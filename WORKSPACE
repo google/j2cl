@@ -1,49 +1,18 @@
 workspace(name = "com_google_j2cl")
 
 maven_jar(
-    name = "args4j",
-    artifact = "args4j:args4j:2.33",
-)
-
-maven_jar(
     name = "com_google_auto_common",
     artifact = "com.google.auto:auto-common:0.9",
 )
-
 maven_jar(
     name = "com_google_auto_service",
     artifact = "com.google.auto.service:auto-service:1.0-rc2",
 )
 
 maven_jar(
-    name = "com_google_auto_value",
-    artifact = "com.google.auto.value:auto-value:1.5.3",
-)
-
-maven_jar(
-    name = "com_google_gson",
-    artifact = "com.google.code.gson:gson:2.8.2",
-)
-
-maven_jar(
-    name = "com_google_guava",
-    artifact = "com.google.guava:guava:26.0-jre",
-)
-
-maven_jar(
-    name = "com_google_jscomp",
-    artifact = "com.google.javascript:closure-compiler:v20170409",
-)
-
-maven_jar(
     name = "com_google_jsinterop_annotations",
     artifact = "com.google.jsinterop:jsinterop-annotations:HEAD-SNAPSHOT",
     repository = "https://oss.sonatype.org/content/repositories/google-snapshots/",
-)
-
-maven_jar(
-    name = "com_google_jsr305",
-    artifact = "com.google.code.findbugs:jsr305:3.0.1",
 )
 
 maven_jar(
@@ -149,13 +118,6 @@ http_jar(
     sha256 = "55f4470b98a7cad8aa22404afed4a03581478a29bb83e68b24d6a5a9e8508c61",
 )
 
-new_http_archive(
-    name = "closure_library",
-    url = "https://github.com/google/closure-library/archive/v20170409.tar.gz",
-    build_file = "closure_library.BUILD",
-    strip_prefix = "closure-library-20170409",
-)
-
 http_archive(
     name = "org_gwtproject_gwt",
     url = "https://gwt.googlesource.com/gwt/+archive/master.tar.gz",
@@ -178,18 +140,17 @@ http_archive(
 # needed for protobuf
 bind(
     name = "guava",
-    actual = "@com_google_guava//jar",
+    actual = "@com_google_guava",
 )
 
 # needed for protobuf
 bind(
     name = "gson",
-    actual = "@com_google_gson//jar",
+    actual = "@com_google_code_gson",
 )
 
 load("@io_bazel_rules_closure//closure:defs.bzl", "closure_repositories")
 
 closure_repositories(
-    omit_args4j = True,
-    omit_com_google_javascript_closure_library = True,
+ omit_com_google_protobuf=True,
 )

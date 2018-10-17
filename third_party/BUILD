@@ -8,7 +8,7 @@ licenses(["notice"])
 
 java_library(
     name = "guava",
-    exports = ["@com_google_guava//jar"],
+    exports = ["@com_google_guava"],
 )
 
 java_library(
@@ -18,17 +18,17 @@ java_library(
 
 java_library(
     name = "jsr305_annotations",
-    exports = ["@com_google_jsr305//jar"],
+    exports = ["@com_google_code_findbugs_jsr305"],
 )
 
 java_library(
     name = "jscomp",
-    exports = ["@com_google_jscomp//jar"],
+    exports = ["@io_bazel_rules_closure//closure/compiler"],
 )
 
 java_library(
     name = "args4j",
-    exports = ["@args4j//jar"],
+    exports = ["@args4j"],
 )
 
 java_library(
@@ -47,25 +47,9 @@ java_library(
     ],
 )
 
-java_plugin(
-    name = "auto_annotation_plugin",
-    processor_class = "com.google.auto.value.processor.AutoAnnotationProcessor",
-    deps = ["@com_google_auto_value//jar"],
-)
-
-java_plugin(
-    name = "auto_value_plugin",
-    processor_class = "com.google.auto.value.processor.AutoValueProcessor",
-    deps = ["@com_google_auto_value//jar"],
-)
-
 java_library(
     name = "auto_value",
-    exported_plugins = [
-        ":auto_annotation_plugin",
-        ":auto_value_plugin",
-    ],
-    exports = ["@com_google_auto_value//jar"],
+    exports = ["@com_google_auto_value"],
 )
 
 java_library(
@@ -80,7 +64,7 @@ java_library(
 
 java_library(
     name = "gson",
-    exports = ["@com_google_gson//jar"],
+    exports = ["@com_google_code_gson"],
 )
 
 java_library(
@@ -126,22 +110,26 @@ java_library(
 
 alias(
     name = "closure_testcase",
-    actual = "@closure_library//:testcase",
+    actual = "@io_bazel_rules_closure//closure/library/testing:testcase",
 )
 
 alias(
     name = "closure_reflect",
-    actual = "@closure_library//:reflect",
+    actual = "@io_bazel_rules_closure//closure/library/reflect",
 )
 
 alias(
     name = "closure_math_long",
-    actual = "@closure_library//:math_long",
+    actual = "@io_bazel_rules_closure//closure/library/math:long",
 )
 
-alias(
+load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_library")
+
+# closure_js_library implicitly includes closure base by default but we still
+# need a target since there is existing deps.
+closure_js_library(
     name = "closure_base",
-    actual = "@closure_library//:base",
+    srcs = ["@io_bazel_rules_closure//closure/library:base"],
 )
 
 alias(
@@ -159,17 +147,7 @@ alias(
     actual = "@org_gwtproject_gwt//user:gwt-javaemul-internal-annotations",
 )
 
-alias(
-    name = "gwt-javaemul-internal-annotations-j2cl",
-    actual = "@org_gwtproject_gwt//user:gwt-javaemul-internal-annotations",
-)
-
 java_library(
     name = "gwt-jsinterop-annotations",
-    exports = ["@com_google_jsinterop_annotations//jar"],
-)
-
-java_library(
-    name = "gwt-jsinterop-annotations-j2cl",
     exports = ["@com_google_jsinterop_annotations//jar"],
 )
