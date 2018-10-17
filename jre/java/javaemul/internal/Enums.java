@@ -65,7 +65,7 @@ class Enums {
     return cache(ctor, "$$enumValues/" + value, () -> new BoxedLightEnum<T>(value, ctor));
   }
 
-  private static class BoxedLightEnum<T> {
+  private static class BoxedLightEnum<T> implements Serializable {
     @JsConstructor
     private BoxedLightEnum(T value, Constructor ctor) {
       this.value = value;
@@ -91,7 +91,7 @@ class Enums {
   }
 
   private static class BoxedComparableLightEnum<T> extends BoxedLightEnum<T>
-      implements Comparable<BoxedComparableLightEnum<T>>, Serializable {
+      implements Comparable<BoxedComparableLightEnum<T>> {
     @JsConstructor
     private BoxedComparableLightEnum(T value, Constructor ctor) {
       super(value, ctor);

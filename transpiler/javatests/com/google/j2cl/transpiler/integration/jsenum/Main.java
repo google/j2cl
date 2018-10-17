@@ -109,7 +109,7 @@ public class Main {
     assertTrue(v instanceof NativeEnum);
     assertFalse((Object) v instanceof String);
     assertFalse(v instanceof Comparable);
-    assertFalse(v instanceof Serializable);
+    assertTrue(v instanceof Serializable);
     assertFalse((Object) v instanceof PlainJsEnum);
     // TODO(b/114118635): Uncomment when different native classes pointing to the same closure
     // enum share instances.
@@ -119,12 +119,12 @@ public class Main {
     assertFalse(OK_STRING instanceof NativeEnum);
 
     NativeEnum ne = (NativeEnum) o;
+    Serializable se = (Serializable) o;
     // TODO(b/114118635): Uncomment when different native classes pointing to the same closure
     // enum share instances.
     // StringNativeEnum sne = (StringNativeEnum) o;
     assertThrowsClassCastException(() -> (Enum) o);
     assertThrowsClassCastException(() -> (Comparable) o);
-    assertThrowsClassCastException(() -> (Serializable) o);
     assertThrowsClassCastException(() -> (Boolean) o);
 
     assertTrue(asSeenFromJs(NativeEnum.OK) == OK_STRING);
@@ -203,7 +203,7 @@ public class Main {
     assertTrue(v instanceof StringNativeEnum);
     assertFalse((Object) v instanceof String);
     assertFalse(v instanceof Comparable);
-    assertFalse(v instanceof Serializable);
+    assertTrue(v instanceof Serializable);
     assertFalse((Object) v instanceof PlainJsEnum);
     // TODO(b/114118635): Uncomment when different native classes pointing to the same closure
     // enum share instances.
@@ -213,13 +213,13 @@ public class Main {
     assertFalse(new Object() instanceof StringNativeEnum);
     assertFalse((Object) OK_STRING instanceof StringNativeEnum);
 
+    Serializable se = (Serializable) o;
     StringNativeEnum sne = (StringNativeEnum) o;
     // TODO(b/114118635): Uncomment when different native classes pointing to the same closure
     // enum share instances.
     // NativeEnum ne = (NativeEnum) o;
     assertThrowsClassCastException(() -> (Enum) o);
     assertThrowsClassCastException(() -> (Comparable) o);
-    assertThrowsClassCastException(() -> (Serializable) o);
     assertThrowsClassCastException(() -> (Boolean) o);
 
     assertTrue(asSeenFromJs(StringNativeEnum.OK) == OK_STRING);
@@ -406,16 +406,15 @@ public class Main {
     assertTrue(v instanceof BooleanJsEnum);
     assertFalse((Object) v instanceof Boolean);
     assertFalse(v instanceof Comparable);
-    // TODO(b/117221972): Uncomment when all non native JsEnums implement Serializable
-    // assertTrue(v instanceof Serializable);
+    assertTrue(v instanceof Serializable);
     assertFalse((Object) v instanceof PlainJsEnum);
 
     assertFalse(new Object() instanceof BooleanJsEnum);
     assertFalse((Object) FALSE_BOOLEAN instanceof BooleanJsEnum);
 
     BooleanJsEnum be = (BooleanJsEnum) o;
-    // TODO(b/117221972): Uncomment when all non native JsEnums implement Serializable
-    // Serializable s = (Serializable) o;
+    Serializable s = (Serializable) o;
+
     assertThrowsClassCastException(() -> (Enum) o);
     assertThrowsClassCastException(() -> (Comparable) o);
     assertThrowsClassCastException(() -> (Boolean) o);
@@ -486,16 +485,14 @@ public class Main {
     assertTrue(v instanceof StringJsEnum);
     assertFalse((Object) v instanceof String);
     assertFalse(v instanceof Comparable);
-    // TODO(b/117221972): Uncomment when all non native JsEnums implement Serializable
-    // assertTrue(v instanceof Serializable);
+    assertTrue(v instanceof Serializable);
     assertFalse((Object) v instanceof PlainJsEnum);
 
     assertFalse(new Object() instanceof StringJsEnum);
     assertFalse((Object) HELLO_STRING instanceof StringJsEnum);
 
     StringJsEnum se = (StringJsEnum) o;
-    // TODO(b/117221972): Uncomment when all non native JsEnums implement Serializable
-    // Serializable s = (Serializable) o;
+    Serializable s = (Serializable) o;
     assertThrowsClassCastException(() -> (Enum) o);
     assertThrowsClassCastException(() -> (Comparable) o);
     assertThrowsClassCastException(() -> (String) o);
