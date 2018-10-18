@@ -265,8 +265,8 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         && isSubtypeOf(thatRawTypeDescriptor);
   }
 
-  public boolean isOrExtendsNativeClass() {
-    return getTypeDeclaration().isOrExtendsNativeClass();
+  public boolean extendsNativeClass() {
+    return getTypeDeclaration().extendsNativeClass();
   }
 
   private boolean isSubtypeOf(TypeDescriptor that) {

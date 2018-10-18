@@ -219,16 +219,13 @@ public abstract class TypeDeclaration extends Node
   }
 
   @Memoized
-  public boolean isOrExtendsNativeClass() {
-    if (isNative()) {
-      return true;
-    }
-
-    if (getSuperTypeDescriptor() == null) {
+  public boolean extendsNativeClass() {
+    DeclaredTypeDescriptor superTypeDescriptor = getSuperTypeDescriptor();
+    if (superTypeDescriptor == null) {
       return false;
     }
 
-    return getSuperTypeDescriptor().isOrExtendsNativeClass();
+    return superTypeDescriptor.isNative() || superTypeDescriptor.extendsNativeClass();
   }
 
   public boolean hasJsConstructor() {

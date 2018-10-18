@@ -1009,12 +1009,21 @@ public class AstUtils {
             .setFinal(true)
             .build();
 
-    // Replace all 'this' references in the method with parameter references.
+    // Replace all 'this' references in the method with a reference to the newly introduced
+    // parameter. There should not be any super references in devirtualized methods; but if there
+    // were they should also be replaced with the parameter reference but more importantly, the
+    // method call or field access they are the qualifier of needs to be resolved statically.
     method.accept(
         new AbstractRewriter() {
           @Override
           public Node rewriteThisReference(ThisReference thisReference) {
             return thisArg.getReference();
+          }
+
+          @Override
+          public Node rewriteSuperReference(SuperReference superReference) {
+            checkState(false, "super should not appear in devirtualized methods.");
+            return superReference;
           }
         });
 

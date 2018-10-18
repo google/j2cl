@@ -260,6 +260,10 @@ public class JsInteropRestrictionsChecker {
     }
 
     for (Member member : type.getMembers()) {
+      if (member.getDescriptor().isJsOverlay()) {
+        // JsOverlays are checked independently.
+        continue;
+      }
       checkMemberOfJsEnum(type, member);
     }
   }
@@ -790,8 +794,8 @@ public class JsInteropRestrictionsChecker {
       checkMemberOfNativeJsType(member);
     }
 
-    if (enclosingTypeDescriptor.isOrExtendsNativeClass()) {
-      checkMemberOfNativeClassOrSubclass(member);
+    if (enclosingTypeDescriptor.extendsNativeClass()) {
+      checkMemberOfSubclassOfNativeClass(member);
     }
 
     if (memberDescriptor.isJsOverlay()) {
@@ -825,8 +829,8 @@ public class JsInteropRestrictionsChecker {
     }
   }
 
-  private void checkMemberOfNativeClassOrSubclass(Member member) {
-    if (member.isStatic() || member.isConstructor()) {
+  private void checkMemberOfSubclassOfNativeClass(Member member) {
+    if (member.isStatic() || member.isConstructor() || member.getDescriptor().isJsOverlay()) {
       return;
     }
 
@@ -841,8 +845,7 @@ public class JsInteropRestrictionsChecker {
             if (target.isOrOverridesJavaLangObjectMethod()) {
               problems.error(
                   methodCall.getSourcePosition(),
-                  "Cannot use 'super' to call '%s'. Native classes and their subclasses "
-                      + "cannot use 'super' to call 'java.lang.Object' methods.",
+                  "Cannot use 'super' to call '%s' from a subclass of a native class.",
                   target.getReadableDescription());
             }
           }
@@ -966,32 +969,27 @@ public class JsInteropRestrictionsChecker {
       return;
     }
     if (member.isMethod()) {
-      Method method = (Method) member;
-      if (method.isOverride()) {
+      if (!memberDescriptor.getEnclosingTypeDescriptor().getTypeDeclaration().isFinal()
+          && !memberDescriptor.isFinal()
+          && !memberDescriptor.isStatic()
+          && !memberDescriptor.getVisibility().isPrivate()
+          && !memberDescriptor.isDefaultMethod()) {
         problems.error(
-            method.getSourcePosition(),
-            "JsOverlay method '%s' cannot override a supertype method.",
+            member.getSourcePosition(),
+            "JsOverlay method '%s' cannot be non-final.",
             readableDescription);
         return;
       }
-      if (member.isNative()
-          || (!memberDescriptor.getEnclosingTypeDescriptor().getTypeDeclaration().isFinal()
-              && !memberDescriptor.isFinal()
-              && !memberDescriptor.isStatic()
-              && !memberDescriptor.getVisibility().isPrivate()
-              && !memberDescriptor.isDefaultMethod())) {
-        problems.error(
-            member.getSourcePosition(),
-            "JsOverlay method '%s' cannot be non-final nor native.",
-            readableDescription);
-      }
     }
+
     if (member.isField() && !memberDescriptor.isStatic()) {
       problems.error(
           member.getSourcePosition(),
           "JsOverlay field '%s' can only be static.",
           readableDescription);
     }
+
+    checkImplementableStatically(member, "JsOverlay");
   }
 
   private boolean checkNativeJsType(Type type) {
@@ -1206,35 +1204,40 @@ public class JsInteropRestrictionsChecker {
 
     if (member.isMethod()) {
       Method method = (Method) member;
-      Optional<MethodDescriptor> nonJsFunctionOverride =
-          method
-              .getDescriptor()
-              .getOverriddenMethodDescriptors()
-              .stream()
-              .filter(Predicates.not(MethodDescriptor::isJsFunction))
-              .findFirst();
+      boolean hasNonJsFunctionOverride =
+          method.getDescriptor().getOverriddenMethodDescriptors().stream()
+              .anyMatch(Predicates.not(MethodDescriptor::isJsFunction));
 
-      if (nonJsFunctionOverride.isPresent()) {
-        // Methods that are not effectively static dispatch are disallowed. In this case these
-        // could only be overrideable methods of java.lang.Object, i.e. toString, hashCode
-        // and equals.
-
+      if (hasNonJsFunctionOverride) {
+        // Methods that are not effectively static dispatch are disallowed.
         problems.error(
             member.getSourcePosition(),
-            messagePrefix + " '%s' cannot override method '%s'.",
-            memberDescriptor.getEnclosingTypeDescriptor().getReadableDescription(),
-            nonJsFunctionOverride.get().getReadableDescription());
+            messagePrefix + " method '%s' cannot override a supertype method.",
+            memberDescriptor.getReadableDescription());
         return;
       }
 
-      if (member.isNative()) {
+      if (method.isNative()) {
         // Only perform this check for methods to avoid giving error on fields that are not
         // explicitly marked native.
         problems.error(
-            member.getSourcePosition(),
-            messagePrefix + " member '%s' cannot be native.",
-            member.getReadableDescription());
+            method.getSourcePosition(),
+            messagePrefix + " method '%s' cannot be native.",
+            method.getReadableDescription());
+        return;
       }
+
+      method.accept(
+          new AbstractVisitor() {
+            @Override
+            public void exitSuperReference(SuperReference superReference) {
+              problems.error(
+                  method.getSourcePosition(),
+                  "Cannot use 'super' in %s method '%s'.",
+                  messagePrefix,
+                  method.getReadableDescription());
+            }
+          });
     }
 
     checkNotJsMember(member, messagePrefix);

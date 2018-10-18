@@ -1448,15 +1448,17 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 + "JsMethod nor JsProperty nor JsConstructor.",
             "JsFunction implementation member 'void Buggy.bleh()' cannot be"
                 + " JsMethod nor JsProperty nor JsConstructor.",
-            "JsFunction implementation member 'void Buggy.nativeMethod()' cannot be native.",
+            "JsFunction implementation method 'void Buggy.nativeMethod()' cannot be native.",
             "JsFunction implementation member 'Buggy.prop' cannot be JsMethod nor JsProperty "
                 + "nor JsConstructor.",
             "JsFunction implementation member 'int JsFunctionMarkedAsJsType.getFoo()' cannot be "
                 + "JsMethod nor JsProperty nor JsConstructor.",
-            "JsFunction implementation 'Buggy' cannot override method 'String Object.toString()'.",
-            "JsFunction implementation 'Buggy' cannot override method "
-                + "'boolean Object.equals(Object)'.",
-            "JsFunction implementation 'Buggy' cannot override method 'int Object.hashCode()'.",
+            "JsFunction implementation method 'String Buggy.toString()' cannot override a "
+                + "supertype method.",
+            "JsFunction implementation method 'boolean Buggy.equals(Object)' cannot override a "
+                + "supertype method.",
+            "JsFunction implementation method 'int Buggy.hashCode()' cannot override a supertype "
+                + "method.",
             "JsFunction interface member 'int InvalidFunction.getFoo()' cannot be JsMethod "
                 + "nor JsProperty nor JsConstructor.",
             "JsFunction interface member 'void InvalidJsTypeJsFunction.n()' cannot be JsMethod "
@@ -1624,7 +1626,12 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  int value = 5;",
             "  int instanceField;",
             "  @JsOverlay",
-            "  public final void anOverlayMethod() { }",
+            "  public final void anOverlayMethod() {",
+            "    super.ordinal();",
+            "  }",
+            "  public final void aMethod() {",
+            "    super.name();",
+            "  }",
             "}",
             "@JsEnum @JsType",
             "enum MyJsTypeJsEnum { }",
@@ -1665,17 +1672,19 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 + "JsMethod nor JsProperty nor JsConstructor.",
             "JsEnum member 'int JsEnumWithInvalidMembers.getP()' cannot be "
                 + "JsMethod nor JsProperty nor JsConstructor.",
-            "JsEnum member 'void JsEnumWithInvalidMembers.n()' cannot be native.",
-            "JsEnum member 'void JsEnumWithInvalidMembers.o()' cannot be native.",
-            "JsEnum 'JsEnumWithInvalidMembers' cannot override method "
-                + "'String Object.toString()'.",
+            "JsEnum method 'void JsEnumWithInvalidMembers.n()' cannot be native.",
+            "JsEnum method 'void JsEnumWithInvalidMembers.o()' cannot be native.",
+            "JsEnum method 'String JsEnumWithInvalidMembers.toString()' cannot override a"
+                + " supertype method.",
             "JsEnum 'MyJsEnum' cannot have instance field 'MyJsEnum.instanceField'.",
             "JsEnum 'MyJsEnum' cannot have an instance initializer.",
             "Type 'AListSubclass' cannot define a type variable with a JsEnum as a bound.",
             "Type 'AListSubclass' cannot subclass a class parameterized by JsEnum.",
             "Type 'AListSubclass' cannot implement an interface parameterized by JsEnum.",
             "Method 'MyJsEnum AListSubclass.getObject()' returning JsEnum cannot override method "
-                + "'Object List.getObject()'.");
+                + "'Object List.getObject()'.",
+            "Cannot use 'super' in JsOverlay method 'void MyJsEnum.anOverlayMethod()'.",
+            "Cannot use 'super' in JsEnum method 'void MyJsEnum.aMethod()'.");
   }
 
   public void testJsEnumSucceeds() {
@@ -2336,6 +2345,20 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         .assertNoWarnings();
   }
 
+  public void testJsOverlayWithSuperFails() {
+    assertTranspileFails(
+            "Buggy",
+            "import jsinterop.annotations.*;",
+            "@JsType(isNative=true) class SuperBuggy {",
+            "  public native void m();",
+            "}",
+            "@JsType(isNative=true) public class Buggy extends SuperBuggy {",
+            "  @JsOverlay public final void n() { super.m(); }",
+            "}")
+        .assertErrorsWithoutSourcePosition(
+            "Cannot use 'super' in JsOverlay method 'void Buggy.n()'.");
+  }
+
   public void testJsOverlayImplementingInterfaceMethodFails() {
     assertTranspileFails(
             "Buggy",
@@ -2382,7 +2405,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "}")
         .assertErrorsWithoutSourcePosition(
             "JsOverlay field 'Buggy.f2' can only be static.",
-            "JsOverlay method 'void Buggy.m()' cannot be non-final nor native.");
+            "JsOverlay method 'void Buggy.m()' cannot be non-final.");
   }
 
   public void testJsOverlayWithStaticInitializerSucceeds() {
@@ -2410,8 +2433,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  public final native void m2();",
             "}")
         .assertErrorsWithoutSourcePosition(
-            "JsOverlay method 'void Buggy.m1()' cannot be non-final nor native.",
-            "JsOverlay method 'void Buggy.m2()' cannot be non-final nor native.");
+            "JsOverlay method 'void Buggy.m1()' cannot be native.",
+            "JsOverlay method 'void Buggy.m2()' cannot be native.");
   }
 
   public void testJsOverlayOnJsMemberFails() {
@@ -2655,14 +2678,12 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "'int Buggy.hashCode()' cannot be assigned JavaScript name 'blah' "
                 + "that is different from the JavaScript name of a method it overrides "
                 + "('int Object.hashCode()' with JavaScript name 'hashCode').",
-            "Cannot use 'super' to call 'String Object.toString()'. Native classes and their "
-                + "subclasses cannot use 'super' to call 'java.lang.Object' methods.",
-            "Cannot use 'super' to call 'int Object.hashCode()'. Native classes and their "
-                + "subclasses cannot use 'super' to call 'java.lang.Object' methods.",
-            "Cannot use 'super' to call 'boolean Object.equals(Object)'. Native classes and their "
-                + "subclasses cannot use 'super' to call 'java.lang.Object' methods.",
-            "Cannot use 'super' to call 'String Buggy.toString()'. Native classes and their "
-                + "subclasses cannot use 'super' to call 'java.lang.Object' methods.");
+            "Cannot use 'super' to call 'int Object.hashCode()' from a subclass of a native class.",
+            "Cannot use 'super' to call 'boolean Object.equals(Object)' from a subclass of "
+                + "a native class.",
+            "Cannot use 'super' to call 'String Buggy.toString()' from a subclass of a "
+                + "native class.",
+            "Cannot use 'super' in JsOverlay method 'String NativeType.callToString()'.");
   }
 
   public void testNativeMethodOnJsTypeSucceeds() {
