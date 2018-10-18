@@ -36,9 +36,8 @@ public class Main {
     testJsEnum();
     testBooleanJsEnum();
     testStringJsEnum();
-    // TODO():
-    // Test equals on enum values.
-    // Test Js.uncheckedCast, to go back and forth from Jsenum to native class or interfaces.
+    testJsEnumClassInitialization();
+    testNativeEnumClassInitialization();
   }
 
   @JsEnum(isNative = true, namespace = "test")
@@ -502,6 +501,81 @@ public class Main {
 
   @JsMethod(name = "passThrough")
   private static native Object asSeenFromJs(StringJsEnum b);
+
+  private static boolean nonNativeClinitCalled = false;
+
+  @JsEnum
+  enum EnumWithClinit {
+    A;
+
+    static {
+      nonNativeClinitCalled = true;
+    }
+
+    int getValue() {
+      return ordinal();
+    }
+  }
+
+  public static void testJsEnumClassInitialization() {
+    assertFalse(nonNativeClinitCalled);
+    // Access to an enum value does not trigger clinit.
+    Object o = EnumWithClinit.A;
+    assertFalse(nonNativeClinitCalled);
+
+    // Cast and instanceof do not trigger clinit.
+    if (o instanceof EnumWithClinit) {
+      o = (EnumWithClinit) o;
+    }
+    assertFalse(nonNativeClinitCalled);
+
+    // Access to ordinal() does not trigger clinit.
+    int n = EnumWithClinit.A.ordinal();
+    assertFalse(nonNativeClinitCalled);
+
+    // Access to any devirtualized method triggers clinit.
+    EnumWithClinit.A.getValue();
+    assertTrue(nonNativeClinitCalled);
+  }
+
+  private static boolean nativeClinitCalled = false;
+
+  @JsEnum(isNative = true, hasCustomValue = true, namespace = "test", name = "NativeEnum")
+  enum NativeEnumWithClinit {
+    OK;
+
+    static {
+      nativeClinitCalled = true;
+    }
+
+    String value;
+
+    @JsOverlay
+    String getValue() {
+      return value;
+    }
+  }
+
+  public static void testNativeEnumClassInitialization() {
+    assertFalse(nativeClinitCalled);
+    // Access to an enum value does not trigger clinit.
+    Object o = NativeEnumWithClinit.OK;
+    assertFalse(nativeClinitCalled);
+
+    // Cast and instanceof do not trigger clinit.
+    if (o instanceof NativeEnumWithClinit) {
+      o = (NativeEnumWithClinit) o;
+    }
+    assertFalse(nativeClinitCalled);
+
+    // Access to value does not trigger clinit.
+    String s = NativeEnumWithClinit.OK.value;
+    assertFalse(nativeClinitCalled);
+
+    // Access to any devirtualized method triggers clinit.
+    NativeEnumWithClinit.OK.getValue();
+    assertTrue(nativeClinitCalled);
+  }
 
   @JsMethod
   // Pass through an enum value as if it were coming from and going to JavaScript.

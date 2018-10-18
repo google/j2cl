@@ -26,6 +26,7 @@ import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldDescriptor;
+import com.google.j2cl.ast.InitializerBlock;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.Member;
 import com.google.j2cl.ast.Method;
@@ -158,16 +159,18 @@ public class NormalizeJsEnumClasses extends NormalizationPass {
       checkArgument(member.isStatic());
       Field field = (Field) member;
       return Field.Builder.from(field).setDescriptor(toJsOverlay(field.getDescriptor())).build();
-    }
-    if (member.isMethod()) {
+    } else if (member.isMethod()) {
       Method method = (Method) member;
       return Method.Builder.from(method)
           .setMethodDescriptor(toJsOverlay(method.getDescriptor()))
           .build();
+    } else {
+      checkArgument(member.isStatic());
+      InitializerBlock initializerBlock = (InitializerBlock) member;
+      return InitializerBlock.Builder.from(initializerBlock)
+          .setDescriptor(toJsOverlay(initializerBlock.getDescriptor()))
+          .build();
     }
-
-    checkArgument(member.isStatic());
-    return member;
   }
 
   /** Rewrites member references to JsOverlay references. */
