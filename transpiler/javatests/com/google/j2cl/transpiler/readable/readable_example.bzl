@@ -17,8 +17,6 @@ load("//third_party/java/j2cl:j2cl_library.bzl", "j2cl_library")
 load("//tools/build_rules:build_test.bzl", "build_test")
 
 JAVAC_FLAGS = [
-    "-source 9",
-    "-target 9",
     "-XepDisableAllChecks",
 ]
 
