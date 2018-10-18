@@ -407,7 +407,7 @@ public class AstUtils {
         (PrimitiveTypeDescriptor) expression.getTypeDescriptor();
     checkArgument(!TypeDescriptors.isPrimitiveVoid(primitiveType));
     checkArgument(!TypeDescriptors.isPrimitiveBooleanOrDouble(primitiveType));
-    DeclaredTypeDescriptor boxType = TypeDescriptors.getBoxTypeFromPrimitiveType(primitiveType);
+    DeclaredTypeDescriptor boxType = primitiveType.toBoxedType();
 
     MethodDescriptor valueOfMethodDescriptor =
         boxType.getMethodDescriptorByName(MethodDescriptor.VALUE_OF_METHOD_NAME, primitiveType);

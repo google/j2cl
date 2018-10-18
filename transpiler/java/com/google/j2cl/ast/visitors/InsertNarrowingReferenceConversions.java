@@ -18,7 +18,6 @@ package com.google.j2cl.ast.visitors;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
-import com.google.j2cl.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 
@@ -42,9 +41,6 @@ public class InsertNarrowingReferenceConversions extends NormalizationPass {
         // does a narrowing reference conversion first, and then does a unboxing conversion.
         if (toTypeDescriptor.isPrimitive()
             && TypeDescriptors.isNonBoxedReferenceType(fromTypeDescriptor)) {
-          TypeDescriptor boxedTypeDescriptor =
-              TypeDescriptors.getBoxTypeFromPrimitiveType(
-                  (PrimitiveTypeDescriptor) toTypeDescriptor);
           // This is to make sure that code like
           //
           //   Object o = new Long(10);
@@ -65,7 +61,7 @@ public class InsertNarrowingReferenceConversions extends NormalizationPass {
               .setExpression(
                   CastExpression.newBuilder()
                       .setExpression(castExpression.getExpression())
-                      .setCastTypeDescriptor(boxedTypeDescriptor)
+                      .setCastTypeDescriptor(toTypeDescriptor.toBoxedType())
                       .build())
               .setCastTypeDescriptor(toTypeDescriptor)
               .build();

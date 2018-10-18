@@ -16,6 +16,7 @@
 package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.collect.ImmutableList;
@@ -106,6 +107,11 @@ public class PrimitiveTypeDescriptor extends TypeDescriptor {
   @Override
   public PrimitiveTypeDescriptor toUnparameterizedTypeDescriptor() {
     return this;
+  }
+
+  @Override
+  public DeclaredTypeDescriptor toBoxedType() {
+    return checkNotNull(TypeDescriptors.getBoxTypeFromPrimitiveType(this));
   }
 
   /**

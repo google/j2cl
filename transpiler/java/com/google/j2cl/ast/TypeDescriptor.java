@@ -143,6 +143,13 @@ public abstract class TypeDescriptor extends Node
     return (PrimitiveTypeDescriptor) this;
   }
 
+  /**
+   * Returns the corresponding reference type if the {@code setTypeDescriptor} is a primitive type.
+   */
+  public DeclaredTypeDescriptor toBoxedType() {
+    return (DeclaredTypeDescriptor) this;
+  }
+
   /** Returns the value for uninitialized expression of this type. */
   public Expression getDefaultValue() {
     return NullLiteral.get();

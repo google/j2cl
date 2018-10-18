@@ -90,12 +90,11 @@ public class TypeDescriptors {
     return typeDescriptors.get() != null;
   }
 
-  public static DeclaredTypeDescriptor getBoxTypeFromPrimitiveType(
-      PrimitiveTypeDescriptor primitiveType) {
+  static DeclaredTypeDescriptor getBoxTypeFromPrimitiveType(PrimitiveTypeDescriptor primitiveType) {
     return get().boxedTypeByPrimitiveType.get(primitiveType);
   }
 
-  public static PrimitiveTypeDescriptor getPrimitiveTypeFromBoxType(TypeDescriptor boxType) {
+  static PrimitiveTypeDescriptor getPrimitiveTypeFromBoxType(TypeDescriptor boxType) {
     return get().boxedTypeByPrimitiveType.inverse().get(boxType.toNullable());
   }
 
