@@ -1814,6 +1814,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "    A.compareTo(B);",
             "    Native.values();",
             "    Native.valueOf(null);",
+            "    if (A instanceof Native) { }",
             "  }",
             "  static int staticField = 1;",
             "}",
@@ -1832,7 +1833,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         .assertErrorsWithoutSourcePosition(
             "JsEnum 'Native' does not support 'String Enum.name()'.",
             "Native JsEnum 'Native' does not support 'int Enum.ordinal()'.",
-            "Native JsEnum 'Native' does not support 'int Enum.compareTo(Native)'.",
             "JsEnum 'Native' does not support 'Native[] Native.values()'.",
             "JsEnum 'Native' does not support 'Native Native.valueOf(String)'.",
             "JsEnum 'NativeJsEnumImplementingNativeInterface' cannot implement any interface.",
@@ -1841,7 +1841,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "Custom-valued JsEnum 'NativeJsEnumDeclaringCustomValueButNoField' does not have a"
                 + " field named 'value'.",
             "Non-custom-valued JsEnum 'NativeJsEnumNotDeclaringCustomValueButWithValueField' "
-                + "cannot have a field named 'value'.");
+                + "cannot have a field named 'value'.",
+            "Cannot do instanceof against native JsEnum 'Native'.");
   }
 
   public void testNativeJsEnumSucceeds() {
@@ -1854,7 +1855,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  B;",
             "  @JsOverlay",
             "  public void anOverlayMethod() { ",
-            "    if (A instanceof Native) {}",
+            "    A.compareTo(B);",
             "  }",
             "}",
             "@JsEnum(isNative = true, hasCustomValue = true)",
@@ -1862,6 +1863,12 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  A,",
             "  B;",
             "  int value;",
+            "}",
+            "interface List<T> { Object getObject(); }",
+            "class AList<Native> { }",
+            "class AListSubclass<T extends Native>",
+            "    extends AList<Native> implements List<Native>  {",
+            "    public Native getObject() { return null; }",
             "}")
         .assertNoWarnings();
   }
@@ -1872,27 +1879,29 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "import java.io.Serializable;",
             "import jsinterop.annotations.*;",
             "public class Main {",
-            "  @JsEnum(isNative = true, hasCustomValue = true)",
-            "  enum Native {",
-            "    A,",
-            "    B;",
-            "    int value;",
-            "  }",
+            "  @JsEnum(isNative = true) enum Native {A, B}",
             "  @JsEnum enum MyJsEnum {A, B}",
+            "  @JsEnum(hasCustomValue = true) enum JsEnumWithCustomValue {",
+            "    A(1),",
+            "    B(2);",
+            "    int value;",
+            "    JsEnumWithCustomValue(int value) { this.value = value; }",
+            "  }",
             "  private static void main() {",
             "    Enum e = Native.A;",
-            "    Comparable c = Native.A;",
-            "    Serializable s = Native.A;",
             "    e = MyJsEnum.A;",
-            "    Native.A.value = 3;",
+            "    e = JsEnumWithCustomValue.A;",
+            "    Comparable c = JsEnumWithCustomValue.A;",
+            "    Serializable s = JsEnumWithCustomValue.A;",
+            "    JsEnumWithCustomValue.A.value = 3;",
             "  }",
             "}")
         .assertErrorsWithoutSourcePosition(
             "JsEnum 'Native' cannot be assigned to 'Enum'.",
-            "Native JsEnum 'Native' cannot be assigned to 'Comparable'.",
-            "Native JsEnum 'Native' cannot be assigned to 'Serializable'.",
+            "JsEnum 'JsEnumWithCustomValue' cannot be assigned to 'Enum'.",
+            "Custom-valued JsEnum 'JsEnumWithCustomValue' cannot be assigned to 'Comparable'.",
             "JsEnum 'MyJsEnum' cannot be assigned to 'Enum'.",
-            "Custom-valued JsEnum value field 'Native.value' cannot be assigned.");
+            "Custom-valued JsEnum value field 'JsEnumWithCustomValue.value' cannot be assigned.");
   }
 
   public void testJsEnumParameterAssignmentFails() {
@@ -1903,20 +1912,22 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "import java.util.List;",
             "import jsinterop.annotations.*;",
             "public class Main {",
-            "  @JsEnum(isNative = true)",
-            "  enum Native {",
-            "    A,",
-            "    B;",
-            "  }",
+            "  @JsEnum(isNative = true) enum Native {A, B}",
             "  @JsEnum enum MyJsEnum {A, B}",
+            "  @JsEnum(hasCustomValue = true) enum JsEnumWithCustomValue {",
+            "    A(1),",
+            "    B(2);",
+            "    int value;",
+            "    JsEnumWithCustomValue(int value) { this.value = value; }",
+            "  }",
             "  private static void acceptsEnum(Enum e) {}",
             "  private static void acceptsComparable(Comparable c) {}",
             "  private static void acceptsSerializable(Serializable s) {}",
             "  private static void main() {",
             "    acceptsEnum(Native.A);",
-            "    acceptsComparable(Native.A);",
-            "    acceptsSerializable(Native.A);",
             "    acceptsEnum(MyJsEnum.A);",
+            "    acceptsEnum(JsEnumWithCustomValue.A);",
+            "    acceptsComparable(JsEnumWithCustomValue.A);",
             // TODO(b/114468916): The following should have failed. But for now they will be caught
             // by runtime checks when the erasure cast to Enum occurs.
             "    List<Enum> l1 = null; l1.add(MyJsEnum.A);",
@@ -1925,9 +1936,9 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "}")
         .assertErrorsWithoutSourcePosition(
             "JsEnum 'Native' cannot be assigned to 'Enum'.",
-            "Native JsEnum 'Native' cannot be assigned to 'Comparable'.",
-            "Native JsEnum 'Native' cannot be assigned to 'Serializable'.",
-            "JsEnum 'MyJsEnum' cannot be assigned to 'Enum'.");
+            "JsEnum 'MyJsEnum' cannot be assigned to 'Enum'.",
+            "JsEnum 'JsEnumWithCustomValue' cannot be assigned to 'Enum'.",
+            "Custom-valued JsEnum 'JsEnumWithCustomValue' cannot be assigned to 'Comparable'.");
   }
 
   public void testJsEnumAssignmentSucceeds() {
@@ -1949,19 +1960,30 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  private static void acceptsComparable(Comparable c) {}",
             "  private static void acceptsMyJsEnum(MyJsEnum c) {}",
             "  private static void main() {",
-            "    Object o = Native.A;",
-            "    acceptsObject(Native.A);",
-            "    o = MyJsEnum.A;",
-            "    acceptsObject(MyJsEnum.A);",
-            "    Serializable s = MyJsEnum.A;",
-            "    acceptsSerializable(MyJsEnum.A);",
-            "    Comparable c = MyJsEnum.A;",
-            "    acceptsComparable(MyJsEnum.A);",
-            "    MyJsEnum myJsEnum = MyJsEnum.A;",
-            "    acceptsMyJsEnum(MyJsEnum.A);",
-            "    List<MyJsEnum> l1 = null; l1.add(MyJsEnum.A);",
-            "    List<Object> l2 = null; l2.add(MyJsEnum.A);",
-            "    List<? extends Serializable> l3 = new ArrayList<MyJsEnum>();",
+            "    {",
+            "      Object o = Native.A;",
+            "      acceptsObject(Native.A);",
+            "      Serializable s = MyJsEnum.A;",
+            "      acceptsSerializable(Native.A);",
+            "      Comparable c = Native.A;",
+            "      acceptsComparable(Native.A);",
+            "      List<Native> l1 = null; l1.add(Native.A);",
+            "      List<Object> l2 = null; l2.add(Native.A);",
+            "      List<? extends Serializable> l3 = new ArrayList<Native>();",
+            "    }",
+            "    {",
+            "      Object o = MyJsEnum.A;",
+            "      acceptsObject(MyJsEnum.A);",
+            "      Serializable s = MyJsEnum.A;",
+            "      acceptsSerializable(MyJsEnum.A);",
+            "      Comparable c = MyJsEnum.A;",
+            "      acceptsComparable(MyJsEnum.A);",
+            "      MyJsEnum myJsEnum = MyJsEnum.A;",
+            "      acceptsMyJsEnum(MyJsEnum.A);",
+            "      List<MyJsEnum> l1 = null; l1.add(MyJsEnum.A);",
+            "      List<Object> l2 = null; l2.add(MyJsEnum.A);",
+            "      List<? extends Serializable> l3 = new ArrayList<MyJsEnum>();",
+            "    }",
             "  }",
             "}")
         .assertNoWarnings();
@@ -2012,14 +2034,23 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
     assertTranspileSucceeds(
             "Main",
             "import java.util.List;",
+            "import java.util.function.Function;",
             "import jsinterop.annotations.*;",
             "public class Main {",
             "  @JsEnum enum MyJsEnum {A, B}",
+            "  @JsEnum(isNative = true) enum NativeEnum {A, B}",
             "  private static void arrays() {",
             "    Object[] array = null;",
             "    array[0] = MyJsEnum.A;",
             "    List<MyJsEnum> l = null;",
-            "    Object[] o = l.toArray();",
+            "    Object[] oarr = l.toArray();",
+            "    Object o = new NativeEnum[1];",
+            "    NativeEnum[] arr = null;",
+            "    List<NativeEnum[]> list = null;",
+            "    o = (Function<? extends Object, ? extends Object>) (NativeEnum[] p1) -> p1;",
+            "    o = (Function<? extends Object, ? extends Object>) (NativeEnum... p2) -> p2;",
+            "    o = (NativeEnum[]) o;",
+            "    if (o instanceof NativeEnum[]) { }",
             "  }",
             "}")
         .assertNoWarnings();

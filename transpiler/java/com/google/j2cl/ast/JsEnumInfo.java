@@ -29,6 +29,8 @@ public abstract class JsEnumInfo {
 
   public abstract boolean supportsComparable();
 
+  public abstract boolean supportsOrdinal();
+
   abstract Builder toBuilder();
 
   public static Builder newBuilder() {
@@ -43,14 +45,16 @@ public abstract class JsEnumInfo {
 
     public abstract Builder setSupportsComparable(boolean supportsComparable);
 
+    public abstract Builder setSupportsOrdinal(boolean supportsOrdinal);
+
     abstract JsEnumInfo autoBuild();
 
     abstract boolean hasCustomValue();
 
-    abstract boolean supportsComparable();
+    abstract boolean supportsOrdinal();
 
     public JsEnumInfo build() {
-      checkState(!supportsComparable() || !hasCustomValue());
+      checkState(!supportsOrdinal() || !hasCustomValue());
       return interner.intern(autoBuild());
     }
 

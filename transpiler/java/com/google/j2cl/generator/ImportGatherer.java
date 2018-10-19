@@ -125,6 +125,15 @@ class ImportGatherer extends AbstractVisitor {
       // Add Enums bootstrap type as it is referred to at code generation from $isInstance.
       // $isInstance does not call $clinit, for that reason it needs to be imported eagerly.
       addTypeDeclaration(BootstrapType.ENUMS.getDeclaration(), ImportCategory.LOADTIME);
+      DeclaredTypeDescriptor overlaidTypeDescriptor = type.getOverlaidTypeDescriptor();
+      if (overlaidTypeDescriptor.getJsEnumInfo().hasCustomValue()
+          && overlaidTypeDescriptor.isNative()) {
+        // Add the type needed to for $IsInstance on native JsEnums.
+        TypeDescriptor instanceofType =
+            AstUtils.getJsEnumValueFieldInstanceCheckType(
+                overlaidTypeDescriptor.getTypeDeclaration());
+        addTypeDeclaration(instanceofType.getMetadataTypeDeclaration(), ImportCategory.LOADTIME);
+      }
     }
 
     // Super type and super interface imports are needed eagerly because they are used during the

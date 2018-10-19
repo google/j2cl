@@ -35,6 +35,7 @@ public class Main {
   public static void main(String... args) {
     testNativeJsEnum();
     testStringNativeJsEnum();
+    testCastOnNative();
     testJsEnum();
     testBooleanJsEnum();
     testStringJsEnum();
@@ -47,7 +48,7 @@ public class Main {
   @JsEnum(isNative = true, namespace = "test")
   enum NativeEnum {
     OK,
-    CANCEL;
+    CANCEL
   }
 
   private static void testNativeJsEnum() {
@@ -73,61 +74,43 @@ public class Main {
 
     assertTrue(v == NativeEnum.OK);
     assertTrue(v != NativeEnum.CANCEL);
-    assertTrue(v != OK_STRING);
-    // TODO(b/114118635): Uncomment when different native classes pointing to the same closure
-    // enum share instances.
-    // assertTrue(v == StringNativeEnum.OK);
+    // Native JsEnums are not boxed.
+    assertTrue(v == OK_STRING);
+    assertTrue(v == (Object) StringNativeEnum.OK);
 
-    // Boxing preserves equality.
+    // No boxing
     Object o = NativeEnum.OK;
     assertTrue(o == NativeEnum.OK);
 
     // Object methods calls on a variable of JsEnum type.
     assertTrue(v.hashCode() == NativeEnum.OK.hashCode());
     assertTrue(v.hashCode() != NativeEnum.CANCEL.hashCode());
-    // TODO(b/114118635): Uncomment when different native classes pointing to the same closure
-    // enum share instances.
-    // assertTrue(v.hashCode() == StringNativeEnum.OK.hashCode());
+    assertTrue(v.hashCode() == StringNativeEnum.OK.hashCode());
     assertTrue(v.toString().equals(OK_STRING));
     assertTrue(v.equals(NativeEnum.OK));
-    assertFalse(v.equals(OK_STRING));
-    // TODO(b/114118635): Uncomment when different native classes pointing to the same closure
-    // enum share instances.
-    // assertTrue(v.equals(StringNativeEnum.OK));
+    assertTrue(v.equals(OK_STRING));
+    assertTrue(v.equals(StringNativeEnum.OK));
 
     // Object methods calls on a variable of Object type.
     assertTrue(o.hashCode() == NativeEnum.OK.hashCode());
     assertTrue(o.hashCode() != NativeEnum.CANCEL.hashCode());
-    // TODO(b/114118635): Uncomment when different native classes pointing to the same closure
-    // enum share instances.
-    // assertTrue(o.hashCode() == StringNativeEnum.OK.hashCode());
+    assertTrue(o.hashCode() == StringNativeEnum.OK.hashCode());
     assertTrue(o.toString().equals(OK_STRING));
     assertTrue(o.equals(NativeEnum.OK));
-    assertFalse(o.equals(OK_STRING));
-    // TODO(b/114118635): Uncomment when different native classes pointing to the same closure
-    // enum share instances.
-    // assertTrue(v.equals(StringNativeEnum.OK));
+    assertTrue(o.equals(OK_STRING));
+    assertTrue(v.equals(StringNativeEnum.OK));
 
     assertFalse(v instanceof Enum);
-    assertTrue(v instanceof NativeEnum);
-    assertFalse((Object) v instanceof String);
-    assertFalse(v instanceof Comparable);
+    assertTrue((Object) v instanceof String);
+    assertTrue(v instanceof Comparable);
     assertTrue(v instanceof Serializable);
     assertFalse((Object) v instanceof PlainJsEnum);
-    // TODO(b/114118635): Uncomment when different native classes pointing to the same closure
-    // enum share instances.
-    // assertTrue((Object) v instanceof StringNativeEnum);
-
-    assertFalse(new Object() instanceof NativeEnum);
-    assertFalse(OK_STRING instanceof NativeEnum);
 
     NativeEnum ne = (NativeEnum) o;
-    Serializable se = (Serializable) o;
-    // TODO(b/114118635): Uncomment when different native classes pointing to the same closure
-    // enum share instances.
-    // StringNativeEnum sne = (StringNativeEnum) o;
+    StringNativeEnum sne = (StringNativeEnum) o;
+    Comparable ce = (Comparable) o;
+    Serializable s = (Serializable) o;
     assertThrowsClassCastException(() -> (Enum) o);
-    assertThrowsClassCastException(() -> (Comparable) o);
     assertThrowsClassCastException(() -> (Boolean) o);
 
     assertTrue(asSeenFromJs(NativeEnum.OK) == OK_STRING);
@@ -172,11 +155,9 @@ public class Main {
 
     assertTrue(v == StringNativeEnum.OK);
     assertTrue(v != StringNativeEnum.CANCEL);
-    assertTrue((Object) v != OK_STRING);
-    // TODO(b/114118635): Uncomment when different native classes pointing to the same closure
-    // enum share instances.
-    // assertTrue(v == NativeEnum.OK);
-    // Boxing preserves equality.
+    assertTrue((Object) v == OK_STRING);
+    assertTrue(v == (Object) NativeEnum.OK);
+
     Object o = StringNativeEnum.OK;
     assertTrue(o == StringNativeEnum.OK);
 
@@ -185,47 +166,81 @@ public class Main {
     assertTrue(v.hashCode() != StringNativeEnum.CANCEL.hashCode());
     assertTrue(v.toString().equals(OK_STRING));
     assertTrue(v.equals(StringNativeEnum.OK));
-    // TODO(b/114118635): Uncomment when different native classes pointing to the same closure
-    // enum share instances.
-    // assertTrue(v.equals(NativeEnum.OK));
-    assertFalse(v.equals(OK_STRING));
+    assertTrue(v.equals(NativeEnum.OK));
+    assertTrue(v.equals(OK_STRING));
 
     // Object methods calls on a variable of Object type.
     assertTrue(o.hashCode() == StringNativeEnum.OK.hashCode());
     assertTrue(o.hashCode() != StringNativeEnum.CANCEL.hashCode());
     assertTrue(o.toString().equals(OK_STRING));
     assertTrue(o.equals(StringNativeEnum.OK));
-    // TODO(b/114118635): Uncomment when different native classes pointing to the same closure
-    // enum share instances.
-    // assertTrue(v.equals(NativeEnum.OK));
-    assertFalse(o.equals(OK_STRING));
+    assertTrue(o.equals(NativeEnum.OK));
+    assertTrue(o.equals(OK_STRING));
 
     assertTrue(v.getValue().equals(v.toString()));
     assertTrue(v.getValue().equals(OK_STRING));
+
     assertFalse(v instanceof Enum);
-    assertTrue(v instanceof StringNativeEnum);
-    assertFalse((Object) v instanceof String);
-    assertFalse(v instanceof Comparable);
+    assertTrue((Object) v instanceof String);
+    assertTrue(v instanceof Comparable);
     assertTrue(v instanceof Serializable);
     assertFalse((Object) v instanceof PlainJsEnum);
-    // TODO(b/114118635): Uncomment when different native classes pointing to the same closure
-    // enum share instances.
-    //
-    // assertTrue((Object) v instanceof NativeEnum);
-
-    assertFalse(new Object() instanceof StringNativeEnum);
-    assertFalse((Object) OK_STRING instanceof StringNativeEnum);
 
     Serializable se = (Serializable) o;
     StringNativeEnum sne = (StringNativeEnum) o;
-    // TODO(b/114118635): Uncomment when different native classes pointing to the same closure
-    // enum share instances.
-    // NativeEnum ne = (NativeEnum) o;
+    NativeEnum ne = (NativeEnum) o;
+    Comparable ce = (Comparable) o;
+    Serializable s = (Serializable) o;
     assertThrowsClassCastException(() -> (Enum) o);
-    assertThrowsClassCastException(() -> (Comparable) o);
     assertThrowsClassCastException(() -> (Boolean) o);
 
     assertTrue(asSeenFromJs(StringNativeEnum.OK) == OK_STRING);
+  }
+
+  @JsEnum(isNative = true, namespace = "test", name = "NativeEnumOfNumber", hasCustomValue = true)
+  enum NumberNativeEnum {
+    ONE,
+    TWO;
+
+    short value;
+  }
+
+  public static void testCastOnNative() {
+    castToNativeEnum(NativeEnum.OK);
+    castToNativeEnum(StringNativeEnum.OK);
+    castToNativeEnum(NumberNativeEnum.ONE);
+    castToNativeEnum(PlainJsEnum.ONE);
+    castToNativeEnum(OK_STRING);
+    castToNativeEnum((Double) 2.0);
+    castToNativeEnum((Integer) 1);
+
+    castToStringNativeEnum(StringNativeEnum.OK);
+    castToStringNativeEnum(NativeEnum.OK);
+    castToStringNativeEnum(OK_STRING);
+    assertThrowsClassCastException(() -> castToStringNativeEnum(NumberNativeEnum.ONE));
+    assertThrowsClassCastException(() -> castToStringNativeEnum(PlainJsEnum.ONE));
+    assertThrowsClassCastException(() -> castToStringNativeEnum((Integer) 1));
+    assertThrowsClassCastException(() -> castToStringNativeEnum((Double) 2.0));
+
+    castToNumberNativeEnum(NumberNativeEnum.ONE);
+    castToNumberNativeEnum((Double) 2.0);
+    assertThrowsClassCastException(() -> castToNumberNativeEnum(NativeEnum.OK));
+    assertThrowsClassCastException(() -> castToNumberNativeEnum(StringNativeEnum.OK));
+    assertThrowsClassCastException(() -> castToNumberNativeEnum(PlainJsEnum.ONE));
+    assertThrowsClassCastException(() -> castToNumberNativeEnum((Integer) 1));
+    assertThrowsClassCastException(() -> castToNumberNativeEnum(OK_STRING));
+  }
+
+  private static NativeEnum castToNativeEnum(Object o) {
+    return (NativeEnum) o;
+  }
+
+  private static StringNativeEnum castToStringNativeEnum(Object o) {
+    return (StringNativeEnum) o;
+  }
+
+  private static NumberNativeEnum castToNumberNativeEnum(Object o) {
+    return (NumberNativeEnum) o;
   }
 
   @JsMethod(name = "passThrough")
@@ -566,10 +581,8 @@ public class Main {
     Object o = NativeEnumWithClinit.OK;
     assertFalse(nativeClinitCalled);
 
-    // Cast and instanceof do not trigger clinit.
-    if (o instanceof NativeEnumWithClinit) {
-      o = (NativeEnumWithClinit) o;
-    }
+    // Cast does not trigger clinit.
+    o = (NativeEnumWithClinit) o;
     assertFalse(nativeClinitCalled);
 
     // Access to value does not trigger clinit.

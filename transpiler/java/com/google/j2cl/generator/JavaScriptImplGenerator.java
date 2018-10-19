@@ -487,12 +487,25 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   }
 
   private void renderIsInstanceOfJsEnumStatement(DeclaredTypeDescriptor typeDescriptor) {
-    sourceBuilder.append(
-        "return "
-            + environment.aliasForType(BootstrapType.ENUMS.getDeclaration())
-            + ".isInstanceOf(instance, "
-            + environment.aliasForType(typeDescriptor.getMetadataTypeDeclaration())
-            + ");");
+    if (AstUtils.isNonNativeJsEnum(typeDescriptor)) {
+      sourceBuilder.append(
+          "return "
+              + environment.aliasForType(BootstrapType.ENUMS.getDeclaration())
+              + ".isInstanceOf(instance, "
+              + environment.aliasForType(typeDescriptor.getMetadataTypeDeclaration())
+              + ");");
+    } else if (typeDescriptor.getJsEnumInfo().hasCustomValue()) {
+      DeclaredTypeDescriptor instanceOfValueType =
+          AstUtils.getJsEnumValueFieldInstanceCheckType(typeDescriptor.getTypeDeclaration());
+      sourceBuilder.append(
+          "return "
+              + environment.aliasForType(instanceOfValueType.getTypeDeclaration())
+              + ".$isInstance(instance);");
+
+    } else {
+      // Native JsEnum of unknown value type.
+      sourceBuilder.append("return true;");
+    }
   }
 
   private void renderIsInstanceOfClassStatement(DeclaredTypeDescriptor typeDescriptor) {

@@ -97,7 +97,8 @@ public class JsInteropUtils {
     boolean hasCustomValue = JsInteropAnnotationUtils.hasCustomValue(typeBinding);
     return JsEnumInfo.newBuilder()
         .setHasCustomValue(hasCustomValue)
-        .setSupportsComparable(!(hasCustomValue || isJsNativeType(typeBinding)))
+        .setSupportsComparable(!hasCustomValue || isJsNativeType(typeBinding))
+        .setSupportsOrdinal(!hasCustomValue && !isJsNativeType(typeBinding))
         .build();
   }
 

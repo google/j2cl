@@ -63,7 +63,7 @@ public class NormalizeCasts extends NormalizationPass {
 
     Expression resultingExpression = createCheckCastCall(castExpression);
     // /**@type {}*/ ()
-    return toTypeDescriptor.isJsEnum()
+    return AstUtils.isNonNativeJsEnum(toTypeDescriptor)
         ? resultingExpression
         : JsDocCastExpression.newBuilder()
             .setExpression(resultingExpression)

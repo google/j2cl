@@ -538,7 +538,7 @@ public class AstUtils {
     TypeDescriptor rhsTypeDescriptor = binaryExpression.getRightOperand().getTypeDescriptor();
 
     return operator.isRelationalOperator()
-        && (lhsTypeDescriptor.isJsEnum() || rhsTypeDescriptor.isJsEnum())
+        && (isNonNativeJsEnum(lhsTypeDescriptor) || isNonNativeJsEnum(rhsTypeDescriptor))
         && !lhsTypeDescriptor.hasSameRawType(rhsTypeDescriptor);
   }
 
@@ -547,7 +547,7 @@ public class AstUtils {
       InstanceOfExpression instanceOfExpression) {
     TypeDescriptor expressionTypeDescriptor =
         instanceOfExpression.getExpression().getTypeDescriptor();
-    return expressionTypeDescriptor.isJsEnum()
+    return isNonNativeJsEnum(expressionTypeDescriptor)
         && !expressionTypeDescriptor.hasSameRawType(instanceOfExpression.getTestTypeDescriptor());
   }
 
@@ -1253,12 +1253,31 @@ public class AstUtils {
         && memberDescriptor.getEnclosingTypeDescriptor().isJsEnum();
   }
 
-  /** Returns the value field for a JsEnum */
+  /** Returns the value field for a JsEnum. */
   public static TypeDescriptor getJsEnumValueFieldType(TypeDeclaration typeDeclaration) {
     FieldDescriptor valueFieldDescriptor = getJsEnumValueFieldDescriptor(typeDeclaration);
     return valueFieldDescriptor == null
         ? PrimitiveTypes.INT
         : valueFieldDescriptor.getTypeDescriptor();
+  }
+
+  /** Returns the type to use for instanceof checking for a native JsEnum. */
+  public static DeclaredTypeDescriptor getJsEnumValueFieldInstanceCheckType(
+      TypeDeclaration typeDeclaration) {
+    TypeDescriptor valueTypeDescriptor =
+        getJsEnumValueFieldDescriptor(typeDeclaration).getTypeDescriptor();
+    // The JavaScript types are either number, boolean or string. As a shortcut we use the
+    // instanceof checks for Double, Boolean and String respectively, instead of duplicating the
+    // code.
+    // Note that this is not equivalent to use .toBoxedType since for example [int].toBoxedType()
+    // will actually be java.lang.Integer not the runtime type for an unboxed number enum.
+    if (TypeDescriptors.isNumericPrimitive(valueTypeDescriptor)) {
+      return TypeDescriptors.get().javaLangDouble;
+    } else if (TypeDescriptors.isPrimitiveBoolean(valueTypeDescriptor)) {
+      return TypeDescriptors.get().javaLangBoolean;
+    } else {
+      return (DeclaredTypeDescriptor) valueTypeDescriptor;
+    }
   }
 
   /** Returns the initialization value for a JsEnum constant. */
@@ -1271,5 +1290,13 @@ public class AstUtils {
       return null;
     }
     return arguments.get(0);
+  }
+
+  /**
+   * Returns true if {@code typeDescriptor} is a non native JsEnum, i.e. a JsEnum that requires
+   * boxing.
+   */
+  public static boolean isNonNativeJsEnum(TypeDescriptor typeDescriptor) {
+    return typeDescriptor.isJsEnum() && !typeDescriptor.isNative();
   }
 }

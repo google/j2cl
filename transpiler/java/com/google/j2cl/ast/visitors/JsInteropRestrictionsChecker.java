@@ -163,7 +163,7 @@ public class JsInteropRestrictionsChecker {
   private void checkTypeVariables(Type type) {
     if (type.getDeclaration().getTypeParameterDescriptors().stream()
         .map(TypeDescriptor::toRawTypeDescriptor)
-        .anyMatch(TypeDescriptor::isJsEnum)) {
+        .anyMatch(AstUtils::isNonNativeJsEnum)) {
       problems.error(
           type.getSourcePosition(),
           "Type '%s' cannot define a type variable with a JsEnum as a bound.",
@@ -172,7 +172,7 @@ public class JsInteropRestrictionsChecker {
   }
 
   private void checkSuperTypes(Type type) {
-    if (hasJsEnumTypeArgument(type.getSuperTypeDescriptor())) {
+    if (hasNonNativeJsEnumTypeArgument(type.getSuperTypeDescriptor())) {
       problems.error(
           type.getSourcePosition(),
           "Type '%s' cannot subclass a class parameterized by JsEnum.",
@@ -180,7 +180,7 @@ public class JsInteropRestrictionsChecker {
     }
 
     if (type.getSuperInterfaceTypeDescriptors().stream()
-        .anyMatch(JsInteropRestrictionsChecker::hasJsEnumTypeArgument)) {
+        .anyMatch(JsInteropRestrictionsChecker::hasNonNativeJsEnumTypeArgument)) {
       problems.error(
           type.getSourcePosition(),
           "Type '%s' cannot implement an interface parameterized by JsEnum.",
@@ -188,11 +188,11 @@ public class JsInteropRestrictionsChecker {
     }
   }
 
-  private static boolean hasJsEnumTypeArgument(DeclaredTypeDescriptor typeDescriptor) {
+  private static boolean hasNonNativeJsEnumTypeArgument(DeclaredTypeDescriptor typeDescriptor) {
     return typeDescriptor != null
         && typeDescriptor.getTypeArgumentDescriptors().stream()
             .map(TypeDescriptor::toRawTypeDescriptor)
-            .anyMatch(TypeDescriptor::isJsEnum);
+            .anyMatch(AstUtils::isNonNativeJsEnum);
   }
 
   /**
@@ -478,12 +478,18 @@ public class JsInteropRestrictionsChecker {
             String messagePrefix = "JsEnum";
 
             String targetMethodSignature = target.getDeclarationDescriptor().getMethodSignature();
-            if (targetMethodSignature.equals("ordinal()")
-                || targetMethodSignature.equals("compareTo(java.lang.Enum)")) {
+            if (targetMethodSignature.equals("compareTo(java.lang.Enum)")) {
               if (qualifierTypeDescriptor.getJsEnumInfo().supportsComparable()) {
                 return;
               }
-              // Customize the message to give a better idea why these cases are forbidden.
+              // Customize the message to give a better idea why compareTo() is forbidden.
+              messagePrefix = getJsEnumTypeText(qualifierTypeDescriptor);
+            }
+            if (targetMethodSignature.equals("ordinal()")) {
+              if (qualifierTypeDescriptor.getJsEnumInfo().supportsOrdinal()) {
+                return;
+              }
+              // Customize the message to give a better idea why ordinal() is forbidden.
               messagePrefix = getJsEnumTypeText(qualifierTypeDescriptor);
             }
 
@@ -540,14 +546,13 @@ public class JsInteropRestrictionsChecker {
                   return;
                 }
 
+                if (TypeDescriptors.isJavaIoSerializable(toTypeDescriptor)) {
+                  return;
+                }
+
                 String messagePrefix = "JsEnum";
                 if (TypeDescriptors.isJavaLangComparable(toTypeDescriptor)) {
                   if (expressionTypeDescriptor.getJsEnumInfo().supportsComparable()) {
-                    return;
-                  }
-                  messagePrefix = getJsEnumTypeText(expressionTypeDescriptor);
-                } else if (TypeDescriptors.isJavaIoSerializable(toTypeDescriptor)) {
-                  if (!expressionTypeDescriptor.isNative()) {
                     return;
                   }
                   messagePrefix = getJsEnumTypeText(expressionTypeDescriptor);
@@ -574,7 +579,7 @@ public class JsInteropRestrictionsChecker {
             }
             TypeDescriptor variableTypeDescriptor = variable.getTypeDescriptor();
             String messagePrefix = String.format("Variable '%s'", variable.getName());
-            errorIfJsEnumArray(
+            errorIfNonNativeJsEnumArray(
                 variableTypeDescriptor,
                 variable.getSourcePosition().orElse(getCurrentMember().getSourcePosition()),
                 messagePrefix);
@@ -595,7 +600,8 @@ public class JsInteropRestrictionsChecker {
             FieldDescriptor fieldDescriptor = field.getDescriptor();
             TypeDescriptor fieldTypeDescriptor = fieldDescriptor.getTypeDescriptor();
             String messagePrefix = String.format("Field '%s'", field.getReadableDescription());
-            errorIfJsEnumArray(fieldTypeDescriptor, field.getSourcePosition(), messagePrefix);
+            errorIfNonNativeJsEnumArray(
+                fieldTypeDescriptor, field.getSourcePosition(), messagePrefix);
           }
 
           @Override
@@ -604,7 +610,7 @@ public class JsInteropRestrictionsChecker {
             // TODO(b/65465035): Emit the expression source position when it is tracked, and avoid
             // toString() in an AST nodes.
             String messagePrefix = String.format("Array creation '%s'", newArray);
-            errorIfJsEnumArray(
+            errorIfNonNativeJsEnumArray(
                 newArrayTypeDescriptor, getCurrentMember().getSourcePosition(), messagePrefix);
           }
         });
@@ -616,7 +622,7 @@ public class JsInteropRestrictionsChecker {
       String messagePrefix =
           String.format(
               "Parameter '%s' in '%s'", parameter.getName(), methodLike.getReadableDescription());
-      errorIfJsEnumArray(
+      errorIfNonNativeJsEnumArray(
           parameterTypeDescriptor,
           parameter.getSourcePosition().orElse(methodLike.getSourcePosition()),
           messagePrefix);
@@ -630,7 +636,8 @@ public class JsInteropRestrictionsChecker {
     TypeDescriptor returnTypeDescriptor = methodLike.getDescriptor().getReturnTypeDescriptor();
     String messagePrefix =
         String.format("Return type of '%s'", methodLike.getReadableDescription());
-    errorIfJsEnumArray(returnTypeDescriptor, methodLike.getSourcePosition(), messagePrefix);
+    errorIfNonNativeJsEnumArray(
+        returnTypeDescriptor, methodLike.getSourcePosition(), messagePrefix);
   }
 
   private void checkJsEnumValueFieldAssignment(Type type) {
@@ -681,7 +688,12 @@ public class JsInteropRestrictionsChecker {
                   instanceOfExpression.getSourcePosition(),
                   "Cannot do instanceof against JsFunction implementation '%s'.",
                   testTypeDescriptor.getReadableDescription());
-            } else if (hasJsEnumArray(testTypeDescriptor)) {
+            } else if (testTypeDescriptor.isJsEnum() && testTypeDescriptor.isNative()) {
+              problems.error(
+                  instanceOfExpression.getSourcePosition(),
+                  "Cannot do instanceof against native JsEnum '%s'.",
+                  testTypeDescriptor.getReadableDescription());
+            } else if (hasNonNativeJsEnumArray(testTypeDescriptor)) {
               problems.error(
                   instanceOfExpression.getSourcePosition(),
                   "Cannot do instanceof against JsEnum array '%s'.",
@@ -692,7 +704,7 @@ public class JsInteropRestrictionsChecker {
           @Override
           public void exitCastExpression(CastExpression castExpression) {
             TypeDescriptor castTypeDescriptor = castExpression.getCastTypeDescriptor();
-            if (hasJsEnumArray(castTypeDescriptor)) {
+            if (hasNonNativeJsEnumArray(castTypeDescriptor)) {
               // TODO(b/65465035): Emit the expression source position when it is tracked.
               problems.error(
                   getCurrentMember().getSourcePosition(),
@@ -703,9 +715,9 @@ public class JsInteropRestrictionsChecker {
         });
   }
 
-  private void errorIfJsEnumArray(
+  private void errorIfNonNativeJsEnumArray(
       TypeDescriptor typeDescriptor, SourcePosition sourcePosition, String messagePrefix) {
-    if (hasJsEnumArray(typeDescriptor)) {
+    if (hasNonNativeJsEnumArray(typeDescriptor)) {
       problems.error(
           sourcePosition,
           messagePrefix + " cannot be of type '%s'.",
@@ -713,15 +725,16 @@ public class JsInteropRestrictionsChecker {
     }
   }
 
-  private static boolean hasJsEnumArray(TypeDescriptor typeDescriptor) {
+  private static boolean hasNonNativeJsEnumArray(TypeDescriptor typeDescriptor) {
     if (typeDescriptor.isArray()
-        && ((ArrayTypeDescriptor) typeDescriptor).getLeafTypeDescriptor().isJsEnum()) {
+        && AstUtils.isNonNativeJsEnum(
+            ((ArrayTypeDescriptor) typeDescriptor).getLeafTypeDescriptor())) {
       return true;
     }
     if (typeDescriptor instanceof DeclaredTypeDescriptor) {
       DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeDescriptor;
       return declaredTypeDescriptor.getTypeArgumentDescriptors().stream()
-          .anyMatch(JsInteropRestrictionsChecker::hasJsEnumArray);
+          .anyMatch(JsInteropRestrictionsChecker::hasNonNativeJsEnumArray);
     }
     return false;
   }
@@ -763,7 +776,7 @@ public class JsInteropRestrictionsChecker {
           jsOverlayOverride.get().getReadableDescription());
     }
 
-    if (method.getDescriptor().getReturnTypeDescriptor().isJsEnum()) {
+    if (AstUtils.isNonNativeJsEnum(method.getDescriptor().getReturnTypeDescriptor())) {
       Optional<MethodDescriptor> nonJsEnumReturnOverride =
           method.getDescriptor().getOverriddenMethodDescriptors().stream()
               .filter(m -> !m.getReturnTypeDescriptor().toRawTypeDescriptor().isJsEnum())

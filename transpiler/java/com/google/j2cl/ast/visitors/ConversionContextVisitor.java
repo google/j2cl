@@ -283,10 +283,10 @@ public final class ConversionContextVisitor extends AbstractRewriter {
 
     // JsEnum boxing conversion context.
     if (AstUtils.matchesJsEnumBoxingConversionContext(binaryExpression)) {
-      if (leftOperand.getTypeDescriptor().isJsEnum()) {
+      if (AstUtils.isNonNativeJsEnum(leftOperand.getTypeDescriptor())) {
         leftOperand = contextRewriter.rewriteJsEnumBoxingConversionContext(leftOperand);
       }
-      if (rightOperand.getTypeDescriptor().isJsEnum()) {
+      if (AstUtils.isNonNativeJsEnum(rightOperand.getTypeDescriptor())) {
         rightOperand = contextRewriter.rewriteJsEnumBoxingConversionContext(rightOperand);
       }
     }

@@ -17,6 +17,7 @@ package com.google.j2cl.ast.visitors;
 
 import static com.google.common.base.Preconditions.checkState;
 
+import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
@@ -45,11 +46,13 @@ public class InsertJsEnumBoxingAndUnboxingConversions extends NormalizationPass 
                   TypeDescriptor toTypeDescriptor, Expression expression) {
 
                 TypeDescriptor fromTypeDescriptor = expression.getTypeDescriptor();
-                if (fromTypeDescriptor.isJsEnum() && !toTypeDescriptor.isJsEnum()) {
+                if (AstUtils.isNonNativeJsEnum(fromTypeDescriptor)
+                    && !AstUtils.isNonNativeJsEnum(toTypeDescriptor)) {
                   return box(expression);
                 }
 
-                if (toTypeDescriptor.isJsEnum() && !fromTypeDescriptor.isJsEnum()) {
+                if (AstUtils.isNonNativeJsEnum(toTypeDescriptor)
+                    && !AstUtils.isNonNativeJsEnum(fromTypeDescriptor)) {
                   return unbox(toTypeDescriptor, expression);
                 }
                 return expression;
@@ -79,12 +82,12 @@ public class InsertJsEnumBoxingAndUnboxingConversions extends NormalizationPass 
                   return innerExpression;
                 }
 
-                if (toTypeDescriptor.isJsEnum()) {
+                if (AstUtils.isNonNativeJsEnum(toTypeDescriptor)) {
                   // (MyJsEnum) o => unbox((MyJsEnum) o);
                   return unbox(toTypeDescriptor, castExpression);
                 }
 
-                if (fromTypeDescriptor.isJsEnum()) {
+                if (AstUtils.isNonNativeJsEnum(fromTypeDescriptor)) {
                   // TODO(b/117431082): When information about super interfaces is represented
                   // accurately in the JsEnum type descriptor these casts are statically decidable.
                   // (Comparable) myJsEnum => (Comparable) box(myJsEnum);
