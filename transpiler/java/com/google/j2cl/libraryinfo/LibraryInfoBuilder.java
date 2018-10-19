@@ -15,10 +15,10 @@
  */
 package com.google.j2cl.libraryinfo;
 
-import static com.google.j2cl.ast.MethodDescriptor.CLINIT_METHOD_NAME;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.ast.AbstractVisitor;
+import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.Invocation;
@@ -26,7 +26,9 @@ import com.google.j2cl.ast.JavaScriptConstructorReference;
 import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.Member;
 import com.google.j2cl.ast.MemberDescriptor;
+import com.google.j2cl.ast.MemberReference;
 import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.MethodDescriptor.MethodOrigin;
 import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.SuperReference;
 import com.google.j2cl.ast.Type;
@@ -147,35 +149,23 @@ public final class LibraryInfoBuilder {
             // because getter and setter functions has the same name: the name of the field. If a
             // field is accessed, we visits both getter and setter.
             methodInvocationSet.add(
-                MethodInvocation.newBuilder()
-                    .setMethod(ManglingNameUtils.getMangledName(node.getTarget()))
-                    .setEnclosingType(getTypeId(node.getTarget().getEnclosingTypeDescriptor()))
-                    .setKind(
-                        node.getTarget().isStatic()
-                            ? InvocationKind.STATIC
-                            : InvocationKind.DYNAMIC)
-                    .build());
+                createMethodInvocation(node.getTarget(), getInvocationKind(node)));
           }
 
           @Override
           public void exitInvocation(Invocation node) {
-            if (node.getTarget().isJsFunction()) {
+            MethodDescriptor target = node.getTarget();
+            if (target.isJsFunction()) {
               // We don't record call to JsFunction interface methods because a it doesn't
               // generate any js type. The implementation of JsFunction interface will be marked as
               // accessible by js and will be live if the implementation type is instantiated.
               return;
             }
-            String enclosingType = getTypeId(node.getTarget().getEnclosingTypeDescriptor());
 
-            methodInvocationSet.add(
-                MethodInvocation.newBuilder()
-                    .setMethod(getMemberId(node.getTarget()))
-                    .setEnclosingType(enclosingType)
-                    .setKind(getInvocationKind(node))
-                    .build());
+            methodInvocationSet.add(createMethodInvocation(target, getInvocationKind(node)));
 
-            if (node.getTarget().isConstructor()) {
-              referencedTypes.add(enclosingType);
+            if (target.isConstructor()) {
+              referencedTypes.add(getTypeId(target.getEnclosingTypeDescriptor()));
             }
           }
         });
@@ -183,10 +173,10 @@ public final class LibraryInfoBuilder {
     if (member.isStatic() && member.isNative()) {
       // hand-written native static method could potentially make a call to $clinit
       methodInvocationSet.add(
-          MethodInvocation.newBuilder()
-              .setMethod(CLINIT_METHOD_NAME)
-              .setEnclosingType(getTypeId(member.getDescriptor().getEnclosingTypeDescriptor()))
-              .build());
+          createMethodInvocation(
+              AstUtils.getClinitMethodDescriptor(
+                  member.getDescriptor().getEnclosingTypeDescriptor()),
+              InvocationKind.STATIC));
     }
 
     memberInfoBuilder
@@ -196,7 +186,16 @@ public final class LibraryInfoBuilder {
         .addAllReferencedTypes(referencedTypes);
   }
 
-  private static InvocationKind getInvocationKind(Invocation node) {
+  private static MethodInvocation createMethodInvocation(
+      MemberDescriptor memberDescriptor, InvocationKind invocationKind) {
+    return MethodInvocation.newBuilder()
+        .setMethod(getMemberId(memberDescriptor))
+        .setEnclosingType(getTypeId(memberDescriptor.getEnclosingTypeDescriptor()))
+        .setKind(invocationKind)
+        .build();
+  }
+
+  private static InvocationKind getInvocationKind(MemberReference node) {
     if (node instanceof NewInstance) {
       return InvocationKind.INSTANTIATION;
     }
@@ -240,23 +239,23 @@ public final class LibraryInfoBuilder {
   }
 
   /**
-   * Returns {@code true} if the member is marked JsMethod for convenience but not supposed to be
-   * accessible from JavaScript code.
+   * Members with these origins are marked as JsMembers for naming or boilerplate reasons, do not
+   * consider them accessible by JavaScript code.
+   */
+  // TODO(b/116712070): make sure these members are not internally marked as JsMethod/JsConstructor,
+  // So that this hack can be removed.
+  private static final ImmutableSet<MemberDescriptor.Origin> NOT_ACCESSIBLE_BY_JS_ORIGINS =
+      ImmutableSet.of(
+          MethodOrigin.SYNTHETIC_CLASS_INITIALIZER,
+          MethodOrigin.SYNTHETIC_ADAPT_LAMBDA,
+          MethodOrigin.SYNTHETIC_LAMBDA_ADAPTOR_CONSTRUCTOR);
+
+  /**
+   * Returns {@code true} if the member is marked JsMethod/JsConstructor for convenience but not
+   * supposed to be accessible from JavaScript code.
    */
   private static boolean shouldNotBeJsAccessible(MemberDescriptor memberDescriptor) {
-    // TODO(b/116712070): make sure these members are not internally marked as
-    // JsMethod/JsConstructor.
-    // Lambda adaptor classes have a JsConstructor only to reduce the boilerplate. They are not
-    // meant to be instantiated or subclassed by JavaScript code.
-    boolean isLambdaAdaptorConstructor =
-        memberDescriptor.getEnclosingTypeDescriptor().getSimpleSourceName().equals("$LambdaAdaptor")
-            && memberDescriptor.isConstructor();
-    // $clinit and $adapt are JsMethod for naming purposes but are not meant to be called by
-    // JavaScript code.
-    return memberDescriptor.getName().equals("$clinit")
-        || (memberDescriptor.getEnclosingTypeDescriptor().isFunctionalInterface()
-            && memberDescriptor.getName().equals("$adapt"))
-        || isLambdaAdaptorConstructor;
+    return NOT_ACCESSIBLE_BY_JS_ORIGINS.contains(memberDescriptor.getOrigin());
   }
 
   // There are references to non JsMember members of these types from JavaScript in the J2CL

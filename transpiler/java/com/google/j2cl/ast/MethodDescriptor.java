@@ -100,7 +100,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     SYNTHETIC_INSTANCE_INITIALIZER("<init>", Visibility.PRIVATE),
     SYNTHETIC_PROPERTY_SETTER("<synthetic: setter>"),
     SYNTHETIC_PROPERTY_GETTER("<synthetic: getter>"),
-    SYNTHETIC_ADAPT_LAMBDA("<synthetic: adapt_lambda>");
+    SYNTHETIC_ADAPT_LAMBDA("<synthetic: adapt_lambda>"),
+    SYNTHETIC_LAMBDA_ADAPTOR_CONSTRUCTOR("<synthetic: lambda_adaptor_ctor>");
 
     private final String stackTraceFrameName;
     private final Visibility overriddenJsVisibility;

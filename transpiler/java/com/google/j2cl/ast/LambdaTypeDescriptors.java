@@ -160,6 +160,7 @@ public class LambdaTypeDescriptors {
         .setEnclosingTypeDescriptor(adaptorTypeDescriptor)
         .setConstructor(true)
         .setJsInfo(JsInfo.RAW_CTOR)
+        .setOrigin(MethodDescriptor.MethodOrigin.SYNTHETIC_LAMBDA_ADAPTOR_CONSTRUCTOR)
         .setParameterTypeDescriptors(jsFunctionInterface)
         .build();
   }
