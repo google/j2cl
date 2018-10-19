@@ -32,96 +32,26 @@ import jsinterop.annotations.JsMethod;
   "ReturnValueIgnored"
 })
 public class Main {
-  public Byte box(byte b) {
-    return new Byte(b);
+
+  public static void main(String[] args) {
+    testBoxByParameter();
+    testBoxByAssignment();
+    testUnboxByParameter();
+    testUnboxByAssignment();
+    testUnboxByOperator();
+    testBoxedCompoundAssignmentResult();
+    testNull();
+    testAllNumericTypes();
+    testTernary();
+    testCasts();
+    testArrayExpressions();
+    testConditionals();
+    testCompoundAssignmentBoxUnboxSequence();
+    testUnboxingFromTypeVariable();
+    testUnboxingFromIntersectionType();
   }
 
-  public Double box(double d) {
-    return new Double(d);
-  }
-
-  public Float box(float f) {
-    return new Float(f);
-  }
-
-  public Integer box(int i) {
-    return new Integer(i);
-  }
-
-  public Long box(long l) {
-    return new Long(l);
-  }
-
-  public Short box(short s) {
-    return new Short(s);
-  }
-
-  public Boolean box(boolean b) {
-    return new Boolean(b);
-  }
-
-  public Character box(char a) {
-    return new Character(a);
-  }
-
-  public byte unbox(Byte b) {
-    return b.byteValue();
-  }
-
-  public double unbox(Double d) {
-    return d.doubleValue();
-  }
-
-  public float unbox(Float f) {
-    return f.floatValue();
-  }
-
-  public int unbox(Integer i) {
-    return i.intValue();
-  }
-
-  public long unbox(Long l) {
-    return l.longValue();
-  }
-
-  public short unbox(Short s) {
-    return s.shortValue();
-  }
-
-  public boolean unbox(Boolean b) {
-    return b.booleanValue();
-  }
-
-  public char unbox(Character c) {
-    return c.charValue();
-  }
-
-  public double takesAndReturnsPrimitiveDouble(double d) {
-    return d;
-  }
-
-  public double takesObjectAndReturnsPrimitiveDouble(@DoNotAutobox Object o) {
-    return (Double) o;
-  }
-
-  public double sumWithoutBoxing(@DoNotAutobox Object... numbers) {
-    double sum = 0;
-    for (Object number : numbers) {
-      sum += (Double) number;
-    }
-    return sum;
-  }
-
-  @JsMethod
-  public double sumWithoutBoxingJsVarargs(@DoNotAutobox Object... numbers) {
-    double sum = 0;
-    for (Object number : numbers) {
-      sum += (Double) number;
-    }
-    return sum;
-  }
-
-  public void testBoxByParameter() {
+  private static void testBoxByParameter() {
     byte b = (byte) 100;
     double d = 1111.0;
     float f = 1111.0f;
@@ -138,12 +68,66 @@ public class Main {
     assert (unbox(s) == s);
     assert (unbox(bool) == bool);
     assert (unbox(c) == c);
-    assert (takesAndReturnsPrimitiveDouble(3) == 3);
+    assert (takesObjectAndReturnsPrimitiveDouble(3) == 3);
     assert (sumWithoutBoxing(1, 1.5, (byte) 1, (short) 1, (float) 1) == 5.5);
     assert (sumWithoutBoxingJsVarargs(1, 1.5, (byte) 1, (short) 1, (float) 1) == 5.5);
   }
 
-  public void testBoxByAssignment() {
+  private static double takesObjectAndReturnsPrimitiveDouble(@DoNotAutobox Object o) {
+    return (Double) o;
+  }
+
+  private static double sumWithoutBoxing(@DoNotAutobox Object... numbers) {
+    double sum = 0;
+    for (Object number : numbers) {
+      sum += (Double) number;
+    }
+    return sum;
+  }
+
+  // JsMethods have different varargs semantics.
+  @JsMethod
+  private static double sumWithoutBoxingJsVarargs(@DoNotAutobox Object... numbers) {
+    double sum = 0;
+    for (Object number : numbers) {
+      sum += (Double) number;
+    }
+    return sum;
+  }
+
+  private static byte unbox(Byte b) {
+    return b.byteValue();
+  }
+
+  private static double unbox(Double d) {
+    return d.doubleValue();
+  }
+
+  private static float unbox(Float f) {
+    return f.floatValue();
+  }
+
+  private static int unbox(Integer i) {
+    return i.intValue();
+  }
+
+  private static long unbox(Long l) {
+    return l.longValue();
+  }
+
+  private static short unbox(Short s) {
+    return s.shortValue();
+  }
+
+  private static boolean unbox(Boolean b) {
+    return b.booleanValue();
+  }
+
+  private static char unbox(Character c) {
+    return c.charValue();
+  }
+
+  private static void testBoxByAssignment() {
     byte b = (byte) 100;
     double d = 1111.0;
     float f = 1111.0f;
@@ -170,7 +154,7 @@ public class Main {
     assert (boxC.charValue() == c);
   }
 
-  public void testBoxedCompoundAssignmentResult() {
+  private static void testBoxedCompoundAssignmentResult() {
     Integer i = 10;
     assertIsBoxedInteger(i++);
     assertIsBoxedInteger(--i);
@@ -178,11 +162,7 @@ public class Main {
     assert (--i).intValue() == 10;
   }
 
-  public void assertIsBoxedInteger(@DoNotAutobox Object object) {
-    assert object instanceof Integer;
-  }
-
-  public void testUnboxByParameter() {
+  private static void testUnboxByParameter() {
     Byte boxB = new Byte((byte) 100);
     Double boxD = new Double(1111.0);
     Float boxF = new Float(1111.0f);
@@ -211,7 +191,43 @@ public class Main {
     assert takesAndReturnsPrimitiveDouble(boxF) == boxF.floatValue();
   }
 
-  public void testUnboxByAssignment() {
+  private static double takesAndReturnsPrimitiveDouble(double d) {
+    return d;
+  }
+
+  private static Byte box(byte b) {
+    return new Byte(b);
+  }
+
+  private static Double box(double d) {
+    return new Double(d);
+  }
+
+  private static Float box(float f) {
+    return new Float(f);
+  }
+
+  private static Integer box(int i) {
+    return new Integer(i);
+  }
+
+  private static Long box(long l) {
+    return new Long(l);
+  }
+
+  private static Short box(short s) {
+    return new Short(s);
+  }
+
+  private static Boolean box(boolean b) {
+    return new Boolean(b);
+  }
+
+  private static Character box(char a) {
+    return new Character(a);
+  }
+
+  private static void testUnboxByAssignment() {
     Byte boxB = new Byte((byte) 100);
     Double boxD = new Double(1111.0);
     Float boxF = new Float(1111.0f);
@@ -256,7 +272,7 @@ public class Main {
     assert (d == boxC.charValue());
   }
 
-  public void testUnboxByOperator() {
+  private static void testUnboxByOperator() {
     // non side effect prefix operations
     Integer i = new Integer(1111);
     i = +i;
@@ -355,9 +371,9 @@ public class Main {
     String unusedS = "" + booleanInIntegerRef.field;
   }
 
-  private void acceptsInt(int x) {}
+  private static void acceptsInt(int x) {}
 
-  public static class Ref<T> {
+  private static class Ref<T> {
     T field;
 
     Ref(T value) {
@@ -365,9 +381,9 @@ public class Main {
     }
   }
 
-  private int foo = 0;
+  private static int foo = 0;
 
-  public void testNull() {
+  private static void testNull() {
     // Avoiding a "condition always evaluates to true" error in JSComp type checking.
     Object maybeNull = foo == 0 ? null : new Object();
 
@@ -381,7 +397,7 @@ public class Main {
     assert l == maybeNull;
   }
 
-  public void testAllNumericTypes() {
+  private static void testAllNumericTypes() {
     Byte b = 0;
     Character c = (char) 0;
     Short s = 0;
@@ -412,7 +428,7 @@ public class Main {
     assert b == -55;
   }
 
-  public void testTernary() {
+  private static void testTernary() {
     Integer boxedValue = new Integer(1);
     int primitiveValue = 10;
 
@@ -452,7 +468,7 @@ public class Main {
   }
 
   @SuppressWarnings("cast")
-  public void testCasts() {
+  private static void testCasts() {
     // Box
     Integer boxedInteger = (Integer) 100;
     // Unbox
@@ -466,14 +482,15 @@ public class Main {
   }
 
   @SuppressWarnings("cast")
-  public void testArrayExpressions() {
+  private static void testArrayExpressions() {
     Integer boxedInteger1 = new Integer(100);
     Integer boxedInteger2 = new Integer(50);
 
     Object[] objects = new Object[boxedInteger1];
     assert objects.length == 100;
-    objects[boxedInteger2] = this;
-    assert objects[50] == this;
+    Object marker = new Object();
+    objects[boxedInteger2] = marker;
+    assert objects[50] == marker;
 
     Integer[] boxedIntegers = new Integer[] {1, 2, 3};
     assert boxedIntegers[0] instanceof Integer;
@@ -486,7 +503,7 @@ public class Main {
    * devirtualized Boolean.
    */
   @SuppressWarnings("LoopConditionChecker")
-  public void testConditionals() {
+  private static void testConditionals() {
     Boolean boxedFalseBoolean = new Boolean(false);
 
     if (boxedFalseBoolean) {
@@ -559,7 +576,7 @@ public class Main {
         });
   }
 
-  public static void testCompoundAssignmentBoxUnboxSequence() {
+  private static void testCompoundAssignmentBoxUnboxSequence() {
     Integer boxI = 1;
     int i = 2;
     boxI /* 6 */ += i /* 5 */ += boxI /* 3 */ += i /* 2*/;
@@ -568,7 +585,7 @@ public class Main {
     assert boxI == 6;
   }
 
-  public static <T extends Long> void testUnboxingFromTypeVariable() {
+  private static <T extends Long> void testUnboxingFromTypeVariable() {
     T n = (T) (Long) 10L;
     // Auto unboxing from variable n.
     long l = n;
@@ -587,7 +604,7 @@ public class Main {
     assert l == 11L;
   }
 
-  public static <T extends Long & Comparable<Long>> void testUnboxingFromIntersectionType() {
+  private static <T extends Long & Comparable<Long>> void testUnboxingFromIntersectionType() {
     T n = (T) (Long) 10L;
     // Auto unboxing from variable n.
     long l = n;
@@ -606,13 +623,17 @@ public class Main {
     assert l == 11L;
   }
 
-  public Object doFail() {
+  private static Object doFail() {
     assert false;
     return null;
   }
 
-  public Object doNothing() {
+  private static Object doNothing() {
     return null;
+  }
+
+  private static void assertIsBoxedInteger(@DoNotAutobox Object object) {
+    assert object instanceof Integer;
   }
 
   private static <T> void assertThrowsClassCastException(Supplier<T> supplier, Class<?> toClass) {
@@ -647,24 +668,5 @@ public class Main {
       assert false : "Should have thrown NPE";
     } catch (NullPointerException expected) {
     }
-  }
-
-  public static void main(String[] args) {
-    Main m = new Main();
-    m.testBoxByParameter();
-    m.testBoxByAssignment();
-    m.testUnboxByParameter();
-    m.testUnboxByAssignment();
-    m.testUnboxByOperator();
-    m.testBoxedCompoundAssignmentResult();
-    m.testNull();
-    m.testAllNumericTypes();
-    m.testTernary();
-    m.testCasts();
-    m.testArrayExpressions();
-    m.testConditionals();
-    testCompoundAssignmentBoxUnboxSequence();
-    testUnboxingFromTypeVariable();
-    testUnboxingFromIntersectionType();
   }
 }
