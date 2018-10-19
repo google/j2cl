@@ -19,6 +19,8 @@ import java.io.Serializable;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.function.Supplier;
+import javaemul.internal.annotations.DoNotAutobox;
+import javaemul.internal.annotations.UncheckedCast;
 import jsinterop.annotations.JsEnum;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsOverlay;
@@ -38,6 +40,8 @@ public class Main {
     testStringJsEnum();
     testJsEnumClassInitialization();
     testNativeEnumClassInitialization();
+    testDoNotAutoboxJsEnum();
+    testUnckeckedCastJsEnum();
   }
 
   @JsEnum(isNative = true, namespace = "test")
@@ -46,7 +50,7 @@ public class Main {
     CANCEL;
   }
 
-  public static void testNativeJsEnum() {
+  private static void testNativeJsEnum() {
     NativeEnum v = NativeEnum.OK;
     switch (v) {
       case OK:
@@ -145,7 +149,7 @@ public class Main {
     }
   }
 
-  public static void testStringNativeJsEnum() {
+  private static void testStringNativeJsEnum() {
     StringNativeEnum v = StringNativeEnum.OK;
     switch (v) {
       case OK:
@@ -243,7 +247,7 @@ public class Main {
     UNIT
   }
 
-  public static void testJsEnum() {
+  private static void testJsEnum() {
     PlainJsEnum v = PlainJsEnum.ONE;
     switch (v) {
       case ZERO:
@@ -354,7 +358,7 @@ public class Main {
     }
   }
 
-  public static void testBooleanJsEnum() {
+  private static void testBooleanJsEnum() {
     BooleanJsEnum v = BooleanJsEnum.FALSE;
     switch (v) {
       case TRUE:
@@ -436,7 +440,7 @@ public class Main {
     }
   }
 
-  public static void testStringJsEnum() {
+  private static void testStringJsEnum() {
     StringJsEnum v = StringJsEnum.HELLO;
     switch (v) {
       case GOODBYE:
@@ -517,7 +521,7 @@ public class Main {
     }
   }
 
-  public static void testJsEnumClassInitialization() {
+  private static void testJsEnumClassInitialization() {
     assertFalse(nonNativeClinitCalled);
     // Access to an enum value does not trigger clinit.
     Object o = EnumWithClinit.A;
@@ -556,7 +560,7 @@ public class Main {
     }
   }
 
-  public static void testNativeEnumClassInitialization() {
+  private static void testNativeEnumClassInitialization() {
     assertFalse(nativeClinitCalled);
     // Access to an enum value does not trigger clinit.
     Object o = NativeEnumWithClinit.OK;
@@ -575,6 +579,30 @@ public class Main {
     // Access to any devirtualized method triggers clinit.
     NativeEnumWithClinit.OK.getValue();
     assertTrue(nativeClinitCalled);
+  }
+
+  private static void testDoNotAutoboxJsEnum() {
+    assert returnsObject(StringJsEnum.HELLO) == HELLO_STRING;
+    // TODO(b/117954790): Uncomment when bug is fixed.
+    // assert returnsObject(0, StringJsEnum.HELLO) == HELLO_STRING;
+  }
+
+  private static Object returnsObject(@DoNotAutobox Object object) {
+    return object;
+  }
+
+  private static Object returnsObject(int n, @DoNotAutobox Object... object) {
+    return object[0];
+  }
+
+  private static void testUnckeckedCastJsEnum() {
+    StringJsEnum s = uncheckedCast(HELLO_STRING);
+    assert s == StringJsEnum.HELLO;
+  }
+
+  @UncheckedCast
+  private static <T> T uncheckedCast(@DoNotAutobox Object object) {
+    return (T) object;
   }
 
   @JsMethod
@@ -613,11 +641,11 @@ public class Main {
     assertTrue(!condition);
   }
 
-  public static void fail() {
+  private static void fail() {
     assert false;
   }
 
-  public static void fail(String message) {
+  private static void fail(String message) {
     assert false : message;
   }
 }
