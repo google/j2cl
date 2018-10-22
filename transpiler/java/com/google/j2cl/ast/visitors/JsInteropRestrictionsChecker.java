@@ -62,6 +62,7 @@ import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
+import com.google.j2cl.ast.TypeLiteral;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableReference;
 import com.google.j2cl.ast.visitors.ConversionContextVisitor.ContextVisitor;
@@ -156,7 +157,7 @@ public class JsInteropRestrictionsChecker {
     for (Member member : type.getMembers()) {
       checkMember(member, instanceJsMembersByName, staticJsMembersByName);
     }
-    checkCastsAndInstanceOf(type);
+    checkTypeReferences(type);
     checkJsEnumUsages(type);
   }
 
@@ -672,7 +673,8 @@ public class JsInteropRestrictionsChecker {
         });
   }
 
-  private void checkCastsAndInstanceOf(Type type) {
+  /** Checks that type references in casts, instanceof and type literals are valid. */
+  private void checkTypeReferences(Type type) {
     type.accept(
         new AbstractVisitor() {
           @Override
@@ -710,6 +712,17 @@ public class JsInteropRestrictionsChecker {
                   getCurrentMember().getSourcePosition(),
                   "Cannot cast to JsEnum array '%s'.",
                   castTypeDescriptor.getReadableDescription());
+            }
+          }
+
+          @Override
+          public void exitTypeLiteral(TypeLiteral typeLiteral) {
+            TypeDescriptor literalTypeDescriptor = typeLiteral.getReferencedTypeDescriptor();
+            if (literalTypeDescriptor.isJsEnum() && literalTypeDescriptor.isNative()) {
+              problems.error(
+                  typeLiteral.getSourcePosition(),
+                  "Cannot use native JsEnum literal '%s.class'.",
+                  literalTypeDescriptor.getReadableDescription());
             }
           }
         });

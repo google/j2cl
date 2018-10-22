@@ -1699,6 +1699,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "    A.ordinal();",
             "    A.compareTo(B);",
             "    if (((MyJsEnum) A) instanceof MyJsEnum) {}",
+            "    Object o = MyJsEnum.class;",
             "  }",
             "  static int field = 5;",
             "  static { }",
@@ -1815,6 +1816,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "    Native.values();",
             "    Native.valueOf(null);",
             "    if (A instanceof Native) { }",
+            "    Object o = Native.class;",
             "  }",
             "  static int staticField = 1;",
             "}",
@@ -1842,7 +1844,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 + " field named 'value'.",
             "Non-custom-valued JsEnum 'NativeJsEnumNotDeclaringCustomValueButWithValueField' "
                 + "cannot have a field named 'value'.",
-            "Cannot do instanceof against native JsEnum 'Native'.");
+            "Cannot do instanceof against native JsEnum 'Native'.",
+            "Cannot use native JsEnum literal 'Native.class'.");
   }
 
   public void testNativeJsEnumSucceeds() {
