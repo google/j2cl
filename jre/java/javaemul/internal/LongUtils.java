@@ -195,6 +195,8 @@ class LongUtils {
 
     public native NativeLong xor(NativeLong rightLong);
 
+    // This is a native object whose hashCode method should never be called.
+    @SuppressWarnings("EqualsHashCode")
     public native boolean equals(Object rightLong);
   }
 }
