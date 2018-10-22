@@ -11,6 +11,8 @@ load(
 # blaze test :compiled_test
 # blaze test :uncompiled_test
 integration_test(
-    name = "interfacemethoddispatch",
+    name = "interfaces",
     srcs = glob(["*.java"]),
+    # TODO(b/118184493): remove when Java 9 language support is enabled.
+    j2cl_library_tags = ["manual"],
 )

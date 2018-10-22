@@ -14,7 +14,10 @@ integration_test(
     name = "jsenum",
     srcs = glob(["*.java"]),
     js_deps = [":native_types"],
-    deps = ["//third_party/java/gwt:gwt-jsinterop-annotations-j2cl"],
+    deps = [
+        "//third_party/java/gwt:gwt-javaemul-internal-annotations-j2cl",
+        "//third_party/java/gwt:gwt-jsinterop-annotations-j2cl",
+    ],
 )
 
 js_library(

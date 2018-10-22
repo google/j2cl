@@ -135,37 +135,36 @@ public class Main {
     assert List.returnOne() == 1;
   }
 
-  // TODO(b/117826852): Uncomment when Java 9 language features are supported.
-  // interface InterfaceWithPrivateMethods {
-  //   default int defaultMethod() {
-  //     return privateInstanceMethod();
-  //   }
-  //
-  //   private int privateInstanceMethod() {
-  //     return m();
-  //   }
-  //   private static int privateStaticMethod() {
-  //     return ((InterfaceWithPrivateMethods) () -> 1).privateInstanceMethod() + 1;
-  //   }
-  //
-  //   int m();
-  //
-  //   static int callPrivateStaticMethod() {
-  //     return privateStaticMethod();
-  //   }
-  // }
-  //
-  // public static void testPrivateMethods() {
-  //   assert InterfaceWithPrivateMethods.callPrivateStaticMethod() == 2;
-  //   assert ((InterfaceWithPrivateMethods) () -> 1).defaultMethod() == 1;
-  // }
+  interface InterfaceWithPrivateMethods {
+    default int defaultMethod() {
+      return privateInstanceMethod();
+    }
+
+    private int privateInstanceMethod() {
+      return m();
+    }
+
+    private static int privateStaticMethod() {
+      return ((InterfaceWithPrivateMethods) () -> 1).privateInstanceMethod() + 1;
+    }
+
+    int m();
+
+    static int callPrivateStaticMethod() {
+      return privateStaticMethod();
+    }
+  }
+
+  public static void testPrivateMethods() {
+    assert InterfaceWithPrivateMethods.callPrivateStaticMethod() == 2;
+    assert ((InterfaceWithPrivateMethods) () -> 1).defaultMethod() == 1;
+  }
 
   public static void main(String[] args) {
     testInterfaceDispatch();
     testInterfaceWithFields();
     testDefaultMethods();
     testStaticMethods();
-    // TODO(b/117826852): Uncomment when Java 9 language features are supported.
-    // testPrivateMethods();
+    testPrivateMethods();
   }
 }

@@ -24,13 +24,10 @@ public class Main {
     void interfaceMethod();
 
     default void defaultMethod(T t) {
-      // TODO(b/117826852): Uncomment when Java 9 language features are supported.
-      // this.privateMethod(t);
+      this.privateMethod(t);
     }
 
-    // TODO(b/117826852): Uncomment when Java 9 language features are supported.
-    // private void privateMethod(T t) {
-    // }
+    private void privateMethod(T t) {}
 
     static void staticInterfaceMethod() {}
   }

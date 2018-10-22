@@ -28,6 +28,7 @@ def readable_example(
         plugins = [],
         defs = [],
         generate_library_info = False,
+        j2cl_library_tags = [],
         _declare_legacy_namespace = False):
     """Macro that confirms the JS compilability of some transpiled Java.
 
@@ -54,6 +55,7 @@ def readable_example(
         deps = deps,
         plugins = plugins,
         generate_build_test = False,
+        tags = j2cl_library_tags,
         _js_deps = js_deps,
         _readable_source_maps = True,
         _declare_legacy_namespace = _declare_legacy_namespace,

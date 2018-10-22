@@ -48,6 +48,7 @@ def integration_test(
         closure_defines = dict(),
         disable_uncompiled_test = False,
         disable_compiled_test = False,
+        j2cl_library_tags = [],
         plugins = []):
     """Macro that turns Java files into integration test targets.
 
@@ -94,6 +95,7 @@ def integration_test(
         _js_deps = js_deps,
         native_srcs = native_srcs,
         plugins = plugins,
+        tags = j2cl_library_tags,
     )
 
     # blaze build :optimized_js
@@ -218,10 +220,6 @@ def _gwt_targets(java_package, srcs, deps, gwt_deps):
         srcs = srcs + ["MainEntryPoint.java"],
         deps = java_library_deps,
         entry_points = [java_package + ".MainEntryPoint"],
-        javacopts = [
-            "-source 8",
-            "-target 8",
-        ],
     )
     native.gwt_application(
         name = "readable_gwt_application",
