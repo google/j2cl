@@ -70,11 +70,7 @@ public class RuntimeMethods {
   }
 
   /** Create a call to an Class method. */
-  public static MethodCall createClassGetMethodCall(
-      DeclaredTypeDescriptor parameterizedJavaLangClassTypeDescriptor, Expression... arguments) {
-    checkArgument(
-        parameterizedJavaLangClassTypeDescriptor.isAssignableTo(
-            TypeDescriptors.get().javaLangClass));
+  public static MethodCall createClassGetMethodCall(Expression... arguments) {
     checkArgument(arguments.length == 1 || arguments.length == 2);
 
     List<TypeDescriptor> parameterTypeDescriptors =
@@ -87,7 +83,7 @@ public class RuntimeMethods {
                 .setName("$get")
                 // Allow the call to use the one or two parameter version.
                 .setParameterTypeDescriptors(parameterTypeDescriptors.subList(0, arguments.length))
-                .setReturnTypeDescriptor(parameterizedJavaLangClassTypeDescriptor)
+                .setReturnTypeDescriptor(TypeDescriptors.get().javaLangClass)
                 .build())
         .setArguments(arguments)
         .build();

@@ -78,6 +78,7 @@ import com.google.j2cl.ast.visitors.NormalizeStaticMemberQualifiers;
 import com.google.j2cl.ast.visitors.NormalizeStaticNativeMemberReferences;
 import com.google.j2cl.ast.visitors.NormalizeSwitchStatements;
 import com.google.j2cl.ast.visitors.NormalizeTryWithResources;
+import com.google.j2cl.ast.visitors.NormalizeTypeLiterals;
 import com.google.j2cl.ast.visitors.OptimizeAnonymousInnerClassesToFunctionExpressions;
 import com.google.j2cl.ast.visitors.PackagePrivateMethodsDispatcher;
 import com.google.j2cl.ast.visitors.RemoveUnneededJsDocCasts;
@@ -219,6 +220,7 @@ class J2clTranspiler {
             new ImplementInstanceInitialization(),
             new NormalizeNestedClassConstructors(),
             new NormalizeConstructors(),
+            new NormalizeTypeLiterals(),
             new NormalizeCasts(),
             new NormalizeInstanceOfs(),
             new NormalizeEquality(),
