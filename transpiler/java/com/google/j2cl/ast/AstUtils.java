@@ -1193,6 +1193,7 @@ public class AstUtils {
     if (varargsParameterDescriptor.isDoNotAutobox()) {
       checkArgument(
           TypeDescriptors.isJavaLangObject(varargsTypeDescriptor.getComponentTypeDescriptor()));
+      // TODO(b/118000088): Model @DoNotAutobox in varargs better.
       // Use a NATIVE_OBJECT[] instead of Object[] for @DoNotAutobox varargs, so that the
       // boxing logic can avoid boxing here.
       varargsTypeDescriptor =

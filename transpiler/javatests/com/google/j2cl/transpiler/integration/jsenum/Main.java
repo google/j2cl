@@ -596,8 +596,7 @@ public class Main {
 
   private static void testDoNotAutoboxJsEnum() {
     assert returnsObject(StringJsEnum.HELLO) == HELLO_STRING;
-    // TODO(b/117954790): Uncomment when bug is fixed.
-    // assert returnsObject(0, StringJsEnum.HELLO) == HELLO_STRING;
+    assert returnsObject(0, StringJsEnum.HELLO) == HELLO_STRING;
   }
 
   private static Object returnsObject(@DoNotAutobox Object object) {
