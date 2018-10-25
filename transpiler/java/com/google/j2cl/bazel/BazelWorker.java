@@ -119,7 +119,8 @@ public final class BazelWorker {
   }
 
   private static Iterable<String> getArgsFromFlagFile(String flagFileName) throws IOException {
-    String flagFileContent = Files.toString(new File(flagFileName), StandardCharsets.UTF_8);
+    String flagFileContent =
+        Files.asCharSource(new File(flagFileName), StandardCharsets.UTF_8).read();
     return Splitter.on('\n').omitEmptyStrings().split(flagFileContent);
   }
 }

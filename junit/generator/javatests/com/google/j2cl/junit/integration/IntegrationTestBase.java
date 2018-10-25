@@ -78,7 +78,8 @@ public abstract class IntegrationTestBase {
     File standardFile = getTestDataFile(testName + ".stacktrace.txt");
     // try loading a prefix version first if it exists, otherwise use the default file
     String fileContent =
-        Files.toString(prefixFile.exists() ? prefixFile : standardFile, StandardCharsets.UTF_8);
+        Files.asCharSource(prefixFile.exists() ? prefixFile : standardFile, StandardCharsets.UTF_8)
+            .read();
     return Stacktrace.parse(fileContent);
   }
 
