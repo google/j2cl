@@ -35,7 +35,6 @@ J2CL_UNOPTIMIZED_DEFS = [
 J2CL_OPTIMIZED_DEFS = (J2CL_UNOPTIMIZED_DEFS +
                        ADVANCED_OPTIMIZATIONS_FLAGS +
                        USE_TYPES_FOR_OPTIMIZATIONS_FLAGS + [
-    "--extra_smart_name_removal=true",
     "--define=goog.DEBUG=false",
     "--remove_unused_prototype_props_in_externs",
 ])
@@ -43,7 +42,6 @@ J2CL_OPTIMIZED_DEFS = (J2CL_UNOPTIMIZED_DEFS +
 J2CL_TEST_DEFS = JS_TEST_FLAGS + [
     # Manage closure deps will strip our outputs in some tests
     "--manage_closure_dependencies=false",
-    "--extra_smart_name_removal=true",
     # Enable assert statements for tests (as java_test does the same)
     "--remove_j2cl_asserts=false",
     # turn off the closure debug loader since it is causing warnings
