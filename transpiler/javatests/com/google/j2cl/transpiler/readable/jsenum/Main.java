@@ -79,6 +79,15 @@ public class Main {
     }
   }
 
+  @JsEnum(
+      isNative = true,
+      namespace = "com.google.j2cl.transpiler.readable.jsenum.Main",
+      name = "NonNullableStringJsEnum")
+  enum NativeStringEnum {
+    ONE,
+    THREE
+  }
+
   public static void testJsEnumSwitch() {
     ComparableJsEnum comparableJsEnum =
         ComparableJsEnum.ONE.getValue() == 1 ? ComparableJsEnum.TWO : null;
@@ -113,5 +122,7 @@ public class Main {
         break;
       default:
     }
+
+    NativeStringEnum.ONE.compareTo(NativeStringEnum.THREE);
   }
 }

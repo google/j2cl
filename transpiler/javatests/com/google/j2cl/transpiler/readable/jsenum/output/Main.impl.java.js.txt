@@ -16,9 +16,11 @@ let ComparableJsEnum = goog.forwardDeclare('com.google.j2cl.transpiler.readable.
 let $Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsenum.Main.ComparableJsEnum.$Overlay$impl');
 let IntJsEnum = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsenum.Main.IntJsEnum$impl');
 let IntJsEnum_$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsenum.Main.IntJsEnum.$Overlay$impl');
+let NativeStringEnum = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsenum.Main.NonNullableStringJsEnum');
 let StringJsEnum = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsenum.Main.StringJsEnum$impl');
 let StringJsEnum_$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsenum.Main.StringJsEnum.$Overlay$impl');
 let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
+let Double = goog.forwardDeclare('java.lang.Double$impl');
 let $InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
@@ -105,6 +107,8 @@ class Main extends j_l_Object {
         break;
       default:
     }
+    Double.m_compareTo__java_lang_Double__java_lang_Double(
+        NativeStringEnum.ONE, NativeStringEnum.THREE);
   }
 
   /**
@@ -147,11 +151,14 @@ class Main extends j_l_Object {
         'com.google.j2cl.transpiler.readable.jsenum.Main.IntJsEnum$impl');
     IntJsEnum_$Overlay = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsenum.Main.IntJsEnum.$Overlay$impl');
+    NativeStringEnum = goog.module.get(
+        'com.google.j2cl.transpiler.readable.jsenum.Main.NonNullableStringJsEnum');
     StringJsEnum = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsenum.Main.StringJsEnum$impl');
     StringJsEnum_$Overlay = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsenum.Main.StringJsEnum.$Overlay$impl');
     Comparable = goog.module.get('java.lang.Comparable$impl');
+    Double = goog.module.get('java.lang.Double$impl');
     $InternalPreconditions =
         goog.module.get('javaemul.internal.InternalPreconditions$impl');
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
