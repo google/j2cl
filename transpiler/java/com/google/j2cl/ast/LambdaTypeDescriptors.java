@@ -169,14 +169,6 @@ public class LambdaTypeDescriptors {
   @SuppressWarnings("ReferenceEquality")
   public static MethodDescriptor getAdaptorForwardingMethod(
       DeclaredTypeDescriptor adaptorTypeDescriptor) {
-    DeclaredTypeDescriptor unparameterizedAdaptorTypeDescriptor =
-        adaptorTypeDescriptor.toUnparameterizedTypeDescriptor();
-    MethodDescriptor methodDeclarationDescriptor = null;
-    if (unparameterizedAdaptorTypeDescriptor != adaptorTypeDescriptor) {
-      methodDeclarationDescriptor =
-          getAdaptorForwardingMethod(unparameterizedAdaptorTypeDescriptor);
-    }
-
     DeclaredTypeDescriptor functionalInterfaceTypeDescriptor =
         adaptorTypeDescriptor.getFunctionalInterface();
     checkState(
@@ -188,7 +180,9 @@ public class LambdaTypeDescriptors {
     return MethodDescriptor.Builder.from(functionalInterfaceMethodDescriptor)
         .setNative(false)
         // This is the declaration.
-        .setDeclarationMethodDescriptor(methodDeclarationDescriptor)
+        .setDeclarationMethodDescriptor(
+            createRelatedMethodDeclaration(
+                LambdaTypeDescriptors::getAdaptorForwardingMethod, adaptorTypeDescriptor))
         .setEnclosingTypeDescriptor(adaptorTypeDescriptor)
         // Remove the method type parameters as they when moved to the adaptor type.
         .setTypeParameterTypeDescriptors(Collections.emptyList())
@@ -214,7 +208,6 @@ public class LambdaTypeDescriptors {
     return DeclaredTypeDescriptor.newBuilder()
         .setEnclosingTypeDescriptor(functionalTypeDescriptor)
         .setTypeDeclaration(jsFunctionDeclaration)
-        .setTypeArgumentDescriptors(functionalTypeDescriptor.getTypeArgumentDescriptors())
         .setTypeArgumentDescriptors(functionalTypeDescriptor.getTypeArgumentDescriptors())
         .setSingleAbstractMethodDescriptorFactory(
             jsfunctionTypeDescriptor ->
@@ -264,6 +257,12 @@ public class LambdaTypeDescriptors {
       DeclaredTypeDescriptor jsfunctionTypeDescriptor, MethodDescriptor singleAbstractMethod) {
     return MethodDescriptor.Builder.from(singleAbstractMethod)
         .setEnclosingTypeDescriptor(jsfunctionTypeDescriptor)
+        .setDeclarationMethodDescriptor(
+            createRelatedMethodDeclaration(
+                t ->
+                    createJsFunctionMethodDescriptor(
+                        t, singleAbstractMethod.getDeclarationDescriptor()),
+                jsfunctionTypeDescriptor))
         .setJsInfo(
             JsInfo.newBuilder()
                 .setJsMemberType(JsMemberType.NONE)
@@ -278,5 +277,16 @@ public class LambdaTypeDescriptors {
       MethodDescriptor... methodDescriptors) {
     return Arrays.stream(methodDescriptors)
         .collect(toImmutableMap(MethodDescriptor::getMethodSignature, Function.identity()));
+  }
+
+  private static MethodDescriptor createRelatedMethodDeclaration(
+      Function<DeclaredTypeDescriptor, MethodDescriptor> creator,
+      DeclaredTypeDescriptor typeDescriptor) {
+    DeclaredTypeDescriptor unparameterizedTypeDescriptor =
+        typeDescriptor.toUnparameterizedTypeDescriptor();
+    if (unparameterizedTypeDescriptor.equals(typeDescriptor)) {
+      return null;
+    }
+    return creator.apply(unparameterizedTypeDescriptor);
   }
 }
