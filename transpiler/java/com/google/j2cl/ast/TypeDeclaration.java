@@ -22,7 +22,6 @@ import static java.util.stream.Collectors.joining;
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
 import com.google.common.base.Joiner;
-import com.google.common.base.Objects;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -539,7 +538,7 @@ public abstract class TypeDeclaration extends Node
   @Override
   @Memoized
   public int hashCode() {
-    return Objects.hashCode(getUniqueId());
+    return getUniqueId().hashCode();
   }
 
   /**
