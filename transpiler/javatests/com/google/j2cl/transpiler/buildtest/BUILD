@@ -12,7 +12,7 @@
 
 load("//apps/framework/modulesets/builddefs:modulesets.bzl", "mss_js_compiled_module_set_flat_files")
 load("//java/com/google/devtools/javascript/pinto/builddefs:rules.bzl", "pinto_processed_module_set")
-load("//build_def:j2cl_test.bzl", "j2cl_test")
+load("//build_defs:rules.bzl", "j2cl_test")
 
 # Apache2
 licenses(["notice"])

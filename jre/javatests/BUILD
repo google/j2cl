@@ -122,7 +122,7 @@ build_test(
     ],
 )
 
-load("//build_def:j2cl_util.bzl", "J2CL_OPTIMIZED_DEFS")
+load("//build_defs:rules.bzl", "J2CL_OPTIMIZED_DEFS")
 load("//javascript/tools/jscompiler/builddefs:flags.bzl", "VERBOSE_WARNING_FLAGS_STRICT")
 
 COMFORMANCE_CHECK_FLAGS = J2CL_OPTIMIZED_DEFS + VERBOSE_WARNING_FLAGS_STRICT + [

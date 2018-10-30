@@ -1,7 +1,7 @@
 # Apache2. These tests are written for J2CL emulation, not copied over.
 licenses(["notice"])
 
-load("//third_party/java/j2cl:j2cl_test.bzl", "j2cl_test")
+load("//build_defs:rules.bzl", "j2cl_test")
 
 j2cl_test(
     name = "junit_framework_AssertTest",

@@ -19,12 +19,7 @@ integration_test(
 
 """
 
-load(
-    "//build_def:j2cl_util.bzl",
-    "J2CL_OPTIMIZED_DEFS",
-    "J2CL_TEST_DEFS",
-)
-load("//third_party/java/j2cl:j2cl_library.bzl", "j2cl_library")
+load("//build_defs:rules.bzl", "J2CL_OPTIMIZED_DEFS", "J2CL_TEST_DEFS", "j2cl_library")
 load("//build_def:j2cl_util.bzl", "get_java_package")
 load("//tools/build_defs/label:def.bzl", "absolute_label")
 load("//testing/web/build_defs:web.bzl", "web_test")

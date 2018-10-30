@@ -1,7 +1,7 @@
 # Apache2
 licenses(["notice"])
 
-load("//build_def:j2cl_test.bzl", "j2cl_test")
+load("//build_defs:rules.bzl", "j2cl_test")
 
 j2cl_test(
     name = "Java8Test_uncompiled",

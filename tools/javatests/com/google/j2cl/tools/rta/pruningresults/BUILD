@@ -4,7 +4,7 @@
 # Apache2
 licenses(["notice"])
 
-load("//build_def:j2cl_rta.bzl", "j2cl_rta")
+load("//build_defs:rules.bzl", "j2cl_rta")
 
 j2cl_rta(
     name = "test_input_rta",

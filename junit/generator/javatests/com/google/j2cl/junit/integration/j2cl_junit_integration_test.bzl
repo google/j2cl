@@ -1,7 +1,6 @@
 """Helper for j2cl junit integration tests."""
 
-load("//build_def:j2cl_library.bzl", "j2cl_library")
-load("//build_def:j2cl_test.bzl", "j2cl_test")
+load("//build_defs:rules.bzl", "j2cl_library", "j2cl_test")
 load("//build_def:j2cl_util.bzl", "get_java_package")
 
 def j2cl_test_integration_test(name, test_data, test_data_java_only = [], deps = [], extra_data = []):

@@ -12,8 +12,7 @@ readable_example(
 
 """
 
-load("//build_def:j2cl_util.bzl", "J2CL_OPTIMIZED_DEFS")
-load("//third_party/java/j2cl:j2cl_library.bzl", "j2cl_library")
+load("//build_defs:rules.bzl", "J2CL_OPTIMIZED_DEFS", "j2cl_library")
 load("//tools/build_rules:build_test.bzl", "build_test")
 
 JAVAC_FLAGS = [

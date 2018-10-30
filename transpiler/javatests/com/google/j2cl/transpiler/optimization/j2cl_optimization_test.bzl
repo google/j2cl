@@ -4,8 +4,7 @@ See BooleansTest for an example usage.
 
 """
 
-load("//third_party/java/j2cl:j2cl_library.bzl", "j2cl_library")
-load("//third_party/java/j2cl:j2cl_test.bzl", "j2cl_test")
+load("//build_defs:rules.bzl", "j2cl_test")
 
 def j2cl_optimization_test(name, defs = [], javacopts = []):
     j2cl_test(

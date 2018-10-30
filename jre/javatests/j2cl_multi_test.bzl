@@ -12,7 +12,7 @@ j2cl_multi_test(
 
 """
 
-load("//third_party/java/j2cl:j2cl_test.bzl", "j2cl_test")
+load("//build_defs:rules.bzl", "j2cl_test")
 
 def j2cl_multi_test(name, test_class, **kwargs):
     deps = [":emul_tests_lib", "//third_party/java/junit:junit-j2cl"]
