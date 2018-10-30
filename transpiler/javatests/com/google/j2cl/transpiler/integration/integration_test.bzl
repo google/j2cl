@@ -23,7 +23,6 @@ load(
     "//build_def:j2cl_util.bzl",
     "J2CL_OPTIMIZED_DEFS",
     "J2CL_TEST_DEFS",
-    "J2CL_UNOPTIMIZED_DEFS",
 )
 load("//third_party/java/j2cl:j2cl_library.bzl", "j2cl_library")
 load("//build_def:j2cl_util.bzl", "get_java_package")
@@ -128,7 +127,7 @@ def integration_test(
     native.js_binary(
         name = "readable_unoptimized_js",
         srcs = ["OptHarness.js"],
-        defs = J2CL_UNOPTIMIZED_DEFS + readable_out_defs + defs,
+        defs = readable_out_defs + defs,
         compiler = "//javascript/tools/jscompiler:head",
         deps = [":" + name],
     )

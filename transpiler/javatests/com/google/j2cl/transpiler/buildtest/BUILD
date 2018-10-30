@@ -13,7 +13,6 @@
 load("//apps/framework/modulesets/builddefs:modulesets.bzl", "mss_js_compiled_module_set_flat_files")
 load("//java/com/google/devtools/javascript/pinto/builddefs:rules.bzl", "pinto_processed_module_set")
 load("//build_def:j2cl_test.bzl", "j2cl_test")
-load("//build_def:j2cl_util.bzl", "J2CL_UNOPTIMIZED_DEFS")
 
 # Apache2
 licenses(["notice"])
@@ -82,7 +81,6 @@ js_library(
 js_binary(
     name = "J2clJSCompiler",
     compiler = "//javascript/tools/jscompiler:head",
-    defs = J2CL_UNOPTIMIZED_DEFS,
     deps = [":launcher"],
 )
 
@@ -96,7 +94,6 @@ js_module(
 js_module_binary(
     name = "J2clJSCompilerWithModules",
     compiler = "//javascript/tools/jscompiler:head",
-    defs = J2CL_UNOPTIMIZED_DEFS,
     deps = [":J2clJSCompilerWithModules_js_module"],
 )
 
@@ -112,7 +109,6 @@ js_binary(
     name = "J2clAjdJSCompiler",
     srcs = ["Point.js"],
     compiler = "//javascript/tools/jscompiler:head",
-    defs = J2CL_UNOPTIMIZED_DEFS,
     deps = [":J2clAjdJSCompiler_library"],
 )
 
@@ -129,7 +125,6 @@ js_binary(
     name = "J2clDupeAjdJSCompiler",
     srcs = ["Point.js"],
     compiler = "//javascript/tools/jscompiler:head",
-    defs = J2CL_UNOPTIMIZED_DEFS,
     deps = [":J2clDupeAjdJSCompiler_library"],
 )
 

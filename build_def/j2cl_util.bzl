@@ -26,15 +26,11 @@ load(
     "USE_TYPES_FOR_OPTIMIZATIONS_FLAGS",
 )
 
-J2CL_UNOPTIMIZED_DEFS = [
+# TODO(goktug): Switch to RECOMMENDED_FLAGS and opt-out from checks as needed.
+J2CL_OPTIMIZED_DEFS = (ADVANCED_OPTIMIZATIONS_FLAGS +
+                       USE_TYPES_FOR_OPTIMIZATIONS_FLAGS + [
     "--jscomp_error=strictMissingRequire",
     "--language_out=ECMASCRIPT5_STRICT",
-]
-
-# TODO(goktug): Switch to RECOMMENDED_FLAGS and opt-out from checks as needed.
-J2CL_OPTIMIZED_DEFS = (J2CL_UNOPTIMIZED_DEFS +
-                       ADVANCED_OPTIMIZATIONS_FLAGS +
-                       USE_TYPES_FOR_OPTIMIZATIONS_FLAGS + [
     "--define=goog.DEBUG=false",
     "--remove_unused_prototype_props_in_externs",
 ])
