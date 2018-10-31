@@ -87,8 +87,7 @@ public class InsertBoxingConversions extends NormalizationPass {
   private static Expression maybeBox(TypeDescriptor toTypeDescriptor, Expression expression) {
     if (!TypeDescriptors.isNonVoidPrimitiveType(toTypeDescriptor)
         && TypeDescriptors.isNonVoidPrimitiveType(expression.getTypeDescriptor())
-        && !TypeDescriptors.isPrimitiveBooleanOrDouble(expression.getTypeDescriptor())
-        && !toTypeDescriptor.isNative()) {
+        && !TypeDescriptors.isPrimitiveBooleanOrDouble(expression.getTypeDescriptor())) {
       return AstUtils.box(expression);
     }
     return expression;

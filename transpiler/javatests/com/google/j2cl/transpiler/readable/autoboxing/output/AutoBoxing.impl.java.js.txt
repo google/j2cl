@@ -309,9 +309,13 @@ class AutoBoxing extends j_l_Object {
     c = this.m_unbox__java_lang_Character(Character.m_valueOf__char(c));
     let unusedDouble =
         this.m_takesObjectAndReturnsPrimitiveDouble__java_lang_Object(4);
-    unusedDouble =
-        this.m_sumWithoutBoxing__arrayOf_java_lang_Object([1, 2.2, 1, 1, 2.2]);
-    unusedDouble = this.sumWithoutBoxingJsVarargs(1, 2.2, 1, 1, 2.2);
+    unusedDouble = this.m_sumWithoutBoxing__arrayOf_java_lang_Object([
+      /**@type {*} */ (1), /**@type {*} */ (2.2), /**@type {*} */ (1),
+      /**@type {*} */ (1), /**@type {*} */ (2.2)
+    ]);
+    unusedDouble = this.sumWithoutBoxingJsVarargs(
+        /**@type {*} */ (1), /**@type {*} */ (2.2), /**@type {*} */ (1),
+        /**@type {*} */ (1), /**@type {*} */ (2.2));
     this.m_takesFloatVarArgs__arrayOf_java_lang_Float(
         /**@type {!Array<Float>} */ ($Arrays.$init(
             [

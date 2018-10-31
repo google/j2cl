@@ -44,15 +44,6 @@ public class InsertJsEnumBoxingAndUnboxingConversions extends NormalizationPass 
               @Override
               public Expression rewriteAssignmentContext(
                   TypeDescriptor toTypeDescriptor, Expression expression) {
-                if (toTypeDescriptor.isNative()) {
-                  // TODO(b/118000088): Model @DoNotAutobox in varargs better.
-                  // No autoboxing/unboxing when the target is native. This can not normally happen
-                  // since javac will reject code line NativeInterface a = MyJsEnum.A because of
-                  // the types are incompatible; but to implement varargs with @DoNotAutobox we
-                  // create an array of native 'Object' so that way we avoid boxing.
-                  return expression;
-                }
-
                 TypeDescriptor fromTypeDescriptor = expression.getTypeDescriptor();
                 if (AstUtils.isNonNativeJsEnum(fromTypeDescriptor)
                     && !AstUtils.isNonNativeJsEnum(toTypeDescriptor)) {

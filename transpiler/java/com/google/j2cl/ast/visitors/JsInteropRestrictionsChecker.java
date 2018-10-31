@@ -543,13 +543,6 @@ public class JsInteropRestrictionsChecker {
                   return;
                 }
 
-                if (toTypeDescriptor.isNative()) {
-                  // TODO(b/118000088): Model @DoNotAutobox in varargs better.
-                  // There can never be an assignment of this type in the source code but the
-                  // frontend might introduce one when there is @DoNotAutobox in varargs.
-                  return;
-                }
-
                 if (TypeDescriptors.isJavaLangObject(toTypeDescriptor)) {
                   return;
                 }

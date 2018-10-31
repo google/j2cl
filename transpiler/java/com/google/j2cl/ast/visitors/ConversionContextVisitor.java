@@ -25,27 +25,47 @@ import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.AssertStatement;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryExpression;
+import com.google.j2cl.ast.Block;
+import com.google.j2cl.ast.BreakStatement;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.ConditionalExpression;
+import com.google.j2cl.ast.ContinueStatement;
 import com.google.j2cl.ast.DoWhileStatement;
+import com.google.j2cl.ast.EmptyStatement;
 import com.google.j2cl.ast.Expression;
+import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.Field;
+import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.ForStatement;
+import com.google.j2cl.ast.FunctionExpression;
 import com.google.j2cl.ast.IfStatement;
 import com.google.j2cl.ast.InstanceOfExpression;
 import com.google.j2cl.ast.Invocation;
+import com.google.j2cl.ast.JavaScriptConstructorReference;
+import com.google.j2cl.ast.JsDocCastExpression;
+import com.google.j2cl.ast.LabeledStatement;
+import com.google.j2cl.ast.Literal;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
+import com.google.j2cl.ast.MultiExpression;
 import com.google.j2cl.ast.NewArray;
 import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.PostfixExpression;
 import com.google.j2cl.ast.PrefixExpression;
 import com.google.j2cl.ast.PrimitiveTypes;
 import com.google.j2cl.ast.ReturnStatement;
+import com.google.j2cl.ast.Statement;
+import com.google.j2cl.ast.SuperReference;
 import com.google.j2cl.ast.SwitchStatement;
+import com.google.j2cl.ast.SynchronizedStatement;
+import com.google.j2cl.ast.ThisReference;
+import com.google.j2cl.ast.ThrowStatement;
+import com.google.j2cl.ast.TryStatement;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.UnaryExpression;
+import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.VariableDeclarationFragment;
+import com.google.j2cl.ast.VariableReference;
 import com.google.j2cl.ast.WhileStatement;
 import java.util.ArrayList;
 import java.util.List;
@@ -63,9 +83,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
    */
   protected abstract static class ContextRewriter {
 
-    /**
-     * Expression is going to the given type.
-     */
+    /** Expression is going to the given type. */
     @SuppressWarnings("unused")
     public Expression rewriteAssignmentContext(
         TypeDescriptor toTypeDescriptor, Expression expression) {
@@ -366,6 +384,26 @@ public final class ConversionContextVisitor extends AbstractRewriter {
   }
 
   @Override
+  public Expression rewriteExpression(Expression expression) {
+    // Every expression needs to be handled explicitly or excluded here.
+    if (expression instanceof Literal
+        || expression instanceof FieldAccess
+        || expression instanceof ArrayAccess
+        || expression instanceof MultiExpression
+        || expression instanceof FunctionExpression
+        || expression instanceof JavaScriptConstructorReference
+        || expression instanceof JsDocCastExpression
+        || expression instanceof ThisReference
+        || expression instanceof SuperReference
+        || expression instanceof VariableDeclarationExpression
+        || expression instanceof VariableReference) {
+      // These expressions do not need rewriting.
+      return expression;
+    }
+    throw new IllegalStateException();
+  }
+
+  @Override
   public IfStatement rewriteIfStatement(IfStatement ifStatement) {
     return IfStatement.newBuilder()
         .setSourcePosition(ifStatement.getSourcePosition())
@@ -477,6 +515,24 @@ public final class ConversionContextVisitor extends AbstractRewriter {
         .setTypeDescriptor(returnStatement.getTypeDescriptor())
         .setSourcePosition(returnStatement.getSourcePosition())
         .build();
+  }
+
+  @Override
+  public Statement rewriteStatement(Statement statement) {
+    // Every statement needs to be handled explicitly or excluded here.
+    if (statement instanceof ExpressionStatement
+        || statement instanceof Block
+        || statement instanceof BreakStatement
+        || statement instanceof ContinueStatement
+        || statement instanceof TryStatement
+        || statement instanceof ThrowStatement
+        || statement instanceof EmptyStatement
+        || statement instanceof LabeledStatement
+        || statement instanceof SynchronizedStatement) {
+      // These statements do not need rewriting.
+      return statement;
+    }
+    throw new IllegalStateException();
   }
 
   @Override

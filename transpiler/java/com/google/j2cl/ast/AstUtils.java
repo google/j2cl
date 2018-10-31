@@ -1188,18 +1188,15 @@ public class AstUtils {
     }
     List<Expression> valueExpressions = new ArrayList<>();
     for (int i = parametersLength - 1; i < arguments.size(); i++) {
-      valueExpressions.add(arguments.get(i));
-    }
-    if (varargsParameterDescriptor.isDoNotAutobox()) {
-      checkArgument(
-          TypeDescriptors.isJavaLangObject(varargsTypeDescriptor.getComponentTypeDescriptor()));
-      // TODO(b/118000088): Model @DoNotAutobox in varargs better.
-      // Use a NATIVE_OBJECT[] instead of Object[] for @DoNotAutobox varargs, so that the
-      // boxing logic can avoid boxing here.
-      varargsTypeDescriptor =
-          ArrayTypeDescriptor.newBuilder()
-              .setComponentTypeDescriptor(TypeDescriptors.get().nativeObject)
-              .build();
+      valueExpressions.add(
+          // Wrap isDoNotAutobox arguments in a JsDocCastExpression so that they don't get converted
+          // by passes based on ContextRewriter.
+          varargsParameterDescriptor.isDoNotAutobox()
+              ? JsDocCastExpression.newBuilder()
+                  .setCastType(varargsTypeDescriptor.getComponentTypeDescriptor())
+                  .setExpression(arguments.get(i))
+                  .build()
+              : arguments.get(i));
     }
     return new ArrayLiteral(varargsTypeDescriptor, valueExpressions);
   }
