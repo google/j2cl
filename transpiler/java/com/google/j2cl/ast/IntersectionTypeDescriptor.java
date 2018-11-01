@@ -79,6 +79,14 @@ public abstract class IntersectionTypeDescriptor extends TypeDescriptor {
 
   @Override
   @Memoized
+  public String getSimpleSourceName() {
+    return getIntersectionTypeDescriptors().stream()
+        .map(TypeDescriptor::getSimpleSourceName)
+        .collect(joining(" & "));
+  }
+
+  @Override
+  @Memoized
   public DeclaredTypeDescriptor getFunctionalInterface() {
     return getIntersectionTypeDescriptors()
         .stream()

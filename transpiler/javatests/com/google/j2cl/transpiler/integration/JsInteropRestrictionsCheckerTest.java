@@ -1998,13 +1998,16 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "import java.util.List;",
             "import java.util.function.Function;",
             "import jsinterop.annotations.*;",
-            "public class Main {",
+            "public class Main<T> {",
             "  @JsEnum enum MyJsEnum {A, B}",
-            "  MyJsEnum[] MyJsEnum;",
+            "  MyJsEnum[] myJsEnum;",
+            "  T[] tArray;",
+            "  T t;",
             "  private static void acceptsJsEnumArray(MyJsEnum[] p) {}",
             "  private static void acceptsJsEnumVarargs(MyJsEnum... p) {}",
             "  private static void acceptsJsEnumVarargsArray(MyJsEnum[]... p) {}",
             "  private static MyJsEnum[] returnsJsEnumArray() { return null;}",
+            "  private static <T> T[] returnsTArray(T t) { return null;}",
             "  private static void arrays() {",
             "    Object o = new MyJsEnum[1];",
             "    MyJsEnum[] arr = null;",
@@ -2013,12 +2016,15 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "    o = (Function<? extends Object, ? extends Object>) (MyJsEnum... p2) -> p2;",
             "    o = (MyJsEnum[]) o;",
             "    if (o instanceof MyJsEnum[]) { }",
+            "    MyJsEnum e = returnsTArray(MyJsEnum.A)[0];",
+            "    e = new Main<MyJsEnum>().tArray[0];",
+            "    e = new Main<MyJsEnum[]>().t[0];",
             "  }",
             "}")
         .assertErrorsWithoutSourcePosition(
             "Cannot cast to JsEnum array 'MyJsEnum[]'.",
             "Cannot do instanceof against JsEnum array 'MyJsEnum[]'.",
-            "Field 'Main.MyJsEnum' cannot be of type 'MyJsEnum[]'.",
+            "Field 'Main<T>.myJsEnum' cannot be of type 'MyJsEnum[]'.",
             "Parameter 'p' in 'void Main.acceptsJsEnumArray(MyJsEnum[] p)' cannot be of "
                 + "type 'MyJsEnum[]'.",
             "Parameter 'p' in 'void Main.acceptsJsEnumVarargs(MyJsEnum... p)' cannot be of type "
@@ -2030,7 +2036,11 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "Variable 'arr' cannot be of type 'MyJsEnum[]'.",
             "Variable 'list' cannot be of type 'List<MyJsEnum[]>'.",
             "Parameter 'p1' in '<lambda>' cannot be of type 'MyJsEnum[]'.",
-            "Parameter 'p2' in '<lambda>' cannot be of type 'MyJsEnum[]'.");
+            "Parameter 'p2' in '<lambda>' cannot be of type 'MyJsEnum[]'.",
+            "Returned type in call to method 'MyJsEnum[] Main.returnsTArray(MyJsEnum)' cannot be "
+                + "of type 'MyJsEnum[]'.",
+            "Reference to field 'Main<MyJsEnum>.tArray' cannot be of type 'MyJsEnum[]'.",
+            "Reference to field 'Main<MyJsEnum[]>.t' cannot be of type 'MyJsEnum[]'.");
   }
 
   public void testJsEnumArraysSucceeds() {

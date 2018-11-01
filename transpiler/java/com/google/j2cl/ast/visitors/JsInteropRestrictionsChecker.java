@@ -606,6 +606,40 @@ public class JsInteropRestrictionsChecker {
           }
 
           @Override
+          public void exitFieldAccess(FieldAccess fieldAccess) {
+            TypeDescriptor inferredTypeDescriptor = fieldAccess.getTypeDescriptor();
+            TypeDescriptor declaredTypeDescriptor =
+                fieldAccess.getTarget().getDeclarationDescriptor().getTypeDescriptor();
+            if (inferredTypeDescriptor.equals(declaredTypeDescriptor)) {
+              // No inference, the error will be given at declaration if needed.
+              return;
+            }
+            String messagePrefix =
+                String.format(
+                    "Reference to field '%s'", fieldAccess.getTarget().getReadableDescription());
+            errorIfNonNativeJsEnumArray(
+                inferredTypeDescriptor, getCurrentMember().getSourcePosition(), messagePrefix);
+          }
+
+          @Override
+          public void exitMethodCall(MethodCall methodCall) {
+            TypeDescriptor inferredTypeDescriptor =
+                methodCall.getTarget().getReturnTypeDescriptor();
+            TypeDescriptor declaredTypeDescriptor =
+                methodCall.getTarget().getDeclarationDescriptor().getReturnTypeDescriptor();
+            if (inferredTypeDescriptor.equals(declaredTypeDescriptor)) {
+              // No inference, the error will be given at declaration if needed.
+              return;
+            }
+            String messagePrefix =
+                String.format(
+                    "Returned type in call to method '%s'",
+                    methodCall.getTarget().getReadableDescription());
+            errorIfNonNativeJsEnumArray(
+                inferredTypeDescriptor, getCurrentMember().getSourcePosition(), messagePrefix);
+          }
+
+          @Override
           public void exitNewArray(NewArray newArray) {
             ArrayTypeDescriptor newArrayTypeDescriptor = newArray.getTypeDescriptor();
             // TODO(b/65465035): Emit the expression source position when it is tracked, and avoid
