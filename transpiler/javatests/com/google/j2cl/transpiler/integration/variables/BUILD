@@ -10,6 +10,8 @@ load(
 # blaze build :optimized_js
 # blaze test :readable_js
 integration_test(
-    name = "variablecollisions",
+    name = "variables",
     srcs = glob(["*.java"]),
+    # TODO(b/118184493): remove when Java 10 language support is enabled.
+    j2cl_library_tags = ["manual"],
 )
