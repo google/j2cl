@@ -25,6 +25,11 @@ public abstract class Expression extends Node implements Cloneable<Expression> {
   /** Returns the type descriptor of the value that is returned by this expression. */
   public abstract TypeDescriptor getTypeDescriptor();
 
+  /** Returns the declared type for the expression if it is different from the inferred type. */
+  public TypeDescriptor getDeclaredTypeDescriptor() {
+    return getTypeDescriptor();
+  }
+
   /**
    * Returns true if the expression can be evaluated multiple times and always results in the same
    * value.

@@ -152,6 +152,15 @@ public class Arrays {
     nativeObjects2d[0][1] = null;
   }
 
+  public void testErasureCastsOnArrayAccess() {
+    ArrayContainer<String> container = null;
+    String s = container.data[0];
+  }
+
+  private static class ArrayContainer<T> {
+    T[] data;
+  }
+
   public void testArraysSupertypeClosureTypes() {
     consumesCloneable(new Object[10]);
     consumesSerializable(new Object[10]);

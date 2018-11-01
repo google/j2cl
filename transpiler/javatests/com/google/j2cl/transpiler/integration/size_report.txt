@@ -1,7 +1,9 @@
 Integration tests size report:
 **************************************
-There are 0 optimized size changes.
-Total size (of already existing tests) did not change.
+There are 4 optimized size changes.
+Total optimized size (of already existing tests) changed from
+  1622856 to 1624283 bytes (100%->100.1%) and from
+  502536 to 502943 bytes (100%->100.1%) gzipped.
 
 
 Shrinkage report highlights:
@@ -11,16 +13,20 @@ Shrinkage report highlights:
 
 Expansion report highlights:
 **************************************
-  none
+        old      new
+       1321     1347 casttoarray (2.0%)
+      34682    34817 box2d_noclassmetadata_checksopt (0.4%)
+      36524    36650 box2d_noclassmetadata (0.3%)
+      38705    38825 box2d_default (0.3%)
 
 
 Uncompiled bundle reports:
 **************************************
         old      new
-   11486343 11486397 box2d_default (0.0%)
-    6980563  6980572 box2d_default.minified (0.0%)
-    3393676  3393730 emptyclass (0.0%)
-    2132215  2132224 emptyclass.minified (0.0%)
+   11486627 11491570 box2d_default (0.0%)
+    6980683  6983656 box2d_default.minified (0.0%)
+    3393960  3393960 emptyclass (unchanged)
+    2132335  2132335 emptyclass.minified (unchanged)
 
 
 All reports:
@@ -45,10 +51,10 @@ All reports:
        1084     1084 backwardbridgemethod (unchanged)
        2643     2643 binaryexpressions (unchanged)
        1022     1022 blockscoping (unchanged)
-      38705    38705 box2d_default (unchanged)
-      36524    36524 box2d_noclassmetadata (unchanged)
+      38705    38825 box2d_default (0.3%)
+      36524    36650 box2d_noclassmetadata (0.3%)
       33270    33270 box2d_noclassmetadata_checksmin (unchanged)
-      34682    34682 box2d_noclassmetadata_checksopt (unchanged)
+      34682    34817 box2d_noclassmetadata_checksopt (0.4%)
        3426     3426 boxingsideeffect (unchanged)
        1069     1069 breakstatement (unchanged)
        2189     2189 bridgejsmethod (unchanged)
@@ -59,7 +65,7 @@ All reports:
        1035     1035 cascadedstaticinit (unchanged)
           9        9 castdevirtualizedtypes (unchanged)
           9        9 castnull (unchanged)
-       1321     1321 casttoarray (unchanged)
+       1321     1347 casttoarray (2.0%)
        1271     1271 casttoboxedtype (unchanged)
        1215     1215 casttoclass (unchanged)
           9        9 casttoclassdisabled (unchanged)
@@ -126,7 +132,7 @@ All reports:
        1401     1401 interfaces (unchanged)
        1617     1617 intersectiontype (unchanged)
        1376     1376 iteratormethodresolution (unchanged)
-      53775    53775 jsasync (unchanged)
+      53787    53787 jsasync (unchanged)
           9        9 jsbridgebackward (unchanged)
        1372     1372 jsbridgemethodaccidentaloverride (unchanged)
           9        9 jsbridgemultipleaccidental (unchanged)

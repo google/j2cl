@@ -208,10 +208,12 @@ public final class ConversionContextVisitor extends AbstractRewriter {
 
   @Override
   public ArrayAccess rewriteArrayAccess(ArrayAccess arrayAccess) {
-    // unary numeric promotion context
+    Expression expression = arrayAccess.getArrayExpression();
     return ArrayAccess.newBuilder()
-        .setArrayExpression(arrayAccess.getArrayExpression())
+        .setArrayExpression(
+            contextRewriter.rewriteAssignmentContext(expression.getTypeDescriptor(), expression))
         .setIndexExpression(
+            // The index is always int so gets rewritten with unary numeric promotion context
             contextRewriter.rewriteUnaryNumericPromotionContext(arrayAccess.getIndexExpression()))
         .build();
   }
@@ -388,7 +390,6 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     // Every expression needs to be handled explicitly or excluded here.
     if (expression instanceof Literal
         || expression instanceof FieldAccess
-        || expression instanceof ArrayAccess
         || expression instanceof MultiExpression
         || expression instanceof FunctionExpression
         || expression instanceof JavaScriptConstructorReference

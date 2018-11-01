@@ -56,6 +56,11 @@ public class FieldAccess extends Expression implements MemberReference {
     return targetFieldDescriptor.getTypeDescriptor();
   }
 
+  @Override
+  public TypeDescriptor getDeclaredTypeDescriptor() {
+    return targetFieldDescriptor.getDeclarationDescriptor().getTypeDescriptor();
+  }
+
   public Optional<SourcePosition> getSourcePosition() {
     return sourcePosition;
   }

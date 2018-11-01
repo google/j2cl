@@ -44,7 +44,12 @@ public class MultiExpression extends Expression {
 
   @Override
   public TypeDescriptor getTypeDescriptor() {
-    return expressions.get(expressions.size() - 1).getTypeDescriptor();
+    return Iterables.getLast(expressions).getTypeDescriptor();
+  }
+
+  @Override
+  public TypeDescriptor getDeclaredTypeDescriptor() {
+    return Iterables.getLast(expressions).getDeclaredTypeDescriptor();
   }
 
   @Override

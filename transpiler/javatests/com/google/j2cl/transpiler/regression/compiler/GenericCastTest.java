@@ -16,7 +16,6 @@
 package com.google.j2cl.transpiler.regression.compiler;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.junit.Assert.fail;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,10 +30,6 @@ import org.junit.runners.JUnit4;
  */
 @RunWith(JUnit4.class)
 public class GenericCastTest {
-
-  private static final String EXPECTED_CLASS_CAST_MESSAGE =
-      "java.lang.Object cannot be cast to "
-          + "com.google.j2cl.transpiler.regression.compiler.GenericCastTest$Foo";
 
   @SuppressWarnings("unused")
   /** Always contains an Object internally, the parameterization is a lie. */
@@ -56,24 +51,23 @@ public class GenericCastTest {
           // Should succeed
           Object unusedObject = value;
 
-          try {
-            Foo unusedFoo = value;
-            fail("Expected ClassCastException 1");
-          } catch (ClassCastException expected) {
-            assertThat(expected.getMessage()).isEqualTo(EXPECTED_CLASS_CAST_MESSAGE);
-          }
-          try {
-            String unusedString = value.bar;
-            fail("Expected ClassCastException 2");
-          } catch (ClassCastException expected) {
-            assertThat(expected.getMessage()).isEqualTo(EXPECTED_CLASS_CAST_MESSAGE);
-          }
-          try {
-            String unusedString = value.baz();
-            fail("Expected ClassCastException 3");
-          } catch (ClassCastException expected) {
-            assertThat(expected.getMessage()).isEqualTo(EXPECTED_CLASS_CAST_MESSAGE);
-          }
+          assertThrowsClassCastException(
+              () -> {
+                Foo unusedFoo = value;
+              },
+              Foo.class);
+
+          assertThrowsClassCastException(
+              () -> {
+                String unusedString = value.bar;
+              },
+              Foo.class);
+
+          assertThrowsClassCastException(
+              () -> {
+                String unusedString = value.baz();
+              },
+              Foo.class);
         }
       }.run();
     }
@@ -86,24 +80,23 @@ public class GenericCastTest {
           // Should succeed
           Object unusedObject = get();
 
-          try {
-            Foo unusedFoo = get();
-            fail("Expected ClassCastException 1");
-          } catch (ClassCastException expected) {
-            assertThat(expected.getMessage()).isEqualTo(EXPECTED_CLASS_CAST_MESSAGE);
-          }
-          try {
-            String unusedString = get().bar;
-            fail("Expected ClassCastException 2");
-          } catch (ClassCastException expected) {
-            assertThat(expected.getMessage()).isEqualTo(EXPECTED_CLASS_CAST_MESSAGE);
-          }
-          try {
-            String unusedString = get().baz();
-            fail("Expected ClassCastException 3");
-          } catch (ClassCastException expected) {
-            assertThat(expected.getMessage()).isEqualTo(EXPECTED_CLASS_CAST_MESSAGE);
-          }
+          assertThrowsClassCastException(
+              () -> {
+                Foo unusedFoo = get();
+              },
+              Foo.class);
+
+          assertThrowsClassCastException(
+              () -> {
+                String unusedString = get().bar;
+              },
+              Foo.class);
+
+          assertThrowsClassCastException(
+              () -> {
+                String unusedString = get().baz();
+              },
+              Foo.class);
         }
       }.run();
     }
@@ -112,48 +105,46 @@ public class GenericCastTest {
       // Should succeed
       Object unusedObject = value;
 
-      try {
-        Foo unusedFoo = value;
-        fail("Expected ClassCastException 1");
-      } catch (ClassCastException expected) {
-        assertThat(expected.getMessage()).isEqualTo(EXPECTED_CLASS_CAST_MESSAGE);
-      }
-      try {
-        String unusedString = value.bar;
-        fail("Expected ClassCastException 2");
-      } catch (ClassCastException expected) {
-        assertThat(expected.getMessage()).isEqualTo(EXPECTED_CLASS_CAST_MESSAGE);
-      }
-      try {
-        String unusedString = value.baz();
-        fail("Expected ClassCastException 3");
-      } catch (ClassCastException expected) {
-        assertThat(expected.getMessage()).isEqualTo(EXPECTED_CLASS_CAST_MESSAGE);
-      }
+      assertThrowsClassCastException(
+          () -> {
+            Foo unusedFoo = value;
+          },
+          Foo.class);
+
+      assertThrowsClassCastException(
+          () -> {
+            String unusedString = value.bar;
+          },
+          Foo.class);
+
+      assertThrowsClassCastException(
+          () -> {
+            String unusedString = value.baz();
+          },
+          Foo.class);
     }
 
     public void testSuperMethod() {
       // Should succeed
       Object unusedObject = get();
 
-      try {
-        Foo unusedFoo = get();
-        fail("Expected ClassCastException 1");
-      } catch (ClassCastException expected) {
-        assertThat(expected.getMessage()).isEqualTo(EXPECTED_CLASS_CAST_MESSAGE);
-      }
-      try {
-        String unusedString = get().bar;
-        fail("Expected ClassCastException 2");
-      } catch (ClassCastException expected) {
-        assertThat(expected.getMessage()).isEqualTo(EXPECTED_CLASS_CAST_MESSAGE);
-      }
-      try {
-        String unusedString = get().baz();
-        fail("Expected ClassCastException 3");
-      } catch (ClassCastException expected) {
-        assertThat(expected.getMessage()).isEqualTo(EXPECTED_CLASS_CAST_MESSAGE);
-      }
+      assertThrowsClassCastException(
+          () -> {
+            Foo unusedFoo = get();
+          },
+          Foo.class);
+
+      assertThrowsClassCastException(
+          () -> {
+            String unusedString = get().bar;
+          },
+          Foo.class);
+
+      assertThrowsClassCastException(
+          () -> {
+            String unusedString = get().baz();
+          },
+          Foo.class);
     }
 
     public void testInternalAccess() {
@@ -161,44 +152,42 @@ public class GenericCastTest {
         @Override
         public void run() {
           Object unusedObject = get();
-          try {
-            Foo unusedFoo = get();
-            fail("Expected ClassCastException 5a");
-          } catch (ClassCastException expected) {
-            assertThat(expected.getMessage()).isEqualTo(EXPECTED_CLASS_CAST_MESSAGE);
-          }
-          try {
-            String unusedString = get().bar;
-            fail("Expected ClassCastException 5b");
-          } catch (ClassCastException expected) {
-            assertThat(expected.getMessage()).isEqualTo(EXPECTED_CLASS_CAST_MESSAGE);
-          }
-          try {
-            String unusedString = get().baz();
-            fail("Expected ClassCastException 5c");
-          } catch (ClassCastException expected) {
-            assertThat(expected.getMessage()).isEqualTo(EXPECTED_CLASS_CAST_MESSAGE);
-          }
+          assertThrowsClassCastException(
+              () -> {
+                Foo unusedFoo = get();
+              },
+              Foo.class);
+
+          assertThrowsClassCastException(
+              () -> {
+                String unusedString = get().bar;
+              },
+              Foo.class);
+
+          assertThrowsClassCastException(
+              () -> {
+                String unusedString = get().baz();
+              },
+              Foo.class);
 
           unusedObject = value;
-          try {
-            Foo unusedFoo = value;
-            fail("Expected ClassCastException 6a");
-          } catch (ClassCastException expected) {
-            assertThat(expected.getMessage()).isEqualTo(EXPECTED_CLASS_CAST_MESSAGE);
-          }
-          try {
-            String unusedString = value.bar;
-            fail("Expected ClassCastException 6b");
-          } catch (ClassCastException expected) {
-            assertThat(expected.getMessage()).isEqualTo(EXPECTED_CLASS_CAST_MESSAGE);
-          }
-          try {
-            String unusedString = value.baz();
-            fail("Expected ClassCastException 6c");
-          } catch (ClassCastException expected) {
-            assertThat(expected.getMessage()).isEqualTo(EXPECTED_CLASS_CAST_MESSAGE);
-          }
+          assertThrowsClassCastException(
+              () -> {
+                Foo unusedFoo = value;
+              },
+              Foo.class);
+
+          assertThrowsClassCastException(
+              () -> {
+                String unusedString = value.bar;
+              },
+              Foo.class);
+
+          assertThrowsClassCastException(
+              () -> {
+                String unusedString = value.baz();
+              },
+              Foo.class);
         }
       }.run();
     }
@@ -217,27 +206,24 @@ public class GenericCastTest {
   public void testExplicitField() {
     Liar<Foo> bug = new Liar<Foo>();
 
-    // Should succeed
+    // Should succeed.
     Object unusedObject = bug.value;
 
-    try {
-      Foo unusedFoo = bug.value;
-      fail("Expected ClassCastException 1");
-    } catch (ClassCastException expected) {
-      assertThat(expected.getMessage()).isEqualTo(EXPECTED_CLASS_CAST_MESSAGE);
-    }
-    try {
-      String unusedString = bug.value.bar;
-      fail("Expected ClassCastException 2");
-    } catch (ClassCastException expected) {
-      assertThat(expected.getMessage()).isEqualTo(EXPECTED_CLASS_CAST_MESSAGE);
-    }
-    try {
-      String unusedString = bug.value.baz();
-      fail("Expected ClassCastException 3");
-    } catch (ClassCastException expected) {
-      assertThat(expected.getMessage()).isEqualTo(EXPECTED_CLASS_CAST_MESSAGE);
-    }
+    assertThrowsClassCastException(
+        () -> {
+          Foo unusedFoo = bug.value;
+        },
+        Foo.class);
+    assertThrowsClassCastException(
+        () -> {
+          String unusedString = bug.value.bar;
+        },
+        Foo.class);
+    assertThrowsClassCastException(
+        () -> {
+          String unusedString = bug.value.baz();
+        },
+        Foo.class);
   }
 
   /** Test explicit references through a local variable qualifier. */
@@ -245,27 +231,24 @@ public class GenericCastTest {
   public void testExplicitMethod() {
     Liar<Foo> bug = new Liar<Foo>();
 
-    // Should succeed
+    // Should succeed.
     Object unusedObject = bug.get();
 
-    try {
-      Foo unusedFoo = bug.get();
-      fail("Expected ClassCastException 1");
-    } catch (ClassCastException expected) {
-      assertThat(expected.getMessage()).isEqualTo(EXPECTED_CLASS_CAST_MESSAGE);
-    }
-    try {
-      String unusedString = bug.get().bar;
-      fail("Expected ClassCastException 2");
-    } catch (ClassCastException expected) {
-      assertThat(expected.getMessage()).isEqualTo(EXPECTED_CLASS_CAST_MESSAGE);
-    }
-    try {
-      String unusedString = bug.get().baz();
-      fail("Expected ClassCastException 3");
-    } catch (ClassCastException expected) {
-      assertThat(expected.getMessage()).isEqualTo(EXPECTED_CLASS_CAST_MESSAGE);
-    }
+    assertThrowsClassCastException(
+        () -> {
+          Foo unusedFoo = bug.get();
+        },
+        Foo.class);
+    assertThrowsClassCastException(
+        () -> {
+          String unusedString = bug.get().bar;
+        },
+        Foo.class);
+    assertThrowsClassCastException(
+        () -> {
+          String unusedString = bug.get().baz();
+        },
+        Foo.class);
   }
 
   /** Test implicit references through an outer class. */
@@ -311,19 +294,74 @@ public class GenericCastTest {
     String[] array = newGenericArray();
     assertThat(array[0]).isEqualTo("Hello");
     assertThat(newGenericArray()[0]).isEqualTo("Hello");
-    try {
-      Integer[] intArray = newGenericArray();
-      fail("Expected ClassCastException (1)");
-    } catch (ClassCastException expected) {
-      assertThat(expected.getMessage())
-          .isEqualTo("[Ljava.lang.String; cannot be cast to [Ljava.lang.Integer;");
+
+    assertThrowsClassCastException(
+        () -> {
+          Integer[] unused = newGenericArray();
+        },
+        Integer[].class);
+    assertThrowsClassCastException(
+        () -> {
+          Integer unused = getElement(newGenericArray(), 0);
+        },
+        Integer.class);
+  }
+
+  @Test
+  public void testArrayAccess() {
+    assertThrowsClassCastException(
+        () -> {
+          Object unused = GenericCastTest.<String[]>newTArray()[0];
+        },
+        String[].class);
+  }
+
+  private static <T> T newTArray() {
+    return (T) new Object[] {"Hello"};
+  }
+
+  @Test
+  public void testAssignmentReference() {
+    Container<String> container = new Container(1);
+    // TODO(b/118714379): There shouldn't be an erasure cast here as it is not needed to preserve
+    // type safety. Uncomment when fixed.
+    // container.value = container.value;
+    assertThrowsClassCastException(
+        () -> {
+          String unusedString = container.value = container.value;
+        },
+        String.class);
+  }
+
+  @Test
+  public void testParenthesizedAssignmentReference() {
+    assertThrowsClassCastException(
+        () -> {
+          Container<String> container = new Container(1);
+          String unusedString = (container.value = container.value);
+        },
+        String.class);
+  }
+
+  private static class Container<T> {
+    Container(T value) {
+      this.value = value;
     }
+
+    T value;
+
+    T getValue() {
+      return value;
+    }
+  }
+
+  private static void assertThrowsClassCastException(Runnable runnable, Class<?> toClass) {
     try {
-      Integer n = getElement(newGenericArray(), 0);
-      fail("Expected ClassCastException (2)");
+      runnable.run();
+      assert false : "Should have thrown ClassCastException";
     } catch (ClassCastException expected) {
-      assertThat(expected.getMessage())
-          .isEqualTo("java.lang.String cannot be cast to java.lang.Integer");
+      assert expected.getMessage().endsWith("cannot be cast to " + toClass.getName())
+          : "Got unexpected message " + expected.getMessage();
     }
   }
 }

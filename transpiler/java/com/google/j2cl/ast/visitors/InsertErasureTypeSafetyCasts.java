@@ -21,9 +21,7 @@ import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.FieldAccess;
-import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.MethodCall;
-import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeVariable;
@@ -126,27 +124,14 @@ public class InsertErasureTypeSafetyCasts extends NormalizationPass {
     };
   }
 
-
   private static Expression maybeInsertErasureTypeSafetyCast(Expression expression) {
     return maybeInsertErasureTypeSafetyCast(expression.getTypeDescriptor(), expression);
-
   }
 
   private static Expression maybeInsertErasureTypeSafetyCast(
       TypeDescriptor toTypeDescriptor, Expression expression) {
-    if (expression instanceof MethodCall) {
-      MethodDescriptor target = ((MethodCall) expression).getTarget();
-      return maybeInsertErasureTypeSafetyCast(
-          target.getDeclarationDescriptor().getReturnTypeDescriptor(),
-          toTypeDescriptor,
-          expression);
-    } else if (expression instanceof FieldAccess) {
-      FieldDescriptor target = ((FieldAccess) expression).getTarget();
-      return maybeInsertErasureTypeSafetyCast(
-          target.getDeclarationDescriptor().getTypeDescriptor(), toTypeDescriptor, expression);
-    } else {
-      return expression;
-    }
+    return maybeInsertErasureTypeSafetyCast(
+        expression.getDeclaredTypeDescriptor(), toTypeDescriptor, expression);
   }
 
   private static Expression maybeInsertErasureTypeSafetyCast(

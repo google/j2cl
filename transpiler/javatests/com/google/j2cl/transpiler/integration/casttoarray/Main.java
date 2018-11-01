@@ -24,6 +24,7 @@ public class Main {
     testDimensionCasts();
     testTypeCasts();
     testBasics();
+    testErasureCastsOnArrayAccess();
   }
 
   private static void testBasics() {
@@ -56,24 +57,23 @@ public class Main {
     o = (Object[]) charSequences;
     o = (CharSequence[]) charSequences;
 
-    try {
-      o = (String[]) objects;
-      assert false : "the expected cast exception did not occur";
-    } catch (ClassCastException e) {
-      // expected
-    }
-    try {
-      o = (CharSequence[]) objects;
-      assert false : "the expected cast exception did not occur";
-    } catch (ClassCastException e) {
-      // expected
-    }
-    try {
-      o = (String[]) charSequences;
-      assert false : "the expected cast exception did not occur";
-    } catch (ClassCastException e) {
-      // expected
-    }
+    assertThrowsClassCastException(
+        () -> {
+          Object unused = (String[]) objects;
+        },
+        String[].class);
+
+    assertThrowsClassCastException(
+        () -> {
+          Object unused = (CharSequence[]) objects;
+        },
+        CharSequence[].class);
+
+    assertThrowsClassCastException(
+        () -> {
+          Object unused = (String[]) charSequences;
+        },
+        String[].class);
   }
 
   private static void testDimensionCasts() {
@@ -84,19 +84,44 @@ public class Main {
     Object[][] object2d = (Object[][]) object;
 
     // A 2d array cannot be cast to a 3d array.
-    try {
-      Object[][][] object3d = (Object[][][]) object2d;
-      assert false : "An expected failure did not occur.";
-    } catch (ClassCastException e) {
-      // expected
-    }
+    assertThrowsClassCastException(
+        () -> {
+          Object[][][] unused = (Object[][][]) object2d;
+        },
+        Object[][][].class);
 
     // A non-array cannot be cast to an array.
+    assertThrowsClassCastException(
+        () -> {
+          Object[] unused = (Object[]) new Object();
+        },
+        Object[].class);
+  }
+
+  private static void testErasureCastsOnArrayAccess() {
+    ArrayContainer<String> container = new ArrayContainer<>(new Object[1]);
+    assertThrowsClassCastException(
+        () -> {
+          String unused = container.data[0];
+        },
+        String[].class);
+  }
+
+  private static class ArrayContainer<T> {
+    ArrayContainer(Object array) {
+      this.data = (T[]) array;
+    }
+
+    T[] data;
+  }
+
+  private static void assertThrowsClassCastException(Runnable runnable, Class<?> toClass) {
     try {
-      object1d = (Object[]) new Object();
-      assert false : "An expected failure did not occur.";
-    } catch (ClassCastException e) {
-      // expected
+      runnable.run();
+      assert false : "Should have thrown ClassCastException";
+    } catch (ClassCastException expected) {
+      assert expected.getMessage().endsWith("cannot be cast to " + toClass.getName())
+          : "Got unexpected message " + expected.getMessage();
     }
   }
 }

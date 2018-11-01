@@ -61,6 +61,37 @@ public class BinaryExpression extends Expression {
   }
 
   @Override
+  public TypeDescriptor getDeclaredTypeDescriptor() {
+    // As opposed to getTypeDescriptor() which is precomputed when the expression is created and
+    // does not change even if the operands are rewritten, getDeclaredTypeDescriptor() returns the
+    // current declared type descriptor if the expression is an assignment or the precomputed
+    // type for the expression if it is not.
+
+    if (operator.isAssignmentOperator()) {
+      // From the perspective of the type of binary expression as a value, which is used for
+      // conversions on assignment, etc., an assignment (which includes compound assignments) has
+      // the same type as the lhs. (e.g.)
+      //        class Container<T> {
+      //          Container(Object o) { this.data = (T) o; }
+      //          T data;
+      //        }
+      //        Container<String> c = new Container<>(1); // container with inconsistent type.
+      //        c.data = c.data;   // allowed as it does no violate runtime type safety.
+      //        String s = c.data = c.data // throws CCE on assignment to s, because the type of the
+      //                                   // the assignment expression has been specialized to
+      //                                   // String.
+      return leftOperand.getDeclaredTypeDescriptor();
+    }
+
+    // Return the precomputed type for the expression, do not use
+    // binaryOperationResult(
+    //     leftOperand.getDeclaredTypeDescriptor(), rightOperand.getTypeDescriptor())
+    // because binary expressions that are not assignments are not the point of inference for type
+    // specialization, hence their declared type has to be exactly the same as its inferred type.
+    return getTypeDescriptor();
+  }
+
+  @Override
   public boolean isIdempotent() {
     return !operator.hasSideEffect() && leftOperand.isIdempotent() && rightOperand.isIdempotent();
   }

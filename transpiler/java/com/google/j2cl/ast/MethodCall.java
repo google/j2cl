@@ -79,6 +79,11 @@ public class MethodCall extends Invocation {
     return targetMethodDescriptor.getReturnTypeDescriptor();
   }
 
+  @Override
+  public TypeDescriptor getDeclaredTypeDescriptor() {
+    return targetMethodDescriptor.getDeclarationDescriptor().getReturnTypeDescriptor();
+  }
+
   public SourcePosition getSourcePosition() {
     return sourcePosition.get();
   }

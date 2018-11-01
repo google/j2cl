@@ -223,6 +223,18 @@ class Arrays extends j_l_Object {
    * @return {void}
    * @public
    */
+  m_testErasureCastsOnArrayAccess__() {
+    let container = null;
+    let s = /**@type {Array<?string>} */ ($Arrays.$castTo(
+        container
+            .f_data__com_google_j2cl_transpiler_readable_array_Arrays_ArrayContainer,
+        j_l_String, 1))[0];
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
   m_testArraysSupertypeClosureTypes__() {
     this.m_consumesCloneable__java_lang_Cloneable(new Array(10));
     this.m_consumesSerializable__java_io_Serializable(new Array(10));
