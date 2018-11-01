@@ -176,7 +176,7 @@ public class JsInteropRestrictionsChecker {
     if (hasNonNativeJsEnumTypeArgument(type.getSuperTypeDescriptor())) {
       problems.error(
           type.getSourcePosition(),
-          "Type '%s' cannot subclass a class parameterized by JsEnum.",
+          "Type '%s' cannot subclass a class parameterized by JsEnum. (b/118304241)",
           type.getReadableDescription());
     }
 
@@ -184,7 +184,7 @@ public class JsInteropRestrictionsChecker {
         .anyMatch(JsInteropRestrictionsChecker::hasNonNativeJsEnumTypeArgument)) {
       problems.error(
           type.getSourcePosition(),
-          "Type '%s' cannot implement an interface parameterized by JsEnum.",
+          "Type '%s' cannot implement an interface parameterized by JsEnum. (b/118304241)",
           type.getReadableDescription());
     }
   }
@@ -494,9 +494,14 @@ public class JsInteropRestrictionsChecker {
               messagePrefix = getJsEnumTypeText(qualifierTypeDescriptor);
             }
 
+            String bugMessage = "";
+            if (targetMethodSignature.equals("values()")) {
+              bugMessage = " (b/118228329)";
+            }
+
             problems.error(
                 methodCall.getSourcePosition(),
-                messagePrefix + " '%s' does not support '%s'.",
+                messagePrefix + " '%s' does not support '%s'." + bugMessage,
                 qualifierTypeDescriptor.getReadableDescription(),
                 target.getReadableDescription());
           }
@@ -732,7 +737,7 @@ public class JsInteropRestrictionsChecker {
             } else if (hasNonNativeJsEnumArray(testTypeDescriptor)) {
               problems.error(
                   instanceOfExpression.getSourcePosition(),
-                  "Cannot do instanceof against JsEnum array '%s'.",
+                  "Cannot do instanceof against JsEnum array '%s'. (b/118299062)",
                   testTypeDescriptor.getReadableDescription());
             }
           }
@@ -744,7 +749,7 @@ public class JsInteropRestrictionsChecker {
               // TODO(b/65465035): Emit the expression source position when it is tracked.
               problems.error(
                   getCurrentMember().getSourcePosition(),
-                  "Cannot cast to JsEnum array '%s'.",
+                  "Cannot cast to JsEnum array '%s'. (b/118299062)",
                   castTypeDescriptor.getReadableDescription());
             }
           }
@@ -767,7 +772,7 @@ public class JsInteropRestrictionsChecker {
     if (hasNonNativeJsEnumArray(typeDescriptor)) {
       problems.error(
           sourcePosition,
-          messagePrefix + " cannot be of type '%s'.",
+          messagePrefix + " cannot be of type '%s'. (b/118299062)",
           typeDescriptor.getReadableDescription());
     }
   }
@@ -831,7 +836,7 @@ public class JsInteropRestrictionsChecker {
         checkState(!nonJsEnumReturnOverride.get().isSynthetic());
         problems.error(
             method.getSourcePosition(),
-            "Method '%s' returning JsEnum cannot override method '%s'.",
+            "Method '%s' returning JsEnum cannot override method '%s'. (b/118301700)",
             method.getReadableDescription(),
             nonJsEnumReturnOverride.get().getReadableDescription());
       }

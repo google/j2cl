@@ -1663,7 +1663,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 + " or @JsFunction interface.",
             "JsEnum constant 'MyJsEnum.B' cannot have a class body.",
             "JsEnum 'MyJsEnum' does not support 'String Enum.name()'.",
-            "JsEnum 'MyJsEnum' does not support 'MyJsEnum[] MyJsEnum.values()'.",
+            "JsEnum 'MyJsEnum' does not support 'MyJsEnum[] MyJsEnum.values()'. (b/118228329)",
             "JsEnum 'MyJsEnum' does not support 'MyJsEnum MyJsEnum.valueOf(String)'.",
             "'MyJsTypeJsEnum' cannot be both a JsEnum and a JsType at the same time.",
             "JsEnum 'InterfaceWithJsEnum' has to be an enum type.",
@@ -1679,10 +1679,11 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "JsEnum 'MyJsEnum' cannot have instance field 'MyJsEnum.instanceField'.",
             "JsEnum 'MyJsEnum' cannot have an instance initializer.",
             "Type 'AListSubclass' cannot define a type variable with a JsEnum as a bound.",
-            "Type 'AListSubclass' cannot subclass a class parameterized by JsEnum.",
-            "Type 'AListSubclass' cannot implement an interface parameterized by JsEnum.",
+            "Type 'AListSubclass' cannot subclass a class parameterized by JsEnum. (b/118304241)",
+            "Type 'AListSubclass' cannot implement an interface parameterized by JsEnum. "
+                + "(b/118304241)",
             "Method 'MyJsEnum AListSubclass.getObject()' returning JsEnum cannot override method "
-                + "'Object List.getObject()'.",
+                + "'Object List.getObject()'. (b/118301700)",
             "Cannot use 'super' in JsOverlay method 'void MyJsEnum.anOverlayMethod()'.",
             "Cannot use 'super' in JsEnum method 'void MyJsEnum.aMethod()'.");
   }
@@ -1780,7 +1781,9 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "Custom-valued JsEnum 'CustomValued' does not support 'int Enum.ordinal()'.",
             "Custom-valued JsEnum 'CustomValued' does not support "
                 + "'int Enum.compareTo(CustomValued)'.",
-            "JsEnum 'CustomValued' does not support " + "'CustomValued[] CustomValued.values()'.",
+            "JsEnum 'CustomValued' does not support "
+                + "'CustomValued[] CustomValued.values()'. "
+                + "(b/118228329)",
             "JsEnum 'CustomValued' does not support "
                 + "'CustomValued CustomValued.valueOf(String)'.",
             "JsEnum member 'CustomValueWithJsConstructor(int value)' cannot be "
@@ -1835,7 +1838,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         .assertErrorsWithoutSourcePosition(
             "JsEnum 'Native' does not support 'String Enum.name()'.",
             "Native JsEnum 'Native' does not support 'int Enum.ordinal()'.",
-            "JsEnum 'Native' does not support 'Native[] Native.values()'.",
+            "JsEnum 'Native' does not support 'Native[] Native.values()'. (b/118228329)",
             "JsEnum 'Native' does not support 'Native Native.valueOf(String)'.",
             "JsEnum 'NativeJsEnumImplementingNativeInterface' cannot implement any interface.",
             "Native JsEnum 'Native' cannot declare non-JsOverlay member 'void Native.main()'.",
@@ -2022,25 +2025,29 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  }",
             "}")
         .assertErrorsWithoutSourcePosition(
-            "Cannot cast to JsEnum array 'MyJsEnum[]'.",
-            "Cannot do instanceof against JsEnum array 'MyJsEnum[]'.",
-            "Field 'Main<T>.myJsEnum' cannot be of type 'MyJsEnum[]'.",
+            "Cannot cast to JsEnum array 'MyJsEnum[]'. (b/118299062)",
+            "Cannot do instanceof against JsEnum array 'MyJsEnum[]'. (b/118299062)",
+            "Field 'Main<T>.myJsEnum' cannot be of type 'MyJsEnum[]'. (b/118299062)",
             "Parameter 'p' in 'void Main.acceptsJsEnumArray(MyJsEnum[] p)' cannot be of "
-                + "type 'MyJsEnum[]'.",
+                + "type 'MyJsEnum[]'. (b/118299062)",
             "Parameter 'p' in 'void Main.acceptsJsEnumVarargs(MyJsEnum... p)' cannot be of type "
-                + "'MyJsEnum[]'.",
+                + "'MyJsEnum[]'. (b/118299062)",
             "Parameter 'p' in 'void Main.acceptsJsEnumVarargsArray(MyJsEnum[]... p)' cannot be of "
-                + "type 'MyJsEnum[][]'.",
-            "Return type of 'MyJsEnum[] Main.returnsJsEnumArray()' cannot be of type 'MyJsEnum[]'.",
-            "Array creation 'new test.Main.MyJsEnum[1]' cannot be of type 'MyJsEnum[]'.",
-            "Variable 'arr' cannot be of type 'MyJsEnum[]'.",
-            "Variable 'list' cannot be of type 'List<MyJsEnum[]>'.",
-            "Parameter 'p1' in '<lambda>' cannot be of type 'MyJsEnum[]'.",
-            "Parameter 'p2' in '<lambda>' cannot be of type 'MyJsEnum[]'.",
+                + "type 'MyJsEnum[][]'. (b/118299062)",
+            "Return type of 'MyJsEnum[] Main.returnsJsEnumArray()' cannot be of type 'MyJsEnum[]'. "
+                + "(b/118299062)",
+            "Array creation 'new test.Main.MyJsEnum[1]' cannot be of type 'MyJsEnum[]'. "
+                + "(b/118299062)",
+            "Variable 'arr' cannot be of type 'MyJsEnum[]'. (b/118299062)",
+            "Variable 'list' cannot be of type 'List<MyJsEnum[]>'. (b/118299062)",
+            "Parameter 'p1' in '<lambda>' cannot be of type 'MyJsEnum[]'. (b/118299062)",
+            "Parameter 'p2' in '<lambda>' cannot be of type 'MyJsEnum[]'. (b/118299062)",
             "Returned type in call to method 'MyJsEnum[] Main.returnsTArray(MyJsEnum)' cannot be "
-                + "of type 'MyJsEnum[]'.",
-            "Reference to field 'Main<MyJsEnum>.tArray' cannot be of type 'MyJsEnum[]'.",
-            "Reference to field 'Main<MyJsEnum[]>.t' cannot be of type 'MyJsEnum[]'.");
+                + "of type 'MyJsEnum[]'. (b/118299062)",
+            "Reference to field 'Main<MyJsEnum>.tArray' cannot be of type 'MyJsEnum[]'."
+                + " (b/118299062)",
+            "Reference to field 'Main<MyJsEnum[]>.t' cannot be of type 'MyJsEnum[]'."
+                + " (b/118299062)");
   }
 
   public void testJsEnumArraysSucceeds() {
