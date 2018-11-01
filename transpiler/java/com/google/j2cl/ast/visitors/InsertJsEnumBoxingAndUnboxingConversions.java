@@ -33,6 +33,8 @@ public class InsertJsEnumBoxingAndUnboxingConversions extends NormalizationPass 
   // boxing/unboxing.
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
+    // TODO(b/118615488): Surface the BoxedLightEnum type to the compiler and make this pass
+    // simpler.
     compilationUnit.accept(
         new ConversionContextVisitor(
             new ContextRewriter() {
@@ -43,35 +45,42 @@ public class InsertJsEnumBoxingAndUnboxingConversions extends NormalizationPass 
 
               @Override
               public Expression rewriteAssignmentContext(
-                  TypeDescriptor toTypeDescriptor, Expression expression) {
-                TypeDescriptor fromTypeDescriptor = expression.getTypeDescriptor();
+                  TypeDescriptor inferredTypeDescriptor,
+                  TypeDescriptor toDeclaredTypeDescriptor,
+                  Expression expression) {
+                TypeDescriptor fromTypeDescriptor = expression.getDeclaredTypeDescriptor();
                 if (AstUtils.isNonNativeJsEnum(fromTypeDescriptor)
-                    && !AstUtils.isNonNativeJsEnum(toTypeDescriptor)) {
+                    && !AstUtils.isNonNativeJsEnum(toDeclaredTypeDescriptor)) {
                   return box(expression);
                 }
 
-                if (AstUtils.isNonNativeJsEnum(toTypeDescriptor)
+                if (AstUtils.isNonNativeJsEnum(toDeclaredTypeDescriptor)
                     && !AstUtils.isNonNativeJsEnum(fromTypeDescriptor)) {
-                  return unbox(toTypeDescriptor, expression);
+                  return unbox(toDeclaredTypeDescriptor, expression);
                 }
                 return expression;
               }
 
               @Override
               public Expression rewriteMethodInvocationContext(
-                  ParameterDescriptor parameterDescriptor, Expression argumentExpression) {
-                if (parameterDescriptor.isDoNotAutobox()) {
+                  ParameterDescriptor inferredParameterDescriptor,
+                  ParameterDescriptor declaredParameterDescriptor,
+                  Expression argumentExpression) {
+                if (inferredParameterDescriptor.isDoNotAutobox()) {
                   return argumentExpression;
                 }
                 return rewriteAssignmentContext(
-                    parameterDescriptor.getTypeDescriptor(), argumentExpression);
+                    inferredParameterDescriptor.getTypeDescriptor(),
+                    declaredParameterDescriptor.getTypeDescriptor(),
+                    argumentExpression);
               }
 
               @Override
               public Expression rewriteCastContext(CastExpression castExpression) {
                 TypeDescriptor toTypeDescriptor = castExpression.getCastTypeDescriptor();
+                // Make sure when parameters are specialized to JsEnum they are unboxed.
                 Expression innerExpression = castExpression.getExpression();
-                TypeDescriptor fromTypeDescriptor = innerExpression.getTypeDescriptor();
+                TypeDescriptor fromTypeDescriptor = innerExpression.getDeclaredTypeDescriptor();
 
                 // TODO(b/33681746): J2CL should not be emitting casts in these scenarios but it is.
                 // remove when the bug is fixed.

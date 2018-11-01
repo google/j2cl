@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.readable.jsenum;
 
+import java.util.Arrays;
 import jsinterop.annotations.JsEnum;
 import jsinterop.annotations.JsNonNull;
 
@@ -124,5 +125,27 @@ public class Main {
     }
 
     NativeStringEnum.ONE.compareTo(NativeStringEnum.THREE);
+  }
+
+  private static void testBoxUnboxWithTypeInference() {
+    // Make sure the enum is boxed even when assigned to a field that is inferred to be JsEnum.
+    TemplatedField<ComparableJsEnum> templatedField =
+        new TemplatedField<ComparableJsEnum>(ComparableJsEnum.ONE);
+    ComparableJsEnum unboxed = templatedField.getValue();
+    unboxed = templatedField.value;
+    templatedField.value = ComparableJsEnum.ONE;
+    Arrays.asList(ComparableJsEnum.ONE);
+  }
+
+  private static class TemplatedField<T> {
+    T value;
+
+    TemplatedField(T value) {
+      this.value = value;
+    }
+
+    T getValue() {
+      return this.value;
+    }
   }
 }

@@ -112,7 +112,9 @@ public final class NormalizeIntersectionTypes extends NormalizationPass {
             new ConversionContextVisitor.ContextRewriter() {
               @Override
               public Expression rewriteAssignmentContext(
-                  TypeDescriptor toTypeDescriptor, Expression expression) {
+                  TypeDescriptor toTypeDescriptor,
+                  TypeDescriptor declaredTypeDescriptor,
+                  Expression expression) {
                 return maybeInsertCastToMemberType(toTypeDescriptor, expression);
               }
             }));

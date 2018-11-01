@@ -1177,11 +1177,24 @@ public class AstUtils {
     checkArgument(methodDescriptor.isVarargs());
     int parametersLength = methodDescriptor.getParameterDescriptors().size();
     ParameterDescriptor varargsParameterDescriptor =
-        methodDescriptor
-            .getParameterDescriptors()
-            .get(methodDescriptor.getParameterDescriptors().size() - 1);
+        Iterables.getLast(methodDescriptor.getParameterDescriptors());
     ArrayTypeDescriptor varargsTypeDescriptor =
         (ArrayTypeDescriptor) varargsParameterDescriptor.getTypeDescriptor();
+
+    if (AstUtils.isNonNativeJsEnum(varargsTypeDescriptor.getComponentTypeDescriptor())) {
+      // TODO(b/118615488): remove this when BoxedLightEnums are surfaces to J2CL.
+      //
+      // Here we create DeclaratedType[] instead of the actual inferred type T[] since non-native
+      // JsEnum[] are forbidden.
+      // We have chosen this workaround instead of banning T[] since it is not easy to observe
+      // implications of generating Object[] instead of T[] and it allows uses cases like
+      // Arrays.asList().
+      varargsTypeDescriptor =
+          (ArrayTypeDescriptor)
+              Iterables.getLast(
+                      methodDescriptor.getDeclarationDescriptor().getParameterDescriptors())
+                  .getTypeDescriptor();
+    }
     if (arguments.size() < parametersLength) {
       // no argument for the varargs, add an empty array.
       return new ArrayLiteral(varargsTypeDescriptor);
@@ -1296,5 +1309,11 @@ public class AstUtils {
    */
   public static boolean isNonNativeJsEnum(TypeDescriptor typeDescriptor) {
     return typeDescriptor.isJsEnum() && !typeDescriptor.isNative();
+  }
+
+  /** Returns true if {@code typeDescriptor} is a non native JsEnum array. */
+  public static boolean isNonNativeJsEnumArray(TypeDescriptor typeDescriptor) {
+    return typeDescriptor.isArray()
+        && isNonNativeJsEnum(((ArrayTypeDescriptor) typeDescriptor).getLeafTypeDescriptor());
   }
 }

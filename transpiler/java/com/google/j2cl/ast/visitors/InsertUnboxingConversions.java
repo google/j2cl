@@ -38,7 +38,9 @@ public class InsertUnboxingConversions extends NormalizationPass {
     return new ConversionContextVisitor.ContextRewriter() {
       @Override
       public Expression rewriteAssignmentContext(
-          TypeDescriptor toTypeDescriptor, Expression expression) {
+          TypeDescriptor toTypeDescriptor,
+          TypeDescriptor declaredTypeDescriptor,
+          Expression expression) {
         Optional<Expression> unboxedExpression = maybeUnboxAndWiden(toTypeDescriptor, expression);
         return unboxedExpression.orElse(expression);
       }

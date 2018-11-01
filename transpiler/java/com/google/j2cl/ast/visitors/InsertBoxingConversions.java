@@ -38,17 +38,19 @@ public class InsertBoxingConversions extends NormalizationPass {
     return new ConversionContextVisitor.ContextRewriter() {
       @Override
       public Expression rewriteAssignmentContext(
-          TypeDescriptor toTypeDescriptor, Expression expression) {
+          TypeDescriptor inferredTypeDescriptor,
+          TypeDescriptor declaredTypeDescriptor,
+          Expression expression) {
         // A narrowing primitive conversion may precede boxing a number or character literal.
         // (See JLS 5.2).
         if (expression instanceof NumberLiteral) {
-          expression = maybeNarrowNumberLiteral(toTypeDescriptor, (NumberLiteral) expression);
+          expression = maybeNarrowNumberLiteral(inferredTypeDescriptor, (NumberLiteral) expression);
         }
         // There should be a following 'widening reference conversion' if the targeting type
         // is not the boxed type, but as widening reference conversion is always NOOP, and it
         // is mostly impossible to be optimized by JSCompiler, just avoid the insertion of the
         // NOOP cast here.
-        return maybeBox(toTypeDescriptor, expression);
+        return maybeBox(inferredTypeDescriptor, expression);
       }
 
       @Override
@@ -75,11 +77,13 @@ public class InsertBoxingConversions extends NormalizationPass {
 
       @Override
       public Expression rewriteMethodInvocationContext(
-          ParameterDescriptor parameterDescriptor, Expression argumentExpression) {
-        if (parameterDescriptor.isDoNotAutobox()) {
+          ParameterDescriptor inferredParameterDescriptor,
+          ParameterDescriptor declaredParameterDescriptor,
+          Expression argumentExpression) {
+        if (inferredParameterDescriptor.isDoNotAutobox()) {
           return argumentExpression;
         }
-        return maybeBox(parameterDescriptor.getTypeDescriptor(), argumentExpression);
+        return maybeBox(inferredParameterDescriptor.getTypeDescriptor(), argumentExpression);
       }
     };
   }

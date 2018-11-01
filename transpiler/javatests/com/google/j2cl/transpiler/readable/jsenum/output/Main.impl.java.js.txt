@@ -19,8 +19,11 @@ let IntJsEnum_$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readabl
 let NativeStringEnum = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsenum.Main.NonNullableStringJsEnum');
 let StringJsEnum = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsenum.Main.StringJsEnum$impl');
 let StringJsEnum_$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsenum.Main.StringJsEnum.$Overlay$impl');
+let TemplatedField = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsenum.Main.TemplatedField$impl');
 let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
 let Double = goog.forwardDeclare('java.lang.Double$impl');
+let Arrays = goog.forwardDeclare('java.util.Arrays$impl');
+let List = goog.forwardDeclare('java.util.List$impl');
 let $InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
@@ -115,6 +118,30 @@ class Main extends j_l_Object {
    * @return {void}
    * @public
    */
+  static m_testBoxUnboxWithTypeInference___$p_com_google_j2cl_transpiler_readable_jsenum_Main() {
+    Main.$clinit();
+    let templatedField = /**@type {!TemplatedField<*>} */ (
+        TemplatedField.$create__java_lang_Object(
+            $Enums.boxComparable(ComparableJsEnum.ONE, $Overlay)));
+    let unboxed = /**@type {?ComparableJsEnum} */ ($Enums.unbox($Casts.$to(
+        templatedField
+            .m_getValue___$pp_com_google_j2cl_transpiler_readable_jsenum(),
+        $Overlay)));
+    unboxed = /**@type {?ComparableJsEnum} */ ($Enums.unbox($Casts.$to(
+        templatedField
+            .f_value__com_google_j2cl_transpiler_readable_jsenum_Main_TemplatedField,
+        $Overlay)));
+    templatedField
+        .f_value__com_google_j2cl_transpiler_readable_jsenum_Main_TemplatedField =
+        $Enums.boxComparable(ComparableJsEnum.ONE, $Overlay);
+    /**@type {List<*>} */ (Arrays.m_asList__arrayOf_java_lang_Object(
+        [$Enums.boxComparable(ComparableJsEnum.ONE, $Overlay)]));
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
   static $clinit() {
     Main.$clinit = (() => {});
     Main.$loadModules();
@@ -157,8 +184,11 @@ class Main extends j_l_Object {
         'com.google.j2cl.transpiler.readable.jsenum.Main.StringJsEnum$impl');
     StringJsEnum_$Overlay = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsenum.Main.StringJsEnum.$Overlay$impl');
+    TemplatedField = goog.module.get(
+        'com.google.j2cl.transpiler.readable.jsenum.Main.TemplatedField$impl');
     Comparable = goog.module.get('java.lang.Comparable$impl');
     Double = goog.module.get('java.lang.Double$impl');
+    Arrays = goog.module.get('java.util.Arrays$impl');
     $InternalPreconditions =
         goog.module.get('javaemul.internal.InternalPreconditions$impl');
     $Equality = goog.module.get('nativebootstrap.Equality$impl');

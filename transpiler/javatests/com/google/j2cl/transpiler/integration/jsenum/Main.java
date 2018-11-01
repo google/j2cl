@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.integration.jsenum;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.function.Supplier;
@@ -43,6 +44,7 @@ public class Main {
     testNativeEnumClassInitialization();
     testDoNotAutoboxJsEnum();
     testUnckeckedCastJsEnum();
+    testBoxUnboxWithTypeInference();
   }
 
   @JsEnum(isNative = true, namespace = "test")
@@ -617,6 +619,67 @@ public class Main {
     return (T) object;
   }
 
+  private static void testBoxUnboxWithTypeInference() {
+    assertSameType(Double.class, PlainJsEnum.ONE);
+    assertSameType(PlainJsEnum.class, boxingIdentity(PlainJsEnum.ONE));
+
+    // Make sure the enum is boxed even when assigned to a field that is inferred to be JsEnum.
+    TemplatedField<PlainJsEnum> templatedField = new TemplatedField<PlainJsEnum>(PlainJsEnum.ONE);
+    PlainJsEnum unboxed = templatedField.getValue();
+    assertSameType(Double.class, unboxed);
+    // Boxing through specialized method parameter assignment.
+    assertSameType(PlainJsEnum.class, boxingIdentity(unboxed));
+
+    // Boxing through specialized method parameter assignment.
+    assertSameType(PlainJsEnum.class, boxingIdentity(templatedField.getValue()));
+    // Checks what is actually returned by getValue().
+    assertSameType(PlainJsEnum.class, ((TemplatedField) templatedField).getValue());
+
+    unboxed = templatedField.value;
+    assertSameType(Double.class, unboxed);
+
+    templatedField.value = PlainJsEnum.ONE;
+    // Boxing through specialized method parameter assignment.
+    assertSameType(PlainJsEnum.class, boxingIdentity(templatedField.value));
+    // Checks what is actually stored in value.
+    assertSameType(PlainJsEnum.class, ((TemplatedField) templatedField).value);
+
+    // Boxing/unboxing in varargs.
+    assertSameType(Double.class, Arrays.asList(PlainJsEnum.ONE).get(0));
+
+    // TODO(b/118615488): Rewrite the following checks when JsEnum arrays are allowed.
+    // In Java the varargs array will be of the inferred argument type. Since non native JsEnum
+    // arrays are not allowed, the created array is of the declared type.
+    assertSameType(Comparable[].class, varargsToComparableArray(PlainJsEnum.ONE));
+    assertSameType(PlainJsEnum.class, varargsToComparableArray(PlainJsEnum.ONE)[0]);
+    assertSameType(Object[].class, varargsToObjectArray(PlainJsEnum.ONE));
+    assertSameType(PlainJsEnum.class, varargsToObjectArray(PlainJsEnum.ONE)[0]);
+  }
+
+  private static class TemplatedField<T> {
+    T value;
+
+    TemplatedField(T value) {
+      this.value = value;
+    }
+
+    T getValue() {
+      return this.value;
+    }
+  }
+
+  private static <T> Object boxingIdentity(T o) {
+    return o;
+  }
+
+  private static <T extends Comparable> Object[] varargsToComparableArray(T... elements) {
+    return elements;
+  }
+
+  private static <T> Object[] varargsToObjectArray(T... elements) {
+    return elements;
+  }
+
   @JsMethod
   // Pass through an enum value as if it were coming from and going to JavaScript.
   private static Object passThrough(Object o) {
@@ -624,6 +687,18 @@ public class Main {
     // Make sure that boxed enums are not passing though here.
     assertTrue(o instanceof String || o instanceof Double || o instanceof Boolean);
     return o;
+  }
+
+  private static <T> void assertSameType(Class<?> expectedType, @DoNotAutobox T actual) {
+    // Makes sure that even if the type variable T is inferred to be JsEnum, boxing still
+    // happens.
+    assertTrue(
+        "Not true that actual type <"
+            + actual.getClass().getCanonicalName()
+            + "> is equals to expected type <"
+            + expectedType.getCanonicalName()
+            + ">.",
+        expectedType == actual.getClass());
   }
 
   private static void assertThrowsClassCastException(Supplier<?> supplier) {
@@ -647,6 +722,10 @@ public class Main {
 
   private static void assertTrue(boolean condition) {
     assert condition;
+  }
+
+  private static void assertTrue(String message, boolean condition) {
+    assert condition : message;
   }
 
   private static void assertFalse(boolean condition) {

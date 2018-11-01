@@ -53,6 +53,16 @@
     }] "com.google.j2cl.transpiler.readable.jsenum.Main.testJsEnumSwitch"
 [break;] => [break;] "com.google.j2cl.transpiler.readable.jsenum.Main.testJsEnumSwitch"
 [NativeStringEnum.ONE.compareTo(NativeStringEnum.THREE);] => [Double.m_compareTo__java_lang_Double__java_lang_Double(NativeStringEnum.ONE, NativeStringEnum.THREE);] "com.google.j2cl.transpiler.readable.jsenum.Main.testJsEnumSwitch"
+[testBoxUnboxWithTypeInference] => [m_testBoxUnboxWithTypeInference___$p_com_google_j2cl_transpiler_readable_jsenum_Main]
+[testBoxUnboxWithTypeInference] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsenum.Main.testBoxUnboxWithTypeInference"
+[TemplatedField<ComparableJsEnum> templatedField =
+        new TemplatedField<ComparableJsEnum>(ComparableJsEnum.ONE);] => [let templatedField = /**@type {!TemplatedField<*>} */ (TemplatedField.$create__java_lang_Object($Enums.boxComparable(ComparableJsEnum.ONE, $Overlay)));] "com.google.j2cl.transpiler.readable.jsenum.Main.testBoxUnboxWithTypeInference"
+[templatedField] => [templatedField] "templatedField"
+[ComparableJsEnum unboxed = templatedField.getValue();] => [let unboxed = /**@type {?ComparableJsEnum} */ ($Enums.unbox($Casts.$to(templatedField.m_getValue___$pp_com_google_j2cl_transpiler_readable_jsenum(), $Overlay)));] "com.google.j2cl.transpiler.readable.jsenum.Main.testBoxUnboxWithTypeInference"
+[unboxed] => [unboxed] "unboxed"
+[unboxed = templatedField.value;] => [unboxed = /**@type {?ComparableJsEnum} */ ($Enums.unbox($Casts.$to(templatedField.f_value__com_google_j2cl_transpiler_readable_jsenum_Main_TemplatedField, $Overlay)));] "com.google.j2cl.transpiler.readable.jsenum.Main.testBoxUnboxWithTypeInference"
+[templatedField.value = ComparableJsEnum.ONE;] => [templatedField.f_value__com_google_j2cl_transpiler_readable_jsenum_Main_TemplatedField = $Enums.boxComparable(ComparableJsEnum.ONE, $Overlay);] "com.google.j2cl.transpiler.readable.jsenum.Main.testBoxUnboxWithTypeInference"
+[Arrays.asList(ComparableJsEnum.ONE);] => [/**@type {List<*>} */ (Arrays.m_asList__arrayOf_java_lang_Object([$Enums.boxComparable(ComparableJsEnum.ONE, $Overlay)]));] "com.google.j2cl.transpiler.readable.jsenum.Main.testBoxUnboxWithTypeInference"
 [Main] => [$clinit]
 [Main] => [Main.$clinit = (() =>{
     });] "com.google.j2cl.transpiler.readable.jsenum.Main.<clinit>"

@@ -1,0 +1,107 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.jsenum.Main$TemplatedField.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire,
+ * suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables,
+ * uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.jsenum.Main.TemplatedField$impl');
+
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+
+/**
+ * @template C_TemplatedField_T
+ */
+class TemplatedField extends j_l_Object {
+  /**
+   * @protected
+   */
+  constructor() {
+    super();
+    /** @public {C_TemplatedField_T} */
+    this.f_value__com_google_j2cl_transpiler_readable_jsenum_Main_TemplatedField;
+  }
+
+  /**
+   * @template C_TemplatedField_T
+   * @param {C_TemplatedField_T} value
+   * @return {!TemplatedField<C_TemplatedField_T>}
+   * @public
+   */
+  static $create__java_lang_Object(value) {
+    TemplatedField.$clinit();
+    let $instance = new TemplatedField();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_jsenum_Main_TemplatedField__java_lang_Object(
+            value);
+    return $instance;
+  }
+
+  /**
+   * @param {C_TemplatedField_T} value
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_jsenum_Main_TemplatedField__java_lang_Object(
+      value) {
+    this.$ctor__java_lang_Object__();
+    this.f_value__com_google_j2cl_transpiler_readable_jsenum_Main_TemplatedField =
+        value;
+  }
+
+  /**
+   * @return {C_TemplatedField_T}
+   * @public
+   */
+  m_getValue___$pp_com_google_j2cl_transpiler_readable_jsenum() {
+    return this
+        .f_value__com_google_j2cl_transpiler_readable_jsenum_Main_TemplatedField;
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    TemplatedField.$clinit = (() => {});
+    TemplatedField.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
+   * @param {?} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof TemplatedField;
+  }
+
+  /**
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, TemplatedField);
+  }
+
+  /**
+   * @public
+   */
+  static $loadModules() {}
+};
+
+$Util.$setClassMetadata(
+    TemplatedField,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.jsenum.Main$TemplatedField'));
+
+
+
+exports = TemplatedField;
+//# sourceMappingURL=Main$TemplatedField.js.map

@@ -40,7 +40,9 @@ public class InsertNarrowingPrimitiveConversions extends NormalizationPass {
     return new ConversionContextVisitor.ContextRewriter() {
       @Override
       public Expression rewriteAssignmentContext(
-          TypeDescriptor toTypeDescriptor, Expression expression) {
+          TypeDescriptor toTypeDescriptor,
+          TypeDescriptor declaredTypeDescriptor,
+          Expression expression) {
         TypeDescriptor fromTypeDescriptor = expression.getTypeDescriptor();
 
         if (fromTypeDescriptor.isAssignableTo(toTypeDescriptor)

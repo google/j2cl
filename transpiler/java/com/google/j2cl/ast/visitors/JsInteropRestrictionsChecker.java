@@ -773,9 +773,7 @@ public class JsInteropRestrictionsChecker {
   }
 
   private static boolean hasNonNativeJsEnumArray(TypeDescriptor typeDescriptor) {
-    if (typeDescriptor.isArray()
-        && AstUtils.isNonNativeJsEnum(
-            ((ArrayTypeDescriptor) typeDescriptor).getLeafTypeDescriptor())) {
+    if (AstUtils.isNonNativeJsEnumArray(typeDescriptor)) {
       return true;
     }
     if (typeDescriptor instanceof DeclaredTypeDescriptor) {

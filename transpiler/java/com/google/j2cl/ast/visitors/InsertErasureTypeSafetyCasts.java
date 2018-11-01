@@ -17,11 +17,13 @@ package com.google.j2cl.ast.visitors;
 
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.ArrayTypeDescriptor;
+import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.MethodCall;
+import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeVariable;
@@ -88,13 +90,34 @@ public class InsertErasureTypeSafetyCasts extends NormalizationPass {
     return new ConversionContextVisitor.ContextRewriter() {
       @Override
       public Expression rewriteAssignmentContext(
-          TypeDescriptor toTypeDescriptor, Expression expression) {
+          TypeDescriptor toTypeDescriptor,
+          TypeDescriptor declaredTypeDescriptor,
+          Expression expression) {
         // Per JLS 5.2, only insert the cast check if it is required to maintain consistency with
         // the LHS. If the LHS is a primitive type then the proper cast to the boxed type is
         // required.
         return maybeInsertErasureTypeSafetyCast(
             toTypeDescriptor.isPrimitive() ? expression.getTypeDescriptor() : toTypeDescriptor,
             expression);
+      }
+
+      @Override
+      public Expression rewriteMethodInvocationContext(
+          ParameterDescriptor toParameterDescriptor,
+          ParameterDescriptor declaredParameterDescriptor,
+          Expression expression) {
+        TypeDescriptor toTypeDescriptor = toParameterDescriptor.getTypeDescriptor();
+        TypeDescriptor declaredTypeDescriptor = declaredParameterDescriptor.getTypeDescriptor();
+        if (toParameterDescriptor.isVarargs()
+            && AstUtils.isNonNativeJsEnumArray(toTypeDescriptor)) {
+          // TODO(b/118299062): Remove special casing when non native JsEnum arrays are allowed.
+          //
+          // Since the packaging of varargs (see AstUtils.getPackagedVarargs() for the motivation)
+          // creates an array of type DeclaredType[] instead of a JsEnum[] this pass would normally
+          // insert an erasure cast to JsEnum[], which needs to be avoided.
+          return expression;
+        }
+        return rewriteAssignmentContext(toTypeDescriptor, declaredTypeDescriptor, expression);
       }
 
       @Override
