@@ -14,6 +14,7 @@ java_library(
 java_library(
     name = "apache_commons_text",
     exports = ["@org_apache_commons_text//jar"],
+    runtime_deps = ["@org_apache_commons_lang3//jar"],
 )
 
 java_library(
@@ -70,9 +71,11 @@ java_library(
 java_library(
     name = "jakarta_velocity",
     exports = [
+        "@org_apache_velocity//jar",
+    ],
+    runtime_deps = [
         "@org_apache_commons_collections//jar",
         "@org_apache_commons_lang2//jar",
-        "@org_apache_velocity//jar",
     ],
 )
 
