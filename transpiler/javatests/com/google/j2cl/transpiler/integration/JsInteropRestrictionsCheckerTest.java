@@ -1419,6 +1419,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "interface FunctionWithDefaultMethod {",
             "  default int getFoo() { return 0; }",
             "}",
+            "abstract class AbstractFunctionImplementation implements Function {",
+            "}",
             "class Main {",
             "  public static void main() {",
             "    Object o;",
@@ -1467,7 +1469,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 + "than one interface.",
             "JsFunction 'FunctionWithDefaultMethod' has to be a functional interface.",
             "JsFunction implementation member 'Buggy()' cannot be JsMethod nor JsProperty "
-                + "nor JsConstructor.");
+                + "nor JsConstructor.",
+            "JsFunction implementation 'AbstractFunctionImplementation' must be final.");
   }
 
   public void testNativeJsTypeStaticInitializerSucceeds() {

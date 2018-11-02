@@ -303,6 +303,12 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     }
 
     if (typeDescriptor.isJsFunctionInterface() || typeDescriptor.isJsFunctionImplementation()) {
+      if (typeDescriptor.getJsFunctionMethodDescriptor() == null) {
+        // An invalid abstract JsFunction implementation might not have a JsFunction method
+        // descriptor, and will be rejected during by JsInteropRestrictionChecker. But this method
+        // might be called in the process and would throw NPE below.
+        return;
+      }
       // Type variables that might appear referenced in a JsDoc annotation might need to be
       // processed by passes that handle incompatibilities with Closure Type system. The closure
       // type for JsFunction interfaces and implementations includes the types referenced
