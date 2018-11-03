@@ -11,7 +11,7 @@ j2cl_library(
     name = "superinject",
     srcs = glob(["super/**/*.java"]),
     native_srcs = glob(["super/**/*.native.js"]),
-    deps = ["//third_party/java/gwt:gwt-jsinterop-annotations-j2cl"],
+    deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )
 
 # Creates targets
@@ -24,6 +24,6 @@ integration_test(
     native_srcs = ["NativeClass.native.js"],
     deps = [
         ":superinject",
-        "//third_party/java/gwt:gwt-jsinterop-annotations-j2cl",
+        "//third_party:gwt-jsinterop-annotations-j2cl",
     ],
 )

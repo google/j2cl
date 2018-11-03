@@ -11,11 +11,8 @@ java_binary(
         "-Dj2cl.deterministicTimestamps=true",
     ],
     deps = [
-        "//java/com/google/common/base",
-        "//java/com/google/common/collect",
-        "//java/com/google/common/hash",
-        "//java/com/google/common/io",
-        "//third_party/java/auto:auto_value",
+        "//third_party:auto_value",
+        "//third_party:guava",
         "//transpiler/java/com/google/j2cl/bazel",
         "//transpiler/java/com/google/j2cl/transpiler:bazelbuilder_lib",
     ],

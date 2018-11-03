@@ -31,7 +31,7 @@ java_test(
     data = [":jre_bundle_deploy.jar"],
     deps = [
         ":TranspilerTester",
-        "//third_party/java/junit",
+        "//third_party:junit",
     ],
 )
 
@@ -41,7 +41,7 @@ java_test(
     data = [":jre_bundle_deploy.jar"],
     deps = [
         ":TranspilerTester",
-        "//third_party/java/junit",
+        "//third_party:junit",
     ],
 )
 
@@ -51,7 +51,7 @@ java_test(
     data = [":jre_bundle_deploy.jar"],
     deps = [
         ":TranspilerTester",
-        "//third_party/java/junit",
+        "//third_party:junit",
     ],
 )
 
@@ -61,10 +61,8 @@ java_test(
     data = [":jre_bundle_deploy.jar"],
     deps = [
         ":TranspilerTester",
-        "//java/com/google/common/base",
-        "//java/com/google/common/collect",
-        "//java/com/google/common/io",
-        "//third_party/java/junit",
+        "//third_party:guava",
+        "//third_party:junit",
     ],
 )
 
@@ -75,11 +73,9 @@ java_library(
         "TranspilerTester.java",
     ],
     deps = [
-        "//java/com/google/common/base",
-        "//java/com/google/common/collect",
-        "//java/com/google/common/io",
-        "//third_party/java/junit",
-        "//third_party/java/truth",
+        "//third_party:guava",
+        "//third_party:junit",
+        "//third_party:truth",
         "//transpiler/java/com/google/j2cl/common",
         "//transpiler/java/com/google/j2cl/transpiler:commandlinerunner_lib",
     ],

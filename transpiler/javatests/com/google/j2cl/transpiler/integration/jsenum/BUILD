@@ -15,8 +15,8 @@ integration_test(
     srcs = glob(["*.java"]),
     js_deps = [":native_types"],
     deps = [
-        "//third_party/java/gwt:gwt-javaemul-internal-annotations-j2cl",
-        "//third_party/java/gwt:gwt-jsinterop-annotations-j2cl",
+        "//third_party:gwt-javaemul-internal-annotations-j2cl",
+        "//third_party:gwt-jsinterop-annotations-j2cl",
     ],
 )
 

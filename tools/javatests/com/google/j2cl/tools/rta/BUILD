@@ -8,8 +8,8 @@ java_library(
     testonly = True,
     srcs = ["GoldenFileTester.java"],
     deps = [
-        "//third_party/java/junit",
         "//third_party:guava",
+        "//third_party:junit",
         "//third_party:truth",
     ],
 )

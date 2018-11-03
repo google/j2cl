@@ -24,6 +24,6 @@ j2cl_library(
     testonly = 1,
     srcs = ["super/J2clAsyncTestRunner.java"],
     deps = [
-        "//third_party/java/junit:junit-j2cl",
+        "//third_party:junit-j2cl",
     ],
 )

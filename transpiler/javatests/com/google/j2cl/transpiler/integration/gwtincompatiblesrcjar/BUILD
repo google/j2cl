@@ -14,8 +14,7 @@ java_library(
     ],
     deps = [
         ":gwtincompatibleOther",
-        "//java/com/google/common/annotations",
-        "//java/com/google/common/io",
+        "//third_party:guava",
     ],
 )
 
@@ -34,8 +33,5 @@ integration_test(
         ":libgwtincompatibleMain-src.jar",
         ":libgwtincompatibleOther-src.jar",
     ],
-    deps = [
-        "//java/com/google/common/annotations:annotations-j2cl",
-        "//java/com/google/common/io:io-j2cl",
-    ],
+    deps = ["//third_party:guava-j2cl"],
 )

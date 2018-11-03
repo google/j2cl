@@ -12,7 +12,7 @@ j2cl_library(
     # Src's JUST the Foo class.
     srcs = ["Foo.java"],
     _js_deps = [":native_types"],
-    deps = ["//third_party/java/gwt:gwt-jsinterop-annotations-j2cl"],
+    deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )
 
 # Creates targets
@@ -28,7 +28,7 @@ integration_test(
     native_srcs = ["Main.native.js"],
     deps = [
         ":Foo",
-        "//third_party/java/gwt:gwt-jsinterop-annotations-j2cl",
+        "//third_party:gwt-jsinterop-annotations-j2cl",
     ],
 )
 

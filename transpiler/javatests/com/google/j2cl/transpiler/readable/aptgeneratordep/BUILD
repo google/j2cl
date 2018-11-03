@@ -17,7 +17,6 @@ readable_example(
 java_library(
     name = "dummy-processor-lib",
     srcs = ["DummyProcessor.java"],
-    deps = ["//third_party/java/jsr305_annotations"],
 )
 
 # Provide a java_plugin interface for that APT processor library.

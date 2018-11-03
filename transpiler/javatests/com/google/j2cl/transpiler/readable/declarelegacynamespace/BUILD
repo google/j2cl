@@ -10,5 +10,5 @@ load(
 readable_example(
     srcs = glob(["*.java"]),
     _declare_legacy_namespace = True,
-    deps = ["//third_party/java/gwt:gwt-jsinterop-annotations-j2cl"],
+    deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )

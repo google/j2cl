@@ -23,7 +23,7 @@ def j2cl_optimization_test(name, defs = [], javacopts = []):
         externs_list = ["//javascript/externs:common"],
         deps = [
             ":shared",
-            "//third_party/java/junit:junit-j2cl",
-            "//third_party/java/gwt:gwt-jsinterop-annotations-j2cl",
+            "//third_party:junit-j2cl",
+            "//third_party:gwt-jsinterop-annotations-j2cl",
         ],
     )

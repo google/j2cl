@@ -12,8 +12,8 @@ j2cl_library(
     testonly = 1,
     srcs = ["OptimizationTestUtil.java"],
     deps = [
-        "//third_party/java/gwt:gwt-jsinterop-annotations-j2cl",
-        "//third_party/java/junit:junit-j2cl",
+        "//third_party:gwt-jsinterop-annotations-j2cl",
+        "//third_party:junit-j2cl",
     ],
 )
 

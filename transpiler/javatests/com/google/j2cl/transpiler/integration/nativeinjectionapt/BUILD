@@ -17,7 +17,7 @@ integration_test(
         "super/**/*.java",
     ]),
     deps = [
-        "//third_party/java/gwt:gwt-jsinterop-annotations-j2cl",
+        "//third_party:gwt-jsinterop-annotations-j2cl",
         "//transpiler/javatests/com/google/j2cl/transpiler/integration/nativeinjectionapt/apt:annotation",
     ],
 )

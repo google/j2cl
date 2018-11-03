@@ -15,6 +15,6 @@ integration_test(
     name = "compiletimeconstant",
     srcs = glob(["*.java"]),
     deps = [
-        "//third_party/java/gwt:gwt-jsinterop-annotations-j2cl",
+        "//third_party:gwt-jsinterop-annotations-j2cl",
     ],
 )

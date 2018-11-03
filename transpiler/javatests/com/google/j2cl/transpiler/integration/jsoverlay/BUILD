@@ -14,7 +14,7 @@ integration_test(
     name = "jsoverlay",
     srcs = glob(["*.java"]),
     js_deps = [":native_types"],
-    deps = ["//third_party/java/gwt:gwt-jsinterop-annotations-j2cl"],
+    deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )
 
 js_library(

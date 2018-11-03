@@ -23,7 +23,7 @@ j2cl_library(
     ],
     js_deps_mgmt = "closure",
     deps = [
-        "//third_party/java/gwt:gwt-jsinterop-annotations-j2cl",
+        "//third_party:gwt-jsinterop-annotations-j2cl",
     ],
 )
 

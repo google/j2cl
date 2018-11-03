@@ -9,5 +9,5 @@ load(
 # Creates verification target
 readable_example(
     srcs = glob(["*.java"]),
-    deps = ["//third_party/java/gwt:gwt-javaemul-internal-annotations-j2cl"],
+    deps = ["//third_party:gwt-javaemul-internal-annotations-j2cl"],
 )

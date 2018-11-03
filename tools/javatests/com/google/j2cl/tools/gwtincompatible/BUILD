@@ -5,8 +5,8 @@ java_test(
     name = "JavaPreprocessorTest",
     srcs = ["JavaPreprocessorTest.java"],
     deps = [
-        "//java/com/google/common/base",
-        "//third_party/java/junit",
+        "//third_party:guava",
+        "//third_party:junit",
         "//tools/java/com/google/j2cl/tools/gwtincompatible:gwtincompatible_lib",
     ],
 )
@@ -15,10 +15,9 @@ java_test(
     name = "UnusedImportsNodeCollectorTest",
     srcs = ["UnusedImportsNodeCollectorTest.java"],
     deps = [
-        "//java/com/google/common/base",
-        "//java/com/google/common/collect",
-        "//third_party/java/eclipse:eclipse-jdt-core-4.8",
-        "//third_party/java/junit",
+        "//third_party:guava",
+        "//third_party:jdt-core",
+        "//third_party:junit",
         "//tools/java/com/google/j2cl/tools/gwtincompatible:gwtincompatible_lib",
     ],
 )
@@ -30,10 +29,9 @@ java_test(
         "-Dj2cl.deterministicTimestamps=true",
     ],
     deps = [
-        "//java/com/google/common/base",
-        "//java/com/google/common/io",
-        "//third_party/java/junit",
-        "//third_party/java/truth",
+        "//third_party:guava",
+        "//third_party:junit",
+        "//third_party:truth",
         "//tools/java/com/google/j2cl/tools/gwtincompatible:gwtincompatible_lib",
         "//transpiler/java/com/google/j2cl/common",
     ],

@@ -9,8 +9,5 @@ load(
 # Creates verification target
 readable_example(
     srcs = glob(["*.java"]),
-    deps = [
-        "//java/com/google/common/base:base-j2cl",
-        "//java/com/google/common/collect:collect-j2cl",
-    ],
+    deps = ["//third_party:guava-j2cl"],
 )

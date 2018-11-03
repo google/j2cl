@@ -13,5 +13,5 @@ integration_test(
     name = "classliteralstripped",
     srcs = glob(["*.java"]),
     closure_defines = {"jre.classMetadata": "'STRIPPED'"},
-    deps = ["//third_party/java/gwt:gwt-jsinterop-annotations-j2cl"],
+    deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )

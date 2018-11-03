@@ -13,5 +13,5 @@ load(
 integration_test(
     name = "importglobaljstypes",
     srcs = glob(["*.java"]),
-    deps = ["//third_party/java/gwt:gwt-jsinterop-annotations-j2cl"],
+    deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )

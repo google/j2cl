@@ -10,6 +10,6 @@ load(
 readable_example(
     srcs = glob(["*.java"]),
     deps = [
-        "//third_party/java/gwt:gwt-jsinterop-annotations-j2cl",
+        "//third_party:gwt-jsinterop-annotations-j2cl",
     ],
 )

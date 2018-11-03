@@ -17,6 +17,6 @@ readable_example(
     js_deps = [":externs"],
     native_srcs = glob(["*.native.js"]),
     deps = [
-        "//third_party/java/gwt:gwt-jsinterop-annotations-j2cl",
+        "//third_party:gwt-jsinterop-annotations-j2cl",
     ],
 )

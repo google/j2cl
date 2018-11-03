@@ -16,5 +16,5 @@ integration_test(
     native_srcs = [
         "Main.native.js",
     ],
-    deps = ["//third_party/java/gwt:gwt-jsinterop-annotations-j2cl"],
+    deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )

@@ -14,7 +14,7 @@ j2cl_library(
         "Foo.java",
         "UnusedType.java",
     ],
-    deps = ["//third_party/java/gwt:gwt-jsinterop-annotations-j2cl"],
+    deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )
 
 j2cl_rta(
@@ -28,8 +28,8 @@ java_library(
     testonly = 1,
     srcs = ["PruningResultsTest.java"],
     deps = [
-        "//third_party/java/junit",
         "//third_party:guava",
+        "//third_party:junit",
         "//third_party:truth",
         "//tools/java/com/google/j2cl/tools/minifier",
     ],

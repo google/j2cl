@@ -22,7 +22,7 @@ j2cl_library(
     srcs = ["Parent.java"],
     deps = [
         ":SuperParent",
-        "//third_party/java/gwt:gwt-jsinterop-annotations-j2cl",
+        "//third_party:gwt-jsinterop-annotations-j2cl",
     ],
 )
 
@@ -32,7 +32,7 @@ j2cl_library(
     deps = [
         ":MyInterface",
         ":Parent",
-        "//third_party/java/gwt:gwt-jsinterop-annotations-j2cl",
+        "//third_party:gwt-jsinterop-annotations-j2cl",
     ],
 )
 
@@ -49,6 +49,6 @@ integration_test(
         ":MyInterface",
         ":Parent",
         ":SuperParent",
-        "//third_party/java/gwt:gwt-jsinterop-annotations-j2cl",
+        "//third_party:gwt-jsinterop-annotations-j2cl",
     ],
 )

@@ -25,8 +25,8 @@ j2cl_mirror_from_gwt(
     ],
     mirrored_files = ["//third_party/java_src/gwt/svn/trunk/user:java_emul_test"],
     deps = [
-        "//third_party/java/gwt:gwt-jsinterop-annotations-j2cl",
-        "//third_party/java/junit:junit-j2cl",
+        "//third_party:gwt-jsinterop-annotations-j2cl",
+        "//third_party:junit-j2cl",
     ],
 )
 
@@ -61,9 +61,9 @@ java_test(
     ],
     test_class = "com.google.gwt.emultest.AllTests",
     deps = [
-        "//third_party/java/gwt:gwt-javaemul-internal-annotations",
-        "//third_party/java/gwt:gwt-jsinterop-annotations",
-        "//third_party/java/junit",
+        "//third_party:gwt-javaemul-internal-annotations",
+        "//third_party:gwt-jsinterop-annotations",
+        "//third_party:junit",
     ],
 )
 
@@ -160,5 +160,5 @@ j2cl_library(
         "//javatests/com/google/protobuf/contrib/gwt:__subpackages__",
         "//third_party/java_src/jsinterop/javatests/jsinterop/base:__subpackages__",
     ],
-    deps = ["//third_party/java/junit:junit-j2cl"],
+    deps = ["//third_party:junit-j2cl"],
 )

@@ -69,7 +69,7 @@ j2cl_library(
         "Bar.java",
         "Foo.java",
     ],
-    deps = ["//third_party/java/gwt:gwt-jsinterop-annotations-j2cl"],
+    deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )
 
 # Has dupe src glob.
@@ -79,7 +79,7 @@ j2cl_library(
         "Bar.java",
         "Foo.java",
     ],
-    deps = ["//third_party/java/gwt:gwt-jsinterop-annotations-j2cl"],
+    deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )
 
 js_library(

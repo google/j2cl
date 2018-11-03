@@ -10,7 +10,7 @@ j2cl_library(
         "Instantiated.java",
         "NotInstantiated.java",
     ],
-    deps = ["//third_party/java/gwt:gwt-jsinterop-annotations-j2cl"],
+    deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )
 
 rta_test(

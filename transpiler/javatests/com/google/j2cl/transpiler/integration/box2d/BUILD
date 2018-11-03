@@ -8,17 +8,11 @@ load("//build_defs:rules.bzl", "j2cl_library")
 gwt_module(
     name = "box2d_gwt",
     srcs = glob(["*.java"]),
-    deps = [
-        "//java/com/google/common/collect:collect-gwt",
-        "//third_party/java/jbox2d:jbox2d_gwt",
-    ],
+    deps = ["//third_party/java/jbox2d:jbox2d_gwt"],
 )
 
 j2cl_library(
     name = "box2d_j2cl",
     srcs = glob(["*.java"]),
-    deps = [
-        "//third_party/java/gwt:gwt-jsinterop-annotations-j2cl",
-        "//third_party/java/jbox2d:jbox2d_j2cl",
-    ],
+    deps = ["//third_party/java/jbox2d:jbox2d_j2cl"],
 )

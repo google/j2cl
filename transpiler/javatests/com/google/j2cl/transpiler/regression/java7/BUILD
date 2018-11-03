@@ -18,8 +18,8 @@ j2cl_library(
         "-Xep:MethodCanBeStatic:OFF",
     ],
     deps = [
-        "//third_party/java/junit:junit-j2cl",
-        "//third_party/java/truth:truth-j2cl",
+        "//third_party:junit-j2cl",
+        "//third_party:truth-j2cl",
     ],
 )
 

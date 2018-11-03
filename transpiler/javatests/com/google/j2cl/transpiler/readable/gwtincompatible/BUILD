@@ -13,7 +13,7 @@ j2cl_library(
         "Interface.java",
     ],
     deps = [
-        "//java/com/google/common/annotations:annotations-j2cl",
+        "//third_party:guava-j2cl",
     ],
 )
 
@@ -24,6 +24,6 @@ readable_example(
     ],
     deps = [
         ":interface",
-        "//java/com/google/common/annotations:annotations-j2cl",
+        "//third_party:guava-j2cl",
     ],
 )

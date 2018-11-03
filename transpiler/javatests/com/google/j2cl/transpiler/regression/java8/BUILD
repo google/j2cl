@@ -19,9 +19,9 @@ j2cl_library(
     ],
     native_srcs = ["Java8Test.native.js"],
     deps = [
-        "//third_party/java/gwt:gwt-jsinterop-annotations-j2cl",
-        "//third_party/java/junit:junit-j2cl",
-        "//third_party/java/truth:truth-j2cl",
+        "//third_party:gwt-jsinterop-annotations-j2cl",
+        "//third_party:junit-j2cl",
+        "//third_party:truth-j2cl",
     ],
 )
 

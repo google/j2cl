@@ -11,7 +11,7 @@ j2cl_test(
     ],
     tags = ["manual"],
     deps = [
-        "//third_party/java/gwt:gwt-jsinterop-annotations-j2cl",
-        "//third_party/java/junit:junit-j2cl",
+        "//third_party:gwt-jsinterop-annotations-j2cl",
+        "//third_party:junit-j2cl",
     ],
 )

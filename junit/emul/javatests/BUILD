@@ -7,12 +7,12 @@ j2cl_test(
     name = "junit_framework_AssertTest",
     srcs = ["junit/framework/AssertTest.java"],
     test_class = "junit.framework.AssertTest",
-    deps = ["//third_party/java/junit:junit-j2cl"],
+    deps = ["//third_party:junit-j2cl"],
 )
 
 j2cl_test(
     name = "org_junit_AssertTest",
     srcs = ["org/junit/AssertTest.java"],
     test_class = "org.junit.AssertTest",
-    deps = ["//third_party/java/junit:junit-j2cl"],
+    deps = ["//third_party:junit-j2cl"],
 )
