@@ -1,6 +1,6 @@
 """Build test macro for j2cl_library targets. Not intended for public use."""
 
-load("//build_def:j2cl_util.bzl", "J2CL_OPTIMIZED_DEFS")
+load("//build_def:j2cl_js_common.bzl", "J2CL_OPTIMIZED_DEFS")
 load("//tools/build_rules:build_test.bzl", build_test_rule = "build_test")
 
 def build_test(target, tags):

@@ -18,33 +18,3 @@ def get_java_package(path):
 
 def _find(segments, s):
     return segments.index(s) if s in segments else len(segments)
-
-load(
-    "//javascript/tools/jscompiler/builddefs:flags.bzl",
-    "ADVANCED_OPTIMIZATIONS_FLAGS",
-    "JS_TEST_FLAGS",
-    "USE_TYPES_FOR_OPTIMIZATIONS_FLAGS",
-)
-
-# TODO(goktug): Switch to RECOMMENDED_FLAGS and opt-out from checks as needed.
-J2CL_OPTIMIZED_DEFS = (ADVANCED_OPTIMIZATIONS_FLAGS +
-                       USE_TYPES_FOR_OPTIMIZATIONS_FLAGS + [
-    "--jscomp_error=strictMissingRequire",
-    "--language_out=ECMASCRIPT5_STRICT",
-    "--define=goog.DEBUG=false",
-    "--remove_unused_prototype_props_in_externs",
-])
-
-J2CL_TEST_DEFS = JS_TEST_FLAGS + [
-    # Manage closure deps will strip our outputs in some tests
-    "--manage_closure_dependencies=false",
-    # Enable assert statements for tests (as java_test does the same)
-    "--remove_j2cl_asserts=false",
-    # turn off the closure debug loader since it is causing warnings
-    # in bundled mode
-    "--define=goog.ENABLE_DEBUG_LOADER=false",
-    # enables source maps for tests used in stack trace deobfuscation
-    "--apply_input_source_maps",
-    # set the naming pattern for the source map output
-    "--create_source_map=%outname%.sourcemap",
-]
