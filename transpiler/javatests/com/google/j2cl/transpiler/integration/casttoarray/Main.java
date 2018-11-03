@@ -24,7 +24,8 @@ public class Main {
     testDimensionCasts();
     testTypeCasts();
     testBasics();
-    testErasureCastsOnArrayAccess();
+    testErasureCastsOnArrayAccess_fromArrayOfT();
+    testErasureCastsOnArrayAccess_fromT();
   }
 
   private static void testBasics() {
@@ -98,13 +99,34 @@ public class Main {
         Object[].class);
   }
 
-  private static void testErasureCastsOnArrayAccess() {
-    ArrayContainer<String> container = new ArrayContainer<>(new Object[1]);
+  private static void testErasureCastsOnArrayAccess_fromArrayOfT() {
+    // Array of the right type.
+    ArrayContainer<String> stringArrayInArrayContainer = new ArrayContainer<>(new String[1]);
+    String unusedString = stringArrayInArrayContainer.data[0];
+    int len = stringArrayInArrayContainer.data.length;
+    assert len == 1;
+
+    // Array of the wrong type.
+    ArrayContainer<String> objectArrayInArrayContainer = new ArrayContainer<>(new Object[1]);
     assertThrowsClassCastException(
         () -> {
-          String unused = container.data[0];
+          String unused = objectArrayInArrayContainer.data[0];
         },
         String[].class);
+    // Make sure access to the length field performs the right cast. The length field
+    // has special handling in CompilationUnitBuider.
+    assertThrowsClassCastException(
+        () -> {
+          int unused = objectArrayInArrayContainer.data.length;
+        },
+        String[].class);
+
+    // Not even an array.
+    assertThrowsClassCastException(
+        () -> {
+          ArrayContainer<String> container = new ArrayContainer<>(new Object());
+        },
+        Object[].class);
   }
 
   private static class ArrayContainer<T> {
@@ -113,6 +135,48 @@ public class Main {
     }
 
     T[] data;
+  }
+
+  private static void testErasureCastsOnArrayAccess_fromT() {
+    // Array of the right type.
+    Container<String[]> stringArrayInContainer = new Container<>(new String[1]);
+    String unusedString = stringArrayInContainer.data[0];
+    int len = stringArrayInContainer.data.length;
+    assert len == 1;
+
+    // Array of the wrong type.
+    Container<String[]> objectArrayInContainer = new Container<>(new Object[1]);
+    assertThrowsClassCastException(
+        () -> {
+          String unused = objectArrayInContainer.data[0];
+        },
+        String[].class);
+    assertThrowsClassCastException(
+        () -> {
+          int unused = objectArrayInContainer.data.length;
+        },
+        String[].class);
+
+    // Not even an array.
+    Container<String[]> notAnArrayInContainer = new Container<>(new Object());
+    assertThrowsClassCastException(
+        () -> {
+          String unused = notAnArrayInContainer.data[0];
+        },
+        String[].class);
+    assertThrowsClassCastException(
+        () -> {
+          int unused = notAnArrayInContainer.data.length;
+        },
+        String[].class);
+  }
+
+  private static class Container<T> {
+    Container(Object array) {
+      this.data = (T) array;
+    }
+
+    T data;
   }
 
   private static void assertThrowsClassCastException(Runnable runnable, Class<?> toClass) {
