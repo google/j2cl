@@ -1,3 +1,5 @@
+load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_library")
+
 # Apache2
 licenses(["notice"])
 
@@ -41,7 +43,7 @@ j2cl_library(
     ],
 )
 
-js_library(
+closure_js_library(
     name = "ajd",
     deps_mgmt = "closure",
     exports = [

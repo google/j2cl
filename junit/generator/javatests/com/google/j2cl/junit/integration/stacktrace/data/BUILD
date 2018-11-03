@@ -1,3 +1,5 @@
+load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_library")
+
 package(default_visibility = ["//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace:__pkg__"])
 
 # Apache2
@@ -67,7 +69,7 @@ j2cl_test_integration_test_data(
     deps = ["//third_party:gwt-jsinterop-annotations"],
 )
 
-js_library(
+closure_js_library(
     name = "stacktrace",
     srcs = ["throwing_js_class.js"],
     deps = ["//javascript/closure:base"],

@@ -11,10 +11,10 @@ readable_example(
     srcs = glob(["*.java"]),
     deps = [
         ":subpackage",
-        "//third_party/java/checker_framework:annotations-j2cl",
         "//third_party:guava-j2cl",
         "//third_party:gwt-jsinterop-annotations-j2cl",
         "//third_party:jsr305_annotations-j2cl",
+        "//third_party/java/checker_framework:annotations-j2cl",
     ],
 )
 

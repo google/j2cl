@@ -1,3 +1,5 @@
+load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_library")
+
 # Apache2
 licenses(["notice"])
 
@@ -6,7 +8,7 @@ load(
     "integration_test",
 )
 
-js_library(
+closure_js_library(
     name = "Bar",
     srcs = ["foo.Bar.js"],
     deps_mgmt = "legacy",

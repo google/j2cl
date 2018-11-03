@@ -23,8 +23,8 @@ java_binary(
     name = "J2clRtaRunner",
     main_class = "com.google.j2cl.tools.rta.J2clRta",
     visibility = [
-        "//java/com/google/caribou/ui/pinto/modules:__subpackages__",
         "//:__subpackages__",
+        "//java/com/google/caribou/ui/pinto/modules:__subpackages__",
     ],
     runtime_deps = [":rta"],
 )

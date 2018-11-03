@@ -1,6 +1,8 @@
 # Description:
 #   j2cl/jre: JRE subset for transpilation.
 
+load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_binary")
+
 # Apache2
 licenses(["notice"])
 
@@ -132,17 +134,15 @@ COMFORMANCE_CHECK_FLAGS = J2CL_OPTIMIZED_DEFS + VERBOSE_WARNING_FLAGS_STRICT + [
     # "--jscomp_error=reportUnknownTypes",
 ]
 
-js_binary(
+closure_js_binary(
     name = "conformance_binary",
-    compile = 1,
     defs = COMFORMANCE_CHECK_FLAGS,
     extra_inputs = ["conformance_proto.txt"],
     deps = ["//jre/java:jre"],
 )
 
-js_binary(
+closure_js_binary(
     name = "conformance_binary_head",
-    compile = 1,
     compiler = "//javascript/tools/jscompiler:head",
     defs = COMFORMANCE_CHECK_FLAGS,
     extra_inputs = ["conformance_proto.txt"],

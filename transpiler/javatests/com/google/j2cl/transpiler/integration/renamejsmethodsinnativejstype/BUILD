@@ -1,3 +1,5 @@
+load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_library")
+
 # Apache2
 licenses(["notice"])
 
@@ -32,7 +34,7 @@ integration_test(
     ],
 )
 
-js_library(
+closure_js_library(
     name = "native_types",
     srcs = ["NativeFoo.js"],
     deps_mgmt = "legacy",

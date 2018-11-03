@@ -5,8 +5,8 @@ licenses(["notice"])
 
 load(
     "//junit/generator/javatests/com/google/j2cl/junit/integration:j2cl_junit_integration_test.bzl",
-    "java_and_j2cl_library",
     "j2cl_test_integration_test_data",
+    "java_and_j2cl_library",
 )
 
 java_and_j2cl_library(

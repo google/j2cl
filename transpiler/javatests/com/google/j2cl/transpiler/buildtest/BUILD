@@ -10,6 +10,7 @@
 #
 # TODO(stalcup): add a Boq web example when Boq web is ready.
 
+load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_binary", "closure_js_library")
 load("//apps/framework/modulesets/builddefs:modulesets.bzl", "mss_js_compiled_module_set_flat_files")
 load("//java/com/google/devtools/javascript/pinto/builddefs:rules.bzl", "pinto_processed_module_set")
 load("//build_defs:rules.bzl", "j2cl_library", "j2cl_test")
@@ -82,7 +83,7 @@ j2cl_library(
     deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )
 
-js_library(
+closure_js_library(
     name = "launcher",
     srcs = ["Launcher.js"],
     deps_mgmt = "legacy",
@@ -93,7 +94,7 @@ js_library(
 )
 
 # Depends on library that has dupe src glob.
-js_library(
+closure_js_library(
     name = "dupe_launcher",
     srcs = ["Launcher.js"],
     deps_mgmt = "legacy",
@@ -106,7 +107,7 @@ js_library(
 
 # ********************************************
 
-js_binary(
+closure_js_binary(
     name = "J2clJSCompiler",
     compiler = "//javascript/tools/jscompiler:head",
     deps = [":launcher"],
@@ -127,13 +128,13 @@ js_module_binary(
 
 # ********************************************
 
-js_library(
+closure_js_library(
     name = "J2clAjdJSCompiler_library",
     deps_mgmt = "closure",  # Turns on AJD.
     exports = [":launcher"],
 )
 
-js_binary(
+closure_js_binary(
     name = "J2clAjdJSCompiler",
     srcs = ["Point.js"],
     compiler = "//javascript/tools/jscompiler:head",
@@ -143,13 +144,13 @@ js_binary(
 # ********************************************
 # Some zip libraries contain duplicate provides.
 
-js_library(
+closure_js_library(
     name = "J2clDupeAjdJSCompiler_library",
     deps_mgmt = "closure",  # Turns on AJD.
     exports = [":dupe_launcher"],
 )
 
-js_binary(
+closure_js_binary(
     name = "J2clDupeAjdJSCompiler",
     srcs = ["Point.js"],
     compiler = "//javascript/tools/jscompiler:head",
