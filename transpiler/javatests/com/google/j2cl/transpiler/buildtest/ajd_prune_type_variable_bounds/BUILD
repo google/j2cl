@@ -1,6 +1,8 @@
 # Apache2
 licenses(["notice"])
 
+load("//build_defs:rules.bzl", "j2cl_library")
+
 js_library(
     name = "nativejs",
     srcs = [
@@ -12,6 +14,53 @@ js_library(
     ],
     deps = [
         "//javascript/closure:base",
+    ],
+)
+
+j2cl_library(
+    name = "native",
+    srcs = [
+        "NativeType1.java",
+        "NativeType2.java",
+        "NativeType3.java",
+        "NativeType4.java",
+        "NativeType5.java",
+    ],
+    _js_deps = [
+        ":nativejs",
+    ],
+    js_deps_mgmt = "closure",
+    deps = [
+        "//third_party/java/gwt:gwt-jsinterop-annotations-j2cl",
+    ],
+)
+
+j2cl_library(
+    name = "A",
+    srcs = [
+        "A1.java",
+        "A2.java",
+        "A3.java",
+        "A4.java",
+        "A5.java",
+        "Container.java",
+        "Marker.java",
+    ],
+    js_deps_mgmt = "closure",
+    deps = [
+        ":native",
+        "//third_party/java/gwt:gwt-jsinterop-annotations-j2cl",
+    ],
+)
+
+j2cl_library(
+    name = "B",
+    srcs = [
+        "B.java",
+    ],
+    js_deps_mgmt = "closure",
+    deps = [
+        ":A",
     ],
 )
 

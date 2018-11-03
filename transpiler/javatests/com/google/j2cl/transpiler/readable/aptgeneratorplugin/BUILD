@@ -1,6 +1,7 @@
 # Apache2
 licenses(["notice"])
 
+load("//build_defs:rules.bzl", "j2cl_import")
 load(
     "//:transpiler/javatests/com/google/j2cl/transpiler/readable/readable_example.bzl",
     "readable_example",
@@ -32,4 +33,10 @@ java_library(
     name = "dummy-processor-export",
     exported_plugins = [":dummy-processor"],
     exports = [":dummy-processor-lib"],
+)
+
+# Expose that re-exporting java_library to the J2CL zone.
+j2cl_import(
+    name = "dummy-processor-export-j2cl",
+    jar = ":dummy-processor-export",
 )

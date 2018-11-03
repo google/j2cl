@@ -13,7 +13,7 @@ readable_example(
 """
 
 load("//build_defs:rules.bzl", "J2CL_OPTIMIZED_DEFS", "j2cl_library")
-load("//tools/build_rules:build_test.bzl", "build_test")
+load("@bazel_tools//tools/build_rules:build_test.bzl", "build_test")
 
 JAVAC_FLAGS = [
     "-XepDisableAllChecks",

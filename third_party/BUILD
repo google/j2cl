@@ -150,7 +150,19 @@ alias(
     actual = "@org_gwtproject_gwt//user:gwt-javaemul-internal-annotations",
 )
 
+load("//build_def:j2cl_import.bzl", "j2cl_import")
+
+j2cl_import(
+    name = "gwt-javaemul-internal-annotations-j2cl",
+    jar = "@org_gwtproject_gwt//user:gwt-javaemul-internal-annotations",
+)
+
 java_library(
     name = "gwt-jsinterop-annotations",
     exports = ["@com_google_jsinterop_annotations//jar"],
+)
+
+j2cl_import(
+    name = "gwt-jsinterop-annotations-j2cl",
+    jar = "@com_google_jsinterop_annotations//jar",
 )

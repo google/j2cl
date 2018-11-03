@@ -15,3 +15,12 @@ java_plugin(
         "//third_party/java/jsr305_annotations",
     ],
 )
+
+load("//build_defs:rules.bzl", "j2cl_library")
+
+j2cl_library(
+    name = "annotation",
+    srcs = ["RunApt.java"],
+    exported_plugins = [":apt"],
+    visibility = ["//transpiler/javatests/com/google/j2cl/transpiler/integration/nativeinjectionapt:__pkg__"],
+)

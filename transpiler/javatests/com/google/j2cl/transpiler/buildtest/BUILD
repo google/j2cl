@@ -12,13 +12,22 @@
 
 load("//apps/framework/modulesets/builddefs:modulesets.bzl", "mss_js_compiled_module_set_flat_files")
 load("//java/com/google/devtools/javascript/pinto/builddefs:rules.bzl", "pinto_processed_module_set")
-load("//build_defs:rules.bzl", "j2cl_test")
+load("//build_defs:rules.bzl", "j2cl_library", "j2cl_test")
 
 # Apache2
 licenses(["notice"])
 
 # ********************************************
 # Broken target with notap and manual tags should not break
+
+j2cl_library(
+    name = "BrokenLib",
+    srcs = ["NotExists.java"],
+    tags = [
+        "manual",
+        "notap",
+    ],
+)
 
 j2cl_test(
     name = "BrokenTest",
@@ -41,7 +50,7 @@ java_library(
 
 # ********************************************
 
-load("//tools/build_rules:build_test.bzl", "build_test")
+load("@bazel_tools//tools/build_rules:build_test.bzl", "build_test")
 
 # test implicit j2cl_library outputs
 build_test(
@@ -53,6 +62,25 @@ build_test(
 )
 
 # ********************************************
+
+j2cl_library(
+    name = "example_j2cl_lib",
+    srcs = [
+        "Bar.java",
+        "Foo.java",
+    ],
+    deps = ["//third_party/java/gwt:gwt-jsinterop-annotations-j2cl"],
+)
+
+# Has dupe src glob.
+j2cl_library(
+    name = "dupe_j2cl_lib",
+    srcs = [
+        "Bar.java",
+        "Foo.java",
+    ],
+    deps = ["//third_party/java/gwt:gwt-jsinterop-annotations-j2cl"],
+)
 
 js_library(
     name = "launcher",

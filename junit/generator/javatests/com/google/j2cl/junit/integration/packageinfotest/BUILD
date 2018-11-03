@@ -1,7 +1,23 @@
 # Apache2
 licenses(["notice"])
 
-load("//build_defs:rules.bzl", "j2cl_test")
+load("//build_defs:rules.bzl", "j2cl_library", "j2cl_test")
+
+j2cl_library(
+    name = "packageinfo",
+    srcs = ["package-info.java"],
+    deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
+)
+
+j2cl_library(
+    name = "lib",
+    testonly = 1,
+    srcs = ["FileWithPackageInfoTest.java"],
+    deps = [
+        ":packageinfo",
+        "//third_party/java/junit:junit-j2cl",
+    ],
+)
 
 # Test that j2cl_test works fine w.r.t package-info strict deps (b/78013961).
 j2cl_test(

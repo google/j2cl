@@ -23,6 +23,8 @@ licenses(["notice"])
 
 package(default_visibility = ["//visibility:public"])
 
+load("//build_defs:rules.bzl", "j2cl_library")
+
 # ***************************************************
 # Transpiler related
 # ***************************************************
@@ -37,9 +39,20 @@ alias(
 # Standard library related
 # ***************************************************
 
+j2cl_library(
+    name = "jre",
+    exports = ["//jre/java:jre"],
+)
+
 # ***************************************************
 # JUnit library related
 # ***************************************************
+
+j2cl_library(
+    name = "internal_junit_annotations",
+    testonly = 1,
+    exports = ["//junit/generator/java/com/google/j2cl/junit/apt:internal_junit_annotations"],
+)
 
 # ***************************************************
 # Tools related

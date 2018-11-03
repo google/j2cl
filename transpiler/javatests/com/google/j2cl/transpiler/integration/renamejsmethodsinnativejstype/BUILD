@@ -1,9 +1,18 @@
 # Apache2
 licenses(["notice"])
 
+load("//build_defs:rules.bzl", "j2cl_library")
 load(
     "//transpiler/javatests/com/google/j2cl/transpiler/integration:integration_test.bzl",
     "integration_test",
+)
+
+j2cl_library(
+    name = "Foo",
+    # Src's JUST the Foo class.
+    srcs = ["Foo.java"],
+    _js_deps = [":native_types"],
+    deps = ["//third_party/java/gwt:gwt-jsinterop-annotations-j2cl"],
 )
 
 # Creates targets

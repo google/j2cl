@@ -4,7 +4,18 @@
 # Apache2
 licenses(["notice"])
 
-load("//build_defs:rules.bzl", "j2cl_rta")
+load("//build_defs:rules.bzl", "j2cl_library", "j2cl_rta")
+
+j2cl_library(
+    name = "test_input",
+    testonly = 1,
+    srcs = [
+        "Bar.java",
+        "Foo.java",
+        "UnusedType.java",
+    ],
+    deps = ["//third_party/java/gwt:gwt-jsinterop-annotations-j2cl"],
+)
 
 j2cl_rta(
     name = "test_input_rta",
@@ -17,9 +28,9 @@ java_library(
     testonly = 1,
     srcs = ["PruningResultsTest.java"],
     deps = [
+        "//third_party/java/junit",
         "//third_party:guava",
         "//third_party:truth",
-        "//third_party/java/junit",
         "//tools/java/com/google/j2cl/tools/minifier",
     ],
 )

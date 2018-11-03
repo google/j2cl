@@ -1,6 +1,16 @@
 # Apache2
 licenses(["notice"])
 
+load("//build_defs:rules.bzl", "j2cl_library")
+
+j2cl_library(
+    name = "internal_junit_annotations",
+    testonly = 1,
+    srcs = ["J2clTestInput.java"],
+    exported_plugins = [":junit_processor_plugin"],
+    visibility = ["//internal_do_not_use:__pkg__"],
+)
+
 java_plugin(
     name = "junit_processor_plugin",
     testonly = 1,

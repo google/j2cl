@@ -112,7 +112,7 @@ j2cl_multi_test(
     test_class = "com.google.gwt.emultest.EmulJava8Suite",
 )
 
-load("//tools/build_rules:build_test.bzl", "build_test")
+load("@bazel_tools//tools/build_rules:build_test.bzl", "build_test")
 
 build_test(
     name = "conformance_test",
@@ -122,7 +122,7 @@ build_test(
     ],
 )
 
-load("//build_defs:rules.bzl", "J2CL_OPTIMIZED_DEFS")
+load("//build_defs:rules.bzl", "J2CL_OPTIMIZED_DEFS", "j2cl_library")
 load("//javascript/tools/jscompiler/builddefs:flags.bzl", "VERBOSE_WARNING_FLAGS_STRICT")
 
 COMFORMANCE_CHECK_FLAGS = J2CL_OPTIMIZED_DEFS + VERBOSE_WARNING_FLAGS_STRICT + [
@@ -147,4 +147,18 @@ js_binary(
     defs = COMFORMANCE_CHECK_FLAGS,
     extra_inputs = ["conformance_proto.txt"],
     deps = ["//jre/java:jre"],
+)
+
+# TODO(dankuka): Eventually we want to provide a library target for apps that
+# need to be compatible with both gwt tests and j2cl tests, but this will
+# require some more careful thought.
+j2cl_library(
+    name = "gwt_test_case-j2cl",
+    testonly = 1,
+    srcs = ["com/google/gwt/junit/client/GWTTestCase.java"],
+    visibility = [
+        "//javatests/com/google/protobuf/contrib/gwt:__subpackages__",
+        "//third_party/java_src/jsinterop/javatests/jsinterop/base:__subpackages__",
+    ],
+    deps = ["//third_party/java/junit:junit-j2cl"],
 )

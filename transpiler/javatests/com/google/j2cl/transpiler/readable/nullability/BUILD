@@ -18,3 +18,13 @@ readable_example(
         "//third_party/java/jsr305_annotations:jsr305_annotations-j2cl",
     ],
 )
+
+load("//build_defs:rules.bzl", "j2cl_library")
+
+j2cl_library(
+    name = "subpackage",
+    srcs = glob(["subpackage/*.java"]),
+    deps = [
+        "//third_party/java/jsr305_annotations:jsr305_annotations-j2cl",
+    ],
+)

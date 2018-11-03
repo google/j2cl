@@ -1,52 +1,33 @@
 """This module contains j2cl_js_provider helpers."""
 
-load("//tools/build_defs/js_toolchain:def.bzl", "JS_TOOLCHAIN_ATTRIBUTE")
-load(
-    "//javascript/tools/jscompiler/builddefs:flags.bzl",
-    "ADVANCED_OPTIMIZATIONS_FLAGS",
-    "JS_TEST_FLAGS",
-    "USE_TYPES_FOR_OPTIMIZATIONS_FLAGS",
-)
+load("@io_bazel_rules_closure//closure:defs.bzl", "CLOSURE_JS_TOOLCHAIN_ATTRS", "create_closure_js_library")
 
 def j2cl_js_provider(ctx, srcs = [], deps = [], exports = []):
     """ Creates a js provider from provided sources, deps and exports. """
 
+    default_j2cl_suppresses = [
+      "analyzerChecks",
+      "JSC_UNKNOWN_EXPR_TYPE",
+      "JSC_STRICT_INEXISTENT_PROPERTY",
+    ]
+    suppresses = default_j2cl_suppresses + ctx.attr.js_suppress
+
+    js = create_closure_js_library(ctx, srcs, deps, exports, suppresses)
+
     return {
-        "js": js_common.provider(
-            ctx,
-            srcs = srcs,
-            deps = [d.js for d in deps],
-            exports = [e.js for e in exports],
-            deps_mgmt = ctx.attr.js_deps_mgmt,
-            strict_deps_already_checked = True,
-        ),
+        "closure_js_library": js.closure_js_library,
+        "exports": js.exports,
     }
 
-J2CL_JS_ATTRS = dict(JS_TOOLCHAIN_ATTRIBUTE, **{
-    "js_deps_mgmt": attr.string(default = "closure"),
+J2CL_JS_ATTRS = dict(CLOSURE_JS_TOOLCHAIN_ATTRS, **{
+    "js_suppress": attr.string_list(),
 })
 
-JS_PROVIDER_NAME = "js"
+JS_PROVIDER_NAME = "closure_js_library"
 
-# TODO(goktug): Switch to RECOMMENDED_FLAGS and opt-out from checks as needed.
-J2CL_OPTIMIZED_DEFS = (ADVANCED_OPTIMIZATIONS_FLAGS +
-                       USE_TYPES_FOR_OPTIMIZATIONS_FLAGS + [
-    "--jscomp_error=strictMissingRequire",
-    "--language_out=ECMASCRIPT5_STRICT",
+J2CL_OPTIMIZED_DEFS = [
     "--define=goog.DEBUG=false",
-    "--remove_unused_prototype_props_in_externs",
-])
-
-J2CL_TEST_DEFS = JS_TEST_FLAGS + [
-    # Manage closure deps will strip our outputs in some tests
-    "--manage_closure_dependencies=false",
-    # Enable assert statements for tests (as java_test does the same)
-    "--remove_j2cl_asserts=false",
-    # turn off the closure debug loader since it is causing warnings
-    # in bundled mode
-    "--define=goog.ENABLE_DEBUG_LOADER=false",
-    # enables source maps for tests used in stack trace deobfuscation
-    "--apply_input_source_maps",
-    # set the naming pattern for the source map output
-    "--create_source_map=%outname%.sourcemap",
 ]
+
+# Place holder until we implement unut testing support for open-source.
+J2CL_TEST_DEFS = []

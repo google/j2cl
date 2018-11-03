@@ -4,7 +4,18 @@
 # Apache2
 licenses(["notice"])
 
+load("//build_defs:rules.bzl", "j2cl_library")
 load(":j2cl_optimization_test.bzl", "j2cl_optimization_test")
+
+j2cl_library(
+    name = "shared",
+    testonly = 1,
+    srcs = ["OptimizationTestUtil.java"],
+    deps = [
+        "//third_party/java/gwt:gwt-jsinterop-annotations-j2cl",
+        "//third_party/java/junit:junit-j2cl",
+    ],
+)
 
 j2cl_optimization_test(
     name = "BooleanOptimizationTest",

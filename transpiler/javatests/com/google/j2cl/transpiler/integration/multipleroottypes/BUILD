@@ -1,9 +1,16 @@
 # Apache2
 licenses(["notice"])
 
+load("//build_defs:rules.bzl", "j2cl_library")
 load(
     "//transpiler/javatests/com/google/j2cl/transpiler/integration:integration_test.bzl",
     "integration_test",
+)
+
+j2cl_library(
+    name = "MainRootType",
+    # Src's JUST the MainRootType class.
+    srcs = ["MainRootType.java"],
 )
 
 # Creates targets
