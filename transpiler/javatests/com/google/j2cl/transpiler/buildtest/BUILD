@@ -98,8 +98,8 @@ js_library(
     srcs = ["Launcher.js"],
     deps_mgmt = "legacy",
     deps = [
-        ":example_j2cl_lib",
         ":dupe_j2cl_lib",
+        ":example_j2cl_lib",
         "//javascript/closure:base",
     ],
 )
