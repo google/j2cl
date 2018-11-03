@@ -1,18 +1,9 @@
 # Apache2
 licenses(["notice"])
 
-load("//build_defs:rules.bzl", "j2cl_library")
 load(
     "//transpiler/javatests/com/google/j2cl/transpiler/integration:integration_test.bzl",
     "integration_test",
-)
-
-j2cl_library(
-    name = "outer",
-    srcs = ["Outer.java"],
-    deps = [
-        "//third_party/java/gwt:gwt-jsinterop-annotations-j2cl",
-    ],
 )
 
 # Creates targets
@@ -21,20 +12,9 @@ j2cl_library(
 # blaze test :uncompiled_test
 integration_test(
     name = "jsinnerclass",
-    srcs = ["Main.java"],
-    js_deps = [":native_types"],
-    deps = [
-        ":outer",
-        "//third_party/java/gwt:gwt-jsinterop-annotations-j2cl",
-    ],
-)
-
-js_library(
-    name = "native_types",
-    srcs = glob(["*.js"]),
-    deps_mgmt = "legacy",
-    deps = [
-        "//javascript/closure:base",
-        ":outer",
-    ],
+    srcs = glob([
+        "*.java",
+        "*.js",
+    ]),
+    deps = ["//third_party/java/gwt:gwt-jsinterop-annotations-j2cl"],
 )

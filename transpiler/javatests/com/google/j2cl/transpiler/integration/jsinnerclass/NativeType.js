@@ -13,12 +13,12 @@
 // limitations under the License.
 goog.module('com.google.test.NativeType');
 
-var Inner = goog.require('com.google.test.Inner$impl');
-var Outer = goog.require('com.google.j2cl.transpiler.integration.jsinnerclass.Outer$impl');
+var Inner = goog.require('com.google.test.Inner');
+var Outer = goog.require('com.google.j2cl.transpiler.integration.jsinnerclass.Outer');
 
 class NativeType {
   /**
-   * @param {Outer} outer
+   * @param {!Outer} outer
    * @return {number}
    */
   static getB(outer) { return new Inner(outer).getB(); }
