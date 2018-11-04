@@ -125,6 +125,9 @@ public class Main {
     }
 
     NativeStringEnum.ONE.compareTo(NativeStringEnum.THREE);
+    NativeStringEnum.ONE.equals(NativeStringEnum.THREE);
+    ComparableJsEnum.ONE.compareTo(ComparableJsEnum.ZERO);
+    ComparableJsEnum.ONE.equals(ComparableJsEnum.ZERO);
   }
 
   private static void testBoxUnboxWithTypeInference() {

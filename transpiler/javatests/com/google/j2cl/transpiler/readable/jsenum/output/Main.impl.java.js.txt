@@ -28,6 +28,7 @@ let $InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPrec
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
+let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
 
 class Main extends j_l_Object {
@@ -112,6 +113,14 @@ class Main extends j_l_Object {
     }
     Double.m_compareTo__java_lang_Double__java_lang_Double(
         NativeStringEnum.ONE, NativeStringEnum.THREE);
+    $Objects.m_equals__java_lang_Object__java_lang_Object(
+        NativeStringEnum.ONE, NativeStringEnum.THREE);
+    Double.m_compareTo__java_lang_Double__java_lang_Double(
+        ComparableJsEnum.ONE,
+        $Enums.boxComparable(ComparableJsEnum.ZERO, $Overlay));
+    $Objects.m_equals__java_lang_Object__java_lang_Object(
+        $Enums.boxComparable(ComparableJsEnum.ONE, $Overlay),
+        $Enums.boxComparable(ComparableJsEnum.ZERO, $Overlay));
   }
 
   /**
@@ -194,6 +203,7 @@ class Main extends j_l_Object {
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     $Enums = goog.module.get('vmbootstrap.Enums$impl');
+    $Objects = goog.module.get('vmbootstrap.Objects$impl');
   }
 };
 

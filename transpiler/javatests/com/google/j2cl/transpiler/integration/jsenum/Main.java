@@ -45,6 +45,7 @@ public class Main {
     testDoNotAutoboxJsEnum();
     testUnckeckedCastJsEnum();
     testBoxUnboxWithTypeInference();
+    testBoxingWithSpecialMethods();
   }
 
   @JsEnum(isNative = true, namespace = "test")
@@ -251,7 +252,16 @@ public class Main {
   @JsEnum
   enum PlainJsEnum {
     ZERO,
-    ONE;
+    ONE,
+    TWO,
+    THREE,
+    FOUR,
+    FIVE,
+    SIX,
+    SEVEN,
+    EIGHT,
+    NINE,
+    TEN;
 
     public int getValue() {
       return ordinal();
@@ -617,6 +627,13 @@ public class Main {
   @UncheckedCast
   private static <T> T uncheckedCast(@DoNotAutobox Object object) {
     return (T) object;
+  }
+
+  private static void testBoxingWithSpecialMethods() {
+    assertTrue(PlainJsEnum.ONE.equals(PlainJsEnum.ONE));
+    assertTrue(PlainJsEnum.ONE.compareTo(PlainJsEnum.ONE) == 0);
+    assertTrue(PlainJsEnum.ONE.compareTo(PlainJsEnum.ZERO) > 0);
+    assertTrue(PlainJsEnum.TWO.compareTo(PlainJsEnum.TEN) < 0);
   }
 
   private static void testBoxUnboxWithTypeInference() {
