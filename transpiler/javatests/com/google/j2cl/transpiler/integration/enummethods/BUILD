@@ -1,5 +1,3 @@
-load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_library")
-
 # Apache2
 licenses(["notice"])
 
@@ -14,14 +12,9 @@ load(
 # blaze test :uncompiled_test
 integration_test(
     name = "enummethods",
-    srcs = glob(["*.java"]),
-    js_deps = [":native_types"],
+    srcs = glob([
+        "*.java",
+        "*.js",
+    ]),
     deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
-)
-
-closure_js_library(
-    name = "native_types",
-    srcs = glob(["javascript/*.js"]),
-    deps_mgmt = "legacy",
-    deps = ["//javascript/closure:base"],
 )
