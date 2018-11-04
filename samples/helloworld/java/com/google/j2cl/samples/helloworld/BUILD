@@ -18,6 +18,9 @@ closure_js_library(
 # TODO(b/117998344): Discuss outputs and some of the optimizations
 closure_js_binary(
     name = "helloworld",
-    defs = J2CL_OPTIMIZED_DEFS + ["--rewrite_polyfills=false"],
+    defs = J2CL_OPTIMIZED_DEFS + [
+        "--rewrite_polyfills=false",
+        "--entry_point=goog:j2cl.samples.app",
+    ],
     deps = [":app"],
 )

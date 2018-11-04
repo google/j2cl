@@ -11,7 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-goog.module('j2cl.samples.helloworld');
+goog.module('j2cl.samples.app');
 
 // This is the entry point of our app.
 // Feel free to use any fancy new ES features, Closure compiler will take care
