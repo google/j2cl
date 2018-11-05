@@ -1,5 +1,3 @@
-load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_library")
-
 # Apache2
 licenses(["notice"])
 
@@ -10,15 +8,10 @@ load(
 
 # Creates verification target
 readable_example(
-    srcs = glob(["*.java"]),
-    js_deps = [":native_types"],
-    native_srcs = glob(["*.native.js"]),
+    srcs = glob([
+        "*.java",
+        "*.native.js",
+        "native_sources/*.js",
+    ]),
     deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
-)
-
-closure_js_library(
-    name = "native_types",
-    srcs = glob(["native_sources/*.js"]),
-    deps_mgmt = "legacy",
-    deps = ["//javascript/closure:base"],
 )
