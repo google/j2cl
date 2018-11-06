@@ -20,7 +20,7 @@ integration_test(
 """
 
 load("//build_defs:rules.bzl", "J2CL_OPTIMIZED_DEFS", "J2CL_TEST_DEFS", "j2cl_library")
-load("//build_def:j2cl_util.bzl", "get_java_package")
+load("//build_defs/internal_do_not_use:j2cl_util.bzl", "get_java_package")
 load("@bazel_tools//tools/build_defs/label:def.bzl", "absolute_label")
 load("//testing/web/build_defs:web.bzl", "web_test")
 load("//testing/web/build_defs/js:js.bzl", "jsunit_test")

@@ -25,8 +25,8 @@ j2cl_library(
 
 """
 
-load("//build_def:j2cl_java_library.bzl", j2cl_library_rule = "j2cl_library")
-load("//build_def:j2cl_library_build_test.bzl", "build_test")
+load(":j2cl_java_library.bzl", j2cl_library_rule = "j2cl_library")
+load(":j2cl_library_build_test.bzl", "build_test")
 
 def j2cl_library(
         name,
@@ -73,7 +73,7 @@ def j2cl_library(
     # If this is JRE itself, don't synthesize the JRE dep.
     target_name = "//" + native.package_name() + ":" + name
     if args["srcs"] and target_name != "//jre/java:jre":
-        args["deps"].append("//internal_do_not_use:jre")
+        args["deps"].append("//build_defs/internal_do_not_use:jre")
 
     # TODO(goktug): remove workaround after b/71772385 is fixed
     dummy_class_name = name.replace("-", "__")

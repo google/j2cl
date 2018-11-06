@@ -5,8 +5,34 @@ overlaying files from current directory.
 
 """
 
-load(":j2cl_source_copy.bzl", "j2cl_source_copy")
-load(":j2cl_library.bzl", "j2cl_library")
+load("//build_defs:rules.bzl", "j2cl_library")
+
+def _impl_source_copy(ctx):
+    java_out_files = []
+    for java_file in ctx.files.srcs:
+        out_file_name = java_file.path
+        if any([out_file_name.endswith(x) for x in ctx.attr.excludes]):
+            continue
+
+        java_file_artifact = ctx.actions.declare_file(out_file_name)
+        java_out_files += [java_file_artifact]
+        ctx.actions.run_shell(
+            inputs = [java_file],
+            outputs = [java_file_artifact],
+            command = "cp $1 $2",
+            arguments = [java_file.path, java_file_artifact.path],
+        )
+
+    return DefaultInfo(files = depset(java_out_files))
+
+# Copies Java source from one place in the repo to another.
+java_source_copy = rule(
+    implementation = _impl_source_copy,
+    attrs = {
+        "srcs": attr.label_list(mandatory = True, allow_files = [".java"]),
+        "excludes": attr.string_list(),
+    },
+)
 
 def j2cl_mirror_from_gwt(
         name,
@@ -20,7 +46,7 @@ def j2cl_mirror_from_gwt(
     native_srcs = native.glob(["**/*.native.js"])
     js_srcs = native.glob(["**/*.js"], exclude = native_srcs) + extra_js_srcs
 
-    j2cl_source_copy(
+    java_source_copy(
         name = name + "_copy",
         srcs = mirrored_files,
         excludes = super_srcs,

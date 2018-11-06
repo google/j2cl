@@ -8,7 +8,7 @@ j2cl_library(
     testonly = 1,
     srcs = ["J2clTestInput.java"],
     exported_plugins = [":junit_processor_plugin"],
-    visibility = ["//internal_do_not_use:__pkg__"],
+    visibility = ["//build_defs/internal_do_not_use:__pkg__"],
 )
 
 java_plugin(

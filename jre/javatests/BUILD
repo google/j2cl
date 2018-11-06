@@ -6,8 +6,7 @@ load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_binary")
 # Apache2
 licenses(["notice"])
 
-load("//build_def:j2cl_source_copy.bzl", "j2cl_source_copy")
-load("//build_def:j2cl_mirror_from_gwt.bzl", "j2cl_mirror_from_gwt")
+load("//jre/java:j2cl_mirror_from_gwt.bzl", "j2cl_mirror_from_gwt", "java_source_copy")
 
 j2cl_mirror_from_gwt(
     name = "emul_tests_lib",
@@ -32,7 +31,7 @@ j2cl_mirror_from_gwt(
     ],
 )
 
-j2cl_source_copy(
+java_source_copy(
     name = "java_emul_internal",
     srcs = ["//third_party/java_src/gwt/svn/trunk/user:java_emul_internal"],
     excludes = [

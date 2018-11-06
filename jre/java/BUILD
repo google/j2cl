@@ -5,7 +5,7 @@
 
 package(default_visibility = [
     "//:__pkg__",
-    "//internal_do_not_use:__pkg__",
+    "//build_defs/internal_do_not_use:__pkg__",
     "//jre/javatests:__pkg__",
     "//transpiler/javatests/com/google/j2cl/transpiler:__subpackages__",
 ])
@@ -13,7 +13,7 @@ package(default_visibility = [
 # Apache2
 licenses(["notice"])
 
-load("//build_def:j2cl_mirror_from_gwt.bzl", "j2cl_mirror_from_gwt")
+load(":j2cl_mirror_from_gwt.bzl", "j2cl_mirror_from_gwt")
 
 j2cl_mirror_from_gwt(
     name = "jre",

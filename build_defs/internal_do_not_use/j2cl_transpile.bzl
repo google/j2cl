@@ -42,6 +42,6 @@ J2CL_TRANSPILE_ATTRS = {
         cfg = "host",
         executable = True,
         allow_files = True,
-        default = Label("//internal_do_not_use:BazelJ2clBuilder"),
+        default = Label("//build_defs/internal_do_not_use:BazelJ2clBuilder"),
     ),
 }

@@ -13,9 +13,9 @@ gen_j2cl_tests(
 
 """
 
-load("//build_def:j2cl_test.bzl", "j2cl_test")
-load("//build_def:j2cl_library.bzl", "j2cl_library")
-load("//build_def:j2cl_util.bzl", "get_java_package")
+load(":j2cl_test.bzl", "j2cl_test")
+load(":j2cl_library.bzl", "j2cl_library")
+load(":j2cl_util.bzl", "get_java_package")
 
 def gen_j2cl_tests(
         name,

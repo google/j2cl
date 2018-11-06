@@ -1,6 +1,6 @@
 """Test macro for j2cl_rta"""
 
-load("//build_def:j2cl_rta.bzl", "j2cl_rta")
+load("//build_defs:rules.bzl", "j2cl_rta")
 
 def rta_test(
         name,

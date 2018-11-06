@@ -22,7 +22,7 @@ j2cl_library(
 
 """
 
-load("//build_def:j2cl_java_library.bzl", "j2cl_java_import")
+load(":j2cl_java_library.bzl", "j2cl_java_import")
 
 def j2cl_import(
         name,

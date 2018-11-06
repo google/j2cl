@@ -1,7 +1,7 @@
 """Common utilities for creating J2CL targets and providers."""
 
-load("//build_def:j2cl_transpile.bzl", "J2CL_TRANSPILE_ATTRS", "j2cl_transpile")
-load("//build_def:j2cl_js_common.bzl", "J2CL_JS_ATTRS", "JS_PROVIDER_NAME", "j2cl_js_provider")
+load(":j2cl_transpile.bzl", "J2CL_TRANSPILE_ATTRS", "j2cl_transpile")
+load(":j2cl_js_common.bzl", "J2CL_JS_ATTRS", "JS_PROVIDER_NAME", "j2cl_js_provider")
 
 # Constructor for the Bazel provider for J2CL.
 _J2clInfo = provider(fields = ["_J2clJavaInfo"])
@@ -110,7 +110,7 @@ _J2CL_LIB_ATTRS = {
         cfg = "host",
     ),
     "_stripper": attr.label(
-        default = Label("//internal_do_not_use:GwtIncompatibleStripper"),
+        default = Label("//build_defs/internal_do_not_use:GwtIncompatibleStripper"),
         cfg = "host",
         executable = True,
     ),

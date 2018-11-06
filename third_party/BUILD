@@ -150,7 +150,7 @@ alias(
     actual = "@org_gwtproject_gwt//user:gwt-javaemul-internal-annotations",
 )
 
-load("//build_def:j2cl_import.bzl", "j2cl_import")
+load("//build_defs:rules.bzl", "j2cl_import")
 
 j2cl_import(
     name = "gwt-javaemul-internal-annotations-j2cl",

@@ -46,6 +46,6 @@ java_binary(
         "-Dj2cl.deterministicTimestamps=true",
     ],
     main_class = "com.google.j2cl.tools.gwtincompatible.StripperWorker",
-    visibility = ["//internal_do_not_use:__pkg__"],
+    visibility = ["//build_defs/internal_do_not_use:__pkg__"],
     runtime_deps = [":gwtincompatible_worker_lib"],
 )

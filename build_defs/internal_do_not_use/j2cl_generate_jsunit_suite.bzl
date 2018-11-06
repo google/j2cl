@@ -25,8 +25,8 @@ jsunit_test(
 
 """
 
-load("//build_def:j2cl_library.bzl", "j2cl_library")
-load("//build_def:j2cl_util.bzl", "get_java_package")
+load(":j2cl_library.bzl", "j2cl_library")
+load(":j2cl_util.bzl", "get_java_package")
 
 _TEMPLATE = """
 // THIS IS GENERATED CODE. DO NOT EDIT.
@@ -84,7 +84,7 @@ def j2cl_generate_jsunit_suite(name, test_class, deps, tags = []):
         name = name + "_lib",
         srcs = [test_input],
         deps = deps + [
-            "//internal_do_not_use:internal_junit_annotations",
+            "//build_defs/internal_do_not_use:internal_junit_annotations",
             "//third_party/java/gwt:gwt-jsinterop-annotations-j2cl",
         ],
         _js_deps = ["//javascript/closure/testing:testcase"],
