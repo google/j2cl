@@ -30,13 +30,7 @@ public class NormalizeJsEnumSpecialMemberReferences extends NormalizationPass {
     normalizeJsEnumSpecialMemberReferences(compilationUnit);
   }
 
-  /**
-   * Rewrites references to the special JsEnum members.
-   *
-   * <p>{@code e.value} and {@code e.ordinal()} will both be rewritten to {@code e}, {@code
-   * e1.compareTo(e2)} gets devirtualized as if {@code e1} and {@code e2} where both of type {@link
-   * Double}.
-   */
+  /** Rewrites references to the special JsEnum members. */
   private void normalizeJsEnumSpecialMemberReferences(CompilationUnit compilationUnit) {
     compilationUnit.accept(
         new AbstractRewriter() {
