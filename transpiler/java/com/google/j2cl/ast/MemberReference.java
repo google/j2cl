@@ -23,4 +23,6 @@ public interface MemberReference {
   MemberDescriptor getTarget();
 
   Expression getQualifier();
+
+  TypeDescriptor getTypeDescriptor();
 }

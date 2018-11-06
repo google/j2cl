@@ -65,8 +65,7 @@ import com.google.j2cl.ast.visitors.NormalizeInterfaceMethods;
 import com.google.j2cl.ast.visitors.NormalizeIntersectionTypes;
 import com.google.j2cl.ast.visitors.NormalizeJsAwaitMethodInvocations;
 import com.google.j2cl.ast.visitors.NormalizeJsDocCastExpressions;
-import com.google.j2cl.ast.visitors.NormalizeJsEnumClasses;
-import com.google.j2cl.ast.visitors.NormalizeJsEnumSpecialMemberReferences;
+import com.google.j2cl.ast.visitors.NormalizeJsEnums;
 import com.google.j2cl.ast.visitors.NormalizeJsFunctionPropertyInvocations;
 import com.google.j2cl.ast.visitors.NormalizeJsOverlayMembers;
 import com.google.j2cl.ast.visitors.NormalizeJsVarargs;
@@ -161,7 +160,7 @@ class J2clTranspiler {
             // Class structure normalizations.
             new ImplementLambdaExpressions(),
             new OptimizeAnonymousInnerClassesToFunctionExpressions(),
-            new NormalizeJsEnumClasses(),
+            new NormalizeJsEnums(),
             // Default constructors and explicit super calls should be synthesized first.
             new CreateDefaultConstructors(),
             new InsertExplicitSuperCalls(),
@@ -212,7 +211,6 @@ class J2clTranspiler {
             // Java semantic conversions.
             new InsertJsEnumBoxingAndUnboxingConversions(),
             new NormalizeSwitchStatements(),
-            new NormalizeJsEnumSpecialMemberReferences(),
             new ArrayAccessNormalizer(),
             new ImplementAssertStatements(),
             new ImplementSynchronizedStatements(),

@@ -21,15 +21,17 @@ import static com.google.common.base.Preconditions.checkState;
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AstUtils;
+import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.InitializerBlock;
+import com.google.j2cl.ast.JsDocCastExpression;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.Member;
+import com.google.j2cl.ast.MemberReference;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -44,7 +46,7 @@ import java.util.stream.Collectors;
  * Normalizes JsEnum classes into a native JsEnum with overlays and a JsEnum that represents the
  * closure enum directly.
  */
-public class NormalizeJsEnumClasses extends NormalizationPass {
+public class NormalizeJsEnums extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     normalizeNonNativeJsEnums(compilationUnit);
@@ -115,8 +117,8 @@ public class NormalizeJsEnumClasses extends NormalizationPass {
 
     type.setMembers(
         type.getMembers().stream()
-            .filter(NormalizeJsEnumClasses::shouldMoveToNativeType)
-            .map(NormalizeJsEnumClasses::createJsOverlayMember)
+            .filter(NormalizeJsEnums::shouldMoveToNativeType)
+            .map(NormalizeJsEnums::createJsOverlayMember)
             .collect(Collectors.toList()));
 
     // Change to a native type.
@@ -235,7 +237,7 @@ public class NormalizeJsEnumClasses extends NormalizationPass {
     compilationUnit.accept(
         new AbstractRewriter() {
           @Override
-          public MethodCall rewriteMethodCall(MethodCall methodCall) {
+          public Expression rewriteMethodCall(MethodCall methodCall) {
             MethodDescriptor methodDescriptor = methodCall.getTarget();
 
             if (!methodDescriptor.isPolymorphic()) {
@@ -252,17 +254,27 @@ public class NormalizeJsEnumClasses extends NormalizationPass {
               return methodCall;
             }
 
+            if (methodCall.getTarget().getMethodSignature().equals("ordinal()")) {
+              return castJsEnumToValue(methodCall);
+            }
+
             return MethodCall.Builder.from(methodCall)
-                .setMethodDescriptor(
-                    fixEnumMethodDescriptor(
-                        (DeclaredTypeDescriptor) qualifierTypeDescriptor, methodDescriptor))
+                .setMethodDescriptor(fixEnumMethodDescriptor(methodDescriptor))
                 .build();
+          }
+
+          @Override
+          public Expression rewriteFieldAccess(FieldAccess fieldAccess) {
+            if (AstUtils.isJsEnumCustomValueField(fieldAccess.getTarget())) {
+              return castJsEnumToValue(fieldAccess);
+            }
+
+            return fieldAccess;
           }
         });
   }
 
-  private MethodDescriptor fixEnumMethodDescriptor(
-      DeclaredTypeDescriptor targetTypeDescriptor, MethodDescriptor methodDescriptor) {
+  private MethodDescriptor fixEnumMethodDescriptor(MethodDescriptor methodDescriptor) {
     MethodDescriptor declarationMethodDescriptor = methodDescriptor.getDeclarationDescriptor();
     String declarationMethodSignature = declarationMethodDescriptor.getMethodSignature();
 
@@ -278,12 +290,32 @@ public class NormalizeJsEnumClasses extends NormalizationPass {
           .build();
     }
 
-    // The only other method declared at Enum that is actually allowed "ordinal()".
-    checkArgument(declarationMethodSignature.equals("ordinal()"));
+    throw new AssertionError();
+  }
 
-    // Reroute other Enum methods to the actual JsEnum type.
-    return MethodDescriptor.Builder.from(declarationMethodDescriptor)
-        .setEnclosingTypeDescriptor(targetTypeDescriptor)
+  /** Rewrite references like {@code q.value} and {@code q.ordinal()} to {@code q}. */
+  private static Expression castJsEnumToValue(MemberReference memberReference) {
+    // In order to preserve type consistency, expressions like
+    //
+    //     getEnum().ordinal()  // where getEnum() returns MyJsEnum.
+    //
+    // will be rewritten as
+    //
+    //     /** @type {int} */ ((MyJsEnum) getEnum())
+    //
+    // The inner Java cast to MyJsEnum guarantees that any conversion due to getEnum() being the
+    // qualifier of ordinal() is preserved (e.g. erasure casts if getEnum() returned T and was
+    // specialized to MyJsEnum in the calling context).
+    // The outer JsDoc cast guarantees that the expression is treated as of being the type of value
+    // and conversions such as boxing are correctly preserved (e.g. if the expression was assigned
+    // to an Integer variable).
+    return JsDocCastExpression.newBuilder()
+        .setCastType(memberReference.getTypeDescriptor())
+        .setExpression(
+            CastExpression.newBuilder()
+                .setCastTypeDescriptor(memberReference.getQualifier().getTypeDescriptor())
+                .setExpression(memberReference.getQualifier())
+                .build())
         .build();
   }
 }
