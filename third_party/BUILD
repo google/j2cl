@@ -103,12 +103,9 @@ java_library(
     exports = ["@com_google_testing_compile//jar"],
 )
 
-java_library(
-    name = "protobuf_json",
-    exports = [
-        "@com_google_protobuf//:protobuf_java",
-        "@com_google_protobuf//:protobuf_java_util",
-    ],
+alias(
+    name = "protobuf_util_json",
+    actual = "@com_google_protobuf//:protobuf_java_util",
 )
 
 alias(

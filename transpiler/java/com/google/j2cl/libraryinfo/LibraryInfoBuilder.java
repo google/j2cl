@@ -35,8 +35,8 @@ import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.common.SourcePosition;
-import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.util.JsonFormat;
+import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -49,7 +49,7 @@ public final class LibraryInfoBuilder {
   public static String serialize(LibraryInfo.Builder libraryInfo) {
     try {
       return JsonFormat.printer().print(libraryInfo);
-    } catch (InvalidProtocolBufferException e) {
+    } catch (IOException e) {
       throw new RuntimeException("Unable to write library info", e);
     }
   }
