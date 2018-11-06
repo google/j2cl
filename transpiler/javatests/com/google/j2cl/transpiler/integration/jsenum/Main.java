@@ -646,6 +646,8 @@ public class Main {
     assertSameType(Double.class, unboxed);
     // Boxing through specialized method parameter assignment.
     assertSameType(PlainJsEnum.class, boxingIdentity(unboxed));
+    // Unboxing as a qualifier to ordinal.
+    assertSameType(Double.class, templatedField.getValue().ordinal());
 
     // Boxing through specialized method parameter assignment.
     assertSameType(PlainJsEnum.class, boxingIdentity(templatedField.getValue()));
@@ -660,6 +662,8 @@ public class Main {
     assertSameType(PlainJsEnum.class, boxingIdentity(templatedField.value));
     // Checks what is actually stored in value.
     assertSameType(PlainJsEnum.class, ((TemplatedField) templatedField).value);
+    // Unboxing as a qualifier to ordinal.
+    assertSameType(Double.class, templatedField.value.ordinal());
 
     // Boxing/unboxing in varargs.
     assertSameType(Double.class, Arrays.asList(PlainJsEnum.ONE).get(0));

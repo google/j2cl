@@ -22,6 +22,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldAccess;
@@ -36,6 +37,7 @@ import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptor;
+import com.google.j2cl.ast.TypeDescriptors;
 import java.util.stream.Collectors;
 
 /**
@@ -47,6 +49,7 @@ public class NormalizeJsEnumClasses extends NormalizationPass {
   public void applyTo(CompilationUnit compilationUnit) {
     normalizeNonNativeJsEnums(compilationUnit);
     normalizeJsEnumMemberReferencesToJsOverlay(compilationUnit);
+    fixEnumMethodCalls(compilationUnit);
   }
 
   /**
@@ -218,6 +221,69 @@ public class NormalizeJsEnumClasses extends NormalizationPass {
   private static MethodDescriptor toJsOverlay(MethodDescriptor methodDescriptor) {
     return MethodDescriptor.Builder.from(methodDescriptor)
         .setJsInfo(JsInfo.Builder.from(methodDescriptor.getJsInfo()).setJsOverlay(true).build())
+        .build();
+  }
+
+  /**
+   * Rewrite method calls to Enum methods on JsEnum instances to preserve the AST consistent.
+   *
+   * <p>Many passes rely on the enclosing type of the method to make decisions such as
+   * devirtualizing, conversion, etc. But since JsEnums do not really extend Enum this prevents
+   * those passes from taking decisions based on incorrect information.
+   */
+  private void fixEnumMethodCalls(CompilationUnit compilationUnit) {
+    compilationUnit.accept(
+        new AbstractRewriter() {
+          @Override
+          public MethodCall rewriteMethodCall(MethodCall methodCall) {
+            MethodDescriptor methodDescriptor = methodCall.getTarget();
+
+            if (!methodDescriptor.isPolymorphic()) {
+              // Only rewrite polymorphic methods.
+              return methodCall;
+            }
+            if (!TypeDescriptors.isJavaLangEnum(methodDescriptor.getEnclosingTypeDescriptor())) {
+              // Not a java.lang.Enum method, nothing to do.
+              return methodCall;
+            }
+            TypeDescriptor qualifierTypeDescriptor = methodCall.getQualifier().getTypeDescriptor();
+            if (!qualifierTypeDescriptor.isJsEnum()) {
+              // Not a JsEnum receiver, nothing to do.
+              return methodCall;
+            }
+
+            return MethodCall.Builder.from(methodCall)
+                .setMethodDescriptor(
+                    fixEnumMethodDescriptor(
+                        (DeclaredTypeDescriptor) qualifierTypeDescriptor, methodDescriptor))
+                .build();
+          }
+        });
+  }
+
+  private MethodDescriptor fixEnumMethodDescriptor(
+      DeclaredTypeDescriptor targetTypeDescriptor, MethodDescriptor methodDescriptor) {
+    MethodDescriptor declarationMethodDescriptor = methodDescriptor.getDeclarationDescriptor();
+    String declarationMethodSignature = declarationMethodDescriptor.getMethodSignature();
+
+    // Reroute overridden methods to the super method they override.
+    if (declarationMethodSignature.equals("compareTo(java.lang.Enum)")) {
+      return TypeDescriptors.get()
+          .javaLangComparable
+          .getMethodDescriptorByName("compareTo", TypeDescriptors.get().javaLangObject);
+    }
+    if (declarationMethodDescriptor.isOrOverridesJavaLangObjectMethod()) {
+      return MethodDescriptor.Builder.from(declarationMethodDescriptor)
+          .setEnclosingTypeDescriptor(TypeDescriptors.get().javaLangObject)
+          .build();
+    }
+
+    // The only other method declared at Enum that is actually allowed "ordinal()".
+    checkArgument(declarationMethodSignature.equals("ordinal()"));
+
+    // Reroute other Enum methods to the actual JsEnum type.
+    return MethodDescriptor.Builder.from(declarationMethodDescriptor)
+        .setEnclosingTypeDescriptor(targetTypeDescriptor)
         .build();
   }
 }

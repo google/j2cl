@@ -138,6 +138,7 @@ public class Main {
     unboxed = templatedField.value;
     templatedField.value = ComparableJsEnum.ONE;
     Arrays.asList(ComparableJsEnum.ONE);
+    templatedField.getValue().ordinal();
   }
 
   private static class TemplatedField<T> {

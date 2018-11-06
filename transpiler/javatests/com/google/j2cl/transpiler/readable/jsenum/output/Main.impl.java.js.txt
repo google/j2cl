@@ -21,12 +21,12 @@ let StringJsEnum = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsen
 let StringJsEnum_$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsenum.Main.StringJsEnum.$Overlay$impl');
 let TemplatedField = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsenum.Main.TemplatedField$impl');
 let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
-let Double = goog.forwardDeclare('java.lang.Double$impl');
 let Arrays = goog.forwardDeclare('java.util.Arrays$impl');
 let List = goog.forwardDeclare('java.util.List$impl');
 let $InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $Comparables = goog.forwardDeclare('vmbootstrap.Comparables$impl');
 let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
@@ -111,12 +111,12 @@ class Main extends j_l_Object {
         break;
       default:
     }
-    Double.m_compareTo__java_lang_Double__java_lang_Double(
+    $Comparables.m_compareTo__java_lang_Comparable__java_lang_Object(
         NativeStringEnum.ONE, NativeStringEnum.THREE);
     $Objects.m_equals__java_lang_Object__java_lang_Object(
         NativeStringEnum.ONE, NativeStringEnum.THREE);
-    Double.m_compareTo__java_lang_Double__java_lang_Double(
-        ComparableJsEnum.ONE,
+    $Comparables.m_compareTo__java_lang_Comparable__java_lang_Object(
+        $Enums.boxComparable(ComparableJsEnum.ONE, $Overlay),
         $Enums.boxComparable(ComparableJsEnum.ZERO, $Overlay));
     $Objects.m_equals__java_lang_Object__java_lang_Object(
         $Enums.boxComparable(ComparableJsEnum.ONE, $Overlay),
@@ -145,6 +145,10 @@ class Main extends j_l_Object {
         $Enums.boxComparable(ComparableJsEnum.ONE, $Overlay);
     /**@type {List<*>} */ (Arrays.m_asList__arrayOf_java_lang_Object(
         [$Enums.boxComparable(ComparableJsEnum.ONE, $Overlay)]));
+    /**@type {?ComparableJsEnum} */ ($Enums.unbox($Casts.$to(
+        templatedField
+            .m_getValue___$pp_com_google_j2cl_transpiler_readable_jsenum(),
+        $Overlay)));
   }
 
   /**
@@ -196,12 +200,12 @@ class Main extends j_l_Object {
     TemplatedField = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsenum.Main.TemplatedField$impl');
     Comparable = goog.module.get('java.lang.Comparable$impl');
-    Double = goog.module.get('java.lang.Double$impl');
     Arrays = goog.module.get('java.util.Arrays$impl');
     $InternalPreconditions =
         goog.module.get('javaemul.internal.InternalPreconditions$impl');
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
+    $Comparables = goog.module.get('vmbootstrap.Comparables$impl');
     $Enums = goog.module.get('vmbootstrap.Enums$impl');
     $Objects = goog.module.get('vmbootstrap.Objects$impl');
   }

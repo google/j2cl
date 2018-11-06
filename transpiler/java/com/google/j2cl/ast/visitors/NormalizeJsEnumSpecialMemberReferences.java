@@ -18,12 +18,10 @@ package com.google.j2cl.ast.visitors;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Node;
-import com.google.j2cl.ast.TypeDescriptors;
 
 /** Normalizes references to JsEnum special members like {@code ordinal()}, {@code value}, etc. */
 public class NormalizeJsEnumSpecialMemberReferences extends NormalizationPass {
@@ -68,23 +66,9 @@ public class NormalizeJsEnumSpecialMemberReferences extends NormalizationPass {
               // Expression q.ordinal() gets rewritten to just q.
               return methodCall.getQualifier();
             }
-            if (methodSignature.equals("compareTo(java.lang.Enum)")) {
-              // The only comparable JsEnum types have Closure number as their underlying type.
-              // Hence, devirtualize to the Double.compareTo(Double) implementation which handles
-              // JavaScript numbers.
-              return AstUtils.devirtualizeMethodCall(
-                  convertToDoubleCompareCall(methodCall), TypeDescriptors.get().javaLangDouble);
-            }
 
             return methodCall;
           }
         });
-  }
-
-  private static MethodCall convertToDoubleCompareCall(MethodCall methodCall) {
-    DeclaredTypeDescriptor javaLangDouble = TypeDescriptors.get().javaLangDouble;
-    return MethodCall.Builder.from(methodCall)
-        .setMethodDescriptor(javaLangDouble.getMethodDescriptorByName("compareTo", javaLangDouble))
-        .build();
   }
 }
