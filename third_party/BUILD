@@ -6,9 +6,9 @@ package(default_visibility = ["//:__subpackages__"])
 # Apache2
 licenses(["notice"])
 
-java_library(
+alias(
     name = "guava",
-    exports = ["@com_google_guava"],
+    actual = "@com_google_guava",
 )
 
 java_library(
@@ -17,19 +17,19 @@ java_library(
     runtime_deps = ["@org_apache_commons_lang3//jar"],
 )
 
-java_library(
+alias(
     name = "jsr305_annotations",
-    exports = ["@com_google_code_findbugs_jsr305"],
+    actual = "@com_google_code_findbugs_jsr305",
 )
 
-java_library(
+alias(
     name = "jscomp",
-    exports = ["@io_bazel_rules_closure//closure/compiler"],
+    actual = "@io_bazel_rules_closure//closure/compiler",
 )
 
-java_library(
+alias(
     name = "args4j",
-    exports = ["@args4j"],
+    actual = "@args4j",
 )
 
 java_library(
@@ -48,24 +48,24 @@ java_library(
     ],
 )
 
-java_library(
+alias(
     name = "auto_value",
-    exports = ["@com_google_auto_value"],
+    actual = "@com_google_auto_value",
 )
 
-java_library(
+alias(
     name = "auto_service",
-    exports = ["@com_google_auto_service//jar"],
+    actual = "@com_google_auto_service//jar",
 )
 
-java_library(
+alias(
     name = "auto_common",
-    exports = ["@com_google_auto_common//jar"],
+    actual = "@com_google_auto_common//jar",
 )
 
-java_library(
+alias(
     name = "gson",
-    exports = ["@com_google_code_gson"],
+    actual = "@com_google_code_gson",
 )
 
 java_library(
@@ -154,9 +154,9 @@ j2cl_import(
     jar = "@org_gwtproject_gwt//user:gwt-javaemul-internal-annotations",
 )
 
-java_library(
+alias(
     name = "gwt-jsinterop-annotations",
-    exports = ["@com_google_jsinterop_annotations//jar"],
+    actual = "@com_google_jsinterop_annotations//jar",
 )
 
 j2cl_import(

@@ -10,22 +10,21 @@ licenses(["notice"])
 
 exports_files(["LICENSE"])
 
-load("//build_defs:rules.bzl", "j2cl_library")
-
-# JRE emulation - for js_library targets
+# JRE emulation
+# This is not an alias since it is intended only for js targets not j2cl targets
 closure_js_library(
     name = "jre",
     exports = ["//jre/java:jre"],
 )
 
 # JUnit library emulation
-j2cl_library(
+alias(
     name = "junit",
-    exports = ["//junit/emul/java:junit_emul"],
+    actual = "//junit/emul/java:junit_emul",
 )
 
 # Optional minifier library for development servers
-java_library(
+alias(
     name = "minifier",
-    exports = ["//tools/java/com/google/j2cl/tools/minifier"],
+    actual = "//tools/java/com/google/j2cl/tools/minifier",
 )
