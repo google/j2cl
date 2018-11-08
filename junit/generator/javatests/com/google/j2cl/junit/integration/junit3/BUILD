@@ -1,5 +1,4 @@
-# Apache2
-licenses(["notice"])
+licenses(["notice"])  # Apache 2.0
 
 load(
     "//junit/generator/javatests/com/google/j2cl/junit/integration:j2cl_junit_integration_test.bzl",

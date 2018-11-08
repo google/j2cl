@@ -6,8 +6,7 @@
 # Other integration tests will want to run transpiled output as JS and
 # should make use of j2cl_library macro.
 
-# Apache2
-licenses(["notice"])
+licenses(["notice"])  # Apache 2.0
 
 java_library(
     name = "jre",

@@ -1,5 +1,4 @@
-# Apache2
-licenses(["notice"])
+licenses(["notice"])  # Apache 2.0
 
 package(default_visibility = ["//tools/javatests/com/google/j2cl/tools/rta:__subpackages__"])
 

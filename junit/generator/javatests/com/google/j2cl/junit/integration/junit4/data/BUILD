@@ -1,7 +1,6 @@
 package(default_visibility = ["//junit/generator/javatests/com/google/j2cl/junit/integration/junit4:__pkg__"])
 
-# Apache2
-licenses(["notice"])
+licenses(["notice"])  # Apache 2.0
 
 load(
     "//junit/generator/javatests/com/google/j2cl/junit/integration:j2cl_junit_integration_test.bzl",

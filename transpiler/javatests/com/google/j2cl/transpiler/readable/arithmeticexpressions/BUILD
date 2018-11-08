@@ -1,7 +1,6 @@
 package(default_visibility = ["//:__subpackages__"])
 
-# Apache2
-licenses(["notice"])
+licenses(["notice"])  # Apache 2.0
 
 load(
     "//:transpiler/javatests/com/google/j2cl/transpiler/readable/readable_example.bzl",

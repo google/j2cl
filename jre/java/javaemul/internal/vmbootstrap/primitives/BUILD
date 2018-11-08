@@ -5,8 +5,7 @@
 
 package(default_visibility = ["//jre/java:__pkg__"])
 
-# Apache2
-licenses(["notice"])
+licenses(["notice"])  # Apache 2.0
 
 load(":generate_primitive.bzl", "generate_primitive_type")
 

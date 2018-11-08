@@ -1,8 +1,7 @@
 # Description:
 #   Test for J2cl worker integration
 
-# Apache2
-licenses(["notice"])
+licenses(["notice"])  # Apache 2.0
 
 java_binary(
     name = "RerunningJ2clTranspiler",

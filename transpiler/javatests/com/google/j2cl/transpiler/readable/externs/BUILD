@@ -1,7 +1,6 @@
 load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_library")
 
-# Apache2
-licenses(["notice"])
+licenses(["notice"])  # Apache 2.0
 
 load(
     "//:transpiler/javatests/com/google/j2cl/transpiler/readable/readable_example.bzl",

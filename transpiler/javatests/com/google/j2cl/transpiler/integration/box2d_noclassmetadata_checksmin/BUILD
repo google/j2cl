@@ -1,7 +1,6 @@
 package(default_visibility = ["//transpiler/javatests/com/google/j2cl/transpiler/sizetest:__pkg__"])
 
-# Apache2
-licenses(["notice"])
+licenses(["notice"])  # Apache 2.0
 
 load(
     "//transpiler/javatests/com/google/j2cl/transpiler/integration:integration_test.bzl",

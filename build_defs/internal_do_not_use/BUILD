@@ -1,8 +1,7 @@
 # Description:
 #   Build rules used by J2CL and BUILD targets used by the rules.
 
-# Apache2
-licenses(["notice"])
+licenses(["notice"])  # Apache 2.0
 
 ##########################################################
 #                                                        #

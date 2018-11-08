@@ -1,8 +1,7 @@
 # Description:
 #  Tests for a minifier library for J2CL mangled names.
 
-# Apache2
-licenses(["notice"])
+licenses(["notice"])  # Apache 2.0
 
 java_test(
     name = "J2clMinifierTest",

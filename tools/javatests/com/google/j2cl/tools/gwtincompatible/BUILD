@@ -1,5 +1,4 @@
-# Apache2
-licenses(["notice"])
+licenses(["notice"])  # Apache 2.0
 
 java_test(
     name = "JavaPreprocessorTest",

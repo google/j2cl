@@ -3,8 +3,7 @@
 #   annotations on source code elements and comments them out so that they do not get parsed by
 #   J2CL.
 
-# Apache2
-licenses(["notice"])
+licenses(["notice"])  # Apache 2.0
 
 java_library(
     name = "gwtincompatible_lib",

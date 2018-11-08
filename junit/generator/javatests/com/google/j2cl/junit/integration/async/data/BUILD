@@ -5,8 +5,7 @@ package(default_visibility = [
 
 # Tests in this directory are not tests that are meant to be run directly.
 # They serve as integration tests for J2clTestRunner.
-# Apache2
-licenses(["notice"])
+licenses(["notice"])  # Apache 2.0
 
 load(
     "//junit/generator/javatests/com/google/j2cl/junit/integration:j2cl_junit_integration_test.bzl",

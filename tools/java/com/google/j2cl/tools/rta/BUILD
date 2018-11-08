@@ -1,8 +1,7 @@
 # Description:
 #  Implementation of RTA algorithm used to do fast method pruning.
 
-# Apache2
-licenses(["notice"])
+licenses(["notice"])  # Apache 2.0
 
 proto_library(
     name = "code_removal_info_proto",

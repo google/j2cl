@@ -1,8 +1,7 @@
 # Description:
 #   j2cl tests verifying important optimizations
 
-# Apache2
-licenses(["notice"])
+licenses(["notice"])  # Apache 2.0
 
 load("//build_defs:rules.bzl", "j2cl_library")
 load(":j2cl_optimization_test.bzl", "j2cl_optimization_test")
