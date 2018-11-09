@@ -23,23 +23,17 @@ import java.nio.file.FileSystem;
 import java.util.List;
 
 /**
- * This tool comments out source code elements annotated with @GwtIncompatible so that they are
- * ignored by tools taking that source as input such as the _java_library compile and the
- * j2cl_transpile action.
+ * A helper to comment out source code elements annotated with @GwtIncompatible so that they are
+ * ignored by tools taking that source as input such as the java compile or the j2cl transpile.
  */
-public class Stripper {
+public class GwtIncompatibleStripper {
 
-  public static void main(String... args) {
-    System.exit(Stripper.strip(args).reportAndGetExitCode(System.err));
-  }
-
-  static Problems strip(String[] args) {
+  static Problems strip(List<String> files, String outputPath) {
     try {
       Problems problems = new Problems();
-      StripperFlags flags = StripperFlags.parse(args, problems);
-      FileSystem outputZipFileSystem = FrontendUtils.initZipOutput(flags.outputPath, problems);
+      FileSystem outputZipFileSystem = FrontendUtils.initZipOutput(outputPath, problems);
       List<FileInfo> allPaths =
-          FrontendUtils.getAllSources(flags.files, problems)
+          FrontendUtils.getAllSources(files, problems)
               .filter(f -> f.targetPath().endsWith(".java"))
               .collect(ImmutableList.toImmutableList());
       JavaPreprocessor.preprocessFiles(allPaths, outputZipFileSystem.getPath("/"), problems);

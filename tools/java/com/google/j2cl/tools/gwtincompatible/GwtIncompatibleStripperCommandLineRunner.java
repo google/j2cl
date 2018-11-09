@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 Google Inc.
+ * Copyright 2018 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
@@ -11,20 +11,17 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-
 package com.google.j2cl.tools.gwtincompatible;
 
+import com.google.j2cl.common.CommandLineTool;
 import com.google.j2cl.common.Problems;
 import java.util.ArrayList;
 import java.util.List;
 import org.kohsuke.args4j.Argument;
-import org.kohsuke.args4j.CmdLineException;
-import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.Option;
-import org.kohsuke.args4j.OptionHandlerFilter;
 
-/** Flags for the @GwtIncompatible Stripping tool. */
-public class StripperFlags {
+/** A javac-like command line driver for @GwtIncompatible stripper. */
+final class GwtIncompatibleStripperCommandLineRunner extends CommandLineTool {
   @Argument(metaVar = "<source files .java|.srcjar>", usage = "source files")
   protected List<String> files = new ArrayList<>();
 
@@ -35,19 +32,16 @@ public class StripperFlags {
       usage = "The location into which to place output srcjar.")
   protected String outputPath;
 
-  protected static StripperFlags parse(String[] args, Problems problems) {
-    StripperFlags flags = new StripperFlags();
-    CmdLineParser parser = new CmdLineParser(flags);
+  private GwtIncompatibleStripperCommandLineRunner() {
+    super("gwt-incompatible-stripper");
+  }
 
-    try {
-      parser.parseArgument(args);
-    } catch (CmdLineException e) {
-      String message = e.getMessage() + "\n";
-      message += "Valid options: \n" + parser.printExample(OptionHandlerFilter.ALL);
-      message += "\nuse -help for a list of possible options in more details";
-      problems.error(message);
-      problems.abort();
-    }
-    return flags;
+  @Override
+  protected Problems run() {
+    return GwtIncompatibleStripper.strip(files, outputPath);
+  }
+
+  public static void main(String[] args) {
+    new GwtIncompatibleStripperCommandLineRunner().execute(args);
   }
 }

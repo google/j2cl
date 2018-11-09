@@ -9,7 +9,7 @@ java_library(
     name = "gwtincompatible_lib",
     srcs = glob(
         ["*.java"],
-        exclude = ["StripperWorker.java"],
+        exclude = ["BazelGwtIncompatibleStripper.java"],
     ),
     visibility = ["//tools/javatests/com/google/j2cl/tools/gwtincompatible:__pkg__"],
     deps = [
@@ -26,16 +26,18 @@ java_binary(
     jvm_flags = [
         "-Dj2cl.deterministicTimestamps=true",
     ],
-    main_class = "com.google.j2cl.tools.gwtincompatible.Stripper",
+    main_class = "com.google.j2cl.tools.gwtincompatible.GwtIncompatibleStripperCommandLineRunner",
     runtime_deps = [":gwtincompatible_lib"],
 )
 
 java_library(
     name = "gwtincompatible_worker_lib",
-    srcs = ["StripperWorker.java"],
+    srcs = ["BazelGwtIncompatibleStripper.java"],
     deps = [
         ":gwtincompatible_lib",
+        "//third_party:args4j",
         "//transpiler/java/com/google/j2cl/bazel",
+        "//transpiler/java/com/google/j2cl/common",
     ],
 )
 
@@ -44,7 +46,7 @@ java_binary(
     jvm_flags = [
         "-Dj2cl.deterministicTimestamps=true",
     ],
-    main_class = "com.google.j2cl.tools.gwtincompatible.StripperWorker",
+    main_class = "com.google.j2cl.tools.gwtincompatible.BazelGwtIncompatibleStripper",
     visibility = ["//build_defs/internal_do_not_use:__pkg__"],
     runtime_deps = [":gwtincompatible_worker_lib"],
 )
