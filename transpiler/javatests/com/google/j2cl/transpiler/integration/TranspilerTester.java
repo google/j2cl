@@ -271,7 +271,8 @@ public class TranspilerTester {
   private static Problems transpile(Iterable<String> args) throws Exception {
     // J2clCommandLineRunner.run is hidden since we don't want it to be used as an entry point. As a
     // result we use reflection here to invoke it.
-    Method transpileMethod = J2clCommandLineRunner.class.getDeclaredMethod("run", String[].class);
+    Method transpileMethod =
+        J2clCommandLineRunner.class.getDeclaredMethod("runForTest", String[].class);
     transpileMethod.setAccessible(true);
     return (Problems) transpileMethod.invoke(null, (Object) Iterables.toArray(args, String.class));
   }
