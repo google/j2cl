@@ -20,6 +20,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.io.Files;
 import com.google.devtools.build.lib.worker.WorkerProtocol.WorkRequest;
 import com.google.devtools.build.lib.worker.WorkerProtocol.WorkResponse;
+import com.google.j2cl.common.Problems;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -28,6 +29,9 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Supplier;
+import org.kohsuke.args4j.CmdLineException;
+import org.kohsuke.args4j.CmdLineParser;
 
 /**
  * A base class for running processes as blaze workers. Used for both the transpiler
@@ -35,42 +39,52 @@ import java.util.List;
  *
  * <p>Partially adapted from {@code com.google.devtools.build.buildjar.BazelJavaBuilder}.
  */
-public final class BazelWorker {
+public abstract class BazelWorker {
 
-  /** A handler that could process requests designated by Bazel. */
-  public interface WorkHandler {
-    /**
-     * Process the request described by the arguments. Note that you must output errors and warnings
-     * to the provided outputStream to avoid interrupting the worker protocol which occurs over
-     * stdout.
-     */
-    int processRequest(String[] args, PrintWriter outputStream);
-  }
+  protected abstract Problems run();
 
-  public static final void start(String[] args, WorkHandler handler) {
+  /**
+   * Process the request described by the arguments. Note that you must output errors and warnings
+   * via {@link Problems} to avoid interrupting the worker protocol which occurs over stdout.
+   */
+  private Problems processRequest(String[] args) {
+    CmdLineParser parser = new CmdLineParser(this);
+    Problems problems = new Problems();
+
     try {
-      int exitCode = execute(args, handler);
-      System.exit(exitCode);
-    } catch (Exception e) {
-      e.printStackTrace();
-      System.exit(1);
+      parser.parseArgument(args);
+    } catch (CmdLineException e) {
+      problems.error(e.getMessage());
+      return problems;
+    }
+
+    try {
+      return run();
+    } catch (Problems.Exit e) {
+      return e.getProblems();
     }
   }
 
-  private static final int execute(String[] args, WorkHandler handler) throws IOException {
+  public static final void start(String[] args, Supplier<BazelWorker> workerSupplier)
+      throws Exception {
     if (args.length == 1 && args[0].equals("--persistent_worker")) {
-      runPersistentWorker(handler);
-      return 0;
+      runPersistentWorker(workerSupplier);
     } else {
-      // This is a single invocation of builder that exits after it processed the request.
-      PrintWriter err = new PrintWriter(System.err);
-      int exitCode = handler.processRequest(expandFlagFile(args), err);
-      err.flush();
-      return exitCode;
+      runStandaloneWorker(workerSupplier, args);
     }
   }
 
-  private static void runPersistentWorker(WorkHandler handler) throws IOException {
+  private static void runStandaloneWorker(Supplier<BazelWorker> workerSupplier, String[] args)
+      throws IOException {
+    // This is a single invocation of builder that exits after it processed the request.
+    try (PrintWriter err = new PrintWriter(System.err)) {
+      int exitCode = execute(workerSupplier, expandFlagFile(args), err);
+      err.flush();
+      System.exit(exitCode);
+    }
+  }
+
+  private static void runPersistentWorker(Supplier<BazelWorker> workerSupplier) throws IOException {
     while (true) {
       WorkRequest request = WorkRequest.parseDelimitedFrom(System.in);
 
@@ -81,7 +95,7 @@ public final class BazelWorker {
       try (StringWriter sw = new StringWriter();
           PrintWriter pw = new PrintWriter(sw)) {
         String[] args = request.getArgumentsList().toArray(new String[0]);
-        int exitCode = handler.processRequest(args, pw);
+        int exitCode = execute(workerSupplier, args, pw);
         WorkResponse.newBuilder()
             .setOutput(sw.toString())
             .setExitCode(exitCode)
@@ -95,6 +109,11 @@ public final class BazelWorker {
         System.gc();
       }
     }
+  }
+
+  private static final int execute(
+      Supplier<BazelWorker> workerSupplier, String[] args, PrintWriter err) {
+    return workerSupplier.get().processRequest(args).reportAndGetExitCode(err);
   }
 
   /**

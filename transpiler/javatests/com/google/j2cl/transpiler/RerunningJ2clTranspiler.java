@@ -14,7 +14,6 @@
 package com.google.j2cl.transpiler;
 
 import com.google.auto.value.AutoValue;
-import com.google.common.collect.Iterators;
 import com.google.common.collect.Sets;
 import com.google.common.collect.Sets.SetView;
 import com.google.common.hash.HashCode;
@@ -22,15 +21,14 @@ import com.google.common.hash.Hashing;
 import com.google.common.io.ByteStreams;
 import com.google.common.io.Files;
 import com.google.j2cl.bazel.BazelWorker;
+import com.google.j2cl.common.Problems;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -40,39 +38,35 @@ import java.util.zip.ZipFile;
  * <p>This is used in testing to run the transpiler twice and possibly uncover static state within
  * the transpiler.
  */
-public class RerunningJ2clTranspiler {
+public class RerunningJ2clTranspiler extends BazelJ2clBuilder {
 
   public static void main(final String[] workerArgs) throws Exception {
-    BazelWorker.start(workerArgs, RerunningJ2clTranspiler::process);
+    BazelWorker.start(workerArgs, RerunningJ2clTranspiler::new);
   }
 
-  private static int process(String[] args, PrintWriter output) {
+  @Override
+  protected Problems run() {
     try {
-      return processImpl(args, output);
+      runImpl();
+      return new Problems();
     } catch (IOException e) {
-      e.printStackTrace();
-      System.exit(-10);
-      return -1;
+      throw new RuntimeException(e);
     }
   }
 
-  private static int processImpl(String[] args, PrintWriter output) throws IOException {
-    File outputZip =
-        Iterators.getOnlyElement(
-            Stream.of(args).filter(arg -> arg.endsWith(".js.zip")).map(File::new).iterator());
+  private void runImpl() throws IOException {
+    File outputZip = new File(output);
 
-    int rv = BazelJ2clBuilder.run(args).reportAndGetExitCode(output);
+    int rv = super.run().reportAndGetExitCode(System.err);
     if (rv != 0) {
-      output.flush();
       System.err.println("First compile failed");
       System.exit(-1);
     }
     Set<OutFile> firstCompileOut = getOutFilesFromZip(outputZip);
     byte[] firstOutputData = Files.toByteArray(outputZip);
 
-    rv = BazelJ2clBuilder.run(args).reportAndGetExitCode(output);
+    rv = super.run().reportAndGetExitCode(System.err);
     if (rv != 0) {
-      output.flush();
       System.err.println("Second compile failed");
       System.exit(-1);
     }
@@ -92,8 +86,6 @@ public class RerunningJ2clTranspiler {
       System.err.println("Output is not identical");
       System.exit(-3);
     }
-
-    return 0;
   }
 
   @AutoValue

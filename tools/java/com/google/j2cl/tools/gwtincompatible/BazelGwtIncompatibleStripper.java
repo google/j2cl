@@ -20,13 +20,10 @@ import com.google.j2cl.common.Problems;
 import java.util.ArrayList;
 import java.util.List;
 import org.kohsuke.args4j.Argument;
-import org.kohsuke.args4j.CmdLineException;
-import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.Option;
-import org.kohsuke.args4j.OptionHandlerFilter;
 
 /** Runs The @GwtIncompatible stripper as a worker. */
-public class BazelGwtIncompatibleStripper {
+public class BazelGwtIncompatibleStripper extends BazelWorker {
   @Argument(metaVar = "<source files .java|.srcjar>", usage = "source files")
   protected List<String> files = new ArrayList<>();
 
@@ -37,26 +34,12 @@ public class BazelGwtIncompatibleStripper {
       usage = "The location into which to place output srcjar.")
   protected String outputPath;
 
-  protected Problems run(String[] args) {
-    Problems problems = new Problems();
-    CmdLineParser parser = new CmdLineParser(this);
-
-    try {
-      parser.parseArgument(args);
-    } catch (CmdLineException e) {
-      String message = e.getMessage() + "\n";
-      message += "Valid options: \n" + parser.printExample(OptionHandlerFilter.ALL);
-      message += "\nuse -help for a list of possible options in more details";
-      problems.error(message);
-      return problems;
-    }
+  @Override
+  protected Problems run() {
     return GwtIncompatibleStripper.strip(files, outputPath);
   }
 
-  public static void main(String[] workerArgs) {
-    BazelWorker.start(
-        workerArgs,
-        (args, output) ->
-            new BazelGwtIncompatibleStripper().run(args).reportAndGetExitCode(output));
+  public static void main(String[] workerArgs) throws Exception {
+    BazelWorker.start(workerArgs, BazelGwtIncompatibleStripper::new);
   }
 }
