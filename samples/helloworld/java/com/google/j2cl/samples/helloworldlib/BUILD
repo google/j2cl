@@ -16,6 +16,6 @@ j2cl_library(
         "*.js",
     ]),
     deps = [
-        "//third_party:gwt-jsinterop-annotations-j2cl",
+        "//:jsinterop-annotations",
     ],
 )

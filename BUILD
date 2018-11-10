@@ -16,6 +16,12 @@ closure_js_library(
     exports = ["//jre/java:jre"],
 )
 
+# Note that this is temporarily available until jsinterop-annotations get its own repo
+alias(
+    name = "jsinterop-annotations",
+    actual = "//third_party:gwt-jsinterop-annotations-j2cl",
+)
+
 # JUnit library emulation
 alias(
     name = "junit",
