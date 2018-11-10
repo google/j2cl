@@ -40,7 +40,6 @@ def j2cl_mirror_from_gwt(
         extra_srcs = [],
         extra_js_srcs = [],
         deps = [],
-        js_deps = [],
         **kwargs):
     super_srcs = native.glob(["**/*.java"]) + extra_srcs
     native_srcs = native.glob(["**/*.native.js"])
@@ -68,6 +67,5 @@ def j2cl_mirror_from_gwt(
         native_srcs = [":" + name + "_native_files"],
         deps = deps,
         _js_srcs = js_srcs,
-        _js_deps = js_deps,
         **kwargs
     )

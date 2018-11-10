@@ -122,15 +122,6 @@ alias(
     actual = "@io_bazel_rules_closure//closure/library/math:long",
 )
 
-load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_library")
-
-# closure_js_library implicitly includes closure base by default but we still
-# need a target since there is existing deps.
-closure_js_library(
-    name = "closure_base",
-    srcs = ["@io_bazel_rules_closure//closure/library:base"],
-)
-
 alias(
     name = "gwt_java_emul",
     actual = "@org_gwtproject_gwt//user:java_emul",

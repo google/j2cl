@@ -7,10 +7,7 @@ load("//build_defs:rules.bzl", "J2CL_OPTIMIZED_DEFS")
 closure_js_library(
     name = "app",
     srcs = ["app.js"],
-    deps = [
-        "//samples/helloworld/java/com/google/j2cl/samples/helloworldlib",
-        "//third_party:closure_base",
-    ],
+    deps = ["//samples/helloworld/java/com/google/j2cl/samples/helloworldlib"],
 )
 
 # This is the bazel target that compiles and optimizes whole JavaScript / J2CL app.
