@@ -18,15 +18,24 @@ Getting Started
 You can build J2CL and samples from source by following the steps below:
 
 - Install [Bazel](https://bazel.build/versions/master/docs/install.html).
-- Clone this repository with git: `git clone https://github.com/google/j2cl.git`
+- Clone this repository:
+
+```shell
+      $ git clone https://github.com/google/j2cl.git
+```
+
 - Build a sample app:
 
+```shell
       $ bazel build samples/helloworld/java/com/google/j2cl/samples/helloworld:helloworld
+```
 
 - Look at the optimized sample app:
 
+```shell
       $ cat bazel-bin/samples/helloworld/java/com/google/j2cl/samples/helloworld/helloworld.js
       document.write('Hello from Java! and JS!');
+```
 
 
 Contributing
