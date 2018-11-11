@@ -152,23 +152,23 @@ production.
 
 <!-- mdformat off(breaks tables in github markdown) -->
 
-Group   |Description                                          |Common Exception Types
---------|-----------------------------------------------------|----------------------
-BOUNDS  |Checks related to bound checking in collections.     |`IndexOutBoundsException`, `ArrayIndexOutOfBoundsException`
-API     |Checks related to the correct usage of various APIs.  |`IllegalStateException`, `NoSuchElementException`, `NullPointerException`, `IllegalArgumentException`, `ConcurrentModificationException`
-NUMERIC |Checks related to numeric operations.                |`ArithmeticException`
-TYPE    |Checks related to runtime Java type consistency.     |`ClassCastException`, `ArrayStoreException`
-CRITICAL|Checks for cases where not failing-fast will keep the object in an inconsistent state and/or degrade debugging significantly. Currently disabling these checks is not supported.                             |`IllegalArgumentException`
+Group     |Description                                          |Common Exception Types
+----------|-----------------------------------------------------|----------------------
+`BOUNDS`  |Checks related to bound checking in collections.     |`IndexOutBoundsException`, `ArrayIndexOutOfBoundsException`
+`API`     |Checks related to the correct usage of various APIs.  |`IllegalStateException`, `NoSuchElementException`, `NullPointerException`, `IllegalArgumentException`, `ConcurrentModificationException`
+`NUMERIC` |Checks related to numeric operations.                |`ArithmeticException`
+`TYPE`    |Checks related to runtime Java type consistency.     |`ClassCastException`, `ArrayStoreException`
+`CRITICAL`|Checks for cases where not failing-fast will keep the object in an inconsistent state and/or degrade debugging significantly. Currently disabling these checks is not supported.                             |`IllegalArgumentException`
 
 <!-- mdformat on -->
 
 Following table summarizes predefined check levels:
 
-Check level      | BOUNDS | API | NUMERIC | TYPE | CRITICAL
----------------- | :----: | :-: | :-----: | :--: | :------:
-NORMAL (default) | X      | X   | X       | X    | X
-OPTIMIZED        |        |     |         | X    | X
-MINIMAL          |        |     |         |      | X
+Check level        | BOUNDS | API | NUMERIC | TYPE | CRITICAL
+------------------ | :----: | :-: | :-----: | :--: | :------:
+`NORMAL` (default) | x      | x   | x       | x    | x
+`OPTIMIZED`        |        |     |         | x    | x
+`MINIMAL`          |        |     |         |      | x
 
 **Note that this configuration should be set to same value for both debugging
 and production in order to detect user code that incorrectly relies on specific
@@ -188,9 +188,8 @@ Note that stripping class metadata has several implications:
 *   `Class.isEnum()`, `Class.isPrimitive()`, `Class.isInterface()` always return
     `false`.
 
-TODO(goktug): Document how to obfuscate or strip enum names
-
-TODO(goktug): Document how to obfuscate class names
+Enum constant names can be obfuscated or stripped (TODO(goktug): document how).
+Class names can be obfuscated (TODO(goktug): document how).
 
 #### Logging
 
