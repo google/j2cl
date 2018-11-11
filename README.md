@@ -40,7 +40,7 @@ You can build J2CL and samples from source by following the steps below:
 
 Contributing
 ------------
-Read how to [contribute to J2CL](docs/CONTRIBUTING.md).
+Read how to [contribute to J2CL](CONTRIBUTING.md).
 
 Licensing
 ---------
