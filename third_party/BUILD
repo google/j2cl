@@ -146,10 +146,10 @@ j2cl_import(
 
 alias(
     name = "gwt-jsinterop-annotations",
-    actual = "@com_google_jsinterop_annotations//jar",
+    actual = "@com_google_jsinterop_annotations_head//jar",
 )
 
 j2cl_import(
     name = "gwt-jsinterop-annotations-j2cl",
-    jar = "@com_google_jsinterop_annotations//jar",
+    jar = "@com_google_jsinterop_annotations_head//jar",
 )

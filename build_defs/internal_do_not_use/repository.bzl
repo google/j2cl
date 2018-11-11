@@ -9,7 +9,6 @@ def setup_j2cl_workspace():
     closure_repositories(
         omit_com_google_protobuf = True,
         omit_com_google_auto_common = True,
-        omit_com_google_jsinterop_annotations = True
     )
 
     native.maven_jar(
@@ -22,8 +21,9 @@ def setup_j2cl_workspace():
         artifact = "com.google.auto.service:auto-service:1.0-rc2",
     )
 
+    # We cannot replace com_google_jsinterop_annotations so choose a different name
     native.maven_jar(
-        name = "com_google_jsinterop_annotations",
+        name = "com_google_jsinterop_annotations_head",
         artifact = "com.google.jsinterop:jsinterop-annotations:HEAD-SNAPSHOT",
         repository = "https://oss.sonatype.org/content/repositories/google-snapshots/",
     )
