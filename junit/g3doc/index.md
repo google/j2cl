@@ -4,7 +4,7 @@ go/j2cl-junit
 
 J2cl supports translating JUnit3 and JUnit4 tests to jsunit tests.
 
-[TOC]
+
 
 ## Build rule j2cl_test
 

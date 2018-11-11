@@ -1,52 +1,42 @@
-> # PLEASE BE ADVISED: This repository does not contain a finished product and has limited access. Early access is provided to individual contributors for the purpose of migration of the GWT-SDK and checking compatibility of a few common open source GWT libraries.
+J2CL: Java to Closure Typed JavaScript
+======================================
 
-J2CL
-====
-J2CL is a transpiler from Java to Closure style JavaScript.
-The project enables easy reuse of Java libraries in JS applications by
-generating JS that tightly optimizes and correctly type-checks in
-[Google Closure Compiler](https://github.com/google/closure-compiler)
+What J2CL is
+------------
+J2CL is a lightweight transpiler from Java to Closure style JavaScript.
+J2CL makes it easy to reuse of Java libraries in JavaScript applications by
+generating JavaScript code that optimizes tightly and type-checks in
+[Google Closure Compiler](https://github.com/google/closure-compiler).
 
-Compile with Bazel
-------------------
+J2CL provides a rich [JavaScript interoperation](docs/jsinterop-by-example.md) layer that allows to produce and
+consume Closure JavaScript abstractions.
 
-You can build the transpiler from source by following the steps below:
+J2CL supports [most](docs/limitations.md) of Java semantics.
+
+Getting Started
+---------------
+You can build J2CL and samples from source by following the steps below:
 
 - Install [Bazel](https://bazel.build/versions/master/docs/install.html).
 - Clone this repository with git: `git clone https://github.com/google/j2cl.git`
-- Build the jar file inside the repository with Bazel:
+- Build a sample app:
 
-      $ bazel build //transpiler/java/com/google/j2cl/transpiler:J2clTranspiler_deploy.jar
+      $ bazel build samples/helloworld/java/com/google/j2cl/samples/helloworld:helloworld
 
-Run the transpiler
-------------------
+- Look at the optimized sample app:
 
-- The generated jar file can be found at `bazel-bin/transpiler/java/com/google/j2cl/transpiler/J2clTranspiler_deploy.jar`
-- The main method is located in `com.google.j2cl.transpiler.J2clTranspiler`
+      $ cat bazel-bin/samples/helloworld/java/com/google/j2cl/samples/helloworld/helloworld.js
+      document.write('Hello from Java! and JS!');
 
-To compile and resolve the calls; J2CL does need bytecode of deps, just like javac.
-So the transpiler takes following as input:
-
-- java sources (individual files or src jar)
-- native srcs (a zip file containing native.js files)
-- classpath (bytecode jar of deps)
-- bootclasspath (bytecode jar of jre)
-
-and produces:
-
-- output (invidiual js files for each class or a zip)
-- sourcemaps
-
-You can look into `build_def/j2cl_transpile.bzl` and `build_def/j2cl_library.bzl` to have more insight on how we use the transpiler internally.
 
 Contributing
 ------------
-Please refer to [the contributing document](CONTRIBUTING.md).
+Read how to [contribute to J2CL](docs/CONTRIBUTING.md).
 
 Licensing
 ---------
 Please refer to [the license file](LICENSE).
 
-Disclaimer
-----------
-This is not an official Google product.
+Disclaimers
+-----------
+J2CL is not an official Google product and is currently in 'alpha' release for developer preview.

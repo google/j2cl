@@ -1,7 +1,7 @@
 # Contained here are integration tests.
 
 To make assertions about the std or err output of the Transpile process see
-//third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/integration:SyntaxErrorTest
+//transpiler/javatests/com/google/j2cl/transpiler/integration:SyntaxErrorTest
 for an example.
 
 To execute output as a JS test and track its optimized size see
