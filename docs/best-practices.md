@@ -4,10 +4,10 @@
 
 ## Library Naming: use -j2cl suffix.
 
-Instances of j2cl_library should be named the same as your `java_library` with a
--j2cl suffix. This brings consistency across different project and makes it
-easier for other developers and macros that generate j2cl_libraries to predict
-the names of dependencies.
+Instances of `j2cl_library` should be named the same as the corresponding
+`java_library` with a `-j2cl` suffix. This brings consistency across different
+project and makes it easier for other developers and macros that generate
+`j2cl_library` to predict the names of dependencies.
 
 ```python
 java_library(
@@ -56,7 +56,7 @@ class Logger {
 }
 ```
 
-The convention is to place super sources in a folder called super-j2cl/ :
+The convention is to place super sources in a folder called `super-j2cl/` :
 
 ```java
 // super-j2cl/Logger.java
@@ -73,7 +73,7 @@ class Logger {
 }
 ```
 
-Swap out the java implementation in the build.
+Swap out the Java implementation in the build.
 
 ```python
 java_library(
@@ -91,25 +91,25 @@ j2cl_library(
 )
 ```
 
-#### @GwtIncompatible:
+#### `@GwtIncompatible`:
 
 The `@GwtIncompatible` annotation allows you to strip specific elements from
 your code including classes, methods, and members. It's designed to strip
 incompatible methods from your code before they are seen by the J2CL compiler.
 `@GwtIncompatible` is effective for removing parts of your API that you don't
 want to be available to J2CL code. It is usually a good idea to document the
-reason in the annotation eg:
+reason in the annotation e.g.:
 
 ```java
 @GwtIncompatible("java.lang.Thread is unavailable in web").
 ```
 
-In general, don't use `@GwtIncompatible` within application logic to disable
-specific code paths. This is usually done in conjunction with inheritance
-(disabling an override) and can lead to confusing differences in behavior as
-well as causing `@GwtIncompatible` to propagate further and further through your
-code. It is better to restructure code and abstract out incompatible parts and
-super source the code such that it does something meaningful on the web.
+In general, it is not recommended to use `@GwtIncompatible` in application logic
+to disable specific code paths, for example by disabling an overriding method,
+since it can lead to confusing differences in behavior as well as causing
+`@GwtIncompatible` to propagate further and further through your code. It is
+better to restructure code and abstract out incompatible parts and super source
+the code such that it does something meaningful on the web.
 
 ## Code Size and Runtime Performance
 
@@ -146,17 +146,18 @@ conservative values as to accurately preserve Java semantics and behavior.
 
 Closure compiler flag: `--define=jre.checks.checkLevel=NORMAL|OPTIMIZED|MINIMAL`
 
-Allows the suppression of certain runtime checks in the Java Standard library which allows those
-checks to be removed in production.
+Allows the suppression of certain runtime checks in the Java Standard library
+which allows for the code for those checks to be completely removed in
+production.
 
 <!-- mdformat off(breaks tables in github markdown) -->
 
 Group   |Description                                          |Common Exception Types
 --------|-----------------------------------------------------|----------------------
-BOUNDS  |Checks related to the bound checking in collections. |`IndexOutBoundsException`, `ArrayIndexOutOfBoundsException`
-API     |Checks related to the correct usage of APIs.         |`IllegalStateException`, `NoSuchElementException`, `NullPointerException`, `IllegalArgumentException`, `ConcurrentModificationException`
+BOUNDS  |Checks related to bound checking in collections.     |`IndexOutBoundsException`, `ArrayIndexOutOfBoundsException`
+API     |Checks related to the correct usage of various APIs.  |`IllegalStateException`, `NoSuchElementException`, `NullPointerException`, `IllegalArgumentException`, `ConcurrentModificationException`
 NUMERIC |Checks related to numeric operations.                |`ArithmeticException`
-TYPE    |Checks related to java type system.                  |`ClassCastException`, `ArrayStoreException`
+TYPE    |Checks related to runtime Java type consistency.     |`ClassCastException`, `ArrayStoreException`
 CRITICAL|Checks for cases where not failing-fast will keep the object in an inconsistent state and/or degrade debugging significantly. Currently disabling these checks is not supported.                             |`IllegalArgumentException`
 
 <!-- mdformat on -->

@@ -127,7 +127,7 @@ const MyClass = goog.require("com.google.example.MyClass");
 new MyClass();
 ```
 
-### @JsMethod
+### `@JsMethod`
 
 ```java
 // Interop.java
