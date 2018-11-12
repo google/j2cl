@@ -87,7 +87,7 @@ def _strip_gwt_incompatible(ctx, java_srcs):
         arguments = [args],
         env = dict(LANG = "en_US.UTF-8"),
         execution_requirements = {"supports-workers": "1"},
-        mnemonic = "GwtIncompatibleStripper",
+        mnemonic = "J2cl",
     )
 
     return output_file
