@@ -188,7 +188,7 @@ def gather_closure_warnings(build_log):
     if "readable/" not in build_log_path:
       continue
     if os.path.isfile(build_log_path):
-      run_cmd_get_output(["rm", build_log_path])
+      os.remove(build_log_path)
 
     if "\n0 error(s), 0 warning(s)" not in build_log:
       # There are errors, emit the build.log file.
