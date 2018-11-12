@@ -34,6 +34,7 @@ Getting Started
 Clone the repository and build a sample app from source:
 
 - Install [Bazel](https://bazel.build/versions/master/docs/install.html).
+
 - Clone this repository:
 
 ```shell
@@ -53,12 +54,33 @@ Clone the repository and build a sample app from source:
       document.write('Hello from Java! and JS!');
 ```
 
+
+Live-reload
+---
+ibazel is file-system watcher that auto-triggers bazel build when neeeded.
+To use it, just replace ```bazel``` with ```ibazel``` in any command:
+
+- Install [ibazel](https://github.com/bazelbuild/bazel-watcher#installation) and make sure it is in your path.
+
+- Run the development server
+
+```shell
+      $ ibazel run samples/helloworld/java/com/google/j2cl/samples/helloworld:helloworld_dev_server
+```
+- Navigate to 'http://localhost:6006/helloworld_dev.html" in your browser.
+
+- Edit any source (e.g. ```HelloWorld.java```), save and see the results.
+You will enjoy it more as it warms up!
+
+You like build-on-save but you would like to refresh on your own terms?
+Pass ```-nolive_reload``` while running ibazel.
+
+
 Guides
 ------
 - [JsInterop Cookbook](docs/jsinterop-by-example.md)
 - [Best Practices](docs/best-practices.md)
 - [Emulation Limitations](docs/limitations.md)
-
 
 Caveat Emptor
 -------------

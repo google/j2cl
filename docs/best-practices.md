@@ -2,6 +2,13 @@
 
 
 
+## Build Performance
+
+To improve build performance we recommend adding a .bazelrc file in your
+workspace root, which will be checked into version control and shared with your
+team and CI. Start by copying the
+[one from J2CL](https://github.com/google/j2cl/blob/master/.bazelrc).
+
 ## Library Naming: use -j2cl suffix.
 
 Instances of `j2cl_library` should be named the same as the corresponding

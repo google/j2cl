@@ -18,7 +18,13 @@ closure_js_library(
 #    use as a simple development server.
 #
 # Give it a try:
-#   bazel run third_party/java_src/j2cl/samples/helloworld/java/com/google/j2cl/samples/helloworld:helloworld_dev_server
+#   $ bazel run third_party/java_src/j2cl/samples/helloworld/java/com/google/j2cl/samples/helloworld:helloworld_dev_server
+#
+# If you like to just save a file and see the results, you can just replace bazel w/ ibazel:
+#   $ ibazel run third_party/java_src/j2cl/samples/helloworld/java/com/google/j2cl/samples/helloworld:helloworld_dev_server
+#
+# See the installation instructions for ibazel here:
+# https://github.com/bazelbuild/bazel-watcher#installation
 j2cl_application(
     name = "helloworld",
     entry_points = ["j2cl.samples.app"],
