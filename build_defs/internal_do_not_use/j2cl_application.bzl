@@ -20,7 +20,7 @@ def j2cl_application(
       <name>_dev_server: a simple development server for simple apps.
 
     The devserver could be provided by extra resources. A custom host page can
-    also be supplied as a resource where the development resourcces could be
+    also be supplied as a resource where the development resources could be
     loaded by <link rel="import" href="<your_target_dev.html">.
     TODO(goktug): Document what needs to be done by apps with custom development
     server.
