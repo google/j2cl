@@ -106,8 +106,7 @@ def j2cl_application(
 
 def _define_js(name, defines, user_overrides):
     defines.update(user_overrides)
-    define_js = "\n".join(["  '%s': '%s'," % (k, v) for (k, v) in defines.items()])
-    content = "var CLOSURE_DEFINES = {\n" + define_js + "}"
+    content = "var CLOSURE_DEFINES = %s;" % struct(**defines).to_json()
     closure_js_library(
         name = name,
         srcs = [_generate_file("%s.js" % name, content)],
@@ -118,6 +117,6 @@ def _generate_file(file_name, content):
     native.genrule(
         name = file_name.replace(".", "_"),
         outs = [file_name],
-        cmd = "echo \"%s\" > $@" % content,
+        cmd = "echo '%s' > $@" % content,
     )
     return ":" + file_name
