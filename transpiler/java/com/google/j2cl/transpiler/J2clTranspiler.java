@@ -126,10 +126,11 @@ class J2clTranspiler {
       checkUnits(j2clUnits);
       normalizeUnits(j2clUnits);
       generateOutputs(j2clUnits);
-      maybeCloseFileSystem();
       return problems;
     } catch (Problems.Exit e) {
       return e.getProblems();
+    } finally {
+      maybeCloseFileSystem();
     }
   }
 
