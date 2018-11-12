@@ -14,7 +14,7 @@
  * the License.
  */
 
-// We don't need JavaScript to print to console but for the sake having a richer
+// We don't need JavaScript for document.write but for the sake having a richer
 // example, here is a JavaScript module that uses our Java code.
 
 goog.module('j2cl.samples.hello');
@@ -28,7 +28,7 @@ const HelloWorld = goog.require('com.google.j2cl.samples.helloworldlib.HelloWorl
  * @return {void}
  */
 function sayHello() {
-  console.log(HelloWorld.getHelloWorld() + ' and JS!');
+  document.write(HelloWorld.getHelloWorld() + ' and JS!');
 }
 
 // Export our method so it could be used outside of the module.

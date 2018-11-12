@@ -1,8 +1,8 @@
-load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_binary", "closure_js_library")
+load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_library")
 
 licenses(["notice"])  # Apache 2.0
 
-load("//build_defs:rules.bzl", "J2CL_OPTIMIZED_DEFS")
+load("//build_defs:rules.bzl", "j2cl_application")
 
 closure_js_library(
     name = "app",
@@ -11,12 +11,16 @@ closure_js_library(
 )
 
 # This is the bazel target that compiles and optimizes whole JavaScript / J2CL app.
-# TODO(b/117998344): Discuss outputs and some of the optimizations
-closure_js_binary(
+# It provides couple of convenient targets:
+#  :helloworld produces the helloworld.js that could be used for production.
+#  :helloworld_dev produces the helloworld_dev.js that could be used for development.
+#  :helloworld_dev_server serves helloworld_dev.js with couple of extras which you can
+#    use as a simple development server.
+#
+# Give it a try:
+#   bazel run third_party/java_src/j2cl/samples/helloworld/java/com/google/j2cl/samples/helloworld:helloworld_dev_server
+j2cl_application(
     name = "helloworld",
-    defs = J2CL_OPTIMIZED_DEFS + [
-        "--rewrite_polyfills=false",
-        "--entry_point=goog:j2cl.samples.app",
-    ],
+    entry_points = ["j2cl.samples.app"],
     deps = [":app"],
 )
