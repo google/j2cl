@@ -54,6 +54,13 @@ Clone the repository and build a sample app from source:
       document.write('Hello from Java! and JS!');
 ```
 
+Guides
+------
+- [JsInterop Cookbook](docs/limitations.md)
+- [Best Practices](docs/best-practices.md)
+- [Emulation Limitations](docs/limitations.md)
+
+
 Caveat Emptor
 -------------
 J2CL is production ready, but open-sourcing is not yet finalized and breaking
