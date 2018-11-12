@@ -2,7 +2,7 @@
 set -e
 
 chmod +x ${KOKORO_GFILE_DIR}/use_bazel.sh
-${KOKORO_GFILE_DIR}/use_bazel.sh latest
+${KOKORO_GFILE_DIR}/use_bazel.sh 0.19.0
 bazel version
 
 # the repo is cloned under git/j2cl
