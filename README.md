@@ -50,13 +50,12 @@ Clone the repository and build a sample app from source:
 
 ```shell
       $ cat bazel-bin/samples/helloworld/java/com/google/j2cl/samples/helloworld/helloworld.js
-
       document.write('Hello from Java! and JS!');
 ```
 
 Guides
 ------
-- [JsInterop Cookbook](docs/limitations.md)
+- [JsInterop Cookbook](docs/jsinterop-by-example.md)
 - [Best Practices](docs/best-practices.md)
 - [Emulation Limitations](docs/limitations.md)
 
