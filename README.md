@@ -4,25 +4,26 @@ Seamless Java in JavaScript applications that tightly optimizes with
 [Closure](https://github.com/google/closure-compiler)
 
 ---
-J2CL is a powerful, simple, lightweight transpiler from Java to Closure style JavaScript.
+J2CL is a powerful, simple and lightweight transpiler from Java to Closure style
+JavaScript.
 
-* **Get best out of Java and JavaScript.** You no longer need to choose between
+* **Get the best out of Java and JavaScript.** You no longer need to choose between
 the two or lock into a specific framework or a language. Choose the right language
 at the right place and hire the best talent for the job.
 
-* **Do it correct the first time.** The robust run-time type checking based on the
-strong Java type system integrated with the advanced cross language checks catches
-your mistakes early on.
-
-* **Modern, fresh and blazing fast.** Powered by [Bazel](https://bazel.build/),
-J2CL provides fast and modern development experience that will make you smile and
-keep you productive.
+* **Do it correct the first time.** The robust run-time type checking based on
+the strong Java type system combined with the advanced cross language type checks
+catches your mistakes early on.
 
 * **Provides massive code reuse.** J2CL closely follows the Java language
-[semantics](docs/limitations.md). This reduces suprises, enables reuse across
+[semantics](docs/limitations.md). This reduces surprises, enables reuse across
 different platforms and brings most popular Java libraries into your toolkit
 including [Guava](https://github.com/google/guava), [Dagger](https://google.github.io/dagger/)
 and [AutoValue](https://github.com/google/auto/tree/master/value).
+
+* **Modern, fresh and blazing fast.** Powered by [Bazel](https://bazel.build/),
+J2CL provides a fast and modern development experience that will make you smile
+and keep you productive.
 
 * **Road tested and trusted.** J2CL is the underlying technology of the most
 advanced GSuite apps developed by Google including GMail, Inbox, Docs, Slides
