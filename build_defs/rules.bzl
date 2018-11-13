@@ -3,7 +3,7 @@
 See corresponding bzl files for the documentation.
 """
 
-load("//build_defs/internal_do_not_use:repository.bzl", _setup_j2cl_workspace = "setup_j2cl_workspace")
+load("//build_defs/internal_do_not_use:j2cl_workspace.bzl", _setup_j2cl_workspace = "setup_j2cl_workspace")
 load("//build_defs/internal_do_not_use:j2cl_application.bzl", _j2cl_application = "j2cl_application")
 load("//build_defs/internal_do_not_use:j2cl_library.bzl", _j2cl_library = "j2cl_library")
 load("//build_defs/internal_do_not_use:j2cl_import.bzl", _j2cl_import = "j2cl_import")
