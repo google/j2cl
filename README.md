@@ -79,8 +79,10 @@ Pass ```-nolive_reload``` while running ibazel.
 Guides
 ------
 - [JsInterop Cookbook](docs/jsinterop-by-example.md)
-- [Best Practices](docs/best-practices.md)
+- [J2CL Best Practices](docs/best-practices.md)
 - [Emulation Limitations](docs/limitations.md)
+- [Bazel Tutorial](https://docs.bazel.build/versions/master/tutorial/java.html)
+- [Bazel Best Practices](https://docs.bazel.build/versions/master/best-practices.html)
 
 Caveat Emptor
 -------------
