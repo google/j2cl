@@ -89,7 +89,7 @@ public final class J2clCommandLineRunner extends CommandLineTool {
   }
 
   private J2clTranspilerOptions createOptions() {
-    checkSourceFiles(files, ".java", ".srcjar", "-src.jar");
+    checkSourceFiles(files, ".java", ".srcjar", ".jar");
 
     Problems problems = new Problems();
     if (this.readableSourceMaps && this.generateKytheIndexingMetadata) {
