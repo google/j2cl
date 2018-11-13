@@ -46,13 +46,13 @@ Clone the repository and build a sample app from source:
 
 ```shell
       $ cd j2cl/samples/helloworld
-      $ bazel build java/com/google/j2cl/samples/helloworld:helloworld
+      $ bazel build src/main/java/com/google/j2cl/samples/helloworld:helloworld
 ```
 
 - Look at the optimized output:
 
 ```shell
-      $ cat bazel-bin/java/com/google/j2cl/samples/helloworld/helloworld.js
+      $ cat bazel-bin/src/main/java/com/google/j2cl/samples/helloworld/helloworld.js
       document.write('Hello from Java! and JS!');
 ```
 
