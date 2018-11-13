@@ -11,7 +11,7 @@ JavaScript.
 the two or lock into a specific framework or a language. Choose the right language
 at the right place and hire the best talent for the job.
 
-* **Do it correct the first time.** The robust run-time type checking based on
+* **Get it correct the first time.** The robust run-time type checking based on
 the strong Java type system combined with the advanced cross language type checks
 catches your mistakes early on.
 
@@ -99,10 +99,12 @@ Guides
 
 Caveat Emptor
 -------------
-J2CL is production ready, but open-sourcing is not yet finalized and breaking
-changes will be introduced.
-We are actively working on adapting more pieces to open-source including
-[Junit4](https://junit.org/junit4/) emulation and faster pruning for even better development experience.
+J2CL is production ready and actively used by many of Google's products, but the
+process of adapting workflows and tooling for the open-source version is not yet
+finalized and breaking changes will most likely be introduced.
+We are actively working on adapting more pieces including
+[Junit4](https://junit.org/junit4/) emulation and faster pruning for an even
+better development experience.
 Stay tuned!
 
 Contributing
