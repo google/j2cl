@@ -2,12 +2,12 @@ load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_library")
 
 licenses(["notice"])  # Apache 2.0
 
-load("//build_defs:rules.bzl", "j2cl_application")
+load("@com_google_j2cl//build_defs:rules.bzl", "j2cl_application")
 
 closure_js_library(
     name = "app",
     srcs = ["app.js"],
-    deps = ["//samples/helloworld/java/com/google/j2cl/samples/helloworldlib"],
+    deps = ["//java/com/google/j2cl/samples/helloworldlib"],
 )
 
 # This is the bazel target that compiles and optimizes whole JavaScript / J2CL app.

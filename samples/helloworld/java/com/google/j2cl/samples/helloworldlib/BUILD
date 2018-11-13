@@ -1,8 +1,8 @@
-package(default_visibility = ["//samples/helloworld:__subpackages__"])
+package(default_visibility = ["//visibility:public"])
 
 licenses(["notice"])  # Apache 2.0
 
-load("//build_defs:rules.bzl", "j2cl_library")
+load("@com_google_j2cl//build_defs:rules.bzl", "j2cl_library")
 
 # This is the bazel target that compiles our J2CL library. Note that our HelloWorld library
 # include both Java and JavaScript sources. Usually you don't need to have any JavaScript
@@ -16,6 +16,6 @@ j2cl_library(
         "*.js",
     ]),
     deps = [
-        "//:jsinterop-annotations",
+        "@com_google_j2cl//:jsinterop-annotations",
     ],
 )

@@ -110,7 +110,7 @@ _J2CL_LIB_ATTRS = {
         cfg = "host",
     ),
     "_stripper": attr.label(
-        default = Label("//build_defs/internal_do_not_use:GwtIncompatibleStripper"),
+        default = Label("//build_defs/internal_do_not_use:GwtIncompatibleStripper", relative_to_caller_repository = False),
         cfg = "host",
         executable = True,
     ),

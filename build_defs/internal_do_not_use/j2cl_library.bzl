@@ -73,7 +73,7 @@ def j2cl_library(
     # If this is JRE itself, don't synthesize the JRE dep.
     target_name = "//" + native.package_name() + ":" + name
     if args["srcs"] and target_name != "//jre/java:jre":
-        args["deps"].append("//build_defs/internal_do_not_use:jre")
+        args["deps"].append(Label("//build_defs/internal_do_not_use:jre", relative_to_caller_repository = False))
 
     # TODO(goktug): remove workaround after b/71772385 is fixed
     dummy_class_name = name.replace("-", "__")

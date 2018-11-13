@@ -1,0 +1,9 @@
+# Recommended bazel settings for working with J2CL.
+# You can copy this into root of your workspace.
+
+build --watchfs
+
+build --spawn_strategy=standalone
+build --strategy=J2cl=worker
+build --strategy=Closure=worker
+build --experimental_persistent_javac

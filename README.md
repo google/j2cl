@@ -45,13 +45,14 @@ Clone the repository and build a sample app from source:
 - Build a sample app:
 
 ```shell
-      $ bazel build samples/helloworld/java/com/google/j2cl/samples/helloworld:helloworld
+      $ cd j2cl/samples/helloworld
+      $ bazel build java/com/google/j2cl/samples/helloworld:helloworld
 ```
 
 - Look at the optimized output:
 
 ```shell
-      $ cat bazel-bin/samples/helloworld/java/com/google/j2cl/samples/helloworld/helloworld.js
+      $ cat bazel-bin/java/com/google/j2cl/samples/helloworld/helloworld.js
       document.write('Hello from Java! and JS!');
 ```
 
@@ -75,6 +76,17 @@ You will enjoy it more as it warms up!
 
 You like build-on-save but you would like to refresh on your own terms?
 Pass ```-nolive_reload``` while running ibazel.
+
+
+Setting up your first project
+---
+To start your first project, you can use the helloworld sample as a template:
+
+```shell
+      $ cp -R <j2cl-repo>/samples/helloworld <my-repo>/<app-name>
+```
+
+and you are done.
 
 
 Guides
