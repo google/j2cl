@@ -102,8 +102,10 @@ Guides
 Get Support
 ------
 - Please subscribe to [J2CL announce](http://groups.google.com/forum/#!forum/j2cl-announce) for announcements (low traffic).
-- Please report bugs or feature requests via [GitHub issue tracker](https://github.com/google/j2cl/issues/new).
-- For other questions you can also use the [issue tracker](https://github.com/google/j2cl/issues/new) for now.
+- Please report [bugs](https://github.com/google/j2cl/issues/new?template=bug_report.md&labels=bug)
+or file [feature requests](https://github.com/google/j2cl/issues/new?template=feature_request.md&labels=enhancement)
+via [issue tracker](https://github.com/google/j2cl/issues).
+- For other questions you can also use the [issue tracker](https://github.com/google/j2cl/issues/new?template=question.md&labels=question) for now.
 
 
 Caveat Emptor
