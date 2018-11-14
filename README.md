@@ -67,7 +67,8 @@ To use it, just replace ```bazel``` with ```ibazel``` in any command:
 - Run the development server
 
 ```shell
-      $ ibazel run samples/helloworld/java/com/google/j2cl/samples/helloworld:helloworld_dev_server
+      $ cd j2cl/samples/helloworld
+      $ ibazel run src/main/java/com/google/j2cl/samples/helloworld:helloworld_dev_server
 ```
 - Navigate to 'http://localhost:6006/helloworld_dev.html" in your browser.
 
