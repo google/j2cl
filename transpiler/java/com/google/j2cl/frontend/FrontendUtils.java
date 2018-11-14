@@ -141,7 +141,8 @@ public class FrontendUtils {
 
     try {
       return FileSystems.newFileSystem(
-          URI.create("jar:file:" + outputPath.toAbsolutePath()), ImmutableMap.of("create", "true"));
+          URI.create("jar:" + outputPath.toAbsolutePath().toUri()),
+          ImmutableMap.of("create", "true"));
     } catch (IOException e) {
       problems.fatal(FatalError.CANNOT_CREATE_ZIP, outputPath, e.getMessage());
       return null;
