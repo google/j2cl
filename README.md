@@ -118,6 +118,32 @@ We are actively working on adapting more pieces including
 better development experience.
 Stay tuned!
 
+
+J2CL vs. GWT?
+---
+In early 2015, Google GWT team made a difficult but necessary decision to work
+on a new alternative product to enable Java for the Web.
+
+It was mostly due to changing trends in the web ecosystem and our new internal
+customers who were looking at Java on the Web not as an isolated ecosystem but
+an integral part of their larger stack. It required a completely new vision
+to create tools from the ground up, that are tightly integrated with the rest of
+the ecosystem. A modern architecture, that is reliable, fast and provides a
+quick iteration cycle.
+
+There was no practical way to achieve those goals completely incrementally out
+of GWT. We started from scratch using everything we learned from working on GWT
+over the years. In the meantime, we kept GWT steering committee members in the
+loop and gave contributors very early access so they could decide to build the
+next version of GWT on J2CL.
+
+The strategy has now evolved GWT3 to an SDK focused on libraries and enterprise
+tooling which was one of the strongest points of GWT all along.
+
+We think that such separation of concerns is crucial part of the success of the
+both projects and will provide the best results for the open source community.
+
+
 Contributing
 ------------
 Read how to [contribute to J2CL](CONTRIBUTING.md).
