@@ -1,7 +1,7 @@
 # [J2CL](http://j2cl.io)
 
 Seamless Java in JavaScript applications that tightly optimizes with
-[Closure](https://github.com/google/closure-compiler)
+[Closure Compiler](https://github.com/google/closure-compiler)
 
 ---
 J2CL is a powerful, simple and lightweight transpiler from Java to Closure style
