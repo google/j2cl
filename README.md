@@ -1,4 +1,4 @@
-# [J2CL](https://github.com/google/j2cl)
+# [J2CL](http://j2cl.io)
 
 Seamless Java in JavaScript applications that tightly optimizes with
 [Closure](https://github.com/google/closure-compiler)
@@ -96,6 +96,14 @@ Guides
 - [Emulation Limitations](docs/limitations.md)
 - [Bazel Tutorial](https://docs.bazel.build/versions/master/tutorial/java.html)
 - [Bazel Best Practices](https://docs.bazel.build/versions/master/best-practices.html)
+
+
+Get Support
+------
+- Please subscribe to [J2CL announce](http://groups.google.com/forum/#!forum/j2cl-announce) for announcements (low traffic).
+- Please report bugs or feature requests via [GitHub issue tracker](https://github.com/google/j2cl/issues/new).
+- For other questions you can also use the [issue tracker](https://github.com/google/j2cl/issues/new) for now.
+
 
 Caveat Emptor
 -------------
