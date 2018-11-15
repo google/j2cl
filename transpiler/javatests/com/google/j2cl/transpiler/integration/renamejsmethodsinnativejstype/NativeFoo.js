@@ -20,6 +20,6 @@ class MyFoo {
   }
 
   mysum() { return this.x + this.y; }
-};
+}
 
 exports = MyFoo;
