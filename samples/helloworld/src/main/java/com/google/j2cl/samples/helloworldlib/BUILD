@@ -16,6 +16,6 @@ j2cl_library(
         "*.js",
     ]),
     deps = [
-        "@com_google_j2cl//:jsinterop-annotations",
+        "@com_google_j2cl//:jsinterop-annotations-j2cl",
     ],
 )

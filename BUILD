@@ -16,9 +16,15 @@ closure_js_library(
     exports = ["//jre/java:jre"],
 )
 
-# Note that this is temporarily available until jsinterop-annotations get its own repo
+# Note that JsInterop targets may disappear after jsinterop-annotations get its own repo.
+
 alias(
     name = "jsinterop-annotations",
+    actual = "//third_party:gwt-jsinterop-annotations",
+)
+
+alias(
+    name = "jsinterop-annotations-j2cl",
     actual = "//third_party:gwt-jsinterop-annotations-j2cl",
 )
 
