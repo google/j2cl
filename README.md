@@ -113,9 +113,17 @@ Caveat Emptor
 J2CL is production ready and actively used by many of Google's products, but the
 process of adapting workflows and tooling for the open-source version is not yet
 finalized and breaking changes will most likely be introduced.
+
 We are actively working on adapting more pieces including
 [Junit4](https://junit.org/junit4/) emulation and faster pruning for an even
 better development experience.
+
+Last, the workflow is **not** yet supported in Windows. You can contribute to
+make this a reality. Coordinate and follow the progress of this effort
+[here](https://github.com/google/j2cl/issues/9).
+For developers that want to use Windows as their platform we recommend
+installing under WSL (Windows Subsystem for Linux).
+
 Stay tuned!
 
 
