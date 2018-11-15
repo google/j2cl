@@ -29,9 +29,6 @@ public class Main {
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "String")
   static class Baz {}
 
-  @JsType(isNative = true, namespace = "goog.math", name = "Long")
-  static class Zoo {}
-
   @JsFunction
   interface Qux {
     String m(String s);
@@ -104,19 +101,6 @@ public class Main {
               .equals(
                   "com.google.j2cl.transpiler.integration.classcastexception.Main$Foo"
                       + " cannot be cast to String")
-          : "Got unexpected message " + e.getMessage();
-    }
-
-    // Failed cast to native non-extern goog.math.Long.
-    try {
-      Zoo baz = (Zoo) object;
-      assert false : "An expected failure did not occur.";
-    } catch (ClassCastException e) {
-      // expected
-      assert e.getMessage()
-              .equals(
-                  "com.google.j2cl.transpiler.integration.classcastexception.Main$Foo"
-                      + " cannot be cast to goog.math.Long")
           : "Got unexpected message " + e.getMessage();
     }
 

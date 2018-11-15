@@ -11,6 +11,5 @@ load(
 integration_test(
     name = "classcastexception",
     srcs = glob(["*.java"]),
-    js_deps = ["//javascript/closure/math:long"],
     deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )
