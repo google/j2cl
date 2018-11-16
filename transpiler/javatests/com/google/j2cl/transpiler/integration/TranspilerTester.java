@@ -53,14 +53,17 @@ public class TranspilerTester {
    * Creates a new transpiler tester initialized with the defaults (e.g. location for the JRE, etc)
    */
   public static TranspilerTester newTesterWithDefaults() {
-    return newTester().setJavaPackage("test").setArgs("-cp", JRE_PATH);
+    return newTester()
+        .setJavaPackage("test")
+        // Add both paths where the JRE would be found is in the open-source release and internally.
+        .setArgs("-cp", GOOGLE3_PATH_PREFIX + JRE_PATH + java.io.File.pathSeparatorChar + JRE_PATH);
   }
 
+  public static final String GOOGLE3_PATH_PREFIX = "third_party/java_src/j2cl/";
   // The bundle contains both the standard library and its deps so that tests don't have to know how
   // to dep on all.
   private static final String JRE_PATH =
-      "third_party/java_src/j2cl/transpiler/javatests/"
-          + "com/google/j2cl/transpiler/integration/jre_bundle_deploy.jar";
+      "transpiler/javatests/com/google/j2cl/transpiler/integration/jre_bundle_deploy.jar";
 
   private List<File> files = new ArrayList<>();
   private List<String> args = new ArrayList<>();
