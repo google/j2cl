@@ -2,8 +2,7 @@ Want to contribute? Great! First, read this page.
 
 ### Before you contribute
 Before we can use your code, you must sign the
-[Google Individual Contributor License Agreement]
-(https://cla.developers.google.com/about/google-individual)
+[Google Individual Contributor License Agreement](https://cla.developers.google.com/about/google-individual)
 (CLA), which you can do online.
 You (or your employer) retain the copyright to your contribution, this simply
 gives us permission to use and redistribute your contributions as part of the
