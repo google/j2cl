@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 Google Inc.
+ * Copyright 2018 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,12 +19,12 @@ import static jsinterop.annotations.JsPackage.GLOBAL;
 
 import jsinterop.annotations.JsType;
 
-/**
- * Native js types with global namespace.
- */
+/** Native js types with global namespace. */
 @JsType(namespace = GLOBAL, isNative = true)
-public class Headers {
-  public native void append(String name, String value);
+public class Number {
+  public Number(double n) {}
 
-  public native String get(String name);
+  public static native Number parseInt(String string, int base);
+
+  public native String toFixed();
 }

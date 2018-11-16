@@ -35,9 +35,9 @@ public class Main {
   }
 
   public static void testGlobalNativeJsType() {
-    Headers header = new Headers();
-    header.append("Content-Type", "text/xml");
-    assert header.get("Content-Type").equals("text/xml");
+    Number number22 = new Number(2.2);
+    Number number10base2 = Number.parseInt("10", 2);
+    assert number22.toFixed().equals(number10base2.toString());
   }
 
   public static void main(String... args) {
