@@ -20,4 +20,5 @@ integration_test(
     ],
     # String replacement does not occur in uncompiled_test
     disable_uncompiled_test = True,
+    tags = ["manual"],
 )

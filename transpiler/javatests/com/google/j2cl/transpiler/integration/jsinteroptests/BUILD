@@ -16,7 +16,6 @@ integration_test(
         "native_types/*.js",
     ]),
     defs = [
-        "--strict",
         "--emit_use_strict=true",
         # Make sure property renaming & variable renaming is turned off,
         # otherwise JsTypeTest fails since it asserts properties.
@@ -27,5 +26,9 @@ integration_test(
     ],
     main_class = "woo.Main",
     native_srcs = glob(["*.native.js"]),
-    deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
+    tags = ["manual"],
+    deps = [
+        "//third_party:closure_reflect",
+        "//third_party:gwt-jsinterop-annotations-j2cl",
+    ],
 )

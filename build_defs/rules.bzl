@@ -10,6 +10,7 @@ load("//build_defs/internal_do_not_use:j2cl_import.bzl", _j2cl_import = "j2cl_im
 load(
     "//build_defs/internal_do_not_use:j2cl_js_common.bzl",
     _J2CL_OPTIMIZED_DEFS = "J2CL_OPTIMIZED_DEFS",
+    _J2CL_TEST_DEFS = "J2CL_TEST_DEFS",
 )
 
 setup_j2cl_workspace = _setup_j2cl_workspace
@@ -20,5 +21,6 @@ j2cl_library = _j2cl_library
 
 j2cl_import = _j2cl_import
 
-
 J2CL_OPTIMIZED_DEFS = _J2CL_OPTIMIZED_DEFS
+
+J2CL_TEST_DEFS = _J2CL_TEST_DEFS

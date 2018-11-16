@@ -1,7 +1,6 @@
 """integration_test build macro
 
-A build macro that turns Java files into an optimized JS target and a JS
-test target.
+A build macro that turns Java files into optimized and unoptimized test targets.
 
 The set of Java files must have a Main class with a main() function.
 
@@ -9,7 +8,6 @@ The set of Java files must have a Main class with a main() function.
 Example usage:
 
 # Creates targets
-# blaze build :optimized_js
 # blaze test :compiled_test
 # blaze test :uncompiled_test
 integration_test(
@@ -19,16 +17,15 @@ integration_test(
 
 """
 
+load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_test")
 load("//build_defs:rules.bzl", "J2CL_OPTIMIZED_DEFS", "J2CL_TEST_DEFS", "j2cl_library")
 load("//build_defs/internal_do_not_use:j2cl_util.bzl", "get_java_package")
-load("@bazel_tools//tools/build_defs/label:def.bzl", "absolute_label")
-load("//testing/web/build_defs:web.bzl", "web_test")
-load("//testing/web/build_defs/js:js.bzl", "jsunit_test")
 
 JAVAC_FLAGS = [
     "-XepDisableAllChecks",
 ]
 
+# TODO(b/119637659): abstract common behaviour and merge with the internal version.
 def integration_test(
         name,
         srcs,
@@ -42,7 +39,9 @@ def integration_test(
         closure_defines = dict(),
         disable_uncompiled_test = False,
         disable_compiled_test = False,
+        suppress = [],
         j2cl_library_tags = [],
+        tags = [],
         plugins = []):
     """Macro that turns Java files into integration test targets.
 
@@ -56,24 +55,25 @@ def integration_test(
     if not main_class:
         main_class = java_package + ".Main"
 
-    deps = [absolute_label(dep) for dep in deps]
-
     optimized_extra_defs = [
         # Turn on asserts since the integration tests rely on them.
-        "--remove_j2cl_asserts=false",
+        # TODO: Enable once the option is made available.
+        #        "--remove_j2cl_asserts=false",
         # Avoid 'use strict' noise.
-        "--emit_use_strict=false",
+        #        "--emit_use_strict=false",
         # Polyfill re-write is disabled so that size tracking only focuses on
         # size issues that are actionable outside of JSCompiler or are expected
         # to eventually be addressed inside of JSCompiler.
-        "--rewrite_polyfills=false",
+        # TODO: Phantomjs needs polyfills for some features used in tests.
+        #"--rewrite_polyfills=false",
         # Cuts optimize time nearly in half and the optimization leaks that it
         # previously hid no longer exist.
         "--closure_entry_point=gen.opt.Harness",
         # Since integration tests are used for optimized size tracking, set
         # behavior to the mode with the smallest output size which is what we
         # expect to be used for customer application production releases.
-        "--define=jre.checks.checkLevel=MINIMAL",
+        # TODO: Enable once the remove_j2cl_asserts option is made available.
+        #       "--define=jre.checks.checkLevel=MINIMAL",
     ]
 
     define_flags = ["--define=%s=%s" % (k, v) for (k, v) in closure_defines.items()]
@@ -89,47 +89,9 @@ def integration_test(
         _js_deps = js_deps,
         native_srcs = native_srcs,
         plugins = plugins,
-        tags = j2cl_library_tags,
+        tags = tags + j2cl_library_tags,
+        js_suppress = suppress,
     )
-
-    # blaze build :optimized_js
-    opt_harness = """
-      goog.module('gen.opt.Harness');
-      var Main = goog.require('%s');
-      Main.m_main__arrayOf_java_lang_String([]);
-  """ % main_class
-    _genfile("OptHarness.js", opt_harness)
-
-    native.js_binary(
-        name = "optimized_js",
-        srcs = ["OptHarness.js"],
-        defs = J2CL_OPTIMIZED_DEFS + optimized_extra_defs + defs,
-        compiler = "//javascript/tools/jscompiler:head",
-        deps = [":" + name],
-    )
-
-    # For constructing readable optimized diffs.
-    readable_out_defs = ["--variable_renaming=OFF", "--property_renaming=OFF", "--pretty_print"]
-    native.js_binary(
-        name = "readable_optimized_js",
-        srcs = ["OptHarness.js"],
-        defs = J2CL_OPTIMIZED_DEFS + readable_out_defs + optimized_extra_defs + defs,
-        compiler = "//javascript/tools/jscompiler:head",
-        deps = [":" + name],
-    )
-
-    # For constructing readable unoptimized diffs.
-    native.js_binary(
-        name = "readable_unoptimized_js",
-        srcs = ["OptHarness.js"],
-        defs = readable_out_defs + defs,
-        compiler = "//javascript/tools/jscompiler:head",
-        deps = [":" + name],
-    )
-
-    # For constructing GWT transpiled output.
-    if enable_gwt:
-        _gwt_targets(java_package, srcs, deps, gwt_deps)
 
     # blaze test :uncompiled_test
     # blaze test :compiled_test
@@ -146,111 +108,26 @@ def integration_test(
         }
       });
   """ % (main_class)
-    _genfile("TestHarness.js", test_harness)
+    _genfile("TestHarness_test.js", test_harness, tags)
 
-    jsunit_test_args = dict(
-        srcs = ["TestHarness.js"],
+    closure_js_test(
+        name = "compiled_test",
+        srcs = ["TestHarness_test.js"],
         deps = [
             ":" + name,
-            "//javascript/closure/testing:testsuite",
+            "@io_bazel_rules_closure//closure/library:testing",
         ],
-        deps_mgmt = "closure",
-        defs = J2CL_TEST_DEFS + [
-            "--closure_entry_point=gen.test.Harness",
-        ] + defs,
-        jvm_flags = [
-            "-Djsrunner.net.useJsBundles=true",
-            "-DstacktraceDeobfuscation=true",
-        ],
+        defs = J2CL_TEST_DEFS + optimized_extra_defs + defs,
+        suppress = suppress,
+        testonly = True,
+        tags = tags,
+        entry_points = ["gen.test.Harness"],
     )
 
-    jsunit_test(
-        name = "uncompiled_test_debug",
-        tags = ["manual", "notap"],
-        **jsunit_test_args
-    )
-
-    web_test(
-        name = "uncompiled_test",
-        browser = "//testing/web/browsers:chrome-linux",
-        tags = ["manual", "notap"] if disable_uncompiled_test else [],
-        test = ":uncompiled_test_debug",
-    )
-
-    jsunit_test(
-        name = "compiled_test_debug",
-        compile = 1,
-        compiler = "//javascript/tools/jscompiler:head",
-        tags = ["manual", "notap"],
-        **jsunit_test_args
-    )
-
-    web_test(
-        name = "compiled_test",
-        browser = "//testing/web/browsers:chrome-linux",
-        tags = ["manual", "notap"] if disable_compiled_test else [],
-        test = ":compiled_test_debug",
-    )
-
-def _gwt_targets(java_package, srcs, deps, gwt_deps):
-    if any([".srcjar" in src for src in srcs]):
-        fail("gwt_module cannot handle srcjar")
-
-    gwt_harness = """
-      package %s;
-      import com.google.gwt.core.client.EntryPoint;
-      public class MainEntryPoint implements EntryPoint {
-        @Override
-        public void onModuleLoad() {
-          Main.main(new String[] {});
-        }
-      }
-  """ % java_package
-    _genfile("MainEntryPoint.java", gwt_harness)
-
-    java_library_deps = gwt_deps if gwt_deps else [dep + "_java_library" for dep in deps]
-    native.gwt_module(
-        name = "gwt_module",
-        srcs = srcs + ["MainEntryPoint.java"],
-        deps = java_library_deps,
-        entry_points = [java_package + ".MainEntryPoint"],
-    )
-    native.gwt_application(
-        name = "readable_gwt_application",
-        compiler_opts = [
-            "-optimize 0",
-            "-style PRETTY",
-            "-setProperty user.agent=safari",
-            "-generateJsInteropExports",
-            "-ea",
-        ],
-        shard_count = 1,
-        module_target = ":gwt_module",
-        tags = ["manual"],
-    )
-
-    native.gwt_application(
-        name = "optimized_gwt_application",
-        compiler_opts = [
-            "-optimize 9",
-            "-style OBFUSCATED",
-            "-setProperty user.agent=safari",
-            "-setProperty compiler.stackMode=strip",
-            "-setProperty compiler.enum.obfuscate.names=true",
-            "-setProperty jre.logging.logLevel=OFF",
-            "-setProperty document.compatMode.severity=IGNORE",
-            "-setProperty user.agent.runtimeWarning=false",
-            "-setProperty jre.checks.checkLevel=MINIMAL",
-            "-XnoclassMetadata",
-        ],
-        shard_count = 1,
-        module_target = ":gwt_module",
-        tags = ["manual"],
-    )
-
-def _genfile(name, str):
+def _genfile(name, str, tags):
     native.genrule(
         name = name.replace(".", "_"),
         outs = [name],
         cmd = "echo \"%s\" > $@" % str,
+        tags = tags,
     )

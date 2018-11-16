@@ -12,5 +12,6 @@ load(
 integration_test(
     name = "jsfunctionbridge",
     srcs = glob(["*.java"]),
+    suppress = ["JSC_TYPE_MISMATCH"],
     deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )

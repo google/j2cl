@@ -13,5 +13,6 @@ integration_test(
     name = "jsfunctiontypeannotation",
     srcs = glob(["*.java"]),
     native_srcs = ["Main.native.js"],
+    suppress = ["JSC_TYPE_MISMATCH"],
     deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )

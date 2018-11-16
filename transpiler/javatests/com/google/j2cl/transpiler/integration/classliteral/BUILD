@@ -11,5 +11,6 @@ load(
 integration_test(
     name = "classliteral",
     srcs = glob(["*.java"]),
+    tags = ["manual"],
     deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )

@@ -30,6 +30,7 @@ integration_test(
     gwt_deps = [
         "//transpiler/javatests/com/google/j2cl/transpiler/integration/box2d:box2d_gwt",
     ],
+    tags = ["manual"],
     deps = [
         "//transpiler/javatests/com/google/j2cl/transpiler/integration/box2d:box2d_j2cl",
     ],
