@@ -169,6 +169,22 @@ PropertyUtils.hasDefaultStaticMethod = function(obj) {
  * @param {?} obj
  * @return {boolean}
  */
+PropertyUtils.hasOwnPropertyMine = function(obj) {
+  return obj.hasOwnProperty(goog.reflect.objectProperty('mine', obj));
+};
+
+/**
+ * @param {?} obj
+ * @return {boolean}
+ */
+PropertyUtils.hasOwnPropertyToString = function(obj) {
+  return obj.hasOwnProperty(goog.reflect.objectProperty('toString', obj));
+};
+
+/**
+ * @param {?} obj
+ * @return {boolean}
+ */
 PropertyUtils.hasNotExported_1 = function(obj) {
   return obj[goog.reflect.objectProperty('notExported_1', obj)] != null;
 };

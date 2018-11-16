@@ -38,7 +38,8 @@ public class MyTestCase {
   }
 
   public static void assertEquals(int expected, int actual) {
-    assert (expected == actual);
+    assert (expected == actual)
+        : "Not equals - expected: <" + expected + "> - actual: <" + actual + ">";
   }
 
   public static void assertTrue(boolean condition) {

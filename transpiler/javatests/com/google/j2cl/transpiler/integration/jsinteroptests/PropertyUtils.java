@@ -74,6 +74,12 @@ public class PropertyUtils {
   public static native boolean hasDefaultStaticMethod(Object obj);
 
   @JsMethod
+  public static native boolean hasOwnPropertyMine(Object obj);
+
+  @JsMethod
+  public static native boolean hasOwnPropertyToString(Object obj);
+
+  @JsMethod
   public static native boolean hasNotExported_1(Object obj);
 
   @JsMethod

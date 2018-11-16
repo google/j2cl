@@ -15,18 +15,8 @@ integration_test(
         "**/*.java",
         "native_types/*.js",
     ]),
-    defs = [
-        "--emit_use_strict=true",
-        # Make sure property renaming & variable renaming is turned off,
-        # otherwise JsTypeTest fails since it asserts properties.
-        # We need to turn both off here otherwise blaze fails with outputs not created.
-        "--property_renaming=OFF",
-        # We actually want variable renaming but have to turn it off due to bug: b/31816224
-        "--variable_renaming=OFF",
-    ],
     main_class = "woo.Main",
     native_srcs = glob(["*.native.js"]),
-    tags = ["manual"],
     deps = [
         "//third_party:closure_reflect",
         "//third_party:gwt-jsinterop-annotations-j2cl",

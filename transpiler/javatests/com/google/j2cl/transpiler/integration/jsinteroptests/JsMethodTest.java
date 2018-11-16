@@ -36,16 +36,13 @@ public class JsMethodTest extends MyTestCase {
 
   static class MyObject {
     @JsProperty public int mine;
-
-    @JsMethod
-    public native boolean hasOwnProperty(String name);
   }
 
   public void testNativeJsMethod() {
     MyObject obj = new MyObject();
     obj.mine = 0;
-    assertTrue(obj.hasOwnProperty("mine"));
-    assertFalse(obj.hasOwnProperty("toString"));
+    assertTrue(PropertyUtils.hasOwnPropertyMine(obj));
+    assertFalse(PropertyUtils.hasOwnPropertyToString(obj));
   }
 
   @JsMethod(namespace = GLOBAL)
