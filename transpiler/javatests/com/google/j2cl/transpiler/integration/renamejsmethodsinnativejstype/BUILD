@@ -9,7 +9,7 @@ load(
 )
 
 j2cl_library(
-    name = "Foo",
+    name = "foo",
     # Src's JUST the Foo class.
     srcs = ["Foo.java"],
     _js_deps = [":native_types"],
@@ -27,7 +27,8 @@ integration_test(
     srcs = ["Main.java"],
     native_srcs = ["Main.native.js"],
     deps = [
-        ":Foo",
+        ":foo",
+        ":native_types",
         "//third_party:gwt-jsinterop-annotations-j2cl",
     ],
 )

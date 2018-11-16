@@ -11,5 +11,4 @@ load(
 integration_test(
     name = "staticfieldcompoundassignment",
     srcs = glob(["*.java"]),
-    defs = ["--collapse_properties"],
 )
