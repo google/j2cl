@@ -12,5 +12,4 @@ load(
 integration_test(
     name = "gwtincompatible",
     srcs = glob(["*.java"]),
-    deps = ["//third_party:guava-j2cl"],
 )

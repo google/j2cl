@@ -32,5 +32,4 @@ integration_test(
         ":libgwtincompatibleMain-src.jar",
         ":libgwtincompatibleOther-src.jar",
     ],
-    deps = ["//third_party:guava-j2cl"],
 )
