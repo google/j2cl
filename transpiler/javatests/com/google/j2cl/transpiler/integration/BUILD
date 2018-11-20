@@ -79,3 +79,5 @@ java_library(
         "//transpiler/java/com/google/j2cl/transpiler:commandlinerunner_lib",
     ],
 )
+
+exports_files(["integration_tests_warnings_whitelist.txt"])
