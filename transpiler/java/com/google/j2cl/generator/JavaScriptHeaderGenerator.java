@@ -16,6 +16,7 @@
 package com.google.j2cl.generator;
 
 import com.google.common.collect.Iterables;
+import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.common.Problems;
@@ -45,7 +46,7 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
     sourceBuilder.append(");");
     sourceBuilder.newLine();
 
-    if (declareLegacyNamespace && typeDeclaration.isJsType() && !typeDeclaration.isAnonymous()) {
+    if (declareLegacyNamespace && AstUtils.canBeRequiredFromJs(typeDeclaration)) {
       // Even if opted into declareLegacyNamespace, this only makes sense for classes that are
       // intended to be accessed from the native JS. Thus we only emit declareLegacyNamespace
       // for non-anonymous JsType classes.

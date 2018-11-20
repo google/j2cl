@@ -47,7 +47,8 @@ public class AstUtils {
    * This is used to detect if a goog.module.declareLegacyNamespace should be emitted for a class.
    */
   public static boolean canBeRequiredFromJs(TypeDeclaration typeDescriptor) {
-    return typeDescriptor.isJsType() && !typeDescriptor.isAnonymous();
+    return (typeDescriptor.isJsType() || typeDescriptor.isJsEnum())
+        && !typeDescriptor.isAnonymous();
   }
 
   /** Return the String with first letter capitalized. */
