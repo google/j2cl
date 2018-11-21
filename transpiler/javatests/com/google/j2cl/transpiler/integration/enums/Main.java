@@ -15,7 +15,54 @@
  */
 package com.google.j2cl.transpiler.integration.enums;
 
+import java.util.function.Function;
+
 public class Main {
+  public static void main(String[] args) {
+    testOrdinal();
+    testName();
+    testInstanceMethod();
+    testStaticFields();
+    testEnumInitializedWithLambdas();
+  }
+
+  private static void testOrdinal() {
+    assert Foo.FOO.ordinal() == 0;
+    assert Foo.FOZ.ordinal() == 1;
+
+    assert Bar.BAR.ordinal() == 0;
+    assert Bar.BAZ.ordinal() == 1;
+    assert Bar.BANG.ordinal() == 2;
+
+    assert Blah.BLAH.ordinal() == 0;
+  }
+
+  private static void testName() {
+    assert Foo.FOO.name().equals("FOO");
+    assert Foo.FOZ.name().equals("FOZ");
+
+    assert Bar.BAR.name().equals("BAR");
+    assert Bar.BAZ.name().equals("BAZ");
+    assert Bar.BANG.name().equals("BANG");
+
+    assert Blah.BLAH.name().equals("BLAH");
+  }
+
+  private static void testInstanceMethod() {
+    assert Bar.BAR.getF() == 1;
+    assert Bar.BAZ.getF() == 0;
+    assert Bar.BANG.getF() == 7;
+  }
+
+  private static void testStaticFields() {
+    // Check use-before-def assigning undefined
+    // Although it isn't likely the test will make it this far
+    for (Bar b : Bar.ENUM_SET) {
+      assert b != null;
+    }
+
+    assert Baz.field == null;
+  }
 
   enum Foo {
     FOO,
@@ -66,33 +113,19 @@ public class Main {
     UNREFERENCED_VALUE,
   }
 
-  public static void main(String[] args) {
-    assert Foo.FOO.ordinal() == 0;
-    assert Foo.FOO.name().equals("FOO");
+  private static void testEnumInitializedWithLambdas() {
+    assert 1 == Functions.PLUS1.function.apply(0);
+    assert 1 == Functions.MINUS1.function.apply(2);
+  }
 
-    assert Foo.FOZ.ordinal() == 1;
-    assert Foo.FOZ.name().equals("FOZ");
+  enum Functions {
+    PLUS1(n -> n + 1),
+    MINUS1(n -> n - 1);
 
-    assert Bar.BAR.ordinal() == 0;
-    assert Bar.BAR.getF() == 1;
-    assert Bar.BAR.name().equals("BAR");
+    private final Function<Integer, Integer> function;
 
-    assert Bar.BAZ.ordinal() == 1;
-    assert Bar.BAZ.getF() == 0;
-    assert Bar.BAZ.name().equals("BAZ");
-
-    assert Bar.BANG.ordinal() == 2;
-    assert Bar.BANG.getF() == 7;
-    assert Bar.BANG.name().equals("BANG");
-    // Check use-before-def assigning undefined
-    // Although it isn't likely the test will make it this far
-    for (Bar b : Bar.ENUM_SET) {
-      assert b != null;
+    Functions(Function<Integer, Integer> function) {
+      this.function = function;
     }
-
-    assert Baz.field == null;
-
-    assert Blah.BLAH.ordinal() == 0;
-    assert Blah.BLAH.name().equals("BLAH");
   }
 }

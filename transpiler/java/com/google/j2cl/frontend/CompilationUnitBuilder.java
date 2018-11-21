@@ -104,6 +104,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
+import java.util.function.Function;
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.AbstractTypeDeclaration;
 import org.eclipse.jdt.core.dom.AnnotationTypeMemberDeclaration;
@@ -199,26 +200,53 @@ public class CompilationUnitBuilder {
     }
 
     private void convert(EnumDeclaration enumDeclaration) {
-      Type enumType = convertAndAddType(enumDeclaration);
-      checkState(enumType.isEnum());
+      convertAndAddType(
+          enumDeclaration,
+          enumType -> {
+            checkState(enumType.isEnum());
 
-      int ordinal = 0;
-      for (EnumConstantDeclaration enumConstantDeclaration :
-          JdtUtils.<EnumConstantDeclaration>asTypedList(enumDeclaration.enumConstants())) {
-        enumType.addField(ordinal, convert(enumConstantDeclaration));
-        ordinal++;
-      }
-      EnumMethodsCreator.applyTo(enumType);
+            int ordinal = 0;
+            for (EnumConstantDeclaration enumConstantDeclaration :
+                JdtUtils.<EnumConstantDeclaration>asTypedList(enumDeclaration.enumConstants())) {
+              enumType.addField(ordinal, convert(enumConstantDeclaration));
+              ordinal++;
+            }
+            EnumMethodsCreator.applyTo(enumType);
+            return null;
+          });
     }
 
-    private Type convertAndAddType(AbstractTypeDeclaration typeDeclaration) {
-      ITypeBinding typeBinding = typeDeclaration.resolveBinding();
-      Type type = createType(typeBinding, typeDeclaration.getName());
+    private void convertAndAddType(AbstractTypeDeclaration typeDeclaration) {
+      convertAndAddType(typeDeclaration, type -> null);
+    }
+
+    private void convertAndAddType(
+        AbstractTypeDeclaration typeDeclaration, Function<Type, Void> typeProcessor) {
+      convertAndAddType(
+          typeDeclaration.resolveBinding(),
+          JdtUtils.asTypedList(typeDeclaration.bodyDeclarations()),
+          typeDeclaration.getName(),
+          typeProcessor);
+    }
+
+    /**
+     * Constructs a type, maintains the type stack and let's the caller to do additional work by
+     * supplying a {@code typeProcessor}.
+     *
+     * @return {T} the value returned by {@code typeProcessor}
+     */
+    private <T> T convertAndAddType(
+        ITypeBinding typeBinding,
+        List<BodyDeclaration> bodyDeclarations,
+        ASTNode sourcePositionNode,
+        Function<Type, T> typeProcessor) {
+      Type type = createType(typeBinding, sourcePositionNode);
       pushType(type);
       j2clCompilationUnit.addType(type);
-      convertTypeBody(type, typeBinding, JdtUtils.asTypedList(typeDeclaration.bodyDeclarations()));
+      convertTypeBody(type, typeBinding, bodyDeclarations);
+      T result = typeProcessor.apply(type);
       popType();
-      return type;
+      return result;
     }
 
     private void convertTypeBody(
@@ -470,44 +498,45 @@ public class CompilationUnitBuilder {
         IMethodBinding constructorBinding,
         TypeDescriptor superQualifierTypeDescriptor) {
 
-      ITypeBinding typeBinding = typeDeclaration.resolveBinding();
-      Type type = createType(typeBinding, typeDeclaration);
-      j2clCompilationUnit.addType(type);
-      pushType(type);
-      convertTypeBody(type, typeBinding, JdtUtils.asTypedList(typeDeclaration.bodyDeclarations()));
+      return convertAndAddType(
+          typeDeclaration.resolveBinding(),
+          JdtUtils.asTypedList(typeDeclaration.bodyDeclarations()),
+          typeDeclaration,
+          type -> {
+            // The initial constructor descriptor does not include the super call qualifier.
+            MethodDescriptor constructorDescriptor =
+                JdtUtils.createMethodDescriptor(constructorBinding);
 
-      // The initial constructor descriptor does not include the super call qualifier.
-      MethodDescriptor constructorDescriptor = JdtUtils.createMethodDescriptor(constructorBinding);
+            // Find the corresponding superconstructor, the ClassInstanceCreation construct does not
+            // have a reference the super constructor that needs to be called. But the synthetic
+            // anonymous class constructor is a subsignature of the corresponding super constructor.
+            IMethodBinding superConstructorBinding =
+                Arrays.stream(typeDeclaration.resolveBinding().getSuperclass().getDeclaredMethods())
+                    .filter(IMethodBinding::isConstructor)
+                    .filter(constructorBinding::isSubsignature)
+                    .findFirst()
+                    .orElse(constructorBinding);
+            MethodDescriptor superConstructorDescriptor =
+                MethodDescriptor.Builder.from(
+                        JdtUtils.createMethodDescriptor(superConstructorBinding))
+                    .setEnclosingTypeDescriptor(type.getSuperTypeDescriptor())
+                    .build();
 
-      // Find the corresponding superconstructor, the ClassInstanceCreation construct does not
-      // have a reference the super constructor that needs to be called. But the synthetic
-      // anonymous class constructor is a subsignature of the corresponding super constructor.
-      IMethodBinding superConstructorBinding =
-          Arrays.stream(typeBinding.getSuperclass().getDeclaredMethods())
-              .filter(IMethodBinding::isConstructor)
-              .filter(constructorBinding::isSubsignature)
-              .findFirst()
-              .orElse(constructorBinding);
-      MethodDescriptor superConstructorDescriptor =
-          MethodDescriptor.Builder.from(JdtUtils.createMethodDescriptor(superConstructorBinding))
-              .setEnclosingTypeDescriptor(type.getSuperTypeDescriptor())
-              .build();
+            if (superQualifierTypeDescriptor != null) {
+              // If an explicit super qualifier was specified add it as the first parameter to the
+              // constructor.
+              constructorDescriptor =
+                  MethodDescriptor.Builder.from(constructorDescriptor)
+                      .addParameterTypeDescriptors(0, superQualifierTypeDescriptor)
+                      .build();
+            }
 
-      if (superQualifierTypeDescriptor != null) {
-        // If an explicit super qualifier was specified add it as the first parameter to the
-        // constructor.
-        constructorDescriptor =
-            MethodDescriptor.Builder.from(constructorDescriptor)
-                .addParameterTypeDescriptors(0, superQualifierTypeDescriptor)
-                .build();
-      }
-
-      type.addMethod(
-          0,
-          AstUtils.createImplicitAnonymousClassConstructor(
-              type.getSourcePosition(), constructorDescriptor, superConstructorDescriptor));
-      popType();
-      return constructorDescriptor;
+            type.addMethod(
+                0,
+                AstUtils.createImplicitAnonymousClassConstructor(
+                    type.getSourcePosition(), constructorDescriptor, superConstructorDescriptor));
+            return constructorDescriptor;
+          });
     }
 
     private Expression convertAnonymousClassCreation(

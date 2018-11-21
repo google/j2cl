@@ -1,0 +1,222 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.enums.Enum3.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire,
+ * suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables,
+ * uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.enums.Enum3$impl');
+
+
+const Enum = goog.require('java.lang.Enum$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let j_u_function_Function = goog.forwardDeclare('java.util.function.Function$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
+
+
+/**
+ * @extends {Enum<Enum3>}
+ */
+class Enum3 extends Enum {
+  /**
+   * @protected
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * @param {?string} $name
+   * @param {number} $ordinal
+   * @param {j_u_function_Function<Integer, Integer>} function$1$
+   * @return {!Enum3}
+   * @public
+   */
+  static $create__java_lang_String__int__java_util_function_Function(
+      $name, $ordinal, function$1$) {
+    let $instance = new Enum3();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_enums_Enum3__java_lang_String__int__java_util_function_Function(
+            $name, $ordinal, function$1$);
+    return $instance;
+  }
+
+  /**
+   * @param {?string} $name
+   * @param {number} $ordinal
+   * @param {j_u_function_Function<Integer, Integer>} function$1$
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_enums_Enum3__java_lang_String__int__java_util_function_Function(
+      $name, $ordinal, function$1$) {
+    this.f_name__java_lang_Enum_ = $name;
+    this.f_ordinal__java_lang_Enum_ = $ordinal;
+    this.$ctor__java_lang_Enum__java_lang_String__int($name, $ordinal);
+  }
+
+  /**
+   * @param {string} name
+   * @return {!Enum3}
+   * @public
+   */
+  static m_valueOf__java_lang_String(name) {
+    Enum3.$clinit();
+    if ($Equality.$same(
+            Enum3
+                .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_enums_Enum3_,
+            null)) {
+      Enum3
+          .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_enums_Enum3_ =
+          $Enums.createMapFromValues(Enum3.m_values__());
+    }
+    return $Enums.getValueFromNameAndMap(
+        name,
+        Enum3
+            .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_enums_Enum3_);
+  }
+
+  /**
+   * @return {!Array<!Enum3>}
+   * @public
+   */
+  static m_values__() {
+    Enum3.$clinit();
+    return /**@type {!Array<Enum3>} */ ($Arrays.$init(
+        [Enum3.$f_VALUE1__com_google_j2cl_transpiler_readable_enums_Enum3],
+        Enum3));
+  }
+
+  /**
+   * Bridge method.
+   * @override
+   * @param {*} arg0
+   * @return {number}
+   * @public
+   */
+  m_compareTo__java_lang_Object(arg0) {
+    return super.compareTo(/**@type {Enum3} */ ($Casts.$to(arg0, Enum3)));
+  }
+
+  /**
+   * @return {!Enum3}
+   * @public
+   */
+  static get f_VALUE1__com_google_j2cl_transpiler_readable_enums_Enum3() {
+    return (
+        Enum3.$clinit(),
+        Enum3.$f_VALUE1__com_google_j2cl_transpiler_readable_enums_Enum3);
+  }
+
+  /**
+   * @param {!Enum3} value
+   * @return {void}
+   * @public
+   */
+  static set f_VALUE1__com_google_j2cl_transpiler_readable_enums_Enum3(value) {
+    (Enum3.$clinit(),
+     Enum3.$f_VALUE1__com_google_j2cl_transpiler_readable_enums_Enum3 = value);
+  }
+
+  /**
+   * @return {Map<?string, !Enum3>}
+   * @public
+   */
+  static get f_namesToValuesMap__com_google_j2cl_transpiler_readable_enums_Enum3_() {
+    return (
+        Enum3.$clinit(),
+        Enum3
+            .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_enums_Enum3_);
+  }
+
+  /**
+   * @param {Map<?string, !Enum3>} value
+   * @return {void}
+   * @public
+   */
+  static set f_namesToValuesMap__com_google_j2cl_transpiler_readable_enums_Enum3_(
+      value) {
+    (Enum3.$clinit(),
+     Enum3
+         .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_enums_Enum3_ =
+         value);
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    Enum3.$clinit = (() => {});
+    Enum3.$loadModules();
+    Enum.$clinit();
+    Enum3.$f_VALUE1__com_google_j2cl_transpiler_readable_enums_Enum3 =
+        Enum3.$create__java_lang_String__int__java_util_function_Function(
+            $Util.$makeEnumName('VALUE1'),
+            Enum3
+                .$ordinal$f_VALUE1__com_google_j2cl_transpiler_readable_enums_Enum3,
+            j_u_function_Function.$adapt(((/** Integer */ v) => {
+              return Integer.m_valueOf__int(1 + v.m_intValue__());
+            })));
+    Enum3
+        .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_enums_Enum3_ =
+        null;
+  }
+
+  /**
+   * @param {?} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof Enum3;
+  }
+
+  /**
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Enum3);
+  }
+
+  /**
+   * @public
+   */
+  static $loadModules() {
+    Integer = goog.module.get('java.lang.Integer$impl');
+    j_u_function_Function = goog.module.get('java.util.function.Function$impl');
+    $Equality = goog.module.get('nativebootstrap.Equality$impl');
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+    $Enums = goog.module.get('vmbootstrap.Enums$impl');
+  }
+};
+
+$Util.$setClassMetadataForEnum(
+    Enum3,
+    $Util.$makeClassName('com.google.j2cl.transpiler.readable.enums.Enum3'));
+
+
+/** @private {!Enum3} */
+Enum3.$f_VALUE1__com_google_j2cl_transpiler_readable_enums_Enum3;
+
+
+/** @private {Map<?string, !Enum3>} */
+Enum3.$f_namesToValuesMap__com_google_j2cl_transpiler_readable_enums_Enum3_;
+
+
+/** @public {number} @const */
+Enum3.$ordinal$f_VALUE1__com_google_j2cl_transpiler_readable_enums_Enum3 = 0;
+
+
+
+exports = Enum3;
+//# sourceMappingURL=Enum3.js.map

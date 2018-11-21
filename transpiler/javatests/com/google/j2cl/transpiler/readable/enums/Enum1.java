@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.readable.enums;
 
+import java.util.function.Function;
+
 public enum Enum1 {
   V1,
   V2
@@ -45,4 +47,10 @@ enum Enum2 {
   }
 
   static Enum2 C = f(new Object());
+}
+
+enum Enum3 {
+  VALUE1(v -> 1 + v);
+
+  Enum3(Function<Integer, Integer> function) {}
 }
