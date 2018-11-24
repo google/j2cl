@@ -92,7 +92,7 @@ java_library(
 j2cl_library(
   name = "logger-j2cl",
   srcs = [
-    "super-j2cl/Logger.java", //swaperoo
+    "super-j2cl/Logger.java", # swaperoo
   ],
   deps = ":mydep-j2cl",
 )
@@ -223,7 +223,11 @@ if (System.getProperty("some.define") == "YES") {
 ```
 
 ```python
-defs = ["--define=some.define=YES"] + J2CL_OPTIMIZED_DEFS
+js_binary(
+    name = "optimized_j2cl_app",
+    defs = defs = ["--define=some.define=YES"] + J2CL_OPTIMIZED_DEFS,
+    deps = [":js_lib"],
+)
 ```
 
 ### Much Java, such size
@@ -234,7 +238,7 @@ should be evaluated with some caution. It can come with a non-trivial increase
 in code size (and compile time) in your fully optimized application. In general,
 you may want to be more conservative in pulling in non-critical J2CL
 dependencies than in regular Java projects. Remember that you are writing code
-that runs in the web!
+that runs in a web browser!
 
 Additionally, APT based code generation such as
 [Dagger](https://google.github.io/dagger/) or
