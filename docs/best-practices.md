@@ -225,7 +225,7 @@ if (System.getProperty("some.define") == "YES") {
 ```python
 js_binary(
     name = "optimized_j2cl_app",
-    defs = defs = ["--define=some.define=YES"] + J2CL_OPTIMIZED_DEFS,
+    defs = ["--define=some.define=YES"] + J2CL_OPTIMIZED_DEFS,
     deps = [":js_lib"],
 )
 ```
