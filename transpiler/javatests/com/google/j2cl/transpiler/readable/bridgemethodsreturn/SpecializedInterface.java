@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 Google Inc.
+ * Copyright 2018 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,14 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.google.j2cl.transpiler.readable.bridgemethodsreturn;
 
-public class A<T, S> {
-  public T fun(S s) {
-    return null;
-  }
+/** An interface with the same method as A but specialzied. */
+interface SpecializedInterface {
+  String fun(String s);
 
-  public T get() {
-    return null;
-  }
+  String get();
 }

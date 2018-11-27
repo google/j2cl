@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 Google Inc.
+ * Copyright 2018 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,12 +15,4 @@
  */
 package com.google.j2cl.transpiler.readable.bridgemethodsreturn;
 
-public class A<T, S> {
-  public T fun(S s) {
-    return null;
-  }
-
-  public T get() {
-    return null;
-  }
-}
+public class AccidentalOverride extends A<String, String> implements SpecializedInterface {}

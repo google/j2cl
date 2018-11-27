@@ -15,42 +15,102 @@
  */
 package com.google.j2cl.transpiler.integration.bridgemethodaccidentaloverride;
 
-class Parent {
-  public Error foo(Error e) {
-    return e;
-  }
-}
-
-interface SuperInterface<T> {
-  T foo(T t);
-}
-
-class Child extends Parent implements SuperInterface<Error> {
-  // Parent.foo(Error) accidentally overrides SuperInterface.foo(T)
-  // there should be a bridge method foo__Object for SuperInterface.foo(T), and the bridge
-  // method delegates to foo__Error() in Parent.
-}
 
 /**
  * Test for bridge method with accidental overriding.
  */
 public class Main {
-  @SuppressWarnings({"rawtypes", "unchecked"})
-  public Object callInterfaceFoo(SuperInterface intf, Object t) {
-    return intf.foo(t);
+  public static void main(String[] args) {
+    testBridgeForwardsToSpecializedMethod();
+    testBridgeSpecializesSuperclassMethod();
   }
 
-  public static void main(String[] args) {
-    Main m = new Main();
+  private static void testBridgeForwardsToSpecializedMethod() {
     Child c = new Child();
     Error e = new Error();
-    assert (m.callInterfaceFoo(c, e) == e);
-    assert (c.foo(e) == m.callInterfaceFoo(c, e));
+    assert (callInterfaceFoo(c, e) == e);
+    assert (c.foo(e) == callInterfaceFoo(c, e));
     try {
-      m.callInterfaceFoo(c, new Object());
+      callInterfaceFoo(c, new Object());
       assert false : "ClassCastException should be thrown.";
     } catch (ClassCastException cce) {
       // expected.
+    }
+  }
+
+  private static class Parent {
+    public Error foo(Error e) {
+      return e;
+    }
+  }
+
+  interface SuperInterface<T> {
+    T foo(T t);
+  }
+
+  private static class Child extends Parent implements SuperInterface<Error> {
+    // Parent.foo(Error) accidentally overrides SuperInterface.foo(T)
+    // there should be a bridge method foo__Object for SuperInterface.foo(T), and the bridge
+    // method delegates to foo__Error() in Parent.
+  }
+
+  @SuppressWarnings({"rawtypes", "unchecked"})
+  private static Object callInterfaceFoo(SuperInterface intf, Object t) {
+    return intf.foo(t);
+  }
+
+  private static void testBridgeSpecializesSuperclassMethod() {
+    SupplierStringImpl sImpl = new SupplierStringImpl("Hello");
+    SupplierString s = sImpl;
+    assert s.get().equals("Hello");
+
+    // Assing to raw type to subvert the value.
+    AbstractSupplier as = sImpl;
+    as.t = new Object();
+    try {
+      s.f(null);
+      assert false : "ClassCastException should be thrown.";
+    } catch (ClassCastException cce) {
+      // expected.
+    }
+    try {
+      s.get();
+      // TODO(b/119956463): Uncomment when the bug is fixed.
+      // assert false : "ClassCastException should be thrown.";
+    } catch (ClassCastException cce) {
+      // expected.
+    }
+  }
+
+  private abstract static class AbstractSupplier<T> {
+    T t;
+
+    AbstractSupplier(T t) {
+      this.t = t;
+    }
+
+    public T get() {
+      return t;
+    }
+
+    public T f(T t) {
+      return this.t;
+    }
+  }
+
+  interface SupplierString {
+    String get();
+
+    String f(String s);
+  }
+
+  private static class SupplierStringImpl extends AbstractSupplier<String>
+      implements SupplierString {
+    // T AbstractSupplier.get() accidentally overrides String SupplierString.get(). Hence there
+    // should be a bridge method String SupplierStringImpl.get() that has a cast check on the
+    // return.
+    SupplierStringImpl(String s) {
+      super(s);
     }
   }
 }
