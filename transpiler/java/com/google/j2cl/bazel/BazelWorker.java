@@ -15,14 +15,18 @@
  */
 package com.google.j2cl.bazel;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import com.google.common.base.Splitter;
 import com.google.common.collect.Iterables;
 import com.google.common.io.Files;
 import com.google.devtools.build.lib.worker.WorkerProtocol.WorkRequest;
 import com.google.devtools.build.lib.worker.WorkerProtocol.WorkResponse;
 import com.google.j2cl.common.Problems;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
@@ -77,11 +81,14 @@ public abstract class BazelWorker {
   private static void runStandaloneWorker(Supplier<BazelWorker> workerSupplier, String[] args)
       throws IOException {
     // This is a single invocation of builder that exits after it processed the request.
-    try (PrintWriter err = new PrintWriter(System.err)) {
-      int exitCode = execute(workerSupplier, expandFlagFile(args), err);
-      err.flush();
-      System.exit(exitCode);
-    }
+
+    // DO NOT close the err PrintWriter, since it will close the System.err stream and swallow
+    // whatever gets sent to it, e.g. exception stack trace.
+    PrintWriter err =
+        new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.err, UTF_8)));
+    int exitCode = execute(workerSupplier, expandFlagFile(args), err);
+    err.flush();
+    System.exit(exitCode);
   }
 
   private static void runPersistentWorker(Supplier<BazelWorker> workerSupplier) throws IOException {
@@ -91,7 +98,7 @@ public abstract class BazelWorker {
       if (request == null) {
         break;
       }
-
+      
       try (StringWriter sw = new StringWriter();
           PrintWriter pw = new PrintWriter(sw)) {
         String[] args = request.getArgumentsList().toArray(new String[0]);
