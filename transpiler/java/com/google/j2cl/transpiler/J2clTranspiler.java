@@ -95,6 +95,7 @@ import com.google.j2cl.generator.OutputGeneratorStage;
 import java.io.IOException;
 import java.nio.file.FileSystem;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
@@ -105,9 +106,15 @@ class J2clTranspiler {
   static Problems transpile(J2clTranspilerOptions options) {
     // Compiler has no static state, but rather uses thread local variables.
     // Because of this, we invoke the compiler on a different thread each time.
+    ExecutorService executorService = Executors.newSingleThreadExecutor();
     Future<Problems> result =
-        Executors.newSingleThreadExecutor()
-            .submit(() -> new J2clTranspiler(options).transpileImpl());
+        executorService.submit(() -> new J2clTranspiler(options).transpileImpl());
+    // Shutdown the executor service since it will only run a single transpilation. If not shutdown
+    // it prevents the JVM from ending the process (see Executors.newFixedThreadPool()). This is not
+    // normally obvserved since the transpiler in normal circumstances ends with System.exit() which
+    // ends all threads. But when the transpilation throws an exception, the exception propagates
+    // out of main() and the process lingers due the live threads from these executors.
+    executorService.shutdown();
     return Futures.getUnchecked(result);
   }
 
