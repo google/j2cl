@@ -1625,6 +1625,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "    A.name();",
             "    MyJsEnum.values();",
             "    MyJsEnum.valueOf(null);",
+            "    Consumer<MyJsEnum> consumer = c -> c.ordinal();",
             "  }",
             "  int value = 5;",
             "  int instanceField;",
@@ -1657,6 +1658,9 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "class AListSubclass<T extends MyJsEnum>",
             "    extends AList<MyJsEnum> implements List<MyJsEnum>  {",
             "    public MyJsEnum getObject() { return null; }",
+            "}",
+            "interface Consumer<T> {",
+            "  void accept(T t);",
             "}")
         .assertErrorsWithoutSourcePosition(
             "Non-custom-valued JsEnum 'MyJsEnum' cannot have constructor 'MyJsEnum()'.",
@@ -1688,7 +1692,9 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "Method 'MyJsEnum AListSubclass.getObject()' returning JsEnum cannot override method "
                 + "'Object List.getObject()'. (b/118301700)",
             "Cannot use 'super' in JsOverlay method 'void MyJsEnum.anOverlayMethod()'.",
-            "Cannot use 'super' in JsEnum method 'void MyJsEnum.aMethod()'.");
+            "Cannot use 'super' in JsEnum method 'void MyJsEnum.aMethod()'.",
+            "'Consumer<MyJsEnum>' lambda cannot have non-native JsEnum 'MyJsEnum' as a "
+                + "type argument. (b/120087079)");
   }
 
   public void testJsEnumSucceeds() {
@@ -1878,6 +1884,12 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "class AListSubclass<T extends Native>",
             "    extends AList<Native> implements List<Native>  {",
             "    public Native getObject() { return null; }",
+            "}",
+            "interface Consumer<T> {",
+            "  void accept(T t);",
+            "  static void test() {",
+            "    Consumer<Native> consumer = c -> c.toString();",
+            "  }",
             "}")
         .assertNoWarnings();
   }
