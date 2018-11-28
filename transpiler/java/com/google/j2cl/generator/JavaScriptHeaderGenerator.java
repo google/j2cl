@@ -24,19 +24,19 @@ import com.google.j2cl.generator.ImportGatherer.ImportCategory;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Generates JavaScript source header files.
- */
+/** Generates JavaScript source header files. */
 public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
 
   public static final String FILE_SUFFIX = ".java.js";
+
   public JavaScriptHeaderGenerator(Problems problems, boolean declareLegacyNamespace, Type type) {
     super(problems, declareLegacyNamespace, type);
   }
 
   @Override
   public String renderOutput() {
-    renderFileOverview("extraRequire", "lateProvide", "unusedLocalVariables");
+    renderFileOverview(
+        "extraRequire", "lateProvide", "unusedLocalVariables", "strictModuleDepCheck");
 
     TypeDeclaration typeDeclaration = type.getDeclaration();
     sourceBuilder.append("goog.module(");

@@ -114,7 +114,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
           "suspiciousCode",
           "transitionalSuspiciousCodeWarnings",
           "unusedLocalVariables",
-          "uselessCode");
+          "uselessCode",
+          "strictModuleDepCheck");
       renderImports();
       if (type.getDeclaration().isJsEnum()) {
         // TODO(b/117150539): Decide if native.js files are allowed on JsEnum or not, and implement
