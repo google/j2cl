@@ -19,6 +19,11 @@ import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsOverlay;
 
 public class Main {
+  public static void main(String... args) {
+    testJsFunction();
+    testSpecializedJsFunction();
+  }
+
   @JsFunction
   interface Function {
     boolean invoke();
@@ -48,14 +53,29 @@ public class Main {
     @JsOverlay int f = 1;
   }
 
-  public static void main(String... args) {
-    test();
-  }
-
-  public static void test() {
+  private static void testJsFunction() {
     assert ((Function) (() -> true)).fun() == 2;
     assert ((Function) (() -> false)).fun() == 3;
     assert FunctionWithStaticOverlay.fun() == 4;
     assert FunctionWithStaticField.f == 1;
+  }
+
+  @SuppressWarnings({"rawtypes", "unchecked"})
+  private static void testSpecializedJsFunction() {
+    Consumer<String> stringConsumer = s -> s.substring(2);
+    Consumer rawConsumer = stringConsumer;
+    try {
+      // TODO(b/67329642): uncomment when bug is fixed.
+      // If the erasure type check is not present, the code would attempt to call "substring" on
+      // java.lang.Object resulting in a type error.
+      // rawConsumer.accept(new Object());
+      // assert false : "Should have thrown ClassCastException";
+    } catch (ClassCastException expected) {
+    }
+  }
+
+  @JsFunction
+  interface Consumer<T> {
+    void accept(T t);
   }
 }

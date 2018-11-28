@@ -46,6 +46,7 @@ public class Main {
     testUnckeckedCastJsEnum();
     testBoxUnboxWithTypeInference();
     testBoxingWithSpecialMethods();
+    testParameterizedLambdaUnboxing();
   }
 
   @JsEnum(isNative = true, namespace = "test")
@@ -699,6 +700,23 @@ public class Main {
 
   private static <T> Object[] varargsToObjectArray(T... elements) {
     return elements;
+  }
+
+  private static void testParameterizedLambdaUnboxing() {
+
+    Function<Object> ordinalWithCast = e -> ((PlainJsEnum) e).ordinal();
+    assertTrue(1 == ordinalWithCast.apply(PlainJsEnum.ONE));
+
+    // TODO(b/120087079): uncomment when parameterizing lambda with non-native JsEnums is supported.
+    // Since the lambda is not a class and cannot not have bridge methods, if the cast
+    // check/conversions triggered by specialization is not present the following code would not
+    // unbox "e" and would end up returning a boxed enum instead of the ordinal.
+    // Function<PlainJsEnum> ordinal = e -> e.ordinal();
+    // assertTrue(1 == ordinal.apply(PlainJsEnum.ONE));
+  }
+
+  interface Function<T> {
+    int apply(T t);
   }
 
   @JsMethod
