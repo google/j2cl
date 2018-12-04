@@ -629,6 +629,10 @@ public abstract class MethodDescriptor extends MemberDescriptor {
           .collect(ImmutableList.toImmutableList());
     }
 
+    public Builder setParameterDescriptors(ParameterDescriptor... parameterDescriptors) {
+      return setParameterDescriptors(Arrays.asList(parameterDescriptors));
+    }
+
     public abstract Builder setParameterDescriptors(
         Iterable<ParameterDescriptor> parameterDescriptors);
 
