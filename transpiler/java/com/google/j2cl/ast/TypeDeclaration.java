@@ -590,6 +590,30 @@ public abstract class TypeDeclaration extends Node
     return false;
   }
 
+  /** Returns {@code true} if {@code this} is subtype of {@code that}. */
+  public boolean isSubtypeOf(TypeDeclaration that) {
+    // TODO(b/70951075): distinguish between Java isSubtypeOf and our target interpretation of
+    // isSubtypeOf for optimization purposes in the context of jsinterop. Note that this method is
+    // used assuming it provides Java semantics.
+    return TypeDescriptors.isJavaLangObject(that.toUnparameterizedTypeDescriptor())
+        || getAllSuperTypesIncludingSelf().contains(that);
+  }
+
+  @Memoized
+  protected Set<TypeDeclaration> getAllSuperTypesIncludingSelf() {
+    Set<TypeDeclaration> allSupertypesIncludingSelf = new LinkedHashSet<>();
+    allSupertypesIncludingSelf.add(this);
+    if (getSuperTypeDescriptor() != null) {
+      allSupertypesIncludingSelf.addAll(
+          getSuperTypeDescriptor().getTypeDeclaration().getAllSuperTypesIncludingSelf());
+    }
+    for (DeclaredTypeDescriptor interfaceTypeDescriptor : getInterfaceTypeDescriptors()) {
+      allSupertypesIncludingSelf.addAll(
+          interfaceTypeDescriptor.getTypeDeclaration().getAllSuperTypesIncludingSelf());
+    }
+    return allSupertypesIncludingSelf;
+  }
+
   /**
    * The list of methods declared in the type. Note: this does not include methods synthetic methods
    * (like bridge methods) nor supertype methods that are not overridden in the type.

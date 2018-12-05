@@ -243,17 +243,15 @@ public class CompilationUnitBuilder {
       Type type = createType(typeBinding, sourcePositionNode);
       pushType(type);
       j2clCompilationUnit.addType(type);
-      convertTypeBody(type, typeBinding, bodyDeclarations);
+      convertTypeBody(type, bodyDeclarations);
       T result = typeProcessor.apply(type);
       popType();
       return result;
     }
 
-    private void convertTypeBody(
-        Type type, ITypeBinding typeBinding, List<BodyDeclaration> bodyDeclarations) {
+    private void convertTypeBody(Type type, List<BodyDeclaration> bodyDeclarations) {
       TypeDeclaration currentTypeDeclaration = type.getDeclaration();
-      ITypeBinding superclassBinding = typeBinding.getSuperclass();
-      if (superclassBinding != null) {
+      if (type.getSuperTypeDescriptor() != null) {
         capturesByTypeName.putAll(
             currentTypeDeclaration.getQualifiedSourceName(),
             capturesByTypeName.get(type.getSuperTypeDescriptor().getQualifiedSourceName()));
@@ -301,7 +299,7 @@ public class CompilationUnitBuilder {
                 .setNameSourcePosition(capturedVariable.getSourcePosition())
                 .build());
       }
-      if (JdtUtils.capturesEnclosingInstance(typeBinding)) {
+      if (type.getDeclaration().isCapturingEnclosingInstance()) {
         // add field for enclosing instance.
         type.addField(
             0,
@@ -489,7 +487,7 @@ public class CompilationUnitBuilder {
       if (isAnonymousClassCreation) {
         return convertAnonymousClassCreation(expression);
       } else {
-        return convertRegularClassCreation(expression);
+        return convertInstanceCreation(expression);
       }
     }
 
@@ -542,7 +540,6 @@ public class CompilationUnitBuilder {
     private Expression convertAnonymousClassCreation(
         org.eclipse.jdt.core.dom.ClassInstanceCreation expression) {
       IMethodBinding constructorBinding = expression.resolveConstructorBinding();
-      ITypeBinding newInstanceTypeBinding = constructorBinding.getDeclaringClass();
 
       List<Expression> arguments =
           convertArguments(constructorBinding, JdtUtils.asTypedList(expression.arguments()));
@@ -560,15 +557,12 @@ public class CompilationUnitBuilder {
                   : JdtUtils.createTypeDescriptor(expression.getExpression().resolveTypeBinding()));
 
       // the qualifier for the NewInstance.
+      DeclaredTypeDescriptor anonymousClassTypeDescriptor =
+          constructorDescriptor.getEnclosingTypeDescriptor();
       Expression newInstanceQualifier =
-          constructorDescriptor
-                  .getEnclosingTypeDescriptor()
-                  .getTypeDeclaration()
-                  .isCapturingEnclosingInstance()
-              ? convertOuterClassReference(
-                  JdtUtils.findCurrentTypeBinding(expression),
-                  newInstanceTypeBinding.getDeclaringClass(),
-                  false)
+          anonymousClassTypeDescriptor.getTypeDeclaration().isCapturingEnclosingInstance()
+              ? resolveImplicitOuterClassReference(
+                  anonymousClassTypeDescriptor.getEnclosingTypeDescriptor())
               : null;
       return NewInstance.Builder.from(constructorDescriptor)
           .setQualifier(newInstanceQualifier)
@@ -576,7 +570,7 @@ public class CompilationUnitBuilder {
           .build();
     }
 
-    private Expression convertRegularClassCreation(
+    private Expression convertInstanceCreation(
         org.eclipse.jdt.core.dom.ClassInstanceCreation expression) {
 
       IMethodBinding constructorBinding = expression.resolveConstructorBinding();
@@ -585,10 +579,12 @@ public class CompilationUnitBuilder {
 
       MethodDescriptor constructorMethodDescriptor =
           JdtUtils.createMethodDescriptor(constructorBinding);
-      ITypeBinding newInstanceTypeBinding = constructorBinding.getDeclaringClass();
+      DeclaredTypeDescriptor targetTypeDescriptor =
+          constructorMethodDescriptor.getEnclosingTypeDescriptor();
       Expression qualifier = convertOrNull(expression.getExpression());
-      checkArgument(!newInstanceTypeBinding.isAnonymous());
-      boolean needsQualifier = JdtUtils.capturesEnclosingInstance(newInstanceTypeBinding);
+      checkArgument(!targetTypeDescriptor.getTypeDeclaration().isAnonymous());
+      boolean needsQualifier =
+          targetTypeDescriptor.getTypeDeclaration().isCapturingEnclosingInstance();
       checkArgument(
           qualifier == null || needsQualifier,
           "NewInstance of non nested class should have no qualifier.");
@@ -606,10 +602,8 @@ public class CompilationUnitBuilder {
               //     public void test() { new B(); }
               //   }
               // }
-              ? convertOuterClassReference(
-                  JdtUtils.findCurrentTypeBinding(expression),
-                  newInstanceTypeBinding.getDeclaringClass(),
-                  false)
+              ? resolveImplicitOuterClassReference(
+                  targetTypeDescriptor.getEnclosingTypeDescriptor())
               : qualifier;
 
       return NewInstance.Builder.from(constructorMethodDescriptor)
@@ -1217,10 +1211,8 @@ public class CompilationUnitBuilder {
                   .getTypeDeclaration()
                   .isCapturingEnclosingInstance()
               // Inner classes may have an implicit enclosing class qualifier (2).
-              ? convertOuterClassReference(
-                  JdtUtils.findCurrentTypeBinding(expression),
-                  expressionTypeBinding.getDeclaringClass(),
-                  true)
+              ? resolveExplicitOuterClassReference(
+                  JdtUtils.createDeclaredTypeDescriptor(expressionTypeBinding.getDeclaringClass()))
               : null;
 
       return FunctionExpression.newBuilder()
@@ -1275,18 +1267,16 @@ public class CompilationUnitBuilder {
      * </pre>
      */
     private Expression convert(SuperMethodReference expression) {
-      IMethodBinding methodBinding = expression.resolveMethodBinding();
+      MethodDescriptor methodDescriptor =
+          JdtUtils.createMethodDescriptor(expression.resolveMethodBinding());
 
       return createForwardingFunctionExpression(
           getSourcePosition(expression),
           JdtUtils.createDeclaredTypeDescriptor(expression.resolveTypeBinding()),
           JdtUtils.createMethodDescriptor(
               expression.resolveTypeBinding().getFunctionalInterfaceMethod()),
-          convertOuterClassReference(
-              JdtUtils.findCurrentTypeBinding(expression),
-              methodBinding.getDeclaringClass(),
-              false),
-          JdtUtils.createMethodDescriptor(methodBinding),
+          resolveImplicitOuterClassReference(methodDescriptor.getEnclosingTypeDescriptor()),
+          methodDescriptor,
           true);
     }
 
@@ -1394,10 +1384,7 @@ public class CompilationUnitBuilder {
       IVariableBinding variableBinding = expression.resolveFieldBinding();
       FieldDescriptor fieldDescriptor = JdtUtils.createFieldDescriptor(variableBinding);
       Expression qualifier =
-          convertOuterClassReference(
-              JdtUtils.findCurrentTypeBinding(expression),
-              variableBinding.getDeclaringClass(),
-              false);
+          resolveImplicitOuterClassReference(fieldDescriptor.getEnclosingTypeDescriptor());
 
       return FieldAccess.Builder.from(fieldDescriptor).setQualifier(qualifier).build();
     }
@@ -1455,10 +1442,8 @@ public class CompilationUnitBuilder {
       }
 
       // Not static so has to be a reference to 'this
-      return convertOuterClassReference(
-          JdtUtils.findCurrentTypeBinding(methodInvocation),
-          methodBinding.getDeclaringClass(),
-          false);
+      return resolveImplicitOuterClassReference(
+          JdtUtils.createDeclaredTypeDescriptor(methodBinding.getDeclaringClass()));
     }
 
     private Expression convert(org.eclipse.jdt.core.dom.MethodInvocation methodInvocation) {
@@ -1511,10 +1496,9 @@ public class CompilationUnitBuilder {
         // SuperClassOfOuterClass.prototype.fun.call(OuterClass.this);
         return MethodCall.Builder.from(methodDescriptor)
             .setQualifier(
-                convertOuterClassReference(
-                    JdtUtils.findCurrentTypeBinding(expression),
-                    expression.getQualifier().resolveTypeBinding(),
-                    true))
+                resolveExplicitOuterClassReference(
+                    JdtUtils.createDeclaredTypeDescriptor(
+                        expression.getQualifier().resolveTypeBinding())))
             .setArguments(arguments)
             .setStaticDispatch(true)
             .setSourcePosition(getSourcePosition(expression))
@@ -1630,10 +1614,8 @@ public class CompilationUnitBuilder {
               && !fieldDescriptor.isMemberOf(currentType.getTypeDescriptor())) {
             return FieldAccess.Builder.from(fieldDescriptor)
                 .setQualifier(
-                    convertOuterClassReference(
-                        JdtUtils.findCurrentTypeBinding(expression),
-                        variableBinding.getDeclaringClass(),
-                        false))
+                    resolveImplicitOuterClassReference(
+                        fieldDescriptor.getEnclosingTypeDescriptor()))
                 .build();
           } else {
             return FieldAccess.Builder.from(fieldDescriptor).build();
@@ -1662,47 +1644,90 @@ public class CompilationUnitBuilder {
     }
 
     /**
-     * Convert A.this to corresponding field access knowing A's type is {@code outerTypeBinding}.
+     * Returns the required nested path of field accesses needed to refer to a specific enclosing
+     * given by an explicit reference like {@code A.this} or {@code A.super}.
      *
-     * <p>In the case of outside a constructor, if A is the direct enclosing class, A.this =>
-     * this.f_$outer_this. if A is the enclosing class of the direct enclosing class, A.this =>
-     * this.f_$outer_this$.f_$outer_this.
+     * <p>
      *
-     * <p>In the case of inside a constructor, the above two cases should be translated to
-     * $outer_this and $outer_this.f_outer$, $outer_this is the added parameter of the constructor.
+     * <pre><code>
+     *   class A extends Super {
+     *     void m() {}
+     *     class B {
+     *       class C {
+     *         { A a = A.this;}
+     *       }
+     *     }
+     *   }
+     * </code></pre>
      *
-     * <p>In the context where this function is called, {@code typeBinding} may be concretely
-     * resolved, or it may be inferred by method call or field access. In the first case, it does a
-     * 'strict' check, meaning that {@typeBinding} is the exact type that should be found in the
-     * type stack. In the second case, it does a 'non-strict' check, meaning that {@typeBinding} is
-     * or is a super type of one type in the stack.
+     * <p>In this example the outer class referred by {@code A.this} is 2 hops from the reference,
+     * hence the access returned would be {@code this.$outer_this.$outer_this}.
+     *
+     * <p>NOTE: Explicit outer references have to match the class exactly, i.e. references like
+     * {@code Super.this} instead of {@code A.this} will be rejected by the compiler.
      */
-    private Expression convertOuterClassReference(
-        ITypeBinding currentTypeBinding, ITypeBinding outerTypeBinding, boolean strict) {
-      DeclaredTypeDescriptor currentTypeDescriptor = currentType.getTypeDescriptor();
-      Expression qualifier = new ThisReference(currentTypeDescriptor);
-      ITypeBinding innerTypeBinding = currentTypeBinding;
-      while (innerTypeBinding.getDeclaringClass() != null) {
+    private Expression resolveExplicitOuterClassReference(
+        DeclaredTypeDescriptor targetTypeDescriptor) {
+      return resolveOuterClassReference(targetTypeDescriptor, true);
+    }
+
+    /**
+     * Returns the required nested path of field accesses needed to refer to a specific enclosing
+     * given by an implicit reference like an unqualified method call {@code m()} that might be a
+     * method of an enclosing class. E.g:
+     *
+     * <p>
+     *
+     * <pre><code>
+     *   class A {
+     *     void m() {}
+     *     class B {
+     *     }
+     *   }
+     *   class ASub extends A{
+     *     class BSub extends B{
+     *       { m(); }
+     *     }
+     *   }
+     * </code></pre>
+     *
+     * <p>In this example the outer class referred by the call to {@code A.m()} is {@code ASub} and
+     * not {@code A}, an the path return would be {@code this.$outer_this} since it is the immediate
+     * enclosing class of {@code BSub}.
+     */
+    private Expression resolveImplicitOuterClassReference(
+        DeclaredTypeDescriptor targetTypeDescriptor) {
+      return resolveOuterClassReference(targetTypeDescriptor, false);
+    }
+
+    /**
+     * Returns a nested path of field accesses {@code this.$outer_this.....$outer_this} required to
+     * address a specific outer class.
+     *
+     * <p>The search for the enclosing class might be strict or non-strict, depending whether a
+     * subclass of the enclosing class is acceptable as a qualifier. When the member's qualifier is
+     * implicit, superclasses of the enclosing class are acceptable.
+     */
+    private Expression resolveOuterClassReference(
+        DeclaredTypeDescriptor targetTypeDescriptor, boolean strict) {
+      Expression qualifier = new ThisReference(currentType.getTypeDescriptor());
+      DeclaredTypeDescriptor innerTypeDescriptor = currentType.getTypeDescriptor();
+      while (innerTypeDescriptor.getTypeDeclaration().isCapturingEnclosingInstance()) {
         boolean found =
             strict
-                ? JdtUtils.areSameErasedType(innerTypeBinding, outerTypeBinding)
-                : JdtUtils.isSubType(innerTypeBinding, outerTypeBinding);
+                ? innerTypeDescriptor.hasSameRawType(targetTypeDescriptor)
+                : innerTypeDescriptor.isSubtypeOf(targetTypeDescriptor);
         if (found) {
           break;
         }
 
-        DeclaredTypeDescriptor enclosingTypeDescriptor =
-            JdtUtils.createDeclaredTypeDescriptor(innerTypeBinding);
-        TypeDescriptor fieldTypeDescriptor =
-            JdtUtils.createTypeDescriptor(innerTypeBinding.getDeclaringClass());
-
         qualifier =
             FieldAccess.Builder.from(
                     AstUtils.getFieldDescriptorForEnclosingInstance(
-                        enclosingTypeDescriptor, fieldTypeDescriptor))
+                        innerTypeDescriptor, innerTypeDescriptor.getEnclosingTypeDescriptor()))
                 .setQualifier(qualifier)
                 .build();
-        innerTypeBinding = innerTypeBinding.getDeclaringClass();
+        innerTypeDescriptor = innerTypeDescriptor.getEnclosingTypeDescriptor();
       }
       return qualifier;
     }
@@ -1793,18 +1818,16 @@ public class CompilationUnitBuilder {
     private ExpressionStatement convert(
         org.eclipse.jdt.core.dom.SuperConstructorInvocation expression) {
       IMethodBinding superConstructorBinding = expression.resolveConstructorBinding();
-      ITypeBinding superclassBinding = superConstructorBinding.getDeclaringClass();
       MethodDescriptor methodDescriptor = JdtUtils.createMethodDescriptor(superConstructorBinding);
       List<Expression> arguments =
           convertArguments(superConstructorBinding, JdtUtils.asTypedList(expression.arguments()));
       Expression qualifier = convertOrNull(expression.getExpression());
       // super() call to an inner class without explicit qualifier, find the enclosing instance.
-      if (qualifier == null && JdtUtils.capturesEnclosingInstance(superclassBinding)) {
+      DeclaredTypeDescriptor targetTypeDescriptor = methodDescriptor.getEnclosingTypeDescriptor();
+      if (qualifier == null
+          && targetTypeDescriptor.getTypeDeclaration().isCapturingEnclosingInstance()) {
         qualifier =
-            convertOuterClassReference(
-                JdtUtils.findCurrentTypeBinding(expression),
-                superclassBinding.getDeclaringClass(),
-                false);
+            resolveImplicitOuterClassReference(targetTypeDescriptor.getEnclosingTypeDescriptor());
       }
       return MethodCall.Builder.from(methodDescriptor)
           .setQualifier(qualifier)
@@ -1815,13 +1838,12 @@ public class CompilationUnitBuilder {
     }
 
     private Expression convert(org.eclipse.jdt.core.dom.ThisExpression expression) {
-      ITypeBinding currentTypeBinding = JdtUtils.findCurrentTypeBinding(expression);
       if (expression.getQualifier() == null) {
         // Unqualified this reference.
-        return new ThisReference(JdtUtils.createTypeDescriptor(currentTypeBinding));
+        return new ThisReference(currentType.getTypeDescriptor());
       }
-      return convertOuterClassReference(
-          currentTypeBinding, expression.getQualifier().resolveTypeBinding(), true);
+      return resolveExplicitOuterClassReference(
+          JdtUtils.createDeclaredTypeDescriptor(expression.getQualifier().resolveTypeBinding()));
     }
 
     private Expression convert(org.eclipse.jdt.core.dom.TypeLiteral literal) {

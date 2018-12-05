@@ -50,7 +50,6 @@ import com.google.j2cl.common.SourcePosition;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.List;
@@ -61,8 +60,6 @@ import java.util.Set;
 import java.util.function.Supplier;
 import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTNode;
-import org.eclipse.jdt.core.dom.AbstractTypeDeclaration;
-import org.eclipse.jdt.core.dom.AnonymousClassDeclaration;
 import org.eclipse.jdt.core.dom.Assignment;
 import org.eclipse.jdt.core.dom.BodyDeclaration;
 import org.eclipse.jdt.core.dom.CompilationUnit;
@@ -303,34 +300,6 @@ class JdtUtils {
     return JdtAnnotationUtils.hasAnnotation(binding, "javaemul.internal.annotations.UncheckedCast");
   }
 
-  /**
-   * Returns whether {@code subTypeBinding} is a subtype of {@code superTypeBinding} either because
-   * subTypeBinding is a child class of class superTypeBinding or because subTypeBinding implements
-   * interface superTypeBinding. As 'subtype' is transitive and reflective, a type is subtype of
-   * itself.
-   */
-  public static boolean isSubType(ITypeBinding subTypeBinding, ITypeBinding superTypeBinding) {
-    if (areSameErasedType(superTypeBinding, subTypeBinding)) {
-      return true;
-    }
-    // Check if it's a child class.
-    ITypeBinding superClass = subTypeBinding.getSuperclass();
-    if (superClass != null && isSubType(superClass, superTypeBinding)) {
-      return true;
-    }
-    // Check if it implements the interface.
-    for (ITypeBinding superInterface : subTypeBinding.getInterfaces()) {
-      if (isSubType(superInterface, superTypeBinding)) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  public static boolean areSameErasedType(ITypeBinding typeBinding, ITypeBinding otherTypeBinding) {
-    return typeBinding.getErasure().isEqualTo(otherTypeBinding.getErasure());
-  }
-
   /** Helper method to work around JDT habit of returning raw collections. */
   @SuppressWarnings("rawtypes")
   public static <T> List<T> asTypedList(List jdtRawCollection) {
@@ -351,20 +320,6 @@ class JdtUtils {
         return ((MethodDeclaration) node).resolveBinding();
       } else if (node instanceof LambdaExpression) {
         return ((LambdaExpression) node).resolveMethodBinding();
-      }
-      node = node.getParent();
-    }
-  }
-
-  /** Returns the type binding of the immediately enclosing type. */
-  public static ITypeBinding findCurrentTypeBinding(org.eclipse.jdt.core.dom.ASTNode node) {
-    while (true) {
-      if (node == null) {
-        return null;
-      } else if (node instanceof AbstractTypeDeclaration) {
-        return ((AbstractTypeDeclaration) node).resolveBinding();
-      } else if (node instanceof AnonymousClassDeclaration) {
-        return ((AnonymousClassDeclaration) node).resolveBinding();
       }
       node = node.getParent();
     }
@@ -435,7 +390,7 @@ class JdtUtils {
             () -> (DeclaredTypeDescriptor) createTypeDescriptor(typeBinding.getDeclaringClass()))
         .setWildcardOrCapture(typeBinding.isWildcardType() || typeBinding.isCapture())
         .setUniqueKey(typeBinding.getKey())
-        .setClassComponents(getClassComponents(typeBinding))
+        .setClassComponents(getClassComponentsForTypeVariable(typeBinding))
         .build();
   }
 
@@ -517,13 +472,44 @@ class JdtUtils {
         && !binding.isWildcardType();
   }
 
+  private static ImmutableList<String> getClassComponentsForTypeVariable(ITypeBinding typeBinding) {
+    if (typeBinding.isWildcardType() || typeBinding.isCapture()) {
+      return ImmutableList.of("?");
+    }
+    checkArgument(typeBinding.isTypeVariable());
+    if (typeBinding.getDeclaringClass() != null) {
+      // This is a class-level type variable. Use its name prefixed with "C_" as its simple
+      // name component and gather enclosing components from the enclosing class hierarchy.
+      return ImmutableList.<String>builder()
+          .addAll(getClassComponents(typeBinding.getDeclaringClass()))
+          .add(AstUtilConstants.TYPE_VARIABLE_IN_TYPE_PREFIX + typeBinding.getName())
+          .build();
+    } else {
+      // This is a method-level type variable. Use its simple name prefixed with "M_") as its
+      // simple name component, replace the immediate enclosing component with
+      // <EnclosingClass>_<EnclosingComponent> and then continue normally through the enclosing
+      // class hierarchy.
+      return ImmutableList.<String>builder()
+          .addAll(
+              getClassComponents(
+                  typeBinding.getDeclaringMethod().getDeclaringClass().getDeclaringClass()))
+          .add(
+              typeBinding.getDeclaringMethod().getDeclaringClass().getName()
+                  + "_"
+                  + typeBinding.getDeclaringMethod().getName())
+          .add(AstUtilConstants.TYPE_VARIABLE_IN_METHOD_PREFIX + typeBinding.getName())
+          .build();
+    }
+  }
+
   private static List<String> getClassComponents(ITypeBinding typeBinding) {
     List<String> classComponents = new ArrayList<>();
-    if (typeBinding.isWildcardType() || typeBinding.isCapture()) {
-      return Collections.singletonList("?");
-    }
     ITypeBinding currentType = typeBinding;
     while (currentType != null) {
+      checkArgument(
+          !currentType.isTypeVariable()
+              && !currentType.isWildcardType()
+              && !currentType.isCapture());
       String simpleName;
       if (currentType.isLocal()) {
         // JDT binary name for local class is like package.components.EnclosingClass$1SimpleName
@@ -534,23 +520,6 @@ class JdtUtils {
             getBinaryNameFromTypeBinding(currentType.getDeclaringClass()) + "$";
         checkState(binaryName.startsWith(declaringClassPrefix));
         simpleName = binaryName.substring(declaringClassPrefix.length());
-      } else if (currentType.isTypeVariable()) {
-        if (currentType.getDeclaringClass() != null) {
-          // If it is a class-level type variable, use the simple name (with prefix "C_") as the
-          // current name component.
-          simpleName = AstUtilConstants.TYPE_VARIABLE_IN_TYPE_PREFIX + currentType.getName();
-        } else {
-          // If it is a method-level type variable, use the simple name (with prefix "M_") as the
-          // current name component, and add declaringClass_declaringMethod as the next name
-          // component, and set currentType to declaringClass for the next iteration.
-          classComponents.add(
-              0, AstUtilConstants.TYPE_VARIABLE_IN_METHOD_PREFIX + currentType.getName());
-          simpleName =
-              currentType.getDeclaringMethod().getDeclaringClass().getName()
-                  + "_"
-                  + currentType.getDeclaringMethod().getName();
-          currentType = currentType.getDeclaringMethod().getDeclaringClass();
-        }
       } else {
         simpleName = currentType.getErasure().getName();
       }
@@ -589,11 +558,18 @@ class JdtUtils {
   }
 
   private static List<TypeDescriptor> getTypeArgumentTypeDescriptors(ITypeBinding typeBinding) {
-    List<TypeDescriptor> typeArgumentDescriptors = new ArrayList<>();
+    return getTypeArgumentTypeDescriptors(typeBinding, TypeDescriptor.class);
+  }
+
+  private static <T extends TypeDescriptor> List<T> getTypeArgumentTypeDescriptors(
+      ITypeBinding typeBinding, Class<T> clazz) {
+    ImmutableList.Builder<T> typeArgumentDescriptorsBuilder = ImmutableList.builder();
     if (typeBinding.isParameterizedType()) {
-      typeArgumentDescriptors.addAll(createTypeDescriptors(typeBinding.getTypeArguments()));
+      typeArgumentDescriptorsBuilder.addAll(
+          createTypeDescriptors(typeBinding.getTypeArguments(), clazz));
     } else {
-      typeArgumentDescriptors.addAll(createTypeDescriptors(typeBinding.getTypeParameters()));
+      typeArgumentDescriptorsBuilder.addAll(
+          createTypeDescriptors(typeBinding.getTypeParameters(), clazz));
     }
 
     // DO NOT USE getDeclaringMethod(). getDeclaringMethod() returns a synthetic static method
@@ -602,18 +578,19 @@ class JdtUtils {
     // type variable, it would get lost.
     IBinding declarationBinding = getDeclaringMethodOrFieldBinding(typeBinding);
     if (declarationBinding instanceof IMethodBinding) {
-      typeArgumentDescriptors.addAll(
-          createTypeDescriptors(((IMethodBinding) declarationBinding).getTypeParameters()));
+      typeArgumentDescriptorsBuilder.addAll(
+          createTypeDescriptors(((IMethodBinding) declarationBinding).getTypeParameters(), clazz));
     }
 
     if (capturesEnclosingInstance(typeBinding.getTypeDeclaration())) {
       // Find type parameters in the enclosing scope and copy them over as well.
-      typeArgumentDescriptors.addAll(
-          createDeclaredTypeDescriptor(typeBinding.getDeclaringClass())
-              .getTypeArgumentDescriptors());
+      createDeclaredTypeDescriptor(typeBinding.getDeclaringClass()).getTypeArgumentDescriptors()
+          .stream()
+          .map(clazz::cast)
+          .forEach(typeArgumentDescriptorsBuilder::add);
     }
 
-    return typeArgumentDescriptors;
+    return typeArgumentDescriptorsBuilder.build();
   }
 
   public static Visibility getVisibility(IBinding binding) {
@@ -929,21 +906,12 @@ class JdtUtils {
         .map(JdtUtils::createMethodDescriptor);
   }
 
-  private static ImmutableList<TypeDescriptor> createTypeDescriptors(
-      List<ITypeBinding> typeBindings) {
-    return typeBindings.stream().map(JdtUtils::createTypeDescriptor).collect(toImmutableList());
-  }
-
   private static <T extends TypeDescriptor> ImmutableList<T> createTypeDescriptors(
       List<ITypeBinding> typeBindings, Class<T> clazz) {
     return typeBindings
         .stream()
         .map(typeBinding -> createTypeDescriptor(typeBinding, clazz))
         .collect(toImmutableList());
-  }
-
-  private static ImmutableList<TypeDescriptor> createTypeDescriptors(ITypeBinding[] typeBindings) {
-    return createTypeDescriptors(Arrays.asList(typeBindings));
   }
 
   private static <T extends TypeDescriptor> ImmutableList<T> createTypeDescriptors(
@@ -1068,12 +1036,6 @@ class JdtUtils {
   }
 
   private static Kind getKindFromTypeBinding(ITypeBinding typeBinding) {
-    checkArgument(!typeBinding.isArray());
-    checkArgument(!typeBinding.isPrimitive());
-    checkArgument(!typeBinding.isTypeVariable());
-    checkArgument(!typeBinding.isWildcardType());
-    checkArgument(!typeBinding.isCapture());
-
     if (typeBinding.isEnum() && !typeBinding.isAnonymous()) {
       // Do not consider the anonymous classes that constitute enum values as Enums, only the
       // enum "class" itself is considered Kind.ENUM.
@@ -1142,7 +1104,8 @@ class JdtUtils {
     if (typeBinding == null) {
       return null;
     }
-    
+
+    checkArgument(typeBinding.getTypeDeclaration() == typeBinding);
     checkArgument(!typeBinding.isArray());
     checkArgument(!typeBinding.isParameterizedType());
     checkArgument(!typeBinding.isTypeVariable());
@@ -1221,7 +1184,8 @@ class JdtUtils {
                 (jsEnumInfo != null
                     ? TypeDescriptors.get().javaLangObject
                     : createDeclaredTypeDescriptor(typeBinding.getSuperclass())))
-        .setTypeParameterDescriptors((Iterable) getTypeArgumentTypeDescriptors(typeBinding))
+        .setTypeParameterDescriptors(
+            getTypeArgumentTypeDescriptors(typeBinding, TypeVariable.class))
         .setVisibility(getVisibility(typeBinding))
         .setDeclaredMethodDescriptorsFactory(declaredMethods)
         .setDeclaredFieldDescriptorsFactory(declaredFields)

@@ -262,31 +262,17 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   public boolean isAssignableTo(TypeDescriptor that) {
     TypeDescriptor thatRawTypeDescriptor = that.toRawTypeDescriptor();
     return thatRawTypeDescriptor instanceof DeclaredTypeDescriptor
-        && isSubtypeOf(thatRawTypeDescriptor);
+        && isSubtypeOf((DeclaredTypeDescriptor) thatRawTypeDescriptor);
+  }
+
+  public boolean isSubtypeOf(DeclaredTypeDescriptor that) {
+    return getTypeDeclaration().isSubtypeOf(that.getTypeDeclaration());
   }
 
   public boolean extendsNativeClass() {
     return getTypeDeclaration().extendsNativeClass();
   }
 
-  private boolean isSubtypeOf(TypeDescriptor that) {
-    // TODO(70951075): Add other relations due to jsinterop so they are optimized as well.
-    return TypeDescriptors.isJavaLangObject(that)
-        || getRawSuperTypesIncludingSelf().contains(that.toRawTypeDescriptor());
-  }
-
-  private Set<DeclaredTypeDescriptor> getRawSuperTypesIncludingSelf() {
-    Set<DeclaredTypeDescriptor> allRawSupertypesIncludingSelf = new LinkedHashSet<>();
-    allRawSupertypesIncludingSelf.add(toRawTypeDescriptor());
-    if (getSuperTypeDescriptor() != null) {
-      allRawSupertypesIncludingSelf.addAll(
-          getSuperTypeDescriptor().getRawSuperTypesIncludingSelf());
-    }
-    for (DeclaredTypeDescriptor interfaceTypeDescriptor : getInterfaceTypeDescriptors()) {
-      allRawSupertypesIncludingSelf.addAll(interfaceTypeDescriptor.getRawSuperTypesIncludingSelf());
-    }
-    return allRawSupertypesIncludingSelf;
-  }
 
   @Override
   @Memoized
