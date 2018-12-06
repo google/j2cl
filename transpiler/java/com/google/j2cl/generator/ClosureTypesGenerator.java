@@ -79,12 +79,10 @@ class ClosureTypesGenerator {
   public String getJsDocForParameter(MethodLike methodLike, int index) {
     MethodDescriptor methodDescriptor = methodLike.getDescriptor();
     ParameterDescriptor parameterDescriptor = methodDescriptor.getParameterDescriptors().get(index);
-
     Variable parameter = methodLike.getParameters().get(index);
-    String parameterName = environment.aliasForVariable(parameter);
-    return String.format(
-        "@param {%s} %s",
-        toClosureTypeParameter(methodDescriptor, parameterDescriptor).render(), parameterName);
+    return toClosureTypeParameter(
+            methodDescriptor, parameterDescriptor, parameter.getTypeDescriptor())
+        .render();
   }
 
   /** Returns the Closure type for a type descriptor. */
@@ -238,13 +236,20 @@ class ClosureTypesGenerator {
 
   private ClosureFunctionType.Parameter toClosureTypeParameter(
       MethodDescriptor methodDescriptor, ParameterDescriptor parameterDescriptor) {
+    return toClosureTypeParameter(
+        methodDescriptor, parameterDescriptor, parameterDescriptor.getTypeDescriptor());
+  }
+
+  private ClosureFunctionType.Parameter toClosureTypeParameter(
+      MethodDescriptor methodDescriptor,
+      ParameterDescriptor parameterDescriptor,
+      TypeDescriptor parameterTypeDescriptor) {
     boolean isJsVarargs = parameterDescriptor.isVarargs() && methodDescriptor.isJsMethodVarargs();
     boolean isOptional = parameterDescriptor.isJsOptional();
-    TypeDescriptor parameterTypeDescriptor =
+    parameterTypeDescriptor =
         isJsVarargs
-            ? ((ArrayTypeDescriptor) parameterDescriptor.getTypeDescriptor())
-                .getComponentTypeDescriptor()
-            : parameterDescriptor.getTypeDescriptor();
+            ? ((ArrayTypeDescriptor) parameterTypeDescriptor).getComponentTypeDescriptor()
+            : parameterTypeDescriptor;
     return new ClosureFunctionType.Parameter(
         isJsVarargs, isOptional, getClosureType(parameterTypeDescriptor));
   }

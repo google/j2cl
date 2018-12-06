@@ -78,7 +78,7 @@
 [JsFunctionVarargs f =
         (int i, int... numbers) -> {
 ...          return sum;
-        };] => [let f = (/** @param {number} i @param {...number} numbers */ (i, ...numbers) =>{
+        };] => [let f = ((/** number */ i, .../** ...number */ numbers) =>{
       $Arrays.$stampType(numbers, $int, 1);
 ...      return sum;
     });] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionVarargs"
@@ -108,7 +108,7 @@
 [return new JsFunctionVarargs() {
       @Override
 ...      }
-    };] => [return (/** @param {number} i @param {...number} numbers */ (i, ...numbers) =>{
+    };] => [return ((/** number */ i, .../** ...number */ numbers) =>{
       $Arrays.$stampType(numbers, $int, 1);
 ...      return sum;
     });] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionVarargsInnerClass"
@@ -155,7 +155,7 @@
 [o] => [o] "o"
 [o = SimpleJsFunction[].class;] => [o = Class.$get($JavaScriptFunction, 1);] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionClassLiterals"
 [testJsFunctionOptional] => [m_testJsFunctionOptional___$pp_com_google_j2cl_transpiler_readable_jsfunction]
-[JsFunctionOptional f = (i, n) -> (int) (i + n);] => [let f = (/** @param {number} i @param {?number=} n */ (i, n) =>{
+[JsFunctionOptional f = (i, n) -> (int) (i + n);] => [let f = ((/** number */ i, /** ?number= */ n) =>{
       return $Primitives.$narrowDoubleToInt((i + Double.m_doubleValue__java_lang_Double(n)));
     });] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionOptional"
 [f] => [f] "f"

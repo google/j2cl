@@ -20,7 +20,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.base.Predicates;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.AbstractTransformer;
 import com.google.j2cl.ast.ArrayAccess;
@@ -43,7 +42,6 @@ import com.google.j2cl.ast.JsDocFieldDeclaration;
 import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
-import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.ast.MultiExpression;
 import com.google.j2cl.ast.NewArray;
 import com.google.j2cl.ast.NewInstance;
@@ -64,7 +62,6 @@ import com.google.j2cl.common.SourcePosition;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Consumer;
 
 /**
  * Transforms Expression to JavaScript source strings.
@@ -169,34 +166,6 @@ public class ExpressionTranspiler {
         return null;
       }
 
-      private void emitVariableWithJsDocAnnotation(Variable variable) {
-        sourceBuilder.append("/** ");
-        sourceBuilder.append(
-            closureTypesGenerator.getClosureTypeString(variable.getTypeDescriptor()));
-        sourceBuilder.append(" */ ");
-        process(variable);
-      }
-
-      private void emitFunctionHeaderJsDoc(FunctionExpression functionExpression) {
-        sourceBuilder.append("/** ");
-        for (int i = 0; i < functionExpression.getParameters().size(); i++) {
-          sourceBuilder.append(closureTypesGenerator.getJsDocForParameter(functionExpression, i));
-          sourceBuilder.append(" ");
-        }
-        sourceBuilder.append("*/ ");
-      }
-
-      private void emitParameters(List<Variable> parameters, Consumer<Variable> emitter) {
-        sourceBuilder.append("(");
-        String separator = "";
-        for (Variable parameter : parameters) {
-          sourceBuilder.append(separator);
-          emitter.accept(parameter);
-          separator = ", ";
-        }
-        sourceBuilder.append(")");
-      }
-
       @Override
       public Void transformFunctionExpression(FunctionExpression expression) {
         sourceBuilder.append("(");
@@ -205,32 +174,43 @@ public class ExpressionTranspiler {
           sourceBuilder.append("async ");
         }
 
-        ImmutableList<ParameterDescriptor> parameterDescriptors =
-            expression.getDescriptor().getParameterDescriptors();
-        if (parameterDescriptors.stream()
-            .anyMatch(
-                Predicates.or(ParameterDescriptor::isJsOptional, ParameterDescriptor::isVarargs))) {
-          // TODO(b/36818468, b/36855486): Emit a full method header since optional or varargs
-          // are not properly supported as inline annotations.
-          emitFunctionHeaderJsDoc(expression);
-          emitParameters(
-              expression.getParameters(),
-              parameter -> {
-                if (parameter == expression.getJsVarargsParameter()) {
-                  sourceBuilder.append("...");
-                }
-                process(parameter);
-              });
-        } else {
-          // Otherwise emit the more readable inline short form.
-          emitParameters(expression.getParameters(), this::emitVariableWithJsDocAnnotation);
-        }
+        emitParameters(expression);
 
         // After the header is emitted, emit the rest of the arrow function.
         sourceBuilder.append(" =>");
         new StatementTranspiler(sourceBuilder, environment).renderStatement(expression.getBody());
+
         sourceBuilder.append(")");
         return null;
+      }
+
+      private void emitParameters(FunctionExpression expression) {
+        List<Variable> parameters = expression.getParameters();
+        sourceBuilder.append("(");
+
+        String separator = "";
+        for (int i = 0; i < parameters.size(); i++) {
+          sourceBuilder.append(separator);
+          // Emit parameters in the more readable inline short form.
+          emitParameter(expression, i);
+          separator = ", ";
+        }
+        sourceBuilder.append(")");
+      }
+
+      private void emitParameter(FunctionExpression expression, int i) {
+        Variable parameter = expression.getParameters().get(i);
+
+        if (parameter == expression.getJsVarargsParameter()) {
+          sourceBuilder.append("...");
+        }
+        // The inline type annotation for parameters has to be just right preceding the parameter
+        // name, hence if it is a varargs parameter then it would be emitted as follows:
+        // ... /* <inline type annotation> */ <parameter name>
+        //
+        sourceBuilder.append(
+            "/** " + closureTypesGenerator.getJsDocForParameter(expression, i) + " */ ");
+        process(parameter);
       }
 
       @Override
@@ -436,10 +416,14 @@ public class ExpressionTranspiler {
       public Void transformVariableDeclarationFragment(VariableDeclarationFragment fragment) {
         Variable variable = fragment.getVariable();
         if (fragment.needsTypeDeclaration()) {
-          emitVariableWithJsDocAnnotation(variable);
-        } else {
-          process(variable);
+          sourceBuilder.append(
+              "/** "
+                  + closureTypesGenerator.getClosureTypeString(variable.getTypeDescriptor())
+                  + " */ ");
         }
+
+        process(variable);
+
         if (fragment.getInitializer() != null) {
           sourceBuilder.append(" = ");
           process(fragment.getInitializer());

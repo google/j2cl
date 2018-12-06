@@ -398,7 +398,12 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
               + "}");
     }
     for (int i = 0; i < method.getParameters().size(); i++) {
-      sourceBuilder.appendln(" * " + closureTypesGenerator.getJsDocForParameter(method, i));
+      String parameterName = environment.aliasForVariable(method.getParameters().get(i));
+      sourceBuilder.appendln(
+          " * @param {"
+              + closureTypesGenerator.getJsDocForParameter(method, i)
+              + "} "
+              + parameterName);
     }
     String returnTypeName =
         closureTypesGenerator.getClosureTypeString(methodDescriptor.getReturnTypeDescriptor());
