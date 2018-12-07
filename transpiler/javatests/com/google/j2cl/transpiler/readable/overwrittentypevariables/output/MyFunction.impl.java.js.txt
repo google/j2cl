@@ -35,7 +35,7 @@ class MyFunction {
    */
   static $adapt(fn) {
     MyFunction.$clinit();
-    return /**@type {!$LambdaAdaptor<*, *>} */ (new $LambdaAdaptor(fn));
+    return /**@type {!$LambdaAdaptor<C_F, C_T>} */ (new $LambdaAdaptor(fn));
   }
 
   /**

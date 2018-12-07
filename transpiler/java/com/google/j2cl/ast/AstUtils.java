@@ -22,6 +22,7 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import static java.util.stream.Collectors.toList;
 
 import com.google.common.base.Joiner;
+import com.google.common.base.Predicates;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
@@ -895,13 +896,39 @@ public class AstUtils {
       SourcePosition sourcePosition,
       Expression expression,
       TypeDescriptor methodReturnTypeDescriptor) {
-    return TypeDescriptors.isPrimitiveVoid(methodReturnTypeDescriptor)
-        ? expression.makeStatement(sourcePosition)
-        : ReturnStatement.newBuilder()
-            .setExpression(expression)
-            .setTypeDescriptor(methodReturnTypeDescriptor)
-            .setSourcePosition(sourcePosition)
-            .build();
+
+    if (TypeDescriptors.isPrimitiveVoid(methodReturnTypeDescriptor)) {
+      return expression.makeStatement(sourcePosition);
+    }
+
+    // TODO(b/37482332): Bridge method construction incorrectly mixes type variables from the bridge
+    // method and the target method. It should instead do a simple inference for the type variables
+    // in the target method (which reaches here as a method call in expression since, this method is
+    // used for constructing the different type o bridge bodies). For now we just make sure the
+    // return value is consistent with the declared return type if the target has variables that do
+    // not appear in the expected return type.
+    boolean mightHaveUndeclaredTypeVariables =
+        expression.getTypeDescriptor().getAllTypeVariables().stream()
+            .anyMatch(
+                Predicates.not(Predicates.in(methodReturnTypeDescriptor.getAllTypeVariables())));
+    if (mightHaveUndeclaredTypeVariables) {
+      expression =
+          expression.getDeclaredTypeDescriptor().isAssignableTo(methodReturnTypeDescriptor)
+              ? JsDocCastExpression.newBuilder()
+                  .setExpression(expression)
+                  .setCastType(methodReturnTypeDescriptor)
+                  .build()
+              : CastExpression.newBuilder()
+                  .setExpression(expression)
+                  .setCastTypeDescriptor(methodReturnTypeDescriptor)
+                  .build();
+    }
+
+    return ReturnStatement.newBuilder()
+        .setExpression(expression)
+        .setTypeDescriptor(methodReturnTypeDescriptor)
+        .setSourcePosition(sourcePosition)
+        .build();
   }
 
   public static void updateMethodsBySignature(
@@ -1185,16 +1212,19 @@ public class AstUtils {
     if (AstUtils.isNonNativeJsEnum(varargsTypeDescriptor.getComponentTypeDescriptor())) {
       // TODO(b/118615488): remove this when BoxedLightEnums are surfaces to J2CL.
       //
-      // Here we create DeclaratedType[] instead of the actual inferred type T[] since non-native
-      // JsEnum[] are forbidden.
-      // We have chosen this workaround instead of banning T[] since it is not easy to observe
-      // implications of generating Object[] instead of T[] and it allows uses cases like
-      // Arrays.asList().
+      // Here we create an array using the bound of declarated type T[] instead of the actual
+      // inferred type JsEnum[] since non-native JsEnum arrays are forbidden.
+      // We have chosen this workaround instead of banning T[] when T is inferred to be a non-native
+      // JsEnum. It is quite uncommon to have code that observes the implications of using a
+      // array of the supertype in the implicit array creation due to varargs, instead of an array
+      // of the inferred subtype. Making this choice allows the use of common varargs APIs such as
+      // Arrays.asList() with JsEnum values.
       varargsTypeDescriptor =
           (ArrayTypeDescriptor)
               Iterables.getLast(
                       methodDescriptor.getDeclarationDescriptor().getParameterDescriptors())
-                  .getTypeDescriptor();
+                  .getTypeDescriptor()
+                  .toRawTypeDescriptor();
     }
     if (arguments.size() < parametersLength) {
       // no argument for the varargs, add an empty array.

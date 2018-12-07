@@ -35,7 +35,8 @@ class Collection {
    */
   static $adapt(fn) {
     Collection.$clinit();
-    return /**@type {!$LambdaAdaptor<*>} */ (new $LambdaAdaptor(fn));
+    return /**@type {!$LambdaAdaptor<C_Collection_T>} */ (
+        new $LambdaAdaptor(fn));
   }
 
   /**

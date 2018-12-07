@@ -26,7 +26,6 @@ import com.google.j2cl.ast.visitors.DevirtualizeMethodCalls;
 import com.google.j2cl.ast.visitors.ExpandCompoundAssignments;
 import com.google.j2cl.ast.visitors.FilloutMissingSourceMapInformation;
 import com.google.j2cl.ast.visitors.FixSuperCallQualifiers;
-import com.google.j2cl.ast.visitors.FixTypeVariablesInMethods;
 import com.google.j2cl.ast.visitors.ImplementAssertStatements;
 import com.google.j2cl.ast.visitors.ImplementInstanceInitialization;
 import com.google.j2cl.ast.visitors.ImplementLambdaExpressions;
@@ -251,9 +250,6 @@ class J2clTranspiler {
             // TODO(b/72652198): remove the temporary fix once switch to JSCompiler's new type
             // checker.
             new InsertTypeAnnotationOnGenericReturnTypes(),
-            // TODO(b/24476009): remove the temporary fix once we switch to JSCompiler's new type
-            // checker.
-            new FixTypeVariablesInMethods(),
 
             // Perform post cleanups.
             new ImplementStaticInitialization(),

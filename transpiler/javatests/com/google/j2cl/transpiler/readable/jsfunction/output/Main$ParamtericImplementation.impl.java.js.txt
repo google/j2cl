@@ -51,13 +51,15 @@ class ParamtericImplementation extends j_l_Object {
   }
 
   /**
+   * @template C_ParamtericImplementation_T
    * @this {?function(C_ParamtericImplementation_T):void}
    * @param {C_ParamtericImplementation_T} t
    * @return {void}
    * @public
    */
   m_call__java_lang_Object(t) {
-    let o = /**@type {*} */ ($Casts.$to(t, j_l_Object));
+    let o =
+        /**@type {C_ParamtericImplementation_T} */ ($Casts.$to(t, j_l_Object));
   }
 
   /**

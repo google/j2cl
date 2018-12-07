@@ -180,9 +180,9 @@ class Lambdas extends j_l_Object {
    * @public
    */
   m_testInstanceMethodTypeVariableThroughLambda__() {
-    let wrapped = /**@type {Functional<*>} */ (
-        Functional.$adapt(((/** Functional<*> */ f) => {
-          return /**@type {!$1<*>} */ (
+    let wrapped = /**@type {Functional<M_T>} */ (
+        Functional.$adapt(((/** Functional<M_T> */ f) => {
+          return /**@type {!$1<M_T>} */ (
               $1.$create__com_google_j2cl_transpiler_readable_lambdas_Lambdas(
                   this));
         })));
@@ -195,9 +195,9 @@ class Lambdas extends j_l_Object {
    */
   static m_testStaticMethodTypeVariableThroughLambda__() {
     Lambdas.$clinit();
-    let wrapped = /**@type {Functional<*>} */ (
-        Functional.$adapt(((/** Functional<*> */ f) => {
-          return /**@type {!$2<*>} */ ($2.$create__());
+    let wrapped = /**@type {Functional<M_T>} */ (
+        Functional.$adapt(((/** Functional<M_T> */ f) => {
+          return /**@type {!$2<M_T>} */ ($2.$create__());
         })));
   }
 
@@ -235,7 +235,7 @@ class Lambdas extends j_l_Object {
   static m_callTypeVariableWithBounds__com_google_j2cl_transpiler_readable_lambdas_Lambdas_GenericFunctionalInterface__java_lang_Enum(
       intf, e) {
     Lambdas.$clinit();
-    return /**@type {Enum<Enum>} */ (
+    return /**@type {Enum<M_T>} */ (
         $Casts.$to(intf.m_m__java_lang_Object(e), Enum));
   }
 
@@ -255,16 +255,15 @@ class Lambdas extends j_l_Object {
           return i$1$;
         })),
         Error.$create__());
-    /**@type {Enum<Enum>} */
+    /**@type {Enum<M_T>} */
     (Lambdas
          .m_callTypeVariableWithBounds__com_google_j2cl_transpiler_readable_lambdas_Lambdas_GenericFunctionalInterface__java_lang_Enum(
-             /**@type {GenericFunctionalInterface<Enum<Enum>>} */ (
-                 GenericFunctionalInterface.$adapt(
-                     ((/** Enum<Enum> */ i$2$) => {
-                       return i$2$;
-                     }))),
-             /**@type {Enum<Enum>} */ ($Casts.$to(null, Enum))));
-    let f = Lambdas_Function.$adapt(((/** Enum */ item) => {
+             /**@type {GenericFunctionalInterface<Enum<M_T>>} */ (
+                 GenericFunctionalInterface.$adapt(((/** Enum<M_T> */ i$2$) => {
+                   return i$2$;
+                 }))),
+             /**@type {Enum<M_T>} */ ($Casts.$to(null, Enum))));
+    let f = Lambdas_Function.$adapt(((/** M_T */ item) => {
       return Long.m_valueOf__long($Long.fromInt(1));
     }));
   }
@@ -324,7 +323,7 @@ class Lambdas extends j_l_Object {
           .$f_identityFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_ =
           IdentityFunction.$create__();
     }
-    return /**@type {?function(*):*} */ ($Casts.$to(
+    return /**@type {?function(M_E):M_E} */ ($Casts.$to(
         Lambdas
             .$f_identityFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_,
         $JavaScriptFunction));

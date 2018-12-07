@@ -88,10 +88,10 @@ class GenericMethod extends j_l_Object {
    * @public
    */
   m_fun__java_lang_Error(t) {
-    /**@type {!$1<Error, C_T>} */
+    /**@type {!$1<M_T, C_T>} */
     ($1.$create__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod(
         this));
-    /**@type {!$1LocalClass<Error, Error, C_T>} */
+    /**@type {!$1LocalClass<M_T, M_T, C_T>} */
     ($1LocalClass
          .$create__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod(
              this));
@@ -225,8 +225,7 @@ class GenericMethod extends j_l_Object {
     GenericMethod.$clinit();
     let list = null;
     let content =
-        /**@type {Container<Content>} */ (
-            $Casts.$to(list.getAtIndex(0), Container))
+        /**@type {Container<M_C>} */ ($Casts.$to(list.getAtIndex(0), Container))
             .m_get___$pp_com_google_j2cl_transpiler_readable_genericmethod();
     GenericMethod.m_acceptsString__java_lang_String(
         content
@@ -237,7 +236,7 @@ class GenericMethod extends j_l_Object {
     let nestedTypeVariableList = null;
     let nestedContent =
         /**@type {Container} */
-        (/**@type {SuperContainer<Container>} */ (
+        (/**@type {SuperContainer<M_CT>} */ (
              $Casts.$to(nestedTypeVariableList.getAtIndex(0), SuperContainer))
              .m_get___$pp_com_google_j2cl_transpiler_readable_genericmethod())
             .m_get___$pp_com_google_j2cl_transpiler_readable_genericmethod();
@@ -249,7 +248,7 @@ class GenericMethod extends j_l_Object {
             nestedContent);
     let deepTypeVariableList = null;
     let deepContent =
-        /**@type {SuperContainer<Container<Content>>} */ (
+        /**@type {SuperContainer<Container<M_C>>} */ (
             $Casts.$to(deepTypeVariableList.getAtIndex(0), SuperContainer))
             .m_get___$pp_com_google_j2cl_transpiler_readable_genericmethod()
             .m_get___$pp_com_google_j2cl_transpiler_readable_genericmethod();

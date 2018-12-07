@@ -35,7 +35,7 @@ class SimpleGenericInterface {
    */
   static $adapt(fn) {
     SimpleGenericInterface.$clinit();
-    return /**@type {!$LambdaAdaptor<*>} */ (new $LambdaAdaptor(fn));
+    return /**@type {!$LambdaAdaptor<C_T>} */ (new $LambdaAdaptor(fn));
   }
 
   /**

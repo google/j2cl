@@ -115,11 +115,11 @@ class CastGenerics extends j_l_Object {
    */
   m_testCastToMethodTypeVariable__() {
     let o = Integer.$create__int(1);
-    let s = /**@type {*} */ ($Casts.$to(o, j_l_Object));
-    let c = /**@type {CastGenerics<*, (Number|number)>} */ (
+    let s = /**@type {M_S} */ ($Casts.$to(o, j_l_Object));
+    let c = /**@type {CastGenerics<M_S, (Number|number)>} */ (
         $Casts.$to(o, CastGenerics));
-    c = /**@type {Array<*>} */ ($Arrays.$castTo(o, j_l_Object, 1));
-    c = /**@type {Enum} */ ($Casts.$to(o, Enum));
+    c = /**@type {Array<M_S>} */ ($Arrays.$castTo(o, j_l_Object, 1));
+    c = /**@type {M_V} */ ($Casts.$to(o, Enum));
   }
 
   /**
@@ -137,7 +137,7 @@ class CastGenerics extends j_l_Object {
    */
   m_method__java_lang_Object(o) {
     if (Empty1.$isInstance(o)) {
-      return /**@type {Empty1} */ ($Casts.$to(o, Empty1));
+      return /**@type {M_EE} */ ($Casts.$to(o, Empty1));
     }
     return null;
   }
@@ -149,7 +149,7 @@ class CastGenerics extends j_l_Object {
    */
   static m_doSomething__() {
     CastGenerics.$clinit();
-    return /**@type {!$1<*>} */ ($1.$create__());
+    return /**@type {!$1<M_T>} */ ($1.$create__());
   }
 
   /**

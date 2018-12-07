@@ -35,7 +35,7 @@ class MyInterface {
    */
   static $adapt(fn) {
     MyInterface.$clinit();
-    return /**@type {!$LambdaAdaptor<*>} */ (new $LambdaAdaptor(fn));
+    return /**@type {!$LambdaAdaptor<C_T>} */ (new $LambdaAdaptor(fn));
   }
 
   /**

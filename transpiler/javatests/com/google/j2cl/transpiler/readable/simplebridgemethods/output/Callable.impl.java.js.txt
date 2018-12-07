@@ -35,7 +35,7 @@ class Callable {
    */
   static $adapt(fn) {
     Callable.$clinit();
-    return /**@type {!$LambdaAdaptor<*>} */ (new $LambdaAdaptor(fn));
+    return /**@type {!$LambdaAdaptor<C_V>} */ (new $LambdaAdaptor(fn));
   }
 
   /**

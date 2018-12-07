@@ -34,6 +34,7 @@ import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
+import com.google.j2cl.ast.TypeVariable;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.common.FilePosition;
 import com.google.j2cl.common.Problems;
@@ -392,6 +393,12 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         && methodDescriptor.isPolymorphic()
         && !method.getBody().getStatements().isEmpty()
         && !methodDescriptor.getName().startsWith("$ctor")) {
+      // Using @this redefines enclosing class of a method, hence any template variables defined in
+      // the class need to be declared in the method.
+      for (TypeVariable typeVariable : type.getDeclaration().getTypeParameterDescriptors()) {
+        sourceBuilder.appendln(
+            " * @template " + closureTypesGenerator.getClosureTypeString(typeVariable));
+      }
       sourceBuilder.appendln(
           " * @this {"
               + closureTypesGenerator.getClosureTypeString(type.getTypeDescriptor())

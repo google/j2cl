@@ -11,7 +11,7 @@
 [inferGeneric] => [m_inferGeneric__java_lang_Object]
 [foo] => [foo] "foo"
 [inferGeneric] => [InferReturn.$clinit();] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.inferGeneric"
-[return new InferReturn<>();] => [return /**@type {!InferReturn<*>} */ (InferReturn.$create__());] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.inferGeneric"
+[return new InferReturn<>();] => [return /**@type {!InferReturn<M_T>} */ (InferReturn.$create__());] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.inferGeneric"
 [tightenType] => [m_tightenType__com_google_j2cl_transpiler_readable_inferreturn_InferReturn]
 [foo] => [foo] "foo"
 [tightenType] => [InferReturn.$clinit();] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.tightenType"
@@ -34,11 +34,11 @@
 [newArrayList] => [m_newArrayList__java_lang_Object]
 [foo] => [foo] "foo"
 [newArrayList] => [InferReturn.$clinit();] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.newArrayList"
-[return new ArrayList<>();] => [return /**@type {!ArrayList<*>} */ (ArrayList.$create__());] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.newArrayList"
+[return new ArrayList<>();] => [return /**@type {!ArrayList<M_V>} */ (ArrayList.$create__());] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.newArrayList"
 [newArray] => [m_newArray__java_lang_Object]
 [foo] => [foo] "foo"
 [newArray] => [InferReturn.$clinit();] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.newArray"
-[return (V[]) new Object[0];] => [return /**@type {Array<*>} */ ($Arrays.$castTo(new Array(0), j_l_Object, 1));] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.newArray"
+[return (V[]) new Object[0];] => [return /**@type {Array<M_V>} */ ($Arrays.$castTo(new Array(0), j_l_Object, 1));] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.newArray"
 [acceptsArrayListOfObject] => [m_acceptsArrayListOfObject__java_util_ArrayList]
 [foo] => [foo] "foo"
 [acceptsArrayListOfObject] => [InferReturn.$clinit();] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.acceptsArrayListOfObject"

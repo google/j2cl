@@ -35,7 +35,8 @@ class ArrayProducer {
    */
   static $adapt(fn) {
     ArrayProducer.$clinit();
-    return /**@type {!$LambdaAdaptor<*>} */ (new $LambdaAdaptor(fn));
+    return /**@type {!$LambdaAdaptor<C_ArrayProducer_T>} */ (
+        new $LambdaAdaptor(fn));
   }
 
   /**

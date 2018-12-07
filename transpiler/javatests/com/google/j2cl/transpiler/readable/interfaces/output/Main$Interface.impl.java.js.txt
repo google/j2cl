@@ -50,7 +50,8 @@ class Interface {
    */
   static $adapt(fn) {
     Interface.$clinit();
-    return /**@type {!$LambdaAdaptor<*>} */ (new $LambdaAdaptor(fn));
+    return /**@type {!$LambdaAdaptor<C_Interface_T>} */ (
+        new $LambdaAdaptor(fn));
   }
 
   /**

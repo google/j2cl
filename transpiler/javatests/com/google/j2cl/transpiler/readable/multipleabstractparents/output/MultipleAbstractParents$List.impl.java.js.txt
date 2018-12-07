@@ -35,7 +35,7 @@ class List {
    */
   static $adapt(fn) {
     List.$clinit();
-    return /**@type {!$LambdaAdaptor<*>} */ (new $LambdaAdaptor(fn));
+    return /**@type {!$LambdaAdaptor<C_List_T>} */ (new $LambdaAdaptor(fn));
   }
 
   /**

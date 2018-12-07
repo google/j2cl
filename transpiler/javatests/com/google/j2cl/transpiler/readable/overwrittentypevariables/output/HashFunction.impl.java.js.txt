@@ -29,7 +29,7 @@ class HashFunction {
    */
   static $adapt(fn) {
     HashFunction.$clinit();
-    return /**@type {!$LambdaAdaptor<*>} */ (new $LambdaAdaptor(fn));
+    return /**@type {!$LambdaAdaptor<C_T>} */ (new $LambdaAdaptor(fn));
   }
 
   /**

@@ -36,7 +36,8 @@ class Functional {
    */
   static $adapt(fn) {
     Functional.$clinit();
-    return /**@type {!$LambdaAdaptor<*>} */ (new $LambdaAdaptor(fn));
+    return /**@type {!$LambdaAdaptor<C_Functional_T>} */ (
+        new $LambdaAdaptor(fn));
   }
 
   /**

@@ -35,7 +35,8 @@ class Predicate {
    */
   static $adapt(fn) {
     Predicate.$clinit();
-    return /**@type {!$LambdaAdaptor<*>} */ (new $LambdaAdaptor(fn));
+    return /**@type {!$LambdaAdaptor<C_Predicate_T>} */ (
+        new $LambdaAdaptor(fn));
   }
 
   /**

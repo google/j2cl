@@ -36,7 +36,8 @@ class GenericFunctionalInterface {
    */
   static $adapt(fn) {
     GenericFunctionalInterface.$clinit();
-    return /**@type {!$LambdaAdaptor<*>} */ (new $LambdaAdaptor(fn));
+    return /**@type {!$LambdaAdaptor<C_GenericFunctionalInterface_T>} */ (
+        new $LambdaAdaptor(fn));
   }
 
   /**

@@ -34,7 +34,7 @@ class Producer {
    */
   static $adapt(fn) {
     Producer.$clinit();
-    return /**@type {!$LambdaAdaptor<*>} */ (new $LambdaAdaptor(fn));
+    return /**@type {!$LambdaAdaptor<C_Producer_T>} */ (new $LambdaAdaptor(fn));
   }
 
   /**
