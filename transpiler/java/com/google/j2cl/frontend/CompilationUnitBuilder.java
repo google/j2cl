@@ -30,10 +30,10 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.j2cl.ast.ArrayAccess;
+import com.google.j2cl.ast.ArrayLength;
 import com.google.j2cl.ast.ArrayLiteral;
 import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.AssertStatement;
-import com.google.j2cl.ast.AstUtilConstants;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BinaryOperator;
@@ -888,9 +888,7 @@ public class CompilationUnitBuilder {
               .setLeftOperand(indexVariable)
               .setOperator(BinaryOperator.LESS)
               .setRightOperand(
-                  FieldAccess.Builder.from(AstUtilConstants.getArrayLengthFieldDescriptor())
-                      .setQualifier(arrayVariable.getReference())
-                      .build())
+                  ArrayLength.newBuilder().setArrayExpression(arrayVariable.getReference()).build())
               .build();
 
       ExpressionStatement forVariableDeclarationStatement =
@@ -1389,11 +1387,9 @@ public class CompilationUnitBuilder {
       return FieldAccess.Builder.from(fieldDescriptor).setQualifier(qualifier).build();
     }
 
-    private FieldAccess convert(org.eclipse.jdt.core.dom.FieldAccess expression) {
+    private Expression convert(org.eclipse.jdt.core.dom.FieldAccess expression) {
       Expression qualifier = convert(expression.getExpression());
-      FieldDescriptor fieldDescriptor =
-          JdtUtils.createFieldDescriptor(expression.resolveFieldBinding());
-      return FieldAccess.Builder.from(fieldDescriptor).setQualifier(qualifier).build();
+      return JdtUtils.createFieldAccess(qualifier, expression.resolveFieldBinding());
     }
 
     private BinaryExpression convert(org.eclipse.jdt.core.dom.InfixExpression expression) {
@@ -1550,9 +1546,9 @@ public class CompilationUnitBuilder {
         checkArgument(
             variableBinding.isField(),
             "Need to implement translation for QualifiedName that is not a field.");
-        return FieldAccess.Builder.from(JdtUtils.createFieldDescriptor(variableBinding))
-            .setQualifier(convert(expression.getQualifier()))
-            .build();
+
+        Expression qualifier = convert(expression.getQualifier());
+        return JdtUtils.createFieldAccess(qualifier, variableBinding);
       }
 
       if (binding instanceof ITypeBinding) {

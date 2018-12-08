@@ -23,19 +23,4 @@ public class AstUtilConstants {
   public static final String FUNCTIONAL_INTERFACE_JSFUNCTION_CLASS_NAME = "JsFunction";
   public static final String TYPE_VARIABLE_IN_METHOD_PREFIX = "M_";
   public static final String TYPE_VARIABLE_IN_TYPE_PREFIX = "C_";
-
-  private static final ThreadLocal<FieldDescriptor> ARRAY_LENGTH_FIELD_DESCRIPTION =
-      ThreadLocal.withInitial(
-          () ->
-              FieldDescriptor.newBuilder()
-                  .setEnclosingTypeDescriptor(TypeDescriptors.get().nativeArray)
-                  .setName("length")
-                  .setTypeDescriptor(PrimitiveTypes.INT)
-                  .setStatic(false)
-                  .setJsInfo(JsInfo.RAW_FIELD)
-                  .build());
-
-  public static FieldDescriptor getArrayLengthFieldDescriptor() {
-    return ARRAY_LENGTH_FIELD_DESCRIPTION.get();
-  }
 }

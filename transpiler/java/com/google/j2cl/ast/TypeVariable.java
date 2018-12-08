@@ -61,6 +61,11 @@ public abstract class TypeVariable extends TypeDescriptor {
   abstract String getUniqueKey();
 
   @Override
+  public boolean isTypeVariable() {
+    return true;
+  }
+
+  @Override
   public boolean isNullable() {
     // TODO(b/68726480): Implement nullability of type variables.
     return true;

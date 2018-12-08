@@ -61,7 +61,6 @@ import com.google.j2cl.ast.visitors.NormalizeEquality;
 import com.google.j2cl.ast.visitors.NormalizeFieldInitialization;
 import com.google.j2cl.ast.visitors.NormalizeInstanceOfs;
 import com.google.j2cl.ast.visitors.NormalizeInterfaceMethods;
-import com.google.j2cl.ast.visitors.NormalizeIntersectionTypes;
 import com.google.j2cl.ast.visitors.NormalizeJsAwaitMethodInvocations;
 import com.google.j2cl.ast.visitors.NormalizeJsDocCastExpressions;
 import com.google.j2cl.ast.visitors.NormalizeJsEnums;
@@ -199,9 +198,6 @@ class J2clTranspiler {
             // Runs after NormalizeMultiExpressions to make sure it only sees valid l-values.
             new ExpandCompoundAssignments(),
             new InsertErasureTypeSafetyCasts(),
-            // Needs to run after InsertErasureTypeSafetyCasts, as they might introduce
-            // intersection casts.
-            new NormalizeIntersectionTypes(),
             // Runs before unboxing conversion.
             new InsertStringConversions(),
             new InsertNarrowingReferenceConversions(),

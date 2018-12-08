@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.ast.visitors;
 
+
 import static com.google.common.base.Preconditions.checkState;
 
 import com.google.j2cl.ast.AstUtils;
@@ -44,7 +45,7 @@ public class InsertJsEnumBoxingAndUnboxingConversions extends NormalizationPass 
               }
 
               @Override
-              public Expression rewriteAssignmentContext(
+              public Expression rewriteTypeConversionContext(
                   TypeDescriptor inferredTypeDescriptor,
                   TypeDescriptor toDeclaredTypeDescriptor,
                   Expression expression) {
@@ -65,14 +66,14 @@ public class InsertJsEnumBoxingAndUnboxingConversions extends NormalizationPass 
               public Expression rewriteMethodInvocationContext(
                   ParameterDescriptor inferredParameterDescriptor,
                   ParameterDescriptor declaredParameterDescriptor,
-                  Expression argumentExpression) {
+                  Expression argument) {
                 if (inferredParameterDescriptor.isDoNotAutobox()) {
-                  return argumentExpression;
+                  return argument;
                 }
-                return rewriteAssignmentContext(
+                return rewriteTypeConversionContext(
                     inferredParameterDescriptor.getTypeDescriptor(),
                     declaredParameterDescriptor.getTypeDescriptor(),
-                    argumentExpression);
+                    argument);
               }
 
               @Override

@@ -17,16 +17,11 @@ package com.google.j2cl.transpiler.integration.intersectiontype;
 
 public class Main {
   public static void main(String[] args) {
-    new Main().run();
-  }
-
-  public void run() {
-    // Tests from GWT
     testBaseIntersectionCast();
     testIntersectionCastWithLambdaExpr();
     testIntersectionCastPolymorphism();
-    // Custom tests
     testLambdaTypeInference();
+    testErasureCast();
   }
 
   private static class EmptyA {}
@@ -40,7 +35,7 @@ public class Main {
   private static class EmptyC extends EmptyA implements EmptyI, EmptyJ {}
 
   @SuppressWarnings("unused")
-  public void testBaseIntersectionCast() {
+  private static void testBaseIntersectionCast() {
     EmptyA localB = new EmptyB();
     EmptyA localC = new EmptyC();
     EmptyB b2BI = (EmptyB & EmptyI) localB;
@@ -95,7 +90,7 @@ public class Main {
 
   private interface SimpleK {}
 
-  public void testIntersectionCastWithLambdaExpr() {
+  private static void testIntersectionCastWithLambdaExpr() {
     SimpleI simpleI1 = (SimpleI & EmptyI) () -> 11;
     assert 11 == simpleI1.fun();
     SimpleI simpleI2 = (EmptyI & SimpleI) () -> 22;
@@ -147,7 +142,7 @@ public class Main {
     }
   }
 
-  public void testIntersectionCastPolymorphism() {
+  private static void testIntersectionCastPolymorphism() {
     SimpleA bb = new SimpleB();
     assert 22 == ((SimpleB & SimpleI) bb).fun();
     assert 11 == ((SimpleB & SimpleI) bb).bar();
@@ -174,18 +169,35 @@ public class Main {
     int cmp(int a);
   }
 
-  public static Cmp method() {
+  private static Cmp method() {
     return (Cmp & Serial) () -> 1;
   }
 
   // This Lambda is type correctly
-  public static Cmp2 method2() {
+  private static Cmp2 method2() {
     return (Cmp2 & Serial) (a) -> a / 2;
   }
 
-  public static void testLambdaTypeInference() {
+  private static void testLambdaTypeInference() {
     // The first one fails because the lambda is not properly typed.
     assert method().cmp() == 1;
     assert method2().cmp(4) == 2;
+  }
+
+  private static void testErasureCast() {
+    try {
+      new ParameterizedByIntersection().m(new EmptyA());
+      assert false : "Should have thrown ClassCastException";
+    } catch (ClassCastException expected) {
+      assert expected.getMessage().endsWith("cannot be cast to " + SimpleI.class.getCanonicalName())
+          : "Got unexpected message " + expected.getMessage();
+    }
+  }
+
+  private static class ParameterizedByIntersection<T extends EmptyA & SimpleI> {
+    void m(T t) {
+      // fun is a method on SimpleI.
+      t.fun();
+    }
   }
 }

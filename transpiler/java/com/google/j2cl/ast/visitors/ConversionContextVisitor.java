@@ -20,6 +20,7 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.ArrayAccess;
+import com.google.j2cl.ast.ArrayLength;
 import com.google.j2cl.ast.ArrayLiteral;
 import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.AssertStatement;
@@ -45,6 +46,7 @@ import com.google.j2cl.ast.JavaScriptConstructorReference;
 import com.google.j2cl.ast.JsDocCastExpression;
 import com.google.j2cl.ast.LabeledStatement;
 import com.google.j2cl.ast.Literal;
+import com.google.j2cl.ast.MemberDescriptor;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.ast.MultiExpression;
@@ -78,133 +80,104 @@ import java.util.List;
  */
 public final class ConversionContextVisitor extends AbstractRewriter {
 
-  /**
-   * Base class for defining how to insert a conversion operation in a given conversion context.
-   */
+  /** Base class for defining how to insert a conversion operation in a given conversion context. */
   protected abstract static class ContextRewriter {
 
-    /** Expression is going to the given type. */
+    /**
+     * An {@code expression} is being used as if it was of a particular type.
+     *
+     * <p>E.g an assignment like {@code Integer i = 3}, where the {@code int} expression 3 is being
+     * used as if it was of {@code Integer} reference type. Thus it might require conversion.
+     *
+     * <p>But it is also applicable to a receiver in a method call, e.g.
+     *
+     * <p>
+     *
+     * <pre><code>
+     *    <T extends A> m(...) {
+     *      T t;
+     *      t.methodOfA()
+     *    }
+     * </code>
+     * </pre>
+     *
+     * <p>where {@code t} might be used as if it were of type {@code A} but that is not guaranteed
+     * at runtime.
+     */
+    @SuppressWarnings("unused")
+    public Expression rewriteTypeConversionContext(
+        TypeDescriptor inferredTypeDescriptor,
+        TypeDescriptor actualTypeDescriptor,
+        Expression expression) {
+      return expression;
+    }
+
+    /** An {@code expression} that has been assigned to a field or variable of a particular type. */
     @SuppressWarnings("unused")
     public Expression rewriteAssignmentContext(
         TypeDescriptor inferredTypeDescriptor,
         TypeDescriptor actualTypeDescriptor,
         Expression expression) {
-      return expression;
+      // Handle generically as a type conversion context.
+      return rewriteTypeConversionContext(inferredTypeDescriptor, actualTypeDescriptor, expression);
     }
 
-    /** Subject expression is interacting with other expression. */
+    /**
+     * An {@code expression} is an operand of a binary numeric expression where the other operand is
+     * of type {@code otherOperandTypeDescriptor}.
+     */
     @SuppressWarnings("unused")
     public Expression rewriteBinaryNumericPromotionContext(
-        Expression subjectOperandExpression, Expression otherOperandExpression) {
-      return subjectOperandExpression;
+        TypeDescriptor otherOperandTypeDescriptor, Expression operand) {
+      return operand;
     }
 
-    /** Subject expression is interacting with other expression. */
+    /** An {@code expression} is of a JsEnum type and needs boxing. */
     public Expression rewriteJsEnumBoxingConversionContext(Expression expression) {
       return expression;
     }
 
-    /**
-     * Contained expression is going to the contained type.
-     */
+    /** A {@code castExpression} requesting and explicit type conversion. */
     public Expression rewriteCastContext(CastExpression castExpression) {
       return castExpression;
     }
 
-    /** Expression is going to the given type. */
-    public Expression rewriteMethodInvocationContext(
-        ParameterDescriptor inferredParameterDescriptor,
-        ParameterDescriptor actualParameterDescriptor,
-        Expression argumentExpression) {
-      // By default handle method invocation parameter passing like assignments.
-      return rewriteAssignmentContext(
-          inferredParameterDescriptor.getTypeDescriptor(),
-          actualParameterDescriptor.getTypeDescriptor(),
-          argumentExpression);
-    }
-
-    /** Expression is always going to String. */
-    public Expression rewriteStringContext(Expression operandExpression) {
-      return operandExpression;
-    }
-
-    /**
-     * Expression is always going to primitive.
-     */
-    public Expression rewriteUnaryNumericPromotionContext(Expression operandExpression) {
-      return operandExpression;
-    }
-
-    /** Expression is always going to boolean. */
-    public Expression rewriteBooleanConversionContext(Expression operandExpression) {
-      return operandExpression;
-    }
-  }
-
-  /** An abstract base class to extend for visiting the AST according to context rules */
-  protected abstract static class ContextVisitor extends ContextRewriter {
-    @Override
-    public final Expression rewriteAssignmentContext(
+    /** An {@code expression} that is used as a qualifier of a member of a particular type. */
+    @SuppressWarnings("unused")
+    public Expression rewriteMemberQualifierContext(
         TypeDescriptor inferredTypeDescriptor,
         TypeDescriptor actualTypeDescriptor,
         Expression expression) {
-      visitAssignmentContext(inferredTypeDescriptor, expression);
-      return expression;
+      // Handle generically as a type conversion context.
+      return rewriteTypeConversionContext(inferredTypeDescriptor, actualTypeDescriptor, expression);
     }
 
-    public void visitAssignmentContext(TypeDescriptor toTypeDescriptor, Expression expression) {}
-
-    @Override
-    public final Expression rewriteCastContext(CastExpression castExpression) {
-      visitCastContext(castExpression);
-      return castExpression;
-    }
-
-    public void visitCastContext(CastExpression castExpression) {}
-
-    @Override
+    /** An {@code argument} that is passed to a method as a parameter. */
     public Expression rewriteMethodInvocationContext(
         ParameterDescriptor inferredParameterDescriptor,
         ParameterDescriptor actualParameterDescriptor,
-        Expression argumentExpression) {
-      visitMethodInvocationContext(inferredParameterDescriptor, argumentExpression);
-      return argumentExpression;
+        Expression argument) {
+      // By default handle method invocation parameter passing like assignments.
+      return rewriteTypeConversionContext(
+          inferredParameterDescriptor.getTypeDescriptor(),
+          actualParameterDescriptor.getTypeDescriptor(),
+          argument);
     }
 
-    public void visitMethodInvocationContext(
-        ParameterDescriptor parameterDescriptor, Expression argumentExpression) {}
-
-    @Override
-    public final Expression rewriteStringContext(Expression operandExpression) {
-      visitStringContext(operandExpression);
-      return operandExpression;
-    }
-
-    public void visitStringContext(Expression operandExpression) {}
-
-    @Override
-    public final Expression rewriteUnaryNumericPromotionContext(Expression operandExpression) {
-      visitUnaryNumericPromotionContext(operandExpression);
-      return operandExpression;
-    }
-
-    public void visitUnaryNumericPromotionContext(Expression operandExpression) {}
-
-    @Override
-    public final Expression rewriteBooleanConversionContext(Expression operandExpression) {
-      visitBooleanConversionContext(operandExpression);
-      return operandExpression;
-    }
-
-    public void visitBooleanConversionContext(Expression operandExpression) {}
-
-    @Override
-    public Expression rewriteJsEnumBoxingConversionContext(Expression expression) {
-      visitJsEnumConversionContext(expression);
+    /** An {@code expression} that is used as a string. */
+    public Expression rewriteStringContext(Expression expression) {
       return expression;
     }
 
-    public void visitJsEnumConversionContext(Expression expression) {}
+    /** An {@code operand} that is used in an unary numeric operation. */
+    public Expression rewriteUnaryNumericPromotionContext(Expression operand) {
+      return operand;
+    }
+
+    /** An {@code operand} that is used a boolean expression. */
+    public Expression rewriteBooleanConversionContext(Expression operand) {
+      return operand;
+    }
   }
 
   private final ContextRewriter contextRewriter;
@@ -219,11 +192,22 @@ public final class ConversionContextVisitor extends AbstractRewriter {
 
     return ArrayAccess.newBuilder()
         .setArrayExpression(
-            contextRewriter.rewriteAssignmentContext(
-                expression.getTypeDescriptor(), expression.getDeclaredTypeDescriptor(), expression))
+            rewriteTypeConversionContextWithoutDeclaration(
+                expression.getTypeDescriptor(), expression))
         .setIndexExpression(
             // The index is always int so gets rewritten with unary numeric promotion context
             contextRewriter.rewriteUnaryNumericPromotionContext(arrayAccess.getIndexExpression()))
+        .build();
+  }
+
+  @Override
+  public ArrayLength rewriteArrayLength(ArrayLength arrayLength) {
+    Expression expression = arrayLength.getArrayExpression();
+
+    return ArrayLength.Builder.from(arrayLength)
+        .setArrayExpression(
+            rewriteTypeConversionContextWithoutDeclaration(
+                expression.getTypeDescriptor(), expression))
         .build();
   }
 
@@ -235,7 +219,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
         arrayLiteral.getValueExpressions().stream()
             .map(
                 valueExpression ->
-                    rewriteNonInferredAssignmentContext(
+                    rewriteTypeConversionContextWithoutDeclaration(
                         typeDescriptor.getComponentTypeDescriptor(), valueExpression))
             .collect(toImmutableList());
     return new ArrayLiteral(typeDescriptor, valueExpressions);
@@ -278,10 +262,12 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     if (AstUtils.matchesBinaryNumericPromotionContext(binaryExpression)) {
       if (!binaryExpression.getOperator().isCompoundAssignment()) {
         leftOperand =
-            contextRewriter.rewriteBinaryNumericPromotionContext(leftOperand, rightOperand);
+            contextRewriter.rewriteBinaryNumericPromotionContext(
+                rightOperand.getTypeDescriptor(), leftOperand);
       }
       rightOperand =
-          contextRewriter.rewriteBinaryNumericPromotionContext(rightOperand, leftOperand);
+          contextRewriter.rewriteBinaryNumericPromotionContext(
+              leftOperand.getTypeDescriptor(), rightOperand);
     }
 
     // string context
@@ -300,7 +286,8 @@ public final class ConversionContextVisitor extends AbstractRewriter {
       }
       // The left operand of a shift will be always treated as an int as the maximum shift distance
       // is 64.
-      rightOperand = rewriteNonInferredAssignmentContext(PrimitiveTypes.INT, rightOperand);
+      rightOperand =
+          rewriteTypeConversionContextWithoutDeclaration(PrimitiveTypes.INT, rightOperand);
     }
 
     // boolean context
@@ -350,10 +337,10 @@ public final class ConversionContextVisitor extends AbstractRewriter {
             contextRewriter.rewriteBooleanConversionContext(
                 conditionalExpression.getConditionExpression()))
         .setTrueExpression(
-            rewriteNonInferredAssignmentContext(
+            rewriteTypeConversionContextWithoutDeclaration(
                 typeDescriptor, conditionalExpression.getTrueExpression()))
         .setFalseExpression(
-            rewriteNonInferredAssignmentContext(
+            rewriteTypeConversionContextWithoutDeclaration(
                 typeDescriptor, conditionalExpression.getFalseExpression()))
         .build();
   }
@@ -368,9 +355,30 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     // assignment context
     return Field.Builder.from(field)
         .setInitializer(
-            rewriteNonInferredAssignmentContext(
-                field.getDescriptor().getTypeDescriptor(), field.getInitializer()))
+            contextRewriter.rewriteAssignmentContext(
+                field.getDescriptor().getTypeDescriptor(),
+                field.getDescriptor().getDeclarationDescriptor().getTypeDescriptor(),
+                field.getInitializer()))
         .build();
+  }
+
+  @Override
+  public FieldAccess rewriteFieldAccess(FieldAccess fieldAccess) {
+    return FieldAccess.Builder.from(fieldAccess)
+        .setQualifier(rewriteInstanceQualifier(fieldAccess.getQualifier(), fieldAccess.getTarget()))
+        .build();
+  }
+
+  private Expression rewriteInstanceQualifier(
+      Expression qualifier, MemberDescriptor memberDescriptor) {
+    if (memberDescriptor.isStatic()) {
+      return qualifier;
+    }
+
+    return contextRewriter.rewriteMemberQualifierContext(
+        memberDescriptor.getEnclosingTypeDescriptor(),
+        memberDescriptor.getDeclarationDescriptor().getEnclosingTypeDescriptor(),
+        qualifier);
   }
 
   @Override
@@ -399,7 +407,6 @@ public final class ConversionContextVisitor extends AbstractRewriter {
   public Expression rewriteExpression(Expression expression) {
     // Every expression needs to be handled explicitly or excluded here.
     if (expression instanceof Literal
-        || expression instanceof FieldAccess
         || expression instanceof MultiExpression
         || expression instanceof FunctionExpression
         || expression instanceof JavaScriptConstructorReference
@@ -448,6 +455,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
   public MethodCall rewriteMethodCall(MethodCall methodCall) {
     // method invocation context
     return MethodCall.Builder.from(methodCall)
+        .setQualifier(rewriteInstanceQualifier(methodCall.getQualifier(), methodCall.getTarget()))
         .setArguments(rewriteMethodInvocationContextArguments(methodCall))
         .build();
   }
@@ -521,7 +529,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     // assignment context
     return ReturnStatement.newBuilder()
         .setExpression(
-            rewriteNonInferredAssignmentContext(
+            rewriteTypeConversionContextWithoutDeclaration(
                 returnStatement.getTypeDescriptor(), returnStatement.getExpression()))
         .setTypeDescriptor(returnStatement.getTypeDescriptor())
         .setSourcePosition(returnStatement.getSourcePosition())
@@ -570,7 +578,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     return VariableDeclarationFragment.newBuilder()
         .setVariable(variableDeclaration.getVariable())
         .setInitializer(
-            rewriteNonInferredAssignmentContext(
+            rewriteTypeConversionContextWithoutDeclaration(
                 variableDeclaration.getVariable().getTypeDescriptor(),
                 variableDeclaration.getInitializer()))
         .build();
@@ -587,9 +595,10 @@ public final class ConversionContextVisitor extends AbstractRewriter {
         .build();
   }
 
-  private Expression rewriteNonInferredAssignmentContext(
+  private Expression rewriteTypeConversionContextWithoutDeclaration(
       TypeDescriptor toTypeDescriptor, Expression expression) {
-    return contextRewriter.rewriteAssignmentContext(toTypeDescriptor, toTypeDescriptor, expression);
+    return contextRewriter.rewriteTypeConversionContext(
+        toTypeDescriptor, toTypeDescriptor, expression);
   }
 
   private List<Expression> rewriteMethodInvocationContextArguments(Invocation invocation) {

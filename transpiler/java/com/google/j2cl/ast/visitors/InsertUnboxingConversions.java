@@ -37,7 +37,7 @@ public class InsertUnboxingConversions extends NormalizationPass {
   private ConversionContextVisitor.ContextRewriter getContextRewriter() {
     return new ConversionContextVisitor.ContextRewriter() {
       @Override
-      public Expression rewriteAssignmentContext(
+      public Expression rewriteTypeConversionContext(
           TypeDescriptor toTypeDescriptor,
           TypeDescriptor declaredTypeDescriptor,
           Expression expression) {
@@ -47,13 +47,13 @@ public class InsertUnboxingConversions extends NormalizationPass {
 
       @Override
       public Expression rewriteBinaryNumericPromotionContext(
-          Expression subjectOperandExpression, Expression otherOperandExpression) {
-        return maybeUnbox(subjectOperandExpression);
+          TypeDescriptor otherOperandTypeDescriptor, Expression operand) {
+        return maybeUnbox(operand);
       }
 
       @Override
-      public Expression rewriteBooleanConversionContext(Expression operandExpression) {
-        return maybeUnbox(operandExpression);
+      public Expression rewriteBooleanConversionContext(Expression operand) {
+        return maybeUnbox(operand);
       }
 
       @Override
@@ -66,8 +66,8 @@ public class InsertUnboxingConversions extends NormalizationPass {
       }
 
       @Override
-      public Expression rewriteUnaryNumericPromotionContext(Expression operandExpression) {
-        return maybeUnbox(operandExpression);
+      public Expression rewriteUnaryNumericPromotionContext(Expression operand) {
+        return maybeUnbox(operand);
       }
     };
   }

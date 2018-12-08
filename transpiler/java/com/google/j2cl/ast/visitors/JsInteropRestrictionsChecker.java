@@ -66,7 +66,7 @@ import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeLiteral;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableReference;
-import com.google.j2cl.ast.visitors.ConversionContextVisitor.ContextVisitor;
+import com.google.j2cl.ast.visitors.ConversionContextVisitor.ContextRewriter;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourcePosition;
 import java.util.LinkedHashSet;
@@ -530,17 +530,25 @@ public class JsInteropRestrictionsChecker {
   private void checkJsEnumAssignments(Type type) {
     type.accept(
         new ConversionContextVisitor(
-            new ContextVisitor() {
+            new ContextRewriter() {
               @Override
-              public void visitAssignmentContext(
-                  TypeDescriptor toTypeDescriptor, Expression expression) {
-                checkJsEnumAssignment(toTypeDescriptor, expression);
+              public Expression rewriteTypeConversionContext(
+                  TypeDescriptor inferredTypeDescriptor,
+                  TypeDescriptor declaredTypeDescriptor,
+                  Expression expression) {
+                // Handle here all the scenarios related to the JsEnum being used as an enum, e.g.
+                // assignment, parameter passing, etc.
+                checkJsEnumAssignment(inferredTypeDescriptor, expression);
+                return expression;
               }
 
               @Override
-              public void visitMethodInvocationContext(
-                  ParameterDescriptor parameterDescriptor, Expression expression) {
-                checkJsEnumAssignment(parameterDescriptor.getTypeDescriptor(), expression);
+              public Expression rewriteMemberQualifierContext(
+                  TypeDescriptor inferredTypeDescriptor,
+                  TypeDescriptor declaredTypeDescriptor,
+                  Expression qualifierExpression) {
+                // Skip checking here explicitly, members are checked explicitly elsewhere.
+                return qualifierExpression;
               }
 
               private void checkJsEnumAssignment(

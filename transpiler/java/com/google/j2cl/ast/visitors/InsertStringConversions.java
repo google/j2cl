@@ -35,10 +35,10 @@ public class InsertStringConversions extends NormalizationPass {
   private ConversionContextVisitor.ContextRewriter getContextRewriter() {
     return new ConversionContextVisitor.ContextRewriter() {
       @Override
-      public Expression rewriteStringContext(Expression operandExpression) {
-        TypeDescriptor typeDescriptor = operandExpression.getTypeDescriptor();
-        if (AstUtils.isNonNullString(operandExpression)) {
-          return operandExpression;
+      public Expression rewriteStringContext(Expression expression) {
+        TypeDescriptor typeDescriptor = expression.getTypeDescriptor();
+        if (AstUtils.isNonNullString(expression)) {
+          return expression;
         }
 
         // Normally Java would call String.valueOf on a primitive but there is no need in J2CL
@@ -49,12 +49,12 @@ public class InsertStringConversions extends NormalizationPass {
         // instances of a class where we can rely on toString().
         if (TypeDescriptors.isNonVoidPrimitiveType(typeDescriptor)
             && !TypeDescriptors.isPrimitiveChar(typeDescriptor)) {
-          return operandExpression;
+          return expression;
         }
 
         // For the normal case we call String.valueOf which performs the right conversion.
         return MethodCall.Builder.from(AstUtils.getStringValueOfMethodDescriptor(typeDescriptor))
-            .setArguments(operandExpression)
+            .setArguments(expression)
             .build();
       }
     };

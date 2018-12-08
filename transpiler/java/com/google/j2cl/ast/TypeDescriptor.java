@@ -128,6 +128,11 @@ public abstract class TypeDescriptor extends Node
     return false;
   }
 
+  /** Returns whether the described type is a type variable. */
+  public boolean isTypeVariable() {
+    return false;
+  }
+
   /** Returns the type that holds the metadata for the class type */
   @Nullable
   public abstract TypeDeclaration getMetadataTypeDeclaration();

@@ -23,6 +23,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.AbstractTransformer;
 import com.google.j2cl.ast.ArrayAccess;
+import com.google.j2cl.ast.ArrayLength;
 import com.google.j2cl.ast.ArrayLiteral;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.AwaitExpression;
@@ -87,6 +88,13 @@ public class ExpressionTranspiler {
         sourceBuilder.append("[");
         process(arrayAccess.getIndexExpression());
         sourceBuilder.append("]");
+        return null;
+      }
+
+      @Override
+      public Void transformArrayLength(ArrayLength arrayLength) {
+        process(arrayLength.getArrayExpression());
+        sourceBuilder.append(".length");
         return null;
       }
 

@@ -24,10 +24,13 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.j2cl.ast.ArrayLength;
 import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.AstUtilConstants;
 import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.DeclaredTypeDescriptor;
+import com.google.j2cl.ast.Expression;
+import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.IntersectionTypeDescriptor;
 import com.google.j2cl.ast.JsEnumInfo;
@@ -88,9 +91,7 @@ class JdtUtils {
   }
 
   public static FieldDescriptor createFieldDescriptor(IVariableBinding variableBinding) {
-    if (isArrayLengthBinding(variableBinding)) {
-      return AstUtilConstants.getArrayLengthFieldDescriptor();
-    }
+    checkArgument(!isArrayLengthBinding(variableBinding));
 
     boolean isStatic = isStatic(variableBinding);
     Visibility visibility = getVisibility(variableBinding);
@@ -289,7 +290,17 @@ class JdtUtils {
     }
   }
 
-  public static boolean isArrayLengthBinding(IVariableBinding variableBinding) {
+  public static Expression createFieldAccess(Expression qualifier, IVariableBinding fieldBinding) {
+    if (isArrayLengthBinding(fieldBinding)) {
+      return ArrayLength.newBuilder().setArrayExpression(qualifier).build();
+    }
+
+    return FieldAccess.Builder.from(JdtUtils.createFieldDescriptor(fieldBinding))
+        .setQualifier(qualifier)
+        .build();
+  }
+
+  private static boolean isArrayLengthBinding(IVariableBinding variableBinding) {
     return variableBinding.getName().equals("length")
         && variableBinding.isField()
         && variableBinding.getDeclaringClass() == null;

@@ -39,7 +39,7 @@ public class InsertNarrowingPrimitiveConversions extends NormalizationPass {
   private ConversionContextVisitor.ContextRewriter getContextRewriter() {
     return new ConversionContextVisitor.ContextRewriter() {
       @Override
-      public Expression rewriteAssignmentContext(
+      public Expression rewriteTypeConversionContext(
           TypeDescriptor toTypeDescriptor,
           TypeDescriptor declaredTypeDescriptor,
           Expression expression) {

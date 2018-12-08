@@ -44,7 +44,7 @@ public class InsertWideningPrimitiveConversions extends NormalizationPass {
     return new ConversionContextVisitor.ContextRewriter() {
 
       @Override
-      public Expression rewriteAssignmentContext(
+      public Expression rewriteTypeConversionContext(
           TypeDescriptor toTypeDescriptor,
           TypeDescriptor declaredTypeDescriptor,
           Expression expression) {
@@ -56,21 +56,21 @@ public class InsertWideningPrimitiveConversions extends NormalizationPass {
 
       @Override
       public Expression rewriteBinaryNumericPromotionContext(
-          Expression subjectOperand, Expression otherOperand) {
-        if (!TypeDescriptors.isNumericPrimitive(subjectOperand.getTypeDescriptor())
-            || !TypeDescriptors.isNumericPrimitive(otherOperand.getTypeDescriptor())) {
+          TypeDescriptor otherOperandTypeDescriptor, Expression operand) {
+        if (!TypeDescriptors.isNumericPrimitive(operand.getTypeDescriptor())
+            || !TypeDescriptors.isNumericPrimitive(otherOperandTypeDescriptor)) {
           // Widening only applies between primitive types.
-          return subjectOperand;
+          return operand;
         }
 
         TypeDescriptor widenedTypeDescriptor =
             AstUtils.getNumbericBinaryExpressionTypeDescriptor(
-                (PrimitiveTypeDescriptor) otherOperand.getTypeDescriptor(),
-                (PrimitiveTypeDescriptor) subjectOperand.getTypeDescriptor());
-        if (!shouldWiden(widenedTypeDescriptor, subjectOperand)) {
-          return subjectOperand;
+                (PrimitiveTypeDescriptor) otherOperandTypeDescriptor,
+                (PrimitiveTypeDescriptor) operand.getTypeDescriptor());
+        if (!shouldWiden(widenedTypeDescriptor, operand)) {
+          return operand;
         }
-        return widenTo(widenedTypeDescriptor, subjectOperand);
+        return widenTo(widenedTypeDescriptor, operand);
       }
 
       @Override

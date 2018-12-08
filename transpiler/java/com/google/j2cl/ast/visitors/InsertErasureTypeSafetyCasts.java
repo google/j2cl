@@ -15,18 +15,14 @@
  */
 package com.google.j2cl.ast.visitors;
 
-import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
-import com.google.j2cl.ast.FieldAccess;
-import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
-import com.google.j2cl.ast.TypeVariable;
 
 /**
  * Inserts a casts needed for type safety due to type erasure.
@@ -66,30 +62,12 @@ public class InsertErasureTypeSafetyCasts extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(new ConversionContextVisitor(getContextRewriter()));
-    compilationUnit.accept(
-        new AbstractRewriter() {
-          @Override
-          public Expression rewriteMethodCall(MethodCall methodCall) {
-            Expression qualifier = methodCall.getQualifier();
-            return MethodCall.Builder.from(methodCall)
-                .setQualifier(maybeInsertErasureTypeSafetyCast(qualifier))
-                .build();
-          }
-
-          @Override
-          public Expression rewriteFieldAccess(FieldAccess fieldAccess) {
-            Expression qualifier = fieldAccess.getQualifier();
-            return FieldAccess.Builder.from(fieldAccess)
-                .setQualifier(maybeInsertErasureTypeSafetyCast(qualifier))
-                .build();
-          }
-        });
   }
 
   private ConversionContextVisitor.ContextRewriter getContextRewriter() {
     return new ConversionContextVisitor.ContextRewriter() {
       @Override
-      public Expression rewriteAssignmentContext(
+      public Expression rewriteTypeConversionContext(
           TypeDescriptor toTypeDescriptor,
           TypeDescriptor declaredTypeDescriptor,
           Expression expression) {
@@ -105,7 +83,7 @@ public class InsertErasureTypeSafetyCasts extends NormalizationPass {
       public Expression rewriteMethodInvocationContext(
           ParameterDescriptor toParameterDescriptor,
           ParameterDescriptor declaredParameterDescriptor,
-          Expression expression) {
+          Expression argument) {
         TypeDescriptor toTypeDescriptor = toParameterDescriptor.getTypeDescriptor();
         TypeDescriptor declaredTypeDescriptor = declaredParameterDescriptor.getTypeDescriptor();
         if (toParameterDescriptor.isVarargs()
@@ -115,15 +93,15 @@ public class InsertErasureTypeSafetyCasts extends NormalizationPass {
           // Since the packaging of varargs (see AstUtils.getPackagedVarargs() for the motivation)
           // creates an array of type DeclaredType[] instead of a JsEnum[] this pass would normally
           // insert an erasure cast to JsEnum[], which needs to be avoided.
-          return expression;
+          return argument;
         }
-        return rewriteAssignmentContext(toTypeDescriptor, declaredTypeDescriptor, expression);
+        return rewriteTypeConversionContext(toTypeDescriptor, declaredTypeDescriptor, argument);
       }
 
       @Override
       public Expression rewriteBinaryNumericPromotionContext(
-          Expression subjectOperandExpression, Expression otherOperandExpression) {
-        return maybeInsertErasureTypeSafetyCast(subjectOperandExpression);
+          TypeDescriptor otherOperandTypeDescriptor, Expression operand) {
+        return maybeInsertErasureTypeSafetyCast(operand);
       }
 
       @Override
@@ -159,20 +137,22 @@ public class InsertErasureTypeSafetyCasts extends NormalizationPass {
 
   private static Expression maybeInsertErasureTypeSafetyCast(
       TypeDescriptor fromTypeDescriptor, TypeDescriptor toTypeDescriptor, Expression expression) {
-    TypeDescriptor leafTypeDescriptor =
-        fromTypeDescriptor.isArray()
-            ? ((ArrayTypeDescriptor) fromTypeDescriptor).getLeafTypeDescriptor()
-            : fromTypeDescriptor;
-    if (!(leafTypeDescriptor instanceof TypeVariable)) {
+    if (!fromTypeDescriptor.isTypeVariable()
+        && !fromTypeDescriptor.isIntersection()
+        && !(fromTypeDescriptor.isArray()
+            && ((ArrayTypeDescriptor) fromTypeDescriptor)
+                .getLeafTypeDescriptor()
+                .isTypeVariable())) {
       return expression;
     }
 
-    if (!fromTypeDescriptor.isAssignableTo(toTypeDescriptor)) {
+    if (!fromTypeDescriptor.toRawTypeDescriptor().isAssignableTo(toTypeDescriptor)) {
       return CastExpression.newBuilder()
           .setExpression(expression)
           .setCastTypeDescriptor(toTypeDescriptor)
           .build();
     }
+
     return expression;
   }
 }

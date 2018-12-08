@@ -37,7 +37,7 @@ public class InsertBoxingConversions extends NormalizationPass {
   private ConversionContextVisitor.ContextRewriter getContextRewriter() {
     return new ConversionContextVisitor.ContextRewriter() {
       @Override
-      public Expression rewriteAssignmentContext(
+      public Expression rewriteTypeConversionContext(
           TypeDescriptor inferredTypeDescriptor,
           TypeDescriptor declaredTypeDescriptor,
           Expression expression) {
@@ -79,11 +79,11 @@ public class InsertBoxingConversions extends NormalizationPass {
       public Expression rewriteMethodInvocationContext(
           ParameterDescriptor inferredParameterDescriptor,
           ParameterDescriptor declaredParameterDescriptor,
-          Expression argumentExpression) {
+          Expression argument) {
         if (inferredParameterDescriptor.isDoNotAutobox()) {
-          return argumentExpression;
+          return argument;
         }
-        return maybeBox(inferredParameterDescriptor.getTypeDescriptor(), argumentExpression);
+        return maybeBox(inferredParameterDescriptor.getTypeDescriptor(), argument);
       }
     };
   }
