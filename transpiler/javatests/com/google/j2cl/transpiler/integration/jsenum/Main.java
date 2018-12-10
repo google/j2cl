@@ -44,9 +44,10 @@ public class Main {
     testNativeEnumClassInitialization();
     testDoNotAutoboxJsEnum();
     testUnckeckedCastJsEnum();
-    testBoxUnboxWithTypeInference();
-    testBoxingWithSpecialMethods();
-    testParameterizedLambdaUnboxing();
+    testAutoBoxing_typeInference();
+    testAutoBoxing_specialMethods();
+    testAutoBoxing_parameterizedLambda();
+    testAutoBoxing_intersectionCats();
   }
 
   @JsEnum(isNative = true, namespace = "test")
@@ -322,23 +323,24 @@ public class Main {
     assertTrue(v.ordinal() == 1);
     assertTrue(PlainJsEnum.ONE.compareTo(v) == 0);
     assertTrue(PlainJsEnum.ZERO.compareTo(v) < 0);
-    assertThrows(
-        ClassCastException.class,
+    assertThrowsClassCastException(
         () -> {
           Comparable comparable = PlainJsEnum.ONE;
           comparable.compareTo(OtherPlainJsEnum.UNIT);
         });
-    assertThrows(
-        ClassCastException.class,
+    assertThrowsClassCastException(
         () -> {
           Comparable comparable = PlainJsEnum.ONE;
           comparable.compareTo(ONE_DOUBLE);
         });
-    assertThrows(
-        ClassCastException.class,
+    assertThrowsClassCastException(
         () -> {
           Comparable comparable = (Comparable) ONE_DOUBLE;
           comparable.compareTo(PlainJsEnum.ONE);
+        });
+    assertThrowsClassCastException(
+        () -> {
+          Object unused = (Enum<PlainJsEnum> & Comparable<PlainJsEnum>) PlainJsEnum.ONE;
         });
 
     // Test that boxing of special method 'ordinal()' call is not broken by normalization.
@@ -630,14 +632,26 @@ public class Main {
     return (T) object;
   }
 
-  private static void testBoxingWithSpecialMethods() {
+  private static void testAutoBoxing_specialMethods() {
     assertTrue(PlainJsEnum.ONE.equals(PlainJsEnum.ONE));
     assertTrue(PlainJsEnum.ONE.compareTo(PlainJsEnum.ONE) == 0);
     assertTrue(PlainJsEnum.ONE.compareTo(PlainJsEnum.ZERO) > 0);
     assertTrue(PlainJsEnum.TWO.compareTo(PlainJsEnum.TEN) < 0);
   }
 
-  private static void testBoxUnboxWithTypeInference() {
+  private static void testAutoBoxing_intersectionCats() {
+    Comparable c = (PlainJsEnum & Comparable<PlainJsEnum>) PlainJsEnum.ONE;
+    assertTrue(c.compareTo(PlainJsEnum.ZERO) > 0);
+    PlainJsEnum e = (PlainJsEnum & Comparable<PlainJsEnum>) PlainJsEnum.ONE;
+    // e correcly holds an unboxed value.
+    assertSameType(Double.class, e);
+
+    assertTrue(PlainJsEnum.ONE == (PlainJsEnum & Comparable<PlainJsEnum>) PlainJsEnum.ONE);
+    // Intersection cast with a JsEnum does not unbox like the simple cast.
+    assertSameType(PlainJsEnum.class, (PlainJsEnum & Comparable<PlainJsEnum>) PlainJsEnum.ONE);
+  }
+
+  private static void testAutoBoxing_typeInference() {
     assertSameType(Double.class, PlainJsEnum.ONE);
     assertSameType(PlainJsEnum.class, boxingIdentity(PlainJsEnum.ONE));
 
@@ -702,7 +716,7 @@ public class Main {
     return elements;
   }
 
-  private static void testParameterizedLambdaUnboxing() {
+  private static void testAutoBoxing_parameterizedLambda() {
 
     Function<Object> ordinalWithCast = e -> ((PlainJsEnum) e).ordinal();
     assertTrue(1 == ordinalWithCast.apply(PlainJsEnum.ONE));
@@ -740,11 +754,18 @@ public class Main {
         expectedType == actual.getClass());
   }
 
-  private static void assertThrowsClassCastException(Supplier<?> supplier) {
+  private static void assertThrowsClassCastException(Supplier<Object> supplier) {
+    assertThrowsClassCastException(
+        () -> {
+          supplier.get();
+        });
+  }
+
+  private static void assertThrowsClassCastException(Runnable runnable) {
     assertThrows(
         ClassCastException.class,
         () -> {
-          supplier.get();
+          runnable.run();
         });
   }
 
