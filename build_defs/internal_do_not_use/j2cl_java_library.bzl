@@ -80,7 +80,7 @@ def _strip_gwt_incompatible(ctx, java_srcs):
     args.add_all(java_srcs)
 
     ctx.actions.run(
-        progress_message = "Stripping @GwtIncompatible",
+        progress_message = "Stripping @GwtIncompatible from %s" % ctx.label.name,
         inputs = java_srcs,
         outputs = [output_file],
         executable = ctx.executable._stripper,
