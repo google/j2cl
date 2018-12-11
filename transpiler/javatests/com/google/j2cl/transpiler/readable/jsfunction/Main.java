@@ -43,12 +43,21 @@ public class Main {
 
   private static final class JsFunctionImplementation implements JsFunctionInterface {
     public int field;
+    public JsFunctionImplementation storedThis;
+    public JsFunctionImplementation anotherStoredThis;
+
+    JsFunctionImplementation() {
+      storedThis = this;
+      // Add an explicit unnecessary cast to make jscompiler happy.
+      anotherStoredThis = (JsFunctionImplementation) this;
+    }
 
     public int bar() {
       return 0;
     }
 
     public int fun() {
+      field = 1;
       return bar() + foo(1);
     }
 
