@@ -134,7 +134,7 @@
 [i] => [return i$1$;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testLambdaWithGenerics>"
 [callTypeVariableWithBounds(i -> i, (Enum<T>) null);] => [/**@type {Enum<M_T>} */ (Lambdas.m_callTypeVariableWithBounds__com_google_j2cl_transpiler_readable_lambdas_Lambdas_GenericFunctionalInterface__java_lang_Enum(/**@type {GenericFunctionalInterface<Enum<M_T>>} */ (GenericFunctionalInterface.$adapt(((/** Enum<M_T> */ i$2$) =>{
       return i$2$;
-    }))), /**@type {Enum<M_T>} */ (null)));] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testLambdaWithGenerics"
+    }))), /**@type {Enum<M_T>} */ ($Casts.$to(null, Enum))));] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testLambdaWithGenerics"
 [i] => [i$2$] "i"
 [i] => [return i$2$;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testLambdaWithGenerics>"
 [Function<? super T, ?> f = item -> 1L;] => [let f = Lambdas_Function.$adapt(((/** M_T */ item) =>{
@@ -175,7 +175,7 @@
       Lambdas.$f_identityFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_ = IdentityFunction.$create__();
     }] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.identity"
 [identityFunction = new IdentityFunction();] => [Lambdas.$f_identityFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_ = IdentityFunction.$create__();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.identity"
-[return (GenericJsFunction<E, E>) identityFunction;] => [return /**@type {?function(M_E):M_E} */ (Lambdas.$f_identityFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_);] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.identity"
+[return (GenericJsFunction<E, E>) identityFunction;] => [return /**@type {?function(M_E):M_E} */ ($Casts.$to(Lambdas.$f_identityFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_, $JavaScriptFunction));] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.identity"
 [testJsInteropLambdas] => [m_testJsInteropLambdas__]
 [testJsInteropLambdas] => [Lambdas.$clinit();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testJsInteropLambdas"
 [Thenable<String> rv = (f1, f2) -> f1.apply(null);] => [let rv = /**@type {!$LambdaAdaptor$1<?string>} */ (new $LambdaAdaptor$1(((/** ?function(?string):?void */ f1, /** ?function(Throwable):?void */ f2) =>{

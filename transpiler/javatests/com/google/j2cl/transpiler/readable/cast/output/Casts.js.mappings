@@ -40,9 +40,9 @@
 [Boolean bool = (Boolean) o;] => [let bool = /**@type {?boolean} */ ($Casts.$to(o, Boolean));] "com.google.j2cl.transpiler.readable.cast.Casts.testCastToBoxedType"
 [bool] => [bool] "bool"
 [testCastToArray] => [m_testCastToArray__]
-[Object foo = (Object[]) null;] => [let foo = /**@type {Array<*>} */ (null);] "com.google.j2cl.transpiler.readable.cast.Casts.testCastToArray"
+[Object foo = (Object[]) null;] => [let foo = /**@type {Array<*>} */ ($Arrays.$castTo(null, j_l_Object, 1));] "com.google.j2cl.transpiler.readable.cast.Casts.testCastToArray"
 [foo] => [foo] "foo"
-[Object bar = (Object[][]) null;] => [let bar = /**@type {Array<Array<*>>} */ (null);] "com.google.j2cl.transpiler.readable.cast.Casts.testCastToArray"
+[Object bar = (Object[][]) null;] => [let bar = /**@type {Array<Array<*>>} */ ($Arrays.$castTo(null, j_l_Object, 2));] "com.google.j2cl.transpiler.readable.cast.Casts.testCastToArray"
 [bar] => [bar] "bar"
 [Casts] => [$clinit]
 [Casts] => [Casts.$clinit = (() =>{
