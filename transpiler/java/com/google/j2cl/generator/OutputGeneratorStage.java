@@ -33,6 +33,7 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Optional;
 
 /**
  * The OutputGeneratorStage contains all necessary information for generating the JavaScript output
@@ -43,6 +44,7 @@ public class OutputGeneratorStage {
   private final List<FileInfo> nativeJavaScriptFiles;
   private final Problems problems;
   private final Path outputPath;
+  private final Optional<Path> libraryInfoOutputPath;
   private final boolean declareLegacyNamespace;
   private final boolean shouldGenerateReadableSourceMaps;
   private final boolean generateKytheIndexingMetadata;
@@ -50,19 +52,19 @@ public class OutputGeneratorStage {
   public OutputGeneratorStage(
       List<FileInfo> nativeJavaScriptFiles,
       Path outputPath,
+      Optional<Path> libraryInfoOutputPath,
       boolean declareLegacyNamespace,
       boolean shouldGenerateReadableSourceMaps,
       boolean generateKytheIndexingMetadata,
       Problems problems) {
     this.nativeJavaScriptFiles = nativeJavaScriptFiles;
     this.outputPath = outputPath;
+    this.libraryInfoOutputPath = libraryInfoOutputPath;
     this.declareLegacyNamespace = declareLegacyNamespace;
     this.shouldGenerateReadableSourceMaps = shouldGenerateReadableSourceMaps;
     this.generateKytheIndexingMetadata = generateKytheIndexingMetadata;
     this.problems = problems;
   }
-
-  private static final String LIBRARY_INFO_FILE_NAME = "libraryinfo.json";
 
   public void generateOutputs(List<CompilationUnit> j2clCompilationUnits) {
     // The map must be ordered because it will be iterated over later and if it was not ordered then
@@ -150,12 +152,14 @@ public class OutputGeneratorStage {
         J2clUtils.writeToFile(
             outputPath.resolve(headerRelativePath), javaScriptHeaderSource, problems);
 
-        libraryInfo.addType(
-            LibraryInfoBuilder.build(
-                type,
-                headerRelativePath,
-                implRelativePath,
-                jsImplGenerator.getOutputSourceInfoByMember()));
+        if (libraryInfoOutputPath.isPresent()) {
+          libraryInfo.addType(
+              LibraryInfoBuilder.build(
+                  type,
+                  headerRelativePath,
+                  implRelativePath,
+                  jsImplGenerator.getOutputSourceInfoByMember()));
+        }
 
         if (matchingNativeFile != null) {
           copyNativeJsFileToOutput(matchingNativeFile);
@@ -167,9 +171,10 @@ public class OutputGeneratorStage {
       }
     }
 
-    Path callgraphAbsolutePath = outputPath.resolve(LIBRARY_INFO_FILE_NAME);
-    J2clUtils.writeToFile(
-        callgraphAbsolutePath, LibraryInfoBuilder.serialize(libraryInfo), problems);
+    if (libraryInfoOutputPath.isPresent()) {
+      J2clUtils.writeToFile(
+          libraryInfoOutputPath.get(), LibraryInfoBuilder.serialize(libraryInfo), problems);
+    }
 
     // Error if any of the native implementation files were not used.
     for (Entry<String, NativeJavaScriptFile> fileEntry : nativeFilesByPath.entrySet()) {

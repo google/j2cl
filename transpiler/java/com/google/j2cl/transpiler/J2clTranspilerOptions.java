@@ -21,6 +21,7 @@ import com.google.auto.value.AutoValue;
 import com.google.j2cl.frontend.FrontendUtils.FileInfo;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Optional;
 
 /** Frontend options, which is initialized by a Flag instance that is already parsed. */
 @AutoValue
@@ -33,6 +34,8 @@ public abstract class J2clTranspilerOptions {
   public abstract List<String> getClasspaths();
 
   public abstract Path getOutput();
+
+  public abstract Optional<Path> getLibraryInfoOutput();
 
   public abstract boolean getEmitReadableSourceMap();
 
@@ -55,6 +58,8 @@ public abstract class J2clTranspilerOptions {
     public abstract Builder setClasspaths(List<String> entries);
 
     public abstract Builder setOutput(Path path);
+
+    public abstract Builder setLibraryInfoOutput(Path path);
 
     public abstract Builder setEmitReadableSourceMap(boolean b);
 

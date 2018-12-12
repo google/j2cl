@@ -57,6 +57,13 @@ class BazelJ2clBuilder extends BazelWorker {
       usage = "Specifies the zip into which to place compiled output.")
   protected String output;
 
+  @Option(
+      name = "-libraryinfooutput",
+      required = true,
+      metaVar = "<path>",
+      usage = "Specifies the file into which to place the call graph.")
+  protected String libraryInfoOutput;
+
   @Option(name = "-readablesourcemaps", hidden = true)
   protected boolean readableSourceMaps = false;
 
@@ -85,6 +92,7 @@ class BazelJ2clBuilder extends BazelWorker {
     }
 
     Path outputPath = getZipOutput(this.output, problems);
+    Path libraryInfoOutputPath = Paths.get(this.libraryInfoOutput);
 
     List<FileInfo> allSources =
         FrontendUtils.getAllSources(this.sources, problems)
@@ -113,6 +121,7 @@ class BazelJ2clBuilder extends BazelWorker {
         .setNativeSources(allNativeSources)
         .setClasspaths(getPathEntries(this.classPath))
         .setOutput(outputPath)
+        .setLibraryInfoOutput(libraryInfoOutputPath)
         .setEmitReadableSourceMap(this.readableSourceMaps)
         .setDeclareLegacyNamespace(this.declareLegacyNamespaces)
         .setGenerateKytheIndexingMetadata(this.generateKytheIndexingMetadata)

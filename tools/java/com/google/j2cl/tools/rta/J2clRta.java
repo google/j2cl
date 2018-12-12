@@ -62,13 +62,10 @@ public class J2clRta {
       required = true)
   String unusedMembersOutputFilePath = null;
 
-  @Argument(required = true, usage = "Directory containing the call graph files")
-  String inputDirectory = null;
+  @Argument(required = true, usage = "The list of call graph files", multiValued = true)
+  List<String> inputs = null;
 
   private void run() {
-    checkState(
-        new File(inputDirectory).isDirectory(), "Program argument is not a valid directory path.");
-
     LibraryInfo libraryInfo = mergeCallGraphFiles();
 
     RtaResult rtaResult = new RapidTypeAnalyser(libraryInfo).analyse();
@@ -83,12 +80,10 @@ public class J2clRta {
       Map<String, TypeInfo> typeInfosByName = new HashMap<>();
 
       // TODO(b/112662982): improve performance by reading file contents in parallel.
-      for (File callGraph : Files.fileTraverser().breadthFirst(new File(inputDirectory))) {
-        if (callGraph.isDirectory()) {
-          continue;
-        }
+      for (String callGraphPath : inputs) {
 
-        String callGraphContent = Files.asCharSource(callGraph, StandardCharsets.UTF_8).read();
+        String callGraphContent =
+            Files.asCharSource(new File(callGraphPath), StandardCharsets.UTF_8).read();
         LibraryInfo.Builder builder = LibraryInfo.newBuilder();
         JsonFormat.parser().merge(callGraphContent, builder);
 

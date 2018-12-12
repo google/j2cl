@@ -279,6 +279,7 @@ class J2clTranspiler {
     new OutputGeneratorStage(
             options.getNativeSources(),
             options.getOutput(),
+            options.getLibraryInfoOutput(),
             options.getDeclareLegacyNamespace(),
             options.getEmitReadableSourceMap(),
             options.getGenerateKytheIndexingMetadata(),

@@ -5,6 +5,7 @@ load(":j2cl_js_common.bzl", "J2CL_JS_ATTRS", "JS_PROVIDER_NAME", "j2cl_js_provid
 
 # Constructor for the Bazel provider for J2CL.
 _J2clInfo = provider(fields = ["_J2clJavaInfo"])
+LibraryInfo = provider(fields = ["file"])
 
 def _impl_j2cl_library(ctx):
     # Categorize the sources.
@@ -22,8 +23,9 @@ def _impl_j2cl_library(ctx):
 
     java_provider = _java_compile(ctx, java_srcs)
 
-    js_zip = j2cl_transpile(ctx, java_provider, js_srcs)
+    js_zip, library_info = j2cl_transpile(ctx, java_provider, js_srcs)
     js_outputs = [js_zip] if java_srcs else []
+    library_info = [library_info] if java_srcs else []
 
     # This is a workaround to b/35847804 to make sure the zip ends up in the runfiles.
     js_runfiles = _collect_runfiles(ctx, js_outputs, ctx.attr.deps + ctx.attr.exports)
@@ -38,6 +40,7 @@ def _impl_j2cl_library(ctx):
                 runfiles = js_runfiles,
             ),
             _J2clInfo(_J2clJavaInfo = java_provider),
+            LibraryInfo(file = library_info),
         ],
         **j2cl_js_provider(ctx, srcs = js_outputs, deps = ctx.attr.deps, exports = ctx.attr.exports)
     )
