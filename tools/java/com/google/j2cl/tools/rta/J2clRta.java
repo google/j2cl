@@ -21,8 +21,8 @@ import com.google.common.io.CharSink;
 import com.google.common.io.Files;
 import com.google.j2cl.libraryinfo.LibraryInfo;
 import com.google.j2cl.libraryinfo.TypeInfo;
-import com.google.protobuf.util.JsonFormat;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -81,17 +81,13 @@ public class J2clRta {
 
       // TODO(b/112662982): improve performance by reading file contents in parallel.
       for (String callGraphPath : inputs) {
-
-        String callGraphContent =
-            Files.asCharSource(new File(callGraphPath), StandardCharsets.UTF_8).read();
-        LibraryInfo.Builder builder = LibraryInfo.newBuilder();
-        JsonFormat.parser().merge(callGraphContent, builder);
+        LibraryInfo libraryInfo = LibraryInfo.parseFrom(new FileInputStream(callGraphPath));
 
         // Because J2CL proto emits duplicate sources (see b/36486919), we can see several TypeInfos
         // with the same name. When we reach that case, check that the TypeInfo are the same and
         // throw an exception if they are different.
         // TODO(b/36486919): remove that logic when the bug is fixed.
-        for (TypeInfo typeInfo : builder.getTypeList()) {
+        for (TypeInfo typeInfo : libraryInfo.getTypeList()) {
           String typeId = typeInfo.getTypeId();
           if (typeInfosByName.containsKey(typeId)) {
             TypeInfo existingTypeInfo = typeInfosByName.get(typeId);

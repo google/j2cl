@@ -28,6 +28,8 @@ import com.google.j2cl.libraryinfo.LibraryInfo;
 import com.google.j2cl.libraryinfo.LibraryInfoBuilder;
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
@@ -172,8 +174,11 @@ public class OutputGeneratorStage {
     }
 
     if (libraryInfoOutputPath.isPresent()) {
-      J2clUtils.writeToFile(
-          libraryInfoOutputPath.get(), LibraryInfoBuilder.serialize(libraryInfo), problems);
+      try (OutputStream outputStream = Files.newOutputStream(libraryInfoOutputPath.get())) {
+        libraryInfo.build().writeTo(outputStream);
+      } catch (IOException e) {
+        problems.fatal(FatalError.CANNOT_WRITE_FILE, e.toString());
+      }
     }
 
     // Error if any of the native implementation files were not used.

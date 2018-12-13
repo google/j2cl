@@ -36,7 +36,6 @@ java_library(
         "//third_party:args4j",
         "//third_party:auto_value",
         "//third_party:guava",
-        "//third_party:protobuf_util_json",
         "//transpiler/java/com/google/j2cl/libraryinfo",
     ],
 )
