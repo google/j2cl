@@ -11,6 +11,6 @@ readable_example(
     deps = [
         "//third_party:gwt-jsinterop-annotations-j2cl",
         "//third_party:jsr305_annotations-j2cl",
-        "//third_party/java/checker_framework:annotations-j2cl",
+        "//third_party/java/checker_framework_annotations:checker_framework_annotations-j2cl",
     ],
 )
