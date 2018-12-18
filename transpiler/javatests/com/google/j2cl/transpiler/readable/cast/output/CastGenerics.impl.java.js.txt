@@ -103,7 +103,7 @@ class CastGenerics extends j_l_Object {
   m_testCastToTypeVariable__() {
     let o = Integer.$create__int(1);
     let e = /**@type {C_E} */ ($Casts.$to(o, Number));
-    let t = /**@type {C_T} */ ($Casts.$to(o, j_l_Object));
+    let t = /**@type {C_T} */ (o);
     let es = /**@type {Array<C_E>} */ ($Arrays.$castTo(o, Number, 1));
     let ts = /**@type {Array<C_T>} */ ($Arrays.$castTo(o, j_l_Object, 1));
   }
@@ -115,7 +115,7 @@ class CastGenerics extends j_l_Object {
    */
   m_testCastToMethodTypeVariable__() {
     let o = Integer.$create__int(1);
-    let s = /**@type {M_S} */ ($Casts.$to(o, j_l_Object));
+    let s = /**@type {M_S} */ (o);
     let c = /**@type {CastGenerics<M_S, (Number|number)>} */ (
         $Casts.$to(o, CastGenerics));
     c = /**@type {Array<M_S>} */ ($Arrays.$castTo(o, j_l_Object, 1));

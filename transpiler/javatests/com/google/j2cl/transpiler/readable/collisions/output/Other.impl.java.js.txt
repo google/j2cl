@@ -12,8 +12,6 @@ goog.module('com.google.j2cl.transpiler.readable.collisions.Other$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-
 
 /**
  * @template C_T
@@ -54,7 +52,7 @@ class Other extends j_l_Object {
    */
   m_m___$pp_com_google_j2cl_transpiler_readable_collisions() {
     let M_T = 5;
-    let o = /**@type {Other<M_T>} */ ($Casts.$to(null, Other));
+    let o = /**@type {Other<M_T>} */ (null);
     return null;
   }
 
@@ -64,7 +62,7 @@ class Other extends j_l_Object {
    */
   $init__com_google_j2cl_transpiler_readable_collisions_Other() {
     let C_T = 3;
-    let o = /**@type {Other<C_T>} */ ($Casts.$to(null, Other));
+    let o = /**@type {Other<C_T>} */ (null);
   }
 
   /**
@@ -98,9 +96,7 @@ class Other extends j_l_Object {
   /**
    * @public
    */
-  static $loadModules() {
-    $Casts = goog.module.get('vmbootstrap.Casts$impl');
-  }
+  static $loadModules() {}
 };
 
 $Util.$setClassMetadata(

@@ -21,7 +21,6 @@ let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Long = goog.forwardDeclare('java.lang.Long$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
 let Short = goog.forwardDeclare('java.lang.Short$impl');
-let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
@@ -92,9 +91,8 @@ class Casts extends j_l_Object {
    * @public
    */
   m_testCastToArray__() {
-    let foo = /**@type {Array<*>} */ ($Arrays.$castTo(null, j_l_Object, 1));
-    let bar =
-        /**@type {Array<Array<*>>} */ ($Arrays.$castTo(null, j_l_Object, 2));
+    let foo = /**@type {Array<*>} */ (null);
+    let bar = /**@type {Array<Array<*>>} */ (null);
   }
 
   /**
@@ -139,7 +137,6 @@ class Casts extends j_l_Object {
     Long = goog.module.get('java.lang.Long$impl');
     Number = goog.module.get('java.lang.Number$impl');
     Short = goog.module.get('java.lang.Short$impl');
-    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
   }
 };

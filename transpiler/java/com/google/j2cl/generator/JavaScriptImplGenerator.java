@@ -391,18 +391,26 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
     if (type.getDeclaration().isJsFunctionImplementation()
         && methodDescriptor.isPolymorphic()
-        && !method.getBody().getStatements().isEmpty()
-        && !methodDescriptor.getName().startsWith("$ctor")) {
-      // Using @this redefines enclosing class of a method, hence any template variables defined in
-      // the class need to be declared in the method.
-      for (TypeVariable typeVariable : type.getDeclaration().getTypeParameterDescriptors()) {
+        && !method.getBody().getStatements().isEmpty()) {
+      // TODO(b/120800425): Solve the object<->function duality in JsFunction implementations in a
+      // more principled way.
+      if (methodDescriptor.getName().startsWith("$ctor")) {
+        // ctor treats the JsFunction implementation as a class to invoke java.lang.Object ctor
+        // method. Do not redefine @this, instead suppress invalid casts to allow casting this to
+        // a function if needed.
+        sourceBuilder.appendln(" * @suppress {invalidCasts}");
+      } else {
+        // Using @this redefines enclosing class of a method, hence any template variables defined
+        // in the class need to be declared in the method.
+        for (TypeVariable typeVariable : type.getDeclaration().getTypeParameterDescriptors()) {
+          sourceBuilder.appendln(
+              " * @template " + closureTypesGenerator.getClosureTypeString(typeVariable));
+        }
         sourceBuilder.appendln(
-            " * @template " + closureTypesGenerator.getClosureTypeString(typeVariable));
+            " * @this {"
+                + closureTypesGenerator.getClosureTypeString(type.getTypeDescriptor())
+                + "}");
       }
-      sourceBuilder.appendln(
-          " * @this {"
-              + closureTypesGenerator.getClosureTypeString(type.getTypeDescriptor())
-              + "}");
     }
     for (int i = 0; i < method.getParameters().size(); i++) {
       String parameterName = environment.aliasForVariable(method.getParameters().get(i));

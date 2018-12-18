@@ -13,7 +13,6 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let j_l_Object = goog.forwardDeclare('java.lang.Object$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
 class $Overlay {
@@ -30,7 +29,7 @@ class $Overlay {
     $Overlay.$clinit();
     let o = j_l_Object.$create__();
     let a = /**@type {Array<C_T>} */ ($Arrays.$castToNative(o));
-    return /**@type {C_T} */ ($Casts.$to($thisArg, $Overlay));
+    return /**@type {C_T} */ ($thisArg);
   }
 
   /**
@@ -57,7 +56,6 @@ class $Overlay {
   static $loadModules() {
     j_l_Object = goog.module.get('java.lang.Object$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-    $Casts = goog.module.get('vmbootstrap.Casts$impl');
   }
 };
 
