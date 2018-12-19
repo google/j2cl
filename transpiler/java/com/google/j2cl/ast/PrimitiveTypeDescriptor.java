@@ -161,7 +161,7 @@ public class PrimitiveTypeDescriptor extends TypeDescriptor {
       return TypeDescriptors.isPrimitiveFloatOrDouble(that);
     }
 
-    return false;
+    return toBoxedType().isAssignableTo(that);
   }
 
   @Override
