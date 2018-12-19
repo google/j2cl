@@ -34,7 +34,11 @@ import com.google.j2cl.ast.SuperReference;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptor;
+import com.google.j2cl.common.Problems;
+import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.common.SourcePosition;
+import com.google.protobuf.util.JsonFormat;
+import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -43,6 +47,20 @@ import java.util.stream.Collectors;
 
 /** Traverse types and gather execution flow information for building call graph. */
 public final class LibraryInfoBuilder {
+  /** Serialize a LibraryInfo object into a JSON string. */
+  public static String toJson(LibraryInfo.Builder libraryInfo, Problems problems) {
+    try {
+      return JsonFormat.printer().print(libraryInfo);
+    } catch (IOException e) {
+      problems.fatal(FatalError.CANNOT_WRITE_FILE, e.toString());
+      return null;
+    }
+  }
+
+  public static byte[] toByteArray(LibraryInfo.Builder libraryInfo) {
+    return libraryInfo.build().toByteArray();
+  }
+
   /** Gather information from a Type and create a TypeInfo object used to build the call graph. */
   public static TypeInfo build(
       Type type,

@@ -111,6 +111,7 @@ public final class J2clCommandLineRunner extends CommandLineTool {
                 ? getZipOutput(this.output, problems)
                 : getDirOutput(this.output, problems))
         .setEmitReadableSourceMap(this.readableSourceMaps)
+        .setEmitReadableLibraryInfo(false)
         .setDeclareLegacyNamespace(this.declareLegacyNamespaces)
         .setGenerateKytheIndexingMetadata(this.generateKytheIndexingMetadata)
         .build();

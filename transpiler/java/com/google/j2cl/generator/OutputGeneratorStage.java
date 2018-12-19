@@ -28,8 +28,6 @@ import com.google.j2cl.libraryinfo.LibraryInfo;
 import com.google.j2cl.libraryinfo.LibraryInfoBuilder;
 import java.io.File;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
@@ -49,6 +47,7 @@ public class OutputGeneratorStage {
   private final Optional<Path> libraryInfoOutputPath;
   private final boolean declareLegacyNamespace;
   private final boolean shouldGenerateReadableSourceMaps;
+  private final boolean shouldGenerateReadableLibraryInfo;
   private final boolean generateKytheIndexingMetadata;
 
   public OutputGeneratorStage(
@@ -56,6 +55,7 @@ public class OutputGeneratorStage {
       Path outputPath,
       Optional<Path> libraryInfoOutputPath,
       boolean declareLegacyNamespace,
+      boolean shouldGenerateReadableLibraryInfo,
       boolean shouldGenerateReadableSourceMaps,
       boolean generateKytheIndexingMetadata,
       Problems problems) {
@@ -63,6 +63,7 @@ public class OutputGeneratorStage {
     this.outputPath = outputPath;
     this.libraryInfoOutputPath = libraryInfoOutputPath;
     this.declareLegacyNamespace = declareLegacyNamespace;
+    this.shouldGenerateReadableLibraryInfo = shouldGenerateReadableLibraryInfo;
     this.shouldGenerateReadableSourceMaps = shouldGenerateReadableSourceMaps;
     this.generateKytheIndexingMetadata = generateKytheIndexingMetadata;
     this.problems = problems;
@@ -154,7 +155,7 @@ public class OutputGeneratorStage {
         J2clUtils.writeToFile(
             outputPath.resolve(headerRelativePath), javaScriptHeaderSource, problems);
 
-        if (libraryInfoOutputPath.isPresent()) {
+        if (libraryInfoOutputPath.isPresent() || shouldGenerateReadableLibraryInfo) {
           libraryInfo.addType(
               LibraryInfoBuilder.build(
                   type,
@@ -174,11 +175,15 @@ public class OutputGeneratorStage {
     }
 
     if (libraryInfoOutputPath.isPresent()) {
-      try (OutputStream outputStream = Files.newOutputStream(libraryInfoOutputPath.get())) {
-        libraryInfo.build().writeTo(outputStream);
-      } catch (IOException e) {
-        problems.fatal(FatalError.CANNOT_WRITE_FILE, e.toString());
-      }
+      J2clUtils.writeToFile(
+          libraryInfoOutputPath.get(), LibraryInfoBuilder.toByteArray(libraryInfo), problems);
+    }
+
+    if (shouldGenerateReadableLibraryInfo) {
+      J2clUtils.writeToFile(
+          outputPath.resolve("library_info_debug.json"),
+          LibraryInfoBuilder.toJson(libraryInfo, problems),
+          problems);
     }
 
     // Error if any of the native implementation files were not used.

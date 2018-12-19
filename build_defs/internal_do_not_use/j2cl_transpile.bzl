@@ -18,6 +18,8 @@ def j2cl_transpile(ctx, java_provider, js_srcs):
         args.add("-declarelegacynamespaces")
     if ctx.attr.readable_source_maps:
         args.add("-readablesourcemaps")
+    if ctx.attr.readable_library_info:
+        args.add("-readablelibraryinfo")
     if ctx.var.get("GROK_ELLIPSIS_BUILD", None):
         args.add("-generatekytheindexingmetadata")
     args.add_all(srcs)
@@ -39,6 +41,7 @@ def j2cl_transpile(ctx, java_provider, js_srcs):
 #   transpiler: J2CL compiler jar to use.
 J2CL_TRANSPILE_ATTRS = {
     "readable_source_maps": attr.bool(default = False),
+    "readable_library_info": attr.bool(default = False),
     "declare_legacy_namespace": attr.bool(default = False),
     "transpiler": attr.label(
         cfg = "host",

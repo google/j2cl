@@ -57,6 +57,7 @@ def readable_example(
         tags = j2cl_library_tags,
         _js_deps = js_deps,
         _readable_source_maps = True,
+        _readable_library_info = generate_library_info,
         _declare_legacy_namespace = _declare_legacy_namespace,
     )
 

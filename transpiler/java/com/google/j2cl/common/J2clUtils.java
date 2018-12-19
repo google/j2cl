@@ -57,11 +57,15 @@ public class J2clUtils {
   }
 
   public static void writeToFile(Path outputPath, String content, Problems problems) {
+    writeToFile(outputPath, content.getBytes(StandardCharsets.UTF_8), problems);
+  }
+
+  public static void writeToFile(Path outputPath, byte[] content, Problems problems) {
     try {
       // Write using the provided fileSystem (which might be the regular file system or might be a
       // zip file.)
       createDirectories(outputPath.getParent());
-      Files.write(outputPath, content.getBytes(StandardCharsets.UTF_8));
+      Files.write(outputPath, content);
       // Wipe entries modification time so that input->output mapping is stable
       // regardless of the time of day.
       maybeResetAllTimeStamps(outputPath);

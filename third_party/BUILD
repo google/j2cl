@@ -103,6 +103,11 @@ java_library(
 )
 
 alias(
+    name = "protobuf_util_json",
+    actual = "@com_google_protobuf//:protobuf_java_util",
+)
+
+alias(
     name = "closure_testcase",
     actual = "@io_bazel_rules_closure//closure/library/testing:testcase",
 )

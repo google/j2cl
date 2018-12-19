@@ -281,6 +281,7 @@ class J2clTranspiler {
             options.getOutput(),
             options.getLibraryInfoOutput(),
             options.getDeclareLegacyNamespace(),
+            options.getEmitReadableLibraryInfo(),
             options.getEmitReadableSourceMap(),
             options.getGenerateKytheIndexingMetadata(),
             problems)

@@ -64,6 +64,9 @@ class BazelJ2clBuilder extends BazelWorker {
       usage = "Specifies the file into which to place the call graph.")
   protected String libraryInfoOutput;
 
+  @Option(name = "-readablelibraryinfo", hidden = true)
+  protected boolean readableLibraryInfo = false;
+
   @Option(name = "-readablesourcemaps", hidden = true)
   protected boolean readableSourceMaps = false;
 
@@ -122,6 +125,7 @@ class BazelJ2clBuilder extends BazelWorker {
         .setClasspaths(getPathEntries(this.classPath))
         .setOutput(outputPath)
         .setLibraryInfoOutput(libraryInfoOutputPath)
+        .setEmitReadableLibraryInfo(readableLibraryInfo)
         .setEmitReadableSourceMap(this.readableSourceMaps)
         .setDeclareLegacyNamespace(this.declareLegacyNamespaces)
         .setGenerateKytheIndexingMetadata(this.generateKytheIndexingMetadata)

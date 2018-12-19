@@ -37,6 +37,8 @@ public abstract class J2clTranspilerOptions {
 
   public abstract Optional<Path> getLibraryInfoOutput();
 
+  public abstract boolean getEmitReadableLibraryInfo();
+
   public abstract boolean getEmitReadableSourceMap();
 
   public abstract boolean getDeclareLegacyNamespace();
@@ -61,6 +63,8 @@ public abstract class J2clTranspilerOptions {
 
     public abstract Builder setLibraryInfoOutput(Path path);
 
+    public abstract Builder setEmitReadableLibraryInfo(boolean b);
+
     public abstract Builder setEmitReadableSourceMap(boolean b);
 
     public abstract Builder setDeclareLegacyNamespace(boolean b);
@@ -73,6 +77,8 @@ public abstract class J2clTranspilerOptions {
       J2clTranspilerOptions options = autoBuild();
       checkState(
           !options.getEmitReadableSourceMap() || !options.getGenerateKytheIndexingMetadata());
+      checkState(
+          !options.getEmitReadableLibraryInfo() || options.getLibraryInfoOutput().isPresent());
       return options;
     }
   }
