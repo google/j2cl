@@ -13,6 +13,8 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 const $JavaScriptFunction = goog.require('vmbootstrap.JavaScriptFunction$impl');
 
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
 
 /**
  * @template C_ParamtericImplementation_T
@@ -41,7 +43,6 @@ class ParamtericImplementation extends j_l_Object {
   }
 
   /**
-   * @suppress {invalidCasts}
    * @return {void}
    * @public
    */
@@ -57,7 +58,8 @@ class ParamtericImplementation extends j_l_Object {
    * @public
    */
   m_call__java_lang_Object(t) {
-    let o = /**@type {C_ParamtericImplementation_T} */ (t);
+    let o =
+        /**@type {C_ParamtericImplementation_T} */ ($Casts.$to(t, j_l_Object));
   }
 
   /**
@@ -104,7 +106,9 @@ class ParamtericImplementation extends j_l_Object {
   /**
    * @public
    */
-  static $loadModules() {}
+  static $loadModules() {
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+  }
 };
 
 $Util.$setClassMetadata(

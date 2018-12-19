@@ -14,6 +14,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 const $JavaScriptFunction = goog.require('vmbootstrap.JavaScriptFunction$impl');
 
 let $Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunction.Main.JsFunctionInterface.$Overlay$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
 class JsFunctionImplementation extends j_l_Object {
@@ -46,7 +47,6 @@ class JsFunctionImplementation extends j_l_Object {
   }
 
   /**
-   * @suppress {invalidCasts}
    * @return {void}
    * @public
    */
@@ -55,7 +55,8 @@ class JsFunctionImplementation extends j_l_Object {
     this.f_storedThis__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionImplementation =
         this;
     this.f_anotherStoredThis__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionImplementation =
-        /**@type {?function(number):number} */ (this);
+        /**@type {?function(number):number} */ (
+            $Casts.$to(this, JsFunctionImplementation));
   }
 
   /**
@@ -150,7 +151,9 @@ class JsFunctionImplementation extends j_l_Object {
   /**
    * @public
    */
-  static $loadModules() {}
+  static $loadModules() {
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+  }
 };
 
 $Util.$setClassMetadata(

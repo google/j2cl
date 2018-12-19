@@ -31,6 +31,7 @@ let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $JavaScriptFunction = goog.forwardDeclare('vmbootstrap.JavaScriptFunction$impl');
 
 
 class Lambdas extends j_l_Object {
@@ -261,7 +262,7 @@ class Lambdas extends j_l_Object {
                  GenericFunctionalInterface.$adapt(((/** Enum<M_T> */ i$2$) => {
                    return i$2$;
                  }))),
-             /**@type {Enum<M_T>} */ (null)));
+             /**@type {Enum<M_T>} */ ($Casts.$to(null, Enum))));
     let f = Lambdas_Function.$adapt(((/** M_T */ item) => {
       return Long.m_valueOf__long($Long.fromInt(1));
     }));
@@ -322,9 +323,10 @@ class Lambdas extends j_l_Object {
           .$f_identityFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_ =
           IdentityFunction.$create__();
     }
-    return /**@type {?function(M_E):M_E} */ (
+    return /**@type {?function(M_E):M_E} */ ($Casts.$to(
         Lambdas
-            .$f_identityFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_);
+            .$f_identityFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_,
+        $JavaScriptFunction));
   }
 
   /**
@@ -443,6 +445,8 @@ class Lambdas extends j_l_Object {
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Long = goog.module.get('nativebootstrap.Long$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
+    $JavaScriptFunction =
+        goog.module.get('vmbootstrap.JavaScriptFunction$impl');
   }
 };
 

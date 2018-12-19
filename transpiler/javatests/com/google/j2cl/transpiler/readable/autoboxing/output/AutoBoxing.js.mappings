@@ -167,7 +167,7 @@
 [boxBool = !boxBool;] => [boxBool = !Boolean.m_booleanValue__java_lang_Boolean(boxBool);] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testBoxing"
 [boxI = +boxI;] => [boxI = Integer.m_valueOf__int(+boxI.m_intValue__());] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testBoxing"
 [boxI = -boxI;] => [boxI = Integer.m_valueOf__int(-boxI.m_intValue__());] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testBoxing"
-[o = (Integer & Comparable<Integer>) 15;] => [o = /**@type {Integer} */ (Integer.m_valueOf__int(15));] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testBoxing"
+[o = (Integer & Comparable<Integer>) 15;] => [o = /**@type {Integer} */ ($Casts.$to($Casts.$to(Integer.m_valueOf__int(15), Integer), Comparable));] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testBoxing"
 [testUnboxing] => [m_testUnboxing__]
 [Boolean boxBool = new Boolean(true);] => [let boxBool = Boolean.$create__boolean(true);] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxing"
 [boxBool] => [boxBool] "boxBool"
@@ -330,7 +330,7 @@
 [assert b;] => [$Asserts.$assert(b);] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testAssertStatement"
 [testUnboxingFromTypeVariable] => [m_testUnboxingFromTypeVariable__]
 [testUnboxingFromTypeVariable] => [AutoBoxing.$clinit();] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxingFromTypeVariable"
-[T n = (T) (Long) 10L;] => [let n = /**@type {M_T} */ (Long.m_valueOf__long($Long.fromInt(10)));] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxingFromTypeVariable"
+[T n = (T) (Long) 10L;] => [let n = /**@type {M_T} */ ($Casts.$to(Long.m_valueOf__long($Long.fromInt(10)), Long));] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxingFromTypeVariable"
 [n] => [n] "n"
 [long l = n;] => [let l = /**@type {Long} */ (n).m_longValue__();] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxingFromTypeVariable"
 [l] => [l] "l"
@@ -340,7 +340,7 @@
 [assert l == 11L;] => [$Asserts.$assert($LongUtils.$equals(l, $Long.fromInt(11)));] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxingFromTypeVariable"
 [testUnboxingFromIntersectionType] => [m_testUnboxingFromIntersectionType__]
 [testUnboxingFromIntersectionType] => [AutoBoxing.$clinit();] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxingFromIntersectionType"
-[T n = (T) (Long) 10L;] => [let n = /**@type {M_T} */ (Long.m_valueOf__long($Long.fromInt(10)));] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxingFromIntersectionType"
+[T n = (T) (Long) 10L;] => [let n = /**@type {M_T} */ ($Casts.$to(Long.m_valueOf__long($Long.fromInt(10)), Long));] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxingFromIntersectionType"
 [n] => [n] "n"
 [long l = n;] => [let l = /**@type {Long} */ (n).m_longValue__();] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxingFromIntersectionType"
 [l] => [l] "l"
@@ -348,7 +348,7 @@
 [n++;] => [n = Long.m_valueOf__long($LongUtils.$plus(/**@type {Long} */ (n).m_longValue__(), $Long.fromInt(1)));] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxingFromIntersectionType"
 [l = new Local<>().toLong(11L);] => [l = /**@type {!$2Local<Long, M_T>} */ ($2Local.$create__()).m_toLong__java_lang_Long_$pp_com_google_j2cl_transpiler_readable_autoboxing(Long.m_valueOf__long($Long.fromInt(11)));] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxingFromIntersectionType"
 [assert l == 11L;] => [$Asserts.$assert($LongUtils.$equals(l, $Long.fromInt(11)));] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxingFromIntersectionType"
-[int i = (Integer & Comparable<Integer>) 10;] => [let i = /**@type {Integer} */ (Integer.m_valueOf__int(10)).m_intValue__();] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxingFromIntersectionType"
+[int i = (Integer & Comparable<Integer>) 10;] => [let i = /**@type {Integer} */ ($Casts.$to($Casts.$to(Integer.m_valueOf__int(10), Integer), Comparable)).m_intValue__();] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxingFromIntersectionType"
 [i] => [i] "i"
 [AutoBoxing] => [$clinit]
 [AutoBoxing] => [AutoBoxing.$clinit = (() =>{
