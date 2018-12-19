@@ -319,16 +319,23 @@ public class CompilationUnitBuilder {
             enumConstantDeclaration.getAnonymousClassDeclaration(), enumConstructorBinding, null);
       }
 
+      FieldDescriptor fieldDescriptor =
+          JdtUtils.createFieldDescriptor(enumConstantDeclaration.resolveVariable());
+
+      // Since initializing custom values for JsEnum requires literals, we fold constant expressions
+      // to give more options to the user. E.g. -1 is a unary expression but the expression is a
+      // constant that can be evaluated at compile time, hence it makes sense to allow it.
+      boolean foldConstantArguments = fieldDescriptor.getEnclosingTypeDescriptor().isJsEnum();
+
+      MethodDescriptor methodDescriptor = JdtUtils.createMethodDescriptor(enumConstructorBinding);
       Expression initializer =
-          NewInstance.Builder.from(JdtUtils.createMethodDescriptor(enumConstructorBinding))
+          NewInstance.Builder.from(methodDescriptor)
               .setArguments(
                   convertArguments(
                       enumConstructorBinding,
-                      JdtUtils.asTypedList(enumConstantDeclaration.arguments())))
+                      JdtUtils.asTypedList(enumConstantDeclaration.arguments()),
+                      foldConstantArguments))
               .build();
-
-      FieldDescriptor fieldDescriptor =
-          JdtUtils.createFieldDescriptor(enumConstantDeclaration.resolveVariable());
 
       checkArgument(fieldDescriptor.isEnumConstant());
       return Field.Builder.from(fieldDescriptor)
@@ -348,7 +355,10 @@ public class CompilationUnitBuilder {
         if (variableBinding.getConstantValue() == null) {
           initializer = convertOrNull(fragment.getInitializer());
         } else {
-          initializer = convertConstantToLiteral(variableBinding);
+          initializer =
+              convertConstantToLiteral(
+                  variableBinding.getConstantValue(),
+                  JdtUtils.createTypeDescriptor(variableBinding.getType()));
         }
         Field field =
             Field.Builder.from(JdtUtils.createFieldDescriptor(variableBinding))
@@ -361,15 +371,13 @@ public class CompilationUnitBuilder {
       return fields;
     }
 
-    private Expression convertConstantToLiteral(IVariableBinding variableBinding) {
-      Object constantValue = variableBinding.getConstantValue();
+    private Expression convertConstantToLiteral(
+        Object constantValue, TypeDescriptor typeDescriptor) {
       if (constantValue instanceof Boolean) {
         return (boolean) constantValue ? BooleanLiteral.get(true) : BooleanLiteral.get(false);
       }
       if (constantValue instanceof Number) {
-        return new NumberLiteral(
-            JdtUtils.createTypeDescriptor(variableBinding.getType()).toUnboxedType(),
-            (Number) constantValue);
+        return new NumberLiteral(typeDescriptor.toUnboxedType(), (Number) constantValue);
       }
       if (constantValue instanceof Character) {
         return NumberLiteral.fromChar((Character) constantValue);
@@ -1505,9 +1513,24 @@ public class CompilationUnitBuilder {
     private List<Expression> convertArguments(
         IMethodBinding methodBinding,
         List<org.eclipse.jdt.core.dom.Expression> argumentExpressions) {
+      return convertArguments(methodBinding, argumentExpressions, false);
+    }
+
+    private List<Expression> convertArguments(
+        IMethodBinding methodBinding,
+        List<org.eclipse.jdt.core.dom.Expression> argumentExpressions,
+        boolean foldConstants) {
       MethodDescriptor methodDescriptor = JdtUtils.createMethodDescriptor(methodBinding);
       List<Expression> arguments =
-          argumentExpressions.stream().map(this::convert).collect(toList());
+          argumentExpressions.stream()
+              .map(
+                  expression ->
+                      foldConstants && expression.resolveConstantExpressionValue() != null
+                          ? convertConstantToLiteral(
+                              expression.resolveConstantExpressionValue(),
+                              JdtUtils.createTypeDescriptor(expression.resolveTypeBinding()))
+                          : convert(expression))
+              .collect(toList());
       AstUtils.maybePackageVarargs(methodDescriptor, arguments);
       return arguments;
     }

@@ -1806,7 +1806,9 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "@JsEnum(hasCustomValue = true)",
             "public enum CustomValued {",
             "  A(true),",
-            "  B(false);",
+            "  B(!true),",
+            "  C(false),",
+            "  D(true);",
             "  final boolean value;",
             "  CustomValued(boolean value) { this.value = value;}",
             "}")

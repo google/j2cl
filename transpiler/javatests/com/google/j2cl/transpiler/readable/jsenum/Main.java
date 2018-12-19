@@ -34,7 +34,8 @@ public class Main {
 
   @JsEnum(hasCustomValue = true)
   enum IntJsEnum {
-    TWENTY(20),
+    MINUSONE(-1),
+    TWENTY(2 * 10),
     ELEVEN(11);
 
     private int value;
