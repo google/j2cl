@@ -15,6 +15,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let $1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.cast.CastGenerics.$1$impl');
 let A = goog.forwardDeclare('com.google.j2cl.transpiler.readable.cast.CastGenerics.A$impl');
 let B = goog.forwardDeclare('com.google.j2cl.transpiler.readable.cast.CastGenerics.B$impl');
+let BaseImplementor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.cast.CastGenerics.BaseImplementor$impl');
 let Empty1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.cast.CastGenerics.Empty1$impl');
 let Empty2 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.cast.CastGenerics.Empty2$impl');
 let Foo = goog.forwardDeclare('com.google.j2cl.transpiler.readable.cast.CastGenerics.Foo$impl');
@@ -133,17 +134,17 @@ class CastGenerics extends j_l_Object {
         containerArrU.m_get___$pp_com_google_j2cl_transpiler_readable_cast(), B,
         1));
     let containerBase = null;
-    /**@type {A} */ (
+    /**@type {BaseImplementor} */ (
         $Casts.$to(
             containerBase
                 .m_get___$pp_com_google_j2cl_transpiler_readable_cast(),
-            A))
+            BaseImplementor))
         .m_mA__();
-    /**@type {B} */ (
+    /**@type {BaseImplementor} */ (
         $Casts.$to(
             containerBase
                 .m_get___$pp_com_google_j2cl_transpiler_readable_cast(),
-            B))
+            BaseImplementor))
         .m_mB__();
     let containerImplementor = null;
     /**@type {Implementor} */ (
@@ -266,6 +267,8 @@ class CastGenerics extends j_l_Object {
         'com.google.j2cl.transpiler.readable.cast.CastGenerics.A$impl');
     B = goog.module.get(
         'com.google.j2cl.transpiler.readable.cast.CastGenerics.B$impl');
+    BaseImplementor = goog.module.get(
+        'com.google.j2cl.transpiler.readable.cast.CastGenerics.BaseImplementor$impl');
     Empty1 = goog.module.get(
         'com.google.j2cl.transpiler.readable.cast.CastGenerics.Empty1$impl');
     Implementor = goog.module.get(
