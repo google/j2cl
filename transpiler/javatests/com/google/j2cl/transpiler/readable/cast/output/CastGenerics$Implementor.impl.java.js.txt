@@ -1,0 +1,100 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.cast.CastGenerics$Implementor.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire,
+ * suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables,
+ * uselessCode, strictModuleDepCheck}
+ */
+goog.module('com.google.j2cl.transpiler.readable.cast.CastGenerics.Implementor$impl');
+
+
+const BaseImplementor = goog.require('com.google.j2cl.transpiler.readable.cast.CastGenerics.BaseImplementor$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+
+class Implementor extends BaseImplementor {
+  /**
+   * @protected
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * @return {!Implementor}
+   * @public
+   */
+  static $create__() {
+    Implementor.$clinit();
+    let $instance = new Implementor();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_cast_CastGenerics_Implementor__();
+    return $instance;
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_cast_CastGenerics_Implementor__() {
+    this.$ctor__com_google_j2cl_transpiler_readable_cast_CastGenerics_BaseImplementor__();
+  }
+
+  /**
+   * @override
+   * @return {void}
+   * @public
+   */
+  m_mA__() {}
+
+  /**
+   * @override
+   * @return {void}
+   * @public
+   */
+  m_mB__() {}
+
+  /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    Implementor.$clinit = (() => {});
+    Implementor.$loadModules();
+    BaseImplementor.$clinit();
+  }
+
+  /**
+   * @param {?} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof Implementor;
+  }
+
+  /**
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Implementor);
+  }
+
+  /**
+   * @public
+   */
+  static $loadModules() {}
+};
+
+$Util.$setClassMetadata(
+    Implementor,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.cast.CastGenerics$Implementor'));
+
+
+
+exports = Implementor;
+//# sourceMappingURL=CastGenerics$Implementor.js.map

@@ -22,9 +22,63 @@ public class CastGenerics<T, E extends Number> {
     return null;
   }
 
-  public static void testErasureCast() {
+  interface A {
+    void mA();
+  }
+
+  interface B {
+    void mB();
+  }
+
+  private abstract static class BaseImplementor implements A, B {}
+
+  private static class Implementor extends BaseImplementor {
+    public void mA() {}
+
+    public void mB() {}
+  }
+
+  private static class Container<T> {
+    T get() {
+      return null;
+    }
+  }
+
+  public static <T extends A & B, U extends T> void testErasureCast() {
     String str = new CastGenerics<String, Number>().field;
     str = new CastGenerics<String, Number>().method();
+
+    Container<T> containerT = null;
+    containerT.get().mA();
+    containerT.get().mB();
+
+    Container<U> containerU = null;
+    containerU.get().mA();
+    containerU.get().mB();
+
+    Container<T[]> containerArrT = null;
+    T[] arrT = containerArrT.get();
+    arrT[0].mA();
+    arrT[0].mB();
+
+    A[] arrA = containerArrT.get();
+    B[] arrB = containerArrT.get();
+
+    Container<U[]> containerArrU = null;
+    U[] arrU = containerArrU.get();
+    arrU[0].mA();
+    arrU[0].mB();
+
+    arrA = containerArrU.get();
+    arrB = containerArrU.get();
+
+    Container<BaseImplementor> containerBase = null;
+    containerBase.get().mA();
+    containerBase.get().mB();
+
+    Container<Implementor> containerImplementor = null;
+    containerImplementor.get().mA();
+    containerImplementor.get().mB();
   }
 
   public static void testCastToParamterizedType() {

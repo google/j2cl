@@ -1,0 +1,101 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.cast.CastGenerics$B.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire,
+ * suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables,
+ * uselessCode, strictModuleDepCheck}
+ */
+goog.module('com.google.j2cl.transpiler.readable.cast.CastGenerics.B$impl');
+
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.cast.CastGenerics.B.$LambdaAdaptor$impl');
+
+
+/**
+ * @interface
+ */
+class B {
+  /**
+   * @abstract
+   * @return {void}
+   * @public
+   */
+  m_mB__() {}
+
+  /**
+   * @param {?function():void} fn
+   * @return {B}
+   * @public
+   */
+  static $adapt(fn) {
+    B.$clinit();
+    return new $LambdaAdaptor(fn);
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    B.$clinit = (() => {});
+    B.$loadModules();
+  }
+
+  /**
+   * @param {Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_cast_CastGenerics_B =
+        true;
+  }
+
+  /**
+   * @param {?} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+        !!instance
+              .$implements__com_google_j2cl_transpiler_readable_cast_CastGenerics_B;
+  }
+
+  /**
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+        !!classConstructor.prototype
+              .$implements__com_google_j2cl_transpiler_readable_cast_CastGenerics_B;
+  }
+
+  /**
+   * @public
+   */
+  static $loadModules() {
+    $LambdaAdaptor = goog.module.get(
+        'com.google.j2cl.transpiler.readable.cast.CastGenerics.B.$LambdaAdaptor$impl');
+  }
+};
+
+$Util.$setClassMetadataForInterface(
+    B,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.cast.CastGenerics$B'));
+
+
+B.$markImplementor(/** @type {Function} */ (B));
+
+
+exports = B;
+//# sourceMappingURL=CastGenerics$B.js.map

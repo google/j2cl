@@ -13,9 +13,12 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.cast.CastGenerics.$1$impl');
+let A = goog.forwardDeclare('com.google.j2cl.transpiler.readable.cast.CastGenerics.A$impl');
+let B = goog.forwardDeclare('com.google.j2cl.transpiler.readable.cast.CastGenerics.B$impl');
 let Empty1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.cast.CastGenerics.Empty1$impl');
 let Empty2 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.cast.CastGenerics.Empty2$impl');
 let Foo = goog.forwardDeclare('com.google.j2cl.transpiler.readable.cast.CastGenerics.Foo$impl');
+let Implementor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.cast.CastGenerics.Implementor$impl');
 let Enum = goog.forwardDeclare('java.lang.Enum$impl');
 let Error = goog.forwardDeclare('java.lang.Error$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
@@ -67,6 +70,7 @@ class CastGenerics extends j_l_Object {
   }
 
   /**
+   * @template M_T, M_U
    * @return {void}
    * @public
    */
@@ -82,6 +86,78 @@ class CastGenerics extends j_l_Object {
             CastGenerics.$create__())
             .m_method___$pp_com_google_j2cl_transpiler_readable_cast(),
         j_l_String));
+    let containerT = null;
+    /**@type {A} */ (
+        $Casts.$to(
+            containerT.m_get___$pp_com_google_j2cl_transpiler_readable_cast(),
+            A))
+        .m_mA__();
+    /**@type {B} */ (
+        $Casts.$to(
+            containerT.m_get___$pp_com_google_j2cl_transpiler_readable_cast(),
+            B))
+        .m_mB__();
+    let containerU = null;
+    /**@type {A} */ (
+        $Casts.$to(
+            containerU.m_get___$pp_com_google_j2cl_transpiler_readable_cast(),
+            A))
+        .m_mA__();
+    /**@type {B} */ (
+        $Casts.$to(
+            containerU.m_get___$pp_com_google_j2cl_transpiler_readable_cast(),
+            B))
+        .m_mB__();
+    let containerArrT = null;
+    let arrT = /**@type {Array<M_T>} */ ($Arrays.$castTo(
+        containerArrT.m_get___$pp_com_google_j2cl_transpiler_readable_cast(), A,
+        1));
+    /**@type {A} */ (arrT[0]).m_mA__();
+    /**@type {B} */ ($Casts.$to(arrT[0], B)).m_mB__();
+    let arrA = /**@type {Array<A>} */ ($Arrays.$castTo(
+        containerArrT.m_get___$pp_com_google_j2cl_transpiler_readable_cast(), A,
+        1));
+    let arrB = /**@type {Array<B>} */ ($Arrays.$castTo(
+        containerArrT.m_get___$pp_com_google_j2cl_transpiler_readable_cast(), B,
+        1));
+    let containerArrU = null;
+    let arrU = /**@type {Array<M_U>} */ ($Arrays.$castTo(
+        containerArrU.m_get___$pp_com_google_j2cl_transpiler_readable_cast(), A,
+        1));
+    /**@type {A} */ (arrU[0]).m_mA__();
+    /**@type {B} */ ($Casts.$to(arrU[0], B)).m_mB__();
+    arrA = /**@type {Array<A>} */ ($Arrays.$castTo(
+        containerArrU.m_get___$pp_com_google_j2cl_transpiler_readable_cast(), A,
+        1));
+    arrB = /**@type {Array<B>} */ ($Arrays.$castTo(
+        containerArrU.m_get___$pp_com_google_j2cl_transpiler_readable_cast(), B,
+        1));
+    let containerBase = null;
+    /**@type {A} */ (
+        $Casts.$to(
+            containerBase
+                .m_get___$pp_com_google_j2cl_transpiler_readable_cast(),
+            A))
+        .m_mA__();
+    /**@type {B} */ (
+        $Casts.$to(
+            containerBase
+                .m_get___$pp_com_google_j2cl_transpiler_readable_cast(),
+            B))
+        .m_mB__();
+    let containerImplementor = null;
+    /**@type {Implementor} */ (
+        $Casts.$to(
+            containerImplementor
+                .m_get___$pp_com_google_j2cl_transpiler_readable_cast(),
+            Implementor))
+        .m_mA__();
+    /**@type {Implementor} */ (
+        $Casts.$to(
+            containerImplementor
+                .m_get___$pp_com_google_j2cl_transpiler_readable_cast(),
+            Implementor))
+        .m_mB__();
   }
 
   /**
@@ -186,8 +262,14 @@ class CastGenerics extends j_l_Object {
   static $loadModules() {
     $1 = goog.module.get(
         'com.google.j2cl.transpiler.readable.cast.CastGenerics.$1$impl');
+    A = goog.module.get(
+        'com.google.j2cl.transpiler.readable.cast.CastGenerics.A$impl');
+    B = goog.module.get(
+        'com.google.j2cl.transpiler.readable.cast.CastGenerics.B$impl');
     Empty1 = goog.module.get(
         'com.google.j2cl.transpiler.readable.cast.CastGenerics.Empty1$impl');
+    Implementor = goog.module.get(
+        'com.google.j2cl.transpiler.readable.cast.CastGenerics.Implementor$impl');
     Enum = goog.module.get('java.lang.Enum$impl');
     Integer = goog.module.get('java.lang.Integer$impl');
     Number = goog.module.get('java.lang.Number$impl');
