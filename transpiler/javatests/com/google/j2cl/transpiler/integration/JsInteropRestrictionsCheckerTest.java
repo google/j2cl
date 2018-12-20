@@ -3085,6 +3085,12 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  void trigger(T t);",
             "}",
             "@JsFunction interface FI {void foo();}",
+            "class List<T> {",
+            "  @JsMethod",
+            "  public T get() { return null; }",
+            "}",
+            "@JsEnum enum MyJsEnum { A; }",
+            "@JsEnum(isNative = true) enum NativeEnum { A; }",
             "@JsType class MyJsType implements I<Void> {",
             "  public void f1(boolean a, int b, double c) {}", // primitive types work fine.
             "  public void f2(Boolean a, Double b, String c) {}", // unboxed types work fine.
@@ -3102,6 +3108,10 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  public long f16(long... a) { return 1l; }", // varargs of allowable types works fine.
             // anonymous @JsConstructor class with unusable-by-js captures.
             "  private void f17(Long a) { new A() { { f7(a); } }; }",
+            "  public void f18(List<NativeEnum> l) {}", // Type parameterized by native JsEnum
+            // succeeds
+            "  public void f19(List<List<MyJsEnum>> l) {}", // Type parameterized by List<> of
+            // JsEnum succeeds
             "  public void trigger(Void v) { }", // Void succeeds.
             "}",
             "class Outer {",
@@ -3145,6 +3155,11 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  public static A a;", // JsProperty
             "}",
             "@JsFunction interface FI  { void f(A a); }", // JsFunction method is checked.
+            "class List<T> {",
+            "  @JsMethod",
+            "  public T get() { return null; }",
+            "}",
+            "@JsEnum enum MyJsEnum { A; }",
             "@JsType public class Buggy {",
             "  public A f;", // exported field
             "  public A f1(A a) { return null; }", // regular class fails.
@@ -3154,6 +3169,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  public B f4(B a) { return null; }",
             "  public Long f5(Long a) { return 1l; }", // Long fails
             "  public void f6(Long... a) { }", // varargs fails
+            "  public void f7(List<MyJsEnum> l) { }", // Type parameterized by JsEnum fails
             "}")
         .addNativeFile("C")
         .assertTranspileSucceeds()
@@ -3189,7 +3205,9 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "[unusable-by-js] Type of parameter 'a' in 'Long Buggy.f5(Long a)' is not usable"
                 + " by but exposed to JavaScript.",
             "[unusable-by-js] Type of parameter 'a' in 'void Buggy.f6(Long... a)' is not"
-                + " usable by but exposed to JavaScript.")
+                + " usable by but exposed to JavaScript.",
+            "[unusable-by-js] Type of parameter 'l' in 'void Buggy.f7(List<MyJsEnum> l)' is not "
+                + "usable by but exposed to JavaScript.")
         .assertLastMessage(
             "Suppress \"[unusable-by-js]\" warnings by adding a "
                 + "`@SuppressWarnings(\"unusable-by-js\")` annotation to the "

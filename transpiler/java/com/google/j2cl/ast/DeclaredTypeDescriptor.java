@@ -486,6 +486,10 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
 
   @Override
   public boolean canBeReferencedExternally() {
+    if (getTypeArgumentDescriptors().stream().anyMatch(AstUtils::isNonNativeJsEnum)) {
+      return false;
+    }
+
     if (getTypeDeclaration().isJsType()
         || isJsFunctionInterface()
         || TypeDescriptors.isBoxedTypeAsJsPrimitives(this)
