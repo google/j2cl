@@ -486,7 +486,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
 
   @Override
   public boolean canBeReferencedExternally() {
-    if (getTypeArgumentDescriptors().stream().anyMatch(AstUtils::isNonNativeJsEnum)) {
+    if (isParameterizedByNonNativeJsEnum()) {
       return false;
     }
 
@@ -503,6 +503,21 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         .stream()
         .filter(Predicates.not(MemberDescriptor::isOrOverridesJavaLangObjectMethod))
         .anyMatch(MemberDescriptor::isJsMember);
+  }
+
+  private boolean isParameterizedByNonNativeJsEnum() {
+    for (TypeDescriptor typeArgument : getTypeArgumentDescriptors()) {
+      if (AstUtils.isNonNativeJsEnum(typeArgument)) {
+        return true;
+      }
+      if (typeArgument instanceof DeclaredTypeDescriptor) {
+        DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeArgument;
+        if (declaredTypeDescriptor.isParameterizedByNonNativeJsEnum()) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   @Memoized
