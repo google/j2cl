@@ -77,14 +77,8 @@ public class GenericCastTest {
       new Runnable() {
         @Override
         public void run() {
-          assertThrowsClassCastException(
-              () -> {
-                // Java semantics don't require a type erasure cast here but J2CL always inserts one
-                // if needed to the inferred type of the expression disregaring the left hand side
-                // type.
-                Object unusedObject = get();
-              },
-              Foo.class);
+          // Should succeed
+          Object unusedObject = get();
 
           assertThrowsClassCastException(
               () -> {
@@ -108,13 +102,8 @@ public class GenericCastTest {
     }
 
     public void testSuperField() {
-      assertThrowsClassCastException(
-          () -> {
-            // Java semantics don't require a type erasure cast here but J2CL always inserts one
-            // if needed to the inferred type of the expression disregaring the left hand side type.
-            Object unusedObject = value;
-          },
-          Foo.class);
+      // Should succeed
+      Object unusedObject = value;
 
       assertThrowsClassCastException(
           () -> {
@@ -136,13 +125,8 @@ public class GenericCastTest {
     }
 
     public void testSuperMethod() {
-      assertThrowsClassCastException(
-          () -> {
-            // Java semantics don't require a type erasure cast here but J2CL always inserts one
-            // if needed to the inferred type of the expression disregaring the left hand side type.
-            Object unusedObject = get();
-          },
-          Foo.class);
+      // Should succeed
+      Object unusedObject = get();
 
       assertThrowsClassCastException(
           () -> {
@@ -167,15 +151,7 @@ public class GenericCastTest {
       new Runnable() {
         @Override
         public void run() {
-          assertThrowsClassCastException(
-              () -> {
-                // Java semantics don't require a type erasure cast here but J2CL always inserts one
-                // if needed to the inferred type of the expression disregaring the left hand side
-                // type.
-                Object unusedObject = get();
-              },
-              Foo.class);
-
+          Object unusedObject = get();
           assertThrowsClassCastException(
               () -> {
                 Foo unusedFoo = get();
@@ -194,15 +170,7 @@ public class GenericCastTest {
               },
               Foo.class);
 
-          assertThrowsClassCastException(
-              () -> {
-                // Java semantics don't require a type erasure cast here but J2CL always inserts one
-                // if needed to the inferred type of the expression disregaring the left hand side
-                // type.
-                Object unusedObject = value;
-              },
-              Foo.class);
-
+          unusedObject = value;
           assertThrowsClassCastException(
               () -> {
                 Foo unusedFoo = value;
@@ -238,20 +206,14 @@ public class GenericCastTest {
   public void testExplicitField() {
     Liar<Foo> bug = new Liar<Foo>();
 
-    assertThrowsClassCastException(
-        () -> {
-          // Java semantics don't require a type erasure cast here but J2CL always inserts one
-          // if needed to the inferred type of the expression disregaring the left hand side type.
-          Object unusedObject = bug.value;
-        },
-        Foo.class);
+    // Should succeed.
+    Object unusedObject = bug.value;
 
     assertThrowsClassCastException(
         () -> {
           Foo unusedFoo = bug.value;
         },
         Foo.class);
-
     assertThrowsClassCastException(
         () -> {
           String unusedString = bug.value.bar;
@@ -268,13 +230,9 @@ public class GenericCastTest {
   @Test
   public void testExplicitMethod() {
     Liar<Foo> bug = new Liar<Foo>();
-    assertThrowsClassCastException(
-        () -> {
-          // Java semantics don't require a type erasure cast here but J2CL always inserts one
-          // if needed to the inferred type of the expression disregaring the left hand side type.
-          Object unusedObject = bug.get();
-        },
-        Foo.class);
+
+    // Should succeed.
+    Object unusedObject = bug.get();
 
     assertThrowsClassCastException(
         () -> {
