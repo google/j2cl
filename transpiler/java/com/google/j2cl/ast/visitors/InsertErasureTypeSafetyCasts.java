@@ -19,6 +19,7 @@ import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
@@ -146,6 +147,16 @@ public class InsertErasureTypeSafetyCasts extends NormalizationPass {
       return expression;
     }
 
+    TypeDescriptor inferredTypeDescriptor = expression.getTypeDescriptor();
+    // TODO(b/121293394): Use the expression inferred type in more cases, e.g. arrays, since it will
+    // provide more accurate type information.
+    if (inferredTypeDescriptor instanceof DeclaredTypeDescriptor) {
+      // Using the inferred type descriptor, which is either the same or a more precise type,
+      // conveys more accurate type information potentially improving the optimizations made by
+      // jscompiler. This is a slight, but safe, deviation from Java semantics which requires to
+      // insert only the necessary casts to preserve runtime type safety.
+      toTypeDescriptor = inferredTypeDescriptor;
+    }
     if (!fromTypeDescriptor.toRawTypeDescriptor().isAssignableTo(toTypeDescriptor)) {
       return CastExpression.newBuilder()
           .setExpression(expression)
