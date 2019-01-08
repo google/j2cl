@@ -2100,9 +2100,14 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "public class EntryPoint {",
             "  @JsType(isNative = true)",
             "  public class Buggy {}",
+            "}",
+            "@JsType(isNative=true, namespace = JsPackage.GLOBAL, name =\"*\") interface Star {",
+            "  @JsType(isNative=true) static class InnerClass {",
+            "  }",
             "}")
         .assertErrorsWithoutSourcePosition(
-            "Non static inner class 'Buggy' cannot be a native JsType.");
+            "Non static inner class 'Buggy' cannot be a native JsType.",
+            "Native inner class 'InnerClass' cannot be enclosed by \"?\" or \"*\".");
   }
 
   public void testInnerJsTypeSucceeds() {
@@ -2112,6 +2117,10 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "public class EntryPoint {",
             "  @JsType",
             "  public static class Buggy {}",
+            "  @JsType(isNative=true) static class InnerClass {",
+            "    @JsType(isNative=true, name =\"Inner1.Inner1\") interface InnerInnerInterface {",
+            "    }",
+            "  }",
             "}")
         .assertNoWarnings();
   }
