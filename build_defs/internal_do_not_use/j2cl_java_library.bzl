@@ -30,13 +30,10 @@ def _impl_j2cl_library(ctx):
     # This is a workaround to b/35847804 to make sure the zip ends up in the runfiles.
     js_runfiles = _collect_runfiles(ctx, js_outputs, ctx.attr.deps + ctx.attr.exports)
 
-    # Write an empty .jslib output (work around b/38349075 and maybe others).
-    ctx.actions.write(ctx.outputs.dummy_jslib, "")
-
     return struct(
         providers = [
             DefaultInfo(
-                files = depset(js_outputs + [ctx.outputs.jar, ctx.outputs.dummy_jslib]),
+                files = depset(js_outputs + [ctx.outputs.jar]),
                 runfiles = js_runfiles,
             ),
             _J2clInfo(_J2clJavaInfo = java_provider),
@@ -129,7 +126,6 @@ j2cl_library = rule(
         "jar": "lib%{name}.jar",
         "srcjar": "lib%{name}-src.jar",
         "zip_file": "%{name}.js.zip",
-        "dummy_jslib": "%{name}.jslib",
     },
 )
 
