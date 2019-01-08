@@ -1117,15 +1117,6 @@ public class JsInteropRestrictionsChecker {
       return false;
     }
 
-    if (typeDeclaration.getEnclosingTypeDeclaration() != null
-        && typeDeclaration.getEnclosingTypeDeclaration().isStarOrUnknown()) {
-      problems.error(
-          type.getSourcePosition(),
-          "Native inner class '%s' cannot be enclosed by \"?\" or \"*\".",
-          readableDescription);
-      return false;
-    }
-
     TypeDescriptor superTypeDescriptor = type.getSuperTypeDescriptor();
     if (superTypeDescriptor != null
         && !TypeDescriptors.isJavaLangObject(superTypeDescriptor)
