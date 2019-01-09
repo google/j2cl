@@ -20,7 +20,6 @@ let $LambdaAdaptor$2 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.
 let A = goog.forwardDeclare('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.A$impl');
 let EmptyA = goog.forwardDeclare('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.EmptyA$impl');
 let EmptyB = goog.forwardDeclare('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.EmptyB$impl');
-let Serial = goog.forwardDeclare('com.google.j2cl.transpiler.readable.intersectiontype.Serial$impl');
 let Setable = goog.forwardDeclare('com.google.j2cl.transpiler.readable.intersectiontype.Setable$impl');
 let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
@@ -127,13 +126,9 @@ class IntersectionTypeTest extends j_l_Object {
    */
   static m_method__() {
     IntersectionTypeTest.$clinit();
-    return /**@type {Cmp} */ ($Casts.$to(
-        $Casts.$to(
-            new $LambdaAdaptor$1((() => {
-              return 1;
-            })),
-            Cmp),
-        Serial));
+    return /**@type {Cmp} */ (new $LambdaAdaptor$1((() => {
+      return 1;
+    })));
   }
 
   /**
@@ -142,13 +137,9 @@ class IntersectionTypeTest extends j_l_Object {
    */
   static m_method2__() {
     IntersectionTypeTest.$clinit();
-    return /**@type {Cmp2} */ ($Casts.$to(
-        $Casts.$to(
-            new $LambdaAdaptor$2(((/** number */ a) => {
-              return 1;
-            })),
-            Cmp2),
-        Serial));
+    return /**@type {Cmp2} */ (new $LambdaAdaptor$2(((/** number */ a) => {
+      return 1;
+    })));
   }
 
   /**
@@ -265,10 +256,6 @@ class IntersectionTypeTest extends j_l_Object {
    * @public
    */
   static $loadModules() {
-    Cmp = goog.module.get(
-        'com.google.j2cl.transpiler.readable.intersectiontype.Cmp$impl');
-    Cmp2 = goog.module.get(
-        'com.google.j2cl.transpiler.readable.intersectiontype.Cmp2$impl');
     Getable = goog.module.get(
         'com.google.j2cl.transpiler.readable.intersectiontype.Getable$impl');
     $LambdaAdaptor$1 = goog.module.get(
@@ -281,8 +268,6 @@ class IntersectionTypeTest extends j_l_Object {
         'com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.EmptyA$impl');
     EmptyB = goog.module.get(
         'com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.EmptyB$impl');
-    Serial = goog.module.get(
-        'com.google.j2cl.transpiler.readable.intersectiontype.Serial$impl');
     Setable = goog.module.get(
         'com.google.j2cl.transpiler.readable.intersectiontype.Setable$impl');
     $Equality = goog.module.get('nativebootstrap.Equality$impl');

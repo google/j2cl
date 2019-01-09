@@ -13,9 +13,7 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $1Outer = goog.forwardDeclare('com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.$1Outer$impl');
-let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
-let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
 class BooleanOperations extends j_l_Object {
@@ -100,14 +98,14 @@ class BooleanOperations extends j_l_Object {
         .m_acceptBoolean__boolean_$p_com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations(
             ls = rs);
     let /** ?boolean */ br;
-    br = /**@type {?boolean} */ ($Casts.$to((ls == rs), Boolean));
-    br = /**@type {?boolean} */ ($Casts.$to((ls != rs), Boolean));
-    br = /**@type {?boolean} */ ($Casts.$to((!!(+ls ^ +rs)), Boolean));
-    br = /**@type {?boolean} */ ($Casts.$to((!!(+ls & +rs)), Boolean));
-    br = /**@type {?boolean} */ ($Casts.$to((!!(+ls | +rs)), Boolean));
-    br = /**@type {?boolean} */ ($Casts.$to((ls && rs), Boolean));
-    br = /**@type {?boolean} */ ($Casts.$to((ls || rs), Boolean));
-    br = /**@type {?boolean} */ ($Casts.$to((ls = rs), Boolean));
+    br = /**@type {?boolean} */ ((ls == rs));
+    br = /**@type {?boolean} */ ((ls != rs));
+    br = /**@type {?boolean} */ ((!!(+ls ^ +rs)));
+    br = /**@type {?boolean} */ ((!!(+ls & +rs)));
+    br = /**@type {?boolean} */ ((!!(+ls | +rs)));
+    br = /**@type {?boolean} */ ((ls && rs));
+    br = /**@type {?boolean} */ ((ls || rs));
+    br = /**@type {?boolean} */ ((ls = rs));
     if (ls == rs) {
       r = true;
     }
@@ -183,9 +181,7 @@ class BooleanOperations extends j_l_Object {
   static $loadModules() {
     $1Outer = goog.module.get(
         'com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.$1Outer$impl');
-    Boolean = goog.module.get('java.lang.Boolean$impl');
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
-    $Casts = goog.module.get('vmbootstrap.Casts$impl');
   }
 };
 

@@ -14,7 +14,6 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
-let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 
 
 /**
@@ -107,8 +106,7 @@ class InferReturn extends j_l_Object {
    */
   static m_newArray__java_lang_Object(foo) {
     InferReturn.$clinit();
-    return /**@type {Array<M_V>} */ (
-        $Arrays.$castTo(new Array(0), j_l_Object, 1));
+    return /**@type {Array<M_V>} */ (new Array(0));
   }
 
   /**
@@ -163,7 +161,6 @@ class InferReturn extends j_l_Object {
   static $loadModules() {
     ArrayList = goog.module.get('java.util.ArrayList$impl');
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
-    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   }
 };
 
