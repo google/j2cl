@@ -20,5 +20,9 @@ public class ForStatement {
     for (int i = 0, count = 0; i < 100; i++) {
       count++;
     }
+
+    for (long l = 0, count = 0; l < 100; l++, l++) {
+      count++;
+    }
   }
 }

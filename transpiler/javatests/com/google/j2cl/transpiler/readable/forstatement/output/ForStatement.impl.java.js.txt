@@ -12,6 +12,10 @@ goog.module('com.google.j2cl.transpiler.readable.forstatement.ForStatement$impl'
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
+let $LongUtils = goog.forwardDeclare('vmbootstrap.LongUtils$impl');
+let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
+
 
 class ForStatement extends j_l_Object {
   /**
@@ -49,6 +53,12 @@ class ForStatement extends j_l_Object {
     for (let i = 0, count = 0; i < 100; i++) {
       count++;
     }
+    for (let l = $Long.fromInt(0), count$1$ = $Long.fromInt(0);
+         $LongUtils.$less(l, $Primitives.$widenIntToLong(100));
+         l = $LongUtils.$plus(l, $Long.fromInt(1)),
+             l = $LongUtils.$plus(l, $Long.fromInt(1))) {
+      count$1$ = $LongUtils.$plus(count$1$, $Long.fromInt(1));
+    }
   }
 
   /**
@@ -82,7 +92,11 @@ class ForStatement extends j_l_Object {
   /**
    * @public
    */
-  static $loadModules() {}
+  static $loadModules() {
+    $Long = goog.module.get('nativebootstrap.Long$impl');
+    $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');
+    $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
+  }
 };
 
 $Util.$setClassMetadata(

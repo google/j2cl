@@ -49,4 +49,15 @@ public enum PostfixOperator implements Operator {
   public BinaryOperator getUnderlyingBinaryOperator() {
     return underlyingBinaryOperator;
   }
+
+  /** Returns the corresponding prefix operator. */
+  public PrefixOperator toPrefixOperator() {
+    switch (this) {
+      case DECREMENT:
+        return PrefixOperator.DECREMENT;
+      case INCREMENT:
+        return PrefixOperator.INCREMENT;
+    }
+    throw new AssertionError();
+  }
 }

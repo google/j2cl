@@ -15,8 +15,7 @@
  */
 package com.google.j2cl.ast.visitors;
 
-import static com.google.common.base.Preconditions.checkArgument;
-
+import com.google.common.collect.ImmutableList;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BinaryOperator;
@@ -26,15 +25,11 @@ import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.ForStatement;
 import com.google.j2cl.ast.PostfixExpression;
-import com.google.j2cl.ast.PostfixOperator;
 import com.google.j2cl.ast.PrefixExpression;
-import com.google.j2cl.ast.PrefixOperator;
 import com.google.j2cl.ast.PrimitiveTypes;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.UnaryExpression;
-import java.util.ArrayList;
-import java.util.List;
 
 /** Expands compound assignments where conversions need to be performed. */
 public class ExpandCompoundAssignments extends NormalizationPass {
@@ -47,32 +42,23 @@ public class ExpandCompoundAssignments extends NormalizationPass {
           @Override
           public ExpressionStatement rewriteExpressionStatement(
               ExpressionStatement expressionStatement) {
-            Expression expression = expressionStatement.getExpression();
-
-            if (expression instanceof PostfixExpression) {
-              PostfixExpression postfixExpression = (PostfixExpression) expression;
-              if (needsExpansion(postfixExpression)) {
-                return toPrefixExpression(postfixExpression)
-                    .makeStatement(expressionStatement.getSourcePosition());
-              }
-            }
-            return expressionStatement;
+            return normalizePostfixExpression(expressionStatement.getExpression())
+                .makeStatement(expressionStatement.getSourcePosition());
           }
 
           @Override
           public ForStatement rewriteForStatement(ForStatement forStatement) {
-            List<Expression> modifiedInitializers =
-                replacePrefixExpressionsWithPostfixExpression(forStatement.getInitializers());
-            List<Expression> modifiedUpdates =
-                replacePrefixExpressionsWithPostfixExpression(forStatement.getUpdates());
-            if (!modifiedInitializers.equals(forStatement.getInitializers())
-                || !modifiedUpdates.equals(forStatement.getUpdates())) {
-              ForStatement.Builder.from(forStatement)
-                  .setInitializers(modifiedInitializers)
-                  .setUpdates(modifiedUpdates)
-                  .build();
-            }
-            return forStatement;
+
+            return ForStatement.Builder.from(forStatement)
+                .setInitializers(
+                    forStatement.getInitializers().stream()
+                        .map(ExpandCompoundAssignments::normalizePostfixExpression)
+                        .collect(ImmutableList.toImmutableList()))
+                .setUpdates(
+                    forStatement.getUpdates().stream()
+                        .map(ExpandCompoundAssignments::normalizePostfixExpression)
+                        .collect(ImmutableList.toImmutableList()))
+                .build();
           }
         });
 
@@ -149,34 +135,17 @@ public class ExpandCompoundAssignments extends NormalizationPass {
     return true;
   }
 
-  /** Rewrites a postfix expressions int the list into the corresponding prefix expressions. */
-  private static List<Expression> replacePrefixExpressionsWithPostfixExpression(
-      List<Expression> expressions) {
-    List<Expression> result = new ArrayList<>();
-
-    for (Expression expression : expressions) {
-      if (expression instanceof PostfixExpression) {
-        PostfixExpression postfixExpression = (PostfixExpression) expression;
-        if (needsExpansion(postfixExpression)) {
-          expression = toPrefixExpression(postfixExpression);
-        }
+  /** Normalizes expandable postfix expressions into the corresponding prefix expressions. */
+  private static Expression normalizePostfixExpression(Expression expression) {
+    if (expression instanceof PostfixExpression) {
+      PostfixExpression postfixExpression = (PostfixExpression) expression;
+      if (needsExpansion(postfixExpression)) {
+        // Only normalize the ones that are expanded.
+        return PrefixExpression.Builder.from(postfixExpression)
+            .setOperator(postfixExpression.getOperator().toPrefixOperator())
+            .build();
       }
-      result.add(expression);
     }
-    return result;
-  }
-
-  /** Rewrites a postfix expression into the corresponding prefix expression. */
-  private static UnaryExpression toPrefixExpression(PostfixExpression postfixExpression) {
-    PostfixOperator postfixOperator = postfixExpression.getOperator();
-    checkArgument(
-        postfixOperator == PostfixOperator.DECREMENT
-            || postfixOperator == PostfixOperator.INCREMENT);
-    return PrefixExpression.Builder.from(postfixExpression)
-        .setOperator(
-            postfixOperator == PostfixOperator.DECREMENT
-                ? PrefixOperator.DECREMENT
-                : PrefixOperator.INCREMENT)
-        .build();
+    return expression;
   }
 }
