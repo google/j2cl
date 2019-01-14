@@ -19,7 +19,7 @@
 [count++;] => [count++;] "com.google.j2cl.transpiler.readable.forstatement.ForStatement.test"
 [for (long l = 0, count = 0; l < 100; l++, l++) {
       count++;
-    }] => [for (let l = $Long.fromInt(0), count$1$ = $Long.fromInt(0); $LongUtils.$less(l, $Primitives.$widenIntToLong(100)); l = $LongUtils.$plus(l, $Long.fromInt(1)), l = $LongUtils.$plus(l, $Long.fromInt(1))) {
+    }] => [for (let l = $Long.fromInt(0), count$1$ = $Long.fromInt(0); $LongUtils.$less(l, $Primitives.$widenIntToLong(100)); (l = $LongUtils.$plus(l, $Long.fromInt(1))), (l = $LongUtils.$plus(l, $Long.fromInt(1)))) {
       count$1$ = $LongUtils.$plus(count$1$, $Long.fromInt(1));
     }] "com.google.j2cl.transpiler.readable.forstatement.ForStatement.test"
 [l] => [l] "l"

@@ -19,6 +19,7 @@ import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
 
 /** Test unary operations. */
 public class Main {
+
   public static void main(String[] args) {
     testBasicUnaryExpressions();
   }
@@ -54,5 +55,30 @@ public class Main {
 
     boolean i = (a == 100);
     assertTrue(!i);
+
+    short s = 10;
+    // Test that the result of evaluating "++s" is correct.
+    // DO NOT CHANGE to "assertEquals(++s, 11)" since the tests also make sure that the expressions
+    // are transformed correctly w.r.t. operator precedence.
+    assertTrue(++s == 11);
+    // Test that ++s correctly mutates "s". Also indirectly tests that "++s == 11" is not
+    // incorrectly expanded to "s = s + 1 == 11", which would have resulted in "s" having "true" as
+    // its value.
+    assertTrue(s == 11);
+
+    // Test that the result of evaluating "s++" is correct.
+    assertTrue(s++ == 11);
+    // Test that ++s correctly mutates "s".
+    assertTrue(s == 12);
+
+    short[] shorts = new short[] {1, 2, 3};
+    // Test that the result of evaluating "++s" is correct.
+    // DO NOT CHANGE to "assertEquals(++s, 11)" since the tests also make sure that the expressions
+    // are transformed correctly w.r.t. operator precedence.
+    assertTrue(++shorts[1] == 3);
+    // Test that ++s correctly mutates "s". Also indirectly tests that "++s == 11" is not
+    // incorrectly expanded to "s = s + 1 == 11", which would have resulted in "s" having "true" as
+    // its value.
+    assertTrue(shorts[1] == 3);
   }
 }

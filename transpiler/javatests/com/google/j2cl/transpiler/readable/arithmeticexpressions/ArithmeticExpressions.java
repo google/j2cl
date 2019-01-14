@@ -43,6 +43,9 @@ public class ArithmeticExpressions {
     a += Double.MAX_VALUE; // if not expanded and performed in double result will change.
 
     ((k)) |= true;
+
+    short s = 10;
+    k = ++s == 10;
   }
 
   // Compount assignments in static fields
@@ -81,6 +84,9 @@ public class ArithmeticExpressions {
 
     String[] strings = null;
     strings[0] += null;
+
+    short[] shorts = null;
+    boolean b = ++shorts[0] == 10;
   }
 
   private static long[] getLongArray() {

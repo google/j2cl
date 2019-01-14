@@ -17,7 +17,6 @@ package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
-import com.google.common.collect.Iterables;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -166,9 +165,8 @@ public class CompoundOperationsUtils {
       expressions.add(valueVariable.getReference());
     }
 
-    if (expressions.size() == 1) {
-      return Iterables.getOnlyElement(expressions);
-    }
+    // Leave the multiexpression even if there is only one expression, because the expansion might
+    // need to be parenthesized to preserve precedence.
     return MultiExpression.newBuilder().addExpressions(expressions).build();
   }
 
@@ -228,12 +226,12 @@ public class CompoundOperationsUtils {
             .addVariableDeclaration(qualifierVariable, qualifier)
             .addVariableDeclaration(valueVariable, expandedOperand.clone())
             .build();
+
     // The referenced expression is being modified and it has a qualifier. Take special
     // care to only dereference the qualifier once (to avoid double side effects), store it in a
     // temporary variable and use that temporary variable in the rest of the computation.
     // q.a++; =>
     // (let $qualifier = q, let $value = $qualifier.a, $qualifier.a = $qualifier.a + 1, $value)
-
     return MultiExpression.newBuilder()
         .setExpressions(
             // Declare the temporary variables to hold the qualifier and the initial value.
@@ -255,11 +253,12 @@ public class CompoundOperationsUtils {
     if (operand.isIdempotent()) {
       // The referenced expression *is* being modified but it has no qualifier so no care needs to
       // be taken to avoid double side-effects from dereferencing the qualifier twice.
-      // ++a => a = a + 1
+      // ++a => (a = a + 1)
       return assignToLeftOperand(
-          operand,
-          operator.getUnderlyingBinaryOperator(),
-          createLiteralOne(operand.getTypeDescriptor()));
+              operand,
+              operator.getUnderlyingBinaryOperator(),
+              createLiteralOne(operand.getTypeDescriptor()))
+          .parenthesize();
     }
 
     if (operand instanceof FieldAccess) {
@@ -270,7 +269,7 @@ public class CompoundOperationsUtils {
           createLiteralOne(operand.getTypeDescriptor()));
     }
 
-    // Treat as a[i]++ as a[i] += 1.
+    // Treat as ++a[i] as a[i] += 1.
     return expandArrayAccess(
         operator.getUnderlyingBinaryOperator(),
         (ArrayAccess) operand,

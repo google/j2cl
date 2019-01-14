@@ -89,6 +89,8 @@ class ArithmeticExpressions extends j_l_Object {
     a = $Primitives.$narrowDoubleToInt(
         a + Double.f_MAX_VALUE__java_lang_Double);
     k = !!(+k | +true);
+    let s = 10;
+    k = (s = $Primitives.$narrowIntToShort(s + 1)) == 10;
   }
 
   /**
@@ -137,6 +139,9 @@ class ArithmeticExpressions extends j_l_Object {
         strings, 0,
         j_l_String.m_valueOf__java_lang_Object(strings[0]) +
             j_l_String.m_valueOf__java_lang_Object(null));
+    let shorts = null;
+    let b = $Arrays.$set(
+                shorts, 0, $Primitives.$narrowIntToShort(shorts[0] + 1)) == 10;
   }
 
   /**
@@ -162,8 +167,8 @@ class ArithmeticExpressions extends j_l_Object {
     d = Integer.m_valueOf__int(d.m_intValue__() + i);
     d = Integer.m_valueOf__int(d.m_intValue__() << i);
     i += c.m_intValue__();
-    let e = c = Integer.m_valueOf__int(c.m_intValue__() + 1);
-    e = c = Integer.m_valueOf__int(c.m_intValue__() + 1);
+    let e = (c = Integer.m_valueOf__int(c.m_intValue__() + 1));
+    e = (c = Integer.m_valueOf__int(c.m_intValue__() + 1));
     let e2 = 100.0;
     e2 = Double.m_doubleValue__java_lang_Double(e2) + 1.0;
     let f =

@@ -85,11 +85,12 @@ class SimpleLongs extends j_l_Object {
     b = $Long.fromBits(-1, 2147483647) /* 9223372036854775807 */;
     let c = $LongUtils.$plus(a, b);
     c = $LongUtils.$divide(a, b);
-    let e = a = $LongUtils.$plus(a, $Long.fromInt(1));
-    e = this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs =
-        $LongUtils.$plus(
-            this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs,
-            $Long.fromInt(1));
+    let e = (a = $LongUtils.$plus(a, $Long.fromInt(1)));
+    e =
+        (this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs =
+             $LongUtils.$plus(
+                 this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs,
+                 $Long.fromInt(1)));
     e =
         ($qualifier = this.m_getWithSideEffect__(),
          $qualifier
