@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.nestednativetype;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 public class Main {
 
   /**
@@ -26,6 +28,6 @@ public class Main {
     NativeArray nativeArray = new NativeArray();
     NativeArray2 nativeArray2 = new NativeArray2();
 
-    assert(nativeArray.getObject() != nativeArray2.getObject());
+    assertTrue(nativeArray.getObject() != nativeArray2.getObject());
   }
 }

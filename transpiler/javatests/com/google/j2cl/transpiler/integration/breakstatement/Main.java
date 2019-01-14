@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.breakstatement;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 /**
  * Test for for break statement.
  */
@@ -28,7 +30,7 @@ public class Main {
       }
     }
 
-    assert i == 50;
+    assertTrue(i == 50);
 
     while (true) {
       i++;
@@ -38,7 +40,7 @@ public class Main {
       }
     }
 
-    assert i == 100;
+    assertTrue(i == 100);
 
     int count = 0;
 
@@ -52,13 +54,13 @@ public class Main {
       }
     }
 
-    assert count == 100;
+    assertTrue(count == 100);
 
     for (; ; ) {
       count++;
       break;
     }
 
-    assert count == 101;
+    assertTrue(count == 101);
   }
 }

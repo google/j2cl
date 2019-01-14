@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.integration.jsoverlaywithjsfunction;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
 import static jsinterop.annotations.JsPackage.GLOBAL;
 
 import jsinterop.annotations.JsFunction;
@@ -23,7 +24,7 @@ import jsinterop.annotations.JsType;
 
 public class Main {
   public static void main(String... args) {
-    assert new Foo().bar() == 30;
+    assertTrue(new Foo().bar() == 30);
   }
 
   @JsType(isNative = true, namespace = GLOBAL, name = "Object")

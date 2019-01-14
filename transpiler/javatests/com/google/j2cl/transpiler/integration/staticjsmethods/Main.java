@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.integration.staticjsmethods;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
 import static jsinterop.annotations.JsPackage.GLOBAL;
 
 import jsinterop.annotations.JsMethod;
@@ -31,28 +32,28 @@ public class Main {
   }
 
   public static void testJsMethodsCalledByJava() {
-    assert f1(1) == 12;
-    assert f2(1) == 23;
+    assertTrue(f1(1) == 12);
+    assertTrue(f2(1) == 23);
   }
 
   public static void testJsMethodsCalledByJS() {
-    assert callF1(1) == 12;
-    assert callF2(1) == 23;
+    assertTrue(callF1(1) == 12);
+    assertTrue(callF2(1) == 23);
   }
 
   public static void testJsMethodsCalledByOtherClass() {
-    assert OtherClass.callF1(1) == 12;
-    assert OtherClass.callF2(1) == 23;
+    assertTrue(OtherClass.callF1(1) == 12);
+    assertTrue(OtherClass.callF2(1) == 23);
   }
 
   public static void testNativeJsMethod() {
-    assert floor(1.5) == 1;
-    assert f3(-1) == 1;
-    assert isFinite(1.0);
+    assertTrue(floor(1.5) == 1);
+    assertTrue(f3(-1) == 1);
+    assertTrue(isFinite(1.0));
   }
 
   public static void testDeepNamespaceNativeJsMethod() {
-    assert fooBarAbs(-1) == 1;
+    assertTrue(fooBarAbs(-1) == 1);
   }
 
   public static void main(String... args) {

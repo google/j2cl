@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.arithmeticexception;
 
+import static com.google.j2cl.transpiler.utils.Asserts.fail;
+
 public class Main {
   public static void main(String... args) {
     testDivideByZero();
@@ -27,7 +29,7 @@ public class Main {
       int b = 0;
       @SuppressWarnings("unused")
       int c = a / b;
-      assert false : "failed to throw ArithmeticException";
+      fail("failed to throw ArithmeticException");
     } catch (ArithmeticException e) {
       // do nothing.
     }
@@ -37,7 +39,7 @@ public class Main {
       int a = 10;
       int b = 0;
       a /= b;
-      assert false : "failed to throw ArithmeticException";
+      fail("failed to throw ArithmeticException");
     } catch (ArithmeticException e) {
       // do nothing.
     }
@@ -47,7 +49,7 @@ public class Main {
       int a = 10;
       int b = 0;
       int c = 1 + a / b;
-      assert false : "failed to throw ArithmeticException";
+      fail("failed to throw ArithmeticException");
     } catch (ArithmeticException e) {
       // do nothing.
     }
@@ -57,7 +59,7 @@ public class Main {
       short b = 0;
       @SuppressWarnings("unused")
       short c = (short) (a / b);
-      assert false : "failed to throw ArithmeticException";
+      fail("failed to throw ArithmeticException");
     } catch (ArithmeticException e) {
       // do nothing.
     }
@@ -67,7 +69,7 @@ public class Main {
       char b = 0;
       @SuppressWarnings("unused")
       char c = (char) (a / b);
-      assert false : "failed to throw ArithmeticException";
+      fail("failed to throw ArithmeticException");
     } catch (ArithmeticException e) {
       // do nothing.
     }
@@ -77,7 +79,7 @@ public class Main {
       byte b = 0;
       @SuppressWarnings("unused")
       byte c = (byte) (a / b);
-      assert false : "failed to throw ArithmeticException";
+      fail("failed to throw ArithmeticException");
     } catch (ArithmeticException e) {
       // do nothing.
     }
@@ -87,7 +89,7 @@ public class Main {
       long b = 0;
       @SuppressWarnings("unused")
       long c = (a / b);
-      assert false : "failed to throw ArithmeticException";
+      fail("failed to throw ArithmeticException");
     } catch (ArithmeticException e) {
       // do nothing.
     }
@@ -97,7 +99,7 @@ public class Main {
       int b = 0;
       @SuppressWarnings("unused")
       long c = 10L + (a / b);
-      assert false : "failed to throw ArithmeticException";
+      fail("failed to throw ArithmeticException");
     } catch (ArithmeticException e) {
       // do nothing.
     }
@@ -107,7 +109,7 @@ public class Main {
       short b = 0;
       @SuppressWarnings("unused")
       long c = 10L + (a / b);
-      assert false : "failed to throw ArithmeticException";
+      fail("failed to throw ArithmeticException");
     } catch (ArithmeticException e) {
       // do nothing.
     }
@@ -119,7 +121,7 @@ public class Main {
       int b = 0;
       @SuppressWarnings("unused")
       int c = a % b;
-      assert false : "failed to throw ArithmeticException";
+      fail("failed to throw ArithmeticException");
     } catch (ArithmeticException e) {
       // do nothing.
     }
@@ -129,7 +131,7 @@ public class Main {
       int a = 10;
       int b = 0;
       a %= b;
-      assert false : "failed to throw ArithmeticException";
+      fail("failed to throw ArithmeticException");
     } catch (ArithmeticException e) {
       // do nothing.
     }
@@ -139,7 +141,7 @@ public class Main {
       short b = 0;
       @SuppressWarnings("unused")
       short c = (short) (a % b);
-      assert false : "failed to throw ArithmeticException";
+      fail("failed to throw ArithmeticException");
     } catch (ArithmeticException e) {
       // do nothing.
     }
@@ -149,7 +151,7 @@ public class Main {
       char b = 0;
       @SuppressWarnings("unused")
       char c = (char) (a % b);
-      assert false : "failed to throw ArithmeticException";
+      fail("failed to throw ArithmeticException");
     } catch (ArithmeticException e) {
       // do nothing.
     }
@@ -159,7 +161,7 @@ public class Main {
       byte b = 0;
       @SuppressWarnings("unused")
       byte c = (byte) (a % b);
-      assert false : "failed to throw ArithmeticException";
+      fail("failed to throw ArithmeticException");
     } catch (ArithmeticException e) {
       // do nothing.
     }
@@ -169,7 +171,7 @@ public class Main {
       long b = 0;
       @SuppressWarnings("unused")
       long c = (a % b);
-      assert false : "failed to throw ArithmeticException";
+      fail("failed to throw ArithmeticException");
     } catch (ArithmeticException e) {
       // do nothing.
     }
@@ -179,7 +181,7 @@ public class Main {
       int b = 0;
       @SuppressWarnings("unused")
       long c = 10L + (a % b);
-      assert false : "failed to throw ArithmeticException";
+      fail("failed to throw ArithmeticException");
     } catch (ArithmeticException e) {
       // do nothing.
     }
@@ -189,7 +191,7 @@ public class Main {
       short b = 0;
       @SuppressWarnings("unused")
       double c = 10d + (a % b);
-      assert false : "failed to throw ArithmeticException";
+      fail("failed to throw ArithmeticException");
     } catch (ArithmeticException e) {
       // do nothing.
     }

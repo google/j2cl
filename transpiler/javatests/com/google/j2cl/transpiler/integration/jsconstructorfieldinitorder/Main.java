@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.jsconstructorfieldinitorder;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 import jsinterop.annotations.JsConstructor;
 
 public class Main {
@@ -48,7 +50,7 @@ public class Main {
 
   public static void main(String... args) {
     // Reproduces b/27484158
-    // assert new Foo().bar == 42;
-    assert new Foo().foo.equals("");
+    // assertTrue(new Foo().bar == 42);
+    assertTrue(new Foo().foo.equals(""));
   }
 }

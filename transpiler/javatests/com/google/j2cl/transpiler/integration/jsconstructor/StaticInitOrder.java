@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.jsconstructor;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 import jsinterop.annotations.JsType;
 
 @JsType
@@ -22,29 +24,29 @@ public class StaticInitOrder {
   public static int counter = 1;
 
   public static void test() {
-    assert StaticInitOrder.counter == 5;
-    assert StaticInitOrder.field1 == 2;
-    assert StaticInitOrder.field2 == 3;
+    assertTrue(StaticInitOrder.counter == 5);
+    assertTrue(StaticInitOrder.field1 == 2);
+    assertTrue(StaticInitOrder.field2 == 3);
   }
 
   public static int field1 = initializeField1();
   public static int field2 = initializeField2();
 
   static {
-    assert counter++ == 3; // #3
+    assertTrue(counter++ == 3); // #3
   }
 
   static {
-    assert counter++ == 4; // #4
+    assertTrue(counter++ == 4); // #4
   }
 
   public static int initializeField1() {
-    assert counter++ == 1; // #1
+    assertTrue(counter++ == 1); // #1
     return counter;
   }
 
   public static int initializeField2() {
-    assert counter++ == 2; // #2
+    assertTrue(counter++ == 2); // #2
     return counter;
   }
 }

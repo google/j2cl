@@ -15,19 +15,23 @@
  */
 package com.google.j2cl.transpiler.integration.jsinteroptests;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertEquals;
+import static com.google.j2cl.transpiler.utils.Asserts.assertFalse;
+import static com.google.j2cl.transpiler.utils.Asserts.assertNotNull;
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 /** Tests JsType object method devirtualization functionality. */
-public class JsTypeObjectMethodsTest extends MyTestCase {
+public class JsTypeObjectMethodsTest {
   public static void testAll() {
-    JsTypeObjectMethodsTest test = new JsTypeObjectMethodsTest();
-    test.testEquals();
-    test.testHashCode();
-    test.testJavaLangObjectMethodsOrNativeSubtypes();
-    test.testObjectMethodDispatch();
+    testEquals();
+    testHashCode();
+    testJavaLangObjectMethodsOrNativeSubtypes();
+    testObjectMethodDispatch();
   }
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
@@ -86,7 +90,7 @@ public class JsTypeObjectMethodsTest extends MyTestCase {
     }
   }
 
-  public void testHashCode() {
+  private static void testHashCode() {
     assertEquals(3, createWithEqualsAndHashCode(1, 3).hashCode());
     NativeObjectInterface o1 = createWithoutEqualsAndHashCode(1, 3);
     NativeObjectInterface o2 = createWithoutEqualsAndHashCode(1, 3);
@@ -98,7 +102,7 @@ public class JsTypeObjectMethodsTest extends MyTestCase {
     assertEquals(10, callHashCode(new SubclassNativeClassWithHashCode(10)));
   }
 
-  public void testEquals() {
+  private static void testEquals() {
     assertEquals(createWithEqualsAndHashCode(1, 3), createWithEqualsAndHashCode(1, 4));
     NativeObjectInterface o1 = createWithoutEqualsAndHashCode(1, 3);
     NativeObjectInterface o2 = createWithoutEqualsAndHashCode(1, 3);
@@ -136,7 +140,7 @@ public class JsTypeObjectMethodsTest extends MyTestCase {
     String toString();
   }
 
-  public void testJavaLangObjectMethodsOrNativeSubtypes() {
+  private static void testJavaLangObjectMethodsOrNativeSubtypes() {
     assertTrue(new NativeClassWithHashCode(3).equals(new NativeClassWithHashCode(3)));
     assertFalse(new NativeClassWithHashCode(3).equals(new NativeClassWithHashCode(4)));
 
@@ -187,7 +191,7 @@ public class JsTypeObjectMethodsTest extends MyTestCase {
   @JsType(isNative = true, name = "NativeJsTypeImplementsObjectMethods")
   interface NativeInterfaceWithoutDeclarations {}
 
-  public void testObjectMethodDispatch() {
+  private static void testObjectMethodDispatch() {
     NativeClassWithDeclarations nativeClassWithDeclarations = new NativeClassWithDeclarations(5.0);
     NativeClassWithoutDeclarations nativeClassWithoutDeclarations =
         new NativeClassWithoutDeclarations(5.0);

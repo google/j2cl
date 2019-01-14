@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.backwardbridgemethod;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 interface I {
   String get(String s);
 }
@@ -34,8 +36,8 @@ public class Main extends C<String> implements I {
     C c = new Main();
     Main m = new Main();
     String s = "";
-    assert i.get(s) == s;
-    assert c.get(s) == s;
-    assert m.get(s) == s;
+    assertTrue(i.get(s) == s);
+    assertTrue(c.get(s) == s);
+    assertTrue(m.get(s) == s);
   }
 }

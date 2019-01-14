@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.integration.morebridgemethods;
 
+import com.google.j2cl.transpiler.utils.Asserts;
 import jsinterop.annotations.JsMethod;
 
 public class BridgeJsMethodMain {
@@ -39,11 +40,6 @@ public class BridgeJsMethodMain {
   }
 
   public static void test(String... args) {
-    try {
-      callFunByA(new B(), 1);
-      assert false;
-    } catch (ClassCastException e) {
-      // expected.
-    }
+    Asserts.assertThrowsClassCastException(() -> callFunByA(new B(), 1));
   }
 }

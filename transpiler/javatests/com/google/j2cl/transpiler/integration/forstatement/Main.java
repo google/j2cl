@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.forstatement;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 /**
  * Test for for loops.
  */
@@ -27,26 +29,26 @@ public class Main {
       count = j + i;
     }
 
-    assert count == 30;
+    assertTrue(count == 30);
 
     for (count = 0; count == 1; count++) {
       count = 100;
     }
 
-    assert count == 0;
+    assertTrue(count == 0);
 
     for (int i = 0, j = 10; i < 10; i++, j--) {
       count = j - i;
     }
-    assert count == -8;
+    assertTrue(count == -8);
 
     for (; count < 10; ) {
       count++;
     }
-    assert count == 10;
+    assertTrue(count == 10);
 
     for (count = 0; count < 10; count++) ;
 
-    assert count == 10;
+    assertTrue(count == 10);
   }
 }

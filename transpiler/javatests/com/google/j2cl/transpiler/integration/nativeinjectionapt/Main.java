@@ -15,11 +15,13 @@
  */
 package com.google.j2cl.transpiler.integration.nativeinjectionapt;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 /** Integration tests for native methods written by APTs. */
 public class Main {
   public static void main(String... args) {
-    assert MyClass.nativeStaticMethod().equals("MyClass");
-    assert NativeClass.nativeStaticMethod().equals("NativeClass");
-    assert SuperMyClass.nativeStaticMethod().equals("SuperMyClass");
+    assertTrue(MyClass.nativeStaticMethod().equals("MyClass"));
+    assertTrue(NativeClass.nativeStaticMethod().equals("NativeClass"));
+    assertTrue(SuperMyClass.nativeStaticMethod().equals("SuperMyClass"));
   }
 }

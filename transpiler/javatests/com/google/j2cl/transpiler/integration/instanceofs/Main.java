@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.instanceofs;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 import java.io.Serializable;
 
 /**
@@ -31,21 +33,21 @@ public class Main {
 
   private static void testInstanceOf_class() {
     Object object = new SomeClass();
-    assert object instanceof SomeClass;
-    assert object instanceof Object;
-    assert !(object instanceof String);
-    assert "A String Literal" instanceof String;
-    assert !(null instanceof Object);
+    assertTrue(object instanceof SomeClass);
+    assertTrue(object instanceof Object);
+    assertTrue(!(object instanceof String));
+    assertTrue("A String Literal" instanceof String);
+    assertTrue(!(null instanceof Object));
 
     try {
-      assert hasSideEffect() instanceof Object;
-      assert false;
+      assertTrue(hasSideEffect() instanceof Object);
+      assertTrue(false);
     } catch (IllegalArgumentException expected) {
     }
 
     try {
-      assert hasSideEffect() instanceof ThreadLocal;
-      assert false;
+      assertTrue(hasSideEffect() instanceof ThreadLocal);
+      assertTrue(false);
     } catch (IllegalArgumentException expected) {
     }
   }
@@ -58,10 +60,10 @@ public class Main {
 
   private static void testInstanceOf_interface() {
     Object object = new Implementor();
-    assert object instanceof ParentInterface;
-    assert object instanceof ChildInterface;
-    assert object instanceof GenericInterface;
-    assert !(object instanceof Serializable);
+    assertTrue(object instanceof ParentInterface);
+    assertTrue(object instanceof ChildInterface);
+    assertTrue(object instanceof GenericInterface);
+    assertTrue(!(object instanceof Serializable));
   }
 
   public interface ParentInterface {}
@@ -75,190 +77,190 @@ public class Main {
   @SuppressWarnings("cast")
   private static void testInstanceOf_array() {
     Object object = new Object();
-    assert object instanceof Object;
-    assert !(object instanceof Object[]);
-    assert !(object instanceof Object[][]);
-    assert !(object instanceof String[]);
-    assert !(object instanceof String[][]);
-    assert !(object instanceof int[]);
-    assert !(object instanceof Comparable);
-    assert !(object instanceof Serializable);
+    assertTrue(object instanceof Object);
+    assertTrue(!(object instanceof Object[]));
+    assertTrue(!(object instanceof Object[][]));
+    assertTrue(!(object instanceof String[]));
+    assertTrue(!(object instanceof String[][]));
+    assertTrue(!(object instanceof int[]));
+    assertTrue(!(object instanceof Comparable));
+    assertTrue(!(object instanceof Serializable));
 
     Object objects1d = new Object[1];
-    assert objects1d instanceof Object;
-    assert objects1d instanceof Object[];
-    assert !(objects1d instanceof Object[][]);
-    assert !(objects1d instanceof String[]);
-    assert !(objects1d instanceof String[][]);
-    assert !(objects1d instanceof int[]);
-    assert !(objects1d instanceof Comparable);
-    assert objects1d instanceof Serializable;
+    assertTrue(objects1d instanceof Object);
+    assertTrue(objects1d instanceof Object[]);
+    assertTrue(!(objects1d instanceof Object[][]));
+    assertTrue(!(objects1d instanceof String[]));
+    assertTrue(!(objects1d instanceof String[][]));
+    assertTrue(!(objects1d instanceof int[]));
+    assertTrue(!(objects1d instanceof Comparable));
+    assertTrue(objects1d instanceof Serializable);
 
     Object strings1d = new String[1];
-    assert strings1d instanceof Object;
-    assert strings1d instanceof Object[];
-    assert !(strings1d instanceof Object[][]);
-    assert strings1d instanceof String[];
-    assert !(strings1d instanceof String[][]);
-    assert !(strings1d instanceof int[]);
-    assert !(strings1d instanceof Comparable);
-    assert strings1d instanceof Serializable;
+    assertTrue(strings1d instanceof Object);
+    assertTrue(strings1d instanceof Object[]);
+    assertTrue(!(strings1d instanceof Object[][]));
+    assertTrue(strings1d instanceof String[]);
+    assertTrue(!(strings1d instanceof String[][]));
+    assertTrue(!(strings1d instanceof int[]));
+    assertTrue(!(strings1d instanceof Comparable));
+    assertTrue(strings1d instanceof Serializable);
 
     Object objects2d = new Object[1][1];
-    assert objects2d instanceof Object;
-    assert objects2d instanceof Object[];
-    assert objects2d instanceof Object[][];
-    assert !(objects2d instanceof String[]);
-    assert !(objects2d instanceof String[][]);
-    assert !(objects2d instanceof int[]);
-    assert !(objects2d instanceof Comparable);
-    assert objects2d instanceof Serializable;
+    assertTrue(objects2d instanceof Object);
+    assertTrue(objects2d instanceof Object[]);
+    assertTrue(objects2d instanceof Object[][]);
+    assertTrue(!(objects2d instanceof String[]));
+    assertTrue(!(objects2d instanceof String[][]));
+    assertTrue(!(objects2d instanceof int[]));
+    assertTrue(!(objects2d instanceof Comparable));
+    assertTrue(objects2d instanceof Serializable);
 
     Object strings2d = new String[1][1];
-    assert strings2d instanceof Object;
-    assert strings2d instanceof Object[];
-    assert strings2d instanceof Object[][];
-    assert !(strings2d instanceof String[]);
-    assert strings2d instanceof String[][];
-    assert !(strings2d instanceof int[]);
-    assert !(strings2d instanceof Comparable);
-    assert strings2d instanceof Serializable;
+    assertTrue(strings2d instanceof Object);
+    assertTrue(strings2d instanceof Object[]);
+    assertTrue(strings2d instanceof Object[][]);
+    assertTrue(!(strings2d instanceof String[]));
+    assertTrue(strings2d instanceof String[][]);
+    assertTrue(!(strings2d instanceof int[]));
+    assertTrue(!(strings2d instanceof Comparable));
+    assertTrue(strings2d instanceof Serializable);
 
     Object ints1d = new int[1];
-    assert ints1d instanceof Object;
-    assert !(ints1d instanceof Object[]);
-    assert !(ints1d instanceof Object[][]);
-    assert !(ints1d instanceof String[]);
-    assert !(ints1d instanceof String[][]);
-    assert ints1d instanceof int[];
-    assert !(ints1d instanceof Comparable);
-    assert ints1d instanceof Serializable;
+    assertTrue(ints1d instanceof Object);
+    assertTrue(!(ints1d instanceof Object[]));
+    assertTrue(!(ints1d instanceof Object[][]));
+    assertTrue(!(ints1d instanceof String[]));
+    assertTrue(!(ints1d instanceof String[][]));
+    assertTrue(ints1d instanceof int[]);
+    assertTrue(!(ints1d instanceof Comparable));
+    assertTrue(ints1d instanceof Serializable);
 
     Object ints2d = new int[1][];
-    assert ints2d instanceof Object;
-    assert ints2d instanceof Object[];
-    assert !(ints2d instanceof Object[][]);
-    assert !(ints2d instanceof String[]);
-    assert !(ints2d instanceof String[][]);
-    assert !(ints2d instanceof int[]);
-    assert ints2d instanceof int[][];
-    assert !(ints2d instanceof Comparable);
-    assert ints2d instanceof Serializable;
+    assertTrue(ints2d instanceof Object);
+    assertTrue(ints2d instanceof Object[]);
+    assertTrue(!(ints2d instanceof Object[][]));
+    assertTrue(!(ints2d instanceof String[]));
+    assertTrue(!(ints2d instanceof String[][]));
+    assertTrue(!(ints2d instanceof int[]));
+    assertTrue(ints2d instanceof int[][]);
+    assertTrue(!(ints2d instanceof Comparable));
+    assertTrue(ints2d instanceof Serializable);
   }
 
   @SuppressWarnings("BoxedPrimitiveConstructor")
   private static void testInstanceOf_boxedTypes() {
     Object o = new Byte((byte) 1);
-    assert o instanceof Byte;
-    assert !(o instanceof Double);
-    assert !(o instanceof Float);
-    assert !(o instanceof Integer);
-    assert !(o instanceof Long);
-    assert !(o instanceof Short);
-    assert o instanceof Number;
-    assert !(o instanceof Character);
-    assert !(o instanceof Boolean);
-    assert o instanceof Comparable;
-    assert o instanceof Serializable;
+    assertTrue(o instanceof Byte);
+    assertTrue(!(o instanceof Double));
+    assertTrue(!(o instanceof Float));
+    assertTrue(!(o instanceof Integer));
+    assertTrue(!(o instanceof Long));
+    assertTrue(!(o instanceof Short));
+    assertTrue(o instanceof Number);
+    assertTrue(!(o instanceof Character));
+    assertTrue(!(o instanceof Boolean));
+    assertTrue(o instanceof Comparable);
+    assertTrue(o instanceof Serializable);
 
     o = new Double(1.0);
-    assert !(o instanceof Byte);
-    assert o instanceof Double;
-    assert !(o instanceof Float);
-    assert !(o instanceof Integer);
-    assert !(o instanceof Long);
-    assert !(o instanceof Short);
-    assert o instanceof Number;
-    assert !(o instanceof Character);
-    assert !(o instanceof Boolean);
-    assert o instanceof Comparable;
-    assert o instanceof Serializable;
+    assertTrue(!(o instanceof Byte));
+    assertTrue(o instanceof Double);
+    assertTrue(!(o instanceof Float));
+    assertTrue(!(o instanceof Integer));
+    assertTrue(!(o instanceof Long));
+    assertTrue(!(o instanceof Short));
+    assertTrue(o instanceof Number);
+    assertTrue(!(o instanceof Character));
+    assertTrue(!(o instanceof Boolean));
+    assertTrue(o instanceof Comparable);
+    assertTrue(o instanceof Serializable);
 
     o = new Float(1.0f);
-    assert !(o instanceof Byte);
-    assert !(o instanceof Double);
-    assert o instanceof Float;
-    assert !(o instanceof Integer);
-    assert !(o instanceof Long);
-    assert !(o instanceof Short);
-    assert o instanceof Number;
-    assert !(o instanceof Character);
-    assert !(o instanceof Boolean);
-    assert o instanceof Comparable;
-    assert o instanceof Serializable;
+    assertTrue(!(o instanceof Byte));
+    assertTrue(!(o instanceof Double));
+    assertTrue(o instanceof Float);
+    assertTrue(!(o instanceof Integer));
+    assertTrue(!(o instanceof Long));
+    assertTrue(!(o instanceof Short));
+    assertTrue(o instanceof Number);
+    assertTrue(!(o instanceof Character));
+    assertTrue(!(o instanceof Boolean));
+    assertTrue(o instanceof Comparable);
+    assertTrue(o instanceof Serializable);
 
     o = new Integer(1);
-    assert !(o instanceof Byte);
-    assert !(o instanceof Double);
-    assert !(o instanceof Float);
-    assert o instanceof Integer;
-    assert !(o instanceof Long);
-    assert !(o instanceof Short);
-    assert o instanceof Number;
-    assert !(o instanceof Character);
-    assert !(o instanceof Boolean);
-    assert o instanceof Comparable;
-    assert o instanceof Serializable;
+    assertTrue(!(o instanceof Byte));
+    assertTrue(!(o instanceof Double));
+    assertTrue(!(o instanceof Float));
+    assertTrue(o instanceof Integer);
+    assertTrue(!(o instanceof Long));
+    assertTrue(!(o instanceof Short));
+    assertTrue(o instanceof Number);
+    assertTrue(!(o instanceof Character));
+    assertTrue(!(o instanceof Boolean));
+    assertTrue(o instanceof Comparable);
+    assertTrue(o instanceof Serializable);
 
     o = new Long(1L);
-    assert !(o instanceof Byte);
-    assert !(o instanceof Double);
-    assert !(o instanceof Float);
-    assert !(o instanceof Integer);
-    assert o instanceof Long;
-    assert !(o instanceof Short);
-    assert o instanceof Number;
-    assert !(o instanceof Character);
-    assert !(o instanceof Boolean);
-    assert o instanceof Comparable;
-    assert o instanceof Serializable;
+    assertTrue(!(o instanceof Byte));
+    assertTrue(!(o instanceof Double));
+    assertTrue(!(o instanceof Float));
+    assertTrue(!(o instanceof Integer));
+    assertTrue(o instanceof Long);
+    assertTrue(!(o instanceof Short));
+    assertTrue(o instanceof Number);
+    assertTrue(!(o instanceof Character));
+    assertTrue(!(o instanceof Boolean));
+    assertTrue(o instanceof Comparable);
+    assertTrue(o instanceof Serializable);
 
     o = new Short((short) 1);
-    assert !(o instanceof Byte);
-    assert !(o instanceof Double);
-    assert !(o instanceof Float);
-    assert !(o instanceof Integer);
-    assert !(o instanceof Long);
-    assert o instanceof Short;
-    assert o instanceof Number;
-    assert !(o instanceof Character);
-    assert !(o instanceof Boolean);
-    assert o instanceof Comparable;
-    assert o instanceof Serializable;
+    assertTrue(!(o instanceof Byte));
+    assertTrue(!(o instanceof Double));
+    assertTrue(!(o instanceof Float));
+    assertTrue(!(o instanceof Integer));
+    assertTrue(!(o instanceof Long));
+    assertTrue(o instanceof Short);
+    assertTrue(o instanceof Number);
+    assertTrue(!(o instanceof Character));
+    assertTrue(!(o instanceof Boolean));
+    assertTrue(o instanceof Comparable);
+    assertTrue(o instanceof Serializable);
 
     o = new Character('a');
-    assert !(o instanceof Byte);
-    assert !(o instanceof Double);
-    assert !(o instanceof Float);
-    assert !(o instanceof Integer);
-    assert !(o instanceof Long);
-    assert !(o instanceof Short);
-    assert !(o instanceof Number);
-    assert o instanceof Character;
-    assert !(o instanceof Boolean);
-    assert o instanceof Comparable;
-    assert o instanceof Serializable;
+    assertTrue(!(o instanceof Byte));
+    assertTrue(!(o instanceof Double));
+    assertTrue(!(o instanceof Float));
+    assertTrue(!(o instanceof Integer));
+    assertTrue(!(o instanceof Long));
+    assertTrue(!(o instanceof Short));
+    assertTrue(!(o instanceof Number));
+    assertTrue(o instanceof Character);
+    assertTrue(!(o instanceof Boolean));
+    assertTrue(o instanceof Comparable);
+    assertTrue(o instanceof Serializable);
 
     o = new Boolean(true);
-    assert !(o instanceof Byte);
-    assert !(o instanceof Double);
-    assert !(o instanceof Float);
-    assert !(o instanceof Integer);
-    assert !(o instanceof Long);
-    assert !(o instanceof Short);
-    assert !(o instanceof Number);
-    assert !(o instanceof Character);
-    assert o instanceof Boolean;
-    assert o instanceof Comparable;
-    assert o instanceof Serializable;
+    assertTrue(!(o instanceof Byte));
+    assertTrue(!(o instanceof Double));
+    assertTrue(!(o instanceof Float));
+    assertTrue(!(o instanceof Integer));
+    assertTrue(!(o instanceof Long));
+    assertTrue(!(o instanceof Short));
+    assertTrue(!(o instanceof Number));
+    assertTrue(!(o instanceof Character));
+    assertTrue(o instanceof Boolean);
+    assertTrue(o instanceof Comparable);
+    assertTrue(o instanceof Serializable);
 
     o = new NumberSubclass();
-    assert (o instanceof NumberSubclass);
-    assert (o instanceof Number);
-    assert o instanceof Serializable;
+    assertTrue((o instanceof NumberSubclass));
+    assertTrue((o instanceof Number));
+    assertTrue(o instanceof Serializable);
 
-    assert (!(new Object() instanceof Void));
-    assert (!(null instanceof Void));
+    assertTrue((!(new Object() instanceof Void)));
+    assertTrue((!(null instanceof Void)));
   }
 
   private static class NumberSubclass extends Number {
@@ -285,17 +287,17 @@ public class Main {
 
   private static void testInstanceOf_string() {
     Object s = "A string";
-    assert !(s instanceof Byte);
-    assert !(s instanceof Double);
-    assert !(s instanceof Float);
-    assert !(s instanceof Integer);
-    assert !(s instanceof Long);
-    assert !(s instanceof Short);
-    assert !(s instanceof Number);
-    assert !(s instanceof Character);
-    assert !(s instanceof Boolean);
-    assert s instanceof String;
-    assert s instanceof Comparable;
-    assert s instanceof Serializable;
+    assertTrue(!(s instanceof Byte));
+    assertTrue(!(s instanceof Double));
+    assertTrue(!(s instanceof Float));
+    assertTrue(!(s instanceof Integer));
+    assertTrue(!(s instanceof Long));
+    assertTrue(!(s instanceof Short));
+    assertTrue(!(s instanceof Number));
+    assertTrue(!(s instanceof Character));
+    assertTrue(!(s instanceof Boolean));
+    assertTrue(s instanceof String);
+    assertTrue(s instanceof Comparable);
+    assertTrue(s instanceof Serializable);
   }
 }

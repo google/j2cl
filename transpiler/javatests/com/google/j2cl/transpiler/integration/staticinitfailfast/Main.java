@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.staticinitfailfast;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 import jsinterop.annotations.JsMethod;
 
 public class Main {
@@ -31,18 +33,21 @@ public class Main {
   public static void main(String[] args) {
     try {
       createFoo();
-      assert "true".equals(System.getProperty("COMPILED")) : "should fail in uncompiled mode";
+      assertTrue("should fail in uncompiled mode", "true".equals(System.getProperty("COMPILED")));
     } catch (Exception e) {
-      assert "false".equals(System.getProperty("COMPILED")) : "should not fail in compiled mode";
-      assert e.getMessage().contains("Java class Foo is instantiated but not initialized.");
+      assertTrue(
+          "should not fail in compiled mode", "false".equals(System.getProperty("COMPILED")));
+      assertTrue(e.getMessage().contains("Java class Foo is instantiated but not initialized."));
     }
 
     try {
       createFooJsChild();
-      assert "true".equals(System.getProperty("COMPILED")) : "should fail in uncompiled mode";
+      assertTrue("should fail in uncompiled mode", "true".equals(System.getProperty("COMPILED")));
     } catch (Exception e) {
-      assert "false".equals(System.getProperty("COMPILED")) : "should not fail in compiled mode";
-      assert e.getMessage().contains("Java class Foo is extended by FooChild but not initialized.");
+      assertTrue(
+          "should not fail in compiled mode", "false".equals(System.getProperty("COMPILED")));
+      assertTrue(
+          e.getMessage().contains("Java class Foo is extended by FooChild but not initialized."));
     }
   }
 }

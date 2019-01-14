@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.continuestatement;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 /**
  * Test for continue statement.
  */
@@ -29,7 +31,7 @@ public class Main {
       break;
     }
 
-    assert i == 50;
+    assertTrue(i == 50);
 
     while (true) {
       i++;
@@ -40,7 +42,7 @@ public class Main {
       break;
     }
 
-    assert i == 100;
+    assertTrue(i == 100);
 
     int count = 0;
 
@@ -58,7 +60,7 @@ public class Main {
       break;
     }
 
-    assert count == 100;
+    assertTrue(count == 100);
 
     for (; ; ) {
       count++;
@@ -68,6 +70,6 @@ public class Main {
       break;
     }
 
-    assert count == 101;
+    assertTrue(count == 101);
   }
 }

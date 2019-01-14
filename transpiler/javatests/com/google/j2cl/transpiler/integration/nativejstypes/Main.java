@@ -15,29 +15,31 @@
  */
 package com.google.j2cl.transpiler.integration.nativejstypes;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 public class Main {
   public static void testNativeJsTypeWithNamespace() {
     Foo foo = new Foo();
-    assert foo.sum() == 42;
+    assertTrue(foo.sum() == 42);
     foo.x = 50;
     foo.y = 5;
-    assert foo.sum() == 55;
+    assertTrue(foo.sum() == 55);
   }
 
   public static void testNativeJsTypeWithoutNamespace() {
     Bar bar = new Bar(6, 7);
-    assert bar.product() == 42;
+    assertTrue(bar.product() == 42);
     bar.x = 50;
     bar.y = 5;
-    assert bar.product() == 250;
+    assertTrue(bar.product() == 250);
     Bar.f = 10;
-    assert Bar.f == 10;
+    assertTrue(Bar.f == 10);
   }
 
   public static void testGlobalNativeJsType() {
     Number number22 = new Number(2.2);
     Number number10base2 = Number.parseInt("10", 2);
-    assert number22.toFixed().equals(number10base2.toString());
+    assertTrue(number22.toFixed().equals(number10base2.toString()));
   }
 
   public static void main(String... args) {

@@ -15,7 +15,7 @@
  */
 package com.google.j2cl.transpiler.integration.jsinteroptests;
 
-import static com.google.j2cl.transpiler.integration.jsinteroptests.MyTestCase.assertEquals;
+import static com.google.j2cl.transpiler.utils.Asserts.assertEquals;
 
 import jsinterop.annotations.JsConstructor;
 

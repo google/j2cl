@@ -15,6 +15,9 @@
  */
 package com.google.j2cl.transpiler.integration.bridgemethods;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+import static com.google.j2cl.transpiler.utils.Asserts.fail;
+
 /**
  * Test for complicated cases for bridge methods, which includes bounded type varaibles, multiple
  * inheritance and accidental overrides.
@@ -64,21 +67,21 @@ public class Main {
     Child c = new Child();
     AnotherChild ac = new AnotherChild();
 
-    assert (m.callByInterface(c, new AssertionError()) == 1);
+    assertTrue((m.callByInterface(c, new AssertionError()) == 1));
     try {
       // javac throws a ClassCastException, but eclipse does not.
-      assert (m.callByInterface(c, new Error()) == 1);
-      assert false : "ClassCastException should be thrown.";
+      assertTrue((m.callByInterface(c, new Error()) == 1));
+      fail("ClassCastException should be thrown.");
     } catch (ClassCastException e) {
       // expected.
     }
-    assert (m.callByParent(c, new AssertionError()) == 1);
-    assert (c.foo(new AssertionError()) == 1);
+    assertTrue((m.callByParent(c, new AssertionError()) == 1));
+    assertTrue((c.foo(new AssertionError()) == 1));
 
-    assert (m.callByParent(ac, new Error()) == 1);
-    assert (m.callByParent(ac, new AssertionError()) == 1);
-    assert (m.callByInterface(ac, new AssertionError()) == 2);
-    assert (ac.foo(new AssertionError()) == 2);
-    assert (ac.foo(new Error()) == 1);
+    assertTrue((m.callByParent(ac, new Error()) == 1));
+    assertTrue((m.callByParent(ac, new AssertionError()) == 1));
+    assertTrue((m.callByInterface(ac, new AssertionError()) == 2));
+    assertTrue((ac.foo(new AssertionError()) == 2));
+    assertTrue((ac.foo(new Error()) == 1));
   }
 }

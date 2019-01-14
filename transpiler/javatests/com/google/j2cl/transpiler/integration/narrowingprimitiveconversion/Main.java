@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.narrowingprimitiveconversion;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 public class Main {
   public static void main(String[] args) {
     byte b = 1;
@@ -34,104 +36,104 @@ public class Main {
     double dd = 2415919103.7; // dd > max_int
     double md = 1.7976931348623157E308; // Double.MAX_VALUE;
 
-    assert ((char) b == 1);
+    assertTrue(((char) b == 1));
 
-    assert ((char) mb == 127);
+    assertTrue(((char) mb == 127));
 
-    assert ((byte) c == 97);
-    assert ((short) c == 97);
+    assertTrue(((byte) c == 97));
+    assertTrue(((short) c == 97));
 
-    assert ((byte) mc == -1);
-    assert ((short) mc == -1);
+    assertTrue(((byte) mc == -1));
+    assertTrue(((short) mc == -1));
 
-    assert ((byte) s == 2);
-    assert ((char) s == 2);
+    assertTrue(((byte) s == 2));
+    assertTrue(((char) s == 2));
 
-    assert ((byte) ms == -1);
-    assert ((char) ms == 32767);
+    assertTrue(((byte) ms == -1));
+    assertTrue(((char) ms == 32767));
 
-    assert ((byte) i == 3);
-    assert ((char) i == 3);
-    assert ((short) i == 3);
+    assertTrue(((byte) i == 3));
+    assertTrue(((char) i == 3));
+    assertTrue(((short) i == 3));
 
-    assert ((byte) mi == -1);
-    assert ((char) mi == 65535);
-    assert ((short) mi == -1);
+    assertTrue(((byte) mi == -1));
+    assertTrue(((char) mi == 65535));
+    assertTrue(((short) mi == -1));
 
-    assert ((byte) l == 4);
-    assert ((char) l == 4);
-    assert ((short) l == 4);
-    assert ((int) l == 4);
+    assertTrue(((byte) l == 4));
+    assertTrue(((char) l == 4));
+    assertTrue(((short) l == 4));
+    assertTrue(((int) l == 4));
 
-    assert ((byte) ll == -1);
-    assert ((char) ll == 65535);
-    assert ((short) ll == -1);
-    assert ((int) ll == -1879048193);
+    assertTrue(((byte) ll == -1));
+    assertTrue(((char) ll == 65535));
+    assertTrue(((short) ll == -1));
+    assertTrue(((int) ll == -1879048193));
 
-    assert ((byte) ml == -1);
-    assert ((char) ml == 65535);
-    assert ((short) ml == -1);
-    assert ((int) ml == -1);
+    assertTrue(((byte) ml == -1));
+    assertTrue(((char) ml == 65535));
+    assertTrue(((short) ml == -1));
+    assertTrue(((int) ml == -1));
 
-    assert ((byte) f == 2);
-    assert ((char) f == 2);
-    assert ((short) f == 2);
-    assert ((int) f == 2);
-    assert ((long) f == 2L);
+    assertTrue(((byte) f == 2));
+    assertTrue(((char) f == 2));
+    assertTrue(((short) f == 2));
+    assertTrue(((int) f == 2));
+    assertTrue(((long) f == 2L));
 
-    assert ((byte) mf == -1);
-    assert ((char) mf == 65535);
-    assert ((short) mf == -1);
-    assert ((int) mf == 2147483647);
-    assert ((long) mf == 9223372036854775807L);
+    assertTrue(((byte) mf == -1));
+    assertTrue(((char) mf == 65535));
+    assertTrue(((short) mf == -1));
+    assertTrue(((int) mf == 2147483647));
+    assertTrue(((long) mf == 9223372036854775807L));
 
-    assert ((byte) d == 2);
-    assert ((char) d == 2);
-    assert ((short) d == 2);
-    assert ((int) d == 2);
-    assert ((long) d == 2L);
-    assert ((float) d == d); // we don't honor float-double precision differences
+    assertTrue(((byte) d == 2));
+    assertTrue(((char) d == 2));
+    assertTrue(((short) d == 2));
+    assertTrue(((int) d == 2));
+    assertTrue(((long) d == 2L));
+    assertTrue(((float) d == d)); // we don't honor float-double precision differences
 
-    assert ((byte) dd == -1);
-    assert ((char) dd == 65535);
-    assert ((short) dd == -1);
-    assert ((int) dd == 2147483647);
-    assert ((long) dd == 2415919103L);
-    assert ((float) dd == dd); // we don't honor float-double precision differences
+    assertTrue(((byte) dd == -1));
+    assertTrue(((char) dd == 65535));
+    assertTrue(((short) dd == -1));
+    assertTrue(((int) dd == 2147483647));
+    assertTrue(((long) dd == 2415919103L));
+    assertTrue(((float) dd == dd)); // we don't honor float-double precision differences
 
-    assert ((byte) md == -1);
-    assert ((char) md == 65535);
-    assert ((short) md == -1);
-    assert ((int) md == 2147483647);
-    assert ((long) md == 9223372036854775807L);
-    assert ((float) md == md); // we don't honor float-double precision differences
+    assertTrue(((byte) md == -1));
+    assertTrue(((char) md == 65535));
+    assertTrue(((short) md == -1));
+    assertTrue(((int) md == 2147483647));
+    assertTrue(((long) md == 9223372036854775807L));
+    assertTrue(((float) md == md)); // we don't honor float-double precision differences
 
     int n = 5;
-    assert 2 * (n / 2) == 4;
+    assertTrue(2 * (n / 2) == 4);
 
     // JLS 5.1.4
     float fmin = Float.NEGATIVE_INFINITY;
     float fmax = Float.POSITIVE_INFINITY;
     float fnan = Float.NaN;
 
-    assert (long) fmin == Long.MIN_VALUE;
-    assert (long) fmax == Long.MAX_VALUE;
-    assert (long) fnan == 0L;
+    assertTrue((long) fmin == Long.MIN_VALUE);
+    assertTrue((long) fmax == Long.MAX_VALUE);
+    assertTrue((long) fnan == 0L);
 
-    assert (int) fmin == Integer.MIN_VALUE;
-    assert (int) fmax == Integer.MAX_VALUE;
-    assert (int) fnan == 0;
+    assertTrue((int) fmin == Integer.MIN_VALUE);
+    assertTrue((int) fmax == Integer.MAX_VALUE);
+    assertTrue((int) fnan == 0);
 
-    assert (short) fmin == (short) Integer.MIN_VALUE;
-    assert (short) fmax == (short) Integer.MAX_VALUE;
-    assert (short) fnan == (short) 0;
+    assertTrue((short) fmin == (short) Integer.MIN_VALUE);
+    assertTrue((short) fmax == (short) Integer.MAX_VALUE);
+    assertTrue((short) fnan == (short) 0);
 
-    assert (byte) fmin == (byte) Integer.MIN_VALUE;
-    assert (byte) fmax == (byte) Integer.MAX_VALUE;
-    assert (byte) fnan == (byte) 0;
+    assertTrue((byte) fmin == (byte) Integer.MIN_VALUE);
+    assertTrue((byte) fmax == (byte) Integer.MAX_VALUE);
+    assertTrue((byte) fnan == (byte) 0);
 
-    assert (char) fmin == (char) Integer.MIN_VALUE;
-    assert (char) fmax == (char) Integer.MAX_VALUE;
-    assert (char) fnan == (char) 0;
+    assertTrue((char) fmin == (char) Integer.MIN_VALUE);
+    assertTrue((char) fmax == (char) Integer.MAX_VALUE);
+    assertTrue((char) fnan == (char) 0);
   }
 }

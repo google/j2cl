@@ -15,49 +15,51 @@
  */
 package com.google.j2cl.transpiler.integration.jsinteroptests;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertEquals;
+import static com.google.j2cl.transpiler.utils.Asserts.assertFalse;
+import static com.google.j2cl.transpiler.utils.Asserts.assertNotNull;
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 import com.google.j2cl.transpiler.integration.jsinteroptests.MyExportedClass.InnerClass;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
-/**
- * Tests presence and naming of exported classes, fields, and methods.
- */
-public class JsExportTest extends MyTestCase {
+/** Tests presence and naming of exported classes, fields, and methods. */
+public class JsExportTest {
   public static void testAll() {
-    JsExportTest test = new JsExportTest();
-    test.testClinit_staticField();
-    test.testClinit_staticMethod();
-    test.testClinit_virtualMethod();
-    test.testClinit();
-    test.testEnum_enumerations();
-    test.testEnum_exportedFields();
-    test.testEnum_exportedMethods();
-    test.testEnum_notExported();
-    test.testEnum_subclassEnumerations();
-    test.testEnum_subclassMethodCallFromExportedEnumerations();
-    test.testExportClass_correctNamespace();
-    test.testExportClass_implicitConstructor();
-    test.testExportConstructors();
-    test.testExportedField();
-    test.testExportedFieldRefInExportedMethod();
-    test.testExportedMethod();
-    test.testInheritClassNamespace();
-    test.testInheritClassNamespace_nested();
-    test.testInheritClassNamespace_nestedNoExport();
-    test.testInheritClassNamespace_noExport();
-    test.testInheritClassNamespace_withName();
-    test.testInheritPackageNamespace_nestedClass();
-    test.testInheritPackageNamespace_nestedEnum();
-    test.testInheritPackageNamespace_subpackage();
-    test.testInheritPackageNamespace();
-    test.testMethodExport_notReferencedFromJava();
-    test.testMethodExport();
-    test.testMethodExportWithLong();
-    test.testNoExport();
+    testClinit_staticField();
+    testClinit_staticMethod();
+    testClinit_virtualMethod();
+    testClinit();
+    testEnum_enumerations();
+    testEnum_exportedFields();
+    testEnum_exportedMethods();
+    testEnum_notExported();
+    testEnum_subclassEnumerations();
+    testEnum_subclassMethodCallFromExportedEnumerations();
+    testExportClass_correctNamespace();
+    testExportClass_implicitConstructor();
+    testExportConstructors();
+    testExportedField();
+    testExportedFieldRefInExportedMethod();
+    testExportedMethod();
+    testInheritClassNamespace();
+    testInheritClassNamespace_nested();
+    testInheritClassNamespace_nestedNoExport();
+    testInheritClassNamespace_noExport();
+    testInheritClassNamespace_withName();
+    testInheritPackageNamespace_nestedClass();
+    testInheritPackageNamespace_nestedEnum();
+    testInheritPackageNamespace_subpackage();
+    testInheritPackageNamespace();
+    testMethodExport_notReferencedFromJava();
+    testMethodExport();
+    testMethodExportWithLong();
+    testNoExport();
   }
 
-  public void testMethodExport() {
+  private static void testMethodExport() {
     myClassExportsMethodCallMe4();
     assertTrue(MyClassExportsMethod.calledFromCallMe4);
 
@@ -71,7 +73,7 @@ public class JsExportTest extends MyTestCase {
   @JsMethod(namespace = "woo.MyClassExportsMethod", name = "callMe5")
   private static native void myClassExportsMethodCallMe5();
 
-  public void testMethodExportWithLong() {
+  private static void testMethodExportWithLong() {
     NativeMyJsTypeThatUsesLongType obj = new NativeMyJsTypeThatUsesLongType();
 
     assertEquals(42L, obj.addLong(40L, 2L));
@@ -89,7 +91,7 @@ public class JsExportTest extends MyTestCase {
     public static native long addLongStatic(long a, long b);
   }
 
-  public void testMethodExport_notReferencedFromJava() {
+  private static void testMethodExport_notReferencedFromJava() {
     // Exported by MyClassExportsMethodWithoutReference which is not referenced by Java. This
     // ensures that we correctly collect root types.
     assertEquals(42, onlyCalledFromJs());
@@ -99,7 +101,7 @@ public class JsExportTest extends MyTestCase {
       namespace = "woo.MyClassExportsMethodWithoutReference", name = "onlyCalledFromJs")
   private static native int onlyCalledFromJs();
 
-  public void testClinit() {
+  private static void testClinit() {
     new NativeMyClassExportsMethodWithClinit();
     assertEquals(23, MyClassExportsMethodWithClinit.magicNumber);
   }
@@ -111,7 +113,7 @@ public class JsExportTest extends MyTestCase {
   @JsType(isNative = true, namespace = "woo", name = "MyClassExportsMethodWithClinit")
   private static class NativeMyClassExportsMethodWithClinit {}
 
-  public void testClinit_staticField() {
+  private static void testClinit_staticField() {
     assertNotNull(getStaticInitializerStaticFieldExported1());
     assertNotNull(getStaticInitializerStaticFieldExported2());
     assertNotNull(getStaticInitializerStaticFieldInterfaceStatic());
@@ -126,14 +128,14 @@ public class JsExportTest extends MyTestCase {
   @JsProperty(namespace = "woo.StaticInitializerStaticField.InterfaceWithField", name = "STATIC")
   private static native Object getStaticInitializerStaticFieldInterfaceStatic();
 
-  public void testClinit_staticMethod() {
+  private static void testClinit_staticMethod() {
     assertNotNull(getStaticInitializerStaticMethod());
   }
 
   @JsMethod(namespace = "woo.StaticInitializerStaticMethod", name = "getInstance")
   private static native Object getStaticInitializerStaticMethod();
 
-  public void testClinit_virtualMethod() {
+  private static void testClinit_virtualMethod() {
     NativeStaticInitializerVirtualMethod instance1 = new NativeStaticInitializerVirtualMethod();
     assertNotNull(instance1);
     NativeStaticInitializerVirtualMethod instance2 = instance1.getInstance();
@@ -154,7 +156,7 @@ public class JsExportTest extends MyTestCase {
     public MyExportedClassCorrectNamespace() { }
   }
 
-  public void testExportClass_correctNamespace() {
+  private static void testExportClass_correctNamespace() {
     Object o = new NativeMyExportedClassCorrectNamespace();
     assertTrue(o instanceof MyExportedClassCorrectNamespace);
   }
@@ -162,7 +164,7 @@ public class JsExportTest extends MyTestCase {
   @JsType(isNative = true, namespace = "bar.foo.baz", name = "MyExportedClassCorrectNamespace")
   private static class NativeMyExportedClassCorrectNamespace { }
 
-  public void testExportClass_implicitConstructor() {
+  private static void testExportClass_implicitConstructor() {
     Object o = new NativeMyExportedClassWithImplicitConstructor();
     assertNotNull(o);
     assertTrue(o instanceof MyExportedClassWithImplicitConstructor);
@@ -171,7 +173,7 @@ public class JsExportTest extends MyTestCase {
   @JsType(isNative = true, namespace = "woo", name = "MyExportedClassWithImplicitConstructor")
   private static class NativeMyExportedClassWithImplicitConstructor { }
 
-  public void testExportConstructors() {
+  private static void testExportConstructors() {
     MyClassExportsConstructor nativeMyClassExportsConstructor =
         (MyClassExportsConstructor) (Object) new NativeMyClassExportsConstructor(2);
     assertEquals(4, nativeMyClassExportsConstructor.foo());
@@ -183,7 +185,7 @@ public class JsExportTest extends MyTestCase {
     public NativeMyClassExportsConstructor(@SuppressWarnings("unused") int a) {}
   }
 
-  public void testExportedField() {
+  private static void testExportedField() {
     assertEquals(100, MyExportedClass.EXPORTED_1);
     assertEquals(100, getExportedField());
 
@@ -199,7 +201,7 @@ public class JsExportTest extends MyTestCase {
   @JsProperty(namespace = "woo.MyExportedClass", name = "EXPORTED_1")
   private static native void setExportedField(int value);
 
-  public void testExportedMethod() {
+  private static void testExportedMethod() {
     assertEquals(200, MyExportedClass.foo());
     assertEquals(200, callExportedMethod());
 
@@ -221,7 +223,7 @@ public class JsExportTest extends MyTestCase {
       namespace = "woo.MyExportedClass", name = "replacementFoo")
   private static native Object getReplacementExportedMethod();
 
-  public void testExportedFieldRefInExportedMethod() {
+  private static void testExportedFieldRefInExportedMethod() {
     assertEquals(5, MyExportedClass.bar(0, 0));
     assertEquals(5, callExportedFieldByExportedMethod(0, 0));
     setExportedField2(myExportedClassNewInnerClass(10));
@@ -244,7 +246,7 @@ public class JsExportTest extends MyTestCase {
   @JsProperty(namespace = "woo.MyExportedClass", name = "EXPORTED_2.field")
   private static native int getExportedField2();
 
-  public void testNoExport() {
+  private static void testNoExport() {
     Object staticInitializerStaticMethodCtor =
         PropertyUtils.toCtor(StaticInitializerStaticMethod.class);
     assertFalse(PropertyUtils.hasNotExported_1(staticInitializerStaticMethodCtor));
@@ -259,28 +261,28 @@ public class JsExportTest extends MyTestCase {
     assertFalse(PropertyUtils.hasNOT_EXPORTED_5(staticInitializerStaticFieldCtor));
   }
 
-  public void testInheritClassNamespace() {
+  private static void testInheritClassNamespace() {
     assertEquals(42, getBAR());
   }
 
   @JsProperty(namespace = "foo.MyExportedClassWithNamespace", name = "BAR")
   private static native int getBAR();
 
-  public void testInheritClassNamespace_withName() {
+  private static void testInheritClassNamespace_withName() {
     assertEquals(42, getBooBAR());
   }
 
   @JsProperty(namespace = "foo.boo", name = "BAR")
   private static native int getBooBAR();
 
-  public void testInheritClassNamespace_noExport() {
+  private static void testInheritClassNamespace_noExport() {
     assertEquals(99, getBAZ());
   }
 
   @JsProperty(namespace = "foobaz.MyClassWithNamespace", name = "BAZ")
   private static native int getBAZ();
 
-  public void testInheritClassNamespace_nested() {
+  private static void testInheritClassNamespace_nested() {
     assertEquals(99, getLOO());
     assertNotNull(new BlooInner());
   }
@@ -291,7 +293,7 @@ public class JsExportTest extends MyTestCase {
   @JsType(isNative = true, namespace = "woo.Bloo", name = "Inner")
   private static class BlooInner {}
 
-  public void testInheritClassNamespace_nestedNoExport() {
+  private static void testInheritClassNamespace_nestedNoExport() {
     assertEquals(999, getWOOZ());
     assertNotNull(new NativeInnerWithNamespace());
   }
@@ -302,14 +304,14 @@ public class JsExportTest extends MyTestCase {
   @JsType(isNative = true, namespace = "zoo", name = "InnerWithNamespace")
   private static class NativeInnerWithNamespace { }
 
-  public void testInheritPackageNamespace() {
+  private static void testInheritPackageNamespace() {
     assertEquals(1001, getWOO());
   }
 
   @JsProperty(namespace = "woo.MyExportedClassWithPackageNamespace", name = "WOO")
   private static native int getWOO();
 
-  public void testInheritPackageNamespace_nestedClass() {
+  private static void testInheritPackageNamespace_nestedClass() {
     assertEquals(99, getNestedWOO());
     assertNotNull(new NativeMyClassWithNestedExportedClassInner());
   }
@@ -320,14 +322,14 @@ public class JsExportTest extends MyTestCase {
   @JsType(isNative = true, namespace = "woo.MyClassWithNestedExportedClass", name = "Inner")
   private static class NativeMyClassWithNestedExportedClassInner {}
 
-  public void testInheritPackageNamespace_nestedEnum() {
+  private static void testInheritPackageNamespace_nestedEnum() {
     assertNotNull(getNestedEnum());
   }
 
   @JsProperty(namespace = "woo.MyClassWithNestedExportedClass.InnerEnum", name = "AA")
   private static native Object getNestedEnum();
 
-  public void testInheritPackageNamespace_subpackage() {
+  private static void testInheritPackageNamespace_subpackage() {
     assertNotNull(new NativeMyNestedExportedClassSansPackageNamespace());
   }
 
@@ -337,7 +339,7 @@ public class JsExportTest extends MyTestCase {
       name = "MyNestedExportedClassSansPackageNamespace")
   private static class NativeMyNestedExportedClassSansPackageNamespace {}
 
-  public void testEnum_enumerations() {
+  private static void testEnum_enumerations() {
     assertNotNull(getEnumerationTEST1());
     assertNotNull(getEnumerationTEST2());
   }
@@ -348,7 +350,7 @@ public class JsExportTest extends MyTestCase {
   @JsProperty(namespace = "woo.MyExportedEnum", name = "TEST2")
   private static native Object getEnumerationTEST2();
 
-  public void testEnum_exportedMethods() {
+  private static void testEnum_exportedMethods() {
     assertNotNull(getPublicStaticMethodInEnum());
     assertNotNull(getValuesMethodInEnum());
     assertNotNull(getValueOfMethodInEnum());
@@ -363,7 +365,7 @@ public class JsExportTest extends MyTestCase {
   @JsProperty(namespace = "woo.MyExportedEnum", name = "valueOf")
   private static native Object getValueOfMethodInEnum();
 
-  public void testEnum_exportedFields() {
+  private static void testEnum_exportedFields() {
     assertEquals(1, getPublicStaticFinalFieldInEnum());
 
     // explicitly marked @JsType() fields must be final
@@ -377,7 +379,7 @@ public class JsExportTest extends MyTestCase {
   @JsProperty(namespace = "woo.MyExportedEnum", name = "publicStaticField")
   private static native int getPublicStaticFieldInEnum();
 
-  public void testEnum_notExported() {
+  private static void testEnum_notExported() {
     Object enumClassCtor = PropertyUtils.toCtor(MyExportedEnum.class);
     assertFalse(PropertyUtils.hasPublicFinalField(enumClassCtor));
     assertFalse(PropertyUtils.hasPrivateStaticFinalField(enumClassCtor));
@@ -390,7 +392,7 @@ public class JsExportTest extends MyTestCase {
     assertFalse(PropertyUtils.hasDefaultStaticMethod(enumClassCtor));
   }
 
-  public void testEnum_subclassEnumerations() {
+  private static void testEnum_subclassEnumerations() {
     assertNotNull(getEnumerationA());
     assertNotNull(getEnumerationB());
     assertNotNull(getEnumerationC());
@@ -405,7 +407,7 @@ public class JsExportTest extends MyTestCase {
   @JsProperty(namespace = "woo.MyEnumWithSubclassGen", name = "C")
   private static native Object getEnumerationC();
 
-  public void testEnum_subclassMethodCallFromExportedEnumerations() {
+  private static void testEnum_subclassMethodCallFromExportedEnumerations() {
     assertEquals(100, callPublicMethodFromEnumerationA());
     assertEquals(200, callPublicMethodFromEnumerationB());
     assertEquals(1, callPublicMethodFromEnumerationC());

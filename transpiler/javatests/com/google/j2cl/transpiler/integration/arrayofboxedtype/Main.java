@@ -15,80 +15,87 @@
  */
 package com.google.j2cl.transpiler.integration.arrayofboxedtype;
 
+import static com.google.j2cl.transpiler.utils.Asserts.fail;
+
 public class Main {
-  public void insertByteException(Object[] array) {
+  public static void main(String[] args) {
+    testArrayInsertion();
+    testArrayCast();
+  }
+
+  private static void insertByteException(Object[] array) {
     try {
       array[0] = new Byte((byte) 1);
-      assert false : "An expected failure did not occur.";
+      fail("An expected failure did not occur.");
     } catch (ArrayStoreException e) {
       // expected
     }
   }
 
-  public void insertDoubleException(Object[] array) {
+  private static void insertDoubleException(Object[] array) {
     try {
       array[0] = new Double(1.0);
-      assert false : "An expected failure did not occur.";
+      fail("An expected failure did not occur.");
     } catch (ArrayStoreException e) {
       // expected
     }
   }
 
-  public void insertFloatException(Object[] array) {
+  private static void insertFloatException(Object[] array) {
     try {
       array[0] = new Float(1.0f);
-      assert false : "An expected failure did not occur.";
+      fail("An expected failure did not occur.");
     } catch (ArrayStoreException e) {
       // expected
     }
   }
 
-  public void insertIntegerException(Object[] array) {
+  private static void insertIntegerException(Object[] array) {
     try {
       array[0] = new Integer(1);
-      assert false : "An expected failure did not occur.";
+      fail("An expected failure did not occur.");
     } catch (ArrayStoreException e) {
       // expected
     }
   }
 
-  public void insertLongException(Object[] array) {
+  private static void insertLongException(Object[] array) {
     try {
       array[0] = new Long(1L);
-      assert false : "An expected failure did not occur.";
+      fail("An expected failure did not occur.");
     } catch (ArrayStoreException e) {
       // expected
     }
   }
 
-  public void insertShortException(Object[] array) {
+  private static void insertShortException(Object[] array) {
     try {
       array[0] = new Short((short) 1);
-      assert false : "An expected failure did not occur.";
+      fail("An expected failure did not occur.");
     } catch (ArrayStoreException e) {
       // expected
     }
   }
 
-  public void insertCharacterException(Object[] array) {
+  private static void insertCharacterException(Object[] array) {
     try {
       array[0] = new Character('a');
-      assert false : "An expected failure did not occur.";
+      fail("An expected failure did not occur.");
     } catch (ArrayStoreException e) {
       // expected
     }
   }
 
-  public void insertBooleanException(Object[] array) {
+  private static void insertBooleanException(Object[] array) {
     try {
       array[0] = new Boolean(true);
-      assert false : "An expected failure did not occur.";
+      fail("An expected failure did not occur.");
     } catch (ArrayStoreException e) {
       // expected
     }
   }
 
-  public void testArrayInsertion() {
+  private static void testArrayInsertion() {
     Object[] byteArray = new Byte[2];
     byteArray[0] = new Byte((byte) 1);
     insertBooleanException(byteArray);
@@ -193,97 +200,97 @@ public class Main {
   }
 
   @SuppressWarnings("unused")
-  public void castToByteException(Object[] array) {
+  private static void castToByteException(Object[] array) {
     try {
       Byte[] byteArray = (Byte[]) array;
-      assert false : "An expected failure did not occur.";
+      fail("An expected failure did not occur.");
     } catch (ClassCastException e) {
       // expected
     }
   }
 
   @SuppressWarnings("unused")
-  public void castToDoubleException(Object[] array) {
+  private static void castToDoubleException(Object[] array) {
     try {
       Double[] doubleArray = (Double[]) array;
-      assert false : "An expected failure did not occur.";
+      fail("An expected failure did not occur.");
     } catch (ClassCastException e) {
       // expected
     }
   }
 
   @SuppressWarnings("unused")
-  public void castToFloatException(Object[] array) {
+  private static void castToFloatException(Object[] array) {
     try {
       Float[] floatArray = (Float[]) array;
-      assert false : "An expected failure did not occur.";
+      fail("An expected failure did not occur.");
     } catch (ClassCastException e) {
       // expected
     }
   }
 
   @SuppressWarnings("unused")
-  public void castToIntegerException(Object[] array) {
+  private static void castToIntegerException(Object[] array) {
     try {
       Integer[] integerArray = (Integer[]) array;
-      assert false : "An expected failure did not occur.";
+      fail("An expected failure did not occur.");
     } catch (ClassCastException e) {
       // expected
     }
   }
 
   @SuppressWarnings("unused")
-  public void castToLongException(Object[] array) {
+  private static void castToLongException(Object[] array) {
     try {
       Long[] longArray = (Long[]) array;
-      assert false : "An expected failure did not occur.";
+      fail("An expected failure did not occur.");
     } catch (ClassCastException e) {
       // expected
     }
   }
 
   @SuppressWarnings("unused")
-  public void castToShortException(Object[] array) {
+  private static void castToShortException(Object[] array) {
     try {
       Short[] shortArray = (Short[]) array;
-      assert false : "An expected failure did not occur.";
+      fail("An expected failure did not occur.");
     } catch (ClassCastException e) {
       // expected
     }
   }
 
   @SuppressWarnings("unused")
-  public void castToCharacterException(Object[] array) {
+  private static void castToCharacterException(Object[] array) {
     try {
       Character[] characterArray = (Character[]) array;
-      assert false : "An expected failure did not occur.";
+      fail("An expected failure did not occur.");
     } catch (ClassCastException e) {
       // expected
     }
   }
 
   @SuppressWarnings("unused")
-  public void castToBooleanException(Object[] array) {
+  private static void castToBooleanException(Object[] array) {
     try {
       Boolean[] booleanArray = (Boolean[]) array;
-      assert false : "An expected failure did not occur.";
+      fail("An expected failure did not occur.");
     } catch (ClassCastException e) {
       // expected
     }
   }
 
   @SuppressWarnings("unused")
-  public void castToNumberException(Object[] array) {
+  private static void castToNumberException(Object[] array) {
     try {
       Number[] numberArray = (Number[]) array;
-      assert false : "An expected failure did not occur.";
+      fail("An expected failure did not occur.");
     } catch (ClassCastException e) {
       // expected
     }
   }
 
   @SuppressWarnings("unused")
-  public void testArrayCast() {
+  private static void testArrayCast() {
     Object[] byteArray = new Byte[2];
     Byte[] bArray = (Byte[]) byteArray;
     Number[] nArray = (Number[]) byteArray;
@@ -393,13 +400,13 @@ public class Main {
     Object o2 = new double[2];
     try {
       double[] d1 = (double[]) o1;
-      assert false : "An expected failure did not occur.";
+      fail("An expected failure did not occur.");
     } catch (ClassCastException e) {
       // expected
     }
     try {
       Double[] d2 = (Double[]) o2;
-      assert false : "An expected failure did not occur.";
+      fail("An expected failure did not occur.");
     } catch (ClassCastException e) {
       // expected
     }
@@ -409,21 +416,15 @@ public class Main {
     Object o4 = new boolean[2];
     try {
       boolean[] b3 = (boolean[]) o3;
-      assert false : "An expected failure did not occur.";
+      fail("An expected failure did not occur.");
     } catch (ClassCastException e) {
       // expected
     }
     try {
       Boolean[] b4 = (Boolean[]) o4;
-      assert false : "An expected failure did not occur.";
+      fail("An expected failure did not occur.");
     } catch (ClassCastException e) {
       // expected
     }
-  }
-
-  public static void main(String[] args) {
-    Main m = new Main();
-    m.testArrayInsertion();
-    m.testArrayCast();
   }
 }

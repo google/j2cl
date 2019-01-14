@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.anonymousclasswithcaptures;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 public class Main {
   interface AnonymousInterface {
     void foo();
@@ -49,11 +51,11 @@ public class Main {
 
     i.foo();
 
-    assert instances[0] == i;
-    assert instances[1] == i;
-    assert instances[2] == this;
+    assertTrue(instances[0] == i);
+    assertTrue(instances[1] == i);
+    assertTrue(instances[2] == this);
 
-    assert new SomeClass(3) {}.foo() == 3;
+    assertTrue(new SomeClass(3) {}.foo() == 3);
   }
 
   public static void main(String... args) {

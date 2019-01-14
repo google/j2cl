@@ -15,22 +15,24 @@
  */
 package com.google.j2cl.transpiler.integration.cascadedstaticinit;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 /**
  * Test cascaded static initializers run only once.
  */
 public class Main {
   public static void main(String... args) {
     // Bar's initializer defines it to be 5;
-    assert getBar() == 5;
+    assertTrue(getBar() == 5);
     // Foo's initializer defines it to be bar * 5;
-    assert getFoo() == 25;
+    assertTrue(getFoo() == 25);
 
     // If you change Bar then Foo won't update because it's initializer only runs once.
     setBar(10);
-    assert getBar() == 10;
-    assert getFoo() == 25;
-    assert getFoo() == 25;
-    assert getFoo() == 25;
+    assertTrue(getBar() == 10);
+    assertTrue(getFoo() == 25);
+    assertTrue(getFoo() == 25);
+    assertTrue(getFoo() == 25);
   }
 
   public static int getBar() {

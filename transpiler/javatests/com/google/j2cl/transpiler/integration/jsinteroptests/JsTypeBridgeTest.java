@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.jsinteroptests;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 import jsinterop.annotations.JsType;
 
 public class JsTypeBridgeTest {
@@ -83,6 +85,6 @@ public class JsTypeBridgeTest {
   }
 
   private void assertEquals(Object expect, Object actual) {
-    assert expect.equals(actual);
+    assertTrue(expect.equals(actual));
   }
 }

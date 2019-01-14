@@ -15,6 +15,9 @@
  */
 package com.google.j2cl.transpiler.integration.bridgemethodbasic;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+import static com.google.j2cl.transpiler.utils.Asserts.fail;
+
 class Parent<T> {
   @SuppressWarnings("unused")
   public T foo(T t) {
@@ -56,13 +59,14 @@ public class Main {
     Child c = new Child();
     AnotherChild ac = new AnotherChild();
 
-    assert m.test(c, ae) == ae;
-    assert m.test(c, ae) == c.foo(ae);
-    assert m.test(ac, ae) == null;
-    assert m.test(ac, o) == null; // no ClassCastException.
+    assertTrue(m.test(c, ae) == ae);
+    assertTrue(m.test(c, ae) == c.foo(ae));
+    assertTrue(m.test(ac, ae) == null);
+    assertTrue(m.test(ac, o) == null); // no ClassCastException.
     try {
-      assert m.test(c, o) == o; // casting o to AssertionError, should cause ClassCastException.
-      assert false : "ClassCastException should be thrown";
+      assertTrue(
+          m.test(c, o) == o); // casting o to AssertionError, should cause ClassCastException.
+      fail("ClassCastException should be thrown");
     } catch (ClassCastException e) {
       // expected.
     }

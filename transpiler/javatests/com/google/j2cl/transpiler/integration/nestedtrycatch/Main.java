@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.nestedtrycatch;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 /**
  * Test nested try catch.
  */
@@ -29,10 +31,10 @@ public class Main {
       try {
         notThrowException();
       } catch (ClassCastException ie) {
-        assert false; // No exception was thrown so shouldn't reach catch block.
+        assertTrue(false); // No exception was thrown so shouldn't reach catch block.
       }
     } finally {
-      assert count == 2; // first catch block is executed.
+      assertTrue(count == 2); // first catch block is executed.
     }
   }
 

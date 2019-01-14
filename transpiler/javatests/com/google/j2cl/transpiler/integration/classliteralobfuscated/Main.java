@@ -15,11 +15,14 @@
  */
 package com.google.j2cl.transpiler.integration.classliteralobfuscated;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 /** Does nothing. Exists to check optimized size. */
 public class Main {
   public static void main(String... args) {
-    assert !Main.class
-        .getName()
-        .equals("com.google.j2cl.transpiler.integration.classliteralobfuscated.Main");
+    assertTrue(
+        !Main.class
+            .getName()
+            .equals("com.google.j2cl.transpiler.integration.classliteralobfuscated.Main"));
   }
 }

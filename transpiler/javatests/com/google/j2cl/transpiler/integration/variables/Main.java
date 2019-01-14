@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.variables;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 /** A class that has the same simple name of the runtime class Asserts */
 class Asserts {}
 
@@ -31,19 +33,19 @@ public class Main {
     int Asserts = 1;
     int $Asserts = 2;
     int l_Asserts = 3;
-    assert Main && !(new Object() instanceof Main);
-    assert a instanceof Asserts;
-    assert Asserts == 1;
-    assert $Asserts == 2;
-    assert l_Asserts == 3;
+    assertTrue(Main && !(new Object() instanceof Main));
+    assertTrue(a instanceof Asserts);
+    assertTrue(Asserts == 1);
+    assertTrue($Asserts == 2);
+    assertTrue(l_Asserts == 3);
   }
 
   private static void testClassParameterCollision(
       boolean Main, Object Asserts, Object $Asserts, int l_Asserts) {
-    assert Main;
-    assert Asserts instanceof Asserts;
-    assert $Asserts instanceof CollisionInConstructor;
-    assert l_Asserts == 1;
+    assertTrue(Main);
+    assertTrue(Asserts instanceof Asserts);
+    assertTrue($Asserts instanceof CollisionInConstructor);
+    assertTrue(l_Asserts == 1);
   }
 
   private static class CollisionInConstructor {
@@ -51,10 +53,10 @@ public class Main {
 
     CollisionInConstructor(
         boolean CollisionInConstructor, Object Asserts, Object $Asserts, int l_Asserts) {
-      assert CollisionInConstructor;
-      assert Asserts instanceof Asserts;
-      assert $Asserts instanceof CollisionInConstructor;
-      assert l_Asserts == 1;
+      assertTrue(CollisionInConstructor);
+      assertTrue(Asserts instanceof Asserts);
+      assertTrue($Asserts instanceof CollisionInConstructor);
+      assertTrue(l_Asserts == 1);
     }
   }
 
@@ -64,7 +66,7 @@ public class Main {
 
   private static void testVariableInference() {
     var str = "String";
-    assert str instanceof String;
+    assertTrue(str instanceof String);
 
     // The type of anonymous is not Runnable but the actual anonymous class which is non-denotable.
     var anonymous = new Runnable() {
@@ -76,11 +78,11 @@ public class Main {
       }
     };
 
-    assert "Hello".equals(anonymous.exposedMethod());
+    assertTrue("Hello".equals(anonymous.exposedMethod()));
   }
 
   public static void main(String... args) {
-    assert testJSKeywords(10) == 110;
+    assertTrue(testJSKeywords(10) == 110);
     testClassLocalVarCollision();
     testClassParameterCollision(true, new Asserts(), new CollisionInConstructor(), 1);
     testClassParameterCollisionInConstructor();

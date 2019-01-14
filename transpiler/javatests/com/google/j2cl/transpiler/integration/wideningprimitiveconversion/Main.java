@@ -15,28 +15,30 @@
  */
 package com.google.j2cl.transpiler.integration.wideningprimitiveconversion;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 public class Main {
   private static class ClassTakesDouble {
     public ClassTakesDouble(double widenValue, double expectValue) {
-      assert widenValue == expectValue;
+      assertTrue(widenValue == expectValue);
     }
   }
 
   private static class ClassTakesFloat {
     public ClassTakesFloat(float widenValue, float expectValue) {
-      assert widenValue == expectValue;
+      assertTrue(widenValue == expectValue);
     }
   }
 
   private static class ClassTakesInt {
     public ClassTakesInt(int widenValue, int expectValue) {
-      assert widenValue == expectValue;
+      assertTrue(widenValue == expectValue);
     }
   }
 
   private static class ClassTakesLong {
     public ClassTakesLong(long widenValue, long expectValue) {
-      assert widenValue == expectValue;
+      assertTrue(widenValue == expectValue);
     }
   }
 
@@ -69,19 +71,19 @@ public class Main {
   }
 
   private static void takesDouble(double widenValue, double expectValue) {
-    assert widenValue == expectValue;
+    assertTrue(widenValue == expectValue);
   }
 
   private static void takesFloat(float widenValue, float expectValue) {
-    assert widenValue == expectValue;
+    assertTrue(widenValue == expectValue);
   }
 
   private static void takesInt(int widenValue, int expectValue) {
-    assert widenValue == expectValue;
+    assertTrue(widenValue == expectValue);
   }
 
   private static void takesLong(long widenValue, long expectValue) {
-    assert widenValue == expectValue;
+    assertTrue(widenValue == expectValue);
   }
 
   private static void testArraysAssignment() {
@@ -90,11 +92,11 @@ public class Main {
 
     // Arrays
     int[] ints = new int[c];
-    assert ints.length == 97;
+    assertTrue(ints.length == 97);
     ints[b] = b;
-    assert ints[1] == 1;
+    assertTrue(ints[1] == 1);
     double[] doubles = new double[] {100L, 200L, 300L};
-    assert doubles[0] == 100d;
+    assertTrue(doubles[0] == 100d);
   }
 
   private static void testAssignment() {
@@ -124,39 +126,39 @@ public class Main {
     double d = 2.6;
 
     // Anything below int promotes to int.
-    assert (mb * mb) == ((int) mb * (int) mb);
-    assert (mb * mc) == ((int) mb * (int) mc);
-    assert (mb * ms) == ((int) mb * (int) ms);
-    assert (mb * mi) == ((int) mb * (int) mi);
+    assertTrue((mb * mb) == ((int) mb * (int) mb));
+    assertTrue((mb * mc) == ((int) mb * (int) mc));
+    assertTrue((mb * ms) == ((int) mb * (int) ms));
+    assertTrue((mb * mi) == ((int) mb * (int) mi));
 
     // If there is a long then anything below long promotes to long.
-    assert (l * mb) == ((long) l * (long) mb);
-    assert (l * mc) == ((long) l * (long) mc);
-    assert (l * ms) == ((long) l * (long) ms);
-    assert (l * mi) == ((long) l * (long) mi);
+    assertTrue((l * mb) == ((long) l * (long) mb));
+    assertTrue((l * mc) == ((long) l * (long) mc));
+    assertTrue((l * ms) == ((long) l * (long) ms));
+    assertTrue((l * mi) == ((long) l * (long) mi));
 
     // If there is a float then anything below float promotes to float.
-    assert (f * mb) == ((float) f * (float) mb);
-    assert (f * mc) == ((float) f * (float) mc);
-    assert (f * ms) == ((float) f * (float) ms);
-    assert (f * mi) == ((float) f * (float) mi);
-    assert (f * ml) == ((float) f * (float) ml);
+    assertTrue((f * mb) == ((float) f * (float) mb));
+    assertTrue((f * mc) == ((float) f * (float) mc));
+    assertTrue((f * ms) == ((float) f * (float) ms));
+    assertTrue((f * mi) == ((float) f * (float) mi));
+    assertTrue((f * ml) == ((float) f * (float) ml));
 
     // If there is a double then anything below double promotes to double.
-    assert (d * mb) == ((double) d * (double) mb);
-    assert (d * mc) == ((double) d * (double) mc);
-    assert (d * ms) == ((double) d * (double) ms);
-    assert (d * mi) == ((double) d * (double) mi);
-    assert (d * ml) == ((double) d * (double) ml);
-    assert (d * mf) == ((double) d * (double) mf);
+    assertTrue((d * mb) == ((double) d * (double) mb));
+    assertTrue((d * mc) == ((double) d * (double) mc));
+    assertTrue((d * ms) == ((double) d * (double) ms));
+    assertTrue((d * mi) == ((double) d * (double) mi));
+    assertTrue((d * ml) == ((double) d * (double) ml));
+    assertTrue((d * mf) == ((double) d * (double) mf));
 
     // And with equality operators.
-    assert i == l - 1L;
-    assert i != l;
-    assert i < l;
-    assert !(i > l);
-    assert i <= l;
-    assert !(i >= l);
+    assertTrue(i == l - 1L);
+    assertTrue(i != l);
+    assertTrue(i < l);
+    assertTrue(!(i > l));
+    assertTrue(i <= l);
+    assertTrue(!(i >= l));
   }
 
   private static void testCast() {
@@ -175,59 +177,59 @@ public class Main {
     float mf = 3.4028235E38f; // Float.MAX_VALUE;
     double d = 2.6;
 
-    assert ((short) b == 1);
-    assert ((int) b == 1);
-    assert ((long) b == 1L);
-    assert ((float) b == 1.0);
-    assert ((double) b == 1.0);
+    assertTrue(((short) b == 1));
+    assertTrue(((int) b == 1));
+    assertTrue(((long) b == 1L));
+    assertTrue(((float) b == 1.0));
+    assertTrue(((double) b == 1.0));
 
-    assert ((short) mb == 127);
-    assert ((int) mb == 127);
-    assert ((long) mb == 127L);
-    assert ((float) mb == 127.0);
-    assert ((double) mb == 127.0);
+    assertTrue(((short) mb == 127));
+    assertTrue(((int) mb == 127));
+    assertTrue(((long) mb == 127L));
+    assertTrue(((float) mb == 127.0));
+    assertTrue(((double) mb == 127.0));
 
-    assert ((int) c == 97);
-    assert ((long) c == 97L);
-    assert ((float) c == 97.0);
-    assert ((double) c == 97.0);
+    assertTrue(((int) c == 97));
+    assertTrue(((long) c == 97L));
+    assertTrue(((float) c == 97.0));
+    assertTrue(((double) c == 97.0));
 
-    assert ((int) mc == 65535);
-    assert ((long) mc == 65535L);
-    assert ((float) mc == 65535.0);
-    assert ((double) mc == 65535.0);
+    assertTrue(((int) mc == 65535));
+    assertTrue(((long) mc == 65535L));
+    assertTrue(((float) mc == 65535.0));
+    assertTrue(((double) mc == 65535.0));
 
-    assert ((int) s == 2);
-    assert ((long) s == 2L);
-    assert ((float) s == 2.0);
-    assert ((double) s == 2.0);
+    assertTrue(((int) s == 2));
+    assertTrue(((long) s == 2L));
+    assertTrue(((float) s == 2.0));
+    assertTrue(((double) s == 2.0));
 
-    assert ((int) ms == 32767);
-    assert ((long) ms == 32767L);
-    assert ((float) ms == 32767.0);
-    assert ((double) ms == 32767.0);
+    assertTrue(((int) ms == 32767));
+    assertTrue(((long) ms == 32767L));
+    assertTrue(((float) ms == 32767.0));
+    assertTrue(((double) ms == 32767.0));
 
-    assert ((long) i == 3L);
-    assert ((float) i == 3.0);
-    assert ((double) i == 3.0);
+    assertTrue(((long) i == 3L));
+    assertTrue(((float) i == 3.0));
+    assertTrue(((double) i == 3.0));
 
-    assert ((long) mi == 2147483647L);
-    assert ((float) mi == 2.147483647E9); // we don't honor float-double precision differences
-    assert ((double) mi == 2.147483647E9);
+    assertTrue(((long) mi == 2147483647L));
+    assertTrue(((float) mi == 2.147483647E9)); // we don't honor float-double precision differences
+    assertTrue(((double) mi == 2.147483647E9));
 
-    assert ((float) l == 4);
-    assert ((double) l == 4);
+    assertTrue(((float) l == 4));
+    assertTrue(((double) l == 4));
 
-    assert ((float) ll == 2.415919103E9); // we don't honor float-double precision differences
-    assert ((double) ll == 2.415919103E9);
+    assertTrue(((float) ll == 2.415919103E9)); // we don't honor float-double precision differences
+    assertTrue(((double) ll == 2.415919103E9));
 
-    assert ((float) ml == 9.223372036854776E18);
-    assert ((double) ml == 9.223372036854776E18);
+    assertTrue(((float) ml == 9.223372036854776E18));
+    assertTrue(((double) ml == 9.223372036854776E18));
 
-    assert (((double) f - 2.7) < 1e-7);
+    assertTrue((((double) f - 2.7) < 1e-7));
 
     // we don't honor float-double precision differences
-    assert ((double) mf == 3.4028234663852886e+38d);
+    assertTrue(((double) mf == 3.4028234663852886e+38d));
   }
 
   private static void testCompoundAssignment() {
@@ -239,16 +241,16 @@ public class Main {
 
     // Compound Assignment
     ri += l;
-    assert ri == 6;
+    assertTrue(ri == 6);
     rl += i;
-    assert rl == 3;
+    assertTrue(rl == 3);
   }
 
   private static void testFieldInitializerAssignment() {
-    assert fieldIntFromChar == 456;
-    assert fieldLongFromInt == 456;
-    assert fieldFloatFromLong == 456;
-    assert fieldDoubleFromLong == 456;
+    assertTrue(fieldIntFromChar == 456);
+    assertTrue(fieldLongFromInt == 456);
+    assertTrue(fieldFloatFromLong == 456);
+    assertTrue(fieldDoubleFromLong == 456);
   }
 
   private static void testMethodInvocation() {
@@ -268,10 +270,10 @@ public class Main {
   }
 
   private static void testReturnAssignment() {
-    assert returnIntFromChar() == 123;
-    assert returnLongFromInt() == 123;
-    assert returnFloatFromLong() == 123;
-    assert returnDoubleFromLong() == 123;
+    assertTrue(returnIntFromChar() == 123);
+    assertTrue(returnLongFromInt() == 123);
+    assertTrue(returnFloatFromLong() == 123);
+    assertTrue(returnDoubleFromLong() == 123);
   }
 
   private static void testSimpleAssignment() {
@@ -298,57 +300,57 @@ public class Main {
     double rd = 0;
 
     // Exhaustive simple assignment
-    assert ((ri = b) == 1);
-    assert ((rl = b) == 1L);
-    assert ((rf = b) == 1.0);
-    assert ((rd = b) == 1.0);
+    assertTrue(((ri = b) == 1));
+    assertTrue(((rl = b) == 1L));
+    assertTrue(((rf = b) == 1.0));
+    assertTrue(((rd = b) == 1.0));
 
-    assert ((ri = mb) == 127);
-    assert ((rl = mb) == 127L);
-    assert ((rf = mb) == 127.0);
-    assert ((rd = mb) == 127.0);
+    assertTrue(((ri = mb) == 127));
+    assertTrue(((rl = mb) == 127L));
+    assertTrue(((rf = mb) == 127.0));
+    assertTrue(((rd = mb) == 127.0));
 
-    assert ((ri = c) == 97);
-    assert ((rl = c) == 97L);
-    assert ((rf = c) == 97.0);
-    assert ((rd = c) == 97.0);
+    assertTrue(((ri = c) == 97));
+    assertTrue(((rl = c) == 97L));
+    assertTrue(((rf = c) == 97.0));
+    assertTrue(((rd = c) == 97.0));
 
-    assert ((ri = mc) == 65535);
-    assert ((rl = mc) == 65535L);
-    assert ((rf = mc) == 65535.0);
-    assert ((rd = mc) == 65535.0);
+    assertTrue(((ri = mc) == 65535));
+    assertTrue(((rl = mc) == 65535L));
+    assertTrue(((rf = mc) == 65535.0));
+    assertTrue(((rd = mc) == 65535.0));
 
-    assert ((ri = s) == 2);
-    assert ((rl = s) == 2L);
-    assert ((rf = s) == 2.0);
-    assert ((rd = s) == 2.0);
+    assertTrue(((ri = s) == 2));
+    assertTrue(((rl = s) == 2L));
+    assertTrue(((rf = s) == 2.0));
+    assertTrue(((rd = s) == 2.0));
 
-    assert ((ri = ms) == 32767);
-    assert ((rl = ms) == 32767L);
-    assert ((rf = ms) == 32767.0);
-    assert ((rd = ms) == 32767.0);
+    assertTrue(((ri = ms) == 32767));
+    assertTrue(((rl = ms) == 32767L));
+    assertTrue(((rf = ms) == 32767.0));
+    assertTrue(((rd = ms) == 32767.0));
 
-    assert ((rl = i) == 3L);
-    assert ((rf = i) == 3.0);
-    assert ((rd = i) == 3.0);
+    assertTrue(((rl = i) == 3L));
+    assertTrue(((rf = i) == 3.0));
+    assertTrue(((rd = i) == 3.0));
 
-    assert ((rl = mi) == 2147483647L);
-    assert ((rf = mi) == 2.147483647E9); // we don't honor float-double precision differences
-    assert ((rd = mi) == 2.147483647E9);
+    assertTrue(((rl = mi) == 2147483647L));
+    assertTrue(((rf = mi) == 2.147483647E9)); // we don't honor float-double precision differences
+    assertTrue(((rd = mi) == 2.147483647E9));
 
-    assert ((rf = l) == 4);
-    assert ((rd = l) == 4);
+    assertTrue(((rf = l) == 4));
+    assertTrue(((rd = l) == 4));
 
-    assert ((rf = ll) == 2.415919103E9); // we don't honor float-double precision differences
-    assert ((rd = ll) == 2.415919103E9);
+    assertTrue(((rf = ll) == 2.415919103E9)); // we don't honor float-double precision differences
+    assertTrue(((rd = ll) == 2.415919103E9));
 
-    assert ((rf = ml) == 9.223372036854776E18);
-    assert ((rd = ml) == 9.223372036854776E18);
+    assertTrue(((rf = ml) == 9.223372036854776E18));
+    assertTrue(((rd = ml) == 9.223372036854776E18));
 
-    assert ((rd = f - 2.7) < 1e-7f);
+    assertTrue(((rd = f - 2.7) < 1e-7f));
 
     // we don't honor float-double precision differences
-    assert ((rd = mf) == 3.4028234663852886e+38d);
+    assertTrue(((rd = mf) == 3.4028234663852886e+38d));
   }
 
   private static void testTernaryAssignment() {
@@ -364,10 +366,10 @@ public class Main {
 
     // Below int promotes to int, if there is a long promote to long, if there is a float promote to
     // float, if there is a double promote to double.
-    assert (alwaysTrue ? b : i) == 1;
-    assert (alwaysTrue ? i : l) == 2L;
-    assert (alwaysTrue ? l : f) == 3f;
-    assert (alwaysTrue ? l : d) == 3d;
+    assertTrue((alwaysTrue ? b : i) == 1);
+    assertTrue((alwaysTrue ? i : l) == 2L);
+    assertTrue((alwaysTrue ? l : f) == 3f);
+    assertTrue((alwaysTrue ? l : d) == 3d);
   }
 
   private static void testVariableInitializerAssignment() {
@@ -376,9 +378,9 @@ public class Main {
     float varFloatFromLong = 456L;
     double varDoubleFromLong = 456L;
 
-    assert varIntFromChar == 456;
-    assert varLongFromInt == 456;
-    assert varFloatFromLong == 456;
-    assert varDoubleFromLong == 456;
+    assertTrue(varIntFromChar == 456);
+    assertTrue(varLongFromInt == 456);
+    assertTrue(varFloatFromLong == 456);
+    assertTrue(varDoubleFromLong == 456);
   }
 }

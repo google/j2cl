@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.underflowoverflowconversion;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 @SuppressWarnings("IdentityBinaryExpression")
 public class Main {
 
@@ -59,28 +61,28 @@ public class Main {
   }
 
   private void takesInt(int overflowValue, int expectValue) {
-    assert overflowValue == expectValue;
+    assertTrue(overflowValue == expectValue);
   }
 
   private void takesDouble(double overflowValue, double expectValue) {
-    assert overflowValue == expectValue;
+    assertTrue(overflowValue == expectValue);
   }
 
   private void takesLong(long overflowValue, long expectValue) {
-    assert overflowValue == expectValue;
+    assertTrue(overflowValue == expectValue);
   }
 
   private void testArraysAssignment() {
     // All array contexts are implicitly int typed.
 
     int[] ints = new int[21 / 2];
-    assert ints.length == 10;
+    assertTrue(ints.length == 10);
     ints[11 / 2] = 1;
-    assert ints[5] == 1;
+    assertTrue(ints[5] == 1);
     ints = new int[] {1 / 2, 3 / 2, 5 / 2};
-    assert ints[0] == 0;
-    assert ints[1] == 1;
-    assert ints[2] == 2;
+    assertTrue(ints[0] == 0);
+    assertTrue(ints[1] == 1);
+    assertTrue(ints[2] == 2);
   }
 
   private void testBinaryOperations() {
@@ -94,75 +96,75 @@ public class Main {
     // Int
     {
       ri = mi + mi;
-      assert ri == 4294967294d; // we don't honor int overflow for some operations
+      assertTrue(ri == 4294967294d); // we don't honor int overflow for some operations
 
       ri = mi / mi;
-      assert ri == 1;
+      assertTrue(ri == 1);
 
       ri = mi % mi;
-      assert ri == 0;
+      assertTrue(ri == 0);
 
       ri = mi - mi;
-      assert ri == 0;
+      assertTrue(ri == 0);
 
       ri = mi << mi;
-      assert ri == -2147483648;
+      assertTrue(ri == -2147483648);
 
       ri = mi >> mi;
-      assert ri == 0;
+      assertTrue(ri == 0);
 
       ri = mi >>> mi;
-      assert ri == 0;
+      assertTrue(ri == 0);
 
       ri = mi ^ mi;
-      assert ri == 0;
+      assertTrue(ri == 0);
 
       ri = mi & mi;
-      assert ri == 2147483647;
+      assertTrue(ri == 2147483647);
 
       ri = mi | mi;
-      assert ri == 2147483647;
+      assertTrue(ri == 2147483647);
 
       // Int division is handled, make sure that division doesn't leave any decimals behind.
       ri = 1 / 2;
-      assert ri == 0;
+      assertTrue(ri == 0);
     }
 
     // Long
     {
       rl = ml + ml;
-      assert rl == -2L; // Works since the long emulation class supports it..
+      assertTrue(rl == -2L); // Works since the long emulation class supports it..
 
       rl = ml / ml;
-      assert rl == 1L;
+      assertTrue(rl == 1L);
 
       rl = ml % ml;
-      assert rl == 0L;
+      assertTrue(rl == 0L);
 
       rl = ml - ml;
-      assert rl == 0L;
+      assertTrue(rl == 0L);
 
       rl = ml << ml;
-      assert rl == -9223372036854775808L;
+      assertTrue(rl == -9223372036854775808L);
 
       rl = ml >> ml;
-      assert rl == 0L;
+      assertTrue(rl == 0L);
 
       rl = ml >>> ml;
-      assert rl == 0L;
+      assertTrue(rl == 0L);
 
       rl = ml ^ ml;
-      assert rl == 0L;
+      assertTrue(rl == 0L);
 
       rl = ml & ml;
-      assert rl == 9223372036854775807L;
+      assertTrue(rl == 9223372036854775807L);
 
       rl = ml | ml;
-      assert rl == 9223372036854775807L;
+      assertTrue(rl == 9223372036854775807L);
 
       // Long division is handled, make sure that division doesn't leave any decimals behind.
       rl = 1L / 2L;
-      assert rl == 0L;
+      assertTrue(rl == 0L);
     }
   }
 
@@ -174,27 +176,27 @@ public class Main {
 
     rb = mb;
     get().rb++;
-    assert rb == -128;
+    assertTrue(rb == -128);
 
     rb = mb;
     rb++;
-    assert rb == -128;
+    assertTrue(rb == -128);
 
     rb = mb;
     ++get().rb;
-    assert rb == -128;
+    assertTrue(rb == -128);
 
     rb = mb;
     ++rb;
-    assert rb == -128;
+    assertTrue(rb == -128);
 
     rb = mb;
     get().rb += 1;
-    assert rb == -128;
+    assertTrue(rb == -128);
 
     rb = mb;
     rb += 1;
-    assert rb == -128;
+    assertTrue(rb == -128);
   }
 
   private void testInlineEquality() {
@@ -208,23 +210,23 @@ public class Main {
     int ei = 1;
     long el = 2L;
 
-    assert 3 / 2 == ei;
-    assert 5L / 2L == el;
+    assertTrue(3 / 2 == ei);
+    assertTrue(5L / 2L == el);
 
-    assert 1 / 2 != ei;
-    assert 3L / 2L != el;
+    assertTrue(1 / 2 != ei);
+    assertTrue(3L / 2L != el);
 
-    assert 3 / 2 <= ei;
-    assert 5L / 2L <= el;
+    assertTrue(3 / 2 <= ei);
+    assertTrue(5L / 2L <= el);
 
-    assert 3 / 2 >= ei;
-    assert 5L / 2L >= el;
+    assertTrue(3 / 2 >= ei);
+    assertTrue(5L / 2L >= el);
 
-    assert 4 / 2 > ei;
-    assert 6L / 2L > el;
+    assertTrue(4 / 2 > ei);
+    assertTrue(6L / 2L > el);
 
-    assert 1 / 2 < ei;
-    assert 3L / 2L < el;
+    assertTrue(1 / 2 < ei);
+    assertTrue(3L / 2L < el);
   }
 
   private void testMethodInvocation() {
@@ -247,47 +249,47 @@ public class Main {
 
     rb = mb;
     rb++;
-    assert rb == -128;
+    assertTrue(rb == -128);
 
     rc = mc;
     rc++;
-    assert rc == 0;
+    assertTrue(rc == 0);
 
     rs = ms;
     rs++;
-    assert rs == -32768;
+    assertTrue(rs == -32768);
 
     ri = mi;
     ri++;
-    assert ri == 2147483648d; // we don't honor int overflow for some operations
+    assertTrue(ri == 2147483648d); // we don't honor int overflow for some operations
 
     rl = ml;
     rl++;
-    assert rl == -9223372036854775808L;
+    assertTrue(rl == -9223372036854775808L);
 
     rf = mf;
     rf++;
-    assert rf == 3.4028235E38f;
+    assertTrue(rf == 3.4028235E38f);
 
     rd = md;
     rd++;
-    assert rd == 1.7976931348623157E308D;
+    assertTrue(rd == 1.7976931348623157E308D);
 
     byte b = Byte.MIN_VALUE;
-    assert b-- == Byte.MIN_VALUE;
-    assert b == Byte.MAX_VALUE;
+    assertTrue(b-- == Byte.MIN_VALUE);
+    assertTrue(b == Byte.MAX_VALUE);
 
     b = Byte.MAX_VALUE;
-    assert b++ == Byte.MAX_VALUE;
-    assert b == Byte.MIN_VALUE;
+    assertTrue(b++ == Byte.MAX_VALUE);
+    assertTrue(b == Byte.MIN_VALUE);
 
     Byte boxedByte = Byte.MIN_VALUE;
-    assert boxedByte-- == Byte.MIN_VALUE;
-    assert boxedByte == Byte.MAX_VALUE;
+    assertTrue(boxedByte-- == Byte.MIN_VALUE);
+    assertTrue(boxedByte == Byte.MAX_VALUE);
 
     boxedByte = Byte.MAX_VALUE;
-    assert boxedByte++ == Byte.MAX_VALUE;
-    assert boxedByte == Byte.MIN_VALUE;
+    assertTrue(boxedByte++ == Byte.MAX_VALUE);
+    assertTrue(boxedByte == Byte.MIN_VALUE);
   }
 
   private void testPrefixOperations() {
@@ -297,43 +299,43 @@ public class Main {
 
     rb = mb;
     ++rb;
-    assert rb == -128;
+    assertTrue(rb == -128);
 
     rc = mc;
     ++rc;
-    assert rc == 0;
+    assertTrue(rc == 0);
 
     rs = ms;
     ++rs;
-    assert rs == -32768;
+    assertTrue(rs == -32768);
 
     ri = mi;
     ++ri;
-    assert ri == 2147483648d; // we don't honor int overflow for some operations
+    assertTrue(ri == 2147483648d); // we don't honor int overflow for some operations
 
     rl = ml;
     ++rl;
-    assert rl == -9223372036854775808L;
+    assertTrue(rl == -9223372036854775808L);
 
     rf = mf;
     ++rf;
-    assert rf == 3.4028235E38f;
+    assertTrue(rf == 3.4028235E38f);
 
     rd = md;
     ++rd;
-    assert rd == 1.7976931348623157E308D;
+    assertTrue(rd == 1.7976931348623157E308D);
 
     byte b = Byte.MIN_VALUE;
-    assert --b == Byte.MAX_VALUE;
+    assertTrue(--b == Byte.MAX_VALUE);
 
     b = Byte.MAX_VALUE;
-    assert ++b == Byte.MIN_VALUE;
+    assertTrue(++b == Byte.MIN_VALUE);
 
     Byte boxedByte = Byte.MIN_VALUE;
-    assert --boxedByte == Byte.MAX_VALUE;
+    assertTrue(--boxedByte == Byte.MAX_VALUE);
 
     boxedByte = Byte.MAX_VALUE;
-    assert ++boxedByte == Byte.MIN_VALUE;
+    assertTrue(++boxedByte == Byte.MIN_VALUE);
   }
 
   private void testReturnAssignment() {
@@ -344,8 +346,8 @@ public class Main {
     // Don't need to check float and double since they're just native double operations with native
     // underflow/overflow.
 
-    assert returnInt() == 1;
-    assert returnLong() == 2;
+    assertTrue(returnInt() == 1);
+    assertTrue(returnLong() == 2);
   }
 
   private void testVarInitializerAssignment() {
@@ -357,8 +359,8 @@ public class Main {
     // underflow/overflow.
 
     int ri = 1 / 2;
-    assert ri == 0;
+    assertTrue(ri == 0);
     long rl = 1L / 2L;
-    assert rl == 0L;
+    assertTrue(rl == 0L);
   }
 }

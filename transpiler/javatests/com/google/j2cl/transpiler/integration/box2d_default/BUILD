@@ -17,8 +17,6 @@ integration_test(
     closure_defines = {
         "jre.checks.checkLevel": "NORMAL",
     },
-    # Override integration_test default since we don't want asserts for box2d tracking
-    defs = ["--remove_j2cl_asserts=true"],
     tags = ["manual"],
     deps = [
         "//transpiler/javatests/com/google/j2cl/transpiler/integration/box2d:box2d_j2cl",

@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.lambdasnestedscope;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 /**
  * Test lambda nested in local class.
  */
@@ -31,6 +33,6 @@ public class LambdaNestingInLocalClass {
   }
 
   public void test() {
-    assert new InnerClass().run(100) == 111;
+    assertTrue(new InnerClass().run(100) == 111);
   }
 }

@@ -15,10 +15,75 @@
  */
 package com.google.j2cl.transpiler.integration.bridgejsmethod;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 import jsinterop.annotations.JsMethod;
 
 public class Main {
-  public static class A<T> {
+  public static void main(String... args) {
+    assertTrue(callFunByA(new A<String>(), "abc").equals("abc"));
+    assertTrue(callFunByA(new B(), "def").equals("defabc"));
+    assertTrue(callFunByA(new C(), 1).equals(new Integer(6)));
+    assertTrue(callFunByA(new D(), 2).equals(new Integer(8)));
+    assertTrue(callFunByA(new E(), "xyz").equals("xyzabc"));
+
+    try {
+      callFunByA(new B(), 1);
+      assertTrue(false);
+    } catch (ClassCastException e) {
+      // expected.
+    }
+
+    assertTrue(callBarByA(new A<String>(), "abc", "abc"));
+    assertTrue(callBarByA(new B(), "abc", "abc"));
+    assertTrue(callBarByA(new C(), 1, 1));
+    assertTrue(callBarByA(new D(), 2, 2));
+    assertTrue(callBarByA(new E(), "xyz", "xyz"));
+
+    try {
+      callBarByA(new B(), 1, 2);
+      assertTrue(false);
+    } catch (ClassCastException e) {
+      // expected.
+    }
+
+    assertTrue(callFunByI(new D(), 2).equals(new Integer(8)));
+    try {
+      callFunByI(new D(), new Float(2.2));
+      assertTrue(false);
+    } catch (ClassCastException e) {
+      // expected.
+    }
+
+    assertTrue(callBarByJ(new E(), "xyz", "xyz"));
+    try {
+      callBarByJ(new E(), new Object(), new Object());
+      assertTrue(false);
+    } catch (ClassCastException e) {
+      // expected.
+    }
+
+    assertTrue(new B().fun("def").equals("defabc"));
+    assertTrue(new C().fun(1) == 6);
+    assertTrue(new D().fun(10) == 16);
+    assertTrue(new E().fun("xyz").equals("xyzabc"));
+
+    assertTrue(new B().bar("abcd", "defg"));
+    assertTrue(!new C().bar(1, 2));
+    assertTrue(new D().bar(2, 2));
+    assertTrue(new E().bar("xyz", "qwe"));
+
+    assertTrue(callFun(new A<String>(), "abc").equals("abc"));
+    assertTrue(callFun(new B(), "abc").equals("abcabc"));
+    assertTrue(callFun(new C(), 1).equals(6));
+    assertTrue(callFun(new D(), 10).equals(16));
+    assertTrue(callFun(new E(), "xyz").equals("xyzabc"));
+
+    assertTrue(callBar(new B(), "abcd", "defg"));
+    assertTrue(callBar(new E(), "abcd", "defg"));
+  }
+
+  private static class A<T> {
     @JsMethod
     public T fun(T t) {
       return t;
@@ -30,22 +95,18 @@ public class Main {
     }
   }
 
-  /**
-   * Interface with JsMethod.
-   */
-  public interface I<T extends Number> {
+  /** Interface with JsMethod. */
+  interface I<T extends Number> {
     @JsMethod
     T fun(T t);
   }
 
-  /**
-   * Interface with non-JsMethod.
-   */
-  public interface J<T> {
+  /** Interface with non-JsMethod. */
+  interface J<T> {
     boolean bar(T t, T s);
   }
 
-  public static class B extends A<String> {
+  private static class B extends A<String> {
     // It is a JsMethod itself and also overrides a JsMethod.
     @Override
     @JsMethod
@@ -63,7 +124,7 @@ public class Main {
     }
   }
 
-  public static class C extends A<Integer> {
+  private static class C extends A<Integer> {
     // Not directly annotated as a JsMethod, but overrides a JsMethod.
     @Override
     public Integer fun(Integer i) {
@@ -71,7 +132,7 @@ public class Main {
     }
   }
 
-  public static class D extends A<Integer> implements I<Integer> {
+  private static class D extends A<Integer> implements I<Integer> {
     // Two JS bridges: fun__Object, and fun__Number, should result in one bridge.
     @Override
     public Integer fun(Integer i) {
@@ -79,94 +140,31 @@ public class Main {
     }
   }
 
-  public static class E extends B implements J<String> {
+  private static class E extends B implements J<String> {
     // inherited B.bar() accidentally overrides J.bar().
     // Two bridges, one for generic method, the other for exposing non-JsMethod, should result in
     // only one bridge.
   }
 
-  public static Object callFunByA(A a, Object o) {
+  private static Object callFunByA(A a, Object o) {
     return a.fun(o);
   }
 
-  public static boolean callBarByA(A a, Object t, Object s) {
+  private static boolean callBarByA(A a, Object t, Object s) {
     return a.bar(t, s);
   }
 
-  public static Number callFunByI(I i, Number o) {
+  private static Number callFunByI(I i, Number o) {
     return i.fun(o);
   }
 
-  public static boolean callBarByJ(J j, Object t, Object s) {
+  private static boolean callBarByJ(J j, Object t, Object s) {
     return j.bar(t, s);
   }
 
   @JsMethod
-  public static native Object callFun(Object o, Object arg);
+  private static native Object callFun(Object o, Object arg);
 
   @JsMethod
-  public static native boolean callBar(Object o, Object t, Object s);
-
-  public static void main(String... args) {
-    assert callFunByA(new A<String>(), "abc").equals("abc");
-    assert callFunByA(new B(), "def").equals("defabc");
-    assert callFunByA(new C(), 1).equals(new Integer(6));
-    assert callFunByA(new D(), 2).equals(new Integer(8));
-    assert callFunByA(new E(), "xyz").equals("xyzabc");
-
-    try {
-      callFunByA(new B(), 1);
-      assert false;
-    } catch (ClassCastException e) {
-      // expected.
-    }
-
-    assert callBarByA(new A<String>(), "abc", "abc");
-    assert callBarByA(new B(), "abc", "abc");
-    assert callBarByA(new C(), 1, 1);
-    assert callBarByA(new D(), 2, 2);
-    assert callBarByA(new E(), "xyz", "xyz");
-
-    try {
-      callBarByA(new B(), 1, 2);
-      assert false;
-    } catch (ClassCastException e) {
-      // expected.
-    }
-
-    assert callFunByI(new D(), 2).equals(new Integer(8));
-    try {
-      callFunByI(new D(), new Float(2.2));
-      assert false;
-    } catch (ClassCastException e) {
-      // expected.
-    }
-
-    assert callBarByJ(new E(), "xyz", "xyz");
-    try {
-      callBarByJ(new E(), new Object(), new Object());
-      assert false;
-    } catch (ClassCastException e) {
-      // expected.
-    }
-
-    assert new B().fun("def").equals("defabc");
-    assert new C().fun(1) == 6;
-    assert new D().fun(10) == 16;
-    assert new E().fun("xyz").equals("xyzabc");
-
-    assert new B().bar("abcd", "defg");
-    assert !new C().bar(1, 2);
-    assert new D().bar(2, 2);
-    assert new E().bar("xyz", "qwe");
-
-    assert callFun(new A<String>(), "abc").equals("abc");
-    assert callFun(new B(), "abc").equals("abcabc");
-    assert callFun(new C(), 1).equals(6);
-    assert callFun(new D(), 10).equals(16);
-    assert callFun(new E(), "xyz").equals("xyzabc");
-
-    assert callBar(new B(), "abcd", "defg");
-    assert callBar(new E(), "abcd", "defg");
-  }
+  private static native boolean callBar(Object o, Object t, Object s);
 }

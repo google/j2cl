@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.staticfieldinitializer;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 /**
  * Test static field initializer.
  */
@@ -28,8 +30,8 @@ public class Main {
   }
 
   public static void main(String... args) {
-    assert Main.simpleValue == 5;
-    assert Main.calculatedValue == 25;
-    assert Main.someStaticMethod() == 125;
+    assertTrue(Main.simpleValue == 5);
+    assertTrue(Main.calculatedValue == 25);
+    assertTrue(Main.someStaticMethod() == 125);
   }
 }

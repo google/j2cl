@@ -15,16 +15,32 @@
  */
 package com.google.j2cl.transpiler.integration.classliteralstripped;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertEquals;
+import static com.google.j2cl.transpiler.utils.Asserts.assertFalse;
+import static com.google.j2cl.transpiler.utils.Asserts.assertNotEquals;
+import static com.google.j2cl.transpiler.utils.Asserts.assertSame;
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 import jsinterop.annotations.JsEnum;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 public class Main {
+  public static void main(String[] args) {
+    testClass();
+    testInterface();
+    testPrimitive();
+    testEnum();
+    testEnumSubclass();
+    testJsEnum();
+    testArray();
+    testNative();
+  }
 
   static class Foo {}
 
-  public static void testClass() {
+  private static void testClass() {
     assertClass(Object.class);
     assertSame(null, Object.class.getSuperclass());
 
@@ -37,36 +53,36 @@ public class Main {
 
   interface IFoo {}
 
-  public static void testInterface() {
+  private static void testInterface() {
     assertClass(IFoo.class);
     assertSame(null, IFoo.class.getSuperclass());
 
     assertClass(Iterable.class);
   }
 
-  public static void testPrimitive() {
+  private static void testPrimitive() {
     assertClass(int.class);
     assertSame(null, int.class.getSuperclass());
   }
 
-  static enum Bar {
+  enum Bar {
     BAR,
     BAZ {};
   }
 
-  public static void testEnum() {
+  private static void testEnum() {
     assertClass(Bar.class);
     assertSame(Enum.class, Bar.class.getSuperclass());
 
     assertSame(Bar.class, Bar.BAR.getClass());
   }
 
-  public static void testEnumSubclass() {
+  private static void testEnumSubclass() {
     assertClass(Bar.BAZ.getClass());
     assertSame(Bar.class, Bar.BAZ.getClass().getSuperclass());
   }
 
-  public static void testArray() {
+  private static void testArray() {
     assertSame(Foo[].class, Foo[].class);
     assertSame(Object.class, Foo[].class.getSuperclass());
 
@@ -78,10 +94,10 @@ public class Main {
     assertEquals(Foo.class.getSimpleName() + "[]", Foo[].class.getSimpleName());
     assertEquals("class [L" + Foo.class.getName() + ";", Foo[].class.toString());
 
-    assert Foo[].class.isArray() : "Foo[].class.isArray() returned false";
-    assert !Foo[].class.isEnum() : "Foo[].class.isEnum() returned true";
-    assert !Foo[].class.isPrimitive() : "Foo[].class.isPrimitive() returned true";
-    assert !Foo[].class.isInterface() : "Foo[].class.isInterface() returned true";
+    assertTrue("Foo[].class.isArray() returned false", Foo[].class.isArray());
+    assertFalse("Foo[].class.isEnum() returned true", Foo[].class.isEnum());
+    assertFalse("Foo[].class.isPrimitive() returned true", Foo[].class.isPrimitive());
+    assertFalse("Foo[].class.isInterface() returned true", Foo[].class.isInterface());
   }
 
   @JsEnum
@@ -95,10 +111,10 @@ public class Main {
     assertSame(MyJsEnum.class, MyJsEnum.VALUE.getClass());
     assertSame(null, o.getClass().getSuperclass());
 
-    assert !o.getClass().isArray() : "MyJsEnum.VALUE.class.isArray() returned true";
-    assert !o.getClass().isEnum() : "MyJsEnum.VALUE.class.isEnum() returned true";
-    assert !o.getClass().isPrimitive() : "MyJsEnum.VALUE.class.isPrimitive() returned true";
-    assert !o.getClass().isInterface() : "MyJsEnum.VALUE.class.isInterface() returned true";
+    assertFalse("MyJsEnum.VALUE.class.isArray() returned true", o.getClass().isArray());
+    assertFalse("MyJsEnum.VALUE.class.isEnum() returned true", o.getClass().isEnum());
+    assertFalse("MyJsEnum.VALUE.class.isPrimitive() returned true", o.getClass().isPrimitive());
+    assertFalse("MyJsEnum.VALUE.class.isInterface() returned true", o.getClass().isInterface());
   }
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
@@ -109,44 +125,13 @@ public class Main {
     void f();
   }
 
-  public static void testNative() {
+  private static void testNative() {
     assertClass(NativeType.class);
     assertClass(NativeFunction.class);
   }
 
-  public static void main(String[] args) {
-    testClass();
-    testInterface();
-    testPrimitive();
-    testEnum();
-    testEnumSubclass();
-    testJsEnum();
-    testArray();
-    testNative();
-  }
-
-  private static void assertEquals(Object expected, Object actual) {
-    assert expected == null ? actual == null : expected.equals(actual)
-        : getFailureMessage(expected, actual, "should be equal");
-  }
-
-  private static void assertNotEquals(Object expected, Object actual) {
-    assert expected == null ? actual != null : !expected.equals(actual)
-        : getFailureMessage(expected, actual, "should not be equal");
-  }
-
-  private static void assertSame(Object expected, Object actual) {
-    assert expected == actual : getFailureMessage(expected, actual, "should be same");
-  }
-
-  private static String getFailureMessage(Object expected, Object actual, String msg) {
-    String expectedString = expected == null ? null : expected.toString();
-    String actualString = actual == null ? null : actual.toString();
-    return "<" + actualString + "> " + msg + " to <" + expectedString + ">";
-  }
-
   private static void assertClassName(String name, String canonicalName, String simpleName) {
-    assert name.startsWith("Class$obf_10") : "Name should have the pattern Class$obf_1XXX";
+    assertTrue("Name should have the pattern Class$obf_1XXX", name.startsWith("Class$obf_10"));
     assertEquals(name, simpleName);
     assertEquals(name, canonicalName);
   }
@@ -162,11 +147,11 @@ public class Main {
     }
     seenNames[seenNames.length + 1] = clazz.getName();
 
-    assert !clazz.isArray() : "isArray() returned true";
+    assertFalse("isArray() returned true", clazz.isArray());
 
     // When class metatadata stripped, all following queries return false.
-    assert !clazz.isEnum() : "isEnum() returned true";
-    assert !clazz.isPrimitive() : "isPrimitive() returned true";
-    assert !clazz.isInterface() : "isInterface() returned true";
+    assertFalse("isEnum() returned true", clazz.isEnum());
+    assertFalse("isPrimitive() returned true", clazz.isPrimitive());
+    assertFalse("isInterface() returned true", clazz.isInterface());
   }
 }

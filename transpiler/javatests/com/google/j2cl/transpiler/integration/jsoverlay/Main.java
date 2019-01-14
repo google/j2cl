@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.jsoverlay;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsType;
 
@@ -63,18 +65,18 @@ public class Main {
 
   public static void testNativeJsWithOverlay() {
     NativeJsTypeWithOverlay object = new NativeJsTypeWithOverlay();
-    assert 6 == object.callM();
-    assert 20 == NativeJsTypeWithOverlay.fun(4, 5);
-    assert 1 == NativeJsTypeWithOverlay.COMPILE_TIME_CONSTANT;
-    assert NativeJsTypeWithOverlay.staticField != null;
+    assertTrue(6 == object.callM());
+    assertTrue(20 == NativeJsTypeWithOverlay.fun(4, 5));
+    assertTrue(1 == NativeJsTypeWithOverlay.COMPILE_TIME_CONSTANT);
+    assertTrue(NativeJsTypeWithOverlay.staticField != null);
     NativeJsTypeWithOverlay.staticField = null;
-    assert NativeJsTypeWithOverlay.staticField == null;
-    assert 10 == NativeJsTypeWithOverlay.bar();
-    assert 20 == object.foo();
-    assert 30 == object.baz();
+    assertTrue(NativeJsTypeWithOverlay.staticField == null);
+    assertTrue(10 == NativeJsTypeWithOverlay.bar());
+    assertTrue(20 == object.foo());
+    assertTrue(30 == object.baz());
     NativeFinalJsTypeWithOverlay f = new NativeFinalJsTypeWithOverlay();
-    assert 36 == f.e();
-    assert 42 == f.buzz();
+    assertTrue(36 == f.e());
+    assertTrue(42 == f.buzz());
   }
 
   public static void main(String... args) {

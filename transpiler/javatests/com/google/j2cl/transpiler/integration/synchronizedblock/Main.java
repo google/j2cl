@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.synchronizedblock;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 public class Main {
   private static boolean expressionCalled;
   private static boolean blockExecuted;
@@ -23,8 +25,8 @@ public class Main {
     synchronized (getX()) {
       blockExecuted = true;
     }
-    assert expressionCalled;
-    assert blockExecuted;
+    assertTrue(expressionCalled);
+    assertTrue(blockExecuted);
   }
 
   private static X getX() {

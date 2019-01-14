@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.morebridgemethods;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 public class TestCase5814 {
   static interface BI1 {
     String get(String value);
@@ -34,8 +36,8 @@ public class TestCase5814 {
   @SuppressWarnings({"unchecked", "rawtypes"})
   public static void test() {
     C c = new C();
-    assert ((B) c).get("").equals("C get String");
-    assert c.get("").equals("C get String");
-    assert ((BI1) c).get("").equals("C get String");
+    assertTrue(((B) c).get("").equals("C get String"));
+    assertTrue(c.get("").equals("C get String"));
+    assertTrue(((BI1) c).get("").equals("C get String"));
   }
 }

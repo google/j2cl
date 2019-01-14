@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.jsmethodoverride;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
 
@@ -40,8 +42,8 @@ public class Main {
   public static void testJsMethodOverride() {
     A a = new A();
     B b = new B();
-    assert 1 == callY(a);
-    assert 2 == callY(b);
+    assertTrue(1 == callY(a));
+    assertTrue(2 == callY(b));
   }
 
   public static void main(String... args) {

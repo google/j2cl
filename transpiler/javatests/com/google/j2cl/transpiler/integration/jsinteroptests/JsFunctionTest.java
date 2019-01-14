@@ -15,13 +15,20 @@
  */
 package com.google.j2cl.transpiler.integration.jsinteroptests;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertEquals;
+import static com.google.j2cl.transpiler.utils.Asserts.assertFalse;
+import static com.google.j2cl.transpiler.utils.Asserts.assertNotNull;
+import static com.google.j2cl.transpiler.utils.Asserts.assertSame;
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+import static com.google.j2cl.transpiler.utils.Asserts.fail;
+
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
-public class JsFunctionTest extends MyTestCase {
+public class JsFunctionTest {
   public static void testAll() {
     testCast_crossCastJavaInstance();
     testCast_fromJsFunction();

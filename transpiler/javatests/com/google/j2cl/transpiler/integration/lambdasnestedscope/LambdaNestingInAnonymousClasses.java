@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.lambdasnestedscope;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 /**
  * Test lambdas nested in anonymous classes.
  */
@@ -32,7 +34,7 @@ public class LambdaNestingInAnonymousClasses {
             return intf.fun(a) + 100;
           }
         }.fun(100);
-    assert result == 242;
+    assertTrue(result == 242);
 
     // test lambda nested in multiple anonymous class.
     int[] y = new int[] {42};
@@ -57,7 +59,7 @@ public class LambdaNestingInAnonymousClasses {
             }.fun(3000);
           }
         }.fun(4000);
-    assert result == 10042;
-    assert y[0] == 10042;
+    assertTrue(result == 10042);
+    assertTrue(y[0] == 10042);
   }
 }

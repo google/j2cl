@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.methodreferences;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 public class Main {
   interface Producer<T> {
     T produce();
@@ -54,30 +56,30 @@ public class Main {
 
   void testConstructorReferences() {
     Producer<SomeObject> objectFactory = SomeObject::new;
-    assert objectFactory.produce().someObjectInstanceNumber == 0;
-    assert objectFactory.produce().someObjectInstanceNumber == 1;
+    assertTrue(objectFactory.produce().someObjectInstanceNumber == 0);
+    assertTrue(objectFactory.produce().someObjectInstanceNumber == 1);
 
     Producer<ObjectCapturingOuter> objectCapturingOuterProducer = ObjectCapturingOuter::new;
-    assert objectCapturingOuterProducer.produce().getMain() == this;
+    assertTrue(objectCapturingOuterProducer.produce().getMain() == this);
 
     ArrayProducer<Object> arrayProducer = SomeObject[]::new;
-    assert arrayProducer.produce(10).length == 10;
+    assertTrue(arrayProducer.produce(10).length == 10);
   }
 
   void testMethodReferences() {
     Producer<SomeObject> objectFactory = Main::m;
-    assert objectFactory.produce().someObjectInstanceNumber == 0;
-    assert objectFactory.produce().someObjectInstanceNumber == 1;
+    assertTrue(objectFactory.produce().someObjectInstanceNumber == 0);
+    assertTrue(objectFactory.produce().someObjectInstanceNumber == 1);
 
     // Qualified instance method, make sure that the evaluation of the qualifier only happens once.
     Producer<Boolean> booleanProducer = new SomeObject()::is2;
-    assert booleanProducer.produce();
-    assert booleanProducer.produce();
+    assertTrue(booleanProducer.produce());
+    assertTrue(booleanProducer.produce());
 
     // Unqualified SomeObject method
     Predicate<SomeObject> objectPredicate = SomeObject::is3;
-    assert objectPredicate.apply(new SomeObject());
-    assert !objectPredicate.apply(new SomeObject());
+    assertTrue(objectPredicate.apply(new SomeObject()));
+    assertTrue(!objectPredicate.apply(new SomeObject()));
   }
 
   void testSuperMethodReferences() {
@@ -98,7 +100,7 @@ public class Main {
       }
     }
 
-    assert new SubA().superIntroducer().produce().equals("I am A.");
+    assertTrue(new SubA().superIntroducer().produce().equals("I am A."));
   }
 
   public static void main(String[] args) {

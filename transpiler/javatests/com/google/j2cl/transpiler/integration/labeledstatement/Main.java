@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.labeledstatement;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 /**
  * Test for labeled statements.
  */
@@ -32,8 +34,8 @@ public class Main {
       }
     }
 
-    assert i == 10;
-    assert j == 5;
+    assertTrue(i == 10);
+    assertTrue(j == 5);
 
     i = 0;
     j = 0;
@@ -49,8 +51,8 @@ public class Main {
       }
     }
 
-    assert i == 100;
-    assert j == 5;
-    assert count == 500;
+    assertTrue(i == 100);
+    assertTrue(j == 5);
+    assertTrue(count == 500);
   }
 }

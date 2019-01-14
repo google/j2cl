@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.integration.jsasync;
 
 import static com.google.j2cl.transpiler.integration.jsasync.Promise.await;
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
 
 import jsinterop.annotations.JsAsync;
 import jsinterop.annotations.JsFunction;
@@ -35,29 +36,29 @@ public class Main {
   @JsMethod
   private static Promise<Integer> fifteen() {
     int a = await(five());
-    assert a == 5;
+    assertTrue(a == 5);
     JsIntFunction asyncFunction =
         () -> {
           int ten = await(ten());
           return Promise.resolve(ten);
         };
     int b = await(asyncFunction.get());
-    assert b == 10;
+    assertTrue(b == 10);
     return Promise.resolve(a + b);
   }
 
   @JsAsync
   public static Promise<?> main(@SuppressWarnings("unused") String... args) {
     int result = await(fifteen());
-    assert result == 15;
+    assertTrue(result == 15);
     result += await(InterfaceWithDefaultMethod.staticAsyncMethod());
-    assert result == 20;
+    assertTrue(result == 20);
     result += await(new InterfaceWithDefaultMethod() {}.defaultAsyncMethod());
-    assert result == 30;
+    assertTrue(result == 30);
     result += same(await(ten()) + await(ten()));
-    assert result == 50;
+    assertTrue(result == 50);
     result += await(ClinitTest.X);
-    assert result == 60;
+    assertTrue(result == 60);
     return Promise.resolve(result);
   }
 
@@ -75,14 +76,14 @@ public class Main {
     @JsAsync
     default Promise<Integer> defaultAsyncMethod() {
       int result = await(ten());
-      assert result == 10;
+      assertTrue(result == 10);
       return Promise.resolve(result);
     }
 
     @JsAsync
     static Promise<Integer> staticAsyncMethod() {
       int result = await(five());
-      assert result == 5;
+      assertTrue(result == 5);
       return Promise.resolve(result);
     }
   }

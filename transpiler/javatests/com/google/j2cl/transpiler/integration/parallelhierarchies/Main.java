@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.parallelhierarchies;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 /**
  * Tests behavior of nested inner classes with parallel class hierarchies.
  */
@@ -95,6 +97,6 @@ public class Main {
 
   public static void main(String... args) {
     QualifiedCalls.Outer2.Inner2 test = new QualifiedCalls().new Outer2().new Inner2();
-    assert "Inner2Outer2QualifiedCallsInner1Outer1QualifiedCalls".equals(test.result);
+    assertTrue("Inner2Outer2QualifiedCallsInner1Outer1QualifiedCalls".equals(test.result));
   }
 }

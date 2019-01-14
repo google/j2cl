@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.protectedcrosscall;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 public class Main {
 
   static class Inner {
@@ -28,6 +30,6 @@ public class Main {
   }
 
   public static void main(String[] args) {
-    assert Inner.caller() == 3;
+    assertTrue(Inner.caller() == 3);
   }
 }

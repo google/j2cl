@@ -15,6 +15,9 @@
  */
 package com.google.j2cl.transpiler.integration.interfacedevirtualize;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+import static com.google.j2cl.transpiler.utils.Asserts.fail;
+
 /**
  * Test Comparable Interface on all devirtualized classes that implement it.
  */
@@ -80,25 +83,25 @@ public class ComparableTest {
     Double d1 = new Double(1.1);
     Double d2 = new Double(1.1);
     Double d3 = new Double(2.1);
-    assert compare0(d1, d2) == 0;
-    assert compare0(d1, d3) < 0;
-    assert compare0(d3, d2) > 0;
+    assertTrue(compare0(d1, d2) == 0);
+    assertTrue(compare0(d1, d3) < 0);
+    assertTrue(compare0(d3, d2) > 0);
 
-    assert compare1(d1, d2) == 0;
-    assert compare1(d1, d3) < 0;
-    assert compare1(d3, d2) > 0;
+    assertTrue(compare1(d1, d2) == 0);
+    assertTrue(compare1(d1, d3) < 0);
+    assertTrue(compare1(d3, d2) > 0);
 
-    assert compare2(d1, d2) == 0;
-    assert compare2(d1, d3) < 0;
-    assert compare2(d3, d2) > 0;
+    assertTrue(compare2(d1, d2) == 0);
+    assertTrue(compare2(d1, d3) < 0);
+    assertTrue(compare2(d3, d2) > 0);
 
-    assert compare3(d1, d2) == 0;
-    assert compare3(d1, d3) < 0;
-    assert compare3(d3, d2) > 0;
+    assertTrue(compare3(d1, d2) == 0);
+    assertTrue(compare3(d1, d3) < 0);
+    assertTrue(compare3(d3, d2) > 0);
 
     try {
       compare1(d1, new Object());
-      assert false : "should have thrown an exception";
+      fail("should have thrown an exception");
     } catch (ClassCastException e) {
       // expected.
     }
@@ -108,25 +111,25 @@ public class ComparableTest {
     Boolean b1 = new Boolean(false);
     Boolean b2 = new Boolean(false);
     Boolean b3 = new Boolean(true);
-    assert compare0(b1, b2) == 0;
-    assert compare0(b1, b3) < 0;
-    assert compare0(b3, b2) > 0;
+    assertTrue(compare0(b1, b2) == 0);
+    assertTrue(compare0(b1, b3) < 0);
+    assertTrue(compare0(b3, b2) > 0);
 
-    assert compare1(b1, b2) == 0;
-    assert compare1(b1, b3) < 0;
-    assert compare1(b3, b2) > 0;
+    assertTrue(compare1(b1, b2) == 0);
+    assertTrue(compare1(b1, b3) < 0);
+    assertTrue(compare1(b3, b2) > 0);
 
-    assert compare2(b1, b2) == 0;
-    assert compare2(b1, b3) < 0;
-    assert compare2(b3, b2) > 0;
+    assertTrue(compare2(b1, b2) == 0);
+    assertTrue(compare2(b1, b3) < 0);
+    assertTrue(compare2(b3, b2) > 0);
 
-    assert compare3(b1, b2) == 0;
-    assert compare3(b1, b3) < 0;
-    assert compare3(b3, b2) > 0;
+    assertTrue(compare3(b1, b2) == 0);
+    assertTrue(compare3(b1, b3) < 0);
+    assertTrue(compare3(b3, b2) > 0);
 
     try {
       compare1(b1, new Object());
-      assert false : "should have thrown an exception";
+      fail("should have thrown an exception");
     } catch (ClassCastException e) {
       // expected.
     }
@@ -136,25 +139,25 @@ public class ComparableTest {
     Integer i1 = new Integer(1000);
     Integer i2 = new Integer(1000);
     Integer i3 = new Integer(2000);
-    assert compare0(i1, i2) == 0;
-    assert compare0(i1, i3) < 0;
-    assert compare0(i3, i2) > 0;
+    assertTrue(compare0(i1, i2) == 0);
+    assertTrue(compare0(i1, i3) < 0);
+    assertTrue(compare0(i3, i2) > 0);
 
-    assert compare1(i1, i2) == 0;
-    assert compare1(i1, i3) < 0;
-    assert compare1(i3, i2) > 0;
+    assertTrue(compare1(i1, i2) == 0);
+    assertTrue(compare1(i1, i3) < 0);
+    assertTrue(compare1(i3, i2) > 0);
 
-    assert compare2(i1, i2) == 0;
-    assert compare2(i1, i3) < 0;
-    assert compare2(i3, i2) > 0;
+    assertTrue(compare2(i1, i2) == 0);
+    assertTrue(compare2(i1, i3) < 0);
+    assertTrue(compare2(i3, i2) > 0);
 
-    assert compare3(i1, i2) == 0;
-    assert compare3(i1, i3) < 0;
-    assert compare3(i3, i2) > 0;
+    assertTrue(compare3(i1, i2) == 0);
+    assertTrue(compare3(i1, i3) < 0);
+    assertTrue(compare3(i3, i2) > 0);
 
     try {
       compare1(i1, new Object());
-      assert false : "should have thrown an exception";
+      fail("should have thrown an exception");
     } catch (ClassCastException e) {
       // expected.
     }
@@ -164,25 +167,25 @@ public class ComparableTest {
     Long l1 = new Long(1000L);
     Long l2 = new Long(1000L);
     Long l3 = new Long(2000L);
-    assert compare0(l1, l2) == 0;
-    assert compare0(l1, l3) < 0;
-    assert compare0(l3, l2) > 0;
+    assertTrue(compare0(l1, l2) == 0);
+    assertTrue(compare0(l1, l3) < 0);
+    assertTrue(compare0(l3, l2) > 0);
 
-    assert compare1(l1, l2) == 0;
-    assert compare1(l1, l3) < 0;
-    assert compare1(l3, l2) > 0;
+    assertTrue(compare1(l1, l2) == 0);
+    assertTrue(compare1(l1, l3) < 0);
+    assertTrue(compare1(l3, l2) > 0);
 
-    assert compare2(l1, l2) == 0;
-    assert compare2(l1, l3) < 0;
-    assert compare2(l3, l2) > 0;
+    assertTrue(compare2(l1, l2) == 0);
+    assertTrue(compare2(l1, l3) < 0);
+    assertTrue(compare2(l3, l2) > 0);
 
-    assert compare3(l1, l2) == 0;
-    assert compare3(l1, l3) < 0;
-    assert compare3(l3, l2) > 0;
+    assertTrue(compare3(l1, l2) == 0);
+    assertTrue(compare3(l1, l3) < 0);
+    assertTrue(compare3(l3, l2) > 0);
 
     try {
       compare1(l1, new Object());
-      assert false : "should have thrown an exception";
+      fail("should have thrown an exception");
     } catch (ClassCastException e) {
       // expected.
     }
@@ -192,25 +195,25 @@ public class ComparableTest {
     String s1 = "abc";
     String s2 = "abc";
     String s3 = "def";
-    assert compare0(s1, s2) == 0;
-    assert compare0(s1, s3) < 0;
-    assert compare0(s3, s2) > 0;
+    assertTrue(compare0(s1, s2) == 0);
+    assertTrue(compare0(s1, s3) < 0);
+    assertTrue(compare0(s3, s2) > 0);
 
-    assert compare1(s1, s2) == 0;
-    assert compare1(s1, s3) < 0;
-    assert compare1(s3, s2) > 0;
+    assertTrue(compare1(s1, s2) == 0);
+    assertTrue(compare1(s1, s3) < 0);
+    assertTrue(compare1(s3, s2) > 0);
 
-    assert compare2(s1, s2) == 0;
-    assert compare2(s1, s3) < 0;
-    assert compare2(s3, s2) > 0;
+    assertTrue(compare2(s1, s2) == 0);
+    assertTrue(compare2(s1, s3) < 0);
+    assertTrue(compare2(s3, s2) > 0);
 
-    assert compare3(s1, s2) == 0;
-    assert compare3(s1, s3) < 0;
-    assert compare3(s3, s2) > 0;
+    assertTrue(compare3(s1, s2) == 0);
+    assertTrue(compare3(s1, s3) < 0);
+    assertTrue(compare3(s3, s2) > 0);
 
     try {
       compare1(s1, new Object());
-      assert false : "should have thrown an exception";
+      fail("should have thrown an exception");
     } catch (ClassCastException e) {
       // expected.
     }
@@ -220,25 +223,25 @@ public class ComparableTest {
     ComparableImpl c1 = new ComparableImpl(1000);
     ComparableImpl c2 = new ComparableImpl(1000);
     ComparableImpl c3 = new ComparableImpl(2000);
-    assert compare0(c1, c2) == 0;
-    assert compare0(c1, c3) < 0;
-    assert compare0(c3, c2) > 0;
+    assertTrue(compare0(c1, c2) == 0);
+    assertTrue(compare0(c1, c3) < 0);
+    assertTrue(compare0(c3, c2) > 0);
 
-    assert compare1(c1, c2) == 0;
-    assert compare1(c1, c3) < 0;
-    assert compare1(c3, c2) > 0;
+    assertTrue(compare1(c1, c2) == 0);
+    assertTrue(compare1(c1, c3) < 0);
+    assertTrue(compare1(c3, c2) > 0);
 
-    assert compare2(c1, c2) == 0;
-    assert compare2(c1, c3) < 0;
-    assert compare2(c3, c2) > 0;
+    assertTrue(compare2(c1, c2) == 0);
+    assertTrue(compare2(c1, c3) < 0);
+    assertTrue(compare2(c3, c2) > 0);
 
-    assert compare3(c1, c2) == 0;
-    assert compare3(c1, c3) < 0;
-    assert compare3(c3, c2) > 0;
+    assertTrue(compare3(c1, c2) == 0);
+    assertTrue(compare3(c1, c3) < 0);
+    assertTrue(compare3(c3, c2) > 0);
 
     try {
       compare1(c1, new Object());
-      assert false : "should have thrown an exception";
+      fail("should have thrown an exception");
     } catch (ClassCastException e) {
       // expected.
     }

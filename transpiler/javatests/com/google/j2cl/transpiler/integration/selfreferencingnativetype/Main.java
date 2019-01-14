@@ -15,8 +15,10 @@
  */
 package com.google.j2cl.transpiler.integration.selfreferencingnativetype;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 public class Main {
   public static void main(String... args) {
-    assert Foo.getMeViaNative() == "me";
+    assertTrue(Foo.getMeViaNative() == "me");
   }
 }

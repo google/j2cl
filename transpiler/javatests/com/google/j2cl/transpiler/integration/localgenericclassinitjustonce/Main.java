@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.localgenericclassinitjustonce;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 /**
  * The 'value' field is given a value of 0 in it's initializer, which should run in the $init()
  * function. This value is then replaced with another value in the body of the second P1 constructor
@@ -43,7 +45,7 @@ public class Main {
   public static void main(String[] args) {
     P1<?> p1 = new P1<Object>();
     P1<?>.P2<?> p2 = p1.new P2<Object>();
-    assert (1 == p2.value);
-    assert (2 == p1.new P2<Object>(2).value);
+    assertTrue((1 == p2.value));
+    assertTrue((2 == p1.new P2<Object>(2).value));
   }
 }

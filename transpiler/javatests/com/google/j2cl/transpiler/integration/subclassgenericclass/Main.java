@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.subclassgenericclass;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 class Parent<T> {
   public T foo(T t) {
     return t;
@@ -29,10 +31,10 @@ public class Main {
   public static void main(String[] args) {
     Child c = new Child();
     Child b = c.foo(c);
-    assert b == c;
+    assertTrue(b == c);
 
     GenericChild<Child> gc = new GenericChild<>();
     Child cc = gc.foo(c);
-    assert cc == c;
+    assertTrue(cc == c);
   }
 }

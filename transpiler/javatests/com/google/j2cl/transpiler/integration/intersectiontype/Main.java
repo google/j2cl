@@ -15,6 +15,9 @@
  */
 package com.google.j2cl.transpiler.integration.intersectiontype;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertThrowsClassCastException;
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 public class Main {
   public static void main(String[] args) {
     testBaseIntersectionCast();
@@ -49,33 +52,21 @@ public class Main {
     EmptyJ jj3 = (EmptyC & EmptyJ) localC;
     EmptyJ jj4 = (EmptyI & EmptyJ) localC;
 
-    try {
-      EmptyC b2CIJ = (EmptyC & EmptyI & EmptyJ) localB;
-      assert false : "Should have thrown a ClassCastException";
-    } catch (ClassCastException e) {
-      assert e.getMessage()
-          .equals(
-              "com.google.j2cl.transpiler.integration.intersectiontype.Main$EmptyB cannot be cast "
-                  + "to com.google.j2cl.transpiler.integration.intersectiontype.Main$EmptyC");
-    }
-    try {
-      EmptyB c2BI = (EmptyB & EmptyI) localC;
-      assert false : "Should have thrown a ClassCastException";
-    } catch (ClassCastException e) {
-      assert e.getMessage()
-          .equals(
-              "com.google.j2cl.transpiler.integration.intersectiontype.Main$EmptyC cannot be cast "
-                  + "to com.google.j2cl.transpiler.integration.intersectiontype.Main$EmptyB");
-    }
-    try {
-      EmptyJ jj = (EmptyB & EmptyJ) localB;
-      assert false : "Should have thrown a ClassCastException";
-    } catch (ClassCastException e) {
-      assert e.getMessage()
-          .equals(
-              "com.google.j2cl.transpiler.integration.intersectiontype.Main$EmptyB cannot be cast "
-                  + "to com.google.j2cl.transpiler.integration.intersectiontype.Main$EmptyJ");
-    }
+    assertThrowsClassCastException(
+        () -> {
+          EmptyC b2CIJ = (EmptyC & EmptyI & EmptyJ) localB;
+        },
+        EmptyC.class);
+    assertThrowsClassCastException(
+        () -> {
+          EmptyB c2BI = (EmptyB & EmptyI) localC;
+        },
+        EmptyB.class);
+    assertThrowsClassCastException(
+        () -> {
+          EmptyJ jj = (EmptyB & EmptyJ) localB;
+        },
+        EmptyJ.class);
   }
 
   private interface SimpleI {
@@ -92,11 +83,11 @@ public class Main {
 
   private static void testIntersectionCastWithLambdaExpr() {
     SimpleI simpleI1 = (SimpleI & EmptyI) () -> 11;
-    assert 11 == simpleI1.fun();
+    assertTrue(11 == simpleI1.fun());
     SimpleI simpleI2 = (EmptyI & SimpleI) () -> 22;
-    assert 22 == simpleI2.fun();
+    assertTrue(22 == simpleI2.fun());
     EmptyI emptyI = (EmptyI & SimpleI) () -> 33;
-    assert 55 == ((SimpleI & SimpleK) () -> 55).fun();
+    assertTrue(55 == ((SimpleI & SimpleK) () -> 55).fun());
   }
 
   private static class SimpleA {
@@ -144,19 +135,19 @@ public class Main {
 
   private static void testIntersectionCastPolymorphism() {
     SimpleA bb = new SimpleB();
-    assert 22 == ((SimpleB & SimpleI) bb).fun();
-    assert 11 == ((SimpleB & SimpleI) bb).bar();
+    assertTrue(22 == ((SimpleB & SimpleI) bb).fun());
+    assertTrue(11 == ((SimpleB & SimpleI) bb).bar());
     SimpleA cc = new SimpleC();
-    assert 33 == ((SimpleC & SimpleI) cc).fun();
-    assert 44 == ((SimpleC & SimpleI) cc).bar();
-    assert 33 == ((SimpleA & SimpleI) cc).fun();
+    assertTrue(33 == ((SimpleC & SimpleI) cc).fun());
+    assertTrue(44 == ((SimpleC & SimpleI) cc).bar());
+    assertTrue(33 == ((SimpleA & SimpleI) cc).fun());
     SimpleI ii = (SimpleC & SimpleI) cc;
 
     Object d = new SimpleD();
-    assert 4 == ((SimpleI & SimpleJ) d).foo();
-    assert 5 == ((SimpleI & SimpleJ) d).bar();
-    assert 6 == ((SimpleI & SimpleJ) d).fun();
-    assert 33 == ii.fun();
+    assertTrue(4 == ((SimpleI & SimpleJ) d).foo());
+    assertTrue(5 == ((SimpleI & SimpleJ) d).bar());
+    assertTrue(6 == ((SimpleI & SimpleJ) d).fun());
+    assertTrue(33 == ii.fun());
   }
 
   private interface Serial {}
@@ -180,18 +171,16 @@ public class Main {
 
   private static void testLambdaTypeInference() {
     // The first one fails because the lambda is not properly typed.
-    assert method().cmp() == 1;
-    assert method2().cmp(4) == 2;
+    assertTrue(1 == method().cmp());
+    assertTrue(2 == method2().cmp(4));
   }
 
   private static void testErasureCast() {
-    try {
-      new ParameterizedByIntersection().m(new EmptyA());
-      assert false : "Should have thrown ClassCastException";
-    } catch (ClassCastException expected) {
-      assert expected.getMessage().endsWith("cannot be cast to " + SimpleI.class.getCanonicalName())
-          : "Got unexpected message " + expected.getMessage();
-    }
+    assertThrowsClassCastException(
+        () -> {
+          new ParameterizedByIntersection().m(new EmptyA());
+        },
+        SimpleI.class);
   }
 
   private static class ParameterizedByIntersection<T extends EmptyA & SimpleI> {

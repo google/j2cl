@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.casttonativetypevariable;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
@@ -39,7 +41,7 @@ public class Main {
 
   public static void main(String... args) {
     SubFoo sf = new SubFoo();
-    assert sf.getSelf() == sf;
+    assertTrue(sf.getSelf() == sf);
 
     testGenericType();
   }
@@ -52,16 +54,16 @@ public class Main {
     Object a = new NativeObject<String, Object>();
 
     NativeObject e = (NativeObject) a;
-    assert e == a;
+    assertTrue(e == a);
     NativeObject<String, Object> f = (NativeObject<String, Object>) a;
-    assert f == a;
-    assert a instanceof NativeObject;
+    assertTrue(f == a);
+    assertTrue(a instanceof NativeObject);
 
     Object os = new NativeObject[] {e};
     NativeObject[] g = (NativeObject[]) os;
-    assert g[0] == e;
+    assertTrue(g[0] == e);
     NativeObject<String, Object>[] h = (NativeObject<String, Object>[]) os;
-    assert h[0] == e;
-    assert os instanceof NativeObject[];
+    assertTrue(h[0] == e);
+    assertTrue(os instanceof NativeObject[]);
   }
 }

@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.overwrittentypevariables;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 enum A {
   FIRST,
   SECOND;
@@ -23,8 +25,8 @@ enum A {
 public class Main {
   public static void main(String... args) {
     HashFunction<A> hashFunction = HashFunctions.enumHashFunction();
-    assert hashFunction.apply(A.FIRST).equals("0");
+    assertTrue(hashFunction.apply(A.FIRST).equals("0"));
     HashFunction<Object> f = HashFunctions.hashFunction();
-    assert f.apply(new Object()).equals("a");
+    assertTrue(f.apply(new Object()).equals("a"));
   }
 }

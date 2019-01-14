@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.allsimplebridges;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 public class Tester516 {
   static interface I1 {
     String get(String value);
@@ -32,7 +34,7 @@ public class Tester516 {
   @SuppressWarnings("unchecked")
   public static void test() {
     C1 s = new C1();
-    assert s.get("").equals("C1.get");
-    assert ((I1) s).get("").equals("C1.get");
+    assertTrue(s.get("").equals("C1.get"));
+    assertTrue(((I1) s).get("").equals("C1.get"));
   }
 }

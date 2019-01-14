@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.morebridgemethods;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 public class TestCase4182 {
   static class B<B1> {
     @SuppressWarnings("unused")
@@ -33,7 +35,7 @@ public class TestCase4182 {
   @SuppressWarnings({"unchecked", "rawtypes"})
   public static void test() {
     C c = new C();
-    assert ((B) c).get("").equals("C get String");
-    assert c.get("").equals("C get String");
+    assertTrue(((B) c).get("").equals("C get String"));
+    assertTrue(c.get("").equals("C get String"));
   }
 }

@@ -15,56 +15,59 @@
  */
 package com.google.j2cl.transpiler.integration.enumspecialfunctions;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+import static com.google.j2cl.transpiler.utils.Asserts.fail;
+
 /**
  * This class tests the special functions of enum: .values() and .valueOf()
  */
 public class Main {
   public static void main(String[] args) {
     // TODO(b/36863439): Uncomment the following line once Enum.valueOf is implemented.
-    //assert Enum.valueOf(Planet.class, "SATURN")
-    assert Planet.values().length == 8;
-    assert arrayContains(Planet.MERCURY, Planet.values());
-    assert arrayContains(Planet.VENUS, Planet.values());
-    assert arrayContains(Planet.EARTH, Planet.values());
-    assert arrayContains(Planet.MARS, Planet.values());
-    assert arrayContains(Planet.JUPITER, Planet.values());
-    assert arrayContains(Planet.SATURN, Planet.values());
-    assert arrayContains(Planet.URANUS, Planet.values());
-    assert arrayContains(Planet.NEPTUNE, Planet.values());
+    // assertTrue(Enum.valueOf(Planet.class, "SATURN")
+    assertTrue(Planet.values().length == 8);
+    assertTrue(arrayContains(Planet.MERCURY, Planet.values()));
+    assertTrue(arrayContains(Planet.VENUS, Planet.values()));
+    assertTrue(arrayContains(Planet.EARTH, Planet.values()));
+    assertTrue(arrayContains(Planet.MARS, Planet.values()));
+    assertTrue(arrayContains(Planet.JUPITER, Planet.values()));
+    assertTrue(arrayContains(Planet.SATURN, Planet.values()));
+    assertTrue(arrayContains(Planet.URANUS, Planet.values()));
+    assertTrue(arrayContains(Planet.NEPTUNE, Planet.values()));
 
-    assert Planet.valueOf("MERCURY") == Planet.MERCURY;
-    assert Planet.valueOf("VENUS") == Planet.VENUS;
-    assert Planet.valueOf("EARTH") == Planet.EARTH;
-    assert Planet.valueOf("MARS") == Planet.MARS;
-    assert Planet.valueOf("JUPITER") == Planet.JUPITER;
-    assert Planet.valueOf("SATURN") == Planet.SATURN;
-    assert Planet.valueOf("URANUS") == Planet.URANUS;
-    assert Planet.valueOf("NEPTUNE") == Planet.NEPTUNE;
+    assertTrue(Planet.valueOf("MERCURY") == Planet.MERCURY);
+    assertTrue(Planet.valueOf("VENUS") == Planet.VENUS);
+    assertTrue(Planet.valueOf("EARTH") == Planet.EARTH);
+    assertTrue(Planet.valueOf("MARS") == Planet.MARS);
+    assertTrue(Planet.valueOf("JUPITER") == Planet.JUPITER);
+    assertTrue(Planet.valueOf("SATURN") == Planet.SATURN);
+    assertTrue(Planet.valueOf("URANUS") == Planet.URANUS);
+    assertTrue(Planet.valueOf("NEPTUNE") == Planet.NEPTUNE);
 
     try {
       Planet.valueOf("NOTHING");
-      assert false : "Should have thrown IllegalArgumentException.";
+      fail("Should have thrown IllegalArgumentException.");
     } catch (IllegalArgumentException e) {
       // do nothing.
     }
 
     try {
       Planet.valueOf(null);
-      assert false : "Should have thrown IllegalArgumentException.";
+      fail("Should have thrown IllegalArgumentException.");
     } catch (IllegalArgumentException e) {
       // do nothing.
     }
 
     try {
       Planet.valueOf("toString");
-      assert false : "Should have thrown IllegalArgumentException.";
+      fail("Should have thrown IllegalArgumentException.");
     } catch (IllegalArgumentException e) {
       // do nothing.
     }
 
     try {
       Planet.valueOf("__proto__");
-      assert false : "Should have thrown IllegalArgumentException.";
+      fail("Should have thrown IllegalArgumentException.");
     } catch (IllegalArgumentException e) {
       // do nothing.
     }
@@ -73,14 +76,14 @@ public class Main {
     // implemented.
     try {
       Enum.valueOf(Planet.class, null);
-      // assert false : "Should have thrown NullPointerException";
+      // fail( "Should have thrown NullPointerException");
       // } catch (NullPointerException expected) {
     } catch (AssertionError expected) {
     }
 
     // TODO(b/30745420): Transform these into meaningful assertions once Class.getEnumConstants is
     // implemented.
-    assert Planet.class.getEnumConstants() == null || Planet.class.getEnumConstants() != null;
+    assertTrue(Planet.class.getEnumConstants() == null || Planet.class.getEnumConstants() != null);
   }
 
   private static boolean arrayContains(Object obj, Object[] array) {

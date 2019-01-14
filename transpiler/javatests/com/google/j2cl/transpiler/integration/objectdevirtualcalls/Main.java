@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.objectdevirtualcalls;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 /**
  * Verifies that Object methods on the Object class execute properly. It is effectively a test that
  * Object method devirtualization is occurring and that the implementation being routed to is
@@ -26,22 +28,22 @@ public class Main {
     Object object2 = new Object();
 
     // Equals
-    assert object1.equals(object1);
-    assert !object1.equals(object2);
-    assert !object1.equals("some string");
+    assertTrue(object1.equals(object1));
+    assertTrue(!object1.equals(object2));
+    assertTrue(!object1.equals("some string"));
 
     // HashCode
-    assert object1.hashCode() != -1;
-    assert object1.hashCode() == object1.hashCode();
-    assert object1.hashCode() != object2.hashCode();
+    assertTrue(object1.hashCode() != -1);
+    assertTrue(object1.hashCode() == object1.hashCode());
+    assertTrue(object1.hashCode() != object2.hashCode());
 
     // ToString
-    assert object1.toString() instanceof String;
-    assert object1.toString() == "java.lang.Object@" + Integer.toHexString(object1.hashCode());
-    assert object1.toString() != object2.toString();
+    assertTrue(object1.toString() instanceof String);
+    assertTrue(object1.toString() == "java.lang.Object@" + Integer.toHexString(object1.hashCode()));
+    assertTrue(object1.toString() != object2.toString());
 
     // GetClass
-    assert object1.getClass() instanceof Class;
-    assert object1.getClass() == object2.getClass();
+    assertTrue(object1.getClass() instanceof Class);
+    assertTrue(object1.getClass() == object2.getClass());
   }
 }

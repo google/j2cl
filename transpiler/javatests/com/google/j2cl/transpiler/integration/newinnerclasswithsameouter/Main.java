@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.newinnerclasswithsameouter;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 public class Main {
   public int f;
 
@@ -27,8 +29,8 @@ public class Main {
       // New instance of other inner classes with the same outer class.
       B b = new B();
       C c = new C();
-      assert (b.get() == 10);
-      assert (c.get() == 20);
+      assertTrue((b.get() == 10));
+      assertTrue((c.get() == 20));
     }
   }
 

@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.jsfunctiontypeannotation;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 
@@ -68,16 +70,16 @@ public class Main {
   public static void testParameterTypes() {
     ApplyFunction foo = new B<String>();
     ApplyFunction bar = new A();
-    assert callGenericInterface(foo, "a", 1).equals("a");
-    assert callGenericInterface(bar, 1.1, 1.1).equals(new Double(2.2));
-    assert callParametricInterface(foo, "a").equals("a");
-    assert callParametricWithTypeVariable(foo, "a", 1).equals("a");
-    assert callParametricWithTypeVariable(bar, 1.1, 1.1).equals(new Double(2.2));
-    assert callImplementorGeneric(new B<Double>(), 1.1, 1).equals(new Double(1.1));
-    assert callImplementorParametric(new B<String>(), "").equals("");
-    assert foo.apply("a", 1).equals("a");
-    assert bar.apply(1.1, 1.1).equals(new Double(2.2));
-    assert callOnFunction(new A()) == 2.2;
+    assertTrue(callGenericInterface(foo, "a", 1).equals("a"));
+    assertTrue(callGenericInterface(bar, 1.1, 1.1).equals(new Double(2.2)));
+    assertTrue(callParametricInterface(foo, "a").equals("a"));
+    assertTrue(callParametricWithTypeVariable(foo, "a", 1).equals("a"));
+    assertTrue(callParametricWithTypeVariable(bar, 1.1, 1.1).equals(new Double(2.2)));
+    assertTrue(callImplementorGeneric(new B<Double>(), 1.1, 1).equals(new Double(1.1)));
+    assertTrue(callImplementorParametric(new B<String>(), "").equals(""));
+    assertTrue(foo.apply("a", 1).equals("a"));
+    assertTrue(bar.apply(1.1, 1.1).equals(new Double(2.2)));
+    assertTrue(callOnFunction(new A()) == 2.2);
   }
 
   public static void testCast() {
@@ -88,23 +90,23 @@ public class Main {
     ApplyFunction<String, Integer> af2 = (ApplyFunction<String, Integer>) o;
     try {
       A a = (A) o;
-      assert false;
+      assertTrue(false);
     } catch (ClassCastException e) {
       // expected.
     }
-    assert b1 != null;
-    assert b2 != null;
-    assert af1 != null;
-    assert af2 != null;
+    assertTrue(b1 != null);
+    assertTrue(b2 != null);
+    assertTrue(af1 != null);
+    assertTrue(af2 != null);
   }
 
   public static void testNewInstance() {
     B b1 = new B();
     B<String> b2 = (B) new B<String>();
     ApplyFunction af1 = new A();
-    assert b1 != null;
-    assert b2 != null;
-    assert af1 != null;
+    assertTrue(b1 != null);
+    assertTrue(b2 != null);
+    assertTrue(af1 != null);
   }
 
   @JsMethod

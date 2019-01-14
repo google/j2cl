@@ -15,30 +15,30 @@
  */
 package com.google.j2cl.transpiler.integration.jsinteroptests;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertEquals;
+import static com.google.j2cl.transpiler.utils.Asserts.assertFalse;
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
 import static jsinterop.annotations.JsPackage.GLOBAL;
 
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 
-/**
- * Tests JsMethod functionality.
- */
-public class JsMethodTest extends MyTestCase {
+/** Tests JsMethod functionality. */
+public class JsMethodTest {
   public static void testAll() {
-    JsMethodTest test = new JsMethodTest();
-    test.testNativeJsMethod();
-    test.testStaticNativeJsMethod();
-    test.testStaticNativeJsPropertyGetter();
-    test.testStaticNativeJsPropertySetter();
-    test.testLambdaImplementingJsMethod();
-    test.testLambdaRequiringJsMethodBridge();
+    testNativeJsMethod();
+    testStaticNativeJsMethod();
+    testStaticNativeJsPropertyGetter();
+    testStaticNativeJsPropertySetter();
+    testLambdaImplementingJsMethod();
+    testLambdaRequiringJsMethodBridge();
   }
 
   static class MyObject {
     @JsProperty public int mine;
   }
 
-  public void testNativeJsMethod() {
+  private static void testNativeJsMethod() {
     MyObject obj = new MyObject();
     obj.mine = 0;
     assertTrue(PropertyUtils.hasOwnPropertyMine(obj));
@@ -48,7 +48,7 @@ public class JsMethodTest extends MyTestCase {
   @JsMethod(namespace = GLOBAL)
   private static native boolean isFinite(double d);
 
-  public void testStaticNativeJsMethod() {
+  private static void testStaticNativeJsMethod() {
     assertFalse(isFinite(Double.POSITIVE_INFINITY));
     assertFalse(isFinite(Double.NEGATIVE_INFINITY));
     assertFalse(isFinite(Double.NaN));
@@ -62,7 +62,7 @@ public class JsMethodTest extends MyTestCase {
   @JsProperty(namespace = GLOBAL, name = "Infinity")
   private static native double infinity();
 
-  public void testStaticNativeJsPropertyGetter() {
+  private static void testStaticNativeJsPropertyGetter() {
     assertTrue(getNaN() != getNaN());
     assertTrue(Double.isInfinite(infinity()));
     assertTrue(Double.isInfinite(-infinity()));
@@ -74,7 +74,7 @@ public class JsMethodTest extends MyTestCase {
   @JsProperty(namespace = "window")
   private static native String getJsInteropSecret();
 
-  public void testStaticNativeJsPropertySetter() {
+  private static void testStaticNativeJsPropertySetter() {
     setJsInteropSecret("very secret!");
     assertEquals("very secret!", getJsInteropSecret());
   }
@@ -84,7 +84,7 @@ public class JsMethodTest extends MyTestCase {
     String greet();
   }
 
-  public void testLambdaImplementingJsMethod() {
+  private static void testLambdaImplementingJsMethod() {
     FunctionalInterfaceWithJsMethod f = () -> "Hello";
     assertEquals("Hello", f.greet());
   }
@@ -101,7 +101,7 @@ public class JsMethodTest extends MyTestCase {
     Object get();
   }
 
-  public void testLambdaRequiringJsMethodBridge() {
+  private static void testLambdaRequiringJsMethodBridge() {
     JsSupplier aSupplier = () -> "Hello";
     NullSupplier aliasToSupplier = aSupplier;
     assertEquals("Hello", aSupplier.get());

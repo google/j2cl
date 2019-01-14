@@ -15,10 +15,12 @@
  */
 package com.google.j2cl.transpiler.integration.circularcompiletimeconstant;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 public class Main {
   public static void main(String... args) {
     int total = A.C;
-    assert total == 2;
+    assertTrue(total == 2);
   }
 
   public static class A {

@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.morebridgemethods;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 public class DefaultMethodsMain {
 
   public static final int COLLECTION_ADD = 1;
@@ -22,14 +24,14 @@ public class DefaultMethodsMain {
 
   interface Collection<T> {
     default int add(T elem) {
-      assert this instanceof Collection;
+      assertTrue(this instanceof Collection);
       return COLLECTION_ADD;
     }
   }
 
   interface List<T> extends Collection<T> {
     default int add(T elem) {
-      assert this instanceof List;
+      assertTrue(this instanceof List);
       return LIST_ADD;
     }
   }
@@ -42,6 +44,6 @@ public class DefaultMethodsMain {
   static class YetAnotherList<T> extends SomeOtherList<T> implements Collection<T> {}
 
   public static void test() {
-    assert new YetAnotherList<Object>().add(null) == LIST_ADD;
+    assertTrue(new YetAnotherList<Object>().add(null) == LIST_ADD);
   }
 }

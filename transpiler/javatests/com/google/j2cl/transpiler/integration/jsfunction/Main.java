@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.jsfunction;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsOverlay;
 
@@ -54,10 +56,10 @@ public class Main {
   }
 
   private static void testJsFunction() {
-    assert ((Function) (() -> true)).fun() == 2;
-    assert ((Function) (() -> false)).fun() == 3;
-    assert FunctionWithStaticOverlay.fun() == 4;
-    assert FunctionWithStaticField.f == 1;
+    assertTrue(((Function) (() -> true)).fun() == 2);
+    assertTrue(((Function) (() -> false)).fun() == 3);
+    assertTrue(FunctionWithStaticOverlay.fun() == 4);
+    assertTrue(FunctionWithStaticField.f == 1);
   }
 
   @SuppressWarnings({"rawtypes", "unchecked"})
@@ -69,7 +71,7 @@ public class Main {
       // If the erasure type check is not present, the code would attempt to call "substring" on
       // java.lang.Object resulting in a type error.
       // rawConsumer.accept(new Object());
-      // assert false : "Should have thrown ClassCastException";
+      // fail( "Should have thrown ClassCastException");
     } catch (ClassCastException expected) {
     }
   }

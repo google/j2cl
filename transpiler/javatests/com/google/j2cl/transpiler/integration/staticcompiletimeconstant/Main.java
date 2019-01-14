@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.staticcompiletimeconstant;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 public class Main {
 
   private static final String CONST_WITH_ESCAPES = "A\"SD\"F";
@@ -37,16 +39,16 @@ public class Main {
     public static Object initialized = new Object();
 
     private static String init() {
-      assert initialized == null;
-      assert STRING_COMPILE_TIME_CONSTANT == "qwer";
-      assert BYTE_COMPILE_TIME_CONSTANT == 100;
-      assert SHORT_COMPILE_TIME_CONSTANT == 100;
-      assert INT_COMPILE_TIME_CONSTANT == 100;
-      assert LONG_COMPILE_TIME_CONSTANT == 100;
-      assert FLOAT_COMPILE_TIME_CONSTANT == 100;
-      assert DOUBLE_COMPILE_TIME_CONSTANT == 100;
-      assert CHAR_COMPILE_TIME_CONSTANT == 100;
-      assert BOOLEAN_COMPILE_TIME_CONSTANT == true;
+      assertTrue(initialized == null);
+      assertTrue(STRING_COMPILE_TIME_CONSTANT == "qwer");
+      assertTrue(BYTE_COMPILE_TIME_CONSTANT == 100);
+      assertTrue(SHORT_COMPILE_TIME_CONSTANT == 100);
+      assertTrue(INT_COMPILE_TIME_CONSTANT == 100);
+      assertTrue(LONG_COMPILE_TIME_CONSTANT == 100);
+      assertTrue(FLOAT_COMPILE_TIME_CONSTANT == 100);
+      assertTrue(DOUBLE_COMPILE_TIME_CONSTANT == 100);
+      assertTrue(CHAR_COMPILE_TIME_CONSTANT == 100);
+      assertTrue(BOOLEAN_COMPILE_TIME_CONSTANT == true);
 
       return Bar.circular;
     }
@@ -70,16 +72,16 @@ public class Main {
     public static Object initialized = new Object();
 
     private static String init() {
-      assert initialized == null;
-      assert STRING_COMPILE_TIME_CONSTANT == "qwer";
-      assert BYTE_COMPILE_TIME_CONSTANT == 100;
-      assert SHORT_COMPILE_TIME_CONSTANT == 100;
-      assert INT_COMPILE_TIME_CONSTANT == 100;
-      assert LONG_COMPILE_TIME_CONSTANT == 100;
-      assert FLOAT_COMPILE_TIME_CONSTANT == 100;
-      assert DOUBLE_COMPILE_TIME_CONSTANT == 100;
-      assert CHAR_COMPILE_TIME_CONSTANT == 100;
-      assert BOOLEAN_COMPILE_TIME_CONSTANT == true;
+      assertTrue(initialized == null);
+      assertTrue(STRING_COMPILE_TIME_CONSTANT == "qwer");
+      assertTrue(BYTE_COMPILE_TIME_CONSTANT == 100);
+      assertTrue(SHORT_COMPILE_TIME_CONSTANT == 100);
+      assertTrue(INT_COMPILE_TIME_CONSTANT == 100);
+      assertTrue(LONG_COMPILE_TIME_CONSTANT == 100);
+      assertTrue(FLOAT_COMPILE_TIME_CONSTANT == 100);
+      assertTrue(DOUBLE_COMPILE_TIME_CONSTANT == 100);
+      assertTrue(CHAR_COMPILE_TIME_CONSTANT == 100);
+      assertTrue(BOOLEAN_COMPILE_TIME_CONSTANT == true);
 
       return Foo.circular;
     }
@@ -91,6 +93,6 @@ public class Main {
     String a = Bar.circular;
 
     // Verify that even compile time constants handle string escaping the same as regular strings.
-    assert Main.CONST_WITH_ESCAPES.equals("A\"SD\"F");
+    assertTrue(Main.CONST_WITH_ESCAPES.equals("A\"SD\"F"));
   }
 }

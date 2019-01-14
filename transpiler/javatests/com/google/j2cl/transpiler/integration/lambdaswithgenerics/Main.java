@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.lambdaswithgenerics;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 import java.util.Spliterator;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -37,7 +39,7 @@ public class Main {
   public void testLambdaNoCapture() {
     Main m = new Main(100);
     int result = test(i -> new Main(i.field * 3), m);
-    assert (result == 310);
+    assertTrue((result == 310));
   }
 
   public void testLambdaCaptureField() {
@@ -49,7 +51,7 @@ public class Main {
               return new Main(f);
             },
             m);
-    assert (result == 120);
+    assertTrue((result == 120));
   }
 
   public void testLambdaCaptureLocal() {
@@ -61,7 +63,7 @@ public class Main {
               return new Main(f);
             },
             m);
-    assert (result == 210);
+    assertTrue((result == 210));
   }
 
   public static void main(String[] args) {

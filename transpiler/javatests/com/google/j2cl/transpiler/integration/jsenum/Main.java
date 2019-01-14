@@ -15,11 +15,17 @@
  */
 package com.google.j2cl.transpiler.integration.jsenum;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertFalse;
+import static com.google.j2cl.transpiler.utils.Asserts.assertThrows;
+import static com.google.j2cl.transpiler.utils.Asserts.assertThrowsClassCastException;
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+import static com.google.j2cl.transpiler.utils.Asserts.assertType;
+import static com.google.j2cl.transpiler.utils.Asserts.fail;
+
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.SortedSet;
 import java.util.TreeSet;
-import java.util.function.Supplier;
 import javaemul.internal.annotations.DoNotAutobox;
 import javaemul.internal.annotations.UncheckedCast;
 import jsinterop.annotations.JsEnum;
@@ -115,8 +121,16 @@ public class Main {
     StringNativeEnum sne = (StringNativeEnum) o;
     Comparable ce = (Comparable) o;
     Serializable s = (Serializable) o;
-    assertThrowsClassCastException(() -> (Enum) o);
-    assertThrowsClassCastException(() -> (Boolean) o);
+    assertThrowsClassCastException(
+        () -> {
+          Object unused = (Enum) o;
+        },
+        Enum.class);
+    assertThrowsClassCastException(
+        () -> {
+          Object unused = (Boolean) o;
+        },
+        Boolean.class);
 
     assertTrue(asSeenFromJs(NativeEnum.OK) == OK_STRING);
   }
@@ -196,8 +210,16 @@ public class Main {
     NativeEnum ne = (NativeEnum) o;
     Comparable ce = (Comparable) o;
     Serializable s = (Serializable) o;
-    assertThrowsClassCastException(() -> (Enum) o);
-    assertThrowsClassCastException(() -> (Boolean) o);
+    assertThrowsClassCastException(
+        () -> {
+          Object unused = (Enum) o;
+        },
+        Enum.class);
+    assertThrowsClassCastException(
+        () -> {
+          Object unused = (Boolean) o;
+        },
+        Boolean.class);
 
     assertTrue(asSeenFromJs(StringNativeEnum.OK) == OK_STRING);
   }
@@ -341,7 +363,8 @@ public class Main {
     assertThrowsClassCastException(
         () -> {
           Object unused = (Enum<PlainJsEnum> & Comparable<PlainJsEnum>) PlainJsEnum.ONE;
-        });
+        },
+        Enum.class);
 
     // Test that boxing of special method 'ordinal()' call is not broken by normalization.
     Integer i = v.ordinal();
@@ -360,8 +383,16 @@ public class Main {
     PlainJsEnum pe = (PlainJsEnum) o;
     Comparable c = (Comparable) o;
     Serializable s = (Serializable) o;
-    assertThrowsClassCastException(() -> (Enum) o);
-    assertThrowsClassCastException(() -> (Double) o);
+    assertThrowsClassCastException(
+        () -> {
+          Object unused = (Enum) o;
+        },
+        Enum.class);
+    assertThrowsClassCastException(
+        () -> {
+          Object unused = (Double) o;
+        },
+        Double.class);
 
     assertTrue(asSeenFromJs(PlainJsEnum.ONE) == ONE_DOUBLE);
 
@@ -448,9 +479,21 @@ public class Main {
     BooleanJsEnum be = (BooleanJsEnum) o;
     Serializable s = (Serializable) o;
 
-    assertThrowsClassCastException(() -> (Enum) o);
-    assertThrowsClassCastException(() -> (Comparable) o);
-    assertThrowsClassCastException(() -> (Boolean) o);
+    assertThrowsClassCastException(
+        () -> {
+          Object unused = (Enum) o;
+        },
+        Enum.class);
+    assertThrowsClassCastException(
+        () -> {
+          Object unused = (Comparable) o;
+        },
+        Comparable.class);
+    assertThrowsClassCastException(
+        () -> {
+          Object unused = (Boolean) o;
+        },
+        Boolean.class);
 
     assertTrue(asSeenFromJs(BooleanJsEnum.FALSE) == FALSE_BOOLEAN);
   }
@@ -526,9 +569,21 @@ public class Main {
 
     StringJsEnum se = (StringJsEnum) o;
     Serializable s = (Serializable) o;
-    assertThrowsClassCastException(() -> (Enum) o);
-    assertThrowsClassCastException(() -> (Comparable) o);
-    assertThrowsClassCastException(() -> (String) o);
+    assertThrowsClassCastException(
+        () -> {
+          Object unused = (Enum) o;
+        },
+        Enum.class);
+    assertThrowsClassCastException(
+        () -> {
+          Object unused = (Comparable) o;
+        },
+        Comparable.class);
+    assertThrowsClassCastException(
+        () -> {
+          Object unused = (String) o;
+        },
+        String.class);
 
     assertTrue(asSeenFromJs(StringJsEnum.HELLO) == HELLO_STRING);
   }
@@ -610,8 +665,8 @@ public class Main {
   }
 
   private static void testDoNotAutoboxJsEnum() {
-    assert returnsObject(StringJsEnum.HELLO) == HELLO_STRING;
-    assert returnsObject(0, StringJsEnum.HELLO) == HELLO_STRING;
+    assertTrue(returnsObject(StringJsEnum.HELLO) == HELLO_STRING);
+    assertTrue(returnsObject(0, StringJsEnum.HELLO) == HELLO_STRING);
   }
 
   private static Object returnsObject(@DoNotAutobox Object object) {
@@ -624,7 +679,7 @@ public class Main {
 
   private static void testUnckeckedCastJsEnum() {
     StringJsEnum s = uncheckedCast(HELLO_STRING);
-    assert s == StringJsEnum.HELLO;
+    assertTrue(s == StringJsEnum.HELLO);
   }
 
   @UncheckedCast
@@ -644,52 +699,52 @@ public class Main {
     assertTrue(c.compareTo(PlainJsEnum.ZERO) > 0);
     PlainJsEnum e = (PlainJsEnum & Comparable<PlainJsEnum>) PlainJsEnum.ONE;
     // e correcly holds an unboxed value.
-    assertSameType(Double.class, e);
+    assertType(Double.class, e);
 
     assertTrue(PlainJsEnum.ONE == (PlainJsEnum & Comparable<PlainJsEnum>) PlainJsEnum.ONE);
     // Intersection cast with a JsEnum does not unbox like the simple cast.
-    assertSameType(PlainJsEnum.class, (PlainJsEnum & Comparable<PlainJsEnum>) PlainJsEnum.ONE);
+    assertType(PlainJsEnum.class, (PlainJsEnum & Comparable<PlainJsEnum>) PlainJsEnum.ONE);
   }
 
   private static void testAutoBoxing_typeInference() {
-    assertSameType(Double.class, PlainJsEnum.ONE);
-    assertSameType(PlainJsEnum.class, boxingIdentity(PlainJsEnum.ONE));
+    assertType(Double.class, PlainJsEnum.ONE);
+    assertType(PlainJsEnum.class, boxingIdentity(PlainJsEnum.ONE));
 
     // Make sure the enum is boxed even when assigned to a field that is inferred to be JsEnum.
     TemplatedField<PlainJsEnum> templatedField = new TemplatedField<PlainJsEnum>(PlainJsEnum.ONE);
     PlainJsEnum unboxed = templatedField.getValue();
-    assertSameType(Double.class, unboxed);
+    assertType(Double.class, unboxed);
     // Boxing through specialized method parameter assignment.
-    assertSameType(PlainJsEnum.class, boxingIdentity(unboxed));
+    assertType(PlainJsEnum.class, boxingIdentity(unboxed));
     // Unboxing as a qualifier to ordinal.
-    assertSameType(Double.class, templatedField.getValue().ordinal());
+    assertType(Double.class, templatedField.getValue().ordinal());
 
     // Boxing through specialized method parameter assignment.
-    assertSameType(PlainJsEnum.class, boxingIdentity(templatedField.getValue()));
+    assertType(PlainJsEnum.class, boxingIdentity(templatedField.getValue()));
     // Checks what is actually returned by getValue().
-    assertSameType(PlainJsEnum.class, ((TemplatedField) templatedField).getValue());
+    assertType(PlainJsEnum.class, ((TemplatedField) templatedField).getValue());
 
     unboxed = templatedField.value;
-    assertSameType(Double.class, unboxed);
+    assertType(Double.class, unboxed);
 
     templatedField.value = PlainJsEnum.ONE;
     // Boxing through specialized method parameter assignment.
-    assertSameType(PlainJsEnum.class, boxingIdentity(templatedField.value));
+    assertType(PlainJsEnum.class, boxingIdentity(templatedField.value));
     // Checks what is actually stored in value.
-    assertSameType(PlainJsEnum.class, ((TemplatedField) templatedField).value);
+    assertType(PlainJsEnum.class, ((TemplatedField) templatedField).value);
     // Unboxing as a qualifier to ordinal.
-    assertSameType(Double.class, templatedField.value.ordinal());
+    assertType(Double.class, templatedField.value.ordinal());
 
     // Boxing/unboxing in varargs.
-    assertSameType(Double.class, Arrays.asList(PlainJsEnum.ONE).get(0));
+    assertType(Double.class, Arrays.asList(PlainJsEnum.ONE).get(0));
 
     // TODO(b/118615488): Rewrite the following checks when JsEnum arrays are allowed.
     // In Java the varargs array will be of the inferred argument type. Since non native JsEnum
     // arrays are not allowed, the created array is of the declared type.
-    assertSameType(Comparable[].class, varargsToComparableArray(PlainJsEnum.ONE));
-    assertSameType(PlainJsEnum.class, varargsToComparableArray(PlainJsEnum.ONE)[0]);
-    assertSameType(Object[].class, varargsToObjectArray(PlainJsEnum.ONE));
-    assertSameType(PlainJsEnum.class, varargsToObjectArray(PlainJsEnum.ONE)[0]);
+    assertType(Comparable[].class, varargsToComparableArray(PlainJsEnum.ONE));
+    assertType(PlainJsEnum.class, varargsToComparableArray(PlainJsEnum.ONE)[0]);
+    assertType(Object[].class, varargsToObjectArray(PlainJsEnum.ONE));
+    assertType(PlainJsEnum.class, varargsToObjectArray(PlainJsEnum.ONE)[0]);
   }
 
   private static class TemplatedField<T> {
@@ -742,61 +797,4 @@ public class Main {
     return o;
   }
 
-  private static <T> void assertSameType(Class<?> expectedType, @DoNotAutobox T actual) {
-    // Makes sure that even if the type variable T is inferred to be JsEnum, boxing still
-    // happens.
-    assertTrue(
-        "Not true that actual type <"
-            + actual.getClass().getCanonicalName()
-            + "> is equals to expected type <"
-            + expectedType.getCanonicalName()
-            + ">.",
-        expectedType == actual.getClass());
-  }
-
-  private static void assertThrowsClassCastException(Supplier<Object> supplier) {
-    assertThrowsClassCastException(
-        () -> {
-          supplier.get();
-        });
-  }
-
-  private static void assertThrowsClassCastException(Runnable runnable) {
-    assertThrows(
-        ClassCastException.class,
-        () -> {
-          runnable.run();
-        });
-  }
-
-  private static <T> void assertThrows(Class<?> exceptionClass, Runnable runnable) {
-    try {
-      runnable.run();
-    } catch (Throwable e) {
-      if (e.getClass() == exceptionClass) {
-        return;
-      }
-    }
-    fail("Should have thrown " + exceptionClass.getSimpleName());
-  }
-
-  private static void assertTrue(boolean condition) {
-    assert condition;
-  }
-
-  private static void assertTrue(String message, boolean condition) {
-    assert condition : message;
-  }
-
-  private static void assertFalse(boolean condition) {
-    assertTrue(!condition);
-  }
-
-  private static void fail() {
-    assert false;
-  }
-
-  private static void fail(String message) {
-    assert false : message;
-  }
 }

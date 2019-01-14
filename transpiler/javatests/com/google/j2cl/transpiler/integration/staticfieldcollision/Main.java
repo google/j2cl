@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.staticfieldcollision;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 import jsinterop.annotations.JsType;
 
 /**
@@ -32,6 +34,6 @@ public class Main {
   }
 
   public static void main(String... args) {
-    assert !HasNameCollision.clinit;
+    assertTrue(!HasNameCollision.clinit);
   }
 }

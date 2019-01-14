@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.interfacedevirtualize;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 /**
  * Test CharSequence Interface on all devirtualized classes that implement it.
  */
@@ -55,26 +57,26 @@ public class CharSequenceTest {
           }
         };
 
-    assert s.length() == 6;
-    assert cs.length() == 6;
+    assertTrue(s.length() == 6);
+    assertTrue(cs.length() == 6);
 
-    assert s.charAt(1) == 't';
-    assert cs.charAt(1) == 't';
+    assertTrue(s.charAt(1) == 't');
+    assertTrue(cs.charAt(1) == 't');
 
-    assert s.subSequence(0, 2).equals("st");
-    assert cs.subSequence(0, 2).equals("st");
+    assertTrue(s.subSequence(0, 2).equals("st"));
+    assertTrue(cs.subSequence(0, 2).equals("st"));
 
-    assert s.equals("string");
-    assert cs.equals("string");
+    assertTrue(s.equals("string"));
+    assertTrue(cs.equals("string"));
 
-    assert s.hashCode() == "string".hashCode();
-    assert cs.hashCode() == "string".hashCode();
+    assertTrue(s.hashCode() == "string".hashCode());
+    assertTrue(cs.hashCode() == "string".hashCode());
 
-    assert s.toString().equals("string");
-    assert cs.toString().equals("string");
+    assertTrue(s.toString().equals("string"));
+    assertTrue(cs.toString().equals("string"));
 
-    assert s.getClass() == String.class;
-    assert cs.getClass() != String.class;
+    assertTrue(s.getClass() == String.class);
+    assertTrue(cs.getClass() != String.class);
   }
 
   public static void testViaSuper() {
@@ -111,13 +113,13 @@ public class CharSequenceTest {
           }
         };
 
-    assert cs.equals(cs);
-    assert !cs.equals("string");
+    assertTrue(cs.equals(cs));
+    assertTrue(!cs.equals("string"));
 
-    assert cs.hashCode() == System.identityHashCode(cs);
-    assert cs.hashCode() != 0;
+    assertTrue(cs.hashCode() == System.identityHashCode(cs));
+    assertTrue(cs.hashCode() != 0);
 
-    assert cs.toString().startsWith("sub");
+    assertTrue(cs.toString().startsWith("sub"));
   }
 }
 

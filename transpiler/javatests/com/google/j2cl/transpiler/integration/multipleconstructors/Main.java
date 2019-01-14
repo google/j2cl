@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.multipleconstructors;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 /**
  * Test multiple constructors.
  */
@@ -39,15 +41,15 @@ public class Main {
 
   public static void main(String[] args) {
     Main m1 = new Main(1);
-    assert m1.id == 1;
-    assert !m1.flag;
+    assertTrue(m1.id == 1);
+    assertTrue(!m1.flag);
 
     Main m2 = new Main(true);
-    assert m2.id == -1;
-    assert m2.flag;
+    assertTrue(m2.id == -1);
+    assertTrue(m2.flag);
 
     Main m3 = new Main(10, false);
-    assert m3.id == 10;
-    assert !m3.flag;
+    assertTrue(m3.id == 10);
+    assertTrue(!m3.flag);
   }
 }

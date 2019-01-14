@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.fieldmethodclasscollision;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 /**
  * Test field, method and class name collision.
  */
@@ -28,8 +30,8 @@ public class Main {
   }
 
   public static void main(String... args) {
-    assert new Foo() instanceof Foo;
-    assert Foo == 1;
-    assert Foo() == 2;
+    assertTrue(new Foo() instanceof Foo);
+    assertTrue(Foo == 1);
+    assertTrue(Foo() == 2);
   }
 }

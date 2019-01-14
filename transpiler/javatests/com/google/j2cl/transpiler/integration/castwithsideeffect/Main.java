@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.castwithsideeffect;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 public class Main {
   public int count = 0;
 
@@ -26,6 +28,6 @@ public class Main {
   public static void main(String... args) {
     Main m = new Main();
     Main mm = (Main) m.test();
-    assert (m.count == 1);
+    assertTrue((m.count == 1));
   }
 }

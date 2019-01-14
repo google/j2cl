@@ -15,12 +15,33 @@
  */
 package com.google.j2cl.transpiler.integration.argumentimplicitcasts;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 /**
  * Tests implicit conversion in method call argument values.
  * <p>
  * Illegal conversions are commented out.
  */
 public class Main {
+  public static void main(String... args) {
+    assertAllTypeConversions(
+        BYTE_MAX_VALUE,
+        CHAR_MAX_VALUE,
+        SHORT_MAX_VALUE,
+        INTEGER_MAX_VALUE,
+        LONG_MAX_VALUE,
+        FLOAT_MAX_VALUE,
+        DOUBLE_MAX_VALUE);
+
+    assertAllTypeConversions(
+        BYTE_MIN_VALUE,
+        CHAR_MIN_VALUE,
+        SHORT_MIN_VALUE,
+        INTEGER_MIN_VALUE,
+        LONG_MIN_VALUE,
+        FLOAT_MIN_VALUE,
+        DOUBLE_MIN_VALUE);
+  }
 
   private static class IntValueHolder {
     private int value;
@@ -38,21 +59,21 @@ public class Main {
     }
   }
 
-  public static final byte BYTE_MAX_VALUE = 127;
-  public static final char CHAR_MAX_VALUE = 65535;
-  public static final short SHORT_MAX_VALUE = 32767;
-  public static final int INTEGER_MAX_VALUE = 2147483647;
-  public static final long LONG_MAX_VALUE = 9223372036854775807L;
-  public static final float FLOAT_MAX_VALUE = 3.4028235E38f;
-  public static final double DOUBLE_MAX_VALUE = 1.7976931348623157E308d;
+  private static final byte BYTE_MAX_VALUE = 127;
+  private static final char CHAR_MAX_VALUE = 65535;
+  private static final short SHORT_MAX_VALUE = 32767;
+  private static final int INTEGER_MAX_VALUE = 2147483647;
+  private static final long LONG_MAX_VALUE = 9223372036854775807L;
+  private static final float FLOAT_MAX_VALUE = 3.4028235E38f;
+  private static final double DOUBLE_MAX_VALUE = 1.7976931348623157E308d;
 
-  public static final byte BYTE_MIN_VALUE = -128;
-  public static final char CHAR_MIN_VALUE = 0;
-  public static final short SHORT_MIN_VALUE = -32768;
-  public static final int INTEGER_MIN_VALUE = -2147483648;
-  public static final long LONG_MIN_VALUE = -9223372036854775808L;
-  public static final float FLOAT_MIN_VALUE = 1.4E-45f;
-  public static final double DOUBLE_MIN_VALUE = 4.9E-324;
+  private static final byte BYTE_MIN_VALUE = -128;
+  private static final char CHAR_MIN_VALUE = 0;
+  private static final short SHORT_MIN_VALUE = -32768;
+  private static final int INTEGER_MIN_VALUE = -2147483648;
+  private static final long LONG_MIN_VALUE = -9223372036854775808L;
+  private static final float FLOAT_MIN_VALUE = 1.4E-45f;
+  private static final double DOUBLE_MIN_VALUE = 4.9E-324;
 
   @SuppressWarnings("unused")
   private static char getChar(char value) {
@@ -84,26 +105,6 @@ public class Main {
     return value;
   }
 
-  public static void main(String... args) {
-    assertAllTypeConversions(
-        BYTE_MAX_VALUE,
-        CHAR_MAX_VALUE,
-        SHORT_MAX_VALUE,
-        INTEGER_MAX_VALUE,
-        LONG_MAX_VALUE,
-        FLOAT_MAX_VALUE,
-        DOUBLE_MAX_VALUE);
-
-    assertAllTypeConversions(
-        BYTE_MIN_VALUE,
-        CHAR_MIN_VALUE,
-        SHORT_MIN_VALUE,
-        INTEGER_MIN_VALUE,
-        LONG_MIN_VALUE,
-        FLOAT_MIN_VALUE,
-        DOUBLE_MIN_VALUE);
-  }
-
   @SuppressWarnings("unused")
   private static void assertAllTypeConversions(
       byte byteValue,
@@ -120,68 +121,68 @@ public class Main {
     // Also around long / non long boundaries if we fail to insert implicit casts it will be a
     // JSComp compile error since it will see 'Long' on one side and 'number' on the other.
 
-    // assert getChar(byteValue) == (char) byteValue; // illegal
-    assert getShort(byteValue) == (short) byteValue;
-    assert getInt(byteValue) == (int) byteValue;
-    assert getLong(byteValue) == (long) byteValue;
-    assert getFloat(byteValue) == (float) byteValue;
-    assert getDouble(byteValue) == (double) byteValue;
+    // assertTrue(getChar(byteValue) == (char) byteValue); // illegal
+    assertTrue(getShort(byteValue) == (short) byteValue);
+    assertTrue(getInt(byteValue) == (int) byteValue);
+    assertTrue(getLong(byteValue) == (long) byteValue);
+    assertTrue(getFloat(byteValue) == (float) byteValue);
+    assertTrue(getDouble(byteValue) == (double) byteValue);
 
-    // assert getByte(charValue) == (byte) charValue; // illegal
-    // assert getShort(charValue) == (short) charValue; // illegal
-    assert getInt(charValue) == (int) charValue;
-    assert getLong(charValue) == (long) charValue;
-    assert getFloat(charValue) == (float) charValue;
-    assert getDouble(charValue) == (double) charValue;
+    // assertTrue(getByte(charValue) == (byte) charValue); // illegal
+    // assertTrue(getShort(charValue) == (short) charValue); // illegal
+    assertTrue(getInt(charValue) == (int) charValue);
+    assertTrue(getLong(charValue) == (long) charValue);
+    assertTrue(getFloat(charValue) == (float) charValue);
+    assertTrue(getDouble(charValue) == (double) charValue);
 
-    // assert getByte(shortValue) == (byte) shortValue; // illegal
-    // assert getChar(shortValue) == (char) shortValue; // illegal
-    assert getInt(shortValue) == (int) shortValue;
-    assert getLong(shortValue) == (long) shortValue;
-    assert getFloat(shortValue) == (float) shortValue;
-    assert getDouble(shortValue) == (double) shortValue;
+    // assertTrue(getByte(shortValue) == (byte) shortValue); // illegal
+    // assertTrue(getChar(shortValue) == (char) shortValue); // illegal
+    assertTrue(getInt(shortValue) == (int) shortValue);
+    assertTrue(getLong(shortValue) == (long) shortValue);
+    assertTrue(getFloat(shortValue) == (float) shortValue);
+    assertTrue(getDouble(shortValue) == (double) shortValue);
 
-    // assert getByte(integerValue) == (byte) integerValue; // illegal
-    // assert getChar(integerValue) == (char) integerValue; // illegal
-    // assert getShort(integerValue) == (short) integerValue; // illegal
-    assert getLong(integerValue) == (long) integerValue;
-    assert getFloat(integerValue) == (float) integerValue;
-    assert getDouble(integerValue) == (double) integerValue;
+    // assertTrue(getByte(integerValue) == (byte) integerValue); // illegal
+    // assertTrue(getChar(integerValue) == (char) integerValue); // illegal
+    // assertTrue(getShort(integerValue) == (short) integerValue); // illegal
+    assertTrue(getLong(integerValue) == (long) integerValue);
+    assertTrue(getFloat(integerValue) == (float) integerValue);
+    assertTrue(getDouble(integerValue) == (double) integerValue);
 
-    // assert getByte(longValue) == (byte) longValue; // illegal
-    // assert getChar(longValue) == (char) longValue; // illegal
-    // assert getShort(longValue) == (short) longValue; // illegal
-    // assert getInt(longValue) == (int) longValue; // illegal
-    assert getFloat(longValue) == (float) longValue;
-    assert getDouble(longValue) == (double) longValue;
+    // assertTrue(getByte(longValue) == (byte) longValue); // illegal
+    // assertTrue(getChar(longValue) == (char) longValue); // illegal
+    // assertTrue(getShort(longValue) == (short) longValue); // illegal
+    // assertTrue(getInt(longValue) == (int) longValue); // illegal
+    assertTrue(getFloat(longValue) == (float) longValue);
+    assertTrue(getDouble(longValue) == (double) longValue);
 
-    // assert getByte(floatValue) == (byte) floatValue; // illegal
-    // assert getChar(floatValue) == (char) floatValue; // illegal
-    // assert getShort(floatValue) == (short) floatValue; // illegal
-    // assert getInt(floatValue) == (int) floatValue; // illegal
-    // assert getLong(floatValue) == (long) floatValue; // illegal
-    assert getDouble(floatValue) == (double) floatValue;
+    // assertTrue(getByte(floatValue) == (byte) floatValue); // illegal
+    // assertTrue(getChar(floatValue) == (char) floatValue); // illegal
+    // assertTrue(getShort(floatValue) == (short) floatValue); // illegal
+    // assertTrue(getInt(floatValue) == (int) floatValue); // illegal
+    // assertTrue(getLong(floatValue) == (long) floatValue); // illegal
+    assertTrue(getDouble(floatValue) == (double) floatValue);
 
-    // assert getByte(doubleValue) == (byte) doubleValue; // illegal
-    // assert getChar(doubleValue) == (char) doubleValue; // illegal
-    // assert getShort(doubleValue) == (short) doubleValue; // illegal
-    // assert getInt(doubleValue) == (int) doubleValue; // illegal
-    // assert getLong(doubleValue) == (long) doubleValue; // illegal
-    // assert getFloat(doubleValue) == (float) doubleValue; // illegal
+    // assertTrue(getByte(doubleValue) == (byte) doubleValue); // illegal
+    // assertTrue(getChar(doubleValue) == (char) doubleValue); // illegal
+    // assertTrue(getShort(doubleValue) == (short) doubleValue); // illegal
+    // assertTrue(getInt(doubleValue) == (int) doubleValue); // illegal
+    // assertTrue(getLong(doubleValue) == (long) doubleValue); // illegal
+    // assertTrue(getFloat(doubleValue) == (float) doubleValue); // illegal
 
     // Do some of the same checks for NewInstance invocations.
-    assert new IntValueHolder(byteValue).value == (int) byteValue;
-    assert new IntValueHolder(charValue).value == (int) charValue;
-    assert new IntValueHolder(shortValue).value == (int) shortValue;
-    // assert new IntValueHolder(longValue).value == (int) longValue; // illegal
-    // assert new IntValueHolder(floatValue).value == (int) floatValue; // illegal
-    // assert new IntValueHolder(doubleValue).value == (int) doubleValue; // illegal
+    assertTrue(new IntValueHolder(byteValue).value == (int) byteValue);
+    assertTrue(new IntValueHolder(charValue).value == (int) charValue);
+    assertTrue(new IntValueHolder(shortValue).value == (int) shortValue);
+    // assertTrue(new IntValueHolder(longValue).value == (int) longValue); // illegal
+    // assertTrue(new IntValueHolder(floatValue).value == (int) floatValue); // illegal
+    // assertTrue(new IntValueHolder(doubleValue).value == (int) doubleValue); // illegal
 
-    assert new LongValueHolder(byteValue).value == (long) byteValue;
-    assert new LongValueHolder(charValue).value == (long) charValue;
-    assert new LongValueHolder(shortValue).value == (long) shortValue;
-    // assert new LongValueHolder(intValue).value == (long) intValue; // illegal
-    // assert new LongValueHolder(floatValue).value == (long) floatValue; // illegal
-    // assert new LongValueHolder(doubleValue).value == (long) doubleValue; // illegal
+    assertTrue(new LongValueHolder(byteValue).value == (long) byteValue);
+    assertTrue(new LongValueHolder(charValue).value == (long) charValue);
+    assertTrue(new LongValueHolder(shortValue).value == (long) shortValue);
+    // assertTrue(new LongValueHolder(intValue).value == (long) intValue); // illegal
+    // assertTrue(new LongValueHolder(floatValue).value == (long) floatValue); // illegal
+    // assertTrue(new LongValueHolder(doubleValue).value == (long) doubleValue); // illegal
   }
 }

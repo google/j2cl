@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.trywithresource;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 import com.google.j2cl.transpiler.integration.trywithresource.FailableResource.FailureMode;
 import java.util.ArrayList;
 
@@ -40,16 +42,16 @@ public class TryWithResourceSingleResourceTests {
     try {
       testSingleResource(FailureMode.OnConstruction, false);
     } catch (Exception e) {
-      assert e.getMessage().equals("OnConstruction") : "Should fail on construction";
+      assertTrue("Should fail on construction", e.getMessage().equals("OnConstruction"));
       numCaught++;
     }
     try {
       testSingleResource(FailureMode.OnConstruction, true);
     } catch (Exception e) {
-      assert e.getMessage().equals("OnConstruction") : "Should fail on construction";
+      assertTrue("Should fail on construction", e.getMessage().equals("OnConstruction"));
       numCaught++;
     }
-    assert numCaught == 2 : "Should have thrown an exception in every case.";
+    assertTrue("Should have thrown an exception in every case.", numCaught == 2);
   }
 
   /**
@@ -63,10 +65,10 @@ public class TryWithResourceSingleResourceTests {
     try {
       testSingleResource(FailureMode.None, true);
     } catch (Exception e) {
-      assert e.getMessage().equals("try") : "Should fail to complete try block.";
+      assertTrue("Should fail to complete try block.", e.getMessage().equals("try"));
       numCaught++;
     }
-    assert numCaught == 1 : "Should have thrown an exception.";
+    assertTrue("Should have thrown an exception.", numCaught == 1);
 
     // If the automatic closing of the resource completes abruptly because of a throw of a value V2,
     // then the try-with-resources statement completes abruptly because of a throw of value V with
@@ -74,12 +76,12 @@ public class TryWithResourceSingleResourceTests {
     try {
       testSingleResource(FailureMode.OnClose, true);
     } catch (Exception e) {
-      assert e.getMessage().equals("try") : "Should fail to complete try block.";
-      assert e.getSuppressed().length == 1;
-      assert e.getSuppressed()[0].getMessage().equals("OnClose");
+      assertTrue("Should fail to complete try block.", e.getMessage().equals("try"));
+      assertTrue(e.getSuppressed().length == 1);
+      assertTrue(e.getSuppressed()[0].getMessage().equals("OnClose"));
       numCaught++;
     }
-    assert numCaught == 2 : "Should have thrown an exception in every case.";
+    assertTrue("Should have thrown an exception in every case.", numCaught == 2);
   }
 
   /**
@@ -92,10 +94,10 @@ public class TryWithResourceSingleResourceTests {
     try {
       testSingleResource(FailureMode.OnClose, false);
     } catch (Exception e) {
-      assert e.getMessage().equals("OnClose") : "Should fail to close resource.";
+      assertTrue("Should fail to close resource.", e.getMessage().equals("OnClose"));
       numCaught++;
     }
-    assert numCaught == 1 : "Should have thrown an exception.";
+    assertTrue("Should have thrown an exception.", numCaught == 1);
   }
 
   private static void testSingleResource(FailureMode failureMode, boolean tryBlockFails)

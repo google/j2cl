@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.lambdas;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 @SuppressWarnings("MultipleTopLevelClasses")
 interface MyInterface {
   int foo(int i);
@@ -47,30 +49,30 @@ public class Main {
 
     private void testLambdaNoCapture() {
       int result = test(i -> i + 1, 10);
-      assert result == 111;
+      assertTrue(result == 111);
       result =
           test(
               i -> {
                 return i + 2;
               },
               10);
-      assert result == 112;
+      assertTrue(result == 112);
     }
 
     private void testInstanceofLambda() {
       MyInterface intf = (i -> i + 1);
-      assert (intf instanceof MyInterface);
+      assertTrue((intf instanceof MyInterface));
     }
 
     private void testLambdaCaptureField() {
       int result = test(i -> field + i + 1, 10);
-      assert result == 211;
+      assertTrue(result == 211);
     }
 
     private void testLambdaCaptureLocal() {
       int x = 1;
       int result = test(i -> x + i + 1, 10);
-      assert result == 112;
+      assertTrue(result == 112);
     }
 
     private void testLambdaCaptureFieldAndLocal() {
@@ -82,13 +84,13 @@ public class Main {
                 return x + y + this.field + i + 1;
               },
               10);
-      assert result == 213;
+      assertTrue(result == 213);
     }
 
     private void testLambdaCaptureField2() {
       int result = test(i -> field + i + 1);
-      assert (result == 701);
-      assert (this.field == 200);
+      assertTrue((result == 701));
+      assertTrue((this.field == 200));
     }
   }
 
@@ -110,9 +112,9 @@ public class Main {
   private static void testSpecialLambdas() {
     SubEquals getHello = () -> "Hello";
 
-    assert getHello.equals(getHello);
-    assert !getHello.equals("Hello");
-    assert "Hello".equals(getHello.get());
+    assertTrue(getHello.equals(getHello));
+    assertTrue(!getHello.equals("Hello"));
+    assertTrue("Hello".equals(getHello.get()));
   }
 
   @SuppressWarnings({"rawtypes", "unchecked"})
@@ -124,7 +126,7 @@ public class Main {
       // If the erasure type check is not present, the code would attempt to call "substring" on
       // java.lang.Object resulting in a type error.
       // rawConsumer.accept(new Object());
-      // assert false : "Should have thrown ClassCastException";
+      // fail( "Should have thrown ClassCastException");
     } catch (ClassCastException expected) {
     }
   }

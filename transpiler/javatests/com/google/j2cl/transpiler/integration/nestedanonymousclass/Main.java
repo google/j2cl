@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.nestedanonymousclass;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 /**
  * Test nested anonymous class.
  */
@@ -33,19 +35,22 @@ public class Main {
                   @Override
                   public void foo() {}
                 };
-            assert intf2 instanceof AnonymousInterface;
-            assert intf2
-                .getClass()
-                .getName()
-                .equals("com.google.j2cl.transpiler.integration.nestedanonymousclass.Main$1$1");
+            assertTrue(intf2 instanceof AnonymousInterface);
+            assertTrue(
+                intf2
+                    .getClass()
+                    .getName()
+                    .equals(
+                        "com.google.j2cl.transpiler.integration.nestedanonymousclass.Main$1$1"));
           }
         };
 
-    assert intf1 instanceof AnonymousInterface;
-    assert intf1
-        .getClass()
-        .getName()
-        .equals("com.google.j2cl.transpiler.integration.nestedanonymousclass.Main$1");
+    assertTrue(intf1 instanceof AnonymousInterface);
+    assertTrue(
+        intf1
+            .getClass()
+            .getName()
+            .equals("com.google.j2cl.transpiler.integration.nestedanonymousclass.Main$1"));
     intf1.foo();
   }
 }

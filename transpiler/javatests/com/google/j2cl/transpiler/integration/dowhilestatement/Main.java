@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.dowhilestatement;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 /**
  * Test do while loop.
  */
@@ -28,10 +30,10 @@ public class Main {
 
     do count++;
     while (count < 10);
-    assert count == 10;
+    assertTrue(count == 10);
 
     do ;
     while (count++ < 14);
-    assert count == 15;
+    assertTrue(count == 15);
   }
 }

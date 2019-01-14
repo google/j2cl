@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.casttogenerics;
 
+import static com.google.j2cl.transpiler.utils.Asserts.fail;
+
 public class Main<T, E extends Number> {
   @SuppressWarnings({"unused", "unchecked"})
   public void test() {
@@ -25,7 +27,7 @@ public class Main<T, E extends Number> {
     Object oo = new Error();
     try {
       E ee = (E) oo; // casting Error instance to Number, exception.
-      assert false : "An expected failure did not occur.";
+      fail("An expected failure did not occur.");
     } catch (ClassCastException exe) {
       // expected.
     }
@@ -39,7 +41,7 @@ public class Main<T, E extends Number> {
     T[] ts = (T[]) is;
     try {
       E[] ees = (E[]) os;
-      assert false : "An expected failure did not occur.";
+      fail("An expected failure did not occur.");
     } catch (ClassCastException exe) {
       // expected.
     }

@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.nativeinjection;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 import jsinterop.annotations.JsMethod;
 
 /**
@@ -22,11 +24,11 @@ import jsinterop.annotations.JsMethod;
  */
 public class Main {
   public static void main(String... args) {
-    assert NativeClass.nativeStaticMethod().equals("nativeStaticMethod");
+    assertTrue(NativeClass.nativeStaticMethod().equals("nativeStaticMethod"));
     NativeClass instance = new NativeClass();
-    assert instance.nativeInstanceMethod().equals("nativeInstanceMethod");
+    assertTrue(instance.nativeInstanceMethod().equals("nativeInstanceMethod"));
 
-    assert NativeClassSuper.nativeStaticMethod().equals("nativeStaticMethodInSuper");
+    assertTrue(NativeClassSuper.nativeStaticMethod().equals("nativeStaticMethodInSuper"));
   }
 
   /**

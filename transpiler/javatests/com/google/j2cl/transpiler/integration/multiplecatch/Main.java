@@ -15,23 +15,25 @@
  */
 package com.google.j2cl.transpiler.integration.multiplecatch;
 
+import static com.google.j2cl.transpiler.utils.Asserts.fail;
+
 /**
  * Test multiple catch.
  */
 public class Main {
   public static void main(String... args) {
     try {
-      throwRuntimeException(); // So assert isn't considered dead code by javac.
-      assert false; // should have skipped past this with an exception.
+      throwRuntimeException(); // So assertTrue(isn't considered dead code by javac.
+      fail(); // should have skipped past this with an exception.
     } catch (NullPointerException | ClassCastException e) {
-      assert false; // The wrong exception type was caught.
+      fail(); // The wrong exception type was caught.
     } catch (RuntimeException r) {
       // expected
     }
 
     try {
-      throwIllegalArgumentException(); // So assert isn't considered dead code by javac.
-      assert false; // should have skipped past this with an exception.
+      throwIllegalArgumentException(); // So assertTrue(isn't considered dead code by javac.
+      fail(); // should have skipped past this with an exception.
     } catch (NullPointerException | IllegalArgumentException e) {
       // expected
     }

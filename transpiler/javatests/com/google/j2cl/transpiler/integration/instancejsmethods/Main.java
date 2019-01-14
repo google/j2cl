@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.instancejsmethods;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 import jsinterop.annotations.JsMethod;
 
 public class Main {
@@ -32,15 +34,15 @@ public class Main {
     Parent cc = new Child();
     MyInterface intf = new Child();
 
-    assert (sp.fun(12, 35) == 158);
-    assert (sp.bar(6, 7) == 264);
-    assert (p.fun(12, 35) == 47);
-    assert (p.bar(6, 7) == 42);
-    assert (c.fun(12, 35) == 48);
-    assert (c.bar(6, 7) == 43);
-    assert (pp.foo(10) == 10);
-    assert (cc.foo(10) == 11);
-    assert (intf.intfFoo(5) == 5);
+    assertTrue((sp.fun(12, 35) == 158));
+    assertTrue((sp.bar(6, 7) == 264));
+    assertTrue((p.fun(12, 35) == 47));
+    assertTrue((p.bar(6, 7) == 42));
+    assertTrue((c.fun(12, 35) == 48));
+    assertTrue((c.bar(6, 7) == 43));
+    assertTrue((pp.foo(10) == 10));
+    assertTrue((cc.foo(10) == 11));
+    assertTrue((intf.intfFoo(5) == 5));
   }
 
   public static void testCallByConcreteType() {
@@ -48,27 +50,27 @@ public class Main {
     Parent p = new Parent();
     Child c = new Child();
 
-    assert (sp.fun(12, 35) == 158);
-    assert (sp.bar(6, 7) == 264);
-    assert (p.fun(12, 35) == 47);
-    assert (p.bar(6, 7) == 42);
-    assert (c.fun(12, 35) == 48);
-    assert (c.bar(6, 7) == 43);
-    assert (p.foo(10) == 10);
-    assert (c.foo(10) == 11);
-    assert (c.intfFoo(5) == 5);
+    assertTrue((sp.fun(12, 35) == 158));
+    assertTrue((sp.bar(6, 7) == 264));
+    assertTrue((p.fun(12, 35) == 47));
+    assertTrue((p.bar(6, 7) == 42));
+    assertTrue((c.fun(12, 35) == 48));
+    assertTrue((c.bar(6, 7) == 43));
+    assertTrue((p.foo(10) == 10));
+    assertTrue((c.foo(10) == 11));
+    assertTrue((c.intfFoo(5) == 5));
   }
 
   public static void testCallByJS() {
     Parent p = new Parent();
     Child c = new Child();
-    assert (callParentFun(p, 12, 35) == 47);
-    assert (callParentBar(p, 6, 7) == 42);
-    assert (callParentFoo(p, 10) == 10);
-    assert (callChildFun(c, 12, 35) == 48);
-    assert (callChildBar(c, 6, 7) == 43);
-    assert (callChildFoo(c, 10) == 11);
-    assert (callChildIntfFoo(c, 5) == 5);
+    assertTrue((callParentFun(p, 12, 35) == 47));
+    assertTrue((callParentBar(p, 6, 7) == 42));
+    assertTrue((callParentFoo(p, 10) == 10));
+    assertTrue((callChildFun(c, 12, 35) == 48));
+    assertTrue((callChildBar(c, 6, 7) == 43));
+    assertTrue((callChildFoo(c, 10) == 11));
+    assertTrue((callChildIntfFoo(c, 5) == 5));
   }
 
   @JsMethod

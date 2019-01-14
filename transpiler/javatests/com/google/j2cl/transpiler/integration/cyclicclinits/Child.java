@@ -15,10 +15,12 @@
  */
 package com.google.j2cl.transpiler.integration.cyclicclinits;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 class Parent {
   static {
     // Parent.$clinit() executes before Child.$clinit(), so fieldInChild has not been initialized.
-    assert Child.fieldInChild == null;
+    assertTrue(Child.fieldInChild == null);
   }
 }
 
@@ -27,6 +29,6 @@ public class Child extends Parent {
 
   public static void test() {
     // Child.$clinit() has been called, so fieldInChild has been initialized.
-    assert fieldInChild != null;
+    assertTrue(fieldInChild != null);
   }
 }

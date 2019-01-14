@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.jsbridgemultipleexposing;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 public class Main {
   public static void main(String... args) {
     A a = new Foo();
@@ -22,11 +24,11 @@ public class Main {
     I i = new Foo();
     Foo f = new Foo();
 
-    assert (a.m() == 10);
-    assert (b.m() == 10);
-    assert (i.m() == 10);
-    assert (f.m() == 10);
-    assert (new A().m() == 1);
-    assert (new B().m() == 5);
+    assertTrue((a.m() == 10));
+    assertTrue((b.m() == 10));
+    assertTrue((i.m() == 10));
+    assertTrue((f.m() == 10));
+    assertTrue((new A().m() == 1));
+    assertTrue((new B().m() == 5));
   }
 }

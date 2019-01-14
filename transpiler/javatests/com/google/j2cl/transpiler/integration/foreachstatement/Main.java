@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.foreachstatement;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 import java.util.Iterator;
 
 /**
@@ -46,22 +48,22 @@ public class Main {
     int j = 5;
     int lastSeenInt = -1;
     for (int i : array) {
-      assert i == j : "Seen:<" + i + "> Expected:<" + j + ">";
+      assertTrue("Seen:<" + i + "> Expected:<" + j + ">", i == j);
       j--;
       lastSeenInt = i;
     }
 
-    assert lastSeenInt == 0 : "LastSeen:<" + lastSeenInt + "> should be zero";
+    assertTrue("LastSeen:<" + lastSeenInt + "> should be zero", lastSeenInt == 0);
 
     String lastSeenString = "";
     j = 5;
     for (String s : new MyIterable()) {
 
-      assert s == "" + j : "Seen:<" + s + "> Expected:<" + j + ">";
+      assertTrue("Seen:<" + s + "> Expected:<" + j + ">", s == "" + j);
       j--;
       lastSeenString = s;
     }
-    assert lastSeenString == "0" : "LastSeen:<" + lastSeenString + "> should be zero";
+    assertTrue("LastSeen:<" + lastSeenString + "> should be zero", lastSeenString == "0");
 
     int[][] matrix = new int[5][5];
     // load the matrix
@@ -75,7 +77,7 @@ public class Main {
     for (int[] row : matrix) {
       int k0 = 0;
       for (int k : row) {
-        assert k == value(i0, k0) : "Seen:<" + k + "> Expected:<" + value(i0, k0) + ">";
+        assertTrue("Seen:<" + k + "> Expected:<" + value(i0, k0) + ">", k == value(i0, k0));
         k0++;
       }
       i0++;

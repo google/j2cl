@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.arrayobjectcalls;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 @SuppressWarnings({
   "ArrayEquals",
   "ArrayHashCode",
@@ -28,11 +30,11 @@ public class Main {
     Main[] mains = new Main[1];
     Main[] other = new Main[1];
 
-    assert mains.equals(mains);
-    assert !mains.equals(other);
-    assert mains.hashCode() == mains.hashCode();
-    assert mains.hashCode() != other.hashCode();
-    assert mains.toString() != other.toString();
-    assert mains.getClass() == other.getClass();
+    assertTrue(mains.equals(mains));
+    assertTrue(!mains.equals(other));
+    assertTrue(mains.hashCode() == mains.hashCode());
+    assertTrue(mains.hashCode() != other.hashCode());
+    assertTrue(mains.toString() != other.toString());
+    assertTrue(mains.getClass() == other.getClass());
   }
 }

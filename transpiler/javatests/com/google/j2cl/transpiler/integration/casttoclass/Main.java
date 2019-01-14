@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.casttoclass;
 
+import static com.google.j2cl.transpiler.utils.Asserts.fail;
+
 /**
  * Test cast to class type.
  */
@@ -29,7 +31,7 @@ public class Main {
     // But this isn't fine.
     try {
       RuntimeException exception = (RuntimeException) object;
-      assert false : "An expected failure did not occur.";
+      fail("An expected failure did not occur.");
     } catch (ClassCastException e) {
       // expected
     }

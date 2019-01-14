@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.enums;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 import java.util.function.Function;
 
 public class Main {
@@ -27,41 +29,41 @@ public class Main {
   }
 
   private static void testOrdinal() {
-    assert Foo.FOO.ordinal() == 0;
-    assert Foo.FOZ.ordinal() == 1;
+    assertTrue(Foo.FOO.ordinal() == 0);
+    assertTrue(Foo.FOZ.ordinal() == 1);
 
-    assert Bar.BAR.ordinal() == 0;
-    assert Bar.BAZ.ordinal() == 1;
-    assert Bar.BANG.ordinal() == 2;
+    assertTrue(Bar.BAR.ordinal() == 0);
+    assertTrue(Bar.BAZ.ordinal() == 1);
+    assertTrue(Bar.BANG.ordinal() == 2);
 
-    assert Blah.BLAH.ordinal() == 0;
+    assertTrue(Blah.BLAH.ordinal() == 0);
   }
 
   private static void testName() {
-    assert Foo.FOO.name().equals("FOO");
-    assert Foo.FOZ.name().equals("FOZ");
+    assertTrue(Foo.FOO.name().equals("FOO"));
+    assertTrue(Foo.FOZ.name().equals("FOZ"));
 
-    assert Bar.BAR.name().equals("BAR");
-    assert Bar.BAZ.name().equals("BAZ");
-    assert Bar.BANG.name().equals("BANG");
+    assertTrue(Bar.BAR.name().equals("BAR"));
+    assertTrue(Bar.BAZ.name().equals("BAZ"));
+    assertTrue(Bar.BANG.name().equals("BANG"));
 
-    assert Blah.BLAH.name().equals("BLAH");
+    assertTrue(Blah.BLAH.name().equals("BLAH"));
   }
 
   private static void testInstanceMethod() {
-    assert Bar.BAR.getF() == 1;
-    assert Bar.BAZ.getF() == 0;
-    assert Bar.BANG.getF() == 7;
+    assertTrue(Bar.BAR.getF() == 1);
+    assertTrue(Bar.BAZ.getF() == 0);
+    assertTrue(Bar.BANG.getF() == 7);
   }
 
   private static void testStaticFields() {
     // Check use-before-def assigning undefined
     // Although it isn't likely the test will make it this far
     for (Bar b : Bar.ENUM_SET) {
-      assert b != null;
+      assertTrue(b != null);
     }
 
-    assert Baz.field == null;
+    assertTrue(Baz.field == null);
   }
 
   enum Foo {
@@ -114,8 +116,8 @@ public class Main {
   }
 
   private static void testEnumInitializedWithLambdas() {
-    assert 1 == Functions.PLUS1.function.apply(0);
-    assert 1 == Functions.MINUS1.function.apply(2);
+    assertTrue(1 == Functions.PLUS1.function.apply(0));
+    assertTrue(1 == Functions.MINUS1.function.apply(2));
   }
 
   enum Functions {

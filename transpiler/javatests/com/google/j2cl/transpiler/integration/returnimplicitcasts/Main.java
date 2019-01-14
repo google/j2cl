@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.returnimplicitcasts;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 /**
  * Tests implicit conversion in function return values.
  * <p>
@@ -198,47 +200,47 @@ public class Main {
   //  }
 
   public static void main(String... args) {
-    assert getCharFromByte() == (char) BYTE_MAX_VALUE;
-    assert getShortFromByte() == (short) BYTE_MAX_VALUE;
-    assert getIntFromByte() == (int) BYTE_MAX_VALUE;
-    assert getLongFromByte() == (long) BYTE_MAX_VALUE;
-    assert getFloatFromByte() == (float) BYTE_MAX_VALUE;
-    assert getDoubleFromByte() == (double) BYTE_MAX_VALUE;
-    //    assert getByteFromChar() == (byte) CHAR_MAX_VALUE; // illegal
-    //    assert getShortFromChar() == (short) CHAR_MAX_VALUE; // illegal
-    assert getIntFromChar() == (int) CHAR_MAX_VALUE;
-    assert getLongFromChar() == (long) CHAR_MAX_VALUE;
-    assert getFloatFromChar() == (float) CHAR_MAX_VALUE;
-    assert getDoubleFromChar() == (double) CHAR_MAX_VALUE;
-    //    assert getByteFromShort() == (byte) SHORT_MAX_VALUE; // illegal
-    assert getCharFromShort() == (char) SHORT_MAX_VALUE;
-    assert getIntFromShort() == (int) SHORT_MAX_VALUE;
-    assert getLongFromShort() == (long) SHORT_MAX_VALUE;
-    assert getFloatFromShort() == (float) SHORT_MAX_VALUE;
-    assert getDoubleFromShort() == (double) SHORT_MAX_VALUE;
-    //    assert getByteFromInt() == (byte) INTEGER_MAX_VALUE; // illegal
-    //    assert getCharFromInt() == (char) INTEGER_MAX_VALUE; // illegal
-    //    assert getShortFromInt() == (short) INTEGER_MAX_VALUE; // illegal
-    assert getLongFromInt() == (long) INTEGER_MAX_VALUE;
-    assert getFloatFromInt() == (float) INTEGER_MAX_VALUE;
-    assert getDoubleFromInt() == (double) INTEGER_MAX_VALUE;
-    //    assert getByteFromLong() == (byte) LONG_MAX_VALUE; // illegal
-    //    assert getCharFromLong() == (char) LONG_MAX_VALUE; // illegal
-    //    assert getShortFromLong() == (short) LONG_MAX_VALUE; // illegal
-    //    assert getIntFromLong() == (int) LONG_MAX_VALUE; // illegal
-    assert getFloatFromLong() == (float) LONG_MAX_VALUE;
-    assert getDoubleFromLong() == (double) LONG_MAX_VALUE;
-    //    assert getByteFromFloat() == (byte) FLOAT_MAX_VALUE; // illegal
-    //    assert getCharFromFloat() == (char) FLOAT_MAX_VALUE; // illegal
-    //    assert getShortFromFloat() == (short) FLOAT_MAX_VALUE; // illegal
-    //    assert getIntFromFloat() == (int) FLOAT_MAX_VALUE; // illegal
-    //    assert getLongFromFloat() == (long) FLOAT_MAX_VALUE; // illegal
-    assert getDoubleFromFloat() == (double) FLOAT_MAX_VALUE;
-    //    assert getByteFromDouble() == (byte) DOUBLE_MAX_VALUE; // illegal
-    //    assert getCharFromDouble() == (char) DOUBLE_MAX_VALUE; // illegal
-    //    assert getShortFromDouble() == (short) DOUBLE_MAX_VALUE; // illegal
-    //    assert getIntFromDouble() == (int) DOUBLE_MAX_VALUE; // illegal
-    //    assert getLongFromDouble() == (long) DOUBLE_MAX_VALUE; // illegal
-    //    assert getFloatFromDouble() == (float) DOUBLE_MAX_VALUE; // illegal
+    assertTrue(getCharFromByte() == (char) BYTE_MAX_VALUE);
+    assertTrue(getShortFromByte() == (short) BYTE_MAX_VALUE);
+    assertTrue(getIntFromByte() == (int) BYTE_MAX_VALUE);
+    assertTrue(getLongFromByte() == (long) BYTE_MAX_VALUE);
+    assertTrue(getFloatFromByte() == (float) BYTE_MAX_VALUE);
+    assertTrue(getDoubleFromByte() == (double) BYTE_MAX_VALUE);
+    //    assertTrue(getByteFromChar() == (byte) CHAR_MAX_VALUE); // illegal
+    //    assertTrue(getShortFromChar() == (short) CHAR_MAX_VALUE); // illegal
+    assertTrue(getIntFromChar() == (int) CHAR_MAX_VALUE);
+    assertTrue(getLongFromChar() == (long) CHAR_MAX_VALUE);
+    assertTrue(getFloatFromChar() == (float) CHAR_MAX_VALUE);
+    assertTrue(getDoubleFromChar() == (double) CHAR_MAX_VALUE);
+    //    assertTrue(getByteFromShort() == (byte) SHORT_MAX_VALUE); // illegal
+    assertTrue(getCharFromShort() == (char) SHORT_MAX_VALUE);
+    assertTrue(getIntFromShort() == (int) SHORT_MAX_VALUE);
+    assertTrue(getLongFromShort() == (long) SHORT_MAX_VALUE);
+    assertTrue(getFloatFromShort() == (float) SHORT_MAX_VALUE);
+    assertTrue(getDoubleFromShort() == (double) SHORT_MAX_VALUE);
+    //    assertTrue(getByteFromInt() == (byte) INTEGER_MAX_VALUE); // illegal
+    //    assertTrue(getCharFromInt() == (char) INTEGER_MAX_VALUE); // illegal
+    //    assertTrue(getShortFromInt() == (short) INTEGER_MAX_VALUE); // illegal
+    assertTrue(getLongFromInt() == (long) INTEGER_MAX_VALUE);
+    assertTrue(getFloatFromInt() == (float) INTEGER_MAX_VALUE);
+    assertTrue(getDoubleFromInt() == (double) INTEGER_MAX_VALUE);
+    //    assertTrue(getByteFromLong() == (byte) LONG_MAX_VALUE); // illegal
+    //    assertTrue(getCharFromLong() == (char) LONG_MAX_VALUE); // illegal
+    //    assertTrue(getShortFromLong() == (short) LONG_MAX_VALUE); // illegal
+    //    assertTrue(getIntFromLong() == (int) LONG_MAX_VALUE); // illegal
+    assertTrue(getFloatFromLong() == (float) LONG_MAX_VALUE);
+    assertTrue(getDoubleFromLong() == (double) LONG_MAX_VALUE);
+    //    assertTrue(getByteFromFloat() == (byte) FLOAT_MAX_VALUE); // illegal
+    //    assertTrue(getCharFromFloat() == (char) FLOAT_MAX_VALUE); // illegal
+    //    assertTrue(getShortFromFloat() == (short) FLOAT_MAX_VALUE); // illegal
+    //    assertTrue(getIntFromFloat() == (int) FLOAT_MAX_VALUE); // illegal
+    //    assertTrue(getLongFromFloat() == (long) FLOAT_MAX_VALUE); // illegal
+    assertTrue(getDoubleFromFloat() == (double) FLOAT_MAX_VALUE);
+    //    assertTrue(getByteFromDouble() == (byte) DOUBLE_MAX_VALUE); // illegal
+    //    assertTrue(getCharFromDouble() == (char) DOUBLE_MAX_VALUE); // illegal
+    //    assertTrue(getShortFromDouble() == (short) DOUBLE_MAX_VALUE); // illegal
+    //    assertTrue(getIntFromDouble() == (int) DOUBLE_MAX_VALUE); // illegal
+    //    assertTrue(getLongFromDouble() == (long) DOUBLE_MAX_VALUE); // illegal
+    //    assertTrue(getFloatFromDouble() == (float) DOUBLE_MAX_VALUE); // illegal
   }
 }

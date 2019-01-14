@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.casttoreference;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 public class Main {
   public static void main(String... args) {
     testPrimitiveToReference();
@@ -31,36 +33,36 @@ public class Main {
     float f = 1.0f;
     double d = 1.0;
     Object o = bool;
-    assert o != null;
+    assertTrue(o != null);
     o = b;
-    assert o != null;
+    assertTrue(o != null);
     o = c;
-    assert o != null;
+    assertTrue(o != null);
     o = s;
-    assert o != null;
+    assertTrue(o != null);
     o = i;
-    assert o != null;
+    assertTrue(o != null);
     o = l;
-    assert o != null;
+    assertTrue(o != null);
     o = f;
-    assert o != null;
+    assertTrue(o != null);
     o = d;
-    assert o != null;
+    assertTrue(o != null);
     o = (Object) bool;
-    assert o != null;
+    assertTrue(o != null);
     o = (Object) b;
-    assert o != null;
+    assertTrue(o != null);
     o = (Object) c;
-    assert o != null;
+    assertTrue(o != null);
     o = (Object) s;
-    assert o != null;
+    assertTrue(o != null);
     o = (Object) i;
-    assert o != null;
+    assertTrue(o != null);
     o = (Object) l;
-    assert o != null;
+    assertTrue(o != null);
     o = (Object) f;
-    assert o != null;
+    assertTrue(o != null);
     o = (Object) d;
-    assert o != null;
+    assertTrue(o != null);
   }
 }

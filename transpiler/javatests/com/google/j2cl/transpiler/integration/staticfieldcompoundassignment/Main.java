@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.staticfieldcompoundassignment;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 public class Main {
   public static long bar;
 
@@ -24,6 +26,6 @@ public class Main {
     // assertion would fail.
     bar++;
 
-    assert bar == 1;
+    assertTrue(bar == 1);
   }
 }

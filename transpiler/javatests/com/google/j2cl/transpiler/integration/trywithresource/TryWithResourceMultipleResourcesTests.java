@@ -15,8 +15,10 @@
  */
 package com.google.j2cl.transpiler.integration.trywithresource;
 
-import com.google.j2cl.transpiler.integration.trywithresource.FailableResource.FailureMode;
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+import static com.google.j2cl.transpiler.utils.Asserts.fail;
 
+import com.google.j2cl.transpiler.integration.trywithresource.FailableResource.FailureMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,15 +42,15 @@ public class TryWithResourceMultipleResourcesTests {
         FailableResource r3 = new FailableResource("r3", orderLog, FailureMode.None)) {
       orderLog.add("try block");
     } catch (Exception e) {
-      assert false : "Should not have throw any exceptions.";
+      fail("Should not have throw any exceptions.");
     }
-    assert orderLog.get(0).equals("r1 OnConstruction");
-    assert orderLog.get(1).equals("r2 OnConstruction");
-    assert orderLog.get(2).equals("r3 OnConstruction");
-    assert orderLog.get(3).equals("try block");
-    assert orderLog.get(4).equals("r3 OnClose");
-    assert orderLog.get(5).equals("r2 OnClose");
-    assert orderLog.get(6).equals("r1 OnClose");
+    assertTrue(orderLog.get(0).equals("r1 OnConstruction"));
+    assertTrue(orderLog.get(1).equals("r2 OnConstruction"));
+    assertTrue(orderLog.get(2).equals("r3 OnConstruction"));
+    assertTrue(orderLog.get(3).equals("try block"));
+    assertTrue(orderLog.get(4).equals("r3 OnClose"));
+    assertTrue(orderLog.get(5).equals("r2 OnClose"));
+    assertTrue(orderLog.get(6).equals("r1 OnClose"));
   }
 
   private static void testTryWithResourceMultipleResourcesFailures() {
@@ -73,18 +75,18 @@ public class TryWithResourceMultipleResourcesTests {
         FailableResource r3 = new FailableResource("r3", orderLog, FailureMode.OnClose)) {
       orderLog.add("try block");
     } catch (Exception e) {
-      assert e.getMessage().equals("OnClose");
-      assert e.getSuppressed().length == 2;
-      assert e.getSuppressed()[0].getMessage().equals("OnClose");
-      assert e.getSuppressed()[1].getMessage().equals("OnClose");
+      assertTrue(e.getMessage().equals("OnClose"));
+      assertTrue(e.getSuppressed().length == 2);
+      assertTrue(e.getSuppressed()[0].getMessage().equals("OnClose"));
+      assertTrue(e.getSuppressed()[1].getMessage().equals("OnClose"));
     }
-    assert orderLog.get(0).equals("r1 OnConstruction");
-    assert orderLog.get(1).equals("r2 OnConstruction");
-    assert orderLog.get(2).equals("r3 OnConstruction");
-    assert orderLog.get(3).equals("try block");
-    assert orderLog.get(4).equals("r3 throw OnClose");
-    assert orderLog.get(5).equals("r2 throw OnClose");
-    assert orderLog.get(6).equals("r1 throw OnClose");
+    assertTrue(orderLog.get(0).equals("r1 OnConstruction"));
+    assertTrue(orderLog.get(1).equals("r2 OnConstruction"));
+    assertTrue(orderLog.get(2).equals("r3 OnConstruction"));
+    assertTrue(orderLog.get(3).equals("try block"));
+    assertTrue(orderLog.get(4).equals("r3 throw OnClose"));
+    assertTrue(orderLog.get(5).equals("r2 throw OnClose"));
+    assertTrue(orderLog.get(6).equals("r1 throw OnClose"));
   }
 
   /**
@@ -102,12 +104,12 @@ public class TryWithResourceMultipleResourcesTests {
           throw new Exception("try");
         }
       } catch (Exception e) {
-        assert e.getMessage().equals("try");
+        assertTrue(e.getMessage().equals("try"));
       }
-      assert orderLog.get(0).equals("r1 OnConstruction");
-      assert orderLog.get(1).equals("r2 OnConstruction");
-      assert orderLog.get(2).equals("r2 OnClose");
-      assert orderLog.get(3).equals("r1 OnClose");
+      assertTrue(orderLog.get(0).equals("r1 OnConstruction"));
+      assertTrue(orderLog.get(1).equals("r2 OnConstruction"));
+      assertTrue(orderLog.get(2).equals("r2 OnClose"));
+      assertTrue(orderLog.get(3).equals("r1 OnClose"));
     }
 
     // If the automatic closings of one or more initialized resources complete abruptly because of
@@ -124,19 +126,19 @@ public class TryWithResourceMultipleResourcesTests {
           throw new Exception("try");
         }
       } catch (Exception e) {
-        assert e.getMessage().equals("try");
-        assert e.getSuppressed().length == 3;
-        assert e.getSuppressed()[0].getMessage().equals("OnClose");
-        assert e.getSuppressed()[1].getMessage().equals("OnClose");
-        assert e.getSuppressed()[2].getMessage().equals("OnClose");
+        assertTrue(e.getMessage().equals("try"));
+        assertTrue(e.getSuppressed().length == 3);
+        assertTrue(e.getSuppressed()[0].getMessage().equals("OnClose"));
+        assertTrue(e.getSuppressed()[1].getMessage().equals("OnClose"));
+        assertTrue(e.getSuppressed()[2].getMessage().equals("OnClose"));
       }
-      assert orderLog.get(0).equals("r1 OnConstruction");
-      assert orderLog.get(1).equals("r2 OnConstruction");
-      assert orderLog.get(2).equals("r3 OnConstruction");
-      assert orderLog.get(3).equals("try block");
-      assert orderLog.get(4).equals("r3 throw OnClose");
-      assert orderLog.get(5).equals("r2 throw OnClose");
-      assert orderLog.get(6).equals("r1 throw OnClose");
+      assertTrue(orderLog.get(0).equals("r1 OnConstruction"));
+      assertTrue(orderLog.get(1).equals("r2 OnConstruction"));
+      assertTrue(orderLog.get(2).equals("r3 OnConstruction"));
+      assertTrue(orderLog.get(3).equals("try block"));
+      assertTrue(orderLog.get(4).equals("r3 throw OnClose"));
+      assertTrue(orderLog.get(5).equals("r2 throw OnClose"));
+      assertTrue(orderLog.get(6).equals("r1 throw OnClose"));
     }
   }
 
@@ -156,11 +158,11 @@ public class TryWithResourceMultipleResourcesTests {
           orderLog.add("try block"); // note that this is never reached.
         }
       } catch (Exception e) {
-        assert e.getMessage().equals("OnConstruction");
+        assertTrue(e.getMessage().equals("OnConstruction"));
       }
-      assert orderLog.get(0).equals("r1 OnConstruction");
-      assert orderLog.get(1).equals("r2 throw OnConstruction");
-      assert orderLog.get(2).equals("r1 OnClose");
+      assertTrue(orderLog.get(0).equals("r1 OnConstruction"));
+      assertTrue(orderLog.get(1).equals("r2 throw OnConstruction"));
+      assertTrue(orderLog.get(2).equals("r1 OnClose"));
     }
 
     // If the automatic closings of all successfully initialized resources (possibly zero) complete
@@ -176,11 +178,11 @@ public class TryWithResourceMultipleResourcesTests {
           orderLog.add("try block"); // note that this is never reached.
         }
       } catch (Exception e) {
-        assert e.getMessage().equals("OnConstruction");
+        assertTrue(e.getMessage().equals("OnConstruction"));
       }
-      assert orderLog.get(0).equals("r1 OnConstruction");
-      assert orderLog.get(1).equals("r2 throw OnConstruction");
-      assert orderLog.get(2).equals("r1 throw OnClose");
+      assertTrue(orderLog.get(0).equals("r1 OnConstruction"));
+      assertTrue(orderLog.get(1).equals("r2 throw OnConstruction"));
+      assertTrue(orderLog.get(2).equals("r1 throw OnClose"));
     }
 
     // The first 2 fail to close the 3rd fails to open.
@@ -194,16 +196,16 @@ public class TryWithResourceMultipleResourcesTests {
           orderLog.add("try block"); // note that this is never reached.
         }
       } catch (Exception e) {
-        assert e.getMessage().equals("OnConstruction");
-        assert e.getSuppressed().length == 2;
-        assert e.getSuppressed()[0].getMessage().equals("OnClose");
-        assert e.getSuppressed()[1].getMessage().equals("OnClose");
+        assertTrue(e.getMessage().equals("OnConstruction"));
+        assertTrue(e.getSuppressed().length == 2);
+        assertTrue(e.getSuppressed()[0].getMessage().equals("OnClose"));
+        assertTrue(e.getSuppressed()[1].getMessage().equals("OnClose"));
       }
-      assert orderLog.get(0).equals("r1 OnConstruction");
-      assert orderLog.get(1).equals("r2 OnConstruction");
-      assert orderLog.get(2).equals("r3 throw OnConstruction");
-      assert orderLog.get(3).equals("r2 throw OnClose");
-      assert orderLog.get(4).equals("r1 throw OnClose");
+      assertTrue(orderLog.get(0).equals("r1 OnConstruction"));
+      assertTrue(orderLog.get(1).equals("r2 OnConstruction"));
+      assertTrue(orderLog.get(2).equals("r3 throw OnConstruction"));
+      assertTrue(orderLog.get(3).equals("r2 throw OnClose"));
+      assertTrue(orderLog.get(4).equals("r1 throw OnClose"));
     }
 
     // The first 1 fails to close the 3rd fails to open.
@@ -217,15 +219,15 @@ public class TryWithResourceMultipleResourcesTests {
           orderLog.add("try block"); // note that this is never reached.
         }
       } catch (Exception e) {
-        assert e.getMessage().equals("OnConstruction");
-        assert e.getSuppressed().length == 1;
-        assert e.getSuppressed()[0].getMessage().equals("OnClose");
+        assertTrue(e.getMessage().equals("OnConstruction"));
+        assertTrue(e.getSuppressed().length == 1);
+        assertTrue(e.getSuppressed()[0].getMessage().equals("OnClose"));
       }
-      assert orderLog.get(0).equals("r1 OnConstruction");
-      assert orderLog.get(1).equals("r2 OnConstruction");
-      assert orderLog.get(2).equals("r3 throw OnConstruction");
-      assert orderLog.get(3).equals("r2 OnClose");
-      assert orderLog.get(4).equals("r1 throw OnClose");
+      assertTrue(orderLog.get(0).equals("r1 OnConstruction"));
+      assertTrue(orderLog.get(1).equals("r2 OnConstruction"));
+      assertTrue(orderLog.get(2).equals("r3 throw OnConstruction"));
+      assertTrue(orderLog.get(3).equals("r2 OnClose"));
+      assertTrue(orderLog.get(4).equals("r1 throw OnClose"));
     }
   }
 }

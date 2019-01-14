@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.removeunusedcontructorprops;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 import jsinterop.annotations.JsMethod;
 
 /**
@@ -34,10 +36,9 @@ public class Main {
     }
   }
 
-
   public static void main(String[] args) {
     Inner.raiseFlag();
-    assert getFlag() == true;
+    assertTrue(getFlag() == true);
   }
 
   /**

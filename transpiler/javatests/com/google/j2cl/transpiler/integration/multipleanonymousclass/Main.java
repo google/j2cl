@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.multipleanonymousclass;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 /**
  * Test multiple anonymous classes.
  */
@@ -39,16 +41,18 @@ public class Main {
           }
         };
 
-    assert intf1 == intf1.getSelf();
-    assert intf2 == intf2.getSelf();
-    assert intf1.getClass() != intf2.getClass();
-    assert intf1
-        .getClass()
-        .getName()
-        .equals("com.google.j2cl.transpiler.integration.multipleanonymousclass.Main$1");
-    assert intf2
-        .getClass()
-        .getName()
-        .equals("com.google.j2cl.transpiler.integration.multipleanonymousclass.Main$2");
+    assertTrue(intf1 == intf1.getSelf());
+    assertTrue(intf2 == intf2.getSelf());
+    assertTrue(intf1.getClass() != intf2.getClass());
+    assertTrue(
+        intf1
+            .getClass()
+            .getName()
+            .equals("com.google.j2cl.transpiler.integration.multipleanonymousclass.Main$1"));
+    assertTrue(
+        intf2
+            .getClass()
+            .getName()
+            .equals("com.google.j2cl.transpiler.integration.multipleanonymousclass.Main$2"));
   }
 }

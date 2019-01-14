@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.multipleabstractparents;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 public class Main {
   public interface List<T> {
     String getFoo(T t);
@@ -42,8 +44,8 @@ public class Main {
   public static class StringList extends AbstractStringList {}
 
   public static void main(String... args) {
-    assert new ArrayList<String>().getFoo(null).equals("AbstractCollection");
-    assert new StringList().getFoo(null).equals("AbstractCollection");
-    assert ((IStringList) new StringList()).getFoo(null).equals("AbstractCollection");
+    assertTrue(new ArrayList<String>().getFoo(null).equals("AbstractCollection"));
+    assertTrue(new StringList().getFoo(null).equals("AbstractCollection"));
+    assertTrue(((IStringList) new StringList()).getFoo(null).equals("AbstractCollection"));
   }
 }

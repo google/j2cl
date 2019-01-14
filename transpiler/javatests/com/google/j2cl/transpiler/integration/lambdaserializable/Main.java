@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.lambdaserializable;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 import java.io.Serializable;
 
 interface MyInterface<T> extends Serializable {
@@ -29,7 +31,7 @@ public class Main {
 
   public void testLambda() {
     int result = test(i -> i * 3);
-    assert (result == 9);
+    assertTrue((result == 9));
   }
 
   public static void main(String[] args) {

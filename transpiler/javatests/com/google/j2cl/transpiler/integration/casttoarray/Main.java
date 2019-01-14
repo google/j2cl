@@ -15,6 +15,9 @@
  */
 package com.google.j2cl.transpiler.integration.casttoarray;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertThrowsClassCastException;
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 /**
  * Test cast to array type.
  */
@@ -104,7 +107,7 @@ public class Main {
     ArrayContainer<String> stringArrayInArrayContainer = new ArrayContainer<>(new String[1]);
     String unusedString = stringArrayInArrayContainer.data[0];
     int len = stringArrayInArrayContainer.data.length;
-    assert len == 1;
+    assertTrue(len == 1);
 
     // Array of the wrong type.
     ArrayContainer<String> objectArrayInArrayContainer = new ArrayContainer<>(new Object[1]);
@@ -142,7 +145,7 @@ public class Main {
     Container<String[]> stringArrayInContainer = new Container<>(new String[1]);
     String unusedString = stringArrayInContainer.data[0];
     int len = stringArrayInContainer.data.length;
-    assert len == 1;
+    assertTrue(len == 1);
 
     // Array of the wrong type.
     Container<String[]> objectArrayInContainer = new Container<>(new Object[1]);
@@ -177,15 +180,5 @@ public class Main {
     }
 
     T data;
-  }
-
-  private static void assertThrowsClassCastException(Runnable runnable, Class<?> toClass) {
-    try {
-      runnable.run();
-      assert false : "Should have thrown ClassCastException";
-    } catch (ClassCastException expected) {
-      assert expected.getMessage().endsWith("cannot be cast to " + toClass.getName())
-          : "Got unexpected message " + expected.getMessage();
-    }
   }
 }

@@ -15,15 +15,17 @@
  */
 package com.google.j2cl.transpiler.integration.interfacejsbridge;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 public class Main {
   public static void main(String... args) {
     MyJsInterface a = new InterfaceImpl();
     MyInterface b = new InterfaceImpl();
     SubInterface c = new InterfaceImpl();
     InterfaceImpl d = new InterfaceImpl();
-    assert (a.foo(1) == 1);
-    assert (b.foo(2) == 2);
-    assert (c.foo(3) == 3);
-    assert (d.foo(4) == 4);
+    assertTrue((a.foo(1) == 1));
+    assertTrue((b.foo(2) == 2));
+    assertTrue((c.foo(3) == 3));
+    assertTrue((d.foo(4) == 4));
   }
 }

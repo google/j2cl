@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.interfaces;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 /** Test basic interface functionality. */
 @SuppressWarnings("StaticQualifiedUsingExpression")
 public class Main {
@@ -35,7 +37,7 @@ public class Main {
 
   public static void testInterfaceDispatch() {
     SomeClass s = new SomeClass();
-    assert run(s) == 1;
+    assertTrue(run(s) == 1);
   }
 
   public interface InterfaceWithFields {
@@ -44,11 +46,11 @@ public class Main {
   }
 
   public static void testInterfaceWithFields() {
-    assert InterfaceWithFields.A == 1;
-    assert InterfaceWithFields.B == 2;
+    assertTrue(InterfaceWithFields.A == 1);
+    assertTrue(InterfaceWithFields.B == 2);
     InterfaceWithFields i = new InterfaceWithFields() {};
-    assert i.A == 1;
-    assert i.B == 2;
+    assertTrue(i.A == 1);
+    assertTrue(i.B == 2);
   }
 
   public static final int COLLECTION_ADD = 1;
@@ -59,7 +61,7 @@ public class Main {
 
   interface Collection<T> {
     default int add(T elem) {
-      assert this instanceof Collection;
+      assertTrue(this instanceof Collection);
       return COLLECTION_ADD;
     }
   }
@@ -67,7 +69,7 @@ public class Main {
   interface List<T> extends Collection<T> {
     @Override
     default int add(T elem) {
-      assert this instanceof List;
+      assertTrue(this instanceof List);
       return LIST_ADD;
     }
 
@@ -79,7 +81,7 @@ public class Main {
   abstract static class AbstractCollection<T> implements Collection<T> {
     @Override
     public int add(T elem) {
-      assert this instanceof AbstractCollection;
+      assertTrue(this instanceof AbstractCollection);
       return ABSTRACT_COLLECTION_ADD;
     }
   }
@@ -108,7 +110,7 @@ public class Main {
 
   interface AnotherListInterface<T> {
     default int add(T elem) {
-      assert this instanceof AnotherListInterface;
+      assertTrue(this instanceof AnotherListInterface);
       return ANOTHER_LIST_INTERFACE_ADD;
     }
   }
@@ -121,18 +123,18 @@ public class Main {
   }
 
   public static void testDefaultMethods() {
-    assert new ACollection<Object>().add(null) == COLLECTION_ADD;
-    assert new AConcreteList<Object>().add(null) == ABSTRACT_COLLECTION_ADD;
-    assert new SomeOtherCollection<Object>().add(null) == COLLECTION_ADD;
-    assert new SomeOtherList<Object>().add(null) == LIST_ADD;
-    assert new YetAnotherList<Object>().add(null) == LIST_ADD;
-    assert new StringList().add(null) == LIST_ADD;
-    assert new AnotherStringList().add(null) == ANOTHER_STRING_LIST_ADD;
-    assert new AnotherCollection<Object>().add(null) == ANOTHER_LIST_INTERFACE_ADD;
+    assertTrue(new ACollection<Object>().add(null) == COLLECTION_ADD);
+    assertTrue(new AConcreteList<Object>().add(null) == ABSTRACT_COLLECTION_ADD);
+    assertTrue(new SomeOtherCollection<Object>().add(null) == COLLECTION_ADD);
+    assertTrue(new SomeOtherList<Object>().add(null) == LIST_ADD);
+    assertTrue(new YetAnotherList<Object>().add(null) == LIST_ADD);
+    assertTrue(new StringList().add(null) == LIST_ADD);
+    assertTrue(new AnotherStringList().add(null) == ANOTHER_STRING_LIST_ADD);
+    assertTrue(new AnotherCollection<Object>().add(null) == ANOTHER_LIST_INTERFACE_ADD);
   }
 
   public static void testStaticMethods() {
-    assert List.returnOne() == 1;
+    assertTrue(List.returnOne() == 1);
   }
 
   interface InterfaceWithPrivateMethods {
@@ -156,8 +158,8 @@ public class Main {
   }
 
   public static void testPrivateMethods() {
-    assert InterfaceWithPrivateMethods.callPrivateStaticMethod() == 2;
-    assert ((InterfaceWithPrivateMethods) () -> 1).defaultMethod() == 1;
+    assertTrue(InterfaceWithPrivateMethods.callPrivateStaticMethod() == 2);
+    assertTrue(((InterfaceWithPrivateMethods) () -> 1).defaultMethod() == 1);
   }
 
   public static void main(String[] args) {

@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.objectchilddevirtualcalls;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 public class ChildClassOverrides {
   public boolean equals(Object o) {
     return o instanceof ChildClassOverrides;
@@ -32,15 +34,15 @@ public class ChildClassOverrides {
    * Test object method calls with implicit qualifiers and explicit this.
    */
   public void test() {
-    assert (equals(new ChildClassOverrides()));
-    assert (!equals(new Object()));
-    assert (this.equals(new ChildClassOverrides()));
-    assert (!this.equals(new Object()));
-    assert (this.hashCode() == 100);
-    assert (hashCode() == 100);
-    assert (this.toString().equals("ChildClassOverrides"));
-    assert (toString().equals("ChildClassOverrides"));
-    assert (this.getClass() instanceof Class);
-    assert (getClass() instanceof Class);
+    assertTrue((equals(new ChildClassOverrides())));
+    assertTrue((!equals(new Object())));
+    assertTrue((this.equals(new ChildClassOverrides())));
+    assertTrue((!this.equals(new Object())));
+    assertTrue((this.hashCode() == 100));
+    assertTrue((hashCode() == 100));
+    assertTrue((this.toString().equals("ChildClassOverrides")));
+    assertTrue((toString().equals("ChildClassOverrides")));
+    assertTrue((this.getClass() instanceof Class));
+    assertTrue((getClass() instanceof Class));
   }
 }

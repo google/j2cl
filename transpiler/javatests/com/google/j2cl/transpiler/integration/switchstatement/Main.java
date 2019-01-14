@@ -15,6 +15,12 @@
  */
 package com.google.j2cl.transpiler.integration.switchstatement;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertFalse;
+import static com.google.j2cl.transpiler.utils.Asserts.assertThrowsClassCastException;
+import static com.google.j2cl.transpiler.utils.Asserts.assertThrowsNullPointerException;
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+import static com.google.j2cl.transpiler.utils.Asserts.fail;
+
 import java.util.function.Supplier;
 
 public class Main {
@@ -26,30 +32,30 @@ public class Main {
   }
 
   private static void testSwitchValues() {
-    assert getStringValue("zero") == 1; // Cascade
-    assert getStringValue("one") == 1;
-    assert getStringValue("two") == 2;
-    assert getStringValue("three") == 3; // Default
+    assertTrue(getStringValue("zero") == 1); // Cascade
+    assertTrue(getStringValue("one") == 1);
+    assertTrue(getStringValue("two") == 2);
+    assertTrue(getStringValue("three") == 3); // Default
 
-    assert getCharValue('0') == 1; // Cascade
-    assert getCharValue('1') == 1;
-    assert getCharValue('2') == 2;
-    assert getCharValue('3') == 3; // Default
+    assertTrue(getCharValue('0') == 1); // Cascade
+    assertTrue(getCharValue('1') == 1);
+    assertTrue(getCharValue('2') == 2);
+    assertTrue(getCharValue('3') == 3); // Default
 
-    assert getIntValue(0) == 1; // Cascade
-    assert getIntValue(1) == 1;
-    assert getIntValue(2) == 2;
-    assert getIntValue(3) == 3; // Default
+    assertTrue(getIntValue(0) == 1); // Cascade
+    assertTrue(getIntValue(1) == 1);
+    assertTrue(getIntValue(2) == 2);
+    assertTrue(getIntValue(3) == 3); // Default
 
-    assert getBoxedIntValue(new Integer(0)) == 1; // Cascade
-    assert getBoxedIntValue(new Integer(1)) == 1;
-    assert getBoxedIntValue(new Integer(2)) == 2;
-    assert getBoxedIntValue(new Integer(3)) == 3; // Default
+    assertTrue(getBoxedIntValue(new Integer(0)) == 1); // Cascade
+    assertTrue(getBoxedIntValue(new Integer(1)) == 1);
+    assertTrue(getBoxedIntValue(new Integer(2)) == 2);
+    assertTrue(getBoxedIntValue(new Integer(3)) == 3); // Default
 
-    assert getEnumValue(Numbers.ZERO) == 1; // Cascade
-    assert getEnumValue(Numbers.ONE) == 1;
-    assert getEnumValue(Numbers.TWO) == 2;
-    assert getEnumValue(Numbers.THREE) == 3; // Default
+    assertTrue(getEnumValue(Numbers.ZERO) == 1); // Cascade
+    assertTrue(getEnumValue(Numbers.ONE) == 1);
+    assertTrue(getEnumValue(Numbers.TWO) == 2);
+    assertTrue(getEnumValue(Numbers.THREE) == 3); // Default
   }
 
   private static int getStringValue(String stringValue) {
@@ -82,6 +88,8 @@ public class Main {
       case 1:
         return 1;
       case 2:
+        // Keep this assertion to make sure jscompiler does not optimize calls to the method away.
+        assertFalse(i != 2);
         return 2;
       default:
         return 3;
@@ -113,6 +121,8 @@ public class Main {
       case ONE:
         return 1;
       case TWO:
+        // Keep this assertion to make sure jscompiler does not optimize calls to the method away.
+        assertFalse(numberValue != Numbers.TWO);
         return 2;
       default:
         return 3;
@@ -129,7 +139,7 @@ public class Main {
         break;
       case 3:
         i = 3;
-        assert i == 3;
+        assertTrue(i == 3);
         return;
     }
 
@@ -156,29 +166,11 @@ public class Main {
         fail();
     }
 
-    supplier = (Supplier) () -> new Integer(1);
-
-    try {
-      switch (supplier.get()) {
-      }
-      fail("Should have thrown ClassCastException");
-    } catch (ClassCastException expected) {
-    }
-  }
-
-  private static <T> void assertThrowsNullPointerException(Supplier<T> supplier) {
-    try {
-      supplier.get();
-      fail("Should have thrown NPE");
-    } catch (NullPointerException expected) {
-    }
-  }
-
-  private static void fail() {
-    assert false;
-  }
-
-  private static void fail(String message) {
-    assert false : message;
+    assertThrowsClassCastException(
+        () -> {
+          Supplier<Numbers> integerSupplier = (Supplier) () -> new Integer(1);
+          switch (integerSupplier.get()) {
+          }
+        });
   }
 }

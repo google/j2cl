@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.localclasswithcaptures;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 /**
  * Test local classes with captured variables.
  */
@@ -140,16 +142,16 @@ public class Main {
     //    return new ClassCapturingLocal().returnLocal();
     //  }
     // }
-    // assert new ClassIndirectlyCapturingLocal().returnInderctCapture() == 3;
+    // assertTrue(new ClassIndirectlyCapturingLocal().returnInderctCapture() == 3);
   }
 
   public static void main(String[] args) {
     Main m = new Main();
-    assert m.testSimple(100) == 201;
-    assert m.testConstructor(100) == 108;
-    assert m.testClassWithSameName() == 30;
-    assert m.testClassWithParent() == 140;
-    assert m.testFunctionCallWithOverriding() == 99;
+    assertTrue(m.testSimple(100) == 201);
+    assertTrue(m.testConstructor(100) == 108);
+    assertTrue(m.testClassWithSameName() == 30);
+    assertTrue(m.testClassWithParent() == 140);
+    assertTrue(m.testFunctionCallWithOverriding() == 99);
     m.testIndirectCapture();
   }
 }

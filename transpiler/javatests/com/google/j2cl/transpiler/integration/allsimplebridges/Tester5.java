@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.allsimplebridges;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 import jsinterop.annotations.JsType;
 
 public class Tester5 {
@@ -42,8 +44,8 @@ public class Tester5 {
   @SuppressWarnings("unchecked")
   public static void test() {
     C2 s = new C2();
-    assert s.get("").equals("C2.get");
-    assert ((C1) s).get("").equals("C2.get");
-    assert ((I1) s).get("").equals("C2.get");
+    assertTrue(s.get("").equals("C2.get"));
+    assertTrue(((C1) s).get("").equals("C2.get"));
+    assertTrue(((I1) s).get("").equals("C2.get"));
   }
 }

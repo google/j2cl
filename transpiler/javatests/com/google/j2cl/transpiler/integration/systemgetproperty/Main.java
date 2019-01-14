@@ -15,10 +15,12 @@
  */
 package com.google.j2cl.transpiler.integration.systemgetproperty;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 public class Main {
 
   public static void main(String[] args) {
-    assert System.getProperty("jre.classMetadata").equals("SIMPLE");
-    assert System.getProperty("jre.bar", "bar").equals("bar");
+    assertTrue(System.getProperty("jre.classMetadata").equals("SIMPLE"));
+    assertTrue(System.getProperty("jre.bar", "bar").equals("bar"));
   }
 }

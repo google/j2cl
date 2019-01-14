@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.innerclassinitorder;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 /**
  * Smoke test for inner classes, copied from GWT.
  */
@@ -60,12 +62,12 @@ public class Main {
 
   public void testOuterThisFromSuperCall() {
     new OuterRefFromSuperCtorCall();
-    assert (number == 100);
+    assertTrue((number == 100));
   }
 
   public void testOuterThisFromThisCall() {
     new OuterRefFromThisCtorCall();
-    assert (number == 1100);
+    assertTrue((number == 1100));
   }
 
   class InnerClass {
@@ -119,7 +121,6 @@ public class Main {
       value = i;
     }
   }
-
 
   /**
    * Used in test {@link #testExtendsNested()}
@@ -181,10 +182,10 @@ public class Main {
 
   public void testExtendsNested() {
     ESOuter o = new ESOuter();
-    assert (1 == o.new ESInner().value);
-    assert (2 == o.new ESInner(2).value);
-    assert (1 == new ESInnerSubclass(o).value);
-    assert (2 == new ESInnerSubclass(2, o).value);
+    assertTrue((1 == o.new ESInner().value));
+    assertTrue((2 == o.new ESInner(2).value));
+    assertTrue((1 == new ESInnerSubclass(o).value));
+    assertTrue((2 == new ESInnerSubclass(2, o).value));
   }
 
   /**
@@ -192,26 +193,26 @@ public class Main {
    */
   public void testExtendsNestedWithGenerics() {
     ESWGOuter<String> o = new ESWGOuter<String>();
-    assert (1 == o.new ESWGInner().value);
-    assert (2 == o.new ESWGInner(2).value);
-    assert (1 == new ESWGInnerSubclass(o).value);
-    assert (2 == new ESWGInnerSubclass(2, o).value);
+    assertTrue((1 == o.new ESWGInner().value));
+    assertTrue((2 == o.new ESWGInner(2).value));
+    assertTrue((1 == new ESWGInnerSubclass(o).value));
+    assertTrue((2 == new ESWGInnerSubclass(2, o).value));
   }
 
   public void testInnerClassCtors() {
     P1<?> p1 = new P1<Object>();
-    assert (1 == p1.value);
-    assert (2 == new P1<Object>(2).value);
+    assertTrue((1 == p1.value));
+    assertTrue((2 == new P1<Object>(2).value));
     P1<?>.P2<?> p2 = p1.new P2<Object>();
-    assert (1 == p2.value);
-    assert (2 == p1.new P2<Object>(2).value);
-    assert (1 == p2.new P3<Object>().value);
-    assert (2 == p2.new P3<Object>(2).value);
+    assertTrue((1 == p2.value));
+    assertTrue((2 == p1.new P2<Object>(2).value));
+    assertTrue((1 == p2.new P3<Object>().value));
+    assertTrue((2 == p2.new P3<Object>(2).value));
   }
 
   public void testInnerClassInitialization() {
     new InnerClass();
-    assert (number == 1111);
+    assertTrue((number == 1111));
   }
 
   public void testInnerClassLoop() {
@@ -237,7 +238,7 @@ public class Main {
     for (AddNumber theAp : results) {
       theAp.act();
     }
-    assert (number == 1156);
+    assertTrue((number == 1156));
   }
 
   public static class Outer {
@@ -305,47 +306,47 @@ public class Main {
 
   public void testOuterIsNotSuper() {
     Outer.OuterIsNotSuper x = outerIsSuper.new OuterIsNotSuper();
-    assert (2 == x.getValue());
+    assertTrue((2 == x.getValue()));
   }
 
   // new an anonymous class of an inner class with a qualifier
   public void testOuterIsNotSuperAnon() {
     Outer.OuterIsNotSuper x = outerIsSuper.new OuterIsNotSuper() {
     };
-    assert (2 == x.getValue());
+    assertTrue((2 == x.getValue()));
   }
 
   public void testQualifiedSuperCall() {
     Outer.TestQualifiedSuperCall x = new Outer.TestQualifiedSuperCall();
-    assert (2 == x.getValue());
+    assertTrue((2 == x.getValue()));
   }
 
   public void testQualifiedSuperCallAnon() {
     Outer.TestQualifiedSuperCall x = new Outer.TestQualifiedSuperCall() {
     };
-    assert (2 == x.getValue());
+    assertTrue((2 == x.getValue()));
   }
 
   public void testSuperDispatch() {
-    assert (1 == outerIsSuper.checkDispatchFromSub1());
-    assert (1 == outerIsSuper.checkDispatchFromSub2());
+    assertTrue((1 == outerIsSuper.checkDispatchFromSub1()));
+    assertTrue((1 == outerIsSuper.checkDispatchFromSub2()));
   }
 
   public void testUnqualifiedAlloc() {
     Outer.OuterIsNotSuper x = outerIsSuper.unqualifiedAlloc();
-    assert (2 == x.getValue());
+    assertTrue((2 == x.getValue()));
   }
 
   public void testUnqualifiedSuperCall() {
     Outer.TestUnqualifiedSuperCall x = outerIsSuper.new TestUnqualifiedSuperCall();
-    assert (2 == x.getValue());
+    assertTrue((2 == x.getValue()));
   }
 
   // new an anonymous class of an inner class with a qualifier.
   public void testUnqualifiedSuperCallAnon() {
     Outer.TestUnqualifiedSuperCall x = outerIsSuper.new TestUnqualifiedSuperCall() {
     };
-    assert (2 == x.getValue());
+    assertTrue((2 == x.getValue()));
   }
 
   public static void main(String... args) {

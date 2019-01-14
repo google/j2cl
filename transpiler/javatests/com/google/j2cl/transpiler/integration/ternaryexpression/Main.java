@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.ternaryexpression;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 /**
  * Test ternary expression.
  */
@@ -22,18 +24,18 @@ public class Main {
 
   public static void main(String... args) {
     int count = true ? 1 : 2;
-    assert count == 1;
+    assertTrue(count == 1);
 
     count = count == 2 ? 2 : 3;
-    assert count == 3;
+    assertTrue(count == 3);
 
     int foo = ((2 * count) / 2) == 3 ? (4 + 4) / 2 : 5 + 5;
-    assert foo == 4;
+    assertTrue(foo == 4);
 
     foo = foo < 5 && foo > 3 ? (foo == 4 ? 5 : 6) : (0);
-    assert foo == 5;
+    assertTrue(foo == 5);
 
     foo = foo == 5 ? new Integer(15) : new Integer(30);
-    assert foo == 15;
+    assertTrue(foo == 15);
   }
 }

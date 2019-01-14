@@ -15,6 +15,12 @@
  */
 package com.google.j2cl.transpiler.integration.jsinteroptests;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertEquals;
+import static com.google.j2cl.transpiler.utils.Asserts.assertFalse;
+import static com.google.j2cl.transpiler.utils.Asserts.assertNotNull;
+import static com.google.j2cl.transpiler.utils.Asserts.assertNull;
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsOverlay;
@@ -23,21 +29,20 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /** Tests native JsType functionality. */
-public class NativeJsTypeTest extends MyTestCase {
+public class NativeJsTypeTest {
   public static void testAll() {
-    NativeJsTypeTest test = new NativeJsTypeTest();
-    test.testClassLiterals();
-    test.testGetClass();
-    test.testEqualityOptimization();
-    test.testClassLiterals();
-    test.testNativeJsTypeWithOverlay();
-    test.testNativeJsTypeWithStaticIntializer();
-    test.testNativeInnerClass();
-    test.testSpecialNativeInstanceOf();
-    test.testForwaringMethodsOnNativeClasses();
-    test.testUninitializedStaticOverlayField();
-    test.testVariableExternCollision();
-    test.testAliasExternCollision();
+    testClassLiterals();
+    testGetClass();
+    testEqualityOptimization();
+    testClassLiterals();
+    testNativeJsTypeWithOverlay();
+    testNativeJsTypeWithStaticIntializer();
+    testNativeInnerClass();
+    testSpecialNativeInstanceOf();
+    testForwaringMethodsOnNativeClasses();
+    testUninitializedStaticOverlayField();
+    testVariableExternCollision();
+    testAliasExternCollision();
   }
 
   @JsType(isNative = true)
@@ -58,7 +63,7 @@ public class NativeJsTypeTest extends MyTestCase {
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
   private interface MyNativeJsTypeInterfaceOnlyOneConcreteImplementor {}
 
-  public void testClassLiterals() {
+  private static void testClassLiterals() {
     assertEquals("<native object>", MyNativeJsType.class.getName());
     assertEquals(MyNativeJsType.class, MyNativeJsType.class);
     assertEquals(MyNativeJsType.class, MyNativeJsTypeInterface.class);
@@ -68,7 +73,7 @@ public class NativeJsTypeTest extends MyTestCase {
     assertEquals(MyNativeJsType[].class, MyNativeJsTypeInterface[][].class);
   }
 
-  public void testGetClass() {
+  private static void testGetClass() {
     Object object = createNativeObjectWithoutToString();
     assertEquals(MyNativeJsType.class, object.getClass());
 
@@ -96,7 +101,7 @@ public class NativeJsTypeTest extends MyTestCase {
     return thisObject == thatObject;
   }
 
-  public void testEqualityOptimization() {
+  private static void testEqualityOptimization() {
     // Makes sure that == does not get optimized away due to static class incompatibility.
 
     FinalNativeObject finalNativeObject = new FinalNativeObject();
@@ -108,7 +113,7 @@ public class NativeJsTypeTest extends MyTestCase {
     assertTrue(same(anotherFinalNativeObject, finalNativeObject));
   }
 
-  public void testToString() {
+  private static void testToString() {
     Object nativeObjectWithToString = createNativeObjectWithToString();
     assertEquals("Native type", nativeObjectWithToString.toString());
 
@@ -168,7 +173,7 @@ public class NativeJsTypeTest extends MyTestCase {
   @JsMethod
   private static native NativeJsTypeWithOverlay createNativeJsTypeWithOverlayWithM();
 
-  public void testNativeJsTypeWithOverlay() {
+  private static void testNativeJsTypeWithOverlay() {
     NativeJsTypeWithOverlay object = createNativeJsTypeWithOverlayWithM();
     assertTrue(object.hasM());
     assertTrue(NativeJsTypeWithOverlay.hasM(object));
@@ -209,7 +214,7 @@ public class NativeJsTypeTest extends MyTestCase {
 
   private static int clinitCalled = 0;
 
-  public void testNativeJsTypeWithStaticIntializer() {
+  private static void testNativeJsTypeWithStaticIntializer() {
     assertEquals(new Integer(3), NativeJsTypeWithStaticInitializationAndFieldAccess.object);
     assertEquals(0, clinitCalled);
     assertEquals(
@@ -253,7 +258,7 @@ public class NativeJsTypeTest extends MyTestCase {
     public void m() {}
   }
 
-  public void testSpecialNativeInstanceOf() {
+  private static void testSpecialNativeInstanceOf() {
     Object aJsFunction = new SomeFunction();
     // True cases.
     assertTrue(aJsFunction instanceof NativeFunction);
@@ -372,7 +377,7 @@ public class NativeJsTypeTest extends MyTestCase {
   private static native Object getUndefined();
 
   @SuppressWarnings("unused")
-  public void testVariableExternCollision() {
+  private static void testVariableExternCollision() {
     Object Int8Array = null; // A variable name that would collide with an extern.
     assertNotNull(getInt8ArrayBytesPerElement());
   }
@@ -380,7 +385,7 @@ public class NativeJsTypeTest extends MyTestCase {
   @JsProperty(namespace = JsPackage.GLOBAL, name = "Int8Array.BYTES_PER_ELEMENT")
   private static native double getInt8ArrayBytesPerElement();
 
-  public void testAliasExternCollision() {
+  private static void testAliasExternCollision() {
     Float32Array unused = new Float32Array(); // make sure it is referenced hence aliased.
     assertNotNull(getFloat32ArrayBytesPerElement());
   }
@@ -409,7 +414,7 @@ public class NativeJsTypeTest extends MyTestCase {
   @JsMethod
   private static native NativeSubClassAccidentalOverride createNativeSubclass();
 
-  public void testForwaringMethodsOnNativeClasses() {
+  private static void testForwaringMethodsOnNativeClasses() {
     NativeSubClassAccidentalOverride subClass = createNativeSubclass();
     subClass.add("Hi");
     assertTrue(subClass.remove("Hi"));
@@ -423,7 +428,7 @@ public class NativeJsTypeTest extends MyTestCase {
     @JsOverlay static int initializedInt = 5;
   }
 
-  public void testUninitializedStaticOverlayField() {
+  private static void testUninitializedStaticOverlayField() {
     assertEquals(0, NativeClassWithStaticOverlayFields.uninitializedInt);
     assertEquals(5, NativeClassWithStaticOverlayFields.initializedInt);
     assertNull(NativeClassWithStaticOverlayFields.uninitializedString);
@@ -450,7 +455,7 @@ public class NativeJsTypeTest extends MyTestCase {
     public native int getN();
   }
 
-  public void testNativeInnerClass() {
+  private static void testNativeInnerClass() {
     MyNativeJsTypeWithInner.Inner object = new MyNativeJsTypeWithInner.Inner(3);
     assertTrue(object instanceof MyNativeJsTypeWithInner.Inner);
     assertTrue((Object) object instanceof MyNativeJsTypeInner);

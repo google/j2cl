@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.staticblocklocalvar;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 /**
  * References (directly and as a captured variable in an anonymous class) a local variable defined
  * inside of a static block to show that the "declaring class" finding logic can handle the
@@ -41,7 +43,7 @@ public class Main {
   }
 
   public static void main(String... args) {
-    assert directlySetValue == 999;
-    assert indirectValueGetter.get() == 999;
+    assertTrue(directlySetValue == 999);
+    assertTrue(indirectValueGetter.get() == 999);
   }
 }

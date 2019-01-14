@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.jsproperties;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 import jsinterop.annotations.JsMethod;
 
 public class Main {
@@ -28,52 +30,52 @@ public class Main {
 
   public void testNativeStaticJsProperty() {
     int pi = (int) NativeFoo.getB();
-    assert pi == 3;
+    assertTrue(pi == 3);
   }
 
   public void testNativeInstanceJsProperty() {
-    assert new NativeFoo().getA() != null;
+    assertTrue(new NativeFoo().getA() != null);
   }
 
   public void testStaticJsProperty() {
-    assert Foo.getF() == 10;
-    assert Foo.getA() == 11;
+    assertTrue(Foo.getF() == 10);
+    assertTrue(Foo.getA() == 11);
     Foo.setA(10);
-    assert Foo.getF() == 12;
-    assert Foo.getA() == 13;
-    assert Foo.getB() == 15;
+    assertTrue(Foo.getF() == 12);
+    assertTrue(Foo.getA() == 13);
+    assertTrue(Foo.getB() == 15);
     Foo.setB(20);
-    assert Foo.getF() == 24;
-    assert Foo.getB() == 27;
+    assertTrue(Foo.getF() == 24);
+    assertTrue(Foo.getB() == 27);
 
     // call by JS.
-    assert getFooA() == 25;
+    assertTrue(getFooA() == 25);
     setFooA(30);
-    assert getFooA() == 33;
-    assert getFooB() == 35;
+    assertTrue(getFooA() == 33);
+    assertTrue(getFooB() == 35);
     setFooB(40);
-    assert getFooB() == 47;
+    assertTrue(getFooB() == 47);
   }
 
   public void testInstanceJsProperty() {
     Bar bar = new Bar();
-    assert bar.getF() == 10;
-    assert bar.getA() == 11;
+    assertTrue(bar.getF() == 10);
+    assertTrue(bar.getA() == 11);
     bar.setA(10);
-    assert bar.getF() == 12;
-    assert bar.getA() == 13;
-    assert bar.getB() == 15;
+    assertTrue(bar.getF() == 12);
+    assertTrue(bar.getA() == 13);
+    assertTrue(bar.getB() == 15);
     bar.setB(20);
-    assert bar.getF() == 24;
-    assert bar.getB() == 27;
+    assertTrue(bar.getF() == 24);
+    assertTrue(bar.getB() == 27);
 
     // call by JS.
-    assert getBarA(bar) == 25;
+    assertTrue(getBarA(bar) == 25);
     setBarA(bar, 30);
-    assert getBarA(bar) == 33;
-    assert getBarB(bar) == 35;
+    assertTrue(getBarA(bar) == 33);
+    assertTrue(getBarB(bar) == 35);
     setBarB(bar, 40);
-    assert getBarB(bar) == 47;
+    assertTrue(getBarB(bar) == 47);
   }
 
   @JsMethod

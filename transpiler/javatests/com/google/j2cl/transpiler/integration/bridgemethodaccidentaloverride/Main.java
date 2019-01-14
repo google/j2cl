@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.bridgemethodaccidentaloverride;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+import static com.google.j2cl.transpiler.utils.Asserts.fail;
 
 /**
  * Test for bridge method with accidental overriding.
@@ -28,11 +30,11 @@ public class Main {
   private static void testBridgeForwardsToSpecializedMethod() {
     Child c = new Child();
     Error e = new Error();
-    assert (callInterfaceFoo(c, e) == e);
-    assert (c.foo(e) == callInterfaceFoo(c, e));
+    assertTrue((callInterfaceFoo(c, e) == e));
+    assertTrue((c.foo(e) == callInterfaceFoo(c, e)));
     try {
       callInterfaceFoo(c, new Object());
-      assert false : "ClassCastException should be thrown.";
+      fail("ClassCastException should be thrown.");
     } catch (ClassCastException cce) {
       // expected.
     }
@@ -62,21 +64,21 @@ public class Main {
   private static void testBridgeSpecializesSuperclassMethod() {
     SupplierStringImpl sImpl = new SupplierStringImpl("Hello");
     SupplierString s = sImpl;
-    assert s.get().equals("Hello");
+    assertTrue(s.get().equals("Hello"));
 
     // Assing to raw type to subvert the value.
     AbstractSupplier as = sImpl;
     as.t = new Object();
     try {
       s.f(null);
-      assert false : "ClassCastException should be thrown.";
+      fail("ClassCastException should be thrown.");
     } catch (ClassCastException cce) {
       // expected.
     }
     try {
       s.get();
       // TODO(b/119956463): Uncomment when the bug is fixed.
-      // assert false : "ClassCastException should be thrown.";
+      // fail("ClassCastException should be thrown.");
     } catch (ClassCastException cce) {
       // expected.
     }

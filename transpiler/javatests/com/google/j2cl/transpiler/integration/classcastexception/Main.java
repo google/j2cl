@@ -15,6 +15,9 @@
  */
 package com.google.j2cl.transpiler.integration.classcastexception;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+import static com.google.j2cl.transpiler.utils.Asserts.fail;
+
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
@@ -41,80 +44,86 @@ public class Main {
     // Failed cast.
     try {
       Bar bar = (Bar) object;
-      assert false : "An expected failure did not occur.";
+      fail("An expected failure did not occur.");
     } catch (ClassCastException e) {
-      assert e.getMessage()
+      assertTrue(
+          "Got unexpected message " + e.getMessage(),
+          e.getMessage()
               .equals(
                   "com.google.j2cl.transpiler.integration.classcastexception.Main$Foo"
                       + " cannot be cast to"
-                      + " com.google.j2cl.transpiler.integration.classcastexception.Main$Bar")
-          : "Got unexpected message " + e.getMessage();
+                      + " com.google.j2cl.transpiler.integration.classcastexception.Main$Bar"));
     }
 
     // Failed cast to array type.
     try {
       Bar[] bars = (Bar[]) object;
-      assert false : "An expected failure did not occur.";
+      fail("An expected failure did not occur.");
     } catch (ClassCastException e) {
       // expected
-      assert e.getMessage()
+      assertTrue(
+          "Got unexpected message " + e.getMessage(),
+          e.getMessage()
               .equals(
                   "com.google.j2cl.transpiler.integration.classcastexception.Main$Foo"
                       + " cannot be cast to"
-                      + " [Lcom.google.j2cl.transpiler.integration.classcastexception.Main$Bar;")
-          : "Got unexpected message " + e.getMessage();
+                      + " [Lcom.google.j2cl.transpiler.integration.classcastexception.Main$Bar;"));
     }
 
     // Failed cast to Java String.
     try {
       String string = (String) object;
-      assert false : "An expected failure did not occur.";
+      fail("An expected failure did not occur.");
     } catch (ClassCastException e) {
       // expected
-      assert e.getMessage()
+      assertTrue(
+          "Got unexpected message " + e.getMessage(),
+          e.getMessage()
               .equals(
                   "com.google.j2cl.transpiler.integration.classcastexception.Main$Foo"
-                      + " cannot be cast to java.lang.String")
-          : "Got unexpected message " + e.getMessage();
+                      + " cannot be cast to java.lang.String"));
     }
 
     // Failed cast to Java Void.
     try {
       Void aVoid = (Void) object;
-      assert false;
+      assertTrue(false);
     } catch (ClassCastException e) {
       // expected
-      assert e.getMessage()
+      assertTrue(
+          "Got unexpected message " + e.getMessage(),
+          e.getMessage()
               .equals(
                   "com.google.j2cl.transpiler.integration.classcastexception.Main$Foo"
-                      + " cannot be cast to java.lang.Void")
-          : "Got unexpected message " + e.getMessage();
+                      + " cannot be cast to java.lang.Void"));
     }
 
     // Failed cast to native extern String.
     try {
       Baz baz = (Baz) object;
-      assert false : "An expected failure did not occur.";
+      fail("An expected failure did not occur.");
     } catch (ClassCastException e) {
       // expected
-      assert e.getMessage()
+      assertTrue(
+          "Got unexpected message " + e.getMessage(),
+          e.getMessage()
               .equals(
                   "com.google.j2cl.transpiler.integration.classcastexception.Main$Foo"
-                      + " cannot be cast to String")
-          : "Got unexpected message " + e.getMessage();
+                      + " cannot be cast to String"));
     }
 
     // Failed cast to native JsFunction.
     try {
       Qux qux = (Qux) object;
-      assert false : "An expected failure did not occur.";
+      fail("An expected failure did not occur.");
     } catch (ClassCastException e) {
       // expected
-      assert e.getMessage()
+      assertTrue(
+          "Got unexpected message " + e.getMessage(),
+          e.getMessage()
               .equals(
                   "com.google.j2cl.transpiler.integration.classcastexception.Main$Foo"
-                      + " cannot be cast to <native function>")
-          : "Got unexpected message " + e.getMessage();
+                      + " cannot be cast to <native function>"));
     }
   }
 }

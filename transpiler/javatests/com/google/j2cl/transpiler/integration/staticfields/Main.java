@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.staticfields;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 /**
  * Test static field initializer, and static field reference in field declaration.
  */
@@ -23,7 +25,7 @@ public class Main {
   protected static int b = a * 3;
 
   public static void main(String[] args) {
-    assert Main.a == 2;
-    assert Main.b == 6;
+    assertTrue(Main.a == 2);
+    assertTrue(Main.b == 6);
   }
 }

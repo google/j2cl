@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.numberobjectcalls;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 public class SubNumber extends Number {
   @Override
   public int intValue() {
@@ -48,16 +50,16 @@ public class SubNumber extends Number {
 
   public void test() {
     SubNumber sn = new SubNumber();
-    assert (this.equals(sn));
-    assert (equals(sn));
-    assert (!equals(new Object()));
+    assertTrue((this.equals(sn)));
+    assertTrue((equals(sn)));
+    assertTrue((!equals(new Object())));
 
-    assert (this.hashCode() == 100);
-    assert (hashCode() == 100);
+    assertTrue((this.hashCode() == 100));
+    assertTrue((hashCode() == 100));
 
-    assert (toString().equals(this.toString()));
+    assertTrue((toString().equals(this.toString())));
 
-    assert (getClass() instanceof Class);
-    assert (getClass().equals(this.getClass()));
+    assertTrue((getClass() instanceof Class));
+    assertTrue((getClass().equals(this.getClass())));
   }
 }

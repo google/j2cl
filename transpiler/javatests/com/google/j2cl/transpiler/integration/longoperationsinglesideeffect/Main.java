@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.longoperationsinglesideeffect;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 public class Main {
   public static void main(String... args) {
     Main m = new Main();
@@ -33,7 +35,7 @@ public class Main {
   }
 
   public Main fluentAssert(long expectedValue, long testValue) {
-    assert expectedValue == testValue : "expected " + expectedValue + " but was " + testValue;
+    assertTrue("expected " + expectedValue + " but was " + testValue, expectedValue == testValue);
     return this;
   }
 
@@ -46,31 +48,31 @@ public class Main {
     longField = 0L;
     sideEffectCount = 0;
 
-    assert sideEffectCount == 0;
+    assertTrue(sideEffectCount == 0);
 
-    assert causeSideEffect().longField++ == 0L;
-    assert longField == 1L;
-    assert sideEffectCount == 1;
+    assertTrue(causeSideEffect().longField++ == 0L);
+    assertTrue(longField == 1L);
+    assertTrue(sideEffectCount == 1);
 
-    assert causeSideEffect().longField-- == 1L;
-    assert longField == 0L;
-    assert sideEffectCount == 2;
+    assertTrue(causeSideEffect().longField-- == 1L);
+    assertTrue(longField == 0L);
+    assertTrue(sideEffectCount == 2);
 
-    assert ++causeSideEffect().longField == 1L;
-    assert longField == 1L;
-    assert sideEffectCount == 3;
+    assertTrue(++causeSideEffect().longField == 1L);
+    assertTrue(longField == 1L);
+    assertTrue(sideEffectCount == 3);
 
-    assert --causeSideEffect().longField == 0L;
-    assert longField == 0L;
-    assert sideEffectCount == 4;
+    assertTrue(--causeSideEffect().longField == 0L);
+    assertTrue(longField == 0L);
+    assertTrue(sideEffectCount == 4);
 
     causeSideEffect().longField += 1L;
-    assert longField == 1L;
-    assert sideEffectCount == 5;
+    assertTrue(longField == 1L);
+    assertTrue(sideEffectCount == 5);
 
     causeSideEffect().longField -= 1L;
-    assert longField == 0L;
-    assert sideEffectCount == 6;
+    assertTrue(longField == 0L);
+    assertTrue(sideEffectCount == 6);
   }
 
   /**
@@ -82,23 +84,23 @@ public class Main {
     longField = 0L;
     sideEffectCount = 0;
 
-    assert sideEffectCount == 0;
+    assertTrue(sideEffectCount == 0);
 
     causeSideEffect().longField += 1L;
-    assert longField == 1L;
-    assert sideEffectCount == 1;
+    assertTrue(longField == 1L);
+    assertTrue(sideEffectCount == 1);
 
     causeSideEffect().longField -= 1L;
-    assert longField == 0L;
-    assert sideEffectCount == 2;
+    assertTrue(longField == 0L);
+    assertTrue(sideEffectCount == 2);
 
     causeSideEffect().longField *= 1L;
-    assert longField == 0L;
-    assert sideEffectCount == 3;
+    assertTrue(longField == 0L);
+    assertTrue(sideEffectCount == 3);
 
     causeSideEffect().longField /= 1L;
-    assert longField == 0L;
-    assert sideEffectCount == 4;
+    assertTrue(longField == 0L);
+    assertTrue(sideEffectCount == 4);
   }
 
   /**

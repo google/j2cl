@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.interfaceabstractimpl;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 /**
  * Multiple inheritance.
  * A -> I, J, B
@@ -153,18 +155,18 @@ class SubA extends A {
 public class Main {
   public static void main(String... args) {
     SubA subA = new SubA();
-    assert (subA.barInI() == 4);
-    assert (subA.barInJ() == 8);
-    assert (subA.barInW() == 3);
-    assert (subA.barInX() == 2);
-    assert (subA.barInY() == 12);
-    assert (subA.barInZ() == 1);
-    assert (subA.funInI() == 5);
-    assert (subA.funInJ() == 7);
-    assert (subA.funInW() == 6);
-    assert (subA.funInX() == 10);
-    assert (subA.funInY() == 11);
-    assert (subA.funInZ() == 9);
-    assert (subA.klmInZ() == 42);
+    assertTrue((subA.barInI() == 4));
+    assertTrue((subA.barInJ() == 8));
+    assertTrue((subA.barInW() == 3));
+    assertTrue((subA.barInX() == 2));
+    assertTrue((subA.barInY() == 12));
+    assertTrue((subA.barInZ() == 1));
+    assertTrue((subA.funInI() == 5));
+    assertTrue((subA.funInJ() == 7));
+    assertTrue((subA.funInW() == 6));
+    assertTrue((subA.funInX() == 10));
+    assertTrue((subA.funInY() == 11));
+    assertTrue((subA.funInZ() == 9));
+    assertTrue((subA.klmInZ() == 42));
   }
 }

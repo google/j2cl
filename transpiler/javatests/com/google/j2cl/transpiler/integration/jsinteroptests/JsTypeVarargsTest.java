@@ -15,6 +15,11 @@
  */
 package com.google.j2cl.transpiler.integration.jsinteroptests;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertEquals;
+import static com.google.j2cl.transpiler.utils.Asserts.assertNull;
+import static com.google.j2cl.transpiler.utils.Asserts.assertSame;
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+import static com.google.j2cl.transpiler.utils.Asserts.fail;
 import static jsinterop.annotations.JsPackage.GLOBAL;
 
 import jsinterop.annotations.JsConstructor;
@@ -22,18 +27,17 @@ import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
 
-public class JsTypeVarargsTest extends MyTestCase {
+public class JsTypeVarargsTest {
   public static void testAll() {
-    JsTypeVarargsTest test = new JsTypeVarargsTest();
-    test.testVarargsCall_constructors();
-    test.testVarargsCall_fromJavaScript();
-    test.testVarargsCall_jsFunction();
-    test.testVarargsCall_regularMethods();
-    test.testVarargsCall_edgeCases();
-    test.testVarargsCall_superCalls();
-    test.testVarargsCall_sideEffectingInstance();
-    test.testVarargsCall_correctArrayType();
-    test.testVarargsCall_interfaceMethods();
+    testVarargsCall_constructors();
+    testVarargsCall_fromJavaScript();
+    testVarargsCall_jsFunction();
+    testVarargsCall_regularMethods();
+    testVarargsCall_edgeCases();
+    testVarargsCall_superCalls();
+    testVarargsCall_sideEffectingInstance();
+    testVarargsCall_correctArrayType();
+    testVarargsCall_interfaceMethods();
   }
 
   @JsMethod
@@ -50,7 +54,7 @@ public class JsTypeVarargsTest extends MyTestCase {
   }
 
   @JsMethod
-  private int stringVarargsLengthV2(int i, String... varargs) {
+  private static int stringVarargsLengthV2(int i, String... varargs) {
     return varargs.length;
   }
 
@@ -60,13 +64,13 @@ public class JsTypeVarargsTest extends MyTestCase {
   }
 
   @JsMethod
-  private Object[] clrearVarargsSlot(int slot, Object... varargs) {
+  private static Object[] clrearVarargsSlot(int slot, Object... varargs) {
     varargs[slot] = null;
     return varargs;
   }
 
   @JsMethod
-  private Class<?> getVarargsArrayClass(String... varargs) {
+  private static Class<?> getVarargsArrayClass(String... varargs) {
     return varargs.getClass();
   }
 
@@ -120,7 +124,7 @@ public class JsTypeVarargsTest extends MyTestCase {
     }
   }
 
-  public void testVarargsCall_regularMethods() {
+  private static void testVarargsCall_regularMethods() {
     assertEquals(3, varargsLengthThruArguments("A", "B", "C"));
     assertEquals(4, varargsLength("A", "B", "C", "D"));
     assertEquals(2, varargsLengthThruArguments(new NativeJsType[] {null, null}));
@@ -133,7 +137,7 @@ public class JsTypeVarargsTest extends MyTestCase {
     assertSame(String[].class, getVarargsArrayClass("A", "B", "C"));
   }
 
-  public void testVarargsCall_edgeCases() {
+  private static void testVarargsCall_edgeCases() {
     assertSame(String[].class, getVarargsArrayClass());
     assertSame(String[].class, getVarargsArrayClass(new String[0]));
     assertSame(String[].class, getVarargsArrayClass((String) null));
@@ -178,7 +182,7 @@ public class JsTypeVarargsTest extends MyTestCase {
     }
   }
 
-  public void testVarargsCall_constructors() {
+  private static void testVarargsCall_constructors() {
     NativeJsType someNativeObject = new NativeJsType();
     NativeJsTypeWithVarargsConstructor object =
         new NativeJsTypeWithVarargsConstructor(1, someNativeObject, null);
@@ -235,7 +239,7 @@ public class JsTypeVarargsTest extends MyTestCase {
     }
   }
 
-  public void testVarargsCall_fromJavaScript() {
+  private static void testVarargsCall_fromJavaScript() {
     assertEquals(60, callSumAndMultiply());
     assertEquals(30, callSumAndMultiplyInt());
     Function f = AFunction.create();
@@ -251,13 +255,13 @@ public class JsTypeVarargsTest extends MyTestCase {
   @JsMethod
   private static native Object callAFunction(Object obj);
 
-  public void testVarargsCall_jsFunction() {
+  private static void testVarargsCall_jsFunction() {
     Function function = new AFunction();
     assertSame(function, function.f(2, null, null, function, null));
     assertSame(null, function.f(1, null, null, function, null));
   }
 
-  public void testVarargsCall_superCalls() {
+  private static void testVarargsCall_superCalls() {
     SubSubNativeWithVarargsConstructor object = new SubSubNativeWithVarargsConstructor();
     assertSame(object, object.nonJsVarargsMethod());
     assertSame(object, object.varargsMethod(1, null, object, null));
@@ -265,12 +269,12 @@ public class JsTypeVarargsTest extends MyTestCase {
 
   private static int sideEffectCount;
 
-  private SubNativeWithVarargsConstructor doSideEffect(SubNativeWithVarargsConstructor obj) {
+  private static SubNativeWithVarargsConstructor doSideEffect(SubNativeWithVarargsConstructor obj) {
     sideEffectCount++;
     return obj;
   }
 
-  public void testVarargsCall_sideEffectingInstance() {
+  private static void testVarargsCall_sideEffectingInstance() {
     Object arg = new Object();
     SubNativeWithVarargsConstructor object = new SubNativeWithVarargsConstructor(0, arg);
     sideEffectCount = 0;
@@ -284,7 +288,7 @@ public class JsTypeVarargsTest extends MyTestCase {
     void consume(String... strings);
   }
 
-  public void testVarargsCall_correctArrayType() {
+  private static void testVarargsCall_correctArrayType() {
     JsStringConsumer consumer = (strings) -> assertTrue(strings instanceof String[]);
     consumer.consume("A", "B");
   }
@@ -304,7 +308,7 @@ public class JsTypeVarargsTest extends MyTestCase {
     }
   }
 
-  public void testVarargsCall_interfaceMethods() {
+  private static void testVarargsCall_interfaceMethods() {
     assertTrue(new InterfaceWithJsVarargsMethods() {}.isDoubleArray());
     assertTrue(InterfaceWithJsVarargsMethods.isIntArray());
   }

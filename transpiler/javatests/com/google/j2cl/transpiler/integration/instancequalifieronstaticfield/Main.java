@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.instancequalifieronstaticfield;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 public class Main {
   public static int staticField = 100;
   public static int sideEffectCount = 0;
@@ -41,35 +43,35 @@ public class Main {
     // Simplest.
     {
       staticField = 50;
-      assert staticField == 50;
+      assertTrue(staticField == 50);
     }
 
     // Simple inline.
     {
       main.staticField = 100;
-      assert main.staticField == 100;
-      assert main.getStaticValue() == 100;
+      assertTrue(main.staticField == 100);
+      assertTrue(main.getStaticValue() == 100);
     }
 
     // Right hand side assignment.
     {
       i = main.staticField;
-      assert i == 100;
+      assertTrue(i == 100);
       i = main.getStaticValue();
-      assert i == 100;
+      assertTrue(i == 100);
     }
 
     // Left hand side, simple assignment and side effects
     {
       {
         main.getWithSideEffects().staticField = 200;
-        assert staticField == 200;
-        assert sideEffectCount == 1;
+        assertTrue(staticField == 200);
+        assertTrue(sideEffectCount == 1);
       }
       {
         main.getWithSideEffects().getStaticMain().staticField = 300;
-        assert staticField == 300;
-        assert sideEffectCount == 2;
+        assertTrue(staticField == 300);
+        assertTrue(sideEffectCount == 2);
       }
     }
 
@@ -77,13 +79,13 @@ public class Main {
     {
       {
         main.getWithSideEffects().staticField += 100;
-        assert staticField == 400;
-        assert sideEffectCount == 3;
+        assertTrue(staticField == 400);
+        assertTrue(sideEffectCount == 3);
       }
       {
         main.getWithSideEffects().getStaticMain().staticField += 100;
-        assert staticField == 500;
-        assert sideEffectCount == 4;
+        assertTrue(staticField == 500);
+        assertTrue(sideEffectCount == 4);
       }
     }
     
@@ -91,13 +93,13 @@ public class Main {
     {
       {
         main.getWithSideEffects().staticField++;
-        assert staticField == 501;
-        assert sideEffectCount == 5;
+        assertTrue(staticField == 501);
+        assertTrue(sideEffectCount == 5);
       }
       {
         main.getWithSideEffects().getStaticMain().staticField++;
-        assert staticField == 502;
-        assert sideEffectCount == 6;
+        assertTrue(staticField == 502);
+        assertTrue(sideEffectCount == 6);
       }
     }
 
@@ -117,8 +119,8 @@ public class Main {
               .getWithSideEffects()
               .getStaticMain()
               .staticField;
-      assert staticField == 1004;
-      assert sideEffectCount == 12;
+      assertTrue(staticField == 1004);
+      assertTrue(sideEffectCount == 12);
     }
   }
 }

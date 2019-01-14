@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.nestedgenericclass;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 public class Main<T> {
   public <T> void fun(T outer) {
     /**
@@ -40,10 +42,10 @@ public class Main<T> {
     }
 
     // new A<> with different type arguments.
-    assert new A<Error>(new Error()).t instanceof Error;
-    assert new A<Exception>(new Exception()).t instanceof Exception;
+    assertTrue(new A<Error>(new Error()).t instanceof Error);
+    assertTrue(new A<Exception>(new Exception()).t instanceof Exception);
 
-    assert (new B(outer).t == outer);
+    assertTrue((new B(outer).t == outer));
   }
 
   public static void main(String[] args) {

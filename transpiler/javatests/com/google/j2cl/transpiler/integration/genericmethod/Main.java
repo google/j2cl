@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.genericmethod;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 public class Main {
   public Object foo(Object o) {
     return o;
@@ -34,9 +36,9 @@ public class Main {
 
   public static void main(String[] args) {
     Main m = new Main();
-    assert m.foo(new Object()) instanceof Object;
-    assert m.foo(new Error()) instanceof Error;
-    assert m.foo(new Exception()) instanceof Exception;
-    assert m.foo(new String[] {"asdf"}) instanceof String[];
+    assertTrue(m.foo(new Object()) instanceof Object);
+    assertTrue(m.foo(new Error()) instanceof Error);
+    assertTrue(m.foo(new Exception()) instanceof Exception);
+    assertTrue(m.foo(new String[] {"asdf"}) instanceof String[]);
   }
 }

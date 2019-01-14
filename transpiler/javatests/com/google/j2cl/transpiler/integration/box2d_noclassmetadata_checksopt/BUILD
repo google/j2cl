@@ -21,8 +21,6 @@ integration_test(
         # name before ReplaceStrings sees it.
         # Strip enum names:
         "--replace_strings=module$exports$nativebootstrap$Util$impl.$makeEnumName(?)",
-        # Override integration_test default since we don't want asserts for box2d tracking
-        "--remove_j2cl_asserts=true",
     ],
     tags = ["manual"],
     deps = [

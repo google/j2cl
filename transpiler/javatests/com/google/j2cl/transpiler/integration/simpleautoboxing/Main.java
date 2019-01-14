@@ -15,7 +15,11 @@
  */
 package com.google.j2cl.transpiler.integration.simpleautoboxing;
 
-import java.util.function.Supplier;
+import static com.google.j2cl.transpiler.utils.Asserts.assertThrowsClassCastException;
+import static com.google.j2cl.transpiler.utils.Asserts.assertThrowsNullPointerException;
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+import static com.google.j2cl.transpiler.utils.Asserts.fail;
+
 import javaemul.internal.annotations.DoNotAutobox;
 import jsinterop.annotations.JsMethod;
 
@@ -60,17 +64,17 @@ public class Main {
     short s = (short) 100;
     boolean bool = true;
     char c = 'a';
-    assert (unbox(b) == b);
-    assert (unbox(d) == d);
-    assert (unbox(f) == f);
-    assert (unbox(i) == i);
-    assert (unbox(l) == l);
-    assert (unbox(s) == s);
-    assert (unbox(bool) == bool);
-    assert (unbox(c) == c);
-    assert (takesObjectAndReturnsPrimitiveDouble(3) == 3);
-    assert (sumWithoutBoxing(1, 1.5, (byte) 1, (short) 1, (float) 1) == 5.5);
-    assert (sumWithoutBoxingJsVarargs(1, 1.5, (byte) 1, (short) 1, (float) 1) == 5.5);
+    assertTrue((unbox(b) == b));
+    assertTrue((unbox(d) == d));
+    assertTrue((unbox(f) == f));
+    assertTrue((unbox(i) == i));
+    assertTrue((unbox(l) == l));
+    assertTrue((unbox(s) == s));
+    assertTrue((unbox(bool) == bool));
+    assertTrue((unbox(c) == c));
+    assertTrue((takesObjectAndReturnsPrimitiveDouble(3) == 3));
+    assertTrue((sumWithoutBoxing(1, 1.5, (byte) 1, (short) 1, (float) 1) == 5.5));
+    assertTrue((sumWithoutBoxingJsVarargs(1, 1.5, (byte) 1, (short) 1, (float) 1) == 5.5));
   }
 
   private static double takesObjectAndReturnsPrimitiveDouble(@DoNotAutobox Object o) {
@@ -144,22 +148,22 @@ public class Main {
     Short boxS = s;
     Boolean boxBool = bool;
     Character boxC = c;
-    assert (boxB.byteValue() == b);
-    assert (boxD.doubleValue() == d);
-    assert (boxF.floatValue() == f);
-    assert (boxI.intValue() == i);
-    assert (boxL.longValue() == l);
-    assert (boxS.shortValue() == s);
-    assert (boxBool.booleanValue() == bool);
-    assert (boxC.charValue() == c);
+    assertTrue((boxB.byteValue() == b));
+    assertTrue((boxD.doubleValue() == d));
+    assertTrue((boxF.floatValue() == f));
+    assertTrue((boxI.intValue() == i));
+    assertTrue((boxL.longValue() == l));
+    assertTrue((boxS.shortValue() == s));
+    assertTrue((boxBool.booleanValue() == bool));
+    assertTrue((boxC.charValue() == c));
   }
 
   private static void testBoxedCompoundAssignmentResult() {
     Integer i = 10;
     assertIsBoxedInteger(i++);
     assertIsBoxedInteger(--i);
-    assert (i++).getClass() == Integer.class;
-    assert (--i).intValue() == 10;
+    assertTrue((i++).getClass() == Integer.class);
+    assertTrue((--i).intValue() == 10);
   }
 
   private static void testUnboxByParameter() {
@@ -173,22 +177,22 @@ public class Main {
     Character boxC = new Character('c');
 
     // Unbox
-    assert (box(boxB).equals(boxB));
-    assert (box(boxD).equals(boxD));
-    assert (box(boxF).equals(boxF));
-    assert (box(boxI).equals(boxI));
-    assert (box(boxL).equals(boxL));
-    assert (box(boxS).equals(boxS));
-    assert (box(boxBool).equals(boxBool));
-    assert (box(boxC).equals(boxC));
+    assertTrue((box(boxB).equals(boxB)));
+    assertTrue((box(boxD).equals(boxD)));
+    assertTrue((box(boxF).equals(boxF)));
+    assertTrue((box(boxI).equals(boxI)));
+    assertTrue((box(boxL).equals(boxL)));
+    assertTrue((box(boxS).equals(boxS)));
+    assertTrue((box(boxBool).equals(boxBool)));
+    assertTrue((box(boxC).equals(boxC)));
 
     // Unbox and widen
-    assert takesAndReturnsPrimitiveDouble(boxB) == boxB.byteValue();
-    assert takesAndReturnsPrimitiveDouble(boxC) == boxC.charValue();
-    assert takesAndReturnsPrimitiveDouble(boxS) == boxS.shortValue();
-    assert takesAndReturnsPrimitiveDouble(boxI) == boxI.intValue();
-    assert takesAndReturnsPrimitiveDouble(boxL) == boxL.longValue();
-    assert takesAndReturnsPrimitiveDouble(boxF) == boxF.floatValue();
+    assertTrue(takesAndReturnsPrimitiveDouble(boxB) == boxB.byteValue());
+    assertTrue(takesAndReturnsPrimitiveDouble(boxC) == boxC.charValue());
+    assertTrue(takesAndReturnsPrimitiveDouble(boxS) == boxS.shortValue());
+    assertTrue(takesAndReturnsPrimitiveDouble(boxI) == boxI.intValue());
+    assertTrue(takesAndReturnsPrimitiveDouble(boxL) == boxL.longValue());
+    assertTrue(takesAndReturnsPrimitiveDouble(boxF) == boxF.floatValue());
   }
 
   private static double takesAndReturnsPrimitiveDouble(double d) {
@@ -246,44 +250,44 @@ public class Main {
     short s = boxS;
     boolean bool = boxBool;
     char c = boxC;
-    assert (b == boxB.byteValue());
-    assert (d == boxD.doubleValue());
-    assert (f == boxF.floatValue());
-    assert (i == boxI.intValue());
-    assert (l == boxL.longValue());
-    assert (s == boxS.shortValue());
-    assert (bool == boxBool.booleanValue());
-    assert (c == boxC.charValue());
+    assertTrue((b == boxB.byteValue()));
+    assertTrue((d == boxD.doubleValue()));
+    assertTrue((f == boxF.floatValue()));
+    assertTrue((i == boxI.intValue()));
+    assertTrue((l == boxL.longValue()));
+    assertTrue((s == boxS.shortValue()));
+    assertTrue((bool == boxBool.booleanValue()));
+    assertTrue((c == boxC.charValue()));
 
     // Unbox and widen
     d = boxB;
-    assert (d == boxB.byteValue());
+    assertTrue((d == boxB.byteValue()));
     d = boxD;
-    assert (d == boxD.doubleValue());
+    assertTrue((d == boxD.doubleValue()));
     d = boxF;
-    assert (d == boxF.floatValue());
+    assertTrue((d == boxF.floatValue()));
     d = boxI;
-    assert (d == boxI.intValue());
+    assertTrue((d == boxI.intValue()));
     d = boxL;
-    assert (d == boxL.longValue());
+    assertTrue((d == boxL.longValue()));
     d = boxS;
-    assert (d == boxS.shortValue());
+    assertTrue((d == boxS.shortValue()));
     d = boxC;
-    assert (d == boxC.charValue());
+    assertTrue((d == boxC.charValue()));
   }
 
   private static void testUnboxByOperator() {
     // non side effect prefix operations
     Integer i = new Integer(1111);
     i = +i;
-    assert i.intValue() == 1111;
+    assertTrue(i.intValue() == 1111);
     i = -i;
-    assert i.intValue() == -1111;
+    assertTrue(i.intValue() == -1111);
     i = ~i;
-    assert i.intValue() == 1110;
+    assertTrue(i.intValue() == 1110);
     Boolean bool = new Boolean(true);
     bool = !bool;
-    assert !bool.booleanValue();
+    assertTrue(!bool.booleanValue());
 
     // non side effect binary operations
     Integer i1 = new Integer(100);
@@ -291,46 +295,58 @@ public class Main {
     Integer i3 = new Integer(4);
     int sumI = i1 + i2;
     Integer boxSumI = i1 + i2;
-    assert sumI == 300;
-    assert boxSumI.intValue() == 300;
-    assert boxSumI != 0;
-    assert boxSumI < 400;
-    assert boxSumI > 200;
-    assert boxSumI <= 300;
-    assert boxSumI >= 300;
+    assertTrue(sumI == 300);
+    assertTrue(boxSumI.intValue() == 300);
+    assertTrue(boxSumI != 0);
+    assertTrue(boxSumI < 400);
+    assertTrue(boxSumI > 200);
+    assertTrue(boxSumI <= 300);
+    assertTrue(boxSumI >= 300);
     int shiftedI = i2 << i3;
-    assert shiftedI == 3200;
+    assertTrue(shiftedI == 3200);
 
     Long l1 = new Long(1000L);
     Long l2 = new Long(2000L);
     long sumL = l1 + l2;
     Long boxSumL = l1 + l2;
-    assert (sumL == 3000L);
-    assert (boxSumL.longValue() == sumL);
+    assertTrue((sumL == 3000L));
+    assertTrue((boxSumL.longValue() == sumL));
 
     Double d1 = new Double(1111.1);
     Double d2 = new Double(2222.2);
     double sumD = d1 + d2;
     Double boxSumD = d1 + d2;
-    assert (boxSumD.doubleValue() == sumD);
+    assertTrue((boxSumD.doubleValue() == sumD));
 
     Boolean b1 = new Boolean(true);
     Boolean b2 = new Boolean(false);
     Boolean boxB = b1 && b2;
     boolean b3 = b1 || b2;
-    assert (!boxB.booleanValue());
-    assert (b3);
+    assertTrue((!boxB.booleanValue()));
+    assertTrue((b3));
 
     // Unboxing can cause NPE.
     Boolean b = null;
-    assertThrowsNullPointerException(() -> b && b);
-    assertThrowsNullPointerException(() -> !b);
+    assertThrowsNullPointerException(
+        () -> {
+          Object unused = b && b;
+        });
+    assertThrowsNullPointerException(
+        () -> {
+          Object unused = !b;
+        });
 
     Double d = null;
-    assertThrowsNullPointerException(() -> +d);
+    assertThrowsNullPointerException(
+        () -> {
+          Object unused = +d;
+        });
 
     Integer n = null;
-    assertThrowsNullPointerException(() -> -n);
+    assertThrowsNullPointerException(
+        () -> {
+          Object unused = -n;
+        });
 
     Ref<Integer> shortInIntegerRef = (Ref) new Ref<Short>((short) 1);
     Ref<Integer> booleanInIntegerRef = (Ref) new Ref<Boolean>(true);
@@ -340,19 +356,37 @@ public class Main {
     // Unboxing can cause ClassCastException.
     assertThrowsClassCastException(() -> booleanInIntegerRef.field++, Integer.class);
 
-    assertThrowsClassCastException(() -> -booleanInIntegerRef.field, Integer.class);
+    assertThrowsClassCastException(
+        () -> {
+          Object unused = -booleanInIntegerRef.field;
+        },
+        Integer.class);
 
-    assertThrowsClassCastException(() -> !integerInBooleanRef.field, Boolean.class);
+    assertThrowsClassCastException(
+        () -> {
+          Object unused = !integerInBooleanRef.field;
+        },
+        Boolean.class);
 
     assertThrowsClassCastException(() -> booleanInIntegerRef.field += 1, Integer.class);
 
-    assertThrowsClassCastException(() -> 1 + booleanInIntegerRef.field, Integer.class);
+    assertThrowsClassCastException(
+        () -> {
+          Object unused = 1 + booleanInIntegerRef.field;
+        },
+        Integer.class);
 
     assertThrowsClassCastException(
-        () -> integerInBooleanRef.field || integerInBooleanRef.field, Boolean.class);
+        () -> {
+          Object unused = integerInBooleanRef.field || integerInBooleanRef.field;
+        },
+        Boolean.class);
 
     assertThrowsClassCastException(
-        () -> integerInStringRef.field + integerInStringRef.field, String.class);
+        () -> {
+          Object unused = integerInStringRef.field + integerInStringRef.field;
+        },
+        String.class);
 
     assertThrowsClassCastException(
         () -> integerInStringRef.field = integerInStringRef.field, String.class);
@@ -391,10 +425,10 @@ public class Main {
     Double d = null;
     Integer i = null;
     Long l = null;
-    assert bool == maybeNull;
-    assert d == maybeNull;
-    assert i == maybeNull;
-    assert l == maybeNull;
+    assertTrue(bool == maybeNull);
+    assertTrue(d == maybeNull);
+    assertTrue(i == maybeNull);
+    assertTrue(l == maybeNull);
   }
 
   private static void testAllNumericTypes() {
@@ -414,18 +448,18 @@ public class Main {
     f++;
     d++;
 
-    assert b == 1;
-    assert c == 1;
-    assert s == 1;
-    assert i == 1;
-    assert l == 1L;
-    assert f == 1f;
-    assert d == 1d;
+    assertTrue(b == 1);
+    assertTrue(c == 1);
+    assertTrue(s == 1);
+    assertTrue(i == 1);
+    assertTrue(l == 1L);
+    assertTrue(f == 1f);
+    assertTrue(d == 1d);
 
     for (int j = 0; j < 200; j++) {
       b++;
     }
-    assert b == -55;
+    assertTrue(b == -55);
   }
 
   private static void testTernary() {
@@ -440,31 +474,34 @@ public class Main {
     boolean alwaysTrue = foo == 0;
 
     boxedResult = alwaysTrue ? boxedValue : boxedValue;
-    assert boxedResult == 1;
+    assertTrue(boxedResult == 1);
 
     boxedResult = alwaysTrue ? boxedValue : primitiveValue;
-    assert boxedResult == 1;
+    assertTrue(boxedResult == 1);
 
     boxedResult = alwaysTrue ? primitiveValue : boxedValue;
-    assert boxedResult == 10;
+    assertTrue(boxedResult == 10);
 
     boxedResult = alwaysTrue ? primitiveValue : primitiveValue;
-    assert boxedResult == 10;
+    assertTrue(boxedResult == 10);
 
     primitiveResult = alwaysTrue ? boxedValue : boxedValue;
-    assert primitiveResult == 1;
+    assertTrue(primitiveResult == 1);
 
     primitiveResult = alwaysTrue ? boxedValue : primitiveValue;
-    assert primitiveResult == 1;
+    assertTrue(primitiveResult == 1);
 
     primitiveResult = alwaysTrue ? primitiveValue : boxedValue;
-    assert primitiveResult == 10;
+    assertTrue(primitiveResult == 10);
 
     primitiveResult = alwaysTrue ? primitiveValue : primitiveValue;
-    assert primitiveResult == 10;
+    assertTrue(primitiveResult == 10);
 
     Boolean b = null;
-    assertThrowsNullPointerException(() -> b ? b : b);
+    assertThrowsNullPointerException(
+        () -> {
+          Object unused = b ? b : b;
+        });
   }
 
   @SuppressWarnings("cast")
@@ -476,9 +513,9 @@ public class Main {
     // Unbox and widen
     double primitiveDouble = (double) new Integer(100);
 
-    assert boxedInteger instanceof Integer;
-    assert primitiveInteger == 100;
-    assert primitiveDouble == 100d;
+    assertTrue(boxedInteger instanceof Integer);
+    assertTrue(primitiveInteger == 100);
+    assertTrue(primitiveDouble == 100d);
   }
 
   @SuppressWarnings("cast")
@@ -487,15 +524,15 @@ public class Main {
     Integer boxedInteger2 = new Integer(50);
 
     Object[] objects = new Object[boxedInteger1];
-    assert objects.length == 100;
+    assertTrue(objects.length == 100);
     Object marker = new Object();
     objects[boxedInteger2] = marker;
-    assert objects[50] == marker;
+    assertTrue(objects[50] == marker);
 
     Integer[] boxedIntegers = new Integer[] {1, 2, 3};
-    assert boxedIntegers[0] instanceof Integer;
+    assertTrue(boxedIntegers[0] instanceof Integer);
     int[] primitiveInts = new int[] {new Integer(1), new Integer(2), new Integer(3)};
-    assert primitiveInts[0] == 1;
+    assertTrue(primitiveInts[0] == 1);
   }
 
   /**
@@ -508,26 +545,26 @@ public class Main {
 
     if (boxedFalseBoolean) {
       // If unboxing is missing we'll arrive here.
-      doFail();
+      fail();
     }
 
     while (boxedFalseBoolean) {
       // If unboxing is missing we'll arrive here.
-      doFail();
+      fail();
     }
 
     int count = 0;
     do {
       if (count > 0) {
         // If unboxing is missing we'll arrive here.
-        doFail();
+        fail();
       }
       count++;
     } while (boxedFalseBoolean);
 
     for (; boxedFalseBoolean; ) {
       // If unboxing is missing we'll arrive here.
-      doFail();
+      fail();
     }
 
     Object unusedBlah = boxedFalseBoolean ? doFail() : doNothing();
@@ -539,7 +576,7 @@ public class Main {
         break;
       default:
         // If unboxing is missing we'll arrive here.
-        doFail();
+        fail();
     }
 
     Boolean b = null;
@@ -581,50 +618,50 @@ public class Main {
     int i = 2;
     boxI /* 6 */ += i /* 5 */ += boxI /* 3 */ += i /* 2*/;
 
-    assert i == 5;
-    assert boxI == 6;
+    assertTrue(i == 5);
+    assertTrue(boxI == 6);
   }
 
   private static <T extends Long> void testUnboxingFromTypeVariable() {
     T n = (T) (Long) 10L;
     // Auto unboxing from variable n.
     long l = n;
-    assert l == 10L;
+    assertTrue(l == 10L);
 
     class Local<T extends Long> {
       long toLong(T l) {
         // Auto unboxing from variable l.
-        assert l.equals(11L);
+        assertTrue(l.equals(11L));
         return l;
       }
     }
 
     // Auto boxing parameter.
     l = new Local<>().toLong(11L);
-    assert l == 11L;
+    assertTrue(l == 11L);
   }
 
   private static <T extends Long & Comparable<Long>> void testUnboxingFromIntersectionType() {
     T n = (T) (Long) 10L;
     // Auto unboxing from variable n.
     long l = n;
-    assert l == 10L;
+    assertTrue(l == 10L);
 
     class Local<T extends Long & Comparable<Long>> {
       long toLong(T l) {
         // Auto unboxing from variable l.
-        assert l.equals(11L);
+        assertTrue(l.equals(11L));
         return l;
       }
     }
 
     // Auto boxing parameter.
     l = new Local<>().toLong(11L);
-    assert l == 11L;
+    assertTrue(l == 11L);
   }
 
   private static Object doFail() {
-    assert false;
+    fail();
     return null;
   }
 
@@ -633,40 +670,7 @@ public class Main {
   }
 
   private static void assertIsBoxedInteger(@DoNotAutobox Object object) {
-    assert object instanceof Integer;
+    assertTrue(object instanceof Integer);
   }
 
-  private static <T> void assertThrowsClassCastException(Supplier<T> supplier, Class<?> toClass) {
-    assertThrowsClassCastException(
-        () -> {
-          supplier.get();
-        },
-        toClass);
-  }
-
-  private static void assertThrowsClassCastException(Runnable runnable, Class<?> toClass) {
-    try {
-      runnable.run();
-      assert false : "Should have thrown ClassCastException";
-    } catch (ClassCastException expected) {
-      assert expected.getMessage().endsWith("cannot be cast to " + toClass.getCanonicalName())
-          : "Got unexpected message " + expected.getMessage();
-    }
-  }
-
-  private static <T> void assertThrowsNullPointerException(Runnable runnable) {
-    assertThrowsNullPointerException(
-        () -> {
-          runnable.run();
-          return null;
-        });
-  }
-
-  private static <T> void assertThrowsNullPointerException(Supplier<T> supplier) {
-    try {
-      supplier.get();
-      assert false : "Should have thrown NPE";
-    } catch (NullPointerException expected) {
-    }
-  }
 }

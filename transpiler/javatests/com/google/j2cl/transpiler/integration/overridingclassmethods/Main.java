@@ -15,19 +15,21 @@
  */
 package com.google.j2cl.transpiler.integration.overridingclassmethods;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 /**
  * Test overriding class methods.
  */
 public class Main {
   public static void main(String... args) {
     Parent parentClass = new Parent();
-    assert parentClass.overrideWithNoChange() instanceof Parent;
-    assert parentClass.overrideWithReturnChange() instanceof Parent;
-    assert parentClass.paramChangeCantOverride(null) instanceof Parent;
+    assertTrue(parentClass.overrideWithNoChange() instanceof Parent);
+    assertTrue(parentClass.overrideWithReturnChange() instanceof Parent);
+    assertTrue(parentClass.paramChangeCantOverride(null) instanceof Parent);
 
     Parent childClass = new Child();
-    assert childClass.overrideWithNoChange() instanceof Child;
-    assert childClass.overrideWithReturnChange() instanceof Child;
-    assert childClass.paramChangeCantOverride(null) instanceof Parent;
+    assertTrue(childClass.overrideWithNoChange() instanceof Child);
+    assertTrue(childClass.overrideWithReturnChange() instanceof Child);
+    assertTrue(childClass.paramChangeCantOverride(null) instanceof Parent);
   }
 }

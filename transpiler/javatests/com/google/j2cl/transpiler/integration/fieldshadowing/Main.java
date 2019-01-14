@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.fieldshadowing;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 /** Test field shadowing and super field access. */
 public class Main {
 
@@ -52,14 +54,14 @@ public class Main {
   }
 
   public static void main(String... args) {
-    assert new SubFoo().value() == 2;
-    assert new SubFoo().value == 2;
-    assert new SubFoo().new InnerSubFoo().value() == 2;
-    assert new SubFoo().valueSupplier.get() == 2;
-    assert new SubFoo().value == 2;
-    assert new SubFoo().superValue() == 1;
-    assert new SubFoo().new InnerSubFoo().superValue() == 1;
-    assert new SubFoo().superValueSupplier.get() == 1;
-    assert new Foo().value == 1;
+    assertTrue(new SubFoo().value() == 2);
+    assertTrue(new SubFoo().value == 2);
+    assertTrue(new SubFoo().new InnerSubFoo().value() == 2);
+    assertTrue(new SubFoo().valueSupplier.get() == 2);
+    assertTrue(new SubFoo().value == 2);
+    assertTrue(new SubFoo().superValue() == 1);
+    assertTrue(new SubFoo().new InnerSubFoo().superValue() == 1);
+    assertTrue(new SubFoo().superValueSupplier.get() == 1);
+    assertTrue(new Foo().value == 1);
   }
 }

@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.renamejsmethodsinnativejstype;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 import jsinterop.annotations.JsMethod;
 
 public class Main {
@@ -25,15 +27,15 @@ public class Main {
 
   public static void testJsMethodInJava() {
     Foo foo = new Foo();
-    assert foo.sum() == 42;
+    assertTrue(foo.sum() == 42);
     foo.x = 50;
     foo.y = 5;
-    assert foo.sum() == 55;
+    assertTrue(foo.sum() == 55);
   }
 
   public static void testJsMethodInJs() {
     Foo foo = new Foo();
-    assert callSum(foo) == 42;
+    assertTrue(callSum(foo) == 42);
   }
 
   @JsMethod

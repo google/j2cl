@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.allsimplebridges;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 public class Tester182 {
   static interface I1 {
     default String get(String value) {
@@ -41,8 +43,8 @@ public class Tester182 {
   @SuppressWarnings("unchecked")
   public static void test() {
     C2 s = new C2();
-    assert s.get(new Object()).equals("C2.get");
-    assert ((C1) s).get("").equals("C2.get");
-    assert ((I1) s).get("").equals("I1.get");
+    assertTrue(s.get(new Object()).equals("C2.get"));
+    assertTrue(((C1) s).get("").equals("C2.get"));
+    assertTrue(((I1) s).get("").equals("I1.get"));
   }
 }

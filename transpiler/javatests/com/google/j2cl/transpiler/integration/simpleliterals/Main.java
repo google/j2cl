@@ -15,30 +15,32 @@
  */
 package com.google.j2cl.transpiler.integration.simpleliterals;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 public class Main {
   @SuppressWarnings("cast")
   public static void main(String... args) {
     boolean a = false;
-    assert !a;
+    assertTrue(!a);
 
     char b = 'a';
-    assert b == 97;
+    assertTrue(b == 97);
 
     // Verify compile time float literal expansion to double.
-    assert 0.7308782f == (float) 0.7308781743049622d;
+    assertTrue(0.7308782f == (float) 0.7308781743049622d);
 
     // Avoiding a "condition always evaluates to true" error in JSComp type checking.
     Object maybeNull = b == 97 ? null : new Object();
     Object c = null;
-    assert c == maybeNull;
+    assertTrue(c == maybeNull);
 
     int d = 100;
-    assert d == 50 + 50;
+    assertTrue(d == 50 + 50);
 
     String e = "foo";
-    assert e instanceof String;
+    assertTrue(e instanceof String);
 
     Class<?> f = Main.class;
-    assert f instanceof Class;
+    assertTrue(f instanceof Class);
   }
 }

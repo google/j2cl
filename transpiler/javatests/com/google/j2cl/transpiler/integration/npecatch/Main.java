@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.npecatch;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 /**
  * Test NPE catch.
  */
@@ -22,7 +24,7 @@ public class Main {
   public static void main(String... args) {
     try {
       throwNpe();
-      assert false;
+      assertTrue(false);
     } catch (NullPointerException expected) {
       // expected
     }

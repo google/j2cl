@@ -15,10 +15,12 @@
  */
 package com.google.j2cl.transpiler.integration.nativeinjectionwithoutmethods;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 /** Integration tests for native methods. */
 public class Main {
   public static void main(String... args) {
     new MyClass();
-    assert "fromnative".equals(Helper.getExportedString());
+    assertTrue("fromnative".equals(Helper.getExportedString()));
   }
 }

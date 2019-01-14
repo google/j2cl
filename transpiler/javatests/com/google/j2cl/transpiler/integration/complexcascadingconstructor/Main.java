@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.complexcascadingconstructor;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 /**
  * Test for cascading constructors with side effect in field initialization.
  */
@@ -34,9 +36,9 @@ public class Main {
 
   public static void main(String[] args) {
     Main m = new Main(10);
-    assert m.a == 12;
-    assert m.b == 23;
-    assert counter == 3;
+    assertTrue(m.a == 12);
+    assertTrue(m.b == 23);
+    assertTrue(counter == 3);
   }
 
   private int incCounter() {

@@ -15,6 +15,12 @@
  */
 package com.google.j2cl.transpiler.integration.jsinteroptests;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertEquals;
+import static com.google.j2cl.transpiler.utils.Asserts.assertFalse;
+import static com.google.j2cl.transpiler.utils.Asserts.assertNotNull;
+import static com.google.j2cl.transpiler.utils.Asserts.assertSame;
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 import java.util.Iterator;
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsFunction;
@@ -23,36 +29,35 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
-public class JsTypeTest extends MyTestCase {
+public class JsTypeTest {
   public static void testAll() {
-    JsTypeTest test = new JsTypeTest();
-    test.testAbstractJsTypeAccess();
-    test.testCasts();
-    test.testConcreteJsTypeAccess();
-    test.testConcreteJsTypeNoTypeTightenField();
-    test.testConcreteJsTypeSubclassAccess();
-    test.testEnumeration();
-    test.testEnumJsTypeAccess();
-    test.testEnumSubclassEnumeration();
-    test.testInstanceOf_concreteJsType();
-    test.testInstanceOf_extendsJsTypeWithProto();
-    test.testInstanceOf_implementsJsType();
-    test.testInstanceOf_implementsJsTypeWithPrototype();
-    test.testInstanceOf_jsoWithNativeButtonProto();
-    test.testInstanceOf_jsoWithoutProto();
-    test.testInstanceOf_jsoWithProto();
-    test.testInstanceOf_withNameSpace();
-    test.testJsMethodWithDifferentVisiblities();
-    test.testJsTypeField();
-    test.testNamedBridge();
-    test.testNativeMethodOverrideNoTypeTightenParam();
-    test.testRevealedOverrideJsType();
-    test.testSingleJavaConcreteInterface();
-    test.testSingleJavaConcreteJsFunction();
-    test.testStar();
-    test.testWildcard();
-    test.testNativeFunctionalInterface();
-    test.testInheritName();
+    testAbstractJsTypeAccess();
+    testCasts();
+    testConcreteJsTypeAccess();
+    testConcreteJsTypeNoTypeTightenField();
+    testConcreteJsTypeSubclassAccess();
+    testEnumeration();
+    testEnumJsTypeAccess();
+    testEnumSubclassEnumeration();
+    testInstanceOf_concreteJsType();
+    testInstanceOf_extendsJsTypeWithProto();
+    testInstanceOf_implementsJsType();
+    testInstanceOf_implementsJsTypeWithPrototype();
+    testInstanceOf_jsoWithNativeButtonProto();
+    testInstanceOf_jsoWithoutProto();
+    testInstanceOf_jsoWithProto();
+    testInstanceOf_withNameSpace();
+    testJsMethodWithDifferentVisiblities();
+    testJsTypeField();
+    testNamedBridge();
+    testNativeMethodOverrideNoTypeTightenParam();
+    testRevealedOverrideJsType();
+    testSingleJavaConcreteInterface();
+    testSingleJavaConcreteJsFunction();
+    testStar();
+    testWildcard();
+    testNativeFunctionalInterface();
+    testInheritName();
   }
 
   @JsType(isNative = true, namespace = "test.foo")
@@ -97,17 +102,13 @@ public class JsTypeTest extends MyTestCase {
     }
   }
 
-  /**
-   * A test class marked with JsType but isn't referenced from any Java code except instanceof.
-   */
+  /** A test class marked with JsType but isn't referenced from any Java code except instanceof. */
   @JsType
-  static interface MyJsInterfaceWithOnlyInstanceofReference {}
+  interface MyJsInterfaceWithOnlyInstanceofReference {}
 
-  /**
-   * A test class marked with JsType but isn't referenced from any Java code except instanceof.
-   */
+  /** A test class marked with JsType but isn't referenced from any Java code except instanceof. */
   @JsType(isNative = true)
-  static interface MyNativeJsTypeInterfaceAndOnlyInstanceofReference {}
+  interface MyNativeJsTypeInterfaceAndOnlyInstanceofReference {}
 
   /**
    * A test class marked with JsType but isn't referenced from any Java code except instanceof.
@@ -143,11 +144,9 @@ public class JsTypeTest extends MyTestCase {
    */
   public static class RevealedOverrideSubType extends PlainParentType implements JsTypeRunnable {}
 
-  /**
-   * Causes the run() function of any implementor to be exported.
-   */
+  /** Causes the run() function of any implementor to be exported. */
   @JsType
-  public static interface JsTypeRunnable {
+  public interface JsTypeRunnable {
 
     void run();
   }
@@ -158,7 +157,7 @@ public class JsTypeTest extends MyTestCase {
     public ConcreteJsTypeJsSubclass() {}
   }
 
-  static interface SubclassInterface {
+  interface SubclassInterface {
     int publicMethodAlsoExposedAsNonJsMethod();
   }
 
@@ -225,7 +224,7 @@ public class JsTypeTest extends MyTestCase {
     }
   }
 
-  public void testCasts() {
+  private static void testCasts() {
     Object myClass;
     assertNotNull(myClass = (ElementLikeNativeInterface) createMyNativeJsType());
     assertNotNull(myClass = (MyNativeJsTypeInterface) createMyNativeJsType());
@@ -233,7 +232,7 @@ public class JsTypeTest extends MyTestCase {
 
     try {
       assertNotNull(myClass = (HTMLElementConcreteNativeJsType) createMyNativeJsType());
-      assert false;
+      assertTrue(false);
     } catch (ClassCastException cce) {
       // Expected.
     }
@@ -251,7 +250,7 @@ public class JsTypeTest extends MyTestCase {
     assertNotNull(nativeButton2);
   }
 
-  public void testInstanceOf_jsoWithProto() {
+  private static void testInstanceOf_jsoWithProto() {
     Object object = createMyNativeJsType();
 
     assertTrue(object instanceof Object);
@@ -269,7 +268,7 @@ public class JsTypeTest extends MyTestCase {
     assertFalse(object instanceof MyNativeJsTypeInterfaceImpl[][]);
   }
 
-  public void testInstanceOf_jsoWithoutProto() {
+  private static void testInstanceOf_jsoWithoutProto() {
     Object object = createObject();
 
     assertTrue(object instanceof Object);
@@ -287,7 +286,7 @@ public class JsTypeTest extends MyTestCase {
     assertFalse(object instanceof MyNativeJsTypeInterfaceImpl[][]);
   }
 
-  public void testInstanceOf_jsoWithNativeButtonProto() {
+  private static void testInstanceOf_jsoWithNativeButtonProto() {
     Object object = createNativeButton();
 
     assertTrue(object instanceof Object);
@@ -305,7 +304,7 @@ public class JsTypeTest extends MyTestCase {
     assertFalse(object instanceof MyNativeJsTypeInterfaceImpl[][]);
   }
 
-  public void testInstanceOf_implementsJsType() {
+  private static void testInstanceOf_implementsJsType() {
     // Foils type tightening.
     Object object = new ElementLikeNativeInterfaceImpl();
 
@@ -324,7 +323,7 @@ public class JsTypeTest extends MyTestCase {
     assertFalse(object instanceof MyNativeJsTypeInterfaceImpl[][]);
   }
 
-  public void testInstanceOf_implementsJsTypeWithPrototype() {
+  private static void testInstanceOf_implementsJsTypeWithPrototype() {
     // Foils type tightening.
     Object object = new MyNativeJsTypeInterfaceImpl();
 
@@ -343,7 +342,7 @@ public class JsTypeTest extends MyTestCase {
     assertFalse(object instanceof MyNativeJsTypeInterfaceImpl[][]);
   }
 
-  public void testInstanceOf_concreteJsType() {
+  private static void testInstanceOf_concreteJsType() {
     // Foils type tightening.
     Object object = new ConcreteJsType();
 
@@ -362,7 +361,7 @@ public class JsTypeTest extends MyTestCase {
     assertFalse(object instanceof MyNativeJsTypeInterfaceImpl[][]);
   }
 
-  public void testInstanceOf_extendsJsTypeWithProto() {
+  private static void testInstanceOf_extendsJsTypeWithProto() {
     // Foils type tightening.
     Object object = new MyNativeJsTypeSubclassWithIterator();
 
@@ -383,7 +382,7 @@ public class JsTypeTest extends MyTestCase {
     assertFalse(object instanceof MyNativeJsTypeInterfaceImpl[][]);
   }
 
-  public void testInstanceOf_withNameSpace() {
+  private static void testInstanceOf_withNameSpace() {
     Object obj1 = createMyNamespacedJsInterface();
 
     assertTrue(obj1 instanceof MyNamespacedNativeJsType);
@@ -404,7 +403,7 @@ public class JsTypeTest extends MyTestCase {
   @JsMethod
   public static native Object createObject();
 
-  public void testConcreteJsTypeAccess() {
+  private static void testConcreteJsTypeAccess() {
     ConcreteJsType concreteJsType = new ConcreteJsType();
 
     assertTrue(ConcreteJsType.hasPublicField(concreteJsType));
@@ -422,7 +421,7 @@ public class JsTypeTest extends MyTestCase {
     assertEquals(10, callPublicMethod(concreteJsType));
   }
 
-  public void testAbstractJsTypeAccess() {
+  private static void testAbstractJsTypeAccess() {
     AbstractJsType jsType =
         new AbstractJsType() {
           @Override
@@ -436,7 +435,7 @@ public class JsTypeTest extends MyTestCase {
     assertEquals(32, jsType.publicMethod());
   }
 
-  public void testConcreteJsTypeSubclassAccess() {
+  private static void testConcreteJsTypeSubclassAccess() {
     ConcreteJsTypeSubclass concreteJsTypeSubclass = new ConcreteJsTypeSubclass();
 
     // A subclass of a JsType is not itself a JsType.
@@ -458,7 +457,7 @@ public class JsTypeTest extends MyTestCase {
     assertEquals(10, concreteJsTypeSubclass.publicSubclassMethod());
   }
 
-  public void testConcreteJsTypeNoTypeTightenField() {
+  private static void testConcreteJsTypeNoTypeTightenField() {
     // If we type-tighten, java side will see no calls and think that field could only AImpl1.
     ConcreteJsType concreteJsType = new ConcreteJsType();
     setTheField(concreteJsType, new ConcreteJsType.AImpl2());
@@ -477,7 +476,7 @@ public class JsTypeTest extends MyTestCase {
     }
   }
 
-  public void testNativeMethodOverrideNoTypeTightenParam() {
+  private static void testNativeMethodOverrideNoTypeTightenParam() {
     AImpl a = new AImpl();
     assertTrue(a.m(null));
     assertFalse((Boolean) callM(a, new Object()));
@@ -486,7 +485,7 @@ public class JsTypeTest extends MyTestCase {
   @JsMethod
   private static native Object callM(Object obj, Object param);
 
-  public void testRevealedOverrideJsType() {
+  private static void testRevealedOverrideJsType() {
     PlainParentType plainParentType = new PlainParentType();
     RevealedOverrideSubType revealedOverrideSubType = new RevealedOverrideSubType();
 
@@ -506,12 +505,12 @@ public class JsTypeTest extends MyTestCase {
   @JsMethod
   private static native boolean hasFieldRun(Object obj);
 
-  public void testEnumeration() {
+  private static void testEnumeration() {
     assertEquals(2, callPublicMethodFromEnumeration(MyEnumWithJsType.TEST1));
     assertEquals(3, callPublicMethodFromEnumeration(MyEnumWithJsType.TEST2));
   }
 
-  public void testEnumJsTypeAccess() {
+  private static void testEnumJsTypeAccess() {
     assertTrue(ConcreteJsType.hasPublicField(MyEnumWithJsType.TEST2));
     assertTrue(ConcreteJsType.hasPublicMethod(MyEnumWithJsType.TEST2));
 
@@ -525,7 +524,7 @@ public class JsTypeTest extends MyTestCase {
     assertFalse(ConcreteJsType.hasPackageField(MyEnumWithJsType.TEST2));
   }
 
-  public void testEnumSubclassEnumeration() {
+  private static void testEnumSubclassEnumeration() {
     assertEquals(100, callPublicMethodFromEnumerationSubclass(MyEnumWithSubclassGen.A));
     assertEquals(200, callPublicMethodFromEnumerationSubclass(MyEnumWithSubclassGen.B));
     assertEquals(1, callPublicMethodFromEnumerationSubclass(MyEnumWithSubclassGen.C));
@@ -556,7 +555,7 @@ public class JsTypeTest extends MyTestCase {
     @JsProperty public SimpleJsTypeFieldInterface someField;
   }
 
-  public void testJsTypeField() {
+  private static void testJsTypeField() {
     assertTrue(new SimpleJsTypeFieldClass() != new SimpleJsTypeFieldClass());
     SimpleJsTypeWithField holder = new SimpleJsTypeWithField();
     fillJsTypeField(holder);
@@ -582,7 +581,7 @@ public class JsTypeTest extends MyTestCase {
   @JsMethod
   private static native Object nativeObjectImplementingM();
 
-  public void testSingleJavaConcreteInterface() {
+  private static void testSingleJavaConcreteInterface() {
     // Create a couple of instances and use the objects in some way to avoid complete pruning
     // of JavaConcrete
     assertTrue(new JavaConcrete() != new JavaConcrete());
@@ -605,7 +604,7 @@ public class JsTypeTest extends MyTestCase {
   @JsMethod
   private static native Object nativeJsFunction();
 
-  public void testSingleJavaConcreteJsFunction() {
+  private static void testSingleJavaConcreteJsFunction() {
     // Create a couple of instances and use the objects in some way to avoid complete pruning
     // of JavaConcrete
     assertTrue(new JavaConcreteJsFunction() != new JavaConcreteJsFunction());
@@ -633,7 +632,7 @@ public class JsTypeTest extends MyTestCase {
     }
   }
 
-  public void testNamedBridge() {
+  private static void testNamedBridge() {
     // Bridges are sorted by signature in the JDT. Make sure that the bridge method appears second.
     // GWT specific test.
     // assertTrue(
@@ -654,7 +653,7 @@ public class JsTypeTest extends MyTestCase {
     }
   }
 
-  public void testJsMethodWithDifferentVisiblities() {
+  private static void testJsMethodWithDifferentVisiblities() {
     NonPublicJsMethodClass instance = new NonPublicJsMethodClass();
     assertEquals("foo", instance.foo());
     assertEquals("bar", instance.bar());
@@ -668,29 +667,28 @@ public class JsTypeTest extends MyTestCase {
   @JsMethod
   public static native Object callBar(Object obj, Object param);
 
-
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "*")
   interface Star {}
 
-  public void testStar() {
+  private static void testStar() {
     Object object = new Object();
 
-    assertNotNull((Star) object);
+    assertNotNull(object);
 
     object = Double.valueOf(3.0);
-    assertNotNull((Star) object);
+    assertNotNull(object);
   }
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
   interface Wildcard {}
 
-  public void testWildcard() {
+  private static void testWildcard() {
     Object object = new Object();
 
-    assertNotNull((Wildcard) object);
+    assertNotNull(object);
 
     object = Double.valueOf(3.0);
-    assertNotNull((Wildcard) object);
+    assertNotNull(object);
   }
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
@@ -698,7 +696,7 @@ public class JsTypeTest extends MyTestCase {
     int f(T t);
   }
 
-  public void testNativeFunctionalInterface() {
+  private static void testNativeFunctionalInterface() {
     NativeFunctionalInterface<String> nativeFunctionalInterface = (s) -> 10;
     assertEquals(10, nativeFunctionalInterface.f(""));
   }
@@ -719,14 +717,14 @@ public class JsTypeTest extends MyTestCase {
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
   private interface HasName {
-    public String name();
+    String name();
   }
 
-  private String callName(Object o) {
+  private static String callName(Object o) {
     return ((HasName) o).name();
   }
 
-  public void testInheritName() {
+  private static void testInheritName() {
     ClassWithJsMethod object = new ClassWithJsMethod();
     assertEquals(ClassWithJsMethod.class.getName(), object.className());
     assertEquals(ClassWithJsMethod.class.getName(), callName(object));

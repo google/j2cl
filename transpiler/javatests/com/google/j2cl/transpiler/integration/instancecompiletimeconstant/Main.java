@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.instancecompiletimeconstant;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 public class Main {
   private static class Parent {
     public final String parentCompileTimeConstantString = "987";
@@ -35,16 +37,16 @@ public class Main {
      * be initialized.
      */
     public void checkFieldsInitialized() {
-      assert parentCompileTimeConstantString != null;
-      assert parentCompileTimeConstantByte != 0;
-      assert parentCompileTimeConstantShort != 0;
-      assert parentCompileTimeConstantInt != 0;
-      assert parentCompileTimeConstantLong != 0L;
+      assertTrue(parentCompileTimeConstantString != null);
+      assertTrue(parentCompileTimeConstantByte != 0);
+      assertTrue(parentCompileTimeConstantShort != 0);
+      assertTrue(parentCompileTimeConstantInt != 0);
+      assertTrue(parentCompileTimeConstantLong != 0L);
 
       // Parent's non compile time constant fields *have* been initialized because of the time at
       // which check was called!
-      assert parentRegularString != null;
-      assert parentRegularInt != 0;
+      assertTrue(parentRegularString != null);
+      assertTrue(parentRegularInt != 0);
     }
   }
 
@@ -70,14 +72,14 @@ public class Main {
     public void checkFieldsInitialized() {
       super.checkFieldsInitialized();
 
-      assert childCompileTimeConstantFloat != 0;
-      assert childCompileTimeConstantDouble != 0;
-      assert childCompileTimeConstantChar != 0;
-      assert childCompileTimeConstantBoolean != false;
+      assertTrue(childCompileTimeConstantFloat != 0);
+      assertTrue(childCompileTimeConstantDouble != 0);
+      assertTrue(childCompileTimeConstantChar != 0);
+      assertTrue(childCompileTimeConstantBoolean != false);
 
       // Child's non compile time constant fields have not been initialized!
-      assert childRegularString == null;
-      assert childRegularInt == 0;
+      assertTrue(childRegularString == null);
+      assertTrue(childRegularInt == 0);
     }
   }
 

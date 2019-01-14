@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.implicitparenthesis;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 /**
  * Inserting unboxing method calls will be mangled if implicit parenthesis are not inserted.
  */
@@ -34,7 +36,7 @@ public class Main {
       primitiveInt = 5;
       boxedInt = new Integer(10);
       primitiveInt = primitiveInt == 5 ? new Integer(15) : new Integer(30);
-      assert primitiveInt == 15;
+      assertTrue(primitiveInt == 15);
     }
 
     // Binary operator, compound assignment
@@ -42,7 +44,7 @@ public class Main {
       primitiveInt = 5;
       boxedInt = new Integer(10);
       primitiveInt = boxedInt += primitiveInt;
-      assert primitiveInt == 15;
+      assertTrue(primitiveInt == 15);
     }
 
     // Binary operator, assignment
@@ -50,7 +52,7 @@ public class Main {
       primitiveInt = 5;
       boxedInt = new Integer(10);
       primitiveInt = boxedInt = primitiveInt;
-      assert primitiveInt == 5;
+      assertTrue(primitiveInt == 5);
     }
 
     // Postfix operator
@@ -58,7 +60,7 @@ public class Main {
       primitiveInt = 5;
       boxedInt = new Integer(10);
       primitiveInt = boxedInt++;
-      assert primitiveInt == 10;
+      assertTrue(primitiveInt == 10);
     }
 
     // Prefix operator
@@ -66,7 +68,7 @@ public class Main {
       primitiveInt = 5;
       boxedInt = new Integer(10);
       primitiveInt = ++boxedInt;
-      assert primitiveInt == 11;
+      assertTrue(primitiveInt == 11);
     }
   }
 
@@ -82,7 +84,7 @@ public class Main {
       primitiveInt = 5;
       boxedInt = new Integer(10);
       primitiveInt = boxedInt - primitiveInt;
-      assert primitiveInt == 5;
+      assertTrue(primitiveInt == 5);
     }
 
     // Binary operator, comparison.
@@ -92,7 +94,7 @@ public class Main {
       boxedInt = new Integer(10);
       boxedBoolean = true;
       boxedBoolean = boxedInt == primitiveInt;
-      assert boxedBoolean == false;
+      assertTrue(boxedBoolean == false);
     }
   }
 }

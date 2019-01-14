@@ -15,14 +15,16 @@
  */
 package com.google.j2cl.transpiler.integration.externalunqualifiedstaticfield;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 /**
  * Test unqualified external static field reference.
  */
 public class Main {
   public static void main(String[] args) {
-    assert getEnumValue(Numbers.ONE) == 1;
-    assert getEnumValue(Numbers.TWO) == 2;
-    assert getEnumValue(Numbers.THREE) == 3;
+    assertTrue(getEnumValue(Numbers.ONE) == 1);
+    assertTrue(getEnumValue(Numbers.TWO) == 2);
+    assertTrue(getEnumValue(Numbers.THREE) == 3);
   }
 
   private static int getEnumValue(Numbers numberValue) {

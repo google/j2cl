@@ -15,6 +15,12 @@
  */
 package com.google.j2cl.transpiler.integration.jsinteroptests;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertEquals;
+import static com.google.j2cl.transpiler.utils.Asserts.assertFalse;
+import static com.google.j2cl.transpiler.utils.Asserts.assertNotNull;
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+import static com.google.j2cl.transpiler.utils.Asserts.fail;
+
 import java.io.Serializable;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
@@ -23,21 +29,20 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /** Tests JsType with array functionality. */
-public class JsTypeArrayTest extends MyTestCase {
+public class JsTypeArrayTest {
   public static void testAll() {
-    JsTypeArrayTest test = new JsTypeArrayTest();
-    test.testJsTypeArray();
-    test.testJsType3DimArray_castFromNativeWithACall();
-    test.testJsTypeArray_asAField();
-    test.testJsTypeArray_asAParam();
-    test.testJsTypeArray_instanceOf();
-    test.testJsTypeArray_objectArrayInterchangeability();
-    test.testJsTypeArray_returnFromNative();
-    test.testJsTypeArray_returnFromNativeWithACall();
-    test.testObjectArray_castFromNative();
-    test.testObjectArray_instanceOf();
-    test.testJsFunctionArray();
-    test.testNativeArrays();
+    testJsTypeArray();
+    testJsType3DimArray_castFromNativeWithACall();
+    testJsTypeArray_asAField();
+    testJsTypeArray_asAParam();
+    testJsTypeArray_instanceOf();
+    testJsTypeArray_objectArrayInterchangeability();
+    testJsTypeArray_returnFromNative();
+    testJsTypeArray_returnFromNativeWithACall();
+    testObjectArray_castFromNative();
+    testObjectArray_instanceOf();
+    testJsFunctionArray();
+    testNativeArrays();
   }
 
   /* MAKE SURE EACH TYPE IS ONLY USED ONCE PER TEST CASE */
@@ -47,7 +52,7 @@ public class JsTypeArrayTest extends MyTestCase {
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
   private static class SomeOtherJsType {}
 
-  public void testJsTypeArray() {
+  private static void testJsTypeArray() {
     Object[] array = new SomeJsType[10];
 
     array[0] = new SomeJsType();
@@ -65,7 +70,7 @@ public class JsTypeArrayTest extends MyTestCase {
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
   private interface SimpleJsTypeReturnFromNative {}
 
-  public void testJsTypeArray_returnFromNative() {
+  private static void testJsTypeArray_returnFromNative() {
     SimpleJsTypeReturnFromNative[] array = returnJsTypeFromNative();
     assertEquals(2, array.length);
     assertNotNull(array[0]);
@@ -80,7 +85,7 @@ public class JsTypeArrayTest extends MyTestCase {
     int getId();
   }
 
-  public void testJsTypeArray_returnFromNativeWithACall() {
+  private static void testJsTypeArray_returnFromNativeWithACall() {
     SimpleJsTypeReturnFromNativeWithAMethod[] array = returnJsTypeWithIdsFromNative();
     assertEquals(2, array[1].getId());
   }
@@ -96,7 +101,7 @@ public class JsTypeArrayTest extends MyTestCase {
     public SimpleJsTypeAsAField[] arrayField;
   }
 
-  public void testJsTypeArray_asAField() {
+  private static void testJsTypeArray_asAField() {
     SimpleJsTypeAsAFieldHolder holder = new SimpleJsTypeAsAFieldHolder();
     fillArrayField(holder);
     SimpleJsTypeAsAField[] array = holder.arrayField;
@@ -119,7 +124,7 @@ public class JsTypeArrayTest extends MyTestCase {
     }
   }
 
-  public void testJsTypeArray_asAParam() {
+  private static void testJsTypeArray_asAParam() {
     SimpleJsTypeAsAParamHolder holder = new SimpleJsTypeAsAParamHolder();
     fillArrayParam(holder);
     SimpleJsTypeAsAParam[] array = holder.theParam;
@@ -136,7 +141,7 @@ public class JsTypeArrayTest extends MyTestCase {
     public native int getId();
   }
 
-  public void testJsType3DimArray_castFromNativeWithACall() {
+  private static void testJsType3DimArray_castFromNativeWithACall() {
     SimpleJsTypeReturnForMultiDimArray[][][] array =
         (SimpleJsTypeReturnForMultiDimArray[][][]) returnJsType3DimFromNative();
     assertEquals(1, array.length);
@@ -151,15 +156,15 @@ public class JsTypeArrayTest extends MyTestCase {
   @JsMethod
   private static native SimpleJsTypeReturnForMultiDimArray getSimpleJsType(int i);
 
-  public void testObjectArray_castFromNative() {
+  private static void testObjectArray_castFromNative() {
     SimpleJsTypeReturnForMultiDimArray[] array =
         (SimpleJsTypeReturnForMultiDimArray[]) returnObjectArrayFromNative();
-    assertNotNull((Object[]) array);
+    assertNotNull(array);
     assertEquals(3, array.length);
     assertEquals("1", array[0]);
   }
 
-  public void testJsTypeArray_objectArrayInterchangeability() {
+  private static void testJsTypeArray_objectArrayInterchangeability() {
     Object[] objArray = new Object[1];
 
     SimpleJsTypeReturnForMultiDimArray[][][] array =
@@ -174,7 +179,7 @@ public class JsTypeArrayTest extends MyTestCase {
     assertEquals(2, array[0][0][1].getId());
   }
 
-  public void testObjectArray_instanceOf() {
+  private static void testObjectArray_instanceOf() {
     Object array = new Object[0];
     assertTrue(array instanceof Object[]);
     assertFalse(array instanceof Double[]);
@@ -186,7 +191,7 @@ public class JsTypeArrayTest extends MyTestCase {
     assertTrue(array instanceof Serializable);
   }
 
-  public void testJsTypeArray_instanceOf() {
+  private static void testJsTypeArray_instanceOf() {
     Object array = returnJsType3DimFromNative();
     assertTrue(array instanceof Object[]);
     assertFalse(array instanceof Double[]);
@@ -210,7 +215,7 @@ public class JsTypeArrayTest extends MyTestCase {
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "BufferSource")
   private interface NativeTypedefInterface {}
 
-  public void testNativeArrays() {
+  private static void testNativeArrays() {
     NativeStringInterface[][] nativeArray2d = new NativeStringInterface[10][];
     nativeArray2d[1] = (NativeStringInterface[]) new NativeObjectInterface[0];
 
@@ -227,7 +232,7 @@ public class JsTypeArrayTest extends MyTestCase {
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Array")
   private static class NativeArray {}
 
-  private void assertHasNoMetadata(Object array) {
+  private static void assertHasNoMetadata(Object array) {
     assertEquals(nonNumericKeys(new NativeArray()), nonNumericKeys(array));
   }
 
@@ -247,7 +252,7 @@ public class JsTypeArrayTest extends MyTestCase {
     }
   }
 
-  public void testJsFunctionArray() {
+  private static void testJsFunctionArray() {
     Object[] someFunctionArray = new SomeFunction[10];
 
     // @JsFunction arrays can contain any type of function.

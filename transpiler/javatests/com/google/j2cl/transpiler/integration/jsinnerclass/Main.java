@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.jsinnerclass;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 import jsinterop.annotations.JsType;
 
 public class Main {
@@ -26,8 +28,8 @@ public class Main {
 
   public static void main(String... args) {
     // Call the constructor through js
-    assert NativeType.getB(new Outer()) == 3;
+    assertTrue(NativeType.getB(new Outer()) == 3);
     // Call the constructor through java
-    assert new Outer().new Inner().getB() == 3;
+    assertTrue(new Outer().new Inner().getB() == 3);
   }
 }

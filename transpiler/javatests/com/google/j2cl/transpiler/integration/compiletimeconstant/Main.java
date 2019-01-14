@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.compiletimeconstant;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
@@ -59,29 +61,29 @@ public class Main {
     int total = 0;
 
     total += CompileTimeConstants.CONSTANT;
-    assert ranClinit == false;
-    assert total == 10;
+    assertTrue(ranClinit == false);
+    assertTrue(total == 10);
 
     total += CompileTimeConstants.CONSTANT_PLUS_ONE; // 11 + 10
-    assert ranClinit == false;
-    assert total == 21;
+    assertTrue(ranClinit == false);
+    assertTrue(total == 21);
 
     total += CompileTimeConstants.CONSTANT_COMPOSED; // 21 + 11 + 10
-    assert ranClinit == false;
-    assert total == 42;
+    assertTrue(ranClinit == false);
+    assertTrue(total == 42);
 
     total += CompileTimeConstants.CONSTANT_COMPOSED_STRING.length(); // 42 + 16
-    assert ranClinit == false;
-    assert total == 58;
+    assertTrue(ranClinit == false);
+    assertTrue(total == 58);
 
     total += CompileTimeConstants.nonConstant;
-    assert ranClinit == true;
-    assert total == 78;
+    assertTrue(ranClinit == true);
+    assertTrue(total == 78);
 
-    assert CompileTimeConstants.OBJ == null;
+    assertTrue(CompileTimeConstants.OBJ == null);
 
     total += ExternConstant.CONSTANT;
-    assert Int32Array.BYTES_PER_ELEMENT == 4;
-    assert total == 82;
+    assertTrue(Int32Array.BYTES_PER_ELEMENT == 4);
+    assertTrue(total == 82);
   }
 }

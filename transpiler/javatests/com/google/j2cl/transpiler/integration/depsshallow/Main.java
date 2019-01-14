@@ -15,11 +15,13 @@
  */
 package com.google.j2cl.transpiler.integration.depsshallow;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 import com.google.j2cl.transpiler.integration.depsshallow.foo.Foo;
 
 public class Main {
   public static void main(String... args) {
     Foo foo = new Foo();
-    assert foo.getName().equals("Foo");
+    assertTrue(foo.getName().equals("Foo"));
   }
 }

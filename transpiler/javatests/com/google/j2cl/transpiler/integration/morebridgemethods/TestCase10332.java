@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.morebridgemethods;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 import jsinterop.annotations.JsType;
 
 public class TestCase10332 {
@@ -36,7 +38,7 @@ public class TestCase10332 {
   @SuppressWarnings("unchecked")
   public static void test() {
     C c = new C();
-    assert ((B) c).get("").equals("C get String");
-    assert c.get("").equals("C get String");
+    assertTrue(((B) c).get("").equals("C get String"));
+    assertTrue(c.get("").equals("C get String"));
   }
 }

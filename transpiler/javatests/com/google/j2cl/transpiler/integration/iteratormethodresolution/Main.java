@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.iteratormethodresolution;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 import java.util.Iterator;
 
 /**
@@ -60,7 +62,7 @@ public class Main {
   public static void main(String... args) {
     int count = 1;
     for (String string : new Concrete()) {
-      assert string.equals("" + count);
+      assertTrue(string.equals("" + count));
       count++;
     }
 
@@ -68,7 +70,7 @@ public class Main {
     MyList myList = new Concrete();
     count = 1;
     for (String string : myList) {
-      assert string.equals("" + count);
+      assertTrue(string.equals("" + count));
       count++;
     }
   }

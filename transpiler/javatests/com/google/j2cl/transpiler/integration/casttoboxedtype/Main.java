@@ -15,102 +15,13 @@
  */
 package com.google.j2cl.transpiler.integration.casttoboxedtype;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertThrowsClassCastException;
+
 public class Main {
-  @SuppressWarnings("unused")
-  public static void castToByteException(Object o) {
-    try {
-      Byte b = (Byte) o;
-      assert false : "should have thrown an exception";
-    } catch (ClassCastException e) {
-      // expected.
-    }
-  }
-
-  @SuppressWarnings("unused")
-  public static void castToDoubleException(Object o) {
-    try {
-      Double d = (Double) o;
-      assert false : "should have thrown an exception";
-    } catch (ClassCastException e) {
-      // expected.
-    }
-  }
-
-  @SuppressWarnings("unused")
-  public static void castToFloatException(Object o) {
-    try {
-      Float f = (Float) o;
-      assert false : "should have thrown an exception";
-    } catch (ClassCastException e) {
-      // expected.
-    }
-  }
-
-  @SuppressWarnings("unused")
-  public static void castToIntegerException(Object o) {
-    try {
-      Integer i = (Integer) o;
-      assert false : "should have thrown an exception";
-    } catch (ClassCastException e) {
-      // expected.
-    }
-  }
-
-  @SuppressWarnings("unused")
-  public static void castToLongException(Object o) {
-    try {
-      Long l = (Long) o;
-      assert false : "should have thrown an exception";
-    } catch (ClassCastException e) {
-      // expected.
-    }
-  }
-
-  @SuppressWarnings("unused")
-  public static void castToShortException(Object o) {
-    try {
-      Short s = (Short) o;
-      assert false : "should have thrown an exception";
-    } catch (ClassCastException e) {
-      // expected.
-    }
-  }
-
-  @SuppressWarnings("unused")
-  public static void castToCharacterException(Object o) {
-    try {
-      Character c = (Character) o;
-      assert false : "should have thrown an exception";
-    } catch (ClassCastException e) {
-      // expected.
-    }
-  }
-
-  @SuppressWarnings("unused")
-  public static void castToBooleanException(Object o) {
-    try {
-      Boolean s = (Boolean) o;
-      assert false : "should have thrown an exception";
-    } catch (ClassCastException e) {
-      // expected.
-    }
-  }
-
-  @SuppressWarnings("unused")
-  public static void castToNumberException(Object o) {
-    try {
-      Number n = (Number) o;
-      assert false : "should have thrown an exception";
-    } catch (ClassCastException e) {
-      // expected.
-    }
-  }
-
-  @SuppressWarnings("unused")
   public static void main(String[] args) {
     Object b = new Byte((byte) 1);
-    Byte bb = (Byte) b;
-    Number n = (Number) b;
+    Byte unusedB = (Byte) b;
+    Number unusedN = (Number) b;
     castToDoubleException(b);
     castToFloatException(b);
     castToIntegerException(b);
@@ -120,8 +31,8 @@ public class Main {
     castToBooleanException(b);
 
     Object d = new Double(1.0);
-    Double dd = (Double) d;
-    n = (Number) d;
+    Double unusedD = (Double) d;
+    unusedN = (Number) d;
     castToByteException(d);
     castToFloatException(d);
     castToIntegerException(d);
@@ -131,8 +42,8 @@ public class Main {
     castToBooleanException(d);
 
     Object f = new Float(1.0f);
-    Float ff = (Float) f;
-    n = (Number) f;
+    Float unusedF = (Float) f;
+    unusedN = (Number) f;
     castToByteException(f);
     castToDoubleException(f);
     castToIntegerException(f);
@@ -142,8 +53,8 @@ public class Main {
     castToBooleanException(f);
 
     Object i = new Integer(1);
-    Integer ii = (Integer) i;
-    n = (Number) i;
+    Integer unusedI = (Integer) i;
+    unusedN = (Number) i;
     castToByteException(i);
     castToDoubleException(i);
     castToFloatException(i);
@@ -153,8 +64,8 @@ public class Main {
     castToBooleanException(i);
 
     Object l = new Long(1L);
-    Long ll = (Long) l;
-    n = (Number) l;
+    Long unusedL = (Long) l;
+    unusedN = (Number) l;
     castToByteException(l);
     castToDoubleException(l);
     castToFloatException(l);
@@ -164,8 +75,8 @@ public class Main {
     castToBooleanException(l);
 
     Object s = new Short((short) 1);
-    Short ss = (Short) s;
-    n = (Number) s;
+    Short unusedS = (Short) s;
+    unusedN = (Number) s;
     castToByteException(s);
     castToDoubleException(s);
     castToFloatException(s);
@@ -175,7 +86,7 @@ public class Main {
     castToBooleanException(s);
 
     Object c = new Character('a');
-    Character cc = (Character) c;
+    Character unusedC = (Character) c;
     castToByteException(c);
     castToDoubleException(c);
     castToFloatException(c);
@@ -186,7 +97,7 @@ public class Main {
     castToBooleanException(c);
 
     Object bool = new Boolean(true);
-    Boolean bbool = (Boolean) bool;
+    Boolean unusedBool = (Boolean) bool;
     castToByteException(bool);
     castToDoubleException(bool);
     castToFloatException(bool);
@@ -197,6 +108,69 @@ public class Main {
     castToCharacterException(bool);
 
     Object sn = new SubNumber();
-    n = (Number) sn;
+    unusedN = (Number) sn;
+  }
+
+  private static void castToByteException(Object o) {
+    assertThrowsClassCastException(
+        () -> {
+          Byte b = (Byte) o;
+        });
+  }
+
+  private static void castToDoubleException(Object o) {
+    assertThrowsClassCastException(
+        () -> {
+          Double d = (Double) o;
+        });
+  }
+
+  private static void castToFloatException(Object o) {
+    assertThrowsClassCastException(
+        () -> {
+          Float f = (Float) o;
+        });
+  }
+
+  private static void castToIntegerException(Object o) {
+    assertThrowsClassCastException(
+        () -> {
+          Integer i = (Integer) o;
+        });
+  }
+
+  private static void castToLongException(Object o) {
+    assertThrowsClassCastException(
+        () -> {
+          Long l = (Long) o;
+        });
+  }
+
+  private static void castToShortException(Object o) {
+    assertThrowsClassCastException(
+        () -> {
+          Short s = (Short) o;
+        });
+  }
+
+  private static void castToCharacterException(Object o) {
+    assertThrowsClassCastException(
+        () -> {
+          Character c = (Character) o;
+        });
+  }
+
+  private static void castToBooleanException(Object o) {
+    assertThrowsClassCastException(
+        () -> {
+          Boolean b = (Boolean) o;
+        });
+  }
+
+  private static void castToNumberException(Object o) {
+    assertThrowsClassCastException(
+        () -> {
+          Number n = (Number) o;
+        });
   }
 }

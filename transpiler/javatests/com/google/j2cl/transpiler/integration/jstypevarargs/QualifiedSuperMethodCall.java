@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.jstypevarargs;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 public class QualifiedSuperMethodCall extends Main {
   public QualifiedSuperMethodCall() {
     super(1);
@@ -50,10 +52,10 @@ public class QualifiedSuperMethodCall extends Main {
 
   public static void test() {
     InnerClass i = new QualifiedSuperMethodCall().new InnerClass();
-    assert i.test1() == 4;
-    assert i.test2() == 1;
-    assert i.test3() == 4;
-    assert i.test4() == 1;
-    assert i.test5() == 4;
+    assertTrue(i.test1() == 4);
+    assertTrue(i.test2() == 1);
+    assertTrue(i.test3() == 4);
+    assertTrue(i.test4() == 1);
+    assertTrue(i.test5() == 4);
   }
 }

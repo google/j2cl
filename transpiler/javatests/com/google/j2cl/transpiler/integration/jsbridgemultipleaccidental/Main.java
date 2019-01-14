@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.jsbridgemultipleaccidental;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 public class Main {
   public static void main(String... args) {
     InterfaceOne a = new Test();
@@ -23,10 +25,10 @@ public class Main {
     C d = new Test();
     Test e = new Test();
 
-    assert (a.fun(1) == 1);
-    assert (b.fun(1) == 1);
-    assert (c.fun(1) == 1);
-    assert (d.fun(1) == 1);
-    assert (e.fun(1) == 1);
+    assertTrue((a.fun(1) == 1));
+    assertTrue((b.fun(1) == 1));
+    assertTrue((c.fun(1) == 1));
+    assertTrue((d.fun(1) == 1));
+    assertTrue((e.fun(1) == 1));
   }
 }

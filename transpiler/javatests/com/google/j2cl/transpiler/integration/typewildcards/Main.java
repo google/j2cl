@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.typewildcards;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 @SuppressWarnings("rawtypes")
 public class Main {
   public Object unbounded(GenericType<?> g) {
@@ -38,16 +40,16 @@ public class Main {
     GenericType<Object> go = new GenericType<>(o);
     GenericType<SubClass> gs = new GenericType<>(s);
 
-    assert (m.unbounded(gm) == m);
-    assert (m.unbounded(go) == o);
+    assertTrue((m.unbounded(gm) == m));
+    assertTrue((m.unbounded(go) == o));
 
-    assert (m.upperBound(gm) == m);
-    assert (m.upperBound(gs) == s);
+    assertTrue((m.upperBound(gm) == m));
+    assertTrue((m.upperBound(gs) == s));
 
-    assert (m.lowerBound(gm) == m);
-    assert (m.lowerBound(go) == o);
+    assertTrue((m.lowerBound(gm) == m));
+    assertTrue((m.lowerBound(go) == o));
 
-    assert new RawSubclass().f(null).equals("RawSubclass");
+    assertTrue(new RawSubclass().f(null).equals("RawSubclass"));
   }
 
   interface I<T extends Main> {

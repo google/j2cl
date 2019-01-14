@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.abstractinnerclass;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 public class Main {
   interface A {
     int foo();
@@ -47,7 +49,7 @@ public class Main {
   }
 
   public static void main(String... args) {
-    assert (new BB().bar() == 10);
-    assert (new Main().new CC().bar() == 20);
+    assertTrue(10 == new BB().bar());
+    assertTrue(20 == new Main().new CC().bar());
   }
 }

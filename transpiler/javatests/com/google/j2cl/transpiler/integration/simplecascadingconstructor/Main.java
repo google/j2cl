@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.simplecascadingconstructor;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 /**
  * Test for simple cascading constructors.
  */
@@ -33,7 +35,7 @@ public class Main {
 
   public static void main(String[] args) {
     Main m = new Main(10);
-    assert m.a == 10;
-    assert m.b == 20;
+    assertTrue(m.a == 10);
+    assertTrue(m.b == 20);
   }
 }

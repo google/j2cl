@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.whilestatement;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 /**
  * Test instanceof class type.
  */
@@ -26,12 +28,12 @@ public class Main {
       count++;
     }
 
-    assert count == 5;
+    assertTrue(count == 5);
 
     while (count < 10) count++;
-    assert count == 10;
+    assertTrue(count == 10);
 
     while (count++ < 14) {}
-    assert count == 15;
+    assertTrue(count == 15);
   }
 }

@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.lambdasnestedscope;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 /**
  * Test nested lambdas.
  */
@@ -27,6 +29,6 @@ public class LambdaNestingInLambdas {
           MyInterface ii = n -> a + b + m + n;
           return ii.fun(100);
         };
-    assert (i.fun(200) == 330);
+    assertTrue((i.fun(200) == 330));
   }
 }

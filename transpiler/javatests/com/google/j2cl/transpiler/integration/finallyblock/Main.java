@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.finallyblock;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 /**
  * Test finally block.
  */
@@ -30,6 +32,6 @@ public class Main {
   }
 
   public static void main(String[] args) {
-    assert fun() == Main.value;
+    assertTrue(fun() == Main.value);
   }
 }

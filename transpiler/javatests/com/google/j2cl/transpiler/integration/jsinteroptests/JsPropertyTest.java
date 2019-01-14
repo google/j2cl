@@ -15,31 +15,32 @@
  */
 package com.google.j2cl.transpiler.integration.jsinteroptests;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertEquals;
+import static com.google.j2cl.transpiler.utils.Asserts.assertFalse;
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
-/**
- * Tests JsProperty functionality.
- */
-public class JsPropertyTest extends MyTestCase {
+/** Tests JsProperty functionality. */
+public class JsPropertyTest {
   public static void testAll() {
-    JsPropertyTest test = new JsPropertyTest();
-    test.testConcreteJsType();
-    test.testJavaClassImplementingMyJsTypeInterfaceWithProperty();
-    test.testJsPropertyAccidentalOverrideSuperCall();
-    test.testJsPropertyBridges();
-    test.testJsPropertyBridgesSubclass();
-    test.testJsPropertyGetX();
-    test.testJsPropertyIsX();
-    test.testJsPropertyRemovedAccidentalOverrideSuperCall();
-    test.testNativeJsType();
-    test.testNativeJsTypeSubclass();
-    test.testNativeJsTypeSubclassNoOverride();
-    test.testNativeJsTypeWithConstructor();
-    test.testNativeJsTypeWithConstructorSubclass();
-    test.testProtectedNames();
+    testConcreteJsType();
+    testJavaClassImplementingMyJsTypeInterfaceWithProperty();
+    testJsPropertyAccidentalOverrideSuperCall();
+    testJsPropertyBridges();
+    testJsPropertyBridgesSubclass();
+    testJsPropertyGetX();
+    testJsPropertyIsX();
+    testJsPropertyRemovedAccidentalOverrideSuperCall();
+    testNativeJsType();
+    testNativeJsTypeSubclass();
+    testNativeJsTypeSubclassNoOverride();
+    testNativeJsTypeWithConstructor();
+    testNativeJsTypeWithConstructorSubclass();
+    testProtectedNames();
   }
 
   private static final int SET_PARENT_X = 500;
@@ -71,7 +72,7 @@ public class JsPropertyTest extends MyTestCase {
     }
   }
 
-  public void testJavaClassImplementingMyJsTypeInterfaceWithProperty() {
+  private static void testJavaClassImplementingMyJsTypeInterfaceWithProperty() {
     MyJavaTypeImplementingMyJsTypeInterfaceWithProperty obj =
         new MyJavaTypeImplementingMyJsTypeInterfaceWithProperty();
     assertEquals(0 + GET_X, getProperty(obj, "x"));
@@ -119,7 +120,7 @@ public class JsPropertyTest extends MyTestCase {
     }
   }
 
-  public void testConcreteJsType() {
+  private static void testConcreteJsType() {
     MyConcreteJsType obj = new MyConcreteJsType();
     assertEquals(0 + GET_X, getProperty(obj, "y"));
     assertEquals(0 + GET_X, obj.getY());
@@ -159,7 +160,7 @@ public class JsPropertyTest extends MyTestCase {
     public native int sum(int bias);
   }
 
-  public void testNativeJsType() {
+  private static void testNativeJsType() {
     MyNativeJsType.staticX = 34;
     assertEquals(34, MyNativeJsType.staticX);
     assertEquals(42, MyNativeJsType.answerToLife());
@@ -190,7 +191,7 @@ public class JsPropertyTest extends MyTestCase {
     }
   }
 
-  public void testNativeJsTypeSubclass() {
+  private static void testNativeJsTypeSubclass() {
     MyNativeJsTypeSubclass mc = new MyNativeJsTypeSubclass();
     assertTrue(mc.ctorExecuted);
     assertEquals(143, mc.sum(1));
@@ -206,7 +207,7 @@ public class JsPropertyTest extends MyTestCase {
     public MyNativeJsTypeSubclassNoOverride() {}
   }
 
-  public void testNativeJsTypeSubclassNoOverride() {
+  private static void testNativeJsTypeSubclassNoOverride() {
     MyNativeJsTypeSubclassNoOverride myNativeJsType = new MyNativeJsTypeSubclassNoOverride();
     myNativeJsType.x = 12;
     assertEquals(42, myNativeJsType.sum(30));
@@ -220,7 +221,7 @@ public class JsPropertyTest extends MyTestCase {
     public int x;
   }
 
-  public void testNativeJsTypeWithConstructor() {
+  private static void testNativeJsTypeWithConstructor() {
     MyNativeJsTypeWithConstructor obj = new MyNativeJsTypeWithConstructor(12);
     assertTrue(obj.ctorExecuted);
     assertEquals(12, obj.x);
@@ -233,7 +234,7 @@ public class JsPropertyTest extends MyTestCase {
     }
   }
 
-  public void testNativeJsTypeWithConstructorSubclass() {
+  private static void testNativeJsTypeWithConstructorSubclass() {
     MyNativeJsTypeWithConstructorSubclass obj = new MyNativeJsTypeWithConstructorSubclass(12);
     assertTrue(obj.ctorExecuted);
     assertEquals(12, obj.x);
@@ -269,7 +270,7 @@ public class JsPropertyTest extends MyTestCase {
     }
   }
 
-  public void testJsPropertyBridges() {
+  private static void testJsPropertyBridges() {
     MyNativeJsTypeInterface object = new MyNativeNativeJsTypeTypeInterfaceSubclassNeedingBridge();
 
     object.setX(3);
@@ -333,7 +334,7 @@ public class JsPropertyTest extends MyTestCase {
     }
   }
 
-  public void testJsPropertyBridgesSubclass() {
+  private static void testJsPropertyBridgesSubclass() {
     MyNativeJsTypeInterface object = new MyNativeJsTypeInterfaceImplNeedingBridgeSubclass();
 
     object.setX(3);
@@ -377,7 +378,7 @@ public class JsPropertyTest extends MyTestCase {
     void setImport(String str);
   }
 
-  public void testProtectedNames() {
+  private static void testProtectedNames() {
     MyJsTypeInterfaceWithProtectedNames obj = createMyJsInterfaceWithProtectedNames();
     assertEquals("var", obj.var());
     assertEquals("nullField", obj.getNullField());
@@ -396,7 +397,7 @@ public class JsPropertyTest extends MyTestCase {
     void setX(boolean x);
   }
 
-  public void testJsPropertyIsX() {
+  private static void testJsPropertyIsX() {
     JsTypeIsProperty object = createJsTypeIsProperty();
 
     assertFalse(object.isX());
@@ -421,7 +422,7 @@ public class JsPropertyTest extends MyTestCase {
   static class AccidentalOverrideProperty extends AccidentalOverridePropertyBase
       implements AccidentalOverridePropertyJsTypeInterface {}
 
-  public void testJsPropertyAccidentalOverrideSuperCall() {
+  private static void testJsPropertyAccidentalOverrideSuperCall() {
     AccidentalOverrideProperty object = new AccidentalOverrideProperty();
     assertEquals(50, object.getX());
     assertEquals(50, getProperty(object, "x"));
@@ -439,7 +440,7 @@ public class JsPropertyTest extends MyTestCase {
   static class RemovedAccidentalOverrideProperty extends RemovedAccidentalOverridePropertyBase
       implements AccidentalOverridePropertyJsTypeInterface {}
 
-  public void testJsPropertyRemovedAccidentalOverrideSuperCall() {
+  private static void testJsPropertyRemovedAccidentalOverrideSuperCall() {
     RemovedAccidentalOverrideProperty object = new RemovedAccidentalOverrideProperty();
     // If the accidental override here were not removed the access to property x would result in
     // an infinite loop
@@ -457,7 +458,7 @@ public class JsPropertyTest extends MyTestCase {
     void setX(int x);
   }
 
-  public void testJsPropertyGetX() {
+  private static void testJsPropertyGetX() {
     JsTypeGetProperty object = createJsTypeGetProperty();
 
     assertTrue(isUndefined(object.getX()));

@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.morebridgemethods;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 public class TestCase5828 {
   static class C {
     @SuppressWarnings("unused")
@@ -26,6 +28,6 @@ public class TestCase5828 {
   @SuppressWarnings("unchecked")
   public static void test() {
     C c = new C();
-    assert c.get("").equals("C get Object");
+    assertTrue(c.get("").equals("C get Object"));
   }
 }

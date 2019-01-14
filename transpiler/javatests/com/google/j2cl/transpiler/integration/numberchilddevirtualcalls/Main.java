@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.numberchilddevirtualcalls;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 class NumberChild extends Number {
   private double x;
   private double y;
@@ -55,14 +57,14 @@ class NumberChild extends Number {
 public class Main {
   public static void main(String[] args) {
     Number nc = new NumberChild(2147483647.6, 2.6);
-    assert (nc.byteValue() == -1);
-    assert (nc.doubleValue() == 2.1474836502E9);
-    //assert (nc.floatValue() == 2.14748365E9f); // does not distinguish float and double.
-    assert (nc.intValue() == 2147483647);
-    assert (nc.longValue() == 2147483650L);
-    assert (nc.shortValue() == -1);
+    assertTrue((nc.byteValue() == -1));
+    assertTrue((nc.doubleValue() == 2.1474836502E9));
+    // assertTrue((nc.floatValue() == 2.14748365E9f)); // does not distinguish float and double.
+    assertTrue((nc.intValue() == 2147483647));
+    assertTrue((nc.longValue() == 2147483650L));
+    assertTrue((nc.shortValue() == -1));
 
-    assert (new NumberChild(3.6, 4.6).byteValue() == 3);
-    assert (new NumberChild(3.6, 4.6).shortValue() == 8);
+    assertTrue((new NumberChild(3.6, 4.6).byteValue() == 3));
+    assertTrue((new NumberChild(3.6, 4.6).shortValue() == 8));
   }
 }

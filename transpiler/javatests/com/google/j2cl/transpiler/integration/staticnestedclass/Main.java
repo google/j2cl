@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.staticnestedclass;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 public class Main {
   public static class ParentThis {
     public static class StaticNestedClass {
@@ -30,11 +32,11 @@ public class Main {
 
   public static void main(String... args) {
     ParentThis.StaticNestedClass thisClass = new ParentThis.StaticNestedClass();
-    assert thisClass instanceof ParentThis.StaticNestedClass;
-    assert thisClass.field == 1;
+    assertTrue(thisClass instanceof ParentThis.StaticNestedClass);
+    assertTrue(thisClass.field == 1);
 
     ParentThat.StaticNestedClass thatClass = new ParentThat.StaticNestedClass();
-    assert thatClass instanceof ParentThat.StaticNestedClass;
-    assert thatClass.field == 2;
+    assertTrue(thatClass instanceof ParentThat.StaticNestedClass);
+    assertTrue(thatClass.field == 2);
   }
 }

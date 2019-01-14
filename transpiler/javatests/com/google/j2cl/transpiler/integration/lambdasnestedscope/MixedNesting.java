@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.lambdasnestedscope;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 /**
  * Test lambda having access to local variables and arguments when placed in mixed scopes.
  * Local class -> local class -> anonymous -> lambda -> anonymous -> lambda
@@ -47,8 +49,8 @@ public class MixedNesting {
         }
       }
       int result = new B().b();
-      assert result == 1042;
-      assert x[0] == 1042;
+      assertTrue(result == 1042);
+      assertTrue(x[0] == 1042);
     }
   }
 

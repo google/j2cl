@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.morebridgemethods;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 /**
  * Test for complicated cases for bridge methods, which includes bounded type varaibles, multiple
  * inheritance and accidental overrides.
@@ -43,6 +45,6 @@ public class BridgeMethodsMain {
     BridgeMethodsMain m = new BridgeMethodsMain();
     Child c = new Child();
 
-    assert (m.callByInterface(c, new AssertionError()) == 1);
+    assertTrue((m.callByInterface(c, new AssertionError()) == 1));
   }
 }

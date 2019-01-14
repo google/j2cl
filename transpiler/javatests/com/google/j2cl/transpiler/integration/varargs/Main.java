@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.varargs;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 /**
  * Class that has a constructor with var arg parameters.
  */
@@ -85,36 +87,36 @@ public class Main {
     Main m3 = new Main(3);
     Main m4 = new Main(4);
     int a = m.bar(m1, m2, m3, m4); // varargs with mulitple arguments.
-    assert (a == 10);
+    assertTrue((a == 10));
 
     int b = m.bar(m1); // no argument for varargs.
-    assert (b == 1);
+    assertTrue((b == 1));
 
     int c = m.bar(m1, m2); // varargs with one element.
-    assert (c == 3);
+    assertTrue((c == 3));
 
     int d = m.bar(m1, new Main[] {m2, m3, m4}); // array argument for the varargs.
-    assert (d == 10);
+    assertTrue((d == 10));
 
     int e = m.bar(m1, new Main[] {}); // empty array for the varargs.
-    assert (e == 1);
+    assertTrue((e == 1));
 
     int f = m.bar(m1, null); // null for the varargs.
-    assert (f == 1);
+    assertTrue((f == 1));
 
     Parent p = new Parent(1, 2, 3); // constructor call with varargs.
-    assert (p.value == 6);
+    assertTrue((p.value == 6));
 
     Parent pp = new Parent(""); // constructor call with varargs is invoked by this() call.
-    assert (pp.value == 1);
+    assertTrue((pp.value == 1));
 
     Child cc = new Child(); // constructor call with varargs is invoked by super() constructor call.
-    assert (cc.value == 2);
+    assertTrue((cc.value == 2));
 
     // method call with varargs is invoked by super() method call.
-    assert (new Child().sum(1, 2, 3, 4) == new Parent().sum(1, 2, 3, 4));
-    
-    assert (Parent.generics(1, 2) == 1);
-    assert (Parent.generics("abc", "def").equals("abc"));
+    assertTrue((new Child().sum(1, 2, 3, 4) == new Parent().sum(1, 2, 3, 4)));
+
+    assertTrue((Parent.generics(1, 2) == 1));
+    assertTrue((Parent.generics("abc", "def").equals("abc")));
   }
 }

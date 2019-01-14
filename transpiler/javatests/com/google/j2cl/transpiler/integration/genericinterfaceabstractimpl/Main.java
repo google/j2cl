@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.genericinterfaceabstractimpl;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 interface I<T> {
   int fun(T t);
 
@@ -57,9 +59,9 @@ public class Main {
   public static void main(String... args) {
     SubA subA = new SubA();
     SubB subB = new SubB();
-    assert (subA.bar(new Integer(1)) == 1);
-    assert (subA.fun(new Integer(2)) == 2);
-    assert (subB.bar(new Integer(3)) == 3);
-    assert (subB.fun(new Integer(4)) == 4);
+    assertTrue((subA.bar(new Integer(1)) == 1));
+    assertTrue((subA.fun(new Integer(2)) == 2));
+    assertTrue((subB.bar(new Integer(3)) == 3));
+    assertTrue((subB.fun(new Integer(4)) == 4));
   }
 }

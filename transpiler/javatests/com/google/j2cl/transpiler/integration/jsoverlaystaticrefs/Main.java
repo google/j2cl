@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.jsoverlaystaticrefs;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsType;
 
@@ -41,9 +43,9 @@ public class Main {
   }
 
   public static void testNativeJsWithOverlay() {
-    assert NativeTypeWithStaticOverlay.getStaticField() != null;
+    assertTrue(NativeTypeWithStaticOverlay.getStaticField() != null);
 
-    assert new NativeTypeWithInstanceOverlay().getStaticField() != null;
+    assertTrue(new NativeTypeWithInstanceOverlay().getStaticField() != null);
   }
 
   public static void main(String... args) {

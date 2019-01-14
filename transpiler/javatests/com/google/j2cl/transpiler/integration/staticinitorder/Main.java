@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.staticinitorder;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 /**
  * Test static initializers order.
  */
@@ -22,30 +24,30 @@ public class Main {
   public static int counter = 1;
 
   public static void main(String... args) {
-    assert Main.counter == 5;
-    assert Main.field1 == 2;
-    assert Main.field2 == 4;
+    assertTrue(Main.counter == 5);
+    assertTrue(Main.field1 == 2);
+    assertTrue(Main.field2 == 4);
   }
 
   public static int field1 = initializeField1();
 
   static {
-    assert counter++ == 2; // #2
+    assertTrue(counter++ == 2); // #2
   }
 
   public static int field2 = initializeField2();
 
   static {
-    assert counter++ == 4; // #4
+    assertTrue(counter++ == 4); // #4
   }
 
   public static int initializeField1() {
-    assert counter++ == 1; // #1
+    assertTrue(counter++ == 1); // #1
     return counter;
   }
 
   public static int initializeField2() {
-    assert counter++ == 3; // #3
+    assertTrue(counter++ == 3); // #3
     return counter;
   }
 }

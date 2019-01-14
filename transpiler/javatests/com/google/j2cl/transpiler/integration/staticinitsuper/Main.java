@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.staticinitsuper;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -133,7 +135,8 @@ public class Main {
   }
 
   private static void assertExpectedOrder(String... expected) {
-    assert Arrays.asList(expected).equals(loadOrder)
-        : "Expected <" + Arrays.toString(expected) + " > but was <" + loadOrder + " >";
+    assertTrue(
+        "Expected <" + Arrays.toString(expected) + " > but was <" + loadOrder + " >",
+        Arrays.asList(expected).equals(loadOrder));
   }
 }

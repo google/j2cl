@@ -15,9 +15,9 @@
  */
 package com.google.j2cl.transpiler.integration.ifstatement;
 
-/**
- * Test instanceof class type.
- */
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
+/** Test instanceof class type. */
 public class Main {
   public static void main(String... args) {
     int count = 0;
@@ -25,41 +25,41 @@ public class Main {
     if (count == 0) {
       count = 1;
     } else {
-      assert false;
+      assertTrue(false);
     }
 
-    assert count == 1;
+    assertTrue(count == 1);
 
     if (count == 0) {
-      assert false;
+      assertTrue(false);
     } else if (count == 1) {
       count = 2;
     } else {
-      assert false;
+      assertTrue(false);
     }
 
     if (count != 2) {
-      assert false;
+      assertTrue(false);
     } else if (count == 1) {
-      assert false;
+      assertTrue(false);
     } else {
       count = 3;
     }
 
-    assert count == 3;
+    assertTrue(count == 3);
 
     // Make sure we add a block for ifs without a block
     if (count == 3) count = 4;
-    assert count == 4;
+    assertTrue(count == 4);
 
-    if (count != 4) assert false;
+    if (count != 4) assertTrue(false);
     else count = 5;
 
-    assert count == 5;
+    assertTrue(count == 5);
 
     if (count == 5) ;
     else count = 6;
 
-    assert count == 5;
+    assertTrue(count == 5);
   }
 }

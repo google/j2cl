@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.casttointerface;
 
+import static com.google.j2cl.transpiler.utils.Asserts.fail;
+
 import java.io.Serializable;
 
 /**
@@ -31,7 +33,7 @@ public class Main {
     // But this isn't fine.
     try {
       Serializable exception = (Serializable) object;
-      assert false : "An expected failure did not occur.";
+      fail("An expected failure did not occur.");
     } catch (ClassCastException e) {
       // expected
     }

@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.generictype;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 public class Main<T, S> {
   public T first;
   public S second;
@@ -42,12 +44,12 @@ public class Main<T, S> {
     Error second = new Error();
     Main<Object, Error> main = new Main<>(first, second);
 
-    assert main.getFirst() == first;
-    assert main.getSecond() == second;
-    assert main.getSecond() instanceof Error;
+    assertTrue(main.getFirst() == first);
+    assertTrue(main.getSecond() == second);
+    assertTrue(main.getSecond() instanceof Error);
 
     main.set(new Object(), new Error());
-    assert main.getFirst() != first;
-    assert main.getSecond() != second;
+    assertTrue(main.getFirst() != first);
+    assertTrue(main.getSecond() != second);
   }
 }

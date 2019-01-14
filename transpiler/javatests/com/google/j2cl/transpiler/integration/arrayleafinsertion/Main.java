@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.arrayleafinsertion;
 
+import static com.google.j2cl.transpiler.utils.Asserts.fail;
+
 public class Main {
   public static void main(String... args) {
     testFullArray();
@@ -30,7 +32,7 @@ public class Main {
     // When inserting a leaf value the type must conform.
     try {
       array[0] = new Object();
-      assert false : "An expected failure did not occur.";
+      fail("An expected failure did not occur.");
     } catch (ArrayStoreException e) {
       // expected
     }
@@ -46,7 +48,7 @@ public class Main {
     // When trying to insert into the uninitialized section you'll get an NPE.
     try {
       partialArray[0][0] = new Person();
-      assert false : "An expected failure did not occur.";
+      fail("An expected failure did not occur.");
     } catch (NullPointerException e) {
       // expected
     }

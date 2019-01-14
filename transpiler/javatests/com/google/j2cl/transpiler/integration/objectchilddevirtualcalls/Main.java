@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.objectchilddevirtualcalls;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 /**
  * Verifies that Object methods on the ChildClass class execute properly. It is effectively a test
  * that Object method devirtualization is occurring even for children of Object and that the
@@ -32,25 +34,26 @@ public class Main {
     ChildClass childClass2 = new ChildClass();
 
     // Equals
-    assert childClass1.equals(childClass1);
-    assert !childClass1.equals(childClass2);
-    assert !childClass1.equals("some string");
+    assertTrue(childClass1.equals(childClass1));
+    assertTrue(!childClass1.equals(childClass2));
+    assertTrue(!childClass1.equals("some string"));
 
     // HashCode
-    assert childClass1.hashCode() != -1;
-    assert childClass1.hashCode() == childClass1.hashCode();
-    assert childClass1.hashCode() != childClass2.hashCode();
+    assertTrue(childClass1.hashCode() != -1);
+    assertTrue(childClass1.hashCode() == childClass1.hashCode());
+    assertTrue(childClass1.hashCode() != childClass2.hashCode());
 
     // ToString
-    assert childClass1.toString() instanceof String;
-    assert childClass1.toString()
-        == "com.google.j2cl.transpiler.integration.objectchilddevirtualcalls.ChildClass@"
-            + Integer.toHexString(childClass1.hashCode());
-    assert childClass1.toString() != childClass2.toString();
+    assertTrue(childClass1.toString() instanceof String);
+    assertTrue(
+        childClass1.toString()
+            == "com.google.j2cl.transpiler.integration.objectchilddevirtualcalls.ChildClass@"
+                + Integer.toHexString(childClass1.hashCode()));
+    assertTrue(childClass1.toString() != childClass2.toString());
 
     // GetClass
-    assert childClass1.getClass() instanceof Class;
-    assert childClass1.getClass() == childClass2.getClass();
+    assertTrue(childClass1.getClass() instanceof Class);
+    assertTrue(childClass1.getClass() == childClass2.getClass());
 
     new ChildClassOverrides().test();
   }

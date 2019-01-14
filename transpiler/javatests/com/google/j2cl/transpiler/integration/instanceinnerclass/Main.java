@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.instanceinnerclass;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 /**
  * Test instance inner class.
  */
@@ -252,37 +254,37 @@ public class Main {
 
   public static void main(String[] args) {
     Main m = new Main(2);
-    assert m.new A().fun() == 12;
-    assert m.new A().enclosingInstance == m;
+    assertTrue(m.new A().fun() == 12);
+    assertTrue(m.new A().enclosingInstance == m);
 
     Main mm = new Main(20);
     B b = mm.new B();
     B bb = mm.new B(1, m);
-    assert b.fieldInB == 20;
-    assert b.fieldMain == mm;
-    assert bb.fieldInB == 1;
-    assert bb.fieldMain == m;
+    assertTrue(b.fieldInB == 20);
+    assertTrue(b.fieldMain == mm);
+    assertTrue(bb.fieldInB == 1);
+    assertTrue(bb.fieldMain == m);
 
     C c = m.new C();
-    assert c.new CC().fieldOfC == c;
-    assert c.new CC().fieldOfMain == m;
+    assertTrue(c.new CC().fieldOfC == c);
+    assertTrue(c.new CC().fieldOfMain == m);
 
-    assert m.new D().fieldInD == 2;
-    assert m.new Child().fieldInChild == 4;
-    assert m.new Child(10, 20).fieldInChild == 30;
-    assert m.new AnotherChild().fieldInChild == 60;
+    assertTrue(m.new D().fieldInD == 2);
+    assertTrue(m.new Child().fieldInChild == 4);
+    assertTrue(m.new Child(10, 20).fieldInChild == 30);
+    assertTrue(m.new AnotherChild().fieldInChild == 60);
 
     Child2 c2 = m.new Child2();
-    assert c2.getChild2Outer().fieldInMain == 2;
-    assert c2.getBOuter().fieldInMain == 30;
+    assertTrue(c2.getChild2Outer().fieldInMain == 2);
+    assertTrue(c2.getBOuter().fieldInMain == 30);
 
-    assert m.new X().funInX(2) == 8;
-    assert m.new C().new CC().test(8) == 130;
-    assert m.new Y().new YY().test(8) == 132;
-    assert m.new Z().new ZZ().test(8) == 244;
+    assertTrue(m.new X().funInX(2) == 8);
+    assertTrue(m.new C().new CC().test(8) == 130);
+    assertTrue(m.new Y().new YY().test(8) == 132);
+    assertTrue(m.new Z().new ZZ().test(8) == 244);
 
-    assert m.new W().new W1().test(8) == 262;
-    assert m.new W().new W2().test(8) == 603;
-    assert m.new W().new W3().test(8) == 944;
+    assertTrue(m.new W().new W1().test(8) == 262);
+    assertTrue(m.new W().new W2().test(8) == 603);
+    assertTrue(m.new W().new W3().test(8) == 944);
   }
 }

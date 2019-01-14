@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.arithmeticexceptiondisabledresultused;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 public class Main {
   public static void main(String... args) {
     int a = 10;
@@ -24,7 +26,7 @@ public class Main {
 
     // Use the resulting value, to prove that size reductions are not accidentally because
     // the object was unused and JSCompiler decided to delete the cast on an unused thing.
-    assert c < 100;
-    assert c > -100;
+    assertTrue(c < 100);
+    assertTrue(c > -100);
   }
 }

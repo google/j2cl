@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.implementsgenericinterface;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 interface GenericInterface<T> {
   T foo(T t);
 }
@@ -37,10 +39,10 @@ public class Main {
   public static void main(String[] args) {
     InterfaceImpl i = new InterfaceImpl();
     Object o = i.foo(i);
-    assert o == i;
+    assertTrue(o == i);
 
     InterfaceGenericImpl<InterfaceImpl> gi = new InterfaceGenericImpl<>();
     Object oo = gi.foo(i);
-    assert oo == i;
+    assertTrue(oo == i);
   }
 }

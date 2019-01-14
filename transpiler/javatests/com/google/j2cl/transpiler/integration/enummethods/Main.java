@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.enummethods;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 import jsinterop.annotations.JsType;
 
 /** Checks that .name() and .ordinal() are callable from javascript */
@@ -36,16 +38,16 @@ public class Main {
   }
 
   public static void main(String... args) {
-    assert Test.getOrdinal(MyEnum.A) == 0;
-    assert Test.getOrdinal(MyEnum.B) == 1;
-    assert Test.getOrdinal(MyEnum.C) == 2;
+    assertTrue(Test.getOrdinal(MyEnum.A) == 0);
+    assertTrue(Test.getOrdinal(MyEnum.B) == 1);
+    assertTrue(Test.getOrdinal(MyEnum.C) == 2);
 
-    assert Test.getName(MyEnum.A) == "A";
-    assert Test.getName(MyEnum.B) == "B";
-    assert Test.getName(MyEnum.C) == "C";
+    assertTrue(Test.getName(MyEnum.A) == "A");
+    assertTrue(Test.getName(MyEnum.B) == "B");
+    assertTrue(Test.getName(MyEnum.C) == "C");
 
-    assert Test.compare(MyEnum.A, MyEnum.A) == 0;
-    assert Test.compare(MyEnum.B, MyEnum.A) > 0;
-    assert Test.compare(MyEnum.A, MyEnum.C) < 0;
+    assertTrue(Test.compare(MyEnum.A, MyEnum.A) == 0);
+    assertTrue(Test.compare(MyEnum.B, MyEnum.A) > 0);
+    assertTrue(Test.compare(MyEnum.A, MyEnum.C) < 0);
   }
 }

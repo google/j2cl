@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.jsconstructornested;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+
 import jsinterop.annotations.JsType;
 
 public class Main {
@@ -60,18 +62,18 @@ public class Main {
     // actually arriving via a $ctor.
     {
       InnerJsType innerJsType = main.innerJsType;
-      assert "value one".equals(innerJsType.getOuterName());
+      assertTrue("value one".equals(innerJsType.getOuterName()));
       innerJsType.setOuterName("value two");
-      assert "value two".equals(innerJsType.getOuterName());
+      assertTrue("value two".equals(innerJsType.getOuterName()));
     }
 
     // Exercises the class via JsInterop. Proves that the $outer_this is definitely arriving via the
     // raw JS constructor.
     {
       InnerJsTypeFacade innerJsTypeFacade = new InnerJsTypeFacade(main);
-      assert "value two".equals(innerJsTypeFacade.getOuterName());
+      assertTrue("value two".equals(innerJsTypeFacade.getOuterName()));
       innerJsTypeFacade.setOuterName("value three");
-      assert "value three".equals(innerJsTypeFacade.getOuterName());
+      assertTrue("value three".equals(innerJsTypeFacade.getOuterName()));
     }
   }
 }
