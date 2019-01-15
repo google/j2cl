@@ -32,6 +32,13 @@ alias(
     actual = "//transpiler/java/com/google/j2cl/transpiler:BazelJ2clBuilder",
 )
 
+# TODO(goktug): remove workaround after b/71772385 is fixed
+genrule(
+    name = "dummy_src",
+    outs = ["package-info.java"],
+    cmd = "echo \"package dummy_;\" > $@",
+)
+
 # ***************************************************
 # Standard library related
 # ***************************************************

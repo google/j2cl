@@ -58,7 +58,7 @@ def _java_compile(ctx, java_srcs):
 
     return java_common.compile(
         ctx,
-        source_files = ctx.files.srcs_hack,
+        source_files = ctx.files._srcs_hack,
         source_jars = stripped_java_srcs,
         deps = java_deps,
         exports = java_exports,
@@ -95,7 +95,6 @@ def _strip_gwt_incompatible(ctx, java_srcs):
 _J2CL_LIB_ATTRS = {
     # TODO(goktug): Try to limit this further.
     "srcs": attr.label_list(allow_files = [".java", ".js", ".srcjar", ".jar", ".zip"]),
-    "srcs_hack": attr.label_list(allow_files = True),
     "deps": attr.label_list(providers = [JS_PROVIDER_NAME]),
     "exports": attr.label_list(providers = [JS_PROVIDER_NAME]),
     "plugins": attr.label_list(providers = [JavaInfo]),
@@ -114,6 +113,8 @@ _J2CL_LIB_ATTRS = {
         cfg = "host",
         executable = True,
     ),
+    # TODO(goktug): remove workaround after b/71772385 is fixed
+    "_srcs_hack": attr.label(default = Label("//build_defs/internal_do_not_use:dummy_src")),
 }
 _J2CL_LIB_ATTRS.update(J2CL_TRANSPILE_ATTRS)
 _J2CL_LIB_ATTRS.update(J2CL_JS_ATTRS)

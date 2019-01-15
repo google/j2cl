@@ -75,18 +75,8 @@ def j2cl_library(
     if args["srcs"] and target_name != "//jre/java:jre":
         args["deps"].append(Label("//build_defs/internal_do_not_use:jre", relative_to_caller_repository = False))
 
-    # TODO(goktug): remove workaround after b/71772385 is fixed
-    dummy_class_name = name.replace("-", "__")
-    dummy_src = dummy_class_name + "_gen"
-    native.genrule(
-        name = dummy_src,
-        outs = ["dummy_/%s/package-info.java" % dummy_class_name],
-        cmd = "echo \"package dummy_;\" > $@",
-    )
-
     j2cl_library_rule(
         name = name,
-        srcs_hack = [":" + dummy_src],
         **args
     )
 
