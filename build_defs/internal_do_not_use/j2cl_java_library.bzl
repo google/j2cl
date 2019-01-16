@@ -23,9 +23,17 @@ def _impl_j2cl_library(ctx):
 
     java_provider = _java_compile(ctx, java_srcs)
 
-    js_zip, library_info = j2cl_transpile(ctx, java_provider, js_srcs)
-    js_outputs = [js_zip] if java_srcs else []
-    library_info = [library_info] if java_srcs else []
+    if java_srcs:
+        output_js_zip = ctx.outputs.jszip
+        output_library_info = ctx.actions.declare_file("%s_library_info" % ctx.attr.name)
+        j2cl_transpile(ctx, java_provider, js_srcs, output_js_zip, output_library_info)
+        js_outputs = [output_js_zip]
+        library_info = [output_library_info]
+    else:
+        # Make sure js zip is always created since it is a named output
+        _create_empty_zip(ctx, ctx.outputs.jszip)
+        js_outputs = []
+        library_info = []
 
     # This is a workaround to b/35847804 to make sure the zip ends up in the runfiles.
     js_runfiles = _collect_runfiles(ctx, js_outputs, ctx.attr.deps + ctx.attr.exports)
@@ -33,13 +41,21 @@ def _impl_j2cl_library(ctx):
     return struct(
         providers = [
             DefaultInfo(
-                files = depset(js_outputs + [ctx.outputs.jar]),
+                files = depset([ctx.outputs.jszip, ctx.outputs.jar]),
                 runfiles = js_runfiles,
             ),
             _J2clInfo(_J2clJavaInfo = java_provider),
             LibraryInfo(file = library_info),
         ],
         **j2cl_js_provider(ctx, srcs = js_outputs, deps = ctx.attr.deps, exports = ctx.attr.exports)
+    )
+
+_empty_zip_contents = "\\x50\\x4b\\x05\\x06\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00"
+
+def _create_empty_zip(ctx, output_js_zip):
+    ctx.actions.run_shell(
+        outputs = [output_js_zip],
+        command = "echo -ne  '%s' > '%s'" % (_empty_zip_contents, output_js_zip.path),
     )
 
 def _collect_runfiles(ctx, files, deps):
@@ -126,7 +142,7 @@ j2cl_library = rule(
     outputs = {
         "jar": "lib%{name}.jar",
         "srcjar": "lib%{name}-src.jar",
-        "zip_file": "%{name}.js.zip",
+        "jszip": "%{name}.js.zip",
     },
 )
 
