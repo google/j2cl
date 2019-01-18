@@ -3250,17 +3250,24 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             // line 6
             "  void method() {",
             // line 7
-            "  }",
+            "    Enum e = MyJsEnum.A;",
             // line 8
-            "  @JsProperty(name =\"invalid.field\")",
+            "  }",
             // line 9
-            "  int field;",
+            "  @JsProperty(name =\"invalid.field\")",
             // line 10
+            "  int field;",
+            // line 11
+            "  @JsEnum enum MyJsEnum { A }",
+            // line 12
             "}")
         .assertErrorsWithSourcePosition(
             "Error:Buggy.java:4: 'Promise' has invalid name 'invalid.Promise'.",
             "Error:Buggy.java:6: 'void Promise.method()' has invalid name 'invalid.method'.",
-            "Error:Buggy.java:8: 'Promise.field' has invalid name 'invalid.field'.");
+            // TODO(b/65465035): Expressions do not have source position, so the method source
+            // position is used here.
+            "Error:Buggy.java:6: JsEnum 'MyJsEnum' cannot be assigned to 'Enum'.",
+            "Error:Buggy.java:9: 'Promise.field' has invalid name 'invalid.field'.");
   }
 
   private TranspileResult assertTranspileSucceeds(String compilationUnitName, String... code) {

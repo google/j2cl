@@ -528,7 +528,11 @@ public class JsInteropRestrictionsChecker {
   }
 
   private void checkJsEnumAssignments(Type type) {
-    type.accept(
+    type.getMembers().forEach(this::checkJsEnumAssignments);
+  }
+
+  private void checkJsEnumAssignments(Member member) {
+    member.accept(
         new ConversionContextVisitor(
             new ContextRewriter() {
               @Override
@@ -577,6 +581,7 @@ public class JsInteropRestrictionsChecker {
                 // TODO(b/65465035): When source position is tracked at the expression level,
                 // the error reporting here should include source position.
                 problems.error(
+                    member.getSourcePosition(),
                     messagePrefix + " '%s' cannot be assigned to '%s'.",
                     expressionTypeDescriptor.getReadableDescription(),
                     toTypeDescriptor.getReadableDescription());
@@ -1348,7 +1353,7 @@ public class JsInteropRestrictionsChecker {
 
     checkNotJsMember(member, messagePrefix);
   }
-  
+
   private boolean checkNotJsMember(Member member, String messagePrefix) {
     if (!member.isInitializerBlock() && member.getDescriptor().isJsMember()) {
       problems.error(
