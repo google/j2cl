@@ -117,7 +117,7 @@ _J2CL_LIB_ATTRS = {
     "javacopts": attr.string_list(),
     "licenses": attr.license(),
     "_java_toolchain": attr.label(
-        default = Label("@bazel_tools//tools/jdk:toolchain"),
+        default = Label("@bazel_tools//tools/jdk:current_java_toolchain"),
     ),
     "_host_javabase": attr.label(
         default = Label("@bazel_tools//tools/jdk:current_host_java_runtime"),
