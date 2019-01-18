@@ -4,8 +4,8 @@ load(":j2cl_transpile.bzl", "J2CL_TRANSPILE_ATTRS", "j2cl_transpile")
 load(":j2cl_js_common.bzl", "J2CL_JS_ATTRS", "JS_PROVIDER_NAME", "j2cl_js_provider")
 
 # Constructor for the Bazel provider for J2CL.
-_J2clInfo = provider(fields = ["_J2clJavaInfo"])
-LibraryInfo = provider(fields = ["file"])
+# Note that data under "_private_" considered private internal data so do not use.
+J2clInfo = provider(fields = ["_private_"])
 
 def _impl_j2cl_library(ctx):
     # Categorize the sources.
@@ -44,8 +44,7 @@ def _impl_j2cl_library(ctx):
                 files = depset([ctx.outputs.jszip, ctx.outputs.jar]),
                 runfiles = js_runfiles,
             ),
-            _J2clInfo(_J2clJavaInfo = java_provider),
-            LibraryInfo(file = library_info),
+            J2clInfo(_private_ = struct(JavaInfo = java_provider, LibraryInfo = library_info)),
         ],
         **j2cl_js_provider(ctx, srcs = js_outputs, deps = ctx.attr.deps, exports = ctx.attr.exports)
     )
@@ -67,8 +66,8 @@ def _collect_runfiles(ctx, files, deps):
 
 def _java_compile(ctx, java_srcs):
     stripped_java_srcs = [_strip_gwt_incompatible(ctx, java_srcs)] if java_srcs else []
-    java_deps = [d[_J2clInfo]._J2clJavaInfo for d in ctx.attr.deps if _J2clInfo in d]
-    java_exports = [d[_J2clInfo]._J2clJavaInfo for d in ctx.attr.exports if _J2clInfo in d]
+    java_deps = [d[J2clInfo]._private_.JavaInfo for d in ctx.attr.deps if J2clInfo in d]
+    java_exports = [d[J2clInfo]._private_.JavaInfo for d in ctx.attr.exports if J2clInfo in d]
     plugins = [p[JavaInfo] for p in ctx.attr.plugins]
     exported_plugins = [p[JavaInfo] for p in ctx.attr.exported_plugins]
 
@@ -148,7 +147,7 @@ j2cl_library = rule(
 
 def _impl_java_import(ctx):
     return struct(
-        providers = [_J2clInfo(_J2clJavaInfo = ctx.attr.jar[JavaInfo])],
+        providers = [J2clInfo(_private_ = struct(JavaInfo = ctx.attr.jar[JavaInfo], LibraryInfo = []))],
         **j2cl_js_provider(ctx)
     )
 
