@@ -279,13 +279,13 @@ public class OutputGeneratorStage {
     TypeDeclaration typeDeclaration = type.getDeclaration();
     String typeName = typeDeclaration.getSimpleBinaryName();
     String packageName = typeDeclaration.getPackageName();
-    return packageName.replace(".", File.separator) + File.separator + typeName;
+    return packageName.replace(".", "/") + '/' + typeName;
   }
 
   /** Returns the absolute binary path for a given type. */
   private static String getAbsolutePath(CompilationUnit compilationUnit, Type type) {
     TypeDeclaration typeDeclaration = type.getDeclaration();
     String typeName = typeDeclaration.getSimpleBinaryName();
-    return compilationUnit.getDirectoryPath() + File.separator + typeName;
+    return compilationUnit.getDirectoryPath() + '/' + typeName;
   }
 }
