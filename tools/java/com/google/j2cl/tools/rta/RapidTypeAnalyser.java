@@ -83,11 +83,10 @@ final class RapidTypeAnalyser {
   }
 
   private void unfoldPolymorphicReference(Member member) {
-    // Set of types inheriting this member
+    // Set of types inheriting this member (includes the enclosing type of the member).
     Set<Type> inheritingTypes = typeHierarchyGraph.getTypesInheriting(member);
-    // TODO(b/112859205): Some static references ($clinit or static fields or unknown members) are
-    // flagged as dynamic references. Remove inheritingTypes.isEmpty() when it solved.
-    if (inheritingTypes.isEmpty() || containsLiveTypes(inheritingTypes)) {
+
+    if (containsLiveTypes(inheritingTypes)) {
       markMemberLive(member);
     } else {
       // none of the possible types for this member is live. Register this member,
