@@ -65,13 +65,7 @@ def _collect_runfiles(ctx, files, deps):
     )
 
 def _java_compile(ctx, java_srcs):
-    if java_srcs:
-        source_files = ctx.files._srcs_hack
-        source_jars = [_strip_gwt_incompatible(ctx, java_srcs)]
-    else:
-        source_files = []
-        source_jars = []
-
+    stripped_java_srcs = [_strip_gwt_incompatible(ctx, java_srcs)] if java_srcs else []
     java_deps = [d[J2clInfo]._private_.JavaInfo for d in ctx.attr.deps if J2clInfo in d]
     java_exports = [d[J2clInfo]._private_.JavaInfo for d in ctx.attr.exports if J2clInfo in d]
     plugins = [p[JavaInfo] for p in ctx.attr.plugins]
@@ -79,8 +73,8 @@ def _java_compile(ctx, java_srcs):
 
     return java_common.compile(
         ctx,
-        source_files = source_files,
-        source_jars = source_jars,
+        source_files = ctx.files._srcs_hack,
+        source_jars = stripped_java_srcs,
         deps = java_deps,
         exports = java_exports,
         plugins = plugins,
