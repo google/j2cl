@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.integration.lambdas;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertEquals;
 import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
 
 @SuppressWarnings("MultipleTopLevelClasses")
@@ -33,6 +34,7 @@ public class Main {
     captures.testLambdaCaptureField2();
     testSpecialLambdas();
     testSpecializedLambda();
+    testVarargsLambdas();
   }
 
   private static class Captures {
@@ -133,5 +135,23 @@ public class Main {
 
   interface Consumer<T> {
     void accept(T t);
+  }
+
+  private static void testVarargsLambdas() {
+    VarargsFunction<String> changeFirstElement =
+        ss -> {
+          ss[0] = ss[0] + " world";
+          return ss;
+        };
+    String[] params = new String[] {"hello"};
+    assertEquals("hello world", changeFirstElement.apply(params)[0]);
+
+    // TODO(b/123418269): uncomment when bug is fixed.
+    // assertEquals("hello world", params[0]);
+    // assertEquals(params, changeFirstElement.apply(params));
+  }
+
+  interface VarargsFunction<T> {
+    T[] apply(T... t);
   }
 }
