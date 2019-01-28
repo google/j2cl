@@ -245,24 +245,28 @@ class Lambdas extends j_l_Object {
    */
   m_testLambdaWithGenerics__() {
     this.m_callWithTypeVariable__com_google_j2cl_transpiler_readable_lambdas_Lambdas_GenericFunctionalInterface__java_lang_Object(
-        GenericFunctionalInterface.$adapt(((/** Error */ i) => {
-          return i;
+        GenericFunctionalInterface.$adapt(((i) => {
+          let i$1$ = /**@type {Error} */ ($Casts.$to(i, Error));
+          return i$1$;
         })),
         Error.$create__());
     this.m_callParameterized__com_google_j2cl_transpiler_readable_lambdas_Lambdas_GenericFunctionalInterface__java_lang_Error(
-        GenericFunctionalInterface.$adapt(((/** Error */ i$1$) => {
-          return i$1$;
+        GenericFunctionalInterface.$adapt(((i$2$) => {
+          let i$3$ = /**@type {Error} */ ($Casts.$to(i$2$, Error));
+          return i$3$;
         })),
         Error.$create__());
     /**@type {Enum<M_T>} */
     (Lambdas
          .m_callTypeVariableWithBounds__com_google_j2cl_transpiler_readable_lambdas_Lambdas_GenericFunctionalInterface__java_lang_Enum(
              /**@type {GenericFunctionalInterface<Enum<M_T>>} */ (
-                 GenericFunctionalInterface.$adapt(((/** Enum<M_T> */ i$2$) => {
-                   return i$2$;
+                 GenericFunctionalInterface.$adapt(((i$4$) => {
+                   let i$5$ = /**@type {Enum} */ ($Casts.$to(i$4$, Enum));
+                   return i$5$;
                  }))),
              /**@type {Enum<M_T>} */ (null)));
-    let f = Lambdas_Function.$adapt(((/** M_T */ item) => {
+    let f = Lambdas_Function.$adapt(((item) => {
+      let item$1$ = /**@type {Enum} */ ($Casts.$to(item, Enum));
       return Long.m_valueOf__long($Long.fromInt(1));
     }));
   }

@@ -25,6 +25,7 @@ import com.google.j2cl.ast.AbstractTransformer;
 import com.google.j2cl.ast.ArrayAccess;
 import com.google.j2cl.ast.ArrayLength;
 import com.google.j2cl.ast.ArrayLiteral;
+import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.AwaitExpression;
 import com.google.j2cl.ast.BinaryExpression;
@@ -54,7 +55,9 @@ import com.google.j2cl.ast.PrefixExpression;
 import com.google.j2cl.ast.StringLiteral;
 import com.google.j2cl.ast.SuperReference;
 import com.google.j2cl.ast.ThisReference;
+import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
+import com.google.j2cl.ast.TypeVariable;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.VariableDeclarationFragment;
@@ -212,13 +215,31 @@ public class ExpressionTranspiler {
         if (parameter == expression.getJsVarargsParameter()) {
           sourceBuilder.append("...");
         }
-        // The inline type annotation for parameters has to be just right preceding the parameter
-        // name, hence if it is a varargs parameter then it would be emitted as follows:
-        // ... /* <inline type annotation> */ <parameter name>
-        //
-        sourceBuilder.append(
-            "/** " + closureTypesGenerator.getJsDocForParameter(expression, i) + " */ ");
+
+        // Avoid explicitly declaring unknown parameters in anonymous functions to avoid spurious
+        // conformance errors. Parameter annotations are not required for anonymous functions so
+        // they can be safely skipped here.
+        if (!isUnknownTypeParameter(expression, i)) {
+          // The inline type annotation for parameters has to be just right preceding the parameter
+          // name, hence if it is a varargs parameter then it would be emitted as follows:
+          // ... /* <inline type annotation> */ <parameter name>
+          //
+          sourceBuilder.append(
+              "/** " + closureTypesGenerator.getJsDocForParameter(expression, i) + " */ ");
+        }
         process(parameter);
+      }
+
+      private boolean isUnknownTypeParameter(FunctionExpression functionExpression, int i) {
+        Variable parameter = functionExpression.getParameters().get(i);
+
+        TypeDescriptor parameterType = parameter.getTypeDescriptor();
+        if (parameter == functionExpression.getJsVarargsParameter()) {
+          parameterType = ((ArrayTypeDescriptor) parameterType).getComponentTypeDescriptor();
+        }
+
+        return parameterType.isTypeVariable()
+            && ((TypeVariable) parameterType).isWildcardOrCapture();
       }
 
       @Override

@@ -59,6 +59,7 @@ import com.google.j2cl.ast.visitors.NormalizeConstructors;
 import com.google.j2cl.ast.visitors.NormalizeEnumClasses;
 import com.google.j2cl.ast.visitors.NormalizeEquality;
 import com.google.j2cl.ast.visitors.NormalizeFieldInitialization;
+import com.google.j2cl.ast.visitors.NormalizeFunctionExpressions;
 import com.google.j2cl.ast.visitors.NormalizeInstanceOfs;
 import com.google.j2cl.ast.visitors.NormalizeInterfaceMethods;
 import com.google.j2cl.ast.visitors.NormalizeJsAwaitMethodInvocations;
@@ -166,6 +167,7 @@ class J2clTranspiler {
             // Class structure normalizations.
             new ImplementLambdaExpressions(),
             new OptimizeAnonymousInnerClassesToFunctionExpressions(),
+            new NormalizeFunctionExpressions(),
             new NormalizeJsEnums(),
             // Default constructors and explicit super calls should be synthesized first.
             new CreateDefaultConstructors(),

@@ -16,6 +16,8 @@
 package com.google.j2cl.transpiler.readable.jsenum;
 
 import java.util.Arrays;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 import jsinterop.annotations.JsEnum;
 import jsinterop.annotations.JsNonNull;
 
@@ -129,6 +131,9 @@ public class Main {
     NativeStringEnum.ONE.equals(NativeStringEnum.THREE);
     ComparableJsEnum.ONE.compareTo(ComparableJsEnum.ZERO);
     ComparableJsEnum.ONE.equals(ComparableJsEnum.ZERO);
+
+    Supplier<ComparableJsEnum> supplier = () -> ComparableJsEnum.ONE;
+    Consumer<ComparableJsEnum> consummer = e -> e.ordinal();
   }
 
   private static void testBoxUnboxWithTypeInference() {

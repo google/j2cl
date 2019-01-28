@@ -1625,7 +1625,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "    A.name();",
             "    MyJsEnum.values();",
             "    MyJsEnum.valueOf(null);",
-            "    Consumer<MyJsEnum> consumer = c -> c.ordinal();",
             "  }",
             "  int value = 5;",
             "  int instanceField;",
@@ -1692,15 +1691,14 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "Method 'MyJsEnum AListSubclass.getObject()' returning JsEnum cannot override method "
                 + "'Object List.getObject()'. (b/118301700)",
             "Cannot use 'super' in JsOverlay method 'void MyJsEnum.anOverlayMethod()'.",
-            "Cannot use 'super' in JsEnum method 'void MyJsEnum.aMethod()'.",
-            "'Consumer<MyJsEnum>' lambda cannot have non-native JsEnum 'MyJsEnum' as a "
-                + "type argument. (b/120087079)");
+            "Cannot use 'super' in JsEnum method 'void MyJsEnum.aMethod()'.");
   }
 
   public void testJsEnumSucceeds() {
     assertTranspileSucceeds(
             "MyJsEnum",
             "import jsinterop.annotations.*;",
+            "import java.util.function.*;",
             "@JsEnum",
             "public enum MyJsEnum {",
             "  A,",
@@ -1710,6 +1708,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "    A.compareTo(B);",
             "    if (((MyJsEnum) A) instanceof MyJsEnum) {}",
             "    Object o = MyJsEnum.class;",
+            "    Consumer<MyJsEnum> consumer = c -> c.ordinal();",
+            "    Consumer<? super MyJsEnum> consumer2 = c -> c.ordinal();",
             "  }",
             "  static int field = 5;",
             "  static { }",

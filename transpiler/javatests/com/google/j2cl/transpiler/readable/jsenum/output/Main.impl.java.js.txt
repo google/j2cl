@@ -23,6 +23,8 @@ let TemplatedField = goog.forwardDeclare('com.google.j2cl.transpiler.readable.js
 let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
 let Arrays = goog.forwardDeclare('java.util.Arrays$impl');
 let List = goog.forwardDeclare('java.util.List$impl');
+let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
+let Supplier = goog.forwardDeclare('java.util.function.Supplier$impl');
 let $InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
@@ -121,6 +123,14 @@ class Main extends j_l_Object {
     $Objects.m_equals__java_lang_Object__java_lang_Object(
         $Enums.boxComparable(ComparableJsEnum.ONE, $Overlay),
         $Enums.boxComparable(ComparableJsEnum.ZERO, $Overlay));
+    let supplier = Supplier.$adapt((() => {
+      return $Enums.boxComparable(ComparableJsEnum.ONE, $Overlay);
+    }));
+    let consummer = Consumer.$adapt(((e) => {
+      let e$1$ = /**@type {?ComparableJsEnum} */ (
+          $Enums.unbox($Casts.$to(e, $Overlay)));
+      /**@type {number} */ (e$1$);
+    }));
   }
 
   /**
@@ -201,6 +211,8 @@ class Main extends j_l_Object {
         'com.google.j2cl.transpiler.readable.jsenum.Main.TemplatedField$impl');
     Comparable = goog.module.get('java.lang.Comparable$impl');
     Arrays = goog.module.get('java.util.Arrays$impl');
+    Consumer = goog.module.get('java.util.function.Consumer$impl');
+    Supplier = goog.module.get('java.util.function.Supplier$impl');
     $InternalPreconditions =
         goog.module.get('javaemul.internal.InternalPreconditions$impl');
     $Equality = goog.module.get('nativebootstrap.Equality$impl');

@@ -130,11 +130,14 @@
 [sum += number;] => [sum += number$1$;] "com.google.j2cl.transpiler.readable.jsfunction.Main$4.m"
 [return sum;] => [return sum;] "com.google.j2cl.transpiler.readable.jsfunction.Main$4.m"
 [testVarArgsMethodReferenceToJsFuncion] => [m_testVarArgsMethodReferenceToJsFuncion__]
-[ForEachCallBack<ElementalJsFunction> c = ElementalJsFunction::call;] => [let c = ((/** ?function(...*):* */ arg0, /** number */ arg1, /** Array<?function(...*):*> */ arg2) =>{
-      return arg0(Integer.m_valueOf__int(arg1), arg2);
+[ForEachCallBack<ElementalJsFunction> c = ElementalJsFunction::call;] => [let c = ((arg0, /** number */ arg1, arg2) =>{
+      let arg0$1$ = /**@type {?function(...*):*} */ ($Casts.$to(arg0, $JavaScriptFunction));
+...      return arg0$1$(Integer.m_valueOf__int(arg1), arg2$1$);
     });] "com.google.j2cl.transpiler.readable.jsfunction.Main.testVarArgsMethodReferenceToJsFuncion"
 [c] => [c] "c"
-[ElementalJsFunction::call] => [return arg0(Integer.m_valueOf__int(arg1), arg2);] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in testVarArgsMethodReferenceToJsFuncion>"
+[ElementalJsFunction::call] => [let arg0$1$ = /**@type {?function(...*):*} */ ($Casts.$to(arg0, $JavaScriptFunction));] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in testVarArgsMethodReferenceToJsFuncion>"
+[ElementalJsFunction::call] => [let arg2$1$ = /**@type {Array<?function(...*):*>} */ ($Arrays.$castTo(arg2, $JavaScriptFunction, 1));] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in testVarArgsMethodReferenceToJsFuncion>"
+[ElementalJsFunction::call] => [return arg0$1$(Integer.m_valueOf__int(arg1), arg2$1$);] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in testVarArgsMethodReferenceToJsFuncion>"
 [acceptsVarargsJsFunctionWithTypeVariable] => [m_acceptsVarargsJsFunctionWithTypeVariable__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionVarargsGenerics_$pp_com_google_j2cl_transpiler_readable_jsfunction]
 [x] => [x] "x"
 [acceptsVarargsJsFunctionWithParemetrizedType] => [m_acceptsVarargsJsFunctionWithParemetrizedType__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionVarargsGenerics_$pp_com_google_j2cl_transpiler_readable_jsfunction]
@@ -172,12 +175,17 @@
 [ParametricJsFunction<String> f =
         unused -> {
 ...          l.add(new ArrayList<String>());
-        };] => [let f = ((/** ?string */ unused) =>{
-      let l = /**@type {!ArrayList<List<?>>} */ (ArrayList.$create__());
-      l.add(/**@type {!ArrayList<?string>} */ (ArrayList.$create__()));
+        };] => [let f = ((unused) =>{
+      let unused$1$ = /**@type {?string} */ ($Casts.$to(unused, j_l_String));
+...      l.add(/**@type {!ArrayList<?string>} */ (ArrayList.$create__()));
     });] "com.google.j2cl.transpiler.readable.jsfunction.Main.testFunctionExpressionTypeReplacement"
 [f] => [f] "f"
 [unused] => [unused] "unused"
+[unused -> {
+          List<List<?>> l = new ArrayList<>();
+          l.add(new ArrayList<String>());
+        }] => [let unused$1$ = /**@type {?string} */ ($Casts.$to(unused, j_l_String));] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in testFunctionExpressionTypeReplacement>"
+[unused] => [unused$1$] "unused"
 [List<List<?>> l = new ArrayList<>();] => [let l = /**@type {!ArrayList<List<?>>} */ (ArrayList.$create__());] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in testFunctionExpressionTypeReplacement>"
 [l] => [l] "l"
 [l.add(new ArrayList<String>());] => [l.add(/**@type {!ArrayList<?string>} */ (ArrayList.$create__()));] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in testFunctionExpressionTypeReplacement>"
@@ -267,9 +275,12 @@
 [ParametricJsFunction<?> jsFunctionFieldWildcard = event -> {};] => [this.f_jsFunctionFieldWildcard__com_google_j2cl_transpiler_readable_jsfunction_Main = ((/** * */ event) =>{
     });] "com.google.j2cl.transpiler.readable.jsfunction.Main.<init>"
 [event] => [event] "event"
-[ParametricJsFunction<String> jsFunctionFieldParameterized = event -> {};] => [this.f_jsFunctionFieldParameterized__com_google_j2cl_transpiler_readable_jsfunction_Main = ((/** ?string */ event$1$) =>{
+[ParametricJsFunction<String> jsFunctionFieldParameterized = event -> {};] => [this.f_jsFunctionFieldParameterized__com_google_j2cl_transpiler_readable_jsfunction_Main = ((event$1$) =>{
+      let event$2$ = /**@type {?string} */ ($Casts.$to(event$1$, j_l_String));
     });] "com.google.j2cl.transpiler.readable.jsfunction.Main.<init>"
 [event] => [event$1$] "event"
+[event -> {}] => [let event$2$ = /**@type {?string} */ ($Casts.$to(event$1$, j_l_String));] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in <init>>"
+[event] => [event$2$] "event"
 [Main] => [$clinit]
 [Main] => [Main.$clinit = (() =>{
     });] "com.google.j2cl.transpiler.readable.jsfunction.Main.<clinit>"

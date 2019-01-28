@@ -42,7 +42,6 @@ import com.google.j2cl.ast.HasJsNameInfo;
 import com.google.j2cl.ast.HasReadableDescription;
 import com.google.j2cl.ast.HasSourcePosition;
 import com.google.j2cl.ast.InstanceOfExpression;
-import com.google.j2cl.ast.IntersectionTypeDescriptor;
 import com.google.j2cl.ast.JsEnumInfo;
 import com.google.j2cl.ast.JsMemberType;
 import com.google.j2cl.ast.JsUtils;
@@ -450,7 +449,6 @@ public class JsInteropRestrictionsChecker {
     checkJsEnumAssignments(type);
     checkJsEnumArrays(type);
     checkJsEnumValueFieldAssignment(type);
-    checkJsEnumLambdas(type);
   }
 
   private void checkJsEnumMethodCalls(Type type) {
@@ -802,39 +800,6 @@ public class JsInteropRestrictionsChecker {
           .anyMatch(JsInteropRestrictionsChecker::hasNonNativeJsEnumArray);
     }
     return false;
-  }
-
-  private void checkJsEnumLambdas(Type type) {
-    type.accept(
-        new AbstractVisitor() {
-          @Override
-          public void exitFunctionExpression(FunctionExpression functionExpression) {
-            for (TypeDescriptor typeDescriptor :
-                getTypeArgumentDescriptors(functionExpression.getTypeDescriptor())) {
-              if (AstUtils.isNonNativeJsEnum(typeDescriptor)) {
-                problems.error(
-                    functionExpression.getSourcePosition(),
-                    "'%s' lambda cannot have non-native JsEnum '%s' as a type argument. "
-                        + "(b/120087079)",
-                    functionExpression.getTypeDescriptor().getReadableDescription(),
-                    typeDescriptor.getReadableDescription());
-              }
-            }
-          }
-        });
-  }
-
-  private List<TypeDescriptor> getTypeArgumentDescriptors(TypeDescriptor typeDescriptor) {
-    if (typeDescriptor instanceof DeclaredTypeDescriptor) {
-      return ((DeclaredTypeDescriptor) typeDescriptor).getTypeArgumentDescriptors();
-    }
-    if (typeDescriptor instanceof IntersectionTypeDescriptor) {
-      return ((IntersectionTypeDescriptor) typeDescriptor)
-          .getIntersectionTypeDescriptors().stream()
-              .flatMap(t -> t.getTypeArgumentDescriptors().stream())
-              .collect(ImmutableList.toImmutableList());
-    }
-    return ImmutableList.of();
   }
 
   private boolean checkJsType(Type type) {

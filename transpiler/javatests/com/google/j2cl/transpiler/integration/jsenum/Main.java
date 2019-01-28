@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.integration.jsenum;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertEquals;
 import static com.google.j2cl.transpiler.utils.Asserts.assertFalse;
 import static com.google.j2cl.transpiler.utils.Asserts.assertThrows;
 import static com.google.j2cl.transpiler.utils.Asserts.assertThrowsClassCastException;
@@ -26,6 +27,8 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.function.Function;
+import java.util.function.Supplier;
 import javaemul.internal.annotations.DoNotAutobox;
 import javaemul.internal.annotations.UncheckedCast;
 import jsinterop.annotations.JsEnum;
@@ -773,19 +776,25 @@ public class Main {
 
   private static void testAutoBoxing_parameterizedLambda() {
 
-    Function<Object> ordinalWithCast = e -> ((PlainJsEnum) e).ordinal();
+    Function<Object, Double> ordinalWithCast = e -> (double) ((PlainJsEnum) e).ordinal();
     assertTrue(1 == ordinalWithCast.apply(PlainJsEnum.ONE));
 
-    // TODO(b/120087079): uncomment when parameterizing lambda with non-native JsEnums is supported.
-    // Since the lambda is not a class and cannot not have bridge methods, if the cast
-    // check/conversions triggered by specialization is not present the following code would not
-    // unbox "e" and would end up returning a boxed enum instead of the ordinal.
-    // Function<PlainJsEnum> ordinal = e -> e.ordinal();
-    // assertTrue(1 == ordinal.apply(PlainJsEnum.ONE));
-  }
+    Function<PlainJsEnum, Double> ordinal = e -> (double) e.ordinal();
+    assertTrue(1 == ordinal.apply(PlainJsEnum.ONE));
 
-  interface Function<T> {
-    int apply(T t);
+    Function<? super PlainJsEnum, String> function =
+        e -> {
+          switch (e) {
+            case ONE:
+              return "ONE";
+            default:
+              return "None";
+          }
+        };
+    assertEquals("ONE", function.apply(PlainJsEnum.ONE));
+
+    Supplier<PlainJsEnum> supplier = () -> PlainJsEnum.ONE;
+    assertEquals(PlainJsEnum.ONE, supplier.get());
   }
 
   @JsMethod
@@ -796,5 +805,4 @@ public class Main {
     assertTrue(o instanceof String || o instanceof Double || o instanceof Boolean);
     return o;
   }
-
 }

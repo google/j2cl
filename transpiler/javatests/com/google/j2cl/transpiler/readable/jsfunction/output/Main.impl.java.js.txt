@@ -197,11 +197,13 @@ class Main extends j_l_Object {
    * @public
    */
   m_testVarArgsMethodReferenceToJsFuncion__() {
-    let c =
-        ((/** ?function(...*):* */ arg0, /** number */ arg1,
-          /** Array<?function(...*):*> */ arg2) => {
-          return arg0(Integer.m_valueOf__int(arg1), arg2);
-        });
+    let c = ((arg0, /** number */ arg1, arg2) => {
+      let arg0$1$ = /**@type {?function(...*):*} */ (
+          $Casts.$to(arg0, $JavaScriptFunction));
+      let arg2$1$ = /**@type {Array<?function(...*):*>} */ (
+          $Arrays.$castTo(arg2, $JavaScriptFunction, 1));
+      return arg0$1$(Integer.m_valueOf__int(arg1), arg2$1$);
+    });
   }
 
   /**
@@ -296,7 +298,8 @@ class Main extends j_l_Object {
    * @public
    */
   m_testFunctionExpressionTypeReplacement___$pp_com_google_j2cl_transpiler_readable_jsfunction() {
-    let f = ((/** ?string */ unused) => {
+    let f = ((unused) => {
+      let unused$1$ = /**@type {?string} */ ($Casts.$to(unused, j_l_String));
       let l = /**@type {!ArrayList<List<?>>} */ (ArrayList.$create__());
       l.add(/**@type {!ArrayList<?string>} */ (ArrayList.$create__()));
     });
@@ -481,7 +484,10 @@ class Main extends j_l_Object {
     this.f_jsFunctionFieldWildcard__com_google_j2cl_transpiler_readable_jsfunction_Main =
         ((/** * */ event) => {});
     this.f_jsFunctionFieldParameterized__com_google_j2cl_transpiler_readable_jsfunction_Main =
-        ((/** ?string */ event$1$) => {});
+        ((event$1$) => {
+          let event$2$ =
+              /**@type {?string} */ ($Casts.$to(event$1$, j_l_String));
+        });
   }
 
   /**

@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.integration.jsfunction;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertThrowsClassCastException;
 import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
 
 import jsinterop.annotations.JsFunction;
@@ -66,14 +67,8 @@ public class Main {
   private static void testSpecializedJsFunction() {
     Consumer<String> stringConsumer = s -> s.substring(2);
     Consumer rawConsumer = stringConsumer;
-    try {
-      // TODO(b/67329642): uncomment when bug is fixed.
-      // If the erasure type check is not present, the code would attempt to call "substring" on
-      // java.lang.Object resulting in a type error.
-      // rawConsumer.accept(new Object());
-      // fail( "Should have thrown ClassCastException");
-    } catch (ClassCastException expected) {
-    }
+
+    assertThrowsClassCastException(() -> rawConsumer.accept(new Object()), String.class);
   }
 
   @JsFunction
