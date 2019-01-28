@@ -16,8 +16,10 @@
 package com.google.j2cl.transpiler.regression.compiler;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.junit.Assert.assertThrows;
 
 import org.junit.Test;
+import org.junit.function.ThrowingRunnable;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
@@ -397,13 +399,9 @@ public class GenericCastTest {
     }
   }
 
-  private static void assertThrowsClassCastException(Runnable runnable, Class<?> toClass) {
-    try {
-      runnable.run();
-      assert false : "Should have thrown ClassCastException";
-    } catch (ClassCastException expected) {
-      assert expected.getMessage().endsWith("cannot be cast to " + toClass.getName())
-          : "Got unexpected message " + expected.getMessage();
-    }
+  private static void assertThrowsClassCastException(ThrowingRunnable runnable, Class<?> toClass) {
+    assertThat(assertThrows(ClassCastException.class, runnable))
+        .hasMessageThat()
+        .endsWith("cannot be cast to " + toClass.getName());
   }
 }
