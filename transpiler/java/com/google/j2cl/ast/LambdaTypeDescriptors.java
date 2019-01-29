@@ -21,6 +21,7 @@ import static com.google.common.collect.ImmutableMap.toImmutableMap;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -196,11 +197,17 @@ public class LambdaTypeDescriptors {
       TypeDescriptor typeDescriptor) {
     DeclaredTypeDescriptor functionalTypeDescriptor =
         typeDescriptor.getFunctionalInterface().toUnparameterizedTypeDescriptor();
+    checkArgument(!functionalTypeDescriptor.isJsFunctionInterface());
 
-    MethodDescriptor jsFunctionMethodDescriptor =
+    MethodDescriptor functionalMethodDescriptor =
         functionalTypeDescriptor.getSingleAbstractMethodDescriptor();
 
-    checkArgument(!functionalTypeDescriptor.isJsFunctionInterface());
+    // Remove varargs if the functional method is not a JsMethod, otherwise it will become
+    // JsVarargs and loose runtime type checking on the varargs parameter.
+    MethodDescriptor jsFunctionMethodDescriptor =
+        functionalMethodDescriptor.isJsMethod()
+            ? functionalMethodDescriptor
+            : removeVarargs(functionalMethodDescriptor);
 
     TypeDeclaration jsFunctionDeclaration =
         createJsFunctionTypeDeclaration(functionalTypeDescriptor);
@@ -219,6 +226,27 @@ public class LambdaTypeDescriptors {
             jsfunctionTypeDescriptor ->
                 createMethodDescriptorBySignatureMap(
                     jsfunctionTypeDescriptor.getSingleAbstractMethodDescriptor()))
+        .build();
+  }
+
+  /**
+   * Removes the varargs attribute from the varargs parameter if {@code functionalMethodDescriptor}
+   * is a varargs method.
+   */
+  private static MethodDescriptor removeVarargs(MethodDescriptor functionalMethodDescriptor) {
+    return MethodDescriptor.Builder.from(functionalMethodDescriptor)
+        .setParameterDescriptors(
+            functionalMethodDescriptor.getParameterDescriptors().stream()
+                .map(
+                    parameterDescriptor ->
+                        ParameterDescriptor.newBuilder()
+                            .setTypeDescriptor(parameterDescriptor.getTypeDescriptor())
+                            .build())
+                .collect(ImmutableList.toImmutableList()))
+        .setJsInfo(
+            JsInfo.Builder.from(functionalMethodDescriptor.getJsInfo())
+                .setJsMemberType(JsMemberType.NONE)
+                .build())
         .build();
   }
 

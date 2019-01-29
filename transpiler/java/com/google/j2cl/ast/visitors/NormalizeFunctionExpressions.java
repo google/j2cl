@@ -68,10 +68,9 @@ public class NormalizeFunctionExpressions extends NormalizationPass {
           declaredParameterDescriptor.getTypeDescriptor();
       // Only replace parameters that have been specialized.
       if (!declaredParameterTypeDescriptor.isAssignableTo(parameter.getTypeDescriptor())
-          // TODO(b/123418269): Don't replace the varargs parameter since all lambdas are converted
-          // into jsfunctions and the varargs parameter will be stamped to the right array type.
-          // Varargs lambdas should not be converted into varargs jsfunctions, but just jsfunctions
-          // taking arrays as the last parameter.
+          // Don't replace the varargs parameter since FunctionalExpressions are jsfunctions, and
+          // hence if they have a varargs parameter it is a jsvarargs which will be stamped to the
+          // right array type due to varargs JavaScript semantics.
           && !declaredParameterDescriptor.isVarargs()) {
         // Create a new parameter variable of the type "? extends DeclaredType", this takes
         // care of having the right parameter type without the problem of introducing type

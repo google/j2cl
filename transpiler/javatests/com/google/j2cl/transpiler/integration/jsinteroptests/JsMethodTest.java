@@ -20,8 +20,12 @@ import static com.google.j2cl.transpiler.utils.Asserts.assertFalse;
 import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
 import static jsinterop.annotations.JsPackage.GLOBAL;
 
+import java.util.Arrays;
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsOptional;
+import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 
 /** Tests JsMethod functionality. */
 public class JsMethodTest {
@@ -32,6 +36,7 @@ public class JsMethodTest {
     testStaticNativeJsPropertySetter();
     testLambdaImplementingJsMethod();
     testLambdaRequiringJsMethodBridge();
+    testJsOptionalJsVarargsLambda();
   }
 
   static class MyObject {
@@ -106,5 +111,31 @@ public class JsMethodTest {
     NullSupplier aliasToSupplier = aSupplier;
     assertEquals("Hello", aSupplier.get());
     assertEquals("Hello", aliasToSupplier.get());
+  }
+
+  interface FunctionalInterfaceWithJsVarargsAndJsOptionalJsMethod<T extends Number> {
+    @JsMethod
+    double sum(@JsOptional T first, T... rest);
+  }
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
+  interface NativeSum {
+    @JsMethod
+    double sum();
+  }
+
+  private static void testJsOptionalJsVarargsLambda() {
+    FunctionalInterfaceWithJsVarargsAndJsOptionalJsMethod<Double> f =
+        (first, rest) ->
+            (first != null ? first : 0)
+                + Arrays.stream(rest).mapToDouble(Double::doubleValue).sum();
+
+    // Call lambda with no parameters.
+    assertEquals(0, ((NativeSum) f).sum());
+
+    // Call lambda with wrong type of array. This is still OK since the method is a JsVarargs hence
+    // the array is not passed directly in JavaScript but recreated by the JsVarargs prologue.
+    FunctionalInterfaceWithJsVarargsAndJsOptionalJsMethod rawF = f;
+    assertEquals(6, rawF.sum(1.0d, new Number[] {2.0d, 3.0d}));
   }
 }

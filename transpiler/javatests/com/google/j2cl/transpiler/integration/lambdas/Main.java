@@ -16,7 +16,6 @@
 package com.google.j2cl.transpiler.integration.lambdas;
 
 import static com.google.j2cl.transpiler.utils.Asserts.assertEquals;
-import static com.google.j2cl.transpiler.utils.Asserts.assertThrows;
 import static com.google.j2cl.transpiler.utils.Asserts.assertThrowsClassCastException;
 import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
 
@@ -130,15 +129,8 @@ public class Main {
     VarargsIntFunction<String> firstA = ns -> ns[0].indexOf("a");
     VarargsIntFunction rawVarargsFunction = firstA;
 
-    // Lambdas are always converted into jsfunctions and varargs jsfunctions, by design, use
-    // implicitly the arguments array which does not preserve the extra type information through
-    // the call.
-    // Jsfunctions have their varargs array stamped to match and will not have a failing cast due
-    // to the array not matching the type.
-    assertEquals(2, rawVarargsFunction.apply(new Object[] {"bbabb", "aabb"}));
-    // Throws a TypeError which is surfaced as an NPE.
-    assertThrows(
-        NullPointerException.class, () -> rawVarargsFunction.apply(new Object[] {new Object()}));
+    assertThrowsClassCastException(
+        () -> rawVarargsFunction.apply(new Object[] {"bbabb", "aabb"}), String[].class);
   }
 
   interface Consumer<T> {
@@ -155,12 +147,10 @@ public class Main {
           ss[0] = ss[0] + " world";
           return ss;
         };
-    String[] params = new String[] {"hello"};
-    assertEquals("hello world", changeFirstElement.apply(params)[0]);
 
-    // TODO(b/123418269): uncomment when bug is fixed.
-    // assertEquals("hello world", params[0]);
-    // assertEquals(params, changeFirstElement.apply(params));
+    String[] params = new String[] {"hello"};
+    assertEquals(params, changeFirstElement.apply(params));
+    assertEquals("hello world", params[0]);
   }
 
   interface VarargsFunction<T> {
