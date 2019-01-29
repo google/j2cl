@@ -60,34 +60,37 @@ public abstract class UnaryExpression extends Expression {
 
   abstract Builder createBuilder();
 
-  /**
-   * A Builder for unary expressions.
-   */
-  public abstract static class Builder {
+  /** A Builder for unary expressions. */
+  public abstract static class Builder<T extends Builder<T, U>, U extends UnaryExpression> {
     private Expression operand;
     private Operator operator;
 
-    public static Builder from(UnaryExpression expression) {
+    public static Builder<?, ? extends UnaryExpression> from(UnaryExpression expression) {
       Builder builder = expression.createBuilder();
       builder.operand = expression.getOperand();
       builder.operator = expression.getOperator();
       return builder;
     }
 
-    public Builder setOperand(Expression operand) {
+    public T setOperand(Expression operand) {
       this.operand = operand;
-      return this;
+      return getThis();
     }
 
-    public Builder setOperator(Operator operator) {
+    public T setOperator(Operator operator) {
       this.operator = operator;
-      return this;
+      return getThis();
     }
 
-    public final UnaryExpression build() {
+    @SuppressWarnings("unchecked")
+    private T getThis() {
+      return (T) this;
+    }
+
+    public final U build() {
       return doBuild(operand, operator);
     }
 
-    abstract UnaryExpression doBuild(Expression operand, Operator operator);
+    abstract U doBuild(Expression operand, Operator operator);
   }
 }

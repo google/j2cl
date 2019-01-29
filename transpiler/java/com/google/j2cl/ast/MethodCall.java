@@ -128,12 +128,12 @@ public class MethodCall extends Invocation {
       return builder;
     }
 
-    public Builder setStaticDispatch(boolean isStaticDispatch) {
+    public final Builder setStaticDispatch(boolean isStaticDispatch) {
       this.isStaticDispatch = isStaticDispatch;
       return this;
     }
 
-    public Builder setSourcePosition(SourcePosition sourcePosition) {
+    public final Builder setSourcePosition(SourcePosition sourcePosition) {
       this.sourcePosition = Optional.of(sourcePosition);
       return this;
     }

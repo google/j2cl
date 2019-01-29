@@ -57,15 +57,10 @@ public class PostfixExpression extends UnaryExpression {
     return new Builder();
   }
 
-  /**
-   * A Builder for postfix unary expressions.
-   */
-  public static class Builder extends UnaryExpression.Builder {
+  /** A Builder for postfix unary expressions. */
+  public static class Builder extends UnaryExpression.Builder<Builder, PostfixExpression> {
     public static Builder from(UnaryExpression expression) {
-      return (Builder)
-          newBuilder()
-              .setOperand(expression.getOperand())
-              .setOperator(expression.getOperator());
+      return newBuilder().setOperand(expression.getOperand()).setOperator(expression.getOperator());
     }
 
     @Override

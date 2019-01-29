@@ -61,21 +61,21 @@ public abstract class Invocation extends Expression implements MemberReference {
       return invocation.createBuilder();
     }
 
-    public T setArguments(Expression... arguments) {
+    public final T setArguments(Expression... arguments) {
       return setArguments(Arrays.asList(arguments));
     }
 
-    public T setArguments(List<Expression> arguments) {
+    public final T setArguments(List<Expression> arguments) {
       this.arguments.clear();
       this.arguments.addAll(arguments);
       return getThis();
     }
 
-    public T addArgumentsAndUpdateDescriptor(int index, Expression... argumentExpressions) {
+    public final T addArgumentsAndUpdateDescriptor(int index, Expression... argumentExpressions) {
       return addArgumentsAndUpdateDescriptor(index, Arrays.asList(argumentExpressions));
     }
 
-    public T addArgumentsAndUpdateDescriptor(
+    public final T addArgumentsAndUpdateDescriptor(
         int index, Collection<Expression> argumentExpressions) {
       arguments.addAll(index, argumentExpressions);
       // Add the provided parameters to the proper index position of the existing parameters list.
@@ -92,7 +92,7 @@ public abstract class Invocation extends Expression implements MemberReference {
       return getThis();
     }
 
-    public T addArgumentAndUpdateDescriptor(
+    public final T addArgumentAndUpdateDescriptor(
         int index, Expression argumentExpression, TypeDescriptor parameterTypeDescriptor) {
       arguments.add(index, argumentExpression);
       // Add the provided parameters to the proper index position of the existing parameters list.
@@ -104,11 +104,11 @@ public abstract class Invocation extends Expression implements MemberReference {
       return getThis();
     }
 
-    public T replaceVarargsArgument(Expression... replacementArguments) {
+    public final T replaceVarargsArgument(Expression... replacementArguments) {
       return replaceVarargsArgument(Arrays.asList(replacementArguments));
     }
 
-    public T replaceVarargsArgument(List<Expression> replacementArguments) {
+    public final T replaceVarargsArgument(List<Expression> replacementArguments) {
       checkState(methodDescriptor.isJsMethodVarargs());
       int lastArgumentPosition = arguments.size() - 1;
       arguments.remove(lastArgumentPosition);
@@ -116,17 +116,17 @@ public abstract class Invocation extends Expression implements MemberReference {
       return getThis();
     }
 
-    public T setQualifier(Expression qualifierExpression) {
+    public final T setQualifier(Expression qualifierExpression) {
       this.qualifierExpression = qualifierExpression;
       return getThis();
     }
 
-    public T setMethodDescriptor(MethodDescriptor methodDescriptor) {
+    public final T setMethodDescriptor(MethodDescriptor methodDescriptor) {
       this.methodDescriptor = methodDescriptor;
       return getThis();
     }
 
-    public T setEnclosingTypeDescriptor(DeclaredTypeDescriptor enclosingTypeDescriptor) {
+    public final T setEnclosingTypeDescriptor(DeclaredTypeDescriptor enclosingTypeDescriptor) {
       this.methodDescriptor =
           MethodDescriptor.Builder.from(methodDescriptor)
               .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
