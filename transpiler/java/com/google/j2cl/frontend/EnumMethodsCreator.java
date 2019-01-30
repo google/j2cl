@@ -33,7 +33,6 @@ import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
-import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.ast.NullLiteral;
 import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.RuntimeMethods;
@@ -153,11 +152,7 @@ public class EnumMethodsCreator {
         .setEnclosingTypeDescriptor(enumTypeDescriptor)
         .setName(VALUE_OF_METHOD_NAME)
         .setReturnTypeDescriptor(enumTypeDescriptor.toNonNullable())
-        .setParameterDescriptors(
-            ParameterDescriptor.newBuilder()
-                .setTypeDescriptor(TypeDescriptors.get().javaLangString.toNonNullable())
-                .setJsOptional(isJsType)
-                .build())
+        .setParameterTypeDescriptors(TypeDescriptors.get().javaLangString.toNonNullable())
         .setJsInfo(isJsType ? JsInfo.RAW : JsInfo.NONE)
         .build();
   }

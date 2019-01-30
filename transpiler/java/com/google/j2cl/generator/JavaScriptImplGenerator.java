@@ -108,6 +108,15 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   public String renderOutput() {
     try {
       renderFileOverview(
+          // Do not warn when static overrides do not match.
+          // It is relatively safe to suppress errors about JavaScript static overrides since all
+          // dispatches to static methods from Java code are explicitly qualified with the right
+          // constructor. For code written in JavaScript can still call these methods dynamically on
+          // constructor objects, so the warning might have been useful in this corner case;
+          // in the current state it is actually safe, because J2CL requires the use of
+          // --collapse_properties, which does not support dynamic dispatch for static methods
+          // either.
+          "checkStaticOverrides",
           "const",
           "extraRequire",
           "missingOverride",
