@@ -64,7 +64,7 @@ public class InsertWideningPrimitiveConversions extends NormalizationPass {
         }
 
         TypeDescriptor widenedTypeDescriptor =
-            AstUtils.getNumbericBinaryExpressionTypeDescriptor(
+            AstUtils.getNumericBinaryExpressionTypeDescriptor(
                 (PrimitiveTypeDescriptor) otherOperandTypeDescriptor,
                 (PrimitiveTypeDescriptor) operand.getTypeDescriptor());
         if (!shouldWiden(widenedTypeDescriptor, operand)) {

@@ -559,7 +559,7 @@ public class AstUtils {
    *
    * <p>See JLS 5.6.2.
    */
-  public static PrimitiveTypeDescriptor getNumbericBinaryExpressionTypeDescriptor(
+  public static PrimitiveTypeDescriptor getNumericBinaryExpressionTypeDescriptor(
       PrimitiveTypeDescriptor thisTypeDescriptor, PrimitiveTypeDescriptor thatTypeDescriptor) {
     if (TypeDescriptors.isPrimitiveDouble(thisTypeDescriptor)
         || TypeDescriptors.isPrimitiveDouble(thatTypeDescriptor)) {

@@ -167,7 +167,7 @@ public class BinaryExpression extends Expression {
          * to the widest type of its operands (or integer is integer is wider).
          */
         checkArgument(TypeDescriptors.isBoxedOrPrimitiveType(rightOperandType));
-        return AstUtils.getNumbericBinaryExpressionTypeDescriptor(
+        return AstUtils.getNumericBinaryExpressionTypeDescriptor(
             (PrimitiveTypeDescriptor) leftOperandType, rightOperandType.toUnboxedType());
       case LEFT_SHIFT:
       case RIGHT_SHIFT_SIGNED:
