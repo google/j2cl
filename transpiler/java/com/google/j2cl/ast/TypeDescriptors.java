@@ -160,79 +160,79 @@ public class TypeDescriptors {
   }
 
   public static boolean isJavaLangObject(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.hasSameRawType(get().javaLangObject);
+    return typeDescriptor.isSameBaseType(get().javaLangObject);
   }
 
   public static boolean isJavaLangString(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.hasSameRawType(get().javaLangString);
+    return typeDescriptor.isSameBaseType(get().javaLangString);
   }
 
   public static boolean isJavaLangByte(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.hasSameRawType(get().javaLangByte);
+    return typeDescriptor.isSameBaseType(get().javaLangByte);
   }
 
   public static boolean isJavaLangShort(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.hasSameRawType(get().javaLangShort);
+    return typeDescriptor.isSameBaseType(get().javaLangShort);
   }
 
   public static boolean isJavaLangInteger(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.hasSameRawType(get().javaLangInteger);
+    return typeDescriptor.isSameBaseType(get().javaLangInteger);
   }
 
   public static boolean isJavaLangCharacter(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.hasSameRawType(get().javaLangCharacter);
+    return typeDescriptor.isSameBaseType(get().javaLangCharacter);
   }
 
   public static boolean isJavaLangLong(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.hasSameRawType(get().javaLangLong);
+    return typeDescriptor.isSameBaseType(get().javaLangLong);
   }
 
   public static boolean isJavaLangFloat(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.hasSameRawType(get().javaLangFloat);
+    return typeDescriptor.isSameBaseType(get().javaLangFloat);
   }
 
   public static boolean isJavaLangDouble(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.hasSameRawType(get().javaLangDouble);
+    return typeDescriptor.isSameBaseType(get().javaLangDouble);
   }
 
   public static boolean isJavaLangBoolean(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.hasSameRawType(get().javaLangBoolean);
+    return typeDescriptor.isSameBaseType(get().javaLangBoolean);
   }
 
   public static boolean isJavaLangVoid(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.hasSameRawType(get().javaLangVoid);
+    return typeDescriptor.isSameBaseType(get().javaLangVoid);
   }
 
   public static boolean isJavaLangComparable(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.hasSameRawType(get().javaLangComparable);
+    return typeDescriptor.isSameBaseType(get().javaLangComparable);
   }
 
   public static boolean isJavaLangCharSequence(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.hasSameRawType(get().javaLangCharSequence);
+    return typeDescriptor.isSameBaseType(get().javaLangCharSequence);
   }
 
   public static boolean isJavaLangNumber(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.hasSameRawType(get().javaLangNumber);
+    return typeDescriptor.isSameBaseType(get().javaLangNumber);
   }
 
   public static boolean isJavaIoSerializable(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.hasSameRawType(get().javaIoSerializable);
+    return typeDescriptor.isSameBaseType(get().javaIoSerializable);
   }
 
   public static boolean isJavaLangCloneable(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.hasSameRawType(get().javaLangCloneable);
+    return typeDescriptor.isSameBaseType(get().javaLangCloneable);
   }
 
   public static boolean isJavaLangClass(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.hasSameRawType(get().javaLangClass);
+    return typeDescriptor.isSameBaseType(get().javaLangClass);
   }
 
   public static boolean isJavaLangEnum(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.hasSameRawType(get().javaLangEnum);
+    return typeDescriptor.isSameBaseType(get().javaLangEnum);
   }
 
   public static boolean isJavaLangThrowable(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.hasSameRawType(get().javaLangThrowable);
+    return typeDescriptor.isSameBaseType(get().javaLangThrowable);
   }
 
   public static boolean isNumericPrimitive(TypeDescriptor typeDescriptor) {

@@ -140,11 +140,12 @@ public class Asserts {
   }
 
   /**
-   * Checks that the type of {@code actual} is actually {@code expectedType}.
+   * Checks that the actual runtime type of {@code actual} is {@code expectedType}.
    *
-   * <p>Note that actual {@code actual} will not be autoboxed if it is a primitive or JsEnum.
+   * <p>Note that {@code actual} will not be autoboxed if it is a primitive or JsEnum.
    */
-  public static void assertType(Class<?> expectedType, @DoNotAutobox Object actual) {
+  public static void assertUnderlyingTypeEquals(
+      Class<?> expectedType, @DoNotAutobox Object actual) {
     assertTrue(
         getFailureMessage(
             expectedType.getCanonicalName(),

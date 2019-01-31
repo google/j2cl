@@ -20,7 +20,7 @@ import static com.google.j2cl.transpiler.utils.Asserts.assertFalse;
 import static com.google.j2cl.transpiler.utils.Asserts.assertThrows;
 import static com.google.j2cl.transpiler.utils.Asserts.assertThrowsClassCastException;
 import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
-import static com.google.j2cl.transpiler.utils.Asserts.assertType;
+import static com.google.j2cl.transpiler.utils.Asserts.assertUnderlyingTypeEquals;
 import static com.google.j2cl.transpiler.utils.Asserts.fail;
 
 import java.io.Serializable;
@@ -56,7 +56,7 @@ public class Main {
     testAutoBoxing_typeInference();
     testAutoBoxing_specialMethods();
     testAutoBoxing_parameterizedLambda();
-    testAutoBoxing_intersectionCats();
+    testAutoBoxing_intersectionCasts();
   }
 
   @JsEnum(isNative = true, namespace = "test")
@@ -123,6 +123,7 @@ public class Main {
     NativeEnum ne = (NativeEnum) o;
     StringNativeEnum sne = (StringNativeEnum) o;
     Comparable ce = (Comparable) o;
+    ce = (NativeEnum & Comparable<NativeEnum>) o;
     Serializable s = (Serializable) o;
     assertThrowsClassCastException(
         () -> {
@@ -212,7 +213,10 @@ public class Main {
     StringNativeEnum sne = (StringNativeEnum) o;
     NativeEnum ne = (NativeEnum) o;
     Comparable ce = (Comparable) o;
-    Serializable s = (Serializable) o;
+
+    Comparable seAndC = (StringNativeEnum & Comparable<StringNativeEnum>) o;
+    assertUnderlyingTypeEquals(String.class, seAndC);
+
     assertThrowsClassCastException(
         () -> {
           Object unused = (Enum) o;
@@ -386,6 +390,13 @@ public class Main {
     PlainJsEnum pe = (PlainJsEnum) o;
     Comparable c = (Comparable) o;
     Serializable s = (Serializable) o;
+
+    // Intersection casts box/or unbox depending on the destination type.
+    Comparable otherC = (PlainJsEnum & Comparable<PlainJsEnum>) o;
+    assertUnderlyingTypeEquals(PlainJsEnum.class, otherC);
+    PlainJsEnum otherPe = (PlainJsEnum & Comparable<PlainJsEnum>) o;
+    assertUnderlyingTypeEquals(Double.class, otherPe);
+
     assertThrowsClassCastException(
         () -> {
           Object unused = (Enum) o;
@@ -497,6 +508,11 @@ public class Main {
           Object unused = (Boolean) o;
         },
         Boolean.class);
+    assertThrowsClassCastException(
+        () -> {
+          Object unused = (BooleanJsEnum & Comparable<BooleanJsEnum>) o;
+        },
+        Comparable.class);
 
     assertTrue(asSeenFromJs(BooleanJsEnum.FALSE) == FALSE_BOOLEAN);
   }
@@ -587,6 +603,11 @@ public class Main {
           Object unused = (String) o;
         },
         String.class);
+    assertThrowsClassCastException(
+        () -> {
+          Object unused = (StringJsEnum & Comparable<StringJsEnum>) o;
+        },
+        Comparable.class);
 
     assertTrue(asSeenFromJs(StringJsEnum.HELLO) == HELLO_STRING);
   }
@@ -697,57 +718,58 @@ public class Main {
     assertTrue(PlainJsEnum.TWO.compareTo(PlainJsEnum.TEN) < 0);
   }
 
-  private static void testAutoBoxing_intersectionCats() {
+  private static void testAutoBoxing_intersectionCasts() {
     Comparable c = (PlainJsEnum & Comparable<PlainJsEnum>) PlainJsEnum.ONE;
     assertTrue(c.compareTo(PlainJsEnum.ZERO) > 0);
     PlainJsEnum e = (PlainJsEnum & Comparable<PlainJsEnum>) PlainJsEnum.ONE;
     // e correcly holds an unboxed value.
-    assertType(Double.class, e);
+    assertUnderlyingTypeEquals(Double.class, e);
 
     assertTrue(PlainJsEnum.ONE == (PlainJsEnum & Comparable<PlainJsEnum>) PlainJsEnum.ONE);
     // Intersection cast with a JsEnum does not unbox like the simple cast.
-    assertType(PlainJsEnum.class, (PlainJsEnum & Comparable<PlainJsEnum>) PlainJsEnum.ONE);
+    assertUnderlyingTypeEquals(
+        PlainJsEnum.class, (PlainJsEnum & Comparable<PlainJsEnum>) PlainJsEnum.ONE);
   }
 
   private static void testAutoBoxing_typeInference() {
-    assertType(Double.class, PlainJsEnum.ONE);
-    assertType(PlainJsEnum.class, boxingIdentity(PlainJsEnum.ONE));
+    assertUnderlyingTypeEquals(Double.class, PlainJsEnum.ONE);
+    assertUnderlyingTypeEquals(PlainJsEnum.class, boxingIdentity(PlainJsEnum.ONE));
 
     // Make sure the enum is boxed even when assigned to a field that is inferred to be JsEnum.
     TemplatedField<PlainJsEnum> templatedField = new TemplatedField<PlainJsEnum>(PlainJsEnum.ONE);
     PlainJsEnum unboxed = templatedField.getValue();
-    assertType(Double.class, unboxed);
+    assertUnderlyingTypeEquals(Double.class, unboxed);
     // Boxing through specialized method parameter assignment.
-    assertType(PlainJsEnum.class, boxingIdentity(unboxed));
+    assertUnderlyingTypeEquals(PlainJsEnum.class, boxingIdentity(unboxed));
     // Unboxing as a qualifier to ordinal.
-    assertType(Double.class, templatedField.getValue().ordinal());
+    assertUnderlyingTypeEquals(Double.class, templatedField.getValue().ordinal());
 
     // Boxing through specialized method parameter assignment.
-    assertType(PlainJsEnum.class, boxingIdentity(templatedField.getValue()));
+    assertUnderlyingTypeEquals(PlainJsEnum.class, boxingIdentity(templatedField.getValue()));
     // Checks what is actually returned by getValue().
-    assertType(PlainJsEnum.class, ((TemplatedField) templatedField).getValue());
+    assertUnderlyingTypeEquals(PlainJsEnum.class, ((TemplatedField) templatedField).getValue());
 
     unboxed = templatedField.value;
-    assertType(Double.class, unboxed);
+    assertUnderlyingTypeEquals(Double.class, unboxed);
 
     templatedField.value = PlainJsEnum.ONE;
     // Boxing through specialized method parameter assignment.
-    assertType(PlainJsEnum.class, boxingIdentity(templatedField.value));
+    assertUnderlyingTypeEquals(PlainJsEnum.class, boxingIdentity(templatedField.value));
     // Checks what is actually stored in value.
-    assertType(PlainJsEnum.class, ((TemplatedField) templatedField).value);
+    assertUnderlyingTypeEquals(PlainJsEnum.class, ((TemplatedField) templatedField).value);
     // Unboxing as a qualifier to ordinal.
-    assertType(Double.class, templatedField.value.ordinal());
+    assertUnderlyingTypeEquals(Double.class, templatedField.value.ordinal());
 
     // Boxing/unboxing in varargs.
-    assertType(Double.class, Arrays.asList(PlainJsEnum.ONE).get(0));
+    assertUnderlyingTypeEquals(Double.class, Arrays.asList(PlainJsEnum.ONE).get(0));
 
     // TODO(b/118615488): Rewrite the following checks when JsEnum arrays are allowed.
     // In Java the varargs array will be of the inferred argument type. Since non native JsEnum
     // arrays are not allowed, the created array is of the declared type.
-    assertType(Comparable[].class, varargsToComparableArray(PlainJsEnum.ONE));
-    assertType(PlainJsEnum.class, varargsToComparableArray(PlainJsEnum.ONE)[0]);
-    assertType(Object[].class, varargsToObjectArray(PlainJsEnum.ONE));
-    assertType(PlainJsEnum.class, varargsToObjectArray(PlainJsEnum.ONE)[0]);
+    assertUnderlyingTypeEquals(Comparable[].class, varargsToComparableArray(PlainJsEnum.ONE));
+    assertUnderlyingTypeEquals(PlainJsEnum.class, varargsToComparableArray(PlainJsEnum.ONE)[0]);
+    assertUnderlyingTypeEquals(Object[].class, varargsToObjectArray(PlainJsEnum.ONE));
+    assertUnderlyingTypeEquals(PlainJsEnum.class, varargsToObjectArray(PlainJsEnum.ONE)[0]);
   }
 
   private static class TemplatedField<T> {

@@ -86,7 +86,7 @@ public class InsertJsEnumBoxingAndUnboxingConversions extends NormalizationPass 
                 // TODO(b/33681746): J2CL should not be emitting casts in these scenarios but it is.
                 // remove when the bug is fixed.
                 if (toTypeDescriptor.isJsEnum() && fromTypeDescriptor.isJsEnum()) {
-                  checkState(toTypeDescriptor.hasSameRawType(fromTypeDescriptor));
+                  checkState(toTypeDescriptor.isSameBaseType(fromTypeDescriptor));
                   // Remove the cast as it does not make sense casting on an unboxed value.
                   return innerExpression;
                 }

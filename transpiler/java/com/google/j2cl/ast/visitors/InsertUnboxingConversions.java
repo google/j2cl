@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.ast.visitors;
 
+import static com.google.common.base.Preconditions.checkState;
+
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
@@ -88,9 +90,11 @@ public class InsertUnboxingConversions extends NormalizationPass {
       // An unboxing conversion....
       Expression resultExpression = AstUtils.unbox(expression);
 
-      // ...optionally followed by a widening primitive conversion.
       fromTypeDescriptor = resultExpression.getTypeDescriptor();
-      if (!fromTypeDescriptor.hasSameRawType(toTypeDescriptor)) {
+      checkState(fromTypeDescriptor.isPrimitive() && toTypeDescriptor.isPrimitive());
+
+      // ...optionally followed by a widening primitive conversion.
+      if (!fromTypeDescriptor.equals(toTypeDescriptor)) {
         resultExpression =
             CastExpression.newBuilder()
                 .setExpression(resultExpression)

@@ -75,7 +75,7 @@ public class InsertNarrowingPrimitiveConversions extends NormalizationPass {
       private boolean shouldNarrow(
           TypeDescriptor fromTypeDescriptor, TypeDescriptor toTypeDescriptor) {
 
-        if (fromTypeDescriptor.hasSameRawType(toTypeDescriptor)) {
+        if (fromTypeDescriptor.isSameBaseType(toTypeDescriptor)) {
           return false;
         }
 

@@ -313,7 +313,7 @@ public class JsInteropRestrictionsChecker {
   }
 
   private void checkJsEnumConstant(Type type, Field field) {
-    if (!field.getInitializer().getTypeDescriptor().hasSameRawType(type.getTypeDescriptor())) {
+    if (!field.getInitializer().getTypeDescriptor().isSameBaseType(type.getTypeDescriptor())) {
       problems.error(
           field.getSourcePosition(),
           "JsEnum constant '%s' cannot have a class body.",
@@ -404,7 +404,7 @@ public class JsInteropRestrictionsChecker {
             .getParameterDescriptors()
             .get(0)
             .getTypeDescriptor()
-            .hasSameRawType(customValueType)
+            .isSameBaseType(customValueType)
         && constructor.getBody().getStatements().size() == 1
         && isValidJsEnumConstructorStatement(
             constructorDescriptor.getEnclosingTypeDescriptor(),
@@ -560,16 +560,17 @@ public class JsInteropRestrictionsChecker {
                   return;
                 }
 
-                if (TypeDescriptors.isJavaLangObject(toTypeDescriptor)) {
+                TypeDescriptor targetRawTypeDescriptor = toTypeDescriptor.toRawTypeDescriptor();
+                if (TypeDescriptors.isJavaLangObject(targetRawTypeDescriptor)) {
                   return;
                 }
 
-                if (TypeDescriptors.isJavaIoSerializable(toTypeDescriptor)) {
+                if (TypeDescriptors.isJavaIoSerializable(targetRawTypeDescriptor)) {
                   return;
                 }
 
                 String messagePrefix = "JsEnum";
-                if (TypeDescriptors.isJavaLangComparable(toTypeDescriptor)) {
+                if (TypeDescriptors.isJavaLangComparable(targetRawTypeDescriptor)) {
                   if (expressionTypeDescriptor.getJsEnumInfo().supportsComparable()) {
                     return;
                   }
@@ -1611,7 +1612,7 @@ public class JsInteropRestrictionsChecker {
     MethodDescriptor getter = thisMember.isJsPropertyGetter() ? thisMember : thatMember;
 
     List<TypeDescriptor> setterParams = setter.getParameterTypeDescriptors();
-    if (!getter.getReturnTypeDescriptor().hasSameRawType(setterParams.get(0))) {
+    if (!getter.getReturnTypeDescriptor().isSameBaseType(setterParams.get(0))) {
       problems.error(
           sourcePosition,
           "JsProperty setter '%s' and getter '%s' cannot have inconsistent types.",

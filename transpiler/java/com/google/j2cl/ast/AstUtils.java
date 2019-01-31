@@ -541,7 +541,10 @@ public class AstUtils {
 
     return operator.isRelationalOperator()
         && (isNonNativeJsEnum(lhsTypeDescriptor) || isNonNativeJsEnum(rhsTypeDescriptor))
-        && !lhsTypeDescriptor.hasSameRawType(rhsTypeDescriptor);
+        // DO NOT use hasSameRawType, since intersections that have JsEnums have the same raw type
+        // as the JsEnum but behave differently w.r.t JsEnum boxing conversions. Intersection types
+        // are always boxed.
+        && !lhsTypeDescriptor.isSameBaseType(rhsTypeDescriptor);
   }
 
   /** JsEnum comparison context. */
@@ -549,8 +552,12 @@ public class AstUtils {
       InstanceOfExpression instanceOfExpression) {
     TypeDescriptor expressionTypeDescriptor =
         instanceOfExpression.getExpression().getTypeDescriptor();
+    TypeDescriptor testTypeDescriptor = instanceOfExpression.getTestTypeDescriptor();
     return isNonNativeJsEnum(expressionTypeDescriptor)
-        && !expressionTypeDescriptor.hasSameRawType(instanceOfExpression.getTestTypeDescriptor());
+        // DO NOT use hasSameRawType, since intersections that have JsEnums have the same raw type
+        // as the JsEnum but behave differently w.r.t JsEnum boxing conversions. Intersection types
+        // are always boxed.
+        && !expressionTypeDescriptor.isSameBaseType(testTypeDescriptor);
   }
 
   /**

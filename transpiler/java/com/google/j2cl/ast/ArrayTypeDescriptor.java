@@ -64,15 +64,24 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
     return 1;
   }
 
+  @Override
+  public boolean isSameBaseType(TypeDescriptor other) {
+    if (!(other instanceof ArrayTypeDescriptor)) {
+      return false;
+    }
+    ArrayTypeDescriptor otherArrayType = (ArrayTypeDescriptor) other;
+    return getDimensions() == otherArrayType.getDimensions()
+        && getLeafTypeDescriptor().isSameBaseType(otherArrayType.getLeafTypeDescriptor());
+  }
+
   /** Returns true for arrays where raw JavaScript array representation is enough. */
   public boolean isUntypedArray() {
     if (getLeafTypeDescriptor().isPrimitive()) {
       return false;
     }
-    DeclaredTypeDescriptor leafTypeDescriptor =
-        (DeclaredTypeDescriptor) getLeafTypeDescriptor().toRawTypeDescriptor();
-    return leafTypeDescriptor.isNative()
-        || (TypeDescriptors.isJavaLangObject(getLeafTypeDescriptor()) && getDimensions() == 1);
+    TypeDescriptor rawLeafTypeDescriptor = getLeafTypeDescriptor().toRawTypeDescriptor();
+    return rawLeafTypeDescriptor.isNative()
+        || (TypeDescriptors.isJavaLangObject(rawLeafTypeDescriptor) && getDimensions() == 1);
   }
 
   @Override

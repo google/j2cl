@@ -216,21 +216,34 @@ public abstract class TypeDescriptor extends Node
   public abstract TypeDescriptor specializeTypeVariables(
       Function<TypeVariable, ? extends TypeDescriptor> replacementTypeArgumentByTypeVariable);
 
+  /**
+   * Returns true if the two types have the same raw type.
+   *
+   * <p>The raw type is always an unparameterized (nullable) declared type or a primitive type. And
+   * is defined as follows:
+   * <li>If the type is a primitive type "{@code p}"-> then its raw type is itself, "{@code p}".
+   * <li>If the type is a class, interface or enum "{@code !C<String>}" -> then its raw type is the
+   *     (nullable) declared type with no parameterization, "{@code C}"
+   * <li>If the type is an array type "{@code A[]}" -> its raw type is an array of the same
+   *     dimensions but whose leaf type is the raw type of the leaf type of the original array.
+   * <li>if the type is an intersection type "{@code (A<T> & B<U>)}" -> then its raw type is the raw
+   *     type of the first component, "{@code A}".
+   * <li>if the type is a type variable "{@code <T extends A>}"-> then its raw type is the raw type
+   *     of its upper bound.
+   * <li>if the types in an union type "{@code (A | B)}" -> then its raw type is the closest common
+   *     supertype.
+   */
   public final boolean hasSameRawType(TypeDescriptor other) {
-    // TODO(rluble): compare using toRawTypeDescriptor once raw TypeDescriptors are constructed
-    // correctly. Raw TypeDescriptors are constructed in one of two ways, 1) from a JDT RAW
-    // TypeDescriptor and 2) from a TypeDescriptor by removing type variables. These two ways are
-    // not consistent, in particular the second form does not propagate the removal of type
-    // variables inward. These two construction end up with different data but with the same unique
-    // id, so the first one that is constructed will be interned and used everywhere.
-    // Using toRawTypeDescriptor here triggers the second (incorrect) construction and causes
-    // the wrong information be used in some cases.
+    return toRawTypeDescriptor().isSameBaseType(other.toRawTypeDescriptor());
+  }
 
-    // For type variables, wildcards and captures we still need to do toRawTypeDescriptor to get
-    // the bound.
-    TypeDescriptor thisTypeDescriptor = this instanceof TypeVariable ? toRawTypeDescriptor() : this;
-    other = other instanceof TypeVariable ? other.toRawTypeDescriptor() : other;
-    return thisTypeDescriptor.getQualifiedSourceName().equals(other.getQualifiedSourceName());
+  /**
+   * For primitives, classes, interfaces, enums and arrays of those isSameBaseType returns {@code
+   * true} if they have the same raw type. For all others it is only {@code true} if both types are
+   * the same.
+   */
+  public boolean isSameBaseType(TypeDescriptor other) {
+    return equals(other);
   }
 
   public boolean isAssignableTo(TypeDescriptor that) {

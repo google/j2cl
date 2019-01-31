@@ -265,6 +265,15 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         && isSubtypeOf((DeclaredTypeDescriptor) thatRawTypeDescriptor);
   }
 
+  @Override
+  public boolean isSameBaseType(TypeDescriptor other) {
+    if (!(other instanceof DeclaredTypeDescriptor)) {
+      return false;
+    }
+    DeclaredTypeDescriptor otherDeclaredType = (DeclaredTypeDescriptor) other;
+    return getTypeDeclaration().equals(otherDeclaredType.getTypeDeclaration());
+  }
+
   public boolean isSubtypeOf(DeclaredTypeDescriptor that) {
     return getTypeDeclaration().isSubtypeOf(that.getTypeDeclaration());
   }

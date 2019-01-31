@@ -64,7 +64,7 @@ public class InsertBoxingConversions extends NormalizationPass {
           Expression boxedExpression = AstUtils.box(castExpression.getExpression());
           // It's possible that casting a primitive type to a non-boxed reference type.
           // e.g. (Object) i; in this case, just keep the NOOP casting after boxing.
-          if (!boxedExpression.getTypeDescriptor().hasSameRawType(toTypeDescriptor)) {
+          if (!boxedExpression.getTypeDescriptor().isAssignableTo(toTypeDescriptor)) {
             return CastExpression.newBuilder()
                 .setExpression(boxedExpression)
                 .setCastTypeDescriptor(toTypeDescriptor)
