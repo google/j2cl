@@ -42,15 +42,18 @@ import org.eclipse.jdt.core.dom.ITypeBinding;
  * parsing source files into compilation unit.
  */
 public class JdtParser {
+  private static final String JAVA_VERSION = JavaCore.VERSION_11;
+  private static final int AST_JLS_VERSION = AST.JLS11;
+
   private final Problems problems;
   private final Map<String, String> compilerOptions = new HashMap<>();
   private final List<String> classpathEntries;
 
   /** Create and initialize a JdtParser based on passed parameters. */
   public JdtParser(List<String> classpathEntries, Problems problems) {
-    compilerOptions.put(JavaCore.COMPILER_SOURCE, JavaCore.VERSION_10);
-    compilerOptions.put(JavaCore.COMPILER_CODEGEN_TARGET_PLATFORM, JavaCore.VERSION_10);
-    compilerOptions.put(JavaCore.COMPILER_COMPLIANCE, JavaCore.VERSION_10);
+    compilerOptions.put(JavaCore.COMPILER_SOURCE, JAVA_VERSION);
+    compilerOptions.put(JavaCore.COMPILER_CODEGEN_TARGET_PLATFORM, JAVA_VERSION);
+    compilerOptions.put(JavaCore.COMPILER_COMPLIANCE, JAVA_VERSION);
 
     this.classpathEntries = ImmutableList.copyOf(classpathEntries);
     this.problems = problems;
@@ -113,7 +116,7 @@ public class JdtParser {
   }
 
   private ASTParser newASTParser(boolean resolveBinding) {
-    ASTParser parser = ASTParser.newParser(AST.JLS9);
+    ASTParser parser = ASTParser.newParser(AST_JLS_VERSION);
 
     parser.setCompilerOptions(compilerOptions);
     parser.setResolveBindings(resolveBinding);

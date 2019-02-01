@@ -36,6 +36,7 @@ public class Main {
     testSpecialLambdas();
     testSpecializedLambda();
     testVarargsLambdas();
+    testVarKeywordInLambda();
   }
 
   private static class Captures {
@@ -63,8 +64,8 @@ public class Main {
     }
 
     private void testInstanceofLambda() {
-      MyInterface intf = (i -> i + 1);
-      assertTrue((intf instanceof MyInterface));
+      MyInterface intf = i -> i + 1;
+      assertTrue(intf instanceof MyInterface);
     }
 
     private void testLambdaCaptureField() {
@@ -155,5 +156,10 @@ public class Main {
 
   interface VarargsFunction<T> {
     T[] apply(T... t);
+  }
+
+  private static void testVarKeywordInLambda() {
+    MyInterface intf = (var i) -> i + 1;
+    assertEquals(3, intf.foo(2));
   }
 }
