@@ -23,7 +23,6 @@ import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.j2cl.ast.ArrayLength;
 import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.AstUtilConstants;
@@ -406,18 +405,12 @@ class JdtUtils {
   }
 
   private static TypeDescriptor getTypeBound(ITypeBinding typeBinding) {
-    // TODO(b/67858399): should be using typeBinding.getTypeBounds() but it returns empty for
-    // wildcards in the current version of JDT.
-
-    List<ITypeBinding> bounds = Lists.newArrayList(typeBinding.getInterfaces());
-    if (typeBinding.getSuperclass() != JdtUtils.javaLangObjectTypeBinding.get()) {
-      bounds.add(0, typeBinding.getSuperclass());
-    }
-    if (bounds.isEmpty()) {
+    ITypeBinding[] bounds = typeBinding.getTypeBounds();
+    if (bounds == null || bounds.length == 0) {
       return TypeDescriptors.get().javaLangObject;
     }
-    if (bounds.size() == 1) {
-      return createTypeDescriptor(bounds.get(0));
+    if (bounds.length == 1) {
+      return createTypeDescriptor(bounds[0]);
     }
     return IntersectionTypeDescriptor.newBuilder()
         .setIntersectionTypeDescriptors(createTypeDescriptors(bounds, DeclaredTypeDescriptor.class))
