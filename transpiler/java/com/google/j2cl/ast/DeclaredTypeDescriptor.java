@@ -72,11 +72,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     return getTypeDeclaration().isDeprecated();
   }
 
-  @Override
-  public ImmutableList<String> getClassComponents() {
-    return getTypeDeclaration().getClassComponents();
-  }
-
   @Nullable
   public abstract DeclaredTypeDescriptor getEnclosingTypeDescriptor();
 
@@ -328,14 +323,25 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     return getTypeDeclaration().getQualifiedJsName();
   }
 
-  @Memoized
-  @Override
+  public String getSimpleSourceName() {
+    return getTypeDeclaration().getSimpleSourceName();
+  }
+
+  /**
+   * Returns the fully package qualified source name like "com.google.common.Outer.Inner". Used in
+   * places where original name is useful (like aliasing, identifying the corressponding java type,
+   * Debug/Error output, etc.
+   */
   public String getQualifiedSourceName() {
     return getTypeDeclaration().getQualifiedSourceName();
   }
 
-  @Override
-  @Memoized
+  /**
+   * Returns the fully package qualified binary name like "com.google.common.Outer$Inner".
+   *
+   * <p>Used for generated class metadata (per JLS), file overview, file path, unique id calculation
+   * and other similar scenarios.
+   */
   public String getQualifiedBinaryName() {
     return getTypeDeclaration().getQualifiedBinaryName();
   }
@@ -435,7 +441,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   public MethodDescriptor getMethodDescriptorByName(
       String methodName, TypeDescriptor... parameters) {
     return getMethodDescriptorsBySignature()
-        .get(MethodDescriptor.getSignature(methodName, parameters));
+        .get(MethodDescriptor.buildMethodSignature(methodName, parameters));
   }
 
   /** The list of all methods available on a given type. */

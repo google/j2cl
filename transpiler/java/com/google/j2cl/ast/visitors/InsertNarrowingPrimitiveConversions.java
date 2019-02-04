@@ -108,7 +108,8 @@ public class InsertNarrowingPrimitiveConversions extends NormalizationPass {
           return new NumberLiteral(literalTypeDescriptor, ((NumberLiteral) expression).getValue());
         }
 
-        return RuntimeMethods.createPrimitivesNarrowingMethodCall(expression, toTypeDescriptor);
+        return RuntimeMethods.createPrimitivesNarrowingMethodCall(
+            expression, (PrimitiveTypeDescriptor) toTypeDescriptor);
       }
     };
   }

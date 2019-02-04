@@ -24,14 +24,14 @@ import com.google.j2cl.ast.annotations.Visitable;
  */
 @Visitable
 public class ThisReference extends Expression {
-  @Visitable TypeDescriptor typeDescriptor;
+  @Visitable DeclaredTypeDescriptor typeDescriptor;
 
-  public ThisReference(TypeDescriptor typeDescriptor) {
+  public ThisReference(DeclaredTypeDescriptor typeDescriptor) {
     this.typeDescriptor = checkNotNull(typeDescriptor);
   }
 
   @Override
-  public TypeDescriptor getTypeDescriptor() {
+  public DeclaredTypeDescriptor getTypeDescriptor() {
     return typeDescriptor;
   }
 

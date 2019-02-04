@@ -420,7 +420,7 @@ public class JsInteropRestrictionsChecker {
   }
 
   private boolean isValidJsEnumConstructorStatement(
-      TypeDescriptor typeDescriptor, Statement statement, Variable valueParameter) {
+      DeclaredTypeDescriptor typeDescriptor, Statement statement, Variable valueParameter) {
     if (!(statement instanceof ExpressionStatement)) {
       return false;
     }

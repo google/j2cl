@@ -104,6 +104,7 @@ public class InsertWideningPrimitiveConversions extends NormalizationPass {
       return expression;
     }
 
-    return RuntimeMethods.createWideningPrimitivesMethodCall(expression, toTypeDescriptor);
+    return RuntimeMethods.createWideningPrimitivesMethodCall(
+        expression, (PrimitiveTypeDescriptor) toTypeDescriptor);
   }
 }

@@ -2053,8 +2053,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 + "type 'MyJsEnum[][]'. (b/118299062)",
             "Return type of 'MyJsEnum[] Main.returnsJsEnumArray()' cannot be of type 'MyJsEnum[]'. "
                 + "(b/118299062)",
-            "Array creation 'new test.Main.MyJsEnum[1]' cannot be of type 'MyJsEnum[]'. "
-                + "(b/118299062)",
+            "Array creation 'new MyJsEnum[1]' cannot be of type 'MyJsEnum[]'. " + "(b/118299062)",
             "Variable 'arr' cannot be of type 'MyJsEnum[]'. (b/118299062)",
             "Variable 'list' cannot be of type 'List<MyJsEnum[]>'. (b/118299062)",
             "Parameter 'p1' in '<lambda>' cannot be of type 'MyJsEnum[]'. (b/118299062)",

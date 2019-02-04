@@ -538,7 +538,7 @@ class ToStringRenderer {
 
       @Override
       public boolean enterTypeDescriptor(TypeDescriptor typeDescriptor) {
-        print(typeDescriptor.getQualifiedSourceName());
+        print(typeDescriptor.getReadableDescription());
         return false;
       }
 
@@ -613,7 +613,7 @@ class ToStringRenderer {
       }
 
       private void print(TypeDescriptor typeDescriptor) {
-        print(typeDescriptor.getQualifiedSourceName());
+        print(typeDescriptor.getReadableDescription());
       }
 
       private void printSeparated(String separator, List<? extends Node> expressions) {

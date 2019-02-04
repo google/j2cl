@@ -57,23 +57,14 @@ public class AstUtils {
     if (string.isEmpty()) {
       return string;
     }
-    return string.substring(0, 1).toUpperCase() + string.substring(1, string.length());
-  }
-
-  /** Returns new synthesized class components based on provided {@code simpleNameSynthesizer}. */
-  public static List<String> synthesizeClassComponents(
-      TypeDescriptor originalType, Function<String, String> simpleNameSynthesizer) {
-    List<String> classComponents = Lists.newArrayList(originalType.getClassComponents());
-    int simpleNameIndex = classComponents.size() - 1;
-    classComponents.set(
-        simpleNameIndex, simpleNameSynthesizer.apply(classComponents.get(simpleNameIndex)));
-    return classComponents;
+    return string.substring(0, 1).toUpperCase() + string.substring(1);
   }
 
   /** Returns new synthesized inner class components. */
   public static List<String> synthesizeInnerClassComponents(
-      TypeDescriptor enclosingType, Object... parts) {
-    List<String> classComponents = Lists.newArrayList(enclosingType.getClassComponents());
+      DeclaredTypeDescriptor enclosingType, Object... parts) {
+    List<String> classComponents =
+        Lists.newArrayList(enclosingType.getTypeDeclaration().getClassComponents());
     classComponents.add("$" + Joiner.on("$").skipNulls().join(parts));
     return classComponents;
   }
@@ -442,7 +433,7 @@ public class AstUtils {
   }
 
   public static boolean isDelegatedConstructorCall(
-      MethodCall methodCall, TypeDescriptor targetTypeDescriptor) {
+      MethodCall methodCall, DeclaredTypeDescriptor targetTypeDescriptor) {
     if (methodCall == null || !methodCall.getTarget().isConstructor()) {
       return false;
     }
@@ -636,7 +627,7 @@ public class AstUtils {
   public static boolean hasThisReferenceAsQualifier(MemberReference memberReference) {
     Expression qualifier = memberReference.getQualifier();
     return qualifier instanceof ThisReference
-        && memberReference.getTarget().isMemberOf(qualifier.getTypeDescriptor());
+        && memberReference.getTarget().isMemberOf(((ThisReference) qualifier).getTypeDescriptor());
   }
 
   public static Expression joinExpressionsWithBinaryOperator(

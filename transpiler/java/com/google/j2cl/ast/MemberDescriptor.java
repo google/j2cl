@@ -40,17 +40,13 @@ public abstract class MemberDescriptor extends Node
   public abstract MemberDescriptor toRawMemberDescriptor();
 
   /** Returns true if {@code typeDescriptor} is the enclosing class of this member. */
-  public boolean isMemberOf(TypeDescriptor typeDescriptor) {
-    return getEnclosingTypeDescriptor()
-        .getQualifiedSourceName()
-        .equals(typeDescriptor.getQualifiedSourceName());
+  public boolean isMemberOf(DeclaredTypeDescriptor typeDescriptor) {
+    return isMemberOf(typeDescriptor.getTypeDeclaration());
   }
 
   /** Returns true if {@code typeDeclaration} is the enclosing class of this member. */
   public boolean isMemberOf(TypeDeclaration typeDeclaration) {
-    return getEnclosingTypeDescriptor()
-        .getQualifiedSourceName()
-        .equals(typeDeclaration.getQualifiedSourceName());
+    return getEnclosingTypeDescriptor().getTypeDeclaration().equals(typeDeclaration);
   }
 
   /** Returns true if {@code thatMemberDescriptor} is in the same type as this member. */

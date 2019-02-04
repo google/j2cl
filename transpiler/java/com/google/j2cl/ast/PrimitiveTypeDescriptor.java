@@ -19,7 +19,6 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.j2cl.ast.annotations.Visitable;
 import java.util.Map;
@@ -34,7 +33,6 @@ public class PrimitiveTypeDescriptor extends TypeDescriptor {
   private final String boxedClassName;
   private final int precisionOrder;
 
-  @Override
   public String getSimpleSourceName() {
     return name;
   }
@@ -45,17 +43,17 @@ public class PrimitiveTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
-  public ImmutableList<String> getClassComponents() {
-    return ImmutableList.of(getSimpleSourceName());
-  }
-
-  @Override
   public Expression getDefaultValue() {
     checkState(!TypeDescriptors.isPrimitiveVoid(this));
     if (TypeDescriptors.isPrimitiveBoolean(this)) {
       return BooleanLiteral.get(false);
     }
     return new NumberLiteral(this, 0);
+  }
+
+  @Override
+  public String getReadableDescription() {
+    return getSimpleSourceName();
   }
 
   @Override

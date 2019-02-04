@@ -60,10 +60,7 @@ import javax.annotation.Nullable;
 @AutoValue
 @Visitable
 public abstract class TypeDeclaration extends Node
-    implements HasJsNameInfo,
-        HasReadableDescription,
-        HasUnusableByJsSuppression,
-        HasSimpleSourceName {
+    implements HasJsNameInfo, HasReadableDescription, HasUnusableByJsSuppression {
   /**
    * References to some descriptors need to be deferred in some cases since it will cause infinite
    * loops.
@@ -91,7 +88,14 @@ public abstract class TypeDeclaration extends Node
         && getDeclaredMethodDescriptors().stream().anyMatch(MethodDescriptor::isDefaultMethod);
   }
 
+  /** Returns the unqualified simple source name like "Inner". */
+  @Memoized
+  public String getSimpleSourceName() {
+    return AstUtils.getSimpleSourceName(getClassComponents());
+  }
+
   /** Returns the simple binary name like "Outer$Inner". Used for file naming purposes. */
+  @Memoized
   public String getSimpleBinaryName() {
     return Joiner.on('$').join(getClassComponents());
   }
@@ -161,6 +165,13 @@ public abstract class TypeDeclaration extends Node
   /** Returns the fully package qualified name like "com.google.common". */
   @Nullable
   public abstract String getPackageName();
+
+  /**
+   * Returns a list of Strings representing the current type's simple name and enclosing type simple
+   * names. For example for "com.google.foo.Outer" the class components are ["Outer"] and for
+   * "com.google.foo.Outer.Inner" the class components are ["Outer", "Inner"].
+   */
+  public abstract ImmutableList<String> getClassComponents();
 
   @Nullable
   public abstract TypeDeclaration getEnclosingTypeDeclaration();

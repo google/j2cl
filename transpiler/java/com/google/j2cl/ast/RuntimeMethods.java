@@ -237,8 +237,9 @@ public class RuntimeMethods {
 
   /** Create a call to the corresponding narrowing Primitives method. */
   public static Expression createPrimitivesNarrowingMethodCall(
-      Expression expression, TypeDescriptor toTypeDescriptor) {
-    TypeDescriptor fromTypeDescriptor = expression.getTypeDescriptor();
+      Expression expression, PrimitiveTypeDescriptor toTypeDescriptor) {
+    PrimitiveTypeDescriptor fromTypeDescriptor =
+        (PrimitiveTypeDescriptor) expression.getTypeDescriptor();
     String methodName =
         String.format(
             "$narrow%sTo%s",
@@ -259,8 +260,9 @@ public class RuntimeMethods {
 
   /** Create a call to the corresponding widening Primitives method. */
   public static Expression createWideningPrimitivesMethodCall(
-      Expression expression, TypeDescriptor toTypeDescriptor) {
-    TypeDescriptor fromTypeDescriptor = expression.getTypeDescriptor();
+      Expression expression, PrimitiveTypeDescriptor toTypeDescriptor) {
+    PrimitiveTypeDescriptor fromTypeDescriptor =
+        (PrimitiveTypeDescriptor) expression.getTypeDescriptor();
     String widenMethodName =
         String.format(
             "$widen%sTo%s",

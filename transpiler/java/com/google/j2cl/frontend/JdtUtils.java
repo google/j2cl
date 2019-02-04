@@ -400,7 +400,7 @@ class JdtUtils {
             () -> (DeclaredTypeDescriptor) createTypeDescriptor(typeBinding.getDeclaringClass()))
         .setWildcardOrCapture(typeBinding.isWildcardType() || typeBinding.isCapture())
         .setUniqueKey(typeBinding.getKey())
-        .setClassComponents(getClassComponentsForTypeVariable(typeBinding))
+        .setNameComponents(getClassComponentsForTypeVariable(typeBinding))
         .build();
   }
 

@@ -79,14 +79,6 @@ public abstract class IntersectionTypeDescriptor extends TypeDescriptor {
 
   @Override
   @Memoized
-  public String getSimpleSourceName() {
-    return getIntersectionTypeDescriptors().stream()
-        .map(TypeDescriptor::getSimpleSourceName)
-        .collect(joining(" & "));
-  }
-
-  @Override
-  @Memoized
   public DeclaredTypeDescriptor getFunctionalInterface() {
     return getIntersectionTypeDescriptors()
         .stream()
@@ -118,6 +110,7 @@ public abstract class IntersectionTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
+  @Memoized
   public Set<TypeVariable> getAllTypeVariables() {
     return getIntersectionTypeDescriptors()
         .stream()
@@ -127,10 +120,20 @@ public abstract class IntersectionTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
+  @Memoized
   public String getUniqueId() {
-    return getIntersectionTypeDescriptors()
-        .stream()
-        .map(TypeDescriptor::getUniqueId)
+    return synthesizeIntersectionName(TypeDescriptor::getUniqueId);
+  }
+
+  @Override
+  @Memoized
+  public String getReadableDescription() {
+    return synthesizeIntersectionName(TypeDescriptor::getReadableDescription);
+  }
+
+  private String synthesizeIntersectionName(Function<DeclaredTypeDescriptor, String> nameFunction) {
+    return getIntersectionTypeDescriptors().stream()
+        .map(nameFunction)
         .collect(joining("&", "(", ")"));
   }
 

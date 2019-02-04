@@ -139,17 +139,32 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   public static final String CREATE_METHOD_NAME = "$create";
   public static final String LOAD_MODULES_METHOD_NAME = "$loadModules";
 
-  public static String getSignature(String name, TypeDescriptor... parameterTypeDescriptors) {
-    return getSignature(name, Arrays.asList(parameterTypeDescriptors));
+  public static String buildMethodSignature(
+      String name, TypeDescriptor... parameterTypeDescriptors) {
+    return buildMethodSignature(name, Arrays.asList(parameterTypeDescriptors));
   }
 
-  private static String getSignature(String name, List<TypeDescriptor> parameterTypeDescriptors) {
+  private static String buildMethodSignature(
+      String name, List<TypeDescriptor> parameterTypeDescriptors) {
     return name
-        + parameterTypeDescriptors
-            .stream()
-            .map(TypeDescriptor::toRawTypeDescriptor)
-            .map(TypeDescriptor::getQualifiedBinaryName)
+        + parameterTypeDescriptors.stream()
+            .map(MethodDescriptor::getSignatureStringForParameter)
             .collect(joining(",", "(", ")"));
+  }
+
+  private static String getSignatureStringForParameter(TypeDescriptor typeDescriptor) {
+    if (typeDescriptor instanceof DeclaredTypeDescriptor) {
+      return ((DeclaredTypeDescriptor) typeDescriptor).getQualifiedBinaryName();
+    }
+    if (typeDescriptor instanceof PrimitiveTypeDescriptor) {
+      return ((PrimitiveTypeDescriptor) typeDescriptor).getSimpleSourceName();
+    }
+    if (typeDescriptor instanceof ArrayTypeDescriptor) {
+      return getSignatureStringForParameter(
+              ((ArrayTypeDescriptor) typeDescriptor).getComponentTypeDescriptor())
+          + "[]";
+    }
+    return getSignatureStringForParameter(typeDescriptor.toRawTypeDescriptor());
   }
 
   public abstract boolean isAbstract();
@@ -181,8 +196,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
   @Memoized
   public ImmutableList<TypeDescriptor> getParameterTypeDescriptors() {
-    return getParameterDescriptors()
-        .stream()
+    return getParameterDescriptors().stream()
         .map(ParameterDescriptor::getTypeDescriptor)
         .collect(ImmutableList.toImmutableList());
   }
@@ -233,8 +247,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         .setTypeParameterTypeDescriptors(ImmutableList.of())
         .setReturnTypeDescriptor(getReturnTypeDescriptor().toRawTypeDescriptor())
         .setParameterDescriptors(
-            getParameterDescriptors()
-                .stream()
+            getParameterDescriptors().stream()
                 .map(ParameterDescriptor::toRawParameterDescriptor)
                 .collect(toImmutableList()))
         .build();
@@ -287,8 +300,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       return true;
     }
 
-    return getOverriddenMethodDescriptors()
-        .stream()
+    return getOverriddenMethodDescriptors().stream()
         .map(MethodDescriptor::getEnclosingTypeDescriptor)
         .anyMatch(TypeDescriptors::isJavaLangObject);
   }
@@ -383,9 +395,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   }
 
   public String getMethodSignature() {
-    String name = getName();
-    ImmutableList<TypeDescriptor> parameterTypeDescriptors = getParameterTypeDescriptors();
-    return getSignature(name, parameterTypeDescriptors);
+    return buildMethodSignature(getName(), getParameterTypeDescriptors());
   }
 
   abstract Builder toBuilder();
@@ -422,8 +432,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   @Override
   public String getReadableDescription() {
     String parameterString =
-        getParameterDescriptors()
-            .stream()
+        getParameterDescriptors().stream()
             .map(MethodDescriptor::getParameterReadableDescription)
             .collect(joining(", "));
 
@@ -458,19 +467,9 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   /** Returns a signature suitable for override checking from the Java source perspective. */
   @Memoized
   public String getOverrideSignature() {
-    StringBuilder signatureBuilder = new StringBuilder("");
-
-    signatureBuilder.append(getName());
-    signatureBuilder.append("(");
-
-    String separator = "";
-    for (TypeDescriptor parameterType : getParameterTypeDescriptors()) {
-      signatureBuilder.append(separator);
-      signatureBuilder.append(parameterType.toRawTypeDescriptor().getQualifiedBinaryName());
-      separator = ";";
-    }
-    signatureBuilder.append(")");
-    return signatureBuilder.toString();
+    return getParameterTypeDescriptors().stream()
+        .map(MethodDescriptor::getSignatureStringForParameter)
+        .collect(joining(";", getName() + "(", ")"));
   }
 
   private Set<MethodDescriptor> getOverriddenJsMembers() {
@@ -503,8 +502,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     TypeDescriptor specializedReturnTypeDescriptor =
         returnTypeDescriptor.specializeTypeVariables(replacingTypeDescriptorByTypeVariable);
     ImmutableList<TypeDescriptor> specializedParameterTypeDescriptors =
-        parameterTypeDescriptors
-            .stream()
+        parameterTypeDescriptors.stream()
             .map(
                 typeDescriptor ->
                     typeDescriptor.specializeTypeVariables(replacingTypeDescriptorByTypeVariable))
@@ -621,8 +619,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     static ImmutableList<ParameterDescriptor> toParameterDescriptors(
         Collection<TypeDescriptor> parameterTypeDescriptors) {
-      return parameterTypeDescriptors
-          .stream()
+      return parameterTypeDescriptors.stream()
           .map(
               typeDescriptor ->
                   ParameterDescriptor.newBuilder().setTypeDescriptor(typeDescriptor).build())
@@ -641,8 +638,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     public Builder removeParameterOptionality() {
       return setParameterDescriptors(
-          getParameterDescriptors()
-              .stream()
+          getParameterDescriptors().stream()
               .map(
                   parameterDescriptor ->
                       parameterDescriptor.toBuilder().setJsOptional(false).build())
@@ -717,9 +713,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
         // At most 1 varargs parameter.
         checkState(
-            methodDescriptor
-                    .getParameterDescriptors()
-                    .stream()
+            methodDescriptor.getParameterDescriptors().stream()
                     .filter(ParameterDescriptor::isVarargs)
                     .count()
                 <= 1);

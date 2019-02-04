@@ -18,7 +18,6 @@ package com.google.j2cl.ast;
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
 import com.google.common.base.Strings;
-import com.google.common.collect.ImmutableList;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.common.ThreadLocalInterner;
 import java.util.Map;
@@ -33,14 +32,6 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
 
   @Nullable
   public abstract TypeDescriptor getComponentTypeDescriptor();
-
-  @Override
-  @Memoized
-  public ImmutableList<String> getClassComponents() {
-    return ImmutableList.copyOf(
-        AstUtils.synthesizeClassComponents(
-            getComponentTypeDescriptor(), simpleName -> simpleName + "[]"));
-  }
 
   @Memoized
   public TypeDescriptor getLeafTypeDescriptor() {
@@ -137,14 +128,20 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
+  @Memoized
   public String getUniqueId() {
     String prefix = isNullable() ? "?" : "!";
     return prefix + Strings.repeat("[]", getDimensions()) + getLeafTypeDescriptor().getUniqueId();
   }
 
   @Override
+  @Memoized
   public String getReadableDescription() {
-    return getSimpleSourceName();
+    return synthesizeArrayName(getLeafTypeDescriptor().getReadableDescription());
+  }
+
+  private String synthesizeArrayName(String leafName) {
+    return leafName + Strings.repeat("[]", getDimensions());
   }
 
   @Override

@@ -33,7 +33,6 @@ import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.SuperReference;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
-import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.common.SourcePosition;
@@ -281,7 +280,8 @@ public final class LibraryInfoBuilder {
           "java.lang.Comparable",
           "java.lang.Integer");
 
-  private static boolean isAccesssedFromJ2clBootstrapJsFiles(TypeDescriptor typeDescriptor) {
+  private static boolean isAccesssedFromJ2clBootstrapJsFiles(
+      DeclaredTypeDescriptor typeDescriptor) {
     return TYPES_ACCESSED_FROM_J2CL_BOOTSTRAP_JS.contains(typeDescriptor.getQualifiedSourceName());
   }
 }

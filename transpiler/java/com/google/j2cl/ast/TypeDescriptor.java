@@ -15,8 +15,6 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.common.base.Joiner;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.ast.annotations.Visitable;
 import java.util.Map;
@@ -27,41 +25,7 @@ import javax.annotation.Nullable;
 /** A usage-site reference to a type. */
 @Visitable
 public abstract class TypeDescriptor extends Node
-    implements Comparable<TypeDescriptor>, HasReadableDescription, HasSimpleSourceName {
-
-  /** Returns the simple binary name like "Outer$Inner". Used for file naming purposes. */
-  public String getSimpleBinaryName() {
-    return Joiner.on('$').join(getClassComponents());
-  }
-
-  /**
-   * Returns the fully package qualified binary name like "com.google.common.Outer$Inner".
-   *
-   * <p>Used for generated class metadata (per JLS), file overview, file path, unique id calculation
-   * and other similar scenarios.
-   */
-  public String getQualifiedBinaryName() {
-    return getSimpleBinaryName();
-  }
-
-  /**
-   * Returns the fully package qualified source name like "com.google.common.Outer.Inner". Used in
-   * places where original name is useful (like aliasing, identifying the corressponding java type,
-   * Debug/Error output, etc.
-   */
-  public String getQualifiedSourceName() {
-    return Joiner.on(".").join(getClassComponents());
-  }
-
-  /**
-   * Returns a list of Strings representing the current type's simple name and enclosing type simple
-   * names. For example for "com.google.foo.Outer" the class components are ["Outer"] and for
-   * "com.google.foo.Outer.Inner" the class components are ["Outer", "Inner"].
-   */
-  @Override
-  public ImmutableList<String> getClassComponents() {
-    return ImmutableList.of();
-  }
+    implements Comparable<TypeDescriptor>, HasReadableDescription {
 
   public boolean isJsType() {
     return false;
@@ -282,12 +246,6 @@ public abstract class TypeDescriptor extends Node
   @Override
   public final String toString() {
     return getUniqueId();
-  }
-
-  /** Returns a description that is useful for error messages. */
-  @Override
-  public String getReadableDescription() {
-    return getSimpleSourceName();
   }
 
   @Override

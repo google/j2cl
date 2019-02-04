@@ -92,11 +92,6 @@ public class NullType extends TypeDescriptor {
     return Visitor_NullType.visit(processor, this);
   }
 
-  @Override
-  public String getSimpleSourceName() {
-    return "null";
-  }
-
   // Only instantiated by TypeDescriptors.
   NullType() {}
 }

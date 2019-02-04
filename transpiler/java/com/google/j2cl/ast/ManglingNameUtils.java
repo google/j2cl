@@ -37,7 +37,10 @@ public class ManglingNameUtils {
       return Strings.repeat("arrayOf_", arrayTypeDescriptor.getDimensions())
           + getMangledName(arrayTypeDescriptor.getLeafTypeDescriptor());
     }
-    return rawTypeDescriptor.getQualifiedSourceName().replace('.', '_');
+    if (rawTypeDescriptor.isPrimitive()) {
+      return ((PrimitiveTypeDescriptor) rawTypeDescriptor).getSimpleSourceName();
+    }
+    return ((DeclaredTypeDescriptor) rawTypeDescriptor).getQualifiedSourceName().replace('.', '_');
   }
 
   /** Returns the mangled name of a method. */

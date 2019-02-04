@@ -98,6 +98,7 @@ public abstract class UnionTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
+  @Memoized
   public Set<TypeVariable> getAllTypeVariables() {
     return getUnionTypeDescriptors()
         .stream()
@@ -107,11 +108,19 @@ public abstract class UnionTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
+  @Memoized
   public String getUniqueId() {
-    return getUnionTypeDescriptors()
-        .stream()
-        .map(TypeDescriptor::getUniqueId)
-        .collect(joining("|", "(", ")"));
+    return synthesizeUnionName(TypeDescriptor::getUniqueId);
+  }
+
+  @Override
+  @Memoized
+  public String getReadableDescription() {
+    return synthesizeUnionName(TypeDescriptor::getReadableDescription);
+  }
+
+  private String synthesizeUnionName(Function<TypeDescriptor, String> nameFunction) {
+    return getUnionTypeDescriptors().stream().map(nameFunction).collect(joining("|", "(", ")"));
   }
 
   @Override

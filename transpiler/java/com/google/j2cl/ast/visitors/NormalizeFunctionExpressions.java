@@ -111,7 +111,7 @@ public class NormalizeFunctionExpressions extends NormalizationPass {
     return TypeVariable.newBuilder()
         .setWildcardOrCapture(true)
         .setBoundTypeDescriptorSupplier(() -> bound)
-        .setClassComponents(Arrays.asList("?"))
+        .setNameComponents(Arrays.asList("?"))
         .setUniqueKey("<??>" + bound.getUniqueId())
         .setEnclosingTypeDescriptorSupplier(() -> null)
         .build();

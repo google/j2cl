@@ -41,7 +41,6 @@ import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.Type;
-import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.Variable;
 import java.util.Collection;
 import java.util.stream.Collectors;
@@ -215,7 +214,7 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
 
     @Override
     public Node rewriteNewInstance(NewInstance newInstance) {
-      TypeDescriptor typeDescriptor = newInstance.getTarget().getEnclosingTypeDescriptor();
+      DeclaredTypeDescriptor typeDescriptor = newInstance.getTarget().getEnclosingTypeDescriptor();
       if (!capturedVariablesByCapturingTypeName.containsKey(
           typeDescriptor.getQualifiedSourceName())) {
         // No captures.
@@ -270,7 +269,7 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
      * Expands the given arguments list with references to the variables captured by the given type.
      */
     private void addCapturedVariableArguments(
-        Invocation.Builder invocationBuilder, TypeDescriptor typeDescriptor) {
+        Invocation.Builder<?, ?> invocationBuilder, DeclaredTypeDescriptor typeDescriptor) {
       Collection<Variable> capturedVariables =
           capturedVariablesByCapturingTypeName.get(typeDescriptor.getQualifiedSourceName());
       if (capturedVariables.isEmpty()) {

@@ -18,7 +18,6 @@ package com.google.j2cl.generator;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
-import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.j2cl.ast.ArrayTypeDescriptor;
@@ -36,7 +35,6 @@ import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.TypeVariable;
 import com.google.j2cl.ast.UnionTypeDescriptor;
 import com.google.j2cl.ast.Variable;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -167,26 +165,7 @@ class ClosureTypesGenerator {
       return UNKNOWN;
     }
 
-    // Template variable like "C_T".
-
-    // TODO(b/68715725): Clean up naming for type variables so that no special handling is needed
-    // here.
-
-    // skip the top level class component for better output readability.
-    List<String> classComponents = typeVariable.getClassComponents();
-    List<String> nameComponents =
-        new ArrayList<>(classComponents.subList(1, classComponents.size()));
-
-    // move the prefix in the simple name to the class name to avoid collisions between method-
-    // level and class-level type variable and avoid variable name starts with a number.
-    // concat class components to avoid collisions between type variables in inner/outer class.
-    // use '_' instead of '$' because '$' is not allowed in template variable name in closure.
-    String simpleName = typeVariable.getSimpleSourceName();
-    nameComponents.set(
-        nameComponents.size() - 1, simpleName.substring(simpleName.indexOf('_') + 1));
-    String prefix = simpleName.substring(0, simpleName.indexOf('_') + 1);
-
-    return new ClosureNamedType(prefix + Joiner.on('_').join(nameComponents));
+    return new ClosureNamedType(typeVariable.getJsName());
   }
 
   /** Returns the Closure type for an array type descriptor. */
