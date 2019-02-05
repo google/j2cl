@@ -2,6 +2,7 @@
 
 load(":j2cl_transpile.bzl", "J2CL_TRANSPILE_ATTRS", "j2cl_transpile")
 load(":j2cl_js_common.bzl", "J2CL_JS_ATTRS", "JS_PROVIDER_NAME", "j2cl_js_provider")
+load("@bazel_tools//tools/jdk:toolchain_utils.bzl", "find_java_runtime_toolchain", "find_java_toolchain")
 
 # Constructor for the Bazel provider for J2CL.
 # Note that data under "_private_" considered private internal data so do not use.
@@ -80,9 +81,9 @@ def _java_compile(ctx, java_srcs):
         plugins = plugins,
         exported_plugins = exported_plugins,
         output = ctx.outputs.jar,
-        java_toolchain = ctx.attr._java_toolchain,
-        host_javabase = ctx.attr._host_javabase,
-        javac_opts = java_common.default_javac_opts(ctx, java_toolchain_attr = "_java_toolchain"),
+        java_toolchain = find_java_toolchain(ctx, ctx.attr._java_toolchain),
+        host_javabase = find_java_runtime_toolchain(ctx, ctx.attr._host_javabase),
+        javac_opts = ctx.attr.javacopts,
     )
 
 def _strip_gwt_incompatible(ctx, java_srcs):
