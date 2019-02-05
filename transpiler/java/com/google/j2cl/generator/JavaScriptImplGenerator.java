@@ -192,12 +192,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
     // goog.module(...) declaration.
     sourceBuilder.appendln("goog.module('" + typeDeclaration.getImplModuleName() + "');");
-    if (declareLegacyNamespace && AstUtils.canBeRequiredFromJs(typeDeclaration)) {
-      // Even if opted into declareLegacyNamespace, this only makes sense for classes that are
-      // intended to be accessed from the native JS. Thus we only emit declareLegacyNamespace
-      // for non-anonymous JsType classes.
-      sourceBuilder.appendln("goog.module.declareLegacyNamespace();");
-    }
     sourceBuilder.newLines(2);
 
     // goog.require(...) for eager imports.
