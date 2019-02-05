@@ -34,7 +34,12 @@ Getting Started
 ---
 Clone the repository and build a sample app from source:
 
-- Install [Bazel](https://bazel.build/versions/master/docs/install.html).
+- Install Bazel 0.20.0:
+
+```shell
+    $ npm install -g @bazel/bazel@0.20.0
+```
+(See [Install Bazel](https://bazel.build/versions/master/docs/install.html) for different platforms.)
 
 - Clone this repository:
 
