@@ -71,6 +71,10 @@ def _java_compile(ctx, java_srcs):
     plugins = [p[JavaInfo] for p in ctx.attr.plugins]
     exported_plugins = [p[JavaInfo] for p in ctx.attr.exported_plugins]
 
+    default_j2cl_javac_opts = [
+        # Avoid log site injection which introduces calls to unsupported APIs
+        "-XDinjectLogSites=false",
+    ]
     return java_common.compile(
         ctx,
         source_files = ctx.files._srcs_hack,
@@ -82,7 +86,8 @@ def _java_compile(ctx, java_srcs):
         output = ctx.outputs.jar,
         java_toolchain = ctx.attr._java_toolchain,
         host_javabase = ctx.attr._host_javabase,
-        javac_opts = java_common.default_javac_opts(ctx, java_toolchain_attr = "_java_toolchain"),
+        javac_opts = java_common.default_javac_opts(ctx, java_toolchain_attr = "_java_toolchain") +
+                     default_j2cl_javac_opts,
     )
 
 def _strip_gwt_incompatible(ctx, java_srcs):
@@ -117,7 +122,7 @@ _J2CL_LIB_ATTRS = {
     "javacopts": attr.string_list(),
     "licenses": attr.license(),
     "_java_toolchain": attr.label(
-        default = Label("@bazel_tools//tools/jdk:current_java_toolchain"),
+        default = Label("//build_defs/internal_do_not_use:j2cl_java_toolchain"),
     ),
     "_host_javabase": attr.label(
         default = Label("@bazel_tools//tools/jdk:current_host_java_runtime"),

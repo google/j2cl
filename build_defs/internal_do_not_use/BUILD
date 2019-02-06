@@ -1,6 +1,8 @@
 # Description:
 #   Build rules used by J2CL and BUILD targets used by the rules.
 
+load("@bazel_tools//tools/jdk:default_java_toolchain.bzl", "default_java_toolchain")
+
 licenses(["notice"])  # Apache 2.0
 
 ##########################################################
@@ -46,6 +48,11 @@ genrule(
 alias(
     name = "jre",
     actual = "//jre/java:jre",
+)
+
+default_java_toolchain(
+    name = "j2cl_java_toolchain",
+    bootclasspath = ["//jre/java:libjre_bootclasspath.jar"],
 )
 
 # ***************************************************

@@ -39,9 +39,10 @@ def j2cl_mirror_from_gwt(
         mirrored_files,
         extra_srcs = [],
         extra_js_srcs = [],
+        excluded_srcs = [],
         deps = [],
         **kwargs):
-    super_srcs = native.glob(["**/*.java"]) + extra_srcs
+    super_srcs = native.glob(["**/*.java"], exclude = excluded_srcs) + extra_srcs
     native_srcs = native.glob(["**/*.native.js"])
     js_srcs = native.glob(["**/*.js"], exclude = native_srcs) + extra_js_srcs
 

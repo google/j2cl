@@ -15,11 +15,7 @@ package java.lang.invoke;
 
 import java.io.Serializable;
 
-/**
- * See
- * <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/invoke/SerializedLambda.html">the
- * official Java API doc</a> for details.
- */
+/** Exists solely to make javac happy. */
 public final class SerializedLambda implements Serializable {
 
   public Object getCapturedArg(int i) {

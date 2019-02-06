@@ -5,7 +5,10 @@ def j2cl_transpile(ctx, java_provider, js_srcs, output, library_info_output):
 
     # Using source_jars of the java_library since that includes APT generated src.
     srcs = java_provider.source_jars + js_srcs
-    classpath = java_provider.compilation_info.compilation_classpath
+    classpath = depset(
+        java_provider.compilation_info.boot_classpath,
+        transitive = [java_provider.compilation_info.compilation_classpath],
+    )
 
     args = ctx.actions.args()
     args.use_param_file("@%s", use_always = True)

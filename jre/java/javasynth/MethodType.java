@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Google Inc.
+ * Copyright 2019 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
@@ -13,9 +13,5 @@
  */
 package java.lang.invoke;
 
-/**
- * See <a
- * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/invoke/MethodHandles.html">the
- * official Java API doc</a> for details.
- */
-public class MethodHandles {}
+/** Exists solely to make javac happy. */
+class MethodType {}

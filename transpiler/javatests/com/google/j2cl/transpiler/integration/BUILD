@@ -12,6 +12,7 @@ java_library(
     name = "jre",
     srcs = ["//jre/java:jre_java_files"],
     deps = [
+        "//jre/java:jre_bootclasspath",
         "//third_party:gwt-javaemul-internal-annotations",
         "//third_party:gwt-jsinterop-annotations",
     ],
