@@ -313,7 +313,7 @@ public class TypeDescriptors {
     private final DeclaredTypeDescriptor typeDescriptor;
 
     BootstrapType(String namespace, String name) {
-      this.typeDescriptor = createBootstrapTypeDescriptor(Kind.CLASS, namespace, name);
+      this.typeDescriptor = createSyntheticTypeDescriptor(Kind.CLASS, namespace, name);
     }
 
     public DeclaredTypeDescriptor getDescriptor() {
@@ -342,17 +342,7 @@ public class TypeDescriptors {
       PrimitiveTypeDescriptor primitiveTypeDescriptor) {
     // Prepend "$" so that internal aliases start with "$".
     return createSyntheticTypeDescriptor(
-        "vmbootstrap.primitives",
-        "$" + primitiveTypeDescriptor.getSimpleSourceName(),
-        ImmutableList.of(),
-        Kind.CLASS);
-  }
-
-  /** Returns a TypeDescriptor to a Bootstrap type; used to synthesize calls to the runtime. */
-  private static DeclaredTypeDescriptor createBootstrapTypeDescriptor(
-      Kind kind, String namespace, String bootstrapClassName) {
-    checkArgument(!bootstrapClassName.contains("<"));
-    return createSyntheticTypeDescriptor(namespace, bootstrapClassName, ImmutableList.of(), kind);
+        Kind.CLASS, "vmbootstrap.primitives", "$" + primitiveTypeDescriptor.getSimpleSourceName());
   }
 
   public static DeclaredTypeDescriptor createGlobalNativeTypeDescriptor(
@@ -363,7 +353,7 @@ public class TypeDescriptors {
   static DeclaredTypeDescriptor createNativeTypeDescriptor(
       String jsNamespace, String className, TypeDescriptor... typeArgumentDescriptors) {
     return createSyntheticTypeDescriptor(
-        jsNamespace, className, Arrays.asList(typeArgumentDescriptors), Kind.INTERFACE);
+        Kind.INTERFACE, jsNamespace, className, typeArgumentDescriptors);
   }
 
   /**
@@ -372,10 +362,7 @@ public class TypeDescriptors {
    * <p>Used to synthesize type descriptors to Bootstrap types and native JS types.
    */
   private static DeclaredTypeDescriptor createSyntheticTypeDescriptor(
-      final String jsNamespace,
-      final String className,
-      final List<TypeDescriptor> typeArgumentDescriptors,
-      final Kind kind) {
+      Kind kind, String jsNamespace, String className, TypeDescriptor... typeArgumentDescriptors) {
 
     TypeDeclaration typeDeclaration =
         TypeDeclaration.newBuilder()
@@ -386,8 +373,7 @@ public class TypeDescriptors {
             .setCustomizedJsNamespace(jsNamespace)
             .setPackageName(getSyntheticPackageName(jsNamespace))
             .setUnparameterizedTypeDescriptorFactory(
-                () ->
-                    createSyntheticTypeDescriptor(jsNamespace, className, ImmutableList.of(), kind))
+                () -> createSyntheticTypeDescriptor(kind, jsNamespace, className))
             // Synthetic type declarations do not need to have type variables.
             // TODO(b/63118697): Make sure declaratations are consistent with descriptor w.r.t
             // type parameters.
@@ -398,7 +384,7 @@ public class TypeDescriptors {
 
     return DeclaredTypeDescriptor.newBuilder()
         .setTypeDeclaration(typeDeclaration)
-        .setTypeArgumentDescriptors(typeArgumentDescriptors)
+        .setTypeArgumentDescriptors(Arrays.asList(typeArgumentDescriptors))
         .build();
   }
 
