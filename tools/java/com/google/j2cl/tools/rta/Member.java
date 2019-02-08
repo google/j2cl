@@ -15,10 +15,11 @@
  */
 package com.google.j2cl.tools.rta;
 
-import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.MultimapBuilder;
 import com.google.j2cl.libraryinfo.InvocationKind;
 import com.google.j2cl.libraryinfo.MemberInfo;
+import java.util.ArrayList;
 import java.util.List;
 
 final class Member {
@@ -36,14 +37,20 @@ final class Member {
     return member;
   }
 
-  private final Multimap<InvocationKind, Member> referencedMembers = HashMultimap.create();
   private String name;
   private Type declaringType;
-  private List<Type> referencedTypes;
   private boolean jsAccessible;
   private boolean isStatic;
   private int startLine = -1;
   private int endLine = -1;
+
+  private boolean fullyTraversed;
+  private boolean live;
+  private List<Type> referencedTypes;
+  private final Multimap<InvocationKind, Member> referencedMembers =
+      MultimapBuilder.enumKeys(InvocationKind.class).arrayListValues().build();
+  private final List<Type> overridingTypes = new ArrayList<>();
+  private final List<Type> inheritingTypes = new ArrayList<>();
 
   private Member() {}
 
@@ -77,12 +84,20 @@ final class Member {
     }
   }
 
-  Multimap<InvocationKind, Member> getReferencedMembers() {
-    return referencedMembers;
+  boolean isLive() {
+    return live;
   }
 
-  void addReferencedMember(InvocationKind invocationKind, Member referencedMember) {
-    referencedMembers.put(invocationKind, referencedMember);
+  void markLive() {
+    this.live = true;
+  }
+
+  boolean isFullyTraversed() {
+    return fullyTraversed;
+  }
+
+  void markFullyTraversed() {
+    this.fullyTraversed = true;
   }
 
   List<Type> getReferencedTypes() {
@@ -91,5 +106,34 @@ final class Member {
 
   void setReferencedTypes(List<Type> referencedTypes) {
     this.referencedTypes = referencedTypes;
+  }
+
+  Multimap<InvocationKind, Member> getReferencedMembers() {
+    return referencedMembers;
+  }
+
+  void addReferencedMember(InvocationKind invocationKind, Member referencedMember) {
+    referencedMembers.put(invocationKind, referencedMember);
+  }
+
+  /** Returns the list of types overriding the implementation of this member. */
+  List<Type> getOverridingTypes() {
+    return overridingTypes;
+  }
+
+  void addOverridingType(Type type) {
+    overridingTypes.add(type);
+  }
+
+  /**
+   * Returns the list of types inheriting the implementation of this member including the enclosing
+   * type of the member.
+   */
+  List<Type> getInheritingTypes() {
+    return inheritingTypes;
+  }
+
+  void addInheritingType(Type type) {
+    inheritingTypes.add(type);
   }
 }

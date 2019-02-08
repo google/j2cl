@@ -20,12 +20,10 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.Streams.concat;
 import static java.util.stream.Collectors.toSet;
 
-import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.LinkedHashMultiset;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multiset;
-import com.google.common.collect.SetMultimap;
 import com.google.j2cl.libraryinfo.LibraryInfo;
 import com.google.j2cl.libraryinfo.MemberInfo;
 import com.google.j2cl.libraryinfo.MethodInvocation;
@@ -38,58 +36,30 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 /** Give information about inheritance relationships between types. */
-public class TypeHierarchyGraph {
+public class TypeGraphBuilder {
 
-  static TypeHierarchyGraph buildFrom(LibraryInfo libraryInfo) {
-    TypeHierarchyGraph graph = new TypeHierarchyGraph();
-    graph.build(libraryInfo);
-    return graph;
-  }
-
-  private List<Type> types;
-  // Set of types overriding a particular member
-  private final SetMultimap<Member, Type> typesOverridingMemberByMember = HashMultimap.create();
-  // Set of types inheriting a particular member
-  private final SetMultimap<Member, Type> typesInheritingMemberByMember = HashMultimap.create();
-
-  private TypeHierarchyGraph() {}
-
-  /** Returns the set of types inheriting a member. */
-  Set<Type> getTypesInheriting(Member member) {
-    return typesInheritingMemberByMember.get(member);
-  }
-
-  /** Returns the set of types overriding a member. */
-  Set<Type> getTypesOverriding(Member targetMember) {
-    return typesOverridingMemberByMember.get(targetMember);
-  }
-
-  List<Type> getTypes() {
-    return types;
-  }
-
-  private void build(LibraryInfo libraryInfo) {
-    types = createTypes(libraryInfo);
+  static List<Type> build(LibraryInfo libraryInfo) {
+    List<Type> types = createTypes(libraryInfo);
 
     LinkedHashMultiset<Type> typesInTopologicalOrder = sortTypesInTopologicalOrder(types);
 
     addInheritedMembers(typesInTopologicalOrder);
 
     computeOverrideFrontier(ImmutableList.copyOf(typesInTopologicalOrder.elementSet()));
+
+    return types;
   }
 
   private static List<Type> createTypes(LibraryInfo libraryInfo) {
-    // First create all types and members
     Map<String, Type> typesByName = new HashMap<>();
 
-    // create all Member
+    // Create all types and members.
     for (TypeInfo typeInfo : libraryInfo.getTypeList()) {
       Type type = Type.buildFrom(typeInfo);
-
       typesByName.put(type.getName(), type);
     }
 
-    // Build cross-references between Types and Members
+    // Build cross-references between types and members
     for (TypeInfo typeInfo : libraryInfo.getTypeList()) {
       Type type = typesByName.get(typeInfo.getTypeId());
       type.setSuperTypes(
@@ -136,7 +106,7 @@ public class TypeHierarchyGraph {
   }
 
   /** Add inherited members to all types. */
-  private void addInheritedMembers(LinkedHashMultiset<Type> typesInTopologicalOrder) {
+  private static void addInheritedMembers(LinkedHashMultiset<Type> typesInTopologicalOrder) {
     for (Type type : typesInTopologicalOrder.elementSet()) {
       Set<String> declaredMemberNames =
           type.getMembers().stream().map(Member::getName).collect(toSet());
@@ -183,14 +153,14 @@ public class TypeHierarchyGraph {
     return typesInTopologicalOrder.count(type) > typesInTopologicalOrder.count(priorCandidate);
   }
 
-  private void computeOverrideFrontier(List<Type> typesInTopologicalOrder) {
+  private static void computeOverrideFrontier(List<Type> typesInTopologicalOrder) {
     // Build the overrides set by starting from children and check if a member with same name exist
     // on the parent with a different member identifiers.
     // visit children first
     for (Type type : Lists.reverse(typesInTopologicalOrder)) {
       for (Member member : type.getMembers()) {
         // register this type as inheriting the current member.
-        typesInheritingMemberByMember.put(member, type);
+        member.addInheritingType(type);
 
         String memberName = member.getName();
 
@@ -214,7 +184,7 @@ public class TypeHierarchyGraph {
             // in this case A needs to be registered as a type that provides an implementation of
             // I:foo() because A:foo() is inherited by B.
 
-            typesOverridingMemberByMember.put(parentMember, member.getDeclaringType());
+            parentMember.addOverridingType(member.getDeclaringType());
           }
         }
       }
@@ -237,7 +207,7 @@ public class TypeHierarchyGraph {
    * <p>The getCount() member on the returned MultiSet can be used to know the topological number of
    * a type.
    */
-  private LinkedHashMultiset<Type> sortTypesInTopologicalOrder(List<Type> types) {
+  private static LinkedHashMultiset<Type> sortTypesInTopologicalOrder(List<Type> types) {
     LinkedHashMultiset<Type> topologicalSortedSet = LinkedHashMultiset.create();
 
     // Insert all interfaces first so that they have a smaller topological number than any class.
@@ -258,7 +228,7 @@ public class TypeHierarchyGraph {
     return topologicalSortedSet;
   }
 
-  private void insertInTopologicalOrder(Type type, Multiset<Type> topologicalSortedSet) {
+  private static void insertInTopologicalOrder(Type type, Multiset<Type> topologicalSortedSet) {
     if (topologicalSortedSet.contains(type)) {
       return;
     }

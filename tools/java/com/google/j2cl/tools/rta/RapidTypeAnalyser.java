@@ -15,45 +15,44 @@
  */
 package com.google.j2cl.tools.rta;
 
+import static com.google.common.base.Predicates.not;
+import static java.util.stream.Collectors.toSet;
 
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.SetMultimap;
 import com.google.j2cl.libraryinfo.InvocationKind;
 import com.google.j2cl.libraryinfo.LibraryInfo;
-import java.util.HashSet;
+import java.util.Collection;
+import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 final class RapidTypeAnalyser {
-  private final Set<Type> instantiatedTypes = new HashSet<>();
-  private final Set<Type> unusedTypes;
-  private final Set<Member> unusedMembers;
-  private final SetMultimap<Type, Member> virtuallyLiveMemberPerType = HashMultimap.create();
-  private final TypeHierarchyGraph typeHierarchyGraph;
 
-  RapidTypeAnalyser(LibraryInfo libraryInfo) {
-    typeHierarchyGraph = TypeHierarchyGraph.buildFrom(libraryInfo);
-    unusedTypes = new HashSet<>(typeHierarchyGraph.getTypes());
-    unusedMembers =
-        typeHierarchyGraph.getTypes().stream()
-            .flatMap(t -> t.getMembers().stream())
-            .collect(Collectors.toSet());
-  }
+  static RtaResult analyse(LibraryInfo libraryInfo) {
+    List<Type> types = TypeGraphBuilder.build(libraryInfo);
 
-  RtaResult analyse() {
     // Go over the entry points to start the traversal.
-    typeHierarchyGraph.getTypes().stream()
+    types.stream()
         .flatMap(t -> t.getMembers().stream())
         .filter(Member::isJsAccessible)
         .forEach(m -> onMemberReference(m.getDefaultInvocationKind(), m));
 
-    return RtaResult.build(unusedTypes, unusedMembers);
+    return RtaResult.build(getUnusedTypes(types), getUnusedMembers(types));
   }
 
-  private void onMemberReference(InvocationKind invocationKind, Member member) {
+  private static Set<Type> getUnusedTypes(List<Type> types) {
+    return types.stream().filter(not(Type::isLive)).collect(toSet());
+  }
+
+  private static Set<Member> getUnusedMembers(List<Type> types) {
+    return types.stream()
+        .flatMap(t -> t.getMembers().stream())
+        .filter(not(Member::isLive))
+        .collect(toSet());
+  }
+
+  private static void onMemberReference(InvocationKind invocationKind, Member member) {
     switch (invocationKind) {
       case DYNAMIC:
-        unfoldPolymorphicReference(member);
+        traversePolymorphicReference(member);
         break;
       case STATIC:
         markTypeLive(member.getDeclaringType());
@@ -68,60 +67,71 @@ final class RapidTypeAnalyser {
     }
   }
 
-  private void onTypeReference(Type type) {
+  private static void onTypeReference(Type type) {
     markTypeLive(type);
   }
 
-  private void markMemberLive(Member member) {
-    if (!unusedMembers.remove(member)) {
-      // already live
+  private static void markMemberLive(Member member) {
+    if (member.isLive()) {
       return;
     }
 
-    member.getReferencedTypes().forEach(this::onTypeReference);
-    member.getReferencedMembers().forEach(this::onMemberReference);
+    member.markLive();
+
+    member.getReferencedTypes().forEach(RapidTypeAnalyser::onTypeReference);
+    member.getReferencedMembers().forEach(RapidTypeAnalyser::onMemberReference);
   }
 
-  private void unfoldPolymorphicReference(Member member) {
-    // Set of types inheriting this member (includes the enclosing type of the member).
-    Set<Type> inheritingTypes = typeHierarchyGraph.getTypesInheriting(member);
-
-    if (containsLiveTypes(inheritingTypes)) {
-      markMemberLive(member);
-    } else {
-      // none of the possible types for this member is live. Register this member,
-      // so once one of the type become live, the member will be added to the live member
-      // graph.
-      inheritingTypes.forEach(c -> virtuallyLiveMemberPerType.put(c, member));
+  private static void traversePolymorphicReference(Member member) {
+    if (member.isFullyTraversed()) {
+      return;
     }
+    member.markFullyTraversed();
+
+    markMemberPotentiallyLive(member);
 
     // Recursively unfold the overriding chain.
-    for (Type overridingType : typeHierarchyGraph.getTypesOverriding(member)) {
+    for (Type overridingType : member.getOverridingTypes()) {
       Member newTargetMember = overridingType.getMemberByName(member.getName());
-      unfoldPolymorphicReference(newTargetMember);
+      traversePolymorphicReference(newTargetMember);
     }
   }
 
-  private void markTypeLive(Type type) {
-    if (!unusedTypes.remove(type)) {
-      // already live
+  private static void markMemberPotentiallyLive(Member member) {
+    // Set of types inheriting this member
+    List<Type> inheritingTypes = member.getInheritingTypes();
+
+    if (containsInstantiatedTypes(inheritingTypes)) {
+      markMemberLive(member);
+    } else {
+      // None of the types inheriting this polymorphic member is instantiated.
+      // Register this member so that it gets marked live once an inheriting type is instantiated.
+      inheritingTypes.forEach(t -> t.addPotentiallyLiveMember(member));
+    }
+  }
+
+  private static void markTypeLive(Type type) {
+    if (type.isLive()) {
       return;
     }
+
+    type.markLive();
 
     // When a type is marked as live, we need to mark the super types as live too because their are
     // referred to in the class declaration (as supertypes or encoded as implementing interfaces).
-    type.getSuperTypes().forEach(this::markTypeLive);
+    type.getSuperTypes().forEach(RapidTypeAnalyser::markTypeLive);
   }
 
-  private void instantiate(Type type) {
-    if (!instantiatedTypes.add(type)) {
-      // Type is already live
+  private static void instantiate(Type type) {
+    if (type.isInstantiated()) {
       return;
     }
-    virtuallyLiveMemberPerType.get(type).forEach(this::markMemberLive);
+    type.instantiate();
+
+    type.getPotentiallyLiveMembers().forEach(RapidTypeAnalyser::markMemberLive);
   }
 
-  private boolean containsLiveTypes(Set<Type> types) {
-    return types.stream().anyMatch(instantiatedTypes::contains);
+  private static boolean containsInstantiatedTypes(Collection<Type> types) {
+    return types.stream().anyMatch(Type::isInstantiated);
   }
 }

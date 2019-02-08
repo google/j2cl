@@ -68,7 +68,7 @@ public class J2clRta {
   private void run() {
     LibraryInfo libraryInfo = mergeCallGraphFiles();
 
-    RtaResult rtaResult = new RapidTypeAnalyser(libraryInfo).analyse();
+    RtaResult rtaResult = RapidTypeAnalyser.analyse(libraryInfo);
 
     writeToFile(unusedTypesOutputFilePath, rtaResult.getUnusedTypes());
     writeToFile(unusedMembersOutputFilePath, rtaResult.getUnusedMembers());

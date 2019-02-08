@@ -19,6 +19,7 @@ import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.libraryinfo.TypeInfo;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -30,6 +31,9 @@ final class Type {
   private final LinkedHashMap<String, Member> membersByName = new LinkedHashMap<>();
   private String implSourceFile;
   private String headerSourceFile;
+  private boolean live;
+  private boolean instantiated;
+  private final List<Member> potentiallyLiveMembers = new ArrayList<>();
 
   static Type buildFrom(TypeInfo typeInfo) {
     Type type = new Type();
@@ -91,5 +95,30 @@ final class Type {
 
   List<Type> getSuperTypes() {
     return superTypes;
+  }
+
+  void markLive() {
+    this.live = true;
+  }
+
+  boolean isLive() {
+    return live;
+  }
+
+  boolean isInstantiated() {
+    return instantiated;
+  }
+
+  void instantiate() {
+    this.instantiated = true;
+  }
+
+  /** Returns the list of members that need to mark as live when the type becomes live. */
+  List<Member> getPotentiallyLiveMembers() {
+    return potentiallyLiveMembers;
+  }
+
+  void addPotentiallyLiveMember(Member member) {
+    potentiallyLiveMembers.add(member);
   }
 }
