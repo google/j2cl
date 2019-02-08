@@ -89,7 +89,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       sourceBuilder.emitWithMapping(
           // Only map parameters if they are named.
           AstUtils.emptySourcePositionIfNotNamed(parameter.getSourcePosition()),
-          () -> sourceBuilder.append(environment.aliasForVariable(parameter)));
+          () -> sourceBuilder.append(environment.getUniqueNameForVariable(parameter)));
       separator = ", ";
     }
     sourceBuilder.append(") ");
@@ -407,7 +407,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       }
     }
     for (int i = 0; i < method.getParameters().size(); i++) {
-      String parameterName = environment.aliasForVariable(method.getParameters().get(i));
+      String parameterName = environment.getUniqueNameForVariable(method.getParameters().get(i));
       sourceBuilder.appendln(
           " * @param {"
               + closureTypesGenerator.getJsDocForParameter(method, i)

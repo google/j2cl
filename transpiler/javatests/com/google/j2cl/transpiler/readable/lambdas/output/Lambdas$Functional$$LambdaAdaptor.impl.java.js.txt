@@ -15,29 +15,25 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 
 /**
- * @template C_Functional_T
- * @implements {Functional<C_Functional_T>}
+ * @template T
+ * @implements {Functional<T>}
  */
 class $LambdaAdaptor extends j_l_Object {
   /**
-   * @param {?function(Functional<C_Functional_T>):Functional<C_Functional_T>}
-   *     fn
+   * @param {?function(Functional<T>):Functional<T>} fn
    * @public
    */
   constructor(fn) {
     $LambdaAdaptor.$clinit();
     super();
-    /**
-     * @public {?function(Functional<C_Functional_T>):Functional<C_Functional_T>}
-     */
+    /** @public {?function(Functional<T>):Functional<T>} */
     this.f_$$fn__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Functional_$LambdaAdaptor;
     this.$ctor__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Functional_$LambdaAdaptor__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Functional_$JsFunction(
         fn);
   }
 
   /**
-   * @param {?function(Functional<C_Functional_T>):Functional<C_Functional_T>}
-   *     fn
+   * @param {?function(Functional<T>):Functional<T>} fn
    * @return {void}
    * @public
    */
@@ -49,13 +45,12 @@ class $LambdaAdaptor extends j_l_Object {
   }
 
   /**
-   * @param {Functional<C_Functional_T>} arg0
-   * @return {Functional<C_Functional_T>}
+   * @param {Functional<T>} arg0
+   * @return {Functional<T>}
    * @public
    */
   m_wrap__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Functional(arg0) {
-    let /** ?function(Functional<C_Functional_T>):Functional<C_Functional_T> */
-        $function;
+    let /** ?function(Functional<T>):Functional<T> */ $function;
     return (
         $function =
             this.f_$$fn__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Functional_$LambdaAdaptor,

@@ -32,6 +32,8 @@ import java.util.function.Function;
 
 /** Utility class holding type descriptors that need to be referenced directly. */
 public class TypeDescriptors {
+  private static final String OVERLAY_IMPLEMENTATION_CLASS_SUFFIX = "Overlay";
+
   public DeclaredTypeDescriptor javaLangBoolean;
   public DeclaredTypeDescriptor javaLangByte;
   public DeclaredTypeDescriptor javaLangCharacter;
@@ -271,7 +273,7 @@ public class TypeDescriptors {
 
     List<String> classComponents =
         AstUtils.synthesizeInnerClassComponents(
-            unparameterizedTypeDescriptor, AstUtilConstants.OVERLAY_IMPLEMENTATION_CLASS_SUFFIX);
+            unparameterizedTypeDescriptor, OVERLAY_IMPLEMENTATION_CLASS_SUFFIX);
 
     return TypeDeclaration.newBuilder()
         .setEnclosingTypeDeclaration(unparameterizedTypeDescriptor.getTypeDeclaration())

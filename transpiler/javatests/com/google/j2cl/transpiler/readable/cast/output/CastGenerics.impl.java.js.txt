@@ -30,7 +30,7 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
 /**
- * @template C_T, C_E
+ * @template T, E
  */
 class CastGenerics extends j_l_Object {
   /**
@@ -38,13 +38,13 @@ class CastGenerics extends j_l_Object {
    */
   constructor() {
     super();
-    /** @public {C_T} */
+    /** @public {T} */
     this.f_field__com_google_j2cl_transpiler_readable_cast_CastGenerics;
   }
 
   /**
-   * @template C_T, C_E
-   * @return {!CastGenerics<C_T, C_E>}
+   * @template T, E
+   * @return {!CastGenerics<T, E>}
    * @public
    */
   static $create__() {
@@ -63,7 +63,7 @@ class CastGenerics extends j_l_Object {
   }
 
   /**
-   * @return {C_T}
+   * @return {T}
    * @public
    */
   m_method___$pp_com_google_j2cl_transpiler_readable_cast() {
@@ -71,7 +71,7 @@ class CastGenerics extends j_l_Object {
   }
 
   /**
-   * @template M_T, M_U
+   * @template T_1, U
    * @return {void}
    * @public
    */
@@ -110,7 +110,7 @@ class CastGenerics extends j_l_Object {
             B))
         .m_mB__();
     let containerArrT = null;
-    let arrT = /**@type {Array<M_T>} */ ($Arrays.$castTo(
+    let arrT = /**@type {Array<T_1>} */ ($Arrays.$castTo(
         containerArrT.m_get___$pp_com_google_j2cl_transpiler_readable_cast(), A,
         1));
     /**@type {A} */ (arrT[0]).m_mA__();
@@ -122,7 +122,7 @@ class CastGenerics extends j_l_Object {
         containerArrT.m_get___$pp_com_google_j2cl_transpiler_readable_cast(), B,
         1));
     let containerArrU = null;
-    let arrU = /**@type {Array<M_U>} */ ($Arrays.$castTo(
+    let arrU = /**@type {Array<U>} */ ($Arrays.$castTo(
         containerArrU.m_get___$pp_com_google_j2cl_transpiler_readable_cast(), A,
         1));
     /**@type {A} */ (arrU[0]).m_mA__();
@@ -179,54 +179,54 @@ class CastGenerics extends j_l_Object {
    */
   m_testCastToTypeVariable__() {
     let o = Integer.$create__int(1);
-    let e = /**@type {C_E} */ ($Casts.$to(o, Number));
-    let t = /**@type {C_T} */ (o);
-    let es = /**@type {Array<C_E>} */ ($Arrays.$castTo(o, Number, 1));
-    let ts = /**@type {Array<C_T>} */ ($Arrays.$castTo(o, j_l_Object, 1));
+    let e = /**@type {E} */ ($Casts.$to(o, Number));
+    let t = /**@type {T} */ (o);
+    let es = /**@type {Array<E>} */ ($Arrays.$castTo(o, Number, 1));
+    let ts = /**@type {Array<T>} */ ($Arrays.$castTo(o, j_l_Object, 1));
   }
 
   /**
-   * @template M_S, M_V
+   * @template S, V
    * @return {void}
    * @public
    */
   m_testCastToMethodTypeVariable__() {
     let o = Integer.$create__int(1);
-    let s = /**@type {M_S} */ (o);
-    let c = /**@type {CastGenerics<M_S, (Number|number)>} */ (
+    let s = /**@type {S} */ (o);
+    let c = /**@type {CastGenerics<S, (Number|number)>} */ (
         $Casts.$to(o, CastGenerics));
-    c = /**@type {Array<M_S>} */ ($Arrays.$castTo(o, j_l_Object, 1));
-    c = /**@type {M_V} */ ($Casts.$to(o, Enum));
+    c = /**@type {Array<S>} */ ($Arrays.$castTo(o, j_l_Object, 1));
+    c = /**@type {V} */ ($Casts.$to(o, Enum));
   }
 
   /**
-   * @template M_TT
+   * @template TT
    * @return {void}
    * @public
    */
   m_outerGenericMethod__() {}
 
   /**
-   * @template M_EE
+   * @template EE
    * @param {*} o
-   * @return {M_EE}
+   * @return {EE}
    * @public
    */
   m_method__java_lang_Object(o) {
     if (Empty1.$isInstance(o)) {
-      return /**@type {M_EE} */ ($Casts.$to(o, Empty1));
+      return /**@type {EE} */ ($Casts.$to(o, Empty1));
     }
     return null;
   }
 
   /**
-   * @template M_T
-   * @return {Foo<M_T>}
+   * @template T_1
+   * @return {Foo<T_1>}
    * @public
    */
   static m_doSomething__() {
     CastGenerics.$clinit();
-    return /**@type {!$1<M_T>} */ ($1.$create__());
+    return /**@type {!$1<T_1>} */ ($1.$create__());
   }
 
   /**

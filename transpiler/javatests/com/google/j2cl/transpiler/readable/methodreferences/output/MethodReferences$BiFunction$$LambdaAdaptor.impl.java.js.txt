@@ -15,25 +15,25 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 
 /**
- * @template C_BiFunction_T, C_BiFunction_U, C_BiFunction_V
- * @implements {BiFunction<C_BiFunction_T, C_BiFunction_U, C_BiFunction_V>}
+ * @template T, U, V
+ * @implements {BiFunction<T, U, V>}
  */
 class $LambdaAdaptor extends j_l_Object {
   /**
-   * @param {?function(C_BiFunction_T, C_BiFunction_U):C_BiFunction_V} fn
+   * @param {?function(T, U):V} fn
    * @public
    */
   constructor(fn) {
     $LambdaAdaptor.$clinit();
     super();
-    /** @public {?function(C_BiFunction_T, C_BiFunction_U):C_BiFunction_V} */
+    /** @public {?function(T, U):V} */
     this.f_$$fn__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_BiFunction_$LambdaAdaptor;
     this.$ctor__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_BiFunction_$LambdaAdaptor__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_BiFunction_$JsFunction(
         fn);
   }
 
   /**
-   * @param {?function(C_BiFunction_T, C_BiFunction_U):C_BiFunction_V} fn
+   * @param {?function(T, U):V} fn
    * @return {void}
    * @public
    */
@@ -45,14 +45,13 @@ class $LambdaAdaptor extends j_l_Object {
   }
 
   /**
-   * @param {C_BiFunction_T} arg0
-   * @param {C_BiFunction_U} arg1
-   * @return {C_BiFunction_V}
+   * @param {T} arg0
+   * @param {U} arg1
+   * @return {V}
    * @public
    */
   m_apply__java_lang_Object__java_lang_Object(arg0, arg1) {
-    let /** ?function(C_BiFunction_T, C_BiFunction_U):C_BiFunction_V */
-        $function;
+    let /** ?function(T, U):V */ $function;
     return (
         $function =
             this.f_$$fn__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_BiFunction_$LambdaAdaptor,

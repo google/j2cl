@@ -18,8 +18,8 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
 /**
- * @template C_TemplatedSubtype_T
- * @implements {I<C_TemplatedSubtype_T>}
+ * @template T
+ * @implements {I<T>}
  */
 class TemplatedSubtype extends j_l_Object {
   /**
@@ -30,8 +30,8 @@ class TemplatedSubtype extends j_l_Object {
   }
 
   /**
-   * @template C_TemplatedSubtype_T
-   * @return {!TemplatedSubtype<C_TemplatedSubtype_T>}
+   * @template T
+   * @return {!TemplatedSubtype<T>}
    * @public
    */
   static $create__() {
@@ -51,7 +51,7 @@ class TemplatedSubtype extends j_l_Object {
   }
 
   /**
-   * @param {C_TemplatedSubtype_T} t
+   * @param {T} t
    * @param {*} o
    * @return {void}
    * @public
@@ -68,8 +68,7 @@ class TemplatedSubtype extends j_l_Object {
    */
   m(arg0, arg1) {
     this.m_m__java_lang_String__java_lang_Object(
-        /**@type {C_TemplatedSubtype_T} */ ($Casts.$to(arg0, j_l_String)),
-        arg1);
+        /**@type {T} */ ($Casts.$to(arg0, j_l_String)), arg1);
   }
 
   /**

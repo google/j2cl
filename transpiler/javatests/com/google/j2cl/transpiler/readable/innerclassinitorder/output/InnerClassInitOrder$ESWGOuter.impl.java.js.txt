@@ -16,7 +16,7 @@ let ESWGInner = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innercl
 
 
 /**
- * @template C_ESWGOuter_T
+ * @template T
  */
 class ESWGOuter extends j_l_Object {
   /**
@@ -27,8 +27,8 @@ class ESWGOuter extends j_l_Object {
   }
 
   /**
-   * @template C_ESWGOuter_T
-   * @return {!ESWGOuter<C_ESWGOuter_T>}
+   * @template T
+   * @return {!ESWGOuter<T>}
    * @public
    */
   static $create__() {
@@ -48,11 +48,11 @@ class ESWGOuter extends j_l_Object {
   }
 
   /**
-   * @return {ESWGInner<C_ESWGOuter_T>}
+   * @return {ESWGInner<T>}
    * @public
    */
   m_newESWGInner__() {
-    return /**@type {!ESWGInner<C_ESWGOuter_T>} */ (
+    return /**@type {!ESWGInner<T>} */ (
         ESWGInner
             .$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESWGOuter(
                 this));

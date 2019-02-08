@@ -16,8 +16,8 @@ let InnerEntry = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nobrid
 
 
 /**
- * @template C_K
- * @extends {Map<C_K>}
+ * @template K
+ * @extends {Map<K>}
  */
 class TreeMap extends Map {
   /**
@@ -28,8 +28,8 @@ class TreeMap extends Map {
   }
 
   /**
-   * @template C_K
-   * @return {!TreeMap<C_K>}
+   * @template K
+   * @return {!TreeMap<K>}
    * @public
    */
   static $create__() {
@@ -50,12 +50,12 @@ class TreeMap extends Map {
 
   /**
    * @override
-   * @param {C_K} key
-   * @return {InnerEntry<C_K>}
+   * @param {K} key
+   * @return {InnerEntry<K>}
    * @public
    */
   m_getCeilingEntry__java_lang_Object(key) {
-    return /**@type {!InnerEntry<C_K>} */ (InnerEntry.$create__());
+    return /**@type {!InnerEntry<K>} */ (InnerEntry.$create__());
   }
 
   /**

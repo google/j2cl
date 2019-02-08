@@ -19,10 +19,10 @@
 [if (o == null) {
       return (Setable & Getable<T>) o;
     }] => [if ($Equality.$same(o, null)) {
-      return /**@type {Getable<M_T>} */ ($Casts.$to($Casts.$to(o, Getable), Setable));
+      return /**@type {Getable<T>} */ ($Casts.$to($Casts.$to(o, Getable), Setable));
     }] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.cast"
-[return (Setable & Getable<T>) o;] => [return /**@type {Getable<M_T>} */ ($Casts.$to($Casts.$to(o, Getable), Setable));] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.cast"
-[return (Getable<T> & Setable) o;] => [return /**@type {Getable<M_T>} */ ($Casts.$to($Casts.$to(o, Getable), Setable));] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.cast"
+[return (Setable & Getable<T>) o;] => [return /**@type {Getable<T>} */ ($Casts.$to($Casts.$to(o, Getable), Setable));] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.cast"
+[return (Getable<T> & Setable) o;] => [return /**@type {Getable<T>} */ ($Casts.$to($Casts.$to(o, Getable), Setable));] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.cast"
 [cast1] => [m_cast1__java_lang_Object]
 [s] => [s] "s"
 [cast1] => [IntersectionTypeTest.$clinit();] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.cast1"
@@ -30,7 +30,7 @@
 [cast2] => [m_cast2__java_lang_Object]
 [s] => [s] "s"
 [cast2] => [IntersectionTypeTest.$clinit();] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.cast2"
-[return (Getable<Comparable<T>> & Setable) s;] => [return /**@type {Getable<(Comparable<M_T>|boolean|number|string)>} */ ($Casts.$to($Casts.$to(s, Getable), Setable));] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.cast2"
+[return (Getable<Comparable<T>> & Setable) s;] => [return /**@type {Getable<(Comparable<T>|boolean|number|string)>} */ ($Casts.$to($Casts.$to(s, Getable), Setable));] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.cast2"
 [cast3] => [m_cast3__java_lang_Object]
 [s] => [s] "s"
 [return s;] => [return s;] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.cast3"
@@ -62,7 +62,7 @@
 [return t;] => [return t;] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.get"
 [m] => [m_m___$p_com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest]
 [m] => [IntersectionTypeTest.$clinit();] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.m"
-[return (T) get(new Object());] => [return /**@type {M_T} */ ($Casts.$to(IntersectionTypeTest.m_get__java_lang_Object_$p_com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest(j_l_Object.$create__()), A));] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.m"
+[return (T) get(new Object());] => [return /**@type {T} */ ($Casts.$to(IntersectionTypeTest.m_get__java_lang_Object_$p_com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest(j_l_Object.$create__()), A));] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.m"
 [n] => [m_n___$p_com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest]
 [n] => [IntersectionTypeTest.$clinit();] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.n"
 [return null;] => [return null;] "com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.n"

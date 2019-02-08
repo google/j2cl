@@ -16,28 +16,26 @@ let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.la
 
 /**
  * @interface
- * @template C_Functional_T
+ * @template T
  */
 class Functional {
   /**
    * @abstract
-   * @param {Functional<C_Functional_T>} f
-   * @return {Functional<C_Functional_T>}
+   * @param {Functional<T>} f
+   * @return {Functional<T>}
    * @public
    */
   m_wrap__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Functional(f) {}
 
   /**
-   * @template C_Functional_T
-   * @param {?function(Functional<C_Functional_T>):Functional<C_Functional_T>}
-   *     fn
-   * @return {Functional<C_Functional_T>}
+   * @template T
+   * @param {?function(Functional<T>):Functional<T>} fn
+   * @return {Functional<T>}
    * @public
    */
   static $adapt(fn) {
     Functional.$clinit();
-    return /**@type {!$LambdaAdaptor<C_Functional_T>} */ (
-        new $LambdaAdaptor(fn));
+    return /**@type {!$LambdaAdaptor<T>} */ (new $LambdaAdaptor(fn));
   }
 
   /**

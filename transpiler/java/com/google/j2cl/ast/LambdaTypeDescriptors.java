@@ -31,6 +31,8 @@ import java.util.function.Function;
 /** Utility TypeDescriptors methods related to lambda synthesis. */
 // TODO(b/63118697): Simplify this code once TD refactoring makes it easier to implement.
 public class LambdaTypeDescriptors {
+  private static final String FUNCTIONAL_INTERFACE_JSFUNCTION_CLASS_NAME = "JsFunction";
+  private static final String FUNCTIONAL_INTERFACE_ADAPTOR_CLASS_NAME = "LambdaAdaptor";
 
   /** Returns the TypeDescriptor for a LambdaAdaptor class. */
   public static DeclaredTypeDescriptor createLambdaAdaptorTypeDescriptor(
@@ -114,7 +116,7 @@ public class LambdaTypeDescriptors {
     List<String> classComponents =
         AstUtils.synthesizeInnerClassComponents(
             enclosingTypeDescriptor,
-            AstUtilConstants.FUNCTIONAL_INTERFACE_ADAPTOR_CLASS_NAME,
+            FUNCTIONAL_INTERFACE_ADAPTOR_CLASS_NAME,
             uniqueId.orElse(null));
 
     ImmutableList<TypeVariable> typeParameterDescriptors =
@@ -256,7 +258,7 @@ public class LambdaTypeDescriptors {
 
     List<String> classComponents =
         AstUtils.synthesizeInnerClassComponents(
-            functionalTypeDescriptor, AstUtilConstants.FUNCTIONAL_INTERFACE_JSFUNCTION_CLASS_NAME);
+            functionalTypeDescriptor, FUNCTIONAL_INTERFACE_JSFUNCTION_CLASS_NAME);
 
     return TypeDeclaration.newBuilder()
         .setEnclosingTypeDeclaration(functionalTypeDescriptor.getTypeDeclaration())

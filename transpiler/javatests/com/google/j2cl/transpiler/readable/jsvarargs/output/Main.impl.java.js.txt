@@ -100,9 +100,9 @@ class Main extends j_l_Object {
   }
 
   /**
-   * @template M_T
-   * @param {...M_T} elements
-   * @return {M_T}
+   * @template T
+   * @param {...T} elements
+   * @return {T}
    * @public
    */
   static generics(...elements) {
@@ -122,9 +122,9 @@ class Main extends j_l_Object {
   }
 
   /**
-   * @template M_T
-   * @param {...List<M_T>} elements
-   * @return {M_T}
+   * @template T
+   * @param {...List<T>} elements
+   * @return {T}
    * @public
    */
   static parameterizedByT(...elements) {
@@ -249,12 +249,12 @@ class Main extends j_l_Object {
   }
 
   /**
-   * @template M_U
+   * @template U
    * @return {void}
    * @public
    */
   m_testGenericJsFunctionWithVarags__() {
-    let function$1$ = ((/** M_U */ n, .../** ...M_U */ param) => {
+    let function_1 = ((/** U */ n, .../** ...U */ param) => {
       return /**@type {*} */ (param);
     });
   }

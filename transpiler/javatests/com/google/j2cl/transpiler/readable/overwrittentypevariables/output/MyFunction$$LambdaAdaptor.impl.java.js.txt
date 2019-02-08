@@ -15,25 +15,25 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 
 /**
- * @template C_F, C_T
- * @implements {MyFunction<C_F, C_T>}
+ * @template F, T
+ * @implements {MyFunction<F, T>}
  */
 class $LambdaAdaptor extends j_l_Object {
   /**
-   * @param {?function(C_F):C_T} fn
+   * @param {?function(F):T} fn
    * @public
    */
   constructor(fn) {
     $LambdaAdaptor.$clinit();
     super();
-    /** @public {?function(C_F):C_T} */
+    /** @public {?function(F):T} */
     this.f_$$fn__com_google_j2cl_transpiler_readable_overwrittentypevariables_MyFunction_$LambdaAdaptor;
     this.$ctor__com_google_j2cl_transpiler_readable_overwrittentypevariables_MyFunction_$LambdaAdaptor__com_google_j2cl_transpiler_readable_overwrittentypevariables_MyFunction_$JsFunction(
         fn);
   }
 
   /**
-   * @param {?function(C_F):C_T} fn
+   * @param {?function(F):T} fn
    * @return {void}
    * @public
    */
@@ -45,12 +45,12 @@ class $LambdaAdaptor extends j_l_Object {
   }
 
   /**
-   * @param {C_F} arg0
-   * @return {C_T}
+   * @param {F} arg0
+   * @return {T}
    * @public
    */
   m_apply__java_lang_Object(arg0) {
-    let /** ?function(C_F):C_T */ $function;
+    let /** ?function(F):T */ $function;
     return (
         $function =
             this.f_$$fn__com_google_j2cl_transpiler_readable_overwrittentypevariables_MyFunction_$LambdaAdaptor,

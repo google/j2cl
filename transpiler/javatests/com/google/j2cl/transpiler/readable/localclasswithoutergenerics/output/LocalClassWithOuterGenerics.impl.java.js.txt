@@ -17,7 +17,7 @@ let $1Baz = goog.forwardDeclare('com.google.j2cl.transpiler.readable.localclassw
 
 
 /**
- * @template C_A
+ * @template A
  */
 class LocalClassWithOuterGenerics extends j_l_Object {
   /**
@@ -28,8 +28,8 @@ class LocalClassWithOuterGenerics extends j_l_Object {
   }
 
   /**
-   * @template C_A
-   * @return {!LocalClassWithOuterGenerics<C_A>}
+   * @template A
+   * @return {!LocalClassWithOuterGenerics<A>}
    * @public
    */
   static $create__() {
@@ -49,14 +49,14 @@ class LocalClassWithOuterGenerics extends j_l_Object {
   }
 
   /**
-   * @template M_T
+   * @template T
    * @return {void}
    * @public
    */
   static m_foo__() {
     LocalClassWithOuterGenerics.$clinit();
-    let bar = /**@type {!$1Bar<M_T>} */ ($1Bar.$create__());
-    let baz = /**@type {!$1Baz<*, M_T>} */ ($1Baz.$create__());
+    let bar = /**@type {!$1Bar<T>} */ ($1Bar.$create__());
+    let baz = /**@type {!$1Baz<*, T>} */ ($1Baz.$create__());
   }
 
   /**

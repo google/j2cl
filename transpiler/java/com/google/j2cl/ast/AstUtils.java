@@ -1020,7 +1020,8 @@ public class AstUtils {
     checkArgument(
         !method.getDescriptor().isJsPropertyGetter()
             && !method.getDescriptor().isJsPropertySetter(),
-        "JsPropery getter and setters should never be devirtualized " + method);
+        "JsPropery getter and setters should never be devirtualized %s",
+        method.getReadableDescription());
     checkArgument(method.getDescriptor().isPolymorphic());
     checkArgument(!method.getDescriptor().isInit(), "Do not devirtualize init().");
 

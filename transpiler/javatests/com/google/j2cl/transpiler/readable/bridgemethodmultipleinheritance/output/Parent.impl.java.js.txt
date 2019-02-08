@@ -18,8 +18,8 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
 /**
- * @template C_T
- * @extends {SuperParent<C_T, (Number|number)>}
+ * @template T
+ * @extends {SuperParent<T, (Number|number)>}
  */
 class Parent extends SuperParent {
   /**
@@ -30,8 +30,8 @@ class Parent extends SuperParent {
   }
 
   /**
-   * @template C_T
-   * @return {!Parent<C_T>}
+   * @template T
+   * @return {!Parent<T>}
    * @public
    */
   static $create__() {
@@ -51,7 +51,7 @@ class Parent extends SuperParent {
   }
 
   /**
-   * @param {C_T} t
+   * @param {T} t
    * @param {(Number|number)} s
    * @return {void}
    * @public
@@ -59,16 +59,16 @@ class Parent extends SuperParent {
   m_foo__java_lang_Error__java_lang_Number(t, s) {}
 
   /**
-   * @template M_T
-   * @param {M_T} t
+   * @template T_1
+   * @param {T_1} t
    * @return {void}
    * @public
    */
   m_bar__java_lang_Number(t) {}
 
   /**
-   * @template M_T
-   * @param {M_T} t
+   * @template T_1
+   * @param {T_1} t
    * @return {void}
    * @public
    */
@@ -84,7 +84,7 @@ class Parent extends SuperParent {
    */
   m_foo__java_lang_Object__java_lang_Object(arg0, arg1) {
     this.m_foo__java_lang_Error__java_lang_Number(
-        /**@type {C_T} */ ($Casts.$to(arg0, Error)),
+        /**@type {T} */ ($Casts.$to(arg0, Error)),
         /**@type {(Number|number)} */ ($Casts.$to(arg1, Number)));
   }
 

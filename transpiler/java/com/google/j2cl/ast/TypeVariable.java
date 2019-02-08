@@ -17,15 +17,11 @@ package com.google.j2cl.ast;
 
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
-import com.google.common.base.Joiner;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.common.ThreadLocalInterner;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -42,14 +38,9 @@ import javax.annotation.Nullable;
  */
 @AutoValue
 @Visitable
-public abstract class TypeVariable extends TypeDescriptor {
-  public abstract ImmutableList<String> getNameComponents();
+public abstract class TypeVariable extends TypeDescriptor implements HasName {
 
-  public DeclaredTypeDescriptor getEnclosingTypeDescriptor() {
-    return getEnclosingTypeDescriptorSupplier().get();
-  }
-
-  public abstract Supplier<DeclaredTypeDescriptor> getEnclosingTypeDescriptorSupplier();
+  public abstract String getName();
 
   @Memoized
   public TypeDescriptor getBoundTypeDescriptor() {
@@ -58,29 +49,6 @@ public abstract class TypeVariable extends TypeDescriptor {
   }
 
   public abstract Supplier<TypeDescriptor> getBoundTypeDescriptorSupplier();
-
-  public String getJsName() {
-    // Template variable like "C_T".
-
-    // TODO(b/68715725): Clean up naming for type variables so that no special handling is needed
-    // here.
-
-    // skip the top level class component for better output readability.
-    List<String> classComponents = getNameComponents();
-    List<String> nameComponents =
-        new ArrayList<>(classComponents.subList(1, classComponents.size()));
-
-    // move the prefix in the simple name to the class name to avoid collisions between method-
-    // level and class-level type variable and avoid variable name starts with a number.
-    // concat class components to avoid collisions between type variables in inner/outer class.
-    // use '_' instead of '$' because '$' is not allowed in template variable name in closure.
-    String simpleName = getSourceName();
-    nameComponents.set(
-        nameComponents.size() - 1, simpleName.substring(simpleName.indexOf('_') + 1));
-    String prefix = simpleName.substring(0, simpleName.indexOf('_') + 1);
-
-    return prefix + Joiner.on('_').join(nameComponents);
-  }
 
   @Nullable
   abstract String getUniqueKey();
@@ -163,15 +131,11 @@ public abstract class TypeVariable extends TypeDescriptor {
 
   @Override
   public String getReadableDescription() {
-    // TODO(b/114074816): Remove this hack when modeling of type variables is improved and the name
-    // is actually the source name of the variable and does not encode extra information.
-    int lastUnderscore = getSourceName().lastIndexOf("_");
-    return getSourceName().substring(lastUnderscore + 1);
+    return getName();
   }
 
-  @Memoized
   public String getSourceName() {
-    return Iterables.getLast(getNameComponents());
+    return getName();
   }
 
   @Override
@@ -191,29 +155,48 @@ public abstract class TypeVariable extends TypeDescriptor {
     return new AutoValue_TypeVariable.Builder().setWildcardOrCapture(false);
   }
 
+  /** Creates a wildcard type variable with a specific bound. */
+  public static TypeVariable createWildcardWithBound(TypeDescriptor bound) {
+    return TypeVariable.newBuilder()
+        .setWildcardOrCapture(true)
+        .setBoundTypeDescriptorSupplier(() -> bound)
+        // Create an unique key that does not conflict with the keys used for other types nor for
+        // type variables coming from JDT, which follow "<declaring_type>:<name>...".
+        // {@see org.eclipse.jdt.core.BindingKey}.
+        .setUniqueKey("<??>" + bound.getUniqueId())
+        .setName("?")
+        .build();
+  }
+
   /** Builder for a TypeVariableDeclaration. */
   @AutoValue.Builder
   public abstract static class Builder {
-
-    public abstract Builder setEnclosingTypeDescriptorSupplier(
-        Supplier<DeclaredTypeDescriptor> enclosingTypeDescriptorSupplier);
 
     public abstract Builder setBoundTypeDescriptorSupplier(
         Supplier<TypeDescriptor> boundTypeDescriptorFactory);
 
     public abstract Builder setUniqueKey(String uniqueKey);
 
-    public abstract Builder setNameComponents(Iterable<String> name);
+    public abstract Builder setName(String name);
 
     public abstract Builder setWildcardOrCapture(boolean isWildcardOrCapture);
+
+    // Internal builder accessors to compute default values.
+    abstract boolean isWildcardOrCapture();
+
+    abstract Optional<String> getUniqueKey();
+
+    abstract Supplier<TypeDescriptor> getBoundTypeDescriptorSupplier();
+
+    abstract Optional<String> getName();
 
     private static final ThreadLocalInterner<TypeVariable> interner = new ThreadLocalInterner<>();
 
     abstract TypeVariable autoBuild();
 
     public TypeVariable build() {
-      TypeVariable typeDeclaration = autoBuild();
-      return interner.intern(typeDeclaration);
+      TypeVariable typeVariable = autoBuild();
+      return interner.intern(typeVariable);
     }
 
     public static Builder from(TypeVariable typeVariable) {

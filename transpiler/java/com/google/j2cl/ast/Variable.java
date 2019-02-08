@@ -24,7 +24,8 @@ import java.util.Optional;
 
 /** Class for local variable and parameter. */
 @Visitable
-public class Variable extends Node implements Cloneable<Variable>, HasUnusableByJsSuppression {
+public class Variable extends Node
+    implements Cloneable<Variable>, HasUnusableByJsSuppression, HasName {
   private final String name;
   @Visitable TypeDescriptor typeDescriptor;
   private final boolean isFinal;

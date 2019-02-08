@@ -16,26 +16,25 @@ let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nu
 
 /**
  * @interface
- * @template C_NullableTemplatedReturn_T
+ * @template T
  */
 class NullableTemplatedReturn {
   /**
    * @abstract
-   * @return {C_NullableTemplatedReturn_T}
+   * @return {T}
    * @public
    */
   m_foo__() {}
 
   /**
-   * @template C_NullableTemplatedReturn_T
-   * @param {?function():C_NullableTemplatedReturn_T} fn
-   * @return {NullableTemplatedReturn<C_NullableTemplatedReturn_T>}
+   * @template T
+   * @param {?function():T} fn
+   * @return {NullableTemplatedReturn<T>}
    * @public
    */
   static $adapt(fn) {
     NullableTemplatedReturn.$clinit();
-    return /**@type {!$LambdaAdaptor<C_NullableTemplatedReturn_T>} */ (
-        new $LambdaAdaptor(fn));
+    return /**@type {!$LambdaAdaptor<T>} */ (new $LambdaAdaptor(fn));
   }
 
   /**

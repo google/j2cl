@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 Google Inc.
+ * Copyright 2019 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -15,12 +15,8 @@
  */
 package com.google.j2cl.ast;
 
-
-/** Constants supporting manipulation of J2CL AST. */
-public class AstUtilConstants {
-  public static final String OVERLAY_IMPLEMENTATION_CLASS_SUFFIX = "Overlay";
-  public static final String FUNCTIONAL_INTERFACE_ADAPTOR_CLASS_NAME = "LambdaAdaptor";
-  public static final String FUNCTIONAL_INTERFACE_JSFUNCTION_CLASS_NAME = "JsFunction";
-  public static final String TYPE_VARIABLE_IN_METHOD_PREFIX = "M_";
-  public static final String TYPE_VARIABLE_IN_TYPE_PREFIX = "C_";
+/** Implemented by nodes that have names. */
+public interface HasName {
+  /** Returns its name. */
+  String getName();
 }

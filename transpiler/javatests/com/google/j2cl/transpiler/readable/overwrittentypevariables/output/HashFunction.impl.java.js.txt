@@ -17,19 +17,19 @@ let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.ov
 
 /**
  * @interface
- * @template C_T
- * @extends {MyFunction<C_T, ?string>}
+ * @template T
+ * @extends {MyFunction<T, ?string>}
  */
 class HashFunction {
   /**
-   * @template C_T
-   * @param {?function(C_T):?string} fn
-   * @return {HashFunction<C_T>}
+   * @template T
+   * @param {?function(T):?string} fn
+   * @return {HashFunction<T>}
    * @public
    */
   static $adapt(fn) {
     HashFunction.$clinit();
-    return /**@type {!$LambdaAdaptor<C_T>} */ (new $LambdaAdaptor(fn));
+    return /**@type {!$LambdaAdaptor<T>} */ (new $LambdaAdaptor(fn));
   }
 
   /**

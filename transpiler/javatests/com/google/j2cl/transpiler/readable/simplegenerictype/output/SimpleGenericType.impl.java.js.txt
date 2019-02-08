@@ -16,7 +16,7 @@ let Error = goog.forwardDeclare('java.lang.Error$impl');
 
 
 /**
- * @template C_T, C_S
+ * @template T, S
  */
 class SimpleGenericType extends j_l_Object {
   /**
@@ -24,17 +24,17 @@ class SimpleGenericType extends j_l_Object {
    */
   constructor() {
     super();
-    /** @public {C_T} */
+    /** @public {T} */
     this.f_first__com_google_j2cl_transpiler_readable_simplegenerictype_SimpleGenericType;
-    /** @public {C_S} */
+    /** @public {S} */
     this.f_second__com_google_j2cl_transpiler_readable_simplegenerictype_SimpleGenericType;
   }
 
   /**
-   * @template C_T, C_S
-   * @param {C_T} t
-   * @param {C_S} s
-   * @return {!SimpleGenericType<C_T, C_S>}
+   * @template T, S
+   * @param {T} t
+   * @param {S} s
+   * @return {!SimpleGenericType<T, S>}
    * @public
    */
   static $create__java_lang_Object__java_lang_Object(t, s) {
@@ -47,8 +47,8 @@ class SimpleGenericType extends j_l_Object {
   }
 
   /**
-   * @param {C_T} t
-   * @param {C_S} s
+   * @param {T} t
+   * @param {S} s
    * @return {void}
    * @public
    */

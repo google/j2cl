@@ -16,27 +16,26 @@ let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.me
 
 /**
  * @interface
- * @template C_ArrayProducer_T
+ * @template T
  */
 class ArrayProducer {
   /**
    * @abstract
    * @param {number} size
-   * @return {Array<C_ArrayProducer_T>}
+   * @return {Array<T>}
    * @public
    */
   m_produce__int(size) {}
 
   /**
-   * @template C_ArrayProducer_T
-   * @param {?function(number):Array<C_ArrayProducer_T>} fn
-   * @return {ArrayProducer<C_ArrayProducer_T>}
+   * @template T
+   * @param {?function(number):Array<T>} fn
+   * @return {ArrayProducer<T>}
    * @public
    */
   static $adapt(fn) {
     ArrayProducer.$clinit();
-    return /**@type {!$LambdaAdaptor<C_ArrayProducer_T>} */ (
-        new $LambdaAdaptor(fn));
+    return /**@type {!$LambdaAdaptor<T>} */ (new $LambdaAdaptor(fn));
   }
 
   /**

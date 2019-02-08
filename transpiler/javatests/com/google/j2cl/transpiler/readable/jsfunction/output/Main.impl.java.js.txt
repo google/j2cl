@@ -105,8 +105,8 @@ class Main extends j_l_Object {
   m_testJsFunctionsCapturingLocal__() {
     let n = 4;
     Main.m_callFn__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionInterface__int(
-        ((/** number */ number$1$) => {
-          return number$1$ + n;
+        ((/** number */ number_1) => {
+          return number_1 + n;
         }),
         n);
     Main.m_callFn__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionInterface__int(
@@ -114,7 +114,7 @@ class Main extends j_l_Object {
           return a + n;
         }),
         n);
-    ((/** number */ a$1$) => {
+    ((/** number */ a_1) => {
       this.m_instanceMethod___$p_com_google_j2cl_transpiler_readable_jsfunction_Main();
       return 0;
     })(3);
@@ -168,8 +168,8 @@ class Main extends j_l_Object {
       $Arrays.$stampType(numbers, $int, 1);
       let sum = i;
       for (let $array = numbers, $index = 0; $index < $array.length; $index++) {
-        let number$1$ = $array[$index];
-        sum += number$1$;
+        let number_1 = $array[$index];
+        sum += number_1;
       }
       return sum;
     });
@@ -185,8 +185,8 @@ class Main extends j_l_Object {
       $Arrays.$stampType(numbers, $int, 1);
       let sum = i;
       for (let $array = numbers, $index = 0; $index < $array.length; $index++) {
-        let number$1$ = $array[$index];
-        sum += number$1$;
+        let number_1 = $array[$index];
+        sum += number_1;
       }
       return sum;
     });
@@ -198,17 +198,17 @@ class Main extends j_l_Object {
    */
   m_testVarArgsMethodReferenceToJsFuncion__() {
     let c = ((arg0, /** number */ arg1, arg2) => {
-      let arg0$1$ = /**@type {?function(...*):*} */ (
+      let arg0_1 = /**@type {?function(...*):*} */ (
           $Casts.$to(arg0, $JavaScriptFunction));
-      let arg2$1$ = /**@type {Array<?function(...*):*>} */ (
+      let arg2_1 = /**@type {Array<?function(...*):*>} */ (
           $Arrays.$castTo(arg2, $JavaScriptFunction, 1));
-      return arg0$1$(Integer.m_valueOf__int(arg1), arg2$1$);
+      return arg0_1(Integer.m_valueOf__int(arg1), arg2_1);
     });
   }
 
   /**
-   * @template M_T
-   * @param {?function(number, ...M_T):number} x
+   * @template T
+   * @param {?function(number, ...T):number} x
    * @return {void}
    * @public
    */
@@ -216,8 +216,8 @@ class Main extends j_l_Object {
       x) {}
 
   /**
-   * @template M_T
-   * @param {?function(number, ...List<M_T>):number} x
+   * @template T
+   * @param {?function(number, ...List<T>):number} x
    * @return {void}
    * @public
    */
@@ -225,8 +225,8 @@ class Main extends j_l_Object {
       x) {}
 
   /**
-   * @template M_T
-   * @param {...?function(number, ...M_T):number} x
+   * @template T
+   * @param {...?function(number, ...T):number} x
    * @return {void}
    * @public
    */
@@ -235,8 +235,8 @@ class Main extends j_l_Object {
   }
 
   /**
-   * @template M_T
-   * @param {...?function(number, ...List<M_T>):number} x
+   * @template T
+   * @param {...?function(number, ...List<T>):number} x
    * @return {void}
    * @public
    */
@@ -299,7 +299,7 @@ class Main extends j_l_Object {
    */
   m_testFunctionExpressionTypeReplacement___$pp_com_google_j2cl_transpiler_readable_jsfunction() {
     let f = ((unused) => {
-      let unused$1$ = /**@type {?string} */ ($Casts.$to(unused, j_l_String));
+      let unused_1 = /**@type {?string} */ ($Casts.$to(unused, j_l_String));
       let l = /**@type {!ArrayList<List<?>>} */ (ArrayList.$create__());
       l.add(/**@type {!ArrayList<?string>} */ (ArrayList.$create__()));
     });
@@ -317,20 +317,20 @@ class Main extends j_l_Object {
       $function('');
     }
     {
-      let $function$1$ = c.function;
-      $function$1$('');
+      let $function_1 = c.function;
+      $function_1('');
     }
     {
-      let $function$2$ =
+      let $function_2 =
           c.f_function__com_google_j2cl_transpiler_readable_jsfunction_Main_ClassWithJsFunctionProperty;
-      $function$2$('');
+      $function_2('');
     }
     {
-      let $function$3$ =
+      let $function_3 =
           (!$Equality.$same(c, null) ?
                c.f_function__com_google_j2cl_transpiler_readable_jsfunction_Main_ClassWithJsFunctionProperty :
                null);
-      $function$3$('');
+      $function_3('');
     }
   }
 
@@ -361,11 +361,11 @@ class Main extends j_l_Object {
   }
 
   /**
-   * @template M_U, M_V
-   * @param {?function(M_U, M_V):M_U} f
-   * @param {M_U} u
-   * @param {M_V} v
-   * @return {M_U}
+   * @template U, V
+   * @param {?function(U, V):U} f
+   * @param {U} u
+   * @param {V} v
+   * @return {U}
    * @public
    */
   static m_callInterfaceUnparameterized__com_google_j2cl_transpiler_readable_jsfunction_Main_JsBiFunction__java_lang_Object__java_lang_Number(
@@ -484,9 +484,8 @@ class Main extends j_l_Object {
     this.f_jsFunctionFieldWildcard__com_google_j2cl_transpiler_readable_jsfunction_Main =
         ((/** * */ event) => {});
     this.f_jsFunctionFieldParameterized__com_google_j2cl_transpiler_readable_jsfunction_Main =
-        ((event$1$) => {
-          let event$2$ =
-              /**@type {?string} */ ($Casts.$to(event$1$, j_l_String));
+        ((event_1) => {
+          let event_2 = /**@type {?string} */ ($Casts.$to(event_1, j_l_String));
         });
   }
 

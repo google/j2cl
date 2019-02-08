@@ -16,27 +16,26 @@ let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.me
 
 /**
  * @interface
- * @template C_Predicate_T
+ * @template T
  */
 class Predicate {
   /**
    * @abstract
-   * @param {C_Predicate_T} parameter
+   * @param {T} parameter
    * @return {boolean}
    * @public
    */
   m_apply__java_lang_Object(parameter) {}
 
   /**
-   * @template C_Predicate_T
-   * @param {?function(C_Predicate_T):boolean} fn
-   * @return {Predicate<C_Predicate_T>}
+   * @template T
+   * @param {?function(T):boolean} fn
+   * @return {Predicate<T>}
    * @public
    */
   static $adapt(fn) {
     Predicate.$clinit();
-    return /**@type {!$LambdaAdaptor<C_Predicate_T>} */ (
-        new $LambdaAdaptor(fn));
+    return /**@type {!$LambdaAdaptor<T>} */ (new $LambdaAdaptor(fn));
   }
 
   /**

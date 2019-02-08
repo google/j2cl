@@ -16,26 +16,26 @@ let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.br
 
 /**
  * @interface
- * @template C_J_T
+ * @template T
  */
 class J {
   /**
    * @abstract
-   * @param {C_J_T} t
+   * @param {T} t
    * @return {void}
    * @public
    */
   m_bar__java_lang_Object(t) {}
 
   /**
-   * @template C_J_T
-   * @param {?function(C_J_T):void} fn
-   * @return {J<C_J_T>}
+   * @template T
+   * @param {?function(T):void} fn
+   * @return {J<T>}
    * @public
    */
   static $adapt(fn) {
     J.$clinit();
-    return /**@type {!$LambdaAdaptor<C_J_T>} */ (new $LambdaAdaptor(fn));
+    return /**@type {!$LambdaAdaptor<T>} */ (new $LambdaAdaptor(fn));
   }
 
   /**

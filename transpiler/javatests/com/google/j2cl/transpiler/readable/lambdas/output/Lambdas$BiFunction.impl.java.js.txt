@@ -17,56 +17,54 @@ let Lambdas_Function = goog.forwardDeclare('com.google.j2cl.transpiler.readable.
 
 /**
  * @interface
- * @template C_BiFunction_T, C_BiFunction_U, C_BiFunction_R
+ * @template T, U, R
  */
 class BiFunction {
   /**
    * @abstract
-   * @param {C_BiFunction_T} t
-   * @param {C_BiFunction_U} u
-   * @return {C_BiFunction_R}
+   * @param {T} t
+   * @param {U} u
+   * @return {R}
    * @public
    */
   m_apply__java_lang_Object__java_lang_Object(t, u) {}
 
   /**
    * @abstract
-   * @template M_BiFunction_andThen_V
+   * @template V
    * @param {Lambdas_Function<?, ?>} after
-   * @return {BiFunction<C_BiFunction_T, C_BiFunction_U,
-   *     M_BiFunction_andThen_V>}
+   * @return {BiFunction<T, U, V>}
    * @public
    */
   m_andThen__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Function(
       after) {}
 
   /**
-   * @template C_BiFunction_T, C_BiFunction_U, C_BiFunction_R
-   * @param {?function(C_BiFunction_T, C_BiFunction_U):C_BiFunction_R} fn
-   * @return {BiFunction<C_BiFunction_T, C_BiFunction_U, C_BiFunction_R>}
+   * @template T, U, R
+   * @param {?function(T, U):R} fn
+   * @return {BiFunction<T, U, R>}
    * @public
    */
   static $adapt(fn) {
     BiFunction.$clinit();
-    return /**@type {!$LambdaAdaptor<C_BiFunction_T, C_BiFunction_U, C_BiFunction_R>} */ (new $LambdaAdaptor(fn));
+    return /**@type {!$LambdaAdaptor<T, U, R>} */ (new $LambdaAdaptor(fn));
   }
 
   /**
-   * @template M_BiFunction_andThen_V, C_BiFunction_T, C_BiFunction_U,
-   *     C_BiFunction_R
-   * @param {BiFunction<C_BiFunction_T, C_BiFunction_U, C_BiFunction_R>}
-   *     $thisArg
+   * @template V, T, U, R
+   * @param {BiFunction<T, U, R>} $thisArg
    * @param {Lambdas_Function<?, ?>} after
-   * @return {BiFunction<C_BiFunction_T, C_BiFunction_U,
-   *     M_BiFunction_andThen_V>}
+   * @return {BiFunction<T, U, V>}
    * @public
    */
   static m_andThen__$default__com_google_j2cl_transpiler_readable_lambdas_Lambdas_BiFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Function(
       $thisArg, after) {
     BiFunction.$clinit();
-    return /**@type {BiFunction<C_BiFunction_T, C_BiFunction_U, M_BiFunction_andThen_V>} */ (BiFunction.$adapt(((/** C_BiFunction_T */ t, /** C_BiFunction_U */ u) =>{
-      return after.m_apply__java_lang_Object($thisArg.m_apply__java_lang_Object__java_lang_Object(t, u));
-    })));
+    return /**@type {BiFunction<T, U, V>} */ (
+        BiFunction.$adapt(((/** T */ t, /** U */ u) => {
+          return after.m_apply__java_lang_Object(
+              $thisArg.m_apply__java_lang_Object__java_lang_Object(t, u));
+        })));
   }
 
   /**

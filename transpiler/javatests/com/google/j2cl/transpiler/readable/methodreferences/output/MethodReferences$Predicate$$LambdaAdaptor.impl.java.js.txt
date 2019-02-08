@@ -15,25 +15,25 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 
 /**
- * @template C_Predicate_T
- * @implements {Predicate<C_Predicate_T>}
+ * @template T
+ * @implements {Predicate<T>}
  */
 class $LambdaAdaptor extends j_l_Object {
   /**
-   * @param {?function(C_Predicate_T):boolean} fn
+   * @param {?function(T):boolean} fn
    * @public
    */
   constructor(fn) {
     $LambdaAdaptor.$clinit();
     super();
-    /** @public {?function(C_Predicate_T):boolean} */
+    /** @public {?function(T):boolean} */
     this.f_$$fn__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Predicate_$LambdaAdaptor;
     this.$ctor__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Predicate_$LambdaAdaptor__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Predicate_$JsFunction(
         fn);
   }
 
   /**
-   * @param {?function(C_Predicate_T):boolean} fn
+   * @param {?function(T):boolean} fn
    * @return {void}
    * @public
    */
@@ -45,12 +45,12 @@ class $LambdaAdaptor extends j_l_Object {
   }
 
   /**
-   * @param {C_Predicate_T} arg0
+   * @param {T} arg0
    * @return {boolean}
    * @public
    */
   m_apply__java_lang_Object(arg0) {
-    let /** ?function(C_Predicate_T):boolean */ $function;
+    let /** ?function(T):boolean */ $function;
     return (
         $function =
             this.f_$$fn__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Predicate_$LambdaAdaptor,

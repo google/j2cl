@@ -19,8 +19,8 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 
 import com.google.j2cl.ast.DeclaredTypeDescriptor;
+import com.google.j2cl.ast.HasName;
 import com.google.j2cl.ast.TypeDeclaration;
-import com.google.j2cl.ast.Variable;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,20 +33,21 @@ public class GenerationEnvironment {
    */
   private Map<String, String> aliasByTypeBinaryName = new HashMap<>();
 
-  private final Map<Variable, String> aliasByVariable;
+  private final Map<HasName, String> uniqueNameByVariable;
 
-  public GenerationEnvironment(Collection<Import> imports, Map<Variable, String> aliasByVariable) {
+  public GenerationEnvironment(
+      Collection<Import> imports, Map<HasName, String> uniqueNameByVariable) {
     for (Import anImport : imports) {
       String alias = anImport.getAlias();
       checkArgument(alias != null && !alias.isEmpty(), "Bad alias for %s", anImport.getElement());
       aliasByTypeBinaryName.put(anImport.getElement().getQualifiedBinaryName(), alias);
     }
-    this.aliasByVariable = aliasByVariable;
+    this.uniqueNameByVariable = uniqueNameByVariable;
   }
 
-  public String aliasForVariable(Variable variable) {
-    if (aliasByVariable.containsKey(variable)) {
-      return aliasByVariable.get(variable);
+  public String getUniqueNameForVariable(HasName variable) {
+    if (uniqueNameByVariable.containsKey(variable)) {
+      return uniqueNameByVariable.get(variable);
     }
     return variable.getName();
   }

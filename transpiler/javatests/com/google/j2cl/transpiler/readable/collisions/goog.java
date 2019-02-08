@@ -50,26 +50,24 @@ class bar {
 
 class Other<T> {
   {
-    int C_T = 3;
+    int T = 3;
     Other<T> o = (Other<T>) null;
   }
 
   <T> T m() {
-    // TODO(b/112669572) : JsCompiler complains about the type of the local variable because
-    // it confuses it with the method template (which is named M_T in the js code).
-    int M_T = 5;
+    int T = 5;
     Other<T> o = (Other<T>) null;
     return null;
   }
 }
 
-class C_T<T extends Number> {
+class T<T extends Number> {
   T m() {
     return null;
   }
 
   T n() {
-    T t = new C_T<T>().m();
+    T t = new com.google.j2cl.transpiler.readable.collisions.T<T>().m();
     t.byteValue();
     return t;
   }

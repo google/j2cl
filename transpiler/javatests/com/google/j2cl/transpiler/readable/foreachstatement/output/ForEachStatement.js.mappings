@@ -24,14 +24,14 @@
 [for (Throwable t : new Throwable[10]) {
       t.toString();
     }] => [for (let $array = /**@type {!Array<Throwable>} */ ($Arrays.$create([10], Throwable)), $index = 0; $index < $array.length; $index++) {
-      let t$1$ = $array[$index];
-      t$1$.toString();
+      let t_1 = $array[$index];
+      t_1.toString();
     }] "com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement.test"
 [for (Throwable t : new Throwable[10]) {
       t.toString();
-    }] => [let t$1$ = $array[$index];] "com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement.test"
-[t] => [t$1$] "t"
-[t.toString();] => [t$1$.toString();] "com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement.test"
+    }] => [let t_1 = $array[$index];] "com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement.test"
+[t] => [t_1] "t"
+[t.toString();] => [t_1.toString();] "com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement.test"
 [ForEachStatement] => [$clinit]
 [ForEachStatement] => [ForEachStatement.$clinit = (() =>{
     });] "com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement.<clinit>"

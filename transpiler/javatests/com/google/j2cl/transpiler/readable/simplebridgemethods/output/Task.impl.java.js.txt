@@ -15,8 +15,8 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 
 /**
- * @template C_T
- * @implements {Callable<C_T>}
+ * @template T
+ * @implements {Callable<T>}
  */
 class Task extends j_l_Object {
   /**
@@ -27,8 +27,8 @@ class Task extends j_l_Object {
   }
 
   /**
-   * @template C_T
-   * @return {!Task<C_T>}
+   * @template T
+   * @return {!Task<T>}
    * @public
    */
   static $create__() {
@@ -49,7 +49,7 @@ class Task extends j_l_Object {
 
   /**
    * @override
-   * @param {C_T} t
+   * @param {T} t
    * @return {void}
    * @public
    */

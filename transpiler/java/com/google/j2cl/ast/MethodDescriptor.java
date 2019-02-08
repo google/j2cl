@@ -730,7 +730,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
                   == methodDescriptor.getParameterTypeDescriptors().size(),
               "Method parameters (%s) for method %s don't match method declaration (%s)",
               methodDescriptor.getParameterTypeDescriptors(),
-              methodDescriptor.getEnclosingTypeDescriptor().getSimpleSourceName()
+              methodDescriptor.getEnclosingTypeDescriptor().getReadableDescription()
                   + "."
                   + methodDescriptor.getName(),
               methodDeclarationParameterTypeDescriptors);

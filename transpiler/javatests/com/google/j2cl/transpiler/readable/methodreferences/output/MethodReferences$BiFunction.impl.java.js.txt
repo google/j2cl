@@ -16,27 +16,27 @@ let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.me
 
 /**
  * @interface
- * @template C_BiFunction_T, C_BiFunction_U, C_BiFunction_V
+ * @template T, U, V
  */
 class BiFunction {
   /**
    * @abstract
-   * @param {C_BiFunction_T} t
-   * @param {C_BiFunction_U} u
-   * @return {C_BiFunction_V}
+   * @param {T} t
+   * @param {U} u
+   * @return {V}
    * @public
    */
   m_apply__java_lang_Object__java_lang_Object(t, u) {}
 
   /**
-   * @template C_BiFunction_T, C_BiFunction_U, C_BiFunction_V
-   * @param {?function(C_BiFunction_T, C_BiFunction_U):C_BiFunction_V} fn
-   * @return {BiFunction<C_BiFunction_T, C_BiFunction_U, C_BiFunction_V>}
+   * @template T, U, V
+   * @param {?function(T, U):V} fn
+   * @return {BiFunction<T, U, V>}
    * @public
    */
   static $adapt(fn) {
     BiFunction.$clinit();
-    return /**@type {!$LambdaAdaptor<C_BiFunction_T, C_BiFunction_U, C_BiFunction_V>} */ (new $LambdaAdaptor(fn));
+    return /**@type {!$LambdaAdaptor<T, U, V>} */ (new $LambdaAdaptor(fn));
   }
 
   /**

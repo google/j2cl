@@ -18,7 +18,12 @@ package com.google.j2cl.transpiler.readable.nestedgenericclass;
 public class NestedGenericClass<T> {
   // nested generic classes with shadowing type parameters.
   public class A<T> {
-    public class B<T> {}
+    public class B<T> {
+      B() {}
+
+      // constructor with a type variable
+      <U> B(U u) {}
+    }
   }
 
   // nested non-generic classes that refers to the type parameters declared in outer class.

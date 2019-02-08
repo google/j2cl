@@ -15,25 +15,25 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 
 /**
- * @template C_T, C_S
- * @implements {I<C_T, C_S>}
+ * @template T, S
+ * @implements {I<T, S>}
  */
 class $LambdaAdaptor extends j_l_Object {
   /**
-   * @param {?function(C_S):C_T} fn
+   * @param {?function(S):T} fn
    * @public
    */
   constructor(fn) {
     $LambdaAdaptor.$clinit();
     super();
-    /** @public {?function(C_S):C_T} */
+    /** @public {?function(S):T} */
     this.f_$$fn__com_google_j2cl_transpiler_readable_bridgemethodsreturn_I_$LambdaAdaptor;
     this.$ctor__com_google_j2cl_transpiler_readable_bridgemethodsreturn_I_$LambdaAdaptor__com_google_j2cl_transpiler_readable_bridgemethodsreturn_I_$JsFunction(
         fn);
   }
 
   /**
-   * @param {?function(C_S):C_T} fn
+   * @param {?function(S):T} fn
    * @return {void}
    * @public
    */
@@ -45,12 +45,12 @@ class $LambdaAdaptor extends j_l_Object {
   }
 
   /**
-   * @param {C_S} arg0
-   * @return {C_T}
+   * @param {S} arg0
+   * @return {T}
    * @public
    */
   m_fun__java_lang_Object(arg0) {
-    let /** ?function(C_S):C_T */ $function;
+    let /** ?function(S):T */ $function;
     return (
         $function =
             this.f_$$fn__com_google_j2cl_transpiler_readable_bridgemethodsreturn_I_$LambdaAdaptor,

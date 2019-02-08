@@ -15,25 +15,25 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 
 /**
- * @template C_T
- * @implements {HashFunction<C_T>}
+ * @template T
+ * @implements {HashFunction<T>}
  */
 class $LambdaAdaptor extends j_l_Object {
   /**
-   * @param {?function(C_T):?string} fn
+   * @param {?function(T):?string} fn
    * @public
    */
   constructor(fn) {
     $LambdaAdaptor.$clinit();
     super();
-    /** @public {?function(C_T):?string} */
+    /** @public {?function(T):?string} */
     this.f_$$fn__com_google_j2cl_transpiler_readable_overwrittentypevariables_HashFunction_$LambdaAdaptor;
     this.$ctor__com_google_j2cl_transpiler_readable_overwrittentypevariables_HashFunction_$LambdaAdaptor__com_google_j2cl_transpiler_readable_overwrittentypevariables_HashFunction_$JsFunction(
         fn);
   }
 
   /**
-   * @param {?function(C_T):?string} fn
+   * @param {?function(T):?string} fn
    * @return {void}
    * @public
    */
@@ -45,12 +45,12 @@ class $LambdaAdaptor extends j_l_Object {
   }
 
   /**
-   * @param {C_T} arg0
+   * @param {T} arg0
    * @return {?string}
    * @public
    */
   m_apply__java_lang_Object(arg0) {
-    let /** ?function(C_T):?string */ $function;
+    let /** ?function(T):?string */ $function;
     return (
         $function =
             this.f_$$fn__com_google_j2cl_transpiler_readable_overwrittentypevariables_HashFunction_$LambdaAdaptor,

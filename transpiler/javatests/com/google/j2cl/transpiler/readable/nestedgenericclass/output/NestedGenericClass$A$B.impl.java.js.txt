@@ -16,7 +16,7 @@ let A = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nestedgenericcl
 
 
 /**
- * @template C_A_B_T, C_A_T, C_T
+ * @template T, T_1, T_2
  */
 class B extends j_l_Object {
   /**
@@ -24,14 +24,15 @@ class B extends j_l_Object {
    */
   constructor() {
     super();
-    /** @public {A<C_A_T, C_T>} */
+    /** @public {A<T_1, T_2>} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass_A_B;
   }
 
   /**
-   * @template C_A_B_T, C_A_T, C_T
-   * @param {A<C_A_T, C_T>} $outer_this
-   * @return {!B<C_A_B_T, C_A_T, C_T>}
+   * Factory method corresponding to constructor 'B(A)'.
+   * @template T, T_1, T_2
+   * @param {A<T_1, T_2>} $outer_this
+   * @return {!B<T, T_1, T_2>}
    * @public
    */
   static $create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass_A(
@@ -45,12 +46,46 @@ class B extends j_l_Object {
   }
 
   /**
-   * @param {A<C_A_T, C_T>} $outer_this
+   * Initialization from constructor 'B(A)'.
+   * @param {A<T_1, T_2>} $outer_this
    * @return {void}
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass_A_B__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass_A(
       $outer_this) {
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass_A_B =
+        $outer_this;
+    this.$ctor__java_lang_Object__();
+  }
+
+  /**
+   * Factory method corresponding to constructor 'B(A, Object)'.
+   * @template T, T_1, T_2, U
+   * @param {A<T_1, T_2>} $outer_this
+   * @param {U} u
+   * @return {!B<T, T_1, T_2>}
+   * @public
+   */
+  static $create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass_A__java_lang_Object(
+      $outer_this, u) {
+    B.$clinit();
+    let $instance = new B();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass_A_B__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass_A__java_lang_Object(
+            $outer_this, u);
+    return $instance;
+  }
+
+  /**
+   * Initialization from constructor 'B(A, Object)'.
+   * @template U
+   * @param {A<T_1, T_2>} $outer_this
+   * @param {U} u
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass_A_B__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass_A__java_lang_Object(
+      $outer_this, u) {
     this.f_$outer_this__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass_A_B =
         $outer_this;
     this.$ctor__java_lang_Object__();

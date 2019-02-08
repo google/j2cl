@@ -28,7 +28,6 @@ import com.google.j2cl.ast.TypeVariable;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -75,7 +74,8 @@ public class NormalizeFunctionExpressions extends NormalizationPass {
         // Create a new parameter variable of the type "? extends DeclaredType", this takes
         // care of having the right parameter type without the problem of introducing type
         // variables that are not in the current context. (this is a hack).
-        TypeVariable targetType = createWildcardTypeVariable(declaredParameterTypeDescriptor);
+        TypeVariable targetType =
+            TypeVariable.createWildcardWithBound(declaredParameterTypeDescriptor);
 
         Variable newParameter =
             Variable.Builder.from(parameter).setTypeDescriptor(targetType).build();
@@ -103,17 +103,6 @@ public class NormalizeFunctionExpressions extends NormalizationPass {
                 .addAll(prologue)
                 .addAll(functionExpression.getBody().getStatements())
                 .build())
-        .build();
-  }
-
-  /** Synthesizes a wildcard type variable with a specific bound. */
-  private static TypeVariable createWildcardTypeVariable(TypeDescriptor bound) {
-    return TypeVariable.newBuilder()
-        .setWildcardOrCapture(true)
-        .setBoundTypeDescriptorSupplier(() -> bound)
-        .setNameComponents(Arrays.asList("?"))
-        .setUniqueKey("<??>" + bound.getUniqueId())
-        .setEnclosingTypeDescriptorSupplier(() -> null)
         .build();
   }
 

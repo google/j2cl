@@ -18,9 +18,9 @@ package com.google.j2cl.generator;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
+import com.google.j2cl.ast.HasName;
 import com.google.j2cl.ast.Member;
 import com.google.j2cl.ast.Type;
-import com.google.j2cl.ast.Variable;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.generator.ImportGatherer.ImportCategory;
@@ -48,9 +48,9 @@ public abstract class JavaScriptGenerator {
     this.type = type;
     importsByCategory = ImportGatherer.gatherImports(type, declareLegacyNamespace);
     Collection<Import> imports = importsByCategory.values();
-    Map<Variable, String> aliasByVariable =
-        VariableAliasesGatherer.gatherVariableAliases(imports, type);
-    environment = new GenerationEnvironment(imports, aliasByVariable);
+    Map<HasName, String> uniqueNameByVariable =
+        UniqueVariableNamesGatherer.computeUniqueVariableNames(imports, type);
+    environment = new GenerationEnvironment(imports, uniqueNameByVariable);
   }
 
   public Map<SourcePosition, SourcePosition> getSourceMappings() {

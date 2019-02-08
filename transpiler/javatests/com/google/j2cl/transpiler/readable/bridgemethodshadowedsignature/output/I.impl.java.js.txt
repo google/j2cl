@@ -17,7 +17,7 @@ let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
 
 /**
  * @interface
- * @template C_I1
+ * @template I1
  */
 class I {
   /**
@@ -29,14 +29,14 @@ class I {
   m_get__java_util_function_Consumer(consumer) {}
 
   /**
-   * @template C_I1
+   * @template I1
    * @param {?function(Consumer<?>):?string} fn
-   * @return {I<C_I1>}
+   * @return {I<I1>}
    * @public
    */
   static $adapt(fn) {
     I.$clinit();
-    return /**@type {!$LambdaAdaptor<C_I1>} */ (new $LambdaAdaptor(fn));
+    return /**@type {!$LambdaAdaptor<I1>} */ (new $LambdaAdaptor(fn));
   }
 
   /**

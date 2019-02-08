@@ -20,22 +20,21 @@ let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.js
 class ApiWithMethodReturningParametricJsFunction {
   /**
    * @abstract
-   * @template M_ApiWithMethodReturningParametricJsFunction_anApi_T
-   * @return {?function(M_ApiWithMethodReturningParametricJsFunction_anApi_T):void}
+   * @template T
+   * @return {?function(T):void}
    * @public
    */
   m_anApi__() {}
 
   /**
-   * @template M_ApiWithMethodReturningParametricJsFunction_anApi_T
-   * @param {?function():?function(M_ApiWithMethodReturningParametricJsFunction_anApi_T):void}
-   *     fn
+   * @template T
+   * @param {?function():?function(T):void} fn
    * @return {ApiWithMethodReturningParametricJsFunction}
    * @public
    */
   static $adapt(fn) {
     ApiWithMethodReturningParametricJsFunction.$clinit();
-    return /**@type {!$LambdaAdaptor<M_ApiWithMethodReturningParametricJsFunction_anApi_T>} */ (new $LambdaAdaptor(fn));
+    return /**@type {!$LambdaAdaptor<T>} */ (new $LambdaAdaptor(fn));
   }
 
   /**

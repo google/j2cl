@@ -17,8 +17,8 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
 /**
- * @template C_K, C_V
- * @extends {AbstractMap<C_K, C_V>}
+ * @template K, V
+ * @extends {AbstractMap<K, V>}
  */
 class EnumMap extends AbstractMap {
   /**
@@ -29,8 +29,8 @@ class EnumMap extends AbstractMap {
   }
 
   /**
-   * @template C_K, C_V
-   * @return {!EnumMap<C_K, C_V>}
+   * @template K, V
+   * @return {!EnumMap<K, V>}
    * @public
    */
   static $create__() {
@@ -50,9 +50,9 @@ class EnumMap extends AbstractMap {
   }
 
   /**
-   * @param {C_K} key
-   * @param {C_V} value
-   * @return {C_V}
+   * @param {K} key
+   * @param {V} value
+   * @return {V}
    * @public
    */
   m_put__java_lang_Enum__java_lang_Object(key, value) {
@@ -64,12 +64,12 @@ class EnumMap extends AbstractMap {
    * @override
    * @param {*} arg0
    * @param {*} arg1
-   * @return {C_V}
+   * @return {V}
    * @public
    */
   m_put__java_lang_Object__java_lang_Object(arg0, arg1) {
     return this.m_put__java_lang_Enum__java_lang_Object(
-        /**@type {C_K} */ ($Casts.$to(arg0, Enum)), arg1);
+        /**@type {K} */ ($Casts.$to(arg0, Enum)), arg1);
   }
 
   /**

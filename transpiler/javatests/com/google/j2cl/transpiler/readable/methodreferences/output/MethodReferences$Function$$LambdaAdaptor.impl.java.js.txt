@@ -15,25 +15,25 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 
 /**
- * @template C_Function_T, C_Function_U
- * @implements {MethodReferences_Function<C_Function_T, C_Function_U>}
+ * @template T, U
+ * @implements {MethodReferences_Function<T, U>}
  */
 class $LambdaAdaptor extends j_l_Object {
   /**
-   * @param {?function(C_Function_T):C_Function_U} fn
+   * @param {?function(T):U} fn
    * @public
    */
   constructor(fn) {
     $LambdaAdaptor.$clinit();
     super();
-    /** @public {?function(C_Function_T):C_Function_U} */
+    /** @public {?function(T):U} */
     this.f_$$fn__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Function_$LambdaAdaptor;
     this.$ctor__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Function_$LambdaAdaptor__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Function_$JsFunction(
         fn);
   }
 
   /**
-   * @param {?function(C_Function_T):C_Function_U} fn
+   * @param {?function(T):U} fn
    * @return {void}
    * @public
    */
@@ -45,12 +45,12 @@ class $LambdaAdaptor extends j_l_Object {
   }
 
   /**
-   * @param {C_Function_T} arg0
-   * @return {C_Function_U}
+   * @param {T} arg0
+   * @return {U}
    * @public
    */
   m_apply__java_lang_Object(arg0) {
-    let /** ?function(C_Function_T):C_Function_U */ $function;
+    let /** ?function(T):U */ $function;
     return (
         $function =
             this.f_$$fn__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Function_$LambdaAdaptor,

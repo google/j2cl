@@ -255,7 +255,7 @@ public class StatementTranspiler {
               for (CatchClause catchClause : tryStatement.getCatchClauses()) {
                 builder.append(
                     " catch ("
-                        + environment.aliasForVariable(catchClause.getExceptionVariable())
+                        + environment.getUniqueNameForVariable(catchClause.getExceptionVariable())
                         + ") ");
                 render(catchClause.getBody());
               }

@@ -27,7 +27,7 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
 /**
- * @template C_U
+ * @template U
  */
 class IntersectionTypeTest extends j_l_Object {
   /**
@@ -38,8 +38,8 @@ class IntersectionTypeTest extends j_l_Object {
   }
 
   /**
-   * @template C_U
-   * @return {!IntersectionTypeTest<C_U>}
+   * @template U
+   * @return {!IntersectionTypeTest<U>}
    * @public
    */
   static $create__() {
@@ -59,8 +59,8 @@ class IntersectionTypeTest extends j_l_Object {
   }
 
   /**
-   * @template M_T
-   * @param {M_T} object
+   * @template T
+   * @param {T} object
    * @return {void}
    * @public
    */
@@ -72,23 +72,23 @@ class IntersectionTypeTest extends j_l_Object {
   }
 
   /**
-   * @template M_T
+   * @template T
    * @param {*} o
-   * @return {Getable<M_T>}
+   * @return {Getable<T>}
    * @public
    */
   static m_cast__java_lang_Object(o) {
     IntersectionTypeTest.$clinit();
     if ($Equality.$same(o, null)) {
-      return /**@type {Getable<M_T>} */ (
+      return /**@type {Getable<T>} */ (
           $Casts.$to($Casts.$to(o, Getable), Setable));
     }
-    return /**@type {Getable<M_T>} */ (
+    return /**@type {Getable<T>} */ (
         $Casts.$to($Casts.$to(o, Getable), Setable));
   }
 
   /**
-   * @template M_T
+   * @template T
    * @param {*} s
    * @return {Getable<(Comparable<?string>|boolean|number|string)>}
    * @public
@@ -100,14 +100,14 @@ class IntersectionTypeTest extends j_l_Object {
   }
 
   /**
-   * @template M_T
+   * @template T
    * @param {*} s
-   * @return {Getable<(Comparable<M_T>|boolean|number|string)>}
+   * @return {Getable<(Comparable<T>|boolean|number|string)>}
    * @public
    */
   static m_cast2__java_lang_Object(s) {
     IntersectionTypeTest.$clinit();
-    return /**@type {Getable<(Comparable<M_T>|boolean|number|string)>} */ (
+    return /**@type {Getable<(Comparable<T>|boolean|number|string)>} */ (
         $Casts.$to($Casts.$to(s, Getable), Setable));
   }
 
@@ -158,9 +158,9 @@ class IntersectionTypeTest extends j_l_Object {
   }
 
   /**
-   * @template M_T
-   * @param {M_T} t
-   * @return {M_T}
+   * @template T
+   * @param {T} t
+   * @return {T}
    * @public
    */
   static m_get__java_lang_Object_$p_com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest(
@@ -170,13 +170,13 @@ class IntersectionTypeTest extends j_l_Object {
   }
 
   /**
-   * @template M_T
-   * @return {M_T}
+   * @template T
+   * @return {T}
    * @public
    */
   static m_m___$p_com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest() {
     IntersectionTypeTest.$clinit();
-    return /**@type {M_T} */ ($Casts.$to(
+    return /**@type {T} */ ($Casts.$to(
         IntersectionTypeTest
             .m_get__java_lang_Object_$p_com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest(
                 j_l_Object.$create__()),
@@ -184,8 +184,8 @@ class IntersectionTypeTest extends j_l_Object {
   }
 
   /**
-   * @template M_T
-   * @return {Getable<M_T>}
+   * @template T
+   * @return {Getable<T>}
    * @public
    */
   static m_n___$p_com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest() {
@@ -194,8 +194,8 @@ class IntersectionTypeTest extends j_l_Object {
   }
 
   /**
-   * @template M_T
-   * @param {M_T} t
+   * @template T
+   * @param {T} t
    * @return {void}
    * @public
    */

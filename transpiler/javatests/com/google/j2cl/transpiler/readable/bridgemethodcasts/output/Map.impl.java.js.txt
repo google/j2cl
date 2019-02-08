@@ -16,27 +16,27 @@ let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.br
 
 /**
  * @interface
- * @template C_K, C_V
+ * @template K, V
  */
 class Map {
   /**
    * @abstract
-   * @param {C_K} key
-   * @param {C_V} value
-   * @return {C_V}
+   * @param {K} key
+   * @param {V} value
+   * @return {V}
    * @public
    */
   m_put__java_lang_Object__java_lang_Object(key, value) {}
 
   /**
-   * @template C_K, C_V
-   * @param {?function(C_K, C_V):C_V} fn
-   * @return {Map<C_K, C_V>}
+   * @template K, V
+   * @param {?function(K, V):V} fn
+   * @return {Map<K, V>}
    * @public
    */
   static $adapt(fn) {
     Map.$clinit();
-    return /**@type {!$LambdaAdaptor<C_K, C_V>} */ (new $LambdaAdaptor(fn));
+    return /**@type {!$LambdaAdaptor<K, V>} */ (new $LambdaAdaptor(fn));
   }
 
   /**

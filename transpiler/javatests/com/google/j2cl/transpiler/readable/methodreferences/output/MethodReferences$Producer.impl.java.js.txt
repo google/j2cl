@@ -16,25 +16,25 @@ let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.me
 
 /**
  * @interface
- * @template C_Producer_T
+ * @template T
  */
 class Producer {
   /**
    * @abstract
-   * @return {C_Producer_T}
+   * @return {T}
    * @public
    */
   m_produce__() {}
 
   /**
-   * @template C_Producer_T
-   * @param {?function():C_Producer_T} fn
-   * @return {Producer<C_Producer_T>}
+   * @template T
+   * @param {?function():T} fn
+   * @return {Producer<T>}
    * @public
    */
   static $adapt(fn) {
     Producer.$clinit();
-    return /**@type {!$LambdaAdaptor<C_Producer_T>} */ (new $LambdaAdaptor(fn));
+    return /**@type {!$LambdaAdaptor<T>} */ (new $LambdaAdaptor(fn));
   }
 
   /**

@@ -14,7 +14,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 /**
  * @interface
- * @template C_Equals_T
+ * @template T
  */
 class Equals {
   /**
@@ -27,15 +27,15 @@ class Equals {
 
   /**
    * @abstract
-   * @return {C_Equals_T}
+   * @return {T}
    * @public
    */
   m_get__() {}
 
   /**
-   * @template C_Equals_T
-   * @param {Equals<C_Equals_T>} $thisArg
-   * @return {C_Equals_T}
+   * @template T
+   * @param {Equals<T>} $thisArg
+   * @return {T}
    * @public
    */
   static m_get__$default__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Equals(

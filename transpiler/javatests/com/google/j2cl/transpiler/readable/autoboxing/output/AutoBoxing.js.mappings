@@ -74,14 +74,14 @@
 [for (Object number : numbers) {
       sum += (Double) number;
     }] => [for (let $array = numbers, $index = 0; $index < $array.length; $index++) {
-      let number$1$ = $array[$index];
-      sum += Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.$to(number$1$, Double)));
+      let number_1 = $array[$index];
+      sum += Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.$to(number_1, Double)));
     }] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.sumWithoutBoxing"
 [for (Object number : numbers) {
       sum += (Double) number;
-    }] => [let number$1$ = $array[$index];] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.sumWithoutBoxing"
-[number] => [number$1$] "number"
-[sum += (Double) number;] => [sum += Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.$to(number$1$, Double)));] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.sumWithoutBoxing"
+    }] => [let number_1 = $array[$index];] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.sumWithoutBoxing"
+[number] => [number_1] "number"
+[sum += (Double) number;] => [sum += Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.$to(number_1, Double)));] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.sumWithoutBoxing"
 [return sum;] => [return sum;] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.sumWithoutBoxing"
 [sumWithoutBoxingJsVarargs] => [sumWithoutBoxingJsVarargs]
 [numbers] => [numbers] "numbers"
@@ -90,14 +90,14 @@
 [for (Object number : numbers) {
       sum += (Double) number;
     }] => [for (let $array = numbers, $index = 0; $index < $array.length; $index++) {
-      let number$1$ = $array[$index];
-      sum += Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.$to(number$1$, Double)));
+      let number_1 = $array[$index];
+      sum += Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.$to(number_1, Double)));
     }] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.sumWithoutBoxingJsVarargs"
 [for (Object number : numbers) {
       sum += (Double) number;
-    }] => [let number$1$ = $array[$index];] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.sumWithoutBoxingJsVarargs"
-[number] => [number$1$] "number"
-[sum += (Double) number;] => [sum += Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.$to(number$1$, Double)));] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.sumWithoutBoxingJsVarargs"
+    }] => [let number_1 = $array[$index];] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.sumWithoutBoxingJsVarargs"
+[number] => [number_1] "number"
+[sum += (Double) number;] => [sum += Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.$to(number_1, Double)));] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.sumWithoutBoxingJsVarargs"
 [return sum;] => [return sum;] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.sumWithoutBoxingJsVarargs"
 [testBoxing] => [m_testBoxing__]
 [boolean bool = true;] => [let bool = true;] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testBoxing"
@@ -330,23 +330,23 @@
 [assert b;] => [$Asserts.$assert(b);] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testAssertStatement"
 [testUnboxingFromTypeVariable] => [m_testUnboxingFromTypeVariable__]
 [testUnboxingFromTypeVariable] => [AutoBoxing.$clinit();] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxingFromTypeVariable"
-[T n = (T) (Long) 10L;] => [let n = /**@type {M_T} */ (Long.m_valueOf__long($Long.fromInt(10)));] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxingFromTypeVariable"
+[T n = (T) (Long) 10L;] => [let n = /**@type {T} */ (Long.m_valueOf__long($Long.fromInt(10)));] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxingFromTypeVariable"
 [n] => [n] "n"
 [long l = n;] => [let l = /**@type {Long} */ (n).m_longValue__();] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxingFromTypeVariable"
 [l] => [l] "l"
 [assert l == 10L;] => [$Asserts.$assert($LongUtils.$equals(l, $Long.fromInt(10)));] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxingFromTypeVariable"
 [n++;] => [n = Long.m_valueOf__long($LongUtils.$plus(/**@type {Long} */ (n).m_longValue__(), $Long.fromInt(1)));] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxingFromTypeVariable"
-[l = new Local<>().toLong(11L);] => [l = /**@type {!$1Local<Long, M_T>} */ ($1Local.$create__()).m_toLong__java_lang_Long_$pp_com_google_j2cl_transpiler_readable_autoboxing(Long.m_valueOf__long($Long.fromInt(11)));] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxingFromTypeVariable"
+[l = new Local<>().toLong(11L);] => [l = /**@type {!$1Local<Long, T>} */ ($1Local.$create__()).m_toLong__java_lang_Long_$pp_com_google_j2cl_transpiler_readable_autoboxing(Long.m_valueOf__long($Long.fromInt(11)));] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxingFromTypeVariable"
 [assert l == 11L;] => [$Asserts.$assert($LongUtils.$equals(l, $Long.fromInt(11)));] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxingFromTypeVariable"
 [testUnboxingFromIntersectionType] => [m_testUnboxingFromIntersectionType__]
 [testUnboxingFromIntersectionType] => [AutoBoxing.$clinit();] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxingFromIntersectionType"
-[T n = (T) (Long) 10L;] => [let n = /**@type {M_T} */ (Long.m_valueOf__long($Long.fromInt(10)));] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxingFromIntersectionType"
+[T n = (T) (Long) 10L;] => [let n = /**@type {T} */ (Long.m_valueOf__long($Long.fromInt(10)));] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxingFromIntersectionType"
 [n] => [n] "n"
 [long l = n;] => [let l = /**@type {Long} */ (n).m_longValue__();] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxingFromIntersectionType"
 [l] => [l] "l"
 [assert l == 10L;] => [$Asserts.$assert($LongUtils.$equals(l, $Long.fromInt(10)));] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxingFromIntersectionType"
 [n++;] => [n = Long.m_valueOf__long($LongUtils.$plus(/**@type {Long} */ (n).m_longValue__(), $Long.fromInt(1)));] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxingFromIntersectionType"
-[l = new Local<>().toLong(11L);] => [l = /**@type {!$2Local<Long, M_T>} */ ($2Local.$create__()).m_toLong__java_lang_Long_$pp_com_google_j2cl_transpiler_readable_autoboxing(Long.m_valueOf__long($Long.fromInt(11)));] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxingFromIntersectionType"
+[l = new Local<>().toLong(11L);] => [l = /**@type {!$2Local<Long, T>} */ ($2Local.$create__()).m_toLong__java_lang_Long_$pp_com_google_j2cl_transpiler_readable_autoboxing(Long.m_valueOf__long($Long.fromInt(11)));] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxingFromIntersectionType"
 [assert l == 11L;] => [$Asserts.$assert($LongUtils.$equals(l, $Long.fromInt(11)));] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxingFromIntersectionType"
 [int i = (Integer & Comparable<Integer>) 10;] => [let i = Integer.m_valueOf__int(10).m_intValue__();] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxingFromIntersectionType"
 [i] => [i] "i"

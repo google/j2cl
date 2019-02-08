@@ -465,14 +465,14 @@ public class ExpressionTranspiler {
         sourceBuilder.emitWithMapping(
             // Only map variables if they are named.
             AstUtils.emptySourcePositionIfNotNamed(variable.getSourcePosition()),
-            () -> sourceBuilder.append(environment.aliasForVariable(variable)));
+            () -> sourceBuilder.append(environment.getUniqueNameForVariable(variable)));
 
         return null;
       }
 
       @Override
       public Void transformVariableReference(VariableReference expression) {
-        sourceBuilder.append(environment.aliasForVariable(expression.getTarget()));
+        sourceBuilder.append(environment.getUniqueNameForVariable(expression.getTarget()));
         return null;
       }
 

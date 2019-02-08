@@ -14,8 +14,8 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 class $Overlay {
   /**
-   * @template M_V
-   * @return {Array<M_V>}
+   * @template V
+   * @return {Array<V>}
    * @public
    */
   static m_create__() {
@@ -25,14 +25,14 @@ class $Overlay {
   }
 
   /**
-   * @template M_V
+   * @template V
    * @param {number} size
-   * @return {Array<M_V>}
+   * @return {Array<V>}
    * @public
    */
   static m_create__int(size) {
     $Overlay.$clinit();
-    let array = /**@type {!Array<M_V>} */ (new Array(size));
+    let array = /**@type {!Array<V>} */ (new Array(size));
     return array;
   }
 

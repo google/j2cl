@@ -28,7 +28,7 @@ let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
 
 /**
- * @template C_T
+ * @template T
  */
 class MethodReferences extends j_l_Object {
   /**
@@ -39,8 +39,8 @@ class MethodReferences extends j_l_Object {
   }
 
   /**
-   * @template C_T
-   * @return {!MethodReferences<C_T>}
+   * @template T
+   * @return {!MethodReferences<T>}
    * @public
    */
   static $create__() {
@@ -99,7 +99,7 @@ class MethodReferences extends j_l_Object {
    * @public
    */
   m_main___$pp_com_google_j2cl_transpiler_readable_methodreferences() {
-    let /** MethodReferences<C_T> */ $$qualifier1,
+    let /** MethodReferences<T> */ $$qualifier1,
         /** MethodReferences<*> */ $$qualifier2,
         /** MethodReferences<*> */ $$qualifier3;
     let objectFactory = Producer.$adapt((() => {
@@ -110,41 +110,40 @@ class MethodReferences extends j_l_Object {
           .m_m___$pp_com_google_j2cl_transpiler_readable_methodreferences();
     }));
     objectFactory =
-        ($$qualifier1 = /**@type {!MethodReferences<C_T>} */ (
-             MethodReferences.$create__()),
+        ($$qualifier1 =
+             /**@type {!MethodReferences<T>} */ (MethodReferences.$create__()),
          Producer.$adapt((() => {
            return $$qualifier1.m_isA__();
          })));
-    let biFunction = /**@type {BiFunction<MethodReferences<C_T>,
-                            (Number|number), ?boolean>} */
+    let biFunction =
+        /**@type {BiFunction<MethodReferences<T>, (Number|number), ?boolean>} */
         (BiFunction.$adapt(((arg0, arg1) => {
-          let arg0$1$ = /**@type {MethodReferences} */ (
+          let arg0_1 = /**@type {MethodReferences} */ (
               $Casts.$to(arg0, MethodReferences));
-          let arg1$1$ =
-              /**@type {(Number|number)} */ ($Casts.$to(arg1, Number));
-          return arg0$1$
+          let arg1_1 = /**@type {(Number|number)} */ ($Casts.$to(arg1, Number));
+          return arg0_1
               .m_sameAs__java_lang_Number_$pp_com_google_j2cl_transpiler_readable_methodreferences(
-                  arg1$1$);
+                  arg1_1);
         })));
-    let functionWithParameters = MethodReferences_Function.$adapt(((arg0$2$) => {
-      let arg0$3$ = /**@type {(Number|number)} */ ($Casts.$to(arg0$2$, Number));
+    let functionWithParameters = MethodReferences_Function.$adapt(((arg0_2) => {
+      let arg0_3 = /**@type {(Number|number)} */ ($Casts.$to(arg0_2, Number));
       return this
           .m_sameAs__java_lang_Number_$pp_com_google_j2cl_transpiler_readable_methodreferences(
-              arg0$3$);
+              arg0_3);
     }));
-    let objectPredicate = /**@type {Predicate<MethodReferences<C_T>>} */ (
-        Predicate.$adapt(((arg0$4$) => {
-          let arg0$5$ = /**@type {MethodReferences} */ (
-              $Casts.$to(arg0$4$, MethodReferences));
-          return Boolean.m_booleanValue__java_lang_Boolean(arg0$5$.m_isA__());
+    let objectPredicate = /**@type {Predicate<MethodReferences<T>>} */ (
+        Predicate.$adapt(((arg0_4) => {
+          let arg0_5 = /**@type {MethodReferences} */ (
+              $Casts.$to(arg0_4, MethodReferences));
+          return Boolean.m_booleanValue__java_lang_Boolean(arg0_5.m_isA__());
         })));
     let objectCapturingOuterProducer =
-        /**@type {Producer<ObjectCapturingOuter<C_T>>} */ (Producer
-                                                               .$adapt((() => {
-                                                                 return /**@type {!ObjectCapturingOuter<C_T>} */ (ObjectCapturingOuter.$create__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences(this));
-                                                               })));
-    let arrayProducer = ArrayProducer.$adapt(((/** number */ arg0$6$) => {
-      return /**@type {!Array<?number>} */ ($Arrays.$create([arg0$6$], Double));
+        /**@type {Producer<ObjectCapturingOuter<T>>} */ (Producer
+                                                             .$adapt((() => {
+                                                               return /**@type {!ObjectCapturingOuter<T>} */ (ObjectCapturingOuter.$create__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences(this));
+                                                             })));
+    let arrayProducer = ArrayProducer.$adapt(((/** number */ arg0_6) => {
+      return /**@type {!Array<?number>} */ ($Arrays.$create([arg0_6], Double));
     }));
     objectFactory =
         ($$qualifier2 =
@@ -153,17 +152,17 @@ class MethodReferences extends j_l_Object {
            return $$qualifier2
                .m_self___$pp_com_google_j2cl_transpiler_readable_methodreferences();
          })));
-    let function$1$ =
-        /**@type {MethodReferences_Function<MethodReferences<C_T>, *>} */
-        (MethodReferences_Function.$adapt(((arg0$7$) => {
-          let arg0$8$ = /**@type {MethodReferences} */ (
-              $Casts.$to(arg0$7$, MethodReferences));
-          return arg0$8$
+    let function_1 =
+        /**@type {MethodReferences_Function<MethodReferences<T>, *>} */
+        (MethodReferences_Function.$adapt(((arg0_7) => {
+          let arg0_8 = /**@type {MethodReferences} */ (
+              $Casts.$to(arg0_7, MethodReferences));
+          return arg0_8
               .m_self___$pp_com_google_j2cl_transpiler_readable_methodreferences();
         })));
-    let arrayFactory = MethodReferences_Function.$adapt(((arg0$9$) => {
-      let arg0$10$ = /**@type {Integer} */ ($Casts.$to(arg0$9$, Integer));
-      return new Array(arg0$10$.m_intValue__());
+    let arrayFactory = MethodReferences_Function.$adapt(((arg0_9) => {
+      let arg0_10 = /**@type {Integer} */ ($Casts.$to(arg0_9, Integer));
+      return new Array(arg0_10.m_intValue__());
     }));
     let superToStringProducer = Producer.$adapt((() => {
       return j_l_Object.prototype.toString.call(this);
@@ -182,33 +181,32 @@ class MethodReferences extends j_l_Object {
            return $$qualifier3
                .m_self___$pp_com_google_j2cl_transpiler_readable_methodreferences();
          }));
-    let jsfunction = ((arg0$11$) => {
-      let arg0$12$ = /**@type {MethodReferences} */ (
-          $Casts.$to(arg0$11$, MethodReferences));
-      return arg0$12$
+    let jsfunction = ((arg0_11) => {
+      let arg0_12 = /**@type {MethodReferences} */ (
+          $Casts.$to(arg0_11, MethodReferences));
+      return arg0_12
           .m_self___$pp_com_google_j2cl_transpiler_readable_methodreferences();
     });
-    let jsarrayFactory = ((arg0$13$) => {
-      let arg0$14$ = /**@type {Integer} */ ($Casts.$to(arg0$13$, Integer));
-      return new Array(arg0$14$.m_intValue__());
+    let jsarrayFactory = ((arg0_13) => {
+      let arg0_14 = /**@type {Integer} */ ($Casts.$to(arg0_13, Integer));
+      return new Array(arg0_14.m_intValue__());
     });
     let jsSuperToStringProducer = (() => {
       return j_l_Object.prototype.toString.call(this);
     });
-    let jsbiFunction = ((arg0$15$, arg1$2$) => {
-      let arg0$16$ = /**@type {MethodReferences} */ (
-          $Casts.$to(arg0$15$, MethodReferences));
-      let arg1$3$ = /**@type {(Number|number)} */ ($Casts.$to(arg1$2$, Number));
-      return arg0$16$
+    let jsbiFunction = ((arg0_15, arg1_2) => {
+      let arg0_16 = /**@type {MethodReferences} */ (
+          $Casts.$to(arg0_15, MethodReferences));
+      let arg1_3 = /**@type {(Number|number)} */ ($Casts.$to(arg1_2, Number));
+      return arg0_16
           .m_sameAs__java_lang_Number_$pp_com_google_j2cl_transpiler_readable_methodreferences(
-              arg1$3$);
+              arg1_3);
     });
-    let jsFunctionWithParameters = ((arg0$17$) => {
-      let arg0$18$ =
-          /**@type {(Number|number)} */ ($Casts.$to(arg0$17$, Number));
+    let jsFunctionWithParameters = ((arg0_17) => {
+      let arg0_18 = /**@type {(Number|number)} */ ($Casts.$to(arg0_17, Number));
       return this
           .m_sameAs__java_lang_Number_$pp_com_google_j2cl_transpiler_readable_methodreferences(
-              arg0$18$);
+              arg0_18);
     });
   }
 

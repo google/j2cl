@@ -16,39 +16,39 @@ let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.la
 
 /**
  * @interface
- * @template C_Function_T, C_Function_R
+ * @template T, R
  */
 class Lambdas_Function {
   /**
-   * @template M_Function_identity_T
-   * @return {Lambdas_Function<M_Function_identity_T, M_Function_identity_T>}
+   * @template T_1
+   * @return {Lambdas_Function<T_1, T_1>}
    * @public
    */
   static m_identity__() {
     Lambdas_Function.$clinit();
-    return /**@type {Lambdas_Function<M_Function_identity_T, M_Function_identity_T>} */ (Lambdas_Function.$adapt(((/** M_Function_identity_T */ t) =>{
-      return t;
-    })));
+    return /**@type {Lambdas_Function<T_1, T_1>} */ (
+        Lambdas_Function.$adapt(((/** T_1 */ t) => {
+          return t;
+        })));
   }
 
   /**
    * @abstract
-   * @param {C_Function_T} t
-   * @return {C_Function_R}
+   * @param {T} t
+   * @return {R}
    * @public
    */
   m_apply__java_lang_Object(t) {}
 
   /**
-   * @template C_Function_T, C_Function_R
-   * @param {?function(C_Function_T):C_Function_R} fn
-   * @return {Lambdas_Function<C_Function_T, C_Function_R>}
+   * @template T, R
+   * @param {?function(T):R} fn
+   * @return {Lambdas_Function<T, R>}
    * @public
    */
   static $adapt(fn) {
     Lambdas_Function.$clinit();
-    return /**@type {!$LambdaAdaptor<C_Function_T, C_Function_R>} */ (
-        new $LambdaAdaptor(fn));
+    return /**@type {!$LambdaAdaptor<T, R>} */ (new $LambdaAdaptor(fn));
   }
 
   /**

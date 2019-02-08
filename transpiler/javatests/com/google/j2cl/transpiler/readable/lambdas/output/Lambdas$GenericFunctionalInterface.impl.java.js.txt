@@ -16,28 +16,26 @@ let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.la
 
 /**
  * @interface
- * @template C_GenericFunctionalInterface_T
+ * @template T
  */
 class GenericFunctionalInterface {
   /**
    * @abstract
-   * @param {C_GenericFunctionalInterface_T} i
-   * @return {C_GenericFunctionalInterface_T}
+   * @param {T} i
+   * @return {T}
    * @public
    */
   m_m__java_lang_Object(i) {}
 
   /**
-   * @template C_GenericFunctionalInterface_T
-   * @param {?function(C_GenericFunctionalInterface_T):C_GenericFunctionalInterface_T}
-   *     fn
-   * @return {GenericFunctionalInterface<C_GenericFunctionalInterface_T>}
+   * @template T
+   * @param {?function(T):T} fn
+   * @return {GenericFunctionalInterface<T>}
    * @public
    */
   static $adapt(fn) {
     GenericFunctionalInterface.$clinit();
-    return /**@type {!$LambdaAdaptor<C_GenericFunctionalInterface_T>} */ (
-        new $LambdaAdaptor(fn));
+    return /**@type {!$LambdaAdaptor<T>} */ (new $LambdaAdaptor(fn));
   }
 
   /**

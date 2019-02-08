@@ -15,7 +15,7 @@ const $JavaScriptFunction = goog.require('vmbootstrap.JavaScriptFunction$impl');
 
 
 /**
- * @template C_ParamtericImplementation_T
+ * @template T
  */
 class ParamtericImplementation extends j_l_Object {
   /**
@@ -26,8 +26,8 @@ class ParamtericImplementation extends j_l_Object {
   }
 
   /**
-   * @template C_ParamtericImplementation_T
-   * @return {function(C_ParamtericImplementation_T):void}
+   * @template T
+   * @return {function(T):void}
    * @public
    */
   static $create__() {
@@ -50,14 +50,14 @@ class ParamtericImplementation extends j_l_Object {
   }
 
   /**
-   * @template C_ParamtericImplementation_T
-   * @this {?function(C_ParamtericImplementation_T):void}
-   * @param {C_ParamtericImplementation_T} t
+   * @template T
+   * @this {?function(T):void}
+   * @param {T} t
    * @return {void}
    * @public
    */
   m_call__java_lang_Object(t) {
-    let o = /**@type {C_ParamtericImplementation_T} */ (t);
+    let o = /**@type {T} */ (t);
   }
 
   /**

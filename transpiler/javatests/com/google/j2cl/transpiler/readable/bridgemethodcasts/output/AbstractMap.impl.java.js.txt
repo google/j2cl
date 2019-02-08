@@ -15,8 +15,8 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 
 /**
- * @template C_K, C_V
- * @implements {Map<C_K, C_V>}
+ * @template K, V
+ * @implements {Map<K, V>}
  */
 class AbstractMap extends j_l_Object {
   /**
@@ -27,8 +27,8 @@ class AbstractMap extends j_l_Object {
   }
 
   /**
-   * @template C_K, C_V
-   * @return {!AbstractMap<C_K, C_V>}
+   * @template K, V
+   * @return {!AbstractMap<K, V>}
    * @public
    */
   static $create__() {
@@ -49,9 +49,9 @@ class AbstractMap extends j_l_Object {
 
   /**
    * @override
-   * @param {C_K} key
-   * @param {C_V} value
-   * @return {C_V}
+   * @param {K} key
+   * @param {V} value
+   * @return {V}
    * @public
    */
   m_put__java_lang_Object__java_lang_Object(key, value) {

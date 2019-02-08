@@ -25,7 +25,6 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.ArrayLength;
 import com.google.j2cl.ast.ArrayTypeDescriptor;
-import com.google.j2cl.ast.AstUtilConstants;
 import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Expression;
@@ -396,11 +395,9 @@ class JdtUtils {
 
     return TypeVariable.newBuilder()
         .setBoundTypeDescriptorSupplier(boundTypeDescriptorFactory)
-        .setEnclosingTypeDescriptorSupplier(
-            () -> (DeclaredTypeDescriptor) createTypeDescriptor(typeBinding.getDeclaringClass()))
         .setWildcardOrCapture(typeBinding.isWildcardType() || typeBinding.isCapture())
         .setUniqueKey(typeBinding.getKey())
-        .setNameComponents(getClassComponentsForTypeVariable(typeBinding))
+        .setName(typeBinding.getName())
         .build();
   }
 
@@ -476,45 +473,11 @@ class JdtUtils {
         && !binding.isWildcardType();
   }
 
-  private static ImmutableList<String> getClassComponentsForTypeVariable(ITypeBinding typeBinding) {
-    if (typeBinding.isWildcardType() || typeBinding.isCapture()) {
-      return ImmutableList.of("?");
-    }
-    checkArgument(typeBinding.isTypeVariable());
-    if (typeBinding.getDeclaringClass() != null) {
-      // This is a class-level type variable. Use its name prefixed with "C_" as its simple
-      // name component and gather enclosing components from the enclosing class hierarchy.
-      return ImmutableList.<String>builder()
-          .addAll(getClassComponents(typeBinding.getDeclaringClass()))
-          .add(AstUtilConstants.TYPE_VARIABLE_IN_TYPE_PREFIX + typeBinding.getName())
-          .build();
-    } else {
-      // This is a method-level type variable. Use its simple name prefixed with "M_") as its
-      // simple name component, replace the immediate enclosing component with
-      // <EnclosingClass>_<EnclosingComponent> and then continue normally through the enclosing
-      // class hierarchy.
-      return ImmutableList.<String>builder()
-          .addAll(
-              getClassComponents(
-                  typeBinding.getDeclaringMethod().getDeclaringClass().getDeclaringClass()))
-          .add(
-              typeBinding.getDeclaringMethod().getDeclaringClass().getName()
-                  + "_"
-                  + typeBinding.getDeclaringMethod().getName())
-          .add(AstUtilConstants.TYPE_VARIABLE_IN_METHOD_PREFIX + typeBinding.getName())
-          .build();
-    }
-  }
-
   private static List<String> getClassComponents(ITypeBinding typeBinding) {
     List<String> classComponents = new ArrayList<>();
     ITypeBinding currentType = typeBinding;
     while (currentType != null) {
-      checkArgument(
-          !currentType.isTypeVariable()
-              && !currentType.isWildcardType()
-              && !currentType.isCapture());
-      String simpleName;
+      checkArgument(currentType.getTypeDeclaration() != null);
       if (currentType.isLocal()) {
         // JDT binary name for local class is like package.components.EnclosingClass$1SimpleName
         // Extract the generated name by taking the part after the binary name of the declaring
@@ -523,11 +486,10 @@ class JdtUtils {
         String declaringClassPrefix =
             getBinaryNameFromTypeBinding(currentType.getDeclaringClass()) + "$";
         checkState(binaryName.startsWith(declaringClassPrefix));
-        simpleName = binaryName.substring(declaringClassPrefix.length());
+        classComponents.add(0, binaryName.substring(declaringClassPrefix.length()));
       } else {
-        simpleName = currentType.getErasure().getName();
+        classComponents.add(0, currentType.getName());
       }
-      classComponents.add(0, simpleName);
       currentType = currentType.getDeclaringClass();
     }
     return classComponents;
@@ -704,6 +666,10 @@ class JdtUtils {
 
   /** Create a MethodDescriptor directly based on the given JDT method binding. */
   public static MethodDescriptor createMethodDescriptor(IMethodBinding methodBinding) {
+    if (methodBinding == null) {
+      return null;
+    }
+
     DeclaredTypeDescriptor enclosingTypeDescriptor =
         createDeclaredTypeDescriptor(methodBinding.getDeclaringClass());
 

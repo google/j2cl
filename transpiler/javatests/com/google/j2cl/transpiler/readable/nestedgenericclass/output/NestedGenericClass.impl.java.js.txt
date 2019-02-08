@@ -25,7 +25,7 @@ let Number = goog.forwardDeclare('java.lang.Number$impl');
 
 
 /**
- * @template C_T
+ * @template T
  */
 class NestedGenericClass extends j_l_Object {
   /**
@@ -36,8 +36,8 @@ class NestedGenericClass extends j_l_Object {
   }
 
   /**
-   * @template C_T
-   * @return {!NestedGenericClass<C_T>}
+   * @template T
+   * @return {!NestedGenericClass<T>}
    * @public
    */
   static $create__() {
@@ -57,27 +57,27 @@ class NestedGenericClass extends j_l_Object {
   }
 
   /**
-   * @template M_S
-   * @param {M_S} t
+   * @template S
+   * @param {S} t
    * @return {void}
    * @public
    */
   m_fun__java_lang_Object(t) {
-    /**@type {!$1E<(Number|number), M_S, C_T>} */
+    /**@type {!$1E<(Number|number), S, T>} */
     ($1E.$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass(
         this));
-    /**@type {!$1F<M_S, C_T>} */
+    /**@type {!$1F<S, T>} */
     ($1F.$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass(
         this));
   }
 
   /**
-   * @template M_T
+   * @template T_1
    * @return {void}
    * @public
    */
   m_bar__() {
-    /**@type {!$1G<Error, M_T, C_T>} */
+    /**@type {!$1G<Error, T_1, T>} */
     ($1G.$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass(
          this))
         .m_bar__();

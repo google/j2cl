@@ -46,23 +46,23 @@ class Implementor extends j_l_Object {
   }
 
   /**
-   * @template M_Implementor_anApi_T
-   * @return {?function(M_Implementor_anApi_T):void}
+   * @template T
+   * @return {?function(T):void}
    * @public
    */
   anApi() {
-    return /**@type {?function(M_Implementor_anApi_T):void} */ (null);
+    return /**@type {?function(T):void} */ (null);
   }
 
   /**
    * Bridge method for exposing non-JsMethod.
    * @override
-   * @template M_ApiWithMethodReturningParametricJsFunction_anApi_T
-   * @return {?function(M_ApiWithMethodReturningParametricJsFunction_anApi_T):void}
+   * @template T
+   * @return {?function(T):void}
    * @public
    */
   m_anApi__() {
-    return /**@type {?function(M_ApiWithMethodReturningParametricJsFunction_anApi_T):void} */ (this.anApi());
+    return /**@type {?function(T):void} */ (this.anApi());
   }
 
   /**

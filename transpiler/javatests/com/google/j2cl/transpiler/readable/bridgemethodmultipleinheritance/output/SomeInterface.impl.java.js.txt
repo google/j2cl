@@ -16,13 +16,13 @@ let Number = goog.forwardDeclare('java.lang.Number$impl');
 
 /**
  * @interface
- * @template C_T, C_S
+ * @template T, S
  */
 class SomeInterface {
   /**
    * @abstract
-   * @param {C_T} t
-   * @param {C_S} s
+   * @param {T} t
+   * @param {S} s
    * @return {void}
    * @public
    */
@@ -30,7 +30,7 @@ class SomeInterface {
 
   /**
    * @abstract
-   * @param {C_T} t
+   * @param {T} t
    * @param {(Number|number)} n
    * @return {void}
    * @public

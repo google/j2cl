@@ -16,7 +16,7 @@ let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.in
 
 /**
  * @interface
- * @template C_T
+ * @template T
  */
 class Cmp2 {
   /**
@@ -28,14 +28,14 @@ class Cmp2 {
   m_cmp__int(a) {}
 
   /**
-   * @template C_T
+   * @template T
    * @param {?function(number):number} fn
-   * @return {Cmp2<C_T>}
+   * @return {Cmp2<T>}
    * @public
    */
   static $adapt(fn) {
     Cmp2.$clinit();
-    return /**@type {!$LambdaAdaptor<C_T>} */ (new $LambdaAdaptor(fn));
+    return /**@type {!$LambdaAdaptor<T>} */ (new $LambdaAdaptor(fn));
   }
 
   /**

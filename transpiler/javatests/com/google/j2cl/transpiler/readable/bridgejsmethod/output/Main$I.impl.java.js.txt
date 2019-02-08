@@ -17,26 +17,26 @@ let Number = goog.forwardDeclare('java.lang.Number$impl');
 
 /**
  * @interface
- * @template C_I_T
+ * @template T
  */
 class I {
   /**
    * @abstract
-   * @param {C_I_T} t
-   * @return {C_I_T}
+   * @param {T} t
+   * @return {T}
    * @public
    */
   fun(t) {}
 
   /**
-   * @template C_I_T
-   * @param {?function(C_I_T):C_I_T} fn
-   * @return {I<C_I_T>}
+   * @template T
+   * @param {?function(T):T} fn
+   * @return {I<T>}
    * @public
    */
   static $adapt(fn) {
     I.$clinit();
-    return /**@type {!$LambdaAdaptor<C_I_T>} */ (new $LambdaAdaptor(fn));
+    return /**@type {!$LambdaAdaptor<T>} */ (new $LambdaAdaptor(fn));
   }
 
   /**

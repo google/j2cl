@@ -160,12 +160,12 @@ class ClosureTypesGenerator {
   }
 
   /** Returns the template variable name for a type variable for use in JsDoc annotations. */
-  private static ClosureType getClosureTypeForTypeVariable(TypeVariable typeVariable) {
+  private ClosureType getClosureTypeForTypeVariable(TypeVariable typeVariable) {
     if (typeVariable.isWildcardOrCapture()) {
       return UNKNOWN;
     }
 
-    return new ClosureNamedType(typeVariable.getJsName());
+    return new ClosureNamedType(environment.getUniqueNameForVariable(typeVariable));
   }
 
   /** Returns the Closure type for an array type descriptor. */

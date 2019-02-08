@@ -247,9 +247,9 @@ class AutoBoxing extends j_l_Object {
   m_sumWithoutBoxing__arrayOf_java_lang_Object(numbers) {
     let sum = 0.0;
     for (let $array = numbers, $index = 0; $index < $array.length; $index++) {
-      let number$1$ = $array[$index];
+      let number_1 = $array[$index];
       sum += Double.m_doubleValue__java_lang_Double(
-          /**@type {?number} */ ($Casts.$to(number$1$, Double)));
+          /**@type {?number} */ ($Casts.$to(number_1, Double)));
     }
     return sum;
   }
@@ -262,9 +262,9 @@ class AutoBoxing extends j_l_Object {
   sumWithoutBoxingJsVarargs(...numbers) {
     let sum = 0.0;
     for (let $array = numbers, $index = 0; $index < $array.length; $index++) {
-      let number$1$ = $array[$index];
+      let number_1 = $array[$index];
       sum += Double.m_doubleValue__java_lang_Double(
-          /**@type {?number} */ ($Casts.$to(number$1$, Double)));
+          /**@type {?number} */ ($Casts.$to(number_1, Double)));
     }
     return sum;
   }
@@ -544,36 +544,36 @@ class AutoBoxing extends j_l_Object {
   }
 
   /**
-   * @template M_T
+   * @template T
    * @return {void}
    * @public
    */
   static m_testUnboxingFromTypeVariable__() {
     AutoBoxing.$clinit();
-    let n = /**@type {M_T} */ (Long.m_valueOf__long($Long.fromInt(10)));
+    let n = /**@type {T} */ (Long.m_valueOf__long($Long.fromInt(10)));
     let l = /**@type {Long} */ (n).m_longValue__();
     $Asserts.$assert($LongUtils.$equals(l, $Long.fromInt(10)));
     n = Long.m_valueOf__long($LongUtils.$plus(
         /**@type {Long} */ (n).m_longValue__(), $Long.fromInt(1)));
-    l = /**@type {!$1Local<Long, M_T>} */ ($1Local.$create__())
+    l = /**@type {!$1Local<Long, T>} */ ($1Local.$create__())
             .m_toLong__java_lang_Long_$pp_com_google_j2cl_transpiler_readable_autoboxing(
                 Long.m_valueOf__long($Long.fromInt(11)));
     $Asserts.$assert($LongUtils.$equals(l, $Long.fromInt(11)));
   }
 
   /**
-   * @template M_T
+   * @template T
    * @return {void}
    * @public
    */
   static m_testUnboxingFromIntersectionType__() {
     AutoBoxing.$clinit();
-    let n = /**@type {M_T} */ (Long.m_valueOf__long($Long.fromInt(10)));
+    let n = /**@type {T} */ (Long.m_valueOf__long($Long.fromInt(10)));
     let l = /**@type {Long} */ (n).m_longValue__();
     $Asserts.$assert($LongUtils.$equals(l, $Long.fromInt(10)));
     n = Long.m_valueOf__long($LongUtils.$plus(
         /**@type {Long} */ (n).m_longValue__(), $Long.fromInt(1)));
-    l = /**@type {!$2Local<Long, M_T>} */ ($2Local.$create__())
+    l = /**@type {!$2Local<Long, T>} */ ($2Local.$create__())
             .m_toLong__java_lang_Long_$pp_com_google_j2cl_transpiler_readable_autoboxing(
                 Long.m_valueOf__long($Long.fromInt(11)));
     $Asserts.$assert($LongUtils.$equals(l, $Long.fromInt(11)));

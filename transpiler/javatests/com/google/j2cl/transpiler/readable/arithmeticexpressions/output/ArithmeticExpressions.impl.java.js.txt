@@ -126,11 +126,11 @@ class ArithmeticExpressions extends j_l_Object {
     $Arrays.$set(longs, 0, $LongUtils.$minus(longs[0], $Long.fromInt(1)));
     $Arrays.$set(longs, 0, $LongUtils.$minus(longs[0], $Long.fromInt(1)));
     {
-      let $array$1$ =
+      let $array_1 =
           ArithmeticExpressions
               .m_getLongArray___$p_com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions();
       $Arrays.$set(
-          $array$1$, 0, $LongUtils.$plus($array$1$[0], $Long.fromInt(1)));
+          $array_1, 0, $LongUtils.$plus($array_1[0], $Long.fromInt(1)));
     }
     let booleans = null;
     $Arrays.$set(booleans, 0, !!(+booleans[0] | +true));
@@ -158,8 +158,7 @@ class ArithmeticExpressions extends j_l_Object {
    * @public
    */
   m_testCompoundBoxedTypes__() {
-    let /** Integer */ $value, /** Integer */ $value$1$,
-        /** Integer */ $value$2$;
+    let /** Integer */ $value, /** Integer */ $value_1, /** Integer */ $value_2;
     let c = Integer.m_valueOf__int(1000);
     let d = Integer.m_valueOf__int(10000);
     d = Integer.m_valueOf__int(d.m_intValue__() + c.m_intValue__());
@@ -174,8 +173,8 @@ class ArithmeticExpressions extends j_l_Object {
     let f =
         ($value = c, c = Integer.m_valueOf__int(c.m_intValue__() + 1), $value);
     f =
-        ($value$1$ = c, c = Integer.m_valueOf__int(c.m_intValue__() + 1),
-         $value$1$);
+        ($value_1 = c, c = Integer.m_valueOf__int(c.m_intValue__() + 1),
+         $value_1);
     let b = Byte.m_valueOf__byte(0);
     b = Byte.m_valueOf__byte(
         $Primitives.$narrowIntToByte(b.m_byteValue__() + 1));
@@ -183,7 +182,7 @@ class ArithmeticExpressions extends j_l_Object {
     ch = Character.m_valueOf__char(
         $Primitives.$narrowIntToChar(ch.m_charValue__() + 1 /* '\u0001' */));
     (f = Integer.m_valueOf__int(f.m_intValue__() + 1)).m_intValue__();
-    ($value$2$ = f, f = Integer.m_valueOf__int(f.m_intValue__() - 1), $value$2$)
+    ($value_2 = f, f = Integer.m_valueOf__int(f.m_intValue__() - 1), $value_2)
         .m_intValue__();
     let ref = null;
     ref.f_field__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions_1Ref =
