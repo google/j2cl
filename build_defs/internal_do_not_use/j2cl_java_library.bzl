@@ -86,8 +86,7 @@ def _java_compile(ctx, java_srcs):
         output = ctx.outputs.jar,
         java_toolchain = ctx.attr._java_toolchain,
         host_javabase = ctx.attr._host_javabase,
-        javac_opts = java_common.default_javac_opts(ctx, java_toolchain_attr = "_java_toolchain") +
-                     default_j2cl_javac_opts,
+        javac_opts = default_j2cl_javac_opts + ctx.attr.javacopts,
     )
 
 def _strip_gwt_incompatible(ctx, java_srcs):
