@@ -9,6 +9,7 @@ def j2cl_js_provider(ctx, srcs = [], deps = [], exports = []):
       "analyzerChecks",
       "JSC_UNKNOWN_EXPR_TYPE",
       "JSC_STRICT_INEXISTENT_PROPERTY",
+      "unusedLocalVariables",
     ]
     suppresses = default_j2cl_suppresses + ctx.attr.js_suppress
 
