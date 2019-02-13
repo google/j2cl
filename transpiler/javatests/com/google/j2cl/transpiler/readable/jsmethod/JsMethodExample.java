@@ -39,4 +39,19 @@ public class JsMethodExample {
   //    2. return a type variable that is bounded by a generic class that has a constructor.
   // This would better be handled in a unit test.
   public native <T extends ArrayList<String>> T testMethod();
+
+  abstract static class Base<T> {
+    @JsMethod
+    public void m(T t) {}
+  }
+
+  interface I {
+    @JsMethod
+    void m(String s);
+  }
+
+  // Regression test for b/124227197
+  static class Sub extends Base<String> implements I {
+    public void m(String s) {}
+  }
 }
