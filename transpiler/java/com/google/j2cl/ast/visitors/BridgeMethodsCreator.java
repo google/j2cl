@@ -108,9 +108,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
           public Method rewriteMethod(Method method) {
             MethodDescriptor methodDescriptor = method.getDescriptor();
             Collection<Method> bridgeJsMethods =
-                bridgeMethodsByTargetMethodDescriptor
-                    .get(methodDescriptor)
-                    .stream()
+                bridgeMethodsByTargetMethodDescriptor.get(methodDescriptor).stream()
                     .filter(bridgeMethod -> bridgeMethod.getDescriptor().isJsMethod())
                     .collect(toImmutableList());
             if (bridgeJsMethods.isEmpty()) {
@@ -125,6 +123,10 @@ public class BridgeMethodsCreator extends NormalizationPass {
                         .setJsInfo(JsInfo.NONE)
                         .removeParameterOptionality()
                         .build())
+                // TODO(b/31312257): avoid declaring the method override if there is a chance that
+                // it is not; this avoid jscompiler errors when there are none but might miss real
+                // overrides. See readable/jsmethod.
+                .setOverride(false)
                 .build();
           }
         });
