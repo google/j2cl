@@ -75,6 +75,16 @@ def _java_compile(ctx, java_srcs):
         # Avoid log site injection which introduces calls to unsupported APIs
         "-XDinjectLogSites=false",
     ]
+
+    # Use find_java_toolchain / find_java_runtime_toolchain after the next Bazel release,
+    # see: https://github.com/bazelbuild/bazel/issues/7186
+    if hasattr(java_common, "JavaToolchainInfo"):
+        java_toolchain = ctx.attr._java_toolchain[java_common.JavaToolchainInfo]
+        host_javabase = ctx.attr._host_javabase[java_common.JavaRuntimeInfo]
+    else:
+        java_toolchain = ctx.attr._java_toolchain
+        host_javabase = ctx.attr._host_javabase
+
     return java_common.compile(
         ctx,
         source_files = ctx.files._srcs_hack,
@@ -84,8 +94,8 @@ def _java_compile(ctx, java_srcs):
         plugins = plugins,
         exported_plugins = exported_plugins,
         output = ctx.outputs.jar,
-        java_toolchain = ctx.attr._java_toolchain,
-        host_javabase = ctx.attr._host_javabase,
+        java_toolchain = java_toolchain,
+        host_javabase = host_javabase,
         javac_opts = default_j2cl_javac_opts + ctx.attr.javacopts,
     )
 
