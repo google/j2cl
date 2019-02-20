@@ -1424,7 +1424,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "class Main {",
             "  public static void main() {",
             "    Object o;",
-            // TODO(b/67913644): All these should be rejected but are not.
             "    o = (Foo & Function) () -> 0;",
             "  }",
             "}")
@@ -1470,7 +1469,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "JsFunction 'FunctionWithDefaultMethod' has to be a functional interface.",
             "JsFunction implementation member 'Buggy()' cannot be JsMethod nor JsProperty "
                 + "nor JsConstructor.",
-            "JsFunction implementation 'AbstractFunctionImplementation' must be final.");
+            "JsFunction implementation 'AbstractFunctionImplementation' must be final.",
+            "JsFunction lambda can only implement the JsFunction interface.");
   }
 
   public void testNativeJsTypeStaticInitializerSucceeds() {

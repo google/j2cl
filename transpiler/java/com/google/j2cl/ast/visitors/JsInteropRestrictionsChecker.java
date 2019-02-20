@@ -42,6 +42,7 @@ import com.google.j2cl.ast.HasJsNameInfo;
 import com.google.j2cl.ast.HasReadableDescription;
 import com.google.j2cl.ast.HasSourcePosition;
 import com.google.j2cl.ast.InstanceOfExpression;
+import com.google.j2cl.ast.IntersectionTypeDescriptor;
 import com.google.j2cl.ast.JsEnumInfo;
 import com.google.j2cl.ast.JsMemberType;
 import com.google.j2cl.ast.JsUtils;
@@ -159,6 +160,27 @@ public class JsInteropRestrictionsChecker {
     }
     checkTypeReferences(type);
     checkJsEnumUsages(type);
+    checkJsFunctionLambdas(type);
+  }
+
+  private void checkJsFunctionLambdas(Type type) {
+    type.accept(
+        new AbstractVisitor() {
+          @Override
+          public void exitFunctionExpression(FunctionExpression functionExpression) {
+            if (!functionExpression.getTypeDescriptor().isIntersection()) {
+              return;
+            }
+            IntersectionTypeDescriptor intersectionTypeDescriptor =
+                (IntersectionTypeDescriptor) functionExpression.getTypeDescriptor();
+            if (intersectionTypeDescriptor.getIntersectionTypeDescriptors().stream()
+                .anyMatch(TypeDescriptor::isJsFunctionInterface)) {
+              problems.error(
+                  functionExpression.getSourcePosition(),
+                  "JsFunction lambda can only implement the JsFunction interface.");
+            }
+          }
+        });
   }
 
   private void checkTypeVariables(Type type) {
