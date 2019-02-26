@@ -15,8 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.bridgemethodaccidentaloverride;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertThrowsClassCastException;
 import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
-import static com.google.j2cl.transpiler.utils.Asserts.fail;
 
 /**
  * Test for bridge method with accidental overriding.
@@ -32,12 +32,7 @@ public class Main {
     Error e = new Error();
     assertTrue((callInterfaceFoo(c, e) == e));
     assertTrue((c.foo(e) == callInterfaceFoo(c, e)));
-    try {
-      callInterfaceFoo(c, new Object());
-      fail("ClassCastException should be thrown.");
-    } catch (ClassCastException cce) {
-      // expected.
-    }
+    assertThrowsClassCastException(() -> callInterfaceFoo(c, new Object()));
   }
 
   private static class Parent {
@@ -69,19 +64,9 @@ public class Main {
     // Assing to raw type to subvert the value.
     AbstractSupplier as = sImpl;
     as.t = new Object();
-    try {
-      s.f(null);
-      fail("ClassCastException should be thrown.");
-    } catch (ClassCastException cce) {
-      // expected.
-    }
-    try {
-      s.get();
-      // TODO(b/119956463): Uncomment when the bug is fixed.
-      // fail("ClassCastException should be thrown.");
-    } catch (ClassCastException cce) {
-      // expected.
-    }
+    assertThrowsClassCastException(() -> s.f(null));
+    // TODO(b/119956463): Uncomment when the bug is fixed.
+    // assertThrowsClassCastException(() -> s.get());
   }
 
   private abstract static class AbstractSupplier<T> {
