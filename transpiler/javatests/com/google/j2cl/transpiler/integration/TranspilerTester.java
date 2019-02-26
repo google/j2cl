@@ -73,28 +73,24 @@ public class TranspilerTester {
 
   public TranspilerTester addCompilationUnit(String compilationUnitName, String... code) {
     List<String> content = new ArrayList<>(Arrays.asList(code));
-    if (packageName != null && !packageName.isEmpty()) {
+    if (!packageName.isEmpty()) {
       content.add(0, "package " + packageName + ";");
     }
-    this.files.add(
-        new File(
-            getPackageRelativePath(compilationUnitName + ".java"), Joiner.on('\n').join(content)));
-    return this;
+    return addPath(
+        getPackageRelativePath(compilationUnitName + ".java"), Joiner.on('\n').join(content));
   }
 
   public TranspilerTester addNativeFile(String compilationUnitName, String... code) {
-    if (code.length == 0) {
-      code = new String[] {""};
-    }
-    this.files.add(
-        new File(
-            getPackageRelativePath(compilationUnitName + ".native.js"),
-            Joiner.on('\n').join(code)));
-    return this;
+    return addPath(
+        getPackageRelativePath(compilationUnitName + ".native.js"), Joiner.on('\n').join(code));
   }
 
   public TranspilerTester addFile(String filename, String content) {
-    this.files.add(new File(Paths.get(filename), content));
+    return addPath(Paths.get(filename), content);
+  }
+
+  private TranspilerTester addPath(Path filePath, String content) {
+    this.files.add(new File(filePath, content));
     return this;
   }
 
@@ -201,7 +197,7 @@ public class TranspilerTester {
 
     public TranspileResult assertErrorsContainsSnippets(String... snippets) {
       assertThat(getProblems().getErrors())
-          .comparingElementsUsing(CONTAINS_STRING)
+          .comparingElementsUsing(Correspondence.from(String::contains, "contained within"))
           .containsAllIn(Arrays.asList(snippets));
       return this;
     }
@@ -226,19 +222,6 @@ public class TranspilerTester {
       return this;
     }
 
-    private static final Correspondence<String, String> CONTAINS_STRING =
-        new Correspondence<String, String>() {
-          @Override
-          public boolean compare(String actual, String expected) {
-            return actual.contains(expected);
-          }
-
-          @Override
-          public String toString() {
-            return "contained within";
-          }
-        };
-
     private static final Pattern messagePattern =
         Pattern.compile("(?:(?:Error)|(?:Warning))(?::[\\w.]+:\\d+)?: (?<message>.*)");
 
@@ -246,10 +229,8 @@ public class TranspilerTester {
         new Correspondence<String, String>() {
           @Override
           public boolean compare(String actual, String expected) {
-
             Matcher matcher = messagePattern.matcher(actual);
             checkState(matcher.matches());
-
             return matcher.group("message").equals(expected);
           }
 
