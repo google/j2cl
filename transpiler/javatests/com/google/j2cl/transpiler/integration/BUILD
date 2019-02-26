@@ -8,9 +8,11 @@
 
 licenses(["notice"])  # Apache 2.0
 
-java_library(
+java_import(
     name = "jre",
-    srcs = ["//jre/java:jre_java_files"],
+    jars = [
+        "//jre/java:libjre.jar",
+    ],
     deps = [
         "//jre/java:jre_bootclasspath",
         "//third_party:gwt-javaemul-internal-annotations",
