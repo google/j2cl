@@ -35,7 +35,7 @@ import org.kohsuke.args4j.Option;
  * <p>Bazel workers allow J2CL to run in a JVM that is not being terminated after every compile and
  * thus gain significant speedups.
  */
-class BazelJ2clBuilder extends BazelWorker {
+final class BazelJ2clBuilder extends BazelWorker {
 
   @Argument(
       metaVar = "<source files>",

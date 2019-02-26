@@ -44,7 +44,6 @@ java_binary(
 java_library(
     name = "bazelbuilder_lib",
     srcs = ["BazelJ2clBuilder.java"],
-    visibility = ["//transpiler/javatests/com/google/j2cl/transpiler:__subpackages__"],
     deps = [
         ":transpiler_lib",
         "//third_party:args4j",

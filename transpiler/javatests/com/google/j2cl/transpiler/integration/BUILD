@@ -13,6 +13,7 @@ java_import(
     jars = [
         "//jre/java:libjre.jar",
     ],
+    srcjar = "//jre/java:libjre-src.jar",
     deps = [
         "//jre/java:jre_bootclasspath",
         "//third_party:gwt-javaemul-internal-annotations",
@@ -61,6 +62,27 @@ java_test(
     name = "JsInteropRestrictionsCheckerTest",
     srcs = ["JsInteropRestrictionsCheckerTest.java"],
     data = [":jre_bundle_deploy.jar"],
+    deps = [
+        ":TranspilerTester",
+        "//third_party:guava",
+        "//third_party:junit",
+    ],
+)
+
+# This just a convenient way of zipping since that's what is expected for nativesourcepath.
+java_library(
+    name = "jre_native",
+    resources = ["//jre/java:jre_native_files"],
+)
+
+java_test(
+    name = "RerunningJ2clTranspilerTest",
+    srcs = ["RerunningJ2clTranspilerTest.java"],
+    data = [
+        ":jre_bundle_deploy.jar",
+        ":jre_bundle_deploy-src.jar",
+        ":libjre_native.jar",
+    ],
     deps = [
         ":TranspilerTester",
         "//third_party:guava",

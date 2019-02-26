@@ -21,6 +21,7 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import com.google.common.io.MoreFiles;
 import com.google.common.truth.Correspondence;
 import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.Problems;
@@ -55,15 +56,9 @@ public class TranspilerTester {
   public static TranspilerTester newTesterWithDefaults() {
     return newTester()
         .setJavaPackage("test")
-        // Add both paths where the JRE would be found is in the open-source release and internally.
-        .setArgs("-cp", GOOGLE3_PATH_PREFIX + JRE_PATH + java.io.File.pathSeparatorChar + JRE_PATH);
+        .setClassPath(
+            "transpiler/javatests/com/google/j2cl/transpiler/integration/jre_bundle_deploy.jar");
   }
-
-  public static final String GOOGLE3_PATH_PREFIX = "third_party/java_src/j2cl/";
-  // The bundle contains both the standard library and its deps so that tests don't have to know how
-  // to dep on all.
-  private static final String JRE_PATH =
-      "transpiler/javatests/com/google/j2cl/transpiler/integration/jre_bundle_deploy.jar";
 
   private List<File> files = new ArrayList<>();
   private List<String> args = new ArrayList<>();
@@ -92,6 +87,22 @@ public class TranspilerTester {
   private TranspilerTester addPath(Path filePath, String content) {
     this.files.add(new File(filePath, content));
     return this;
+  }
+
+  public TranspilerTester setClassPath(String path) {
+    return this.addArgs("-cp", toTestPath(path));
+  }
+
+  public TranspilerTester setNativeSourcePath(String path) {
+    return this.addArgs("-nativesourcepath", toTestPath(path));
+  }
+
+  public TranspilerTester addSourcePath(String path) {
+    return this.addArgs(toTestPath(path));
+  }
+
+  private static String toTestPath(String path) {
+    return path;
   }
 
   public TranspilerTester setArgs(String... args) {
@@ -220,6 +231,37 @@ public class TranspilerTester {
       Arrays.stream(fileNames)
           .forEach(fileName -> Assert.assertFalse(Files.exists(outputPath.resolve(fileName))));
       return this;
+    }
+
+    public TranspileResult assertOutputFilesAreSame(TranspileResult other) throws IOException {
+      List<Path> actualPaths =
+          ImmutableList.copyOf(MoreFiles.fileTraverser().depthFirstPreOrder(outputPath));
+      List<Path> expectedPaths =
+          ImmutableList.copyOf(MoreFiles.fileTraverser().depthFirstPreOrder(other.outputPath));
+
+      // Compare simple names.
+      assertThat(toFileNames(actualPaths))
+          .containsExactlyElementsIn(toFileNames(expectedPaths))
+          .inOrder();
+
+      // Compare file contents.
+      for (int i = 0; i < expectedPaths.size(); i++) {
+        Path expectedPath = expectedPaths.get(i);
+        Path actualPath = actualPaths.get(i);
+        if (Files.isDirectory(expectedPath)) {
+          assertThat(Files.isDirectory(actualPath)).isTrue();
+        } else {
+          assertThat(Files.readAllLines(actualPath))
+              .containsExactlyElementsIn(Files.readAllLines(expectedPath))
+              .inOrder();
+        }
+      }
+
+      return this;
+    }
+
+    private static List<Path> toFileNames(List<Path> original) {
+      return original.stream().map(Path::getFileName).collect(ImmutableList.toImmutableList());
     }
 
     private static final Pattern messagePattern =
