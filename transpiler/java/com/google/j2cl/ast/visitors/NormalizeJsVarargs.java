@@ -19,7 +19,6 @@ import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.ArrayLiteral;
 import com.google.j2cl.ast.ArrayTypeDescriptor;
-import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
@@ -97,8 +96,9 @@ public class NormalizeJsVarargs extends NormalizationPass {
           RuntimeMethods.createArraysMethodCall(
               "$stampType",
               varargsParameter.getReference(),
-              AstUtils.getMetadataConstructorReference(
-                  varargsParameterTypeDescriptor.getLeafTypeDescriptor()),
+              varargsParameterTypeDescriptor
+                  .getLeafTypeDescriptor()
+                  .getMetadataConstructorReference(),
               NumberLiteral.fromInt(varargsParameterTypeDescriptor.getDimensions()));
 
       List<Statement> statements = body.getStatements();

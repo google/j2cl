@@ -1244,16 +1244,6 @@ public class AstUtils {
     return new ArrayLiteral(varargsTypeDescriptor, valueExpressions);
   }
 
-  /**
-   * Returns a reference to the JavaScript constructor to be used for array marking, instanceof and
-   * casts. In most cases it the underlying JavaScript constructor for the class but not in all
-   * (such as native @JsTypes and @JsFunctions).
-   */
-  public static JavaScriptConstructorReference getMetadataConstructorReference(
-      TypeDescriptor typeDescriptor) {
-    return new JavaScriptConstructorReference(typeDescriptor.getMetadataTypeDeclaration());
-  }
-
   /** Whether this method require methods that override it to have an @override @JsDoc annotation */
   // TODO(b/31312257): fix or decide to not emit @override and suppress the error.
   public static boolean overrideNeedsAtOverrideAnnotation(MethodDescriptor overrideMethod) {

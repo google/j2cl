@@ -132,7 +132,7 @@ public class RuntimeMethods {
     String boxingMethodName =
         valueTypeDescriptor.getJsEnumInfo().supportsComparable() ? "boxComparable" : "box";
     return createEnumsMethodCall(
-        boxingMethodName, value, AstUtils.getMetadataConstructorReference(valueTypeDescriptor));
+        boxingMethodName, value, valueTypeDescriptor.getMetadataConstructorReference());
   }
 
   /** Create a call to Enums.unbox. */

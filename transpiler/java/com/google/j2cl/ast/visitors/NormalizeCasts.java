@@ -179,7 +179,7 @@ public class NormalizeCasts extends NormalizationPass {
 
     // Casts.$to(expr, TypeName);
     return MethodCall.Builder.from(castToMethodDescriptor)
-        .setArguments(expression, AstUtils.getMetadataConstructorReference(castTypeDescriptor))
+        .setArguments(expression, castTypeDescriptor.getMetadataConstructorReference())
         .build();
   }
 
@@ -219,7 +219,7 @@ public class NormalizeCasts extends NormalizationPass {
     return RuntimeMethods.createArraysMethodCall(
         "$castTo",
         expression,
-        AstUtils.getMetadataConstructorReference(leafTypeDescriptor),
+        leafTypeDescriptor.getMetadataConstructorReference(),
         NumberLiteral.fromInt(arrayCastTypeDescriptor.getDimensions()));
   }
 

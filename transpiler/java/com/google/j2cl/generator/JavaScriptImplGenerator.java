@@ -712,7 +712,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
           continue;
         }
         JavaScriptConstructorReference markImplementorConstructor =
-            AstUtils.getMetadataConstructorReference(interfaceTypeDescriptor);
+            interfaceTypeDescriptor.getMetadataConstructorReference();
         renderExpression(markImplementorConstructor);
         sourceBuilder.appendln(".$markImplementor(" + className + ");");
       }

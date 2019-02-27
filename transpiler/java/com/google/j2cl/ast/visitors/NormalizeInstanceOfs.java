@@ -19,7 +19,6 @@ import static com.google.common.base.Preconditions.checkState;
 
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.ArrayTypeDescriptor;
-import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.CompilationUnit;
@@ -70,7 +69,7 @@ public class NormalizeInstanceOfs extends NormalizationPass {
       InstanceOfExpression instanceOfExpression) {
     TypeDescriptor checkTypeDescriptor = instanceOfExpression.getTestTypeDescriptor();
     JavaScriptConstructorReference javaScriptConstructorReference =
-        AstUtils.getMetadataConstructorReference(checkTypeDescriptor);
+        checkTypeDescriptor.getMetadataConstructorReference();
 
     MethodDescriptor isInstanceMethodDescriptor =
         MethodDescriptor.newBuilder()
@@ -108,7 +107,7 @@ public class NormalizeInstanceOfs extends NormalizationPass {
     return RuntimeMethods.createArraysMethodCall(
         "$instanceIsOfType",
         expression,
-        AstUtils.getMetadataConstructorReference(leafTypeDescriptor),
+        leafTypeDescriptor.getMetadataConstructorReference(),
         NumberLiteral.fromInt(checkTypeDescriptor.getDimensions()));
   }
 }

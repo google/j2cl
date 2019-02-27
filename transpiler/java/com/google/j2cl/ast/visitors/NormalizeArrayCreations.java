@@ -21,7 +21,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.ArrayLiteral;
-import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.JsDocCastExpression;
@@ -89,7 +88,7 @@ public class NormalizeArrayCreations extends NormalizationPass {
             new ArrayLiteral(
                 TypeDescriptors.get().javaLangObjectArray,
                 newArrayExpression.getDimensionExpressions()),
-            AstUtils.getMetadataConstructorReference(leafTypeDescriptor)),
+            leafTypeDescriptor.getMetadataConstructorReference()),
         newArrayExpression.getTypeDescriptor());
   }
 
@@ -108,7 +107,7 @@ public class NormalizeArrayCreations extends NormalizationPass {
     List<Expression> arguments =
         Lists.newArrayList(
             newArrayExpression.getArrayLiteral(),
-            AstUtils.getMetadataConstructorReference(leafTypeDescriptor));
+            leafTypeDescriptor.getMetadataConstructorReference());
 
     int dimensionCount = newArrayExpression.getDimensionExpressions().size();
     if (dimensionCount > 1) {

@@ -17,7 +17,6 @@ package com.google.j2cl.ast.visitors;
 
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.ArrayTypeDescriptor;
-import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Node;
@@ -63,7 +62,7 @@ public class NormalizeTypeLiterals extends NormalizationPass {
   private static Expression convertTypeLiteral(TypeDescriptor literalTypeDescriptor) {
     // Class.$get(constructor)
     return RuntimeMethods.createClassGetMethodCall(
-        AstUtils.getMetadataConstructorReference(literalTypeDescriptor));
+        literalTypeDescriptor.getMetadataConstructorReference());
   }
 
   private static Expression convertArrayTypeLiteral(ArrayTypeDescriptor literalTypeDescriptor) {
@@ -74,7 +73,7 @@ public class NormalizeTypeLiterals extends NormalizationPass {
 
     // Class.$get(leafConstructor, dimenstions)
     return RuntimeMethods.createClassGetMethodCall(
-        AstUtils.getMetadataConstructorReference(literalTypeDescriptor.getLeafTypeDescriptor()),
+        literalTypeDescriptor.getLeafTypeDescriptor().getMetadataConstructorReference(),
         NumberLiteral.fromInt(literalTypeDescriptor.getDimensions()));
   }
 }

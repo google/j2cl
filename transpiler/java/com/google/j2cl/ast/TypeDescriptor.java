@@ -143,6 +143,15 @@ public abstract class TypeDescriptor extends Node
   @Nullable
   public abstract TypeDescriptor toRawTypeDescriptor();
 
+  /**
+   * Returns a reference to the JavaScript constructor to be used for array marking, instanceof and
+   * casts. In most cases it the underlying JavaScript constructor for the class but not in all
+   * (such as native @JsTypes and @JsFunctions).
+   */
+  public JavaScriptConstructorReference getMetadataConstructorReference() {
+    return new JavaScriptConstructorReference(getMetadataTypeDeclaration());
+  }
+
   /** Returns all the free type variables that appear in the type. */
   public Set<TypeVariable> getAllTypeVariables() {
     return ImmutableSet.of();
