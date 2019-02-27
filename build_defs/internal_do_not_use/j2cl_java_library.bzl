@@ -1,7 +1,6 @@
 """Common utilities for creating J2CL targets and providers."""
 
-load(":j2cl_transpile.bzl", "J2CL_TRANSPILE_ATTRS", "j2cl_transpile")
-load(":j2cl_js_common.bzl", "J2CL_JS_ATTRS", "JS_PROVIDER_NAME", "j2cl_js_provider")
+load(":j2cl_js_common.bzl", "J2CL_JS_ATTRS", "J2CL_JS_TOOLCHAIN_ATTRS", "JS_PROVIDER_NAME", "j2cl_js_provider")
 
 # Constructor for the Bazel provider for J2CL.
 # Note that data under "_private_" considered private internal data so do not use.
@@ -26,7 +25,7 @@ def _impl_j2cl_library(ctx):
     if java_srcs:
         output_js_zip = ctx.outputs.jszip
         output_library_info = ctx.actions.declare_file("%s_library_info" % ctx.attr.name)
-        j2cl_transpile(ctx, java_provider, js_srcs, output_js_zip, output_library_info)
+        _j2cl_transpile(ctx, java_provider, js_srcs, output_js_zip, output_library_info)
         js_outputs = [output_js_zip]
         library_info = [output_library_info]
     else:
@@ -112,7 +111,7 @@ def _strip_gwt_incompatible(ctx, java_srcs):
         progress_message = "Stripping @GwtIncompatible from %s" % ctx.label.name,
         inputs = java_srcs,
         outputs = [output_file],
-        executable = ctx.executable._stripper,
+        executable = ctx.executable._j2cl_stripper,
         arguments = [args],
         env = dict(LANG = "en_US.UTF-8"),
         execution_requirements = {"supports-workers": "1"},
@@ -120,6 +119,72 @@ def _strip_gwt_incompatible(ctx, java_srcs):
     )
 
     return output_file
+
+def _j2cl_transpile(ctx, java_provider, js_srcs, output, library_info_output):
+    """ Takes Java provider and translates it into Closure style JS in a zip bundle."""
+
+    # Using source_jars of the java_library since that includes APT generated src.
+    srcs = java_provider.source_jars + js_srcs
+    classpath = depset(
+        java_provider.compilation_info.boot_classpath,
+        transitive = [java_provider.compilation_info.compilation_classpath],
+    )
+
+    args = ctx.actions.args()
+    args.use_param_file("@%s", use_always = True)
+    args.set_param_file_format("multiline")
+    args.add_joined("-classpath", classpath, join_with = ctx.configuration.host_path_separator)
+    args.add("-output", output)
+    args.add("-libraryinfooutput", library_info_output)
+    if ctx.attr.declare_legacy_namespace:
+        args.add("-declarelegacynamespaces")
+    if ctx.attr.readable_source_maps:
+        args.add("-readablesourcemaps")
+    if ctx.attr.readable_library_info:
+        args.add("-readablelibraryinfo")
+    if ctx.var.get("GROK_ELLIPSIS_BUILD", None):
+        args.add("-generatekytheindexingmetadata")
+    args.add_all(srcs)
+
+    ctx.actions.run(
+        progress_message = "Transpiling to JavaScript %s" % ctx.label,
+        inputs = depset(srcs, transitive = [classpath]),
+        outputs = [output, library_info_output],
+        executable = ctx.executable._j2cl_transpiler,
+        arguments = [args],
+        env = dict(LANG = "en_US.UTF-8"),
+        execution_requirements = {"supports-workers": "1"},
+        mnemonic = "J2cl",
+    )
+
+_J2CL_TOOLCHAIN_ATTRS = {
+    "_java_toolchain": attr.label(
+        default = Label("//build_defs/internal_do_not_use:j2cl_java_toolchain"),
+    ),
+    "_host_javabase": attr.label(
+        default = Label("@bazel_tools//tools/jdk:current_host_java_runtime"),
+        cfg = "host",
+    ),
+    "_j2cl_transpiler": attr.label(
+        default = Label("//build_defs/internal_do_not_use:BazelJ2clBuilder"),
+        cfg = "host",
+        executable = True,
+    ),
+    "_j2cl_stripper": attr.label(
+        default = Label("//build_defs/internal_do_not_use:GwtIncompatibleStripper", relative_to_caller_repository = False),
+        cfg = "host",
+        executable = True,
+    ),
+    # TODO(goktug): remove workaround after b/71772385 is fixed
+    "_srcs_hack": attr.label(default = Label("//build_defs/internal_do_not_use:dummy_src")),
+}
+_J2CL_TOOLCHAIN_ATTRS.update(J2CL_JS_TOOLCHAIN_ATTRS)
+
+_J2CL_DEPRECATED_LIB_ATTRS = {
+    "readable_source_maps": attr.bool(default = False),
+    "readable_library_info": attr.bool(default = False),
+    "declare_legacy_namespace": attr.bool(default = False),
+}
 
 _J2CL_LIB_ATTRS = {
     # TODO(goktug): Try to limit this further.
@@ -130,22 +195,9 @@ _J2CL_LIB_ATTRS = {
     "exported_plugins": attr.label_list(providers = [JavaInfo]),
     "javacopts": attr.string_list(),
     "licenses": attr.license(),
-    "_java_toolchain": attr.label(
-        default = Label("//build_defs/internal_do_not_use:j2cl_java_toolchain"),
-    ),
-    "_host_javabase": attr.label(
-        default = Label("@bazel_tools//tools/jdk:current_host_java_runtime"),
-        cfg = "host",
-    ),
-    "_stripper": attr.label(
-        default = Label("//build_defs/internal_do_not_use:GwtIncompatibleStripper", relative_to_caller_repository = False),
-        cfg = "host",
-        executable = True,
-    ),
-    # TODO(goktug): remove workaround after b/71772385 is fixed
-    "_srcs_hack": attr.label(default = Label("//build_defs/internal_do_not_use:dummy_src")),
 }
-_J2CL_LIB_ATTRS.update(J2CL_TRANSPILE_ATTRS)
+_J2CL_LIB_ATTRS.update(_J2CL_DEPRECATED_LIB_ATTRS)
+_J2CL_LIB_ATTRS.update(_J2CL_TOOLCHAIN_ATTRS)
 _J2CL_LIB_ATTRS.update(J2CL_JS_ATTRS)
 
 j2cl_library = rule(
@@ -165,12 +217,16 @@ def _impl_java_import(ctx):
         **j2cl_js_provider(ctx)
     )
 
+_J2CL_IMPORT_ATTRS = {
+    "jar": attr.label(providers = [JavaInfo]),
+    "licenses": attr.license(),
+}
+_J2CL_IMPORT_ATTRS.update(J2CL_JS_TOOLCHAIN_ATTRS)
+_J2CL_IMPORT_ATTRS.update(J2CL_JS_ATTRS)
+
 # helper rule to convert a Java target to a J2CL target.
 j2cl_java_import = rule(
     implementation = _impl_java_import,
-    attrs = dict(J2CL_JS_ATTRS, **{
-        "jar": attr.label(providers = [JavaInfo]),
-        "licenses": attr.license(),
-    }),
+    attrs = _J2CL_IMPORT_ATTRS,
     fragments = ["java", "js"],
 )

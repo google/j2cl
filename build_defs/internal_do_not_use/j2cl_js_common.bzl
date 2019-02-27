@@ -6,9 +6,9 @@ def j2cl_js_provider(ctx, srcs = [], deps = [], exports = []):
     """ Creates a js provider from provided sources, deps and exports. """
 
     default_j2cl_suppresses = [
-      "analyzerChecks",
-      "JSC_UNKNOWN_EXPR_TYPE",
-      "JSC_STRICT_INEXISTENT_PROPERTY",
+        "analyzerChecks",
+        "JSC_UNKNOWN_EXPR_TYPE",
+        "JSC_STRICT_INEXISTENT_PROPERTY",
     ]
     suppresses = default_j2cl_suppresses + ctx.attr.js_suppress
 
@@ -19,9 +19,11 @@ def j2cl_js_provider(ctx, srcs = [], deps = [], exports = []):
         "exports": js.exports,
     }
 
-J2CL_JS_ATTRS = dict(CLOSURE_JS_TOOLCHAIN_ATTRS, **{
+J2CL_JS_TOOLCHAIN_ATTRS = CLOSURE_JS_TOOLCHAIN_ATTRS
+
+J2CL_JS_ATTRS = {
     "js_suppress": attr.string_list(),
-})
+}
 
 JS_PROVIDER_NAME = "closure_js_library"
 
