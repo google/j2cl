@@ -28,9 +28,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
 /** Method declaration. */
 @Visitable
@@ -271,16 +269,6 @@ public class Method extends Member implements HasJsNameInfo, MethodLike {
       return this;
     }
 
-    public Builder clearStatements() {
-      statements.clear();
-      return this;
-    }
-
-    public Builder removeStatement(int index) {
-      statements.remove(index);
-      return this;
-    }
-
     public Builder setOverride(boolean isOverride) {
       this.isOverride = isOverride;
       return this;
@@ -307,35 +295,8 @@ public class Method extends Member implements HasJsNameInfo, MethodLike {
               .build();
       checkState(parameters.size() == methodDescriptor.getParameterDescriptors().size());
 
-      Set<TypeVariable> typeParametersTypeDescriptors =
-          new LinkedHashSet<>(methodDescriptor.getTypeParameterTypeDescriptors());
-      for (Variable parameter : parameters) {
-        // Collect type variables that have been introduced by new parameters and are
-        // not already type parameters of the method nor of the enclosing class.
-        typeParametersTypeDescriptors.addAll(
-            parameter
-                .getTypeDescriptor()
-                .getAllTypeVariables()
-                .stream()
-                .filter(
-                    typeVariable ->
-                        !methodDescriptor
-                            .getEnclosingTypeDescriptor()
-                            .getTypeArgumentDescriptors()
-                            .contains(typeVariable))
-                .collect(toImmutableList()));
-      }
       return new Method(
-          sourcePosition,
-          MethodDescriptor.Builder.from(methodDescriptor)
-              .updateParameterTypeDescriptors(
-                  parameters.stream().map(Variable::getTypeDescriptor).collect(toImmutableList()))
-              .setTypeParameterTypeDescriptors(typeParametersTypeDescriptors)
-              .build(),
-          parameters,
-          body,
-          isOverride,
-          jsDocDescription);
+          sourcePosition, methodDescriptor, parameters, body, isOverride, jsDocDescription);
     }
   }
 }

@@ -25,13 +25,13 @@ import com.google.auto.value.extension.memoized.Memoized;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
+import com.google.common.collect.Streams;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.common.ThreadLocalInterner;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -566,23 +566,13 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       return setParameterDescriptors(toParameterDescriptors(parameterTypeDescriptors));
     }
 
-    public Builder updateParameterTypeDescriptors(List<TypeDescriptor> parameterTypeDescriptors) {
-      checkArgument(parameterTypeDescriptors.size() == getParameterDescriptors().size());
-      ImmutableList.Builder<ParameterDescriptor> listBuilder = ImmutableList.builder();
-      Iterator<ParameterDescriptor> parameterDescriptorIterator =
-          getParameterDescriptors().iterator();
-      Iterator<TypeDescriptor> parameterTypeDescriptorIterator =
-          parameterTypeDescriptors.iterator();
-      while (parameterDescriptorIterator.hasNext()) {
-        checkState(parameterTypeDescriptorIterator.hasNext());
-        listBuilder.add(
-            parameterDescriptorIterator
-                .next()
-                .toBuilder()
-                .setTypeDescriptor(parameterTypeDescriptorIterator.next())
-                .build());
-      }
-      return setParameterDescriptors(listBuilder.build());
+    private Builder updateParameterTypeDescriptors(List<TypeDescriptor> parameterTypeDescriptors) {
+      return setParameterDescriptors(
+          Streams.zip(
+                  getParameterDescriptors().stream(),
+                  parameterTypeDescriptors.stream(),
+                  (pd, td) -> pd.toBuilder().setTypeDescriptor(td).build())
+              .collect(ImmutableList.toImmutableList()));
     }
 
     public Builder addParameterTypeDescriptors(
@@ -602,15 +592,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
                 .build());
       }
       return setParameterDescriptors(newParameterDescriptors);
-    }
-
-    public Builder addParameterTypeDescriptors(TypeDescriptor... parameterTypeDescriptors) {
-      return addParameterTypeDescriptors(Arrays.asList(parameterTypeDescriptors));
-    }
-
-    public Builder addParameterTypeDescriptors(List<TypeDescriptor> parameterTypeDescriptors) {
-      return addParameterTypeDescriptors(
-          getParameterDescriptors().size(), parameterTypeDescriptors);
     }
 
     abstract MethodDescriptor getDeclarationMethodDescriptorOrNullIfSelf();
@@ -734,6 +715,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
                   + "."
                   + methodDescriptor.getName(),
               methodDeclarationParameterTypeDescriptors);
+          // TODO(b/35802406): Add an assertion that the declaration has the same enclosing type.
         }
       }
       return internedMethodDescriptor;
