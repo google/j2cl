@@ -114,10 +114,8 @@ public class LambdaTypeDescriptors {
       Optional<Integer> uniqueId) {
 
     List<String> classComponents =
-        AstUtils.synthesizeInnerClassComponents(
-            enclosingTypeDescriptor,
-            FUNCTIONAL_INTERFACE_ADAPTOR_CLASS_NAME,
-            uniqueId.orElse(null));
+        enclosingTypeDescriptor.synthesizeInnerClassComponents(
+            FUNCTIONAL_INTERFACE_ADAPTOR_CLASS_NAME, uniqueId.orElse(null));
 
     ImmutableList<TypeVariable> typeParameterDescriptors =
         ImmutableList.<TypeVariable>builder()
@@ -257,8 +255,8 @@ public class LambdaTypeDescriptors {
       DeclaredTypeDescriptor functionalTypeDescriptor) {
 
     List<String> classComponents =
-        AstUtils.synthesizeInnerClassComponents(
-            functionalTypeDescriptor, FUNCTIONAL_INTERFACE_JSFUNCTION_CLASS_NAME);
+        functionalTypeDescriptor.synthesizeInnerClassComponents(
+            FUNCTIONAL_INTERFACE_JSFUNCTION_CLASS_NAME);
 
     return TypeDeclaration.newBuilder()
         .setEnclosingTypeDeclaration(functionalTypeDescriptor.getTypeDeclaration())

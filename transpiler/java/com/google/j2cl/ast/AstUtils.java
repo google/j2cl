@@ -26,7 +26,6 @@ import com.google.common.base.Predicates;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.j2cl.ast.FieldDescriptor.FieldOrigin;
 import com.google.j2cl.ast.MethodDescriptor.MethodOrigin;
 import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
@@ -58,15 +57,6 @@ public class AstUtils {
       return string;
     }
     return string.substring(0, 1).toUpperCase() + string.substring(1);
-  }
-
-  /** Returns new synthesized inner class components. */
-  public static List<String> synthesizeInnerClassComponents(
-      DeclaredTypeDescriptor enclosingType, Object... parts) {
-    List<String> classComponents =
-        Lists.newArrayList(enclosingType.getTypeDeclaration().getClassComponents());
-    classComponents.add("$" + Joiner.on("$").skipNulls().join(parts));
-    return classComponents;
   }
 
   /** Returns the loadModules method descriptor for a particular type */

@@ -23,6 +23,7 @@ import static java.util.stream.Collectors.joining;
 
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
+import com.google.common.base.Joiner;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -468,6 +469,14 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         .stream()
         .filter(MethodDescriptor::isJsConstructor)
         .collect(toImmutableList());
+  }
+
+  /** Returns new synthesized inner class components. */
+  public ImmutableList<String> synthesizeInnerClassComponents(Object... parts) {
+    return ImmutableList.<String>builder()
+        .addAll(getTypeDeclaration().getClassComponents())
+        .add("$" + Joiner.on("$").skipNulls().join(parts))
+        .build();
   }
 
   /**

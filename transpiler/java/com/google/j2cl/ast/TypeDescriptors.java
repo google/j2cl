@@ -272,8 +272,8 @@ public class TypeDescriptors {
         typeDescriptor.toUnparameterizedTypeDescriptor();
 
     List<String> classComponents =
-        AstUtils.synthesizeInnerClassComponents(
-            unparameterizedTypeDescriptor, OVERLAY_IMPLEMENTATION_CLASS_SUFFIX);
+        unparameterizedTypeDescriptor.synthesizeInnerClassComponents(
+            OVERLAY_IMPLEMENTATION_CLASS_SUFFIX);
 
     return TypeDeclaration.newBuilder()
         .setEnclosingTypeDeclaration(unparameterizedTypeDescriptor.getTypeDeclaration())
