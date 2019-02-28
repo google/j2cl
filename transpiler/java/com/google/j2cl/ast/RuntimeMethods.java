@@ -243,8 +243,8 @@ public class RuntimeMethods {
     String methodName =
         String.format(
             "$narrow%sTo%s",
-            AstUtils.toProperCase(fromTypeDescriptor.getSimpleSourceName()),
-            AstUtils.toProperCase(toTypeDescriptor.getSimpleSourceName()));
+            toProperCase(fromTypeDescriptor.getSimpleSourceName()),
+            toProperCase(toTypeDescriptor.getSimpleSourceName()));
     MethodDescriptor narrowMethodDescriptor =
         MethodDescriptor.newBuilder()
             .setJsInfo(JsInfo.RAW)
@@ -266,8 +266,8 @@ public class RuntimeMethods {
     String widenMethodName =
         String.format(
             "$widen%sTo%s",
-            AstUtils.toProperCase(fromTypeDescriptor.getSimpleSourceName()),
-            AstUtils.toProperCase(toTypeDescriptor.getSimpleSourceName()));
+            toProperCase(fromTypeDescriptor.getSimpleSourceName()),
+            toProperCase(toTypeDescriptor.getSimpleSourceName()));
     MethodDescriptor widenMethodDescriptor =
         MethodDescriptor.newBuilder()
             .setJsInfo(JsInfo.RAW)
@@ -279,6 +279,14 @@ public class RuntimeMethods {
             .build();
     // Primitives.$widenAToB(expr);
     return MethodCall.Builder.from(widenMethodDescriptor).setArguments(expression).build();
+  }
+
+  /** Return the String with first letter capitalized. */
+  private static String toProperCase(String string) {
+    if (string.isEmpty()) {
+      return string;
+    }
+    return string.substring(0, 1).toUpperCase() + string.substring(1);
   }
 
   /** Create a call to a Util method. */

@@ -51,14 +51,6 @@ public class AstUtils {
         && !typeDescriptor.isAnonymous();
   }
 
-  /** Return the String with first letter capitalized. */
-  public static String toProperCase(String string) {
-    if (string.isEmpty()) {
-      return string;
-    }
-    return string.substring(0, 1).toUpperCase() + string.substring(1);
-  }
-
   /** Returns the loadModules method descriptor for a particular type */
   public static MethodDescriptor getLoadModulesDescriptor(DeclaredTypeDescriptor typeDescriptor) {
     return MethodDescriptor.newBuilder()
@@ -366,7 +358,7 @@ public class AstUtils {
 
     List<Expression> arguments = parameters.stream().map(Variable::getReference).collect(toList());
 
-    AstUtils.maybePackageVarargs(toMethodDescriptor, arguments);
+    maybePackageVarargs(toMethodDescriptor, arguments);
 
     // TODO(rluble): Casts are probably needed on arguments if the types differ between the
     // targetMethodDescriptor and its declarationMethodDescriptor.
@@ -567,35 +559,6 @@ public class AstUtils {
     return PrimitiveTypes.INT;
   }
 
-  public static MethodDescriptor getStringValueOfMethodDescriptor(TypeDescriptor typeDescriptor) {
-    // Find the right overload.
-    if (TypeDescriptors.isPrimitiveByte(typeDescriptor)
-        || TypeDescriptors.isPrimitiveShort(typeDescriptor)) {
-      typeDescriptor = PrimitiveTypes.INT;
-    } else if (!typeDescriptor.isPrimitive()) {
-      typeDescriptor = TypeDescriptors.get().javaLangObject;
-    }
-
-    return TypeDescriptors.get()
-        .javaLangString
-        .getMethodDescriptorByName(MethodDescriptor.VALUE_OF_METHOD_NAME, typeDescriptor);
-  }
-
-  /**
-   * Returns true if {@code expression} is a string literal or if it is a BinaryExpression that
-   * matches String conversion context and one of its operands is non null String.
-   */
-  public static boolean isNonNullString(Expression expression) {
-    if (expression instanceof StringLiteral) {
-      return true;
-    }
-    if (!(expression instanceof BinaryExpression)) {
-      return false;
-    }
-    BinaryExpression binaryExpression = (BinaryExpression) expression;
-    return matchesStringContext(binaryExpression);
-  }
-
   /**
    * Returns explicit qualifier for member reference (field access or method call).
    *
@@ -727,6 +690,10 @@ public class AstUtils {
     // namespaces like "foo.bar.Baz.4". Prefix anonymous numbered classes with a string to make
     // JSCompiler happy.
     return startsWithNumber(simpleName) ? "$" + simpleName : simpleName;
+  }
+
+  private static boolean startsWithNumber(String string) {
+    return !string.isEmpty() && Character.isDigit(string.charAt(0));
   }
 
   @SuppressWarnings("unchecked")
@@ -908,10 +875,6 @@ public class AstUtils {
         methodsBySignature.put(declaredMethod.getMethodSignature(), declaredMethod);
       }
     }
-  }
-
-  public static boolean startsWithNumber(String string) {
-    return !string.isEmpty() && Character.isDigit(string.charAt(0));
   }
 
   /**
@@ -1237,7 +1200,7 @@ public class AstUtils {
   }
 
   /** Returns the value field descriptor for a JsEnum */
-  public static FieldDescriptor getJsEnumValueFieldDescriptor(TypeDeclaration typeDeclaration) {
+  private static FieldDescriptor getJsEnumValueFieldDescriptor(TypeDeclaration typeDeclaration) {
     checkState(typeDeclaration.isJsEnum());
     return typeDeclaration.getDeclaredFieldDescriptors().stream()
         .filter(AstUtils::isJsEnumCustomValueField)
@@ -1276,18 +1239,6 @@ public class AstUtils {
     } else {
       return (DeclaredTypeDescriptor) valueTypeDescriptor;
     }
-  }
-
-  /** Returns the initialization value for a JsEnum constant. */
-  public static Expression getJsEnumConstantValue(Field field) {
-    checkState(field.isEnumField());
-    NewInstance initializer = (NewInstance) field.getInitializer();
-    List<Expression> arguments = initializer.getArguments();
-    if (arguments.size() != 1) {
-      // Not a valid initialization. The code will be rejected.
-      return null;
-    }
-    return arguments.get(0);
   }
 
   /**

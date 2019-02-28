@@ -35,11 +35,13 @@ import com.google.j2cl.ast.MemberReference;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -89,7 +91,7 @@ public class NormalizeJsEnums extends NormalizationPass {
    */
   private static Field createClosureEnumConstant(Field field, int ordinal) {
 
-    Expression initializer = AstUtils.getJsEnumConstantValue(field);
+    Expression initializer = getJsEnumConstantValue(field);
     if (initializer == null) {
       initializer = NumberLiteral.fromInt(ordinal);
     }
@@ -110,6 +112,18 @@ public class NormalizeJsEnums extends NormalizationPass {
         .setDescriptor(closureEnumConstantFieldDescriptor)
         .setInitializer(initializer)
         .build();
+  }
+
+  /** Returns the initialization value for a JsEnum constant. */
+  private static Expression getJsEnumConstantValue(Field field) {
+    checkState(field.isEnumField());
+    NewInstance initializer = (NewInstance) field.getInitializer();
+    List<Expression> arguments = initializer.getArguments();
+    if (arguments.size() != 1) {
+      // Not a valid initialization. The code will be rejected.
+      return null;
+    }
+    return arguments.get(0);
   }
 
   /** Convert the JsEnum to a native JsEnum so that they are handled uniformly. */

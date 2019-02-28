@@ -16,9 +16,13 @@
 package com.google.j2cl.ast.visitors;
 
 import com.google.j2cl.ast.AstUtils;
+import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.MethodCall;
+import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.PrimitiveTypes;
+import com.google.j2cl.ast.StringLiteral;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 
@@ -37,7 +41,7 @@ public class InsertStringConversions extends NormalizationPass {
       @Override
       public Expression rewriteStringContext(Expression expression) {
         TypeDescriptor typeDescriptor = expression.getTypeDescriptor();
-        if (AstUtils.isNonNullString(expression)) {
+        if (isNonNullString(expression)) {
           return expression;
         }
 
@@ -53,10 +57,39 @@ public class InsertStringConversions extends NormalizationPass {
         }
 
         // For the normal case we call String.valueOf which performs the right conversion.
-        return MethodCall.Builder.from(AstUtils.getStringValueOfMethodDescriptor(typeDescriptor))
+        return MethodCall.Builder.from(getStringValueOfMethodDescriptor(typeDescriptor))
             .setArguments(expression)
             .build();
       }
     };
+  }
+
+  private static MethodDescriptor getStringValueOfMethodDescriptor(TypeDescriptor typeDescriptor) {
+    // Find the right overload.
+    if (TypeDescriptors.isPrimitiveByte(typeDescriptor)
+        || TypeDescriptors.isPrimitiveShort(typeDescriptor)) {
+      typeDescriptor = PrimitiveTypes.INT;
+    } else if (!typeDescriptor.isPrimitive()) {
+      typeDescriptor = TypeDescriptors.get().javaLangObject;
+    }
+
+    return TypeDescriptors.get()
+        .javaLangString
+        .getMethodDescriptorByName(MethodDescriptor.VALUE_OF_METHOD_NAME, typeDescriptor);
+  }
+
+  /**
+   * Returns true if {@code expression} is a string literal or if it is a BinaryExpression that
+   * matches String conversion context and one of its operands is non null String.
+   */
+  private static boolean isNonNullString(Expression expression) {
+    if (expression instanceof StringLiteral) {
+      return true;
+    }
+    if (!(expression instanceof BinaryExpression)) {
+      return false;
+    }
+    BinaryExpression binaryExpression = (BinaryExpression) expression;
+    return AstUtils.matchesStringContext(binaryExpression);
   }
 }
