@@ -58,9 +58,11 @@ public class DevirtualizeBoxedTypesAndJsFunctionImplementations extends Normaliz
             if (methodDescriptor.isJsFunction()) {
               // If the JsFunction method has different method signature from the SAM method, it
               // should be devirtualized.
-              return !AstUtils.areParameterErasureEqual(
-                  methodDescriptor,
-                  enclosingTypeDescriptor.getFunctionalInterface().getJsFunctionMethodDescriptor());
+              return !methodDescriptor.isSameSignature(
+                  enclosingTypeDescriptor
+                      .getFunctionalInterface()
+                      .getJsFunctionMethodDescriptor()
+                      .getDeclarationDescriptor());
             }
             return true;
           }

@@ -366,7 +366,12 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       return false;
     }
 
-    return this.getOverrideSignature().equals(that.getOverrideSignature());
+    return isSameSignature(that);
+  }
+
+  /** Returns {@code true} is {@code this} has the same signature as {@code that}. */
+  public boolean isSameSignature(MethodDescriptor that) {
+    return getOverrideSignature().equals(that.getOverrideSignature());
   }
 
   /**

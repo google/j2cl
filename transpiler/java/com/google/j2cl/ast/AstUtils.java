@@ -638,29 +638,6 @@ public class AstUtils {
   }
 
   /**
-   * Two methods are parameter erasure equal if the erasure of their parameters' types are equal.
-   */
-  public static boolean areParameterErasureEqual(MethodDescriptor left, MethodDescriptor right) {
-    List<TypeDescriptor> leftParameterTypeDescriptors =
-        left.getDeclarationDescriptor().getParameterTypeDescriptors();
-    List<TypeDescriptor> rightParameterTypeDescriptors =
-        right.getDeclarationDescriptor().getParameterTypeDescriptors();
-
-    if (!left.getName().equals(right.getName())
-        || leftParameterTypeDescriptors.size() != rightParameterTypeDescriptors.size()) {
-      return false;
-    }
-    for (int i = 0; i < leftParameterTypeDescriptors.size(); i++) {
-      if (!leftParameterTypeDescriptors
-          .get(i)
-          .hasSameRawType(rightParameterTypeDescriptors.get(i))) {
-        return false;
-      }
-    }
-    return true;
-  }
-
-  /**
    * Generates the following code:
    *
    * <p>$Util.$makeLambdaFunction(Type.prototype.m_equal, $instance, Type.$copy);
