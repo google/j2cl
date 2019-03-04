@@ -29,6 +29,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.MoreCollectors;
+import com.google.j2cl.ast.MethodDescriptor.MethodOrigin;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.common.ThreadLocalInterner;
 import java.util.ArrayList;
@@ -354,6 +355,36 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   }
 
   public abstract TypeDeclaration getTypeDeclaration();
+
+  /** Returns the class initializer method descriptor for a particular type */
+  @Memoized
+  public MethodDescriptor getClinitMethodDescriptor() {
+    return MethodDescriptor.newBuilder()
+        .setStatic(true)
+        .setEnclosingTypeDescriptor(this)
+        .setName(MethodDescriptor.CLINIT_METHOD_NAME)
+        .setOrigin(MethodOrigin.SYNTHETIC_CLASS_INITIALIZER)
+        .setJsInfo(isNative() ? JsInfo.RAW_OVERLAY : JsInfo.RAW)
+        .build();
+  }
+
+  /** Returns the instance initializer method descriptor for a particular type */
+  @Memoized
+  public MethodDescriptor getInitMethodDescriptor() {
+    return MethodDescriptor.newBuilder()
+        .setEnclosingTypeDescriptor(this)
+        .setName(getInitName())
+        .setVisibility(Visibility.PRIVATE)
+        .setOrigin(MethodOrigin.SYNTHETIC_INSTANCE_INITIALIZER)
+        .setJsInfo(JsInfo.RAW)
+        .build();
+  }
+
+  /** Returns the name of $init method for a type. */
+  private String getInitName() {
+    // Synthesize a name that is unique per class to avoid property clashes in JS.
+    return MethodDescriptor.INIT_METHOD_PREFIX + "__" + ManglingNameUtils.getMangledName(this);
+  }
 
   @Memoized
   @Override

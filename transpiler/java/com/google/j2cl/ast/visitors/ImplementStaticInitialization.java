@@ -204,8 +204,7 @@ public class ImplementStaticInitialization extends NormalizationPass {
   }
 
   private static Expression createClinitCallExpression(DeclaredTypeDescriptor typeDescriptor) {
-    MethodDescriptor clinitMethodDescriptor = AstUtils.getClinitMethodDescriptor(typeDescriptor);
-    return MethodCall.Builder.from(clinitMethodDescriptor).build();
+    return MethodCall.Builder.from(typeDescriptor.getClinitMethodDescriptor()).build();
   }
 
   private void addRequiredSuperInterfacesClinitCalls(
@@ -350,7 +349,7 @@ public class ImplementStaticInitialization extends NormalizationPass {
 
     type.addMethod(
         Method.newBuilder()
-            .setMethodDescriptor(AstUtils.getClinitMethodDescriptor(type.getTypeDescriptor()))
+            .setMethodDescriptor(type.getTypeDescriptor().getClinitMethodDescriptor())
             .addStatements(noopClinitFunction, callLoadModules)
             .addStatements(clinitStatements)
             .setSourcePosition(sourcePosition)

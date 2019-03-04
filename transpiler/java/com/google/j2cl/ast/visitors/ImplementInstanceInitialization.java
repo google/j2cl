@@ -51,7 +51,7 @@ public class ImplementInstanceInitialization extends NormalizationPass {
 
     type.addMethod(
         Method.newBuilder()
-            .setMethodDescriptor(AstUtils.getInitMethodDescriptor(type.getTypeDescriptor()))
+            .setMethodDescriptor(type.getTypeDescriptor().getInitMethodDescriptor())
             .addStatements(statements)
             .setSourcePosition(type.getSourcePosition())
             .build());
@@ -72,7 +72,7 @@ public class ImplementInstanceInitialization extends NormalizationPass {
 
   private static void synthesizeInstanceInitCall(Method constructor) {
     MethodDescriptor initMethodDescriptor =
-        AstUtils.getInitMethodDescriptor(constructor.getDescriptor().getEnclosingTypeDescriptor());
+        constructor.getDescriptor().getEnclosingTypeDescriptor().getInitMethodDescriptor();
 
     SourcePosition sourcePosition = constructor.getBody().getSourcePosition();
 

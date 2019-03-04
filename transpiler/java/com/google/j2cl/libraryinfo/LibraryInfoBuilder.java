@@ -18,7 +18,6 @@ package com.google.j2cl.libraryinfo;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.ast.AbstractVisitor;
-import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.Invocation;
@@ -180,8 +179,7 @@ public final class LibraryInfoBuilder {
       // hand-written native static method could potentially make a call to $clinit
       methodInvocationSet.add(
           createMethodInvocation(
-              AstUtils.getClinitMethodDescriptor(
-                  member.getDescriptor().getEnclosingTypeDescriptor()),
+              member.getDescriptor().getEnclosingTypeDescriptor().getClinitMethodDescriptor(),
               InvocationKind.STATIC));
     }
 

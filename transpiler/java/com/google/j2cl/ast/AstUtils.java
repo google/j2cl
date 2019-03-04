@@ -62,36 +62,6 @@ public class AstUtils {
         .build();
   }
 
-  /** Returns the class initializer method descriptor for a particular type */
-  public static MethodDescriptor getClinitMethodDescriptor(DeclaredTypeDescriptor typeDescriptor) {
-    return MethodDescriptor.newBuilder()
-        .setStatic(true)
-        .setEnclosingTypeDescriptor(typeDescriptor)
-        .setName(MethodDescriptor.CLINIT_METHOD_NAME)
-        .setOrigin(MethodOrigin.SYNTHETIC_CLASS_INITIALIZER)
-        .setJsInfo(typeDescriptor.isNative() ? JsInfo.RAW_OVERLAY : JsInfo.RAW)
-        .build();
-  }
-
-  /** Returns the instance initializer method descriptor for a particular type */
-  public static MethodDescriptor getInitMethodDescriptor(DeclaredTypeDescriptor typeDescriptor) {
-    return MethodDescriptor.newBuilder()
-        .setEnclosingTypeDescriptor(typeDescriptor)
-        .setName(getInitName(typeDescriptor))
-        .setVisibility(Visibility.PRIVATE)
-        .setOrigin(MethodOrigin.SYNTHETIC_INSTANCE_INITIALIZER)
-        .setJsInfo(JsInfo.RAW)
-        .build();
-  }
-
-  /** Returns the name of $init method for a type. */
-  private static String getInitName(DeclaredTypeDescriptor typeDescriptor) {
-    // Synthesize a name that is unique per class to avoid property clashes in JS.
-    return MethodDescriptor.INIT_METHOD_PREFIX
-        + "__"
-        + ManglingNameUtils.getMangledName(typeDescriptor);
-  }
-
   /** Create default constructor MethodDescriptor. */
   public static MethodDescriptor createImplicitConstructorDescriptor(
       DeclaredTypeDescriptor enclosingTypeDescriptor) {

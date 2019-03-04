@@ -16,7 +16,6 @@
 package com.google.j2cl.ast.visitors;
 
 import com.google.j2cl.ast.AbstractRewriter;
-import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.CompilationUnit;
@@ -64,8 +63,8 @@ public class NormalizeFieldInitialization extends NormalizationPass {
               return InitializerBlock.newBuilder()
                   .setDescriptor(
                       field.isStatic()
-                          ? AstUtils.getClinitMethodDescriptor(enclosingTypeDescriptor)
-                          : AstUtils.getInitMethodDescriptor(enclosingTypeDescriptor))
+                          ? enclosingTypeDescriptor.getClinitMethodDescriptor()
+                          : enclosingTypeDescriptor.getInitMethodDescriptor())
                   .setSourcePosition(field.getSourcePosition())
                   .setStatic(field.isStatic())
                   .setBlock(createInitializerBlockFromFieldInitializer(field))

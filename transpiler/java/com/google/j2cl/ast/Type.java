@@ -197,7 +197,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
         InitializerBlock.newBuilder()
             .setBlock(instanceInitializer)
             .setSourcePosition(instanceInitializer.getSourcePosition())
-            .setDescriptor(AstUtils.getInitMethodDescriptor(getTypeDescriptor()))
+            .setDescriptor(getTypeDescriptor().getInitMethodDescriptor())
             .build());
   }
 
@@ -211,7 +211,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
             .setBlock(staticInitializer)
             .setStatic(true)
             .setSourcePosition(staticInitializer.getSourcePosition())
-            .setDescriptor(AstUtils.getClinitMethodDescriptor(getTypeDescriptor()))
+            .setDescriptor(getTypeDescriptor().getClinitMethodDescriptor())
             .build());
   }
 
@@ -222,7 +222,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
             .setBlock(staticInitializer)
             .setStatic(true)
             .setSourcePosition(staticInitializer.getSourcePosition())
-            .setDescriptor(AstUtils.getClinitMethodDescriptor(getTypeDescriptor()))
+            .setDescriptor(getTypeDescriptor().getClinitMethodDescriptor())
             .build());
   }
 
