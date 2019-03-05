@@ -573,7 +573,7 @@ public class RuntimeMethods {
 
     checkArgument(arguments.size() >= requiredParameters);
 
-    MethodDescriptor arrayCreateMethodDescriptor =
+    MethodDescriptor methodDescriptor =
         MethodDescriptor.newBuilder()
             .setEnclosingTypeDescriptor(vmTypeDescriptor)
             .setJsInfo(JsInfo.RAW)
@@ -584,7 +584,7 @@ public class RuntimeMethods {
             .build();
     // Use the raw type as the stamped leaf type. So that we use the upper bound of a generic type
     // parameter type instead of the type parameter itself.
-    return MethodCall.Builder.from(arrayCreateMethodDescriptor).setArguments(arguments).build();
+    return MethodCall.Builder.from(methodDescriptor).setArguments(arguments).build();
   }
 
   @AutoValue
