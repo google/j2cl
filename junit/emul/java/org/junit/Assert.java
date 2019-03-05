@@ -300,7 +300,7 @@ public class Assert {
     public static void assertArrayEquals(Object[] expecteds, Object[] actuals) {
         assertArrayEquals(null, expecteds, actuals);
     }
-    
+
     /**
      * Asserts that two boolean arrays are equal. If they are not, an
      * {@link AssertionError} is thrown with the given message. If
@@ -315,8 +315,8 @@ public class Assert {
     public static void assertArrayEquals(String message, boolean[] expecteds,
             boolean[] actuals) throws ArrayComparisonFailure {
         internalArrayEquals(message, expecteds, actuals);
-    }    
-    
+    }
+
     /**
      * Asserts that two boolean arrays are equal. If they are not, an
      * {@link AssertionError} is thrown. If <code>expected</code> and

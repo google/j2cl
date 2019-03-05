@@ -1,7 +1,7 @@
 ---
 name: Feature request
 about: Suggest an idea for J2CL
-labels: 
+labels:
 
 ---
 

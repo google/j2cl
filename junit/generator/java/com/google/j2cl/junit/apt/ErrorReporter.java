@@ -28,7 +28,7 @@ class ErrorReporter {
   public ErrorReporter(Messager messager) {
     this.messager = messager;
   }
-  
+
   public void report(ErrorMessage errorMessage, Object... args) {
     messager.printMessage(errorMessage.kind(), errorMessage.format(args));
   }

@@ -71,4 +71,3 @@ public abstract class TestClass {
     abstract TestClass build();
   }
 }
-

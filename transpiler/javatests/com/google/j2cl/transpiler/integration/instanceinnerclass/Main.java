@@ -234,7 +234,7 @@ public class Main {
   }
 
   /**
-   * Test inner class without any constructors, and whose parent is also an inner class, 
+   * Test inner class without any constructors, and whose parent is also an inner class,
    * and they share the same enclosing instance.
    */
   public class D extends B {

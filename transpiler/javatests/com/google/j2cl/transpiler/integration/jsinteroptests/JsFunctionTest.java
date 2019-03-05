@@ -596,4 +596,3 @@ public class JsFunctionTest {
   @JsMethod
   public static native boolean hasField(Object object, String fieldName);
 }
-

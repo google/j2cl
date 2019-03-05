@@ -87,4 +87,3 @@ public class ImplementInstanceInitialization extends NormalizationPass {
         MethodCall.Builder.from(initMethodDescriptor).build().makeStatement(sourcePosition));
   }
 }
-

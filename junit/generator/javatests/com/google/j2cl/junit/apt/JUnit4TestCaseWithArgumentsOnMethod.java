@@ -27,4 +27,3 @@ public class JUnit4TestCaseWithArgumentsOnMethod {
   @Test
   public void test(@SuppressWarnings("unused") Object o) {}
 }
-

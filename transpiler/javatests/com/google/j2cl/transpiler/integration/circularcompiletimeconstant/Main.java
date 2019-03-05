@@ -32,4 +32,3 @@ public class Main {
     static final int B = A.A + 1; // which looks at A.a which is circular so it reads it as 0
   }
 }
-

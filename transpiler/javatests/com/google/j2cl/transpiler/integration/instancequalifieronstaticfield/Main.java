@@ -88,7 +88,7 @@ public class Main {
         assertTrue(sideEffectCount == 4);
       }
     }
-    
+
     // Test side effects on binary operator
     {
       {

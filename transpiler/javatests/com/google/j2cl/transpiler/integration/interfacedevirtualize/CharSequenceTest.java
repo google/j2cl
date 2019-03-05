@@ -21,7 +21,7 @@ import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
  * Test CharSequence Interface on all devirtualized classes that implement it.
  */
 public class CharSequenceTest {
-  
+
   public static void test() {
     final String s = "string";
     CharSequence cs =
@@ -122,4 +122,3 @@ public class CharSequenceTest {
     assertTrue(cs.toString().startsWith("sub"));
   }
 }
-

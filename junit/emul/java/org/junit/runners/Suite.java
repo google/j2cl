@@ -63,9 +63,9 @@ public class Suite /* extends ParentRunner<Runner> */ extends Runner {
 //         }
 //         return annotation.value();
 //     }
-// 
+//
 //     private final List<Runner> runners;
-// 
+//
      /**
      * Called reflectively on classes annotated with <code>@RunWith(Suite.class)</code>
      *
@@ -130,7 +130,7 @@ public class Suite /* extends ParentRunner<Runner> */ extends Runner {
 //         return runners;
 //     }
 
-// REMOVED FOR J2CL    
+// REMOVED FOR J2CL
 //     @Override
 //     protected Description describeChild(Runner child) {
 //         return child.getDescription();

@@ -24,4 +24,3 @@ import junit.framework.TestCase;
 public class JUnit3TestCaseWithStaticTestMethod extends TestCase {
   public static void test() {}
 }
-

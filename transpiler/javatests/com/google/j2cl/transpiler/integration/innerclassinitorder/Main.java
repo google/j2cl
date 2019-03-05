@@ -33,7 +33,7 @@ public class Main {
       o.polymorph();
     }
   }
-  
+
   class OuterRefFromSuperCtorCall extends OuterRefFromSuperCtorBase {
     OuterRefFromSuperCtorCall() {
       super(new Base() {
@@ -259,7 +259,7 @@ public class Main {
       public int checkDispatch() {
         return 2;
       }
-      
+
       public int checkDispatchFromSub1() {
         return super.checkDispatch();
       }
@@ -294,7 +294,7 @@ public class Main {
     public Outer(int i) {
       value = i;
     }
-    
+
     public int checkDispatch() {
       return 1;
     }

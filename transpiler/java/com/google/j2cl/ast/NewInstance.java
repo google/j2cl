@@ -105,7 +105,7 @@ public class NewInstance extends Invocation {
         List<Expression> arguments) {
       return new NewInstance(qualifierExpression, methodDescriptor, arguments);
     }
-    
+
     private Builder(NewInstance newInstance) {
       super(newInstance);
     }

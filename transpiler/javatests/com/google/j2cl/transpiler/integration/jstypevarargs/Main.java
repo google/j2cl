@@ -272,7 +272,7 @@ public class Main {
     assertTrue(sm.test4() == 10);
     assertTrue(sm.test5() == 40);
   }
-  
+
   @JsMethod
   private static int count(String... strings) {
     return strings.length;

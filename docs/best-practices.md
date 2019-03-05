@@ -246,4 +246,3 @@ Additionally, APT based code generation such as
 surprising impact on compile time and code size if used without awareness of the
 implications. Generated code is rarely inspected which can lead to hidden code
 verbosity. These APTs are designed for convenience, without code size in mind.
-

@@ -16,7 +16,7 @@ public class ArrayComparisonFailure extends AssertionError {
 
     /*
      * We have to use the f prefix until the next major release to ensure
-     * serialization compatibility. 
+     * serialization compatibility.
      * See https://github.com/junit-team/junit/issues/976
      */
     private final List<Integer> fIndices = new ArrayList<Integer>();

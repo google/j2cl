@@ -20,4 +20,3 @@ package com.google.j2cl.junit.apt;
  */
 public class RandomDependency {
 }
-

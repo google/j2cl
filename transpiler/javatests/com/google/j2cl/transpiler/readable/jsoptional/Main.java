@@ -76,4 +76,3 @@ public class Main {
     public void m(String t, @JsOptional Object o) {}
   }
 }
-

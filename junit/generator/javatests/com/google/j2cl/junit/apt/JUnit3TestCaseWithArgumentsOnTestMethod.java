@@ -26,4 +26,3 @@ public class JUnit3TestCaseWithArgumentsOnTestMethod extends TestCase {
 
   public void test1() {}
 }
-

@@ -257,4 +257,3 @@ public class ComparableTest {
     test.testComparableImpl();
   }
 }
-

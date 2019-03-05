@@ -3,7 +3,7 @@ package org.junit.runners;
 // REMOVED FOR J2CL
 // import java.lang.reflect.Method;
 // import java.util.Comparator;
-// 
+//
 // import org.junit.internal.MethodSorter;
 
 /**
@@ -19,7 +19,7 @@ public enum MethodSorters {
    */
   // REMOVED FOR J2CL
   // NAME_ASCENDING(MethodSorter.NAME_ASCENDING),
-  
+
   // ADDED FOR J2CL
   NAME_ASCENDING,
 
@@ -29,13 +29,13 @@ public enum MethodSorters {
    */
   // REMOVED FOR J2CL
   // JVM(null),
-  
+
   /**
    * Sorts the test methods in a deterministic, but not predictable, order
    */
   // REMOVED FOR J2CL
   // DEFAULT(MethodSorter.DEFAULT);
-  
+
   /**
    * Leaves the test methods in the order returned by the JVM. Note that the order from the JVM may
    * vary from run to run
@@ -50,12 +50,12 @@ public enum MethodSorters {
 
 // REMOVED FOR J2CL
 //   private final Comparator<Method> comparator;
-//  
+//
 //   private MethodSorters(Comparator<Method> comparator) {
 //       this.comparator = comparator;
 //   }
 
-// REMOVED FOR J2CL  
+// REMOVED FOR J2CL
 //   public Comparator<Method> getComparator() {
 //       return comparator;
 //   }

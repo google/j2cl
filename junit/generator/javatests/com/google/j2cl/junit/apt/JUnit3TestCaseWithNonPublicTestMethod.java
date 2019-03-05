@@ -25,4 +25,3 @@ public class JUnit3TestCaseWithNonPublicTestMethod extends TestCase {
   @SuppressWarnings("JUnit3TestNotRun")
   void test() {}
 }
-

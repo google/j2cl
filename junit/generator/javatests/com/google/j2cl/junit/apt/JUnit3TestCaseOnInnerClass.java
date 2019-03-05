@@ -25,4 +25,3 @@ public class JUnit3TestCaseOnInnerClass {
     public void test() {}
   }
 }
-

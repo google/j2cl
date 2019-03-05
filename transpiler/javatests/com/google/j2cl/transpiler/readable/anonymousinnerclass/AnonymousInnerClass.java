@@ -17,7 +17,7 @@ package com.google.j2cl.transpiler.readable.anonymousinnerclass;
 
 class A {
   class B {
-    
+
   }
 }
 public class AnonymousInnerClass {

@@ -176,7 +176,7 @@ public class JsPropertyTest {
     obj.setY(91);
     assertEquals(91, obj.getY());
   }
-  
+
   static class MyNativeJsTypeSubclass extends MyNativeJsType {
 
     @JsConstructor
@@ -363,7 +363,7 @@ public class JsPropertyTest {
     assertEquals(4 + SET_X, ((MyNativeJsTypeInterfaceImplNeedingBridgeSubclass) object).y);
     assertEquals(5 + SET_PARENT_X, ((OtherAccidentalImplementer) object).x);
   }
-  
+
   @JsType(isNative = true)
   interface MyJsTypeInterfaceWithProtectedNames {
     String var();
@@ -406,7 +406,7 @@ public class JsPropertyTest {
     object.setX(false);
     assertFalse(object.isX());
   }
-  
+
   @JsType(isNative = true)
   interface AccidentalOverridePropertyJsTypeInterface {
     @JsProperty
@@ -447,7 +447,7 @@ public class JsPropertyTest {
     assertEquals(55, object.getX());
     assertEquals(55, getProperty(object, "x"));
   }
-  
+
   @JsType(isNative = true)
   interface JsTypeGetProperty {
 

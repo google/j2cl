@@ -26,7 +26,7 @@ public interface Thenable {
   public interface FullFilledCallback {
     void execute(Object o);
   }
-  
+
   @JsFunction
   public interface RejectedCallback {
     void execute(Object o);

@@ -30,4 +30,3 @@ public class JUnit4TestCaseOnInnerClass {
     public void test() {}
   }
 }
-

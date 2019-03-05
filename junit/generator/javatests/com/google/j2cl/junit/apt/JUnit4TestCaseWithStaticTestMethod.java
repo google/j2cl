@@ -27,4 +27,3 @@ public class JUnit4TestCaseWithStaticTestMethod {
   @Test
   public static void test() {}
 }
-

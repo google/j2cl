@@ -32,4 +32,3 @@ public class SimpleJUnit3TestCase extends TestCase {
   @Override
   protected void tearDown() throws Exception {}
 }
-

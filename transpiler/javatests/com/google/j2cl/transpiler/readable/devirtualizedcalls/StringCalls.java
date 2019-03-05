@@ -29,4 +29,3 @@ public class StringCalls {
     String newString = literal.toString();
   }
 }
-

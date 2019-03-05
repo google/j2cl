@@ -53,7 +53,7 @@ public class Main {
     assertTrue(string1.getClass() instanceof Class);
     assertTrue(string1.getClass() == string2.getClass());
   }
-  
+
   private static void testComparableMethods() {
     String string1 = "string1";
     String string2 = "string2";

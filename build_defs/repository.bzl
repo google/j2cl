@@ -10,4 +10,3 @@ def load_j2cl_repo_deps():
     strip_prefix = "rules_closure-%s" % _IO_BAZEL_RULES_CLOSURE_VERSION,
     url = "https://github.com/bazelbuild/rules_closure/archive/%s.zip"% _IO_BAZEL_RULES_CLOSURE_VERSION,
   )
-
