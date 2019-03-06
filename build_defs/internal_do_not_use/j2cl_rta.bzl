@@ -14,7 +14,7 @@ _J2clRtaInfo = provider()
 _RTA_ASPECT_ATTRS = ["deps", "exports", "module_deps", "modules"]
 
 def _library_info_aspect_impl(target, ctx):
-    library_info_file = target[J2clInfo]._private_.LibraryInfo if J2clInfo in target else []
+    library_info_file = target[J2clInfo]._private_.library_info if J2clInfo in target else []
 
     # Because the aspect propagates along attributes listed in _RTA_ASPECT_ATTRS,
     # the aspect has been previously applied to targets listed in those attributes.

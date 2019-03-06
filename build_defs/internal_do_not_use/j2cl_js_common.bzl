@@ -10,7 +10,7 @@ def j2cl_js_provider(ctx, srcs = [], deps = [], exports = []):
         "JSC_UNKNOWN_EXPR_TYPE",
         "JSC_STRICT_INEXISTENT_PROPERTY",
     ]
-    suppresses = default_j2cl_suppresses + ctx.attr.js_suppress
+    suppresses = default_j2cl_suppresses + getattr(ctx.attr, "js_suppress", [])
 
     js = create_closure_js_library(ctx, srcs, deps, exports, suppresses)
 
