@@ -174,10 +174,12 @@ public class RuntimeMethods {
 
   /** Create a call to InternalPreconditions.checkNotNull method. */
   public static MethodCall createCheckNotNullCall(Expression argument) {
-    return createRuntimeMethodCall(
-        BootstrapType.INTERNAL_PRECONDITIONS.getDescriptor(),
-        "m_checkNotNull__java_lang_Object",
-        ImmutableList.of(argument));
+    return MethodCall.Builder.from(
+            TypeDescriptors.get()
+                .javaemulInternalPreconditions
+                .getMethodDescriptorByName("checkNotNull", TypeDescriptors.get().javaLangObject))
+        .setArguments(argument)
+        .build();
   }
 
   /** Create a call to an LongUtils method. */
@@ -511,18 +513,6 @@ public class RuntimeMethods {
                                   MethodInfo.newBuilder()
                                       .setReturnType(PrimitiveTypes.LONG)
                                       .setParameters(PrimitiveTypes.INT, PrimitiveTypes.INT)
-                                      .build())
-                              .build())
-                      .put(
-                          BootstrapType.INTERNAL_PRECONDITIONS.getDescriptor(),
-                          // InternalPreconditions methods
-                          ImmutableMap.<String, MethodInfo>builder()
-                              .put(
-                                  "m_checkNotNull__java_lang_Object",
-                                  MethodInfo.newBuilder()
-                                      .setReturnType(
-                                          TypeDescriptors.get().javaLangObject.toNonNullable())
-                                      .setParameters(TypeDescriptors.get().javaLangObject)
                                       .build())
                               .build())
                       .put(

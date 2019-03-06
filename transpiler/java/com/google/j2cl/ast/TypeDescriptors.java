@@ -58,6 +58,8 @@ public class TypeDescriptors {
   public DeclaredTypeDescriptor javaLangCloneable;
   public DeclaredTypeDescriptor javaIoSerializable;
 
+  public DeclaredTypeDescriptor javaemulInternalPreconditions;
+
   public ArrayTypeDescriptor javaLangObjectArray;
 
   public NullType nullType;
@@ -309,8 +311,7 @@ public class TypeDescriptors {
     JAVA_SCRIPT_FUNCTION("vmbootstrap", "JavaScriptFunction"),
     NATIVE_EQUALITY("nativebootstrap", "Equality"),
     NATIVE_UTIL("nativebootstrap", "Util"),
-    NATIVE_LONG("nativebootstrap", "Long"),
-    INTERNAL_PRECONDITIONS("javaemul.internal", "InternalPreconditions");
+    NATIVE_LONG("nativebootstrap", "Long");
 
     private final DeclaredTypeDescriptor typeDescriptor;
 
@@ -510,6 +511,9 @@ public class TypeDescriptors {
           break;
         case "java.lang.Runnable":
           typeDescriptors.javaLangRunnable = referenceType;
+          break;
+        case "javaemul.internal.InternalPreconditions":
+          typeDescriptors.javaemulInternalPreconditions = referenceType;
           break;
         default:
           throw new IllegalStateException("Unexpected reference type in well known set: " + name);

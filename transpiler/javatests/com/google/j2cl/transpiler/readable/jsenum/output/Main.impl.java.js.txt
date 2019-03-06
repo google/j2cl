@@ -25,7 +25,7 @@ let Arrays = goog.forwardDeclare('java.util.Arrays$impl');
 let List = goog.forwardDeclare('java.util.List$impl');
 let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
 let Supplier = goog.forwardDeclare('java.util.function.Supplier$impl');
-let $InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $Comparables = goog.forwardDeclare('vmbootstrap.Comparables$impl');
@@ -71,7 +71,7 @@ class Main extends j_l_Object {
             ComparableJsEnum.ONE) == 1 ?
         ComparableJsEnum.TWO :
         /**@type {?ComparableJsEnum} */ ($Enums.unbox(null));
-    switch ($InternalPreconditions.m_checkNotNull__java_lang_Object(
+    switch (InternalPreconditions.m_checkNotNull__java_lang_Object(
         comparableJsEnum)) {
       case ComparableJsEnum.TWO:
         break;
@@ -86,8 +86,7 @@ class Main extends j_l_Object {
                     IntJsEnum.ELEVEN) == 10 ?
         IntJsEnum.ELEVEN :
         /**@type {?IntJsEnum} */ ($Enums.unbox(null));
-    switch (
-        $InternalPreconditions.m_checkNotNull__java_lang_Object(intJsEnum)) {
+    switch (InternalPreconditions.m_checkNotNull__java_lang_Object(intJsEnum)) {
       case IntJsEnum.TWENTY:
         break;
       default:
@@ -108,7 +107,7 @@ class Main extends j_l_Object {
         StringJsEnum.THREE :
         /**@type {StringJsEnum} */ ($Enums.unbox(null));
     switch (
-        $InternalPreconditions.m_checkNotNull__java_lang_Object(stringJsEnum)) {
+        InternalPreconditions.m_checkNotNull__java_lang_Object(stringJsEnum)) {
       case StringJsEnum.ONE:
         break;
       default:
@@ -213,7 +212,7 @@ class Main extends j_l_Object {
     Arrays = goog.module.get('java.util.Arrays$impl');
     Consumer = goog.module.get('java.util.function.Consumer$impl');
     Supplier = goog.module.get('java.util.function.Supplier$impl');
-    $InternalPreconditions =
+    InternalPreconditions =
         goog.module.get('javaemul.internal.InternalPreconditions$impl');
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');

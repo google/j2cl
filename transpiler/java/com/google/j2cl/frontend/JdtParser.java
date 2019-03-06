@@ -71,7 +71,8 @@ public class JdtParser {
           "java.lang.Object",
           "java.lang.Runnable",
           "java.lang.String",
-          "java.lang.Throwable");
+          "java.lang.Throwable",
+          "javaemul.internal.InternalPreconditions");
 
   /** Returns a map from file paths to compilation units after JDT parsing. */
   public CompilationUnitsAndTypeBindings parseFiles(

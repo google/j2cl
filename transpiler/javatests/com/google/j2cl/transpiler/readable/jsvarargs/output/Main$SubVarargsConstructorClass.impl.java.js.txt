@@ -12,7 +12,7 @@ goog.module('com.google.j2cl.transpiler.readable.jsvarargs.Main.SubVarargsConstr
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsvarargs.Main.NativeObject.$Overlay$impl');
-let $InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 
 
 class SubVarargsConstructorClass extends Object {
@@ -23,7 +23,7 @@ class SubVarargsConstructorClass extends Object {
    */
   constructor(i, ...args) {
     SubVarargsConstructorClass.$clinit();
-    super(...$InternalPreconditions.m_checkNotNull__java_lang_Object(args));
+    super(...InternalPreconditions.m_checkNotNull__java_lang_Object(args));
     this.$ctor__com_google_j2cl_transpiler_readable_jsvarargs_Main_SubVarargsConstructorClass__int__arrayOf_java_lang_Object(
         i, args);
   }
@@ -68,7 +68,7 @@ class SubVarargsConstructorClass extends Object {
    * @public
    */
   static $loadModules() {
-    $InternalPreconditions =
+    InternalPreconditions =
         goog.module.get('javaemul.internal.InternalPreconditions$impl');
   }
 };

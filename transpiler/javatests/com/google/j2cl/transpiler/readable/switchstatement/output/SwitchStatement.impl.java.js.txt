@@ -13,7 +13,7 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Numbers = goog.forwardDeclare('com.google.j2cl.transpiler.readable.switchstatement.Numbers$impl');
-let $InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
 
 
@@ -50,7 +50,7 @@ class SwitchStatement extends j_l_Object {
    * @public
    */
   m_main__() {
-    switch ($InternalPreconditions.m_checkNotNull__java_lang_Object('one')) {
+    switch (InternalPreconditions.m_checkNotNull__java_lang_Object('one')) {
       case 'one':
       case 'two':
         break;
@@ -146,7 +146,7 @@ class SwitchStatement extends j_l_Object {
   static $loadModules() {
     Numbers = goog.module.get(
         'com.google.j2cl.transpiler.readable.switchstatement.Numbers$impl');
-    $InternalPreconditions =
+    InternalPreconditions =
         goog.module.get('javaemul.internal.InternalPreconditions$impl');
     $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
   }

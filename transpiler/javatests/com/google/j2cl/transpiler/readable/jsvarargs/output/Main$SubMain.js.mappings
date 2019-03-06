@@ -19,7 +19,7 @@
 [a += super.f3(1, new int[] {});] => [a += super.f3(1);] "com.google.j2cl.transpiler.readable.jsvarargs.Main$SubMain.f3"
 [int[] ints = new int[] {1, 2};] => [let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));] "com.google.j2cl.transpiler.readable.jsvarargs.Main$SubMain.f3"
 [ints] => [ints] "ints"
-[a += super.f3(1, ints);] => [a += super.f3(1, ...$InternalPreconditions.m_checkNotNull__java_lang_Object(ints));] "com.google.j2cl.transpiler.readable.jsvarargs.Main$SubMain.f3"
+[a += super.f3(1, ints);] => [a += super.f3(1, ...InternalPreconditions.m_checkNotNull__java_lang_Object(ints));] "com.google.j2cl.transpiler.readable.jsvarargs.Main$SubMain.f3"
 [return a;] => [return a;] "com.google.j2cl.transpiler.readable.jsvarargs.Main$SubMain.f3"
 [SubMain] => [$clinit]
 [SubMain] => [SubMain.$clinit = (() =>{
