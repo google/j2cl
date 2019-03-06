@@ -130,9 +130,6 @@ def _java_compile(ctx, name, srcs, deps, exports, plugins, exported_plugins, out
         java_toolchain = ctx.attr._java_toolchain
         host_javabase = ctx.attr._host_javabase
 
-    if "fields_proto" in ctx.label.name:
-        print(ctx.label.name)
-
     return java_common.compile(
         ctx,
         source_files = ctx.files._srcs_hack,
