@@ -132,7 +132,6 @@ def _java_compile(ctx, name, srcs, deps, exports, plugins, exported_plugins, out
 
     return java_common.compile(
         ctx,
-        source_files = ctx.files._srcs_hack,
         source_jars = stripped_java_srcs,
         deps = deps,
         exports = exports,
@@ -227,8 +226,6 @@ J2CL_TOOLCHAIN_ATTRS = {
         cfg = "host",
         executable = True,
     ),
-    # TODO(goktug): remove workaround after b/71772385 is fixed
-    "_srcs_hack": attr.label(default = Label("//build_defs/internal_do_not_use:dummy_src")),
 }
 J2CL_TOOLCHAIN_ATTRS.update(J2CL_JS_TOOLCHAIN_ATTRS)
 

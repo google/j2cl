@@ -129,8 +129,10 @@ class J2clTranspiler {
       CompilationUnitsAndTypeBindings jdtUnitsAndResolvedBindings =
           createJdtUnitsAndResolveBindings();
       List<CompilationUnit> j2clUnits = convertUnits(jdtUnitsAndResolvedBindings);
-      checkUnits(j2clUnits);
-      normalizeUnits(j2clUnits);
+      if (!j2clUnits.isEmpty()) {
+        checkUnits(j2clUnits);
+        normalizeUnits(j2clUnits);
+      }
       generateOutputs(j2clUnits);
       return problems;
     } catch (Problems.Exit e) {
