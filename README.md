@@ -66,7 +66,7 @@ Clone the repository and build a sample app from source:
 
 Live-reload
 ---
-ibazel is file-system watcher that auto-triggers bazel build when neeeded.
+ibazel is file-system watcher that auto-triggers bazel build when needed.
 To use it, just replace ```bazel``` with ```ibazel``` in any command:
 
 - Install [ibazel](https://github.com/bazelbuild/bazel-watcher#installation) and make sure it is in your path.
