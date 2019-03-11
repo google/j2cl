@@ -201,7 +201,7 @@ Class names can be obfuscated (TODO(goktug): document how).
 #### Logging
 
 Closure compiler flag:
-`"--define=jre.logging.logLevel=OFF|SEVERE|WARNNG|INFO|ALL`
+`"--define=jre.logging.logLevel=OFF|SEVERE|WARNING|INFO|ALL`
 
 When using `java.util.logging.Logger`, you may specify a logging level. You can
 disable these logging statements (and have them dead-code stripped) in
