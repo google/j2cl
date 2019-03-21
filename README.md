@@ -92,6 +92,7 @@ To start your first project, you can use the helloworld sample as a template:
 
 ```shell
       $ cp -R <j2cl-repo>/samples/helloworld <my-repo>/<app-name>
+      $ mv <my-repo>/<app-name>/WORKSPACE.remote <my-repo>/<app-name>/WORKSPACE
 ```
 
 and you are done.
