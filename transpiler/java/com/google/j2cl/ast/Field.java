@@ -24,7 +24,7 @@ import javax.annotation.Nullable;
 
 /** Field declaration node. */
 @Visitable
-public class Field extends Member implements HasJsNameInfo {
+public class Field extends Member {
   @Visitable FieldDescriptor fieldDescriptor;
   @Visitable @Nullable Expression initializer;
   private final Variable capturedVariable;
@@ -57,11 +57,6 @@ public class Field extends Member implements HasJsNameInfo {
     return this.capturedVariable;
   }
 
-  @Override
-  public String getQualifiedBinaryName() {
-    return null;
-  }
-
   public Optional<SourcePosition> getNameSourcePosition() {
     return nameSourcePosition;
   }
@@ -80,11 +75,6 @@ public class Field extends Member implements HasJsNameInfo {
   }
 
   @Override
-  public boolean isStatic() {
-    return fieldDescriptor.isStatic();
-  }
-
-  @Override
   public boolean isField() {
     return true;
   }
@@ -92,16 +82,6 @@ public class Field extends Member implements HasJsNameInfo {
   @Override
   public Node accept(Processor processor) {
     return Visitor_Field.visit(processor, this);
-  }
-
-  @Override
-  public String getSimpleJsName() {
-    return fieldDescriptor.getSimpleJsName();
-  }
-
-  @Override
-  public String getJsNamespace() {
-    return fieldDescriptor.getJsNamespace();
   }
 
   /** A Builder for Field. */

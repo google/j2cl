@@ -24,14 +24,15 @@ import com.google.j2cl.common.SourcePosition;
 /** Abstract base class for class members. */
 @Visitable
 @Context
-public abstract class Member extends Node implements HasSourcePosition, HasReadableDescription {
+public abstract class Member extends Node
+    implements HasJsNameInfo, HasSourcePosition, HasReadableDescription {
   private final SourcePosition sourcePosition;
 
   public Member(SourcePosition sourcePosition) {
     this.sourcePosition = checkNotNull(sourcePosition);
   }
 
-  public abstract boolean isStatic();
+  public abstract MemberDescriptor getDescriptor();
 
   public boolean isAbstract() {
     return false;
@@ -53,17 +54,31 @@ public abstract class Member extends Node implements HasSourcePosition, HasReada
     return false;
   }
 
-  public boolean isNative() {
-    return getDescriptor() != null && getDescriptor().isNative();
-  }
-
   public boolean isInitializerBlock() {
     return false;
   }
 
-  public abstract MemberDescriptor getDescriptor();
+  public final boolean isNative() {
+    return getDescriptor().isNative();
+  }
 
-  public abstract String getQualifiedBinaryName();
+  public final boolean isStatic() {
+    return getDescriptor().isStatic();
+  }
+
+  public final String getQualifiedBinaryName() {
+    return getDescriptor().getQualifiedBinaryName();
+  }
+
+  @Override
+  public final String getSimpleJsName() {
+    return getDescriptor().getSimpleJsName();
+  }
+
+  @Override
+  public final String getJsNamespace() {
+    return getDescriptor().getJsNamespace();
+  }
 
   @Override
   public String getReadableDescription() {

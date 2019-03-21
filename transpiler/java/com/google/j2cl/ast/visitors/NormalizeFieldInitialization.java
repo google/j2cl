@@ -66,7 +66,6 @@ public class NormalizeFieldInitialization extends NormalizationPass {
                           ? enclosingTypeDescriptor.getClinitMethodDescriptor()
                           : enclosingTypeDescriptor.getInitMethodDescriptor())
                   .setSourcePosition(field.getSourcePosition())
-                  .setStatic(field.isStatic())
                   .setBlock(createInitializerBlockFromFieldInitializer(field))
                   .build();
             }

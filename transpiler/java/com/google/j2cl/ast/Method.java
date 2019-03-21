@@ -32,7 +32,7 @@ import java.util.List;
 
 /** Method declaration. */
 @Visitable
-public class Method extends Member implements HasJsNameInfo, MethodLike {
+public class Method extends Member implements MethodLike {
   @Visitable MethodDescriptor methodDescriptor;
   @Visitable List<Variable> parameters = new ArrayList<>();
   @Visitable Block body;
@@ -79,11 +79,6 @@ public class Method extends Member implements HasJsNameInfo, MethodLike {
     return null;
   }
 
-  @Override
-  public String getQualifiedBinaryName() {
-    return getDescriptor().getQualifiedBinaryName();
-  }
-
   public Block getBody() {
     return body;
   }
@@ -114,31 +109,8 @@ public class Method extends Member implements HasJsNameInfo, MethodLike {
     this.isOverride = isOverride;
   }
 
-  public boolean isFinal() {
-    return getDescriptor().isFinal();
-  }
-
-  public boolean isDeprecated() {
-    return methodDescriptor.isDeprecated();
-  }
-
-  @Override
-  public boolean isStatic() {
-    return methodDescriptor.isStatic();
-  }
-
   public String getJsDocDescription() {
     return jsDocDescription;
-  }
-
-  @Override
-  public String getSimpleJsName() {
-    return methodDescriptor.getSimpleJsName();
-  }
-
-  @Override
-  public String getJsNamespace() {
-    return methodDescriptor.getJsNamespace();
   }
 
   public static Builder newBuilder() {

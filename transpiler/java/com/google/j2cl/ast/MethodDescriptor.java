@@ -185,8 +185,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
   public abstract TypeDescriptor getReturnTypeDescriptor();
 
-  public abstract boolean isDeprecated();
-
   /** Type parameters declared in the method. */
   public abstract ImmutableList<TypeVariable> getTypeParameterTypeDescriptors();
 

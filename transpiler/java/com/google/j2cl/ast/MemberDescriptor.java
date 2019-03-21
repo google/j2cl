@@ -78,6 +78,8 @@ public abstract class MemberDescriptor extends Node
 
   public abstract boolean isSynthetic();
 
+  public abstract boolean isDeprecated();
+
   public abstract Origin getOrigin();
 
   public boolean isMethod() {

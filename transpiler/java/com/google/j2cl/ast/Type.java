@@ -209,7 +209,6 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
     members.add(
         InitializerBlock.newBuilder()
             .setBlock(staticInitializer)
-            .setStatic(true)
             .setSourcePosition(staticInitializer.getSourcePosition())
             .setDescriptor(getTypeDescriptor().getClinitMethodDescriptor())
             .build());
@@ -220,7 +219,6 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
         index,
         InitializerBlock.newBuilder()
             .setBlock(staticInitializer)
-            .setStatic(true)
             .setSourcePosition(staticInitializer.getSourcePosition())
             .setDescriptor(getTypeDescriptor().getClinitMethodDescriptor())
             .build());

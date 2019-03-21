@@ -25,17 +25,14 @@ import com.google.j2cl.common.SourcePosition;
 @Visitable
 public class InitializerBlock extends Member {
   @Visitable Block block;
-  private final boolean isStatic;
   private final MethodDescriptor methodDescriptor;
 
   private InitializerBlock(
       SourcePosition sourcePosition,
       Block block,
-      boolean isStatic,
       MethodDescriptor methodDescriptor) {
     super(sourcePosition);
     this.block = checkNotNull(block);
-    this.isStatic = isStatic;
     this.methodDescriptor = checkNotNull(methodDescriptor);
   }
 
@@ -44,25 +41,14 @@ public class InitializerBlock extends Member {
   }
 
   @Override
-  public boolean isStatic() {
-    return isStatic;
-  }
-
-  @Override
   public boolean isInitializerBlock() {
     return true;
-  }
-
-  @Override
-  public String getQualifiedBinaryName() {
-    return methodDescriptor.getQualifiedBinaryName();
   }
 
   @Override
   public MethodDescriptor getDescriptor() {
     return methodDescriptor;
   }
-
   @Override
   public Node accept(Processor processor) {
     return Visitor_InitializerBlock.visit(processor, this);
@@ -75,14 +61,12 @@ public class InitializerBlock extends Member {
   /** Builder for InitializerBlock. */
   public static class Builder {
     private Block block;
-    private boolean isStatic;
     private SourcePosition sourcePosition;
     private MethodDescriptor methodDescriptor;
 
     public static Builder from(InitializerBlock initializerBlock) {
       return newBuilder()
           .setBlock(initializerBlock.getBlock())
-          .setStatic(initializerBlock.isStatic())
           .setSourcePosition(initializerBlock.getSourcePosition())
           .setDescriptor(initializerBlock.getDescriptor());
     }
@@ -102,15 +86,11 @@ public class InitializerBlock extends Member {
       return this;
     }
 
-    public Builder setStatic(boolean isStatic) {
-      this.isStatic = isStatic;
-      return this;
-    }
 
     public InitializerBlock build() {
       checkState(block != null);
       checkState(sourcePosition != null);
-      return new InitializerBlock(sourcePosition, block, isStatic, methodDescriptor);
+      return new InitializerBlock(sourcePosition, block, methodDescriptor);
     }
   }
 }
