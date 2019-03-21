@@ -19,7 +19,6 @@ import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.DeclaredTypeDescriptor;
-import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Type;
@@ -126,45 +125,6 @@ public class DefaultMethodsResolver extends NormalizationPass {
               type.getTypeDescriptor(),
               "Default method forwarding stub.");
       type.addMethod(defaultForwardingMethod);
-
-      if (targetMethodDescriptor.isOrOverridesJsMember()) {
-        // Depending on the class hierarchy these methods might or might not be an override
-        // e.g.
-        //   interface I {        interface J {
-        //     m();                 @JsMethod default m() {}
-        //   }                      @JsMethod default n() {}
-        //                        }
-        //
-        //   class A implements I, J { }
-        //
-        // class A in Js will be emitted as follows
-        //
-        //   class A {
-        //     m()   { J.m(); }     // Overrides J.m
-        //     m_m() { this.m(); }  // Overrides I.m
-        //     n()   { J.n(); }     // Overrides J.n
-        //     m_n() { this.n(); }  // does not override anything
-        //
-        // We could not omit generating m_n() due to accidental overrides in subclasses
-        // but we could skip the override flag in just this case.
-        //
-        // See b/31312257.
-        type.addMethod(
-            AstUtils.createForwardingMethod(
-                type.getSourcePosition(),
-                null,
-                MethodDescriptor.Builder.from(defaultForwardingMethod.getDescriptor())
-                    .setJsInfo(JsInfo.NONE)
-                    .setSynthetic(true)
-                    .setBridge(true)
-                    .setAbstract(false)
-                    .setNative(false)
-                    .setDefaultMethod(false)
-                    .build(),
-                defaultForwardingMethod.getDescriptor(),
-                "Bridge to JsMethod.",
-                false));
-      }
     }
   }
 }

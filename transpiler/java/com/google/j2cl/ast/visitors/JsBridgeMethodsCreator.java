@@ -72,7 +72,9 @@ public class JsBridgeMethodsCreator extends NormalizationPass {
             .map(method -> ManglingNameUtils.getMangledName(method.getDescriptor()))
             .collect(toImmutableSet());
     for (Entry<MethodDescriptor, MethodDescriptor> entry :
-        delegatedMethodDescriptorsByBridgeMethodDescriptor(enclosingTypeDeclaration).entrySet()) {
+        delegatedMethodDescriptorsByBridgeMethodDescriptor(
+                enclosingTypeDeclaration, existingMethods)
+            .entrySet()) {
       MethodDescriptor bridgeMethodDescriptor = entry.getKey();
 
       String manglingName = ManglingNameUtils.getMangledName(bridgeMethodDescriptor);
@@ -110,13 +112,15 @@ public class JsBridgeMethodsCreator extends NormalizationPass {
 
   /** Returns the mapping from the bridge method to the delegating method. */
   private static Map<MethodDescriptor, MethodDescriptor>
-      delegatedMethodDescriptorsByBridgeMethodDescriptor(TypeDeclaration typeDeclaration) {
+      delegatedMethodDescriptorsByBridgeMethodDescriptor(
+          TypeDeclaration typeDeclaration, Iterable<Method> existingMethods) {
     Map<MethodDescriptor, MethodDescriptor> delegateMethodDescriptorsByBridgeMethodDescriptor =
         new LinkedHashMap<>();
 
     // case 1. exposed non-JsMember to the exposing JsMethod.
-    for (MethodDescriptor declaredMethodDescriptor :
-        typeDeclaration.getDeclaredMethodDescriptors()) {
+    for (Method method : existingMethods) {
+      MethodDescriptor declaredMethodDescriptor = method.getDescriptor();
+
       // Don't bridge abstract methods.
       if (declaredMethodDescriptor.isAbstract()) {
         continue;
