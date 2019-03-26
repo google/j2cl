@@ -77,66 +77,66 @@ def setup_j2cl_workspace():
     )
 
     # Eclipse JARs listed at
-    # http://download.eclipse.org/eclipse/updates/4.10/R-4.10-201812060815/plugins/
+    # http://download.eclipse.org/eclipse/updates/4.11/R-4.11-201903070500/plugins/
 
     http_jar(
         name = "org_eclipse_jdt_content_type",
-        url = "http://download.eclipse.org/eclipse/updates/4.10/R-4.10-201812060815/plugins/org.eclipse.core.contenttype_3.7.200.v20181107-1343.jar",
-        sha256 = "28b74f2a273a7a633845c315dbfe6b3bbc65e6fdefdb213fbecc43ded86fd8f2",
+        url = "http://download.eclipse.org/eclipse/updates/4.11/R-4.11-201903070500/plugins/org.eclipse.core.contenttype_3.7.300.v20190215-2048.jar",
+        sha256 = "d4cee7a28a000a89863ab225c479cafc2fdf8638db2e89b383d6d792c5bfb866",
     )
 
     http_jar(
         name = "org_eclipse_jdt_jobs",
-        url = "http://download.eclipse.org/eclipse/updates/4.10/R-4.10-201812060815/plugins/org.eclipse.core.jobs_3.10.200.v20180912-1356.jar",
-        sha256 = "a5aaaaa2ffac532fa0582f32223cca91813e310d19fdf076ba230da1a2371533",
+        url = "http://download.eclipse.org/eclipse/updates/4.11/R-4.11-201903070500/plugins/org.eclipse.core.jobs_3.10.300.v20190215-2048.jar",
+        sha256 = "a337ff365732b08ce59be7e82921fe354ceccb58c6221fc2b064ded9449382b0",
     )
 
     http_jar(
         name = "org_eclipse_jdt_resources",
-        url = "http://download.eclipse.org/eclipse/updates/4.10/R-4.10-201812060815/plugins/org.eclipse.core.resources_3.13.200.v20181121-1020.jar",
-        sha256 = "63c423ca7e8ae7aeb18eb91c60c632ccd11fd1da54f3d5e7601af83e730855d2",
+        url = "http://download.eclipse.org/eclipse/updates/4.11/R-4.11-201903070500/plugins/org.eclipse.core.resources_3.13.300.v20190218-2054.jar",
+        sha256 = "a9176863b9be022cf841ec41e9e5080444700382b7b72ab5d0f3d33d540c1e10",
     )
 
     http_jar(
         name = "org_eclipse_jdt_runtime",
-        url = "http://download.eclipse.org/eclipse/updates/4.10/R-4.10-201812060815/plugins/org.eclipse.core.runtime_3.15.100.v20181107-1343.jar",
-        sha256 = "3c089d14ffb9329dfdde75acbef481235abb1c98ad27bd7148aba48637c11e74",
+        url = "http://download.eclipse.org/eclipse/updates/4.11/R-4.11-201903070500/plugins/org.eclipse.core.runtime_3.15.200.v20190301-1641.jar",
+        sha256 = "9a3b7af1bde36433768a21db8cba91e60c8b56de1cebcc1cbe35fc69c6cba4ef",
     )
 
     http_jar(
         name = "org_eclipse_jdt_equinox_common",
-        url = "http://download.eclipse.org/eclipse/updates/4.10/R-4.10-201812060815/plugins/org.eclipse.equinox.common_3.10.200.v20181021-1645.jar",
-        sha256 = "224a35deeb64ea7271bce3d976974cd76e162e1366631ab01ada95426152fa24",
+        url = "http://download.eclipse.org/eclipse/updates/4.11/R-4.11-201903070500/plugins/org.eclipse.equinox.common_3.10.300.v20190218-2100.jar",
+        sha256 = "86252b5b8cf263f64438e78e80ed8f8b2b22664d4436d582aeb1b6ff9b3a806e",
     )
 
     http_jar(
         name = "org_eclipse_jdt_equinox_preferences",
-        url = "http://download.eclipse.org/eclipse/updates/4.10/R-4.10-201812060815/plugins/org.eclipse.equinox.preferences_3.7.200.v20180827-1235.jar",
-        sha256 = "93c227ed2b6780d605ff48e93add77db00083f9b98a19392c6123b08caadbabd",
+        url = "http://download.eclipse.org/eclipse/updates/4.11/R-4.11-201903070500/plugins/org.eclipse.equinox.preferences_3.7.300.v20190218-2100.jar",
+        sha256 = "d80f376963d276fbe88c9a117b343f39ea381538d104d100e46b5aeef089d1f3",
     )
 
     http_jar(
         name = "org_eclipse_jdt_compiler_apt",
-        url = "http://download.eclipse.org/eclipse/updates/4.10/R-4.10-201812060815/plugins/org.eclipse.jdt.compiler.apt_1.3.400.v20181205-0900.jar",
-        sha256 = "33541f28373d9e3277210c32ae9e4345851324a0c324a2c08411fe54b6028b9b",
+        url = "http://download.eclipse.org/eclipse/updates/4.11/R-4.11-201903070500/plugins/org.eclipse.jdt.apt.core_3.6.300.v20190228-0624.jar",
+        sha256 = "279f69572a11a969bf875a4d2bb27de279327bc843ea30fdc46a2ab3fcf46e8a",
     )
 
     http_jar(
         name = "org_eclipse_jdt_core",
-        url = "http://download.eclipse.org/eclipse/updates/4.10/R-4.10-201812060815/plugins/org.eclipse.jdt.core_3.16.0.v20181130-1748.jar",
-        sha256 = "7c71886a76964a825eb734d22dedbd3a1efa2c19bec3af26d07b7bbe8167d943",
+        url = "http://download.eclipse.org/eclipse/updates/4.11/R-4.11-201903070500/plugins/org.eclipse.jdt.core_3.17.0.v20190306-2240.jar",
+        sha256 = "2b23a72dd7dacfb90000c290fbd6d23fc3857cf015622397d7fc3bee9e7da259",
     )
 
     http_jar(
         name = "org_eclipse_jdt_osgi",
-        url = "http://download.eclipse.org/eclipse/updates/4.10/R-4.10-201812060815/plugins/org.eclipse.osgi_3.13.200.v20181130-2106.jar",
-        sha256 = "03e5e8715d03605d0cf26ad93cbe005cffe070792bbc1aa27e0540aa0c1aa178",
+        url = "http://download.eclipse.org/eclipse/updates/4.11/R-4.11-201903070500/plugins/org.eclipse.osgi_3.13.300.v20190218-1622.jar",
+        sha256 = "d1df0da964ec1bf0e5ac4f442eead3076c1c89dc834bc6148776ff5542c5a0e7",
     )
 
     http_jar(
         name = "org_eclipse_jdt_text",
-        url = "http://download.eclipse.org/eclipse/updates/4.10/R-4.10-201812060815/plugins/org.eclipse.text_3.8.0.v20180923-1636.jar",
-        sha256 = "bca08fbddb5b13a79be82b10c57105e2e6353b15a8b82b4a59d02b67618c92cf",
+        url = "http://download.eclipse.org/eclipse/updates/4.11/R-4.11-201903070500/plugins/org.eclipse.text_3.8.100.v20190306-1823.jar",
+        sha256 = "e9972f7a70c3130691eb57d4514b22d33c6c7615acccab1107fb0e1d64fab710",
     )
 
     http_archive(
