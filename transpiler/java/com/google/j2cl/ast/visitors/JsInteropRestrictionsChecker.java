@@ -105,7 +105,7 @@ public class JsInteropRestrictionsChecker {
     }
   }
 
-  private void checkJsName(Type type) {
+  private void checkQualifiedJsName(Type type) {
     if (type.getDeclaration().isStarOrUnknown()) {
       if (!type.isNative() || !type.isInterface() || !JsUtils.isGlobal(type.getJsNamespace())) {
         problems.error(
@@ -116,7 +116,8 @@ public class JsInteropRestrictionsChecker {
       return;
     }
 
-    checkJsName(type.getSourcePosition(), type.getReadableDescription(), type);
+    checkJsName(type);
+    checkJsNamespace(type);
   }
 
   private void checkType(Type type) {
@@ -133,8 +134,7 @@ public class JsInteropRestrictionsChecker {
     }
 
     if (typeDeclaration.isJsEnum() || typeDeclaration.isJsType()) {
-      checkJsName(type);
-      checkJsNamespace(type);
+      checkQualifiedJsName(type);
     }
 
     if (typeDeclaration.isJsFunctionInterface()) {
@@ -917,7 +917,7 @@ public class JsInteropRestrictionsChecker {
       checkUnusableByJs(member);
     }
 
-    checkMemberQualifiedJsName((Member & HasJsNameInfo) member);
+    checkQualifiedJsName(member);
 
     if (isInstanceJsMember(memberDescriptor)) {
       checkNameCollisions(instanceJsMembersByName, member);
@@ -1006,7 +1006,7 @@ public class JsInteropRestrictionsChecker {
     }
   }
 
-  private <T extends Member & HasJsNameInfo> void checkMemberQualifiedJsName(T member) {
+  private void checkQualifiedJsName(Member member) {
     if (member.isConstructor()) {
       // Constructors always inherit their name and namespace from the enclosing type.
       // The corresponding checks are done for the type separately.
@@ -1365,43 +1365,46 @@ public class JsInteropRestrictionsChecker {
     }
   }
 
-  private void checkJsName(Member member) {
-    checkJsName(
-        member.getSourcePosition(), member.getReadableDescription(), (HasJsNameInfo) member);
-  }
-
-  private void checkJsName(
-      SourcePosition sourcePosition, String readableDescription, HasJsNameInfo item) {
+  private <T extends HasJsNameInfo & HasSourcePosition & HasReadableDescription> void checkJsName(
+      T item) {
     String jsName = item.getSimpleJsName();
-    if (jsName == null) {
+    if (jsName == null || JsUtils.isValidJsIdentifier(jsName)) {
       return;
     }
-    if (jsName.isEmpty()) {
-      problems.error(sourcePosition, "'%s' cannot have an empty name.", readableDescription);
-    } else if ((item.isNative() && !JsUtils.isValidJsQualifiedName(jsName))
-        || (!item.isNative() && !JsUtils.isValidJsIdentifier(jsName))) {
-      problems.error(sourcePosition, "'%s' has invalid name '%s'.", readableDescription, jsName);
+    if (item.isNative() && JsUtils.isValidJsQualifiedName(jsName)) {
+      return;
     }
+
+    errorInvalidName(jsName, "name", item);
   }
 
   private <T extends HasJsNameInfo & HasSourcePosition & HasReadableDescription>
       void checkJsNamespace(T item) {
     String jsNamespace = item.getJsNamespace();
-    if (jsNamespace == null || JsUtils.isGlobal(jsNamespace)) {
+    if (jsNamespace == null
+        || JsUtils.isGlobal(jsNamespace)
+        || JsUtils.isValidJsQualifiedName(jsNamespace)) {
       return;
     }
-    if (jsNamespace.isEmpty()) {
+
+    errorInvalidName(jsNamespace, "namespace", item);
+  }
+
+  private <T extends HasJsNameInfo & HasSourcePosition & HasReadableDescription>
+      void errorInvalidName(String name, String nameType, T item) {
+    if (name.isEmpty()) {
       problems.error(
           item.getSourcePosition(),
-          "'%s' cannot have an empty namespace.",
+          "'%s' cannot have an empty %s.",
           item.getReadableDescription(),
-          jsNamespace);
-    } else if (!JsUtils.isValidJsQualifiedName(jsNamespace)) {
+          nameType);
+    } else {
       problems.error(
           item.getSourcePosition(),
-          "'%s' has invalid namespace '%s'.",
+          "'%s' has invalid %s '%s'.",
           item.getReadableDescription(),
-          jsNamespace);
+          nameType,
+          name);
     }
   }
 
