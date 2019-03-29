@@ -1,6 +1,4 @@
-# [J2CL](http://j2cl.io)
-
-[![Build Status](https://secure.travis-ci.org/google/j2cl.png?branch=master)](http://travis-ci.org/google/j2cl)
+# [J2CL](http://j2cl.io)  &middot; [![Build Status](https://secure.travis-ci.org/google/j2cl.png?branch=master)](http://travis-ci.org/google/j2cl)
 
 Seamless Java in JavaScript applications that tightly optimizes with
 [Closure Compiler](https://github.com/google/closure-compiler)
