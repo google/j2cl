@@ -1091,6 +1091,15 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  @JsConstructor",
             "  public AnotherSubBuggyJsType(int a) { this(); }",
             "}",
+            "class DelegatingConstructorChain extends BuggyJsType {",
+            // TODO(b/129550499): The following class should be fine because only the JsConstructor
+            // delegates to super. However the normalization pass does not handle those cases
+            // correctly.
+            "  @JsConstructor",
+            "  public DelegatingConstructorChain() { super();}",
+            "  public DelegatingConstructorChain(int a) { this(); }",
+            "  public DelegatingConstructorChain(int a, int b) { this(a); }",
+            "}",
             "@JsType(isNative=true) class NativeType {",
             "  NativeType() { }",
             "  NativeType(int i) { }",
@@ -1134,7 +1143,9 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "More than one JsConstructor exists for 'AnotherSubBuggyJsType'.",
             "JsConstructor 'OtherSubBuggyJsType(int)' can be a JsConstructor only if all "
                 + "other constructors in the class delegate to it.",
-            "Class 'SomeClass2' should have a JsConstructor.");
+            "Class 'SomeClass2' should have a JsConstructor.",
+            "Constructor 'DelegatingConstructorChain(int a, int b)' should delegate to the"
+                + " JsConstructor 'DelegatingConstructorChain()'. (b/129550499)");
   }
 
   public void testMultipleConstructorsNotAllDelegatedToJsConstructorFails() {
