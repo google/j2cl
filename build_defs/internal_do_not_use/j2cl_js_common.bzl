@@ -32,5 +32,5 @@ J2CL_OPTIMIZED_DEFS = [
     "--define=goog.DEBUG=false",
 ]
 
-# Place holder until we implement unut testing support for open-source.
+# Place holder until we implement unit testing support for open-source.
 J2CL_TEST_DEFS = []
