@@ -1,66 +1,24 @@
 """This module contains j2cl_js_provider helpers."""
 
-load(
-    "@io_bazel_rules_closure//closure:defs.bzl",
-    "CLOSURE_JS_TOOLCHAIN_ATTRS",
-    "closure_js_binary",
-    "closure_js_library",
-    "create_closure_js_library",
-    "web_library",
-)
+load("@io_bazel_rules_closure//closure:defs.bzl", "CLOSURE_JS_TOOLCHAIN_ATTRS", "create_closure_js_library")
 
 def j2cl_js_provider(ctx, srcs = [], deps = [], exports = []):
-    """ Creates a js provider from provided sources, deps and exports. """
+  """ Creates a js provider from provided sources, deps and exports. """
 
-    default_j2cl_suppresses = [
-        "analyzerChecks",
-        "JSC_UNKNOWN_EXPR_TYPE",
-        "JSC_STRICT_INEXISTENT_PROPERTY",
-    ]
-    suppresses = default_j2cl_suppresses + getattr(ctx.attr, "js_suppress", [])
+  default_j2cl_suppresses = [
+      "analyzerChecks",
+      "JSC_UNKNOWN_EXPR_TYPE",
+      "JSC_STRICT_INEXISTENT_PROPERTY",
+  ]
+  suppresses = default_j2cl_suppresses + getattr(ctx.attr, "js_suppress", [])
 
-    js = create_closure_js_library(
-        ctx,
-        srcs,
-        deps,
-        exports,
-        suppresses,
-        convention = "GOOGLE",
-    )
+  js = create_closure_js_library(
+      ctx, srcs, deps, exports, suppresses, convention="GOOGLE")
 
-    return {
-        "closure_js_library": js.closure_js_library,
-        "exports": js.exports,
-    }
-
-def js_devserver(
-        name,
-        entry_point_defs,
-        deps,
-        dev_resources):
-    """Creates a development server target."""
-
-    closure_js_binary(
-        name = name,
-        compilation_level = "BUNDLE",
-        defs = entry_point_defs,
-        deps = deps,
-    )
-
-    web_library(
-        name = "%s_server" % name,
-        srcs = dev_resources,
-        path = "/",
-        tags = [
-            "ibazel_live_reload",  # Enable ibazel reload server.
-            "ibazel_notify_changes",  # Do not to restart the server on changes.
-        ],
-    )
-
-def simple_js_lib(**kwargs):
-    closure_js_library(no_closure_library = True, **kwargs)
-
-js_binary = closure_js_binary
+  return {
+      "closure_js_library": js.closure_js_library,
+      "exports": js.exports,
+  }
 
 J2CL_JS_TOOLCHAIN_ATTRS = CLOSURE_JS_TOOLCHAIN_ATTRS
 
