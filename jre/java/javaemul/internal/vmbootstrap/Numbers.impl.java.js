@@ -17,15 +17,10 @@
  */
 goog.module('vmbootstrap.Numbers$impl');
 
-
 const $Long = goog.require('nativebootstrap.Long$impl');
 
-let Character = goog.forwardDeclare('java.lang.Character$impl');
-let Class = goog.forwardDeclare('java.lang.Class$impl');
 let Double = goog.forwardDeclare('java.lang.Double$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
-let Object = goog.forwardDeclare('java.lang.Object$impl');
-let $double = goog.forwardDeclare('vmbootstrap.primitives.$double$impl');
 
 
 /**
@@ -116,14 +111,10 @@ class Numbers {
    */
   static $clinit() {
     Numbers.$clinit = function() {};
-    Character = goog.module.get('java.lang.Character$impl');
-    Class = goog.module.get('java.lang.Class$impl');
     Double = goog.module.get('java.lang.Double$impl');
     Number = goog.module.get('java.lang.Number$impl');
-    Object = goog.module.get('java.lang.Object$impl');
-    $double = goog.module.get('vmbootstrap.primitives.$double$impl');
   }
-};
+}
 
 
 

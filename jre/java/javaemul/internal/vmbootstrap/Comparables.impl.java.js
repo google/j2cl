@@ -17,14 +17,10 @@
  */
 goog.module('vmbootstrap.Comparables$impl');
 
-
 let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
-let Class = goog.forwardDeclare('java.lang.Class$impl');
 let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
 let Double = goog.forwardDeclare('java.lang.Double$impl');
 let String = goog.forwardDeclare('java.lang.String$impl');
-let $boolean = goog.forwardDeclare('vmbootstrap.primitives.$boolean$impl');
-let $double = goog.forwardDeclare('vmbootstrap.primitives.$double$impl');
 
 
 /**
@@ -60,14 +56,11 @@ class Comparables {
   static $clinit() {
     Comparables.$clinit = function() {};
     Boolean = goog.module.get('java.lang.Boolean$impl');
-    Class = goog.module.get('java.lang.Class$impl');
     Comparable = goog.module.get('java.lang.Comparable$impl');
     Double = goog.module.get('java.lang.Double$impl');
     String = goog.module.get('java.lang.String$impl');
-    $boolean = goog.module.get('vmbootstrap.primitives.$boolean$impl');
-    $double = goog.module.get('vmbootstrap.primitives.$double$impl');
   }
-};
+}
 
 
 /**

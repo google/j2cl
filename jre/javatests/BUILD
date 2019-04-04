@@ -119,15 +119,17 @@ build_test(
     targets = [
         ":conformance_binary",
         ":conformance_binary_head",
+        ":conformance_binary_whitespace_only",
     ],
 )
 
-load("//build_defs:rules.bzl", "J2CL_OPTIMIZED_DEFS", "j2cl_library")
-load("//javascript/tools/jscompiler/builddefs:flags.bzl", "VERBOSE_WARNING_FLAGS_STRICT")
+load("//build_defs:rules.bzl", "j2cl_library")
+load("//javascript/tools/jscompiler/builddefs:flags.bzl", "VERBOSE_WARNING_FLAGS_STRICT", "WHITESPACE_ONLY_FLAGS")
 
-COMFORMANCE_CHECK_FLAGS = J2CL_OPTIMIZED_DEFS + VERBOSE_WARNING_FLAGS_STRICT + [
+COMFORMANCE_CHECK_FLAGS = VERBOSE_WARNING_FLAGS_STRICT + [
     "--conformance_config=conformance_proto.txt",
     "--jscomp_error=conformanceViolations",
+    "--jscomp_error=unusedLocalVariables",
     # TODO(michaelthomas): Enable once all errors are fixed. Yes, seriously.
     # "--jscomp_error=reportUnknownTypes",
 ]
@@ -143,6 +145,14 @@ closure_js_binary(
     name = "conformance_binary_head",
     compiler = "//javascript/tools/jscompiler:head",
     defs = COMFORMANCE_CHECK_FLAGS,
+    extra_inputs = ["conformance_proto.txt"],
+    deps = ["//jre/java:jre"],
+)
+
+closure_js_binary(
+    name = "conformance_binary_whitespace_only",
+    compiler = "//javascript/tools/jscompiler:head",
+    defs = COMFORMANCE_CHECK_FLAGS + WHITESPACE_ONLY_FLAGS,
     extra_inputs = ["conformance_proto.txt"],
     deps = ["//jre/java:jre"],
 )
