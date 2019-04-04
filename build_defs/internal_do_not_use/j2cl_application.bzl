@@ -1,6 +1,7 @@
 """Macro for generating binary targets for j2cl apps."""
 
-load(":j2cl_js_common.bzl", "J2CL_OPTIMIZED_DEFS", "js_binary", "js_devserver", "simple_js_lib")
+load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_binary", "closure_js_library", "web_library")
+load(":j2cl_js_common.bzl", "J2CL_OPTIMIZED_DEFS")
 
 def j2cl_application(
         name,
@@ -54,8 +55,7 @@ def j2cl_application(
         "jre.logging.logLevel": jre_logging_log_level,
     }
     _define_js("%s_config" % name, define_defaults, closure_defines)
-
-    js_binary(
+    closure_js_binary(
         name = name,
         defs = J2CL_OPTIMIZED_DEFS + entry_point_defs + [
             "--rewrite_polyfills=%s" % rewrite_polyfills,
@@ -64,6 +64,13 @@ def j2cl_application(
     )
 
     #### Development binary setup ####
+
+    closure_js_binary(
+        name = "%s_dev" % name,
+        compilation_level = "BUNDLE",
+        defs = entry_point_defs,
+        deps = deps,
+    )
 
     # Note that unlike production, we don't include the generated config js in
     # the binary since JsCompiler re-orders it when there is an entry point.
@@ -74,7 +81,7 @@ def j2cl_application(
         # closure debug loader is slow and complains about cyclic deps.
         "goog.ENABLE_DEBUG_LOADER": False,
         # checks are  always enabled in debug but setting it make sure user code
-        # doesn't accidentally rely on exceptions to be thrown by converting them
+        # doesn't accidentally rely on exceptions to be trown by converting them
         # to assertion errors.
         "jre.checks.checkLevel": jre_checks_check_level,
     }
@@ -83,25 +90,27 @@ def j2cl_application(
     index_html = "<script src='http://localhost:35729/livereload.js'></script>"
     index_html += "<script src='%s_dev_config.js'></script>" % name
     index_html += "<script src='%s_dev.js'></script>" % name
-    dev_resources = [
-        ":%s_dev.js" % name,
-        ":%s_dev_config.js" % name,
-        _generate_file("%s_dev.html" % name, index_html),
-    ] + extra_dev_resources
-
-    js_devserver(
-        name = "%s_dev" % name,
-        entry_point_defs = entry_point_defs,
-        deps = deps,
-        dev_resources = dev_resources,
+    web_library(
+        name = "%s_dev_server" % name,
+        srcs = [
+            ":%s_dev.js" % name,
+            ":%s_dev_config.js" % name,
+            _generate_file("%s_dev.html" % name, index_html),
+        ] + extra_dev_resources,
+        path = "/",
+        tags = [
+            "ibazel_live_reload",  # Enable ibazel reload server.
+            "ibazel_notify_changes",  # Do not to restart the server on changes.
+        ],
     )
 
 def _define_js(name, defines, user_overrides):
     defines.update(user_overrides)
     content = "var CLOSURE_DEFINES = %s;" % struct(**defines).to_json()
-    simple_js_lib(
+    closure_js_library(
         name = name,
         srcs = [_generate_file("%s.js" % name, content)],
+        no_closure_library = True,
     )
 
 def _generate_file(file_name, content):
@@ -110,4 +119,4 @@ def _generate_file(file_name, content):
         outs = [file_name],
         cmd = "echo '%s' > $@" % content,
     )
-    return ":%s" % file_name
+    return ":" + file_name
