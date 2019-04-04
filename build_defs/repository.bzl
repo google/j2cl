@@ -16,7 +16,7 @@ def load_j2cl_repo_deps():
     )
 
 def _github_repo(name, repo, tag):
-    if name in native.existing_rules():
+    if native.existing_rule(name):
         return
 
     _, project_name = repo.split("/")
