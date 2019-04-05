@@ -157,6 +157,31 @@ closure_js_binary(
     deps = ["//jre/java:jre"],
 )
 
+closure_js_binary(
+    name = "conformance_binary_opensource",
+    data = ["jre_opensource_warnings_whitelist.txt"],
+    dependency_mode = "SORT_ONLY",
+    suppress_on_all_sources_in_transitive_closure = [
+        "JSC_STRICT_INEXISTENT_PROPERTY",
+        "JSC_NULLABLE_RETURN_WITH_NAME",
+        "deprecated",
+    ],
+    deps = ["//jre/java:jre"],
+)
+
+genrule(
+    name = "file_empty_check",
+    outs = ["file_empty_check.sh"],
+    cmd = "echo '[ ! -s $$1 ]' > $@",
+)
+
+sh_test(
+    name = "opensource_output_empty_test",
+    srcs = ["file_empty_check.sh"],
+    args = ["$(location conformance_binary_opensource-stderr.txt)"],
+    data = ["conformance_binary_opensource-stderr.txt"],
+)
+
 # TODO(dankuka): Eventually we want to provide a library target for apps that
 # need to be compatible with both gwt tests and j2cl tests, but this will
 # require some more careful thought.
