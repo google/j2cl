@@ -103,7 +103,7 @@ public final class J2clCommandLineRunner extends CommandLineTool {
                 .collect(ImmutableList.toImmutableList()))
         .setNativeSources(
             FrontendUtils.getAllSources(getPathEntries(this.nativeSourcePath), problems)
-                .filter(p -> p.sourcePath().endsWith(".native.js"))
+                .filter(p -> p.sourcePath().endsWith(".js"))
                 .collect(ImmutableList.toImmutableList()))
         .setClasspaths(getPathEntries(this.classPath))
         .setOutput(

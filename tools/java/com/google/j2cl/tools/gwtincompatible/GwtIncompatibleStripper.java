@@ -34,7 +34,7 @@ public class GwtIncompatibleStripper {
       FileSystem outputZipFileSystem = FrontendUtils.initZipOutput(outputPath, problems);
       List<FileInfo> allPaths =
           FrontendUtils.getAllSources(files, problems)
-              .filter(f -> f.targetPath().endsWith(".java"))
+              .filter(f -> f.targetPath().endsWith(".java") || f.targetPath().endsWith(".js"))
               .collect(ImmutableList.toImmutableList());
       JavaPreprocessor.preprocessFiles(allPaths, outputZipFileSystem.getPath("/"), problems);
 

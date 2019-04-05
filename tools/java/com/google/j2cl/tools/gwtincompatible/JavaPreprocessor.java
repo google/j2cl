@@ -51,7 +51,7 @@ public class JavaPreprocessor {
       try {
         String fileContent =
             MoreFiles.asCharSource(Paths.get(fileInfo.sourcePath()), StandardCharsets.UTF_8).read();
-        processedFileContent = processFile(fileContent);
+        processedFileContent = fileInfo.targetPath().endsWith(".java") ? processFile(fileContent) : fileContent;
       } catch (IOException e) {
         problems.fatal(FatalError.CANNOT_OPEN_FILE, e.toString());
         return;
