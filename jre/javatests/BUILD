@@ -159,7 +159,6 @@ closure_js_binary(
 
 closure_js_binary(
     name = "conformance_binary_opensource",
-    data = ["jre_opensource_warnings_whitelist.txt"],
     dependency_mode = "SORT_ONLY",
     suppress_on_all_sources_in_transitive_closure = [
         "JSC_STRICT_INEXISTENT_PROPERTY",
