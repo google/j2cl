@@ -15,7 +15,7 @@ in J2CL:
 
 https://github.com/google/j2cl/tree/master/samples/helloworld
 
-## Building your first applcation
+## Building your first application
 
 Tip: If you are not familiar with using Java with Bazel, it might be helpful to
 start with the
