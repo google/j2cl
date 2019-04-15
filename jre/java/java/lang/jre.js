@@ -20,30 +20,33 @@
 goog.provide('jre');
 
 /** @define {string} */
-goog.define('jre.classMetadata', 'SIMPLE');
+jre.classMetadata = goog.define('jre.classMetadata', 'SIMPLE');
 /** @define {string} */
-goog.define('jre.checkedMode', goog.DEBUG ? 'ENABLED' : 'DISABLED');
+jre.checkedMode =
+    goog.define('jre.checkedMode', goog.DEBUG ? 'ENABLED' : 'DISABLED');
 
 
 goog.provide('jre.checks');
 
 /** @define {string} */
-goog.define('jre.checks.checkLevel', 'NORMAL');
+jre.checks.checkLevel = goog.define('jre.checks.checkLevel', 'NORMAL');
 /** @define {string} */
-goog.define('jre.checks.bounds', 'AUTO');
+jre.checks.bounds = goog.define('jre.checks.bounds', 'AUTO');
 /** @define {string} */
-goog.define('jre.checks.api', 'AUTO');
+jre.checks.api = goog.define('jre.checks.api', 'AUTO');
 /** @define {string} */
-goog.define('jre.checks.numeric', 'AUTO');
+jre.checks.numeric = goog.define('jre.checks.numeric', 'AUTO');
 /** @define {string} */
-goog.define('jre.checks.type', 'AUTO');
+jre.checks.type = goog.define('jre.checks.type', 'AUTO');
 /** @define {string} */
-goog.define('jre.checks.critical', 'AUTO');
+jre.checks.critical = goog.define('jre.checks.critical', 'AUTO');
 
 
 goog.provide('jre.logging');
 
 /** @define {string} */
-goog.define('jre.logging.logLevel', goog.DEBUG ? 'ALL' : 'SEVERE');
+jre.logging.logLevel =
+    goog.define('jre.logging.logLevel', goog.DEBUG ? 'ALL' : 'SEVERE');
 /** @define {string} */
-goog.define('jre.logging.simpleConsoleHandler', "ENABLED");
+jre.logging.simpleConsoleHandler =
+    goog.define('jre.logging.simpleConsoleHandler', 'ENABLED');
