@@ -79,6 +79,15 @@ public class Main {
     }
   }
 
+  public static class NonNullableStringSubNullableComparator extends NullableStringComparator {
+    // Tests that an override can strengthen the type of a parameter to non-nullable without
+    // triggering a warning in jscompiler.
+    @Override
+    public int compare(@JsNonNull String a, @JsNonNull String b) {
+      return 0;
+    }
+  }
+
   interface NonNullableTemplatedReturn<T> {
     @JsNonNull
     T get();

@@ -1,0 +1,223 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.jsnonnull.Main$NonNullableStringSubNullableComparator.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire,
+ * suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables,
+ * uselessCode, strictModuleDepCheck}
+ */
+goog.module('com.google.j2cl.transpiler.readable.jsnonnull.Main.NonNullableStringSubNullableComparator$impl');
+
+
+const NullableStringComparator = goog.require('com.google.j2cl.transpiler.readable.jsnonnull.Main.NullableStringComparator$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let Comparator = goog.forwardDeclare('java.util.Comparator$impl');
+let j_u_function_Function = goog.forwardDeclare('java.util.function.Function$impl');
+let ToDoubleFunction = goog.forwardDeclare('java.util.function.ToDoubleFunction$impl');
+let ToIntFunction = goog.forwardDeclare('java.util.function.ToIntFunction$impl');
+let ToLongFunction = goog.forwardDeclare('java.util.function.ToLongFunction$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+
+class NonNullableStringSubNullableComparator extends NullableStringComparator {
+  /**
+   * @protected
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * @return {!NonNullableStringSubNullableComparator}
+   * @public
+   */
+  static $create__() {
+    NonNullableStringSubNullableComparator.$clinit();
+    let $instance = new NonNullableStringSubNullableComparator();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_jsnonnull_Main_NonNullableStringSubNullableComparator__();
+    return $instance;
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_jsnonnull_Main_NonNullableStringSubNullableComparator__() {
+    this.$ctor__com_google_j2cl_transpiler_readable_jsnonnull_Main_NullableStringComparator__();
+  }
+
+  /**
+   * @override
+   * @param {string} a
+   * @param {string} b
+   * @return {number}
+   * @public
+   */
+  m_compare__java_lang_String__java_lang_String(a, b) {
+    return 0;
+  }
+
+  /**
+   * Default method forwarding stub.
+   * @override
+   * @return {Comparator<?string>}
+   * @public
+   */
+  m_reversed__() {
+    return /**@type {Comparator<?string>} */ (
+        Comparator.m_reversed__$default__java_util_Comparator(this));
+  }
+
+  /**
+   * Default method forwarding stub.
+   * @override
+   * @param {Comparator<?>} arg0
+   * @return {Comparator<?string>}
+   * @public
+   */
+  m_thenComparing__java_util_Comparator(arg0) {
+    return /**@type {Comparator<?string>} */ (
+        Comparator
+            .m_thenComparing__$default__java_util_Comparator__java_util_Comparator(
+                this, arg0));
+  }
+
+  /**
+   * Default method forwarding stub.
+   * @override
+   * @template U
+   * @param {j_u_function_Function<?, ?>} arg0
+   * @return {Comparator<?string>}
+   * @public
+   */
+  m_thenComparing__java_util_function_Function(arg0) {
+    return /**@type {Comparator<?string>} */ (
+        Comparator
+            .m_thenComparing__$default__java_util_Comparator__java_util_function_Function(
+                this, arg0));
+  }
+
+  /**
+   * Default method forwarding stub.
+   * @override
+   * @template U
+   * @param {j_u_function_Function<?, ?>} arg0
+   * @param {Comparator<?>} arg1
+   * @return {Comparator<?string>}
+   * @public
+   */
+  m_thenComparing__java_util_function_Function__java_util_Comparator(
+      arg0, arg1) {
+    return /**@type {Comparator<?string>} */ (
+        Comparator
+            .m_thenComparing__$default__java_util_Comparator__java_util_function_Function__java_util_Comparator(
+                this, arg0, arg1));
+  }
+
+  /**
+   * Default method forwarding stub.
+   * @override
+   * @param {ToDoubleFunction<?>} arg0
+   * @return {Comparator<?string>}
+   * @public
+   */
+  m_thenComparingDouble__java_util_function_ToDoubleFunction(arg0) {
+    return /**@type {Comparator<?string>} */ (
+        Comparator
+            .m_thenComparingDouble__$default__java_util_Comparator__java_util_function_ToDoubleFunction(
+                this, arg0));
+  }
+
+  /**
+   * Default method forwarding stub.
+   * @override
+   * @param {ToIntFunction<?>} arg0
+   * @return {Comparator<?string>}
+   * @public
+   */
+  m_thenComparingInt__java_util_function_ToIntFunction(arg0) {
+    return /**@type {Comparator<?string>} */ (
+        Comparator
+            .m_thenComparingInt__$default__java_util_Comparator__java_util_function_ToIntFunction(
+                this, arg0));
+  }
+
+  /**
+   * Default method forwarding stub.
+   * @override
+   * @param {ToLongFunction<?>} arg0
+   * @return {Comparator<?string>}
+   * @public
+   */
+  m_thenComparingLong__java_util_function_ToLongFunction(arg0) {
+    return /**@type {Comparator<?string>} */ (
+        Comparator
+            .m_thenComparingLong__$default__java_util_Comparator__java_util_function_ToLongFunction(
+                this, arg0));
+  }
+
+  /**
+   * Bridge method.
+   * @override
+   * @param {*} arg0
+   * @param {*} arg1
+   * @return {number}
+   * @public
+   */
+  m_compare__java_lang_Object__java_lang_Object(arg0, arg1) {
+    return this.m_compare__java_lang_String__java_lang_String(
+        /**@type {?string} */ ($Casts.$to(arg0, j_l_String)),
+        /**@type {?string} */ ($Casts.$to(arg1, j_l_String)));
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    NonNullableStringSubNullableComparator.$clinit = (() => {});
+    NonNullableStringSubNullableComparator.$loadModules();
+    NullableStringComparator.$clinit();
+  }
+
+  /**
+   * @param {?} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof NonNullableStringSubNullableComparator;
+  }
+
+  /**
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(
+        classConstructor, NonNullableStringSubNullableComparator);
+  }
+
+  /**
+   * @public
+   */
+  static $loadModules() {
+    j_l_String = goog.module.get('java.lang.String$impl');
+    Comparator = goog.module.get('java.util.Comparator$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+  }
+};
+
+$Util.$setClassMetadata(
+    NonNullableStringSubNullableComparator,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.jsnonnull.Main$NonNullableStringSubNullableComparator'));
+
+
+
+exports = NonNullableStringSubNullableComparator;
+//# sourceMappingURL=Main$NonNullableStringSubNullableComparator.js.map
