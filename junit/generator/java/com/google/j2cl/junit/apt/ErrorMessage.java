@@ -34,6 +34,7 @@ enum ErrorMessage {
   ASYNC_NO_TIMEOUT("Method %s is missing @Test timeout attribute."),
   NON_TOP_LEVEL_TYPE("Type %s is not a top level class."),
   SKIPPED_TYPE("Type %s is not a JUnit test or a JUnit4 style suite. Skipped.", Kind.WARNING),
+  EMPTY_SUITE("Test suite %s doesn't include any tests."),
   JUNIT3_SUITE("Type %s is a JUnit3 style suite. j2cl_test supports only JUnit4 style suites."),
   NO_TEST(
       "No tests found.\n"

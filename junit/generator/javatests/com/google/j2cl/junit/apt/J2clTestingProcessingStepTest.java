@@ -118,6 +118,7 @@ public class J2clTestingProcessingStepTest {
   @Test
   public void testNonJunit4Suite() {
     assertError(ErrorMessage.JUNIT3_SUITE, JUnit3Suite.class);
+    assertError(ErrorMessage.EMPTY_SUITE, EmptySuite.class);
     assertError(ErrorMessage.SKIPPED_TYPE, RandomDependency.class);
   }
 

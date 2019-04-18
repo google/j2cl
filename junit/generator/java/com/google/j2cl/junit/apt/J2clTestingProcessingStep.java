@@ -130,6 +130,9 @@ public class J2clTestingProcessingStep implements ProcessingStep {
   private void handleJUnit4Suite(TypeElement typeElement) {
     List<String> classes =
         MoreApt.getClassNamesFromAnnotation(typeElement, Suite.SuiteClasses.class, "value");
+    if (classes.isEmpty()) {
+      errorReporter.report(ErrorMessage.EMPTY_SUITE, typeElement);
+    }
     for (String clazzName : classes) {
       TypeElement t = processingEnv.getElementUtils().getTypeElement(clazzName);
       handleClass(t);
