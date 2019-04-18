@@ -224,14 +224,6 @@ public class J2clTestingProcessingStepTest {
     return TestMethod.builder().javaMethodName(methodName).isStatic(false).build();
   }
 
-  private TestMethod method(String methodName, String expectedEception) {
-    return TestMethod.builder()
-        .javaMethodName(methodName)
-        .isStatic(false)
-        .expectedExceptionQualifiedName(expectedEception)
-        .build();
-  }
-
   private TestMethod staticMethod(String methodName) {
     return TestMethod.builder().javaMethodName(methodName).isStatic(true).build();
   }
