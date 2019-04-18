@@ -36,10 +36,10 @@ enum ErrorMessage {
   SKIPPED_TYPE("Type %s is not a JUnit test or a JUnit4 style suite. Skipped.", Kind.WARNING),
   EMPTY_SUITE("Test suite %s doesn't include any tests."),
   JUNIT3_SUITE("Type %s is a JUnit3 style suite. j2cl_test supports only JUnit4 style suites."),
-  NO_TEST(
-      "No tests found.\n"
-          + " This usually means that the name of your test does not match your Java test class"
-          + " or that you have an invalid value in test_class attribute."),
+  NO_TEST("No tests found."),
+  NO_TEST_INPUT(
+      "Test class is not found. "
+          + "Ensure that test_class is a fully qualified class name and exists in the classpath."),
   CANNOT_WRITE_RESOURCE("Can not write jsunit test suite file: %s");
 
   private final String formattedMsg;

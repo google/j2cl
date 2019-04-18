@@ -44,6 +44,7 @@ public class J2clTestingProcessingStep implements ProcessingStep {
   private final JUnit3Validator junit3Validator;
   private final JUnit4Validator junit4Validator;
   private final TemplateWriter writer;
+  private boolean noTestInput = true;
 
   public J2clTestingProcessingStep(ProcessingEnvironment processingEnv) {
     this.processingEnv = processingEnv;
@@ -71,6 +72,7 @@ public class J2clTestingProcessingStep implements ProcessingStep {
 
   @VisibleForTesting
   void handleClass(String className) {
+    noTestInput = false;
     TypeElement typeElement = processingEnv.getElementUtils().getTypeElement(className);
     handleClass(typeElement);
   }
@@ -145,6 +147,11 @@ public class J2clTestingProcessingStep implements ProcessingStep {
   }
 
   public void writeSummary() {
+    if (noTestInput) {
+      errorReporter.report(ErrorMessage.NO_TEST_INPUT);
+      return;
+    }
+
     writer.writeSummary();
   }
 }

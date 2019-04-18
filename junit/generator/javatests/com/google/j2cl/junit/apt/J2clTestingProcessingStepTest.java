@@ -18,6 +18,7 @@ package com.google.j2cl.junit.apt;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 import com.google.common.collect.Iterables;
@@ -123,6 +124,13 @@ public class J2clTestingProcessingStepTest {
   }
 
   @Test
+  public void testNoTestInput() {
+    J2clTestingProcessingStep step = createProcessor();
+    step.writeSummary();
+    verifyPrintMessage(ErrorMessage.NO_TEST_INPUT, null);
+  }
+
+  @Test
   public void testJUnit3NonPublicMethod() {
     assertError(ErrorMessage.NON_PUBLIC, JUnit3TestCaseWithNonPublicTestMethod.class, "test");
   }
@@ -157,7 +165,6 @@ public class J2clTestingProcessingStepTest {
   public void testAsyncTestWithoutTimeout() {
     assertError(ErrorMessage.ASYNC_NO_TIMEOUT, TestTimeOutNotProvided.class, "doesNotHaveTimeout");
   }
-
 
   @Test
   public void testAsyncTestWithExpectedException() {
@@ -201,7 +208,12 @@ public class J2clTestingProcessingStepTest {
   private void assertMessage(ErrorMessage expectedError, String errorArg, Class<?> test) {
     TestClass testClass = executeProcessorOnTest(test);
     assertThat(testClass).isNull();
+    verifyPrintMessage(expectedError, errorArg);
+  }
+
+  private void verifyPrintMessage(ErrorMessage expectedError, String errorArg) {
     verify(messager).printMessage(expectedError.kind(), expectedError.format(errorArg));
+    verifyNoMoreInteractions(messager);
   }
 
   private TestClass executeProcessorOnTest(Class<?> test) {
