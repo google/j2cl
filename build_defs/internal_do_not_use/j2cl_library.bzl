@@ -84,6 +84,10 @@ def j2cl_library(
         build_test(name, kwargs.get("tags", []))
 
 def _append(args, name, value):
-    # TODO(goktug): Remove list() coercions after cleaning the callsites w/ depsets since it is
+    # TODO(goktug): Remove to_list() coercions after cleaning the callsites w/ depsets since it is
     #  slotted for deprecation in favor of explicit to_list calls.
-    args[name] = list(args.get(name) or []) + list(value or [])
+    old_value = args.get(name) or []
+    if type(old_value) == type(depset()):
+        old_value = old_value.to_list()
+
+    args[name] = old_value + list(value or [])
