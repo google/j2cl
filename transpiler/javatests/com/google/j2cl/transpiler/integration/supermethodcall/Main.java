@@ -15,56 +15,132 @@
  */
 package com.google.j2cl.transpiler.integration.supermethodcall;
 
-import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+import static com.google.j2cl.transpiler.utils.Asserts.assertEquals;
 
 /**
  * Test non-constructor super method calls.
  */
 public class Main {
   public static void main(String[] args) {
-    Child child = new Child();
-    Parent parent = new Parent();
-    GrandParent grandParent = new GrandParent();
+    testSuperMethodCalls();
+    testSuperMethodCalls_returnSpecialization();
+    testSuperMethodCalls_parameterSpecialization();
+  }
 
-    // Given the same inputs the functions return the same values, because the child calls are just
-    // delegating to the super calls.
-    assertTrue(child.getNameTwo() == parent.getNameTwo());
-    assertTrue(child.getParentPassedValue(15) == parent.getParentPassedValue(15));
-    assertTrue(
-        child.getParentPassedValueWithChangingReturn(parent)
-            == parent.getParentPassedValueWithChangingReturn(parent));
-    assertTrue(child.getNameOne() == parent.getNameOne());
-    assertTrue(
-        child.getGrandParentPassedValueTimesTwo(15)
-            == parent.getGrandParentPassedValueTimesTwo(15));
-    assertTrue(
-        child.getGrandParentPassedValueWithChangingReturn(parent)
-            == parent.getGrandParentPassedValueWithChangingReturn(parent));
-    assertTrue(child.getNameOne() == grandParent.getNameOne());
-    assertTrue(
-        child.getGrandParentPassedValueTimesTwo(15)
-            == grandParent.getGrandParentPassedValueTimesTwo(15));
-    assertTrue(
-        child.getGrandParentPassedValueWithChangingReturn(grandParent)
-            == grandParent.getGrandParentPassedValueWithChangingReturn(grandParent));
+  private static void testSuperMethodCalls() {
+    class GrandParent {
+      public String getName() {
+        return "GrandParent";
+      }
+    }
 
-    // But with different inputs of course the results also differ.
-    Parent unexpectedParentInstance = new Parent();
-    assertTrue(child.getParentPassedValue(99999) != parent.getParentPassedValue(1));
-    assertTrue(
-        child.getParentPassedValueWithChangingReturn(unexpectedParentInstance)
-            != parent.getParentPassedValueWithChangingReturn(parent));
-    assertTrue(
-        child.getGrandParentPassedValueTimesTwo(99999)
-            != parent.getGrandParentPassedValueTimesTwo(1));
-    assertTrue(
-        child.getGrandParentPassedValueWithChangingReturn(unexpectedParentInstance)
-            != parent.getGrandParentPassedValueWithChangingReturn(parent));
-    assertTrue(
-        child.getGrandParentPassedValueTimesTwo(99999)
-            != grandParent.getGrandParentPassedValueTimesTwo(1));
-    assertTrue(
-        child.getGrandParentPassedValueWithChangingReturn(unexpectedParentInstance)
-            != grandParent.getGrandParentPassedValueWithChangingReturn(grandParent));
+    class Parent extends GrandParent {
+      public String getName() {
+        return "Parent";
+      }
+
+      public String getParentName() {
+        return super.getName();
+      }
+    }
+
+    class Child extends Parent {
+      @Override
+      public String getName() {
+        return "Child";
+      }
+
+      @Override
+      public String getParentName() {
+        return super.getName();
+      }
+
+      public String getGrandParentName() {
+        return super.getParentName();
+      }
+
+      class Inner {
+        public String getOuterParentName() {
+          return Child.super.getName();
+        }
+      }
+    }
+    assertEquals("Parent", new Child().getParentName());
+    assertEquals("GrandParent", new Child().getGrandParentName());
+    assertEquals("Parent", new Child().new Inner().getOuterParentName());
+  }
+
+  private static void testSuperMethodCalls_returnSpecialization() {
+    class GrandParent {
+      public CharSequence getName() {
+        return "GrandParent";
+      }
+    }
+
+    class Parent extends GrandParent {
+      @Override
+      public String getName() {
+        return "Parent";
+      }
+
+      public String getParentName() {
+        return (String) super.getName();
+      }
+    }
+
+    class Child extends Parent {
+      public String getName() {
+        return "Child";
+      }
+
+      public String getParentName() {
+        return super.getName();
+      }
+
+      public String getGrandParentName() {
+        return super.getParentName();
+      }
+    }
+
+    assertEquals("Parent", new Child().getParentName());
+    assertEquals("GrandParent", new Child().getGrandParentName());
+  }
+
+  private static void testSuperMethodCalls_parameterSpecialization() {
+    class GrandParent<T> {
+      public T getName(T object) {
+        return (T) "GrandParent";
+      }
+    }
+
+    class Parent<T extends CharSequence> extends GrandParent<T> {
+      @Override
+      public T getName(T object) {
+        return (T) "Parent";
+      }
+
+      public T getParentName(T object) {
+        // Dispatches to an override.
+        return super.getName(object);
+      }
+    }
+
+    class Child extends Parent<String> {
+      // Parameter Specialization
+      public String getName(String object) {
+        return "Child";
+      }
+
+      public String getParentName(String object) {
+        return super.getName(object);
+      }
+
+      public String getGrandParentName(String object) {
+        return super.getParentName(object);
+      }
+    }
+
+    assertEquals("Parent", new Child().getParentName(null));
+    assertEquals("GrandParent", new Child().getGrandParentName(null));
   }
 }
