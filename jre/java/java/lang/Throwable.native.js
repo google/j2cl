@@ -30,9 +30,10 @@ Throwable.prototype.m_constructJavaStackTrace___$p_java_lang_Throwable =
   var e = this.backingJsObject;
   var splitStack = (e && e.stack) ? e.stack.split(/\n/) : [];
   for (var i = 0; i < splitStack.length; i++) {
-    var createSte = StackTraceElement.
-        $create__java_lang_String__java_lang_String__java_lang_String__int;
-    stackTraceElements[i] = createSte('', splitStack[i], null, -1);
+    stackTraceElements[i] =
+        StackTraceElement
+            .$create__java_lang_String__java_lang_String__java_lang_String__int(
+                '', splitStack[i], null, -1);
   }
   return stackTraceElements;
 };
