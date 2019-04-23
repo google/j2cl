@@ -85,7 +85,7 @@ public class TestAsserter {
 
     List<String> javaLogLines = extractJavaMessages();
     for (ImmutableList<String> javaLogLineSequence : testResult.javaLogLinesSequences()) {
-      assertThat(javaLogLines).containsAllIn(javaLogLineSequence).inOrder();
+      assertThat(javaLogLines).containsAtLeastElementsIn(javaLogLineSequence).inOrder();
     }
     Iterable<String> allExpectedJavaLog = Iterables.concat(testResult.javaLogLinesSequences());
     assertThat(javaLogLines).containsExactlyElementsIn(allExpectedJavaLog);
