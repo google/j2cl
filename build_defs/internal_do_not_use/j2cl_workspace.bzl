@@ -9,6 +9,7 @@ def setup_j2cl_workspace():
 
     versions.check("0.23.0")  # The version J2CL currently have a CI setup for.
 
+
     closure_repositories(
         omit_com_google_protobuf = True,
         omit_com_google_auto_common = True,
