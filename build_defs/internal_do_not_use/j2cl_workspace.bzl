@@ -7,7 +7,7 @@ load("@bazel_skylib//:lib/versions.bzl", "versions")
 def setup_j2cl_workspace():
     """Load all dependencies needed for J2CL."""
 
-    versions.check("0.23.0")  # The version J2CL currently have a CI setup for.
+    versions.check("0.24.0")  # The version J2CL currently have a CI setup for.
 
 
     closure_repositories(

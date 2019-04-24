@@ -26,10 +26,10 @@ Let's get started with cloning the repository and build a sample app from
 source:
 
 
--   Install Bazel 0.23.0:
+-   Install Bazel 0.24.0:
 
 ```shell
-    $ npm install -g @bazel/bazel@0.23.0
+    $ npm install -g @bazel/bazel@0.24.0
 ```
 
 (See [Install Bazel](https://bazel.build/versions/master/docs/install.html) for
