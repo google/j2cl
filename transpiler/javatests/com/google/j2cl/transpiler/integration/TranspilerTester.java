@@ -16,6 +16,7 @@ package com.google.j2cl.transpiler.integration;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.truth.Truth.assertThat;
+import static com.google.common.truth.Truth.assertWithMessage;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Predicates;
@@ -217,7 +218,7 @@ public class TranspilerTester {
       String output =
           J2clUtils.streamToString(stream -> getProblems().reportAndGetExitCode(stream));
       Arrays.stream(snippets)
-          .forEach(snippet -> assertThat(output).named("Output").contains(snippet));
+          .forEach(snippet -> assertWithMessage("Output").that(output).contains(snippet));
       return this;
     }
 
