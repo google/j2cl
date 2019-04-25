@@ -18,7 +18,8 @@ package com.google.j2cl.transpiler;
 import static com.google.common.base.Preconditions.checkState;
 
 import com.google.auto.value.AutoValue;
-import com.google.j2cl.frontend.FrontendUtils.FileInfo;
+import com.google.common.collect.ImmutableList;
+import com.google.j2cl.common.FrontendUtils.FileInfo;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
@@ -27,11 +28,11 @@ import java.util.Optional;
 @AutoValue
 public abstract class J2clTranspilerOptions {
 
-  public abstract List<FileInfo> getSources();
+  public abstract ImmutableList<FileInfo> getSources();
 
-  public abstract List<FileInfo> getNativeSources();
+  public abstract ImmutableList<FileInfo> getNativeSources();
 
-  public abstract List<String> getClasspaths();
+  public abstract ImmutableList<String> getClasspaths();
 
   public abstract Path getOutput();
 

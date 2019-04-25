@@ -17,9 +17,9 @@ package com.google.j2cl.frontend;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import com.google.j2cl.common.FrontendUtils.FileInfo;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
-import com.google.j2cl.frontend.FrontendUtils.FileInfo;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;

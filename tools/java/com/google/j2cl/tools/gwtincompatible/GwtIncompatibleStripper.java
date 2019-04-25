@@ -14,10 +14,10 @@
 package com.google.j2cl.tools.gwtincompatible;
 
 import com.google.common.collect.ImmutableList;
+import com.google.j2cl.common.FrontendUtils;
+import com.google.j2cl.common.FrontendUtils.FileInfo;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
-import com.google.j2cl.frontend.FrontendUtils;
-import com.google.j2cl.frontend.FrontendUtils.FileInfo;
 import java.io.IOException;
 import java.nio.file.FileSystem;
 import java.util.List;

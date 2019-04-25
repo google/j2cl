@@ -13,12 +13,11 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.frontend;
+package com.google.j2cl.common;
 
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
-import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
 import java.io.File;
 import java.io.IOException;
