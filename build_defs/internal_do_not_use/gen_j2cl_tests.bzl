@@ -28,6 +28,7 @@ def gen_j2cl_tests(
         test_plugins = [],
         test_suffix = "",
         tags = [],
+        browsers = None,
         **kwargs):
     """Generates `j2cl_test` rules for each file in `srcs` ending in "Test.java".
 
@@ -46,6 +47,7 @@ def gen_j2cl_tests(
         test_suffix: An optional suffix that can be added to generated test names.
         tags: Tags to add to all tests. In addition, tests are always tagged with
             "gen_j2cl_tests".
+        browsers: List of labels; optional; The browsers with which to run the test.
         **kwargs: extra parameters are all passed to the generated j2cl_tests.
     """
     test_files = [src for src in srcs if src.endswith("Test.java")]
@@ -75,5 +77,6 @@ def gen_j2cl_tests(
             test_class = test_class,
             plugins = test_plugins + plugins,
             tags = ["gen_j2cl_tests"] + tags,
+            browsers = browsers,
             **kwargs
         )
