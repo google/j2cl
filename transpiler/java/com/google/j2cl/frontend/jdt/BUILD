@@ -6,7 +6,7 @@ package(default_visibility = [
 licenses(["notice"])  # Apache 2.0
 
 java_library(
-    name = "frontend",
+    name = "jdt",
     srcs = glob(["*.java"]),
     deps = [
         "//third_party:auto_value",

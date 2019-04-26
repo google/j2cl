@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.frontend;
+package com.google.j2cl.frontend.jdt;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
