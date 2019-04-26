@@ -222,7 +222,7 @@ J2CL_TOOLCHAIN_ATTRS = {
         executable = True,
     ),
     "_j2cl_stripper": attr.label(
-        default = Label("//build_defs/internal_do_not_use:GwtIncompatibleStripper", relative_to_caller_repository = False),
+        default = Label("//build_defs/internal_do_not_use:GwtIncompatibleStripper"),
         cfg = "host",
         executable = True,
     ),
