@@ -96,6 +96,7 @@ import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.ast.WhileStatement;
 import com.google.j2cl.common.FilePosition;
 import com.google.j2cl.common.SourcePosition;
+import com.google.j2cl.frontend.common.PackageInfoCache;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -107,6 +108,7 @@ import java.util.Optional;
 import java.util.function.Function;
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.AbstractTypeDeclaration;
+import org.eclipse.jdt.core.dom.Annotation;
 import org.eclipse.jdt.core.dom.AnnotationTypeMemberDeclaration;
 import org.eclipse.jdt.core.dom.AnonymousClassDeclaration;
 import org.eclipse.jdt.core.dom.ArrayType;
@@ -168,10 +170,9 @@ public class CompilationUnitBuilder {
       // Records information about package-info files supplied as source code.
       if (currentSourceFile.endsWith("package-info.java")
           && jdtCompilationUnit.getPackage() != null) {
-        packageInfoCache.setInfo(
-            PackageInfoCache.SOURCE_CLASS_PATH_ENTRY,
-            packageName,
-            jdtCompilationUnit.getPackage().annotations());
+        String packageJsNamespace = getPackageJsNamespace(jdtCompilationUnit);
+        packageInfoCache.setPackageJsNamespace(
+            PackageInfoCache.SOURCE_CLASS_PATH_ENTRY, packageName, packageJsNamespace);
       }
       for (Object object : jdtCompilationUnit.types()) {
         AbstractTypeDeclaration abstractTypeDeclaration = (AbstractTypeDeclaration) object;
@@ -179,6 +180,22 @@ public class CompilationUnitBuilder {
       }
 
       return j2clCompilationUnit;
+    }
+
+    private String getPackageJsNamespace(
+        org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit) {
+      List<Annotation> packageAnnotations =
+          JdtUtils.asTypedList(jdtCompilationUnit.getPackage().annotations());
+      if (packageAnnotations == null) {
+        return null;
+      }
+
+      return packageAnnotations.stream()
+          .map(Annotation::resolveAnnotationBinding)
+          .filter(JsInteropAnnotationUtils::isJsPackageAnnotation)
+          .findFirst()
+          .map(JsInteropAnnotationUtils::getJsNamespace)
+          .orElse(null);
     }
 
     private void convert(AbstractTypeDeclaration typeDeclaration) {

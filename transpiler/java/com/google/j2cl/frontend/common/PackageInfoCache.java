@@ -13,11 +13,12 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.frontend.jdt;
+package com.google.j2cl.frontend.common;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
+import com.google.auto.value.AutoValue;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.common.Problems;
@@ -27,11 +28,12 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.Nullable;
 import jsinterop.annotations.JsPackage;
-import org.eclipse.jdt.core.dom.IAnnotationBinding;
 
 /**
  * A cache for information on package-info files that are needed for transpilation, like JsInterop
@@ -50,8 +52,27 @@ import org.eclipse.jdt.core.dom.IAnnotationBinding;
 public class PackageInfoCache {
 
   /** Encapsulates all that is known about a particular package in a particular class path entry. */
-  private static class PackageReport {
-    private String jsNamespace = null;
+  @AutoValue
+  public abstract static class PackageReport {
+    @Nullable
+    public abstract String getJsNamespace();
+
+    public static Builder newBuilder() {
+      return new AutoValue_PackageInfoCache_PackageReport.Builder();
+    }
+
+    /** A Builder for PackageReport. */
+    @AutoValue.Builder
+    public abstract static class Builder {
+
+      public abstract Builder setJsNamespace(String jsNamespace);
+
+      abstract PackageReport autoBuild();
+
+      public PackageReport build() {
+        return autoBuild();
+      }
+    }
   }
 
   public static final String SOURCE_CLASS_PATH_ENTRY = "[source]";
@@ -60,7 +81,7 @@ public class PackageInfoCache {
    * When nothing is known about a particular package in a particular class path entry the answers
    * to questions about package properties are taken from this instance.
    */
-  private static final PackageReport defaultPackageReport = new PackageReport();
+  private static final PackageReport DEFAULT_PACKAGE_REPORT = PackageReport.newBuilder().build();
 
   /** Allows for the initialization/retrieval of one shared PackageInfoCache instance per thread. */
   private static final ThreadLocal<PackageInfoCache> packageInfoCacheStorage = new ThreadLocal<>();
@@ -96,32 +117,6 @@ public class PackageInfoCache {
     packageInfoCacheStorage.set(new PackageInfoCache(resourcesClassLoader, problems));
   }
 
-  private static PackageReport toPackageReport(Annotation[] packageAnnotations) {
-    PackageReport packageReport = new PackageReport();
-    if (packageAnnotations != null) {
-      for (Annotation packageAnnotation : packageAnnotations) {
-        if (packageAnnotation instanceof JsPackage) {
-          packageReport.jsNamespace = ((JsPackage) packageAnnotation).namespace();
-        }
-      }
-    }
-    return packageReport;
-  }
-
-  private static PackageReport toPackageReport(
-      Iterable<org.eclipse.jdt.core.dom.Annotation> packageAnnotations) {
-    PackageReport packageReport = new PackageReport();
-    if (packageAnnotations != null) {
-      for (org.eclipse.jdt.core.dom.Annotation packageAnnotation : packageAnnotations) {
-        IAnnotationBinding annotationBinding = packageAnnotation.resolveAnnotationBinding();
-        if (JsInteropAnnotationUtils.isJsPackageAnnotation(annotationBinding)) {
-          packageReport.jsNamespace = JsInteropAnnotationUtils.getJsNamespace(annotationBinding);
-        }
-      }
-    }
-    return packageReport;
-  }
-
   private static String toSpecificPackagePath(String classPathEntry, String packagePath) {
     return classPathEntry + ":" + packagePath;
   }
@@ -141,7 +136,7 @@ public class PackageInfoCache {
    * fully qualified source name.
    */
   public String getJsNamespace(String topLevelTypeSourceName) {
-    return getPackageReport(topLevelTypeSourceName).jsNamespace;
+    return getPackageReport(topLevelTypeSourceName).getJsNamespace();
   }
 
   /**
@@ -155,14 +150,15 @@ public class PackageInfoCache {
   }
 
   /**
-   * Interpret the given annotations as info about a specific package (as identified by the
-   * combination of class path entry and package path).
+   * Specify the JavaScript namespace for a given package (as identified by the combination of class
+   * path entry and package path).
    */
-  public void setInfo(
-      String classPathEntry,
-      String packagePath,
-      List<org.eclipse.jdt.core.dom.Annotation> packageAnnotations) {
-    setReportForPackage(classPathEntry, packagePath, toPackageReport(packageAnnotations));
+  public void setPackageJsNamespace(
+      String classPathEntry, String packagePath, String packageJsNamespace) {
+    setReportForPackage(
+        classPathEntry,
+        packagePath,
+        PackageReport.newBuilder().setJsNamespace(packageJsNamespace).build());
   }
 
   @SuppressWarnings({"resource", "unused"})
@@ -240,7 +236,7 @@ public class PackageInfoCache {
     String specificPackagePath = toSpecificPackagePath(originClassPathEntry, packagePath);
 
     if (originClassPathEntry == null) {
-      return defaultPackageReport;
+      return DEFAULT_PACKAGE_REPORT;
     }
 
     if (!packageReportBySpecificPackagePath.containsKey(specificPackagePath)) {
@@ -253,16 +249,28 @@ public class PackageInfoCache {
       return packageReport;
     }
 
-    return defaultPackageReport;
+    return DEFAULT_PACKAGE_REPORT;
   }
 
   private void parsePackageInfo(
       String classPathEntry, String packagePath, String topLevelTypeSourceName) {
     Annotation[] packageAnnotations = findBytecodePackageAnnotations(classPathEntry, packagePath);
-    PackageReport packageReport = toPackageReport(packageAnnotations);
 
-    setReportForPackage(classPathEntry, packagePath, packageReport);
+    setPackageJsNamespace(classPathEntry, packagePath, getPackageJsNamespace(packageAnnotations));
     propagateSpecificInfo(classPathEntry, topLevelTypeSourceName);
+  }
+
+  private static String getPackageJsNamespace(Annotation[] packageAnnotations) {
+    if (packageAnnotations == null) {
+      return null;
+    }
+
+    return Arrays.stream(packageAnnotations)
+        .filter(JsPackage.class::isInstance)
+        .findFirst()
+        .map(JsPackage.class::cast)
+        .map(JsPackage::namespace)
+        .orElse(null);
   }
 
   /**
@@ -275,7 +283,7 @@ public class PackageInfoCache {
         packageReportBySpecificPackagePath.get(
             toSpecificPackagePath(classPathEntry, getPackagePath(topLevelTypeSourceName)));
     if (packageReport == null) {
-      packageReport = defaultPackageReport;
+      packageReport = DEFAULT_PACKAGE_REPORT;
     }
 
     packageReportByTypeName.put(topLevelTypeSourceName, packageReport);
@@ -284,7 +292,7 @@ public class PackageInfoCache {
   private void setReportForPackage(
       String classPathEntry, String packagePath, PackageReport packageReport) {
     if (packageReport == null) {
-      packageReport = defaultPackageReport;
+      packageReport = DEFAULT_PACKAGE_REPORT;
     }
     String specificPackagePath = toSpecificPackagePath(classPathEntry, packagePath);
     packageReportBySpecificPackagePath.put(specificPackagePath, packageReport);
