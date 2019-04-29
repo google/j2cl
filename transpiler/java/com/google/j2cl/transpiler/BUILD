@@ -12,8 +12,7 @@ java_library(
         "//transpiler/java/com/google/j2cl/ast",
         "//transpiler/java/com/google/j2cl/ast/visitors",
         "//transpiler/java/com/google/j2cl/common",
-        "//transpiler/java/com/google/j2cl/frontend/common",
-        "//transpiler/java/com/google/j2cl/frontend/jdt",
+        "//transpiler/java/com/google/j2cl/frontend",
         "//transpiler/java/com/google/j2cl/generator",
     ],
 )
@@ -28,7 +27,6 @@ java_library(
         "//third_party:auto_value",
         "//third_party:guava",
         "//transpiler/java/com/google/j2cl/common",
-        "//transpiler/java/com/google/j2cl/frontend/jdt",
     ],
 )
 
@@ -52,7 +50,6 @@ java_library(
         "//third_party:guava",
         "//transpiler/java/com/google/j2cl/bazel",
         "//transpiler/java/com/google/j2cl/common",
-        "//transpiler/java/com/google/j2cl/frontend/jdt",
     ],
 )
 

@@ -2,7 +2,7 @@
 #   This package contains frontend common code that is agnostic of the actual frontend used.
 
 package(default_visibility = [
-    "//transpiler:__subpackages__",
+    "//transpiler/java/com/google/j2cl/frontend:__subpackages__",
 ])
 
 licenses(["notice"])  # Apache 2.0
