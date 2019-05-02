@@ -96,6 +96,7 @@ import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.ast.WhileStatement;
 import com.google.j2cl.common.FilePosition;
 import com.google.j2cl.common.SourcePosition;
+import com.google.j2cl.frontend.common.EnumMethodsCreator;
 import com.google.j2cl.frontend.common.PackageInfoCache;
 import java.util.ArrayList;
 import java.util.Arrays;
