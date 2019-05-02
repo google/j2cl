@@ -83,7 +83,7 @@ public class NormalizeEnumClasses extends NormalizationPass {
                     .setParameter(true)
                     .build();
 
-            // rewrite the super() call in the method body to thread the orinal and name
+            // Rewrite the super() call in the constructor body to thread the ordinal and name
             // parameters.
             method
                 .getBody()
