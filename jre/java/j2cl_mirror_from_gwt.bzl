@@ -37,14 +37,12 @@ java_source_copy = rule(
 def j2cl_mirror_from_gwt(
         name,
         mirrored_files,
-        extra_srcs = [],
         extra_js_srcs = [],
         excluded_srcs = [],
         deps = [],
         **kwargs):
-    super_srcs = native.glob(["**/*.java"], exclude = excluded_srcs) + extra_srcs
-    native_srcs = native.glob(["**/*.native.js"])
-    js_srcs = native.glob(["**/*.js"], exclude = native_srcs) + extra_js_srcs
+    super_srcs = native.glob(["**/*.java"], exclude = excluded_srcs)
+    native_srcs = native.glob(["**/*.js"]) + extra_js_srcs
 
     java_source_copy(
         name = name + "_copy",
@@ -64,9 +62,10 @@ def j2cl_mirror_from_gwt(
 
     j2cl_library(
         name = name,
-        srcs = [":" + name + "_java_files"],
-        native_srcs = [":" + name + "_native_files"],
+        srcs = [
+            ":" + name + "_java_files",
+            ":" + name + "_native_files",
+        ],
         deps = deps,
-        _js_srcs = js_srcs,
         **kwargs
     )

@@ -32,7 +32,6 @@ def j2cl_library(
         name,
         native_srcs = [],
         generate_build_test = None,
-        _js_srcs = [],
         _js_deps = [],
         _js_exports = [],
         **kwargs):
@@ -52,7 +51,6 @@ def j2cl_library(
             NOT labels of java_library() rules.
     """
     # Private Args:
-    #   _js_srcs: JavaScript source files (.js) to include in the bundle.
     #   _js_deps: Direct JavaScript dependencies needed by native code (either
     #       via srcs in _js_srcs or via JsInterop/native.js).
     #       For the JsInterop scenario, we encourage developers to create
@@ -62,7 +60,6 @@ def j2cl_library(
 
     args = dict(kwargs)
     _append(args, "srcs", native_srcs)
-    _append(args, "srcs", _js_srcs)
     _append(args, "deps", _js_deps)
     _append(args, "exports", _js_exports)
 
