@@ -35,6 +35,7 @@ import com.google.j2cl.ast.DoWhileStatement;
 import com.google.j2cl.ast.EmptyStatement;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
+import com.google.j2cl.ast.ExpressionWithComment;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.ForStatement;
@@ -405,15 +406,28 @@ public final class ConversionContextVisitor extends AbstractRewriter {
 
   @Override
   public Expression rewriteExpression(Expression expression) {
-    // Every expression needs to be handled explicitly or excluded here.
-    if (expression instanceof Literal
-        || expression instanceof MultiExpression
-        || expression instanceof FunctionExpression
+    // Every expression needs to be handled explicitly or excluded here. This is to ensure when new
+    // expressions are added to the AST that a conscious decision is made, and avoid the implicit
+    // noop rewriting.
+    // Expressions that don't need handling include:
+    //    - literals (including class literals)
+    //    - references (variable references, this and super)
+    //    - jsdoc casts (since they are used to specifically avoid rewriting)
+    //    - any other expression that only requires its subexpressions to be handled, but don't need
+    //      any rewriting themselves (MultiExpression, ExpressionWithComment, VariableDeclarations)
+
+    if (expression instanceof Literal // literals
         || expression instanceof JavaScriptConstructorReference
+        // expressions that needs only subexpressions to be handled
+        || expression instanceof MultiExpression
+        || expression instanceof ExpressionWithComment
+        || expression instanceof FunctionExpression
+        || expression instanceof VariableDeclarationExpression
+        // jsdoc casts
         || expression instanceof JsDocCastExpression
+        // references
         || expression instanceof ThisReference
         || expression instanceof SuperReference
-        || expression instanceof VariableDeclarationExpression
         || expression instanceof VariableReference) {
       // These expressions do not need rewriting.
       return expression;
