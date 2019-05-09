@@ -57,7 +57,6 @@ import com.google.j2cl.ast.ForStatement;
 import com.google.j2cl.ast.FunctionExpression;
 import com.google.j2cl.ast.IfStatement;
 import com.google.j2cl.ast.InstanceOfExpression;
-import com.google.j2cl.ast.JavaScriptConstructorReference;
 import com.google.j2cl.ast.JsDocCastExpression;
 import com.google.j2cl.ast.LabeledStatement;
 import com.google.j2cl.ast.Method;
@@ -1114,7 +1113,7 @@ public class CompilationUnitBuilder {
           JdtUtils.createTypeDescriptor(expression.resolveTypeBinding());
       if (JdtUtils.isEffectivelyConstant(qualifier)) {
         // There is no need to introduce a temporary variable for the qualifier.
-        return createForwardingFunctionExpression(
+        return AstUtils.createForwardingFunctionExpression(
             getSourcePosition(expression),
             expressionTypeDescriptor,
             // functional interface method that the expression implements.
@@ -1144,7 +1143,7 @@ public class CompilationUnitBuilder {
                   .addVariableDeclaration(variable, convert(qualifier))
                   .build(),
               // Construct the functional expression.
-              createForwardingFunctionExpression(
+              AstUtils.createForwardingFunctionExpression(
                   getSourcePosition(expression),
                   expressionTypeDescriptor,
                   // functional interface method that the expression implements.
@@ -1272,7 +1271,7 @@ public class CompilationUnitBuilder {
      */
     private Expression convert(TypeMethodReference expression) {
       ITypeBinding expressionTypeBinding = expression.resolveTypeBinding();
-      return createForwardingFunctionExpression(
+      return AstUtils.createForwardingFunctionExpression(
           getSourcePosition(expression),
           JdtUtils.createDeclaredTypeDescriptor(expressionTypeBinding),
           JdtUtils.createMethodDescriptor(expressionTypeBinding.getFunctionalInterfaceMethod()),
@@ -1294,7 +1293,7 @@ public class CompilationUnitBuilder {
       MethodDescriptor methodDescriptor =
           JdtUtils.createMethodDescriptor(expression.resolveMethodBinding());
 
-      return createForwardingFunctionExpression(
+      return AstUtils.createForwardingFunctionExpression(
           getSourcePosition(expression),
           JdtUtils.createDeclaredTypeDescriptor(expression.resolveTypeBinding()),
           JdtUtils.createMethodDescriptor(
@@ -1302,52 +1301,6 @@ public class CompilationUnitBuilder {
           resolveImplicitOuterClassReference(methodDescriptor.getEnclosingTypeDescriptor()),
           methodDescriptor,
           true);
-    }
-
-    /**
-     * Creates a FunctionExpression described by {@code functionalMethodDescriptor} that forwards to
-     * {@code targetMethodDescriptor}.
-     */
-    private FunctionExpression createForwardingFunctionExpression(
-        SourcePosition sourcePosition,
-        TypeDescriptor expressionTypeDescriptor,
-        MethodDescriptor functionalMethodDescriptor,
-        Expression qualifier,
-        MethodDescriptor targetMethodDescriptor,
-        boolean isStaticDispatch) {
-
-      List<Variable> parameters =
-          AstUtils.createParameterVariables(
-              functionalMethodDescriptor.getParameterTypeDescriptors());
-
-      List<Variable> forwardingParameters = parameters;
-      if (!targetMethodDescriptor.isStatic()
-          && (qualifier == null || qualifier instanceof JavaScriptConstructorReference)) {
-        // The qualifier for the instance method becomes the first parameter. Method references to
-        // instance methods without an explicit qualifier use the first parameter in the functional
-        // interface as the qualifier for the method call.
-        checkArgument(
-            parameters.size() == targetMethodDescriptor.getParameterTypeDescriptors().size() + 1
-                || (parameters.size() >= targetMethodDescriptor.getParameterTypeDescriptors().size()
-                    && targetMethodDescriptor.isVarargs()));
-        qualifier = parameters.get(0).getReference();
-        forwardingParameters = parameters.subList(1, parameters.size());
-      }
-
-      Statement forwardingStatement =
-          AstUtils.createForwardingStatement(
-              sourcePosition,
-              qualifier,
-              targetMethodDescriptor,
-              isStaticDispatch,
-              forwardingParameters,
-              functionalMethodDescriptor.getReturnTypeDescriptor());
-      return FunctionExpression.newBuilder()
-          .setTypeDescriptor(expressionTypeDescriptor)
-          .setParameters(parameters)
-          .setStatements(forwardingStatement)
-          .setSourcePosition(sourcePosition)
-          .build();
     }
 
     private AssertStatement convert(org.eclipse.jdt.core.dom.AssertStatement statement) {
