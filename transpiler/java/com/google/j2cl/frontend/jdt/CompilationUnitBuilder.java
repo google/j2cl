@@ -144,7 +144,6 @@ public class CompilationUnitBuilder {
     private String currentSourceFile;
     private org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit;
     private CompilationUnit j2clCompilationUnit;
-    private int qualifierCounter;
 
     private void pushType(Type type) {
       typeStack.add(type);
@@ -1130,7 +1129,7 @@ public class CompilationUnitBuilder {
       Variable variable =
           Variable.newBuilder()
               .setFinal(true)
-              .setName("$$qualifier" + qualifierCounter++)
+              .setName("$$q")
               .setTypeDescriptor(JdtUtils.createTypeDescriptor(qualifier.resolveTypeBinding()))
               .build();
       // Store the declaring type in the local scope so that variable declaration scope points to
