@@ -1134,7 +1134,6 @@ public class CompilationUnitBuilder {
               .build();
       // Store the declaring type in the local scope so that variable declaration scope points to
       // the right type when the functional expression is effectively constructed.
-      final Type declaringType = currentType;
       return MultiExpression.newBuilder()
           .setExpressions(
               // Declare the temporary variable and initialize to the evaluated qualifier.
@@ -1148,9 +1147,7 @@ public class CompilationUnitBuilder {
                   // functional interface method that the expression implements.
                   JdtUtils.createMethodDescriptor(
                       expression.resolveTypeBinding().getFunctionalInterfaceMethod()),
-                  declaringType == currentType
-                      ? variable.getReference()
-                      : convertCapturedVariableReference(variable, declaringType.getDeclaration()),
+                  variable.getReference(),
                   // target method to forward to.
                   JdtUtils.createMethodDescriptor(expression.resolveMethodBinding()),
                   false))
