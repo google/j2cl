@@ -93,15 +93,45 @@ public class CompoundOperationsUtils {
     return expandArrayAccessReturningPreValue(operator, leftOperand, rightOperand, null);
   }
 
+  /**
+   * Expands a binary expression that has an array access in the lhs. If {@code valueVariable} is
+   * not {@code null}, the prior lhs value is stored in it and that returned by the resulting
+   * expression.
+   *
+   * <ul>
+   *   <li>Array and index expressions are idempotent (i.e. can be evaluated more that one time)
+   *       <pre><code> array[0] += expression =>
+   *     ($valueVariable = array[0],              // store in $valueVariable if it was passed
+   *      array[0] = array[0] + expression,
+   *      $valueVariable)                         // return $valueVariable if it was passed
+   *   </code></pre>
+   *   <li>Array expression is idempotent but index expression is not.
+   *       <pre><code> getAndChangeArray()[0] += expression =>
+   *     ($array = getAndChangeArray(),
+   *      $valueVariable = $array[0],             // store in $valueVariable if it was passed
+   *      $array[0] = $array[0] + expression,
+   *      $valueVariable)                         // return $valueVariable if it was passed
+   *   </code></pre>
+   *   <li>Index expression is not idempotent (and might have a side-effect on the array
+   *       expression).
+   *       <pre><code> array[getIndexButModifyArrayOrIndex()] += expression =>
+   *     ($array = array,
+   *      $index = getIndexButModifyArrayOrIndex(),
+   *      $valueVariable = $array[$index],        // store in $valueVariable if it was passed
+   *      $array[$index] = $array[$index] + expression,
+   *      $valueVariable)                         // return $valueVariable if it was passed
+   *   </code></pre>
+   * </ul>
+   *
+   * <p>If {@code valueVariable} is {@code null} then the assigment to it is omitted, and the
+   * expression evaluates to the result of the binary expression.
+   */
   private static Expression expandArrayAccessReturningPreValue(
       BinaryOperator operator,
       ArrayAccess leftOperand,
       Expression rightOperand,
       Variable valueVariable) {
-    // The referenced expression is being modified and it has a qualifier. Take special
-    // care to only dereference the qualifier once (to avoid double side effects), store it in a
-    // temporary variable and use that temporary variable in the rest of the computation.
-    // q.a += b; => (let $qualifier = q, $qualifier.a = $qualifier.a + b)
+
     List<Expression> expressions = new ArrayList<>();
     List<VariableDeclarationFragment> variableDeclarationFragments = new ArrayList<>();
 
@@ -126,6 +156,7 @@ public class CompoundOperationsUtils {
     }
 
     if (!indexExpression.isIdempotent()) {
+      // Store the index expression so that it is not evaluated twice.
       Variable indexExpressionVariable =
           Variable.newBuilder()
               .setFinal(true)
@@ -146,6 +177,7 @@ public class CompoundOperationsUtils {
             .setIndexExpression(indexExpression)
             .build();
     if (valueVariable != null) {
+      // Evaluate the left hand side before evaluating the binary expression.
       variableDeclarationFragments.add(
           VariableDeclarationFragment.newBuilder()
               .setVariable(valueVariable)
@@ -160,12 +192,14 @@ public class CompoundOperationsUtils {
               .setVariableDeclarationFragments(variableDeclarationFragments)
               .build());
     }
+    // Evaluate the binary expression.
     expressions.add(assignToLeftOperand(arrayAccess, operator, rightOperand));
     if (valueVariable != null) {
+      // Return the saved value.
       expressions.add(valueVariable.getReference());
     }
 
-    // Leave the multiexpression even if there is only one expression, because the expansion might
+    // Leave the multi expression even if there is only one expression, because the expansion might
     // need to be parenthesized to preserve precedence.
     return MultiExpression.newBuilder().addExpressions(expressions).build();
   }
