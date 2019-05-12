@@ -18,6 +18,12 @@ package com.google.j2cl.transpiler.integration.methodreferences;
 import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
 
 public class Main {
+  public static void main(String[] args) {
+    testSuperMethodReferences();
+    testConstructorReferences();
+    testMethodReferences();
+  }
+
   interface Producer<T> {
     T produce();
   }
@@ -30,59 +36,70 @@ public class Main {
     T[] produce(int size);
   }
 
-  static SomeObject m() {
-    return new SomeObject();
+  static Outer.SomeObject returnsSomeObject() {
+    return new Outer.SomeObject();
   }
 
-  static int instanceNumber;
+  static class Outer {
+    static int instanceNumber;
 
-  static class SomeObject {
-    int someObjectInstanceNumber = Main.instanceNumber++;
+    static class SomeObject {
+      int someObjectInstanceNumber = Outer.instanceNumber++;
 
-    public Boolean is2() {
-      return someObjectInstanceNumber == 2;
+      public Boolean isInstanceNumber2() {
+        return someObjectInstanceNumber == 2;
+      }
+
+      public Boolean isInstanceNumber3() {
+        return someObjectInstanceNumber == 3;
+      }
     }
 
-    public Boolean is3() {
-      return someObjectInstanceNumber == 3;
+    class ObjectCapturingOuter {
+      Outer getOuter() {
+        return Outer.this;
+      }
+    }
+
+    Producer<ObjectCapturingOuter> objectCapturingOuterFactory() {
+      // Constructor member reference with implicit outer instance capture.
+      return ObjectCapturingOuter::new;
     }
   }
 
-  class ObjectCapturingOuter {
-    Main getMain() {
-      return Main.this;
-    }
-  }
-
-  void testConstructorReferences() {
-    Producer<SomeObject> objectFactory = SomeObject::new;
+  private static void testConstructorReferences() {
+    Outer.instanceNumber = 0;
+    Producer<Outer.SomeObject> objectFactory = Outer.SomeObject::new;
     assertTrue(objectFactory.produce().someObjectInstanceNumber == 0);
     assertTrue(objectFactory.produce().someObjectInstanceNumber == 1);
 
-    Producer<ObjectCapturingOuter> objectCapturingOuterProducer = ObjectCapturingOuter::new;
-    assertTrue(objectCapturingOuterProducer.produce().getMain() == this);
+    Outer outer = new Outer();
+    Producer<Outer.ObjectCapturingOuter> objectCapturingOuterProducer =
+        outer.objectCapturingOuterFactory();
+    assertTrue(objectCapturingOuterProducer.produce().getOuter() == outer);
 
-    ArrayProducer<Object> arrayProducer = SomeObject[]::new;
+    ArrayProducer<Object> arrayProducer = Outer.SomeObject[]::new;
     assertTrue(arrayProducer.produce(10).length == 10);
   }
 
-  void testMethodReferences() {
-    Producer<SomeObject> objectFactory = Main::m;
+  private static void testMethodReferences() {
+    Outer.instanceNumber = 0;
+    Producer<Outer.SomeObject> objectFactory = Main::returnsSomeObject;
     assertTrue(objectFactory.produce().someObjectInstanceNumber == 0);
     assertTrue(objectFactory.produce().someObjectInstanceNumber == 1);
 
     // Qualified instance method, make sure that the evaluation of the qualifier only happens once.
-    Producer<Boolean> booleanProducer = new SomeObject()::is2;
+    Producer<Boolean> booleanProducer = new Outer.SomeObject()::isInstanceNumber2;
     assertTrue(booleanProducer.produce());
     assertTrue(booleanProducer.produce());
 
     // Unqualified SomeObject method
-    Predicate<SomeObject> objectPredicate = SomeObject::is3;
-    assertTrue(objectPredicate.apply(new SomeObject()));
-    assertTrue(!objectPredicate.apply(new SomeObject()));
+    Predicate<Outer.SomeObject> objectPredicate = Outer.SomeObject::isInstanceNumber3;
+    assertTrue(objectPredicate.apply(new Outer.SomeObject()));
+    assertTrue(!objectPredicate.apply(new Outer.SomeObject()));
   }
 
-  void testSuperMethodReferences() {
+  private static void testSuperMethodReferences() {
     class A {
       String introduce() {
         return "I am A.";
@@ -101,15 +118,5 @@ public class Main {
     }
 
     assertTrue(new SubA().superIntroducer().produce().equals("I am A."));
-  }
-
-  public static void main(String[] args) {
-    Main m = new Main();
-    instanceNumber = 0;
-    m.testSuperMethodReferences();
-    instanceNumber = 0;
-    m.testConstructorReferences();
-    instanceNumber = 0;
-    m.testMethodReferences();
   }
 }
