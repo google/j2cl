@@ -210,7 +210,7 @@ public class TranspilerTester {
     public TranspileResult assertErrorsContainsSnippets(String... snippets) {
       assertThat(getProblems().getErrors())
           .comparingElementsUsing(Correspondence.from(String::contains, "contained within"))
-          .containsAllIn(Arrays.asList(snippets));
+          .containsAtLeastElementsIn(Arrays.asList(snippets));
       return this;
     }
 
