@@ -1552,33 +1552,6 @@ public class CompilationUnitBuilder {
           .build();
     }
 
-    /**
-     * Finds and returns the descriptor of the type that encloses the variable referenced by the
-     * provided binding.
-     */
-    private TypeDeclaration findEnclosingTypeDeclaration(IVariableBinding variableBinding) {
-      // The binding is for a local variable in a static or instance block. JDT does not allow for
-      // retrieving the enclosing class. Answer the question from information we've been gathering
-      // while processing the compilation unit.
-      Type type = enclosingTypeByVariable.get(variableByJdtBinding.get(variableBinding));
-      if (type != null) {
-        return type.getDeclaration();
-      }
-      // The binding is a simple field and JDT provides direct knowledge of the declaring class.
-      if (variableBinding.getDeclaringClass() != null) {
-        return JdtUtils.createDeclarationForType(variableBinding.getDeclaringClass());
-      }
-      // The binding is a local variable or parameter in method. JDT provides an indirect path to
-      // the enclosing class.
-      if (variableBinding.getDeclaringMethod() != null) {
-        return JdtUtils.createDeclarationForType(
-            variableBinding.getDeclaringMethod().getDeclaringClass());
-      }
-
-      throw internalCompilerError(
-          "Unable to locate the declaring class for variable binding: %s", variableBinding);
-    }
-
     private Expression convert(org.eclipse.jdt.core.dom.SimpleName expression) {
       IBinding binding = expression.resolveBinding();
       if (binding instanceof IVariableBinding) {
@@ -1599,14 +1572,7 @@ public class CompilationUnitBuilder {
         } else {
           // It refers to a local variable or parameter in a method or block.
           Variable variable = checkNotNull(variableByJdtBinding.get(variableBinding));
-          // The innermost type in which this variable is declared.
-          TypeDeclaration enclosingTypeDeclaration = findEnclosingTypeDeclaration(variableBinding);
-          TypeDeclaration currentTypeDeclaration = currentType.getDeclaration();
-          if (!enclosingTypeDeclaration.equals(currentTypeDeclaration)) {
-            return convertCapturedVariableReference(variable, enclosingTypeDeclaration);
-          } else {
-            return variable.getReference();
-          }
+          return resolveVariableReference(variable);
         }
       }
 
@@ -1707,13 +1673,25 @@ public class CompilationUnitBuilder {
       return qualifier;
     }
 
-    private Expression convertCapturedVariableReference(
-        Variable variable, TypeDeclaration enclosingClassDeclarationDescriptor) {
+    /**
+     * Returns the expression to reference {@code variable} in the current context.
+     *
+     * <p>If the variable is not declared in the current context it is a capture. References to
+     * captured variables are recorded doing this resolution to determine the backing fields that
+     * are needed.
+     */
+    private Expression resolveVariableReference(Variable variable) {
+      TypeDeclaration enclosingClassDeclaration =
+          checkNotNull(enclosingTypeByVariable.get(variable).getDeclaration());
+
+      if (currentType.getDeclaration().equals(enclosingClassDeclaration)) {
+        return variable.getReference();
+      }
       // the variable is declared outside current type, i.e. a captured variable to current
       // type, and also a captured variable to the outer class in the type stack that is
-      // inside {@code enclosingClassRef}.
+      // inside enclosingClassDeclaration.
       for (int i = typeStack.size() - 1; i >= 0; i--) {
-        if (typeStack.get(i).getDeclaration().equals(enclosingClassDeclarationDescriptor)) {
+        if (typeStack.get(i).getDeclaration().equals(enclosingClassDeclaration)) {
           break;
         }
         capturesByTypeName.put(
