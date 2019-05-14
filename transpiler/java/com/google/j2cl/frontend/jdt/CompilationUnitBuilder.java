@@ -29,6 +29,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
+import com.google.errorprone.annotations.FormatMethod;
 import com.google.j2cl.ast.ArrayAccess;
 import com.google.j2cl.ast.ArrayLength;
 import com.google.j2cl.ast.ArrayLiteral;
@@ -207,11 +208,9 @@ public class CompilationUnitBuilder {
           convert((EnumDeclaration) typeDeclaration);
           break;
         default:
-          throw new RuntimeException(
-              "Need to implement translation for AbstractTypeDeclaration type: "
-                  + typeDeclaration.getClass().getName()
-                  + " file triggering this: "
-                  + currentSourceFile);
+          throw internalCompilerError(
+              "Unexpected node type for AbstractTypeDeclaration: %s  type name: %s ",
+              typeDeclaration.getClass().getName(), typeDeclaration.getName().toString());
       }
     }
 
@@ -296,11 +295,9 @@ public class CompilationUnitBuilder {
           AbstractTypeDeclaration nestedTypeDeclaration = (AbstractTypeDeclaration) bodyDeclaration;
           convert(nestedTypeDeclaration);
         } else {
-          throw new RuntimeException(
-              "Need to implement translation for BodyDeclaration type: "
-                  + bodyDeclaration.getClass().getName()
-                  + " file triggering this: "
-                  + currentSourceFile);
+          throw internalCompilerError(
+              "Unexpected type for BodyDeclaration: %s, in type: %s",
+              bodyDeclaration.getClass().getName(), type.getDeclaration().getQualifiedSourceName());
         }
       }
 
@@ -401,10 +398,9 @@ public class CompilationUnitBuilder {
       if (constantValue instanceof String) {
         return new StringLiteral((String) constantValue);
       }
-      throw new RuntimeException(
-          "Need to implement translation for compile time constants of type: "
-              + constantValue.getClass().getSimpleName()
-              + ".");
+      throw internalCompilerError(
+          "Unexpected type for compile time constant: %s",
+          constantValue.getClass().getSimpleName());
     }
 
     private Method convert(MethodDeclaration methodDeclaration) {
@@ -705,11 +701,8 @@ public class CompilationUnitBuilder {
         case ASTNode.VARIABLE_DECLARATION_EXPRESSION:
           return convert((org.eclipse.jdt.core.dom.VariableDeclarationExpression) expression);
         default:
-          throw new RuntimeException(
-              "Need to implement translation for expression type: "
-                  + expression.getClass().getName()
-                  + " file triggering this: "
-                  + currentSourceFile);
+          throw internalCompilerError(
+              "Unexpected type for Expression: %s", expression.getClass().getName());
       }
     }
 
@@ -785,11 +778,8 @@ public class CompilationUnitBuilder {
         case ASTNode.WHILE_STATEMENT:
           return convert((org.eclipse.jdt.core.dom.WhileStatement) statement);
         default:
-          throw new RuntimeException(
-              "Need to implement translation for statement type: "
-                  + statement.getClass().getName()
-                  + " file triggering this: "
-                  + currentSourceFile);
+          throw internalCompilerError(
+              "Unexpected type for Statement: %s", statement.getClass().getName());
       }
     }
 
@@ -1535,7 +1525,7 @@ public class CompilationUnitBuilder {
         IVariableBinding variableBinding = (IVariableBinding) binding;
         checkArgument(
             variableBinding.isField(),
-            "Need to implement translation for QualifiedName that is not a field.");
+            internalCompilerErrorMessage("Unexpected QualifiedName that is not a field"));
 
         Expression qualifier = convert(expression.getQualifier());
         return JdtUtils.createFieldAccess(qualifier, variableBinding);
@@ -1545,8 +1535,8 @@ public class CompilationUnitBuilder {
         return null;
       }
 
-      throw new RuntimeException(
-          "Need to implement translation for QualifiedName that is not a variable or a type.");
+      throw internalCompilerError(
+          "Unexpected type for QualifiedName binding: %s ", binding.getClass().getName());
     }
 
     private ReturnStatement convert(org.eclipse.jdt.core.dom.ReturnStatement statement) {
@@ -1585,8 +1575,8 @@ public class CompilationUnitBuilder {
             variableBinding.getDeclaringMethod().getDeclaringClass());
       }
 
-      throw new RuntimeException(
-          "Need to be able to locate the declaring class for variable binding: " + variableBinding);
+      throw internalCompilerError(
+          "Unable to locate the declaring class for variable binding: %s", variableBinding);
     }
 
     private Expression convert(org.eclipse.jdt.core.dom.SimpleName expression) {
@@ -1623,10 +1613,9 @@ public class CompilationUnitBuilder {
       if (binding instanceof ITypeBinding) {
         return null;
       }
-      // TODO(rluble): to be implemented
-      throw new RuntimeException(
-          "Need to implement translation for SimpleName binding: "
-              + expression.getClass().getName());
+
+      throw internalCompilerError(
+          "Unexpected binding class for SimpleName: %s", expression.getClass().getName());
     }
 
     /**
@@ -1940,6 +1929,16 @@ public class CompilationUnitBuilder {
       Type type = new Type(getSourcePosition(sourcePositionNode), visibility, typeDeclaration);
       type.setStatic(JdtUtils.isStatic(typeBinding));
       return type;
+    }
+
+    @FormatMethod
+    private RuntimeException internalCompilerError(String format, Object... params) {
+      return new RuntimeException(internalCompilerErrorMessage(format, params));
+    }
+
+    @FormatMethod
+    private String internalCompilerErrorMessage(String format, Object... params) {
+      return String.format(format, params) + ", in file: " + currentSourceFile;
     }
   }
 
