@@ -26,6 +26,11 @@ public abstract class Literal extends Expression {
   }
 
   @Override
+  public boolean isEffectivelyInvariant() {
+    return true;
+  }
+
+  @Override
   public boolean areEnclosingParenthesisUnnecessary() {
     return true;
   }

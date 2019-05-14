@@ -1040,10 +1040,10 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
      */
     private Expression convert(ExpressionMethodReference expression) {
       checkNotNull(expression.getExpression());
-      org.eclipse.jdt.core.dom.Expression qualifier = expression.getExpression();
       TypeDescriptor expressionTypeDescriptor =
           JdtUtils.createTypeDescriptor(expression.resolveTypeBinding());
-      if (JdtUtils.isEffectivelyConstant(qualifier)) {
+      Expression qualifier = convertOrNull(expression.getExpression());
+      if (qualifier == null || qualifier.isEffectivelyInvariant()) {
         // There is no need to introduce a temporary variable for the qualifier.
         return AstUtils.createForwardingFunctionExpression(
             getSourcePosition(expression),
@@ -1051,7 +1051,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
             // functional interface method that the expression implements.
             JdtUtils.createMethodDescriptor(
                 expression.resolveTypeBinding().getFunctionalInterfaceMethod()),
-            convert(qualifier),
+            qualifier,
             // target method to forward to.
             JdtUtils.createMethodDescriptor(expression.resolveMethodBinding()),
             false);
@@ -1063,7 +1063,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           Variable.newBuilder()
               .setFinal(true)
               .setName("$$q")
-              .setTypeDescriptor(JdtUtils.createTypeDescriptor(qualifier.resolveTypeBinding()))
+              .setTypeDescriptor(qualifier.getTypeDescriptor())
               .build();
       // Store the declaring type in the local scope so that variable declaration scope points to
       // the right type when the functional expression is effectively constructed.
@@ -1071,7 +1071,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           .setExpressions(
               // Declare the temporary variable and initialize to the evaluated qualifier.
               VariableDeclarationExpression.newBuilder()
-                  .addVariableDeclaration(variable, convert(qualifier))
+                  .addVariableDeclaration(variable, qualifier)
                   .build(),
               // Construct the functional expression.
               AstUtils.createForwardingFunctionExpression(

@@ -43,6 +43,15 @@ public abstract class Expression extends Node implements Cloneable<Expression> {
   }
 
   /**
+   * Returns true if the expression does not have side effects (including triggering class
+   * initializers) and its evaluation results on the same value if it is moved forward in the same
+   * or an enclosed scope.
+   */
+  public boolean isEffectivelyInvariant() {
+    return false;
+  }
+
+  /**
    * Returns true if the expression can be used in the left hand side of an assignment. {@see JLS
    * 15.26}
    */

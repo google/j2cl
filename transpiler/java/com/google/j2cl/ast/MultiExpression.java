@@ -58,6 +58,11 @@ public class MultiExpression extends Expression {
   }
 
   @Override
+  public boolean isEffectivelyInvariant() {
+    return expressions.stream().allMatch(Expression::isEffectivelyInvariant);
+  }
+
+  @Override
   public MultiExpression clone() {
     return MultiExpression.newBuilder().setExpressions(AstUtils.clone(expressions)).build();
   }

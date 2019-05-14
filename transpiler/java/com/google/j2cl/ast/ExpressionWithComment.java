@@ -44,6 +44,11 @@ public class ExpressionWithComment extends Expression {
   }
 
   @Override
+  public boolean isEffectivelyInvariant() {
+    return expression.isEffectivelyInvariant();
+  }
+
+  @Override
   public boolean areEnclosingParenthesisUnnecessary() {
     // expressions with comment are safe to unparenthesize if the underlying expression is.
     return expression.areEnclosingParenthesisUnnecessary();

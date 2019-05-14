@@ -41,6 +41,11 @@ public class SuperReference extends Expression {
   }
 
   @Override
+  public boolean isEffectivelyInvariant() {
+    return true;
+  }
+
+  @Override
   public boolean areEnclosingParenthesisUnnecessary() {
     return true;
   }

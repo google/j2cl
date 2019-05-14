@@ -51,6 +51,11 @@ public class VariableReference extends Expression {
   }
 
   @Override
+  public boolean isEffectivelyInvariant() {
+    return target.isFinal();
+  }
+
+  @Override
   public boolean isLValue() {
     return true;
   }
