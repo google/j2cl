@@ -25,11 +25,7 @@ import static java.util.stream.Collectors.toList;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.ComparisonChain;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.LinkedHashMultimap;
-import com.google.common.collect.Multimap;
-import com.google.errorprone.annotations.FormatMethod;
 import com.google.j2cl.ast.ArrayAccess;
 import com.google.j2cl.ast.ArrayLength;
 import com.google.j2cl.ast.ArrayLiteral;
@@ -96,8 +92,8 @@ import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.ast.WhileStatement;
 import com.google.j2cl.common.FilePosition;
 import com.google.j2cl.common.SourcePosition;
+import com.google.j2cl.frontend.common.AbstractCompilationUnitBuilder;
 import com.google.j2cl.frontend.common.EnumMethodsCreator;
-import com.google.j2cl.frontend.common.PackageInfoCache;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -133,28 +129,11 @@ import org.eclipse.jdt.core.dom.TypeMethodReference;
 import org.eclipse.jdt.core.dom.VariableDeclaration;
 
 /** Creates a J2CL Java AST from the AST provided by JDT. */
-public class CompilationUnitBuilder {
+public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
+
   private class ASTConverter {
-    private PackageInfoCache packageInfoCache = PackageInfoCache.get();
-    private Map<IVariableBinding, Variable> variableByJdtBinding = new HashMap<>();
-    private Map<Variable, Type> enclosingTypeByVariable = new HashMap<>();
-    private Multimap<String, Variable> capturesByTypeName = LinkedHashMultimap.create();
-    private List<Type> typeStack = new ArrayList<>();
-    private Type currentType = null;
-
-    private String currentSourceFile;
     private org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit;
-    private CompilationUnit j2clCompilationUnit;
-
-    private void pushType(Type type) {
-      typeStack.add(type);
-      currentType = type;
-    }
-
-    private void popType() {
-      typeStack.remove(typeStack.size() - 1);
-      currentType = typeStack.isEmpty() ? null : typeStack.get(typeStack.size() - 1);
-    }
+    private Map<IVariableBinding, Variable> variableByJdtBinding = new HashMap<>();
 
     @SuppressWarnings({"cast", "unchecked"})
     private CompilationUnit convert(
@@ -164,22 +143,20 @@ public class CompilationUnitBuilder {
       JdtUtils.initWellKnownTypes(jdtCompilationUnit.getAST(), wellKnownTypeBindings);
       this.jdtCompilationUnit = jdtCompilationUnit;
 
-      currentSourceFile = sourceFilePath;
+      setCurrentSourceFile(sourceFilePath);
       String packageName = JdtUtils.getCompilationUnitPackageName(jdtCompilationUnit);
-      j2clCompilationUnit = new CompilationUnit(sourceFilePath, packageName);
+      setCurrentCompilationUnit(new CompilationUnit(sourceFilePath, packageName));
       // Records information about package-info files supplied as source code.
-      if (currentSourceFile.endsWith("package-info.java")
+      if (getCurrentSourceFile().endsWith("package-info.java")
           && jdtCompilationUnit.getPackage() != null) {
-        String packageJsNamespace = getPackageJsNamespace(jdtCompilationUnit);
-        packageInfoCache.setPackageJsNamespace(
-            PackageInfoCache.SOURCE_CLASS_PATH_ENTRY, packageName, packageJsNamespace);
+        setPackageJsNamespaceFromSource(packageName, getPackageJsNamespace(jdtCompilationUnit));
       }
       for (Object object : jdtCompilationUnit.types()) {
         AbstractTypeDeclaration abstractTypeDeclaration = (AbstractTypeDeclaration) object;
         convert(abstractTypeDeclaration);
       }
 
-      return j2clCompilationUnit;
+      return getCurrentCompilationUnit();
     }
 
     private String getPackageJsNamespace(
@@ -257,7 +234,7 @@ public class CompilationUnitBuilder {
         Function<Type, T> typeProcessor) {
       Type type = createType(typeBinding, sourcePositionNode);
       pushType(type);
-      j2clCompilationUnit.addType(type);
+      getCurrentCompilationUnit().addType(type);
       convertTypeBody(type, bodyDeclarations);
       T result = typeProcessor.apply(type);
       popType();
@@ -266,11 +243,7 @@ public class CompilationUnitBuilder {
 
     private void convertTypeBody(Type type, List<BodyDeclaration> bodyDeclarations) {
       TypeDeclaration currentTypeDeclaration = type.getDeclaration();
-      if (type.getSuperTypeDescriptor() != null) {
-        capturesByTypeName.putAll(
-            currentTypeDeclaration.getQualifiedSourceName(),
-            capturesByTypeName.get(type.getSuperTypeDescriptor().getQualifiedSourceName()));
-      }
+      propagateCapturesFromSupertype(currentTypeDeclaration);
       for (BodyDeclaration bodyDeclaration : bodyDeclarations) {
         if (bodyDeclaration instanceof FieldDeclaration) {
           FieldDeclaration fieldDeclaration = (FieldDeclaration) bodyDeclaration;
@@ -301,8 +274,7 @@ public class CompilationUnitBuilder {
         }
       }
 
-      for (Variable capturedVariable :
-          capturesByTypeName.get(currentTypeDeclaration.getQualifiedSourceName())) {
+      for (Variable capturedVariable : getCapturedVariables(currentTypeDeclaration)) {
         FieldDescriptor fieldDescriptor =
             AstUtils.getFieldDescriptorForCapture(type.getTypeDescriptor(), capturedVariable);
         type.addField(
@@ -384,25 +356,6 @@ public class CompilationUnitBuilder {
       return fields;
     }
 
-    private Expression convertConstantToLiteral(
-        Object constantValue, TypeDescriptor typeDescriptor) {
-      if (constantValue instanceof Boolean) {
-        return (boolean) constantValue ? BooleanLiteral.get(true) : BooleanLiteral.get(false);
-      }
-      if (constantValue instanceof Number) {
-        return new NumberLiteral(typeDescriptor.toUnboxedType(), (Number) constantValue);
-      }
-      if (constantValue instanceof Character) {
-        return NumberLiteral.fromChar((Character) constantValue);
-      }
-      if (constantValue instanceof String) {
-        return new StringLiteral((String) constantValue);
-      }
-      throw internalCompilerError(
-          "Unexpected type for compile time constant: %s",
-          constantValue.getClass().getSimpleName());
-    }
-
     private Method convert(MethodDeclaration methodDeclaration) {
       List<Variable> parameters = new ArrayList<>();
       for (SingleVariableDeclaration parameter :
@@ -438,16 +391,6 @@ public class CompilationUnitBuilder {
               .stream()
               .anyMatch(m -> requiresOverrideAnnotation(methodDescriptor, m));
       return Method.newBuilder().setMethodDescriptor(methodDescriptor).setOverride(isOverride);
-    }
-
-    private boolean requiresOverrideAnnotation(
-        MethodDescriptor methodDescriptor, MethodDescriptor overriddenMethodDescriptor) {
-      if (methodDescriptor.isJsMember()) {
-        return overriddenMethodDescriptor.isJsMember()
-            && AstUtils.overrideNeedsAtOverrideAnnotation(overriddenMethodDescriptor);
-      }
-      return methodDescriptor.isJsOverride(overriddenMethodDescriptor)
-          && AstUtils.overrideNeedsAtOverrideAnnotation(overriddenMethodDescriptor);
     }
 
     private ArrayAccess convert(org.eclipse.jdt.core.dom.ArrayAccess expression) {
@@ -795,7 +738,7 @@ public class CompilationUnitBuilder {
       int endLine = jdtCompilationUnit.getLineNumber(endCharacterPosition) - 1;
       int endColumn = jdtCompilationUnit.getColumnNumber(endCharacterPosition) + 1;
       return SourcePosition.newBuilder()
-          .setFilePath(j2clCompilationUnit.getFilePath())
+          .setFilePath(getCurrentCompilationUnit().getFilePath())
           .setName(name)
           .setStartFilePosition(
               FilePosition.newBuilder()
@@ -1160,59 +1103,24 @@ public class CompilationUnitBuilder {
           JdtUtils.createMethodDescriptor(
               expression.resolveTypeBinding().getFunctionalInterfaceMethod());
 
-      List<Variable> parameters =
-          AstUtils.createParameterVariables(
-              functionalMethodDescriptor.getParameterTypeDescriptors());
-
-      // There are 3 flavors for CreationReferences: 1) unqualified constructors, 2) implicitly
-      // qualified constructors  and 3) array creations.
+      // There are 3 flavors for CreationReferences: 1) array creations, 2) unqualified
+      // constructors, and 3) implicitly qualified constructors.
 
       // If the expression does not resolve, it is an array creation.
+      SourcePosition sourcePosition = getSourcePosition(expression);
       if (expression.resolveMethodBinding() == null) {
-        // convert A[]::new into (size) -> new A[size]
-        ArrayTypeDescriptor arrayType =
-            (ArrayTypeDescriptor) JdtUtils.createTypeDescriptor(expressionTypeBinding);
 
-        checkArgument(arrayType.isArray());
-        // Array creation method references always have exactly one parameter.
-        checkArgument(parameters.size() == 1);
-
-        // The size of the array is the only parameter in the implemented function. It's legal for
-        // the source to provide only one dimension parameter to to create a multidimensional array
-        // but our AST expects NewArray nodes to provide an expression for each dimension in the
-        // array type, hence the missing dimensions are padded with null.
-        ImmutableList<Expression> dimensionExpressions =
-            ImmutableList.<Expression>builder()
-                .add(parameters.get(0).getReference())
-                .addAll(Collections.nCopies(arrayType.getDimensions() - 1, NullLiteral.get()))
-                .build();
-
-        return FunctionExpression.newBuilder()
-            .setTypeDescriptor(functionalMethodDescriptor.getEnclosingTypeDescriptor())
-            .setParameters(parameters)
-            .setStatements(
-                ReturnStatement.newBuilder()
-                    .setExpression(
-                        NewArray.newBuilder()
-                            .setTypeDescriptor(arrayType)
-                            .setDimensionExpressions(dimensionExpressions)
-                            .build())
-                    .setTypeDescriptor(functionalMethodDescriptor.getReturnTypeDescriptor())
-                    .setSourcePosition(getSourcePosition(expression))
-                    .build())
-            .setSourcePosition(getSourcePosition(expression))
-            .build();
+        return createArrayCreationLambda(
+            functionalMethodDescriptor,
+            (ArrayTypeDescriptor) JdtUtils.createTypeDescriptor(expressionTypeBinding),
+            sourcePosition);
       }
 
       MethodDescriptor targetConstructorMethodDescriptor =
           JdtUtils.createMethodDescriptor(expression.resolveMethodBinding());
 
-      // This is a class instantiation.
-      // convert A:new into (par1, ..., parN) -> new A(par1, ..., parN) or
-      // (par1, ..., parN) -> B.this.new A(par1, ..., parN)
-      checkArgument(
-          targetConstructorMethodDescriptor.getParameterTypeDescriptors().size()
-              == parameters.size());
+      DeclaredTypeDescriptor enclosingTypeDescriptor =
+          JdtUtils.createDeclaredTypeDescriptor(expressionTypeBinding.getDeclaringClass());
 
       Expression qualifier =
           targetConstructorMethodDescriptor
@@ -1220,30 +1128,11 @@ public class CompilationUnitBuilder {
                   .getTypeDeclaration()
                   .isCapturingEnclosingInstance()
               // Inner classes may have an implicit enclosing class qualifier (2).
-              ? resolveExplicitOuterClassReference(
-                  JdtUtils.createDeclaredTypeDescriptor(expressionTypeBinding.getDeclaringClass()))
+              ? resolveExplicitOuterClassReference(enclosingTypeDescriptor)
               : null;
 
-      return FunctionExpression.newBuilder()
-          .setTypeDescriptor(functionalMethodDescriptor.getEnclosingTypeDescriptor())
-          .setParameters(parameters)
-          .setStatements(
-              (Statement)
-                  ReturnStatement.newBuilder()
-                      .setExpression(
-                          NewInstance.Builder.from(targetConstructorMethodDescriptor)
-                              .setQualifier(qualifier)
-                              .setArguments(
-                                  parameters
-                                      .stream()
-                                      .map(Variable::getReference)
-                                      .collect(toImmutableList()))
-                              .build())
-                      .setTypeDescriptor(functionalMethodDescriptor.getReturnTypeDescriptor())
-                      .setSourcePosition(getSourcePosition(expression))
-                      .build())
-          .setSourcePosition(getSourcePosition(expression))
-          .build();
+      return createInstantiationLambda(
+          functionalMethodDescriptor, targetConstructorMethodDescriptor, qualifier, sourcePosition);
     }
 
     /**
@@ -1440,7 +1329,7 @@ public class CompilationUnitBuilder {
           convertArguments(methodBinding, JdtUtils.asTypedList(expression.arguments()));
       if (expression.getQualifier() == null) {
         return MethodCall.Builder.from(methodDescriptor)
-            .setQualifier(new SuperReference(currentType.getSuperTypeDescriptor()))
+            .setQualifier(new SuperReference(getCurrentType().getSuperTypeDescriptor()))
             .setArguments(arguments)
             .setSourcePosition(getSourcePosition(expression))
             .build();
@@ -1560,7 +1449,7 @@ public class CompilationUnitBuilder {
           // It refers to a field.
           FieldDescriptor fieldDescriptor = JdtUtils.createFieldDescriptor(variableBinding);
           if (!fieldDescriptor.isStatic()
-              && !fieldDescriptor.isMemberOf(currentType.getTypeDescriptor())) {
+              && !fieldDescriptor.isMemberOf(getCurrentType().getTypeDescriptor())) {
             return FieldAccess.Builder.from(fieldDescriptor)
                 .setQualifier(
                     resolveImplicitOuterClassReference(
@@ -1584,129 +1473,6 @@ public class CompilationUnitBuilder {
           "Unexpected binding class for SimpleName: %s", expression.getClass().getName());
     }
 
-    /**
-     * Returns the required nested path of field accesses needed to refer to a specific enclosing
-     * given by an explicit reference like {@code A.this} or {@code A.super}.
-     *
-     * <p>
-     *
-     * <pre><code>
-     *   class A extends Super {
-     *     void m() {}
-     *     class B {
-     *       class C {
-     *         { A a = A.this;}
-     *       }
-     *     }
-     *   }
-     * </code></pre>
-     *
-     * <p>In this example the outer class referred by {@code A.this} is 2 hops from the reference,
-     * hence the access returned would be {@code this.$outer_this.$outer_this}.
-     *
-     * <p>NOTE: Explicit outer references have to match the class exactly, i.e. references like
-     * {@code Super.this} instead of {@code A.this} will be rejected by the compiler.
-     */
-    private Expression resolveExplicitOuterClassReference(
-        DeclaredTypeDescriptor targetTypeDescriptor) {
-      return resolveOuterClassReference(targetTypeDescriptor, true);
-    }
-
-    /**
-     * Returns the required nested path of field accesses needed to refer to a specific enclosing
-     * given by an implicit reference like an unqualified method call {@code m()} that might be a
-     * method of an enclosing class. E.g:
-     *
-     * <p>
-     *
-     * <pre><code>
-     *   class A {
-     *     void m() {}
-     *     class B {
-     *     }
-     *   }
-     *   class ASub extends A{
-     *     class BSub extends B{
-     *       { m(); }
-     *     }
-     *   }
-     * </code></pre>
-     *
-     * <p>In this example the outer class referred by the call to {@code A.m()} is {@code ASub} and
-     * not {@code A}, an the path return would be {@code this.$outer_this} since it is the immediate
-     * enclosing class of {@code BSub}.
-     */
-    private Expression resolveImplicitOuterClassReference(
-        DeclaredTypeDescriptor targetTypeDescriptor) {
-      return resolveOuterClassReference(targetTypeDescriptor, false);
-    }
-
-    /**
-     * Returns a nested path of field accesses {@code this.$outer_this.....$outer_this} required to
-     * address a specific outer class.
-     *
-     * <p>The search for the enclosing class might be strict or non-strict, depending whether a
-     * subclass of the enclosing class is acceptable as a qualifier. When the member's qualifier is
-     * implicit, superclasses of the enclosing class are acceptable.
-     */
-    private Expression resolveOuterClassReference(
-        DeclaredTypeDescriptor targetTypeDescriptor, boolean strict) {
-      Expression qualifier = new ThisReference(currentType.getTypeDescriptor());
-      DeclaredTypeDescriptor innerTypeDescriptor = currentType.getTypeDescriptor();
-      while (innerTypeDescriptor.getTypeDeclaration().isCapturingEnclosingInstance()) {
-        boolean found =
-            strict
-                ? innerTypeDescriptor.hasSameRawType(targetTypeDescriptor)
-                : innerTypeDescriptor.isSubtypeOf(targetTypeDescriptor);
-        if (found) {
-          break;
-        }
-
-        qualifier =
-            FieldAccess.Builder.from(
-                    AstUtils.getFieldDescriptorForEnclosingInstance(
-                        innerTypeDescriptor, innerTypeDescriptor.getEnclosingTypeDescriptor()))
-                .setQualifier(qualifier)
-                .build();
-        innerTypeDescriptor = innerTypeDescriptor.getEnclosingTypeDescriptor();
-      }
-      return qualifier;
-    }
-
-    /**
-     * Returns the expression to reference {@code variable} in the current context.
-     *
-     * <p>If the variable is not declared in the current context it is a capture. References to
-     * captured variables are recorded doing this resolution to determine the backing fields that
-     * are needed.
-     */
-    private Expression resolveVariableReference(Variable variable) {
-      TypeDeclaration enclosingClassDeclaration =
-          checkNotNull(enclosingTypeByVariable.get(variable).getDeclaration());
-
-      if (currentType.getDeclaration().equals(enclosingClassDeclaration)) {
-        return variable.getReference();
-      }
-      // the variable is declared outside current type, i.e. a captured variable to current
-      // type, and also a captured variable to the outer class in the type stack that is
-      // inside enclosingClassDeclaration.
-      for (int i = typeStack.size() - 1; i >= 0; i--) {
-        if (typeStack.get(i).getDeclaration().equals(enclosingClassDeclaration)) {
-          break;
-        }
-        capturesByTypeName.put(
-            typeStack.get(i).getDeclaration().getQualifiedSourceName(), variable);
-      }
-      // for reference to a captured variable, if it is in a constructor, translate to
-      // reference to outer parameter, otherwise, translate to reference to corresponding
-      // field created for the captured variable.
-      DeclaredTypeDescriptor currentTypeDescriptor = currentType.getTypeDescriptor();
-      FieldDescriptor fieldDescriptor =
-          AstUtils.getFieldDescriptorForCapture(currentTypeDescriptor, variable);
-      ThisReference qualifier = new ThisReference(currentTypeDescriptor);
-      return FieldAccess.Builder.from(fieldDescriptor).setQualifier(qualifier).build();
-    }
-
     private Variable convert(
         org.eclipse.jdt.core.dom.SingleVariableDeclaration variableDeclaration) {
       Variable variable = createVariable(variableDeclaration);
@@ -1726,7 +1492,7 @@ public class CompilationUnitBuilder {
               getSourcePosition(variableBinding.getName(), variableDeclaration.getName()),
               variableBinding);
       variableByJdtBinding.put(variableBinding, variable);
-      recordEnclosingType(variable, currentType);
+      recordEnclosingType(variable, getCurrentType());
       return variable;
     }
 
@@ -1793,7 +1559,7 @@ public class CompilationUnitBuilder {
     private Expression convert(org.eclipse.jdt.core.dom.ThisExpression expression) {
       if (expression.getQualifier() == null) {
         // Unqualified this reference.
-        return new ThisReference(currentType.getTypeDescriptor());
+        return new ThisReference(getCurrentType().getTypeDescriptor());
       }
       return resolveExplicitOuterClassReference(
           JdtUtils.createDeclaredTypeDescriptor(expression.getQualifier().resolveTypeBinding()));
@@ -1819,31 +1585,13 @@ public class CompilationUnitBuilder {
       return TryStatement.newBuilder()
           .setSourcePosition(getSourcePosition(statement))
           .setResourceDeclarations(
-              resources
-                  .stream()
+              resources.stream()
                   .map(this::convert)
-                  .map(this::toResource)
+                  .map(CompilationUnitBuilder::toResource)
                   .collect(toImmutableList()))
           .setBody(convert(statement.getBody()))
           .setCatchClauses(catchClauses.stream().map(this::convert).collect(toImmutableList()))
           .setFinallyBlock(convertOrNull(statement.getFinally()))
-          .build();
-    }
-
-    private VariableDeclarationExpression toResource(Expression expression) {
-      if (expression instanceof VariableDeclarationExpression) {
-        return (VariableDeclarationExpression) expression;
-      }
-
-      // Create temporary variables for resources declared outside of the try statement.
-      return VariableDeclarationExpression.newBuilder()
-          .addVariableDeclaration(
-              Variable.newBuilder()
-                  .setName("$resource")
-                  .setTypeDescriptor(expression.getTypeDescriptor())
-                  .setFinal(true)
-                  .build(),
-              expression)
           .build();
     }
 
@@ -1876,16 +1624,6 @@ public class CompilationUnitBuilder {
       }
     }
 
-    /**
-     * Records associations of variables and their enclosing type.
-     *
-     * <p>Enclosing type is a broader category than declaring type since some variables (fields)
-     * have a declaring type (that is also their enclosing type) while other variables do not.
-     */
-    private void recordEnclosingType(Variable variable, Type enclosingType) {
-      enclosingTypeByVariable.put(variable, enclosingType);
-    }
-
     private ExpressionStatement convert(
         org.eclipse.jdt.core.dom.VariableDeclarationStatement statement) {
       List<org.eclipse.jdt.core.dom.VariableDeclarationFragment> fragments =
@@ -1907,16 +1645,6 @@ public class CompilationUnitBuilder {
       Type type = new Type(getSourcePosition(sourcePositionNode), visibility, typeDeclaration);
       type.setStatic(JdtUtils.isStatic(typeBinding));
       return type;
-    }
-
-    @FormatMethod
-    private RuntimeException internalCompilerError(String format, Object... params) {
-      return new RuntimeException(internalCompilerErrorMessage(format, params));
-    }
-
-    @FormatMethod
-    private String internalCompilerErrorMessage(String format, Object... params) {
-      return String.format(format, params) + ", in file: " + currentSourceFile;
     }
   }
 
