@@ -544,6 +544,14 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           JdtUtils.createMethodDescriptor(constructorBinding);
       DeclaredTypeDescriptor targetTypeDescriptor =
           constructorMethodDescriptor.getEnclosingTypeDescriptor();
+
+      // Instantiation implicitly references all captured variables since in the flat class model
+      // captures become fields and need to be threaded through the constructors.
+      // This is crucial to cover some corner cases where the capture is never referenced in the
+      // class nor its superclasses but is implicitly referenced by invoking a constructor of
+      // the capturing class.
+      propagateAllCapturesOutward(targetTypeDescriptor.getTypeDeclaration());
+
       Expression qualifier = convertOrNull(expression.getExpression());
       checkArgument(!targetTypeDescriptor.getTypeDeclaration().isAnonymous());
       boolean needsQualifier =

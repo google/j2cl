@@ -318,7 +318,7 @@ public abstract class AbstractCompilationUnitBuilder {
       return variable.getReference();
       }
 
-    propagateCaptureOutward(variable, enclosingClassDeclaration);
+    propagateCaptureOutward(variable);
 
     // for reference to a captured variable, if it is in a constructor, translate to
     // reference to outer parameter, otherwise, translate to reference to corresponding
@@ -347,17 +347,24 @@ public abstract class AbstractCompilationUnitBuilder {
    *   }
    * </code></pre>
    */
-  private void propagateCaptureOutward(
-      Variable variable, TypeDeclaration enclosingClassDeclarationDescriptor) {
+  private void propagateCaptureOutward(Variable variable) {
+    TypeDeclaration enclosingClassDeclaration =
+        checkNotNull(enclosingTypeByVariable.get(variable).getDeclaration());
+
     // the variable is declared outside current type, i.e. a captured variable to current
     // type, and also a captured variable to the outer class in the type stack that is
     // inside {@code enclosingClassRef}.
     for (int i = typeStack.size() - 1; i >= 0; i--) {
-      if (typeStack.get(i).getDeclaration().equals(enclosingClassDeclarationDescriptor)) {
+      if (typeStack.get(i).getDeclaration().equals(enclosingClassDeclaration)) {
         break;
       }
       capturesByTypeName.put(typeStack.get(i).getDeclaration().getQualifiedSourceName(), variable);
     }
+  }
+
+  /** Propagate all captures outward. */
+  protected void propagateAllCapturesOutward(TypeDeclaration typeDeclaration) {
+    getCapturedVariables(typeDeclaration).forEach(this::propagateCaptureOutward);
   }
 
   /** Returns the variables captured by a type. */

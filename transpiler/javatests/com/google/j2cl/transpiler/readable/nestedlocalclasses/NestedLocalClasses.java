@@ -29,9 +29,7 @@ public class NestedLocalClasses {
 
         class ClassIndirectlyCapturingLocal {
           {
-            // TODO(b/33438153): uncomment the code that follows when captures are implemented
-            // properly.
-            // new InnerInnerClass();
+            new InnerInnerClass();
           }
         }
       }

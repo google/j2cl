@@ -136,13 +136,12 @@ public class Main {
       }
     }
 
-    // TODO(b/33438153): uncomment the code that follows when captures are implemented properly.
-    // class ClassIndirectlyCapturingLocal {
-    //  int returnInderctCapture() {
-    //    return new ClassCapturingLocal().returnLocal();
-    //  }
-    // }
-    // assertTrue(new ClassIndirectlyCapturingLocal().returnInderctCapture() == 3);
+    class ClassIndirectlyCapturingLocal {
+      int returnIndirectCapture() {
+        return new ClassCapturingLocal().returnLocal();
+      }
+    }
+    assertTrue(new ClassIndirectlyCapturingLocal().returnIndirectCapture() == 3);
   }
 
   public static void main(String[] args) {
