@@ -33,12 +33,15 @@ import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.FunctionExpression;
+import com.google.j2cl.ast.JavaScriptConstructorReference;
 import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.MultiExpression;
 import com.google.j2cl.ast.NewArray;
 import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.NullLiteral;
 import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.ReturnStatement;
+import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.StringLiteral;
 import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.Type;
@@ -108,6 +111,106 @@ public abstract class AbstractCompilationUnitBuilder {
   ////////////////////////////////////////////////////////////////////////////////////////////////
 
   /**
+   * Creates a lambda from a qualified method reference.
+   *
+   * <p>
+   *
+   * <pre>{@code
+   * q::m into (par1, ..., parN) -> q.m(par1, ..., parN) or
+   *           (let $q = q, (par1, ..., parN) -> $q.m(par1, ..., parN)
+   * }</pre>
+   *
+   * <p>depending on whether the qualifier can be evaluated inside the functional expression
+   * preserving the original semantics.
+   */
+  protected static Expression createMethodReferenceLambda(
+      SourcePosition sourcePosition,
+      Expression qualifier,
+      MethodDescriptor referencedMethodDescriptor,
+      TypeDescriptor expressionTypeDescriptor,
+      MethodDescriptor functionalMethodDescriptor) {
+    List<Expression> result = new ArrayList<>();
+
+    if (qualifier != null && !qualifier.isEffectivelyInvariant()) {
+      // The semantics require that the qualifier be evaluated in the context where the method
+      // reference appears, so here we introduce a temporary variable to store the evaluated
+      // qualifier.
+      Variable variable =
+          Variable.newBuilder()
+              .setFinal(true)
+              .setName("$$q")
+              .setTypeDescriptor(qualifier.getTypeDescriptor())
+              .build();
+      // Declare the temporary variable and initialize to the evaluated qualifier.
+      result.add(
+          VariableDeclarationExpression.newBuilder()
+              .addVariableDeclaration(variable, qualifier)
+              .build());
+      // Use the newly introduced variable as a qualifier when forwarding the call within the
+      // lambda expression.
+      qualifier = variable.getReference();
+    }
+
+    result.add(
+        createForwardingFunctionExpression(
+            sourcePosition,
+            expressionTypeDescriptor,
+            functionalMethodDescriptor,
+            qualifier,
+            referencedMethodDescriptor,
+            false));
+
+    return result.size() == 1
+        ? Iterables.getOnlyElement(result)
+        : MultiExpression.newBuilder().setExpressions(result).build();
+  }
+
+  /**
+   * Creates a FunctionExpression described by {@code functionalMethodDescriptor} that forwards to
+   * {@code targetMethodDescriptor}.
+   */
+  protected static FunctionExpression createForwardingFunctionExpression(
+      SourcePosition sourcePosition,
+      TypeDescriptor expressionTypeDescriptor,
+      MethodDescriptor functionalMethodDescriptor,
+      Expression qualifier,
+      MethodDescriptor targetMethodDescriptor,
+      boolean isStaticDispatch) {
+
+    List<Variable> parameters =
+        AstUtils.createParameterVariables(functionalMethodDescriptor.getParameterTypeDescriptors());
+
+    List<Variable> forwardingParameters = parameters;
+    if (!targetMethodDescriptor.isStatic()
+        && (qualifier == null || qualifier instanceof JavaScriptConstructorReference)) {
+      // The qualifier for the instance method becomes the first parameter. Method references to
+      // instance methods without an explicit qualifier use the first parameter in the functional
+      // interface as the qualifier for the method call.
+      checkArgument(
+          parameters.size() == targetMethodDescriptor.getParameterTypeDescriptors().size() + 1
+              || (parameters.size() >= targetMethodDescriptor.getParameterTypeDescriptors().size()
+                  && targetMethodDescriptor.isVarargs()));
+      qualifier = parameters.get(0).getReference();
+      forwardingParameters = parameters.subList(1, parameters.size());
+    }
+
+    Statement forwardingStatement =
+        AstUtils.createForwardingStatement(
+            sourcePosition,
+            qualifier,
+            targetMethodDescriptor,
+            isStaticDispatch,
+            forwardingParameters,
+            functionalMethodDescriptor.getReturnTypeDescriptor());
+    return FunctionExpression.newBuilder()
+        .setTypeDescriptor(expressionTypeDescriptor)
+        .setParameters(parameters)
+        .setStatements(forwardingStatement)
+        .setSourcePosition(sourcePosition)
+        .build();
+  }
+
+  /**
    * Creates a class instantiation lambda from a method reference.
    *
    * <p>
@@ -117,7 +220,7 @@ public abstract class AbstractCompilationUnitBuilder {
    *            (par1, ..., parN) -> B.this.new A(par1, ..., parN)
    * }</pre>
    */
-  public static Expression createInstantiationLambda(
+  protected static Expression createInstantiationLambda(
       MethodDescriptor functionalMethodDescriptor,
       MethodDescriptor targetConstructorMethodDescriptor,
       Expression qualifier,
@@ -156,7 +259,7 @@ public abstract class AbstractCompilationUnitBuilder {
    *
    * <pre>{@code convert A[]::new into (size) -> new A[size]} </pre>
    */
-  public static Expression createArrayCreationLambda(
+  protected static Expression createArrayCreationLambda(
       MethodDescriptor targetFunctionalMethodDescriptor,
       ArrayTypeDescriptor arrayType,
       SourcePosition sourcePosition) {

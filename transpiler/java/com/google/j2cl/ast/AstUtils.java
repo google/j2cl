@@ -252,51 +252,6 @@ public class AstUtils {
   }
 
   /**
-   * Creates a FunctionExpression described by {@code functionalMethodDescriptor} that forwards to
-   * {@code targetMethodDescriptor}.
-   */
-  public static FunctionExpression createForwardingFunctionExpression(
-      SourcePosition sourcePosition,
-      TypeDescriptor expressionTypeDescriptor,
-      MethodDescriptor functionalMethodDescriptor,
-      Expression qualifier,
-      MethodDescriptor targetMethodDescriptor,
-      boolean isStaticDispatch) {
-
-    List<Variable> parameters =
-        createParameterVariables(functionalMethodDescriptor.getParameterTypeDescriptors());
-
-    List<Variable> forwardingParameters = parameters;
-    if (!targetMethodDescriptor.isStatic()
-        && (qualifier == null || qualifier instanceof JavaScriptConstructorReference)) {
-      // The qualifier for the instance method becomes the first parameter. Method references to
-      // instance methods without an explicit qualifier use the first parameter in the functional
-      // interface as the qualifier for the method call.
-      checkArgument(
-          parameters.size() == targetMethodDescriptor.getParameterTypeDescriptors().size() + 1
-              || (parameters.size() >= targetMethodDescriptor.getParameterTypeDescriptors().size()
-                  && targetMethodDescriptor.isVarargs()));
-      qualifier = parameters.get(0).getReference();
-      forwardingParameters = parameters.subList(1, parameters.size());
-    }
-
-    Statement forwardingStatement =
-        createForwardingStatement(
-            sourcePosition,
-            qualifier,
-            targetMethodDescriptor,
-            isStaticDispatch,
-            forwardingParameters,
-            functionalMethodDescriptor.getReturnTypeDescriptor());
-    return FunctionExpression.newBuilder()
-        .setTypeDescriptor(expressionTypeDescriptor)
-        .setParameters(parameters)
-        .setStatements(forwardingStatement)
-        .setSourcePosition(sourcePosition)
-        .build();
-  }
-
-  /**
    * Creates forwarding method {@code fromMethodDescriptor} that delegates to {@code
    * toMethodDescriptor}, e.g.
    *

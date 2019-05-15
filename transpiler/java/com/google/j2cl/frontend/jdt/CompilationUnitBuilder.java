@@ -59,7 +59,6 @@ import com.google.j2cl.ast.LabeledStatement;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
-import com.google.j2cl.ast.MultiExpression;
 import com.google.j2cl.ast.NewArray;
 import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.NullLiteral;
@@ -1047,52 +1046,28 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
      * preserving semantics.
      */
     private Expression convert(ExpressionMethodReference expression) {
-      checkNotNull(expression.getExpression());
+
+      SourcePosition sourcePosition = getSourcePosition(expression);
       TypeDescriptor expressionTypeDescriptor =
           JdtUtils.createTypeDescriptor(expression.resolveTypeBinding());
-      Expression qualifier = convertOrNull(expression.getExpression());
-      if (qualifier == null || qualifier.isEffectivelyInvariant()) {
-        // There is no need to introduce a temporary variable for the qualifier.
-        return AstUtils.createForwardingFunctionExpression(
-            getSourcePosition(expression),
-            expressionTypeDescriptor,
-            // functional interface method that the expression implements.
-            JdtUtils.createMethodDescriptor(
-                expression.resolveTypeBinding().getFunctionalInterfaceMethod()),
-            qualifier,
-            // target method to forward to.
-            JdtUtils.createMethodDescriptor(expression.resolveMethodBinding()),
-            false);
-      }
-      // The semantics require that the qualifier be evaluated in the context where the method
-      // reference appears, so here we introduce a temporary variable to store the evaluated
-      // qualifier.
-      Variable variable =
-          Variable.newBuilder()
-              .setFinal(true)
-              .setName("$$q")
-              .setTypeDescriptor(qualifier.getTypeDescriptor())
-              .build();
-      // Store the declaring type in the local scope so that variable declaration scope points to
-      // the right type when the functional expression is effectively constructed.
-      return MultiExpression.newBuilder()
-          .setExpressions(
-              // Declare the temporary variable and initialize to the evaluated qualifier.
-              VariableDeclarationExpression.newBuilder()
-                  .addVariableDeclaration(variable, qualifier)
-                  .build(),
-              // Construct the functional expression.
-              AstUtils.createForwardingFunctionExpression(
-                  getSourcePosition(expression),
-                  expressionTypeDescriptor,
-                  // functional interface method that the expression implements.
-                  JdtUtils.createMethodDescriptor(
-                      expression.resolveTypeBinding().getFunctionalInterfaceMethod()),
-                  variable.getReference(),
-                  // target method to forward to.
-                  JdtUtils.createMethodDescriptor(expression.resolveMethodBinding()),
-                  false))
-          .build();
+
+      // MethodDescriptor target of the method reference.
+      MethodDescriptor referencedMethodDescriptor =
+          JdtUtils.createMethodDescriptor(expression.resolveMethodBinding());
+
+      // Functional interface method that the expression implements.
+      MethodDescriptor functionalMethodDescriptor =
+          JdtUtils.createMethodDescriptor(
+              expression.resolveTypeBinding().getFunctionalInterfaceMethod());
+
+      Expression qualifier = convert(expression.getExpression());
+
+      return createMethodReferenceLambda(
+          sourcePosition,
+          qualifier,
+          referencedMethodDescriptor,
+          expressionTypeDescriptor,
+          functionalMethodDescriptor);
     }
 
     /**
@@ -1154,13 +1129,12 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
      */
     private Expression convert(TypeMethodReference expression) {
       ITypeBinding expressionTypeBinding = expression.resolveTypeBinding();
-      return AstUtils.createForwardingFunctionExpression(
+      return createMethodReferenceLambda(
           getSourcePosition(expression),
-          JdtUtils.createDeclaredTypeDescriptor(expressionTypeBinding),
-          JdtUtils.createMethodDescriptor(expressionTypeBinding.getFunctionalInterfaceMethod()),
           null,
           JdtUtils.createMethodDescriptor(expression.resolveMethodBinding()),
-          false);
+          JdtUtils.createDeclaredTypeDescriptor(expressionTypeBinding),
+          JdtUtils.createMethodDescriptor(expressionTypeBinding.getFunctionalInterfaceMethod()));
     }
 
     /**
@@ -1176,7 +1150,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       MethodDescriptor methodDescriptor =
           JdtUtils.createMethodDescriptor(expression.resolveMethodBinding());
 
-      return AstUtils.createForwardingFunctionExpression(
+      return AbstractCompilationUnitBuilder.createForwardingFunctionExpression(
           getSourcePosition(expression),
           JdtUtils.createDeclaredTypeDescriptor(expression.resolveTypeBinding()),
           JdtUtils.createMethodDescriptor(
