@@ -1636,6 +1636,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "    A.name();",
             "    MyJsEnum.values();",
             "    MyJsEnum.valueOf(null);",
+            // TODO(b/132736149): make sure the following statement is rejected.
+            "    EnumList<MyJsEnum> myJsEnumList = null;",
             "  }",
             "  int value = 5;",
             "  int instanceField;",
@@ -1671,6 +1673,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "}",
             "interface Consumer<T> {",
             "  void accept(T t);",
+            "}",
+            "interface EnumList<E extends Enum<E>> {",
             "}")
         .assertErrorsWithoutSourcePosition(
             "Non-custom-valued JsEnum 'MyJsEnum' cannot have constructor 'MyJsEnum()'.",
