@@ -553,28 +553,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
       Expression qualifier = convertOrNull(expression.getExpression());
       checkArgument(!targetTypeDescriptor.getTypeDeclaration().isAnonymous());
-      boolean needsQualifier =
-          targetTypeDescriptor.getTypeDeclaration().isCapturingEnclosingInstance();
-      checkArgument(
-          qualifier == null || needsQualifier,
-          "NewInstance of non nested class should have no qualifier.");
-
-      // Resolve the qualifier of NewInstance that creates an instance of a nested class.
-      // Implicit 'this' doesn't always refer to 'this', it may refer to any enclosing instances.
-      qualifier =
-          needsQualifier && qualifier == null
-              // find the enclosing instance in non-strict mode, which means
-              // for example,
-              // class A {
-              //   class B {}
-              //   class C extends class A {
-              //     // The qualifier of new B() should be C.this, not A.this.
-              //     public void test() { new B(); }
-              //   }
-              // }
-              ? resolveImplicitOuterClassReference(
-                  targetTypeDescriptor.getEnclosingTypeDescriptor())
-              : qualifier;
+      qualifier = resolveInstantiationQualifier(qualifier, targetTypeDescriptor);
 
       return NewInstance.Builder.from(constructorMethodDescriptor)
           .setQualifier(qualifier)
@@ -1102,20 +1081,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       MethodDescriptor targetConstructorMethodDescriptor =
           JdtUtils.createMethodDescriptor(expression.resolveMethodBinding());
 
-      DeclaredTypeDescriptor enclosingTypeDescriptor =
-          JdtUtils.createDeclaredTypeDescriptor(expressionTypeBinding.getDeclaringClass());
-
-      Expression qualifier =
-          targetConstructorMethodDescriptor
-                  .getEnclosingTypeDescriptor()
-                  .getTypeDeclaration()
-                  .isCapturingEnclosingInstance()
-              // Inner classes may have an implicit enclosing class qualifier (2).
-              ? resolveExplicitOuterClassReference(enclosingTypeDescriptor)
-              : null;
-
       return createInstantiationLambda(
-          functionalMethodDescriptor, targetConstructorMethodDescriptor, qualifier, sourcePosition);
+          functionalMethodDescriptor, targetConstructorMethodDescriptor, null, sourcePosition);
     }
 
     /**

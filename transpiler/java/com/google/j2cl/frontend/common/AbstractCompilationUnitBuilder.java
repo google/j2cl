@@ -220,11 +220,15 @@ public abstract class AbstractCompilationUnitBuilder {
    *            (par1, ..., parN) -> B.this.new A(par1, ..., parN)
    * }</pre>
    */
-  protected static Expression createInstantiationLambda(
+  protected Expression createInstantiationLambda(
       MethodDescriptor functionalMethodDescriptor,
       MethodDescriptor targetConstructorMethodDescriptor,
       Expression qualifier,
       SourcePosition sourcePosition) {
+
+    qualifier =
+        resolveInstantiationQualifier(
+            qualifier, targetConstructorMethodDescriptor.getEnclosingTypeDescriptor());
 
     List<Variable> parameters =
         AstUtils.createParameterVariables(functionalMethodDescriptor.getParameterTypeDescriptors());
@@ -250,6 +254,36 @@ public abstract class AbstractCompilationUnitBuilder {
                 .build())
         .setSourcePosition(sourcePosition)
         .build();
+  }
+
+  /**
+   * Resolves the qualifier for an instantiation, by supplying an explicit reference to the required
+   * outer class instance if necessary.
+   */
+  protected Expression resolveInstantiationQualifier(
+      Expression qualifier, DeclaredTypeDescriptor targetTypeDescriptor) {
+    boolean needsQualifier =
+        targetTypeDescriptor.getTypeDeclaration().isCapturingEnclosingInstance();
+    checkArgument(
+        qualifier == null || needsQualifier,
+        "NewInstance of non nested class should have no qualifier.");
+
+    // Resolve the qualifier of NewInstance that creates an instance of a nested class.
+    // Implicit 'this' doesn't always refer to 'this', it may refer to any enclosing instances.
+    qualifier =
+        needsQualifier && qualifier == null
+            // find the enclosing instance in non-strict mode, which means
+            // for example,
+            // class A {
+            //   class B {}
+            //   class C extends class A {
+            //     // The qualifier of new B() should be C.this, not A.this.
+            //     public void test() { new B(); }
+            //   }
+            // }
+            ? resolveImplicitOuterClassReference(targetTypeDescriptor.getEnclosingTypeDescriptor())
+            : qualifier;
+    return qualifier;
   }
 
   /**
@@ -309,11 +343,6 @@ public abstract class AbstractCompilationUnitBuilder {
    */
   protected void recordEnclosingType(Variable variable, Type enclosingType) {
     enclosingTypeByVariable.put(variable, enclosingType);
-  }
-
-  /** Returns the enclosing type for a variable. */
-  protected Type getEnclosingType(Variable variable) {
-    return enclosingTypeByVariable.get(variable);
   }
 
   /**
