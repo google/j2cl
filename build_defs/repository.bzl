@@ -13,9 +13,11 @@ def load_j2cl_repo_deps():
         name = "bazel_skylib",
         repo = "bazelbuild/bazel-skylib",
         tag = "0.7.0",
+        sha256 = "bce240a0749dfc52fab20dce400b4d5cf7c28b239d64f8fd1762b3c9470121d8",
+
     )
 
-def _github_repo(name, repo, tag):
+def _github_repo(name, repo, tag, sha256 = None):
     if native.existing_rule(name):
         return
 
@@ -24,4 +26,5 @@ def _github_repo(name, repo, tag):
         name = name,
         strip_prefix = "%s-%s" % (project_name, tag),
         url = "https://github.com/%s/archive/%s.zip" % (repo, tag),
+        sha256 = sha256,
     )
