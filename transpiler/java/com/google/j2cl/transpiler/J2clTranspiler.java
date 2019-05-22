@@ -225,8 +225,6 @@ class J2clTranspiler {
             // TODO(b/35241823): Revisit this pass if jscompiler adds a way to express constraints
             // to template variables.
             new InsertCastsToTypeBounds(),
-            new RemoveUnneededJsDocCasts(),
-            new NormalizeJsDocCastExpressions(),
 
             // Dodge OTI limitations.
             // TODO(b/30365337): remove after JSCompiler stops requiring unnecessary abstract
@@ -242,6 +240,9 @@ class J2clTranspiler {
             // variable motion.
             new NormalizeMultiExpressions(),
             new MoveVariableDeclarationsToEnclosingBlock(),
+            // Remove redundant JsDocCasts.
+            new RemoveUnneededJsDocCasts(),
+            new NormalizeJsDocCastExpressions(),
 
             // Handle await keyword
             new NormalizeJsAwaitMethodInvocations(),

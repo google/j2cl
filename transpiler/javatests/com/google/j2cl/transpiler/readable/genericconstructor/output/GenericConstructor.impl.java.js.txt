@@ -91,11 +91,9 @@ class GenericConstructor extends j_l_Object {
    * @public
    */
   m_test__() {
-    /**@type {!GenericConstructor<Error>} */ (
-        GenericConstructor.$create__java_lang_Object__java_lang_Object(
-            Exception.$create__(), Error.$create__()));
-    /**@type {!GenericConstructor<Error>} */ (
-        GenericConstructor.$create__java_lang_Object(Exception.$create__()));
+    GenericConstructor.$create__java_lang_Object__java_lang_Object(
+        Exception.$create__(), Error.$create__());
+    GenericConstructor.$create__java_lang_Object(Exception.$create__());
   }
 
   /**

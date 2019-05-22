@@ -20,8 +20,8 @@
 [new GenericMethod<T>() { // inherit method T
       public void fun2(T t) {} // inherit method T
 ...      public <T> void fun2(T t) {} // redefine T
-    };] => [/**@type {!$1<T_1, T>} */ ($1.$create__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod(this));] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.fun"
-[new LocalClass<T>();] => [/**@type {!$1LocalClass<T_1, T_1, T>} */ ($1LocalClass.$create__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod(this));] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.fun"
+    };] => [$1.$create__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod(this);] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.fun"
+[new LocalClass<T>();] => [$1LocalClass.$create__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod(this);] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.fun"
 [bar] => [m_bar__]
 [return null;] => [return null;] "com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.bar"
 [fun] => [m_fun__arrayOf_java_lang_Object]
