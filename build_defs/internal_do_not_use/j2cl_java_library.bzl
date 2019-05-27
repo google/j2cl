@@ -63,7 +63,6 @@ _J2CL_LIB_ATTRS = {
     "plugins": attr.label_list(providers = [JavaInfo]),
     "exported_plugins": attr.label_list(providers = [JavaInfo]),
     "javacopts": attr.string_list(),
-    "licenses": attr.license(),
 }
 _J2CL_LIB_ATTRS.update(_J2CL_INTERNAL_LIB_ATTRS)
 _J2CL_LIB_ATTRS.update(J2CL_TOOLCHAIN_ATTRS)
@@ -94,7 +93,6 @@ def _impl_java_import(ctx):
 
 _J2CL_IMPORT_ATTRS = {
     "jar": attr.label(providers = [JavaInfo]),
-    "licenses": attr.license(),
 }
 _J2CL_IMPORT_ATTRS.update(J2CL_TOOLCHAIN_ATTRS)
 
