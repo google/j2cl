@@ -18,7 +18,7 @@ catches your mistakes early on.
 * **Provides massive code reuse.** J2CL closely follows the Java language
 [semantics](docs/limitations.md). This reduces surprises, enables reuse across
 different platforms and brings most popular Java libraries into your toolkit
-including [Guava](https://github.com/google/guava), [Dagger](https://google.github.io/dagger/)
+including [Guava](https://github.com/google/guava), [Dagger](https://dagger.dev/)
 and [AutoValue](https://github.com/google/auto/tree/master/value).
 
 * **Modern, fresh and blazing fast.** Powered by [Bazel](https://bazel.build/),
