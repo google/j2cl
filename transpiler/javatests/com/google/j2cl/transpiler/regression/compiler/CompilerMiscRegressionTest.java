@@ -35,6 +35,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
@@ -334,5 +335,22 @@ public class CompilerMiscRegressionTest {
     assertThat(singletonFrom(1, "Hello", "GoodBye").get(0)).isEqualTo("GoodBye");
     assertThat(argumentsParameterClasher(1, "Hello", "GoodBye").get(0)).isEqualTo("Hello");
     assertThat(argumentsVariableClasher(1, "Hello", "GoodBye").get(0)).isEqualTo("Hello");
+  }
+
+  interface ParameterizedFunctionalInterface<T, S> {}
+
+  static class ClassUsingRawInterface {
+    public ClassUsingRawInterface(Supplier<ParameterizedFunctionalInterface> supplier) {}
+  }
+
+  /**
+   * Reproduces https://github.com/google/j2cl/issues/52.
+   *
+   * <p>The following code would trigger a IllegalArgumentException due to nested
+   * JsDocCastExpressions being introduced by InsertErasureTypeSafetyCasts.
+   */
+  @Test
+  public <R, S> void testCompilesWithoutNPE() {
+    new ClassUsingRawInterface(() -> new ParameterizedFunctionalInterface<R, S>() {});
   }
 }

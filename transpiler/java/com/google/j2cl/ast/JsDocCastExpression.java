@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.ast;
 
-import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
@@ -27,7 +26,6 @@ public class JsDocCastExpression extends Expression {
   @Visitable TypeDescriptor castType;
 
   private JsDocCastExpression(Expression expression, TypeDescriptor castType) {
-    checkArgument(!(expression instanceof JsDocCastExpression));
     this.expression = checkNotNull(expression);
     this.castType = checkNotNull(castType);
   }
