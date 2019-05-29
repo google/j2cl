@@ -202,7 +202,7 @@ class Util {
       return;
     }
 
-    const clinit = instance.constructor.$clinit;
+    const clinit = instance.constructor['$clinit'];
     if (clinit && clinit.name == '$clinit' /* i.e. not re-written yet */) {
       throw new Error(Util.getInitializationError_(instance.constructor));
     }
