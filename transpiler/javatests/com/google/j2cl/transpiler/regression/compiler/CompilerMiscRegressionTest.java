@@ -296,15 +296,6 @@ public class CompilerMiscRegressionTest {
     }
   }
 
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "*")
-  interface SomeNativeInterface {
-    @JsProperty
-    String getTextContent();
-  }
-
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
-  abstract static class AbstractNativeType implements SomeNativeInterface {}
-
   @JsMethod
   private static List<String> singletonFrom(int i, String... arguments) {
     // Make the second parameter varargs and pass it as a whole to trigger the arguments copying
