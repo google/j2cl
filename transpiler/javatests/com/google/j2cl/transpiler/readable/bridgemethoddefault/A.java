@@ -15,4 +15,23 @@
  */
 package com.google.j2cl.transpiler.readable.bridgemethoddefault;
 
+import jsinterop.annotations.JsMethod;
+
+interface I<T> {
+  void m(T t);
+}
+
+interface II extends I<String> {
+  @Override
+  default void m(String s) {}
+}
+
 class A implements II {}
+
+interface JJ extends I<Object> {
+  @JsMethod
+  @Override
+  default void m(Object o) {}
+}
+
+class B implements JJ {}

@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.readable.functiontype;
 
+interface Function {}
+
 public class FunctionImpl implements Function {
   public void test(Function f) {}
 }

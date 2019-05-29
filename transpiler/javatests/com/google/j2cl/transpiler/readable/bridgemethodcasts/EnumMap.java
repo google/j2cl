@@ -15,6 +15,17 @@
  */
 package com.google.j2cl.transpiler.readable.bridgemethodcasts;
 
+interface Map<K, V> {
+  V put(K key, V value);
+}
+
+class AbstractMap<K, V> implements Map<K, V> {
+  @Override
+  public V put(K key, V value) {
+    return value;
+  }
+}
+
 public class EnumMap<K extends Enum<K>, V> extends AbstractMap<K, V> {
   @Override
   public V put(K key, V value) {

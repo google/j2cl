@@ -15,6 +15,21 @@
  */
 package com.google.j2cl.transpiler.readable.nobridgemethods;
 
+interface Entry<K> {}
+
+abstract class Map<K> {
+  public abstract Entry<K> getCeilingEntry(K key);
+}
+
+class TreeMap<K> extends Map<K> {
+  static class InnerEntry<K> implements Entry<K> {}
+
+  @Override
+  public InnerEntry<K> getCeilingEntry(K key) {
+    return new InnerEntry<K>();
+  }
+}
+
 public class CharSet {
   @SuppressWarnings("unused")
   public static void main(String... args) {

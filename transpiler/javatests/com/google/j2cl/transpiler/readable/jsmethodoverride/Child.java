@@ -15,7 +15,13 @@
  */
 package com.google.j2cl.transpiler.readable.jsmethodoverride;
 
+import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
+
+class Parent {
+  @JsMethod(name = "bar")
+  public void foo() {}
+}
 
 @JsType
 public class Child extends Parent {

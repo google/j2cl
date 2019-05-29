@@ -15,4 +15,8 @@
  */
 package com.google.j2cl.transpiler.readable.abstractinterfaceimpl;
 
+interface MyInterface {
+  int foo();
+}
+
 public abstract class AbstractInterfaceImpl implements MyInterface {}

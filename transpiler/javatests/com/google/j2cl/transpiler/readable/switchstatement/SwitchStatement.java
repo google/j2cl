@@ -15,6 +15,11 @@
  */
 package com.google.j2cl.transpiler.readable.switchstatement;
 
+enum Numbers {
+  ONE,
+  TWO
+}
+
 public class SwitchStatement {
   public void main() {
     // String switch.

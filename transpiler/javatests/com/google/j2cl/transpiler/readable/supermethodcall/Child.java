@@ -15,6 +15,28 @@
  */
 package com.google.j2cl.transpiler.readable.supermethodcall;
 
+class GrandParent {
+  public void grandParentSimplest() {}
+
+  @SuppressWarnings("unused")
+  public void grandParentWithParams(int foo) {}
+
+  public Object grandParentWithChangingReturn() {
+    return null;
+  }
+}
+
+class Parent extends GrandParent {
+  public void parentSimplest() {}
+
+  @SuppressWarnings("unused")
+  public void parentWithParams(int foo) {}
+
+  public Object parentWithChangingReturn() {
+    return null;
+  }
+}
+
 public class Child extends Parent {
   @Override
   public void parentSimplest() {

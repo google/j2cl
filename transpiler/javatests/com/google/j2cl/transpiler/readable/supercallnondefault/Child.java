@@ -15,6 +15,14 @@
  */
 package com.google.j2cl.transpiler.readable.supercallnondefault;
 
+class Parent {
+  public int field;
+
+  public Parent(int f) {
+    this.field = f;
+  }
+}
+
 public class Child extends Parent {
   public Child(int a) {
     super(a);

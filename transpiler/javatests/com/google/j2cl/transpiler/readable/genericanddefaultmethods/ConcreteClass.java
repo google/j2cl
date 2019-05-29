@@ -15,4 +15,16 @@
  */
 package com.google.j2cl.transpiler.readable.genericanddefaultmethods;
 
+interface InterfaceWithDefault {
+  default void foo(String value) {
+    System.out.println("in InterfaceWithDefault");
+  }
+}
+
+class GenericClass<T> {
+  public void foo(T value) {
+    System.out.println("in GenericClass");
+  }
+}
+
 public class ConcreteClass extends GenericClass<String> implements InterfaceWithDefault {}

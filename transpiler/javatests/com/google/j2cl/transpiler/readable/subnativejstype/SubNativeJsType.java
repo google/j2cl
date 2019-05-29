@@ -16,6 +16,12 @@
 package com.google.j2cl.transpiler.readable.subnativejstype;
 
 import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsType;
+
+@JsType(isNative = true, namespace = "test.foo")
+class MyNativeJsType {
+  public MyNativeJsType(int x) {}
+}
 
 public class SubNativeJsType extends MyNativeJsType {
   @JsConstructor

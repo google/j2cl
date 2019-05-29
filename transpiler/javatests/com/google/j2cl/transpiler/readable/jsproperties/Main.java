@@ -15,6 +15,67 @@
  */
 package com.google.j2cl.transpiler.readable.jsproperties;
 
+import jsinterop.annotations.JsProperty;
+
+/** Tests for non native static JsProperty. */
+class Foo {
+  private static int f;
+
+  @JsProperty
+  public static int getA() {
+    return f + 1;
+  }
+
+  @JsProperty
+  public static void setA(int x) {
+    f = x + 2;
+  }
+
+  @JsProperty(name = "abc")
+  public static int getB() {
+    return f + 3;
+  }
+
+  @JsProperty(name = "abc")
+  public static void setB(int x) {
+    f = x + 4;
+  }
+}
+
+/** Tests for non native instance JsProperty. */
+class Bar {
+  private int f;
+
+  @JsProperty
+  public int getA() {
+    return f + 1;
+  }
+
+  @JsProperty
+  public void setA(int x) {
+    f = x + 2;
+  }
+
+  @JsProperty(name = "abc")
+  public int getB() {
+    return f + 3;
+  }
+
+  @JsProperty(name = "abc")
+  public void setB(int x) {
+    f = x + 4;
+  }
+}
+
+/** Tests for native JsProperty. */
+class NativeFoo {
+  @JsProperty(name = "hasOwnProperty")
+  public native Object getA();
+
+  @JsProperty(name = "PI", namespace = "Math")
+  public static native double getB();
+}
+
 public class Main {
   public void testNativeJsProperty() {
     new NativeFoo().getA();

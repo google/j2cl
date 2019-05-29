@@ -15,4 +15,34 @@
  */
 package com.google.j2cl.transpiler.readable.bridgemethodsreturn;
 
-public class AccidentalOverride extends A<String, String> implements SpecializedInterface {}
+interface I<T, S> {
+  T fun(S s);
+}
+
+class A<T, S> {
+  public T fun(S s) {
+    return null;
+  }
+
+  public T get() {
+    return null;
+  }
+}
+
+class B extends A<Number, String> implements I<Integer, String> {
+  // bridge method for A.fun(String):Number and I.fun(String):Integer should both delegate
+  // to this method. Since A.fun(String):Number and I.fun(String):Integer has the same signature
+  // (although) different return type, only one bridge method should be created.
+  public Integer fun(String s) {
+    return new Integer(1);
+  }
+}
+
+/** An interface with the same method as A but specialized. */
+interface SpecializedInterface {
+  String fun(String s);
+
+  String get();
+}
+
+class AccidentalOverride extends A<String, String> implements SpecializedInterface {}

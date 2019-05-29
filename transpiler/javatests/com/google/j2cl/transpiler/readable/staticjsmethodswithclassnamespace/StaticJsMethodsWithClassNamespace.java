@@ -28,3 +28,9 @@ public class StaticJsMethodsWithClassNamespace {
     originalName();
   }
 }
+
+class ExternalCaller {
+  public void test() {
+    StaticJsMethodsWithClassNamespace.originalName();
+  }
+}

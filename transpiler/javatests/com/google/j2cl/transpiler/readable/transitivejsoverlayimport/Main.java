@@ -15,6 +15,43 @@
  */
 package com.google.j2cl.transpiler.readable.transitivejsoverlayimport;
 
+import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsOverlay;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
+
+@JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
+class Immediate extends Transitive {
+
+  @JsOverlay
+  final void doImmediateInstanceMethod() {}
+}
+
+class NonNativeUpper extends Immediate {
+  @JsConstructor
+  public NonNativeUpper() {}
+
+  void doNonNativeUpperInstanceMethod() {}
+}
+
+class NonNativeLower extends NonNativeUpper {
+  @JsConstructor
+  public NonNativeLower() {}
+
+  void doNonNativeLowerInstanceMethod() {}
+}
+
+@JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
+class Transitive {
+
+  @JsProperty
+  final native int getJsProperty();
+
+  @JsOverlay
+  final void doTransitiveInstanceMethod(String arg1) {}
+}
+
 public class Main {
 
   public static void main(String... args) {

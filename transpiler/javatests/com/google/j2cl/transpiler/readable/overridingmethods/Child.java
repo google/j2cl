@@ -15,6 +15,14 @@
  */
 package com.google.j2cl.transpiler.readable.overridingmethods;
 
+interface SomeInterface {
+  void bar();
+}
+
+class Parent {
+  public void fun() {}
+}
+
 public class Child extends Parent implements SomeInterface {
   @Override
   public void fun() {}

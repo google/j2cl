@@ -15,6 +15,18 @@
  */
 package com.google.j2cl.transpiler.readable.innerclassinheritance;
 
+class ParentOuter {
+  public int fieldInParentOuter;
+
+  public void funInParentOuter() {}
+}
+
+class ParentInner {
+  public int fieldInParentInner;
+
+  public void funInParentInner() {}
+}
+
 public class ChildClass extends ParentOuter {
   public int fieldInOuter;
 

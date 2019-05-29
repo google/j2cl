@@ -15,6 +15,12 @@
  */
 package com.google.j2cl.transpiler.readable.overwrittentypevariables;
 
+interface MyFunction<F, T> {
+  T apply(F input);
+}
+
+interface HashFunction<T> extends MyFunction<T, String> {}
+
 public class HashFunctions {
   public static final <T> HashFunction<T> hashFunction() {
     return new HashFunction<T>() {
