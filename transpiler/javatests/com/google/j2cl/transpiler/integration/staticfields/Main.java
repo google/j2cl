@@ -17,15 +17,28 @@ package com.google.j2cl.transpiler.integration.staticfields;
 
 import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
 
-/**
- * Test static field initializer, and static field reference in field declaration.
- */
+/** Test static field initializer, and static field reference in field declaration. */
 public class Main {
+  public static void main(String[] args) {
+    testStaticFields_visibilities();
+    testStaticFields_superInterface();
+  }
+
   public static int a = 2;
   protected static int b = a * 3;
 
-  public static void main(String[] args) {
+  private static void testStaticFields_visibilities() {
     assertTrue(Main.a == 2);
     assertTrue(Main.b == 6);
+  }
+
+  interface Super {
+    Object SUPERFIELD = new Object();
+  }
+
+  interface Sub extends Super {}
+
+  private static void testStaticFields_superInterface() {
+    assertTrue(Sub.SUPERFIELD != null);
   }
 }
