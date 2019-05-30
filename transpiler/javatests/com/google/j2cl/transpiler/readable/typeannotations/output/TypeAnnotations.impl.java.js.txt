@@ -1,0 +1,99 @@
+/**
+ * @fileoverview transpiled from
+ * com.google.j2cl.transpiler.readable.typeannotations.TypeAnnotations.
+ *
+ * @suppress {const, extraRequire, missingOverride, missingRequire,
+ * suspiciousCode, transitionalSuspiciousCodeWarnings, unusedLocalVariables,
+ * uselessCode, strictModuleDepCheck}
+ */
+goog.module('com.google.j2cl.transpiler.readable.typeannotations.TypeAnnotations$impl');
+
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
+
+
+class TypeAnnotations extends j_l_Object {
+  /**
+   * @protected
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * @return {!TypeAnnotations}
+   * @public
+   */
+  static $create__() {
+    TypeAnnotations.$clinit();
+    let $instance = new TypeAnnotations();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_typeannotations_TypeAnnotations__();
+    return $instance;
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_typeannotations_TypeAnnotations__() {
+    this.$ctor__java_lang_Object__();
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  static m_main__() {
+    TypeAnnotations.$clinit();
+    let list = /**@type {!ArrayList<string>} */ (ArrayList.$create__());
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    TypeAnnotations.$clinit = (() => {});
+    TypeAnnotations.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
+   * @param {?} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof TypeAnnotations;
+  }
+
+  /**
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, TypeAnnotations);
+  }
+
+  /**
+   * @public
+   */
+  static $loadModules() {
+    ArrayList = goog.module.get('java.util.ArrayList$impl');
+  }
+};
+
+$Util.$setClassMetadata(
+    TypeAnnotations,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.typeannotations.TypeAnnotations'));
+
+
+
+exports = TypeAnnotations;
+//# sourceMappingURL=TypeAnnotations.js.map
