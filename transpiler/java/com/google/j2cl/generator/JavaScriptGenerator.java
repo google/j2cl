@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.generator;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
@@ -65,14 +67,14 @@ public abstract class JavaScriptGenerator {
 
   abstract String getSuffix();
 
-  void renderFileOverview(String... suppressions) {
-    String transpiledFrom = type.getDeclaration().getQualifiedBinaryName();
+  /**
+   * @param suppressions file level suppresions. Should be only used as a workaround if an urgent
+   *     suppression is needed without needing to wait for JsCompiler release.
+   */
+  void renderSuppressions(String... suppressions) {
+    checkArgument(suppressions.length > 0);
     sourceBuilder.appendLines(
-        "/**",
-        " * @fileoverview transpiled from " + transpiledFrom + ".",
-        " *",
-        " * @suppress {" + Joiner.on(", ").join(suppressions) + "}",
-        " */");
+        "/** @fileoverview @suppress {" + Joiner.on(", ").join(suppressions) + "} */");
     sourceBuilder.newLine();
   }
 
