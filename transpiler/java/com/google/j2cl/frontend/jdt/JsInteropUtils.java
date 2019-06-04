@@ -43,6 +43,9 @@ public class JsInteropUtils {
       annotation = JsInteropAnnotationUtils.getJsPropertyAnnotation(methodBinding);
     }
 
+    // TODO(b/134486605): Decide whether a method is a property accessor taking into account its
+    //  overridden methods, otherwise a public method of a JsType that is not annotated is
+    //  considered a JsMethod even if it overrides a JsProperty.
     boolean isPropertyAccessor =
         JsInteropAnnotationUtils.getJsPropertyAnnotation(methodBinding) != null;
     return getJsInfo(

@@ -904,6 +904,12 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "}",
             "@JsType public class Buggy extends Super {",
             "  @JsProperty public void setX(int x) {  }",
+            "}",
+            "class OverrideWithoutJsType extends Super {",
+            "  @JsProperty public void setX(int x) {  }",
+            "}",
+            "class OverrideWithoutJsPropertyNorJsType extends Super {",
+            "  public void setX(int x) {  }",
             "}")
         .assertNoWarnings();
   }
@@ -914,15 +920,39 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "import jsinterop.annotations.*;",
             "class Super {",
             "  @JsMethod public int getY() { return 5; }",
-            "  @JsProperty public void setZ(int z) {}",
+            "  @JsProperty public void setX(int x) {}",
+            "  @JsProperty(name = \"setZ\")  public void setZ(int z) {}",
+            "}",
+            "@JsType class OverrideWithoutJsProperty extends Super {",
+            // TODO(b/134486605): Unannotated public method in a JsType should be JsProperty if
+            //  they override a JsProperty.
+            "  public void setX(int x) {  }",
+            "  public void setZ(int z) {  }",
             "}",
             "public class Buggy extends Super {",
             "  @JsProperty(name = \"getY\") public int getY() { return 6; }",
-            "  @JsMethod(name = \"z\") public void setZ(int z) {}",
+            "  @JsMethod public void setX(int x) {  }",
+            "  @JsMethod public void setZ(int z) {}",
             "}")
         .assertErrorsWithoutSourcePosition(
             "JsProperty 'int Buggy.getY()' cannot override JsMethod 'int Super.getY()'.",
-            "JsMethod 'void Buggy.setZ(int z)' cannot override JsProperty 'void Super.setZ(int)'.");
+            // TODO(b/134508974): Uncomment the following 2 error messages when this bug is fixed.
+            // "JsMethod 'void Buggy.setZ(int z)' cannot override JsProperty "
+            //     + "'void Super.setZ(int)'.".
+            // "JsMethod 'void OverrideWithoutJsProperty.setZ(int z)' cannot override JsProperty "
+            //     + "'void Super.setZ(int)'.",
+            // TODO(b/134507763): Uncomment the following 2 error messages and remove the following
+            //  2 when this bug is fixed.
+            // "JsMethod 'void OverrideWithoutJsProperty.setX(int x)' cannot override JsProperty "
+            //     + "'void Super.setX(int)'.",
+            // "JsMethod 'void Buggy.setX(int x)' cannot override JsProperty "
+            //     + "'void Super.setX(int)'.",
+            "'void OverrideWithoutJsProperty.setX(int x)' cannot be assigned JavaScript name "
+                + "'setX' that is different from the JavaScript name of a method it overrides "
+                + "('void Super.setX(int)' with JavaScript name 'x').",
+            "'void Buggy.setX(int x)' cannot be assigned JavaScript name "
+                + "'setX' that is different from the JavaScript name of a method it overrides "
+                + "('void Super.setX(int)' with JavaScript name 'x').");
   }
 
   // GWT enforces some restriction on JSNI JsMethods. In J2CL,  JSNI is just a comment and no test
