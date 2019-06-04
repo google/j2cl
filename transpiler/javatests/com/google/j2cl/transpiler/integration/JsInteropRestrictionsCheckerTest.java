@@ -941,18 +941,10 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             //     + "'void Super.setZ(int)'.".
             // "JsMethod 'void OverrideWithoutJsProperty.setZ(int z)' cannot override JsProperty "
             //     + "'void Super.setZ(int)'.",
-            // TODO(b/134507763): Uncomment the following 2 error messages and remove the following
-            //  2 when this bug is fixed.
-            // "JsMethod 'void OverrideWithoutJsProperty.setX(int x)' cannot override JsProperty "
-            //     + "'void Super.setX(int)'.",
-            // "JsMethod 'void Buggy.setX(int x)' cannot override JsProperty "
-            //     + "'void Super.setX(int)'.",
-            "'void OverrideWithoutJsProperty.setX(int x)' cannot be assigned JavaScript name "
-                + "'setX' that is different from the JavaScript name of a method it overrides "
-                + "('void Super.setX(int)' with JavaScript name 'x').",
-            "'void Buggy.setX(int x)' cannot be assigned JavaScript name "
-                + "'setX' that is different from the JavaScript name of a method it overrides "
-                + "('void Super.setX(int)' with JavaScript name 'x').");
+            "JsMethod 'void OverrideWithoutJsProperty.setX(int x)' cannot override JsProperty "
+                + "'void Super.setX(int)'.",
+            "JsMethod 'void Buggy.setX(int x)' cannot override JsProperty "
+                + "'void Super.setX(int)'.");
   }
 
   // GWT enforces some restriction on JSNI JsMethods. In J2CL,  JSNI is just a comment and no test

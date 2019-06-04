@@ -978,19 +978,8 @@ public class JsInteropRestrictionsChecker {
       if (!overriddenMethodDescriptor.isJsMember()) {
         continue;
       }
-      String parentName = overriddenMethodDescriptor.getSimpleJsName();
-      if (!parentName.equals(jsName)) {
-        problems.error(
-            method.getSourcePosition(),
-            "'%s' cannot be assigned JavaScript name '%s' that is different from the"
-                + " JavaScript name of a method it overrides ('%s' with JavaScript name '%s').",
-            member.getReadableDescription(),
-            jsName,
-            overriddenMethodDescriptor.getReadableDescription(),
-            parentName);
-        break;
-      }
 
+      String parentName = overriddenMethodDescriptor.getSimpleJsName();
       if (overriddenMethodDescriptor.isJsMethod() != method.getDescriptor().isJsMethod()) {
         // Overrides can not change JsMethod to JsProperty nor vice versa.
         problems.error(
@@ -999,6 +988,18 @@ public class JsInteropRestrictionsChecker {
             member.getDescriptor().isJsMethod() ? "JsMethod" : "JsProperty",
             member.getReadableDescription(),
             overriddenMethodDescriptor.isJsMethod() ? "JsMethod" : "JsProperty",
+            overriddenMethodDescriptor.getReadableDescription(),
+            parentName);
+        break;
+      }
+
+      if (!parentName.equals(jsName)) {
+        problems.error(
+            method.getSourcePosition(),
+            "'%s' cannot be assigned JavaScript name '%s' that is different from the"
+                + " JavaScript name of a method it overrides ('%s' with JavaScript name '%s').",
+            member.getReadableDescription(),
+            jsName,
             overriddenMethodDescriptor.getReadableDescription(),
             parentName);
         break;
