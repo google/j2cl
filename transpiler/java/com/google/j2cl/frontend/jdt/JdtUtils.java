@@ -750,44 +750,51 @@ class JdtUtils {
   /** Checks overriding chain to compute JsInfo. */
   private static JsInfo computeJsInfo(IMethodBinding methodBinding) {
     JsInfo originalJsInfo = JsInteropUtils.getJsInfo(methodBinding);
-    if (originalJsInfo.isJsOverlay()) {
+
+    if (originalJsInfo.isJsOverlay() || originalJsInfo.getJsName() != null) {
+      // Do not examine overridden methods if the method is marked as JsOverlay or it has a JsMember
+      // annotation that customizes the name.
       return originalJsInfo;
     }
 
-    List<JsInfo> inheritedJsInfoList = new ArrayList<>();
-
-    // Add the JsInfo of the method and all the overridden methods to the list.
-    if (originalJsInfo.getJsMemberType() != JsMemberType.NONE) {
-      inheritedJsInfoList.add(originalJsInfo);
-    }
+    boolean hasExplicitJsMemberAnnotation = hasJsMemberAnnotation(methodBinding);
+    JsInfo defaultJsInfo = originalJsInfo;
     for (IMethodBinding overriddenMethod : getOverriddenMethods(methodBinding)) {
       JsInfo inheritedJsInfo = JsInteropUtils.getJsInfo(overriddenMethod);
-      if (inheritedJsInfo.getJsMemberType() != JsMemberType.NONE) {
-        inheritedJsInfoList.add(inheritedJsInfo);
+      if (inheritedJsInfo.getJsMemberType() == JsMemberType.NONE) {
+        continue;
       }
-    }
 
-    if (inheritedJsInfoList.isEmpty()) {
-      return originalJsInfo;
-    }
+      if (hasExplicitJsMemberAnnotation
+          && originalJsInfo.getJsMemberType() != inheritedJsInfo.getJsMemberType()) {
+        // Only inherit from the overridden method if the JsMember types are consistent.
+        continue;
+      }
 
-    // TODO(b/67778330): Make the handling of @JsProperty consistent with the handling of @JsMethod.
-    if (inheritedJsInfoList.get(0).getJsMemberType() == JsMemberType.METHOD) {
-      // Return the first JsInfo with a Js name specified.
-      for (JsInfo inheritedJsInfo : inheritedJsInfoList) {
-        if (inheritedJsInfo.getJsName() != null) {
-          // Don't inherit @JsAsync annotation from overridden methods.
-          return JsInfo.Builder.from(inheritedJsInfo)
-              .setJsAsync(originalJsInfo.isJsAsync())
-              .build();
-        }
+      if (inheritedJsInfo.getJsName() != null) {
+        // Found an overridden method of the same JsMember type one that customizes the name, done.
+        // If there are any conflicts with other overrides they will be reported by
+        // JsInteropRestrictionsChecker.
+        return JsInfo.Builder.from(inheritedJsInfo).setJsAsync(originalJsInfo.isJsAsync()).build();
+      }
+
+      if (defaultJsInfo == originalJsInfo && !hasExplicitJsMemberAnnotation) {
+        // The original method does not have a JsMember annotation and traversing the list of
+        // overridden methods we found the first that has an explicit JsMember annotation.
+        // Keep it as the one to be used if none is found that customizes the name.
+        // This allows to "inherit" the JsMember type from the override.
+        defaultJsInfo = inheritedJsInfo;
       }
     }
 
     // Don't inherit @JsAsync annotation from overridden methods.
-    return JsInfo.Builder.from(inheritedJsInfoList.get(0))
-        .setJsAsync(originalJsInfo.isJsAsync())
-        .build();
+    return JsInfo.Builder.from(defaultJsInfo).setJsAsync(originalJsInfo.isJsAsync()).build();
+  }
+
+  private static boolean hasJsMemberAnnotation(IMethodBinding methodBinding) {
+    return JsInteropAnnotationUtils.getJsMethodAnnotation(methodBinding) != null
+        || JsInteropAnnotationUtils.getJsPropertyAnnotation(methodBinding) != null
+        || JsInteropAnnotationUtils.getJsConstructorAnnotation(methodBinding) != null;
   }
 
   public static Set<IMethodBinding> getOverriddenMethods(IMethodBinding methodBinding) {

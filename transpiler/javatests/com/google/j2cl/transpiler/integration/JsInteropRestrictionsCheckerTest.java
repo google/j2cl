@@ -910,6 +910,9 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "}",
             "class OverrideWithoutJsPropertyNorJsType extends Super {",
             "  public void setX(int x) {  }",
+            "}",
+            "@JsType class OverrideWithoutJsProperty extends Super {",
+            "  public void setX(int x) {  }",
             "}")
         .assertNoWarnings();
   }
@@ -923,12 +926,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  @JsProperty public void setX(int x) {}",
             "  @JsProperty(name = \"setZ\")  public void setZ(int z) {}",
             "}",
-            "@JsType class OverrideWithoutJsProperty extends Super {",
-            // TODO(b/134486605): Unannotated public method in a JsType should be JsProperty if
-            //  they override a JsProperty.
-            "  public void setX(int x) {  }",
-            "  public void setZ(int z) {  }",
-            "}",
             "public class Buggy extends Super {",
             "  @JsProperty(name = \"getY\") public int getY() { return 6; }",
             "  @JsMethod public void setX(int x) {  }",
@@ -936,13 +933,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "}")
         .assertErrorsWithoutSourcePosition(
             "JsProperty 'int Buggy.getY()' cannot override JsMethod 'int Super.getY()'.",
-            // TODO(b/134508974): Uncomment the following 2 error messages when this bug is fixed.
-            // "JsMethod 'void Buggy.setZ(int z)' cannot override JsProperty "
-            //     + "'void Super.setZ(int)'.".
-            // "JsMethod 'void OverrideWithoutJsProperty.setZ(int z)' cannot override JsProperty "
-            //     + "'void Super.setZ(int)'.",
-            "JsMethod 'void OverrideWithoutJsProperty.setX(int x)' cannot override JsProperty "
-                + "'void Super.setX(int)'.",
+            "JsMethod 'void Buggy.setZ(int z)' cannot override JsProperty "
+                + "'void Super.setZ(int)'.",
             "JsMethod 'void Buggy.setX(int x)' cannot override JsProperty "
                 + "'void Super.setX(int)'.");
   }
