@@ -11,11 +11,12 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 goog.module('j2cl.samples.app');
 
 // This is the entry point of our app.
-// Feel free to use any fancy new ES features, Closure compiler will take care
-// of it if you need to run the code an older browser.
+// Feel free to use any of the fancy new JS features; Closure compiler will take
+// care of making your app run in an older browser if needed.
 var {sayHello} = goog.require('j2cl.samples.hello');
 
 sayHello();
