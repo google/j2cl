@@ -192,7 +192,6 @@ j2cl_library(
     srcs = ["com/google/gwt/junit/client/GWTTestCase.java"],
     visibility = [
         "//javatests/com/google/protobuf/contrib/gwt:__subpackages__",
-        "//third_party/java_src/jsinterop_base/javatests:__subpackages__",
     ],
     deps = ["//third_party:junit-j2cl"],
 )
