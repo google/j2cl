@@ -80,7 +80,7 @@ def j2cl_application(
     }
     _define_js("%s_dev_config" % name, define_dev_defaults, closure_defines)
 
-    index_html = "<script src='http://localhost:35729/livereload.js'></script>"
+    index_html = "<script language=\"JavaScript\">document.write(\"<script src=http://\" + window.location.hostname + \":35729/livereload.js></sc\" +\"ript>\")</script>"
     index_html += "<script src='%s_dev_config.js'></script>" % name
     index_html += "<script src='%s_dev.js'></script>" % name
     dev_resources = [
