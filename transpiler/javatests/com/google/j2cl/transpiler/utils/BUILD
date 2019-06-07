@@ -1,7 +1,9 @@
 # Description:
 #   Utilites for tests.
 
-licenses(["notice"])  # Apache 2.0
+package(
+    licenses = ["notice"],  # Apache 2.0
+)
 
 load("//third_party/java/j2cl:j2cl_library.bzl", "j2cl_library")
 

@@ -1,11 +1,12 @@
 # Description:
 #   This package contains frontend driver code.
 
-package(default_visibility = [
-    "//transpiler:__subpackages__",
-])
-
-licenses(["notice"])  # Apache 2.0
+package(
+    default_visibility = [
+        "//transpiler:__subpackages__",
+    ],
+    licenses = ["notice"],  # Apache 2.0
+)
 
 java_library(
     name = "frontend",

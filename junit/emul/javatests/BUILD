@@ -1,5 +1,7 @@
-# Apache2. These tests are written for J2CL emulation, not copied over.
-licenses(["notice"])
+package(
+    # Apache2. These tests are written for J2CL emulation, not copied over.
+    licenses = ["notice"],
+)
 
 load("//build_defs:rules.bzl", "j2cl_test")
 

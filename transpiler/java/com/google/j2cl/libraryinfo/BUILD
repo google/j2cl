@@ -1,9 +1,10 @@
-package(default_visibility = [
-    "//tools:__subpackages__",
-    "//transpiler:__subpackages__",
-])
-
-licenses(["notice"])  # Apache 2.0
+package(
+    default_visibility = [
+        "//tools:__subpackages__",
+        "//transpiler:__subpackages__",
+    ],
+    licenses = ["notice"],  # Apache 2.0
+)
 
 proto_library(
     name = "library_info_proto",

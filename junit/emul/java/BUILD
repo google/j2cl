@@ -1,4 +1,6 @@
-licenses(["reciprocal"])  # Eclipse Public License - v 1.0
+package(
+    licenses = ["reciprocal"],  # Eclipse Public License - v 1.0
+)
 
 load("//build_defs:rules.bzl", "j2cl_library")
 

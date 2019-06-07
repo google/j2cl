@@ -3,7 +3,10 @@
 
 load("@bazel_tools//tools/jdk:default_java_toolchain.bzl", "default_java_toolchain")
 
-licenses(["notice"])  # Apache 2.0
+package(
+    default_visibility = ["//visibility:public"],
+    licenses = ["notice"],  # Apache 2.0
+)
 
 ##########################################################
 #                                                        #
@@ -21,8 +24,6 @@ licenses(["notice"])  # Apache 2.0
 # and should actually be private, but Blaze does not     #
 # support this yet, b/34359566.                          #
 ##########################################################
-
-package(default_visibility = ["//visibility:public"])
 
 # ***************************************************
 # Transpiler related

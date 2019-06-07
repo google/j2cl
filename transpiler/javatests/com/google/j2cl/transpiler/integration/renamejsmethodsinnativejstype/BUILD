@@ -1,6 +1,8 @@
 load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_library")
 
-licenses(["notice"])  # Apache 2.0
+package(
+    licenses = ["notice"],  # Apache 2.0
+)
 
 load("//build_defs:rules.bzl", "j2cl_library")
 load(

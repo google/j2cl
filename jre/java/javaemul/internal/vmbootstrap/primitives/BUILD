@@ -3,9 +3,10 @@
 #
 # Depends on the JRE JS.
 
-package(default_visibility = ["//jre/java:__pkg__"])
-
-licenses(["notice"])  # Apache 2.0
+package(
+    default_visibility = ["//jre/java:__pkg__"],
+    licenses = ["notice"],  # Apache 2.0
+)
 
 load(":generate_primitive.bzl", "generate_primitive_type")
 

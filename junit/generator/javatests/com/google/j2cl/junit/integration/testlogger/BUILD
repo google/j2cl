@@ -1,6 +1,7 @@
-package(default_visibility = ["//junit/generator/javatests/com/google/j2cl/junit/integration:__subpackages__"])
-
-licenses(["notice"])  # Apache 2.0
+package(
+    default_visibility = ["//junit/generator/javatests/com/google/j2cl/junit/integration:__subpackages__"],
+    licenses = ["notice"],  # Apache 2.0
+)
 
 load("//build_defs:rules.bzl", "j2cl_library")
 

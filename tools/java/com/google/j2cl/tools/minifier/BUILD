@@ -1,7 +1,9 @@
 # Description:
 #  A minifier library for J2CL generated source. Applicable in dev servers.
 
-licenses(["notice"])  # Apache 2.0
+package(
+    licenses = ["notice"],  # Apache 2.0
+)
 
 java_binary(
     name = "J2clMinifier",

@@ -3,7 +3,9 @@
 
 load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_binary")
 
-licenses(["notice"])  # Apache 2.0
+package(
+    licenses = ["notice"],  # Apache 2.0
+)
 
 load("//jre/java:j2cl_mirror_from_gwt.bzl", "j2cl_mirror_from_gwt", "java_source_copy")
 

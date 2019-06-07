@@ -1,11 +1,12 @@
-package(default_visibility = [
-    "//junit/generator/javatests/com/google/j2cl/junit/apt:__pkg__",
-    "//junit/generator/javatests/com/google/j2cl/junit/integration/async:__pkg__",
-])
-
-# Tests in this directory are not tests that are meant to be run directly.
-# They serve as integration tests for J2clTestRunner.
-licenses(["notice"])  # Apache 2.0
+package(
+    default_visibility = [
+        "//junit/generator/javatests/com/google/j2cl/junit/apt:__pkg__",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/async:__pkg__",
+    ],
+    # Tests in this directory are not tests that are meant to be run directly.
+    # They serve as integration tests for J2clTestRunner.
+    licenses = ["notice"],  # Apache 2.0
+)
 
 load(
     "//junit/generator/javatests/com/google/j2cl/junit/integration:j2cl_junit_integration_test.bzl",

@@ -2,9 +2,10 @@
 # testing under j2cl.
 # JVM async testing support should be placed under Guava or Xplat.
 
-package(default_visibility = ["//junit/generator/javatests/com/google/j2cl/junit:__subpackages__"])
-
-licenses(["notice"])  # Apache 2.0
+package(
+    default_visibility = ["//junit/generator/javatests/com/google/j2cl/junit:__subpackages__"],
+    licenses = ["notice"],  # Apache 2.0
+)
 
 load("//build_defs:rules.bzl", "j2cl_library")
 

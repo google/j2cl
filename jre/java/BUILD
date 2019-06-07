@@ -2,14 +2,15 @@
 #   j2cl/jre: JRE subset for transpilation.
 #
 
-package(default_visibility = [
-    "//:__pkg__",
-    "//build_defs/internal_do_not_use:__pkg__",
-    "//jre/javatests:__pkg__",
-    "//transpiler/javatests/com/google/j2cl/transpiler:__subpackages__",
-])
-
-licenses(["notice"])  # Apache 2.0
+package(
+    default_visibility = [
+        "//:__pkg__",
+        "//build_defs/internal_do_not_use:__pkg__",
+        "//jre/javatests:__pkg__",
+        "//transpiler/javatests/com/google/j2cl/transpiler:__subpackages__",
+    ],
+    licenses = ["notice"],  # Apache 2.0
+)
 
 load(":j2cl_mirror_from_gwt.bzl", "j2cl_mirror_from_gwt")
 

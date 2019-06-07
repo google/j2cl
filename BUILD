@@ -3,9 +3,10 @@
 
 load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_library")
 
-package(default_visibility = ["//visibility:public"])
-
-licenses(["notice"])  # Apache 2.0
+package(
+    default_visibility = ["//visibility:public"],
+    licenses = ["notice"],  # Apache 2.0
+)
 
 exports_files(["LICENSE"])
 
