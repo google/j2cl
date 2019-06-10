@@ -119,11 +119,11 @@ public class AutoboxTest {
   /** Verify that .valueOf() methods return identical references for types within certain ranges. */
   @Test
   public void testCaching() {
-    assertThat((byte) 3).isSameAs((byte) 3);
-    assertThat('A').isSameAs('A');
-    assertThat((short) 120).isSameAs((short) 120);
-    assertThat(-13).isSameAs(-13);
-    assertThat(7L).isSameAs(7L);
+    assertThat((byte) 3).isSameInstanceAs((byte) 3);
+    assertThat('A').isSameInstanceAs('A');
+    assertThat((short) 120).isSameInstanceAs((short) 120);
+    assertThat(-13).isSameInstanceAs(-13);
+    assertThat(7L).isSameInstanceAs(7L);
   }
 
   /**
@@ -141,11 +141,11 @@ public class AutoboxTest {
       original = operand = 0;
       result = operand++;
       // operand must be different object now.
-      assertWithMessage("[o++] original != operand, ").that(operand).isNotSameAs(original);
-      assertWithMessage("[o++] original == result, ").that(result).isSameAs(original);
-      assertWithMessage("[o++] result != operand, ").that(operand).isNotSameAs(result);
+      assertWithMessage("[o++] original != operand, ").that(operand).isNotSameInstanceAs(original);
+      assertWithMessage("[o++] original == result, ").that(result).isSameInstanceAs(original);
+      assertWithMessage("[o++] result != operand, ").that(operand).isNotSameInstanceAs(result);
       // checks against boxedvalues cached object.
-      assertWithMessage("[o++] valueOf(n) == operand, ").that(operand).isSameAs(1);
+      assertWithMessage("[o++] valueOf(n) == operand, ").that(operand).isSameInstanceAs(1);
       // checks cached object's value.
       assertWithMessage("[o++] n == operand.value, ").that(operand.intValue()).isEqualTo(1);
     }
@@ -156,10 +156,10 @@ public class AutoboxTest {
       Integer result;
       original = operand = 2;
       result = ++operand;
-      assertWithMessage("[++o] original != operand, ").that(operand).isNotSameAs(original);
-      assertWithMessage("[++o] original != result, ").that(result).isNotSameAs(original);
-      assertWithMessage("[++o] result == operand, ").that(operand).isSameAs(result);
-      assertWithMessage("[++o] valueOf(n) == operand, ").that(operand).isSameAs(3);
+      assertWithMessage("[++o] original != operand, ").that(operand).isNotSameInstanceAs(original);
+      assertWithMessage("[++o] original != result, ").that(result).isNotSameInstanceAs(original);
+      assertWithMessage("[++o] result == operand, ").that(operand).isSameInstanceAs(result);
+      assertWithMessage("[++o] valueOf(n) == operand, ").that(operand).isSameInstanceAs(3);
       assertWithMessage("[++o] n == operand.value, ").that(operand.intValue()).isEqualTo(3);
     }
 
@@ -169,10 +169,10 @@ public class AutoboxTest {
       Integer result;
       original = operand = 5;
       result = operand--;
-      assertWithMessage("[o--] original != operand, ").that(operand).isNotSameAs(original);
-      assertWithMessage("[o--] original == result, ").that(result).isSameAs(original);
-      assertWithMessage("[o--] result != operand, ").that(operand).isNotSameAs(result);
-      assertWithMessage("[o--] valueOf(n) == operand, ").that(operand).isSameAs(4);
+      assertWithMessage("[o--] original != operand, ").that(operand).isNotSameInstanceAs(original);
+      assertWithMessage("[o--] original == result, ").that(result).isSameInstanceAs(original);
+      assertWithMessage("[o--] result != operand, ").that(operand).isNotSameInstanceAs(result);
+      assertWithMessage("[o--] valueOf(n) == operand, ").that(operand).isSameInstanceAs(4);
       assertWithMessage("[o--] n == operand.value, ").that(operand.intValue()).isEqualTo(4);
     }
 
@@ -182,10 +182,10 @@ public class AutoboxTest {
       Integer result;
       original = operand = 7;
       result = --operand;
-      assertWithMessage("[--o] original != operand, ").that(operand).isNotSameAs(original);
-      assertWithMessage("[--o] original != result, ").that(result).isNotSameAs(original);
-      assertWithMessage("[--o] result == operand, ").that(operand).isSameAs(result);
-      assertWithMessage("[--o] valueOf(n) == operand, ").that(operand).isSameAs(6);
+      assertWithMessage("[--o] original != operand, ").that(operand).isNotSameInstanceAs(original);
+      assertWithMessage("[--o] original != result, ").that(result).isNotSameInstanceAs(original);
+      assertWithMessage("[--o] result == operand, ").that(operand).isSameInstanceAs(result);
+      assertWithMessage("[--o] valueOf(n) == operand, ").that(operand).isSameInstanceAs(6);
       assertWithMessage("[--o] n == operand.value, ").that(operand.intValue()).isEqualTo(6);
     }
 
@@ -194,8 +194,8 @@ public class AutoboxTest {
       Integer original;
       original = operand = 8;
       operand += 2;
-      assertWithMessage("[+=] original != operand, ").that(operand).isNotSameAs(original);
-      assertWithMessage("[+=] valueOf(n) == operand, ").that(operand).isSameAs(10);
+      assertWithMessage("[+=] original != operand, ").that(operand).isNotSameInstanceAs(original);
+      assertWithMessage("[+=] valueOf(n) == operand, ").that(operand).isSameInstanceAs(10);
       assertWithMessage("[+=] n == operand.value, ").that(operand.intValue()).isEqualTo(10);
     }
 
@@ -204,8 +204,8 @@ public class AutoboxTest {
       Integer original;
       original = operand = 11;
       operand -= 2;
-      assertWithMessage("[-=] original != operand, ").that(operand).isNotSameAs(original);
-      assertWithMessage("[-=] valueOf(n) == operand, ").that(operand).isSameAs(9);
+      assertWithMessage("[-=] original != operand, ").that(operand).isNotSameInstanceAs(original);
+      assertWithMessage("[-=] valueOf(n) == operand, ").that(operand).isSameInstanceAs(9);
       assertWithMessage("[-=] n == operand.value, ").that(operand.intValue()).isEqualTo(9);
     }
 
@@ -214,8 +214,8 @@ public class AutoboxTest {
       Integer original;
       original = operand = 21;
       operand *= 2;
-      assertWithMessage("[*=] original != operand, ").that(operand).isNotSameAs(original);
-      assertWithMessage("[*=] valueOf(n) == operand, ").that(operand).isSameAs(42);
+      assertWithMessage("[*=] original != operand, ").that(operand).isNotSameInstanceAs(original);
+      assertWithMessage("[*=] valueOf(n) == operand, ").that(operand).isSameInstanceAs(42);
       assertWithMessage("[*=] n == operand.value, ").that(operand.intValue()).isEqualTo(42);
     }
 
@@ -224,8 +224,8 @@ public class AutoboxTest {
       Integer original;
       original = operand = 30;
       operand /= 2;
-      assertWithMessage("[/=] original != operand, ").that(operand).isNotSameAs(original);
-      assertWithMessage("[/=] valueOf(n) == operand, ").that(operand).isSameAs(15);
+      assertWithMessage("[/=] original != operand, ").that(operand).isNotSameInstanceAs(original);
+      assertWithMessage("[/=] valueOf(n) == operand, ").that(operand).isSameInstanceAs(15);
       assertWithMessage("[/=] n == operand.value, ").that(operand.intValue()).isEqualTo(15);
     }
 
@@ -234,8 +234,8 @@ public class AutoboxTest {
       Integer original;
       original = operand = 123;
       operand %= 100;
-      assertWithMessage("[%=] original != operand, ").that(operand).isNotSameAs(original);
-      assertWithMessage("[%=] valueOf(n) == operand, ").that(operand).isSameAs(23);
+      assertWithMessage("[%=] original != operand, ").that(operand).isNotSameInstanceAs(original);
+      assertWithMessage("[%=] valueOf(n) == operand, ").that(operand).isSameInstanceAs(23);
       assertWithMessage("[%=] n == operand.value, ").that(operand.intValue()).isEqualTo(23);
     }
 
@@ -244,8 +244,8 @@ public class AutoboxTest {
       Integer original;
       original = operand = 0x55;
       operand &= 0xF;
-      assertWithMessage("[&=] original != operand, ").that(operand).isNotSameAs(original);
-      assertWithMessage("[&=] valueOf(n) == operand, ").that(operand).isSameAs(0x5);
+      assertWithMessage("[&=] original != operand, ").that(operand).isNotSameInstanceAs(original);
+      assertWithMessage("[&=] valueOf(n) == operand, ").that(operand).isSameInstanceAs(0x5);
       assertWithMessage("[&=] n == operand.value, ").that(operand.intValue()).isEqualTo(0x5);
     }
 
@@ -254,8 +254,8 @@ public class AutoboxTest {
       Integer original;
       original = operand = 0x55;
       operand |= 0xF;
-      assertWithMessage("[|=] original != operand, ").that(operand).isNotSameAs(original);
-      assertWithMessage("[|=] valueOf(n) == operand, ").that(operand).isSameAs(0x5F);
+      assertWithMessage("[|=] original != operand, ").that(operand).isNotSameInstanceAs(original);
+      assertWithMessage("[|=] valueOf(n) == operand, ").that(operand).isSameInstanceAs(0x5F);
       assertWithMessage("[|=] n == operand.value, ").that(operand.intValue()).isEqualTo(0x5F);
     }
 
@@ -264,8 +264,8 @@ public class AutoboxTest {
       Integer original;
       original = operand = 0x55;
       operand ^= 0xF;
-      assertWithMessage("[&=] original != operand, ").that(operand).isNotSameAs(original);
-      assertWithMessage("[&=] valueOf(n) == operand, ").that(operand).isSameAs(0x5A);
+      assertWithMessage("[&=] original != operand, ").that(operand).isNotSameInstanceAs(original);
+      assertWithMessage("[&=] valueOf(n) == operand, ").that(operand).isSameInstanceAs(0x5A);
       assertWithMessage("[&=] n == operand.value, ").that(operand.intValue()).isEqualTo(0x5A);
     }
 
@@ -274,8 +274,8 @@ public class AutoboxTest {
       Integer original;
       original = operand = 0x3F;
       operand <<= 1;
-      assertWithMessage("[<<=] original != operand, ").that(operand).isNotSameAs(original);
-      assertWithMessage("[<<=] valueOf(n) == operand, ").that(operand).isSameAs(0x7E);
+      assertWithMessage("[<<=] original != operand, ").that(operand).isNotSameInstanceAs(original);
+      assertWithMessage("[<<=] valueOf(n) == operand, ").that(operand).isSameInstanceAs(0x7E);
       assertWithMessage("[<<=] n == operand.value, ").that(operand.intValue()).isEqualTo(0x7E);
     }
 
@@ -284,8 +284,8 @@ public class AutoboxTest {
       Integer original;
       original = operand = -16;
       operand >>= 1;
-      assertWithMessage("[>>=] original != operand, ").that(operand).isNotSameAs(original);
-      assertWithMessage("[>>=] valueOf(n) == operand, ").that(operand).isSameAs(-8);
+      assertWithMessage("[>>=] original != operand, ").that(operand).isNotSameInstanceAs(original);
+      assertWithMessage("[>>=] valueOf(n) == operand, ").that(operand).isSameInstanceAs(-8);
       assertWithMessage("[>>=] n == operand.value, ").that(operand.intValue()).isEqualTo(-8);
     }
 
@@ -294,7 +294,7 @@ public class AutoboxTest {
       Integer original;
       original = operand = -1;
       operand >>>= 1;
-      assertWithMessage("[>>>=] original != operand, ").that(operand).isNotSameAs(original);
+      assertWithMessage("[>>>=] original != operand, ").that(operand).isNotSameInstanceAs(original);
       assertWithMessage("[>>>=] valueOf(n).equals(operand), ")
           .that(operand)
           .isEqualTo(Integer.valueOf(0x7FFFFFFF));
@@ -424,25 +424,25 @@ public class AutoboxTest {
       boxedByte++;
       assertWithMessage("Boxed byte modified in place")
           .that(originalBoxedByte)
-          .isNotSameAs(boxedByte);
+          .isNotSameInstanceAs(boxedByte);
       assertThat((byte) boxedByte).isEqualTo(unboxedByte + 1);
       boxedByte = originalBoxedByte;
       ++boxedByte;
       assertWithMessage("Boxed byte modified in place")
           .that(originalBoxedByte)
-          .isNotSameAs(boxedByte);
+          .isNotSameInstanceAs(boxedByte);
       assertThat((byte) boxedByte).isEqualTo(unboxedByte + 1);
       boxedByte = originalBoxedByte;
       boxedByte--;
       assertWithMessage("Boxed byte modified in place")
           .that(originalBoxedByte)
-          .isNotSameAs(boxedByte);
+          .isNotSameInstanceAs(boxedByte);
       assertThat((byte) boxedByte).isEqualTo(unboxedByte - 1);
       boxedByte = originalBoxedByte;
       --boxedByte;
       assertWithMessage("Boxed byte modified in place")
           .that(originalBoxedByte)
-          .isNotSameAs(boxedByte);
+          .isNotSameInstanceAs(boxedByte);
       assertThat((byte) boxedByte).isEqualTo(unboxedByte - 1);
       boxedByte = originalBoxedByte;
     }
@@ -451,25 +451,25 @@ public class AutoboxTest {
       boxedChar++;
       assertWithMessage("Boxed character modified in place")
           .that(originalBoxedChar)
-          .isNotSameAs(boxedChar);
+          .isNotSameInstanceAs(boxedChar);
       assertThat((char) boxedChar).isEqualTo(unboxedChar + 1);
       boxedChar = originalBoxedChar;
       ++boxedChar;
       assertWithMessage("Boxed character modified in place")
           .that(originalBoxedChar)
-          .isNotSameAs(boxedChar);
+          .isNotSameInstanceAs(boxedChar);
       assertThat((char) boxedChar).isEqualTo(unboxedChar + 1);
       boxedChar = originalBoxedChar;
       boxedChar--;
       assertWithMessage("Boxed character modified in place")
           .that(originalBoxedChar)
-          .isNotSameAs(boxedChar);
+          .isNotSameInstanceAs(boxedChar);
       assertThat((char) boxedChar).isEqualTo(unboxedChar - 1);
       boxedChar = originalBoxedChar;
       --boxedChar;
       assertWithMessage("Boxed character modified in place")
           .that(originalBoxedChar)
-          .isNotSameAs(boxedChar);
+          .isNotSameInstanceAs(boxedChar);
       assertThat((char) boxedChar).isEqualTo(unboxedChar - 1);
       boxedChar = originalBoxedChar;
     }
@@ -478,44 +478,52 @@ public class AutoboxTest {
       boxedShort++;
       assertWithMessage("Boxed short modified in place")
           .that(originalBoxedShort)
-          .isNotSameAs(boxedShort);
+          .isNotSameInstanceAs(boxedShort);
       assertThat((short) boxedShort).isEqualTo(unboxedShort + 1);
       boxedShort = originalBoxedShort;
       ++boxedShort;
       assertWithMessage("Boxed short modified in place")
           .that(originalBoxedShort)
-          .isNotSameAs(boxedShort);
+          .isNotSameInstanceAs(boxedShort);
       assertThat((short) boxedShort).isEqualTo(unboxedShort + 1);
       boxedShort = originalBoxedShort;
       boxedShort--;
       assertWithMessage("Boxed short modified in place")
           .that(originalBoxedShort)
-          .isNotSameAs(boxedShort);
+          .isNotSameInstanceAs(boxedShort);
       assertThat((short) boxedShort).isEqualTo(unboxedShort - 1);
       boxedShort = originalBoxedShort;
       --boxedShort;
       assertWithMessage("Boxed short modified in place")
           .that(originalBoxedShort)
-          .isNotSameAs(boxedShort);
+          .isNotSameInstanceAs(boxedShort);
       assertThat((short) boxedShort).isEqualTo(unboxedShort - 1);
       boxedShort = originalBoxedShort;
     }
     {
       Integer originalBoxedInt = boxedInt;
       boxedInt++;
-      assertWithMessage("Boxed int modified in place").that(originalBoxedInt).isNotSameAs(boxedInt);
+      assertWithMessage("Boxed int modified in place")
+          .that(originalBoxedInt)
+          .isNotSameInstanceAs(boxedInt);
       assertThat((int) boxedInt).isEqualTo(unboxedInt + 1);
       boxedInt = originalBoxedInt;
       ++boxedInt;
-      assertWithMessage("Boxed int modified in place").that(originalBoxedInt).isNotSameAs(boxedInt);
+      assertWithMessage("Boxed int modified in place")
+          .that(originalBoxedInt)
+          .isNotSameInstanceAs(boxedInt);
       assertThat((int) boxedInt).isEqualTo(unboxedInt + 1);
       boxedInt = originalBoxedInt;
       boxedInt--;
-      assertWithMessage("Boxed int modified in place").that(originalBoxedInt).isNotSameAs(boxedInt);
+      assertWithMessage("Boxed int modified in place")
+          .that(originalBoxedInt)
+          .isNotSameInstanceAs(boxedInt);
       assertThat((int) boxedInt).isEqualTo(unboxedInt - 1);
       boxedInt = originalBoxedInt;
       --boxedInt;
-      assertWithMessage("Boxed int modified in place").that(originalBoxedInt).isNotSameAs(boxedInt);
+      assertWithMessage("Boxed int modified in place")
+          .that(originalBoxedInt)
+          .isNotSameInstanceAs(boxedInt);
       assertThat((int) boxedInt).isEqualTo(unboxedInt - 1);
       boxedInt = originalBoxedInt;
     }
@@ -524,25 +532,25 @@ public class AutoboxTest {
       boxedLong++;
       assertWithMessage("Boxed long modified in place")
           .that(originalBoxedLong)
-          .isNotSameAs(boxedLong);
+          .isNotSameInstanceAs(boxedLong);
       assertThat((long) boxedLong).isEqualTo(unboxedLong + 1);
       boxedLong = originalBoxedLong;
       ++boxedLong;
       assertWithMessage("Boxed long modified in place")
           .that(originalBoxedLong)
-          .isNotSameAs(boxedLong);
+          .isNotSameInstanceAs(boxedLong);
       assertThat((long) boxedLong).isEqualTo(unboxedLong + 1);
       boxedLong = originalBoxedLong;
       boxedLong--;
       assertWithMessage("Boxed long modified in place")
           .that(originalBoxedLong)
-          .isNotSameAs(boxedLong);
+          .isNotSameInstanceAs(boxedLong);
       assertThat((long) boxedLong).isEqualTo(unboxedLong - 1);
       boxedLong = originalBoxedLong;
       --boxedLong;
       assertWithMessage("Boxed long modified in place")
           .that(originalBoxedLong)
-          .isNotSameAs(boxedLong);
+          .isNotSameInstanceAs(boxedLong);
       assertThat((long) boxedLong).isEqualTo(unboxedLong - 1);
       boxedLong = originalBoxedLong;
     }
@@ -551,25 +559,25 @@ public class AutoboxTest {
       boxedFloat++;
       assertWithMessage("Boxed float modified in place")
           .that(originalBoxedFloat)
-          .isNotSameAs(boxedFloat);
+          .isNotSameInstanceAs(boxedFloat);
       assertThat((float) boxedFloat).isEqualTo(unboxedFloat + 1);
       boxedFloat = originalBoxedFloat;
       ++boxedFloat;
       assertWithMessage("Boxed float modified in place")
           .that(originalBoxedFloat)
-          .isNotSameAs(boxedFloat);
+          .isNotSameInstanceAs(boxedFloat);
       assertThat((float) boxedFloat).isEqualTo(unboxedFloat + 1);
       boxedFloat = originalBoxedFloat;
       boxedFloat--;
       assertWithMessage("Boxed float modified in place")
           .that(originalBoxedFloat)
-          .isNotSameAs(boxedFloat);
+          .isNotSameInstanceAs(boxedFloat);
       assertThat((float) boxedFloat).isEqualTo(unboxedFloat - 1);
       boxedFloat = originalBoxedFloat;
       --boxedFloat;
       assertWithMessage("Boxed float modified in place")
           .that(originalBoxedFloat)
-          .isNotSameAs(boxedFloat);
+          .isNotSameInstanceAs(boxedFloat);
       assertThat((float) boxedFloat).isEqualTo(unboxedFloat - 1);
       boxedFloat = originalBoxedFloat;
     }
@@ -578,25 +586,25 @@ public class AutoboxTest {
       boxedDouble++;
       assertWithMessage("Boxed double modified in place")
           .that(originalBoxedDouble)
-          .isNotSameAs(boxedDouble);
+          .isNotSameInstanceAs(boxedDouble);
       assertThat((double) boxedDouble).isEqualTo(unboxedDouble + 1);
       boxedDouble = originalBoxedDouble;
       ++boxedDouble;
       assertWithMessage("Boxed double modified in place")
           .that(originalBoxedDouble)
-          .isNotSameAs(boxedDouble);
+          .isNotSameInstanceAs(boxedDouble);
       assertThat((double) boxedDouble).isEqualTo(unboxedDouble + 1);
       boxedDouble = originalBoxedDouble;
       boxedDouble--;
       assertWithMessage("Boxed double modified in place")
           .that(originalBoxedDouble)
-          .isNotSameAs(boxedDouble);
+          .isNotSameInstanceAs(boxedDouble);
       assertThat((double) boxedDouble).isEqualTo(unboxedDouble - 1);
       boxedDouble = originalBoxedDouble;
       --boxedDouble;
       assertWithMessage("Boxed double modified in place")
           .that(originalBoxedDouble)
-          .isNotSameAs(boxedDouble);
+          .isNotSameInstanceAs(boxedDouble);
       assertThat((double) boxedDouble).isEqualTo(unboxedDouble - 1);
       boxedDouble = originalBoxedDouble;
     }

@@ -1768,10 +1768,10 @@ public class Java8Test {
   @Test
   public void testJsVarargsLambda() {
     VarargsFunction function = (i, args) -> args[i];
-    assertThat((Object) function.f(1, "a", "b", "c")).isSameAs("b");
-    assertThat((Object) callFromJSNI(function)).isSameAs("c");
+    assertThat((Object) function.f(1, "a", "b", "c")).isSameInstanceAs("b");
+    assertThat((Object) callFromJSNI(function)).isSameInstanceAs("c");
     String[] pars = new String[] {"a", "b", "c"};
-    assertThat((Object) function.f(0, pars)).isSameAs("a");
+    assertThat((Object) function.f(0, pars)).isSameInstanceAs("a");
   }
 
   private static <T> T m(T s) {
@@ -1963,7 +1963,7 @@ public class Java8Test {
 
   @Test
   public void testNativeJsOverlay_lambda() {
-    assertThat((Object) NativeClassWithJsOverlay.m("Hello")).isSameAs("Hello");
+    assertThat((Object) NativeClassWithJsOverlay.m("Hello")).isSameInstanceAs("Hello");
   }
 
   interface IntefaceWithDefaultMethodAndLambda {

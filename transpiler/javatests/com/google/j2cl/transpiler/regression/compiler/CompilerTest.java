@@ -1400,11 +1400,11 @@ public class CompilerTest {
   }
 
   private static <U, V> void assertSame(String message, U expected, V value) {
-    assertWithMessage(message).that(value).isSameAs(expected);
+    assertWithMessage(message).that(value).isSameInstanceAs(expected);
   }
 
   private static <U, V> void assertSame(U expected, V value) {
-    assertThat(value).isSameAs(expected);
+    assertThat(value).isSameInstanceAs(expected);
   }
 
   private static <U> void assertNotNull(U value) {
@@ -1416,11 +1416,11 @@ public class CompilerTest {
   }
 
   private static <U, V> void assertNotSame(String message, U expected, V value) {
-    assertWithMessage(message).that(value).isNotSameAs(expected);
+    assertWithMessage(message).that(value).isNotSameInstanceAs(expected);
   }
 
   private static <U, V> void assertNotSame(U expected, V value) {
-    assertThat(value).isNotSameAs(expected);
+    assertThat(value).isNotSameInstanceAs(expected);
   }
 }
 
