@@ -45,6 +45,9 @@ def js_devserver(
         compilation_level = "BUNDLE",
         defs = entry_point_defs,
         deps = deps,
+        # For J2CL it is in impractical to embed all source into sourcemap since
+        # it bloats sourcemaps as well as it slows down bundling.
+        nodefs = ["--source_map_include_content"],
     )
 
     web_library(
