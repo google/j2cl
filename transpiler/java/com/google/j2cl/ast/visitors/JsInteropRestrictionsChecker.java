@@ -105,21 +105,6 @@ public class JsInteropRestrictionsChecker {
     }
   }
 
-  private void checkQualifiedJsName(Type type) {
-    if (type.getDeclaration().isStarOrUnknown()) {
-      if (!type.isNative() || !type.isInterface() || !JsUtils.isGlobal(type.getJsNamespace())) {
-        problems.error(
-            type.getSourcePosition(),
-            "Only native interfaces in the global namespace can be named '%s'.",
-            type.getSimpleJsName());
-      }
-      return;
-    }
-
-    checkJsName(type);
-    checkJsNamespace(type);
-  }
-
   private void checkType(Type type) {
     TypeDeclaration typeDeclaration = type.getDeclaration();
 
@@ -917,7 +902,11 @@ public class JsInteropRestrictionsChecker {
       checkUnusableByJs(member);
     }
 
-    checkQualifiedJsName(member);
+    if (!checkQualifiedJsName(member)) {
+      // Do not check for name collisions if the member has an invalid name.
+      // This avoids reporting cascading error that are irrelevant.
+      return;
+    }
 
     if (isInstanceJsMember(memberDescriptor)) {
       checkNameCollisions(instanceJsMembersByName, member);
@@ -1007,24 +996,41 @@ public class JsInteropRestrictionsChecker {
     }
   }
 
-  private void checkQualifiedJsName(Member member) {
-    if (member.isConstructor()) {
-      // Constructors always inherit their name and namespace from the enclosing type.
-      // The corresponding checks are done for the type separately.
+  private void checkQualifiedJsName(Type type) {
+    if (type.getDeclaration().isStarOrUnknown()) {
+      if (!type.isNative() || !type.isInterface() || !JsUtils.isGlobal(type.getJsNamespace())) {
+        problems.error(
+            type.getSourcePosition(),
+            "Only native interfaces in the global namespace can be named '%s'.",
+            type.getSimpleJsName());
+      }
       return;
     }
 
-    checkJsName(member);
+    checkJsName(type);
+    checkJsNamespace(type);
+  }
+
+  private boolean checkQualifiedJsName(Member member) {
+    if (member.isConstructor()) {
+      // Constructors always inherit their name and namespace from the enclosing type.
+      // The corresponding checks are done for the type separately.
+      return true;
+    }
+
+    if (!checkJsName(member)) {
+      return false;
+    }
 
     if (member.getJsNamespace() == null) {
-      return;
+      return true;
     }
 
     if (member
         .getJsNamespace()
         .equals(member.getDescriptor().getEnclosingTypeDescriptor().getQualifiedJsName())) {
       // Namespace set by the enclosing type has already been checked.
-      return;
+      return true;
     }
 
     if (!member.isStatic()) {
@@ -1032,7 +1038,7 @@ public class JsInteropRestrictionsChecker {
           member.getSourcePosition(),
           "Instance member '%s' cannot declare a namespace.",
           member.getReadableDescription());
-      return;
+      return false;
     }
 
     if (!member.isNative()) {
@@ -1040,10 +1046,10 @@ public class JsInteropRestrictionsChecker {
           member.getSourcePosition(),
           "Non-native member '%s' cannot declare a namespace.",
           member.getReadableDescription());
-      return;
+      return false;
     }
 
-    checkJsNamespace(member);
+    return checkJsNamespace(member);
   }
 
   private void checkJsOverlay(Member member) {
@@ -1366,29 +1372,31 @@ public class JsInteropRestrictionsChecker {
     }
   }
 
-  private <T extends HasJsNameInfo & HasSourcePosition & HasReadableDescription> void checkJsName(
-      T item) {
+  private <T extends HasJsNameInfo & HasSourcePosition & HasReadableDescription>
+      boolean checkJsName(T item) {
     String jsName = item.getSimpleJsName();
     if (jsName == null || JsUtils.isValidJsIdentifier(jsName)) {
-      return;
+      return true;
     }
     if (item.isNative() && JsUtils.isValidJsQualifiedName(jsName)) {
-      return;
+      return true;
     }
 
     errorInvalidName(jsName, "name", item);
+    return false;
   }
 
   private <T extends HasJsNameInfo & HasSourcePosition & HasReadableDescription>
-      void checkJsNamespace(T item) {
+      boolean checkJsNamespace(T item) {
     String jsNamespace = item.getJsNamespace();
     if (jsNamespace == null
         || JsUtils.isGlobal(jsNamespace)
         || JsUtils.isValidJsQualifiedName(jsNamespace)) {
-      return;
+      return true;
     }
 
     errorInvalidName(jsNamespace, "namespace", item);
+    return false;
   }
 
   private <T extends HasJsNameInfo & HasSourcePosition & HasReadableDescription>

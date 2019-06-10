@@ -1280,8 +1280,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "'void Buggy.o()' cannot have an empty namespace.",
             "Instance member 'Buggy.p' cannot declare a namespace.",
             "Instance member 'void Buggy.q()' cannot declare a namespace.",
-            // TODO(b/134589091): uncomment when bug is fixed.
-            // "Instance member 'void Buggy.r()' cannot declare a namespace.",
+            "Instance member 'void Buggy.r()' cannot declare a namespace.",
             "'NativeClass.n' has invalid namespace 's^'.",
             "Non-native member 'JsTypeOnWindow.r' cannot declare a namespace.",
             "Non-native member 'void JsTypeOnWindow.s()' cannot declare a namespace.",

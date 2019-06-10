@@ -751,7 +751,9 @@ class JdtUtils {
   private static JsInfo computeJsInfo(IMethodBinding methodBinding) {
     JsInfo originalJsInfo = JsInteropUtils.getJsInfo(methodBinding);
 
-    if (originalJsInfo.isJsOverlay() || originalJsInfo.getJsName() != null) {
+    if (originalJsInfo.isJsOverlay()
+        || originalJsInfo.getJsName() != null
+        || originalJsInfo.getJsNamespace() != null) {
       // Do not examine overridden methods if the method is marked as JsOverlay or it has a JsMember
       // annotation that customizes the name.
       return originalJsInfo;
