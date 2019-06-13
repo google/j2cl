@@ -394,6 +394,19 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 + "cannot both use the same JavaScript name 'show'.");
   }
 
+  public void testCollidingJsMethodWithObjectMethod() {
+    assertTranspileFails(
+            "Buggy",
+            "import jsinterop.annotations.*;",
+            "interface Buggy {",
+            "  @JsMethod(name = \"equals\")",
+            "  boolean notEquals(Object o);",
+            "}")
+        .assertErrorsWithoutSourcePosition(
+            "'boolean Buggy.notEquals(Object)' and 'boolean Object.equals(Object)' cannot both use "
+                + "the same JavaScript name 'equals'.");
+  }
+
   public void testCollidingMethodToMethodJsTypeFails() {
     assertTranspileFails(
             "Buggy",

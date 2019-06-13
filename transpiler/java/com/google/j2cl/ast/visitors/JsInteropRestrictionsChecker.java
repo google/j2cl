@@ -1748,8 +1748,16 @@ public class JsInteropRestrictionsChecker {
       return LinkedHashMultimap.create();
     }
 
+    // The supertype of an interface is java.lang.Object. java.lang.Object methods need to be
+    // considered when checking for name collisions.
+    // TODO(b/135140069): remove if the model starts including java.lang.Object as the supertype of
+    // interfaces.
+    DeclaredTypeDescriptor superTypeDescriptor =
+        typeDescriptor.isInterface() && !typeDescriptor.isNative()
+            ? TypeDescriptors.get().javaLangObject
+            : typeDescriptor.getSuperTypeDescriptor();
     Multimap<String, MemberDescriptor> instanceMembersByName =
-        collectInstanceNames(typeDescriptor.getSuperTypeDescriptor());
+        collectInstanceNames(superTypeDescriptor);
     for (MemberDescriptor member : typeDescriptor.getDeclaredMemberDescriptors()) {
       if (isInstanceJsMember(member)) {
         addMember(instanceMembersByName, member);

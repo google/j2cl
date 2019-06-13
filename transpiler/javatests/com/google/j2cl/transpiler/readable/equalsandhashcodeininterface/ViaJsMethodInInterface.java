@@ -16,7 +16,10 @@
 package com.google.j2cl.transpiler.readable.equalsandhashcodeininterface;
 
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsType;
 
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
 public interface ViaJsMethodInInterface {
 
   @JsMethod(name = "equals")
