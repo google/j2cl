@@ -14,8 +14,10 @@ j2cl_library(
     name = "foo",
     # Src's JUST the Foo class.
     srcs = ["Foo.java"],
-    _js_deps = [":native_types"],
-    deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
+    deps = [
+        ":native_types",
+        "//third_party:gwt-jsinterop-annotations-j2cl",
+    ],
 )
 
 # Creates targets

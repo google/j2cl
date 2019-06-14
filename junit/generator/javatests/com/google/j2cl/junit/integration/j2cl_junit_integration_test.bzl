@@ -42,7 +42,7 @@ _DEFAULT_JAVA_DEPS = [
     "//junit/generator/javatests/com/google/j2cl/junit/integration/testlogger:testlogger",
 ]
 
-def j2cl_test_integration_test_data(name, deps = [], extra_defs = [], _js_deps = [], native_srcs = []):
+def j2cl_test_integration_test_data(name, deps = [], extra_defs = [], native_srcs = [], native_deps = []):
     srcs = ["%s.java" % name]
     test_class = "%s.%s" % (get_java_package(native.package_name()), name)
     tags = ["manual", "notap"]
@@ -56,8 +56,8 @@ def j2cl_test_integration_test_data(name, deps = [], extra_defs = [], _js_deps =
         srcs = srcs,
         tags = tags,
         deps = deps,
-        _js_deps = _js_deps,
         native_srcs = native_srcs,
+        native_deps = native_deps,
     )
 
     j2cl_test(
@@ -88,10 +88,10 @@ def j2cl_test_integration_test_data(name, deps = [], extra_defs = [], _js_deps =
 def java_and_j2cl_library(
         name,
         srcs,
-        _js_deps = [],
+        deps = [],
+        native_deps = [],
         tags = [],
         super_srcs = None,
-        deps = [],
         native_srcs = []):
     deps = deps + _DEFAULT_JAVA_DEPS
     j2cl_deps = [dep + "-j2cl" for dep in deps]
@@ -108,11 +108,9 @@ def java_and_j2cl_library(
 
     j2cl_library(
         name = name + "-j2cl",
-        srcs = j2cl_srcs,
-        deps = j2cl_deps,
+        srcs = j2cl_srcs + native_srcs,
+        deps = j2cl_deps + native_deps,
         testonly = 1,
         tags = tags,
         exports = j2cl_deps,
-        _js_deps = _js_deps,
-        native_srcs = native_srcs,
     )

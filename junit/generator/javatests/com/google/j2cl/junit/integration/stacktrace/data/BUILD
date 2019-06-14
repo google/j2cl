@@ -77,8 +77,8 @@ closure_js_library(
 
 j2cl_test_integration_test_data(
     name = "NativeStacktraceTest",
-    _js_deps = [":stacktrace"],
     extra_defs = ["--inline_functions=false"],
+    native_deps = [":stacktrace"],
     deps = ["//third_party:gwt-jsinterop-annotations"],
 )
 
