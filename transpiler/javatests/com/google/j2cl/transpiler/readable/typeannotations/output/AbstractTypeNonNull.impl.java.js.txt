@@ -6,8 +6,6 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let AbstractType = goog.forwardDeclare('com.google.j2cl.transpiler.readable.typeannotations.AbstractType$impl');
-let List = goog.forwardDeclare('java.util.List$impl');
-let Map = goog.forwardDeclare('java.util.Map$impl');
 
 
 /**
@@ -29,36 +27,6 @@ class AbstractTypeNonNull extends j_l_Object {
   $ctor__com_google_j2cl_transpiler_readable_typeannotations_AbstractTypeNonNull__() {
     this.$ctor__java_lang_Object__();
   }
-
-  /**
-   * @abstract
-   * @override
-   * @param {!List<!Map<!Array<string>, Map<Array<!List<string>>,
-   *     !Array<?string>>>>} arg0
-   * @return {!List<!AbstractType>}
-   * @public
-   */
-  m_m__java_util_List(arg0) {}
-
-  /**
-   * @abstract
-   * @override
-   * @param {string} arg0
-   * @param {!AbstractType} arg1
-   * @return {!AbstractType}
-   * @public
-   */
-  m_m__java_lang_String__java_lang_Object(arg0, arg1) {}
-
-  /**
-   * @abstract
-   * @override
-   * @param {List<string>} arg0
-   * @param {!AbstractType} arg1
-   * @return {List<!AbstractType>}
-   * @public
-   */
-  m_m__java_util_List__java_lang_Object(arg0, arg1) {}
 
   /**
    * @return {void}

@@ -5,8 +5,6 @@ const I = goog.require('com.google.j2cl.transpiler.readable.bridgemethodshadowed
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
-
 
 /**
  * @abstract
@@ -37,15 +35,6 @@ class B extends j_l_Object {
   m_get__java_lang_Object(consumer) {
     return 'B get B2';
   }
-
-  /**
-   * @abstract
-   * @override
-   * @param {Consumer<?>} arg0
-   * @return {?string}
-   * @public
-   */
-  m_get__java_util_function_Consumer(arg0) {}
 
   /**
    * @return {void}

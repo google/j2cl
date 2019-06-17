@@ -80,7 +80,6 @@ import com.google.j2cl.ast.visitors.NormalizeTypeLiterals;
 import com.google.j2cl.ast.visitors.OptimizeAnonymousInnerClassesToFunctionExpressions;
 import com.google.j2cl.ast.visitors.PackagePrivateMethodsDispatcher;
 import com.google.j2cl.ast.visitors.RemoveUnneededJsDocCasts;
-import com.google.j2cl.ast.visitors.UnimplementedMethodsCreator;
 import com.google.j2cl.ast.visitors.VerifyParamAndArgCounts;
 import com.google.j2cl.ast.visitors.VerifySingleAstReference;
 import com.google.j2cl.ast.visitors.VerifyVariableScoping;
@@ -226,10 +225,6 @@ class J2clTranspiler {
             // to template variables.
             new InsertCastsToTypeBounds(),
 
-            // Dodge OTI limitations.
-            // TODO(b/30365337): remove after JSCompiler stops requiring unnecessary abstract
-            // methods on abstract classes.
-            new UnimplementedMethodsCreator(),
             // TODO(b/72652198): remove the temporary fix once switch to JSCompiler's new type
             // checker.
             new InsertTypeAnnotationOnGenericReturnTypes(),
