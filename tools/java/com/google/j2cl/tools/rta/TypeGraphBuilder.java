@@ -24,7 +24,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.LinkedHashMultiset;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multiset;
-import com.google.j2cl.libraryinfo.LibraryInfo;
 import com.google.j2cl.libraryinfo.MemberInfo;
 import com.google.j2cl.libraryinfo.MethodInvocation;
 import com.google.j2cl.libraryinfo.TypeInfo;
@@ -38,8 +37,8 @@ import java.util.stream.Stream;
 /** Give information about inheritance relationships between types. */
 public class TypeGraphBuilder {
 
-  static List<Type> build(LibraryInfo libraryInfo) {
-    List<Type> types = createTypes(libraryInfo);
+  static List<Type> build(List<TypeInfo> typeInfos) {
+    List<Type> types = createTypes(typeInfos);
 
     LinkedHashMultiset<Type> typesInTopologicalOrder = sortTypesInTopologicalOrder(types);
 
@@ -50,17 +49,17 @@ public class TypeGraphBuilder {
     return types;
   }
 
-  private static List<Type> createTypes(LibraryInfo libraryInfo) {
+  private static List<Type> createTypes(List<TypeInfo> typeInfos) {
     Map<String, Type> typesByName = new HashMap<>();
 
     // Create all types and members.
-    for (TypeInfo typeInfo : libraryInfo.getTypeList()) {
+    for (TypeInfo typeInfo : typeInfos) {
       Type type = Type.buildFrom(typeInfo);
       typesByName.put(type.getName(), type);
     }
 
     // Build cross-references between types and members
-    for (TypeInfo typeInfo : libraryInfo.getTypeList()) {
+    for (TypeInfo typeInfo : typeInfos) {
       Type type = typesByName.get(typeInfo.getTypeId());
       type.setSuperTypes(
           concat(Stream.of(typeInfo.getExtendsType()), typeInfo.getImplementsTypeList().stream())

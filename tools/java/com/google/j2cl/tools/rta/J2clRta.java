@@ -15,8 +15,6 @@
  */
 package com.google.j2cl.tools.rta;
 
-import static com.google.common.base.Preconditions.checkState;
-
 import com.google.common.io.CharSink;
 import com.google.common.io.Files;
 import com.google.j2cl.libraryinfo.LibraryInfo;
@@ -26,9 +24,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
@@ -66,46 +63,23 @@ public class J2clRta {
   List<String> inputs = null;
 
   private void run() {
-    LibraryInfo libraryInfo = mergeCallGraphFiles();
+    List<TypeInfo> typeInfos = collectTypeInfos();
 
-    RtaResult rtaResult = RapidTypeAnalyser.analyse(libraryInfo);
+    RtaResult rtaResult = RapidTypeAnalyser.analyse(typeInfos);
 
     writeToFile(unusedTypesOutputFilePath, rtaResult.getUnusedTypes());
     writeToFile(unusedMembersOutputFilePath, rtaResult.getUnusedMembers());
     writeToFile(removalCodeInfoOutputFilePath, rtaResult.getCodeRemovalInfo());
   }
 
-  private LibraryInfo mergeCallGraphFiles() {
+  private List<TypeInfo> collectTypeInfos() {
     try {
-      Map<String, TypeInfo> typeInfosByName = new HashMap<>();
-
-      // TODO(b/112662982): improve performance by reading file contents in parallel.
+      List<TypeInfo> typeInfos = new ArrayList<>();
       for (String callGraphPath : inputs) {
         LibraryInfo libraryInfo = LibraryInfo.parseFrom(new FileInputStream(callGraphPath));
-
-        // Because J2CL proto emits duplicate sources (see b/36486919), we can see several TypeInfos
-        // with the same name. When we reach that case, check that the TypeInfo are the same and
-        // throw an exception if they are different.
-        // TODO(b/36486919): remove that logic when the bug is fixed.
-        for (TypeInfo typeInfo : libraryInfo.getTypeList()) {
-          String typeId = typeInfo.getTypeId();
-          if (typeInfosByName.containsKey(typeId)) {
-            TypeInfo existingTypeInfo = typeInfosByName.get(typeId);
-            checkState(
-                typeInfo.equals(existingTypeInfo),
-                "Got two different TypeInfo for the same type id.\n"
-                    + "TypeId: [%s]\n"
-                    + "Existing TypeInfo: [%s]\n"
-                    + "New TypeInfo: [%s]",
-                typeId,
-                existingTypeInfo,
-                typeInfo);
-          }
-          typeInfosByName.put(typeId, typeInfo);
-        }
+        typeInfos.addAll(libraryInfo.getTypeList());
       }
-
-      return LibraryInfo.newBuilder().addAllType(typeInfosByName.values()).build();
+      return typeInfos;
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
