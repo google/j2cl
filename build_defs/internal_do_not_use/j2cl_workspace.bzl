@@ -9,7 +9,6 @@ def setup_j2cl_workspace():
 
     versions.check("0.24.0")  # The version J2CL currently have a CI setup for.
 
-
     closure_repositories(
         omit_com_google_protobuf = True,
         omit_com_google_auto_common = True,
@@ -75,6 +74,13 @@ def setup_j2cl_workspace():
     native.maven_jar(
         name = "com_google_truth",
         artifact = "com.google.truth:truth:0.39",
+    )
+
+    # TODO(b/135461024): for now J2CL uses a prepackaged version of javac. But in the future it
+    # might be better to tie in to the Java platform in bazel and control the version there.
+    native.maven_jar(
+        name = "com_sun_tools_javac",
+        artifact = "com.google.errorprone:javac:1.9.0-dev-r2644-1",
     )
 
     # Eclipse JARs listed at
