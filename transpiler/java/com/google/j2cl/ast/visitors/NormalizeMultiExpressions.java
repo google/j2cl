@@ -23,13 +23,11 @@ import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.EmptyStatement;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
-import com.google.j2cl.ast.Literal;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor.MethodOrigin;
 import com.google.j2cl.ast.MultiExpression;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.UnaryExpression;
-import com.google.j2cl.ast.VariableReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -66,10 +64,9 @@ public class NormalizeMultiExpressions extends NormalizationPass {
         // That makes it safe to remove any subexpressions that don't have side effects.
         List<Expression> expressions =
             ((MultiExpression) statement.getExpression())
-                .getExpressions()
-                .stream()
-                .filter(NormalizeMultiExpressions::mayHaveSideEffects)
-                .collect(Collectors.toList());
+                .getExpressions().stream()
+                    .filter(Expression::hasSideEffects)
+                    .collect(Collectors.toList());
 
         if (expressions.isEmpty()) {
           // Eliminate empty multi expressions.
@@ -152,9 +149,5 @@ public class NormalizeMultiExpressions extends NormalizationPass {
       }
       return expression;
     }
-  }
-
-  private static boolean mayHaveSideEffects(Expression expression) {
-    return !(expression instanceof VariableReference || expression instanceof Literal);
   }
 }

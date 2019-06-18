@@ -51,6 +51,11 @@ public abstract class Expression extends Node implements Cloneable<Expression> {
     return false;
   }
 
+  /** Returns true if the expression has side effects. */
+  public boolean hasSideEffects() {
+    return true;
+  }
+
   /**
    * Returns true if the expression can be used in the left hand side of an assignment. {@see JLS
    * 15.26}

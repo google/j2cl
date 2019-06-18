@@ -31,6 +31,11 @@ public abstract class Literal extends Expression {
   }
 
   @Override
+  public boolean hasSideEffects() {
+    return false;
+  }
+
+  @Override
   public boolean areEnclosingParenthesisUnnecessary() {
     return true;
   }

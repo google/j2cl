@@ -85,6 +85,14 @@ public class FieldAccess extends Expression implements MemberReference {
   }
 
   @Override
+  public boolean hasSideEffects() {
+    // Access to captures does not have side effects, all others might.
+    // Access to instance fields might trigger an NPE and access to static fields might trigger
+    // class initialization.
+    return !getTarget().isCapture();
+  }
+
+  @Override
   public boolean isLValue() {
     return true;
   }

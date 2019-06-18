@@ -79,6 +79,7 @@ import com.google.j2cl.ast.visitors.NormalizeTryWithResources;
 import com.google.j2cl.ast.visitors.NormalizeTypeLiterals;
 import com.google.j2cl.ast.visitors.OptimizeAnonymousInnerClassesToFunctionExpressions;
 import com.google.j2cl.ast.visitors.PackagePrivateMethodsDispatcher;
+import com.google.j2cl.ast.visitors.RemoveNoopStatements;
 import com.google.j2cl.ast.visitors.RemoveUnneededJsDocCasts;
 import com.google.j2cl.ast.visitors.VerifyParamAndArgCounts;
 import com.google.j2cl.ast.visitors.VerifySingleAstReference;
@@ -239,8 +240,9 @@ class J2clTranspiler {
             new RemoveUnneededJsDocCasts(),
             new NormalizeJsDocCastExpressions(),
 
-            // Handle await keyword
+            // Handle await keyword.
             new NormalizeJsAwaitMethodInvocations(),
+            new RemoveNoopStatements(),
 
             // Enrich source mapping information for better stack deobfuscation.
             new FilloutMissingSourceMapInformation());

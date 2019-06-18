@@ -51,7 +51,7 @@
 ...      // expected empty body.
     }] => [try {
       throw $Exceptions.toJs(ClassCastException.$create__());
-...
+    } catch (__$exc) {
     }] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testEmptyThrowableCatch"
 [throw new ClassCastException();] => [throw $Exceptions.toJs(ClassCastException.$create__());] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testEmptyThrowableCatch"
 [try {
@@ -68,8 +68,7 @@
 [{
       // expected empty body.
     }] => [if (Exception.$isInstance(__$exc_1)) {
-
-...
+      } else {
       }] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testEmptyThrowableCatch"
 [testEmptyThrowableRethrow] => [m_testEmptyThrowableRethrow__]
 [try {
@@ -175,8 +174,8 @@
 [{
       // expected empty body.
     }] => [if (Exception.$isInstance(__$exc_1)) {
-
-...        throw $Exceptions.toJs(__$exc_1);
+      } else {
+        throw $Exceptions.toJs(__$exc_1);
       }] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testTryWithResource"
 [{
       // expected empty body.
@@ -261,8 +260,8 @@
 [{
       // expected empty body.
     }] => [if (Exception.$isInstance(__$exc_1)) {
-
-...        throw $Exceptions.toJs(__$exc_1);
+      } else {
+        throw $Exceptions.toJs(__$exc_1);
       }] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testTryWithResourceJava9"
 [{
       // expected empty body.
@@ -306,8 +305,8 @@
 [{
         // expected empty body.
       }] => [if (Exception.$isInstance(__$exc_1)) {
-
-...            throw $Exceptions.toJs(__$exc_1);
+          } else {
+            throw $Exceptions.toJs(__$exc_1);
           }] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testNestedTryCatch"
 [{
         // expected empty body.

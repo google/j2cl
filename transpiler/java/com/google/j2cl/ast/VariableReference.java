@@ -56,6 +56,11 @@ public class VariableReference extends Expression {
   }
 
   @Override
+  public boolean hasSideEffects() {
+    return false;
+  }
+
+  @Override
   public boolean isLValue() {
     return true;
   }
