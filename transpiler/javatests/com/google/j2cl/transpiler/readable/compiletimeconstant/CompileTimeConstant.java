@@ -41,4 +41,8 @@ public class CompileTimeConstant {
   public final long G2 = 10000L;
   public final char H2 = 'A';
   public final boolean I2 = G2 > 100;
+
+  {
+    boolean b = I2;
+  }
 }
