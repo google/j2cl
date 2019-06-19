@@ -56,6 +56,11 @@ public abstract class Expression extends Node implements Cloneable<Expression> {
     return true;
   }
 
+  /** Returns true if the expression value can be computed at compile time. */
+  public boolean isCompileTimeConstant() {
+    return false;
+  }
+
   /**
    * Returns true if the expression can be used in the left hand side of an assignment. {@see JLS
    * 15.26}

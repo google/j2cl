@@ -37,6 +37,11 @@ public abstract class UnaryExpression extends Expression {
   public abstract Operator getOperator();
 
   @Override
+  public boolean isCompileTimeConstant() {
+    return !getOperator().hasSideEffect() && getOperand().isCompileTimeConstant();
+  }
+
+  @Override
   public TypeDescriptor getTypeDescriptor() {
     if (getOperator().hasSideEffect()) {
       return operand.getTypeDescriptor();

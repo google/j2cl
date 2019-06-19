@@ -97,6 +97,13 @@ public class BinaryExpression extends Expression {
   }
 
   @Override
+  public boolean isCompileTimeConstant() {
+    return !operator.hasSideEffect()
+        && leftOperand.isCompileTimeConstant()
+        && rightOperand.isCompileTimeConstant();
+  }
+
+  @Override
   public BinaryExpression clone() {
     return newBuilder()
         .setLeftOperand(leftOperand.clone())

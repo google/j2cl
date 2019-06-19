@@ -36,6 +36,11 @@ public abstract class Literal extends Expression {
   }
 
   @Override
+  public boolean isCompileTimeConstant() {
+    return true;
+  }
+
+  @Override
   public boolean areEnclosingParenthesisUnnecessary() {
     return true;
   }

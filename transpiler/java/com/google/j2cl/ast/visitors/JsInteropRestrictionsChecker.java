@@ -46,7 +46,6 @@ import com.google.j2cl.ast.IntersectionTypeDescriptor;
 import com.google.j2cl.ast.JsEnumInfo;
 import com.google.j2cl.ast.JsMemberType;
 import com.google.j2cl.ast.JsUtils;
-import com.google.j2cl.ast.Literal;
 import com.google.j2cl.ast.Member;
 import com.google.j2cl.ast.MemberDescriptor;
 import com.google.j2cl.ast.Method;
@@ -335,7 +334,7 @@ public class JsInteropRestrictionsChecker {
     }
 
     Expression enumFieldValue = getEnumConstantValue(field);
-    if (enumFieldValue == null || enumFieldValue instanceof Literal) {
+    if (enumFieldValue == null || enumFieldValue.isCompileTimeConstant()) {
       return;
     }
     problems.error(

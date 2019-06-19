@@ -68,6 +68,11 @@ public class MultiExpression extends Expression {
   }
 
   @Override
+  public boolean isCompileTimeConstant() {
+    return expressions.stream().allMatch(Expression::isCompileTimeConstant);
+  }
+
+  @Override
   public MultiExpression clone() {
     return MultiExpression.newBuilder().setExpressions(AstUtils.clone(expressions)).build();
   }
