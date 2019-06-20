@@ -201,11 +201,11 @@ public class Main {
 // Main.java.js (transpiled)
 class Main {
   /**
-   * @param {number=} d // Note the "=" here.
+   * @param {number=} i // Note the "=" here.
    * @return {void}
    * @public
    */
-  method1(i, d) {}
+  method1(i) {}
 }
 ```
 
