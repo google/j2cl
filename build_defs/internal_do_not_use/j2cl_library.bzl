@@ -10,14 +10,14 @@ this same j2cl_library build macro.
 
 Example use:
 
-# Effectively creates js_library(name="Foo") containing translated JS.
+# Effectively creates closure_js_library(name="Foo") containing translated JS.
 j2cl_library(
     name = "Foo",
     srcs = glob(["Foo.java"]),
     deps = [":Bar"]  # Directly depends on j2cl_library(name="Bar")
 )
 
-# Effectively creates js_library(name="Bar") containing the results.
+# Effectively creates closure_js_library(name="Bar") containing the results.
 j2cl_library(
     name = "Bar",
     srcs = glob(["Bar.java"]),
