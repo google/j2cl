@@ -35,6 +35,18 @@ alias(
     actual = "//junit/emul/java:junit_emul",
 )
 
+# JUnit async runner (EXPERIMENTAL)
+
+alias(
+    name = "junit_async_runner",
+    actual = "//junit/generator/java/com/google/j2cl/junit/async",
+)
+
+alias(
+    name = "junit_async_runner-j2cl",
+    actual = "//junit/generator/java/com/google/j2cl/junit/async:async-j2cl",
+)
+
 # Optional minifier library for development servers
 alias(
     name = "minifier",

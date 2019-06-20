@@ -1,9 +1,12 @@
 # Description:
 #   Thirdparty dependencies indirection for bazel.
 
-package(default_visibility = ["//:__subpackages__"])
+package(
+    default_visibility = ["//:__subpackages__"],
+    licenses = ["notice"],  # Apache 2.0
+)
 
-licenses(["notice"])  # Apache 2.0
+load("//build_defs:rules.bzl", "j2cl_import", "j2cl_library")
 
 alias(
     name = "guava",
@@ -89,6 +92,12 @@ java_library(
     exports = ["@org_junit//jar"],
 )
 
+j2cl_library(
+    name = "junit-j2cl",
+    testonly = 1,
+    exports = ["//:junit"],
+)
+
 java_library(
     name = "mockito",
     testonly = 1,
@@ -141,8 +150,6 @@ alias(
     name = "gwt-javaemul-internal-annotations",
     actual = "@org_gwtproject_gwt//user:gwt-javaemul-internal-annotations",
 )
-
-load("//build_defs:rules.bzl", "j2cl_import")
 
 j2cl_import(
     name = "gwt-javaemul-internal-annotations-j2cl",
