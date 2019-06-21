@@ -3,7 +3,7 @@ package(
 )
 
 load(
-    "//transpiler/javatests/com/google/j2cl/transpiler:readable/readable_example.bzl",
+    "//transpiler/javatests/com/google/j2cl/transpiler/readable:readable_example.bzl",
     "readable_example",
 )
 
