@@ -32,8 +32,6 @@ def j2cl_library(
         name,
         native_srcs = [],
         generate_build_test = None,
-        _js_deps = [],
-        _js_exports = [],
         **kwargs):
     """Translates Java source into JS source in a js_common.provider target.
 
@@ -59,9 +57,9 @@ def j2cl_library(
     #   _js_exports: Exported JavaScript dependencies.
 
     args = dict(kwargs)
+
     _append(args, "srcs", native_srcs)
-    _append(args, "deps", _js_deps)
-    _append(args, "exports", _js_exports)
+    _append(args, "deps", [])
 
     hidden_arg_names = [i for i in args if i.startswith("_")]
     for arg_name in hidden_arg_names:
