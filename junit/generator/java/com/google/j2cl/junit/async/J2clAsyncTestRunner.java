@@ -61,9 +61,10 @@ public class J2clAsyncTestRunner extends BlockJUnit4ClassRunner {
           + "and an optional 'failure' callback parameter.";
 
   public enum ErrorMessage {
-    TIME_OUT_SET("Method %s() has timeout attribute but doesn't return a promise-like type. "),
-    EXPECTED_EXCEPTION(
-        "Method %s() has expectedException attribute but returns a promise-like type."),
+    ASYNC_NO_TIMEOUT(
+        "Method %s is missing @Test timeout attribute but returns a promise-like" + " type."),
+    ASYNC_HAS_EXPECTED_EXCEPTION(
+        "Method %s has expectedException attribute but returns a promise-like type."),
     NO_THEN_METHOD(
         "Type %s is not a promise-like type. It's missing a 'then' method with two paramters. "
             + PROMISE_LIKE),
@@ -216,12 +217,13 @@ public class J2clAsyncTestRunner extends BlockJUnit4ClassRunner {
 
     // Make sure we have a value greater than zero for test timeout
     if (testAnnotation.timeout() <= 0) {
-      errors.add(makeError(ErrorMessage.TIME_OUT_SET.format(testMethod.getMethod().getName())));
+      errors.add(makeError(ErrorMessage.ASYNC_NO_TIMEOUT.format(testMethod.getMethod().getName())));
     }
 
     if (!testAnnotation.expected().equals(Test.None.class)) {
       errors.add(
-          makeError(ErrorMessage.EXPECTED_EXCEPTION.format(testMethod.getMethod().getName())));
+          makeError(
+              ErrorMessage.ASYNC_HAS_EXPECTED_EXCEPTION.format(testMethod.getMethod().getName())));
     }
   }
 
