@@ -621,7 +621,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
             ? targetTypeDescriptor.getQualifiedJsName()
             : targetTypeDescriptor.getQualifiedBinaryName();
 
-    String obfuscatableName = utilAlias + ".$makeClassName('" + name + "')";
+    String obfuscatableName = "'" + name + "'";
     String className = environment.aliasForType(type.getDeclaration());
     if (targetTypeDescriptor.isInterface()) {
       sourceBuilder.appendln(

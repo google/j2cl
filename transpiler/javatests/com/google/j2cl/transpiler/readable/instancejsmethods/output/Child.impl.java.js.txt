@@ -122,9 +122,7 @@ class Child extends Parent {
 };
 
 $Util.$setClassMetadata(
-    Child,
-    $Util.$makeClassName(
-        'com.google.j2cl.transpiler.readable.instancejsmethods.Child'));
+    Child, 'com.google.j2cl.transpiler.readable.instancejsmethods.Child');
 
 
 MyInterface.$markImplementor(Child);
