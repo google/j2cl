@@ -374,7 +374,7 @@ public class JsInteropRestrictionsChecker {
           messagePrefix + " cannot be static nor JsOverlay nor JsMethod nor JsProperty.");
     }
 
-    if (!isValidJsEnumType(valueTypeDescriptor)) {
+    if (!checkJsEnumCustomValueType(valueTypeDescriptor)) {
       problems.error(
           field.getSourcePosition(),
           messagePrefix + " cannot have the type '%s'.",
@@ -386,7 +386,7 @@ public class JsInteropRestrictionsChecker {
     }
   }
 
-  private boolean isValidJsEnumType(TypeDescriptor valueTypeDescriptor) {
+  private static boolean checkJsEnumCustomValueType(TypeDescriptor valueTypeDescriptor) {
     return (valueTypeDescriptor.isPrimitive()
             && !TypeDescriptors.isPrimitiveLong(valueTypeDescriptor))
         || TypeDescriptors.isJavaLangString(valueTypeDescriptor);
@@ -404,18 +404,7 @@ public class JsInteropRestrictionsChecker {
       return;
     }
 
-    MethodDescriptor constructorDescriptor = constructor.getDescriptor();
-    if (constructorDescriptor.getParameterDescriptors().size() == 1
-        && constructorDescriptor
-            .getParameterDescriptors()
-            .get(0)
-            .getTypeDescriptor()
-            .isSameBaseType(customValueType)
-        && constructor.getBody().getStatements().size() == 1
-        && isValidJsEnumConstructorStatement(
-            constructorDescriptor.getEnclosingTypeDescriptor(),
-            constructor.getBody().getStatements().get(0),
-            constructor.getParameters().get(0))) {
+    if (checkCustomValuedJsEnumConstructor(constructor, customValueType)) {
       return;
     }
     problems.error(
@@ -425,7 +414,49 @@ public class JsInteropRestrictionsChecker {
         constructor.getReadableDescription());
   }
 
-  private boolean isValidJsEnumConstructorStatement(
+  /**
+   * Custom valued JsEnums must have exactly one constructor of the following form:
+   *
+   * <pre>{@code
+   * JsEnumType(CustomValueType parameter) {
+   *   this.value = parameter;
+   * }
+   * }</pre>
+   */
+  private static boolean checkCustomValuedJsEnumConstructor(
+      Method constructor, TypeDescriptor customValueType) {
+    MethodDescriptor constructorDescriptor = constructor.getDescriptor();
+    // Check that the parameter to the constructor is consistent with the custom value type.
+    if (constructorDescriptor.getParameterDescriptors().size() != 1
+        || !constructorDescriptor
+            .getParameterDescriptors()
+            .get(0)
+            .getTypeDescriptor()
+            .isSameBaseType(customValueType)) {
+      // Method declaration is invalid.
+      return false;
+    }
+
+    // Skip the super() call if present to get the only expected statement in the custom valued
+    // JsEnum.
+    int statementIndex = AstUtils.hasSuperCall(constructor) ? 1 : 0;
+
+    // Verify that the body only contains the assignment to the custom value field.
+    return constructor.getBody().getStatements().size() == statementIndex + 1
+        && checkJsEnumConstructorStatement(
+            constructorDescriptor.getEnclosingTypeDescriptor(),
+            constructor.getBody().getStatements().get(statementIndex),
+            constructor.getParameters().get(0));
+  }
+
+  /**
+   * Checks that the only statement in a custom valued JsEnum is of the form:
+   *
+   * <pre>{@code
+   * this.value = parameter;
+   * }</pre>
+   */
+  private static boolean checkJsEnumConstructorStatement(
       DeclaredTypeDescriptor typeDescriptor, Statement statement, Variable valueParameter) {
     if (!(statement instanceof ExpressionStatement)) {
       return false;
