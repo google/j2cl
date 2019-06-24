@@ -1,16 +1,11 @@
 goog.module('com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.SubVarargs');
 
+goog.require('com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.Varargs');
+goog.require('nativebootstrap.Util');
+goog.require('java.lang.Object');
+goog.require('javaemul.internal.InternalPreconditions');
+goog.require('vmbootstrap.Arrays');
+goog.require('vmbootstrap.primitives.$int');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _Varargs = goog.require('com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.Varargs');
-const _$Util = goog.require('nativebootstrap.Util');
-const _j_l_Object = goog.require('java.lang.Object');
-const _InternalPreconditions = goog.require('javaemul.internal.InternalPreconditions');
-const _$Arrays = goog.require('vmbootstrap.Arrays');
-const _$int = goog.require('vmbootstrap.primitives.$int');
-
-
-// Re-exports the implementation.
-var SubVarargs = goog.require('com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.SubVarargs$impl');
+const SubVarargs = goog.require('com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.SubVarargs$impl');
 exports = SubVarargs;

@@ -1,14 +1,9 @@
 goog.module('com.google.j2cl.transpiler.readable.bridgemethodshadowedsignature.C');
 
+goog.require('com.google.j2cl.transpiler.readable.bridgemethodshadowedsignature.B');
+goog.require('com.google.j2cl.transpiler.readable.bridgemethodshadowedsignature.I');
+goog.require('nativebootstrap.Util');
+goog.require('java.util.function.Consumer');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _B = goog.require('com.google.j2cl.transpiler.readable.bridgemethodshadowedsignature.B');
-const _I = goog.require('com.google.j2cl.transpiler.readable.bridgemethodshadowedsignature.I');
-const _$Util = goog.require('nativebootstrap.Util');
-const _Consumer = goog.require('java.util.function.Consumer');
-
-
-// Re-exports the implementation.
-var C = goog.require('com.google.j2cl.transpiler.readable.bridgemethodshadowedsignature.C$impl');
+const C = goog.require('com.google.j2cl.transpiler.readable.bridgemethodshadowedsignature.C$impl');
 exports = C;

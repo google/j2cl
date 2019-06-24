@@ -1,17 +1,12 @@
 goog.module('com.google.j2cl.transpiler.readable.bridgemethodsreturn.B');
 
+goog.require('com.google.j2cl.transpiler.readable.bridgemethodsreturn.A');
+goog.require('com.google.j2cl.transpiler.readable.bridgemethodsreturn.I');
+goog.require('nativebootstrap.Util');
+goog.require('java.lang.Integer');
+goog.require('java.lang.Number');
+goog.require('java.lang.String');
+goog.require('vmbootstrap.Casts');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _A = goog.require('com.google.j2cl.transpiler.readable.bridgemethodsreturn.A');
-const _I = goog.require('com.google.j2cl.transpiler.readable.bridgemethodsreturn.I');
-const _$Util = goog.require('nativebootstrap.Util');
-const _Integer = goog.require('java.lang.Integer');
-const _Number = goog.require('java.lang.Number');
-const _j_l_String = goog.require('java.lang.String');
-const _$Casts = goog.require('vmbootstrap.Casts');
-
-
-// Re-exports the implementation.
-var B = goog.require('com.google.j2cl.transpiler.readable.bridgemethodsreturn.B$impl');
+const B = goog.require('com.google.j2cl.transpiler.readable.bridgemethodsreturn.B$impl');
 exports = B;

@@ -1,15 +1,10 @@
 goog.module('com.google.j2cl.transpiler.readable.markimplementornativetypes.Foo');
 
+goog.require('com.google.j2cl.transpiler.readable.markimplementornativetypes.RegularInterface');
+goog.require('java.lang.Object');
+goog.require('nativebootstrap.Util');
+goog.require('test.foo.MyNativeInterface');
+goog.require('com.google.j2cl.transpiler.readable.markimplementornativetypes.MyNativeInterface.$Overlay');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _RegularInterface = goog.require('com.google.j2cl.transpiler.readable.markimplementornativetypes.RegularInterface');
-const _j_l_Object = goog.require('java.lang.Object');
-const _$Util = goog.require('nativebootstrap.Util');
-const _MyNativeInterface = goog.require('test.foo.MyNativeInterface');
-const _$Overlay = goog.require('com.google.j2cl.transpiler.readable.markimplementornativetypes.MyNativeInterface.$Overlay');
-
-
-// Re-exports the implementation.
-var Foo = goog.require('com.google.j2cl.transpiler.readable.markimplementornativetypes.Foo$impl');
+const Foo = goog.require('com.google.j2cl.transpiler.readable.markimplementornativetypes.Foo$impl');
 exports = Foo;

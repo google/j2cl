@@ -1,15 +1,10 @@
 goog.module('com.google.j2cl.transpiler.readable.jsmethod.JsMethodExample.Sub');
 
+goog.require('com.google.j2cl.transpiler.readable.jsmethod.JsMethodExample.Base');
+goog.require('com.google.j2cl.transpiler.readable.jsmethod.JsMethodExample.I');
+goog.require('nativebootstrap.Util');
+goog.require('java.lang.String');
+goog.require('vmbootstrap.Casts');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _Base = goog.require('com.google.j2cl.transpiler.readable.jsmethod.JsMethodExample.Base');
-const _I = goog.require('com.google.j2cl.transpiler.readable.jsmethod.JsMethodExample.I');
-const _$Util = goog.require('nativebootstrap.Util');
-const _j_l_String = goog.require('java.lang.String');
-const _$Casts = goog.require('vmbootstrap.Casts');
-
-
-// Re-exports the implementation.
-var Sub = goog.require('com.google.j2cl.transpiler.readable.jsmethod.JsMethodExample.Sub$impl');
+const Sub = goog.require('com.google.j2cl.transpiler.readable.jsmethod.JsMethodExample.Sub$impl');
 exports = Sub;

@@ -1,12 +1,7 @@
 goog.module('com.google.j2cl.transpiler.readable.packageprivatemethods.package2.SubChild');
 
+goog.require('com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Child');
+goog.require('nativebootstrap.Util');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _Child = goog.require('com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Child');
-const _$Util = goog.require('nativebootstrap.Util');
-
-
-// Re-exports the implementation.
-var SubChild = goog.require('com.google.j2cl.transpiler.readable.packageprivatemethods.package2.SubChild$impl');
+const SubChild = goog.require('com.google.j2cl.transpiler.readable.packageprivatemethods.package2.SubChild$impl');
 exports = SubChild;

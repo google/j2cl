@@ -1,15 +1,10 @@
 goog.module('com.google.j2cl.transpiler.readable.jsasync.Main.InterfaceWithAsyncDefaultMethod');
 
+goog.require('nativebootstrap.Util');
+goog.require('com.google.j2cl.transpiler.readable.jsasync.Main.IThenable.$Overlay');
+goog.require('com.google.j2cl.transpiler.readable.jsasync.Main.Promise.$Overlay');
+goog.require('java.lang.Integer');
+goog.require('vmbootstrap.Casts');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _$Util = goog.require('nativebootstrap.Util');
-const _$Overlay = goog.require('com.google.j2cl.transpiler.readable.jsasync.Main.IThenable.$Overlay');
-const _Promise_$Overlay = goog.require('com.google.j2cl.transpiler.readable.jsasync.Main.Promise.$Overlay');
-const _Integer = goog.require('java.lang.Integer');
-const _$Casts = goog.require('vmbootstrap.Casts');
-
-
-// Re-exports the implementation.
-var InterfaceWithAsyncDefaultMethod = goog.require('com.google.j2cl.transpiler.readable.jsasync.Main.InterfaceWithAsyncDefaultMethod$impl');
+const InterfaceWithAsyncDefaultMethod = goog.require('com.google.j2cl.transpiler.readable.jsasync.Main.InterfaceWithAsyncDefaultMethod$impl');
 exports = InterfaceWithAsyncDefaultMethod;

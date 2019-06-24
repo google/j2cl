@@ -1,15 +1,10 @@
 goog.module('com.google.j2cl.transpiler.readable.simplebridgemethods.Subclass');
 
+goog.require('com.google.j2cl.transpiler.readable.simplebridgemethods.Superclass');
+goog.require('nativebootstrap.Util');
+goog.require('java.lang.AssertionError');
+goog.require('java.lang.Error');
+goog.require('vmbootstrap.Casts');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _Superclass = goog.require('com.google.j2cl.transpiler.readable.simplebridgemethods.Superclass');
-const _$Util = goog.require('nativebootstrap.Util');
-const _AssertionError = goog.require('java.lang.AssertionError');
-const _Error = goog.require('java.lang.Error');
-const _$Casts = goog.require('vmbootstrap.Casts');
-
-
-// Re-exports the implementation.
-var Subclass = goog.require('com.google.j2cl.transpiler.readable.simplebridgemethods.Subclass$impl');
+const Subclass = goog.require('com.google.j2cl.transpiler.readable.simplebridgemethods.Subclass$impl');
 exports = Subclass;

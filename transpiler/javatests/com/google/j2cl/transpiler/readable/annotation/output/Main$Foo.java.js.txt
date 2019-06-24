@@ -1,12 +1,7 @@
 goog.module('com.google.j2cl.transpiler.readable.annotation.Main.Foo');
 
+goog.require('java.lang.annotation.Annotation');
+goog.require('nativebootstrap.Util');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _Annotation = goog.require('java.lang.annotation.Annotation');
-const _$Util = goog.require('nativebootstrap.Util');
-
-
-// Re-exports the implementation.
-var Foo = goog.require('com.google.j2cl.transpiler.readable.annotation.Main.Foo$impl');
+const Foo = goog.require('com.google.j2cl.transpiler.readable.annotation.Main.Foo$impl');
 exports = Foo;

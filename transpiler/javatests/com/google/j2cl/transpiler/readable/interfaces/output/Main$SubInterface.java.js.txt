@@ -1,13 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.interfaces.Main.SubInterface');
 
+goog.require('com.google.j2cl.transpiler.readable.interfaces.Main.Interface');
+goog.require('nativebootstrap.Util');
+goog.require('com.google.j2cl.transpiler.readable.interfaces.Main.SubInterface.$LambdaAdaptor');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _Interface = goog.require('com.google.j2cl.transpiler.readable.interfaces.Main.Interface');
-const _$Util = goog.require('nativebootstrap.Util');
-const _$LambdaAdaptor = goog.require('com.google.j2cl.transpiler.readable.interfaces.Main.SubInterface.$LambdaAdaptor');
-
-
-// Re-exports the implementation.
-var SubInterface = goog.require('com.google.j2cl.transpiler.readable.interfaces.Main.SubInterface$impl');
+const SubInterface = goog.require('com.google.j2cl.transpiler.readable.interfaces.Main.SubInterface$impl');
 exports = SubInterface;

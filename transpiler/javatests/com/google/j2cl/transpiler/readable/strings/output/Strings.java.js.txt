@@ -1,15 +1,10 @@
 goog.module('com.google.j2cl.transpiler.readable.strings.Strings');
 
+goog.require('java.lang.Object');
+goog.require('nativebootstrap.Util');
+goog.require('com.google.j2cl.transpiler.readable.strings.Strings.StringHolder');
+goog.require('java.lang.String');
+goog.require('nativebootstrap.Long');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _j_l_Object = goog.require('java.lang.Object');
-const _$Util = goog.require('nativebootstrap.Util');
-const _StringHolder = goog.require('com.google.j2cl.transpiler.readable.strings.Strings.StringHolder');
-const _j_l_String = goog.require('java.lang.String');
-const _$Long = goog.require('nativebootstrap.Long');
-
-
-// Re-exports the implementation.
-var Strings = goog.require('com.google.j2cl.transpiler.readable.strings.Strings$impl');
+const Strings = goog.require('com.google.j2cl.transpiler.readable.strings.Strings$impl');
 exports = Strings;

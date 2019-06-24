@@ -1,14 +1,9 @@
 goog.module('com.google.j2cl.transpiler.readable.markimplementornativetypes.SubNativeInterface');
 
+goog.require('com.google.j2cl.transpiler.readable.markimplementornativetypes.RegularInterface');
+goog.require('nativebootstrap.Util');
+goog.require('test.foo.MyNativeInterface');
+goog.require('com.google.j2cl.transpiler.readable.markimplementornativetypes.MyNativeInterface.$Overlay');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _RegularInterface = goog.require('com.google.j2cl.transpiler.readable.markimplementornativetypes.RegularInterface');
-const _$Util = goog.require('nativebootstrap.Util');
-const _MyNativeInterface = goog.require('test.foo.MyNativeInterface');
-const _$Overlay = goog.require('com.google.j2cl.transpiler.readable.markimplementornativetypes.MyNativeInterface.$Overlay');
-
-
-// Re-exports the implementation.
-var SubNativeInterface = goog.require('com.google.j2cl.transpiler.readable.markimplementornativetypes.SubNativeInterface$impl');
+const SubNativeInterface = goog.require('com.google.j2cl.transpiler.readable.markimplementornativetypes.SubNativeInterface$impl');
 exports = SubNativeInterface;

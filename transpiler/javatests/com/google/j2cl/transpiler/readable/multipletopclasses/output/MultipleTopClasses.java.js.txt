@@ -1,12 +1,7 @@
 goog.module('com.google.j2cl.transpiler.readable.multipletopclasses.MultipleTopClasses');
 
+goog.require('com.google.j2cl.transpiler.readable.multipletopclasses.AnotherClass');
+goog.require('nativebootstrap.Util');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _AnotherClass = goog.require('com.google.j2cl.transpiler.readable.multipletopclasses.AnotherClass');
-const _$Util = goog.require('nativebootstrap.Util');
-
-
-// Re-exports the implementation.
-var MultipleTopClasses = goog.require('com.google.j2cl.transpiler.readable.multipletopclasses.MultipleTopClasses$impl');
+const MultipleTopClasses = goog.require('com.google.j2cl.transpiler.readable.multipletopclasses.MultipleTopClasses$impl');
 exports = MultipleTopClasses;

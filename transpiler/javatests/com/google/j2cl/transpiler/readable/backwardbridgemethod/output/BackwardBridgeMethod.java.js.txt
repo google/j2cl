@@ -1,15 +1,10 @@
 goog.module('com.google.j2cl.transpiler.readable.backwardbridgemethod.BackwardBridgeMethod');
 
+goog.require('com.google.j2cl.transpiler.readable.backwardbridgemethod.C');
+goog.require('com.google.j2cl.transpiler.readable.backwardbridgemethod.I');
+goog.require('nativebootstrap.Util');
+goog.require('java.lang.String');
+goog.require('vmbootstrap.Casts');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _C = goog.require('com.google.j2cl.transpiler.readable.backwardbridgemethod.C');
-const _I = goog.require('com.google.j2cl.transpiler.readable.backwardbridgemethod.I');
-const _$Util = goog.require('nativebootstrap.Util');
-const _j_l_String = goog.require('java.lang.String');
-const _$Casts = goog.require('vmbootstrap.Casts');
-
-
-// Re-exports the implementation.
-var BackwardBridgeMethod = goog.require('com.google.j2cl.transpiler.readable.backwardbridgemethod.BackwardBridgeMethod$impl');
+const BackwardBridgeMethod = goog.require('com.google.j2cl.transpiler.readable.backwardbridgemethod.BackwardBridgeMethod$impl');
 exports = BackwardBridgeMethod;

@@ -1,12 +1,7 @@
 goog.module('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.StringList');
 
+goog.require('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.AbstractStringList');
+goog.require('nativebootstrap.Util');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _AbstractStringList = goog.require('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.AbstractStringList');
-const _$Util = goog.require('nativebootstrap.Util');
-
-
-// Re-exports the implementation.
-var StringList = goog.require('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.StringList$impl');
+const StringList = goog.require('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.StringList$impl');
 exports = StringList;

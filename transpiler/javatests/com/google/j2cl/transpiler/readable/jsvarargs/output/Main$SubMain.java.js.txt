@@ -1,15 +1,10 @@
 goog.module('com.google.j2cl.transpiler.readable.jsvarargs.Main.SubMain');
 
+goog.require('com.google.j2cl.transpiler.readable.jsvarargs.Main');
+goog.require('nativebootstrap.Util');
+goog.require('javaemul.internal.InternalPreconditions');
+goog.require('vmbootstrap.Arrays');
+goog.require('vmbootstrap.primitives.$int');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _Main = goog.require('com.google.j2cl.transpiler.readable.jsvarargs.Main');
-const _$Util = goog.require('nativebootstrap.Util');
-const _InternalPreconditions = goog.require('javaemul.internal.InternalPreconditions');
-const _$Arrays = goog.require('vmbootstrap.Arrays');
-const _$int = goog.require('vmbootstrap.primitives.$int');
-
-
-// Re-exports the implementation.
-var SubMain = goog.require('com.google.j2cl.transpiler.readable.jsvarargs.Main.SubMain$impl');
+const SubMain = goog.require('com.google.j2cl.transpiler.readable.jsvarargs.Main.SubMain$impl');
 exports = SubMain;

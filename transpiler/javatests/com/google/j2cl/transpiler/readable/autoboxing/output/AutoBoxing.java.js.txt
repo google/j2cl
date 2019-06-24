@@ -1,30 +1,25 @@
 goog.module('com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing');
 
+goog.require('java.lang.Object');
+goog.require('nativebootstrap.Util');
+goog.require('com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.$1Local');
+goog.require('com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.$2Local');
+goog.require('java.lang.Boolean');
+goog.require('java.lang.Byte');
+goog.require('java.lang.Character');
+goog.require('java.lang.Comparable');
+goog.require('java.lang.Double');
+goog.require('java.lang.Float');
+goog.require('java.lang.Integer');
+goog.require('java.lang.Long');
+goog.require('java.lang.Short');
+goog.require('nativebootstrap.Equality');
+goog.require('nativebootstrap.Long');
+goog.require('vmbootstrap.Arrays');
+goog.require('vmbootstrap.Asserts');
+goog.require('vmbootstrap.Casts');
+goog.require('vmbootstrap.LongUtils');
+goog.require('vmbootstrap.Primitives');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _j_l_Object = goog.require('java.lang.Object');
-const _$Util = goog.require('nativebootstrap.Util');
-const _$1Local = goog.require('com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.$1Local');
-const _$2Local = goog.require('com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.$2Local');
-const _Boolean = goog.require('java.lang.Boolean');
-const _Byte = goog.require('java.lang.Byte');
-const _Character = goog.require('java.lang.Character');
-const _Comparable = goog.require('java.lang.Comparable');
-const _Double = goog.require('java.lang.Double');
-const _Float = goog.require('java.lang.Float');
-const _Integer = goog.require('java.lang.Integer');
-const _Long = goog.require('java.lang.Long');
-const _Short = goog.require('java.lang.Short');
-const _$Equality = goog.require('nativebootstrap.Equality');
-const _$Long = goog.require('nativebootstrap.Long');
-const _$Arrays = goog.require('vmbootstrap.Arrays');
-const _$Asserts = goog.require('vmbootstrap.Asserts');
-const _$Casts = goog.require('vmbootstrap.Casts');
-const _$LongUtils = goog.require('vmbootstrap.LongUtils');
-const _$Primitives = goog.require('vmbootstrap.Primitives');
-
-
-// Re-exports the implementation.
-var AutoBoxing = goog.require('com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing$impl');
+const AutoBoxing = goog.require('com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing$impl');
 exports = AutoBoxing;

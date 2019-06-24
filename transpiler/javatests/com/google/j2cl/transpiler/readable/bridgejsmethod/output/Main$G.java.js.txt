@@ -1,12 +1,7 @@
 goog.module('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.G');
 
+goog.require('nativebootstrap.Util');
+goog.require('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.G.$LambdaAdaptor');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _$Util = goog.require('nativebootstrap.Util');
-const _$LambdaAdaptor = goog.require('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.G.$LambdaAdaptor');
-
-
-// Re-exports the implementation.
-var G = goog.require('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.G$impl');
+const G = goog.require('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.G$impl');
 exports = G;

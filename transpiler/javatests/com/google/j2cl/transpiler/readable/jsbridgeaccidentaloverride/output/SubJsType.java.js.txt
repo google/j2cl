@@ -1,13 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.SubJsType');
 
+goog.require('com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyInterface');
+goog.require('com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyJsType');
+goog.require('nativebootstrap.Util');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _MyInterface = goog.require('com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyInterface');
-const _MyJsType = goog.require('com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyJsType');
-const _$Util = goog.require('nativebootstrap.Util');
-
-
-// Re-exports the implementation.
-var SubJsType = goog.require('com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.SubJsType$impl');
+const SubJsType = goog.require('com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.SubJsType$impl');
 exports = SubJsType;

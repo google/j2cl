@@ -1,14 +1,9 @@
 goog.module('com.google.j2cl.transpiler.readable.boundedtypesupercall.Main.Bar.$1');
 
+goog.require('com.google.j2cl.transpiler.readable.boundedtypesupercall.Main.Foo');
+goog.require('nativebootstrap.Util');
+goog.require('com.google.j2cl.transpiler.readable.boundedtypesupercall.Main.Bar');
+goog.require('java.lang.Comparable');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _Foo = goog.require('com.google.j2cl.transpiler.readable.boundedtypesupercall.Main.Foo');
-const _$Util = goog.require('nativebootstrap.Util');
-const _Bar = goog.require('com.google.j2cl.transpiler.readable.boundedtypesupercall.Main.Bar');
-const _Comparable = goog.require('java.lang.Comparable');
-
-
-// Re-exports the implementation.
-var $1 = goog.require('com.google.j2cl.transpiler.readable.boundedtypesupercall.Main.Bar.$1$impl');
+const $1 = goog.require('com.google.j2cl.transpiler.readable.boundedtypesupercall.Main.Bar.$1$impl');
 exports = $1;

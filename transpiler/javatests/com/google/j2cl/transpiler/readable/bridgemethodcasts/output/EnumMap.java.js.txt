@@ -1,14 +1,9 @@
 goog.module('com.google.j2cl.transpiler.readable.bridgemethodcasts.EnumMap');
 
+goog.require('com.google.j2cl.transpiler.readable.bridgemethodcasts.AbstractMap');
+goog.require('nativebootstrap.Util');
+goog.require('java.lang.Enum');
+goog.require('vmbootstrap.Casts');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _AbstractMap = goog.require('com.google.j2cl.transpiler.readable.bridgemethodcasts.AbstractMap');
-const _$Util = goog.require('nativebootstrap.Util');
-const _Enum = goog.require('java.lang.Enum');
-const _$Casts = goog.require('vmbootstrap.Casts');
-
-
-// Re-exports the implementation.
-var EnumMap = goog.require('com.google.j2cl.transpiler.readable.bridgemethodcasts.EnumMap$impl');
+const EnumMap = goog.require('com.google.j2cl.transpiler.readable.bridgemethodcasts.EnumMap$impl');
 exports = EnumMap;

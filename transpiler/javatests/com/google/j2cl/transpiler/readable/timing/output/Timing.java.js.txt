@@ -1,17 +1,12 @@
 goog.module('com.google.j2cl.transpiler.readable.timing.Timing');
 
+goog.require('java.lang.Object');
+goog.require('nativebootstrap.Util');
+goog.require('com.google.common.base.Objects');
+goog.require('com.google.common.collect.Lists');
+goog.require('java.lang.String');
+goog.require('java.util.ArrayList');
+goog.require('vmbootstrap.Arrays');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _j_l_Object = goog.require('java.lang.Object');
-const _$Util = goog.require('nativebootstrap.Util');
-const _Objects = goog.require('com.google.common.base.Objects');
-const _Lists = goog.require('com.google.common.collect.Lists');
-const _j_l_String = goog.require('java.lang.String');
-const _ArrayList = goog.require('java.util.ArrayList');
-const _$Arrays = goog.require('vmbootstrap.Arrays');
-
-
-// Re-exports the implementation.
-var Timing = goog.require('com.google.j2cl.transpiler.readable.timing.Timing$impl');
+const Timing = goog.require('com.google.j2cl.transpiler.readable.timing.Timing$impl');
 exports = Timing;

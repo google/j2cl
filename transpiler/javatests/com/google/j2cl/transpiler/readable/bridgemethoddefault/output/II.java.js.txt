@@ -1,12 +1,7 @@
 goog.module('com.google.j2cl.transpiler.readable.bridgemethoddefault.II');
 
+goog.require('com.google.j2cl.transpiler.readable.bridgemethoddefault.I');
+goog.require('nativebootstrap.Util');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _I = goog.require('com.google.j2cl.transpiler.readable.bridgemethoddefault.I');
-const _$Util = goog.require('nativebootstrap.Util');
-
-
-// Re-exports the implementation.
-var II = goog.require('com.google.j2cl.transpiler.readable.bridgemethoddefault.II$impl');
+const II = goog.require('com.google.j2cl.transpiler.readable.bridgemethoddefault.II$impl');
 exports = II;

@@ -1,13 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings.InnerClass1');
 
+goog.require('com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings.Parent');
+goog.require('nativebootstrap.Util');
+goog.require('com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _Parent = goog.require('com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings.Parent');
-const _$Util = goog.require('nativebootstrap.Util');
-const _MultipleNestings = goog.require('com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings');
-
-
-// Re-exports the implementation.
-var InnerClass1 = goog.require('com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings.InnerClass1$impl');
+const InnerClass1 = goog.require('com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings.InnerClass1$impl');
 exports = InnerClass1;

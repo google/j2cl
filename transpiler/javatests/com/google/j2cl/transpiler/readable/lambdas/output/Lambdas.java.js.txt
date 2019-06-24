@@ -1,31 +1,26 @@
 goog.module('com.google.j2cl.transpiler.readable.lambdas.Lambdas');
 
+goog.require('java.lang.Object');
+goog.require('nativebootstrap.Util');
+goog.require('com.google.j2cl.transpiler.readable.lambdas.Lambdas.$1');
+goog.require('com.google.j2cl.transpiler.readable.lambdas.Lambdas.$2');
+goog.require('com.google.j2cl.transpiler.readable.lambdas.Lambdas.$3');
+goog.require('com.google.j2cl.transpiler.readable.lambdas.Lambdas.$LambdaAdaptor$1');
+goog.require('com.google.j2cl.transpiler.readable.lambdas.Lambdas.Function');
+goog.require('com.google.j2cl.transpiler.readable.lambdas.Lambdas.Functional');
+goog.require('com.google.j2cl.transpiler.readable.lambdas.Lambdas.FunctionalInterface');
+goog.require('com.google.j2cl.transpiler.readable.lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid');
+goog.require('com.google.j2cl.transpiler.readable.lambdas.Lambdas.GenericFunctionalInterface');
+goog.require('com.google.j2cl.transpiler.readable.lambdas.Lambdas.IdentityFunction');
+goog.require('com.google.j2cl.transpiler.readable.lambdas.Lambdas.JsSupplier');
+goog.require('java.lang.Enum');
+goog.require('java.lang.Error');
+goog.require('java.lang.Integer');
+goog.require('java.lang.Long');
+goog.require('java.lang.Throwable');
+goog.require('nativebootstrap.Equality');
+goog.require('nativebootstrap.Long');
+goog.require('vmbootstrap.Casts');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _j_l_Object = goog.require('java.lang.Object');
-const _$Util = goog.require('nativebootstrap.Util');
-const _$1 = goog.require('com.google.j2cl.transpiler.readable.lambdas.Lambdas.$1');
-const _$2 = goog.require('com.google.j2cl.transpiler.readable.lambdas.Lambdas.$2');
-const _$3 = goog.require('com.google.j2cl.transpiler.readable.lambdas.Lambdas.$3');
-const _$LambdaAdaptor$1 = goog.require('com.google.j2cl.transpiler.readable.lambdas.Lambdas.$LambdaAdaptor$1');
-const _Lambdas_Function = goog.require('com.google.j2cl.transpiler.readable.lambdas.Lambdas.Function');
-const _Functional = goog.require('com.google.j2cl.transpiler.readable.lambdas.Lambdas.Functional');
-const _FunctionalInterface = goog.require('com.google.j2cl.transpiler.readable.lambdas.Lambdas.FunctionalInterface');
-const _FunctionalInterfaceWithMethodReturningVoid = goog.require('com.google.j2cl.transpiler.readable.lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid');
-const _GenericFunctionalInterface = goog.require('com.google.j2cl.transpiler.readable.lambdas.Lambdas.GenericFunctionalInterface');
-const _IdentityFunction = goog.require('com.google.j2cl.transpiler.readable.lambdas.Lambdas.IdentityFunction');
-const _JsSupplier = goog.require('com.google.j2cl.transpiler.readable.lambdas.Lambdas.JsSupplier');
-const _Enum = goog.require('java.lang.Enum');
-const _Error = goog.require('java.lang.Error');
-const _Integer = goog.require('java.lang.Integer');
-const _Long = goog.require('java.lang.Long');
-const _Throwable = goog.require('java.lang.Throwable');
-const _$Equality = goog.require('nativebootstrap.Equality');
-const _$Long = goog.require('nativebootstrap.Long');
-const _$Casts = goog.require('vmbootstrap.Casts');
-
-
-// Re-exports the implementation.
-var Lambdas = goog.require('com.google.j2cl.transpiler.readable.lambdas.Lambdas$impl');
+const Lambdas = goog.require('com.google.j2cl.transpiler.readable.lambdas.Lambdas$impl');
 exports = Lambdas;

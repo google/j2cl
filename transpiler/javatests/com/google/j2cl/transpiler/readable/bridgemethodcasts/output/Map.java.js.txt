@@ -1,12 +1,7 @@
 goog.module('com.google.j2cl.transpiler.readable.bridgemethodcasts.Map');
 
+goog.require('nativebootstrap.Util');
+goog.require('com.google.j2cl.transpiler.readable.bridgemethodcasts.Map.$LambdaAdaptor');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _$Util = goog.require('nativebootstrap.Util');
-const _$LambdaAdaptor = goog.require('com.google.j2cl.transpiler.readable.bridgemethodcasts.Map.$LambdaAdaptor');
-
-
-// Re-exports the implementation.
-var Map = goog.require('com.google.j2cl.transpiler.readable.bridgemethodcasts.Map$impl');
+const Map = goog.require('com.google.j2cl.transpiler.readable.bridgemethodcasts.Map$impl');
 exports = Map;

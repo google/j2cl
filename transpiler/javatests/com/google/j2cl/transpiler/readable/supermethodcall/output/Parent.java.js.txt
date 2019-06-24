@@ -1,12 +1,7 @@
 goog.module('com.google.j2cl.transpiler.readable.supermethodcall.Parent');
 
+goog.require('com.google.j2cl.transpiler.readable.supermethodcall.GrandParent');
+goog.require('nativebootstrap.Util');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _GrandParent = goog.require('com.google.j2cl.transpiler.readable.supermethodcall.GrandParent');
-const _$Util = goog.require('nativebootstrap.Util');
-
-
-// Re-exports the implementation.
-var Parent = goog.require('com.google.j2cl.transpiler.readable.supermethodcall.Parent$impl');
+const Parent = goog.require('com.google.j2cl.transpiler.readable.supermethodcall.Parent$impl');
 exports = Parent;

@@ -1,13 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.longinitialvalue.LongInitialValue');
 
+goog.require('java.lang.Object');
+goog.require('nativebootstrap.Long');
+goog.require('nativebootstrap.Util');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _j_l_Object = goog.require('java.lang.Object');
-const _$Long = goog.require('nativebootstrap.Long');
-const _$Util = goog.require('nativebootstrap.Util');
-
-
-// Re-exports the implementation.
-var LongInitialValue = goog.require('com.google.j2cl.transpiler.readable.longinitialvalue.LongInitialValue$impl');
+const LongInitialValue = goog.require('com.google.j2cl.transpiler.readable.longinitialvalue.LongInitialValue$impl');
 exports = LongInitialValue;

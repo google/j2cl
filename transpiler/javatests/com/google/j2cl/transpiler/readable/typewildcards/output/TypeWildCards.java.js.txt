@@ -1,22 +1,17 @@
 goog.module('com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards');
 
+goog.require('java.lang.Object');
+goog.require('nativebootstrap.Util');
+goog.require('com.google.j2cl.transpiler.readable.typewildcards.GenericType');
+goog.require('com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.A');
+goog.require('com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.Foo');
+goog.require('com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.HasKey');
+goog.require('com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.IntegerSupplier');
+goog.require('com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.Y');
+goog.require('java.lang.Integer');
+goog.require('java.util.List');
+goog.require('java.util.function.Function');
+goog.require('vmbootstrap.Casts');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _j_l_Object = goog.require('java.lang.Object');
-const _$Util = goog.require('nativebootstrap.Util');
-const _GenericType = goog.require('com.google.j2cl.transpiler.readable.typewildcards.GenericType');
-const _A = goog.require('com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.A');
-const _Foo = goog.require('com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.Foo');
-const _HasKey = goog.require('com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.HasKey');
-const _IntegerSupplier = goog.require('com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.IntegerSupplier');
-const _Y = goog.require('com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.Y');
-const _Integer = goog.require('java.lang.Integer');
-const _List = goog.require('java.util.List');
-const _j_u_function_Function = goog.require('java.util.function.Function');
-const _$Casts = goog.require('vmbootstrap.Casts');
-
-
-// Re-exports the implementation.
-var TypeWildCards = goog.require('com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards$impl');
+const TypeWildCards = goog.require('com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards$impl');
 exports = TypeWildCards;

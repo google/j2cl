@@ -1,11 +1,6 @@
 goog.module('com.google.j2cl.transpiler.readable.lambdas.Lambdas.Equals');
 
+goog.require('nativebootstrap.Util');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _$Util = goog.require('nativebootstrap.Util');
-
-
-// Re-exports the implementation.
-var Equals = goog.require('com.google.j2cl.transpiler.readable.lambdas.Lambdas.Equals$impl');
+const Equals = goog.require('com.google.j2cl.transpiler.readable.lambdas.Lambdas.Equals$impl');
 exports = Equals;

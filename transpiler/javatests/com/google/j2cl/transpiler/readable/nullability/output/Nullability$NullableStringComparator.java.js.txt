@@ -1,19 +1,14 @@
 goog.module('com.google.j2cl.transpiler.readable.nullability.Nullability.NullableStringComparator');
 
+goog.require('java.lang.Object');
+goog.require('java.util.Comparator');
+goog.require('nativebootstrap.Util');
+goog.require('java.lang.String');
+goog.require('java.util.function.Function');
+goog.require('java.util.function.ToDoubleFunction');
+goog.require('java.util.function.ToIntFunction');
+goog.require('java.util.function.ToLongFunction');
+goog.require('vmbootstrap.Casts');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _j_l_Object = goog.require('java.lang.Object');
-const _Comparator = goog.require('java.util.Comparator');
-const _$Util = goog.require('nativebootstrap.Util');
-const _j_l_String = goog.require('java.lang.String');
-const _j_u_function_Function = goog.require('java.util.function.Function');
-const _ToDoubleFunction = goog.require('java.util.function.ToDoubleFunction');
-const _ToIntFunction = goog.require('java.util.function.ToIntFunction');
-const _ToLongFunction = goog.require('java.util.function.ToLongFunction');
-const _$Casts = goog.require('vmbootstrap.Casts');
-
-
-// Re-exports the implementation.
-var NullableStringComparator = goog.require('com.google.j2cl.transpiler.readable.nullability.Nullability.NullableStringComparator$impl');
+const NullableStringComparator = goog.require('com.google.j2cl.transpiler.readable.nullability.Nullability.NullableStringComparator$impl');
 exports = NullableStringComparator;

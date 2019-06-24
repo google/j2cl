@@ -1,15 +1,10 @@
 goog.module('com.google.j2cl.transpiler.readable.interfaces.Main.Implementor');
 
+goog.require('com.google.j2cl.transpiler.readable.interfaces.Main.Interface');
+goog.require('com.google.j2cl.transpiler.readable.interfaces.Main.SubInterface');
+goog.require('java.lang.Object');
+goog.require('nativebootstrap.Util');
+goog.require('com.google.j2cl.transpiler.readable.interfaces.Main');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _Interface = goog.require('com.google.j2cl.transpiler.readable.interfaces.Main.Interface');
-const _SubInterface = goog.require('com.google.j2cl.transpiler.readable.interfaces.Main.SubInterface');
-const _j_l_Object = goog.require('java.lang.Object');
-const _$Util = goog.require('nativebootstrap.Util');
-const _Main = goog.require('com.google.j2cl.transpiler.readable.interfaces.Main');
-
-
-// Re-exports the implementation.
-var Implementor = goog.require('com.google.j2cl.transpiler.readable.interfaces.Main.Implementor$impl');
+const Implementor = goog.require('com.google.j2cl.transpiler.readable.interfaces.Main.Implementor$impl');
 exports = Implementor;

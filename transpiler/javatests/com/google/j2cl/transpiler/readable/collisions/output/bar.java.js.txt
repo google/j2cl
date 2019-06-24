@@ -1,14 +1,9 @@
 goog.module('com.google.j2cl.transpiler.readable.collisions.bar');
 
+goog.require('java.lang.Object');
+goog.require('nativebootstrap.Util');
+goog.require('com.google.j2cl.transpiler.readable.collisions.foo');
+goog.require('com.google.j2cl.transpiler.readable.collisions.goog');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _j_l_Object = goog.require('java.lang.Object');
-const _$Util = goog.require('nativebootstrap.Util');
-const _foo = goog.require('com.google.j2cl.transpiler.readable.collisions.foo');
-const _c_g_j2cl_transpiler_readable_collisions_goog = goog.require('com.google.j2cl.transpiler.readable.collisions.goog');
-
-
-// Re-exports the implementation.
-var bar = goog.require('com.google.j2cl.transpiler.readable.collisions.bar$impl');
+const bar = goog.require('com.google.j2cl.transpiler.readable.collisions.bar$impl');
 exports = bar;

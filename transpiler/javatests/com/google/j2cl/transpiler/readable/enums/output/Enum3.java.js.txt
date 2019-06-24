@@ -1,18 +1,13 @@
 goog.module('com.google.j2cl.transpiler.readable.enums.Enum3');
 
+goog.require('java.lang.Enum');
+goog.require('nativebootstrap.Util');
+goog.require('java.lang.Integer');
+goog.require('java.util.function.Function');
+goog.require('nativebootstrap.Equality');
+goog.require('vmbootstrap.Arrays');
+goog.require('vmbootstrap.Casts');
+goog.require('vmbootstrap.Enums');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _Enum = goog.require('java.lang.Enum');
-const _$Util = goog.require('nativebootstrap.Util');
-const _Integer = goog.require('java.lang.Integer');
-const _j_u_function_Function = goog.require('java.util.function.Function');
-const _$Equality = goog.require('nativebootstrap.Equality');
-const _$Arrays = goog.require('vmbootstrap.Arrays');
-const _$Casts = goog.require('vmbootstrap.Casts');
-const _$Enums = goog.require('vmbootstrap.Enums');
-
-
-// Re-exports the implementation.
-var Enum3 = goog.require('com.google.j2cl.transpiler.readable.enums.Enum3$impl');
+const Enum3 = goog.require('com.google.j2cl.transpiler.readable.enums.Enum3$impl');
 exports = Enum3;

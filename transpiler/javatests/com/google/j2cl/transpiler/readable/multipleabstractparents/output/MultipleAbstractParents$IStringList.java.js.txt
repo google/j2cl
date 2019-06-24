@@ -1,13 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.IStringList');
 
+goog.require('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.List');
+goog.require('nativebootstrap.Util');
+goog.require('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.IStringList.$LambdaAdaptor');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _List = goog.require('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.List');
-const _$Util = goog.require('nativebootstrap.Util');
-const _$LambdaAdaptor = goog.require('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.IStringList.$LambdaAdaptor');
-
-
-// Re-exports the implementation.
-var IStringList = goog.require('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.IStringList$impl');
+const IStringList = goog.require('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.IStringList$impl');
 exports = IStringList;

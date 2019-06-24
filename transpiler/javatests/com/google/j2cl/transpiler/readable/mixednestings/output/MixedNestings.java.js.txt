@@ -1,13 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.mixednestings.MixedNestings');
 
+goog.require('java.lang.Object');
+goog.require('nativebootstrap.Util');
+goog.require('com.google.j2cl.transpiler.readable.mixednestings.MixedNestings.A');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _j_l_Object = goog.require('java.lang.Object');
-const _$Util = goog.require('nativebootstrap.Util');
-const _A = goog.require('com.google.j2cl.transpiler.readable.mixednestings.MixedNestings.A');
-
-
-// Re-exports the implementation.
-var MixedNestings = goog.require('com.google.j2cl.transpiler.readable.mixednestings.MixedNestings$impl');
+const MixedNestings = goog.require('com.google.j2cl.transpiler.readable.mixednestings.MixedNestings$impl');
 exports = MixedNestings;

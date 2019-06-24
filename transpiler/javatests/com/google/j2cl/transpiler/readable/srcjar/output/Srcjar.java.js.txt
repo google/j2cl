@@ -1,13 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.srcjar.Srcjar');
 
+goog.require('java.lang.Object');
+goog.require('nativebootstrap.Util');
+goog.require('com.google.j2cl.transpiler.readable.srcjar.Foo');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _j_l_Object = goog.require('java.lang.Object');
-const _$Util = goog.require('nativebootstrap.Util');
-const _Foo = goog.require('com.google.j2cl.transpiler.readable.srcjar.Foo');
-
-
-// Re-exports the implementation.
-var Srcjar = goog.require('com.google.j2cl.transpiler.readable.srcjar.Srcjar$impl');
+const Srcjar = goog.require('com.google.j2cl.transpiler.readable.srcjar.Srcjar$impl');
 exports = Srcjar;

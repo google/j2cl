@@ -1,15 +1,10 @@
 goog.module('com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main');
 
+goog.require('java.lang.Object');
+goog.require('nativebootstrap.Util');
+goog.require('test.foo.NativeJsTypeWithToString');
+goog.require('test.foo.NativeJsTypeWithoutToString');
+goog.require('vmbootstrap.Objects');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _j_l_Object = goog.require('java.lang.Object');
-const _$Util = goog.require('nativebootstrap.Util');
-const _NativeJsTypeWithToString = goog.require('test.foo.NativeJsTypeWithToString');
-const _NativeJsTypeWithoutToString = goog.require('test.foo.NativeJsTypeWithoutToString');
-const _$Objects = goog.require('vmbootstrap.Objects');
-
-
-// Re-exports the implementation.
-var Main = goog.require('com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main$impl');
+const Main = goog.require('com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main$impl');
 exports = Main;

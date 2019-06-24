@@ -1,12 +1,7 @@
 goog.module('com.google.j2cl.transpiler.readable.intersectiontype.Cmp2');
 
+goog.require('nativebootstrap.Util');
+goog.require('com.google.j2cl.transpiler.readable.intersectiontype.Cmp2.$LambdaAdaptor');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _$Util = goog.require('nativebootstrap.Util');
-const _$LambdaAdaptor = goog.require('com.google.j2cl.transpiler.readable.intersectiontype.Cmp2.$LambdaAdaptor');
-
-
-// Re-exports the implementation.
-var Cmp2 = goog.require('com.google.j2cl.transpiler.readable.intersectiontype.Cmp2$impl');
+const Cmp2 = goog.require('com.google.j2cl.transpiler.readable.intersectiontype.Cmp2$impl');
 exports = Cmp2;

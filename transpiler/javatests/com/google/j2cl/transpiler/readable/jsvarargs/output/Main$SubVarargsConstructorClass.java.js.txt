@@ -1,13 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.jsvarargs.Main.SubVarargsConstructorClass');
 
+goog.require('nativebootstrap.Util');
+goog.require('com.google.j2cl.transpiler.readable.jsvarargs.Main.NativeObject.$Overlay');
+goog.require('javaemul.internal.InternalPreconditions');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _$Util = goog.require('nativebootstrap.Util');
-const _$Overlay = goog.require('com.google.j2cl.transpiler.readable.jsvarargs.Main.NativeObject.$Overlay');
-const _InternalPreconditions = goog.require('javaemul.internal.InternalPreconditions');
-
-
-// Re-exports the implementation.
-var SubVarargsConstructorClass = goog.require('com.google.j2cl.transpiler.readable.jsvarargs.Main.SubVarargsConstructorClass$impl');
+const SubVarargsConstructorClass = goog.require('com.google.j2cl.transpiler.readable.jsvarargs.Main.SubVarargsConstructorClass$impl');
 exports = SubVarargsConstructorClass;

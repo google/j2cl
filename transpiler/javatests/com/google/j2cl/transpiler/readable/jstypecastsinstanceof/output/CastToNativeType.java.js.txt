@@ -1,17 +1,12 @@
 goog.module('com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType');
 
+goog.require('java.lang.Object');
+goog.require('nativebootstrap.Util');
+goog.require('com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType.NativeJsType.$Overlay');
+goog.require('com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType.NativeObject.$Overlay');
+goog.require('test.foo.NativeJsType');
+goog.require('vmbootstrap.Arrays');
+goog.require('vmbootstrap.Casts');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _j_l_Object = goog.require('java.lang.Object');
-const _$Util = goog.require('nativebootstrap.Util');
-const _$Overlay = goog.require('com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType.NativeJsType.$Overlay');
-const _NativeObject_$Overlay = goog.require('com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType.NativeObject.$Overlay');
-const _NativeJsType = goog.require('test.foo.NativeJsType');
-const _$Arrays = goog.require('vmbootstrap.Arrays');
-const _$Casts = goog.require('vmbootstrap.Casts');
-
-
-// Re-exports the implementation.
-var CastToNativeType = goog.require('com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType$impl');
+const CastToNativeType = goog.require('com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType$impl');
 exports = CastToNativeType;

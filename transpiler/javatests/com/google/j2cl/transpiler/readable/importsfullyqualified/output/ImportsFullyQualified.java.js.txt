@@ -1,13 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.importsfullyqualified.ImportsFullyQualified');
 
+goog.require('java.io.Serializable');
+goog.require('java.lang.Object');
+goog.require('nativebootstrap.Util');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _Serializable = goog.require('java.io.Serializable');
-const _j_l_Object = goog.require('java.lang.Object');
-const _$Util = goog.require('nativebootstrap.Util');
-
-
-// Re-exports the implementation.
-var ImportsFullyQualified = goog.require('com.google.j2cl.transpiler.readable.importsfullyqualified.ImportsFullyQualified$impl');
+const ImportsFullyQualified = goog.require('com.google.j2cl.transpiler.readable.importsfullyqualified.ImportsFullyQualified$impl');
 exports = ImportsFullyQualified;

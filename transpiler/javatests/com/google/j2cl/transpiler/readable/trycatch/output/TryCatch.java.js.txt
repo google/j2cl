@@ -1,21 +1,16 @@
 goog.module('com.google.j2cl.transpiler.readable.trycatch.TryCatch');
 
+goog.require('java.lang.Object');
+goog.require('nativebootstrap.Util');
+goog.require('com.google.j2cl.transpiler.readable.trycatch.TryCatch.ClosableThing');
+goog.require('java.lang.ClassCastException');
+goog.require('java.lang.Exception');
+goog.require('java.lang.NullPointerException');
+goog.require('java.lang.RuntimeException');
+goog.require('java.lang.Throwable');
+goog.require('nativebootstrap.Equality');
+goog.require('vmbootstrap.Asserts');
+goog.require('vmbootstrap.Exceptions');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _j_l_Object = goog.require('java.lang.Object');
-const _$Util = goog.require('nativebootstrap.Util');
-const _ClosableThing = goog.require('com.google.j2cl.transpiler.readable.trycatch.TryCatch.ClosableThing');
-const _ClassCastException = goog.require('java.lang.ClassCastException');
-const _Exception = goog.require('java.lang.Exception');
-const _NullPointerException = goog.require('java.lang.NullPointerException');
-const _RuntimeException = goog.require('java.lang.RuntimeException');
-const _Throwable = goog.require('java.lang.Throwable');
-const _$Equality = goog.require('nativebootstrap.Equality');
-const _$Asserts = goog.require('vmbootstrap.Asserts');
-const _$Exceptions = goog.require('vmbootstrap.Exceptions');
-
-
-// Re-exports the implementation.
-var TryCatch = goog.require('com.google.j2cl.transpiler.readable.trycatch.TryCatch$impl');
+const TryCatch = goog.require('com.google.j2cl.transpiler.readable.trycatch.TryCatch$impl');
 exports = TryCatch;

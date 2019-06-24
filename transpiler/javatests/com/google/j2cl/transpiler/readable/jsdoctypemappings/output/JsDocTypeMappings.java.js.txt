@@ -1,31 +1,26 @@
 goog.module('com.google.j2cl.transpiler.readable.jsdoctypemappings.JsDocTypeMappings');
 
+goog.require('java.lang.Object');
+goog.require('nativebootstrap.Util');
+goog.require('com.google.j2cl.transpiler.readable.jsdoctypemappings.JsDocTypeMappings.ExportedTypeNewName');
+goog.require('com.google.j2cl.transpiler.readable.jsdoctypemappings.JsDocTypeMappings.NativeBoolean.$Overlay');
+goog.require('com.google.j2cl.transpiler.readable.jsdoctypemappings.JsDocTypeMappings.NativeNull.$Overlay');
+goog.require('com.google.j2cl.transpiler.readable.jsdoctypemappings.JsDocTypeMappings.NativeNumber.$Overlay');
+goog.require('com.google.j2cl.transpiler.readable.jsdoctypemappings.JsDocTypeMappings.NativeStar.$Overlay');
+goog.require('com.google.j2cl.transpiler.readable.jsdoctypemappings.JsDocTypeMappings.NativeString.$Overlay');
+goog.require('com.google.j2cl.transpiler.readable.jsdoctypemappings.JsDocTypeMappings.NativeType.$Overlay');
+goog.require('com.google.j2cl.transpiler.readable.jsdoctypemappings.JsDocTypeMappings.NativeUndefined.$Overlay');
+goog.require('com.google.j2cl.transpiler.readable.jsdoctypemappings.JsDocTypeMappings.NativeVoid.$Overlay');
+goog.require('com.google.j2cl.transpiler.readable.jsdoctypemappings.JsDocTypeMappings.NativeWildcard.$Overlay');
+goog.require('java.lang.Byte');
+goog.require('java.lang.Character');
+goog.require('java.lang.Comparable');
+goog.require('java.lang.Float');
+goog.require('java.lang.Integer');
+goog.require('java.lang.Long');
+goog.require('java.lang.Short');
+goog.require('java.util.Comparator');
+goog.require('nativebootstrap.Long');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _j_l_Object = goog.require('java.lang.Object');
-const _$Util = goog.require('nativebootstrap.Util');
-const _ExportedType = goog.require('com.google.j2cl.transpiler.readable.jsdoctypemappings.JsDocTypeMappings.ExportedTypeNewName');
-const _NativeBoolean_$Overlay = goog.require('com.google.j2cl.transpiler.readable.jsdoctypemappings.JsDocTypeMappings.NativeBoolean.$Overlay');
-const _NativeNull_$Overlay = goog.require('com.google.j2cl.transpiler.readable.jsdoctypemappings.JsDocTypeMappings.NativeNull.$Overlay');
-const _NativeNumber_$Overlay = goog.require('com.google.j2cl.transpiler.readable.jsdoctypemappings.JsDocTypeMappings.NativeNumber.$Overlay');
-const _NativeStar_$Overlay = goog.require('com.google.j2cl.transpiler.readable.jsdoctypemappings.JsDocTypeMappings.NativeStar.$Overlay');
-const _NativeString_$Overlay = goog.require('com.google.j2cl.transpiler.readable.jsdoctypemappings.JsDocTypeMappings.NativeString.$Overlay');
-const _$Overlay = goog.require('com.google.j2cl.transpiler.readable.jsdoctypemappings.JsDocTypeMappings.NativeType.$Overlay');
-const _NativeUndefined_$Overlay = goog.require('com.google.j2cl.transpiler.readable.jsdoctypemappings.JsDocTypeMappings.NativeUndefined.$Overlay');
-const _NativeVoid_$Overlay = goog.require('com.google.j2cl.transpiler.readable.jsdoctypemappings.JsDocTypeMappings.NativeVoid.$Overlay');
-const _NativeWildcard_$Overlay = goog.require('com.google.j2cl.transpiler.readable.jsdoctypemappings.JsDocTypeMappings.NativeWildcard.$Overlay');
-const _Byte = goog.require('java.lang.Byte');
-const _Character = goog.require('java.lang.Character');
-const _Comparable = goog.require('java.lang.Comparable');
-const _Float = goog.require('java.lang.Float');
-const _Integer = goog.require('java.lang.Integer');
-const _Long = goog.require('java.lang.Long');
-const _Short = goog.require('java.lang.Short');
-const _Comparator = goog.require('java.util.Comparator');
-const _$Long = goog.require('nativebootstrap.Long');
-
-
-// Re-exports the implementation.
-var JsDocTypeMappings = goog.require('com.google.j2cl.transpiler.readable.jsdoctypemappings.JsDocTypeMappings$impl');
+const JsDocTypeMappings = goog.require('com.google.j2cl.transpiler.readable.jsdoctypemappings.JsDocTypeMappings$impl');
 exports = JsDocTypeMappings;

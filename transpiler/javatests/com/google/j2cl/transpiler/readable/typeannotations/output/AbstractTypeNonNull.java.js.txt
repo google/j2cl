@@ -1,14 +1,9 @@
 goog.module('com.google.j2cl.transpiler.readable.typeannotations.AbstractTypeNonNull');
 
+goog.require('com.google.j2cl.transpiler.readable.typeannotations.ParametricType');
+goog.require('java.lang.Object');
+goog.require('nativebootstrap.Util');
+goog.require('com.google.j2cl.transpiler.readable.typeannotations.AbstractType');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _ParametricType = goog.require('com.google.j2cl.transpiler.readable.typeannotations.ParametricType');
-const _j_l_Object = goog.require('java.lang.Object');
-const _$Util = goog.require('nativebootstrap.Util');
-const _AbstractType = goog.require('com.google.j2cl.transpiler.readable.typeannotations.AbstractType');
-
-
-// Re-exports the implementation.
-var AbstractTypeNonNull = goog.require('com.google.j2cl.transpiler.readable.typeannotations.AbstractTypeNonNull$impl');
+const AbstractTypeNonNull = goog.require('com.google.j2cl.transpiler.readable.typeannotations.AbstractTypeNonNull$impl');
 exports = AbstractTypeNonNull;

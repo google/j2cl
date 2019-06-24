@@ -1,12 +1,7 @@
 goog.module('bar.foo.baz.InnerClass');
 
+goog.require('java.lang.Object');
+goog.require('nativebootstrap.Util');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _j_l_Object = goog.require('java.lang.Object');
-const _$Util = goog.require('nativebootstrap.Util');
-
-
-// Re-exports the implementation.
-var InnerClass = goog.require('bar.foo.baz.InnerClass$impl');
+const InnerClass = goog.require('bar.foo.baz.InnerClass$impl');
 exports = InnerClass;

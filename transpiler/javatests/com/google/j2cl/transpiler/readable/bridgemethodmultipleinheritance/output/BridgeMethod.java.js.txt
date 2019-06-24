@@ -1,17 +1,12 @@
 goog.module('com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.BridgeMethod');
 
+goog.require('com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.Parent');
+goog.require('com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.SomeInterface');
+goog.require('nativebootstrap.Util');
+goog.require('java.lang.AssertionError');
+goog.require('java.lang.Error');
+goog.require('java.lang.Number');
+goog.require('vmbootstrap.Casts');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _Parent = goog.require('com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.Parent');
-const _SomeInterface = goog.require('com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.SomeInterface');
-const _$Util = goog.require('nativebootstrap.Util');
-const _AssertionError = goog.require('java.lang.AssertionError');
-const _Error = goog.require('java.lang.Error');
-const _Number = goog.require('java.lang.Number');
-const _$Casts = goog.require('vmbootstrap.Casts');
-
-
-// Re-exports the implementation.
-var BridgeMethod = goog.require('com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.BridgeMethod$impl');
+const BridgeMethod = goog.require('com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.BridgeMethod$impl');
 exports = BridgeMethod;

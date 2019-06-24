@@ -1,12 +1,7 @@
 goog.module('com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.H');
 
+goog.require('com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.G');
+goog.require('nativebootstrap.Util');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _G = goog.require('com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.G');
-const _$Util = goog.require('nativebootstrap.Util');
-
-
-// Re-exports the implementation.
-var H = goog.require('com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.H$impl');
+const H = goog.require('com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.H$impl');
 exports = H;

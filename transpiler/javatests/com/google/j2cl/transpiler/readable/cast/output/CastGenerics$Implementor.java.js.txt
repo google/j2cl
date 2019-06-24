@@ -1,12 +1,7 @@
 goog.module('com.google.j2cl.transpiler.readable.cast.CastGenerics.Implementor');
 
+goog.require('com.google.j2cl.transpiler.readable.cast.CastGenerics.BaseImplementor');
+goog.require('nativebootstrap.Util');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _BaseImplementor = goog.require('com.google.j2cl.transpiler.readable.cast.CastGenerics.BaseImplementor');
-const _$Util = goog.require('nativebootstrap.Util');
-
-
-// Re-exports the implementation.
-var Implementor = goog.require('com.google.j2cl.transpiler.readable.cast.CastGenerics.Implementor$impl');
+const Implementor = goog.require('com.google.j2cl.transpiler.readable.cast.CastGenerics.Implementor$impl');
 exports = Implementor;

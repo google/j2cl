@@ -1,12 +1,7 @@
 goog.module('com.google.j2cl.transpiler.readable.implementsgenericinterface.GenericSubInterface');
 
+goog.require('com.google.j2cl.transpiler.readable.implementsgenericinterface.GenericInterface');
+goog.require('nativebootstrap.Util');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _GenericInterface = goog.require('com.google.j2cl.transpiler.readable.implementsgenericinterface.GenericInterface');
-const _$Util = goog.require('nativebootstrap.Util');
-
-
-// Re-exports the implementation.
-var GenericSubInterface = goog.require('com.google.j2cl.transpiler.readable.implementsgenericinterface.GenericSubInterface$impl');
+const GenericSubInterface = goog.require('com.google.j2cl.transpiler.readable.implementsgenericinterface.GenericSubInterface$impl');
 exports = GenericSubInterface;

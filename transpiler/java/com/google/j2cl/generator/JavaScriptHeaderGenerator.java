@@ -51,21 +51,15 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
     }
 
     sourceBuilder.newLine();
-    sourceBuilder.newLine();
-    sourceBuilder.appendLines(
-        "// Imports headers for both eager and lazy dependencies to ensure that",
-        "// all files are included in the dependency tree.");
-    sourceBuilder.newLine();
 
     Set<String> alreadyRequiredPaths = new HashSet<>();
     // Make sure we don't self-import
     alreadyRequiredPaths.add(type.getDeclaration().getQualifiedJsName());
     // goog.require(...) for eager imports.
     for (Import eagerImport : sortImports(importsByCategory.get(ImportCategory.LOADTIME))) {
-      String alias = eagerImport.getAlias();
       String path = eagerImport.getHeaderModulePath();
       if (alreadyRequiredPaths.add(path)) {
-        sourceBuilder.appendln("const _" + alias + " = goog.require('" + path + "');");
+        sourceBuilder.appendln("goog.require('" + path + "');");
       }
     }
     // goog.require(...) for lazy imports
@@ -75,21 +69,18 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
                 importsByCategory.get(ImportCategory.RUNTIME),
                 importsByCategory.get(ImportCategory.JSDOC)));
     for (Import lazyImport : lazyImports) {
-      String alias = lazyImport.getAlias();
       String path = lazyImport.getHeaderModulePath();
       if (alreadyRequiredPaths.add(path)) {
-        sourceBuilder.appendln("const _" + alias + " = goog.require('" + path + "');");
+        sourceBuilder.appendln("goog.require('" + path + "');");
       }
     }
     // externs imports are always available in the browser and don't need a header reference.
-    sourceBuilder.newLine();
     sourceBuilder.newLine();
 
     String className = environment.aliasForType(type.getDeclaration());
     String implementationPath = typeDeclaration.getImplModuleName();
     sourceBuilder.appendLines(
-        "// Re-exports the implementation.",
-        "var " + className + " = goog.require('" + implementationPath + "');");
+        "const " + className + " = goog.require('" + implementationPath + "');");
     sourceBuilder.newLine();
     // Since declareLegacyNamespace makes this class globally accessible via exports, also add a
     // mapping from the exports to the original Java class.

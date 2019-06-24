@@ -1,13 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass');
 
+goog.require('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner');
+goog.require('nativebootstrap.Util');
+goog.require('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGOuter');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _ESWGInner = goog.require('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner');
-const _$Util = goog.require('nativebootstrap.Util');
-const _ESWGOuter = goog.require('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGOuter');
-
-
-// Re-exports the implementation.
-var ESWGInnerSubclass = goog.require('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass$impl');
+const ESWGInnerSubclass = goog.require('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass$impl');
 exports = ESWGInnerSubclass;

@@ -1,13 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.nobridgemethods.TreeMap');
 
+goog.require('com.google.j2cl.transpiler.readable.nobridgemethods.Map');
+goog.require('nativebootstrap.Util');
+goog.require('com.google.j2cl.transpiler.readable.nobridgemethods.TreeMap.InnerEntry');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _Map = goog.require('com.google.j2cl.transpiler.readable.nobridgemethods.Map');
-const _$Util = goog.require('nativebootstrap.Util');
-const _InnerEntry = goog.require('com.google.j2cl.transpiler.readable.nobridgemethods.TreeMap.InnerEntry');
-
-
-// Re-exports the implementation.
-var TreeMap = goog.require('com.google.j2cl.transpiler.readable.nobridgemethods.TreeMap$impl');
+const TreeMap = goog.require('com.google.j2cl.transpiler.readable.nobridgemethods.TreeMap$impl');
 exports = TreeMap;

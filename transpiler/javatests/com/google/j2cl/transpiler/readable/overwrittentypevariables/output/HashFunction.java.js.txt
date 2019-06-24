@@ -1,13 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunction');
 
+goog.require('com.google.j2cl.transpiler.readable.overwrittentypevariables.MyFunction');
+goog.require('nativebootstrap.Util');
+goog.require('com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunction.$LambdaAdaptor');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _MyFunction = goog.require('com.google.j2cl.transpiler.readable.overwrittentypevariables.MyFunction');
-const _$Util = goog.require('nativebootstrap.Util');
-const _$LambdaAdaptor = goog.require('com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunction.$LambdaAdaptor');
-
-
-// Re-exports the implementation.
-var HashFunction = goog.require('com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunction$impl');
+const HashFunction = goog.require('com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunction$impl');
 exports = HashFunction;

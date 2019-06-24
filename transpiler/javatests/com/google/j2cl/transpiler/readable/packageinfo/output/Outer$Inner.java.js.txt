@@ -1,13 +1,8 @@
 goog.module('readable.packageinfo.Outer.Inner');
 
+goog.require('java.lang.Object');
+goog.require('nativebootstrap.Util');
+goog.require('readable.packageinfo.Outer');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _j_l_Object = goog.require('java.lang.Object');
-const _$Util = goog.require('nativebootstrap.Util');
-const _Outer = goog.require('readable.packageinfo.Outer');
-
-
-// Re-exports the implementation.
-var Inner = goog.require('readable.packageinfo.Outer.Inner$impl');
+const Inner = goog.require('readable.packageinfo.Outer.Inner$impl');
 exports = Inner;

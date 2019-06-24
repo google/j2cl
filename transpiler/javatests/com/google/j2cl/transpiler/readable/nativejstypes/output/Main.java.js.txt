@@ -1,17 +1,12 @@
 goog.module('com.google.j2cl.transpiler.readable.nativejstypes.Main');
 
+goog.require('java.lang.Object');
+goog.require('nativebootstrap.Util');
+goog.require('com.acme.MyFoo');
+goog.require('com.google.j2cl.transpiler.readable.nativejstypes.Bar');
+goog.require('java.lang.Class');
+goog.require('vmbootstrap.JavaScriptObject');
+goog.require('vmbootstrap.Objects');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _j_l_Object = goog.require('java.lang.Object');
-const _$Util = goog.require('nativebootstrap.Util');
-const _Foo = goog.require('com.acme.MyFoo');
-const _Bar = goog.require('com.google.j2cl.transpiler.readable.nativejstypes.Bar');
-const _Class = goog.require('java.lang.Class');
-const _$JavaScriptObject = goog.require('vmbootstrap.JavaScriptObject');
-const _$Objects = goog.require('vmbootstrap.Objects');
-
-
-// Re-exports the implementation.
-var Main = goog.require('com.google.j2cl.transpiler.readable.nativejstypes.Main$impl');
+const Main = goog.require('com.google.j2cl.transpiler.readable.nativejstypes.Main$impl');
 exports = Main;

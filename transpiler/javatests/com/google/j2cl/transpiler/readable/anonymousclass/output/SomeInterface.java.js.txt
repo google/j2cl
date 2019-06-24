@@ -1,13 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.anonymousclass.SomeInterface');
 
+goog.require('nativebootstrap.Util');
+goog.require('com.google.j2cl.transpiler.readable.anonymousclass.SomeClass');
+goog.require('com.google.j2cl.transpiler.readable.anonymousclass.SomeInterface.$1');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _$Util = goog.require('nativebootstrap.Util');
-const _SomeClass = goog.require('com.google.j2cl.transpiler.readable.anonymousclass.SomeClass');
-const _$1 = goog.require('com.google.j2cl.transpiler.readable.anonymousclass.SomeInterface.$1');
-
-
-// Re-exports the implementation.
-var SomeInterface = goog.require('com.google.j2cl.transpiler.readable.anonymousclass.SomeInterface$impl');
+const SomeInterface = goog.require('com.google.j2cl.transpiler.readable.anonymousclass.SomeInterface$impl');
 exports = SomeInterface;

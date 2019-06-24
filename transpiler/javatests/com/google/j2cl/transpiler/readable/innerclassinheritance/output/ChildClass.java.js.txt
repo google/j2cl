@@ -1,13 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass');
 
+goog.require('com.google.j2cl.transpiler.readable.innerclassinheritance.ParentOuter');
+goog.require('nativebootstrap.Util');
+goog.require('com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass.$1LocalClass');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _ParentOuter = goog.require('com.google.j2cl.transpiler.readable.innerclassinheritance.ParentOuter');
-const _$Util = goog.require('nativebootstrap.Util');
-const _$1LocalClass = goog.require('com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass.$1LocalClass');
-
-
-// Re-exports the implementation.
-var ChildClass = goog.require('com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$impl');
+const ChildClass = goog.require('com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$impl');
 exports = ChildClass;

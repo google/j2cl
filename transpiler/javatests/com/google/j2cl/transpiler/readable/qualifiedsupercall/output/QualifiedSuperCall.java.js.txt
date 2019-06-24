@@ -1,12 +1,7 @@
 goog.module('com.google.j2cl.transpiler.readable.qualifiedsupercall.QualifiedSuperCall');
 
+goog.require('com.google.j2cl.transpiler.readable.qualifiedsupercall.Parent');
+goog.require('nativebootstrap.Util');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _Parent = goog.require('com.google.j2cl.transpiler.readable.qualifiedsupercall.Parent');
-const _$Util = goog.require('nativebootstrap.Util');
-
-
-// Re-exports the implementation.
-var QualifiedSuperCall = goog.require('com.google.j2cl.transpiler.readable.qualifiedsupercall.QualifiedSuperCall$impl');
+const QualifiedSuperCall = goog.require('com.google.j2cl.transpiler.readable.qualifiedsupercall.QualifiedSuperCall$impl');
 exports = QualifiedSuperCall;
