@@ -200,6 +200,15 @@ class ToStringRenderer {
       }
 
       @Override
+      public boolean enterExpressionWithComment(ExpressionWithComment expression) {
+        print("/*");
+        print(expression.getComment());
+        print("*/");
+        accept(expression.getExpression());
+        return false;
+      }
+
+      @Override
       public boolean enterField(Field field) {
         print(field.getDescriptor().getTypeDescriptor());
         print(" ");
