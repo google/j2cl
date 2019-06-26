@@ -46,7 +46,7 @@ class JavaScriptFunction {
    * @public
    */
   static $isInstance(instance) {
-    return instance != null && typeof instance == 'function';
+    return typeof instance == 'function';
   }
 
   /**
