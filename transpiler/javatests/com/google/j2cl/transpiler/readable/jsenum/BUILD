@@ -9,7 +9,9 @@ load(
 
 # Creates verification target
 readable_example(
-    srcs = glob(["*.java"]),
-    native_srcs = glob(["*.native.js"]),
+    srcs = glob([
+        "*.java",
+        "*.native.js",
+    ]),
     deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )

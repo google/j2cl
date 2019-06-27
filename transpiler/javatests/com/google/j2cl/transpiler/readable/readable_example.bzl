@@ -21,9 +21,7 @@ JAVAC_FLAGS = [
 
 def readable_example(
         srcs,
-        native_srcs = [],
         deps = [],
-        js_deps = [],
         plugins = [],
         defs = [],
         generate_library_info = False,
@@ -36,9 +34,7 @@ def readable_example(
 
     Args:
       srcs: Source files to make readable output for.
-      native_srcs: Foo.native.js files to merge in.
       deps: J2CL libraries referenced by the srcs.
-      js_deps: JS libraries referenced by the srcs.
       plugins: APT processors to execute when generating readable output.
       defs: Custom flags to pass to the JavaScript compiler.
       generate_library_info: Wheter to copy the call graph for the library in the output dir.
@@ -50,8 +46,7 @@ def readable_example(
         name = "readable",
         srcs = srcs,
         javacopts = JAVAC_FLAGS,
-        native_srcs = native_srcs,
-        deps = deps + js_deps,
+        deps = deps,
         plugins = plugins,
         generate_build_test = False,
         tags = j2cl_library_tags,

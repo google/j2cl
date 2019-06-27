@@ -9,7 +9,9 @@ load(
 
 integration_test(
     name = "staticinitfailfast",
-    srcs = glob(["*.java"]),
-    native_srcs = glob(["*.native.js"]),
+    srcs = glob([
+        "*.java",
+        "*.native.js",
+    ]),
     deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )

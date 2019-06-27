@@ -13,7 +13,9 @@ load(
 # blaze test :uncompiled_test
 integration_test(
     name = "nativeinjection",
-    srcs = glob(["*.java"]),
-    native_srcs = ["MyClass.native.js"],
+    srcs = glob([
+        "*.java",
+        "*.js",
+    ]),
     deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )

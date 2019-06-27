@@ -13,9 +13,9 @@ load(
 # blaze test :uncompiled_test
 integration_test(
     name = "jsmethodoverride",
-    srcs = glob(["*.java"]),
-    native_srcs = [
-        "Main.native.js",
-    ],
+    srcs = glob([
+        "*.java",
+        "*.js",
+    ]),
     deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )

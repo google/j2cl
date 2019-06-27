@@ -7,7 +7,10 @@ load("//build_defs:rules.bzl", "j2cl_library", "j2cl_test")
 j2cl_library(
     name = "Java8TestLib",
     testonly = 1,
-    srcs = glob(["**/*.java"]),
+    srcs = glob([
+        "**/*.java",
+        "**/*.js",
+    ]),
     javacopts = [
         "-Xep:EqualsIncompatibleType:OFF",
         "-Xep:SelfComparison:OFF",  # See go/self-comparison-lsc
@@ -18,7 +21,6 @@ j2cl_library(
         "-Xep:ClassCanBeStatic:OFF",
         "-Xep:MethodCanBeStatic:OFF",
     ],
-    native_srcs = ["Java8Test.native.js"],
     deps = [
         "//third_party:gwt-jsinterop-annotations-j2cl",
         "//third_party:junit-j2cl",

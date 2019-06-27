@@ -10,8 +10,10 @@ load(
 
 j2cl_library(
     name = "superinject",
-    srcs = glob(["super/**/*.java"]),
-    native_srcs = glob(["super/**/*.native.js"]),
+    srcs = glob([
+        "super/**/*.java",
+        "super/**/*.native.js",
+    ]),
     deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )
 
@@ -21,8 +23,10 @@ j2cl_library(
 # blaze test :uncompiled_test
 integration_test(
     name = "nativeinjection",
-    srcs = glob(["*.java"]),
-    native_srcs = ["NativeClass.native.js"],
+    srcs = glob([
+        "*.java",
+        "*.js",
+    ]),
     deps = [
         ":superinject",
         "//third_party:gwt-jsinterop-annotations-j2cl",

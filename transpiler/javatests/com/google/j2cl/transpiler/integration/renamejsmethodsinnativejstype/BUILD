@@ -28,8 +28,10 @@ integration_test(
     name = "renamejsmethodsinnativejstype",
     # Src's JUST the Main class and gets Foo as a dependency. Do not
     # change this since this is part of what the test is verifying.
-    srcs = ["Main.java"],
-    native_srcs = ["Main.native.js"],
+    srcs = [
+        "Main.java",
+        "Main.native.js",
+    ],
     deps = [
         ":foo",
         ":native_types",

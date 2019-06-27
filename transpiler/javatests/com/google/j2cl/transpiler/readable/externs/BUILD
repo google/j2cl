@@ -16,10 +16,12 @@ closure_js_library(
 
 # Creates verification target
 readable_example(
-    srcs = glob(["*.java"]),
-    js_deps = [":externs"],
-    native_srcs = glob(["*.native.js"]),
+    srcs = glob([
+        "*.java",
+        "*.native.js",
+    ]),
     deps = [
+        ":externs",
         "//third_party:gwt-jsinterop-annotations-j2cl",
     ],
 )
