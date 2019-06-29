@@ -60,7 +60,7 @@ _J2CL_LIB_ATTRS = {
     "srcs": attr.label_list(allow_files = [".java", ".js", ".srcjar", ".jar", ".zip"]),
     "deps": attr.label_list(providers = [JS_PROVIDER_NAME]),
     "exports": attr.label_list(providers = [JS_PROVIDER_NAME]),
-    "plugins": attr.label_list(allow_rules = ["java_plugin"], cfg = "host"),
+    "plugins": attr.label_list(allow_rules = ["java_library","java_plugin"], cfg = "host"),
     "exported_plugins": attr.label_list(allow_rules = ["java_plugin"], cfg = "host"),
     "javacopts": attr.string_list(),
 }
