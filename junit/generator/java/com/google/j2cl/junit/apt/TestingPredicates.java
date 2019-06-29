@@ -38,27 +38,18 @@ class TestingPredicates {
       input -> input.getSimpleName().toString().startsWith("test");
 
   private static final boolean isPromise(TypeElement type) {
-    // We consider a type to be working under the following conditions:
-    //
-    //  - It is a JsType
-    //  - It has a then method with either one or two parameters
-    //  - All the parameters of the then methods are annotated with @JsFunction
-    //
-    // For now we do not take a look at the hierarchy of the type, so we
-    // could be missing then methods in parent classes or interfaces. Since in tests
-    // one can always use the base type this is probably fine.
-    if (type == null || !isAnnotationPresent(type, JsType.class)) {
+    if (type == null) {
       return false;
     }
 
-    return ElementFilter.methodsIn(type.getEnclosedElements())
-        .stream()
+    return MoreApt.getTypeHierarchy(type).stream()
+        .filter(t -> isAnnotationPresent(t, JsType.class))
+        .flatMap(t -> ElementFilter.methodsIn(t.getEnclosedElements()).stream())
         .filter(m -> m.getSimpleName().contentEquals("then"))
         .filter(m -> m.getParameters().size() == 1 || m.getParameters().size() == 2)
         .anyMatch(
             m ->
-                m.getParameters()
-                    .stream()
+                m.getParameters().stream()
                     .map(ve -> MoreApt.asTypeElement(ve.asType()))
                     .allMatch(t -> t != null && isAnnotationPresent(t, JsFunction.class)));
   }

@@ -82,7 +82,9 @@ public class J2clAsyncTest extends IntegrationTestBase {
     TestResult testResult =
         newTestResultBuilder()
             .testClassName(testName)
-            .addTestSuccess("testResolvesAfterDelay")
+            .addTestSuccess("testResolvesAfterDelay1")
+            .addTestSuccess("testResolvesAfterDelay2")
+            .addTestSuccess("testResolvesAfterDelay3")
             .build();
 
     List<String> logLines = runTest(testName);

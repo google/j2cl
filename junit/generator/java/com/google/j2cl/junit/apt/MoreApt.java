@@ -21,6 +21,7 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import com.google.auto.common.MoreTypes;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,11 +38,27 @@ import javax.lang.model.type.TypeMirror;
  * Helper methods for APT processing.
  */
 public class MoreApt {
-  /** Returns the list of the type and its super types from most to least specific order. */
+
+  /** Returns the list of the type and its super types without a specific order. */
+  public static ImmutableSet<TypeElement> getTypeHierarchy(TypeElement typeElement) {
+    return ImmutableSet.copyOf(getHierarchyImpl(typeElement, true));
+  }
+
+  /** Returns the list of the class and its super classes from most to least specific order. */
   public static ImmutableList<TypeElement> getClassHierarchy(TypeElement typeElement) {
+    return getHierarchyImpl(typeElement, false);
+  }
+
+  public static ImmutableList<TypeElement> getHierarchyImpl(
+      TypeElement typeElement, boolean includeInterfaces) {
     ImmutableList.Builder<TypeElement> classHierarchyBuilder = new ImmutableList.Builder<>();
     for (TypeElement t = typeElement; t != null; t = asTypeElement(t.getSuperclass())) {
       classHierarchyBuilder.add(t);
+      if (includeInterfaces) {
+        for (TypeMirror i : t.getInterfaces()) {
+          classHierarchyBuilder.addAll(getHierarchyImpl(asTypeElement(i), includeInterfaces));
+        }
+      }
     }
     return classHierarchyBuilder.build();
   }

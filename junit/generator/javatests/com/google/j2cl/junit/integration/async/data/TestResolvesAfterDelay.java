@@ -24,7 +24,26 @@ import org.junit.runner.RunWith;
 public class TestResolvesAfterDelay {
 
   @Test(timeout = 200L)
-  public Thenable testResolvesAfterDelay() {
+  public Thenable testResolvesAfterDelay1() {
     return (onFulfilled, onRejected) -> Timer.schedule(() -> onFulfilled.execute(null), 0);
+  }
+
+  private interface SubThenable extends Thenable {}
+
+  @Test(timeout = 200L)
+  public SubThenable testResolvesAfterDelay2() {
+    return (onFulfilled, onRejected) -> Timer.schedule(() -> onFulfilled.execute(null), 0);
+  }
+
+  private abstract static class ThenableImpl implements SubThenable {}
+
+  @Test(timeout = 200L)
+  public ThenableImpl testResolvesAfterDelay3() {
+    return new ThenableImpl() {
+      @Override
+      public void then(FullFilledCallback onFulfilled, RejectedCallback onRejected) {
+        Timer.schedule(() -> onFulfilled.execute(null), 0);
+      }
+    };
   }
 }
