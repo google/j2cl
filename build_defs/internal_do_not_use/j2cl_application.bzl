@@ -6,7 +6,10 @@ def j2cl_application(
         name,
         entry_points,
         deps,
+        extra_defs = [],
+        formatting = None,
         rewrite_polyfills = False,
+        language = None,
         jre_logging_log_level = "OFF",
         jre_checks_check_level = "NORMAL",
         closure_defines = dict(),
@@ -32,9 +35,14 @@ def j2cl_application(
         name: name of the rule.
         entry_points: JavaScript namespace of the entry point for the app.
         deps: dependencies of the app (e.g. j2cl_library, js_library, etc).
+        extra_defs: Extra flags to pass to the Closure Compiler.
+        formatting: Whether to pretty-print or minify the code.
         rewrite_polyfills: rewrite ES6 library calls to use polyfills provided
           by the compiler's runtime to support "old" browsers. Only affects
           production binary.
+        language: Output target language to pass to Closure Compiler. If no
+          value is passed, the default is used (`ECMASCRIPT5` at the time of
+          this writing).
         jre_logging_log_level: the minimum log level that java.util.logging
             should capture for production; the rest is optimized away.
         jre_checks_check_level: the level of checks provided by Java standard
@@ -44,6 +52,7 @@ def j2cl_application(
           specific exceptions to be thrown.
         closure_defines: override the value of a variable defined by goog.define.
         extra_dev_resources: extra resource to serve for development server.
+        kwargs: Extra arguments to pass into `rules_closure`.
     """
 
     entry_point_defs = ["--entry_point=goog:%s" % e for e in entry_points]
@@ -56,11 +65,16 @@ def j2cl_application(
     }
     _define_js("%s_config" % name, define_defaults, closure_defines)
 
+    if language:
+        kwargs["language"] = language
+    if formatting:
+        kwargs["formatting"] = formatting
+
     js_binary(
         name = name,
         defs = J2CL_OPTIMIZED_DEFS + entry_point_defs + [
             "--rewrite_polyfills=%s" % rewrite_polyfills,
-        ],
+        ] + extra_defs,
         deps = [":%s_config" % name] + deps,
         **kwargs
     )
