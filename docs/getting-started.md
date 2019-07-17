@@ -114,10 +114,10 @@ and you are done.
 
 ## Next steps
 
-*   [JsInterop Cookbook](jsinterop-by-example.md) for examples on how to
-    interop with Java and JavaScript.
-*   [J2CL Best Practices](best-practices.md) to make informed decisions
-    for your project.
+*   [JsInterop Cookbook](jsinterop-by-example.md) for examples on how to interop
+    with Java and JavaScript.
+*   [J2CL Best Practices](best-practices.md) to make informed decisions for your
+    project.
 *   [J2CL Transpiler Readable Repo](https://github.com/google/j2cl/tree/master/transpiler/javatests/com/google/j2cl/transpiler/readable)
     to dive into internals and see how J2CL generated code looks like in
     different situations.
