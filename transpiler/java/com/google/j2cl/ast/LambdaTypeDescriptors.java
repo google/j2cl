@@ -124,7 +124,6 @@ public class LambdaTypeDescriptors {
                     .getTypeDeclaration()
                     .getTypeParameterDescriptors())
             .addAll(
-                (Iterable)
                     functionalInterfaceTypeDescriptor
                         .toUnparameterizedTypeDescriptor()
                         .getSingleAbstractMethodDescriptor()

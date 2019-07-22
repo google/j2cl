@@ -63,7 +63,7 @@ public abstract class UnaryExpression extends Expression {
     return Visitor_UnaryExpression.visit(processor, this);
   }
 
-  abstract Builder createBuilder();
+  abstract Builder<?, ? extends UnaryExpression> createBuilder();
 
   /** A Builder for unary expressions. */
   public abstract static class Builder<T extends Builder<T, U>, U extends UnaryExpression> {
@@ -71,7 +71,7 @@ public abstract class UnaryExpression extends Expression {
     private Operator operator;
 
     public static Builder<?, ? extends UnaryExpression> from(UnaryExpression expression) {
-      Builder builder = expression.createBuilder();
+      Builder<?, ? extends UnaryExpression> builder = expression.createBuilder();
       builder.operand = expression.getOperand();
       builder.operator = expression.getOperator();
       return builder;
