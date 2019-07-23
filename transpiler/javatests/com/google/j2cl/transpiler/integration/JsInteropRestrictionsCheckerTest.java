@@ -1015,7 +1015,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  public NativeBuggy(int a) {}",
             "}",
             "@JsType (isNative = true)",
-            "class NativeSubNativeBuggy extends NativeBuggy{",
+            "class NativeSubNativeBuggy extends NativeBuggy {",
             "  public NativeSubNativeBuggy() { super(1); }",
             "  public NativeSubNativeBuggy(int a) { super();}",
             "}",
@@ -1265,7 +1265,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "@JsType class Super {",
             "   @JsMethod(name = \"custom\") public void r() {}",
             "}",
-            "@JsType(namespace = \"a.b.\") public class Buggy extends Super{",
+            "@JsType(namespace = \"a.b.\") public class Buggy extends Super {",
             "   @JsMethod(namespace = \"34s\") public native static void m();",
             "   @JsMethod(namespace = \"\") public native static void o();",
             "   @JsProperty(namespace = \"\") public int p;",
@@ -1275,7 +1275,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "@JsType(isNative = true) class NativeClass {",
             "   @JsProperty(namespace = \"s^\") public static int  n;",
             "}",
-            "@JsType(namespace = \"<window>\") class JsTypeOnWindow{",
+            "@JsType(namespace = \"<window>\") class JsTypeOnWindow {",
             "   @JsProperty(namespace = \"<window>\") public static int r;",
             "   @JsMethod(namespace = \"<window>\") public static  void s() {}",
             "}",
@@ -2281,13 +2281,13 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "Buggy",
             "import jsinterop.annotations.*;",
             "@JsType(isNative=true) interface Interface {",
-            "  @JsOverlay default void someOtherMethod(){}",
+            "  @JsOverlay default void someOtherMethod() {}",
             "}",
             "class OtherClass implements Interface {",
             "  public void someOtherMethod() {}",
             "}",
             "@JsType(isNative=true) public interface Buggy extends Interface {",
-            "  default void someMethod(){}",
+            "  default void someMethod() {}",
             "  void someOtherMethod();",
             "}")
         .assertErrorsWithoutSourcePosition(
@@ -2425,7 +2425,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "@JsType(isNative = true)",
             "public interface Buggy {",
             "  @JsOverlay Object obj = new Object();",
-            "  @JsOverlay default void someOverlayMethod(){};",
+            "  @JsOverlay default void someOverlayMethod() {};",
             "}")
         .assertNoWarnings();
   }
