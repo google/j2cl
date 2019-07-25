@@ -367,9 +367,14 @@ public class GenericCastTest {
   @Test
   public void testAssignmentReference() {
     Container<String> container = new Container(1);
-    // TODO(b/118714379): There shouldn't be an erasure cast here as it is not needed to preserve
-    // type safety. Uncomment when fixed.
-    // container.value = container.value;
+
+    // Code like
+    //     container.value = container.value;
+    // does not require a cast per Java spec, since only the minimal casts to preserve type safety
+    // are required. J2CL deviates from this policy and may emit more erasure casts than strictly
+    // needed. These casts are still correct and improve code size due to more giving more precise
+    // typing to Closure.
+
     assertThrowsClassCastException(
         () -> {
           String unusedString = container.value = container.value;

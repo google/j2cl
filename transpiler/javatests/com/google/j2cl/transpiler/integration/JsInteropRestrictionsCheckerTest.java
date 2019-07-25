@@ -503,7 +503,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "class Main {",
             "  public static void main() {",
             "    Object o;",
-            // TODO(b/67913644): This lambda should be rejected but it is not.
+            // TODO(b/71911586): This lambda should be rejected but it is not.
             "    o = (IBuggy2 & IBuggy3) (b) -> {};",
             "  }",
             "}")
@@ -3275,7 +3275,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "}",
             "public class Buggy extends Parent implements Foo {}")
         .assertNoWarnings();
-    // TODO(b/27597597): Finalize checker implementation and enable this test.
+    // TODO(b/37579830): This error should be emitted once accidental overrides are handled in
+    //  restriction checking.
     //  "Line 10: [unusable-by-js] Type of parameter 'x' in "
     //      + "'void EntryPoint.Parent.doIt(Class)' (exposed by 'EntryPoint.Buggy') is not "
     //      + "usable by but exposed to JavaScript.");

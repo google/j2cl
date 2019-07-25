@@ -533,7 +533,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
             + ";");
   }
 
-  // TODO(tdeegan): Move this to the ast in a normalization pass.
+  // TODO(b/34928687): Move this to the ast in a normalization pass.
   private void renderIsAssignableFromMethod() {
     if (type.isJsOverlayImplementation()
         || type.containsMethod(MethodDescriptor.IS_ASSIGNABLE_FROM_METHOD_NAME)) {

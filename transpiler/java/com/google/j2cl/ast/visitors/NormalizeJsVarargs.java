@@ -43,9 +43,6 @@ import java.util.List;
  *
  * <p>At the call sites, array creation/literal the array is spread either statically (if it was an
  * array literal) or at runtime using the ES6 spread (...) operator.
- *
- * <p>TODO(tdeegan): Optimize the copying away if only read access to vararg[i] and vararg.length
- * happen in the body.
  */
 public class NormalizeJsVarargs extends NormalizationPass {
   @Override

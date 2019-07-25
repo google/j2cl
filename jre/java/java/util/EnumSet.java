@@ -118,12 +118,11 @@ public class EnumSet<E extends Enum<E>> extends AbstractSet<E> {
   }
 
   // Used in EnumMap.
-  // TODO(tdeegan): Remove this since it's not part of the public API.
   int capacity() {
     return size();
   }
 
-  // TODO(tdeegan): Remove these from the API if possible to make it a compile time error.
+  // TODO(b/138399086): Remove these from the API if possible to make it a compile time error.
   public static <E extends Enum<E>> EnumSet<E> complementOf(EnumSet<E> other) {
     throw new UnsupportedOperationException();
   }
