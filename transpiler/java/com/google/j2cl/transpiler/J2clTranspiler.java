@@ -106,7 +106,7 @@ class J2clTranspiler {
         executorService.submit(() -> new J2clTranspiler(options).transpileImpl());
     // Shutdown the executor service since it will only run a single transpilation. If not shutdown
     // it prevents the JVM from ending the process (see Executors.newFixedThreadPool()). This is not
-    // normally obvserved since the transpiler in normal circumstances ends with System.exit() which
+    // normally observed since the transpiler in normal circumstances ends with System.exit() which
     // ends all threads. But when the transpilation throws an exception, the exception propagates
     // out of main() and the process lingers due the live threads from these executors.
     executorService.shutdown();
