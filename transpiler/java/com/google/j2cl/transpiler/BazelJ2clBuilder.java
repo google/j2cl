@@ -21,6 +21,7 @@ import com.google.j2cl.common.FrontendUtils.FileInfo;
 import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
+import com.google.j2cl.frontend.Frontend;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -79,6 +80,9 @@ final class BazelJ2clBuilder extends BazelWorker {
   @Option(name = "-generatekytheindexingmetadata", hidden = true)
   protected boolean generateKytheIndexingMetadata = false;
 
+  @Option(name = "-frontend", metaVar = "(JDT | JAVAC)", hidden = true)
+  protected Frontend frontEnd = Frontend.JDT;
+
   @Override
   protected Problems run() {
     return J2clTranspiler.transpile(createOptions());
@@ -129,6 +133,7 @@ final class BazelJ2clBuilder extends BazelWorker {
         .setEmitReadableSourceMap(this.readableSourceMaps)
         .setDeclareLegacyNamespace(this.declareLegacyNamespaces)
         .setGenerateKytheIndexingMetadata(this.generateKytheIndexingMetadata)
+        .setFrontend(this.frontEnd)
         .build();
   }
 

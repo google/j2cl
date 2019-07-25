@@ -20,6 +20,7 @@ import static com.google.common.base.Preconditions.checkState;
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.FrontendUtils.FileInfo;
+import com.google.j2cl.frontend.Frontend;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
@@ -46,6 +47,8 @@ public abstract class J2clTranspilerOptions {
 
   public abstract boolean getGenerateKytheIndexingMetadata();
 
+  public abstract Frontend getFrontend();
+
   public static Builder newBuilder() {
     return new AutoValue_J2clTranspilerOptions.Builder();
   }
@@ -71,6 +74,8 @@ public abstract class J2clTranspilerOptions {
     public abstract Builder setDeclareLegacyNamespace(boolean b);
 
     public abstract Builder setGenerateKytheIndexingMetadata(boolean b);
+
+    public abstract Builder setFrontend(Frontend frontend);
 
     abstract J2clTranspilerOptions autoBuild();
 

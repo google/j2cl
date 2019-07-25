@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.frontend;
 
+import com.google.common.collect.ImmutableList;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.common.FrontendUtils.FileInfo;
 import com.google.j2cl.common.Problems;
@@ -25,36 +26,59 @@ import com.google.j2cl.frontend.jdt.JdtParser;
 import java.util.List;
 
 /** Drives the frontend to parse, typecheck and resolve Java source code. */
-public class Frontend {
+public enum Frontend {
+  JDT {
+    @Override
+    public List<CompilationUnit> getCompilationUnits(
+        List<String> classPath,
+        List<FileInfo> sources,
+        boolean useTargetClassPath,
+        Problems problems) {
+      CompilationUnitsAndTypeBindings jdtUnitsAndResolvedBindings =
+          createJdtUnitsAndResolveBindings(classPath, sources, useTargetClassPath, problems);
+      return convertUnits(jdtUnitsAndResolvedBindings, classPath, problems);
+    }
 
-  public static List<CompilationUnit> getCompilationUnits(
+    private List<CompilationUnit> convertUnits(
+        CompilationUnitsAndTypeBindings compilationUnitsAndTypeBindings,
+        List<String> classPath,
+        Problems problems) {
+      init(classPath, problems);
+      return CompilationUnitBuilder.build(compilationUnitsAndTypeBindings);
+    }
+
+    private CompilationUnitsAndTypeBindings createJdtUnitsAndResolveBindings(
+        List<String> classPath,
+        List<FileInfo> sources,
+        boolean useTargetClassPath,
+        Problems problems) {
+      JdtParser parser = new JdtParser(classPath, problems);
+      CompilationUnitsAndTypeBindings compilationUnitsAndTypeBindings =
+          parser.parseFiles(sources, useTargetClassPath);
+      problems.abortIfHasErrors();
+      return compilationUnitsAndTypeBindings;
+    }
+  },
+  JAVAC {
+    @Override
+    public List<CompilationUnit> getCompilationUnits(
+        List<String> classPath,
+        List<FileInfo> sources,
+        boolean useTargetClassPath,
+        Problems problems) {
+      problems.error("Javac frontend is not supported yet.");
+      return ImmutableList.of();
+    }
+  };
+
+  public abstract List<CompilationUnit> getCompilationUnits(
       List<String> classPath,
       List<FileInfo> sources,
       boolean useTargetClassPath,
-      Problems problems) {
-    CompilationUnitsAndTypeBindings jdtUnitsAndResolvedBindings =
-        createJdtUnitsAndResolveBindings(classPath, sources, useTargetClassPath, problems);
-    return convertUnits(jdtUnitsAndResolvedBindings, classPath, problems);
-  }
+      Problems problems);
 
-  private static List<CompilationUnit> convertUnits(
-      CompilationUnitsAndTypeBindings compilationUnitsAndTypeBindings,
-      List<String> classPath,
-      Problems problems) {
+  private static void init(List<String> classPath, Problems problems) {
     // Records information about package-info files supplied as byte code.
     PackageInfoCache.init(classPath, problems);
-    return CompilationUnitBuilder.build(compilationUnitsAndTypeBindings);
-  }
-
-  private static CompilationUnitsAndTypeBindings createJdtUnitsAndResolveBindings(
-      List<String> classPath,
-      List<FileInfo> sources,
-      boolean useTargetClassPath,
-      Problems problems) {
-    JdtParser parser = new JdtParser(classPath, problems);
-    CompilationUnitsAndTypeBindings compilationUnitsAndTypeBindings =
-        parser.parseFiles(sources, useTargetClassPath);
-    problems.abortIfHasErrors();
-    return compilationUnitsAndTypeBindings;
   }
 }

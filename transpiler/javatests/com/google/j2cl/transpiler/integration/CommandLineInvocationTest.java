@@ -44,6 +44,27 @@ public class CommandLineInvocationTest extends TestCase {
                 + "use -help for a list of possible options");
   }
 
+  public void testFrontendFlag() throws IOException {
+    newTesterWithDefaults()
+        .addArgs("-frontend", "llama")
+        .addCompilationUnit("Foo", "public class Foo {}")
+        .assertTranspileFails()
+        .assertErrorsContainsSnippets("\"llama\" is not a valid value for \"-frontend");
+
+    newTesterWithDefaults()
+        .addArgs("-frontend", "javac")
+        .addCompilationUnit("Foo", "public class Foo {}")
+        .assertTranspileFails()
+        .assertErrorsContainsSnippets(" Javac frontend is not supported");
+
+    Path outputLocation = Files.createTempFile("output", ".zip");
+    newTesterWithDefaults()
+        .addArgs("-frontend", "jdt")
+        .setOutputPath(outputLocation)
+        .addCompilationUnit("Foo", "public class Foo {}")
+        .assertTranspileSucceeds();
+  }
+
   public void testSyntaxError() {
     newTesterWithDefaults()
         .addCompilationUnit("SyntaxError", "public class SyntaxError {", "  =", "}")

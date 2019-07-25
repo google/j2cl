@@ -20,6 +20,7 @@ import com.google.j2cl.common.CommandLineTool;
 import com.google.j2cl.common.FrontendUtils;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
+import com.google.j2cl.frontend.Frontend;
 import java.io.File;
 import java.nio.file.FileSystem;
 import java.nio.file.Files;
@@ -77,6 +78,13 @@ public final class J2clCommandLineRunner extends CommandLineTool {
       hidden = true)
   protected boolean generateKytheIndexingMetadata = false;
 
+  @Option(
+      name = "-frontend",
+      metaVar = "(JDT | JAVAC)",
+      usage = "Select the frontend to use: JDT (default), JAVAC (experimental).",
+      hidden = true)
+  protected Frontend frontEnd = Frontend.JDT;
+
   private J2clCommandLineRunner() {
     super("j2cl");
   }
@@ -114,6 +122,7 @@ public final class J2clCommandLineRunner extends CommandLineTool {
         .setEmitReadableLibraryInfo(false)
         .setDeclareLegacyNamespace(this.declareLegacyNamespaces)
         .setGenerateKytheIndexingMetadata(this.generateKytheIndexingMetadata)
+        .setFrontend(this.frontEnd)
         .build();
   }
 

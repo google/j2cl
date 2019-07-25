@@ -86,7 +86,6 @@ import com.google.j2cl.ast.visitors.VerifySingleAstReference;
 import com.google.j2cl.ast.visitors.VerifyVariableScoping;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
-import com.google.j2cl.frontend.Frontend;
 import com.google.j2cl.generator.OutputGeneratorStage;
 import java.io.IOException;
 import java.nio.file.FileSystem;
@@ -124,11 +123,13 @@ class J2clTranspiler {
   private Problems transpileImpl() {
     try {
       List<CompilationUnit> j2clUnits =
-          Frontend.getCompilationUnits(
-              options.getClasspaths(),
-              options.getSources(),
-              options.getGenerateKytheIndexingMetadata(),
-              problems);
+          options
+              .getFrontend()
+              .getCompilationUnits(
+                  options.getClasspaths(),
+                  options.getSources(),
+                  options.getGenerateKytheIndexingMetadata(),
+                  problems);
       if (!j2clUnits.isEmpty()) {
         checkUnits(j2clUnits);
         normalizeUnits(j2clUnits);
