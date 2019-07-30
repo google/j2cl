@@ -13,6 +13,7 @@
  */
 package com.google.j2cl.transpiler;
 
+import com.google.common.base.Ascii;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.bazel.BazelWorker;
@@ -80,8 +81,9 @@ final class BazelJ2clBuilder extends BazelWorker {
   @Option(name = "-generatekytheindexingmetadata", hidden = true)
   protected boolean generateKytheIndexingMetadata = false;
 
-  @Option(name = "-frontend", metaVar = "(JDT | JAVAC)", hidden = true)
-  protected Frontend frontEnd = Frontend.JDT;
+  /** Temporary flag to select the frontend during the transition to javac. */
+  private static final Frontend FRONTEND =
+      Frontend.valueOf(Ascii.toUpperCase(System.getProperty("j2cl.frontend", "jdt")));
 
   @Override
   protected Problems run() {
@@ -133,7 +135,7 @@ final class BazelJ2clBuilder extends BazelWorker {
         .setEmitReadableSourceMap(this.readableSourceMaps)
         .setDeclareLegacyNamespace(this.declareLegacyNamespaces)
         .setGenerateKytheIndexingMetadata(this.generateKytheIndexingMetadata)
-        .setFrontend(this.frontEnd)
+        .setFrontend(FRONTEND)
         .build();
   }
 
