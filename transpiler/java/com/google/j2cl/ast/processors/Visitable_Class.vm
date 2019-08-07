@@ -8,13 +8,13 @@ public class Visitor_${className} {
     Node result = node;
 
     ProcessorPrivate processorImpl = (ProcessorPrivate) processor;
+
     if (processorImpl.shouldProcess${className}(node)) {
-      node = processorImpl.preProcess${className}(node);
       pushContext(processor, node);
       visitMembers(processorImpl, node);
       popContext(processor, node);
-      result = processorImpl.postProcess${className}(node);
     }
+    result = processorImpl.postProcess${className}(node);
     return result;
   }
 

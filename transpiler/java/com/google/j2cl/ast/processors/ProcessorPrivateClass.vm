@@ -14,10 +14,6 @@ abstract class ProcessorPrivate implements Processor {
 #end
 
 #foreach($clazz in $classes)
-  abstract ${clazz.SimpleName} preProcess${clazz.SimpleName}(${clazz.SimpleName} node);
-#end
-
-#foreach($clazz in $classes)
   abstract Node postProcess${clazz.SimpleName}(${clazz.SimpleName} node);
 #end
 }
