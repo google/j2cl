@@ -15,6 +15,21 @@
  */
 package com.google.j2cl.frontend.jdt;
 
+import static com.google.j2cl.frontend.common.FrontendConstants.DO_NOT_AUTOBOX_ANNOTATION_NAME;
+import static com.google.j2cl.frontend.common.FrontendConstants.JS_ASYNC_ANNOTATION_NAME;
+import static com.google.j2cl.frontend.common.FrontendConstants.JS_CONSTRUCTOR_ANNOTATION_NAME;
+import static com.google.j2cl.frontend.common.FrontendConstants.JS_ENUM_ANNOTATION_NAME;
+import static com.google.j2cl.frontend.common.FrontendConstants.JS_FUNCTION_ANNOTATION_NAME;
+import static com.google.j2cl.frontend.common.FrontendConstants.JS_IGNORE_ANNOTATION_NAME;
+import static com.google.j2cl.frontend.common.FrontendConstants.JS_METHOD_ANNOTATION_NAME;
+import static com.google.j2cl.frontend.common.FrontendConstants.JS_NONNULL_ANNOTATION_NAME;
+import static com.google.j2cl.frontend.common.FrontendConstants.JS_OPTIONAL_ANNOTATION_NAME;
+import static com.google.j2cl.frontend.common.FrontendConstants.JS_OVERLAY_ANNOTATION_NAME;
+import static com.google.j2cl.frontend.common.FrontendConstants.JS_PACKAGE_ANNOTATION_NAME;
+import static com.google.j2cl.frontend.common.FrontendConstants.JS_PROPERTY_ANNOTATION_NAME;
+import static com.google.j2cl.frontend.common.FrontendConstants.JS_TYPE_ANNOTATION_NAME;
+import static com.google.j2cl.frontend.common.FrontendConstants.SUPPRESS_WARNINGS_ANNOTATION_NAME;
+
 import java.util.Arrays;
 import java.util.Optional;
 import org.eclipse.jdt.core.dom.IAnnotationBinding;
@@ -26,23 +41,6 @@ import org.eclipse.jdt.core.dom.ITypeBinding;
  * Utility methods to get information about Js Interop annotations.
  */
 public class JsInteropAnnotationUtils {
-  private static final String JS_CONSTRUCTOR_ANNOTATION_NAME =
-      "jsinterop.annotations.JsConstructor";
-  private static final String JS_ASYNC_ANNOTATION_NAME = "jsinterop.annotations.JsAsync";
-  private static final String JS_ENUM_ANNOTATION_NAME = "jsinterop.annotations.JsEnum";
-  private static final String JS_FUNCTION_ANNOTATION_NAME = "jsinterop.annotations.JsFunction";
-  private static final String JS_IGNORE_ANNOTATION_NAME = "jsinterop.annotations.JsIgnore";
-  private static final String JS_METHOD_ANNOTATION_NAME = "jsinterop.annotations.JsMethod";
-  private static final String JS_NONNULL_ANNOTATION_NAME = "jsinterop.annotations.JsNonNull";
-  private static final String JS_OPTIONAL_ANNOTATION_NAME = "jsinterop.annotations.JsOptional";
-  private static final String JS_OVERLAY_ANNOTATION_NAME = "jsinterop.annotations.JsOverlay";
-  private static final String JS_PACKAGE_ANNOTATION_NAME = "jsinterop.annotations.JsPackage";
-  private static final String JS_PROPERTY_ANNOTATION_NAME = "jsinterop.annotations.JsProperty";
-  private static final String JS_TYPE_ANNOTATION_NAME = "jsinterop.annotations.JsType";
-  private static final String SUPPRESS_WARNINGS_NAME = "java.lang.SuppressWarnings";
-  private static final String DO_NOT_AUTOBOX_ANNOTATION_NAME =
-      "javaemul.internal.annotations.DoNotAutobox";
-
   private JsInteropAnnotationUtils() {}
 
   public static IAnnotationBinding getJsAsyncAnnotation(IBinding methodBinding) {
@@ -123,7 +121,7 @@ public class JsInteropAnnotationUtils {
   public static boolean isUnusableByJsSuppressed(IBinding binding) {
     IAnnotationBinding suppressWarningsBinding =
         JdtAnnotationUtils.findAnnotationBindingByName(
-            binding.getAnnotations(), SUPPRESS_WARNINGS_NAME);
+            binding.getAnnotations(), SUPPRESS_WARNINGS_ANNOTATION_NAME);
     if (suppressWarningsBinding == null) {
       return false;
     }

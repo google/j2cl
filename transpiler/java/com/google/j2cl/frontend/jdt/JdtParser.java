@@ -20,6 +20,7 @@ import com.google.common.collect.Iterables;
 import com.google.j2cl.common.FrontendUtils.FileInfo;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
+import com.google.j2cl.frontend.common.FrontendConstants;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -59,21 +60,6 @@ public class JdtParser {
     this.problems = problems;
   }
 
-  private static final List<String> wellKnownClassNames =
-      ImmutableList.of(
-          "java.io.Serializable",
-          "java.lang.CharSequence",
-          "java.lang.Class",
-          "java.lang.Cloneable",
-          "java.lang.Comparable",
-          "java.lang.Enum",
-          "java.lang.Number",
-          "java.lang.Object",
-          "java.lang.Runnable",
-          "java.lang.String",
-          "java.lang.Throwable",
-          "javaemul.internal.InternalPreconditions");
-
   /** Returns a map from file paths to compilation units after JDT parsing. */
   public CompilationUnitsAndTypeBindings parseFiles(
       List<FileInfo> filePaths, boolean useTargetPath) {
@@ -110,7 +96,9 @@ public class JdtParser {
     parser.createASTs(
         filePaths.stream().map(f -> f.sourcePath()).toArray(String[]::new),
         getEncodings(filePaths.size()),
-        wellKnownClassNames.stream().map(BindingKey::createTypeBindingKey).toArray(String[]::new),
+        FrontendConstants.WELL_KNOWN_CLASS_NAMES.stream()
+            .map(BindingKey::createTypeBindingKey)
+            .toArray(String[]::new),
         astRequestor,
         null);
     return new CompilationUnitsAndTypeBindings(compilationUnitsByFilePath, wellKnownTypeBindings);

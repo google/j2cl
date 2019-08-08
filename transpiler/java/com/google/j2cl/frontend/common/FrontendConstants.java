@@ -1,0 +1,56 @@
+/*
+ * Copyright 2019 Google Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+package com.google.j2cl.frontend.common;
+
+import com.google.common.collect.ImmutableList;
+
+/** Constants common to all frontends. */
+public class FrontendConstants {
+
+  /** Annotations names. */
+  public static final String JS_CONSTRUCTOR_ANNOTATION_NAME = "jsinterop.annotations.JsConstructor";
+
+  public static final String JS_ASYNC_ANNOTATION_NAME = "jsinterop.annotations.JsAsync";
+  public static final String JS_ENUM_ANNOTATION_NAME = "jsinterop.annotations.JsEnum";
+  public static final String JS_FUNCTION_ANNOTATION_NAME = "jsinterop.annotations.JsFunction";
+  public static final String JS_IGNORE_ANNOTATION_NAME = "jsinterop.annotations.JsIgnore";
+  public static final String JS_METHOD_ANNOTATION_NAME = "jsinterop.annotations.JsMethod";
+  public static final String JS_NONNULL_ANNOTATION_NAME = "jsinterop.annotations.JsNonNull";
+  public static final String JS_OPTIONAL_ANNOTATION_NAME = "jsinterop.annotations.JsOptional";
+  public static final String JS_OVERLAY_ANNOTATION_NAME = "jsinterop.annotations.JsOverlay";
+  public static final String JS_PACKAGE_ANNOTATION_NAME = "jsinterop.annotations.JsPackage";
+  public static final String JS_PROPERTY_ANNOTATION_NAME = "jsinterop.annotations.JsProperty";
+  public static final String JS_TYPE_ANNOTATION_NAME = "jsinterop.annotations.JsType";
+  public static final String SUPPRESS_WARNINGS_ANNOTATION_NAME = "java.lang.SuppressWarnings";
+  public static final String DO_NOT_AUTOBOX_ANNOTATION_NAME =
+      "javaemul.internal.annotations.DoNotAutobox";
+
+  /** Classes that are assumed to be allways present. */
+  public static final ImmutableList<String> WELL_KNOWN_CLASS_NAMES =
+      ImmutableList.of(
+          "java.io.Serializable",
+          "java.lang.CharSequence",
+          "java.lang.Class",
+          "java.lang.Cloneable",
+          "java.lang.Comparable",
+          "java.lang.Enum",
+          "java.lang.Number",
+          "java.lang.Object",
+          "java.lang.Runnable",
+          "java.lang.String",
+          "java.lang.Throwable",
+          "javaemul.internal.InternalPreconditions");
+}

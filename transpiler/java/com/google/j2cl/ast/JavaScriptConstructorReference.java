@@ -39,6 +39,11 @@ public class JavaScriptConstructorReference extends Expression {
   }
 
   @Override
+  public boolean isEffectivelyInvariant() {
+    return true;
+  }
+
+  @Override
   public JavaScriptConstructorReference clone() {
     return new JavaScriptConstructorReference(typeDeclaration);
   }
