@@ -40,7 +40,7 @@ public abstract class AbstractTransformer<T> extends ProcessorPrivate {
 #foreach($clazz in $classes)
 
   @Override
-  final Node postProcess${clazz.SimpleName}(${clazz.SimpleName} node) {
+  final ${clazz.TopClassName} postProcess${clazz.SimpleName}(${clazz.SimpleName} node) {
     return node;
   }
 #end

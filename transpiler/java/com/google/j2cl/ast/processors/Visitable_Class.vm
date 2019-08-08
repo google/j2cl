@@ -1,11 +1,13 @@
 package ${packageName};
 
 import com.google.common.base.Preconditions;
+import com.google.j2cl.ast.processors.common.ListVisitor;
+import com.google.j2cl.ast.processors.common.Processor;
 
 public class Visitor_${className} {
 
-  public static Node visit(Processor processor, ${className} node) {
-    Node result = node;
+  public static ${visitableClass.TopClassName} visit(Processor processor, ${className} node) {
+    ${visitableClass.TopClassName} result = node;
 
     ProcessorPrivate processorImpl = (ProcessorPrivate) processor;
 
@@ -51,7 +53,9 @@ public class Visitor_${className} {
     if (node.${field.Name} != null) {
 #end
 #if(${field.isList()})
-      VisitorUtils.visitList(processorImpl, node.${field.Name});
+      ListVisitor.visit(
+          node.${field.Name},
+          n -> (${field.ComponentTypeName}) n.accept(processorImpl));
 #elseif (${field.isNullable()})
       node.${field.Name} = (${field.TypeName}) node.${field.Name}.accept(processorImpl);
 #else

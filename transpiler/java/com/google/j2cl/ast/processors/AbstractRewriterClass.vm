@@ -32,7 +32,7 @@ public abstract class AbstractRewriter extends ProcessorPrivate implements Rewri
 #end
 #foreach($clazz in $classes)
   @Override
-  final Node postProcess${clazz.SimpleName}(${clazz.SimpleName} node) {
+  final ${clazz.TopClassName} postProcess${clazz.SimpleName}(${clazz.SimpleName} node) {
     return rewrite${clazz.SimpleName}(node);
   }
 
@@ -40,7 +40,7 @@ public abstract class AbstractRewriter extends ProcessorPrivate implements Rewri
 #foreach($clazz in $classes)
 
   @Override
-  public Node rewrite${clazz.SimpleName}(${clazz.SimpleName} node) {
+  public ${clazz.TopClassName}  rewrite${clazz.SimpleName}(${clazz.SimpleName} node) {
 #if(${clazz.isTop()})
     return node;
 #else

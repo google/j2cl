@@ -7,6 +7,6 @@ interface Rewriter {
 #end
 
 #foreach($clazz in $classes)
-  Node rewrite${clazz.SimpleName}(${clazz.SimpleName} node);
+  ${clazz.TopClassName} rewrite${clazz.SimpleName}(${clazz.SimpleName} node);
 #end
 }

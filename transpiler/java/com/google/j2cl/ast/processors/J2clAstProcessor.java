@@ -19,6 +19,7 @@ import static com.google.auto.common.MoreElements.isAnnotationPresent;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.auto.common.MoreElements;
+import com.google.auto.common.MoreTypes;
 import com.google.auto.service.AutoService;
 import com.google.common.base.Joiner;
 import com.google.common.base.Objects;
@@ -26,6 +27,7 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.j2cl.ast.annotations.Context;
@@ -41,6 +43,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.Processor;
@@ -48,9 +51,12 @@ import javax.annotation.processing.RoundEnvironment;
 import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
+import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
+import javax.lang.model.type.TypeKind;
+import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.ElementFilter;
 import javax.lang.model.util.Types;
 import javax.tools.Diagnostic.Kind;
@@ -121,7 +127,9 @@ public class J2clAstProcessor extends AbstractProcessor {
       return false;
     }
     Collection<? extends Element> annotatedElements =
-        roundEnv.getElementsAnnotatedWith(Visitable.class);
+        roundEnv.getElementsAnnotatedWith(Visitable.class).stream()
+            .filter(element -> element.getKind() != ElementKind.INTERFACE)
+            .collect(Collectors.toList());
     List<TypeElement> types =
         new ImmutableList.Builder<TypeElement>()
             .addAll(deferredTypes)
@@ -163,18 +171,24 @@ public class J2clAstProcessor extends AbstractProcessor {
     String name;
     Type type;
     String typeName;
+    String componentTypeName;
 
     boolean isNullable;
 
-    Field(String name, TypeElement type, boolean isNullable) {
+    Field(String name, TypeMirror type, boolean isNullable) {
       this.name = name;
       this.isNullable = isNullable;
-      if (type.getQualifiedName().contentEquals("java.util.List")) {
+      TypeElement typeElement = MoreElements.asType(MoreTypes.asElement(type));
+      if (typeElement.getQualifiedName().contentEquals("java.util.List")) {
         this.type = Type.LIST;
+        this.componentTypeName =
+            MoreTypes.asElement(MoreTypes.asDeclared(type).getTypeArguments().get(0))
+                .getSimpleName()
+                .toString();
       } else {
         this.type = Type.SCALAR;
       }
-      this.typeName = type.getSimpleName().toString();
+      this.typeName = typeElement.getSimpleName().toString();
     }
 
     public String getName() {
@@ -183,6 +197,10 @@ public class J2clAstProcessor extends AbstractProcessor {
 
     public String getTypeName() {
       return typeName;
+    }
+
+    public String getComponentTypeName() {
+      return componentTypeName;
     }
 
     public boolean isList() {
@@ -201,7 +219,8 @@ public class J2clAstProcessor extends AbstractProcessor {
     String packageName;
     String simpleName;
     String superclassName;
-    List<Field> fieldNames;
+    String topClassName;
+    List<Field> fields;
     boolean isContext;
 
     @Override
@@ -235,13 +254,17 @@ public class J2clAstProcessor extends AbstractProcessor {
     public String getSuperclassName() {
       return superclassName;
     }
+
+    public String getTopClassName() {
+      return topClassName;
+    }
   }
 
   private VelocityContext createVelocityContextForVisitorHelper(VisitableClass visitableClass) {
     VelocityContext vc = new VelocityContext();
     vc.put("className", visitableClass.simpleName);
     vc.put("packageName", visitableClass.packageName);
-    vc.put("fields", visitableClass.fieldNames);
+    vc.put("fields", visitableClass.fields);
     vc.put("visitableClass", visitableClass);
     return vc;
   }
@@ -300,17 +323,14 @@ public class J2clAstProcessor extends AbstractProcessor {
   private VisitableClass extractVisitableClass(final TypeElement typeElement) {
     final Types typeUtils = processingEnv.getTypeUtils();
     ImmutableList<Field> allFieldsNames =
-        ElementFilter.fieldsIn(typeElement.getEnclosedElements())
-            .stream()
+        ElementFilter.fieldsIn(typeElement.getEnclosedElements()).stream()
             .filter(hasAnnotation(Visitable.class))
             .map(
                 variableElement -> {
-                  TypeElement fieldTypeElement =
-                      (TypeElement)
-                          typeUtils.asElement(typeUtils.erasure(variableElement.asType()));
+                  TypeMirror fieldType = variableElement.asType();
                   return new Field(
                       variableElement.getSimpleName().toString(),
-                      fieldTypeElement,
+                      fieldType,
                       hasAnnotation(Nullable.class).apply(variableElement));
                 })
             .collect(toImmutableList());
@@ -325,18 +345,42 @@ public class J2clAstProcessor extends AbstractProcessor {
     VisitableClass visitableClass = new VisitableClass();
     visitableClass.simpleName = typeElement.getSimpleName().toString();
     visitableClass.packageName = MoreElements.getPackage(typeElement).getQualifiedName().toString();
-    visitableClass.fieldNames = allFieldsNames;
+    visitableClass.fields = allFieldsNames;
     visitableClass.isContext = isAnnotationPresent(typeElement, Context.class);
-    if (typeElement.getSuperclass() != null
-        && MoreElements.getPackage(typeElement)
-            .getQualifiedName()
-            .equals(
-                MoreElements.getPackage(typeUtils.asElement(typeElement.getSuperclass()))
-                    .getQualifiedName())) {
+    if (isVisitable(typeElement.getSuperclass())) {
       visitableClass.superclassName =
           typeUtils.asElement(typeElement.getSuperclass()).getSimpleName().toString();
     }
+    TypeElement topElement = typeElement;
+    TypeMirror visitableSuper;
+    while ((visitableSuper = getSingleVisitableSuper(topElement)) != null) {
+      topElement = MoreElements.asType(MoreTypes.asElement(visitableSuper));
+    }
+    visitableClass.topClassName = topElement.getSimpleName().toString();
     return visitableClass;
+  }
+
+  private TypeMirror getSingleVisitableSuper(TypeElement typeElement) {
+    ArrayList<TypeMirror> supers = new ArrayList<>();
+    if (typeElement.getSuperclass() != null && isVisitable(typeElement.getSuperclass())) {
+      supers.add(typeElement.getSuperclass());
+    }
+    supers.addAll(
+        typeElement.getInterfaces().stream()
+            .filter(J2clAstProcessor::isVisitable)
+            .collect(toImmutableList()));
+    if (supers.size() > 1) {
+      abortWithError(
+          typeElement.getQualifiedName() + " has more than one @Visitable direct supertype",
+          typeElement);
+    }
+    return Iterables.getOnlyElement(supers, null);
+  }
+
+  private static boolean isVisitable(TypeMirror typeMirror) {
+    return typeMirror != null
+        && typeMirror.getKind() != TypeKind.NONE
+        && MoreTypes.asElement(typeMirror).getAnnotationsByType(Visitable.class).length != 0;
   }
 
   private boolean hasAcceptMethod(final TypeElement typeElement) {

@@ -13,19 +13,17 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.ast;
+package com.google.j2cl.ast.processors.common;
 
 import java.util.List;
+import java.util.function.Function;
 
-/**
- * A general Visitor class to traverse/modify the AST.
- */
-public class VisitorUtils {
-  @SuppressWarnings("unchecked")
-  static <T extends Node> void visitList(Processor processor, List<T> nodeList) {
+/** Visitor helper for lists. */
+public class ListVisitor {
+  public static <T> void visit(List<T> nodeList, Function<T, T> acceptor) {
     for (int i = 0; i < nodeList.size(); i++) {
       T oldNode = nodeList.get(i);
-      T newNode = (T) oldNode.accept(processor);
+      T newNode = acceptor.apply(oldNode);
       if (newNode == null) {
         // Node is removed from list.
         nodeList.remove(i);
@@ -39,5 +37,5 @@ public class VisitorUtils {
     }
   }
 
-  private VisitorUtils() {}
+  private ListVisitor() {}
 }

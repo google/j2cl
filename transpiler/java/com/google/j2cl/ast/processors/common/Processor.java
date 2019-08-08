@@ -13,9 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.ast;
+package com.google.j2cl.ast.processors.common;
 
-/**
- * A placeholder interface for APT generation.
- */
+/** An opaque interface representing a visitor. */
 public interface Processor {}

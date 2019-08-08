@@ -17,6 +17,7 @@ package com.google.j2cl.ast;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.ast.annotations.Visitable;
+import com.google.j2cl.ast.processors.common.Processor;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;

@@ -1,5 +1,7 @@
 package ${packageName};
 
+import com.google.j2cl.ast.processors.common.Processor;
+
 abstract class ProcessorPrivate implements Processor {
 #foreach($clazz in $classes)
 #if(${clazz.isContext()})
@@ -14,6 +16,6 @@ abstract class ProcessorPrivate implements Processor {
 #end
 
 #foreach($clazz in $classes)
-  abstract Node postProcess${clazz.SimpleName}(${clazz.SimpleName} node);
+  abstract ${clazz.TopClassName} postProcess${clazz.SimpleName}(${clazz.SimpleName} node);
 #end
 }
