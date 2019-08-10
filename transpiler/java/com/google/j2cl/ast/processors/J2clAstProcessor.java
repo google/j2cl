@@ -43,7 +43,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.Processor;
@@ -51,14 +50,12 @@ import javax.annotation.processing.RoundEnvironment;
 import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
-import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.TypeKind;
 import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.ElementFilter;
-import javax.lang.model.util.Types;
 import javax.tools.Diagnostic.Kind;
 import javax.tools.JavaFileObject;
 import org.apache.velocity.VelocityContext;
@@ -127,9 +124,7 @@ public class J2clAstProcessor extends AbstractProcessor {
       return false;
     }
     Collection<? extends Element> annotatedElements =
-        roundEnv.getElementsAnnotatedWith(Visitable.class).stream()
-            .filter(element -> element.getKind() != ElementKind.INTERFACE)
-            .collect(Collectors.toList());
+        roundEnv.getElementsAnnotatedWith(Visitable.class);
     List<TypeElement> types =
         new ImmutableList.Builder<TypeElement>()
             .addAll(deferredTypes)
@@ -321,7 +316,6 @@ public class J2clAstProcessor extends AbstractProcessor {
   }
 
   private VisitableClass extractVisitableClass(final TypeElement typeElement) {
-    final Types typeUtils = processingEnv.getTypeUtils();
     ImmutableList<Field> allFieldsNames =
         ElementFilter.fieldsIn(typeElement.getEnclosedElements()).stream()
             .filter(hasAnnotation(Visitable.class))
@@ -347,9 +341,9 @@ public class J2clAstProcessor extends AbstractProcessor {
     visitableClass.packageName = MoreElements.getPackage(typeElement).getQualifiedName().toString();
     visitableClass.fields = allFieldsNames;
     visitableClass.isContext = isAnnotationPresent(typeElement, Context.class);
-    if (isVisitable(typeElement.getSuperclass())) {
+    if (getSingleVisitableSuper(typeElement) != null) {
       visitableClass.superclassName =
-          typeUtils.asElement(typeElement.getSuperclass()).getSimpleName().toString();
+          MoreTypes.asElement(getSingleVisitableSuper(typeElement)).getSimpleName().toString();
     }
     TypeElement topElement = typeElement;
     TypeMirror visitableSuper;
