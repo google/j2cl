@@ -731,7 +731,7 @@ class JdtUtils {
         .setReturnTypeDescriptor(returnTypeDescriptor)
         .setTypeParameterTypeDescriptors(typeParameterTypeDescriptors)
         .setJsInfo(jsInfo)
-        .setJsFunction(JsInteropUtils.isOrOverridesJsFunctionMethod(methodBinding))
+        .setJsFunction(isOrOverridesJsFunctionMethod(methodBinding))
         .setVisibility(visibility)
         .setStatic(isStatic)
         .setConstructor(isConstructor)
@@ -745,6 +745,22 @@ class JdtUtils {
         .setUnusableByJsSuppressed(JsInteropAnnotationUtils.isUnusableByJsSuppressed(methodBinding))
         .setDeprecated(isDeprecated(methodBinding))
         .build();
+  }
+
+  private static boolean isOrOverridesJsFunctionMethod(IMethodBinding methodBinding) {
+    ITypeBinding declaringType = methodBinding.getDeclaringClass();
+    if (JsInteropUtils.isJsFunction(declaringType)
+        && declaringType.getFunctionalInterfaceMethod() != null
+        && methodBinding.getMethodDeclaration()
+            == declaringType.getFunctionalInterfaceMethod().getMethodDeclaration()) {
+      return true;
+    }
+    for (IMethodBinding overriddenMethodBinding : getOverriddenMethods(methodBinding)) {
+      if (isOrOverridesJsFunctionMethod(overriddenMethodBinding)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   /** Checks overriding chain to compute JsInfo. */

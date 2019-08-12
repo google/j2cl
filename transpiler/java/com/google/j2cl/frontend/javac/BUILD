@@ -12,6 +12,9 @@ java_library(
     name = "javac",
     srcs = glob(["*.java"]),
     deps = [
+        "//third_party:guava",
+        "//third_party:gwt-jsinterop-annotations",
         "//third_party:javac",
+        "//transpiler/java/com/google/j2cl/ast",
     ],
 )

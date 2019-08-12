@@ -102,22 +102,6 @@ public class JsInteropUtils {
         .build();
   }
 
-  public static boolean isOrOverridesJsFunctionMethod(IMethodBinding methodBinding) {
-    ITypeBinding declaringType = methodBinding.getDeclaringClass();
-    if (isJsFunction(declaringType)
-        && declaringType.getFunctionalInterfaceMethod() != null
-        && methodBinding.getMethodDeclaration()
-            == declaringType.getFunctionalInterfaceMethod().getMethodDeclaration()) {
-      return true;
-    }
-    for (IMethodBinding overriddenMethodBinding : JdtUtils.getOverriddenMethods(methodBinding)) {
-      if (isOrOverridesJsFunctionMethod(overriddenMethodBinding)) {
-        return true;
-      }
-    }
-    return false;
-  }
-
   private static JsMemberType getJsMemberType(IBinding member, boolean isPropertyAccessor) {
     if (member instanceof IVariableBinding) {
       return JsMemberType.PROPERTY;
