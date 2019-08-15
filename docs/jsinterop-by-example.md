@@ -1,6 +1,8 @@
 # J2CL JsInterop by Example
 
-This is meant to be a quick guide on how to use JsInterop.
+This is meant to be a quick guide on how to use JsInterop. More details can be
+found in the
+[design doc](https://docs.google.com/document/d/10fmlEYIHcyead_4R1S5wKGs1t2I7Fnp_PaNaa7XTEk0/edit?usp=sharing).
 
 ## Calling JavaScript from Java
 
