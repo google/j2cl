@@ -43,6 +43,16 @@ class N extends j_l_Object {
   getB() {}
 
   /**
+   * Bridge method for exposing non-JsMethod.
+   * @override
+   * @return {B}
+   * @public
+   */
+  m_getB__() {
+    return this.getB();
+  }
+
+  /**
    * @return {void}
    * @public
    */

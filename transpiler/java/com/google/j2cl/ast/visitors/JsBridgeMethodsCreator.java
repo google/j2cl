@@ -112,11 +112,6 @@ public class JsBridgeMethodsCreator extends NormalizationPass {
     for (Method method : type.getMethods()) {
       MethodDescriptor declaredMethodDescriptor = method.getDescriptor();
 
-      // Don't bridge abstract methods.
-      if (declaredMethodDescriptor.isAbstract()) {
-        continue;
-      }
-
       MethodDescriptor exposedNonJsMember = getExposedNonJsMember(declaredMethodDescriptor);
       if (exposedNonJsMember != null) {
         delegateMethodDescriptorsByBridgeMethodDescriptor.put(
@@ -169,7 +164,7 @@ public class JsBridgeMethodsCreator extends NormalizationPass {
       }
       // If the overridden method has itself already exposed a non-JsMember, then it doesn't need to
       // be exposed again.
-      if (getExposedNonJsMember(overriddenMethod) != null && !overriddenMethod.isAbstract()) {
+      if (getExposedNonJsMember(overriddenMethod) != null) {
         return null; // the overridden method has already exposed the method.
       }
     }

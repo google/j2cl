@@ -1052,6 +1052,7 @@ public class AstUtils {
           devirtualizeMethodDescriptor(
               MethodDescriptor.Builder.from(methodDescriptor.getDeclarationDescriptor())
                   .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
+                  .setDefaultMethod(false)
                   .build(),
               targetTypeDescriptor,
               postfix));

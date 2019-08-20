@@ -21,6 +21,7 @@ import static com.google.j2cl.transpiler.utils.Asserts.assertNotNull;
 import static com.google.j2cl.transpiler.utils.Asserts.assertNull;
 import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
 
+import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsOverlay;
@@ -43,6 +44,7 @@ public class NativeJsTypeTest {
     testUninitializedStaticOverlayField();
     testVariableExternCollision();
     testAliasExternCollision();
+    testBridgesNativeSubclass();
   }
 
   @JsType(isNative = true)
@@ -463,4 +465,52 @@ public class NativeJsTypeTest {
     object = (MyNativeJsTypeWithInner.Inner) (Object) new MyNativeJsTypeInner(4);
     assertEquals(4, object.n);
   }
+
+  interface InterfaceWithDefaultMethods {
+    String method();
+
+    default String defaultMethod() {
+      return "default-method";
+    }
+  }
+
+  private abstract static class AbstractSuperWithPackagePrivateMethod {
+    @JsConstructor
+    AbstractSuperWithPackagePrivateMethod() {}
+
+    String packagePrivateMethod() {
+      return "package-private";
+    }
+  }
+
+  @JsType(namespace = "woo.NativeJsTypeTest", name = "AbstractJavaSuperclass")
+  private abstract static class AbstractSuperClassForJs
+      extends AbstractSuperWithPackagePrivateMethod implements InterfaceWithDefaultMethods {
+    public AbstractSuperClassForJs() {}
+
+    @Override
+    public abstract String packagePrivateMethod();
+
+    @Override
+    public abstract String method();
+  }
+
+  private static void testBridgesNativeSubclass() {
+    AbstractSuperClassForJs nativeSubclass = createBridgesNativeSubclass();
+    // Tests that the default method is implemented.
+    assertEquals("default-method", nativeSubclass.defaultMethod());
+
+    assertEquals("package-private-override", nativeSubclass.packagePrivateMethod());
+    // Tests package private bridge.
+    assertEquals(
+        "package-private-override",
+        ((AbstractSuperWithPackagePrivateMethod) (Object) nativeSubclass).packagePrivateMethod());
+
+    assertEquals("method", nativeSubclass.method());
+    // Tests JsMethod bridge.
+    assertEquals("method", ((InterfaceWithDefaultMethods) (Object) nativeSubclass).method());
+  }
+
+  @JsMethod(namespace = "woo.NativeJsTypeTest.NativeBridgesSubclass", name = "create")
+  private static native AbstractSuperClassForJs createBridgesNativeSubclass();
 }

@@ -34,8 +34,8 @@ public class DefaultMethodsResolver extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     for (Type type : compilationUnit.getTypes()) {
-      if (type.isInterface() || type.isAbstract()) {
-        // Only concrete classes inherit default methods. Nothing to do.
+      if (type.isInterface()) {
+        // Only classes inherit default methods.
         continue;
       }
 

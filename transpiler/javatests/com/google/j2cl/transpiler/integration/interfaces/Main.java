@@ -15,11 +15,22 @@
  */
 package com.google.j2cl.transpiler.integration.interfaces;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertEquals;
 import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
 
 /** Test basic interface functionality. */
 @SuppressWarnings("StaticQualifiedUsingExpression")
 public class Main {
+
+  public static void main(String[] args) {
+    testInterfaceDispatch();
+    testInterfaceWithFields();
+    testDefaultMethods();
+    testSuperCallDefaultMethod();
+    testStaticMethods();
+    testPrivateMethods();
+  }
+
   public interface SomeInterface {
     int run();
   }
@@ -35,7 +46,7 @@ public class Main {
     return someInterface.run();
   }
 
-  public static void testInterfaceDispatch() {
+  private static void testInterfaceDispatch() {
     SomeClass s = new SomeClass();
     assertTrue(run(s) == 1);
   }
@@ -45,7 +56,7 @@ public class Main {
     public static int B = 2;
   }
 
-  public static void testInterfaceWithFields() {
+  private static void testInterfaceWithFields() {
     assertTrue(InterfaceWithFields.A == 1);
     assertTrue(InterfaceWithFields.B == 2);
     InterfaceWithFields i = new InterfaceWithFields() {};
@@ -122,7 +133,7 @@ public class Main {
     }
   }
 
-  public static void testDefaultMethods() {
+  private static void testDefaultMethods() {
     assertTrue(new ACollection<Object>().add(null) == COLLECTION_ADD);
     assertTrue(new AConcreteList<Object>().add(null) == ABSTRACT_COLLECTION_ADD);
     assertTrue(new SomeOtherCollection<Object>().add(null) == COLLECTION_ADD);
@@ -133,7 +144,7 @@ public class Main {
     assertTrue(new AnotherCollection<Object>().add(null) == ANOTHER_LIST_INTERFACE_ADD);
   }
 
-  public static void testStaticMethods() {
+  private static void testStaticMethods() {
     assertTrue(List.returnOne() == 1);
   }
 
@@ -157,16 +168,26 @@ public class Main {
     }
   }
 
-  public static void testPrivateMethods() {
+  private static void testPrivateMethods() {
     assertTrue(InterfaceWithPrivateMethods.callPrivateStaticMethod() == 2);
     assertTrue(((InterfaceWithPrivateMethods) () -> 1).defaultMethod() == 1);
   }
 
-  public static void main(String[] args) {
-    testInterfaceDispatch();
-    testInterfaceWithFields();
-    testDefaultMethods();
-    testStaticMethods();
-    testPrivateMethods();
+  interface InterfaceWithDefaultMethod {
+    default String defaultMethod() {
+      return "default-method";
+    }
+  }
+
+  private static void testSuperCallDefaultMethod() {
+    abstract class AbstractClass implements InterfaceWithDefaultMethod {}
+
+    class SubClass extends AbstractClass {
+      public String defaultMethod() {
+        return super.defaultMethod();
+      }
+    }
+
+    assertEquals("default-method", new SubClass().defaultMethod());
   }
 }

@@ -1,33 +1,31 @@
 Integration tests size report:
 **************************************
-There are 12 optimized size changes.
+There are 3 optimized size changes.
 Total optimized size (of already existing tests) changed from
-  1132402 to 1131496 bytes (100%->99.9%) and from
-  416997 to 416729 bytes (100%->99.9%) gzipped.
+  1131496 to 1133376 bytes (100%->100.2%) and from
+  416729 to 417128 bytes (100%->100.1%) gzipped.
 
 
 Shrinkage report highlights:
 **************************************
-        old      new
-       1449     1318 staticinitfailfast (-9.0%)
-       1190     1147 stringescapecodes (-3.6%)
-       1161     1141 jsconstructornested (-1.7%)
-       1432     1412 jsfunctionbridge (-1.4%)
+  none
 
 
 Expansion report highlights:
 **************************************
         old      new
-       1165     1167 importglobaljstypes (0.2%)
+       1399     1599 interfaces (14.3%)
+       3021     3060 morebridgemethods (1.3%)
+      13960    14120 jsinteroptests (1.1%)
 
 
 Uncompiled bundle reports:
 **************************************
         old      new
-    4826786  4826626 box2d_default (-0.0%)
-    2943885  2943861 box2d_default.minified (-0.0%)
-    3043416  3043256 emptyclass (-0.0%)
-    1969714  1969690 emptyclass.minified (-0.0%)
+    4826626  4859360 box2d_default (0.7%)
+    2943861  2959314 box2d_default.minified (0.5%)
+    3043256  3075990 emptyclass (1.1%)
+    1969690  1985143 emptyclass.minified (0.8%)
 
 
 All reports:
@@ -46,7 +44,7 @@ All reports:
        1501     1501 arrayleafinsertion (unchanged)
        2050     2050 arrayliteral (unchanged)
        1797     1797 arrayobjectcalls (unchanged)
-       3447     3428 arrayofboxedtype (-0.6%)
+       3428     3428 arrayofboxedtype (unchanged)
        3786     3786 arrayreadwrite (unchanged)
        2492     2492 assertsimple (unchanged)
        1084     1084 backwardbridgemethod (unchanged)
@@ -66,7 +64,7 @@ All reports:
        1043     1043 cascadedstaticinit (unchanged)
          22       22 castdevirtualizedtypes (unchanged)
          22       22 castnull (unchanged)
-       1630     1626 casttoarray (-0.2%)
+       1626     1626 casttoarray (unchanged)
        1275     1275 casttoboxedtype (unchanged)
        1218     1218 casttoclass (unchanged)
          22       22 casttoclassdisabled (unchanged)
@@ -115,7 +113,7 @@ All reports:
        1055     1055 ifstatement (unchanged)
        1124     1124 implementsgenericinterface (unchanged)
        1449     1449 implicitparenthesis (unchanged)
-       1165     1167 importglobaljstypes (0.2%)
+       1167     1167 importglobaljstypes (unchanged)
          22       22 importinnerclass (unchanged)
          22       22 importsfullyqualified (unchanged)
        1073     1073 inlineinstancefieldinit (unchanged)
@@ -125,14 +123,14 @@ All reports:
        1027     1027 instanceinitorder (unchanged)
        2065     2065 instanceinnerclass (unchanged)
        1320     1320 instancejsmethods (unchanged)
-       3866     3859 instanceofs (-0.2%)
+       3859     3859 instanceofs (unchanged)
        1208     1208 instancequalifieronstaticfield (unchanged)
          22       22 interfaceabstractimpl (unchanged)
        3785     3785 interfacedevirtualize (unchanged)
          22       22 interfacejsbridge (unchanged)
-       1399     1399 interfaces (unchanged)
+       1399     1599 interfaces (14.3%)
        1656     1656 intersectiontype (unchanged)
-       1379     1375 iteratormethodresolution (-0.3%)
+       1375     1375 iteratormethodresolution (unchanged)
        3782     3782 jsasync (unchanged)
          22       22 jsbridgebackward (unchanged)
        1364     1364 jsbridgemethodaccidentaloverride (unchanged)
@@ -140,19 +138,19 @@ All reports:
        1143     1143 jsbridgemultipleexposing (unchanged)
        1523     1523 jsconstructor (unchanged)
        1099     1099 jsconstructorfieldinitorder (unchanged)
-       1161     1141 jsconstructornested (-1.7%)
+       1141     1141 jsconstructornested (unchanged)
        6460     6460 jsenum (unchanged)
        1277     1277 jsfunction (unchanged)
-       1432     1412 jsfunctionbridge (-1.4%)
+       1412     1412 jsfunctionbridge (unchanged)
        1898     1898 jsfunctiontypeannotation (unchanged)
        1091     1091 jsinnerclass (unchanged)
-      13960    13960 jsinteroptests (unchanged)
+      13960    14120 jsinteroptests (1.1%)
        1101     1101 jsmethodoverride (unchanged)
        1016     1016 jsoverlay (unchanged)
        1029     1029 jsoverlaystaticrefs (unchanged)
          22       22 jsoverlaywithjsfunction (unchanged)
        1390     1390 jsproperties (unchanged)
-       2686     2681 jstypevarargs (-0.2%)
+       2681     2681 jstypevarargs (unchanged)
        1073     1073 labeledstatement (unchanged)
        2083     2083 lambdas (unchanged)
        1454     1454 lambdaserializable (unchanged)
@@ -165,7 +163,7 @@ All reports:
        2895     2895 longimplicitcasts (unchanged)
        2633     2633 longoperationsinglesideeffect (unchanged)
        2934     2934 methodreferences (unchanged)
-       3023     3021 morebridgemethods (-0.1%)
+       3021     3060 morebridgemethods (1.3%)
        1155     1155 multipleabstractparents (unchanged)
        1329     1329 multipleanonymousclass (unchanged)
        1242     1242 multiplecatch (unchanged)
@@ -192,7 +190,7 @@ All reports:
        1099     1099 overloadedmethods (unchanged)
        1136     1136 overridingclassmethods (unchanged)
        1058     1058 overridinginterfacemethods (unchanged)
-       1241     1226 overwrittentypevariables (-1.2%)
+       1226     1226 overwrittentypevariables (unchanged)
          22       22 packagecrosscall (unchanged)
        1393     1393 packageprivatemethods (unchanged)
        1220     1220 parallelhierarchies (unchanged)
@@ -213,7 +211,7 @@ All reports:
        2086     2086 staticfieldcompoundassignment (unchanged)
          22       22 staticfieldinitializer (unchanged)
        1010     1010 staticfields (unchanged)
-       1449     1318 staticinitfailfast (-9.0%)
+       1318     1318 staticinitfailfast (unchanged)
        1050     1050 staticinitorder (unchanged)
        2660     2660 staticinitsuper (unchanged)
         996      996 staticjsmethods (unchanged)
@@ -221,7 +219,7 @@ All reports:
        1776     1776 strictequality (unchanged)
        1492     1492 stringconversion (unchanged)
        1650     1650 stringdevirtualcalls (unchanged)
-       1190     1147 stringescapecodes (-3.6%)
+       1147     1147 stringescapecodes (unchanged)
        1098     1098 subclassgenericclass (unchanged)
        1119     1119 subnativejstype (unchanged)
        1094     1094 supercallnondefault (unchanged)

@@ -657,8 +657,7 @@ public class Java8Test {
   public void testAbstractClassImplementsInterface() {
     Child1 child1 = new Child1();
     Child2 child2 = new Child2();
-    // TODO(b/36779140): Uncomment when bug is fixed.
-    //assertThat((Object) child1.foo()).isEqualTo("interface.foo child1.foo");
+    assertThat((Object) child1.foo()).isEqualTo("interface.foo child1.foo");
     assertThat((Object) child2.foo()).isEqualTo("interface.foo");
   }
 
