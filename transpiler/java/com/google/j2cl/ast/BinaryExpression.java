@@ -105,6 +105,11 @@ public class BinaryExpression extends Expression {
   }
 
   @Override
+  public boolean isNonNullString() {
+    return AstUtils.matchesStringContext(this);
+  }
+
+  @Override
   public BinaryExpression clone() {
     return newBuilder()
         .setLeftOperand(leftOperand.clone())

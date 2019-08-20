@@ -120,6 +120,11 @@ public abstract class Expression extends Node implements Cloneable<Expression> {
     return false;
   }
 
+  /** Returns true if the expression is guaranteed to be a non null string. */
+  public boolean isNonNullString() {
+    return false;
+  }
+
   @Override
   public abstract Expression clone();
 

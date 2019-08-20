@@ -19,12 +19,19 @@ import static com.google.j2cl.transpiler.optimization.OptimizationTestUtil.asser
 
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 @RunWith(JUnit4.class)
 public class StringOptimizationTest {
+
+  @Before
+  public void setUp() {
+    // Refer to static fields of String so that $clinit is not empty and does not get pruned.
+    String.CASE_INSENSITIVE_ORDER.compare("aaa", "bbb");
+  }
 
   @JsMethod
   public boolean stringEqualsString() {
@@ -36,7 +43,7 @@ public class StringOptimizationTest {
 
   @JsMethod
   public boolean stringNotEqualsString() {
-    return "".equals("asd");
+    return "".equals(new Object());
   }
 
   @JsProperty

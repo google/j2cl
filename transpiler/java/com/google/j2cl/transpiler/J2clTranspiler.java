@@ -81,6 +81,7 @@ import com.google.j2cl.ast.visitors.OptimizeAnonymousInnerClassesToFunctionExpre
 import com.google.j2cl.ast.visitors.PackagePrivateMethodsDispatcher;
 import com.google.j2cl.ast.visitors.RemoveNoopStatements;
 import com.google.j2cl.ast.visitors.RemoveUnneededJsDocCasts;
+import com.google.j2cl.ast.visitors.RewriteStringEquals;
 import com.google.j2cl.ast.visitors.VerifyParamAndArgCounts;
 import com.google.j2cl.ast.visitors.VerifySingleAstReference;
 import com.google.j2cl.ast.visitors.VerifyVariableScoping;
@@ -164,6 +165,9 @@ class J2clTranspiler {
             new PackagePrivateMethodsDispatcher(),
             new BridgeMethodsCreator(),
             new JsBridgeMethodsCreator(),
+            // TODO(b/31865368): Remove RewriteStringEquals pass once delayed field initialization
+            //  is introduced and String.java gets updated to use it.
+            new RewriteStringEquals(),
             new DevirtualizeBoxedTypesAndJsFunctionImplementations(),
             new NormalizeTryWithResources(),
             new NormalizeCatchClauses(),
