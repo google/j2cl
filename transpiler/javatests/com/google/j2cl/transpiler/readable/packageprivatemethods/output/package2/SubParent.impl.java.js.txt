@@ -5,24 +5,15 @@ const Parent = goog.require('com.google.j2cl.transpiler.readable.packageprivatem
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 
+/**
+ * @abstract
+ */
 class SubParent extends Parent {
   /**
    * @protected
    */
   constructor() {
     super();
-  }
-
-  /**
-   * @return {!SubParent}
-   * @public
-   */
-  static $create__() {
-    SubParent.$clinit();
-    let $instance = new SubParent();
-    $instance
-        .$ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package2_SubParent__();
-    return $instance;
   }
 
   /**

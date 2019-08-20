@@ -46,6 +46,8 @@ public class Main {
     }
   }
 
+  abstract class AbstractImplementor implements SubInterface {}
+
   void testInterfaceMembers() {
     Interface i = new Implementor();
     i.interfaceMethod();

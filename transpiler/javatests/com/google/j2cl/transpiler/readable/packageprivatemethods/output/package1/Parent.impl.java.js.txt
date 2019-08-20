@@ -5,24 +5,15 @@ const SuperParent = goog.require('com.google.j2cl.transpiler.readable.packagepri
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 
+/**
+ * @abstract
+ */
 class Parent extends SuperParent {
   /**
    * @protected
    */
   constructor() {
     super();
-  }
-
-  /**
-   * @return {!Parent}
-   * @public
-   */
-  static $create__() {
-    Parent.$clinit();
-    let $instance = new Parent();
-    $instance
-        .$ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_Parent__();
-    return $instance;
   }
 
   /**
@@ -45,15 +36,14 @@ class Parent extends SuperParent {
   }
 
   /**
+   * @abstract
    * @param {number} a
    * @param {number} b
    * @param {number} c
    * @return {number}
    * @public
    */
-  m_bar__int__int__int(a, b, c) {
-    return a + b + c + 1;
-  }
+  m_bar__int__int__int(a, b, c) {}
 
   /**
    * Forwarding method for package private method.
