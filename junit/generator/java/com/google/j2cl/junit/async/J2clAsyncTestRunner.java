@@ -34,12 +34,7 @@ import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.Statement;
 
 /**
- * Experimental, do not use!
- *
- * <p>Should really be living in guava or xplat for cross platform async testing. This probably
- * should also support a common async abstraction on top of a promise.
- *
- * <p>A test runner that allows for asynchronous test using a structural Promise.
+ * A test runner that allows for asynchronous test using a structural Promise.
  *
  * <p>A structural promise to this runner is a class that conforms to the following conditions:
  *
@@ -53,6 +48,7 @@ import org.junit.runners.model.Statement;
  *       Throwable as parameter
  * </ul>
  */
+// TODO(b/139867020): Move (and potentially rename).
 public class J2clAsyncTestRunner extends BlockJUnit4ClassRunner {
 
   private static final String PROMISE_LIKE =
