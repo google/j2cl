@@ -1,0 +1,111 @@
+goog.module('com.google.j2cl.transpiler.readable.bridgemethods.AccidentalOverrideBridge$impl');
+
+
+const ClassWithParameterizedGet = goog.require('com.google.j2cl.transpiler.readable.bridgemethods.ClassWithParameterizedGet$impl');
+const Getter = goog.require('com.google.j2cl.transpiler.readable.bridgemethods.Getter$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+
+/**
+ * @extends {ClassWithParameterizedGet<?string>}
+ * @implements {Getter}
+ */
+class AccidentalOverrideBridge extends ClassWithParameterizedGet {
+  /**
+   * @protected
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * @return {!AccidentalOverrideBridge}
+   * @public
+   */
+  static $create__() {
+    AccidentalOverrideBridge.$clinit();
+    let $instance = new AccidentalOverrideBridge();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_bridgemethods_AccidentalOverrideBridge__();
+    return $instance;
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_bridgemethods_AccidentalOverrideBridge__() {
+    this.$ctor__com_google_j2cl_transpiler_readable_bridgemethods_ClassWithParameterizedGet__();
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_test__() {
+    let g = AccidentalOverrideBridge.$create__();
+    g.m_get__java_lang_String('');
+  }
+
+  /**
+   * Bridge method.
+   * @override
+   * @param {?string} arg0
+   * @return {?string}
+   * @public
+   */
+  m_get__java_lang_String(arg0) {
+    return /**@type {?string} */ (
+        $Casts.$to(super.m_get__java_lang_Object(arg0), j_l_String));
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    AccidentalOverrideBridge.$clinit = (() => {});
+    AccidentalOverrideBridge.$loadModules();
+    ClassWithParameterizedGet.$clinit();
+  }
+
+  /**
+   * @param {?} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof AccidentalOverrideBridge;
+  }
+
+  /**
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, AccidentalOverrideBridge);
+  }
+
+  /**
+   * @public
+   */
+  static $loadModules() {
+    j_l_String = goog.module.get('java.lang.String$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+  }
+};
+
+$Util.$setClassMetadata(
+    AccidentalOverrideBridge,
+    'com.google.j2cl.transpiler.readable.bridgemethods.AccidentalOverrideBridge');
+
+
+Getter.$markImplementor(AccidentalOverrideBridge);
+
+
+exports = AccidentalOverrideBridge;
+//# sourceMappingURL=AccidentalOverrideBridge.js.map

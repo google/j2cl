@@ -1,0 +1,96 @@
+goog.module('com.google.j2cl.transpiler.readable.bridgemethods.SomeOtherFooInterface.$LambdaAdaptor$impl');
+
+
+const SomeOtherFooInterface = goog.require('com.google.j2cl.transpiler.readable.bridgemethods.SomeOtherFooInterface$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+
+/**
+ * @template T
+ * @implements {SomeOtherFooInterface<T>}
+ */
+class $LambdaAdaptor extends j_l_Object {
+  /**
+   * @param {?function(T, ?number):void} fn
+   * @public
+   */
+  constructor(fn) {
+    $LambdaAdaptor.$clinit();
+    super();
+    /** @public {?function(T, ?number):void} */
+    this.f_$$fn__com_google_j2cl_transpiler_readable_bridgemethods_SomeOtherFooInterface_$LambdaAdaptor;
+    this.$ctor__com_google_j2cl_transpiler_readable_bridgemethods_SomeOtherFooInterface_$LambdaAdaptor__com_google_j2cl_transpiler_readable_bridgemethods_SomeOtherFooInterface_$JsFunction(
+        fn);
+  }
+
+  /**
+   * @param {?function(T, ?number):void} fn
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_bridgemethods_SomeOtherFooInterface_$LambdaAdaptor__com_google_j2cl_transpiler_readable_bridgemethods_SomeOtherFooInterface_$JsFunction(
+      fn) {
+    this.$ctor__java_lang_Object__();
+    this.f_$$fn__com_google_j2cl_transpiler_readable_bridgemethods_SomeOtherFooInterface_$LambdaAdaptor =
+        fn;
+  }
+
+  /**
+   * @param {T} arg0
+   * @param {?number} arg1
+   * @return {void}
+   * @public
+   */
+  m_foo__java_lang_Object__java_lang_Double(arg0, arg1) {
+    {
+      let $function =
+          this.f_$$fn__com_google_j2cl_transpiler_readable_bridgemethods_SomeOtherFooInterface_$LambdaAdaptor;
+      $function(arg0, arg1);
+    }
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    $LambdaAdaptor.$clinit = (() => {});
+    $LambdaAdaptor.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
+   * @param {?} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof $LambdaAdaptor;
+  }
+
+  /**
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, $LambdaAdaptor);
+  }
+
+  /**
+   * @public
+   */
+  static $loadModules() {}
+};
+
+$Util.$setClassMetadata(
+    $LambdaAdaptor,
+    'com.google.j2cl.transpiler.readable.bridgemethods.SomeOtherFooInterface$$LambdaAdaptor');
+
+
+SomeOtherFooInterface.$markImplementor($LambdaAdaptor);
+
+
+exports = $LambdaAdaptor;
+//# sourceMappingURL=SomeOtherFooInterface$$LambdaAdaptor.js.map

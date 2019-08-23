@@ -1,0 +1,94 @@
+goog.module('com.google.j2cl.transpiler.readable.bridgemethods.Getter.$LambdaAdaptor$impl');
+
+
+const Getter = goog.require('com.google.j2cl.transpiler.readable.bridgemethods.Getter$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+
+/**
+ * @implements {Getter}
+ */
+class $LambdaAdaptor extends j_l_Object {
+  /**
+   * @param {?function(?string):?string} fn
+   * @public
+   */
+  constructor(fn) {
+    $LambdaAdaptor.$clinit();
+    super();
+    /** @public {?function(?string):?string} */
+    this.f_$$fn__com_google_j2cl_transpiler_readable_bridgemethods_Getter_$LambdaAdaptor;
+    this.$ctor__com_google_j2cl_transpiler_readable_bridgemethods_Getter_$LambdaAdaptor__com_google_j2cl_transpiler_readable_bridgemethods_Getter_$JsFunction(
+        fn);
+  }
+
+  /**
+   * @param {?function(?string):?string} fn
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_bridgemethods_Getter_$LambdaAdaptor__com_google_j2cl_transpiler_readable_bridgemethods_Getter_$JsFunction(
+      fn) {
+    this.$ctor__java_lang_Object__();
+    this.f_$$fn__com_google_j2cl_transpiler_readable_bridgemethods_Getter_$LambdaAdaptor =
+        fn;
+  }
+
+  /**
+   * @param {?string} arg0
+   * @return {?string}
+   * @public
+   */
+  m_get__java_lang_String(arg0) {
+    let /** ?function(?string):?string */ $function;
+    return (
+        $function =
+            this.f_$$fn__com_google_j2cl_transpiler_readable_bridgemethods_Getter_$LambdaAdaptor,
+        $function(arg0));
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    $LambdaAdaptor.$clinit = (() => {});
+    $LambdaAdaptor.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
+   * @param {?} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof $LambdaAdaptor;
+  }
+
+  /**
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, $LambdaAdaptor);
+  }
+
+  /**
+   * @public
+   */
+  static $loadModules() {}
+};
+
+$Util.$setClassMetadata(
+    $LambdaAdaptor,
+    'com.google.j2cl.transpiler.readable.bridgemethods.Getter$$LambdaAdaptor');
+
+
+Getter.$markImplementor($LambdaAdaptor);
+
+
+exports = $LambdaAdaptor;
+//# sourceMappingURL=Getter$$LambdaAdaptor.js.map

@@ -1,0 +1,91 @@
+goog.module('com.google.j2cl.transpiler.readable.bridgemethods.SomeInterface$impl');
+
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Number = goog.forwardDeclare('java.lang.Number$impl');
+
+
+/**
+ * @interface
+ * @template T, S
+ */
+class SomeInterface {
+  /**
+   * @abstract
+   * @param {T} t
+   * @param {S} s
+   * @return {void}
+   * @public
+   */
+  m_foo__java_lang_Object__java_lang_Object(t, s) {}
+
+  /**
+   * @abstract
+   * @param {T} t
+   * @param {(Number|number)} n
+   * @return {void}
+   * @public
+   */
+  m_foo__java_lang_Object__java_lang_Number(t, n) {}
+
+  /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    SomeInterface.$clinit = (() => {});
+    SomeInterface.$loadModules();
+  }
+
+  /**
+   * @param {Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_bridgemethods_SomeInterface =
+        true;
+  }
+
+  /**
+   * @param {?} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+        !!instance
+              .$implements__com_google_j2cl_transpiler_readable_bridgemethods_SomeInterface;
+  }
+
+  /**
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+        !!classConstructor.prototype
+              .$implements__com_google_j2cl_transpiler_readable_bridgemethods_SomeInterface;
+  }
+
+  /**
+   * @public
+   */
+  static $loadModules() {}
+};
+
+$Util.$setClassMetadataForInterface(
+    SomeInterface,
+    'com.google.j2cl.transpiler.readable.bridgemethods.SomeInterface');
+
+
+SomeInterface.$markImplementor(/** @type {Function} */ (SomeInterface));
+
+
+exports = SomeInterface;
+//# sourceMappingURL=SomeInterface.js.map

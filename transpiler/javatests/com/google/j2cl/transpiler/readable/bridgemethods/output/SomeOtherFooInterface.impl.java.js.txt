@@ -1,0 +1,97 @@
+goog.module('com.google.j2cl.transpiler.readable.bridgemethods.SomeOtherFooInterface$impl');
+
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.bridgemethods.SomeOtherFooInterface.$LambdaAdaptor$impl');
+
+
+/**
+ * @interface
+ * @template T
+ */
+class SomeOtherFooInterface {
+  /**
+   * @abstract
+   * @param {T} t
+   * @param {?number} s
+   * @return {void}
+   * @public
+   */
+  m_foo__java_lang_Object__java_lang_Double(t, s) {}
+
+  /**
+   * @template T
+   * @param {?function(T, ?number):void} fn
+   * @return {SomeOtherFooInterface<T>}
+   * @public
+   */
+  static $adapt(fn) {
+    SomeOtherFooInterface.$clinit();
+    return /**@type {!$LambdaAdaptor<T>} */ (new $LambdaAdaptor(fn));
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    SomeOtherFooInterface.$clinit = (() => {});
+    SomeOtherFooInterface.$loadModules();
+  }
+
+  /**
+   * @param {Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_bridgemethods_SomeOtherFooInterface =
+        true;
+  }
+
+  /**
+   * @param {?} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+        !!instance
+              .$implements__com_google_j2cl_transpiler_readable_bridgemethods_SomeOtherFooInterface;
+  }
+
+  /**
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+        !!classConstructor.prototype
+              .$implements__com_google_j2cl_transpiler_readable_bridgemethods_SomeOtherFooInterface;
+  }
+
+  /**
+   * @public
+   */
+  static $loadModules() {
+    $LambdaAdaptor = goog.module.get(
+        'com.google.j2cl.transpiler.readable.bridgemethods.SomeOtherFooInterface.$LambdaAdaptor$impl');
+  }
+};
+
+$Util.$setClassMetadataForInterface(
+    SomeOtherFooInterface,
+    'com.google.j2cl.transpiler.readable.bridgemethods.SomeOtherFooInterface');
+
+
+SomeOtherFooInterface.$markImplementor(
+    /** @type {Function} */ (SomeOtherFooInterface));
+
+
+exports = SomeOtherFooInterface;
+//# sourceMappingURL=SomeOtherFooInterface.js.map

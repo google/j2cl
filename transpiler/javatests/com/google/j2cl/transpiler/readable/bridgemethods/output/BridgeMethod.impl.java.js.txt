@@ -1,0 +1,156 @@
+goog.module('com.google.j2cl.transpiler.readable.bridgemethods.BridgeMethod$impl');
+
+
+const Parent = goog.require('com.google.j2cl.transpiler.readable.bridgemethods.Parent$impl');
+const SomeInterface = goog.require('com.google.j2cl.transpiler.readable.bridgemethods.SomeInterface$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let AssertionError = goog.forwardDeclare('java.lang.AssertionError$impl');
+let Error = goog.forwardDeclare('java.lang.Error$impl');
+let Number = goog.forwardDeclare('java.lang.Number$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+
+/**
+ * @extends {Parent<AssertionError>}
+ * @implements {SomeInterface<AssertionError, (Number|number)>}
+ */
+class BridgeMethod extends Parent {
+  /**
+   * @protected
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * @return {!BridgeMethod}
+   * @public
+   */
+  static $create__() {
+    BridgeMethod.$clinit();
+    let $instance = new BridgeMethod();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_bridgemethods_BridgeMethod__();
+    return $instance;
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_bridgemethods_BridgeMethod__() {
+    this.$ctor__com_google_j2cl_transpiler_readable_bridgemethods_Parent__();
+  }
+
+  /**
+   * @param {AssertionError} a
+   * @param {(Number|number)} n
+   * @return {void}
+   * @public
+   */
+  m_foo__java_lang_AssertionError__java_lang_Number(a, n) {}
+
+  /**
+   * @override
+   * @param {(Number|number)} t
+   * @return {void}
+   * @public
+   */
+  m_bar__java_lang_Number(t) {}
+
+  /**
+   * @param {(Number|number)} t
+   * @return {void}
+   * @public
+   */
+  m_fun__java_lang_Number(t) {}
+
+  /**
+   * Bridge method.
+   * @override
+   * @param {Error} arg0
+   * @param {(Number|number)} arg1
+   * @return {void}
+   * @public
+   */
+  m_foo__java_lang_Error__java_lang_Number(arg0, arg1) {
+    this.m_foo__java_lang_AssertionError__java_lang_Number(
+        /**@type {AssertionError} */ ($Casts.$to(arg0, AssertionError)), arg1);
+  }
+
+  /**
+   * Bridge method.
+   * @override
+   * @param {*} arg0
+   * @param {*} arg1
+   * @return {void}
+   * @public
+   */
+  m_foo__java_lang_Object__java_lang_Object(arg0, arg1) {
+    this.m_foo__java_lang_AssertionError__java_lang_Number(
+        /**@type {AssertionError} */ ($Casts.$to(arg0, AssertionError)),
+        /**@type {(Number|number)} */ ($Casts.$to(arg1, Number)));
+  }
+
+  /**
+   * Bridge method.
+   * @override
+   * @param {*} arg0
+   * @param {(Number|number)} arg1
+   * @return {void}
+   * @public
+   */
+  m_foo__java_lang_Object__java_lang_Number(arg0, arg1) {
+    this.m_foo__java_lang_AssertionError__java_lang_Number(
+        /**@type {AssertionError} */ ($Casts.$to(arg0, AssertionError)), arg1);
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    BridgeMethod.$clinit = (() => {});
+    BridgeMethod.$loadModules();
+    Parent.$clinit();
+  }
+
+  /**
+   * @param {?} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof BridgeMethod;
+  }
+
+  /**
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, BridgeMethod);
+  }
+
+  /**
+   * @public
+   */
+  static $loadModules() {
+    AssertionError = goog.module.get('java.lang.AssertionError$impl');
+    Number = goog.module.get('java.lang.Number$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+  }
+};
+
+$Util.$setClassMetadata(
+    BridgeMethod,
+    'com.google.j2cl.transpiler.readable.bridgemethods.BridgeMethod');
+
+
+SomeInterface.$markImplementor(BridgeMethod);
+
+
+exports = BridgeMethod;
+//# sourceMappingURL=BridgeMethod.js.map

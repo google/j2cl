@@ -55,10 +55,9 @@ public class BridgeMethodsCreator extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     for (Type type : compilationUnit.getTypes()) {
-      // Don't bridge methods in abstract classes. Ideally we should emit and avoid re-emitting in
-      // subclasses. That would reduce unnecessary bridges and make subclassing in JavaScript work
-      // properly (b/64280462). In the meantime, we need bridges for boxed primitives hence that is
-      // special cased here.
+      // TODO(b/64280462): Emit the bridge as high in the class hierarchy as possible including
+      //  abstract classes. That would reduce the number bridges created and also enable JavaScript
+      //  to extend a class and inherit all the necessary bridges.
       if (type.getDeclaration().isAbstract()
           && !TypeDescriptors.isBoxedTypeAsJsPrimitives(type.getTypeDescriptor())) {
         continue;
@@ -88,6 +87,8 @@ public class BridgeMethodsCreator extends NormalizationPass {
           createBridgeMethod(type, bridgeMethodDescriptor, targetMethodDescriptor);
 
       if (!usedMangledNames.add(ManglingNameUtils.getMangledName(bridgeMethod.getDescriptor()))) {
+        // TODO(b/64280462): there should not be any ambiguity here depending on the order in which
+        //  the bridges are created.
         // Do not generate duplicate bridge methods in one class.
         continue;
       }
@@ -161,7 +162,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
       // target is concrete.
       if (!potentialBridgeMethodDescriptor.isAbstract()) {
         MethodDescriptor backwardingMethodDescriptor =
-            findBackwardingMethodDescriptor(potentialBridgeMethodDescriptor, typeDeclaration);
+            findBridgeDueToAccidentalOverride(potentialBridgeMethodDescriptor, typeDeclaration);
         if (backwardingMethodDescriptor != null) {
           targetMethodDescriptorByBridgeMethodDescriptor.put(
               backwardingMethodDescriptor, potentialBridgeMethodDescriptor);
@@ -186,7 +187,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
 
   /**
    * Returns all the potential methods in the super classes and super interfaces that may need a
-   * bridge method generating in {@code type}.
+   * bridge method in {@code type}.
    *
    * <p>A bridge method is needed in a type when the type extends or implements a parameterized
    * class or interface and type erasure changes the signature of any inherited method or when an
@@ -333,7 +334,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
    * arguments, and it is overridden by a generic method, it needs a bridge method that delegates to
    * the generic method.
    */
-  private static MethodDescriptor findBackwardingMethodDescriptor(
+  private static MethodDescriptor findBridgeDueToAccidentalOverride(
       MethodDescriptor bridgeMethodDescriptor, TypeDeclaration typeDeclaration) {
     for (DeclaredTypeDescriptor superInterface :
         typeDeclaration.getTransitiveInterfaceTypeDescriptors()) {
@@ -399,7 +400,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
       parameters.add(parameter);
       Expression parameterReference = parameter.getReference();
 
-      // The type the argument should be casted to. It should be casted to the specific parameter
+      // The type the argument should be cast to. It should be cast to the specific parameter
       // type that is expected by the concrete parameterized method.
       TypeDescriptor castToParameterTypeDescriptor =
           originalBridgeMethodDescriptor.getParameterTypeDescriptors().get(i);

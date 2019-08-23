@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.bridgejsmethod;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertEquals;
+import static com.google.j2cl.transpiler.utils.Asserts.assertThrowsClassCastException;
 import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
 
 import jsinterop.annotations.JsMethod;
@@ -26,52 +28,33 @@ public class Main {
     assertTrue(callFunByA(new C(), 1).equals(new Integer(6)));
     assertTrue(callFunByA(new D(), 2).equals(new Integer(8)));
     assertTrue(callFunByA(new E(), "xyz").equals("xyzabc"));
+    assertThrowsClassCastException(() -> callFunByA(new B(), 1), String.class);
 
-    try {
-      callFunByA(new B(), 1);
-      assertTrue(false);
-    } catch (ClassCastException e) {
-      // expected.
-    }
-
-    assertTrue(callBarByA(new A<String>(), "abc", "abc"));
-    assertTrue(callBarByA(new B(), "abc", "abc"));
-    assertTrue(callBarByA(new C(), 1, 1));
-    assertTrue(callBarByA(new D(), 2, 2));
-    assertTrue(callBarByA(new E(), "xyz", "xyz"));
-
-    try {
-      callBarByA(new B(), 1, 2);
-      assertTrue(false);
-    } catch (ClassCastException e) {
-      // expected.
-    }
+    assertEquals("A-bar", callBarByA(new A<String>(), "abc"));
+    assertEquals("B-bar", callBarByA(new B(), "abc"));
+    assertEquals("A-bar", callBarByA(new C(), 1));
+    assertEquals("A-bar", callBarByA(new D(), 2));
+    assertEquals("B-bar", callBarByA(new E(), "xyz"));
+    assertEquals("F-bar", callBarByA(new F(), "abcd"));
+    assertThrowsClassCastException(() -> callBarByA(new B(), 1), String.class);
 
     assertTrue(callFunByI(new D(), 2).equals(new Integer(8)));
-    try {
-      callFunByI(new D(), new Float(2.2));
-      assertTrue(false);
-    } catch (ClassCastException e) {
-      // expected.
-    }
+    assertThrowsClassCastException(() -> callFunByI(new D(), new Float(2.2)), Integer.class);
 
-    assertTrue(callBarByJ(new E(), "xyz", "xyz"));
-    try {
-      callBarByJ(new E(), new Object(), new Object());
-      assertTrue(false);
-    } catch (ClassCastException e) {
-      // expected.
-    }
+    assertEquals("B-bar", callBarByJ(new E(), "xyz"));
+    assertThrowsClassCastException(() -> callBarByJ(new E(), new Object()), String.class);
 
     assertTrue(new B().fun("def").equals("defabc"));
     assertTrue(new C().fun(1) == 6);
     assertTrue(new D().fun(10) == 16);
     assertTrue(new E().fun("xyz").equals("xyzabc"));
 
-    assertTrue(new B().bar("abcd", "defg"));
-    assertTrue(!new C().bar(1, 2));
-    assertTrue(new D().bar(2, 2));
-    assertTrue(new E().bar("xyz", "qwe"));
+    assertEquals("A-bar", new A<>().bar(new Object()));
+    assertEquals("B-bar", new B().bar("abcd"));
+    assertEquals("A-bar", new C().bar(1));
+    assertEquals("A-bar", new D().bar(1));
+    assertEquals("B-bar", new E().bar("abcd"));
+    assertEquals("F-bar", new F().bar("abcd"));
 
     assertTrue(callFun(new A<String>(), "abc").equals("abc"));
     assertTrue(callFun(new B(), "abc").equals("abcabc"));
@@ -90,8 +73,8 @@ public class Main {
     }
 
     // not a JsMethod.
-    public boolean bar(T t1, T t2) {
-      return t1.equals(t2);
+    public String bar(T t) {
+      return "A-bar";
     }
   }
 
@@ -103,7 +86,7 @@ public class Main {
 
   /** Interface with non-JsMethod. */
   interface J<T> {
-    boolean bar(T t, T s);
+    String bar(T t);
   }
 
   private static class B extends A<String> {
@@ -119,8 +102,8 @@ public class Main {
     // in only one bridge.
     @JsMethod
     @Override
-    public boolean bar(String s, String t) {
-      return s.length() == t.length();
+    public String bar(String t) {
+      return "B-bar";
     }
   }
 
@@ -146,20 +129,26 @@ public class Main {
     // only one bridge.
   }
 
+  private static class F extends E {
+    public String bar(String s) {
+      return "F-bar";
+    }
+  }
+
   private static Object callFunByA(A a, Object o) {
     return a.fun(o);
   }
 
-  private static boolean callBarByA(A a, Object t, Object s) {
-    return a.bar(t, s);
+  private static String callBarByA(A a, Object t) {
+    return a.bar(t);
   }
 
   private static Number callFunByI(I i, Number o) {
     return i.fun(o);
   }
 
-  private static boolean callBarByJ(J j, Object t, Object s) {
-    return j.bar(t, s);
+  private static String callBarByJ(J j, Object t) {
+    return j.bar(t);
   }
 
   @JsMethod

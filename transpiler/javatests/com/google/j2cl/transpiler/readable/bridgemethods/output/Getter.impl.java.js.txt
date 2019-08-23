@@ -1,30 +1,30 @@
-goog.module('com.google.j2cl.transpiler.readable.bridgemethods.TestCase102.BI2$impl');
+goog.module('com.google.j2cl.transpiler.readable.bridgemethods.Getter$impl');
 
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.bridgemethods.TestCase102.BI2.$LambdaAdaptor$impl');
+let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.bridgemethods.Getter.$LambdaAdaptor$impl');
 
 
 /**
  * @interface
  */
-class BI2 {
+class Getter {
   /**
    * @abstract
-   * @param {?string} value
-   * @return {void}
+   * @param {?string} s
+   * @return {?string}
    * @public
    */
-  set(value) {}
+  m_get__java_lang_String(s) {}
 
   /**
-   * @param {?function(?string):void} fn
-   * @return {BI2}
+   * @param {?function(?string):?string} fn
+   * @return {Getter}
    * @public
    */
   static $adapt(fn) {
-    BI2.$clinit();
+    Getter.$clinit();
     return new $LambdaAdaptor(fn);
   }
 
@@ -33,8 +33,8 @@ class BI2 {
    * @public
    */
   static $clinit() {
-    BI2.$clinit = (() => {});
-    BI2.$loadModules();
+    Getter.$clinit = (() => {});
+    Getter.$loadModules();
   }
 
   /**
@@ -46,7 +46,7 @@ class BI2 {
      * @public {boolean}
      */
     classConstructor.prototype
-        .$implements__com_google_j2cl_transpiler_readable_bridgemethods_TestCase102_BI2 =
+        .$implements__com_google_j2cl_transpiler_readable_bridgemethods_Getter =
         true;
   }
 
@@ -58,7 +58,7 @@ class BI2 {
   static $isInstance(instance) {
     return instance != null &&
         !!instance
-              .$implements__com_google_j2cl_transpiler_readable_bridgemethods_TestCase102_BI2;
+              .$implements__com_google_j2cl_transpiler_readable_bridgemethods_Getter;
   }
 
   /**
@@ -69,7 +69,7 @@ class BI2 {
   static $isAssignableFrom(classConstructor) {
     return classConstructor != null &&
         !!classConstructor.prototype
-              .$implements__com_google_j2cl_transpiler_readable_bridgemethods_TestCase102_BI2;
+              .$implements__com_google_j2cl_transpiler_readable_bridgemethods_Getter;
   }
 
   /**
@@ -77,16 +77,16 @@ class BI2 {
    */
   static $loadModules() {
     $LambdaAdaptor = goog.module.get(
-        'com.google.j2cl.transpiler.readable.bridgemethods.TestCase102.BI2.$LambdaAdaptor$impl');
+        'com.google.j2cl.transpiler.readable.bridgemethods.Getter.$LambdaAdaptor$impl');
   }
 };
 
 $Util.$setClassMetadataForInterface(
-    BI2, 'com.google.j2cl.transpiler.readable.bridgemethods.TestCase102$BI2');
+    Getter, 'com.google.j2cl.transpiler.readable.bridgemethods.Getter');
 
 
-BI2.$markImplementor(/** @type {Function} */ (BI2));
+Getter.$markImplementor(/** @type {Function} */ (Getter));
 
 
-exports = BI2;
-//# sourceMappingURL=TestCase102$BI2.js.map
+exports = Getter;
+//# sourceMappingURL=Getter.js.map

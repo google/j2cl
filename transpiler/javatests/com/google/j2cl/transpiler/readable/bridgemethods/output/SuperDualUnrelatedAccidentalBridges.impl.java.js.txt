@@ -1,0 +1,96 @@
+goog.module('com.google.j2cl.transpiler.readable.bridgemethods.SuperDualUnrelatedAccidentalBridges$impl');
+
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Number = goog.forwardDeclare('java.lang.Number$impl');
+
+
+class SuperDualUnrelatedAccidentalBridges extends j_l_Object {
+  /**
+   * @protected
+   */
+  constructor() {
+    super();
+  }
+
+  /**
+   * @return {!SuperDualUnrelatedAccidentalBridges}
+   * @public
+   */
+  static $create__() {
+    SuperDualUnrelatedAccidentalBridges.$clinit();
+    let $instance = new SuperDualUnrelatedAccidentalBridges();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_bridgemethods_SuperDualUnrelatedAccidentalBridges__();
+    return $instance;
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_bridgemethods_SuperDualUnrelatedAccidentalBridges__() {
+    this.$ctor__java_lang_Object__();
+  }
+
+  /**
+   * @param {?string} s
+   * @param {?number} n
+   * @return {void}
+   * @public
+   */
+  m_foo__java_lang_String__java_lang_Double(s, n) {}
+
+  /**
+   * @param {?string} s
+   * @param {(Number|number)} n
+   * @return {void}
+   * @public
+   */
+  m_foo__java_lang_String__java_lang_Number(s, n) {}
+
+  /**
+   * @return {void}
+   * @public
+   */
+  static $clinit() {
+    SuperDualUnrelatedAccidentalBridges.$clinit = (() => {});
+    SuperDualUnrelatedAccidentalBridges.$loadModules();
+    j_l_Object.$clinit();
+  }
+
+  /**
+   * @param {?} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof SuperDualUnrelatedAccidentalBridges;
+  }
+
+  /**
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(
+        classConstructor, SuperDualUnrelatedAccidentalBridges);
+  }
+
+  /**
+   * @public
+   */
+  static $loadModules() {}
+};
+
+$Util.$setClassMetadata(
+    SuperDualUnrelatedAccidentalBridges,
+    'com.google.j2cl.transpiler.readable.bridgemethods.SuperDualUnrelatedAccidentalBridges');
+
+
+
+exports = SuperDualUnrelatedAccidentalBridges;
+//# sourceMappingURL=SuperDualUnrelatedAccidentalBridges.js.map
