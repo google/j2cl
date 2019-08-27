@@ -34,7 +34,6 @@ import javax.annotation.processing.Filer;
 import javax.annotation.processing.Messager;
 import javax.annotation.processing.ProcessingEnvironment;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -199,18 +198,17 @@ public class J2clTestingProcessingStepTest {
   }
 
   @Test
-  // TODO(b/139922359): Remove @Ignore once the bug is fixed.
-  @Ignore
   public void testOverriddenTests() {
     TestClass concreteTestClass = executeProcessorOnTest(JUnit4ConcreteSubclassTestCase.class);
     assertThat(concreteTestClass.testMethods())
-        .containsExactly(
-            method("testOverriddenWithTest"),
-            method("testOverriddenWithoutTest"),
-            // JUnit4 requires both @Test and @Ignore for an overridden test to be ignored.
-            // See: https://github.com/junit-team/junit4/issues/695
-            method("testOverriddenWithIgnoreButNoTest"))
+        .containsExactly(method("testOverriddenWithoutTest"), method("testOverriddenWithTest"))
         .inOrder();
+  }
+
+  @Test
+  public void testClassLevelIgnore() {
+    TestClass concreteTestClass = executeProcessorOnTest(JUnit4ClassLevelIgnoreTestCase.class);
+    assertThat(concreteTestClass.testMethods()).isEmpty();
   }
 
   private void assertError(ErrorMessage expectedError, Class<?> testClass) {

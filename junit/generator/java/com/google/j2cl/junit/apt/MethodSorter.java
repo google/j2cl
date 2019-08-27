@@ -15,10 +15,7 @@
  */
 package com.google.j2cl.junit.apt;
 
-import static com.google.common.base.Preconditions.checkState;
-
 import java.util.Comparator;
-import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 import org.junit.FixMethodOrder;
 import org.junit.runners.MethodSorters;
@@ -29,29 +26,21 @@ import org.junit.runners.MethodSorters;
 class MethodSorter {
 
   /** Method name ascending lexicographic sort order. */
-  static final Comparator<ExecutableElement> NAME_ASCENDING =
-      (m1, m2) -> {
-        // Since we do not allow for parameters in our unit tests we can not have a collision here.
-        // If we ever allow for parameters we would need to implement a proper toString method
-        // for the whole method declaration and use that for comparison.
-        // To make sure we update the implementation here we assert zero parameters for now:
-        checkState(m1.getParameters().isEmpty());
-        checkState(m2.getParameters().isEmpty());
-        return m1.getSimpleName().toString().compareTo(m2.getSimpleName().toString());
-      };
+  static final Comparator<TestMethod> NAME_ASCENDING =
+      Comparator.comparing(TestMethod::javaMethodName);
 
   /** DEFAULT sort order */
-  static final Comparator<ExecutableElement> DEFAULT =
+  static final Comparator<TestMethod> DEFAULT =
       (m1, m2) -> {
-        int i1 = m1.getSimpleName().toString().hashCode();
-        int i2 = m2.getSimpleName().toString().hashCode();
-        if (i1 != i2) {
-          return i1 < i2 ? -1 : 1;
+        int i1 = m1.javaMethodName().hashCode();
+        int i2 = m2.javaMethodName().hashCode();
+        if (i1 == i2) {
+          return NAME_ASCENDING.compare(m1, m2);
         }
-        return NAME_ASCENDING.compare(m1, m2);
+        return i1 < i2 ? -1 : 1;
       };
 
-  public static Comparator<ExecutableElement> getSorter(TypeElement typeElement) {
+  public static Comparator<TestMethod> getTestSorter(TypeElement typeElement) {
     FixMethodOrder fixMethodOrder = typeElement.getAnnotation(FixMethodOrder.class);
     return fixMethodOrder != null && fixMethodOrder.value() == MethodSorters.NAME_ASCENDING
         ? NAME_ASCENDING

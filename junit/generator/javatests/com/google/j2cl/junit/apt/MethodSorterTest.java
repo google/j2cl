@@ -46,7 +46,7 @@ public class MethodSorterTest {
   @Parameter public Comparator<Method> jUnitComparator;
 
   @Parameter(1)
-  public Comparator<ExecutableElement> aptComparator;
+  public Comparator<TestMethod> aptComparator;
 
   public static class Simple {
     public void c() {}
@@ -73,10 +73,10 @@ public class MethodSorterTest {
         ImmutableList.copyOf(Arrays.asList(clazz.getDeclaredMethods()));
 
     ImmutableList<String> sortedClassMethodsFromApt =
-        methodsFromApt
-            .stream()
+        methodsFromApt.stream()
+            .map(JUnit4TestDataExtractor::toTestMethod)
             .sorted(aptComparator)
-            .map(m -> m.getSimpleName().toString())
+            .map(TestMethod::javaMethodName)
             .collect(ImmutableList.toImmutableList());
 
     ImmutableList<String> sortedClassMethodsFromReflection =

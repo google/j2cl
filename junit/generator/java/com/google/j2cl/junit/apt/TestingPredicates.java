@@ -57,7 +57,7 @@ class TestingPredicates {
   static final Predicate<ExecutableElement> IS_RETURNTYPE_A_PROMISE =
       input -> isPromise(MoreApt.asTypeElement(input.getReturnType()));
 
-  static Predicate<Element> hasAnnotation(final Class<? extends Annotation> annotation) {
-    return input -> isAnnotationPresent(input, annotation);
+  static Predicate<? super Element> hasAnnotation(final Class<? extends Annotation> annotation) {
+    return element -> isAnnotationPresent(element, annotation);
   }
 }

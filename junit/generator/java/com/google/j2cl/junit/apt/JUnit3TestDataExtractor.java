@@ -55,17 +55,16 @@ class JUnit3TestDataExtractor {
   }
 
   private ImmutableList<TestMethod> getJUnit3TestMethods(TypeElement typeElement) {
-    return ElementFilter.methodsIn(typeElement.getEnclosedElements())
-        .stream()
+    return ElementFilter.methodsIn(typeElement.getEnclosedElements()).stream()
         .filter(TestingPredicates.METHOD_NAME_STARTS_WITH_TEST_PREDICATE)
         .filter(TestingPredicates.ZERO_PARAMETER_PREDICATE)
-        .sorted(MethodSorter.getSorter(typeElement))
         .map(
             input ->
                 TestMethod.builder()
                     .javaMethodName(input.getSimpleName().toString())
                     .isStatic(input.getModifiers().contains(Modifier.STATIC))
                     .build())
+        .sorted(MethodSorter.getTestSorter(typeElement))
         .collect(toImmutableList());
   }
 }

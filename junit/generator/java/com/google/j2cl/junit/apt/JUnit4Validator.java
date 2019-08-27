@@ -19,7 +19,6 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.auto.common.MoreElements;
-import com.google.common.base.Predicates;
 import java.util.List;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Modifier;
@@ -84,7 +83,7 @@ class JUnit4Validator extends BaseValidator {
   private boolean validateTestMethod(ExecutableElement executableElement) {
     checkArgument(MoreElements.isAnnotationPresent(executableElement, Test.class));
     boolean isValid = true;
-    if (TestingPredicates.IS_RETURNTYPE_A_PROMISE.apply(executableElement)) {
+    if (TestingPredicates.IS_RETURNTYPE_A_PROMISE.test(executableElement)) {
       // if we are an async test, we need the timeout attribute
       if (executableElement.getAnnotation(Test.class).timeout() <= 0) {
         errorReporter.report(ErrorMessage.ASYNC_NO_TIMEOUT, executableElement);
@@ -102,7 +101,7 @@ class JUnit4Validator extends BaseValidator {
         errorReporter.report(ErrorMessage.HAS_TIMEOUT, executableElement);
         isValid = false;
       }
-      if (!TestingPredicates.RETURN_TYPE_VOID_PREDICATE.apply(executableElement)) {
+      if (!TestingPredicates.RETURN_TYPE_VOID_PREDICATE.test(executableElement)) {
         errorReporter.report(ErrorMessage.NON_PROMISE_RETURN, executableElement);
         isValid = false;
       }
@@ -115,26 +114,23 @@ class JUnit4Validator extends BaseValidator {
   }
 
   private List<ExecutableElement> getAllMethodsAnnotatedWithTest(TypeElement typeElement) {
-    return ElementFilter.methodsIn(typeElement.getEnclosedElements())
-        .stream()
+    return ElementFilter.methodsIn(typeElement.getEnclosedElements()).stream()
         .filter(TestingPredicates.hasAnnotation(Test.class))
-        .filter(Predicates.not(TestingPredicates.hasAnnotation(Ignore.class)))
+        .filter(TestingPredicates.hasAnnotation(Ignore.class).negate())
         .collect(toImmutableList());
   }
 
   private List<ExecutableElement> getAllMethodsAnnotatedWithAfter(TypeElement typeElement) {
-    return ElementFilter.methodsIn(typeElement.getEnclosedElements())
-        .stream()
+    return ElementFilter.methodsIn(typeElement.getEnclosedElements()).stream()
         .filter(TestingPredicates.hasAnnotation(After.class))
-        .filter(Predicates.not(TestingPredicates.hasAnnotation(Ignore.class)))
+        .filter(TestingPredicates.hasAnnotation(Ignore.class).negate())
         .collect(toImmutableList());
   }
 
   private List<ExecutableElement> getAllMethodsAnnotatedWithBefore(TypeElement typeElement) {
-    return ElementFilter.methodsIn(typeElement.getEnclosedElements())
-        .stream()
+    return ElementFilter.methodsIn(typeElement.getEnclosedElements()).stream()
         .filter(TestingPredicates.hasAnnotation(Before.class))
-        .filter(Predicates.not(TestingPredicates.hasAnnotation(Ignore.class)))
+        .filter(TestingPredicates.hasAnnotation(Ignore.class).negate())
         .collect(toImmutableList());
   }
 }
