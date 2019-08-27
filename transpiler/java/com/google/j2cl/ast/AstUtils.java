@@ -931,7 +931,7 @@ public class AstUtils {
     final Variable thisArg =
         Variable.newBuilder()
             .setName("$thisArg")
-            .setTypeDescriptor(method.getDescriptor().getEnclosingTypeDescriptor())
+            .setTypeDescriptor(method.getDescriptor().getEnclosingTypeDescriptor().toNonNullable())
             .setParameter(true)
             .setFinal(true)
             .build();
