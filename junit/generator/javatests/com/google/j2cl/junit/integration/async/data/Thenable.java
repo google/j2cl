@@ -23,12 +23,12 @@ import jsinterop.annotations.JsType;
 public interface Thenable {
   // We are defining two different callback types here so that we can reproduce b/32406287
   @JsFunction
-  public interface FullFilledCallback {
+  interface FullFilledCallback {
     void execute(Object o);
   }
-  
+
   @JsFunction
-  public interface RejectedCallback {
+  interface RejectedCallback {
     void execute(Object o);
   }
 

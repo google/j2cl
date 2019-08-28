@@ -21,10 +21,13 @@ import com.google.common.base.Predicate;
 import java.lang.annotation.Annotation;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
+import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.TypeKind;
 import javax.lang.model.util.ElementFilter;
 import jsinterop.annotations.JsFunction;
+import jsinterop.annotations.JsIgnore;
+import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
 
 class TestingPredicates {
@@ -37,16 +40,25 @@ class TestingPredicates {
   static final Predicate<ExecutableElement> METHOD_NAME_STARTS_WITH_TEST_PREDICATE =
       input -> input.getSimpleName().toString().startsWith("test");
 
-  private static final boolean isPromise(TypeElement type) {
+  // TODO(b/140131081): Code like the following should be using shared J2CL infrastructure so
+  //  that the code is consistent and not duplicated.
+  private static final boolean isThenable(TypeElement type) {
     if (type == null) {
       return false;
     }
 
+    Predicate<ExecutableElement> isJsMethod =
+        method ->
+            (isAnnotationPresent(method.getEnclosingElement(), JsType.class)
+                    && !isAnnotationPresent(method, JsIgnore.class))
+                || isAnnotationPresent(method, JsMethod.class);
+
     return MoreApt.getTypeHierarchy(type).stream()
-        .filter(t -> isAnnotationPresent(t, JsType.class))
         .flatMap(t -> ElementFilter.methodsIn(t.getEnclosedElements()).stream())
-        .filter(m -> m.getSimpleName().contentEquals("then"))
+        .filter(m -> !m.getModifiers().contains(Modifier.STATIC))
+        .filter(TestingPredicates::isThenMethod)
         .filter(m -> m.getParameters().size() == 1 || m.getParameters().size() == 2)
+        .filter(isJsMethod)
         .anyMatch(
             m ->
                 m.getParameters().stream()
@@ -54,8 +66,18 @@ class TestingPredicates {
                     .allMatch(t -> t != null && isAnnotationPresent(t, JsFunction.class)));
   }
 
-  static final Predicate<ExecutableElement> IS_RETURNTYPE_A_PROMISE =
-      input -> isPromise(MoreApt.asTypeElement(input.getReturnType()));
+  // TODO(b/140131081): Due to having two separate implementations to decide what is a Promise
+  // one for running under Jvm and the other for the running on the web, we require the method
+  // to be named 'then' and not renamed with the @JsMethod annotation.
+  private static boolean isThenMethod(ExecutableElement method) {
+    return method.getSimpleName().contentEquals("then")
+        && (!isAnnotationPresent(method, JsMethod.class)
+            || method.getAnnotation(JsMethod.class).name().equals("<auto>")
+            || method.getAnnotation(JsMethod.class).name().equals("then"));
+  }
+
+  static final Predicate<ExecutableElement> IS_RETURNTYPE_A_THENABLE =
+      input -> isThenable(MoreApt.asTypeElement(input.getReturnType()));
 
   static Predicate<? super Element> hasAnnotation(final Class<? extends Annotation> annotation) {
     return element -> isAnnotationPresent(element, annotation);

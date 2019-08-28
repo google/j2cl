@@ -83,7 +83,7 @@ class JUnit4Validator extends BaseValidator {
   private boolean validateTestMethod(ExecutableElement executableElement) {
     checkArgument(MoreElements.isAnnotationPresent(executableElement, Test.class));
     boolean isValid = true;
-    if (TestingPredicates.IS_RETURNTYPE_A_PROMISE.test(executableElement)) {
+    if (TestingPredicates.IS_RETURNTYPE_A_THENABLE.test(executableElement)) {
       // if we are an async test, we need the timeout attribute
       if (executableElement.getAnnotation(Test.class).timeout() <= 0) {
         errorReporter.report(ErrorMessage.ASYNC_NO_TIMEOUT, executableElement);

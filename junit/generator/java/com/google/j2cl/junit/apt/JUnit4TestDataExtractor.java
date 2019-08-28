@@ -116,7 +116,7 @@ class JUnit4TestDataExtractor {
         .isStatic(element.getModifiers().contains(Modifier.STATIC))
         .expectedExceptionQualifiedName(getExpectedException(element))
         .timeout(getTimeout(element))
-        .isAsync(TestingPredicates.IS_RETURNTYPE_A_PROMISE.test(element))
+        .isAsync(TestingPredicates.IS_RETURNTYPE_A_THENABLE.test(element))
         .build();
   }
 

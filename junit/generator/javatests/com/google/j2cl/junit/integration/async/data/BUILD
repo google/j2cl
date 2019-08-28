@@ -55,6 +55,11 @@ j2cl_test_integration_test_data(
 )
 
 j2cl_test_integration_test_data(
+    name = "TestStructuralThenable",
+    deps = ASYNC_TEST_DEPS,
+)
+
+j2cl_test_integration_test_data(
     name = "TestReturnsNullForPromise",
     deps = ASYNC_TEST_DEPS,
 )
@@ -76,6 +81,11 @@ j2cl_test_integration_test_data(
 
 j2cl_test_integration_test_data(
     name = "TestReturnTypeNotStructuralPromiseThenParameterNotJsType",
+    deps = ASYNC_TEST_DEPS + ["//third_party:gwt-jsinterop-annotations"],
+)
+
+j2cl_test_integration_test_data(
+    name = "TestReturnTypeNotStructuralPromiseThenNameRedefined",
     deps = ASYNC_TEST_DEPS + ["//third_party:gwt-jsinterop-annotations"],
 )
 

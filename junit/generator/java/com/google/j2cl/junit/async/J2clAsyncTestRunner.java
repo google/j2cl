@@ -52,8 +52,8 @@ import org.junit.runners.model.Statement;
 public class J2clAsyncTestRunner extends BlockJUnit4ClassRunner {
 
   private static final String PROMISE_LIKE =
-      "A promise-like type is a type that is annotated with @JsType "
-          + "and has a 'then' method. 'then' method should have a 'success' callback parameter "
+      "A promise-like type is a type that  has a 'then' method. 'then' method should be a "
+          + "@JsMethod and have a 'success' callback parameter "
           + "and an optional 'failure' callback parameter.";
 
   public enum ErrorMessage {
@@ -62,10 +62,10 @@ public class J2clAsyncTestRunner extends BlockJUnit4ClassRunner {
     ASYNC_HAS_EXPECTED_EXCEPTION(
         "Method %s has expectedException attribute but returns a promise-like type."),
     NO_THEN_METHOD(
-        "Type %s is not a promise-like type. It's missing a 'then' method with two paramters. "
+        "Type %s is not a promise-like type. It's missing a 'then' method with two parameters. "
             + PROMISE_LIKE),
     MULTIPLE_THEN_METHOD(
-        "Type %s is not a promise-like type. It has multiple 'then' methods with two paramters. "
+        "Type %s is not a promise-like type. It has multiple 'then' methods with two parameters. "
             + PROMISE_LIKE),
     INVALID_CALLBACK_PARAMETER(
         "Type '%s' is not a promise-like type,"
@@ -74,7 +74,7 @@ public class J2clAsyncTestRunner extends BlockJUnit4ClassRunner {
 
     private final String formattedMsg;
 
-    private ErrorMessage(String formattedMsg) {
+    ErrorMessage(String formattedMsg) {
       this.formattedMsg = formattedMsg;
     }
 
@@ -231,6 +231,11 @@ public class J2clAsyncTestRunner extends BlockJUnit4ClassRunner {
     return new Exception(String.format(message, eachTestMethod.getMethod().getName()));
   }
 
+  // TODO(b/140131081): Yet another different implementation of what means to be a promise.
+  //  This one is only used for running Async tests on the JVM and has more relaxed requirements.
+  //  IMHO, since this is only for J2CL tests it should have the same error paths and reject
+  //  the test methods in the same cases as the validator, for example this one accepts 'then'
+  //  methods that are not JsMethod.
   private static PromiseType getPromiseType(Class<?> shouldBePromise) throws InvalidTypeException {
 
     List<Method> methods =

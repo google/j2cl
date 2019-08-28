@@ -92,7 +92,22 @@ public class J2clAsyncTest extends IntegrationTestBase {
   }
 
   @Test
-  public void testReturnTypeNotStructualPromise() throws Exception {
+  public void testStructuralThenable() throws Exception {
+    String testName = "TestStructuralThenable";
+    TestResult testResult =
+        newTestResultBuilder()
+            .testClassName(testName)
+            .addTestSuccess("testStructuraThenable")
+            .addTestSuccess("testStructuraThenable_subinterface")
+            .addTestSuccess("testStructuraThenable_subclass")
+            .build();
+
+    List<String> logLines = runTest(testName);
+    assertThat(logLines).matches(testResult);
+  }
+
+  @Test
+  public void testReturnTypeNotStructuralThenable() throws Exception {
     if (testMode.isJ2cl()) {
       // No j2cl version of this test since these would be a compile error and thus are handled
       // in our APT unit tests
@@ -113,7 +128,7 @@ public class J2clAsyncTest extends IntegrationTestBase {
   }
 
   @Test
-  public void testReturnTypeNotStructualPromise_thenParameterCount() throws Exception {
+  public void testReturnTypeNotStructuralThenable_thenParameterCount() throws Exception {
     if (testMode.isJ2cl()) {
       // No j2cl version of this test since these would be a compile error and thus are handled
       // in our APT unit tests
@@ -137,7 +152,7 @@ public class J2clAsyncTest extends IntegrationTestBase {
   }
 
   @Test
-  public void testReturnTypeNotStructualPromise_thenParameterNotJsType() throws Exception {
+  public void testReturnTypeNotStructuralThenable_thenParameterNotJsType() throws Exception {
     if (testMode.isJ2cl()) {
       // No j2cl version of this test since these would be a compile error and thus are handled
       // in our APT unit tests

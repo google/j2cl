@@ -23,6 +23,7 @@ import static org.mockito.Mockito.when;
 
 import com.google.common.collect.Iterables;
 import com.google.j2cl.junit.integration.async.data.TestReturnTypeNotStructuralPromise;
+import com.google.j2cl.junit.integration.async.data.TestReturnTypeNotStructuralPromiseThenNameRedefined;
 import com.google.j2cl.junit.integration.async.data.TestReturnTypeNotStructuralPromiseThenParameterCount;
 import com.google.j2cl.junit.integration.async.data.TestReturnTypeNotStructuralPromiseThenParameterNotJsType;
 import com.google.j2cl.junit.integration.async.data.TestReturnsVoidTimeoutProvided;
@@ -104,6 +105,14 @@ public class J2clTestingProcessingStepTest {
         ErrorMessage.NON_PROMISE_RETURN,
         TestReturnTypeNotStructuralPromise.class,
         "returnTypeNotStructuralPromise");
+  }
+
+  @Test
+  public void testJUnit4NotProperThenableReturnType() {
+    assertError(
+        ErrorMessage.NON_PROMISE_RETURN,
+        TestReturnTypeNotStructuralPromiseThenNameRedefined.class,
+        "returnTypeNotQuiteThenable");
   }
 
   @Test
