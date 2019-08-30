@@ -232,12 +232,13 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         ASTNode sourcePositionNode,
         Function<Type, T> typeProcessor) {
       Type type = createType(typeBinding, sourcePositionNode);
-      pushType(type);
       getCurrentCompilationUnit().addType(type);
-      convertTypeBody(type, bodyDeclarations);
-      T result = typeProcessor.apply(type);
-      popType();
-      return result;
+      return processEnclosedBy(
+          type,
+          () -> {
+            convertTypeBody(type, bodyDeclarations);
+            return typeProcessor.apply(type);
+          });
     }
 
     private void convertTypeBody(Type type, List<BodyDeclaration> bodyDeclarations) {
@@ -362,13 +363,16 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         parameters.add(createVariable(parameter));
       }
 
+      MethodDescriptor methodDescriptor =
+          JdtUtils.createMethodDescriptor(methodDeclaration.resolveBinding());
+
       // If a method has no body, initialize the body with an empty list of statements.
       Block body =
           methodDeclaration.getBody() == null
               ? Block.newBuilder().setSourcePosition(getSourcePosition(methodDeclaration)).build()
-              : convert(methodDeclaration.getBody());
+              : processEnclosedBy(methodDescriptor, () -> convert(methodDeclaration.getBody()));
 
-      return newMethodBuilder(methodDeclaration.resolveBinding())
+      return newMethodBuilder(methodDescriptor)
           .setSourcePosition(getSourcePosition(methodDeclaration.getName()))
           .setParameters(parameters)
           .addStatements(body.getStatements())
@@ -376,13 +380,15 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     }
 
     private Method convert(AnnotationTypeMemberDeclaration memberDeclaration) {
-      return newMethodBuilder(memberDeclaration.resolveBinding())
+      MethodDescriptor methodDescriptor =
+          JdtUtils.createMethodDescriptor(memberDeclaration.resolveBinding());
+
+      return newMethodBuilder(methodDescriptor)
           .setSourcePosition(getSourcePosition(memberDeclaration))
           .build();
     }
 
-    private Method.Builder newMethodBuilder(IMethodBinding methodBinding) {
-      MethodDescriptor methodDescriptor = JdtUtils.createMethodDescriptor(methodBinding);
+    private Method.Builder newMethodBuilder(MethodDescriptor methodDescriptor) {
       // TODO(b/31312257): fix or decide to not emit @override and suppress the error.
       boolean isOverride =
           methodDescriptor
@@ -979,20 +985,19 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       return FunctionExpression.newBuilder()
           .setTypeDescriptor(JdtUtils.createTypeDescriptor(expression.resolveTypeBinding()))
           .setParameters(
-              JdtUtils.<VariableDeclaration>asTypedList(expression.parameters())
-                  .stream()
+              JdtUtils.<VariableDeclaration>asTypedList(expression.parameters()).stream()
                   .map(this::convert)
                   .collect(toImmutableList()))
           .setStatements(
-              convertLambdaBody(
-                      expression.getBody(), functionalMethodDescriptor.getReturnTypeDescriptor())
-                  .getStatements())
+              processEnclosedBy(
+                  functionalMethodDescriptor,
+                  () -> convertLambdaBody(expression.getBody()).getStatements()))
           .setSourcePosition(getSourcePosition(expression))
           .build();
     }
 
     // Lambda expression bodies can be either an Expression or a Statement
-    private Block convertLambdaBody(ASTNode lambdaBody, TypeDescriptor returnTypeDescriptor) {
+    private Block convertLambdaBody(ASTNode lambdaBody) {
       Block body;
       if (lambdaBody.getNodeType() == ASTNode.BLOCK) {
         body = convert((org.eclipse.jdt.core.dom.Block) lambdaBody);
@@ -1001,7 +1006,9 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         Expression lambdaMethodBody = convert((org.eclipse.jdt.core.dom.Expression) lambdaBody);
         Statement statement =
             AstUtils.createReturnOrExpressionStatement(
-                getSourcePosition(lambdaBody), lambdaMethodBody, returnTypeDescriptor);
+                getSourcePosition(lambdaBody),
+                lambdaMethodBody,
+                getEnclosingFunctional().getReturnTypeDescriptor());
         body =
             Block.newBuilder()
                 .setSourcePosition(getSourcePosition(lambdaBody))
@@ -1379,13 +1386,10 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
     private ReturnStatement convert(org.eclipse.jdt.core.dom.ReturnStatement statement) {
       // Grab the type of the return statement from the method declaration, not from the expression.
-      TypeDescriptor returnTypeDescriptor =
-          JdtUtils.createTypeDescriptor(
-              checkNotNull(JdtUtils.findCurrentMethodBinding(statement)).getReturnType());
 
       return ReturnStatement.newBuilder()
           .setExpression(convertOrNull(statement.getExpression()))
-          .setTypeDescriptor(returnTypeDescriptor)
+          .setTypeDescriptor(getEnclosingFunctional().getReturnTypeDescriptor())
           .setSourcePosition(getSourcePosition(statement))
           .build();
     }

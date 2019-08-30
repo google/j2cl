@@ -50,12 +50,15 @@ import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.common.SourcePosition;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
 
 /** Base class for implementing that AST conversion from different front ends. */
 public abstract class AbstractCompilationUnitBuilder {
@@ -63,26 +66,15 @@ public abstract class AbstractCompilationUnitBuilder {
   private final PackageInfoCache packageInfoCache = PackageInfoCache.get();
   private final Map<Variable, Type> enclosingTypeByVariable = new HashMap<>();
   private final Multimap<String, Variable> capturesByTypeName = LinkedHashMultimap.create();
+
   /** Type stack to keep track of the lexically enclosing types as they are being created. */
   private final List<Type> typeStack = new ArrayList<>();
 
+  /** MethodDescriptor stack to keep track of lexical enclosing method scopes. */
+  private final Deque<MethodDescriptor> enclosingFunctionalElementStack = new ArrayDeque<>();
+
   private String currentSourceFile;
   private CompilationUnit currentCompilationUnit;
-
-  /** Push a type the type stack, making it the current type. */
-  protected void pushType(Type type) {
-    typeStack.add(type);
-  }
-
-  /** Pops the top of the type stack. */
-  protected void popType() {
-    typeStack.remove(typeStack.size() - 1);
-  }
-
-  /** Returns the current type. */
-  protected Type getCurrentType() {
-    return Iterables.getLast(typeStack, null);
-  }
 
   /** Sets the JS namespace for a package that is being compiled from source. */
   protected void setPackageJsNamespaceFromSource(String packageName, String jsNamespace) {
@@ -104,6 +96,32 @@ public abstract class AbstractCompilationUnitBuilder {
 
   protected void setCurrentCompilationUnit(CompilationUnit currentCompilationUnit) {
     this.currentCompilationUnit = currentCompilationUnit;
+  }
+
+  /** Invoke {@code supplier} with {@code type} in the type stack. */
+  protected <T> T processEnclosedBy(Type type, Supplier<T> supplier) {
+    typeStack.add(type);
+    T converted = supplier.get();
+    typeStack.remove(typeStack.size() - 1);
+    return converted;
+  }
+
+  /** Invoke {@code supplier} with {@code methodDescriptor} in the functional stack. */
+  protected <T> T processEnclosedBy(MethodDescriptor methodDescriptor, Supplier<T> supplier) {
+    enclosingFunctionalElementStack.push(methodDescriptor);
+    T converted = supplier.get();
+    enclosingFunctionalElementStack.pop();
+    return converted;
+  }
+
+  /** Returns the current type. */
+  protected Type getCurrentType() {
+    return Iterables.getLast(typeStack, null);
+  }
+
+  /** Returns the current enclosing functional element. */
+  protected MethodDescriptor getEnclosingFunctional() {
+    return enclosingFunctionalElementStack.peek();
   }
 
   ////////////////////////////////////////////////////////////////////////////////////////////////

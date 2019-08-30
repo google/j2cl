@@ -70,8 +70,6 @@ import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.IVariableBinding;
 import org.eclipse.jdt.core.dom.InfixExpression;
-import org.eclipse.jdt.core.dom.LambdaExpression;
-import org.eclipse.jdt.core.dom.MethodDeclaration;
 import org.eclipse.jdt.core.dom.Modifier;
 import org.eclipse.jdt.core.dom.PostfixExpression;
 import org.eclipse.jdt.core.dom.PrefixExpression;
@@ -313,23 +311,6 @@ class JdtUtils {
     @SuppressWarnings("unchecked")
     List<T> typedList = jdtRawCollection;
     return typedList;
-  }
-
-  /**
-   * Returns the method binding of the immediately enclosing method, whether that be an actual
-   * method or a lambda expression.
-   */
-  public static IMethodBinding findCurrentMethodBinding(org.eclipse.jdt.core.dom.ASTNode node) {
-    while (true) {
-      if (node == null) {
-        return null;
-      } else if (node instanceof MethodDeclaration) {
-        return ((MethodDeclaration) node).resolveBinding();
-      } else if (node instanceof LambdaExpression) {
-        return ((LambdaExpression) node).resolveMethodBinding();
-      }
-      node = node.getParent();
-    }
   }
 
   /** Creates a DeclaredTypeDescriptor from a JDT TypeBinding. */
