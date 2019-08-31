@@ -372,7 +372,7 @@ public class GenericCastTest {
     //     container.value = container.value;
     // does not require a cast per Java spec, since only the minimal casts to preserve type safety
     // are required. J2CL deviates from this policy and may emit more erasure casts than strictly
-    // needed. These casts are still correct and improve code size due to more giving more precise
+    // needed. These casts are still correct and improve code size due to giving more precise
     // typing to Closure.
 
     assertThrowsClassCastException(
