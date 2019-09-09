@@ -25,8 +25,7 @@ message MemberInfo {
   bool js_accessible = 4;
   repeated MethodInvocation invoked_methods = 5;
   repeated string referenced_types = 6;
-  FilePosition start_position = 7;
-  FilePosition end_position = 8;
+  SourcePosition position = 7;
 }
 
 enum InvocationKind {
@@ -41,7 +40,7 @@ message MethodInvocation {
   InvocationKind kind = 3;
 }
 
-message FilePosition {
-  int32 line = 1;
-  int32 column = 2;
+message SourcePosition {
+  int32 start = 1;
+  int32 end = 2;
 }

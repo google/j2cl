@@ -34,7 +34,6 @@ import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
-import com.google.j2cl.common.SourcePosition;
 import com.google.protobuf.util.JsonFormat;
 import java.io.IOException;
 import java.util.LinkedHashMap;
@@ -64,7 +63,7 @@ public final class LibraryInfoBuilder {
       Type type,
       String headerFilePath,
       String implFilePath,
-      Map<Member, SourcePosition> outputSourceInfoByMember) {
+      Map<Member, com.google.j2cl.common.SourcePosition> outputSourceInfoByMember) {
     String typeId = getTypeId(type);
 
     TypeInfo.Builder typeInfoBuilder =
@@ -110,10 +109,9 @@ public final class LibraryInfoBuilder {
                       .setStatic(member.isStatic())
                       .setJsAccessible(isJsAccessible));
 
-      SourcePosition jsSourcePosition = outputSourceInfoByMember.get(member);
+      com.google.j2cl.common.SourcePosition jsSourcePosition = outputSourceInfoByMember.get(member);
       if (jsSourcePosition != null) {
-        builder.setStartPosition(createFilePosition(jsSourcePosition.getStartFilePosition()));
-        builder.setEndPosition(createFilePosition(jsSourcePosition.getEndFilePosition()));
+        builder.setPosition(createSourcePosition(jsSourcePosition));
       }
 
       collectReferencedTypesAndMethodInvocations(member, builder);
@@ -127,10 +125,11 @@ public final class LibraryInfoBuilder {
         .build();
   }
 
-  private static FilePosition createFilePosition(com.google.j2cl.common.FilePosition filePosition) {
-    return FilePosition.newBuilder()
-        .setLine(filePosition.getLine())
-        .setColumn(filePosition.getColumn())
+  private static SourcePosition createSourcePosition(
+      com.google.j2cl.common.SourcePosition position) {
+    return SourcePosition.newBuilder()
+        .setStart(position.getStartFilePosition().getLine())
+        .setEnd(position.getEndFilePosition().getLine())
         .build();
   }
 
