@@ -279,7 +279,8 @@ public class ExpressionTranspiler {
         String qualifier = methodDescriptor.isStatic() ? typeName : typeName + ".prototype";
 
         sourceBuilder.append(
-            qualifier + "." + ManglingNameUtils.getMangledName(methodDescriptor) + ".call");
+            AstUtils.buildQualifiedName(
+                qualifier, ManglingNameUtils.getMangledName(methodDescriptor), "call"));
         renderDelimitedAndSeparated(
             "(",
             ", ",

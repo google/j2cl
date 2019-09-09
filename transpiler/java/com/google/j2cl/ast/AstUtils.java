@@ -30,6 +30,7 @@ import com.google.j2cl.ast.MethodDescriptor.MethodOrigin;
 import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.common.SourcePosition;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -868,7 +869,12 @@ public class AstUtils {
   }
 
   /** Returns a qualified name, ignoring empty and {@code null} {@code parts}. */
-  private static String buildQualifiedName(Stream<String> parts) {
+  public static String buildQualifiedName(String... parts) {
+    return buildQualifiedName(Arrays.stream(parts));
+  }
+
+  /** Returns a qualified name, ignoring empty and {@code null} {@code parts}. */
+  public static String buildQualifiedName(Stream<String> parts) {
     return parts
         .filter(Predicates.notNull())
         .filter(Predicates.not(String::isEmpty))

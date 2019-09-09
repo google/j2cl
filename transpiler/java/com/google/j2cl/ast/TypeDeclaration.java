@@ -30,6 +30,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
+import com.google.common.collect.Streams;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.ast.processors.common.Processor;
@@ -44,6 +45,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 import javax.annotation.Nullable;
 
 /**
@@ -109,7 +111,7 @@ public abstract class TypeDeclaration extends Node
    */
   @Memoized
   public String getQualifiedBinaryName() {
-    return Joiner.on(".").skipNulls().join(getPackageName(), getSimpleBinaryName());
+    return AstUtils.buildQualifiedName(getPackageName(), getSimpleBinaryName());
   }
 
   /** Returns the globally unique qualified name by which this type should be defined/imported. */
@@ -285,9 +287,7 @@ public abstract class TypeDeclaration extends Node
     String enclosingModuleRelativeName = getEnclosingTypeDeclaration().getModuleRelativeJsName();
     // enclosingModuleRelativeName can only be empty if the type has TypeDescriptors.globalNamespace
     // as an enclosing type. This could only potentially happen in synthetic type descriptors.
-    return enclosingModuleRelativeName.isEmpty()
-        ? getSimpleJsName()
-        : enclosingModuleRelativeName + "." + getSimpleJsName();
+    return AstUtils.buildQualifiedName(enclosingModuleRelativeName, getSimpleJsName());
   }
 
   @Override
@@ -324,7 +324,7 @@ public abstract class TypeDeclaration extends Node
     if (JsUtils.isGlobal(getJsNamespace())) {
       return getModuleRelativeJsName();
     }
-    return getJsNamespace() + "." + getModuleRelativeJsName();
+    return AstUtils.buildQualifiedName(getJsNamespace(), getModuleRelativeJsName());
   }
 
   @Nullable
@@ -506,9 +506,8 @@ public abstract class TypeDeclaration extends Node
    */
   @Memoized
   public String getQualifiedSourceName() {
-    return Joiner.on(".")
-        .skipNulls()
-        .join(getPackageName(), Joiner.on(".").join(getClassComponents()));
+    return AstUtils.buildQualifiedName(
+        Streams.concat(Stream.of(getPackageName()), getClassComponents().stream()));
   }
 
   @Memoized

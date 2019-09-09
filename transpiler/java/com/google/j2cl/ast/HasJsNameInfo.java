@@ -31,6 +31,6 @@ public interface HasJsNameInfo {
     if (JsUtils.isGlobal(getJsNamespace())) {
       return getSimpleJsName();
     }
-    return getJsNamespace() + "." + getSimpleJsName();
+    return AstUtils.buildQualifiedName(getJsNamespace(), getSimpleJsName());
   }
 }
