@@ -901,7 +901,7 @@ class JdtUtils {
     if (TypeDescriptors.isInitialized()) {
       return;
     }
-    TypeDescriptors.Builder builder = new TypeDescriptors.Builder();
+    TypeDescriptors.SingletonBuilder builder = new TypeDescriptors.SingletonBuilder();
     for (PrimitiveTypeDescriptor typeDescriptor : PrimitiveTypes.TYPES) {
       addPrimitive(ast, builder, typeDescriptor);
     }
@@ -909,11 +909,11 @@ class JdtUtils {
     for (ITypeBinding typeBinding : typeBindings) {
       builder.addReferenceType(createDeclaredTypeDescriptor(typeBinding));
     }
-    builder.init();
+    builder.buildSingleton();
   }
 
   private static void addPrimitive(
-      AST ast, TypeDescriptors.Builder builder, PrimitiveTypeDescriptor typeDescriptor) {
+      AST ast, TypeDescriptors.SingletonBuilder builder, PrimitiveTypeDescriptor typeDescriptor) {
     DeclaredTypeDescriptor boxedType =
         createDeclaredTypeDescriptor(ast.resolveWellKnownType(typeDescriptor.getBoxedClassName()));
     builder.addPrimitiveBoxedTypeDescriptorPair(typeDescriptor, boxedType);

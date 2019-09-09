@@ -425,11 +425,11 @@ public class TypeDescriptors {
   }
 
   /** Builder for TypeDescriptors. */
-  public static class Builder {
+  public static class SingletonBuilder {
 
     private final TypeDescriptors typeDescriptors = new TypeDescriptors();
 
-    public void init() {
+    public void buildSingleton() {
       set(typeDescriptors);
       typeDescriptors.javaLangObjectArray =
           ArrayTypeDescriptor.newBuilder()
@@ -438,14 +438,14 @@ public class TypeDescriptors {
       typeDescriptors.nullType = new NullType();
     }
 
-    public Builder addPrimitiveBoxedTypeDescriptorPair(
+    public SingletonBuilder addPrimitiveBoxedTypeDescriptorPair(
         PrimitiveTypeDescriptor primitiveType, DeclaredTypeDescriptor boxedType) {
       addReferenceType(boxedType);
       addBoxedTypeMapping(primitiveType, boxedType);
       return this;
     }
 
-    public Builder addReferenceType(DeclaredTypeDescriptor referenceType) {
+    public SingletonBuilder addReferenceType(DeclaredTypeDescriptor referenceType) {
       checkArgument(
           !referenceType.isPrimitive(),
           "%s is not a reference type",
