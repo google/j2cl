@@ -31,7 +31,7 @@ public class StaticJsMembers {
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
   public static class Native {
-    @JsProperty(namespace = "Math", name = "PI")
+    @JsProperty(namespace = JsPackage.GLOBAL, name = "Math.PI")
     public static int field3;
 
     @JsProperty(namespace = GLOBAL, name = "top")
@@ -53,7 +53,7 @@ public class StaticJsMembers {
   @JsMethod
   public static void f2(int a) {}
 
-  @JsMethod(namespace = "Math", name = "floor")
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "Math.floor")
   public static native void f3(double a);
 
   @JsMethod(namespace = GLOBAL, name = "isFinite")

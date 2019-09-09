@@ -26,7 +26,7 @@ import jsinterop.annotations.JsType;
  */
 public class Number {
   // import native js "Number" in a java class "Number".
-  @JsMethod(name = "isInteger", namespace = "Number")
+  @JsMethod(name = "Number.isInteger", namespace = GLOBAL)
   public static native boolean fun(double x);
 
   public static boolean test(double x) {
@@ -41,7 +41,7 @@ public class Number {
     T apply(Object thisContext, int[] argsArray);
   }
 
-  @JsProperty(name = "fromCharCode", namespace = "String")
+  @JsProperty(name = "String.fromCharCode", namespace = GLOBAL)
   private static native NativeFunction<String> getFromCharCodeFunction();
 
   public static String fromCharCode(int[] array) {

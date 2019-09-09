@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.readable.libraryinfo;
 
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsPackage;
 
 public class Main {
   public static String STATIC_FIELD = "STATIC_FIELD";
@@ -57,6 +58,6 @@ public class Main {
     return super.toString();
   }
 
-  @JsMethod(namespace = "console")
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "console.log")
   public static native void log(Object o);
 }

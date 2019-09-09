@@ -257,12 +257,12 @@
                   "com.google.j2cl.transpiler.readable.libraryinfo.Main.FunctionImpl",
               "kind" : "STATIC"
             },
-            {"method" : "log", "enclosingType" : "console", "kind" : "STATIC"}
+            {"method" : "console.log", "kind" : "STATIC"}
           ],
           "referencedTypes" : [
             "com.google.j2cl.transpiler.readable.libraryinfo.Main",
             "com.google.j2cl.transpiler.readable.libraryinfo.Main.FunctionImpl",
-            "console"
+            ""
           ],
           "startPosition" : {"line" : 35, "column" : 2},
           "endPosition" : {"line" : 48, "column" : 2}
@@ -270,10 +270,8 @@
         {
           "name" :
               "m_execute___$p_com_google_j2cl_transpiler_readable_libraryinfo_Main",
-          "invokedMethods" : [
-            {"method" : "log", "enclosingType" : "console", "kind" : "STATIC"}
-          ],
-          "referencedTypes" : ["console"],
+          "invokedMethods" : [ {"method" : "console.log", "kind" : "STATIC"} ],
+          "referencedTypes" : [""],
           "startPosition" : {"line" : 48, "column" : 2},
           "endPosition" : {"line" : 55, "column" : 2}
         },
@@ -290,7 +288,7 @@
           "endPosition" : {"line" : 64, "column" : 2}
         },
         {
-          "name" : "log",
+          "name" : "console.log",
           "public" : true,
           "static" : true,
           "jsAccessible" : true,

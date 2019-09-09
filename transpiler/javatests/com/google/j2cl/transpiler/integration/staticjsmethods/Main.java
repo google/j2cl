@@ -68,10 +68,10 @@ public class Main {
 
   public static native int callF2(int a);
 
-  @JsMethod(namespace = "Math")
+  @JsMethod(namespace = GLOBAL, name = "Math.floor")
   public static native int floor(double d);
 
-  @JsMethod(namespace = "Math", name = "abs")
+  @JsMethod(namespace = GLOBAL, name = "Math.abs")
   public static native int f3(int d);
 
   @JsMethod(namespace = GLOBAL, name = "isFinite")

@@ -21,7 +21,6 @@ import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static java.util.stream.Collectors.toList;
 
-import com.google.common.base.Joiner;
 import com.google.common.base.Predicates;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
@@ -36,6 +35,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /** Utility functions to manipulate J2CL AST. */
 public class AstUtils {
@@ -860,16 +861,18 @@ public class AstUtils {
     }
 
     List<String> components = Splitter.on('.').omitEmptyStrings().splitToList(memberJsNamespace);
-    List<String> namespaceComponents = components.subList(0, components.size() - 1);
-    boolean isExtern = namespaceComponents.size() < 1;
+
+    String jsNamespace = buildQualifiedName(components.subList(0, components.size() - 1).stream());
     String jsName = Iterables.getLast(components);
-
-    if (isExtern) {
-      return TypeDescriptors.createGlobalNativeTypeDescriptor(jsName);
-    }
-
-    String jsNamespace = Joiner.on(".").join(namespaceComponents);
     return TypeDescriptors.createNativeTypeDescriptor(jsNamespace, jsName);
+  }
+
+  /** Returns a qualified name, ignoring empty and {@code null} {@code parts}. */
+  private static String buildQualifiedName(Stream<String> parts) {
+    return parts
+        .filter(Predicates.notNull())
+        .filter(Predicates.not(String::isEmpty))
+        .collect(Collectors.joining("."));
   }
 
   /**

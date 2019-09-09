@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.readable.jsproperties;
 
+import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 
 /** Tests for non native static JsProperty. */
@@ -72,7 +73,7 @@ class NativeFoo {
   @JsProperty(name = "hasOwnProperty")
   public native Object getA();
 
-  @JsProperty(name = "PI", namespace = "Math")
+  @JsProperty(name = "Math.PI", namespace = JsPackage.GLOBAL)
   public static native double getB();
 }
 

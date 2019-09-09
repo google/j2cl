@@ -75,10 +75,10 @@ public class JsMethodTest {
     assertTrue(Double.isInfinite(-infinity()));
   }
 
-  @JsProperty(namespace = "window")
+  @JsProperty(namespace = GLOBAL, name = "window.jsInteropSecret")
   private static native void setJsInteropSecret(String magic);
 
-  @JsProperty(namespace = "window")
+  @JsProperty(namespace = GLOBAL, name = "window.jsInteropSecret")
   private static native String getJsInteropSecret();
 
   private static void testStaticNativeJsPropertySetter() {

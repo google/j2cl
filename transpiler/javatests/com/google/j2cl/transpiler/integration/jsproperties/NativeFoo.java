@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.integration.jsproperties;
 
+import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 
 /**
@@ -24,6 +25,6 @@ public class NativeFoo {
   @JsProperty(name = "hasOwnProperty")
   public native Object getA();
 
-  @JsProperty(name = "PI", namespace = "Math")
+  @JsProperty(name = "Math.PI", namespace = JsPackage.GLOBAL)
   public static native double getB();
 }
