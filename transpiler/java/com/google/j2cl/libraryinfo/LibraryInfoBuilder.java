@@ -44,8 +44,6 @@ import java.util.stream.Collectors;
 
 /** Traverse types and gather execution flow information for building call graph. */
 public final class LibraryInfoBuilder {
-  public static final String CONSTRUCTOR_METHOD_NAME = "constructor";
-
   /** Serialize a LibraryInfo object into a JSON string. */
   public static String toJson(LibraryInfo.Builder libraryInfo, Problems problems) {
     try {
@@ -119,43 +117,12 @@ public final class LibraryInfoBuilder {
       collectReferencedTypesAndMethodInvocations(member, builder);
     }
 
-    // Add the default constructor if there is no other constructor defined, So when the type is
-    // instantiated, it ensures that RTA see a call to the possible super type constructor.
-    memberInfoBuilderByName.computeIfAbsent(
-        CONSTRUCTOR_METHOD_NAME, m -> createDefaultConstructorMember(type));
-
     return typeInfoBuilder
         .addAllMember(
             memberInfoBuilderByName.values().stream()
                 .map(MemberInfo.Builder::build)
                 .collect(Collectors.toList()))
         .build();
-  }
-
-  private static MemberInfo.Builder createDefaultConstructorMember(Type type) {
-    if (type.isInterface()) {
-      return null;
-    }
-
-    MemberInfo.Builder builder =
-        MemberInfo.newBuilder().setName(CONSTRUCTOR_METHOD_NAME).setPublic(true);
-
-    DeclaredTypeDescriptor superTypeDescriptor = type.getSuperTypeDescriptor();
-    if (superTypeDescriptor != null
-        && !superTypeDescriptor.getTypeDeclaration().isStarOrUnknown()) {
-      String superTypeId = getTypeId(superTypeDescriptor.getTypeDeclaration());
-
-      // add method invocation to super constructor.
-      builder
-          .addInvokedMethods(
-              MethodInvocation.newBuilder()
-                  .setMethod(CONSTRUCTOR_METHOD_NAME)
-                  .setEnclosingType(superTypeId)
-                  .setKind(InvocationKind.STATIC))
-          .addReferencedTypes(superTypeId);
-    }
-
-    return builder;
   }
 
   private static SourcePosition createSourcePosition(
