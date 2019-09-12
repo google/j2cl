@@ -33,7 +33,7 @@ public class MyExportedClass {
     return 1000;
   }
 
-  public static final InnerClass EXPORTED_2 = new InnerClass(5);
+  public static InnerClass EXPORTED_2 = new InnerClass(5);
 
   public static int bar(int a, int b) {
     return EXPORTED_2.fun(a, b);
