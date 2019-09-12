@@ -906,7 +906,7 @@ public class AstUtils {
    */
   public static Method devirtualizeMethod(
       Method method, DeclaredTypeDescriptor enclosingTypeDescriptor) {
-    return devirtualizeMethod(method, enclosingTypeDescriptor, null);
+    return devirtualizeMethod(method, enclosingTypeDescriptor, Optional.empty());
   }
 
   /**
@@ -916,15 +916,16 @@ public class AstUtils {
    */
   public static Method devirtualizeMethod(Method method, String postfix) {
     checkArgument(!postfix.isEmpty());
-    return devirtualizeMethod(method, method.getDescriptor().getEnclosingTypeDescriptor(), postfix);
+    return devirtualizeMethod(
+        method, method.getDescriptor().getEnclosingTypeDescriptor(), Optional.of(postfix));
   }
 
   /**
    * Devirtualizes {@code Method} by making {@code this} into an explicit argument and placing the
    * resulting method in according to {@code devirtualizedMethodDescriptor}.
    */
-  public static Method devirtualizeMethod(
-      Method method, DeclaredTypeDescriptor enclosingTypeDescriptor, String postfix) {
+  private static Method devirtualizeMethod(
+      Method method, DeclaredTypeDescriptor enclosingTypeDescriptor, Optional<String> postfix) {
     checkArgument(
         !method.getDescriptor().isJsPropertyGetter()
             && !method.getDescriptor().isJsPropertySetter(),
@@ -934,8 +935,7 @@ public class AstUtils {
     checkArgument(!method.getDescriptor().isInit(), "Do not devirtualize init().");
 
     MethodDescriptor devirtualizedMethodDescriptor =
-        devirtualizeMethodDescriptor(
-            method.getDescriptor(), enclosingTypeDescriptor, Optional.ofNullable(postfix));
+        devirtualizeMethodDescriptor(method.getDescriptor(), enclosingTypeDescriptor, postfix);
 
     final Variable thisArg =
         Variable.newBuilder()
@@ -982,7 +982,7 @@ public class AstUtils {
    */
   public static MethodCall devirtualizeMethodCall(
       MethodCall methodCall, DeclaredTypeDescriptor targetTypeDescriptor) {
-    return devirtualizeMethodCall(methodCall, targetTypeDescriptor, null);
+    return devirtualizeMethodCall(methodCall, targetTypeDescriptor, Optional.empty());
   }
 
   /**
@@ -996,14 +996,15 @@ public class AstUtils {
   public static MethodCall devirtualizeMethodCall(MethodCall methodCall, String postfix) {
     checkArgument(!postfix.isEmpty());
     return devirtualizeMethodCall(
-        methodCall, methodCall.getTarget().getEnclosingTypeDescriptor(), postfix);
+        methodCall, methodCall.getTarget().getEnclosingTypeDescriptor(), Optional.of(postfix));
   }
 
-  public static MethodCall devirtualizeMethodCall(
-      MethodCall methodCall, DeclaredTypeDescriptor targetTypeDescriptor, String postfix) {
+  private static MethodCall devirtualizeMethodCall(
+      MethodCall methodCall,
+      DeclaredTypeDescriptor targetTypeDescriptor,
+      Optional<String> postfix) {
     MethodDescriptor devirtualizedMethodDescriptor =
-        devirtualizeMethodDescriptor(
-            methodCall.getTarget(), targetTypeDescriptor, Optional.ofNullable(postfix));
+        devirtualizeMethodDescriptor(methodCall.getTarget(), targetTypeDescriptor, postfix);
 
     // Call the method like Objects.foo(instance, ...)
     List<Expression> arguments =

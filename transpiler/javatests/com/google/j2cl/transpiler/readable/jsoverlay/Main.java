@@ -92,11 +92,13 @@ public class Main {
       }.run();
     }
 
+    // JsOverlay collision
     @JsOverlay
     public final void overlay() {}
 
-    @JsOverlay
-    public static void overlay(NativeJsTypeWithOverlay o) {}
+    // TODO(b/140883593): Uncomment when bug is resolved.
+    // @JsOverlay
+    // public static void overlay(NativeJsTypeWithOverlay o) {}
   }
 
   @JsFunction
