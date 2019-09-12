@@ -20,11 +20,14 @@ import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.base.CharMatcher;
 import com.google.common.base.Strings;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.j2cl.ast.Member;
 import com.google.j2cl.common.FilePosition;
 import com.google.j2cl.common.SourcePosition;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.SortedMap;
@@ -48,6 +51,7 @@ class SourceBuilder {
   private final SortedMap<SourcePosition, SourcePosition> javaSourceInfoByOutputSourceInfo =
       new TreeMap<>();
   private final Map<Member, SourcePosition> outputSourceInfoByMember = new HashMap<>();
+  private final List<SourcePosition> prunableOutputSourceInfo = new ArrayList<>();
   private boolean finished = false;
 
   public void emitWithMapping(Optional<SourcePosition> javaSourcePosition, Runnable codeEmitter) {
@@ -84,6 +88,24 @@ class SourceBuilder {
     }
 
     outputSourceInfoByMember.put(member, jsSourcePosition.get());
+  }
+
+  public void emitWithPrunableMapping(Runnable codeEmitter) {
+    checkSourceEndsWithNewLine();
+
+    Optional<SourcePosition> jsSourcePosition = emit(codeEmitter);
+    if (!jsSourcePosition.isPresent()) {
+      // Do not record empty mappings.
+      return;
+    }
+
+    prunableOutputSourceInfo.add(jsSourcePosition.get());
+
+    checkSourceEndsWithNewLine();
+  }
+
+  private void checkSourceEndsWithNewLine() {
+    checkState(sb.charAt(sb.length() - 1) == LINE_SEPARATOR_CHAR);
   }
 
   private Optional<SourcePosition> emit(Runnable codeEmitter) {
@@ -126,6 +148,10 @@ class SourceBuilder {
 
   public ImmutableMap<Member, SourcePosition> getOutputSourceInfoByMember() {
     return ImmutableMap.copyOf(outputSourceInfoByMember);
+  }
+
+  public ImmutableList<SourcePosition> getPrunableOutputSourceInfo() {
+    return ImmutableList.copyOf(prunableOutputSourceInfo);
   }
 
   public void append(String source) {

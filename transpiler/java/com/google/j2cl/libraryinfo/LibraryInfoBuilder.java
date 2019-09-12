@@ -17,6 +17,7 @@ package com.google.j2cl.libraryinfo;
 
 
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.FieldAccess;
@@ -38,6 +39,7 @@ import com.google.protobuf.util.JsonFormat;
 import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -63,6 +65,8 @@ public final class LibraryInfoBuilder {
       Type type,
       String headerFilePath,
       String implFilePath,
+      List<com.google.j2cl.common.SourcePosition> headerPrunableSourceInfo,
+      List<com.google.j2cl.common.SourcePosition> implPrunableSourceInfo,
       Map<Member, com.google.j2cl.common.SourcePosition> outputSourceInfoByMember) {
     String typeId = getTypeId(type);
 
@@ -70,7 +74,9 @@ public final class LibraryInfoBuilder {
         TypeInfo.newBuilder()
             .setTypeId(typeId)
             .setHeaderSourceFilePath(headerFilePath)
-            .setImplSourceFilePath(implFilePath);
+            .setImplSourceFilePath(implFilePath)
+            .addAllHeaderPrunablePositions(createSourcePositions(headerPrunableSourceInfo))
+            .addAllImplPrunablePositions(createSourcePositions(implPrunableSourceInfo));
 
     DeclaredTypeDescriptor superTypeDescriptor = type.getSuperTypeDescriptor();
     if (superTypeDescriptor != null
@@ -123,6 +129,11 @@ public final class LibraryInfoBuilder {
                 .map(MemberInfo.Builder::build)
                 .collect(Collectors.toList()))
         .build();
+  }
+
+  private static List<SourcePosition> createSourcePositions(
+      List<com.google.j2cl.common.SourcePosition> positions) {
+    return Lists.transform(positions, LibraryInfoBuilder::createSourcePosition);
   }
 
   private static SourcePosition createSourcePosition(

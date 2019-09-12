@@ -52,6 +52,22 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
 
     sourceBuilder.newLine();
 
+    sourceBuilder.emitWithPrunableMapping(this::renderImports);
+
+    String className = environment.aliasForType(type.getDeclaration());
+    String implementationPath = typeDeclaration.getImplModuleName();
+    sourceBuilder.appendLines(
+        "const " + className + " = goog.require('" + implementationPath + "');");
+    sourceBuilder.newLine();
+    // Since declareLegacyNamespace makes this class globally accessible via exports, also add a
+    // mapping from the exports to the original Java class.
+    sourceBuilder.emitWithMapping(type.getSourcePosition(), () -> sourceBuilder.append("exports"));
+    sourceBuilder.append(" = " + className + ";");
+    sourceBuilder.newLine();
+    return sourceBuilder.build();
+  }
+
+  private void renderImports() {
     Set<String> alreadyRequiredPaths = new HashSet<>();
     // Make sure we don't self-import
     alreadyRequiredPaths.add(type.getDeclaration().getQualifiedJsName());
@@ -76,18 +92,6 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
     }
     // externs imports are always available in the browser and don't need a header reference.
     sourceBuilder.newLine();
-
-    String className = environment.aliasForType(type.getDeclaration());
-    String implementationPath = typeDeclaration.getImplModuleName();
-    sourceBuilder.appendLines(
-        "const " + className + " = goog.require('" + implementationPath + "');");
-    sourceBuilder.newLine();
-    // Since declareLegacyNamespace makes this class globally accessible via exports, also add a
-    // mapping from the exports to the original Java class.
-    sourceBuilder.emitWithMapping(type.getSourcePosition(), () -> sourceBuilder.append("exports"));
-    sourceBuilder.append(" = " + className + ";");
-    sourceBuilder.newLine();
-    return sourceBuilder.build();
   }
 
   @Override

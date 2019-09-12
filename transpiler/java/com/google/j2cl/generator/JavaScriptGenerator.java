@@ -63,6 +63,10 @@ public abstract class JavaScriptGenerator {
     return sourceBuilder.getOutputSourceInfoByMember();
   }
 
+  public List<SourcePosition> getPrunableOutputSourceInfo() {
+    return sourceBuilder.getPrunableOutputSourceInfo();
+  }
+
   abstract String renderOutput();
 
   abstract String getSuffix();

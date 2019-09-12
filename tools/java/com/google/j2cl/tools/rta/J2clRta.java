@@ -65,11 +65,11 @@ public class J2clRta {
   private void run() {
     List<TypeInfo> typeInfos = collectTypeInfos();
 
-    RtaResult rtaResult = RapidTypeAnalyser.analyse(typeInfos);
+    PruningResult pruningResult = RapidTypeAnalyser.analyse(typeInfos);
 
-    writeToFile(unusedTypesOutputFilePath, rtaResult.getUnusedTypes());
-    writeToFile(unusedMembersOutputFilePath, rtaResult.getUnusedMembers());
-    writeToFile(removalCodeInfoOutputFilePath, rtaResult.getCodeRemovalInfo());
+    writeToFile(unusedTypesOutputFilePath, pruningResult.getUnusedTypes());
+    writeToFile(unusedMembersOutputFilePath, pruningResult.getUnusedMembers());
+    writeToFile(removalCodeInfoOutputFilePath, pruningResult.getCodeRemovalInfo());
   }
 
   private List<TypeInfo> collectTypeInfos() {

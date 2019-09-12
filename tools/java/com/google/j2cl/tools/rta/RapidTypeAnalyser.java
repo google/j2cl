@@ -26,7 +26,7 @@ import java.util.Set;
 
 final class RapidTypeAnalyser {
 
-  static RtaResult analyse(List<TypeInfo> typeInfos) {
+  static PruningResult analyse(List<TypeInfo> typeInfos) {
     List<Type> types = TypeGraphBuilder.build(typeInfos);
 
     // Go over the entry points to start the traversal.
@@ -35,7 +35,7 @@ final class RapidTypeAnalyser {
         .filter(Member::isJsAccessible)
         .forEach(m -> onMemberReference(m.getDefaultInvocationKind(), m));
 
-    return RtaResult.build(getUnusedTypes(types), getUnusedMembers(types));
+    return PruningResult.build(getUnusedTypes(types), getUnusedMembers(types), typeInfos);
   }
 
   private static Set<Type> getUnusedTypes(List<Type> types) {
