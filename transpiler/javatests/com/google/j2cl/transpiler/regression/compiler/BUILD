@@ -7,11 +7,13 @@ load("//build_defs:rules.bzl", "j2cl_library", "j2cl_test")
 j2cl_library(
     name = "CompilerSuiteLib",
     testonly = 1,
-    srcs = glob(["**/*.java"]),
+    srcs = glob([
+        "**/*.java",
+        "**/*.js",
+    ]),
     javacopts = [
         "-XepDisableAllChecks",
     ],
-    native_srcs = ["ArraysTest.native.js"],
     deps = [
         "//third_party:gwt-javaemul-internal-annotations-j2cl",
         "//third_party:gwt-jsinterop-annotations-j2cl",

@@ -30,7 +30,6 @@ load(":j2cl_library_build_test.bzl", "build_test")
 
 def j2cl_library(
         name,
-        native_srcs = [],
         generate_build_test = None,
         **kwargs):
     """Translates Java source into JS source in a js_common.provider target.
@@ -43,8 +42,6 @@ def j2cl_library(
 
     Args:
       srcs: Source files (.java or .srcjar) to compile.
-      native_srcs: Native js source files (.native.js). Native sources should be
-          put next to main java file to match.
       deps: Labels of other j2cl_library() rules.
             NOT labels of java_library() rules.
     """
@@ -58,8 +55,8 @@ def j2cl_library(
 
     args = dict(kwargs)
 
-    _append(args, "srcs", native_srcs)
-    _append(args, "deps", [])
+    _ensureList(args, "srcs")
+    _ensureList(args, "deps")
 
     hidden_arg_names = [i for i in args if i.startswith("_")]
     for arg_name in hidden_arg_names:
@@ -78,11 +75,11 @@ def j2cl_library(
     if args["srcs"] and (generate_build_test == None or generate_build_test):
         build_test(name, kwargs.get("tags", []))
 
-def _append(args, name, value):
+def _ensureList(args, name):
     # TODO(goktug): Remove to_list() coercions after cleaning the callsites w/ depsets since it is
     #  slotted for deprecation in favor of explicit to_list calls.
     old_value = args.get(name) or []
     if type(old_value) == type(depset()):
         old_value = old_value.to_list()
 
-    args[name] = old_value + list(value or [])
+    args[name] = old_value + []
