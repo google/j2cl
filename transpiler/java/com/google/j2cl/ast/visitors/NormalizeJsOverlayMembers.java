@@ -97,11 +97,13 @@ public class NormalizeJsOverlayMembers extends NormalizationPass {
     return overlayClass;
   }
 
+  private static final String OVERLAY_METHOD_SUFFIX = "__$devirt";
+
   private static Method createOverlayMethod(
       Method method, DeclaredTypeDescriptor overlayImplTypeDescriptor) {
     return method.getDescriptor().isStatic()
         ? AstUtils.createStaticOverlayMethod(method, overlayImplTypeDescriptor)
-        : AstUtils.devirtualizeMethod(method, overlayImplTypeDescriptor);
+        : AstUtils.devirtualizeMethod(method, overlayImplTypeDescriptor, OVERLAY_METHOD_SUFFIX);
   }
 
   /**
@@ -155,6 +157,6 @@ public class NormalizeJsOverlayMembers extends NormalizationPass {
           .setQualifier(null)
           .build();
     }
-    return AstUtils.devirtualizeMethodCall(methodCall, targetType);
+    return AstUtils.devirtualizeMethodCall(methodCall, targetType, OVERLAY_METHOD_SUFFIX);
   }
 }
