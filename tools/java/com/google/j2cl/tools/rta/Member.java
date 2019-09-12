@@ -19,20 +19,30 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.MultimapBuilder;
 import com.google.j2cl.libraryinfo.InvocationKind;
 import com.google.j2cl.libraryinfo.MemberInfo;
-import com.google.j2cl.libraryinfo.SourcePosition;
 import java.util.ArrayList;
 import java.util.List;
 
 final class Member {
   static Member buildFrom(MemberInfo memberInfo, Type declaringType) {
     Member member = new Member();
-    member.memberInfo = memberInfo;
+    member.name = memberInfo.getName();
+    member.isStatic = memberInfo.getStatic();
+    member.jsAccessible = memberInfo.getJsAccessible();
     member.declaringType = declaringType;
+    if (memberInfo.hasStartPosition() && memberInfo.hasEndPosition()) {
+      member.startLine = memberInfo.getStartPosition().getLine();
+      member.endLine = memberInfo.getEndPosition().getLine();
+    }
+
     return member;
   }
 
-  private MemberInfo memberInfo;
+  private String name;
   private Type declaringType;
+  private boolean jsAccessible;
+  private boolean isStatic;
+  private int startLine = -1;
+  private int endLine = -1;
 
   private boolean fullyTraversed;
   private boolean live;
@@ -49,21 +59,25 @@ final class Member {
   }
 
   boolean isJsAccessible() {
-    return memberInfo.getJsAccessible();
+    return jsAccessible;
   }
 
   String getName() {
-    return memberInfo.getName();
+    return name;
   }
 
-  SourcePosition getPosition() {
-    return memberInfo.getPosition();
+  int getStartLine() {
+    return startLine;
+  }
+
+  int getEndLine() {
+    return endLine;
   }
 
   InvocationKind getDefaultInvocationKind() {
-    if (memberInfo.getStatic()) {
+    if (isStatic) {
       return InvocationKind.STATIC;
-    } else if ("constructor".equals(getName())) {
+    } else if ("constructor".equals(name)) {
       return InvocationKind.INSTANTIATION;
     } else {
       return InvocationKind.DYNAMIC;

@@ -20,7 +20,7 @@ import static java.util.stream.Collectors.toList;
 
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableList;
-import com.google.j2cl.libraryinfo.SourcePosition;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -67,28 +67,25 @@ abstract class RtaResult {
         // Don't process members of unused types because the files will be totally removed.
         .filter(m -> !unusedTypeSet.contains(m.getDeclaringType()))
         // Consider member with file position info.
-        .filter(m -> m.getPosition() != null)
-        .sorted((m1, m2) -> m1.getPosition().getStart() - m2.getPosition().getStart())
+        .filter(m -> m.getStartLine() != -1)
+        .sorted(Comparator.comparing(Member::getStartLine))
         .forEach(
             member ->
                 unusedLinesBuilderByFileName
                     .computeIfAbsent(
                         member.getDeclaringType().getImplSourceFile(),
-                        file -> UnusedLines.newBuilder().setFileKey(file))
-                    .addUnusedRanges(convertToLineRange(member.getPosition())));
+                        (file) -> UnusedLines.newBuilder().setFileKey(file))
+                    .addUnusedRanges(
+                        LineRange.newBuilder()
+                            .setLineStart(member.getStartLine())
+                            .setLineEnd(member.getEndLine())
+                            .build()));
 
     return codeRemovalInfo
         .addAllUnusedLines(
             unusedLinesBuilderByFileName.values().stream()
                 .map(UnusedLines.Builder::build)
                 .collect(toList()))
-        .build();
-  }
-
-  private static LineRange convertToLineRange(SourcePosition position) {
-    return LineRange.newBuilder()
-        .setLineStart(position.getStart())
-        .setLineEnd(position.getEnd())
         .build();
   }
 
