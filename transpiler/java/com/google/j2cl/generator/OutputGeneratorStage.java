@@ -161,8 +161,6 @@ public class OutputGeneratorStage {
                   type,
                   headerRelativePath,
                   implRelativePath,
-                  jsHeaderGenerator.getPrunableOutputSourceInfo(),
-                  jsImplGenerator.getPrunableOutputSourceInfo(),
                   jsImplGenerator.getOutputSourceInfoByMember()));
         }
 

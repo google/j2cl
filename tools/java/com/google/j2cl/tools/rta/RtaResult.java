@@ -21,7 +21,6 @@ import static java.util.stream.Collectors.toList;
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.libraryinfo.SourcePosition;
-import com.google.j2cl.libraryinfo.TypeInfo;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -33,24 +32,23 @@ import java.util.stream.Stream;
  * Wrapper Object containing the set of live types and live members discovered by the RTA algorithm.
  */
 @AutoValue
-abstract class PruningResult {
+abstract class RtaResult {
   abstract ImmutableList<String> getUnusedTypes();
 
   abstract ImmutableList<String> getUnusedMembers();
 
   abstract CodeRemovalInfo getCodeRemovalInfo();
 
-  static PruningResult build(
-      Set<Type> unusedTypeSet, Set<Member> unusedMemberSet, List<TypeInfo> typeInfos) {
-    return new AutoValue_PruningResult.Builder()
+  static RtaResult build(Set<Type> unusedTypeSet, Set<Member> unusedMemberSet) {
+    return new AutoValue_RtaResult.Builder()
         .setUnusedTypes(toSortedList(unusedTypeSet.stream().map(Type::getName)))
-        .setUnusedMembers(toSortedList(unusedMemberSet.stream().map(PruningResult::createMemberId)))
-        .setCodeRemovalInfo(buildCodeRemovalInfo(unusedTypeSet, unusedMemberSet, typeInfos))
+        .setUnusedMembers(toSortedList(unusedMemberSet.stream().map(RtaResult::createMemberId)))
+        .setCodeRemovalInfo(buildCodeRemovalInfo(unusedTypeSet, unusedMemberSet))
         .build();
   }
 
   private static CodeRemovalInfo buildCodeRemovalInfo(
-      Set<Type> unusedTypeSet, Set<Member> unusedMemberSet, List<TypeInfo> typeInfos) {
+      Set<Type> unusedTypeSet, Set<Member> unusedMemberSet) {
 
     CodeRemovalInfo.Builder codeRemovalInfo = CodeRemovalInfo.newBuilder();
 
@@ -64,17 +62,6 @@ abstract class PruningResult {
     // unusedMemberSet iterator, we use a tree map to ensure a deterministic output of our
     // skylark rule.
     Map<String, UnusedLines.Builder> unusedLinesBuilderByFileName = new TreeMap<>();
-
-    for (TypeInfo type : typeInfos) {
-      createPrunableLines(
-          unusedLinesBuilderByFileName,
-          type.getHeaderSourceFilePath(),
-          type.getHeaderPrunablePositionsList());
-      createPrunableLines(
-          unusedLinesBuilderByFileName,
-          type.getImplSourceFilePath(),
-          type.getImplPrunablePositionsList());
-    }
 
     unusedMemberSet.stream()
         // Don't process members of unused types because the files will be totally removed.
@@ -98,18 +85,6 @@ abstract class PruningResult {
         .build();
   }
 
-  private static void createPrunableLines(
-      Map<String, UnusedLines.Builder> unusedLinesBuilderByFileName,
-      String file,
-      List<SourcePosition> unusedPositions) {
-    if (unusedPositions.isEmpty()) {
-      return;
-    }
-    UnusedLines.Builder unusedLinesBuilder = UnusedLines.newBuilder().setFileKey(file);
-    unusedPositions.forEach(p -> unusedLinesBuilder.addUnusedRanges(convertToLineRange(p)));
-    unusedLinesBuilderByFileName.put(file, unusedLinesBuilder);
-  }
-
   private static LineRange convertToLineRange(SourcePosition position) {
     return LineRange.newBuilder()
         .setLineStart(position.getStart())
@@ -125,7 +100,7 @@ abstract class PruningResult {
 
     abstract Builder setUnusedTypes(List<String> unusedFiles);
 
-    abstract PruningResult build();
+    abstract RtaResult build();
   }
 
   private static String createMemberId(Member member) {

@@ -209,14 +209,11 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
             Iterables.concat(
                 importsByCategory.get(ImportCategory.RUNTIME),
                 importsByCategory.get(ImportCategory.JSDOC)));
-    sourceBuilder.emitWithPrunableMapping(
-        () -> {
-          for (Import lazyImport : lazyImports) {
-            String alias = lazyImport.getAlias();
-            String path = lazyImport.getImplModulePath();
-            sourceBuilder.appendln("let " + alias + " = goog.forwardDeclare('" + path + "');");
-          }
-        });
+    for (Import lazyImport : lazyImports) {
+      String alias = lazyImport.getAlias();
+      String path = lazyImport.getImplModulePath();
+      sourceBuilder.appendln("let " + alias + " = goog.forwardDeclare('" + path + "');");
+    }
     if (!Iterables.isEmpty(lazyImports)) {
       sourceBuilder.newLine();
     }
