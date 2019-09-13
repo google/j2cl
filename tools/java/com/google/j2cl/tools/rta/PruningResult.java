@@ -80,7 +80,7 @@ abstract class PruningResult {
         // Don't process members of unused types because the files will be totally removed.
         .filter(m -> !unusedTypeSet.contains(m.getDeclaringType()))
         // Consider member with file position info.
-        .filter(m -> m.getPosition() != null)
+        .filter(m -> m.hasPosition())
         .sorted((m1, m2) -> m1.getPosition().getStart() - m2.getPosition().getStart())
         .forEach(
             member ->
