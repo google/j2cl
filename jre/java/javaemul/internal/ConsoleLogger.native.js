@@ -18,7 +18,7 @@
  * @param {Throwable} t
  * @return {string}
  */
-ConsoleLogger.m_getBackingErrorStack__java_lang_Throwable_$p_javaemul_internal_ConsoleLogger = function(t) {
+ConsoleLogger.m_getBackingErrorStack__java_lang_Throwable = function(t) {
   ConsoleLogger.$clinit();
   let backingError = /** @type {Error} */ (t.backingJsObject);
   return (backingError && backingError.stack) || "";

@@ -25,7 +25,6 @@ function useFoo(foo) {
  * @return {void}
  * @public
  */
-Main.m_useDirectlyAsFoo__java_lang_Object_$p_com_google_j2cl_transpiler_readable_externs_Main =
-    function(foo) {
+Main.m_useDirectlyAsFoo__java_lang_Object = function(foo) {
   useFoo(/** @type {Foo} */ (foo));
 };

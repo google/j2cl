@@ -112,7 +112,7 @@ class TypeWildCards extends j_l_Object {
    * @return {List<V>}
    * @public
    */
-  static m_transform__java_util_List__java_util_function_Function_$p_com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards(
+  static m_transform__java_util_List__java_util_function_Function(
       from, function_1) {
     TypeWildCards.$clinit();
     return null;
@@ -125,8 +125,7 @@ class TypeWildCards extends j_l_Object {
    * @return {List<E>}
    * @public
    */
-  static m_concat__java_util_List__java_util_List_$p_com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards(
-      a, b) {
+  static m_concat__java_util_List__java_util_List(a, b) {
     TypeWildCards.$clinit();
     return null;
   }
@@ -138,25 +137,23 @@ class TypeWildCards extends j_l_Object {
     let elements = null;
     let otherElements = null;
     let integers = /**@type {List<Integer>} */ (
-        TypeWildCards
-            .m_transform__java_util_List__java_util_function_Function_$p_com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards(
-                /**@type {List<*>} */
-                (TypeWildCards
-                     .m_concat__java_util_List__java_util_List_$p_com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards(
-                         elements, otherElements)),
-                j_u_function_Function.$adapt(((/** * */ a) => {
-                  /**@type {HasKey} */ ($Casts.$to(a, HasKey)).m_getKey__();
-                  return /**@type {IntegerSupplier} */ (
-                             $Casts.$to(a, IntegerSupplier))
-                      .m_get__();
-                }))));
+        TypeWildCards.m_transform__java_util_List__java_util_function_Function(
+            /**@type {List<*>} */ (
+                TypeWildCards.m_concat__java_util_List__java_util_List(
+                    elements, otherElements)),
+            j_u_function_Function.$adapt(((/** * */ a) => {
+              /**@type {HasKey} */ ($Casts.$to(a, HasKey)).m_getKey__();
+              return /**@type {IntegerSupplier} */ (
+                         $Casts.$to(a, IntegerSupplier))
+                  .m_get__();
+            }))));
   }
 
   /**
    * @param {GenericType<Foo>} foo
    * @public
    */
-  static m_takesRecursiveGeneric__com_google_j2cl_transpiler_readable_typewildcards_GenericType_$p_com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards(
+  static m_takesRecursiveGeneric__com_google_j2cl_transpiler_readable_typewildcards_GenericType(
       foo) {
     TypeWildCards.$clinit();
   }
@@ -166,7 +163,7 @@ class TypeWildCards extends j_l_Object {
    */
   m_testRecursiveGeneric__() {
     TypeWildCards
-        .m_takesRecursiveGeneric__com_google_j2cl_transpiler_readable_typewildcards_GenericType_$p_com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards(
+        .m_takesRecursiveGeneric__com_google_j2cl_transpiler_readable_typewildcards_GenericType(
             Foo.$create__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards(
                 this));
   }

@@ -16,9 +16,9 @@ const BigInteger_ = goog.require("java.math.BigInteger");
 
 /**
  * @param {number} v
- * @return {BigInteger}
+ * @return {?BigInteger_}
  * @public
  */
 BigIntegerViolator.m_fromDouble__double = function(v) {
-  return BigInteger_.m_valueOf__double_$pp_java_math(v);
+  return BigInteger_.m_valueOf__double(v);
 };

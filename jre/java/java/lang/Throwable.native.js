@@ -43,9 +43,12 @@ Throwable.prototype.m_constructJavaStackTrace___$p_java_lang_Throwable =
  * @return {*}
  * @public
  */
-Throwable.m_fixIE__java_lang_Object_$p_java_lang_Throwable = function(e) {
+Throwable.m_fixIE__java_lang_Object = function(e) {
   if (!('stack' in e)) {
-    try { throw e; } catch (ignored) {}
+    try {
+      throw e;
+    } catch (ignored) {
+    }
   }
   return e;
 };

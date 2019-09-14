@@ -149,30 +149,14 @@ class CastPrimitives extends j_l_Object {
     let l = $Long.fromBits(-1, 2147483647) /* 9223372036854775807 */;
     let f = 3.4028234663852886E38;
     let d = 1.7976931348623157E308;
-    CastPrimitives
-        .m_getShort__short_$p_com_google_j2cl_transpiler_readable_cast_CastPrimitives(
-            b);
-    CastPrimitives
-        .m_getInt__int_$p_com_google_j2cl_transpiler_readable_cast_CastPrimitives(
-            b);
-    CastPrimitives
-        .m_getLong__long_$p_com_google_j2cl_transpiler_readable_cast_CastPrimitives(
-            $Primitives.$widenByteToLong(b));
-    CastPrimitives
-        .m_getFloat__float_$p_com_google_j2cl_transpiler_readable_cast_CastPrimitives(
-            b);
-    CastPrimitives
-        .m_getDouble__double_$p_com_google_j2cl_transpiler_readable_cast_CastPrimitives(
-            b);
-    CastPrimitives
-        .m_getFloat__float_$p_com_google_j2cl_transpiler_readable_cast_CastPrimitives(
-            $Primitives.$widenLongToFloat(l));
-    CastPrimitives
-        .m_getDouble__double_$p_com_google_j2cl_transpiler_readable_cast_CastPrimitives(
-            $Primitives.$widenLongToDouble(l));
-    CastPrimitives
-        .m_getDouble__double_$p_com_google_j2cl_transpiler_readable_cast_CastPrimitives(
-            f);
+    CastPrimitives.m_getShort__short(b);
+    CastPrimitives.m_getInt__int(b);
+    CastPrimitives.m_getLong__long($Primitives.$widenByteToLong(b));
+    CastPrimitives.m_getFloat__float(b);
+    CastPrimitives.m_getDouble__double(b);
+    CastPrimitives.m_getFloat__float($Primitives.$widenLongToFloat(l));
+    CastPrimitives.m_getDouble__double($Primitives.$widenLongToDouble(l));
+    CastPrimitives.m_getDouble__double(f);
     IntValueHolder.$create__int(b);
     IntValueHolder.$create__int(c);
     IntValueHolder.$create__int(s);
@@ -186,8 +170,7 @@ class CastPrimitives extends j_l_Object {
    * @return {number}
    * @public
    */
-  static m_getShort__short_$p_com_google_j2cl_transpiler_readable_cast_CastPrimitives(
-      value) {
+  static m_getShort__short(value) {
     CastPrimitives.$clinit();
     return value;
   }
@@ -197,8 +180,7 @@ class CastPrimitives extends j_l_Object {
    * @return {number}
    * @public
    */
-  static m_getInt__int_$p_com_google_j2cl_transpiler_readable_cast_CastPrimitives(
-      value) {
+  static m_getInt__int(value) {
     CastPrimitives.$clinit();
     return value;
   }
@@ -208,8 +190,7 @@ class CastPrimitives extends j_l_Object {
    * @return {!$Long}
    * @public
    */
-  static m_getLong__long_$p_com_google_j2cl_transpiler_readable_cast_CastPrimitives(
-      value) {
+  static m_getLong__long(value) {
     CastPrimitives.$clinit();
     return value;
   }
@@ -219,8 +200,7 @@ class CastPrimitives extends j_l_Object {
    * @return {number}
    * @public
    */
-  static m_getFloat__float_$p_com_google_j2cl_transpiler_readable_cast_CastPrimitives(
-      value) {
+  static m_getFloat__float(value) {
     CastPrimitives.$clinit();
     return value;
   }
@@ -230,8 +210,7 @@ class CastPrimitives extends j_l_Object {
    * @return {number}
    * @public
    */
-  static m_getDouble__double_$p_com_google_j2cl_transpiler_readable_cast_CastPrimitives(
-      value) {
+  static m_getDouble__double(value) {
     CastPrimitives.$clinit();
     return value;
   }

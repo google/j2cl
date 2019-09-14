@@ -50,7 +50,7 @@ class Main extends j_l_Object {
    * @return {boolean}
    * @public
    */
-  static m_testFooOverlay__com_google_j2cl_transpiler_readable_externs_Main_FooOverlay_$p_com_google_j2cl_transpiler_readable_externs_Main(
+  static m_testFooOverlay__com_google_j2cl_transpiler_readable_externs_Main_FooOverlay(
       fooOverlay) {
     Main.$clinit();
     return j_l_String.m_equals__java_lang_String__java_lang_Object(
@@ -61,8 +61,7 @@ class Main extends j_l_Object {
    * @param {*} fooOverlay
    * @public
    */
-  // native static
-  // m_useDirectlyAsFoo__java_lang_Object_$p_com_google_j2cl_transpiler_readable_externs_Main(fooOverlay)
+  // native static m_useDirectlyAsFoo__java_lang_Object(fooOverlay)
 
   /**
    * @param {Array<?string>} args
@@ -70,10 +69,9 @@ class Main extends j_l_Object {
    */
   static m_main__arrayOf_java_lang_String(args) {
     Main.$clinit();
-    Main.m_testFooOverlay__com_google_j2cl_transpiler_readable_externs_Main_FooOverlay_$p_com_google_j2cl_transpiler_readable_externs_Main(
+    Main.m_testFooOverlay__com_google_j2cl_transpiler_readable_externs_Main_FooOverlay(
         /**@type {Foo} */ ($Casts.$to(FooImpl.$create__(), $Overlay)));
-    Main.m_useDirectlyAsFoo__java_lang_Object_$p_com_google_j2cl_transpiler_readable_externs_Main(
-        FooImpl.$create__());
+    Main.m_useDirectlyAsFoo__java_lang_Object(FooImpl.$create__());
   }
 
   /**
@@ -152,10 +150,10 @@ function useFoo(foo) {
  * @return {void}
  * @public
  */
-Main.m_useDirectlyAsFoo__java_lang_Object_$p_com_google_j2cl_transpiler_readable_externs_Main =
-    function(foo) {
+Main.m_useDirectlyAsFoo__java_lang_Object = function(foo) {
   useFoo(/** @type {Foo} */ (foo));
 };
+
 
 exports = Main;
 //# sourceMappingURL=Main.js.map
