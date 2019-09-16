@@ -80,8 +80,7 @@ public class J2clMinifier {
   private static final int S_BLOCK_COMMENT;
   private static final int S_DOUBLE_QUOTED_STRING;
   private static final int S_DOUBLE_QUOTED_STRING_ESCAPE;
-  private static final int S_NON_MINIMIZABLE_IDENTIFIER;
-  private static final int S_MINIMIZABLE_IDENTIFIER;
+  private static final int S_IDENTIFIER;
   private static final int S_LINE_COMMENT;
   private static final int S_MAYBE_BLOCK_COMMENT_END;
   private static final int S_MAYBE_COMMENT_START;
@@ -98,8 +97,7 @@ public class J2clMinifier {
       S_BLOCK_COMMENT = numberOfStates++;
       S_DOUBLE_QUOTED_STRING = numberOfStates++;
       S_DOUBLE_QUOTED_STRING_ESCAPE = numberOfStates++;
-      S_NON_MINIMIZABLE_IDENTIFIER = numberOfStates++;
-      S_MINIMIZABLE_IDENTIFIER = numberOfStates++;
+      S_IDENTIFIER = numberOfStates++;
       S_LINE_COMMENT = numberOfStates++;
       S_MAYBE_BLOCK_COMMENT_END = numberOfStates++;
       S_MAYBE_COMMENT_START = numberOfStates++;
@@ -117,13 +115,9 @@ public class J2clMinifier {
       setIdentifierStartTransitions(S_NON_IDENTIFIER);
       setCommentOrStringStartTransitions(S_NON_IDENTIFIER);
 
-      setDefaultTransitions(S_MINIMIZABLE_IDENTIFIER, S_NON_IDENTIFIER);
-      setIdentifierCharTransitions(S_MINIMIZABLE_IDENTIFIER, S_MINIMIZABLE_IDENTIFIER);
-      setCommentOrStringStartTransitions(S_MINIMIZABLE_IDENTIFIER);
-
-      setDefaultTransitions(S_NON_MINIMIZABLE_IDENTIFIER, S_NON_IDENTIFIER);
-      setIdentifierCharTransitions(S_NON_MINIMIZABLE_IDENTIFIER, S_NON_MINIMIZABLE_IDENTIFIER);
-      setCommentOrStringStartTransitions(S_NON_MINIMIZABLE_IDENTIFIER);
+      setDefaultTransitions(S_IDENTIFIER, S_NON_IDENTIFIER);
+      setIdentifierCharTransitions(S_IDENTIFIER, S_IDENTIFIER);
+      setCommentOrStringStartTransitions(S_IDENTIFIER);
 
       setDefaultTransitions(S_MAYBE_COMMENT_START, S_NON_IDENTIFIER);
       setIdentifierStartTransitions(S_MAYBE_COMMENT_START);
@@ -198,6 +192,11 @@ public class J2clMinifier {
   }
 
   private static boolean isMinifiableIdentifier(String identifier) {
+    char firstChar = identifier.charAt(0);
+    if (firstChar != '$' && firstChar != 'm' && firstChar != 'f') {
+      return false;
+    }
+
     // This is faster than a regex and more readable as well.
     if (startsLikeJavaMethodOrField(identifier)) {
       int underScoreIndex = identifier.indexOf('_');
@@ -224,10 +223,7 @@ public class J2clMinifier {
   }
 
   private static void setIdentifierStartTransitions(int currentState) {
-    setIdentifierCharTransitions(currentState, S_NON_MINIMIZABLE_IDENTIFIER);
-    nextState[currentState]['f'] = S_MINIMIZABLE_IDENTIFIER;
-    nextState[currentState]['m'] = S_MINIMIZABLE_IDENTIFIER;
-    nextState[currentState]['$'] = S_MINIMIZABLE_IDENTIFIER;
+    setIdentifierCharTransitions(currentState, S_IDENTIFIER);
   }
 
   private static void setIdentifierCharTransitions(int currentState, int nextState) {
@@ -347,32 +343,21 @@ public class J2clMinifier {
 
     transFn = new TransitionFunction[numberOfStates][numberOfStates];
 
-    transFn[S_NON_IDENTIFIER][S_MINIMIZABLE_IDENTIFIER] = J2clMinifier::startNewIdentifier;
-    transFn[S_NON_IDENTIFIER][S_NON_MINIMIZABLE_IDENTIFIER] = J2clMinifier::writeChar;
+    transFn[S_NON_IDENTIFIER][S_IDENTIFIER] = J2clMinifier::startNewIdentifier;
     transFn[S_NON_IDENTIFIER][S_NON_IDENTIFIER] = J2clMinifier::writeChar;
     transFn[S_NON_IDENTIFIER][S_MAYBE_COMMENT_START] = J2clMinifier::skipChar;
     transFn[S_NON_IDENTIFIER][S_SINGLE_QUOTED_STRING] = J2clMinifier::writeChar;
     transFn[S_NON_IDENTIFIER][S_DOUBLE_QUOTED_STRING] = J2clMinifier::writeChar;
     transFn[S_NON_IDENTIFIER][S_END_STATE] = J2clMinifier::skipChar;
 
-    transFn[S_NON_MINIMIZABLE_IDENTIFIER][S_NON_MINIMIZABLE_IDENTIFIER] = J2clMinifier::writeChar;
-    transFn[S_NON_MINIMIZABLE_IDENTIFIER][S_NON_IDENTIFIER] = J2clMinifier::writeChar;
-    transFn[S_NON_MINIMIZABLE_IDENTIFIER][S_MAYBE_COMMENT_START] = J2clMinifier::skipChar;
-    transFn[S_NON_MINIMIZABLE_IDENTIFIER][S_SINGLE_QUOTED_STRING] = J2clMinifier::writeChar;
-    transFn[S_NON_MINIMIZABLE_IDENTIFIER][S_DOUBLE_QUOTED_STRING] = J2clMinifier::writeChar;
-    transFn[S_NON_MINIMIZABLE_IDENTIFIER][S_END_STATE] = J2clMinifier::skipChar;
+    transFn[S_IDENTIFIER][S_IDENTIFIER] = J2clMinifier::bufferIdentifierChar;
+    transFn[S_IDENTIFIER][S_NON_IDENTIFIER] = this::writeIdentifierAndChar;
+    transFn[S_IDENTIFIER][S_MAYBE_COMMENT_START] = this::writeIdentifier;
+    transFn[S_IDENTIFIER][S_SINGLE_QUOTED_STRING] = this::writeIdentifierAndChar;
+    transFn[S_IDENTIFIER][S_DOUBLE_QUOTED_STRING] = this::writeIdentifierAndChar;
+    transFn[S_IDENTIFIER][S_END_STATE] = this::writeIdentifier;
 
-    transFn[S_MINIMIZABLE_IDENTIFIER][S_MINIMIZABLE_IDENTIFIER] =
-        J2clMinifier::bufferIdentifierChar;
-    transFn[S_MINIMIZABLE_IDENTIFIER][S_NON_IDENTIFIER] = this::writeIdentifierAndChar;
-    transFn[S_MINIMIZABLE_IDENTIFIER][S_MAYBE_COMMENT_START] = this::writeIdentifier;
-    transFn[S_MINIMIZABLE_IDENTIFIER][S_SINGLE_QUOTED_STRING] = this::writeIdentifierAndChar;
-    transFn[S_MINIMIZABLE_IDENTIFIER][S_DOUBLE_QUOTED_STRING] = this::writeIdentifierAndChar;
-    transFn[S_MINIMIZABLE_IDENTIFIER][S_END_STATE] = this::writeIdentifier;
-
-    transFn[S_MAYBE_COMMENT_START][S_MINIMIZABLE_IDENTIFIER] =
-        J2clMinifier::writeSlashAndStartNewIdentifier;
-    transFn[S_MAYBE_COMMENT_START][S_NON_MINIMIZABLE_IDENTIFIER] = J2clMinifier::writeSlashAndChar;
+    transFn[S_MAYBE_COMMENT_START][S_IDENTIFIER] = J2clMinifier::writeSlashAndStartNewIdentifier;
     transFn[S_MAYBE_COMMENT_START][S_MAYBE_COMMENT_START] = J2clMinifier::writeChar;
     transFn[S_MAYBE_COMMENT_START][S_LINE_COMMENT] = J2clMinifier::writeSlashAndChar;
     transFn[S_MAYBE_COMMENT_START][S_BLOCK_COMMENT] = J2clMinifier::skipChar;
