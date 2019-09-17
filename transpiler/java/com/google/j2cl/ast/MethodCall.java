@@ -49,7 +49,7 @@ public class MethodCall extends Invocation {
     this.qualifier = checkNotNull(AstUtils.getExplicitQualifier(qualifier, targetMethodDescriptor));
     this.arguments.addAll(checkNotNull(arguments));
     this.isStaticDispatch = isStaticDispatch;
-    this.sourcePosition = sourcePosition;
+    this.sourcePosition = checkNotNull(sourcePosition);
   }
 
   @Override
@@ -125,7 +125,7 @@ public class MethodCall extends Invocation {
 
     public static Builder from(MethodDescriptor methodDescriptor) {
       Builder builder = new Builder();
-      builder.setMethodDescriptor(methodDescriptor);
+      builder.setMethodDescriptor(methodDescriptor).setSourcePosition(null);
       return builder;
     }
 
@@ -135,7 +135,7 @@ public class MethodCall extends Invocation {
     }
 
     public final Builder setSourcePosition(SourcePosition sourcePosition) {
-      this.sourcePosition = Optional.of(sourcePosition);
+      this.sourcePosition = Optional.ofNullable(sourcePosition);
       return this;
     }
 
@@ -151,6 +151,7 @@ public class MethodCall extends Invocation {
     private Builder(MethodCall methodCall) {
       super(methodCall);
       this.isStaticDispatch = methodCall.isStaticDispatch();
+      this.sourcePosition = methodCall.sourcePosition;
     }
 
     private Builder() {}
