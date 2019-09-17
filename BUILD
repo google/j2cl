@@ -52,3 +52,9 @@ alias(
     name = "minifier",
     actual = "//tools/java/com/google/j2cl/tools/minifier",
 )
+
+sh_binary(
+    name = "deploy",
+    srcs = ["deploy.sh"],
+    visibility = ["//visibility:private"],
+)
