@@ -52,6 +52,9 @@ public class J2clMinifierTest extends TestCase {
     assertChange("alert('hi');/* */", "alert('hi');");
     assertChange("/* */alert('hi');", "alert('hi');");
 
+    assertChange("/* *//* */", "");
+    assertChange("''/* */", "''");
+
     assertChange("/** */", "");
     assertChange("/* **/", "");
     assertChange("a/** **/b", "ab");
