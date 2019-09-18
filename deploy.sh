@@ -41,16 +41,43 @@
 #
 set -e
 
-artifact=$1
-jar_file=$2
-src_jar=$3
-license_header=$4
-pom_template=$5
-lib_version=$6
-group_id=$7
-gpg_passphrase=$8
+merge_src=true
 
-if [ -z ${gpg_passphrase} ]; then
+while [[ "$1" != "" ]]; do
+  case $1 in
+    --artifact )        shift
+                        artifact=$1
+                        ;;
+    --jar-file )        shift
+                        jar_file=$1
+                        ;;
+    --src-jar )         shift
+                        src_jar=$1
+                        ;;
+    --license-header )  shift
+                        license_header=$1
+                        ;;
+    --pom-template )    shift
+                        pom_template=$1
+                        ;;
+    --lib-version )     shift
+                        lib_version=$1
+                        ;;
+    --group-id )        shift
+                        group_id=$1
+                        ;;
+    --gpg-passphrase )  shift
+                        gpg_passphrase=$1
+                        ;;
+    --no-merge-src )    merge_src=false
+                        ;;
+     * )                exit 1
+  esac
+  shift
+done
+
+
+if [[ -z ${gpg_passphrase} ]]; then
   # As this script can be called in a for loop for releasing several artifacts at once, the caller
   # script can pass the gpg_passphrase as argument to avoid to ask several time the user for the
   # passphrase.
@@ -64,20 +91,22 @@ create_artifact() {
   mv $1 $2
 }
 
-tmp_directory=$(mktemp -d)
+classes_directory=$(mktemp -d)
+srcs_directory=$(mktemp -d)
+javadoc_directory=$(mktemp -d)
 artifact_directory=$(mktemp -d)
 
-cd ${tmp_directory}
+cd ${srcs_directory}
 
-# - extract src and class files in order to merge them in one jar.
+# - extract src and class files in order to merge them in one jar if requested.
 # - sonatype requires a separate jar file containing only the sources
 # - Add license header on each src file.
 jar xf ${src_jar}
 
-if [ "${license_header}" -ne "--no-license" ]; then
+if [[ -n "${license_header}" ]]; then
   tmp_file=$(mktemp)
 
-  for java in $(find ${tmp_directory} -name '*.java'); do
+  for java in $(find ${srcs_directory} -name '*.java'); do
     cat  ${license_header} ${java} > ${tmp_file}
     mv ${tmp_file} ${java}
   done
@@ -86,16 +115,21 @@ fi
 # source file for sonatype
 create_artifact "${artifact}-sources.jar" ${artifact_directory}
 
+if [[ ${merge_src} == true ]]; then
+  # Copy srcs with class files
+  cp -r * ${classes_directory}
+fi
+
+cd ${classes_directory}
 jar xf ${jar_file}
 
 # create the jar file that contains source and class files
 create_artifact "${artifact}.jar" ${artifact_directory}
 
 # Create javadoc jar file
-javadoc_dest=$(mktemp -d)
-find ${tmp_directory} -type f -name "*.java" | xargs javadoc -d ${javadoc_dest}
+find ${srcs_directory} -type f -name "*.java" | xargs javadoc -d ${javadoc_directory}
 
-cd ${javadoc_dest}
+cd ${javadoc_directory}
 create_artifact "${artifact}-javadoc.jar" ${artifact_directory}
 
 # Replace version in template and generate the final pom.xml
@@ -105,7 +139,7 @@ sed -e "s/__VERSION__/${lib_version}/g" -e "s/__ARTIFACT_ID__/${artifact}/g" -e 
 cd ${artifact_directory}
 
 for i in "" sources javadoc; do
-  if [ -n "$i" ]; then
+  if [[ -n "$i" ]]; then
     classifier="-Dclassifier=$i"
     suffix="-$i"
   else
@@ -124,6 +158,7 @@ for i in "" sources javadoc; do
     -DpomFile=pom.xml $classifier
 done
 
-rm -rf ${javadoc_dest}
-rm -rf ${tmp_directory}
+rm -rf ${javadoc_directory}
+rm -rf ${classes_directory}
+rm -rf ${srcs_directory}
 rm -rf ${artifact_directory}
