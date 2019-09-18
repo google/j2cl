@@ -23,6 +23,44 @@ import junit.framework.TestCase;
 /** Tests for JsInteropRestrictionsChecker. */
 public class JsInteropRestrictionsCheckerTest extends TestCase {
 
+  public void testSystemGetPropertyFails() {
+    assertTranspileFails(
+            "Buggy",
+            "import jsinterop.annotations.*;",
+            "@JsType",
+            "class Main {",
+            "  public final static String COMPILE_TIME_CONSTANT =\"constant\";",
+            "  public static void main(){",
+            "    System.getProperty(COMPILE_TIME_CONSTANT);",
+            "    String s=\"property\";",
+            "    System.getProperty(s);",
+            "    System.getProperty(\"pro\"+\"perty\");",
+            "    System.getProperty(COMPILE_TIME_CONSTANT,\"default\");}",
+            "}")
+        .assertErrorsWithSourcePosition(
+            "Error:Buggy.java:7: Method 'String System.getProperty(String)' "
+                + "can only take a string literal as its first parameter",
+            "Error:Buggy.java:9: Method 'String System.getProperty(String)' "
+                + "can only take a string literal as its first parameter",
+            "Error:Buggy.java:10: Method 'String System.getProperty(String)' "
+                + "can only take a string literal as its first parameter",
+            "Error:Buggy.java:11: Method 'String System.getProperty(String, String)' "
+                + "can only take a string literal as its first parameter");
+  }
+
+  public void testSystemGetPropertySucceeds() {
+    assertTranspileSucceeds(
+            "Buggy",
+            "import jsinterop.annotations.*;",
+            "@JsType",
+            "class Main {",
+            "  public static void main(){",
+            "    System.getProperty(\"java.runtime.name\");",
+            "    System.getProperty(\"java.runtime.name\",\"default\");}",
+            "}")
+        .assertNoWarnings();
+  }
+
   // TODO(b/37579830): Finalize checker implementation and enable this test.
   public void disabled_testCollidingAccidentalOverrideConcreteMethodFails() {
     assertTranspileFails(
