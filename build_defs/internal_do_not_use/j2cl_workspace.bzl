@@ -27,7 +27,7 @@ def setup_j2cl_workspace():
     # We cannot replace com_google_jsinterop_annotations so choose a different name
     native.maven_jar(
         name = "com_google_jsinterop_annotations_head",
-        artifact = "com.google.jsinterop:jsinterop-annotations:2.0.0,
+        artifact = "com.google.jsinterop:jsinterop-annotations:2.0.0",
     )
 
     native.maven_jar(
