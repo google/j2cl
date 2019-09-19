@@ -1,12 +1,10 @@
 goog.module('com.google.j2cl.transpiler.readable.boundedtypesupercall.Main.Bar.$1$impl');
 
-
 const Foo = goog.require('com.google.j2cl.transpiler.readable.boundedtypesupercall.Main.Foo$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Bar = goog.forwardDeclare('com.google.j2cl.transpiler.readable.boundedtypesupercall.Main.Bar$impl');
 let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
-
 
 /**
  * @template T
@@ -21,7 +19,6 @@ class $1 extends Foo {
     /** @public {Bar<T>} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_boundedtypesupercall_Main_Bar_1;
   }
-
   /**
    * @template T
    * @param {Bar<T>} $outer_this
@@ -38,7 +35,6 @@ class $1 extends Foo {
             $outer_this, $_0);
     return $instance;
   }
-
   /**
    * @param {Bar<T>} $outer_this
    * @param {T} $_0
@@ -51,13 +47,11 @@ class $1 extends Foo {
     this.$ctor__com_google_j2cl_transpiler_readable_boundedtypesupercall_Main_Foo__java_lang_Object(
         $_0);
   }
-
   /**
    * @override
    * @public
    */
   m_foo__() {}
-
   /**
    * @public
    */
@@ -66,7 +60,6 @@ class $1 extends Foo {
     $1.$loadModules();
     Foo.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -75,7 +68,6 @@ class $1 extends Foo {
   static $isInstance(instance) {
     return instance instanceof $1;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -84,17 +76,13 @@ class $1 extends Foo {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, $1);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     $1, 'com.google.j2cl.transpiler.readable.boundedtypesupercall.Main$Bar$1');
-
-
 
 exports = $1;
 //# sourceMappingURL=Main$Bar$1.js.map

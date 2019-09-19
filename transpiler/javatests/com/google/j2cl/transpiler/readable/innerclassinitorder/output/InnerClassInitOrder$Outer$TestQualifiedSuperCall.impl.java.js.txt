@@ -1,12 +1,10 @@
 goog.module('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall$impl');
 
-
 const OuterIsNotSuper = goog.require('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Outer = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer$impl');
 let OuterIsSuper = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper$impl');
-
 
 class TestQualifiedSuperCall extends OuterIsNotSuper {
   /**
@@ -15,7 +13,6 @@ class TestQualifiedSuperCall extends OuterIsNotSuper {
   constructor() {
     super();
   }
-
   /**
    * @return {!TestQualifiedSuperCall}
    * @public
@@ -27,7 +24,6 @@ class TestQualifiedSuperCall extends OuterIsNotSuper {
         .$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer_TestQualifiedSuperCall__();
     return $instance;
   }
-
   /**
    * @public
    */
@@ -37,7 +33,6 @@ class TestQualifiedSuperCall extends OuterIsNotSuper {
             .$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer__int(
                 Outer.$create__int(1), 2));
   }
-
   /**
    * @public
    */
@@ -46,7 +41,6 @@ class TestQualifiedSuperCall extends OuterIsNotSuper {
     TestQualifiedSuperCall.$loadModules();
     OuterIsNotSuper.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -55,7 +49,6 @@ class TestQualifiedSuperCall extends OuterIsNotSuper {
   static $isInstance(instance) {
     return instance instanceof TestQualifiedSuperCall;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -64,7 +57,6 @@ class TestQualifiedSuperCall extends OuterIsNotSuper {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, TestQualifiedSuperCall);
   }
-
   /**
    * @public
    */
@@ -74,13 +66,10 @@ class TestQualifiedSuperCall extends OuterIsNotSuper {
     OuterIsSuper = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     TestQualifiedSuperCall,
     'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$TestQualifiedSuperCall');
-
-
 
 exports = TestQualifiedSuperCall;
 //# sourceMappingURL=InnerClassInitOrder$Outer$TestQualifiedSuperCall.js.map

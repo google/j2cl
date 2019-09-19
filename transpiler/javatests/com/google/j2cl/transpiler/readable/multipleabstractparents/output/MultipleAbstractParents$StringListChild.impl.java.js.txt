@@ -1,9 +1,7 @@
 goog.module('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.StringListChild$impl');
 
-
 const StringList = goog.require('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.StringList$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
-
 
 class StringListChild extends StringList {
   /**
@@ -12,7 +10,6 @@ class StringListChild extends StringList {
   constructor() {
     super();
   }
-
   /**
    * @return {!StringListChild}
    * @public
@@ -24,14 +21,12 @@ class StringListChild extends StringList {
         .$ctor__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_StringListChild__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_StringListChild__() {
     this.$ctor__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_StringList__();
   }
-
   /**
    * Bridge method.
    * @override
@@ -42,7 +37,6 @@ class StringListChild extends StringList {
   m_getFoo__java_lang_String(arg0) {
     return super.m_getFoo__java_lang_Object(arg0);
   }
-
   /**
    * @public
    */
@@ -51,7 +45,6 @@ class StringListChild extends StringList {
     StringListChild.$loadModules();
     StringList.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -60,7 +53,6 @@ class StringListChild extends StringList {
   static $isInstance(instance) {
     return instance instanceof StringListChild;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -69,18 +61,14 @@ class StringListChild extends StringList {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, StringListChild);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     StringListChild,
     'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$StringListChild');
-
-
 
 exports = StringListChild;
 //# sourceMappingURL=MultipleAbstractParents$StringListChild.js.map

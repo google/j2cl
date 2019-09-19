@@ -39,7 +39,7 @@ class SourceBuilder {
   // handle that if somebody cares to take a look our generated code.
   private static final char LINE_SEPARATOR_CHAR = '\n';
   private static final String LINE_SEPARATOR = String.valueOf(LINE_SEPARATOR_CHAR);
-  private static final String INDENT = "  ";
+  private static final String INDENT = " ";
 
   private StringBuilder sb = new StringBuilder();
   private int currentLine = 0;
@@ -158,12 +158,6 @@ class SourceBuilder {
     append(LINE_SEPARATOR);
   }
 
-  public void newLines(int numberOfLines) {
-    for (int i = 0; i < numberOfLines; i++) {
-      newLine();
-    }
-  }
-
   public void indent() {
     currentIndentation++;
   }
@@ -184,7 +178,9 @@ class SourceBuilder {
 
   public void closeBrace() {
     unindent();
-    newLine();
+    if (sb.charAt(sb.length() - 1) != '{') {
+      newLine();
+    }
     append("}");
   }
 

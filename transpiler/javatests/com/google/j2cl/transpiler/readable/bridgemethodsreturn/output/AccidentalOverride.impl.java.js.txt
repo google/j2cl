@@ -1,13 +1,11 @@
 goog.module('com.google.j2cl.transpiler.readable.bridgemethodsreturn.AccidentalOverride$impl');
 
-
 const A = goog.require('com.google.j2cl.transpiler.readable.bridgemethodsreturn.A$impl');
 const SpecializedInterface = goog.require('com.google.j2cl.transpiler.readable.bridgemethodsreturn.SpecializedInterface$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-
 
 /**
  * @extends {A<?string, ?string>}
@@ -20,7 +18,6 @@ class AccidentalOverride extends A {
   constructor() {
     super();
   }
-
   /**
    * @return {!AccidentalOverride}
    * @public
@@ -32,14 +29,12 @@ class AccidentalOverride extends A {
         .$ctor__com_google_j2cl_transpiler_readable_bridgemethodsreturn_AccidentalOverride__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_bridgemethodsreturn_AccidentalOverride__() {
     this.$ctor__com_google_j2cl_transpiler_readable_bridgemethodsreturn_A__();
   }
-
   /**
    * Bridge method.
    * @override
@@ -51,7 +46,6 @@ class AccidentalOverride extends A {
     return /**@type {?string} */ (
         $Casts.$to(super.m_fun__java_lang_Object(arg0), j_l_String));
   }
-
   /**
    * @public
    */
@@ -60,7 +54,6 @@ class AccidentalOverride extends A {
     AccidentalOverride.$loadModules();
     A.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -69,7 +62,6 @@ class AccidentalOverride extends A {
   static $isInstance(instance) {
     return instance instanceof AccidentalOverride;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -78,7 +70,6 @@ class AccidentalOverride extends A {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, AccidentalOverride);
   }
-
   /**
    * @public
    */
@@ -86,15 +77,12 @@ class AccidentalOverride extends A {
     j_l_String = goog.module.get('java.lang.String$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     AccidentalOverride,
     'com.google.j2cl.transpiler.readable.bridgemethodsreturn.AccidentalOverride');
 
-
 SpecializedInterface.$markImplementor(AccidentalOverride);
-
 
 exports = AccidentalOverride;
 //# sourceMappingURL=AccidentalOverride.js.map

@@ -19,8 +19,8 @@
       // Without a cast to fix it, JSCompiler will infer the type of this return statement to be
 ...      return inferGeneric(foo);
     }] => [if (!$Equality.$same(foo, null)) {
-      return /**@type {InferReturn<InferReturn<?string>>} */ (InferReturn.m_inferGeneric__java_lang_Object(foo));
-    }] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.tightenType"
+   return /**@type {InferReturn<InferReturn<?string>>} */ (InferReturn.m_inferGeneric__java_lang_Object(foo));
+  }] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.tightenType"
 [return inferGeneric(foo);] => [return /**@type {InferReturn<InferReturn<?string>>} */ (InferReturn.m_inferGeneric__java_lang_Object(foo));] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.tightenType"
 [return null;] => [return null;] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.tightenType"
 [main] => [m_main__]
@@ -46,7 +46,6 @@
 [foo] => [foo] "foo"
 [acceptsArrayOfObject] => [InferReturn.$clinit();] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.acceptsArrayOfObject"
 [InferReturn] => [$clinit]
-[InferReturn] => [InferReturn.$clinit = (() =>{
-    });] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.<clinit>"
+[InferReturn] => [InferReturn.$clinit = (() =>{});] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.<clinit>"
 [InferReturn] => [InferReturn.$loadModules();] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.<clinit>"
 [InferReturn] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.<clinit>"

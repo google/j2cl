@@ -19,28 +19,27 @@
       number = 2;
 ...      number = 4;
     }] => [if (a) {
-      number_1 = 2;
-...      number_1 = 4;
-    }] "com.google.j2cl.transpiler.readable.ifstatement.IfStatement.test"
+   number_1 = 2;
+...   number_1 = 4;
+  }] "com.google.j2cl.transpiler.readable.ifstatement.IfStatement.test"
 [number = 2;] => [number_1 = 2;] "com.google.j2cl.transpiler.readable.ifstatement.IfStatement.test"
 [if (b) {
       number = 3;
 ...      number = 4;
     }] => [if (b) {
-      number_1 = 3;
-...      number_1 = 4;
-    }] "com.google.j2cl.transpiler.readable.ifstatement.IfStatement.test"
+   number_1 = 3;
+...   number_1 = 4;
+  }] "com.google.j2cl.transpiler.readable.ifstatement.IfStatement.test"
 [number = 3;] => [number_1 = 3;] "com.google.j2cl.transpiler.readable.ifstatement.IfStatement.test"
 [number = 4;] => [number_1 = 4;] "com.google.j2cl.transpiler.readable.ifstatement.IfStatement.test"
 [if (a) number = 5;
     else number = 6;] => [if (a) {
-      number_1 = 5;
-...      number_1 = 6;
-    }] "com.google.j2cl.transpiler.readable.ifstatement.IfStatement.test"
+   number_1 = 5;
+...   number_1 = 6;
+  }] "com.google.j2cl.transpiler.readable.ifstatement.IfStatement.test"
 [number = 5;] => [number_1 = 5;] "com.google.j2cl.transpiler.readable.ifstatement.IfStatement.test"
 [number = 6;] => [number_1 = 6;] "com.google.j2cl.transpiler.readable.ifstatement.IfStatement.test"
 [IfStatement] => [$clinit]
-[IfStatement] => [IfStatement.$clinit = (() =>{
-    });] "com.google.j2cl.transpiler.readable.ifstatement.IfStatement.<clinit>"
+[IfStatement] => [IfStatement.$clinit = (() =>{});] "com.google.j2cl.transpiler.readable.ifstatement.IfStatement.<clinit>"
 [IfStatement] => [IfStatement.$loadModules();] "com.google.j2cl.transpiler.readable.ifstatement.IfStatement.<clinit>"
 [IfStatement] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.ifstatement.IfStatement.<clinit>"

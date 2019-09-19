@@ -1,11 +1,9 @@
 goog.module('com.google.j2cl.transpiler.readable.interfaces.Main.SubInterface$impl');
 
-
 const Interface = goog.require('com.google.j2cl.transpiler.readable.interfaces.Main.Interface$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.interfaces.Main.SubInterface.$LambdaAdaptor$impl');
-
 
 /**
  * @interface
@@ -18,7 +16,6 @@ class SubInterface {
    * @public
    */
   m_defaultMethodX__java_lang_String(s) {}
-
   /**
    * @param {?function():void} fn
    * @return {SubInterface}
@@ -28,7 +25,6 @@ class SubInterface {
     SubInterface.$clinit();
     return new $LambdaAdaptor(fn);
   }
-
   /**
    * @param {!SubInterface} $thisArg
    * @param {?string} s
@@ -41,7 +37,6 @@ class SubInterface {
         .m_defaultMethod__$default__com_google_j2cl_transpiler_readable_interfaces_Main_Interface__java_lang_Object(
             $thisArg, s);
   }
-
   /**
    * @public
    */
@@ -50,7 +45,6 @@ class SubInterface {
     SubInterface.$loadModules();
     Interface.$clinit();
   }
-
   /**
    * @param {Function} classConstructor
    * @public
@@ -64,7 +58,6 @@ class SubInterface {
         .$implements__com_google_j2cl_transpiler_readable_interfaces_Main_SubInterface =
         true;
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -75,7 +68,6 @@ class SubInterface {
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_interfaces_Main_SubInterface;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -86,7 +78,6 @@ class SubInterface {
         !!classConstructor.prototype
               .$implements__com_google_j2cl_transpiler_readable_interfaces_Main_SubInterface;
   }
-
   /**
    * @public
    */
@@ -94,15 +85,12 @@ class SubInterface {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.interfaces.Main.SubInterface.$LambdaAdaptor$impl');
   }
-};
-
+}
 $Util.$setClassMetadataForInterface(
     SubInterface,
     'com.google.j2cl.transpiler.readable.interfaces.Main$SubInterface');
 
-
 SubInterface.$markImplementor(/** @type {Function} */ (SubInterface));
-
 
 exports = SubInterface;
 //# sourceMappingURL=Main$SubInterface.js.map

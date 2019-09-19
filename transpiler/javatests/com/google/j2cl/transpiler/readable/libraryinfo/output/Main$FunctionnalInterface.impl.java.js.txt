@@ -1,10 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.libraryinfo.Main.FunctionnalInterface$impl');
 
-
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.libraryinfo.Main.FunctionnalInterface.$LambdaAdaptor$impl');
-
 
 /**
  * @interface
@@ -15,7 +13,6 @@ class FunctionnalInterface {
    * @public
    */
   m_foo__() {}
-
   /**
    * @param {?function():void} fn
    * @return {FunctionnalInterface}
@@ -25,7 +22,6 @@ class FunctionnalInterface {
     FunctionnalInterface.$clinit();
     return new $LambdaAdaptor(fn);
   }
-
   /**
    * @public
    */
@@ -33,7 +29,6 @@ class FunctionnalInterface {
     FunctionnalInterface.$clinit = (() => {});
     FunctionnalInterface.$loadModules();
   }
-
   /**
    * @param {Function} classConstructor
    * @public
@@ -46,7 +41,6 @@ class FunctionnalInterface {
         .$implements__com_google_j2cl_transpiler_readable_libraryinfo_Main_FunctionnalInterface =
         true;
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -57,7 +51,6 @@ class FunctionnalInterface {
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_libraryinfo_Main_FunctionnalInterface;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -68,7 +61,6 @@ class FunctionnalInterface {
         !!classConstructor.prototype
               .$implements__com_google_j2cl_transpiler_readable_libraryinfo_Main_FunctionnalInterface;
   }
-
   /**
    * @public
    */
@@ -76,16 +68,13 @@ class FunctionnalInterface {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.libraryinfo.Main.FunctionnalInterface.$LambdaAdaptor$impl');
   }
-};
-
+}
 $Util.$setClassMetadataForInterface(
     FunctionnalInterface,
     'com.google.j2cl.transpiler.readable.libraryinfo.Main$FunctionnalInterface');
 
-
 FunctionnalInterface.$markImplementor(
     /** @type {Function} */ (FunctionnalInterface));
-
 
 exports = FunctionnalInterface;
 //# sourceMappingURL=Main$FunctionnalInterface.js.map

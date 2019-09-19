@@ -1,13 +1,11 @@
 goog.module('com.google.j2cl.transpiler.readable.switchstatement.SwitchStatement$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Numbers = goog.forwardDeclare('com.google.j2cl.transpiler.readable.switchstatement.Numbers$impl');
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
-
 
 class SwitchStatement extends j_l_Object {
   /**
@@ -16,7 +14,6 @@ class SwitchStatement extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @return {!SwitchStatement}
    * @public
@@ -28,14 +25,12 @@ class SwitchStatement extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_switchstatement_SwitchStatement__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_switchstatement_SwitchStatement__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @public
    */
@@ -74,7 +69,6 @@ class SwitchStatement extends j_l_Object {
         return;
     }
   }
-
   /**
    * @public
    */
@@ -99,7 +93,6 @@ class SwitchStatement extends j_l_Object {
     }
     $Asserts.$assert(false);
   }
-
   /**
    * @public
    */
@@ -108,7 +101,6 @@ class SwitchStatement extends j_l_Object {
     SwitchStatement.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -117,7 +109,6 @@ class SwitchStatement extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof SwitchStatement;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -126,7 +117,6 @@ class SwitchStatement extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, SwitchStatement);
   }
-
   /**
    * @public
    */
@@ -137,13 +127,10 @@ class SwitchStatement extends j_l_Object {
         goog.module.get('javaemul.internal.InternalPreconditions$impl');
     $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     SwitchStatement,
     'com.google.j2cl.transpiler.readable.switchstatement.SwitchStatement');
-
-
 
 exports = SwitchStatement;
 //# sourceMappingURL=SwitchStatement.js.map

@@ -1,11 +1,9 @@
 goog.module('com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2$impl');
 
-
 const Parent = goog.require('com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings.Parent$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let InnerClass1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings.InnerClass1$impl');
-
 
 class InnerClass2 extends Parent {
   /**
@@ -16,7 +14,6 @@ class InnerClass2 extends Parent {
     /** @public {InnerClass1} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2;
   }
-
   /**
    * @param {InnerClass1} $outer_this
    * @return {!InnerClass2}
@@ -31,7 +28,6 @@ class InnerClass2 extends Parent {
             $outer_this);
     return $instance;
   }
-
   /**
    * @param {InnerClass1} $outer_this
    * @public
@@ -44,12 +40,10 @@ class InnerClass2 extends Parent {
         $outer_this
             .f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings_InnerClass1);
   }
-
   /**
    * @public
    */
   m_funInI2__() {}
-
   /**
    * @public
    */
@@ -70,7 +64,6 @@ class InnerClass2 extends Parent {
         .m_funInI1__();
     this.m_funInI2__();
   }
-
   /**
    * @public
    */
@@ -79,7 +72,6 @@ class InnerClass2 extends Parent {
     InnerClass2.$loadModules();
     Parent.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -88,7 +80,6 @@ class InnerClass2 extends Parent {
   static $isInstance(instance) {
     return instance instanceof InnerClass2;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -97,18 +88,14 @@ class InnerClass2 extends Parent {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, InnerClass2);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     InnerClass2,
     'com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings$InnerClass1$InnerClass2');
-
-
 
 exports = InnerClass2;
 //# sourceMappingURL=MultipleNestings$InnerClass1$InnerClass2.js.map

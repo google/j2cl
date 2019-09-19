@@ -1,11 +1,9 @@
 goog.module('com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.IntegerSupplier$impl');
 
-
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.IntegerSupplier.$LambdaAdaptor$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
-
 
 /**
  * @interface
@@ -17,7 +15,6 @@ class IntegerSupplier {
    * @public
    */
   m_get__() {}
-
   /**
    * @param {?function():Integer} fn
    * @return {IntegerSupplier}
@@ -27,7 +24,6 @@ class IntegerSupplier {
     IntegerSupplier.$clinit();
     return new $LambdaAdaptor(fn);
   }
-
   /**
    * @public
    */
@@ -35,7 +31,6 @@ class IntegerSupplier {
     IntegerSupplier.$clinit = (() => {});
     IntegerSupplier.$loadModules();
   }
-
   /**
    * @param {Function} classConstructor
    * @public
@@ -48,7 +43,6 @@ class IntegerSupplier {
         .$implements__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_IntegerSupplier =
         true;
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -59,7 +53,6 @@ class IntegerSupplier {
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_IntegerSupplier;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -70,7 +63,6 @@ class IntegerSupplier {
         !!classConstructor.prototype
               .$implements__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_IntegerSupplier;
   }
-
   /**
    * @public
    */
@@ -78,15 +70,12 @@ class IntegerSupplier {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.IntegerSupplier.$LambdaAdaptor$impl');
   }
-};
-
+}
 $Util.$setClassMetadataForInterface(
     IntegerSupplier,
     'com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards$IntegerSupplier');
 
-
 IntegerSupplier.$markImplementor(/** @type {Function} */ (IntegerSupplier));
-
 
 exports = IntegerSupplier;
 //# sourceMappingURL=TypeWildCards$IntegerSupplier.js.map

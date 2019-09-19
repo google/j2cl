@@ -1,6 +1,5 @@
 goog.module('com.google.j2cl.transpiler.readable.nullability.Nullability$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
@@ -9,7 +8,6 @@ let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
 let List = goog.forwardDeclare('java.util.List$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-
 
 class Nullability extends j_l_Object {
   /**
@@ -44,7 +42,6 @@ class Nullability extends j_l_Object {
     this.$ctor__com_google_j2cl_transpiler_readable_nullability_Nullability__java_lang_String(
         a);
   }
-
   /**
    * @param {string} a
    * @public
@@ -54,7 +51,6 @@ class Nullability extends j_l_Object {
     this.$ctor__java_lang_Object__();
     this.$init__com_google_j2cl_transpiler_readable_nullability_Nullability();
   }
-
   /**
    * @param {string} a
    * @param {!List<number>} b
@@ -65,7 +61,6 @@ class Nullability extends j_l_Object {
   m_m1__java_lang_String__java_util_List__java_lang_String(a, b, c) {
     return '';
   }
-
   /**
    * @param {?string} a
    * @param {!List<?number>} b
@@ -75,7 +70,6 @@ class Nullability extends j_l_Object {
   m_m2__java_lang_String__java_util_List(a, b) {
     return '';
   }
-
   /**
    * @param {string} a
    * @param {...string} args
@@ -86,14 +80,12 @@ class Nullability extends j_l_Object {
     $Arrays.$stampType(args, j_l_String, 1);
     return null;
   }
-
   /**
    * @param {function(string):string} f
    * @public
    */
   m_m4__com_google_j2cl_transpiler_readable_nullability_Nullability_MyFunction(
       f) {}
-
   /**
    * @private
    */
@@ -121,7 +113,6 @@ class Nullability extends j_l_Object {
     this.f_f12__com_google_j2cl_transpiler_readable_nullability_Nullability_ =
         /**@type {ArrayList<?string>} */ (Lists.m_newArrayList__());
   }
-
   /**
    * @public
    */
@@ -130,7 +121,6 @@ class Nullability extends j_l_Object {
     Nullability.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -139,7 +129,6 @@ class Nullability extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof Nullability;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -148,7 +137,6 @@ class Nullability extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Nullability);
   }
-
   /**
    * @public
    */
@@ -158,12 +146,9 @@ class Nullability extends j_l_Object {
     ArrayList = goog.module.get('java.util.ArrayList$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     Nullability, 'com.google.j2cl.transpiler.readable.nullability.Nullability');
-
-
 
 exports = Nullability;
 //# sourceMappingURL=Nullability.js.map

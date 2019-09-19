@@ -1,9 +1,7 @@
 goog.module('com.google.j2cl.transpiler.readable.bridgemethods.SuperParent$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
-
 
 /**
  * @template T, S
@@ -15,7 +13,6 @@ class SuperParent extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @template T, S
    * @return {!SuperParent<T, S>}
@@ -28,21 +25,18 @@ class SuperParent extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_bridgemethods_SuperParent__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_bridgemethods_SuperParent__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @param {T} t
    * @param {S} s
    * @public
    */
   m_foo__java_lang_Object__java_lang_Object(t, s) {}
-
   /**
    * @public
    */
@@ -51,7 +45,6 @@ class SuperParent extends j_l_Object {
     SuperParent.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -60,7 +53,6 @@ class SuperParent extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof SuperParent;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -69,18 +61,14 @@ class SuperParent extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, SuperParent);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     SuperParent,
     'com.google.j2cl.transpiler.readable.bridgemethods.SuperParent');
-
-
 
 exports = SuperParent;
 //# sourceMappingURL=SuperParent.js.map

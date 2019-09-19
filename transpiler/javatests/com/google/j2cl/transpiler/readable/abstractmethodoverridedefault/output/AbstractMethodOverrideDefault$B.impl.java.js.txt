@@ -1,10 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault.B$impl');
 
-
 const A = goog.require('com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault.A$impl');
 const J = goog.require('com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault.J$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
-
 
 /**
  * @abstract
@@ -17,14 +15,12 @@ class B extends A {
   constructor() {
     super();
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_abstractmethodoverridedefault_AbstractMethodOverrideDefault_B__() {
     this.$ctor__com_google_j2cl_transpiler_readable_abstractmethodoverridedefault_AbstractMethodOverrideDefault_A__();
   }
-
   /**
    * @override
    * @public
@@ -34,7 +30,6 @@ class B extends A {
       this.m_bar__();
     }
   }
-
   /**
    * @public
    */
@@ -44,7 +39,6 @@ class B extends A {
     A.$clinit();
     J.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -53,7 +47,6 @@ class B extends A {
   static $isInstance(instance) {
     return instance instanceof B;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -62,20 +55,16 @@ class B extends A {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, B);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     B,
     'com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault$B');
 
-
 J.$markImplementor(B);
-
 
 exports = B;
 //# sourceMappingURL=AbstractMethodOverrideDefault$B.js.map

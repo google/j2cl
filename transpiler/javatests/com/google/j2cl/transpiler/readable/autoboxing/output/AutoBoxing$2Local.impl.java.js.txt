@@ -1,6 +1,5 @@
 goog.module('com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.$2Local$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
@@ -8,7 +7,6 @@ let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
 let Long = goog.forwardDeclare('java.lang.Long$impl');
 let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
-
 
 /**
  * @template T, T_1
@@ -20,7 +18,6 @@ class $2Local extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @template T, T_1
    * @return {!$2Local<T, T_1>}
@@ -33,14 +30,12 @@ class $2Local extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_autoboxing_AutoBoxing_2Local__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_autoboxing_AutoBoxing_2Local__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @param {T} l
    * @return {!$Long}
@@ -52,7 +47,6 @@ class $2Local extends j_l_Object {
         /**@type {Long} */ (l).equals(Long.m_valueOf__long($Long.fromInt(11))));
     return /**@type {Long} */ (l).m_longValue__();
   }
-
   /**
    * @public
    */
@@ -61,7 +55,6 @@ class $2Local extends j_l_Object {
     $2Local.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -70,7 +63,6 @@ class $2Local extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof $2Local;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -79,7 +71,6 @@ class $2Local extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, $2Local);
   }
-
   /**
    * @public
    */
@@ -88,13 +79,10 @@ class $2Local extends j_l_Object {
     $Long = goog.module.get('nativebootstrap.Long$impl');
     $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     $2Local,
     'com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing$2Local');
-
-
 
 exports = $2Local;
 //# sourceMappingURL=AutoBoxing$2Local.js.map

@@ -1,13 +1,11 @@
 goog.module('com.google.j2cl.transpiler.readable.forstatement.ForStatement$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $LongUtils = goog.forwardDeclare('vmbootstrap.LongUtils$impl');
 let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
-
 
 class ForStatement extends j_l_Object {
   /**
@@ -16,7 +14,6 @@ class ForStatement extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @return {!ForStatement}
    * @public
@@ -28,14 +25,12 @@ class ForStatement extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_forstatement_ForStatement__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_forstatement_ForStatement__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @public
    */
@@ -50,7 +45,6 @@ class ForStatement extends j_l_Object {
       count_1 = $LongUtils.$plus(count_1, $Long.fromInt(1));
     }
   }
-
   /**
    * @public
    */
@@ -59,7 +53,6 @@ class ForStatement extends j_l_Object {
     ForStatement.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -68,7 +61,6 @@ class ForStatement extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof ForStatement;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -77,7 +69,6 @@ class ForStatement extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, ForStatement);
   }
-
   /**
    * @public
    */
@@ -86,13 +77,10 @@ class ForStatement extends j_l_Object {
     $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');
     $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     ForStatement,
     'com.google.j2cl.transpiler.readable.forstatement.ForStatement');
-
-
 
 exports = ForStatement;
 //# sourceMappingURL=ForStatement.js.map

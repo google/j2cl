@@ -1,11 +1,9 @@
 goog.module('com.google.j2cl.transpiler.readable.lambdas.Lambdas.BiFunction$impl');
 
-
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.BiFunction.$LambdaAdaptor$impl');
 let Lambdas_Function = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.Function$impl');
-
 
 /**
  * @interface
@@ -20,7 +18,6 @@ class BiFunction {
    * @public
    */
   m_apply__java_lang_Object__java_lang_Object(t, u) {}
-
   /**
    * @abstract
    * @template V
@@ -30,7 +27,6 @@ class BiFunction {
    */
   m_andThen__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Function(
       after) {}
-
   /**
    * @template T, U, R
    * @param {?function(T, U):R} fn
@@ -41,7 +37,6 @@ class BiFunction {
     BiFunction.$clinit();
     return /**@type {!$LambdaAdaptor<T, U, R>} */ (new $LambdaAdaptor(fn));
   }
-
   /**
    * @template V, T, U, R
    * @param {!BiFunction<T, U, R>} $thisArg
@@ -58,7 +53,6 @@ class BiFunction {
               $thisArg.m_apply__java_lang_Object__java_lang_Object(t, u));
         })));
   }
-
   /**
    * @public
    */
@@ -66,7 +60,6 @@ class BiFunction {
     BiFunction.$clinit = (() => {});
     BiFunction.$loadModules();
   }
-
   /**
    * @param {Function} classConstructor
    * @public
@@ -79,7 +72,6 @@ class BiFunction {
         .$implements__com_google_j2cl_transpiler_readable_lambdas_Lambdas_BiFunction =
         true;
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -90,7 +82,6 @@ class BiFunction {
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_lambdas_Lambdas_BiFunction;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -101,7 +92,6 @@ class BiFunction {
         !!classConstructor.prototype
               .$implements__com_google_j2cl_transpiler_readable_lambdas_Lambdas_BiFunction;
   }
-
   /**
    * @public
    */
@@ -109,15 +99,12 @@ class BiFunction {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdas.Lambdas.BiFunction.$LambdaAdaptor$impl');
   }
-};
-
+}
 $Util.$setClassMetadataForInterface(
     BiFunction,
     'com.google.j2cl.transpiler.readable.lambdas.Lambdas$BiFunction');
 
-
 BiFunction.$markImplementor(/** @type {Function} */ (BiFunction));
-
 
 exports = BiFunction;
 //# sourceMappingURL=Lambdas$BiFunction.js.map

@@ -1,8 +1,6 @@
 goog.module('com.google.j2cl.transpiler.readable.jstypewithdefault.Interface$impl');
 
-
 const $Util = goog.require('nativebootstrap.Util$impl');
-
 
 /**
  * @interface
@@ -13,7 +11,6 @@ class Interface {
    * @public
    */
   defaultMethod() {}
-
   /**
    * @param {!Interface} $thisArg
    * @public
@@ -22,7 +19,6 @@ class Interface {
       $thisArg) {
     Interface.$clinit();
   }
-
   /**
    * @public
    */
@@ -30,7 +26,6 @@ class Interface {
     Interface.$clinit = (() => {});
     Interface.$loadModules();
   }
-
   /**
    * @param {Function} classConstructor
    * @public
@@ -43,7 +38,6 @@ class Interface {
         .$implements__com_google_j2cl_transpiler_readable_jstypewithdefault_Interface =
         true;
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -54,7 +48,6 @@ class Interface {
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_jstypewithdefault_Interface;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -65,20 +58,16 @@ class Interface {
         !!classConstructor.prototype
               .$implements__com_google_j2cl_transpiler_readable_jstypewithdefault_Interface;
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadataForInterface(
     Interface,
     'com.google.j2cl.transpiler.readable.jstypewithdefault.Interface');
 
-
 Interface.$markImplementor(/** @type {Function} */ (Interface));
-
 
 exports = Interface;
 //# sourceMappingURL=Interface.js.map

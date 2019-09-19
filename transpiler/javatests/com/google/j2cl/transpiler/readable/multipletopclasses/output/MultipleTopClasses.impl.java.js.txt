@@ -1,9 +1,7 @@
 goog.module('com.google.j2cl.transpiler.readable.multipletopclasses.MultipleTopClasses$impl');
 
-
 const AnotherClass = goog.require('com.google.j2cl.transpiler.readable.multipletopclasses.AnotherClass$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
-
 
 class MultipleTopClasses extends AnotherClass {
   /**
@@ -12,7 +10,6 @@ class MultipleTopClasses extends AnotherClass {
   constructor() {
     super();
   }
-
   /**
    * @return {!MultipleTopClasses}
    * @public
@@ -24,14 +21,12 @@ class MultipleTopClasses extends AnotherClass {
         .$ctor__com_google_j2cl_transpiler_readable_multipletopclasses_MultipleTopClasses__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_multipletopclasses_MultipleTopClasses__() {
     this.$ctor__com_google_j2cl_transpiler_readable_multipletopclasses_AnotherClass__();
   }
-
   /**
    * @public
    */
@@ -40,7 +35,6 @@ class MultipleTopClasses extends AnotherClass {
     MultipleTopClasses.$loadModules();
     AnotherClass.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -49,7 +43,6 @@ class MultipleTopClasses extends AnotherClass {
   static $isInstance(instance) {
     return instance instanceof MultipleTopClasses;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -58,18 +51,14 @@ class MultipleTopClasses extends AnotherClass {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, MultipleTopClasses);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     MultipleTopClasses,
     'com.google.j2cl.transpiler.readable.multipletopclasses.MultipleTopClasses');
-
-
 
 exports = MultipleTopClasses;
 //# sourceMappingURL=MultipleTopClasses.js.map

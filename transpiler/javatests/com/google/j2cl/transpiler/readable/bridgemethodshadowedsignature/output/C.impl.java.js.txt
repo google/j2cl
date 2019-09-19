@@ -1,12 +1,10 @@
 goog.module('com.google.j2cl.transpiler.readable.bridgemethodshadowedsignature.C$impl');
 
-
 const B = goog.require('com.google.j2cl.transpiler.readable.bridgemethodshadowedsignature.B$impl');
 const I = goog.require('com.google.j2cl.transpiler.readable.bridgemethodshadowedsignature.I$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
-
 
 /**
  * @template C1
@@ -20,7 +18,6 @@ class C extends B {
   constructor() {
     super();
   }
-
   /**
    * @template C1
    * @return {!C<C1>}
@@ -33,14 +30,12 @@ class C extends B {
         .$ctor__com_google_j2cl_transpiler_readable_bridgemethodshadowedsignature_C__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_bridgemethodshadowedsignature_C__() {
     this.$ctor__com_google_j2cl_transpiler_readable_bridgemethodshadowedsignature_B__();
   }
-
   /**
    * Bridge method.
    * @override
@@ -51,7 +46,6 @@ class C extends B {
   m_get__java_util_function_Consumer(arg0) {
     return super.m_get__java_lang_Object(arg0);
   }
-
   /**
    * @public
    */
@@ -60,7 +54,6 @@ class C extends B {
     C.$loadModules();
     B.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -69,7 +62,6 @@ class C extends B {
   static $isInstance(instance) {
     return instance instanceof C;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -78,19 +70,15 @@ class C extends B {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, C);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     C, 'com.google.j2cl.transpiler.readable.bridgemethodshadowedsignature.C');
 
-
 I.$markImplementor(C);
-
 
 exports = C;
 //# sourceMappingURL=C.js.map

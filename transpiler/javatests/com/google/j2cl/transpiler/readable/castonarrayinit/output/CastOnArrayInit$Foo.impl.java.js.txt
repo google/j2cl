@@ -1,9 +1,7 @@
 goog.module('com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.Foo$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
-
 
 /**
  * @template T
@@ -15,7 +13,6 @@ class Foo extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @template T
    * @return {!Foo<T>}
@@ -28,14 +25,12 @@ class Foo extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_castonarrayinit_CastOnArrayInit_Foo__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_castonarrayinit_CastOnArrayInit_Foo__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @public
    */
@@ -44,7 +39,6 @@ class Foo extends j_l_Object {
     Foo.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -53,7 +47,6 @@ class Foo extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof Foo;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -62,18 +55,14 @@ class Foo extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Foo);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     Foo,
     'com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit$Foo');
-
-
 
 exports = Foo;
 //# sourceMappingURL=CastOnArrayInit$Foo.js.map

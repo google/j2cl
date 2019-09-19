@@ -1,10 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid$impl');
 
-
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid.$LambdaAdaptor$impl');
-
 
 /**
  * @interface
@@ -15,7 +13,6 @@ class FunctionalInterfaceWithMethodReturningVoid {
    * @public
    */
   m_run__() {}
-
   /**
    * @param {?function():void} fn
    * @return {FunctionalInterfaceWithMethodReturningVoid}
@@ -25,7 +22,6 @@ class FunctionalInterfaceWithMethodReturningVoid {
     FunctionalInterfaceWithMethodReturningVoid.$clinit();
     return new $LambdaAdaptor(fn);
   }
-
   /**
    * @public
    */
@@ -33,7 +29,6 @@ class FunctionalInterfaceWithMethodReturningVoid {
     FunctionalInterfaceWithMethodReturningVoid.$clinit = (() => {});
     FunctionalInterfaceWithMethodReturningVoid.$loadModules();
   }
-
   /**
    * @param {Function} classConstructor
    * @public
@@ -46,7 +41,6 @@ class FunctionalInterfaceWithMethodReturningVoid {
         .$implements__com_google_j2cl_transpiler_readable_lambdas_Lambdas_FunctionalInterfaceWithMethodReturningVoid =
         true;
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -57,7 +51,6 @@ class FunctionalInterfaceWithMethodReturningVoid {
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_lambdas_Lambdas_FunctionalInterfaceWithMethodReturningVoid;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -68,7 +61,6 @@ class FunctionalInterfaceWithMethodReturningVoid {
         !!classConstructor.prototype
               .$implements__com_google_j2cl_transpiler_readable_lambdas_Lambdas_FunctionalInterfaceWithMethodReturningVoid;
   }
-
   /**
    * @public
    */
@@ -76,16 +68,13 @@ class FunctionalInterfaceWithMethodReturningVoid {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid.$LambdaAdaptor$impl');
   }
-};
-
+}
 $Util.$setClassMetadataForInterface(
     FunctionalInterfaceWithMethodReturningVoid,
     'com.google.j2cl.transpiler.readable.lambdas.Lambdas$FunctionalInterfaceWithMethodReturningVoid');
 
-
 FunctionalInterfaceWithMethodReturningVoid.$markImplementor(
     /** @type {Function} */ (FunctionalInterfaceWithMethodReturningVoid));
-
 
 exports = FunctionalInterfaceWithMethodReturningVoid;
 //# sourceMappingURL=Lambdas$FunctionalInterfaceWithMethodReturningVoid.js.map

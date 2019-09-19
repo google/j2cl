@@ -1,6 +1,5 @@
 goog.module('com.google.j2cl.transpiler.readable.cast.CastGenerics.$1Nested$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
@@ -8,7 +7,6 @@ let CastGenerics = goog.forwardDeclare('com.google.j2cl.transpiler.readable.cast
 let Enum = goog.forwardDeclare('java.lang.Enum$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-
 
 /**
  * @template SS, TT, T, E
@@ -22,7 +20,6 @@ class $1Nested extends j_l_Object {
     /** @public {CastGenerics<T, E>} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_cast_CastGenerics_1Nested;
   }
-
   /**
    * @template SS, TT, T, E
    * @param {CastGenerics<T, E>} $outer_this
@@ -38,7 +35,6 @@ class $1Nested extends j_l_Object {
             $outer_this);
     return $instance;
   }
-
   /**
    * @param {CastGenerics<T, E>} $outer_this
    * @public
@@ -49,7 +45,6 @@ class $1Nested extends j_l_Object {
         $outer_this;
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @param {*} o
    * @public
@@ -58,7 +53,6 @@ class $1Nested extends j_l_Object {
       o) {
     let t = /**@type {TT} */ ($Casts.$to(o, Enum));
   }
-
   /**
    * @public
    */
@@ -67,7 +61,6 @@ class $1Nested extends j_l_Object {
     $1Nested.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -76,7 +69,6 @@ class $1Nested extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof $1Nested;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -85,7 +77,6 @@ class $1Nested extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, $1Nested);
   }
-
   /**
    * @public
    */
@@ -93,12 +84,9 @@ class $1Nested extends j_l_Object {
     Enum = goog.module.get('java.lang.Enum$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     $1Nested, 'com.google.j2cl.transpiler.readable.cast.CastGenerics$1Nested');
-
-
 
 exports = $1Nested;
 //# sourceMappingURL=CastGenerics$1Nested.js.map

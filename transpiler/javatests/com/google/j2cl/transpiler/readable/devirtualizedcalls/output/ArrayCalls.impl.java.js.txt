@@ -1,11 +1,9 @@
 goog.module('com.google.j2cl.transpiler.readable.devirtualizedcalls.ArrayCalls$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-
 
 class ArrayCalls extends j_l_Object {
   /**
@@ -14,7 +12,6 @@ class ArrayCalls extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @return {!ArrayCalls}
    * @public
@@ -26,14 +23,12 @@ class ArrayCalls extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_devirtualizedcalls_ArrayCalls__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_devirtualizedcalls_ArrayCalls__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @public
    */
@@ -43,7 +38,6 @@ class ArrayCalls extends j_l_Object {
     let length1 = array2d[0].length;
     let length2 = array2d.length;
   }
-
   /**
    * @public
    */
@@ -52,7 +46,6 @@ class ArrayCalls extends j_l_Object {
     ArrayCalls.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -61,7 +54,6 @@ class ArrayCalls extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof ArrayCalls;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -70,20 +62,16 @@ class ArrayCalls extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, ArrayCalls);
   }
-
   /**
    * @public
    */
   static $loadModules() {
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     ArrayCalls,
     'com.google.j2cl.transpiler.readable.devirtualizedcalls.ArrayCalls');
-
-
 
 exports = ArrayCalls;
 //# sourceMappingURL=ArrayCalls.js.map

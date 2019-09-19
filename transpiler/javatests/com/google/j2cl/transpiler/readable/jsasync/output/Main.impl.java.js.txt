@@ -1,6 +1,5 @@
 goog.module('com.google.j2cl.transpiler.readable.jsasync.Main$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
@@ -13,7 +12,6 @@ let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Void = goog.forwardDeclare('java.lang.Void$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
-
 class Main extends j_l_Object {
   /**
    * @protected
@@ -23,7 +21,6 @@ class Main extends j_l_Object {
     /** @public {IThenable<Integer>} */
     this.f_x__com_google_j2cl_transpiler_readable_jsasync_Main_;
   }
-
   /**
    * @return {!Main}
    * @public
@@ -34,7 +31,6 @@ class Main extends j_l_Object {
     $instance.$ctor__com_google_j2cl_transpiler_readable_jsasync_Main__();
     return $instance;
   }
-
   /**
    * @public
    */
@@ -42,7 +38,6 @@ class Main extends j_l_Object {
     this.$ctor__java_lang_Object__();
     this.$init__com_google_j2cl_transpiler_readable_jsasync_Main();
   }
-
   /**
    * @return {IThenable<?void>}
    * @public
@@ -50,7 +45,6 @@ class Main extends j_l_Object {
   async m_emptyAsyncMethod___$pp_com_google_j2cl_transpiler_readable_jsasync() {
     return null;
   }
-
   /**
    * @return {IThenable<Integer>}
    * @public
@@ -66,7 +60,6 @@ class Main extends j_l_Object {
         this.m_parametricAsyncMethod__java_lang_Object_$pp_com_google_j2cl_transpiler_readable_jsasync(
             Integer.m_valueOf__int(result)));
   }
-
   /**
    * @template T
    * @param {T} value
@@ -78,7 +71,6 @@ class Main extends j_l_Object {
     return /**@type {Promise<T>} */ (Promise.resolve(
         (await /**@type {Promise<T>} */ (Promise.resolve(value)))));
   }
-
   /**
    * @return {IThenable<?void>}
    * @public
@@ -91,7 +83,6 @@ class Main extends j_l_Object {
                 Promise.resolve(/**@type {?void} */ (null)))),
             Void))));
   }
-
   /**
    * @public
    */
@@ -118,7 +109,6 @@ class Main extends j_l_Object {
     let unoptimizableJsFunction =
         $3.$create__com_google_j2cl_transpiler_readable_jsasync_Main(this);
   }
-
   /**
    * @private
    */
@@ -127,7 +117,6 @@ class Main extends j_l_Object {
         /**@type {Promise<Integer>} */ (
             Promise.resolve(Integer.m_valueOf__int(10)));
   }
-
   /**
    * @public
    */
@@ -136,7 +125,6 @@ class Main extends j_l_Object {
     Main.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -145,7 +133,6 @@ class Main extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof Main;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -154,7 +141,6 @@ class Main extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Main);
   }
-
   /**
    * @public
    */
@@ -169,12 +155,9 @@ class Main extends j_l_Object {
     Void = goog.module.get('java.lang.Void$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     Main, 'com.google.j2cl.transpiler.readable.jsasync.Main');
-
-
 
 exports = Main;
 //# sourceMappingURL=Main.js.map

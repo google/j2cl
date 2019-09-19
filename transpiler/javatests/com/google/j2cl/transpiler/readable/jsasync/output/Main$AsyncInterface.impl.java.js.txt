@@ -1,13 +1,11 @@
 goog.module('com.google.j2cl.transpiler.readable.jsasync.Main.AsyncInterface$impl');
 
-
 const BaseInterface = goog.require('com.google.j2cl.transpiler.readable.jsasync.Main.BaseInterface$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsasync.Main.AsyncInterface.$LambdaAdaptor$impl');
 let $Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsasync.Main.IThenable.$Overlay$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
-
 
 /**
  * @interface
@@ -21,7 +19,6 @@ class AsyncInterface {
    * @public
    */
   m_asyncCall__() {}
-
   /**
    * @param {?function():IThenable<Integer>} fn
    * @return {AsyncInterface}
@@ -31,7 +28,6 @@ class AsyncInterface {
     AsyncInterface.$clinit();
     return new $LambdaAdaptor(fn);
   }
-
   /**
    * @public
    */
@@ -39,7 +35,6 @@ class AsyncInterface {
     AsyncInterface.$clinit = (() => {});
     AsyncInterface.$loadModules();
   }
-
   /**
    * @param {Function} classConstructor
    * @public
@@ -53,7 +48,6 @@ class AsyncInterface {
         .$implements__com_google_j2cl_transpiler_readable_jsasync_Main_AsyncInterface =
         true;
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -64,7 +58,6 @@ class AsyncInterface {
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_jsasync_Main_AsyncInterface;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -75,7 +68,6 @@ class AsyncInterface {
         !!classConstructor.prototype
               .$implements__com_google_j2cl_transpiler_readable_jsasync_Main_AsyncInterface;
   }
-
   /**
    * @public
    */
@@ -83,15 +75,12 @@ class AsyncInterface {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsasync.Main.AsyncInterface.$LambdaAdaptor$impl');
   }
-};
-
+}
 $Util.$setClassMetadataForInterface(
     AsyncInterface,
     'com.google.j2cl.transpiler.readable.jsasync.Main$AsyncInterface');
 
-
 AsyncInterface.$markImplementor(/** @type {Function} */ (AsyncInterface));
-
 
 exports = AsyncInterface;
 //# sourceMappingURL=Main$AsyncInterface.js.map

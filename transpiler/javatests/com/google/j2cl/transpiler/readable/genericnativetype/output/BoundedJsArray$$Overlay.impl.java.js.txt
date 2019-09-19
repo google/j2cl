@@ -1,8 +1,6 @@
 goog.module('com.google.j2cl.transpiler.readable.genericnativetype.BoundedJsArray.$Overlay$impl');
 
-
 const $Util = goog.require('nativebootstrap.Util$impl');
-
 
 class $Overlay {
   /**
@@ -15,7 +13,6 @@ class $Overlay {
     let array = null;
     return array;
   }
-
   /**
    * @template V
    * @param {number} size
@@ -27,7 +24,6 @@ class $Overlay {
     let array = /**@type {!Array<V>} */ (new Array(size));
     return array;
   }
-
   /**
    * @public
    */
@@ -35,7 +31,6 @@ class $Overlay {
     $Overlay.$clinit = (() => {});
     $Overlay.$loadModules();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -44,15 +39,12 @@ class $Overlay {
   static $isInstance(instance) {
     return instance instanceof Array;
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata($Overlay, 'Array');
-
 
 exports = $Overlay;
 //# sourceMappingURL=BoundedJsArray$$Overlay.js.map

@@ -1,6 +1,5 @@
 goog.module('com.google.j2cl.transpiler.readable.typeannotations.ChildWithNonNullableParent$impl');
 
-
 const ParametricType = goog.require('com.google.j2cl.transpiler.readable.typeannotations.ParametricType$impl');
 const Parent = goog.require('com.google.j2cl.transpiler.readable.typeannotations.Parent$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
@@ -8,7 +7,6 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let List = goog.forwardDeclare('java.util.List$impl');
 let Map = goog.forwardDeclare('java.util.Map$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-
 
 /**
  * @implements {ParametricType<!Parent>}
@@ -20,7 +18,6 @@ class ChildWithNonNullableParent extends Parent {
   constructor() {
     super();
   }
-
   /**
    * @return {!ChildWithNonNullableParent}
    * @public
@@ -32,14 +29,12 @@ class ChildWithNonNullableParent extends Parent {
         .$ctor__com_google_j2cl_transpiler_readable_typeannotations_ChildWithNonNullableParent__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_typeannotations_ChildWithNonNullableParent__() {
     this.$ctor__com_google_j2cl_transpiler_readable_typeannotations_Parent__();
   }
-
   /**
    * Default method forwarding stub.
    * @override
@@ -54,7 +49,6 @@ class ChildWithNonNullableParent extends Parent {
             .m_m__$default__com_google_j2cl_transpiler_readable_typeannotations_ParametricType__java_util_List(
                 this, arg0));
   }
-
   /**
    * Bridge method.
    * @override
@@ -68,7 +62,6 @@ class ChildWithNonNullableParent extends Parent {
         .m_m__java_lang_String__com_google_j2cl_transpiler_readable_typeannotations_Parent(
             arg0, /**@type {!Parent} */ ($Casts.$to(arg1, Parent)));
   }
-
   /**
    * Bridge method.
    * @override
@@ -82,7 +75,6 @@ class ChildWithNonNullableParent extends Parent {
         .m_m__java_util_List__com_google_j2cl_transpiler_readable_typeannotations_Parent(
             arg0, /**@type {!Parent} */ ($Casts.$to(arg1, Parent)));
   }
-
   /**
    * @public
    */
@@ -92,7 +84,6 @@ class ChildWithNonNullableParent extends Parent {
     Parent.$clinit();
     ParametricType.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -101,7 +92,6 @@ class ChildWithNonNullableParent extends Parent {
   static $isInstance(instance) {
     return instance instanceof ChildWithNonNullableParent;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -110,22 +100,18 @@ class ChildWithNonNullableParent extends Parent {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, ChildWithNonNullableParent);
   }
-
   /**
    * @public
    */
   static $loadModules() {
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     ChildWithNonNullableParent,
     'com.google.j2cl.transpiler.readable.typeannotations.ChildWithNonNullableParent');
 
-
 ParametricType.$markImplementor(ChildWithNonNullableParent);
-
 
 exports = ChildWithNonNullableParent;
 //# sourceMappingURL=ChildWithNonNullableParent.js.map

@@ -1,10 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.longinitialvalue.LongInitialValue$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Long = goog.require('nativebootstrap.Long$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
-
 
 /**
  * @abstract
@@ -16,14 +14,12 @@ class LongInitialValue extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_longinitialvalue_LongInitialValue__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @return {!$Long}
    * @public
@@ -34,7 +30,6 @@ class LongInitialValue extends j_l_Object {
         LongInitialValue
             .$f_LONG_VALUE__com_google_j2cl_transpiler_readable_longinitialvalue_LongInitialValue);
   }
-
   /**
    * @param {!$Long} value
    * @public
@@ -46,7 +41,6 @@ class LongInitialValue extends j_l_Object {
          .$f_LONG_VALUE__com_google_j2cl_transpiler_readable_longinitialvalue_LongInitialValue =
          value);
   }
-
   /**
    * @public
    */
@@ -55,7 +49,6 @@ class LongInitialValue extends j_l_Object {
     LongInitialValue.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -64,7 +57,6 @@ class LongInitialValue extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof LongInitialValue;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -73,24 +65,19 @@ class LongInitialValue extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, LongInitialValue);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     LongInitialValue,
     'com.google.j2cl.transpiler.readable.longinitialvalue.LongInitialValue');
-
 
 /** @private {!$Long} */
 LongInitialValue
     .$f_LONG_VALUE__com_google_j2cl_transpiler_readable_longinitialvalue_LongInitialValue =
     $Long.fromInt(0);
-
-
 
 exports = LongInitialValue;
 //# sourceMappingURL=LongInitialValue.js.map

@@ -1,13 +1,11 @@
 goog.module('com.google.j2cl.transpiler.readable.genericequals.GenericEquals$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
-
 
 /**
  * @template T
@@ -23,7 +21,6 @@ class GenericEquals extends j_l_Object {
     /** @public {GenericEquals<T>} */
     this.f_value2__com_google_j2cl_transpiler_readable_genericequals_GenericEquals_;
   }
-
   /**
    * @template T
    * @param {T} value
@@ -38,7 +35,6 @@ class GenericEquals extends j_l_Object {
             value);
     return $instance;
   }
-
   /**
    * @param {T} value
    * @public
@@ -51,7 +47,6 @@ class GenericEquals extends j_l_Object {
     this.f_value2__com_google_j2cl_transpiler_readable_genericequals_GenericEquals_ =
         null;
   }
-
   /**
    * @param {GenericEquals<?>} other
    * @return {*}
@@ -63,7 +58,6 @@ class GenericEquals extends j_l_Object {
         .f_value2__com_google_j2cl_transpiler_readable_genericequals_GenericEquals_
         .f_value__com_google_j2cl_transpiler_readable_genericequals_GenericEquals_;
   }
-
   /**
    * @override
    * @param {*} obj
@@ -83,7 +77,6 @@ class GenericEquals extends j_l_Object {
         other
             .f_value__com_google_j2cl_transpiler_readable_genericequals_GenericEquals_);
   }
-
   /**
    * @public
    */
@@ -92,7 +85,6 @@ class GenericEquals extends j_l_Object {
     GenericEquals.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -101,7 +93,6 @@ class GenericEquals extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof GenericEquals;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -110,7 +101,6 @@ class GenericEquals extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, GenericEquals);
   }
-
   /**
    * @public
    */
@@ -119,13 +109,10 @@ class GenericEquals extends j_l_Object {
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     $Objects = goog.module.get('vmbootstrap.Objects$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     GenericEquals,
     'com.google.j2cl.transpiler.readable.genericequals.GenericEquals');
-
-
 
 exports = GenericEquals;
 //# sourceMappingURL=GenericEquals.js.map

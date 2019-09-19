@@ -1,9 +1,7 @@
 goog.module('javaemul.InternalType$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
-
 
 class InternalType extends j_l_Object {
   /**
@@ -12,7 +10,6 @@ class InternalType extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @return {!InternalType}
    * @public
@@ -23,19 +20,16 @@ class InternalType extends j_l_Object {
     $instance.$ctor__javaemul_InternalType__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__javaemul_InternalType__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @public
    */
   foo() {}
-
   /**
    * @public
    */
@@ -44,7 +38,6 @@ class InternalType extends j_l_Object {
     InternalType.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -53,7 +46,6 @@ class InternalType extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof InternalType;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -62,16 +54,12 @@ class InternalType extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, InternalType);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(InternalType, 'javaemul.InternalType');
-
-
 
 exports = InternalType;
 //# sourceMappingURL=InternalType.js.map

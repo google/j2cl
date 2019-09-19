@@ -1,12 +1,10 @@
 goog.module('com.google.j2cl.transpiler.readable.typeannotations.Parent$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
 let List = goog.forwardDeclare('java.util.List$impl');
-
 
 class Parent extends j_l_Object {
   /**
@@ -15,7 +13,6 @@ class Parent extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @return {!Parent}
    * @public
@@ -27,14 +24,12 @@ class Parent extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_typeannotations_Parent__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_typeannotations_Parent__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @param {string} s
    * @param {Parent} c
@@ -45,7 +40,6 @@ class Parent extends j_l_Object {
       s, c) {
     return c;
   }
-
   /**
    * @param {List<string>} l
    * @param {Parent} c
@@ -56,7 +50,6 @@ class Parent extends j_l_Object {
       l, c) {
     return /**@type {!ArrayList<!Parent>} */ (ArrayList.$create__());
   }
-
   /**
    * @public
    */
@@ -65,7 +58,6 @@ class Parent extends j_l_Object {
     Parent.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -74,7 +66,6 @@ class Parent extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof Parent;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -83,19 +74,15 @@ class Parent extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Parent);
   }
-
   /**
    * @public
    */
   static $loadModules() {
     ArrayList = goog.module.get('java.util.ArrayList$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     Parent, 'com.google.j2cl.transpiler.readable.typeannotations.Parent');
-
-
 
 exports = Parent;
 //# sourceMappingURL=Parent.js.map

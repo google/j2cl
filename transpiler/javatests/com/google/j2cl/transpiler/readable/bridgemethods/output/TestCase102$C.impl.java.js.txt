@@ -1,11 +1,9 @@
 goog.module('com.google.j2cl.transpiler.readable.bridgemethods.TestCase102.C$impl');
 
-
 const B = goog.require('com.google.j2cl.transpiler.readable.bridgemethods.TestCase102.B$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let TestCase102 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.bridgemethods.TestCase102$impl');
-
 
 /**
  * @template B1
@@ -20,7 +18,6 @@ class C extends B {
     /** @public {TestCase102} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_bridgemethods_TestCase102_C;
   }
-
   /**
    * @template B1
    * @param {TestCase102} $outer_this
@@ -36,7 +33,6 @@ class C extends B {
             $outer_this);
     return $instance;
   }
-
   /**
    * @param {TestCase102} $outer_this
    * @public
@@ -47,21 +43,18 @@ class C extends B {
         $outer_this;
     this.$ctor__com_google_j2cl_transpiler_readable_bridgemethods_TestCase102_B__();
   }
-
   /**
    * @override
    * @param {?string} value
    * @public
    */
   set(value) {}
-
   /**
    * @override
    * @param {B1} value
    * @public
    */
   m_set__java_lang_Object(value) {}
-
   /**
    * Bridge method for exposing non-JsMethod.
    * @override
@@ -71,7 +64,6 @@ class C extends B {
   m_set__java_lang_String(arg0) {
     this.set(arg0);
   }
-
   /**
    * @public
    */
@@ -80,7 +72,6 @@ class C extends B {
     C.$loadModules();
     B.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -89,7 +80,6 @@ class C extends B {
   static $isInstance(instance) {
     return instance instanceof C;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -98,17 +88,13 @@ class C extends B {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, C);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     C, 'com.google.j2cl.transpiler.readable.bridgemethods.TestCase102$C');
-
-
 
 exports = C;
 //# sourceMappingURL=TestCase102$C.js.map

@@ -1,13 +1,11 @@
 goog.module('com.google.j2cl.transpiler.readable.bridgemethods.Parent$impl');
 
-
 const SuperParent = goog.require('com.google.j2cl.transpiler.readable.bridgemethods.SuperParent$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Error = goog.forwardDeclare('java.lang.Error$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-
 
 /**
  * @template T
@@ -20,7 +18,6 @@ class Parent extends SuperParent {
   constructor() {
     super();
   }
-
   /**
    * @template T
    * @return {!Parent<T>}
@@ -33,35 +30,30 @@ class Parent extends SuperParent {
         .$ctor__com_google_j2cl_transpiler_readable_bridgemethods_Parent__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_bridgemethods_Parent__() {
     this.$ctor__com_google_j2cl_transpiler_readable_bridgemethods_SuperParent__();
   }
-
   /**
    * @param {T} t
    * @param {(Number|number)} s
    * @public
    */
   m_foo__java_lang_Error__java_lang_Number(t, s) {}
-
   /**
    * @template T_1
    * @param {T_1} t
    * @public
    */
   m_bar__java_lang_Number(t) {}
-
   /**
    * @template T_1
    * @param {T_1} t
    * @public
    */
   m_fun__java_lang_Object(t) {}
-
   /**
    * Bridge method.
    * @override
@@ -74,7 +66,6 @@ class Parent extends SuperParent {
         /**@type {T} */ ($Casts.$to(arg0, Error)),
         /**@type {(Number|number)} */ ($Casts.$to(arg1, Number)));
   }
-
   /**
    * @public
    */
@@ -83,7 +74,6 @@ class Parent extends SuperParent {
     Parent.$loadModules();
     SuperParent.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -92,7 +82,6 @@ class Parent extends SuperParent {
   static $isInstance(instance) {
     return instance instanceof Parent;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -101,7 +90,6 @@ class Parent extends SuperParent {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Parent);
   }
-
   /**
    * @public
    */
@@ -110,12 +98,9 @@ class Parent extends SuperParent {
     Number = goog.module.get('java.lang.Number$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     Parent, 'com.google.j2cl.transpiler.readable.bridgemethods.Parent');
-
-
 
 exports = Parent;
 //# sourceMappingURL=Parent.js.map

@@ -1,9 +1,7 @@
 goog.module('com.google.j2cl.transpiler.readable.staticconstant.StaticConstant$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
-
 
 class StaticConstant extends j_l_Object {
   /**
@@ -12,7 +10,6 @@ class StaticConstant extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @return {!StaticConstant}
    * @public
@@ -24,14 +21,12 @@ class StaticConstant extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_staticconstant_StaticConstant__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_staticconstant_StaticConstant__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @public
    */
@@ -40,7 +35,6 @@ class StaticConstant extends j_l_Object {
     StaticConstant.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -49,7 +43,6 @@ class StaticConstant extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof StaticConstant;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -58,24 +51,19 @@ class StaticConstant extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, StaticConstant);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     StaticConstant,
     'com.google.j2cl.transpiler.readable.staticconstant.StaticConstant');
-
 
 /** @public {number} @const */
 StaticConstant
     .f_FOO__com_google_j2cl_transpiler_readable_staticconstant_StaticConstant =
     1;
-
-
 
 exports = StaticConstant;
 //# sourceMappingURL=StaticConstant.js.map

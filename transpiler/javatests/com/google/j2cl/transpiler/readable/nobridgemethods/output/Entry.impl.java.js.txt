@@ -1,8 +1,6 @@
 goog.module('com.google.j2cl.transpiler.readable.nobridgemethods.Entry$impl');
 
-
 const $Util = goog.require('nativebootstrap.Util$impl');
-
 
 /**
  * @interface
@@ -16,7 +14,6 @@ class Entry {
     Entry.$clinit = (() => {});
     Entry.$loadModules();
   }
-
   /**
    * @param {Function} classConstructor
    * @public
@@ -29,7 +26,6 @@ class Entry {
         .$implements__com_google_j2cl_transpiler_readable_nobridgemethods_Entry =
         true;
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -40,7 +36,6 @@ class Entry {
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_nobridgemethods_Entry;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -51,19 +46,15 @@ class Entry {
         !!classConstructor.prototype
               .$implements__com_google_j2cl_transpiler_readable_nobridgemethods_Entry;
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadataForInterface(
     Entry, 'com.google.j2cl.transpiler.readable.nobridgemethods.Entry');
 
-
 Entry.$markImplementor(/** @type {Function} */ (Entry));
-
 
 exports = Entry;
 //# sourceMappingURL=Entry.js.map

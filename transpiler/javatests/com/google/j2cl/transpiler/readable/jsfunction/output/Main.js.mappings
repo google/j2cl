@@ -2,10 +2,10 @@
 [Main] => [constructor]
 [Main] => [super();] "com.google.j2cl.transpiler.readable.jsfunction.Main.<synthetic: ctor_js>"
 [Main] => [/** @public {?function(?):void} */
-    this.f_jsFunctionFieldWildcard__com_google_j2cl_transpiler_readable_jsfunction_Main;] "com.google.j2cl.transpiler.readable.jsfunction.Main.<synthetic: ctor_js>"
+  this.f_jsFunctionFieldWildcard__com_google_j2cl_transpiler_readable_jsfunction_Main;] "com.google.j2cl.transpiler.readable.jsfunction.Main.<synthetic: ctor_js>"
 [jsFunctionFieldWildcard] => [f_jsFunctionFieldWildcard__com_google_j2cl_transpiler_readable_jsfunction_Main]
 [Main] => [/** @public {?function(?string):void} */
-    this.f_jsFunctionFieldParameterized__com_google_j2cl_transpiler_readable_jsfunction_Main;] "com.google.j2cl.transpiler.readable.jsfunction.Main.<synthetic: ctor_js>"
+  this.f_jsFunctionFieldParameterized__com_google_j2cl_transpiler_readable_jsfunction_Main;] "com.google.j2cl.transpiler.readable.jsfunction.Main.<synthetic: ctor_js>"
 [jsFunctionFieldParameterized] => [f_jsFunctionFieldParameterized__com_google_j2cl_transpiler_readable_jsfunction_Main]
 [Main] => [$create__]
 [Main] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsfunction.Main.<synthetic: ctor_create>"
@@ -33,25 +33,25 @@
 [final int n = 4;] => [let n = 4;] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionsCapturingLocal"
 [n] => [n] "n"
 [callFn((number) -> number + n, n);] => [Main.m_callFn__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionInterface__int(((/** number */ number_1) =>{
-      return number_1 + n;
-    }), n);] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionsCapturingLocal"
+   return number_1 + n;
+  }), n);] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionsCapturingLocal"
 [number] => [number_1] "number"
 [number + n] => [return number_1 + n;] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in testJsFunctionsCapturingLocal>"
 [callFn(
         new JsFunctionInterface() {
 ...        },
         n);] => [Main.m_callFn__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionInterface__int(((/** number */ a) =>{
-      return a + n;
-    }), n);] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionsCapturingLocal"
+   return a + n;
+  }), n);] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionsCapturingLocal"
 [a] => [a] "a"
 [return a + n;] => [return a + n;] "com.google.j2cl.transpiler.readable.jsfunction.Main$1.foo"
 [new JsFunctionInterface() {
       @Override
 ...      }
     }.foo(3);] => [((/** number */ a_1) =>{
-      this.m_instanceMethod___$p_com_google_j2cl_transpiler_readable_jsfunction_Main();
-      return 0;
-    })(3);] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionsCapturingLocal"
+   this.m_instanceMethod___$p_com_google_j2cl_transpiler_readable_jsfunction_Main();
+   return 0;
+  })(3);] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionsCapturingLocal"
 [a] => [a_1] "a"
 [instanceMethod();] => [this.m_instanceMethod___$p_com_google_j2cl_transpiler_readable_jsfunction_Main();] "com.google.j2cl.transpiler.readable.jsfunction.Main$2.foo"
 [return 0;] => [return 0;] "com.google.j2cl.transpiler.readable.jsfunction.Main$2.foo"
@@ -60,9 +60,9 @@
       @Override
 ...      }
     }.foo(3);] => [((/** number */ a) =>{
-      this.m_instanceMethod___$p_com_google_j2cl_transpiler_readable_jsfunction_Main();
-      return 0;
-    })(3);] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionThis"
+   this.m_instanceMethod___$p_com_google_j2cl_transpiler_readable_jsfunction_Main();
+   return 0;
+  })(3);] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionThis"
 [a] => [a] "a"
 [instanceMethod();] => [this.m_instanceMethod___$p_com_google_j2cl_transpiler_readable_jsfunction_Main();] "com.google.j2cl.transpiler.readable.jsfunction.Main$3.foo"
 [return 0;] => [return 0;] "com.google.j2cl.transpiler.readable.jsfunction.Main$3.foo"
@@ -79,9 +79,9 @@
         (int i, int... numbers) -> {
 ...          return sum;
         };] => [let f = ((/** number */ i, .../** ...number */ numbers) =>{
-      $Arrays.$stampType(numbers, $int, 1);
-...      return sum;
-    });] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionVarargs"
+   $Arrays.$stampType(numbers, $int, 1);
+...   return sum;
+  });] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionVarargs"
 [f] => [f] "f"
 [i] => [i] "i"
 [numbers] => [numbers] "numbers"
@@ -94,9 +94,9 @@
 [for (int number : numbers) {
             sum += number;
           }] => [for (let $array = numbers, $index = 0; $index < $array.length; $index++) {
-        let number_1 = $array[$index];
-        sum += number_1;
-      }] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in testJsFunctionVarargs>"
+    let number_1 = $array[$index];
+    sum += number_1;
+   }] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in testJsFunctionVarargs>"
 [for (int number : numbers) {
             sum += number;
           }] => [let number_1 = $array[$index];] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in testJsFunctionVarargs>"
@@ -109,9 +109,9 @@
       @Override
 ...      }
     };] => [return ((/** number */ i, .../** ...number */ numbers) =>{
-      $Arrays.$stampType(numbers, $int, 1);
-...      return sum;
-    });] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionVarargsInnerClass"
+   $Arrays.$stampType(numbers, $int, 1);
+...   return sum;
+  });] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionVarargsInnerClass"
 [i] => [i] "i"
 [numbers] => [numbers] "numbers"
 [m] => [$Arrays.$stampType(numbers, $int, 1);] "com.google.j2cl.transpiler.readable.jsfunction.Main$4.m"
@@ -120,9 +120,9 @@
 [for (int number : numbers) {
           sum += number;
         }] => [for (let $array = numbers, $index = 0; $index < $array.length; $index++) {
-        let number_1 = $array[$index];
-        sum += number_1;
-      }] "com.google.j2cl.transpiler.readable.jsfunction.Main$4.m"
+    let number_1 = $array[$index];
+    sum += number_1;
+   }] "com.google.j2cl.transpiler.readable.jsfunction.Main$4.m"
 [for (int number : numbers) {
           sum += number;
         }] => [let number_1 = $array[$index];] "com.google.j2cl.transpiler.readable.jsfunction.Main$4.m"
@@ -131,9 +131,9 @@
 [return sum;] => [return sum;] "com.google.j2cl.transpiler.readable.jsfunction.Main$4.m"
 [testVarArgsMethodReferenceToJsFuncion] => [m_testVarArgsMethodReferenceToJsFuncion__]
 [ForEachCallBack<ElementalJsFunction> c = ElementalJsFunction::call;] => [let c = ((arg0, /** number */ arg1, arg2) =>{
-      let arg0_1 = /**@type {?function(...*):*} */ ($Casts.$to(arg0, $JavaScriptFunction));
-...      return arg0_1(Integer.m_valueOf__int(arg1), arg2_1);
-    });] "com.google.j2cl.transpiler.readable.jsfunction.Main.testVarArgsMethodReferenceToJsFuncion"
+   let arg0_1 = /**@type {?function(...*):*} */ ($Casts.$to(arg0, $JavaScriptFunction));
+...   return arg0_1(Integer.m_valueOf__int(arg1), arg2_1);
+  });] "com.google.j2cl.transpiler.readable.jsfunction.Main.testVarArgsMethodReferenceToJsFuncion"
 [c] => [c] "c"
 [ElementalJsFunction::call] => [let arg0_1 = /**@type {?function(...*):*} */ ($Casts.$to(arg0, $JavaScriptFunction));] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in testVarArgsMethodReferenceToJsFuncion>"
 [ElementalJsFunction::call] => [let arg2_1 = /**@type {Array<?function(...*):*>} */ ($Arrays.$castTo(arg2, $JavaScriptFunction, 1));] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in testVarArgsMethodReferenceToJsFuncion>"
@@ -159,8 +159,8 @@
 [o = SimpleJsFunction[].class;] => [o = Class.$get($JavaScriptFunction, 1);] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionClassLiterals"
 [testJsFunctionOptional] => [m_testJsFunctionOptional___$pp_com_google_j2cl_transpiler_readable_jsfunction]
 [JsFunctionOptional f = (i, n) -> (int) (i + n);] => [let f = ((/** number */ i, /** ?number= */ n) =>{
-      return $Primitives.$narrowDoubleToInt((i + Double.m_doubleValue__java_lang_Double(n)));
-    });] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionOptional"
+   return $Primitives.$narrowDoubleToInt((i + Double.m_doubleValue__java_lang_Double(n)));
+  });] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionOptional"
 [f] => [f] "f"
 [i] => [i] "i"
 [n] => [n] "n"
@@ -176,9 +176,9 @@
         unused -> {
 ...          l.add(new ArrayList<String>());
         };] => [let f = ((unused) =>{
-      let unused_1 = /**@type {?string} */ ($Casts.$to(unused, j_l_String));
-...      l.add(/**@type {!ArrayList<?string>} */ (ArrayList.$create__()));
-    });] "com.google.j2cl.transpiler.readable.jsfunction.Main.testFunctionExpressionTypeReplacement"
+   let unused_1 = /**@type {?string} */ ($Casts.$to(unused, j_l_String));
+...   l.add(/**@type {!ArrayList<?string>} */ (ArrayList.$create__()));
+  });] "com.google.j2cl.transpiler.readable.jsfunction.Main.testFunctionExpressionTypeReplacement"
 [f] => [f] "f"
 [unused] => [unused] "unused"
 [unused -> {
@@ -272,18 +272,16 @@
 [JsBiFunction rawJsBiFunction = new DoubleDoubleJsBiFunction();] => [let rawJsBiFunction = DoubleDoubleJsBiFunction.$create__();] "com.google.j2cl.transpiler.readable.jsfunction.Main.testNewInstance"
 [rawJsBiFunction] => [rawJsBiFunction] "rawJsBiFunction"
 [Main] => [$init__com_google_j2cl_transpiler_readable_jsfunction_Main]
-[ParametricJsFunction<?> jsFunctionFieldWildcard = event -> {};] => [this.f_jsFunctionFieldWildcard__com_google_j2cl_transpiler_readable_jsfunction_Main = ((/** * */ event) =>{
-    });] "com.google.j2cl.transpiler.readable.jsfunction.Main.<init>"
+[ParametricJsFunction<?> jsFunctionFieldWildcard = event -> {};] => [this.f_jsFunctionFieldWildcard__com_google_j2cl_transpiler_readable_jsfunction_Main = ((/** * */ event) =>{});] "com.google.j2cl.transpiler.readable.jsfunction.Main.<init>"
 [event] => [event] "event"
 [ParametricJsFunction<String> jsFunctionFieldParameterized = event -> {};] => [this.f_jsFunctionFieldParameterized__com_google_j2cl_transpiler_readable_jsfunction_Main = ((event_1) =>{
-      let event_2 = /**@type {?string} */ ($Casts.$to(event_1, j_l_String));
-    });] "com.google.j2cl.transpiler.readable.jsfunction.Main.<init>"
+   let event_2 = /**@type {?string} */ ($Casts.$to(event_1, j_l_String));
+  });] "com.google.j2cl.transpiler.readable.jsfunction.Main.<init>"
 [event] => [event_1] "event"
 [event -> {}] => [let event_2 = /**@type {?string} */ ($Casts.$to(event_1, j_l_String));] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in <init>>"
 [event] => [event_2] "event"
 [Main] => [$clinit]
-[Main] => [Main.$clinit = (() =>{
-    });] "com.google.j2cl.transpiler.readable.jsfunction.Main.<clinit>"
+[Main] => [Main.$clinit = (() =>{});] "com.google.j2cl.transpiler.readable.jsfunction.Main.<clinit>"
 [Main] => [Main.$loadModules();] "com.google.j2cl.transpiler.readable.jsfunction.Main.<clinit>"
 [Main] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.jsfunction.Main.<clinit>"
 [// Copyright 2017 Google Inc.] => [// Copyright 2017 Google Inc.] "com.google.j2cl.transpiler.readable.jsfunction.Main.<native>"

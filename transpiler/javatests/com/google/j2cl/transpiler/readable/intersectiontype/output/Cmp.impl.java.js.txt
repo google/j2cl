@@ -1,10 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.intersectiontype.Cmp$impl');
 
-
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.intersectiontype.Cmp.$LambdaAdaptor$impl');
-
 
 /**
  * @interface
@@ -16,7 +14,6 @@ class Cmp {
    * @public
    */
   m_cmp__() {}
-
   /**
    * @param {?function():number} fn
    * @return {Cmp}
@@ -26,7 +23,6 @@ class Cmp {
     Cmp.$clinit();
     return new $LambdaAdaptor(fn);
   }
-
   /**
    * @public
    */
@@ -34,7 +30,6 @@ class Cmp {
     Cmp.$clinit = (() => {});
     Cmp.$loadModules();
   }
-
   /**
    * @param {Function} classConstructor
    * @public
@@ -47,7 +42,6 @@ class Cmp {
         .$implements__com_google_j2cl_transpiler_readable_intersectiontype_Cmp =
         true;
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -58,7 +52,6 @@ class Cmp {
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_intersectiontype_Cmp;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -69,7 +62,6 @@ class Cmp {
         !!classConstructor.prototype
               .$implements__com_google_j2cl_transpiler_readable_intersectiontype_Cmp;
   }
-
   /**
    * @public
    */
@@ -77,14 +69,11 @@ class Cmp {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.intersectiontype.Cmp.$LambdaAdaptor$impl');
   }
-};
-
+}
 $Util.$setClassMetadataForInterface(
     Cmp, 'com.google.j2cl.transpiler.readable.intersectiontype.Cmp');
 
-
 Cmp.$markImplementor(/** @type {Function} */ (Cmp));
-
 
 exports = Cmp;
 //# sourceMappingURL=Cmp.js.map

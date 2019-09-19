@@ -74,9 +74,9 @@
 [for (Object number : numbers) {
       sum += (Double) number;
     }] => [for (let $array = numbers, $index = 0; $index < $array.length; $index++) {
-      let number_1 = $array[$index];
-      sum += Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.$to(number_1, Double)));
-    }] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.sumWithoutBoxing"
+   let number_1 = $array[$index];
+   sum += Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.$to(number_1, Double)));
+  }] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.sumWithoutBoxing"
 [for (Object number : numbers) {
       sum += (Double) number;
     }] => [let number_1 = $array[$index];] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.sumWithoutBoxing"
@@ -90,9 +90,9 @@
 [for (Object number : numbers) {
       sum += (Double) number;
     }] => [for (let $array = numbers, $index = 0; $index < $array.length; $index++) {
-      let number_1 = $array[$index];
-      sum += Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.$to(number_1, Double)));
-    }] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.sumWithoutBoxingJsVarargs"
+   let number_1 = $array[$index];
+   sum += Double.m_doubleValue__java_lang_Double(/**@type {?number} */ ($Casts.$to(number_1, Double)));
+  }] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.sumWithoutBoxingJsVarargs"
 [for (Object number : numbers) {
       sum += (Double) number;
     }] => [let number_1 = $array[$index];] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.sumWithoutBoxingJsVarargs"
@@ -237,8 +237,8 @@
 [switch (boxI) {
       default:
     }] => [switch (boxI.m_intValue__()) {
-      default:
-    }] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxing"
+   default:
+  }] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxing"
 [i += boxI += i += boxI;] => [i += (boxI = Integer.m_valueOf__int(boxI.m_intValue__() + (i += boxI.m_intValue__()))).m_intValue__();] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxing"
 [l = l << boxL;] => [l = $LongUtils.$leftShift(l, $Primitives.$narrowLongToInt(boxL.m_longValue__()));] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxing"
 [testUnboxingBoolean] => [m_testUnboxingBoolean__]
@@ -299,8 +299,7 @@
 [boxB = !boxB;] => [boxB = !Boolean.m_booleanValue__java_lang_Boolean(boxB);] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxingBoolean"
 [boxB = boxB && boxB;] => [boxB = Boolean.m_booleanValue__java_lang_Boolean(boxB) && Boolean.m_booleanValue__java_lang_Boolean(boxB);] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxingBoolean"
 [boxB = boxB ? boxB : boxB;] => [boxB = Boolean.m_booleanValue__java_lang_Boolean(boxB) ? boxB : boxB;] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxingBoolean"
-[if (boxB) {}] => [if (Boolean.m_booleanValue__java_lang_Boolean(boxB)) {
-    }] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxingBoolean"
+[if (boxB) {}] => [if (Boolean.m_booleanValue__java_lang_Boolean(boxB)) {}] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxingBoolean"
 [boolean b = false;] => [let b = false;] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxingBoolean"
 [b] => [b] "b"
 [b |= boxB |= b |= boxB;] => [b = !!(+b | +Boolean.m_booleanValue__java_lang_Boolean((boxB = !!(+Boolean.m_booleanValue__java_lang_Boolean(boxB) | +(b = !!(+b | +Boolean.m_booleanValue__java_lang_Boolean(boxB)))))));] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxingBoolean"
@@ -351,8 +350,7 @@
 [int i = (Integer & Comparable<Integer>) 10;] => [let i = Integer.m_valueOf__int(10).m_intValue__();] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxingFromIntersectionType"
 [i] => [i] "i"
 [AutoBoxing] => [$clinit]
-[AutoBoxing] => [AutoBoxing.$clinit = (() =>{
-    });] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.<clinit>"
+[AutoBoxing] => [AutoBoxing.$clinit = (() =>{});] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.<clinit>"
 [AutoBoxing] => [AutoBoxing.$loadModules();] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.<clinit>"
 [AutoBoxing] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.<clinit>"
 [public static final float COMPILE_TIME_CONSTANT = 1.1f;] => [/** @public {number} @const */

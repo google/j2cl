@@ -1,11 +1,9 @@
 goog.module('com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$impl');
 
-
 const ParentOuter = goog.require('com.google.j2cl.transpiler.readable.innerclassinheritance.ParentOuter$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $1LocalClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass.$1LocalClass$impl');
-
 
 class ChildClass extends ParentOuter {
   /**
@@ -17,7 +15,6 @@ class ChildClass extends ParentOuter {
     this.f_fieldInOuter__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass =
         0;
   }
-
   /**
    * @return {!ChildClass}
    * @public
@@ -29,19 +26,16 @@ class ChildClass extends ParentOuter {
         .$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass__() {
     this.$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ParentOuter__();
   }
-
   /**
    * @public
    */
   m_funInOuter__() {}
-
   /**
    * @public
    */
@@ -51,7 +45,6 @@ class ChildClass extends ParentOuter {
             this)
         .m_test__();
   }
-
   /**
    * @public
    */
@@ -60,7 +53,6 @@ class ChildClass extends ParentOuter {
     ChildClass.$loadModules();
     ParentOuter.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -69,7 +61,6 @@ class ChildClass extends ParentOuter {
   static $isInstance(instance) {
     return instance instanceof ChildClass;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -78,7 +69,6 @@ class ChildClass extends ParentOuter {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, ChildClass);
   }
-
   /**
    * @public
    */
@@ -86,13 +76,10 @@ class ChildClass extends ParentOuter {
     $1LocalClass = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass.$1LocalClass$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     ChildClass,
     'com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass');
-
-
 
 exports = ChildClass;
 //# sourceMappingURL=ChildClass.js.map

@@ -1,12 +1,10 @@
 goog.module('com.google.j2cl.transpiler.readable.aptgeneratordep.Foo$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Dummy = goog.forwardDeclare('com.google.j2cl.transpiler.readable.aptgeneratordep.Dummy$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
-
 
 class Foo extends j_l_Object {
   /**
@@ -15,7 +13,6 @@ class Foo extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @return {!Foo}
    * @public
@@ -27,14 +24,12 @@ class Foo extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_aptgeneratordep_Foo__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_aptgeneratordep_Foo__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @override
    * @return {?string}
@@ -43,7 +38,6 @@ class Foo extends j_l_Object {
   toString() {
     return Class.$get(Dummy).m_getSimpleName__();
   }
-
   /**
    * @public
    */
@@ -52,7 +46,6 @@ class Foo extends j_l_Object {
     Foo.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -61,7 +54,6 @@ class Foo extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof Foo;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -70,7 +62,6 @@ class Foo extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Foo);
   }
-
   /**
    * @public
    */
@@ -79,12 +70,9 @@ class Foo extends j_l_Object {
         'com.google.j2cl.transpiler.readable.aptgeneratordep.Dummy$impl');
     Class = goog.module.get('java.lang.Class$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     Foo, 'com.google.j2cl.transpiler.readable.aptgeneratordep.Foo');
-
-
 
 exports = Foo;
 //# sourceMappingURL=Foo.js.map

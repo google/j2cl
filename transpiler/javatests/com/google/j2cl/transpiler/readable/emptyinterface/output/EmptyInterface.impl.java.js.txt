@@ -1,8 +1,6 @@
 goog.module('com.google.j2cl.transpiler.readable.emptyinterface.EmptyInterface$impl');
 
-
 const $Util = goog.require('nativebootstrap.Util$impl');
-
 
 /**
  * @interface
@@ -15,7 +13,6 @@ class EmptyInterface {
     EmptyInterface.$clinit = (() => {});
     EmptyInterface.$loadModules();
   }
-
   /**
    * @param {Function} classConstructor
    * @public
@@ -28,7 +25,6 @@ class EmptyInterface {
         .$implements__com_google_j2cl_transpiler_readable_emptyinterface_EmptyInterface =
         true;
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -39,7 +35,6 @@ class EmptyInterface {
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_emptyinterface_EmptyInterface;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -50,20 +45,16 @@ class EmptyInterface {
         !!classConstructor.prototype
               .$implements__com_google_j2cl_transpiler_readable_emptyinterface_EmptyInterface;
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadataForInterface(
     EmptyInterface,
     'com.google.j2cl.transpiler.readable.emptyinterface.EmptyInterface');
 
-
 EmptyInterface.$markImplementor(/** @type {Function} */ (EmptyInterface));
-
 
 exports = EmptyInterface;
 //# sourceMappingURL=EmptyInterface.js.map

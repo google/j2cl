@@ -1,10 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.intersectiontype.Setable$impl');
 
-
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.intersectiontype.Setable.$LambdaAdaptor$impl');
-
 
 /**
  * @interface
@@ -16,7 +14,6 @@ class Setable {
    * @public
    */
   m_set__int(i) {}
-
   /**
    * @param {?function(number):void} fn
    * @return {Setable}
@@ -26,7 +23,6 @@ class Setable {
     Setable.$clinit();
     return new $LambdaAdaptor(fn);
   }
-
   /**
    * @public
    */
@@ -34,7 +30,6 @@ class Setable {
     Setable.$clinit = (() => {});
     Setable.$loadModules();
   }
-
   /**
    * @param {Function} classConstructor
    * @public
@@ -47,7 +42,6 @@ class Setable {
         .$implements__com_google_j2cl_transpiler_readable_intersectiontype_Setable =
         true;
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -58,7 +52,6 @@ class Setable {
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_intersectiontype_Setable;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -69,7 +62,6 @@ class Setable {
         !!classConstructor.prototype
               .$implements__com_google_j2cl_transpiler_readable_intersectiontype_Setable;
   }
-
   /**
    * @public
    */
@@ -77,14 +69,11 @@ class Setable {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.intersectiontype.Setable.$LambdaAdaptor$impl');
   }
-};
-
+}
 $Util.$setClassMetadataForInterface(
     Setable, 'com.google.j2cl.transpiler.readable.intersectiontype.Setable');
 
-
 Setable.$markImplementor(/** @type {Function} */ (Setable));
-
 
 exports = Setable;
 //# sourceMappingURL=Setable.js.map

@@ -1,10 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.lambdas.Lambdas.Function$impl');
 
-
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.Function.$LambdaAdaptor$impl');
-
 
 /**
  * @interface
@@ -23,7 +21,6 @@ class Lambdas_Function {
           return t;
         })));
   }
-
   /**
    * @abstract
    * @param {T} t
@@ -31,7 +28,6 @@ class Lambdas_Function {
    * @public
    */
   m_apply__java_lang_Object(t) {}
-
   /**
    * @template T, R
    * @param {?function(T):R} fn
@@ -42,7 +38,6 @@ class Lambdas_Function {
     Lambdas_Function.$clinit();
     return /**@type {!$LambdaAdaptor<T, R>} */ (new $LambdaAdaptor(fn));
   }
-
   /**
    * @public
    */
@@ -50,7 +45,6 @@ class Lambdas_Function {
     Lambdas_Function.$clinit = (() => {});
     Lambdas_Function.$loadModules();
   }
-
   /**
    * @param {Function} classConstructor
    * @public
@@ -63,7 +57,6 @@ class Lambdas_Function {
         .$implements__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Function =
         true;
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -74,7 +67,6 @@ class Lambdas_Function {
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Function;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -85,7 +77,6 @@ class Lambdas_Function {
         !!classConstructor.prototype
               .$implements__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Function;
   }
-
   /**
    * @public
    */
@@ -93,15 +84,12 @@ class Lambdas_Function {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdas.Lambdas.Function.$LambdaAdaptor$impl');
   }
-};
-
+}
 $Util.$setClassMetadataForInterface(
     Lambdas_Function,
     'com.google.j2cl.transpiler.readable.lambdas.Lambdas$Function');
 
-
 Lambdas_Function.$markImplementor(/** @type {Function} */ (Lambdas_Function));
-
 
 exports = Lambdas_Function;
 //# sourceMappingURL=Lambdas$Function.js.map

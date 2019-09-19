@@ -1,9 +1,7 @@
 goog.module('com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Child$impl');
 
-
 const Parent = goog.require('com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Parent$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
-
 
 class Child extends Parent {
   /**
@@ -12,7 +10,6 @@ class Child extends Parent {
   constructor() {
     super();
   }
-
   /**
    * @return {!Child}
    * @public
@@ -24,14 +21,12 @@ class Child extends Parent {
         .$ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_Child__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_Child__() {
     this.$ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_Parent__();
   }
-
   /**
    * @param {number} a
    * @return {number}
@@ -40,7 +35,6 @@ class Child extends Parent {
   m_foo__int(a) {
     return a + 1;
   }
-
   /**
    * @param {number} a
    * @param {number} b
@@ -50,7 +44,6 @@ class Child extends Parent {
   m_fun__int__int(a, b) {
     return a + b + 1;
   }
-
   /**
    * @override
    * @param {number} a
@@ -62,7 +55,6 @@ class Child extends Parent {
   m_bar__int__int__int(a, b, c) {
     return a + b + c + 2;
   }
-
   /**
    * Forwarding method for package private method.
    * @override
@@ -74,7 +66,6 @@ class Child extends Parent {
       arg0) {
     return this.m_foo__int(arg0);
   }
-
   /**
    * Forwarding method for package private method.
    * @override
@@ -87,7 +78,6 @@ class Child extends Parent {
       arg0, arg1) {
     return this.m_fun__int__int(arg0, arg1);
   }
-
   /**
    * @public
    */
@@ -96,7 +86,6 @@ class Child extends Parent {
     Child.$loadModules();
     Parent.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -105,7 +94,6 @@ class Child extends Parent {
   static $isInstance(instance) {
     return instance instanceof Child;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -114,18 +102,14 @@ class Child extends Parent {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Child);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     Child,
     'com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Child');
-
-
 
 exports = Child;
 //# sourceMappingURL=Child.js.map

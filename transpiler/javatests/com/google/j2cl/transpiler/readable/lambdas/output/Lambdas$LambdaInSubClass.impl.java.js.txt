@@ -1,11 +1,9 @@
 goog.module('com.google.j2cl.transpiler.readable.lambdas.Lambdas.LambdaInSubClass$impl');
 
-
 const Parent = goog.require('com.google.j2cl.transpiler.readable.lambdas.Lambdas.Parent$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let FunctionalInterface = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.FunctionalInterface$impl');
-
 
 class LambdaInSubClass extends Parent {
   /**
@@ -14,7 +12,6 @@ class LambdaInSubClass extends Parent {
   constructor() {
     super();
   }
-
   /**
    * @return {!LambdaInSubClass}
    * @public
@@ -26,14 +23,12 @@ class LambdaInSubClass extends Parent {
         .$ctor__com_google_j2cl_transpiler_readable_lambdas_Lambdas_LambdaInSubClass__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_lambdas_Lambdas_LambdaInSubClass__() {
     this.$ctor__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Parent__();
   }
-
   /**
    * @public
    */
@@ -49,7 +44,6 @@ class LambdaInSubClass extends Parent {
       return a;
     }));
   }
-
   /**
    * @public
    */
@@ -58,7 +52,6 @@ class LambdaInSubClass extends Parent {
     LambdaInSubClass.$loadModules();
     Parent.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -67,7 +60,6 @@ class LambdaInSubClass extends Parent {
   static $isInstance(instance) {
     return instance instanceof LambdaInSubClass;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -76,7 +68,6 @@ class LambdaInSubClass extends Parent {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, LambdaInSubClass);
   }
-
   /**
    * @public
    */
@@ -84,13 +75,10 @@ class LambdaInSubClass extends Parent {
     FunctionalInterface = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdas.Lambdas.FunctionalInterface$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     LambdaInSubClass,
     'com.google.j2cl.transpiler.readable.lambdas.Lambdas$LambdaInSubClass');
-
-
 
 exports = LambdaInSubClass;
 //# sourceMappingURL=Lambdas$LambdaInSubClass.js.map

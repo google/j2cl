@@ -1,10 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.jsvarargs.Main.AFunction$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 const $JavaScriptFunction = goog.require('vmbootstrap.JavaScriptFunction$impl');
-
 
 class AFunction extends j_l_Object {
   /**
@@ -13,7 +11,6 @@ class AFunction extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @return {function(number, ...*):*}
    * @public
@@ -27,7 +24,6 @@ class AFunction extends j_l_Object {
         AFunction.prototype.m_f1__int__arrayOf_java_lang_Object, $instance,
         AFunction.$copy);
   }
-
   /**
    * @suppress {invalidCasts}
    * @public
@@ -35,7 +31,6 @@ class AFunction extends j_l_Object {
   $ctor__com_google_j2cl_transpiler_readable_jsvarargs_Main_AFunction__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @this {?function(number, ...*):*}
    * @param {number} i
@@ -46,7 +41,6 @@ class AFunction extends j_l_Object {
   m_f1__int__arrayOf_java_lang_Object(i, ...args) {
     return args[i];
   }
-
   /**
    * @public
    */
@@ -55,7 +49,6 @@ class AFunction extends j_l_Object {
     AFunction.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -66,7 +59,6 @@ class AFunction extends j_l_Object {
         !!instance
               .$is__com_google_j2cl_transpiler_readable_jsvarargs_Main_AFunction;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -75,7 +67,6 @@ class AFunction extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, AFunction);
   }
-
   /**
    * @param {AFunction} from
    * @param {?} to
@@ -85,19 +76,15 @@ class AFunction extends j_l_Object {
     // Marks the object is an instance of this class.
     to.$is__com_google_j2cl_transpiler_readable_jsvarargs_Main_AFunction = true;
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     AFunction, 'com.google.j2cl.transpiler.readable.jsvarargs.Main$AFunction');
 
-
 $JavaScriptFunction.$markImplementor(AFunction);
-
 
 exports = AFunction;
 //# sourceMappingURL=Main$AFunction.js.map

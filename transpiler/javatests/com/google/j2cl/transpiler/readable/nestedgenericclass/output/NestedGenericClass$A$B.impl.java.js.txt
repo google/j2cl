@@ -1,11 +1,9 @@
 goog.module('com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.A.B$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let A = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.A$impl');
-
 
 /**
  * @template T, T_1, T_2
@@ -19,7 +17,6 @@ class B extends j_l_Object {
     /** @public {A<T_1, T_2>} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass_A_B;
   }
-
   /**
    * Factory method corresponding to constructor 'B(A)'.
    * @template T, T_1, T_2
@@ -36,7 +33,6 @@ class B extends j_l_Object {
             $outer_this);
     return $instance;
   }
-
   /**
    * Initialization from constructor 'B(A)'.
    * @param {A<T_1, T_2>} $outer_this
@@ -48,7 +44,6 @@ class B extends j_l_Object {
         $outer_this;
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * Factory method corresponding to constructor 'B(A, Object)'.
    * @template T, T_1, T_2, U
@@ -66,7 +61,6 @@ class B extends j_l_Object {
             $outer_this, u);
     return $instance;
   }
-
   /**
    * Initialization from constructor 'B(A, Object)'.
    * @template U
@@ -80,7 +74,6 @@ class B extends j_l_Object {
         $outer_this;
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @public
    */
@@ -89,7 +82,6 @@ class B extends j_l_Object {
     B.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -98,7 +90,6 @@ class B extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof B;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -107,18 +98,14 @@ class B extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, B);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     B,
     'com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass$A$B');
-
-
 
 exports = B;
 //# sourceMappingURL=NestedGenericClass$A$B.js.map

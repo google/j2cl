@@ -1,12 +1,10 @@
 goog.module('com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.SubOtherElement$impl');
 
-
 const HasKey = goog.require('com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.HasKey$impl');
 const OtherElement = goog.require('com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.OtherElement$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let TypeWildCards = goog.forwardDeclare('com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards$impl');
-
 
 /**
  * @abstract
@@ -21,7 +19,6 @@ class SubOtherElement extends OtherElement {
     /** @public {TypeWildCards} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_SubOtherElement;
   }
-
   /**
    * @param {TypeWildCards} $outer_this
    * @public
@@ -33,7 +30,6 @@ class SubOtherElement extends OtherElement {
     this.$ctor__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_OtherElement__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards(
         $outer_this);
   }
-
   /**
    * @public
    */
@@ -42,7 +38,6 @@ class SubOtherElement extends OtherElement {
     SubOtherElement.$loadModules();
     OtherElement.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -51,7 +46,6 @@ class SubOtherElement extends OtherElement {
   static $isInstance(instance) {
     return instance instanceof SubOtherElement;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -60,20 +54,16 @@ class SubOtherElement extends OtherElement {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, SubOtherElement);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     SubOtherElement,
     'com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards$SubOtherElement');
 
-
 HasKey.$markImplementor(SubOtherElement);
-
 
 exports = SubOtherElement;
 //# sourceMappingURL=TypeWildCards$SubOtherElement.js.map

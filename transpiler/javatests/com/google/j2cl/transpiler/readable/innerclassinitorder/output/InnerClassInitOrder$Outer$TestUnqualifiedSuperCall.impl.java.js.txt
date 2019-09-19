@@ -1,11 +1,9 @@
 goog.module('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall$impl');
 
-
 const OuterIsNotSuper = goog.require('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Outer = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer$impl');
-
 
 class TestUnqualifiedSuperCall extends OuterIsNotSuper {
   /**
@@ -16,7 +14,6 @@ class TestUnqualifiedSuperCall extends OuterIsNotSuper {
     /** @public {Outer} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer_TestUnqualifiedSuperCall;
   }
-
   /**
    * @param {Outer} $outer_this
    * @return {!TestUnqualifiedSuperCall}
@@ -31,7 +28,6 @@ class TestUnqualifiedSuperCall extends OuterIsNotSuper {
             $outer_this);
     return $instance;
   }
-
   /**
    * @param {Outer} $outer_this
    * @public
@@ -43,7 +39,6 @@ class TestUnqualifiedSuperCall extends OuterIsNotSuper {
     this.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer(
         $outer_this);
   }
-
   /**
    * @public
    */
@@ -52,7 +47,6 @@ class TestUnqualifiedSuperCall extends OuterIsNotSuper {
     TestUnqualifiedSuperCall.$loadModules();
     OuterIsNotSuper.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -61,7 +55,6 @@ class TestUnqualifiedSuperCall extends OuterIsNotSuper {
   static $isInstance(instance) {
     return instance instanceof TestUnqualifiedSuperCall;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -70,18 +63,14 @@ class TestUnqualifiedSuperCall extends OuterIsNotSuper {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, TestUnqualifiedSuperCall);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     TestUnqualifiedSuperCall,
     'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$TestUnqualifiedSuperCall');
-
-
 
 exports = TestUnqualifiedSuperCall;
 //# sourceMappingURL=InnerClassInitOrder$Outer$TestUnqualifiedSuperCall.js.map

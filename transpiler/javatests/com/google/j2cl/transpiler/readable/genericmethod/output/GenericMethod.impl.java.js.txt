@@ -1,6 +1,5 @@
 goog.module('com.google.j2cl.transpiler.readable.genericmethod.GenericMethod$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
@@ -16,7 +15,6 @@ let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
-
 /**
  * @template T
  */
@@ -27,7 +25,6 @@ class GenericMethod extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @template T
    * @return {!GenericMethod<T>}
@@ -40,14 +37,12 @@ class GenericMethod extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @template T_1, S
    * @param {T_1} f
@@ -55,20 +50,17 @@ class GenericMethod extends j_l_Object {
    * @public
    */
   m_foo__java_lang_Object__java_lang_Object(f, s) {}
-
   /**
    * @param {*} o
    * @public
    */
   m_fun__java_lang_Object(o) {}
-
   /**
    * @template T_1
    * @param {T_1} t
    * @public
    */
   m_fun__java_lang_Exception(t) {}
-
   /**
    * @template T_1
    * @param {T_1} t
@@ -81,7 +73,6 @@ class GenericMethod extends j_l_Object {
         .$create__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod(
             this);
   }
-
   /**
    * @template T_1
    * @return {GenericMethod<T_1>}
@@ -90,7 +81,6 @@ class GenericMethod extends j_l_Object {
   m_bar__() {
     return null;
   }
-
   /**
    * @template T_1
    * @param {Array<T_1>} array
@@ -100,7 +90,6 @@ class GenericMethod extends j_l_Object {
   m_fun__arrayOf_java_lang_Object(array) {
     return array;
   }
-
   /**
    * @template T_1
    * @return {T_1}
@@ -109,7 +98,6 @@ class GenericMethod extends j_l_Object {
   m_checked__() {
     return null;
   }
-
   /**
    * @template T_1
    * @return {T_1}
@@ -118,7 +106,6 @@ class GenericMethod extends j_l_Object {
   m_unchecked__() {
     return null;
   }
-
   /**
    * @public
    */
@@ -136,7 +123,6 @@ class GenericMethod extends j_l_Object {
     let s = /**@type {?string} */ ($Casts.$to(this.m_checked__(), j_l_String));
     s = /**@type {?string} */ (this.m_unchecked__());
   }
-
   /**
    * @param {Content} content
    * @public
@@ -145,7 +131,6 @@ class GenericMethod extends j_l_Object {
       content) {
     GenericMethod.$clinit();
   }
-
   /**
    * @param {?string} string_1
    * @public
@@ -153,7 +138,6 @@ class GenericMethod extends j_l_Object {
   static m_acceptsString__java_lang_String(string_1) {
     GenericMethod.$clinit();
   }
-
   /**
    * @public
    */
@@ -196,7 +180,6 @@ class GenericMethod extends j_l_Object {
         .m_acceptsContent__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod_Content(
             deepContent);
   }
-
   /**
    * @template CT, C
    * @return {void}
@@ -240,7 +223,6 @@ class GenericMethod extends j_l_Object {
         .m_acceptsContent__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod_Content(
             deepContent);
   }
-
   /**
    * @public
    */
@@ -249,7 +231,6 @@ class GenericMethod extends j_l_Object {
     GenericMethod.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -258,7 +239,6 @@ class GenericMethod extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof GenericMethod;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -267,7 +247,6 @@ class GenericMethod extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, GenericMethod);
   }
-
   /**
    * @public
    */
@@ -286,13 +265,10 @@ class GenericMethod extends j_l_Object {
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     GenericMethod,
     'com.google.j2cl.transpiler.readable.genericmethod.GenericMethod');
-
-
 
 exports = GenericMethod;
 //# sourceMappingURL=GenericMethod.js.map

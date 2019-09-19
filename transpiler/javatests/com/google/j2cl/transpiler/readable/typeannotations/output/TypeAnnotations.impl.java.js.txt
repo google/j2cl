@@ -1,11 +1,9 @@
 goog.module('com.google.j2cl.transpiler.readable.typeannotations.TypeAnnotations$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
-
 
 class TypeAnnotations extends j_l_Object {
   /**
@@ -14,7 +12,6 @@ class TypeAnnotations extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @return {!TypeAnnotations}
    * @public
@@ -26,14 +23,12 @@ class TypeAnnotations extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_typeannotations_TypeAnnotations__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_typeannotations_TypeAnnotations__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @public
    */
@@ -41,7 +36,6 @@ class TypeAnnotations extends j_l_Object {
     TypeAnnotations.$clinit();
     let list = /**@type {!ArrayList<string>} */ (ArrayList.$create__());
   }
-
   /**
    * @public
    */
@@ -50,7 +44,6 @@ class TypeAnnotations extends j_l_Object {
     TypeAnnotations.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -59,7 +52,6 @@ class TypeAnnotations extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof TypeAnnotations;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -68,20 +60,16 @@ class TypeAnnotations extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, TypeAnnotations);
   }
-
   /**
    * @public
    */
   static $loadModules() {
     ArrayList = goog.module.get('java.util.ArrayList$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     TypeAnnotations,
     'com.google.j2cl.transpiler.readable.typeannotations.TypeAnnotations');
-
-
 
 exports = TypeAnnotations;
 //# sourceMappingURL=TypeAnnotations.js.map

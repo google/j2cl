@@ -1,9 +1,7 @@
 goog.module('com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Parent$impl');
 
-
 const SuperParent = goog.require('com.google.j2cl.transpiler.readable.packageprivatemethods.package1.SuperParent$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
-
 
 /**
  * @abstract
@@ -15,14 +13,12 @@ class Parent extends SuperParent {
   constructor() {
     super();
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_Parent__() {
     this.$ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_SuperParent__();
   }
-
   /**
    * @override
    * @param {number} a
@@ -33,7 +29,6 @@ class Parent extends SuperParent {
       a) {
     return a;
   }
-
   /**
    * @abstract
    * @param {number} a
@@ -43,7 +38,6 @@ class Parent extends SuperParent {
    * @public
    */
   m_bar__int__int__int(a, b, c) {}
-
   /**
    * Forwarding method for package private method.
    * @override
@@ -57,7 +51,6 @@ class Parent extends SuperParent {
       arg0, arg1, arg2) {
     return this.m_bar__int__int__int(arg0, arg1, arg2);
   }
-
   /**
    * @public
    */
@@ -66,7 +59,6 @@ class Parent extends SuperParent {
     Parent.$loadModules();
     SuperParent.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -75,7 +67,6 @@ class Parent extends SuperParent {
   static $isInstance(instance) {
     return instance instanceof Parent;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -84,18 +75,14 @@ class Parent extends SuperParent {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Parent);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     Parent,
     'com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Parent');
-
-
 
 exports = Parent;
 //# sourceMappingURL=Parent.js.map

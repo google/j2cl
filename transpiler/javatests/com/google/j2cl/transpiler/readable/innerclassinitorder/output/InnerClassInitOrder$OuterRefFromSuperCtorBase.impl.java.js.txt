@@ -1,11 +1,9 @@
 goog.module('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
-
 
 class OuterRefFromSuperCtorBase extends j_l_Object {
   /**
@@ -14,7 +12,6 @@ class OuterRefFromSuperCtorBase extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @param {*} o
    * @return {!OuterRefFromSuperCtorBase}
@@ -28,7 +25,6 @@ class OuterRefFromSuperCtorBase extends j_l_Object {
             o);
     return $instance;
   }
-
   /**
    * @param {*} o
    * @public
@@ -38,7 +34,6 @@ class OuterRefFromSuperCtorBase extends j_l_Object {
     this.$ctor__java_lang_Object__();
     $Objects.m_toString__java_lang_Object(o);
   }
-
   /**
    * @public
    */
@@ -47,7 +42,6 @@ class OuterRefFromSuperCtorBase extends j_l_Object {
     OuterRefFromSuperCtorBase.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -56,7 +50,6 @@ class OuterRefFromSuperCtorBase extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof OuterRefFromSuperCtorBase;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -65,20 +58,16 @@ class OuterRefFromSuperCtorBase extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, OuterRefFromSuperCtorBase);
   }
-
   /**
    * @public
    */
   static $loadModules() {
     $Objects = goog.module.get('vmbootstrap.Objects$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     OuterRefFromSuperCtorBase,
     'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$OuterRefFromSuperCtorBase');
-
-
 
 exports = OuterRefFromSuperCtorBase;
 //# sourceMappingURL=InnerClassInitOrder$OuterRefFromSuperCtorBase.js.map

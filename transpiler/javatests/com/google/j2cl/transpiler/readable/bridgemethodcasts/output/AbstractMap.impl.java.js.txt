@@ -1,10 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.bridgemethodcasts.AbstractMap$impl');
 
-
 const Map = goog.require('com.google.j2cl.transpiler.readable.bridgemethodcasts.Map$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
-
 
 /**
  * @template K, V
@@ -17,7 +15,6 @@ class AbstractMap extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @template K, V
    * @return {!AbstractMap<K, V>}
@@ -30,14 +27,12 @@ class AbstractMap extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_bridgemethodcasts_AbstractMap__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_bridgemethodcasts_AbstractMap__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @override
    * @param {K} key
@@ -48,7 +43,6 @@ class AbstractMap extends j_l_Object {
   m_put__java_lang_Object__java_lang_Object(key, value) {
     return value;
   }
-
   /**
    * @public
    */
@@ -57,7 +51,6 @@ class AbstractMap extends j_l_Object {
     AbstractMap.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -66,7 +59,6 @@ class AbstractMap extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof AbstractMap;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -75,20 +67,16 @@ class AbstractMap extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, AbstractMap);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     AbstractMap,
     'com.google.j2cl.transpiler.readable.bridgemethodcasts.AbstractMap');
 
-
 Map.$markImplementor(AbstractMap);
-
 
 exports = AbstractMap;
 //# sourceMappingURL=AbstractMap.js.map

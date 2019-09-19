@@ -1,8 +1,6 @@
 goog.module('com.google.j2cl.transpiler.readable.jsnonnull.Main.NonNullableTemplate$impl');
 
-
 const $Util = goog.require('nativebootstrap.Util$impl');
-
 
 /**
  * @interface
@@ -15,14 +13,12 @@ class NonNullableTemplate {
    * @public
    */
   m_get__() {}
-
   /**
    * @abstract
    * @return {Array<T>}
    * @public
    */
   m_getArray__() {}
-
   /**
    * @public
    */
@@ -30,7 +26,6 @@ class NonNullableTemplate {
     NonNullableTemplate.$clinit = (() => {});
     NonNullableTemplate.$loadModules();
   }
-
   /**
    * @param {Function} classConstructor
    * @public
@@ -43,7 +38,6 @@ class NonNullableTemplate {
         .$implements__com_google_j2cl_transpiler_readable_jsnonnull_Main_NonNullableTemplate =
         true;
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -54,7 +48,6 @@ class NonNullableTemplate {
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_jsnonnull_Main_NonNullableTemplate;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -65,21 +58,17 @@ class NonNullableTemplate {
         !!classConstructor.prototype
               .$implements__com_google_j2cl_transpiler_readable_jsnonnull_Main_NonNullableTemplate;
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadataForInterface(
     NonNullableTemplate,
     'com.google.j2cl.transpiler.readable.jsnonnull.Main$NonNullableTemplate');
 
-
 NonNullableTemplate.$markImplementor(
     /** @type {Function} */ (NonNullableTemplate));
-
 
 exports = NonNullableTemplate;
 //# sourceMappingURL=Main$NonNullableTemplate.js.map

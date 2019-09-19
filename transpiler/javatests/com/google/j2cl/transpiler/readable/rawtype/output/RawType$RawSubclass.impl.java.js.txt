@@ -1,12 +1,10 @@
 goog.module('com.google.j2cl.transpiler.readable.rawtype.RawType.RawSubclass$impl');
 
-
 const I = goog.require('com.google.j2cl.transpiler.readable.rawtype.RawType.I$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let RawType = goog.forwardDeclare('com.google.j2cl.transpiler.readable.rawtype.RawType$impl');
-
 
 /**
  * @implements {I}
@@ -18,7 +16,6 @@ class RawSubclass extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @return {!RawSubclass}
    * @public
@@ -30,21 +27,18 @@ class RawSubclass extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_rawtype_RawType_RawSubclass__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_rawtype_RawType_RawSubclass__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @override
    * @param {RawType} t
    * @public
    */
   m_f__com_google_j2cl_transpiler_readable_rawtype_RawType(t) {}
-
   /**
    * @public
    */
@@ -54,7 +48,6 @@ class RawSubclass extends j_l_Object {
     j_l_Object.$clinit();
     I.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -63,7 +56,6 @@ class RawSubclass extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof RawSubclass;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -72,20 +64,16 @@ class RawSubclass extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, RawSubclass);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     RawSubclass,
     'com.google.j2cl.transpiler.readable.rawtype.RawType$RawSubclass');
 
-
 I.$markImplementor(RawSubclass);
-
 
 exports = RawSubclass;
 //# sourceMappingURL=RawType$RawSubclass.js.map

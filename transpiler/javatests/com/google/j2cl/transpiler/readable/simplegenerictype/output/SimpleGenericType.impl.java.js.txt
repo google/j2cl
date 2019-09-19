@@ -1,11 +1,9 @@
 goog.module('com.google.j2cl.transpiler.readable.simplegenerictype.SimpleGenericType$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Error = goog.forwardDeclare('java.lang.Error$impl');
-
 
 /**
  * @template T, S
@@ -21,7 +19,6 @@ class SimpleGenericType extends j_l_Object {
     /** @public {S} */
     this.f_second__com_google_j2cl_transpiler_readable_simplegenerictype_SimpleGenericType;
   }
-
   /**
    * @template T, S
    * @param {T} t
@@ -37,7 +34,6 @@ class SimpleGenericType extends j_l_Object {
             t, s);
     return $instance;
   }
-
   /**
    * @param {T} t
    * @param {S} s
@@ -51,7 +47,6 @@ class SimpleGenericType extends j_l_Object {
     this.f_second__com_google_j2cl_transpiler_readable_simplegenerictype_SimpleGenericType =
         s;
   }
-
   /**
    * @public
    */
@@ -60,7 +55,6 @@ class SimpleGenericType extends j_l_Object {
         SimpleGenericType.$create__java_lang_Object__java_lang_Object(
             j_l_Object.$create__(), Error.$create__()));
   }
-
   /**
    * @public
    */
@@ -69,7 +63,6 @@ class SimpleGenericType extends j_l_Object {
     SimpleGenericType.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -78,7 +71,6 @@ class SimpleGenericType extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof SimpleGenericType;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -87,20 +79,16 @@ class SimpleGenericType extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, SimpleGenericType);
   }
-
   /**
    * @public
    */
   static $loadModules() {
     Error = goog.module.get('java.lang.Error$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     SimpleGenericType,
     'com.google.j2cl.transpiler.readable.simplegenerictype.SimpleGenericType');
-
-
 
 exports = SimpleGenericType;
 //# sourceMappingURL=SimpleGenericType.js.map

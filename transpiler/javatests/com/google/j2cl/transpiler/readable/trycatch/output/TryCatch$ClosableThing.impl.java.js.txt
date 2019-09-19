@@ -1,10 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.trycatch.TryCatch.ClosableThing$impl');
 
-
 const AutoCloseable = goog.require('java.lang.AutoCloseable$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
-
 
 /**
  * @implements {AutoCloseable}
@@ -16,7 +14,6 @@ class ClosableThing extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @return {!ClosableThing}
    * @public
@@ -28,20 +25,17 @@ class ClosableThing extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_trycatch_TryCatch_ClosableThing__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_trycatch_TryCatch_ClosableThing__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @override
    * @public
    */
   m_close__() {}
-
   /**
    * @public
    */
@@ -50,7 +44,6 @@ class ClosableThing extends j_l_Object {
     ClosableThing.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -59,7 +52,6 @@ class ClosableThing extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof ClosableThing;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -68,20 +60,16 @@ class ClosableThing extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, ClosableThing);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     ClosableThing,
     'com.google.j2cl.transpiler.readable.trycatch.TryCatch$ClosableThing');
 
-
 AutoCloseable.$markImplementor(ClosableThing);
-
 
 exports = ClosableThing;
 //# sourceMappingURL=TryCatch$ClosableThing.js.map

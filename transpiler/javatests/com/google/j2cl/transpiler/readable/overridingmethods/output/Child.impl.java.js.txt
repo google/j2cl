@@ -1,10 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.overridingmethods.Child$impl');
 
-
 const Parent = goog.require('com.google.j2cl.transpiler.readable.overridingmethods.Parent$impl');
 const SomeInterface = goog.require('com.google.j2cl.transpiler.readable.overridingmethods.SomeInterface$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
-
 
 /**
  * @implements {SomeInterface}
@@ -16,7 +14,6 @@ class Child extends Parent {
   constructor() {
     super();
   }
-
   /**
    * @return {!Child}
    * @public
@@ -28,26 +25,22 @@ class Child extends Parent {
         .$ctor__com_google_j2cl_transpiler_readable_overridingmethods_Child__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_overridingmethods_Child__() {
     this.$ctor__com_google_j2cl_transpiler_readable_overridingmethods_Parent__();
   }
-
   /**
    * @override
    * @public
    */
   m_fun__() {}
-
   /**
    * @override
    * @public
    */
   m_bar__() {}
-
   /**
    * @public
    */
@@ -56,7 +49,6 @@ class Child extends Parent {
     Child.$loadModules();
     Parent.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -65,7 +57,6 @@ class Child extends Parent {
   static $isInstance(instance) {
     return instance instanceof Child;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -74,19 +65,15 @@ class Child extends Parent {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Child);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     Child, 'com.google.j2cl.transpiler.readable.overridingmethods.Child');
 
-
 SomeInterface.$markImplementor(Child);
-
 
 exports = Child;
 //# sourceMappingURL=Child.js.map

@@ -1,9 +1,7 @@
 goog.module('com.google.j2cl.transpiler.readable.multipletopclasses.AnotherClass$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
-
 
 class AnotherClass extends j_l_Object {
   /**
@@ -12,7 +10,6 @@ class AnotherClass extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @return {!AnotherClass}
    * @public
@@ -24,14 +21,12 @@ class AnotherClass extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_multipletopclasses_AnotherClass__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_multipletopclasses_AnotherClass__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @public
    */
@@ -40,7 +35,6 @@ class AnotherClass extends j_l_Object {
     AnotherClass.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -49,7 +43,6 @@ class AnotherClass extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof AnotherClass;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -58,18 +51,14 @@ class AnotherClass extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, AnotherClass);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     AnotherClass,
     'com.google.j2cl.transpiler.readable.multipletopclasses.AnotherClass');
-
-
 
 exports = AnotherClass;
 //# sourceMappingURL=AnotherClass.js.map

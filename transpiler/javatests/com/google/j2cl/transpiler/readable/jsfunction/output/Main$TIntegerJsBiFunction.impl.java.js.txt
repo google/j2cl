@@ -1,6 +1,5 @@
 goog.module('com.google.j2cl.transpiler.readable.jsfunction.Main.TIntegerJsBiFunction$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 const $JavaScriptFunction = goog.require('vmbootstrap.JavaScriptFunction$impl');
@@ -8,7 +7,6 @@ const $JavaScriptFunction = goog.require('vmbootstrap.JavaScriptFunction$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-
 
 /**
  * @template T
@@ -20,7 +18,6 @@ class TIntegerJsBiFunction extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @template T
    * @return {function(T, Integer):T}
@@ -36,7 +33,6 @@ class TIntegerJsBiFunction extends j_l_Object {
             .m_apply__java_lang_Object__java_lang_Number,
         $instance, TIntegerJsBiFunction.$copy);
   }
-
   /**
    * @suppress {invalidCasts}
    * @public
@@ -44,7 +40,6 @@ class TIntegerJsBiFunction extends j_l_Object {
   $ctor__com_google_j2cl_transpiler_readable_jsfunction_Main_TIntegerJsBiFunction__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @template T
    * @param {function(T, Integer):T} $thisArg
@@ -58,7 +53,6 @@ class TIntegerJsBiFunction extends j_l_Object {
     TIntegerJsBiFunction.$clinit();
     return null;
   }
-
   /**
    * Bridge method.
    * @template T
@@ -73,7 +67,6 @@ class TIntegerJsBiFunction extends j_l_Object {
         .m_apply__com_google_j2cl_transpiler_readable_jsfunction_Main_TIntegerJsBiFunction__java_lang_Object__java_lang_Integer(
             this, arg0, /**@type {Integer} */ ($Casts.$to(arg1, Integer)));
   }
-
   /**
    * @public
    */
@@ -82,7 +75,6 @@ class TIntegerJsBiFunction extends j_l_Object {
     TIntegerJsBiFunction.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -93,7 +85,6 @@ class TIntegerJsBiFunction extends j_l_Object {
         !!instance
               .$is__com_google_j2cl_transpiler_readable_jsfunction_Main_TIntegerJsBiFunction;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -102,7 +93,6 @@ class TIntegerJsBiFunction extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, TIntegerJsBiFunction);
   }
-
   /**
    * @param {TIntegerJsBiFunction} from
    * @param {?} to
@@ -113,7 +103,6 @@ class TIntegerJsBiFunction extends j_l_Object {
     to.$is__com_google_j2cl_transpiler_readable_jsfunction_Main_TIntegerJsBiFunction =
         true;
   }
-
   /**
    * @public
    */
@@ -121,15 +110,12 @@ class TIntegerJsBiFunction extends j_l_Object {
     Integer = goog.module.get('java.lang.Integer$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     TIntegerJsBiFunction,
     'com.google.j2cl.transpiler.readable.jsfunction.Main$TIntegerJsBiFunction');
 
-
 $JavaScriptFunction.$markImplementor(TIntegerJsBiFunction);
-
 
 exports = TIntegerJsBiFunction;
 //# sourceMappingURL=Main$TIntegerJsBiFunction.js.map

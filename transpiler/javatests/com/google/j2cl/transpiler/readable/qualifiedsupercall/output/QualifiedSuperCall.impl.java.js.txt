@@ -1,9 +1,7 @@
 goog.module('com.google.j2cl.transpiler.readable.qualifiedsupercall.QualifiedSuperCall$impl');
 
-
 const Parent = goog.require('com.google.j2cl.transpiler.readable.qualifiedsupercall.Parent$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
-
 
 class QualifiedSuperCall extends Parent {
   /**
@@ -12,7 +10,6 @@ class QualifiedSuperCall extends Parent {
   constructor() {
     super();
   }
-
   /**
    * @return {!QualifiedSuperCall}
    * @public
@@ -24,14 +21,12 @@ class QualifiedSuperCall extends Parent {
         .$ctor__com_google_j2cl_transpiler_readable_qualifiedsupercall_QualifiedSuperCall__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_qualifiedsupercall_QualifiedSuperCall__() {
     this.$ctor__com_google_j2cl_transpiler_readable_qualifiedsupercall_Parent__();
   }
-
   /**
    * @public
    */
@@ -40,7 +35,6 @@ class QualifiedSuperCall extends Parent {
     QualifiedSuperCall.$loadModules();
     Parent.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -49,7 +43,6 @@ class QualifiedSuperCall extends Parent {
   static $isInstance(instance) {
     return instance instanceof QualifiedSuperCall;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -58,18 +51,14 @@ class QualifiedSuperCall extends Parent {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, QualifiedSuperCall);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     QualifiedSuperCall,
     'com.google.j2cl.transpiler.readable.qualifiedsupercall.QualifiedSuperCall');
-
-
 
 exports = QualifiedSuperCall;
 //# sourceMappingURL=QualifiedSuperCall.js.map

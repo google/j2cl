@@ -1,13 +1,11 @@
 goog.module('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.D$impl');
 
-
 const A = goog.require('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.A$impl');
 const I = goog.require('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.I$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-
 
 /**
  * @extends {A<Integer>}
@@ -20,7 +18,6 @@ class D extends A {
   constructor() {
     super();
   }
-
   /**
    * @return {!D}
    * @public
@@ -32,14 +29,12 @@ class D extends A {
         .$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_D__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_D__() {
     this.$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_A__();
   }
-
   /**
    * @param {Integer} i
    * @return {Integer}
@@ -48,7 +43,6 @@ class D extends A {
   m_fun__java_lang_Integer(i) {
     return i;
   }
-
   /**
    * Bridge method.
    * @override
@@ -60,7 +54,6 @@ class D extends A {
     return this.m_fun__java_lang_Integer(
         /**@type {Integer} */ ($Casts.$to(arg0, Integer)));
   }
-
   /**
    * @public
    */
@@ -69,7 +62,6 @@ class D extends A {
     D.$loadModules();
     A.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -78,7 +70,6 @@ class D extends A {
   static $isInstance(instance) {
     return instance instanceof D;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -87,7 +78,6 @@ class D extends A {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, D);
   }
-
   /**
    * @public
    */
@@ -95,14 +85,11 @@ class D extends A {
     Integer = goog.module.get('java.lang.Integer$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     D, 'com.google.j2cl.transpiler.readable.bridgejsmethod.Main$D');
 
-
 I.$markImplementor(D);
-
 
 exports = D;
 //# sourceMappingURL=Main$D.js.map

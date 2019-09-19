@@ -1,13 +1,11 @@
 goog.module('com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.Element$impl');
 
-
 const HasKey = goog.require('com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.HasKey$impl');
 const IntegerSupplier = goog.require('com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.IntegerSupplier$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let TypeWildCards = goog.forwardDeclare('com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards$impl');
-
 
 /**
  * @abstract
@@ -23,7 +21,6 @@ class Element extends j_l_Object {
     /** @public {TypeWildCards} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_Element;
   }
-
   /**
    * @param {TypeWildCards} $outer_this
    * @public
@@ -34,7 +31,6 @@ class Element extends j_l_Object {
         $outer_this;
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @public
    */
@@ -43,7 +39,6 @@ class Element extends j_l_Object {
     Element.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -52,7 +47,6 @@ class Element extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof Element;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -61,21 +55,17 @@ class Element extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Element);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     Element,
     'com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards$Element');
 
-
 HasKey.$markImplementor(Element);
 IntegerSupplier.$markImplementor(Element);
-
 
 exports = Element;
 //# sourceMappingURL=TypeWildCards$Element.js.map

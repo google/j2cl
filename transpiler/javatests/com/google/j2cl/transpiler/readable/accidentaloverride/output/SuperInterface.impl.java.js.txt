@@ -1,10 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.accidentaloverride.SuperInterface$impl');
 
-
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.accidentaloverride.SuperInterface.$LambdaAdaptor$impl');
-
 
 /**
  * @interface
@@ -17,7 +15,6 @@ class SuperInterface {
    * @public
    */
   m_foo__java_lang_Object(t) {}
-
   /**
    * @template T
    * @param {?function(T):void} fn
@@ -28,7 +25,6 @@ class SuperInterface {
     SuperInterface.$clinit();
     return /**@type {!$LambdaAdaptor<T>} */ (new $LambdaAdaptor(fn));
   }
-
   /**
    * @public
    */
@@ -36,7 +32,6 @@ class SuperInterface {
     SuperInterface.$clinit = (() => {});
     SuperInterface.$loadModules();
   }
-
   /**
    * @param {Function} classConstructor
    * @public
@@ -49,7 +44,6 @@ class SuperInterface {
         .$implements__com_google_j2cl_transpiler_readable_accidentaloverride_SuperInterface =
         true;
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -60,7 +54,6 @@ class SuperInterface {
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_accidentaloverride_SuperInterface;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -71,7 +64,6 @@ class SuperInterface {
         !!classConstructor.prototype
               .$implements__com_google_j2cl_transpiler_readable_accidentaloverride_SuperInterface;
   }
-
   /**
    * @public
    */
@@ -79,15 +71,12 @@ class SuperInterface {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.accidentaloverride.SuperInterface.$LambdaAdaptor$impl');
   }
-};
-
+}
 $Util.$setClassMetadataForInterface(
     SuperInterface,
     'com.google.j2cl.transpiler.readable.accidentaloverride.SuperInterface');
 
-
 SuperInterface.$markImplementor(/** @type {Function} */ (SuperInterface));
-
 
 exports = SuperInterface;
 //# sourceMappingURL=SuperInterface.js.map

@@ -1,10 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.genericanddefaultmethods.ConcreteClass$impl');
 
-
 const GenericClass = goog.require('com.google.j2cl.transpiler.readable.genericanddefaultmethods.GenericClass$impl');
 const InterfaceWithDefault = goog.require('com.google.j2cl.transpiler.readable.genericanddefaultmethods.InterfaceWithDefault$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
-
 
 /**
  * @extends {GenericClass<?string>}
@@ -17,7 +15,6 @@ class ConcreteClass extends GenericClass {
   constructor() {
     super();
   }
-
   /**
    * @return {!ConcreteClass}
    * @public
@@ -29,14 +26,12 @@ class ConcreteClass extends GenericClass {
         .$ctor__com_google_j2cl_transpiler_readable_genericanddefaultmethods_ConcreteClass__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_genericanddefaultmethods_ConcreteClass__() {
     this.$ctor__com_google_j2cl_transpiler_readable_genericanddefaultmethods_GenericClass__();
   }
-
   /**
    * Bridge method.
    * @override
@@ -46,7 +41,6 @@ class ConcreteClass extends GenericClass {
   m_foo__java_lang_String(arg0) {
     super.m_foo__java_lang_Object(arg0);
   }
-
   /**
    * @public
    */
@@ -56,7 +50,6 @@ class ConcreteClass extends GenericClass {
     GenericClass.$clinit();
     InterfaceWithDefault.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -65,7 +58,6 @@ class ConcreteClass extends GenericClass {
   static $isInstance(instance) {
     return instance instanceof ConcreteClass;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -74,20 +66,16 @@ class ConcreteClass extends GenericClass {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, ConcreteClass);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     ConcreteClass,
     'com.google.j2cl.transpiler.readable.genericanddefaultmethods.ConcreteClass');
 
-
 InterfaceWithDefault.$markImplementor(ConcreteClass);
-
 
 exports = ConcreteClass;
 //# sourceMappingURL=ConcreteClass.js.map

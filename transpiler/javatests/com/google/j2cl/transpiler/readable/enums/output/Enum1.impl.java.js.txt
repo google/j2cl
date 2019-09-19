@@ -1,6 +1,5 @@
 goog.module('com.google.j2cl.transpiler.readable.enums.Enum1$impl');
 
-
 const Enum = goog.require('java.lang.Enum$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
@@ -8,7 +7,6 @@ let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
-
 
 /**
  * @extends {Enum<Enum1>}
@@ -20,7 +18,6 @@ class Enum1 extends Enum {
   constructor() {
     super();
   }
-
   /**
    * @param {?string} $name
    * @param {number} $ordinal
@@ -34,7 +31,6 @@ class Enum1 extends Enum {
             $name, $ordinal);
     return $instance;
   }
-
   /**
    * @param {?string} $name
    * @param {number} $ordinal
@@ -46,7 +42,6 @@ class Enum1 extends Enum {
     this.f_ordinal__java_lang_Enum_ = $ordinal;
     this.$ctor__java_lang_Enum__java_lang_String__int($name, $ordinal);
   }
-
   /**
    * @param {string} name
    * @return {!Enum1}
@@ -67,7 +62,6 @@ class Enum1 extends Enum {
         Enum1
             .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_enums_Enum1_);
   }
-
   /**
    * @return {!Array<!Enum1>}
    * @public
@@ -81,7 +75,6 @@ class Enum1 extends Enum {
         ],
         Enum1));
   }
-
   /**
    * Bridge method.
    * @override
@@ -92,7 +85,6 @@ class Enum1 extends Enum {
   m_compareTo__java_lang_Object(arg0) {
     return super.compareTo(/**@type {Enum1} */ ($Casts.$to(arg0, Enum1)));
   }
-
   /**
    * @return {!Enum1}
    * @public
@@ -102,7 +94,6 @@ class Enum1 extends Enum {
         Enum1.$clinit(),
         Enum1.$f_V1__com_google_j2cl_transpiler_readable_enums_Enum1);
   }
-
   /**
    * @return {!Enum1}
    * @public
@@ -112,7 +103,6 @@ class Enum1 extends Enum {
         Enum1.$clinit(),
         Enum1.$f_V2__com_google_j2cl_transpiler_readable_enums_Enum1);
   }
-
   /**
    * @return {Map<?string, !Enum1>}
    * @public
@@ -123,7 +113,6 @@ class Enum1 extends Enum {
         Enum1
             .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_enums_Enum1_);
   }
-
   /**
    * @param {Map<?string, !Enum1>} value
    * @public
@@ -135,7 +124,6 @@ class Enum1 extends Enum {
          .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_enums_Enum1_ =
          value);
   }
-
   /**
    * @public
    */
@@ -157,7 +145,6 @@ class Enum1 extends Enum {
         .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_enums_Enum1_ =
         null;
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -166,7 +153,6 @@ class Enum1 extends Enum {
   static $isInstance(instance) {
     return instance instanceof Enum1;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -175,7 +161,6 @@ class Enum1 extends Enum {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Enum1);
   }
-
   /**
    * @public
    */
@@ -185,32 +170,20 @@ class Enum1 extends Enum {
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     $Enums = goog.module.get('vmbootstrap.Enums$impl');
   }
-};
-
+}
 $Util.$setClassMetadataForEnum(
     Enum1, 'com.google.j2cl.transpiler.readable.enums.Enum1');
 
-
 /** @private {!Enum1} */
 Enum1.$f_V1__com_google_j2cl_transpiler_readable_enums_Enum1;
-
-
 /** @private {!Enum1} */
 Enum1.$f_V2__com_google_j2cl_transpiler_readable_enums_Enum1;
-
-
 /** @private {Map<?string, !Enum1>} */
 Enum1.$f_namesToValuesMap__com_google_j2cl_transpiler_readable_enums_Enum1_;
-
-
 /** @public {number} @const */
 Enum1.$ordinal$f_V1__com_google_j2cl_transpiler_readable_enums_Enum1 = 0;
-
-
 /** @public {number} @const */
 Enum1.$ordinal$f_V2__com_google_j2cl_transpiler_readable_enums_Enum1 = 1;
-
-
 
 exports = Enum1;
 //# sourceMappingURL=Enum1.js.map

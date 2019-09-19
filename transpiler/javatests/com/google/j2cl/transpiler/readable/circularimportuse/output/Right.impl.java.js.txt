@@ -1,11 +1,9 @@
 goog.module('com.google.j2cl.transpiler.readable.circularimportuse.Right$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Left = goog.forwardDeclare('com.google.j2cl.transpiler.readable.circularimportuse.Left$impl');
-
 
 class Right extends j_l_Object {
   /**
@@ -14,7 +12,6 @@ class Right extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @return {!Right}
    * @public
@@ -26,14 +23,12 @@ class Right extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_circularimportuse_Right__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_circularimportuse_Right__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @return {Left}
    * @public
@@ -41,7 +36,6 @@ class Right extends j_l_Object {
   m_createLeft___$pp_com_google_j2cl_transpiler_readable_circularimportuse() {
     return Left.$create__();
   }
-
   /**
    * @public
    */
@@ -50,7 +44,6 @@ class Right extends j_l_Object {
     Right.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -59,7 +52,6 @@ class Right extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof Right;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -68,7 +60,6 @@ class Right extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Right);
   }
-
   /**
    * @public
    */
@@ -76,12 +67,9 @@ class Right extends j_l_Object {
     Left = goog.module.get(
         'com.google.j2cl.transpiler.readable.circularimportuse.Left$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     Right, 'com.google.j2cl.transpiler.readable.circularimportuse.Right');
-
-
 
 exports = Right;
 //# sourceMappingURL=Right.js.map

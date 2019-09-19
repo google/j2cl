@@ -1,13 +1,11 @@
 goog.module('com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.$1Local$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Long = goog.forwardDeclare('java.lang.Long$impl');
 let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
-
 
 /**
  * @template T, T_1
@@ -19,7 +17,6 @@ class $1Local extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @template T, T_1
    * @return {!$1Local<T, T_1>}
@@ -32,14 +29,12 @@ class $1Local extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_autoboxing_AutoBoxing_1Local__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_autoboxing_AutoBoxing_1Local__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @param {T} l
    * @return {!$Long}
@@ -51,7 +46,6 @@ class $1Local extends j_l_Object {
         /**@type {Long} */ (l).equals(Long.m_valueOf__long($Long.fromInt(11))));
     return /**@type {Long} */ (l).m_longValue__();
   }
-
   /**
    * @public
    */
@@ -60,7 +54,6 @@ class $1Local extends j_l_Object {
     $1Local.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -69,7 +62,6 @@ class $1Local extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof $1Local;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -78,7 +70,6 @@ class $1Local extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, $1Local);
   }
-
   /**
    * @public
    */
@@ -87,13 +78,10 @@ class $1Local extends j_l_Object {
     $Long = goog.module.get('nativebootstrap.Long$impl');
     $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     $1Local,
     'com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing$1Local');
-
-
 
 exports = $1Local;
 //# sourceMappingURL=AutoBoxing$1Local.js.map

@@ -1,13 +1,11 @@
 goog.module('com.google.j2cl.transpiler.readable.simplebridgemethods.Subclass$impl');
 
-
 const Superclass = goog.require('com.google.j2cl.transpiler.readable.simplebridgemethods.Superclass$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let AssertionError = goog.forwardDeclare('java.lang.AssertionError$impl');
 let Error = goog.forwardDeclare('java.lang.Error$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-
 
 /**
  * @extends {Superclass<AssertionError>}
@@ -19,7 +17,6 @@ class Subclass extends Superclass {
   constructor() {
     super();
   }
-
   /**
    * @return {!Subclass}
    * @public
@@ -31,20 +28,17 @@ class Subclass extends Superclass {
         .$ctor__com_google_j2cl_transpiler_readable_simplebridgemethods_Subclass__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_simplebridgemethods_Subclass__() {
     this.$ctor__com_google_j2cl_transpiler_readable_simplebridgemethods_Superclass__();
   }
-
   /**
    * @param {AssertionError} a
    * @public
    */
   m_m1__java_lang_AssertionError(a) {}
-
   /**
    * Bridge method.
    * @override
@@ -55,7 +49,6 @@ class Subclass extends Superclass {
     this.m_m1__java_lang_AssertionError(
         /**@type {AssertionError} */ ($Casts.$to(arg0, AssertionError)));
   }
-
   /**
    * @public
    */
@@ -64,7 +57,6 @@ class Subclass extends Superclass {
     Subclass.$loadModules();
     Superclass.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -73,7 +65,6 @@ class Subclass extends Superclass {
   static $isInstance(instance) {
     return instance instanceof Subclass;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -82,7 +73,6 @@ class Subclass extends Superclass {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Subclass);
   }
-
   /**
    * @public
    */
@@ -90,13 +80,10 @@ class Subclass extends Superclass {
     AssertionError = goog.module.get('java.lang.AssertionError$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     Subclass,
     'com.google.j2cl.transpiler.readable.simplebridgemethods.Subclass');
-
-
 
 exports = Subclass;
 //# sourceMappingURL=Subclass.js.map

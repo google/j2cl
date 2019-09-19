@@ -1,10 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.cast.CastGenerics.A$impl');
 
-
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.cast.CastGenerics.A.$LambdaAdaptor$impl');
-
 
 /**
  * @interface
@@ -15,7 +13,6 @@ class A {
    * @public
    */
   m_mA__() {}
-
   /**
    * @param {?function():void} fn
    * @return {A}
@@ -25,7 +22,6 @@ class A {
     A.$clinit();
     return new $LambdaAdaptor(fn);
   }
-
   /**
    * @public
    */
@@ -33,7 +29,6 @@ class A {
     A.$clinit = (() => {});
     A.$loadModules();
   }
-
   /**
    * @param {Function} classConstructor
    * @public
@@ -46,7 +41,6 @@ class A {
         .$implements__com_google_j2cl_transpiler_readable_cast_CastGenerics_A =
         true;
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -57,7 +51,6 @@ class A {
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_cast_CastGenerics_A;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -68,7 +61,6 @@ class A {
         !!classConstructor.prototype
               .$implements__com_google_j2cl_transpiler_readable_cast_CastGenerics_A;
   }
-
   /**
    * @public
    */
@@ -76,14 +68,11 @@ class A {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.cast.CastGenerics.A.$LambdaAdaptor$impl');
   }
-};
-
+}
 $Util.$setClassMetadataForInterface(
     A, 'com.google.j2cl.transpiler.readable.cast.CastGenerics$A');
 
-
 A.$markImplementor(/** @type {Function} */ (A));
-
 
 exports = A;
 //# sourceMappingURL=CastGenerics$A.js.map

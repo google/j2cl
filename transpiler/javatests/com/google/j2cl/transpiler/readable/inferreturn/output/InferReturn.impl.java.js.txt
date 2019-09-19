@@ -1,12 +1,10 @@
 goog.module('com.google.j2cl.transpiler.readable.inferreturn.InferReturn$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
-
 
 /**
  * @template T
@@ -18,7 +16,6 @@ class InferReturn extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @template T
    * @return {!InferReturn<T>}
@@ -31,14 +28,12 @@ class InferReturn extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_inferreturn_InferReturn__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_inferreturn_InferReturn__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @template T_1
    * @param {T_1} foo
@@ -49,7 +44,6 @@ class InferReturn extends j_l_Object {
     InferReturn.$clinit();
     return /**@type {!InferReturn<T_1>} */ (InferReturn.$create__());
   }
-
   /**
    * @param {InferReturn<?string>} foo
    * @return {InferReturn<InferReturn<?string>>}
@@ -64,7 +58,6 @@ class InferReturn extends j_l_Object {
     }
     return null;
   }
-
   /**
    * @public
    */
@@ -76,7 +69,6 @@ class InferReturn extends j_l_Object {
     let array = InferReturn.m_newArray__java_lang_Object('foo');
     InferReturn.m_acceptsArrayOfObject__arrayOf_java_lang_Object(array);
   }
-
   /**
    * @template V
    * @param {V} foo
@@ -87,7 +79,6 @@ class InferReturn extends j_l_Object {
     InferReturn.$clinit();
     return /**@type {!ArrayList<V>} */ (ArrayList.$create__());
   }
-
   /**
    * @template V
    * @param {V} foo
@@ -98,7 +89,6 @@ class InferReturn extends j_l_Object {
     InferReturn.$clinit();
     return /**@type {Array<V>} */ (new Array(0));
   }
-
   /**
    * @param {ArrayList<*>} foo
    * @public
@@ -106,7 +96,6 @@ class InferReturn extends j_l_Object {
   static m_acceptsArrayListOfObject__java_util_ArrayList(foo) {
     InferReturn.$clinit();
   }
-
   /**
    * @param {Array<*>} foo
    * @public
@@ -114,7 +103,6 @@ class InferReturn extends j_l_Object {
   static m_acceptsArrayOfObject__arrayOf_java_lang_Object(foo) {
     InferReturn.$clinit();
   }
-
   /**
    * @public
    */
@@ -123,7 +111,6 @@ class InferReturn extends j_l_Object {
     InferReturn.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -132,7 +119,6 @@ class InferReturn extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof InferReturn;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -141,7 +127,6 @@ class InferReturn extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, InferReturn);
   }
-
   /**
    * @public
    */
@@ -149,12 +134,9 @@ class InferReturn extends j_l_Object {
     ArrayList = goog.module.get('java.util.ArrayList$impl');
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     InferReturn, 'com.google.j2cl.transpiler.readable.inferreturn.InferReturn');
-
-
 
 exports = InferReturn;
 //# sourceMappingURL=InferReturn.js.map

@@ -1,12 +1,10 @@
 goog.module('com.google.j2cl.transpiler.readable.markimplementornativetypes.SubNativeInterface$impl');
 
-
 const RegularInterface = goog.require('com.google.j2cl.transpiler.readable.markimplementornativetypes.RegularInterface$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 const MyNativeInterface = goog.require('test.foo.MyNativeInterface');
 
 let $Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.markimplementornativetypes.MyNativeInterface.$Overlay$impl');
-
 
 /**
  * @interface
@@ -21,7 +19,6 @@ class SubNativeInterface {
     SubNativeInterface.$clinit = (() => {});
     SubNativeInterface.$loadModules();
   }
-
   /**
    * @param {Function} classConstructor
    * @public
@@ -35,7 +32,6 @@ class SubNativeInterface {
         .$implements__com_google_j2cl_transpiler_readable_markimplementornativetypes_SubNativeInterface =
         true;
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -46,7 +42,6 @@ class SubNativeInterface {
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_markimplementornativetypes_SubNativeInterface;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -57,21 +52,17 @@ class SubNativeInterface {
         !!classConstructor.prototype
               .$implements__com_google_j2cl_transpiler_readable_markimplementornativetypes_SubNativeInterface;
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadataForInterface(
     SubNativeInterface,
     'com.google.j2cl.transpiler.readable.markimplementornativetypes.SubNativeInterface');
 
-
 SubNativeInterface.$markImplementor(
     /** @type {Function} */ (SubNativeInterface));
-
 
 exports = SubNativeInterface;
 //# sourceMappingURL=SubNativeInterface.js.map

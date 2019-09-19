@@ -1,10 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.J$impl');
 
-
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.J.$LambdaAdaptor$impl');
-
 
 /**
  * @interface
@@ -17,7 +15,6 @@ class J {
    * @public
    */
   m_bar__java_lang_Object(t) {}
-
   /**
    * @template T
    * @param {?function(T):void} fn
@@ -28,7 +25,6 @@ class J {
     J.$clinit();
     return /**@type {!$LambdaAdaptor<T>} */ (new $LambdaAdaptor(fn));
   }
-
   /**
    * @public
    */
@@ -36,7 +32,6 @@ class J {
     J.$clinit = (() => {});
     J.$loadModules();
   }
-
   /**
    * @param {Function} classConstructor
    * @public
@@ -49,7 +44,6 @@ class J {
         .$implements__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_J =
         true;
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -60,7 +54,6 @@ class J {
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_J;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -71,7 +64,6 @@ class J {
         !!classConstructor.prototype
               .$implements__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_J;
   }
-
   /**
    * @public
    */
@@ -79,14 +71,11 @@ class J {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.bridgejsmethod.Main.J.$LambdaAdaptor$impl');
   }
-};
-
+}
 $Util.$setClassMetadataForInterface(
     J, 'com.google.j2cl.transpiler.readable.bridgejsmethod.Main$J');
 
-
 J.$markImplementor(/** @type {Function} */ (J));
-
 
 exports = J;
 //# sourceMappingURL=Main$J.js.map

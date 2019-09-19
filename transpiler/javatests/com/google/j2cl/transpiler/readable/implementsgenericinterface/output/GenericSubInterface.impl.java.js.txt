@@ -1,9 +1,7 @@
 goog.module('com.google.j2cl.transpiler.readable.implementsgenericinterface.GenericSubInterface$impl');
 
-
 const GenericInterface = goog.require('com.google.j2cl.transpiler.readable.implementsgenericinterface.GenericInterface$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
-
 
 /**
  * @interface
@@ -18,7 +16,6 @@ class GenericSubInterface {
     GenericSubInterface.$clinit = (() => {});
     GenericSubInterface.$loadModules();
   }
-
   /**
    * @param {Function} classConstructor
    * @public
@@ -32,7 +29,6 @@ class GenericSubInterface {
         .$implements__com_google_j2cl_transpiler_readable_implementsgenericinterface_GenericSubInterface =
         true;
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -43,7 +39,6 @@ class GenericSubInterface {
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_implementsgenericinterface_GenericSubInterface;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -54,21 +49,17 @@ class GenericSubInterface {
         !!classConstructor.prototype
               .$implements__com_google_j2cl_transpiler_readable_implementsgenericinterface_GenericSubInterface;
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadataForInterface(
     GenericSubInterface,
     'com.google.j2cl.transpiler.readable.implementsgenericinterface.GenericSubInterface');
 
-
 GenericSubInterface.$markImplementor(
     /** @type {Function} */ (GenericSubInterface));
-
 
 exports = GenericSubInterface;
 //# sourceMappingURL=GenericSubInterface.js.map

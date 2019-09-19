@@ -1,10 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.OtherInterface$impl');
 
-
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.OtherInterface.$LambdaAdaptor$impl');
-
 
 /**
  * @interface
@@ -17,7 +15,6 @@ class OtherInterface {
    * @public
    */
   m_fun__int(a) {}
-
   /**
    * @param {?function(number):number} fn
    * @return {OtherInterface}
@@ -27,7 +24,6 @@ class OtherInterface {
     OtherInterface.$clinit();
     return new $LambdaAdaptor(fn);
   }
-
   /**
    * @public
    */
@@ -35,7 +31,6 @@ class OtherInterface {
     OtherInterface.$clinit = (() => {});
     OtherInterface.$loadModules();
   }
-
   /**
    * @param {Function} classConstructor
    * @public
@@ -48,7 +43,6 @@ class OtherInterface {
         .$implements__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_OtherInterface =
         true;
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -59,7 +53,6 @@ class OtherInterface {
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_OtherInterface;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -70,7 +63,6 @@ class OtherInterface {
         !!classConstructor.prototype
               .$implements__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_OtherInterface;
   }
-
   /**
    * @public
    */
@@ -78,15 +70,12 @@ class OtherInterface {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.OtherInterface.$LambdaAdaptor$impl');
   }
-};
-
+}
 $Util.$setClassMetadataForInterface(
     OtherInterface,
     'com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.OtherInterface');
 
-
 OtherInterface.$markImplementor(/** @type {Function} */ (OtherInterface));
-
 
 exports = OtherInterface;
 //# sourceMappingURL=OtherInterface.js.map

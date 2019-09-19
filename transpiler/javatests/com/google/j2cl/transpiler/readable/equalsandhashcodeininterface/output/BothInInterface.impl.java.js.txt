@@ -1,8 +1,6 @@
 goog.module('com.google.j2cl.transpiler.readable.equalsandhashcodeininterface.BothInInterface$impl');
 
-
 const $Util = goog.require('nativebootstrap.Util$impl');
-
 
 /**
  * @interface
@@ -15,14 +13,12 @@ class BothInInterface {
    * @public
    */
   equals(obj) {}
-
   /**
    * @abstract
    * @return {number}
    * @public
    */
   hashCode() {}
-
   /**
    * @public
    */
@@ -30,7 +26,6 @@ class BothInInterface {
     BothInInterface.$clinit = (() => {});
     BothInInterface.$loadModules();
   }
-
   /**
    * @param {Function} classConstructor
    * @public
@@ -43,7 +38,6 @@ class BothInInterface {
         .$implements__com_google_j2cl_transpiler_readable_equalsandhashcodeininterface_BothInInterface =
         true;
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -54,7 +48,6 @@ class BothInInterface {
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_equalsandhashcodeininterface_BothInInterface;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -65,20 +58,16 @@ class BothInInterface {
         !!classConstructor.prototype
               .$implements__com_google_j2cl_transpiler_readable_equalsandhashcodeininterface_BothInInterface;
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadataForInterface(
     BothInInterface,
     'com.google.j2cl.transpiler.readable.equalsandhashcodeininterface.BothInInterface');
 
-
 BothInInterface.$markImplementor(/** @type {Function} */ (BothInInterface));
-
 
 exports = BothInInterface;
 //# sourceMappingURL=BothInInterface.js.map

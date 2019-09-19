@@ -1,9 +1,7 @@
 goog.module('com.google.j2cl.transpiler.readable.instancejsmethods.Parent$impl');
 
-
 const SuperParent = goog.require('com.google.j2cl.transpiler.readable.instancejsmethods.SuperParent$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
-
 
 class Parent extends SuperParent {
   /**
@@ -12,7 +10,6 @@ class Parent extends SuperParent {
   constructor() {
     super();
   }
-
   /**
    * @return {!Parent}
    * @public
@@ -24,14 +21,12 @@ class Parent extends SuperParent {
         .$ctor__com_google_j2cl_transpiler_readable_instancejsmethods_Parent__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_instancejsmethods_Parent__() {
     this.$ctor__com_google_j2cl_transpiler_readable_instancejsmethods_SuperParent__();
   }
-
   /**
    * @param {number} a
    * @param {number} b
@@ -41,7 +36,6 @@ class Parent extends SuperParent {
   sum(a, b) {
     return a + b;
   }
-
   /**
    * @param {number} a
    * @param {number} b
@@ -51,7 +45,6 @@ class Parent extends SuperParent {
   bar(a, b) {
     return a * b;
   }
-
   /**
    * @param {number} a
    * @return {number}
@@ -60,7 +53,6 @@ class Parent extends SuperParent {
   myFoo(a) {
     return a;
   }
-
   /**
    * Bridge method for exposing non-JsMethod.
    * @override
@@ -72,7 +64,6 @@ class Parent extends SuperParent {
   m_fun__int__int(arg0, arg1) {
     return this.sum(arg0, arg1);
   }
-
   /**
    * Bridge method for exposing non-JsMethod.
    * @override
@@ -84,7 +75,6 @@ class Parent extends SuperParent {
   m_bar__int__int(arg0, arg1) {
     return this.bar(arg0, arg1);
   }
-
   /**
    * @public
    */
@@ -93,7 +83,6 @@ class Parent extends SuperParent {
     Parent.$loadModules();
     SuperParent.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -102,7 +91,6 @@ class Parent extends SuperParent {
   static $isInstance(instance) {
     return instance instanceof Parent;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -111,17 +99,13 @@ class Parent extends SuperParent {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Parent);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     Parent, 'com.google.j2cl.transpiler.readable.instancejsmethods.Parent');
-
-
 
 exports = Parent;
 //# sourceMappingURL=Parent.js.map

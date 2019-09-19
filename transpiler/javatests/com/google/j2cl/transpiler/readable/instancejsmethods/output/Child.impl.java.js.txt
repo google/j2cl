@@ -1,10 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.instancejsmethods.Child$impl');
 
-
 const MyInterface = goog.require('com.google.j2cl.transpiler.readable.instancejsmethods.MyInterface$impl');
 const Parent = goog.require('com.google.j2cl.transpiler.readable.instancejsmethods.Parent$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
-
 
 /**
  * @implements {MyInterface}
@@ -16,7 +14,6 @@ class Child extends Parent {
   constructor() {
     super();
   }
-
   /**
    * @return {!Child}
    * @public
@@ -28,14 +25,12 @@ class Child extends Parent {
         .$ctor__com_google_j2cl_transpiler_readable_instancejsmethods_Child__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_instancejsmethods_Child__() {
     this.$ctor__com_google_j2cl_transpiler_readable_instancejsmethods_Parent__();
   }
-
   /**
    * @override
    * @param {number} a
@@ -46,7 +41,6 @@ class Child extends Parent {
   sum(a, b) {
     return a + b + 1;
   }
-
   /**
    * @override
    * @param {number} a
@@ -57,7 +51,6 @@ class Child extends Parent {
   bar(a, b) {
     return a * b + 1;
   }
-
   /**
    * @override
    * @param {number} a
@@ -67,7 +60,6 @@ class Child extends Parent {
   myFoo(a) {
     return a;
   }
-
   /**
    * @return {number}
    * @public
@@ -75,7 +67,6 @@ class Child extends Parent {
   intfFoo() {
     return 1;
   }
-
   /**
    * Bridge method for exposing non-JsMethod.
    * @override
@@ -85,7 +76,6 @@ class Child extends Parent {
   m_intfFoo__() {
     return this.intfFoo();
   }
-
   /**
    * @public
    */
@@ -94,7 +84,6 @@ class Child extends Parent {
     Child.$loadModules();
     Parent.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -103,7 +92,6 @@ class Child extends Parent {
   static $isInstance(instance) {
     return instance instanceof Child;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -112,19 +100,15 @@ class Child extends Parent {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Child);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     Child, 'com.google.j2cl.transpiler.readable.instancejsmethods.Child');
 
-
 MyInterface.$markImplementor(Child);
-
 
 exports = Child;
 //# sourceMappingURL=Child.js.map

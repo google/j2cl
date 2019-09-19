@@ -1,9 +1,7 @@
 goog.module('com.google.j2cl.transpiler.readable.subclassgenericclass.GenericClass$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
-
 
 /**
  * @template T
@@ -15,7 +13,6 @@ class GenericClass extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @template T
    * @return {!GenericClass<T>}
@@ -28,14 +25,12 @@ class GenericClass extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_subclassgenericclass_GenericClass__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_subclassgenericclass_GenericClass__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @public
    */
@@ -44,7 +39,6 @@ class GenericClass extends j_l_Object {
     GenericClass.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -53,7 +47,6 @@ class GenericClass extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof GenericClass;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -62,18 +55,14 @@ class GenericClass extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, GenericClass);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     GenericClass,
     'com.google.j2cl.transpiler.readable.subclassgenericclass.GenericClass');
-
-
 
 exports = GenericClass;
 //# sourceMappingURL=GenericClass.js.map

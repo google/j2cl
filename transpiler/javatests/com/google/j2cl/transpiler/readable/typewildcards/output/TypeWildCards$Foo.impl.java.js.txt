@@ -1,11 +1,9 @@
 goog.module('com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.Foo$impl');
 
-
 const GenericType = goog.require('com.google.j2cl.transpiler.readable.typewildcards.GenericType$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let TypeWildCards = goog.forwardDeclare('com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards$impl');
-
 
 /**
  * @extends {GenericType<Foo>}
@@ -19,7 +17,6 @@ class Foo extends GenericType {
     /** @public {TypeWildCards} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_Foo;
   }
-
   /**
    * @param {TypeWildCards} $outer_this
    * @return {!Foo}
@@ -34,7 +31,6 @@ class Foo extends GenericType {
             $outer_this);
     return $instance;
   }
-
   /**
    * @param {TypeWildCards} $outer_this
    * @public
@@ -45,7 +41,6 @@ class Foo extends GenericType {
         $outer_this;
     this.$ctor__com_google_j2cl_transpiler_readable_typewildcards_GenericType__();
   }
-
   /**
    * @public
    */
@@ -54,7 +49,6 @@ class Foo extends GenericType {
     Foo.$loadModules();
     GenericType.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -63,7 +57,6 @@ class Foo extends GenericType {
   static $isInstance(instance) {
     return instance instanceof Foo;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -72,17 +65,13 @@ class Foo extends GenericType {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Foo);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     Foo, 'com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards$Foo');
-
-
 
 exports = Foo;
 //# sourceMappingURL=TypeWildCards$Foo.js.map

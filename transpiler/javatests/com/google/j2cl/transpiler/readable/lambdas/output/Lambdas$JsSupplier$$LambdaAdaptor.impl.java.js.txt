@@ -1,13 +1,11 @@
 goog.module('com.google.j2cl.transpiler.readable.lambdas.Lambdas.JsSupplier.$LambdaAdaptor$impl');
 
-
 const JsSupplier = goog.require('com.google.j2cl.transpiler.readable.lambdas.Lambdas.JsSupplier$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Equals = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.Equals$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
-
 
 /**
  * @template T
@@ -26,7 +24,6 @@ class $LambdaAdaptor extends j_l_Object {
     this.$ctor__com_google_j2cl_transpiler_readable_lambdas_Lambdas_JsSupplier_$LambdaAdaptor__com_google_j2cl_transpiler_readable_lambdas_Lambdas_JsSupplier_$JsFunction(
         fn);
   }
-
   /**
    * @param {?function():T} fn
    * @public
@@ -37,7 +34,6 @@ class $LambdaAdaptor extends j_l_Object {
     this.f_$$fn__com_google_j2cl_transpiler_readable_lambdas_Lambdas_JsSupplier_$LambdaAdaptor =
         fn;
   }
-
   /**
    * @return {T}
    * @public
@@ -49,7 +45,6 @@ class $LambdaAdaptor extends j_l_Object {
             this.f_$$fn__com_google_j2cl_transpiler_readable_lambdas_Lambdas_JsSupplier_$LambdaAdaptor,
         $function());
   }
-
   /**
    * Bridge method for exposing non-JsMethod.
    * @override
@@ -59,7 +54,6 @@ class $LambdaAdaptor extends j_l_Object {
   m_get__() {
     return this.get();
   }
-
   /**
    * @public
    */
@@ -69,7 +63,6 @@ class $LambdaAdaptor extends j_l_Object {
     j_l_Object.$clinit();
     Equals.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -78,7 +71,6 @@ class $LambdaAdaptor extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof $LambdaAdaptor;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -87,7 +79,6 @@ class $LambdaAdaptor extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, $LambdaAdaptor);
   }
-
   /**
    * @public
    */
@@ -95,15 +86,12 @@ class $LambdaAdaptor extends j_l_Object {
     Equals = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdas.Lambdas.Equals$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     $LambdaAdaptor,
     'com.google.j2cl.transpiler.readable.lambdas.Lambdas$JsSupplier$$LambdaAdaptor');
 
-
 JsSupplier.$markImplementor($LambdaAdaptor);
-
 
 exports = $LambdaAdaptor;
 //# sourceMappingURL=Lambdas$JsSupplier$$LambdaAdaptor.js.map

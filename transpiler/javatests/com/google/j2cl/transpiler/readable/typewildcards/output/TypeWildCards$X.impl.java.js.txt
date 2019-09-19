@@ -1,10 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.X$impl');
 
-
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.X.$LambdaAdaptor$impl');
-
 
 /**
  * @interface
@@ -15,7 +13,6 @@ class X {
    * @public
    */
   m_m__() {}
-
   /**
    * @param {?function():void} fn
    * @return {X}
@@ -25,7 +22,6 @@ class X {
     X.$clinit();
     return new $LambdaAdaptor(fn);
   }
-
   /**
    * @public
    */
@@ -33,7 +29,6 @@ class X {
     X.$clinit = (() => {});
     X.$loadModules();
   }
-
   /**
    * @param {Function} classConstructor
    * @public
@@ -46,7 +41,6 @@ class X {
         .$implements__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_X =
         true;
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -57,7 +51,6 @@ class X {
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_X;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -68,7 +61,6 @@ class X {
         !!classConstructor.prototype
               .$implements__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_X;
   }
-
   /**
    * @public
    */
@@ -76,14 +68,11 @@ class X {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.X.$LambdaAdaptor$impl');
   }
-};
-
+}
 $Util.$setClassMetadataForInterface(
     X, 'com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards$X');
 
-
 X.$markImplementor(/** @type {Function} */ (X));
-
 
 exports = X;
 //# sourceMappingURL=TypeWildCards$X.js.map

@@ -1,9 +1,7 @@
 goog.module('com.google.j2cl.transpiler.readable.anonymousclass.SomeClass$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
-
 
 /**
  * @abstract
@@ -15,14 +13,12 @@ class SomeClass extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @abstract
    * @return {?string}
    * @public
    */
   m_foo__() {}
-
   /**
    * @param {number} i
    * @public
@@ -30,7 +26,6 @@ class SomeClass extends j_l_Object {
   $ctor__com_google_j2cl_transpiler_readable_anonymousclass_SomeClass__int(i) {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @public
    */
@@ -39,7 +34,6 @@ class SomeClass extends j_l_Object {
     SomeClass.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -48,7 +42,6 @@ class SomeClass extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof SomeClass;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -57,17 +50,13 @@ class SomeClass extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, SomeClass);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     SomeClass, 'com.google.j2cl.transpiler.readable.anonymousclass.SomeClass');
-
-
 
 exports = SomeClass;
 //# sourceMappingURL=SomeClass.js.map

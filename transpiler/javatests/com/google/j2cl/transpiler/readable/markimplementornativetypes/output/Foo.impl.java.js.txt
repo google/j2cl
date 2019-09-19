@@ -1,13 +1,11 @@
 goog.module('com.google.j2cl.transpiler.readable.markimplementornativetypes.Foo$impl');
 
-
 const RegularInterface = goog.require('com.google.j2cl.transpiler.readable.markimplementornativetypes.RegularInterface$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 const MyNativeInterface = goog.require('test.foo.MyNativeInterface');
 
 let $Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.markimplementornativetypes.MyNativeInterface.$Overlay$impl');
-
 
 /**
  * @implements {MyNativeInterface}
@@ -20,7 +18,6 @@ class Foo extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @return {!Foo}
    * @public
@@ -32,14 +29,12 @@ class Foo extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_markimplementornativetypes_Foo__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_markimplementornativetypes_Foo__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @public
    */
@@ -48,7 +43,6 @@ class Foo extends j_l_Object {
     Foo.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -57,7 +51,6 @@ class Foo extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof Foo;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -66,19 +59,15 @@ class Foo extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Foo);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     Foo, 'com.google.j2cl.transpiler.readable.markimplementornativetypes.Foo');
 
-
 RegularInterface.$markImplementor(Foo);
-
 
 exports = Foo;
 //# sourceMappingURL=Foo.js.map

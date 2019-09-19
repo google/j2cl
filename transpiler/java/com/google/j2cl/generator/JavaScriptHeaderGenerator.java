@@ -86,7 +86,6 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
     // mapping from the exports to the original Java class.
     sourceBuilder.emitWithMapping(type.getSourcePosition(), () -> sourceBuilder.append("exports"));
     sourceBuilder.append(" = " + className + ";");
-    sourceBuilder.newLine();
     return sourceBuilder.build();
   }
 

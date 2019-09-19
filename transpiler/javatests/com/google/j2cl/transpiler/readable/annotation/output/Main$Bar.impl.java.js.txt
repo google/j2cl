@@ -1,12 +1,10 @@
 goog.module('com.google.j2cl.transpiler.readable.annotation.Main.Bar$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Main = goog.forwardDeclare('com.google.j2cl.transpiler.readable.annotation.Main$impl');
 let Foo = goog.forwardDeclare('com.google.j2cl.transpiler.readable.annotation.Main.Foo$impl');
-
 
 class Bar extends j_l_Object {
   /**
@@ -17,7 +15,6 @@ class Bar extends j_l_Object {
     /** @public {Main} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_annotation_Main_Bar;
   }
-
   /**
    * @param {Main} $outer_this
    * @return {!Bar}
@@ -32,7 +29,6 @@ class Bar extends j_l_Object {
             $outer_this);
     return $instance;
   }
-
   /**
    * @param {Main} $outer_this
    * @public
@@ -43,7 +39,6 @@ class Bar extends j_l_Object {
         $outer_this;
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @return {number}
    * @public
@@ -54,7 +49,6 @@ class Bar extends j_l_Object {
     return Foo
         .f_CONSTANT__com_google_j2cl_transpiler_readable_annotation_Main_Foo;
   }
-
   /**
    * @public
    */
@@ -63,7 +57,6 @@ class Bar extends j_l_Object {
     Bar.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -72,7 +65,6 @@ class Bar extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof Bar;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -81,7 +73,6 @@ class Bar extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Bar);
   }
-
   /**
    * @public
    */
@@ -89,12 +80,9 @@ class Bar extends j_l_Object {
     Foo = goog.module.get(
         'com.google.j2cl.transpiler.readable.annotation.Main.Foo$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     Bar, 'com.google.j2cl.transpiler.readable.annotation.Main$Bar');
-
-
 
 exports = Bar;
 //# sourceMappingURL=Main$Bar.js.map

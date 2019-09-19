@@ -1,6 +1,5 @@
 goog.module('com.google.j2cl.transpiler.readable.bridgemethods.DualUnrelatedBridges$impl');
 
-
 const SomeInterface = goog.require('com.google.j2cl.transpiler.readable.bridgemethods.SomeInterface$impl');
 const SomeOtherFooInterface = goog.require('com.google.j2cl.transpiler.readable.bridgemethods.SomeOtherFooInterface$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
@@ -10,7 +9,6 @@ let Double = goog.forwardDeclare('java.lang.Double$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-
 
 /**
  * @implements {SomeInterface<?string, ?number>}
@@ -23,7 +21,6 @@ class DualUnrelatedBridges extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @return {!DualUnrelatedBridges}
    * @public
@@ -35,28 +32,24 @@ class DualUnrelatedBridges extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_bridgemethods_DualUnrelatedBridges__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_bridgemethods_DualUnrelatedBridges__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @param {?string} s
    * @param {?number} n
    * @public
    */
   m_foo__java_lang_String__java_lang_Double(s, n) {}
-
   /**
    * @param {?string} s
    * @param {(Number|number)} n
    * @public
    */
   m_foo__java_lang_String__java_lang_Number(s, n) {}
-
   /**
    * Bridge method.
    * @override
@@ -69,7 +62,6 @@ class DualUnrelatedBridges extends j_l_Object {
         /**@type {?string} */ ($Casts.$to(arg0, j_l_String)),
         /**@type {?number} */ ($Casts.$to(arg1, Double)));
   }
-
   /**
    * Bridge method.
    * @override
@@ -81,7 +73,6 @@ class DualUnrelatedBridges extends j_l_Object {
     this.m_foo__java_lang_String__java_lang_Number(
         /**@type {?string} */ ($Casts.$to(arg0, j_l_String)), arg1);
   }
-
   /**
    * Bridge method.
    * @override
@@ -93,7 +84,6 @@ class DualUnrelatedBridges extends j_l_Object {
     this.m_foo__java_lang_String__java_lang_Double(
         /**@type {?string} */ ($Casts.$to(arg0, j_l_String)), arg1);
   }
-
   /**
    * @public
    */
@@ -102,7 +92,6 @@ class DualUnrelatedBridges extends j_l_Object {
     DualUnrelatedBridges.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -111,7 +100,6 @@ class DualUnrelatedBridges extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof DualUnrelatedBridges;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -120,7 +108,6 @@ class DualUnrelatedBridges extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, DualUnrelatedBridges);
   }
-
   /**
    * @public
    */
@@ -129,16 +116,13 @@ class DualUnrelatedBridges extends j_l_Object {
     j_l_String = goog.module.get('java.lang.String$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     DualUnrelatedBridges,
     'com.google.j2cl.transpiler.readable.bridgemethods.DualUnrelatedBridges');
 
-
 SomeInterface.$markImplementor(DualUnrelatedBridges);
 SomeOtherFooInterface.$markImplementor(DualUnrelatedBridges);
-
 
 exports = DualUnrelatedBridges;
 //# sourceMappingURL=DualUnrelatedBridges.js.map

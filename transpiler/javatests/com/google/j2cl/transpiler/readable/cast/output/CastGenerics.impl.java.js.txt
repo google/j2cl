@@ -1,6 +1,5 @@
 goog.module('com.google.j2cl.transpiler.readable.cast.CastGenerics$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
@@ -20,7 +19,6 @@ let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
-
 /**
  * @template T, E
  */
@@ -33,7 +31,6 @@ class CastGenerics extends j_l_Object {
     /** @public {T} */
     this.f_field__com_google_j2cl_transpiler_readable_cast_CastGenerics;
   }
-
   /**
    * @template T, E
    * @return {!CastGenerics<T, E>}
@@ -45,14 +42,12 @@ class CastGenerics extends j_l_Object {
     $instance.$ctor__com_google_j2cl_transpiler_readable_cast_CastGenerics__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_cast_CastGenerics__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @return {T}
    * @public
@@ -60,7 +55,6 @@ class CastGenerics extends j_l_Object {
   m_method___$pp_com_google_j2cl_transpiler_readable_cast() {
     return null;
   }
-
   /**
    * @template T_1, U
    * @return {void}
@@ -151,7 +145,6 @@ class CastGenerics extends j_l_Object {
             Implementor))
         .m_mB__();
   }
-
   /**
    * @public
    */
@@ -162,7 +155,6 @@ class CastGenerics extends j_l_Object {
         $Casts.$to(o, CastGenerics));
     cc = /**@type {CastGenerics} */ ($Casts.$to(o, CastGenerics));
   }
-
   /**
    * @public
    */
@@ -173,7 +165,6 @@ class CastGenerics extends j_l_Object {
     let es = /**@type {Array<E>} */ ($Arrays.$castTo(o, Number, 1));
     let ts = /**@type {Array<T>} */ ($Arrays.$castTo(o, j_l_Object, 1));
   }
-
   /**
    * @template S, V
    * @return {void}
@@ -187,14 +178,12 @@ class CastGenerics extends j_l_Object {
     c = /**@type {Array<S>} */ ($Arrays.$castTo(o, j_l_Object, 1));
     c = /**@type {V} */ ($Casts.$to(o, Enum));
   }
-
   /**
    * @template TT
    * @return {void}
    * @public
    */
   m_outerGenericMethod__() {}
-
   /**
    * @template EE
    * @param {*} o
@@ -207,7 +196,6 @@ class CastGenerics extends j_l_Object {
     }
     return null;
   }
-
   /**
    * @template T_1
    * @return {Foo<T_1>}
@@ -217,7 +205,6 @@ class CastGenerics extends j_l_Object {
     CastGenerics.$clinit();
     return /**@type {!$1<T_1>} */ ($1.$create__());
   }
-
   /**
    * @public
    */
@@ -226,7 +213,6 @@ class CastGenerics extends j_l_Object {
     CastGenerics.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -235,7 +221,6 @@ class CastGenerics extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof CastGenerics;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -244,7 +229,6 @@ class CastGenerics extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, CastGenerics);
   }
-
   /**
    * @public
    */
@@ -268,12 +252,9 @@ class CastGenerics extends j_l_Object {
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     CastGenerics, 'com.google.j2cl.transpiler.readable.cast.CastGenerics');
-
-
 
 exports = CastGenerics;
 //# sourceMappingURL=CastGenerics.js.map

@@ -1,11 +1,9 @@
 goog.module('com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunction$impl');
 
-
 const MyFunction = goog.require('com.google.j2cl.transpiler.readable.overwrittentypevariables.MyFunction$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunction.$LambdaAdaptor$impl');
-
 
 /**
  * @interface
@@ -23,7 +21,6 @@ class HashFunction {
     HashFunction.$clinit();
     return /**@type {!$LambdaAdaptor<T>} */ (new $LambdaAdaptor(fn));
   }
-
   /**
    * @public
    */
@@ -31,7 +28,6 @@ class HashFunction {
     HashFunction.$clinit = (() => {});
     HashFunction.$loadModules();
   }
-
   /**
    * @param {Function} classConstructor
    * @public
@@ -45,7 +41,6 @@ class HashFunction {
         .$implements__com_google_j2cl_transpiler_readable_overwrittentypevariables_HashFunction =
         true;
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -56,7 +51,6 @@ class HashFunction {
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_overwrittentypevariables_HashFunction;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -67,7 +61,6 @@ class HashFunction {
         !!classConstructor.prototype
               .$implements__com_google_j2cl_transpiler_readable_overwrittentypevariables_HashFunction;
   }
-
   /**
    * @public
    */
@@ -75,15 +68,12 @@ class HashFunction {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunction.$LambdaAdaptor$impl');
   }
-};
-
+}
 $Util.$setClassMetadataForInterface(
     HashFunction,
     'com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunction');
 
-
 HashFunction.$markImplementor(/** @type {Function} */ (HashFunction));
-
 
 exports = HashFunction;
 //# sourceMappingURL=HashFunction.js.map

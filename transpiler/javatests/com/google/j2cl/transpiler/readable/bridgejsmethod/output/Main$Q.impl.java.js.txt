@@ -1,12 +1,10 @@
 goog.module('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.Q$impl');
 
-
 const P = goog.require('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.P$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Main = goog.forwardDeclare('com.google.j2cl.transpiler.readable.bridgejsmethod.Main$impl');
-
 
 /**
  * @abstract
@@ -21,7 +19,6 @@ class Q extends j_l_Object {
     /** @public {Main} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_Q;
   }
-
   /**
    * @param {Main} $outer_this
    * @public
@@ -32,14 +29,12 @@ class Q extends j_l_Object {
         $outer_this;
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @abstract
    * @return {?string}
    * @public
    */
   getKey() {}
-
   /**
    * Bridge method for exposing non-JsMethod.
    * @override
@@ -49,7 +44,6 @@ class Q extends j_l_Object {
   m_getKey__() {
     return this.getKey();
   }
-
   /**
    * @public
    */
@@ -58,7 +52,6 @@ class Q extends j_l_Object {
     Q.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -67,7 +60,6 @@ class Q extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof Q;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -76,19 +68,15 @@ class Q extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Q);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     Q, 'com.google.j2cl.transpiler.readable.bridgejsmethod.Main$Q');
 
-
 P.$markImplementor(Q);
-
 
 exports = Q;
 //# sourceMappingURL=Main$Q.js.map

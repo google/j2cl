@@ -1,6 +1,5 @@
 goog.module('com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
@@ -23,7 +22,6 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $LongUtils = goog.forwardDeclare('vmbootstrap.LongUtils$impl');
 let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
 
-
 class AutoBoxing extends j_l_Object {
   /**
    * @protected
@@ -31,7 +29,6 @@ class AutoBoxing extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @return {!AutoBoxing}
    * @public
@@ -43,14 +40,12 @@ class AutoBoxing extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_autoboxing_AutoBoxing__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_autoboxing_AutoBoxing__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @param {boolean} b
    * @return {?boolean}
@@ -59,7 +54,6 @@ class AutoBoxing extends j_l_Object {
   m_box__boolean(b) {
     return b;
   }
-
   /**
    * @param {number} d
    * @return {?number}
@@ -68,7 +62,6 @@ class AutoBoxing extends j_l_Object {
   m_box__double(d) {
     return d;
   }
-
   /**
    * @param {number} b
    * @return {Byte}
@@ -77,7 +70,6 @@ class AutoBoxing extends j_l_Object {
   m_box__byte(b) {
     return Byte.m_valueOf__byte(b);
   }
-
   /**
    * @param {number} f
    * @return {Float}
@@ -86,7 +78,6 @@ class AutoBoxing extends j_l_Object {
   m_box__float(f) {
     return Float.m_valueOf__float(f);
   }
-
   /**
    * @param {number} i
    * @return {Integer}
@@ -95,7 +86,6 @@ class AutoBoxing extends j_l_Object {
   m_box__int(i) {
     return Integer.m_valueOf__int(i);
   }
-
   /**
    * @param {!$Long} l
    * @return {Long}
@@ -104,7 +94,6 @@ class AutoBoxing extends j_l_Object {
   m_box__long(l) {
     return Long.m_valueOf__long(l);
   }
-
   /**
    * @param {number} s
    * @return {Short}
@@ -113,7 +102,6 @@ class AutoBoxing extends j_l_Object {
   m_box__short(s) {
     return Short.m_valueOf__short(s);
   }
-
   /**
    * @param {number} c
    * @return {Character}
@@ -122,7 +110,6 @@ class AutoBoxing extends j_l_Object {
   m_box__char(c) {
     return Character.m_valueOf__char(c);
   }
-
   /**
    * @param {?boolean} b
    * @return {boolean}
@@ -131,7 +118,6 @@ class AutoBoxing extends j_l_Object {
   m_unbox__java_lang_Boolean(b) {
     return Boolean.m_booleanValue__java_lang_Boolean(b);
   }
-
   /**
    * @param {?number} d
    * @return {number}
@@ -140,7 +126,6 @@ class AutoBoxing extends j_l_Object {
   m_unbox__java_lang_Double(d) {
     return Double.m_doubleValue__java_lang_Double(d);
   }
-
   /**
    * @param {Byte} b
    * @return {number}
@@ -149,7 +134,6 @@ class AutoBoxing extends j_l_Object {
   m_unbox__java_lang_Byte(b) {
     return b.m_byteValue__();
   }
-
   /**
    * @param {Float} f
    * @return {number}
@@ -158,7 +142,6 @@ class AutoBoxing extends j_l_Object {
   m_unbox__java_lang_Float(f) {
     return f.m_floatValue__();
   }
-
   /**
    * @param {Integer} i
    * @return {number}
@@ -167,7 +150,6 @@ class AutoBoxing extends j_l_Object {
   m_unbox__java_lang_Integer(i) {
     return i.m_intValue__();
   }
-
   /**
    * @param {Long} l
    * @return {!$Long}
@@ -176,7 +158,6 @@ class AutoBoxing extends j_l_Object {
   m_unbox__java_lang_Long(l) {
     return l.m_longValue__();
   }
-
   /**
    * @param {Short} s
    * @return {number}
@@ -185,7 +166,6 @@ class AutoBoxing extends j_l_Object {
   m_unbox__java_lang_Short(s) {
     return s.m_shortValue__();
   }
-
   /**
    * @param {Character} c
    * @return {number}
@@ -194,7 +174,6 @@ class AutoBoxing extends j_l_Object {
   m_unbox__java_lang_Character(c) {
     return c.m_charValue__();
   }
-
   /**
    * @param {number} d
    * @return {number}
@@ -203,7 +182,6 @@ class AutoBoxing extends j_l_Object {
   m_takesAndReturnsPrimitiveDouble__double(d) {
     return d;
   }
-
   /**
    * @param {?void} v
    * @return {?void}
@@ -212,13 +190,11 @@ class AutoBoxing extends j_l_Object {
   m_takesAndReturnsVoid__java_lang_Void(v) {
     return null;
   }
-
   /**
    * @param {Array<Float>} elements
    * @public
    */
   m_takesFloatVarArgs__arrayOf_java_lang_Float(elements) {}
-
   /**
    * @param {*} o
    * @return {number}
@@ -228,7 +204,6 @@ class AutoBoxing extends j_l_Object {
     return Double.m_doubleValue__java_lang_Double(
         /**@type {?number} */ ($Casts.$to(o, Double)));
   }
-
   /**
    * @param {Array<*>} numbers
    * @return {number}
@@ -243,7 +218,6 @@ class AutoBoxing extends j_l_Object {
     }
     return sum;
   }
-
   /**
    * @param {...*} numbers
    * @return {number}
@@ -258,7 +232,6 @@ class AutoBoxing extends j_l_Object {
     }
     return sum;
   }
-
   /**
    * @public
    */
@@ -330,7 +303,6 @@ class AutoBoxing extends j_l_Object {
     boxI = Integer.m_valueOf__int(-boxI.m_intValue__());
     o = Integer.m_valueOf__int(15);
   }
-
   /**
    * @public
    */
@@ -395,7 +367,6 @@ class AutoBoxing extends j_l_Object {
     l = $LongUtils.$leftShift(
         l, $Primitives.$narrowLongToInt(boxL.m_longValue__()));
   }
-
   /**
    * @public
    */
@@ -499,7 +470,6 @@ class AutoBoxing extends j_l_Object {
                          +b |
                          +Boolean.m_booleanValue__java_lang_Boolean(boxB)))))));
   }
-
   /**
    * @public
    */
@@ -517,7 +487,6 @@ class AutoBoxing extends j_l_Object {
     $Asserts.$assert(i != i);
     $Asserts.$assert(i != boxI.m_intValue__());
   }
-
   /**
    * @public
    */
@@ -527,7 +496,6 @@ class AutoBoxing extends j_l_Object {
     $Asserts.$assert(Boolean.m_booleanValue__java_lang_Boolean(boxB));
     $Asserts.$assert(b);
   }
-
   /**
    * @template T
    * @return {void}
@@ -545,7 +513,6 @@ class AutoBoxing extends j_l_Object {
                 Long.m_valueOf__long($Long.fromInt(11)));
     $Asserts.$assert($LongUtils.$equals(l, $Long.fromInt(11)));
   }
-
   /**
    * @template T
    * @return {void}
@@ -564,7 +531,6 @@ class AutoBoxing extends j_l_Object {
     $Asserts.$assert($LongUtils.$equals(l, $Long.fromInt(11)));
     let i = Integer.m_valueOf__int(10).m_intValue__();
   }
-
   /**
    * @public
    */
@@ -573,7 +539,6 @@ class AutoBoxing extends j_l_Object {
     AutoBoxing.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -582,7 +547,6 @@ class AutoBoxing extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof AutoBoxing;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -591,7 +555,6 @@ class AutoBoxing extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, AutoBoxing);
   }
-
   /**
    * @public
    */
@@ -616,18 +579,14 @@ class AutoBoxing extends j_l_Object {
     $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');
     $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     AutoBoxing, 'com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing');
-
 
 /** @public {number} @const */
 AutoBoxing
     .f_COMPILE_TIME_CONSTANT__com_google_j2cl_transpiler_readable_autoboxing_AutoBoxing =
     1.100000023841858;
-
-
 
 exports = AutoBoxing;
 //# sourceMappingURL=AutoBoxing.js.map

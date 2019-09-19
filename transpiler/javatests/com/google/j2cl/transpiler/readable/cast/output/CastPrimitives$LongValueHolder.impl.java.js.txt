@@ -1,11 +1,9 @@
 goog.module('com.google.j2cl.transpiler.readable.cast.CastPrimitives.LongValueHolder$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
-
 
 class LongValueHolder extends j_l_Object {
   /**
@@ -14,7 +12,6 @@ class LongValueHolder extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @param {!$Long} value
    * @return {!LongValueHolder}
@@ -28,7 +25,6 @@ class LongValueHolder extends j_l_Object {
             value);
     return $instance;
   }
-
   /**
    * @param {!$Long} value
    * @public
@@ -37,7 +33,6 @@ class LongValueHolder extends j_l_Object {
       value) {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @public
    */
@@ -46,7 +41,6 @@ class LongValueHolder extends j_l_Object {
     LongValueHolder.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -55,7 +49,6 @@ class LongValueHolder extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof LongValueHolder;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -64,18 +57,14 @@ class LongValueHolder extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, LongValueHolder);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     LongValueHolder,
     'com.google.j2cl.transpiler.readable.cast.CastPrimitives$LongValueHolder');
-
-
 
 exports = LongValueHolder;
 //# sourceMappingURL=CastPrimitives$LongValueHolder.js.map

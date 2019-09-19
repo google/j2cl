@@ -1,11 +1,9 @@
 goog.module('com.google.j2cl.transpiler.readable.ternaryexpression.TernaryExpression$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
-
 
 class TernaryExpression extends j_l_Object {
   /**
@@ -14,7 +12,6 @@ class TernaryExpression extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @return {!TernaryExpression}
    * @public
@@ -26,14 +23,12 @@ class TernaryExpression extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_ternaryexpression_TernaryExpression__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_ternaryexpression_TernaryExpression__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @public
    */
@@ -44,7 +39,6 @@ class TernaryExpression extends j_l_Object {
     let value = (b ? Integer.$create__int(15) : Integer.$create__int(30))
                     .m_intValue__();
   }
-
   /**
    * @public
    */
@@ -53,7 +47,6 @@ class TernaryExpression extends j_l_Object {
     TernaryExpression.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -62,7 +55,6 @@ class TernaryExpression extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof TernaryExpression;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -71,20 +63,16 @@ class TernaryExpression extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, TernaryExpression);
   }
-
   /**
    * @public
    */
   static $loadModules() {
     Integer = goog.module.get('java.lang.Integer$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     TernaryExpression,
     'com.google.j2cl.transpiler.readable.ternaryexpression.TernaryExpression');
-
-
 
 exports = TernaryExpression;
 //# sourceMappingURL=TernaryExpression.js.map

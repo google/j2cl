@@ -1,11 +1,9 @@
 goog.module('com.google.j2cl.transpiler.readable.rawtype.RawType$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
-
 
 class RawType extends j_l_Object {
   /**
@@ -16,7 +14,6 @@ class RawType extends j_l_Object {
     /** @public {(Comparable|boolean|number|string)} */
     this.f_c__com_google_j2cl_transpiler_readable_rawtype_RawType;
   }
-
   /**
    * @return {!RawType}
    * @public
@@ -27,14 +24,12 @@ class RawType extends j_l_Object {
     $instance.$ctor__com_google_j2cl_transpiler_readable_rawtype_RawType__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_rawtype_RawType__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @public
    */
@@ -43,7 +38,6 @@ class RawType extends j_l_Object {
     RawType.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -52,7 +46,6 @@ class RawType extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof RawType;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -61,17 +54,13 @@ class RawType extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, RawType);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     RawType, 'com.google.j2cl.transpiler.readable.rawtype.RawType');
-
-
 
 exports = RawType;
 //# sourceMappingURL=RawType.js.map

@@ -1,8 +1,6 @@
 goog.module('com.google.j2cl.transpiler.readable.markimplementornativetypes.RegularInterface$impl');
 
-
 const $Util = goog.require('nativebootstrap.Util$impl');
-
 
 /**
  * @interface
@@ -15,7 +13,6 @@ class RegularInterface {
     RegularInterface.$clinit = (() => {});
     RegularInterface.$loadModules();
   }
-
   /**
    * @param {Function} classConstructor
    * @public
@@ -28,7 +25,6 @@ class RegularInterface {
         .$implements__com_google_j2cl_transpiler_readable_markimplementornativetypes_RegularInterface =
         true;
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -39,7 +35,6 @@ class RegularInterface {
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_markimplementornativetypes_RegularInterface;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -50,20 +45,16 @@ class RegularInterface {
         !!classConstructor.prototype
               .$implements__com_google_j2cl_transpiler_readable_markimplementornativetypes_RegularInterface;
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadataForInterface(
     RegularInterface,
     'com.google.j2cl.transpiler.readable.markimplementornativetypes.RegularInterface');
 
-
 RegularInterface.$markImplementor(/** @type {Function} */ (RegularInterface));
-
 
 exports = RegularInterface;
 //# sourceMappingURL=RegularInterface.js.map

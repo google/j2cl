@@ -1,10 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.rawtype.RawType.I$impl');
 
-
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let RawType = goog.forwardDeclare('com.google.j2cl.transpiler.readable.rawtype.RawType$impl');
-
 
 /**
  * @interface
@@ -17,7 +15,6 @@ class I {
    * @public
    */
   m_f__com_google_j2cl_transpiler_readable_rawtype_RawType(t) {}
-
   /**
    * @template T
    * @param {!I<T>} $thisArg
@@ -28,7 +25,6 @@ class I {
       $thisArg, t) {
     I.$clinit();
   }
-
   /**
    * @public
    */
@@ -36,7 +32,6 @@ class I {
     I.$clinit = (() => {});
     I.$loadModules();
   }
-
   /**
    * @param {Function} classConstructor
    * @public
@@ -49,7 +44,6 @@ class I {
         .$implements__com_google_j2cl_transpiler_readable_rawtype_RawType_I =
         true;
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -60,7 +54,6 @@ class I {
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_rawtype_RawType_I;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -71,19 +64,15 @@ class I {
         !!classConstructor.prototype
               .$implements__com_google_j2cl_transpiler_readable_rawtype_RawType_I;
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadataForInterface(
     I, 'com.google.j2cl.transpiler.readable.rawtype.RawType$I');
 
-
 I.$markImplementor(/** @type {Function} */ (I));
-
 
 exports = I;
 //# sourceMappingURL=RawType$I.js.map

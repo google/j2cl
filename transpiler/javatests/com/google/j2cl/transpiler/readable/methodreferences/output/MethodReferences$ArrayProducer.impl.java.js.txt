@@ -1,10 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.ArrayProducer$impl');
 
-
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.ArrayProducer.$LambdaAdaptor$impl');
-
 
 /**
  * @interface
@@ -18,7 +16,6 @@ class ArrayProducer {
    * @public
    */
   m_produce__int(size) {}
-
   /**
    * @template T
    * @param {?function(number):Array<T>} fn
@@ -29,7 +26,6 @@ class ArrayProducer {
     ArrayProducer.$clinit();
     return /**@type {!$LambdaAdaptor<T>} */ (new $LambdaAdaptor(fn));
   }
-
   /**
    * @public
    */
@@ -37,7 +33,6 @@ class ArrayProducer {
     ArrayProducer.$clinit = (() => {});
     ArrayProducer.$loadModules();
   }
-
   /**
    * @param {Function} classConstructor
    * @public
@@ -50,7 +45,6 @@ class ArrayProducer {
         .$implements__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_ArrayProducer =
         true;
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -61,7 +55,6 @@ class ArrayProducer {
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_ArrayProducer;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -72,7 +65,6 @@ class ArrayProducer {
         !!classConstructor.prototype
               .$implements__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_ArrayProducer;
   }
-
   /**
    * @public
    */
@@ -80,15 +72,12 @@ class ArrayProducer {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.ArrayProducer.$LambdaAdaptor$impl');
   }
-};
-
+}
 $Util.$setClassMetadataForInterface(
     ArrayProducer,
     'com.google.j2cl.transpiler.readable.methodreferences.MethodReferences$ArrayProducer');
 
-
 ArrayProducer.$markImplementor(/** @type {Function} */ (ArrayProducer));
-
 
 exports = ArrayProducer;
 //# sourceMappingURL=MethodReferences$ArrayProducer.js.map

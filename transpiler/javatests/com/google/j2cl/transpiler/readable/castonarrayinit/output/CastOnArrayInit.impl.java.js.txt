@@ -1,12 +1,10 @@
 goog.module('com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Foo = goog.forwardDeclare('com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.Foo$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-
 
 class CastOnArrayInit extends j_l_Object {
   /**
@@ -15,7 +13,6 @@ class CastOnArrayInit extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @return {!CastOnArrayInit}
    * @public
@@ -27,14 +24,12 @@ class CastOnArrayInit extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_castonarrayinit_CastOnArrayInit__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_castonarrayinit_CastOnArrayInit__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @template E
    * @param {Array<Foo<E>>} args
@@ -44,7 +39,6 @@ class CastOnArrayInit extends j_l_Object {
       args) {
     CastOnArrayInit.$clinit();
   }
-
   /**
    * @template E
    * @return {void}
@@ -58,7 +52,6 @@ class CastOnArrayInit extends j_l_Object {
         .m_fun__arrayOf_com_google_j2cl_transpiler_readable_castonarrayinit_CastOnArrayInit_Foo(
             /**@type {!Array<Foo<E>>} */ ($Arrays.$init([f1, f2], Foo)));
   }
-
   /**
    * @public
    */
@@ -67,7 +60,6 @@ class CastOnArrayInit extends j_l_Object {
     CastOnArrayInit.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -76,7 +68,6 @@ class CastOnArrayInit extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof CastOnArrayInit;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -85,7 +76,6 @@ class CastOnArrayInit extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, CastOnArrayInit);
   }
-
   /**
    * @public
    */
@@ -94,13 +84,10 @@ class CastOnArrayInit extends j_l_Object {
         'com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.Foo$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     CastOnArrayInit,
     'com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit');
-
-
 
 exports = CastOnArrayInit;
 //# sourceMappingURL=CastOnArrayInit.js.map

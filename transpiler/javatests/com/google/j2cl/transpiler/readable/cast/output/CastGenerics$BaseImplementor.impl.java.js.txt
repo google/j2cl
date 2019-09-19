@@ -1,11 +1,9 @@
 goog.module('com.google.j2cl.transpiler.readable.cast.CastGenerics.BaseImplementor$impl');
 
-
 const A = goog.require('com.google.j2cl.transpiler.readable.cast.CastGenerics.A$impl');
 const B = goog.require('com.google.j2cl.transpiler.readable.cast.CastGenerics.B$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
-
 
 /**
  * @abstract
@@ -19,14 +17,12 @@ class BaseImplementor extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_cast_CastGenerics_BaseImplementor__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @public
    */
@@ -35,7 +31,6 @@ class BaseImplementor extends j_l_Object {
     BaseImplementor.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -44,7 +39,6 @@ class BaseImplementor extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof BaseImplementor;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -53,21 +47,17 @@ class BaseImplementor extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, BaseImplementor);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     BaseImplementor,
     'com.google.j2cl.transpiler.readable.cast.CastGenerics$BaseImplementor');
 
-
 A.$markImplementor(BaseImplementor);
 B.$markImplementor(BaseImplementor);
-
 
 exports = BaseImplementor;
 //# sourceMappingURL=CastGenerics$BaseImplementor.js.map

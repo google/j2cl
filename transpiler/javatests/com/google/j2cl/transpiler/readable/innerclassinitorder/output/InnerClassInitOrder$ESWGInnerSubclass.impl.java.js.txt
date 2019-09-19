@@ -1,11 +1,9 @@
 goog.module('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass$impl');
 
-
 const ESWGInner = goog.require('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let ESWGOuter = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGOuter$impl');
-
 
 /**
  * @extends {ESWGInner<?string>}
@@ -17,7 +15,6 @@ class ESWGInnerSubclass extends ESWGInner {
   constructor() {
     super();
   }
-
   /**
    * Factory method corresponding to constructor 'ESWGInnerSubclass(ESWGOuter)'.
    * @param {ESWGOuter<?string>} outer
@@ -33,7 +30,6 @@ class ESWGInnerSubclass extends ESWGInner {
             outer);
     return $instance;
   }
-
   /**
    * Initialization from constructor 'ESWGInnerSubclass(ESWGOuter)'.
    * @param {ESWGOuter<?string>} outer
@@ -44,7 +40,6 @@ class ESWGInnerSubclass extends ESWGInner {
     this.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESWGOuter(
         outer);
   }
-
   /**
    * Factory method corresponding to constructor 'ESWGInnerSubclass(int,
    * ESWGOuter)'.
@@ -62,7 +57,6 @@ class ESWGInnerSubclass extends ESWGInner {
             value, outer);
     return $instance;
   }
-
   /**
    * Initialization from constructor 'ESWGInnerSubclass(int, ESWGOuter)'.
    * @param {number} value
@@ -74,7 +68,6 @@ class ESWGInnerSubclass extends ESWGInner {
     this.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESWGOuter__int(
         outer, value);
   }
-
   /**
    * @public
    */
@@ -83,7 +76,6 @@ class ESWGInnerSubclass extends ESWGInner {
     ESWGInnerSubclass.$loadModules();
     ESWGInner.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -92,7 +84,6 @@ class ESWGInnerSubclass extends ESWGInner {
   static $isInstance(instance) {
     return instance instanceof ESWGInnerSubclass;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -101,18 +92,14 @@ class ESWGInnerSubclass extends ESWGInner {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, ESWGInnerSubclass);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     ESWGInnerSubclass,
     'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$ESWGInnerSubclass');
-
-
 
 exports = ESWGInnerSubclass;
 //# sourceMappingURL=InnerClassInitOrder$ESWGInnerSubclass.js.map

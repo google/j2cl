@@ -1,12 +1,10 @@
 goog.module('com.google.j2cl.transpiler.readable.equality.Equality$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
-
 
 class Equality extends j_l_Object {
   /**
@@ -15,7 +13,6 @@ class Equality extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @return {!Equality}
    * @public
@@ -26,14 +23,12 @@ class Equality extends j_l_Object {
     $instance.$ctor__com_google_j2cl_transpiler_readable_equality_Equality__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_equality_Equality__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @public
    */
@@ -51,7 +46,6 @@ class Equality extends j_l_Object {
       $Asserts.$assert(!$Equality.$same(j_l_Object.$create__(), null));
     }
   }
-
   /**
    * @public
    */
@@ -60,7 +54,6 @@ class Equality extends j_l_Object {
     Equality.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -69,7 +62,6 @@ class Equality extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof Equality;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -78,7 +70,6 @@ class Equality extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Equality);
   }
-
   /**
    * @public
    */
@@ -86,12 +77,9 @@ class Equality extends j_l_Object {
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     Equality, 'com.google.j2cl.transpiler.readable.equality.Equality');
-
-
 
 exports = Equality;
 //# sourceMappingURL=Equality.js.map

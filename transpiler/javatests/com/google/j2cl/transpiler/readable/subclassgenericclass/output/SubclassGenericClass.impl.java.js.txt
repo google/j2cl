@@ -1,9 +1,7 @@
 goog.module('com.google.j2cl.transpiler.readable.subclassgenericclass.SubclassGenericClass$impl');
 
-
 const GenericClass = goog.require('com.google.j2cl.transpiler.readable.subclassgenericclass.GenericClass$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
-
 
 /**
  * @extends {GenericClass<SubclassGenericClass>}
@@ -15,7 +13,6 @@ class SubclassGenericClass extends GenericClass {
   constructor() {
     super();
   }
-
   /**
    * @return {!SubclassGenericClass}
    * @public
@@ -27,14 +24,12 @@ class SubclassGenericClass extends GenericClass {
         .$ctor__com_google_j2cl_transpiler_readable_subclassgenericclass_SubclassGenericClass__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_subclassgenericclass_SubclassGenericClass__() {
     this.$ctor__com_google_j2cl_transpiler_readable_subclassgenericclass_GenericClass__();
   }
-
   /**
    * @public
    */
@@ -43,7 +38,6 @@ class SubclassGenericClass extends GenericClass {
     SubclassGenericClass.$loadModules();
     GenericClass.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -52,7 +46,6 @@ class SubclassGenericClass extends GenericClass {
   static $isInstance(instance) {
     return instance instanceof SubclassGenericClass;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -61,18 +54,14 @@ class SubclassGenericClass extends GenericClass {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, SubclassGenericClass);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     SubclassGenericClass,
     'com.google.j2cl.transpiler.readable.subclassgenericclass.SubclassGenericClass');
-
-
 
 exports = SubclassGenericClass;
 //# sourceMappingURL=SubclassGenericClass.js.map

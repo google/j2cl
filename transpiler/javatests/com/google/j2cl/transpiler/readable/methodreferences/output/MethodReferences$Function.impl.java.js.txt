@@ -1,10 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.Function$impl');
 
-
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.Function.$LambdaAdaptor$impl');
-
 
 /**
  * @interface
@@ -18,7 +16,6 @@ class MethodReferences_Function {
    * @public
    */
   m_apply__java_lang_Object(t) {}
-
   /**
    * @template T, U
    * @param {?function(T):U} fn
@@ -29,7 +26,6 @@ class MethodReferences_Function {
     MethodReferences_Function.$clinit();
     return /**@type {!$LambdaAdaptor<T, U>} */ (new $LambdaAdaptor(fn));
   }
-
   /**
    * @public
    */
@@ -37,7 +33,6 @@ class MethodReferences_Function {
     MethodReferences_Function.$clinit = (() => {});
     MethodReferences_Function.$loadModules();
   }
-
   /**
    * @param {Function} classConstructor
    * @public
@@ -50,7 +45,6 @@ class MethodReferences_Function {
         .$implements__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Function =
         true;
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -61,7 +55,6 @@ class MethodReferences_Function {
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Function;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -72,7 +65,6 @@ class MethodReferences_Function {
         !!classConstructor.prototype
               .$implements__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Function;
   }
-
   /**
    * @public
    */
@@ -80,16 +72,13 @@ class MethodReferences_Function {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.Function.$LambdaAdaptor$impl');
   }
-};
-
+}
 $Util.$setClassMetadataForInterface(
     MethodReferences_Function,
     'com.google.j2cl.transpiler.readable.methodreferences.MethodReferences$Function');
 
-
 MethodReferences_Function.$markImplementor(
     /** @type {Function} */ (MethodReferences_Function));
-
 
 exports = MethodReferences_Function;
 //# sourceMappingURL=MethodReferences$Function.js.map

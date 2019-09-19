@@ -1,11 +1,9 @@
 goog.module('com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.A$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let NestedGenericClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass$impl');
-
 
 /**
  * @template T, T_1
@@ -19,7 +17,6 @@ class A extends j_l_Object {
     /** @public {NestedGenericClass<T_1>} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass_A;
   }
-
   /**
    * @template T, T_1
    * @param {NestedGenericClass<T_1>} $outer_this
@@ -35,7 +32,6 @@ class A extends j_l_Object {
             $outer_this);
     return $instance;
   }
-
   /**
    * @param {NestedGenericClass<T_1>} $outer_this
    * @public
@@ -46,7 +42,6 @@ class A extends j_l_Object {
         $outer_this;
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @public
    */
@@ -55,7 +50,6 @@ class A extends j_l_Object {
     A.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -64,7 +58,6 @@ class A extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof A;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -73,18 +66,14 @@ class A extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, A);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     A,
     'com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass$A');
-
-
 
 exports = A;
 //# sourceMappingURL=NestedGenericClass$A.js.map

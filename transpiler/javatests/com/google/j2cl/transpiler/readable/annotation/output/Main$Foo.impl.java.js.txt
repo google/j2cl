@@ -1,9 +1,7 @@
 goog.module('com.google.j2cl.transpiler.readable.annotation.Main.Foo$impl');
 
-
 const Annotation = goog.require('java.lang.annotation.Annotation$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
-
 
 /**
  * @interface
@@ -16,7 +14,6 @@ class Foo {
    * @public
    */
   m_bar__() {}
-
   /**
    * @public
    */
@@ -24,7 +21,6 @@ class Foo {
     Foo.$clinit = (() => {});
     Foo.$loadModules();
   }
-
   /**
    * @param {Function} classConstructor
    * @public
@@ -38,7 +34,6 @@ class Foo {
         .$implements__com_google_j2cl_transpiler_readable_annotation_Main_Foo =
         true;
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -49,7 +44,6 @@ class Foo {
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_annotation_Main_Foo;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -60,23 +54,18 @@ class Foo {
         !!classConstructor.prototype
               .$implements__com_google_j2cl_transpiler_readable_annotation_Main_Foo;
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadataForInterface(
     Foo, 'com.google.j2cl.transpiler.readable.annotation.Main$Foo');
 
+Foo.$markImplementor(/** @type {Function} */ (Foo));
 
 /** @public {number} @const */
 Foo.f_CONSTANT__com_google_j2cl_transpiler_readable_annotation_Main_Foo = 123;
-
-
-Foo.$markImplementor(/** @type {Function} */ (Foo));
-
 
 exports = Foo;
 //# sourceMappingURL=Main$Foo.js.map

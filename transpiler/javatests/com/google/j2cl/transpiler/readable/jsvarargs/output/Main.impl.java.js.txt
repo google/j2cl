@@ -1,6 +1,5 @@
 goog.module('com.google.j2cl.transpiler.readable.jsvarargs.Main$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
@@ -12,7 +11,6 @@ let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
-
 class Main extends j_l_Object {
   /**
    * @protected
@@ -22,7 +20,6 @@ class Main extends j_l_Object {
     /** @public {number} */
     this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main = 0;
   }
-
   /**
    * @param {number} f
    * @return {!Main}
@@ -34,7 +31,6 @@ class Main extends j_l_Object {
     $instance.$ctor__com_google_j2cl_transpiler_readable_jsvarargs_Main__int(f);
     return $instance;
   }
-
   /**
    * @param {number} f
    * @public
@@ -43,7 +39,6 @@ class Main extends j_l_Object {
     this.$ctor__java_lang_Object__();
     this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main = f;
   }
-
   /**
    * @param {number} multiplier
    * @param {...number} numbers
@@ -55,7 +50,6 @@ class Main extends j_l_Object {
     $Arrays.$stampType(numbers, $int, 1);
     return numbers.length + numbers[0] + multiplier;
   }
-
   /**
    * @param {...number} numbers
    * @return {number}
@@ -66,7 +60,6 @@ class Main extends j_l_Object {
     $Arrays.$stampType(numbers, $int, 1);
     return numbers.length + numbers[0];
   }
-
   /**
    * @param {number} m
    * @param {...number} numbers
@@ -78,7 +71,6 @@ class Main extends j_l_Object {
     return this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main +
         m + numbers[1];
   }
-
   /**
    * @param {...number} numbers
    * @return {number}
@@ -89,7 +81,6 @@ class Main extends j_l_Object {
     return this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main +
         numbers[1];
   }
-
   /**
    * @template T
    * @param {...T} elements
@@ -100,7 +91,6 @@ class Main extends j_l_Object {
     Main.$clinit();
     return elements[0];
   }
-
   /**
    * @param {...List<Main>} elements
    * @return {Main}
@@ -111,7 +101,6 @@ class Main extends j_l_Object {
     $Arrays.$stampType(elements, List, 1);
     return /**@type {Main} */ ($Casts.$to(elements[0].getAtIndex(0), Main));
   }
-
   /**
    * @template T
    * @param {...List<T>} elements
@@ -123,7 +112,6 @@ class Main extends j_l_Object {
     $Arrays.$stampType(elements, List, 1);
     return elements[0].getAtIndex(0);
   }
-
   /**
    * @public
    */
@@ -141,7 +129,6 @@ class Main extends j_l_Object {
     Main.f1(1, ...InternalPreconditions.m_checkNotNull__java_lang_Object(ints));
     Main.f1(1, ...InternalPreconditions.m_checkNotNull__java_lang_Object(null));
   }
-
   /**
    * @public
    */
@@ -170,7 +157,6 @@ class Main extends j_l_Object {
     Main.generics(
         ...InternalPreconditions.m_checkNotNull__java_lang_Object(integers));
   }
-
   /**
    * @public
    */
@@ -183,7 +169,6 @@ class Main extends j_l_Object {
     let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));
     m.f3(1, ...InternalPreconditions.m_checkNotNull__java_lang_Object(ints));
   }
-
   /**
    * @public
    */
@@ -196,7 +181,6 @@ class Main extends j_l_Object {
     let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));
     m.f4(...InternalPreconditions.m_checkNotNull__java_lang_Object(ints));
   }
-
   /**
    * @public
    */
@@ -211,7 +195,6 @@ class Main extends j_l_Object {
     let os = [o1, o2];
     a(0, ...InternalPreconditions.m_checkNotNull__java_lang_Object(os));
   }
-
   /**
    * @public
    */
@@ -220,7 +203,6 @@ class Main extends j_l_Object {
     Main.$create__int(1).f3(
         1, ...InternalPreconditions.m_checkNotNull__java_lang_Object(ints));
   }
-
   /**
    * @public
    */
@@ -228,7 +210,6 @@ class Main extends j_l_Object {
     let ints = null;
     Main.f2(...InternalPreconditions.m_checkNotNull__java_lang_Object(ints));
   }
-
   /**
    * @template U
    * @return {void}
@@ -239,7 +220,6 @@ class Main extends j_l_Object {
       return /**@type {*} */ (param);
     });
   }
-
   /**
    * @public
    */
@@ -248,7 +228,6 @@ class Main extends j_l_Object {
     Main.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -257,7 +236,6 @@ class Main extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof Main;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -266,7 +244,6 @@ class Main extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Main);
   }
-
   /**
    * @public
    */
@@ -281,12 +258,9 @@ class Main extends j_l_Object {
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     Main, 'com.google.j2cl.transpiler.readable.jsvarargs.Main');
-
-
 
 exports = Main;
 //# sourceMappingURL=Main.js.map

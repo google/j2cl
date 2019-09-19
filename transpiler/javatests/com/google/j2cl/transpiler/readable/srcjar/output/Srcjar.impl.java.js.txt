@@ -1,11 +1,9 @@
 goog.module('com.google.j2cl.transpiler.readable.srcjar.Srcjar$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Foo = goog.forwardDeclare('com.google.j2cl.transpiler.readable.srcjar.Foo$impl');
-
 
 class Srcjar extends j_l_Object {
   /**
@@ -14,7 +12,6 @@ class Srcjar extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @return {!Srcjar}
    * @public
@@ -25,14 +22,12 @@ class Srcjar extends j_l_Object {
     $instance.$ctor__com_google_j2cl_transpiler_readable_srcjar_Srcjar__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_srcjar_Srcjar__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @public
    */
@@ -40,7 +35,6 @@ class Srcjar extends j_l_Object {
     Srcjar.$clinit();
     let foo = Foo.$create__();
   }
-
   /**
    * @public
    */
@@ -49,7 +43,6 @@ class Srcjar extends j_l_Object {
     Srcjar.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -58,7 +51,6 @@ class Srcjar extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof Srcjar;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -67,7 +59,6 @@ class Srcjar extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Srcjar);
   }
-
   /**
    * @public
    */
@@ -75,12 +66,9 @@ class Srcjar extends j_l_Object {
     Foo =
         goog.module.get('com.google.j2cl.transpiler.readable.srcjar.Foo$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     Srcjar, 'com.google.j2cl.transpiler.readable.srcjar.Srcjar');
-
-
 
 exports = Srcjar;
 //# sourceMappingURL=Srcjar.js.map

@@ -1,11 +1,9 @@
 goog.module('com.google.j2cl.transpiler.readable.nobridgemethods.TreeMap$impl');
 
-
 const Map = goog.require('com.google.j2cl.transpiler.readable.nobridgemethods.Map$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let InnerEntry = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nobridgemethods.TreeMap.InnerEntry$impl');
-
 
 /**
  * @template K
@@ -18,7 +16,6 @@ class TreeMap extends Map {
   constructor() {
     super();
   }
-
   /**
    * @template K
    * @return {!TreeMap<K>}
@@ -31,14 +28,12 @@ class TreeMap extends Map {
         .$ctor__com_google_j2cl_transpiler_readable_nobridgemethods_TreeMap__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_nobridgemethods_TreeMap__() {
     this.$ctor__com_google_j2cl_transpiler_readable_nobridgemethods_Map__();
   }
-
   /**
    * @override
    * @param {K} key
@@ -48,7 +43,6 @@ class TreeMap extends Map {
   m_getCeilingEntry__java_lang_Object(key) {
     return /**@type {!InnerEntry<K>} */ (InnerEntry.$create__());
   }
-
   /**
    * @public
    */
@@ -57,7 +51,6 @@ class TreeMap extends Map {
     TreeMap.$loadModules();
     Map.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -66,7 +59,6 @@ class TreeMap extends Map {
   static $isInstance(instance) {
     return instance instanceof TreeMap;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -75,7 +67,6 @@ class TreeMap extends Map {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, TreeMap);
   }
-
   /**
    * @public
    */
@@ -83,12 +74,9 @@ class TreeMap extends Map {
     InnerEntry = goog.module.get(
         'com.google.j2cl.transpiler.readable.nobridgemethods.TreeMap.InnerEntry$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     TreeMap, 'com.google.j2cl.transpiler.readable.nobridgemethods.TreeMap');
-
-
 
 exports = TreeMap;
 //# sourceMappingURL=TreeMap.js.map

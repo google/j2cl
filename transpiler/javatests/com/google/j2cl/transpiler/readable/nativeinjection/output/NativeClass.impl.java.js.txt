@@ -1,9 +1,7 @@
 goog.module('com.google.j2cl.transpiler.readable.nativeinjection.NativeClass$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
-
 
 class NativeClass extends j_l_Object {
   /**
@@ -12,7 +10,6 @@ class NativeClass extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @return {!NativeClass}
    * @public
@@ -24,26 +21,22 @@ class NativeClass extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_nativeinjection_NativeClass__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_nativeinjection_NativeClass__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @return {?string}
    * @public
    */
   // native m_nativeInstanceMethod__()
-
   /**
    * @return {NativeClass}
    * @public
    */
   // native static m_nativeStaticMethod__()
-
   /**
    * @public
    */
@@ -52,7 +45,6 @@ class NativeClass extends j_l_Object {
     NativeClass.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -61,7 +53,6 @@ class NativeClass extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof NativeClass;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -70,18 +61,14 @@ class NativeClass extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, NativeClass);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     NativeClass,
     'com.google.j2cl.transpiler.readable.nativeinjection.NativeClass');
-
-
 
 /* NATIVE.JS EPILOG */
 

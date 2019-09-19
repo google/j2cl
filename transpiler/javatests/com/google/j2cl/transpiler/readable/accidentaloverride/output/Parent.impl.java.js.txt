@@ -1,11 +1,9 @@
 goog.module('com.google.j2cl.transpiler.readable.accidentaloverride.Parent$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Error = goog.forwardDeclare('java.lang.Error$impl');
-
 
 /**
  * @template T
@@ -17,7 +15,6 @@ class Parent extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @template T
    * @return {!Parent<T>}
@@ -30,20 +27,17 @@ class Parent extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_accidentaloverride_Parent__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_accidentaloverride_Parent__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @param {T} e
    * @public
    */
   m_foo__java_lang_Error(e) {}
-
   /**
    * @public
    */
@@ -52,7 +46,6 @@ class Parent extends j_l_Object {
     Parent.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -61,7 +54,6 @@ class Parent extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof Parent;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -70,17 +62,13 @@ class Parent extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Parent);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     Parent, 'com.google.j2cl.transpiler.readable.accidentaloverride.Parent');
-
-
 
 exports = Parent;
 //# sourceMappingURL=Parent.js.map

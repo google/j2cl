@@ -1,9 +1,7 @@
 goog.module('com.google.j2cl.transpiler.readable.boundedtypesupercall.Main.Foo$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
-
 
 /**
  * @abstract
@@ -16,7 +14,6 @@ class Foo extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @param {T} foo
    * @public
@@ -25,13 +22,11 @@ class Foo extends j_l_Object {
       foo) {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @abstract
    * @public
    */
   m_foo__() {}
-
   /**
    * @public
    */
@@ -40,7 +35,6 @@ class Foo extends j_l_Object {
     Foo.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -49,7 +43,6 @@ class Foo extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof Foo;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -58,17 +51,13 @@ class Foo extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Foo);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     Foo, 'com.google.j2cl.transpiler.readable.boundedtypesupercall.Main$Foo');
-
-
 
 exports = Foo;
 //# sourceMappingURL=Main$Foo.js.map

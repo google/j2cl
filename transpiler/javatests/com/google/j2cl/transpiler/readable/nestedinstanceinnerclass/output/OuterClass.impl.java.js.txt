@@ -1,12 +1,10 @@
 goog.module('com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let InnerClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.InnerClass$impl');
 let InnerInnerClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass$impl');
-
 
 class OuterClass extends j_l_Object {
   /**
@@ -15,7 +13,6 @@ class OuterClass extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @return {!OuterClass}
    * @public
@@ -27,14 +24,12 @@ class OuterClass extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @public
    */
@@ -45,7 +40,6 @@ class OuterClass extends j_l_Object {
                 .$create__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass(
                     OuterClass.$create__()));
   }
-
   /**
    * @public
    */
@@ -54,7 +48,6 @@ class OuterClass extends j_l_Object {
     OuterClass.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -63,7 +56,6 @@ class OuterClass extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof OuterClass;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -72,7 +64,6 @@ class OuterClass extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, OuterClass);
   }
-
   /**
    * @public
    */
@@ -82,13 +73,10 @@ class OuterClass extends j_l_Object {
     InnerInnerClass = goog.module.get(
         'com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     OuterClass,
     'com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass');
-
-
 
 exports = OuterClass;
 //# sourceMappingURL=OuterClass.js.map

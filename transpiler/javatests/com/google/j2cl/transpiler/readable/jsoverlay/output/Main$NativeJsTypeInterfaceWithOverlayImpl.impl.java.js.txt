@@ -1,12 +1,10 @@
 goog.module('com.google.j2cl.transpiler.readable.jsoverlay.Main.NativeJsTypeInterfaceWithOverlayImpl$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 const NativeJsTypeInterfaceWithOverlay = goog.require('test.foo.NativeJsTypeInterfaceWithOverlay');
 
 let $Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay$impl');
-
 
 /**
  * @implements {NativeJsTypeInterfaceWithOverlay}
@@ -18,7 +16,6 @@ class NativeJsTypeInterfaceWithOverlayImpl extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @return {!NativeJsTypeInterfaceWithOverlayImpl}
    * @public
@@ -30,14 +27,12 @@ class NativeJsTypeInterfaceWithOverlayImpl extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeInterfaceWithOverlayImpl__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeInterfaceWithOverlayImpl__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @override
    * @return {number}
@@ -46,7 +41,6 @@ class NativeJsTypeInterfaceWithOverlayImpl extends j_l_Object {
   m() {
     return 0;
   }
-
   /**
    * @public
    */
@@ -55,7 +49,6 @@ class NativeJsTypeInterfaceWithOverlayImpl extends j_l_Object {
     NativeJsTypeInterfaceWithOverlayImpl.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -64,7 +57,6 @@ class NativeJsTypeInterfaceWithOverlayImpl extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof NativeJsTypeInterfaceWithOverlayImpl;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -74,18 +66,14 @@ class NativeJsTypeInterfaceWithOverlayImpl extends j_l_Object {
     return $Util.$canCastClass(
         classConstructor, NativeJsTypeInterfaceWithOverlayImpl);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     NativeJsTypeInterfaceWithOverlayImpl,
     'com.google.j2cl.transpiler.readable.jsoverlay.Main$NativeJsTypeInterfaceWithOverlayImpl');
-
-
 
 exports = NativeJsTypeInterfaceWithOverlayImpl;
 //# sourceMappingURL=Main$NativeJsTypeInterfaceWithOverlayImpl.js.map

@@ -1,6 +1,5 @@
 goog.module('com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
@@ -10,7 +9,6 @@ let NativeJsType = goog.forwardDeclare('test.foo.NativeJsType');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
-
 class CastToNativeType extends j_l_Object {
   /**
    * @protected
@@ -18,7 +16,6 @@ class CastToNativeType extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @return {!CastToNativeType}
    * @public
@@ -30,14 +27,12 @@ class CastToNativeType extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_jstypecastsinstanceof_CastToNativeType__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_jstypecastsinstanceof_CastToNativeType__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @public
    */
@@ -55,7 +50,6 @@ class CastToNativeType extends j_l_Object {
     let h = /**@type {Array<Object<?string, *>>} */ ($Arrays.$castToNative(a));
     c = $Arrays.$instanceIsOfNative(a);
   }
-
   /**
    * @public
    */
@@ -64,7 +58,6 @@ class CastToNativeType extends j_l_Object {
     CastToNativeType.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -73,7 +66,6 @@ class CastToNativeType extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof CastToNativeType;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -82,7 +74,6 @@ class CastToNativeType extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, CastToNativeType);
   }
-
   /**
    * @public
    */
@@ -95,13 +86,10 @@ class CastToNativeType extends j_l_Object {
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     CastToNativeType,
     'com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType');
-
-
 
 exports = CastToNativeType;
 //# sourceMappingURL=CastToNativeType.js.map

@@ -1,11 +1,9 @@
 goog.module('com.google.j2cl.transpiler.readable.gwtincompatible.Implementor.SomeEnum.$1$impl');
 
-
 const SomeEnum = goog.require('com.google.j2cl.transpiler.readable.gwtincompatible.Implementor.SomeEnum$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-
 
 class $1 extends SomeEnum {
   /**
@@ -14,7 +12,6 @@ class $1 extends SomeEnum {
   constructor() {
     super();
   }
-
   /**
    * @param {?string} $name
    * @param {number} $ordinal
@@ -29,7 +26,6 @@ class $1 extends SomeEnum {
             $name, $ordinal);
     return $instance;
   }
-
   /**
    * @param {?string} $name
    * @param {number} $ordinal
@@ -40,13 +36,11 @@ class $1 extends SomeEnum {
     this.$ctor__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum__java_lang_String__int(
         $name, $ordinal);
   }
-
   /**
    * @override
    * @public
    */
   m_method___$pp_com_google_j2cl_transpiler_readable_gwtincompatible() {}
-
   /**
    * Bridge method.
    * @override
@@ -57,7 +51,6 @@ class $1 extends SomeEnum {
   m_compareTo__java_lang_Object(arg0) {
     return super.compareTo(/**@type {SomeEnum} */ ($Casts.$to(arg0, SomeEnum)));
   }
-
   /**
    * @public
    */
@@ -66,7 +59,6 @@ class $1 extends SomeEnum {
     $1.$loadModules();
     SomeEnum.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -75,7 +67,6 @@ class $1 extends SomeEnum {
   static $isInstance(instance) {
     return instance instanceof $1;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -84,20 +75,16 @@ class $1 extends SomeEnum {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, $1);
   }
-
   /**
    * @public
    */
   static $loadModules() {
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     $1,
     'com.google.j2cl.transpiler.readable.gwtincompatible.Implementor$SomeEnum$1');
-
-
 
 exports = $1;
 //# sourceMappingURL=Implementor$SomeEnum$1.js.map

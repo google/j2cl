@@ -1,11 +1,9 @@
 goog.module('com.google.j2cl.transpiler.readable.nobridgemethods.Map$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Entry = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nobridgemethods.Entry$impl');
-
 
 /**
  * @abstract
@@ -18,14 +16,12 @@ class Map extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_nobridgemethods_Map__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @abstract
    * @param {K} key
@@ -33,7 +29,6 @@ class Map extends j_l_Object {
    * @public
    */
   m_getCeilingEntry__java_lang_Object(key) {}
-
   /**
    * @public
    */
@@ -42,7 +37,6 @@ class Map extends j_l_Object {
     Map.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -51,7 +45,6 @@ class Map extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof Map;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -60,17 +53,13 @@ class Map extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Map);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     Map, 'com.google.j2cl.transpiler.readable.nobridgemethods.Map');
-
-
 
 exports = Map;
 //# sourceMappingURL=Map.js.map

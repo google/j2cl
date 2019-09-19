@@ -1,10 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.bridgemethods.SomeOtherFooInterface$impl');
 
-
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.bridgemethods.SomeOtherFooInterface.$LambdaAdaptor$impl');
-
 
 /**
  * @interface
@@ -18,7 +16,6 @@ class SomeOtherFooInterface {
    * @public
    */
   m_foo__java_lang_Object__java_lang_Double(t, s) {}
-
   /**
    * @template T
    * @param {?function(T, ?number):void} fn
@@ -29,7 +26,6 @@ class SomeOtherFooInterface {
     SomeOtherFooInterface.$clinit();
     return /**@type {!$LambdaAdaptor<T>} */ (new $LambdaAdaptor(fn));
   }
-
   /**
    * @public
    */
@@ -37,7 +33,6 @@ class SomeOtherFooInterface {
     SomeOtherFooInterface.$clinit = (() => {});
     SomeOtherFooInterface.$loadModules();
   }
-
   /**
    * @param {Function} classConstructor
    * @public
@@ -50,7 +45,6 @@ class SomeOtherFooInterface {
         .$implements__com_google_j2cl_transpiler_readable_bridgemethods_SomeOtherFooInterface =
         true;
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -61,7 +55,6 @@ class SomeOtherFooInterface {
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_bridgemethods_SomeOtherFooInterface;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -72,7 +65,6 @@ class SomeOtherFooInterface {
         !!classConstructor.prototype
               .$implements__com_google_j2cl_transpiler_readable_bridgemethods_SomeOtherFooInterface;
   }
-
   /**
    * @public
    */
@@ -80,16 +72,13 @@ class SomeOtherFooInterface {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.bridgemethods.SomeOtherFooInterface.$LambdaAdaptor$impl');
   }
-};
-
+}
 $Util.$setClassMetadataForInterface(
     SomeOtherFooInterface,
     'com.google.j2cl.transpiler.readable.bridgemethods.SomeOtherFooInterface');
 
-
 SomeOtherFooInterface.$markImplementor(
     /** @type {Function} */ (SomeOtherFooInterface));
-
 
 exports = SomeOtherFooInterface;
 //# sourceMappingURL=SomeOtherFooInterface.js.map

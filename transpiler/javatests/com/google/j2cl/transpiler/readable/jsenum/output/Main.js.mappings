@@ -17,9 +17,9 @@
       case TWO:
 ...      default:
     }] => [switch (InternalPreconditions.m_checkNotNull__java_lang_Object(comparableJsEnum)) {
-      case ComparableJsEnum.TWO:
-...      default:
-    }] "com.google.j2cl.transpiler.readable.jsenum.Main.testJsEnumSwitch"
+   case ComparableJsEnum.TWO:
+...   default:
+  }] "com.google.j2cl.transpiler.readable.jsenum.Main.testJsEnumSwitch"
 [break;] => [break;] "com.google.j2cl.transpiler.readable.jsenum.Main.testJsEnumSwitch"
 [Comparable comparable = comparableJsEnum;] => [let comparable = $Enums.boxComparable(comparableJsEnum, $Overlay);] "com.google.j2cl.transpiler.readable.jsenum.Main.testJsEnumSwitch"
 [comparable] => [comparable] "comparable"
@@ -30,9 +30,9 @@
       case TWENTY:
 ...      default:
     }] => [switch (InternalPreconditions.m_checkNotNull__java_lang_Object(intJsEnum)) {
-      case IntJsEnum.TWENTY:
-...      default:
-    }] "com.google.j2cl.transpiler.readable.jsenum.Main.testJsEnumSwitch"
+   case IntJsEnum.TWENTY:
+...   default:
+  }] "com.google.j2cl.transpiler.readable.jsenum.Main.testJsEnumSwitch"
 [break;] => [break;] "com.google.j2cl.transpiler.readable.jsenum.Main.testJsEnumSwitch"
 [Object o = intJsEnum;] => [let o = $Enums.box(intJsEnum, IntJsEnum_$Overlay);] "com.google.j2cl.transpiler.readable.jsenum.Main.testJsEnumSwitch"
 [o] => [o] "o"
@@ -48,22 +48,22 @@
       case ONE:
 ...      default:
     }] => [switch (InternalPreconditions.m_checkNotNull__java_lang_Object(stringJsEnum)) {
-      case StringJsEnum.ONE:
-...      default:
-    }] "com.google.j2cl.transpiler.readable.jsenum.Main.testJsEnumSwitch"
+   case StringJsEnum.ONE:
+...   default:
+  }] "com.google.j2cl.transpiler.readable.jsenum.Main.testJsEnumSwitch"
 [break;] => [break;] "com.google.j2cl.transpiler.readable.jsenum.Main.testJsEnumSwitch"
 [NativeStringEnum.ONE.compareTo(NativeStringEnum.THREE);] => [$Comparables.m_compareTo__java_lang_Comparable__java_lang_Object(NativeStringEnum.ONE, NativeStringEnum.THREE);] "com.google.j2cl.transpiler.readable.jsenum.Main.testJsEnumSwitch"
 [NativeStringEnum.ONE.equals(NativeStringEnum.THREE);] => [$Objects.m_equals__java_lang_Object__java_lang_Object(NativeStringEnum.ONE, NativeStringEnum.THREE);] "com.google.j2cl.transpiler.readable.jsenum.Main.testJsEnumSwitch"
 [ComparableJsEnum.ONE.compareTo(ComparableJsEnum.ZERO);] => [$Comparables.m_compareTo__java_lang_Comparable__java_lang_Object($Enums.boxComparable(ComparableJsEnum.ONE, $Overlay), $Enums.boxComparable(ComparableJsEnum.ZERO, $Overlay));] "com.google.j2cl.transpiler.readable.jsenum.Main.testJsEnumSwitch"
 [ComparableJsEnum.ONE.equals(ComparableJsEnum.ZERO);] => [$Objects.m_equals__java_lang_Object__java_lang_Object($Enums.boxComparable(ComparableJsEnum.ONE, $Overlay), $Enums.boxComparable(ComparableJsEnum.ZERO, $Overlay));] "com.google.j2cl.transpiler.readable.jsenum.Main.testJsEnumSwitch"
 [Supplier<ComparableJsEnum> supplier = () -> ComparableJsEnum.ONE;] => [let supplier = Supplier.$adapt((() =>{
-      return $Enums.boxComparable(ComparableJsEnum.ONE, $Overlay);
-    }));] "com.google.j2cl.transpiler.readable.jsenum.Main.testJsEnumSwitch"
+   return $Enums.boxComparable(ComparableJsEnum.ONE, $Overlay);
+  }));] "com.google.j2cl.transpiler.readable.jsenum.Main.testJsEnumSwitch"
 [supplier] => [supplier] "supplier"
 [ComparableJsEnum.ONE] => [return $Enums.boxComparable(ComparableJsEnum.ONE, $Overlay);] "com.google.j2cl.transpiler.readable.jsenum.Main.<lambda in testJsEnumSwitch>"
 [Consumer<ComparableJsEnum> consummer = e -> e.ordinal();] => [let consummer = Consumer.$adapt(((e) =>{
-      let e_1 = /**@type {?ComparableJsEnum} */ ($Enums.unbox($Casts.$to(e, $Overlay)));
-    }));] "com.google.j2cl.transpiler.readable.jsenum.Main.testJsEnumSwitch"
+   let e_1 = /**@type {?ComparableJsEnum} */ ($Enums.unbox($Casts.$to(e, $Overlay)));
+  }));] "com.google.j2cl.transpiler.readable.jsenum.Main.testJsEnumSwitch"
 [consummer] => [consummer] "consummer"
 [e] => [e] "e"
 [e -> e.ordinal()] => [let e_1 = /**@type {?ComparableJsEnum} */ ($Enums.unbox($Casts.$to(e, $Overlay)));] "com.google.j2cl.transpiler.readable.jsenum.Main.<lambda in testJsEnumSwitch>"
@@ -80,7 +80,6 @@
 [Arrays.asList(ComparableJsEnum.ONE);] => [Arrays.m_asList__arrayOf_java_lang_Object([$Enums.boxComparable(ComparableJsEnum.ONE, $Overlay)]);] "com.google.j2cl.transpiler.readable.jsenum.Main.testBoxUnboxWithTypeInference"
 [templatedField.getValue().ordinal();] => [$Enums.unbox($Casts.$to(templatedField.m_getValue___$pp_com_google_j2cl_transpiler_readable_jsenum(), $Overlay));] "com.google.j2cl.transpiler.readable.jsenum.Main.testBoxUnboxWithTypeInference"
 [Main] => [$clinit]
-[Main] => [Main.$clinit = (() =>{
-    });] "com.google.j2cl.transpiler.readable.jsenum.Main.<clinit>"
+[Main] => [Main.$clinit = (() =>{});] "com.google.j2cl.transpiler.readable.jsenum.Main.<clinit>"
 [Main] => [Main.$loadModules();] "com.google.j2cl.transpiler.readable.jsenum.Main.<clinit>"
 [Main] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.jsenum.Main.<clinit>"

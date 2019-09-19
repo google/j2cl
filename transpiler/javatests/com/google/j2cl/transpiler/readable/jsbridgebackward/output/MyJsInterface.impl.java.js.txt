@@ -1,10 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.jsbridgebackward.MyJsInterface$impl');
 
-
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsbridgebackward.MyJsInterface.$LambdaAdaptor$impl');
-
 
 /**
  * @interface
@@ -17,7 +15,6 @@ class MyJsInterface {
    * @public
    */
   foo(a) {}
-
   /**
    * @param {?function(number):number} fn
    * @return {MyJsInterface}
@@ -27,7 +24,6 @@ class MyJsInterface {
     MyJsInterface.$clinit();
     return new $LambdaAdaptor(fn);
   }
-
   /**
    * @public
    */
@@ -35,7 +31,6 @@ class MyJsInterface {
     MyJsInterface.$clinit = (() => {});
     MyJsInterface.$loadModules();
   }
-
   /**
    * @param {Function} classConstructor
    * @public
@@ -48,7 +43,6 @@ class MyJsInterface {
         .$implements__com_google_j2cl_transpiler_readable_jsbridgebackward_MyJsInterface =
         true;
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -59,7 +53,6 @@ class MyJsInterface {
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_jsbridgebackward_MyJsInterface;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -70,7 +63,6 @@ class MyJsInterface {
         !!classConstructor.prototype
               .$implements__com_google_j2cl_transpiler_readable_jsbridgebackward_MyJsInterface;
   }
-
   /**
    * @public
    */
@@ -78,15 +70,12 @@ class MyJsInterface {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsbridgebackward.MyJsInterface.$LambdaAdaptor$impl');
   }
-};
-
+}
 $Util.$setClassMetadataForInterface(
     MyJsInterface,
     'com.google.j2cl.transpiler.readable.jsbridgebackward.MyJsInterface');
 
-
 MyJsInterface.$markImplementor(/** @type {Function} */ (MyJsInterface));
-
 
 exports = MyJsInterface;
 //# sourceMappingURL=MyJsInterface.js.map

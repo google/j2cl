@@ -1,10 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault.J$impl');
 
-
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault.J.$LambdaAdaptor$impl');
-
 
 /**
  * @interface
@@ -15,13 +13,11 @@ class J {
    * @public
    */
   m_foo__() {}
-
   /**
    * @abstract
    * @public
    */
   m_bar__() {}
-
   /**
    * @param {?function():void} fn
    * @return {J}
@@ -31,7 +27,6 @@ class J {
     J.$clinit();
     return new $LambdaAdaptor(fn);
   }
-
   /**
    * @param {!J} $thisArg
    * @public
@@ -40,7 +35,6 @@ class J {
       $thisArg) {
     J.$clinit();
   }
-
   /**
    * @public
    */
@@ -48,7 +42,6 @@ class J {
     J.$clinit = (() => {});
     J.$loadModules();
   }
-
   /**
    * @param {Function} classConstructor
    * @public
@@ -61,7 +54,6 @@ class J {
         .$implements__com_google_j2cl_transpiler_readable_abstractmethodoverridedefault_AbstractMethodOverrideDefault_J =
         true;
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -72,7 +64,6 @@ class J {
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_abstractmethodoverridedefault_AbstractMethodOverrideDefault_J;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -83,7 +74,6 @@ class J {
         !!classConstructor.prototype
               .$implements__com_google_j2cl_transpiler_readable_abstractmethodoverridedefault_AbstractMethodOverrideDefault_J;
   }
-
   /**
    * @public
    */
@@ -91,15 +81,12 @@ class J {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault.J.$LambdaAdaptor$impl');
   }
-};
-
+}
 $Util.$setClassMetadataForInterface(
     J,
     'com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault$J');
 
-
 J.$markImplementor(/** @type {Function} */ (J));
-
 
 exports = J;
 //# sourceMappingURL=AbstractMethodOverrideDefault$J.js.map

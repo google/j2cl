@@ -1,6 +1,5 @@
 goog.module('com.google.j2cl.transpiler.readable.deprecated.DeprecatedExample.DeprecatedEnum$impl');
 
-
 const Enum = goog.require('java.lang.Enum$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
@@ -8,7 +7,6 @@ let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
-
 
 /**
  * @deprecated
@@ -21,7 +19,6 @@ class DeprecatedEnum extends Enum {
   constructor() {
     super();
   }
-
   /**
    * @param {?string} $name
    * @param {number} $ordinal
@@ -35,7 +32,6 @@ class DeprecatedEnum extends Enum {
             $name, $ordinal);
     return $instance;
   }
-
   /**
    * @param {?string} $name
    * @param {number} $ordinal
@@ -47,7 +43,6 @@ class DeprecatedEnum extends Enum {
     this.f_ordinal__java_lang_Enum_ = $ordinal;
     this.$ctor__java_lang_Enum__java_lang_String__int($name, $ordinal);
   }
-
   /**
    * @param {string} name
    * @return {!DeprecatedEnum}
@@ -68,7 +63,6 @@ class DeprecatedEnum extends Enum {
         DeprecatedEnum
             .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_deprecated_DeprecatedExample_DeprecatedEnum_);
   }
-
   /**
    * @return {!Array<!DeprecatedEnum>}
    * @public
@@ -82,7 +76,6 @@ class DeprecatedEnum extends Enum {
         ],
         DeprecatedEnum));
   }
-
   /**
    * Bridge method.
    * @override
@@ -94,7 +87,6 @@ class DeprecatedEnum extends Enum {
     return super.compareTo(
         /**@type {DeprecatedEnum} */ ($Casts.$to(arg0, DeprecatedEnum)));
   }
-
   /**
    * @return {!DeprecatedEnum}
    * @public
@@ -106,7 +98,6 @@ class DeprecatedEnum extends Enum {
         DeprecatedEnum
             .$f_A_VALUE__com_google_j2cl_transpiler_readable_deprecated_DeprecatedExample_DeprecatedEnum);
   }
-
   /**
    * @return {Map<?string, !DeprecatedEnum>}
    * @public
@@ -117,7 +108,6 @@ class DeprecatedEnum extends Enum {
         DeprecatedEnum
             .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_deprecated_DeprecatedExample_DeprecatedEnum_);
   }
-
   /**
    * @param {Map<?string, !DeprecatedEnum>} value
    * @public
@@ -129,7 +119,6 @@ class DeprecatedEnum extends Enum {
          .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_deprecated_DeprecatedExample_DeprecatedEnum_ =
          value);
   }
-
   /**
    * @public
    */
@@ -147,7 +136,6 @@ class DeprecatedEnum extends Enum {
         .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_deprecated_DeprecatedExample_DeprecatedEnum_ =
         null;
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -156,7 +144,6 @@ class DeprecatedEnum extends Enum {
   static $isInstance(instance) {
     return instance instanceof DeprecatedEnum;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -165,7 +152,6 @@ class DeprecatedEnum extends Enum {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, DeprecatedEnum);
   }
-
   /**
    * @public
    */
@@ -175,29 +161,21 @@ class DeprecatedEnum extends Enum {
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     $Enums = goog.module.get('vmbootstrap.Enums$impl');
   }
-};
-
+}
 $Util.$setClassMetadataForEnum(
     DeprecatedEnum,
     'com.google.j2cl.transpiler.readable.deprecated.DeprecatedExample$DeprecatedEnum');
 
-
 /** @private {!DeprecatedEnum} @deprecated */
 DeprecatedEnum
     .$f_A_VALUE__com_google_j2cl_transpiler_readable_deprecated_DeprecatedExample_DeprecatedEnum;
-
-
 /** @private {Map<?string, !DeprecatedEnum>} */
 DeprecatedEnum
     .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_deprecated_DeprecatedExample_DeprecatedEnum_;
-
-
 /** @public {number} @const @deprecated */
 DeprecatedEnum
     .$ordinal$f_A_VALUE__com_google_j2cl_transpiler_readable_deprecated_DeprecatedExample_DeprecatedEnum =
     0;
-
-
 
 exports = DeprecatedEnum;
 //# sourceMappingURL=DeprecatedExample$DeprecatedEnum.js.map

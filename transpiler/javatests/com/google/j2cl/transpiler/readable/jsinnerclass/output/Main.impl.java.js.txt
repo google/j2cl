@@ -1,12 +1,10 @@
 goog.module('com.google.j2cl.transpiler.readable.jsinnerclass.Main$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Outer = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsinnerclass.Main.Outer$impl');
 let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
-
 
 class Main extends j_l_Object {
   /**
@@ -15,7 +13,6 @@ class Main extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @return {!Main}
    * @public
@@ -26,14 +23,12 @@ class Main extends j_l_Object {
     $instance.$ctor__com_google_j2cl_transpiler_readable_jsinnerclass_Main__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_jsinnerclass_Main__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @param {Array<?string>} args
    * @public
@@ -42,7 +37,6 @@ class Main extends j_l_Object {
     Main.$clinit();
     $Asserts.$assert(Outer.$create__().m_method__() == 5);
   }
-
   /**
    * @public
    */
@@ -51,7 +45,6 @@ class Main extends j_l_Object {
     Main.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -60,7 +53,6 @@ class Main extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof Main;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -69,7 +61,6 @@ class Main extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Main);
   }
-
   /**
    * @public
    */
@@ -78,12 +69,9 @@ class Main extends j_l_Object {
         'com.google.j2cl.transpiler.readable.jsinnerclass.Main.Outer$impl');
     $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     Main, 'com.google.j2cl.transpiler.readable.jsinnerclass.Main');
-
-
 
 exports = Main;
 //# sourceMappingURL=Main.js.map

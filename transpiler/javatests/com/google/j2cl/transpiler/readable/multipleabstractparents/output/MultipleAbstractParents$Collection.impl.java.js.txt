@@ -1,10 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.Collection$impl');
 
-
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.Collection.$LambdaAdaptor$impl');
-
 
 /**
  * @interface
@@ -18,7 +16,6 @@ class Collection {
    * @public
    */
   m_getFoo__java_lang_Object(t) {}
-
   /**
    * @template T
    * @param {?function(T):?string} fn
@@ -29,7 +26,6 @@ class Collection {
     Collection.$clinit();
     return /**@type {!$LambdaAdaptor<T>} */ (new $LambdaAdaptor(fn));
   }
-
   /**
    * @public
    */
@@ -37,7 +33,6 @@ class Collection {
     Collection.$clinit = (() => {});
     Collection.$loadModules();
   }
-
   /**
    * @param {Function} classConstructor
    * @public
@@ -50,7 +45,6 @@ class Collection {
         .$implements__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_Collection =
         true;
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -61,7 +55,6 @@ class Collection {
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_Collection;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -72,7 +65,6 @@ class Collection {
         !!classConstructor.prototype
               .$implements__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_Collection;
   }
-
   /**
    * @public
    */
@@ -80,15 +72,12 @@ class Collection {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.Collection.$LambdaAdaptor$impl');
   }
-};
-
+}
 $Util.$setClassMetadataForInterface(
     Collection,
     'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$Collection');
 
-
 Collection.$markImplementor(/** @type {Function} */ (Collection));
-
 
 exports = Collection;
 //# sourceMappingURL=MultipleAbstractParents$Collection.js.map

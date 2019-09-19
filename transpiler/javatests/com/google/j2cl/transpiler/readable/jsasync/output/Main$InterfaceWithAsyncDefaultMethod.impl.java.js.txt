@@ -1,13 +1,11 @@
 goog.module('com.google.j2cl.transpiler.readable.jsasync.Main.InterfaceWithAsyncDefaultMethod$impl');
 
-
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsasync.Main.IThenable.$Overlay$impl');
 let Promise_$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsasync.Main.Promise.$Overlay$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-
 
 /**
  * @interface
@@ -19,7 +17,6 @@ class InterfaceWithAsyncDefaultMethod {
    * @public
    */
   m_asyncCall__() {}
-
   /**
    * @param {!InterfaceWithAsyncDefaultMethod} $thisArg
    * @return {IThenable<Integer>}
@@ -34,7 +31,6 @@ class InterfaceWithAsyncDefaultMethod {
                 Promise.resolve(Integer.m_valueOf__int(5)))),
             Integer))));
   }
-
   /**
    * @public
    */
@@ -42,7 +38,6 @@ class InterfaceWithAsyncDefaultMethod {
     InterfaceWithAsyncDefaultMethod.$clinit = (() => {});
     InterfaceWithAsyncDefaultMethod.$loadModules();
   }
-
   /**
    * @param {Function} classConstructor
    * @public
@@ -55,7 +50,6 @@ class InterfaceWithAsyncDefaultMethod {
         .$implements__com_google_j2cl_transpiler_readable_jsasync_Main_InterfaceWithAsyncDefaultMethod =
         true;
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -66,7 +60,6 @@ class InterfaceWithAsyncDefaultMethod {
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_jsasync_Main_InterfaceWithAsyncDefaultMethod;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -77,7 +70,6 @@ class InterfaceWithAsyncDefaultMethod {
         !!classConstructor.prototype
               .$implements__com_google_j2cl_transpiler_readable_jsasync_Main_InterfaceWithAsyncDefaultMethod;
   }
-
   /**
    * @public
    */
@@ -85,16 +77,13 @@ class InterfaceWithAsyncDefaultMethod {
     Integer = goog.module.get('java.lang.Integer$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
   }
-};
-
+}
 $Util.$setClassMetadataForInterface(
     InterfaceWithAsyncDefaultMethod,
     'com.google.j2cl.transpiler.readable.jsasync.Main$InterfaceWithAsyncDefaultMethod');
 
-
 InterfaceWithAsyncDefaultMethod.$markImplementor(
     /** @type {Function} */ (InterfaceWithAsyncDefaultMethod));
-
 
 exports = InterfaceWithAsyncDefaultMethod;
 //# sourceMappingURL=Main$InterfaceWithAsyncDefaultMethod.js.map

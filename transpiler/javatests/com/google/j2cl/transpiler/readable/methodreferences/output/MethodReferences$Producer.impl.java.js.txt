@@ -1,10 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.Producer$impl');
 
-
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.Producer.$LambdaAdaptor$impl');
-
 
 /**
  * @interface
@@ -17,7 +15,6 @@ class Producer {
    * @public
    */
   m_produce__() {}
-
   /**
    * @template T
    * @param {?function():T} fn
@@ -28,7 +25,6 @@ class Producer {
     Producer.$clinit();
     return /**@type {!$LambdaAdaptor<T>} */ (new $LambdaAdaptor(fn));
   }
-
   /**
    * @public
    */
@@ -36,7 +32,6 @@ class Producer {
     Producer.$clinit = (() => {});
     Producer.$loadModules();
   }
-
   /**
    * @param {Function} classConstructor
    * @public
@@ -49,7 +44,6 @@ class Producer {
         .$implements__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Producer =
         true;
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -60,7 +54,6 @@ class Producer {
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Producer;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -71,7 +64,6 @@ class Producer {
         !!classConstructor.prototype
               .$implements__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Producer;
   }
-
   /**
    * @public
    */
@@ -79,15 +71,12 @@ class Producer {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.Producer.$LambdaAdaptor$impl');
   }
-};
-
+}
 $Util.$setClassMetadataForInterface(
     Producer,
     'com.google.j2cl.transpiler.readable.methodreferences.MethodReferences$Producer');
 
-
 Producer.$markImplementor(/** @type {Function} */ (Producer));
-
 
 exports = Producer;
 //# sourceMappingURL=MethodReferences$Producer.js.map

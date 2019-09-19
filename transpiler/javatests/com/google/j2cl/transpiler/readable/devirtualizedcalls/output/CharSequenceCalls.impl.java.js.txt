@@ -1,12 +1,10 @@
 goog.module('com.google.j2cl.transpiler.readable.devirtualizedcalls.CharSequenceCalls$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let CharSequence = goog.forwardDeclare('java.lang.CharSequence$impl');
 let $CharSequences = goog.forwardDeclare('vmbootstrap.CharSequences$impl');
-
 
 class CharSequenceCalls extends j_l_Object {
   /**
@@ -15,7 +13,6 @@ class CharSequenceCalls extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @return {!CharSequenceCalls}
    * @public
@@ -27,14 +24,12 @@ class CharSequenceCalls extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_devirtualizedcalls_CharSequenceCalls__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_devirtualizedcalls_CharSequenceCalls__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @param {(CharSequence|string)} cs
    * @public
@@ -42,7 +37,6 @@ class CharSequenceCalls extends j_l_Object {
   m_test__java_lang_CharSequence(cs) {
     $CharSequences.m_charAt__java_lang_CharSequence__int(cs, 0);
   }
-
   /**
    * @public
    */
@@ -50,7 +44,6 @@ class CharSequenceCalls extends j_l_Object {
     let s = 's';
     this.m_test__java_lang_CharSequence(s);
   }
-
   /**
    * @public
    */
@@ -59,7 +52,6 @@ class CharSequenceCalls extends j_l_Object {
     CharSequenceCalls.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -68,7 +60,6 @@ class CharSequenceCalls extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof CharSequenceCalls;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -77,20 +68,16 @@ class CharSequenceCalls extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, CharSequenceCalls);
   }
-
   /**
    * @public
    */
   static $loadModules() {
     $CharSequences = goog.module.get('vmbootstrap.CharSequences$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     CharSequenceCalls,
     'com.google.j2cl.transpiler.readable.devirtualizedcalls.CharSequenceCalls');
-
-
 
 exports = CharSequenceCalls;
 //# sourceMappingURL=CharSequenceCalls.js.map

@@ -1,10 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.HasKey$impl');
 
-
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.HasKey.$LambdaAdaptor$impl');
-
 
 /**
  * @interface
@@ -16,7 +14,6 @@ class HasKey {
    * @public
    */
   m_getKey__() {}
-
   /**
    * @param {?function():?string} fn
    * @return {HasKey}
@@ -26,7 +23,6 @@ class HasKey {
     HasKey.$clinit();
     return new $LambdaAdaptor(fn);
   }
-
   /**
    * @public
    */
@@ -34,7 +30,6 @@ class HasKey {
     HasKey.$clinit = (() => {});
     HasKey.$loadModules();
   }
-
   /**
    * @param {Function} classConstructor
    * @public
@@ -47,7 +42,6 @@ class HasKey {
         .$implements__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_HasKey =
         true;
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -58,7 +52,6 @@ class HasKey {
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_HasKey;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -69,7 +62,6 @@ class HasKey {
         !!classConstructor.prototype
               .$implements__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_HasKey;
   }
-
   /**
    * @public
    */
@@ -77,15 +69,12 @@ class HasKey {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.HasKey.$LambdaAdaptor$impl');
   }
-};
-
+}
 $Util.$setClassMetadataForInterface(
     HasKey,
     'com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards$HasKey');
 
-
 HasKey.$markImplementor(/** @type {Function} */ (HasKey));
-
 
 exports = HasKey;
 //# sourceMappingURL=TypeWildCards$HasKey.js.map

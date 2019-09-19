@@ -1,10 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.simplegenericinterface.SimpleGenericInterface$impl');
 
-
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.simplegenericinterface.SimpleGenericInterface.$LambdaAdaptor$impl');
-
 
 /**
  * @interface
@@ -18,7 +16,6 @@ class SimpleGenericInterface {
    * @public
    */
   m_fun__java_lang_Object(t) {}
-
   /**
    * @template T
    * @param {?function(T):T} fn
@@ -29,7 +26,6 @@ class SimpleGenericInterface {
     SimpleGenericInterface.$clinit();
     return /**@type {!$LambdaAdaptor<T>} */ (new $LambdaAdaptor(fn));
   }
-
   /**
    * @public
    */
@@ -37,7 +33,6 @@ class SimpleGenericInterface {
     SimpleGenericInterface.$clinit = (() => {});
     SimpleGenericInterface.$loadModules();
   }
-
   /**
    * @param {Function} classConstructor
    * @public
@@ -50,7 +45,6 @@ class SimpleGenericInterface {
         .$implements__com_google_j2cl_transpiler_readable_simplegenericinterface_SimpleGenericInterface =
         true;
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -61,7 +55,6 @@ class SimpleGenericInterface {
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_simplegenericinterface_SimpleGenericInterface;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -72,7 +65,6 @@ class SimpleGenericInterface {
         !!classConstructor.prototype
               .$implements__com_google_j2cl_transpiler_readable_simplegenericinterface_SimpleGenericInterface;
   }
-
   /**
    * @public
    */
@@ -80,16 +72,13 @@ class SimpleGenericInterface {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.simplegenericinterface.SimpleGenericInterface.$LambdaAdaptor$impl');
   }
-};
-
+}
 $Util.$setClassMetadataForInterface(
     SimpleGenericInterface,
     'com.google.j2cl.transpiler.readable.simplegenericinterface.SimpleGenericInterface');
 
-
 SimpleGenericInterface.$markImplementor(
     /** @type {Function} */ (SimpleGenericInterface));
-
 
 exports = SimpleGenericInterface;
 //# sourceMappingURL=SimpleGenericInterface.js.map

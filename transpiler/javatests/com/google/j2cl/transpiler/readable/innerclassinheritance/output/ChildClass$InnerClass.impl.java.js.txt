@@ -1,11 +1,9 @@
 goog.module('com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass.InnerClass$impl');
 
-
 const ParentInner = goog.require('com.google.j2cl.transpiler.readable.innerclassinheritance.ParentInner$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let ChildClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$impl');
-
 
 class InnerClass extends ParentInner {
   /**
@@ -19,7 +17,6 @@ class InnerClass extends ParentInner {
     this.f_fieldInInner__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass_InnerClass =
         0;
   }
-
   /**
    * @param {ChildClass} $outer_this
    * @return {!InnerClass}
@@ -34,7 +31,6 @@ class InnerClass extends ParentInner {
             $outer_this);
     return $instance;
   }
-
   /**
    * @param {ChildClass} $outer_this
    * @public
@@ -45,12 +41,10 @@ class InnerClass extends ParentInner {
         $outer_this;
     this.$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ParentInner__();
   }
-
   /**
    * @public
    */
   m_funInInner__() {}
-
   /**
    * @return {number}
    * @public
@@ -83,7 +77,6 @@ class InnerClass extends ParentInner {
     a = this.f_fieldInInner__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass_InnerClass;
     return a;
   }
-
   /**
    * @public
    */
@@ -92,7 +85,6 @@ class InnerClass extends ParentInner {
     InnerClass.$loadModules();
     ParentInner.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -101,7 +93,6 @@ class InnerClass extends ParentInner {
   static $isInstance(instance) {
     return instance instanceof InnerClass;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -110,18 +101,14 @@ class InnerClass extends ParentInner {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, InnerClass);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     InnerClass,
     'com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$InnerClass');
-
-
 
 exports = InnerClass;
 //# sourceMappingURL=ChildClass$InnerClass.js.map

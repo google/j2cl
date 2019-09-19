@@ -1,13 +1,11 @@
 goog.module('com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunctions.$2$impl');
 
-
 const HashFunction = goog.require('com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunction$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Enum = goog.forwardDeclare('java.lang.Enum$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-
 
 /**
  * @template T
@@ -20,7 +18,6 @@ class $2 extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @template T
    * @return {!$2<T>}
@@ -33,14 +30,12 @@ class $2 extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_overwrittentypevariables_HashFunctions_2__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_overwrittentypevariables_HashFunctions_2__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @param {T} input
    * @return {?string}
@@ -49,7 +44,6 @@ class $2 extends j_l_Object {
   m_apply__java_lang_Enum(input) {
     return '' + /**@type {Enum} */ (input).ordinal();
   }
-
   /**
    * Bridge method.
    * @override
@@ -61,7 +55,6 @@ class $2 extends j_l_Object {
     return this.m_apply__java_lang_Enum(
         /**@type {T} */ ($Casts.$to(arg0, Enum)));
   }
-
   /**
    * @public
    */
@@ -70,7 +63,6 @@ class $2 extends j_l_Object {
     $2.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -79,7 +71,6 @@ class $2 extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof $2;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -88,7 +79,6 @@ class $2 extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, $2);
   }
-
   /**
    * @public
    */
@@ -96,15 +86,12 @@ class $2 extends j_l_Object {
     Enum = goog.module.get('java.lang.Enum$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     $2,
     'com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunctions$2');
 
-
 HashFunction.$markImplementor($2);
-
 
 exports = $2;
 //# sourceMappingURL=HashFunctions$2.js.map

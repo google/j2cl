@@ -1,10 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.overwrittentypevariables.MyFunction$impl');
 
-
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.overwrittentypevariables.MyFunction.$LambdaAdaptor$impl');
-
 
 /**
  * @interface
@@ -18,7 +16,6 @@ class MyFunction {
    * @public
    */
   m_apply__java_lang_Object(input) {}
-
   /**
    * @template F, T
    * @param {?function(F):T} fn
@@ -29,7 +26,6 @@ class MyFunction {
     MyFunction.$clinit();
     return /**@type {!$LambdaAdaptor<F, T>} */ (new $LambdaAdaptor(fn));
   }
-
   /**
    * @public
    */
@@ -37,7 +33,6 @@ class MyFunction {
     MyFunction.$clinit = (() => {});
     MyFunction.$loadModules();
   }
-
   /**
    * @param {Function} classConstructor
    * @public
@@ -50,7 +45,6 @@ class MyFunction {
         .$implements__com_google_j2cl_transpiler_readable_overwrittentypevariables_MyFunction =
         true;
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -61,7 +55,6 @@ class MyFunction {
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_overwrittentypevariables_MyFunction;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -72,7 +65,6 @@ class MyFunction {
         !!classConstructor.prototype
               .$implements__com_google_j2cl_transpiler_readable_overwrittentypevariables_MyFunction;
   }
-
   /**
    * @public
    */
@@ -80,15 +72,12 @@ class MyFunction {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.overwrittentypevariables.MyFunction.$LambdaAdaptor$impl');
   }
-};
-
+}
 $Util.$setClassMetadataForInterface(
     MyFunction,
     'com.google.j2cl.transpiler.readable.overwrittentypevariables.MyFunction');
 
-
 MyFunction.$markImplementor(/** @type {Function} */ (MyFunction));
-
 
 exports = MyFunction;
 //# sourceMappingURL=MyFunction.js.map

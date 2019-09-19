@@ -1,12 +1,10 @@
 goog.module('com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Long = goog.require('nativebootstrap.Long$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $LongUtils = goog.forwardDeclare('vmbootstrap.LongUtils$impl');
-
 
 class SimpleLongs extends j_l_Object {
   /**
@@ -21,7 +19,6 @@ class SimpleLongs extends j_l_Object {
     this.f_sideEffect__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs_ =
         0;
   }
-
   /**
    * @return {!SimpleLongs}
    * @public
@@ -33,7 +30,6 @@ class SimpleLongs extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs__();
     return $instance;
   }
-
   /**
    * @public
    */
@@ -41,7 +37,6 @@ class SimpleLongs extends j_l_Object {
     this.$ctor__java_lang_Object__();
     this.$init__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs();
   }
-
   /**
    * @return {!$Long}
    * @public
@@ -49,7 +44,6 @@ class SimpleLongs extends j_l_Object {
   m_getBar__() {
     return $Long.fromInt(0);
   }
-
   /**
    * @return {SimpleLongs}
    * @public
@@ -58,7 +52,6 @@ class SimpleLongs extends j_l_Object {
     this.f_sideEffect__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs_++;
     return this;
   }
-
   /**
    * @public
    */
@@ -114,7 +107,6 @@ class SimpleLongs extends j_l_Object {
         this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs;
     g = this.m_getBar__();
   }
-
   /**
    * @private
    */
@@ -122,7 +114,6 @@ class SimpleLongs extends j_l_Object {
     this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs =
         $Long.fromInt(0);
   }
-
   /**
    * @public
    */
@@ -131,7 +122,6 @@ class SimpleLongs extends j_l_Object {
     SimpleLongs.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -140,7 +130,6 @@ class SimpleLongs extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof SimpleLongs;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -149,19 +138,15 @@ class SimpleLongs extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, SimpleLongs);
   }
-
   /**
    * @public
    */
   static $loadModules() {
     $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     SimpleLongs, 'com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs');
-
-
 
 exports = SimpleLongs;
 //# sourceMappingURL=SimpleLongs.js.map

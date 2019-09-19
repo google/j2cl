@@ -1,6 +1,5 @@
 goog.module('com.google.j2cl.transpiler.readable.simplebridgemethods.AnotherTask$impl');
 
-
 const Callable = goog.require('com.google.j2cl.transpiler.readable.simplebridgemethods.Callable$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
@@ -8,7 +7,6 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Superclass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.simplebridgemethods.Superclass$impl');
 let AssertionError = goog.forwardDeclare('java.lang.AssertionError$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-
 
 /**
  * @template T
@@ -21,7 +19,6 @@ class AnotherTask extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @template T
    * @return {!AnotherTask<T>}
@@ -34,21 +31,18 @@ class AnotherTask extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_simplebridgemethods_AnotherTask__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_simplebridgemethods_AnotherTask__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @param {Superclass<T>} t
    * @public
    */
   m_call__com_google_j2cl_transpiler_readable_simplebridgemethods_Superclass(
       t) {}
-
   /**
    * Bridge method.
    * @override
@@ -59,7 +53,6 @@ class AnotherTask extends j_l_Object {
     this.m_call__com_google_j2cl_transpiler_readable_simplebridgemethods_Superclass(
         /**@type {Superclass<T>} */ ($Casts.$to(arg0, Superclass)));
   }
-
   /**
    * @public
    */
@@ -68,7 +61,6 @@ class AnotherTask extends j_l_Object {
     AnotherTask.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -77,7 +69,6 @@ class AnotherTask extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof AnotherTask;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -86,7 +77,6 @@ class AnotherTask extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, AnotherTask);
   }
-
   /**
    * @public
    */
@@ -95,15 +85,12 @@ class AnotherTask extends j_l_Object {
         'com.google.j2cl.transpiler.readable.simplebridgemethods.Superclass$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     AnotherTask,
     'com.google.j2cl.transpiler.readable.simplebridgemethods.AnotherTask');
 
-
 Callable.$markImplementor(AnotherTask);
-
 
 exports = AnotherTask;
 //# sourceMappingURL=AnotherTask.js.map

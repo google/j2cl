@@ -1,12 +1,10 @@
 goog.module('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper$impl');
 
-
 const Outer = goog.require('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let OuterIsNotSuper = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper$impl');
 let $1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.$1$impl');
-
 
 class OuterIsSuper extends Outer {
   /**
@@ -17,7 +15,6 @@ class OuterIsSuper extends Outer {
     /** @public {Outer} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper;
   }
-
   /**
    * @param {Outer} $outer_this
    * @param {number} i
@@ -33,7 +30,6 @@ class OuterIsSuper extends Outer {
             $outer_this, i);
     return $instance;
   }
-
   /**
    * @param {Outer} $outer_this
    * @param {number} i
@@ -46,7 +42,6 @@ class OuterIsSuper extends Outer {
     this.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer__int(
         i);
   }
-
   /**
    * @override
    * @return {number}
@@ -55,7 +50,6 @@ class OuterIsSuper extends Outer {
   m_checkDispatch__() {
     return 2;
   }
-
   /**
    * @return {number}
    * @public
@@ -63,7 +57,6 @@ class OuterIsSuper extends Outer {
   m_checkDispatchFromSub1__() {
     return super.m_checkDispatch__();
   }
-
   /**
    * @return {number}
    * @public
@@ -74,7 +67,6 @@ class OuterIsSuper extends Outer {
             this, 1)
         .m_go__();
   }
-
   /**
    * @return {OuterIsNotSuper}
    * @public
@@ -84,7 +76,6 @@ class OuterIsSuper extends Outer {
         .$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer(
             this);
   }
-
   /**
    * @public
    */
@@ -93,7 +84,6 @@ class OuterIsSuper extends Outer {
     OuterIsSuper.$loadModules();
     Outer.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -102,7 +92,6 @@ class OuterIsSuper extends Outer {
   static $isInstance(instance) {
     return instance instanceof OuterIsSuper;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -111,7 +100,6 @@ class OuterIsSuper extends Outer {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, OuterIsSuper);
   }
-
   /**
    * @public
    */
@@ -121,13 +109,10 @@ class OuterIsSuper extends Outer {
     $1 = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.$1$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     OuterIsSuper,
     'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$OuterIsSuper');
-
-
 
 exports = OuterIsSuper;
 //# sourceMappingURL=InnerClassInitOrder$Outer$OuterIsSuper.js.map

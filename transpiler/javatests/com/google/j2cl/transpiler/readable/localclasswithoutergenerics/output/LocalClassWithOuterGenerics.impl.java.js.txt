@@ -1,12 +1,10 @@
 goog.module('com.google.j2cl.transpiler.readable.localclasswithoutergenerics.LocalClassWithOuterGenerics$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $1Bar = goog.forwardDeclare('com.google.j2cl.transpiler.readable.localclasswithoutergenerics.LocalClassWithOuterGenerics.$1Bar$impl');
 let $1Baz = goog.forwardDeclare('com.google.j2cl.transpiler.readable.localclasswithoutergenerics.LocalClassWithOuterGenerics.$1Baz$impl');
-
 
 /**
  * @template A
@@ -18,7 +16,6 @@ class LocalClassWithOuterGenerics extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @template A
    * @return {!LocalClassWithOuterGenerics<A>}
@@ -31,14 +28,12 @@ class LocalClassWithOuterGenerics extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_localclasswithoutergenerics_LocalClassWithOuterGenerics__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_localclasswithoutergenerics_LocalClassWithOuterGenerics__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @template T
    * @return {void}
@@ -49,7 +44,6 @@ class LocalClassWithOuterGenerics extends j_l_Object {
     let bar = /**@type {!$1Bar<T>} */ ($1Bar.$create__());
     let baz = /**@type {!$1Baz<*, T>} */ ($1Baz.$create__());
   }
-
   /**
    * @public
    */
@@ -58,7 +52,6 @@ class LocalClassWithOuterGenerics extends j_l_Object {
     LocalClassWithOuterGenerics.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -67,7 +60,6 @@ class LocalClassWithOuterGenerics extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof LocalClassWithOuterGenerics;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -76,7 +68,6 @@ class LocalClassWithOuterGenerics extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, LocalClassWithOuterGenerics);
   }
-
   /**
    * @public
    */
@@ -86,13 +77,10 @@ class LocalClassWithOuterGenerics extends j_l_Object {
     $1Baz = goog.module.get(
         'com.google.j2cl.transpiler.readable.localclasswithoutergenerics.LocalClassWithOuterGenerics.$1Baz$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     LocalClassWithOuterGenerics,
     'com.google.j2cl.transpiler.readable.localclasswithoutergenerics.LocalClassWithOuterGenerics');
-
-
 
 exports = LocalClassWithOuterGenerics;
 //# sourceMappingURL=LocalClassWithOuterGenerics.js.map

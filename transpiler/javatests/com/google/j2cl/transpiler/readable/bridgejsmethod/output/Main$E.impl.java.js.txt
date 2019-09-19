@@ -1,13 +1,11 @@
 goog.module('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.E$impl');
 
-
 const B = goog.require('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.B$impl');
 const J = goog.require('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.J$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-
 
 /**
  * @implements {J<?string>}
@@ -19,7 +17,6 @@ class E extends B {
   constructor() {
     super();
   }
-
   /**
    * @return {!E}
    * @public
@@ -31,14 +28,12 @@ class E extends B {
         .$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_E__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_E__() {
     this.$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_B__();
   }
-
   /**
    * Bridge method.
    * @override
@@ -48,7 +43,6 @@ class E extends B {
   m_bar__java_lang_Object(arg0) {
     super.bar(/**@type {?string} */ ($Casts.$to(arg0, j_l_String)));
   }
-
   /**
    * Bridge method.
    * @override
@@ -59,7 +53,6 @@ class E extends B {
   fun(arg0) {
     return super.fun(/**@type {?string} */ ($Casts.$to(arg0, j_l_String)));
   }
-
   /**
    * @public
    */
@@ -68,7 +61,6 @@ class E extends B {
     E.$loadModules();
     B.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -77,7 +69,6 @@ class E extends B {
   static $isInstance(instance) {
     return instance instanceof E;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -86,7 +77,6 @@ class E extends B {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, E);
   }
-
   /**
    * @public
    */
@@ -94,14 +84,11 @@ class E extends B {
     j_l_String = goog.module.get('java.lang.String$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     E, 'com.google.j2cl.transpiler.readable.bridgejsmethod.Main$E');
 
-
 J.$markImplementor(E);
-
 
 exports = E;
 //# sourceMappingURL=Main$E.js.map

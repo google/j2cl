@@ -1,13 +1,11 @@
 goog.module('com.google.j2cl.transpiler.readable.strings.Strings$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let StringHolder = goog.forwardDeclare('com.google.j2cl.transpiler.readable.strings.Strings.StringHolder$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
-
 
 class Strings extends j_l_Object {
   /**
@@ -22,7 +20,6 @@ class Strings extends j_l_Object {
     /** @public {?string} */
     this.f_wideColon__com_google_j2cl_transpiler_readable_strings_Strings_;
   }
-
   /**
    * @return {!Strings}
    * @public
@@ -33,7 +30,6 @@ class Strings extends j_l_Object {
     $instance.$ctor__com_google_j2cl_transpiler_readable_strings_Strings__();
     return $instance;
   }
-
   /**
    * @public
    */
@@ -41,7 +37,6 @@ class Strings extends j_l_Object {
     this.$ctor__java_lang_Object__();
     this.$init__com_google_j2cl_transpiler_readable_strings_Strings();
   }
-
   /**
    * @public
    */
@@ -102,7 +97,6 @@ class Strings extends j_l_Object {
           'o';
     }
   }
-
   /**
    * @private
    */
@@ -114,7 +108,6 @@ class Strings extends j_l_Object {
     this.f_wideColon__com_google_j2cl_transpiler_readable_strings_Strings_ =
         '\uFF1A';
   }
-
   /**
    * @public
    */
@@ -123,7 +116,6 @@ class Strings extends j_l_Object {
     Strings.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -132,7 +124,6 @@ class Strings extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof Strings;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -141,7 +132,6 @@ class Strings extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Strings);
   }
-
   /**
    * @public
    */
@@ -151,23 +141,17 @@ class Strings extends j_l_Object {
     j_l_String = goog.module.get('java.lang.String$impl');
     $Long = goog.module.get('nativebootstrap.Long$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     Strings, 'com.google.j2cl.transpiler.readable.strings.Strings');
-
 
 /** @public {?string} @const */
 Strings.f_ESCAPE_CODES__com_google_j2cl_transpiler_readable_strings_Strings_ =
     '\b\f\n\r\t"\'\\\u0000\u007F\uD800\uDF46\uFF1A';
-
-
 /** @public {?string} @const */
 Strings
     .f_ESCAPE_CODES_COPY__com_google_j2cl_transpiler_readable_strings_Strings_ =
     '\b\f\n\r\t"\'\\\u0000\u007F\uD800\uDF46\uFF1A';
-
-
 
 exports = Strings;
 //# sourceMappingURL=Strings.js.map

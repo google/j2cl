@@ -1,12 +1,10 @@
 goog.module('com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.SuperContainer$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Container = goog.forwardDeclare('com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.Container$impl');
 let Content = goog.forwardDeclare('com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.Content$impl');
-
 
 /**
  * @template C
@@ -18,7 +16,6 @@ class SuperContainer extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @template C
    * @return {!SuperContainer<C>}
@@ -31,14 +28,12 @@ class SuperContainer extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod_SuperContainer__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod_SuperContainer__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @return {C}
    * @public
@@ -46,7 +41,6 @@ class SuperContainer extends j_l_Object {
   m_get___$pp_com_google_j2cl_transpiler_readable_genericmethod() {
     return null;
   }
-
   /**
    * @public
    */
@@ -55,7 +49,6 @@ class SuperContainer extends j_l_Object {
     SuperContainer.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -64,7 +57,6 @@ class SuperContainer extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof SuperContainer;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -73,18 +65,14 @@ class SuperContainer extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, SuperContainer);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     SuperContainer,
     'com.google.j2cl.transpiler.readable.genericmethod.GenericMethod$SuperContainer');
-
-
 
 exports = SuperContainer;
 //# sourceMappingURL=GenericMethod$SuperContainer.js.map

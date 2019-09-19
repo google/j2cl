@@ -1,10 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.jsfunction.Main.Implementor$impl');
 
-
 const ApiWithMethodReturningParametricJsFunction = goog.require('com.google.j2cl.transpiler.readable.jsfunction.Main.ApiWithMethodReturningParametricJsFunction$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
-
 
 /**
  * @implements {ApiWithMethodReturningParametricJsFunction}
@@ -16,7 +14,6 @@ class Implementor extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @return {!Implementor}
    * @public
@@ -28,14 +25,12 @@ class Implementor extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_jsfunction_Main_Implementor__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_jsfunction_Main_Implementor__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @template T
    * @return {?function(T):void}
@@ -44,7 +39,6 @@ class Implementor extends j_l_Object {
   anApi() {
     return /**@type {?function(T):void} */ (null);
   }
-
   /**
    * Bridge method for exposing non-JsMethod.
    * @override
@@ -55,7 +49,6 @@ class Implementor extends j_l_Object {
   m_anApi__() {
     return /**@type {?function(T):void} */ (this.anApi());
   }
-
   /**
    * @public
    */
@@ -64,7 +57,6 @@ class Implementor extends j_l_Object {
     Implementor.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -73,7 +65,6 @@ class Implementor extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof Implementor;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -82,20 +73,16 @@ class Implementor extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Implementor);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     Implementor,
     'com.google.j2cl.transpiler.readable.jsfunction.Main$Implementor');
 
-
 ApiWithMethodReturningParametricJsFunction.$markImplementor(Implementor);
-
 
 exports = Implementor;
 //# sourceMappingURL=Main$Implementor.js.map

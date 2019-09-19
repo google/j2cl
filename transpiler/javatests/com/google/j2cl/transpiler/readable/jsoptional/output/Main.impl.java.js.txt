@@ -1,13 +1,11 @@
 goog.module('com.google.j2cl.transpiler.readable.jsoptional.Main$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-
 
 class Main extends j_l_Object {
   /**
@@ -22,7 +20,6 @@ class Main extends j_l_Object {
     this.$ctor__com_google_j2cl_transpiler_readable_jsoptional_Main__java_lang_String(
         a);
   }
-
   /**
    * @param {number} i1
    * @param {?number=} d
@@ -30,7 +27,6 @@ class Main extends j_l_Object {
    * @public
    */
   method1(i1, d, i) {}
-
   /**
    * @param {?string} s1
    * @param {?number=} d
@@ -40,7 +36,6 @@ class Main extends j_l_Object {
   method2(s1, d, ...i) {
     $Arrays.$stampType(i, Boolean, 1);
   }
-
   /**
    * @param {?string} a
    * @public
@@ -50,20 +45,17 @@ class Main extends j_l_Object {
     this.$ctor__java_lang_Object__();
     this.$init__com_google_j2cl_transpiler_readable_jsoptional_Main();
   }
-
   /**
    * @param {?function(?string=, ...*):*} f
    * @public
    */
   m_testFunction__com_google_j2cl_transpiler_readable_jsoptional_Main_Function(
       f) {}
-
   /**
    * @param {?function(?string=, ...*):*=} f
    * @public
    */
   testOptionalFunction(f) {}
-
   /**
    * @private
    */
@@ -73,7 +65,6 @@ class Main extends j_l_Object {
           return s;
         });
   }
-
   /**
    * @public
    */
@@ -82,7 +73,6 @@ class Main extends j_l_Object {
     Main.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -91,7 +81,6 @@ class Main extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof Main;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -100,7 +89,6 @@ class Main extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Main);
   }
-
   /**
    * @public
    */
@@ -108,12 +96,9 @@ class Main extends j_l_Object {
     Boolean = goog.module.get('java.lang.Boolean$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     Main, 'com.google.j2cl.transpiler.readable.jsoptional.Main');
-
-
 
 exports = Main;
 //# sourceMappingURL=Main.js.map

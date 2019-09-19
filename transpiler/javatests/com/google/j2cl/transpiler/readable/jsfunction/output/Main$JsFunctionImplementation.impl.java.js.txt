@@ -1,12 +1,10 @@
 goog.module('com.google.j2cl.transpiler.readable.jsfunction.Main.JsFunctionImplementation$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 const $JavaScriptFunction = goog.require('vmbootstrap.JavaScriptFunction$impl');
 
 let $Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunction.Main.JsFunctionInterface.$Overlay$impl');
-
 
 class JsFunctionImplementation extends j_l_Object {
   /**
@@ -22,7 +20,6 @@ class JsFunctionImplementation extends j_l_Object {
     /** @public {?function(number):number} */
     this.f_anotherStoredThis__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionImplementation;
   }
-
   /**
    * @return {function(number):number}
    * @public
@@ -36,7 +33,6 @@ class JsFunctionImplementation extends j_l_Object {
         JsFunctionImplementation.prototype.m_foo__int, $instance,
         JsFunctionImplementation.$copy);
   }
-
   /**
    * @suppress {invalidCasts}
    * @public
@@ -48,7 +44,6 @@ class JsFunctionImplementation extends j_l_Object {
     this.f_anotherStoredThis__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionImplementation =
         /**@type {?function(number):number} */ (this);
   }
-
   /**
    * @param {function(number):number} $thisArg
    * @return {number}
@@ -59,7 +54,6 @@ class JsFunctionImplementation extends j_l_Object {
     JsFunctionImplementation.$clinit();
     return 0;
   }
-
   /**
    * @param {function(number):number} $thisArg
    * @return {number}
@@ -76,7 +70,6 @@ class JsFunctionImplementation extends j_l_Object {
                    $thisArg) +
         $thisArg(1);
   }
-
   /**
    * @this {?function(number):number}
    * @param {number} a
@@ -90,7 +83,6 @@ class JsFunctionImplementation extends j_l_Object {
                 this) +
         this.f_field__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionImplementation;
   }
-
   /**
    * @public
    */
@@ -99,7 +91,6 @@ class JsFunctionImplementation extends j_l_Object {
     JsFunctionImplementation.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -110,7 +101,6 @@ class JsFunctionImplementation extends j_l_Object {
         !!instance
               .$is__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionImplementation;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -119,7 +109,6 @@ class JsFunctionImplementation extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, JsFunctionImplementation);
   }
-
   /**
    * @param {JsFunctionImplementation} from
    * @param {?} to
@@ -136,20 +125,16 @@ class JsFunctionImplementation extends j_l_Object {
     to.$is__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionImplementation =
         true;
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     JsFunctionImplementation,
     'com.google.j2cl.transpiler.readable.jsfunction.Main$JsFunctionImplementation');
 
-
 $JavaScriptFunction.$markImplementor(JsFunctionImplementation);
-
 
 exports = JsFunctionImplementation;
 //# sourceMappingURL=Main$JsFunctionImplementation.js.map

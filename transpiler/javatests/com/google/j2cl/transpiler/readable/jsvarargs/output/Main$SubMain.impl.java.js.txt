@@ -1,13 +1,11 @@
 goog.module('com.google.j2cl.transpiler.readable.jsvarargs.Main.SubMain$impl');
 
-
 const Main = goog.require('com.google.j2cl.transpiler.readable.jsvarargs.Main$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
-
 
 class SubMain extends Main {
   /**
@@ -16,7 +14,6 @@ class SubMain extends Main {
   constructor() {
     super();
   }
-
   /**
    * @return {!SubMain}
    * @public
@@ -28,14 +25,12 @@ class SubMain extends Main {
         .$ctor__com_google_j2cl_transpiler_readable_jsvarargs_Main_SubMain__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_jsvarargs_Main_SubMain__() {
     this.$ctor__com_google_j2cl_transpiler_readable_jsvarargs_Main__int(10);
   }
-
   /**
    * @override
    * @param {number} m
@@ -54,7 +49,6 @@ class SubMain extends Main {
         1, ...InternalPreconditions.m_checkNotNull__java_lang_Object(ints));
     return a;
   }
-
   /**
    * @public
    */
@@ -63,7 +57,6 @@ class SubMain extends Main {
     SubMain.$loadModules();
     Main.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -72,7 +65,6 @@ class SubMain extends Main {
   static $isInstance(instance) {
     return instance instanceof SubMain;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -81,7 +73,6 @@ class SubMain extends Main {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, SubMain);
   }
-
   /**
    * @public
    */
@@ -91,12 +82,9 @@ class SubMain extends Main {
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     SubMain, 'com.google.j2cl.transpiler.readable.jsvarargs.Main$SubMain');
-
-
 
 exports = SubMain;
 //# sourceMappingURL=Main$SubMain.js.map

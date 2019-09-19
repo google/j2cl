@@ -1,13 +1,11 @@
 goog.module('com.google.j2cl.transpiler.readable.jsproperties.Main$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Bar = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsproperties.Bar$impl');
 let Foo = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsproperties.Foo$impl');
 let NativeFoo = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsproperties.NativeFoo$impl');
-
 
 class Main extends j_l_Object {
   /**
@@ -16,7 +14,6 @@ class Main extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @return {!Main}
    * @public
@@ -27,14 +24,12 @@ class Main extends j_l_Object {
     $instance.$ctor__com_google_j2cl_transpiler_readable_jsproperties_Main__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_jsproperties_Main__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @public
    */
@@ -42,7 +37,6 @@ class Main extends j_l_Object {
     NativeFoo.$create__().hasOwnProperty;
     Math.PI;
   }
-
   /**
    * @public
    */
@@ -52,7 +46,6 @@ class Main extends j_l_Object {
     Foo.abc;
     Foo.abc = 10;
   }
-
   /**
    * @public
    */
@@ -63,7 +56,6 @@ class Main extends j_l_Object {
     bar.abc;
     bar.abc = 10;
   }
-
   /**
    * @public
    */
@@ -72,7 +64,6 @@ class Main extends j_l_Object {
     Main.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -81,7 +72,6 @@ class Main extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof Main;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -90,7 +80,6 @@ class Main extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Main);
   }
-
   /**
    * @public
    */
@@ -102,12 +91,9 @@ class Main extends j_l_Object {
     NativeFoo = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsproperties.NativeFoo$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     Main, 'com.google.j2cl.transpiler.readable.jsproperties.Main');
-
-
 
 exports = Main;
 //# sourceMappingURL=Main.js.map

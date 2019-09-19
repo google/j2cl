@@ -1,13 +1,11 @@
 goog.module('com.google.j2cl.transpiler.readable.unimplementedbridgemethod.J.$LambdaAdaptor$impl');
 
-
 const J = goog.require('com.google.j2cl.transpiler.readable.unimplementedbridgemethod.J$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-
 
 /**
  * @implements {J}
@@ -25,7 +23,6 @@ class $LambdaAdaptor extends j_l_Object {
     this.$ctor__com_google_j2cl_transpiler_readable_unimplementedbridgemethod_J_$LambdaAdaptor__com_google_j2cl_transpiler_readable_unimplementedbridgemethod_J_$JsFunction(
         fn);
   }
-
   /**
    * @param {?function(?string):number} fn
    * @public
@@ -36,7 +33,6 @@ class $LambdaAdaptor extends j_l_Object {
     this.f_$$fn__com_google_j2cl_transpiler_readable_unimplementedbridgemethod_J_$LambdaAdaptor =
         fn;
   }
-
   /**
    * @param {?string} arg0
    * @return {number}
@@ -49,7 +45,6 @@ class $LambdaAdaptor extends j_l_Object {
             this.f_$$fn__com_google_j2cl_transpiler_readable_unimplementedbridgemethod_J_$LambdaAdaptor,
         $function(arg0));
   }
-
   /**
    * Bridge method.
    * @override
@@ -61,7 +56,6 @@ class $LambdaAdaptor extends j_l_Object {
     return this.m_foo__java_lang_String(
         /**@type {?string} */ ($Casts.$to(arg0, j_l_String)));
   }
-
   /**
    * @public
    */
@@ -70,7 +64,6 @@ class $LambdaAdaptor extends j_l_Object {
     $LambdaAdaptor.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -79,7 +72,6 @@ class $LambdaAdaptor extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof $LambdaAdaptor;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -88,7 +80,6 @@ class $LambdaAdaptor extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, $LambdaAdaptor);
   }
-
   /**
    * @public
    */
@@ -96,15 +87,12 @@ class $LambdaAdaptor extends j_l_Object {
     j_l_String = goog.module.get('java.lang.String$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     $LambdaAdaptor,
     'com.google.j2cl.transpiler.readable.unimplementedbridgemethod.J$$LambdaAdaptor');
 
-
 J.$markImplementor($LambdaAdaptor);
-
 
 exports = $LambdaAdaptor;
 //# sourceMappingURL=J$$LambdaAdaptor.js.map

@@ -1,12 +1,10 @@
 goog.module('com.google.j2cl.transpiler.readable.varargs.Child$impl');
 
-
 const Varargs = goog.require('com.google.j2cl.transpiler.readable.varargs.Varargs$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
-
 
 class Child extends Varargs {
   /**
@@ -15,7 +13,6 @@ class Child extends Varargs {
   constructor() {
     super();
   }
-
   /**
    * @return {!Child}
    * @public
@@ -26,7 +23,6 @@ class Child extends Varargs {
     $instance.$ctor__com_google_j2cl_transpiler_readable_varargs_Child__();
     return $instance;
   }
-
   /**
    * @public
    */
@@ -34,7 +30,6 @@ class Child extends Varargs {
     this.$ctor__com_google_j2cl_transpiler_readable_varargs_Varargs__arrayOf_int(
         /**@type {!Array<number>} */ ($Arrays.$init([1], $int)));
   }
-
   /**
    * @public
    */
@@ -43,7 +38,6 @@ class Child extends Varargs {
     Child.$loadModules();
     Varargs.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -52,7 +46,6 @@ class Child extends Varargs {
   static $isInstance(instance) {
     return instance instanceof Child;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -61,7 +54,6 @@ class Child extends Varargs {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Child);
   }
-
   /**
    * @public
    */
@@ -69,12 +61,9 @@ class Child extends Varargs {
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     Child, 'com.google.j2cl.transpiler.readable.varargs.Child');
-
-
 
 exports = Child;
 //# sourceMappingURL=Child.js.map

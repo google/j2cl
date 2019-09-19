@@ -1,11 +1,9 @@
 goog.module('com.google.j2cl.transpiler.readable.unimplementedbridgemethod.J$impl');
 
-
 const I = goog.require('com.google.j2cl.transpiler.readable.unimplementedbridgemethod.I$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.unimplementedbridgemethod.J.$LambdaAdaptor$impl');
-
 
 /**
  * @interface
@@ -21,7 +19,6 @@ class J {
     J.$clinit();
     return new $LambdaAdaptor(fn);
   }
-
   /**
    * @public
    */
@@ -29,7 +26,6 @@ class J {
     J.$clinit = (() => {});
     J.$loadModules();
   }
-
   /**
    * @param {Function} classConstructor
    * @public
@@ -43,7 +39,6 @@ class J {
         .$implements__com_google_j2cl_transpiler_readable_unimplementedbridgemethod_J =
         true;
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -54,7 +49,6 @@ class J {
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_unimplementedbridgemethod_J;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -65,7 +59,6 @@ class J {
         !!classConstructor.prototype
               .$implements__com_google_j2cl_transpiler_readable_unimplementedbridgemethod_J;
   }
-
   /**
    * @public
    */
@@ -73,14 +66,11 @@ class J {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.unimplementedbridgemethod.J.$LambdaAdaptor$impl');
   }
-};
-
+}
 $Util.$setClassMetadataForInterface(
     J, 'com.google.j2cl.transpiler.readable.unimplementedbridgemethod.J');
 
-
 J.$markImplementor(/** @type {Function} */ (J));
-
 
 exports = J;
 //# sourceMappingURL=J.js.map

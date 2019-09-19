@@ -1,8 +1,6 @@
 goog.module('com.google.j2cl.transpiler.readable.lambdas.Lambdas.Equals$impl');
 
-
 const $Util = goog.require('nativebootstrap.Util$impl');
-
 
 /**
  * @interface
@@ -16,14 +14,12 @@ class Equals {
    * @public
    */
   equals(o) {}
-
   /**
    * @abstract
    * @return {T}
    * @public
    */
   m_get__() {}
-
   /**
    * @template T
    * @param {!Equals<T>} $thisArg
@@ -35,7 +31,6 @@ class Equals {
     Equals.$clinit();
     return null;
   }
-
   /**
    * @public
    */
@@ -43,7 +38,6 @@ class Equals {
     Equals.$clinit = (() => {});
     Equals.$loadModules();
   }
-
   /**
    * @param {Function} classConstructor
    * @public
@@ -56,7 +50,6 @@ class Equals {
         .$implements__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Equals =
         true;
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -67,7 +60,6 @@ class Equals {
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Equals;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -78,19 +70,15 @@ class Equals {
         !!classConstructor.prototype
               .$implements__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Equals;
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadataForInterface(
     Equals, 'com.google.j2cl.transpiler.readable.lambdas.Lambdas$Equals');
 
-
 Equals.$markImplementor(/** @type {Function} */ (Equals));
-
 
 exports = Equals;
 //# sourceMappingURL=Lambdas$Equals.js.map

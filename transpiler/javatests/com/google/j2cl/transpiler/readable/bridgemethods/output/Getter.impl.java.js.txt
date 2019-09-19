@@ -1,10 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.bridgemethods.Getter$impl');
 
-
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.bridgemethods.Getter.$LambdaAdaptor$impl');
-
 
 /**
  * @interface
@@ -17,7 +15,6 @@ class Getter {
    * @public
    */
   m_get__java_lang_String(s) {}
-
   /**
    * @param {?function(?string):?string} fn
    * @return {Getter}
@@ -27,7 +24,6 @@ class Getter {
     Getter.$clinit();
     return new $LambdaAdaptor(fn);
   }
-
   /**
    * @public
    */
@@ -35,7 +31,6 @@ class Getter {
     Getter.$clinit = (() => {});
     Getter.$loadModules();
   }
-
   /**
    * @param {Function} classConstructor
    * @public
@@ -48,7 +43,6 @@ class Getter {
         .$implements__com_google_j2cl_transpiler_readable_bridgemethods_Getter =
         true;
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -59,7 +53,6 @@ class Getter {
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_bridgemethods_Getter;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -70,7 +63,6 @@ class Getter {
         !!classConstructor.prototype
               .$implements__com_google_j2cl_transpiler_readable_bridgemethods_Getter;
   }
-
   /**
    * @public
    */
@@ -78,14 +70,11 @@ class Getter {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.bridgemethods.Getter.$LambdaAdaptor$impl');
   }
-};
-
+}
 $Util.$setClassMetadataForInterface(
     Getter, 'com.google.j2cl.transpiler.readable.bridgemethods.Getter');
 
-
 Getter.$markImplementor(/** @type {Function} */ (Getter));
-
 
 exports = Getter;
 //# sourceMappingURL=Getter.js.map

@@ -1,11 +1,9 @@
 goog.module('com.google.test.Inner$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Outer = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsinnerclass.Main.Outer$impl');
-
 
 class Inner extends j_l_Object {
   /**
@@ -23,7 +21,6 @@ class Inner extends j_l_Object {
     this.$ctor__com_google_j2cl_transpiler_readable_jsinnerclass_Main_Outer_Inner__com_google_j2cl_transpiler_readable_jsinnerclass_Main_Outer(
         $outer_this);
   }
-
   /**
    * @param {Outer} $outer_this
    * @public
@@ -38,7 +35,6 @@ class Inner extends j_l_Object {
             .f_a__com_google_j2cl_transpiler_readable_jsinnerclass_Main_Outer +
         1;
   }
-
   /**
    * @return {number}
    * @public
@@ -47,7 +43,6 @@ class Inner extends j_l_Object {
     return this
         .f_b__com_google_j2cl_transpiler_readable_jsinnerclass_Main_Outer_Inner_;
   }
-
   /**
    * @public
    */
@@ -56,7 +51,6 @@ class Inner extends j_l_Object {
     Inner.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -65,7 +59,6 @@ class Inner extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof Inner;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -74,17 +67,13 @@ class Inner extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Inner);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     Inner, 'com.google.j2cl.transpiler.readable.jsinnerclass.Main$Outer$Inner');
-
-
 
 exports = Inner;
 //# sourceMappingURL=Main$Outer$Inner.js.map

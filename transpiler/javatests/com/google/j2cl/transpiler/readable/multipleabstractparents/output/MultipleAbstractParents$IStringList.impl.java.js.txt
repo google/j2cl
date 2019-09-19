@@ -1,11 +1,9 @@
 goog.module('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.IStringList$impl');
 
-
 const List = goog.require('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.List$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.IStringList.$LambdaAdaptor$impl');
-
 
 /**
  * @interface
@@ -19,7 +17,6 @@ class IStringList {
    * @public
    */
   m_getFoo__java_lang_String(string_1) {}
-
   /**
    * @param {?function(?string):?string} fn
    * @return {IStringList}
@@ -29,7 +26,6 @@ class IStringList {
     IStringList.$clinit();
     return new $LambdaAdaptor(fn);
   }
-
   /**
    * @public
    */
@@ -37,7 +33,6 @@ class IStringList {
     IStringList.$clinit = (() => {});
     IStringList.$loadModules();
   }
-
   /**
    * @param {Function} classConstructor
    * @public
@@ -51,7 +46,6 @@ class IStringList {
         .$implements__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_IStringList =
         true;
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -62,7 +56,6 @@ class IStringList {
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_IStringList;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -73,7 +66,6 @@ class IStringList {
         !!classConstructor.prototype
               .$implements__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_IStringList;
   }
-
   /**
    * @public
    */
@@ -81,15 +73,12 @@ class IStringList {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.IStringList.$LambdaAdaptor$impl');
   }
-};
-
+}
 $Util.$setClassMetadataForInterface(
     IStringList,
     'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$IStringList');
 
-
 IStringList.$markImplementor(/** @type {Function} */ (IStringList));
-
 
 exports = IStringList;
 //# sourceMappingURL=MultipleAbstractParents$IStringList.js.map

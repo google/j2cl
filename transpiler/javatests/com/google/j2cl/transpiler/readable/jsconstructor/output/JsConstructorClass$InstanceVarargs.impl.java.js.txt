@@ -1,13 +1,11 @@
 goog.module('com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.InstanceVarargs$impl');
 
-
 const A = goog.require('com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.A$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let JsConstructorClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
-
 
 class InstanceVarargs extends A {
   /**
@@ -24,7 +22,6 @@ class InstanceVarargs extends A {
     this.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_InstanceVarargs__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass__arrayOf_int(
         $outer_this, args);
   }
-
   /**
    * @param {JsConstructorClass} $outer_this
    * @param {Array<number>} args
@@ -37,7 +34,6 @@ class InstanceVarargs extends A {
     this.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_A__int(
         args[1]);
   }
-
   /**
    * @public
    */
@@ -46,7 +42,6 @@ class InstanceVarargs extends A {
     InstanceVarargs.$loadModules();
     A.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -55,7 +50,6 @@ class InstanceVarargs extends A {
   static $isInstance(instance) {
     return instance instanceof InstanceVarargs;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -64,7 +58,6 @@ class InstanceVarargs extends A {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, InstanceVarargs);
   }
-
   /**
    * @public
    */
@@ -72,13 +65,10 @@ class InstanceVarargs extends A {
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     InstanceVarargs,
     'com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$InstanceVarargs');
-
-
 
 exports = InstanceVarargs;
 //# sourceMappingURL=JsConstructorClass$InstanceVarargs.js.map

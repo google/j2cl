@@ -1,11 +1,9 @@
 goog.module('com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings.InnerClass1$impl');
 
-
 const Parent = goog.require('com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings.Parent$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let MultipleNestings = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings$impl');
-
 
 class InnerClass1 extends Parent {
   /**
@@ -16,7 +14,6 @@ class InnerClass1 extends Parent {
     /** @public {MultipleNestings} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings_InnerClass1;
   }
-
   /**
    * @param {MultipleNestings} $outer_this
    * @return {!InnerClass1}
@@ -31,7 +28,6 @@ class InnerClass1 extends Parent {
             $outer_this);
     return $instance;
   }
-
   /**
    * @param {MultipleNestings} $outer_this
    * @public
@@ -43,12 +39,10 @@ class InnerClass1 extends Parent {
     this.$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings_Parent__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings(
         $outer_this);
   }
-
   /**
    * @public
    */
   m_funInI1__() {}
-
   /**
    * @public
    */
@@ -57,7 +51,6 @@ class InnerClass1 extends Parent {
     InnerClass1.$loadModules();
     Parent.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -66,7 +59,6 @@ class InnerClass1 extends Parent {
   static $isInstance(instance) {
     return instance instanceof InnerClass1;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -75,18 +67,14 @@ class InnerClass1 extends Parent {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, InnerClass1);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     InnerClass1,
     'com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings$InnerClass1');
-
-
 
 exports = InnerClass1;
 //# sourceMappingURL=MultipleNestings$InnerClass1.js.map

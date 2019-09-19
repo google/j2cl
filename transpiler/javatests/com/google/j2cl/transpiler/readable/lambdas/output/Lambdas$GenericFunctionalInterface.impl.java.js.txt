@@ -1,10 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.lambdas.Lambdas.GenericFunctionalInterface$impl');
 
-
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.GenericFunctionalInterface.$LambdaAdaptor$impl');
-
 
 /**
  * @interface
@@ -18,7 +16,6 @@ class GenericFunctionalInterface {
    * @public
    */
   m_m__java_lang_Object(i) {}
-
   /**
    * @template T
    * @param {?function(T):T} fn
@@ -29,7 +26,6 @@ class GenericFunctionalInterface {
     GenericFunctionalInterface.$clinit();
     return /**@type {!$LambdaAdaptor<T>} */ (new $LambdaAdaptor(fn));
   }
-
   /**
    * @public
    */
@@ -37,7 +33,6 @@ class GenericFunctionalInterface {
     GenericFunctionalInterface.$clinit = (() => {});
     GenericFunctionalInterface.$loadModules();
   }
-
   /**
    * @param {Function} classConstructor
    * @public
@@ -50,7 +45,6 @@ class GenericFunctionalInterface {
         .$implements__com_google_j2cl_transpiler_readable_lambdas_Lambdas_GenericFunctionalInterface =
         true;
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -61,7 +55,6 @@ class GenericFunctionalInterface {
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_lambdas_Lambdas_GenericFunctionalInterface;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -72,7 +65,6 @@ class GenericFunctionalInterface {
         !!classConstructor.prototype
               .$implements__com_google_j2cl_transpiler_readable_lambdas_Lambdas_GenericFunctionalInterface;
   }
-
   /**
    * @public
    */
@@ -80,16 +72,13 @@ class GenericFunctionalInterface {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdas.Lambdas.GenericFunctionalInterface.$LambdaAdaptor$impl');
   }
-};
-
+}
 $Util.$setClassMetadataForInterface(
     GenericFunctionalInterface,
     'com.google.j2cl.transpiler.readable.lambdas.Lambdas$GenericFunctionalInterface');
 
-
 GenericFunctionalInterface.$markImplementor(
     /** @type {Function} */ (GenericFunctionalInterface));
-
 
 exports = GenericFunctionalInterface;
 //# sourceMappingURL=Lambdas$GenericFunctionalInterface.js.map

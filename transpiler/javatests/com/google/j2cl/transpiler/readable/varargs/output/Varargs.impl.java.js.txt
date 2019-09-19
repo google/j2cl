@@ -1,6 +1,5 @@
 goog.module('com.google.j2cl.transpiler.readable.varargs.Varargs$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
@@ -9,7 +8,6 @@ let Cloneable = goog.forwardDeclare('java.lang.Cloneable$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
-
 class Varargs extends j_l_Object {
   /**
    * @protected
@@ -17,7 +15,6 @@ class Varargs extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * Factory method corresponding to constructor 'Varargs(int...)'.
    * @param {Array<number>} args
@@ -32,7 +29,6 @@ class Varargs extends j_l_Object {
             args);
     return $instance;
   }
-
   /**
    * Initialization from constructor 'Varargs(int...)'.
    * @param {Array<number>} args
@@ -42,7 +38,6 @@ class Varargs extends j_l_Object {
       args) {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * Factory method corresponding to constructor 'Varargs()'.
    * @return {!Varargs}
@@ -54,7 +49,6 @@ class Varargs extends j_l_Object {
     $instance.$ctor__com_google_j2cl_transpiler_readable_varargs_Varargs__();
     return $instance;
   }
-
   /**
    * Initialization from constructor 'Varargs()'.
    * @public
@@ -63,26 +57,22 @@ class Varargs extends j_l_Object {
     this.$ctor__com_google_j2cl_transpiler_readable_varargs_Varargs__arrayOf_int(
         /**@type {!Array<number>} */ ($Arrays.$init([1], $int)));
   }
-
   /**
    * @param {number} a
    * @param {Array<*>} args
    * @public
    */
   m_test__int__arrayOf_java_lang_Object(a, args) {}
-
   /**
    * @param {Array<(Cloneable|Array)>} args
    * @public
    */
   m_testCloneable__arrayOf_java_lang_Cloneable(args) {}
-
   /**
    * @param {Array<(Serializable|Array)>} args
    * @public
    */
   m_testSerializable__arrayOf_java_io_Serializable(args) {}
-
   /**
    * @template T
    * @param {Array<T>} elements
@@ -91,7 +81,6 @@ class Varargs extends j_l_Object {
   static m_fun__arrayOf_java_lang_Object(elements) {
     Varargs.$clinit();
   }
-
   /**
    * @template E
    * @param {E} a
@@ -102,7 +91,6 @@ class Varargs extends j_l_Object {
     Varargs.$clinit();
     Varargs.m_fun__arrayOf_java_lang_Object([a, b]);
   }
-
   /**
    * @public
    */
@@ -119,7 +107,6 @@ class Varargs extends j_l_Object {
     v.m_testSerializable__arrayOf_java_io_Serializable(
         /**@type {!Array<Array<*>>} */ ($Arrays.$init([], j_l_Object, 2)));
   }
-
   /**
    * @public
    */
@@ -128,7 +115,6 @@ class Varargs extends j_l_Object {
     Varargs.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -137,7 +123,6 @@ class Varargs extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof Varargs;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -146,7 +131,6 @@ class Varargs extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Varargs);
   }
-
   /**
    * @public
    */
@@ -154,12 +138,9 @@ class Varargs extends j_l_Object {
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     Varargs, 'com.google.j2cl.transpiler.readable.varargs.Varargs');
-
-
 
 exports = Varargs;
 //# sourceMappingURL=Varargs.js.map

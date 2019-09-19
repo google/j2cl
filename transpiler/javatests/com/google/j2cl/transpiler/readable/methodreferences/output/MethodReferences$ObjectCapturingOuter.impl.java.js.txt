@@ -1,11 +1,9 @@
 goog.module('com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.ObjectCapturingOuter$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let MethodReferences = goog.forwardDeclare('com.google.j2cl.transpiler.readable.methodreferences.MethodReferences$impl');
-
 
 /**
  * @template T
@@ -19,7 +17,6 @@ class ObjectCapturingOuter extends j_l_Object {
     /** @public {MethodReferences<T>} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_ObjectCapturingOuter;
   }
-
   /**
    * @template T
    * @param {MethodReferences<T>} $outer_this
@@ -35,7 +32,6 @@ class ObjectCapturingOuter extends j_l_Object {
             $outer_this);
     return $instance;
   }
-
   /**
    * @param {MethodReferences<T>} $outer_this
    * @public
@@ -46,7 +42,6 @@ class ObjectCapturingOuter extends j_l_Object {
         $outer_this;
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @return {MethodReferences<T>}
    * @public
@@ -55,7 +50,6 @@ class ObjectCapturingOuter extends j_l_Object {
     return this
         .f_$outer_this__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_ObjectCapturingOuter;
   }
-
   /**
    * @public
    */
@@ -64,7 +58,6 @@ class ObjectCapturingOuter extends j_l_Object {
     ObjectCapturingOuter.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -73,7 +66,6 @@ class ObjectCapturingOuter extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof ObjectCapturingOuter;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -82,18 +74,14 @@ class ObjectCapturingOuter extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, ObjectCapturingOuter);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     ObjectCapturingOuter,
     'com.google.j2cl.transpiler.readable.methodreferences.MethodReferences$ObjectCapturingOuter');
-
-
 
 exports = ObjectCapturingOuter;
 //# sourceMappingURL=MethodReferences$ObjectCapturingOuter.js.map

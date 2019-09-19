@@ -1,10 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.instancejsmethods.MyInterface$impl');
 
-
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.instancejsmethods.MyInterface.$LambdaAdaptor$impl');
-
 
 /**
  * @interface
@@ -16,7 +14,6 @@ class MyInterface {
    * @public
    */
   m_intfFoo__() {}
-
   /**
    * @param {?function():number} fn
    * @return {MyInterface}
@@ -26,7 +23,6 @@ class MyInterface {
     MyInterface.$clinit();
     return new $LambdaAdaptor(fn);
   }
-
   /**
    * @public
    */
@@ -34,7 +30,6 @@ class MyInterface {
     MyInterface.$clinit = (() => {});
     MyInterface.$loadModules();
   }
-
   /**
    * @param {Function} classConstructor
    * @public
@@ -47,7 +42,6 @@ class MyInterface {
         .$implements__com_google_j2cl_transpiler_readable_instancejsmethods_MyInterface =
         true;
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -58,7 +52,6 @@ class MyInterface {
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_instancejsmethods_MyInterface;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -69,7 +62,6 @@ class MyInterface {
         !!classConstructor.prototype
               .$implements__com_google_j2cl_transpiler_readable_instancejsmethods_MyInterface;
   }
-
   /**
    * @public
    */
@@ -77,15 +69,12 @@ class MyInterface {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.instancejsmethods.MyInterface.$LambdaAdaptor$impl');
   }
-};
-
+}
 $Util.$setClassMetadataForInterface(
     MyInterface,
     'com.google.j2cl.transpiler.readable.instancejsmethods.MyInterface');
 
-
 MyInterface.$markImplementor(/** @type {Function} */ (MyInterface));
-
 
 exports = MyInterface;
 //# sourceMappingURL=MyInterface.js.map

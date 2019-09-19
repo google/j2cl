@@ -1,11 +1,9 @@
 goog.module('com.google.j2cl.transpiler.readable.interfacejsbridge.Main$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let InterfaceImpl = goog.forwardDeclare('com.google.j2cl.transpiler.readable.interfacejsbridge.InterfaceImpl$impl');
-
 
 class Main extends j_l_Object {
   /**
@@ -14,7 +12,6 @@ class Main extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @return {!Main}
    * @public
@@ -26,14 +23,12 @@ class Main extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_interfacejsbridge_Main__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_interfacejsbridge_Main__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @public
    */
@@ -47,7 +42,6 @@ class Main extends j_l_Object {
     c.foo(1);
     d.foo(1);
   }
-
   /**
    * @public
    */
@@ -56,7 +50,6 @@ class Main extends j_l_Object {
     Main.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -65,7 +58,6 @@ class Main extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof Main;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -74,7 +66,6 @@ class Main extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Main);
   }
-
   /**
    * @public
    */
@@ -82,12 +73,9 @@ class Main extends j_l_Object {
     InterfaceImpl = goog.module.get(
         'com.google.j2cl.transpiler.readable.interfacejsbridge.InterfaceImpl$impl');
   }
-};
-
+}
 $Util.$setClassMetadata(
     Main, 'com.google.j2cl.transpiler.readable.interfacejsbridge.Main');
-
-
 
 exports = Main;
 //# sourceMappingURL=Main.js.map

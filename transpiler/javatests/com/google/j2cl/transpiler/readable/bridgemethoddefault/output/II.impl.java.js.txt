@@ -1,9 +1,7 @@
 goog.module('com.google.j2cl.transpiler.readable.bridgemethoddefault.II$impl');
 
-
 const I = goog.require('com.google.j2cl.transpiler.readable.bridgemethoddefault.I$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
-
 
 /**
  * @interface
@@ -16,7 +14,6 @@ class II {
    * @public
    */
   m_m__java_lang_String(s) {}
-
   /**
    * @param {!II} $thisArg
    * @param {?string} s
@@ -26,7 +23,6 @@ class II {
       $thisArg, s) {
     II.$clinit();
   }
-
   /**
    * @public
    */
@@ -34,7 +30,6 @@ class II {
     II.$clinit = (() => {});
     II.$loadModules();
   }
-
   /**
    * @param {Function} classConstructor
    * @public
@@ -48,7 +43,6 @@ class II {
         .$implements__com_google_j2cl_transpiler_readable_bridgemethoddefault_II =
         true;
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -59,7 +53,6 @@ class II {
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_bridgemethoddefault_II;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -70,19 +63,15 @@ class II {
         !!classConstructor.prototype
               .$implements__com_google_j2cl_transpiler_readable_bridgemethoddefault_II;
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadataForInterface(
     II, 'com.google.j2cl.transpiler.readable.bridgemethoddefault.II');
 
-
 II.$markImplementor(/** @type {Function} */ (II));
-
 
 exports = II;
 //# sourceMappingURL=II.js.map

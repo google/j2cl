@@ -1,11 +1,9 @@
 goog.module('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.AbstractListCollection$impl');
 
-
 const Collection = goog.require('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.Collection$impl');
 const List = goog.require('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.List$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
-
 
 /**
  * @abstract
@@ -20,14 +18,12 @@ class AbstractListCollection extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_AbstractListCollection__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @public
    */
@@ -36,7 +32,6 @@ class AbstractListCollection extends j_l_Object {
     AbstractListCollection.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -45,7 +40,6 @@ class AbstractListCollection extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof AbstractListCollection;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -54,21 +48,17 @@ class AbstractListCollection extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, AbstractListCollection);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     AbstractListCollection,
     'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$AbstractListCollection');
 
-
 List.$markImplementor(AbstractListCollection);
 Collection.$markImplementor(AbstractListCollection);
-
 
 exports = AbstractListCollection;
 //# sourceMappingURL=MultipleAbstractParents$AbstractListCollection.js.map

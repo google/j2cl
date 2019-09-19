@@ -1,10 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.jsfunction.Main.ApiWithMethodReturningParametricJsFunction$impl');
 
-
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunction.Main.ApiWithMethodReturningParametricJsFunction.$LambdaAdaptor$impl');
-
 
 /**
  * @interface
@@ -17,7 +15,6 @@ class ApiWithMethodReturningParametricJsFunction {
    * @public
    */
   m_anApi__() {}
-
   /**
    * @template T
    * @param {?function():?function(T):void} fn
@@ -28,7 +25,6 @@ class ApiWithMethodReturningParametricJsFunction {
     ApiWithMethodReturningParametricJsFunction.$clinit();
     return /**@type {!$LambdaAdaptor<T>} */ (new $LambdaAdaptor(fn));
   }
-
   /**
    * @public
    */
@@ -36,7 +32,6 @@ class ApiWithMethodReturningParametricJsFunction {
     ApiWithMethodReturningParametricJsFunction.$clinit = (() => {});
     ApiWithMethodReturningParametricJsFunction.$loadModules();
   }
-
   /**
    * @param {Function} classConstructor
    * @public
@@ -49,7 +44,6 @@ class ApiWithMethodReturningParametricJsFunction {
         .$implements__com_google_j2cl_transpiler_readable_jsfunction_Main_ApiWithMethodReturningParametricJsFunction =
         true;
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -60,7 +54,6 @@ class ApiWithMethodReturningParametricJsFunction {
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_jsfunction_Main_ApiWithMethodReturningParametricJsFunction;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -71,7 +64,6 @@ class ApiWithMethodReturningParametricJsFunction {
         !!classConstructor.prototype
               .$implements__com_google_j2cl_transpiler_readable_jsfunction_Main_ApiWithMethodReturningParametricJsFunction;
   }
-
   /**
    * @public
    */
@@ -79,16 +71,13 @@ class ApiWithMethodReturningParametricJsFunction {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsfunction.Main.ApiWithMethodReturningParametricJsFunction.$LambdaAdaptor$impl');
   }
-};
-
+}
 $Util.$setClassMetadataForInterface(
     ApiWithMethodReturningParametricJsFunction,
     'com.google.j2cl.transpiler.readable.jsfunction.Main$ApiWithMethodReturningParametricJsFunction');
 
-
 ApiWithMethodReturningParametricJsFunction.$markImplementor(
     /** @type {Function} */ (ApiWithMethodReturningParametricJsFunction));
-
 
 exports = ApiWithMethodReturningParametricJsFunction;
 //# sourceMappingURL=Main$ApiWithMethodReturningParametricJsFunction.js.map

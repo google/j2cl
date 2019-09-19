@@ -1,9 +1,7 @@
 goog.module('com.google.j2cl.transpiler.readable.typewildcards.GenericType$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
-
 
 /**
  * @template T
@@ -15,7 +13,6 @@ class GenericType extends j_l_Object {
   constructor() {
     super();
   }
-
   /**
    * @template T
    * @return {!GenericType<T>}
@@ -28,14 +25,12 @@ class GenericType extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_typewildcards_GenericType__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_typewildcards_GenericType__() {
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @public
    */
@@ -44,7 +39,6 @@ class GenericType extends j_l_Object {
     GenericType.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -53,7 +47,6 @@ class GenericType extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof GenericType;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -62,18 +55,14 @@ class GenericType extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, GenericType);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     GenericType,
     'com.google.j2cl.transpiler.readable.typewildcards.GenericType');
-
-
 
 exports = GenericType;
 //# sourceMappingURL=GenericType.js.map

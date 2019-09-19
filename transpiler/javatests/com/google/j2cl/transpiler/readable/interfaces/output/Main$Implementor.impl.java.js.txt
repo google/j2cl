@@ -1,13 +1,11 @@
 goog.module('com.google.j2cl.transpiler.readable.interfaces.Main.Implementor$impl');
 
-
 const Interface = goog.require('com.google.j2cl.transpiler.readable.interfaces.Main.Interface$impl');
 const SubInterface = goog.require('com.google.j2cl.transpiler.readable.interfaces.Main.SubInterface$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Main = goog.forwardDeclare('com.google.j2cl.transpiler.readable.interfaces.Main$impl');
-
 
 /**
  * @implements {SubInterface}
@@ -22,7 +20,6 @@ class Implementor extends j_l_Object {
     /** @public {Main} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_interfaces_Main_Implementor;
   }
-
   /**
    * @param {Main} $outer_this
    * @return {!Implementor}
@@ -37,7 +34,6 @@ class Implementor extends j_l_Object {
             $outer_this);
     return $instance;
   }
-
   /**
    * @param {Main} $outer_this
    * @public
@@ -48,13 +44,11 @@ class Implementor extends j_l_Object {
         $outer_this;
     this.$ctor__java_lang_Object__();
   }
-
   /**
    * @override
    * @public
    */
   m_interfaceMethod__() {}
-
   /**
    * Default method forwarding stub.
    * @override
@@ -66,7 +60,6 @@ class Implementor extends j_l_Object {
         .m_defaultMethodX__$default__com_google_j2cl_transpiler_readable_interfaces_Main_SubInterface__java_lang_String(
             this, arg0);
   }
-
   /**
    * Default method forwarding stub.
    * @override
@@ -78,7 +71,6 @@ class Implementor extends j_l_Object {
         .m_defaultMethod__$default__com_google_j2cl_transpiler_readable_interfaces_Main_Interface__java_lang_Object(
             this, arg0);
   }
-
   /**
    * @public
    */
@@ -89,7 +81,6 @@ class Implementor extends j_l_Object {
     SubInterface.$clinit();
     Interface.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -98,7 +89,6 @@ class Implementor extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof Implementor;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -107,21 +97,17 @@ class Implementor extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Implementor);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     Implementor,
     'com.google.j2cl.transpiler.readable.interfaces.Main$Implementor');
 
-
 SubInterface.$markImplementor(Implementor);
 Interface.$markImplementor(Implementor);
-
 
 exports = Implementor;
 //# sourceMappingURL=Main$Implementor.js.map

@@ -1,10 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.genericanddefaultmethods.InterfaceWithDefault$impl');
 
-
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let System = goog.forwardDeclare('java.lang.System$impl');
-
 
 /**
  * @interface
@@ -16,7 +14,6 @@ class InterfaceWithDefault {
    * @public
    */
   m_foo__java_lang_String(value) {}
-
   /**
    * @param {!InterfaceWithDefault} $thisArg
    * @param {?string} value
@@ -28,7 +25,6 @@ class InterfaceWithDefault {
     System.f_out__java_lang_System.m_println__java_lang_String(
         'in InterfaceWithDefault');
   }
-
   /**
    * @public
    */
@@ -36,7 +32,6 @@ class InterfaceWithDefault {
     InterfaceWithDefault.$clinit = (() => {});
     InterfaceWithDefault.$loadModules();
   }
-
   /**
    * @param {Function} classConstructor
    * @public
@@ -49,7 +44,6 @@ class InterfaceWithDefault {
         .$implements__com_google_j2cl_transpiler_readable_genericanddefaultmethods_InterfaceWithDefault =
         true;
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -60,7 +54,6 @@ class InterfaceWithDefault {
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_genericanddefaultmethods_InterfaceWithDefault;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -71,23 +64,19 @@ class InterfaceWithDefault {
         !!classConstructor.prototype
               .$implements__com_google_j2cl_transpiler_readable_genericanddefaultmethods_InterfaceWithDefault;
   }
-
   /**
    * @public
    */
   static $loadModules() {
     System = goog.module.get('java.lang.System$impl');
   }
-};
-
+}
 $Util.$setClassMetadataForInterface(
     InterfaceWithDefault,
     'com.google.j2cl.transpiler.readable.genericanddefaultmethods.InterfaceWithDefault');
 
-
 InterfaceWithDefault.$markImplementor(
     /** @type {Function} */ (InterfaceWithDefault));
-
 
 exports = InterfaceWithDefault;
 //# sourceMappingURL=InterfaceWithDefault.js.map

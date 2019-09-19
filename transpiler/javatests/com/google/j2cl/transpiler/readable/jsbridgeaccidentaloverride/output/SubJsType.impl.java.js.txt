@@ -1,10 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.SubJsType$impl');
 
-
 const MyInterface = goog.require('com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyInterface$impl');
 const MyJsType = goog.require('com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyJsType$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
-
 
 /**
  * @implements {MyInterface}
@@ -16,7 +14,6 @@ class SubJsType extends MyJsType {
   constructor() {
     super();
   }
-
   /**
    * @return {!SubJsType}
    * @public
@@ -28,14 +25,12 @@ class SubJsType extends MyJsType {
         .$ctor__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_SubJsType__();
     return $instance;
   }
-
   /**
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_SubJsType__() {
     this.$ctor__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_MyJsType__();
   }
-
   /**
    * @override
    * @param {number} a
@@ -45,7 +40,6 @@ class SubJsType extends MyJsType {
   bar(a) {
     return a + 2;
   }
-
   /**
    * Bridge method for exposing non-JsMethod.
    * @override
@@ -56,7 +50,6 @@ class SubJsType extends MyJsType {
   m_bar__int(arg0) {
     return this.bar(arg0);
   }
-
   /**
    * Bridge method for exposing non-JsMethod.
    * @override
@@ -67,7 +60,6 @@ class SubJsType extends MyJsType {
   m_foo__int(arg0) {
     return this.foo(arg0);
   }
-
   /**
    * @public
    */
@@ -76,7 +68,6 @@ class SubJsType extends MyJsType {
     SubJsType.$loadModules();
     MyJsType.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -85,7 +76,6 @@ class SubJsType extends MyJsType {
   static $isInstance(instance) {
     return instance instanceof SubJsType;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -94,20 +84,16 @@ class SubJsType extends MyJsType {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, SubJsType);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     SubJsType,
     'com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.SubJsType');
 
-
 MyInterface.$markImplementor(SubJsType);
-
 
 exports = SubJsType;
 //# sourceMappingURL=SubJsType.js.map

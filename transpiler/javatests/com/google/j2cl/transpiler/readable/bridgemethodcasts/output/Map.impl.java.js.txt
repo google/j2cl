@@ -1,10 +1,8 @@
 goog.module('com.google.j2cl.transpiler.readable.bridgemethodcasts.Map$impl');
 
-
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.bridgemethodcasts.Map.$LambdaAdaptor$impl');
-
 
 /**
  * @interface
@@ -19,7 +17,6 @@ class Map {
    * @public
    */
   m_put__java_lang_Object__java_lang_Object(key, value) {}
-
   /**
    * @template K, V
    * @param {?function(K, V):V} fn
@@ -30,7 +27,6 @@ class Map {
     Map.$clinit();
     return /**@type {!$LambdaAdaptor<K, V>} */ (new $LambdaAdaptor(fn));
   }
-
   /**
    * @public
    */
@@ -38,7 +34,6 @@ class Map {
     Map.$clinit = (() => {});
     Map.$loadModules();
   }
-
   /**
    * @param {Function} classConstructor
    * @public
@@ -51,7 +46,6 @@ class Map {
         .$implements__com_google_j2cl_transpiler_readable_bridgemethodcasts_Map =
         true;
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -62,7 +56,6 @@ class Map {
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_bridgemethodcasts_Map;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -73,7 +66,6 @@ class Map {
         !!classConstructor.prototype
               .$implements__com_google_j2cl_transpiler_readable_bridgemethodcasts_Map;
   }
-
   /**
    * @public
    */
@@ -81,14 +73,11 @@ class Map {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.bridgemethodcasts.Map.$LambdaAdaptor$impl');
   }
-};
-
+}
 $Util.$setClassMetadataForInterface(
     Map, 'com.google.j2cl.transpiler.readable.bridgemethodcasts.Map');
 
-
 Map.$markImplementor(/** @type {Function} */ (Map));
-
 
 exports = Map;
 //# sourceMappingURL=Map.js.map

@@ -1,9 +1,7 @@
 goog.module('com.google.j2cl.transpiler.readable.deprecated.DeprecatedExample$impl');
 
-
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
-
 
 /**
  * @deprecated
@@ -20,7 +18,6 @@ class DeprecatedExample extends j_l_Object {
     this.deprecatedInstanceField;
     this.$ctor__com_google_j2cl_transpiler_readable_deprecated_DeprecatedExample__();
   }
-
   /**
    * @param {*} someObject
    * @public
@@ -29,14 +26,12 @@ class DeprecatedExample extends j_l_Object {
   static deprecatedStaticMethod(someObject) {
     DeprecatedExample.$clinit();
   }
-
   /**
    * @param {?string} someArg
    * @public
    * @deprecated
    */
   deprecatedInstanceMethod(someArg) {}
-
   /**
    * @public
    * @deprecated
@@ -45,14 +40,12 @@ class DeprecatedExample extends j_l_Object {
     this.$ctor__java_lang_Object__();
     this.$init__com_google_j2cl_transpiler_readable_deprecated_DeprecatedExample();
   }
-
   /**
    * @private
    */
   $init__com_google_j2cl_transpiler_readable_deprecated_DeprecatedExample() {
     this.deprecatedInstanceField = 'deprecated field';
   }
-
   /**
    * @public
    */
@@ -61,7 +54,6 @@ class DeprecatedExample extends j_l_Object {
     DeprecatedExample.$loadModules();
     j_l_Object.$clinit();
   }
-
   /**
    * @param {?} instance
    * @return {boolean}
@@ -70,7 +62,6 @@ class DeprecatedExample extends j_l_Object {
   static $isInstance(instance) {
     return instance instanceof DeprecatedExample;
   }
-
   /**
    * @param {Function} classConstructor
    * @return {boolean}
@@ -79,22 +70,17 @@ class DeprecatedExample extends j_l_Object {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, DeprecatedExample);
   }
-
   /**
    * @public
    */
   static $loadModules() {}
-};
-
+}
 $Util.$setClassMetadata(
     DeprecatedExample,
     'com.google.j2cl.transpiler.readable.deprecated.DeprecatedExample');
 
-
 /** @public {?string} @const @deprecated */
 DeprecatedExample.DEPRECATED_STATIC_FIELD = 'deprecated field';
-
-
 
 exports = DeprecatedExample;
 //# sourceMappingURL=DeprecatedExample.js.map
