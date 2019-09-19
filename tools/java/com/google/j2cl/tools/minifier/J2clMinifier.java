@@ -268,7 +268,7 @@ public class J2clMinifier {
   private static StringBuilder writeCharOrReplace(
       StringBuilder minifiedContentBuffer, StringBuilder identifierBuffer, char c, int state) {
     if ((c == '\n' || c == 0) && state == S_NON_IDENTIFIER) {
-      maybeReplaceGoogForwardDeclare(minifiedContentBuffer);
+      maybeReplaceGoogStatement(minifiedContentBuffer);
     }
     if (c != 0) {
       minifiedContentBuffer.append(c);
@@ -276,18 +276,31 @@ public class J2clMinifier {
     return identifierBuffer;
   }
 
+  private static final String MODULE_NAME = "['\"][\\w\\.$]+['\"]";
   private static final Pattern GOOG_FORWARD_DECLARE =
-      Pattern.compile("((?:let|var) [\\w$]+) = goog.forwardDeclare\\(['\"][\\w\\.$]+['\"]\\);");
+      Pattern.compile("((?:let|var) [\\w$]+) = goog.forwardDeclare\\(" + MODULE_NAME + "\\);");
+  private static final Pattern GOOG_REQUIRE =
+      Pattern.compile("goog.require\\(" + MODULE_NAME + "\\);");
 
-  private static void maybeReplaceGoogForwardDeclare(StringBuilder minifiedContentBuffer) {
+  private static void maybeReplaceGoogStatement(StringBuilder minifiedContentBuffer) {
     int start = minifiedContentBuffer.lastIndexOf("\n") + 1;
     int end = minifiedContentBuffer.length();
     if (start == end) {
       return;
     }
+
+    // goog.forwardDeclare is only useful for compiler except the variable declaration.
     Matcher m = GOOG_FORWARD_DECLARE.matcher(minifiedContentBuffer).region(start, end);
     if (m.matches()) {
       minifiedContentBuffer.replace(start, minifiedContentBuffer.length(), m.group(1)).append(';');
+      return;
+    }
+
+    // Unassigned goog.require is only useful for compiler and bundling.
+    m = GOOG_REQUIRE.matcher(minifiedContentBuffer).region(start, end);
+    if (m.matches()) {
+      minifiedContentBuffer.delete(start, minifiedContentBuffer.length());
+      return;
     }
   }
 
