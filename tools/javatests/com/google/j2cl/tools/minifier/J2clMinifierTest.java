@@ -112,6 +112,8 @@ public class J2clMinifierTest extends TestCase {
     assertChange(".$implements__java_util_Map$Entry;", ".implements＿1;");
     assertChange("{$implements__java_util_Map$Entry}", "{implements＿1}");
     assertChange("($implements__java_util_Map$Entry)", "(implements＿1)");
+
+    assertChange("abc.$f_baz__com_google_j2cl_MyClass.klm", "abc.baz＿1.klm");
   }
 
   public void testLineComments() {
@@ -152,6 +154,25 @@ public class J2clMinifierTest extends TestCase {
     assertChange("m_foo__", "foo＿1");
     assertChange("m_bar__java_lang_Object", "bar＿1");
     assertChange("m_baz__java_lang_Object__java_lang_String", "baz＿1");
+  }
+
+  public void testForwardDeclare() {
+    assertChange("let Byte = goog.forwardDeclare('java.lang.Byte$impl');", "let Byte;");
+    assertChange("let Byte = goog.forwardDeclare(\"java.lang.Byte$impl\");", "let Byte;");
+    assertChange("var Foo = goog.forwardDeclare('java.lang.Foo');", "var Foo;");
+    assertChange("var $Foo1_ = goog.forwardDeclare('java.lang.$Foo1_');", "var $Foo1_;");
+    assertChange("\nlet Byte = goog.forwardDeclare('java.lang.Byte$impl');\n", "\nlet Byte;\n");
+    assertChange(
+        "let Byte = goog.forwardDeclare(\"java.lang.Byte$impl\");\n"
+            + "var Foo = goog.forwardDeclare('java.lang.Foo');",
+        "let Byte;\nvar Foo;");
+
+    assertNoChange("let Byte = goog.forwardDeclare('java.lang.Byte');('$impl');");
+    assertNoChange("goog.forwardDeclare('java.lang.Foo');");
+    assertNoChange("var Foo = goog.forwardDeclare('java.lang.Foo')");
+    assertNoChange("identvar Foo = goog.forwardDeclare('java.lang.Foo');");
+    assertNoChange("\"let Byte = goog.forwardDeclare('java.lang.Byte$impl');\"");
+    assertNoChange("//let Byte = goog.forwardDeclare('java.lang.Byte$impl');");
   }
 
   public void testNoChanges() {
