@@ -6,7 +6,7 @@ def load_j2cl_repo_deps():
     _github_repo(
         name = "io_bazel_rules_closure",
         repo = "bazelbuild/rules_closure",
-        tag = "master",
+        tag = "0.9.0",
     )
 
     _github_repo(
