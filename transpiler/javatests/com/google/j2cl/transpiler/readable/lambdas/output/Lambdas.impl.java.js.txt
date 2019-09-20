@@ -65,9 +65,9 @@ class Lambdas extends j_l_Object {
    */
   m_testLambdaExpressionStyle__() {
     this.m_call__com_google_j2cl_transpiler_readable_lambdas_Lambdas_FunctionalInterface__int(
-        FunctionalInterface.$adapt(((/** number */ i) => {
+        FunctionalInterface.$adapt((/** number */ i) => {
           return i + 1;
-        })),
+        }),
         10);
   }
   /**
@@ -75,9 +75,9 @@ class Lambdas extends j_l_Object {
    */
   m_testLambdaBlockStyle__() {
     this.m_call__com_google_j2cl_transpiler_readable_lambdas_Lambdas_FunctionalInterface__int(
-        FunctionalInterface.$adapt(((/** number */ i) => {
+        FunctionalInterface.$adapt((/** number */ i) => {
           return i + 2;
-        })),
+        }),
         10);
   }
   /**
@@ -85,10 +85,10 @@ class Lambdas extends j_l_Object {
    */
   m_testLambdaCaptureField__() {
     this.m_call__com_google_j2cl_transpiler_readable_lambdas_Lambdas_FunctionalInterface__int(
-        FunctionalInterface.$adapt(((/** number */ i) => {
+        FunctionalInterface.$adapt((/** number */ i) => {
           return this.f_field__com_google_j2cl_transpiler_readable_lambdas_Lambdas +
               i + 1;
-        })),
+        }),
         10);
   }
   /**
@@ -97,9 +97,9 @@ class Lambdas extends j_l_Object {
   m_testLambdaCaptureLocal__() {
     let x = 1;
     this.m_call__com_google_j2cl_transpiler_readable_lambdas_Lambdas_FunctionalInterface__int(
-        FunctionalInterface.$adapt(((/** number */ i) => {
+        FunctionalInterface.$adapt((/** number */ i) => {
           return x + i + 1;
-        })),
+        }),
         10);
   }
   /**
@@ -108,12 +108,12 @@ class Lambdas extends j_l_Object {
   m_testLambdaCaptureFieldAndLocal__() {
     let x = 1;
     this.m_call__com_google_j2cl_transpiler_readable_lambdas_Lambdas_FunctionalInterface__int(
-        FunctionalInterface.$adapt(((/** number */ i) => {
+        FunctionalInterface.$adapt((/** number */ i) => {
           let y = 1;
           return x + y +
               this.f_field__com_google_j2cl_transpiler_readable_lambdas_Lambdas +
               i + 1;
-        })),
+        }),
         10);
   }
   /**
@@ -125,12 +125,12 @@ class Lambdas extends j_l_Object {
    */
   m_testLambdaCallOuterFunction__() {
     this.m_call__com_google_j2cl_transpiler_readable_lambdas_Lambdas_FunctionalInterface__int(
-        FunctionalInterface.$adapt(((/** number */ i) => {
+        FunctionalInterface.$adapt((/** number */ i) => {
           this.m_funOuter__();
           this.m_funOuter__();
           this.m_funOuter__();
           return i + 2;
-        })),
+        }),
         10);
   }
   /**
@@ -138,9 +138,9 @@ class Lambdas extends j_l_Object {
    */
   static m_testLambdaInStaticContext__() {
     Lambdas.$clinit();
-    let f = FunctionalInterface.$adapt(((/** number */ i) => {
+    let f = FunctionalInterface.$adapt((/** number */ i) => {
       return i;
-    }));
+    });
   }
   /**
    * @template T
@@ -149,11 +149,11 @@ class Lambdas extends j_l_Object {
    */
   m_testInstanceMethodTypeVariableThroughLambda__() {
     let wrapped = /**@type {Functional<T>} */ (
-        Functional.$adapt(((/** Functional<T> */ f) => {
+        Functional.$adapt((/** Functional<T> */ f) => {
           return /**@type {!$1<T>} */ (
               $1.$create__com_google_j2cl_transpiler_readable_lambdas_Lambdas(
                   this));
-        })));
+        }));
   }
   /**
    * @template T
@@ -163,9 +163,9 @@ class Lambdas extends j_l_Object {
   static m_testStaticMethodTypeVariableThroughLambda__() {
     Lambdas.$clinit();
     let wrapped = /**@type {Functional<T>} */ (
-        Functional.$adapt(((/** Functional<T> */ f) => {
+        Functional.$adapt((/** Functional<T> */ f) => {
           return /**@type {!$2<T>} */ ($2.$create__());
-        })));
+        }));
   }
   /**
    * @template T
@@ -209,29 +209,29 @@ class Lambdas extends j_l_Object {
    */
   m_testLambdaWithGenerics__() {
     this.m_callWithTypeVariable__com_google_j2cl_transpiler_readable_lambdas_Lambdas_GenericFunctionalInterface__java_lang_Object(
-        GenericFunctionalInterface.$adapt(((i) => {
+        GenericFunctionalInterface.$adapt((i) => {
           let i_1 = /**@type {Error} */ ($Casts.$to(i, Error));
           return i_1;
-        })),
+        }),
         Error.$create__());
     this.m_callParameterized__com_google_j2cl_transpiler_readable_lambdas_Lambdas_GenericFunctionalInterface__java_lang_Error(
-        GenericFunctionalInterface.$adapt(((i_2) => {
+        GenericFunctionalInterface.$adapt((i_2) => {
           let i_3 = /**@type {Error} */ ($Casts.$to(i_2, Error));
           return i_3;
-        })),
+        }),
         Error.$create__());
     Lambdas
         .m_callTypeVariableWithBounds__com_google_j2cl_transpiler_readable_lambdas_Lambdas_GenericFunctionalInterface__java_lang_Enum(
             /**@type {GenericFunctionalInterface<Enum<T>>} */ (
-                GenericFunctionalInterface.$adapt(((i_4) => {
+                GenericFunctionalInterface.$adapt((i_4) => {
                   let i_5 = /**@type {Enum} */ ($Casts.$to(i_4, Enum));
                   return i_5;
-                }))),
+                })),
             /**@type {Enum<T>} */ (null));
-    let f = Lambdas_Function.$adapt(((item) => {
+    let f = Lambdas_Function.$adapt((item) => {
       let item_1 = /**@type {Enum} */ ($Casts.$to(item, Enum));
       return Long.m_valueOf__long($Long.fromInt(1));
-    }));
+    });
   }
   /**
    * @return {*}
@@ -246,25 +246,25 @@ class Lambdas extends j_l_Object {
    */
   static m_testLambdaCallingStaticMethod__() {
     Lambdas.$clinit();
-    let f = Lambdas_Function.$adapt(((/** * */ l) => {
+    let f = Lambdas_Function.$adapt((/** * */ l) => {
       return Lambdas.m_m__();
-    }));
+    });
   }
   /**
    * @public
    */
   m_testLambdaReturningVoidAsExpression__() {
-    let runner = FunctionalInterfaceWithMethodReturningVoid.$adapt((() => {
+    let runner = FunctionalInterfaceWithMethodReturningVoid.$adapt(() => {
       j_l_Object.$create__();
-    }));
+    });
   }
   /**
    * @public
    */
   m_testAnonymousInsideLambda__() {
-    let runner = FunctionalInterfaceWithMethodReturningVoid.$adapt((() => {
+    let runner = FunctionalInterfaceWithMethodReturningVoid.$adapt(() => {
       $3.$create__com_google_j2cl_transpiler_readable_lambdas_Lambdas(this);
-    }));
+    });
   }
   /**
    * @template E
@@ -291,13 +291,13 @@ class Lambdas extends j_l_Object {
   static m_testJsInteropLambdas__() {
     Lambdas.$clinit();
     let rv = /**@type {!$LambdaAdaptor$1<?string>} */ (new $LambdaAdaptor$1(
-        ((/** ?function(?string):?void */ f1,
-          /** ?function(Throwable):?void */ f2) => {
+        (/** ?function(?string):?void */ f1,
+         /** ?function(Throwable):?void */ f2) => {
           f1(null);
-        })));
-    let stringJsSupplier = JsSupplier.$adapt((() => {
+        }));
+    let stringJsSupplier = JsSupplier.$adapt(() => {
       return Integer.m_valueOf__int(1);
-    }));
+    });
     stringJsSupplier.get();
     let equals = stringJsSupplier;
     equals.equals(null);
@@ -334,7 +334,7 @@ class Lambdas extends j_l_Object {
    * @public
    */
   static $clinit() {
-    Lambdas.$clinit = (() => {});
+    Lambdas.$clinit = () => {};
     Lambdas.$loadModules();
     j_l_Object.$clinit();
     Lambdas

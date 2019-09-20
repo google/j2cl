@@ -32,7 +32,7 @@ class SubParent extends Parent {
    * @public
    */
   static $clinit() {
-    SubParent.$clinit = (() => {});
+    SubParent.$clinit = () => {};
     SubParent.$loadModules();
     Parent.$clinit();
   }

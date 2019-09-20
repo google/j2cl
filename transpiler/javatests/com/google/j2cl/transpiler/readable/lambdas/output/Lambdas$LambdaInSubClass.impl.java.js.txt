@@ -33,7 +33,7 @@ class LambdaInSubClass extends Parent {
    * @public
    */
   m_testLambdaInSubclass__() {
-    let l = FunctionalInterface.$adapt(((/** number */ i) => {
+    let l = FunctionalInterface.$adapt((/** number */ i) => {
       this.m_funInParent__();
       this.m_funInParent__();
       this.m_funInParent__();
@@ -42,13 +42,13 @@ class LambdaInSubClass extends Parent {
       a = this.f_fieldInParent__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Parent;
       a = this.f_fieldInParent__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Parent;
       return a;
-    }));
+    });
   }
   /**
    * @public
    */
   static $clinit() {
-    LambdaInSubClass.$clinit = (() => {});
+    LambdaInSubClass.$clinit = () => {};
     LambdaInSubClass.$loadModules();
     Parent.$clinit();
   }

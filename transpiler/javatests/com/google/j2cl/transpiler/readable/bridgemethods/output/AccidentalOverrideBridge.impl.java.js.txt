@@ -57,7 +57,7 @@ class AccidentalOverrideBridge extends ClassWithParameterizedGet {
    * @public
    */
   static $clinit() {
-    AccidentalOverrideBridge.$clinit = (() => {});
+    AccidentalOverrideBridge.$clinit = () => {};
     AccidentalOverrideBridge.$loadModules();
     ClassWithParameterizedGet.$clinit();
   }

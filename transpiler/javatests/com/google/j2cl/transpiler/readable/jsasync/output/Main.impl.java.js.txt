@@ -87,25 +87,25 @@ class Main extends j_l_Object {
    * @public
    */
   m_testAsyncLambdas___$pp_com_google_j2cl_transpiler_readable_jsasync() {
-    let i = AsyncInterface.$adapt((async () => {
-      return /**@type {Promise<Integer>} */ (
-          Promise.resolve(/**@type {Integer} */ ($Casts.$to(
-              (await /**@type {Promise<Integer>} */ (
-                  Promise.resolve(Integer.m_valueOf__int(5)))),
-              Integer))));
-    }));
-    let o = $1.$create__com_google_j2cl_transpiler_readable_jsasync_Main(this);
-    let j = (async () => {
+    let i = AsyncInterface.$adapt(async () => {
       return /**@type {Promise<Integer>} */ (
           Promise.resolve(/**@type {Integer} */ ($Casts.$to(
               (await /**@type {Promise<Integer>} */ (
                   Promise.resolve(Integer.m_valueOf__int(5)))),
               Integer))));
     });
-    let optimizableJsFunction = (() => {
+    let o = $1.$create__com_google_j2cl_transpiler_readable_jsasync_Main(this);
+    let j = async () => {
+      return /**@type {Promise<Integer>} */ (
+          Promise.resolve(/**@type {Integer} */ ($Casts.$to(
+              (await /**@type {Promise<Integer>} */ (
+                  Promise.resolve(Integer.m_valueOf__int(5)))),
+              Integer))));
+    };
+    let optimizableJsFunction = () => {
       return /**@type {Promise<Integer>} */ (
           Promise.resolve(Integer.m_valueOf__int(5)));
-    });
+    };
     let unoptimizableJsFunction =
         $3.$create__com_google_j2cl_transpiler_readable_jsasync_Main(this);
   }
@@ -121,7 +121,7 @@ class Main extends j_l_Object {
    * @public
    */
   static $clinit() {
-    Main.$clinit = (() => {});
+    Main.$clinit = () => {};
     Main.$loadModules();
     j_l_Object.$clinit();
   }

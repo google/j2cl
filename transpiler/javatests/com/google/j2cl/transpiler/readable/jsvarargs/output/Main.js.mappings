@@ -129,14 +129,14 @@
 [ints] => [ints] "ints"
 [Main.f2(ints);] => [Main.f2(...InternalPreconditions.m_checkNotNull__java_lang_Object(ints));] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testNullJsVarargs"
 [testGenericJsFunctionWithVarags] => [m_testGenericJsFunctionWithVarags__]
-[GenericFunction<U> function = (n, param) -> param;] => [let function_1 = ((/** U */ n, .../** ...U */ param) =>{
+[GenericFunction<U> function = (n, param) -> param;] => [let function_1 = (/** U */ n, .../** ...U */ param) =>{
    return /**@type {*} */ (param);
-  });] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testGenericJsFunctionWithVarags"
+  };] "com.google.j2cl.transpiler.readable.jsvarargs.Main.testGenericJsFunctionWithVarags"
 [function] => [function_1] "function"
 [n] => [n] "n"
 [param] => [param] "param"
 [param] => [return /**@type {*} */ (param);] "com.google.j2cl.transpiler.readable.jsvarargs.Main.<lambda in testGenericJsFunctionWithVarags>"
 [Main] => [$clinit]
-[Main] => [Main.$clinit = (() =>{});] "com.google.j2cl.transpiler.readable.jsvarargs.Main.<clinit>"
+[Main] => [Main.$clinit = () =>{};] "com.google.j2cl.transpiler.readable.jsvarargs.Main.<clinit>"
 [Main] => [Main.$loadModules();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.<clinit>"
 [Main] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.jsvarargs.Main.<clinit>"

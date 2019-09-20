@@ -48,16 +48,16 @@ class BiFunction {
       $thisArg, after) {
     BiFunction.$clinit();
     return /**@type {BiFunction<T, U, V>} */ (
-        BiFunction.$adapt(((/** T */ t, /** U */ u) => {
+        BiFunction.$adapt((/** T */ t, /** U */ u) => {
           return after.m_apply__java_lang_Object(
               $thisArg.m_apply__java_lang_Object__java_lang_Object(t, u));
-        })));
+        }));
   }
   /**
    * @public
    */
   static $clinit() {
-    BiFunction.$clinit = (() => {});
+    BiFunction.$clinit = () => {};
     BiFunction.$loadModules();
   }
   /**

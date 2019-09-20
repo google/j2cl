@@ -49,7 +49,7 @@ class ChildClass extends ParentOuter {
    * @public
    */
   static $clinit() {
-    ChildClass.$clinit = (() => {});
+    ChildClass.$clinit = () => {};
     ChildClass.$loadModules();
     ParentOuter.$clinit();
   }

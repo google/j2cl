@@ -47,7 +47,7 @@ class Parent extends GrandParent {
    * @public
    */
   static $clinit() {
-    Parent.$clinit = (() => {});
+    Parent.$clinit = () => {};
     Parent.$loadModules();
     GrandParent.$clinit();
   }

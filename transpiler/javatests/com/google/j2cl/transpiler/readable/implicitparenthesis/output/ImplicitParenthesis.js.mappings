@@ -59,6 +59,6 @@
 [boxedBoolean = boxedInt == primitiveInt;] => [boxedBoolean = boxedInt.m_intValue__() == primitiveInt;] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.nonExamples"
 [assert boxedBoolean == false;] => [$Asserts.$assert(Boolean.m_booleanValue__java_lang_Boolean(boxedBoolean) == false);] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.nonExamples"
 [ImplicitParenthesis] => [$clinit]
-[ImplicitParenthesis] => [ImplicitParenthesis.$clinit = (() =>{});] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.<clinit>"
+[ImplicitParenthesis] => [ImplicitParenthesis.$clinit = () =>{};] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.<clinit>"
 [ImplicitParenthesis] => [ImplicitParenthesis.$loadModules();] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.<clinit>"
 [ImplicitParenthesis] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis.<clinit>"

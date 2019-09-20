@@ -45,7 +45,7 @@ class ConcreteClass extends GenericClass {
    * @public
    */
   static $clinit() {
-    ConcreteClass.$clinit = (() => {});
+    ConcreteClass.$clinit = () => {};
     ConcreteClass.$loadModules();
     GenericClass.$clinit();
     InterfaceWithDefault.$clinit();

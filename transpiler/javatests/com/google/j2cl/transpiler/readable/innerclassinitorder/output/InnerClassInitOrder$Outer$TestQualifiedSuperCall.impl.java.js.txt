@@ -37,7 +37,7 @@ class TestQualifiedSuperCall extends OuterIsNotSuper {
    * @public
    */
   static $clinit() {
-    TestQualifiedSuperCall.$clinit = (() => {});
+    TestQualifiedSuperCall.$clinit = () => {};
     TestQualifiedSuperCall.$loadModules();
     OuterIsNotSuper.$clinit();
   }

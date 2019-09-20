@@ -80,7 +80,7 @@ class OuterIsSuper extends Outer {
    * @public
    */
   static $clinit() {
-    OuterIsSuper.$clinit = (() => {});
+    OuterIsSuper.$clinit = () => {};
     OuterIsSuper.$loadModules();
     Outer.$clinit();
   }

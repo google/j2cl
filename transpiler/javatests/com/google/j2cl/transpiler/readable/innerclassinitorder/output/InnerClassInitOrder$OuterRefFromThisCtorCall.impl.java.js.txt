@@ -79,7 +79,7 @@ class OuterRefFromThisCtorCall extends OuterRefFromSuperCtorBase {
    * @public
    */
   static $clinit() {
-    OuterRefFromThisCtorCall.$clinit = (() => {});
+    OuterRefFromThisCtorCall.$clinit = () => {};
     OuterRefFromThisCtorCall.$loadModules();
     OuterRefFromSuperCtorBase.$clinit();
   }

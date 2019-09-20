@@ -13,9 +13,9 @@
 [new Main().execute();] => [Main.$create__().m_execute___$p_com_google_j2cl_transpiler_readable_libraryinfo_Main();] "com.google.j2cl.transpiler.readable.libraryinfo.Main.entryPoint"
 [Function jsFunction = new FunctionImpl();] => [let jsFunction = FunctionImpl.$create__();] "com.google.j2cl.transpiler.readable.libraryinfo.Main.entryPoint"
 [jsFunction] => [jsFunction] "jsFunction"
-[jsFunction = s -> log(s);] => [jsFunction = ((/** ?string */ s) =>{
+[jsFunction = s -> log(s);] => [jsFunction = (/** ?string */ s) =>{
    console.log(s);
-  });] "com.google.j2cl.transpiler.readable.libraryinfo.Main.entryPoint"
+  };] "com.google.j2cl.transpiler.readable.libraryinfo.Main.entryPoint"
 [s] => [s] "s"
 [log(s)] => [console.log(s);] "com.google.j2cl.transpiler.readable.libraryinfo.Main.<lambda in entryPoint>"
 [jsFunction.apply("foo");] => [jsFunction("foo");] "com.google.j2cl.transpiler.readable.libraryinfo.Main.entryPoint"
@@ -28,7 +28,7 @@
 [public static String STATIC_FIELD = "STATIC_FIELD";] => [set f_STATIC_FIELD__com_google_j2cl_transpiler_readable_libraryinfo_Main]
 [public static String STATIC_FIELD = "STATIC_FIELD";] => [(Main.$clinit(), Main.$f_STATIC_FIELD__com_google_j2cl_transpiler_readable_libraryinfo_Main = value);] "com.google.j2cl.transpiler.readable.libraryinfo.Main.<synthetic: setter>"
 [Main] => [$clinit]
-[Main] => [Main.$clinit = (() =>{});] "com.google.j2cl.transpiler.readable.libraryinfo.Main.<clinit>"
+[Main] => [Main.$clinit = () =>{};] "com.google.j2cl.transpiler.readable.libraryinfo.Main.<clinit>"
 [Main] => [Main.$loadModules();] "com.google.j2cl.transpiler.readable.libraryinfo.Main.<clinit>"
 [Main] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.libraryinfo.Main.<clinit>"
 [public static String STATIC_FIELD = "STATIC_FIELD";] => [Main.$f_STATIC_FIELD__com_google_j2cl_transpiler_readable_libraryinfo_Main = "STATIC_FIELD";] "com.google.j2cl.transpiler.readable.libraryinfo.Main.<clinit>"

@@ -79,7 +79,7 @@ class Child extends Parent {
    * @public
    */
   static $clinit() {
-    Child.$clinit = (() => {});
+    Child.$clinit = () => {};
     Child.$loadModules();
     Parent.$clinit();
   }

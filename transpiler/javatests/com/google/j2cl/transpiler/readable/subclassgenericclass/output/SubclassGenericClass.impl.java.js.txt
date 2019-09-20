@@ -34,7 +34,7 @@ class SubclassGenericClass extends GenericClass {
    * @public
    */
   static $clinit() {
-    SubclassGenericClass.$clinit = (() => {});
+    SubclassGenericClass.$clinit = () => {};
     SubclassGenericClass.$loadModules();
     GenericClass.$clinit();
   }

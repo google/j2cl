@@ -12,10 +12,10 @@
 [FunctionalInterface l =
           (i -> {
 ...            return a;
-          });] => [let l = FunctionalInterface.$adapt(((/** number */ i) =>{
+          });] => [let l = FunctionalInterface.$adapt((/** number */ i) =>{
    this.m_funInParent__();
 ...   return a;
-  }));] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$LambdaInSubClass.testLambdaInSubclass"
+  });] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$LambdaInSubClass.testLambdaInSubclass"
 [l] => [l] "l"
 [i] => [i] "i"
 [funInParent();] => [this.m_funInParent__();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$LambdaInSubClass.<lambda in testLambdaInSubclass>"
@@ -27,6 +27,6 @@
 [a = LambdaInSubClass.this.fieldInParent;] => [a = this.f_fieldInParent__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Parent;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$LambdaInSubClass.<lambda in testLambdaInSubclass>"
 [return a;] => [return a;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$LambdaInSubClass.<lambda in testLambdaInSubclass>"
 [LambdaInSubClass] => [$clinit]
-[LambdaInSubClass] => [LambdaInSubClass.$clinit = (() =>{});] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$LambdaInSubClass.<clinit>"
+[LambdaInSubClass] => [LambdaInSubClass.$clinit = () =>{};] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$LambdaInSubClass.<clinit>"
 [LambdaInSubClass] => [LambdaInSubClass.$loadModules();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$LambdaInSubClass.<clinit>"
 [LambdaInSubClass] => [Parent.$clinit();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas$LambdaInSubClass.<clinit>"

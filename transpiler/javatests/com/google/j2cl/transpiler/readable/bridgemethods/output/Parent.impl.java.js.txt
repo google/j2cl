@@ -70,7 +70,7 @@ class Parent extends SuperParent {
    * @public
    */
   static $clinit() {
-    Parent.$clinit = (() => {});
+    Parent.$clinit = () => {};
     Parent.$loadModules();
     SuperParent.$clinit();
   }

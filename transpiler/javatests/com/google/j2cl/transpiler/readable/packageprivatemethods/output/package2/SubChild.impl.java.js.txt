@@ -40,7 +40,7 @@ class SubChild extends Child {
    * @public
    */
   static $clinit() {
-    SubChild.$clinit = (() => {});
+    SubChild.$clinit = () => {};
     SubChild.$loadModules();
     Child.$clinit();
   }

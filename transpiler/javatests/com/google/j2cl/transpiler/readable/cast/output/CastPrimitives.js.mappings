@@ -186,6 +186,6 @@
 [tlong <<= flong;] => [tlong = $LongUtils.$leftShift(tlong, $Primitives.$narrowLongToInt(flong));] "com.google.j2cl.transpiler.readable.cast.CastPrimitives.testImplicitLongAssignmentCasts"
 [tlong = 0 + 1 + 2L;] => [tlong = $LongUtils.$plus($Primitives.$widenIntToLong(0 + 1), $Long.fromInt(2));] "com.google.j2cl.transpiler.readable.cast.CastPrimitives.testImplicitLongAssignmentCasts"
 [CastPrimitives] => [$clinit]
-[CastPrimitives] => [CastPrimitives.$clinit = (() =>{});] "com.google.j2cl.transpiler.readable.cast.CastPrimitives.<clinit>"
+[CastPrimitives] => [CastPrimitives.$clinit = () =>{};] "com.google.j2cl.transpiler.readable.cast.CastPrimitives.<clinit>"
 [CastPrimitives] => [CastPrimitives.$loadModules();] "com.google.j2cl.transpiler.readable.cast.CastPrimitives.<clinit>"
 [CastPrimitives] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.cast.CastPrimitives.<clinit>"

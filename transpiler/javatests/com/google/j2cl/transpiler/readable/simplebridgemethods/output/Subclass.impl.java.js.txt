@@ -53,7 +53,7 @@ class Subclass extends Superclass {
    * @public
    */
   static $clinit() {
-    Subclass.$clinit = (() => {});
+    Subclass.$clinit = () => {};
     Subclass.$loadModules();
     Superclass.$clinit();
   }

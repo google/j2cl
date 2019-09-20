@@ -79,7 +79,7 @@ class ChildWithNonNullableParent extends Parent {
    * @public
    */
   static $clinit() {
-    ChildWithNonNullableParent.$clinit = (() => {});
+    ChildWithNonNullableParent.$clinit = () => {};
     ChildWithNonNullableParent.$loadModules();
     Parent.$clinit();
     ParametricType.$clinit();

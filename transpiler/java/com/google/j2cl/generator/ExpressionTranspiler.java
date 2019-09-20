@@ -179,8 +179,6 @@ public class ExpressionTranspiler {
 
       @Override
       public Void transformFunctionExpression(FunctionExpression expression) {
-        sourceBuilder.append("(");
-
         if (expression.getDescriptor().isJsAsync()) {
           sourceBuilder.append("async ");
         }
@@ -191,7 +189,6 @@ public class ExpressionTranspiler {
         sourceBuilder.append(" =>");
         new StatementTranspiler(sourceBuilder, environment).renderStatement(expression.getBody());
 
-        sourceBuilder.append(")");
         return null;
       }
 
@@ -337,7 +334,7 @@ public class ExpressionTranspiler {
           sourceBuilder.append("super");
         } else if (target.isJsFunction()) {
           // Call to a JsFunction method is emitted as the call on the qualifier itself:
-          process(expression.getQualifier());
+          process(expression.getQualifier().parenthesize());
         } else {
           renderQualifiedName(expression.getQualifier(), ManglingNameUtils.getMangledName(target));
         }
