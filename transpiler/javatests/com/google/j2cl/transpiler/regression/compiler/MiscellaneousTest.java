@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.regression.compiler;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.fail;
 
 import jsinterop.annotations.JsPackage;
@@ -252,11 +253,11 @@ public class MiscellaneousTest {
     assertThat(o instanceof PolyA).isFalse();
     boolean b = o instanceof PolyB;
     assertThat(b).isTrue();
-    try {
-      o = (PolyA) o;
-      fail();
-    } catch (ClassCastException expected) {
-    }
+    assertThrows(
+        ClassCastException.class,
+        () -> {
+          Object unused = (PolyA) o;
+        });
   }
 
   @SuppressWarnings("StaticQualifiedUsingExpression")

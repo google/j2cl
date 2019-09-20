@@ -119,18 +119,23 @@ public class Asserts {
   // introduce casts and autoboxing. The whole purpose of this assert helper is to make sure that
   // the code written by the user does not omit casts.
   public static void assertThrowsClassCastException(JsRunnable runnable) {
-    assertThrowsClassCastException(runnable, null);
+    assertThrowsClassCastException(runnable, (String) null);
   }
 
   public static void assertThrowsClassCastException(JsRunnable runnable, Class<?> toClass) {
+    assertThrowsClassCastException(runnable, toClass.getName());
+  }
+
+  public static void assertThrowsClassCastException(
+      JsRunnable runnable, String qualifiedBinaryName) {
     try {
       runnable.run();
       fail("Should have thrown ClassCastException");
     } catch (ClassCastException expected) {
-      if (toClass != null) {
+      if (qualifiedBinaryName != null) {
         assertTrue(
             "Got unexpected message " + expected.getMessage(),
-            expected.getMessage().endsWith("cannot be cast to " + toClass.getName()));
+            expected.getMessage().endsWith("cannot be cast to " + qualifiedBinaryName));
       }
     }
   }

@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.regression.java8;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.fail;
 
 import com.google.j2cl.transpiler.regression.java8.Java8Test.TestLambdaClass.TestLambdaInnerClass;
@@ -863,24 +864,21 @@ public class Java8Test {
     EmptyJ jj3 = (EmptyC & EmptyJ) localC;
     EmptyJ jj4 = (EmptyI & EmptyJ) localC;
 
-    try {
-      EmptyC b2CIJ = (EmptyC & EmptyI & EmptyJ) localB;
-      fail("Should have thrown a ClassCastException");
-    } catch (ClassCastException e) {
-      // Expected.
-    }
-    try {
-      EmptyB c2BI = (EmptyB & EmptyI) localC;
-      fail("Should have thrown a ClassCastException");
-    } catch (ClassCastException e) {
-      // Expected.
-    }
-    try {
-      EmptyJ jj = (EmptyB & EmptyJ) localB;
-      fail("Should have thrown a ClassCastException");
-    } catch (ClassCastException e) {
-      // Expected.
-    }
+    assertThrows(
+        ClassCastException.class,
+        () -> {
+          EmptyC unused = (EmptyC & EmptyI & EmptyJ) localB;
+        });
+    assertThrows(
+        ClassCastException.class,
+        () -> {
+          EmptyB unused = (EmptyB & EmptyI) localC;
+        });
+    assertThrows(
+        ClassCastException.class,
+        () -> {
+          EmptyJ unused = (EmptyB & EmptyJ) localB;
+        });
   }
 
   interface SimpleI {

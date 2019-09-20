@@ -19,6 +19,7 @@ import static com.google.j2cl.transpiler.utils.Asserts.assertEquals;
 import static com.google.j2cl.transpiler.utils.Asserts.assertFalse;
 import static com.google.j2cl.transpiler.utils.Asserts.assertNotNull;
 import static com.google.j2cl.transpiler.utils.Asserts.assertSame;
+import static com.google.j2cl.transpiler.utils.Asserts.assertThrowsClassCastException;
 import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
 
 import java.util.Iterator;
@@ -230,12 +231,10 @@ public class JsTypeTest {
     assertNotNull(myClass = (MyNativeJsTypeInterface) createMyNativeJsType());
     assertNotNull(myClass = (HTMLElementConcreteNativeJsType) createNativeButton());
 
-    try {
-      assertNotNull(myClass = (HTMLElementConcreteNativeJsType) createMyNativeJsType());
-      assertTrue(false);
-    } catch (ClassCastException cce) {
-      // Expected.
-    }
+    assertThrowsClassCastException(
+        () -> {
+          Object unused = (HTMLElementConcreteNativeJsType) createMyNativeJsType();
+        });
 
     // Test cross cast for native types
     Object nativeButton1 = (HTMLElementConcreteNativeJsType) createNativeButton();

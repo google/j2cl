@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.regression.compiler;
 
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.Truth.assertWithMessage;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
@@ -1150,12 +1151,7 @@ public class CompilerTest {
 
   @Test
   public void testNullFlowVsClassCastPrecedence() {
-    try {
-      ((UninstantiableType) new Object()).returnNull();
-      fail();
-    } catch (ClassCastException e) {
-      // success
-    }
+    assertThrows(ClassCastException.class, () -> ((UninstantiableType) new Object()).returnNull());
   }
 
   @Test

@@ -15,8 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.arraybranchinsertion;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertThrows;
 import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
-import static com.google.j2cl.transpiler.utils.Asserts.fail;
 
 public class Main {
   public static void main(String... args) {
@@ -45,28 +45,13 @@ public class Main {
     assertTrue(array2d[0].length == 2);
 
     // When inserting an array into an array slot you can NOT broaden the leaf type.
-    try {
-      array2d[0] = new Object[2];
-      fail("An expected failure did not occur.");
-    } catch (ArrayStoreException e) {
-      // expected
-    }
+    assertThrows(ArrayStoreException.class, () -> array2d[0] = new Object[2]);
 
     // You can NOT put an object in a slot that expects an array.
-    try {
-      ((Object[]) array2d)[0] = new Object();
-      fail("An expected failure did not occur.");
-    } catch (ArrayStoreException e) {
-      // expected
-    }
+    assertThrows(ArrayStoreException.class, () -> ((Object[]) array2d)[0] = new Object());
 
     // When inserting an array into an array slot you can not change the number of dimensions.
-    try {
-      array2d[0] = new HasName[2][2];
-      fail("An expected failure did not occur.");
-    } catch (ArrayStoreException e) {
-      // expected
-    }
+    assertThrows(ArrayStoreException.class, () -> array2d[0] = new HasName[2][2]);
   }
 
   private static void testPartialArray() {

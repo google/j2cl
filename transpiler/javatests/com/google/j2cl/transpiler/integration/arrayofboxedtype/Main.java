@@ -15,7 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.arrayofboxedtype;
 
-import static com.google.j2cl.transpiler.utils.Asserts.fail;
+import static com.google.j2cl.transpiler.utils.Asserts.assertThrows;
+import static com.google.j2cl.transpiler.utils.Asserts.assertThrowsClassCastException;
 
 public class Main {
   public static void main(String[] args) {
@@ -23,277 +24,194 @@ public class Main {
     testArrayCast();
   }
 
-  private static void insertByteException(Object[] array) {
-    try {
-      array[0] = new Byte((byte) 1);
-      fail("An expected failure did not occur.");
-    } catch (ArrayStoreException e) {
-      // expected
-    }
-  }
-
-  private static void insertDoubleException(Object[] array) {
-    try {
-      array[0] = new Double(1.0);
-      fail("An expected failure did not occur.");
-    } catch (ArrayStoreException e) {
-      // expected
-    }
-  }
-
-  private static void insertFloatException(Object[] array) {
-    try {
-      array[0] = new Float(1.0f);
-      fail("An expected failure did not occur.");
-    } catch (ArrayStoreException e) {
-      // expected
-    }
-  }
-
-  private static void insertIntegerException(Object[] array) {
-    try {
-      array[0] = new Integer(1);
-      fail("An expected failure did not occur.");
-    } catch (ArrayStoreException e) {
-      // expected
-    }
-  }
-
-  private static void insertLongException(Object[] array) {
-    try {
-      array[0] = new Long(1L);
-      fail("An expected failure did not occur.");
-    } catch (ArrayStoreException e) {
-      // expected
-    }
-  }
-
-  private static void insertShortException(Object[] array) {
-    try {
-      array[0] = new Short((short) 1);
-      fail("An expected failure did not occur.");
-    } catch (ArrayStoreException e) {
-      // expected
-    }
-  }
-
-  private static void insertCharacterException(Object[] array) {
-    try {
-      array[0] = new Character('a');
-      fail("An expected failure did not occur.");
-    } catch (ArrayStoreException e) {
-      // expected
-    }
-  }
-
-  private static void insertBooleanException(Object[] array) {
-    try {
-      array[0] = new Boolean(true);
-      fail("An expected failure did not occur.");
-    } catch (ArrayStoreException e) {
-      // expected
-    }
+  private static void assertThrowsArrayStoreException(Object[] array, Object o) {
+    assertThrows(
+        ArrayStoreException.class,
+        () -> {
+          array[0] = o;
+        });
   }
 
   private static void testArrayInsertion() {
+    Boolean booleanValue = new Boolean(true);
+    Character characterValue = new Character('a');
+    Byte byleValue = new Byte((byte) 1);
+    Short shortValue = new Short((short) 1);
+    Integer integerValue = new Integer(1);
+    Long longValue = new Long(1L);
+    Double doubleValue = new Double(1.0);
+    Float floatValue = new Float(1.0f);
     Object[] byteArray = new Byte[2];
-    byteArray[0] = new Byte((byte) 1);
-    insertBooleanException(byteArray);
-    insertCharacterException(byteArray);
-    insertDoubleException(byteArray);
-    insertFloatException(byteArray);
-    insertIntegerException(byteArray);
-    insertLongException(byteArray);
-    insertShortException(byteArray);
+
+    byteArray[0] = byleValue;
+    assertThrowsArrayStoreException(byteArray, booleanValue);
+    assertThrowsArrayStoreException(byteArray, characterValue);
+    assertThrowsArrayStoreException(byteArray, doubleValue);
+    assertThrowsArrayStoreException(byteArray, floatValue);
+    assertThrowsArrayStoreException(byteArray, integerValue);
+    assertThrowsArrayStoreException(byteArray, longValue);
+    assertThrowsArrayStoreException(byteArray, shortValue);
 
     Object[] doubleArray = new Double[2];
-    doubleArray[0] = new Double(1.0);
-    insertBooleanException(doubleArray);
-    insertCharacterException(doubleArray);
-    insertByteException(doubleArray);
-    insertFloatException(doubleArray);
-    insertIntegerException(doubleArray);
-    insertLongException(doubleArray);
-    insertShortException(doubleArray);
+    doubleArray[0] = doubleValue;
+    assertThrowsArrayStoreException(doubleArray, booleanValue);
+    assertThrowsArrayStoreException(doubleArray, characterValue);
+    assertThrowsArrayStoreException(doubleArray, byleValue);
+    assertThrowsArrayStoreException(doubleArray, floatValue);
+    assertThrowsArrayStoreException(doubleArray, integerValue);
+    assertThrowsArrayStoreException(doubleArray, longValue);
+    assertThrowsArrayStoreException(doubleArray, shortValue);
 
     Object[] floatArray = new Float[2];
-    floatArray[0] = new Float(1.0f);
-    insertBooleanException(floatArray);
-    insertCharacterException(floatArray);
-    insertByteException(floatArray);
-    insertDoubleException(floatArray);
-    insertIntegerException(floatArray);
-    insertLongException(floatArray);
-    insertShortException(floatArray);
+    floatArray[0] = floatValue;
+    assertThrowsArrayStoreException(floatArray, booleanValue);
+    assertThrowsArrayStoreException(floatArray, characterValue);
+    assertThrowsArrayStoreException(floatArray, byleValue);
+    assertThrowsArrayStoreException(floatArray, doubleValue);
+    assertThrowsArrayStoreException(floatArray, integerValue);
+    assertThrowsArrayStoreException(floatArray, longValue);
+    assertThrowsArrayStoreException(floatArray, shortValue);
 
     Object[] integerArray = new Integer[2];
-    integerArray[0] = new Integer(1);
-    insertBooleanException(integerArray);
-    insertCharacterException(integerArray);
-    insertByteException(integerArray);
-    insertDoubleException(integerArray);
-    insertFloatException(integerArray);
-    insertLongException(integerArray);
-    insertShortException(integerArray);
+    integerArray[0] = integerValue;
+    assertThrowsArrayStoreException(integerArray, booleanValue);
+    assertThrowsArrayStoreException(integerArray, characterValue);
+    assertThrowsArrayStoreException(integerArray, byleValue);
+    assertThrowsArrayStoreException(integerArray, doubleValue);
+    assertThrowsArrayStoreException(integerArray, floatValue);
+    assertThrowsArrayStoreException(integerArray, longValue);
+    assertThrowsArrayStoreException(integerArray, shortValue);
 
     Object[] longArray = new Long[2];
-    longArray[0] = new Long(1L);
-    insertBooleanException(longArray);
-    insertCharacterException(longArray);
-    insertByteException(longArray);
-    insertDoubleException(longArray);
-    insertFloatException(longArray);
-    insertIntegerException(longArray);
-    insertShortException(longArray);
+    longArray[0] = longValue;
+    assertThrowsArrayStoreException(longArray, booleanValue);
+    assertThrowsArrayStoreException(longArray, characterValue);
+    assertThrowsArrayStoreException(longArray, byleValue);
+    assertThrowsArrayStoreException(longArray, doubleValue);
+    assertThrowsArrayStoreException(longArray, floatValue);
+    assertThrowsArrayStoreException(longArray, integerValue);
+    assertThrowsArrayStoreException(longArray, shortValue);
 
     Object[] shortArray = new Short[2];
-    shortArray[0] = new Short((short) 1);
-    insertBooleanException(shortArray);
-    insertCharacterException(shortArray);
-    insertByteException(shortArray);
-    insertDoubleException(shortArray);
-    insertFloatException(shortArray);
-    insertIntegerException(shortArray);
-    insertLongException(shortArray);
+    shortArray[0] = shortValue;
+    assertThrowsArrayStoreException(shortArray, booleanValue);
+    assertThrowsArrayStoreException(shortArray, characterValue);
+    assertThrowsArrayStoreException(shortArray, byleValue);
+    assertThrowsArrayStoreException(shortArray, doubleValue);
+    assertThrowsArrayStoreException(shortArray, floatValue);
+    assertThrowsArrayStoreException(shortArray, integerValue);
+    assertThrowsArrayStoreException(shortArray, longValue);
 
     Object[] characterArray = new Character[2];
-    characterArray[0] = new Character('a');
-    insertBooleanException(characterArray);
-    insertByteException(characterArray);
-    insertDoubleException(characterArray);
-    insertFloatException(characterArray);
-    insertIntegerException(characterArray);
-    insertLongException(characterArray);
-    insertShortException(characterArray);
+    characterArray[0] = characterValue;
+    assertThrowsArrayStoreException(characterArray, booleanValue);
+    assertThrowsArrayStoreException(characterArray, byleValue);
+    assertThrowsArrayStoreException(characterArray, doubleValue);
+    assertThrowsArrayStoreException(characterArray, floatValue);
+    assertThrowsArrayStoreException(characterArray, integerValue);
+    assertThrowsArrayStoreException(characterArray, longValue);
+    assertThrowsArrayStoreException(characterArray, shortValue);
 
     Object[] booleanArray = new Boolean[2];
-    booleanArray[0] = new Boolean(true);
-    insertCharacterException(booleanArray);
-    insertByteException(booleanArray);
-    insertDoubleException(booleanArray);
-    insertFloatException(booleanArray);
-    insertIntegerException(booleanArray);
-    insertLongException(booleanArray);
-    insertShortException(booleanArray);
+    booleanArray[0] = booleanValue;
+    assertThrowsArrayStoreException(booleanArray, characterValue);
+    assertThrowsArrayStoreException(booleanArray, byleValue);
+    assertThrowsArrayStoreException(booleanArray, doubleValue);
+    assertThrowsArrayStoreException(booleanArray, floatValue);
+    assertThrowsArrayStoreException(booleanArray, integerValue);
+    assertThrowsArrayStoreException(booleanArray, longValue);
+    assertThrowsArrayStoreException(booleanArray, shortValue);
 
     Object[] numberArray = new Number[2];
-    numberArray[0] = new Byte((byte) 1);
-    numberArray[0] = new Double(1.0);
-    numberArray[0] = new Float(1.0f);
-    numberArray[0] = new Integer(1);
-    numberArray[0] = new Long(1L);
-    numberArray[0] = new Short((short) 1);
+    numberArray[0] = byleValue;
+    numberArray[0] = doubleValue;
+    numberArray[0] = floatValue;
+    numberArray[0] = integerValue;
+    numberArray[0] = longValue;
+    numberArray[0] = shortValue;
     numberArray[0] = new SubNumber();
-    insertBooleanException(numberArray);
-    insertCharacterException(numberArray);
+    assertThrowsArrayStoreException(numberArray, booleanValue);
+    assertThrowsArrayStoreException(numberArray, characterValue);
 
     Object[] subnumberArray = new SubNumber[2];
     subnumberArray[0] = new SubNumber();
-    insertBooleanException(subnumberArray);
-    insertCharacterException(subnumberArray);
-    insertByteException(subnumberArray);
-    insertDoubleException(subnumberArray);
-    insertFloatException(subnumberArray);
-    insertIntegerException(subnumberArray);
-    insertLongException(subnumberArray);
-    insertShortException(subnumberArray);
+    assertThrowsArrayStoreException(subnumberArray, booleanValue);
+    assertThrowsArrayStoreException(subnumberArray, characterValue);
+    assertThrowsArrayStoreException(subnumberArray, byleValue);
+    assertThrowsArrayStoreException(subnumberArray, doubleValue);
+    assertThrowsArrayStoreException(subnumberArray, floatValue);
+    assertThrowsArrayStoreException(subnumberArray, integerValue);
+    assertThrowsArrayStoreException(subnumberArray, longValue);
+    assertThrowsArrayStoreException(subnumberArray, shortValue);
   }
 
-  @SuppressWarnings("unused")
   private static void castToByteException(Object[] array) {
-    try {
-      Byte[] byteArray = (Byte[]) array;
-      fail("An expected failure did not occur.");
-    } catch (ClassCastException e) {
-      // expected
-    }
+    assertThrowsClassCastException(
+        () -> {
+          Byte[] unused = (Byte[]) array;
+        });
   }
 
-  @SuppressWarnings("unused")
   private static void castToDoubleException(Object[] array) {
-    try {
-      Double[] doubleArray = (Double[]) array;
-      fail("An expected failure did not occur.");
-    } catch (ClassCastException e) {
-      // expected
-    }
+    assertThrowsClassCastException(
+        () -> {
+          Double[] unused = (Double[]) array;
+        });
   }
 
-  @SuppressWarnings("unused")
   private static void castToFloatException(Object[] array) {
-    try {
-      Float[] floatArray = (Float[]) array;
-      fail("An expected failure did not occur.");
-    } catch (ClassCastException e) {
-      // expected
-    }
+    assertThrowsClassCastException(
+        () -> {
+          Float[] unused = (Float[]) array;
+        });
   }
 
-  @SuppressWarnings("unused")
   private static void castToIntegerException(Object[] array) {
-    try {
-      Integer[] integerArray = (Integer[]) array;
-      fail("An expected failure did not occur.");
-    } catch (ClassCastException e) {
-      // expected
-    }
+    assertThrowsClassCastException(
+        () -> {
+          Integer[] unused = (Integer[]) array;
+        });
   }
 
-  @SuppressWarnings("unused")
   private static void castToLongException(Object[] array) {
-    try {
-      Long[] longArray = (Long[]) array;
-      fail("An expected failure did not occur.");
-    } catch (ClassCastException e) {
-      // expected
-    }
+    assertThrowsClassCastException(
+        () -> {
+          Long[] unused = (Long[]) array;
+        });
   }
 
-  @SuppressWarnings("unused")
   private static void castToShortException(Object[] array) {
-    try {
-      Short[] shortArray = (Short[]) array;
-      fail("An expected failure did not occur.");
-    } catch (ClassCastException e) {
-      // expected
-    }
+    assertThrowsClassCastException(
+        () -> {
+          Short[] unused = (Short[]) array;
+        });
   }
 
-  @SuppressWarnings("unused")
   private static void castToCharacterException(Object[] array) {
-    try {
-      Character[] characterArray = (Character[]) array;
-      fail("An expected failure did not occur.");
-    } catch (ClassCastException e) {
-      // expected
-    }
+    assertThrowsClassCastException(
+        () -> {
+          Character[] unused = (Character[]) array;
+        });
   }
 
-  @SuppressWarnings("unused")
   private static void castToBooleanException(Object[] array) {
-    try {
-      Boolean[] booleanArray = (Boolean[]) array;
-      fail("An expected failure did not occur.");
-    } catch (ClassCastException e) {
-      // expected
-    }
+    assertThrowsClassCastException(
+        () -> {
+          Boolean[] unused = (Boolean[]) array;
+        });
   }
 
-  @SuppressWarnings("unused")
   private static void castToNumberException(Object[] array) {
-    try {
-      Number[] numberArray = (Number[]) array;
-      fail("An expected failure did not occur.");
-    } catch (ClassCastException e) {
-      // expected
-    }
+    assertThrowsClassCastException(
+        () -> {
+          Number[] unused = (Number[]) array;
+        });
   }
 
-  @SuppressWarnings("unused")
   private static void testArrayCast() {
     Object[] byteArray = new Byte[2];
-    Byte[] bArray = (Byte[]) byteArray;
-    Number[] nArray = (Number[]) byteArray;
+    Byte[] unusedByteArray = (Byte[]) byteArray;
+    Number[] unusedNumberArray = (Number[]) byteArray;
     castToDoubleException(byteArray);
     castToFloatException(byteArray);
     castToIntegerException(byteArray);
@@ -303,8 +221,8 @@ public class Main {
     castToBooleanException(byteArray);
 
     Object[] doubleArray = new Double[2];
-    Double[] dArray = (Double[]) doubleArray;
-    nArray = (Number[]) doubleArray;
+    Double[] unusedDoubleArray = (Double[]) doubleArray;
+    unusedNumberArray = (Number[]) doubleArray;
     castToByteException(doubleArray);
     castToFloatException(doubleArray);
     castToIntegerException(doubleArray);
@@ -314,8 +232,8 @@ public class Main {
     castToBooleanException(doubleArray);
 
     Object[] floatArray = new Float[2];
-    Float[] fArray = (Float[]) floatArray;
-    nArray = (Number[]) floatArray;
+    Float[] unusedFloatArray = (Float[]) floatArray;
+    unusedNumberArray = (Number[]) floatArray;
     castToByteException(floatArray);
     castToDoubleException(floatArray);
     castToIntegerException(floatArray);
@@ -325,8 +243,8 @@ public class Main {
     castToBooleanException(floatArray);
 
     Object[] integerArray = new Integer[2];
-    Integer[] iArray = (Integer[]) integerArray;
-    nArray = (Number[]) integerArray;
+    Integer[] unusedIntegerArray = (Integer[]) integerArray;
+    unusedNumberArray = (Number[]) integerArray;
     castToByteException(integerArray);
     castToDoubleException(integerArray);
     castToFloatException(integerArray);
@@ -336,8 +254,8 @@ public class Main {
     castToBooleanException(integerArray);
 
     Object[] longArray = new Long[2];
-    Long[] lArray = (Long[]) longArray;
-    nArray = (Number[]) longArray;
+    Long[] unusedLongArray = (Long[]) longArray;
+    unusedNumberArray = (Number[]) longArray;
     castToByteException(longArray);
     castToDoubleException(longArray);
     castToFloatException(longArray);
@@ -347,8 +265,8 @@ public class Main {
     castToBooleanException(longArray);
 
     Object[] shortArray = new Short[2];
-    Short[] sArray = (Short[]) shortArray;
-    nArray = (Number[]) shortArray;
+    Short[] unusedShortArray = (Short[]) shortArray;
+    unusedNumberArray = (Number[]) shortArray;
     castToByteException(shortArray);
     castToDoubleException(shortArray);
     castToFloatException(shortArray);
@@ -358,7 +276,7 @@ public class Main {
     castToBooleanException(shortArray);
 
     Object[] characterArray = new Character[2];
-    Character[] cArray = (Character[]) characterArray;
+    Character[] unusedCharacterArray = (Character[]) characterArray;
     castToByteException(characterArray);
     castToDoubleException(characterArray);
     castToFloatException(characterArray);
@@ -369,7 +287,7 @@ public class Main {
     castToNumberException(characterArray);
 
     Object[] booleanArray = new Boolean[2];
-    Boolean[] boolArray = (Boolean[]) booleanArray;
+    Boolean[] unusedBooleanArray = (Boolean[]) booleanArray;
     castToByteException(booleanArray);
     castToDoubleException(booleanArray);
     castToFloatException(booleanArray);
@@ -380,7 +298,7 @@ public class Main {
     castToNumberException(booleanArray);
 
     Object[] numberArray = new Number[2];
-    nArray = (Number[]) numberArray;
+    unusedNumberArray = (Number[]) numberArray;
     castToByteException(numberArray);
     castToDoubleException(numberArray);
     castToFloatException(numberArray);
@@ -392,39 +310,31 @@ public class Main {
 
     // test cast from SubNumber[] to Number[].
     Object[] subnumberArray = new SubNumber[2];
-    nArray = (Number[]) subnumberArray;
-    SubNumber[] sbArray = (SubNumber[]) subnumberArray;
+    unusedNumberArray = (Number[]) subnumberArray;
+    SubNumber[] unusedSbArray = (SubNumber[]) subnumberArray;
 
     // test cast between double[] and Double[]
     Object o1 = new Double[2];
     Object o2 = new double[2];
-    try {
-      double[] d1 = (double[]) o1;
-      fail("An expected failure did not occur.");
-    } catch (ClassCastException e) {
-      // expected
-    }
-    try {
-      Double[] d2 = (Double[]) o2;
-      fail("An expected failure did not occur.");
-    } catch (ClassCastException e) {
-      // expected
-    }
+    assertThrowsClassCastException(
+        () -> {
+          double[] unused = (double[]) o1;
+        });
+    assertThrowsClassCastException(
+        () -> {
+          Double[] unused = (Double[]) o2;
+        });
 
     // test cast between boolean[] and Boolean[]
     Object o3 = new Boolean[2];
     Object o4 = new boolean[2];
-    try {
-      boolean[] b3 = (boolean[]) o3;
-      fail("An expected failure did not occur.");
-    } catch (ClassCastException e) {
-      // expected
-    }
-    try {
-      Boolean[] b4 = (Boolean[]) o4;
-      fail("An expected failure did not occur.");
-    } catch (ClassCastException e) {
-      // expected
-    }
+    assertThrowsClassCastException(
+        () -> {
+          boolean[] unused = (boolean[]) o3;
+        });
+    assertThrowsClassCastException(
+        () -> {
+          Boolean[] unused = (Boolean[]) o4;
+        });
   }
 }

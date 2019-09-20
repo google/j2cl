@@ -19,6 +19,7 @@ import static com.google.j2cl.transpiler.utils.Asserts.assertEquals;
 import static com.google.j2cl.transpiler.utils.Asserts.assertFalse;
 import static com.google.j2cl.transpiler.utils.Asserts.assertNotSame;
 import static com.google.j2cl.transpiler.utils.Asserts.assertSame;
+import static com.google.j2cl.transpiler.utils.Asserts.assertThrowsNullPointerException;
 import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
 
 import jsinterop.annotations.JsConstructor;
@@ -355,12 +356,10 @@ public class Main {
     assertSame(Class.class, int.class.getClass());
     assertSame(Class.class, Object[].class.getClass());
 
-    try {
-      Object nullObject = null;
-      nullObject.getClass();
-      assertTrue(false);
-    } catch (NullPointerException expected) {
-      // expected
-    }
+    assertThrowsNullPointerException(
+        () -> {
+          Object nullObject = null;
+          nullObject.getClass();
+        });
   }
 }

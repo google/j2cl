@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.integration.jsfunctionbridge;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertThrowsClassCastException;
 import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
 
 import jsinterop.annotations.JsFunction;
@@ -39,12 +40,7 @@ public class Main {
           }
         };
     assertTrue(("eaad".equals(callGeneric(foo, "e"))));
-    try {
-      callGeneric(foo, new Object());
-      assertTrue(false);
-    } catch (ClassCastException e) {
-      // expected.
-    }
+    assertThrowsClassCastException(() -> callGeneric(foo, new Object()));
     assertTrue(("eaad".equals(callParametric(foo, "e"))));
     assertTrue(("eaad".equals(foo.apply("e"))));
     assertTrue("hello".equals(new Identity().apply("hello")));

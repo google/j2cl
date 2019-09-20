@@ -18,8 +18,8 @@ package com.google.j2cl.transpiler.integration.jsinteroptests;
 import static com.google.j2cl.transpiler.utils.Asserts.assertEquals;
 import static com.google.j2cl.transpiler.utils.Asserts.assertNull;
 import static com.google.j2cl.transpiler.utils.Asserts.assertSame;
+import static com.google.j2cl.transpiler.utils.Asserts.assertThrowsNullPointerException;
 import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
-import static com.google.j2cl.transpiler.utils.Asserts.fail;
 import static jsinterop.annotations.JsPackage.GLOBAL;
 
 import jsinterop.annotations.JsConstructor;
@@ -141,45 +141,20 @@ public class JsTypeVarargsTest {
     assertSame(String[].class, getVarargsArrayClass());
     assertSame(String[].class, getVarargsArrayClass(new String[0]));
     assertSame(String[].class, getVarargsArrayClass((String) null));
-    try {
-      assertSame(String[].class, getVarargsArrayClass(null));
-      fail("Should have thrown exception");
-    } catch (NullPointerException expected) {
-    }
-    try {
-      assertSame(String[].class, getVarargsArrayClass((String[]) null));
-      fail("Should have thrown exception");
-    } catch (NullPointerException expected) {
-    }
-
+    assertThrowsNullPointerException(() -> getVarargsArrayClass(null));
+    assertThrowsNullPointerException(() -> getVarargsArrayClass((String[]) null));
     assertEquals(0, stringVarargsLength());
     assertEquals(0, stringVarargsLength(new String[0]));
     assertEquals(1, stringVarargsLength((String) null));
-    try {
-      assertEquals(0, stringVarargsLength(null));
-      fail("Should have thrown exception");
-    } catch (NullPointerException expected) {
-    }
-    try {
-      assertEquals(0, stringVarargsLength((String[]) null));
-      fail("Should have thrown exception");
-    } catch (NullPointerException expected) {
-    }
+    assertThrowsNullPointerException(() -> stringVarargsLength(null));
+    assertThrowsNullPointerException(() -> stringVarargsLength((String[]) null));
 
     // Test with an additional parameter as it results in a slightly different call site.
     assertEquals(0, stringVarargsLengthV2(0));
     assertEquals(0, stringVarargsLengthV2(0, new String[0]));
     assertEquals(1, stringVarargsLengthV2(0, (String) null));
-    try {
-      assertEquals(0, stringVarargsLengthV2(0, null));
-      fail("Should have thrown exception");
-    } catch (NullPointerException expected) {
-    }
-    try {
-      assertEquals(0, stringVarargsLengthV2(0, (String[]) null));
-      fail("Should have thrown exception");
-    } catch (NullPointerException expected) {
-    }
+    assertThrowsNullPointerException(() -> stringVarargsLengthV2(0, null));
+    assertThrowsNullPointerException(() -> stringVarargsLengthV2(0, (String[]) null));
   }
 
   private static void testVarargsCall_constructors() {

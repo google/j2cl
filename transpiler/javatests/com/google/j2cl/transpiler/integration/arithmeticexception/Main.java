@@ -15,7 +15,9 @@
  */
 package com.google.j2cl.transpiler.integration.arithmeticexception;
 
-import static com.google.j2cl.transpiler.utils.Asserts.fail;
+import static com.google.j2cl.transpiler.utils.Asserts.assertThrows;
+
+import com.google.j2cl.transpiler.utils.Asserts.JsRunnable;
 
 public class Main {
   public static void main(String... args) {
@@ -24,176 +26,130 @@ public class Main {
   }
 
   private static void testDivideByZero() {
-    try {
-      int a = 10;
-      int b = 0;
-      @SuppressWarnings("unused")
-      int c = a / b;
-      fail("failed to throw ArithmeticException");
-    } catch (ArithmeticException e) {
-      // do nothing.
-    }
+    assertThrowsArithmeticException(
+        () -> {
+          int a = 10;
+          int b = 0;
+          int unused = a / b;
+        });
 
-    try {
-      @SuppressWarnings("unused")
-      int a = 10;
-      int b = 0;
-      a /= b;
-      fail("failed to throw ArithmeticException");
-    } catch (ArithmeticException e) {
-      // do nothing.
-    }
+    assertThrowsArithmeticException(
+        () -> {
+          int unused = 10;
+          int b = 0;
+          unused /= b;
+        });
 
-    try {
-      @SuppressWarnings("unused")
-      int a = 10;
-      int b = 0;
-      int c = 1 + a / b;
-      fail("failed to throw ArithmeticException");
-    } catch (ArithmeticException e) {
-      // do nothing.
-    }
+    assertThrowsArithmeticException(
+        () -> {
+          int a = 10;
+          int b = 0;
+          int unused = 1 + a / b;
+        });
 
-    try {
-      short a = 10;
-      short b = 0;
-      @SuppressWarnings("unused")
-      short c = (short) (a / b);
-      fail("failed to throw ArithmeticException");
-    } catch (ArithmeticException e) {
-      // do nothing.
-    }
+    assertThrowsArithmeticException(
+        () -> {
+          short a = 10;
+          short b = 0;
+          short unused = (short) (a / b);
+        });
 
-    try {
-      char a = 10;
-      char b = 0;
-      @SuppressWarnings("unused")
-      char c = (char) (a / b);
-      fail("failed to throw ArithmeticException");
-    } catch (ArithmeticException e) {
-      // do nothing.
-    }
+    assertThrowsArithmeticException(
+        () -> {
+          char a = 10;
+          char b = 0;
+          char unused = (char) (a / b);
+        });
 
-    try {
-      byte a = 10;
-      byte b = 0;
-      @SuppressWarnings("unused")
-      byte c = (byte) (a / b);
-      fail("failed to throw ArithmeticException");
-    } catch (ArithmeticException e) {
-      // do nothing.
-    }
+    assertThrowsArithmeticException(
+        () -> {
+          byte a = 10;
+          byte b = 0;
+          @SuppressWarnings("unused")
+          byte unused = (byte) (a / b);
+        });
 
-    try {
-      long a = 10;
-      long b = 0;
-      @SuppressWarnings("unused")
-      long c = (a / b);
-      fail("failed to throw ArithmeticException");
-    } catch (ArithmeticException e) {
-      // do nothing.
-    }
+    assertThrowsArithmeticException(
+        () -> {
+          long a = 10;
+          long b = 0;
+          long unused = (a / b);
+        });
 
-    try {
-      int a = 10;
-      int b = 0;
-      @SuppressWarnings("unused")
-      long c = 10L + (a / b);
-      fail("failed to throw ArithmeticException");
-    } catch (ArithmeticException e) {
-      // do nothing.
-    }
+    assertThrowsArithmeticException(
+        () -> {
+          int a = 10;
+          int b = 0;
+          long unused = 10L + (a / b);
+        });
 
-    try {
-      short a = 10;
-      short b = 0;
-      @SuppressWarnings("unused")
-      long c = 10L + (a / b);
-      fail("failed to throw ArithmeticException");
-    } catch (ArithmeticException e) {
-      // do nothing.
-    }
+    assertThrowsArithmeticException(
+        () -> {
+          short a = 10;
+          short b = 0;
+          long unused = 10L + (a / b);
+        });
   }
 
   private static void testModByZero() {
-    try {
-      int a = 10;
-      int b = 0;
-      @SuppressWarnings("unused")
-      int c = a % b;
-      fail("failed to throw ArithmeticException");
-    } catch (ArithmeticException e) {
-      // do nothing.
-    }
+    assertThrowsArithmeticException(
+        () -> {
+          int a = 10;
+          int b = 0;
+          int unused = a % b;
+        });
 
-    try {
-      @SuppressWarnings("unused")
-      int a = 10;
-      int b = 0;
-      a %= b;
-      fail("failed to throw ArithmeticException");
-    } catch (ArithmeticException e) {
-      // do nothing.
-    }
+    assertThrowsArithmeticException(
+        () -> {
+          int unused = 10;
+          int b = 0;
+          unused %= b;
+        });
 
-    try {
-      short a = 10;
-      short b = 0;
-      @SuppressWarnings("unused")
-      short c = (short) (a % b);
-      fail("failed to throw ArithmeticException");
-    } catch (ArithmeticException e) {
-      // do nothing.
-    }
+    assertThrowsArithmeticException(
+        () -> {
+          short a = 10;
+          short b = 0;
+          short unused = (short) (a % b);
+        });
 
-    try {
-      char a = 10;
-      char b = 0;
-      @SuppressWarnings("unused")
-      char c = (char) (a % b);
-      fail("failed to throw ArithmeticException");
-    } catch (ArithmeticException e) {
-      // do nothing.
-    }
+    assertThrowsArithmeticException(
+        () -> {
+          char a = 10;
+          char b = 0;
+          char unused = (char) (a % b);
+        });
 
-    try {
-      byte a = 10;
-      byte b = 0;
-      @SuppressWarnings("unused")
-      byte c = (byte) (a % b);
-      fail("failed to throw ArithmeticException");
-    } catch (ArithmeticException e) {
-      // do nothing.
-    }
+    assertThrowsArithmeticException(
+        () -> {
+          byte a = 10;
+          byte b = 0;
+          byte unused = (byte) (a % b);
+        });
 
-    try {
-      long a = 10;
-      long b = 0;
-      @SuppressWarnings("unused")
-      long c = (a % b);
-      fail("failed to throw ArithmeticException");
-    } catch (ArithmeticException e) {
-      // do nothing.
-    }
+    assertThrowsArithmeticException(
+        () -> {
+          long a = 10;
+          long b = 0;
+          long unused = (a % b);
+        });
 
-    try {
-      int a = 10;
-      int b = 0;
-      @SuppressWarnings("unused")
-      long c = 10L + (a % b);
-      fail("failed to throw ArithmeticException");
-    } catch (ArithmeticException e) {
-      // do nothing.
-    }
+    assertThrowsArithmeticException(
+        () -> {
+          int a = 10;
+          int b = 0;
+          long unused = 10L + (a % b);
+        });
 
-    try {
-      short a = 10;
-      short b = 0;
-      @SuppressWarnings("unused")
-      double c = 10d + (a % b);
-      fail("failed to throw ArithmeticException");
-    } catch (ArithmeticException e) {
-      // do nothing.
-    }
+    assertThrowsArithmeticException(
+        () -> {
+          short a = 10;
+          short b = 0;
+          double unused = 10d + (a % b);
+        });
+  }
+
+  private static void assertThrowsArithmeticException(JsRunnable runnable) {
+    assertThrows(ArithmeticException.class, runnable);
   }
 }

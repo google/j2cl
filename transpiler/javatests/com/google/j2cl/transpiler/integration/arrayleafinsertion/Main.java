@@ -15,7 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.arrayleafinsertion;
 
-import static com.google.j2cl.transpiler.utils.Asserts.fail;
+import static com.google.j2cl.transpiler.utils.Asserts.assertThrows;
+import static com.google.j2cl.transpiler.utils.Asserts.assertThrowsNullPointerException;
 
 public class Main {
   public static void main(String... args) {
@@ -30,12 +31,7 @@ public class Main {
     array[0] = new Person();
 
     // When inserting a leaf value the type must conform.
-    try {
-      array[0] = new Object();
-      fail("An expected failure did not occur.");
-    } catch (ArrayStoreException e) {
-      // expected
-    }
+    assertThrows(ArrayStoreException.class, () -> array[0] = new Object());
 
     // You can always insert null.
     array[0] = null;
@@ -46,18 +42,13 @@ public class Main {
     Object[][] partialArray = new Object[1][];
 
     // When trying to insert into the uninitialized section you'll get an NPE.
-    try {
-      partialArray[0][0] = new Person();
-      fail("An expected failure did not occur.");
-    } catch (NullPointerException e) {
-      // expected
-    }
+    assertThrowsNullPointerException(() -> partialArray[0][0] = new Person());
 
     // You can replace it with a fully initialized array.
-    partialArray = new Object[1][1];
+    Object[][] fullyInitializedArray = new Object[1][1];
 
     // And then insert a leaf value that conforms to the strictest leaf type
-    partialArray[0][0] = new Person();
-    partialArray[0][0] = null;
+    fullyInitializedArray[0][0] = new Person();
+    fullyInitializedArray[0][0] = null;
   }
 }

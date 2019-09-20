@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.regression.java7;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.fail;
 
 import java.io.Serializable;
@@ -352,21 +353,16 @@ public class Java7Test {
     assertThat((int) c).isEqualTo(7);
 
     // Failing casts.
-    try {
-      Object boxedChar = unoptimizableId('a');
-      boolean unusedB = (boolean) boxedChar;
-      fail("Should have thrown a ClassCastException");
-    } catch (ClassCastException expected) {
-      // Expected.
-    }
-
-    try {
-      Object string = unoptimizableId("string");
-      int unusedNum = (int) string;
-      fail("Should have thrown a ClassCastException");
-    } catch (ClassCastException expected) {
-      // Expected.
-    }
+    assertThrows(
+        ClassCastException.class,
+        () -> {
+          boolean unused = (boolean) unoptimizableId('a');
+        });
+    assertThrows(
+        ClassCastException.class,
+        () -> {
+          int unused = (int) unoptimizableId("string");
+        });
   }
 
   private static void assertContentsInOrder(Iterable<String> contents, String... elements) {

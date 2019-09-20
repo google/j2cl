@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.integration.jsfunctiontypeannotation;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertThrowsClassCastException;
 import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
 
 import jsinterop.annotations.JsFunction;
@@ -88,12 +89,11 @@ public class Main {
     B<String> b2 = (B<String>) o;
     ApplyFunction af1 = (ApplyFunction) o;
     ApplyFunction<String, Integer> af2 = (ApplyFunction<String, Integer>) o;
-    try {
-      A a = (A) o;
-      assertTrue(false);
-    } catch (ClassCastException e) {
-      // expected.
-    }
+
+    assertThrowsClassCastException(
+        () -> {
+          A a = (A) o;
+        });
     assertTrue(b1 != null);
     assertTrue(b2 != null);
     assertTrue(af1 != null);

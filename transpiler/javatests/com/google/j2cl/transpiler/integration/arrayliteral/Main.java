@@ -15,8 +15,9 @@
  */
 package com.google.j2cl.transpiler.integration.arrayliteral;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertThrows;
+import static com.google.j2cl.transpiler.utils.Asserts.assertThrowsNullPointerException;
 import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
-import static com.google.j2cl.transpiler.utils.Asserts.fail;
 
 public class Main {
   public static void main(String... args) {
@@ -69,17 +70,12 @@ public class Main {
     assertTrue(partial2D[0] == null);
 
     // When trying to insert into the uninitialized section you'll get an NPE.
-    try {
-      partial2D[0][0] = new Object();
-      fail("An expected failure did not occur.");
-    } catch (NullPointerException e) {
-      // expected
-    }
+    assertThrowsNullPointerException(() -> partial2D[0][0] = new Object());
 
     // You can replace it with a fully initialized array with the right dimensions.
-    partial2D = new Object[2][2];
-    assertTrue(partial2D.length == 2);
-    assertTrue(partial2D[0].length == 2);
+    Object[][] full2D = new Object[2][2];
+    assertTrue(full2D.length == 2);
+    assertTrue(full2D[0].length == 2);
   }
 
   private static void testTwoD() {
@@ -104,21 +100,11 @@ public class Main {
     twoD[0][2] = main;
 
     // When inserting a leaf value the type must conform.
-    try {
-      twoD[0][0] = new Object();
-      fail("An expected failure did not occur.");
-    } catch (ArrayStoreException e) {
-      // expected
-    }
+    assertThrows(ArrayStoreException.class, () -> twoD[0][0] = new Object());
 
     // The object-literal partial arrays still know their depth and so for example will reject an
     // attempt to stick an object into a 1-dimensional array slot.
-    try {
-      ((Object[]) twoD)[1] = new Object();
-      fail("An expected failure did not occur.");
-    } catch (ArrayStoreException e) {
-      // expected
-    }
+    assertThrows(ArrayStoreException.class, () -> ((Object[]) twoD)[1] = new Object());
   }
 
   private static void testUnbalanced2D() {

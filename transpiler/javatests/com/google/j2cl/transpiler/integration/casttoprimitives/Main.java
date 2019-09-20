@@ -15,8 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.casttoprimitives;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertThrowsClassCastException;
 import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
-import static com.google.j2cl.transpiler.utils.Asserts.fail;
 
 @SuppressWarnings({"BoxedPrimitiveConstructor", "unchecked"})
 public class Main {
@@ -26,6 +26,7 @@ public class Main {
     testBoxedToPrimitive();
     testTypeExtendsLongReferenceToPrimitive();
     testTypeExtendsIntersectionReferenceToPrimitive();
+    testPrimitiveToReference();
   }
 
   @SuppressWarnings("unused")
@@ -210,87 +211,74 @@ public class Main {
 
   @SuppressWarnings("unused")
   public static void testObjectReferenceToPrimitive() {
+    {
     Object o = new Object();
-    try {
+      assertThrowsClassCastException(
+          () -> {
+            boolean b = (boolean) o;
+          });
+      assertThrowsClassCastException(
+          () -> {
+            byte b = (byte) o;
+          });
+      assertThrowsClassCastException(
+          () -> {
+            char c = (char) o;
+          });
+      assertThrowsClassCastException(
+          () -> {
+            short s = (short) o;
+          });
+      assertThrowsClassCastException(
+          () -> {
+            int i = (int) o;
+          });
+      assertThrowsClassCastException(
+          () -> {
+            long l = (long) o;
+          });
+      assertThrowsClassCastException(
+          () -> {
+            float f = (float) o;
+          });
+      assertThrowsClassCastException(
+          () -> {
+            double d = (double) o;
+          });
+    }
+    {
+      Object o = Boolean.FALSE;
       boolean bool = (boolean) o;
-      fail("An expected failure did not occur.");
-    } catch (ClassCastException e) {
-      // expected.
-    }
-    try {
+      assertTrue(!bool);
+
+      o = Byte.MAX_VALUE;
       byte b = (byte) o;
-      fail("An expected failure did not occur.");
-    } catch (ClassCastException e) {
-      // expected.
-    }
-    try {
+      assertTrue(b == 127);
+
+      o = new Character('a');
       char c = (char) o;
-      fail("An expected failure did not occur.");
-    } catch (ClassCastException e) {
-      // expected.
-    }
-    try {
+      assertTrue(c == 'a');
+
+      o = Short.MAX_VALUE;
       short s = (short) o;
-      fail("An expected failure did not occur.");
-    } catch (ClassCastException e) {
-      // expected.
-    }
-    try {
+      assertTrue(s == 32767);
+
+      o = new Integer(1);
       int i = (int) o;
-      fail("An expected failure did not occur.");
-    } catch (ClassCastException e) {
-      // expected.
-    }
-    try {
+      assertTrue(i == 1);
+
+      o = new Long(1L);
       long l = (long) o;
-      fail("An expected failure did not occur.");
-    } catch (ClassCastException e) {
-      // expected.
-    }
-    try {
+      assertTrue(l == 1L);
+
+      o = new Float(1.1f);
       float f = (float) o;
-      fail("An expected failure did not occur.");
-    } catch (ClassCastException e) {
-      // expected.
-    }
-    try {
+      assertTrue(f == 1.1f);
+
+      o = new Double(1.2);
       double d = (double) o;
-      fail("An expected failure did not occur.");
-    } catch (ClassCastException e) {
-      // expected.
+      assertTrue(d == 1.2);
     }
-
-    o = Boolean.FALSE;
-    boolean bool = (boolean) o;
-    assertTrue(!bool);
-
-    o = Byte.MAX_VALUE;
-    byte b = (byte) o;
-    assertTrue(b == 127);
-
-    o = new Character('a');
-    char c = (char) o;
-    assertTrue(c == 'a');
-
-    o = Short.MAX_VALUE;
-    short s = (short) o;
-    assertTrue(s == 32767);
-
-    o = new Integer(1);
-    int i = (int) o;
-    assertTrue(i == 1);
-
-    o = new Long(1L);
-    long l = (long) o;
-    assertTrue(l == 1L);
-
-    o = new Float(1.1f);
-    float f = (float) o;
-    assertTrue(f == 1.1f);
-
-    o = new Double(1.2);
-    double d = (double) o;
-    assertTrue(d == 1.2);
   }
 
   public static <T extends Long> void testTypeExtendsLongReferenceToPrimitive() {
@@ -370,5 +358,49 @@ public class Main {
     assertTrue(dd == 1);
     dd = f;
     assertTrue(dd - 1.1 < 1e-7);
+  }
+
+  @SuppressWarnings("cast")
+  public static void testPrimitiveToReference() {
+    boolean bool = true;
+    byte b = 1;
+    char c = 'a';
+    short s = 1;
+    int i = 1;
+    long l = 1L;
+    float f = 1.0f;
+    double d = 1.0;
+    Object o = bool;
+    assertTrue(o != null);
+    o = b;
+    assertTrue(o != null);
+    o = c;
+    assertTrue(o != null);
+    o = s;
+    assertTrue(o != null);
+    o = i;
+    assertTrue(o != null);
+    o = l;
+    assertTrue(o != null);
+    o = f;
+    assertTrue(o != null);
+    o = d;
+    assertTrue(o != null);
+    o = (Object) bool;
+    assertTrue(o != null);
+    o = (Object) b;
+    assertTrue(o != null);
+    o = (Object) c;
+    assertTrue(o != null);
+    o = (Object) s;
+    assertTrue(o != null);
+    o = (Object) i;
+    assertTrue(o != null);
+    o = (Object) l;
+    assertTrue(o != null);
+    o = (Object) f;
+    assertTrue(o != null);
+    o = (Object) d;
+    assertTrue(o != null);
   }
 }
