@@ -12,6 +12,6 @@ load(
 # blaze build :optimized_js
 # blaze test :readable_js
 integration_test(
-    name = "casttoclass",
+    name = "castsenabled",
     srcs = glob(["*.java"]),
 )

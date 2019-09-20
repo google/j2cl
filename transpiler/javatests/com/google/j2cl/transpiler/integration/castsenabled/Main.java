@@ -13,13 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.google.j2cl.transpiler.integration.casttoclass;
+package com.google.j2cl.transpiler.integration.castsenabled;
 
 import static com.google.j2cl.transpiler.utils.Asserts.fail;
 
-/**
- * Test cast to class type.
- */
+/** Simple cast test for measuring the size cost of having casts enabled. */
 public class Main {
   @SuppressWarnings("unused")
   public static void main(String[] args) {
@@ -28,10 +26,10 @@ public class Main {
     // This is fine.
     Main main = (Main) object;
 
-    // But this isn't fine.
     try {
+      // But this isn't fine.
       RuntimeException exception = (RuntimeException) object;
-      fail("An expected failure did not occur.");
+      fail();
     } catch (ClassCastException e) {
       // expected
     }

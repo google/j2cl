@@ -13,10 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.google.j2cl.transpiler.integration.casttoclassdisabled;
+package com.google.j2cl.transpiler.integration.castsdisabled;
+
+import static com.google.j2cl.transpiler.utils.Asserts.fail;
 
 /**
- * Test disabling of runtime cast checking.
+ * Simple cast test for measuring the size cost of having casts disabled, and verifying that casts
+ * checks are not performed.
  */
 public class Main {
   @SuppressWarnings("unused")
@@ -26,7 +29,12 @@ public class Main {
     // This is fine.
     Main main = (Main) object;
 
-    // This should fail! But we've turned off cast checking in the BUILD file.
-    RuntimeException exception = (RuntimeException) object;
+    try {
+      // This should fail! But we've turned off cast checking in the BUILD file, so the exception
+      // will not be thrown.
+      RuntimeException exception = (RuntimeException) object;
+    } catch (ClassCastException e) {
+      fail();
+    }
   }
 }

@@ -11,7 +11,7 @@ load(
 # blaze build :optimized_js
 # blaze test :readable_js
 integration_test(
-    name = "casttoclassdisabled",
+    name = "castsdisabled",
     srcs = glob(["*.java"]),
     closure_defines = {
         "jre.checks.type": "DISABLED",
