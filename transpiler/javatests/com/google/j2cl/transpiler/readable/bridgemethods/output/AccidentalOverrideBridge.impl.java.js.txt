@@ -70,14 +70,6 @@ class AccidentalOverrideBridge extends ClassWithParameterizedGet {
     return instance instanceof AccidentalOverrideBridge;
   }
   /**
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, AccidentalOverrideBridge);
-  }
-  /**
    * @public
    */
   static $loadModules() {

@@ -47,14 +47,6 @@ class SubclassGenericClass extends GenericClass {
     return instance instanceof SubclassGenericClass;
   }
   /**
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, SubclassGenericClass);
-  }
-  /**
    * @public
    */
   static $loadModules() {}

@@ -66,14 +66,6 @@ class SubMain extends Main {
     return instance instanceof SubMain;
   }
   /**
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, SubMain);
-  }
-  /**
    * @public
    */
   static $loadModules() {

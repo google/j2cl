@@ -39,14 +39,6 @@ class AbstractStringList extends AbstractList {
     return instance instanceof AbstractStringList;
   }
   /**
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, AbstractStringList);
-  }
-  /**
    * @public
    */
   static $loadModules() {}

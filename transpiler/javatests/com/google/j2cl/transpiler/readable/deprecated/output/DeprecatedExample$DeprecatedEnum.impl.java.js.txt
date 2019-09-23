@@ -145,14 +145,6 @@ class DeprecatedEnum extends Enum {
     return instance instanceof DeprecatedEnum;
   }
   /**
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, DeprecatedEnum);
-  }
-  /**
    * @public
    */
   static $loadModules() {

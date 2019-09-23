@@ -61,14 +61,6 @@ class LambdaInSubClass extends Parent {
     return instance instanceof LambdaInSubClass;
   }
   /**
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, LambdaInSubClass);
-  }
-  /**
    * @public
    */
   static $loadModules() {

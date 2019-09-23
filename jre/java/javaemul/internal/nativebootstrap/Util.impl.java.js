@@ -158,22 +158,6 @@ class Util {
   }
 
   /**
-   * Returns whether the "from" class can be cast to the "to" class.
-   *
-   * Unlike instanceof, this function operates on classes instead of
-   * instances.
-   * @param {Function} fromClass
-   * @param {Function} toClass
-   * @return {boolean}
-   * @public
-   */
-  static $canCastClass(fromClass, toClass) {
-    return (
-        fromClass != null &&
-        (fromClass == toClass || fromClass.prototype instanceof toClass));
-  }
-
-  /**
    * Create a function that applies the specified jsFunctionMethod on itself,
    * and copies `instance`' properties to itself.
    *

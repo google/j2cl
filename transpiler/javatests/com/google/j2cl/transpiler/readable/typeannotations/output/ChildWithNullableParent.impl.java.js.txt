@@ -93,14 +93,6 @@ class ChildWithNullableParent extends Parent {
     return instance instanceof ChildWithNullableParent;
   }
   /**
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, ChildWithNullableParent);
-  }
-  /**
    * @public
    */
   static $loadModules() {

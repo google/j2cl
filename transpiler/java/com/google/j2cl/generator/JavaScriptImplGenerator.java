@@ -309,7 +309,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     renderTypeMethods();
     renderMarkImplementorMethod();
     renderIsInstanceMethod();
-    renderIsAssignableFromMethod();
     renderCopyMethod();
     renderLoadModules();
     sourceBuilder.closeBrace();
@@ -536,43 +535,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         "return instance != null && !!instance.$is__"
             + ManglingNameUtils.getMangledName(typeDescriptor)
             + ";");
-  }
-
-  // TODO(b/34928687): Move this to the ast in a normalization pass.
-  private void renderIsAssignableFromMethod() {
-    if (type.isJsOverlayImplementation()
-        || type.containsMethod(MethodDescriptor.IS_ASSIGNABLE_FROM_METHOD_NAME)) {
-      return; // Don't render for overlay types or if the method exists.
-    }
-    sourceBuilder.appendLines(
-        "/**",
-        " * @param {"
-            + TypeDescriptors.get().nativeFunction.getQualifiedJsName()
-            + "} classConstructor",
-        " * @return {boolean}",
-        " * @public",
-        " */",
-        "static $isAssignableFrom(classConstructor) ");
-    sourceBuilder.openBrace();
-    sourceBuilder.newLine();
-
-    if (type.isInterface()) { // For interfaces
-      sourceBuilder.append(
-          "return classConstructor != null && !!classConstructor.prototype.$implements__"
-              + ManglingNameUtils.getMangledName(type.getTypeDescriptor())
-              + ";");
-    } else { // For classes
-      BootstrapType.NATIVE_UTIL.getDescriptor();
-      String utilAlias = environment.aliasForType(BootstrapType.NATIVE_UTIL.getDescriptor());
-      sourceBuilder.append(
-          "return "
-              + utilAlias
-              + ".$canCastClass(classConstructor, "
-              + environment.aliasForType(type.getDeclaration())
-              + ");");
-    }
-    sourceBuilder.closeBrace();
-    sourceBuilder.newLine();
   }
 
   // TODO(b/34928687): Move this to the ast in a normalization pass.

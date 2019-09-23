@@ -94,14 +94,6 @@ class InnerClass extends ParentInner {
     return instance instanceof InnerClass;
   }
   /**
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, InnerClass);
-  }
-  /**
    * @public
    */
   static $loadModules() {}

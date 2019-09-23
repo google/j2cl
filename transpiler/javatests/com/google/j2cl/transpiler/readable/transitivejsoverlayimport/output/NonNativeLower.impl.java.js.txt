@@ -39,14 +39,6 @@ class NonNativeLower extends NonNativeUpper {
     return instance instanceof NonNativeLower;
   }
   /**
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, NonNativeLower);
-  }
-  /**
    * @public
    */
   static $loadModules() {}

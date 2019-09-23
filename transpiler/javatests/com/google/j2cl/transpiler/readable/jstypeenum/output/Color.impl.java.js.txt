@@ -169,14 +169,6 @@ class Color extends Enum {
     return instance instanceof Color;
   }
   /**
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, Color);
-  }
-  /**
    * @public
    */
   static $loadModules() {

@@ -50,14 +50,6 @@ class TestQualifiedSuperCall extends OuterIsNotSuper {
     return instance instanceof TestQualifiedSuperCall;
   }
   /**
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, TestQualifiedSuperCall);
-  }
-  /**
    * @public
    */
   static $loadModules() {

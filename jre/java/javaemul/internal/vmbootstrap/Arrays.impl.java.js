@@ -22,6 +22,7 @@ goog.module('vmbootstrap.Arrays$impl');
 // that will miss some multiline goog.require's.
 const Constructor = goog.require('javaemul.internal.Constructor');
 const Hashing = goog.require('nativebootstrap.Hashing$impl');
+const Util = goog.require('nativebootstrap.Util$impl');
 let Class = goog.forwardDeclare('java.lang.Class');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
@@ -46,8 +47,8 @@ class Arrays {
    */
   static $create(dimensionLengths, leafType) {
     return Arrays.$createInternal_(
-        dimensionLengths, /** @type {Constructor} */ (leafType), leafType.$isInstance,
-        leafType.$isAssignableFrom, leafType.$initialArrayValue);
+        dimensionLengths, /** @type {Constructor} */ (leafType),
+        leafType.$isInstance, leafType.$initialArrayValue);
   }
 
   /**
@@ -68,19 +69,16 @@ class Arrays {
    * @param {Array<number>} dimensionLengths
    * @param {Constructor} leafType
    * @param {Function} leafTypeIsInstance
-   * @param {Function} leafTypeIsAssignableFrom
    * @param {*} leafTypeInitialValue
    * @return {Array<*>}
    * @private
    */
   static $createInternal_(
-      dimensionLengths, leafType, leafTypeIsInstance, leafTypeIsAssignableFrom,
-      leafTypeInitialValue) {
+      dimensionLengths, leafType, leafTypeIsInstance, leafTypeInitialValue) {
     return Arrays.$createRecursiveInternal_(
         dimensionLengths, leafTypeInitialValue,
         Arrays.$createMetadata_(
-            leafType, leafTypeIsInstance, leafTypeIsAssignableFrom,
-            dimensionLengths.length));
+            leafType, leafTypeIsInstance, dimensionLengths.length));
   }
 
   /**
@@ -144,26 +142,21 @@ class Arrays {
   static $init(array, leafType, opt_dimensionCount) {
     return Arrays.$initInternal_(
         array, /** @type {Constructor} */ (leafType), leafType.$isInstance,
-        leafType.$isAssignableFrom, opt_dimensionCount || 1);
+        opt_dimensionCount || 1);
   }
 
   /**
    * @param {Array<*>} array
    * @param {Constructor} leafType
    * @param {Function} leafTypeIsInstance
-   * @param {Function} leafTypeIsAssignableFrom
    * @param {number} dimensionCount
    * @return {Array<*>}
    * @private
    */
-  static $initInternal_(
-      array, leafType, leafTypeIsInstance, leafTypeIsAssignableFrom,
-      dimensionCount) {
+  static $initInternal_(array, leafType, leafTypeIsInstance, dimensionCount) {
     return Arrays.$initRecursiveInternal_(
         array,
-        Arrays.$createMetadata_(
-            leafType, leafTypeIsInstance, leafTypeIsAssignableFrom,
-            dimensionCount)
+        Arrays.$createMetadata_(leafType, leafTypeIsInstance, dimensionCount)
 
     );
   }
@@ -202,7 +195,7 @@ class Arrays {
         array,
         Arrays.$createMetadata_(
             /** @type {Constructor} */ (leafType), leafType.$isInstance,
-            leafType.$isAssignableFrom, dimensionCount));
+            dimensionCount));
   }
 
   /**
@@ -253,7 +246,7 @@ class Arrays {
     if (metadata) {
       if (metadata.dimensionCount > 1) {
         if (!Arrays.$instanceIsOfTypeInternal_(
-                value, metadata.leafType, metadata.leafTypeIsAssignableFrom,
+                value, metadata.leafType, metadata.leafTypeIsInstance,
                 metadata.dimensionCount - 1)) {
           // The inserted array must fit dimensions and the array leaf type.
           return false;
@@ -294,19 +287,19 @@ class Arrays {
   static $instanceIsOfType(instance, requiredLeafType, requiredDimensionCount) {
     return Arrays.$instanceIsOfTypeInternal_(
         instance, /** @type {Constructor} */ (requiredLeafType),
-        requiredLeafType.$isAssignableFrom, requiredDimensionCount);
+        requiredLeafType.$isInstance, requiredDimensionCount);
   }
 
   /**
    * @param {*} instance
    * @param {Constructor} requiredLeafType
-   * @param {Function} requiredLeafTypeIsAssignableFrom
+   * @param {Function} requiredLeafTypeIsInstance
    * @param {number} requiredDimensionCount
    * @return {boolean}
    * @private
    */
   static $instanceIsOfTypeInternal_(
-      instance, requiredLeafType, requiredLeafTypeIsAssignableFrom,
+      instance, requiredLeafType, requiredLeafTypeIsInstance,
       requiredDimensionCount) {
     Arrays.$clinit();
     if (instance == null || !Array.isArray(instance)) {
@@ -314,14 +307,31 @@ class Arrays {
       return false;
     }
 
-    var metadata = Arrays.$getMetadata_(instance) ||
-        /** @type {Arrays.Metadata_} */ ({dimensionCount: 1});
+    const metadata = Arrays.$getMetadata_(instance) ||
+        /** @type {Arrays.Metadata_} */ ({
+                       leafType: JavaLangObject,
+                       dimensionCount: 1
+                     });
 
-    var effectiveInstanceDimensionCount = metadata.dimensionCount;
+    const effectiveInstanceDimensionCount = metadata.dimensionCount;
     if (effectiveInstanceDimensionCount == requiredDimensionCount) {
-      // If dimensions are equal then the leaftypes must be castable.
-      return requiredLeafTypeIsAssignableFrom(metadata.leafType);
+      const fromLeafType = metadata.leafType;
+
+      if (fromLeafType === requiredLeafType) {
+        return true;
+      }
+
+      if (Util.$isPrimitiveType(requiredLeafType) ||
+          Util.$isPrimitiveType(fromLeafType)) {
+        // Since they are not the same type, they cannot be compatible if either
+        // one is a primitive array.
+        return false;
+      }
+
+      // Array with same dimension is assignable if the leaf type is assignable.
+      return requiredLeafTypeIsInstance(fromLeafType.prototype);
     }
+
     if (effectiveInstanceDimensionCount > requiredDimensionCount) {
       // If shrinking the dimensions then the new leaf type must *be* Object.
       return JavaLangObject == requiredLeafType;
@@ -355,25 +365,25 @@ class Arrays {
   static $castTo(instance, requiredLeafType, requiredDimensionCount) {
     return Arrays.$castToInternal_(
         instance, /** @type {Constructor} */ (requiredLeafType),
-        requiredLeafType.$isAssignableFrom, requiredDimensionCount);
+        requiredLeafType.$isInstance, requiredDimensionCount);
   }
 
   /**
    * @param {*} instance
    * @param {Constructor} requiredLeafType
-   * @param {Function} requiredLeafTypeIsAssignableFrom
+   * @param {Function} requiredLeafTypeIsInstance
    * @param {number} requiredDimensionCount
    * @return {*}
    * @private
    */
   static $castToInternal_(
-      instance, requiredLeafType, requiredLeafTypeIsAssignableFrom,
+      instance, requiredLeafType, requiredLeafTypeIsInstance,
       requiredDimensionCount) {
     Arrays.$clinit();
     if (InternalPreconditions.m_isTypeChecked__()) {
       const castSucceeds = instance == null ||
           Arrays.$instanceIsOfTypeInternal_(
-              instance, requiredLeafType, requiredLeafTypeIsAssignableFrom,
+              instance, requiredLeafType, requiredLeafTypeIsInstance,
               requiredDimensionCount);
       if (!castSucceeds) {
         // We don't delegate to a common throw function because it confuses
@@ -444,7 +454,6 @@ class Arrays {
     return Arrays.$createMetadata_(
         metadata.leafType,
         metadata.leafTypeIsInstance,
-        metadata.leafTypeIsAssignableFrom,
         metadata.dimensionCount - 1
     );
   }
@@ -452,17 +461,14 @@ class Arrays {
   /**
    * @param {Constructor} leafType
    * @param {Function} leafTypeIsInstance
-   * @param {Function} leafTypeIsAssignableFrom
    * @param {number} dimensionCount
    * @return {Arrays.Metadata_}
    * @private
    */
-  static $createMetadata_(
-      leafType, leafTypeIsInstance, leafTypeIsAssignableFrom, dimensionCount) {
+  static $createMetadata_(leafType, leafTypeIsInstance, dimensionCount) {
     return {
       leafType: leafType,
       leafTypeIsInstance: leafTypeIsInstance,
-      leafTypeIsAssignableFrom: leafTypeIsAssignableFrom,
       dimensionCount: dimensionCount
     };
   }
@@ -500,7 +506,6 @@ class Arrays {
  * @typedef {{
  *   leafType: Function,
  *   leafTypeIsInstance: Function,
- *   leafTypeIsAssignableFrom: Function,
  *   dimensionCount: number,
  * }}
  * @private

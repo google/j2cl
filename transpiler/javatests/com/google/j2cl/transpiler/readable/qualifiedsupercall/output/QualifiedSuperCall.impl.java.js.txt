@@ -44,14 +44,6 @@ class QualifiedSuperCall extends Parent {
     return instance instanceof QualifiedSuperCall;
   }
   /**
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, QualifiedSuperCall);
-  }
-  /**
    * @public
    */
   static $loadModules() {}

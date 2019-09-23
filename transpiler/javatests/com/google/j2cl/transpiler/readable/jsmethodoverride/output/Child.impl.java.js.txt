@@ -40,14 +40,6 @@ class Child extends Parent {
     return instance instanceof Child;
   }
   /**
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, Child);
-  }
-  /**
    * @public
    */
   static $loadModules() {}

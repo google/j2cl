@@ -23,6 +23,9 @@ goog.module('vmbootstrap.Arrays');
 // Imports headers for both eager and lazy dependencies to ensure that
 // all files are included in the dependency tree.
 const _Class = goog.require('java.lang.Class');
+const _Constructor = goog.require('javaemul.internal.Constructor');
+const _Hashing = goog.require('nativebootstrap.Hashing');
+const _Util = goog.require('nativebootstrap.Util');
 const _Integer = goog.require('java.lang.Integer');
 const _Object = goog.require('java.lang.Object');
 const _Objects = goog.require('vmbootstrap.Objects');

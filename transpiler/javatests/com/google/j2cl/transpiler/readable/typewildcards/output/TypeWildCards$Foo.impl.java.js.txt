@@ -58,14 +58,6 @@ class Foo extends GenericType {
     return instance instanceof Foo;
   }
   /**
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, Foo);
-  }
-  /**
    * @public
    */
   static $loadModules() {}

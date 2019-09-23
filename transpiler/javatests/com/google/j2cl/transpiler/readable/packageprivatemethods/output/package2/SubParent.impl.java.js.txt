@@ -45,14 +45,6 @@ class SubParent extends Parent {
     return instance instanceof SubParent;
   }
   /**
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, SubParent);
-  }
-  /**
    * @public
    */
   static $loadModules() {}

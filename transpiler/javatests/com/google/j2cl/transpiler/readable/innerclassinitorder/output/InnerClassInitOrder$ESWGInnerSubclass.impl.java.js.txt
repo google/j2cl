@@ -85,14 +85,6 @@ class ESWGInnerSubclass extends ESWGInner {
     return instance instanceof ESWGInnerSubclass;
   }
   /**
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, ESWGInnerSubclass);
-  }
-  /**
    * @public
    */
   static $loadModules() {}

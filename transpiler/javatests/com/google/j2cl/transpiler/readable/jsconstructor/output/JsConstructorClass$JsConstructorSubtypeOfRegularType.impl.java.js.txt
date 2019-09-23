@@ -65,15 +65,6 @@ class JsConstructorSubtypeOfRegularType extends RegularType {
     return instance instanceof JsConstructorSubtypeOfRegularType;
   }
   /**
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(
-        classConstructor, JsConstructorSubtypeOfRegularType);
-  }
-  /**
    * @public
    */
   static $loadModules() {

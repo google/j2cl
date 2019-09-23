@@ -73,14 +73,6 @@ class EnumMap extends AbstractMap {
     return instance instanceof EnumMap;
   }
   /**
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, EnumMap);
-  }
-  /**
    * @public
    */
   static $loadModules() {

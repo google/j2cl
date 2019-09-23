@@ -58,14 +58,6 @@ class SubNativeJsType extends MyNativeJsType {
     return instance instanceof SubNativeJsType;
   }
   /**
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, SubNativeJsType);
-  }
-  /**
    * @public
    */
   static $loadModules() {}

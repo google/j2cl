@@ -92,14 +92,6 @@ class OuterRefFromThisCtorCall extends OuterRefFromSuperCtorBase {
     return instance instanceof OuterRefFromThisCtorCall;
   }
   /**
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, OuterRefFromThisCtorCall);
-  }
-  /**
    * @public
    */
   static $loadModules() {

@@ -49,14 +49,6 @@ class AnotherSubclass extends Superclass {
     return instance instanceof AnotherSubclass;
   }
   /**
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, AnotherSubclass);
-  }
-  /**
    * @public
    */
   static $loadModules() {}

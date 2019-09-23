@@ -47,9 +47,4 @@ public class Object {
   private static boolean $isInstance(Object instance) {
     return instance != null;
   }
-
-  @JsMethod
-  private static boolean $isAssignableFrom(Constructor classConstructor) {
-    return !classConstructor.isPrimitiveType();
-  }
 }

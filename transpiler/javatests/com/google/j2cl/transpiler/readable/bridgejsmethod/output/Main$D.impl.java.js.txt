@@ -71,14 +71,6 @@ class D extends A {
     return instance instanceof D;
   }
   /**
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, D);
-  }
-  /**
    * @public
    */
   static $loadModules() {

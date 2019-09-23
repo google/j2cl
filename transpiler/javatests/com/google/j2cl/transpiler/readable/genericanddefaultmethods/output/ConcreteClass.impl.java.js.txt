@@ -59,14 +59,6 @@ class ConcreteClass extends GenericClass {
     return instance instanceof ConcreteClass;
   }
   /**
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, ConcreteClass);
-  }
-  /**
    * @public
    */
   static $loadModules() {}

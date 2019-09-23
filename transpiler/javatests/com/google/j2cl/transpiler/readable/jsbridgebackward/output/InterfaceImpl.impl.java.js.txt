@@ -58,14 +58,6 @@ class InterfaceImpl extends A {
     return instance instanceof InterfaceImpl;
   }
   /**
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, InterfaceImpl);
-  }
-  /**
    * @public
    */
   static $loadModules() {}

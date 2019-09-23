@@ -160,14 +160,6 @@ class Numbers extends Enum {
     return instance instanceof Numbers;
   }
   /**
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, Numbers);
-  }
-  /**
    * @public
    */
   static $loadModules() {

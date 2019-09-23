@@ -47,14 +47,6 @@ class Child extends Varargs {
     return instance instanceof Child;
   }
   /**
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, Child);
-  }
-  /**
    * @public
    */
   static $loadModules() {

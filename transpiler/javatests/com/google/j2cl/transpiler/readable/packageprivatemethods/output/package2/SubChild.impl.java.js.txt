@@ -53,14 +53,6 @@ class SubChild extends Child {
     return instance instanceof SubChild;
   }
   /**
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, SubChild);
-  }
-  /**
    * @public
    */
   static $loadModules() {}
