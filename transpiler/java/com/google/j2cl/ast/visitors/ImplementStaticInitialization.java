@@ -17,7 +17,9 @@ package com.google.j2cl.ast.visitors;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
+import com.google.common.base.Joiner;
 import com.google.j2cl.ast.AbstractRewriter;
+import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.Block;
@@ -29,10 +31,13 @@ import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.FieldDescriptor.FieldOrigin;
 import com.google.j2cl.ast.FunctionExpression;
+import com.google.j2cl.ast.Invocation;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.JsMemberType;
 import com.google.j2cl.ast.LambdaTypeDescriptors;
+import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.Member;
+import com.google.j2cl.ast.MemberDescriptor;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -41,11 +46,14 @@ import com.google.j2cl.ast.MultiExpression;
 import com.google.j2cl.ast.PrimitiveTypes;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.Type;
+import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.common.SourcePosition;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -55,13 +63,52 @@ import java.util.stream.Collectors;
  */
 public class ImplementStaticInitialization extends NormalizationPass {
 
+  private final Set<String> privateStaticMembersCalledFromOtherClasses = new HashSet<>();
+
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
+    collectPrivateMemberReferences(compilationUnit);
     for (Type type : compilationUnit.getTypes()) {
       insertClinitCalls(type);
       synthesizeSuperClinitCalls(type);
       synthesizeSettersAndGetters(type);
       synthesizeClinitMethod(type);
+    }
+  }
+
+  /** Collect all private static methods and fields that are accessed from outside its class. */
+  private void collectPrivateMemberReferences(CompilationUnit compilationUnit) {
+    compilationUnit.accept(
+        new AbstractVisitor() {
+          @Override
+          @SuppressWarnings("ReferenceEquality")
+          public void exitInvocation(Invocation invocation) {
+            // TODO(b/35802406): Do not use the target declaration descriptor here, since there are
+            // cases, e.g. JsOverlays, in which the enclosing class of the declaration descriptor
+            // is not the same as the actual class of the target.
+            recordMemberReference(getCurrentType().getDeclaration(), invocation.getTarget());
+          }
+
+          @Override
+          @SuppressWarnings("ReferenceEquality")
+          public void exitFieldAccess(FieldAccess fieldAccess) {
+            // TODO(b/35802406): Do not use the target declaration descriptor here, since there are
+            // cases, e.g. JsOverlays, in which the enclosing class of the declaration descriptor
+            // is not the same as the actual class of the target.
+            recordMemberReference(getCurrentType().getDeclaration(), fieldAccess.getTarget());
+          }
+        });
+  }
+
+  /** Records access to member {@code targetMember} from type {@code callerEnclosingType}. */
+  private void recordMemberReference(
+      TypeDeclaration callerEnclosingType, MemberDescriptor targetMember) {
+    if (targetMember.isPolymorphic() || !targetMember.getVisibility().isPrivate()) {
+      return;
+    }
+
+    if (!targetMember.isMemberOf(callerEnclosingType)) {
+      privateStaticMembersCalledFromOtherClasses.add(getUniqueIdentifier(targetMember));
     }
   }
 
@@ -71,7 +118,7 @@ public class ImplementStaticInitialization extends NormalizationPass {
         new AbstractRewriter() {
           @Override
           public Method rewriteMethod(Method method) {
-            if (needsClinitCall(method.getDescriptor())) {
+            if (triggersClinit(method.getDescriptor())) {
               return Method.Builder.from(method)
                   .addStatement(
                       0,
@@ -90,7 +137,7 @@ public class ImplementStaticInitialization extends NormalizationPass {
     Block.Builder staticInitializerBuilder =
         Block.newBuilder().setSourcePosition(type.getSourcePosition());
 
-    if (hasClinitMethod(type.getSuperTypeDescriptor())) {
+    if (implementsClinitMethod(type.getSuperTypeDescriptor())) {
       staticInitializerBuilder.addStatement(
           createClinitCallStatement(type.getSourcePosition(), type.getSuperTypeDescriptor()));
     }
@@ -152,8 +199,12 @@ public class ImplementStaticInitialization extends NormalizationPass {
         });
   }
 
-  private static boolean triggersClinit(FieldDescriptor fieldDescriptor) {
-    return fieldDescriptor.isStatic() && !fieldDescriptor.isCompileTimeConstant();
+  /** Returns a string that uniquely identifies a method. */
+  private static String getUniqueIdentifier(MemberDescriptor memberDescriptor) {
+    return Joiner.on("___")
+        .join(
+            memberDescriptor.getEnclosingTypeDescriptor().getQualifiedBinaryName(),
+            ManglingNameUtils.getMangledName(memberDescriptor));
   }
 
   public void synthesizePropertyGetter(Type type, Field field) {
@@ -215,7 +266,7 @@ public class ImplementStaticInitialization extends NormalizationPass {
       Block.Builder staticInitializerBuilder) {
     for (DeclaredTypeDescriptor interfaceTypeDescriptor :
         typeDescriptor.getInterfaceTypeDescriptors()) {
-      if (!hasClinitMethod(interfaceTypeDescriptor)) {
+      if (!implementsClinitMethod(interfaceTypeDescriptor)) {
         continue;
       }
 
@@ -235,27 +286,39 @@ public class ImplementStaticInitialization extends NormalizationPass {
     }
   }
 
-  private static boolean needsClinitCall(MethodDescriptor methodDescriptor) {
-    // Skip native methods.
-    if (methodDescriptor.isNative()) {
+  /**
+   * Returns {@code true} if a class initialization (clinit) needs to be called when accessing this
+   * member (i.e. calling it if if a method, or referencing it if it is a field)
+   */
+  private boolean triggersClinit(MemberDescriptor memberDescriptor) {
+    if (memberDescriptor.isNative()) {
+      // Skip native members.
       return false;
     }
 
-    // At this point all constructors (except JsConstructors) are static factory ($create) methods,
-    // so clinits need to be inserted only on static methods or JsConstructors. clinits are not
-    // needed in factories or JsConstructors for enum classes because those are already only called
-    // from the clinit itself.
-
-    if (methodDescriptor.getEnclosingTypeDescriptor().isEnum()
-        && methodDescriptor.getOrigin() == MethodOrigin.SYNTHETIC_FACTORY_FOR_CONSTRUCTOR) {
-      // These are the classes corresponding to enums excluding the anonymous enum subclasses.
+    if (memberDescriptor.isCompileTimeConstant()) {
+      // Compile time constants do not trigger clinit.
       return false;
     }
 
-    return methodDescriptor.isStatic() || methodDescriptor.isJsConstructor();
+    if (memberDescriptor.getVisibility().isPrivate()
+        && !memberDescriptor.isJsMember()
+        && !isCalledFromOtherClasses(memberDescriptor)) {
+      // This is an effectively private member, which means that when this member is access clinit
+      // is already guaranteed to have been called.
+      return false;
+    }
+
+    return memberDescriptor.isStatic() || memberDescriptor.isJsConstructor();
   }
 
-  private static boolean hasClinitMethod(TypeDescriptor typeDescriptor) {
+  private boolean isCalledFromOtherClasses(MemberDescriptor memberDescriptor) {
+    return privateStaticMembersCalledFromOtherClasses.contains(
+        getUniqueIdentifier(memberDescriptor));
+  }
+
+  /** Returns {@code true} if the type implements the class initialization method. */
+  private static boolean implementsClinitMethod(TypeDescriptor typeDescriptor) {
     return typeDescriptor != null
         && !typeDescriptor.isNative()
         && !typeDescriptor.isJsFunctionInterface();

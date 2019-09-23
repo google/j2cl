@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.integration.jsoverlay;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertEquals;
 import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
 
 import jsinterop.annotations.JsOverlay;
@@ -63,6 +64,18 @@ public class Main {
     }
   }
 
+  // TODO(b/35802406): This is an example where staticMethod in the Overlay type will have a
+  // declaration descriptor with the native type as the enclosing class.
+  @JsType(isNative = true, namespace = "test.foo", name = "NativeJsTypeWithOverlay")
+  static final class NativesTypeWithOnlyPrivateOverlay<T> {
+    @JsOverlay private static Integer field = new Integer(42);
+
+    @JsOverlay
+    private static int staticMethod() {
+      return field;
+    }
+  }
+
   public static void testNativeJsWithOverlay() {
     NativeJsTypeWithOverlay object = new NativeJsTypeWithOverlay();
     assertTrue(6 == object.callM());
@@ -77,6 +90,7 @@ public class Main {
     NativeFinalJsTypeWithOverlay f = new NativeFinalJsTypeWithOverlay();
     assertTrue(36 == f.e());
     assertTrue(42 == f.buzz());
+    assertEquals(42, NativesTypeWithOnlyPrivateOverlay.staticMethod());
   }
 
   public static void main(String... args) {

@@ -504,7 +504,6 @@ public class NormalizeConstructors extends NormalizationPass {
     return MethodDescriptor.Builder.from(constructor)
         .setStatic(true)
         .setName(MethodDescriptor.CREATE_METHOD_NAME)
-        .setVisibility(Visibility.PUBLIC)
         .setConstructor(false)
         .setReturnTypeDescriptor(constructor.getEnclosingTypeDescriptor().toNonNullable())
         .setTypeParameterTypeDescriptors(

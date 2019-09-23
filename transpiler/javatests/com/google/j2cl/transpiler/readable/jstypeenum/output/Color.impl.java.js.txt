@@ -51,16 +51,16 @@ class Color extends Enum {
     Color.$clinit();
     if ($Equality.$same(
             Color
-                .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_,
+                .f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_,
             null)) {
       Color
-          .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_ =
+          .f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_ =
           $Enums.createMapFromValues(Color.values());
     }
     return $Enums.getValueFromNameAndMap(
         name,
         Color
-            .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_);
+            .f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_);
   }
   /**
    * @return {!Array<!Color>}
@@ -114,27 +114,6 @@ class Color extends Enum {
         Color.$f_BLUE__com_google_j2cl_transpiler_readable_jstypeenum_Color);
   }
   /**
-   * @return {Map<?string, !Color>}
-   * @public
-   */
-  static get f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_() {
-    return (
-        Color.$clinit(),
-        Color
-            .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_);
-  }
-  /**
-   * @param {Map<?string, !Color>} value
-   * @public
-   */
-  static set f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_(
-      value) {
-    (Color.$clinit(),
-     Color
-         .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_ =
-         value);
-  }
-  /**
    * @public
    */
   static $clinit() {
@@ -157,7 +136,7 @@ class Color extends Enum {
             Color
                 .$ordinal$f_BLUE__com_google_j2cl_transpiler_readable_jstypeenum_Color);
     Color
-        .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_ =
+        .f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_ =
         null;
   }
   /**
@@ -187,9 +166,8 @@ Color.$f_RED__com_google_j2cl_transpiler_readable_jstypeenum_Color;
 Color.$f_GREEN__com_google_j2cl_transpiler_readable_jstypeenum_Color;
 /** @private {!Color} */
 Color.$f_BLUE__com_google_j2cl_transpiler_readable_jstypeenum_Color;
-/** @private {Map<?string, !Color>} */
-Color
-    .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_;
+/** @public {Map<?string, !Color>} */
+Color.f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_;
 /** @public {number} @const */
 Color.$ordinal$f_RED__com_google_j2cl_transpiler_readable_jstypeenum_Color = 0;
 /** @public {number} @const */

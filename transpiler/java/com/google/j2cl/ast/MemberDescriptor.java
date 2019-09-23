@@ -59,9 +59,7 @@ public abstract class MemberDescriptor extends Node
    * Returns true if both members are references/declaration of the same particular member in the
    * same enclosing class.
    */
-  public boolean isSameMember(MemberDescriptor thatMember) {
-    return getDeclarationDescriptor() == thatMember.getDeclarationDescriptor();
-  }
+  public abstract boolean isSameMember(MemberDescriptor thatMember);
 
   @Nullable
   public abstract String getName();
@@ -100,6 +98,10 @@ public abstract class MemberDescriptor extends Node
   }
 
   public boolean isEnumConstant() {
+    return false;
+  }
+
+  public boolean isCompileTimeConstant() {
     return false;
   }
 

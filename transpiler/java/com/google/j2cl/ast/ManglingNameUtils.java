@@ -43,6 +43,14 @@ public class ManglingNameUtils {
     return ((DeclaredTypeDescriptor) rawTypeDescriptor).getQualifiedSourceName().replace('.', '_');
   }
 
+  /** Returns the mangled name of a member. */
+  public static String getMangledName(MemberDescriptor memberDescriptor) {
+    if (memberDescriptor instanceof MethodDescriptor) {
+      return getMangledName((MethodDescriptor) memberDescriptor);
+    }
+    return getMangledName((FieldDescriptor) memberDescriptor);
+  }
+
   /** Returns the mangled name of a method. */
   public static String getMangledName(MethodDescriptor methodDescriptor) {
     if (methodDescriptor.isConstructor()) {

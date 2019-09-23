@@ -93,7 +93,6 @@
 [boolean b = ++shorts[0] == 10;] => [let b = $Arrays.$set(shorts, 0, $Primitives.$narrowIntToShort(shorts[0] + 1)) == 10;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundArray"
 [b] => [b] "b"
 [getLongArray] => [m_getLongArray__]
-[getLongArray] => [ArithmeticExpressions.$clinit();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.getLongArray"
 [return null;] => [return null;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.getLongArray"
 [testCompoundBoxedTypes] => [m_testCompoundBoxedTypes__]
 [testCompoundBoxedTypes] => [let /** Integer */ $value, /** Integer */ $value_1, /** Integer */ $value_2;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
@@ -130,14 +129,11 @@
 [int n = 1 + ref.field;] => [let n = 1 + /**@type {Integer} */ ($Casts.$to(ref.f_field__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions_1Ref, Integer)).m_intValue__();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
 [n] => [n] "n"
 [getInteger] => [m_getInteger__]
-[getInteger] => [ArithmeticExpressions.$clinit();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.getInteger"
 [return null;] => [return null;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.getInteger"
 [testSideEffect] => [m_testSideEffect__]
-[testSideEffect] => [ArithmeticExpressions.$clinit();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testSideEffect"
 [getWithSideEffect().intField += 5;] => [let $qualifier = ArithmeticExpressions.m_getWithSideEffect__();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testSideEffect"
 [getWithSideEffect().intField += 5;] => [$qualifier.f_intField__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions = $LongUtils.$plus($qualifier.f_intField__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions, $Primitives.$widenIntToLong(5));] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testSideEffect"
 [getWithSideEffect] => [m_getWithSideEffect__]
-[getWithSideEffect] => [ArithmeticExpressions.$clinit();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.getWithSideEffect"
 [return null;] => [return null;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.getWithSideEffect"
 [testExtendedOperands] => [m_testExtendedOperands__]
 [Integer boxedInteger = 3;] => [let boxedInteger = Integer.m_valueOf__int(3);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testExtendedOperands"
