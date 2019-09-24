@@ -835,10 +835,13 @@ public class AstUtils {
         .build();
   }
 
-  public static void updateMethodsBySignature(
+  public static void addInheritedMethodsBySignature(
       Map<String, MethodDescriptor> methodsBySignature,
       Iterable<MethodDescriptor> methodDescriptors) {
     for (MethodDescriptor declaredMethod : methodDescriptors) {
+      if (!declaredMethod.isPolymorphic()) {
+        continue;
+      }
       MethodDescriptor existingMethod = methodsBySignature.get(declaredMethod.getMethodSignature());
       // TODO(rluble): implement correct default replacement when existing method != null.
       // Only replace the method if we found a default definition that implements the method at

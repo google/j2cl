@@ -576,13 +576,13 @@ public abstract class TypeDeclaration extends Node
 
     // Add all the methods from the super class.
     if (getSuperTypeDescriptor() != null) {
-      AstUtils.updateMethodsBySignature(
+      AstUtils.addInheritedMethodsBySignature(
           methodDescriptorsBySignature, getSuperTypeDescriptor().getMethodDescriptors());
     }
 
     // Finally add the methods that appear in super interfaces.
     for (DeclaredTypeDescriptor implementedInterface : getInterfaceTypeDescriptors()) {
-      AstUtils.updateMethodsBySignature(
+      AstUtils.addInheritedMethodsBySignature(
           methodDescriptorsBySignature, implementedInterface.getMethodDescriptors());
     }
     return methodDescriptorsBySignature;
