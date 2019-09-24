@@ -20,6 +20,21 @@ public class ArithmeticExpressions {
   private static final double DOUBLE_CONSTANT = FLOAT_CONSTANT;
   private static final double DOUBLE_CONSTANT_WITH_ARITHMETIC = FLOAT_CONSTANT + FLOAT_CONSTANT;
 
+  public void testCoercions() {
+    byte b = (byte) 1L;
+    char c = (char) 1L;
+    short s = (short) 1L;
+    int i = (int) 1L;
+    float f = (float) 1L;
+    double d = (double) 1L;
+    b = (byte) 9223372036854775807L; // -1
+    c = (char) 9223372036854775807L; // 65535
+    s = (short) 9223372036854775807L; // -1
+    i = (int) 9223372036854775807L; // -1
+    f = (float) 9223372036854775807L; //  9.223372036854776E18
+    d = (double) 9223372036854775807L; //  9.223372036854776E18
+  }
+
   public void testPrimitives() {
     int a = 10;
     int b = a++;

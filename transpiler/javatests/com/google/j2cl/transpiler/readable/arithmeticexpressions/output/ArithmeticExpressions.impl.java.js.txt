@@ -49,6 +49,25 @@ class ArithmeticExpressions extends j_l_Object {
   /**
    * @public
    */
+  m_testCoercions__() {
+    let b = 1;
+    let c = 1 /* '\u0001' */;
+    let s = 1;
+    let i = 1;
+    let f = $Primitives.$widenLongToFloat($Long.fromInt(1));
+    let d = $Primitives.$widenLongToDouble($Long.fromInt(1));
+    b = -1;
+    c = 65535 /* '\uFFFF' */;
+    s = -1;
+    i = -1;
+    f = $Primitives.$widenLongToFloat(
+        $Long.fromBits(-1, 2147483647) /* 9223372036854775807 */);
+    d = $Primitives.$widenLongToDouble(
+        $Long.fromBits(-1, 2147483647) /* 9223372036854775807 */);
+  }
+  /**
+   * @public
+   */
   m_testPrimitives__() {
     let a = 10;
     let b = a++;
