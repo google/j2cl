@@ -19,7 +19,7 @@ respectively.
 ```java
 @JsType(isNative=true, namespace=JsPackage.GLOBAL)
 class RegExp {
-  public RegExp(String pattern, String... flags);
+  public RegExp(String pattern, String... flags) {}
   public native boolean test();
   public String flags;
 }
@@ -40,7 +40,7 @@ class ClosureLinkify {
   @JsMethod(namespace="goog.string.linkify")
   public static native String findFirstEmail(String text);
   @JsMethod(namespace="goog.string.linkify")
-  public static native String findFirstUrl(String text) {}
+  public static native String findFirstUrl(String text);
 }
 ```
 
@@ -52,7 +52,7 @@ ClosureLinkify.findFirstEmail("this is an email: aaa@gmail.com");
 ```
 
 ```javascript
-// Main.java.js (translated).
+// Main.impl.java.js (transpiled from Main.java).
 const Linkify = goog.require("goog.string.linkify");
 Linkify.findFirstEmail("this is an email: aaa@gmail.com");
 ```
@@ -67,6 +67,7 @@ class Main {
     void run();
   }
 
+  // Global JavaScript method setTimeout().
   @JsMethod(namespace=JsPackage.GLOBAL)
   private static native int setTimeout(Callback callback, int delayMs);
 
@@ -90,6 +91,7 @@ const ClosureEnum = {
 ```
 
 ```java
+// Handwritten Java code to expose ClosureEnum to Java code.
 @JsEnum(isNative=true)
 enum ClosureEnum {
   OK,
@@ -123,6 +125,7 @@ class MyClass {
 ```
 
 ```javascript
+// User written JavaScript code using J2CL transpiled MyClass.java.
 goog.module("example.module");
 const MyClass = goog.require("com.google.example.MyClass");
 
@@ -144,7 +147,7 @@ class Interop {
 ```
 
 ```javascript
-// Generated Interop.java.js
+// Interop.impl.java.js (transpiled from Interop.java)
 goog.module("com.google.example.Interop");
 
 class Interop {
@@ -169,7 +172,8 @@ public class Interop {
   @JsProperty
   public int instanceProp = 30;
 
-  @JsMethod
+  // Getter for a JavaScript property named "instance"
+  @JsProperty
   public static Interop getInstance() {
     return new Interop();
   }
@@ -177,13 +181,13 @@ public class Interop {
 ```
 
 ```javascript
-// usage.js
+// User written JavaScript code using J2CL transpiled Interop.java.
 goog.module("com.google.example.Usage");
 
 const Interop = goog.require("com.google.example.Interop")
 
 console.log(Interop.staticProp); // 10
-console.log(Interop.getInstance().instanceProp); // 30
+console.log(Interop.instance.instanceProp); // 30
 ```
 
 ### `@JsOptional` - Closure optional parameters
@@ -200,7 +204,7 @@ public class Main {
 ```
 
 ```javascript
-// Main.java.js (transpiled)
+// Main.impl.java.js (transpiled from Main.java)
 class Main {
   /**
    * @param {number=} i // Note the "=" here.
@@ -223,20 +227,20 @@ public class Exported {
   public Exported() {
     this.prop = 100;
   }
-  public int getProp() {
+  public int value() {
     return this.prop;
   }
 }
 ```
 
 ```javascript
-// usage.js
+// User written JavaScript code using J2CL transpiled Exported.java.
 goog.module("com.google.example.usage");
 const Exported = goog.require("com.google.example.Exported");
 
 let e = new Exported();
 console.log(e.prop); // 100
-console.log(e.getProp()); // 100
+console.log(e.value()); // 100
 ```
 
 ### `@JsEnum` - Expose a Java enum to JavaScript
@@ -254,7 +258,7 @@ enum ExposedEnum {
 ```
 
 ```javascript
-// ExposedEnum.impl.java.js (transpiled)
+// ExposedEnum.impl.java.js (transpiled from ExposedEnum.java)
 /** @enum {number} */
 const ExposedEnum = {
   VALUE1 : 0,
@@ -275,8 +279,10 @@ public class Main {
   public void method(@JsOptional Object o) {
     Console.log("Called method() with " + o);
   }
+  // Alias method(@JsOptional Object o). Calling method() (from Java code) is
+  // equivalent to calling method(null).
   @JsMethod
-  public native void method() {}
+  public native void method();
 
   private void main() {
     method("Hello"); // logs to console "Called method() with Hello"
@@ -323,7 +329,7 @@ enum ExposedEnum {
 ```
 
 ```javascript
-// ExposedEnum.impl.java.js (transpiled)
+// ExposedEnum.impl.java.js (transpiled from ExposedEnum.java)
 /** @enum {?string} */
 const ExposedEnum = {
   VALUE1 : 'Value1',
