@@ -121,6 +121,55 @@ public class CommandLineInvocationTest extends TestCase {
             "Cannot find matching native file 'nativeclasstest/NativeClass.native.js'.");
   }
 
+  public void testNativeJsFileForJsEnum() {
+    newTesterWithDefaults()
+        .setJavaPackage("nativeclasstest")
+        .addCompilationUnit(
+            "ClosureEnum",
+            "import jsinterop.annotations.*;",
+            "@JsEnum",
+            "public enum ClosureEnum{",
+            "  OK,",
+            "  CANCEL",
+            "}")
+        .addNativeFile("ClosureEnum", "const ClosureEnum ={ OK : 'OK', CANCEL : 'Cancel' }")
+        .assertTranspileFails()
+        .assertErrorsWithoutSourcePosition(
+            "JsEnum 'ClosureEnum' does not support having a '.native.js' file.");
+  }
+
+  public void testNativeJsFileForNativeJsEnum() {
+    newTesterWithDefaults()
+        .setJavaPackage("nativeclasstest")
+        .addCompilationUnit(
+            "ClosureEnum",
+            "import jsinterop.annotations.*;",
+            "@JsEnum(isNative=true)",
+            "public enum ClosureEnum{",
+            "  OK,",
+            "  CANCEL",
+            "}")
+        .addNativeFile("ClosureEnum", "const ClosureEnum ={ OK : 'OK', CANCEL : 'Cancel' }")
+        .assertTranspileFails()
+        .assertErrorsWithoutSourcePosition(
+            "JsEnum 'ClosureEnum' does not support having a '.native.js' file.");
+  }
+
+  public void testNativeJsFileForNativeJsType() {
+    newTesterWithDefaults()
+        .setJavaPackage("nativeclasstest")
+        .addCompilationUnit(
+            "NativeClass",
+            "import jsinterop.annotations.*;",
+            "@JsType(isNative=true)",
+            "public class NativeClass{",
+            "}")
+        .addNativeFile("NativeClass", "Class NativeClass{}")
+        .assertTranspileFails()
+        .assertErrorsWithoutSourcePosition(
+            "Native JsType 'NativeClass' does not support having a '.native.js' file.");
+  }
+
   public void testUnusedSource() {
     newTesterWithDefaults()
         .setJavaPackage("nativeclasstest")

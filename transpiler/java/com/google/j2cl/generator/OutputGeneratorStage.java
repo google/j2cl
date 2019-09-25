@@ -84,22 +84,27 @@ public class OutputGeneratorStage {
             new JavaScriptImplGenerator(problems, declareLegacyNamespace, type);
 
         // If the java type contains any native methods, search for matching native file.
-        String typeRelativePath = getRelativePath(type);
-        String typeAbsolutePath =
-            FrontendUtils.getJavaPath(getAbsolutePath(j2clCompilationUnit, type));
+        String typeRelativePath = getRelativePath(type.getDeclaration());
 
-        // Locate matching native files that either have the same relative package as their Java
-        // class (useful when Java and native.js files started in different directories on disk).
-        // TODO(goktug): reconsider matching with relative name.
-        NativeJavaScriptFile matchingNativeFile = nativeFilesByPath.get(typeRelativePath);
-        // or that are in the same absolute path folder on disk as their Java class.
-        if (matchingNativeFile == null) {
-          matchingNativeFile = nativeFilesByPath.get(typeAbsolutePath);
-        }
+        NativeJavaScriptFile matchingNativeFile =
+            getMatchingNativeFile(nativeFilesByPath, j2clCompilationUnit, type);
 
         if (matchingNativeFile != null) {
           jsImplGenerator.setNativeSource(matchingNativeFile);
           matchingNativeFile.setUsed();
+
+          // Native JsTypes are mere references to external JavaScript types, adding native code
+          // through native.js files does not make sense. Non-native JsEnums on the other hand are
+          // emitted by J2CL but are not JavaScript classes, "native.js" files are not allowed in
+          // this case to avoid surprises.
+          TypeDeclaration typeDeclaration = getUnderlyingTypeDeclaration(type);
+          if (typeDeclaration.isNative() || typeDeclaration.isJsEnum()) {
+            problems.error(
+                (typeDeclaration.isJsEnum() ? "JsEnum" : "Native JsType")
+                    + " '%s' does not support having a '.native.js' file.",
+                typeDeclaration.getReadableDescription());
+            return;
+          }
         }
 
         // If not matching native file is found, and the java type contains non-JsMethod native
@@ -133,7 +138,7 @@ public class OutputGeneratorStage {
                     "%n//# sourceMappingURL=%s",
                     type.getDeclaration().getSimpleBinaryName() + SOURCE_MAP_SUFFIX);
             Path absolutePathForSourceMap =
-                outputPath.resolve(getRelativePath(type) + SOURCE_MAP_SUFFIX);
+                outputPath.resolve(typeRelativePath + SOURCE_MAP_SUFFIX);
             J2clUtils.writeToFile(absolutePathForSourceMap, sourceMap, problems);
           }
         }
@@ -251,7 +256,7 @@ public class OutputGeneratorStage {
             problems);
     if (!readableOutput.isEmpty()) {
       Path absolutePathForReadableSourceMap =
-          outputPath.resolve(getRelativePath(type) + READABLE_MAPPINGS_SUFFIX);
+          outputPath.resolve(getRelativePath(type.getDeclaration()) + READABLE_MAPPINGS_SUFFIX);
       J2clUtils.writeToFile(absolutePathForReadableSourceMap, readableOutput, problems);
     }
   }
@@ -275,17 +280,43 @@ public class OutputGeneratorStage {
   }
 
   /** Returns the relative output path for a given type. */
-  private static String getRelativePath(Type type) {
-    TypeDeclaration typeDeclaration = type.getDeclaration();
+  private static String getRelativePath(TypeDeclaration typeDeclaration) {
     String typeName = typeDeclaration.getSimpleBinaryName();
     String packageName = typeDeclaration.getPackageName();
     return packageName.replace('.', '/') + '/' + typeName;
   }
 
   /** Returns the absolute binary path for a given type. */
-  private static String getAbsolutePath(CompilationUnit compilationUnit, Type type) {
-    TypeDeclaration typeDeclaration = type.getDeclaration();
+  private static String getAbsolutePath(
+      CompilationUnit compilationUnit, TypeDeclaration typeDeclaration) {
     String typeName = typeDeclaration.getSimpleBinaryName();
     return compilationUnit.getDirectoryPath() + '/' + typeName;
+  }
+
+  private static NativeJavaScriptFile getMatchingNativeFile(
+      Map<String, NativeJavaScriptFile> nativeFilesByPath,
+      CompilationUnit j2clCompilationUnit,
+      Type type) {
+    NativeJavaScriptFile matchingNativeFile;
+    // Locate matching native files that either have the same relative package as their Java
+    // class (useful when Java and native.js files started in different directories on disk).
+    // TODO(goktug): reconsider matching with relative name.
+    TypeDeclaration typeDeclaration = getUnderlyingTypeDeclaration(type);
+    String typeRelativePath = getRelativePath(typeDeclaration);
+
+    matchingNativeFile = nativeFilesByPath.get(typeRelativePath);
+    if (matchingNativeFile != null) {
+      return matchingNativeFile;
+    }
+    String typeAbsolutePath =
+        FrontendUtils.getJavaPath(getAbsolutePath(j2clCompilationUnit, typeDeclaration));
+    return nativeFilesByPath.get(typeAbsolutePath);
+  }
+
+  private static TypeDeclaration getUnderlyingTypeDeclaration(Type type) {
+    if (type.isJsOverlayImplementation()) {
+      return type.getOverlaidTypeDescriptor().getTypeDeclaration();
+    }
+    return type.getDeclaration();
   }
 }
