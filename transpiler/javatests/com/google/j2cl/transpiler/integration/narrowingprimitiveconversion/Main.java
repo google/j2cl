@@ -19,6 +19,11 @@ import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
 
 public class Main {
   public static void main(String[] args) {
+    testCoercions();
+    testStaticCoercions();
+  }
+
+  private static void testCoercions() {
     byte b = 1;
     byte mb = 127; // Byte.MAX_VALUE
     char c = 'a';
@@ -135,5 +140,27 @@ public class Main {
     assertTrue((char) fmin == (char) Integer.MIN_VALUE);
     assertTrue((char) fmax == (char) Integer.MAX_VALUE);
     assertTrue((char) fnan == (char) 0);
+  }
+
+  private static void testStaticCoercions() {
+    long max = 9223372036854775807L;
+
+    byte b = (byte) 9223372036854775807L; // -1
+    assertTrue(b == (byte) max);
+
+    char c = (char) 9223372036854775807L; // 65535
+    assertTrue(c == (char) max);
+
+    short s = (short) 9223372036854775807L; // -1
+    assertTrue(s == (short) max);
+
+    int i = (int) 9223372036854775807L; // -1
+    assertTrue(i == (int) max);
+
+    float f = (float) 9223372036854775807L; //  9.223372036854776E18
+    assertTrue(f == (float) max);
+
+    double d = (double) 9223372036854775807L; //  9.223372036854776E18
+    assertTrue(d == (double) max);
   }
 }

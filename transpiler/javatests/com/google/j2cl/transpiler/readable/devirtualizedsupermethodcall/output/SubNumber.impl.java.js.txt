@@ -4,7 +4,6 @@ const Number = goog.require('java.lang.Number$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
-let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
 
 class SubNumber extends Number {
   /**
@@ -44,7 +43,7 @@ class SubNumber extends Number {
    * @public
    */
   m_longValue__() {
-    return $Primitives.$widenIntToLong(0);
+    return $Long.fromInt(0);
   }
   /**
    * @override
@@ -82,7 +81,7 @@ class SubNumber extends Number {
    * @public
    */
   static $loadModules() {
-    $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
+    $Long = goog.module.get('nativebootstrap.Long$impl');
   }
 }
 $Util.$setClassMetadata(

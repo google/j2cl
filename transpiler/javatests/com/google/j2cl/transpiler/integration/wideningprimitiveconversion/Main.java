@@ -18,6 +18,17 @@ package com.google.j2cl.transpiler.integration.wideningprimitiveconversion;
 import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
 
 public class Main {
+  private static void testAssignment() {
+    testArraysAssignment();
+    testCompoundAssignment();
+    testSimpleAssignment();
+    testReturnAssignment();
+    testFieldInitializerAssignment();
+    testVariableInitializerAssignment();
+    testTernaryAssignment();
+    testStaticCoercions();
+  }
+
   private static class ClassTakesDouble {
     public ClassTakesDouble(double widenValue, double expectValue) {
       assertTrue(widenValue == expectValue);
@@ -97,16 +108,6 @@ public class Main {
     assertTrue(ints[1] == 1);
     double[] doubles = new double[] {100L, 200L, 300L};
     assertTrue(doubles[0] == 100d);
-  }
-
-  private static void testAssignment() {
-    testArraysAssignment();
-    testCompoundAssignment();
-    testSimpleAssignment();
-    testReturnAssignment();
-    testFieldInitializerAssignment();
-    testVariableInitializerAssignment();
-    testTernaryAssignment();
   }
 
   private static void testBinaryNumericPromotion() {
@@ -382,5 +383,15 @@ public class Main {
     assertTrue(varLongFromInt == 456);
     assertTrue(varFloatFromLong == 456);
     assertTrue(varDoubleFromLong == 456);
+  }
+
+  private static void testStaticCoercions() {
+    long max = 9223372036854775807L;
+
+    float f = (float) 9223372036854775807L; //  9.223372036854776E18
+    assertTrue(f == (float) max);
+
+    double d = (double) 9223372036854775807L; //  9.223372036854776E18
+    assertTrue(d == (double) max);
   }
 }

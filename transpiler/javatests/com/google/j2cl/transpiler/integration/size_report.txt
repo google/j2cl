@@ -1,33 +1,33 @@
 Integration tests size report:
 **************************************
-There are 6 optimized size changes.
+There are 5 optimized size changes.
 Total optimized size (of already existing tests) changed from
-  1101287 to 1101832 bytes (100%->100.0%) and from
-  404670 to 404881 bytes (100%->100.1%) gzipped.
+  1101832 to 1102009 bytes (100%->100.0%) and from
+  404881 to 404909 bytes (100%->100.0%) gzipped.
 
 
 Shrinkage report highlights:
 **************************************
         old      new
-       2908     2885 methodreferences (-0.8%)
-       2117     2111 classliteralstripped (-0.3%)
-       6456     6440 jsenum (-0.2%)
-       2656     2654 staticinitsuper (-0.1%)
+       3732     3715 arrayreadwrite (-0.5%)
+       4053     4047 casttoprimitives (-0.1%)
 
 
 Expansion report highlights:
 **************************************
         old      new
-       1037     1296 jsoverlay (25.0%)
+       2535     2570 narrowingprimitiveconversion (1.4%)
+       2795     2810 wideningprimitiveconversion (0.5%)
+       2883     2884 longimplicitcasts (0.0%)
 
 
 Uncompiled bundle reports:
 **************************************
         old      new
-    4483361  4464403 box2d_default (-0.4%)
-    2313938  2303491 box2d_default.minified (-0.5%)
-    2819622  2807360 emptyclass (-0.4%)
-    1524871  1517469 emptyclass.minified (-0.5%)
+    4464403  4461509 box2d_default (-0.1%)
+    2303491  2301609 box2d_default.minified (-0.1%)
+    2807360  2804466 emptyclass (-0.1%)
+    1517469  1515587 emptyclass.minified (-0.1%)
 
 
 All reports:
@@ -47,7 +47,7 @@ All reports:
        2051     2051 arrayliteral (unchanged)
        1769     1769 arrayobjectcalls (unchanged)
        3544     3544 arrayofboxedtype (unchanged)
-       3732     3732 arrayreadwrite (unchanged)
+       3732     3715 arrayreadwrite (-0.5%)
        2515     2515 assertsimple (unchanged)
        1104     1104 backwardbridgemethod (unchanged)
        2639     2639 binaryexpressions (unchanged)
@@ -64,11 +64,11 @@ All reports:
        1859     1859 casts (unchanged)
          22       22 castsdisabled (unchanged)
        1210     1210 castsenabled (unchanged)
-       4053     4053 casttoprimitives (unchanged)
+       4053     4047 casttoprimitives (-0.1%)
        1063     1063 circularcompiletimeconstant (unchanged)
        3236     3236 classliteral (unchanged)
        1052     1052 classliteralobfuscated (unchanged)
-       2117     2111 classliteralstripped (-0.3%)
+       2111     2111 classliteralstripped (unchanged)
        1187     1187 compiletimeconstant (unchanged)
        1132     1132 complexcascadingconstructor (unchanged)
        1095     1095 continuestatement (unchanged)
@@ -128,14 +128,14 @@ All reports:
        1544     1544 jsconstructor (unchanged)
        1119     1119 jsconstructorfieldinitorder (unchanged)
        1158     1158 jsconstructornested (unchanged)
-       6456     6440 jsenum (-0.2%)
+       6440     6440 jsenum (unchanged)
        1321     1321 jsfunction (unchanged)
        1474     1474 jsfunctionbridge (unchanged)
        1895     1895 jsfunctiontypeannotation (unchanged)
        1111     1111 jsinnerclass (unchanged)
-      14092    14091 jsinteroptests (-0.0%)
+      14091    14091 jsinteroptests (unchanged)
        1122     1122 jsmethodoverride (unchanged)
-       1037     1296 jsoverlay (25.0%)
+       1296     1296 jsoverlay (unchanged)
        1051     1051 jsoverlaystaticrefs (unchanged)
          22       22 jsoverlaywithjsfunction (unchanged)
        1410     1410 jsproperties (unchanged)
@@ -149,16 +149,16 @@ All reports:
        1130     1130 localgenericclassinitjustonce (unchanged)
        4705     4705 logging (unchanged)
        3833     3833 loggingstripped (unchanged)
-       2883     2883 longimplicitcasts (unchanged)
+       2883     2884 longimplicitcasts (0.0%)
        2682     2682 longoperationsinglesideeffect (unchanged)
-       2908     2885 methodreferences (-0.8%)
+       2885     2885 methodreferences (unchanged)
        3041     3041 morebridgemethods (unchanged)
        1175     1175 multipleabstractparents (unchanged)
        1346     1346 multipleanonymousclass (unchanged)
        1261     1261 multiplecatch (unchanged)
        1131     1131 multipleconstructors (unchanged)
          22       22 multipleroottypes (unchanged)
-       2535     2535 narrowingprimitiveconversion (unchanged)
+       2535     2570 narrowingprimitiveconversion (1.4%)
        1073     1073 nativeinjection (unchanged)
        1055     1055 nativeinjectionapt (unchanged)
        1034     1034 nativeinjectionwithoutmethods (unchanged)
@@ -202,7 +202,7 @@ All reports:
        1030     1030 staticfields (unchanged)
        1346     1346 staticinitfailfast (unchanged)
        1068     1068 staticinitorder (unchanged)
-       2656     2654 staticinitsuper (-0.1%)
+       2654     2654 staticinitsuper (unchanged)
        1017     1017 staticjsmethods (unchanged)
        1136     1136 staticnestedclass (unchanged)
        1725     1725 strictequality (unchanged)
@@ -227,4 +227,4 @@ All reports:
        1146     1146 variables (unchanged)
        1041     1041 whilestatement (unchanged)
        1212     1212 wideningandboxing (unchanged)
-       2795     2795 wideningprimitiveconversion (unchanged)
+       2795     2810 wideningprimitiveconversion (0.5%)

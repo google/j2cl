@@ -19,6 +19,7 @@ import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
+import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.ast.RuntimeMethods;
 import com.google.j2cl.ast.TypeDescriptor;
@@ -35,7 +36,7 @@ public class InsertWideningPrimitiveConversions extends NormalizationPass {
     compilationUnit.accept(new ConversionContextVisitor(getContextRewriter()));
   }
 
-  private ConversionContextVisitor.ContextRewriter getContextRewriter() {
+  private static ConversionContextVisitor.ContextRewriter getContextRewriter() {
     return new ConversionContextVisitor.ContextRewriter() {
 
       @Override
@@ -97,6 +98,12 @@ public class InsertWideningPrimitiveConversions extends NormalizationPass {
     // Don't emit known NOOP widenings.
     if (fromTypeDescriptor.isAssignableTo(toTypeDescriptor)) {
       return expression;
+    }
+
+    // Widen literals at compile time.
+    if (expression instanceof NumberLiteral) {
+      PrimitiveTypeDescriptor literalTypeDescriptor = (PrimitiveTypeDescriptor) toTypeDescriptor;
+      return new NumberLiteral(literalTypeDescriptor, ((NumberLiteral) expression).getValue());
     }
 
     return RuntimeMethods.createWideningPrimitivesMethodCall(

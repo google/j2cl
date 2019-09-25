@@ -54,16 +54,14 @@ class ArithmeticExpressions extends j_l_Object {
     let c = 1 /* '\u0001' */;
     let s = 1;
     let i = 1;
-    let f = $Primitives.$widenLongToFloat($Long.fromInt(1));
-    let d = $Primitives.$widenLongToDouble($Long.fromInt(1));
+    let f = 1.0;
+    let d = 1.0;
     b = -1;
     c = 65535 /* '\uFFFF' */;
     s = -1;
     i = -1;
-    f = $Primitives.$widenLongToFloat(
-        $Long.fromBits(-1, 2147483647) /* 9223372036854775807 */);
-    d = $Primitives.$widenLongToDouble(
-        $Long.fromBits(-1, 2147483647) /* 9223372036854775807 */);
+    f = 9.223372036854776E18;
+    d = 9.223372036854776E18;
   }
   /**
    * @public
@@ -123,8 +121,7 @@ class ArithmeticExpressions extends j_l_Object {
           $array, $index, $Primitives.$coerceDivision($array[$index] / 1));
     }
     let longs = null;
-    $Arrays.$set(
-        longs, 0, $LongUtils.$plus(longs[0], $Primitives.$widenIntToLong(1)));
+    $Arrays.$set(longs, 0, $LongUtils.$plus(longs[0], $Long.fromInt(1)));
     $Arrays.$set(longs, 0, $LongUtils.$minus(longs[0], $Long.fromInt(1)));
     $Arrays.$set(longs, 0, $LongUtils.$minus(longs[0], $Long.fromInt(1)));
     {
@@ -214,7 +211,7 @@ class ArithmeticExpressions extends j_l_Object {
           $LongUtils.$plus(
               $qualifier
                   .f_intField__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions,
-              $Primitives.$widenIntToLong(5));
+              $Long.fromInt(5));
     }
   }
   /**
@@ -242,9 +239,9 @@ class ArithmeticExpressions extends j_l_Object {
         $LongUtils.$times(
             $LongUtils.$times(
                 $LongUtils.$times($Long.fromInt(1000000), l),
-                $Primitives.$widenIntToLong(60)),
-            $Primitives.$widenIntToLong(60)),
-        $Primitives.$widenIntToLong(24));
+                $Long.fromInt(60)),
+            $Long.fromInt(60)),
+        $Long.fromInt(24));
     l = $LongUtils.$times(
         $LongUtils.$times($Primitives.$widenIntToLong(24 * 60 * 60), l),
         $Long.fromInt(1000000));
@@ -254,9 +251,8 @@ class ArithmeticExpressions extends j_l_Object {
     l = $LongUtils.$plus(
         $LongUtils.$plus(
             $Primitives.$widenIntToLong(i + boxedInteger.m_intValue__()), l),
-        $Primitives.$widenIntToLong(20));
-    d = $Primitives.$widenLongToDouble(
-            $LongUtils.$plus($Primitives.$widenIntToLong(20), l)) +
+        $Long.fromInt(20));
+    d = $Primitives.$widenLongToDouble($LongUtils.$plus($Long.fromInt(20), l)) +
         d;
   }
   /**
