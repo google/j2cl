@@ -19,7 +19,7 @@ respectively.
 ```java
 @JsType(isNative=true, namespace=JsPackage.GLOBAL)
 class RegExp {
-  public native RegExp(String pattern, String... flags);
+  public RegExp(String pattern, String... flags);
   public native boolean test();
   public String flags;
 }
