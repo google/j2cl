@@ -185,6 +185,21 @@ public abstract class TypeDeclaration extends Node
 
   public abstract Kind getKind();
 
+  /** Returns whether the described type is a class. */
+  public boolean isClass() {
+    return getKind() == Kind.CLASS;
+  }
+
+  /** Returns whether the described type is an interface. */
+  public boolean isInterface() {
+    return getKind() == Kind.INTERFACE;
+  }
+
+  /** Returns whether the described type is an enum. */
+  public boolean isEnum() {
+    return getKind() == Kind.ENUM;
+  }
+
   public boolean isAbstract() {
     return getHasAbstractModifier()
         || TypeDescriptors.isBoxedTypeAsJsPrimitives(toRawTypeDescriptor());
@@ -231,6 +246,31 @@ public abstract class TypeDeclaration extends Node
     return getJsEnumInfo() != null;
   }
 
+  /** Returns true if the class captures its enclosing instance */
+  public abstract boolean isCapturingEnclosingInstance();
+
+  @Memoized
+  public boolean isExtern() {
+    return isNative() && hasExternNamespace();
+  }
+
+  public boolean isStarOrUnknown() {
+    return getSimpleJsName().equals("*") || getSimpleJsName().equals("?");
+  }
+
+  private boolean hasExternNamespace() {
+    // A native type descriptor is an extern if its namespace is the global namespace or if
+    // it inherited the namespace from its (enclosing) extern type.
+    return JsUtils.isGlobal(getJsNamespace())
+        || (!hasCustomizedJsNamespace()
+            && getEnclosingTypeDeclaration() != null
+            && getEnclosingTypeDeclaration().isExtern());
+  }
+
+  public boolean hasTypeParameters() {
+    return !getTypeParameterDescriptors().isEmpty();
+  }
+
   @Memoized
   public boolean extendsNativeClass() {
     DeclaredTypeDescriptor superTypeDescriptor = getSuperTypeDescriptor();
@@ -248,6 +288,16 @@ public abstract class TypeDeclaration extends Node
   public boolean isJsConstructorSubtype() {
     DeclaredTypeDescriptor superTypeDescriptor = getSuperTypeDescriptor();
     return superTypeDescriptor != null && superTypeDescriptor.hasJsConstructor();
+  }
+
+  /** Whether cast to this type are checked or not. */
+  public boolean isNoopCast() {
+    if (isNative() && isJsEnum() && !getJsEnumInfo().hasCustomValue()) {
+      // Nothing is known about the underlying type of Native JsEnum that don't provide a custom
+      // value
+      return true;
+    }
+    return isNative() && isInterface();
   }
 
   /**
@@ -329,46 +379,6 @@ public abstract class TypeDeclaration extends Node
 
   @Nullable
   abstract String getCustomizedJsNamespace();
-
-  /** Returns true if the class captures its enclosing instance */
-  public abstract boolean isCapturingEnclosingInstance();
-
-  public boolean hasTypeParameters() {
-    return !getTypeParameterDescriptors().isEmpty();
-  }
-
-  /** Returns whether the described type is a class. */
-  public boolean isClass() {
-    return getKind() == Kind.CLASS;
-  }
-
-  /** Returns whether the described type is an interface. */
-  public boolean isInterface() {
-    return getKind() == Kind.INTERFACE;
-  }
-
-  /** Returns whether the described type is an enum. */
-  public boolean isEnum() {
-    return getKind() == Kind.ENUM;
-  }
-
-  @Memoized
-  public boolean isExtern() {
-    return isNative() && hasExternNamespace();
-  }
-
-  private boolean hasExternNamespace() {
-    // A native type descriptor is an extern if its namespace is the global namespace or if
-    // it inherited the namespace from its (enclosing) extern type.
-    return JsUtils.isGlobal(getJsNamespace())
-        || (!hasCustomizedJsNamespace()
-            && getEnclosingTypeDeclaration() != null
-            && getEnclosingTypeDeclaration().isExtern());
-  }
-
-  public boolean isStarOrUnknown() {
-    return getSimpleJsName().equals("*") || getSimpleJsName().equals("?");
-  }
 
   @Memoized
   public TypeDeclaration getMetadataTypeDeclaration() {

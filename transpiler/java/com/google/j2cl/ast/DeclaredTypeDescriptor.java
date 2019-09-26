@@ -66,22 +66,24 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     T get(DeclaredTypeDescriptor typeDescriptor);
   }
 
-  @Override
-  public boolean isUnusableByJsSuppressed() {
-    return getTypeDeclaration().isUnusableByJsSuppressed();
-  }
-
-  public boolean isDeprecated() {
-    return getTypeDeclaration().isDeprecated();
-  }
-
   @Nullable
   public abstract DeclaredTypeDescriptor getEnclosingTypeDescriptor();
 
   public abstract ImmutableList<TypeDescriptor> getTypeArgumentDescriptors();
 
-  public boolean isFinal() {
-    return getTypeDeclaration().isFinal();
+  @Override
+  public boolean isClass() {
+    return getTypeDeclaration().isClass();
+  }
+
+  @Override
+  public boolean isInterface() {
+    return getTypeDeclaration().isInterface();
+  }
+
+  @Override
+  public boolean isEnum() {
+    return getTypeDeclaration().isEnum();
   }
 
   public boolean isFunctionalInterface() {
@@ -108,9 +110,30 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     return getTypeDeclaration().isJsEnum();
   }
 
+  public boolean isFinal() {
+    return getTypeDeclaration().isFinal();
+  }
+
   @Override
   public boolean isNative() {
     return getTypeDeclaration().isNative();
+  }
+
+  @Override
+  public abstract boolean isNullable();
+
+  @Override
+  public boolean isNoopCast() {
+    return getTypeDeclaration().isNoopCast();
+  }
+
+  @Override
+  public boolean isUnusableByJsSuppressed() {
+    return getTypeDeclaration().isUnusableByJsSuppressed();
+  }
+
+  public boolean isDeprecated() {
+    return getTypeDeclaration().isDeprecated();
   }
 
   @Override
@@ -118,15 +141,15 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     return getTypeDeclaration().getJsEnumInfo();
   }
 
-  @Override
-  public abstract boolean isNullable();
-
   public boolean hasJsConstructor() {
     return getTypeDeclaration().hasJsConstructor();
   }
 
-  /* PRIVATE AUTO_VALUE PROPERTIES */
+  public boolean hasTypeArguments() {
+    return !getTypeArgumentDescriptors().isEmpty();
+  }
 
+  /* PRIVATE AUTO_VALUE PROPERTIES */
   @Nullable
   abstract DescriptorFactory<ImmutableMap<String, MethodDescriptor>>
       getDeclaredMethodDescriptorsFactory();
@@ -146,25 +169,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
 
   @Nullable
   abstract DescriptorFactory<DeclaredTypeDescriptor> getSuperTypeDescriptorFactory();
-
-  public boolean hasTypeArguments() {
-    return !getTypeArgumentDescriptors().isEmpty();
-  }
-
-  @Override
-  public boolean isClass() {
-    return getTypeDeclaration().isClass();
-  }
-
-  @Override
-  public boolean isInterface() {
-    return getTypeDeclaration().isInterface();
-  }
-
-  @Override
-  public boolean isEnum() {
-    return getTypeDeclaration().isEnum();
-  }
 
   /**
    * Returns a list of the type descriptors of interfaces that are explicitly implemented directly

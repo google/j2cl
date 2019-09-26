@@ -75,7 +75,9 @@ public class NormalizeCasts extends NormalizationPass {
             .getDeclaredTypeDescriptor()
             .toRawTypeDescriptor()
             .isAssignableTo(castTypeDescriptor);
-    return isStaticallyGuaranteedToHoldAtRuntime || isRedundantCast(castTypeDescriptor, expression);
+    return castTypeDescriptor.isNoopCast()
+        || isStaticallyGuaranteedToHoldAtRuntime
+        || isRedundantCast(castTypeDescriptor, expression);
   }
 
   /**

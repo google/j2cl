@@ -16,6 +16,7 @@
 package com.google.j2cl.generator;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.base.CharMatcher;
 import com.google.common.base.Splitter;
@@ -454,9 +455,16 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   // TODO(b/34928687): Move this to the ast in a normalization pass.
   private void renderIsInstanceMethod() {
-    if (type.isJsOverlayImplementation()
-        && type.getOverlaidTypeDescriptor().isJsFunctionInterface()) {
-      // JsFunction interface overlays do not need $isInstance.
+    DeclaredTypeDescriptor underlyingType =
+        type.isJsOverlayImplementation()
+            ? type.getOverlaidTypeDescriptor()
+            : type.getTypeDescriptor();
+    if (underlyingType.isJsFunctionInterface()) {
+      // JsFunction interfaces use the custom class JavaScriptFunction for casts, instanceof and
+      // class literal purposes. Hence no need to emit $isInstance in the overlay class.
+      return;
+    }
+    if (underlyingType.isNoopCast()) {
       return;
     }
     if (type.containsMethod(MethodDescriptor.IS_INSTANCE_METHOD_NAME)) {
@@ -480,9 +488,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       DeclaredTypeDescriptor overlaidTypeDescriptor = type.getOverlaidTypeDescriptor();
       if (overlaidTypeDescriptor.isJsEnum()) {
         renderIsInstanceOfJsEnumStatement(overlaidTypeDescriptor);
-      } else if (overlaidTypeDescriptor.isInterface()) {
-        // Since instanceof is forbidden this is only used for casting so null check is not needed.
-        sourceBuilder.append("return true;");
       } else {
         renderIsInstanceOfClassStatement(type.getOverlaidTypeDescriptor());
       }
@@ -503,7 +508,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
               + ".isInstanceOf(instance, "
               + environment.aliasForType(typeDescriptor.getMetadataTypeDeclaration())
               + ");");
-    } else if (typeDescriptor.getJsEnumInfo().hasCustomValue()) {
+    } else {
+      checkState(typeDescriptor.getJsEnumInfo().hasCustomValue());
       DeclaredTypeDescriptor instanceOfValueType =
           AstUtils.getJsEnumValueFieldInstanceCheckType(typeDescriptor.getTypeDeclaration());
       sourceBuilder.append(
@@ -511,9 +517,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
               + environment.aliasForType(instanceOfValueType.getTypeDeclaration())
               + ".$isInstance(instance);");
 
-    } else {
-      // Native JsEnum of unknown value type.
-      sourceBuilder.append("return true;");
     }
   }
 

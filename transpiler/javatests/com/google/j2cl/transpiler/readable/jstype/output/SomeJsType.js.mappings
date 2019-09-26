@@ -34,9 +34,9 @@
 [w] => [w] "w"
 [Object object = new Object();] => [let object = j_l_Object.$create__();] "com.google.j2cl.transpiler.readable.jstype.SomeJsType.testStarAndWildCard"
 [object] => [object] "object"
-[Star star = (Star) (Object) 3.0;] => [let star = /**@type {*} */ ($Casts.$to($Casts.$to(3.0, j_l_Object), $Overlay));] "com.google.j2cl.transpiler.readable.jstype.SomeJsType.testStarAndWildCard"
+[Star star = (Star) (Object) 3.0;] => [let star = /**@type {*} */ ($Casts.$to(3.0, j_l_Object));] "com.google.j2cl.transpiler.readable.jstype.SomeJsType.testStarAndWildCard"
 [star] => [star] "star"
-[return (Wildcard) star;] => [return /**@type {?} */ ($Casts.$to(star, Wildcard_$Overlay));] "com.google.j2cl.transpiler.readable.jstype.SomeJsType.testStarAndWildCard"
+[return (Wildcard) star;] => [return /**@type {?} */ (star);] "com.google.j2cl.transpiler.readable.jstype.SomeJsType.testStarAndWildCard"
 [SomeJsType] => [$clinit]
 [SomeJsType] => [SomeJsType.$clinit = () =>{};] "com.google.j2cl.transpiler.readable.jstype.SomeJsType.<clinit>"
 [SomeJsType] => [SomeJsType.$loadModules();] "com.google.j2cl.transpiler.readable.jstype.SomeJsType.<clinit>"

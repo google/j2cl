@@ -74,9 +74,8 @@ class SomeJsType extends j_l_Object {
    */
   testStarAndWildCard(s, w) {
     let object = j_l_Object.$create__();
-    let star =
-        /**@type {*} */ ($Casts.$to($Casts.$to(3.0, j_l_Object), $Overlay));
-    return /**@type {?} */ ($Casts.$to(star, Wildcard_$Overlay));
+    let star = /**@type {*} */ ($Casts.$to(3.0, j_l_Object));
+    return /**@type {?} */ (star);
   }
   /**
    * @public
@@ -98,10 +97,6 @@ class SomeJsType extends j_l_Object {
    * @public
    */
   static $loadModules() {
-    $Overlay = goog.module.get(
-        'com.google.j2cl.transpiler.readable.jstype.SomeJsType.Star.$Overlay$impl');
-    Wildcard_$Overlay = goog.module.get(
-        'com.google.j2cl.transpiler.readable.jstype.SomeJsType.Wildcard.$Overlay$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
   }
 }

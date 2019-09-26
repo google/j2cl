@@ -224,6 +224,11 @@ public abstract class TypeDescriptor extends Node
     return this == that;
   }
 
+  /** Whether casts to this type are checked at runtime. */
+  public boolean isNoopCast() {
+    return false;
+  }
+
   /** A unique string for a give type. Used for interning. */
   public abstract String getUniqueId();
 

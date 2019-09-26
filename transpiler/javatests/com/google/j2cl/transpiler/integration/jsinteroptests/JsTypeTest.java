@@ -225,11 +225,14 @@ public class JsTypeTest {
     }
   }
 
-  private static void testCasts() {
+  private static <NI extends MyNativeJsTypeInterface, NC extends HTMLElementConcreteNativeJsType>
+      void testCasts() {
     Object myClass;
     assertNotNull(myClass = (ElementLikeNativeInterface) createMyNativeJsType());
     assertNotNull(myClass = (MyNativeJsTypeInterface) createMyNativeJsType());
+    assertNotNull(myClass = (NI) createMyNativeJsType());
     assertNotNull(myClass = (HTMLElementConcreteNativeJsType) createNativeButton());
+    assertNotNull(myClass = (NC) createNativeButton());
 
     assertThrowsClassCastException(
         () -> {

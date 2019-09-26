@@ -84,6 +84,11 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
   /** Return true if it is an unnamed type variable, i.e. a wildcard or capture. */
   public abstract boolean isWildcardOrCapture();
 
+  @Override
+  public boolean isNoopCast() {
+    return toRawTypeDescriptor().isNoopCast();
+  }
+
   @Nullable
   @Override
   public TypeDeclaration getMetadataTypeDeclaration() {

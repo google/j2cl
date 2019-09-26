@@ -25,7 +25,7 @@
 [main] => [m_main__arrayOf_java_lang_String]
 [args] => [args] "args"
 [main] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.externs.Main.main"
-[testFooOverlay((FooOverlay) (Object) new FooImpl());] => [Main.m_testFooOverlay__com_google_j2cl_transpiler_readable_externs_Main_FooOverlay(/**@type {Foo} */ ($Casts.$to(FooImpl.$create__(), $Overlay)));] "com.google.j2cl.transpiler.readable.externs.Main.main"
+[testFooOverlay((FooOverlay) (Object) new FooImpl());] => [Main.m_testFooOverlay__com_google_j2cl_transpiler_readable_externs_Main_FooOverlay(/**@type {Foo} */ (FooImpl.$create__()));] "com.google.j2cl.transpiler.readable.externs.Main.main"
 [useDirectlyAsFoo(new FooImpl());] => [Main.m_useDirectlyAsFoo__java_lang_Object(FooImpl.$create__());] "com.google.j2cl.transpiler.readable.externs.Main.main"
 [Main] => [$clinit]
 [Main] => [Main.$clinit = () =>{};] "com.google.j2cl.transpiler.readable.externs.Main.<clinit>"
