@@ -42,7 +42,7 @@ public class NormalizeCasts extends NormalizationPass {
 
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
-    removeRedundatCasts(compilationUnit);
+    removeRedundantCasts(compilationUnit);
     implementCasts(compilationUnit);
   }
 
@@ -51,7 +51,7 @@ public class NormalizeCasts extends NormalizationPass {
    *
    * <p>Redundant casts are replaced by JsDocCasts to preserve the type of the resulting expression.
    */
-  private void removeRedundatCasts(CompilationUnit compilationUnit) {
+  private void removeRedundantCasts(CompilationUnit compilationUnit) {
     compilationUnit.accept(
         new AbstractRewriter() {
           @Override
