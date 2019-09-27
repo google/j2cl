@@ -21,7 +21,7 @@ import org.junit.runners.JUnit4;
 
 /** Simple throwing test case */
 @RunWith(JUnit4.class)
-public class SimpleThrowingStacktraceTest {
+public class SimpleThrowingStacktraceTest extends StacktraceTestBase {
   @Test
   public void test() {
     method1();

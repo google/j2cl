@@ -21,7 +21,7 @@ import org.junit.runners.JUnit4;
 
 /** Tests stacktraces for throwing in a constructor */
 @RunWith(JUnit4.class)
-public class ThrowsInConstructorTest {
+public class ThrowsInConstructorTest extends StacktraceTestBase {
   public static class InnerClass {
 
     public InnerClass() {

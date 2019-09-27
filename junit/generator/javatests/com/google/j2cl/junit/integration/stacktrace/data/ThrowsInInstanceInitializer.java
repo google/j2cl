@@ -21,7 +21,7 @@ import org.junit.runners.JUnit4;
 
 /** Integration test for throwing in a class initializer. */
 @RunWith(JUnit4.class)
-public class ThrowsInInstanceInitializer {
+public class ThrowsInInstanceInitializer extends StacktraceTestBase {
 
   public static class InnerClass {
     {

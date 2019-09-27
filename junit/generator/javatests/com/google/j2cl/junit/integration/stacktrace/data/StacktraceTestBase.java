@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 Google Inc.
+ * Copyright 2019 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -15,25 +15,18 @@
  */
 package com.google.j2cl.junit.integration.stacktrace.data;
 
-import java.util.ArrayList;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.Before;
 
-/** Integration test for throwing in a bridge method */
-@RunWith(JUnit4.class)
-public class ThrowsInBridgeMethod extends StacktraceTestBase {
-
-  public static class MyList extends ArrayList<String> {
-    @Override
-    public boolean add(String e) {
-      throw new RuntimeException("__the_message__!");
+/** Base class for all tests that do stack deobfuscation. */
+public class StacktraceTestBase {
+  @Before
+  public void setup() {
+    // By adding a second creation site for an exception, the instantiation call
+    // (RuntimeException.create) is not inlined, hence avoiding the extra stack frame in compiled
+    // mode see (b/64729436).
+    try {
+      throw new RuntimeException();
+    } catch (RuntimeException expected) {
     }
-  }
-
-  @Test
-  public void test() {
-    ArrayList<String> list = new MyList();
-    list.add("asdf"); // calls through the bridge
   }
 }

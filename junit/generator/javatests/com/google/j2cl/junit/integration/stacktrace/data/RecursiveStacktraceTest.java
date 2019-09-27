@@ -21,7 +21,7 @@ import org.junit.runners.JUnit4;
 
 /** Simple recursive test case */
 @RunWith(JUnit4.class)
-public class RecursiveStacktraceTest {
+public class RecursiveStacktraceTest extends StacktraceTestBase {
   @Test
   public void test() {
     recurse(4);

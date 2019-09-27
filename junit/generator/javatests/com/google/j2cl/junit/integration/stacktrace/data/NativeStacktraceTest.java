@@ -22,7 +22,7 @@ import org.junit.runners.JUnit4;
 
 /** Stack trace integration test that calls into native code. */
 @RunWith(JUnit4.class)
-public class NativeStacktraceTest {
+public class NativeStacktraceTest extends StacktraceTestBase {
 
   @JsType(isNative = true, namespace = "nativeStacktraceTest")
   private static class ThrowingJsClass {

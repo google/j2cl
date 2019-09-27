@@ -22,7 +22,7 @@ import org.junit.runners.JUnit4;
 
 /** Integration test for throwing in a JsConstructor */
 @RunWith(JUnit4.class)
-public class ThrowsInJsConstructorTest {
+public class ThrowsInJsConstructorTest extends StacktraceTestBase {
   public static class InnerClass {
     @JsConstructor
     public InnerClass() {

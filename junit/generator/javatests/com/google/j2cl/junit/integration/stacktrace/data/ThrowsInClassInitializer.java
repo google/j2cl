@@ -22,7 +22,7 @@ import org.junit.runners.JUnit4;
 
 /** Tests stacktraces for throwing class initializer */
 @RunWith(JUnit4.class)
-public class ThrowsInClassInitializer {
+public class ThrowsInClassInitializer extends StacktraceTestBase {
 
   public static class Inner {
     private static final Inner throwsInConstructor = Inner.willThrow();
