@@ -17,8 +17,6 @@ package com.google.j2cl.junit.integration;
 
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableList;
-import java.util.LinkedList;
-import java.util.List;
 
 /** Represents a stacktrace. */
 @AutoValue
@@ -59,29 +57,27 @@ public abstract class Stacktrace {
   }
 
   public static Stacktrace parse(String stacktrace) {
-    // We are putting parsed lines into a List first to allow the first lines to be stripped
-    // if they are comments
-    List<String> parsedLines = new LinkedList<>();
+    Builder builder = newStacktraceBuilder();
+    String message = "";
     for (String frame : stacktrace.split("\\n")) {
-      frame = frame.trim();
       // cut off comments
       int index = frame.indexOf('#');
       if (index != -1) {
-        frame = frame.substring(0, index).trim();
+        frame = frame.substring(0, index);
       }
       // if the frame is empty after removing the comment do not add it
-      if (frame.isEmpty()) {
+      if (frame.trim().isEmpty()) {
         continue;
       }
 
-      parsedLines.add(frame);
+      if (frame.startsWith(" ")) {
+        builder.addFrame(frame.trim());
+      } else {
+        message = message.isEmpty() ? frame : (message + "\n" + frame);
+      }
     }
 
-    // First line is the message
-    Builder builder = newStacktraceBuilder().message(parsedLines.remove(0));
-    parsedLines.stream().forEach(builder::addFrame);
-
-    return builder.build();
+    return builder.message(message).build();
   }
 
 }

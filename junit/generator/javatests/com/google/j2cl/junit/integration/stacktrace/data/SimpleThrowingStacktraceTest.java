@@ -37,7 +37,7 @@ public class SimpleThrowingStacktraceTest extends StacktraceTestBase {
 
   public void method3() {
     if (true) {
-      throw new RuntimeException("__the_message__!");
+      throw new RuntimeException("__the_message__!\n And second line!");
     }
   }
 }

@@ -44,28 +44,6 @@ class StacktraceAsserter {
           "javascript/closure/promise/promise.js",
           "javascript/closure/testing/jsunit.js");
 
-  public static Stacktrace parse(String stacktrace) {
-    String[] lines = stacktrace.split("\\n");
-
-    Builder builder = Stacktrace.newStacktraceBuilder().message(lines[0]);
-
-    for (int i = 1; i < lines.length; i++) {
-      String frame = lines[i].trim();
-      // cut off comments
-      int index = frame.indexOf("#");
-      if (index != -1) {
-        frame = frame.substring(0, index).trim();
-      }
-      // if the frame is empty after removing the comment do not add it
-      if (frame.isEmpty()) {
-        continue;
-      }
-      builder.addFrame(frame);
-    }
-
-    return builder.build();
-  }
-
   private final TestMode testMode;
   private final List<String> consoleLogs;
 
@@ -199,9 +177,20 @@ class StacktraceAsserter {
     // The first line is different from the rest, it is the message.
     checkArgument(!stacktrace.isEmpty());
     Builder stacktraceBuilder = Stacktrace.newStacktraceBuilder();
-    stacktraceBuilder.message(stacktrace.get(0).trim());
 
-    for (int i = 1; i < stacktrace.size(); i++) {
+    String message = stacktrace.get(0).trim();
+    int i;
+    for (i = 1; i < stacktrace.size(); i++) {
+      String line = stacktrace.get(i).trim();
+      if (!line.startsWith("at ")) {
+        message += "\n" + line;
+      } else {
+        break;
+      }
+    }
+    stacktraceBuilder.message(message);
+
+    for (; i < stacktrace.size(); i++) {
       final String line = stacktrace.get(i).trim();
       List<String> startTokenList =
           testMode == TestMode.JAVA ? JAVA_START_FRAMES_FOR_TRIMMING : JS_START_FRAMES_FOR_TRIMMING;
@@ -249,7 +238,7 @@ class StacktraceAsserter {
         stacklines.add(line.trim());
       }
 
-      if (line.equals(startLine)) {
+      if (line.contains(startLine)) {
         foundStart = true;
         stacklines.add(line.trim());
       }
