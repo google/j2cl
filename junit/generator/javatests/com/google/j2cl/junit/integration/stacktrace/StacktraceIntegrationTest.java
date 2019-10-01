@@ -102,6 +102,11 @@ public class StacktraceIntegrationTest extends IntegrationTestBase {
     runStacktraceTest("ThrowsInJsFunction");
   }
 
+  @Test
+  public void testFillInStackTrace() throws Exception {
+    runStacktraceTest("FillInStacktraceTest");
+  }
+
   private void runStacktraceTest(String testName) throws Exception {
     TestResult testResult =
         newTestResultBuilder().testClassName(testName).addTestFailure("test").build();

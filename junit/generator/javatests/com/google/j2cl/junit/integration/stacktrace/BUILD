@@ -14,6 +14,7 @@ j2cl_test_integration_test(
     ],
     test_data = [
         "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:AnonymousClassesStacktraceTest",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:FillInStacktraceTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:LambdaStacktraceTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:NativeStacktraceTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:RecursiveStacktraceTest",
