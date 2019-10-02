@@ -69,18 +69,27 @@ public abstract class IntegrationTestBase {
   }
 
   protected Stacktrace loadStackTrace(String testName) throws IOException {
-    String prefixName =
-        testName
-            + (testMode == TestMode.JAVA
-                ? "-java"
-                : testMode == TestMode.J2CL_COMPILED ? "-j2cl_compiled" : "-j2cl_uncompiled");
-    File prefixFile = getTestDataFile(prefixName + ".stacktrace.txt");
-    File standardFile = getTestDataFile(testName + ".stacktrace.txt");
-    // try loading a prefix version first if it exists, otherwise use the default file
-    String fileContent =
-        Files.asCharSource(prefixFile.exists() ? prefixFile : standardFile, StandardCharsets.UTF_8)
-            .read();
-    return Stacktrace.parse(fileContent);
+    return Stacktrace.parse(
+        Files.asCharSource(getStackTraceFile(testName), StandardCharsets.UTF_8).read());
+  }
+
+  private File getStackTraceFile(String testName) throws IOException {
+    switch (testMode) {
+      case J2CL_COMPILED:
+        File compiledFile = getTestDataFile(testName + ".stacktrace_j2cl_compiled.txt");
+        if (compiledFile.exists()) {
+          return compiledFile;
+        }
+        // fall through
+      case J2CL_UNCOMPILED:
+        File uncompiledFile = getTestDataFile(testName + ".stacktrace_j2cl.txt");
+        if (uncompiledFile.exists()) {
+          return uncompiledFile;
+        }
+        // fall through
+      default:
+        return getTestDataFile(testName + ".stacktrace.txt");
+    }
   }
 
   protected List<String> runTest(String testName) throws Exception {

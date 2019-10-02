@@ -118,5 +118,9 @@ j2cl_test_integration_test_data(
 
 filegroup(
     name = "stacktrace-files",
-    srcs = glob(["*.stacktrace.txt"]),
+    srcs = glob([
+        "*.stacktrace.txt",
+        "*.stacktrace_j2cl.txt",
+        "*.stacktrace_j2cl_compiled.txt",
+    ]),
 )
