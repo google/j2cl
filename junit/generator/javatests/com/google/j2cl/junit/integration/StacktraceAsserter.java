@@ -53,8 +53,7 @@ class StacktraceAsserter {
   }
 
   void matches(Stacktrace expectedStacktrace) {
-    List<String> stacktrace =
-        extractStackTrace(consoleLogs, "java.lang.RuntimeException: __the_message__!");
+    List<String> stacktrace = extractStackTrace(consoleLogs, "Exception: __the_message__!");
     Stacktrace actualStacktrace = parseStackTrace(stacktrace);
 
     assertThat(actualStacktrace.message()).isEqualTo(expectedStacktrace.message());

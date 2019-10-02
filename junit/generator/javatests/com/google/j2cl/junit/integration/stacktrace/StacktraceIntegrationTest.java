@@ -33,6 +33,11 @@ public class StacktraceIntegrationTest extends IntegrationTestBase {
   }
 
   @Test
+  public void testCustomException() throws Exception {
+    runStacktraceTest("CustomExceptionStacktraceTest");
+  }
+
+  @Test
   public void testRecursive() throws Exception {
     runStacktraceTest("RecursiveStacktraceTest");
   }

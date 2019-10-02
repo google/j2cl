@@ -18,6 +18,12 @@ j2cl_test_integration_test_data(
 )
 
 j2cl_test_integration_test_data(
+    name = "CustomExceptionStacktraceTest",
+    extra_defs = ["--inline_functions=false"],
+    deps = [":base"],
+)
+
+j2cl_test_integration_test_data(
     name = "LambdaStacktraceTest",
     extra_defs = ["--inline_functions=false"],
     deps = [":base"],
