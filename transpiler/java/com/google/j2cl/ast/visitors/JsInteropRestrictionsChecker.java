@@ -944,6 +944,10 @@ public class JsInteropRestrictionsChecker {
       Method method = (Method) member;
       checkIllegalOverrides(method);
       checkMethodParameters(method);
+
+      if (memberDescriptor.isNative()) {
+        checkNativeMethod(method);
+      }
       if (memberDescriptor.isJsAsync()) {
         checkJsAsyncMethod(method);
       }
@@ -952,7 +956,7 @@ public class JsInteropRestrictionsChecker {
       }
     }
 
-    if (memberDescriptor.canBeReferencedExternally() || memberDescriptor.isNative()) {
+    if (memberDescriptor.canBeReferencedExternally()) {
       checkUnusableByJs(member);
     }
 
@@ -992,6 +996,20 @@ public class JsInteropRestrictionsChecker {
             }
           }
         });
+  }
+
+  private void checkNativeMethod(Method method) {
+    MethodDescriptor methodDescriptor = method.getDescriptor();
+    if (isUnusableByJsSuppressed(methodDescriptor)) {
+      return;
+    }
+
+    if (!methodDescriptor.isJsMember()) {
+      problems.warning(
+          method.getSourcePosition(),
+          "[unusable-by-js] Native '%s' is exposed to JavaScript without @JsMethod.",
+          method.getReadableDescription());
+    }
   }
 
   private void checkJsAsyncMethod(Method method) {
