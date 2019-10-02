@@ -1,5 +1,4 @@
 package(
-    default_visibility = ["//transpiler/javatests/com/google/j2cl/transpiler/sizetest:__pkg__"],
     licenses = ["notice"],  # Apache 2.0
 )
 
