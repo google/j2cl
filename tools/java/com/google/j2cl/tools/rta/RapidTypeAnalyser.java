@@ -44,6 +44,7 @@ final class RapidTypeAnalyser {
 
   private static Set<Member> getUnusedMembers(List<Type> types) {
     return types.stream()
+        .filter(Type::isLive)
         .flatMap(t -> t.getMembers().stream())
         .filter(not(Member::isLive))
         .collect(toSet());

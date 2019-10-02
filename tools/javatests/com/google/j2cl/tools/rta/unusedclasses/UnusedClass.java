@@ -15,4 +15,6 @@
  */
 package com.google.j2cl.tools.rta.unusedclasses;
 
-public class UnusedClass {}
+public class UnusedClass {
+  void unusedMethod() {}
+}
