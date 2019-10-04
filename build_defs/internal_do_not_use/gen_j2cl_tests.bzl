@@ -1,14 +1,14 @@
 """Macro for generating j2cl_test targets for multiple test files.
 
 Similar to gen_java_tests in third_party/bazel_common/testing/test_defs.bzl,
-this macro generates a j2cl_test rule for each test in test_files using
+this macro generates a j2cl_test rule for each file in `srcs` ending in "Test.java" using
 the specified deps.
 
 Example usage:
 
 gen_j2cl_tests(
     name = "AllTests",
-    test_files = glob(["*.java"]),
+    srcs = glob(["*.java"]),
 )
 
 """
