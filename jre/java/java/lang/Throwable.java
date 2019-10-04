@@ -145,7 +145,13 @@ public class Throwable implements Serializable {
     if (writableStackTrace) {
       // Note that when this called from ctor, transpiler hasn't initialized backingJsObject yet.
       if (backingJsObject instanceof NativeError) {
-        NativeError.captureStackTrace((NativeError) backingJsObject);
+        // The stack property on Error is lazily evaluated in Chrome, so it is better use
+        // captureStackTrace if available.
+        if (NativeError.hasCaptureStackTraceProperty) {
+          NativeError.captureStackTrace((NativeError) backingJsObject);
+        } else {
+          ((NativeError) backingJsObject).stack = new NativeError().stack;
+        }
       }
 
       // Invalidate the cached trace
@@ -254,7 +260,12 @@ public class Throwable implements Serializable {
 
   @JsType(isNative = true, name = "Error", namespace = "<window>")
   private static class NativeError {
+    @JsProperty(name = "captureStackTrace")
+    static boolean hasCaptureStackTraceProperty;
+
     static native void captureStackTrace(Object error);
+
+    String stack;
   }
 
   @JsType(isNative = true, name = "TypeError", namespace = "<window>")
