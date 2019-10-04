@@ -43,10 +43,12 @@ import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
+import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.common.SourcePosition;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -261,6 +263,14 @@ public class NormalizeConstructors extends NormalizationPass {
             jsConstructorParameters,
             superConstructorInvocation.makeStatement(jsConstructorSourcePosition)));
 
+    if (type.getTypeDescriptor().isAssignableTo(TypeDescriptors.get().javaLangThrowable)) {
+      // $instance.privateInitError(new Error);
+      body.add(
+          createThrowableInit(
+                  new ThisReference(type.getTypeDescriptor()), TypeDescriptors.get().nativeError)
+              .makeStatement(jsConstructorSourcePosition));
+    }
+
     return Method.newBuilder()
         .setMethodDescriptor(jsConstructor.getDescriptor())
         .setParameters(jsConstructorParameters)
@@ -417,6 +427,9 @@ public class NormalizeConstructors extends NormalizationPass {
       DeclaredTypeDescriptor enclosingType,
       MethodDescriptor javascriptConstructor,
       List<Expression> javascriptConstructorArguments) {
+
+    List<Statement> statements = new ArrayList<>();
+
     List<Variable> factoryMethodParameters = AstUtils.clone(constructor.getParameters());
     List<Expression> relayArguments = AstUtils.getReferences(factoryMethodParameters);
     javascriptConstructorArguments =
@@ -439,6 +452,7 @@ public class NormalizeConstructors extends NormalizationPass {
                             .build())
                     .build())
             .makeStatement(constructorSourcePosition);
+    statements.add(newInstanceStatement);
 
     // $instance.$ctor...();
     Statement ctorCallStatement =
@@ -447,6 +461,18 @@ public class NormalizeConstructors extends NormalizationPass {
             .setArguments(relayArguments)
             .build()
             .makeStatement(constructorSourcePosition);
+    statements.add(ctorCallStatement);
+
+    if (enclosingType.isAssignableTo(TypeDescriptors.get().javaLangThrowable)) {
+      // $instance.privateInitError(new Error);
+      statements.add(
+          createThrowableInit(
+                  newInstance.getReference(),
+                  enclosingType.isAssignableTo(TypeDescriptors.get().javaLangNulPointerException)
+                      ? TypeDescriptors.get().nativeTypeError
+                      : TypeDescriptors.get().nativeError)
+              .makeStatement(constructorSourcePosition));
+    }
 
     // return $instance
     Statement returnStatement =
@@ -455,20 +481,48 @@ public class NormalizeConstructors extends NormalizationPass {
                 enclosingType.isJsFunctionImplementation()
                     ? AstUtils.createLambdaInstance(enclosingType, newInstance.getReference())
                     : newInstance.getReference())
-            .setTypeDescriptor(constructor.getDescriptor().getEnclosingTypeDescriptor())
+            .setTypeDescriptor(enclosingType)
             .setSourcePosition(constructorSourcePosition)
             .build();
+    statements.add(returnStatement);
 
     return Method.newBuilder()
         .setMethodDescriptor(factoryDescriptorForConstructor(constructor.getDescriptor()))
         .setParameters(factoryMethodParameters)
-        .addStatements(newInstanceStatement, ctorCallStatement, returnStatement)
+        .addStatements(statements)
         .setJsDocDescription(jsDocDescription)
         .setSourcePosition(constructorSourcePosition)
         .build();
   }
 
-  public static Method getJsConstructor(Type type) {
+  private static Expression createThrowableInit(
+      Expression newInstanceRef, DeclaredTypeDescriptor errorType) {
+    MethodDescriptor initMethod =
+        MethodDescriptor.newBuilder()
+            .setParameterTypeDescriptors(TypeDescriptors.get().javaLangObject)
+            .setEnclosingTypeDescriptor(TypeDescriptors.get().javaLangThrowable)
+            .setVisibility(Visibility.PACKAGE_PRIVATE)
+            .setName("privateInitError")
+            .build();
+    checkNotNull(initMethod);
+    return MethodCall.Builder.from(initMethod)
+        .setQualifier(newInstanceRef)
+        .setArguments(newInstanceOfError(errorType, newInstanceRef.clone()))
+        .build();
+  }
+
+  private static Expression newInstanceOfError(DeclaredTypeDescriptor type, Expression thisRef) {
+    return NewInstance.Builder.from(
+            MethodDescriptor.newBuilder()
+                .setConstructor(true)
+                .setParameterTypeDescriptors(TypeDescriptors.get().javaLangObject)
+                .setEnclosingTypeDescriptor(type)
+                .build())
+        .setArguments(thisRef)
+        .build();
+  }
+
+  private static Method getJsConstructor(Type type) {
     return type.getMethods()
         .stream()
         .filter(method -> method.getDescriptor().isJsConstructor())

@@ -29,15 +29,19 @@ import java.util.List;
 /** Helper class for comparing stack traces */
 class StacktraceAsserter {
 
-  private static final ImmutableList<String> JAVA_START_FRAMES_FOR_TRIMMING =
+  private static final int EXTRA_J2CL_FRAME_COUNT = 1;
+
+  private static final ImmutableList<String> EXTRA_J2CL_FRAMES =
+      ImmutableList.of(
+          "at java.lang.Throwable.fillInStackTrace.*",
+          "at java.lang.RuntimeException.*",
+          "at .*\\$MyJsException.*");
+
+  private static final ImmutableList<String> JAVA_TEST_INFRA_FRAMES =
       ImmutableList.of(
           "at sun.reflect.", "at java.lang.reflect.", "at org.junit.", "at com.google.testing.");
 
-  private static final ImmutableList<String> JS_START_FRAMES_FOR_TRIMMING =
-      ImmutableList.of(
-          "at java.lang.Throwable.", "at java.lang.Exception.", "at java.lang.RuntimeException.");
-
-  private static final ImmutableList<String> JS_FILES_FOR_TRIMMING =
+  private static final ImmutableList<String> JS_TEST_INFRA_FRAMES =
       ImmutableList.of(
           "javascript/closure/testing/testcase.js",
           "javascript/closure/testing/testrunner.js",
@@ -178,9 +182,9 @@ class StacktraceAsserter {
     Builder stacktraceBuilder = Stacktrace.newStacktraceBuilder();
 
     String message = stacktrace.get(0).trim();
-    int i;
-    for (i = 1; i < stacktrace.size(); i++) {
-      String line = stacktrace.get(i).trim();
+    int frameStart;
+    for (frameStart = 1; frameStart < stacktrace.size(); frameStart++) {
+      String line = stacktrace.get(frameStart).trim();
       if (!line.startsWith("at ")) {
         message += "\n" + line;
       } else {
@@ -189,15 +193,17 @@ class StacktraceAsserter {
     }
     stacktraceBuilder.message(message);
 
-    for (; i < stacktrace.size(); i++) {
+    for (int i = frameStart; i < stacktrace.size(); i++) {
       final String line = stacktrace.get(i).trim();
-      List<String> startTokenList =
-          testMode == TestMode.JAVA ? JAVA_START_FRAMES_FOR_TRIMMING : JS_START_FRAMES_FOR_TRIMMING;
-      boolean skip = startTokenList.stream().anyMatch(s -> line.startsWith(s));
 
+      boolean skip = false;
       if (testMode.isJ2cl()) {
-        // in J2cl we skip certain js files
-        skip |= JS_FILES_FOR_TRIMMING.stream().anyMatch(s -> line.contains(s));
+        if (i < frameStart + EXTRA_J2CL_FRAME_COUNT) {
+          skip |= EXTRA_J2CL_FRAMES.stream().anyMatch(s -> line.matches(s));
+        }
+        skip |= JS_TEST_INFRA_FRAMES.stream().anyMatch(s -> line.contains(s));
+      } else {
+        skip |= JAVA_TEST_INFRA_FRAMES.stream().anyMatch(s -> line.contains(s));
       }
 
       if (!skip) {
@@ -213,7 +219,7 @@ class StacktraceAsserter {
     // (they are not part of a normal j2cl_test log)
     // Make sure we skip those here
     int logIndex = 0;
-    if (testMode != TestMode.JAVA) {
+    if (testMode.isJ2cl()) {
       for (; logIndex < logLines.size(); logIndex++) {
         if (logLines
             .get(logIndex)

@@ -24,6 +24,24 @@ j2cl_test_integration_test_data(
 )
 
 j2cl_test_integration_test_data(
+    name = "JsExceptionStacktraceTest",
+    extra_defs = ["--inline_functions=false"],
+    deps = [
+        ":base",
+        "//third_party:gwt-jsinterop-annotations",
+    ],
+)
+
+j2cl_test_integration_test_data(
+    name = "JsExceptionNonJsConstructorStacktraceTest",
+    extra_defs = ["--inline_functions=false"],
+    deps = [
+        ":base",
+        "//third_party:gwt-jsinterop-annotations",
+    ],
+)
+
+j2cl_test_integration_test_data(
     name = "LambdaStacktraceTest",
     extra_defs = ["--inline_functions=false"],
     deps = [":base"],

@@ -47,6 +47,7 @@ public class FrontendConstants {
           "java.lang.Cloneable",
           "java.lang.Comparable",
           "java.lang.Enum",
+          "java.lang.NullPointerException",
           "java.lang.Number",
           "java.lang.Object",
           "java.lang.Runnable",

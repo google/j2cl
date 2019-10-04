@@ -13,15 +13,7 @@
 // limitations under the License.
 
 /**
- * @public
- */
-Throwable.prototype.m_captureStackTrace___$p_java_lang_Throwable = function() {
-  // Only supporting modern browsers so generating stack by traversing callees
-  // is not necessary.
-};
-
-/**
- * @return {Array<StackTraceElement>}
+ * @return {!Array<!StackTraceElement>}
  * @public
  */
 Throwable.prototype.m_constructJavaStackTrace___$p_java_lang_Throwable =
@@ -36,19 +28,4 @@ Throwable.prototype.m_constructJavaStackTrace___$p_java_lang_Throwable =
                 '', splitStack[i], null, -1);
   }
   return stackTraceElements;
-};
-
-/**
- * @param {*} e
- * @return {*}
- * @public
- */
-Throwable.m_fixIE__java_lang_Object = function(e) {
-  if (!('stack' in e)) {
-    try {
-      throw e;
-    } catch (ignored) {
-    }
-  }
-  return e;
 };

@@ -48,6 +48,7 @@ public class TypeDescriptors {
   public DeclaredTypeDescriptor javaLangClass;
   public DeclaredTypeDescriptor javaLangObject;
   public DeclaredTypeDescriptor javaLangThrowable;
+  public DeclaredTypeDescriptor javaLangNulPointerException;
   public DeclaredTypeDescriptor javaLangEnum;
   public DeclaredTypeDescriptor javaLangRunnable;
 
@@ -68,6 +69,9 @@ public class TypeDescriptors {
   public final DeclaredTypeDescriptor nativeFunction = createGlobalNativeTypeDescriptor("Function");
   public final DeclaredTypeDescriptor nativeObject = createGlobalNativeTypeDescriptor("Object");
   public final DeclaredTypeDescriptor nativeArray = createGlobalNativeTypeDescriptor("Array");
+  public final DeclaredTypeDescriptor nativeError = createGlobalNativeTypeDescriptor("Error");
+  public final DeclaredTypeDescriptor nativeTypeError =
+      createGlobalNativeTypeDescriptor("TypeError");
 
   /**
    * Global window reference that is the enclosing class of native global methods and properties.
@@ -493,6 +497,9 @@ public class TypeDescriptors {
           break;
         case "java.lang.Throwable":
           typeDescriptors.javaLangThrowable = referenceType;
+          break;
+        case "java.lang.NullPointerException":
+          typeDescriptors.javaLangNulPointerException = referenceType;
           break;
         case "java.lang.Number":
           typeDescriptors.javaLangNumber = referenceType;

@@ -38,6 +38,16 @@ public class StacktraceIntegrationTest extends IntegrationTestBase {
   }
 
   @Test
+  public void testJsException() throws Exception {
+    runStacktraceTest("JsExceptionStacktraceTest");
+  }
+
+  @Test
+  public void testJsExceptionNonJsConstructor() throws Exception {
+    runStacktraceTest("JsExceptionNonJsConstructorStacktraceTest");
+  }
+
+  @Test
   public void testRecursive() throws Exception {
     runStacktraceTest("RecursiveStacktraceTest");
   }
