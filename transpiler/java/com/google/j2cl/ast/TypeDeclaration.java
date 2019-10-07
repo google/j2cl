@@ -179,6 +179,14 @@ public abstract class TypeDeclaration extends Node
   @Nullable
   public abstract TypeDeclaration getEnclosingTypeDeclaration();
 
+  /** Returns the topmost enclosing type declaration for this type. */
+  public TypeDeclaration getTopEnclosingDeclaration() {
+    TypeDeclaration enclosingTypeDeclaration = getEnclosingTypeDeclaration();
+    return enclosingTypeDeclaration == null
+        ? this
+        : enclosingTypeDeclaration.getTopEnclosingDeclaration();
+  }
+
   public abstract ImmutableList<TypeVariable> getTypeParameterDescriptors();
 
   public abstract Visibility getVisibility();

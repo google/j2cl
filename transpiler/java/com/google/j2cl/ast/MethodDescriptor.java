@@ -358,10 +358,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     }
     // To override a package private method one must reside in the same package.
     if (thatVisibility.isPackagePrivate()
-        && !getEnclosingTypeDescriptor()
-            .getTypeDeclaration()
-            .getPackageName()
-            .equals(that.getEnclosingTypeDescriptor().getTypeDeclaration().getPackageName())) {
+        && !getEnclosingTypeDescriptor().isInSamePackage(that.getEnclosingTypeDescriptor())) {
       return false;
     }
 

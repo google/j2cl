@@ -12,5 +12,5 @@ load(
 # blaze test :readable_js
 integration_test(
     name = "varargs",
-    srcs = glob(["*.java"]),
+    srcs = glob(["**/*.java"]),
 )

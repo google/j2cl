@@ -280,10 +280,17 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     return getTypeDeclaration().isSubtypeOf(that.getTypeDeclaration());
   }
 
+  /** Whether the type is in the same package as {@code other}. */
+  public boolean isInSamePackage(DeclaredTypeDescriptor other) {
+    return other
+        .getTypeDeclaration()
+        .getPackageName()
+        .equals(getTypeDeclaration().getPackageName());
+  }
+
   public boolean extendsNativeClass() {
     return getTypeDeclaration().extendsNativeClass();
   }
-
 
   @Override
   @Memoized

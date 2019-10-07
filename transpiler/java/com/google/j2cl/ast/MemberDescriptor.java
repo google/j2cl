@@ -153,6 +153,28 @@ public abstract class MemberDescriptor extends Node
     return false;
   }
 
+  /** Determines whether a method is visible from {@code type} or not (following JLS 6.6.1). */
+  public boolean isVisibleFrom(DeclaredTypeDescriptor type) {
+    switch (getVisibility()) {
+      case PUBLIC:
+      case PROTECTED:
+        return true;
+      case PACKAGE_PRIVATE:
+        return type.isInSamePackage(getEnclosingTypeDescriptor());
+      case PRIVATE:
+        return isEnclosedBySameTopLevelClass(type, getEnclosingTypeDescriptor());
+    }
+    throw new AssertionError();
+  }
+
+  private static boolean isEnclosedBySameTopLevelClass(
+      DeclaredTypeDescriptor thisType, DeclaredTypeDescriptor thatType) {
+    return thisType
+        .getTypeDeclaration()
+        .getTopEnclosingDeclaration()
+        .equals(thatType.getTypeDeclaration().getTopEnclosingDeclaration());
+  }
+
   /** Returns whether the member can be referenced directly from JavaScript code. */
   public boolean canBeReferencedExternally() {
     if (getEnclosingTypeDescriptor().getTypeDeclaration().isAnonymous()) {
