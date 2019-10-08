@@ -12,14 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-goog.require('goog.reflect');
+const googReflect = goog.require('goog.reflect');
 
 /**
  * @param {?} obj
  * @return {boolean}
  */
 PropertyUtils.hasPublicMethod = function(obj) {
-  return obj[goog.reflect.objectProperty('publicMethod', obj)] != null;
+  return obj[googReflect.objectProperty('publicMethod', obj)] != null;
 };
 
 /**
@@ -27,7 +27,7 @@ PropertyUtils.hasPublicMethod = function(obj) {
  * @return {boolean}
  */
 PropertyUtils.hasPublicSubclassMethod = function(obj) {
-  return obj[goog.reflect.objectProperty('publicSubclassMethod', obj)] != null;
+  return obj[googReflect.objectProperty('publicSubclassMethod', obj)] != null;
 };
 
 /**
@@ -35,7 +35,7 @@ PropertyUtils.hasPublicSubclassMethod = function(obj) {
  * @return {boolean}
  */
 PropertyUtils.hasPublicStaticSubclassMethod = function(obj) {
-  return obj[goog.reflect.objectProperty('publicStaticSubclassMethod', obj)] !=
+  return obj[googReflect.objectProperty('publicStaticSubclassMethod', obj)] !=
       null;
 };
 
@@ -44,7 +44,7 @@ PropertyUtils.hasPublicStaticSubclassMethod = function(obj) {
  * @return {boolean}
  */
 PropertyUtils.hasPrivateSubclassMethod = function(obj) {
-  return obj[goog.reflect.objectProperty('privateSubclassMethod', obj)] != null;
+  return obj[googReflect.objectProperty('privateSubclassMethod', obj)] != null;
 };
 
 /**
@@ -52,7 +52,7 @@ PropertyUtils.hasPrivateSubclassMethod = function(obj) {
  * @return {boolean}
  */
 PropertyUtils.hasProtectedSubclassMethod = function(obj) {
-  return obj[goog.reflect.objectProperty('protectedSubclassMethod', obj)] !=
+  return obj[googReflect.objectProperty('protectedSubclassMethod', obj)] !=
       null;
 };
 
@@ -61,7 +61,7 @@ PropertyUtils.hasProtectedSubclassMethod = function(obj) {
  * @return {boolean}
  */
 PropertyUtils.hasPackageSubclassMethod = function(obj) {
-  return obj[goog.reflect.objectProperty('packageSubclassMethod', obj)] != null;
+  return obj[googReflect.objectProperty('packageSubclassMethod', obj)] != null;
 };
 
 /**
@@ -69,7 +69,7 @@ PropertyUtils.hasPackageSubclassMethod = function(obj) {
  * @return {boolean}
  */
 PropertyUtils.hasPublicSubclassField = function(obj) {
-  return obj[goog.reflect.objectProperty('publicSubclassField', obj)] != null;
+  return obj[googReflect.objectProperty('publicSubclassField', obj)] != null;
 };
 
 /**
@@ -77,7 +77,7 @@ PropertyUtils.hasPublicSubclassField = function(obj) {
  * @return {boolean}
  */
 PropertyUtils.hasPublicStaticSubclassField = function(obj) {
-  return obj[goog.reflect.objectProperty('publicStaticSubclassField', obj)] !=
+  return obj[googReflect.objectProperty('publicStaticSubclassField', obj)] !=
       null;
 };
 
@@ -86,7 +86,7 @@ PropertyUtils.hasPublicStaticSubclassField = function(obj) {
  * @return {boolean}
  */
 PropertyUtils.hasPrivateSubclassField = function(obj) {
-  return obj[goog.reflect.objectProperty('privateSubclassField', obj)] != null;
+  return obj[googReflect.objectProperty('privateSubclassField', obj)] != null;
 };
 
 /**
@@ -94,7 +94,7 @@ PropertyUtils.hasPrivateSubclassField = function(obj) {
  * @return {boolean}
  */
 PropertyUtils.hasProtectedSubclassField = function(obj) {
-  return obj[goog.reflect.objectProperty('protectedSubclassField', obj)] !=
+  return obj[googReflect.objectProperty('protectedSubclassField', obj)] !=
       null;
 };
 
@@ -103,7 +103,7 @@ PropertyUtils.hasProtectedSubclassField = function(obj) {
  * @return {boolean}
  */
 PropertyUtils.hasPackageSubclassField = function(obj) {
-  return obj[goog.reflect.objectProperty('packageSubclassField', obj)] != null;
+  return obj[googReflect.objectProperty('packageSubclassField', obj)] != null;
 };
 
 /**
@@ -111,7 +111,7 @@ PropertyUtils.hasPackageSubclassField = function(obj) {
  * @return {boolean}
  */
 PropertyUtils.hasPublicFinalField = function(obj) {
-  return obj[goog.reflect.objectProperty('publicFinalField', obj)] != null;
+  return obj[googReflect.objectProperty('publicFinalField', obj)] != null;
 };
 
 /**
@@ -119,7 +119,7 @@ PropertyUtils.hasPublicFinalField = function(obj) {
  * @return {boolean}
  */
 PropertyUtils.hasPrivateStaticFinalField = function(obj) {
-  return obj[goog.reflect.objectProperty('privateStaticFinalField', obj)] !=
+  return obj[googReflect.objectProperty('privateStaticFinalField', obj)] !=
       null;
 };
 
@@ -128,7 +128,7 @@ PropertyUtils.hasPrivateStaticFinalField = function(obj) {
  * @return {boolean}
  */
 PropertyUtils.hasProtectedStaticFinalField = function(obj) {
-  return obj[goog.reflect.objectProperty('protectedStaticFinalField', obj)] !=
+  return obj[googReflect.objectProperty('protectedStaticFinalField', obj)] !=
       null;
 };
 
@@ -137,7 +137,7 @@ PropertyUtils.hasProtectedStaticFinalField = function(obj) {
  * @return {boolean}
  */
 PropertyUtils.hasDefaultStaticFinalField = function(obj) {
-  return obj[goog.reflect.objectProperty('defaultStaticFinalField', obj)] !=
+  return obj[googReflect.objectProperty('defaultStaticFinalField', obj)] !=
       null;
 };
 
@@ -146,7 +146,7 @@ PropertyUtils.hasDefaultStaticFinalField = function(obj) {
  * @return {boolean}
  */
 PropertyUtils.hasProtectedStaticMethod = function(obj) {
-  return obj[goog.reflect.objectProperty('protectedStaticMethod', obj)] != null;
+  return obj[googReflect.objectProperty('protectedStaticMethod', obj)] != null;
 };
 
 /**
@@ -154,7 +154,7 @@ PropertyUtils.hasProtectedStaticMethod = function(obj) {
  * @return {boolean}
  */
 PropertyUtils.hasPrivateStaticMethod = function(obj) {
-  return obj[goog.reflect.objectProperty('privateStaticMethod', obj)] != null;
+  return obj[googReflect.objectProperty('privateStaticMethod', obj)] != null;
 };
 
 /**
@@ -162,7 +162,7 @@ PropertyUtils.hasPrivateStaticMethod = function(obj) {
  * @return {boolean}
  */
 PropertyUtils.hasDefaultStaticMethod = function(obj) {
-  return obj[goog.reflect.objectProperty('defaultStaticMethod', obj)] != null;
+  return obj[googReflect.objectProperty('defaultStaticMethod', obj)] != null;
 };
 
 /**
@@ -170,7 +170,7 @@ PropertyUtils.hasDefaultStaticMethod = function(obj) {
  * @return {boolean}
  */
 PropertyUtils.hasOwnPropertyMine = function(obj) {
-  return obj.hasOwnProperty(goog.reflect.objectProperty('mine', obj));
+  return obj.hasOwnProperty(googReflect.objectProperty('mine', obj));
 };
 
 /**
@@ -178,7 +178,7 @@ PropertyUtils.hasOwnPropertyMine = function(obj) {
  * @return {boolean}
  */
 PropertyUtils.hasOwnPropertyToString = function(obj) {
-  return obj.hasOwnProperty(goog.reflect.objectProperty('toString', obj));
+  return obj.hasOwnProperty(googReflect.objectProperty('toString', obj));
 };
 
 /**
@@ -186,7 +186,7 @@ PropertyUtils.hasOwnPropertyToString = function(obj) {
  * @return {boolean}
  */
 PropertyUtils.hasNotExported_1 = function(obj) {
-  return obj[goog.reflect.objectProperty('notExported_1', obj)] != null;
+  return obj[googReflect.objectProperty('notExported_1', obj)] != null;
 };
 
 /**
@@ -194,7 +194,7 @@ PropertyUtils.hasNotExported_1 = function(obj) {
  * @return {boolean}
  */
 PropertyUtils.hasNotExported_2 = function(obj) {
-  return obj[goog.reflect.objectProperty('notExported_2', obj)] != null;
+  return obj[googReflect.objectProperty('notExported_2', obj)] != null;
 };
 
 /**
@@ -202,7 +202,7 @@ PropertyUtils.hasNotExported_2 = function(obj) {
  * @return {boolean}
  */
 PropertyUtils.hasNOT_EXPORTED_1 = function(obj) {
-  return obj[goog.reflect.objectProperty('NOT_EXPORTED_1', obj)] != null;
+  return obj[googReflect.objectProperty('NOT_EXPORTED_1', obj)] != null;
 };
 
 /**
@@ -210,7 +210,7 @@ PropertyUtils.hasNOT_EXPORTED_1 = function(obj) {
  * @return {boolean}
  */
 PropertyUtils.hasNOT_EXPORTED_2 = function(obj) {
-  return obj[goog.reflect.objectProperty('NOT_EXPORTED_2', obj)] != null;
+  return obj[googReflect.objectProperty('NOT_EXPORTED_2', obj)] != null;
 };
 
 /**
@@ -218,7 +218,7 @@ PropertyUtils.hasNOT_EXPORTED_2 = function(obj) {
  * @return {boolean}
  */
 PropertyUtils.hasNOT_EXPORTED_3 = function(obj) {
-  return obj[goog.reflect.objectProperty('NOT_EXPORTED_3', obj)] != null;
+  return obj[googReflect.objectProperty('NOT_EXPORTED_3', obj)] != null;
 };
 
 /**
@@ -226,7 +226,7 @@ PropertyUtils.hasNOT_EXPORTED_3 = function(obj) {
  * @return {boolean}
  */
 PropertyUtils.hasNOT_EXPORTED_4 = function(obj) {
-  return obj[goog.reflect.objectProperty('NOT_EXPORTED_4', obj)] != null;
+  return obj[googReflect.objectProperty('NOT_EXPORTED_4', obj)] != null;
 };
 
 /**
@@ -234,7 +234,7 @@ PropertyUtils.hasNOT_EXPORTED_4 = function(obj) {
  * @return {boolean}
  */
 PropertyUtils.hasNOT_EXPORTED_5 = function(obj) {
-  return obj[goog.reflect.objectProperty('NOT_EXPORTED_5', obj)] != null;
+  return obj[googReflect.objectProperty('NOT_EXPORTED_5', obj)] != null;
 };
 
 let __Class = goog.forwardDeclare('java.lang.Class');
