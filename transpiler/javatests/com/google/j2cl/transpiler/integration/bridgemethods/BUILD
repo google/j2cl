@@ -14,4 +14,5 @@ load(
 integration_test(
     name = "bridgemethods",
     srcs = glob(["*.java"]),
+    suppress = ["JSC_TYPE_MISMATCH"],
 )
