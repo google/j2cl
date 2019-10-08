@@ -5,7 +5,7 @@ package(
     licenses = ["notice"],  # Apache 2.0
 )
 
-load("//third_party/java/j2cl:j2cl_library.bzl", "j2cl_library")
+load("//build_defs:rules.bzl", "j2cl_library")
 
 j2cl_library(
     name = "asserts",

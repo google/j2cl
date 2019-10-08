@@ -18,7 +18,7 @@ integration_test(
 """
 
 load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_test")
-load("//build_defs:rules.bzl", "J2CL_OPTIMIZED_DEFS", "J2CL_TEST_DEFS", "j2cl_library")
+load("//build_defs:rules.bzl", "J2CL_TEST_DEFS", "j2cl_library")
 load("//build_defs/internal_do_not_use:j2cl_util.bzl", "get_java_package")
 
 JAVAC_FLAGS = [
@@ -31,7 +31,6 @@ def integration_test(
         srcs,
         deps = [],
         defs = [],
-        native_srcs = [],
         main_class = None,
         enable_gwt = False,
         gwt_deps = [],
@@ -54,26 +53,7 @@ def integration_test(
     if not main_class:
         main_class = java_package + ".Main"
 
-    optimized_extra_defs = [
-        # Turn on asserts since the integration tests rely on them.
-        # TODO: Enable once the option is made available.
-        #        "--remove_j2cl_asserts=false",
-        # Avoid 'use strict' noise.
-        #        "--emit_use_strict=false",
-        # Polyfill re-write is disabled so that size tracking only focuses on
-        # size issues that are actionable outside of JSCompiler or are expected
-        # to eventually be addressed inside of JSCompiler.
-        # TODO: Phantomjs needs polyfills for some features used in tests.
-        #"--rewrite_polyfills=false",
-        # Cuts optimize time nearly in half and the optimization leaks that it
-        # previously hid no longer exist.
-        "--closure_entry_point=gen.opt.Harness",
-        # Since integration tests are used for optimized size tracking, set
-        # behavior to the mode with the smallest output size which is what we
-        # expect to be used for customer application production releases.
-        # TODO: Enable once the remove_j2cl_asserts option is made available.
-        #       "--define=jre.checks.checkLevel=MINIMAL",
-    ]
+    deps = deps + ["//transpiler/javatests/com/google/j2cl/transpiler/utils:asserts"]
 
     define_flags = ["--define=%s=%s" % (k, v) for (k, v) in closure_defines.items()]
 
@@ -85,7 +65,6 @@ def integration_test(
         generate_build_test = False,
         deps = deps,
         javacopts = JAVAC_FLAGS,
-        native_srcs = native_srcs,
         plugins = plugins,
         tags = tags + j2cl_library_tags,
         js_suppress = suppress,
@@ -115,7 +94,7 @@ def integration_test(
             ":" + name,
             "@io_bazel_rules_closure//closure/library:testing",
         ],
-        defs = J2CL_TEST_DEFS + optimized_extra_defs + defs,
+        defs = J2CL_TEST_DEFS + defs,
         suppress = suppress,
         testonly = True,
         tags = tags,
