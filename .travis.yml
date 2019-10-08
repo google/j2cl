@@ -3,8 +3,8 @@ dist: trusty
 sudo: required
 # xcode8 has jdk8
 osx_image: xcode8
-# Not technically required but suppresses 'Ruby' in Job status message.
-language: java
+# Since Bazel 0.25, PY3 is the default Python version. Make sure Travis has it.
+language: python3
 
 os:
   - linux
@@ -18,11 +18,13 @@ before_install:
       sysctl kernel.unprivileged_userns_clone=1
       OS=linux
     fi
-    BAZEL=$(cat ".bazelversion")
-    wget -O install.sh "https://github.com/bazelbuild/bazel/releases/download/${BAZEL}/bazel-${BAZEL}-installer-${OS}-x86_64.sh"
-    chmod +x install.sh
-    ./install.sh --user
-    rm -f install.sh
+    BAZEL_VERSION=$(cat ".bazelversion")
+    BAZELISK_VERSION=v1.0
+    if [ ! -d "${HOME}/bin" ]; then
+      mkdir "${HOME}/bin"
+    fi
+    wget -O "${HOME}/bin/bazel" "https://github.com/bazelbuild/bazelisk/releases/download/${BAZELISK_VERSION}/bazelisk-${OS}-amd64"
+    chmod +x "${HOME}/bin/bazel"
 
 before_script:
   - echo "startup --output_base=$HOME/.cache/bazel" >> .bazelrc
