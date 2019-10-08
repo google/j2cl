@@ -73,7 +73,7 @@ def setup_j2cl_workspace():
 
     native.maven_jar(
         name = "com_google_truth",
-        artifact = "com.google.truth:truth:0.39",
+        artifact = "com.google.truth:truth:1.0",
     )
 
     # TODO(b/135461024): for now J2CL uses a prepackaged version of javac. But in the future it
