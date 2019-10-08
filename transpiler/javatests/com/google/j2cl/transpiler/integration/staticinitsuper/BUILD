@@ -14,4 +14,5 @@ load(
 integration_test(
     name = "staticinitsuper",
     srcs = glob(["*.java"]),
+    tags = ["manual"],
 )

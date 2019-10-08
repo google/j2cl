@@ -19,7 +19,9 @@ set -e
 bazel build :all tools/java/...
 
 # build hello world sample in its own workspace
-cd samples/helloworld
+(cd samples/helloworld && bazel build src/main/...)
 
-bazel build src/main/...
-
+# Run CI test if requested
+if [[ $1 == "CI" ]]; then
+  bazel test transpiler/javatests/com/google/j2cl/transpiler/integration/...
+fi

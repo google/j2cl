@@ -17,4 +17,5 @@ integration_test(
         # Turn on asserts since it is what this test is testing.
         "--remove_j2cl_asserts=false",
     ],
+    tags = ["manual"],
 )
