@@ -25,10 +25,10 @@ def setup_j2cl_workspace():
     )
 
     # We cannot replace com_google_jsinterop_annotations so choose a different name
-    native.maven_jar(
+    http_archive(
         name = "com_google_jsinterop_annotations_head",
-        artifact = "com.google.jsinterop:jsinterop-annotations:HEAD-SNAPSHOT",
-        repository = "https://oss.sonatype.org/content/repositories/google-snapshots/",
+        urls = ["https://github.com/google/jsinterop-annotations/archive/master.zip"],
+        strip_prefix = "jsinterop-annotations-master",
     )
 
     native.maven_jar(
