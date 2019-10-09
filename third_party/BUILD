@@ -165,3 +165,14 @@ j2cl_import(
     name = "gwt-jsinterop-annotations-j2cl",
     jar = "@com_google_jsinterop_annotations_head//jar",
 )
+
+j2cl_library(
+    name = "jbox2d",
+    srcs = ["@org_jbox2d//:j2cl_sources"],
+    javacopts = [
+        "-source 8",
+        "-target 8",
+        "-Xep:EqualsHashCode:OFF",  # See go/equals-hashcode-lsc
+    ],
+    deps = [":gwt-jsinterop-annotations-j2cl"],
+)

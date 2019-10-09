@@ -9,4 +9,5 @@ j2cl_library(
     name = "box2d_j2cl",
     srcs = glob(["*.java"]),
     tags = ["manual"],
+    deps = ["//third_party:jbox2d"],
 )

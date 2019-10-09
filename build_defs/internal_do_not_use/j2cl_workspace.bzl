@@ -151,6 +151,28 @@ def setup_j2cl_workspace():
         url = "https://gwt.googlesource.com/gwt/+archive/master.tar.gz",
     )
 
+    http_archive(
+        name = "org_jbox2d",
+        strip_prefix = "jbox2d-jbox2d-2.2.1.1/jbox2d-library",
+        urls = ["https://github.com/jbox2d/jbox2d/archive/jbox2d-2.2.1.1.zip"],
+        sha256 = "088e5fc0f56c75f82c289c4721d9faf46a309e258d3ee647799622ef82e60303",
+        patches = ["@com_google_j2cl//transpiler/javatests/com/google/j2cl/transpiler/integration/box2d:jbox2d.patch"],
+        build_file_content = '''
+filegroup(
+    name = "j2cl_sources",
+    srcs = glob(
+        ["src/main/java/**/*.java"],
+        exclude = [
+            "**/StrictMath.java",
+            "**/PlatformMathUtils.java",
+            "**/Timer.java",
+            "**/profile/**",
+        ],
+    ) + glob(["src/main/java/org/jbox2d/gwtemul/**/*.java"]),
+    visibility = ["//visibility:public"],
+)''',
+    )
+
     # proto_library and java_proto_library rules implicitly depend on
     # @com_google_protobuf for protoc and proto runtimes.
     http_archive(
