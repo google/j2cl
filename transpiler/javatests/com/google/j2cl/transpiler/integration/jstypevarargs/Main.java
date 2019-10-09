@@ -153,8 +153,8 @@ public class Main {
     assertTrue(Main.sumAndMultiply(10.0, new Double[] {}) == 0);
     // array object for varargs.
     Double[] ds = new Double[] {1.0, 2.2};
-    assertTrue(sumAndMultiply(10.0, ds) == 30.0);
-    assertTrue(Main.sumAndMultiply(10.0, ds) == 30.0);
+    assertTrue(sumAndMultiply(10.0, ds) == 32.0);
+    assertTrue(Main.sumAndMultiply(10.0, ds) == 32.0);
     // call by JS.
     assertTrue(callSumAndMultiply() == 30.0);
   }
@@ -317,6 +317,7 @@ public class Main {
     testSideEffect();
     testSuperMethodCall();
     testCallVarargsWithNull();
+    testUnboxedType();
     QualifiedSuperMethodCall.test();
   }
 }

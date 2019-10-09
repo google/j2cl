@@ -16,7 +16,7 @@
  * @return {?number}
  */
 Main.callSumAndMultiply = function() {
-  return Main.sumAndMultiply(1, 1, 2);
+  return Main.sumAndMultiply(10, 1, 2);
 };
 
 /**
