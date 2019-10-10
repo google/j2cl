@@ -21,6 +21,8 @@ import static com.google.j2cl.transpiler.utils.Asserts.assertThrowsClassCastExce
 import static com.google.j2cl.transpiler.utils.Asserts.assertThrowsNullPointerException;
 import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
 
+import java.util.function.Function;
+
 public class Main {
   public static void main(String[] args) {
     testSuperMethodReferences();
@@ -28,7 +30,9 @@ public class Main {
     testInstanceMethodReferences();
     testStaticMethodReferences();
     testQualifierEvaluation();
+    testQualifierEvaluation_array();
     testQualifierEvaluation_observeUninitializedField();
+    testQualifierEvaluation_implicitObjectMethods();
   }
 
   interface Producer<T> {
@@ -200,11 +204,43 @@ public class Main {
     // Object instantiation
     stringProducer = new Integer(returnSequenceAsInt())::toString;
     assertEquals(stringProducer.produce(), stringProducer.produce());
+  }
 
-    // TODO(b/132618274): Uncomment test when bug is fixed.
-    // // Array instantiation
-    // stringProducer = new String[] {returnSequenceAsString()}::toString;
-    // assertEquals(stringProducer.produce(), stringProducer.produce());
+  interface Interface {}
+
+  interface InterfaceWithHashcode {
+    int hashCode();
+  }
+
+  private static void testQualifierEvaluation_implicitObjectMethods() {
+    Interface i = new Interface() {};
+    Producer<String> stringProducer = i::toString;
+    assertEquals(i.toString(), stringProducer.produce());
+
+    Producer<Integer> integerProducer = i::hashCode;
+    assertEquals(i.hashCode(), integerProducer.produce().intValue());
+
+    Function<Object, Boolean> equalityTester = i::equals;
+    assertTrue(equalityTester.apply(i));
+    assertFalse(equalityTester.apply(new Object() {}));
+
+    InterfaceWithHashcode interfaceWithHashcode = new InterfaceWithHashcode() {};
+    integerProducer = interfaceWithHashcode::hashCode;
+    assertEquals(interfaceWithHashcode.hashCode(), integerProducer.produce().intValue());
+  }
+
+  private static void testQualifierEvaluation_array() {
+    // Array methods.
+    String[] array = {returnSequenceAsString()};
+    Producer<String> stringProducer = array::toString;
+    assertEquals(array.toString(), stringProducer.produce());
+
+    Producer<Integer> integerProducer = array::hashCode;
+    assertEquals(array.hashCode(), integerProducer.produce().intValue());
+
+    Function<Object, Boolean> equalityTester = array::equals;
+    assertTrue(equalityTester.apply(array));
+    assertFalse(equalityTester.apply(new int[0]));
   }
 
   private static String[] returnsArray() {

@@ -26,6 +26,7 @@ import static java.util.stream.Collectors.toList;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ComparisonChain;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.MoreCollectors;
 import com.google.j2cl.ast.ArrayAccess;
 import com.google.j2cl.ast.ArrayLength;
 import com.google.j2cl.ast.ArrayLiteral;
@@ -81,6 +82,7 @@ import com.google.j2cl.ast.TryStatement;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptor;
+import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeLiteral;
 import com.google.j2cl.ast.UnaryExpression;
 import com.google.j2cl.ast.UnionTypeDescriptor;
@@ -1038,8 +1040,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           JdtUtils.createTypeDescriptor(expression.resolveTypeBinding());
 
       // MethodDescriptor target of the method reference.
-      MethodDescriptor referencedMethodDescriptor =
-          JdtUtils.createMethodDescriptor(expression.resolveMethodBinding());
+      MethodDescriptor referencedMethodDescriptor = resolveMethodReferenceTarget(expression);
 
       // Functional interface method that the expression implements.
       MethodDescriptor functionalMethodDescriptor =
@@ -1054,6 +1055,26 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           referencedMethodDescriptor,
           expressionTypeDescriptor,
           functionalMethodDescriptor);
+    }
+
+    private MethodDescriptor resolveMethodReferenceTarget(ExpressionMethodReference expression) {
+      IMethodBinding methodBinding = expression.resolveMethodBinding();
+      if (methodBinding == null) {
+        // JDT did not resolve the method binding but it was not a compilation error. This situation
+        // seems to happen only for method references on array objects.
+        checkArgument(expression.getExpression().resolveTypeBinding().isArray());
+
+        // Array methods are provided by java.lang.Object and are matched here by name. This is safe
+        // because there is only a handful of method in java.lang.Object and if methods are added
+        // in the future they will be caught be the MoreCollectors.onlyElement. Resolving the target
+        // correctly if there were many overloads is extra complexity that can be left out until
+        // it is really needed.
+        String targetMethodName = expression.getName().getIdentifier();
+        return TypeDescriptors.get().javaLangObject.getMethodDescriptors().stream()
+            .filter(m -> m.getName().equals(targetMethodName))
+            .collect(MoreCollectors.onlyElement());
+      }
+      return JdtUtils.createMethodDescriptor(methodBinding);
     }
 
     /**
