@@ -1115,6 +1115,7 @@ class JdtUtils {
         .setFinal(isFinal)
         .setFunctionalInterface(typeBinding.getFunctionalInterfaceMethod() != null)
         .setJsFunctionInterface(JsInteropUtils.isJsFunction(typeBinding))
+        .setAnnotatedWithFunctionalInterface(isAnnotatedWithFunctionalInterface(typeBinding))
         .setJsType(JsInteropUtils.isJsType(typeBinding))
         .setJsEnumInfo(jsEnumInfo)
         .setNative(JsInteropUtils.isJsNativeType(typeBinding))
@@ -1136,6 +1137,10 @@ class JdtUtils {
         .setUnusableByJsSuppressed(JsInteropAnnotationUtils.isUnusableByJsSuppressed(typeBinding))
         .setDeprecated(isDeprecated(typeBinding))
         .build();
+  }
+
+  private static boolean isAnnotatedWithFunctionalInterface(ITypeBinding typeBinding) {
+    return JdtAnnotationUtils.hasAnnotation(typeBinding, FunctionalInterface.class.getName());
   }
 
   private JdtUtils() {}

@@ -203,6 +203,12 @@ public class Lambdas {
     void then(GenericJsFunction<Void, T> f1, GenericJsFunction<Void, Throwable> f2);
   }
 
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
+  @java.lang.FunctionalInterface
+  public interface AnotherThenable<T> {
+    void then(GenericJsFunction<Void, T> f1, GenericJsFunction<Void, Throwable> f2);
+  }
+
   // @Nullable
   private static IdentityFunction identityFunction = null;
 
@@ -237,7 +243,8 @@ public class Lambdas {
   }
 
   public static void testJsInteropLambdas() {
-    Thenable<String> rv = (f1, f2) -> f1.apply(null);
+    Thenable<String> thenable = (f1, f2) -> f1.apply(null);
+    AnotherThenable<String> otherThenable = (f1, f2) -> f1.apply(null);
     JsSupplier<Integer> stringJsSupplier = () -> 1;
     stringJsSupplier.get();
     Equals equals = stringJsSupplier;

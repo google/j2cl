@@ -215,7 +215,11 @@ public abstract class TypeDeclaration extends Node
 
   public abstract boolean isFinal();
 
+  /** Returns whether the described type is a functional interface (JLS 9.8). */
   public abstract boolean isFunctionalInterface();
+
+  /** Returns whether the described type has the @FunctionalInterface annotation. */
+  public abstract boolean isAnnotatedWithFunctionalInterface();
 
   @Memoized
   public boolean isJsFunctionImplementation() {
@@ -862,6 +866,7 @@ public abstract class TypeDeclaration extends Node
         .setCapturingEnclosingInstance(false)
         .setFinal(false)
         .setFunctionalInterface(false)
+        .setAnnotatedWithFunctionalInterface(false)
         .setJsFunctionInterface(false)
         .setJsType(false)
         .setLocal(false)
@@ -897,6 +902,8 @@ public abstract class TypeDeclaration extends Node
     public abstract Builder setFinal(boolean isFinal);
 
     public abstract Builder setFunctionalInterface(boolean isFunctionalInterface);
+
+    public abstract Builder setAnnotatedWithFunctionalInterface(boolean isAnnotated);
 
     public abstract Builder setJsFunctionInterface(boolean isJsFunctionInterface);
 

@@ -7,6 +7,7 @@ let $1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambda
 let $2 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.$2$impl');
 let $3 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.$3$impl');
 let $LambdaAdaptor$1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.$LambdaAdaptor$1$impl');
+let $Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.AnotherThenable.$Overlay$impl');
 let Lambdas_Function = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.Function$impl');
 let Functional = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.Functional$impl');
 let FunctionalInterface = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.FunctionalInterface$impl');
@@ -290,11 +291,19 @@ class Lambdas extends j_l_Object {
    */
   static m_testJsInteropLambdas__() {
     Lambdas.$clinit();
-    let rv = /**@type {!$LambdaAdaptor$1<?string>} */ (new $LambdaAdaptor$1(
-        (/** ?function(?string):?void */ f1,
-         /** ?function(Throwable):?void */ f2) => {
-          f1(null);
-        }));
+    let thenable =
+        /**@type {!$LambdaAdaptor$1<?string>} */ (new $LambdaAdaptor$1(
+            (/** ?function(?string):?void */ f1,
+             /** ?function(Throwable):?void */ f2) => {
+              f1(null);
+            }));
+    let otherThenable =
+        $Overlay
+            .$adapt__com_google_j2cl_transpiler_readable_lambdas_Lambdas_AnotherThenable_$JsFunction(
+                (/** ?function(?string):?void */ f1_1,
+                 /** ?function(Throwable):?void */ f2_1) => {
+                  f1_1(null);
+                });
     let stringJsSupplier = JsSupplier.$adapt(() => {
       return Integer.m_valueOf__int(1);
     });
@@ -340,6 +349,8 @@ class Lambdas extends j_l_Object {
         'com.google.j2cl.transpiler.readable.lambdas.Lambdas.$3$impl');
     $LambdaAdaptor$1 = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdas.Lambdas.$LambdaAdaptor$1$impl');
+    $Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.lambdas.Lambdas.AnotherThenable.$Overlay$impl');
     Lambdas_Function = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdas.Lambdas.Function$impl');
     Functional = goog.module.get(

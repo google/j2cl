@@ -86,8 +86,14 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     return getTypeDeclaration().isEnum();
   }
 
+  @Override
   public boolean isFunctionalInterface() {
     return getTypeDeclaration().isFunctionalInterface();
+  }
+
+  @Override
+  public boolean isAnnotatedWithFunctionalInterface() {
+    return getTypeDeclaration().isAnnotatedWithFunctionalInterface();
   }
 
   @Override

@@ -98,6 +98,16 @@ public abstract class TypeDescriptor extends Node
     return false;
   }
 
+  /** Returns whether the described type is a functional interface (JLS 9.8). */
+  public boolean isFunctionalInterface() {
+    return false;
+  }
+
+  /** Returns whether the described type has the @FunctionalInterface annotation. */
+  public boolean isAnnotatedWithFunctionalInterface() {
+    return false;
+  }
+
   /** Returns the type that holds the metadata for the class type */
   @Nullable
   public abstract TypeDeclaration getMetadataTypeDeclaration();

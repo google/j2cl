@@ -13,7 +13,6 @@
  */
 package com.google.j2cl.ast.visitors;
 
-import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.j2cl.ast.LambdaTypeDescriptors.createJsFunctionTypeDescriptor;
 
 import com.google.j2cl.ast.AbstractRewriter;
@@ -60,19 +59,18 @@ public class ImplementLambdaExpressions extends NormalizationPass {
     // Qualifying functional interfaces are functional interfaces that are not
     // @JsFunction nor @JsType(isNative=true)
     for (Type type : compilationUnit.getTypes()) {
-      if (type.getDeclaration().isFunctionalInterface()
-          && !type.getDeclaration().isJsFunctionInterface()
-          && !type.getDeclaration().isNative()) {
+      DeclaredTypeDescriptor typeDescriptor = type.getTypeDescriptor();
+      if (hasSharedLambdaAdaptor(typeDescriptor)) {
 
         DeclaredTypeDescriptor adaptorTypeDescriptor =
-            LambdaTypeDescriptors.createLambdaAdaptorTypeDescriptor(type.getTypeDescriptor());
+            LambdaTypeDescriptors.createLambdaAdaptorTypeDescriptor(typeDescriptor);
         DeclaredTypeDescriptor jsFunctionTypeDescriptor =
-            LambdaTypeDescriptors.createJsFunctionTypeDescriptor(type.getTypeDescriptor());
+            LambdaTypeDescriptors.createJsFunctionTypeDescriptor(typeDescriptor);
 
         // Create and add the LambdaAdaptor type for the functional interface.
         newLambdaAdaptors.add(
             createLambdaAdaptorType(
-                type.getSourcePosition(), type.getTypeDescriptor(), adaptorTypeDescriptor));
+                type.getSourcePosition(), typeDescriptor, adaptorTypeDescriptor));
 
         // Add the $adapt method to the functional interface to hide the adaptor class..
         addAdaptMethod(type, jsFunctionTypeDescriptor, adaptorTypeDescriptor);
@@ -90,9 +88,7 @@ public class ImplementLambdaExpressions extends NormalizationPass {
               return functionExpression;
             }
 
-            // TODO(b/65977332): Do not generate a per instance adaptor for native functional
-            // interfaces.
-            if (typeDescriptor.isIntersection() || typeDescriptor.isNative()) {
+            if (!hasSharedLambdaAdaptor(typeDescriptor)) {
               // For these cases create a per instance adaptor.
 
               DeclaredTypeDescriptor adaptorTypeDescriptor =
@@ -142,6 +138,28 @@ public class ImplementLambdaExpressions extends NormalizationPass {
     compilationUnit.addTypes(newLambdaAdaptors);
   }
 
+  private static boolean hasSharedLambdaAdaptor(TypeDescriptor typeDescriptor) {
+    if (typeDescriptor.isJsFunctionInterface()) {
+      // JsFunctions are plain JavaScript functions there is no Java class abstraction hence there
+      // is no need for an adaptor.
+      return false;
+    }
+
+    if (typeDescriptor.isNative() && !typeDescriptor.isAnnotatedWithFunctionalInterface()) {
+      // A native contract might be defined with a single method and an interface but that doesn't
+      // guarantee that its JavaScript definition is an interface nor that it has single method. So
+      // J2CL cannot generate lambda adaptor blindly in such cases as these well end up being
+      // type check errors in JsCompiler.
+      // J2CL requires the developer to mark the intent to use such interfaces with
+      // @FunctionalInterface to use a shared lambda adaptor. They can still be used with lambdas
+      // even if they are not marked with @FunctionalInterface where J2CL will produce a specific
+      // lambda adaptor per usage site.
+      return false;
+    }
+
+    return typeDescriptor.isFunctionalInterface();
+  }
+
   /** Adds the $adapt method to the functional interface. */
   private void addAdaptMethod(
       Type functionalInterfaceType,
@@ -150,10 +168,6 @@ public class ImplementLambdaExpressions extends NormalizationPass {
 
     DeclaredTypeDescriptor functionalInterfaceTypeTypeDescriptor =
         functionalInterfaceType.getTypeDescriptor();
-    checkArgument(
-        functionalInterfaceTypeTypeDescriptor.isFunctionalInterface()
-            && !functionalInterfaceTypeTypeDescriptor.isNative()
-            && !functionalInterfaceTypeTypeDescriptor.isJsFunctionInterface());
 
     MethodDescriptor adaptMethodDescriptor =
         getAdaptMethodDescriptor(functionalInterfaceTypeTypeDescriptor, jsFunctionTypeDescriptor);
@@ -192,7 +206,7 @@ public class ImplementLambdaExpressions extends NormalizationPass {
       DeclaredTypeDescriptor enclosingTypeDescriptor, TypeDescriptor jsFunctionTypeDescriptor) {
     return MethodDescriptor.newBuilder()
         .setName("$adapt")
-        .setJsInfo(JsInfo.RAW)
+        .setJsInfo(enclosingTypeDescriptor.isNative() ? JsInfo.RAW_OVERLAY : JsInfo.RAW)
         .setStatic(true)
         .setParameterTypeDescriptors(jsFunctionTypeDescriptor)
         .setTypeParameterTypeDescriptors(jsFunctionTypeDescriptor.getAllTypeVariables())
@@ -248,8 +262,7 @@ public class ImplementLambdaExpressions extends NormalizationPass {
         LambdaTypeDescriptors.getAdaptorForwardingMethod(adaptorTypeDescriptor);
 
     MethodDescriptor jsFunctionMethodDescriptor =
-        MethodDescriptor.newBuilder()
-            .from(jsFunctionTypeDescriptor.getSingleAbstractMethodDescriptor())
+        MethodDescriptor.Builder.from(jsFunctionTypeDescriptor.getSingleAbstractMethodDescriptor())
             .setEnclosingTypeDescriptor(jsFunctionTypeDescriptor)
             .build();
 

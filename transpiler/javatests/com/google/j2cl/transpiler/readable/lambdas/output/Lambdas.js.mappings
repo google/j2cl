@@ -190,13 +190,20 @@
 [return (GenericJsFunction<E, E>) identityFunction;] => [return /**@type {?function(E):E} */ (Lambdas.f_identityFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_);] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.identity"
 [testJsInteropLambdas] => [m_testJsInteropLambdas__]
 [testJsInteropLambdas] => [Lambdas.$clinit();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testJsInteropLambdas"
-[Thenable<String> rv = (f1, f2) -> f1.apply(null);] => [let rv = /**@type {!$LambdaAdaptor$1<?string>} */ (new $LambdaAdaptor$1((/** ?function(?string):?void */ f1, /** ?function(Throwable):?void */ f2) =>{
+[Thenable<String> thenable = (f1, f2) -> f1.apply(null);] => [let thenable = /**@type {!$LambdaAdaptor$1<?string>} */ (new $LambdaAdaptor$1((/** ?function(?string):?void */ f1, /** ?function(Throwable):?void */ f2) =>{
    f1(null);
   }));] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testJsInteropLambdas"
-[rv] => [rv] "rv"
+[thenable] => [thenable] "thenable"
 [f1] => [f1] "f1"
 [f2] => [f2] "f2"
 [f1.apply(null)] => [f1(null);] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testJsInteropLambdas>"
+[AnotherThenable<String> otherThenable = (f1, f2) -> f1.apply(null);] => [let otherThenable = $Overlay.$adapt__com_google_j2cl_transpiler_readable_lambdas_Lambdas_AnotherThenable_$JsFunction((/** ?function(?string):?void */ f1_1, /** ?function(Throwable):?void */ f2_1) =>{
+   f1_1(null);
+  });] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testJsInteropLambdas"
+[otherThenable] => [otherThenable] "otherThenable"
+[f1] => [f1_1] "f1"
+[f2] => [f2_1] "f2"
+[f1.apply(null)] => [f1_1(null);] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testJsInteropLambdas>"
 [JsSupplier<Integer> stringJsSupplier = () -> 1;] => [let stringJsSupplier = JsSupplier.$adapt(() =>{
    return Integer.m_valueOf__int(1);
   });] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testJsInteropLambdas"
