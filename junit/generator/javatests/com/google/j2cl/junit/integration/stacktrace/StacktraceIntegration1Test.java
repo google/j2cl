@@ -16,16 +16,13 @@
 package com.google.j2cl.junit.integration.stacktrace;
 
 import com.google.j2cl.junit.integration.IntegrationTestBase;
-import com.google.j2cl.junit.integration.Stacktrace;
-import com.google.j2cl.junit.integration.TestResult;
-import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 /** Integration test for stack trace deobfuscation */
 @RunWith(Parameterized.class)
-public class StacktraceIntegrationTest extends IntegrationTestBase {
+public class StacktraceIntegration1Test extends IntegrationTestBase {
 
   @Test
   public void testSimpleThrowingMethod() throws Exception {
@@ -48,17 +45,13 @@ public class StacktraceIntegrationTest extends IntegrationTestBase {
   }
 
   @Test
-  public void testRecursive() throws Exception {
-    runStacktraceTest("RecursiveStacktraceTest");
+  public void testFillInStackTrace() throws Exception {
+    runStacktraceTest("FillInStacktraceTest");
   }
 
   @Test
-  public void testNative() throws Exception {
-    if (!testMode.isJ2cl()) {
-      // test contains native js code and can't be run in pure Java
-      return;
-    }
-    runStacktraceTest("NativeStacktraceTest");
+  public void testRecursive() throws Exception {
+    runStacktraceTest("RecursiveStacktraceTest");
   }
 
   @Test
@@ -101,35 +94,5 @@ public class StacktraceIntegrationTest extends IntegrationTestBase {
   @Test
   public void testThrowsInBridgeMethod() throws Exception {
     runStacktraceTest("ThrowsInBridgeMethod");
-  }
-
-  @Test
-  public void testThrowsInNativeJs() throws Exception {
-    if (testMode == TestMode.JAVA) {
-      // uses native methods which wont work in Java
-      return;
-    }
-    runStacktraceTest("ThrowsInNativeJs");
-  }
-
-  @Test
-  public void testThrowsInJsFunction() throws Exception {
-    runStacktraceTest("ThrowsInJsFunction");
-  }
-
-  @Test
-  public void testFillInStackTrace() throws Exception {
-    runStacktraceTest("FillInStacktraceTest");
-  }
-
-  private void runStacktraceTest(String testName) throws Exception {
-    TestResult testResult =
-        newTestResultBuilder().testClassName(testName).addTestFailure("test").build();
-
-    List<String> logLines = runTest(testName);
-    assertThat(logLines).matches(testResult);
-
-    Stacktrace stacktrace = loadStackTrace(testName);
-    assertThat(logLines).matches(stacktrace);
   }
 }
