@@ -81,13 +81,6 @@ public class StacktraceIntegration1Test extends IntegrationTestBase {
 
   @Test
   public void testThrowsInClassInitializer() throws Exception {
-    if (testMode == TestMode.JAVA) {
-      // In Java we get a different stack trace which contains a ExceptionInInitializerError
-      // Java synthesizes a try catch around field initializations and keeps the
-      // original exception as the cause of the ExceptionInInitializerError exception.
-      return;
-    }
-
     runStacktraceTest("ThrowsInClassInitializer");
   }
 
