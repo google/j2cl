@@ -42,6 +42,7 @@
 set -e
 
 merge_src=true
+deploy_to_sonatype=true
 
 while [[ "$1" != "" ]]; do
   case $1 in
@@ -71,7 +72,11 @@ while [[ "$1" != "" ]]; do
                         ;;
     --no-merge-src )    merge_src=false
                         ;;
-     * )                exit 1
+    --no-deploy )       deploy_to_sonatype=false
+                        ;;
+     * )                echo "Error: Unknown flag $1"
+                        exit 1
+                        ;;
   esac
   shift
 done
@@ -135,30 +140,36 @@ create_artifact "${artifact}-javadoc.jar" ${artifact_directory}
 # Replace version in template and generate the final pom.xml
 sed -e "s/__VERSION__/${lib_version}/g" -e "s/__ARTIFACT_ID__/${artifact}/g" -e "s/__GROUP_ID__/${group_id}/g"  ${pom_template} > ${artifact_directory}/pom.xml
 
-# Use maven to sign and deploy jar, sources jar and javadocs jar to OSS sonatype
-cd ${artifact_directory}
+if [[ ${deploy_to_sonatype} == true ]]; then
+  # Use maven to sign and deploy jar, sources jar and javadocs jar to OSS sonatype
+  cd ${artifact_directory}
 
-for i in "" sources javadoc; do
-  if [[ -n "$i" ]]; then
-    classifier="-Dclassifier=$i"
-    suffix="-$i"
-  else
-    classifier=""
-    suffix=""
-  fi
-  mvn gpg:sign-and-deploy-file \
-    -Dgpg.passphrase=${gpg_passphrase} \
-    -Dfile=${artifact}${suffix}.jar \
-    -DrepositoryId=sonatype-nexus-staging \
-    -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2 \
-    -Dpackaging=jar \
-    -DartifactId=${artifact} \
-    -DgroupId=${group_id} \
-    -Dversion=${lib_version} \
-    -DpomFile=pom.xml $classifier
-done
+  for i in "" sources javadoc; do
+    if [[ -n "$i" ]]; then
+      classifier="-Dclassifier=$i"
+      suffix="-$i"
+    else
+      classifier=""
+      suffix=""
+    fi
+    mvn gpg:sign-and-deploy-file \
+      -Dgpg.passphrase=${gpg_passphrase} \
+      -Dfile=${artifact}${suffix}.jar \
+      -DrepositoryId=sonatype-nexus-staging \
+      -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2 \
+      -Dpackaging=jar \
+      -DartifactId=${artifact} \
+      -DgroupId=${group_id} \
+      -Dversion=${lib_version} \
+      -DpomFile=pom.xml $classifier
+  done
+
+  rm -rf ${artifact_directory}
+else
+  echo "Artifacts created in ${artifact_directory}"
+fi
 
 rm -rf ${javadoc_directory}
 rm -rf ${classes_directory}
 rm -rf ${srcs_directory}
-rm -rf ${artifact_directory}
+
