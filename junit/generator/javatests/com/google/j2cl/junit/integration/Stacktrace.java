@@ -71,7 +71,7 @@ public abstract class Stacktrace {
       }
 
       if (frame.startsWith(" ")) {
-        builder.addFrame(frame.trim());
+        builder.addFrame(frame.trim().replaceAll("blaze-out/.*/bin", "<blaze-out>"));
       } else {
         message = message.isEmpty() ? frame : (message + "\n" + frame);
       }

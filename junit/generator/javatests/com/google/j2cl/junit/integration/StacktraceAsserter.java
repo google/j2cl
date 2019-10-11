@@ -240,10 +240,8 @@ class StacktraceAsserter {
         if (!line.startsWith(" ") && !line.startsWith("\t")) {
           break;
         }
-        stacklines.add(line.trim());
-      }
-
-      if (line.contains(startLine)) {
+        stacklines.add(line.trim().replaceAll("blaze-out/.*/bin", "<blaze-out>"));
+      } else if (line.contains(startLine)) {
         foundStart = true;
         stacklines.add(line.trim());
       }
