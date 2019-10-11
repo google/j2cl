@@ -7,8 +7,10 @@ load(
     "j2cl_test_integration_test",
 )
 
+# Note that tests are manually sharded to avoid hitting 50 hard shard limit.
+
 j2cl_test_integration_test(
-    name = "StacktraceIntegrationTest",
+    name = "StacktraceIntegration1Test",
     extra_data = [
         "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:stacktrace-files",
     ],
@@ -19,7 +21,6 @@ j2cl_test_integration_test(
         "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:JsExceptionStacktraceTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:JsExceptionNonJsConstructorStacktraceTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:LambdaStacktraceTest",
-        "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:NativeStacktraceTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:RecursiveStacktraceTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:SimpleThrowingStacktraceTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:ThrowsInInstanceInitializer",
@@ -27,6 +28,16 @@ j2cl_test_integration_test(
         "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:ThrowsInConstructorTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:ThrowsInJsConstructorTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:ThrowsInBridgeMethod",
+    ],
+)
+
+j2cl_test_integration_test(
+    name = "StacktraceIntegration2Test",
+    extra_data = [
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:stacktrace-files",
+    ],
+    test_data = [
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:NativeStacktraceTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:ThrowsInNativeJs",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:ThrowsInJsFunction",
     ],

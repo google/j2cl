@@ -68,7 +68,18 @@ public abstract class IntegrationTestBase {
     return new TestAsserter(testMode, consoleLogs);
   }
 
-  protected Stacktrace loadStackTrace(String testName) throws IOException {
+  protected void runStacktraceTest(String testName) throws Exception {
+    TestResult testResult =
+        newTestResultBuilder().testClassName(testName).addTestFailure("test").build();
+
+    List<String> logLines = runTest(testName);
+    assertThat(logLines).matches(testResult);
+
+    Stacktrace stacktrace = loadStackTrace(testName);
+    assertThat(logLines).matches(stacktrace);
+  }
+
+  private Stacktrace loadStackTrace(String testName) throws IOException {
     return Stacktrace.parse(
         Files.asCharSource(getStackTraceFile(testName), StandardCharsets.UTF_8).read());
   }
