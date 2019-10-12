@@ -50,7 +50,7 @@ public abstract class IntegrationTestBase {
     }
   }
 
-  @Parameters
+  @Parameters(name = "{0}")
   public static Iterable<Object[]> data() {
     return Arrays.asList(
         new TestMode[] {TestMode.JAVA},
