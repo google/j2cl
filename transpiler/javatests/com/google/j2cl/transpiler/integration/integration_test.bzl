@@ -94,6 +94,8 @@ def integration_test(
             ":" + name,
             "@io_bazel_rules_closure//closure/library:testing",
         ],
+        # closure_js_test test infra is flaky so avoid noise in builds.
+        flaky = True,
         defs = J2CL_TEST_DEFS + defs,
         suppress = suppress,
         testonly = True,
