@@ -117,6 +117,15 @@ j2cl_test_integration_test_data(
     ],
 )
 
+j2cl_test_integration_test_data(
+    name = "ThrowsInJsProperty",
+    extra_defs = ["--inline_functions=false"],
+    deps = [
+        ":base",
+        "//third_party:gwt-jsinterop-annotations",
+    ],
+)
+
 java_and_j2cl_library(
     name = "base",
     srcs = [

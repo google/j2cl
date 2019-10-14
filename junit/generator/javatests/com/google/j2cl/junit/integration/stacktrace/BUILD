@@ -40,5 +40,6 @@ j2cl_test_integration_test(
         "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:NativeStacktraceTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:ThrowsInNativeJs",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:ThrowsInJsFunction",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/stacktrace/data:ThrowsInJsProperty",
     ],
 )
