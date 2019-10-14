@@ -13,8 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.google.j2cl.transpiler.integration.simpleautoboxing;
+package com.google.j2cl.transpiler.integration.autoboxing;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertEquals;
 import static com.google.j2cl.transpiler.utils.Asserts.assertThrowsClassCastException;
 import static com.google.j2cl.transpiler.utils.Asserts.assertThrowsNullPointerException;
 import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
@@ -38,24 +39,28 @@ import jsinterop.annotations.JsMethod;
 public class Main {
 
   public static void main(String[] args) {
-    testBoxByParameter();
-    testBoxByAssignment();
-    testUnboxByParameter();
-    testUnboxByAssignment();
-    testUnboxByOperator();
-    testBoxedCompoundAssignmentResult();
-    testNull();
-    testAllNumericTypes();
-    testTernary();
-    testCasts();
-    testArrayExpressions();
-    testConditionals();
-    testCompoundAssignmentBoxUnboxSequence();
-    testUnboxingFromTypeVariable();
-    testUnboxingFromIntersectionType();
+    testBox_byParameter();
+    testBox_byAssignment();
+    testBox_byCompoundAssignment();
+    testUnbox_byParameter();
+    testUnbox_byAssignment();
+    testUnbox_byOperator();
+    testUnbox_fromTypeVariable();
+    testUnbox_fromIntersectionType();
+    testUnbox_conditionals();
+    testUnbox_switchExpression();
+    testAutoboxing_arithmetic();
+    testAutoboxing_ternary();
+    testAutoboxing_casts();
+    testAutoboxing_arrayExpressions();
+    testAutoboxing_compoundAssignmentSequence();
+    testSideEffects_nestedIncrement();
+    testSideEffects_compoundAssignment();
+    testSideEffects_incrementDecrement();
+    testNoBoxing_null();
   }
 
-  private static void testBoxByParameter() {
+  private static void testBox_byParameter() {
     byte b = (byte) 100;
     double d = 1111.0;
     float f = 1111.0f;
@@ -75,6 +80,15 @@ public class Main {
     assertTrue((takesObjectAndReturnsPrimitiveDouble(3) == 3));
     assertTrue((sumWithoutBoxing(1, 1.5, (byte) 1, (short) 1, (float) 1) == 5.5));
     assertTrue((sumWithoutBoxingJsVarargs(1, 1.5, (byte) 1, (short) 1, (float) 1) == 5.5));
+
+    assertTrue(boxToObject((byte) 100) instanceof Byte);
+    assertTrue(boxToObject(1111.0) instanceof Double);
+    assertTrue(boxToObject(1111.0f) instanceof Float);
+    assertTrue(boxToObject(1111) instanceof Integer);
+    assertTrue(boxToObject(1111L) instanceof Long);
+    assertTrue(boxToObject((short) 100) instanceof Short);
+    assertTrue(boxToObject(true) instanceof Boolean);
+    assertTrue(boxToObject('a') instanceof Character);
   }
 
   private static double takesObjectAndReturnsPrimitiveDouble(@DoNotAutobox Object o) {
@@ -131,7 +145,11 @@ public class Main {
     return c.charValue();
   }
 
-  private static void testBoxByAssignment() {
+  private static Object boxToObject(Object o) {
+    return o;
+  }
+
+  private static void testBox_byAssignment() {
     byte b = (byte) 100;
     double d = 1111.0;
     float f = 1111.0f;
@@ -156,9 +174,26 @@ public class Main {
     assertTrue((boxS.shortValue() == s));
     assertTrue((boxBool.booleanValue() == bool));
     assertTrue((boxC.charValue() == c));
+
+    Object o = (byte) 100;
+    assertTrue(o instanceof Byte);
+    o = 1111.0;
+    assertTrue(o instanceof Double);
+    o = 1111.0f;
+    assertTrue(o instanceof Float);
+    o = 1111;
+    assertTrue(o instanceof Integer);
+    o = 1111L;
+    assertTrue(o instanceof Long);
+    o = (short) 100;
+    assertTrue(o instanceof Short);
+    o = true;
+    assertTrue(o instanceof Boolean);
+    o = 'a';
+    assertTrue(o instanceof Character);
   }
 
-  private static void testBoxedCompoundAssignmentResult() {
+  private static void testBox_byCompoundAssignment() {
     Integer i = 10;
     assertIsBoxedInteger(i++);
     assertIsBoxedInteger(--i);
@@ -166,7 +201,7 @@ public class Main {
     assertTrue((--i).intValue() == 10);
   }
 
-  private static void testUnboxByParameter() {
+  private static void testUnbox_byParameter() {
     Byte boxB = new Byte((byte) 100);
     Double boxD = new Double(1111.0);
     Float boxF = new Float(1111.0f);
@@ -231,7 +266,7 @@ public class Main {
     return new Character(a);
   }
 
-  private static void testUnboxByAssignment() {
+  private static void testUnbox_byAssignment() {
     Byte boxB = new Byte((byte) 100);
     Double boxD = new Double(1111.0);
     Float boxF = new Float(1111.0f);
@@ -276,7 +311,7 @@ public class Main {
     assertTrue((d == boxC.charValue()));
   }
 
-  private static void testUnboxByOperator() {
+  private static void testUnbox_byOperator() {
     // non side effect prefix operations
     Integer i = new Integer(1111);
     i = +i;
@@ -417,7 +452,7 @@ public class Main {
 
   private static int foo = 0;
 
-  private static void testNull() {
+  private static void testNoBoxing_null() {
     // Avoiding a "condition always evaluates to true" error in JSComp type checking.
     Object maybeNull = foo == 0 ? null : new Object();
 
@@ -431,7 +466,7 @@ public class Main {
     assertTrue(l == maybeNull);
   }
 
-  private static void testAllNumericTypes() {
+  private static void testAutoboxing_arithmetic() {
     Byte b = 0;
     Character c = (char) 0;
     Short s = 0;
@@ -462,7 +497,7 @@ public class Main {
     assertTrue(b == -55);
   }
 
-  private static void testTernary() {
+  private static void testAutoboxing_ternary() {
     Integer boxedValue = new Integer(1);
     int primitiveValue = 10;
 
@@ -505,7 +540,7 @@ public class Main {
   }
 
   @SuppressWarnings("cast")
-  private static void testCasts() {
+  private static void testAutoboxing_casts() {
     // Box
     Integer boxedInteger = (Integer) 100;
     // Unbox
@@ -519,7 +554,7 @@ public class Main {
   }
 
   @SuppressWarnings("cast")
-  private static void testArrayExpressions() {
+  private static void testAutoboxing_arrayExpressions() {
     Integer boxedInteger1 = new Integer(100);
     Integer boxedInteger2 = new Integer(50);
 
@@ -540,7 +575,7 @@ public class Main {
    * devirtualized Boolean.
    */
   @SuppressWarnings("LoopConditionChecker")
-  private static void testConditionals() {
+  private static void testUnbox_conditionals() {
     Boolean boxedFalseBoolean = new Boolean(false);
 
     if (boxedFalseBoolean) {
@@ -568,16 +603,6 @@ public class Main {
     }
 
     Object unusedBlah = boxedFalseBoolean ? doFail() : doNothing();
-
-    // This one actually matters since we don't devirtualize Integer.
-    switch (new Integer(100)) {
-      case 100:
-        // fine
-        break;
-      default:
-        // If unboxing is missing we'll arrive here.
-        fail();
-    }
 
     Boolean b = null;
 
@@ -613,7 +638,18 @@ public class Main {
         });
   }
 
-  private static void testCompoundAssignmentBoxUnboxSequence() {
+  private static void testUnbox_switchExpression() {
+    switch (new Integer(100)) {
+      case 100:
+        // fine
+        break;
+      default:
+        // If unboxing is missing we'll arrive here.
+        fail();
+    }
+  }
+
+  private static void testAutoboxing_compoundAssignmentSequence() {
     Integer boxI = 1;
     int i = 2;
     boxI /* 6 */ += i /* 5 */ += boxI /* 3 */ += i /* 2*/;
@@ -622,7 +658,7 @@ public class Main {
     assertTrue(boxI == 6);
   }
 
-  private static <T extends Long> void testUnboxingFromTypeVariable() {
+  private static <T extends Long> void testUnbox_fromTypeVariable() {
     T n = (T) (Long) 10L;
     // Auto unboxing from variable n.
     long l = n;
@@ -641,7 +677,7 @@ public class Main {
     assertTrue(l == 11L);
   }
 
-  private static <T extends Long & Comparable<Long>> void testUnboxingFromIntersectionType() {
+  private static <T extends Long & Comparable<Long>> void testUnbox_fromIntersectionType() {
     T n = (T) (Long) 10L;
     // Auto unboxing from variable n.
     long l = n;
@@ -660,6 +696,120 @@ public class Main {
     assertTrue(l == 11L);
   }
 
+  private static class SideEffectTester {
+    private Boolean booleanField = new Boolean(true);
+    private Double doubleField = new Double(1111.1);
+    private Integer integerField = new Integer(1111);
+    private Long longField = new Long(1111L);
+
+    private int sideEffectCount;
+
+    private SideEffectTester causeSideEffect() {
+      sideEffectCount++;
+      return this;
+    }
+
+    private SideEffectTester fluentAssertEquals(Object expectedValue, Object testValue) {
+      assertEquals(expectedValue, testValue);
+      return this;
+    }
+  }
+
+  /** Test increment and decrement operators on boxing values. */
+  private static void testSideEffects_incrementDecrement() {
+    SideEffectTester tester = new SideEffectTester();
+
+    assertTrue(tester.sideEffectCount == 0);
+
+    assertEquals(new Double(1111.1), tester.causeSideEffect().doubleField++);
+    assertTrue(tester.doubleField.equals(new Double(1112.1)));
+    assertTrue(tester.sideEffectCount == 1);
+    assertEquals(new Integer(1111), tester.causeSideEffect().integerField++);
+    assertTrue(tester.integerField.equals(new Integer(1112)));
+    assertTrue(tester.sideEffectCount == 2);
+    assertEquals(new Long(1111L), tester.causeSideEffect().longField++);
+    assertTrue(tester.longField.equals(new Long(1112L)));
+    assertTrue(tester.sideEffectCount == 3);
+
+    assertEquals(new Double(1112.1), tester.causeSideEffect().doubleField--);
+    assertTrue(tester.doubleField.equals(new Double(1111.1)));
+    assertTrue(tester.sideEffectCount == 4);
+    assertEquals(new Integer(1112), tester.causeSideEffect().integerField--);
+    assertTrue(tester.integerField.equals(new Integer(1111)));
+    assertTrue(tester.sideEffectCount == 5);
+    assertEquals(new Long(1112L), tester.causeSideEffect().longField--);
+    assertTrue(tester.longField.equals(new Long(1111L)));
+    assertTrue(tester.sideEffectCount == 6);
+
+    assertEquals(new Double(1112.1), ++tester.causeSideEffect().doubleField);
+    assertTrue(tester.doubleField.doubleValue() == 1112.1);
+    assertTrue(tester.sideEffectCount == 7);
+    assertEquals(new Integer(1112), ++tester.causeSideEffect().integerField);
+    assertTrue(tester.integerField.intValue() == 1112);
+    assertTrue(tester.sideEffectCount == 8);
+    assertEquals(new Long(1112L), ++tester.causeSideEffect().longField);
+    assertTrue(tester.longField.longValue() == 1112L);
+    assertTrue(tester.sideEffectCount == 9);
+
+    assertEquals(new Double(1111.1), --tester.causeSideEffect().doubleField);
+    assertTrue(tester.doubleField.doubleValue() == 1111.1);
+    assertTrue(tester.sideEffectCount == 10);
+    assertEquals(new Integer(1111), --tester.causeSideEffect().integerField);
+    assertTrue(tester.integerField.intValue() == 1111);
+    assertTrue(tester.sideEffectCount == 11);
+    assertEquals(new Long(1111L), --tester.causeSideEffect().longField);
+    assertTrue(tester.longField.longValue() == 1111L);
+    assertTrue(tester.sideEffectCount == 12);
+  }
+
+  /** Test compound assignment. */
+  private static void testSideEffects_compoundAssignment() {
+    SideEffectTester tester = new SideEffectTester();
+
+    tester.causeSideEffect().doubleField += 10.0;
+    assertTrue(tester.doubleField.doubleValue() == 1121.1);
+    assertTrue(tester.sideEffectCount == 1);
+    tester.causeSideEffect().integerField += 10;
+    assertTrue(tester.integerField.intValue() == 1121);
+    assertTrue(tester.sideEffectCount == 2);
+    tester.causeSideEffect().longField += 10L;
+    assertTrue(tester.longField.longValue() == 1121L);
+    assertTrue(tester.sideEffectCount == 3);
+    tester.causeSideEffect().booleanField &= false;
+    assertTrue(!tester.booleanField.booleanValue());
+  }
+
+  /** Test nested increments. */
+  private static void testSideEffects_nestedIncrement() {
+    SideEffectTester tester = new SideEffectTester();
+
+    tester.fluentAssertEquals(
+        new Long(1113L),
+        tester.fluentAssertEquals(
+                new Long(1112L),
+                tester.fluentAssertEquals(new Long(1111L), tester.longField++).longField++)
+            .longField++);
+
+    tester
+        .fluentAssertEquals(new Integer(1111), tester.integerField++)
+        .fluentAssertEquals(new Integer(1112), tester.integerField++)
+        .fluentAssertEquals(new Integer(1113), tester.integerField++);
+
+    tester
+        .fluentAssertEquals(
+            new Double(1113.1),
+            tester
+                .fluentAssertEquals(new Double(1111.1), tester.doubleField++)
+                .fluentAssertEquals(new Double(1112.1), tester.doubleField++)
+                .doubleField++)
+        .fluentAssertEquals(
+            new Double(1116.1),
+            tester
+                .fluentAssertEquals(new Double(1114.1), tester.doubleField++)
+                .fluentAssertEquals(new Double(1115.1), tester.doubleField++)
+                .doubleField++);
+  }
+
   private static Object doFail() {
     fail();
     return null;
@@ -672,5 +822,4 @@ public class Main {
   private static void assertIsBoxedInteger(@DoNotAutobox Object object) {
     assertTrue(object instanceof Integer);
   }
-
 }
