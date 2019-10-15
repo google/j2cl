@@ -13,8 +13,9 @@
 // limitations under the License.
 
 /**
- * This file provides the @defines for JRE configuration options.
- * See InternalPreconditions.java for details.
+ * This file provides the @defines for JRE configuration options. See
+ * https://github.com/google/j2cl/blob/master/docs/best-practices.md#jre-configuration
+ * for documentation.
  */
 
 goog.provide('jre');
