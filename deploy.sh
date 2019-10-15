@@ -74,6 +74,9 @@ while [[ "$1" != "" ]]; do
                         ;;
     --no-deploy )       deploy_to_sonatype=false
                         ;;
+    --artifact_dir )    shift
+                        artifact_directory=$1
+                        ;;
      * )                echo "Error: Unknown flag $1"
                         exit 1
                         ;;
@@ -82,7 +85,7 @@ while [[ "$1" != "" ]]; do
 done
 
 
-if [[ -z ${gpg_passphrase} ]]; then
+if [[ ${deploy_to_sonatype} == true ]] && [[ -z ${gpg_passphrase} ]]; then
   # As this script can be called in a for loop for releasing several artifacts at once, the caller
   # script can pass the gpg_passphrase as argument to avoid to ask several time the user for the
   # passphrase.
@@ -99,7 +102,9 @@ create_artifact() {
 classes_directory=$(mktemp -d)
 srcs_directory=$(mktemp -d)
 javadoc_directory=$(mktemp -d)
-artifact_directory=$(mktemp -d)
+if [[ -z ${artifact_directory} ]]; then
+  artifact_directory=$(mktemp -d)
+fi
 
 cd ${srcs_directory}
 
