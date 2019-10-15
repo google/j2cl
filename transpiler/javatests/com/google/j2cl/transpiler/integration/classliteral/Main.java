@@ -16,7 +16,6 @@
 package com.google.j2cl.transpiler.integration.classliteral;
 
 import static com.google.j2cl.transpiler.utils.Asserts.assertEquals;
-import static com.google.j2cl.transpiler.utils.Asserts.assertFalse;
 import static com.google.j2cl.transpiler.utils.Asserts.assertNotSame;
 import static com.google.j2cl.transpiler.utils.Asserts.assertSame;
 import static com.google.j2cl.transpiler.utils.Asserts.assertThrowsNullPointerException;
@@ -33,17 +32,15 @@ public class Main {
     testClass();
     testInterface();
     testPrimitive();
-    testPrimitivesUnboxed();
     testEnum();
     testEnumSubclass();
     testJsEnum();
     testArray();
     testNative();
-    // TODO(b/63081128): Enable the test.
-    // testExtendsNative();
+    testExtendsNative();
     testGeneric();
-    testClinit();
-    testMisc();
+    testClinitNotTriggered();
+    testGetClassOnClass();
     testLambda();
     testLambdaIntersectionType();
   }
@@ -76,10 +73,7 @@ public class Main {
     assertEquals(
         "class com.google.j2cl.transpiler.integration.classliteral.Main$Foo", Foo.class.toString());
 
-    assertFalse("Foo.class.isArray() returned true", Foo.class.isArray());
-    assertFalse("Foo.class.isEnum() returned true", Foo.class.isEnum());
-    assertFalse("Foo.class.isPrimitive() returned true", Foo.class.isPrimitive());
-    assertFalse("Foo.class.isInterface() returned true", Foo.class.isInterface());
+    assertLiteralType("Foo.class", LiteralType.CLASS, Foo.class);
   }
 
   private interface IFoo {}
@@ -99,10 +93,7 @@ public class Main {
         "interface com.google.j2cl.transpiler.integration.classliteral.Main$IFoo",
         IFoo.class.toString());
 
-    assertFalse("IFoo.class.isArray() returned true", IFoo.class.isArray());
-    assertFalse("IFoo.class.isEnum() returned true", IFoo.class.isEnum());
-    assertFalse("IFoo.class.isPrimitive() returned true", IFoo.class.isPrimitive());
-    assertTrue("IFoo.class.isInterface() returned false", IFoo.class.isInterface());
+    assertLiteralType("IFoo.class", LiteralType.INTERFACE, IFoo.class);
   }
 
   private static void testPrimitive() {
@@ -113,17 +104,7 @@ public class Main {
     assertEquals("int", int.class.getSimpleName());
     assertEquals("int", int.class.toString());
 
-    assertFalse("int.class.isArray() returned true", int.class.isArray());
-    assertFalse("int.class.isEnum() returned true", int.class.isEnum());
-    assertTrue("int.class.isPrimitive() returned false", int.class.isPrimitive());
-    assertFalse("int.class.isInterface() returned true", int.class.isInterface());
-  }
-
-  private static void testPrimitivesUnboxed() {
-    Object b = true;
-    Object d = 0.1;
-    assertEquals(Boolean.class, b.getClass());
-    assertEquals(Double.class, d.getClass());
+    assertLiteralType("int.class", LiteralType.PRIMITIVE, int.class);
   }
 
   private enum Bar {
@@ -148,10 +129,7 @@ public class Main {
         "class com.google.j2cl.transpiler.integration.classliteral.Main$Bar",
         o.getClass().toString());
 
-    assertFalse("Bar.BAR.class.isArray() returned true", o.getClass().isArray());
-    assertTrue("Bar.BAR.class.isEnum() returned false", o.getClass().isEnum());
-    assertFalse("Bar.BAR.class.isPrimitive() returned true", o.getClass().isPrimitive());
-    assertFalse("Bar.BAR.class.isInterface() returned true", o.getClass().isInterface());
+    assertLiteralType("Bar.BAR.getClass()", LiteralType.ENUM, o.getClass());
   }
 
   private static void testEnumSubclass() {
@@ -165,10 +143,7 @@ public class Main {
         "class com.google.j2cl.transpiler.integration.classliteral.Main$Bar$1",
         o.getClass().toString());
 
-    assertFalse("Bar.BAZ.class.isArray() returned true", o.getClass().isArray());
-    assertFalse("Bar.BAZ.class.isEnum() returned true", o.getClass().isEnum());
-    assertFalse("Bar.BAZ.class.isPrimitive() returned true", o.getClass().isPrimitive());
-    assertFalse("Bar.BAZ.class.isInterface() returned true", o.getClass().isInterface());
+    assertLiteralType("Bar.BAZ.getClass()", LiteralType.CLASS, o.getClass());
   }
 
   @JsEnum
@@ -195,10 +170,7 @@ public class Main {
         "class com.google.j2cl.transpiler.integration.classliteral.Main$MyJsEnum",
         o.getClass().toString());
 
-    assertFalse("MyJsEnum.VALUE.class.isArray() returned true", o.getClass().isArray());
-    assertFalse("MyJsEnum.VALUE.class.isEnum() returned true", o.getClass().isEnum());
-    assertFalse("MyJsEnum.VALUE.class.isPrimitive() returned true", o.getClass().isPrimitive());
-    assertFalse("MyJsEnum.VALUE.class.isInterface() returned true", o.getClass().isInterface());
+    assertLiteralType("MyJsEnum.VALUE.class", LiteralType.CLASS, o.getClass());
   }
 
   private static void testArray() {
@@ -214,10 +186,7 @@ public class Main {
     assertEquals(Foo.class.getSimpleName() + "[]", o.getClass().getSimpleName());
     assertEquals("class [L" + Foo.class.getName() + ";", o.getClass().toString());
 
-    assertTrue("Foo[].class.isArray() returned false", o.getClass().isArray());
-    assertFalse("Foo[].class.isEnum() returned true", o.getClass().isEnum());
-    assertFalse("Foo[].class.isPrimitive() returned true", o.getClass().isPrimitive());
-    assertFalse("Foo[].class.isInterface() returned true", o.getClass().isInterface());
+    assertLiteralType("Foo[].class", LiteralType.ARRAY, o.getClass());
 
     Foo[][] f = new Foo[3][3];
     assertSame(Foo[][].class, f.getClass());
@@ -257,7 +226,12 @@ public class Main {
     assertEquals(
         "com.google.j2cl.transpiler.integration.classliteral.Main$TypeExtendsNativeClass",
         TypeExtendsNativeClass.class.getName());
-    assertEquals(NativeClass.class, TypeExtendsNativeClass.class.getSuperclass());
+
+    // TODO(b/63081128): Uncomment when fixed.
+    // assertEquals(NativeClass.class, TypeExtendsNativeClass.class.getSuperclass());
+
+    assertLiteralType(
+        "TypeExtendsNativeClass.class", LiteralType.CLASS, TypeExtendsNativeClass.class);
   }
 
   private interface SomeFunctionalInterface {
@@ -288,12 +262,7 @@ public class Main {
     SomeOtherFunctionalInterface lambdaWithDifferentInterface = () -> {};
     assertNotSame(originalLambda.getClass(), lambdaWithDifferentInterface.getClass());
 
-    assertFalse("lambda.getClass().isArray() returned true", originalLambda.getClass().isArray());
-    assertFalse("lambda.getClass().isEnum() returned true", originalLambda.getClass().isEnum());
-    assertFalse(
-        "lambda.getClass().isPrimitive() returned true", originalLambda.getClass().isPrimitive());
-    assertFalse(
-        "lambda.getClass().isInterface() returned true", originalLambda.getClass().isInterface());
+    assertLiteralType("lambda.getClass()", LiteralType.CLASS, originalLambda.getClass());
   }
 
   private interface SomeFunctionalInterfaceWithParameter {
@@ -314,15 +283,7 @@ public class Main {
     assertNotSame(
         intersectionLambda.getClass(), lambdaWithSameInterfaceAsOriginalLambda.getClass());
 
-    assertFalse(
-        "lambda.getClass().isArray() returned true", intersectionLambda.getClass().isArray());
-    assertFalse("lambda.getClass().isEnum() returned true", intersectionLambda.getClass().isEnum());
-    assertFalse(
-        "lambda.getClass().isPrimitive() returned true",
-        intersectionLambda.getClass().isPrimitive());
-    assertFalse(
-        "lambda.getClass().isInterface() returned true",
-        intersectionLambda.getClass().isInterface());
+    assertLiteralType("lambda.getClass()", LiteralType.CLASS, intersectionLambda.getClass());
   }
 
   private static class GenericClass<T> {}
@@ -334,6 +295,8 @@ public class Main {
     assertSame(GenericClass.class, g.getClass());
     assertEquals("Main$GenericClass", GenericClass.class.getSimpleName());
     assertEquals("Main$GenericInterface", GenericInterface.class.getSimpleName());
+
+    assertLiteralType("generic.getClass()", LiteralType.CLASS, g.getClass());
   }
 
   private static boolean clinitCalled = false;
@@ -344,14 +307,14 @@ public class Main {
     }
   }
 
-  private static void testClinit() {
+  private static void testClinitNotTriggered() {
     assertTrue(clinitCalled == false);
     assertTrue(ClinitTest.class != null);
     assertTrue(clinitCalled == false);
   }
 
   @SuppressWarnings("GetClassOnClass")
-  private static void testMisc() {
+  private static void testGetClassOnClass() {
     assertSame(Class.class, Object.class.getClass());
     assertSame(Class.class, int.class.getClass());
     assertSame(Class.class, Object[].class.getClass());
@@ -361,5 +324,29 @@ public class Main {
           Object nullObject = null;
           nullObject.getClass();
         });
+  }
+
+  private enum LiteralType {
+    CLASS,
+    INTERFACE,
+    ARRAY,
+    PRIMITIVE,
+    ENUM
+  }
+
+  private static void assertLiteralType(
+      String messagePrefix, LiteralType expectedType, Class<?> literal) {
+
+    assertEquals(
+        messagePrefix + ".isInterface()",
+        expectedType == LiteralType.INTERFACE,
+        literal.isInterface());
+    assertEquals(messagePrefix + ".isEnum()", expectedType == LiteralType.ENUM, literal.isEnum());
+    assertEquals(
+        messagePrefix + ".isPrimitive()",
+        expectedType == LiteralType.PRIMITIVE,
+        literal.isPrimitive());
+    assertEquals(
+        messagePrefix + ".isArray()", expectedType == LiteralType.ARRAY, literal.isArray());
   }
 }

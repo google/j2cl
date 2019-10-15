@@ -16,7 +16,6 @@
 package com.google.j2cl.transpiler.integration.classliteralstripped;
 
 import static com.google.j2cl.transpiler.utils.Asserts.assertEquals;
-import static com.google.j2cl.transpiler.utils.Asserts.assertFalse;
 import static com.google.j2cl.transpiler.utils.Asserts.assertNotEquals;
 import static com.google.j2cl.transpiler.utils.Asserts.assertSame;
 import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
@@ -49,6 +48,7 @@ public class Main {
 
     assertClass(Foo.class);
     assertSame(Object.class, Foo.class.getSuperclass());
+    assertNonArrayLiteralType("Foo.class", Foo.class);
   }
 
   interface IFoo {}
@@ -58,11 +58,13 @@ public class Main {
     assertSame(null, IFoo.class.getSuperclass());
 
     assertClass(Iterable.class);
+    assertNonArrayLiteralType("Iterable.class", Iterable.class);
   }
 
   private static void testPrimitive() {
     assertClass(int.class);
     assertSame(null, int.class.getSuperclass());
+    assertNonArrayLiteralType("int.class", int.class);
   }
 
   enum Bar {
@@ -75,11 +77,14 @@ public class Main {
     assertSame(Enum.class, Bar.class.getSuperclass());
 
     assertSame(Bar.class, Bar.BAR.getClass());
+    assertNonArrayLiteralType("Bar.BAR.getClass()", Bar.BAR.getClass());
+    assertNonArrayLiteralType("Bar.BAZ.getClass()", Bar.BAZ.getClass());
   }
 
   private static void testEnumSubclass() {
     assertClass(Bar.BAZ.getClass());
     assertSame(Bar.class, Bar.BAZ.getClass().getSuperclass());
+    assertNonArrayLiteralType("Iterable.class", Iterable.class);
   }
 
   private static void testArray() {
@@ -94,10 +99,7 @@ public class Main {
     assertEquals(Foo.class.getSimpleName() + "[]", Foo[].class.getSimpleName());
     assertEquals("class [L" + Foo.class.getName() + ";", Foo[].class.toString());
 
-    assertTrue("Foo[].class.isArray() returned false", Foo[].class.isArray());
-    assertFalse("Foo[].class.isEnum() returned true", Foo[].class.isEnum());
-    assertFalse("Foo[].class.isPrimitive() returned true", Foo[].class.isPrimitive());
-    assertFalse("Foo[].class.isInterface() returned true", Foo[].class.isInterface());
+    assertArrayLiteralType("Foo[].class", Foo[].class);
   }
 
   @JsEnum
@@ -111,10 +113,7 @@ public class Main {
     assertSame(MyJsEnum.class, MyJsEnum.VALUE.getClass());
     assertSame(null, o.getClass().getSuperclass());
 
-    assertFalse("MyJsEnum.VALUE.class.isArray() returned true", o.getClass().isArray());
-    assertFalse("MyJsEnum.VALUE.class.isEnum() returned true", o.getClass().isEnum());
-    assertFalse("MyJsEnum.VALUE.class.isPrimitive() returned true", o.getClass().isPrimitive());
-    assertFalse("MyJsEnum.VALUE.class.isInterface() returned true", o.getClass().isInterface());
+    assertNonArrayLiteralType("MyJsEnum.VALUE.class", o.getClass());
   }
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
@@ -147,11 +146,23 @@ public class Main {
     }
     seenNames[seenNames.length + 1] = clazz.getName();
 
-    assertFalse("isArray() returned true", clazz.isArray());
+    assertNonArrayLiteralType("<class>", clazz);
+  }
+
+  private static void assertNonArrayLiteralType(String messagePrefix, Class<?> literal) {
+    assertLiteralType(messagePrefix, false, literal);
+  }
+
+  private static void assertArrayLiteralType(String messagePrefix, Class<?> literal) {
+    assertLiteralType(messagePrefix, true, literal);
+  }
+
+  private static void assertLiteralType(String messagePrefix, boolean isArray, Class<?> literal) {
+    assertEquals(messagePrefix + ".isArray()", isArray, literal.isArray());
 
     // When class metatadata stripped, all following queries return false.
-    assertFalse("isEnum() returned true", clazz.isEnum());
-    assertFalse("isPrimitive() returned true", clazz.isPrimitive());
-    assertFalse("isInterface() returned true", clazz.isInterface());
+    assertEquals(messagePrefix + ".isInterface()", false, literal.isInterface());
+    assertEquals(messagePrefix + ".isEnum()", false, literal.isEnum());
+    assertEquals(messagePrefix + ".isPrimitive()", false, literal.isPrimitive());
   }
 }
