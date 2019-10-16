@@ -93,7 +93,7 @@ class Objects {
     Objects.$clinit();
 
     // We only special case 'toString' for arrays to enforce the Java behavior.
-    if (obj instanceof Array) {
+    if (Array.isArray(obj)) {
       return Arrays.m_toString__java_lang_Object(obj);
     }
 
@@ -119,7 +119,7 @@ class Objects {
       return Class.$get(Boolean);
     } else if (type == 'string') {
       return Class.$get(String);
-    } else if (obj instanceof Array) {
+    } else if (Array.isArray(obj)) {
       return Arrays.m_getClass__java_lang_Object(obj);
     } else if (obj instanceof JavaLangObject) {
       // TODO(b/112664631): use of .constructor on JavaLangObject instances
