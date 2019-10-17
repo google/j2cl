@@ -117,7 +117,10 @@ public class Main {
   }
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
-  interface NativeType {}
+  interface NativeInterface {}
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
+  private static class NativeClass {}
 
   @JsFunction
   interface NativeFunction {
@@ -125,8 +128,9 @@ public class Main {
   }
 
   private static void testNative() {
-    assertClass(NativeType.class);
+    assertClass(NativeInterface.class);
     assertClass(NativeFunction.class);
+    assertClass(NativeClass.class);
   }
 
   private static void assertClassName(String name, String canonicalName, String simpleName) {

@@ -312,6 +312,7 @@ public class TypeDescriptors {
     EXCEPTIONS("vmbootstrap", "Exceptions"),
     LONG_UTILS("vmbootstrap", "LongUtils"),
     JAVA_SCRIPT_OBJECT("vmbootstrap", "JavaScriptObject"),
+    JAVA_SCRIPT_INTERFACE("vmbootstrap", "JavaScriptInterface"),
     JAVA_SCRIPT_FUNCTION("vmbootstrap", "JavaScriptFunction"),
     NATIVE_EQUALITY("nativebootstrap", "Equality"),
     NATIVE_UTIL("nativebootstrap", "Util"),

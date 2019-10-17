@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.integration.jsinteroptests;
 
 import static com.google.j2cl.transpiler.utils.Asserts.assertEquals;
 import static com.google.j2cl.transpiler.utils.Asserts.assertFalse;
+import static com.google.j2cl.transpiler.utils.Asserts.assertNotEquals;
 import static com.google.j2cl.transpiler.utils.Asserts.assertNotNull;
 import static com.google.j2cl.transpiler.utils.Asserts.assertNull;
 import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
@@ -67,8 +68,18 @@ public class NativeJsTypeTest {
 
   private static void testClassLiterals() {
     assertEquals("<native object>", MyNativeJsType.class.getName());
-    assertEquals(MyNativeJsType.class, MyNativeJsType.class);
-    assertEquals(MyNativeJsType.class, MyNativeJsTypeInterface.class);
+    // Native classes have all the same class literal.
+    assertEquals(MyNativeJsType.class, NativeObject.class);
+
+    // native interfaces and native classes have different class literals to satisfy Java semantics
+    // with respect to Class.isInterface etc.
+    assertNotEquals(MyNativeJsType.class, MyNativeJsTypeInterface.class);
+    // Native interfaces have all the same class literal.
+    assertEquals(
+        MyNativeJsTypeInterface.class, MyNativeJsTypeInterfaceOnlyOneConcreteImplementor.class);
+
+    // Native arrays have all the same class literal, and is Object[].class.
+    assertEquals(Object[].class, MyNativeJsType[].class);
     assertEquals(MyNativeJsType[].class, MyNativeJsType[].class);
     assertEquals(MyNativeJsType[].class, MyNativeJsTypeInterface[].class);
     assertEquals(MyNativeJsType[].class, MyNativeJsType[][].class);

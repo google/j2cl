@@ -24,6 +24,7 @@ import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.RuntimeMethods;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
+import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.TypeLiteral;
 
 /** Replaces type literal expression with the corresponding method call to the runtime. */
@@ -47,14 +48,18 @@ public class NormalizeTypeLiterals extends NormalizationPass {
     }
 
     if (literalTypeDescriptor.isNative()) {
-      // class literal of native JsType is JavaScriptObject.class
-      return convertTypeLiteral(TypeDescriptors.BootstrapType.JAVA_SCRIPT_OBJECT.getDescriptor());
+      // class literals of native JsTypes.
+      BootstrapType proxyType =
+          literalTypeDescriptor.isInterface()
+              ? BootstrapType.JAVA_SCRIPT_INTERFACE
+              : BootstrapType.JAVA_SCRIPT_OBJECT;
+      return convertTypeLiteral(proxyType.getDescriptor());
     }
 
     if (literalTypeDescriptor.isJsFunctionInterface()
         || literalTypeDescriptor.isJsFunctionImplementation()) {
       // class literal for JsFunction interfaces and implementations.
-      return convertTypeLiteral(TypeDescriptors.BootstrapType.JAVA_SCRIPT_FUNCTION.getDescriptor());
+      return convertTypeLiteral(BootstrapType.JAVA_SCRIPT_FUNCTION.getDescriptor());
     }
     return convertTypeLiteral(literalTypeDescriptor);
   }

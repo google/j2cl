@@ -1,4 +1,4 @@
-// Copyright 2017 Google Inc.
+// Copyright 2019 Google Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,15 +17,14 @@
  *
  * @suppress {extraRequire, lateProvide, unusedLocalVariables}
  */
-goog.module('vmbootstrap.JavaScriptObject');
+goog.module('vmbootstrap.JavaScriptInterface');
 
 
 // Imports headers for both eager and lazy dependencies to ensure that
 // all files are included in the dependency tree.
 const _$Util = goog.require('nativebootstrap.Util');
-const J_L_Object = goog.require('java.lang.Object$impl');
 
 
 // Re-exports the implementation.
-const JavaScriptObject = goog.require('vmbootstrap.JavaScriptObject$impl');
-exports = JavaScriptObject;
+const JavaScriptInterface = goog.require('vmbootstrap.JavaScriptInterface$impl');
+exports = JavaScriptInterface;

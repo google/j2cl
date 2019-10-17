@@ -19,13 +19,14 @@ goog.module('vmbootstrap.JavaScriptObject$impl');
 
 
 const $Util = goog.require('nativebootstrap.Util$impl');
+const JavaLangObject = goog.require('java.lang.Object$impl');
 
 
 /**
  * Provides class literal and Object methods implementations for native
  * JS objects.
  */
-class JavaScriptObject {}
+class JavaScriptObject extends JavaLangObject {}
 
 $Util.$setClassMetadata(JavaScriptObject, '<native object>');
 

@@ -205,16 +205,20 @@ public class Main {
   private static class NativeClass {}
 
   private static void testNative() {
-    assertEquals("<native function>", NativeFunction.class.getName());
-    assertEquals(null, NativeFunction.class.getSuperclass());
+    Class<?> clazz = NativeFunction.class;
+    assertEquals("<native function>", clazz.getName());
+    assertEquals(null, clazz.getSuperclass());
+    assertLiteralType("NativeFunction.class", LiteralType.INTERFACE, clazz);
 
-    // TODO(79116203): return JavaScriptInterface or fail restriction checking
-    assertEquals("<native object>", NativeInterface.class.getName());
-    assertEquals(null, NativeInterface.class.getSuperclass());
+    clazz = NativeInterface.class;
+    assertEquals("<native object>", clazz.getName());
+    assertEquals(null, clazz.getSuperclass());
+    assertLiteralType("NativeFunction.class", LiteralType.INTERFACE, clazz);
 
-    assertEquals("<native object>", NativeClass.class.getName());
-    // TODO(79123093): return Object.class
-    assertEquals(null, NativeClass.class.getSuperclass());
+    clazz = NativeClass.class;
+    assertEquals("<native object>", clazz.getName());
+    assertEquals(Object.class, clazz.getSuperclass());
+    assertLiteralType("NativeFunction.class", LiteralType.CLASS, clazz);
   }
 
   private static class TypeExtendsNativeClass extends NativeClass {

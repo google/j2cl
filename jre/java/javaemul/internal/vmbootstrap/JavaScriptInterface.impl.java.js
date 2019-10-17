@@ -1,4 +1,4 @@
-// Copyright 2017 Google Inc.
+// Copyright 2019 Google Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,20 +12,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+goog.module('vmbootstrap.JavaScriptInterface$impl');
+
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+
 /**
- * @fileoverview Header hand rolled.
- *
- * @suppress {extraRequire, lateProvide, unusedLocalVariables}
+ * Provides class literal and Object methods implementations for native
+ * JavaScript interfaces.
  */
-goog.module('vmbootstrap.JavaScriptObject');
+class JavaScriptInterface {}
 
+$Util.$setClassMetadataForInterface(JavaScriptInterface, '<native object>');
 
-// Imports headers for both eager and lazy dependencies to ensure that
-// all files are included in the dependency tree.
-const _$Util = goog.require('nativebootstrap.Util');
-const J_L_Object = goog.require('java.lang.Object$impl');
-
-
-// Re-exports the implementation.
-const JavaScriptObject = goog.require('vmbootstrap.JavaScriptObject$impl');
-exports = JavaScriptObject;
+/**
+ * Exported class.
+ */
+exports = JavaScriptInterface;

@@ -52,7 +52,7 @@ class JavaScriptFunction {
   }
 }
 
-$Util.$setClassMetadata(JavaScriptFunction, '<native function>');
+$Util.$setClassMetadataForInterface(JavaScriptFunction, '<native function>');
 
 
 JavaScriptFunction.$markImplementor(
