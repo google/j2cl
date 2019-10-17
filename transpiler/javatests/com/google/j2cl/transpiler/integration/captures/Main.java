@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.integration.captures;
 
 import static com.google.j2cl.transpiler.utils.Asserts.assertEquals;
+import static com.google.j2cl.transpiler.utils.Asserts.assertNull;
 import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
 
 /** Test captures. */
@@ -31,6 +32,7 @@ public class Main {
     testCaptures_constructor();
     testCaptures_parent();
     testCaptures_anonymous();
+    testCaptures_uninitializedNotObservable();
   }
 
   private static void testVariableCapture() {
@@ -217,5 +219,39 @@ public class Main {
     assertTrue(instances[2] == outer);
 
     assertTrue(new SomeClass(3) {}.foo() == 3);
+  }
+
+  public static void testCaptures_uninitializedNotObservable() {
+    Object o = new Object();
+    abstract class Parent {
+      Parent(Object oValue, Object outerValue) {
+        observe(oValue, outerValue);
+      }
+
+      abstract void observe(Object oValue, Object outerValue);
+    }
+
+    class Outer {
+      class Capturer extends Parent {
+        // Sentinel to make sure that observe() is called before getting the chance to initialize
+        // the instance.
+        Object initializedField = new Object();
+
+        // Pass the values on construction to avoid relying on captures which is what we will test.
+        Capturer(Object oValue, Object outerValue) {
+          super(oValue, outerValue);
+        }
+
+        @Override
+        void observe(Object oValue, Object outerValue) {
+          assertEquals(oValue, o);
+          assertEquals(outerValue, Outer.this);
+          // Observed uninitialized. Make sure that instance initialization has not been run.
+          assertNull(initializedField);
+        }
+      }
+    }
+    Outer outer = new Outer();
+    outer.new Capturer(o, outer);
   }
 }
