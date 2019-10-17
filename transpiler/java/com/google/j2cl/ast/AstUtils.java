@@ -1159,7 +1159,7 @@ public class AstUtils {
   /** Whether this method require methods that override it to have an @override @JsDoc annotation */
   // TODO(b/31312257): fix or decide to not emit @override and suppress the error.
   public static boolean overrideNeedsAtOverrideAnnotation(MethodDescriptor overrideMethod) {
-    return !overrideMethod.getEnclosingTypeDescriptor().getTypeDeclaration().isStarOrUnknown()
+    return !overrideMethod.getEnclosingTypeDescriptor().isStarOrUnknown()
         && !overrideMethod.getEnclosingTypeDescriptor().isJsFunctionInterface();
   }
 

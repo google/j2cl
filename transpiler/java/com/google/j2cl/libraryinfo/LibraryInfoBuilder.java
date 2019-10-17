@@ -73,8 +73,7 @@ public final class LibraryInfoBuilder {
             .setImplSourceFilePath(implFilePath);
 
     DeclaredTypeDescriptor superTypeDescriptor = type.getSuperTypeDescriptor();
-    if (superTypeDescriptor != null
-        && !superTypeDescriptor.getTypeDeclaration().isStarOrUnknown()) {
+    if (superTypeDescriptor != null && !superTypeDescriptor.isStarOrUnknown()) {
       typeInfoBuilder.setExtendsType(getTypeId(superTypeDescriptor));
     }
 

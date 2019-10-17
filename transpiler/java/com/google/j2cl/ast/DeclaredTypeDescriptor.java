@@ -129,6 +129,11 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   public abstract boolean isNullable();
 
   @Override
+  public boolean isStarOrUnknown() {
+    return getTypeDeclaration().isStarOrUnknown();
+  }
+
+  @Override
   public boolean isNoopCast() {
     return getTypeDeclaration().isNoopCast();
   }

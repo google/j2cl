@@ -108,6 +108,11 @@ public abstract class TypeDescriptor extends Node
     return false;
   }
 
+  /** Returns whether the described type is one of the Closure types "*" or "?". */
+  public boolean isStarOrUnknown() {
+    return false;
+  }
+
   /** Returns the type that holds the metadata for the class type */
   @Nullable
   public abstract TypeDeclaration getMetadataTypeDeclaration();

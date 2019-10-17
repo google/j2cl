@@ -296,7 +296,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   }
 
   private boolean doesClassExistInJavaScript(DeclaredTypeDescriptor type) {
-    return !type.getTypeDeclaration().isStarOrUnknown() && !type.isJsFunctionInterface();
+    return !type.isStarOrUnknown() && !type.isJsFunctionInterface();
   }
 
   private void renderClassBody() {
@@ -318,7 +318,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   private static String getExtendsClause(Type type, GenerationEnvironment environment) {
     DeclaredTypeDescriptor superTypeDescriptor = type.getSuperTypeDescriptor();
-    if (superTypeDescriptor == null || superTypeDescriptor.getTypeDeclaration().isStarOrUnknown()) {
+    if (superTypeDescriptor == null || superTypeDescriptor.isStarOrUnknown()) {
       return "";
     }
     String superTypeName = environment.aliasForType(superTypeDescriptor);
