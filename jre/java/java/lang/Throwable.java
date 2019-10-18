@@ -38,10 +38,10 @@ public class Throwable implements Serializable {
 
   private String detailMessage;
   private Throwable cause;
-  private Throwable[] suppressedExceptions;
+  private Throwable[] suppressedExceptions = new Throwable[0];
   private StackTraceElement[] stackTrace = new StackTraceElement[0];
   private boolean disableSuppression;
-  private boolean writableStackTrace = true;
+  private boolean disableStackTrace;
 
   @JsProperty
   private Object backingJsObject;
@@ -62,8 +62,10 @@ public class Throwable implements Serializable {
   }
 
   public Throwable(Throwable cause) {
-    this.detailMessage = (cause == null) ? null : cause.toString();
     this.cause = cause;
+    if (cause != null) {
+      this.detailMessage = cause.toString();
+    }
     fillInStackTrace();
   }
 
@@ -75,7 +77,7 @@ public class Throwable implements Serializable {
       boolean writableStackTrace) {
     this.cause = cause;
     this.detailMessage = message;
-    this.writableStackTrace = writableStackTrace;
+    this.disableStackTrace = !writableStackTrace;
     this.disableSuppression = !enableSuppression;
     if (writableStackTrace) {
       fillInStackTrace();
@@ -126,13 +128,9 @@ public class Throwable implements Serializable {
       return;
     }
 
-    if (suppressedExceptions == null) {
-      suppressedExceptions = new Throwable[] {exception};
-    } else {
-      // TRICK: This is not correct Java (would give an OOBE, but it works in JS and
-      // this code will only be executed in JS.
-      suppressedExceptions[suppressedExceptions.length] = exception;
-    }
+    // TRICK: This is not correct Java (would give an OOBE, but it works in JS and
+    // this code will only be executed in JS.
+    suppressedExceptions[suppressedExceptions.length] = exception;
   }
 
   /**
@@ -142,7 +140,7 @@ public class Throwable implements Serializable {
    */
   @DoNotInline
   public Throwable fillInStackTrace() {
-    if (writableStackTrace) {
+    if (!disableStackTrace) {
       // Note that when this called from ctor, transpiler hasn't initialized backingJsObject yet.
       if (backingJsObject instanceof NativeError) {
         // The stack property on Error is lazily evaluated in Chrome, so it is better use
@@ -185,10 +183,6 @@ public class Throwable implements Serializable {
 
   /** Returns the array of Exception that this one suppressedExceptions. */
   public final Throwable[] getSuppressed() {
-    if (suppressedExceptions == null) {
-      suppressedExceptions = new Throwable[0];
-    }
-
     return suppressedExceptions;
   }
 
