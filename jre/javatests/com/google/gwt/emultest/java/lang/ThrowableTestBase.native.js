@@ -2,9 +2,8 @@
  * @param {*} e
  * @return {void}
  */
-com_google_gwt_emultest_java_lang_ThrowableTestBase
-    .m_throwNative__java_lang_Object = function(e) {
-  com_google_gwt_emultest_java_lang_ThrowableTestBase.$clinit();
+ThrowableTestBase.throwNative = function(e) {
+  ThrowableTestBase.$clinit();
   throw e;
 };
 
@@ -12,13 +11,22 @@ com_google_gwt_emultest_java_lang_ThrowableTestBase
  * @param {function()} thrower
  * @return {*}
  */
-com_google_gwt_emultest_java_lang_ThrowableTestBase
-    .m_catchNative__com_google_gwt_emultest_java_lang_ThrowableTestBase_Thrower =
-    function(thrower) {
-  com_google_gwt_emultest_java_lang_ThrowableTestBase.$clinit();
+ThrowableTestBase.catchNative = function(thrower) {
+  ThrowableTestBase.$clinit();
   try {
     thrower();
   } catch (e) {
     return e;
   }
+};
+
+const JavaLangThrowable = goog.require("java.lang.Throwable");
+
+/**
+ * @param {*} wrapped
+ * @return {!JavaLangThrowable}
+ */
+ThrowableTestBase.createJsException = function(wrapped) {
+  ThrowableTestBase.$clinit();
+  return JavaLangThrowable.of(wrapped);
 };
