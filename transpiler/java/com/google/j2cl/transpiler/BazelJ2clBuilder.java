@@ -21,7 +21,6 @@ import com.google.j2cl.common.FrontendUtils;
 import com.google.j2cl.common.FrontendUtils.FileInfo;
 import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.Problems;
-import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.frontend.Frontend;
 import java.io.File;
 import java.nio.file.Path;
@@ -92,8 +91,6 @@ final class BazelJ2clBuilder extends BazelWorker {
 
   private J2clTranspilerOptions createOptions() {
     Problems problems = new Problems();
-    checkSourceFiles(this.sources, problems);
-
     if (this.readableSourceMaps && this.generateKytheIndexingMetadata) {
       problems.warning(
           "Readable source maps are not available when generating Kythe indexing metadata.");
@@ -137,27 +134,6 @@ final class BazelJ2clBuilder extends BazelWorker {
         .setGenerateKytheIndexingMetadata(this.generateKytheIndexingMetadata)
         .setFrontend(FRONTEND)
         .build();
-  }
-
-  private static void checkSourceFiles(List<String> sourceFiles, Problems problems) {
-    for (String sourceFile : sourceFiles) {
-      if (isValidExtension(sourceFile)) {
-        File file = new File(sourceFile);
-        if (!file.isFile()) {
-          problems.fatal(FatalError.FILE_NOT_FOUND, sourceFile);
-        }
-      } else {
-        // does not support non-java files.
-        problems.fatal(FatalError.UNKNOWN_INPUT_TYPE, sourceFile);
-      }
-    }
-  }
-
-  private static boolean isValidExtension(String sourceFile) {
-    return sourceFile.endsWith(".java")
-        || sourceFile.endsWith(".js")
-        || sourceFile.endsWith(".zip")
-        || sourceFile.endsWith(".jar");
   }
 
   private static Path getZipOutput(String output, Problems problems) {

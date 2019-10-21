@@ -13,6 +13,8 @@
  */
 package com.google.j2cl.transpiler;
 
+import static com.google.j2cl.common.FrontendUtils.checkSourceFiles;
+
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
@@ -95,9 +97,9 @@ public final class J2clCommandLineRunner extends CommandLineTool {
   }
 
   private J2clTranspilerOptions createOptions() {
-    Problems problems = new Problems();
-    checkSourceFiles(this.files, problems);
+    checkSourceFiles(files, ".java", ".srcjar", "-src.jar");
 
+    Problems problems = new Problems();
     if (this.readableSourceMaps && this.generateKytheIndexingMetadata) {
       problems.warning(
           "Readable source maps are not available when generating Kythe indexing metadata.");
@@ -124,26 +126,6 @@ public final class J2clCommandLineRunner extends CommandLineTool {
         .setGenerateKytheIndexingMetadata(this.generateKytheIndexingMetadata)
         .setFrontend(this.frontEnd)
         .build();
-  }
-
-  private static void checkSourceFiles(List<String> sourceFiles, Problems problems) {
-    for (String sourceFile : sourceFiles) {
-      if (isValidExtension(sourceFile)) {
-        File file = new File(sourceFile);
-        if (!file.isFile()) {
-          problems.fatal(FatalError.FILE_NOT_FOUND, sourceFile);
-        }
-      } else {
-        // does not support non-java files.
-        problems.fatal(FatalError.UNKNOWN_INPUT_TYPE, sourceFile);
-      }
-    }
-  }
-
-  private static boolean isValidExtension(String sourceFile) {
-    return sourceFile.endsWith(".java")
-        || sourceFile.endsWith(".srcjar")
-        || sourceFile.endsWith("-src.jar");
   }
 
   private static Path getDirOutput(String output, Problems problems) {

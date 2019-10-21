@@ -27,6 +27,7 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -145,6 +146,17 @@ public class FrontendUtils {
     } catch (IOException e) {
       problems.fatal(FatalError.CANNOT_CREATE_ZIP, outputPath, e.getMessage());
       return null;
+    }
+  }
+
+  public static void checkSourceFiles(List<String> sourceFiles, String... validExtensions) {
+    for (String sourceFile : sourceFiles) {
+      if (Arrays.stream(validExtensions).noneMatch(x -> sourceFile.endsWith(x))) {
+        new Problems().fatal(FatalError.UNKNOWN_INPUT_TYPE, sourceFile);
+      }
+      if (!Files.isRegularFile(Paths.get(sourceFile))) {
+        new Problems().fatal(FatalError.FILE_NOT_FOUND, sourceFile);
+      }
     }
   }
 }

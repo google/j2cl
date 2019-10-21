@@ -13,6 +13,8 @@
  */
 package com.google.j2cl.tools.gwtincompatible;
 
+import static com.google.j2cl.common.FrontendUtils.checkSourceFiles;
+
 import com.google.j2cl.common.CommandLineTool;
 import com.google.j2cl.common.Problems;
 import java.util.ArrayList;
@@ -38,6 +40,7 @@ final class GwtIncompatibleStripperCommandLineRunner extends CommandLineTool {
 
   @Override
   protected Problems run() {
+    checkSourceFiles(files, ".java", ".srcjar", "-src.jar");
     return GwtIncompatibleStripper.strip(files, outputPath);
   }
 
