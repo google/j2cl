@@ -85,11 +85,6 @@ public class MiscellaneousTest {
     }
   }
 
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
-  private static class Native {
-    private static native void throwNativeException();
-  }
-
   @Test
   public void testArrayCasts() {
     {
@@ -290,7 +285,8 @@ public class MiscellaneousTest {
             case 3:
               throw new StringIndexOutOfBoundsException();
             case 4:
-              Native.throwNativeException();
+              Object a = null;
+              a.getClass(); // will throw JavaScript TypeError
           }
         } catch (StringIndexOutOfBoundsException e) {
           assertThat(i).isEqualTo(3);

@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.regression.compiler;
 import static com.google.common.truth.Truth.assertThat;
 
 import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -378,10 +379,15 @@ public class ObjectIdentityTest {
     assertThat(null == null).isTrue();
   }
 
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "goog.global")
   private static class Native {
+    @JsProperty(name = "undefined")
     static Foo undefinedFoo;
+
+    @JsProperty(name = "undefined")
     static Object undefinedObject;
+
+    @JsProperty(name = "undefined")
     static String undefinedString;
   }
 

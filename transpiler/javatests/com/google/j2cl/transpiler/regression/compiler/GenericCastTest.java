@@ -366,7 +366,7 @@ public class GenericCastTest {
 
   @Test
   public void testAssignmentReference() {
-    Container<String> container = new Container(1);
+    Container<String> container = (Container<String>) new Container(1);
 
     // Code like
     //     container.value = container.value;
@@ -386,7 +386,7 @@ public class GenericCastTest {
   public void testParenthesizedAssignmentReference() {
     assertThrowsClassCastException(
         () -> {
-          Container<String> container = new Container(1);
+          Container<String> container = (Container<String>) new Container(1);
           String unusedString = (container.value = container.value);
         },
         String.class);
