@@ -33,6 +33,7 @@ public class Main {
     testCaptures_parent();
     testCaptures_anonymous();
     testCaptures_uninitializedNotObservable();
+    testCaptures_fieldReferences();
   }
 
   private static void testVariableCapture() {
@@ -253,5 +254,42 @@ public class Main {
     }
     Outer outer = new Outer();
     outer.new Capturer(o, outer);
+  }
+
+  private static class FieldReferencesOuter {
+    String text;
+
+    FieldReferencesOuter() {
+      this.text = "Outer";
+    }
+
+    FieldReferencesOuter(String text) {
+      this.text = text;
+    }
+
+    class Inner extends FieldReferencesOuter {
+      Inner() {
+        super("InnerSuper");
+      }
+
+      class InnerInner {
+        String getImplicitText() {
+          // Refers to Inner.super.text implicitly.
+          return text;
+        }
+
+        // Refers to FieldReferencesOuter.text explicitly.
+        String getOuterText() {
+          return FieldReferencesOuter.this.text;
+        }
+      }
+    }
+  }
+
+  public static void testCaptures_fieldReferences() {
+
+    assertEquals(
+        "InnerSuper", new FieldReferencesOuter().new Inner().new InnerInner().getImplicitText());
+    assertEquals("Outer", new FieldReferencesOuter().new Inner().new InnerInner().getOuterText());
   }
 }
