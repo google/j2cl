@@ -21,7 +21,6 @@ import static javaemul.internal.InternalPreconditions.checkState;
 
 import java.io.PrintStream;
 import java.io.Serializable;
-import javaemul.internal.JsUtils;
 import javaemul.internal.annotations.DoNotInline;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsNonNull;
@@ -100,24 +99,10 @@ public class Throwable implements Serializable {
   private void setBackingJsObject(Object backingJsObject) {
     this.backingJsObject = backingJsObject;
     linkBack(backingJsObject);
-    linkBackingCause();
   }
 
-  private void linkBack(Object error) {
-    if (error != null) {
-      try {
-        // This may throw exception in strict mode.
-        ((HasJavaThrowable) error).setJavaThrowable(this);
-      } catch (Throwable ignored) { }
-    }
-  }
-
-  private void linkBackingCause() {
-    if (cause == null || !(backingJsObject instanceof NativeError)) {
-      return;
-    }
-    JsUtils.setProperty(backingJsObject, "cause", cause.backingJsObject);
-  }
+  @JsMethod
+  private native void linkBack(Object error);
 
   /** Call to add an exception that was suppressed. Used by try-with-resources. */
   public final void addSuppressed(Throwable exception) {
@@ -190,7 +175,6 @@ public class Throwable implements Serializable {
     checkState(this.cause == null, "Can't overwrite cause");
     checkCriticalArgument(cause != this, "Self-causation not permitted");
     this.cause = cause;
-    linkBackingCause();
     return this;
   }
 
@@ -268,9 +252,6 @@ public class Throwable implements Serializable {
   @SuppressWarnings("unusable-by-js")
   @JsType(isNative = true, name = "?", namespace = JsPackage.GLOBAL)
   private interface HasJavaThrowable {
-    @JsProperty(name = "__java$exception")
-    void setJavaThrowable(Throwable t);
-
     @JsProperty(name = "__java$exception")
     Throwable getJavaThrowable();
   }

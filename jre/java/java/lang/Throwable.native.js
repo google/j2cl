@@ -29,3 +29,25 @@ Throwable.prototype.m_constructJavaStackTrace___$p_java_lang_Throwable =
   }
   return stackTraceElements;
 };
+
+/**
+ * @param {*} error
+ * @package
+ */
+Throwable.prototype.linkBack = function(error) {
+  if (error instanceof Object) {
+    try {
+      // This may throw exception (e.g. frozen object) in strict mode.
+      error.__java$exception = this;
+      // TODO(b/142882366): Pass get fn as JsFunction from Java instead.
+      Object.defineProperties(error, {
+        cause: {
+          get: () => this.m_getCause__() && this.m_getCause__().backingJsObject
+        },
+        suppressed: {
+          get: () => this.m_getSuppressed__().map(t => t.backingJsObject)
+        }
+      });
+    } catch (ignored) {}
+  }
+};
