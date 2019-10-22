@@ -36,6 +36,7 @@ import com.google.j2cl.ast.SynchronizedStatement;
 import com.google.j2cl.ast.ThrowStatement;
 import com.google.j2cl.ast.TryStatement;
 import com.google.j2cl.ast.WhileStatement;
+import com.google.j2cl.common.InternalCompilerError;
 import java.util.List;
 
 /**
@@ -58,7 +59,7 @@ public class StatementTranspiler {
 
       @Override
       public boolean enterAssertStatement(AssertStatement assertStatement) {
-        throw new AssertionError("AssertStatement should have been normalized away.");
+        throw new InternalCompilerError("AssertStatement should have been normalized away.");
       }
 
       @Override
@@ -230,7 +231,7 @@ public class StatementTranspiler {
 
       @Override
       public boolean enterSynchronizedStatement(SynchronizedStatement synchronizedStatement) {
-        throw new AssertionError("SynchronizedStatement should have been normalized away.");
+        throw new InternalCompilerError("SynchronizedStatement should have been normalized away.");
       }
 
       @Override

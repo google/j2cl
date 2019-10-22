@@ -38,6 +38,7 @@ import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.TypeVariable;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.common.FilePosition;
+import com.google.j2cl.common.InternalCompilerError;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.generator.ImportGatherer.ImportCategory;
@@ -121,8 +122,10 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     } catch (RuntimeException e) {
       // Catch all unchecked exceptions and rethrow them with more context to make debugging easier.
       // Yes this is really being done on purpose.
-      throw new RuntimeException(
-          "Error generating source for type " + type.getDeclaration().getQualifiedBinaryName(), e);
+      throw new InternalCompilerError(
+          e,
+          "Error generating source for type %s.",
+          type.getDeclaration().getQualifiedBinaryName());
     }
   }
 

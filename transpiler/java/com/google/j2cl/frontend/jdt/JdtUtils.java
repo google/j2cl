@@ -47,6 +47,7 @@ import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeVariable;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.Visibility;
+import com.google.j2cl.common.InternalCompilerError;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.frontend.common.PackageInfoCache;
 import java.util.ArrayDeque;
@@ -1019,7 +1020,7 @@ class JdtUtils {
     } else if (typeBinding.isInterface()) {
       return Kind.INTERFACE;
     }
-    throw new RuntimeException("Type binding " + typeBinding + " not handled");
+    throw new InternalCompilerError("Type binding %s not handled", typeBinding);
   }
 
   private static String getJsName(final ITypeBinding typeBinding) {

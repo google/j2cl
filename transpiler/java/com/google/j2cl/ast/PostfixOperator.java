@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.j2cl.common.InternalCompilerError;
+
 /**
  * Class for postfix operator.
  */
@@ -58,6 +60,6 @@ public enum PostfixOperator implements Operator {
       case INCREMENT:
         return PrefixOperator.INCREMENT;
     }
-    throw new AssertionError();
+    throw new InternalCompilerError("Unexpected prefix operator: %s.", this);
   }
 }

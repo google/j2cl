@@ -41,6 +41,7 @@ import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
+import com.google.j2cl.common.InternalCompilerError;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -304,7 +305,7 @@ public class NormalizeJsEnums extends NormalizationPass {
           .build();
     }
 
-    throw new AssertionError();
+    throw new InternalCompilerError("Unexpected Enum method: %s.", methodDescriptor);
   }
 
   /** Rewrite references like {@code q.value} and {@code q.ordinal()} to {@code q}. */

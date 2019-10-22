@@ -20,6 +20,7 @@ import static com.google.common.base.Preconditions.checkState;
 
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.ast.processors.common.Processor;
+import com.google.j2cl.common.InternalCompilerError;
 
 /** Number literal node. */
 @Visitable
@@ -62,7 +63,7 @@ public class NumberLiteral extends Literal {
     } else if (TypeDescriptors.isPrimitiveDouble(typeDescriptor)) {
       return value.doubleValue();
     }
-    throw new AssertionError("Not a numeric type: " + typeDescriptor);
+    throw new InternalCompilerError("Not a numeric type: %s.", typeDescriptor);
   }
 
   public Number getValue() {

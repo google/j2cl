@@ -33,6 +33,7 @@ import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toList;
 
 import com.google.common.collect.Streams;
+import com.google.j2cl.common.InternalCompilerError;
 import com.sun.tools.javac.code.Attribute.Compound;
 import com.sun.tools.javac.code.Symbol;
 import com.sun.tools.javac.code.Symbol.MethodSymbol;
@@ -178,8 +179,8 @@ public class JsInteropAnnotationUtils {
         // on other types in the signature (e.g. `class Foo extends Bar<@A Baz> {}`).
         return false;
       default:
-        throw new AssertionError(
-            "unsupported element kind in MoreAnnotation#isAnnotationOnType: " + sym.getKind());
+        throw new InternalCompilerError(
+            "Unsupported element kind in MoreAnnotation#isAnnotationOnType: %s.", sym.getKind());
     }
   }
 

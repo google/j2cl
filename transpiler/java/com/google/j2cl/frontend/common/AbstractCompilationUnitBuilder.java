@@ -49,6 +49,7 @@ import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
+import com.google.j2cl.common.InternalCompilerError;
 import com.google.j2cl.common.SourcePosition;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -609,8 +610,8 @@ public abstract class AbstractCompilationUnitBuilder {
   }
 
   @FormatMethod
-  protected RuntimeException internalCompilerError(String format, Object... params) {
-      return new RuntimeException(internalCompilerErrorMessage(format, params));
+  protected Error internalCompilerError(String format, Object... params) {
+    return new InternalCompilerError(internalCompilerErrorMessage(format, params));
     }
 
   @FormatMethod

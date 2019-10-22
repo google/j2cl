@@ -18,6 +18,7 @@ package com.google.j2cl.ast;
 import com.google.common.collect.ImmutableMap;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.ast.processors.common.Processor;
+import com.google.j2cl.common.InternalCompilerError;
 import java.util.Map;
 import java.util.function.Function;
 import javax.annotation.Nullable;
@@ -37,7 +38,7 @@ public class NullType extends TypeDescriptor {
 
   @Override
   public TypeDescriptor toNonNullable() {
-    throw new AssertionError("Cannot call toNonNullable on the null type.");
+    throw new InternalCompilerError("Cannot call toNonNullable on the null type.");
   }
 
   @Override

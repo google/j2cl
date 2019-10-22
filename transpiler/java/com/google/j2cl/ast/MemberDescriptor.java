@@ -19,6 +19,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.ast.processors.common.Processor;
+import com.google.j2cl.common.InternalCompilerError;
 import javax.annotation.Nullable;
 
 /** Abstract base class for member descriptors. */
@@ -164,7 +165,7 @@ public abstract class MemberDescriptor extends Node
       case PRIVATE:
         return isEnclosedBySameTopLevelClass(type, getEnclosingTypeDescriptor());
     }
-    throw new AssertionError();
+    throw new InternalCompilerError("Unexpected visibility: %s.", getVisibility());
   }
 
   private static boolean isEnclosedBySameTopLevelClass(
