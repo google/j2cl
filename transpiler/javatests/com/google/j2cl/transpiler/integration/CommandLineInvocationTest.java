@@ -53,14 +53,13 @@ public class CommandLineInvocationTest extends TestCase {
 
     newTesterWithDefaults()
         .addArgs("-frontend", "javac")
+        .setOutputPath(Files.createTempFile("output-javac", ".zip"))
         .addCompilationUnit("Foo", "public class Foo {}")
-        .assertTranspileFails()
-        .assertErrorsContainsSnippets(" Javac frontend is not supported");
+        .assertTranspileSucceeds();
 
-    Path outputLocation = Files.createTempFile("output", ".zip");
     newTesterWithDefaults()
         .addArgs("-frontend", "jdt")
-        .setOutputPath(outputLocation)
+        .setOutputPath(Files.createTempFile("output", ".zip"))
         .addCompilationUnit("Foo", "public class Foo {}")
         .assertTranspileSucceeds();
   }

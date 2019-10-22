@@ -610,6 +610,11 @@ public abstract class AbstractCompilationUnitBuilder {
   }
 
   @FormatMethod
+  protected Error internalCompilerError(Throwable e, String format, Object... params) {
+    return new InternalCompilerError(e, internalCompilerErrorMessage(format, params));
+  }
+
+  @FormatMethod
   protected Error internalCompilerError(String format, Object... params) {
     return new InternalCompilerError(internalCompilerErrorMessage(format, params));
     }
