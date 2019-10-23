@@ -79,7 +79,7 @@ def setup_j2cl_workspace():
     # might be better to tie in to the Java platform in bazel and control the version there.
     native.maven_jar(
         name = "com_sun_tools_javac",
-        artifact = "com.google.errorprone:javac:1.9.0-dev-r2644-1",
+        artifact = "com.google.errorprone:javac:9+181-r4173-1",
     )
 
     # Eclipse JARs listed at

@@ -20,7 +20,7 @@ import com.google.errorprone.annotations.FormatMethod;
 /** Exception that signals an error in the compiler code. */
 public class InternalCompilerError extends Error {
   @FormatMethod
-  public InternalCompilerError(Exception cause, String format, Object... params) {
+  public InternalCompilerError(Throwable cause, String format, Object... params) {
     super(String.format(format, params), cause);
   }
 
@@ -31,5 +31,9 @@ public class InternalCompilerError extends Error {
 
   public InternalCompilerError(String message) {
     super(message);
+  }
+
+  public InternalCompilerError(Throwable cause, String message) {
+    super(message, cause);
   }
 }
