@@ -15,17 +15,17 @@
  */
 package com.google.j2cl.frontend;
 
+import com.google.common.collect.ImmutableList;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.common.FrontendUtils.FileInfo;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.frontend.common.PackageInfoCache;
-import com.google.j2cl.frontend.javac.JavacParser;
 import com.google.j2cl.frontend.jdt.CompilationUnitBuilder;
 import com.google.j2cl.frontend.jdt.CompilationUnitsAndTypeBindings;
 import com.google.j2cl.frontend.jdt.JdtParser;
 import java.util.List;
 
-/** Drives the frontend to parse, type check and resolve Java source code. */
+/** Drives the frontend to parse, typecheck and resolve Java source code. */
 public enum Frontend {
   JDT {
     @Override
@@ -66,8 +66,8 @@ public enum Frontend {
         List<FileInfo> sources,
         boolean useTargetClassPath,
         Problems problems) {
-      init(classPath, problems);
-      return new JavacParser(classPath, problems).parseFiles(sources, useTargetClassPath);
+      problems.error("Javac frontend is not supported yet.");
+      return ImmutableList.of();
     }
   };
 
