@@ -121,6 +121,9 @@
 [e] => [e] "e"
 [callTypeVariableWithBounds] => [Lambdas.$clinit();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.callTypeVariableWithBounds"
 [return intf.m(e);] => [return /**@type {Enum<T>} */ ($Casts.$to(intf.m_m__java_lang_Object(e), Enum));] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.callTypeVariableWithBounds"
+[callWithBiFunction] => [m_callWithBiFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_BiFunction_$pp_com_google_j2cl_transpiler_readable_lambdas]
+[fn] => [fn] "fn"
+[return null;] => [return null;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.callWithBiFunction"
 [testLambdaWithGenerics] => [m_testLambdaWithGenerics__]
 [callWithTypeVariable(i -> i, new Error());] => [this.m_callWithTypeVariable__com_google_j2cl_transpiler_readable_lambdas_Lambdas_GenericFunctionalInterface__java_lang_Object(GenericFunctionalInterface.$adapt((i) =>{
    let i_1 = /**@type {Error} */ ($Casts.$to(i, Error));
@@ -146,6 +149,20 @@
 [i -> i] => [let i_5 = /**@type {Enum} */ ($Casts.$to(i_4, Enum));] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testLambdaWithGenerics>"
 [i] => [i_5] "i"
 [i] => [return i_5;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testLambdaWithGenerics>"
+[callWithBiFunction(
+        (x, y) -> {
+          throw new RuntimeException();
+        });] => [this.m_callWithBiFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_BiFunction_$pp_com_google_j2cl_transpiler_readable_lambdas(BiFunction.$adapt((/** * */ x, y) =>{
+   let y_1 = /**@type {?string} */ ($Casts.$to(y, j_l_String));
+   throw $Exceptions.toJs(RuntimeException.$create__());
+  }));] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testLambdaWithGenerics"
+[x] => [x] "x"
+[y] => [y] "y"
+[(x, y) -> {
+          throw new RuntimeException();
+        }] => [let y_1 = /**@type {?string} */ ($Casts.$to(y, j_l_String));] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testLambdaWithGenerics>"
+[y] => [y_1] "y"
+[throw new RuntimeException();] => [throw $Exceptions.toJs(RuntimeException.$create__());] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testLambdaWithGenerics>"
 [Function<? super T, ?> f = item -> 1L;] => [let f = Lambdas_Function.$adapt((item) =>{
    let item_1 = /**@type {Enum} */ ($Casts.$to(item, Enum));
    return Long.m_valueOf__long($Long.fromInt(1));

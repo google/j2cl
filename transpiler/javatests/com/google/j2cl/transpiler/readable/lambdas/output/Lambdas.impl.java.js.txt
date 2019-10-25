@@ -8,6 +8,7 @@ let $2 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambda
 let $3 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.$3$impl');
 let $LambdaAdaptor$1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.$LambdaAdaptor$1$impl');
 let $Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.AnotherThenable.$Overlay$impl');
+let BiFunction = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.BiFunction$impl');
 let Lambdas_Function = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.Function$impl');
 let Functional = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.Functional$impl');
 let FunctionalInterface = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.FunctionalInterface$impl');
@@ -19,10 +20,13 @@ let Enum = goog.forwardDeclare('java.lang.Enum$impl');
 let Error = goog.forwardDeclare('java.lang.Error$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Long = goog.forwardDeclare('java.lang.Long$impl');
+let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
 class Lambdas extends j_l_Object {
   /**
@@ -205,6 +209,16 @@ class Lambdas extends j_l_Object {
   }
   /**
    * @template T
+   * @param {BiFunction<T, ?string, ?number>} fn
+   * @return {GenericFunctionalInterface<T>}
+   * @public
+   */
+  m_callWithBiFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_BiFunction_$pp_com_google_j2cl_transpiler_readable_lambdas(
+      fn) {
+    return null;
+  }
+  /**
+   * @template T
    * @return {void}
    * @public
    */
@@ -229,6 +243,11 @@ class Lambdas extends j_l_Object {
                   return i_5;
                 })),
             /**@type {Enum<T>} */ (null));
+    this.m_callWithBiFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_BiFunction_$pp_com_google_j2cl_transpiler_readable_lambdas(
+        BiFunction.$adapt((/** * */ x, y) => {
+          let y_1 = /**@type {?string} */ ($Casts.$to(y, j_l_String));
+          throw $Exceptions.toJs(RuntimeException.$create__());
+        }));
     let f = Lambdas_Function.$adapt((item) => {
       let item_1 = /**@type {Enum} */ ($Casts.$to(item, Enum));
       return Long.m_valueOf__long($Long.fromInt(1));
@@ -351,6 +370,8 @@ class Lambdas extends j_l_Object {
         'com.google.j2cl.transpiler.readable.lambdas.Lambdas.$LambdaAdaptor$1$impl');
     $Overlay = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdas.Lambdas.AnotherThenable.$Overlay$impl');
+    BiFunction = goog.module.get(
+        'com.google.j2cl.transpiler.readable.lambdas.Lambdas.BiFunction$impl');
     Lambdas_Function = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdas.Lambdas.Function$impl');
     Functional = goog.module.get(
@@ -369,9 +390,12 @@ class Lambdas extends j_l_Object {
     Error = goog.module.get('java.lang.Error$impl');
     Integer = goog.module.get('java.lang.Integer$impl');
     Long = goog.module.get('java.lang.Long$impl');
+    RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
+    j_l_String = goog.module.get('java.lang.String$impl');
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Long = goog.module.get('nativebootstrap.Long$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
+    $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
   }
 }
 $Util.$setClassMetadata(

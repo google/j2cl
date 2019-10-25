@@ -125,6 +125,10 @@ public class Lambdas {
     return intf.m(e);
   }
 
+  <T> GenericFunctionalInterface<T> callWithBiFunction(BiFunction<T, String, Double> fn) {
+    return null;
+  }
+
   // Lambdas with default methods.
   interface BiFunction<T, U, R> {
     R apply(T t, U u);
@@ -146,6 +150,10 @@ public class Lambdas {
     callWithTypeVariable(i -> i, new Error());
     callParameterized(i -> i, new Error());
     callTypeVariableWithBounds(i -> i, (Enum<T>) null);
+    callWithBiFunction(
+        (x, y) -> {
+          throw new RuntimeException();
+        });
     Function<? super T, ?> f = item -> 1L;
   }
 
