@@ -14,7 +14,7 @@
 [ArithmeticExpressions] => [return $instance;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<synthetic: ctor_create>"
 [ArithmeticExpressions] => [$ctor__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions__]
 [ArithmeticExpressions] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<init>"
-[ArithmeticExpressions] => [this.$init__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<init>"
+[ArithmeticExpressions] => [this.$init___$p_com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<init>"
 [testCoercions] => [m_testCoercions__]
 [byte b = (byte) 1L;] => [let b = 1;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCoercions"
 [b] => [b] "b"
@@ -171,7 +171,7 @@
 [l = boxedInteger = i = 20;] => [l = $Primitives.$widenIntToLong((boxedInteger = Integer.m_valueOf__int(i = 20)).m_intValue__());] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testExtendedOperands"
 [l = i + boxedInteger + l + 20;] => [l = $LongUtils.$plus($LongUtils.$plus($Primitives.$widenIntToLong(i + boxedInteger.m_intValue__()), l), $Long.fromInt(20));] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testExtendedOperands"
 [d = 20 + l + d;] => [d = $Primitives.$widenLongToDouble($LongUtils.$plus($Long.fromInt(20), l)) + d;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testExtendedOperands"
-[ArithmeticExpressions] => [$init__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions]
+[ArithmeticExpressions] => [$init___$p_com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions]
 [ArithmeticExpressions] => [let /** !$Long */ $value;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<init>"
 [public long bar = foo++;] => [this.f_bar__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions = ($value = ArithmeticExpressions.$f_foo__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions, ArithmeticExpressions.$f_foo__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions = $LongUtils.$plus(ArithmeticExpressions.$f_foo__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions, $Long.fromInt(1)), $value);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<init>"
 [public static long one = 1;] => [get f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions]

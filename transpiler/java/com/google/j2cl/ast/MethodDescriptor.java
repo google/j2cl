@@ -130,7 +130,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     }
   }
 
-  public static final String INIT_METHOD_PREFIX = "$init";
+  public static final String INIT_METHOD_NAME = "$init";
   public static final String CTOR_METHOD_PREFIX = "$ctor";
   public static final String CLINIT_METHOD_NAME = "$clinit";
   public static final String EQUALS_METHOD_NAME = "equals";

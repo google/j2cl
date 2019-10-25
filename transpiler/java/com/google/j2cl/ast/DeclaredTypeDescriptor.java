@@ -396,17 +396,10 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   public MethodDescriptor getInitMethodDescriptor() {
     return MethodDescriptor.newBuilder()
         .setEnclosingTypeDescriptor(this)
-        .setName(getInitName())
+        .setName(MethodDescriptor.INIT_METHOD_NAME)
         .setVisibility(Visibility.PRIVATE)
         .setOrigin(MethodOrigin.SYNTHETIC_INSTANCE_INITIALIZER)
-        .setJsInfo(JsInfo.RAW)
         .build();
-  }
-
-  /** Returns the name of $init method for a type. */
-  private String getInitName() {
-    // Synthesize a name that is unique per class to avoid property clashes in JS.
-    return MethodDescriptor.INIT_METHOD_PREFIX + "__" + ManglingNameUtils.getMangledName(this);
   }
 
   @Memoized
