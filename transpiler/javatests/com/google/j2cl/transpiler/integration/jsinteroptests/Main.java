@@ -15,7 +15,14 @@
  */
 package com.google.j2cl.transpiler.integration.jsinteroptests;
 
+import jsinterop.annotations.JsIgnore;
+import jsinterop.annotations.JsType;
+
+// Restore back original namespace to make it work with integration test infra.
+@JsType(namespace = "com.google.j2cl.transpiler.integration.jsinteroptests")
 public class Main {
+
+  @JsIgnore
   public static void main(String... args) {
     JsExportTest.testAll();
     JsFunctionTest.testAll();
