@@ -1577,7 +1577,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     }
     setCurrentCompilationUnit(
         new CompilationUnit(
-            javacUnit.getSourceFile().getName(), javacUnit.getPackageName().toString()));
+            javacUnit.getSourceFile().getName(),
+            javacUnit.getPackageName() == null ? "" : javacUnit.getPackageName().toString()));
     for (JCTree tree : javacUnit.getTypeDecls()) {
       if (tree instanceof JCClassDecl) {
         convertClassDeclaration((JCClassDecl) tree);
