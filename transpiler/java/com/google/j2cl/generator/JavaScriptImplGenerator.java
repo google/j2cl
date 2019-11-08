@@ -406,7 +406,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     }
     String returnTypeName =
         closureTypesGenerator.getClosureTypeString(methodDescriptor.getReturnTypeDescriptor());
-    if (!methodDescriptor.isConstructor() && needsReturnJsDoc(methodDescriptor)) {
+    if (needsReturnJsDoc(methodDescriptor)) {
       sourceBuilder.appendln(" * @return {" + returnTypeName + "}");
     }
     sourceBuilder.appendln(" * @" + methodDescriptor.getJsVisibility().jsText);
@@ -417,11 +417,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   }
 
   private boolean needsReturnJsDoc(MethodDescriptor methodDescriptor) {
-    return !TypeDescriptors.isPrimitiveVoid(methodDescriptor.getReturnTypeDescriptor())
-        // If there are no @param and no @return, if there is @template jscompiler emits
-        // a generic MISPLACED_ANNOTATION error.
-        || (!methodDescriptor.getTypeParameterTypeDescriptors().isEmpty()
-            && methodDescriptor.getParameterDescriptors().isEmpty());
+    return !methodDescriptor.isConstructor()
+        && !TypeDescriptors.isPrimitiveVoid(methodDescriptor.getReturnTypeDescriptor());
   }
 
   private void renderMarkImplementorMethod() {
