@@ -37,6 +37,7 @@ def integration_test(
         closure_defines = dict(),
         disable_uncompiled_test = False,
         disable_compiled_test = False,
+        disable_esnext_compiled_test = False,
         suppress = [],
         j2cl_library_tags = [],
         tags = [],
