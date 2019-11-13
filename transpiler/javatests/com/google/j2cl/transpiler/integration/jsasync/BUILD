@@ -1,10 +1,10 @@
-package(
-    licenses = ["notice"],  # Apache 2.0
-)
-
 load(
     "//transpiler/javatests/com/google/j2cl/transpiler/integration:integration_test.bzl",
     "integration_test",
+)
+
+package(
+    licenses = ["notice"],  # Apache 2.0
 )
 
 # Creates targets
@@ -14,5 +14,6 @@ load(
 integration_test(
     name = "jsasync",
     srcs = glob(["*.java"]),
+    disable_esnext_compiled_test = True,
     deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )

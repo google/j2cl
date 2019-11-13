@@ -377,18 +377,26 @@ public class JsFunctionTest {
         new NativeRegExp(
             "function [\\w$]*\\(\\s*(?:\\/\\*.*\\*\\/)?\\s*([\\w$]+)\\)\\s*{\\s*return \\1;\\s*}");
     //
-    //  or "(/** type */ <par>)=>{ return <par>;}
+    //  or "(/** type */ <par>)=>{ return <par>;}"
     //
     NativeRegExp arrowRegExp =
         new NativeRegExp(
             "\\(\\s*(?:\\/\\*.*\\*\\/)?\\s*([\\w$]+)\\)\\s*=>\\s*{\\s*return \\1;\\s*}");
 
+    //
+    //  or "<par>=><par>"
+    //
+    NativeRegExp es6ArrowRegExp =
+        new NativeRegExp("\\s*(?:\\/\\*.*\\*\\/)?\\s*([\\w$]+)\\s*=>\\s*\\1\\s*");
+
     assertTrue(
         functionRegExp.exec(optimizableInner.toString()) != null
-            || arrowRegExp.exec(optimizableInner.toString()) != null);
+            || arrowRegExp.exec(optimizableInner.toString()) != null
+            || es6ArrowRegExp.exec(optimizableInner.toString()) != null);
     assertTrue(
         functionRegExp.exec(lambda.toString()) != null
-            || arrowRegExp.exec(lambda.toString()) != null);
+            || arrowRegExp.exec(lambda.toString()) != null
+            || es6ArrowRegExp.exec(lambda.toString()) != null);
 
     // inner class not optimizable to lambda
     MyJsFunctionInterface unoptimizableInner =
