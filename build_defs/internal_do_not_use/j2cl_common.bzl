@@ -7,6 +7,9 @@ load(":j2cl_js_common.bzl", "J2CL_JS_TOOLCHAIN_ATTRS", "j2cl_js_provider")
 J2clInfo = provider(fields = ["_private_", "_is_j2cl_provider"])
 
 def _create_js_lib_struct(j2cl_info, extra_providers = []):
+    if "js" in j2cl_info._private_.js_info:
+        extra_providers = extra_providers + [j2cl_info._private_.js_info["js"]]
+
     return struct(
         providers = [j2cl_info] + extra_providers,
         **j2cl_info._private_.js_info
