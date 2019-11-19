@@ -15,13 +15,13 @@
  */
 package com.google.j2cl.junit.integration.async.data;
 
-import com.google.j2cl.junit.async.J2clAsyncTestRunner;
+import com.google.j2cl.junit.async.AsyncTestRunner;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /** Test async methods in life cycle */
-@RunWith(J2clAsyncTestRunner.class)
+@RunWith(AsyncTestRunner.class)
 public class TestWithLifeCycleMethodBeingAsync {
 
   @Before

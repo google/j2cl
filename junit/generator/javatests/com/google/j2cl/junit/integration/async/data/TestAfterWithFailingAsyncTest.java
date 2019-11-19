@@ -15,14 +15,14 @@
  */
 package com.google.j2cl.junit.integration.async.data;
 
-import com.google.j2cl.junit.async.J2clAsyncTestRunner;
+import com.google.j2cl.junit.async.AsyncTestRunner;
 import com.google.j2cl.junit.integration.testlogger.TestCaseLogger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-@RunWith(J2clAsyncTestRunner.class)
+@RunWith(AsyncTestRunner.class)
 public class TestAfterWithFailingAsyncTest {
 
   @Before

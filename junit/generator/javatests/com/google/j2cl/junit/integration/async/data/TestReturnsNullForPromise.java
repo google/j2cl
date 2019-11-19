@@ -15,12 +15,12 @@
  */
 package com.google.j2cl.junit.integration.async.data;
 
-import com.google.j2cl.junit.async.J2clAsyncTestRunner;
+import com.google.j2cl.junit.async.AsyncTestRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /** Integration test used in J2clTestRunnerTest. */
-@RunWith(J2clAsyncTestRunner.class)
+@RunWith(AsyncTestRunner.class)
 public class TestReturnsNullForPromise {
   @Test(timeout = 200)
   public Thenable returnsNullForPromise() {

@@ -15,12 +15,12 @@
  */
 package com.google.j2cl.junit.integration.async.data;
 
-import com.google.j2cl.junit.async.J2clAsyncTestRunner;
+import com.google.j2cl.junit.async.AsyncTestRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /** Test for timeout in a non asyncTest */
-@RunWith(J2clAsyncTestRunner.class)
+@RunWith(AsyncTestRunner.class)
 public class TestReturnsVoidTimeoutProvided {
   @Test(timeout = 200)
   public void test() {}

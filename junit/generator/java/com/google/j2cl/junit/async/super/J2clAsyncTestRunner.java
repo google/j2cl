@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.junit.async;
 
-import org.junit.runner.Runner;
-
-/** Stub version of J2clAsyncTestRunner for transpiled code. */
-public class J2clAsyncTestRunner extends Runner {}
+/** Renamed to AsyncTestRunner. Stub kept to simplify migration. */
+// TODO(b/139867020): Remove.
+public class J2clAsyncTestRunner extends AsyncTestRunner {}

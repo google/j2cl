@@ -15,12 +15,12 @@
  */
 package com.google.j2cl.junit.integration.async.data;
 
-import com.google.j2cl.junit.async.J2clAsyncTestRunner;
+import com.google.j2cl.junit.async.AsyncTestRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /** Test processing for test with expected exception */
-@RunWith(J2clAsyncTestRunner.class)
+@RunWith(AsyncTestRunner.class)
 public class TestWithExpectedException {
 
   @Test(timeout = 200, expected = Exception.class)

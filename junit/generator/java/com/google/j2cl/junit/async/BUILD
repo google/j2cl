@@ -2,6 +2,8 @@
 # testing under j2cl.
 # JVM async testing support should be placed under Guava or Xplat.
 
+load("//build_defs:rules.bzl", "j2cl_library")
+
 package(
     default_visibility = [
         "//:__pkg__",
@@ -10,12 +12,13 @@ package(
     licenses = ["notice"],  # Apache 2.0
 )
 
-load("//build_defs:rules.bzl", "j2cl_library")
-
 java_library(
     name = "async",
     testonly = 1,
-    srcs = ["J2clAsyncTestRunner.java"],
+    srcs = [
+        "AsyncTestRunner.java",
+        "J2clAsyncTestRunner.java",
+    ],
     deps = [
         "//third_party:guava",
         "//third_party:junit",
@@ -25,7 +28,10 @@ java_library(
 j2cl_library(
     name = "async-j2cl",
     testonly = 1,
-    srcs = ["super/J2clAsyncTestRunner.java"],
+    srcs = [
+        "super/AsyncTestRunner.java",
+        "super/J2clAsyncTestRunner.java",
+    ],
     deps = [
         "//third_party:junit-j2cl",
     ],

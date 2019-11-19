@@ -13,17 +13,9 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.junit.integration.async.data;
+package com.google.j2cl.junit.async;
 
-import com.google.j2cl.junit.async.AsyncTestRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.runner.Runner;
 
-/** Integration test used in J2clTestRunnerTest. */
-@RunWith(AsyncTestRunner.class)
-public class TestWillTimeOut {
-  @Test(timeout = 10)
-  public Thenable willTimeout() {
-    return (onFulfilled, onRejected) -> Timer.schedule(() -> onFulfilled.execute(null), 300);
-  }
-}
+/** Stub version of AsyncTestRunner for transpiled code. */
+public class AsyncTestRunner extends Runner {}

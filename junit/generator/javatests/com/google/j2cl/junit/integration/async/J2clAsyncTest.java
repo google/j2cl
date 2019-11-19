@@ -15,8 +15,8 @@
  */
 package com.google.j2cl.junit.integration.async;
 
-import com.google.j2cl.junit.async.J2clAsyncTestRunner;
-import com.google.j2cl.junit.async.J2clAsyncTestRunner.ErrorMessage;
+import com.google.j2cl.junit.async.AsyncTestRunner;
+import com.google.j2cl.junit.async.AsyncTestRunner.ErrorMessage;
 import com.google.j2cl.junit.integration.IntegrationTestBase;
 import com.google.j2cl.junit.integration.TestResult;
 import java.util.List;
@@ -25,7 +25,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 /**
- * Test for {@link com.google.j2cl.junit.async.J2clAsyncTestRunner} and its j2cl counter part.
+ * Test for {@link com.google.j2cl.junit.async.AsyncTestRunner} and its j2cl counter part.
  *
  * <p>The test runs tests located in data/ and parses their command line output.
  *
@@ -231,7 +231,7 @@ public class J2clAsyncTest extends IntegrationTestBase {
             .testClassName(testName)
             .addTestFailure(
                 "initializationError",
-                J2clAsyncTestRunner.ErrorMessage.ASYNC_HAS_EXPECTED_EXCEPTION.format("test"))
+                AsyncTestRunner.ErrorMessage.ASYNC_HAS_EXPECTED_EXCEPTION.format("test"))
             .build();
 
     List<String> logLines = runTest(testName);
@@ -253,7 +253,7 @@ public class J2clAsyncTest extends IntegrationTestBase {
             .testClassName(testName)
             .addTestFailure(
                 "initializationError",
-                J2clAsyncTestRunner.ErrorMessage.ASYNC_NO_TIMEOUT.format("doesNotHaveTimeout"))
+                AsyncTestRunner.ErrorMessage.ASYNC_NO_TIMEOUT.format("doesNotHaveTimeout"))
             .build();
 
     List<String> logLines = runTest(testName);
