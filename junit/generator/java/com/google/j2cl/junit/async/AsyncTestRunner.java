@@ -19,6 +19,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.reflect.Reflection;
+import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.SettableFuture;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -34,30 +35,21 @@ import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.Statement;
 
 /**
- * A test runner that allows for asynchronous test using a structural Promise.
+ * A test runner that allows for asynchronous test using LitenableFuture or a structural Promise.
  *
- * <p>A structural promise to this runner is a class that conforms to the following conditions:
- *
- * <ul>
- *   <li>A method called then
- *   <li>The then method must have two arguments
- *   <li>Both arguments have to be an interface
- *   <li>Arguments must be either be @FunctionalInterface or @JsFunction and thus can only have one
- *       method
- *   <li>The second argument is assumed to be the errorCallback and thus needs to take a subclass of
- *       Throwable as parameter
- * </ul>
+ * <p>See {@link PROMISE_LIKE} for the expected requirements of structural promise. Note that this
+ * mimics the J2CL version the type but has less requirements since they don't make sense for the
+ * JVM version of the promise-like object.
  */
 public class AsyncTestRunner extends BlockJUnit4ClassRunner {
 
   private static final String PROMISE_LIKE =
-      "A promise-like type is a type that  has a 'then' method. 'then' method should be a "
-          + "@JsMethod and have a 'success' callback parameter "
-          + "and an optional 'failure' callback parameter.";
+      "A promise-like type is a type that is either 'ListenableFuture' or a type with a single "
+          + "'then' method that has 'success' and 'failure' callback parameters.";
 
   public enum ErrorMessage {
     ASYNC_NO_TIMEOUT(
-        "Method %s is missing @Test timeout attribute but returns a promise-like" + " type."),
+        "Method %s is missing @Test timeout attribute but returns a promise-like type."),
     ASYNC_HAS_EXPECTED_EXCEPTION(
         "Method %s has expectedException attribute but returns a promise-like type."),
     NO_THEN_METHOD(
@@ -67,8 +59,8 @@ public class AsyncTestRunner extends BlockJUnit4ClassRunner {
         "Type %s is not a promise-like type. It has multiple 'then' methods with two parameters. "
             + PROMISE_LIKE),
     INVALID_CALLBACK_PARAMETER(
-        "Type '%s' is not a promise-like type,"
-            + " since the argument '%s' on the 'then' is not a @JsFunction/@FunctionalInterface. "
+        "Type '%s' is not a promise-like type. The argument '%s' on the 'then' is not a simple "
+            + "callback interface. "
             + PROMISE_LIKE);
 
     private final String formattedMsg;
@@ -79,6 +71,26 @@ public class AsyncTestRunner extends BlockJUnit4ClassRunner {
 
     public String format(Object... args) {
       return String.format(formattedMsg, args);
+    }
+  }
+
+  private static class ListenableFutureStatement extends Statement {
+    private final FrameworkMethod method;
+    private final Object test;
+
+    public ListenableFutureStatement(FrameworkMethod method, Object test) {
+      this.method = method;
+      this.test = test;
+    }
+
+    @Override
+    public void evaluate() throws Throwable {
+      ListenableFuture<?> future = (ListenableFuture) method.invokeExplosively(test);
+      try {
+        future.get();
+      } catch (ExecutionException e) {
+        throw e.getCause();
+      }
     }
   }
 
@@ -164,6 +176,9 @@ public class AsyncTestRunner extends BlockJUnit4ClassRunner {
     if (method.getReturnType() == Void.TYPE) {
       return super.methodInvoker(method, test);
     }
+    if (method.getReturnType() == ListenableFuture.class) {
+      return new ListenableFutureStatement(method, test);
+    }
     return new PromiseStatement(method, test);
   }
 
@@ -200,6 +215,10 @@ public class AsyncTestRunner extends BlockJUnit4ClassRunner {
     }
 
     if (returnType == Void.TYPE) {
+      return;
+    }
+
+    if (returnType == ListenableFuture.class) {
       return;
     }
 

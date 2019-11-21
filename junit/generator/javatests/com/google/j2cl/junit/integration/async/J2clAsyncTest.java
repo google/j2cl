@@ -92,6 +92,26 @@ public class J2clAsyncTest extends IntegrationTestBase {
   }
 
   @Test
+  public void testListenableFuture() throws Exception {
+    if (testMode.isJ2cl()) {
+      // No j2cl version of this test since guava-j2cl is not available for open-source.
+      return;
+    }
+
+    String testName = "TestListenableFuture";
+    TestResult testResult =
+        newTestResultBuilder()
+            .testClassName(testName)
+            .addTestSuccess("testListenableFuture")
+            .addTestFailure("testListenableFuture_fail")
+            .addLogLineContains("java.lang.Exception: Should see this message")
+            .build();
+
+    List<String> logLines = runTest(testName);
+    assertThat(logLines).matches(testResult);
+  }
+
+  @Test
   public void testStructuralThenable() throws Exception {
     String testName = "TestStructuralThenable";
     TestResult testResult =

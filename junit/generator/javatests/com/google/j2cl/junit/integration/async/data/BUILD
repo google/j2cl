@@ -60,6 +60,11 @@ j2cl_test_integration_test_data(
 )
 
 j2cl_test_integration_test_data(
+    name = "TestListenableFuture",
+    deps = ASYNC_TEST_DEPS + ["//third_party:guava"],
+)
+
+j2cl_test_integration_test_data(
     name = "TestReturnsNullForPromise",
     deps = ASYNC_TEST_DEPS,
 )
