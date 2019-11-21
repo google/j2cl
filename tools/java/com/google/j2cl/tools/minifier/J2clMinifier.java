@@ -353,6 +353,8 @@ public class J2clMinifier {
    */
   private final Multiset<String> countsByIdentifier = HashMultiset.create();
 
+  private final boolean minifierDisabled = Boolean.getBoolean("j2cl_minifier_disabled");
+
   /** Set of file paths that are not used by the application. */
   private ImmutableSet<String> unusedFiles;
 
@@ -451,6 +453,10 @@ public class J2clMinifier {
    * and unique) versions and strips block comments.
    */
   public String minify(String filePath, String content) {
+    if (minifierDisabled) {
+      return content;
+    }
+
     String fileKey = extractFileKey(filePath);
 
     // early exit if the file need to be removed entirely
