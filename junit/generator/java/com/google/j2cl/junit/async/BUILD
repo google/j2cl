@@ -17,7 +17,6 @@ java_library(
     testonly = 1,
     srcs = [
         "AsyncTestRunner.java",
-        "J2clAsyncTestRunner.java",
     ],
     deps = [
         "//third_party:guava",
@@ -30,7 +29,6 @@ j2cl_library(
     testonly = 1,
     srcs = [
         "super/AsyncTestRunner.java",
-        "super/J2clAsyncTestRunner.java",
     ],
     deps = [
         "//third_party:junit-j2cl",
