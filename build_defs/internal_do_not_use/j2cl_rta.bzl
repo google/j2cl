@@ -8,27 +8,34 @@ load(
     "J2clInfo",
 )
 
-_TransitiveLibraryInfo = provider(fields = ["files"])
+_TransitiveLibraryInfo = provider(fields = ["files", "module_names"])
 _J2clRtaInfo = provider()
 
 _RTA_ASPECT_ATTRS = ["deps", "exports", "module_deps", "modules"]
 
 def _library_info_aspect_impl(target, ctx):
     library_info_file = target[J2clInfo]._private_.library_info if J2clInfo in target else []
+    module_names = [ctx.rule.attr.name] if ctx.rule.kind == "pinto_module" else []
 
     # Because the aspect propagates along attributes listed in _RTA_ASPECT_ATTRS,
     # the aspect has been previously applied to targets listed in those attributes.
     # We can safely assume that _TransitiveLibraryInfo exists on those targets.
     transitive_library_infos = []
+    transitive_module_names = []
     for attr in _RTA_ASPECT_ATTRS:
         if hasattr(ctx.rule.attr, attr):
             transitive_library_infos += [
                 target[_TransitiveLibraryInfo].files
                 for target in getattr(ctx.rule.attr, attr)
             ]
+            transitive_module_names += [
+                target[_TransitiveLibraryInfo].module_names
+                for target in getattr(ctx.rule.attr, attr)
+            ]
 
     return [_TransitiveLibraryInfo(
         files = depset(library_info_file, transitive = transitive_library_infos),
+        module_names = depset(module_names, transitive = transitive_module_names),
     )]
 
 _library_info_aspect = aspect(
@@ -64,6 +71,13 @@ def _j2cl_rta_impl(ctx):
         executable = ctx.executable._rta_runner,
     )
 
+    # Store module names in a file so they can be accessed later
+    all_module_names = depset(
+        transitive = [t[_TransitiveLibraryInfo].module_names for t in ctx.attr.targets],
+    ).to_list()
+
+    ctx.actions.write(ctx.outputs.module_name_list, "\n".join(all_module_names))
+
     return [
         _J2clRtaInfo(
             unused_types_list = unused_types_list,
@@ -91,6 +105,7 @@ j2cl_rta = rule(
         "unused_types_list": "%{name}_unused_types.list",
         "unused_members_list": "%{name}_unused_members.list",
         "removal_code_info_file": "%{name}_removal_code_info",
+        "module_name_list": "%{name}_module_names.list",
     },
     implementation = _j2cl_rta_impl,
 )
