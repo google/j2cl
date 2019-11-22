@@ -136,7 +136,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     private org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit;
     private Map<IVariableBinding, Variable> variableByJdtBinding = new HashMap<>();
 
-    @SuppressWarnings({"cast", "unchecked"})
+    @SuppressWarnings({"cast"})
     private CompilationUnit convert(
         String sourceFilePath,
         org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit,
@@ -1304,21 +1304,18 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       MethodDescriptor methodDescriptor = JdtUtils.createMethodDescriptor(methodBinding);
       List<Expression> arguments =
           convertArguments(methodBinding, JdtUtils.asTypedList(expression.arguments()));
-      if (expression.getQualifier() == null) {
-        return MethodCall.Builder.from(methodDescriptor)
-            .setQualifier(new SuperReference(getCurrentType().getSuperTypeDescriptor()))
-            .setArguments(arguments)
-            .setSourcePosition(getSourcePosition(expression))
-            .build();
-      } else if (expression.getQualifier().resolveTypeBinding().isInterface()) {
-        // This is a default method call.
+      if (methodDescriptor.isDefaultMethod()) {
+        // This super method call targets the default method in the interface.
         return MethodCall.Builder.from(methodDescriptor)
             .setQualifier(new ThisReference(methodDescriptor.getEnclosingTypeDescriptor()))
             .setArguments(arguments)
             .setStaticDispatch(true)
             .setSourcePosition(getSourcePosition(expression))
             .build();
-      } else {
+      }
+
+      if (expression.getQualifier() != null) {
+        // This is a qualified super call, targeting an outer class method.
         // OuterClass.super.fun() is transpiled to
         // SuperClassOfOuterClass.prototype.fun.call(OuterClass.this);
         return MethodCall.Builder.from(methodDescriptor)
@@ -1331,6 +1328,13 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
             .setSourcePosition(getSourcePosition(expression))
             .build();
       }
+
+      // This is a regular super call targeting a method in a superclass.
+      return MethodCall.Builder.from(methodDescriptor)
+          .setQualifier(new SuperReference(getCurrentType().getSuperTypeDescriptor()))
+          .setArguments(arguments)
+          .setSourcePosition(getSourcePosition(expression))
+          .build();
     }
 
     private List<Expression> convertArguments(

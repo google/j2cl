@@ -3,6 +3,8 @@ goog.module('com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.A
 const A = goog.require('com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault.A$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let I = goog.forwardDeclare('com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault.I$impl');
+
 class C extends A {
   /**
    * @protected
@@ -37,7 +39,8 @@ class C extends A {
    * @public
    */
   m_bar__() {
-    super.m_bar__();
+    I.m_bar__$default__com_google_j2cl_transpiler_readable_abstractmethodoverridedefault_AbstractMethodOverrideDefault_I(
+        this);
   }
   /**
    * @public
@@ -58,7 +61,10 @@ class C extends A {
   /**
    * @public
    */
-  static $loadModules() {}
+  static $loadModules() {
+    I = goog.module.get(
+        'com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault.I$impl');
+  }
 }
 $Util.$setClassMetadata(
     C,

@@ -1294,9 +1294,12 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     }
 
     boolean hasSuperQualifier = isSuperExpression(jcQualifier);
-    if (hasSuperQualifier && qualifier.getTypeDescriptor().isInterface()) {
+    boolean isStaticDispatch = isQualifiedSuperExpression(jcQualifier);
+    if (hasSuperQualifier
+        && (qualifier.getTypeDescriptor().isInterface() || methodDescriptor.isDefaultMethod())) {
       // This is a default method call through super.
       qualifier = new ThisReference(methodDescriptor.getEnclosingTypeDescriptor());
+      isStaticDispatch = true;
     } else if (hasSuperQualifier
         && !qualifier.getTypeDescriptor().isSameBaseType(getCurrentType().getTypeDescriptor())) {
       qualifier =
@@ -1312,8 +1315,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         MethodCall.Builder.from(methodDescriptor)
             .setQualifier(qualifier)
             .setArguments(arguments)
-            .setStaticDispatch(
-                isQualifiedSuperExpression(jcQualifier) && !(qualifier instanceof SuperReference))
+            .setStaticDispatch(isStaticDispatch)
             .setSourcePosition(getSourcePosition(methodInvocation))
             .build();
     if (hasUncheckedCastAnnotation(methodSymbol)) {
