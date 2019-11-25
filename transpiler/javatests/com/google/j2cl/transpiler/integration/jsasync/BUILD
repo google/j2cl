@@ -14,6 +14,5 @@ package(
 integration_test(
     name = "jsasync",
     srcs = glob(["*.java"]),
-    disable_esnext_compiled_test = True,
     deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )
