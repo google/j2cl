@@ -19,10 +19,9 @@ java_proto_library(
     deps = [":code_removal_info_proto"],
 )
 
-# TODO(b/114042401): Consider to add a Worker
 java_binary(
-    name = "J2clRtaRunner",
-    main_class = "com.google.j2cl.tools.rta.J2clRta",
+    name = "J2clRta_worker",
+    main_class = "com.google.j2cl.tools.rta.BazelJ2clRta",
     visibility = [
         "//:__subpackages__",
         "//java/com/google/caribou/ui/pinto/modules:__subpackages__",
@@ -38,6 +37,8 @@ java_library(
         "//third_party:args4j",
         "//third_party:auto_value",
         "//third_party:guava",
+        "//transpiler/java/com/google/j2cl/bazel",
+        "//transpiler/java/com/google/j2cl/common",
         "//transpiler/java/com/google/j2cl/libraryinfo",
     ],
 )

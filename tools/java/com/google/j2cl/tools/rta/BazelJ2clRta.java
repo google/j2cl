@@ -17,6 +17,8 @@ package com.google.j2cl.tools.rta;
 
 import com.google.common.io.CharSink;
 import com.google.common.io.Files;
+import com.google.j2cl.bazel.BazelWorker;
+import com.google.j2cl.common.Problems;
 import com.google.j2cl.libraryinfo.LibraryInfo;
 import com.google.j2cl.libraryinfo.TypeInfo;
 import java.io.File;
@@ -27,20 +29,10 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import org.kohsuke.args4j.Argument;
-import org.kohsuke.args4j.CmdLineException;
-import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.Option;
 
-/** Command-line helper for running the RTA algorithm. */
-public class J2clRta {
-  public static void main(String[] args) throws CmdLineException {
-    J2clRta runner = new J2clRta();
-    CmdLineParser parser = new CmdLineParser(runner);
-
-    parser.parseArgument(args);
-    runner.run();
-  }
-
+/** Runs The J2clRta as a worker. */
+public class BazelJ2clRta extends BazelWorker {
   @Option(
       name = "--unusedTypesOutput",
       usage = "Path of output file containing the list of unused types",
@@ -62,7 +54,8 @@ public class J2clRta {
   @Argument(required = true, usage = "The list of call graph files", multiValued = true)
   List<String> inputs = null;
 
-  private void run() {
+  @Override
+  protected Problems run() {
     List<TypeInfo> typeInfos = collectTypeInfos();
 
     RtaResult rtaResult = RapidTypeAnalyser.analyse(typeInfos);
@@ -70,6 +63,8 @@ public class J2clRta {
     writeToFile(unusedTypesOutputFilePath, rtaResult.getUnusedTypes());
     writeToFile(unusedMembersOutputFilePath, rtaResult.getUnusedMembers());
     writeToFile(removalCodeInfoOutputFilePath, rtaResult.getCodeRemovalInfo());
+
+    return new Problems();
   }
 
   private List<TypeInfo> collectTypeInfos() {
@@ -100,5 +95,9 @@ public class J2clRta {
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
+  }
+
+  public static void main(String[] workerArgs) throws Exception {
+    BazelWorker.start(workerArgs, BazelJ2clRta::new);
   }
 }

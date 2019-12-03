@@ -55,8 +55,8 @@ def _j2cl_rta_impl(ctx):
     unused_members_list = ctx.outputs.unused_members_list
     removal_code_info_file = ctx.outputs.removal_code_info_file
 
-    # TODO(b/120914781): use a param file
     rta_args = ctx.actions.args()
+    rta_args.use_param_file("@%s", use_always = True)
     rta_args.add("--unusedTypesOutput", unused_types_list)
     rta_args.add("--unusedMembersOutput", unused_members_list)
     rta_args.add("--removalCodeInfoOutput", removal_code_info_file)
@@ -67,8 +67,10 @@ def _j2cl_rta_impl(ctx):
         inputs = all_library_info_files,
         outputs = [unused_types_list, unused_members_list, removal_code_info_file],
         arguments = [rta_args],
-        progress_message = "Running rapid type analysis",
+        progress_message = "Running J2CL rapid type analysis",
         executable = ctx.executable._rta_runner,
+        execution_requirements = {"supports-workers": "1"},
+        mnemonic = "J2clRta",
     )
 
     # Store module names in a file so they can be accessed later
@@ -97,7 +99,7 @@ j2cl_rta = rule(
             cfg = "host",
             executable = True,
             default = Label(
-                "//tools/java/com/google/j2cl/tools/rta:J2clRtaRunner",
+                "//tools/java/com/google/j2cl/tools/rta:J2clRta_worker",
             ),
         ),
     },
