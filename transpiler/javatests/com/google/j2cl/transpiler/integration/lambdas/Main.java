@@ -19,10 +19,7 @@ import static com.google.j2cl.transpiler.utils.Asserts.assertEquals;
 import static com.google.j2cl.transpiler.utils.Asserts.assertThrowsClassCastException;
 import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
 
-@SuppressWarnings("MultipleTopLevelClasses")
-interface MyInterface {
-  int foo(int i);
-}
+import java.io.Serializable;
 
 public class Main {
   public static void main(String[] args) {
@@ -32,23 +29,24 @@ public class Main {
     captures.testLambdaCaptureField();
     captures.testLambdaCaptureLocal();
     captures.testLambdaCaptureFieldAndLocal();
-    captures.testLambdaCaptureField2();
     testSpecialLambdas();
     testSpecializedLambda();
     testVarargsLambdas();
     testVarKeywordInLambda();
+    testSerializableLambda();
+    testNestedLambdas();
+    testArbitraryNesting();
+  }
+
+  private interface IntToIntFunction {
+    int apply(int i);
   }
 
   private static class Captures {
     private int field = 100;
 
-    private int test(MyInterface intf, int n) {
-      return this.field + intf.foo(n);
-    }
-
-    private int test(MyInterface intf) {
-      this.field = 200;
-      return this.field + intf.foo(300);
+    private int test(IntToIntFunction f, int n) {
+      return this.field + f.apply(n);
     }
 
     private void testLambdaNoCapture() {
@@ -64,13 +62,25 @@ public class Main {
     }
 
     private void testInstanceofLambda() {
-      MyInterface intf = i -> i + 1;
-      assertTrue(intf instanceof MyInterface);
+      IntToIntFunction f = i -> i + 1;
+      assertTrue(f instanceof IntToIntFunction);
     }
 
     private void testLambdaCaptureField() {
       int result = test(i -> field + i + 1, 10);
       assertTrue(result == 211);
+
+      class Local {
+        int field = 10;
+
+        class Inner {
+          int getOuterField() {
+            return Local.this.field;
+          }
+        }
+      }
+
+      assertEquals(10, new Local().new Inner().getOuterField());
     }
 
     private void testLambdaCaptureLocal() {
@@ -89,12 +99,6 @@ public class Main {
               },
               10);
       assertTrue(result == 213);
-    }
-
-    private void testLambdaCaptureField2() {
-      int result = test(i -> field + i + 1);
-      assertTrue((result == 701));
-      assertTrue((this.field == 200));
     }
   }
 
@@ -159,7 +163,57 @@ public class Main {
   }
 
   private static void testVarKeywordInLambda() {
-    MyInterface intf = (var i) -> i + 1;
-    assertEquals(3, intf.foo(2));
+    IntToIntFunction f = (var i) -> i + 1;
+    assertEquals(3, f.apply(2));
+  }
+
+  private static void testSerializableLambda() {
+    Object lambda = (Consumer<Object> & Serializable) o -> {};
+    assertTrue(lambda instanceof Serializable);
+  }
+
+  private static void testArbitraryNesting() {
+    class A {
+      public void a() {
+        int[] x = new int[] {42};
+        class B {
+          public int b() {
+            IntToIntFunction i =
+                new IntToIntFunction() {
+
+                  @Override
+                  public int apply(int a) {
+                    IntToIntFunction ii =
+                        n -> {
+                          return new IntToIntFunction() {
+                            @Override
+                            public int apply(int b) {
+                              IntToIntFunction iii = m -> x[0] = x[0] + a + b + n + m;
+                              return iii.apply(100);
+                            }
+                          }.apply(200);
+                        };
+                    return ii.apply(300);
+                  }
+                };
+            return i.apply(400);
+          }
+        }
+        int result = new B().b();
+        assertTrue(result == 1042);
+        assertTrue(x[0] == 1042);
+      }
+    }
+  }
+
+  private static void testNestedLambdas() {
+    int a = 10;
+    IntToIntFunction i =
+        m -> {
+          int b = 20;
+          IntToIntFunction ii = n -> a + b + m + n;
+          return ii.apply(100);
+        };
+    assertTrue((i.apply(200) == 330));
   }
 }
