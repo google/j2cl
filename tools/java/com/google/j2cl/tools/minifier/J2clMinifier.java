@@ -68,13 +68,7 @@ public class J2clMinifier {
         StringBuilder minifiedContentBuffer, StringBuilder identifierBuffer, char c, int state);
   }
 
-  /**
-   * This is a unicode fullwidth low line. Using this unusual separator and incrementing number
-   * makes it extremely unlikely that a new minified name will collide with some existing
-   * identifier.
-   */
-  private static final String MINIFICATION_SEPARATOR = "\uFF3F";
-
+  private static final String MINIFICATION_SEPARATOR = "_$";
   private static final String ZIP_FILE_SEPARATOR = "!/";
   private static final int ZIP_FILE_SEPARATOR_OFFSET = ZIP_FILE_SEPARATOR.length();
 

@@ -2,6 +2,7 @@
 #   j2cl/jre: JRE subset for transpilation.
 
 load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_binary")
+load("//third_party/java/j2cl:j2cl_test.bzl", "j2cl_test")
 
 package(
     licenses = ["notice"],  # Apache 2.0
@@ -112,6 +113,20 @@ j2cl_multi_test(
     name = "EmulJava8",
     shard_count = 8,
     test_class = "com.google.gwt.emultest.EmulJava8Suite",
+)
+
+# A smoke check that verifies es5 transpiled test works
+j2cl_test(
+    name = "ConcurrentSuite_es5",
+    browsers = ["//testing/web/browsers:ie11-win7"],
+    generate_build_test = False,
+    jvm_flags = ["-Djsrunner.net.transpileMode=always"],
+    shard_count = 5,
+    test_class = "com.google.gwt.emultest.ConcurrentSuite",
+    runtime_deps = [
+        ":emul_tests_lib",
+        "//third_party/java/junit:junit-j2cl",
+    ],
 )
 
 load("@bazel_tools//tools/build_rules:build_test.bzl", "build_test")

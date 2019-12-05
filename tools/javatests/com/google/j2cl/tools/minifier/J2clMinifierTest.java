@@ -23,19 +23,19 @@ public class J2clMinifierTest extends TestCase {
   public void testAvoidsCollisions() {
     assertChange(
         "this.foo(); this.m_foo__();", //
-        "this.foo(); this.foo＿1();");
+        "this.foo(); this.foo_$1();");
     assertChange(
         "this.m_bar__java_lang_String(null); this.m_bar__java_lang_Object(null);",
-        "this.bar＿1(null); this.bar＿2(null);");
+        "this.bar_$1(null); this.bar_$2(null);");
 
-    assertChange("this.m_baz__java_lang_Object();", "this.baz＿1();");
-    assertChange("this.m_baz__java_lang_String();", "this.baz＿2();");
-    assertChange("this.m_baz__java_lang_Number();", "this.baz＿3();");
+    assertChange("this.m_baz__java_lang_Object();", "this.baz_$1();");
+    assertChange("this.m_baz__java_lang_String();", "this.baz_$2();");
+    assertChange("this.m_baz__java_lang_Number();", "this.baz_$3();");
   }
 
   public void testBailOutCases() {
     // Triple underscores at the beginning mess up the mangling pattern. Minifying them would
-    // result in an unreadable and illegal identifier of just "＿1". Make sure we leave them alone.
+    // result in an unreadable and illegal identifier of just "_$1". Make sure we leave them alone.
     assertNoChange("m___parseAndValidateInt__java_lang_String__int__int__int");
     assertNoChange("m___");
     assertNoChange("m__parseAndValidate");
@@ -78,42 +78,42 @@ public class J2clMinifierTest extends TestCase {
   }
 
   public void testConsistency() {
-    assertChange("this.m_foo__();", "this.foo＿1();");
-    assertChange("this.m_foo__();", "this.foo＿1();");
-    assertChange("this.m_foo__();", "this.foo＿1();");
+    assertChange("this.m_foo__();", "this.foo_$1();");
+    assertChange("this.m_foo__();", "this.foo_$1();");
+    assertChange("this.m_foo__();", "this.foo_$1();");
   }
 
   public void testFields() {
-    assertChange("f_someInstanceField__com_google_j2cl_MyClass", "someInstanceField＿1");
-    assertChange("$f_someStaticField__com_google_j2cl_MyClass", "someStaticField＿1");
+    assertChange("f_someInstanceField__com_google_j2cl_MyClass", "someInstanceField_$1");
+    assertChange("$f_someStaticField__com_google_j2cl_MyClass", "someStaticField_$1");
   }
 
   public void testFindsIdentifiersInContext() {
-    assertChange(" m_foo__ ", " foo＿1 ");
-    assertChange(".m_foo__(", ".foo＿1(");
-    assertChange(".m_foo__;", ".foo＿1;");
-    assertChange("{m_foo__}", "{foo＿1}");
-    assertChange("(m_foo__)", "(foo＿1)");
+    assertChange(" m_foo__ ", " foo_$1 ");
+    assertChange(".m_foo__(", ".foo_$1(");
+    assertChange(".m_foo__;", ".foo_$1;");
+    assertChange("{m_foo__}", "{foo_$1}");
+    assertChange("(m_foo__)", "(foo_$1)");
 
-    assertChange(" f_bar__com_google_j2cl_MyClass ", " bar＿1 ");
-    assertChange(".f_bar__com_google_j2cl_MyClass(", ".bar＿1(");
-    assertChange(".f_bar__com_google_j2cl_MyClass;", ".bar＿1;");
-    assertChange("{f_bar__com_google_j2cl_MyClass}", "{bar＿1}");
-    assertChange("(f_bar__com_google_j2cl_MyClass)", "(bar＿1)");
+    assertChange(" f_bar__com_google_j2cl_MyClass ", " bar_$1 ");
+    assertChange(".f_bar__com_google_j2cl_MyClass(", ".bar_$1(");
+    assertChange(".f_bar__com_google_j2cl_MyClass;", ".bar_$1;");
+    assertChange("{f_bar__com_google_j2cl_MyClass}", "{bar_$1}");
+    assertChange("(f_bar__com_google_j2cl_MyClass)", "(bar_$1)");
 
-    assertChange(" $f_baz__com_google_j2cl_MyClass ", " baz＿1 ");
-    assertChange(".$f_baz__com_google_j2cl_MyClass(", ".baz＿1(");
-    assertChange(".$f_baz__com_google_j2cl_MyClass;", ".baz＿1;");
-    assertChange("{$f_baz__com_google_j2cl_MyClass}", "{baz＿1}");
-    assertChange("($f_baz__com_google_j2cl_MyClass)", "(baz＿1)");
+    assertChange(" $f_baz__com_google_j2cl_MyClass ", " baz_$1 ");
+    assertChange(".$f_baz__com_google_j2cl_MyClass(", ".baz_$1(");
+    assertChange(".$f_baz__com_google_j2cl_MyClass;", ".baz_$1;");
+    assertChange("{$f_baz__com_google_j2cl_MyClass}", "{baz_$1}");
+    assertChange("($f_baz__com_google_j2cl_MyClass)", "(baz_$1)");
 
-    assertChange(" $implements__java_util_Map$Entry ", " implements＿1 ");
-    assertChange(".$implements__java_util_Map$Entry(", ".implements＿1(");
-    assertChange(".$implements__java_util_Map$Entry;", ".implements＿1;");
-    assertChange("{$implements__java_util_Map$Entry}", "{implements＿1}");
-    assertChange("($implements__java_util_Map$Entry)", "(implements＿1)");
+    assertChange(" $implements__java_util_Map$Entry ", " implements_$1 ");
+    assertChange(".$implements__java_util_Map$Entry(", ".implements_$1(");
+    assertChange(".$implements__java_util_Map$Entry;", ".implements_$1;");
+    assertChange("{$implements__java_util_Map$Entry}", "{implements_$1}");
+    assertChange("($implements__java_util_Map$Entry)", "(implements_$1)");
 
-    assertChange("abc.$f_baz__com_google_j2cl_MyClass.klm", "abc.baz＿1.klm");
+    assertChange("abc.$f_baz__com_google_j2cl_MyClass.klm", "abc.baz_$1.klm");
   }
 
   public void testLineComments() {
@@ -127,7 +127,7 @@ public class J2clMinifierTest extends TestCase {
     assertNoChange("// /* \n */ ");
     assertNoChange("//# sourceMappingURL=/path/to/file.js.map");
 
-    assertChange("m_foo__// bar \nm_foo__", "foo＿1// bar \nfoo＿1");
+    assertChange("m_foo__// bar \nm_foo__", "foo_$1// bar \nfoo_$1");
     assertChange("/* */// bar \n/* */", "// bar \n");
     assertNoChange("'foo'// bar \n'foo'");
     assertNoChange("alert('hi');// bar \nalert('hi');");
@@ -140,20 +140,20 @@ public class J2clMinifierTest extends TestCase {
     assertNoChange("//# sourceMappingURL=/path/to/file.js.map\n");
 
     // Division
-    assertChange("1/f_bar__java_lang_Number;", "1/bar＿1;");
+    assertChange("1/f_bar__java_lang_Number;", "1/bar_$1;");
   }
 
   public void testMeta() {
-    assertChange("$create__", "create＿1");
-    assertChange("$ctor__java_lang_String__", "ctor＿1");
-    assertChange("$init__java_lang_String__java_lang_Object", "init＿1");
-    assertChange("$implements__java_util_Map$Entry", "implements＿1");
+    assertChange("$create__", "create_$1");
+    assertChange("$ctor__java_lang_String__", "ctor_$1");
+    assertChange("$init__java_lang_String__java_lang_Object", "init_$1");
+    assertChange("$implements__java_util_Map$Entry", "implements_$1");
   }
 
   public void testMethods() {
-    assertChange("m_foo__", "foo＿1");
-    assertChange("m_bar__java_lang_Object", "bar＿1");
-    assertChange("m_baz__java_lang_Object__java_lang_String", "baz＿1");
+    assertChange("m_foo__", "foo_$1");
+    assertChange("m_bar__java_lang_Object", "bar_$1");
+    assertChange("m_baz__java_lang_Object__java_lang_String", "baz_$1");
   }
 
   public void testForwardDeclare() {
@@ -208,14 +208,14 @@ public class J2clMinifierTest extends TestCase {
     // Single quoted
     assertNoChange("'/* */'");
     assertNoChange("'this.m_foo__();'");
-    assertChange("'' + this.m_foo__(); + ''", "'' + this.foo＿1(); + ''");
+    assertChange("'' + this.m_foo__(); + ''", "'' + this.foo_$1(); + ''");
     assertNoChange("'this.m_foo__();'");
     assertNoChange("'\\'/* */\\''");
 
     // Double quoted
     assertNoChange("\"/* */\"");
     assertNoChange("\"this.m_foo__();\"");
-    assertChange("\"\" + this.m_foo__(); + \"\"", "\"\" + this.foo＿1(); + \"\"");
+    assertChange("\"\" + this.m_foo__(); + \"\"", "\"\" + this.foo_$1(); + \"\"");
     assertNoChange("\"this.m_foo__();\"");
     assertNoChange("\"\\\"/* */\\\"'");
 
