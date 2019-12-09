@@ -7,13 +7,19 @@ load(":j2cl_js_common.bzl", "J2CL_JS_TOOLCHAIN_ATTRS", "j2cl_js_provider")
 J2clInfo = provider(fields = ["_private_", "_is_j2cl_provider"])
 
 def _create_js_lib_struct(j2cl_info, extra_providers = []):
-    if "js" in j2cl_info._private_.js_info:
-        extra_providers = extra_providers + [j2cl_info._private_.js_info["js"]]
+    jsinfo = _get_jsinfo_provider(j2cl_info)
+    if jsinfo:
+        return [j2cl_info] + extra_providers + [jsinfo]
+    else:
+        return struct(
+            providers = [j2cl_info] + extra_providers,
+            **j2cl_info._private_.js_info
+        )
 
-    return struct(
-        providers = [j2cl_info] + extra_providers,
-        **j2cl_info._private_.js_info
-    )
+def _get_jsinfo_provider(j2cl_info):
+    if "js" in j2cl_info._private_.js_info:
+        return j2cl_info._private_.js_info["js"]
+    return None
 
 def _compile(
         ctx,
@@ -94,7 +100,11 @@ def _split_deps(deps):
         if hasattr(d, "_is_j2cl_provider"):
             # This is a j2cl provider.
             java_deps.append(d._private_.java_info)
-            js_deps.append(struct(**d._private_.js_info))
+            jsinfo = _get_jsinfo_provider(d)
+            if jsinfo:
+                js_deps.append(struct(js = jsinfo))
+            else:
+                js_deps.append(struct(**d._private_.js_info))
         else:
             # This is a js provider
             js_deps.append(d)
@@ -235,4 +245,5 @@ J2CL_TOOLCHAIN_ATTRS.update(J2CL_JS_TOOLCHAIN_ATTRS)
 j2cl_common = struct(
     compile = _compile,
     create_js_lib_struct = _create_js_lib_struct,
+    get_jsinfo_provider = _get_jsinfo_provider,
 )
