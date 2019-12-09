@@ -1,0 +1,106 @@
+goog.module('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.Parent$impl');
+
+const GrandParent = goog.require('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.GrandParent$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Main = goog.forwardDeclare('com.google.j2cl.transpiler.readable.bridgejsmethod.Main$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @template T
+ * @extends {GrandParent<T>}
+ */
+class Parent extends GrandParent {
+  /**
+   * @protected
+   */
+  constructor() {
+    super();
+    /** @public {Main} */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_Parent;
+  }
+  /**
+   * @template T
+   * @param {Main} $outer_this
+   * @return {!Parent<T>}
+   * @public
+   */
+  static $create__com_google_j2cl_transpiler_readable_bridgejsmethod_Main(
+      $outer_this) {
+    Parent.$clinit();
+    let $instance = new Parent();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_Parent__com_google_j2cl_transpiler_readable_bridgejsmethod_Main(
+            $outer_this);
+    return $instance;
+  }
+  /**
+   * @param {Main} $outer_this
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_Parent__com_google_j2cl_transpiler_readable_bridgejsmethod_Main(
+      $outer_this) {
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_Parent =
+        $outer_this;
+    this.$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_GrandParent__com_google_j2cl_transpiler_readable_bridgejsmethod_Main(
+        $outer_this);
+  }
+  /**
+   * @param {T} t
+   * @public
+   */
+  m_jsMethod__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_Parent(
+      t) {}
+  /**
+   * @param {T} t
+   * @public
+   */
+  m_method__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_Parent(t) {}
+  /**
+   * Bridge method.
+   * @override
+   * @param {*} arg0
+   * @public
+   */
+  jsMethod(arg0) {
+    this.m_jsMethod__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_Parent(
+        /**@type {T} */ ($Casts.$to(arg0, Parent)));
+  }
+  /**
+   * Bridge method.
+   * @override
+   * @param {*} arg0
+   * @public
+   */
+  m_method__java_lang_Object(arg0) {
+    this.m_method__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_Parent(
+        /**@type {T} */ ($Casts.$to(arg0, Parent)));
+  }
+  /**
+   * @public
+   */
+  static $clinit() {
+    Parent.$clinit = () => {};
+    Parent.$loadModules();
+    GrandParent.$clinit();
+  }
+  /**
+   * @param {?} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof Parent;
+  }
+  /**
+   * @public
+   */
+  static $loadModules() {
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+  }
+}
+$Util.$setClassMetadata(
+    Parent, 'com.google.j2cl.transpiler.readable.bridgejsmethod.Main$Parent');
+
+exports = Parent;
+//# sourceMappingURL=Main$Parent.js.map

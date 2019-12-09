@@ -1,0 +1,81 @@
+goog.module('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.GrandParent$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Main = goog.forwardDeclare('com.google.j2cl.transpiler.readable.bridgejsmethod.Main$impl');
+
+/**
+ * @template T
+ */
+class GrandParent extends j_l_Object {
+  /**
+   * @protected
+   */
+  constructor() {
+    super();
+    /** @public {Main} */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_GrandParent;
+  }
+  /**
+   * @template T
+   * @param {Main} $outer_this
+   * @return {!GrandParent<T>}
+   * @public
+   */
+  static $create__com_google_j2cl_transpiler_readable_bridgejsmethod_Main(
+      $outer_this) {
+    GrandParent.$clinit();
+    let $instance = new GrandParent();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_GrandParent__com_google_j2cl_transpiler_readable_bridgejsmethod_Main(
+            $outer_this);
+    return $instance;
+  }
+  /**
+   * @param {Main} $outer_this
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_GrandParent__com_google_j2cl_transpiler_readable_bridgejsmethod_Main(
+      $outer_this) {
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_GrandParent =
+        $outer_this;
+    this.$ctor__java_lang_Object__();
+  }
+  /**
+   * @param {T} t
+   * @public
+   */
+  jsMethod(t) {}
+  /**
+   * @param {T} t
+   * @public
+   */
+  m_method__java_lang_Object(t) {}
+  /**
+   * @public
+   */
+  static $clinit() {
+    GrandParent.$clinit = () => {};
+    GrandParent.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /**
+   * @param {?} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof GrandParent;
+  }
+  /**
+   * @public
+   */
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(
+    GrandParent,
+    'com.google.j2cl.transpiler.readable.bridgejsmethod.Main$GrandParent');
+
+exports = GrandParent;
+//# sourceMappingURL=Main$GrandParent.js.map

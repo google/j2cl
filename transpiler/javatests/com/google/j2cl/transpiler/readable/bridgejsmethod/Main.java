@@ -180,4 +180,32 @@ public class Main {
     L<Integer> l = new L<>();
     l.fun("foo", 1);
   }
+
+  // Repro for b/144844889
+  class GrandParent<T> {
+    @JsMethod
+    // This method would have the signature jsMethod(Object) hence it would be mangled as
+    // jsMethod_Object if it was not a jsMethod.
+    public void jsMethod(T t) {}
+
+    public void method(T t) {}
+  }
+
+  class Parent<T extends Parent<T>> extends GrandParent<T> {
+    @Override
+    @JsMethod
+    // This method would have the signature jsMethod(Parent) hence it would be mangled as
+    // jsMethod_Parent if it was not a jsMethod, requiring a bridge from jsMethod_Object. But since
+    // they are JsMethods the bridge is not created, and jsMethod takes a Parent as a parameter.
+    public void jsMethod(T t) {}
+
+    @Override
+    public void method(T t) {}
+  }
+
+  // The bridge method creation scheme works independently form the JsMethod bridge creation, and
+  // here it determines that it needs a two bridges one jsMethod(Parent) to super.jsMethod(Parent)
+  // and one from jsMethod(Object) to super.jsMethod(Object) but since they are JsMethod and the
+  // names collide only one is created resulting in an inconsistent override.
+  class Child extends Parent<Child> {}
 }
