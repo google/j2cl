@@ -300,7 +300,7 @@ public class Assert {
     public static void assertArrayEquals(Object[] expecteds, Object[] actuals) {
         assertArrayEquals(null, expecteds, actuals);
     }
-    
+
     /**
      * Asserts that two boolean arrays are equal. If they are not, an
      * {@link AssertionError} is thrown with the given message. If
@@ -315,8 +315,8 @@ public class Assert {
     public static void assertArrayEquals(String message, boolean[] expecteds,
             boolean[] actuals) throws ArrayComparisonFailure {
         internalArrayEquals(message, expecteds, actuals);
-    }    
-    
+    }
+
     /**
      * Asserts that two boolean arrays are equal. If they are not, an
      * {@link AssertionError} is thrown. If <code>expected</code> and
@@ -971,7 +971,7 @@ public class Assert {
    */
   public static <T extends Throwable> T assertThrows(
       Class<T> expectedThrowable, ThrowingRunnable runnable) {
-    return expectThrows(expectedThrowable, runnable);
+    return assertThrows(null, expectedThrowable, runnable);
     }
 
     // ADDED FOR J2CL (adapted from 4.13)
@@ -982,13 +982,15 @@ public class Assert {
      * AssertionError} is thrown describing the mismatch; the exception that was actually thrown can
      * be obtained by calling {@link AssertionError#getCause}.
      *
+     * @param message the identifying message for the {@link AssertionError} (<code>null</code>
+     * okay)
      * @param expectedThrowable the expected type of the exception
-     * @param runnable       a function that is expected to throw an exception when executed
+     * @param runnable a function that is expected to throw an exception when executed
      * @return the exception thrown by {@code runnable}
      * @since 4.13
      */
-    public static <T extends Throwable> T expectThrows(
-            Class<T> expectedThrowable, ThrowingRunnable runnable) {
+    public static <T extends Throwable> T assertThrows(String message, Class<T> expectedThrowable,
+            ThrowingRunnable runnable) {
         // Sanity check due to b/31386321.
         assertFalse("Class metadata is corrupt", isInstanceOfTypeJ2cl(new Object(), String.class));
 
@@ -999,16 +1001,21 @@ public class Assert {
                 @SuppressWarnings("unchecked") T retVal = (T) actualThrown;
                 return retVal;
             } else {
-                String mismatchMessage = format("unexpected exception type thrown;",
-                        expectedThrowable.getSimpleName(), actualThrown.getClass().getSimpleName());
+                String mismatchMessage =
+                    buildPrefix(message)
+                        + format(
+                            "unexpected exception type thrown;",
+                            expectedThrowable.getName(),
+                            actualThrown.getClass().getName());
                 throw new AssertionError(mismatchMessage, actualThrown);
             }
         }
-        String message =
-            "expected "
-            + expectedThrowable.getSimpleName()
+    String notThrownMessage =
+        buildPrefix(message)
+            + "expected "
+            + expectedThrowable.getName()
             + " to be thrown, but nothing was thrown";
-        throw new AssertionError(message);
+        throw new AssertionError(notThrownMessage);
     }
 
     // ADDED FOR J2CL
@@ -1025,5 +1032,9 @@ public class Assert {
             }
         }
         return false;
+    }
+
+    private static String buildPrefix(String message) {
+        return message != null && !message.isEmpty() ? message + ": " : "";
     }
 }
