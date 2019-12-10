@@ -60,8 +60,8 @@ public class EnumOptimizationTest {
 
   @JsMethod
   private void unusedJsEnumBoxes() {
-    Object o = MyJsEnum.ONE;
-    boolean b = o == MyJsEnum.TWO;
+    Object o1 = MyJsEnum.ONE;
+    Object o2 = MyJsEnum.TWO;
   }
 
   @JsProperty
