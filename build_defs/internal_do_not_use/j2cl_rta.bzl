@@ -7,39 +7,36 @@ load(
     "//build_defs/internal_do_not_use:j2cl_common.bzl",
     "J2clInfo",
 )
+load(
+    "//build_defs/internal_do_not_use:rta_utils.bzl",
+    "RTA_ASPECT_ATTRS",
+    "pmf_file_aspect",
+    "write_module_names_file",
+)
 
-_TransitiveLibraryInfo = provider(fields = ["files", "module_names"])
+_TransitiveLibraryInfo = provider(fields = ["files"])
 _J2clRtaInfo = provider()
-
-_RTA_ASPECT_ATTRS = ["deps", "exports", "module_deps", "modules"]
 
 def _library_info_aspect_impl(target, ctx):
     library_info_file = target[J2clInfo]._private_.library_info if J2clInfo in target else []
-    module_names = [ctx.rule.attr.name] if ctx.rule.kind == "pinto_module" else []
 
     # Because the aspect propagates along attributes listed in _RTA_ASPECT_ATTRS,
     # the aspect has been previously applied to targets listed in those attributes.
     # We can safely assume that _TransitiveLibraryInfo exists on those targets.
     transitive_library_infos = []
-    transitive_module_names = []
-    for attr in _RTA_ASPECT_ATTRS:
+    for attr in RTA_ASPECT_ATTRS:
         if hasattr(ctx.rule.attr, attr):
             transitive_library_infos += [
                 target[_TransitiveLibraryInfo].files
                 for target in getattr(ctx.rule.attr, attr)
             ]
-            transitive_module_names += [
-                target[_TransitiveLibraryInfo].module_names
-                for target in getattr(ctx.rule.attr, attr)
-            ]
 
     return [_TransitiveLibraryInfo(
         files = depset(library_info_file, transitive = transitive_library_infos),
-        module_names = depset(module_names, transitive = transitive_module_names),
     )]
 
 _library_info_aspect = aspect(
-    attr_aspects = _RTA_ASPECT_ATTRS,
+    attr_aspects = RTA_ASPECT_ATTRS,
     provides = [_TransitiveLibraryInfo],
     implementation = _library_info_aspect_impl,
 )
@@ -74,11 +71,7 @@ def _j2cl_rta_impl(ctx):
     )
 
     # Store module names in a file so they can be accessed later
-    all_module_names = depset(
-        transitive = [t[_TransitiveLibraryInfo].module_names for t in ctx.attr.targets],
-    ).to_list()
-
-    ctx.actions.write(ctx.outputs.module_name_list, "\n".join(all_module_names))
+    write_module_names_file(ctx)
 
     return [
         _J2clRtaInfo(
@@ -90,11 +83,8 @@ def _j2cl_rta_impl(ctx):
 
 j2cl_rta = rule(
     attrs = {
-        # This is where we initiate the propagation of our aspect. It will be applied on the target
-        # listed in our targets attributes and then continue its propagation following "exports",
-        # "deps", "modules" and "module_deps" attributes of those targets
         # TODO(b/114732596): Add a check on targets provided in "targets" field.
-        "targets": attr.label_list(aspects = [_library_info_aspect]),
+        "targets": attr.label_list(aspects = [_library_info_aspect, pmf_file_aspect]),
         "_rta_runner": attr.label(
             cfg = "host",
             executable = True,
