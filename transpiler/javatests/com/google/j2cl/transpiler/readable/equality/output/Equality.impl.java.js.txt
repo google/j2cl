@@ -3,8 +3,11 @@ goog.module('com.google.j2cl.transpiler.readable.equality.Equality$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let Double = goog.forwardDeclare('java.lang.Double$impl');
+let Float = goog.forwardDeclare('java.lang.Float$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 class Equality extends j_l_Object {
   /**
@@ -42,6 +45,15 @@ class Equality extends j_l_Object {
           !$Equality.$same(j_l_Object.$create__(), j_l_Object.$create__()));
     }
     {
+      $Asserts.$assert($Equality.$same(
+          /**@type {?number} */ ($Casts.$to(0.0, Double)),
+          /**@type {?number} */ ($Casts.$to(0.0, Double))));
+    }
+    {
+      $Asserts.$assert($Equality.$same(
+          Float.m_valueOf__float(0.0), Float.m_valueOf__float(0.0)));
+    }
+    {
       $Asserts.$assert(!$Equality.$same(null, j_l_Object.$create__()));
       $Asserts.$assert(!$Equality.$same(j_l_Object.$create__(), null));
     }
@@ -66,8 +78,11 @@ class Equality extends j_l_Object {
    * @public
    */
   static $loadModules() {
+    Double = goog.module.get('java.lang.Double$impl');
+    Float = goog.module.get('java.lang.Float$impl');
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
   }
 }
 $Util.$setClassMetadata(
