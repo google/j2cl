@@ -179,7 +179,7 @@ closure_js_binary(
     dependency_mode = "SORT_ONLY",
     suppress_on_all_sources_in_transitive_closure = [
         "JSC_STRICT_INEXISTENT_PROPERTY",
-        "JSC_NULLABLE_RETURN_WITH_NAME",
+        "analyzerChecks",
         "deprecated",
     ],
     deps = ["//jre/java:jre"],
