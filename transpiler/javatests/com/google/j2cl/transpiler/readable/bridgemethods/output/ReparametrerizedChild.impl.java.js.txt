@@ -1,0 +1,89 @@
+goog.module('com.google.j2cl.transpiler.readable.bridgemethods.ReparametrerizedChild$impl');
+
+const ParameterizedParent = goog.require('com.google.j2cl.transpiler.readable.bridgemethods.ParameterizedParent$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @template E
+ * @extends {ParameterizedParent<E>}
+ */
+class ReparametrerizedChild extends ParameterizedParent {
+  /**
+   * @protected
+   */
+  constructor() {
+    super();
+  }
+  /**
+   * @template E
+   * @return {!ReparametrerizedChild<E>}
+   * @public
+   */
+  static $create__() {
+    ReparametrerizedChild.$clinit();
+    let $instance = new ReparametrerizedChild();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_bridgemethods_ReparametrerizedChild__();
+    return $instance;
+  }
+  /**
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_bridgemethods_ReparametrerizedChild__() {
+    this.$ctor__com_google_j2cl_transpiler_readable_bridgemethods_ParameterizedParent__();
+  }
+  /**
+   * @template S
+   * @param {S} t
+   * @return {S}
+   * @public
+   */
+  m_m__com_google_j2cl_transpiler_readable_bridgemethods_ReparametrerizedChild_$pp_com_google_j2cl_transpiler_readable_bridgemethods(
+      t) {
+    return null;
+  }
+  /**
+   * Bridge method.
+   * @override
+   * @template Q
+   * @param {ParameterizedParent} arg0
+   * @return {S}
+   * @public
+   */
+  m_m__com_google_j2cl_transpiler_readable_bridgemethods_ParameterizedParent_$pp_com_google_j2cl_transpiler_readable_bridgemethods(
+      arg0) {
+    return this
+        .m_m__com_google_j2cl_transpiler_readable_bridgemethods_ReparametrerizedChild_$pp_com_google_j2cl_transpiler_readable_bridgemethods(
+            /**@type {Q} */ ($Casts.$to(arg0, ReparametrerizedChild)));
+  }
+  /**
+   * @public
+   */
+  static $clinit() {
+    ReparametrerizedChild.$clinit = () => {};
+    ReparametrerizedChild.$loadModules();
+    ParameterizedParent.$clinit();
+  }
+  /**
+   * @param {?} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof ReparametrerizedChild;
+  }
+  /**
+   * @public
+   */
+  static $loadModules() {
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+  }
+}
+$Util.$setClassMetadata(
+    ReparametrerizedChild,
+    'com.google.j2cl.transpiler.readable.bridgemethods.ReparametrerizedChild');
+
+exports = ReparametrerizedChild;
+//# sourceMappingURL=ReparametrerizedChild.js.map

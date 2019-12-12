@@ -1,0 +1,95 @@
+goog.module('com.google.j2cl.transpiler.readable.bridgemethods.LeafChild$impl');
+
+const ReparametrerizedChild = goog.require('com.google.j2cl.transpiler.readable.bridgemethods.ReparametrerizedChild$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let ParameterizedParent = goog.forwardDeclare('com.google.j2cl.transpiler.readable.bridgemethods.ParameterizedParent$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @extends {ReparametrerizedChild<LeafChild>}
+ */
+class LeafChild extends ReparametrerizedChild {
+  /**
+   * @protected
+   */
+  constructor() {
+    super();
+  }
+  /**
+   * @return {!LeafChild}
+   * @public
+   */
+  static $create__() {
+    LeafChild.$clinit();
+    let $instance = new LeafChild();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_bridgemethods_LeafChild__();
+    return $instance;
+  }
+  /**
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_bridgemethods_LeafChild__() {
+    this.$ctor__com_google_j2cl_transpiler_readable_bridgemethods_ReparametrerizedChild__();
+  }
+  /**
+   * Bridge method.
+   * @override
+   * @template S
+   * @param {ReparametrerizedChild} arg0
+   * @return {Q}
+   * @public
+   */
+  m_m__com_google_j2cl_transpiler_readable_bridgemethods_ReparametrerizedChild_$pp_com_google_j2cl_transpiler_readable_bridgemethods(
+      arg0) {
+    return /**@type {?} */ ($Casts.$to(
+        super
+            .m_m__com_google_j2cl_transpiler_readable_bridgemethods_ParameterizedParent_$pp_com_google_j2cl_transpiler_readable_bridgemethods(
+                /**@type {S} */ ($Casts.$to(arg0, LeafChild))),
+        LeafChild));
+  }
+  /**
+   * Bridge method.
+   * @override
+   * @template Q
+   * @param {ParameterizedParent} arg0
+   * @return {S}
+   * @public
+   */
+  m_m__com_google_j2cl_transpiler_readable_bridgemethods_ParameterizedParent_$pp_com_google_j2cl_transpiler_readable_bridgemethods(
+      arg0) {
+    return /**@type {?} */ ($Casts.$to(
+        super
+            .m_m__com_google_j2cl_transpiler_readable_bridgemethods_ReparametrerizedChild_$pp_com_google_j2cl_transpiler_readable_bridgemethods(
+                /**@type {Q} */ ($Casts.$to(arg0, LeafChild))),
+        LeafChild));
+  }
+  /**
+   * @public
+   */
+  static $clinit() {
+    LeafChild.$clinit = () => {};
+    LeafChild.$loadModules();
+    ReparametrerizedChild.$clinit();
+  }
+  /**
+   * @param {?} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof LeafChild;
+  }
+  /**
+   * @public
+   */
+  static $loadModules() {
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+  }
+}
+$Util.$setClassMetadata(
+    LeafChild, 'com.google.j2cl.transpiler.readable.bridgemethods.LeafChild');
+
+exports = LeafChild;
+//# sourceMappingURL=LeafChild.js.map

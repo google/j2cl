@@ -149,3 +149,17 @@ class TestCase102 {
     public void set(B1 value) {}
   }
 }
+
+class ParameterizedParent<T extends ParameterizedParent<T>> {
+  <Q extends T> Q m(Q t) {
+    return null;
+  }
+}
+
+class ReparametrerizedChild<E extends ReparametrerizedChild<E>> extends ParameterizedParent<E> {
+  <S extends E> S m(S t) {
+    return null;
+  }
+}
+
+class LeafChild extends ReparametrerizedChild<LeafChild> {}
