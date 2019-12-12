@@ -28,6 +28,16 @@ public class Equality {
       assert new Object() != new Object();
     }
 
+    // Double
+    {
+      assert (Double) 0.0 == (Double) 0.0;
+    }
+
+    // Float
+    {
+      assert (Float) 0.0f == (Float) 0.0f;
+    }
+
     // Null literals
     {
       assert null != new Object();
