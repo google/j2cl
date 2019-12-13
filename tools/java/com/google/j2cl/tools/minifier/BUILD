@@ -18,6 +18,8 @@ java_library(
         "//:__pkg__",
         "//tools/javatests/com/google/j2cl/tools:__subpackages__",
     ],
+    # Be careful about dependencies!
+    # This is integrated by many core infra pieces and should be very lightweight.
     deps = [
         "//third_party:guava",
         "//tools/java/com/google/j2cl/tools/rta:code_removal_info_java_proto",
