@@ -73,12 +73,14 @@ public final class LibraryInfoBuilder {
             .setImplSourceFilePath(implFilePath);
 
     DeclaredTypeDescriptor superTypeDescriptor = type.getSuperTypeDescriptor();
-    if (superTypeDescriptor != null && !superTypeDescriptor.isStarOrUnknown()) {
+    if (superTypeDescriptor != null && !superTypeDescriptor.isNative()) {
       typeInfoBuilder.setExtendsType(getTypeId(superTypeDescriptor));
     }
 
     for (DeclaredTypeDescriptor superInterfaceType : type.getSuperInterfaceTypeDescriptors()) {
-      typeInfoBuilder.addImplementsType(getTypeId(superInterfaceType));
+      if (!superInterfaceType.isNative() && !superInterfaceType.isJsFunctionInterface()) {
+        typeInfoBuilder.addImplementsType(getTypeId(superInterfaceType));
+      }
     }
 
     // Collect references to getter and setter for the same field under the name of the field,
