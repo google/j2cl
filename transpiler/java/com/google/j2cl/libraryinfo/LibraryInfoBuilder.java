@@ -36,6 +36,8 @@ import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
 import com.google.protobuf.util.JsonFormat;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -44,31 +46,20 @@ import java.util.stream.Collectors;
 
 /** Traverse types and gather execution flow information for building call graph. */
 public final class LibraryInfoBuilder {
-  /** Serialize a LibraryInfo object into a JSON string. */
-  public static String toJson(LibraryInfo.Builder libraryInfo, Problems problems) {
-    try {
-      return JsonFormat.printer().print(libraryInfo);
-    } catch (IOException e) {
-      problems.fatal(FatalError.CANNOT_WRITE_FILE, e.toString());
-      return null;
-    }
-  }
 
-  public static byte[] toByteArray(LibraryInfo.Builder libraryInfo) {
-    return libraryInfo.build().toByteArray();
-  }
+  public static final int NULL_TYPE = 0;
+  private final LibraryInfo.Builder libraryInfo = LibraryInfo.newBuilder();
+  private final Map<String, Integer> types = new HashMap<>();
 
-  /** Gather information from a Type and create a TypeInfo object used to build the call graph. */
-  public static TypeInfo build(
+  public void addType(
       Type type,
       String headerFilePath,
       String implFilePath,
       Map<Member, com.google.j2cl.common.SourcePosition> outputSourceInfoByMember) {
-    String typeId = getTypeId(type);
 
     TypeInfo.Builder typeInfoBuilder =
         TypeInfo.newBuilder()
-            .setTypeId(typeId)
+            .setTypeId(getTypeId(type))
             .setHeaderSourceFilePath(headerFilePath)
             .setImplSourceFilePath(implFilePath);
 
@@ -118,12 +109,11 @@ public final class LibraryInfoBuilder {
       collectReferencedTypesAndMethodInvocations(member, builder);
     }
 
-    return typeInfoBuilder
-        .addAllMember(
+    libraryInfo.addType(
+        typeInfoBuilder.addAllMember(
             memberInfoBuilderByName.values().stream()
                 .map(MemberInfo.Builder::build)
-                .collect(Collectors.toList()))
-        .build();
+                .collect(Collectors.toList())));
   }
 
   private static SourcePosition createSourcePosition(
@@ -134,11 +124,11 @@ public final class LibraryInfoBuilder {
         .build();
   }
 
-  private static void collectReferencedTypesAndMethodInvocations(
+  private void collectReferencedTypesAndMethodInvocations(
       Member member, MemberInfo.Builder memberInfoBuilder) {
     Set<MethodInvocation> methodInvocationSet =
         new LinkedHashSet<>(memberInfoBuilder.getInvokedMethodsList());
-    Set<String> referencedTypes = new LinkedHashSet<>(memberInfoBuilder.getReferencedTypesList());
+    Set<Integer> referencedTypes = new LinkedHashSet<>(memberInfoBuilder.getReferencedTypesList());
 
     member.accept(
         new AbstractVisitor() {
@@ -190,7 +180,7 @@ public final class LibraryInfoBuilder {
         .addAllReferencedTypes(referencedTypes);
   }
 
-  private static MethodInvocation createMethodInvocation(
+  private MethodInvocation createMethodInvocation(
       MemberDescriptor memberDescriptor, InvocationKind invocationKind) {
     return MethodInvocation.newBuilder()
         .setMethod(getMemberId(memberDescriptor))
@@ -216,16 +206,40 @@ public final class LibraryInfoBuilder {
     return InvocationKind.DYNAMIC;
   }
 
-  private static String getTypeId(Type type) {
+  private int getTypeId(Type type) {
     return getTypeId(type.getDeclaration());
   }
 
-  private static String getTypeId(DeclaredTypeDescriptor typeDescriptor) {
+  private int getTypeId(DeclaredTypeDescriptor typeDescriptor) {
     return getTypeId(typeDescriptor.getTypeDeclaration());
   }
 
-  private static String getTypeId(TypeDeclaration typeDeclaration) {
-    return typeDeclaration.getModuleName();
+  private int getTypeId(TypeDeclaration typeDeclaration) {
+    // Note that the IDs start from '1' to reserve '0' for NULL_TYPE.
+    return types.computeIfAbsent(typeDeclaration.getModuleName(), x -> types.size() + 1);
+  }
+
+  private LibraryInfo build() {
+    libraryInfo.clearTypeMap();
+    String[] typeMap = new String[types.size() + 1];
+    typeMap[NULL_TYPE] = "<no-type>";
+    types.forEach((name, i) -> typeMap[i] = name);
+    libraryInfo.addAllTypeMap(Arrays.asList(typeMap));
+    return libraryInfo.build();
+  }
+
+  /** Serialize a LibraryInfo object into a JSON string. */
+  public String toJson(Problems problems) {
+    try {
+      return JsonFormat.printer().print(build());
+    } catch (IOException e) {
+      problems.fatal(FatalError.CANNOT_WRITE_FILE, e.toString());
+      return null;
+    }
+  }
+
+  public byte[] toByteArray() {
+    return build().toByteArray();
   }
 
   private static String getMemberId(MemberDescriptor memberDescriptor) {

@@ -19,15 +19,15 @@ import static com.google.common.base.Predicates.not;
 import static java.util.stream.Collectors.toSet;
 
 import com.google.j2cl.libraryinfo.InvocationKind;
-import com.google.j2cl.libraryinfo.TypeInfo;
+import com.google.j2cl.libraryinfo.LibraryInfo;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
 final class RapidTypeAnalyser {
 
-  static RtaResult analyse(List<TypeInfo> typeInfos) {
-    List<Type> types = TypeGraphBuilder.build(typeInfos);
+  static RtaResult analyse(List<LibraryInfo> libraryInfos) {
+    List<Type> types = TypeGraphBuilder.build(libraryInfos);
 
     // Go over the entry points to start the traversal.
     types.stream()

@@ -24,7 +24,6 @@ import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.common.SourcePosition;
-import com.google.j2cl.libraryinfo.LibraryInfo;
 import com.google.j2cl.libraryinfo.LibraryInfoBuilder;
 import java.io.File;
 import java.io.IOException;
@@ -76,7 +75,7 @@ public class OutputGeneratorStage {
     // over in the future.
     Map<String, NativeJavaScriptFile> nativeFilesByPath =
         NativeJavaScriptFile.getMap(nativeJavaScriptFiles, problems);
-    LibraryInfo.Builder libraryInfo = LibraryInfo.newBuilder();
+    LibraryInfoBuilder libraryInfoBuilder = new LibraryInfoBuilder();
 
     for (CompilationUnit j2clCompilationUnit : j2clCompilationUnits) {
       for (Type type : j2clCompilationUnit.getTypes()) {
@@ -161,12 +160,11 @@ public class OutputGeneratorStage {
             outputPath.resolve(headerRelativePath), javaScriptHeaderSource, problems);
 
         if (libraryInfoOutputPath.isPresent() || shouldGenerateReadableLibraryInfo) {
-          libraryInfo.addType(
-              LibraryInfoBuilder.build(
-                  type,
-                  headerRelativePath,
-                  implRelativePath,
-                  jsImplGenerator.getOutputSourceInfoByMember()));
+          libraryInfoBuilder.addType(
+              type,
+              headerRelativePath,
+              implRelativePath,
+              jsImplGenerator.getOutputSourceInfoByMember());
         }
 
         if (matchingNativeFile != null) {
@@ -181,13 +179,13 @@ public class OutputGeneratorStage {
 
     if (libraryInfoOutputPath.isPresent()) {
       J2clUtils.writeToFile(
-          libraryInfoOutputPath.get(), LibraryInfoBuilder.toByteArray(libraryInfo), problems);
+          libraryInfoOutputPath.get(), libraryInfoBuilder.toByteArray(), problems);
     }
 
     if (shouldGenerateReadableLibraryInfo) {
       J2clUtils.writeToFile(
           outputPath.resolve("library_info_debug.json"),
-          LibraryInfoBuilder.toJson(libraryInfo, problems),
+          libraryInfoBuilder.toJson(problems),
           problems);
     }
 

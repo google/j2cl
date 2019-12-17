@@ -15,18 +15,18 @@
  */
 package com.google.j2cl.tools.rta;
 
+import static com.google.common.collect.ImmutableList.toImmutableList;
+
 import com.google.common.io.CharSink;
 import com.google.common.io.Files;
 import com.google.j2cl.bazel.BazelWorker;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.libraryinfo.LibraryInfo;
-import com.google.j2cl.libraryinfo.TypeInfo;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.List;
 import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.Option;
@@ -56,9 +56,10 @@ public class BazelJ2clRta extends BazelWorker {
 
   @Override
   protected Problems run() {
-    List<TypeInfo> typeInfos = collectTypeInfos();
+    List<LibraryInfo> libraryInfos =
+        inputs.stream().map(BazelJ2clRta::readLibraryInfo).collect(toImmutableList());
 
-    RtaResult rtaResult = RapidTypeAnalyser.analyse(typeInfos);
+    RtaResult rtaResult = RapidTypeAnalyser.analyse(libraryInfos);
 
     writeToFile(unusedTypesOutputFilePath, rtaResult.getUnusedTypes());
     writeToFile(unusedMembersOutputFilePath, rtaResult.getUnusedMembers());
@@ -67,20 +68,15 @@ public class BazelJ2clRta extends BazelWorker {
     return new Problems();
   }
 
-  private List<TypeInfo> collectTypeInfos() {
-    try {
-      List<TypeInfo> typeInfos = new ArrayList<>();
-      for (String callGraphPath : inputs) {
-        LibraryInfo libraryInfo = LibraryInfo.parseFrom(new FileInputStream(callGraphPath));
-        typeInfos.addAll(libraryInfo.getTypeList());
-      }
-      return typeInfos;
+  private static LibraryInfo readLibraryInfo(String libraryInfoPath) {
+    try (FileInputStream file = new FileInputStream(libraryInfoPath)) {
+      return LibraryInfo.parseFrom(file);
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
   }
 
-  private void writeToFile(String filePath, List<String> lines) {
+  private static void writeToFile(String filePath, List<String> lines) {
     CharSink outputSink = Files.asCharSink(new File(filePath), StandardCharsets.UTF_8);
     try {
       outputSink.writeLines(lines);
@@ -89,7 +85,7 @@ public class BazelJ2clRta extends BazelWorker {
     }
   }
 
-  private void writeToFile(String filePath, CodeRemovalInfo results) {
+  private static void writeToFile(String filePath, CodeRemovalInfo results) {
     try (FileOutputStream outputStream = new FileOutputStream(filePath)) {
       results.writeTo(outputStream);
     } catch (IOException e) {

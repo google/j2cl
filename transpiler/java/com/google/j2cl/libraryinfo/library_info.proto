@@ -6,13 +6,14 @@ option java_multiple_files = true;
 option java_package = "com.google.j2cl.libraryinfo";
 
 message LibraryInfo {
-  repeated TypeInfo type = 1;
+  repeated string type_map = 1;
+  repeated TypeInfo type = 2;
 }
 
 message TypeInfo {
-  string type_id = 1;
-  string extends_type = 2;
-  repeated string implements_type = 3;
+  int32 type_id = 1;
+  int32 extends_type = 2;
+  repeated int32 implements_type = 3;
   repeated MemberInfo member = 4;
   string header_source_file_path = 5;
   string impl_source_file_path = 6;
@@ -24,7 +25,7 @@ message MemberInfo {
   bool static = 3;
   bool js_accessible = 4;
   repeated MethodInvocation invoked_methods = 5;
-  repeated string referenced_types = 6;
+  repeated int32 referenced_types = 6;
   SourcePosition position = 7;
 }
 
@@ -36,7 +37,7 @@ enum InvocationKind {
 
 message MethodInvocation {
   string method = 1;
-  string enclosing_type = 2;
+  int32 enclosing_type = 2;
   InvocationKind kind = 3;
 }
 

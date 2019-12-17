@@ -18,6 +18,7 @@ package com.google.j2cl.tools.rta;
 import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.collect.ImmutableList;
+import com.google.j2cl.libraryinfo.LibraryInfoBuilder;
 import com.google.j2cl.libraryinfo.TypeInfo;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -35,11 +36,13 @@ final class Type {
   private boolean instantiated;
   private final List<Member> potentiallyLiveMembers = new ArrayList<>();
 
-  static Type buildFrom(TypeInfo typeInfo) {
+  static Type buildFrom(TypeInfo typeInfo, String name) {
     Type type = new Type();
-
-    type.name = typeInfo.getTypeId();
-    type.isInterface = isInterfaceType(typeInfo);
+    type.name = name;
+    // All classes extends at least j.l.Object except j.l.Object itself
+    type.isInterface =
+        typeInfo.getExtendsType() == LibraryInfoBuilder.NULL_TYPE
+            && !"java.lang.Object".equals(name);
     type.headerSourceFile = typeInfo.getHeaderSourceFilePath();
     type.implSourceFile = typeInfo.getImplSourceFilePath();
     typeInfo
@@ -47,11 +50,6 @@ final class Type {
         .forEach(memberInfo -> type.addMember(Member.buildFrom(memberInfo, type)));
 
     return type;
-  }
-
-  private static boolean isInterfaceType(TypeInfo typeInfo) {
-    // All classes extends at least j.l.Object except j.l.Object itself
-    return typeInfo.getExtendsType().isEmpty() && !"java.lang.Object".equals(typeInfo.getTypeId());
   }
 
   private Type() {}
