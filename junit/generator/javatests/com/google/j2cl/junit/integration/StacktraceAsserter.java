@@ -39,7 +39,11 @@ class StacktraceAsserter {
 
   private static final ImmutableList<String> JAVA_TEST_INFRA_FRAMES =
       ImmutableList.of(
-          "at sun.reflect.", "at java.lang.reflect.", "at org.junit.", "at com.google.testing.");
+          "at sun.reflect.",
+          "at java.lang.reflect.",
+          "at org.junit.",
+          "at com.google.testing.",
+          "at java.base/");
 
   private static final ImmutableList<String> JS_TEST_INFRA_FRAMES =
       ImmutableList.of(
