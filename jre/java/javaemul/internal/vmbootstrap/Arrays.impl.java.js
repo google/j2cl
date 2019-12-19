@@ -94,7 +94,6 @@ class Arrays {
       return null;
     }
     let array = [];
-    array.length = length;
     if (metadata) {
       array.$$arrayMetadata = metadata;
     }
@@ -118,6 +117,7 @@ class Arrays {
       } else {
         // Object leaf types don't need a defined initial value because the
         // Javascript array's default of 'undefined' works fine.
+        array.length = length;
       }
     }
 
