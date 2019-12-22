@@ -33,6 +33,7 @@ def integration_test(
         defs = [],
         main_class = None,
         enable_gwt = False,
+        enable_rta = True,
         enable_bundle_size_report = False,
         gwt_deps = [],
         closure_defines = dict(),
