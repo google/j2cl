@@ -3,6 +3,9 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive", "http_jar")
 load("@io_bazel_rules_closure//closure:repositories.bzl", "rules_closure_dependencies")
 load("@bazel_skylib//lib:versions.bzl", "versions")
+load("@bazel_tools//tools/build_defs/repo:jvm.bzl", "jvm_maven_import_external")
+
+_MAVEN_CENTRAL_URLS = ["https://repo1.maven.org/maven2/"]
 
 def setup_j2cl_workspace():
     """Load all dependencies needed for J2CL."""
@@ -13,14 +16,18 @@ def setup_j2cl_workspace():
         omit_com_google_auto_common = True,
     )
 
-    native.maven_jar(
+    jvm_maven_import_external(
         name = "com_google_auto_common",
         artifact = "com.google.auto:auto-common:0.9",
+        server_urls = _MAVEN_CENTRAL_URLS,
+        licenses = ["notice"],
     )
 
-    native.maven_jar(
+    jvm_maven_import_external(
         name = "com_google_auto_service",
         artifact = "com.google.auto.service:auto-service:1.0-rc2",
+        server_urls = _MAVEN_CENTRAL_URLS,
+        licenses = ["notice"],
     )
 
     # We cannot replace com_google_jsinterop_annotations so choose a different name
@@ -30,56 +37,76 @@ def setup_j2cl_workspace():
         strip_prefix = "jsinterop-annotations-master",
     )
 
-    native.maven_jar(
+    jvm_maven_import_external(
         name = "org_apache_commons_collections",
         artifact = "commons-collections:commons-collections:3.2.2",
+        server_urls = _MAVEN_CENTRAL_URLS,
+        licenses = ["notice"],
     )
 
-    native.maven_jar(
+    jvm_maven_import_external(
         name = "org_apache_commons_lang2",
         artifact = "commons-lang:commons-lang:2.6",
+        server_urls = _MAVEN_CENTRAL_URLS,
+        licenses = ["notice"],
     )
 
-    native.maven_jar(
+    jvm_maven_import_external(
         name = "org_apache_commons_lang3",
         artifact = "org.apache.commons:commons-lang3:3.6",
+        server_urls = _MAVEN_CENTRAL_URLS,
+        licenses = ["notice"],
     )
 
-    native.maven_jar(
+    jvm_maven_import_external(
         name = "org_apache_commons_text",
         artifact = "org.apache.commons:commons-text:1.2",
+        server_urls = _MAVEN_CENTRAL_URLS,
+        licenses = ["notice"],
     )
 
-    native.maven_jar(
+    jvm_maven_import_external(
         name = "org_apache_velocity",
         artifact = "org.apache.velocity:velocity:1.7",
+        server_urls = _MAVEN_CENTRAL_URLS,
+        licenses = ["notice"],
     )
 
-    native.maven_jar(
+    jvm_maven_import_external(
         name = "org_junit",
         artifact = "junit:junit:4.12",
+        server_urls = _MAVEN_CENTRAL_URLS,
+        licenses = ["notice"],
     )
 
-    native.maven_jar(
+    jvm_maven_import_external(
         name = "com_google_testing_compile",
         artifact = "com.google.testing.compile:compile-testing:0.15",
+        server_urls = _MAVEN_CENTRAL_URLS,
+        licenses = ["notice"],
     )
 
-    native.maven_jar(
+    jvm_maven_import_external(
         name = "org_mockito",
         artifact = "org.mockito:mockito-all:1.9.5",
+        server_urls = _MAVEN_CENTRAL_URLS,
+        licenses = ["notice"],
     )
 
-    native.maven_jar(
+    jvm_maven_import_external(
         name = "com_google_truth",
         artifact = "com.google.truth:truth:1.0",
+        server_urls = _MAVEN_CENTRAL_URLS,
+        licenses = ["notice"],
     )
 
     # TODO(b/135461024): for now J2CL uses a prepackaged version of javac. But in the future it
     # might be better to tie in to the Java platform in bazel and control the version there.
-    native.maven_jar(
+    jvm_maven_import_external(
         name = "com_sun_tools_javac",
         artifact = "com.google.errorprone:javac:9+181-r4173-1",
+        server_urls = _MAVEN_CENTRAL_URLS,
+        licenses = ["notice"],
     )
 
     # Eclipse JARs listed at
