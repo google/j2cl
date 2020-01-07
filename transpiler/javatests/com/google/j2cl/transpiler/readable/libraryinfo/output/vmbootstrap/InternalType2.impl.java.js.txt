@@ -4,51 +4,34 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class InternalType2 extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!InternalType2}
-   * @public
-   */
+  /** @return {!InternalType2} */
   static $create__() {
     InternalType2.$clinit();
     let $instance = new InternalType2();
     $instance.$ctor__vmbootstrap_InternalType2__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__vmbootstrap_InternalType2__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @public
-   */
+
   foo() {}
-  /**
-   * @public
-   */
+
   static $clinit() {
     InternalType2.$clinit = () => {};
     InternalType2.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof InternalType2;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(InternalType2, 'vmbootstrap.InternalType2');

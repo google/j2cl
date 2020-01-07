@@ -4,21 +4,15 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class Outer extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {number} */
+    /**@type {number}*/
     this.f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer =
         0;
   }
-  /**
-   * @param {number} i
-   * @return {!Outer}
-   * @public
-   */
-  static $create__int(i) {
+  /** @return {!Outer} */
+  static $create__int(/** number */ i) {
     Outer.$clinit();
     let $instance = new Outer();
     $instance
@@ -26,42 +20,28 @@ class Outer extends j_l_Object {
             i);
     return $instance;
   }
-  /**
-   * @param {number} i
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer__int(
-      i) {
+      /** number */ i) {
     this.$ctor__java_lang_Object__();
     this.f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer =
         i;
   }
-  /**
-   * @return {number}
-   * @public
-   */
+  /** @return {number} */
   m_checkDispatch__() {
     return 1;
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     Outer.$clinit = () => {};
     Outer.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Outer;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

@@ -9,17 +9,11 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {Callable<T>}
  */
 class Task extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @template T
-   * @return {!Task<T>}
-   * @public
-   */
+  /** @template T @return {!Task<T>} */
   static $create__() {
     Task.$clinit();
     let $instance = new Task();
@@ -27,37 +21,23 @@ class Task extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_simplebridgemethods_Task__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_simplebridgemethods_Task__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @override
-   * @param {T} t
-   * @public
-   */
-  m_call__java_lang_Object(t) {}
-  /**
-   * @public
-   */
+  /** @override */
+  m_call__java_lang_Object(/** T */ t) {}
+
   static $clinit() {
     Task.$clinit = () => {};
     Task.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Task;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

@@ -6,16 +6,11 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let I = goog.forwardDeclare('com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault.I$impl');
 
 class C extends A {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!C}
-   * @public
-   */
+  /** @return {!C} */
   static $create__() {
     C.$clinit();
     let $instance = new C();
@@ -23,44 +18,28 @@ class C extends A {
         .$ctor__com_google_j2cl_transpiler_readable_abstractmethodoverridedefault_AbstractMethodOverrideDefault_C__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_abstractmethodoverridedefault_AbstractMethodOverrideDefault_C__() {
     this.$ctor__com_google_j2cl_transpiler_readable_abstractmethodoverridedefault_AbstractMethodOverrideDefault_A__();
   }
-  /**
-   * @override
-   * @public
-   */
+  /** @override */
   m_foo__() {}
-  /**
-   * @override
-   * @public
-   */
+  /** @override */
   m_bar__() {
     I.m_bar__$default__com_google_j2cl_transpiler_readable_abstractmethodoverridedefault_AbstractMethodOverrideDefault_I(
         this);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     C.$clinit = () => {};
     C.$loadModules();
     A.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof C;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     I = goog.module.get(
         'com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault.I$impl');

@@ -6,23 +6,18 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 
 class ValueOfNullable extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {?string} */
+    /**@type {?string}*/
     this.f_nullableString__com_google_j2cl_transpiler_readable_valueofnullable_ValueOfNullable;
-    /** @public {number} */
+    /**@type {number}*/
     this.f_someChar__com_google_j2cl_transpiler_readable_valueofnullable_ValueOfNullable =
         0 /* '\u0000' */;
-    /** @public {?string} */
+    /**@type {?string}*/
     this.f_result__com_google_j2cl_transpiler_readable_valueofnullable_ValueOfNullable;
   }
-  /**
-   * @return {!ValueOfNullable}
-   * @public
-   */
+  /** @return {!ValueOfNullable} */
   static $create__() {
     ValueOfNullable.$clinit();
     let $instance = new ValueOfNullable();
@@ -30,16 +25,12 @@ class ValueOfNullable extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_valueofnullable_ValueOfNullable__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_valueofnullable_ValueOfNullable__() {
     this.$ctor__java_lang_Object__();
     this.$init___$p_com_google_j2cl_transpiler_readable_valueofnullable_ValueOfNullable();
   }
-  /**
-   * @private
-   */
+  /** @private */
   $init___$p_com_google_j2cl_transpiler_readable_valueofnullable_ValueOfNullable() {
     this.f_nullableString__com_google_j2cl_transpiler_readable_valueofnullable_ValueOfNullable =
         'b';
@@ -51,25 +42,17 @@ class ValueOfNullable extends j_l_Object {
         j_l_String.m_valueOf__java_lang_Object(
             this.f_nullableString__com_google_j2cl_transpiler_readable_valueofnullable_ValueOfNullable);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     ValueOfNullable.$clinit = () => {};
     ValueOfNullable.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof ValueOfNullable;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     j_l_String = goog.module.get('java.lang.String$impl');
   }

@@ -4,16 +4,11 @@ const Parent = goog.require('com.google.j2cl.transpiler.readable.qualifiedsuperc
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class QualifiedSuperCall extends Parent {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!QualifiedSuperCall}
-   * @public
-   */
+  /** @return {!QualifiedSuperCall} */
   static $create__() {
     QualifiedSuperCall.$clinit();
     let $instance = new QualifiedSuperCall();
@@ -21,31 +16,21 @@ class QualifiedSuperCall extends Parent {
         .$ctor__com_google_j2cl_transpiler_readable_qualifiedsupercall_QualifiedSuperCall__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_qualifiedsupercall_QualifiedSuperCall__() {
     this.$ctor__com_google_j2cl_transpiler_readable_qualifiedsupercall_Parent__();
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     QualifiedSuperCall.$clinit = () => {};
     QualifiedSuperCall.$loadModules();
     Parent.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof QualifiedSuperCall;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

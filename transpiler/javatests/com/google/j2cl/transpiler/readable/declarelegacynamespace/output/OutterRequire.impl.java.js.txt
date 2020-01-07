@@ -4,39 +4,26 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class OutterRequire extends j_l_Object {
-  /**
-   * @public
-   */
   constructor() {
     OutterRequire.$clinit();
     super();
     this.$ctor__com_google_j2cl_transpiler_readable_declarelegacynamespace_OutterRequire__();
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_declarelegacynamespace_OutterRequire__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     OutterRequire.$clinit = () => {};
     OutterRequire.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof OutterRequire;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

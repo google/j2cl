@@ -12,57 +12,33 @@ let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.in
  * @extends {MyInterface}
  */
 class SubInterface {
-  /**
-   * @abstract
-   * @override
-   * @param {number} a
-   * @return {number}
-   * @public
-   */
-  foo(a) {}
-  /**
-   * @param {?function(number):number} fn
-   * @return {SubInterface}
-   * @public
-   */
-  static $adapt(fn) {
+  /** @abstract @override @return {number} */
+  foo(/** number */ a) {}
+  /** @return {SubInterface} */
+  static $adapt(/** ?function(number):number */ fn) {
     SubInterface.$clinit();
     return new $LambdaAdaptor(fn);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     SubInterface.$clinit = () => {};
     SubInterface.$loadModules();
   }
-  /**
-   * @param {Function} classConstructor
-   * @public
-   */
-  static $markImplementor(classConstructor) {
-    MyJsInterface.$markImplementor(classConstructor);
-    MyInterface.$markImplementor(classConstructor);
-    /**
-     * @public {boolean}
-     */
-    classConstructor.prototype
+
+  static $markImplementor(/** Function*/ ctor) {
+    MyJsInterface.$markImplementor(ctor);
+    MyInterface.$markImplementor(ctor);
+    ctor.prototype
         .$implements__com_google_j2cl_transpiler_readable_interfacejsbridge_SubInterface =
         true;
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance != null &&
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_interfacejsbridge_SubInterface;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.interfacejsbridge.SubInterface.$LambdaAdaptor$impl');

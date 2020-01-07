@@ -1,10 +1,10 @@
 [ArithmeticExpressions] => [ArithmeticExpressions]
 [ArithmeticExpressions] => [constructor]
 [ArithmeticExpressions] => [super();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<synthetic: ctor_js>"
-[ArithmeticExpressions] => [/** @public {!$Long} */
+[ArithmeticExpressions] => [/**@type {!$Long}*/
   this.f_bar__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions = $Long.fromInt(0);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<synthetic: ctor_js>"
 [bar] => [f_bar__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions]
-[ArithmeticExpressions] => [/** @public {!$Long} */
+[ArithmeticExpressions] => [/**@type {!$Long}*/
   this.f_intField__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions = $Long.fromInt(0);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<synthetic: ctor_js>"
 [intField] => [f_intField__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions]
 [ArithmeticExpressions] => [$create__]
@@ -144,8 +144,8 @@
 [(f--).intValue();] => [($value_2 = f, f = Integer.m_valueOf__int(f.m_intValue__() - 1), $value_2).m_intValue__();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
 [Ref<Integer> ref = null;] => [let ref = null;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
 [ref] => [ref] "ref"
-[ref.field++;] => [ref.f_field__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions_1Ref = Integer.m_valueOf__int(/**@type {Integer} */ ($Casts.$to(ref.f_field__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions_1Ref, Integer)).m_intValue__() + 1);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
-[int n = 1 + ref.field;] => [let n = 1 + /**@type {Integer} */ ($Casts.$to(ref.f_field__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions_1Ref, Integer)).m_intValue__();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
+[ref.field++;] => [ref.f_field__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions_1Ref = Integer.m_valueOf__int(/**@type {Integer}*/ ($Casts.$to(ref.f_field__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions_1Ref, Integer)).m_intValue__() + 1);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
+[int n = 1 + ref.field;] => [let n = 1 + /**@type {Integer}*/ ($Casts.$to(ref.f_field__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions_1Ref, Integer)).m_intValue__();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
 [n] => [n] "n"
 [getInteger] => [m_getInteger__]
 [return null;] => [return null;] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.getInteger"
@@ -189,16 +189,16 @@
 [ArithmeticExpressions] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<clinit>"
 [public static long one = 1;] => [ArithmeticExpressions.$f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions = $Long.fromInt(1);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<clinit>"
 [public static long foo = one++;] => [ArithmeticExpressions.$f_foo__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions = ($value = ArithmeticExpressions.$f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions, ArithmeticExpressions.$f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions = $LongUtils.$plus(ArithmeticExpressions.$f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions, $Long.fromInt(1)), $value);] "com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.<clinit>"
-[private static final float FLOAT_CONSTANT = 1.1f;] => [/** @public {number} @const */
+[private static final float FLOAT_CONSTANT = 1.1f;] => [/**@const {number}*/
 ArithmeticExpressions.f_FLOAT_CONSTANT__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions_ = 1.100000023841858;]
 [FLOAT_CONSTANT] => [f_FLOAT_CONSTANT__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions_]
-[private static final double DOUBLE_CONSTANT = FLOAT_CONSTANT;] => [/** @public {number} @const */
+[private static final double DOUBLE_CONSTANT = FLOAT_CONSTANT;] => [/**@const {number}*/
 ArithmeticExpressions.f_DOUBLE_CONSTANT__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions_ = 1.100000023841858;]
 [DOUBLE_CONSTANT] => [f_DOUBLE_CONSTANT__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions_]
-[private static final double DOUBLE_CONSTANT_WITH_ARITHMETIC = FLOAT_CONSTANT + FLOAT_CONSTANT;] => [/** @public {number} @const */
+[private static final double DOUBLE_CONSTANT_WITH_ARITHMETIC = FLOAT_CONSTANT + FLOAT_CONSTANT;] => [/**@const {number}*/
 ArithmeticExpressions.f_DOUBLE_CONSTANT_WITH_ARITHMETIC__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions_ = 2.200000047683716;]
 [DOUBLE_CONSTANT_WITH_ARITHMETIC] => [f_DOUBLE_CONSTANT_WITH_ARITHMETIC__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions_]
-[ArithmeticExpressions] => [/** @private {!$Long} */
+[ArithmeticExpressions] => [/**@private {!$Long}*/
 ArithmeticExpressions.$f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions = $Long.fromInt(0);]
-[ArithmeticExpressions] => [/** @private {!$Long} */
+[ArithmeticExpressions] => [/**@private {!$Long}*/
 ArithmeticExpressions.$f_foo__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions = $Long.fromInt(0);]

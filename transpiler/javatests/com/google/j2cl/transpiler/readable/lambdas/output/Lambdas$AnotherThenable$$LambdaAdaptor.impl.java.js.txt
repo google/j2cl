@@ -10,61 +10,43 @@ let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
  * @template T
  */
 class $LambdaAdaptor extends j_l_Object {
-  /**
-   * @param {?function(?function(T):?void, ?function(Throwable):?void):void} fn
-   * @public
-   */
-  constructor(fn) {
+  constructor(
+      /** ?function(?function(T):?void, ?function(Throwable):?void):void */
+      fn) {
     $LambdaAdaptor.$clinit();
     super();
-    /**
-     * @public {?function(?function(T):?void, ?function(Throwable):?void):void}
-     */
+    /**@type {?function(?function(T):?void, ?function(Throwable):?void):void}*/
     this.f_$$fn__com_google_j2cl_transpiler_readable_lambdas_Lambdas_AnotherThenable_$LambdaAdaptor;
     this.$ctor__com_google_j2cl_transpiler_readable_lambdas_Lambdas_AnotherThenable_$LambdaAdaptor__com_google_j2cl_transpiler_readable_lambdas_Lambdas_AnotherThenable_$JsFunction(
         fn);
   }
-  /**
-   * @param {?function(?function(T):?void, ?function(Throwable):?void):void} fn
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_lambdas_Lambdas_AnotherThenable_$LambdaAdaptor__com_google_j2cl_transpiler_readable_lambdas_Lambdas_AnotherThenable_$JsFunction(
+      /** ?function(?function(T):?void, ?function(Throwable):?void):void */
       fn) {
     this.$ctor__java_lang_Object__();
     this.f_$$fn__com_google_j2cl_transpiler_readable_lambdas_Lambdas_AnotherThenable_$LambdaAdaptor =
         fn;
   }
-  /**
-   * @param {?function(T):?void} arg0
-   * @param {?function(Throwable):?void} arg1
-   * @public
-   */
-  then(arg0, arg1) {
+
+  then(/** ?function(T):?void */ arg0, /** ?function(Throwable):?void */ arg1) {
     {
       let $function =
           this.f_$$fn__com_google_j2cl_transpiler_readable_lambdas_Lambdas_AnotherThenable_$LambdaAdaptor;
       $function(arg0, arg1);
     }
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     $LambdaAdaptor.$clinit = () => {};
     $LambdaAdaptor.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof $LambdaAdaptor;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

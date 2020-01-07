@@ -1,7 +1,7 @@
 [Main] => [Main]
 [Main] => [constructor]
 [Main] => [super();] "com.google.j2cl.transpiler.readable.jsasync.Main.<synthetic: ctor_js>"
-[Main] => [/** @public {IThenable<Integer>} */
+[Main] => [/**@type {IThenable<Integer>}*/
   this.f_x__com_google_j2cl_transpiler_readable_jsasync_Main_;] "com.google.j2cl.transpiler.readable.jsasync.Main.<synthetic: ctor_js>"
 [x] => [f_x__com_google_j2cl_transpiler_readable_jsasync_Main_]
 [Main] => [$create__]
@@ -15,46 +15,46 @@
 [emptyAsyncMethod] => [m_emptyAsyncMethod___$pp_com_google_j2cl_transpiler_readable_jsasync]
 [return null;] => [return null;] "com.google.j2cl.transpiler.readable.jsasync.Main.emptyAsyncMethod"
 [asyncMethod] => [m_asyncMethod___$pp_com_google_j2cl_transpiler_readable_jsasync]
-[int result = await(Promise.resolve(7));] => [let result = /**@type {Integer} */ ($Casts.$to((await /**@type {Promise<Integer>} */ (Promise.resolve(Integer.m_valueOf__int(7)))), Integer)).m_intValue__();] "com.google.j2cl.transpiler.readable.jsasync.Main.asyncMethod"
+[int result = await(Promise.resolve(7));] => [let result = /**@type {Integer}*/ ($Casts.$to((await /**@type {Promise<Integer>}*/ (Promise.resolve(Integer.m_valueOf__int(7)))), Integer)).m_intValue__();] "com.google.j2cl.transpiler.readable.jsasync.Main.asyncMethod"
 [result] => [result] "result"
-[return parametricAsyncMethod(result);] => [return /**@type {IThenable<Integer>} */ (this.m_parametricAsyncMethod__java_lang_Object_$pp_com_google_j2cl_transpiler_readable_jsasync(Integer.m_valueOf__int(result)));] "com.google.j2cl.transpiler.readable.jsasync.Main.asyncMethod"
+[return parametricAsyncMethod(result);] => [return /**@type {IThenable<Integer>}*/ (this.m_parametricAsyncMethod__java_lang_Object_$pp_com_google_j2cl_transpiler_readable_jsasync(Integer.m_valueOf__int(result)));] "com.google.j2cl.transpiler.readable.jsasync.Main.asyncMethod"
 [parametricAsyncMethod] => [m_parametricAsyncMethod__java_lang_Object_$pp_com_google_j2cl_transpiler_readable_jsasync]
 [value] => [value] "value"
-[return Promise.resolve(await(Promise.resolve(value)));] => [return /**@type {Promise<T>} */ (Promise.resolve((await /**@type {Promise<T>} */ (Promise.resolve(value)))));] "com.google.j2cl.transpiler.readable.jsasync.Main.parametricAsyncMethod"
+[return Promise.resolve(await(Promise.resolve(value)));] => [return /**@type {Promise<T>}*/ (Promise.resolve((await /**@type {Promise<T>}*/ (Promise.resolve(value)))));] "com.google.j2cl.transpiler.readable.jsasync.Main.parametricAsyncMethod"
 [staticAsyncMethod] => [m_staticAsyncMethod__]
 [staticAsyncMethod] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsasync.Main.staticAsyncMethod"
-[return Promise.resolve(await(Promise.resolve((Void) null)));] => [return /**@type {Promise<?void>} */ (Promise.resolve(/**@type {?void} */ ($Casts.$to((await /**@type {Promise<?void>} */ (Promise.resolve(/**@type {?void} */ (null)))), Void))));] "com.google.j2cl.transpiler.readable.jsasync.Main.staticAsyncMethod"
+[return Promise.resolve(await(Promise.resolve((Void) null)));] => [return /**@type {Promise<?void>}*/ (Promise.resolve(/**@type {?void}*/ ($Casts.$to((await /**@type {Promise<?void>}*/ (Promise.resolve(/**@type {?void}*/ (null)))), Void))));] "com.google.j2cl.transpiler.readable.jsasync.Main.staticAsyncMethod"
 [testAsyncLambdas] => [m_testAsyncLambdas___$pp_com_google_j2cl_transpiler_readable_jsasync]
 [AsyncInterface i = () -> Promise.resolve(await(Promise.resolve(5)));] => [let i = AsyncInterface.$adapt(async () =>{
-   return /**@type {Promise<Integer>} */ (Promise.resolve(/**@type {Integer} */ ($Casts.$to((await /**@type {Promise<Integer>} */ (Promise.resolve(Integer.m_valueOf__int(5)))), Integer))));
+   return /**@type {Promise<Integer>}*/ (Promise.resolve(/**@type {Integer}*/ ($Casts.$to((await /**@type {Promise<Integer>}*/ (Promise.resolve(Integer.m_valueOf__int(5)))), Integer))));
   });] "com.google.j2cl.transpiler.readable.jsasync.Main.testAsyncLambdas"
 [i] => [i] "i"
-[Promise.resolve(await(Promise.resolve(5)))] => [return /**@type {Promise<Integer>} */ (Promise.resolve(/**@type {Integer} */ ($Casts.$to((await /**@type {Promise<Integer>} */ (Promise.resolve(Integer.m_valueOf__int(5)))), Integer))));] "com.google.j2cl.transpiler.readable.jsasync.Main.<lambda in testAsyncLambdas>"
+[Promise.resolve(await(Promise.resolve(5)))] => [return /**@type {Promise<Integer>}*/ (Promise.resolve(/**@type {Integer}*/ ($Casts.$to((await /**@type {Promise<Integer>}*/ (Promise.resolve(Integer.m_valueOf__int(5)))), Integer))));] "com.google.j2cl.transpiler.readable.jsasync.Main.<lambda in testAsyncLambdas>"
 [BaseInterface o =
         new BaseInterface() {
 ...          }
         };] => [let o = $1.$create__com_google_j2cl_transpiler_readable_jsasync_Main(this);] "com.google.j2cl.transpiler.readable.jsasync.Main.testAsyncLambdas"
 [o] => [o] "o"
 [AsyncJsFunctionInterface j = () -> Promise.resolve(await(Promise.resolve(5)));] => [let j = async () =>{
-   return /**@type {Promise<Integer>} */ (Promise.resolve(/**@type {Integer} */ ($Casts.$to((await /**@type {Promise<Integer>} */ (Promise.resolve(Integer.m_valueOf__int(5)))), Integer))));
+   return /**@type {Promise<Integer>}*/ (Promise.resolve(/**@type {Integer}*/ ($Casts.$to((await /**@type {Promise<Integer>}*/ (Promise.resolve(Integer.m_valueOf__int(5)))), Integer))));
   };] "com.google.j2cl.transpiler.readable.jsasync.Main.testAsyncLambdas"
 [j] => [j] "j"
-[Promise.resolve(await(Promise.resolve(5)))] => [return /**@type {Promise<Integer>} */ (Promise.resolve(/**@type {Integer} */ ($Casts.$to((await /**@type {Promise<Integer>} */ (Promise.resolve(Integer.m_valueOf__int(5)))), Integer))));] "com.google.j2cl.transpiler.readable.jsasync.Main.<lambda in testAsyncLambdas>"
+[Promise.resolve(await(Promise.resolve(5)))] => [return /**@type {Promise<Integer>}*/ (Promise.resolve(/**@type {Integer}*/ ($Casts.$to((await /**@type {Promise<Integer>}*/ (Promise.resolve(Integer.m_valueOf__int(5)))), Integer))));] "com.google.j2cl.transpiler.readable.jsasync.Main.<lambda in testAsyncLambdas>"
 [JsFunctionInterface optimizableJsFunction =
         new JsFunctionInterface() {
 ...          }
         };] => [let optimizableJsFunction = () =>{
-   return /**@type {Promise<Integer>} */ (Promise.resolve(Integer.m_valueOf__int(5)));
+   return /**@type {Promise<Integer>}*/ (Promise.resolve(Integer.m_valueOf__int(5)));
   };] "com.google.j2cl.transpiler.readable.jsasync.Main.testAsyncLambdas"
 [optimizableJsFunction] => [optimizableJsFunction] "optimizableJsFunction"
-[return Promise.resolve(5);] => [return /**@type {Promise<Integer>} */ (Promise.resolve(Integer.m_valueOf__int(5)));] "com.google.j2cl.transpiler.readable.jsasync.Main$2.doSomething"
+[return Promise.resolve(5);] => [return /**@type {Promise<Integer>}*/ (Promise.resolve(Integer.m_valueOf__int(5)));] "com.google.j2cl.transpiler.readable.jsasync.Main$2.doSomething"
 [JsFunctionInterface unoptimizableJsFunction =
         new JsFunctionInterface() {
 ...          }
         };] => [let unoptimizableJsFunction = $3.$create__com_google_j2cl_transpiler_readable_jsasync_Main(this);] "com.google.j2cl.transpiler.readable.jsasync.Main.testAsyncLambdas"
 [unoptimizableJsFunction] => [unoptimizableJsFunction] "unoptimizableJsFunction"
 [Main] => [$init___$p_com_google_j2cl_transpiler_readable_jsasync_Main]
-[private final IThenable<Integer> x = Promise.resolve(10);] => [this.f_x__com_google_j2cl_transpiler_readable_jsasync_Main_ = /**@type {Promise<Integer>} */ (Promise.resolve(Integer.m_valueOf__int(10)));] "com.google.j2cl.transpiler.readable.jsasync.Main.<init>"
+[private final IThenable<Integer> x = Promise.resolve(10);] => [this.f_x__com_google_j2cl_transpiler_readable_jsasync_Main_ = /**@type {Promise<Integer>}*/ (Promise.resolve(Integer.m_valueOf__int(10)));] "com.google.j2cl.transpiler.readable.jsasync.Main.<init>"
 [Main] => [$clinit]
 [Main] => [Main.$clinit = () =>{};] "com.google.j2cl.transpiler.readable.jsasync.Main.<clinit>"
 [Main] => [Main.$loadModules();] "com.google.j2cl.transpiler.readable.jsasync.Main.<clinit>"

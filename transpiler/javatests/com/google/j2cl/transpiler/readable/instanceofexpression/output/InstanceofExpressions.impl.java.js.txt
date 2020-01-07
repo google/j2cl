@@ -19,16 +19,11 @@ let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 
 class InstanceofExpressions extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!InstanceofExpressions}
-   * @public
-   */
+  /** @return {!InstanceofExpressions} */
   static $create__() {
     InstanceofExpressions.$clinit();
     let $instance = new InstanceofExpressions();
@@ -36,15 +31,11 @@ class InstanceofExpressions extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_instanceofexpression_InstanceofExpressions__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_instanceofexpression_InstanceofExpressions__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @public
-   */
+
   m_testInstanceofClass__() {
     let object = InstanceofExpressions.$create__();
     let /** boolean */ b;
@@ -52,9 +43,7 @@ class InstanceofExpressions extends j_l_Object {
     b = InstanceofExpressions.$isInstance(object);
     b = j_l_String.$isInstance(object);
   }
-  /**
-   * @public
-   */
+
   m_testInstanceofInterface__() {
     let o = j_l_Object.$create__();
     let /** boolean */ b;
@@ -64,9 +53,7 @@ class InstanceofExpressions extends j_l_Object {
             this),
         null);
   }
-  /**
-   * @public
-   */
+
   m_testInstanceofBoxedType__() {
     let b = Integer.$create__int(1);
     let a = Byte.$isInstance(b);
@@ -83,16 +70,14 @@ class InstanceofExpressions extends j_l_Object {
     a = !$Equality.$same(d, null);
     a = !$Equality.$same(d, null);
   }
-  /**
-   * @public
-   */
+
   m_testInstanceOfArray__() {
     let object = j_l_Object.$create__();
     let objectArray = new Array(0);
     let objectDoubleArray =
-        /**@type {!Array<Array<*>>} */ ($Arrays.$create([0, null], j_l_Object));
+        /**@type {!Array<Array<*>>}*/ ($Arrays.$create([0, null], j_l_Object));
     let stringArray =
-        /**@type {!Array<?string>} */ ($Arrays.$create([0], j_l_String));
+        /**@type {!Array<?string>}*/ ($Arrays.$create([0], j_l_String));
     let /** boolean */ a;
     a = $Arrays.$instanceIsOfType(object, j_l_Object, 1);
     a = $Arrays.$instanceIsOfType(object, j_l_String, 2);
@@ -108,25 +93,17 @@ class InstanceofExpressions extends j_l_Object {
     a = !$Equality.$same(stringArray, null);
     a = !$Equality.$same(stringArray, null);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     InstanceofExpressions.$clinit = () => {};
     InstanceofExpressions.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof InstanceofExpressions;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     $1 = goog.module.get(
         'com.google.j2cl.transpiler.readable.instanceofexpression.InstanceofExpressions.$1$impl');

@@ -6,31 +6,22 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let FunctionalInterface = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.FunctionalInterface$impl');
 
 class LambdaInSubClass extends Parent {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!LambdaInSubClass}
-   * @public
-   */
+  /** @return {!LambdaInSubClass} */
   static $create__() {
     let $instance = new LambdaInSubClass();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_lambdas_Lambdas_LambdaInSubClass__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_lambdas_Lambdas_LambdaInSubClass__() {
     this.$ctor__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Parent__();
   }
-  /**
-   * @public
-   */
+
   m_testLambdaInSubclass__() {
     let l = FunctionalInterface.$adapt((/** number */ i) => {
       this.m_funInParent__();
@@ -43,25 +34,17 @@ class LambdaInSubClass extends Parent {
       return a;
     });
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     LambdaInSubClass.$clinit = () => {};
     LambdaInSubClass.$loadModules();
     Parent.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof LambdaInSubClass;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     FunctionalInterface = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdas.Lambdas.FunctionalInterface$impl');

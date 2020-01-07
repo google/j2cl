@@ -6,16 +6,11 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let ESInner = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner$impl');
 
 class ESOuter extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!ESOuter}
-   * @public
-   */
+  /** @return {!ESOuter} */
   static $create__() {
     ESOuter.$clinit();
     let $instance = new ESOuter();
@@ -23,40 +18,27 @@ class ESOuter extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @return {ESInner}
-   * @public
-   */
+  /** @return {ESInner} */
   m_newESInner__() {
     return ESInner
         .$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter(
             this);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     ESOuter.$clinit = () => {};
     ESOuter.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof ESOuter;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     ESInner = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner$impl');

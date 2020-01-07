@@ -7,21 +7,14 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @template T
  */
 class TemplatedField extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {T} */
+    /**@type {T}*/
     this.f_value__com_google_j2cl_transpiler_readable_jsenum_Main_TemplatedField;
   }
-  /**
-   * @template T
-   * @param {T} value
-   * @return {!TemplatedField<T>}
-   * @public
-   */
-  static $create__java_lang_Object(value) {
+  /** @template T @return {!TemplatedField<T>} */
+  static $create__java_lang_Object(/** T */ value) {
     TemplatedField.$clinit();
     let $instance = new TemplatedField();
     $instance
@@ -29,43 +22,29 @@ class TemplatedField extends j_l_Object {
             value);
     return $instance;
   }
-  /**
-   * @param {T} value
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_jsenum_Main_TemplatedField__java_lang_Object(
-      value) {
+      /** T */ value) {
     this.$ctor__java_lang_Object__();
     this.f_value__com_google_j2cl_transpiler_readable_jsenum_Main_TemplatedField =
         value;
   }
-  /**
-   * @return {T}
-   * @public
-   */
+  /** @return {T} */
   m_getValue___$pp_com_google_j2cl_transpiler_readable_jsenum() {
     return this
         .f_value__com_google_j2cl_transpiler_readable_jsenum_Main_TemplatedField;
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     TemplatedField.$clinit = () => {};
     TemplatedField.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof TemplatedField;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

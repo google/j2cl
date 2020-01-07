@@ -10,48 +10,30 @@ let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.un
  * @extends {I<?string>}
  */
 class J {
-  /**
-   * @param {?function(?string):number} fn
-   * @return {J}
-   * @public
-   */
-  static $adapt(fn) {
+  /** @return {J} */
+  static $adapt(/** ?function(?string):number */ fn) {
     J.$clinit();
     return new $LambdaAdaptor(fn);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     J.$clinit = () => {};
     J.$loadModules();
   }
-  /**
-   * @param {Function} classConstructor
-   * @public
-   */
-  static $markImplementor(classConstructor) {
-    I.$markImplementor(classConstructor);
-    /**
-     * @public {boolean}
-     */
-    classConstructor.prototype
+
+  static $markImplementor(/** Function*/ ctor) {
+    I.$markImplementor(ctor);
+    ctor.prototype
         .$implements__com_google_j2cl_transpiler_readable_unimplementedbridgemethod_J =
         true;
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance != null &&
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_unimplementedbridgemethod_J;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.unimplementedbridgemethod.J.$LambdaAdaptor$impl');

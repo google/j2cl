@@ -4,85 +4,58 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class Foo extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!Foo}
-   * @public
-   */
+  /** @return {!Foo} */
   static $create__() {
     Foo.$clinit();
     let $instance = new Foo();
     $instance.$ctor__com_google_j2cl_transpiler_readable_jsproperties_Foo__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_jsproperties_Foo__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @return {number}
-   * @public
-   */
+  /** @return {number} */
   static get a() {
     Foo.$clinit();
     return Foo.f_f__com_google_j2cl_transpiler_readable_jsproperties_Foo_ + 1;
   }
-  /**
-   * @param {number} x
-   * @public
-   */
-  static set a(x) {
+
+  static set a(/** number */ x) {
     Foo.$clinit();
     Foo.f_f__com_google_j2cl_transpiler_readable_jsproperties_Foo_ = x + 2;
   }
-  /**
-   * @return {number}
-   * @public
-   */
+  /** @return {number} */
   static get abc() {
     Foo.$clinit();
     return Foo.f_f__com_google_j2cl_transpiler_readable_jsproperties_Foo_ + 3;
   }
-  /**
-   * @param {number} x
-   * @public
-   */
-  static set abc(x) {
+
+  static set abc(/** number */ x) {
     Foo.$clinit();
     Foo.f_f__com_google_j2cl_transpiler_readable_jsproperties_Foo_ = x + 4;
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     Foo.$clinit = () => {};
     Foo.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Foo;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(
     Foo, 'com.google.j2cl.transpiler.readable.jsproperties.Foo');
 
-/** @public {number} */
+/**@type {number}*/
 Foo.f_f__com_google_j2cl_transpiler_readable_jsproperties_Foo_ = 0;
 
 exports = Foo;

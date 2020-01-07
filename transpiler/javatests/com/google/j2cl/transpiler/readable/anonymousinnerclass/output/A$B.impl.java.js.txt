@@ -6,21 +6,15 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let A = goog.forwardDeclare('com.google.j2cl.transpiler.readable.anonymousinnerclass.A$impl');
 
 class B extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {A} */
+    /**@type {A}*/
     this.f_$outer_this__com_google_j2cl_transpiler_readable_anonymousinnerclass_A_B;
   }
-  /**
-   * @param {A} $outer_this
-   * @return {!B}
-   * @public
-   */
+  /** @return {!B} */
   static $create__com_google_j2cl_transpiler_readable_anonymousinnerclass_A(
-      $outer_this) {
+      /** A */ $outer_this) {
     B.$clinit();
     let $instance = new B();
     $instance
@@ -28,35 +22,24 @@ class B extends j_l_Object {
             $outer_this);
     return $instance;
   }
-  /**
-   * @param {A} $outer_this
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_anonymousinnerclass_A_B__com_google_j2cl_transpiler_readable_anonymousinnerclass_A(
-      $outer_this) {
+      /** A */ $outer_this) {
     this.f_$outer_this__com_google_j2cl_transpiler_readable_anonymousinnerclass_A_B =
         $outer_this;
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     B.$clinit = () => {};
     B.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof B;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

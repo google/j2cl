@@ -8,16 +8,11 @@ let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 class SubMain extends Main {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!SubMain}
-   * @public
-   */
+  /** @return {!SubMain} */
   static $create__() {
     SubMain.$clinit();
     let $instance = new SubMain();
@@ -25,49 +20,33 @@ class SubMain extends Main {
         .$ctor__com_google_j2cl_transpiler_readable_jsvarargs_Main_SubMain__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_jsvarargs_Main_SubMain__() {
     this.$ctor__com_google_j2cl_transpiler_readable_jsvarargs_Main__int(10);
   }
-  /**
-   * @override
-   * @param {number} m
-   * @param {...number} numbers
-   * @return {number}
-   * @public
-   */
-  f3(m, ...numbers) {
+  /** @override @return {number} */
+  f3(/** number */ m, .../** ...number */ numbers) {
     $Arrays.$stampType(numbers, $int, 1);
     let a = super.f3(1, 1, 2);
     a += super.f3(1);
     a += super.f3(1, 1, 2);
     a += super.f3(1);
-    let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));
+    let ints = /**@type {!Array<number>}*/ ($Arrays.$init([1, 2], $int));
     a += super.f3(
         1, ...InternalPreconditions.m_checkNotNull__java_lang_Object(ints));
     return a;
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     SubMain.$clinit = () => {};
     SubMain.$loadModules();
     Main.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof SubMain;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     InternalPreconditions =
         goog.module.get('javaemul.internal.InternalPreconditions$impl');

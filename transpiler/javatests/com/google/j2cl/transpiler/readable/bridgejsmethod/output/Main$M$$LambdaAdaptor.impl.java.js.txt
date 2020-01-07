@@ -10,32 +10,22 @@ let B = goog.forwardDeclare('com.google.j2cl.transpiler.readable.bridgejsmethod.
  * @implements {M}
  */
 class $LambdaAdaptor extends j_l_Object {
-  /**
-   * @param {?function():B} fn
-   * @public
-   */
-  constructor(fn) {
+  constructor(/** ?function():B */ fn) {
     $LambdaAdaptor.$clinit();
     super();
-    /** @public {?function():B} */
+    /**@type {?function():B}*/
     this.f_$$fn__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_M_$LambdaAdaptor;
     this.$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_M_$LambdaAdaptor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_M_$JsFunction(
         fn);
   }
-  /**
-   * @param {?function():B} fn
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_M_$LambdaAdaptor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_M_$JsFunction(
-      fn) {
+      /** ?function():B */ fn) {
     this.$ctor__java_lang_Object__();
     this.f_$$fn__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_M_$LambdaAdaptor =
         fn;
   }
-  /**
-   * @return {B}
-   * @public
-   */
+  /** @return {B} */
   m_getB__() {
     let /** ?function():B */ $function;
     return (
@@ -43,25 +33,17 @@ class $LambdaAdaptor extends j_l_Object {
             this.f_$$fn__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_M_$LambdaAdaptor,
         $function());
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     $LambdaAdaptor.$clinit = () => {};
     $LambdaAdaptor.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof $LambdaAdaptor;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

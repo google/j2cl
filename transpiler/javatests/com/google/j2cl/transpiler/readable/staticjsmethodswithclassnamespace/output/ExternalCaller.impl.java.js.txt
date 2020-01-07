@@ -6,16 +6,11 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let StaticJsMethodsWithClassNamespace = goog.forwardDeclare('woo.StaticJsMethodsWithClassNamespace$impl');
 
 class ExternalCaller extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!ExternalCaller}
-   * @public
-   */
+  /** @return {!ExternalCaller} */
   static $create__() {
     ExternalCaller.$clinit();
     let $instance = new ExternalCaller();
@@ -23,37 +18,25 @@ class ExternalCaller extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_staticjsmethodswithclassnamespace_ExternalCaller__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_staticjsmethodswithclassnamespace_ExternalCaller__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @public
-   */
+
   m_test__() {
     StaticJsMethodsWithClassNamespace.replacedName();
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     ExternalCaller.$clinit = () => {};
     ExternalCaller.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof ExternalCaller;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     StaticJsMethodsWithClassNamespace =
         goog.module.get('woo.StaticJsMethodsWithClassNamespace$impl');

@@ -4,19 +4,14 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class InstanceInitializers extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {number} */
+    /**@type {number}*/
     this.f_field__com_google_j2cl_transpiler_readable_instanceinitializers_InstanceInitializers =
         0;
   }
-  /**
-   * @return {!InstanceInitializers}
-   * @public
-   */
+  /** @return {!InstanceInitializers} */
   static $create__() {
     InstanceInitializers.$clinit();
     let $instance = new InstanceInitializers();
@@ -24,41 +19,29 @@ class InstanceInitializers extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_instanceinitializers_InstanceInitializers__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_instanceinitializers_InstanceInitializers__() {
     this.$ctor__java_lang_Object__();
     this.$init___$p_com_google_j2cl_transpiler_readable_instanceinitializers_InstanceInitializers();
   }
-  /**
-   * @private
-   */
+  /** @private */
   $init___$p_com_google_j2cl_transpiler_readable_instanceinitializers_InstanceInitializers() {
     this.f_field__com_google_j2cl_transpiler_readable_instanceinitializers_InstanceInitializers =
         1;
     this.f_field__com_google_j2cl_transpiler_readable_instanceinitializers_InstanceInitializers =
         2;
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     InstanceInitializers.$clinit = () => {};
     InstanceInitializers.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof InstanceInitializers;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

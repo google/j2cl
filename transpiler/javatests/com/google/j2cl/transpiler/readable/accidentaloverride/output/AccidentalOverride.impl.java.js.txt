@@ -12,16 +12,11 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
  * @implements {SuperInterface<Error>}
  */
 class AccidentalOverride extends Parent {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!AccidentalOverride}
-   * @public
-   */
+  /** @return {!AccidentalOverride} */
   static $create__() {
     AccidentalOverride.$clinit();
     let $instance = new AccidentalOverride();
@@ -29,40 +24,26 @@ class AccidentalOverride extends Parent {
         .$ctor__com_google_j2cl_transpiler_readable_accidentaloverride_AccidentalOverride__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_accidentaloverride_AccidentalOverride__() {
     this.$ctor__com_google_j2cl_transpiler_readable_accidentaloverride_Parent__();
   }
-  /**
-   * Bridge method.
-   * @override
-   * @param {*} arg0
-   * @public
-   */
-  m_foo__java_lang_Object(arg0) {
-    super.m_foo__java_lang_Error(/**@type {Error} */ ($Casts.$to(arg0, Error)));
+  /** @override */
+  // Bridge method.
+  m_foo__java_lang_Object(/** * */ arg0) {
+    super.m_foo__java_lang_Error(/**@type {Error}*/ ($Casts.$to(arg0, Error)));
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     AccidentalOverride.$clinit = () => {};
     AccidentalOverride.$loadModules();
     Parent.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof AccidentalOverride;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     Error = goog.module.get('java.lang.Error$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');

@@ -4,39 +4,26 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class JsTypeWithNamespace extends j_l_Object {
-  /**
-   * @public
-   */
   constructor() {
     JsTypeWithNamespace.$clinit();
     super();
     this.$ctor__com_google_j2cl_transpiler_readable_jstypewithnamespace_JsTypeWithNamespace__();
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_jstypewithnamespace_JsTypeWithNamespace__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     JsTypeWithNamespace.$clinit = () => {};
     JsTypeWithNamespace.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof JsTypeWithNamespace;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

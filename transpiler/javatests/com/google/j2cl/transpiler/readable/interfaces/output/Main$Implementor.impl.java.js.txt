@@ -12,21 +12,15 @@ let Main = goog.forwardDeclare('com.google.j2cl.transpiler.readable.interfaces.M
  * @implements {Interface<?string>}
  */
 class Implementor extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {Main} */
+    /**@type {Main}*/
     this.f_$outer_this__com_google_j2cl_transpiler_readable_interfaces_Main_Implementor;
   }
-  /**
-   * @param {Main} $outer_this
-   * @return {!Implementor}
-   * @public
-   */
+  /** @return {!Implementor} */
   static $create__com_google_j2cl_transpiler_readable_interfaces_Main(
-      $outer_this) {
+      /** Main */ $outer_this) {
     Implementor.$clinit();
     let $instance = new Implementor();
     $instance
@@ -34,46 +28,30 @@ class Implementor extends j_l_Object {
             $outer_this);
     return $instance;
   }
-  /**
-   * @param {Main} $outer_this
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_interfaces_Main_Implementor__com_google_j2cl_transpiler_readable_interfaces_Main(
-      $outer_this) {
+      /** Main */ $outer_this) {
     this.f_$outer_this__com_google_j2cl_transpiler_readable_interfaces_Main_Implementor =
         $outer_this;
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @override
-   * @public
-   */
+  /** @override */
   m_interfaceMethod__() {}
-  /**
-   * Default method forwarding stub.
-   * @override
-   * @param {?string} arg0
-   * @public
-   */
-  m_defaultMethodX__java_lang_String(arg0) {
+  /** @override */
+  // Default method forwarding stub.
+  m_defaultMethodX__java_lang_String(/** ?string */ arg0) {
     SubInterface
         .m_defaultMethodX__$default__com_google_j2cl_transpiler_readable_interfaces_Main_SubInterface__java_lang_String(
             this, arg0);
   }
-  /**
-   * Default method forwarding stub.
-   * @override
-   * @param {?string} arg0
-   * @public
-   */
-  m_defaultMethod__java_lang_Object(arg0) {
+  /** @override */
+  // Default method forwarding stub.
+  m_defaultMethod__java_lang_Object(/** ?string */ arg0) {
     Interface
         .m_defaultMethod__$default__com_google_j2cl_transpiler_readable_interfaces_Main_Interface__java_lang_Object(
             this, arg0);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     Implementor.$clinit = () => {};
     Implementor.$loadModules();
@@ -81,17 +59,11 @@ class Implementor extends j_l_Object {
     SubInterface.$clinit();
     Interface.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Implementor;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

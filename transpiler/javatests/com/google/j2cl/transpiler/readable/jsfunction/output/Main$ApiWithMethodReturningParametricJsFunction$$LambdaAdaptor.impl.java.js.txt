@@ -9,58 +9,40 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {ApiWithMethodReturningParametricJsFunction}
  */
 class $LambdaAdaptor extends j_l_Object {
-  /**
-   * @param {?function():?function(T):void} fn
-   * @public
-   */
-  constructor(fn) {
+  constructor(/** ?function():?function(T):void */ fn) {
     $LambdaAdaptor.$clinit();
     super();
-    /** @public {?function():?function(T):void} */
+    /**@type {?function():?function(T):void}*/
     this.f_$$fn__com_google_j2cl_transpiler_readable_jsfunction_Main_ApiWithMethodReturningParametricJsFunction_$LambdaAdaptor;
     this.$ctor__com_google_j2cl_transpiler_readable_jsfunction_Main_ApiWithMethodReturningParametricJsFunction_$LambdaAdaptor__com_google_j2cl_transpiler_readable_jsfunction_Main_ApiWithMethodReturningParametricJsFunction_$JsFunction(
         fn);
   }
-  /**
-   * @param {?function():?function(T):void} fn
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_jsfunction_Main_ApiWithMethodReturningParametricJsFunction_$LambdaAdaptor__com_google_j2cl_transpiler_readable_jsfunction_Main_ApiWithMethodReturningParametricJsFunction_$JsFunction(
-      fn) {
+      /** ?function():?function(T):void */ fn) {
     this.$ctor__java_lang_Object__();
     this.f_$$fn__com_google_j2cl_transpiler_readable_jsfunction_Main_ApiWithMethodReturningParametricJsFunction_$LambdaAdaptor =
         fn;
   }
-  /**
-   * @return {?function(T):void}
-   * @public
-   */
+  /** @return {?function(T):void} */
   m_anApi__() {
     let /** ?function():?function(T):void */ $function;
-    return /**@type {?function(T):void} */ ((
+    return /**@type {?function(T):void}*/ ((
         $function =
             this.f_$$fn__com_google_j2cl_transpiler_readable_jsfunction_Main_ApiWithMethodReturningParametricJsFunction_$LambdaAdaptor,
         $function()));
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     $LambdaAdaptor.$clinit = () => {};
     $LambdaAdaptor.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof $LambdaAdaptor;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

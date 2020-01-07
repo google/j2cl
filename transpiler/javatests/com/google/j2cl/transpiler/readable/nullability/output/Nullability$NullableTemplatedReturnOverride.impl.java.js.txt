@@ -8,16 +8,11 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {NullableTemplatedReturn<?string>}
  */
 class NullableTemplatedReturnOverride extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!NullableTemplatedReturnOverride}
-   * @public
-   */
+  /** @return {!NullableTemplatedReturnOverride} */
   static $create__() {
     NullableTemplatedReturnOverride.$clinit();
     let $instance = new NullableTemplatedReturnOverride();
@@ -25,39 +20,25 @@ class NullableTemplatedReturnOverride extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_nullability_Nullability_NullableTemplatedReturnOverride__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_nullability_Nullability_NullableTemplatedReturnOverride__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @override
-   * @return {?string}
-   * @public
-   */
+  /** @override @return {?string} */
   m_foo__() {
     return 'foo';
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     NullableTemplatedReturnOverride.$clinit = () => {};
     NullableTemplatedReturnOverride.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof NullableTemplatedReturnOverride;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

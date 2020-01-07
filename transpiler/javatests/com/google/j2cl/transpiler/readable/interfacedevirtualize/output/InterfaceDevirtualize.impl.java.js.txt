@@ -10,16 +10,11 @@ let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let $Comparables = goog.forwardDeclare('vmbootstrap.Comparables$impl');
 
 class InterfaceDevirtualize extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!InterfaceDevirtualize}
-   * @public
-   */
+  /** @return {!InterfaceDevirtualize} */
   static $create__() {
     InterfaceDevirtualize.$clinit();
     let $instance = new InterfaceDevirtualize();
@@ -27,109 +22,67 @@ class InterfaceDevirtualize extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_interfacedevirtualize_InterfaceDevirtualize__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_interfacedevirtualize_InterfaceDevirtualize__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @template T
-   * @param {(Comparable<T>|boolean|number|string)} c
-   * @param {T} t
-   * @return {number}
-   * @public
-   */
-  m_compare0__java_lang_Comparable__java_lang_Object(c, t) {
+  /** @template T @return {number} */
+  m_compare0__java_lang_Comparable__java_lang_Object(
+      /** (Comparable<T>|boolean|number|string) */ c, /** T */ t) {
     return $Comparables.m_compareTo__java_lang_Comparable__java_lang_Object(
         c, t);
   }
-  /**
-   * @param {(Comparable|boolean|number|string)} c
-   * @param {*} o
-   * @return {number}
-   * @public
-   */
-  m_compare1__java_lang_Comparable__java_lang_Object(c, o) {
+  /** @return {number} */
+  m_compare1__java_lang_Comparable__java_lang_Object(
+      /** (Comparable|boolean|number|string) */ c, /** * */ o) {
     return $Comparables.m_compareTo__java_lang_Comparable__java_lang_Object(
         c, o);
   }
-  /**
-   * @param {(Comparable<?number>|boolean|number|string)} c
-   * @param {?number} d
-   * @return {number}
-   * @public
-   */
-  m_compare2__java_lang_Comparable__java_lang_Double(c, d) {
+  /** @return {number} */
+  m_compare2__java_lang_Comparable__java_lang_Double(
+      /** (Comparable<?number>|boolean|number|string) */ c, /** ?number */ d) {
     return $Comparables.m_compareTo__java_lang_Comparable__java_lang_Object(
         c, d);
   }
-  /**
-   * @param {?number} d1
-   * @param {?number} d2
-   * @return {number}
-   * @public
-   */
-  m_compare3__java_lang_Double__java_lang_Double(d1, d2) {
+  /** @return {number} */
+  m_compare3__java_lang_Double__java_lang_Double(
+      /** ?number */ d1, /** ?number */ d2) {
     return Double.m_compareTo__java_lang_Double__java_lang_Double(d1, d2);
   }
-  /**
-   * @param {(Comparable<?boolean>|boolean|number|string)} c
-   * @param {?boolean} d
-   * @return {number}
-   * @public
-   */
-  m_compare2__java_lang_Comparable__java_lang_Boolean(c, d) {
+  /** @return {number} */
+  m_compare2__java_lang_Comparable__java_lang_Boolean(
+      /** (Comparable<?boolean>|boolean|number|string) */ c,
+      /** ?boolean */ d) {
     return $Comparables.m_compareTo__java_lang_Comparable__java_lang_Object(
         c, d);
   }
-  /**
-   * @param {?boolean} d1
-   * @param {?boolean} d2
-   * @return {number}
-   * @public
-   */
-  m_compare3__java_lang_Boolean__java_lang_Boolean(d1, d2) {
+  /** @return {number} */
+  m_compare3__java_lang_Boolean__java_lang_Boolean(
+      /** ?boolean */ d1, /** ?boolean */ d2) {
     return Boolean.m_compareTo__java_lang_Boolean__java_lang_Boolean(d1, d2);
   }
-  /**
-   * @param {(Comparable<Integer>|boolean|number|string)} c
-   * @param {Integer} d
-   * @return {number}
-   * @public
-   */
-  m_compare2__java_lang_Comparable__java_lang_Integer(c, d) {
+  /** @return {number} */
+  m_compare2__java_lang_Comparable__java_lang_Integer(
+      /** (Comparable<Integer>|boolean|number|string) */ c, /** Integer */ d) {
     return $Comparables.m_compareTo__java_lang_Comparable__java_lang_Object(
         c, d);
   }
-  /**
-   * @param {Integer} d1
-   * @param {Integer} d2
-   * @return {number}
-   * @public
-   */
-  m_compare3__java_lang_Integer__java_lang_Integer(d1, d2) {
+  /** @return {number} */
+  m_compare3__java_lang_Integer__java_lang_Integer(
+      /** Integer */ d1, /** Integer */ d2) {
     return d1.m_compareTo__java_lang_Integer(d2);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     InterfaceDevirtualize.$clinit = () => {};
     InterfaceDevirtualize.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof InterfaceDevirtualize;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     Boolean = goog.module.get('java.lang.Boolean$impl');
     Double = goog.module.get('java.lang.Double$impl');

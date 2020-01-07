@@ -12,17 +12,11 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
  * @template T
  */
 class TIntegerJsBiFunction extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @template T
-   * @return {function(T, Integer):T}
-   * @public
-   */
+  /** @template T @return {function(T, Integer):T} */
   static $create__() {
     TIntegerJsBiFunction.$clinit();
     let $instance = new TIntegerJsBiFunction();
@@ -33,71 +27,43 @@ class TIntegerJsBiFunction extends j_l_Object {
             .m_apply__java_lang_Object__java_lang_Number,
         $instance, TIntegerJsBiFunction.$copy);
   }
-  /**
-   * @suppress {invalidCasts}
-   * @public
-   */
+  /** @suppress {invalidCasts} */
   $ctor__com_google_j2cl_transpiler_readable_jsfunction_Main_TIntegerJsBiFunction__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @template T
-   * @param {function(T, Integer):T} $thisArg
-   * @param {T} element
-   * @param {Integer} i
-   * @return {T}
-   * @public
-   */
+  /** @template T @return {T} */
   static m_apply__com_google_j2cl_transpiler_readable_jsfunction_Main_TIntegerJsBiFunction__java_lang_Object__java_lang_Integer(
-      $thisArg, element, i) {
+      /** function(T, Integer):T */ $thisArg, /** T */ element,
+      /** Integer */ i) {
     TIntegerJsBiFunction.$clinit();
     return null;
   }
-  /**
-   * Bridge method.
-   * @template T
-   * @this {?function(T, Integer):T}
-   * @param {*} arg0
-   * @param {(Number|number)} arg1
-   * @return {T}
-   * @public
-   */
-  m_apply__java_lang_Object__java_lang_Number(arg0, arg1) {
+  /** @template T @this {?function(T, Integer):T} @return {T} */
+  // Bridge method.
+  m_apply__java_lang_Object__java_lang_Number(
+      /** * */ arg0, /** (Number|number) */ arg1) {
     return TIntegerJsBiFunction
         .m_apply__com_google_j2cl_transpiler_readable_jsfunction_Main_TIntegerJsBiFunction__java_lang_Object__java_lang_Integer(
-            this, arg0, /**@type {Integer} */ ($Casts.$to(arg1, Integer)));
+            this, arg0, /**@type {Integer}*/ ($Casts.$to(arg1, Integer)));
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     TIntegerJsBiFunction.$clinit = () => {};
     TIntegerJsBiFunction.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance != null &&
         !!instance
               .$is__com_google_j2cl_transpiler_readable_jsfunction_Main_TIntegerJsBiFunction;
   }
-  /**
-   * @param {TIntegerJsBiFunction} from
-   * @param {?} to
-   * @public
-   */
-  static $copy(from, to) {
+  static $copy(/**TIntegerJsBiFunction*/ from, /** ? */ to) {
     // Marks the object is an instance of this class.
     to.$is__com_google_j2cl_transpiler_readable_jsfunction_Main_TIntegerJsBiFunction =
         true;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     Integer = goog.module.get('java.lang.Integer$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');

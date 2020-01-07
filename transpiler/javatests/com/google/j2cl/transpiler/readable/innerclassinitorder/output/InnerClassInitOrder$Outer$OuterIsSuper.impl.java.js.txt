@@ -7,22 +7,15 @@ let OuterIsNotSuper = goog.forwardDeclare('com.google.j2cl.transpiler.readable.i
 let $1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.$1$impl');
 
 class OuterIsSuper extends Outer {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {Outer} */
+    /**@type {Outer}*/
     this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper;
   }
-  /**
-   * @param {Outer} $outer_this
-   * @param {number} i
-   * @return {!OuterIsSuper}
-   * @public
-   */
+  /** @return {!OuterIsSuper} */
   static $create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer__int(
-      $outer_this, i) {
+      /** Outer */ $outer_this, /** number */ i) {
     OuterIsSuper.$clinit();
     let $instance = new OuterIsSuper();
     $instance
@@ -30,71 +23,46 @@ class OuterIsSuper extends Outer {
             $outer_this, i);
     return $instance;
   }
-  /**
-   * @param {Outer} $outer_this
-   * @param {number} i
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer__int(
-      $outer_this, i) {
+      /** Outer */ $outer_this, /** number */ i) {
     this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper =
         $outer_this;
     this.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer__int(
         i);
   }
-  /**
-   * @override
-   * @return {number}
-   * @public
-   */
+  /** @override @return {number} */
   m_checkDispatch__() {
     return 2;
   }
-  /**
-   * @return {number}
-   * @public
-   */
+  /** @return {number} */
   m_checkDispatchFromSub1__() {
     return super.m_checkDispatch__();
   }
-  /**
-   * @return {number}
-   * @public
-   */
+  /** @return {number} */
   m_checkDispatchFromSub2__() {
     return $1
         .$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper__int(
             this, 1)
         .m_go__();
   }
-  /**
-   * @return {OuterIsNotSuper}
-   * @public
-   */
+  /** @return {OuterIsNotSuper} */
   m_unqualifiedAlloc__() {
     return OuterIsNotSuper
         .$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer(
             this);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     OuterIsSuper.$clinit = () => {};
     OuterIsSuper.$loadModules();
     Outer.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof OuterIsSuper;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     OuterIsNotSuper = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper$impl');

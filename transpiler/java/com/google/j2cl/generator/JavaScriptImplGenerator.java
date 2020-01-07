@@ -30,6 +30,7 @@ import com.google.j2cl.ast.JavaScriptConstructorReference;
 import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.MethodLike;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptor;
@@ -37,6 +38,7 @@ import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.TypeVariable;
 import com.google.j2cl.ast.Variable;
+import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.common.FilePosition;
 import com.google.j2cl.common.InternalCompilerError;
 import com.google.j2cl.common.Problems;
@@ -80,21 +82,32 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.emitWithMapping(
         method.getSourcePosition(),
         () -> sourceBuilder.append(ManglingNameUtils.getMangledName(methodDescriptor)));
+
     sourceBuilder.append("(");
+
+    // TODO(goktug): Reuse with Expression transpiler which has similar logic.
     String separator = "";
-    Variable varargsParameter = method.getJsVarargsParameter();
-    for (Variable parameter : method.getParameters()) {
+    for (int i = 0; i < method.getParameters().size(); i++) {
       sourceBuilder.append(separator);
-      if (parameter == varargsParameter) {
-        sourceBuilder.append("...");
-      }
-      sourceBuilder.emitWithMapping(
-          // Only map parameters if they are named.
-          AstUtils.emptySourcePositionIfNotNamed(parameter.getSourcePosition()),
-          () -> sourceBuilder.append(environment.getUniqueNameForVariable(parameter)));
+      // Emit parameters in the more readable inline short form.
+      emitParameter(method, i);
       separator = ", ";
     }
     sourceBuilder.append(") ");
+  }
+
+  private void emitParameter(MethodLike expression, int i) {
+    Variable parameter = expression.getParameters().get(i);
+
+    if (parameter == expression.getJsVarargsParameter()) {
+      sourceBuilder.append("...");
+    }
+    sourceBuilder.append(
+        "/** " + closureTypesGenerator.getJsDocForParameter(expression, i) + " */ ");
+    sourceBuilder.emitWithMapping(
+        // Only map parameters if they are named.
+        AstUtils.emptySourcePositionIfNotNamed(parameter.getSourcePosition()),
+        () -> sourceBuilder.append(environment.getUniqueNameForVariable(parameter)));
   }
 
   @Override
@@ -131,15 +144,13 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   private void renderClosureEnum() {
     TypeDeclaration typeDeclaration = type.getDeclaration();
-    sourceBuilder.appendLines(
-        "/**",
-        " * @enum {"
+    sourceBuilder.append(
+        "/** @enum {"
             + closureTypesGenerator.getClosureTypeString(
                 AstUtils.getJsEnumValueFieldType(typeDeclaration))
             + "}");
-    sourceBuilder.newLine();
     if (type.getDeclaration().isDeprecated()) {
-      sourceBuilder.appendln(" * @deprecated");
+      sourceBuilder.append(" @deprecated");
     }
     sourceBuilder.appendln(" */");
     sourceBuilder.append("const ");
@@ -340,6 +351,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
               if (method.getDescriptor().hasJsNamespace()) {
                 return;
               }
+              sourceBuilder.append("// ");
               renderMethodJsDoc(method);
               sourceBuilder.append("// native ");
               emitMethodHeader(method);
@@ -355,22 +367,31 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   }
 
   private void renderMethodJsDoc(Method method) {
-    sourceBuilder.appendln("/**");
-    if (method.getJsDocDescription() != null && !method.getJsDocDescription().isEmpty()) {
-      sourceBuilder.appendln(" * " + method.getJsDocDescription());
+    if (!Strings.isNullOrEmpty(method.getJsDocDescription())) {
+      sourceBuilder.appendln("//" + method.getJsDocDescription());
     }
-    if (method.isAbstract()) {
-      sourceBuilder.appendln(" * @abstract");
+    String jsDoc = getJsDoc(method);
+    sourceBuilder.appendln(jsDoc.isEmpty() ? "" : "/**" + jsDoc + " */");
+  }
+
+  private String getJsDoc(Method method) {
+    MethodDescriptor methodDescriptor = method.getDescriptor();
+
+    StringBuilder jsDocBuilder = new StringBuilder();
+    if (methodDescriptor.getJsVisibility() != Visibility.PUBLIC) {
+      jsDocBuilder.append(" @" + methodDescriptor.getJsVisibility().jsText);
+    }
+    if (methodDescriptor.isAbstract()) {
+      jsDocBuilder.append(" @abstract");
     }
     if (method.isOverride() && !method.isConstructor()) {
-      sourceBuilder.appendln(" * @override");
+      jsDocBuilder.append(" @override");
     }
-    MethodDescriptor methodDescriptor = method.getDescriptor();
     if (!methodDescriptor.getTypeParameterTypeDescriptors().isEmpty()) {
       String templateParamNames =
           closureTypesGenerator.getCommaSeparatedClosureTypesString(
               methodDescriptor.getTypeParameterTypeDescriptors());
-      sourceBuilder.appendln(" * @template " + templateParamNames);
+      jsDocBuilder.append(" @template " + templateParamNames);
     }
 
     if (type.getDeclaration().isJsFunctionImplementation()
@@ -382,38 +403,31 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         // ctor treats the JsFunction implementation as a class to invoke java.lang.Object ctor
         // method. Do not redefine @this, instead suppress invalid casts to allow casting this to
         // a function if needed.
-        sourceBuilder.appendln(" * @suppress {invalidCasts}");
+        jsDocBuilder.append(" @suppress {invalidCasts}");
       } else {
         // Using @this redefines enclosing class of a method, hence any template variables defined
         // in the class need to be declared in the method.
         for (TypeVariable typeVariable : type.getDeclaration().getTypeParameterDescriptors()) {
-          sourceBuilder.appendln(
-              " * @template " + closureTypesGenerator.getClosureTypeString(typeVariable));
+          jsDocBuilder.append(
+              " @template " + closureTypesGenerator.getClosureTypeString(typeVariable));
         }
-        sourceBuilder.appendln(
-            " * @this {"
+        jsDocBuilder.append(
+            " @this {"
                 + closureTypesGenerator.getClosureTypeString(type.getTypeDescriptor())
                 + "}");
       }
     }
-    for (int i = 0; i < method.getParameters().size(); i++) {
-      String parameterName = environment.getUniqueNameForVariable(method.getParameters().get(i));
-      sourceBuilder.appendln(
-          " * @param {"
-              + closureTypesGenerator.getJsDocForParameter(method, i)
-              + "} "
-              + parameterName);
-    }
     String returnTypeName =
         closureTypesGenerator.getClosureTypeString(methodDescriptor.getReturnTypeDescriptor());
     if (needsReturnJsDoc(methodDescriptor)) {
-      sourceBuilder.appendln(" * @return {" + returnTypeName + "}");
+      jsDocBuilder.append(" @return {" + returnTypeName + "}");
     }
-    sourceBuilder.appendln(" * @" + methodDescriptor.getJsVisibility().jsText);
+
     if (methodDescriptor.isDeprecated()) {
-      sourceBuilder.appendln(" * @deprecated");
+      jsDocBuilder.append(" @deprecated");
     }
-    sourceBuilder.appendln(" */");
+
+    return jsDocBuilder.toString();
   }
 
   private boolean needsReturnJsDoc(MethodDescriptor methodDescriptor) {
@@ -425,14 +439,12 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     if (!type.isInterface() || type.isJsOverlayImplementation()) {
       return; // Only render markImplementor code for interfaces.
     }
-    sourceBuilder.appendLines(
-        "/**",
-        " * @param {"
+
+    sourceBuilder.newLine();
+    sourceBuilder.appendln(
+        "static $markImplementor(/** "
             + TypeDescriptors.get().nativeFunction.getQualifiedJsName()
-            + "} classConstructor",
-        " * @public",
-        " */",
-        "static $markImplementor(classConstructor) ");
+            + "*/ ctor)");
     sourceBuilder.openBrace();
     sourceBuilder.newLine();
     for (DeclaredTypeDescriptor superInterface : type.getSuperInterfaceTypeDescriptors()) {
@@ -440,13 +452,10 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         continue;
       }
       String superInterfaceName = environment.aliasForType(superInterface);
-      sourceBuilder.appendln(superInterfaceName + ".$markImplementor(classConstructor);");
+      sourceBuilder.appendln(superInterfaceName + ".$markImplementor(ctor);");
     }
     sourceBuilder.appendLines(
-        "/**",
-        " * @public {boolean}",
-        " */",
-        "classConstructor.prototype.$implements__"
+        "ctor.prototype.$implements__"
             + ManglingNameUtils.getMangledName(type.getTypeDescriptor())
             + " = true;");
     sourceBuilder.closeBrace();
@@ -473,13 +482,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       sourceBuilder.newLine();
       return;
     }
-    sourceBuilder.appendLines(
-        "/**",
-        " * @param {?} instance",
-        " * @return {boolean}",
-        " * @public",
-        " */",
-        "static $isInstance(instance) ");
+    sourceBuilder.appendLines("/** @return {boolean} */", "static $isInstance(/** ? */ instance) ");
     sourceBuilder.openBrace();
     sourceBuilder.newLine();
     if (type.getDeclaration().isJsFunctionImplementation()) {
@@ -546,13 +549,10 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     if (!type.getDeclaration().isJsFunctionImplementation()) {
       return; // Only render the $copy method for jsfunctions
     }
-    sourceBuilder.appendLines(
-        "/**",
-        " * @param {" + environment.aliasForType(type.getDeclaration()) + "} from",
-        " * @param {?} to",
-        " * @public",
-        " */",
-        "static $copy(from, to) ");
+    sourceBuilder.appendln(
+        "static $copy(/**"
+            + environment.aliasForType(type.getDeclaration())
+            + "*/ from, /** ? */ to) ");
     sourceBuilder.openBrace();
     for (Field field : type.getInstanceFields()) {
       String fieldName = ManglingNameUtils.getMangledName(field.getDescriptor());
@@ -615,10 +615,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   private void renderLoadModules() {
     MethodDescriptor methodDescriptor = AstUtils.getLoadModulesDescriptor(type.getTypeDescriptor());
+    sourceBuilder.newLine();
     sourceBuilder.appendLines(
-        "/**",
-        " * @public",
-        " */",
         "static " + ManglingNameUtils.getMangledName(methodDescriptor) + "() ");
     sourceBuilder.openBrace();
 

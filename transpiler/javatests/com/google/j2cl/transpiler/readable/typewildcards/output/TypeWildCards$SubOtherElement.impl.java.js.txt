@@ -11,44 +11,31 @@ let TypeWildCards = goog.forwardDeclare('com.google.j2cl.transpiler.readable.typ
  * @implements {HasKey}
  */
 class SubOtherElement extends OtherElement {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {TypeWildCards} */
+    /**@type {TypeWildCards}*/
     this.f_$outer_this__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_SubOtherElement;
   }
-  /**
-   * @param {TypeWildCards} $outer_this
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_SubOtherElement__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards(
-      $outer_this) {
+      /** TypeWildCards */ $outer_this) {
     this.f_$outer_this__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_SubOtherElement =
         $outer_this;
     this.$ctor__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_OtherElement__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards(
         $outer_this);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     SubOtherElement.$clinit = () => {};
     SubOtherElement.$loadModules();
     OtherElement.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof SubOtherElement;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

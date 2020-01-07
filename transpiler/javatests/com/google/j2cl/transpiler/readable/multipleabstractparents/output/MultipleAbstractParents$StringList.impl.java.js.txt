@@ -4,16 +4,11 @@ const AbstractStringList = goog.require('com.google.j2cl.transpiler.readable.mul
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class StringList extends AbstractStringList {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!StringList}
-   * @public
-   */
+  /** @return {!StringList} */
   static $create__() {
     StringList.$clinit();
     let $instance = new StringList();
@@ -21,41 +16,26 @@ class StringList extends AbstractStringList {
         .$ctor__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_StringList__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_StringList__() {
     this.$ctor__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_AbstractStringList__();
   }
-  /**
-   * Bridge method.
-   * @override
-   * @param {?string} arg0
-   * @return {?string}
-   * @public
-   */
-  m_getFoo__java_lang_String(arg0) {
+  /** @override @return {?string} */
+  // Bridge method.
+  m_getFoo__java_lang_String(/** ?string */ arg0) {
     return super.m_getFoo__java_lang_Object(arg0);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     StringList.$clinit = () => {};
     StringList.$loadModules();
     AbstractStringList.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof StringList;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

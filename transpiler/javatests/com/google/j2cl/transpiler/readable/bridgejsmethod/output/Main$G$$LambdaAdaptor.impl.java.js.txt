@@ -9,59 +9,40 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {G<V>}
  */
 class $LambdaAdaptor extends j_l_Object {
-  /**
-   * @param {?function(V):V} fn
-   * @public
-   */
-  constructor(fn) {
+  constructor(/** ?function(V):V */ fn) {
     $LambdaAdaptor.$clinit();
     super();
-    /** @public {?function(V):V} */
+    /**@type {?function(V):V}*/
     this.f_$$fn__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_G_$LambdaAdaptor;
     this.$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_G_$LambdaAdaptor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_G_$JsFunction(
         fn);
   }
-  /**
-   * @param {?function(V):V} fn
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_G_$LambdaAdaptor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_G_$JsFunction(
-      fn) {
+      /** ?function(V):V */ fn) {
     this.$ctor__java_lang_Object__();
     this.f_$$fn__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_G_$LambdaAdaptor =
         fn;
   }
-  /**
-   * @param {V} arg0
-   * @return {V}
-   * @public
-   */
-  m_enclose__java_lang_Object(arg0) {
+  /** @return {V} */
+  m_enclose__java_lang_Object(/** V */ arg0) {
     let /** ?function(V):V */ $function;
     return (
         $function =
             this.f_$$fn__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_G_$LambdaAdaptor,
         $function(arg0));
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     $LambdaAdaptor.$clinit = () => {};
     $LambdaAdaptor.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof $LambdaAdaptor;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

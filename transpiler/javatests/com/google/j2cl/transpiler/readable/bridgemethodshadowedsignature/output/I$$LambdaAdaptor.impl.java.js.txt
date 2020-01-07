@@ -11,59 +11,40 @@ let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
  * @implements {I<I1>}
  */
 class $LambdaAdaptor extends j_l_Object {
-  /**
-   * @param {?function(Consumer<?>):?string} fn
-   * @public
-   */
-  constructor(fn) {
+  constructor(/** ?function(Consumer<?>):?string */ fn) {
     $LambdaAdaptor.$clinit();
     super();
-    /** @public {?function(Consumer<?>):?string} */
+    /**@type {?function(Consumer<?>):?string}*/
     this.f_$$fn__com_google_j2cl_transpiler_readable_bridgemethodshadowedsignature_I_$LambdaAdaptor;
     this.$ctor__com_google_j2cl_transpiler_readable_bridgemethodshadowedsignature_I_$LambdaAdaptor__com_google_j2cl_transpiler_readable_bridgemethodshadowedsignature_I_$JsFunction(
         fn);
   }
-  /**
-   * @param {?function(Consumer<?>):?string} fn
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_bridgemethodshadowedsignature_I_$LambdaAdaptor__com_google_j2cl_transpiler_readable_bridgemethodshadowedsignature_I_$JsFunction(
-      fn) {
+      /** ?function(Consumer<?>):?string */ fn) {
     this.$ctor__java_lang_Object__();
     this.f_$$fn__com_google_j2cl_transpiler_readable_bridgemethodshadowedsignature_I_$LambdaAdaptor =
         fn;
   }
-  /**
-   * @param {Consumer<?>} arg0
-   * @return {?string}
-   * @public
-   */
-  m_get__java_util_function_Consumer(arg0) {
+  /** @return {?string} */
+  m_get__java_util_function_Consumer(/** Consumer<?> */ arg0) {
     let /** ?function(Consumer<?>):?string */ $function;
     return (
         $function =
             this.f_$$fn__com_google_j2cl_transpiler_readable_bridgemethodshadowedsignature_I_$LambdaAdaptor,
         $function(arg0));
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     $LambdaAdaptor.$clinit = () => {};
     $LambdaAdaptor.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof $LambdaAdaptor;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

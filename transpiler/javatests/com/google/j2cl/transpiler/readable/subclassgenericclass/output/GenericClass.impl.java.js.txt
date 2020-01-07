@@ -7,17 +7,11 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @template T
  */
 class GenericClass extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @template T
-   * @return {!GenericClass<T>}
-   * @public
-   */
+  /** @template T @return {!GenericClass<T>} */
   static $create__() {
     GenericClass.$clinit();
     let $instance = new GenericClass();
@@ -25,31 +19,21 @@ class GenericClass extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_subclassgenericclass_GenericClass__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_subclassgenericclass_GenericClass__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     GenericClass.$clinit = () => {};
     GenericClass.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof GenericClass;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

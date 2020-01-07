@@ -6,54 +6,37 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Foo = goog.forwardDeclare('com.google.j2cl.transpiler.readable.srcjar.Foo$impl');
 
 class Srcjar extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!Srcjar}
-   * @public
-   */
+  /** @return {!Srcjar} */
   static $create__() {
     Srcjar.$clinit();
     let $instance = new Srcjar();
     $instance.$ctor__com_google_j2cl_transpiler_readable_srcjar_Srcjar__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_srcjar_Srcjar__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @public
-   */
+
   static m_test__() {
     Srcjar.$clinit();
     let foo = Foo.$create__();
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     Srcjar.$clinit = () => {};
     Srcjar.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Srcjar;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     Foo =
         goog.module.get('com.google.j2cl.transpiler.readable.srcjar.Foo$impl');

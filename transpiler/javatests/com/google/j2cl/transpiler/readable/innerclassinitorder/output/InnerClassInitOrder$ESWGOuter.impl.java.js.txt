@@ -9,17 +9,11 @@ let ESWGInner = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innercl
  * @template T
  */
 class ESWGOuter extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @template T
-   * @return {!ESWGOuter<T>}
-   * @public
-   */
+  /** @template T @return {!ESWGOuter<T>} */
   static $create__() {
     ESWGOuter.$clinit();
     let $instance = new ESWGOuter();
@@ -27,41 +21,28 @@ class ESWGOuter extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESWGOuter__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESWGOuter__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @return {ESWGInner<T>}
-   * @public
-   */
+  /** @return {ESWGInner<T>} */
   m_newESWGInner__() {
-    return /**@type {!ESWGInner<T>} */ (
+    return /**@type {!ESWGInner<T>}*/ (
         ESWGInner
             .$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESWGOuter(
                 this));
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     ESWGOuter.$clinit = () => {};
     ESWGOuter.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof ESWGOuter;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     ESWGInner = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner$impl');

@@ -16,22 +16,17 @@ let $LongUtils = goog.forwardDeclare('vmbootstrap.LongUtils$impl');
 let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
 
 class ArithmeticExpressions extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {!$Long} */
+    /**@type {!$Long}*/
     this.f_bar__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions =
         $Long.fromInt(0);
-    /** @public {!$Long} */
+    /**@type {!$Long}*/
     this.f_intField__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions =
         $Long.fromInt(0);
   }
-  /**
-   * @return {!ArithmeticExpressions}
-   * @public
-   */
+  /** @return {!ArithmeticExpressions} */
   static $create__() {
     ArithmeticExpressions.$clinit();
     let $instance = new ArithmeticExpressions();
@@ -39,16 +34,12 @@ class ArithmeticExpressions extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions__() {
     this.$ctor__java_lang_Object__();
     this.$init___$p_com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions();
   }
-  /**
-   * @public
-   */
+
   m_testCoercions__() {
     let b = 1;
     let c = 1 /* '\u0001' */;
@@ -63,9 +54,7 @@ class ArithmeticExpressions extends j_l_Object {
     f = 9.223372036854776E18;
     d = 9.223372036854776E18;
   }
-  /**
-   * @public
-   */
+
   m_testPrimitives__() {
     let a = 10;
     let b = a++;
@@ -94,9 +83,7 @@ class ArithmeticExpressions extends j_l_Object {
     let s = 10;
     k = (s = $Primitives.$narrowIntToShort(s + 1)) == 10;
   }
-  /**
-   * @public
-   */
+
   m_testCompoundArray__() {
     let ints = null;
     ints[0] += 1;
@@ -140,16 +127,11 @@ class ArithmeticExpressions extends j_l_Object {
     let b = $Arrays.$set(
                 shorts, 0, $Primitives.$narrowIntToShort(shorts[0] + 1)) == 10;
   }
-  /**
-   * @return {Array<!$Long>}
-   * @public
-   */
+  /** @return {Array<!$Long>} */
   static m_getLongArray__() {
     return null;
   }
-  /**
-   * @public
-   */
+
   m_testCompoundBoxedTypes__() {
     let /** Integer */ $value, /** Integer */ $value_1, /** Integer */ $value_2;
     let c = Integer.m_valueOf__int(1000);
@@ -180,29 +162,24 @@ class ArithmeticExpressions extends j_l_Object {
     let ref = null;
     ref.f_field__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions_1Ref =
         Integer.m_valueOf__int(
-            /**@type {Integer} */
+            /**@type {Integer}*/
             ($Casts.$to(
                  ref.f_field__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions_1Ref,
                  Integer))
                 .m_intValue__() +
             1);
     let n = 1 +
-        /**@type {Integer} */
+        /**@type {Integer}*/
         ($Casts.$to(
              ref.f_field__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions_1Ref,
              Integer))
             .m_intValue__();
   }
-  /**
-   * @return {Integer}
-   * @public
-   */
+  /** @return {Integer} */
   static m_getInteger__() {
     return null;
   }
-  /**
-   * @public
-   */
+
   static m_testSideEffect__() {
     {
       let $qualifier = ArithmeticExpressions.m_getWithSideEffect__();
@@ -214,16 +191,11 @@ class ArithmeticExpressions extends j_l_Object {
               $Long.fromInt(5));
     }
   }
-  /**
-   * @return {ArithmeticExpressions}
-   * @public
-   */
+  /** @return {ArithmeticExpressions} */
   static m_getWithSideEffect__() {
     return null;
   }
-  /**
-   * @public
-   */
+
   m_testExtendedOperands__() {
     let boxedInteger = Integer.m_valueOf__int(3);
     let /** number */ i;
@@ -255,9 +227,7 @@ class ArithmeticExpressions extends j_l_Object {
     d = $Primitives.$widenLongToDouble($LongUtils.$plus($Long.fromInt(20), l)) +
         d;
   }
-  /**
-   * @private
-   */
+  /** @private */
   $init___$p_com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions() {
     let /** !$Long */ $value;
     this.f_bar__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions =
@@ -272,51 +242,37 @@ class ArithmeticExpressions extends j_l_Object {
                  $Long.fromInt(1)),
          $value);
   }
-  /**
-   * @return {!$Long}
-   * @public
-   */
+  /** @return {!$Long} */
   static get f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions() {
     return (
         ArithmeticExpressions.$clinit(),
         ArithmeticExpressions
             .$f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions);
   }
-  /**
-   * @param {!$Long} value
-   * @public
-   */
+
   static set f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions(
-      value) {
+      /** !$Long */ value) {
     (ArithmeticExpressions.$clinit(),
      ArithmeticExpressions
          .$f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions =
          value);
   }
-  /**
-   * @return {!$Long}
-   * @public
-   */
+  /** @return {!$Long} */
   static get f_foo__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions() {
     return (
         ArithmeticExpressions.$clinit(),
         ArithmeticExpressions
             .$f_foo__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions);
   }
-  /**
-   * @param {!$Long} value
-   * @public
-   */
+
   static set f_foo__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions(
-      value) {
+      /** !$Long */ value) {
     (ArithmeticExpressions.$clinit(),
      ArithmeticExpressions
          .$f_foo__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions =
          value);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     let /** !$Long */ $value;
     ArithmeticExpressions.$clinit = () => {};
@@ -338,17 +294,11 @@ class ArithmeticExpressions extends j_l_Object {
                  $Long.fromInt(1)),
          $value);
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof ArithmeticExpressions;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     Byte = goog.module.get('java.lang.Byte$impl');
     Character = goog.module.get('java.lang.Character$impl');
@@ -366,23 +316,23 @@ $Util.$setClassMetadata(
     ArithmeticExpressions,
     'com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions');
 
-/** @public {number} @const */
+/**@const {number}*/
 ArithmeticExpressions
     .f_FLOAT_CONSTANT__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions_ =
     1.100000023841858;
-/** @public {number} @const */
+/**@const {number}*/
 ArithmeticExpressions
     .f_DOUBLE_CONSTANT__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions_ =
     1.100000023841858;
-/** @public {number} @const */
+/**@const {number}*/
 ArithmeticExpressions
     .f_DOUBLE_CONSTANT_WITH_ARITHMETIC__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions_ =
     2.200000047683716;
-/** @private {!$Long} */
+/**@private {!$Long}*/
 ArithmeticExpressions
     .$f_one__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions =
     $Long.fromInt(0);
-/** @private {!$Long} */
+/**@private {!$Long}*/
 ArithmeticExpressions
     .$f_foo__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions =
     $Long.fromInt(0);

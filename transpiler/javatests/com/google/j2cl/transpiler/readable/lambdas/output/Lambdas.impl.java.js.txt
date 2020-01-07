@@ -29,45 +29,31 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
 class Lambdas extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {number} */
+    /**@type {number}*/
     this.f_field__com_google_j2cl_transpiler_readable_lambdas_Lambdas = 0;
   }
-  /**
-   * @return {!Lambdas}
-   * @public
-   */
+  /** @return {!Lambdas} */
   static $create__() {
     Lambdas.$clinit();
     let $instance = new Lambdas();
     $instance.$ctor__com_google_j2cl_transpiler_readable_lambdas_Lambdas__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_lambdas_Lambdas__() {
     this.$ctor__java_lang_Object__();
     this.$init___$p_com_google_j2cl_transpiler_readable_lambdas_Lambdas();
   }
-  /**
-   * @param {FunctionalInterface} intf
-   * @param {number} n
-   * @return {number}
-   * @public
-   */
+  /** @return {number} */
   m_call__com_google_j2cl_transpiler_readable_lambdas_Lambdas_FunctionalInterface__int(
-      intf, n) {
+      /** FunctionalInterface */ intf, /** number */ n) {
     return this.f_field__com_google_j2cl_transpiler_readable_lambdas_Lambdas +
         intf.m_m__int(n);
   }
-  /**
-   * @public
-   */
+
   m_testLambdaExpressionStyle__() {
     this.m_call__com_google_j2cl_transpiler_readable_lambdas_Lambdas_FunctionalInterface__int(
         FunctionalInterface.$adapt((/** number */ i) => {
@@ -75,9 +61,7 @@ class Lambdas extends j_l_Object {
         }),
         10);
   }
-  /**
-   * @public
-   */
+
   m_testLambdaBlockStyle__() {
     this.m_call__com_google_j2cl_transpiler_readable_lambdas_Lambdas_FunctionalInterface__int(
         FunctionalInterface.$adapt((/** number */ i) => {
@@ -85,9 +69,7 @@ class Lambdas extends j_l_Object {
         }),
         10);
   }
-  /**
-   * @public
-   */
+
   m_testLambdaCaptureField__() {
     this.m_call__com_google_j2cl_transpiler_readable_lambdas_Lambdas_FunctionalInterface__int(
         FunctionalInterface.$adapt((/** number */ i) => {
@@ -96,9 +78,7 @@ class Lambdas extends j_l_Object {
         }),
         10);
   }
-  /**
-   * @public
-   */
+
   m_testLambdaCaptureLocal__() {
     let x = 1;
     this.m_call__com_google_j2cl_transpiler_readable_lambdas_Lambdas_FunctionalInterface__int(
@@ -107,9 +87,7 @@ class Lambdas extends j_l_Object {
         }),
         10);
   }
-  /**
-   * @public
-   */
+
   m_testLambdaCaptureFieldAndLocal__() {
     let x = 1;
     this.m_call__com_google_j2cl_transpiler_readable_lambdas_Lambdas_FunctionalInterface__int(
@@ -121,13 +99,9 @@ class Lambdas extends j_l_Object {
         }),
         10);
   }
-  /**
-   * @public
-   */
+
   m_funOuter__() {}
-  /**
-   * @public
-   */
+
   m_testLambdaCallOuterFunction__() {
     this.m_call__com_google_j2cl_transpiler_readable_lambdas_Lambdas_FunctionalInterface__int(
         FunctionalInterface.$adapt((/** number */ i) => {
@@ -138,156 +112,110 @@ class Lambdas extends j_l_Object {
         }),
         10);
   }
-  /**
-   * @public
-   */
+
   static m_testLambdaInStaticContext__() {
     Lambdas.$clinit();
     let f = FunctionalInterface.$adapt((/** number */ i) => {
       return i;
     });
   }
-  /**
-   * @template T
-   * @public
-   */
+  /** @template T */
   m_testInstanceMethodTypeVariableThroughLambda__() {
-    let wrapped = /**@type {Functional<T>} */ (
+    let wrapped = /**@type {Functional<T>}*/ (
         Functional.$adapt((/** Functional<T> */ f) => {
-          return /**@type {!$1<T>} */ (
+          return /**@type {!$1<T>}*/ (
               $1.$create__com_google_j2cl_transpiler_readable_lambdas_Lambdas(
                   this));
         }));
   }
-  /**
-   * @template T
-   * @public
-   */
+  /** @template T */
   static m_testStaticMethodTypeVariableThroughLambda__() {
     Lambdas.$clinit();
-    let wrapped = /**@type {Functional<T>} */ (
+    let wrapped = /**@type {Functional<T>}*/ (
         Functional.$adapt((/** Functional<T> */ f) => {
-          return /**@type {!$2<T>} */ ($2.$create__());
+          return /**@type {!$2<T>}*/ ($2.$create__());
         }));
   }
-  /**
-   * @template T
-   * @param {GenericFunctionalInterface<T>} intf
-   * @param {T} e
-   * @return {T}
-   * @public
-   */
+  /** @template T @return {T} */
   m_callWithTypeVariable__com_google_j2cl_transpiler_readable_lambdas_Lambdas_GenericFunctionalInterface__java_lang_Object(
-      intf, e) {
+      /** GenericFunctionalInterface<T> */ intf, /** T */ e) {
     return intf.m_m__java_lang_Object(e);
   }
-  /**
-   * @param {GenericFunctionalInterface<Error>} intf
-   * @param {Error} e
-   * @return {Error}
-   * @public
-   */
+  /** @return {Error} */
   m_callParameterized__com_google_j2cl_transpiler_readable_lambdas_Lambdas_GenericFunctionalInterface__java_lang_Error(
-      intf, e) {
-    return /**@type {Error} */ (
+      /** GenericFunctionalInterface<Error> */ intf, /** Error */ e) {
+    return /**@type {Error}*/ (
         $Casts.$to(intf.m_m__java_lang_Object(e), Error));
   }
-  /**
-   * @template T
-   * @param {GenericFunctionalInterface<Enum<T>>} intf
-   * @param {Enum<T>} e
-   * @return {Enum<T>}
-   * @public
-   */
+  /** @template T @return {Enum<T>} */
   static m_callTypeVariableWithBounds__com_google_j2cl_transpiler_readable_lambdas_Lambdas_GenericFunctionalInterface__java_lang_Enum(
-      intf, e) {
+      /** GenericFunctionalInterface<Enum<T>> */ intf, /** Enum<T> */ e) {
     Lambdas.$clinit();
-    return /**@type {Enum<T>} */ (
+    return /**@type {Enum<T>}*/ (
         $Casts.$to(intf.m_m__java_lang_Object(e), Enum));
   }
-  /**
-   * @template T
-   * @param {BiFunction<T, ?string, ?number>} fn
-   * @return {GenericFunctionalInterface<T>}
-   * @public
-   */
+  /** @template T @return {GenericFunctionalInterface<T>} */
   m_callWithBiFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_BiFunction_$pp_com_google_j2cl_transpiler_readable_lambdas(
-      fn) {
+      /** BiFunction<T, ?string, ?number> */ fn) {
     return null;
   }
-  /**
-   * @template T
-   * @public
-   */
+  /** @template T */
   m_testLambdaWithGenerics__() {
     this.m_callWithTypeVariable__com_google_j2cl_transpiler_readable_lambdas_Lambdas_GenericFunctionalInterface__java_lang_Object(
         GenericFunctionalInterface.$adapt((i) => {
-          let i_1 = /**@type {Error} */ ($Casts.$to(i, Error));
+          let i_1 = /**@type {Error}*/ ($Casts.$to(i, Error));
           return i_1;
         }),
         Error.$create__());
     this.m_callParameterized__com_google_j2cl_transpiler_readable_lambdas_Lambdas_GenericFunctionalInterface__java_lang_Error(
         GenericFunctionalInterface.$adapt((i_2) => {
-          let i_3 = /**@type {Error} */ ($Casts.$to(i_2, Error));
+          let i_3 = /**@type {Error}*/ ($Casts.$to(i_2, Error));
           return i_3;
         }),
         Error.$create__());
     Lambdas
         .m_callTypeVariableWithBounds__com_google_j2cl_transpiler_readable_lambdas_Lambdas_GenericFunctionalInterface__java_lang_Enum(
-            /**@type {GenericFunctionalInterface<Enum<T>>} */ (
+            /**@type {GenericFunctionalInterface<Enum<T>>}*/ (
                 GenericFunctionalInterface.$adapt((i_4) => {
-                  let i_5 = /**@type {Enum} */ ($Casts.$to(i_4, Enum));
+                  let i_5 = /**@type {Enum}*/ ($Casts.$to(i_4, Enum));
                   return i_5;
                 })),
-            /**@type {Enum<T>} */ (null));
+            /**@type {Enum<T>}*/ (null));
     this.m_callWithBiFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_BiFunction_$pp_com_google_j2cl_transpiler_readable_lambdas(
         BiFunction.$adapt((/** * */ x, y) => {
-          let y_1 = /**@type {?string} */ ($Casts.$to(y, j_l_String));
+          let y_1 = /**@type {?string}*/ ($Casts.$to(y, j_l_String));
           throw $Exceptions.toJs(RuntimeException.$create__());
         }));
     let f = Lambdas_Function.$adapt((item) => {
-      let item_1 = /**@type {Enum} */ ($Casts.$to(item, Enum));
+      let item_1 = /**@type {Enum}*/ ($Casts.$to(item, Enum));
       return Long.m_valueOf__long($Long.fromInt(1));
     });
   }
-  /**
-   * @return {*}
-   * @public
-   */
+  /** @return {*} */
   static m_m__() {
     Lambdas.$clinit();
     return null;
   }
-  /**
-   * @public
-   */
+
   static m_testLambdaCallingStaticMethod__() {
     Lambdas.$clinit();
     let f = Lambdas_Function.$adapt((/** * */ l) => {
       return Lambdas.m_m__();
     });
   }
-  /**
-   * @public
-   */
+
   m_testLambdaReturningVoidAsExpression__() {
     let runner = FunctionalInterfaceWithMethodReturningVoid.$adapt(() => {
       j_l_Object.$create__();
     });
   }
-  /**
-   * @public
-   */
+
   m_testAnonymousInsideLambda__() {
     let runner = FunctionalInterfaceWithMethodReturningVoid.$adapt(() => {
       $3.$create__com_google_j2cl_transpiler_readable_lambdas_Lambdas(this);
     });
   }
-  /**
-   * @template E
-   * @return {?function(E):E}
-   * @public
-   */
+  /** @template E @return {?function(E):E} */
   static m_identity__() {
     Lambdas.$clinit();
     if ($Equality.$same(
@@ -298,17 +226,15 @@ class Lambdas extends j_l_Object {
           .f_identityFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_ =
           IdentityFunction.$create__();
     }
-    return /**@type {?function(E):E} */ (
+    return /**@type {?function(E):E}*/ (
         Lambdas
             .f_identityFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_);
   }
-  /**
-   * @public
-   */
+
   static m_testJsInteropLambdas__() {
     Lambdas.$clinit();
     let thenable =
-        /**@type {!$LambdaAdaptor$1<?string>} */ (new $LambdaAdaptor$1(
+        /**@type {!$LambdaAdaptor$1<?string>}*/ (new $LambdaAdaptor$1(
             (/** ?function(?string):?void */ f1,
              /** ?function(Throwable):?void */ f2) => {
               f1(null);
@@ -328,15 +254,11 @@ class Lambdas extends j_l_Object {
     equals.equals(null);
     equals.m_get__();
   }
-  /**
-   * @private
-   */
+  /** @private */
   $init___$p_com_google_j2cl_transpiler_readable_lambdas_Lambdas() {
     this.f_field__com_google_j2cl_transpiler_readable_lambdas_Lambdas = 100;
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     Lambdas.$clinit = () => {};
     Lambdas.$loadModules();
@@ -345,17 +267,11 @@ class Lambdas extends j_l_Object {
         .f_identityFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_ =
         null;
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Lambdas;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     $1 = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdas.Lambdas.$1$impl');
@@ -398,7 +314,7 @@ class Lambdas extends j_l_Object {
 $Util.$setClassMetadata(
     Lambdas, 'com.google.j2cl.transpiler.readable.lambdas.Lambdas');
 
-/** @public {?function(*):*} */
+/**@type {?function(*):*}*/
 Lambdas
     .f_identityFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_;
 

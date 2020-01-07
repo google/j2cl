@@ -7,16 +7,11 @@ let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $LongUtils = goog.forwardDeclare('vmbootstrap.LongUtils$impl');
 
 class ForStatement extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!ForStatement}
-   * @public
-   */
+  /** @return {!ForStatement} */
   static $create__() {
     ForStatement.$clinit();
     let $instance = new ForStatement();
@@ -24,15 +19,11 @@ class ForStatement extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_forstatement_ForStatement__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_forstatement_ForStatement__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @public
-   */
+
   m_test__() {
     for (let i = 0, count = 0; i < 100; i++) {
       count++;
@@ -44,25 +35,17 @@ class ForStatement extends j_l_Object {
       count_1 = $LongUtils.$plus(count_1, $Long.fromInt(1));
     }
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     ForStatement.$clinit = () => {};
     ForStatement.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof ForStatement;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     $Long = goog.module.get('nativebootstrap.Long$impl');
     $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');

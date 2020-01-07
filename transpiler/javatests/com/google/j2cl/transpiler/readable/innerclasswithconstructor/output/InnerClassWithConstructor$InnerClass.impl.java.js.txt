@@ -6,27 +6,20 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let InnerClassWithConstructor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclasswithconstructor.InnerClassWithConstructor$impl');
 
 class InnerClass extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {InnerClassWithConstructor} */
+    /**@type {InnerClassWithConstructor}*/
     this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclasswithconstructor_InnerClassWithConstructor_InnerClass;
-    /** @public {number} */
+    /**@type {number}*/
     this.f_b__com_google_j2cl_transpiler_readable_innerclasswithconstructor_InnerClassWithConstructor_InnerClass =
         0;
   }
-  /**
-   * Factory method corresponding to constructor
-   * 'InnerClass(InnerClassWithConstructor, int)'.
-   * @param {InnerClassWithConstructor} $outer_this
-   * @param {number} b
-   * @return {!InnerClass}
-   * @public
-   */
+  /** @return {!InnerClass} */
+  // Factory method corresponding to constructor
+  // 'InnerClass(InnerClassWithConstructor, int)'.
   static $create__com_google_j2cl_transpiler_readable_innerclasswithconstructor_InnerClassWithConstructor__int(
-      $outer_this, b) {
+      /** InnerClassWithConstructor */ $outer_this, /** number */ b) {
     InnerClass.$clinit();
     let $instance = new InnerClass();
     $instance
@@ -34,15 +27,11 @@ class InnerClass extends j_l_Object {
             $outer_this, b);
     return $instance;
   }
-  /**
-   * Initialization from constructor 'InnerClass(InnerClassWithConstructor,
-   * int)'.
-   * @param {InnerClassWithConstructor} $outer_this
-   * @param {number} b
-   * @public
-   */
+
+  // Initialization from constructor 'InnerClass(InnerClassWithConstructor,
+  // int)'.
   $ctor__com_google_j2cl_transpiler_readable_innerclasswithconstructor_InnerClassWithConstructor_InnerClass__com_google_j2cl_transpiler_readable_innerclasswithconstructor_InnerClassWithConstructor__int(
-      $outer_this, b) {
+      /** InnerClassWithConstructor */ $outer_this, /** number */ b) {
     this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclasswithconstructor_InnerClassWithConstructor_InnerClass =
         $outer_this;
     this.$ctor__java_lang_Object__();
@@ -51,15 +40,11 @@ class InnerClass extends j_l_Object {
             .f_a__com_google_j2cl_transpiler_readable_innerclasswithconstructor_InnerClassWithConstructor +
         b;
   }
-  /**
-   * Factory method corresponding to constructor
-   * 'InnerClass(InnerClassWithConstructor)'.
-   * @param {InnerClassWithConstructor} $outer_this
-   * @return {!InnerClass}
-   * @public
-   */
+  /** @return {!InnerClass} */
+  // Factory method corresponding to constructor
+  // 'InnerClass(InnerClassWithConstructor)'.
   static $create__com_google_j2cl_transpiler_readable_innerclasswithconstructor_InnerClassWithConstructor(
-      $outer_this) {
+      /** InnerClassWithConstructor */ $outer_this) {
     InnerClass.$clinit();
     let $instance = new InnerClass();
     $instance
@@ -67,37 +52,26 @@ class InnerClass extends j_l_Object {
             $outer_this);
     return $instance;
   }
-  /**
-   * Initialization from constructor 'InnerClass(InnerClassWithConstructor)'.
-   * @param {InnerClassWithConstructor} $outer_this
-   * @public
-   */
+
+  // Initialization from constructor 'InnerClass(InnerClassWithConstructor)'.
   $ctor__com_google_j2cl_transpiler_readable_innerclasswithconstructor_InnerClassWithConstructor_InnerClass__com_google_j2cl_transpiler_readable_innerclasswithconstructor_InnerClassWithConstructor(
-      $outer_this) {
+      /** InnerClassWithConstructor */ $outer_this) {
     this.$ctor__com_google_j2cl_transpiler_readable_innerclasswithconstructor_InnerClassWithConstructor_InnerClass__com_google_j2cl_transpiler_readable_innerclasswithconstructor_InnerClassWithConstructor__int(
         $outer_this,
         $outer_this
             .f_a__com_google_j2cl_transpiler_readable_innerclasswithconstructor_InnerClassWithConstructor);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     InnerClass.$clinit = () => {};
     InnerClass.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof InnerClass;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

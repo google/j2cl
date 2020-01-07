@@ -11,37 +11,25 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {List<T>}
  */
 class AbstractList extends AbstractCollection {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_AbstractList__() {
     this.$ctor__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_AbstractCollection__();
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     AbstractList.$clinit = () => {};
     AbstractList.$loadModules();
     AbstractCollection.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof AbstractList;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

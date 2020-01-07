@@ -4,22 +4,17 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class InstanceFieldInitializer extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {number} */
+    /**@type {number}*/
     this.f_a__com_google_j2cl_transpiler_readable_instancefieldinitializer_InstanceFieldInitializer =
         0;
-    /** @public {number} */
+    /**@type {number}*/
     this.f_b__com_google_j2cl_transpiler_readable_instancefieldinitializer_InstanceFieldInitializer =
         0;
   }
-  /**
-   * @return {!InstanceFieldInitializer}
-   * @public
-   */
+  /** @return {!InstanceFieldInitializer} */
   static $create__() {
     InstanceFieldInitializer.$clinit();
     let $instance = new InstanceFieldInitializer();
@@ -27,16 +22,12 @@ class InstanceFieldInitializer extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_instancefieldinitializer_InstanceFieldInitializer__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_instancefieldinitializer_InstanceFieldInitializer__() {
     this.$ctor__java_lang_Object__();
     this.$init___$p_com_google_j2cl_transpiler_readable_instancefieldinitializer_InstanceFieldInitializer();
   }
-  /**
-   * @private
-   */
+  /** @private */
   $init___$p_com_google_j2cl_transpiler_readable_instancefieldinitializer_InstanceFieldInitializer() {
     this.f_a__com_google_j2cl_transpiler_readable_instancefieldinitializer_InstanceFieldInitializer =
         1;
@@ -44,25 +35,17 @@ class InstanceFieldInitializer extends j_l_Object {
         this.f_a__com_google_j2cl_transpiler_readable_instancefieldinitializer_InstanceFieldInitializer *
         2;
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     InstanceFieldInitializer.$clinit = () => {};
     InstanceFieldInitializer.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof InstanceFieldInitializer;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

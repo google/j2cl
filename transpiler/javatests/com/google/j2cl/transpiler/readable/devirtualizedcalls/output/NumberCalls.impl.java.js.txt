@@ -15,16 +15,11 @@ let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Numbers = goog.forwardDeclare('vmbootstrap.Numbers$impl');
 
 class NumberCalls extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!NumberCalls}
-   * @public
-   */
+  /** @return {!NumberCalls} */
   static $create__() {
     NumberCalls.$clinit();
     let $instance = new NumberCalls();
@@ -32,15 +27,11 @@ class NumberCalls extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_devirtualizedcalls_NumberCalls__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_devirtualizedcalls_NumberCalls__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @public
-   */
+
   m_main__() {
     let i = Integer.$create__int(1);
     $Numbers.m_byteValue__java_lang_Number(i);
@@ -131,25 +122,17 @@ class NumberCalls extends j_l_Object {
     let bool = Boolean.$create__boolean(true);
     Boolean.m_booleanValue__java_lang_Boolean(bool);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     NumberCalls.$clinit = () => {};
     NumberCalls.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof NumberCalls;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     Boolean = goog.module.get('java.lang.Boolean$impl');
     Byte = goog.module.get('java.lang.Byte$impl');

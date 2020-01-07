@@ -4,16 +4,11 @@ const Child = goog.require('com.google.j2cl.transpiler.readable.packageprivateme
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class SubChild extends Child {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!SubChild}
-   * @public
-   */
+  /** @return {!SubChild} */
   static $create__() {
     SubChild.$clinit();
     let $instance = new SubChild();
@@ -21,40 +16,25 @@ class SubChild extends Child {
         .$ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package2_SubChild__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package2_SubChild__() {
     this.$ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_Child__();
   }
-  /**
-   * @override
-   * @param {number} a
-   * @return {number}
-   * @public
-   */
-  m_foo__int(a) {
+  /** @override @return {number} */
+  m_foo__int(/** number */ a) {
     return a + 3;
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     SubChild.$clinit = () => {};
     SubChild.$loadModules();
     Child.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof SubChild;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

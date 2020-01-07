@@ -7,16 +7,11 @@ let Foo = goog.forwardDeclare('com.google.j2cl.transpiler.readable.castonarrayin
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 
 class CastOnArrayInit extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!CastOnArrayInit}
-   * @public
-   */
+  /** @return {!CastOnArrayInit} */
   static $create__() {
     CastOnArrayInit.$clinit();
     let $instance = new CastOnArrayInit();
@@ -24,52 +19,35 @@ class CastOnArrayInit extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_castonarrayinit_CastOnArrayInit__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_castonarrayinit_CastOnArrayInit__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @template E
-   * @param {Array<Foo<E>>} args
-   * @public
-   */
+  /** @template E */
   static m_fun__arrayOf_com_google_j2cl_transpiler_readable_castonarrayinit_CastOnArrayInit_Foo(
-      args) {
+      /** Array<Foo<E>> */ args) {
     CastOnArrayInit.$clinit();
   }
-  /**
-   * @template E
-   * @public
-   */
+  /** @template E */
   static m_test__() {
     CastOnArrayInit.$clinit();
-    let f1 = /**@type {!Foo<E>} */ (Foo.$create__());
-    let f2 = /**@type {!Foo<E>} */ (Foo.$create__());
+    let f1 = /**@type {!Foo<E>}*/ (Foo.$create__());
+    let f2 = /**@type {!Foo<E>}*/ (Foo.$create__());
     CastOnArrayInit
         .m_fun__arrayOf_com_google_j2cl_transpiler_readable_castonarrayinit_CastOnArrayInit_Foo(
-            /**@type {!Array<Foo<E>>} */ ($Arrays.$init([f1, f2], Foo)));
+            /**@type {!Array<Foo<E>>}*/ ($Arrays.$init([f1, f2], Foo)));
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     CastOnArrayInit.$clinit = () => {};
     CastOnArrayInit.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof CastOnArrayInit;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     Foo = goog.module.get(
         'com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.Foo$impl');

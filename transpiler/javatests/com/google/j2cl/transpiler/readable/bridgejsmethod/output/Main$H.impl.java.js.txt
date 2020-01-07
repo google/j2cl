@@ -9,17 +9,11 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {G<V>}
  */
 class H extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @template V
-   * @return {!H<V>}
-   * @public
-   */
+  /** @template V @return {!H<V>} */
   static $create__() {
     H.$clinit();
     let $instance = new H();
@@ -27,49 +21,30 @@ class H extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_H__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_H__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @param {V} value
-   * @return {V}
-   * @public
-   */
-  enclose(value) {
+  /** @return {V} */
+  enclose(/** V */ value) {
     return null;
   }
-  /**
-   * Bridge method for exposing non-JsMethod.
-   * @override
-   * @param {V} arg0
-   * @return {V}
-   * @public
-   */
-  m_enclose__java_lang_Object(arg0) {
+  /** @override @return {V} */
+  // Bridge method for exposing non-JsMethod.
+  m_enclose__java_lang_Object(/** V */ arg0) {
     return this.enclose(arg0);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     H.$clinit = () => {};
     H.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof H;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

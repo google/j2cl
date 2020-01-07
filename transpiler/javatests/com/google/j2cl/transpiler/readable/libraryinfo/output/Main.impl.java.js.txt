@@ -6,31 +6,22 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let FunctionImpl = goog.forwardDeclare('com.google.j2cl.transpiler.readable.libraryinfo.Main.FunctionImpl$impl');
 
 class Main extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!Main}
-   * @public
-   */
+  /** @return {!Main} */
   static $create__() {
     Main.$clinit();
     let $instance = new Main();
     $instance.$ctor__com_google_j2cl_transpiler_readable_libraryinfo_Main__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_libraryinfo_Main__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @public
-   */
+
   static entryPoint() {
     Main.$clinit();
     Main.$create__()
@@ -41,42 +32,28 @@ class Main extends j_l_Object {
     };
     jsFunction('foo');
   }
-  /**
-   * @public
-   */
+
   m_execute___$p_com_google_j2cl_transpiler_readable_libraryinfo_Main() {
     console.log('Foo');
   }
-  /**
-   * @override
-   * @return {?string}
-   * @public
-   */
+  /** @override @return {?string} */
   toString() {
     return super.toString();
   }
-  /**
-   * @return {?string}
-   * @public
-   */
+  /** @return {?string} */
   static get f_STATIC_FIELD__com_google_j2cl_transpiler_readable_libraryinfo_Main() {
     return (
         Main.$clinit(),
         Main.$f_STATIC_FIELD__com_google_j2cl_transpiler_readable_libraryinfo_Main);
   }
-  /**
-   * @param {?string} value
-   * @public
-   */
+
   static set f_STATIC_FIELD__com_google_j2cl_transpiler_readable_libraryinfo_Main(
-      value) {
+      /** ?string */ value) {
     (Main.$clinit(),
      Main.$f_STATIC_FIELD__com_google_j2cl_transpiler_readable_libraryinfo_Main =
          value);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     Main.$clinit = () => {};
     Main.$loadModules();
@@ -84,17 +61,11 @@ class Main extends j_l_Object {
     Main.$f_STATIC_FIELD__com_google_j2cl_transpiler_readable_libraryinfo_Main =
         'STATIC_FIELD';
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Main;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     FunctionImpl = goog.module.get(
         'com.google.j2cl.transpiler.readable.libraryinfo.Main.FunctionImpl$impl');
@@ -103,7 +74,7 @@ class Main extends j_l_Object {
 $Util.$setClassMetadata(
     Main, 'com.google.j2cl.transpiler.readable.libraryinfo.Main');
 
-/** @private {?string} */
+/**@private {?string}*/
 Main.$f_STATIC_FIELD__com_google_j2cl_transpiler_readable_libraryinfo_Main;
 
 exports = Main;

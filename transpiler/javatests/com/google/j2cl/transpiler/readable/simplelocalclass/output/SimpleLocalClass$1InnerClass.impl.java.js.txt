@@ -6,27 +6,20 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let SimpleLocalClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass$impl');
 
 class $1InnerClass extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {SimpleLocalClass} */
+    /**@type {SimpleLocalClass}*/
     this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass_1InnerClass;
-    /** @public {number} */
+    /**@type {number}*/
     this.$c_localVar = 0;
-    /** @public {number} */
+    /**@type {number}*/
     this.$c_p = 0;
   }
-  /**
-   * @param {SimpleLocalClass} $outer_this
-   * @param {number} $c_localVar
-   * @param {number} $c_p
-   * @return {!$1InnerClass}
-   * @public
-   */
+  /** @return {!$1InnerClass} */
   static $create__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass__int__int(
-      $outer_this, $c_localVar, $c_p) {
+      /** SimpleLocalClass */ $outer_this, /** number */ $c_localVar,
+      /** number */ $c_p) {
     $1InnerClass.$clinit();
     let $instance = new $1InnerClass();
     $instance
@@ -34,46 +27,31 @@ class $1InnerClass extends j_l_Object {
             $outer_this, $c_localVar, $c_p);
     return $instance;
   }
-  /**
-   * @param {SimpleLocalClass} $outer_this
-   * @param {number} $c_localVar
-   * @param {number} $c_p
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass_1InnerClass__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass__int__int(
-      $outer_this, $c_localVar, $c_p) {
+      /** SimpleLocalClass */ $outer_this, /** number */ $c_localVar,
+      /** number */ $c_p) {
     this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass_1InnerClass =
         $outer_this;
     this.$c_localVar = $c_localVar;
     this.$c_p = $c_p;
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @return {number}
-   * @public
-   */
+  /** @return {number} */
   m_fun__() {
     return this.$c_localVar + this.$c_p;
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     $1InnerClass.$clinit = () => {};
     $1InnerClass.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof $1InnerClass;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

@@ -8,38 +8,29 @@ let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 
 class Strings extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {?string} */
+    /**@type {?string}*/
     this.f_someString__com_google_j2cl_transpiler_readable_strings_Strings_;
-    /** @public {?string} */
+    /**@type {?string}*/
     this.f_nonBmpChar__com_google_j2cl_transpiler_readable_strings_Strings_;
-    /** @public {?string} */
+    /**@type {?string}*/
     this.f_wideColon__com_google_j2cl_transpiler_readable_strings_Strings_;
   }
-  /**
-   * @return {!Strings}
-   * @public
-   */
+  /** @return {!Strings} */
   static $create__() {
     Strings.$clinit();
     let $instance = new Strings();
     $instance.$ctor__com_google_j2cl_transpiler_readable_strings_Strings__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_strings_Strings__() {
     this.$ctor__java_lang_Object__();
     this.$init___$p_com_google_j2cl_transpiler_readable_strings_Strings();
   }
-  /**
-   * @public
-   */
+
   m_test__() {
     let s1 = null;
     let s2 = null;
@@ -97,9 +88,7 @@ class Strings extends j_l_Object {
           'o';
     }
   }
-  /**
-   * @private
-   */
+  /** @private */
   $init___$p_com_google_j2cl_transpiler_readable_strings_Strings() {
     this.f_someString__com_google_j2cl_transpiler_readable_strings_Strings_ =
         'This is a string literal';
@@ -108,25 +97,17 @@ class Strings extends j_l_Object {
     this.f_wideColon__com_google_j2cl_transpiler_readable_strings_Strings_ =
         '\uFF1A';
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     Strings.$clinit = () => {};
     Strings.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Strings;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     StringHolder = goog.module.get(
         'com.google.j2cl.transpiler.readable.strings.Strings.StringHolder$impl');
@@ -137,10 +118,10 @@ class Strings extends j_l_Object {
 $Util.$setClassMetadata(
     Strings, 'com.google.j2cl.transpiler.readable.strings.Strings');
 
-/** @public {?string} @const */
+/**@const {?string}*/
 Strings.f_ESCAPE_CODES__com_google_j2cl_transpiler_readable_strings_Strings_ =
     '\b\f\n\r\t"\'\\\u0000\u007F\uD800\uDF46\uFF1A';
-/** @public {?string} @const */
+/**@const {?string}*/
 Strings
     .f_ESCAPE_CODES_COPY__com_google_j2cl_transpiler_readable_strings_Strings_ =
     '\b\f\n\r\t"\'\\\u0000\u007F\uD800\uDF46\uFF1A';

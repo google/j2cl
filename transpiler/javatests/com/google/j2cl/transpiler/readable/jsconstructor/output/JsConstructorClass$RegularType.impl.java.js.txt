@@ -4,18 +4,12 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class RegularType extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @param {*} b
-   * @return {!RegularType}
-   * @public
-   */
-  static $create__java_lang_Object(b) {
+  /** @return {!RegularType} */
+  static $create__java_lang_Object(/** * */ b) {
     RegularType.$clinit();
     let $instance = new RegularType();
     $instance
@@ -23,33 +17,22 @@ class RegularType extends j_l_Object {
             b);
     return $instance;
   }
-  /**
-   * @param {*} b
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_RegularType__java_lang_Object(
-      b) {
+      /** * */ b) {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     RegularType.$clinit = () => {};
     RegularType.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof RegularType;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

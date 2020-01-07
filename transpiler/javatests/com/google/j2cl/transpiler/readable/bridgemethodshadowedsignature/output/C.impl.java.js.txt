@@ -12,17 +12,11 @@ let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
  * @implements {I<C1>}
  */
 class C extends B {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @template C1
-   * @return {!C<C1>}
-   * @public
-   */
+  /** @template C1 @return {!C<C1>} */
   static $create__() {
     C.$clinit();
     let $instance = new C();
@@ -30,41 +24,26 @@ class C extends B {
         .$ctor__com_google_j2cl_transpiler_readable_bridgemethodshadowedsignature_C__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_bridgemethodshadowedsignature_C__() {
     this.$ctor__com_google_j2cl_transpiler_readable_bridgemethodshadowedsignature_B__();
   }
-  /**
-   * Bridge method.
-   * @override
-   * @param {Consumer} arg0
-   * @return {?string}
-   * @public
-   */
-  m_get__java_util_function_Consumer(arg0) {
+  /** @override @return {?string} */
+  // Bridge method.
+  m_get__java_util_function_Consumer(/** Consumer */ arg0) {
     return super.m_get__java_lang_Object(arg0);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     C.$clinit = () => {};
     C.$loadModules();
     B.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof C;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

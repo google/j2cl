@@ -4,16 +4,11 @@ const SuperParent = goog.require('com.google.j2cl.transpiler.readable.instancejs
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class Parent extends SuperParent {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!Parent}
-   * @public
-   */
+  /** @return {!Parent} */
   static $create__() {
     Parent.$clinit();
     let $instance = new Parent();
@@ -21,79 +16,43 @@ class Parent extends SuperParent {
         .$ctor__com_google_j2cl_transpiler_readable_instancejsmethods_Parent__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_instancejsmethods_Parent__() {
     this.$ctor__com_google_j2cl_transpiler_readable_instancejsmethods_SuperParent__();
   }
-  /**
-   * @param {number} a
-   * @param {number} b
-   * @return {number}
-   * @public
-   */
-  sum(a, b) {
+  /** @return {number} */
+  sum(/** number */ a, /** number */ b) {
     return a + b;
   }
-  /**
-   * @param {number} a
-   * @param {number} b
-   * @return {number}
-   * @public
-   */
-  bar(a, b) {
+  /** @return {number} */
+  bar(/** number */ a, /** number */ b) {
     return a * b;
   }
-  /**
-   * @param {number} a
-   * @return {number}
-   * @public
-   */
-  myFoo(a) {
+  /** @return {number} */
+  myFoo(/** number */ a) {
     return a;
   }
-  /**
-   * Bridge method for exposing non-JsMethod.
-   * @override
-   * @param {number} arg0
-   * @param {number} arg1
-   * @return {number}
-   * @public
-   */
-  m_fun__int__int(arg0, arg1) {
+  /** @override @return {number} */
+  // Bridge method for exposing non-JsMethod.
+  m_fun__int__int(/** number */ arg0, /** number */ arg1) {
     return this.sum(arg0, arg1);
   }
-  /**
-   * Bridge method for exposing non-JsMethod.
-   * @override
-   * @param {number} arg0
-   * @param {number} arg1
-   * @return {number}
-   * @public
-   */
-  m_bar__int__int(arg0, arg1) {
+  /** @override @return {number} */
+  // Bridge method for exposing non-JsMethod.
+  m_bar__int__int(/** number */ arg0, /** number */ arg1) {
     return this.bar(arg0, arg1);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     Parent.$clinit = () => {};
     Parent.$loadModules();
     SuperParent.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Parent;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

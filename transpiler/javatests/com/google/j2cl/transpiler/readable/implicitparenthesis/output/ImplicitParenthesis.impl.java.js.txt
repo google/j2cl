@@ -8,16 +8,11 @@ let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
 
 class ImplicitParenthesis extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!ImplicitParenthesis}
-   * @public
-   */
+  /** @return {!ImplicitParenthesis} */
   static $create__() {
     ImplicitParenthesis.$clinit();
     let $instance = new ImplicitParenthesis();
@@ -25,22 +20,16 @@ class ImplicitParenthesis extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_implicitparenthesis_ImplicitParenthesis__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_implicitparenthesis_ImplicitParenthesis__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @public
-   */
+
   m_test__() {
     ImplicitParenthesis.m_examples__();
     ImplicitParenthesis.m_nonExamples__();
   }
-  /**
-   * @public
-   */
+
   static m_examples__() {
     let /** number */ primitiveInt;
     let /** Integer */ boxedInt;
@@ -87,9 +76,7 @@ class ImplicitParenthesis extends j_l_Object {
       $Asserts.$assert(primitiveInt == 11);
     }
   }
-  /**
-   * @public
-   */
+
   static m_nonExamples__() {
     let /** number */ primitiveInt;
     let /** Integer */ boxedInt;
@@ -109,25 +96,17 @@ class ImplicitParenthesis extends j_l_Object {
           Boolean.m_booleanValue__java_lang_Boolean(boxedBoolean) == false);
     }
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     ImplicitParenthesis.$clinit = () => {};
     ImplicitParenthesis.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof ImplicitParenthesis;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     Boolean = goog.module.get('java.lang.Boolean$impl');
     Integer = goog.module.get('java.lang.Integer$impl');

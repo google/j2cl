@@ -13,17 +13,11 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
  * @implements {Callable<Superclass<T>>}
  */
 class AnotherTask extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @template T
-   * @return {!AnotherTask<T>}
-   * @public
-   */
+  /** @template T @return {!AnotherTask<T>} */
   static $create__() {
     AnotherTask.$clinit();
     let $instance = new AnotherTask();
@@ -31,47 +25,30 @@ class AnotherTask extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_simplebridgemethods_AnotherTask__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_simplebridgemethods_AnotherTask__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @param {Superclass<T>} t
-   * @public
-   */
+
   m_call__com_google_j2cl_transpiler_readable_simplebridgemethods_Superclass(
-      t) {}
-  /**
-   * Bridge method.
-   * @override
-   * @param {*} arg0
-   * @public
-   */
-  m_call__java_lang_Object(arg0) {
+      /** Superclass<T> */ t) {}
+  /** @override */
+  // Bridge method.
+  m_call__java_lang_Object(/** * */ arg0) {
     this.m_call__com_google_j2cl_transpiler_readable_simplebridgemethods_Superclass(
-        /**@type {Superclass<T>} */ ($Casts.$to(arg0, Superclass)));
+        /**@type {Superclass<T>}*/ ($Casts.$to(arg0, Superclass)));
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     AnotherTask.$clinit = () => {};
     AnotherTask.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof AnotherTask;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     Superclass = goog.module.get(
         'com.google.j2cl.transpiler.readable.simplebridgemethods.Superclass$impl');

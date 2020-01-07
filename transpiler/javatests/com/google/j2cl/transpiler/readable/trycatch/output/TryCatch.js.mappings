@@ -23,23 +23,23 @@
 [{
       throw e;
     }] => [if (NullPointerException.$isInstance(__$exc) || ClassCastException.$isInstance(__$exc)) {
-    let e = /**@type {(NullPointerException|ClassCastException)} */ (__$exc);
+    let e = /**@type {(NullPointerException|ClassCastException)}*/ (__$exc);
 ...    throw $Exceptions.toJs(__$exc);
    }] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testMultiCatch"
 [{
       throw e;
-    }] => [let e = /**@type {(NullPointerException|ClassCastException)} */ (__$exc);] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testMultiCatch"
+    }] => [let e = /**@type {(NullPointerException|ClassCastException)}*/ (__$exc);] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testMultiCatch"
 [e] => [e] "e"
 [throw e;] => [throw $Exceptions.toJs(e);] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testMultiCatch"
 [{
       r = null; // used to show exception variable is transpiled correctly.
     }] => [if (RuntimeException.$isInstance(__$exc)) {
-    let r = /**@type {RuntimeException} */ (__$exc);
+    let r = /**@type {RuntimeException}*/ (__$exc);
 ...    throw $Exceptions.toJs(__$exc);
    }] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testMultiCatch"
 [{
       r = null; // used to show exception variable is transpiled correctly.
-    }] => [let r = /**@type {RuntimeException} */ (__$exc);] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testMultiCatch"
+    }] => [let r = /**@type {RuntimeException}*/ (__$exc);] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testMultiCatch"
 [r] => [r] "r"
 [r = null;] => [r = null;] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testMultiCatch"
 [{
@@ -81,7 +81,7 @@
     }] => [__$exc = $Exceptions.toJava(__$exc);] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testEmptyThrowableRethrow"
 [{
       throw e;
-    }] => [let e = /**@type {Throwable} */ (__$exc);] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testEmptyThrowableRethrow"
+    }] => [let e = /**@type {Throwable}*/ (__$exc);] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testEmptyThrowableRethrow"
 [e] => [e] "e"
 [throw e;] => [throw $Exceptions.toJs(e);] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testEmptyThrowableRethrow"
 [testFinally] => [m_testFinally__]
@@ -137,7 +137,7 @@
 [try (ClosableThing thing = new ClosableThing();
         ClosableThing thing2 = new ClosableThing()) {
 ...      // expected empty body.
-    }] => [let $exceptionFromTry = /**@type {Throwable} */ (__$exc);] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testTryWithResource"
+    }] => [let $exceptionFromTry = /**@type {Throwable}*/ (__$exc);] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testTryWithResource"
 [try (ClosableThing thing = new ClosableThing();
         ClosableThing thing2 = new ClosableThing()) {
 ...      // expected empty body.
@@ -222,7 +222,7 @@
 [try (thing; thing2) {
       throw new Exception();
 ...      // expected empty body.
-    }] => [let $exceptionFromTry = /**@type {Throwable} */ (__$exc);] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testTryWithResourceJava9"
+    }] => [let $exceptionFromTry = /**@type {Throwable}*/ (__$exc);] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testTryWithResourceJava9"
 [try (thing; thing2) {
       throw new Exception();
 ...      // expected empty body.
@@ -277,13 +277,13 @@
       try {
 ...      }
     }] => [if (Exception.$isInstance(__$exc)) {
-    let ae = /**@type {Exception} */ (__$exc);
+    let ae = /**@type {Exception}*/ (__$exc);
 ...    throw $Exceptions.toJs(__$exc);
    }] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testNestedTryCatch"
 [{
       try {
 ...      }
-    }] => [let ae = /**@type {Exception} */ (__$exc);] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testNestedTryCatch"
+    }] => [let ae = /**@type {Exception}*/ (__$exc);] "com.google.j2cl.transpiler.readable.trycatch.TryCatch.testNestedTryCatch"
 [ae] => [ae] "ae"
 [try {
         throw new Exception();

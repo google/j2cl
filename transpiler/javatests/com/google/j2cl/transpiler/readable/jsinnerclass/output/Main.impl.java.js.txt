@@ -7,55 +7,37 @@ let Outer = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsinnerclas
 let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
 
 class Main extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!Main}
-   * @public
-   */
+  /** @return {!Main} */
   static $create__() {
     Main.$clinit();
     let $instance = new Main();
     $instance.$ctor__com_google_j2cl_transpiler_readable_jsinnerclass_Main__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_jsinnerclass_Main__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @param {Array<?string>} args
-   * @public
-   */
-  static m_main__arrayOf_java_lang_String(args) {
+
+  static m_main__arrayOf_java_lang_String(/** Array<?string> */ args) {
     Main.$clinit();
     $Asserts.$assert(Outer.$create__().m_method__() == 5);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     Main.$clinit = () => {};
     Main.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Main;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     Outer = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsinnerclass.Main.Outer$impl');

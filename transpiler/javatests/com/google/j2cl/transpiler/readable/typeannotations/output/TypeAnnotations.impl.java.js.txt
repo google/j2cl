@@ -6,16 +6,11 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
 
 class TypeAnnotations extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!TypeAnnotations}
-   * @public
-   */
+  /** @return {!TypeAnnotations} */
   static $create__() {
     TypeAnnotations.$clinit();
     let $instance = new TypeAnnotations();
@@ -23,38 +18,26 @@ class TypeAnnotations extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_typeannotations_TypeAnnotations__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_typeannotations_TypeAnnotations__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @public
-   */
+
   static m_main__() {
     TypeAnnotations.$clinit();
-    let list = /**@type {!ArrayList<string>} */ (ArrayList.$create__());
+    let list = /**@type {!ArrayList<string>}*/ (ArrayList.$create__());
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     TypeAnnotations.$clinit = () => {};
     TypeAnnotations.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof TypeAnnotations;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     ArrayList = goog.module.get('java.util.ArrayList$impl');
   }

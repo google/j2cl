@@ -18,17 +18,11 @@ let Number = goog.forwardDeclare('java.lang.Number$impl');
  * @template T
  */
 class NestedGenericClass extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @template T
-   * @return {!NestedGenericClass<T>}
-   * @public
-   */
+  /** @template T @return {!NestedGenericClass<T>} */
   static $create__() {
     NestedGenericClass.$clinit();
     let $instance = new NestedGenericClass();
@@ -36,71 +30,52 @@ class NestedGenericClass extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @template S
-   * @param {S} t
-   * @public
-   */
-  m_fun__java_lang_Object(t) {
+  /** @template S */
+  m_fun__java_lang_Object(/** S */ t) {
     $1E.$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass(
         this);
     $1F.$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass(
         this);
   }
-  /**
-   * @template T_1
-   * @public
-   */
+  /** @template T_1 */
   m_bar__() {
-    /**@type {!$1G<Error, T_1, T>} */
+    /**@type {!$1G<Error, T_1, T>}*/
     ($1G.$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass(
          this))
         .m_bar__();
   }
-  /**
-   * @public
-   */
+
   m_test__() {
-    let n = /**@type {!NestedGenericClass<(Number|number)>} */ (
+    let n = /**@type {!NestedGenericClass<(Number|number)>}*/ (
         NestedGenericClass.$create__());
-    let a = /**@type {!A<Error, (Number|number)>} */ (
+    let a = /**@type {!A<Error, (Number|number)>}*/ (
         A.$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass(
             n));
-    let b = /**@type {!B<Exception, Error, (Number|number)>} */ (
+    let b = /**@type {!B<Exception, Error, (Number|number)>}*/ (
         B.$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass_A(
             a));
     C.$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass(
         n);
     D.$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass_C(
-        /**@type {!C<(Number|number)>} */
+        /**@type {!C<(Number|number)>}*/
         (C.$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass(
             n)));
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     NestedGenericClass.$clinit = () => {};
     NestedGenericClass.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof NestedGenericClass;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     $1E = goog.module.get(
         'com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.$1E$impl');

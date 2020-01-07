@@ -11,70 +11,46 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
  * @implements {IStringList}
  */
 class $LambdaAdaptor extends j_l_Object {
-  /**
-   * @param {?function(?string):?string} fn
-   * @public
-   */
-  constructor(fn) {
+  constructor(/** ?function(?string):?string */ fn) {
     $LambdaAdaptor.$clinit();
     super();
-    /** @public {?function(?string):?string} */
+    /**@type {?function(?string):?string}*/
     this.f_$$fn__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_IStringList_$LambdaAdaptor;
     this.$ctor__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_IStringList_$LambdaAdaptor__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_IStringList_$JsFunction(
         fn);
   }
-  /**
-   * @param {?function(?string):?string} fn
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_IStringList_$LambdaAdaptor__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_IStringList_$JsFunction(
-      fn) {
+      /** ?function(?string):?string */ fn) {
     this.$ctor__java_lang_Object__();
     this.f_$$fn__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_IStringList_$LambdaAdaptor =
         fn;
   }
-  /**
-   * @param {?string} arg0
-   * @return {?string}
-   * @public
-   */
-  m_getFoo__java_lang_String(arg0) {
+  /** @return {?string} */
+  m_getFoo__java_lang_String(/** ?string */ arg0) {
     let /** ?function(?string):?string */ $function;
     return (
         $function =
             this.f_$$fn__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_IStringList_$LambdaAdaptor,
         $function(arg0));
   }
-  /**
-   * Bridge method.
-   * @override
-   * @param {*} arg0
-   * @return {?string}
-   * @public
-   */
-  m_getFoo__java_lang_Object(arg0) {
+  /** @override @return {?string} */
+  // Bridge method.
+  m_getFoo__java_lang_Object(/** * */ arg0) {
     return this.m_getFoo__java_lang_String(
-        /**@type {?string} */ ($Casts.$to(arg0, j_l_String)));
+        /**@type {?string}*/ ($Casts.$to(arg0, j_l_String)));
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     $LambdaAdaptor.$clinit = () => {};
     $LambdaAdaptor.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof $LambdaAdaptor;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     j_l_String = goog.module.get('java.lang.String$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');

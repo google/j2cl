@@ -7,22 +7,15 @@ let A = goog.forwardDeclare('com.google.j2cl.transpiler.readable.anonymousinnerc
 let AnonymousInnerClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass$impl');
 
 class $2 extends B {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {AnonymousInnerClass} */
+    /**@type {AnonymousInnerClass}*/
     this.f_$outer_this__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass_2;
   }
-  /**
-   * @param {AnonymousInnerClass} $outer_this
-   * @param {A} $super_outer_this
-   * @return {!$2}
-   * @public
-   */
+  /** @return {!$2} */
   static $create__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass__com_google_j2cl_transpiler_readable_anonymousinnerclass_A(
-      $outer_this, $super_outer_this) {
+      /** AnonymousInnerClass */ $outer_this, /** A */ $super_outer_this) {
     $2.$clinit();
     let $instance = new $2();
     $instance
@@ -30,37 +23,25 @@ class $2 extends B {
             $outer_this, $super_outer_this);
     return $instance;
   }
-  /**
-   * @param {AnonymousInnerClass} $outer_this
-   * @param {A} $super_outer_this
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass_2__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass__com_google_j2cl_transpiler_readable_anonymousinnerclass_A(
-      $outer_this, $super_outer_this) {
+      /** AnonymousInnerClass */ $outer_this, /** A */ $super_outer_this) {
     this.f_$outer_this__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass_2 =
         $outer_this;
     this.$ctor__com_google_j2cl_transpiler_readable_anonymousinnerclass_A_B__com_google_j2cl_transpiler_readable_anonymousinnerclass_A(
         $super_outer_this);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     $2.$clinit = () => {};
     $2.$loadModules();
     B.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof $2;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

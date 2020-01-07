@@ -11,17 +11,11 @@ let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
  * @template T, T_1
  */
 class $1Local extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @template T, T_1
-   * @return {!$1Local<T, T_1>}
-   * @public
-   */
+  /** @template T, T_1 @return {!$1Local<T, T_1>} */
   static $create__() {
     $1Local.$clinit();
     let $instance = new $1Local();
@@ -29,42 +23,28 @@ class $1Local extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_autoboxing_AutoBoxing_1Local__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_autoboxing_AutoBoxing_1Local__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @param {T} l
-   * @return {!$Long}
-   * @public
-   */
+  /** @return {!$Long} */
   m_toLong__java_lang_Long_$pp_com_google_j2cl_transpiler_readable_autoboxing(
-      l) {
+      /** T */ l) {
     $Asserts.$assert(
-        /**@type {Long} */ (l).equals(Long.m_valueOf__long($Long.fromInt(11))));
-    return /**@type {Long} */ (l).m_longValue__();
+        /**@type {Long}*/ (l).equals(Long.m_valueOf__long($Long.fromInt(11))));
+    return /**@type {Long}*/ (l).m_longValue__();
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     $1Local.$clinit = () => {};
     $1Local.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof $1Local;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     Long = goog.module.get('java.lang.Long$impl');
     $Long = goog.module.get('nativebootstrap.Long$impl');

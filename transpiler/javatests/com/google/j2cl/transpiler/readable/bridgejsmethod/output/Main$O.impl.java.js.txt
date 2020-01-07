@@ -7,23 +7,17 @@ let Main = goog.forwardDeclare('com.google.j2cl.transpiler.readable.bridgejsmeth
 let B = goog.forwardDeclare('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.B$impl');
 
 class O extends N {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {Main} */
+    /**@type {Main}*/
     this.f_$outer_this__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_O;
-    /** @public {B} */
+    /**@type {B}*/
     this.f_b__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_O_;
   }
-  /**
-   * @param {Main} $outer_this
-   * @return {!O}
-   * @public
-   */
+  /** @return {!O} */
   static $create__com_google_j2cl_transpiler_readable_bridgejsmethod_Main(
-      $outer_this) {
+      /** Main */ $outer_this) {
     O.$clinit();
     let $instance = new O();
     $instance
@@ -31,44 +25,29 @@ class O extends N {
             $outer_this);
     return $instance;
   }
-  /**
-   * @param {Main} $outer_this
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_O__com_google_j2cl_transpiler_readable_bridgejsmethod_Main(
-      $outer_this) {
+      /** Main */ $outer_this) {
     this.f_$outer_this__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_O =
         $outer_this;
     this.$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_N__com_google_j2cl_transpiler_readable_bridgejsmethod_Main(
         $outer_this);
   }
-  /**
-   * @override
-   * @return {B}
-   * @public
-   */
+  /** @override @return {B} */
   getB() {
     return this.f_b__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_O_;
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     O.$clinit = () => {};
     O.$loadModules();
     N.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof O;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

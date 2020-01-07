@@ -13,16 +13,11 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
  * @implements {I<Integer>}
  */
 class F extends A {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!F}
-   * @public
-   */
+  /** @return {!F} */
   static $create__() {
     F.$clinit();
     let $instance = new F();
@@ -30,42 +25,27 @@ class F extends A {
         .$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_F__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_F__() {
     this.$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_A__();
   }
-  /**
-   * Bridge method.
-   * @override
-   * @param {(Number|number)} arg0
-   * @return {Integer}
-   * @public
-   */
-  fun(arg0) {
-    return /**@type {Integer} */ ($Casts.$to(
-        super.fun(/**@type {Integer} */ ($Casts.$to(arg0, Integer))), Integer));
+  /** @override @return {Integer} */
+  // Bridge method.
+  fun(/** (Number|number) */ arg0) {
+    return /**@type {Integer}*/ ($Casts.$to(
+        super.fun(/**@type {Integer}*/ ($Casts.$to(arg0, Integer))), Integer));
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     F.$clinit = () => {};
     F.$loadModules();
     A.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof F;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     Integer = goog.module.get('java.lang.Integer$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');

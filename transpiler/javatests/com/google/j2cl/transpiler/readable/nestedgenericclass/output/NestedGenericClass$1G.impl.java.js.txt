@@ -10,22 +10,15 @@ let $1H = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nestedgeneric
  * @template T, T_1, T_2
  */
 class $1G extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {NestedGenericClass<T_2>} */
+    /**@type {NestedGenericClass<T_2>}*/
     this.f_$outer_this__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass_1G;
   }
-  /**
-   * @template T, T_1, T_2
-   * @param {NestedGenericClass<T_2>} $outer_this
-   * @return {!$1G<T, T_1, T_2>}
-   * @public
-   */
+  /** @template T, T_1, T_2 @return {!$1G<T, T_1, T_2>} */
   static $create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass(
-      $outer_this) {
+      /** NestedGenericClass<T_2> */ $outer_this) {
     $1G.$clinit();
     let $instance = new $1G();
     $instance
@@ -33,43 +26,29 @@ class $1G extends j_l_Object {
             $outer_this);
     return $instance;
   }
-  /**
-   * @param {NestedGenericClass<T_2>} $outer_this
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass_1G__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass(
-      $outer_this) {
+      /** NestedGenericClass<T_2> */ $outer_this) {
     this.f_$outer_this__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass_1G =
         $outer_this;
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @template T_3
-   * @public
-   */
+  /** @template T_3 */
   m_bar__() {
     $1H.$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass_1G(
         this);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     $1G.$clinit = () => {};
     $1G.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof $1G;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     $1H = goog.module.get(
         'com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.$1G.$1H$impl');

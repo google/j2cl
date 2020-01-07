@@ -7,46 +7,30 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @abstract
  */
 class SubParent extends Parent {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package2_SubParent__() {
     this.$ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_Parent__();
   }
-  /**
-   * @param {number} a
-   * @return {number}
-   * @public
-   */
+  /** @return {number} */
   m_foo__int_$pp_com_google_j2cl_transpiler_readable_packageprivatemethods_package2(
-      a) {
+      /** number */ a) {
     return a;
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     SubParent.$clinit = () => {};
     SubParent.$loadModules();
     Parent.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof SubParent;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

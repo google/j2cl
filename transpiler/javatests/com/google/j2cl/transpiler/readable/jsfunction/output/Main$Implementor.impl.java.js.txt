@@ -8,16 +8,11 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {ApiWithMethodReturningParametricJsFunction}
  */
 class Implementor extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!Implementor}
-   * @public
-   */
+  /** @return {!Implementor} */
   static $create__() {
     Implementor.$clinit();
     let $instance = new Implementor();
@@ -25,49 +20,30 @@ class Implementor extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_jsfunction_Main_Implementor__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_jsfunction_Main_Implementor__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @template T
-   * @return {?function(T):void}
-   * @public
-   */
+  /** @template T @return {?function(T):void} */
   anApi() {
-    return /**@type {?function(T):void} */ (null);
+    return /**@type {?function(T):void}*/ (null);
   }
-  /**
-   * Bridge method for exposing non-JsMethod.
-   * @override
-   * @template T
-   * @return {?function(T):void}
-   * @public
-   */
+  /** @override @template T @return {?function(T):void} */
+  // Bridge method for exposing non-JsMethod.
   m_anApi__() {
-    return /**@type {?function(T):void} */ (this.anApi());
+    return /**@type {?function(T):void}*/ (this.anApi());
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     Implementor.$clinit = () => {};
     Implementor.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Implementor;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

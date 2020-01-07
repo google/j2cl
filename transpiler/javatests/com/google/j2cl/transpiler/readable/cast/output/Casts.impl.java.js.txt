@@ -16,83 +16,60 @@ let Short = goog.forwardDeclare('java.lang.Short$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 class Casts extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!Casts}
-   * @public
-   */
+  /** @return {!Casts} */
   static $create__() {
     Casts.$clinit();
     let $instance = new Casts();
     $instance.$ctor__com_google_j2cl_transpiler_readable_cast_Casts__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_cast_Casts__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @public
-   */
+
   m_testCastToClass__() {
     let o = j_l_Object.$create__();
-    let c = /**@type {Casts} */ ($Casts.$to(o, Casts));
+    let c = /**@type {Casts}*/ ($Casts.$to(o, Casts));
   }
-  /**
-   * @public
-   */
+
   m_testCasToInterface__() {
     let o = j_l_Object.$create__();
-    let s = /**@type {(Serializable|Array)} */ ($Casts.$to(o, Serializable));
+    let s = /**@type {(Serializable|Array)}*/ ($Casts.$to(o, Serializable));
   }
-  /**
-   * @public
-   */
+
   m_testCastToBoxedType__() {
     let o = Integer.$create__int(1);
-    let b = /**@type {Byte} */ ($Casts.$to(o, Byte));
-    let d = /**@type {?number} */ ($Casts.$to(o, Double));
-    let f = /**@type {Float} */ ($Casts.$to(o, Float));
-    let i = /**@type {Integer} */ ($Casts.$to(o, Integer));
-    let l = /**@type {Long} */ ($Casts.$to(o, Long));
-    let s = /**@type {Short} */ ($Casts.$to(o, Short));
-    let n = /**@type {(Number|number)} */ ($Casts.$to(o, Number));
-    let c = /**@type {Character} */ ($Casts.$to(o, Character));
-    let bool = /**@type {?boolean} */ ($Casts.$to(o, Boolean));
+    let b = /**@type {Byte}*/ ($Casts.$to(o, Byte));
+    let d = /**@type {?number}*/ ($Casts.$to(o, Double));
+    let f = /**@type {Float}*/ ($Casts.$to(o, Float));
+    let i = /**@type {Integer}*/ ($Casts.$to(o, Integer));
+    let l = /**@type {Long}*/ ($Casts.$to(o, Long));
+    let s = /**@type {Short}*/ ($Casts.$to(o, Short));
+    let n = /**@type {(Number|number)}*/ ($Casts.$to(o, Number));
+    let c = /**@type {Character}*/ ($Casts.$to(o, Character));
+    let bool = /**@type {?boolean}*/ ($Casts.$to(o, Boolean));
   }
-  /**
-   * @public
-   */
+
   m_testCastToArray__() {
-    let foo = /**@type {Array<*>} */ (null);
-    let bar = /**@type {Array<Array<*>>} */ (null);
+    let foo = /**@type {Array<*>}*/ (null);
+    let bar = /**@type {Array<Array<*>>}*/ (null);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     Casts.$clinit = () => {};
     Casts.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Casts;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     Serializable = goog.module.get('java.io.Serializable$impl');
     Boolean = goog.module.get('java.lang.Boolean$impl');

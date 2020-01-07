@@ -4,16 +4,11 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class Entry extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!Entry}
-   * @public
-   */
+  /** @return {!Entry} */
   static $create__() {
     Entry.$clinit();
     let $instance = new Entry();
@@ -21,31 +16,21 @@ class Entry extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_importsreturntype_ImportsReturnType_Entry__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_importsreturntype_ImportsReturnType_Entry__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     Entry.$clinit = () => {};
     Entry.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Entry;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

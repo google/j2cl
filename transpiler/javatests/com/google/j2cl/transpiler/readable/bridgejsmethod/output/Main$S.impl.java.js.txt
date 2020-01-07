@@ -6,21 +6,15 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Main = goog.forwardDeclare('com.google.j2cl.transpiler.readable.bridgejsmethod.Main$impl');
 
 class S extends R {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {Main} */
+    /**@type {Main}*/
     this.f_$outer_this__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_S;
   }
-  /**
-   * @param {Main} $outer_this
-   * @return {!S}
-   * @public
-   */
+  /** @return {!S} */
   static $create__com_google_j2cl_transpiler_readable_bridgejsmethod_Main(
-      $outer_this) {
+      /** Main */ $outer_this) {
     S.$clinit();
     let $instance = new S();
     $instance
@@ -28,36 +22,25 @@ class S extends R {
             $outer_this);
     return $instance;
   }
-  /**
-   * @param {Main} $outer_this
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_S__com_google_j2cl_transpiler_readable_bridgejsmethod_Main(
-      $outer_this) {
+      /** Main */ $outer_this) {
     this.f_$outer_this__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_S =
         $outer_this;
     this.$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_R__com_google_j2cl_transpiler_readable_bridgejsmethod_Main(
         $outer_this);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     S.$clinit = () => {};
     S.$loadModules();
     R.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof S;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

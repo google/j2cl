@@ -8,16 +8,11 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {MyInterface}
  */
 class Child extends Parent {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!Child}
-   * @public
-   */
+  /** @return {!Child} */
   static $create__() {
     Child.$clinit();
     let $instance = new Child();
@@ -25,76 +20,42 @@ class Child extends Parent {
         .$ctor__com_google_j2cl_transpiler_readable_instancejsmethods_Child__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_instancejsmethods_Child__() {
     this.$ctor__com_google_j2cl_transpiler_readable_instancejsmethods_Parent__();
   }
-  /**
-   * @override
-   * @param {number} a
-   * @param {number} b
-   * @return {number}
-   * @public
-   */
-  sum(a, b) {
+  /** @override @return {number} */
+  sum(/** number */ a, /** number */ b) {
     return a + b + 1;
   }
-  /**
-   * @override
-   * @param {number} a
-   * @param {number} b
-   * @return {number}
-   * @public
-   */
-  bar(a, b) {
+  /** @override @return {number} */
+  bar(/** number */ a, /** number */ b) {
     return a * b + 1;
   }
-  /**
-   * @override
-   * @param {number} a
-   * @return {number}
-   * @public
-   */
-  myFoo(a) {
+  /** @override @return {number} */
+  myFoo(/** number */ a) {
     return a;
   }
-  /**
-   * @return {number}
-   * @public
-   */
+  /** @return {number} */
   intfFoo() {
     return 1;
   }
-  /**
-   * Bridge method for exposing non-JsMethod.
-   * @override
-   * @return {number}
-   * @public
-   */
+  /** @override @return {number} */
+  // Bridge method for exposing non-JsMethod.
   m_intfFoo__() {
     return this.intfFoo();
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     Child.$clinit = () => {};
     Child.$loadModules();
     Parent.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Child;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

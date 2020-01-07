@@ -6,27 +6,20 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Outer = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsinnerclass.Main.Outer$impl');
 
 class Inner extends j_l_Object {
-  /**
-   * @param {Outer} $outer_this
-   * @public
-   */
-  constructor($outer_this) {
+  constructor(/** Outer */ $outer_this) {
     Inner.$clinit();
     super();
-    /** @public {Outer} */
+    /**@type {Outer}*/
     this.f_$outer_this__com_google_j2cl_transpiler_readable_jsinnerclass_Main_Outer_Inner;
-    /** @public {number} */
+    /**@type {number}*/
     this.f_b__com_google_j2cl_transpiler_readable_jsinnerclass_Main_Outer_Inner_ =
         0;
     this.$ctor__com_google_j2cl_transpiler_readable_jsinnerclass_Main_Outer_Inner__com_google_j2cl_transpiler_readable_jsinnerclass_Main_Outer(
         $outer_this);
   }
-  /**
-   * @param {Outer} $outer_this
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_jsinnerclass_Main_Outer_Inner__com_google_j2cl_transpiler_readable_jsinnerclass_Main_Outer(
-      $outer_this) {
+      /** Outer */ $outer_this) {
     this.f_$outer_this__com_google_j2cl_transpiler_readable_jsinnerclass_Main_Outer_Inner =
         $outer_this;
     this.$ctor__java_lang_Object__();
@@ -35,33 +28,22 @@ class Inner extends j_l_Object {
             .f_a__com_google_j2cl_transpiler_readable_jsinnerclass_Main_Outer +
         1;
   }
-  /**
-   * @return {number}
-   * @public
-   */
+  /** @return {number} */
   getB() {
     return this
         .f_b__com_google_j2cl_transpiler_readable_jsinnerclass_Main_Outer_Inner_;
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     Inner.$clinit = () => {};
     Inner.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Inner;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

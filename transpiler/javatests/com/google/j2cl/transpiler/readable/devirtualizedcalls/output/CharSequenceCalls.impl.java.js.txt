@@ -7,16 +7,11 @@ let CharSequence = goog.forwardDeclare('java.lang.CharSequence$impl');
 let $CharSequences = goog.forwardDeclare('vmbootstrap.CharSequences$impl');
 
 class CharSequenceCalls extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!CharSequenceCalls}
-   * @public
-   */
+  /** @return {!CharSequenceCalls} */
   static $create__() {
     CharSequenceCalls.$clinit();
     let $instance = new CharSequenceCalls();
@@ -24,45 +19,30 @@ class CharSequenceCalls extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_devirtualizedcalls_CharSequenceCalls__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_devirtualizedcalls_CharSequenceCalls__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @param {(CharSequence|string)} cs
-   * @public
-   */
-  m_test__java_lang_CharSequence(cs) {
+
+  m_test__java_lang_CharSequence(/** (CharSequence|string) */ cs) {
     $CharSequences.m_charAt__java_lang_CharSequence__int(cs, 0);
   }
-  /**
-   * @public
-   */
+
   m_main__() {
     let s = 's';
     this.m_test__java_lang_CharSequence(s);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     CharSequenceCalls.$clinit = () => {};
     CharSequenceCalls.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof CharSequenceCalls;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     $CharSequences = goog.module.get('vmbootstrap.CharSequences$impl');
   }

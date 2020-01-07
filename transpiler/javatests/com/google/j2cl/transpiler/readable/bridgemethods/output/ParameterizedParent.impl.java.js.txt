@@ -7,17 +7,11 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @template T
  */
 class ParameterizedParent extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @template T
-   * @return {!ParameterizedParent<T>}
-   * @public
-   */
+  /** @template T @return {!ParameterizedParent<T>} */
   static $create__() {
     ParameterizedParent.$clinit();
     let $instance = new ParameterizedParent();
@@ -25,41 +19,26 @@ class ParameterizedParent extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_bridgemethods_ParameterizedParent__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_bridgemethods_ParameterizedParent__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @template Q
-   * @param {Q} t
-   * @return {Q}
-   * @public
-   */
+  /** @template Q @return {Q} */
   m_m__com_google_j2cl_transpiler_readable_bridgemethods_ParameterizedParent_$pp_com_google_j2cl_transpiler_readable_bridgemethods(
-      t) {
+      /** Q */ t) {
     return null;
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     ParameterizedParent.$clinit = () => {};
     ParameterizedParent.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof ParameterizedParent;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

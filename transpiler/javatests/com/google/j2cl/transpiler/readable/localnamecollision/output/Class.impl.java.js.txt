@@ -6,16 +6,11 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
 class Class extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!Class}
-   * @public
-   */
+  /** @return {!Class} */
   static $create__() {
     Class.$clinit();
     let $instance = new Class();
@@ -23,37 +18,25 @@ class Class extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_localnamecollision_Class__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_localnamecollision_Class__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @public
-   */
+
   m_main__() {
     $Objects.m_getClass__java_lang_Object(Class.$create__());
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     Class.$clinit = () => {};
     Class.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Class;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     $Objects = goog.module.get('vmbootstrap.Objects$impl');
   }

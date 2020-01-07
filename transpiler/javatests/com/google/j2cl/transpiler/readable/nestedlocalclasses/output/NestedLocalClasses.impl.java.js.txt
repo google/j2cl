@@ -4,16 +4,11 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class NestedLocalClasses extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!NestedLocalClasses}
-   * @public
-   */
+  /** @return {!NestedLocalClasses} */
   static $create__() {
     NestedLocalClasses.$clinit();
     let $instance = new NestedLocalClasses();
@@ -21,38 +16,25 @@ class NestedLocalClasses extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_nestedlocalclasses_NestedLocalClasses__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_nestedlocalclasses_NestedLocalClasses__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @param {number} p
-   * @public
-   */
-  m_test__int(p) {
+
+  m_test__int(/** number */ p) {
     let localVar = 1;
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     NestedLocalClasses.$clinit = () => {};
     NestedLocalClasses.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof NestedLocalClasses;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

@@ -7,24 +7,17 @@ let InnerClassInitOrder = goog.forwardDeclare('com.google.j2cl.transpiler.readab
 let $1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.$1$impl');
 
 class OuterRefFromThisCtorCall extends OuterRefFromSuperCtorBase {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {InnerClassInitOrder} */
+    /**@type {InnerClassInitOrder}*/
     this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall;
   }
-  /**
-   * Factory method corresponding to constructor
-   * 'OuterRefFromThisCtorCall(InnerClassInitOrder, Object)'.
-   * @param {InnerClassInitOrder} $outer_this
-   * @param {*} object
-   * @return {!OuterRefFromThisCtorCall}
-   * @public
-   */
+  /** @return {!OuterRefFromThisCtorCall} */
+  // Factory method corresponding to constructor
+  // 'OuterRefFromThisCtorCall(InnerClassInitOrder, Object)'.
   static $create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder__java_lang_Object(
-      $outer_this, object) {
+      /** InnerClassInitOrder */ $outer_this, /** * */ object) {
     OuterRefFromThisCtorCall.$clinit();
     let $instance = new OuterRefFromThisCtorCall();
     $instance
@@ -32,29 +25,21 @@ class OuterRefFromThisCtorCall extends OuterRefFromSuperCtorBase {
             $outer_this, object);
     return $instance;
   }
-  /**
-   * Initialization from constructor
-   * 'OuterRefFromThisCtorCall(InnerClassInitOrder, Object)'.
-   * @param {InnerClassInitOrder} $outer_this
-   * @param {*} object
-   * @public
-   */
+
+  // Initialization from constructor
+  // 'OuterRefFromThisCtorCall(InnerClassInitOrder, Object)'.
   $ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder__java_lang_Object(
-      $outer_this, object) {
+      /** InnerClassInitOrder */ $outer_this, /** * */ object) {
     this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall =
         $outer_this;
     this.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorBase__java_lang_Object(
         object);
   }
-  /**
-   * Factory method corresponding to constructor
-   * 'OuterRefFromThisCtorCall(InnerClassInitOrder)'.
-   * @param {InnerClassInitOrder} $outer_this
-   * @return {!OuterRefFromThisCtorCall}
-   * @public
-   */
+  /** @return {!OuterRefFromThisCtorCall} */
+  // Factory method corresponding to constructor
+  // 'OuterRefFromThisCtorCall(InnerClassInitOrder)'.
   static $create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder(
-      $outer_this) {
+      /** InnerClassInitOrder */ $outer_this) {
     OuterRefFromThisCtorCall.$clinit();
     let $instance = new OuterRefFromThisCtorCall();
     $instance
@@ -62,38 +47,27 @@ class OuterRefFromThisCtorCall extends OuterRefFromSuperCtorBase {
             $outer_this);
     return $instance;
   }
-  /**
-   * Initialization from constructor
-   * 'OuterRefFromThisCtorCall(InnerClassInitOrder)'.
-   * @param {InnerClassInitOrder} $outer_this
-   * @public
-   */
+
+  // Initialization from constructor
+  // 'OuterRefFromThisCtorCall(InnerClassInitOrder)'.
   $ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder(
-      $outer_this) {
+      /** InnerClassInitOrder */ $outer_this) {
     this.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder__java_lang_Object(
         $outer_this,
         $1.$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall(
             this));
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     OuterRefFromThisCtorCall.$clinit = () => {};
     OuterRefFromThisCtorCall.$loadModules();
     OuterRefFromSuperCtorBase.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof OuterRefFromThisCtorCall;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     $1 = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.$1$impl');

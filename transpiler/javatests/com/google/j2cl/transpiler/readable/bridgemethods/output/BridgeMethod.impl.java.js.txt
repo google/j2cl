@@ -14,16 +14,11 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
  * @implements {SomeInterface<AssertionError, (Number|number)>}
  */
 class BridgeMethod extends Parent {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!BridgeMethod}
-   * @public
-   */
+  /** @return {!BridgeMethod} */
   static $create__() {
     BridgeMethod.$clinit();
     let $instance = new BridgeMethod();
@@ -31,82 +26,49 @@ class BridgeMethod extends Parent {
         .$ctor__com_google_j2cl_transpiler_readable_bridgemethods_BridgeMethod__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_bridgemethods_BridgeMethod__() {
     this.$ctor__com_google_j2cl_transpiler_readable_bridgemethods_Parent__();
   }
-  /**
-   * @param {AssertionError} a
-   * @param {(Number|number)} n
-   * @public
-   */
-  m_foo__java_lang_AssertionError__java_lang_Number(a, n) {}
-  /**
-   * @override
-   * @param {(Number|number)} t
-   * @public
-   */
-  m_bar__java_lang_Number(t) {}
-  /**
-   * @param {(Number|number)} t
-   * @public
-   */
-  m_fun__java_lang_Number(t) {}
-  /**
-   * Bridge method.
-   * @override
-   * @param {Error} arg0
-   * @param {(Number|number)} arg1
-   * @public
-   */
-  m_foo__java_lang_Error__java_lang_Number(arg0, arg1) {
+
+  m_foo__java_lang_AssertionError__java_lang_Number(
+      /** AssertionError */ a, /** (Number|number) */ n) {}
+  /** @override */
+  m_bar__java_lang_Number(/** (Number|number) */ t) {}
+
+  m_fun__java_lang_Number(/** (Number|number) */ t) {}
+  /** @override */
+  // Bridge method.
+  m_foo__java_lang_Error__java_lang_Number(
+      /** Error */ arg0, /** (Number|number) */ arg1) {
     this.m_foo__java_lang_AssertionError__java_lang_Number(
-        /**@type {AssertionError} */ ($Casts.$to(arg0, AssertionError)), arg1);
+        /**@type {AssertionError}*/ ($Casts.$to(arg0, AssertionError)), arg1);
   }
-  /**
-   * Bridge method.
-   * @override
-   * @param {*} arg0
-   * @param {*} arg1
-   * @public
-   */
-  m_foo__java_lang_Object__java_lang_Object(arg0, arg1) {
+  /** @override */
+  // Bridge method.
+  m_foo__java_lang_Object__java_lang_Object(/** * */ arg0, /** * */ arg1) {
     this.m_foo__java_lang_AssertionError__java_lang_Number(
-        /**@type {AssertionError} */ ($Casts.$to(arg0, AssertionError)),
-        /**@type {(Number|number)} */ ($Casts.$to(arg1, Number)));
+        /**@type {AssertionError}*/ ($Casts.$to(arg0, AssertionError)),
+        /**@type {(Number|number)}*/ ($Casts.$to(arg1, Number)));
   }
-  /**
-   * Bridge method.
-   * @override
-   * @param {*} arg0
-   * @param {(Number|number)} arg1
-   * @public
-   */
-  m_foo__java_lang_Object__java_lang_Number(arg0, arg1) {
+  /** @override */
+  // Bridge method.
+  m_foo__java_lang_Object__java_lang_Number(
+      /** * */ arg0, /** (Number|number) */ arg1) {
     this.m_foo__java_lang_AssertionError__java_lang_Number(
-        /**@type {AssertionError} */ ($Casts.$to(arg0, AssertionError)), arg1);
+        /**@type {AssertionError}*/ ($Casts.$to(arg0, AssertionError)), arg1);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     BridgeMethod.$clinit = () => {};
     BridgeMethod.$loadModules();
     Parent.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof BridgeMethod;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     AssertionError = goog.module.get('java.lang.AssertionError$impl');
     Number = goog.module.get('java.lang.Number$impl');

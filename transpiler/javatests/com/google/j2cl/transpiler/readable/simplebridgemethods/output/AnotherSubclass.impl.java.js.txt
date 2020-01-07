@@ -9,16 +9,11 @@ let AssertionError = goog.forwardDeclare('java.lang.AssertionError$impl');
  * @extends {Superclass<AssertionError>}
  */
 class AnotherSubclass extends Superclass {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!AnotherSubclass}
-   * @public
-   */
+  /** @return {!AnotherSubclass} */
   static $create__() {
     AnotherSubclass.$clinit();
     let $instance = new AnotherSubclass();
@@ -26,31 +21,21 @@ class AnotherSubclass extends Superclass {
         .$ctor__com_google_j2cl_transpiler_readable_simplebridgemethods_AnotherSubclass__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_simplebridgemethods_AnotherSubclass__() {
     this.$ctor__com_google_j2cl_transpiler_readable_simplebridgemethods_Superclass__();
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     AnotherSubclass.$clinit = () => {};
     AnotherSubclass.$loadModules();
     Superclass.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof AnotherSubclass;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

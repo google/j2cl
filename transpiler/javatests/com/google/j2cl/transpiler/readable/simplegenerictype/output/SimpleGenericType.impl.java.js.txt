@@ -9,24 +9,16 @@ let Error = goog.forwardDeclare('java.lang.Error$impl');
  * @template T, S
  */
 class SimpleGenericType extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {T} */
+    /**@type {T}*/
     this.f_first__com_google_j2cl_transpiler_readable_simplegenerictype_SimpleGenericType;
-    /** @public {S} */
+    /**@type {S}*/
     this.f_second__com_google_j2cl_transpiler_readable_simplegenerictype_SimpleGenericType;
   }
-  /**
-   * @template T, S
-   * @param {T} t
-   * @param {S} s
-   * @return {!SimpleGenericType<T, S>}
-   * @public
-   */
-  static $create__java_lang_Object__java_lang_Object(t, s) {
+  /** @template T, S @return {!SimpleGenericType<T, S>} */
+  static $create__java_lang_Object__java_lang_Object(/** T */ t, /** S */ s) {
     SimpleGenericType.$clinit();
     let $instance = new SimpleGenericType();
     $instance
@@ -34,46 +26,32 @@ class SimpleGenericType extends j_l_Object {
             t, s);
     return $instance;
   }
-  /**
-   * @param {T} t
-   * @param {S} s
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_simplegenerictype_SimpleGenericType__java_lang_Object__java_lang_Object(
-      t, s) {
+      /** T */ t, /** S */ s) {
     this.$ctor__java_lang_Object__();
     this.f_first__com_google_j2cl_transpiler_readable_simplegenerictype_SimpleGenericType =
         t;
     this.f_second__com_google_j2cl_transpiler_readable_simplegenerictype_SimpleGenericType =
         s;
   }
-  /**
-   * @public
-   */
+
   m_test__() {
-    let g = /**@type {!SimpleGenericType<*, Error>} */ (
+    let g = /**@type {!SimpleGenericType<*, Error>}*/ (
         SimpleGenericType.$create__java_lang_Object__java_lang_Object(
             j_l_Object.$create__(), Error.$create__()));
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     SimpleGenericType.$clinit = () => {};
     SimpleGenericType.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof SimpleGenericType;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     Error = goog.module.get('java.lang.Error$impl');
   }

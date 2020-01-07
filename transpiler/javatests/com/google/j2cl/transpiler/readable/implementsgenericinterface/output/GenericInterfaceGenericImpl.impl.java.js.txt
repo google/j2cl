@@ -9,17 +9,11 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {GenericInterface<T>}
  */
 class GenericInterfaceGenericImpl extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @template T
-   * @return {!GenericInterfaceGenericImpl<T>}
-   * @public
-   */
+  /** @template T @return {!GenericInterfaceGenericImpl<T>} */
   static $create__() {
     GenericInterfaceGenericImpl.$clinit();
     let $instance = new GenericInterfaceGenericImpl();
@@ -27,31 +21,21 @@ class GenericInterfaceGenericImpl extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_implementsgenericinterface_GenericInterfaceGenericImpl__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_implementsgenericinterface_GenericInterfaceGenericImpl__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     GenericInterfaceGenericImpl.$clinit = () => {};
     GenericInterfaceGenericImpl.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof GenericInterfaceGenericImpl;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

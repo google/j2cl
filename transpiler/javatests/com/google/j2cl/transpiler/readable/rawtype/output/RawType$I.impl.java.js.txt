@@ -9,54 +9,31 @@ let RawType = goog.forwardDeclare('com.google.j2cl.transpiler.readable.rawtype.R
  * @template T
  */
 class I {
-  /**
-   * @abstract
-   * @param {T} t
-   * @public
-   */
-  m_f__com_google_j2cl_transpiler_readable_rawtype_RawType(t) {}
-  /**
-   * @template T
-   * @param {!I<T>} $thisArg
-   * @param {T} t
-   * @public
-   */
+  /** @abstract */
+  m_f__com_google_j2cl_transpiler_readable_rawtype_RawType(/** T */ t) {}
+  /** @template T */
   static m_f__$default__com_google_j2cl_transpiler_readable_rawtype_RawType_I__com_google_j2cl_transpiler_readable_rawtype_RawType(
-      $thisArg, t) {
+      /** !I<T> */ $thisArg, /** T */ t) {
     I.$clinit();
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     I.$clinit = () => {};
     I.$loadModules();
   }
-  /**
-   * @param {Function} classConstructor
-   * @public
-   */
-  static $markImplementor(classConstructor) {
-    /**
-     * @public {boolean}
-     */
-    classConstructor.prototype
+
+  static $markImplementor(/** Function*/ ctor) {
+    ctor.prototype
         .$implements__com_google_j2cl_transpiler_readable_rawtype_RawType_I =
         true;
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance != null &&
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_rawtype_RawType_I;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadataForInterface(

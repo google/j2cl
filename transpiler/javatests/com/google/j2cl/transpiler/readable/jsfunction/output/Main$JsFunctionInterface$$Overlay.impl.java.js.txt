@@ -3,26 +3,18 @@ goog.module('com.google.j2cl.transpiler.readable.jsfunction.Main.JsFunctionInter
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class $Overlay {
-  /**
-   * @param {function(number):number} $thisArg
-   * @return {number}
-   * @public
-   */
+  /** @return {number} */
   static m_overlayMethod__$devirt__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionInterface(
-      $thisArg) {
+      /** function(number):number */ $thisArg) {
     $Overlay.$clinit();
     return $thisArg(42);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     $Overlay.$clinit = () => {};
     $Overlay.$loadModules();
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 

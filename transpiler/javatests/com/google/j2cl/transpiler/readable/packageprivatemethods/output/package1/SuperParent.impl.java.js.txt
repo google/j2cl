@@ -4,16 +4,11 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class SuperParent extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!SuperParent}
-   * @public
-   */
+  /** @return {!SuperParent} */
   static $create__() {
     SuperParent.$clinit();
     let $instance = new SuperParent();
@@ -21,61 +16,36 @@ class SuperParent extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_SuperParent__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_SuperParent__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @param {number} a
-   * @return {number}
-   * @public
-   */
+  /** @return {number} */
   m_foo__int_$pp_com_google_j2cl_transpiler_readable_packageprivatemethods_package1(
-      a) {
+      /** number */ a) {
     return a - 1;
   }
-  /**
-   * @param {number} a
-   * @param {number} b
-   * @return {number}
-   * @public
-   */
+  /** @return {number} */
   m_fun__int__int_$pp_com_google_j2cl_transpiler_readable_packageprivatemethods_package1(
-      a, b) {
+      /** number */ a, /** number */ b) {
     return a + b;
   }
-  /**
-   * @param {number} a
-   * @param {number} b
-   * @param {number} c
-   * @return {number}
-   * @public
-   */
+  /** @return {number} */
   m_bar__int__int__int_$pp_com_google_j2cl_transpiler_readable_packageprivatemethods_package1(
-      a, b, c) {
+      /** number */ a, /** number */ b, /** number */ c) {
     return a + b + c;
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     SuperParent.$clinit = () => {};
     SuperParent.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof SuperParent;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

@@ -8,65 +8,38 @@ let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.ab
  * @interface
  */
 class J {
-  /**
-   * @abstract
-   * @public
-   */
+  /** @abstract */
   m_foo__() {}
-  /**
-   * @abstract
-   * @public
-   */
+  /** @abstract */
   m_bar__() {}
-  /**
-   * @param {?function():void} fn
-   * @return {J}
-   * @public
-   */
-  static $adapt(fn) {
+  /** @return {J} */
+  static $adapt(/** ?function():void */ fn) {
     J.$clinit();
     return new $LambdaAdaptor(fn);
   }
-  /**
-   * @param {!J} $thisArg
-   * @public
-   */
+
   static m_foo__$default__com_google_j2cl_transpiler_readable_abstractmethodoverridedefault_AbstractMethodOverrideDefault_J(
-      $thisArg) {
+      /** !J */ $thisArg) {
     J.$clinit();
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     J.$clinit = () => {};
     J.$loadModules();
   }
-  /**
-   * @param {Function} classConstructor
-   * @public
-   */
-  static $markImplementor(classConstructor) {
-    /**
-     * @public {boolean}
-     */
-    classConstructor.prototype
+
+  static $markImplementor(/** Function*/ ctor) {
+    ctor.prototype
         .$implements__com_google_j2cl_transpiler_readable_abstractmethodoverridedefault_AbstractMethodOverrideDefault_J =
         true;
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance != null &&
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_abstractmethodoverridedefault_AbstractMethodOverrideDefault_J;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault.J.$LambdaAdaptor$impl');

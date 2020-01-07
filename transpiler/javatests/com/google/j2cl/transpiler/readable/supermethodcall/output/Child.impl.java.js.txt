@@ -4,16 +4,11 @@ const Parent = goog.require('com.google.j2cl.transpiler.readable.supermethodcall
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class Child extends Parent {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!Child}
-   * @public
-   */
+  /** @return {!Child} */
   static $create__() {
     Child.$clinit();
     let $instance = new Child();
@@ -21,79 +16,47 @@ class Child extends Parent {
         .$ctor__com_google_j2cl_transpiler_readable_supermethodcall_Child__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_supermethodcall_Child__() {
     this.$ctor__com_google_j2cl_transpiler_readable_supermethodcall_Parent__();
   }
-  /**
-   * @override
-   * @public
-   */
+  /** @override */
   m_parentSimplest__() {
     super.m_parentSimplest__();
   }
-  /**
-   * @override
-   * @param {number} foo
-   * @public
-   */
-  m_parentWithParams__int(foo) {
+  /** @override */
+  m_parentWithParams__int(/** number */ foo) {
     super.m_parentWithParams__int(foo);
   }
-  /**
-   * @override
-   * @return {Child}
-   * @public
-   */
+  /** @override @return {Child} */
   m_parentWithChangingReturn__() {
     super.m_parentWithChangingReturn__();
     return this;
   }
-  /**
-   * @override
-   * @public
-   */
+  /** @override */
   m_grandParentSimplest__() {
     super.m_grandParentSimplest__();
   }
-  /**
-   * @override
-   * @param {number} foo
-   * @public
-   */
-  m_grandParentWithParams__int(foo) {
+  /** @override */
+  m_grandParentWithParams__int(/** number */ foo) {
     super.m_grandParentWithParams__int(foo);
   }
-  /**
-   * @override
-   * @return {Child}
-   * @public
-   */
+  /** @override @return {Child} */
   m_grandParentWithChangingReturn__() {
     super.m_grandParentWithChangingReturn__();
     return this;
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     Child.$clinit = () => {};
     Child.$loadModules();
     Parent.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Child;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

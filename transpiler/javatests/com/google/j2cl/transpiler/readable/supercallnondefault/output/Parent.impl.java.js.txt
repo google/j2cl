@@ -4,21 +4,15 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class Parent extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {number} */
+    /**@type {number}*/
     this.f_field__com_google_j2cl_transpiler_readable_supercallnondefault_Parent =
         0;
   }
-  /**
-   * @param {number} f
-   * @return {!Parent}
-   * @public
-   */
-  static $create__int(f) {
+  /** @return {!Parent} */
+  static $create__int(/** number */ f) {
     Parent.$clinit();
     let $instance = new Parent();
     $instance
@@ -26,35 +20,24 @@ class Parent extends j_l_Object {
             f);
     return $instance;
   }
-  /**
-   * @param {number} f
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_supercallnondefault_Parent__int(
-      f) {
+      /** number */ f) {
     this.$ctor__java_lang_Object__();
     this.f_field__com_google_j2cl_transpiler_readable_supercallnondefault_Parent =
         f;
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     Parent.$clinit = () => {};
     Parent.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Parent;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

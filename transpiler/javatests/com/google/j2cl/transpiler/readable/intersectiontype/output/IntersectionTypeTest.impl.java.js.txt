@@ -20,17 +20,11 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
  * @template U
  */
 class IntersectionTypeTest extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @template U
-   * @return {!IntersectionTypeTest<U>}
-   * @public
-   */
+  /** @template U @return {!IntersectionTypeTest<U>} */
   static $create__() {
     IntersectionTypeTest.$clinit();
     let $instance = new IntersectionTypeTest();
@@ -38,167 +32,108 @@ class IntersectionTypeTest extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @template T
-   * @param {T} object
-   * @public
-   */
+  /** @template T */
   static m_getAndSet__com_google_j2cl_transpiler_readable_intersectiontype_Getable(
-      object) {
+      /** T */ object) {
     IntersectionTypeTest.$clinit();
-    /**@type {Setable} */ ($Casts.$to(object, Setable)).m_set__int(1);
-    /**@type {Getable} */ (object).m_get__();
+    /**@type {Setable}*/ ($Casts.$to(object, Setable)).m_set__int(1);
+    /**@type {Getable}*/ (object).m_get__();
   }
-  /**
-   * @template T
-   * @param {*} o
-   * @return {Getable<T>}
-   * @public
-   */
-  static m_cast__java_lang_Object(o) {
+  /** @template T @return {Getable<T>} */
+  static m_cast__java_lang_Object(/** * */ o) {
     IntersectionTypeTest.$clinit();
     if ($Equality.$same(o, null)) {
-      return /**@type {Getable<T>} */ (
+      return /**@type {Getable<T>}*/ (
           $Casts.$to($Casts.$to(o, Getable), Setable));
     }
-    return /**@type {Getable<T>} */ (
+    return /**@type {Getable<T>}*/ (
         $Casts.$to($Casts.$to(o, Getable), Setable));
   }
   /**
-   * @template T
-   * @param {*} s
-   * @return {Getable<(Comparable<?string>|boolean|number|string)>}
-   * @public
+   * @template T @return {Getable<(Comparable<?string>|boolean|number|string)>}
    */
-  static m_cast1__java_lang_Object(s) {
+  static m_cast1__java_lang_Object(/** * */ s) {
     IntersectionTypeTest.$clinit();
-    return /**@type {Getable<(Comparable<?string>|boolean|number|string)>} */ (
+    return /**@type {Getable<(Comparable<?string>|boolean|number|string)>}*/ (
         $Casts.$to($Casts.$to(s, Getable), Setable));
   }
-  /**
-   * @template T
-   * @param {*} s
-   * @return {Getable<(Comparable<T>|boolean|number|string)>}
-   * @public
-   */
-  static m_cast2__java_lang_Object(s) {
+  /** @template T @return {Getable<(Comparable<T>|boolean|number|string)>} */
+  static m_cast2__java_lang_Object(/** * */ s) {
     IntersectionTypeTest.$clinit();
-    return /**@type {Getable<(Comparable<T>|boolean|number|string)>} */ (
+    return /**@type {Getable<(Comparable<T>|boolean|number|string)>}*/ (
         $Casts.$to($Casts.$to(s, Getable), Setable));
   }
-  /**
-   * @param {*} s
-   * @return {*}
-   * @public
-   */
-  m_cast3__java_lang_Object(s) {
+  /** @return {*} */
+  m_cast3__java_lang_Object(/** * */ s) {
     return s;
   }
-  /**
-   * @return {Cmp}
-   * @public
-   */
+  /** @return {Cmp} */
   static m_method__() {
     IntersectionTypeTest.$clinit();
-    return /**@type {Cmp} */ (new $LambdaAdaptor$1(() => {
+    return /**@type {Cmp}*/ (new $LambdaAdaptor$1(() => {
       return 1;
     }));
   }
-  /**
-   * @return {Cmp2}
-   * @public
-   */
+  /** @return {Cmp2} */
   static m_method2__() {
     IntersectionTypeTest.$clinit();
-    return /**@type {Cmp2} */ (new $LambdaAdaptor$2((/** number */ a) => {
+    return /**@type {Cmp2}*/ (new $LambdaAdaptor$2((/** number */ a) => {
       return 1;
     }));
   }
-  /**
-   * @param {*} o
-   * @public
-   */
-  static m_testClosureAssignment__java_lang_Object(o) {
+
+  static m_testClosureAssignment__java_lang_Object(/** * */ o) {
     IntersectionTypeTest.$clinit();
-    let e = /**@type {A} */ (
+    let e = /**@type {A}*/ (
         $Casts.$to($Casts.$to($Casts.$to(o, A), EmptyA), EmptyB));
-    let g = /**@type {EmptyA} */ (
+    let g = /**@type {EmptyA}*/ (
         $Casts.$to($Casts.$to($Casts.$to(o, A), EmptyA), EmptyB));
-    let s = /**@type {EmptyB} */ (
+    let s = /**@type {EmptyB}*/ (
         $Casts.$to($Casts.$to($Casts.$to(o, A), EmptyA), EmptyB));
   }
-  /**
-   * @template T
-   * @param {T} t
-   * @return {T}
-   * @public
-   */
-  static m_get__java_lang_Object(t) {
+  /** @template T @return {T} */
+  static m_get__java_lang_Object(/** T */ t) {
     return t;
   }
-  /**
-   * @template T
-   * @return {T}
-   * @public
-   */
+  /** @template T @return {T} */
   static m_m__() {
-    return /**@type {T} */ ($Casts.$to(
+    return /**@type {T}*/ ($Casts.$to(
         IntersectionTypeTest.m_get__java_lang_Object(j_l_Object.$create__()),
         A));
   }
-  /**
-   * @template T
-   * @return {Getable<T>}
-   * @public
-   */
+  /** @template T @return {Getable<T>} */
   static m_n__() {
     return null;
   }
-  /**
-   * @template T
-   * @param {T} t
-   * @public
-   */
+  /** @template T */
   static m_set__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest_A(
-      t) {}
-  /**
-   * @public
-   */
+      /** T */ t) {}
+
   m_testMethodCall__() {
     let o = IntersectionTypeTest.m_m__();
     IntersectionTypeTest
         .m_set__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest_A(
-            /**@type {A} */ ($Casts.$to($Casts.$to(o, A), EmptyA)));
+            /**@type {A}*/ ($Casts.$to($Casts.$to(o, A), EmptyA)));
     IntersectionTypeTest
         .m_set__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest_A(
             IntersectionTypeTest.m_m__());
-    let g = /**@type {Getable<A>} */ (IntersectionTypeTest.m_n__());
+    let g = /**@type {Getable<A>}*/ (IntersectionTypeTest.m_n__());
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     IntersectionTypeTest.$clinit = () => {};
     IntersectionTypeTest.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof IntersectionTypeTest;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     Getable = goog.module.get(
         'com.google.j2cl.transpiler.readable.intersectiontype.Getable$impl');

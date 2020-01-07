@@ -6,20 +6,14 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let ESOuter = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESOuter$impl');
 
 class ESInnerSubclass extends ESInner {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * Factory method corresponding to constructor 'ESInnerSubclass(ESOuter)'.
-   * @param {ESOuter} outer
-   * @return {!ESInnerSubclass}
-   * @public
-   */
+  /** @return {!ESInnerSubclass} */
+  // Factory method corresponding to constructor 'ESInnerSubclass(ESOuter)'.
   static $create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter(
-      outer) {
+      /** ESOuter */ outer) {
     ESInnerSubclass.$clinit();
     let $instance = new ESInnerSubclass();
     $instance
@@ -27,26 +21,18 @@ class ESInnerSubclass extends ESInner {
             outer);
     return $instance;
   }
-  /**
-   * Initialization from constructor 'ESInnerSubclass(ESOuter)'.
-   * @param {ESOuter} outer
-   * @public
-   */
+
+  // Initialization from constructor 'ESInnerSubclass(ESOuter)'.
   $ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESInnerSubclass__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter(
-      outer) {
+      /** ESOuter */ outer) {
     this.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter(
         outer);
   }
-  /**
-   * Factory method corresponding to constructor 'ESInnerSubclass(int,
-   * ESOuter)'.
-   * @param {number} value
-   * @param {ESOuter} outer
-   * @return {!ESInnerSubclass}
-   * @public
-   */
+  /** @return {!ESInnerSubclass} */
+  // Factory method corresponding to constructor 'ESInnerSubclass(int,
+  // ESOuter)'.
   static $create__int__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter(
-      value, outer) {
+      /** number */ value, /** ESOuter */ outer) {
     ESInnerSubclass.$clinit();
     let $instance = new ESInnerSubclass();
     $instance
@@ -54,36 +40,24 @@ class ESInnerSubclass extends ESInner {
             value, outer);
     return $instance;
   }
-  /**
-   * Initialization from constructor 'ESInnerSubclass(int, ESOuter)'.
-   * @param {number} value
-   * @param {ESOuter} outer
-   * @public
-   */
+
+  // Initialization from constructor 'ESInnerSubclass(int, ESOuter)'.
   $ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESInnerSubclass__int__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter(
-      value, outer) {
+      /** number */ value, /** ESOuter */ outer) {
     this.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ESOuter__int(
         outer, value);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     ESInnerSubclass.$clinit = () => {};
     ESInnerSubclass.$loadModules();
     ESInner.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof ESInnerSubclass;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

@@ -11,49 +11,30 @@ let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.ov
  * @extends {MyFunction<T, ?string>}
  */
 class HashFunction {
-  /**
-   * @template T
-   * @param {?function(T):?string} fn
-   * @return {HashFunction<T>}
-   * @public
-   */
-  static $adapt(fn) {
+  /** @template T @return {HashFunction<T>} */
+  static $adapt(/** ?function(T):?string */ fn) {
     HashFunction.$clinit();
-    return /**@type {!$LambdaAdaptor<T>} */ (new $LambdaAdaptor(fn));
+    return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     HashFunction.$clinit = () => {};
     HashFunction.$loadModules();
   }
-  /**
-   * @param {Function} classConstructor
-   * @public
-   */
-  static $markImplementor(classConstructor) {
-    MyFunction.$markImplementor(classConstructor);
-    /**
-     * @public {boolean}
-     */
-    classConstructor.prototype
+
+  static $markImplementor(/** Function*/ ctor) {
+    MyFunction.$markImplementor(ctor);
+    ctor.prototype
         .$implements__com_google_j2cl_transpiler_readable_overwrittentypevariables_HashFunction =
         true;
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance != null &&
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_overwrittentypevariables_HashFunction;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunction.$LambdaAdaptor$impl');

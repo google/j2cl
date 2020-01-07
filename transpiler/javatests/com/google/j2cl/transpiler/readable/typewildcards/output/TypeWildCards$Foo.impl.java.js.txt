@@ -9,21 +9,15 @@ let TypeWildCards = goog.forwardDeclare('com.google.j2cl.transpiler.readable.typ
  * @extends {GenericType<Foo>}
  */
 class Foo extends GenericType {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {TypeWildCards} */
+    /**@type {TypeWildCards}*/
     this.f_$outer_this__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_Foo;
   }
-  /**
-   * @param {TypeWildCards} $outer_this
-   * @return {!Foo}
-   * @public
-   */
+  /** @return {!Foo} */
   static $create__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards(
-      $outer_this) {
+      /** TypeWildCards */ $outer_this) {
     Foo.$clinit();
     let $instance = new Foo();
     $instance
@@ -31,35 +25,24 @@ class Foo extends GenericType {
             $outer_this);
     return $instance;
   }
-  /**
-   * @param {TypeWildCards} $outer_this
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_Foo__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards(
-      $outer_this) {
+      /** TypeWildCards */ $outer_this) {
     this.f_$outer_this__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_Foo =
         $outer_this;
     this.$ctor__com_google_j2cl_transpiler_readable_typewildcards_GenericType__();
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     Foo.$clinit = () => {};
     Foo.$loadModules();
     GenericType.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Foo;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

@@ -4,44 +4,28 @@ const Parent = goog.require('com.google.j2cl.transpiler.readable.jsmethodoverrid
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class Child extends Parent {
-  /**
-   * @public
-   */
   constructor() {
     Child.$clinit();
     super();
     this.$ctor__com_google_j2cl_transpiler_readable_jsmethodoverride_Child__();
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_jsmethodoverride_Child__() {
     this.$ctor__com_google_j2cl_transpiler_readable_jsmethodoverride_Parent__();
   }
-  /**
-   * @override
-   * @public
-   */
+  /** @override */
   bar() {}
-  /**
-   * @public
-   */
+
   static $clinit() {
     Child.$clinit = () => {};
     Child.$loadModules();
     Parent.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Child;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

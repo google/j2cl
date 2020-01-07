@@ -12,56 +12,33 @@ let Number = goog.forwardDeclare('java.lang.Number$impl');
  * @extends {Equals<T>}
  */
 class JsSupplier {
-  /**
-   * @abstract
-   * @return {T}
-   * @public
-   */
+  /** @abstract @return {T} */
   get() {}
-  /**
-   * @template T
-   * @param {?function():T} fn
-   * @return {JsSupplier<T>}
-   * @public
-   */
-  static $adapt(fn) {
+  /** @template T @return {JsSupplier<T>} */
+  static $adapt(/** ?function():T */ fn) {
     JsSupplier.$clinit();
-    return /**@type {!$LambdaAdaptor<T>} */ (new $LambdaAdaptor(fn));
+    return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     JsSupplier.$clinit = () => {};
     JsSupplier.$loadModules();
     Equals.$clinit();
   }
-  /**
-   * @param {Function} classConstructor
-   * @public
-   */
-  static $markImplementor(classConstructor) {
-    Equals.$markImplementor(classConstructor);
-    /**
-     * @public {boolean}
-     */
-    classConstructor.prototype
+
+  static $markImplementor(/** Function*/ ctor) {
+    Equals.$markImplementor(ctor);
+    ctor.prototype
         .$implements__com_google_j2cl_transpiler_readable_lambdas_Lambdas_JsSupplier =
         true;
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance != null &&
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_lambdas_Lambdas_JsSupplier;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdas.Lambdas.JsSupplier.$LambdaAdaptor$impl');

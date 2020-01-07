@@ -6,29 +6,19 @@ const MyNativeJsType = goog.require('test.foo.MyNativeJsType');
 let $Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.subnativejstype.MyNativeJsType.$Overlay$impl');
 
 class SubNativeJsType extends MyNativeJsType {
-  /**
-   * JsConstructor 'SubNativeJsType(int)'.
-   * @param {number} x
-   * @public
-   */
-  constructor(x) {
+  // JsConstructor 'SubNativeJsType(int)'.
+  constructor(/** number */ x) {
     SubNativeJsType.$clinit();
     super(x + 1);
     this.$ctor__com_google_j2cl_transpiler_readable_subnativejstype_SubNativeJsType__int(
         x);
   }
-  /**
-   * Initialization from constructor 'SubNativeJsType(int)'.
-   * @param {number} x
-   * @public
-   */
+
+  // Initialization from constructor 'SubNativeJsType(int)'.
   $ctor__com_google_j2cl_transpiler_readable_subnativejstype_SubNativeJsType__int(
-      x) {}
-  /**
-   * Factory method corresponding to constructor 'SubNativeJsType()'.
-   * @return {!SubNativeJsType}
-   * @public
-   */
+      /** number */ x) {}
+  /** @return {!SubNativeJsType} */
+  // Factory method corresponding to constructor 'SubNativeJsType()'.
   static $create__() {
     SubNativeJsType.$clinit();
     let $instance = new SubNativeJsType(10);
@@ -36,30 +26,20 @@ class SubNativeJsType extends MyNativeJsType {
         .$ctor__com_google_j2cl_transpiler_readable_subnativejstype_SubNativeJsType__();
     return $instance;
   }
-  /**
-   * Initialization from constructor 'SubNativeJsType()'.
-   * @public
-   */
+
+  // Initialization from constructor 'SubNativeJsType()'.
   $ctor__com_google_j2cl_transpiler_readable_subnativejstype_SubNativeJsType__() {
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     SubNativeJsType.$clinit = () => {};
     SubNativeJsType.$loadModules();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof SubNativeJsType;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

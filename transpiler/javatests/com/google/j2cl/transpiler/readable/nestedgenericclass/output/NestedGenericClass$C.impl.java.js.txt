@@ -9,24 +9,17 @@ let NestedGenericClass = goog.forwardDeclare('com.google.j2cl.transpiler.readabl
  * @template T
  */
 class C extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {NestedGenericClass<T>} */
+    /**@type {NestedGenericClass<T>}*/
     this.f_$outer_this__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass_C;
-    /** @public {T} */
+    /**@type {T}*/
     this.f_c__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass_C;
   }
-  /**
-   * @template T
-   * @param {NestedGenericClass<T>} $outer_this
-   * @return {!C<T>}
-   * @public
-   */
+  /** @template T @return {!C<T>} */
   static $create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass(
-      $outer_this) {
+      /** NestedGenericClass<T> */ $outer_this) {
     C.$clinit();
     let $instance = new C();
     $instance
@@ -34,35 +27,24 @@ class C extends j_l_Object {
             $outer_this);
     return $instance;
   }
-  /**
-   * @param {NestedGenericClass<T>} $outer_this
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass_C__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass(
-      $outer_this) {
+      /** NestedGenericClass<T> */ $outer_this) {
     this.f_$outer_this__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass_C =
         $outer_this;
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     C.$clinit = () => {};
     C.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof C;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

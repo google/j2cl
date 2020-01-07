@@ -8,44 +8,28 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @template T
  */
 class Foo extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @param {T} foo
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_boundedtypesupercall_Main_Foo__java_lang_Object(
-      foo) {
+      /** T */ foo) {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @abstract
-   * @public
-   */
+  /** @abstract */
   m_foo__() {}
-  /**
-   * @public
-   */
+
   static $clinit() {
     Foo.$clinit = () => {};
     Foo.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Foo;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

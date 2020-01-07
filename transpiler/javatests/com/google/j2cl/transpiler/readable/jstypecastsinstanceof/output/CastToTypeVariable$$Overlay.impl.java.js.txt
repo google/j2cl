@@ -6,39 +6,25 @@ let j_l_Object = goog.forwardDeclare('java.lang.Object$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 
 class $Overlay {
-  /**
-   * @template T
-   * @param {!Object<string, T>} $thisArg
-   * @param {number} index
-   * @param {boolean} value
-   * @return {T}
-   * @public
-   */
+  /** @template T @return {T} */
   static m_setField__$devirt__com_google_j2cl_transpiler_readable_jstypecastsinstanceof_CastToTypeVariable__int__boolean(
-      $thisArg, index, value) {
+      /** !Object<string, T> */ $thisArg, /** number */ index,
+      /** boolean */ value) {
     $Overlay.$clinit();
     let o = j_l_Object.$create__();
-    let a = /**@type {Array<T>} */ ($Arrays.$castToNative(o));
-    return /**@type {T} */ ($thisArg);
+    let a = /**@type {Array<T>}*/ ($Arrays.$castToNative(o));
+    return /**@type {T}*/ ($thisArg);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     $Overlay.$clinit = () => {};
     $Overlay.$loadModules();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Object;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     j_l_Object = goog.module.get('java.lang.Object$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');

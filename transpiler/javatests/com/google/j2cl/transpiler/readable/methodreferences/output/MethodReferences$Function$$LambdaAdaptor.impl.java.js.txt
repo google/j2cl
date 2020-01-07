@@ -9,59 +9,40 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {MethodReferences_Function<T, U>}
  */
 class $LambdaAdaptor extends j_l_Object {
-  /**
-   * @param {?function(T):U} fn
-   * @public
-   */
-  constructor(fn) {
+  constructor(/** ?function(T):U */ fn) {
     $LambdaAdaptor.$clinit();
     super();
-    /** @public {?function(T):U} */
+    /**@type {?function(T):U}*/
     this.f_$$fn__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Function_$LambdaAdaptor;
     this.$ctor__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Function_$LambdaAdaptor__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Function_$JsFunction(
         fn);
   }
-  /**
-   * @param {?function(T):U} fn
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Function_$LambdaAdaptor__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Function_$JsFunction(
-      fn) {
+      /** ?function(T):U */ fn) {
     this.$ctor__java_lang_Object__();
     this.f_$$fn__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Function_$LambdaAdaptor =
         fn;
   }
-  /**
-   * @param {T} arg0
-   * @return {U}
-   * @public
-   */
-  m_apply__java_lang_Object(arg0) {
+  /** @return {U} */
+  m_apply__java_lang_Object(/** T */ arg0) {
     let /** ?function(T):U */ $function;
     return (
         $function =
             this.f_$$fn__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_Function_$LambdaAdaptor,
         $function(arg0));
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     $LambdaAdaptor.$clinit = () => {};
     $LambdaAdaptor.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof $LambdaAdaptor;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

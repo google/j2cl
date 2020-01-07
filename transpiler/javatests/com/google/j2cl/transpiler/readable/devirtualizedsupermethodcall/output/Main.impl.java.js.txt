@@ -8,16 +8,11 @@ let SubNumber = goog.forwardDeclare('com.google.j2cl.transpiler.readable.devirtu
 let $Numbers = goog.forwardDeclare('vmbootstrap.Numbers$impl');
 
 class Main extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!Main}
-   * @public
-   */
+  /** @return {!Main} */
   static $create__() {
     Main.$clinit();
     let $instance = new Main();
@@ -25,15 +20,11 @@ class Main extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_devirtualizedsupermethodcall_Main__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_devirtualizedsupermethodcall_Main__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @public
-   */
+
   m_main__() {
     let fooCallsSuperObjectMethods = FooCallsSuperObjectMethod.$create__();
     fooCallsSuperObjectMethods.hashCode();
@@ -44,25 +35,17 @@ class Main extends j_l_Object {
     sn.m_intValue__();
     $Numbers.m_shortValue__java_lang_Number(sn);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     Main.$clinit = () => {};
     Main.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Main;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     FooCallsSuperObjectMethod = goog.module.get(
         'com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.FooCallsSuperObjectMethod$impl');

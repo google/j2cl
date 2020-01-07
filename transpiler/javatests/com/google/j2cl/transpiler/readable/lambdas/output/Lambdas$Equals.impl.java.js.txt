@@ -7,62 +7,34 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @template T
  */
 class Equals {
-  /**
-   * @abstract
-   * @param {*} o
-   * @return {boolean}
-   * @public
-   */
-  equals(o) {}
-  /**
-   * @abstract
-   * @return {T}
-   * @public
-   */
+  /** @abstract @return {boolean} */
+  equals(/** * */ o) {}
+  /** @abstract @return {T} */
   m_get__() {}
-  /**
-   * @template T
-   * @param {!Equals<T>} $thisArg
-   * @return {T}
-   * @public
-   */
+  /** @template T @return {T} */
   static m_get__$default__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Equals(
-      $thisArg) {
+      /** !Equals<T> */ $thisArg) {
     Equals.$clinit();
     return null;
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     Equals.$clinit = () => {};
     Equals.$loadModules();
   }
-  /**
-   * @param {Function} classConstructor
-   * @public
-   */
-  static $markImplementor(classConstructor) {
-    /**
-     * @public {boolean}
-     */
-    classConstructor.prototype
+
+  static $markImplementor(/** Function*/ ctor) {
+    ctor.prototype
         .$implements__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Equals =
         true;
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance != null &&
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Equals;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadataForInterface(

@@ -6,66 +6,42 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let $Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.genericnativetype.BoundedJsArray.$Overlay$impl');
 
 class BoundedJsArrays extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!BoundedJsArrays}
-   * @public
-   */
+  /** @return {!BoundedJsArrays} */
   static $create__() {
     let $instance = new BoundedJsArrays();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_genericnativetype_BoundedJsArrays__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_genericnativetype_BoundedJsArrays__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @template V
-   * @return {Array<V>}
-   * @public
-   */
+  /** @template V @return {Array<V>} */
   static m_create__() {
     BoundedJsArrays.$clinit();
-    return /**@type {Array<V>} */ ($Overlay.m_create__());
+    return /**@type {Array<V>}*/ ($Overlay.m_create__());
   }
-  /**
-   * @template V
-   * @param {number} size
-   * @return {Array<V>}
-   * @public
-   */
-  static m_createWithSize__int(size) {
+  /** @template V @return {Array<V>} */
+  static m_createWithSize__int(/** number */ size) {
     BoundedJsArrays.$clinit();
-    return /**@type {Array<V>} */ ($Overlay.m_create__int(size));
+    return /**@type {Array<V>}*/ ($Overlay.m_create__int(size));
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     BoundedJsArrays.$clinit = () => {};
     BoundedJsArrays.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof BoundedJsArrays;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     $Overlay = goog.module.get(
         'com.google.j2cl.transpiler.readable.genericnativetype.BoundedJsArray.$Overlay$impl');

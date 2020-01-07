@@ -7,45 +7,28 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @abstract
  */
 class AbstractMethodWithVarargs extends j_l_Object {
-  /**
-   * @public
-   */
   constructor() {
     AbstractMethodWithVarargs.$clinit();
     super();
     this.$ctor__com_google_j2cl_transpiler_readable_jsvarargs_Main_AbstractMethodWithVarargs__();
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_jsvarargs_Main_AbstractMethodWithVarargs__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @abstract
-   * @param {...number} args
-   * @public
-   */
-  abstractMethod(...args) {}
-  /**
-   * @public
-   */
+  /** @abstract */
+  abstractMethod(.../** ...number */ args) {}
+
   static $clinit() {
     AbstractMethodWithVarargs.$clinit = () => {};
     AbstractMethodWithVarargs.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof AbstractMethodWithVarargs;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

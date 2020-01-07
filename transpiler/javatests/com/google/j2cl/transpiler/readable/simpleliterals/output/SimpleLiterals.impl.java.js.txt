@@ -6,16 +6,11 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
 
 class SimpleLiterals extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!SimpleLiterals}
-   * @public
-   */
+  /** @return {!SimpleLiterals} */
   static $create__() {
     SimpleLiterals.$clinit();
     let $instance = new SimpleLiterals();
@@ -23,15 +18,11 @@ class SimpleLiterals extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_simpleliterals_SimpleLiterals__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_simpleliterals_SimpleLiterals__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @public
-   */
+
   m_main__() {
     let a = false;
     let b = 97 /* 'a' */;
@@ -40,25 +31,17 @@ class SimpleLiterals extends j_l_Object {
     let e = 'foo';
     let f = Class.$get(SimpleLiterals);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     SimpleLiterals.$clinit = () => {};
     SimpleLiterals.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof SimpleLiterals;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     Class = goog.module.get('java.lang.Class$impl');
   }

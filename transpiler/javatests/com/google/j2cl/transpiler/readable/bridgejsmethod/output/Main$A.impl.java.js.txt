@@ -7,17 +7,11 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @template T
  */
 class A extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @template T
-   * @return {!A<T>}
-   * @public
-   */
+  /** @template T @return {!A<T>} */
   static $create__() {
     A.$clinit();
     let $instance = new A();
@@ -25,44 +19,27 @@ class A extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_A__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_A__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @param {T} t
-   * @return {T}
-   * @public
-   */
-  fun(t) {
+  /** @return {T} */
+  fun(/** T */ t) {
     return t;
   }
-  /**
-   * @param {T} t
-   * @public
-   */
-  m_bar__java_lang_Object(t) {}
-  /**
-   * @public
-   */
+
+  m_bar__java_lang_Object(/** T */ t) {}
+
   static $clinit() {
     A.$clinit = () => {};
     A.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof A;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

@@ -8,65 +8,47 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @abstract
  */
 class LongInitialValue extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_longinitialvalue_LongInitialValue__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @return {!$Long}
-   * @public
-   */
+  /** @return {!$Long} */
   static get f_LONG_VALUE__com_google_j2cl_transpiler_readable_longinitialvalue_LongInitialValue() {
     return (
         LongInitialValue.$clinit(),
         LongInitialValue
             .$f_LONG_VALUE__com_google_j2cl_transpiler_readable_longinitialvalue_LongInitialValue);
   }
-  /**
-   * @param {!$Long} value
-   * @public
-   */
+
   static set f_LONG_VALUE__com_google_j2cl_transpiler_readable_longinitialvalue_LongInitialValue(
-      value) {
+      /** !$Long */ value) {
     (LongInitialValue.$clinit(),
      LongInitialValue
          .$f_LONG_VALUE__com_google_j2cl_transpiler_readable_longinitialvalue_LongInitialValue =
          value);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     LongInitialValue.$clinit = () => {};
     LongInitialValue.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof LongInitialValue;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(
     LongInitialValue,
     'com.google.j2cl.transpiler.readable.longinitialvalue.LongInitialValue');
 
-/** @private {!$Long} */
+/**@private {!$Long}*/
 LongInitialValue
     .$f_LONG_VALUE__com_google_j2cl_transpiler_readable_longinitialvalue_LongInitialValue =
     $Long.fromInt(0);

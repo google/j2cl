@@ -6,49 +6,34 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
 
 class RawType extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {(Comparable|boolean|number|string)} */
+    /**@type {(Comparable|boolean|number|string)}*/
     this.f_c__com_google_j2cl_transpiler_readable_rawtype_RawType;
   }
-  /**
-   * @return {!RawType}
-   * @public
-   */
+  /** @return {!RawType} */
   static $create__() {
     RawType.$clinit();
     let $instance = new RawType();
     $instance.$ctor__com_google_j2cl_transpiler_readable_rawtype_RawType__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_rawtype_RawType__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     RawType.$clinit = () => {};
     RawType.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof RawType;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

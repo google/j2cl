@@ -9,17 +9,11 @@ let Error = goog.forwardDeclare('java.lang.Error$impl');
  * @template T
  */
 class Superclass extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @template T
-   * @return {!Superclass<T>}
-   * @public
-   */
+  /** @template T @return {!Superclass<T>} */
   static $create__() {
     Superclass.$clinit();
     let $instance = new Superclass();
@@ -27,36 +21,23 @@ class Superclass extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_simplebridgemethods_Superclass__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_simplebridgemethods_Superclass__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @param {T} t
-   * @public
-   */
-  m_m1__java_lang_Error(t) {}
-  /**
-   * @public
-   */
+
+  m_m1__java_lang_Error(/** T */ t) {}
+
   static $clinit() {
     Superclass.$clinit = () => {};
     Superclass.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Superclass;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

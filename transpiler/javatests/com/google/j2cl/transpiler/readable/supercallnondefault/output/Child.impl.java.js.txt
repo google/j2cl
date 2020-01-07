@@ -4,18 +4,12 @@ const Parent = goog.require('com.google.j2cl.transpiler.readable.supercallnondef
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class Child extends Parent {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @param {number} a
-   * @return {!Child}
-   * @public
-   */
-  static $create__int(a) {
+  /** @return {!Child} */
+  static $create__int(/** number */ a) {
     Child.$clinit();
     let $instance = new Child();
     $instance
@@ -23,33 +17,23 @@ class Child extends Parent {
             a);
     return $instance;
   }
-  /**
-   * @param {number} a
-   * @public
-   */
-  $ctor__com_google_j2cl_transpiler_readable_supercallnondefault_Child__int(a) {
+
+  $ctor__com_google_j2cl_transpiler_readable_supercallnondefault_Child__int(
+      /** number */ a) {
     this.$ctor__com_google_j2cl_transpiler_readable_supercallnondefault_Parent__int(
         a);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     Child.$clinit = () => {};
     Child.$loadModules();
     Parent.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Child;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

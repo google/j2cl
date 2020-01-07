@@ -4,16 +4,11 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class LocalClassInheritance extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!LocalClassInheritance}
-   * @public
-   */
+  /** @return {!LocalClassInheritance} */
   static $create__() {
     LocalClassInheritance.$clinit();
     let $instance = new LocalClassInheritance();
@@ -21,37 +16,25 @@ class LocalClassInheritance extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_localclassinheritance_LocalClassInheritance__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_localclassinheritance_LocalClassInheritance__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @public
-   */
+
   m_test__() {
     let f = 1;
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     LocalClassInheritance.$clinit = () => {};
     LocalClassInheritance.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof LocalClassInheritance;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

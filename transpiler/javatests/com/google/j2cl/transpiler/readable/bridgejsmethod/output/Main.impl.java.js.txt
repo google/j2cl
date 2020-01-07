@@ -13,16 +13,11 @@ let L = goog.forwardDeclare('com.google.j2cl.transpiler.readable.bridgejsmethod.
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 
 class Main extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!Main}
-   * @public
-   */
+  /** @return {!Main} */
   static $create__() {
     Main.$clinit();
     let $instance = new Main();
@@ -30,18 +25,14 @@ class Main extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @public
-   */
+
   static m_test__() {
     Main.$clinit();
-    let a = /**@type {!A<Integer>} */ (A.$create__());
+    let a = /**@type {!A<Integer>}*/ (A.$create__());
     a.fun(Integer.m_valueOf__int(1));
     a.m_bar__java_lang_Object(Integer.m_valueOf__int(1));
     let b = B.$create__();
@@ -56,30 +47,22 @@ class Main extends j_l_Object {
     let e = E.$create__();
     e.fun('abc');
     e.bar('abc');
-    let h = /**@type {!H<Integer>} */ (H.$create__());
+    let h = /**@type {!H<Integer>}*/ (H.$create__());
     h.enclose(Integer.m_valueOf__int(1));
-    let l = /**@type {!L<Integer>} */ (L.$create__());
+    let l = /**@type {!L<Integer>}*/ (L.$create__());
     l.fun('foo', Integer.m_valueOf__int(1));
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     Main.$clinit = () => {};
     Main.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Main;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     A = goog.module.get(
         'com.google.j2cl.transpiler.readable.bridgejsmethod.Main.A$impl');

@@ -13,11 +13,11 @@
 [fun] => [CastOnArrayInit.$clinit();] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.fun"
 [test] => [m_test__]
 [test] => [CastOnArrayInit.$clinit();] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.test"
-[Foo<E> f1 = new Foo<>();] => [let f1 = /**@type {!Foo<E>} */ (Foo.$create__());] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.test"
+[Foo<E> f1 = new Foo<>();] => [let f1 = /**@type {!Foo<E>}*/ (Foo.$create__());] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.test"
 [f1] => [f1] "f1"
-[Foo<E> f2 = new Foo<>();] => [let f2 = /**@type {!Foo<E>} */ (Foo.$create__());] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.test"
+[Foo<E> f2 = new Foo<>();] => [let f2 = /**@type {!Foo<E>}*/ (Foo.$create__());] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.test"
 [f2] => [f2] "f2"
-[fun(f1, f2);] => [CastOnArrayInit.m_fun__arrayOf_com_google_j2cl_transpiler_readable_castonarrayinit_CastOnArrayInit_Foo(/**@type {!Array<Foo<E>>} */ ($Arrays.$init([f1, f2], Foo)));] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.test"
+[fun(f1, f2);] => [CastOnArrayInit.m_fun__arrayOf_com_google_j2cl_transpiler_readable_castonarrayinit_CastOnArrayInit_Foo(/**@type {!Array<Foo<E>>}*/ ($Arrays.$init([f1, f2], Foo)));] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.test"
 [CastOnArrayInit] => [$clinit]
 [CastOnArrayInit] => [CastOnArrayInit.$clinit = () =>{};] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.<clinit>"
 [CastOnArrayInit] => [CastOnArrayInit.$loadModules();] "com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.<clinit>"

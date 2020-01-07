@@ -9,56 +9,31 @@ let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.me
  * @template T, U, V
  */
 class BiFunction {
-  /**
-   * @abstract
-   * @param {T} t
-   * @param {U} u
-   * @return {V}
-   * @public
-   */
-  m_apply__java_lang_Object__java_lang_Object(t, u) {}
-  /**
-   * @template T, U, V
-   * @param {?function(T, U):V} fn
-   * @return {BiFunction<T, U, V>}
-   * @public
-   */
-  static $adapt(fn) {
+  /** @abstract @return {V} */
+  m_apply__java_lang_Object__java_lang_Object(/** T */ t, /** U */ u) {}
+  /** @template T, U, V @return {BiFunction<T, U, V>} */
+  static $adapt(/** ?function(T, U):V */ fn) {
     BiFunction.$clinit();
-    return /**@type {!$LambdaAdaptor<T, U, V>} */ (new $LambdaAdaptor(fn));
+    return /**@type {!$LambdaAdaptor<T, U, V>}*/ (new $LambdaAdaptor(fn));
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     BiFunction.$clinit = () => {};
     BiFunction.$loadModules();
   }
-  /**
-   * @param {Function} classConstructor
-   * @public
-   */
-  static $markImplementor(classConstructor) {
-    /**
-     * @public {boolean}
-     */
-    classConstructor.prototype
+
+  static $markImplementor(/** Function*/ ctor) {
+    ctor.prototype
         .$implements__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_BiFunction =
         true;
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance != null &&
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_BiFunction;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.BiFunction.$LambdaAdaptor$impl');

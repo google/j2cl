@@ -10,64 +10,44 @@ let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 
 class Timing extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!Timing}
-   * @public
-   */
+  /** @return {!Timing} */
   static $create__() {
     Timing.$clinit();
     let $instance = new Timing();
     $instance.$ctor__com_google_j2cl_transpiler_readable_timing_Timing__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_timing_Timing__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @return {boolean}
-   * @public
-   */
+  /** @return {boolean} */
   static m_run__() {
     Timing.$clinit();
-    let fooStrings = /**@type {ArrayList<?string>} */ (
+    let fooStrings = /**@type {ArrayList<?string>}*/ (
         Lists.m_newArrayList__arrayOf_java_lang_Object(
-            /**@type {!Array<?string>} */ (
-                $Arrays.$init(['foo'], j_l_String))));
-    let barStrings = /**@type {ArrayList<?string>} */ (
+            /**@type {!Array<?string>}*/ ($Arrays.$init(['foo'], j_l_String))));
+    let barStrings = /**@type {ArrayList<?string>}*/ (
         Lists.m_newArrayList__arrayOf_java_lang_Object(
-            /**@type {!Array<?string>} */ (
-                $Arrays.$init(['bar'], j_l_String))));
+            /**@type {!Array<?string>}*/ ($Arrays.$init(['bar'], j_l_String))));
     return Objects.m_equal__java_lang_Object__java_lang_Object(
         fooStrings, barStrings);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     Timing.$clinit = () => {};
     Timing.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Timing;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     Objects = goog.module.get('com.google.common.base.Objects$impl');
     Lists = goog.module.get('com.google.common.collect.Lists$impl');

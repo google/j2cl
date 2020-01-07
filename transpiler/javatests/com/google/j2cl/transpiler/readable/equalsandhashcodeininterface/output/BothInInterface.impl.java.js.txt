@@ -6,51 +6,28 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @interface
  */
 class BothInInterface {
-  /**
-   * @abstract
-   * @param {*} obj
-   * @return {boolean}
-   * @public
-   */
-  equals(obj) {}
-  /**
-   * @abstract
-   * @return {number}
-   * @public
-   */
+  /** @abstract @return {boolean} */
+  equals(/** * */ obj) {}
+  /** @abstract @return {number} */
   hashCode() {}
-  /**
-   * @public
-   */
+
   static $clinit() {
     BothInInterface.$clinit = () => {};
     BothInInterface.$loadModules();
   }
-  /**
-   * @param {Function} classConstructor
-   * @public
-   */
-  static $markImplementor(classConstructor) {
-    /**
-     * @public {boolean}
-     */
-    classConstructor.prototype
+
+  static $markImplementor(/** Function*/ ctor) {
+    ctor.prototype
         .$implements__com_google_j2cl_transpiler_readable_equalsandhashcodeininterface_BothInInterface =
         true;
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance != null &&
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_equalsandhashcodeininterface_BothInInterface;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadataForInterface(

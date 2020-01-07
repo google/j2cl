@@ -10,17 +10,11 @@ let Content = goog.forwardDeclare('com.google.j2cl.transpiler.readable.genericme
  * @template C
  */
 class SuperContainer extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @template C
-   * @return {!SuperContainer<C>}
-   * @public
-   */
+  /** @template C @return {!SuperContainer<C>} */
   static $create__() {
     SuperContainer.$clinit();
     let $instance = new SuperContainer();
@@ -28,38 +22,25 @@ class SuperContainer extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod_SuperContainer__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod_SuperContainer__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @return {C}
-   * @public
-   */
+  /** @return {C} */
   m_get___$pp_com_google_j2cl_transpiler_readable_genericmethod() {
     return null;
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     SuperContainer.$clinit = () => {};
     SuperContainer.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof SuperContainer;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

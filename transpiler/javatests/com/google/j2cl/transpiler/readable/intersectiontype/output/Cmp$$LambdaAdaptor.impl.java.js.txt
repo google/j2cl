@@ -8,32 +8,22 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {Cmp}
  */
 class $LambdaAdaptor extends j_l_Object {
-  /**
-   * @param {?function():number} fn
-   * @public
-   */
-  constructor(fn) {
+  constructor(/** ?function():number */ fn) {
     $LambdaAdaptor.$clinit();
     super();
-    /** @public {?function():number} */
+    /**@type {?function():number}*/
     this.f_$$fn__com_google_j2cl_transpiler_readable_intersectiontype_Cmp_$LambdaAdaptor;
     this.$ctor__com_google_j2cl_transpiler_readable_intersectiontype_Cmp_$LambdaAdaptor__com_google_j2cl_transpiler_readable_intersectiontype_Cmp_$JsFunction(
         fn);
   }
-  /**
-   * @param {?function():number} fn
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_intersectiontype_Cmp_$LambdaAdaptor__com_google_j2cl_transpiler_readable_intersectiontype_Cmp_$JsFunction(
-      fn) {
+      /** ?function():number */ fn) {
     this.$ctor__java_lang_Object__();
     this.f_$$fn__com_google_j2cl_transpiler_readable_intersectiontype_Cmp_$LambdaAdaptor =
         fn;
   }
-  /**
-   * @return {number}
-   * @public
-   */
+  /** @return {number} */
   m_cmp__() {
     let /** ?function():number */ $function;
     return (
@@ -41,25 +31,17 @@ class $LambdaAdaptor extends j_l_Object {
             this.f_$$fn__com_google_j2cl_transpiler_readable_intersectiontype_Cmp_$LambdaAdaptor,
         $function());
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     $LambdaAdaptor.$clinit = () => {};
     $LambdaAdaptor.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof $LambdaAdaptor;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

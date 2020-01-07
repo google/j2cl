@@ -7,17 +7,11 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @template T
  */
 class ClassWithParameterizedGet extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @template T
-   * @return {!ClassWithParameterizedGet<T>}
-   * @public
-   */
+  /** @template T @return {!ClassWithParameterizedGet<T>} */
   static $create__() {
     ClassWithParameterizedGet.$clinit();
     let $instance = new ClassWithParameterizedGet();
@@ -25,39 +19,25 @@ class ClassWithParameterizedGet extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_bridgemethods_ClassWithParameterizedGet__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_bridgemethods_ClassWithParameterizedGet__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @param {T} t
-   * @return {T}
-   * @public
-   */
-  m_get__java_lang_Object(t) {
+  /** @return {T} */
+  m_get__java_lang_Object(/** T */ t) {
     return null;
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     ClassWithParameterizedGet.$clinit = () => {};
     ClassWithParameterizedGet.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof ClassWithParameterizedGet;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

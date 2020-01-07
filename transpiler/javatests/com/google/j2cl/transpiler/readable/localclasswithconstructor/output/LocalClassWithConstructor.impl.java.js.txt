@@ -6,16 +6,11 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let $1LocalClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor.$1LocalClass$impl');
 
 class LocalClassWithConstructor extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!LocalClassWithConstructor}
-   * @public
-   */
+  /** @return {!LocalClassWithConstructor} */
   static $create__() {
     LocalClassWithConstructor.$clinit();
     let $instance = new LocalClassWithConstructor();
@@ -23,41 +18,28 @@ class LocalClassWithConstructor extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @param {number} p
-   * @public
-   */
-  m_test__int(p) {
+
+  m_test__int(/** number */ p) {
     let localVar = 1;
     $1LocalClass
         .$create__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor__int__int__int(
             this, localVar, p, 1);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     LocalClassWithConstructor.$clinit = () => {};
     LocalClassWithConstructor.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof LocalClassWithConstructor;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     $1LocalClass = goog.module.get(
         'com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor.$1LocalClass$impl');

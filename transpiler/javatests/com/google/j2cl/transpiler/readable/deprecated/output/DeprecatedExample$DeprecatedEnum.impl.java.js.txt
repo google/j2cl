@@ -13,42 +13,28 @@ let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
  * @extends {Enum<DeprecatedEnum>}
  */
 class DeprecatedEnum extends Enum {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @param {?string} $name
-   * @param {number} $ordinal
-   * @return {!DeprecatedEnum}
-   * @public
-   */
-  static $create__java_lang_String__int($name, $ordinal) {
+  /** @return {!DeprecatedEnum} */
+  static $create__java_lang_String__int(
+      /** ?string */ $name, /** number */ $ordinal) {
     let $instance = new DeprecatedEnum();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_deprecated_DeprecatedExample_DeprecatedEnum__java_lang_String__int(
             $name, $ordinal);
     return $instance;
   }
-  /**
-   * @param {?string} $name
-   * @param {number} $ordinal
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_deprecated_DeprecatedExample_DeprecatedEnum__java_lang_String__int(
-      $name, $ordinal) {
+      /** ?string */ $name, /** number */ $ordinal) {
     this.f_name__java_lang_Enum_ = $name;
     this.f_ordinal__java_lang_Enum_ = $ordinal;
     this.$ctor__java_lang_Enum__java_lang_String__int($name, $ordinal);
   }
-  /**
-   * @param {string} name
-   * @return {!DeprecatedEnum}
-   * @public
-   */
-  static valueOf(name) {
+  /** @return {!DeprecatedEnum} */
+  static valueOf(/** string */ name) {
     DeprecatedEnum.$clinit();
     if ($Equality.$same(
             DeprecatedEnum
@@ -63,44 +49,30 @@ class DeprecatedEnum extends Enum {
         DeprecatedEnum
             .f_namesToValuesMap__com_google_j2cl_transpiler_readable_deprecated_DeprecatedExample_DeprecatedEnum_);
   }
-  /**
-   * @return {!Array<!DeprecatedEnum>}
-   * @public
-   */
+  /** @return {!Array<!DeprecatedEnum>} */
   static values() {
     DeprecatedEnum.$clinit();
-    return /**@type {!Array<DeprecatedEnum>} */ ($Arrays.$init(
+    return /**@type {!Array<DeprecatedEnum>}*/ ($Arrays.$init(
         [
           DeprecatedEnum
               .$f_A_VALUE__com_google_j2cl_transpiler_readable_deprecated_DeprecatedExample_DeprecatedEnum
         ],
         DeprecatedEnum));
   }
-  /**
-   * Bridge method.
-   * @override
-   * @param {*} arg0
-   * @return {number}
-   * @public
-   */
-  m_compareTo__java_lang_Object(arg0) {
+  /** @override @return {number} */
+  // Bridge method.
+  m_compareTo__java_lang_Object(/** * */ arg0) {
     return super.compareTo(
-        /**@type {DeprecatedEnum} */ ($Casts.$to(arg0, DeprecatedEnum)));
+        /**@type {DeprecatedEnum}*/ ($Casts.$to(arg0, DeprecatedEnum)));
   }
-  /**
-   * @return {!DeprecatedEnum}
-   * @public
-   * @deprecated
-   */
+  /** @return {!DeprecatedEnum} @deprecated */
   static get A_VALUE() {
     return (
         DeprecatedEnum.$clinit(),
         DeprecatedEnum
             .$f_A_VALUE__com_google_j2cl_transpiler_readable_deprecated_DeprecatedExample_DeprecatedEnum);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     DeprecatedEnum.$clinit = () => {};
     DeprecatedEnum.$loadModules();
@@ -115,17 +87,11 @@ class DeprecatedEnum extends Enum {
         .f_namesToValuesMap__com_google_j2cl_transpiler_readable_deprecated_DeprecatedExample_DeprecatedEnum_ =
         null;
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof DeprecatedEnum;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
@@ -137,13 +103,13 @@ $Util.$setClassMetadataForEnum(
     DeprecatedEnum,
     'com.google.j2cl.transpiler.readable.deprecated.DeprecatedExample$DeprecatedEnum');
 
-/** @private {!DeprecatedEnum} @deprecated */
+/**@private {!DeprecatedEnum} @deprecated*/
 DeprecatedEnum
     .$f_A_VALUE__com_google_j2cl_transpiler_readable_deprecated_DeprecatedExample_DeprecatedEnum;
-/** @public {Map<?string, !DeprecatedEnum>} */
+/**@type {Map<?string, !DeprecatedEnum>}*/
 DeprecatedEnum
     .f_namesToValuesMap__com_google_j2cl_transpiler_readable_deprecated_DeprecatedExample_DeprecatedEnum_;
-/** @public {number} @const @deprecated */
+/**@const {number} @deprecated*/
 DeprecatedEnum
     .$ordinal$f_A_VALUE__com_google_j2cl_transpiler_readable_deprecated_DeprecatedExample_DeprecatedEnum =
     0;

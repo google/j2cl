@@ -7,25 +7,19 @@ let OuterClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nested
 let InnerClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.InnerClass$impl');
 
 class InnerInnerClass extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {InnerClass} */
+    /**@type {InnerClass}*/
     this.f_$outer_this__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass;
-    /** @public {InnerClass} */
+    /**@type {InnerClass}*/
     this.f_x__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass;
-    /** @public {OuterClass} */
+    /**@type {OuterClass}*/
     this.f_y__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass;
   }
-  /**
-   * @param {InnerClass} $outer_this
-   * @return {!InnerInnerClass}
-   * @public
-   */
+  /** @return {!InnerInnerClass} */
   static $create__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass_InnerClass(
-      $outer_this) {
+      /** InnerClass */ $outer_this) {
     InnerInnerClass.$clinit();
     let $instance = new InnerInnerClass();
     $instance
@@ -33,20 +27,15 @@ class InnerInnerClass extends j_l_Object {
             $outer_this);
     return $instance;
   }
-  /**
-   * @param {InnerClass} $outer_this
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass_InnerClass(
-      $outer_this) {
+      /** InnerClass */ $outer_this) {
     this.f_$outer_this__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass =
         $outer_this;
     this.$ctor__java_lang_Object__();
     this.$init___$p_com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass();
   }
-  /**
-   * @private
-   */
+  /** @private */
   $init___$p_com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass() {
     this.f_x__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass =
         this.f_$outer_this__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass;
@@ -54,25 +43,17 @@ class InnerInnerClass extends j_l_Object {
         this.f_$outer_this__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass
             .f_$outer_this__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass_InnerClass;
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     InnerInnerClass.$clinit = () => {};
     InnerInnerClass.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof InnerInnerClass;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

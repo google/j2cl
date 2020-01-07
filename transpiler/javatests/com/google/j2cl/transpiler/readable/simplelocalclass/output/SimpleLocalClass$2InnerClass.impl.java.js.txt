@@ -6,27 +6,20 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let SimpleLocalClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass$impl');
 
 class $2InnerClass extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {SimpleLocalClass} */
+    /**@type {SimpleLocalClass}*/
     this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass_2InnerClass;
-    /** @public {number} */
+    /**@type {number}*/
     this.f_field__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass_2InnerClass =
         0;
-    /** @public {number} */
+    /**@type {number}*/
     this.$c_localVar = 0;
   }
-  /**
-   * @param {SimpleLocalClass} $outer_this
-   * @param {number} $c_localVar
-   * @return {!$2InnerClass}
-   * @public
-   */
+  /** @return {!$2InnerClass} */
   static $create__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass__int(
-      $outer_this, $c_localVar) {
+      /** SimpleLocalClass */ $outer_this, /** number */ $c_localVar) {
     $2InnerClass.$clinit();
     let $instance = new $2InnerClass();
     $instance
@@ -34,45 +27,31 @@ class $2InnerClass extends j_l_Object {
             $outer_this, $c_localVar);
     return $instance;
   }
-  /**
-   * @param {SimpleLocalClass} $outer_this
-   * @param {number} $c_localVar
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass_2InnerClass__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass__int(
-      $outer_this, $c_localVar) {
+      /** SimpleLocalClass */ $outer_this, /** number */ $c_localVar) {
     this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass_2InnerClass =
         $outer_this;
     this.$c_localVar = $c_localVar;
     this.$ctor__java_lang_Object__();
     this.$init___$p_com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass_2InnerClass();
   }
-  /**
-   * @private
-   */
+  /** @private */
   $init___$p_com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass_2InnerClass() {
     this.f_field__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass_2InnerClass =
         this.$c_localVar;
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     $2InnerClass.$clinit = () => {};
     $2InnerClass.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof $2InnerClass;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

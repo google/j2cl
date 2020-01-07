@@ -8,17 +8,11 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @extends {AbstractList<T>}
  */
 class ArrayList extends AbstractList {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @template T
-   * @return {!ArrayList<T>}
-   * @public
-   */
+  /** @template T @return {!ArrayList<T>} */
   static $create__() {
     ArrayList.$clinit();
     let $instance = new ArrayList();
@@ -26,31 +20,21 @@ class ArrayList extends AbstractList {
         .$ctor__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_ArrayList__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_ArrayList__() {
     this.$ctor__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_AbstractList__();
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     ArrayList.$clinit = () => {};
     ArrayList.$loadModules();
     AbstractList.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof ArrayList;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

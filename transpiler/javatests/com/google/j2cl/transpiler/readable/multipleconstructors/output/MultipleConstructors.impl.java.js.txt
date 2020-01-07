@@ -4,25 +4,19 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class MultipleConstructors extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {number} */
+    /**@type {number}*/
     this.f_id__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors_ =
         0;
-    /** @public {boolean} */
+    /**@type {boolean}*/
     this.f_flag__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors_ =
         false;
   }
-  /**
-   * Factory method corresponding to constructor 'MultipleConstructors(int)'.
-   * @param {number} id
-   * @return {!MultipleConstructors}
-   * @public
-   */
-  static $create__int(id) {
+  /** @return {!MultipleConstructors} */
+  // Factory method corresponding to constructor 'MultipleConstructors(int)'.
+  static $create__int(/** number */ id) {
     MultipleConstructors.$clinit();
     let $instance = new MultipleConstructors();
     $instance
@@ -30,27 +24,20 @@ class MultipleConstructors extends j_l_Object {
             id);
     return $instance;
   }
-  /**
-   * Initialization from constructor 'MultipleConstructors(int)'.
-   * @param {number} id
-   * @public
-   */
+
+  // Initialization from constructor 'MultipleConstructors(int)'.
   $ctor__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors__int(
-      id) {
+      /** number */ id) {
     this.$ctor__java_lang_Object__();
     this.f_id__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors_ =
         id;
     this.f_flag__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors_ =
         (id == 0);
   }
-  /**
-   * Factory method corresponding to constructor
-   * 'MultipleConstructors(boolean)'.
-   * @param {boolean} flag
-   * @return {!MultipleConstructors}
-   * @public
-   */
-  static $create__boolean(flag) {
+  /** @return {!MultipleConstructors} */
+  // Factory method corresponding to constructor
+  // 'MultipleConstructors(boolean)'.
+  static $create__boolean(/** boolean */ flag) {
     MultipleConstructors.$clinit();
     let $instance = new MultipleConstructors();
     $instance
@@ -58,28 +45,20 @@ class MultipleConstructors extends j_l_Object {
             flag);
     return $instance;
   }
-  /**
-   * Initialization from constructor 'MultipleConstructors(boolean)'.
-   * @param {boolean} flag
-   * @public
-   */
+
+  // Initialization from constructor 'MultipleConstructors(boolean)'.
   $ctor__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors__boolean(
-      flag) {
+      /** boolean */ flag) {
     this.$ctor__java_lang_Object__();
     this.f_id__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors_ =
         -1;
     this.f_flag__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors_ =
         flag;
   }
-  /**
-   * Factory method corresponding to constructor 'MultipleConstructors(int,
-   * boolean)'.
-   * @param {number} id
-   * @param {boolean} flag
-   * @return {!MultipleConstructors}
-   * @public
-   */
-  static $create__int__boolean(id, flag) {
+  /** @return {!MultipleConstructors} */
+  // Factory method corresponding to constructor 'MultipleConstructors(int,
+  // boolean)'.
+  static $create__int__boolean(/** number */ id, /** boolean */ flag) {
     MultipleConstructors.$clinit();
     let $instance = new MultipleConstructors();
     $instance
@@ -87,39 +66,27 @@ class MultipleConstructors extends j_l_Object {
             id, flag);
     return $instance;
   }
-  /**
-   * Initialization from constructor 'MultipleConstructors(int, boolean)'.
-   * @param {number} id
-   * @param {boolean} flag
-   * @public
-   */
+
+  // Initialization from constructor 'MultipleConstructors(int, boolean)'.
   $ctor__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors__int__boolean(
-      id, flag) {
+      /** number */ id, /** boolean */ flag) {
     this.$ctor__java_lang_Object__();
     this.f_id__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors_ =
         id;
     this.f_flag__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors_ =
         flag;
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     MultipleConstructors.$clinit = () => {};
     MultipleConstructors.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof MultipleConstructors;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

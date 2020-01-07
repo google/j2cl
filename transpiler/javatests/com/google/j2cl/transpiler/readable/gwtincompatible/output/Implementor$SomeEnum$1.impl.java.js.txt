@@ -6,19 +6,13 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 class $1 extends SomeEnum {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @param {?string} $name
-   * @param {number} $ordinal
-   * @return {!$1}
-   * @public
-   */
-  static $create__java_lang_String__int($name, $ordinal) {
+  /** @return {!$1} */
+  static $create__java_lang_String__int(
+      /** ?string */ $name, /** number */ $ordinal) {
     $1.$clinit();
     let $instance = new $1();
     $instance
@@ -26,50 +20,30 @@ class $1 extends SomeEnum {
             $name, $ordinal);
     return $instance;
   }
-  /**
-   * @param {?string} $name
-   * @param {number} $ordinal
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum_1__java_lang_String__int(
-      $name, $ordinal) {
+      /** ?string */ $name, /** number */ $ordinal) {
     this.$ctor__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum__java_lang_String__int(
         $name, $ordinal);
   }
-  /**
-   * @override
-   * @public
-   */
+  /** @override */
   m_method___$pp_com_google_j2cl_transpiler_readable_gwtincompatible() {}
-  /**
-   * Bridge method.
-   * @override
-   * @param {*} arg0
-   * @return {number}
-   * @public
-   */
-  m_compareTo__java_lang_Object(arg0) {
-    return super.compareTo(/**@type {SomeEnum} */ ($Casts.$to(arg0, SomeEnum)));
+  /** @override @return {number} */
+  // Bridge method.
+  m_compareTo__java_lang_Object(/** * */ arg0) {
+    return super.compareTo(/**@type {SomeEnum}*/ ($Casts.$to(arg0, SomeEnum)));
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     $1.$clinit = () => {};
     $1.$loadModules();
     SomeEnum.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof $1;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
   }

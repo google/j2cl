@@ -4,24 +4,15 @@ const Inner = goog.require('com.google.j2cl.transpiler.readable.externs.Main.Foo
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class $Overlay {
-  /**
-   * @public
-   */
   static $clinit() {
     $Overlay.$clinit = () => {};
     $Overlay.$loadModules();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Inner;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

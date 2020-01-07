@@ -6,16 +6,11 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 
 class StringCalls extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!StringCalls}
-   * @public
-   */
+  /** @return {!StringCalls} */
   static $create__() {
     StringCalls.$clinit();
     let $instance = new StringCalls();
@@ -23,15 +18,11 @@ class StringCalls extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_devirtualizedcalls_StringCalls__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_devirtualizedcalls_StringCalls__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @public
-   */
+
   m_main__() {
     let literal = 'String';
     let sub = j_l_String.m_substring__java_lang_String__int(literal, 1);
@@ -40,25 +31,17 @@ class StringCalls extends j_l_Object {
     let trimmed = j_l_String.m_trim__java_lang_String(literal);
     let newString = j_l_String.m_toString__java_lang_String(literal);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     StringCalls.$clinit = () => {};
     StringCalls.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof StringCalls;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     j_l_String = goog.module.get('java.lang.String$impl');
   }

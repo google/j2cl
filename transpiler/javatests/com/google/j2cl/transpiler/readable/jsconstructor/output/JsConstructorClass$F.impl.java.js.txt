@@ -4,55 +4,38 @@ const C = goog.require('com.google.j2cl.transpiler.readable.jsconstructor.JsCons
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class F extends C {
-  /**
-   * @param {number} x
-   * @public
-   */
-  constructor(x) {
+  constructor(/** number */ x) {
     F.$clinit();
     super(x + 2);
-    /** @public {number} */
+    /**@type {number}*/
     this.f_fF__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_F =
         0;
     this.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_F__int(
         x);
   }
-  /**
-   * @param {number} x
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_F__int(
-      x) {
+      /** number */ x) {
     this.$init___$p_com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_F();
     this.f_fF__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_F =
         x + 3;
   }
-  /**
-   * @private
-   */
+  /** @private */
   $init___$p_com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_F() {
     this.f_fF__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_F =
         13;
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     F.$clinit = () => {};
     F.$loadModules();
     C.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof F;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

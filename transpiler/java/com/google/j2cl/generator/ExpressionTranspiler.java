@@ -63,6 +63,7 @@ import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.VariableDeclarationFragment;
 import com.google.j2cl.ast.VariableReference;
 import com.google.j2cl.common.SourcePosition;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -140,7 +141,7 @@ public class ExpressionTranspiler {
       public Void transformJsDocCastExpression(JsDocCastExpression jsDocCastExpression) {
         String jsdoc =
             closureTypesGenerator.getClosureTypeString(jsDocCastExpression.getTypeDescriptor());
-        sourceBuilder.append("/**@type {" + jsdoc + "} */ (");
+        sourceBuilder.append("/**@type {" + jsdoc + "}*/ (");
         process(jsDocCastExpression.getExpression());
         sourceBuilder.append(")");
         return null;
@@ -148,16 +149,23 @@ public class ExpressionTranspiler {
 
       @Override
       public Void transformJsDocFieldDeclaration(JsDocFieldDeclaration declaration) {
-        String jsdoc = closureTypesGenerator.getClosureTypeString(declaration.getTypeDescriptor());
-        sourceBuilder.appendln(
-            "/** "
-                + (declaration.isPublic() ? "@public" : "@private")
-                + " {"
-                + jsdoc
-                + "} "
-                + (declaration.isConst() ? "@const " : "")
-                + (declaration.isDeprecated() ? "@deprecated " : "")
-                + "*/");
+        String typeJsDoc =
+            closureTypesGenerator.getClosureTypeString(declaration.getTypeDescriptor());
+        ArrayList<String> jsDocs = new ArrayList<>();
+        if (!declaration.isPublic()) {
+          jsDocs.add("@private");
+        }
+        if (declaration.isConst()) {
+          jsDocs.add("@const");
+        }
+        if (jsDocs.isEmpty()) {
+          jsDocs.add("@type");
+        }
+        jsDocs.add("{" + typeJsDoc + "}");
+        if (declaration.isDeprecated()) {
+          jsDocs.add("@deprecated");
+        }
+        sourceBuilder.appendln("/**" + String.join(" ", jsDocs) + "*/");
         process(declaration.getExpression());
         return null;
       }

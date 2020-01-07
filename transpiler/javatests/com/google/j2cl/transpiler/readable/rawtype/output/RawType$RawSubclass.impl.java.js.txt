@@ -10,16 +10,11 @@ let RawType = goog.forwardDeclare('com.google.j2cl.transpiler.readable.rawtype.R
  * @implements {I}
  */
 class RawSubclass extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!RawSubclass}
-   * @public
-   */
+  /** @return {!RawSubclass} */
   static $create__() {
     RawSubclass.$clinit();
     let $instance = new RawSubclass();
@@ -27,38 +22,24 @@ class RawSubclass extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_rawtype_RawType_RawSubclass__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_rawtype_RawType_RawSubclass__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @override
-   * @param {RawType} t
-   * @public
-   */
-  m_f__com_google_j2cl_transpiler_readable_rawtype_RawType(t) {}
-  /**
-   * @public
-   */
+  /** @override */
+  m_f__com_google_j2cl_transpiler_readable_rawtype_RawType(/** RawType */ t) {}
+
   static $clinit() {
     RawSubclass.$clinit = () => {};
     RawSubclass.$loadModules();
     j_l_Object.$clinit();
     I.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof RawSubclass;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

@@ -4,16 +4,11 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class Dummy extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!Dummy}
-   * @public
-   */
+  /** @return {!Dummy} */
   static $create__() {
     Dummy.$clinit();
     let $instance = new Dummy();
@@ -21,31 +16,21 @@ class Dummy extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_aptgeneratorplugin_Dummy__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_aptgeneratorplugin_Dummy__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     Dummy.$clinit = () => {};
     Dummy.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Dummy;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

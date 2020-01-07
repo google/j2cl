@@ -6,21 +6,15 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let InnerClass1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings.InnerClass1$impl');
 
 class InnerClass2 extends Parent {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {InnerClass1} */
+    /**@type {InnerClass1}*/
     this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2;
   }
-  /**
-   * @param {InnerClass1} $outer_this
-   * @return {!InnerClass2}
-   * @public
-   */
+  /** @return {!InnerClass2} */
   static $create__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings_InnerClass1(
-      $outer_this) {
+      /** InnerClass1 */ $outer_this) {
     InnerClass2.$clinit();
     let $instance = new InnerClass2();
     $instance
@@ -28,25 +22,18 @@ class InnerClass2 extends Parent {
             $outer_this);
     return $instance;
   }
-  /**
-   * @param {InnerClass1} $outer_this
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings_InnerClass1(
-      $outer_this) {
+      /** InnerClass1 */ $outer_this) {
     this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2 =
         $outer_this;
     this.$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings_Parent__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings(
         $outer_this
             .f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings_InnerClass1);
   }
-  /**
-   * @public
-   */
+
   m_funInI2__() {}
-  /**
-   * @public
-   */
+
   m_test__() {
     this.m_fun__();
     this.m_fun__();
@@ -64,25 +51,17 @@ class InnerClass2 extends Parent {
         .m_funInI1__();
     this.m_funInI2__();
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     InnerClass2.$clinit = () => {};
     InnerClass2.$loadModules();
     Parent.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof InnerClass2;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

@@ -9,30 +9,22 @@ let $1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunction.JsF
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 
 class $2 extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {$1_$1} */
+    /**@type {$1_$1}*/
     this.f_$outer_this__com_google_j2cl_transpiler_readable_jsfunction_JsFunctionOptimization_1_1_2;
-    /** @public {number} */
+    /**@type {number}*/
     this.$c_r = 0;
-    /** @public {number} */
+    /**@type {number}*/
     this.$c_var = 0;
-    /** @public {?string} */
+    /**@type {?string}*/
     this.$c_x;
   }
-  /**
-   * @param {$1_$1} $outer_this
-   * @param {number} $c_r
-   * @param {number} $c_var
-   * @param {?string} $c_x
-   * @return {function(?string):?string}
-   * @public
-   */
+  /** @return {function(?string):?string} */
   static $create__com_google_j2cl_transpiler_readable_jsfunction_JsFunctionOptimization_1_1__int__int__java_lang_String(
-      $outer_this, $c_r, $c_var, $c_x) {
+      /** $1_$1 */ $outer_this, /** number */ $c_r, /** number */ $c_var,
+      /** ?string */ $c_x) {
     $2.$clinit();
     let $instance = new $2();
     $instance
@@ -41,16 +33,10 @@ class $2 extends j_l_Object {
     return $Util.$makeLambdaFunction(
         $2.prototype.m_m__java_lang_String, $instance, $2.$copy);
   }
-  /**
-   * @suppress {invalidCasts}
-   * @param {$1_$1} $outer_this
-   * @param {number} $c_r
-   * @param {number} $c_var
-   * @param {?string} $c_x
-   * @public
-   */
+  /** @suppress {invalidCasts} */
   $ctor__com_google_j2cl_transpiler_readable_jsfunction_JsFunctionOptimization_1_1_2__com_google_j2cl_transpiler_readable_jsfunction_JsFunctionOptimization_1_1__int__int__java_lang_String(
-      $outer_this, $c_r, $c_var, $c_x) {
+      /** $1_$1 */ $outer_this, /** number */ $c_r, /** number */ $c_var,
+      /** ?string */ $c_x) {
     this.f_$outer_this__com_google_j2cl_transpiler_readable_jsfunction_JsFunctionOptimization_1_1_2 =
         $outer_this;
     this.$c_r = $c_r;
@@ -58,13 +44,8 @@ class $2 extends j_l_Object {
     this.$c_x = $c_x;
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @this {?function(?string):?string}
-   * @param {?string} s
-   * @return {?string}
-   * @public
-   */
-  m_m__java_lang_String(s) {
+  /** @this {?function(?string):?string} @return {?string} */
+  m_m__java_lang_String(/** ?string */ s) {
     let r1 = this.$c_r;
     let var1 = this.$c_var;
     let x1 = this.$c_x;
@@ -77,30 +58,19 @@ class $2 extends j_l_Object {
                   this)
                 .toString());
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     $2.$clinit = () => {};
     $2.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance != null &&
         !!instance
               .$is__com_google_j2cl_transpiler_readable_jsfunction_JsFunctionOptimization_1_1_2;
   }
-  /**
-   * @param {$2} from
-   * @param {?} to
-   * @public
-   */
-  static $copy(from, to) {
+  static $copy(/**$2*/ from, /** ? */ to) {
     to.f_$outer_this__com_google_j2cl_transpiler_readable_jsfunction_JsFunctionOptimization_1_1_2 =
         from.f_$outer_this__com_google_j2cl_transpiler_readable_jsfunction_JsFunctionOptimization_1_1_2;
     to.$c_r = from.$c_r;
@@ -110,9 +80,7 @@ class $2 extends j_l_Object {
     to.$is__com_google_j2cl_transpiler_readable_jsfunction_JsFunctionOptimization_1_1_2 =
         true;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     $1 = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsfunction.JsFunctionOptimization.$1.$1.$2.$1$impl');

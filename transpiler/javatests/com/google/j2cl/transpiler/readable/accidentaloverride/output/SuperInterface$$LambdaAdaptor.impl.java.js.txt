@@ -9,58 +9,40 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {SuperInterface<T>}
  */
 class $LambdaAdaptor extends j_l_Object {
-  /**
-   * @param {?function(T):void} fn
-   * @public
-   */
-  constructor(fn) {
+  constructor(/** ?function(T):void */ fn) {
     $LambdaAdaptor.$clinit();
     super();
-    /** @public {?function(T):void} */
+    /**@type {?function(T):void}*/
     this.f_$$fn__com_google_j2cl_transpiler_readable_accidentaloverride_SuperInterface_$LambdaAdaptor;
     this.$ctor__com_google_j2cl_transpiler_readable_accidentaloverride_SuperInterface_$LambdaAdaptor__com_google_j2cl_transpiler_readable_accidentaloverride_SuperInterface_$JsFunction(
         fn);
   }
-  /**
-   * @param {?function(T):void} fn
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_accidentaloverride_SuperInterface_$LambdaAdaptor__com_google_j2cl_transpiler_readable_accidentaloverride_SuperInterface_$JsFunction(
-      fn) {
+      /** ?function(T):void */ fn) {
     this.$ctor__java_lang_Object__();
     this.f_$$fn__com_google_j2cl_transpiler_readable_accidentaloverride_SuperInterface_$LambdaAdaptor =
         fn;
   }
-  /**
-   * @param {T} arg0
-   * @public
-   */
-  m_foo__java_lang_Object(arg0) {
+
+  m_foo__java_lang_Object(/** T */ arg0) {
     {
       let $function =
           this.f_$$fn__com_google_j2cl_transpiler_readable_accidentaloverride_SuperInterface_$LambdaAdaptor;
       $function(arg0);
     }
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     $LambdaAdaptor.$clinit = () => {};
     $LambdaAdaptor.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof $LambdaAdaptor;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

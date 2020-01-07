@@ -9,17 +9,11 @@ let System = goog.forwardDeclare('java.lang.System$impl');
  * @template T
  */
 class GenericClass extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @template T
-   * @return {!GenericClass<T>}
-   * @public
-   */
+  /** @template T @return {!GenericClass<T>} */
   static $create__() {
     GenericClass.$clinit();
     let $instance = new GenericClass();
@@ -27,39 +21,26 @@ class GenericClass extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_genericanddefaultmethods_GenericClass__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_genericanddefaultmethods_GenericClass__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @param {T} value
-   * @public
-   */
-  m_foo__java_lang_Object(value) {
+
+  m_foo__java_lang_Object(/** T */ value) {
     System.f_out__java_lang_System.m_println__java_lang_String(
         'in GenericClass');
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     GenericClass.$clinit = () => {};
     GenericClass.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof GenericClass;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     System = goog.module.get('java.lang.System$impl');
   }

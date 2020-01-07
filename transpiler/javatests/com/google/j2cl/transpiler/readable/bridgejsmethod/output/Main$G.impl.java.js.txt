@@ -9,55 +9,31 @@ let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.br
  * @template V
  */
 class G {
-  /**
-   * @abstract
-   * @param {V} value
-   * @return {V}
-   * @public
-   */
-  m_enclose__java_lang_Object(value) {}
-  /**
-   * @template V
-   * @param {?function(V):V} fn
-   * @return {G<V>}
-   * @public
-   */
-  static $adapt(fn) {
+  /** @abstract @return {V} */
+  m_enclose__java_lang_Object(/** V */ value) {}
+  /** @template V @return {G<V>} */
+  static $adapt(/** ?function(V):V */ fn) {
     G.$clinit();
-    return /**@type {!$LambdaAdaptor<V>} */ (new $LambdaAdaptor(fn));
+    return /**@type {!$LambdaAdaptor<V>}*/ (new $LambdaAdaptor(fn));
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     G.$clinit = () => {};
     G.$loadModules();
   }
-  /**
-   * @param {Function} classConstructor
-   * @public
-   */
-  static $markImplementor(classConstructor) {
-    /**
-     * @public {boolean}
-     */
-    classConstructor.prototype
+
+  static $markImplementor(/** Function*/ ctor) {
+    ctor.prototype
         .$implements__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_G =
         true;
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance != null &&
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_G;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.bridgejsmethod.Main.G.$LambdaAdaptor$impl');

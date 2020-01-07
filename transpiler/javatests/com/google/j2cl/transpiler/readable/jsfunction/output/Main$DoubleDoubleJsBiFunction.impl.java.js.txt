@@ -9,16 +9,11 @@ let Number = goog.forwardDeclare('java.lang.Number$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 class DoubleDoubleJsBiFunction extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {function(?number, ?number):?number}
-   * @public
-   */
+  /** @return {function(?number, ?number):?number} */
   static $create__() {
     DoubleDoubleJsBiFunction.$clinit();
     let $instance = new DoubleDoubleJsBiFunction();
@@ -29,70 +24,44 @@ class DoubleDoubleJsBiFunction extends j_l_Object {
             .m_apply__java_lang_Object__java_lang_Number,
         $instance, DoubleDoubleJsBiFunction.$copy);
   }
-  /**
-   * @suppress {invalidCasts}
-   * @public
-   */
+  /** @suppress {invalidCasts} */
   $ctor__com_google_j2cl_transpiler_readable_jsfunction_Main_DoubleDoubleJsBiFunction__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @param {function(?number, ?number):?number} $thisArg
-   * @param {?number} d
-   * @param {?number} i
-   * @return {?number}
-   * @public
-   */
+  /** @return {?number} */
   static m_apply__com_google_j2cl_transpiler_readable_jsfunction_Main_DoubleDoubleJsBiFunction__java_lang_Double__java_lang_Double(
-      $thisArg, d, i) {
+      /** function(?number, ?number):?number */ $thisArg, /** ?number */ d,
+      /** ?number */ i) {
     DoubleDoubleJsBiFunction.$clinit();
     return d;
   }
-  /**
-   * Bridge method.
-   * @this {?function(?number, ?number):?number}
-   * @param {*} arg0
-   * @param {(Number|number)} arg1
-   * @return {?number}
-   * @public
-   */
-  m_apply__java_lang_Object__java_lang_Number(arg0, arg1) {
+  /** @this {?function(?number, ?number):?number} @return {?number} */
+  // Bridge method.
+  m_apply__java_lang_Object__java_lang_Number(
+      /** * */ arg0, /** (Number|number) */ arg1) {
     return DoubleDoubleJsBiFunction
         .m_apply__com_google_j2cl_transpiler_readable_jsfunction_Main_DoubleDoubleJsBiFunction__java_lang_Double__java_lang_Double(
-            this, /**@type {?number} */ ($Casts.$to(arg0, Double)),
-            /**@type {?number} */ ($Casts.$to(arg1, Double)));
+            this, /**@type {?number}*/ ($Casts.$to(arg0, Double)),
+            /**@type {?number}*/ ($Casts.$to(arg1, Double)));
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     DoubleDoubleJsBiFunction.$clinit = () => {};
     DoubleDoubleJsBiFunction.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance != null &&
         !!instance
               .$is__com_google_j2cl_transpiler_readable_jsfunction_Main_DoubleDoubleJsBiFunction;
   }
-  /**
-   * @param {DoubleDoubleJsBiFunction} from
-   * @param {?} to
-   * @public
-   */
-  static $copy(from, to) {
+  static $copy(/**DoubleDoubleJsBiFunction*/ from, /** ? */ to) {
     // Marks the object is an instance of this class.
     to.$is__com_google_j2cl_transpiler_readable_jsfunction_Main_DoubleDoubleJsBiFunction =
         true;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     Double = goog.module.get('java.lang.Double$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');

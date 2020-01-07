@@ -9,86 +9,48 @@ let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.in
  * @template T
  */
 class Interface {
-  /**
-   * @abstract
-   * @public
-   */
+  /** @abstract */
   m_interfaceMethod__() {}
-  /**
-   * @abstract
-   * @param {T} t
-   * @public
-   */
-  m_defaultMethod__java_lang_Object(t) {}
-  /**
-   * @public
-   */
+  /** @abstract */
+  m_defaultMethod__java_lang_Object(/** T */ t) {}
+
   static m_staticInterfaceMethod__() {
     Interface.$clinit();
   }
-  /**
-   * @template T
-   * @param {?function():void} fn
-   * @return {Interface<T>}
-   * @public
-   */
-  static $adapt(fn) {
+  /** @template T @return {Interface<T>} */
+  static $adapt(/** ?function():void */ fn) {
     Interface.$clinit();
-    return /**@type {!$LambdaAdaptor<T>} */ (new $LambdaAdaptor(fn));
+    return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));
   }
-  /**
-   * @template T
-   * @param {!Interface<T>} $thisArg
-   * @param {T} t
-   * @public
-   */
+  /** @template T */
   static m_defaultMethod__$default__com_google_j2cl_transpiler_readable_interfaces_Main_Interface__java_lang_Object(
-      $thisArg, t) {
+      /** !Interface<T> */ $thisArg, /** T */ t) {
     Interface.$clinit();
     Interface
         .m_privateMethod__$private__com_google_j2cl_transpiler_readable_interfaces_Main_Interface__java_lang_Object(
             $thisArg, t);
   }
-  /**
-   * @template T
-   * @param {!Interface<T>} $thisArg
-   * @param {T} t
-   * @public
-   */
+  /** @template T */
   static m_privateMethod__$private__com_google_j2cl_transpiler_readable_interfaces_Main_Interface__java_lang_Object(
-      $thisArg, t) {}
-  /**
-   * @public
-   */
+      /** !Interface<T> */ $thisArg, /** T */ t) {}
+
   static $clinit() {
     Interface.$clinit = () => {};
     Interface.$loadModules();
   }
-  /**
-   * @param {Function} classConstructor
-   * @public
-   */
-  static $markImplementor(classConstructor) {
-    /**
-     * @public {boolean}
-     */
-    classConstructor.prototype
+
+  static $markImplementor(/** Function*/ ctor) {
+    ctor.prototype
         .$implements__com_google_j2cl_transpiler_readable_interfaces_Main_Interface =
         true;
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance != null &&
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_interfaces_Main_Interface;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.interfaces.Main.Interface.$LambdaAdaptor$impl');
@@ -99,10 +61,10 @@ $Util.$setClassMetadataForInterface(
 
 Interface.$markImplementor(/** @type {Function} */ (Interface));
 
-/** @public {number} @const */
+/**@const {number}*/
 Interface.f_a__com_google_j2cl_transpiler_readable_interfaces_Main_Interface =
     1;
-/** @public {number} @const */
+/**@const {number}*/
 Interface.f_b__com_google_j2cl_transpiler_readable_interfaces_Main_Interface =
     2;
 

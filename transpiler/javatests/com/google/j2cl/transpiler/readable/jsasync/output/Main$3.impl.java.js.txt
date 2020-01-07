@@ -11,21 +11,15 @@ let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 class $3 extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {Main} */
+    /**@type {Main}*/
     this.f_$outer_this__com_google_j2cl_transpiler_readable_jsasync_Main_3;
   }
-  /**
-   * @param {Main} $outer_this
-   * @return {function():IThenable<Integer>}
-   * @public
-   */
+  /** @return {function():IThenable<Integer>} */
   static $create__com_google_j2cl_transpiler_readable_jsasync_Main(
-      $outer_this) {
+      /** Main */ $outer_this) {
     $3.$clinit();
     let $instance = new $3();
     $instance
@@ -34,62 +28,41 @@ class $3 extends j_l_Object {
     return $Util.$makeLambdaFunction(
         $3.prototype.m_doSomething__, $instance, $3.$copy);
   }
-  /**
-   * @suppress {invalidCasts}
-   * @param {Main} $outer_this
-   * @public
-   */
+  /** @suppress {invalidCasts} */
   $ctor__com_google_j2cl_transpiler_readable_jsasync_Main_3__com_google_j2cl_transpiler_readable_jsasync_Main(
-      $outer_this) {
+      /** Main */ $outer_this) {
     this.f_$outer_this__com_google_j2cl_transpiler_readable_jsasync_Main_3 =
         $outer_this;
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @this {?function():IThenable<Integer>}
-   * @return {IThenable<Integer>}
-   * @public
-   */
+  /** @this {?function():IThenable<Integer>} @return {IThenable<Integer>} */
   async m_doSomething__() {
     let tmp = this;
-    return /**@type {Promise<Integer>} */ (
-        Promise.resolve(/**@type {Integer} */ ($Casts.$to(
+    return /**@type {Promise<Integer>}*/ (
+        Promise.resolve(/**@type {Integer}*/ ($Casts.$to(
             (await this
                  .f_$outer_this__com_google_j2cl_transpiler_readable_jsasync_Main_3
                  .f_x__com_google_j2cl_transpiler_readable_jsasync_Main_),
             Integer))));
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     $3.$clinit = () => {};
     $3.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance != null &&
         !!instance.$is__com_google_j2cl_transpiler_readable_jsasync_Main_3;
   }
-  /**
-   * @param {$3} from
-   * @param {?} to
-   * @public
-   */
-  static $copy(from, to) {
+  static $copy(/**$3*/ from, /** ? */ to) {
     to.f_$outer_this__com_google_j2cl_transpiler_readable_jsasync_Main_3 =
         from.f_$outer_this__com_google_j2cl_transpiler_readable_jsasync_Main_3;
     // Marks the object is an instance of this class.
     to.$is__com_google_j2cl_transpiler_readable_jsasync_Main_3 = true;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     Integer = goog.module.get('java.lang.Integer$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');

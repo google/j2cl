@@ -6,19 +6,14 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let $1LocalClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass.$1LocalClass$impl');
 
 class ChildClass extends ParentOuter {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {number} */
+    /**@type {number}*/
     this.f_fieldInOuter__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass =
         0;
   }
-  /**
-   * @return {!ChildClass}
-   * @public
-   */
+  /** @return {!ChildClass} */
   static $create__() {
     ChildClass.$clinit();
     let $instance = new ChildClass();
@@ -26,44 +21,30 @@ class ChildClass extends ParentOuter {
         .$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass__() {
     this.$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ParentOuter__();
   }
-  /**
-   * @public
-   */
+
   m_funInOuter__() {}
-  /**
-   * @public
-   */
+
   m_testLocalClass__() {
     $1LocalClass
         .$create__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass(
             this)
         .m_test__();
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     ChildClass.$clinit = () => {};
     ChildClass.$loadModules();
     ParentOuter.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof ChildClass;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     $1LocalClass = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass.$1LocalClass$impl');

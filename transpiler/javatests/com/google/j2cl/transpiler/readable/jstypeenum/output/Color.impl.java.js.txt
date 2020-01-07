@@ -12,42 +12,28 @@ let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
  * @extends {Enum<Color>}
  */
 class Color extends Enum {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @param {?string} $name
-   * @param {number} $ordinal
-   * @return {!Color}
-   * @public
-   */
-  static $create__java_lang_String__int($name, $ordinal) {
+  /** @return {!Color} */
+  static $create__java_lang_String__int(
+      /** ?string */ $name, /** number */ $ordinal) {
     let $instance = new Color();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_jstypeenum_Color__java_lang_String__int(
             $name, $ordinal);
     return $instance;
   }
-  /**
-   * @param {?string} $name
-   * @param {number} $ordinal
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_jstypeenum_Color__java_lang_String__int(
-      $name, $ordinal) {
+      /** ?string */ $name, /** number */ $ordinal) {
     this.f_name__java_lang_Enum_ = $name;
     this.f_ordinal__java_lang_Enum_ = $ordinal;
     this.$ctor__java_lang_Enum__java_lang_String__int($name, $ordinal);
   }
-  /**
-   * @param {string} name
-   * @return {!Color}
-   * @public
-   */
-  static valueOf(name) {
+  /** @return {!Color} */
+  static valueOf(/** string */ name) {
     Color.$clinit();
     if ($Equality.$same(
             Color
@@ -62,13 +48,10 @@ class Color extends Enum {
         Color
             .f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_);
   }
-  /**
-   * @return {!Array<!Color>}
-   * @public
-   */
+  /** @return {!Array<!Color>} */
   static values() {
     Color.$clinit();
-    return /**@type {!Array<Color>} */ ($Arrays.$init(
+    return /**@type {!Array<Color>}*/ ($Arrays.$init(
         [
           Color.$f_RED__com_google_j2cl_transpiler_readable_jstypeenum_Color,
           Color.$f_GREEN__com_google_j2cl_transpiler_readable_jstypeenum_Color,
@@ -76,46 +59,30 @@ class Color extends Enum {
         ],
         Color));
   }
-  /**
-   * Bridge method.
-   * @override
-   * @param {*} arg0
-   * @return {number}
-   * @public
-   */
-  m_compareTo__java_lang_Object(arg0) {
-    return super.compareTo(/**@type {Color} */ ($Casts.$to(arg0, Color)));
+  /** @override @return {number} */
+  // Bridge method.
+  m_compareTo__java_lang_Object(/** * */ arg0) {
+    return super.compareTo(/**@type {Color}*/ ($Casts.$to(arg0, Color)));
   }
-  /**
-   * @return {!Color}
-   * @public
-   */
+  /** @return {!Color} */
   static get RED() {
     return (
         Color.$clinit(),
         Color.$f_RED__com_google_j2cl_transpiler_readable_jstypeenum_Color);
   }
-  /**
-   * @return {!Color}
-   * @public
-   */
+  /** @return {!Color} */
   static get GREEN() {
     return (
         Color.$clinit(),
         Color.$f_GREEN__com_google_j2cl_transpiler_readable_jstypeenum_Color);
   }
-  /**
-   * @return {!Color}
-   * @public
-   */
+  /** @return {!Color} */
   static get BLUE() {
     return (
         Color.$clinit(),
         Color.$f_BLUE__com_google_j2cl_transpiler_readable_jstypeenum_Color);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     Color.$clinit = () => {};
     Color.$loadModules();
@@ -139,17 +106,11 @@ class Color extends Enum {
         .f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_ =
         null;
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Color;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
@@ -160,20 +121,20 @@ class Color extends Enum {
 $Util.$setClassMetadataForEnum(
     Color, 'com.google.j2cl.transpiler.readable.jstypeenum.Color');
 
-/** @private {!Color} */
+/**@private {!Color}*/
 Color.$f_RED__com_google_j2cl_transpiler_readable_jstypeenum_Color;
-/** @private {!Color} */
+/**@private {!Color}*/
 Color.$f_GREEN__com_google_j2cl_transpiler_readable_jstypeenum_Color;
-/** @private {!Color} */
+/**@private {!Color}*/
 Color.$f_BLUE__com_google_j2cl_transpiler_readable_jstypeenum_Color;
-/** @public {Map<?string, !Color>} */
+/**@type {Map<?string, !Color>}*/
 Color.f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_;
-/** @public {number} @const */
+/**@const {number}*/
 Color.$ordinal$f_RED__com_google_j2cl_transpiler_readable_jstypeenum_Color = 0;
-/** @public {number} @const */
+/**@const {number}*/
 Color.$ordinal$f_GREEN__com_google_j2cl_transpiler_readable_jstypeenum_Color =
     1;
-/** @public {number} @const */
+/**@const {number}*/
 Color.$ordinal$f_BLUE__com_google_j2cl_transpiler_readable_jstypeenum_Color = 2;
 
 exports = Color;

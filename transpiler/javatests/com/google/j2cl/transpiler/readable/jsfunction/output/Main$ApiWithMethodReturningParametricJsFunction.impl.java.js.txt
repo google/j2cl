@@ -8,55 +8,31 @@ let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.js
  * @interface
  */
 class ApiWithMethodReturningParametricJsFunction {
-  /**
-   * @abstract
-   * @template T
-   * @return {?function(T):void}
-   * @public
-   */
+  /** @abstract @template T @return {?function(T):void} */
   m_anApi__() {}
-  /**
-   * @template T
-   * @param {?function():?function(T):void} fn
-   * @return {ApiWithMethodReturningParametricJsFunction}
-   * @public
-   */
-  static $adapt(fn) {
+  /** @template T @return {ApiWithMethodReturningParametricJsFunction} */
+  static $adapt(/** ?function():?function(T):void */ fn) {
     ApiWithMethodReturningParametricJsFunction.$clinit();
-    return /**@type {!$LambdaAdaptor<T>} */ (new $LambdaAdaptor(fn));
+    return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     ApiWithMethodReturningParametricJsFunction.$clinit = () => {};
     ApiWithMethodReturningParametricJsFunction.$loadModules();
   }
-  /**
-   * @param {Function} classConstructor
-   * @public
-   */
-  static $markImplementor(classConstructor) {
-    /**
-     * @public {boolean}
-     */
-    classConstructor.prototype
+
+  static $markImplementor(/** Function*/ ctor) {
+    ctor.prototype
         .$implements__com_google_j2cl_transpiler_readable_jsfunction_Main_ApiWithMethodReturningParametricJsFunction =
         true;
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance != null &&
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_jsfunction_Main_ApiWithMethodReturningParametricJsFunction;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsfunction.Main.ApiWithMethodReturningParametricJsFunction.$LambdaAdaptor$impl');

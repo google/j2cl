@@ -6,38 +6,23 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @interface
  */
 class RegularInterface {
-  /**
-   * @public
-   */
   static $clinit() {
     RegularInterface.$clinit = () => {};
     RegularInterface.$loadModules();
   }
-  /**
-   * @param {Function} classConstructor
-   * @public
-   */
-  static $markImplementor(classConstructor) {
-    /**
-     * @public {boolean}
-     */
-    classConstructor.prototype
+
+  static $markImplementor(/** Function*/ ctor) {
+    ctor.prototype
         .$implements__com_google_j2cl_transpiler_readable_markimplementornativetypes_RegularInterface =
         true;
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance != null &&
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_markimplementornativetypes_RegularInterface;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadataForInterface(

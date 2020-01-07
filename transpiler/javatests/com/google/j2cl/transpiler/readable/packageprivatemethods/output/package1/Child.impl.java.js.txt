@@ -4,16 +4,11 @@ const Parent = goog.require('com.google.j2cl.transpiler.readable.packageprivatem
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class Child extends Parent {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!Child}
-   * @public
-   */
+  /** @return {!Child} */
   static $create__() {
     Child.$clinit();
     let $instance = new Child();
@@ -21,82 +16,45 @@ class Child extends Parent {
         .$ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_Child__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_Child__() {
     this.$ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_Parent__();
   }
-  /**
-   * @param {number} a
-   * @return {number}
-   * @public
-   */
-  m_foo__int(a) {
+  /** @return {number} */
+  m_foo__int(/** number */ a) {
     return a + 1;
   }
-  /**
-   * @param {number} a
-   * @param {number} b
-   * @return {number}
-   * @public
-   */
-  m_fun__int__int(a, b) {
+  /** @return {number} */
+  m_fun__int__int(/** number */ a, /** number */ b) {
     return a + b + 1;
   }
-  /**
-   * @override
-   * @param {number} a
-   * @param {number} b
-   * @param {number} c
-   * @return {number}
-   * @public
-   */
-  m_bar__int__int__int(a, b, c) {
+  /** @override @return {number} */
+  m_bar__int__int__int(/** number */ a, /** number */ b, /** number */ c) {
     return a + b + c + 2;
   }
-  /**
-   * Forwarding method for package private method.
-   * @override
-   * @param {number} arg0
-   * @return {number}
-   * @public
-   */
+  /** @override @return {number} */
+  // Forwarding method for package private method.
   m_foo__int_$pp_com_google_j2cl_transpiler_readable_packageprivatemethods_package1(
-      arg0) {
+      /** number */ arg0) {
     return this.m_foo__int(arg0);
   }
-  /**
-   * Forwarding method for package private method.
-   * @override
-   * @param {number} arg0
-   * @param {number} arg1
-   * @return {number}
-   * @public
-   */
+  /** @override @return {number} */
+  // Forwarding method for package private method.
   m_fun__int__int_$pp_com_google_j2cl_transpiler_readable_packageprivatemethods_package1(
-      arg0, arg1) {
+      /** number */ arg0, /** number */ arg1) {
     return this.m_fun__int__int(arg0, arg1);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     Child.$clinit = () => {};
     Child.$loadModules();
     Parent.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Child;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

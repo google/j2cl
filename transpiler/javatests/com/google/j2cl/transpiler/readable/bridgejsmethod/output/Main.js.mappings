@@ -10,7 +10,7 @@
 [Main] => [this.$ctor__java_lang_Object__();] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.<init>"
 [test] => [m_test__]
 [test] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.test"
-[A a = new A<Integer>();] => [let a = /**@type {!A<Integer>} */ (A.$create__());] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.test"
+[A a = new A<Integer>();] => [let a = /**@type {!A<Integer>}*/ (A.$create__());] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.test"
 [a] => [a] "a"
 [a.fun(1);] => [a.fun(Integer.m_valueOf__int(1));] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.test"
 [a.bar(1);] => [a.m_bar__java_lang_Object(Integer.m_valueOf__int(1));] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.test"
@@ -30,10 +30,10 @@
 [e] => [e] "e"
 [e.fun("abc");] => [e.fun("abc");] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.test"
 [e.bar("abc");] => [e.bar("abc");] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.test"
-[H<Integer> h = new H<>();] => [let h = /**@type {!H<Integer>} */ (H.$create__());] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.test"
+[H<Integer> h = new H<>();] => [let h = /**@type {!H<Integer>}*/ (H.$create__());] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.test"
 [h] => [h] "h"
 [h.enclose(1);] => [h.enclose(Integer.m_valueOf__int(1));] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.test"
-[L<Integer> l = new L<>();] => [let l = /**@type {!L<Integer>} */ (L.$create__());] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.test"
+[L<Integer> l = new L<>();] => [let l = /**@type {!L<Integer>}*/ (L.$create__());] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.test"
 [l] => [l] "l"
 [l.fun("foo", 1);] => [l.fun("foo", Integer.m_valueOf__int(1));] "com.google.j2cl.transpiler.readable.bridgejsmethod.Main.test"
 [Main] => [$clinit]

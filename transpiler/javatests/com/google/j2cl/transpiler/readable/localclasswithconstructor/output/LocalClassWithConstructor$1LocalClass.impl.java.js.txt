@@ -6,34 +6,25 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let LocalClassWithConstructor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor$impl');
 
 class $1LocalClass extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {LocalClassWithConstructor} */
+    /**@type {LocalClassWithConstructor}*/
     this.f_$outer_this__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor_1LocalClass;
-    /** @public {number} */
+    /**@type {number}*/
     this.f_field__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor_1LocalClass =
         0;
-    /** @public {number} */
+    /**@type {number}*/
     this.$c_localVar = 0;
-    /** @public {number} */
+    /**@type {number}*/
     this.$c_p = 0;
   }
-  /**
-   * Factory method corresponding to constructor
-   * 'LocalClass(LocalClassWithConstructor, int, int, int, int)'.
-   * @param {LocalClassWithConstructor} $outer_this
-   * @param {number} $c_localVar
-   * @param {number} $c_p
-   * @param {number} a
-   * @param {number} b
-   * @return {!$1LocalClass}
-   * @public
-   */
+  /** @return {!$1LocalClass} */
+  // Factory method corresponding to constructor
+  // 'LocalClass(LocalClassWithConstructor, int, int, int, int)'.
   static $create__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor__int__int__int__int(
-      $outer_this, $c_localVar, $c_p, a, b) {
+      /** LocalClassWithConstructor */ $outer_this, /** number */ $c_localVar,
+      /** number */ $c_p, /** number */ a, /** number */ b) {
     $1LocalClass.$clinit();
     let $instance = new $1LocalClass();
     $instance
@@ -41,18 +32,12 @@ class $1LocalClass extends j_l_Object {
             $outer_this, $c_localVar, $c_p, a, b);
     return $instance;
   }
-  /**
-   * Initialization from constructor 'LocalClass(LocalClassWithConstructor, int,
-   * int, int, int)'.
-   * @param {LocalClassWithConstructor} $outer_this
-   * @param {number} $c_localVar
-   * @param {number} $c_p
-   * @param {number} a
-   * @param {number} b
-   * @public
-   */
+
+  // Initialization from constructor 'LocalClass(LocalClassWithConstructor, int,
+  // int, int, int)'.
   $ctor__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor_1LocalClass__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor__int__int__int__int(
-      $outer_this, $c_localVar, $c_p, a, b) {
+      /** LocalClassWithConstructor */ $outer_this, /** number */ $c_localVar,
+      /** number */ $c_p, /** number */ a, /** number */ b) {
     this.f_$outer_this__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor_1LocalClass =
         $outer_this;
     this.$c_localVar = $c_localVar;
@@ -61,18 +46,12 @@ class $1LocalClass extends j_l_Object {
     this.f_field__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor_1LocalClass =
         $c_localVar + a + b;
   }
-  /**
-   * Factory method corresponding to constructor
-   * 'LocalClass(LocalClassWithConstructor, int, int, int)'.
-   * @param {LocalClassWithConstructor} $outer_this
-   * @param {number} $c_localVar
-   * @param {number} $c_p
-   * @param {number} a
-   * @return {!$1LocalClass}
-   * @public
-   */
+  /** @return {!$1LocalClass} */
+  // Factory method corresponding to constructor
+  // 'LocalClass(LocalClassWithConstructor, int, int, int)'.
   static $create__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor__int__int__int(
-      $outer_this, $c_localVar, $c_p, a) {
+      /** LocalClassWithConstructor */ $outer_this, /** number */ $c_localVar,
+      /** number */ $c_p, /** number */ a) {
     $1LocalClass.$clinit();
     let $instance = new $1LocalClass();
     $instance
@@ -80,41 +59,28 @@ class $1LocalClass extends j_l_Object {
             $outer_this, $c_localVar, $c_p, a);
     return $instance;
   }
-  /**
-   * Initialization from constructor 'LocalClass(LocalClassWithConstructor, int,
-   * int, int)'.
-   * @param {LocalClassWithConstructor} $outer_this
-   * @param {number} $c_localVar
-   * @param {number} $c_p
-   * @param {number} a
-   * @public
-   */
+
+  // Initialization from constructor 'LocalClass(LocalClassWithConstructor, int,
+  // int, int)'.
   $ctor__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor_1LocalClass__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor__int__int__int(
-      $outer_this, $c_localVar, $c_p, a) {
+      /** LocalClassWithConstructor */ $outer_this, /** number */ $c_localVar,
+      /** number */ $c_p, /** number */ a) {
     this.$ctor__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor_1LocalClass__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor__int__int__int__int(
         $outer_this, $c_localVar, $c_p, a, $c_p);
     this.f_field__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor_1LocalClass =
         $c_localVar;
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     $1LocalClass.$clinit = () => {};
     $1LocalClass.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof $1LocalClass;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

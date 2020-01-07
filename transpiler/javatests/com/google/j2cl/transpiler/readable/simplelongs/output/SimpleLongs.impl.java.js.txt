@@ -7,22 +7,17 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let $LongUtils = goog.forwardDeclare('vmbootstrap.LongUtils$impl');
 
 class SimpleLongs extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {!$Long} */
+    /**@type {!$Long}*/
     this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs =
         $Long.fromInt(0);
-    /** @public {number} */
+    /**@type {number}*/
     this.f_sideEffect__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs_ =
         0;
   }
-  /**
-   * @return {!SimpleLongs}
-   * @public
-   */
+  /** @return {!SimpleLongs} */
   static $create__() {
     SimpleLongs.$clinit();
     let $instance = new SimpleLongs();
@@ -30,31 +25,21 @@ class SimpleLongs extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs__() {
     this.$ctor__java_lang_Object__();
     this.$init___$p_com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs();
   }
-  /**
-   * @return {!$Long}
-   * @public
-   */
+  /** @return {!$Long} */
   m_getBar__() {
     return $Long.fromInt(0);
   }
-  /**
-   * @return {SimpleLongs}
-   * @public
-   */
+  /** @return {SimpleLongs} */
   m_getWithSideEffect__() {
     this.f_sideEffect__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs_++;
     return this;
   }
-  /**
-   * @public
-   */
+
   m_main__() {
     let /** SimpleLongs */ $qualifier, /** !$Long */ $value,
         /** !$Long */ $value_1, /** SimpleLongs */ $qualifier_1,
@@ -107,32 +92,22 @@ class SimpleLongs extends j_l_Object {
         this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs;
     g = this.m_getBar__();
   }
-  /**
-   * @private
-   */
+  /** @private */
   $init___$p_com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs() {
     this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs =
         $Long.fromInt(0);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     SimpleLongs.$clinit = () => {};
     SimpleLongs.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof SimpleLongs;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');
   }

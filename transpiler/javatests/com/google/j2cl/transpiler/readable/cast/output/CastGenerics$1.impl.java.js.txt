@@ -8,17 +8,11 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @extends {Foo<T>}
  */
 class $1 extends Foo {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @template T
-   * @return {!$1<T>}
-   * @public
-   */
+  /** @template T @return {!$1<T>} */
   static $create__() {
     $1.$clinit();
     let $instance = new $1();
@@ -26,31 +20,21 @@ class $1 extends Foo {
         .$ctor__com_google_j2cl_transpiler_readable_cast_CastGenerics_1__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_cast_CastGenerics_1__() {
     this.$ctor__com_google_j2cl_transpiler_readable_cast_CastGenerics_Foo__();
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     $1.$clinit = () => {};
     $1.$loadModules();
     Foo.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof $1;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

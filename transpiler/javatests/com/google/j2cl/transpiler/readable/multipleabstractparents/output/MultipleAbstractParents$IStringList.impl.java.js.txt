@@ -10,55 +10,32 @@ let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.mu
  * @extends {List<?string>}
  */
 class IStringList {
-  /**
-   * @abstract
-   * @param {?string} string_1
-   * @return {?string}
-   * @public
-   */
-  m_getFoo__java_lang_String(string_1) {}
-  /**
-   * @param {?function(?string):?string} fn
-   * @return {IStringList}
-   * @public
-   */
-  static $adapt(fn) {
+  /** @abstract @return {?string} */
+  m_getFoo__java_lang_String(/** ?string */ string_1) {}
+  /** @return {IStringList} */
+  static $adapt(/** ?function(?string):?string */ fn) {
     IStringList.$clinit();
     return new $LambdaAdaptor(fn);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     IStringList.$clinit = () => {};
     IStringList.$loadModules();
   }
-  /**
-   * @param {Function} classConstructor
-   * @public
-   */
-  static $markImplementor(classConstructor) {
-    List.$markImplementor(classConstructor);
-    /**
-     * @public {boolean}
-     */
-    classConstructor.prototype
+
+  static $markImplementor(/** Function*/ ctor) {
+    List.$markImplementor(ctor);
+    ctor.prototype
         .$implements__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_IStringList =
         true;
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance != null &&
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_IStringList;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.IStringList.$LambdaAdaptor$impl');

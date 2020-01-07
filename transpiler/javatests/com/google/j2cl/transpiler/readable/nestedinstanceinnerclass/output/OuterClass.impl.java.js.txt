@@ -7,16 +7,11 @@ let InnerClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nested
 let InnerInnerClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass$impl');
 
 class OuterClass extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!OuterClass}
-   * @public
-   */
+  /** @return {!OuterClass} */
   static $create__() {
     OuterClass.$clinit();
     let $instance = new OuterClass();
@@ -24,15 +19,11 @@ class OuterClass extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @public
-   */
+
   m_test__() {
     InnerInnerClass
         .$create__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass_InnerClass(
@@ -40,25 +31,17 @@ class OuterClass extends j_l_Object {
                 .$create__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass(
                     OuterClass.$create__()));
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     OuterClass.$clinit = () => {};
     OuterClass.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof OuterClass;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     InnerClass = goog.module.get(
         'com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.InnerClass$impl');

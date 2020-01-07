@@ -9,17 +9,11 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {Map<K, V>}
  */
 class AbstractMap extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @template K, V
-   * @return {!AbstractMap<K, V>}
-   * @public
-   */
+  /** @template K, V @return {!AbstractMap<K, V>} */
   static $create__() {
     AbstractMap.$clinit();
     let $instance = new AbstractMap();
@@ -27,41 +21,25 @@ class AbstractMap extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_bridgemethodcasts_AbstractMap__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_bridgemethodcasts_AbstractMap__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @override
-   * @param {K} key
-   * @param {V} value
-   * @return {V}
-   * @public
-   */
-  m_put__java_lang_Object__java_lang_Object(key, value) {
+  /** @override @return {V} */
+  m_put__java_lang_Object__java_lang_Object(/** K */ key, /** V */ value) {
     return value;
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     AbstractMap.$clinit = () => {};
     AbstractMap.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof AbstractMap;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

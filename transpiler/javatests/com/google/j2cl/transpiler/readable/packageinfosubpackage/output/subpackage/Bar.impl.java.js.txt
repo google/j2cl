@@ -4,46 +4,33 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class Bar extends j_l_Object {
-  /**
-   * @public
-   */
   constructor() {
     Bar.$clinit();
     super();
     this.$ctor__com_google_j2cl_transpiler_readable_packageinfosubpackage_subpackage_Bar__();
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_packageinfosubpackage_subpackage_Bar__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     Bar.$clinit = () => {};
     Bar.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Bar;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(
     Bar,
     'com.google.j2cl.transpiler.readable.packageinfosubpackage.subpackage.Bar');
 
-/** @public {number} @const */
+/**@const {number}*/
 Bar.WOO = 1001;
 
 exports = Bar;

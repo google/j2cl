@@ -11,17 +11,11 @@ let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
  * @template T
  */
 class Bar extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @template T
-   * @return {!Bar<T>}
-   * @public
-   */
+  /** @template T @return {!Bar<T>} */
   static $create__() {
     Bar.$clinit();
     let $instance = new Bar();
@@ -29,47 +23,31 @@ class Bar extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_boundedtypesupercall_Main_Bar__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_boundedtypesupercall_Main_Bar__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @return {T}
-   * @public
-   */
+  /** @return {T} */
   m_getSomething__() {
     return null;
   }
-  /**
-   * @return {Foo<T>}
-   * @public
-   */
+  /** @return {Foo<T>} */
   m_doSomething__() {
-    return /**@type {!$1<T>} */ (
+    return /**@type {!$1<T>}*/ (
         $1.$create__com_google_j2cl_transpiler_readable_boundedtypesupercall_Main_Bar__java_lang_Comparable(
             this, this.m_getSomething__()));
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     Bar.$clinit = () => {};
     Bar.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Bar;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     $1 = goog.module.get(
         'com.google.j2cl.transpiler.readable.boundedtypesupercall.Main.Bar.$1$impl');

@@ -15,119 +15,78 @@ let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
  * @extends {Enum<Enum2>}
  */
 class Enum2 extends Enum {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {number} */
+    /**@type {number}*/
     this.f_foo__com_google_j2cl_transpiler_readable_enums_Enum2 = 0;
   }
-  /**
-   * Factory method corresponding to constructor 'Enum2(String, int, int)'.
-   * @param {?string} $name
-   * @param {number} $ordinal
-   * @param {number} foo
-   * @return {!Enum2}
-   * @public
-   */
-  static $create__java_lang_String__int__int($name, $ordinal, foo) {
+  /** @return {!Enum2} */
+  // Factory method corresponding to constructor 'Enum2(String, int, int)'.
+  static $create__java_lang_String__int__int(
+      /** ?string */ $name, /** number */ $ordinal, /** number */ foo) {
     let $instance = new Enum2();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_enums_Enum2__java_lang_String__int__int(
             $name, $ordinal, foo);
     return $instance;
   }
-  /**
-   * Initialization from constructor 'Enum2(String, int, int)'.
-   * @param {?string} $name
-   * @param {number} $ordinal
-   * @param {number} foo
-   * @public
-   */
+
+  // Initialization from constructor 'Enum2(String, int, int)'.
   $ctor__com_google_j2cl_transpiler_readable_enums_Enum2__java_lang_String__int__int(
-      $name, $ordinal, foo) {
+      /** ?string */ $name, /** number */ $ordinal, /** number */ foo) {
     this.f_name__java_lang_Enum_ = $name;
     this.f_ordinal__java_lang_Enum_ = $ordinal;
     this.$ctor__java_lang_Enum__java_lang_String__int($name, $ordinal);
     this.$init___$p_com_google_j2cl_transpiler_readable_enums_Enum2();
     this.f_foo__com_google_j2cl_transpiler_readable_enums_Enum2 = foo;
   }
-  /**
-   * Factory method corresponding to constructor 'Enum2(String, int, Enum)'.
-   * @param {?string} $name
-   * @param {number} $ordinal
-   * @param {Enum} foo
-   * @return {!Enum2}
-   * @public
-   */
-  static $create__java_lang_String__int__java_lang_Enum($name, $ordinal, foo) {
+  /** @return {!Enum2} */
+  // Factory method corresponding to constructor 'Enum2(String, int, Enum)'.
+  static $create__java_lang_String__int__java_lang_Enum(
+      /** ?string */ $name, /** number */ $ordinal, /** Enum */ foo) {
     let $instance = new Enum2();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_enums_Enum2__java_lang_String__int__java_lang_Enum(
             $name, $ordinal, foo);
     return $instance;
   }
-  /**
-   * Initialization from constructor 'Enum2(String, int, Enum)'.
-   * @param {?string} $name
-   * @param {number} $ordinal
-   * @param {Enum} foo
-   * @public
-   */
+
+  // Initialization from constructor 'Enum2(String, int, Enum)'.
   $ctor__com_google_j2cl_transpiler_readable_enums_Enum2__java_lang_String__int__java_lang_Enum(
-      $name, $ordinal, foo) {
+      /** ?string */ $name, /** number */ $ordinal, /** Enum */ foo) {
     this.f_name__java_lang_Enum_ = $name;
     this.f_ordinal__java_lang_Enum_ = $ordinal;
     this.$ctor__com_google_j2cl_transpiler_readable_enums_Enum2__java_lang_String__int__int(
         $name, $ordinal, foo.ordinal());
   }
-  /**
-   * Factory method corresponding to constructor 'Enum2(String, int,
-   * Object...)'.
-   * @param {?string} $name
-   * @param {number} $ordinal
-   * @param {Array<*>} somePars
-   * @return {!Enum2}
-   * @public
-   */
+  /** @return {!Enum2} */
+  // Factory method corresponding to constructor 'Enum2(String, int,
+  // Object...)'.
   static $create__java_lang_String__int__arrayOf_java_lang_Object(
-      $name, $ordinal, somePars) {
+      /** ?string */ $name, /** number */ $ordinal, /** Array<*> */ somePars) {
     let $instance = new Enum2();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_enums_Enum2__java_lang_String__int__arrayOf_java_lang_Object(
             $name, $ordinal, somePars);
     return $instance;
   }
-  /**
-   * Initialization from constructor 'Enum2(String, int, Object...)'.
-   * @param {?string} $name
-   * @param {number} $ordinal
-   * @param {Array<*>} somePars
-   * @public
-   */
+
+  // Initialization from constructor 'Enum2(String, int, Object...)'.
   $ctor__com_google_j2cl_transpiler_readable_enums_Enum2__java_lang_String__int__arrayOf_java_lang_Object(
-      $name, $ordinal, somePars) {
+      /** ?string */ $name, /** number */ $ordinal, /** Array<*> */ somePars) {
     this.f_name__java_lang_Enum_ = $name;
     this.f_ordinal__java_lang_Enum_ = $ordinal;
     this.$ctor__com_google_j2cl_transpiler_readable_enums_Enum2__java_lang_String__int__int(
         $name, $ordinal, somePars.length);
   }
-  /**
-   * @param {*} o
-   * @return {Enum2}
-   * @public
-   */
-  static m_f__java_lang_Object(o) {
+  /** @return {Enum2} */
+  static m_f__java_lang_Object(/** * */ o) {
     Enum2.$clinit();
     return null;
   }
-  /**
-   * @param {string} name
-   * @return {!Enum2}
-   * @public
-   */
-  static m_valueOf__java_lang_String(name) {
+  /** @return {!Enum2} */
+  static m_valueOf__java_lang_String(/** string */ name) {
     Enum2.$clinit();
     if ($Equality.$same(
             Enum2
@@ -142,13 +101,10 @@ class Enum2 extends Enum {
         Enum2
             .f_namesToValuesMap__com_google_j2cl_transpiler_readable_enums_Enum2_);
   }
-  /**
-   * @return {!Array<!Enum2>}
-   * @public
-   */
+  /** @return {!Array<!Enum2>} */
   static m_values__() {
     Enum2.$clinit();
-    return /**@type {!Array<Enum2>} */ ($Arrays.$init(
+    return /**@type {!Array<Enum2>}*/ ($Arrays.$init(
         [
           Enum2.$f_VALUE1__com_google_j2cl_transpiler_readable_enums_Enum2,
           Enum2.$f_VALUE2__com_google_j2cl_transpiler_readable_enums_Enum2,
@@ -157,79 +113,53 @@ class Enum2 extends Enum {
         ],
         Enum2));
   }
-  /**
-   * Bridge method.
-   * @override
-   * @param {*} arg0
-   * @return {number}
-   * @public
-   */
-  m_compareTo__java_lang_Object(arg0) {
-    return super.compareTo(/**@type {Enum2} */ ($Casts.$to(arg0, Enum2)));
+  /** @override @return {number} */
+  // Bridge method.
+  m_compareTo__java_lang_Object(/** * */ arg0) {
+    return super.compareTo(/**@type {Enum2}*/ ($Casts.$to(arg0, Enum2)));
   }
-  /**
-   * @private
-   */
+  /** @private */
   $init___$p_com_google_j2cl_transpiler_readable_enums_Enum2() {
     this.f_foo__com_google_j2cl_transpiler_readable_enums_Enum2 =
         Enum1.f_V1__com_google_j2cl_transpiler_readable_enums_Enum1.ordinal();
   }
-  /**
-   * @return {!Enum2}
-   * @public
-   */
+  /** @return {!Enum2} */
   static get f_VALUE1__com_google_j2cl_transpiler_readable_enums_Enum2() {
     return (
         Enum2.$clinit(),
         Enum2.$f_VALUE1__com_google_j2cl_transpiler_readable_enums_Enum2);
   }
-  /**
-   * @return {!Enum2}
-   * @public
-   */
+  /** @return {!Enum2} */
   static get f_VALUE2__com_google_j2cl_transpiler_readable_enums_Enum2() {
     return (
         Enum2.$clinit(),
         Enum2.$f_VALUE2__com_google_j2cl_transpiler_readable_enums_Enum2);
   }
-  /**
-   * @return {!Enum2}
-   * @public
-   */
+  /** @return {!Enum2} */
   static get f_VALUE3__com_google_j2cl_transpiler_readable_enums_Enum2() {
     return (
         Enum2.$clinit(),
         Enum2.$f_VALUE3__com_google_j2cl_transpiler_readable_enums_Enum2);
   }
-  /**
-   * @return {!Enum2}
-   * @public
-   */
+  /** @return {!Enum2} */
   static get f_VALUE4__com_google_j2cl_transpiler_readable_enums_Enum2() {
     return (
         Enum2.$clinit(),
         Enum2.$f_VALUE4__com_google_j2cl_transpiler_readable_enums_Enum2);
   }
-  /**
-   * @return {Enum2}
-   * @public
-   */
+  /** @return {Enum2} */
   static get f_C__com_google_j2cl_transpiler_readable_enums_Enum2() {
     return (
         Enum2.$clinit(),
         Enum2.$f_C__com_google_j2cl_transpiler_readable_enums_Enum2);
   }
-  /**
-   * @param {Enum2} value
-   * @public
-   */
-  static set f_C__com_google_j2cl_transpiler_readable_enums_Enum2(value) {
+
+  static set f_C__com_google_j2cl_transpiler_readable_enums_Enum2(
+      /** Enum2 */ value) {
     (Enum2.$clinit(),
      Enum2.$f_C__com_google_j2cl_transpiler_readable_enums_Enum2 = value);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     Enum2.$clinit = () => {};
     Enum2.$loadModules();
@@ -263,17 +193,11 @@ class Enum2 extends Enum {
     Enum2.f_namesToValuesMap__com_google_j2cl_transpiler_readable_enums_Enum2_ =
         null;
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Enum2;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     Enum1 =
         goog.module.get('com.google.j2cl.transpiler.readable.enums.Enum1$impl');
@@ -289,25 +213,25 @@ class Enum2 extends Enum {
 $Util.$setClassMetadataForEnum(
     Enum2, 'com.google.j2cl.transpiler.readable.enums.Enum2');
 
-/** @private {!Enum2} */
+/**@private {!Enum2}*/
 Enum2.$f_VALUE1__com_google_j2cl_transpiler_readable_enums_Enum2;
-/** @private {!Enum2} */
+/**@private {!Enum2}*/
 Enum2.$f_VALUE2__com_google_j2cl_transpiler_readable_enums_Enum2;
-/** @private {!Enum2} */
+/**@private {!Enum2}*/
 Enum2.$f_VALUE3__com_google_j2cl_transpiler_readable_enums_Enum2;
-/** @private {!Enum2} */
+/**@private {!Enum2}*/
 Enum2.$f_VALUE4__com_google_j2cl_transpiler_readable_enums_Enum2;
-/** @private {Enum2} */
+/**@private {Enum2}*/
 Enum2.$f_C__com_google_j2cl_transpiler_readable_enums_Enum2;
-/** @public {Map<?string, !Enum2>} */
+/**@type {Map<?string, !Enum2>}*/
 Enum2.f_namesToValuesMap__com_google_j2cl_transpiler_readable_enums_Enum2_;
-/** @public {number} @const */
+/**@const {number}*/
 Enum2.$ordinal$f_VALUE1__com_google_j2cl_transpiler_readable_enums_Enum2 = 0;
-/** @public {number} @const */
+/**@const {number}*/
 Enum2.$ordinal$f_VALUE2__com_google_j2cl_transpiler_readable_enums_Enum2 = 1;
-/** @public {number} @const */
+/**@const {number}*/
 Enum2.$ordinal$f_VALUE3__com_google_j2cl_transpiler_readable_enums_Enum2 = 2;
-/** @public {number} @const */
+/**@const {number}*/
 Enum2.$ordinal$f_VALUE4__com_google_j2cl_transpiler_readable_enums_Enum2 = 3;
 
 exports = Enum2;

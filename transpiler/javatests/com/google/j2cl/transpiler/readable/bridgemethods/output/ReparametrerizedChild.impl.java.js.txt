@@ -10,17 +10,11 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
  * @extends {ParameterizedParent<E>}
  */
 class ReparametrerizedChild extends ParameterizedParent {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @template E
-   * @return {!ReparametrerizedChild<E>}
-   * @public
-   */
+  /** @template E @return {!ReparametrerizedChild<E>} */
   static $create__() {
     ReparametrerizedChild.$clinit();
     let $instance = new ReparametrerizedChild();
@@ -28,55 +22,34 @@ class ReparametrerizedChild extends ParameterizedParent {
         .$ctor__com_google_j2cl_transpiler_readable_bridgemethods_ReparametrerizedChild__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_bridgemethods_ReparametrerizedChild__() {
     this.$ctor__com_google_j2cl_transpiler_readable_bridgemethods_ParameterizedParent__();
   }
-  /**
-   * @template S
-   * @param {S} t
-   * @return {S}
-   * @public
-   */
+  /** @template S @return {S} */
   m_m__com_google_j2cl_transpiler_readable_bridgemethods_ReparametrerizedChild_$pp_com_google_j2cl_transpiler_readable_bridgemethods(
-      t) {
+      /** S */ t) {
     return null;
   }
-  /**
-   * Bridge method.
-   * @override
-   * @template Q
-   * @param {ParameterizedParent} arg0
-   * @return {S}
-   * @public
-   */
+  /** @override @template Q @return {S} */
+  // Bridge method.
   m_m__com_google_j2cl_transpiler_readable_bridgemethods_ParameterizedParent_$pp_com_google_j2cl_transpiler_readable_bridgemethods(
-      arg0) {
+      /** ParameterizedParent */ arg0) {
     return this
         .m_m__com_google_j2cl_transpiler_readable_bridgemethods_ReparametrerizedChild_$pp_com_google_j2cl_transpiler_readable_bridgemethods(
-            /**@type {Q} */ ($Casts.$to(arg0, ReparametrerizedChild)));
+            /**@type {Q}*/ ($Casts.$to(arg0, ReparametrerizedChild)));
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     ReparametrerizedChild.$clinit = () => {};
     ReparametrerizedChild.$loadModules();
     ParameterizedParent.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof ReparametrerizedChild;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
   }

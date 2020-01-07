@@ -11,7 +11,7 @@
 [inferGeneric] => [m_inferGeneric__java_lang_Object]
 [foo] => [foo] "foo"
 [inferGeneric] => [InferReturn.$clinit();] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.inferGeneric"
-[return new InferReturn<>();] => [return /**@type {!InferReturn<T_1>} */ (InferReturn.$create__());] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.inferGeneric"
+[return new InferReturn<>();] => [return /**@type {!InferReturn<T_1>}*/ (InferReturn.$create__());] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.inferGeneric"
 [tightenType] => [m_tightenType__com_google_j2cl_transpiler_readable_inferreturn_InferReturn]
 [foo] => [foo] "foo"
 [tightenType] => [InferReturn.$clinit();] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.tightenType"
@@ -19,13 +19,13 @@
       // Without a cast to fix it, JSCompiler will infer the type of this return statement to be
 ...      return inferGeneric(foo);
     }] => [if (!$Equality.$same(foo, null)) {
-   return /**@type {InferReturn<InferReturn<?string>>} */ (InferReturn.m_inferGeneric__java_lang_Object(foo));
+   return /**@type {InferReturn<InferReturn<?string>>}*/ (InferReturn.m_inferGeneric__java_lang_Object(foo));
   }] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.tightenType"
-[return inferGeneric(foo);] => [return /**@type {InferReturn<InferReturn<?string>>} */ (InferReturn.m_inferGeneric__java_lang_Object(foo));] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.tightenType"
+[return inferGeneric(foo);] => [return /**@type {InferReturn<InferReturn<?string>>}*/ (InferReturn.m_inferGeneric__java_lang_Object(foo));] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.tightenType"
 [return null;] => [return null;] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.tightenType"
 [main] => [m_main__]
 [main] => [InferReturn.$clinit();] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.main"
-[ArrayList<Object> list = newArrayList("foo");] => [let list = /**@type {ArrayList<*>} */ (InferReturn.m_newArrayList__java_lang_Object("foo"));] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.main"
+[ArrayList<Object> list = newArrayList("foo");] => [let list = /**@type {ArrayList<*>}*/ (InferReturn.m_newArrayList__java_lang_Object("foo"));] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.main"
 [list] => [list] "list"
 [acceptsArrayListOfObject(list);] => [InferReturn.m_acceptsArrayListOfObject__java_util_ArrayList(list);] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.main"
 [Object[] array = newArray("foo");] => [let array = InferReturn.m_newArray__java_lang_Object("foo");] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.main"
@@ -34,11 +34,11 @@
 [newArrayList] => [m_newArrayList__java_lang_Object]
 [foo] => [foo] "foo"
 [newArrayList] => [InferReturn.$clinit();] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.newArrayList"
-[return new ArrayList<>();] => [return /**@type {!ArrayList<V>} */ (ArrayList.$create__());] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.newArrayList"
+[return new ArrayList<>();] => [return /**@type {!ArrayList<V>}*/ (ArrayList.$create__());] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.newArrayList"
 [newArray] => [m_newArray__java_lang_Object]
 [foo] => [foo] "foo"
 [newArray] => [InferReturn.$clinit();] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.newArray"
-[return (V[]) new Object[0];] => [return /**@type {Array<V>} */ (new Array(0));] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.newArray"
+[return (V[]) new Object[0];] => [return /**@type {Array<V>}*/ (new Array(0));] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.newArray"
 [acceptsArrayListOfObject] => [m_acceptsArrayListOfObject__java_util_ArrayList]
 [foo] => [foo] "foo"
 [acceptsArrayListOfObject] => [InferReturn.$clinit();] "com.google.j2cl.transpiler.readable.inferreturn.InferReturn.acceptsArrayListOfObject"

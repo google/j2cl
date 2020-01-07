@@ -8,16 +8,11 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {MyInterface}
  */
 class SubJsType extends MyJsType {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!SubJsType}
-   * @public
-   */
+  /** @return {!SubJsType} */
   static $create__() {
     SubJsType.$clinit();
     let $instance = new SubJsType();
@@ -25,60 +20,35 @@ class SubJsType extends MyJsType {
         .$ctor__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_SubJsType__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_SubJsType__() {
     this.$ctor__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_MyJsType__();
   }
-  /**
-   * @override
-   * @param {number} a
-   * @return {number}
-   * @public
-   */
-  bar(a) {
+  /** @override @return {number} */
+  bar(/** number */ a) {
     return a + 2;
   }
-  /**
-   * Bridge method for exposing non-JsMethod.
-   * @override
-   * @param {number} arg0
-   * @return {number}
-   * @public
-   */
-  m_bar__int(arg0) {
+  /** @override @return {number} */
+  // Bridge method for exposing non-JsMethod.
+  m_bar__int(/** number */ arg0) {
     return this.bar(arg0);
   }
-  /**
-   * Bridge method for exposing non-JsMethod.
-   * @override
-   * @param {number} arg0
-   * @return {number}
-   * @public
-   */
-  m_foo__int(arg0) {
+  /** @override @return {number} */
+  // Bridge method for exposing non-JsMethod.
+  m_foo__int(/** number */ arg0) {
     return this.foo(arg0);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     SubJsType.$clinit = () => {};
     SubJsType.$loadModules();
     MyJsType.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof SubJsType;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

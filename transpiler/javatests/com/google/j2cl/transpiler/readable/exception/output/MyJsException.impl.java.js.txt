@@ -6,30 +6,21 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
 
 class MyJsException extends Exception {
-  /**
-   * JsConstructor 'MyJsException()'.
-   * @public
-   */
+  // JsConstructor 'MyJsException()'.
   constructor() {
     MyJsException.$clinit();
     super();
     this.$ctor__com_google_j2cl_transpiler_readable_exception_MyJsException__();
     this.m_privateInitError__java_lang_Object_$pp_java_lang(new Error(this));
   }
-  /**
-   * Initialization from constructor 'MyJsException()'.
-   * @public
-   */
+
+  // Initialization from constructor 'MyJsException()'.
   $ctor__com_google_j2cl_transpiler_readable_exception_MyJsException__() {
     this.$ctor__java_lang_Exception__();
   }
-  /**
-   * Factory method corresponding to constructor 'MyJsException(Throwable)'.
-   * @param {Throwable} cause
-   * @return {!MyJsException}
-   * @public
-   */
-  static $create__java_lang_Throwable(cause) {
+  /** @return {!MyJsException} */
+  // Factory method corresponding to constructor 'MyJsException(Throwable)'.
+  static $create__java_lang_Throwable(/** Throwable */ cause) {
     MyJsException.$clinit();
     let $instance = new MyJsException();
     $instance
@@ -39,32 +30,21 @@ class MyJsException extends Exception {
         new Error($instance));
     return $instance;
   }
-  /**
-   * Initialization from constructor 'MyJsException(Throwable)'.
-   * @param {Throwable} cause
-   * @public
-   */
+
+  // Initialization from constructor 'MyJsException(Throwable)'.
   $ctor__com_google_j2cl_transpiler_readable_exception_MyJsException__java_lang_Throwable(
-      cause) {}
-  /**
-   * @public
-   */
+      /** Throwable */ cause) {}
+
   static $clinit() {
     MyJsException.$clinit = () => {};
     MyJsException.$loadModules();
     Exception.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof MyJsException;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

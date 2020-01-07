@@ -16,16 +16,11 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
  */
 class DualUnrelatedAccidentalBridges extends
     SuperDualUnrelatedAccidentalBridges {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!DualUnrelatedAccidentalBridges}
-   * @public
-   */
+  /** @return {!DualUnrelatedAccidentalBridges} */
   static $create__() {
     DualUnrelatedAccidentalBridges.$clinit();
     let $instance = new DualUnrelatedAccidentalBridges();
@@ -33,65 +28,42 @@ class DualUnrelatedAccidentalBridges extends
         .$ctor__com_google_j2cl_transpiler_readable_bridgemethods_DualUnrelatedAccidentalBridges__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_bridgemethods_DualUnrelatedAccidentalBridges__() {
     this.$ctor__com_google_j2cl_transpiler_readable_bridgemethods_SuperDualUnrelatedAccidentalBridges__();
   }
-  /**
-   * Bridge method.
-   * @override
-   * @param {*} arg0
-   * @param {*} arg1
-   * @public
-   */
-  m_foo__java_lang_Object__java_lang_Object(arg0, arg1) {
+  /** @override */
+  // Bridge method.
+  m_foo__java_lang_Object__java_lang_Object(/** * */ arg0, /** * */ arg1) {
     super.m_foo__java_lang_String__java_lang_Double(
-        /**@type {?string} */ ($Casts.$to(arg0, j_l_String)),
-        /**@type {?number} */ ($Casts.$to(arg1, Double)));
+        /**@type {?string}*/ ($Casts.$to(arg0, j_l_String)),
+        /**@type {?number}*/ ($Casts.$to(arg1, Double)));
   }
-  /**
-   * Bridge method.
-   * @override
-   * @param {*} arg0
-   * @param {(Number|number)} arg1
-   * @public
-   */
-  m_foo__java_lang_Object__java_lang_Number(arg0, arg1) {
+  /** @override */
+  // Bridge method.
+  m_foo__java_lang_Object__java_lang_Number(
+      /** * */ arg0, /** (Number|number) */ arg1) {
     super.m_foo__java_lang_String__java_lang_Number(
-        /**@type {?string} */ ($Casts.$to(arg0, j_l_String)), arg1);
+        /**@type {?string}*/ ($Casts.$to(arg0, j_l_String)), arg1);
   }
-  /**
-   * Bridge method.
-   * @override
-   * @param {*} arg0
-   * @param {?number} arg1
-   * @public
-   */
-  m_foo__java_lang_Object__java_lang_Double(arg0, arg1) {
+  /** @override */
+  // Bridge method.
+  m_foo__java_lang_Object__java_lang_Double(
+      /** * */ arg0, /** ?number */ arg1) {
     super.m_foo__java_lang_String__java_lang_Double(
-        /**@type {?string} */ ($Casts.$to(arg0, j_l_String)), arg1);
+        /**@type {?string}*/ ($Casts.$to(arg0, j_l_String)), arg1);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     DualUnrelatedAccidentalBridges.$clinit = () => {};
     DualUnrelatedAccidentalBridges.$loadModules();
     SuperDualUnrelatedAccidentalBridges.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof DualUnrelatedAccidentalBridges;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     Double = goog.module.get('java.lang.Double$impl');
     j_l_String = goog.module.get('java.lang.String$impl');

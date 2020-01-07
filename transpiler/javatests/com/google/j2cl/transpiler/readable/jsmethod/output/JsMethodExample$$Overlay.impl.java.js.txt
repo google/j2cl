@@ -3,32 +3,20 @@ goog.module('com.google.j2cl.transpiler.readable.jsmethod.JsMethodExample.$Overl
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class $Overlay {
-  /**
-   * @param {Array<?string>} args
-   * @public
-   */
-  static m_main__arrayOf_java_lang_String(args) {
+  static m_main__arrayOf_java_lang_String(/** Array<?string> */ args) {
     $Overlay.$clinit();
     console.log('test');
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     $Overlay.$clinit = () => {};
     $Overlay.$loadModules();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof console;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata($Overlay, 'console');

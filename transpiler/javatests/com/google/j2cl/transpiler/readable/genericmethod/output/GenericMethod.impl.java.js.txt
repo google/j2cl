@@ -19,17 +19,11 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
  * @template T
  */
 class GenericMethod extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @template T
-   * @return {!GenericMethod<T>}
-   * @public
-   */
+  /** @template T @return {!GenericMethod<T>} */
   static $create__() {
     GenericMethod.$clinit();
     let $instance = new GenericMethod();
@@ -37,80 +31,43 @@ class GenericMethod extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @template T_1, S
-   * @param {T_1} f
-   * @param {S} s
-   * @public
-   */
-  m_foo__java_lang_Object__java_lang_Object(f, s) {}
-  /**
-   * @param {*} o
-   * @public
-   */
-  m_fun__java_lang_Object(o) {}
-  /**
-   * @template T_1
-   * @param {T_1} t
-   * @public
-   */
-  m_fun__java_lang_Exception(t) {}
-  /**
-   * @template T_1
-   * @param {T_1} t
-   * @public
-   */
-  m_fun__java_lang_Error(t) {
+  /** @template T_1, S */
+  m_foo__java_lang_Object__java_lang_Object(/** T_1 */ f, /** S */ s) {}
+
+  m_fun__java_lang_Object(/** * */ o) {}
+  /** @template T_1 */
+  m_fun__java_lang_Exception(/** T_1 */ t) {}
+  /** @template T_1 */
+  m_fun__java_lang_Error(/** T_1 */ t) {
     $1.$create__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod(
         this);
     $1LocalClass
         .$create__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod(
             this);
   }
-  /**
-   * @template T_1
-   * @return {GenericMethod<T_1>}
-   * @public
-   */
+  /** @template T_1 @return {GenericMethod<T_1>} */
   m_bar__() {
     return null;
   }
-  /**
-   * @template T_1
-   * @param {Array<T_1>} array
-   * @return {Array<T_1>}
-   * @public
-   */
-  m_fun__arrayOf_java_lang_Object(array) {
+  /** @template T_1 @return {Array<T_1>} */
+  m_fun__arrayOf_java_lang_Object(/** Array<T_1> */ array) {
     return array;
   }
-  /**
-   * @template T_1
-   * @return {T_1}
-   * @public
-   */
+  /** @template T_1 @return {T_1} */
   m_checked__() {
     return null;
   }
-  /**
-   * @template T_1
-   * @return {T_1}
-   * @public
-   */
+  /** @template T_1 @return {T_1} */
   m_unchecked__() {
     return null;
   }
-  /**
-   * @public
-   */
+
   m_test__() {
-    let g = /**@type {!GenericMethod<(Number|number)>} */ (
+    let g = /**@type {!GenericMethod<(Number|number)>}*/ (
         GenericMethod.$create__());
     g.m_foo__java_lang_Object__java_lang_Object(g, g);
     g.m_foo__java_lang_Object__java_lang_Object(
@@ -119,33 +76,25 @@ class GenericMethod extends j_l_Object {
     g.m_fun__java_lang_Exception(Exception.$create__());
     g.m_fun__java_lang_Error(Error.$create__());
     g.m_fun__arrayOf_java_lang_Object(
-        /**@type {!Array<?string>} */ ($Arrays.$init(['asdf'], j_l_String)));
-    let s = /**@type {?string} */ ($Casts.$to(this.m_checked__(), j_l_String));
-    s = /**@type {?string} */ (this.m_unchecked__());
+        /**@type {!Array<?string>}*/ ($Arrays.$init(['asdf'], j_l_String)));
+    let s = /**@type {?string}*/ ($Casts.$to(this.m_checked__(), j_l_String));
+    s = /**@type {?string}*/ (this.m_unchecked__());
   }
-  /**
-   * @param {Content} content
-   * @public
-   */
+
   static m_acceptsContent__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod_Content(
-      content) {
+      /** Content */ content) {
     GenericMethod.$clinit();
   }
-  /**
-   * @param {?string} string_1
-   * @public
-   */
-  static m_acceptsString__java_lang_String(string_1) {
+
+  static m_acceptsString__java_lang_String(/** ?string */ string_1) {
     GenericMethod.$clinit();
   }
-  /**
-   * @public
-   */
+
   static m_testErasureCast_wildcard__() {
     GenericMethod.$clinit();
     let list = null;
     let content =
-        /**@type {Container<Content>} */ (
+        /**@type {Container<Content>}*/ (
             $Casts.$to(list.getAtIndex(0), Container))
             .m_get___$pp_com_google_j2cl_transpiler_readable_genericmethod();
     GenericMethod.m_acceptsString__java_lang_String(
@@ -156,8 +105,8 @@ class GenericMethod extends j_l_Object {
             content);
     let nestedWildcardList = null;
     let nestedContent =
-        /**@type {Container} */
-        (/**@type {SuperContainer<Container>} */ (
+        /**@type {Container}*/
+        (/**@type {SuperContainer<Container>}*/ (
              $Casts.$to(nestedWildcardList.getAtIndex(0), SuperContainer))
              .m_get___$pp_com_google_j2cl_transpiler_readable_genericmethod())
             .m_get___$pp_com_google_j2cl_transpiler_readable_genericmethod();
@@ -169,7 +118,7 @@ class GenericMethod extends j_l_Object {
             nestedContent);
     let deepWildcardList = null;
     let deepContent =
-        /**@type {SuperContainer<Container<?>>} */ (
+        /**@type {SuperContainer<Container<?>>}*/ (
             $Casts.$to(deepWildcardList.getAtIndex(0), SuperContainer))
             .m_get___$pp_com_google_j2cl_transpiler_readable_genericmethod()
             .m_get___$pp_com_google_j2cl_transpiler_readable_genericmethod();
@@ -180,15 +129,12 @@ class GenericMethod extends j_l_Object {
         .m_acceptsContent__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod_Content(
             deepContent);
   }
-  /**
-   * @template CT, C
-   * @public
-   */
+  /** @template CT, C */
   static m_testErasureCast_typeVariable__() {
     GenericMethod.$clinit();
     let list = null;
     let content =
-        /**@type {Container<C>} */ ($Casts.$to(list.getAtIndex(0), Container))
+        /**@type {Container<C>}*/ ($Casts.$to(list.getAtIndex(0), Container))
             .m_get___$pp_com_google_j2cl_transpiler_readable_genericmethod();
     GenericMethod.m_acceptsString__java_lang_String(
         content
@@ -198,8 +144,8 @@ class GenericMethod extends j_l_Object {
             content);
     let nestedTypeVariableList = null;
     let nestedContent =
-        /**@type {Container} */
-        (/**@type {SuperContainer<CT>} */ (
+        /**@type {Container}*/
+        (/**@type {SuperContainer<CT>}*/ (
              $Casts.$to(nestedTypeVariableList.getAtIndex(0), SuperContainer))
              .m_get___$pp_com_google_j2cl_transpiler_readable_genericmethod())
             .m_get___$pp_com_google_j2cl_transpiler_readable_genericmethod();
@@ -211,7 +157,7 @@ class GenericMethod extends j_l_Object {
             nestedContent);
     let deepTypeVariableList = null;
     let deepContent =
-        /**@type {SuperContainer<Container<C>>} */ (
+        /**@type {SuperContainer<Container<C>>}*/ (
             $Casts.$to(deepTypeVariableList.getAtIndex(0), SuperContainer))
             .m_get___$pp_com_google_j2cl_transpiler_readable_genericmethod()
             .m_get___$pp_com_google_j2cl_transpiler_readable_genericmethod();
@@ -222,25 +168,17 @@ class GenericMethod extends j_l_Object {
         .m_acceptsContent__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod_Content(
             deepContent);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     GenericMethod.$clinit = () => {};
     GenericMethod.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof GenericMethod;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     $1 = goog.module.get(
         'com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.$1$impl');

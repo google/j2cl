@@ -7,16 +7,11 @@ let Dummy = goog.forwardDeclare('com.google.j2cl.transpiler.readable.aptgenerato
 let Class = goog.forwardDeclare('java.lang.Class$impl');
 
 class Foo extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!Foo}
-   * @public
-   */
+  /** @return {!Foo} */
   static $create__() {
     Foo.$clinit();
     let $instance = new Foo();
@@ -24,39 +19,25 @@ class Foo extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_aptgeneratorplugin_Foo__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_aptgeneratorplugin_Foo__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @override
-   * @return {?string}
-   * @public
-   */
+  /** @override @return {?string} */
   toString() {
     return Class.$get(Dummy).m_getSimpleName__();
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     Foo.$clinit = () => {};
     Foo.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Foo;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     Dummy = goog.module.get(
         'com.google.j2cl.transpiler.readable.aptgeneratorplugin.Dummy$impl');

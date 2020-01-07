@@ -8,82 +8,49 @@ let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 
 class Main extends j_l_Object {
-  /**
-   * @param {?string=} a
-   * @public
-   */
-  constructor(a) {
+  constructor(/** ?string= */ a) {
     Main.$clinit();
     super();
-    /** @public {?function(?string=, ...*):*} */
+    /**@type {?function(?string=, ...*):*}*/
     this.f_f__com_google_j2cl_transpiler_readable_jsoptional_Main;
     this.$ctor__com_google_j2cl_transpiler_readable_jsoptional_Main__java_lang_String(
         a);
   }
-  /**
-   * @param {number} i1
-   * @param {?number=} d
-   * @param {Integer=} i
-   * @public
-   */
-  method1(i1, d, i) {}
-  /**
-   * @param {?string} s1
-   * @param {?number=} d
-   * @param {...?boolean} i
-   * @public
-   */
-  method2(s1, d, ...i) {
+
+  method1(/** number */ i1, /** ?number= */ d, /** Integer= */ i) {}
+
+  method2(/** ?string */ s1, /** ?number= */ d, .../** ...?boolean */ i) {
     $Arrays.$stampType(i, Boolean, 1);
   }
-  /**
-   * @param {?string} a
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_jsoptional_Main__java_lang_String(
-      a) {
+      /** ?string */ a) {
     this.$ctor__java_lang_Object__();
     this.$init___$p_com_google_j2cl_transpiler_readable_jsoptional_Main();
   }
-  /**
-   * @param {?function(?string=, ...*):*} f
-   * @public
-   */
+
   m_testFunction__com_google_j2cl_transpiler_readable_jsoptional_Main_Function(
-      f) {}
-  /**
-   * @param {?function(?string=, ...*):*=} f
-   * @public
-   */
-  testOptionalFunction(f) {}
-  /**
-   * @private
-   */
+      /** ?function(?string=, ...*):* */ f) {}
+
+  testOptionalFunction(/** ?function(?string=, ...*):*= */ f) {}
+  /** @private */
   $init___$p_com_google_j2cl_transpiler_readable_jsoptional_Main() {
     this.f_f__com_google_j2cl_transpiler_readable_jsoptional_Main =
         (/** ?string= */ s, .../** ...* */ varargs) => {
           return s;
         };
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     Main.$clinit = () => {};
     Main.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Main;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     Boolean = goog.module.get('java.lang.Boolean$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');

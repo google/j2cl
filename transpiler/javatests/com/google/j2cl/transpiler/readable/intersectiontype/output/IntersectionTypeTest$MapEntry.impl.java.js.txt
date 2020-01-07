@@ -12,22 +12,15 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
  * @template U
  */
 class MapEntry extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {IntersectionTypeTest<U>} */
+    /**@type {IntersectionTypeTest<U>}*/
     this.f_$outer_this__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest_MapEntry;
   }
-  /**
-   * @template U
-   * @param {IntersectionTypeTest<U>} $outer_this
-   * @return {!MapEntry<U>}
-   * @public
-   */
+  /** @template U @return {!MapEntry<U>} */
   static $create__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest(
-      $outer_this) {
+      /** IntersectionTypeTest<U> */ $outer_this) {
     MapEntry.$clinit();
     let $instance = new MapEntry();
     $instance
@@ -35,45 +28,29 @@ class MapEntry extends j_l_Object {
             $outer_this);
     return $instance;
   }
-  /**
-   * @param {IntersectionTypeTest<U>} $outer_this
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest_MapEntry__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest(
-      $outer_this) {
+      /** IntersectionTypeTest<U> */ $outer_this) {
     this.f_$outer_this__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest_MapEntry =
         $outer_this;
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @template T
-   * @param {*} o
-   * @return {Getable<T>}
-   * @public
-   */
-  m_method__java_lang_Object(o) {
-    return /**@type {Getable<T>} */ (
+  /** @template T @return {Getable<T>} */
+  m_method__java_lang_Object(/** * */ o) {
+    return /**@type {Getable<T>}*/ (
         $Casts.$to($Casts.$to(o, Getable), Setable));
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     MapEntry.$clinit = () => {};
     MapEntry.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof MapEntry;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     Getable = goog.module.get(
         'com.google.j2cl.transpiler.readable.intersectiontype.Getable$impl');

@@ -12,32 +12,22 @@ let Number = goog.forwardDeclare('java.lang.Number$impl');
  * @implements {JsSupplier<T>}
  */
 class $LambdaAdaptor extends j_l_Object {
-  /**
-   * @param {?function():T} fn
-   * @public
-   */
-  constructor(fn) {
+  constructor(/** ?function():T */ fn) {
     $LambdaAdaptor.$clinit();
     super();
-    /** @public {?function():T} */
+    /**@type {?function():T}*/
     this.f_$$fn__com_google_j2cl_transpiler_readable_lambdas_Lambdas_JsSupplier_$LambdaAdaptor;
     this.$ctor__com_google_j2cl_transpiler_readable_lambdas_Lambdas_JsSupplier_$LambdaAdaptor__com_google_j2cl_transpiler_readable_lambdas_Lambdas_JsSupplier_$JsFunction(
         fn);
   }
-  /**
-   * @param {?function():T} fn
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_lambdas_Lambdas_JsSupplier_$LambdaAdaptor__com_google_j2cl_transpiler_readable_lambdas_Lambdas_JsSupplier_$JsFunction(
-      fn) {
+      /** ?function():T */ fn) {
     this.$ctor__java_lang_Object__();
     this.f_$$fn__com_google_j2cl_transpiler_readable_lambdas_Lambdas_JsSupplier_$LambdaAdaptor =
         fn;
   }
-  /**
-   * @return {T}
-   * @public
-   */
+  /** @return {T} */
   get() {
     let /** ?function():T */ $function;
     return (
@@ -45,35 +35,23 @@ class $LambdaAdaptor extends j_l_Object {
             this.f_$$fn__com_google_j2cl_transpiler_readable_lambdas_Lambdas_JsSupplier_$LambdaAdaptor,
         $function());
   }
-  /**
-   * Bridge method for exposing non-JsMethod.
-   * @override
-   * @return {T}
-   * @public
-   */
+  /** @override @return {T} */
+  // Bridge method for exposing non-JsMethod.
   m_get__() {
     return this.get();
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     $LambdaAdaptor.$clinit = () => {};
     $LambdaAdaptor.$loadModules();
     j_l_Object.$clinit();
     Equals.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof $LambdaAdaptor;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     Equals = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdas.Lambdas.Equals$impl');

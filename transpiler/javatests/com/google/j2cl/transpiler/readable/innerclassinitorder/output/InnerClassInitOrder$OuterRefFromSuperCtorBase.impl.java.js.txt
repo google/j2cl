@@ -6,18 +6,12 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
 class OuterRefFromSuperCtorBase extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @param {*} o
-   * @return {!OuterRefFromSuperCtorBase}
-   * @public
-   */
-  static $create__java_lang_Object(o) {
+  /** @return {!OuterRefFromSuperCtorBase} */
+  static $create__java_lang_Object(/** * */ o) {
     OuterRefFromSuperCtorBase.$clinit();
     let $instance = new OuterRefFromSuperCtorBase();
     $instance
@@ -25,34 +19,23 @@ class OuterRefFromSuperCtorBase extends j_l_Object {
             o);
     return $instance;
   }
-  /**
-   * @param {*} o
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorBase__java_lang_Object(
-      o) {
+      /** * */ o) {
     this.$ctor__java_lang_Object__();
     $Objects.m_toString__java_lang_Object(o);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     OuterRefFromSuperCtorBase.$clinit = () => {};
     OuterRefFromSuperCtorBase.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof OuterRefFromSuperCtorBase;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     $Objects = goog.module.get('vmbootstrap.Objects$impl');
   }

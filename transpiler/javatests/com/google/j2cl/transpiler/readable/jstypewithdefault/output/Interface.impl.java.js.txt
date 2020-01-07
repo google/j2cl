@@ -6,51 +6,31 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @interface
  */
 class Interface {
-  /**
-   * @abstract
-   * @public
-   */
+  /** @abstract */
   defaultMethod() {}
-  /**
-   * @param {!Interface} $thisArg
-   * @public
-   */
+
   static m_defaultMethod__$default__com_google_j2cl_transpiler_readable_jstypewithdefault_Interface(
-      $thisArg) {
+      /** !Interface */ $thisArg) {
     Interface.$clinit();
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     Interface.$clinit = () => {};
     Interface.$loadModules();
   }
-  /**
-   * @param {Function} classConstructor
-   * @public
-   */
-  static $markImplementor(classConstructor) {
-    /**
-     * @public {boolean}
-     */
-    classConstructor.prototype
+
+  static $markImplementor(/** Function*/ ctor) {
+    ctor.prototype
         .$implements__com_google_j2cl_transpiler_readable_jstypewithdefault_Interface =
         true;
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance != null &&
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_jstypewithdefault_Interface;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadataForInterface(

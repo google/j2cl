@@ -4,16 +4,11 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class JSKeyWords extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!JSKeyWords}
-   * @public
-   */
+  /** @return {!JSKeyWords} */
   static $create__() {
     JSKeyWords.$clinit();
     let $instance = new JSKeyWords();
@@ -21,40 +16,26 @@ class JSKeyWords extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_javascriptkeywords_JSKeyWords__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_javascriptkeywords_JSKeyWords__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @param {number} in_1
-   * @return {number}
-   * @public
-   */
-  m_test__int(in_1) {
+  /** @return {number} */
+  m_test__int(/** number */ in_1) {
     let let_1 = 0;
     return let_1 + in_1;
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     JSKeyWords.$clinit = () => {};
     JSKeyWords.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof JSKeyWords;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

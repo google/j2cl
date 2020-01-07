@@ -7,16 +7,11 @@ let Bar = goog.forwardDeclare('foo.Bar');
 let Baz = goog.forwardDeclare('foo.Baz');
 
 class StaticJsMembers extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!StaticJsMembers}
-   * @public
-   */
+  /** @return {!StaticJsMembers} */
   static $create__() {
     StaticJsMembers.$clinit();
     let $instance = new StaticJsMembers();
@@ -24,29 +19,19 @@ class StaticJsMembers extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_staticjsmembers_StaticJsMembers__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_staticjsmembers_StaticJsMembers__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @param {number} a
-   * @public
-   */
-  static fun(a) {
+
+  static fun(/** number */ a) {
     StaticJsMembers.$clinit();
   }
-  /**
-   * @param {number} a
-   * @public
-   */
-  static f2(a) {
+
+  static f2(/** number */ a) {
     StaticJsMembers.$clinit();
   }
-  /**
-   * @public
-   */
+
   m_test__() {
     StaticJsMembers.fun(1);
     StaticJsMembers.fun(1);
@@ -70,65 +55,45 @@ class StaticJsMembers extends j_l_Object {
     new Object();
     new window.Object();
   }
-  /**
-   * @return {number}
-   * @public
-   */
+  /** @return {number} */
   static get field1() {
     return (
         StaticJsMembers.$clinit(),
         StaticJsMembers
             .$f_field1__com_google_j2cl_transpiler_readable_staticjsmembers_StaticJsMembers);
   }
-  /**
-   * @param {number} value
-   * @public
-   */
-  static set field1(value) {
+
+  static set field1(/** number */ value) {
     (StaticJsMembers.$clinit(),
      StaticJsMembers
          .$f_field1__com_google_j2cl_transpiler_readable_staticjsmembers_StaticJsMembers =
          value);
   }
-  /**
-   * @return {number}
-   * @public
-   */
+  /** @return {number} */
   static get field2() {
     return (
         StaticJsMembers.$clinit(),
         StaticJsMembers
             .$f_field2__com_google_j2cl_transpiler_readable_staticjsmembers_StaticJsMembers);
   }
-  /**
-   * @param {number} value
-   * @public
-   */
-  static set field2(value) {
+
+  static set field2(/** number */ value) {
     (StaticJsMembers.$clinit(),
      StaticJsMembers
          .$f_field2__com_google_j2cl_transpiler_readable_staticjsmembers_StaticJsMembers =
          value);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     StaticJsMembers.$clinit = () => {};
     StaticJsMembers.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof StaticJsMembers;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     Bar = goog.module.get('foo.Bar');
     Baz = goog.module.get('foo.Baz');
@@ -138,11 +103,11 @@ $Util.$setClassMetadata(
     StaticJsMembers,
     'com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers');
 
-/** @private {number} */
+/**@private {number}*/
 StaticJsMembers
     .$f_field1__com_google_j2cl_transpiler_readable_staticjsmembers_StaticJsMembers =
     0;
-/** @private {number} */
+/**@private {number}*/
 StaticJsMembers
     .$f_field2__com_google_j2cl_transpiler_readable_staticjsmembers_StaticJsMembers =
     0;

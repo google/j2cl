@@ -5,16 +5,11 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 const $JavaScriptFunction = goog.require('vmbootstrap.JavaScriptFunction$impl');
 
 class IdentityFunction extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {function(*):*}
-   * @public
-   */
+  /** @return {function(*):*} */
   static $create__() {
     IdentityFunction.$clinit();
     let $instance = new IdentityFunction();
@@ -24,53 +19,32 @@ class IdentityFunction extends j_l_Object {
         IdentityFunction.prototype.m_apply__java_lang_Object, $instance,
         IdentityFunction.$copy);
   }
-  /**
-   * @suppress {invalidCasts}
-   * @public
-   */
+  /** @suppress {invalidCasts} */
   $ctor__com_google_j2cl_transpiler_readable_lambdas_Lambdas_IdentityFunction__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @this {?function(*):*}
-   * @param {*} o
-   * @return {*}
-   * @public
-   */
-  m_apply__java_lang_Object(o) {
+  /** @this {?function(*):*} @return {*} */
+  m_apply__java_lang_Object(/** * */ o) {
     return o;
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     IdentityFunction.$clinit = () => {};
     IdentityFunction.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance != null &&
         !!instance
               .$is__com_google_j2cl_transpiler_readable_lambdas_Lambdas_IdentityFunction;
   }
-  /**
-   * @param {IdentityFunction} from
-   * @param {?} to
-   * @public
-   */
-  static $copy(from, to) {
+  static $copy(/**IdentityFunction*/ from, /** ? */ to) {
     // Marks the object is an instance of this class.
     to.$is__com_google_j2cl_transpiler_readable_lambdas_Lambdas_IdentityFunction =
         true;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

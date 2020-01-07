@@ -10,22 +10,15 @@ let TestCase102 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.bridg
  * @extends {B<B1>}
  */
 class C extends B {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {TestCase102} */
+    /**@type {TestCase102}*/
     this.f_$outer_this__com_google_j2cl_transpiler_readable_bridgemethods_TestCase102_C;
   }
-  /**
-   * @template B1
-   * @param {TestCase102} $outer_this
-   * @return {!C<B1>}
-   * @public
-   */
+  /** @template B1 @return {!C<B1>} */
   static $create__com_google_j2cl_transpiler_readable_bridgemethods_TestCase102(
-      $outer_this) {
+      /** TestCase102 */ $outer_this) {
     C.$clinit();
     let $instance = new C();
     $instance
@@ -33,56 +26,33 @@ class C extends B {
             $outer_this);
     return $instance;
   }
-  /**
-   * @param {TestCase102} $outer_this
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_bridgemethods_TestCase102_C__com_google_j2cl_transpiler_readable_bridgemethods_TestCase102(
-      $outer_this) {
+      /** TestCase102 */ $outer_this) {
     this.f_$outer_this__com_google_j2cl_transpiler_readable_bridgemethods_TestCase102_C =
         $outer_this;
     this.$ctor__com_google_j2cl_transpiler_readable_bridgemethods_TestCase102_B__();
   }
-  /**
-   * @override
-   * @param {?string} value
-   * @public
-   */
-  set(value) {}
-  /**
-   * @override
-   * @param {B1} value
-   * @public
-   */
-  m_set__java_lang_Object(value) {}
-  /**
-   * Bridge method for exposing non-JsMethod.
-   * @override
-   * @param {?string} arg0
-   * @public
-   */
-  m_set__java_lang_String(arg0) {
+  /** @override */
+  set(/** ?string */ value) {}
+  /** @override */
+  m_set__java_lang_Object(/** B1 */ value) {}
+  /** @override */
+  // Bridge method for exposing non-JsMethod.
+  m_set__java_lang_String(/** ?string */ arg0) {
     this.set(arg0);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     C.$clinit = () => {};
     C.$loadModules();
     B.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof C;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

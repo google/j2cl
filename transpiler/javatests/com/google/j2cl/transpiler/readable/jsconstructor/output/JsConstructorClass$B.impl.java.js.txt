@@ -4,38 +4,28 @@ const A = goog.require('com.google.j2cl.transpiler.readable.jsconstructor.JsCons
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class B extends A {
-  /**
-   * JsConstructor 'B(int)'.
-   * @param {number} x
-   * @public
-   */
-  constructor(x) {
+  // JsConstructor 'B(int)'.
+  constructor(/** number */ x) {
     B.$clinit();
     super();
-    /** @public {number} */
+    /**@type {number}*/
     this.f_fB__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_B =
         0;
     this.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_B__int(
         x);
   }
-  /**
-   * Initialization from constructor 'B(int)'.
-   * @param {number} x
-   * @public
-   */
+
+  // Initialization from constructor 'B(int)'.
   $ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_B__int(
-      x) {
+      /** number */ x) {
     this.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_A__int(
         x + 1);
     this.$init___$p_com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_B();
     this.f_fB__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_B =
         3;
   }
-  /**
-   * Factory method corresponding to constructor 'B()'.
-   * @return {!B}
-   * @public
-   */
+  /** @return {!B} */
+  // Factory method corresponding to constructor 'B()'.
   static $create__() {
     B.$clinit();
     let $instance = new B(10);
@@ -43,22 +33,15 @@ class B extends A {
         .$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_B__();
     return $instance;
   }
-  /**
-   * Initialization from constructor 'B()'.
-   * @public
-   */
+
+  // Initialization from constructor 'B()'.
   $ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_B__() {
     this.f_fB__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_B =
         4;
   }
-  /**
-   * Factory method corresponding to constructor 'B(int, int)'.
-   * @param {number} x
-   * @param {number} y
-   * @return {!B}
-   * @public
-   */
-  static $create__int__int(x, y) {
+  /** @return {!B} */
+  // Factory method corresponding to constructor 'B(int, int)'.
+  static $create__int__int(/** number */ x, /** number */ y) {
     B.$clinit();
     let $instance = new B(x + y);
     $instance
@@ -66,43 +49,29 @@ class B extends A {
             x, y);
     return $instance;
   }
-  /**
-   * Initialization from constructor 'B(int, int)'.
-   * @param {number} x
-   * @param {number} y
-   * @public
-   */
+
+  // Initialization from constructor 'B(int, int)'.
   $ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_B__int__int(
-      x, y) {
+      /** number */ x, /** number */ y) {
     this.f_fB__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_B =
         x * y;
   }
-  /**
-   * @private
-   */
+  /** @private */
   $init___$p_com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_B() {
     this.f_fB__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_B =
         2;
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     B.$clinit = () => {};
     B.$loadModules();
     A.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof B;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

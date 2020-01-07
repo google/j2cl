@@ -7,16 +7,11 @@ let $1InnerClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.simp
 let $1InnerClassWithoutCaptures = goog.forwardDeclare('com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.$1InnerClassWithoutCaptures$impl');
 
 class SimpleLocalClass extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!SimpleLocalClass}
-   * @public
-   */
+  /** @return {!SimpleLocalClass} */
   static $create__() {
     SimpleLocalClass.$clinit();
     let $instance = new SimpleLocalClass();
@@ -24,17 +19,12 @@ class SimpleLocalClass extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @param {number} p
-   * @public
-   */
-  m_test__int(p) {
+
+  m_test__int(/** number */ p) {
     let localVar = 1;
     $1InnerClass
         .$create__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass__int__int(
@@ -44,35 +34,23 @@ class SimpleLocalClass extends j_l_Object {
         .$create__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass(
             this);
   }
-  /**
-   * @public
-   */
+
   m_fun__() {
     let localVar = 1;
   }
-  /**
-   * @public
-   */
+
   m_foo__() {}
-  /**
-   * @public
-   */
+
   static $clinit() {
     SimpleLocalClass.$clinit = () => {};
     SimpleLocalClass.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof SimpleLocalClass;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     $1InnerClass = goog.module.get(
         'com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.$1InnerClass$impl');

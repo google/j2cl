@@ -6,16 +6,11 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Right = goog.forwardDeclare('com.google.j2cl.transpiler.readable.circularimportuse.Right$impl');
 
 class Left extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!Left}
-   * @public
-   */
+  /** @return {!Left} */
   static $create__() {
     Left.$clinit();
     let $instance = new Left();
@@ -23,38 +18,25 @@ class Left extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_circularimportuse_Left__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_circularimportuse_Left__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @return {Right}
-   * @public
-   */
+  /** @return {Right} */
   m_createRight___$pp_com_google_j2cl_transpiler_readable_circularimportuse() {
     return Right.$create__();
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     Left.$clinit = () => {};
     Left.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Left;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     Right = goog.module.get(
         'com.google.j2cl.transpiler.readable.circularimportuse.Right$impl');

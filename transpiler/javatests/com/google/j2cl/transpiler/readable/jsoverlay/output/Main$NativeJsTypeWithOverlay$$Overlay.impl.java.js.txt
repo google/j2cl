@@ -6,110 +6,71 @@ const NativeJsTypeWithOverlay = goog.require('test.foo.NativeJsTypeWithOverlay')
 let j_l_Object = goog.forwardDeclare('java.lang.Object$impl');
 
 class $Overlay {
-  /**
-   * @param {!NativeJsTypeWithOverlay} $thisArg
-   * @return {number}
-   * @public
-   */
+  /** @return {number} */
   static m_callM__$devirt__com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeWithOverlay(
-      $thisArg) {
+      /** !NativeJsTypeWithOverlay */ $thisArg) {
     $Overlay.$clinit();
     return $thisArg.m();
   }
-  /**
-   * @return {number}
-   * @public
-   */
+  /** @return {number} */
   static m_fun__() {
     $Overlay.$clinit();
     return 1;
   }
-  /**
-   * @return {number}
-   * @public
-   */
+  /** @return {number} */
   static m_bar__() {
     $Overlay.$clinit();
     return 1;
   }
-  /**
-   * @param {!NativeJsTypeWithOverlay} $thisArg
-   * @return {number}
-   * @public
-   */
+  /** @return {number} */
   static m_foo__$devirt__com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeWithOverlay(
-      $thisArg) {
+      /** !NativeJsTypeWithOverlay */ $thisArg) {
     $Overlay.$clinit();
     return 1;
   }
-  /**
-   * @param {Array<number>} a
-   * @return {number}
-   * @public
-   */
-  static m_varargs__arrayOf_int(a) {
+  /** @return {number} */
+  static m_varargs__arrayOf_int(/** Array<number> */ a) {
     $Overlay.$clinit();
     return a[0];
   }
-  /**
-   * @param {!NativeJsTypeWithOverlay} $thisArg
-   * @return {number}
-   * @public
-   */
+  /** @return {number} */
   static m_baz__$devirt__com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeWithOverlay(
-      $thisArg) {
+      /** !NativeJsTypeWithOverlay */ $thisArg) {
     $Overlay.$clinit();
     return 1;
   }
-  /**
-   * @param {!NativeJsTypeWithOverlay} $thisArg
-   * @public
-   */
+
   static m_overlayWithJsFunction__$devirt__com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeWithOverlay(
-      $thisArg) {
+      /** !NativeJsTypeWithOverlay */ $thisArg) {
     $Overlay.$clinit();
     (() => {})();
   }
-  /**
-   * @param {!NativeJsTypeWithOverlay} $thisArg
-   * @public
-   */
+
   static m_overlay__$devirt__com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeWithOverlay(
-      $thisArg) {
+      /** !NativeJsTypeWithOverlay */ $thisArg) {
     $Overlay.$clinit();
   }
-  /**
-   * @param {NativeJsTypeWithOverlay} o
-   * @public
-   */
+
   static m_overlay__com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeWithOverlay(
-      o) {
+      /** NativeJsTypeWithOverlay */ o) {
     $Overlay.$clinit();
   }
-  /**
-   * @return {*}
-   * @public
-   */
+  /** @return {*} */
   static get f_staticField__com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeWithOverlay_$Overlay() {
     return (
         $Overlay.$clinit(),
         $Overlay
             .$f_staticField__com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeWithOverlay_$Overlay);
   }
-  /**
-   * @param {*} value
-   * @public
-   */
+
   static set f_staticField__com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeWithOverlay_$Overlay(
-      value) {
+      /** * */ value) {
     ($Overlay.$clinit(),
      $Overlay
          .$f_staticField__com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeWithOverlay_$Overlay =
          value);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     $Overlay.$clinit = () => {};
     $Overlay.$loadModules();
@@ -117,28 +78,22 @@ class $Overlay {
         .$f_staticField__com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeWithOverlay_$Overlay =
         j_l_Object.$create__();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof NativeJsTypeWithOverlay;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     j_l_Object = goog.module.get('java.lang.Object$impl');
   }
 }
 $Util.$setClassMetadata($Overlay, 'test.foo.NativeJsTypeWithOverlay');
 
-/** @public {number} @const */
+/**@const {number}*/
 $Overlay
     .f_COMPILE_TIME_CONSTANT__com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeWithOverlay_$Overlay =
     10;
-/** @private {*} */
+/**@private {*}*/
 $Overlay
     .$f_staticField__com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeWithOverlay_$Overlay;
 

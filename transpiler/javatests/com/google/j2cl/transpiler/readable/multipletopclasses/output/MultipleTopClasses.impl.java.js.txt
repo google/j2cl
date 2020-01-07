@@ -4,16 +4,11 @@ const AnotherClass = goog.require('com.google.j2cl.transpiler.readable.multiplet
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class MultipleTopClasses extends AnotherClass {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!MultipleTopClasses}
-   * @public
-   */
+  /** @return {!MultipleTopClasses} */
   static $create__() {
     MultipleTopClasses.$clinit();
     let $instance = new MultipleTopClasses();
@@ -21,31 +16,21 @@ class MultipleTopClasses extends AnotherClass {
         .$ctor__com_google_j2cl_transpiler_readable_multipletopclasses_MultipleTopClasses__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_multipletopclasses_MultipleTopClasses__() {
     this.$ctor__com_google_j2cl_transpiler_readable_multipletopclasses_AnotherClass__();
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     MultipleTopClasses.$clinit = () => {};
     MultipleTopClasses.$loadModules();
     AnotherClass.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof MultipleTopClasses;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

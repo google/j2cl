@@ -4,24 +4,15 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 const NativeJsTypeWithToString = goog.require('test.foo.NativeJsTypeWithToString');
 
 class $Overlay {
-  /**
-   * @public
-   */
   static $clinit() {
     $Overlay.$clinit = () => {};
     $Overlay.$loadModules();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof NativeJsTypeWithToString;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata($Overlay, 'test.foo.NativeJsTypeWithToString');

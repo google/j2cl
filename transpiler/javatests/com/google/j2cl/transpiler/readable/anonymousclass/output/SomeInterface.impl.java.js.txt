@@ -9,19 +9,14 @@ let $1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.anonymousclass
  * @interface
  */
 class SomeInterface {
-  /**
-   * @return {SomeClass}
-   * @public
-   */
+  /** @return {SomeClass} */
   static get f_implicitlyStatic__com_google_j2cl_transpiler_readable_anonymousclass_SomeInterface() {
     return (
         SomeInterface.$clinit(),
         SomeInterface
             .$f_implicitlyStatic__com_google_j2cl_transpiler_readable_anonymousclass_SomeInterface);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     SomeInterface.$clinit = () => {};
     SomeInterface.$loadModules();
@@ -29,31 +24,19 @@ class SomeInterface {
         .$f_implicitlyStatic__com_google_j2cl_transpiler_readable_anonymousclass_SomeInterface =
         $1.$create__int(1);
   }
-  /**
-   * @param {Function} classConstructor
-   * @public
-   */
-  static $markImplementor(classConstructor) {
-    /**
-     * @public {boolean}
-     */
-    classConstructor.prototype
+
+  static $markImplementor(/** Function*/ ctor) {
+    ctor.prototype
         .$implements__com_google_j2cl_transpiler_readable_anonymousclass_SomeInterface =
         true;
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance != null &&
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_anonymousclass_SomeInterface;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     $1 = goog.module.get(
         'com.google.j2cl.transpiler.readable.anonymousclass.SomeInterface.$1$impl');
@@ -65,7 +48,7 @@ $Util.$setClassMetadataForInterface(
 
 SomeInterface.$markImplementor(/** @type {Function} */ (SomeInterface));
 
-/** @private {SomeClass} */
+/**@private {SomeClass}*/
 SomeInterface
     .$f_implicitlyStatic__com_google_j2cl_transpiler_readable_anonymousclass_SomeInterface;
 

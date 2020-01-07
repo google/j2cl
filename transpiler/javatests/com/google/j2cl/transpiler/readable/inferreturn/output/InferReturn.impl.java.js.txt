@@ -10,17 +10,11 @@ let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
  * @template T
  */
 class InferReturn extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @template T
-   * @return {!InferReturn<T>}
-   * @public
-   */
+  /** @template T @return {!InferReturn<T>} */
   static $create__() {
     InferReturn.$clinit();
     let $instance = new InferReturn();
@@ -28,100 +22,64 @@ class InferReturn extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_inferreturn_InferReturn__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_inferreturn_InferReturn__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @template T_1
-   * @param {T_1} foo
-   * @return {InferReturn<T_1>}
-   * @public
-   */
-  static m_inferGeneric__java_lang_Object(foo) {
+  /** @template T_1 @return {InferReturn<T_1>} */
+  static m_inferGeneric__java_lang_Object(/** T_1 */ foo) {
     InferReturn.$clinit();
-    return /**@type {!InferReturn<T_1>} */ (InferReturn.$create__());
+    return /**@type {!InferReturn<T_1>}*/ (InferReturn.$create__());
   }
-  /**
-   * @param {InferReturn<?string>} foo
-   * @return {InferReturn<InferReturn<?string>>}
-   * @public
-   */
+  /** @return {InferReturn<InferReturn<?string>>} */
   static m_tightenType__com_google_j2cl_transpiler_readable_inferreturn_InferReturn(
-      foo) {
+      /** InferReturn<?string> */ foo) {
     InferReturn.$clinit();
     if (!$Equality.$same(foo, null)) {
-      return /**@type {InferReturn<InferReturn<?string>>} */ (
+      return /**@type {InferReturn<InferReturn<?string>>}*/ (
           InferReturn.m_inferGeneric__java_lang_Object(foo));
     }
     return null;
   }
-  /**
-   * @public
-   */
+
   static m_main__() {
     InferReturn.$clinit();
-    let list = /**@type {ArrayList<*>} */ (
+    let list = /**@type {ArrayList<*>}*/ (
         InferReturn.m_newArrayList__java_lang_Object('foo'));
     InferReturn.m_acceptsArrayListOfObject__java_util_ArrayList(list);
     let array = InferReturn.m_newArray__java_lang_Object('foo');
     InferReturn.m_acceptsArrayOfObject__arrayOf_java_lang_Object(array);
   }
-  /**
-   * @template V
-   * @param {V} foo
-   * @return {ArrayList<V>}
-   * @public
-   */
-  static m_newArrayList__java_lang_Object(foo) {
+  /** @template V @return {ArrayList<V>} */
+  static m_newArrayList__java_lang_Object(/** V */ foo) {
     InferReturn.$clinit();
-    return /**@type {!ArrayList<V>} */ (ArrayList.$create__());
+    return /**@type {!ArrayList<V>}*/ (ArrayList.$create__());
   }
-  /**
-   * @template V
-   * @param {V} foo
-   * @return {Array<V>}
-   * @public
-   */
-  static m_newArray__java_lang_Object(foo) {
+  /** @template V @return {Array<V>} */
+  static m_newArray__java_lang_Object(/** V */ foo) {
     InferReturn.$clinit();
-    return /**@type {Array<V>} */ (new Array(0));
+    return /**@type {Array<V>}*/ (new Array(0));
   }
-  /**
-   * @param {ArrayList<*>} foo
-   * @public
-   */
-  static m_acceptsArrayListOfObject__java_util_ArrayList(foo) {
+
+  static m_acceptsArrayListOfObject__java_util_ArrayList(
+      /** ArrayList<*> */ foo) {
     InferReturn.$clinit();
   }
-  /**
-   * @param {Array<*>} foo
-   * @public
-   */
-  static m_acceptsArrayOfObject__arrayOf_java_lang_Object(foo) {
+
+  static m_acceptsArrayOfObject__arrayOf_java_lang_Object(/** Array<*> */ foo) {
     InferReturn.$clinit();
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     InferReturn.$clinit = () => {};
     InferReturn.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof InferReturn;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     ArrayList = goog.module.get('java.util.ArrayList$impl');
     $Equality = goog.module.get('nativebootstrap.Equality$impl');

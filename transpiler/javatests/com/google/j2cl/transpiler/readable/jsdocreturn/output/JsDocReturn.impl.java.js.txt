@@ -4,16 +4,11 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class JsDocReturn extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!JsDocReturn}
-   * @public
-   */
+  /** @return {!JsDocReturn} */
   static $create__() {
     JsDocReturn.$clinit();
     let $instance = new JsDocReturn();
@@ -21,42 +16,27 @@ class JsDocReturn extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_jsdocreturn_JsDocReturn__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_jsdocreturn_JsDocReturn__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @public
-   */
+
   m_test1__() {}
-  /**
-   * @return {number}
-   * @public
-   */
+  /** @return {number} */
   m_test2__() {
     return 1;
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     JsDocReturn.$clinit = () => {};
     JsDocReturn.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof JsDocReturn;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

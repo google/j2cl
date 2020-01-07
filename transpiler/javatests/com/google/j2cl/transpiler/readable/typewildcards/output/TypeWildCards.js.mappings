@@ -15,22 +15,22 @@
 [lowerBound] => [m_lowerBound__com_google_j2cl_transpiler_readable_typewildcards_GenericType]
 [g] => [g] "g"
 [test] => [m_test__]
-[unbounded(new GenericType<TypeWildCards>());] => [this.m_unbounded__com_google_j2cl_transpiler_readable_typewildcards_GenericType(/**@type {!GenericType<TypeWildCards>} */ (GenericType.$create__()));] "com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.test"
-[upperBound(new GenericType<TypeWildCards>());] => [this.m_upperBound__com_google_j2cl_transpiler_readable_typewildcards_GenericType(/**@type {!GenericType<TypeWildCards>} */ (GenericType.$create__()));] "com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.test"
-[lowerBound(new GenericType<TypeWildCards>());] => [this.m_lowerBound__com_google_j2cl_transpiler_readable_typewildcards_GenericType(/**@type {!GenericType<TypeWildCards>} */ (GenericType.$create__()));] "com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.test"
+[unbounded(new GenericType<TypeWildCards>());] => [this.m_unbounded__com_google_j2cl_transpiler_readable_typewildcards_GenericType(/**@type {!GenericType<TypeWildCards>}*/ (GenericType.$create__()));] "com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.test"
+[upperBound(new GenericType<TypeWildCards>());] => [this.m_upperBound__com_google_j2cl_transpiler_readable_typewildcards_GenericType(/**@type {!GenericType<TypeWildCards>}*/ (GenericType.$create__()));] "com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.test"
+[lowerBound(new GenericType<TypeWildCards>());] => [this.m_lowerBound__com_google_j2cl_transpiler_readable_typewildcards_GenericType(/**@type {!GenericType<TypeWildCards>}*/ (GenericType.$create__()));] "com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.test"
 [testBoundedTypeMemberAccess] => [m_testBoundedTypeMemberAccess__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_A]
 [t] => [t] "t"
 [testBoundedTypeMemberAccess] => [TypeWildCards.$clinit();] "com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.testBoundedTypeMemberAccess"
-[int i = t.f;] => [let i = /**@type {A} */ (t).f_f__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_A;] "com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.testBoundedTypeMemberAccess"
+[int i = t.f;] => [let i = /**@type {A}*/ (t).f_f__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_A;] "com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.testBoundedTypeMemberAccess"
 [i] => [i] "i"
-[t.m();] => [/**@type {A} */ (t).m_m__();] "com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.testBoundedTypeMemberAccess"
+[t.m();] => [/**@type {A}*/ (t).m_m__();] "com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.testBoundedTypeMemberAccess"
 [testIntersectionBoundedTypeMemberAccess] => [m_testIntersectionBoundedTypeMemberAccess__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_A]
 [t] => [t] "t"
 [testIntersectionBoundedTypeMemberAccess] => [TypeWildCards.$clinit();] "com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.testIntersectionBoundedTypeMemberAccess"
-[int i = t.f;] => [let i = /**@type {A} */ (t).f_f__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_A;] "com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.testIntersectionBoundedTypeMemberAccess"
+[int i = t.f;] => [let i = /**@type {A}*/ (t).f_f__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_A;] "com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.testIntersectionBoundedTypeMemberAccess"
 [i] => [i] "i"
-[t.m();] => [/**@type {A} */ (t).m_m__();] "com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.testIntersectionBoundedTypeMemberAccess"
-[t.n();] => [/**@type {Y} */ ($Casts.$to(t, Y)).m_n__();] "com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.testIntersectionBoundedTypeMemberAccess"
+[t.m();] => [/**@type {A}*/ (t).m_m__();] "com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.testIntersectionBoundedTypeMemberAccess"
+[t.n();] => [/**@type {Y}*/ ($Casts.$to(t, Y)).m_n__();] "com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.testIntersectionBoundedTypeMemberAccess"
 [transform] => [m_transform__java_util_List__java_util_function_Function]
 [from] => [from] "from"
 [function] => [function_1] "function"
@@ -47,14 +47,14 @@
 [List<Integer> integers =
         transform(
 ...              return a.get();
-            });] => [let integers = /**@type {List<Integer>} */ (TypeWildCards.m_transform__java_util_List__java_util_function_Function(/**@type {List<*>} */ (TypeWildCards.m_concat__java_util_List__java_util_List(elements, otherElements)), j_u_function_Function.$adapt((/** * */ a) =>{
-   /**@type {HasKey} */ ($Casts.$to(a, HasKey)).m_getKey__();
-   return /**@type {IntegerSupplier} */ ($Casts.$to(a, IntegerSupplier)).m_get__();
+            });] => [let integers = /**@type {List<Integer>}*/ (TypeWildCards.m_transform__java_util_List__java_util_function_Function(/**@type {List<*>}*/ (TypeWildCards.m_concat__java_util_List__java_util_List(elements, otherElements)), j_u_function_Function.$adapt((/** * */ a) =>{
+   /**@type {HasKey}*/ ($Casts.$to(a, HasKey)).m_getKey__();
+   return /**@type {IntegerSupplier}*/ ($Casts.$to(a, IntegerSupplier)).m_get__();
   })));] "com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.testInferredGenericIntersection"
 [integers] => [integers] "integers"
 [a] => [a] "a"
-[a.getKey();] => [/**@type {HasKey} */ ($Casts.$to(a, HasKey)).m_getKey__();] "com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.<lambda in testInferredGenericIntersection>"
-[return a.get();] => [return /**@type {IntegerSupplier} */ ($Casts.$to(a, IntegerSupplier)).m_get__();] "com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.<lambda in testInferredGenericIntersection>"
+[a.getKey();] => [/**@type {HasKey}*/ ($Casts.$to(a, HasKey)).m_getKey__();] "com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.<lambda in testInferredGenericIntersection>"
+[return a.get();] => [return /**@type {IntegerSupplier}*/ ($Casts.$to(a, IntegerSupplier)).m_get__();] "com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.<lambda in testInferredGenericIntersection>"
 [takesRecursiveGeneric] => [m_takesRecursiveGeneric__com_google_j2cl_transpiler_readable_typewildcards_GenericType]
 [foo] => [foo] "foo"
 [testRecursiveGeneric] => [m_testRecursiveGeneric__]

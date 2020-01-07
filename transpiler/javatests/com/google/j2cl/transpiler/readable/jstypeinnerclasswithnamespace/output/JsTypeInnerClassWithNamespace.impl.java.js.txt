@@ -4,16 +4,11 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class JsTypeInnerClassWithNamespace extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!JsTypeInnerClassWithNamespace}
-   * @public
-   */
+  /** @return {!JsTypeInnerClassWithNamespace} */
   static $create__() {
     JsTypeInnerClassWithNamespace.$clinit();
     let $instance = new JsTypeInnerClassWithNamespace();
@@ -21,31 +16,21 @@ class JsTypeInnerClassWithNamespace extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     JsTypeInnerClassWithNamespace.$clinit = () => {};
     JsTypeInnerClassWithNamespace.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof JsTypeInnerClassWithNamespace;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

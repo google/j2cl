@@ -4,27 +4,22 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class InstanceFieldAccessLevels extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {number} */
+    /**@type {number}*/
     this.f_a__com_google_j2cl_transpiler_readable_instancefieldaccesslevels_InstanceFieldAccessLevels =
         0;
-    /** @public {boolean} */
+    /**@type {boolean}*/
     this.f_b__com_google_j2cl_transpiler_readable_instancefieldaccesslevels_InstanceFieldAccessLevels_ =
         false;
-    /** @public {*} */
+    /**@type {*}*/
     this.f_c__com_google_j2cl_transpiler_readable_instancefieldaccesslevels_InstanceFieldAccessLevels;
-    /** @public {number} */
+    /**@type {number}*/
     this.f_d__com_google_j2cl_transpiler_readable_instancefieldaccesslevels_InstanceFieldAccessLevels =
         0;
   }
-  /**
-   * @return {!InstanceFieldAccessLevels}
-   * @public
-   */
+  /** @return {!InstanceFieldAccessLevels} */
   static $create__() {
     InstanceFieldAccessLevels.$clinit();
     let $instance = new InstanceFieldAccessLevels();
@@ -32,31 +27,21 @@ class InstanceFieldAccessLevels extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_instancefieldaccesslevels_InstanceFieldAccessLevels__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_instancefieldaccesslevels_InstanceFieldAccessLevels__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     InstanceFieldAccessLevels.$clinit = () => {};
     InstanceFieldAccessLevels.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof InstanceFieldAccessLevels;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

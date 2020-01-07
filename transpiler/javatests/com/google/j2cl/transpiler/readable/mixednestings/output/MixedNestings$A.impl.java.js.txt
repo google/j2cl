@@ -7,21 +7,15 @@ let MixedNestings = goog.forwardDeclare('com.google.j2cl.transpiler.readable.mix
 let $1B = goog.forwardDeclare('com.google.j2cl.transpiler.readable.mixednestings.MixedNestings.A.$1B$impl');
 
 class A extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {MixedNestings} */
+    /**@type {MixedNestings}*/
     this.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings_A;
   }
-  /**
-   * @param {MixedNestings} $outer_this
-   * @return {!A}
-   * @public
-   */
+  /** @return {!A} */
   static $create__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings(
-      $outer_this) {
+      /** MixedNestings */ $outer_this) {
     A.$clinit();
     let $instance = new A();
     $instance
@@ -29,47 +23,32 @@ class A extends j_l_Object {
             $outer_this);
     return $instance;
   }
-  /**
-   * @param {MixedNestings} $outer_this
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings_A__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings(
-      $outer_this) {
+      /** MixedNestings */ $outer_this) {
     this.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings_A =
         $outer_this;
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @public
-   */
+
   m_aa__() {}
-  /**
-   * @public
-   */
+
   m_a__() {
     $1B.$create__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings_A(
            this)
         .m_b__();
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     A.$clinit = () => {};
     A.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof A;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     $1B = goog.module.get(
         'com.google.j2cl.transpiler.readable.mixednestings.MixedNestings.A.$1B$impl');

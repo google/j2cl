@@ -6,18 +6,13 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Outer = goog.forwardDeclare('readable.packageinfo.Outer$impl');
 
 class Foo extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {Outer} */
+    /**@type {Outer}*/
     this.f_outer__com_google_j2cl_transpiler_readable_packageinfo_subpackage_Foo;
   }
-  /**
-   * @return {!Foo}
-   * @public
-   */
+  /** @return {!Foo} */
   static $create__() {
     Foo.$clinit();
     let $instance = new Foo();
@@ -25,39 +20,27 @@ class Foo extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_packageinfo_subpackage_Foo__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_packageinfo_subpackage_Foo__() {
     this.$ctor__java_lang_Object__();
     this.$init___$p_com_google_j2cl_transpiler_readable_packageinfo_subpackage_Foo();
   }
-  /**
-   * @private
-   */
+  /** @private */
   $init___$p_com_google_j2cl_transpiler_readable_packageinfo_subpackage_Foo() {
     this.f_outer__com_google_j2cl_transpiler_readable_packageinfo_subpackage_Foo =
         new Outer();
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     Foo.$clinit = () => {};
     Foo.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Foo;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     Outer = goog.module.get('readable.packageinfo.Outer$impl');
   }

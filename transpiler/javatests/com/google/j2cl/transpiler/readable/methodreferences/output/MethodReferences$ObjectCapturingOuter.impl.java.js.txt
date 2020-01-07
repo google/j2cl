@@ -9,22 +9,15 @@ let MethodReferences = goog.forwardDeclare('com.google.j2cl.transpiler.readable.
  * @template T
  */
 class ObjectCapturingOuter extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {MethodReferences<T>} */
+    /**@type {MethodReferences<T>}*/
     this.f_$outer_this__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_ObjectCapturingOuter;
   }
-  /**
-   * @template T
-   * @param {MethodReferences<T>} $outer_this
-   * @return {!ObjectCapturingOuter<T>}
-   * @public
-   */
+  /** @template T @return {!ObjectCapturingOuter<T>} */
   static $create__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences(
-      $outer_this) {
+      /** MethodReferences<T> */ $outer_this) {
     ObjectCapturingOuter.$clinit();
     let $instance = new ObjectCapturingOuter();
     $instance
@@ -32,43 +25,29 @@ class ObjectCapturingOuter extends j_l_Object {
             $outer_this);
     return $instance;
   }
-  /**
-   * @param {MethodReferences<T>} $outer_this
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_ObjectCapturingOuter__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences(
-      $outer_this) {
+      /** MethodReferences<T> */ $outer_this) {
     this.f_$outer_this__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_ObjectCapturingOuter =
         $outer_this;
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @return {MethodReferences<T>}
-   * @public
-   */
+  /** @return {MethodReferences<T>} */
   m_getMain___$pp_com_google_j2cl_transpiler_readable_methodreferences() {
     return this
         .f_$outer_this__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences_ObjectCapturingOuter;
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     ObjectCapturingOuter.$clinit = () => {};
     ObjectCapturingOuter.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof ObjectCapturingOuter;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

@@ -4,77 +4,50 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class Bar extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {number} */
+    /**@type {number}*/
     this.f_f__com_google_j2cl_transpiler_readable_jsproperties_Bar_ = 0;
   }
-  /**
-   * @return {!Bar}
-   * @public
-   */
+  /** @return {!Bar} */
   static $create__() {
     Bar.$clinit();
     let $instance = new Bar();
     $instance.$ctor__com_google_j2cl_transpiler_readable_jsproperties_Bar__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_jsproperties_Bar__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @return {number}
-   * @public
-   */
+  /** @return {number} */
   get a() {
     return this.f_f__com_google_j2cl_transpiler_readable_jsproperties_Bar_ + 1;
   }
-  /**
-   * @param {number} x
-   * @public
-   */
-  set a(x) {
+
+  set a(/** number */ x) {
     this.f_f__com_google_j2cl_transpiler_readable_jsproperties_Bar_ = x + 2;
   }
-  /**
-   * @return {number}
-   * @public
-   */
+  /** @return {number} */
   get abc() {
     return this.f_f__com_google_j2cl_transpiler_readable_jsproperties_Bar_ + 3;
   }
-  /**
-   * @param {number} x
-   * @public
-   */
-  set abc(x) {
+
+  set abc(/** number */ x) {
     this.f_f__com_google_j2cl_transpiler_readable_jsproperties_Bar_ = x + 4;
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     Bar.$clinit = () => {};
     Bar.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Bar;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

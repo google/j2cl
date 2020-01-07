@@ -9,55 +9,32 @@ let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.la
  * @template T
  */
 class Functional {
-  /**
-   * @abstract
-   * @param {Functional<T>} f
-   * @return {Functional<T>}
-   * @public
-   */
-  m_wrap__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Functional(f) {}
-  /**
-   * @template T
-   * @param {?function(Functional<T>):Functional<T>} fn
-   * @return {Functional<T>}
-   * @public
-   */
-  static $adapt(fn) {
+  /** @abstract @return {Functional<T>} */
+  m_wrap__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Functional(
+      /** Functional<T> */ f) {}
+  /** @template T @return {Functional<T>} */
+  static $adapt(/** ?function(Functional<T>):Functional<T> */ fn) {
     Functional.$clinit();
-    return /**@type {!$LambdaAdaptor<T>} */ (new $LambdaAdaptor(fn));
+    return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     Functional.$clinit = () => {};
     Functional.$loadModules();
   }
-  /**
-   * @param {Function} classConstructor
-   * @public
-   */
-  static $markImplementor(classConstructor) {
-    /**
-     * @public {boolean}
-     */
-    classConstructor.prototype
+
+  static $markImplementor(/** Function*/ ctor) {
+    ctor.prototype
         .$implements__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Functional =
         true;
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance != null &&
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Functional;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdas.Lambdas.Functional.$LambdaAdaptor$impl');

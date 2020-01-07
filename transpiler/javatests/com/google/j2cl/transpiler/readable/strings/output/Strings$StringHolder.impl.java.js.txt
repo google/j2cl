@@ -4,18 +4,13 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class StringHolder extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {?string} */
+    /**@type {?string}*/
     this.f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder;
   }
-  /**
-   * @return {!StringHolder}
-   * @public
-   */
+  /** @return {!StringHolder} */
   static $create__() {
     StringHolder.$clinit();
     let $instance = new StringHolder();
@@ -23,39 +18,27 @@ class StringHolder extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder__() {
     this.$ctor__java_lang_Object__();
     this.$init___$p_com_google_j2cl_transpiler_readable_strings_Strings_StringHolder();
   }
-  /**
-   * @private
-   */
+  /** @private */
   $init___$p_com_google_j2cl_transpiler_readable_strings_Strings_StringHolder() {
     this.f_s__com_google_j2cl_transpiler_readable_strings_Strings_StringHolder =
         'A';
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     StringHolder.$clinit = () => {};
     StringHolder.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof StringHolder;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

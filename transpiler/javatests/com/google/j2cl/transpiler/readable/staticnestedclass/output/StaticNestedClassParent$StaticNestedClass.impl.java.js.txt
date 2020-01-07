@@ -4,16 +4,11 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class StaticNestedClass extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!StaticNestedClass}
-   * @public
-   */
+  /** @return {!StaticNestedClass} */
   static $create__() {
     StaticNestedClass.$clinit();
     let $instance = new StaticNestedClass();
@@ -21,31 +16,21 @@ class StaticNestedClass extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_staticnestedclass_StaticNestedClassParent_StaticNestedClass__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_staticnestedclass_StaticNestedClassParent_StaticNestedClass__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     StaticNestedClass.$clinit = () => {};
     StaticNestedClass.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof StaticNestedClass;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

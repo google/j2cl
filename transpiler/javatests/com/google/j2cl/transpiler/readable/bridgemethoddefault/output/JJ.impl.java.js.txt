@@ -8,54 +8,32 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @extends {I<*>}
  */
 class JJ {
-  /**
-   * @abstract
-   * @param {*} o
-   * @public
-   */
-  m(o) {}
-  /**
-   * @param {!JJ} $thisArg
-   * @param {*} o
-   * @public
-   */
+  /** @abstract */
+  m(/** * */ o) {}
+
   static m_m__$default__com_google_j2cl_transpiler_readable_bridgemethoddefault_JJ__java_lang_Object(
-      $thisArg, o) {
+      /** !JJ */ $thisArg, /** * */ o) {
     JJ.$clinit();
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     JJ.$clinit = () => {};
     JJ.$loadModules();
   }
-  /**
-   * @param {Function} classConstructor
-   * @public
-   */
-  static $markImplementor(classConstructor) {
-    I.$markImplementor(classConstructor);
-    /**
-     * @public {boolean}
-     */
-    classConstructor.prototype
+
+  static $markImplementor(/** Function*/ ctor) {
+    I.$markImplementor(ctor);
+    ctor.prototype
         .$implements__com_google_j2cl_transpiler_readable_bridgemethoddefault_JJ =
         true;
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance != null &&
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_bridgemethoddefault_JJ;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadataForInterface(

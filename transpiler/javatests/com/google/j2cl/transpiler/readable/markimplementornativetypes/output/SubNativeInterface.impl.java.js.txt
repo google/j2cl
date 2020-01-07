@@ -12,39 +12,24 @@ let $Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.markimpl
  * @extends {RegularInterface}
  */
 class SubNativeInterface {
-  /**
-   * @public
-   */
   static $clinit() {
     SubNativeInterface.$clinit = () => {};
     SubNativeInterface.$loadModules();
   }
-  /**
-   * @param {Function} classConstructor
-   * @public
-   */
-  static $markImplementor(classConstructor) {
-    RegularInterface.$markImplementor(classConstructor);
-    /**
-     * @public {boolean}
-     */
-    classConstructor.prototype
+
+  static $markImplementor(/** Function*/ ctor) {
+    RegularInterface.$markImplementor(ctor);
+    ctor.prototype
         .$implements__com_google_j2cl_transpiler_readable_markimplementornativetypes_SubNativeInterface =
         true;
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance != null &&
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_markimplementornativetypes_SubNativeInterface;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadataForInterface(

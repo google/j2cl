@@ -8,16 +8,11 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {MyJsInterface}
  */
 class InterfaceImpl extends A {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!InterfaceImpl}
-   * @public
-   */
+  /** @return {!InterfaceImpl} */
   static $create__() {
     InterfaceImpl.$clinit();
     let $instance = new InterfaceImpl();
@@ -25,41 +20,26 @@ class InterfaceImpl extends A {
         .$ctor__com_google_j2cl_transpiler_readable_jsbridgebackward_InterfaceImpl__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_jsbridgebackward_InterfaceImpl__() {
     this.$ctor__com_google_j2cl_transpiler_readable_jsbridgebackward_A__();
   }
-  /**
-   * Bridge method for exposing non-JsMethod.
-   * @override
-   * @param {number} arg0
-   * @return {number}
-   * @public
-   */
-  foo(arg0) {
+  /** @override @return {number} */
+  // Bridge method for exposing non-JsMethod.
+  foo(/** number */ arg0) {
     return this.m_foo__int(arg0);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     InterfaceImpl.$clinit = () => {};
     InterfaceImpl.$loadModules();
     A.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof InterfaceImpl;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

@@ -4,16 +4,11 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class InnerClasses extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!InnerClasses}
-   * @public
-   */
+  /** @return {!InnerClasses} */
   static $create__() {
     InnerClasses.$clinit();
     let $instance = new InnerClasses();
@@ -21,31 +16,21 @@ class InnerClasses extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_abstractinnerclass_InnerClasses__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_abstractinnerclass_InnerClasses__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     InnerClasses.$clinit = () => {};
     InnerClasses.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof InnerClasses;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

@@ -6,16 +6,11 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 
 class TernaryExpression extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!TernaryExpression}
-   * @public
-   */
+  /** @return {!TernaryExpression} */
   static $create__() {
     TernaryExpression.$clinit();
     let $instance = new TernaryExpression();
@@ -23,15 +18,11 @@ class TernaryExpression extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_ternaryexpression_TernaryExpression__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_ternaryexpression_TernaryExpression__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @public
-   */
+
   m_test__() {
     let a = true;
     let number_1 = a ? 1 : 2;
@@ -39,25 +30,17 @@ class TernaryExpression extends j_l_Object {
     let value = (b ? Integer.$create__int(15) : Integer.$create__int(30))
                     .m_intValue__();
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     TernaryExpression.$clinit = () => {};
     TernaryExpression.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof TernaryExpression;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     Integer = goog.module.get('java.lang.Integer$impl');
   }

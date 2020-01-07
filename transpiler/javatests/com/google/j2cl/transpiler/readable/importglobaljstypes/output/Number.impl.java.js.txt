@@ -10,16 +10,11 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 class c_g_j2cl_transpiler_readable_importglobaljstypes_Number extends
     j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!c_g_j2cl_transpiler_readable_importglobaljstypes_Number}
-   * @public
-   */
+  /** @return {!c_g_j2cl_transpiler_readable_importglobaljstypes_Number} */
   static $create__() {
     c_g_j2cl_transpiler_readable_importglobaljstypes_Number.$clinit();
     let $instance =
@@ -28,60 +23,38 @@ class c_g_j2cl_transpiler_readable_importglobaljstypes_Number extends
         .$ctor__com_google_j2cl_transpiler_readable_importglobaljstypes_Number__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_importglobaljstypes_Number__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @param {number} x
-   * @return {boolean}
-   * @public
-   */
-  static m_test__double(x) {
+  /** @return {boolean} */
+  static m_test__double(/** number */ x) {
     c_g_j2cl_transpiler_readable_importglobaljstypes_Number.$clinit();
     return Number.isInteger(x);
   }
-  /**
-   * @param {Array<number>} array
-   * @return {?string}
-   * @public
-   */
-  static m_fromCharCode__arrayOf_int(array) {
+  /** @return {?string} */
+  static m_fromCharCode__arrayOf_int(/** Array<number> */ array) {
     c_g_j2cl_transpiler_readable_importglobaljstypes_Number.$clinit();
-    return /**@type {?string} */ (
+    return /**@type {?string}*/ (
         $Casts.$to(String.fromCharCode.apply(null, array), j_l_String));
   }
-  /**
-   * @param {Object} a
-   * @return {Object}
-   * @public
-   */
+  /** @return {Object} */
   m_testJsDocForLiteralType__com_google_j2cl_transpiler_readable_importglobaljstypes_Number_MyLiteralType(
-      a) {
+      /** Object */ a) {
     return a;
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     c_g_j2cl_transpiler_readable_importglobaljstypes_Number.$clinit = () => {};
     c_g_j2cl_transpiler_readable_importglobaljstypes_Number.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof
         c_g_j2cl_transpiler_readable_importglobaljstypes_Number;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     j_l_String = goog.module.get('java.lang.String$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');

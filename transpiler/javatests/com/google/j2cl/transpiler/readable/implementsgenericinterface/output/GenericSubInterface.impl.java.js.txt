@@ -9,39 +9,24 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @extends {GenericInterface<T>}
  */
 class GenericSubInterface {
-  /**
-   * @public
-   */
   static $clinit() {
     GenericSubInterface.$clinit = () => {};
     GenericSubInterface.$loadModules();
   }
-  /**
-   * @param {Function} classConstructor
-   * @public
-   */
-  static $markImplementor(classConstructor) {
-    GenericInterface.$markImplementor(classConstructor);
-    /**
-     * @public {boolean}
-     */
-    classConstructor.prototype
+
+  static $markImplementor(/** Function*/ ctor) {
+    GenericInterface.$markImplementor(ctor);
+    ctor.prototype
         .$implements__com_google_j2cl_transpiler_readable_implementsgenericinterface_GenericSubInterface =
         true;
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance != null &&
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_implementsgenericinterface_GenericSubInterface;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadataForInterface(

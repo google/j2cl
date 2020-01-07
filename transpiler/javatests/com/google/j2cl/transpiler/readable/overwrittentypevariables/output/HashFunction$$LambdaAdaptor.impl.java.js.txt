@@ -9,59 +9,40 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {HashFunction<T>}
  */
 class $LambdaAdaptor extends j_l_Object {
-  /**
-   * @param {?function(T):?string} fn
-   * @public
-   */
-  constructor(fn) {
+  constructor(/** ?function(T):?string */ fn) {
     $LambdaAdaptor.$clinit();
     super();
-    /** @public {?function(T):?string} */
+    /**@type {?function(T):?string}*/
     this.f_$$fn__com_google_j2cl_transpiler_readable_overwrittentypevariables_HashFunction_$LambdaAdaptor;
     this.$ctor__com_google_j2cl_transpiler_readable_overwrittentypevariables_HashFunction_$LambdaAdaptor__com_google_j2cl_transpiler_readable_overwrittentypevariables_HashFunction_$JsFunction(
         fn);
   }
-  /**
-   * @param {?function(T):?string} fn
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_overwrittentypevariables_HashFunction_$LambdaAdaptor__com_google_j2cl_transpiler_readable_overwrittentypevariables_HashFunction_$JsFunction(
-      fn) {
+      /** ?function(T):?string */ fn) {
     this.$ctor__java_lang_Object__();
     this.f_$$fn__com_google_j2cl_transpiler_readable_overwrittentypevariables_HashFunction_$LambdaAdaptor =
         fn;
   }
-  /**
-   * @param {T} arg0
-   * @return {?string}
-   * @public
-   */
-  m_apply__java_lang_Object(arg0) {
+  /** @return {?string} */
+  m_apply__java_lang_Object(/** T */ arg0) {
     let /** ?function(T):?string */ $function;
     return (
         $function =
             this.f_$$fn__com_google_j2cl_transpiler_readable_overwrittentypevariables_HashFunction_$LambdaAdaptor,
         $function(arg0));
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     $LambdaAdaptor.$clinit = () => {};
     $LambdaAdaptor.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof $LambdaAdaptor;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

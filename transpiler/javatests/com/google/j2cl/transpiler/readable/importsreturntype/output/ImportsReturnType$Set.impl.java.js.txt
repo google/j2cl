@@ -7,17 +7,11 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @template S
  */
 class Set extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @template S
-   * @return {!Set<S>}
-   * @public
-   */
+  /** @template S @return {!Set<S>} */
   static $create__() {
     Set.$clinit();
     let $instance = new Set();
@@ -25,31 +19,21 @@ class Set extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_importsreturntype_ImportsReturnType_Set__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_importsreturntype_ImportsReturnType_Set__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     Set.$clinit = () => {};
     Set.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Set;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

@@ -10,17 +10,11 @@ let $1Baz = goog.forwardDeclare('com.google.j2cl.transpiler.readable.localclassw
  * @template A
  */
 class LocalClassWithOuterGenerics extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @template A
-   * @return {!LocalClassWithOuterGenerics<A>}
-   * @public
-   */
+  /** @template A @return {!LocalClassWithOuterGenerics<A>} */
   static $create__() {
     LocalClassWithOuterGenerics.$clinit();
     let $instance = new LocalClassWithOuterGenerics();
@@ -28,40 +22,27 @@ class LocalClassWithOuterGenerics extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_localclasswithoutergenerics_LocalClassWithOuterGenerics__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_localclasswithoutergenerics_LocalClassWithOuterGenerics__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @template T
-   * @public
-   */
+  /** @template T */
   static m_foo__() {
     LocalClassWithOuterGenerics.$clinit();
-    let bar = /**@type {!$1Bar<T>} */ ($1Bar.$create__());
-    let baz = /**@type {!$1Baz<*, T>} */ ($1Baz.$create__());
+    let bar = /**@type {!$1Bar<T>}*/ ($1Bar.$create__());
+    let baz = /**@type {!$1Baz<*, T>}*/ ($1Baz.$create__());
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     LocalClassWithOuterGenerics.$clinit = () => {};
     LocalClassWithOuterGenerics.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof LocalClassWithOuterGenerics;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     $1Bar = goog.module.get(
         'com.google.j2cl.transpiler.readable.localclasswithoutergenerics.LocalClassWithOuterGenerics.$1Bar$impl');

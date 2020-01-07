@@ -7,16 +7,11 @@ let MyJsType = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsbridge
 let SubJsType = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.SubJsType$impl');
 
 class Main extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!Main}
-   * @public
-   */
+  /** @return {!Main} */
   static $create__() {
     Main.$clinit();
     let $instance = new Main();
@@ -24,15 +19,11 @@ class Main extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_Main__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_Main__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @public
-   */
+
   m_test__() {
     let a = MyJsType.$create__();
     let b = SubJsType.$create__();
@@ -48,25 +39,17 @@ class Main extends j_l_Object {
     b.fun(1);
     d.m_fun__int(1);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     Main.$clinit = () => {};
     Main.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Main;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     MyJsType = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyJsType$impl');

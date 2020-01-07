@@ -6,18 +6,13 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Inner = goog.forwardDeclare('com.google.test.Inner$impl');
 
 class Outer extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {number} */
+    /**@type {number}*/
     this.f_a__com_google_j2cl_transpiler_readable_jsinnerclass_Main_Outer = 0;
   }
-  /**
-   * @return {!Outer}
-   * @public
-   */
+  /** @return {!Outer} */
   static $create__() {
     Outer.$clinit();
     let $instance = new Outer();
@@ -25,46 +20,31 @@ class Outer extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_jsinnerclass_Main_Outer__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_jsinnerclass_Main_Outer__() {
     this.$ctor__java_lang_Object__();
     this.$init___$p_com_google_j2cl_transpiler_readable_jsinnerclass_Main_Outer();
   }
-  /**
-   * @return {number}
-   * @public
-   */
+  /** @return {number} */
   m_method__() {
     return new Inner(this).getB() +
         this.f_a__com_google_j2cl_transpiler_readable_jsinnerclass_Main_Outer;
   }
-  /**
-   * @private
-   */
+  /** @private */
   $init___$p_com_google_j2cl_transpiler_readable_jsinnerclass_Main_Outer() {
     this.f_a__com_google_j2cl_transpiler_readable_jsinnerclass_Main_Outer = 2;
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     Outer.$clinit = () => {};
     Outer.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Outer;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     Inner = goog.module.get('com.google.test.Inner$impl');
   }

@@ -12,55 +12,32 @@ let Integer = goog.forwardDeclare('java.lang.Integer$impl');
  * @extends {BaseInterface}
  */
 class AsyncInterface {
-  /**
-   * @abstract
-   * @override
-   * @return {IThenable<Integer>}
-   * @public
-   */
+  /** @abstract @override @return {IThenable<Integer>} */
   m_asyncCall__() {}
-  /**
-   * @param {?function():IThenable<Integer>} fn
-   * @return {AsyncInterface}
-   * @public
-   */
-  static $adapt(fn) {
+  /** @return {AsyncInterface} */
+  static $adapt(/** ?function():IThenable<Integer> */ fn) {
     AsyncInterface.$clinit();
     return new $LambdaAdaptor(fn);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     AsyncInterface.$clinit = () => {};
     AsyncInterface.$loadModules();
   }
-  /**
-   * @param {Function} classConstructor
-   * @public
-   */
-  static $markImplementor(classConstructor) {
-    BaseInterface.$markImplementor(classConstructor);
-    /**
-     * @public {boolean}
-     */
-    classConstructor.prototype
+
+  static $markImplementor(/** Function*/ ctor) {
+    BaseInterface.$markImplementor(ctor);
+    ctor.prototype
         .$implements__com_google_j2cl_transpiler_readable_jsasync_Main_AsyncInterface =
         true;
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance != null &&
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_jsasync_Main_AsyncInterface;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsasync.Main.AsyncInterface.$LambdaAdaptor$impl');

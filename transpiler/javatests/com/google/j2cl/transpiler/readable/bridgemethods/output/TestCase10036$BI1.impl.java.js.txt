@@ -10,57 +10,33 @@ let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.br
  * @extends {BI3}
  */
 class BI1 {
-  /**
-   * @abstract
-   * @override
-   * @param {?string} value
-   * @return {?string}
-   * @public
-   */
-  get(value) {}
-  /**
-   * @param {?function(?string):?string} fn
-   * @return {BI1}
-   * @public
-   */
-  static $adapt(fn) {
+  /** @abstract @override @return {?string} */
+  get(/** ?string */ value) {}
+  /** @return {BI1} */
+  static $adapt(/** ?function(?string):?string */ fn) {
     BI1.$clinit();
     return new $LambdaAdaptor(fn);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     BI1.$clinit = () => {};
     BI1.$loadModules();
     BI3.$clinit();
   }
-  /**
-   * @param {Function} classConstructor
-   * @public
-   */
-  static $markImplementor(classConstructor) {
-    BI3.$markImplementor(classConstructor);
-    /**
-     * @public {boolean}
-     */
-    classConstructor.prototype
+
+  static $markImplementor(/** Function*/ ctor) {
+    BI3.$markImplementor(ctor);
+    ctor.prototype
         .$implements__com_google_j2cl_transpiler_readable_bridgemethods_TestCase10036_BI1 =
         true;
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance != null &&
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_bridgemethods_TestCase10036_BI1;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.bridgemethods.TestCase10036.BI1.$LambdaAdaptor$impl');

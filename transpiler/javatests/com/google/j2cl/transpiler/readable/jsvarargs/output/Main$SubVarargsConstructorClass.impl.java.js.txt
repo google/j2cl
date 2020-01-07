@@ -6,42 +6,25 @@ let $Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsvararg
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 
 class SubVarargsConstructorClass extends Object {
-  /**
-   * @param {number} i
-   * @param {...*} args
-   * @public
-   */
-  constructor(i, ...args) {
+  constructor(/** number */ i, .../** ...* */ args) {
     SubVarargsConstructorClass.$clinit();
     super(...InternalPreconditions.m_checkNotNull__java_lang_Object(args));
     this.$ctor__com_google_j2cl_transpiler_readable_jsvarargs_Main_SubVarargsConstructorClass__int__arrayOf_java_lang_Object(
         i, args);
   }
-  /**
-   * @param {number} i
-   * @param {Array<*>} args
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_jsvarargs_Main_SubVarargsConstructorClass__int__arrayOf_java_lang_Object(
-      i, args) {}
-  /**
-   * @public
-   */
+      /** number */ i, /** Array<*> */ args) {}
+
   static $clinit() {
     SubVarargsConstructorClass.$clinit = () => {};
     SubVarargsConstructorClass.$loadModules();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof SubVarargsConstructorClass;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     InternalPreconditions =
         goog.module.get('javaemul.internal.InternalPreconditions$impl');

@@ -13,52 +13,39 @@ let Map = goog.forwardDeclare('java.util.Map$impl');
  * @implements {ParametricType<!AbstractType>}
  */
 class AbstractTypeNonNull extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_typeannotations_AbstractTypeNonNull__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * Default method forwarding stub.
-   * @override
-   * @param {!List<!Map<!Array<string>, Map<Array<!List<string>>,
-   *     !Array<?string>>>>} arg0
-   * @return {!List<!AbstractType>}
-   * @public
-   */
-  m_m__java_util_List(arg0) {
-    return /**@type {!List<!AbstractType>} */ (
+  /** @override @return {!List<!AbstractType>} */
+  // Default method forwarding stub.
+  m_m__java_util_List(
+      /**
+         !List<!Map<!Array<string>, Map<Array<!List<string>>,
+         !Array<?string>>>>
+       */
+      arg0) {
+    return /**@type {!List<!AbstractType>}*/ (
         ParametricType
             .m_m__$default__com_google_j2cl_transpiler_readable_typeannotations_ParametricType__java_util_List(
                 this, arg0));
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     AbstractTypeNonNull.$clinit = () => {};
     AbstractTypeNonNull.$loadModules();
     j_l_Object.$clinit();
     ParametricType.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof AbstractTypeNonNull;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

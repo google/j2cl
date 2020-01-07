@@ -4,22 +4,17 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class PublicInstanceFields extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {number} */
+    /**@type {number}*/
     this.f_a__com_google_j2cl_transpiler_readable_publicinstancefields_PublicInstanceFields =
         0;
-    /** @public {number} */
+    /**@type {number}*/
     this.f_b__com_google_j2cl_transpiler_readable_publicinstancefields_PublicInstanceFields =
         0;
   }
-  /**
-   * @return {!PublicInstanceFields}
-   * @public
-   */
+  /** @return {!PublicInstanceFields} */
   static $create__() {
     PublicInstanceFields.$clinit();
     let $instance = new PublicInstanceFields();
@@ -27,39 +22,27 @@ class PublicInstanceFields extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_publicinstancefields_PublicInstanceFields__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_publicinstancefields_PublicInstanceFields__() {
     this.$ctor__java_lang_Object__();
     this.$init___$p_com_google_j2cl_transpiler_readable_publicinstancefields_PublicInstanceFields();
   }
-  /**
-   * @private
-   */
+  /** @private */
   $init___$p_com_google_j2cl_transpiler_readable_publicinstancefields_PublicInstanceFields() {
     this.f_a__com_google_j2cl_transpiler_readable_publicinstancefields_PublicInstanceFields =
         1;
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     PublicInstanceFields.$clinit = () => {};
     PublicInstanceFields.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof PublicInstanceFields;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

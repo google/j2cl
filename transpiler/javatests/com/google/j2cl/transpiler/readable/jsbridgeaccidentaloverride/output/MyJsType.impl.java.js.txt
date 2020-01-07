@@ -8,16 +8,11 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {OtherInterface}
  */
 class MyJsType extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!MyJsType}
-   * @public
-   */
+  /** @return {!MyJsType} */
   static $create__() {
     MyJsType.$clinit();
     let $instance = new MyJsType();
@@ -25,65 +20,38 @@ class MyJsType extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_MyJsType__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_MyJsType__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @param {number} a
-   * @return {number}
-   * @public
-   */
-  foo(a) {
+  /** @return {number} */
+  foo(/** number */ a) {
     return a;
   }
-  /**
-   * @param {number} a
-   * @return {number}
-   * @public
-   */
-  bar(a) {
+  /** @return {number} */
+  bar(/** number */ a) {
     return a + 1;
   }
-  /**
-   * @param {number} a
-   * @return {number}
-   * @public
-   */
-  fun(a) {
+  /** @return {number} */
+  fun(/** number */ a) {
     return a - 1;
   }
-  /**
-   * Bridge method for exposing non-JsMethod.
-   * @override
-   * @param {number} arg0
-   * @return {number}
-   * @public
-   */
-  m_fun__int(arg0) {
+  /** @override @return {number} */
+  // Bridge method for exposing non-JsMethod.
+  m_fun__int(/** number */ arg0) {
     return this.fun(arg0);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     MyJsType.$clinit = () => {};
     MyJsType.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof MyJsType;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

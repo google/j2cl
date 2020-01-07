@@ -9,17 +9,11 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {HashFunction<T>}
  */
 class $1 extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @template T
-   * @return {!$1<T>}
-   * @public
-   */
+  /** @template T @return {!$1<T>} */
   static $create__() {
     $1.$clinit();
     let $instance = new $1();
@@ -27,40 +21,25 @@ class $1 extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_overwrittentypevariables_HashFunctions_1__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_overwrittentypevariables_HashFunctions_1__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @override
-   * @param {T} input
-   * @return {?string}
-   * @public
-   */
-  m_apply__java_lang_Object(input) {
+  /** @override @return {?string} */
+  m_apply__java_lang_Object(/** T */ input) {
     return '';
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     $1.$clinit = () => {};
     $1.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof $1;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

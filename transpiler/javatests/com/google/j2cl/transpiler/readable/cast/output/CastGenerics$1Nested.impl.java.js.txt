@@ -12,22 +12,15 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
  * @template SS, TT, T, E
  */
 class $1Nested extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {CastGenerics<T, E>} */
+    /**@type {CastGenerics<T, E>}*/
     this.f_$outer_this__com_google_j2cl_transpiler_readable_cast_CastGenerics_1Nested;
   }
-  /**
-   * @template SS, TT, T, E
-   * @param {CastGenerics<T, E>} $outer_this
-   * @return {!$1Nested<SS, TT, T, E>}
-   * @public
-   */
+  /** @template SS, TT, T, E @return {!$1Nested<SS, TT, T, E>} */
   static $create__com_google_j2cl_transpiler_readable_cast_CastGenerics(
-      $outer_this) {
+      /** CastGenerics<T, E> */ $outer_this) {
     $1Nested.$clinit();
     let $instance = new $1Nested();
     $instance
@@ -35,43 +28,29 @@ class $1Nested extends j_l_Object {
             $outer_this);
     return $instance;
   }
-  /**
-   * @param {CastGenerics<T, E>} $outer_this
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_cast_CastGenerics_1Nested__com_google_j2cl_transpiler_readable_cast_CastGenerics(
-      $outer_this) {
+      /** CastGenerics<T, E> */ $outer_this) {
     this.f_$outer_this__com_google_j2cl_transpiler_readable_cast_CastGenerics_1Nested =
         $outer_this;
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @param {*} o
-   * @public
-   */
+
   m_nestedGenericMethod__java_lang_Object_$p_com_google_j2cl_transpiler_readable_cast_CastGenerics_1Nested(
-      o) {
-    let t = /**@type {TT} */ ($Casts.$to(o, Enum));
+      /** * */ o) {
+    let t = /**@type {TT}*/ ($Casts.$to(o, Enum));
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     $1Nested.$clinit = () => {};
     $1Nested.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof $1Nested;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     Enum = goog.module.get('java.lang.Enum$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');

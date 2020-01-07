@@ -9,55 +9,31 @@ let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.mu
  * @template T
  */
 class Collection {
-  /**
-   * @abstract
-   * @param {T} t
-   * @return {?string}
-   * @public
-   */
-  m_getFoo__java_lang_Object(t) {}
-  /**
-   * @template T
-   * @param {?function(T):?string} fn
-   * @return {Collection<T>}
-   * @public
-   */
-  static $adapt(fn) {
+  /** @abstract @return {?string} */
+  m_getFoo__java_lang_Object(/** T */ t) {}
+  /** @template T @return {Collection<T>} */
+  static $adapt(/** ?function(T):?string */ fn) {
     Collection.$clinit();
-    return /**@type {!$LambdaAdaptor<T>} */ (new $LambdaAdaptor(fn));
+    return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     Collection.$clinit = () => {};
     Collection.$loadModules();
   }
-  /**
-   * @param {Function} classConstructor
-   * @public
-   */
-  static $markImplementor(classConstructor) {
-    /**
-     * @public {boolean}
-     */
-    classConstructor.prototype
+
+  static $markImplementor(/** Function*/ ctor) {
+    ctor.prototype
         .$implements__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_Collection =
         true;
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance != null &&
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents_Collection;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     $LambdaAdaptor = goog.module.get(
         'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.Collection.$LambdaAdaptor$impl');

@@ -4,52 +4,35 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class StaticJsMethodsWithClassNamespace extends j_l_Object {
-  /**
-   * @public
-   */
   constructor() {
     StaticJsMethodsWithClassNamespace.$clinit();
     super();
     this.$ctor__com_google_j2cl_transpiler_readable_staticjsmethodswithclassnamespace_StaticJsMethodsWithClassNamespace__();
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_staticjsmethodswithclassnamespace_StaticJsMethodsWithClassNamespace__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @public
-   */
+
   static replacedName() {
     StaticJsMethodsWithClassNamespace.$clinit();
   }
-  /**
-   * @public
-   */
+
   test() {
     StaticJsMethodsWithClassNamespace.replacedName();
     StaticJsMethodsWithClassNamespace.replacedName();
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     StaticJsMethodsWithClassNamespace.$clinit = () => {};
     StaticJsMethodsWithClassNamespace.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof StaticJsMethodsWithClassNamespace;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

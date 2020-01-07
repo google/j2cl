@@ -11,16 +11,11 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
  * @extends {Superclass<AssertionError>}
  */
 class Subclass extends Superclass {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!Subclass}
-   * @public
-   */
+  /** @return {!Subclass} */
   static $create__() {
     Subclass.$clinit();
     let $instance = new Subclass();
@@ -28,46 +23,29 @@ class Subclass extends Superclass {
         .$ctor__com_google_j2cl_transpiler_readable_simplebridgemethods_Subclass__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_simplebridgemethods_Subclass__() {
     this.$ctor__com_google_j2cl_transpiler_readable_simplebridgemethods_Superclass__();
   }
-  /**
-   * @param {AssertionError} a
-   * @public
-   */
-  m_m1__java_lang_AssertionError(a) {}
-  /**
-   * Bridge method.
-   * @override
-   * @param {Error} arg0
-   * @public
-   */
-  m_m1__java_lang_Error(arg0) {
+
+  m_m1__java_lang_AssertionError(/** AssertionError */ a) {}
+  /** @override */
+  // Bridge method.
+  m_m1__java_lang_Error(/** Error */ arg0) {
     this.m_m1__java_lang_AssertionError(
-        /**@type {AssertionError} */ ($Casts.$to(arg0, AssertionError)));
+        /**@type {AssertionError}*/ ($Casts.$to(arg0, AssertionError)));
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     Subclass.$clinit = () => {};
     Subclass.$loadModules();
     Superclass.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Subclass;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     AssertionError = goog.module.get('java.lang.AssertionError$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');

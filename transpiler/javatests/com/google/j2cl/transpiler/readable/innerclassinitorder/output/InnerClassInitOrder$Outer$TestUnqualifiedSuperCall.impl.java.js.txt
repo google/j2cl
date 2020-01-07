@@ -6,21 +6,15 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Outer = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer$impl');
 
 class TestUnqualifiedSuperCall extends OuterIsNotSuper {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {Outer} */
+    /**@type {Outer}*/
     this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer_TestUnqualifiedSuperCall;
   }
-  /**
-   * @param {Outer} $outer_this
-   * @return {!TestUnqualifiedSuperCall}
-   * @public
-   */
+  /** @return {!TestUnqualifiedSuperCall} */
   static $create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer(
-      $outer_this) {
+      /** Outer */ $outer_this) {
     TestUnqualifiedSuperCall.$clinit();
     let $instance = new TestUnqualifiedSuperCall();
     $instance
@@ -28,36 +22,25 @@ class TestUnqualifiedSuperCall extends OuterIsNotSuper {
             $outer_this);
     return $instance;
   }
-  /**
-   * @param {Outer} $outer_this
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer_TestUnqualifiedSuperCall__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer(
-      $outer_this) {
+      /** Outer */ $outer_this) {
     this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer_TestUnqualifiedSuperCall =
         $outer_this;
     this.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer(
         $outer_this);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     TestUnqualifiedSuperCall.$clinit = () => {};
     TestUnqualifiedSuperCall.$loadModules();
     OuterIsNotSuper.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof TestUnqualifiedSuperCall;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

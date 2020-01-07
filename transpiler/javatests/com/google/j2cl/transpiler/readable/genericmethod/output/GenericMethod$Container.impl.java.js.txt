@@ -9,17 +9,11 @@ let Content = goog.forwardDeclare('com.google.j2cl.transpiler.readable.genericme
  * @template CT
  */
 class Container extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @template CT
-   * @return {!Container<CT>}
-   * @public
-   */
+  /** @template CT @return {!Container<CT>} */
   static $create__() {
     Container.$clinit();
     let $instance = new Container();
@@ -27,38 +21,25 @@ class Container extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod_Container__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod_Container__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @return {CT}
-   * @public
-   */
+  /** @return {CT} */
   m_get___$pp_com_google_j2cl_transpiler_readable_genericmethod() {
     return null;
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     Container.$clinit = () => {};
     Container.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Container;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

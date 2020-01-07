@@ -9,34 +9,21 @@ let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 class SubVarargs extends Varargs {
-  /**
-   * JsConstructor 'SubVarargs(Object, int...)'.
-   * @param {*} i
-   * @param {...number} args
-   * @public
-   */
-  constructor(i, ...args) {
+  // JsConstructor 'SubVarargs(Object, int...)'.
+  constructor(/** * */ i, .../** ...number */ args) {
     SubVarargs.$clinit();
     $Arrays.$stampType(args, $int, 1);
     super(...InternalPreconditions.m_checkNotNull__java_lang_Object(args));
     this.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_SubVarargs__java_lang_Object__arrayOf_int(
         i, args);
   }
-  /**
-   * Initialization from constructor 'SubVarargs(Object, int...)'.
-   * @param {*} i
-   * @param {Array<number>} args
-   * @public
-   */
+
+  // Initialization from constructor 'SubVarargs(Object, int...)'.
   $ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_SubVarargs__java_lang_Object__arrayOf_int(
-      i, args) {}
-  /**
-   * Factory method corresponding to constructor 'SubVarargs(int)'.
-   * @param {number} j
-   * @return {!SubVarargs}
-   * @public
-   */
-  static $create__int(j) {
+      /** * */ i, /** Array<number> */ args) {}
+  /** @return {!SubVarargs} */
+  // Factory method corresponding to constructor 'SubVarargs(int)'.
+  static $create__int(/** number */ j) {
     SubVarargs.$clinit();
     let $instance = new SubVarargs(j_l_Object.$create__(), j);
     $instance
@@ -44,40 +31,27 @@ class SubVarargs extends Varargs {
             j);
     return $instance;
   }
-  /**
-   * Initialization from constructor 'SubVarargs(int)'.
-   * @param {number} j
-   * @public
-   */
+
+  // Initialization from constructor 'SubVarargs(int)'.
   $ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_SubVarargs__int(
-      j) {}
-  /**
-   * @public
-   */
+      /** number */ j) {}
+
   static m_subNativeInvocation__() {
     SubVarargs.$clinit();
     let unusedS1 = SubVarargs.$create__int(2);
     let unusedS2 = new SubVarargs(j_l_Object.$create__(), 1, 2, 3);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     SubVarargs.$clinit = () => {};
     SubVarargs.$loadModules();
     Varargs.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof SubVarargs;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     j_l_Object = goog.module.get('java.lang.Object$impl');
     InternalPreconditions =

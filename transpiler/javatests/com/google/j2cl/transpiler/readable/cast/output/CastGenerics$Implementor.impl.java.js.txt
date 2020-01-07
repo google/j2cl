@@ -4,57 +4,36 @@ const BaseImplementor = goog.require('com.google.j2cl.transpiler.readable.cast.C
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class Implementor extends BaseImplementor {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!Implementor}
-   * @public
-   */
+  /** @return {!Implementor} */
   static $create__() {
     let $instance = new Implementor();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_cast_CastGenerics_Implementor__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_cast_CastGenerics_Implementor__() {
     this.$ctor__com_google_j2cl_transpiler_readable_cast_CastGenerics_BaseImplementor__();
   }
-  /**
-   * @override
-   * @public
-   */
+  /** @override */
   m_mA__() {}
-  /**
-   * @override
-   * @public
-   */
+  /** @override */
   m_mB__() {}
-  /**
-   * @public
-   */
+
   static $clinit() {
     Implementor.$clinit = () => {};
     Implementor.$loadModules();
     BaseImplementor.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Implementor;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

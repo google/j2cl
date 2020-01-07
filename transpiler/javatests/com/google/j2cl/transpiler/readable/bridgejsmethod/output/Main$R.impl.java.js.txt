@@ -9,52 +9,35 @@ let Main = goog.forwardDeclare('com.google.j2cl.transpiler.readable.bridgejsmeth
  * @abstract
  */
 class R extends Q {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {Main} */
+    /**@type {Main}*/
     this.f_$outer_this__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_R;
   }
-  /**
-   * @param {Main} $outer_this
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_R__com_google_j2cl_transpiler_readable_bridgejsmethod_Main(
-      $outer_this) {
+      /** Main */ $outer_this) {
     this.f_$outer_this__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_R =
         $outer_this;
     this.$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_Q__com_google_j2cl_transpiler_readable_bridgejsmethod_Main(
         $outer_this);
   }
-  /**
-   * @override
-   * @return {?string}
-   * @public
-   */
+  /** @override @return {?string} */
   getKey() {
     return null;
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     R.$clinit = () => {};
     R.$loadModules();
     Q.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof R;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

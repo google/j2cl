@@ -4,18 +4,13 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class FooImpl extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {?string} */
+    /**@type {?string}*/
     this.foo;
   }
-  /**
-   * @return {!FooImpl}
-   * @public
-   */
+  /** @return {!FooImpl} */
   static $create__() {
     FooImpl.$clinit();
     let $instance = new FooImpl();
@@ -23,31 +18,21 @@ class FooImpl extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_externs_Main_FooImpl__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_externs_Main_FooImpl__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     FooImpl.$clinit = () => {};
     FooImpl.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof FooImpl;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

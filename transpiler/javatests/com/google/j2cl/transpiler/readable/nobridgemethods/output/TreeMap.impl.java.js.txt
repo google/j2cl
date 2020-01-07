@@ -10,17 +10,11 @@ let InnerEntry = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nobrid
  * @extends {Map<K>}
  */
 class TreeMap extends Map {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @template K
-   * @return {!TreeMap<K>}
-   * @public
-   */
+  /** @template K @return {!TreeMap<K>} */
   static $create__() {
     TreeMap.$clinit();
     let $instance = new TreeMap();
@@ -28,40 +22,25 @@ class TreeMap extends Map {
         .$ctor__com_google_j2cl_transpiler_readable_nobridgemethods_TreeMap__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_nobridgemethods_TreeMap__() {
     this.$ctor__com_google_j2cl_transpiler_readable_nobridgemethods_Map__();
   }
-  /**
-   * @override
-   * @param {K} key
-   * @return {InnerEntry<K>}
-   * @public
-   */
-  m_getCeilingEntry__java_lang_Object(key) {
-    return /**@type {!InnerEntry<K>} */ (InnerEntry.$create__());
+  /** @override @return {InnerEntry<K>} */
+  m_getCeilingEntry__java_lang_Object(/** K */ key) {
+    return /**@type {!InnerEntry<K>}*/ (InnerEntry.$create__());
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     TreeMap.$clinit = () => {};
     TreeMap.$loadModules();
     Map.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof TreeMap;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     InnerEntry = goog.module.get(
         'com.google.j2cl.transpiler.readable.nobridgemethods.TreeMap.InnerEntry$impl');

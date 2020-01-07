@@ -11,16 +11,11 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
  * @implements {I<?string>}
  */
 class NonJsTypeSubtype extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!NonJsTypeSubtype}
-   * @public
-   */
+  /** @return {!NonJsTypeSubtype} */
   static $create__() {
     NonJsTypeSubtype.$clinit();
     let $instance = new NonJsTypeSubtype();
@@ -28,48 +23,29 @@ class NonJsTypeSubtype extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_jsoptional_Main_NonJsTypeSubtype__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_jsoptional_Main_NonJsTypeSubtype__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @param {?string} t
-   * @param {*} o
-   * @public
-   */
-  m_m__java_lang_String__java_lang_Object(t, o) {}
-  /**
-   * Bridge method.
-   * @override
-   * @param {*} arg0
-   * @param {*=} arg1
-   * @public
-   */
-  m(arg0, arg1) {
+
+  m_m__java_lang_String__java_lang_Object(/** ?string */ t, /** * */ o) {}
+  /** @override */
+  // Bridge method.
+  m(/** * */ arg0, /** *= */ arg1) {
     this.m_m__java_lang_String__java_lang_Object(
-        /**@type {?string} */ ($Casts.$to(arg0, j_l_String)), arg1);
+        /**@type {?string}*/ ($Casts.$to(arg0, j_l_String)), arg1);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     NonJsTypeSubtype.$clinit = () => {};
     NonJsTypeSubtype.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof NonJsTypeSubtype;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     j_l_String = goog.module.get('java.lang.String$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');

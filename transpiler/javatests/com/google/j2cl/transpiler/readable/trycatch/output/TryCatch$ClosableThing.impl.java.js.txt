@@ -8,16 +8,11 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {AutoCloseable}
  */
 class ClosableThing extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!ClosableThing}
-   * @public
-   */
+  /** @return {!ClosableThing} */
   static $create__() {
     ClosableThing.$clinit();
     let $instance = new ClosableThing();
@@ -25,36 +20,23 @@ class ClosableThing extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_trycatch_TryCatch_ClosableThing__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_trycatch_TryCatch_ClosableThing__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @override
-   * @public
-   */
+  /** @override */
   m_close__() {}
-  /**
-   * @public
-   */
+
   static $clinit() {
     ClosableThing.$clinit = () => {};
     ClosableThing.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof ClosableThing;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

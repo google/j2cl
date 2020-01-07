@@ -6,16 +6,11 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
 
 class Asserts extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!Asserts}
-   * @public
-   */
+  /** @return {!Asserts} */
   static $create__() {
     Asserts.$clinit();
     let $instance = new Asserts();
@@ -23,39 +18,26 @@ class Asserts extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_localnamecollision_Asserts__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_localnamecollision_Asserts__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @return {number}
-   * @public
-   */
+  /** @return {number} */
   m_n___$pp_com_google_j2cl_transpiler_readable_localnamecollision() {
     $Asserts.$assert(5 != 4);
     return 5;
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     Asserts.$clinit = () => {};
     Asserts.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Asserts;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
   }

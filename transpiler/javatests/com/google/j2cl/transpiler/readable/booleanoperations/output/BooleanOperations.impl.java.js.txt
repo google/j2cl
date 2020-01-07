@@ -7,16 +7,11 @@ let $1Outer = goog.forwardDeclare('com.google.j2cl.transpiler.readable.booleanop
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 
 class BooleanOperations extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!BooleanOperations}
-   * @public
-   */
+  /** @return {!BooleanOperations} */
   static $create__() {
     BooleanOperations.$clinit();
     let $instance = new BooleanOperations();
@@ -24,20 +19,13 @@ class BooleanOperations extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @param {boolean} b
-   * @public
-   */
-  static m_acceptBoolean__boolean(b) {}
-  /**
-   * @public
-   */
+
+  static m_acceptBoolean__boolean(/** boolean */ b) {}
+
   m_test__() {
     let ls = true;
     let rs = true;
@@ -62,14 +50,14 @@ class BooleanOperations extends j_l_Object {
     BooleanOperations.m_acceptBoolean__boolean(ls || rs);
     BooleanOperations.m_acceptBoolean__boolean(ls = rs);
     let /** ?boolean */ br;
-    br = /**@type {?boolean} */ ((ls == rs));
-    br = /**@type {?boolean} */ ((ls != rs));
-    br = /**@type {?boolean} */ ((!!(+ls ^ +rs)));
-    br = /**@type {?boolean} */ ((!!(+ls & +rs)));
-    br = /**@type {?boolean} */ ((!!(+ls | +rs)));
-    br = /**@type {?boolean} */ ((ls && rs));
-    br = /**@type {?boolean} */ ((ls || rs));
-    br = /**@type {?boolean} */ ((ls = rs));
+    br = /**@type {?boolean}*/ ((ls == rs));
+    br = /**@type {?boolean}*/ ((ls != rs));
+    br = /**@type {?boolean}*/ ((!!(+ls ^ +rs)));
+    br = /**@type {?boolean}*/ ((!!(+ls & +rs)));
+    br = /**@type {?boolean}*/ ((!!(+ls | +rs)));
+    br = /**@type {?boolean}*/ ((ls && rs));
+    br = /**@type {?boolean}*/ ((ls || rs));
+    br = /**@type {?boolean}*/ ((ls = rs));
     if (ls == rs) {
       r = true;
     }
@@ -110,25 +98,17 @@ class BooleanOperations extends j_l_Object {
                 .f_b__com_google_j2cl_transpiler_readable_booleanoperations_BooleanOperations_1Outer |
            +$Equality.$same((outer = null), null));
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     BooleanOperations.$clinit = () => {};
     BooleanOperations.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof BooleanOperations;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     $1Outer = goog.module.get(
         'com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations.$1Outer$impl');

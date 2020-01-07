@@ -10,65 +10,43 @@ let $Numbers = goog.forwardDeclare('vmbootstrap.Numbers$impl');
  * @template T_1
  */
 class T extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @template T_1
-   * @return {!T<T_1>}
-   * @public
-   */
+  /** @template T_1 @return {!T<T_1>} */
   static $create__() {
     T.$clinit();
     let $instance = new T();
     $instance.$ctor__com_google_j2cl_transpiler_readable_collisions_T__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_collisions_T__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @return {T_1}
-   * @public
-   */
+  /** @return {T_1} */
   m_m___$pp_com_google_j2cl_transpiler_readable_collisions() {
     return null;
   }
-  /**
-   * @return {T_1}
-   * @public
-   */
+  /** @return {T_1} */
   m_n___$pp_com_google_j2cl_transpiler_readable_collisions() {
-    let t = /**@type {!T<T_1>} */ (T.$create__())
+    let t = /**@type {!T<T_1>}*/ (T.$create__())
                 .m_m___$pp_com_google_j2cl_transpiler_readable_collisions();
     $Numbers.m_byteValue__java_lang_Number(t);
     return t;
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     T.$clinit = () => {};
     T.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof T;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     $Numbers = goog.module.get('vmbootstrap.Numbers$impl');
   }

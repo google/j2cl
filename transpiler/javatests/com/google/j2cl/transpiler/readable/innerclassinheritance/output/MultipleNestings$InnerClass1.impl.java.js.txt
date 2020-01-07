@@ -6,21 +6,15 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let MultipleNestings = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings$impl');
 
 class InnerClass1 extends Parent {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {MultipleNestings} */
+    /**@type {MultipleNestings}*/
     this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings_InnerClass1;
   }
-  /**
-   * @param {MultipleNestings} $outer_this
-   * @return {!InnerClass1}
-   * @public
-   */
+  /** @return {!InnerClass1} */
   static $create__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings(
-      $outer_this) {
+      /** MultipleNestings */ $outer_this) {
     InnerClass1.$clinit();
     let $instance = new InnerClass1();
     $instance
@@ -28,40 +22,27 @@ class InnerClass1 extends Parent {
             $outer_this);
     return $instance;
   }
-  /**
-   * @param {MultipleNestings} $outer_this
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings_InnerClass1__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings(
-      $outer_this) {
+      /** MultipleNestings */ $outer_this) {
     this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings_InnerClass1 =
         $outer_this;
     this.$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings_Parent__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings(
         $outer_this);
   }
-  /**
-   * @public
-   */
+
   m_funInI1__() {}
-  /**
-   * @public
-   */
+
   static $clinit() {
     InnerClass1.$clinit = () => {};
     InnerClass1.$loadModules();
     Parent.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof InnerClass1;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

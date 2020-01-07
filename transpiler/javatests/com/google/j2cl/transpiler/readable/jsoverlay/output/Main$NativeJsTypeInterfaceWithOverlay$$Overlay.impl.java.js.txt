@@ -6,29 +6,20 @@ const NativeJsTypeInterfaceWithOverlay = goog.require('test.foo.NativeJsTypeInte
 let j_l_Object = goog.forwardDeclare('java.lang.Object$impl');
 
 class $Overlay {
-  /**
-   * @param {!NativeJsTypeInterfaceWithOverlay} $thisArg
-   * @return {number}
-   * @public
-   */
+  /** @return {number} */
   static m_callM__$devirt__com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeInterfaceWithOverlay(
-      $thisArg) {
+      /** !NativeJsTypeInterfaceWithOverlay */ $thisArg) {
     $Overlay.$clinit();
     return $thisArg.m();
   }
-  /**
-   * @return {*}
-   * @public
-   */
+  /** @return {*} */
   static get f_staticField__com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay() {
     return (
         $Overlay.$clinit(),
         $Overlay
             .$f_staticField__com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     $Overlay.$clinit = () => {};
     $Overlay.$loadModules();
@@ -36,19 +27,17 @@ class $Overlay {
         .$f_staticField__com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay =
         j_l_Object.$create__();
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     j_l_Object = goog.module.get('java.lang.Object$impl');
   }
 }
 
-/** @public {?string} @const */
+/**@const {?string}*/
 $Overlay
     .f_COMPILE_TIME_CONSTANT__com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay =
     '10';
-/** @private {*} */
+/**@private {*}*/
 $Overlay
     .$f_staticField__com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay;
 

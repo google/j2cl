@@ -6,16 +6,11 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 
 class SubNumber extends Number {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!SubNumber}
-   * @public
-   */
+  /** @return {!SubNumber} */
   static $create__() {
     SubNumber.$clinit();
     let $instance = new SubNumber();
@@ -23,63 +18,37 @@ class SubNumber extends Number {
         .$ctor__com_google_j2cl_transpiler_readable_devirtualizedsupermethodcall_SubNumber__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_devirtualizedsupermethodcall_SubNumber__() {
     this.$ctor__java_lang_Number__();
   }
-  /**
-   * @override
-   * @return {number}
-   * @public
-   */
+  /** @override @return {number} */
   m_intValue__() {
     return 0;
   }
-  /**
-   * @override
-   * @return {!$Long}
-   * @public
-   */
+  /** @override @return {!$Long} */
   m_longValue__() {
     return $Long.fromInt(0);
   }
-  /**
-   * @override
-   * @return {number}
-   * @public
-   */
+  /** @override @return {number} */
   m_floatValue__() {
     return 0.0;
   }
-  /**
-   * @override
-   * @return {number}
-   * @public
-   */
+  /** @override @return {number} */
   m_doubleValue__() {
     return 0.0;
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     SubNumber.$clinit = () => {};
     SubNumber.$loadModules();
     Number.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof SubNumber;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     $Long = goog.module.get('nativebootstrap.Long$impl');
   }

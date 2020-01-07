@@ -10,21 +10,15 @@ let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 class InnerClass extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {QualifiedSuperMethodCall} */
+    /**@type {QualifiedSuperMethodCall}*/
     this.f_$outer_this__com_google_j2cl_transpiler_readable_jsvarargs_QualifiedSuperMethodCall_InnerClass;
   }
-  /**
-   * @param {QualifiedSuperMethodCall} $outer_this
-   * @return {!InnerClass}
-   * @public
-   */
+  /** @return {!InnerClass} */
   static $create__com_google_j2cl_transpiler_readable_jsvarargs_QualifiedSuperMethodCall(
-      $outer_this) {
+      /** QualifiedSuperMethodCall */ $outer_this) {
     InnerClass.$clinit();
     let $instance = new InnerClass();
     $instance
@@ -32,19 +26,14 @@ class InnerClass extends j_l_Object {
             $outer_this);
     return $instance;
   }
-  /**
-   * @param {QualifiedSuperMethodCall} $outer_this
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_jsvarargs_QualifiedSuperMethodCall_InnerClass__com_google_j2cl_transpiler_readable_jsvarargs_QualifiedSuperMethodCall(
-      $outer_this) {
+      /** QualifiedSuperMethodCall */ $outer_this) {
     this.f_$outer_this__com_google_j2cl_transpiler_readable_jsvarargs_QualifiedSuperMethodCall_InnerClass =
         $outer_this;
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @public
-   */
+
   m_test__() {
     Main.prototype.f3.call(
         this.f_$outer_this__com_google_j2cl_transpiler_readable_jsvarargs_QualifiedSuperMethodCall_InnerClass,
@@ -58,30 +47,22 @@ class InnerClass extends j_l_Object {
     Main.prototype.f3.call(
         this.f_$outer_this__com_google_j2cl_transpiler_readable_jsvarargs_QualifiedSuperMethodCall_InnerClass,
         1);
-    let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));
+    let ints = /**@type {!Array<number>}*/ ($Arrays.$init([1, 2], $int));
     Main.prototype.f3.call(
         this.f_$outer_this__com_google_j2cl_transpiler_readable_jsvarargs_QualifiedSuperMethodCall_InnerClass,
         1, ...InternalPreconditions.m_checkNotNull__java_lang_Object(ints));
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     InnerClass.$clinit = () => {};
     InnerClass.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof InnerClass;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     Main = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsvarargs.Main$impl');

@@ -11,51 +11,36 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
  * @template T
  */
 class SomeJsType extends j_l_Object {
-  /**
-   * @public
-   */
   constructor() {
     SomeJsType.$clinit();
     super();
-    /** @public {number} */
+    /**@type {number}*/
     this.publicField = 0;
-    /** @public {number} */
+    /**@type {number}*/
     this.f_privateField__com_google_j2cl_transpiler_readable_jstype_SomeJsType_ =
         0;
-    /** @public {number} */
+    /**@type {number}*/
     this.f_packageField__com_google_j2cl_transpiler_readable_jstype_SomeJsType =
         0;
-    /** @public {number} */
+    /**@type {number}*/
     this.f_protectedField__com_google_j2cl_transpiler_readable_jstype_SomeJsType =
         0;
     this.$ctor__com_google_j2cl_transpiler_readable_jstype_SomeJsType__();
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_jstype_SomeJsType__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @public
-   */
+
   publicMethod() {}
-  /**
-   * @public
-   */
+
   m_privateMethod___$p_com_google_j2cl_transpiler_readable_jstype_SomeJsType() {
   }
-  /**
-   * @public
-   */
+
   m_packageMethod___$pp_com_google_j2cl_transpiler_readable_jstype() {}
-  /**
-   * @public
-   */
+
   m_protectedMethod__() {}
-  /**
-   * @public
-   */
+
   useFieldsAndMethods() {
     let value = this.publicField +
         this.f_privateField__com_google_j2cl_transpiler_readable_jstype_SomeJsType_ +
@@ -66,36 +51,23 @@ class SomeJsType extends j_l_Object {
     this.m_packageMethod___$pp_com_google_j2cl_transpiler_readable_jstype();
     this.m_protectedMethod__();
   }
-  /**
-   * @param {*} s
-   * @param {?} w
-   * @return {?}
-   * @public
-   */
-  testStarAndWildCard(s, w) {
+  /** @return {?} */
+  testStarAndWildCard(/** * */ s, /** ? */ w) {
     let object = j_l_Object.$create__();
-    let star = /**@type {*} */ ($Casts.$to(3.0, j_l_Object));
-    return /**@type {?} */ (star);
+    let star = /**@type {*}*/ ($Casts.$to(3.0, j_l_Object));
+    return /**@type {?}*/ (star);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     SomeJsType.$clinit = () => {};
     SomeJsType.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof SomeJsType;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
   }

@@ -7,21 +7,15 @@ let Parent = goog.forwardDeclare('com.google.j2cl.transpiler.readable.qualifieds
 let QualifiedSuperCall = goog.forwardDeclare('com.google.j2cl.transpiler.readable.qualifiedsupercall.QualifiedSuperCall$impl');
 
 class InnerClass extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {QualifiedSuperCall} */
+    /**@type {QualifiedSuperCall}*/
     this.f_$outer_this__com_google_j2cl_transpiler_readable_qualifiedsupercall_QualifiedSuperCall_InnerClass;
   }
-  /**
-   * @param {QualifiedSuperCall} $outer_this
-   * @return {!InnerClass}
-   * @public
-   */
+  /** @return {!InnerClass} */
   static $create__com_google_j2cl_transpiler_readable_qualifiedsupercall_QualifiedSuperCall(
-      $outer_this) {
+      /** QualifiedSuperCall */ $outer_this) {
     InnerClass.$clinit();
     let $instance = new InnerClass();
     $instance
@@ -29,42 +23,29 @@ class InnerClass extends j_l_Object {
             $outer_this);
     return $instance;
   }
-  /**
-   * @param {QualifiedSuperCall} $outer_this
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_qualifiedsupercall_QualifiedSuperCall_InnerClass__com_google_j2cl_transpiler_readable_qualifiedsupercall_QualifiedSuperCall(
-      $outer_this) {
+      /** QualifiedSuperCall */ $outer_this) {
     this.f_$outer_this__com_google_j2cl_transpiler_readable_qualifiedsupercall_QualifiedSuperCall_InnerClass =
         $outer_this;
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @public
-   */
+
   m_test__() {
     Parent.prototype.m_fun__.call(
         this.f_$outer_this__com_google_j2cl_transpiler_readable_qualifiedsupercall_QualifiedSuperCall_InnerClass);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     InnerClass.$clinit = () => {};
     InnerClass.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof InnerClass;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     Parent = goog.module.get(
         'com.google.j2cl.transpiler.readable.qualifiedsupercall.Parent$impl');

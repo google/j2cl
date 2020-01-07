@@ -4,54 +4,37 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class Parent extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {number} */
+    /**@type {number}*/
     this.f_fieldInParent__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Parent =
         0;
   }
-  /**
-   * @return {!Parent}
-   * @public
-   */
+  /** @return {!Parent} */
   static $create__() {
     let $instance = new Parent();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Parent__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Parent__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @public
-   */
+
   m_funInParent__() {}
-  /**
-   * @public
-   */
+
   static $clinit() {
     Parent.$clinit = () => {};
     Parent.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Parent;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

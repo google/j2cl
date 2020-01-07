@@ -12,66 +12,40 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
  * @implements {I<?string>}
  */
 class SpecializedSubtype extends j_l_Object {
-  /**
-   * @param {Main} $outer_this
-   * @param {*=} a
-   * @public
-   */
-  constructor($outer_this, a) {
+  constructor(/** Main */ $outer_this, /** *= */ a) {
     SpecializedSubtype.$clinit();
     super();
-    /** @public {Main} */
+    /**@type {Main}*/
     this.f_$outer_this__com_google_j2cl_transpiler_readable_jsoptional_Main_SpecializedSubtype;
     this.$ctor__com_google_j2cl_transpiler_readable_jsoptional_Main_SpecializedSubtype__com_google_j2cl_transpiler_readable_jsoptional_Main__java_lang_Object(
         $outer_this, a);
   }
-  /**
-   * @param {Main} $outer_this
-   * @param {*} a
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_jsoptional_Main_SpecializedSubtype__com_google_j2cl_transpiler_readable_jsoptional_Main__java_lang_Object(
-      $outer_this, a) {
+      /** Main */ $outer_this, /** * */ a) {
     this.f_$outer_this__com_google_j2cl_transpiler_readable_jsoptional_Main_SpecializedSubtype =
         $outer_this;
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @param {?string} t
-   * @param {*} o
-   * @public
-   */
-  m_m__java_lang_String__java_lang_Object(t, o) {}
-  /**
-   * Bridge method.
-   * @override
-   * @param {*} arg0
-   * @param {*=} arg1
-   * @public
-   */
-  m(arg0, arg1) {
+
+  m_m__java_lang_String__java_lang_Object(/** ?string */ t, /** * */ o) {}
+  /** @override */
+  // Bridge method.
+  m(/** * */ arg0, /** *= */ arg1) {
     this.m_m__java_lang_String__java_lang_Object(
-        /**@type {?string} */ ($Casts.$to(arg0, j_l_String)), arg1);
+        /**@type {?string}*/ ($Casts.$to(arg0, j_l_String)), arg1);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     SpecializedSubtype.$clinit = () => {};
     SpecializedSubtype.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof SpecializedSubtype;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     j_l_String = goog.module.get('java.lang.String$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');

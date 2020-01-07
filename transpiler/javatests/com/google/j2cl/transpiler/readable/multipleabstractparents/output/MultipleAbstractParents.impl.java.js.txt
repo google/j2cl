@@ -10,16 +10,11 @@ let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
 
 class MultipleAbstractParents extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!MultipleAbstractParents}
-   * @public
-   */
+  /** @return {!MultipleAbstractParents} */
   static $create__() {
     MultipleAbstractParents.$clinit();
     let $instance = new MultipleAbstractParents();
@@ -27,49 +22,36 @@ class MultipleAbstractParents extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @param {Array<?string>} args
-   * @public
-   */
-  static m_main__arrayOf_java_lang_String(args) {
+
+  static m_main__arrayOf_java_lang_String(/** Array<?string> */ args) {
     MultipleAbstractParents.$clinit();
     $Asserts.$assert(j_l_String.m_equals__java_lang_String__java_lang_Object(
-        /**@type {!ArrayList<?string>} */ (ArrayList.$create__())
+        /**@type {!ArrayList<?string>}*/ (ArrayList.$create__())
             .m_getFoo__java_lang_Object(null),
         'AbstractCollection'));
     $Asserts.$assert(j_l_String.m_equals__java_lang_String__java_lang_Object(
         StringList.$create__().m_getFoo__java_lang_Object(null),
         'AbstractCollection'));
     $Asserts.$assert(j_l_String.m_equals__java_lang_String__java_lang_Object(
-        /**@type {IStringList} */ (StringList.$create__())
+        /**@type {IStringList}*/ (StringList.$create__())
             .m_getFoo__java_lang_String(null),
         'AbstractCollection'));
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     MultipleAbstractParents.$clinit = () => {};
     MultipleAbstractParents.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof MultipleAbstractParents;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     ArrayList = goog.module.get(
         'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.ArrayList$impl');

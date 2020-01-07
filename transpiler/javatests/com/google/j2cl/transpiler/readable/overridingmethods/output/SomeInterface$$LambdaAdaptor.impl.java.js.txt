@@ -8,31 +8,22 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {SomeInterface}
  */
 class $LambdaAdaptor extends j_l_Object {
-  /**
-   * @param {?function():void} fn
-   * @public
-   */
-  constructor(fn) {
+  constructor(/** ?function():void */ fn) {
     $LambdaAdaptor.$clinit();
     super();
-    /** @public {?function():void} */
+    /**@type {?function():void}*/
     this.f_$$fn__com_google_j2cl_transpiler_readable_overridingmethods_SomeInterface_$LambdaAdaptor;
     this.$ctor__com_google_j2cl_transpiler_readable_overridingmethods_SomeInterface_$LambdaAdaptor__com_google_j2cl_transpiler_readable_overridingmethods_SomeInterface_$JsFunction(
         fn);
   }
-  /**
-   * @param {?function():void} fn
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_overridingmethods_SomeInterface_$LambdaAdaptor__com_google_j2cl_transpiler_readable_overridingmethods_SomeInterface_$JsFunction(
-      fn) {
+      /** ?function():void */ fn) {
     this.$ctor__java_lang_Object__();
     this.f_$$fn__com_google_j2cl_transpiler_readable_overridingmethods_SomeInterface_$LambdaAdaptor =
         fn;
   }
-  /**
-   * @public
-   */
+
   m_bar__() {
     {
       let $function =
@@ -40,25 +31,17 @@ class $LambdaAdaptor extends j_l_Object {
       $function();
     }
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     $LambdaAdaptor.$clinit = () => {};
     $LambdaAdaptor.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof $LambdaAdaptor;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

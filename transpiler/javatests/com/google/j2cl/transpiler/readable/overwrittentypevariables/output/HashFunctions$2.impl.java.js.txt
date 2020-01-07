@@ -12,17 +12,11 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
  * @implements {HashFunction<T>}
  */
 class $2 extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @template T
-   * @return {!$2<T>}
-   * @public
-   */
+  /** @template T @return {!$2<T>} */
   static $create__() {
     $2.$clinit();
     let $instance = new $2();
@@ -30,50 +24,31 @@ class $2 extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_overwrittentypevariables_HashFunctions_2__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_overwrittentypevariables_HashFunctions_2__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @param {T} input
-   * @return {?string}
-   * @public
-   */
-  m_apply__java_lang_Enum(input) {
-    return '' + /**@type {Enum} */ (input).ordinal();
+  /** @return {?string} */
+  m_apply__java_lang_Enum(/** T */ input) {
+    return '' + /**@type {Enum}*/ (input).ordinal();
   }
-  /**
-   * Bridge method.
-   * @override
-   * @param {*} arg0
-   * @return {?string}
-   * @public
-   */
-  m_apply__java_lang_Object(arg0) {
+  /** @override @return {?string} */
+  // Bridge method.
+  m_apply__java_lang_Object(/** * */ arg0) {
     return this.m_apply__java_lang_Enum(
-        /**@type {T} */ ($Casts.$to(arg0, Enum)));
+        /**@type {T}*/ ($Casts.$to(arg0, Enum)));
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     $2.$clinit = () => {};
     $2.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof $2;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     Enum = goog.module.get('java.lang.Enum$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');

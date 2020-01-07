@@ -4,39 +4,27 @@ const B = goog.require('com.google.j2cl.transpiler.readable.jsconstructor.JsCons
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class C extends B {
-  /**
-   * JsConstructor 'C(int)'.
-   * @param {number} x
-   * @public
-   */
-  constructor(x) {
+  // JsConstructor 'C(int)'.
+  constructor(/** number */ x) {
     C.$clinit();
     super(x * 2);
-    /** @public {number} */
+    /**@type {number}*/
     this.f_fC__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_C =
         0;
     this.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_C__int(
         x);
   }
-  /**
-   * Initialization from constructor 'C(int)'.
-   * @param {number} x
-   * @public
-   */
+
+  // Initialization from constructor 'C(int)'.
   $ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_C__int(
-      x) {
+      /** number */ x) {
     this.$init___$p_com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_C();
     this.f_fC__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_C =
         6;
   }
-  /**
-   * Factory method corresponding to constructor 'C(int, int)'.
-   * @param {number} x
-   * @param {number} y
-   * @return {!C}
-   * @public
-   */
-  static $create__int__int(x, y) {
+  /** @return {!C} */
+  // Factory method corresponding to constructor 'C(int, int)'.
+  static $create__int__int(/** number */ x, /** number */ y) {
     C.$clinit();
     let $instance = new C(x + y);
     $instance
@@ -44,43 +32,29 @@ class C extends B {
             x, y);
     return $instance;
   }
-  /**
-   * Initialization from constructor 'C(int, int)'.
-   * @param {number} x
-   * @param {number} y
-   * @public
-   */
+
+  // Initialization from constructor 'C(int, int)'.
   $ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_C__int__int(
-      x, y) {
+      /** number */ x, /** number */ y) {
     this.f_fC__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_C =
         7;
   }
-  /**
-   * @private
-   */
+  /** @private */
   $init___$p_com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_C() {
     this.f_fC__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_C =
         1;
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     C.$clinit = () => {};
     C.$loadModules();
     B.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof C;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

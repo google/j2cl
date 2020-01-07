@@ -8,17 +8,11 @@ const $JavaScriptFunction = goog.require('vmbootstrap.JavaScriptFunction$impl');
  * @template T
  */
 class ParamtericImplementation extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @template T
-   * @return {function(T):void}
-   * @public
-   */
+  /** @template T @return {function(T):void} */
   static $create__() {
     ParamtericImplementation.$clinit();
     let $instance = new ParamtericImplementation();
@@ -28,53 +22,32 @@ class ParamtericImplementation extends j_l_Object {
         ParamtericImplementation.prototype.m_call__java_lang_Object, $instance,
         ParamtericImplementation.$copy);
   }
-  /**
-   * @suppress {invalidCasts}
-   * @public
-   */
+  /** @suppress {invalidCasts} */
   $ctor__com_google_j2cl_transpiler_readable_jsfunction_Main_ParamtericImplementation__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @template T
-   * @this {?function(T):void}
-   * @param {T} t
-   * @public
-   */
-  m_call__java_lang_Object(t) {
-    let o = /**@type {T} */ (t);
+  /** @template T @this {?function(T):void} */
+  m_call__java_lang_Object(/** T */ t) {
+    let o = /**@type {T}*/ (t);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     ParamtericImplementation.$clinit = () => {};
     ParamtericImplementation.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance != null &&
         !!instance
               .$is__com_google_j2cl_transpiler_readable_jsfunction_Main_ParamtericImplementation;
   }
-  /**
-   * @param {ParamtericImplementation} from
-   * @param {?} to
-   * @public
-   */
-  static $copy(from, to) {
+  static $copy(/**ParamtericImplementation*/ from, /** ? */ to) {
     // Marks the object is an instance of this class.
     to.$is__com_google_j2cl_transpiler_readable_jsfunction_Main_ParamtericImplementation =
         true;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

@@ -8,45 +8,27 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @extends {Annotation}
  */
 class Foo {
-  /**
-   * @abstract
-   * @return {number}
-   * @public
-   */
+  /** @abstract @return {number} */
   m_bar__() {}
-  /**
-   * @public
-   */
+
   static $clinit() {
     Foo.$clinit = () => {};
     Foo.$loadModules();
   }
-  /**
-   * @param {Function} classConstructor
-   * @public
-   */
-  static $markImplementor(classConstructor) {
-    Annotation.$markImplementor(classConstructor);
-    /**
-     * @public {boolean}
-     */
-    classConstructor.prototype
+
+  static $markImplementor(/** Function*/ ctor) {
+    Annotation.$markImplementor(ctor);
+    ctor.prototype
         .$implements__com_google_j2cl_transpiler_readable_annotation_Main_Foo =
         true;
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance != null &&
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_annotation_Main_Foo;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadataForInterface(
@@ -54,7 +36,7 @@ $Util.$setClassMetadataForInterface(
 
 Foo.$markImplementor(/** @type {Function} */ (Foo));
 
-/** @public {number} @const */
+/**@const {number}*/
 Foo.f_CONSTANT__com_google_j2cl_transpiler_readable_annotation_Main_Foo = 123;
 
 exports = Foo;

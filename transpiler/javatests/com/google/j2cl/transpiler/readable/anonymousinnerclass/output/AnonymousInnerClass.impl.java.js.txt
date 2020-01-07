@@ -9,16 +9,11 @@ let $2 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.anonymousinner
 let $3 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass.$3$impl');
 
 class AnonymousInnerClass extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!AnonymousInnerClass}
-   * @public
-   */
+  /** @return {!AnonymousInnerClass} */
   static $create__() {
     AnonymousInnerClass.$clinit();
     let $instance = new AnonymousInnerClass();
@@ -26,17 +21,12 @@ class AnonymousInnerClass extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @param {number} arg
-   * @public
-   */
-  m_test__int(arg) {
+
+  m_test__int(/** number */ arg) {
     let ic =
         $1.$create__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass(
             this);
@@ -48,25 +38,17 @@ class AnonymousInnerClass extends j_l_Object {
         $3.$create__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass__int(
             this, arg);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     AnonymousInnerClass.$clinit = () => {};
     AnonymousInnerClass.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof AnonymousInnerClass;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     A = goog.module.get(
         'com.google.j2cl.transpiler.readable.anonymousinnerclass.A$impl');

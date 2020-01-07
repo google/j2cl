@@ -6,24 +6,17 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let LocalClassInheritance = goog.forwardDeclare('com.google.j2cl.transpiler.readable.localclassinheritance.LocalClassInheritance$impl');
 
 class $1Parent extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {LocalClassInheritance} */
+    /**@type {LocalClassInheritance}*/
     this.f_$outer_this__com_google_j2cl_transpiler_readable_localclassinheritance_LocalClassInheritance_1Parent;
-    /** @public {number} */
+    /**@type {number}*/
     this.$c_f = 0;
   }
-  /**
-   * @param {LocalClassInheritance} $outer_this
-   * @param {number} $c_f
-   * @return {!$1Parent}
-   * @public
-   */
+  /** @return {!$1Parent} */
   static $create__com_google_j2cl_transpiler_readable_localclassinheritance_LocalClassInheritance__int(
-      $outer_this, $c_f) {
+      /** LocalClassInheritance */ $outer_this, /** number */ $c_f) {
     $1Parent.$clinit();
     let $instance = new $1Parent();
     $instance
@@ -31,43 +24,29 @@ class $1Parent extends j_l_Object {
             $outer_this, $c_f);
     return $instance;
   }
-  /**
-   * @param {LocalClassInheritance} $outer_this
-   * @param {number} $c_f
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_localclassinheritance_LocalClassInheritance_1Parent__com_google_j2cl_transpiler_readable_localclassinheritance_LocalClassInheritance__int(
-      $outer_this, $c_f) {
+      /** LocalClassInheritance */ $outer_this, /** number */ $c_f) {
     this.f_$outer_this__com_google_j2cl_transpiler_readable_localclassinheritance_LocalClassInheritance_1Parent =
         $outer_this;
     this.$c_f = $c_f;
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @public
-   */
+
   m_n__() {
     let i = this.$c_f;
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     $1Parent.$clinit = () => {};
     $1Parent.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof $1Parent;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

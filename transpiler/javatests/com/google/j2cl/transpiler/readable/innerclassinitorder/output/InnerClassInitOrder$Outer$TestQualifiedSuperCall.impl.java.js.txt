@@ -7,16 +7,11 @@ let Outer = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassi
 let OuterIsSuper = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper$impl');
 
 class TestQualifiedSuperCall extends OuterIsNotSuper {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!TestQualifiedSuperCall}
-   * @public
-   */
+  /** @return {!TestQualifiedSuperCall} */
   static $create__() {
     TestQualifiedSuperCall.$clinit();
     let $instance = new TestQualifiedSuperCall();
@@ -24,34 +19,24 @@ class TestQualifiedSuperCall extends OuterIsNotSuper {
         .$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer_TestQualifiedSuperCall__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer_TestQualifiedSuperCall__() {
     this.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer(
         OuterIsSuper
             .$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_Outer__int(
                 Outer.$create__int(1), 2));
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     TestQualifiedSuperCall.$clinit = () => {};
     TestQualifiedSuperCall.$loadModules();
     OuterIsNotSuper.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof TestQualifiedSuperCall;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     Outer = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer$impl');

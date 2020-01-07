@@ -7,16 +7,11 @@ let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
 class ObjectCalls extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!ObjectCalls}
-   * @public
-   */
+  /** @return {!ObjectCalls} */
   static $create__() {
     ObjectCalls.$clinit();
     let $instance = new ObjectCalls();
@@ -24,15 +19,11 @@ class ObjectCalls extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_devirtualizedcalls_ObjectCalls__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_devirtualizedcalls_ObjectCalls__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @public
-   */
+
   m_main__() {
     let object = j_l_Object.$create__();
     $Objects.m_equals__java_lang_Object__java_lang_Object(object, object);
@@ -40,16 +31,14 @@ class ObjectCalls extends j_l_Object {
     $Objects.m_toString__java_lang_Object(object);
     $Objects.m_getClass__java_lang_Object(object);
     let objectCalls =
-        /**@type {!Array<ObjectCalls>} */ ($Arrays.$create([1], ObjectCalls));
+        /**@type {!Array<ObjectCalls>}*/ ($Arrays.$create([1], ObjectCalls));
     $Objects.m_equals__java_lang_Object__java_lang_Object(
         objectCalls, objectCalls);
     $Objects.m_hashCode__java_lang_Object(objectCalls);
     $Objects.m_toString__java_lang_Object(objectCalls);
     $Objects.m_getClass__java_lang_Object(objectCalls);
   }
-  /**
-   * @public
-   */
+
   m_test__() {
     this.equals(j_l_Object.$create__());
     this.hashCode();
@@ -60,25 +49,17 @@ class ObjectCalls extends j_l_Object {
     this.toString();
     this.m_getClass__();
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     ObjectCalls.$clinit = () => {};
     ObjectCalls.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof ObjectCalls;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Objects = goog.module.get('vmbootstrap.Objects$impl');

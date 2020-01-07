@@ -9,59 +9,40 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {MyFunction<F, T>}
  */
 class $LambdaAdaptor extends j_l_Object {
-  /**
-   * @param {?function(F):T} fn
-   * @public
-   */
-  constructor(fn) {
+  constructor(/** ?function(F):T */ fn) {
     $LambdaAdaptor.$clinit();
     super();
-    /** @public {?function(F):T} */
+    /**@type {?function(F):T}*/
     this.f_$$fn__com_google_j2cl_transpiler_readable_overwrittentypevariables_MyFunction_$LambdaAdaptor;
     this.$ctor__com_google_j2cl_transpiler_readable_overwrittentypevariables_MyFunction_$LambdaAdaptor__com_google_j2cl_transpiler_readable_overwrittentypevariables_MyFunction_$JsFunction(
         fn);
   }
-  /**
-   * @param {?function(F):T} fn
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_overwrittentypevariables_MyFunction_$LambdaAdaptor__com_google_j2cl_transpiler_readable_overwrittentypevariables_MyFunction_$JsFunction(
-      fn) {
+      /** ?function(F):T */ fn) {
     this.$ctor__java_lang_Object__();
     this.f_$$fn__com_google_j2cl_transpiler_readable_overwrittentypevariables_MyFunction_$LambdaAdaptor =
         fn;
   }
-  /**
-   * @param {F} arg0
-   * @return {T}
-   * @public
-   */
-  m_apply__java_lang_Object(arg0) {
+  /** @return {T} */
+  m_apply__java_lang_Object(/** F */ arg0) {
     let /** ?function(F):T */ $function;
     return (
         $function =
             this.f_$$fn__com_google_j2cl_transpiler_readable_overwrittentypevariables_MyFunction_$LambdaAdaptor,
         $function(arg0));
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     $LambdaAdaptor.$clinit = () => {};
     $LambdaAdaptor.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof $LambdaAdaptor;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

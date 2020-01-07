@@ -7,69 +7,38 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @abstract
  */
 class Parent extends SuperParent {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_Parent__() {
     this.$ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_SuperParent__();
   }
-  /**
-   * @override
-   * @param {number} a
-   * @return {number}
-   * @public
-   */
+  /** @override @return {number} */
   m_foo__int_$pp_com_google_j2cl_transpiler_readable_packageprivatemethods_package1(
-      a) {
+      /** number */ a) {
     return a;
   }
-  /**
-   * @abstract
-   * @param {number} a
-   * @param {number} b
-   * @param {number} c
-   * @return {number}
-   * @public
-   */
-  m_bar__int__int__int(a, b, c) {}
-  /**
-   * Forwarding method for package private method.
-   * @override
-   * @param {number} arg0
-   * @param {number} arg1
-   * @param {number} arg2
-   * @return {number}
-   * @public
-   */
+  /** @abstract @return {number} */
+  m_bar__int__int__int(/** number */ a, /** number */ b, /** number */ c) {}
+  /** @override @return {number} */
+  // Forwarding method for package private method.
   m_bar__int__int__int_$pp_com_google_j2cl_transpiler_readable_packageprivatemethods_package1(
-      arg0, arg1, arg2) {
+      /** number */ arg0, /** number */ arg1, /** number */ arg2) {
     return this.m_bar__int__int__int(arg0, arg1, arg2);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     Parent.$clinit = () => {};
     Parent.$loadModules();
     SuperParent.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Parent;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

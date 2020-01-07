@@ -7,27 +7,20 @@ let $1InnerClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nest
 let $1InnerInnerClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nestedlocalclasses.NestedLocalClasses.$1InnerClass.$1InnerInnerClass$impl');
 
 class $1ClassIndirectlyCapturingLocal extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {$1InnerClass} */
+    /**@type {$1InnerClass}*/
     this.f_$outer_this__com_google_j2cl_transpiler_readable_nestedlocalclasses_NestedLocalClasses_1InnerClass_1ClassIndirectlyCapturingLocal;
-    /** @public {number} */
+    /**@type {number}*/
     this.$c_localVar = 0;
-    /** @public {number} */
+    /**@type {number}*/
     this.$c_localVarInInnerClass = 0;
   }
-  /**
-   * @param {$1InnerClass} $outer_this
-   * @param {number} $c_localVar
-   * @param {number} $c_localVarInInnerClass
-   * @return {!$1ClassIndirectlyCapturingLocal}
-   * @public
-   */
+  /** @return {!$1ClassIndirectlyCapturingLocal} */
   static $create__com_google_j2cl_transpiler_readable_nestedlocalclasses_NestedLocalClasses_1InnerClass__int__int(
-      $outer_this, $c_localVar, $c_localVarInInnerClass) {
+      /** $1InnerClass */ $outer_this, /** number */ $c_localVar,
+      /** number */ $c_localVarInInnerClass) {
     $1ClassIndirectlyCapturingLocal.$clinit();
     let $instance = new $1ClassIndirectlyCapturingLocal();
     $instance
@@ -35,14 +28,10 @@ class $1ClassIndirectlyCapturingLocal extends j_l_Object {
             $outer_this, $c_localVar, $c_localVarInInnerClass);
     return $instance;
   }
-  /**
-   * @param {$1InnerClass} $outer_this
-   * @param {number} $c_localVar
-   * @param {number} $c_localVarInInnerClass
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_nestedlocalclasses_NestedLocalClasses_1InnerClass_1ClassIndirectlyCapturingLocal__com_google_j2cl_transpiler_readable_nestedlocalclasses_NestedLocalClasses_1InnerClass__int__int(
-      $outer_this, $c_localVar, $c_localVarInInnerClass) {
+      /** $1InnerClass */ $outer_this, /** number */ $c_localVar,
+      /** number */ $c_localVarInInnerClass) {
     this.f_$outer_this__com_google_j2cl_transpiler_readable_nestedlocalclasses_NestedLocalClasses_1InnerClass_1ClassIndirectlyCapturingLocal =
         $outer_this;
     this.$c_localVar = $c_localVar;
@@ -50,34 +39,24 @@ class $1ClassIndirectlyCapturingLocal extends j_l_Object {
     this.$ctor__java_lang_Object__();
     this.$init___$p_com_google_j2cl_transpiler_readable_nestedlocalclasses_NestedLocalClasses_1InnerClass_1ClassIndirectlyCapturingLocal();
   }
-  /**
-   * @private
-   */
+  /** @private */
   $init___$p_com_google_j2cl_transpiler_readable_nestedlocalclasses_NestedLocalClasses_1InnerClass_1ClassIndirectlyCapturingLocal() {
     $1InnerInnerClass
         .$create__com_google_j2cl_transpiler_readable_nestedlocalclasses_NestedLocalClasses_1InnerClass__int__int(
             this.f_$outer_this__com_google_j2cl_transpiler_readable_nestedlocalclasses_NestedLocalClasses_1InnerClass_1ClassIndirectlyCapturingLocal,
             this.$c_localVar, this.$c_localVarInInnerClass);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     $1ClassIndirectlyCapturingLocal.$clinit = () => {};
     $1ClassIndirectlyCapturingLocal.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof $1ClassIndirectlyCapturingLocal;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     $1InnerInnerClass = goog.module.get(
         'com.google.j2cl.transpiler.readable.nestedlocalclasses.NestedLocalClasses.$1InnerClass.$1InnerInnerClass$impl');

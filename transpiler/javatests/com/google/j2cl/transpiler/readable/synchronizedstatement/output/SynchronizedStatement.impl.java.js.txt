@@ -4,22 +4,17 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class SynchronizedStatement extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {number} */
+    /**@type {number}*/
     this.f_a__com_google_j2cl_transpiler_readable_synchronizedstatement_SynchronizedStatement_ =
         0;
-    /** @public {number} */
+    /**@type {number}*/
     this.f_b__com_google_j2cl_transpiler_readable_synchronizedstatement_SynchronizedStatement_ =
         0;
   }
-  /**
-   * @return {!SynchronizedStatement}
-   * @public
-   */
+  /** @return {!SynchronizedStatement} */
   static $create__() {
     SynchronizedStatement.$clinit();
     let $instance = new SynchronizedStatement();
@@ -27,15 +22,11 @@ class SynchronizedStatement extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_synchronizedstatement_SynchronizedStatement__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_synchronizedstatement_SynchronizedStatement__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @public
-   */
+
   m_main__() {
     {
       $Util.$synchronized(this);
@@ -43,25 +34,17 @@ class SynchronizedStatement extends j_l_Object {
       this.f_b__com_google_j2cl_transpiler_readable_synchronizedstatement_SynchronizedStatement_--;
     }
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     SynchronizedStatement.$clinit = () => {};
     SynchronizedStatement.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof SynchronizedStatement;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

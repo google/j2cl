@@ -10,32 +10,22 @@ let Integer = goog.forwardDeclare('java.lang.Integer$impl');
  * @implements {IntegerSupplier}
  */
 class $LambdaAdaptor extends j_l_Object {
-  /**
-   * @param {?function():Integer} fn
-   * @public
-   */
-  constructor(fn) {
+  constructor(/** ?function():Integer */ fn) {
     $LambdaAdaptor.$clinit();
     super();
-    /** @public {?function():Integer} */
+    /**@type {?function():Integer}*/
     this.f_$$fn__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_IntegerSupplier_$LambdaAdaptor;
     this.$ctor__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_IntegerSupplier_$LambdaAdaptor__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_IntegerSupplier_$JsFunction(
         fn);
   }
-  /**
-   * @param {?function():Integer} fn
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_IntegerSupplier_$LambdaAdaptor__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_IntegerSupplier_$JsFunction(
-      fn) {
+      /** ?function():Integer */ fn) {
     this.$ctor__java_lang_Object__();
     this.f_$$fn__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_IntegerSupplier_$LambdaAdaptor =
         fn;
   }
-  /**
-   * @return {Integer}
-   * @public
-   */
+  /** @return {Integer} */
   m_get__() {
     let /** ?function():Integer */ $function;
     return (
@@ -43,25 +33,17 @@ class $LambdaAdaptor extends j_l_Object {
             this.f_$$fn__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards_IntegerSupplier_$LambdaAdaptor,
         $function());
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     $LambdaAdaptor.$clinit = () => {};
     $LambdaAdaptor.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof $LambdaAdaptor;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

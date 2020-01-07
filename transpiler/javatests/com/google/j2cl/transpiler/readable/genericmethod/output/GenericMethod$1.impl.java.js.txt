@@ -10,22 +10,15 @@ let Error = goog.forwardDeclare('java.lang.Error$impl');
  * @extends {GenericMethod<T>}
  */
 class $1 extends GenericMethod {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {GenericMethod<T_1>} */
+    /**@type {GenericMethod<T_1>}*/
     this.f_$outer_this__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod_1;
   }
-  /**
-   * @template T, T_1
-   * @param {GenericMethod<T_1>} $outer_this
-   * @return {!$1<T, T_1>}
-   * @public
-   */
+  /** @template T, T_1 @return {!$1<T, T_1>} */
   static $create__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod(
-      $outer_this) {
+      /** GenericMethod<T_1> */ $outer_this) {
     $1.$clinit();
     let $instance = new $1();
     $instance
@@ -33,46 +26,28 @@ class $1 extends GenericMethod {
             $outer_this);
     return $instance;
   }
-  /**
-   * @param {GenericMethod<T_1>} $outer_this
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod_1__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod(
-      $outer_this) {
+      /** GenericMethod<T_1> */ $outer_this) {
     this.f_$outer_this__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod_1 =
         $outer_this;
     this.$ctor__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod__();
   }
-  /**
-   * @param {T} t
-   * @public
-   */
-  m_fun2__java_lang_Error(t) {}
-  /**
-   * @template T_2
-   * @param {T_2} t
-   * @public
-   */
-  m_fun2__java_lang_Object(t) {}
-  /**
-   * @public
-   */
+
+  m_fun2__java_lang_Error(/** T */ t) {}
+  /** @template T_2 */
+  m_fun2__java_lang_Object(/** T_2 */ t) {}
+
   static $clinit() {
     $1.$clinit = () => {};
     $1.$loadModules();
     GenericMethod.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof $1;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

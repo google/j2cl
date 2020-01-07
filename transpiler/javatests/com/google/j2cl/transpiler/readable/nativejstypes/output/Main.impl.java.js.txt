@@ -11,32 +11,22 @@ let $JavaScriptObject = goog.forwardDeclare('vmbootstrap.JavaScriptObject$impl')
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
 class Main extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!Main}
-   * @public
-   */
+  /** @return {!Main} */
   static $create__() {
     Main.$clinit();
     let $instance = new Main();
     $instance.$ctor__com_google_j2cl_transpiler_readable_nativejstypes_Main__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_nativejstypes_Main__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @return {number}
-   * @public
-   */
+  /** @return {number} */
   static m_testNativeJsTypeWithNamespace__() {
     Main.$clinit();
     let foo = new Foo();
@@ -44,10 +34,7 @@ class Main extends j_l_Object {
     foo.y = 5;
     return foo.sum();
   }
-  /**
-   * @return {number}
-   * @public
-   */
+  /** @return {number} */
   static m_testNativeJsTypeWithoutNamespace__() {
     Main.$clinit();
     let bar = new Bar(6, 7);
@@ -56,9 +43,7 @@ class Main extends j_l_Object {
     Bar.f = 10;
     return bar.product();
   }
-  /**
-   * @public
-   */
+
   static m_testInnerNativeJsType__() {
     Main.$clinit();
     let unusedBarInner = new Bar.Inner(1);
@@ -66,25 +51,19 @@ class Main extends j_l_Object {
         new $synthetic_com_google_j2cl_transpiler_readable_nativejstypes_Bar
             .Inner(2);
   }
-  /**
-   * @public
-   */
+
   static m_testGlobalNativeJsType__() {
     Main.$clinit();
     let header = new Headers();
     header.append('Content-Type', 'text/xml');
   }
-  /**
-   * @public
-   */
+
   static m_testNativeTypeClassLiteral__() {
     Main.$clinit();
     let o1 = Class.$get($JavaScriptObject);
     o1 = Class.$get(j_l_Object, 1);
   }
-  /**
-   * @public
-   */
+
   static m_testNativeTypeObjectMethods__() {
     Main.$clinit();
     let bar = new Bar(6, 7);
@@ -93,25 +72,17 @@ class Main extends j_l_Object {
     $Objects.m_equals__java_lang_Object__java_lang_Object(
         bar, j_l_Object.$create__());
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     Main.$clinit = () => {};
     Main.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Main;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     Foo = goog.module.get('com.acme.MyFoo');
     Bar = goog.module.get(

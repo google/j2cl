@@ -6,56 +6,32 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @interface
  */
 class BI3 {
-  /**
-   * @abstract
-   * @param {?string} value
-   * @return {?string}
-   * @public
-   */
-  get(value) {}
-  /**
-   * @param {!BI3} $thisArg
-   * @param {?string} value
-   * @return {?string}
-   * @public
-   */
+  /** @abstract @return {?string} */
+  get(/** ?string */ value) {}
+  /** @return {?string} */
   static m_get__$default__com_google_j2cl_transpiler_readable_bridgemethods_TestCase10036_BI3__java_lang_String(
-      $thisArg, value) {
+      /** !BI3 */ $thisArg, /** ?string */ value) {
     BI3.$clinit();
     return 'BI3 get String';
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     BI3.$clinit = () => {};
     BI3.$loadModules();
   }
-  /**
-   * @param {Function} classConstructor
-   * @public
-   */
-  static $markImplementor(classConstructor) {
-    /**
-     * @public {boolean}
-     */
-    classConstructor.prototype
+
+  static $markImplementor(/** Function*/ ctor) {
+    ctor.prototype
         .$implements__com_google_j2cl_transpiler_readable_bridgemethods_TestCase10036_BI3 =
         true;
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance != null &&
         !!instance
               .$implements__com_google_j2cl_transpiler_readable_bridgemethods_TestCase10036_BI3;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadataForInterface(

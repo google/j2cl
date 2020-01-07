@@ -10,44 +10,27 @@ let Entry = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nobridgemet
  * @template K
  */
 class Map extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_nobridgemethods_Map__() {
     this.$ctor__java_lang_Object__();
   }
-  /**
-   * @abstract
-   * @param {K} key
-   * @return {Entry<K>}
-   * @public
-   */
-  m_getCeilingEntry__java_lang_Object(key) {}
-  /**
-   * @public
-   */
+  /** @abstract @return {Entry<K>} */
+  m_getCeilingEntry__java_lang_Object(/** K */ key) {}
+
   static $clinit() {
     Map.$clinit = () => {};
     Map.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Map;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

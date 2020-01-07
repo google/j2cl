@@ -5,27 +5,19 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 
 class $Overlay {
-  /**
-   * @param {!Array} $thisArg
-   * @public
-   */
   static m_test__$devirt__com_google_j2cl_transpiler_readable_jsfunction_Main_TestJsFunctionInJsOverlayCapturingOuter(
-      $thisArg) {
+      /** !Array */ $thisArg) {
     $Overlay.$clinit();
     $thisArg.sort((/** number */ a) => {
       return $Equality.$same($thisArg, null) ? 0 : 1;
     });
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     $Overlay.$clinit = () => {};
     $Overlay.$loadModules();
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
   }

@@ -12,16 +12,11 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
  * @implements {Getter}
  */
 class AccidentalOverrideBridge extends ClassWithParameterizedGet {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!AccidentalOverrideBridge}
-   * @public
-   */
+  /** @return {!AccidentalOverrideBridge} */
   static $create__() {
     AccidentalOverrideBridge.$clinit();
     let $instance = new AccidentalOverrideBridge();
@@ -29,49 +24,32 @@ class AccidentalOverrideBridge extends ClassWithParameterizedGet {
         .$ctor__com_google_j2cl_transpiler_readable_bridgemethods_AccidentalOverrideBridge__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_bridgemethods_AccidentalOverrideBridge__() {
     this.$ctor__com_google_j2cl_transpiler_readable_bridgemethods_ClassWithParameterizedGet__();
   }
-  /**
-   * @public
-   */
+
   m_test__() {
     let g = AccidentalOverrideBridge.$create__();
     g.m_get__java_lang_String('');
   }
-  /**
-   * Bridge method.
-   * @override
-   * @param {?string} arg0
-   * @return {?string}
-   * @public
-   */
-  m_get__java_lang_String(arg0) {
-    return /**@type {?string} */ (
+  /** @override @return {?string} */
+  // Bridge method.
+  m_get__java_lang_String(/** ?string */ arg0) {
+    return /**@type {?string}*/ (
         $Casts.$to(super.m_get__java_lang_Object(arg0), j_l_String));
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     AccidentalOverrideBridge.$clinit = () => {};
     AccidentalOverrideBridge.$loadModules();
     ClassWithParameterizedGet.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof AccidentalOverrideBridge;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     j_l_String = goog.module.get('java.lang.String$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');

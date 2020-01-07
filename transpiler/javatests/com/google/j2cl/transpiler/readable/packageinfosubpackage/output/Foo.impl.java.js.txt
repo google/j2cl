@@ -7,18 +7,13 @@ let $Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.packagei
 let NativeBar = goog.forwardDeclare('com.google.j2cl.transpiler.readable.packageinfosubpackage.subpackage.Bar');
 
 class Foo extends j_l_Object {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
-    /** @public {NativeBar} */
+    /**@type {NativeBar}*/
     this.f_nativeBar__com_google_j2cl_transpiler_readable_packageinfosubpackage_Foo_;
   }
-  /**
-   * @return {!Foo}
-   * @public
-   */
+  /** @return {!Foo} */
   static $create__() {
     Foo.$clinit();
     let $instance = new Foo();
@@ -26,39 +21,27 @@ class Foo extends j_l_Object {
         .$ctor__com_google_j2cl_transpiler_readable_packageinfosubpackage_Foo__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_packageinfosubpackage_Foo__() {
     this.$ctor__java_lang_Object__();
     this.$init___$p_com_google_j2cl_transpiler_readable_packageinfosubpackage_Foo();
   }
-  /**
-   * @private
-   */
+  /** @private */
   $init___$p_com_google_j2cl_transpiler_readable_packageinfosubpackage_Foo() {
     this.f_nativeBar__com_google_j2cl_transpiler_readable_packageinfosubpackage_Foo_ =
         new NativeBar();
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     Foo.$clinit = () => {};
     Foo.$loadModules();
     j_l_Object.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof Foo;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     NativeBar = goog.module.get(
         'com.google.j2cl.transpiler.readable.packageinfosubpackage.subpackage.Bar');

@@ -7,16 +7,11 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @extends {GenericClass<SubclassGenericClass>}
  */
 class SubclassGenericClass extends GenericClass {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @return {!SubclassGenericClass}
-   * @public
-   */
+  /** @return {!SubclassGenericClass} */
   static $create__() {
     SubclassGenericClass.$clinit();
     let $instance = new SubclassGenericClass();
@@ -24,31 +19,21 @@ class SubclassGenericClass extends GenericClass {
         .$ctor__com_google_j2cl_transpiler_readable_subclassgenericclass_SubclassGenericClass__();
     return $instance;
   }
-  /**
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_subclassgenericclass_SubclassGenericClass__() {
     this.$ctor__com_google_j2cl_transpiler_readable_subclassgenericclass_GenericClass__();
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     SubclassGenericClass.$clinit = () => {};
     SubclassGenericClass.$loadModules();
     GenericClass.$clinit();
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof SubclassGenericClass;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {}
 }
 $Util.$setClassMetadata(

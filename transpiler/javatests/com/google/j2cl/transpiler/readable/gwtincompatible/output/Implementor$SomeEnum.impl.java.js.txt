@@ -13,34 +13,21 @@ let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
  * @extends {Enum<SomeEnum>}
  */
 class SomeEnum extends Enum {
-  /**
-   * @protected
-   */
+  /** @protected */
   constructor() {
     super();
   }
-  /**
-   * @param {?string} $name
-   * @param {number} $ordinal
-   * @public
-   */
+
   $ctor__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum__java_lang_String__int(
-      $name, $ordinal) {
+      /** ?string */ $name, /** number */ $ordinal) {
     this.f_name__java_lang_Enum_ = $name;
     this.f_ordinal__java_lang_Enum_ = $ordinal;
     this.$ctor__java_lang_Enum__java_lang_String__int($name, $ordinal);
   }
-  /**
-   * @abstract
-   * @public
-   */
+  /** @abstract */
   m_method___$pp_com_google_j2cl_transpiler_readable_gwtincompatible() {}
-  /**
-   * @param {string} name
-   * @return {!SomeEnum}
-   * @public
-   */
-  static m_valueOf__java_lang_String(name) {
+  /** @return {!SomeEnum} */
+  static m_valueOf__java_lang_String(/** string */ name) {
     SomeEnum.$clinit();
     if ($Equality.$same(
             SomeEnum
@@ -55,32 +42,24 @@ class SomeEnum extends Enum {
         SomeEnum
             .f_namesToValuesMap__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum_);
   }
-  /**
-   * @return {!Array<!SomeEnum>}
-   * @public
-   */
+  /** @return {!Array<!SomeEnum>} */
   static m_values__() {
     SomeEnum.$clinit();
-    return /**@type {!Array<SomeEnum>} */ ($Arrays.$init(
+    return /**@type {!Array<SomeEnum>}*/ ($Arrays.$init(
         [
           SomeEnum
               .$f_COMPATIBLE__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum
         ],
         SomeEnum));
   }
-  /**
-   * @return {!SomeEnum}
-   * @public
-   */
+  /** @return {!SomeEnum} */
   static get f_COMPATIBLE__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum() {
     return (
         SomeEnum.$clinit(),
         SomeEnum
             .$f_COMPATIBLE__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum);
   }
-  /**
-   * @public
-   */
+
   static $clinit() {
     SomeEnum.$clinit = () => {};
     SomeEnum.$loadModules();
@@ -95,17 +74,11 @@ class SomeEnum extends Enum {
         .f_namesToValuesMap__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum_ =
         null;
   }
-  /**
-   * @param {?} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
     return instance instanceof SomeEnum;
   }
-  /**
-   * @public
-   */
+
   static $loadModules() {
     $1 = goog.module.get(
         'com.google.j2cl.transpiler.readable.gwtincompatible.Implementor.SomeEnum.$1$impl');
@@ -118,13 +91,13 @@ $Util.$setClassMetadataForEnum(
     SomeEnum,
     'com.google.j2cl.transpiler.readable.gwtincompatible.Implementor$SomeEnum');
 
-/** @private {!SomeEnum} */
+/**@private {!SomeEnum}*/
 SomeEnum
     .$f_COMPATIBLE__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum;
-/** @public {Map<?string, !SomeEnum>} */
+/**@type {Map<?string, !SomeEnum>}*/
 SomeEnum
     .f_namesToValuesMap__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum_;
-/** @public {number} @const */
+/**@const {number}*/
 SomeEnum
     .$ordinal$f_COMPATIBLE__com_google_j2cl_transpiler_readable_gwtincompatible_Implementor_SomeEnum =
     0;
