@@ -73,36 +73,22 @@ public class J2clMinifier {
   private static final int ZIP_FILE_SEPARATOR_OFFSET = ZIP_FILE_SEPARATOR.length();
 
   private static final int[][] nextState;
-  private static final int S_BLOCK_COMMENT;
-  private static final int S_DOUBLE_QUOTED_STRING;
-  private static final int S_DOUBLE_QUOTED_STRING_ESCAPE;
-  private static final int S_IDENTIFIER;
-  private static final int S_LINE_COMMENT;
-  private static final int S_MAYBE_BLOCK_COMMENT_END;
-  private static final int S_MAYBE_COMMENT_START;
-  private static final int S_NON_IDENTIFIER;
-  private static final int S_SINGLE_QUOTED_STRING;
-  private static final int S_SINGLE_QUOTED_STRING_ESCAPE;
-  private static final int S_END_STATE;
 
   private static int numberOfStates = 0;
+  private static final int S_BLOCK_COMMENT = numberOfStates++;
+  private static final int S_DOUBLE_QUOTED_STRING = numberOfStates++;
+  private static final int S_DOUBLE_QUOTED_STRING_ESCAPE = numberOfStates++;
+  private static final int S_IDENTIFIER = numberOfStates++;
+  private static final int S_LINE_COMMENT = numberOfStates++;
+  private static final int S_SOURCE_MAP = numberOfStates++;
+  private static final int S_MAYBE_BLOCK_COMMENT_END = numberOfStates++;
+  private static final int S_MAYBE_COMMENT_START = numberOfStates++;
+  private static final int S_NON_IDENTIFIER = numberOfStates++;
+  private static final int S_SINGLE_QUOTED_STRING = numberOfStates++;
+  private static final int S_SINGLE_QUOTED_STRING_ESCAPE = numberOfStates++;
+  private static final int S_END_STATE = numberOfStates++;
 
   static {
-    // Initialize unique state ids.
-    {
-      S_BLOCK_COMMENT = numberOfStates++;
-      S_DOUBLE_QUOTED_STRING = numberOfStates++;
-      S_DOUBLE_QUOTED_STRING_ESCAPE = numberOfStates++;
-      S_IDENTIFIER = numberOfStates++;
-      S_LINE_COMMENT = numberOfStates++;
-      S_MAYBE_BLOCK_COMMENT_END = numberOfStates++;
-      S_MAYBE_COMMENT_START = numberOfStates++;
-      S_NON_IDENTIFIER = numberOfStates++;
-      S_SINGLE_QUOTED_STRING = numberOfStates++;
-      S_SINGLE_QUOTED_STRING_ESCAPE = numberOfStates++;
-      S_END_STATE = numberOfStates++;
-    }
-
     // Create and initialize state transitions table.
     {
       nextState = new int[numberOfStates][256];
@@ -124,6 +110,11 @@ public class J2clMinifier {
 
       setDefaultTransitions(S_LINE_COMMENT, S_LINE_COMMENT);
       nextState[S_LINE_COMMENT]['\n'] = S_NON_IDENTIFIER;
+      // This is conservative since any # will preserve the line comment but it is safe and simple.
+      nextState[S_LINE_COMMENT]['#'] = S_SOURCE_MAP;
+
+      setDefaultTransitions(S_SOURCE_MAP, S_SOURCE_MAP);
+      nextState[S_SOURCE_MAP]['\n'] = S_NON_IDENTIFIER;
 
       setDefaultTransitions(S_BLOCK_COMMENT, S_BLOCK_COMMENT);
       nextState[S_BLOCK_COMMENT]['*'] = S_MAYBE_BLOCK_COMMENT_END;
@@ -318,6 +309,12 @@ public class J2clMinifier {
     return identifierBuffer;
   }
 
+  private static StringBuilder writeDoubleSlashAndChar(
+      StringBuilder minifiedContentBuffer, StringBuilder identifierBuffer, char c, int state) {
+    identifierBuffer = writeChar(minifiedContentBuffer, identifierBuffer, '/', state);
+    return writeSlashAndChar(minifiedContentBuffer, identifierBuffer, c, state);
+  }
+
   private static StringBuilder writeSlashAndStartNewIdentifier(
       StringBuilder minifiedContentBuffer, StringBuilder identifierBuffer, char c, int state) {
     identifierBuffer = writeChar(minifiedContentBuffer, identifierBuffer, '/', state);
@@ -397,16 +394,21 @@ public class J2clMinifier {
 
     transFn[S_MAYBE_COMMENT_START][S_IDENTIFIER] = J2clMinifier::writeSlashAndStartNewIdentifier;
     transFn[S_MAYBE_COMMENT_START][S_MAYBE_COMMENT_START] = J2clMinifier::writeChar;
-    transFn[S_MAYBE_COMMENT_START][S_LINE_COMMENT] = J2clMinifier::writeSlashAndChar;
+    transFn[S_MAYBE_COMMENT_START][S_LINE_COMMENT] = J2clMinifier::skipChar;
     transFn[S_MAYBE_COMMENT_START][S_BLOCK_COMMENT] = J2clMinifier::skipChar;
     transFn[S_MAYBE_COMMENT_START][S_NON_IDENTIFIER] = J2clMinifier::writeSlashAndChar;
     transFn[S_MAYBE_COMMENT_START][S_SINGLE_QUOTED_STRING] = J2clMinifier::writeSlashAndChar;
     transFn[S_MAYBE_COMMENT_START][S_DOUBLE_QUOTED_STRING] = J2clMinifier::writeSlashAndChar;
     transFn[S_MAYBE_COMMENT_START][S_END_STATE] = J2clMinifier::writeSlash;
 
-    transFn[S_LINE_COMMENT][S_LINE_COMMENT] = J2clMinifier::writeChar;
+    transFn[S_LINE_COMMENT][S_LINE_COMMENT] = J2clMinifier::skipChar;
+    transFn[S_LINE_COMMENT][S_SOURCE_MAP] = J2clMinifier::writeDoubleSlashAndChar;
     transFn[S_LINE_COMMENT][S_NON_IDENTIFIER] = J2clMinifier::writeChar;
     transFn[S_LINE_COMMENT][S_END_STATE] = J2clMinifier::skipChar;
+
+    transFn[S_SOURCE_MAP][S_SOURCE_MAP] = J2clMinifier::writeChar;
+    transFn[S_SOURCE_MAP][S_NON_IDENTIFIER] = J2clMinifier::writeChar;
+    transFn[S_SOURCE_MAP][S_END_STATE] = J2clMinifier::skipChar;
 
     transFn[S_BLOCK_COMMENT][S_BLOCK_COMMENT] = J2clMinifier::skipCharUnlessNewLine;
     transFn[S_BLOCK_COMMENT][S_MAYBE_BLOCK_COMMENT_END] = J2clMinifier::skipCharUnlessNewLine;

@@ -63,7 +63,7 @@ public class J2clMinifierTest extends TestCase {
 
     assertChange("/* *//", "/");
     assertChange("/* */*", "*");
-    assertChange("//* */", "//* */");
+    assertChange("//* */", "");
     assertChange("*/* */", "*");
 
     assertChange("/*/* */*/", "*/");
@@ -117,26 +117,24 @@ public class J2clMinifierTest extends TestCase {
   }
 
   public void testLineComments() {
-    // Line comments are kept.
-
-    assertNoChange("// m_foo__ ");
-    assertNoChange("// foo ");
-    assertNoChange("// 'foo' ");
-    assertNoChange("// 'fo\noo' ");
-    assertNoChange("// /* */ ");
-    assertNoChange("// /* \n */ ");
+    assertChange("// m_foo__ ", "");
+    assertChange("// foo ", "");
+    assertChange("// 'foo' ", "");
+    assertChange("// 'fo\noo' ", "\noo' ");
+    assertChange("// /* */ ", "");
+    assertChange("// /* \n */ ", "\n */ ");
     assertNoChange("//# sourceMappingURL=/path/to/file.js.map");
 
-    assertChange("m_foo__// bar \nm_foo__", "foo_$1// bar \nfoo_$1");
-    assertChange("/* */// bar \n/* */", "// bar \n");
-    assertNoChange("'foo'// bar \n'foo'");
-    assertNoChange("alert('hi');// bar \nalert('hi');");
+    assertChange("m_foo__// bar \nm_foo__", "foo_$1\nfoo_$1");
+    assertChange("/* */// bar \n/* */", "\n");
+    assertChange("'foo'// bar \n'foo'", "'foo'\n'foo'");
+    assertChange("alert('hi');// bar \nalert('hi');", "alert('hi');\nalert('hi');");
 
-    assertNoChange("//* */");
+    assertChange("//* */", "");
     assertChange("/ /* */", "/ ");
 
     // preserves trailing newlines
-    assertNoChange("// foo \n");
+    assertChange("// foo \n", "\n");
     assertNoChange("//# sourceMappingURL=/path/to/file.js.map\n");
 
     // Division
@@ -172,7 +170,6 @@ public class J2clMinifierTest extends TestCase {
     assertNoChange("var Foo = goog.forwardDeclare('java.lang.Foo')");
     assertNoChange("identvar Foo = goog.forwardDeclare('java.lang.Foo');");
     assertNoChange("\"let Byte = goog.forwardDeclare('java.lang.Byte$impl');\"");
-    assertNoChange("//let Byte = goog.forwardDeclare('java.lang.Byte$impl');");
   }
 
   public void testGoogRequire() {
@@ -186,7 +183,6 @@ public class J2clMinifierTest extends TestCase {
     assertNoChange("goog.require('java.lang.Foo')");
     assertNoChange("identgoog.require('java.lang.Foo');");
     assertNoChange("\"goog.require('java.lang.Foo');\"");
-    assertNoChange("//goog.require('java.lang.Foo');");
   }
 
   public void testNoChanges() {
