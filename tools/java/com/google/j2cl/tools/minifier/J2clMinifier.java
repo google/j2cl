@@ -542,8 +542,8 @@ public class J2clMinifier {
   }
 
   private String makeUnique(String identifier) {
-    countsByIdentifier.add(identifier);
-    return identifier + MINIFICATION_SEPARATOR + countsByIdentifier.count(identifier);
+    int count = countsByIdentifier.add(identifier, 1) + 1;
+    return identifier + MINIFICATION_SEPARATOR + count;
   }
 
   private StringBuilder writeIdentifier(
