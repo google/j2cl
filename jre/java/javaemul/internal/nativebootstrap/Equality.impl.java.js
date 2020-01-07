@@ -30,9 +30,9 @@ class Equality {
    * @return {boolean}
    */
   static $same(left, right) {
-    return left === right || (left == null && right == null);
+    return Object.is(left, right) || (left == null && right == null);
   }
-};
+}
 
 
 /**

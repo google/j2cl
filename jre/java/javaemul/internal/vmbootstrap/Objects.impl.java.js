@@ -50,8 +50,9 @@ class Objects {
 
     // Array Types: doesn't override 'equals'.
 
-    // Fallback to default j.l.Object#equals behavior.
-    return obj === other;
+    // Fallback to default j.l.Object#equals behavior (Equality.$same) except we
+    // already know 'obj' is not null.
+    return Object.is(obj, other);
   }
 
   /**
