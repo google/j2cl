@@ -24,7 +24,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -37,10 +36,10 @@ import org.junit.runners.JUnit4;
  */
 @RunWith(JUnit4.class)
 public class GoldenFileTester {
-  private static Set<String> unusedTypesFromRta;
-  private static Set<String> unusedMembersFromRta;
-  private static Set<String> unusedTypesFromGoldenFile;
-  private static Set<String> unusedMembersFromGoldenFile;
+  private static List<String> unusedTypesFromRta;
+  private static List<String> unusedMembersFromRta;
+  private static List<String> unusedTypesFromGoldenFile;
+  private static List<String> unusedMembersFromGoldenFile;
 
   @BeforeClass
   public static void setUp() throws Exception {
@@ -52,33 +51,42 @@ public class GoldenFileTester {
 
   @Test
   public void unusedTypesFromRtaEqualsUnusedTypesFromGoldenFile() {
-    checkDifferences(unusedTypesFromRta, unusedTypesFromGoldenFile, "types");
+    checkDifferences(unusedTypesFromRta, unusedTypesFromGoldenFile, "unused types");
   }
 
   @Test
   public void unusedMembersFromRtaEqualsUnusedMembersFromGoldenFile() {
-    checkDifferences(unusedMembersFromRta, unusedMembersFromGoldenFile, "members");
+    checkDifferences(unusedMembersFromRta, unusedMembersFromGoldenFile, "unused members");
   }
 
-  private void checkDifferences(Set<String> fromRta, Set<String> fromGoldenFile, String fileType) {
+  private static void checkDifferences(
+      List<String> fromRta, List<String> fromGoldenFile, String fileType) {
+    List<String> patternsInGoldenFile =
+        fromGoldenFile.stream().filter(x -> x.endsWith(".*")).collect(Collectors.toList());
+    fromGoldenFile.removeAll(patternsInGoldenFile);
+    for (String pattern : patternsInGoldenFile) {
+      assertWithMessage("Missing pattern %s in %s", pattern, fileType)
+          .that(fromRta.removeIf(x -> x.matches(pattern)))
+          .isEqualTo(true);
+    }
     assertWithMessage("Comparing rta result with golden file with for " + fileType)
         .that(fromRta)
         .containsExactlyElementsIn(fromGoldenFile);
   }
 
-  private static Set<String> readGoldenFile(String filePath) throws IOException {
+  private static List<String> readGoldenFile(String filePath) throws IOException {
     return readFileLines(filePath).stream()
         .filter(GoldenFileTester::skipCommentLine)
         // Allow blank lines in golden file in order to group some lines
         .filter(not(Strings::isNullOrEmpty))
-        .collect(Collectors.toSet());
+        .collect(Collectors.toList());
   }
 
-  private static Set<String> readOutputFile(String filePath) throws IOException {
+  private static List<String> readOutputFile(String filePath) throws IOException {
     return readFileLines(filePath).stream()
         // Skip JRE to avoid making the test fragile.
         .filter(GoldenFileTester::skipLineFromJre)
-        .collect(Collectors.toSet());
+        .collect(Collectors.toList());
   }
 
   private static List<String> readFileLines(String filePath) throws IOException {

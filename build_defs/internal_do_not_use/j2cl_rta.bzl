@@ -10,6 +10,8 @@ load(
 load(
     "//build_defs/internal_do_not_use:rta_utils.bzl",
     "RTA_ASPECT_ATTRS",
+    "get_aspect_providers",
+    "get_j2cl_info_from_aspect_providers",
     "pmf_file_aspect",
     "write_module_names_file",
 )
@@ -18,7 +20,9 @@ _TransitiveLibraryInfo = provider(fields = ["files"])
 _J2clRtaInfo = provider()
 
 def _library_info_aspect_impl(target, ctx):
-    library_info_file = target[J2clInfo]._private_.library_info if J2clInfo in target else []
+    j2cl_info = target[J2clInfo] if J2clInfo in target else get_j2cl_info_from_aspect_providers(target)
+
+    library_info_file = j2cl_info._private_.library_info if j2cl_info else []
 
     # Because the aspect propagates along attributes listed in _RTA_ASPECT_ATTRS,
     # the aspect has been previously applied to targets listed in those attributes.
@@ -37,6 +41,7 @@ def _library_info_aspect_impl(target, ctx):
 
 _library_info_aspect = aspect(
     attr_aspects = RTA_ASPECT_ATTRS,
+    required_aspect_providers = get_aspect_providers(),
     provides = [_TransitiveLibraryInfo],
     implementation = _library_info_aspect_impl,
 )
