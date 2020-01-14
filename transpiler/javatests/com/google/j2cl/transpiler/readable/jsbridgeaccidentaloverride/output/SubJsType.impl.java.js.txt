@@ -28,13 +28,13 @@ class SubJsType extends MyJsType {
   bar(/** number */ a) {
     return a + 2;
   }
-  /** @override @return {number} */
   // Bridge method for exposing non-JsMethod.
+  /** @override @return {number} */
   m_bar__int(/** number */ arg0) {
     return this.bar(arg0);
   }
-  /** @override @return {number} */
   // Bridge method for exposing non-JsMethod.
+  /** @override @return {number} */
   m_foo__int(/** number */ arg0) {
     return this.foo(arg0);
   }

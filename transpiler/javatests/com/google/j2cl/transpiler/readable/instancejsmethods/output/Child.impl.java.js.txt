@@ -40,8 +40,8 @@ class Child extends Parent {
   intfFoo() {
     return 1;
   }
-  /** @override @return {number} */
   // Bridge method for exposing non-JsMethod.
+  /** @override @return {number} */
   m_intfFoo__() {
     return this.intfFoo();
   }

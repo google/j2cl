@@ -28,8 +28,8 @@ class Implementor extends j_l_Object {
   anApi() {
     return /**@type {?function(T):void}*/ (null);
   }
-  /** @override @template T @return {?function(T):void} */
   // Bridge method for exposing non-JsMethod.
+  /** @override @template T @return {?function(T):void} */
   m_anApi__() {
     return /**@type {?function(T):void}*/ (this.anApi());
   }

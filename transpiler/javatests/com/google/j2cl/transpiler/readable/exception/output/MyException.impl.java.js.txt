@@ -10,8 +10,8 @@ class MyException extends Exception {
   constructor() {
     super();
   }
-  /** @return {!MyException} */
   // Factory method corresponding to constructor 'MyException()'.
+  /** @return {!MyException} */
   static $create__() {
     MyException.$clinit();
     let $instance = new MyException();
@@ -21,13 +21,13 @@ class MyException extends Exception {
         new Error($instance));
     return $instance;
   }
-
   // Initialization from constructor 'MyException()'.
+
   $ctor__com_google_j2cl_transpiler_readable_exception_MyException__() {
     this.$ctor__java_lang_Exception__();
   }
-  /** @return {!MyException} */
   // Factory method corresponding to constructor 'MyException(Throwable)'.
+  /** @return {!MyException} */
   static $create__java_lang_Throwable(/** Throwable */ cause) {
     MyException.$clinit();
     let $instance = new MyException();
@@ -38,8 +38,8 @@ class MyException extends Exception {
         new Error($instance));
     return $instance;
   }
-
   // Initialization from constructor 'MyException(Throwable)'.
+
   $ctor__com_google_j2cl_transpiler_readable_exception_MyException__java_lang_Throwable(
       /** Throwable */ cause) {
     this.$ctor__java_lang_Exception__java_lang_Throwable(cause);

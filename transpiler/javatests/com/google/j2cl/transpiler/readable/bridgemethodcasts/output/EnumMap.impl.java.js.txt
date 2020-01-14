@@ -31,8 +31,8 @@ class EnumMap extends AbstractMap {
   m_put__java_lang_Enum__java_lang_Object(/** K */ key, /** V */ value) {
     return value;
   }
-  /** @override @return {V} */
   // Bridge method.
+  /** @override @return {V} */
   m_put__java_lang_Object__java_lang_Object(/** * */ arg0, /** * */ arg1) {
     return this.m_put__java_lang_Enum__java_lang_Object(
         /**@type {K}*/ ($Casts.$to(arg0, Enum)), arg1);

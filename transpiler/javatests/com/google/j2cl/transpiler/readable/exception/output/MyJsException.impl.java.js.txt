@@ -7,19 +7,20 @@ let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
 
 class MyJsException extends Exception {
   // JsConstructor 'MyJsException()'.
+
   constructor() {
     MyJsException.$clinit();
     super();
     this.$ctor__com_google_j2cl_transpiler_readable_exception_MyJsException__();
     this.m_privateInitError__java_lang_Object_$pp_java_lang(new Error(this));
   }
-
   // Initialization from constructor 'MyJsException()'.
+
   $ctor__com_google_j2cl_transpiler_readable_exception_MyJsException__() {
     this.$ctor__java_lang_Exception__();
   }
-  /** @return {!MyJsException} */
   // Factory method corresponding to constructor 'MyJsException(Throwable)'.
+  /** @return {!MyJsException} */
   static $create__java_lang_Throwable(/** Throwable */ cause) {
     MyJsException.$clinit();
     let $instance = new MyJsException();
@@ -30,8 +31,8 @@ class MyJsException extends Exception {
         new Error($instance));
     return $instance;
   }
-
   // Initialization from constructor 'MyJsException(Throwable)'.
+
   $ctor__com_google_j2cl_transpiler_readable_exception_MyJsException__java_lang_Throwable(
       /** Throwable */ cause) {}
 
