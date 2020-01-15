@@ -630,13 +630,24 @@ class JdtUtils {
    * declaring members but are not.
    */
   private static IBinding getDeclaringMethodOrFieldBinding(ITypeBinding typeBinding) {
-    IBinding declarationBinding = typeBinding.getTypeDeclaration().getDeclaringMember();
+    IBinding declarationBinding = getDeclaringMember(typeBinding);
 
     // Skip all lambda method bindings.
     while (isLambdaBinding(declarationBinding)) {
       declarationBinding = ((IMethodBinding) declarationBinding).getDeclaringMember();
     }
     return declarationBinding;
+  }
+
+  private static IBinding getDeclaringMember(ITypeBinding typeBinding) {
+    ITypeBinding typeDeclaration = typeBinding.getTypeDeclaration();
+    IBinding declaringMember = typeDeclaration.getDeclaringMember();
+    if (declaringMember == null) {
+      // Work around for b/147690014, in which getDeclaringMember returns null, but there is
+      // a declaring member and is returned by getDeclaringMethod.
+      declaringMember = typeDeclaration.getDeclaringMethod();
+    }
+    return declaringMember;
   }
 
   private static boolean isLambdaBinding(IBinding binding) {

@@ -37,8 +37,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -344,4 +342,11 @@ public class CompilerMiscRegressionTest {
   public <R, S> void testCompilesWithoutNPE() {
     new ClassUsingRawInterface(() -> new ParameterizedFunctionalInterface<R, S>() {});
   }
+
+  @Test
+  public <T> void testCompilesWithoutNPE_b147690014() {
+    acceptsSupplier(() -> new Object() {});
+  }
+
+  private static <T> void acceptsSupplier(Supplier<T> supplier) {}
 }
