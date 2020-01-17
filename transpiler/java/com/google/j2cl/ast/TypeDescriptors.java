@@ -375,8 +375,8 @@ public class TypeDescriptors {
     TypeDeclaration typeDeclaration =
         TypeDeclaration.newBuilder()
             .setClassComponents(ImmutableList.of(className))
-            // Mark bootstrap classes as non native so that the goog.require references the
-            // "$impl" module not the header to avoid cycles.
+            // Mark bootstrap classes as non native so that the goog.require doesn't reference
+            // overlay.
             .setNative(!isBootstrapNamespace(jsNamespace))
             .setCustomizedJsNamespace(jsNamespace)
             .setPackageName(getSyntheticPackageName(jsNamespace))
@@ -401,6 +401,14 @@ public class TypeDescriptors {
     return topNamespace.equals("vmbootstrap")
         || topNamespace.equals("nativebootstrap")
         || topNamespace.equals("javaemul");
+  }
+
+  public static boolean isBootstrapNamespace(DeclaredTypeDescriptor typeDescriptor) {
+    return isBootstrapNamespace(typeDescriptor.getTypeDeclaration());
+  }
+
+  public static boolean isBootstrapNamespace(TypeDeclaration typeDeclaration) {
+    return isBootstrapNamespace(typeDeclaration.getModuleName());
   }
 
   /**

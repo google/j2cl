@@ -1,11 +1,12 @@
 {
-  "typeMap": ["\u003cno-type\u003e", "javaemul.InternalType", "java.lang.Object", "vmbootstrap.InternalType2", "com.google.j2cl.transpiler.readable.libraryinfo.Main", "com.google.j2cl.transpiler.readable.libraryinfo.Main.FunctionImpl", "", "com.google.j2cl.transpiler.readable.libraryinfo.Main.FunctionnalInterface", "com.google.j2cl.transpiler.readable.libraryinfo.Main.FunctionnalInterface.$LambdaAdaptor", "com.google.j2cl.transpiler.readable.libraryinfo.Main.JsAccessibleFunctionnalInterface", "com.google.j2cl.transpiler.readable.libraryinfo.Main.JsAccessibleFunctionnalInterface.$LambdaAdaptor", "nativebootstrap.Util"],
+  "typeMap": ["\u003cno-type\u003e", "javaemul.InternalType", "java.lang.Object", "vmbootstrap.InternalType2", "com.google.j2cl.transpiler.readable.libraryinfo.Main", "com.google.j2cl.transpiler.readable.libraryinfo.Main.FunctionImpl", "com.google.j2cl.transpiler.readable.libraryinfo.Main.FunctionnalInterface", "com.google.j2cl.transpiler.readable.libraryinfo.Main.FunctionnalInterface.$LambdaAdaptor", "com.google.j2cl.transpiler.readable.libraryinfo.Main.JsAccessibleFunctionnalInterface", "com.google.j2cl.transpiler.readable.libraryinfo.Main.JsAccessibleFunctionnalInterface.$LambdaAdaptor"],
   "type": [{
     "typeId": 1,
     "extendsType": 2,
     "member": [{
       "name": "constructor",
       "public": true,
+      "jsAccessible": true,
       "invokedMethods": [{
         "method": "constructor",
         "enclosingType": 2,
@@ -19,19 +20,7 @@
     }, {
       "name": "$create__",
       "static": true,
-      "invokedMethods": [{
-        "method": "$clinit",
-        "enclosingType": 1,
-        "kind": "STATIC"
-      }, {
-        "method": "constructor",
-        "enclosingType": 1,
-        "kind": "INSTANTIATION"
-      }, {
-        "method": "$ctor__javaemul_InternalType__",
-        "enclosingType": 1
-      }],
-      "referencedTypes": [1],
+      "jsAccessible": true,
       "position": {
         "start": 10,
         "end": 17
@@ -39,6 +28,7 @@
     }, {
       "name": "$ctor__javaemul_InternalType__",
       "public": true,
+      "jsAccessible": true,
       "invokedMethods": [{
         "method": "$ctor__java_lang_Object__",
         "enclosingType": 2
@@ -58,12 +48,9 @@
       "name": "$clinit",
       "public": true,
       "static": true,
+      "jsAccessible": true,
       "invokedMethods": [{
         "method": "$clinit",
-        "enclosingType": 1,
-        "kind": "STATIC"
-      }, {
-        "method": "$loadModules",
         "enclosingType": 1,
         "kind": "STATIC"
       }, {
@@ -71,7 +58,7 @@
         "enclosingType": 2,
         "kind": "STATIC"
       }],
-      "referencedTypes": [1, 2],
+      "referencedTypes": [2],
       "position": {
         "start": 23,
         "end": 29
@@ -85,6 +72,7 @@
     "member": [{
       "name": "constructor",
       "public": true,
+      "jsAccessible": true,
       "invokedMethods": [{
         "method": "constructor",
         "enclosingType": 2,
@@ -98,19 +86,7 @@
     }, {
       "name": "$create__",
       "static": true,
-      "invokedMethods": [{
-        "method": "$clinit",
-        "enclosingType": 3,
-        "kind": "STATIC"
-      }, {
-        "method": "constructor",
-        "enclosingType": 3,
-        "kind": "INSTANTIATION"
-      }, {
-        "method": "$ctor__vmbootstrap_InternalType2__",
-        "enclosingType": 3
-      }],
-      "referencedTypes": [3],
+      "jsAccessible": true,
       "position": {
         "start": 10,
         "end": 17
@@ -118,6 +94,7 @@
     }, {
       "name": "$ctor__vmbootstrap_InternalType2__",
       "public": true,
+      "jsAccessible": true,
       "invokedMethods": [{
         "method": "$ctor__java_lang_Object__",
         "enclosingType": 2
@@ -137,12 +114,9 @@
       "name": "$clinit",
       "public": true,
       "static": true,
+      "jsAccessible": true,
       "invokedMethods": [{
         "method": "$clinit",
-        "enclosingType": 3,
-        "kind": "STATIC"
-      }, {
-        "method": "$loadModules",
         "enclosingType": 3,
         "kind": "STATIC"
       }, {
@@ -150,7 +124,7 @@
         "enclosingType": 2,
         "kind": "STATIC"
       }],
-      "referencedTypes": [3, 2],
+      "referencedTypes": [2],
       "position": {
         "start": 23,
         "end": 29
@@ -226,24 +200,14 @@
         "method": "$create__",
         "enclosingType": 5,
         "kind": "STATIC"
-      }, {
-        "method": "console.log",
-        "enclosingType": 6,
-        "kind": "STATIC"
       }],
-      "referencedTypes": [4, 5, 6],
+      "referencedTypes": [4, 5],
       "position": {
         "start": 23,
         "end": 33
       }
     }, {
       "name": "m_execute___$p_com_google_j2cl_transpiler_readable_libraryinfo_Main",
-      "invokedMethods": [{
-        "method": "console.log",
-        "enclosingType": 6,
-        "kind": "STATIC"
-      }],
-      "referencedTypes": [6],
       "position": {
         "start": 33,
         "end": 37
@@ -327,7 +291,7 @@
     "headerSourceFilePath": "com/google/j2cl/transpiler/readable/libraryinfo/Main.java.js",
     "implSourceFilePath": "com/google/j2cl/transpiler/readable/libraryinfo/Main.impl.java.js"
   }, {
-    "typeId": 7,
+    "typeId": 6,
     "member": [{
       "name": "m_foo__",
       "public": true,
@@ -341,14 +305,14 @@
       "static": true,
       "invokedMethods": [{
         "method": "$clinit",
-        "enclosingType": 7,
+        "enclosingType": 6,
         "kind": "STATIC"
       }, {
         "method": "constructor",
-        "enclosingType": 8,
+        "enclosingType": 7,
         "kind": "INSTANTIATION"
       }],
-      "referencedTypes": [7, 8],
+      "referencedTypes": [6, 7],
       "position": {
         "start": 12,
         "end": 17
@@ -359,14 +323,14 @@
       "static": true,
       "invokedMethods": [{
         "method": "$clinit",
-        "enclosingType": 7,
+        "enclosingType": 6,
         "kind": "STATIC"
       }, {
         "method": "$loadModules",
-        "enclosingType": 7,
+        "enclosingType": 6,
         "kind": "STATIC"
       }],
-      "referencedTypes": [7],
+      "referencedTypes": [6],
       "position": {
         "start": 17,
         "end": 22
@@ -375,7 +339,7 @@
     "headerSourceFilePath": "com/google/j2cl/transpiler/readable/libraryinfo/Main$FunctionnalInterface.java.js",
     "implSourceFilePath": "com/google/j2cl/transpiler/readable/libraryinfo/Main$FunctionnalInterface.impl.java.js"
   }, {
-    "typeId": 9,
+    "typeId": 8,
     "member": [{
       "name": "accessibleFunctionalInterfaceMethod",
       "public": true,
@@ -390,14 +354,14 @@
       "static": true,
       "invokedMethods": [{
         "method": "$clinit",
-        "enclosingType": 9,
+        "enclosingType": 8,
         "kind": "STATIC"
       }, {
         "method": "constructor",
-        "enclosingType": 10,
+        "enclosingType": 9,
         "kind": "INSTANTIATION"
       }],
-      "referencedTypes": [9, 10],
+      "referencedTypes": [8, 9],
       "position": {
         "start": 12,
         "end": 17
@@ -408,14 +372,14 @@
       "static": true,
       "invokedMethods": [{
         "method": "$clinit",
-        "enclosingType": 9,
+        "enclosingType": 8,
         "kind": "STATIC"
       }, {
         "method": "$loadModules",
-        "enclosingType": 9,
+        "enclosingType": 8,
         "kind": "STATIC"
       }],
-      "referencedTypes": [9],
+      "referencedTypes": [8],
       "position": {
         "start": 17,
         "end": 22
@@ -462,12 +426,8 @@
       }, {
         "method": "$copy",
         "enclosingType": 5
-      }, {
-        "method": "$makeLambdaFunction",
-        "enclosingType": 11,
-        "kind": "STATIC"
       }],
-      "referencedTypes": [5, 11],
+      "referencedTypes": [5],
       "position": {
         "start": 11,
         "end": 18
@@ -517,15 +477,15 @@
     "headerSourceFilePath": "com/google/j2cl/transpiler/readable/libraryinfo/Main$FunctionImpl.java.js",
     "implSourceFilePath": "com/google/j2cl/transpiler/readable/libraryinfo/Main$FunctionImpl.impl.java.js"
   }, {
-    "typeId": 8,
+    "typeId": 7,
     "extendsType": 2,
-    "implementsType": [7],
+    "implementsType": [6],
     "member": [{
       "name": "constructor",
       "public": true,
       "invokedMethods": [{
         "method": "$clinit",
-        "enclosingType": 8,
+        "enclosingType": 7,
         "kind": "STATIC"
       }, {
         "method": "constructor",
@@ -533,12 +493,12 @@
         "kind": "STATIC"
       }, {
         "method": "f_$$fn__com_google_j2cl_transpiler_readable_libraryinfo_Main_FunctionnalInterface_$LambdaAdaptor",
-        "enclosingType": 8
+        "enclosingType": 7
       }, {
         "method": "$ctor__com_google_j2cl_transpiler_readable_libraryinfo_Main_FunctionnalInterface_$LambdaAdaptor__com_google_j2cl_transpiler_readable_libraryinfo_Main_FunctionnalInterface_$JsFunction",
-        "enclosingType": 8
+        "enclosingType": 7
       }],
-      "referencedTypes": [8, 2],
+      "referencedTypes": [7, 2],
       "position": {
         "start": 10,
         "end": 18
@@ -551,7 +511,7 @@
         "enclosingType": 2
       }, {
         "method": "f_$$fn__com_google_j2cl_transpiler_readable_libraryinfo_Main_FunctionnalInterface_$LambdaAdaptor",
-        "enclosingType": 8
+        "enclosingType": 7
       }],
       "position": {
         "start": 18,
@@ -562,7 +522,7 @@
       "public": true,
       "invokedMethods": [{
         "method": "f_$$fn__com_google_j2cl_transpiler_readable_libraryinfo_Main_FunctionnalInterface_$LambdaAdaptor",
-        "enclosingType": 8
+        "enclosingType": 7
       }],
       "position": {
         "start": 23,
@@ -577,18 +537,18 @@
       "static": true,
       "invokedMethods": [{
         "method": "$clinit",
-        "enclosingType": 8,
+        "enclosingType": 7,
         "kind": "STATIC"
       }, {
         "method": "$loadModules",
-        "enclosingType": 8,
+        "enclosingType": 7,
         "kind": "STATIC"
       }, {
         "method": "$clinit",
         "enclosingType": 2,
         "kind": "STATIC"
       }],
-      "referencedTypes": [8, 2],
+      "referencedTypes": [7, 2],
       "position": {
         "start": 30,
         "end": 36
@@ -597,15 +557,15 @@
     "headerSourceFilePath": "com/google/j2cl/transpiler/readable/libraryinfo/Main$FunctionnalInterface$$LambdaAdaptor.java.js",
     "implSourceFilePath": "com/google/j2cl/transpiler/readable/libraryinfo/Main$FunctionnalInterface$$LambdaAdaptor.impl.java.js"
   }, {
-    "typeId": 10,
+    "typeId": 9,
     "extendsType": 2,
-    "implementsType": [9],
+    "implementsType": [8],
     "member": [{
       "name": "constructor",
       "public": true,
       "invokedMethods": [{
         "method": "$clinit",
-        "enclosingType": 10,
+        "enclosingType": 9,
         "kind": "STATIC"
       }, {
         "method": "constructor",
@@ -613,12 +573,12 @@
         "kind": "STATIC"
       }, {
         "method": "f_$$fn__com_google_j2cl_transpiler_readable_libraryinfo_Main_JsAccessibleFunctionnalInterface_$LambdaAdaptor",
-        "enclosingType": 10
+        "enclosingType": 9
       }, {
         "method": "$ctor__com_google_j2cl_transpiler_readable_libraryinfo_Main_JsAccessibleFunctionnalInterface_$LambdaAdaptor__com_google_j2cl_transpiler_readable_libraryinfo_Main_JsAccessibleFunctionnalInterface_$JsFunction",
-        "enclosingType": 10
+        "enclosingType": 9
       }],
-      "referencedTypes": [10, 2],
+      "referencedTypes": [9, 2],
       "position": {
         "start": 10,
         "end": 18
@@ -631,7 +591,7 @@
         "enclosingType": 2
       }, {
         "method": "f_$$fn__com_google_j2cl_transpiler_readable_libraryinfo_Main_JsAccessibleFunctionnalInterface_$LambdaAdaptor",
-        "enclosingType": 10
+        "enclosingType": 9
       }],
       "position": {
         "start": 18,
@@ -643,7 +603,7 @@
       "jsAccessible": true,
       "invokedMethods": [{
         "method": "f_$$fn__com_google_j2cl_transpiler_readable_libraryinfo_Main_JsAccessibleFunctionnalInterface_$LambdaAdaptor",
-        "enclosingType": 10
+        "enclosingType": 9
       }],
       "position": {
         "start": 23,
@@ -658,18 +618,18 @@
       "static": true,
       "invokedMethods": [{
         "method": "$clinit",
-        "enclosingType": 10,
+        "enclosingType": 9,
         "kind": "STATIC"
       }, {
         "method": "$loadModules",
-        "enclosingType": 10,
+        "enclosingType": 9,
         "kind": "STATIC"
       }, {
         "method": "$clinit",
         "enclosingType": 2,
         "kind": "STATIC"
       }],
-      "referencedTypes": [10, 2],
+      "referencedTypes": [9, 2],
       "position": {
         "start": 30,
         "end": 36

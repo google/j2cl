@@ -32,6 +32,7 @@ import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.SuperReference;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
+import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
 import com.google.protobuf.util.JsonFormat;
@@ -80,7 +81,13 @@ public final class LibraryInfoBuilder {
     Map<String, MemberInfo.Builder> memberInfoBuilderByName =
         new LinkedHashMap<>(type.getMembers().size());
 
-    boolean forceJsAccessible = isAccesssedFromJ2clBootstrapJsFiles(type.getTypeDescriptor());
+    // Note that we are not collecting bootstrap classes in references so we need to force them in.
+    // There are 2 reasons for that:
+    //  - We are inconsistent in marking their references wrt. being native or not.
+    //  - They are frequently used and never pruned; recording them is wasteful.
+    boolean forceJsAccessible =
+        TypeDescriptors.isBootstrapNamespace(type.getTypeDescriptor())
+            || isAccesssedFromJ2clBootstrapJsFiles(type.getTypeDescriptor());
 
     for (Member member : type.getMembers()) {
       MemberDescriptor memberDescriptor = member.getDescriptor();
@@ -134,6 +141,15 @@ public final class LibraryInfoBuilder {
         new AbstractVisitor() {
           @Override
           public void exitJavaScriptConstructorReference(JavaScriptConstructorReference node) {
+            if (node.getReferencedTypeDeclaration().isNative()) {
+              return;
+            }
+
+            if (TypeDescriptors.isBootstrapNamespace(node.getReferencedTypeDeclaration())) {
+              // Bootstrap classes already included by marking them as js accessible.
+              return;
+            }
+
             // In Javascript a Class is statically referenced by using it's constructor function.
             referencedTypes.add(getTypeId(node.getReferencedTypeDeclaration()));
           }
@@ -150,8 +166,18 @@ public final class LibraryInfoBuilder {
           @Override
           public void exitInvocation(Invocation node) {
             MethodDescriptor target = node.getTarget();
+
+            if (target.getEnclosingTypeDescriptor().isNative()) {
+              return;
+            }
+
+            if (TypeDescriptors.isBootstrapNamespace(target.getEnclosingTypeDescriptor())) {
+              // Bootstrap classes already included by marking them as js accessible.
+              return;
+            }
+
             if (target.isJsFunction()) {
-              // We don't record call to JsFunction interface methods because a it doesn't
+              // We don't record call to JsFunction interface methods because it doesn't
               // generate any js type. The implementation of JsFunction interface will be marked as
               // accessible by js and will be live if the implementation type is instantiated.
               return;
