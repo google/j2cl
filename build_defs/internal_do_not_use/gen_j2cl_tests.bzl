@@ -29,6 +29,7 @@ def gen_j2cl_tests(
         test_suffix = "",
         tags = [],
         browsers = None,
+        generate_build_test = None,
         **kwargs):
     """Generates `j2cl_test` rules for each file in `srcs` ending in "Test.java".
 
@@ -48,6 +49,8 @@ def gen_j2cl_tests(
         tags: Tags to add to all tests. In addition, tests are always tagged with
             "gen_j2cl_tests".
         browsers: List of labels; optional; The browsers with which to run the test.
+        generate_build_test: Whether the test lib will generate a js_binary and
+            build test.
         **kwargs: extra parameters are all passed to the generated j2cl_tests.
     """
     test_files = [src for src in srcs if src.endswith("Test.java")]
@@ -64,6 +67,7 @@ def gen_j2cl_tests(
             srcs = supporting_lib_files,
             plugins = lib_plugins + plugins,
             testonly = 1,
+            generate_build_test = generate_build_test,
         )
 
     for test_file in test_files:
@@ -78,5 +82,6 @@ def gen_j2cl_tests(
             plugins = test_plugins + plugins,
             tags = ["gen_j2cl_tests"] + tags,
             browsers = browsers,
+            generate_build_test = generate_build_test,
             **kwargs
         )
