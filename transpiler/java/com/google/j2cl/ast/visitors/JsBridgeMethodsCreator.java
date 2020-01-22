@@ -146,9 +146,8 @@ public class JsBridgeMethodsCreator extends NormalizationPass {
    * non-JsMember, return the non-JsMember it exposes otherwise return null.
    */
   private static MethodDescriptor getExposedNonJsMember(MethodDescriptor methodDescriptor) {
-    if (methodDescriptor.isStatic()
-        || methodDescriptor.isConstructor()
-        || methodDescriptor.getEnclosingTypeDescriptor().isInterface()
+    if (methodDescriptor.getEnclosingTypeDescriptor().isInterface()
+        || !methodDescriptor.isPolymorphic()
         || !methodDescriptor.isOrOverridesJsMember()) {
       return null;
     }

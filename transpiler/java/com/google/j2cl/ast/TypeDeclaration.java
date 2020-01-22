@@ -725,12 +725,10 @@ public abstract class TypeDeclaration extends Node
         LinkedHashMultimap.create();
 
     for (MethodDescriptor declaredMethodDescriptor : getDeclaredMethodDescriptors()) {
-      if (declaredMethodDescriptor.isConstructor() || declaredMethodDescriptor.isStatic()) {
-        continue;
+      if (declaredMethodDescriptor.isPolymorphic()) {
+        methodDescriptorsByOverrideSignature.put(
+            declaredMethodDescriptor.getOverrideSignature(), declaredMethodDescriptor);
       }
-
-      methodDescriptorsByOverrideSignature.put(
-          declaredMethodDescriptor.getOverrideSignature(), declaredMethodDescriptor);
     }
 
     // Recurse into immediate super class and interfaces for overridden method.
@@ -782,12 +780,9 @@ public abstract class TypeDeclaration extends Node
     while (superTypeDescriptor != null) {
       for (MethodDescriptor superMethodDescriptor :
           superTypeDescriptor.getDeclaredMethodDescriptors()) {
-        if (superMethodDescriptor.isConstructor() || superMethodDescriptor.isStatic()) {
-          continue;
-        }
-
         // TODO(stalcup): exclude package private method, and add a test for it.
-        if (superMethodDescriptor.isOverride(methodDescriptor)) {
+        if (superMethodDescriptor.isPolymorphic()
+            && superMethodDescriptor.isOverride(methodDescriptor)) {
           return superMethodDescriptor;
         }
       }

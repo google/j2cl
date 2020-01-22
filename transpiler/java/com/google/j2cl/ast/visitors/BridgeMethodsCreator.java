@@ -262,7 +262,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
          * means this method is a potential method that may need a bridge method.
          */
         methodDescriptor ->
-            !methodDescriptor.isConstructor()
+            methodDescriptor.isPolymorphic()
                 && !methodDescriptor.isSynthetic()
                 // is a parameterized method.
                 && methodDescriptor != methodDescriptor.getDeclarationDescriptor()

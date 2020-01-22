@@ -69,8 +69,7 @@ public class PackagePrivateMethodsDispatcher extends NormalizationPass {
         typeDeclaration.getDeclaredMethodDescriptors()) {
       if (!(declaredMethodDescriptor.getVisibility().isPublic()
               || declaredMethodDescriptor.getVisibility().isProtected())
-          || declaredMethodDescriptor.isStatic()
-          || declaredMethodDescriptor.isConstructor()
+          || !declaredMethodDescriptor.isPolymorphic()
           || declaredMethodDescriptor.isSynthetic()) {
         // ITypeBinding.getDeclaredMethods() may or may not include Synthetic methods and
         // constructors, and these methods are not what we care about.

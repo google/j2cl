@@ -1027,8 +1027,7 @@ public class AstUtils {
       MethodDescriptor methodDescriptor,
       DeclaredTypeDescriptor targetTypeDescriptor,
       Optional<String> postfix) {
-    checkArgument(!methodDescriptor.isConstructor());
-    checkArgument(!methodDescriptor.isStatic());
+    checkArgument(methodDescriptor.isPolymorphic());
 
     DeclaredTypeDescriptor enclosingTypeDescriptor = methodDescriptor.getEnclosingTypeDescriptor();
 

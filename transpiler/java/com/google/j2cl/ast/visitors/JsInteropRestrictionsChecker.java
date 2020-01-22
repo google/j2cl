@@ -1802,7 +1802,7 @@ public class JsInteropRestrictionsChecker {
   }
 
   private static boolean isInstanceJsMember(MemberDescriptor memberDescriptor) {
-    return !(memberDescriptor.isStatic() || memberDescriptor.isConstructor())
+    return memberDescriptor.isPolymorphic()
         && memberDescriptor.isJsMember()
         && !memberDescriptor.isSynthetic();
   }
