@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.readable.libraryinfo;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsType;
 
 public class Main {
   public static String STATIC_FIELD = "STATIC_FIELD";
@@ -40,6 +41,15 @@ public class Main {
     public void apply(String s) {}
   }
 
+  @JsType
+  public static class MyJsType {
+    Object someField;
+
+    public MyJsType() {
+      someField = new Main();
+    }
+  }
+
   @JsMethod
   public static void entryPoint() {
     new Main().execute();
@@ -47,6 +57,8 @@ public class Main {
     Function jsFunction = new FunctionImpl();
     jsFunction = s -> log(s);
     jsFunction.apply("foo");
+
+    new MyJsType();
   }
 
   private void execute() {

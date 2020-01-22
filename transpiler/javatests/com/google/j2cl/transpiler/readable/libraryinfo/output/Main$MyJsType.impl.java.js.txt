@@ -1,0 +1,42 @@
+goog.module('com.google.j2cl.transpiler.readable.libraryinfo.Main.MyJsType$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Main = goog.forwardDeclare('com.google.j2cl.transpiler.readable.libraryinfo.Main$impl');
+
+class MyJsType extends j_l_Object {
+  constructor() {
+    MyJsType.$clinit();
+    super();
+    /**@type {*}*/
+    this.f_someField__com_google_j2cl_transpiler_readable_libraryinfo_Main_MyJsType;
+    this.$ctor__com_google_j2cl_transpiler_readable_libraryinfo_Main_MyJsType__();
+  }
+
+  $ctor__com_google_j2cl_transpiler_readable_libraryinfo_Main_MyJsType__() {
+    this.$ctor__java_lang_Object__();
+    this.f_someField__com_google_j2cl_transpiler_readable_libraryinfo_Main_MyJsType =
+        Main.$create__();
+  }
+
+  static $clinit() {
+    MyJsType.$clinit = () => {};
+    MyJsType.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof MyJsType;
+  }
+
+  static $loadModules() {
+    Main = goog.module.get(
+        'com.google.j2cl.transpiler.readable.libraryinfo.Main$impl');
+  }
+}
+$Util.$setClassMetadata(
+    MyJsType, 'com.google.j2cl.transpiler.readable.libraryinfo.Main$MyJsType');
+
+exports = MyJsType;
+//# sourceMappingURL=Main$MyJsType.js.map
