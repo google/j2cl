@@ -17,6 +17,8 @@ package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
+import com.google.common.collect.ImmutableSet;
+import com.google.j2cl.ast.MethodDescriptor.MethodOrigin;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.ast.processors.common.Processor;
 import com.google.j2cl.common.InternalCompilerError;
@@ -185,8 +187,20 @@ public abstract class MemberDescriptor extends Node
     // TODO(b/36232076): There should be two methods isJsMember and isOrOverridesJsMember to
     // distinguish when a member is explicitly marked (to consider the member as
     // canBeReferencedExternally) and when the member inherits through overriding a JsMember.
-    return isJsMember() || isJsFunction();
+    return (isJsMember() && !NOT_ACCESSIBLE_BY_JS_ORIGINS.contains(getOrigin())) || isJsFunction();
   }
+
+  /**
+   * Members with these origins are marked as JsMembers for naming or boilerplate reasons, do not
+   * consider them accessible by JavaScript code.
+   */
+  // TODO(b/116712070): make sure these members are not internally marked as JsMethod/JsConstructor,
+  // So that this hack can be removed.
+  private static final ImmutableSet<MemberDescriptor.Origin> NOT_ACCESSIBLE_BY_JS_ORIGINS =
+      ImmutableSet.of(
+          MethodOrigin.SYNTHETIC_CLASS_INITIALIZER,
+          MethodOrigin.SYNTHETIC_ADAPT_LAMBDA,
+          MethodOrigin.SYNTHETIC_LAMBDA_ADAPTOR_CONSTRUCTOR);
 
   @Override
   public String getSimpleJsName() {

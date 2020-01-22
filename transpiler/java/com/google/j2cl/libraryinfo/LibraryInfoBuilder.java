@@ -27,7 +27,6 @@ import com.google.j2cl.ast.Member;
 import com.google.j2cl.ast.MemberDescriptor;
 import com.google.j2cl.ast.MemberReference;
 import com.google.j2cl.ast.MethodDescriptor;
-import com.google.j2cl.ast.MethodDescriptor.MethodOrigin;
 import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.SuperReference;
 import com.google.j2cl.ast.Type;
@@ -92,11 +91,7 @@ public final class LibraryInfoBuilder {
     for (Member member : type.getMembers()) {
       MemberDescriptor memberDescriptor = member.getDescriptor();
       String memberName = getMemberId(memberDescriptor);
-      // JsMembers and JsFunctions are marked as accessible by js.
-      boolean isJsAccessible =
-          ((memberDescriptor.isJsFunction() || memberDescriptor.isJsMember())
-                  && !shouldNotBeJsAccessible(memberDescriptor))
-              || forceJsAccessible;
+      boolean isJsAccessible = memberDescriptor.canBeReferencedExternally() || forceJsAccessible;
 
       MemberInfo.Builder builder =
           memberInfoBuilderByName.computeIfAbsent(
@@ -280,26 +275,6 @@ public final class LibraryInfoBuilder {
 
   private static boolean isPropertyAccessor(MethodDescriptor methodDescriptor) {
     return methodDescriptor.isPropertyGetter() || methodDescriptor.isPropertySetter();
-  }
-
-  /**
-   * Members with these origins are marked as JsMembers for naming or boilerplate reasons, do not
-   * consider them accessible by JavaScript code.
-   */
-  // TODO(b/116712070): make sure these members are not internally marked as JsMethod/JsConstructor,
-  // So that this hack can be removed.
-  private static final ImmutableSet<MemberDescriptor.Origin> NOT_ACCESSIBLE_BY_JS_ORIGINS =
-      ImmutableSet.of(
-          MethodOrigin.SYNTHETIC_CLASS_INITIALIZER,
-          MethodOrigin.SYNTHETIC_ADAPT_LAMBDA,
-          MethodOrigin.SYNTHETIC_LAMBDA_ADAPTOR_CONSTRUCTOR);
-
-  /**
-   * Returns {@code true} if the member is marked JsMethod/JsConstructor for convenience but not
-   * supposed to be accessible from JavaScript code.
-   */
-  private static boolean shouldNotBeJsAccessible(MemberDescriptor memberDescriptor) {
-    return NOT_ACCESSIBLE_BY_JS_ORIGINS.contains(memberDescriptor.getOrigin());
   }
 
   // There are references to non JsMember members of these types from JavaScript in the J2CL
