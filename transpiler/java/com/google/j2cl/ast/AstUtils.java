@@ -680,7 +680,6 @@ public class AstUtils {
     return node != null ? (T) node.clone() : null;
   }
 
-  @SuppressWarnings("unchecked")
   /**
    * Replaces references to variables in {@code fromVariables} to reference to variables in {@code
    * toVariables}.
