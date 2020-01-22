@@ -9,6 +9,13 @@ load(
     "web_library",
 )
 
+def create_js_lib_struct(j2cl_info, extra_providers = []):
+    return struct(
+        providers = [j2cl_info] + extra_providers,
+        closure_js_library = j2cl_info._private_.js_info.closure_js_library,
+        exports = j2cl_info._private_.js_info.exports,
+    )
+
 def j2cl_js_provider(ctx, srcs = [], deps = [], exports = []):
     """ Creates a js provider from provided sources, deps and exports. """
 
@@ -27,10 +34,10 @@ def j2cl_js_provider(ctx, srcs = [], deps = [], exports = []):
         convention = "GOOGLE",
     )
 
-    return {
-        "closure_js_library": js.closure_js_library,
-        "exports": js.exports,
-    }
+    return struct(
+        closure_js_library = js.closure_js_library,
+        exports = js.exports,
+    )
 
 def js_devserver(
         name,
