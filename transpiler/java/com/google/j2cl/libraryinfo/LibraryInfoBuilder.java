@@ -20,6 +20,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.FieldAccess;
+import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.Invocation;
 import com.google.j2cl.ast.JavaScriptConstructorReference;
 import com.google.j2cl.ast.ManglingNameUtils;
@@ -151,11 +152,21 @@ public final class LibraryInfoBuilder {
 
           @Override
           public void exitFieldAccess(FieldAccess node) {
+            FieldDescriptor target = node.getTarget();
+
+            if (target.getEnclosingTypeDescriptor().isNative()) {
+              return;
+            }
+
+            // TODO(b/34928687): Remove after $isinstance and $loadmodule moved the AST.
+            if (target.getName().equals("prototype") || target.getName().equals("$copy")) {
+              return;
+            }
+
             // Register static FieldAccess as getter/setter invocations. We are conservative here
             // because getter and setter functions has the same name: the name of the field. If a
-            // field is accessed, we visits both getter and setter.
-            methodInvocationSet.add(
-                createMethodInvocation(node.getTarget(), getInvocationKind(node)));
+            // field is accessed, we visit both getter and setter.
+            methodInvocationSet.add(createMethodInvocation(target, getInvocationKind(node)));
           }
 
           @Override
@@ -175,6 +186,11 @@ public final class LibraryInfoBuilder {
               // We don't record call to JsFunction interface methods because it doesn't
               // generate any js type. The implementation of JsFunction interface will be marked as
               // accessible by js and will be live if the implementation type is instantiated.
+              return;
+            }
+
+            // TODO(b/34928687): Remove after $isinstance and $loadmodule moved the AST.
+            if (target.getName().equals("$isInstance") || target.getName().equals("$loadModules")) {
               return;
             }
 
