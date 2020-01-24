@@ -44,7 +44,6 @@ public class OutputGeneratorStage {
   private final Problems problems;
   private final Path outputPath;
   private final Optional<Path> libraryInfoOutputPath;
-  private final boolean declareLegacyNamespace;
   private final boolean shouldGenerateReadableSourceMaps;
   private final boolean shouldGenerateReadableLibraryInfo;
   private final boolean generateKytheIndexingMetadata;
@@ -53,7 +52,6 @@ public class OutputGeneratorStage {
       List<FileInfo> nativeJavaScriptFiles,
       Path outputPath,
       Optional<Path> libraryInfoOutputPath,
-      boolean declareLegacyNamespace,
       boolean shouldGenerateReadableLibraryInfo,
       boolean shouldGenerateReadableSourceMaps,
       boolean generateKytheIndexingMetadata,
@@ -61,7 +59,6 @@ public class OutputGeneratorStage {
     this.nativeJavaScriptFiles = nativeJavaScriptFiles;
     this.outputPath = outputPath;
     this.libraryInfoOutputPath = libraryInfoOutputPath;
-    this.declareLegacyNamespace = declareLegacyNamespace;
     this.shouldGenerateReadableLibraryInfo = shouldGenerateReadableLibraryInfo;
     this.shouldGenerateReadableSourceMaps = shouldGenerateReadableSourceMaps;
     this.generateKytheIndexingMetadata = generateKytheIndexingMetadata;
@@ -79,8 +76,7 @@ public class OutputGeneratorStage {
 
     for (CompilationUnit j2clCompilationUnit : j2clCompilationUnits) {
       for (Type type : j2clCompilationUnit.getTypes()) {
-        JavaScriptImplGenerator jsImplGenerator =
-            new JavaScriptImplGenerator(problems, declareLegacyNamespace, type);
+        JavaScriptImplGenerator jsImplGenerator = new JavaScriptImplGenerator(problems, type);
 
         // If the java type contains any native methods, search for matching native file.
         String typeRelativePath = getRelativePath(type.getDeclaration());
@@ -117,8 +113,7 @@ public class OutputGeneratorStage {
 
         String javaScriptImplementationSource = jsImplGenerator.renderOutput();
 
-        JavaScriptHeaderGenerator jsHeaderGenerator =
-            new JavaScriptHeaderGenerator(problems, declareLegacyNamespace, type);
+        JavaScriptHeaderGenerator jsHeaderGenerator = new JavaScriptHeaderGenerator(problems, type);
         String javaScriptHeaderSource = jsHeaderGenerator.renderOutput();
 
         if (generateKytheIndexingMetadata) {

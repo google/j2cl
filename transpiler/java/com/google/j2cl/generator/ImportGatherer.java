@@ -78,9 +78,8 @@ class ImportGatherer extends AbstractVisitor {
     SELF
   }
 
-  public static Multimap<ImportCategory, Import> gatherImports(
-      Type type, boolean declareLegacyNamespace) {
-    return new ImportGatherer(declareLegacyNamespace).doGatherImports(type);
+  public static Multimap<ImportCategory, Import> gatherImports(Type type) {
+    return new ImportGatherer().doGatherImports(type);
   }
 
   // TODO(b/80201427): We should also include TypeVariables on name recording.
@@ -91,11 +90,7 @@ class ImportGatherer extends AbstractVisitor {
   private final SetMultimap<ImportCategory, TypeDeclaration> typeDeclarationByCategory =
       LinkedHashMultimap.create();
 
-  private final boolean declareLegacyNamespace;
-
-  private ImportGatherer(boolean declareLegacyNamespace) {
-    this.declareLegacyNamespace = declareLegacyNamespace;
-  }
+  private ImportGatherer() {}
 
   @Override
   public void exitField(Field field) {
@@ -152,17 +147,6 @@ class ImportGatherer extends AbstractVisitor {
       }
       addTypeDeclaration(
           superInterfaceTypeDescriptor.getTypeDeclaration(), ImportCategory.LOADTIME);
-    }
-
-    // Here we add an extra dependency on the outer namespace if declareLegacyNamespace is
-    // enabled.  This forces the outer namespaces to be declared first before the inner namespace
-    // which avoids errors in the JsCompiler. Note this interacts poorly with Outer classes that
-    // implement/extend Inner types.
-    TypeDeclaration enclosingTypeDeclaration = type.getDeclaration().getEnclosingTypeDeclaration();
-    if (declareLegacyNamespace
-        && AstUtils.canBeRequiredFromJs(type.getDeclaration())
-        && enclosingTypeDeclaration != null) {
-      addTypeDeclaration(enclosingTypeDeclaration, ImportCategory.LOADTIME);
     }
   }
 

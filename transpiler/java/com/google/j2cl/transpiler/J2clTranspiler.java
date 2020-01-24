@@ -272,7 +272,6 @@ class J2clTranspiler {
             options.getNativeSources(),
             options.getOutput(),
             options.getLibraryInfoOutput(),
-            options.getDeclareLegacyNamespace(),
             options.getEmitReadableLibraryInfo(),
             options.getEmitReadableSourceMap(),
             options.getGenerateKytheIndexingMetadata(),

@@ -18,7 +18,6 @@ def _impl_j2cl_library(ctx):
         internal_transpiler_flags = {
             "readable_source_maps": ctx.attr.readable_source_maps,
             "readable_library_info": ctx.attr.readable_library_info,
-            "declare_legacy_namespace": ctx.attr.declare_legacy_namespace,
         },
     )
 
@@ -52,7 +51,6 @@ def _collect_runfiles(ctx, files, deps):
 _J2CL_INTERNAL_LIB_ATTRS = {
     "readable_source_maps": attr.bool(default = False),
     "readable_library_info": attr.bool(default = False),
-    "declare_legacy_namespace": attr.bool(default = False),
 }
 
 _J2CL_LIB_ATTRS = {

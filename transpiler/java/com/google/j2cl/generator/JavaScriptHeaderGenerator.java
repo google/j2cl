@@ -16,7 +16,6 @@
 package com.google.j2cl.generator;
 
 import com.google.common.collect.Iterables;
-import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.common.Problems;
@@ -29,8 +28,8 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
 
   public static final String FILE_SUFFIX = ".java.js";
 
-  public JavaScriptHeaderGenerator(Problems problems, boolean declareLegacyNamespace, Type type) {
-    super(problems, declareLegacyNamespace, type);
+  public JavaScriptHeaderGenerator(Problems problems, Type type) {
+    super(problems, type);
   }
 
   @Override
@@ -42,14 +41,6 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
         () -> sourceBuilder.append("'" + typeDeclaration.getModuleName() + "'"));
     sourceBuilder.append(");");
     sourceBuilder.newLine();
-
-    if (declareLegacyNamespace && AstUtils.canBeRequiredFromJs(typeDeclaration)) {
-      // Even if opted into declareLegacyNamespace, this only makes sense for classes that are
-      // intended to be accessed from the native JS. Thus we only emit declareLegacyNamespace
-      // for non-anonymous JsType classes.
-      sourceBuilder.appendln("goog.module.declareLegacyNamespace();");
-    }
-
     sourceBuilder.newLine();
 
     Set<String> alreadyRequiredPaths = new HashSet<>();
@@ -82,10 +73,7 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
     sourceBuilder.appendLines(
         "const " + className + " = goog.require('" + implementationPath + "');");
     sourceBuilder.newLine();
-    // Since declareLegacyNamespace makes this class globally accessible via exports, also add a
-    // mapping from the exports to the original Java class.
-    sourceBuilder.emitWithMapping(type.getSourcePosition(), () -> sourceBuilder.append("exports"));
-    sourceBuilder.append(" = " + className + ";");
+    sourceBuilder.append("exports = " + className + ";");
     return sourceBuilder.build();
   }
 

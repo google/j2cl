@@ -66,14 +66,6 @@ public final class J2clCommandLineRunner extends CommandLineTool {
   protected boolean readableSourceMaps = false;
 
   @Option(
-      name = "-declarelegacynamespaces",
-      usage =
-          "Enable goog.module.declareLegacyNamespace() for generated goog.module()."
-              + " For Docs during onboarding, do not use.",
-      hidden = true)
-  protected boolean declareLegacyNamespaces = false;
-
-  @Option(
       name = "-generatekytheindexingmetadata",
       usage =
           "Generates Kythe indexing metadata and appends it onto the generated JavaScript files.",
@@ -122,7 +114,6 @@ public final class J2clCommandLineRunner extends CommandLineTool {
                 : getDirOutput(this.output, problems))
         .setEmitReadableSourceMap(this.readableSourceMaps)
         .setEmitReadableLibraryInfo(false)
-        .setDeclareLegacyNamespace(this.declareLegacyNamespaces)
         .setGenerateKytheIndexingMetadata(this.generateKytheIndexingMetadata)
         .setFrontend(this.frontEnd)
         .build();

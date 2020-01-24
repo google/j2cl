@@ -184,8 +184,6 @@ def _j2cl_transpile(
     args.add_joined("-classpath", classpath, join_with = ctx.configuration.host_path_separator)
     args.add("-output", output)
     args.add("-libraryinfooutput", library_info_output)
-    if internal_transpiler_flags.get("declare_legacy_namespace"):
-        args.add("-declarelegacynamespaces")
     if internal_transpiler_flags.get("readable_source_maps"):
         args.add("-readablesourcemaps")
     if internal_transpiler_flags.get("readable_library_info"):

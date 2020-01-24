@@ -42,13 +42,11 @@ public abstract class JavaScriptGenerator {
   protected final Multimap<ImportCategory, Import> importsByCategory;
   protected final SourceBuilder sourceBuilder = new SourceBuilder();
   protected final Problems problems;
-  protected final boolean declareLegacyNamespace;
 
-  public JavaScriptGenerator(Problems problems, boolean declareLegacyNamespace, Type type) {
+  public JavaScriptGenerator(Problems problems, Type type) {
     this.problems = problems;
-    this.declareLegacyNamespace = declareLegacyNamespace;
     this.type = type;
-    importsByCategory = ImportGatherer.gatherImports(type, declareLegacyNamespace);
+    importsByCategory = ImportGatherer.gatherImports(type);
     Collection<Import> imports = importsByCategory.values();
     Map<HasName, String> uniqueNameByVariable =
         UniqueVariableNamesGatherer.computeUniqueVariableNames(imports, type);

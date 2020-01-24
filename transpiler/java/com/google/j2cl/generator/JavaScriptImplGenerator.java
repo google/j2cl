@@ -57,8 +57,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   public static final String FILE_SUFFIX = ".impl.java.js";
 
-  public JavaScriptImplGenerator(Problems problems, boolean declareLegacyNamespace, Type type) {
-    super(problems, declareLegacyNamespace, type);
+  public JavaScriptImplGenerator(Problems problems, Type type) {
+    super(problems, type);
     this.statementTranspiler = new StatementTranspiler(sourceBuilder, environment);
     this.closureTypesGenerator = new ClosureTypesGenerator(environment);
   }

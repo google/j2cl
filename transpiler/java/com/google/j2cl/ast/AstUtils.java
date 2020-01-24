@@ -44,15 +44,6 @@ public class AstUtils {
   private static final String CAPTURES_PREFIX = "$c_";
   private static final String ENCLOSING_INSTANCE_NAME = "$outer_this";
 
-  /**
-   * Whether or not it makes sense to require this type from javascript with a goog.require('xxx');
-   * This is used to detect if a goog.module.declareLegacyNamespace should be emitted for a class.
-   */
-  public static boolean canBeRequiredFromJs(TypeDeclaration typeDescriptor) {
-    return (typeDescriptor.isJsType() || typeDescriptor.isJsEnum())
-        && !typeDescriptor.isAnonymous();
-  }
-
   /** Returns the loadModules method descriptor for a particular type */
   public static MethodDescriptor getLoadModulesDescriptor(DeclaredTypeDescriptor typeDescriptor) {
     return MethodDescriptor.newBuilder()
@@ -658,9 +649,7 @@ public class AstUtils {
 
   public static String getSimpleSourceName(List<String> classComponents) {
     String simpleName = Iterables.getLast(classComponents);
-    // If the user opted in to declareLegacyNamespaces, then JSCompiler will complain when seeing
-    // namespaces like "foo.bar.Baz.4". Prefix anonymous numbered classes with a string to make
-    // JSCompiler happy.
+    // Prefix anonymous numbered classes with a string to to make their names less odd.
     return startsWithNumber(simpleName) ? "$" + simpleName : simpleName;
   }
 

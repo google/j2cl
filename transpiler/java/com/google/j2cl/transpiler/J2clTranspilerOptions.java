@@ -43,8 +43,6 @@ public abstract class J2clTranspilerOptions {
 
   public abstract boolean getEmitReadableSourceMap();
 
-  public abstract boolean getDeclareLegacyNamespace();
-
   public abstract boolean getGenerateKytheIndexingMetadata();
 
   public abstract Frontend getFrontend();
@@ -70,8 +68,6 @@ public abstract class J2clTranspilerOptions {
     public abstract Builder setEmitReadableLibraryInfo(boolean b);
 
     public abstract Builder setEmitReadableSourceMap(boolean b);
-
-    public abstract Builder setDeclareLegacyNamespace(boolean b);
 
     public abstract Builder setGenerateKytheIndexingMetadata(boolean b);
 

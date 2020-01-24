@@ -25,8 +25,7 @@ def readable_example(
         plugins = [],
         defs = [],
         generate_library_info = False,
-        j2cl_library_tags = [],
-        _declare_legacy_namespace = False):
+        j2cl_library_tags = []):
     """Macro that confirms the JS compilability of some transpiled Java.
 
     deps are Labels of j2cl_library() rules. NOT labels of
@@ -38,7 +37,6 @@ def readable_example(
       plugins: APT processors to execute when generating readable output.
       defs: Custom flags to pass to the JavaScript compiler.
       generate_library_info: Wheter to copy the call graph for the library in the output dir.
-      _declare_legacy_namespace: Whether to use legacy namespaces in output.
     """
 
     # Transpile the Java files.
@@ -52,7 +50,6 @@ def readable_example(
         tags = j2cl_library_tags,
         _readable_source_maps = True,
         _readable_library_info = generate_library_info,
-        _declare_legacy_namespace = _declare_legacy_namespace,
     )
 
     if generate_library_info:

@@ -71,12 +71,6 @@ final class BazelJ2clBuilder extends BazelWorker {
   @Option(name = "-readablesourcemaps", hidden = true)
   protected boolean readableSourceMaps = false;
 
-  @Option(
-      name = "-declarelegacynamespaces",
-      usage = "For Docs during onboarding, do not use.",
-      hidden = true)
-  protected boolean declareLegacyNamespaces = false;
-
   @Option(name = "-generatekytheindexingmetadata", hidden = true)
   protected boolean generateKytheIndexingMetadata = false;
 
@@ -130,7 +124,6 @@ final class BazelJ2clBuilder extends BazelWorker {
         .setLibraryInfoOutput(libraryInfoOutputPath)
         .setEmitReadableLibraryInfo(readableLibraryInfo)
         .setEmitReadableSourceMap(this.readableSourceMaps)
-        .setDeclareLegacyNamespace(this.declareLegacyNamespaces)
         .setGenerateKytheIndexingMetadata(this.generateKytheIndexingMetadata)
         .setFrontend(FRONTEND)
         .build();
