@@ -195,10 +195,6 @@ public final class LibraryInfoBuilder {
             }
 
             methodInvocationSet.add(createMethodInvocation(target, getInvocationKind(node)));
-
-            if (target.isConstructor()) {
-              referencedTypes.add(getTypeId(target.getEnclosingTypeDescriptor()));
-            }
           }
         });
 

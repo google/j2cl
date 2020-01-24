@@ -55,12 +55,11 @@ final class RapidTypeAnalyser {
       case DYNAMIC:
         traversePolymorphicReference(member);
         break;
-      case STATIC:
-        markTypeLive(member.getDeclaringType());
-        markMemberLive(member);
-        break;
       case INSTANTIATION:
         instantiate(member.getDeclaringType());
+        // Fall through.
+      case STATIC:
+        markTypeLive(member.getDeclaringType());
         markMemberLive(member);
         break;
       default:
