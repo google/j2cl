@@ -124,8 +124,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     try {
       renderImports();
       if (type.getDeclaration().isJsEnum()) {
-        // TODO(b/117150539): Decide if native.js files are allowed on JsEnum or not, and implement
-        // accordingly.
         renderClosureEnum();
       } else {
         renderClass();
