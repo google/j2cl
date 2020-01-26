@@ -10,6 +10,7 @@ def j2cl_application(
         jre_logging_log_level = "OFF",
         jre_checks_check_level = "NORMAL",
         closure_defines = dict(),
+        extra_flags = [],
         extra_dev_resources = [],
         **kwargs):
     """Create a J2CL application target.
@@ -58,7 +59,7 @@ def j2cl_application(
 
     js_binary(
         name = name,
-        defs = J2CL_OPTIMIZED_DEFS + entry_point_defs + [
+        defs = J2CL_OPTIMIZED_DEFS + entry_point_defs + extra_flags + [
             "--rewrite_polyfills=%s" % rewrite_polyfills,
         ],
         deps = [":%s_config" % name] + deps,
