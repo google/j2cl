@@ -370,10 +370,13 @@ public class J2clMinifier {
   @VisibleForTesting Map<String, String> minifiedIdentifiersByIdentifier = new HashMap<>();
 
   public J2clMinifier() {
-    // Code removal process is an experimental features for now. In order to avoid disrupting
-    // client code using J2clMinifier, we decided to use a System property for now. Eventually,
-    // clients will pass the file to the J2clMinifier.
-    String codeRemovalFilePath = System.getProperty("j2cl_rta_removal_code_info_file");
+    this(null);
+  }
+
+  public J2clMinifier(String codeRemovalFilePath) {
+    // TODO(goktug): Rename to j2cl_rta_pruning_manifest
+    codeRemovalFilePath =
+        System.getProperty("j2cl_rta_removal_code_info_file", codeRemovalFilePath);
     setupRtaCodeRemoval(readCodeRemovalInfoFile(codeRemovalFilePath));
 
     transFn = new TransitionFunction[numberOfStates][numberOfStates];
