@@ -17,8 +17,6 @@ package com.google.j2cl.common;
 
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
-import com.google.common.base.Splitter;
-import com.google.common.collect.Iterables;
 import java.io.File;
 import javax.annotation.Nullable;
 
@@ -55,7 +53,7 @@ public abstract class SourcePosition implements Comparable<SourcePosition> {
   @Nullable
   public String getFileName() {
     String filePath = getFilePath();
-    return filePath == null ? filePath : getFileName(filePath);
+    return filePath == null ? filePath : new File(filePath).getName();
   }
 
   abstract Builder toBuilder();
@@ -76,22 +74,10 @@ public abstract class SourcePosition implements Comparable<SourcePosition> {
 
     public abstract Builder setName(String name);
 
+    public abstract SourcePosition build();
+
     public static Builder from(SourcePosition sourcePosition) {
       return sourcePosition.toBuilder();
     }
-
-    abstract SourcePosition autoBuild();
-
-    public SourcePosition build() {
-      return autoBuild();
-    }
-  }
-
-  /** Returns the file name portion of a path. */
-  public static String getFileName(String filePath) {
-    // Do not use String.split(File.separator) because the parameter to String.split() is a regex,
-    // therefore, for example on windows, the file separator ("\") would need escaping.
-    // Conversely, Splitter.on() takes a string parameter literally.
-    return Iterables.getLast(Splitter.on(File.separator).split(filePath));
   }
 }

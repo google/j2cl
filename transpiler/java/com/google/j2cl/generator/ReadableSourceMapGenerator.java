@@ -24,6 +24,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.common.SourcePosition;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -86,12 +87,12 @@ public class ReadableSourceMapGenerator {
     if (nativeJavaScriptFile != null) {
       String nativeJavaScriptFileFileName = nativeJavaScriptFile.getRelativeFilePath();
       contentsByFileNameBuilder.put(
-          SourcePosition.getFileName(nativeJavaScriptFileFileName),
+          new File(nativeJavaScriptFileFileName).getName(),
           Splitter.on('\n').splitToList(nativeJavaScriptFile.getContent()));
     }
     try {
       contentsByFileNameBuilder.put(
-          SourcePosition.getFileName(j2clUnitFilePath),
+          new File(j2clUnitFilePath).getName(),
           java.nio.file.Files.readAllLines(Paths.get(j2clUnitFilePath)));
     } catch (IOException e) {
       problems.fatal(FatalError.CANNOT_OPEN_FILE, e.toString());
