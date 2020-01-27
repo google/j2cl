@@ -58,6 +58,10 @@ public final class LibraryInfoBuilder {
       String implFilePath,
       Map<Member, com.google.j2cl.common.SourcePosition> outputSourceInfoByMember) {
 
+    if (!isPrunableType(type.getTypeDescriptor())) {
+      return;
+    }
+
     TypeInfo.Builder typeInfoBuilder =
         TypeInfo.newBuilder()
             .setTypeId(getTypeId(type))
@@ -137,7 +141,7 @@ public final class LibraryInfoBuilder {
         new AbstractVisitor() {
           @Override
           public void exitJavaScriptConstructorReference(JavaScriptConstructorReference node) {
-            if (node.getReferencedTypeDeclaration().isNative()) {
+            if (!isPrunableType(node.getReferencedTypeDeclaration().toRawTypeDescriptor())) {
               return;
             }
 
@@ -154,7 +158,7 @@ public final class LibraryInfoBuilder {
           public void exitFieldAccess(FieldAccess node) {
             FieldDescriptor target = node.getTarget();
 
-            if (target.getEnclosingTypeDescriptor().isNative()) {
+            if (!isPrunableType(target.getEnclosingTypeDescriptor())) {
               return;
             }
 
@@ -173,7 +177,7 @@ public final class LibraryInfoBuilder {
           public void exitInvocation(Invocation node) {
             MethodDescriptor target = node.getTarget();
 
-            if (target.getEnclosingTypeDescriptor().isNative()) {
+            if (!isPrunableType(target.getEnclosingTypeDescriptor())) {
               return;
             }
 
@@ -283,6 +287,10 @@ public final class LibraryInfoBuilder {
 
     // Property (could be a property getter or setter)
     return ManglingNameUtils.getPropertyMangledName(memberDescriptor);
+  }
+
+  private static boolean isPrunableType(DeclaredTypeDescriptor typeDescriptor) {
+    return !typeDescriptor.isNative() && !typeDescriptor.isJsEnum();
   }
 
   private static boolean isPropertyAccessor(MethodDescriptor methodDescriptor) {
