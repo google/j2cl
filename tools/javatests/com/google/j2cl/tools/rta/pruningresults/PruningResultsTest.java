@@ -121,9 +121,6 @@ public class PruningResultsTest {
         regex -> assertThat(contentAfterLineRemoval).doesNotContainMatch(regex));
     notRemovedLinesChecks.forEach(line -> assertThat(contentAfterLineRemoval).contains(line));
 
-    System.err.println(fooFile.content);
-    System.err.println(contentAfterLineRemoval);
-
     // assert we don't change the number of lines for not breaking source map.
     assertThat(numberOfLinesOf(fooFile.content))
         .isEqualTo(numberOfLinesOf(contentAfterLineRemoval));
