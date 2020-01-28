@@ -42,19 +42,15 @@ public abstract class CommandLineTool {
       parser.parseArgument(args);
     } catch (CmdLineException e) {
       if (!this.help) {
-        String message = e.getMessage() + "\n";
-        message += usage + "\n";
-        message += "use -help for a list of possible options";
-        problems.error(message);
+        String message = "%s\n%s\nuse -help for a list of possible options";
+        problems.error(message, e.getMessage(), usage);
         return problems;
       }
     }
 
     if (this.help) {
-      String message = usage + "\n";
-      message += "where possible options include:\n";
-      message += J2clUtils.streamToString(parser::printUsage);
-      problems.info(message);
+      String message = "%s\nwhere possible options include:\n%s";
+      problems.info(message, usage, J2clUtils.streamToString(parser::printUsage));
       return problems;
     }
 

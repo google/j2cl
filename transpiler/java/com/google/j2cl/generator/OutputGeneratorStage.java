@@ -95,8 +95,8 @@ public class OutputGeneratorStage {
           TypeDeclaration typeDeclaration = getUnderlyingTypeDeclaration(type);
           if (typeDeclaration.isNative() || typeDeclaration.isJsEnum()) {
             problems.error(
-                (typeDeclaration.isJsEnum() ? "JsEnum" : "Native JsType")
-                    + " '%s' does not support having a '.native.js' file.",
+                "%s '%s' does not support having a '.native.js' file.",
+                typeDeclaration.isJsEnum() ? "JsEnum" : "Native JsType",
                 typeDeclaration.getReadableDescription());
             return;
           }

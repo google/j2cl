@@ -19,7 +19,6 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.collect.Collections2;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.j2cl.ast.AbstractRewriter;
@@ -138,7 +137,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
       findTargetMethodDescriptorsByBridgeMethodDescriptor(TypeDeclaration typeDeclaration) {
     // Do not create bridge methods in interfaces.
     if (typeDeclaration.isInterface()) {
-      return ImmutableMap.of();
+      return new LinkedHashMap<>();
     }
 
     Map<MethodDescriptor, MethodDescriptor> targetMethodDescriptorByBridgeMethodDescriptor =

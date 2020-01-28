@@ -131,7 +131,7 @@ public class JdtParser {
     }
     for (IProblem problem : unit.getProblems()) {
       if (problem.isError()) {
-        problems.error(problem.getSourceLineNumber(), filename, problem.getMessage());
+        problems.error(problem.getSourceLineNumber(), filename, "%s", problem.getMessage());
         hasErrors = true;
       }
     }

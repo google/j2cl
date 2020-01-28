@@ -123,7 +123,7 @@ public class ReadableSourceMapGenerator {
       }
       content
           .append("\n")
-          .append((trimTrailingWhitespace(lines.get(endLine).substring(0, endColumn))));
+          .append(trimTrailingWhitespace(lines.get(endLine).substring(0, endColumn)));
       return "[" + content.toString() + "]";
     }
 

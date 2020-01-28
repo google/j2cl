@@ -113,7 +113,7 @@ class UniqueVariableNamesGatherer extends AbstractVisitor {
       // When there are collisions synthesize a name of the style "name_<nnn>".
       variableName = variableName + "_";
       int suffix = 0;
-      while (!isNameAvailable.apply((variableName + (++suffix)))) {
+      while (!isNameAvailable.apply((variableName + ++suffix))) {
         // ensure the alias does not collide with other local variables.
       }
       variableName += suffix;

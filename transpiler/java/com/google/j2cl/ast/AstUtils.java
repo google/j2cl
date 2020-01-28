@@ -657,14 +657,14 @@ public class AstUtils {
     return !string.isEmpty() && Character.isDigit(string.charAt(0));
   }
 
-  @SuppressWarnings("unchecked")
   /** Clones a list of expressions */
+  @SuppressWarnings("unchecked")
   public static <T extends Cloneable<?>> List<T> clone(List<T> nodes) {
     return nodes.stream().map(node -> (T) node.clone()).collect(toImmutableList());
   }
 
-  @SuppressWarnings("unchecked")
   /** Clones a cloneable or returns null */
+  @SuppressWarnings("unchecked")
   public static <T extends Cloneable<?>> T clone(T node) {
     return node != null ? (T) node.clone() : null;
   }
@@ -682,11 +682,11 @@ public class AstUtils {
     return result;
   }
 
-  @SuppressWarnings("unchecked")
   /**
    * Replaces references to variables in {@code fromVariables} to reference to variables in {@code
    * toVariables}.
    */
+  @SuppressWarnings("unchecked")
   public static <T extends Node> T replaceVariables(
       List<Variable> fromVariables, List<Variable> toVariable, T node) {
     class VariableReplacer extends AbstractRewriter {

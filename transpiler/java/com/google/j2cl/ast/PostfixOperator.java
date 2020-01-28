@@ -24,8 +24,8 @@ public enum PostfixOperator implements Operator {
   INCREMENT("++", BinaryOperator.PLUS),
   DECREMENT("--", BinaryOperator.MINUS);
 
-  private String symbol;
-  private BinaryOperator underlyingBinaryOperator;
+  private final String symbol;
+  private final BinaryOperator underlyingBinaryOperator;
 
   PostfixOperator(String symbol, BinaryOperator underlyingBinaryOperator) {
     this.symbol = symbol;

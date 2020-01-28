@@ -533,7 +533,8 @@ public abstract class TypeDeclaration extends Node
   }
 
   @Memoized
-  public @Nullable DeclaredTypeDescriptor getSuperTypeDescriptor() {
+  @Nullable
+  public DeclaredTypeDescriptor getSuperTypeDescriptor() {
     return getSuperTypeDescriptorFactory().get(this);
   }
 

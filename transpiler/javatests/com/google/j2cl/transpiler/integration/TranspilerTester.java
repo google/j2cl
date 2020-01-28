@@ -61,6 +61,40 @@ public class TranspilerTester {
             "transpiler/javatests/com/google/j2cl/transpiler/integration/jre_bundle_deploy.jar");
   }
 
+  private static class File {
+    private Path filePath;
+    private String content;
+
+    public File(Path filePath, String content) {
+      this.filePath = filePath;
+      this.content = content;
+    }
+
+    public Path getFilePath() {
+      return filePath;
+    }
+
+    public void createFileIn(Path basePath) {
+      try {
+        Files.write(basePath.resolve(filePath), content.getBytes(Charset.forName("UTF-8")));
+      } catch (IOException e) {
+        throw new AssertionError(e);
+      }
+    }
+
+    private boolean isNativeJsFile() {
+      return filePath.toString().endsWith(".native.js");
+    }
+
+    private boolean isJavaSourceFile() {
+      return filePath.toString().endsWith(".java");
+    }
+
+    private boolean isSrcJar() {
+      return filePath.toString().endsWith(".srcjar");
+    }
+  }
+
   private List<File> files = new ArrayList<>();
   private List<String> args = new ArrayList<>();
   private String temporaryDirectoryPrefix = "transpile_tester";
@@ -284,7 +318,7 @@ public class TranspilerTester {
     } catch (Exception e) {
       e.printStackTrace();
       Problems problems = new Problems();
-      problems.error(e.toString());
+      problems.error("%s", e.toString());
       return new TranspileResult(problems, outputPath);
     }
   }
@@ -296,40 +330,6 @@ public class TranspilerTester {
         J2clCommandLineRunner.class.getDeclaredMethod("runForTest", String[].class);
     transpileMethod.setAccessible(true);
     return (Problems) transpileMethod.invoke(null, (Object) Iterables.toArray(args, String.class));
-  }
-
-  private static class File {
-    private Path filePath;
-    private String content;
-
-    public File(Path filePath, String content) {
-      this.filePath = filePath;
-      this.content = content;
-    }
-
-    public Path getFilePath() {
-      return filePath;
-    }
-
-    public void createFileIn(Path basePath) {
-      try {
-        Files.write(basePath.resolve(filePath), content.getBytes(Charset.forName("UTF-8")));
-      } catch (IOException e) {
-        throw new AssertionError(e);
-      }
-    }
-
-    private boolean isNativeJsFile() {
-      return filePath.toString().endsWith(".native.js");
-    }
-
-    private boolean isJavaSourceFile() {
-      return filePath.toString().endsWith(".java");
-    }
-
-    private boolean isSrcJar() {
-      return filePath.toString().endsWith(".srcjar");
-    }
   }
 
   private TranspileResult transpile() {
@@ -360,8 +360,7 @@ public class TranspilerTester {
 
         // 3. Add Java source files and srcjar files to command line.
         commandLineArgsBuilder.addAll(
-            files
-                .stream()
+            files.stream()
                 .filter(Predicates.or(File::isJavaSourceFile, File::isSrcJar))
                 .map(file -> inputPath.resolve(file.getFilePath()))
                 .map(Path::toAbsolutePath)
@@ -390,15 +389,15 @@ public class TranspilerTester {
       throws IOException {
     Path zipFilePath = inputPath.resolve(outputFileName);
 
-    ZipOutputStream out = new ZipOutputStream(new FileOutputStream(zipFilePath.toFile()));
-    for (File nativeSource : nativeSources) {
-      Path nativeSourceAbsolutePath =
-          inputPath.resolve(nativeSource.getFilePath()).toAbsolutePath();
-      out.putNextEntry(new ZipEntry(inputPath.relativize(nativeSourceAbsolutePath).toString()));
-      Files.copy(nativeSourceAbsolutePath, out);
-      out.closeEntry();
+    try (ZipOutputStream out = new ZipOutputStream(new FileOutputStream(zipFilePath.toFile()))) {
+      for (File nativeSource : nativeSources) {
+        Path nativeSourceAbsolutePath =
+            inputPath.resolve(nativeSource.getFilePath()).toAbsolutePath();
+        out.putNextEntry(new ZipEntry(inputPath.relativize(nativeSourceAbsolutePath).toString()));
+        Files.copy(nativeSourceAbsolutePath, out);
+        out.closeEntry();
+      }
     }
-    out.close();
 
     return zipFilePath;
   }

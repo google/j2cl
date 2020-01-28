@@ -19,6 +19,8 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
+import com.google.errorprone.annotations.FormatMethod;
+import com.google.errorprone.annotations.FormatString;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.util.Collection;
@@ -96,18 +98,34 @@ public class Problems {
     abort();
   }
 
-  public void error(SourcePosition sourcePosition, String detailMessage, Object... args) {
+  @FormatMethod
+  public void error(
+      SourcePosition sourcePosition, @FormatString String detailMessage, Object... args) {
     problem(Severity.ERROR, sourcePosition, detailMessage, args);
   }
 
-  public void error(int lineNumber, String filePath, String detailMessage, Object... args) {
+  @FormatMethod
+  public void error(
+      int lineNumber, String filePath, @FormatString String detailMessage, Object... args) {
     problem(Severity.ERROR, lineNumber, filePath, detailMessage, args);
   }
 
+  @FormatMethod
+  public void error(String detailMessage, Object... args) {
+    problemsBySeverity.put(Severity.ERROR, "Error: " + String.format(detailMessage, args));
+  }
+
+  @FormatMethod
   public void warning(SourcePosition sourcePosition, String detailMessage, Object... args) {
     problem(Severity.WARNING, sourcePosition, detailMessage, args);
   }
 
+  @FormatMethod
+  public void warning(String detailMessage, Object... args) {
+    problemsBySeverity.put(Severity.WARNING, String.format(detailMessage, args));
+  }
+
+  @FormatMethod
   private void problem(
       Severity severity, SourcePosition sourcePosition, String detailMessage, Object... args) {
     problem(
@@ -119,8 +137,13 @@ public class Problems {
         args);
   }
 
+  @FormatMethod
   private void problem(
-      Severity severity, int lineNumber, String filePath, String detailMessage, Object... args) {
+      Severity severity,
+      int lineNumber,
+      String filePath,
+      @FormatString String detailMessage,
+      Object... args) {
     String message = args.length == 0 ? detailMessage : String.format(detailMessage, args);
     problemsBySeverity.put(
         severity,
@@ -132,14 +155,7 @@ public class Problems {
             message));
   }
 
-  public void error(String detailMessage, Object... args) {
-    problemsBySeverity.put(Severity.ERROR, "Error: " + String.format(detailMessage, args));
-  }
-
-  public void warning(String detailMessage, Object... args) {
-    problemsBySeverity.put(Severity.WARNING, String.format(detailMessage, args));
-  }
-
+  @FormatMethod
   public void info(String detailMessage, Object... args) {
     problemsBySeverity.put(Severity.INFO, String.format(detailMessage, args));
   }

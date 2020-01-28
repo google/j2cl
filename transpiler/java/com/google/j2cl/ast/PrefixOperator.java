@@ -29,8 +29,8 @@ public enum PrefixOperator implements Operator {
   NOT("!"),
   SPREAD("..."); // Refers to the Javascript ES6 spread operator.
 
-  private String symbol;
-  private BinaryOperator underlyingBinaryOperator;
+  private final String symbol;
+  private final BinaryOperator underlyingBinaryOperator;
 
   PrefixOperator(String symbol) {
     this(symbol, null);

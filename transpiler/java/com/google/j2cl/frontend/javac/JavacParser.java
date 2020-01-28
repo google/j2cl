@@ -126,6 +126,7 @@ public class JavacParser {
         problems.error(
             (int) diagnostic.getLineNumber(),
             diagnostic.getSource().getName(),
+            "%s",
             diagnostic.getMessage(Locale.US));
         hasErrors = true;
       }

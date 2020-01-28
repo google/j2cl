@@ -54,7 +54,7 @@ public abstract class FilePosition {
   }
 
   @Override
-  public boolean equals(Object that) {
+  public final boolean equals(Object that) {
     if (!(that instanceof FilePosition)) {
       return false;
     }
@@ -68,12 +68,12 @@ public abstract class FilePosition {
   }
 
   @Override
-  public int hashCode() {
+  public final int hashCode() {
     return getLine() * 37 + getColumn();
   }
 
   @Override
-  public String toString() {
+  public final String toString() {
     return "(" + getLine() + ":" + getColumn() + ")";
   }
 }

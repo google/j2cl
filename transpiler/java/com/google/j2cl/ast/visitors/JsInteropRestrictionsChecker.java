@@ -395,18 +395,20 @@ public class JsInteropRestrictionsChecker {
         || fieldDescriptor.isJsMember()) {
       problems.error(
           field.getSourcePosition(),
-          messagePrefix + " cannot be static nor JsOverlay nor JsMethod nor JsProperty.");
+          "%s cannot be static nor JsOverlay nor JsMethod nor JsProperty.",
+          messagePrefix);
     }
 
     if (!checkJsEnumCustomValueType(valueTypeDescriptor)) {
       problems.error(
           field.getSourcePosition(),
-          messagePrefix + " cannot have the type '%s'.",
+          "%s cannot have the type '%s'.",
+          messagePrefix,
           valueTypeDescriptor.getReadableDescription());
     }
 
     if (field.getInitializer() != null) {
-      problems.error(field.getSourcePosition(), messagePrefix + " cannot have initializer.");
+      problems.error(field.getSourcePosition(), "%s cannot have initializer.", messagePrefix);
     }
   }
 
@@ -422,7 +424,8 @@ public class JsInteropRestrictionsChecker {
     if (!requiresConstructor(enclosingTypeDeclaration)) {
       problems.error(
           constructor.getSourcePosition(),
-          getJsEnumTypeText(enclosingTypeDeclaration) + " '%s' cannot have constructor '%s'.",
+          "%s '%s' cannot have constructor '%s'.",
+          getJsEnumTypeText(enclosingTypeDeclaration),
           enclosingTypeDeclaration.getReadableDescription(),
           constructor.getReadableDescription());
       return;
@@ -562,9 +565,11 @@ public class JsInteropRestrictionsChecker {
 
             problems.error(
                 methodCall.getSourcePosition(),
-                messagePrefix + " '%s' does not support '%s'." + bugMessage,
+                "%s '%s' does not support '%s'.%s",
+                messagePrefix,
                 qualifierTypeDescriptor.getReadableDescription(),
-                target.getReadableDescription());
+                target.getReadableDescription(),
+                bugMessage);
           }
         });
   }
@@ -642,7 +647,8 @@ public class JsInteropRestrictionsChecker {
                 // the error reporting here should include source position.
                 problems.error(
                     member.getSourcePosition(),
-                    messagePrefix + " '%s' cannot be assigned to '%s'.",
+                    "%s '%s' cannot be assigned to '%s'.",
+                    messagePrefix,
                     expressionTypeDescriptor.getReadableDescription(),
                     toTypeDescriptor.getReadableDescription());
               }
@@ -847,7 +853,8 @@ public class JsInteropRestrictionsChecker {
     if (hasNonNativeJsEnumArray(typeDescriptor)) {
       problems.error(
           sourcePosition,
-          messagePrefix + " cannot be of type '%s'. (b/118299062)",
+          "%s cannot be of type '%s'. (b/118299062)",
+          messagePrefix,
           typeDescriptor.getReadableDescription());
     }
   }
@@ -1040,7 +1047,6 @@ public class JsInteropRestrictionsChecker {
         continue;
       }
 
-      String parentName = overriddenMethodDescriptor.getSimpleJsName();
       if (overriddenMethodDescriptor.isJsMethod() != method.getDescriptor().isJsMethod()) {
         // Overrides can not change JsMethod to JsProperty nor vice versa.
         problems.error(
@@ -1049,11 +1055,11 @@ public class JsInteropRestrictionsChecker {
             member.getDescriptor().isJsMethod() ? "JsMethod" : "JsProperty",
             member.getReadableDescription(),
             overriddenMethodDescriptor.isJsMethod() ? "JsMethod" : "JsProperty",
-            overriddenMethodDescriptor.getReadableDescription(),
-            parentName);
+            overriddenMethodDescriptor.getReadableDescription());
         break;
       }
 
+      String parentName = overriddenMethodDescriptor.getSimpleJsName();
       if (!parentName.equals(jsName)) {
         problems.error(
             method.getSourcePosition(),
@@ -1326,7 +1332,8 @@ public class JsInteropRestrictionsChecker {
 
     problems.error(
         member.getSourcePosition(),
-        messagePrefix + " '%s' cannot declare non-JsOverlay member '%s'.",
+        "%s '%s' cannot declare non-JsOverlay member '%s'.",
+        messagePrefix,
         memberDescriptor.getEnclosingTypeDescriptor().getTypeDeclaration().getReadableDescription(),
         member.getReadableDescription());
   }
@@ -1390,7 +1397,8 @@ public class JsInteropRestrictionsChecker {
         // Methods that are not effectively static dispatch are disallowed.
         problems.error(
             member.getSourcePosition(),
-            messagePrefix + " method '%s' cannot override a supertype method.",
+            "%s method '%s' cannot override a supertype method.",
+            messagePrefix,
             memberDescriptor.getReadableDescription());
         return;
       }
@@ -1400,7 +1408,8 @@ public class JsInteropRestrictionsChecker {
         // explicitly marked native.
         problems.error(
             method.getSourcePosition(),
-            messagePrefix + " method '%s' cannot be native.",
+            "%s method '%s' cannot be native.",
+            messagePrefix,
             method.getReadableDescription());
         return;
       }
@@ -1425,7 +1434,8 @@ public class JsInteropRestrictionsChecker {
     if (!member.isInitializerBlock() && member.getDescriptor().isJsMember()) {
       problems.error(
           member.getSourcePosition(),
-          messagePrefix + " member '%s' cannot be JsMethod nor JsProperty nor JsConstructor.",
+          "%s member '%s' cannot be JsMethod nor JsProperty nor JsConstructor.",
+          messagePrefix,
           member.getReadableDescription());
       return false;
     }
