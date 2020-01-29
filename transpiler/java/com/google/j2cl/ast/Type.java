@@ -67,15 +67,13 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   }
 
   public boolean containsMethod(String mangledName) {
-    return getMethods()
-        .stream()
+    return getMethods().stream()
         .anyMatch(
             method -> ManglingNameUtils.getMangledName(method.getDescriptor()).equals(mangledName));
   }
 
   public boolean containsNonJsNativeMethods() {
-    return getMethods()
-        .stream()
+    return getMethods().stream()
         .filter(Method::isNative)
         .anyMatch(method -> !method.getDescriptor().isJsMember());
   }
@@ -129,13 +127,9 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   }
 
   public ImmutableList<Field> getFields() {
-    return members
-        .stream()
+    return members.stream()
         .filter(Member::isField)
-        // This could be expressed as Field.class::cast but J2CL version of java.lang.Class does
-        // not implement cast() nor isInstance().
-        // TODO(b/33676747): implement Class.isInstance and() Class.cast()
-        .map(member -> (Field) member)
+        .map(Field.class::cast)
         .collect(ImmutableList.toImmutableList());
   }
 
@@ -157,14 +151,12 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
    */
   public ImmutableList<Field> getEnumFields() {
     return getFields().stream().filter(Field::isEnumField).collect(ImmutableList.toImmutableList());
-
   }
 
   public ImmutableList<Method> getMethods() {
-    return members
-        .stream()
+    return members.stream()
         .filter(Member::isMethod)
-        .map(member -> (Method) member)
+        .map(Method.class::cast)
         .collect(ImmutableList.toImmutableList());
   }
 
@@ -187,8 +179,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   }
 
   public boolean hasInstanceInitializerBlocks() {
-    return members
-        .stream()
+    return members.stream()
         .filter(Predicates.not(Member::isStatic))
         .anyMatch(Member::isInitializerBlock);
   }
@@ -242,27 +233,24 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   }
 
   public ImmutableList<Field> getInstanceFields() {
-    return members
-        .stream()
+    return members.stream()
         .filter(Member::isField)
         .filter(Predicates.not(Member::isStatic))
-        .map(member -> (Field) member)
+        .map(Field.class::cast)
         .collect(ImmutableList.toImmutableList());
   }
 
   public ImmutableList<Member> getInstanceMembers() {
-    return members
-        .stream()
+    return members.stream()
         .filter(Predicates.not(Member::isStatic))
         .collect(ImmutableList.toImmutableList());
   }
 
   public ImmutableList<Field> getStaticFields() {
-    return members
-        .stream()
+    return members.stream()
         .filter(Member::isField)
         .filter(Member::isStatic)
-        .map(member -> (Field) member)
+        .map(Field.class::cast)
         .collect(ImmutableList.toImmutableList());
   }
 
@@ -271,26 +259,23 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   }
 
   public ImmutableList<InitializerBlock> getStaticInitializerBlocks() {
-    return members
-        .stream()
+    return members.stream()
         .filter(Member::isStatic)
         .filter(Member::isInitializerBlock)
-        .map(member -> (InitializerBlock) member)
+        .map(InitializerBlock.class::cast)
         .collect(ImmutableList.toImmutableList());
   }
 
   public ImmutableList<InitializerBlock> getInstanceInitializerBlocks() {
-    return members
-        .stream()
+    return members.stream()
         .filter(Predicates.not(Member::isStatic))
         .filter(Member::isInitializerBlock)
-        .map(member -> (InitializerBlock) member)
+        .map(InitializerBlock.class::cast)
         .collect(ImmutableList.toImmutableList());
   }
 
   public ImmutableList<Method> getConstructors() {
-    return getMethods()
-        .stream()
+    return getMethods().stream()
         .filter(Member::isConstructor)
         .collect(ImmutableList.toImmutableList());
   }
