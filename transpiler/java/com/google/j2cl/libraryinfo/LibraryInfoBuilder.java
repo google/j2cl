@@ -210,6 +210,12 @@ public final class LibraryInfoBuilder {
               InvocationKind.STATIC));
     }
 
+    // Remove redundant references recorded due to JavaScriptConstructorReferences which are already
+    // recorded via invocations (e.g. all static calls introduce JavaScriptConstructorReference).
+    methodInvocationSet.stream()
+        .map(MethodInvocation::getEnclosingType)
+        .forEach(referencedTypes::remove);
+
     memberInfoBuilder
         .clearReferencedTypes()
         .clearInvokedMethods()
