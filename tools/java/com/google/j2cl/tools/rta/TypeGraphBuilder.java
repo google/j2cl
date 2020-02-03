@@ -21,6 +21,7 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.Streams.concat;
 import static java.util.stream.Collectors.toSet;
 
+import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.LinkedHashMultiset;
 import com.google.common.collect.Lists;
@@ -64,13 +65,13 @@ public class TypeGraphBuilder {
 
     // Build cross-references between types and members
     for (LibraryInfo libraryInfo : libraryInfos) {
-      addMethodReferences(typesByName, libraryInfo);
+      addMemberReferences(typesByName, libraryInfo);
     }
 
     return ImmutableList.copyOf(typesByName.values());
   }
 
-  private static void addMethodReferences(Map<String, Type> typesByName, LibraryInfo libraryInfo) {
+  private static void addMemberReferences(Map<String, Type> typesByName, LibraryInfo libraryInfo) {
     for (TypeInfo typeInfo : libraryInfo.getTypeList()) {
       Type type = typesByName.get(libraryInfo.getTypeMap(typeInfo.getTypeId()));
       type.setSuperTypes(
@@ -80,19 +81,19 @@ public class TypeGraphBuilder {
               .collect(toImmutableList()));
 
       for (MemberInfo memberInfo : typeInfo.getMemberList()) {
-        Member member = type.getMemberByName(memberInfo.getName());
+        Member member = type.getMemberByName(memberInfo.getName()).get();
         member.setReferencedTypes(
             memberInfo.getReferencedTypesList().stream()
                 .map(libraryInfo::getTypeMap)
                 .map(typesByName::get)
                 .collect(toImmutableList()));
 
-        addMethodReferences(libraryInfo, memberInfo.getInvokedMethodsList(), member, typesByName);
+        addMemberReferences(libraryInfo, memberInfo.getInvokedMethodsList(), member, typesByName);
       }
     }
   }
 
-  private static void addMethodReferences(
+  private static void addMemberReferences(
       LibraryInfo libraryInfo,
       List<MethodInvocation> methodInvocations,
       Member member,
@@ -100,8 +101,8 @@ public class TypeGraphBuilder {
     for (MethodInvocation methodInvocation : methodInvocations) {
       Type enclosingType =
           typesByName.get(libraryInfo.getTypeMap(methodInvocation.getEnclosingType()));
-      Member referenceMember = enclosingType.getMemberByName(methodInvocation.getMethod());
-      member.addReferencedMember(methodInvocation.getKind(), checkNotNull(referenceMember));
+      Member referencedMember = enclosingType.getMemberByName(methodInvocation.getMethod()).get();
+      member.addReferencedMember(methodInvocation.getKind(), referencedMember);
     }
   }
 
@@ -159,37 +160,31 @@ public class TypeGraphBuilder {
     // visit children first
     for (Type type : Lists.reverse(typesInTopologicalOrder)) {
       for (Member member : type.getMembers()) {
-        // register this type as inheriting the current member.
-        member.addInheritingType(type);
-
         String memberName = member.getName();
 
         for (Type superType : type.getSuperTypes()) {
-          Member parentMember = superType.getMemberByName(memberName);
+          superType
+              .getMemberByName(memberName)
+              .filter(Predicates.not(member::equals))
+              .ifPresent(
+                  parentMember ->
+                      // Member is overridden by the current type.
 
-          if (parentMember == null) {
-            continue;
-          }
+                      // We register the type defining the member as the overriding type of the
+                      // parent member, e.g:
+                      //
+                      // class A {     class B extends A implements I {}    interface I {
+                      //   foo();                                             foo();
+                      // }                                                  }
+                      //
+                      // in this case A needs to be registered as a type that provides an
+                      // implementation of I:foo() because A:foo() is inherited by B.
 
-          if (!member.equals(parentMember)) {
-            // Member is overridden by the current type.
-
-            // We register the type defining the member as the overriding type of the parent member.
-            // Let's take the following example:
-            //
-            // class A {      class B extends A implements I {}     interface I {
-            //   foo();                                               foo();
-            // }                                                    }
-            //
-            // in this case A needs to be registered as a type that provides an implementation of
-            // I:foo() because A:foo() is inherited by B.
-
-            parentMember.addOverridingType(member.getDeclaringType());
+                      parentMember.addOverridingType(member.getDeclaringType()));
           }
         }
       }
     }
-  }
 
   /**
    * Returns a LinkedHashMultiset where elements are the types sorted in order such as for every
@@ -239,4 +234,6 @@ public class TypeGraphBuilder {
 
     topologicalSortedSet.add(type, topologicalSortedSet.elementSet().size() + 1);
   }
+
+  private TypeGraphBuilder() {}
 }

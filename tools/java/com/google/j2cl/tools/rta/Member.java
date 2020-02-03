@@ -28,11 +28,15 @@ final class Member {
     Member member = new Member();
     member.memberInfo = memberInfo;
     member.declaringType = declaringType;
+    member.isStatic = memberInfo.getStatic();
+    member.isConstructor = memberInfo.getName().equals("constructor");
     return member;
   }
 
   private MemberInfo memberInfo;
   private Type declaringType;
+  private boolean isStatic;
+  private boolean isConstructor;
 
   private boolean fullyTraversed;
   private boolean live;
@@ -40,7 +44,6 @@ final class Member {
   private final Multimap<InvocationKind, Member> referencedMembers =
       MultimapBuilder.enumKeys(InvocationKind.class).arrayListValues().build();
   private final List<Type> overridingTypes = new ArrayList<>();
-  private final List<Type> inheritingTypes = new ArrayList<>();
 
   private Member() {}
 
@@ -67,11 +70,19 @@ final class Member {
   InvocationKind getDefaultInvocationKind() {
     if (memberInfo.getStatic()) {
       return InvocationKind.STATIC;
-    } else if ("constructor".equals(getName())) {
+    } else if (isConstructor()) {
       return InvocationKind.INSTANTIATION;
     } else {
       return InvocationKind.DYNAMIC;
     }
+  }
+
+  public boolean isConstructor() {
+    return isConstructor;
+  }
+
+  public boolean isPolymorphic() {
+    return !isStatic && !isConstructor();
   }
 
   boolean isLive() {
@@ -113,17 +124,5 @@ final class Member {
 
   void addOverridingType(Type type) {
     overridingTypes.add(type);
-  }
-
-  /**
-   * Returns the list of types inheriting the implementation of this member including the enclosing
-   * type of the member.
-   */
-  List<Type> getInheritingTypes() {
-    return inheritingTypes;
-  }
-
-  void addInheritingType(Type type) {
-    inheritingTypes.add(type);
   }
 }

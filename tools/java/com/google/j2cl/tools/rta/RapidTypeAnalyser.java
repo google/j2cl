@@ -20,8 +20,8 @@ import static java.util.stream.Collectors.toSet;
 
 import com.google.j2cl.libraryinfo.InvocationKind;
 import com.google.j2cl.libraryinfo.LibraryInfo;
-import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 final class RapidTypeAnalyser {
@@ -80,6 +80,7 @@ final class RapidTypeAnalyser {
 
     member.getReferencedTypes().forEach(RapidTypeAnalyser::onTypeReference);
     member.getReferencedMembers().forEach(RapidTypeAnalyser::onMemberReference);
+    markOverriddenMembersLive(member);
   }
 
   private static void traversePolymorphicReference(Member member) {
@@ -92,21 +93,37 @@ final class RapidTypeAnalyser {
 
     // Recursively unfold the overriding chain.
     for (Type overridingType : member.getOverridingTypes()) {
-      Member newTargetMember = overridingType.getMemberByName(member.getName());
-      traversePolymorphicReference(newTargetMember);
+      overridingType
+          .getMemberByName(member.getName())
+          .ifPresent(RapidTypeAnalyser::traversePolymorphicReference);
+    }
+  }
+
+  private static void markOverriddenMembersLive(Member member) {
+    if (!member.isPolymorphic()) {
+      return;
+    }
+
+    Type type = member.getDeclaringType();
+    for (Optional<Type> superClass = type.getSuperClass();
+        superClass.isPresent();
+        superClass = superClass.get().getSuperClass()) {
+      Optional<Member> overriddenMember = superClass.get().getMemberByName(member.getName());
+      if (!overriddenMember.isPresent()) {
+        continue;
+      }
+      markMemberLive(overriddenMember.get());
+      return;
     }
   }
 
   private static void markMemberPotentiallyLive(Member member) {
-    // Set of types inheriting this member
-    List<Type> inheritingTypes = member.getInheritingTypes();
-
-    if (containsInstantiatedTypes(inheritingTypes)) {
+    Type declaringType = member.getDeclaringType();
+    if (declaringType.isInstantiated()) {
       markMemberLive(member);
     } else {
-      // None of the types inheriting this polymorphic member is instantiated.
-      // Register this member so that it gets marked live once an inheriting type is instantiated.
-      inheritingTypes.forEach(t -> t.addPotentiallyLiveMember(member));
+      // Type is not instantiated, defer making it live until the type is instantiated.
+      declaringType.addPotentiallyLiveMember(member);
     }
   }
 
@@ -127,11 +144,14 @@ final class RapidTypeAnalyser {
       return;
     }
     type.instantiate();
+    // constructors are implicitly live when the type is instantiated.
+    type.getConstructor().ifPresent(RapidTypeAnalyser::markMemberLive);
+
+    // Instantiate supertypes.
+    type.getSuperClass().ifPresent(RapidTypeAnalyser::instantiate);
 
     type.getPotentiallyLiveMembers().forEach(RapidTypeAnalyser::markMemberLive);
   }
 
-  private static boolean containsInstantiatedTypes(Collection<Type> types) {
-    return types.stream().anyMatch(Type::isInstantiated);
-  }
+  private RapidTypeAnalyser() {}
 }

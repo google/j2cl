@@ -17,16 +17,20 @@ package com.google.j2cl.tools.rta;
 
 import static com.google.common.base.Preconditions.checkState;
 
+import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.MoreCollectors;
 import com.google.j2cl.libraryinfo.LibraryInfoBuilder;
 import com.google.j2cl.libraryinfo.TypeInfo;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Optional;
 
 final class Type {
   private String name;
+  private Optional<Type> superClass;
   private List<Type> superTypes;
   private boolean isInterface;
   private final LinkedHashMap<String, Member> membersByName = new LinkedHashMap<>();
@@ -70,8 +74,12 @@ final class Type {
     return membersByName.values();
   }
 
-  Member getMemberByName(String name) {
-    return membersByName.get(name);
+  Optional<Member> getMemberByName(String name) {
+    return Optional.ofNullable(membersByName.get(name));
+  }
+
+  Optional<Member> getConstructor() {
+    return Optional.ofNullable(membersByName.get("constructor"));
   }
 
   void addMember(Member member) {
@@ -89,10 +97,18 @@ final class Type {
 
   void setSuperTypes(List<Type> superTypes) {
     this.superTypes = ImmutableList.copyOf(superTypes);
+    this.superClass =
+        superTypes.stream()
+            .filter(Predicates.not(Type::isInterface))
+            .collect(MoreCollectors.toOptional());
   }
 
   List<Type> getSuperTypes() {
     return superTypes;
+  }
+
+  Optional<Type> getSuperClass() {
+    return superClass;
   }
 
   void markLive() {
@@ -117,6 +133,7 @@ final class Type {
   }
 
   void addPotentiallyLiveMember(Member member) {
+    checkState(!isInstantiated());
     potentiallyLiveMembers.add(member);
   }
 }
