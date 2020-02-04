@@ -123,7 +123,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   public String renderOutput() {
     try {
       renderImports();
-      if (type.getDeclaration().isJsEnum()) {
+      if (type.isJsEnum()) {
         renderClosureEnum();
       } else {
         renderClass();

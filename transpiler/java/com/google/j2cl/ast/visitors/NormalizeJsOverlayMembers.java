@@ -56,9 +56,7 @@ public class NormalizeJsOverlayMembers extends NormalizationPass {
     compilationUnit.getTypes().addAll(overlayTypes);
     // Native types and JsFunction interfaces only contribute code for the overlay class.
     // Once the overlay class is in place they can be removed.
-    compilationUnit
-        .getTypes()
-        .removeIf(type -> type.isNative() || type.getDeclaration().isJsFunctionInterface());
+    compilationUnit.getTypes().removeIf(type -> type.isNative() || type.isJsFunctionInterface());
   }
 
   private static Type createOverlayImplementationType(Type type) {

@@ -35,8 +35,11 @@ public class CreateDefaultConstructors extends NormalizationPass {
         new AbstractVisitor() {
           @Override
           public void exitType(Type type) {
-            if (type.isInterface() || type.getMethods().stream().anyMatch(Method::isConstructor)) {
-              // It is an interface or already has a constructor.
+            if (type.isInterface()
+                || type.isNative()
+                || type.isJsFunctionInterface()
+                || type.isJsEnum()
+                || type.getMethods().stream().anyMatch(Method::isConstructor)) {
               return;
             }
 

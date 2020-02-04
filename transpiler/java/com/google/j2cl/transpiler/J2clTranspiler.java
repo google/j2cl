@@ -13,6 +13,7 @@
  */
 package com.google.j2cl.transpiler;
 
+
 import com.google.common.collect.ImmutableList;
 import com.google.common.util.concurrent.Futures;
 import com.google.j2cl.ast.CompilationUnit;
@@ -82,6 +83,7 @@ import com.google.j2cl.ast.visitors.PackagePrivateMethodsDispatcher;
 import com.google.j2cl.ast.visitors.RemoveNoopStatements;
 import com.google.j2cl.ast.visitors.RemoveUnneededJsDocCasts;
 import com.google.j2cl.ast.visitors.RewriteStringEquals;
+import com.google.j2cl.ast.visitors.VerifyNormalizedUnits;
 import com.google.j2cl.ast.visitors.VerifyParamAndArgCounts;
 import com.google.j2cl.ast.visitors.VerifySingleAstReference;
 import com.google.j2cl.ast.visitors.VerifyVariableScoping;
@@ -149,7 +151,7 @@ class J2clTranspiler {
     problems.abortIfHasErrors();
   }
 
-  private void normalizeUnits(List<CompilationUnit> j2clUnits) {
+  private static void normalizeUnits(List<CompilationUnit> j2clUnits) {
     // TODO(b/117155139): Review the ordering of passes.
     List<NormalizationPass> passes =
         ImmutableList.of(
@@ -257,14 +259,19 @@ class J2clTranspiler {
       for (NormalizationPass pass : passes) {
         pass.applyTo(j2clUnit);
       }
-      verifyUnit(j2clUnit);
+      verifyNormalizedUnit(j2clUnit);
     }
   }
 
-  private void verifyUnit(CompilationUnit j2clUnit) {
+  private static void verifyUnit(CompilationUnit j2clUnit) {
     VerifySingleAstReference.applyTo(j2clUnit);
     VerifyParamAndArgCounts.applyTo(j2clUnit);
     VerifyVariableScoping.applyTo(j2clUnit);
+  }
+
+  private static void verifyNormalizedUnit(CompilationUnit j2clUnit) {
+    verifyUnit(j2clUnit);
+    VerifyNormalizedUnits.applyTo(j2clUnit);
   }
 
   private void generateOutputs(List<CompilationUnit> j2clCompilationUnits) {

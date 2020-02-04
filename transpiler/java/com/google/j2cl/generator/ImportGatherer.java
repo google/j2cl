@@ -357,7 +357,7 @@ class ImportGatherer extends AbstractVisitor {
   }
 
   private Multimap<ImportCategory, Import> doGatherImports(Type type) {
-    if (type.getDeclaration().isJsEnum()) {
+    if (type.isJsEnum()) {
       // TODO(b/116751296): Once the type model is refactored running this pass on a closure enum
       // should produce the right result without special handling.
       // Do not gather anything for Closure enums.

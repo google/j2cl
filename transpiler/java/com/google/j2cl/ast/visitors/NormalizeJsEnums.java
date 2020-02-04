@@ -63,7 +63,7 @@ public class NormalizeJsEnums extends NormalizationPass {
    */
   private void normalizeNonNativeJsEnums(CompilationUnit compilationUnit) {
     for (Type type : ImmutableList.copyOf(compilationUnit.getTypes())) {
-      if (type.getDeclaration().isJsEnum() && !type.isNative()) {
+      if (type.isJsEnum() && !type.isNative()) {
         compilationUnit.addType(createClosureJsEnum(type));
         convertJsEnumToNative(type);
       }

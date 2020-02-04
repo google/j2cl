@@ -118,6 +118,14 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
     return getOverlaidTypeDescriptor() != null;
   }
 
+  public boolean isJsEnum() {
+    return typeDeclaration.isJsEnum();
+  }
+
+  public boolean isJsFunctionInterface() {
+    return typeDeclaration.isJsFunctionInterface();
+  }
+
   public List<Member> getMembers() {
     return members;
   }

@@ -48,7 +48,7 @@ public class NormalizeEnumClasses extends NormalizationPass {
   public void applyTo(CompilationUnit compilationUnit) {
 
     for (Type type : compilationUnit.getTypes()) {
-      if (!type.isEnumOrSubclass()) {
+      if (!type.isEnumOrSubclass() || type.isJsEnum()) {
         continue;
       }
 

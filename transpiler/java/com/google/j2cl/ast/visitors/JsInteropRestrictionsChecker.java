@@ -300,7 +300,7 @@ public class JsInteropRestrictionsChecker {
   }
 
   private static Field getJsEnumValueField(Type type) {
-    checkState(type.getDeclaration().isJsEnum());
+    checkState(type.isJsEnum());
     return type.getFields().stream()
         .filter(member -> AstUtils.isJsEnumCustomValueField(member.getDescriptor()))
         .findFirst()

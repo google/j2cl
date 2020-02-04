@@ -16,6 +16,7 @@
 package com.google.j2cl.ast.visitors;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.base.Joiner;
 import com.google.j2cl.ast.AbstractRewriter;
@@ -69,6 +70,11 @@ public class ImplementStaticInitialization extends NormalizationPass {
   public void applyTo(CompilationUnit compilationUnit) {
     collectPrivateMemberReferences(compilationUnit);
     for (Type type : compilationUnit.getTypes()) {
+      checkState(!type.isNative());
+      checkState(!type.isJsFunctionInterface());
+      if (type.isJsEnum()) {
+        continue;
+      }
       insertClinitCalls(type);
       synthesizeSuperClinitCalls(type);
       synthesizeSettersAndGetters(type);
