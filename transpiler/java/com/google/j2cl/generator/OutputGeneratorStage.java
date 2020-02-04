@@ -25,7 +25,6 @@ import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.libraryinfo.LibraryInfoBuilder;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -223,8 +222,7 @@ public class OutputGeneratorStage {
   }
 
   private String renderSourceMap(
-      Type type,
-      Map<SourcePosition, SourcePosition> javaSourcePositionByOutputSourcePosition) {
+      Type type, Map<SourcePosition, SourcePosition> javaSourcePositionByOutputSourcePosition) {
     try {
       return SourceMapGeneratorStage.generateSourceMaps(
           type, javaSourcePositionByOutputSourcePosition);
@@ -259,10 +257,7 @@ public class OutputGeneratorStage {
    * and having it available as output simplifies the process of source debugging in the browser.
    */
   private void copyJavaSourcesToOutput(CompilationUnit j2clUnit) {
-    String relativePath =
-        j2clUnit.getPackageName().replace(".", File.separator)
-            + File.separator
-            + j2clUnit.getName();
+    String relativePath = getRelativePath(j2clUnit);
     Path absolutePath = outputPath.resolve(relativePath + ".java");
     J2clUtils.copyFile(Paths.get(j2clUnit.getFilePath()), absolutePath, problems);
   }
@@ -274,9 +269,17 @@ public class OutputGeneratorStage {
 
   /** Returns the relative output path for a given type. */
   private static String getRelativePath(TypeDeclaration typeDeclaration) {
-    String typeName = typeDeclaration.getSimpleBinaryName();
-    String packageName = typeDeclaration.getPackageName();
-    return packageName.replace('.', '/') + '/' + typeName;
+    return getRelativePath(typeDeclaration.getPackageName(), typeDeclaration.getSimpleBinaryName());
+  }
+
+  /** Returns the relative output path for a given type. */
+  private static String getRelativePath(CompilationUnit compilationUnit) {
+    return getRelativePath(compilationUnit.getPackageName(), compilationUnit.getName());
+  }
+
+  /** Returns the relative output path for a given type. */
+  private static String getRelativePath(String packageName, String suffix) {
+    return Paths.get(packageName.replace('.', '/'), suffix).toString();
   }
 
   /** Returns the absolute binary path for a given type. */

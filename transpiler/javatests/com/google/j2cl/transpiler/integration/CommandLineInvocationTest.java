@@ -193,6 +193,14 @@ public class CommandLineInvocationTest extends TestCase {
             "test/Bar.java.js",
             "test/Bar.impl.java.js")
         .assertOutputFilesDoNotExist("some/thing/Bogus.js");
+
+    // Test transpilation of java file without java package
+    newTesterWithDefaults()
+        .setOutputPath(outputLocation)
+        .setJavaPackage("")
+        .addCompilationUnit("Foo", "public class Foo {}")
+        .assertTranspileSucceeds()
+        .assertOutputFilesExist("Foo.java.js", "Foo.impl.java.js");
   }
 
   public void testOutputsToZipFile() throws IOException {
