@@ -1,7 +1,5 @@
 # Limitations of J2CL - Java compatibility
 
-[comment]: # TOC
-
 ## No Support for Java Reflection
 
 J2CL does not support any of `java.lang.reflect.*` or any kind of runtime class,

@@ -1,7 +1,5 @@
 # J2CL Best Practices
 
-[comment]: # TOC
-
 ## Build Performance
 
 To improve build performance we recommend adding a .bazelrc file in your
