@@ -16,6 +16,7 @@
 package com.google.j2cl.tools.rta;
 
 import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
@@ -31,6 +32,7 @@ import java.util.Optional;
 final class Type {
   private String name;
   private Optional<Type> superClass;
+  private List<Type> superInterfaces;
   private List<Type> superTypes;
   private boolean isInterface;
   private final LinkedHashMap<String, Member> membersByName = new LinkedHashMap<>();
@@ -101,6 +103,7 @@ final class Type {
         superTypes.stream()
             .filter(Predicates.not(Type::isInterface))
             .collect(MoreCollectors.toOptional());
+    this.superInterfaces = superTypes.stream().filter(Type::isInterface).collect(toImmutableList());
   }
 
   List<Type> getSuperTypes() {
@@ -109,6 +112,10 @@ final class Type {
 
   Optional<Type> getSuperClass() {
     return superClass;
+  }
+
+  List<Type> getSuperInterfaces() {
+    return superInterfaces;
   }
 
   void markLive() {

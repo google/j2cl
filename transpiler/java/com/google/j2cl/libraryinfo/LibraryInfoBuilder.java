@@ -167,6 +167,10 @@ public final class LibraryInfoBuilder {
               return;
             }
 
+            if (target.getName().equals("$clinit")) {
+              return;
+            }
+
             // Register static FieldAccess as getter/setter invocations. We are conservative here
             // because getter and setter functions has the same name: the name of the field. If a
             // field is accessed, we visit both getter and setter.
@@ -193,6 +197,10 @@ public final class LibraryInfoBuilder {
               return;
             }
 
+            if (target.getName().equals("$clinit")) {
+              return;
+            }
+
             // TODO(b/34928687): Remove after $isinstance and $loadmodule moved the AST.
             if (target.getName().equals("$isInstance") || target.getName().equals("$loadModules")) {
               return;
@@ -201,14 +209,6 @@ public final class LibraryInfoBuilder {
             methodInvocationSet.add(createMethodInvocation(target, getInvocationKind(node)));
           }
         });
-
-    if (member.isStatic() && member.isNative()) {
-      // hand-written native static method could potentially make a call to $clinit
-      methodInvocationSet.add(
-          createMethodInvocation(
-              member.getDescriptor().getEnclosingTypeDescriptor().getClinitMethodDescriptor(),
-              InvocationKind.STATIC));
-    }
 
     // Remove redundant references recorded due to JavaScriptConstructorReferences which are already
     // recorded via invocations (e.g. all static calls introduce JavaScriptConstructorReference).

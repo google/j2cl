@@ -59,7 +59,7 @@ final class RapidTypeAnalyser {
         instantiate(member.getDeclaringType());
         // Fall through.
       case STATIC:
-        markTypeLive(member.getDeclaringType());
+        onTypeReference(member.getDeclaringType());
         markMemberLive(member);
         break;
       default:
@@ -69,6 +69,7 @@ final class RapidTypeAnalyser {
 
   private static void onTypeReference(Type type) {
     markTypeLive(type);
+    markMemberLive(type.getMemberByName("$clinit").get());
   }
 
   private static void markMemberLive(Member member) {
@@ -134,9 +135,9 @@ final class RapidTypeAnalyser {
 
     type.markLive();
 
-    // When a type is marked as live, we need to mark the super types as live too because their are
-    // referred to in the class declaration (as supertypes or encoded as implementing interfaces).
-    type.getSuperTypes().forEach(RapidTypeAnalyser::markTypeLive);
+    // When a type is marked as live, we need to explicitly mark the super interfaces as live since
+    // we need markImplementor call (which are not tracked in AST).
+    type.getSuperInterfaces().forEach(RapidTypeAnalyser::markTypeLive);
   }
 
   private static void instantiate(Type type) {
