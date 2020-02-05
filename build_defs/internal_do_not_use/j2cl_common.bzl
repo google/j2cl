@@ -103,13 +103,6 @@ def _create_empty_zip(ctx, output_js_zip):
         command = "echo -ne  '%s' > '%s'" % (_empty_zip_contents, output_js_zip.path),
     )
 
-def _collect_runfiles(ctx, files, deps):
-    transitive_runfiles = [d[DefaultInfo].default_runfiles.files for d in deps]
-    return ctx.runfiles(
-        files = files,
-        transitive_files = depset(transitive = transitive_runfiles),
-    )
-
 def _java_compile(ctx, name, srcs, deps, exports, plugins, exported_plugins, output_jar, javac_opts):
     stripped_java_srcs = [_strip_gwt_incompatible(ctx, name, srcs)] if srcs else []
 
