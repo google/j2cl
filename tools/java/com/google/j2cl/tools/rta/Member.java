@@ -20,7 +20,6 @@ import com.google.common.collect.MultimapBuilder;
 import com.google.j2cl.libraryinfo.InvocationKind;
 import com.google.j2cl.libraryinfo.MemberInfo;
 import com.google.j2cl.libraryinfo.SourcePosition;
-import java.util.ArrayList;
 import java.util.List;
 
 final class Member {
@@ -43,7 +42,6 @@ final class Member {
   private List<Type> referencedTypes;
   private final Multimap<InvocationKind, Member> referencedMembers =
       MultimapBuilder.enumKeys(InvocationKind.class).arrayListValues().build();
-  private final List<Type> overridingTypes = new ArrayList<>();
 
   private Member() {}
 
@@ -115,14 +113,5 @@ final class Member {
 
   void addReferencedMember(InvocationKind invocationKind, Member referencedMember) {
     referencedMembers.put(invocationKind, referencedMember);
-  }
-
-  /** Returns the list of types overriding the implementation of this member. */
-  List<Type> getOverridingTypes() {
-    return overridingTypes;
-  }
-
-  void addOverridingType(Type type) {
-    overridingTypes.add(type);
   }
 }

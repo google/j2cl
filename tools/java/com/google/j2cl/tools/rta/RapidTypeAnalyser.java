@@ -21,7 +21,6 @@ import static java.util.stream.Collectors.toSet;
 import com.google.j2cl.libraryinfo.InvocationKind;
 import com.google.j2cl.libraryinfo.LibraryInfo;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 final class RapidTypeAnalyser {
@@ -53,7 +52,7 @@ final class RapidTypeAnalyser {
   private static void onMemberReference(InvocationKind invocationKind, Member member) {
     switch (invocationKind) {
       case DYNAMIC:
-        traversePolymorphicReference(member);
+        traversePolymorphicReference(member.getDeclaringType(), member.getName());
         break;
       case INSTANTIATION:
         instantiate(member.getDeclaringType());
@@ -69,7 +68,7 @@ final class RapidTypeAnalyser {
 
   private static void onTypeReference(Type type) {
     markTypeLive(type);
-    markMemberLive(type.getMemberByName("$clinit").get());
+    markMemberLive(type.getMemberByName("$clinit"));
   }
 
   private static void markMemberLive(Member member) {
@@ -81,40 +80,36 @@ final class RapidTypeAnalyser {
 
     member.getReferencedTypes().forEach(RapidTypeAnalyser::onTypeReference);
     member.getReferencedMembers().forEach(RapidTypeAnalyser::onMemberReference);
-    markOverriddenMembersLive(member);
   }
 
-  private static void traversePolymorphicReference(Member member) {
-    if (member.isFullyTraversed()) {
-      return;
-    }
-    member.markFullyTraversed();
+  private static void traversePolymorphicReference(Type type, String memberName) {
+    Member member = type.getMemberByName(memberName);
+    if (member != null) {
+      if (member.isFullyTraversed()) {
+        return;
+      }
+      member.markFullyTraversed();
 
-    markMemberPotentiallyLive(member);
+      markMemberPotentiallyLive(member);
+    }
 
     // Recursively unfold the overriding chain.
-    for (Type overridingType : member.getOverridingTypes()) {
-      overridingType
-          .getMemberByName(member.getName())
-          .ifPresent(RapidTypeAnalyser::traversePolymorphicReference);
-    }
+    type.getImmediateSubtypes()
+        .forEach(subtype -> traversePolymorphicReference(subtype, memberName));
+
+    markOverriddenMembersPotentiallyLive(type, memberName);
   }
 
-  private static void markOverriddenMembersLive(Member member) {
-    if (!member.isPolymorphic()) {
-      return;
-    }
-
-    Type type = member.getDeclaringType();
-    for (Optional<Type> superClass = type.getSuperClass();
-        superClass.isPresent();
-        superClass = superClass.get().getSuperClass()) {
-      Optional<Member> overriddenMember = superClass.get().getMemberByName(member.getName());
-      if (!overriddenMember.isPresent()) {
+  private static void markOverriddenMembersPotentiallyLive(Type type, String memberName) {
+    while ((type = type.getSuperClass()) != null) {
+      Member member = type.getMemberByName(memberName);
+      if (member == null) {
         continue;
       }
-      markMemberLive(overriddenMember.get());
-      return;
+      if (!member.isPolymorphic()) {
+        return;
+      }
+      markMemberPotentiallyLive(member);
     }
   }
 
@@ -148,8 +143,10 @@ final class RapidTypeAnalyser {
     // constructors are implicitly live when the type is instantiated.
     type.getConstructor().ifPresent(RapidTypeAnalyser::markMemberLive);
 
-    // Instantiate supertypes.
-    type.getSuperClass().ifPresent(RapidTypeAnalyser::instantiate);
+    // Instantiate superclass.
+    if (type.getSuperClass() != null) {
+      instantiate(type.getSuperClass());
+    }
 
     type.getPotentiallyLiveMembers().forEach(RapidTypeAnalyser::markMemberLive);
   }

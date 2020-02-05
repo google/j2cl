@@ -17,10 +17,10 @@ package com.google.j2cl.tools.rta;
 
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
+import static com.google.common.collect.MoreCollectors.toOptional;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.MoreCollectors;
 import com.google.j2cl.libraryinfo.LibraryInfoBuilder;
 import com.google.j2cl.libraryinfo.TypeInfo;
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ import java.util.Optional;
 
 final class Type {
   private String name;
-  private Optional<Type> superClass;
+  private Type superClass;
   private List<Type> superInterfaces;
   private List<Type> superTypes;
   private boolean isInterface;
@@ -41,6 +41,7 @@ final class Type {
   private boolean live;
   private boolean instantiated;
   private final List<Member> potentiallyLiveMembers = new ArrayList<>();
+  private final List<Type> immediateSubtypes = new ArrayList<>();
 
   static Type buildFrom(TypeInfo typeInfo, String name) {
     Type type = new Type();
@@ -76,8 +77,8 @@ final class Type {
     return membersByName.values();
   }
 
-  Optional<Member> getMemberByName(String name) {
-    return Optional.ofNullable(membersByName.get(name));
+  Member getMemberByName(String name) {
+    return membersByName.get(name);
   }
 
   Optional<Member> getConstructor() {
@@ -89,10 +90,6 @@ final class Type {
     membersByName.put(member.getName(), member);
   }
 
-  void addMembers(Collection<Member> members) {
-    members.forEach(this::addMember);
-  }
-
   String getName() {
     return name;
   }
@@ -102,7 +99,8 @@ final class Type {
     this.superClass =
         superTypes.stream()
             .filter(Predicates.not(Type::isInterface))
-            .collect(MoreCollectors.toOptional());
+            .collect(toOptional())
+            .orElse(null);
     this.superInterfaces = superTypes.stream().filter(Type::isInterface).collect(toImmutableList());
   }
 
@@ -110,7 +108,7 @@ final class Type {
     return superTypes;
   }
 
-  Optional<Type> getSuperClass() {
+  Type getSuperClass() {
     return superClass;
   }
 
@@ -142,5 +140,13 @@ final class Type {
   void addPotentiallyLiveMember(Member member) {
     checkState(!isInstantiated());
     potentiallyLiveMembers.add(member);
+  }
+
+  public void addImmediateSubtype(Type type) {
+    immediateSubtypes.add(type);
+  }
+
+  public List<Type> getImmediateSubtypes() {
+    return immediateSubtypes;
   }
 }
