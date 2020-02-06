@@ -26,10 +26,7 @@ import com.google.j2cl.ast.JavaScriptConstructorReference;
 import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.Member;
 import com.google.j2cl.ast.MemberDescriptor;
-import com.google.j2cl.ast.MemberReference;
 import com.google.j2cl.ast.MethodDescriptor;
-import com.google.j2cl.ast.NewInstance;
-import com.google.j2cl.ast.SuperReference;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptors;
@@ -104,7 +101,6 @@ public final class LibraryInfoBuilder {
               m ->
                   MemberInfo.newBuilder()
                       .setName(memberName)
-                      .setPublic(memberDescriptor.getVisibility().isPublic())
                       .setStatic(member.isStatic())
                       .setJsAccessible(isJsAccessible));
 
@@ -174,7 +170,7 @@ public final class LibraryInfoBuilder {
             // Register static FieldAccess as getter/setter invocations. We are conservative here
             // because getter and setter functions has the same name: the name of the field. If a
             // field is accessed, we visit both getter and setter.
-            methodInvocationSet.add(createMethodInvocation(target, getInvocationKind(node)));
+            methodInvocationSet.add(createMethodInvocation(target));
           }
 
           @Override
@@ -206,7 +202,7 @@ public final class LibraryInfoBuilder {
               return;
             }
 
-            methodInvocationSet.add(createMethodInvocation(target, getInvocationKind(node)));
+            methodInvocationSet.add(createMethodInvocation(target));
           }
         });
 
@@ -223,30 +219,11 @@ public final class LibraryInfoBuilder {
         .addAllReferencedTypes(referencedTypes);
   }
 
-  private MethodInvocation createMethodInvocation(
-      MemberDescriptor memberDescriptor, InvocationKind invocationKind) {
+  private MethodInvocation createMethodInvocation(MemberDescriptor memberDescriptor) {
     return MethodInvocation.newBuilder()
         .setMethod(getMemberId(memberDescriptor))
         .setEnclosingType(getTypeId(memberDescriptor.getEnclosingTypeDescriptor()))
-        .setKind(invocationKind)
         .build();
-  }
-
-  private static InvocationKind getInvocationKind(MemberReference node) {
-    if (node instanceof NewInstance) {
-      return InvocationKind.INSTANTIATION;
-    }
-
-    if (node.getTarget().isStatic()
-        // super call is always a direct call
-        || node.getQualifier() instanceof SuperReference
-        // A method call to a constructor is automatically a call to the super constructor,
-        // otherwise it would have been a NewInstance.
-        || node.getTarget().isConstructor()) {
-      return InvocationKind.STATIC;
-    }
-
-    return InvocationKind.DYNAMIC;
   }
 
   private int getTypeId(Type type) {

@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Optional;
 
 final class Type {
   private String name;
@@ -79,10 +78,6 @@ final class Type {
 
   Member getMemberByName(String name) {
     return membersByName.get(name);
-  }
-
-  Optional<Member> getConstructor() {
-    return Optional.ofNullable(membersByName.get("constructor"));
   }
 
   void addMember(Member member) {

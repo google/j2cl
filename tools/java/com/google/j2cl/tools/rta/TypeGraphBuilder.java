@@ -89,7 +89,7 @@ public class TypeGraphBuilder {
       Type enclosingType =
           typesByName.get(libraryInfo.getTypeMap(methodInvocation.getEnclosingType()));
       Member referencedMember = enclosingType.getMemberByName(methodInvocation.getMethod());
-      member.addReferencedMember(methodInvocation.getKind(), referencedMember);
+      member.addReferencedMember(referencedMember);
     }
   }
 

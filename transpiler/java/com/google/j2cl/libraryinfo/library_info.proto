@@ -21,7 +21,6 @@ message TypeInfo {
 
 message MemberInfo {
   string name = 1;
-  bool public = 2;
   bool static = 3;
   bool js_accessible = 4;
   repeated MethodInvocation invoked_methods = 5;
@@ -29,16 +28,9 @@ message MemberInfo {
   SourcePosition position = 7;
 }
 
-enum InvocationKind {
-  DYNAMIC = 0;
-  STATIC = 1;
-  INSTANTIATION = 2;
-}
-
 message MethodInvocation {
   string method = 1;
   int32 enclosing_type = 2;
-  InvocationKind kind = 3;
 }
 
 message SourcePosition {

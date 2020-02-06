@@ -18,7 +18,6 @@ package com.google.j2cl.tools.rta;
 import static com.google.common.base.Predicates.not;
 import static java.util.stream.Collectors.toSet;
 
-import com.google.j2cl.libraryinfo.InvocationKind;
 import com.google.j2cl.libraryinfo.LibraryInfo;
 import java.util.List;
 import java.util.Set;
@@ -32,7 +31,7 @@ final class RapidTypeAnalyser {
     types.stream()
         .flatMap(t -> t.getMembers().stream())
         .filter(Member::isJsAccessible)
-        .forEach(m -> onMemberReference(m.getDefaultInvocationKind(), m));
+        .forEach(m -> onMemberReference(m));
 
     return RtaResult.build(getUnusedTypes(types), getUnusedMembers(types));
   }
@@ -49,20 +48,12 @@ final class RapidTypeAnalyser {
         .collect(toSet());
   }
 
-  private static void onMemberReference(InvocationKind invocationKind, Member member) {
-    switch (invocationKind) {
-      case DYNAMIC:
-        traversePolymorphicReference(member.getDeclaringType(), member.getName());
-        break;
-      case INSTANTIATION:
-        instantiate(member.getDeclaringType());
-        // Fall through.
-      case STATIC:
-        onTypeReference(member.getDeclaringType());
-        markMemberLive(member);
-        break;
-      default:
-        throw new AssertionError(invocationKind);
+  private static void onMemberReference(Member member) {
+    if (member.isPolymorphic()) {
+      traversePolymorphicReference(member.getDeclaringType(), member.getName());
+    } else {
+      onTypeReference(member.getDeclaringType());
+      markMemberLive(member);
     }
   }
 
@@ -77,6 +68,12 @@ final class RapidTypeAnalyser {
     }
 
     member.markLive();
+
+    Type declaringType = member.getDeclaringType();
+    if (!declaringType.isInstantiated() && member.isConstructor()) {
+      declaringType.instantiate();
+      declaringType.getPotentiallyLiveMembers().forEach(RapidTypeAnalyser::markMemberLive);
+    }
 
     member.getReferencedTypes().forEach(RapidTypeAnalyser::onTypeReference);
     member.getReferencedMembers().forEach(RapidTypeAnalyser::onMemberReference);
@@ -133,22 +130,6 @@ final class RapidTypeAnalyser {
     // When a type is marked as live, we need to explicitly mark the super interfaces as live since
     // we need markImplementor call (which are not tracked in AST).
     type.getSuperInterfaces().forEach(RapidTypeAnalyser::markTypeLive);
-  }
-
-  private static void instantiate(Type type) {
-    if (type.isInstantiated()) {
-      return;
-    }
-    type.instantiate();
-    // constructors are implicitly live when the type is instantiated.
-    type.getConstructor().ifPresent(RapidTypeAnalyser::markMemberLive);
-
-    // Instantiate superclass.
-    if (type.getSuperClass() != null) {
-      instantiate(type.getSuperClass());
-    }
-
-    type.getPotentiallyLiveMembers().forEach(RapidTypeAnalyser::markMemberLive);
   }
 
   private RapidTypeAnalyser() {}

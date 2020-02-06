@@ -15,11 +15,9 @@
  */
 package com.google.j2cl.tools.rta;
 
-import com.google.common.collect.Multimap;
-import com.google.common.collect.MultimapBuilder;
-import com.google.j2cl.libraryinfo.InvocationKind;
 import com.google.j2cl.libraryinfo.MemberInfo;
 import com.google.j2cl.libraryinfo.SourcePosition;
+import java.util.ArrayList;
 import java.util.List;
 
 final class Member {
@@ -40,8 +38,7 @@ final class Member {
   private boolean fullyTraversed;
   private boolean live;
   private List<Type> referencedTypes;
-  private final Multimap<InvocationKind, Member> referencedMembers =
-      MultimapBuilder.enumKeys(InvocationKind.class).arrayListValues().build();
+  private final List<Member> referencedMembers = new ArrayList<>();
 
   private Member() {}
 
@@ -63,16 +60,6 @@ final class Member {
 
   SourcePosition getPosition() {
     return memberInfo.getPosition();
-  }
-
-  InvocationKind getDefaultInvocationKind() {
-    if (memberInfo.getStatic()) {
-      return InvocationKind.STATIC;
-    } else if (isConstructor()) {
-      return InvocationKind.INSTANTIATION;
-    } else {
-      return InvocationKind.DYNAMIC;
-    }
   }
 
   public boolean isConstructor() {
@@ -107,11 +94,11 @@ final class Member {
     this.referencedTypes = referencedTypes;
   }
 
-  Multimap<InvocationKind, Member> getReferencedMembers() {
+  List<Member> getReferencedMembers() {
     return referencedMembers;
   }
 
-  void addReferencedMember(InvocationKind invocationKind, Member referencedMember) {
-    referencedMembers.put(invocationKind, referencedMember);
+  void addReferencedMember(Member referencedMember) {
+    referencedMembers.add(referencedMember);
   }
 }
