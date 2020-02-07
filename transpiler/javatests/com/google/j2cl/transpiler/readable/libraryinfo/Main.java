@@ -59,6 +59,11 @@ public class Main {
     jsFunction.apply("foo");
 
     new MyJsType();
+
+    new Object() {
+      @JsMethod
+      void foo() {}
+    };
   }
 
   private void execute() {

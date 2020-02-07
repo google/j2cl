@@ -3,6 +3,7 @@ goog.module('com.google.j2cl.transpiler.readable.libraryinfo.Main$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let $1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.libraryinfo.Main.$1$impl');
 let FunctionImpl = goog.forwardDeclare('com.google.j2cl.transpiler.readable.libraryinfo.Main.FunctionImpl$impl');
 let MyJsType = goog.forwardDeclare('com.google.j2cl.transpiler.readable.libraryinfo.Main.MyJsType$impl');
 
@@ -33,6 +34,7 @@ class Main extends j_l_Object {
     };
     jsFunction('foo');
     new MyJsType();
+    $1.$create__();
   }
 
   m_execute___$p_com_google_j2cl_transpiler_readable_libraryinfo_Main() {
@@ -69,6 +71,8 @@ class Main extends j_l_Object {
   }
 
   static $loadModules() {
+    $1 = goog.module.get(
+        'com.google.j2cl.transpiler.readable.libraryinfo.Main.$1$impl');
     FunctionImpl = goog.module.get(
         'com.google.j2cl.transpiler.readable.libraryinfo.Main.FunctionImpl$impl');
     MyJsType = goog.module.get(

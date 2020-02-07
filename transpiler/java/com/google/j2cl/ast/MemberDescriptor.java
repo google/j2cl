@@ -180,8 +180,8 @@ public abstract class MemberDescriptor extends Node
 
   /** Returns whether the member can be referenced directly from JavaScript code. */
   public boolean canBeReferencedExternally() {
-    if (getEnclosingTypeDescriptor().getTypeDeclaration().isAnonymous()) {
-      // members of anonymous classes can not be referenced externally
+    if (isConstructor() && getEnclosingTypeDescriptor().getTypeDeclaration().isAnonymous()) {
+      // Constructors of anonymous classes can not be referenced externally
       return false;
     }
     // TODO(b/36232076): There should be two methods isJsMember and isOrOverridesJsMember to

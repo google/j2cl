@@ -3269,9 +3269,9 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  public B f4(B a) { return null; }",
             "  public Long f5(Long a) { return 1l; }", // Long fails
             "  public void f6(Long... a) { }", // varargs fails
-            "  public void f7(List<MyJsEnum> l) { }", // Type parameterized by JsEnum fails
-            "  public void f8(List<List<MyJsEnum>> l) {}", // Type parameterized by List<> of
-            // JsEnum succeeds
+            "  public void f7(List<MyJsEnum> l) { }", // parameterized by JsEnum fails
+            "  public void f8(List<List<MyJsEnum>> l) {}", // parameterized by List<JsEnum> fails
+            "  public void f17() { new Object() { @JsMethod void b(Long a){} }; }",
             "}")
         .addNativeFile("C")
         .assertTranspileSucceeds()
@@ -3311,7 +3311,9 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "[unusable-by-js] Type of parameter 'l' in 'void Buggy.f7(List<MyJsEnum> l)' is not "
                 + "usable by but exposed to JavaScript.",
             "[unusable-by-js] Type of parameter 'l' in 'void Buggy.f8(List<List<MyJsEnum>> l)' is "
-                + "not usable by but exposed to JavaScript.")
+                + "not usable by but exposed to JavaScript.",
+            "[unusable-by-js] Type of parameter 'a' in 'void <anonymous> extends Object.b(Long a)'"
+                + " is not usable by but exposed to JavaScript.")
         .assertLastMessage(
             "Suppress \"[unusable-by-js]\" warnings by adding a "
                 + "`@SuppressWarnings(\"unusable-by-js\")` annotation to the "
