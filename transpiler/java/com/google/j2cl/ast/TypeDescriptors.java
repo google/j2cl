@@ -404,11 +404,7 @@ public class TypeDescriptors {
   }
 
   public static boolean isBootstrapNamespace(DeclaredTypeDescriptor typeDescriptor) {
-    return isBootstrapNamespace(typeDescriptor.getTypeDeclaration());
-  }
-
-  public static boolean isBootstrapNamespace(TypeDeclaration typeDeclaration) {
-    return isBootstrapNamespace(typeDeclaration.getModuleName());
+    return isBootstrapNamespace(typeDescriptor.getQualifiedJsName());
   }
 
   /**

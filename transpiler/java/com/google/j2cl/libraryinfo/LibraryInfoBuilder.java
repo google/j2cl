@@ -15,7 +15,7 @@
  */
 package com.google.j2cl.libraryinfo;
 
-
+import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.DeclaredTypeDescriptor;
@@ -82,18 +82,10 @@ public final class LibraryInfoBuilder {
     Map<String, MemberInfo.Builder> memberInfoBuilderByName =
         new LinkedHashMap<>(type.getMembers().size());
 
-    // Note that we are not collecting bootstrap classes in references so we need to force them in.
-    // There are 2 reasons for that:
-    //  - We are inconsistent in marking their references wrt. being native or not.
-    //  - They are frequently used and never pruned; recording them is wasteful.
-    boolean forceJsAccessible =
-        TypeDescriptors.isBootstrapNamespace(type.getTypeDescriptor())
-            || isAccesssedFromJ2clBootstrapJsFiles(type.getTypeDescriptor());
-
     for (Member member : type.getMembers()) {
       MemberDescriptor memberDescriptor = member.getDescriptor();
       String memberName = getMemberId(memberDescriptor);
-      boolean isJsAccessible = memberDescriptor.canBeReferencedExternally() || forceJsAccessible;
+      boolean isJsAccessible = isJsAccessible(memberDescriptor);
 
       MemberInfo.Builder builder =
           memberInfoBuilderByName.computeIfAbsent(
@@ -141,8 +133,8 @@ public final class LibraryInfoBuilder {
               return;
             }
 
-            if (TypeDescriptors.isBootstrapNamespace(node.getReferencedTypeDeclaration())) {
-              // Bootstrap classes already included by marking them as js accessible.
+            if (isJsAccessible(
+                node.getReferencedTypeDeclaration().toUnparameterizedTypeDescriptor())) {
               return;
             }
 
@@ -155,6 +147,11 @@ public final class LibraryInfoBuilder {
             FieldDescriptor target = node.getTarget();
 
             if (!isPrunableType(target.getEnclosingTypeDescriptor())) {
+              return;
+            }
+
+            if (isJsAccessible(target)) {
+              // We don't record access to js accessible fields since they are never pruned.
               return;
             }
 
@@ -181,15 +178,8 @@ public final class LibraryInfoBuilder {
               return;
             }
 
-            if (TypeDescriptors.isBootstrapNamespace(target.getEnclosingTypeDescriptor())) {
-              // Bootstrap classes already included by marking them as js accessible.
-              return;
-            }
-
-            if (target.isJsFunction()) {
-              // We don't record call to JsFunction interface methods because it doesn't
-              // generate any js type. The implementation of JsFunction interface will be marked as
-              // accessible by js and will be live if the implementation type is instantiated.
+            if (isJsAccessible(target)) {
+              // We don't record call to js accessible methods since they are never pruned.
               return;
             }
 
@@ -280,6 +270,27 @@ public final class LibraryInfoBuilder {
     return methodDescriptor.isPropertyGetter() || methodDescriptor.isPropertySetter();
   }
 
+  private static boolean isJsAccessible(MemberDescriptor memberDescriptor) {
+    // Note that we are not collecting bootstrap classes in references so we need to force them in.
+    // There are 2 reasons for that:
+    //  - We are inconsistent in marking their references wrt. being native or not.
+    //  - They are frequently used and never pruned; recording them is wasteful.
+    return isInBootstrap(memberDescriptor.getEnclosingTypeDescriptor())
+        || memberDescriptor.canBeReferencedExternally();
+  }
+
+  private static boolean isJsAccessible(DeclaredTypeDescriptor typeDescriptor) {
+    return isInBootstrap(typeDescriptor)
+        || typeDescriptor.getDeclaredMemberDescriptors().stream()
+            .filter(Predicates.not(MemberDescriptor::isPolymorphic))
+            .anyMatch(MemberDescriptor::isJsMember);
+  }
+
+  private static boolean isInBootstrap(DeclaredTypeDescriptor typeDescriptor) {
+    return TypeDescriptors.isBootstrapNamespace(typeDescriptor)
+        || isAccesssedFromJ2clBootstrapJsFiles(typeDescriptor);
+  }
+
   // There are references to non JsMember members of these types from JavaScript in the J2CL
   // runtime. For now we will consider and all their members accessible by JavaScript code.
   // TODO(b/29509857):  remove once the refactoring of the code in nativebootstrap and vmbootstrap
@@ -287,6 +298,7 @@ public final class LibraryInfoBuilder {
   private static final ImmutableSet<String> TYPES_ACCESSED_FROM_J2CL_BOOTSTRAP_JS =
       ImmutableSet.of(
           "javaemul.internal.InternalPreconditions",
+          "java.lang.Object",
           "java.lang.Double",
           "java.lang.Boolean",
           "java.lang.Number",
