@@ -52,14 +52,10 @@ final class RapidTypeAnalyser {
     if (member.isPolymorphic()) {
       traversePolymorphicReference(member.getDeclaringType(), member.getName());
     } else {
-      onTypeReference(member.getDeclaringType());
+      markTypeLive(member.getDeclaringType());
+      markMemberLive(member.getDeclaringType().getMemberByName("$clinit"));
       markMemberLive(member);
     }
-  }
-
-  private static void onTypeReference(Type type) {
-    markTypeLive(type);
-    markMemberLive(type.getMemberByName("$clinit"));
   }
 
   private static void markMemberLive(Member member) {
@@ -75,8 +71,8 @@ final class RapidTypeAnalyser {
       declaringType.getPotentiallyLiveMembers().forEach(RapidTypeAnalyser::markMemberLive);
     }
 
-    member.getReferencedTypes().forEach(RapidTypeAnalyser::onTypeReference);
     member.getReferencedMembers().forEach(RapidTypeAnalyser::onMemberReference);
+    member.getReferencedTypes().forEach(RapidTypeAnalyser::markTypeLive);
   }
 
   private static void traversePolymorphicReference(Type type, String memberName) {

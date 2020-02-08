@@ -160,10 +160,6 @@ public final class LibraryInfoBuilder {
               return;
             }
 
-            if (target.getName().equals("$clinit")) {
-              return;
-            }
-
             // Register static FieldAccess as getter/setter invocations. We are conservative here
             // because getter and setter functions has the same name: the name of the field. If a
             // field is accessed, we visit both getter and setter.
@@ -183,7 +179,11 @@ public final class LibraryInfoBuilder {
               return;
             }
 
-            if (target.getName().equals("$clinit")) {
+            // Only record a $clinit call if it is from a clinit itself. All other clinit calls are
+            // from the entry points of the class and doesn't need recording since RapidTypeAnalyser
+            // will make the clinit alive when it arrives to an entry point.
+            if (target.getName().equals("$clinit")
+                && !member.getDescriptor().getName().equals("$clinit")) {
               return;
             }
 
