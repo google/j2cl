@@ -21,13 +21,8 @@ import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.CommandLineTool;
 import com.google.j2cl.common.FrontendUtils;
 import com.google.j2cl.common.Problems;
-import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.frontend.Frontend;
 import java.io.File;
-import java.nio.file.FileSystem;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import org.kohsuke.args4j.Argument;
@@ -108,28 +103,12 @@ public final class J2clCommandLineRunner extends CommandLineTool {
                 .filter(p -> p.sourcePath().endsWith(".native.js"))
                 .collect(ImmutableList.toImmutableList()))
         .setClasspaths(getPathEntries(this.classPath))
-        .setOutput(
-            this.output.endsWith(".zip")
-                ? getZipOutput(this.output, problems)
-                : getDirOutput(this.output, problems))
+        .setOutput(FrontendUtils.initOutputPath(this.output, problems))
         .setEmitReadableSourceMap(this.readableSourceMaps)
         .setEmitReadableLibraryInfo(false)
         .setGenerateKytheIndexingMetadata(this.generateKytheIndexingMetadata)
         .setFrontend(this.frontEnd)
         .build();
-  }
-
-  private static Path getDirOutput(String output, Problems problems) {
-    Path outputPath = Paths.get(output);
-    if (Files.isRegularFile(outputPath)) {
-      problems.fatal(FatalError.OUTPUT_LOCATION, outputPath);
-    }
-    return outputPath;
-  }
-
-  private static Path getZipOutput(String output, Problems problems) {
-    FileSystem newFileSystem = FrontendUtils.initZipOutput(output, problems);
-    return newFileSystem == null ? null : newFileSystem.getPath("/");
   }
 
   private static List<String> getPathEntries(String path) {

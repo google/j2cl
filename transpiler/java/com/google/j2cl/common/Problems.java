@@ -36,8 +36,9 @@ public class Problems {
   /** Represents compiler fatal errors. */
   public enum FatalError {
     FILE_NOT_FOUND("File '%s' not found.", 1),
+    DIRECTORY_NOT_FOUND("Directory '%s' not found.", 1),
     UNKNOWN_INPUT_TYPE("Cannot recognize input type for file '%s'.", 1),
-    OUTPUT_LOCATION("Output location '%s' must be a directory or .zip file.", 1),
+    OUTPUT_LOCATION("Output location '%s' must be a directory.", 1),
     CANNOT_EXTRACT_ZIP("Cannot extract zip '%s'.", 1),
     CANNOT_CREATE_ZIP("Cannot create zip '%s': %s.", 2),
     CANNOT_CLOSE_ZIP("Cannot close zip: %s.", 1),

@@ -50,33 +50,61 @@ def _compile(
         javac_opts,
     )
 
-    output_jszip = output_jszip or ctx.actions.declare_file("%s.js.zip" % name)
     if java_srcs:
+        output_dir = ctx.actions.declare_directory("%s_j2cl_js" % name)
         output_library_info = ctx.actions.declare_file("%s_library_info" % name)
         _j2cl_transpile(
             ctx,
             java_provider,
             js_srcs,
-            output_jszip,
+            output_dir,
             output_library_info,
             internal_transpiler_flags,
         )
-        js_outputs = [output_jszip]
         library_info = [output_library_info]
     else:
-        # Make sure js zip is always created since it is a named output
-        _create_empty_zip(ctx, output_jszip)
-        js_outputs = []
+        output_dir = None
         library_info = []
+
+    output_jszip = output_jszip or ctx.actions.declare_file("%s.js.zip" % name)
+    _create_zip_output(ctx, output_dir, output_jszip)
+
+    # Don't pass anything to the js provider if we didn't transpile anything.
+    # This case happens when j2cl_library exports another j2cl_library.
+    js_provider_srcs = [output_jszip] if output_dir else []
 
     return J2clInfo(
         _private_ = struct(
             java_info = java_provider,
             library_info = library_info,
-            js_info = j2cl_js_provider(ctx, js_outputs, js_deps, js_exports),
+            output_js = output_jszip,
+            js_info = j2cl_js_provider(ctx, js_provider_srcs, js_deps, js_exports),
         ),
         _is_j2cl_provider = 1,
     )
+
+def _create_zip_output(ctx, output_dir, jszip):
+    if output_dir:
+        ctx.actions.run_shell(
+            progress_message = "Generating J2CL zip file",
+            inputs = [output_dir],
+            outputs = [jszip],
+            # We use mkdir -p command in order to ensure srcs_dir exists on filesystem
+            # since it may not have been produced by previous actions.
+            command = (
+                "mkdir -p %s && " % output_dir.path +
+                "%s cfM %s -C %s ." % (ctx.executable._jar.path, jszip.path, output_dir.path)
+            ),
+            tools = [ctx.executable._jar],
+            mnemonic = "J2clZip",
+        )
+    else:
+        empty_zip_contents = "\\x50\\x4b\\x05\\x06" + "\\x00" * 18
+        ctx.actions.run_shell(
+            outputs = [jszip],
+            command = "echo -ne  '%s' > '%s'" % (empty_zip_contents, jszip.path),
+            mnemonic = "J2clZip",
+        )
 
 def _split_deps(deps):
     """ Split the provider deps into Java and JS groups. """
@@ -94,14 +122,6 @@ def _split_deps(deps):
             js_deps.append(d)
 
     return (java_deps, js_deps)
-
-_empty_zip_contents = "\\x50\\x4b\\x05\\x06" + "\\x00" * 18
-
-def _create_empty_zip(ctx, output_js_zip):
-    ctx.actions.run_shell(
-        outputs = [output_js_zip],
-        command = "echo -ne  '%s' > '%s'" % (_empty_zip_contents, output_js_zip.path),
-    )
 
 def _java_compile(ctx, name, srcs, deps, exports, plugins, exported_plugins, output_jar, javac_opts):
     stripped_java_srcs = [_strip_gwt_incompatible(ctx, name, srcs)] if srcs else []
@@ -159,7 +179,7 @@ def _j2cl_transpile(
         ctx,
         java_provider,
         js_srcs,
-        output,
+        output_dir,
         library_info_output,
         internal_transpiler_flags):
     """ Takes Java provider and translates it into Closure style JS in a zip bundle."""
@@ -175,7 +195,7 @@ def _j2cl_transpile(
     args.use_param_file("@%s", use_always = True)
     args.set_param_file_format("multiline")
     args.add_joined("-classpath", classpath, join_with = ctx.configuration.host_path_separator)
-    args.add("-output", output)
+    args.add("-output", output_dir.path)
     args.add("-libraryinfooutput", library_info_output)
     if internal_transpiler_flags.get("readable_source_maps"):
         args.add("-readablesourcemaps")
@@ -188,7 +208,7 @@ def _j2cl_transpile(
     ctx.actions.run(
         progress_message = "Transpiling to JavaScript %s" % ctx.label,
         inputs = depset(srcs, transitive = [classpath]),
-        outputs = [output, library_info_output],
+        outputs = [output_dir, library_info_output],
         executable = ctx.executable._j2cl_transpiler,
         arguments = [args],
         env = dict(LANG = "en_US.UTF-8"),
@@ -213,6 +233,11 @@ J2CL_TOOLCHAIN_ATTRS = {
         default = Label("//build_defs/internal_do_not_use:GwtIncompatibleStripper"),
         cfg = "host",
         executable = True,
+    ),
+    "_jar": attr.label(
+        cfg = "host",
+        executable = True,
+        default = Label("@bazel_tools//tools/jdk:jar"),
     ),
 }
 J2CL_TOOLCHAIN_ATTRS.update(J2CL_JS_TOOLCHAIN_ATTRS)

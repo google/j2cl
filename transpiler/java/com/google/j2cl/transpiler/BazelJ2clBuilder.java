@@ -55,7 +55,7 @@ final class BazelJ2clBuilder extends BazelWorker {
       name = "-output",
       required = true,
       metaVar = "<path>",
-      usage = "Specifies the zip into which to place compiled output.")
+      usage = "Specifies the directory into which to place compiled output.")
   protected String output;
 
   @Option(
@@ -91,7 +91,7 @@ final class BazelJ2clBuilder extends BazelWorker {
       this.readableSourceMaps = false;
     }
 
-    Path outputPath = getZipOutput(this.output, problems);
+    Path outputPath = FrontendUtils.initOutputPath(this.output, problems);
     Path libraryInfoOutputPath = Paths.get(this.libraryInfoOutput);
 
     List<FileInfo> allSources =
@@ -108,7 +108,7 @@ final class BazelJ2clBuilder extends BazelWorker {
             .filter(p -> p.sourcePath().endsWith(".native.js"))
             .collect(ImmutableList.toImmutableList());
 
-    // Directly put all supplied js sources into the zip file.
+    // Directly put all supplied js sources into the directory.
     allSources.stream()
         .filter(p -> p.sourcePath().endsWith(".js") && !p.sourcePath().endsWith("native.js"))
         .forEach(
@@ -127,10 +127,6 @@ final class BazelJ2clBuilder extends BazelWorker {
         .setGenerateKytheIndexingMetadata(this.generateKytheIndexingMetadata)
         .setFrontend(FRONTEND)
         .build();
-  }
-
-  private static Path getZipOutput(String output, Problems problems) {
-    return FrontendUtils.initZipOutput(output, problems).getPath("/");
   }
 
   private static List<String> getPathEntries(String path) {
