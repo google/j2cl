@@ -22,14 +22,15 @@ def _impl_j2cl_library(ctx):
     )
 
     output_js = j2cl_provider._private_.output_js
+    output_js_array = [output_js] if output_js else []
 
     return j2cl_common.create_js_lib_struct(
         j2cl_info = j2cl_provider,
         extra_providers = [
             DefaultInfo(
-                files = depset([output_js, ctx.outputs.jar]),
+                files = depset(output_js_array + [ctx.outputs.jar]),
                 # TODO(goktug): Remove after b/35847804 is fixed.
-                runfiles = _collect_runfiles(ctx, [output_js], ctx.attr.deps + ctx.attr.exports),
+                runfiles = _collect_runfiles(ctx, output_js_array, ctx.attr.deps + ctx.attr.exports),
             ),
         ],
     )

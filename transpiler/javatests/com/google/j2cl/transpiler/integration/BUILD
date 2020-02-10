@@ -109,4 +109,18 @@ java_library(
     ],
 )
 
-exports_files(["integration_tests_warnings_whitelist.txt"])
+config_setting(
+    name = "tree_artifact_enabled",
+    flag_values = {
+        "//:enable_experimental_tree_artifact_mode": "True",
+    },
+)
+
+filegroup(
+    name = "integration_tests_warnings_whitelist",
+    srcs = select({
+        ":tree_artifact_enabled": ["tree_artifact_integration_tests_warnings_whitelist.txt"],
+        "//conditions:default": ["integration_tests_warnings_whitelist.txt"],
+    }),
+    visibility = [":__subpackages__"],
+)

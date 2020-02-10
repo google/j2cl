@@ -13,8 +13,8 @@ def load_j2cl_repo_deps():
     _github_repo(
         name = "bazel_skylib",
         repo = "bazelbuild/bazel-skylib",
-        tag = "0.7.0",
-        sha256 = "bce240a0749dfc52fab20dce400b4d5cf7c28b239d64f8fd1762b3c9470121d8",
+        tag = "1.0.2",
+        sha256 = "64ad2728ccdd2044216e4cec7815918b7bb3bb28c95b7e9d951f9d4eccb07625",
     )
 
     # Add other closure repo deps that need to loaded beforehand.

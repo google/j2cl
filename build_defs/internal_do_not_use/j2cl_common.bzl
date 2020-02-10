@@ -1,6 +1,7 @@
 """Common utilities for creating J2CL targets and providers."""
 
 load(":j2cl_js_common.bzl", "J2CL_JS_TOOLCHAIN_ATTRS", "create_js_lib_struct", "j2cl_js_provider")
+load("@bazel_skylib//rules:common_settings.bzl", "BuildSettingInfo")
 
 # Constructor for the Bazel provider for J2CL.
 # Note that data under "_private_" considered private internal data so do not use.
@@ -66,22 +67,32 @@ def _compile(
         output_dir = None
         library_info = []
 
+    # A note about the zip file: It will only be created if:
+    #  - tree artifacts are not enabled. In this case the zip file will be part
+    #    of the default outputs of the rule and passed to js provider, or
+    #  - a third party rule depends directly on the zip file. When the zip
+    #    file is requested, the action that creates the zip file will be triggered.
     output_jszip = output_jszip or ctx.actions.declare_file("%s.js.zip" % name)
     _create_zip_output(ctx, output_dir, output_jszip)
 
+    output_js = output_dir if _is_tree_artifact_enabled(ctx) else output_jszip
+
     # Don't pass anything to the js provider if we didn't transpile anything.
     # This case happens when j2cl_library exports another j2cl_library.
-    js_provider_srcs = [output_jszip] if output_dir else []
+    js_provider_srcs = [output_js] if output_dir else []
 
     return J2clInfo(
         _private_ = struct(
             java_info = java_provider,
             library_info = library_info,
-            output_js = output_jszip,
+            output_js = output_js,
             js_info = j2cl_js_provider(ctx, js_provider_srcs, js_deps, js_exports),
         ),
         _is_j2cl_provider = 1,
     )
+
+def _is_tree_artifact_enabled(ctx):
+    return ctx.attr._enable_tree_artifact[BuildSettingInfo].value
 
 def _create_zip_output(ctx, output_dir, jszip):
     if output_dir:
@@ -238,6 +249,9 @@ J2CL_TOOLCHAIN_ATTRS = {
         cfg = "host",
         executable = True,
         default = Label("@bazel_tools//tools/jdk:jar"),
+    ),
+    "_enable_tree_artifact": attr.label(
+        default = Label("//:enable_experimental_tree_artifact_mode"),
     ),
 }
 J2CL_TOOLCHAIN_ATTRS.update(J2CL_JS_TOOLCHAIN_ATTRS)

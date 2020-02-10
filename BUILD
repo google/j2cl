@@ -2,6 +2,7 @@
 #  Public targets available externally. Also see build_defs/rules.bzl for the provided rules.
 
 load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_library")
+load("@bazel_skylib//rules:common_settings.bzl", "bool_flag")
 
 package(
     default_visibility = ["//visibility:public"],
@@ -57,4 +58,9 @@ sh_binary(
     name = "deploy",
     srcs = ["deploy.sh"],
     visibility = ["//visibility:private"],
+)
+
+bool_flag(
+    name = "enable_experimental_tree_artifact_mode",
+    build_setting_default = False,
 )
