@@ -28,7 +28,6 @@ import com.google.j2cl.ast.Member;
 import com.google.j2cl.ast.MemberDescriptor;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Type;
-import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
@@ -61,7 +60,7 @@ public final class LibraryInfoBuilder {
 
     TypeInfo.Builder typeInfoBuilder =
         TypeInfo.newBuilder()
-            .setTypeId(getTypeId(type))
+            .setTypeId(getTypeId(type.getTypeDescriptor()))
             .setHeaderSourceFilePath(headerFilePath)
             .setImplSourceFilePath(implFilePath);
 
@@ -129,17 +128,24 @@ public final class LibraryInfoBuilder {
         new AbstractVisitor() {
           @Override
           public void exitJavaScriptConstructorReference(JavaScriptConstructorReference node) {
-            if (!isPrunableType(node.getReferencedTypeDeclaration().toRawTypeDescriptor())) {
+            DeclaredTypeDescriptor referencedType =
+                node.getReferencedTypeDeclaration().toRawTypeDescriptor();
+
+            if (!isPrunableType(referencedType)) {
               return;
             }
 
-            if (isJsAccessible(
-                node.getReferencedTypeDeclaration().toUnparameterizedTypeDescriptor())) {
+            if (isJsAccessible(referencedType)) {
+              return;
+            }
+
+            // No need to record references to parent or itself since they will be live regardless.
+            if (member.getDescriptor().getEnclosingTypeDescriptor().isSubtypeOf(referencedType)) {
               return;
             }
 
             // In Javascript a Class is statically referenced by using it's constructor function.
-            referencedTypes.add(getTypeId(node.getReferencedTypeDeclaration()));
+            referencedTypes.add(getTypeId(referencedType));
           }
 
           @Override
@@ -216,17 +222,9 @@ public final class LibraryInfoBuilder {
         .build();
   }
 
-  private int getTypeId(Type type) {
-    return getTypeId(type.getDeclaration());
-  }
-
   private int getTypeId(DeclaredTypeDescriptor typeDescriptor) {
-    return getTypeId(typeDescriptor.getTypeDeclaration());
-  }
-
-  private int getTypeId(TypeDeclaration typeDeclaration) {
     // Note that the IDs start from '1' to reserve '0' for NULL_TYPE.
-    return types.computeIfAbsent(typeDeclaration.getModuleName(), x -> types.size() + 1);
+    return types.computeIfAbsent(typeDescriptor.getQualifiedJsName(), x -> types.size() + 1);
   }
 
   private LibraryInfo build() {
