@@ -16,12 +16,7 @@
 package com.google.j2cl.tools.rta;
 
 import static com.google.common.base.Preconditions.checkState;
-import static com.google.common.collect.ImmutableList.toImmutableList;
-import static com.google.common.collect.MoreCollectors.toOptional;
 
-import com.google.common.base.Predicates;
-import com.google.common.collect.ImmutableList;
-import com.google.j2cl.libraryinfo.LibraryInfoBuilder;
 import com.google.j2cl.libraryinfo.TypeInfo;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -31,24 +26,18 @@ import java.util.List;
 final class Type {
   private String name;
   private Type superClass;
-  private List<Type> superInterfaces;
-  private List<Type> superTypes;
-  private boolean isInterface;
+  private final List<Type> superInterfaces = new ArrayList<>();
+  private final List<Type> immediateSubtypes = new ArrayList<>();
   private final LinkedHashMap<String, Member> membersByName = new LinkedHashMap<>();
   private String implSourceFile;
   private String headerSourceFile;
   private boolean live;
   private boolean instantiated;
   private final List<Member> potentiallyLiveMembers = new ArrayList<>();
-  private final List<Type> immediateSubtypes = new ArrayList<>();
 
   static Type buildFrom(TypeInfo typeInfo, String name) {
     Type type = new Type();
     type.name = name;
-    // All classes extends at least j.l.Object except j.l.Object itself
-    type.isInterface =
-        typeInfo.getExtendsType() == LibraryInfoBuilder.NULL_TYPE
-            && !"java.lang.Object".equals(name);
     type.headerSourceFile = typeInfo.getHeaderSourceFilePath();
     type.implSourceFile = typeInfo.getImplSourceFilePath();
     typeInfo
@@ -68,10 +57,6 @@ final class Type {
     return implSourceFile;
   }
 
-  boolean isInterface() {
-    return isInterface;
-  }
-
   Collection<Member> getMembers() {
     return membersByName.values();
   }
@@ -81,34 +66,28 @@ final class Type {
   }
 
   void addMember(Member member) {
-    checkState(!membersByName.containsKey(member.getName()));
-    membersByName.put(member.getName(), member);
+    Member previous = membersByName.put(member.getName(), member);
+    checkState(previous == null);
   }
 
   String getName() {
     return name;
   }
 
-  void setSuperTypes(List<Type> superTypes) {
-    this.superTypes = ImmutableList.copyOf(superTypes);
-    this.superClass =
-        superTypes.stream()
-            .filter(Predicates.not(Type::isInterface))
-            .collect(toOptional())
-            .orElse(null);
-    this.superInterfaces = superTypes.stream().filter(Type::isInterface).collect(toImmutableList());
-  }
-
-  List<Type> getSuperTypes() {
-    return superTypes;
-  }
-
   Type getSuperClass() {
     return superClass;
   }
 
+  void setSuperClass(Type superClass) {
+    this.superClass = superClass;
+  }
+
   List<Type> getSuperInterfaces() {
     return superInterfaces;
+  }
+
+  void addSuperInterface(Type superInterface) {
+    this.superInterfaces.add(superInterface);
   }
 
   void markLive() {

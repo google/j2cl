@@ -37,7 +37,7 @@ final class Member {
 
   private boolean fullyTraversed;
   private boolean live;
-  private List<Type> referencedTypes;
+  private final List<Type> referencedTypes = new ArrayList<>();
   private final List<Member> referencedMembers = new ArrayList<>();
 
   private Member() {}
@@ -90,8 +90,8 @@ final class Member {
     return referencedTypes;
   }
 
-  void setReferencedTypes(List<Type> referencedTypes) {
-    this.referencedTypes = referencedTypes;
+  void addReferencedType(Type referencedType) {
+    this.referencedTypes.add(referencedType);
   }
 
   List<Member> getReferencedMembers() {

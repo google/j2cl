@@ -19,13 +19,14 @@ import static com.google.common.base.Predicates.not;
 import static java.util.stream.Collectors.toSet;
 
 import com.google.j2cl.libraryinfo.LibraryInfo;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
 final class RapidTypeAnalyser {
 
   static RtaResult analyse(List<LibraryInfo> libraryInfos) {
-    List<Type> types = TypeGraphBuilder.build(libraryInfos);
+    Collection<Type> types = TypeGraphBuilder.build(libraryInfos);
 
     // Go over the entry points to start the traversal.
     types.stream()
@@ -36,11 +37,11 @@ final class RapidTypeAnalyser {
     return RtaResult.build(getUnusedTypes(types), getUnusedMembers(types));
   }
 
-  private static Set<Type> getUnusedTypes(List<Type> types) {
+  private static Set<Type> getUnusedTypes(Collection<Type> types) {
     return types.stream().filter(not(Type::isLive)).collect(toSet());
   }
 
-  private static Set<Member> getUnusedMembers(List<Type> types) {
+  private static Set<Member> getUnusedMembers(Collection<Type> types) {
     return types.stream()
         .filter(Type::isLive)
         .flatMap(t -> t.getMembers().stream())

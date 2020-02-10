@@ -16,24 +16,21 @@
 package com.google.j2cl.tools.rta;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import static com.google.common.collect.ImmutableList.toImmutableList;
-import static com.google.common.collect.Streams.concat;
 
-import com.google.common.collect.ImmutableList;
 import com.google.j2cl.libraryinfo.LibraryInfo;
 import com.google.j2cl.libraryinfo.LibraryInfoBuilder;
 import com.google.j2cl.libraryinfo.MemberInfo;
 import com.google.j2cl.libraryinfo.MethodInvocation;
 import com.google.j2cl.libraryinfo.TypeInfo;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Stream;
 
 /** Give information about inheritance relationships between types. */
 public class TypeGraphBuilder {
 
-  static List<Type> build(List<LibraryInfo> libraryInfos) {
+  static Collection<Type> build(List<LibraryInfo> libraryInfos) {
     Map<String, Type> typesByName = new HashMap<>();
 
     // Create all types and members.
@@ -46,50 +43,44 @@ public class TypeGraphBuilder {
 
     // Build cross-references between types and members
     for (LibraryInfo libraryInfo : libraryInfos) {
-      addMemberReferences(typesByName, libraryInfo);
+      buildCrossReferences(typesByName, libraryInfo);
     }
 
-    for (Type type : typesByName.values()) {
-      for (Type superType : type.getSuperTypes()) {
-        superType.addImmediateSubtype(type);
-      }
-    }
-
-    return ImmutableList.copyOf(typesByName.values());
+    return typesByName.values();
   }
 
-  private static void addMemberReferences(Map<String, Type> typesByName, LibraryInfo libraryInfo) {
+  private static void buildCrossReferences(Map<String, Type> typesByName, LibraryInfo libraryInfo) {
     for (TypeInfo typeInfo : libraryInfo.getTypeList()) {
       Type type = typesByName.get(libraryInfo.getTypeMap(typeInfo.getTypeId()));
-      type.setSuperTypes(
-          concat(Stream.of(typeInfo.getExtendsType()), typeInfo.getImplementsTypeList().stream())
-              .filter(x -> x != LibraryInfoBuilder.NULL_TYPE)
-              .map(x -> checkNotNull(typesByName.get(libraryInfo.getTypeMap(x))))
-              .collect(toImmutableList()));
+
+      int extendsId = typeInfo.getExtendsType();
+      if (extendsId != LibraryInfoBuilder.NULL_TYPE) {
+        Type superClass = typesByName.get(libraryInfo.getTypeMap(extendsId));
+        superClass.addImmediateSubtype(type);
+        type.setSuperClass(superClass);
+      }
+
+      for (int implementsId : typeInfo.getImplementsTypeList()) {
+        Type superInterface = typesByName.get(libraryInfo.getTypeMap(implementsId));
+        superInterface.addImmediateSubtype(type);
+        type.addSuperInterface(superInterface);
+      }
 
       for (MemberInfo memberInfo : typeInfo.getMemberList()) {
         Member member = type.getMemberByName(memberInfo.getName());
-        member.setReferencedTypes(
-            memberInfo.getReferencedTypesList().stream()
-                .map(libraryInfo::getTypeMap)
-                .map(typesByName::get)
-                .collect(toImmutableList()));
 
-        addMemberReferences(libraryInfo, memberInfo.getInvokedMethodsList(), member, typesByName);
+        for (int referencedId : memberInfo.getReferencedTypesList()) {
+          Type referencedType = typesByName.get(libraryInfo.getTypeMap(referencedId));
+          member.addReferencedType(checkNotNull(referencedType));
+        }
+
+        for (MethodInvocation methodInvocation : memberInfo.getInvokedMethodsList()) {
+          Type enclosingType =
+              typesByName.get(libraryInfo.getTypeMap(methodInvocation.getEnclosingType()));
+          Member referencedMember = enclosingType.getMemberByName(methodInvocation.getMethod());
+          member.addReferencedMember(referencedMember);
+        }
       }
-    }
-  }
-
-  private static void addMemberReferences(
-      LibraryInfo libraryInfo,
-      List<MethodInvocation> methodInvocations,
-      Member member,
-      Map<String, Type> typesByName) {
-    for (MethodInvocation methodInvocation : methodInvocations) {
-      Type enclosingType =
-          typesByName.get(libraryInfo.getTypeMap(methodInvocation.getEnclosingType()));
-      Member referencedMember = enclosingType.getMemberByName(methodInvocation.getMethod());
-      member.addReferencedMember(referencedMember);
     }
   }
 
