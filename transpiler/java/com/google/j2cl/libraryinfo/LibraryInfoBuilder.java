@@ -17,6 +17,7 @@ package com.google.j2cl.libraryinfo;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Maps;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.FieldAccess;
@@ -35,7 +36,6 @@ import com.google.protobuf.util.JsonFormat;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
@@ -79,7 +79,7 @@ public final class LibraryInfoBuilder {
     // creating only one MemberInfo instance that combines all the references appearing in their
     // bodies.
     Map<String, MemberInfo.Builder> memberInfoBuilderByName =
-        new LinkedHashMap<>(type.getMembers().size());
+        Maps.newLinkedHashMapWithExpectedSize(type.getMembers().size());
 
     for (Member member : type.getMembers()) {
       MemberDescriptor memberDescriptor = member.getDescriptor();
