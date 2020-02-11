@@ -57,7 +57,7 @@ public class BazelJ2clRta extends BazelWorker {
   @Override
   protected Problems run() {
     List<LibraryInfo> libraryInfos =
-        inputs.stream().map(BazelJ2clRta::readLibraryInfo).collect(toImmutableList());
+        inputs.parallelStream().map(BazelJ2clRta::readLibraryInfo).collect(toImmutableList());
 
     RtaResult rtaResult = RapidTypeAnalyser.analyse(libraryInfos);
 
