@@ -23,7 +23,7 @@ import com.google.j2cl.libraryinfo.MemberInfo;
 import com.google.j2cl.libraryinfo.MethodInvocation;
 import com.google.j2cl.libraryinfo.TypeInfo;
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,7 +31,7 @@ import java.util.Map;
 public class TypeGraphBuilder {
 
   static Collection<Type> build(List<LibraryInfo> libraryInfos) {
-    Map<String, Type> typesByName = new HashMap<>();
+    Map<String, Type> typesByName = new LinkedHashMap<>();
 
     // Create all types and members.
     for (LibraryInfo libraryInfo : libraryInfos) {

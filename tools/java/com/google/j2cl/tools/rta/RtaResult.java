@@ -15,18 +15,11 @@
  */
 package com.google.j2cl.tools.rta;
 
-import static com.google.common.collect.ImmutableList.toImmutableList;
-import static java.util.stream.Collectors.toList;
-
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.libraryinfo.SourcePosition;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Wrapper Object containing the set of live types and live members discovered by the RTA algorithm.
@@ -39,50 +32,41 @@ abstract class RtaResult {
 
   abstract CodeRemovalInfo getCodeRemovalInfo();
 
-  static RtaResult build(Set<Type> unusedTypeSet, Set<Member> unusedMemberSet) {
-    return new AutoValue_RtaResult.Builder()
-        .setUnusedTypes(toSortedList(unusedTypeSet.stream().map(Type::getName)))
-        .setUnusedMembers(toSortedList(unusedMemberSet.stream().map(RtaResult::createMemberId)))
-        .setCodeRemovalInfo(buildCodeRemovalInfo(unusedTypeSet, unusedMemberSet))
-        .build();
-  }
+  static RtaResult build(Collection<Type> types) {
+    Builder builder = new AutoValue_RtaResult.Builder();
+    CodeRemovalInfo.Builder codeRemovalInfoBuilder = CodeRemovalInfo.newBuilder();
 
-  private static CodeRemovalInfo buildCodeRemovalInfo(
-      Set<Type> unusedTypeSet, Set<Member> unusedMemberSet) {
+    for (Type type : types) {
+      if (type.isLive()) {
+        ArrayList<LineRange> unusedLines = new ArrayList<>();
+        for (Member member : type.getMembers()) {
+          if (member.isLive()) {
+            continue;
+          }
 
-    CodeRemovalInfo.Builder codeRemovalInfo = CodeRemovalInfo.newBuilder();
+          builder.unusedMembersBuilder().add(createMemberId(member));
+          if (member.hasPosition()) {
+            unusedLines.add(convertToLineRange(member.getPosition()));
+          }
+        }
 
-    codeRemovalInfo.addAllUnusedFiles(
-        unusedTypeSet.stream()
-            .flatMap(t -> Stream.of(t.getHeaderSourceFile(), t.getImplSourceFile()))
-            .sorted()
-            .collect(Collectors.toList()));
+        if (!unusedLines.isEmpty()) {
+          unusedLines.sort((m1, m2) -> m1.getLineStart() - m2.getLineStart());
+          codeRemovalInfoBuilder.addUnusedLines(
+              UnusedLines.newBuilder()
+                  .setFileKey(type.getImplSourceFile())
+                  .addAllUnusedRanges(unusedLines)
+                  .build());
+        }
 
-    // Because the order used to add an entry in the map depends on the unstable order of the
-    // unusedMemberSet iterator, we use a tree map to ensure a deterministic output of our
-    // skylark rule.
-    Map<String, UnusedLines.Builder> unusedLinesBuilderByFileName = new TreeMap<>();
+      } else {
+        builder.unusedTypesBuilder().add(type.getName());
+        codeRemovalInfoBuilder.addUnusedFiles(type.getHeaderSourceFile());
+        codeRemovalInfoBuilder.addUnusedFiles(type.getImplSourceFile());
+      }
+    }
 
-    unusedMemberSet.stream()
-        // Don't process members of unused types because the files will be totally removed.
-        .filter(m -> !unusedTypeSet.contains(m.getDeclaringType()))
-        // Consider member with file position info.
-        .filter(m -> m.hasPosition())
-        .sorted((m1, m2) -> m1.getPosition().getStart() - m2.getPosition().getStart())
-        .forEach(
-            member ->
-                unusedLinesBuilderByFileName
-                    .computeIfAbsent(
-                        member.getDeclaringType().getImplSourceFile(),
-                        file -> UnusedLines.newBuilder().setFileKey(file))
-                    .addUnusedRanges(convertToLineRange(member.getPosition())));
-
-    return codeRemovalInfo
-        .addAllUnusedLines(
-            unusedLinesBuilderByFileName.values().stream()
-                .map(UnusedLines.Builder::build)
-                .collect(toList()))
-        .build();
+    return builder.setCodeRemovalInfo(codeRemovalInfoBuilder.build()).build();
   }
 
   private static LineRange convertToLineRange(SourcePosition position) {
@@ -94,20 +78,16 @@ abstract class RtaResult {
 
   @AutoValue.Builder
   abstract static class Builder {
-    abstract Builder setCodeRemovalInfo(CodeRemovalInfo codeRemovalInfo);
+    abstract ImmutableList.Builder<String> unusedTypesBuilder();
 
-    abstract Builder setUnusedMembers(List<String> unusedMembers);
+    abstract ImmutableList.Builder<String> unusedMembersBuilder();
 
-    abstract Builder setUnusedTypes(List<String> unusedFiles);
+    abstract Builder setCodeRemovalInfo(CodeRemovalInfo info);
 
     abstract RtaResult build();
   }
 
   private static String createMemberId(Member member) {
     return member.getDeclaringType().getName() + ":" + member.getName();
-  }
-
-  private static <E> List<E> toSortedList(Stream<E> stream) {
-    return stream.sorted().collect(toImmutableList());
   }
 }

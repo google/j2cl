@@ -15,13 +15,10 @@
  */
 package com.google.j2cl.tools.rta;
 
-import static com.google.common.base.Predicates.not;
-import static java.util.stream.Collectors.toSet;
 
 import com.google.j2cl.libraryinfo.LibraryInfo;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 final class RapidTypeAnalyser {
 
@@ -34,19 +31,7 @@ final class RapidTypeAnalyser {
         .filter(Member::isJsAccessible)
         .forEach(m -> onMemberReference(m));
 
-    return RtaResult.build(getUnusedTypes(types), getUnusedMembers(types));
-  }
-
-  private static Set<Type> getUnusedTypes(Collection<Type> types) {
-    return types.stream().filter(not(Type::isLive)).collect(toSet());
-  }
-
-  private static Set<Member> getUnusedMembers(Collection<Type> types) {
-    return types.stream()
-        .filter(Type::isLive)
-        .flatMap(t -> t.getMembers().stream())
-        .filter(not(Member::isLive))
-        .collect(toSet());
+    return RtaResult.build(types);
   }
 
   private static void onMemberReference(Member member) {
