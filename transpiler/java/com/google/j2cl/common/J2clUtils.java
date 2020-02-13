@@ -25,6 +25,7 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.attribute.BasicFileAttributeView;
 import java.nio.file.attribute.FileTime;
+import java.util.Arrays;
 import java.util.function.Consumer;
 import org.apache.commons.text.StringEscapeUtils;
 
@@ -57,13 +58,19 @@ public class J2clUtils {
   }
 
   public static void writeToFile(Path outputPath, String content, Problems problems) {
-    writeToFile(outputPath, content.getBytes(StandardCharsets.UTF_8), problems);
+    try {
+      createDirectories(outputPath.getParent());
+      Files.write(outputPath, Arrays.asList(content));
+      // Wipe entries modification time so that input->output mapping is stable
+      // regardless of the time of day.
+      maybeResetAllTimeStamps(outputPath);
+    } catch (IOException e) {
+      problems.fatal(FatalError.CANNOT_WRITE_FILE, e.toString());
+    }
   }
 
   public static void writeToFile(Path outputPath, byte[] content, Problems problems) {
     try {
-      // Write using the provided fileSystem (which might be the regular file system or might be a
-      // zip file.)
       createDirectories(outputPath.getParent());
       Files.write(outputPath, content);
       // Wipe entries modification time so that input->output mapping is stable
@@ -86,7 +93,14 @@ public class J2clUtils {
     }
   }
 
+  private static final boolean DETERMINISTIC_TIMESTAMPS =
+      Boolean.getBoolean("j2cl.deterministicTimestamps");
+
   private static void createDirectories(Path outputPath) throws IOException {
+    if (!DETERMINISTIC_TIMESTAMPS) {
+      Files.createDirectories(outputPath);
+      return;
+    }
     // We are creating directories one by one so that we can reset the timestamp for each one.
     if (outputPath == null || Files.exists(outputPath)) {
       return;
@@ -95,9 +109,6 @@ public class J2clUtils {
     Files.createDirectory(outputPath);
     maybeResetAllTimeStamps(outputPath);
   }
-
-  private static final boolean DETERMINISTIC_TIMESTAMPS =
-      Boolean.getBoolean("j2cl.deterministicTimestamps");
 
   private static void maybeResetAllTimeStamps(Path path) throws IOException {
     if (!DETERMINISTIC_TIMESTAMPS) {
