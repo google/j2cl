@@ -55,7 +55,7 @@ public abstract class BazelWorker {
     try {
       parser.parseArgument(args);
     } catch (CmdLineException e) {
-      problems.error("Error: %s", e.getMessage());
+      problems.error("%s", e.getMessage());
       return problems;
     }
 
