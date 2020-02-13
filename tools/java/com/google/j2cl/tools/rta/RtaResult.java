@@ -28,9 +28,16 @@ import java.util.Collection;
 abstract class RtaResult {
   abstract ImmutableList<String> getUnusedTypes();
 
-  abstract ImmutableList<String> getUnusedMembers();
-
   abstract CodeRemovalInfo getCodeRemovalInfo();
+
+  @AutoValue.Builder
+  abstract static class Builder {
+    abstract ImmutableList.Builder<String> unusedTypesBuilder();
+
+    abstract Builder setCodeRemovalInfo(CodeRemovalInfo info);
+
+    abstract RtaResult build();
+  }
 
   static RtaResult build(Collection<Type> types) {
     Builder builder = new AutoValue_RtaResult.Builder();
@@ -40,14 +47,11 @@ abstract class RtaResult {
       if (type.isLive()) {
         ArrayList<LineRange> unusedLines = new ArrayList<>();
         for (Member member : type.getMembers()) {
-          if (member.isLive()) {
+          if (member.isLive() || !member.hasPosition()) {
             continue;
           }
 
-          builder.unusedMembersBuilder().add(createMemberId(member));
-          if (member.hasPosition()) {
-            unusedLines.add(convertToLineRange(member.getPosition()));
-          }
+          unusedLines.add(convertToLineRange(member.getPosition()));
         }
 
         if (!unusedLines.isEmpty()) {
@@ -66,6 +70,15 @@ abstract class RtaResult {
       }
     }
 
+    if (Boolean.getBoolean("j2clrta.generate_unused_methods_for_testing")) {
+      types.stream()
+          .filter(Type::isLive)
+          .flatMap(t -> t.getMembers().stream())
+          .filter(m -> !m.isLive())
+          .map(m -> m.getDeclaringType().getName() + "#" + m.getName())
+          .forEach(builder.unusedTypesBuilder()::add);
+    }
+
     return builder.setCodeRemovalInfo(codeRemovalInfoBuilder.build()).build();
   }
 
@@ -74,20 +87,5 @@ abstract class RtaResult {
         .setLineStart(position.getStart())
         .setLineEnd(position.getEnd())
         .build();
-  }
-
-  @AutoValue.Builder
-  abstract static class Builder {
-    abstract ImmutableList.Builder<String> unusedTypesBuilder();
-
-    abstract ImmutableList.Builder<String> unusedMembersBuilder();
-
-    abstract Builder setCodeRemovalInfo(CodeRemovalInfo info);
-
-    abstract RtaResult build();
-  }
-
-  private static String createMemberId(Member member) {
-    return member.getDeclaringType().getName() + ":" + member.getName();
   }
 }

@@ -54,21 +54,23 @@ def _j2cl_rta_impl(ctx):
     ).to_list()
 
     unused_types_list = ctx.outputs.unused_types_list
-    unused_members_list = ctx.outputs.unused_members_list
     removal_code_info_file = ctx.outputs.removal_code_info_file
 
     rta_args = ctx.actions.args()
     rta_args.use_param_file("@%s", use_always = True)
     rta_args.add("--unusedTypesOutput", unused_types_list)
-    rta_args.add("--unusedMembersOutput", unused_members_list)
     rta_args.add("--removalCodeInfoOutput", removal_code_info_file)
     rta_args.add_all(all_library_info_files)
+
+    jvm_args = []
+    if ctx.attr.generate_unused_methods_for_testing_do_not_use:
+        jvm_args.append("--jvm_flag=-Dj2clrta.generate_unused_methods_for_testing=true")
 
     # Run rta algorithm
     ctx.actions.run(
         inputs = all_library_info_files,
-        outputs = [unused_types_list, unused_members_list, removal_code_info_file],
-        arguments = [rta_args],
+        outputs = [unused_types_list, removal_code_info_file],
+        arguments = jvm_args + [rta_args],
         progress_message = "Running J2CL rapid type analysis",
         executable = ctx.executable._rta_runner,
         execution_requirements = {"supports-workers": "1"},
@@ -82,7 +84,6 @@ def _j2cl_rta_impl(ctx):
         _J2clRtaInfo(
             unused_types_list = unused_types_list,
             removal_code_info_file = removal_code_info_file,
-            unused_members_list = unused_members_list,
         ),
     ]
 
@@ -90,6 +91,7 @@ j2cl_rta = rule(
     attrs = {
         # TODO(b/114732596): Add a check on targets provided in "targets" field.
         "targets": attr.label_list(aspects = [_library_info_aspect, pmf_file_aspect]),
+        "generate_unused_methods_for_testing_do_not_use": attr.bool(default = False),
         "_rta_runner": attr.label(
             cfg = "host",
             executable = True,
@@ -100,7 +102,6 @@ j2cl_rta = rule(
     },
     outputs = {
         "unused_types_list": "%{name}_unused_types.list",
-        "unused_members_list": "%{name}_unused_members.list",
         "removal_code_info_file": "%{name}_removal_code_info",
         "module_name_list": "%{name}_module_names.list",
     },

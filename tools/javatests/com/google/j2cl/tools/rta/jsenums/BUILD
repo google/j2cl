@@ -16,6 +16,5 @@ j2cl_library(
 rta_test(
     name = "jsenum",
     targets = [":jsenum_library"],
-    unused_members_golden_file = "unused_members.txt",
     unused_types_golden_file = "unused_types.txt",
 )

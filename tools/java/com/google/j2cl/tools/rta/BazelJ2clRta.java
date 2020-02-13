@@ -45,12 +45,6 @@ public class BazelJ2clRta extends BazelWorker {
       required = true)
   String removalCodeInfoOutputFilePath = null;
 
-  @Option(
-      name = "--unusedMembersOutput",
-      usage = "Path of output file containing the list of unused members",
-      required = true)
-  String unusedMembersOutputFilePath = null;
-
   @Argument(required = true, usage = "The list of call graph files", multiValued = true)
   List<String> inputs = null;
 
@@ -62,7 +56,6 @@ public class BazelJ2clRta extends BazelWorker {
     RtaResult rtaResult = RapidTypeAnalyser.analyse(libraryInfos);
 
     writeToFile(unusedTypesOutputFilePath, rtaResult.getUnusedTypes());
-    writeToFile(unusedMembersOutputFilePath, rtaResult.getUnusedMembers());
     writeToFile(removalCodeInfoOutputFilePath, rtaResult.getCodeRemovalInfo());
 
     return new Problems();

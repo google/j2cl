@@ -27,6 +27,5 @@ j2cl_proto_library(
 rta_test(
     name = "proto",
     targets = [":bar_j2cl_proto"],
-    unused_members_golden_file = "unused_members.txt",
     unused_types_golden_file = "unused_types.txt",
 )

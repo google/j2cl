@@ -37,26 +37,17 @@ import org.junit.runners.JUnit4;
 @RunWith(JUnit4.class)
 public class GoldenFileTester {
   private static List<String> unusedTypesFromRta;
-  private static List<String> unusedMembersFromRta;
   private static List<String> unusedTypesFromGoldenFile;
-  private static List<String> unusedMembersFromGoldenFile;
 
   @BeforeClass
   public static void setUp() throws Exception {
     unusedTypesFromRta = readOutputFile(getUnusedTypesOutputFile());
-    unusedMembersFromRta = readOutputFile(getUnusedMembersOutputFile());
     unusedTypesFromGoldenFile = readGoldenFile(getUnusedTypesGoldenFile());
-    unusedMembersFromGoldenFile = readGoldenFile(getUnusedMembersGoldenFile());
   }
 
   @Test
   public void unusedTypesFromRtaEqualsUnusedTypesFromGoldenFile() {
     checkDifferences(unusedTypesFromRta, unusedTypesFromGoldenFile, "unused types");
-  }
-
-  @Test
-  public void unusedMembersFromRtaEqualsUnusedMembersFromGoldenFile() {
-    checkDifferences(unusedMembersFromRta, unusedMembersFromGoldenFile, "unused members");
   }
 
   private static void checkDifferences(
@@ -103,16 +94,8 @@ public class GoldenFileTester {
     return !line.startsWith("#");
   }
 
-  private static String getUnusedMembersGoldenFile() {
-    return System.getProperty("unused_members_golden_file");
-  }
-
   private static String getUnusedTypesGoldenFile() {
     return System.getProperty("unused_types_golden_file");
-  }
-
-  private static String getUnusedMembersOutputFile() {
-    return System.getProperty("unused_members_rta");
   }
 
   private static String getUnusedTypesOutputFile() {
