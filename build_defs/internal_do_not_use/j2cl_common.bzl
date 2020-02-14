@@ -51,35 +51,29 @@ def _compile(
         javac_opts,
     )
 
+    output_jszip = output_jszip or ctx.actions.declare_file("%s.js.zip" % name)
+
     if java_srcs:
-        output_dir = ctx.actions.declare_directory("%s_j2cl_js" % name)
         output_library_info = ctx.actions.declare_file("%s_library_info" % name)
         _j2cl_transpile(
             ctx,
             java_provider,
             js_srcs,
-            output_dir,
+            output_jszip,
             output_library_info,
             internal_transpiler_flags,
         )
         library_info = [output_library_info]
     else:
-        output_dir = None
+        _create_empty_zip(ctx, output_jszip)
         library_info = []
 
-    # A note about the zip file: It will only be created if:
-    #  - tree artifacts are not enabled. In this case the zip file will be part
-    #    of the default outputs of the rule and passed to js provider, or
-    #  - a third party rule depends directly on the zip file. When the zip
-    #    file is requested, the action that creates the zip file will be triggered.
-    output_jszip = output_jszip or ctx.actions.declare_file("%s.js.zip" % name)
-    _create_zip_output(ctx, output_dir, output_jszip)
-
-    output_js = output_dir if _is_tree_artifact_enabled(ctx) else output_jszip
+    generate_tree_artifact = ctx.attr._enable_tree_artifact[BuildSettingInfo].value
+    output_js = _unzip_output(ctx, output_jszip, name) if generate_tree_artifact else output_jszip
 
     # Don't pass anything to the js provider if we didn't transpile anything.
     # This case happens when j2cl_library exports another j2cl_library.
-    js_provider_srcs = [output_js] if output_dir else []
+    js_provider_srcs = [output_js] if java_srcs else []
 
     return J2clInfo(
         _private_ = struct(
@@ -91,31 +85,22 @@ def _compile(
         _is_j2cl_provider = 1,
     )
 
-def _is_tree_artifact_enabled(ctx):
-    return ctx.attr._enable_tree_artifact[BuildSettingInfo].value
+def _unzip_output(ctx, jszip, name):
+    output_dir = ctx.actions.declare_directory("%s_j2cl_js" % name)
 
-def _create_zip_output(ctx, output_dir, jszip):
-    if output_dir:
-        ctx.actions.run_shell(
-            progress_message = "Generating J2CL zip file",
-            inputs = [output_dir],
-            outputs = [jszip],
-            # We use mkdir -p command in order to ensure srcs_dir exists on filesystem
-            # since it may not have been produced by previous actions.
-            command = (
-                "mkdir -p %s && " % output_dir.path +
-                "%s cfM %s -C %s ." % (ctx.executable._jar.path, jszip.path, output_dir.path)
-            ),
-            tools = [ctx.executable._jar],
-            mnemonic = "J2clZip",
-        )
-    else:
-        empty_zip_contents = "\\x50\\x4b\\x05\\x06" + "\\x00" * 18
-        ctx.actions.run_shell(
-            outputs = [jszip],
-            command = "echo -ne  '%s' > '%s'" % (empty_zip_contents, jszip.path),
-            mnemonic = "J2clZip",
-        )
+    ctx.actions.run_shell(
+        progress_message = "Generating TreeArtifact",
+        inputs = [jszip],
+        outputs = [output_dir],
+        command = (
+            "mkdir -p %s && " % output_dir.path +
+            "%s x %s -d %s" % (ctx.executable._zip.path, jszip.path, output_dir.path)
+        ),
+        tools = [ctx.executable._zip],
+        mnemonic = "J2clZip",
+    )
+
+    return output_dir
 
 def _split_deps(deps):
     """ Split the provider deps into Java and JS groups. """
@@ -133,6 +118,15 @@ def _split_deps(deps):
             js_deps.append(d)
 
     return (java_deps, js_deps)
+
+_empty_zip_contents = "\\x50\\x4b\\x05\\x06" + "\\x00" * 18
+
+def _create_empty_zip(ctx, output_js_zip):
+    ctx.actions.run_shell(
+        outputs = [output_js_zip],
+        command = "echo -ne  '%s' > '%s'" % (_empty_zip_contents, output_js_zip.path),
+        mnemonic = "J2clZip",
+    )
 
 def _java_compile(ctx, name, srcs, deps, exports, plugins, exported_plugins, output_jar, javac_opts):
     stripped_java_srcs = [_strip_gwt_incompatible(ctx, name, srcs)] if srcs else []
@@ -245,10 +239,10 @@ J2CL_TOOLCHAIN_ATTRS = {
         cfg = "host",
         executable = True,
     ),
-    "_jar": attr.label(
+    "_zip": attr.label(
         cfg = "host",
         executable = True,
-        default = Label("@bazel_tools//tools/jdk:jar"),
+        default = Label("@bazel_tools//tools/zip:zipper"),
     ),
     "_enable_tree_artifact": attr.label(
         default = Label("//:enable_experimental_tree_artifact_mode"),

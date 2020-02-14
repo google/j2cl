@@ -88,7 +88,10 @@ import com.google.j2cl.ast.visitors.VerifyParamAndArgCounts;
 import com.google.j2cl.ast.visitors.VerifySingleAstReference;
 import com.google.j2cl.ast.visitors.VerifyVariableScoping;
 import com.google.j2cl.common.Problems;
+import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.generator.OutputGeneratorStage;
+import java.io.IOException;
+import java.nio.file.FileSystem;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -138,6 +141,8 @@ class J2clTranspiler {
       return problems;
     } catch (Problems.Exit e) {
       return e.getProblems();
+    } finally {
+      maybeCloseFileSystem();
     }
   }
 
@@ -279,5 +284,17 @@ class J2clTranspiler {
             options.getGenerateKytheIndexingMetadata(),
             problems)
         .generateOutputs(j2clCompilationUnits);
+  }
+
+  private void maybeCloseFileSystem() {
+    FileSystem outputFileSystem = options.getOutput().getFileSystem();
+    if (outputFileSystem.getClass().getCanonicalName().equals("com.sun.nio.zipfs.ZipFileSystem")
+        || outputFileSystem.getClass().getCanonicalName().equals("jdk.nio.zipfs.ZipFileSystem")) {
+      try {
+        outputFileSystem.close();
+      } catch (IOException e) {
+        problems.fatal(FatalError.CANNOT_CLOSE_ZIP, e.getMessage());
+      }
+    }
   }
 }

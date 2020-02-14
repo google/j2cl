@@ -21,7 +21,7 @@ import static com.google.j2cl.transpiler.integration.TranspilerTester.newTesterW
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.zip.ZipFile;
 import junit.framework.TestCase;
 
 /** End to end test for command line invocations. */
@@ -53,7 +53,7 @@ public class CommandLineInvocationTest extends TestCase {
 
     newTesterWithDefaults()
         .addArgs("-frontend", "jdt")
-        .setOutputPath(Files.createTempDirectory("output"))
+        .setOutputPath(Files.createTempFile("output", ".zip"))
         .addCompilationUnit("Foo", "public class Foo {}")
         .assertTranspileSucceeds();
   }
@@ -73,7 +73,7 @@ public class CommandLineInvocationTest extends TestCase {
         .setOutputPath(outputLocation)
         .assertTranspileFails()
         .assertErrorsWithoutSourcePosition(
-            "Output location '" + outputLocation + "' must be a directory.");
+            "Output location '" + outputLocation + "' must be a directory or .zip file.");
   }
 
   public void testMissingJreDependency() {
@@ -203,13 +203,21 @@ public class CommandLineInvocationTest extends TestCase {
         .assertOutputFilesExist("Foo.java.js", "Foo.impl.java.js");
   }
 
-  public void testOutputsToUnknownDirectory() throws IOException {
-    Path outputLocation = Paths.get("/__unknown__/__directory__");
+  public void testOutputsToZipFile() throws IOException {
+    Path outputLocation = Files.createTempFile("output", ".zip");
     newTesterWithDefaults()
         .setOutputPath(outputLocation)
         .setJavaPackage("test")
-        .addCompilationUnit("Foo", "public class Foo {}")
-        .assertTranspileFails()
-        .assertErrorsWithoutSourcePosition("Directory '" + outputLocation + "' not found.");
+        .addCompilationUnit("Foo", "public class Foo {", "  public class InnerFoo {}", "}")
+        .addCompilationUnit("Bar", "public class Bar {", "  public class InnerBar {}", "}")
+        .assertTranspileSucceeds();
+
+    try (ZipFile zipFile = new ZipFile(outputLocation.toFile())) {
+      assertNotNull(zipFile.getEntry("test/Foo.java.js"));
+      assertNotNull(zipFile.getEntry("test/Foo.impl.java.js"));
+      assertNotNull(zipFile.getEntry("test/Bar.java.js"));
+      assertNotNull(zipFile.getEntry("test/Bar.impl.java.js"));
+      assertNull(zipFile.getEntry("some/thing/Bogus.js"));
+    }
   }
 }

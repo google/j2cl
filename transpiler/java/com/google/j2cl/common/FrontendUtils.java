@@ -17,9 +17,13 @@ package com.google.j2cl.common;
 
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.j2cl.common.Problems.FatalError;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -126,18 +130,23 @@ public class FrontendUtils {
     return index == -1 ? path.length() : index + rootPath.length();
   }
 
-  /** Create and validate the output path used by the transpiler. */
-  public static Path initOutputPath(String output, Problems problems) {
+  public static FileSystem initZipOutput(String output, Problems problems) {
     Path outputPath = Paths.get(output);
-    if (!Files.exists(outputPath)) {
-      problems.fatal(FatalError.DIRECTORY_NOT_FOUND, outputPath);
-    }
-
-    if (Files.isRegularFile(outputPath)) {
+    if (Files.isDirectory(outputPath)) {
       problems.fatal(FatalError.OUTPUT_LOCATION, outputPath);
     }
 
-    return outputPath;
+    // Ensures that we will not fail if the zip already exists.
+    outputPath.toFile().delete();
+
+    try {
+      return FileSystems.newFileSystem(
+          URI.create("jar:" + outputPath.toAbsolutePath().toUri()),
+          ImmutableMap.of("create", "true"));
+    } catch (IOException e) {
+      problems.fatal(FatalError.CANNOT_CREATE_ZIP, outputPath, e.getMessage());
+      return null;
+    }
   }
 
   public static void checkSourceFiles(List<String> sourceFiles, String... validExtensions) {

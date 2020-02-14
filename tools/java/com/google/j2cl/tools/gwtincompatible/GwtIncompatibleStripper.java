@@ -14,18 +14,12 @@
 package com.google.j2cl.tools.gwtincompatible;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
 import com.google.j2cl.common.FrontendUtils;
 import com.google.j2cl.common.FrontendUtils.FileInfo;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
 import java.io.IOException;
-import java.net.URI;
 import java.nio.file.FileSystem;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
 /**
@@ -37,7 +31,7 @@ public class GwtIncompatibleStripper {
   static Problems strip(List<String> files, String outputPath) {
     try {
       Problems problems = new Problems();
-      FileSystem outputZipFileSystem = initZipOutput(outputPath, problems);
+      FileSystem outputZipFileSystem = FrontendUtils.initZipOutput(outputPath, problems);
       List<FileInfo> allPaths =
           FrontendUtils.getAllSources(files, problems)
               .filter(f -> f.targetPath().endsWith(".java"))
@@ -52,25 +46,6 @@ public class GwtIncompatibleStripper {
       return problems;
     } catch (Problems.Exit e) {
       return e.getProblems();
-    }
-  }
-
-  private static FileSystem initZipOutput(String output, Problems problems) {
-    Path outputPath = Paths.get(output);
-    if (Files.isDirectory(outputPath)) {
-      problems.fatal(FatalError.OUTPUT_LOCATION, outputPath);
-    }
-
-    // Ensures that we will not fail if the zip already exists.
-    outputPath.toFile().delete();
-
-    try {
-      return FileSystems.newFileSystem(
-          URI.create("jar:" + outputPath.toAbsolutePath().toUri()),
-          ImmutableMap.of("create", "true"));
-    } catch (IOException e) {
-      problems.fatal(FatalError.CANNOT_CREATE_ZIP, outputPath, e.getMessage());
-      return null;
     }
   }
 }
