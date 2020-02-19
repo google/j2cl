@@ -20,6 +20,7 @@ import static com.google.common.base.Preconditions.checkState;
 import com.google.common.base.Predicates;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.Member;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.Type;
@@ -31,6 +32,11 @@ public class VerifyNormalizedUnits {
     // All native methods should be empty.
     compilationUnit.accept(
         new AbstractVisitor() {
+          @Override
+          public void exitField(Field field) {
+            checkState(!field.isNative());
+          }
+
           @Override
           public void exitMethod(Method method) {
             checkState(!method.isNative() || method.getBody().isEmpty());
