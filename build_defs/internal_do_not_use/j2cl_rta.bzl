@@ -12,7 +12,6 @@ load(
     "RTA_ASPECT_ATTRS",
     "get_aspect_providers",
     "get_j2cl_info_from_aspect_providers",
-    "pmf_file_aspect",
     "write_module_names_file",
 )
 
@@ -90,7 +89,7 @@ def _j2cl_rta_impl(ctx):
 j2cl_rta = rule(
     attrs = {
         # TODO(b/114732596): Add a check on targets provided in "targets" field.
-        "targets": attr.label_list(aspects = [_library_info_aspect, pmf_file_aspect]),
+        "targets": attr.label_list(aspects = [_library_info_aspect]),
         "generate_unused_methods_for_testing_do_not_use": attr.bool(default = False),
         "_rta_runner": attr.label(
             cfg = "host",
