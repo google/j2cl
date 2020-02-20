@@ -34,6 +34,7 @@ class J2clTestingVelocityUtil {
     velocityEngine.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
     velocityEngine.setProperty(
         CLASSPATH_RESOURCE_LOADER_CLASS, ClasspathResourceLoader.class.getName());
+    velocityEngine.setProperty("runtime.references.strict", "true");
     velocityEngine.init();
     return velocityEngine;
   }
