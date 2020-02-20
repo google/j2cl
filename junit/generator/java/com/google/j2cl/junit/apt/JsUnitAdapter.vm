@@ -3,6 +3,8 @@
  */
 package ${testClass.jsUnitPackageName()};
 
+import jsinterop.annotations.JsAsync;
+import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
@@ -16,6 +18,16 @@ public class ${testClass.jsUnitAdapterClassName()} {
   private static class GoogTestCase {
     public static native GoogTestCase getActiveTestCase();
     public double promiseTimeout;
+  }
+
+  @JsMethod(namespace = JsPackage.GLOBAL)
+  private static native void await(IThenable<?> thenable);
+
+  private static IThenable<?> asIThenable(Object thenable) {
+    if (thenable == null) {
+      throw new IllegalStateException("Test returned null as its promise");
+    }
+    return (IThenable<?>) thenable;
   }
 
   private ${testClass.qualifiedName()} actualTest;
@@ -32,23 +44,39 @@ public class ${testClass.jsUnitAdapterClassName()} {
 #end
   }
 
-  public void setUp() throws Throwable {
+#if($testClass.needsAsyncSetup())
+  @JsAsync
+#end
+  public IThenable<?> setUp() throws Throwable {
     actualTest = new ${testClass.qualifiedName()}();
 #foreach($beforeMethod in ${testClass.beforeMethods()})
-    actualTest.${beforeMethod.javaMethodName()}();
+#if($beforeMethod.isAsync())
+      await(asIThenable(actualTest.${beforeMethod.javaMethodName()}()));
+#else
+      actualTest.${beforeMethod.javaMethodName()}();
 #end
+#end
+    return null;
   }
 
-  public void tearDown() throws Throwable {
+#if($testClass.needsAsyncTeardown())
+  @JsAsync
+#end
+  public IThenable<?> tearDown() throws Throwable {
     if (actualTest == null) {
       // Test failed to be constructed, thus we can not run its teardown
-      return;
+      return null;
     }
 
     try {
 #foreach($afterMethod in ${testClass.afterMethods()})
+#if($afterMethod.isAsync())
+      await(asIThenable(actualTest.${afterMethod.javaMethodName()}()));
+#else
       actualTest.${afterMethod.javaMethodName()}();
 #end
+#end
+      return null;
     } finally {
       // Ensures that the test instance is always reset to null so that if the
       // next test fails to construct the instance in the setUp, the instance
@@ -59,36 +87,29 @@ public class ${testClass.jsUnitAdapterClassName()} {
 
 #foreach($testMethod in ${testClass.testMethods()})
 #if($testMethod.isAsync())
-#set ($returnType = 'IThenable<?>')
-#else
-#set ($returnType = 'void')
+  @JsAsync
 #end
-  public $returnType ${testMethod.jsTestMethodName()}() throws Throwable {
+  public IThenable<?> ${testMethod.jsTestMethodName()}() throws Throwable {
 #if ($testMethod.expectedExceptionQualifiedName())
     try {
-      actualTest.${testMethod.javaMethodName()}();
-    } catch (${testMethod.expectedExceptionQualifiedName()} e) {
-#if($testMethod.isAsync())
-      return null;
-#else
-      return;
 #end
+
+#if($testMethod.isAsync())
+      GoogTestCase.getActiveTestCase().promiseTimeout = ${testMethod.timeout()};
+      await(asIThenable(actualTest.${testMethod.javaMethodName()}()));
+#else
+      actualTest.${testMethod.javaMethodName()}();
+#end
+
+#if ($testMethod.expectedExceptionQualifiedName())
+    } catch (${testMethod.expectedExceptionQualifiedName()} e) {
+      return null;
     }
     throw new Exception("expected exception was not thrown");
+#else
+    return null;
+#end
 
-#else
-#if($testMethod.isAsync())
-   GoogTestCase.getActiveTestCase().promiseTimeout = ${testMethod.timeout()};
-   IThenable<?> promise = (IThenable<?>)(Object)(actualTest.${testMethod.javaMethodName()}());
-   if (promise == null) {
-     throw new IllegalStateException("Test returned null as its promise");
-   }
-   return promise;
-#else
-   actualTest.${testMethod.javaMethodName()}();
-#end
-#end
   }
-
 #end
 }

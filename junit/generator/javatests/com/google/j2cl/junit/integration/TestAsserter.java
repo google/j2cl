@@ -73,9 +73,9 @@ public class TestAsserter {
   }
 
   private void assertTestResults() {
-    testResult.succeeds().stream().forEach(this::assertTestMethodSucceeded);
-    testResult.fails().entrySet().stream().forEach(this::assertTestMethodFailed);
-    testResult.errors().entrySet().stream().forEach(this::assertTestMethodFailed);
+    testResult.succeeds().forEach(this::assertTestMethodSucceeded);
+    testResult.fails().entries().forEach(this::assertTestMethodFailed);
+    testResult.errors().entrySet().forEach(this::assertTestMethodFailed);
   }
 
   private void assertLogLines() {

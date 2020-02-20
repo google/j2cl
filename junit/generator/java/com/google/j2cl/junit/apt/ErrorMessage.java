@@ -28,10 +28,13 @@ enum ErrorMessage {
   HAS_ARGS("Method %s cannot have arguments."),
   IS_STATIC("Method %s cannot be static."),
   NON_PUBLIC("Method %s cannot be non-public."),
-  HAS_TIMEOUT("Method %s has timeout attribute but doesn't return a promise-like type."),
+  NON_ASYNC_HAS_TIMEOUT("Method %s has timeout but doesn't return a promise-like type."),
   ASYNC_HAS_EXPECTED_EXCEPTION(
       "Method %s has expectedException attribute but returns a promise-like type."),
-  ASYNC_NO_TIMEOUT("Method %s is missing @Test timeout attribute but returns a promise-like type."),
+  ASYNC_HAS_NO_TIMEOUT("Method %s is missing timeout but returns a promise-like type."),
+  TEST_HAS_TIMEOUT_ANNOTATION(
+      "Method %s cannot have @Timeout annotation. @Timeout can only be used with @Before/@After. "
+          + "Test methods should use @Test(timeout=x) instead."),
   NON_TOP_LEVEL_TYPE("Type %s is not a top level class."),
   SKIPPED_TYPE("Type %s is not a JUnit test or a JUnit4 style suite. Skipped.", Kind.WARNING),
   EMPTY_SUITE("Test suite %s doesn't include any tests."),

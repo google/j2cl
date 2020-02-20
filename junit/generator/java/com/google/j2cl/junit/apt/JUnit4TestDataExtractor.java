@@ -26,7 +26,7 @@ import java.lang.annotation.Annotation;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.function.Predicate;
+import java.util.stream.Stream;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Modifier;
@@ -50,9 +50,9 @@ class JUnit4TestDataExtractor {
         .simpleName(typeElement.getSimpleName().toString())
         .qualifiedName(typeElement.getQualifiedName().toString())
         .testMethods(getTestMethods(typeElement))
-        .beforeMethods(getAnnotatedMethods(typeHierarchy.reverse(), Before.class))
+        .beforeMethods(getAnnotatedMethods(typeHierarchy, Before.class).reverse())
         .afterMethods(getAnnotatedMethods(typeHierarchy, After.class))
-        .beforeClassMethods(getAnnotatedMethods(typeHierarchy.reverse(), BeforeClass.class))
+        .beforeClassMethods(getAnnotatedMethods(typeHierarchy, BeforeClass.class).reverse())
         .afterClassMethods(getAnnotatedMethods(typeHierarchy, AfterClass.class))
         .build();
   }
@@ -73,7 +73,8 @@ class JUnit4TestDataExtractor {
       methods.addAll(getTestMethods(asTypeElement(typeElement.getSuperclass())));
     }
 
-    Predicate<? super Element> isIgnored = TestingPredicates.hasAnnotation(Ignore.class);
+    // Add declared methods.
+    getAnnotatedMethodStream(typeElement, Test.class).forEach(methods::add);
 
     // Remove ignored methods.
     ElementFilter.methodsIn(typeElement.getEnclosedElements()).stream()
@@ -82,16 +83,9 @@ class JUnit4TestDataExtractor {
         // should be inherited; so in our implementation we honour @Ignore whether @Test is also
         // defined in the method.
         // (See: https://github.com/junit-team/junit4/issues/695
-        .filter(isIgnored)
+        .filter(TestingPredicates.hasAnnotation(Ignore.class))
         .map(JUnit4TestDataExtractor::toTestMethod)
         .forEach(methods::remove);
-
-    // Add declared methods.
-    ElementFilter.methodsIn(typeElement.getEnclosedElements()).stream()
-        .filter(TestingPredicates.hasAnnotation(Test.class))
-        .filter(isIgnored.negate())
-        .map(JUnit4TestDataExtractor::toTestMethod)
-        .forEach(methods::add);
 
     return ImmutableList.sortedCopyOf(MethodSorter.getTestSorter(typeElement), methods);
   }
@@ -99,13 +93,17 @@ class JUnit4TestDataExtractor {
   private ImmutableList<TestMethod> getAnnotatedMethods(
       List<TypeElement> typeHierarchy, Class<? extends Annotation> annotation) {
     return typeHierarchy.stream()
-        .flatMap(
-            t ->
-                ElementFilter.methodsIn(t.getEnclosedElements()).stream()
-                    .filter(TestingPredicates.hasAnnotation(annotation))
-                    .map(JUnit4TestDataExtractor::toTestMethod))
+        .flatMap(t -> getAnnotatedMethodStream(t, annotation))
         .distinct()
         .collect(toImmutableList());
+  }
+
+  private static Stream<TestMethod> getAnnotatedMethodStream(
+      TypeElement type, Class<? extends Annotation> annotation) {
+    return ElementFilter.methodsIn(type.getEnclosedElements()).stream()
+        .filter(TestingPredicates.hasAnnotation(annotation))
+        .map(JUnit4TestDataExtractor::toTestMethod)
+        .sorted(MethodSorter.getTestSorter(type));
   }
 
   public static TestMethod toTestMethod(ExecutableElement element) {

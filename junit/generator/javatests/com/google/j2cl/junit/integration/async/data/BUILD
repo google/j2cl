@@ -55,6 +55,11 @@ j2cl_test_integration_test_data(
 )
 
 j2cl_test_integration_test_data(
+    name = "TestMethodOrder",
+    deps = ASYNC_TEST_DEPS,
+)
+
+j2cl_test_integration_test_data(
     name = "TestStructuralThenable",
     deps = ASYNC_TEST_DEPS,
 )
@@ -106,10 +111,5 @@ j2cl_test_integration_test_data(
 
 j2cl_test_integration_test_data(
     name = "TestWithExpectedException",
-    deps = ASYNC_TEST_DEPS,
-)
-
-j2cl_test_integration_test_data(
-    name = "TestWithLifeCycleMethodBeingAsync",
     deps = ASYNC_TEST_DEPS,
 )

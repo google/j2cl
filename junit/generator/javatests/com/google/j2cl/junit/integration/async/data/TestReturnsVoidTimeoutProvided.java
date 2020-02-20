@@ -16,12 +16,23 @@
 package com.google.j2cl.junit.integration.async.data;
 
 import com.google.j2cl.junit.async.AsyncTestRunner;
+import com.google.j2cl.junit.async.Timeout;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /** Test for timeout in a non asyncTest */
 @RunWith(AsyncTestRunner.class)
 public class TestReturnsVoidTimeoutProvided {
+  @Timeout(200)
+  @Before
+  public void before() {}
+
+  @Timeout(200)
+  @After
+  public void after() {}
+
   @Test(timeout = 200)
   public void test() {}
 }

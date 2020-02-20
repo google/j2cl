@@ -29,7 +29,6 @@ import com.google.j2cl.junit.integration.async.data.TestReturnTypeNotStructuralP
 import com.google.j2cl.junit.integration.async.data.TestReturnsVoidTimeoutProvided;
 import com.google.j2cl.junit.integration.async.data.TestTimeOutNotProvided;
 import com.google.j2cl.junit.integration.async.data.TestWithExpectedException;
-import com.google.j2cl.junit.integration.async.data.TestWithLifeCycleMethodBeingAsync;
 import com.google.testing.compile.CompilationRule;
 import javax.annotation.processing.Filer;
 import javax.annotation.processing.Messager;
@@ -100,22 +99,6 @@ public class J2clTestingProcessingStepTest {
   }
 
   @Test
-  public void testJUnit4NonVoidReturnTypeMethod() {
-    assertError(
-        ErrorMessage.NON_PROMISE_RETURN,
-        TestReturnTypeNotStructuralPromise.class,
-        "returnTypeNotStructuralPromise");
-  }
-
-  @Test
-  public void testJUnit4NotProperThenableReturnType() {
-    assertError(
-        ErrorMessage.NON_PROMISE_RETURN,
-        TestReturnTypeNotStructuralPromiseThenNameRedefined.class,
-        "returnTypeNotQuiteThenable");
-  }
-
-  @Test
   public void testJUnit4ArgumentsOnMethod() {
     assertError(ErrorMessage.HAS_ARGS, JUnit4TestCaseWithArgumentsOnMethod.class, "test");
   }
@@ -137,6 +120,7 @@ public class J2clTestingProcessingStepTest {
     J2clTestingProcessingStep step = createProcessor();
     step.writeSummary();
     verifyPrintMessage(ErrorMessage.NO_TEST_INPUT, null);
+    verifyNoMoreInteractions(messager);
   }
 
   @Test
@@ -172,7 +156,12 @@ public class J2clTestingProcessingStepTest {
 
   @Test
   public void testAsyncTestWithoutTimeout() {
-    assertError(ErrorMessage.ASYNC_NO_TIMEOUT, TestTimeOutNotProvided.class, "doesNotHaveTimeout");
+    assertError(
+        ErrorMessage.ASYNC_HAS_NO_TIMEOUT,
+        TestTimeOutNotProvided.class,
+        "doesNotHaveTimeout",
+        "before",
+        "after");
   }
 
   @Test
@@ -181,8 +170,21 @@ public class J2clTestingProcessingStepTest {
   }
 
   @Test
-  public void testAsyncTestWithLifeCycleMethodBeingAsync() {
-    assertError(ErrorMessage.NON_VOID_RETURN, TestWithLifeCycleMethodBeingAsync.class, "before");
+  public void testAsyncTestNonVoidReturnTypeMethod() {
+    assertError(
+        ErrorMessage.NON_PROMISE_RETURN,
+        TestReturnTypeNotStructuralPromise.class,
+        "returnTypeNotStructuralPromise",
+        "before",
+        "after");
+  }
+
+  @Test
+  public void testAsyncTestThenNameRedefined() {
+    assertError(
+        ErrorMessage.NON_PROMISE_RETURN,
+        TestReturnTypeNotStructuralPromiseThenNameRedefined.class,
+        "returnTypeNotQuiteThenable");
   }
 
   @Test
@@ -203,7 +205,12 @@ public class J2clTestingProcessingStepTest {
 
   @Test
   public void testNonAsyncTestProvidesTimeout() {
-    assertError(ErrorMessage.HAS_TIMEOUT, TestReturnsVoidTimeoutProvided.class, "test");
+    assertError(
+        ErrorMessage.NON_ASYNC_HAS_TIMEOUT,
+        TestReturnsVoidTimeoutProvided.class,
+        "test",
+        "before",
+        "after");
   }
 
   @Test
@@ -220,23 +227,20 @@ public class J2clTestingProcessingStepTest {
     assertThat(concreteTestClass.testMethods()).isEmpty();
   }
 
-  private void assertError(ErrorMessage expectedError, Class<?> testClass) {
-    assertMessage(expectedError, testClass.getCanonicalName(), testClass);
-  }
-
-  private void assertError(ErrorMessage expectedError, Class<?> testClass, String methodName) {
-    assertMessage(expectedError, testClass.getCanonicalName() + "." + methodName, testClass);
-  }
-
-  private void assertMessage(ErrorMessage expectedError, String errorArg, Class<?> test) {
-    TestClass testClass = executeProcessorOnTest(test);
-    assertThat(testClass).isNull();
-    verifyPrintMessage(expectedError, errorArg);
+  private void assertError(ErrorMessage expectedError, Class<?> testClass, String... methodNames) {
+    assertThat(executeProcessorOnTest(testClass)).isNull();
+    if (methodNames.length == 0) {
+      verifyPrintMessage(expectedError, testClass.getCanonicalName());
+    } else {
+      for (String methodName : methodNames) {
+        verifyPrintMessage(expectedError, testClass.getCanonicalName() + "." + methodName);
+      }
+    }
+    verifyNoMoreInteractions(messager);
   }
 
   private void verifyPrintMessage(ErrorMessage expectedError, String errorArg) {
     verify(messager).printMessage(expectedError.kind(), expectedError.format(errorArg));
-    verifyNoMoreInteractions(messager);
   }
 
   private TestClass executeProcessorOnTest(Class<?> test) {

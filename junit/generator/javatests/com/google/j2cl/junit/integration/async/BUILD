@@ -15,6 +15,7 @@ j2cl_test_integration_test(
     test_data = [
         "//junit/generator/javatests/com/google/j2cl/junit/integration/async/data:TestAfterWithFailingAsyncTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/async/data:TestChainingWithException",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/async/data:TestMethodOrder",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/async/data:TestNonAsyncTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/async/data:TestResolvesAfterDelay",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/async/data:TestReturnsNullForPromise",
@@ -27,7 +28,6 @@ j2cl_test_integration_test(
         "//junit/generator/javatests/com/google/j2cl/junit/integration/async/data:TestReturnTypeNotStructuralPromiseThenParameterCount",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/async/data:TestReturnTypeNotStructuralPromiseThenParameterNotJsType",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/async/data:TestTimeOutNotProvided",
-        "//junit/generator/javatests/com/google/j2cl/junit/integration/async/data:TestWithLifeCycleMethodBeingAsync",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/async/data:TestWithExpectedException",
     ],
     deps = ["//junit/generator/java/com/google/j2cl/junit/async"],

@@ -38,6 +38,14 @@ public abstract class TestClass {
   public abstract ImmutableList<TestMethod> beforeClassMethods();
   public abstract ImmutableList<TestMethod> afterClassMethods();
 
+  public boolean needsAsyncSetup() {
+    return beforeMethods().stream().anyMatch(TestMethod::isAsync);
+  }
+
+  public boolean needsAsyncTeardown() {
+    return beforeMethods().stream().anyMatch(TestMethod::isAsync);
+  }
+
   public String jsUnitPackageName() {
     return "javatests." + packageName();
   }

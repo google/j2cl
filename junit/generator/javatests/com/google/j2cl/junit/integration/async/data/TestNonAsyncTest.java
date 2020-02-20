@@ -16,13 +16,26 @@
 package com.google.j2cl.junit.integration.async.data;
 
 import com.google.j2cl.junit.async.AsyncTestRunner;
+import com.google.j2cl.junit.integration.testlogger.TestCaseLogger;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(AsyncTestRunner.class)
 public class TestNonAsyncTest {
+  @Before
+  public void before() {
+    TestCaseLogger.log("Before method ran!");
+  }
+
+  @After
+  public void after() {
+    TestCaseLogger.log("After method ran!");
+  }
+
   @Test
   public void test() {
-    System.out.println("test method ran!");
+    TestCaseLogger.log("test method ran!");
   }
 }

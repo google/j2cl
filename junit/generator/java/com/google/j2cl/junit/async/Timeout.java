@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Google Inc.
+ * Copyright 2019 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -13,22 +13,16 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.junit.integration.async.data;
+package com.google.j2cl.junit.async;
 
-import com.google.j2cl.junit.async.AsyncTestRunner;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-/** Test async methods in life cycle */
-@RunWith(AsyncTestRunner.class)
-public class TestWithLifeCycleMethodBeingAsync {
-
-  @Before
-  public Thenable before() {
-    return null;
-  }
-
-  @Test
-  public void test() {}
+/** Defines a timeout for JUnit lifecycle methods. */
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface Timeout {
+  long value();
 }

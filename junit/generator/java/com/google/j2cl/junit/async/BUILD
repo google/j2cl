@@ -7,7 +7,7 @@ load("//build_defs:rules.bzl", "j2cl_library")
 package(
     default_visibility = [
         "//:__pkg__",
-        "//junit/generator/javatests/com/google/j2cl/junit:__subpackages__",
+        "//junit/generator:__subpackages__",
     ],
     licenses = ["notice"],  # Apache 2.0
 )
@@ -17,6 +17,7 @@ java_library(
     testonly = 1,
     srcs = [
         "AsyncTestRunner.java",
+        "Timeout.java",
     ],
     deps = [
         "//third_party:guava",
@@ -28,6 +29,7 @@ j2cl_library(
     name = "async-j2cl",
     testonly = 1,
     srcs = [
+        "Timeout.java",
         "super/AsyncTestRunner.java",
     ],
     deps = [

@@ -15,7 +15,6 @@ java_library(
         "//junit/generator/javatests/com/google/j2cl/junit/integration/async/data:TestReturnsVoidTimeoutProvided-lib",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/async/data:TestTimeOutNotProvided-lib",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/async/data:TestWithExpectedException-lib",
-        "//junit/generator/javatests/com/google/j2cl/junit/integration/async/data:TestWithLifeCycleMethodBeingAsync-lib",
         "//third_party:auto_common",
         "//third_party:auto_service",
         "//third_party:compile_testing",

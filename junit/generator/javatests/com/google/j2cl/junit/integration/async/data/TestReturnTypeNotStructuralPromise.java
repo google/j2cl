@@ -16,12 +16,24 @@
 package com.google.j2cl.junit.integration.async.data;
 
 import com.google.j2cl.junit.async.AsyncTestRunner;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /** Integration test used in J2clTestRunnerTest. */
 @RunWith(AsyncTestRunner.class)
 public class TestReturnTypeNotStructuralPromise {
+  @Before
+  public Object before() {
+    return null;
+  }
+
+  @After
+  public Object after() {
+    return null;
+  }
+
   @Test
   public Object returnTypeNotStructuralPromise() {
     return null;

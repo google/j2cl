@@ -82,6 +82,14 @@ class JUnit3Validator extends BaseValidator {
     return isValid;
   }
 
+  private final boolean validateMethodVoidReturn(ExecutableElement executableElement) {
+    if (!TestingPredicates.RETURN_TYPE_VOID_PREDICATE.apply(executableElement)) {
+      errorReporter.report(ErrorMessage.NON_VOID_RETURN, executableElement);
+      return false;
+    }
+    return true;
+  }
+
   private boolean hasTestCaseAsParentClass(TypeElement typeElement) {
     return MoreApt.getClassHierarchy(typeElement)
         .stream()

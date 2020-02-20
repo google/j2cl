@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.junit.async;
 
-import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.reflect.Reflection;
@@ -24,14 +23,18 @@ import com.google.common.util.concurrent.SettableFuture;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
+import org.junit.runners.model.MultipleFailureException;
 import org.junit.runners.model.Statement;
 
 /**
@@ -48,10 +51,12 @@ public class AsyncTestRunner extends BlockJUnit4ClassRunner {
           + "'then' method that has 'success' and 'failure' callback parameters.";
 
   public enum ErrorMessage {
-    ASYNC_NO_TIMEOUT(
-        "Method %s is missing @Test timeout attribute but returns a promise-like type."),
     ASYNC_HAS_EXPECTED_EXCEPTION(
         "Method %s has expectedException attribute but returns a promise-like type."),
+    ASYNC_HAS_NO_TIMEOUT("Method %s is missing timeout but returns a promise-like type."),
+    TEST_HAS_TIMEOUT_ANNOTATION(
+        "Method %s cannot have Timeout annotation. @Timeout is only for lifecycle methods. "
+            + "Test methods should use @Test(timeout=x) instead."),
     NO_THEN_METHOD(
         "Type %s is not a promise-like type. It's missing a 'then' method with two parameters. "
             + PROMISE_LIKE),
@@ -182,16 +187,49 @@ public class AsyncTestRunner extends BlockJUnit4ClassRunner {
     return new PromiseStatement(method, test);
   }
 
+  @Override
+  protected Statement withBefores(FrameworkMethod method, Object target, Statement next) {
+    List<FrameworkMethod> befores = getTestClass().getAnnotatedMethods(Before.class);
+    return new Statement() {
+      @Override
+      public void evaluate() throws Throwable {
+        for (FrameworkMethod m : befores) {
+          methodInvoker(m, target).evaluate();
+        }
+        next.evaluate();
+      }
+    };
+  }
+
+  @Override
+  protected Statement withAfters(FrameworkMethod method, Object target, Statement next) {
+    List<FrameworkMethod> afters = getTestClass().getAnnotatedMethods(After.class);
+    return new Statement() {
+      @Override
+      public void evaluate() throws Throwable {
+        ArrayList<Throwable> errors = new ArrayList<>();
+        try {
+          next.evaluate();
+        } catch (Throwable e) {
+          errors.add(e);
+        } finally {
+          for (FrameworkMethod m : afters) {
+            try {
+              methodInvoker(m, target).evaluate();
+            } catch (Throwable e) {
+              errors.add(e);
+            }
+          }
+        }
+        MultipleFailureException.assertEmpty(errors);
+      }
+    };
+  }
+
   // Needs to be overridden to allow for non void return type
   @Override
   protected void validatePublicVoidNoArgMethods(
       Class<? extends Annotation> annotation, boolean isStatic, List<Throwable> errors) {
-
-    if (!annotation.equals(Test.class)) {
-      super.validatePublicVoidNoArgMethods(annotation, isStatic, errors);
-      return;
-    }
-
     List<FrameworkMethod> methods = getTestClass().getAnnotatedMethods(annotation);
 
     for (FrameworkMethod eachTestMethod : methods) {
@@ -201,8 +239,6 @@ public class AsyncTestRunner extends BlockJUnit4ClassRunner {
 
   private void validateTestMethod(
       boolean isStatic, List<Throwable> errors, FrameworkMethod testMethod) {
-    checkArgument(testMethod.getAnnotation(Test.class) != null);
-    Test testAnnotation = testMethod.getAnnotation(Test.class);
     Class<?> returnType = testMethod.getReturnType();
 
     // taken from FrameworkMethod.validatePublicVoid
@@ -229,12 +265,20 @@ public class AsyncTestRunner extends BlockJUnit4ClassRunner {
       return;
     }
 
+    Test testAnnotation = testMethod.getAnnotation(Test.class);
+    Timeout timeoutAnnotation = testMethod.getAnnotation(Timeout.class);
+    long timeout =
+        testAnnotation != null
+            ? testAnnotation.timeout()
+            : timeoutAnnotation != null ? timeoutAnnotation.value() : 0;
+
     // Make sure we have a value greater than zero for test timeout
-    if (testAnnotation.timeout() <= 0) {
-      errors.add(makeError(ErrorMessage.ASYNC_NO_TIMEOUT.format(testMethod.getMethod().getName())));
+    if (timeout <= 0) {
+      errors.add(
+          makeError(ErrorMessage.ASYNC_HAS_NO_TIMEOUT.format(testMethod.getMethod().getName())));
     }
 
-    if (!testAnnotation.expected().equals(Test.None.class)) {
+    if (testAnnotation != null && !testAnnotation.expected().equals(Test.None.class)) {
       errors.add(
           makeError(
               ErrorMessage.ASYNC_HAS_EXPECTED_EXCEPTION.format(testMethod.getMethod().getName())));

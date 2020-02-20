@@ -51,12 +51,4 @@ class BaseValidator {
     }
     return true;
   }
-
-  protected final boolean validateMethodVoidReturn(ExecutableElement executableElement) {
-    if (!TestingPredicates.RETURN_TYPE_VOID_PREDICATE.apply(executableElement)) {
-      errorReporter.report(ErrorMessage.NON_VOID_RETURN, executableElement);
-      return false;
-    }
-    return true;
-  }
 }

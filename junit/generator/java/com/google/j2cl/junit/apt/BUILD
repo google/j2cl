@@ -26,6 +26,7 @@ java_library(
     resources = glob(["*.vm"]),
     visibility = ["//junit/generator/javatests/com/google/j2cl/junit/apt:__pkg__"],
     deps = [
+        "//junit/generator/java/com/google/j2cl/junit/async",
         "//third_party:auto_common",
         "//third_party:auto_service",
         "//third_party:auto_value",

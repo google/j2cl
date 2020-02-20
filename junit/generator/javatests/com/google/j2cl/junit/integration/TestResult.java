@@ -18,13 +18,14 @@ package com.google.j2cl.junit.integration;
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableMultimap;
 
 @AutoValue
 public abstract class TestResult {
 
   abstract ImmutableList<String> succeeds();
 
-  abstract ImmutableMap<String, String> fails();
+  abstract ImmutableMultimap<String, String> fails();
 
   abstract ImmutableMap<String, String> errors();
 
@@ -47,7 +48,7 @@ public abstract class TestResult {
 
     abstract ImmutableList.Builder<String> succeedsBuilder();
 
-    abstract ImmutableMap.Builder<String, String> failsBuilder();
+    abstract ImmutableMultimap.Builder<String, String> failsBuilder();
 
     abstract ImmutableMap.Builder<String, String> errorsBuilder();
 

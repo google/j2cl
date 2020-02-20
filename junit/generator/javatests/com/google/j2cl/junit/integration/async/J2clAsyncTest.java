@@ -70,7 +70,11 @@ public class J2clAsyncTest extends IntegrationTestBase {
   public void testNonAsyncTest() throws Exception {
     String testName = "TestNonAsyncTest";
     TestResult testResult =
-        newTestResultBuilder().testClassName(testName).addTestSuccess("test").build();
+        newTestResultBuilder()
+            .testClassName(testName)
+            .addTestSuccess("test")
+            .addJavaLogLineSequence("Before method ran!", "test method ran!", "After method ran!")
+            .build();
 
     List<String> logLines = runTest(testName);
     assertThat(logLines).matches(testResult);
@@ -85,6 +89,21 @@ public class J2clAsyncTest extends IntegrationTestBase {
             .addTestSuccess("testResolvesAfterDelay1")
             .addTestSuccess("testResolvesAfterDelay2")
             .addTestSuccess("testResolvesAfterDelay3")
+            .build();
+
+    List<String> logLines = runTest(testName);
+    assertThat(logLines).matches(testResult);
+  }
+
+  @Test
+  public void testMethodOrder() throws Exception {
+    String testName = "TestMethodOrder";
+    TestResult testResult =
+        newTestResultBuilder()
+            .testClassName(testName)
+            .addTestSuccess("test")
+            .addJavaLogLineSequence(
+                "before3", "before2", "before1", "test", "after1", "after2", "after3")
             .build();
 
     List<String> logLines = runTest(testName);
@@ -139,6 +158,10 @@ public class J2clAsyncTest extends IntegrationTestBase {
     TestResult testResult =
         newTestResultBuilder()
             .testClassName(testName)
+            .addTestFailure(
+                "initializationError", ErrorMessage.NO_THEN_METHOD.format("java.lang.Object"))
+            .addTestFailure(
+                "initializationError", ErrorMessage.NO_THEN_METHOD.format("java.lang.Object"))
             .addTestFailure(
                 "initializationError", ErrorMessage.NO_THEN_METHOD.format("java.lang.Object"))
             .build();
@@ -273,28 +296,13 @@ public class J2clAsyncTest extends IntegrationTestBase {
             .testClassName(testName)
             .addTestFailure(
                 "initializationError",
-                AsyncTestRunner.ErrorMessage.ASYNC_NO_TIMEOUT.format("doesNotHaveTimeout"))
-            .build();
-
-    List<String> logLines = runTest(testName);
-    assertThat(logLines).matches(testResult);
-  }
-
-  @Test
-  public void testWithLifeCycleMethodBeingAsync() throws Exception {
-    if (testMode.isJ2cl()) {
-      // No j2cl version of this test since these would be a compile error and thus are handled
-      // in our APT unit tests
-      return;
-    }
-
-    String testName = "TestWithLifeCycleMethodBeingAsync";
-
-    TestResult testResult =
-        newTestResultBuilder()
-            .testClassName(testName)
+                AsyncTestRunner.ErrorMessage.ASYNC_HAS_NO_TIMEOUT.format("before"))
             .addTestFailure(
-                "initializationError", "java.lang.Exception: Method before() should be void")
+                "initializationError",
+                AsyncTestRunner.ErrorMessage.ASYNC_HAS_NO_TIMEOUT.format("after"))
+            .addTestFailure(
+                "initializationError",
+                AsyncTestRunner.ErrorMessage.ASYNC_HAS_NO_TIMEOUT.format("doesNotHaveTimeout"))
             .build();
 
     List<String> logLines = runTest(testName);
