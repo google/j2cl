@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.junit.apt;
 
-import static com.google.auto.common.MoreElements.isAnnotationPresent;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.j2cl.junit.apt.MoreApt.asTypeElement;
@@ -58,12 +57,6 @@ class JUnit4TestDataExtractor {
   }
 
   private static ImmutableList<TestMethod> getTestMethods(TypeElement typeElement) {
-
-    // Ignore tests in this class and supertypes.
-    if (isAnnotationPresent(typeElement, Ignore.class)) {
-      return ImmutableList.of();
-    }
-
     // Collect inherited methods
     Set<TestMethod> methods = new LinkedHashSet<>();
     for (TypeMirror ifce : typeElement.getInterfaces()) {

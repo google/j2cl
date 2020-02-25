@@ -23,20 +23,7 @@ import org.junit.runners.JUnit4;
 /** A unit test to test processing handling of class level ignore. */
 @RunWith(JUnit4.class)
 @Ignore
-public class JUnit4ClassLevelIgnoreTestCase extends JUnit4AbstractTestCase {
-  @Override
+public class JUnit4ClassLevelIgnoreTestCase {
   @Test
-  public void testOverriddenWithTest() {}
-
-  @Override
-  public void testOverriddenWithoutTest() {}
-
-  @Override
-  @Test
-  @Ignore
-  public void testOverriddenWithTestAndIgnore() {}
-
-  @Override
-  @Ignore
-  public void testOverriddenWithIgnoreButNoTest() {}
+  public void test() {}
 }

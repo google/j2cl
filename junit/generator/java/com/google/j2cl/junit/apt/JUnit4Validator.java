@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.junit.apt;
 
+import static com.google.auto.common.MoreElements.isAnnotationPresent;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.j2cl.junit.async.Timeout;
@@ -41,6 +42,7 @@ class JUnit4Validator extends BaseValidator {
 
     boolean isValid = true;
     for (TypeElement type : MoreApt.getClassHierarchy(typeElement)) {
+      isValid &= validateType(type);
       isValid &= validateMethods(getAllMethodsAnnotatedWithTest(type));
       isValid &= validateMethods(getAllMethodsAnnotatedWithAfter(type));
       isValid &= validateMethods(getAllMethodsAnnotatedWithBefore(type));
@@ -54,6 +56,14 @@ class JUnit4Validator extends BaseValidator {
         .stream()
         .flatMap(input -> ElementFilter.methodsIn(input.getEnclosedElements()).stream())
         .anyMatch(TestingPredicates.hasAnnotation(Test.class));
+  }
+
+  private final boolean validateType(TypeElement type) {
+    if (isAnnotationPresent(type, Ignore.class)) {
+      errorReporter.report(ErrorMessage.IGNORE_ON_TYPE, type);
+      return false;
+    }
+    return true;
   }
 
   private final boolean validateMethods(List<ExecutableElement> methods) {

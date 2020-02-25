@@ -223,8 +223,7 @@ public class J2clTestingProcessingStepTest {
 
   @Test
   public void testClassLevelIgnore() {
-    TestClass concreteTestClass = executeProcessorOnTest(JUnit4ClassLevelIgnoreTestCase.class);
-    assertThat(concreteTestClass.testMethods()).isEmpty();
+    assertError(ErrorMessage.IGNORE_ON_TYPE, JUnit4ClassLevelIgnoreTestCase.class);
   }
 
   private void assertError(ErrorMessage expectedError, Class<?> testClass, String... methodNames) {
