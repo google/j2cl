@@ -17,9 +17,11 @@
  */
 goog.module('foo.test.Test');
 
+const Enum = goog.require('java.lang.Enum');
+
 class Test {
   /**
-   * @param {*} anyEnum
+   * @param {!Enum} anyEnum
    * @return {?string}
    */
   static getName(anyEnum) {
@@ -27,7 +29,7 @@ class Test {
   }
 
   /**
-   * @param {*} anyEnum
+   * @param {!Enum} anyEnum
    * @return {number}
    */
   static getOrdinal(anyEnum) {
@@ -35,8 +37,8 @@ class Test {
   }
 
   /**
-   * @param {*} enumA
-   * @param {*} enumB
+   * @param {!Enum} enumA
+   * @param {!Enum} enumB
    * @return {number}
    */
   static compare(enumA, enumB) {
