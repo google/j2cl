@@ -17,6 +17,7 @@ package com.google.j2cl.junit.integration;
 
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.truth.Truth.assertThat;
+import static com.google.common.truth.Truth8.assertThat;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -62,13 +63,25 @@ public class TestAsserter {
   }
 
   private void assertTestSummary() {
-    int testCount =
-        testResult.succeeds().size() + testResult.fails().size() + testResult.errors().size();
+    int fails = testResult.fails().size();
+    int errors = testResult.errors().size();
+    int succeeds = testResult.succeeds().size();
+    int testCount = fails + errors + succeeds;
 
-    if (testResult.succeeds().size() == testCount) {
-      assertTestSummaryForSuccess(testResult.succeeds().size());
+    if (testMode.isJ2cl()) {
+      // Like Junit4, J2CL always counts errors as failures
+      fails += errors;
+      errors = 0;
+      // TODO(b/32608089): jsunit_test does not report number of tests correctly
+      testCount = 1;
+      // Since total number of tests cannot be asserted; ensure nummber of succeeds is correct.
+      assertThat(consoleLogs.stream().filter(x -> x.contains(": PASSED"))).hasSize(succeeds);
+    }
+
+    if (fails + errors > 0) {
+      assertTestSummaryForFailure(fails, errors, testCount);
     } else {
-      assertTestSummaryForFailure(testResult.fails().size(), testResult.errors().size(), testCount);
+      assertTestSummaryForSuccess(testCount);
     }
   }
 
@@ -114,31 +127,15 @@ public class TestAsserter {
   }
 
   private void assertTestSummaryForFailure(int failures, int errors, int total) {
-    assertLogsContains("FAILURES!!!");
-
-    if (testMode.isJ2cl()) {
-      // TODO(b/32608089): jsunit_test does not report number of tests correctly
-      total = 1;
-    }
-
-    // Like Junit4, J2CL always counts errors as failures
-    if (testMode.isJ2cl()) {
-      failures += errors;
-      errors = 0;
-    }
-
     if (errors == 0) {
       assertLogsContains("Tests run: %d,  Failures: %d", total, failures);
     } else {
       assertLogsContains("Tests run: %d,  Failures: %d,  Errors: %d", total, failures, errors);
     }
+    assertLogsContains("FAILURES!!!");
   }
 
   private void assertTestSummaryForSuccess(int count) {
-    if (testMode.isJ2cl()) {
-      // TODO(b/32608089): jsunit_test does not report number of tests correctly
-      count = 1;
-    }
     if (count == 1) {
       assertLogsContains("OK (1 test)");
     } else {

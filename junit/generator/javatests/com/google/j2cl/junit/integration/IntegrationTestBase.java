@@ -18,6 +18,7 @@ package com.google.j2cl.junit.integration;
 import static org.junit.Assert.assertTrue;
 
 import com.google.common.base.Splitter;
+import com.google.common.collect.Iterables;
 import com.google.common.io.CharStreams;
 import com.google.common.io.Files;
 import com.google.common.util.concurrent.SettableFuture;
@@ -106,7 +107,15 @@ public abstract class IntegrationTestBase {
   protected List<String> runTest(String testName) throws Exception {
     File executable = getTestDataFile(testName + testMode.postfix);
     assertTrue("Missing the test in classpath", executable.exists());
-    return runTestBinary(executable.getAbsolutePath());
+    List<String> logs = runTestBinary(executable.getAbsolutePath());
+
+    // Cleanup log message for jsunit until "Start" log.
+    if (testMode.isJ2cl()) {
+      int startIndex = Iterables.indexOf(logs, x -> x.endsWith("  Start"));
+      logs = logs.subList(startIndex, logs.size());
+    }
+
+    return logs;
   }
 
   private static List<String> runTestBinary(String binaryPath) throws Exception {
