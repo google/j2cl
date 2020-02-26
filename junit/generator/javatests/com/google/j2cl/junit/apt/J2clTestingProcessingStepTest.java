@@ -214,14 +214,6 @@ public class J2clTestingProcessingStepTest {
   }
 
   @Test
-  public void testOverriddenTests() {
-    TestClass concreteTestClass = executeProcessorOnTest(JUnit4ConcreteSubclassTestCase.class);
-    assertThat(concreteTestClass.testMethods())
-        .containsExactly(method("testOverriddenWithoutTest"), method("testOverriddenWithTest"))
-        .inOrder();
-  }
-
-  @Test
   public void testClassLevelIgnore() {
     assertError(ErrorMessage.IGNORE_ON_TYPE, JUnit4ClassLevelIgnoreTestCase.class);
   }

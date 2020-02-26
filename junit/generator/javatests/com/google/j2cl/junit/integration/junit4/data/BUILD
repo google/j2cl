@@ -33,6 +33,16 @@ j2cl_test_integration_test_data(
 )
 
 java_and_j2cl_library(
+    name = "IgnoreTestParent",
+    srcs = ["IgnoreTestParent.java"],
+)
+
+j2cl_test_integration_test_data(
+    name = "IgnoreTest",
+    deps = [":IgnoreTestParent"],
+)
+
+java_and_j2cl_library(
     name = "MethodOrderingTestParent",
     srcs = ["MethodOrderingTestParent.java"],
 )

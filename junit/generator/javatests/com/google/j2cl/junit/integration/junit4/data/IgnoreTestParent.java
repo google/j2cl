@@ -13,12 +13,11 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.junit.apt;
+package com.google.j2cl.junit.integration.junit4.data;
 
 import org.junit.Test;
 
-/** A simple Unit test to test processing in {@link J2clTestingProcessingStepTest}. */
-public abstract class JUnit4AbstractTestCase {
+public abstract class IgnoreTestParent {
   @Test
   public abstract void testOverriddenWithTest();
 

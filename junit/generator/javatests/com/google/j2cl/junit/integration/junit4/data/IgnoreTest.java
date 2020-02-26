@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.junit.apt;
+package com.google.j2cl.junit.integration.junit4.data;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -22,20 +22,20 @@ import org.junit.runners.JUnit4;
 
 /** A unit test to test processing handling of overridden methods. */
 @RunWith(JUnit4.class)
-public class JUnit4ConcreteSubclassTestCase extends JUnit4AbstractTestCase {
-  @Override
+public class IgnoreTest extends IgnoreTestParent {
   @Test
+  @Override
   public void testOverriddenWithTest() {}
 
   @Override
   public void testOverriddenWithoutTest() {}
 
-  @Override
-  @Test
   @Ignore
+  @Test
+  @Override
   public void testOverriddenWithTestAndIgnore() {}
 
-  @Override
   @Ignore
+  @Override
   public void testOverriddenWithIgnoreButNoTest() {}
 }

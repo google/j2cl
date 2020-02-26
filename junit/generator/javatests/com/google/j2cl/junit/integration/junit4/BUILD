@@ -18,6 +18,7 @@ j2cl_test_integration_test(
         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:ChildWithNewMethodsTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:GrandChildWithNewMethodsTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:ExpectedExceptionTest",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:IgnoreTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:MethodOrderingTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:SimpleFailingTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/junit4/data:SimplePassingTest",

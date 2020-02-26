@@ -23,10 +23,7 @@ import javax.annotation.Nullable;
 public abstract class TestMethod {
 
   public static Builder builder() {
-    Builder builder = new AutoValue_TestMethod.Builder();
-    builder.isAsync(false);
-    builder.timeout(0);
-    return builder;
+    return new AutoValue_TestMethod.Builder().isAsync(false).timeout(0).isIgnored(false);
   }
 
   public abstract String javaMethodName();
@@ -39,6 +36,8 @@ public abstract class TestMethod {
   public abstract boolean isAsync();
 
   public abstract double timeout();
+
+  public abstract boolean isIgnored();
 
   public String jsTestMethodName() {
     String javaMethodName = javaMethodName();
@@ -60,6 +59,8 @@ public abstract class TestMethod {
     abstract Builder isAsync(boolean async);
 
     abstract Builder timeout(double timeout);
+
+    abstract Builder isIgnored(boolean async);
 
     abstract TestMethod build();
   }

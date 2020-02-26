@@ -143,6 +143,21 @@ public class JUnit4IntegrationTest extends IntegrationTestBase {
   }
 
   @Test
+  public void testIgnore() throws Exception {
+    String testName = "IgnoreTest";
+    TestResult testResult =
+        newTestResultBuilder()
+            .testClassName(testName)
+            .addTestSuccess("testOverriddenWithTest")
+            .addTestSuccess("testOverriddenWithoutTest")
+            .addTestSuccess("testOverriddenWithIgnoreButNoTest")
+            .build();
+
+    List<String> logLines = runTest(testName);
+    assertThat(logLines).matches(testResult);
+  }
+
+  @Test
   public void testMethodOrdering() throws Exception {
     String testName = "MethodOrderingTest";
     TestResult testResult =

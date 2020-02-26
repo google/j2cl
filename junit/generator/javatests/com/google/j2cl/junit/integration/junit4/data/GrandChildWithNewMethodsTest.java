@@ -58,8 +58,9 @@ public class GrandChildWithNewMethodsTest extends ChildWithNewMethodsTest {
   }
 
   @Override
-  @Test
+  @Test(expected = NullPointerException.class)
   public void testChild2() {
     TestCaseLogger.log("testGrandChild");
+    throw new NullPointerException();
   }
 }
