@@ -23,16 +23,24 @@ import com.google.j2cl.bazel.BazelWorker;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.libraryinfo.LibraryInfo;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
 import java.util.List;
 import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.Option;
 
 /** Runs The J2clRta as a worker. */
 public class BazelJ2clRta extends BazelWorker {
+
+  private static final int CACHE_SIZE =
+      Integer.parseInt(System.getProperty("j2cl.rta.protocachesize", "5000"));
+
+  private static final FileCache<LibraryInfo> libraryInfoCache =
+      new FileCache<>(BazelJ2clRta::readLibraryInfo, CACHE_SIZE);
+
   @Option(
       name = "--unusedTypesOutput",
       usage = "Path of output file containing the list of unused types",
@@ -51,7 +59,7 @@ public class BazelJ2clRta extends BazelWorker {
   @Override
   protected Problems run() {
     List<LibraryInfo> libraryInfos =
-        inputs.parallelStream().map(BazelJ2clRta::readLibraryInfo).collect(toImmutableList());
+        inputs.parallelStream().map(libraryInfoCache::get).collect(toImmutableList());
 
     RtaResult rtaResult = RapidTypeAnalyser.analyse(libraryInfos);
 
@@ -61,11 +69,9 @@ public class BazelJ2clRta extends BazelWorker {
     return new Problems();
   }
 
-  private static LibraryInfo readLibraryInfo(String libraryInfoPath) {
-    try (FileInputStream file = new FileInputStream(libraryInfoPath)) {
-      return LibraryInfo.parseFrom(file);
-    } catch (IOException e) {
-      throw new RuntimeException(e);
+  private static LibraryInfo readLibraryInfo(Path libraryInfoPath) throws IOException {
+    try (InputStream inputStream = java.nio.file.Files.newInputStream(libraryInfoPath)) {
+      return LibraryInfo.parseFrom(inputStream);
     }
   }
 
