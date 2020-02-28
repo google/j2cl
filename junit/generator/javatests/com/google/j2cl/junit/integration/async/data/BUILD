@@ -1,3 +1,9 @@
+load(
+    "//junit/generator/javatests/com/google/j2cl/junit/integration:j2cl_junit_integration_test.bzl",
+    "j2cl_test_integration_test_data",
+    "java_and_j2cl_library",
+)
+
 package(
     default_visibility = [
         "//junit/generator/javatests/com/google/j2cl/junit/apt:__pkg__",
@@ -6,12 +12,6 @@ package(
     # Tests in this directory are not tests that are meant to be run directly.
     # They serve as integration tests for J2clTestRunner.
     licenses = ["notice"],  # Apache 2.0
-)
-
-load(
-    "//junit/generator/javatests/com/google/j2cl/junit/integration:j2cl_junit_integration_test.bzl",
-    "j2cl_test_integration_test_data",
-    "java_and_j2cl_library",
 )
 
 ASYNC_TEST_DEPS = [
@@ -67,6 +67,11 @@ j2cl_test_integration_test_data(
 j2cl_test_integration_test_data(
     name = "TestListenableFuture",
     deps = ASYNC_TEST_DEPS + ["//third_party:guava"],
+)
+
+j2cl_test_integration_test_data(
+    name = "TestReturnsNullForAsyncBefore",
+    deps = ASYNC_TEST_DEPS,
 )
 
 j2cl_test_integration_test_data(

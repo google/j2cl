@@ -1,10 +1,10 @@
-package(
-    licenses = ["notice"],  # Apache 2.0
-)
-
 load(
     "//junit/generator/javatests/com/google/j2cl/junit/integration:j2cl_junit_integration_test.bzl",
     "j2cl_test_integration_test",
+)
+
+package(
+    licenses = ["notice"],  # Apache 2.0
 )
 
 # For debugging purposes it can be helpful to have the test log results of
@@ -18,6 +18,7 @@ j2cl_test_integration_test(
         "//junit/generator/javatests/com/google/j2cl/junit/integration/async/data:TestMethodOrder",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/async/data:TestNonAsyncTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/async/data:TestResolvesAfterDelay",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/async/data:TestReturnsNullForAsyncBefore",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/async/data:TestReturnsNullForPromise",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/async/data:TestWillTimeOut",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/async/data:TestStructuralThenable",
