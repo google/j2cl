@@ -237,7 +237,7 @@ PropertyUtils.hasNOT_EXPORTED_5 = function(obj) {
   return obj[googReflect.objectProperty('NOT_EXPORTED_5', obj)] != null;
 };
 
-let __Class = goog.forwardDeclare('java.lang.Class');
+let __Class = goog.requireType('java.lang.Class');
 /**
  * @template T
  * @param {__Class<T>} clazz
