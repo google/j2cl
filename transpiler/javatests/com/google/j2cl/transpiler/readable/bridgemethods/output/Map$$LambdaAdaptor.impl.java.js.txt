@@ -1,0 +1,55 @@
+goog.module('com.google.j2cl.transpiler.readable.bridgemethods.Map.$LambdaAdaptor$impl');
+
+const Map = goog.require('com.google.j2cl.transpiler.readable.bridgemethods.Map$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @template K, V
+ * @implements {Map<K, V>}
+ */
+class $LambdaAdaptor extends j_l_Object {
+  constructor(/** ?function(K, V):V */ fn) {
+    $LambdaAdaptor.$clinit();
+    super();
+    /**@type {?function(K, V):V}*/
+    this.f_$$fn__com_google_j2cl_transpiler_readable_bridgemethods_Map_$LambdaAdaptor;
+    this.$ctor__com_google_j2cl_transpiler_readable_bridgemethods_Map_$LambdaAdaptor__com_google_j2cl_transpiler_readable_bridgemethods_Map_$JsFunction(
+        fn);
+  }
+
+  $ctor__com_google_j2cl_transpiler_readable_bridgemethods_Map_$LambdaAdaptor__com_google_j2cl_transpiler_readable_bridgemethods_Map_$JsFunction(
+      /** ?function(K, V):V */ fn) {
+    this.$ctor__java_lang_Object__();
+    this.f_$$fn__com_google_j2cl_transpiler_readable_bridgemethods_Map_$LambdaAdaptor =
+        fn;
+  }
+  /** @return {V} */
+  m_put__java_lang_Object__java_lang_Object(/** K */ arg0, /** V */ arg1) {
+    let /** ?function(K, V):V */ $function;
+    return (
+        $function =
+            this.f_$$fn__com_google_j2cl_transpiler_readable_bridgemethods_Map_$LambdaAdaptor,
+        $function(arg0, arg1));
+  }
+
+  static $clinit() {
+    $LambdaAdaptor.$clinit = () => {};
+    $LambdaAdaptor.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof $LambdaAdaptor;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(
+    $LambdaAdaptor,
+    'com.google.j2cl.transpiler.readable.bridgemethods.Map$$LambdaAdaptor');
+
+Map.$markImplementor($LambdaAdaptor);
+
+exports = $LambdaAdaptor;
+//# sourceMappingURL=Map$$LambdaAdaptor.js.map

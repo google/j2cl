@@ -1,0 +1,46 @@
+goog.module('com.google.j2cl.transpiler.readable.bridgemethods.BridgeMethodDefault.II$impl');
+
+const I = goog.require('com.google.j2cl.transpiler.readable.bridgemethods.BridgeMethodDefault.I$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ * @extends {I<?string>}
+ */
+class II {
+  /** @abstract */
+  m_m__java_lang_String(/** ?string */ s) {}
+
+  static m_m__$default__com_google_j2cl_transpiler_readable_bridgemethods_BridgeMethodDefault_II__java_lang_String(
+      /** !II */ $thisArg, /** ?string */ s) {
+    II.$clinit();
+  }
+
+  static $clinit() {
+    II.$clinit = () => {};
+    II.$loadModules();
+  }
+
+  static $markImplementor(/** Function*/ ctor) {
+    I.$markImplementor(ctor);
+    ctor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_bridgemethods_BridgeMethodDefault_II =
+        true;
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance != null &&
+        !!instance
+              .$implements__com_google_j2cl_transpiler_readable_bridgemethods_BridgeMethodDefault_II;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadataForInterface(
+    II,
+    'com.google.j2cl.transpiler.readable.bridgemethods.BridgeMethodDefault$II');
+
+II.$markImplementor(/** @type {Function} */ (II));
+
+exports = II;
+//# sourceMappingURL=BridgeMethodDefault$II.js.map

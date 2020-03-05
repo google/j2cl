@@ -1,0 +1,49 @@
+goog.module('com.google.j2cl.transpiler.readable.bridgemethods.BridgeMethodDefault.I$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('com.google.j2cl.transpiler.readable.bridgemethods.BridgeMethodDefault.I.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ * @template T
+ */
+class I {
+  /** @abstract */
+  m_m__java_lang_Object(/** T */ t) {}
+  /** @template T @return {I<T>} */
+  static $adapt(/** ?function(T):void */ fn) {
+    I.$clinit();
+    return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));
+  }
+
+  static $clinit() {
+    I.$clinit = () => {};
+    I.$loadModules();
+  }
+
+  static $markImplementor(/** Function*/ ctor) {
+    ctor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_bridgemethods_BridgeMethodDefault_I =
+        true;
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance != null &&
+        !!instance
+              .$implements__com_google_j2cl_transpiler_readable_bridgemethods_BridgeMethodDefault_I;
+  }
+
+  static $loadModules() {
+    $LambdaAdaptor = goog.module.get(
+        'com.google.j2cl.transpiler.readable.bridgemethods.BridgeMethodDefault.I.$LambdaAdaptor$impl');
+  }
+}
+$Util.$setClassMetadataForInterface(
+    I,
+    'com.google.j2cl.transpiler.readable.bridgemethods.BridgeMethodDefault$I');
+
+I.$markImplementor(/** @type {Function} */ (I));
+
+exports = I;
+//# sourceMappingURL=BridgeMethodDefault$I.js.map

@@ -1,0 +1,56 @@
+goog.module('com.google.j2cl.transpiler.readable.bridgemethods.BridgeMethodShadowedSignature.C$impl');
+
+const B = goog.require('com.google.j2cl.transpiler.readable.bridgemethods.BridgeMethodShadowedSignature.B$impl');
+const I = goog.require('com.google.j2cl.transpiler.readable.bridgemethods.BridgeMethodShadowedSignature.I$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
+
+/**
+ * @template C1
+ * @extends {B<C1, Consumer<?>>}
+ * @implements {I<C1>}
+ */
+class C extends B {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  /** @template C1 @return {!C<C1>} */
+  static $create__() {
+    C.$clinit();
+    let $instance = new C();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_bridgemethods_BridgeMethodShadowedSignature_C__();
+    return $instance;
+  }
+
+  $ctor__com_google_j2cl_transpiler_readable_bridgemethods_BridgeMethodShadowedSignature_C__() {
+    this.$ctor__com_google_j2cl_transpiler_readable_bridgemethods_BridgeMethodShadowedSignature_B__();
+  }
+  // Bridge method.
+  /** @override @return {?string} */
+  m_get__java_util_function_Consumer(/** Consumer */ arg0) {
+    return super.m_get__java_lang_Object(arg0);
+  }
+
+  static $clinit() {
+    C.$clinit = () => {};
+    C.$loadModules();
+    B.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof C;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(
+    C,
+    'com.google.j2cl.transpiler.readable.bridgemethods.BridgeMethodShadowedSignature$C');
+
+I.$markImplementor(C);
+
+exports = C;
+//# sourceMappingURL=BridgeMethodShadowedSignature$C.js.map

@@ -1,0 +1,41 @@
+goog.module('com.google.j2cl.transpiler.readable.bridgemethods.BridgeMethodDefault$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class BridgeMethodDefault extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  /** @return {!BridgeMethodDefault} */
+  static $create__() {
+    BridgeMethodDefault.$clinit();
+    let $instance = new BridgeMethodDefault();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_bridgemethods_BridgeMethodDefault__();
+    return $instance;
+  }
+
+  $ctor__com_google_j2cl_transpiler_readable_bridgemethods_BridgeMethodDefault__() {
+    this.$ctor__java_lang_Object__();
+  }
+
+  static $clinit() {
+    BridgeMethodDefault.$clinit = () => {};
+    BridgeMethodDefault.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof BridgeMethodDefault;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(
+    BridgeMethodDefault,
+    'com.google.j2cl.transpiler.readable.bridgemethods.BridgeMethodDefault');
+
+exports = BridgeMethodDefault;
+//# sourceMappingURL=BridgeMethodDefault.js.map
