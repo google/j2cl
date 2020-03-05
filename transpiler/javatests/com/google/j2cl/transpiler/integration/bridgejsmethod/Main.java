@@ -23,47 +23,8 @@ import jsinterop.annotations.JsMethod;
 
 public class Main {
   public static void main(String... args) {
-    assertTrue(callFunByA(new A<String>(), "abc").equals("abc"));
-    assertTrue(callFunByA(new B(), "def").equals("defabc"));
-    assertTrue(callFunByA(new C(), 1).equals(new Integer(6)));
-    assertTrue(callFunByA(new D(), 2).equals(new Integer(8)));
-    assertTrue(callFunByA(new E(), "xyz").equals("xyzabc"));
-    assertThrowsClassCastException(() -> callFunByA(new B(), 1), String.class);
-
-    assertEquals("A-bar", callBarByA(new A<String>(), "abc"));
-    assertEquals("B-bar", callBarByA(new B(), "abc"));
-    assertEquals("A-bar", callBarByA(new C(), 1));
-    assertEquals("A-bar", callBarByA(new D(), 2));
-    assertEquals("B-bar", callBarByA(new E(), "xyz"));
-    assertEquals("F-bar", callBarByA(new F(), "abcd"));
-    assertThrowsClassCastException(() -> callBarByA(new B(), 1), String.class);
-
-    assertTrue(callFunByI(new D(), 2).equals(new Integer(8)));
-    assertThrowsClassCastException(() -> callFunByI(new D(), new Float(2.2)), Integer.class);
-
-    assertEquals("B-bar", callBarByJ(new E(), "xyz"));
-    assertThrowsClassCastException(() -> callBarByJ(new E(), new Object()), String.class);
-
-    assertTrue(new B().fun("def").equals("defabc"));
-    assertTrue(new C().fun(1) == 6);
-    assertTrue(new D().fun(10) == 16);
-    assertTrue(new E().fun("xyz").equals("xyzabc"));
-
-    assertEquals("A-bar", new A<>().bar(new Object()));
-    assertEquals("B-bar", new B().bar("abcd"));
-    assertEquals("A-bar", new C().bar(1));
-    assertEquals("A-bar", new D().bar(1));
-    assertEquals("B-bar", new E().bar("abcd"));
-    assertEquals("F-bar", new F().bar("abcd"));
-
-    assertTrue(callFun(new A<String>(), "abc").equals("abc"));
-    assertTrue(callFun(new B(), "abc").equals("abcabc"));
-    assertTrue(callFun(new C(), 1).equals(6));
-    assertTrue(callFun(new D(), 10).equals(16));
-    assertTrue(callFun(new E(), "xyz").equals("xyzabc"));
-
-    assertTrue(callBar(new B(), "abcd", "defg"));
-    assertTrue(callBar(new E(), "abcd", "defg"));
+    testJsMethods();
+    testJsMethodForwarding();
   }
 
   private static class A<T> {
@@ -156,4 +117,83 @@ public class Main {
 
   @JsMethod
   private static native boolean callBar(Object o, Object t, Object s);
+
+  private static void testJsMethods() {
+    assertTrue(callFunByA(new A<String>(), "abc").equals("abc"));
+    assertTrue(callFunByA(new B(), "def").equals("defabc"));
+    assertTrue(callFunByA(new C(), 1).equals(new Integer(6)));
+    assertTrue(callFunByA(new D(), 2).equals(new Integer(8)));
+    assertTrue(callFunByA(new E(), "xyz").equals("xyzabc"));
+    assertThrowsClassCastException(() -> callFunByA(new B(), 1), String.class);
+
+    assertEquals("A-bar", callBarByA(new A<String>(), "abc"));
+    assertEquals("B-bar", callBarByA(new B(), "abc"));
+    assertEquals("A-bar", callBarByA(new C(), 1));
+    assertEquals("A-bar", callBarByA(new D(), 2));
+    assertEquals("B-bar", callBarByA(new E(), "xyz"));
+    assertEquals("F-bar", callBarByA(new F(), "abcd"));
+    assertThrowsClassCastException(() -> callBarByA(new B(), 1), String.class);
+
+    assertTrue(callFunByI(new D(), 2).equals(new Integer(8)));
+    assertThrowsClassCastException(() -> callFunByI(new D(), new Float(2.2)), Integer.class);
+
+    assertEquals("B-bar", callBarByJ(new E(), "xyz"));
+    assertThrowsClassCastException(() -> callBarByJ(new E(), new Object()), String.class);
+
+    assertTrue(new B().fun("def").equals("defabc"));
+    assertTrue(new C().fun(1) == 6);
+    assertTrue(new D().fun(10) == 16);
+    assertTrue(new E().fun("xyz").equals("xyzabc"));
+
+    assertEquals("A-bar", new A<>().bar(new Object()));
+    assertEquals("B-bar", new B().bar("abcd"));
+    assertEquals("A-bar", new C().bar(1));
+    assertEquals("A-bar", new D().bar(1));
+    assertEquals("B-bar", new E().bar("abcd"));
+    assertEquals("F-bar", new F().bar("abcd"));
+
+    assertTrue(callFun(new A<String>(), "abc").equals("abc"));
+    assertTrue(callFun(new B(), "abc").equals("abcabc"));
+    assertTrue(callFun(new C(), 1).equals(6));
+    assertTrue(callFun(new D(), 10).equals(16));
+    assertTrue(callFun(new E(), "xyz").equals("xyzabc"));
+
+    assertTrue(callBar(new B(), "abcd", "defg"));
+    assertTrue(callBar(new E(), "abcd", "defg"));
+  }
+
+  private static class Top<T, S> {
+    @JsMethod
+    public void m(T t, S s) {}
+  }
+
+  interface Accidental<S> {
+    void m(String t, S s);
+  }
+
+  private static class Child<S> extends Top<String, S> {
+    public void m(String t, S s) {}
+  }
+
+  private static class GrandChild extends Child<String> implements Accidental<String> {
+    public void m(String t, String s) {}
+  }
+
+  private static void testJsMethodForwarding() {
+    Top o = new GrandChild();
+    assertThrowsClassCastException(
+        () -> {
+          o.m(null, new Object());
+        },
+        String.class);
+    // TODO(b/150876433): Uncomment when fixed.
+    // assertThrowsClassCastException(() -> { o.m(new Object(), null ); }, String.class);
+
+    Accidental a = new GrandChild();
+    assertThrowsClassCastException(
+        () -> {
+          a.m(null, new Object());
+        },
+        String.class);
+  }
 }

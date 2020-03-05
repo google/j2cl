@@ -17,5 +17,6 @@ integration_test(
         "*.java",
         "*.js",
     ]),
+    suppress = ["JSC_HIDDEN_SUPERCLASS_PROPERTY_MISMATCH"],
     deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )
