@@ -1,11 +1,11 @@
 # Description:
 #   This package intends to test the pruning result output of the rta algorithm.
 
+load("//build_defs:rules.bzl", "j2cl_library", "j2cl_rta")
+
 package(
     licenses = ["notice"],  # Apache 2.0
 )
-
-load("//build_defs:rules.bzl", "j2cl_library", "j2cl_rta")
 
 j2cl_library(
     name = "test_input",

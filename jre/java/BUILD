@@ -2,6 +2,8 @@
 #   j2cl/jre: JRE subset for transpilation.
 #
 
+load(":j2cl_mirror_from_gwt.bzl", "j2cl_mirror_from_gwt")
+
 package(
     default_visibility = [
         "//:__pkg__",
@@ -11,8 +13,6 @@ package(
     ],
     licenses = ["notice"],  # Apache 2.0
 )
-
-load(":j2cl_mirror_from_gwt.bzl", "j2cl_mirror_from_gwt")
 
 # This target includes part of the JRE that is emulated by J2CL. We don't use it
 # as the 'bootclasspath' since doing so would have multiple implications:

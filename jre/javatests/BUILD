@@ -3,12 +3,15 @@
 
 load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_binary")
 load("//third_party/java/j2cl:j2cl_test.bzl", "j2cl_test")
+load("//jre/java:j2cl_mirror_from_gwt.bzl", "j2cl_mirror_from_gwt", "java_source_copy")
+load(":j2cl_multi_test.bzl", "j2cl_multi_test")
+load("@bazel_tools//tools/build_rules:build_test.bzl", "build_test")
+load("//build_defs:rules.bzl", "j2cl_library")
+load("//javascript/tools/jscompiler/builddefs:flags.bzl", "VERBOSE_WARNING_FLAGS_STRICT", "WHITESPACE_ONLY_FLAGS")
 
 package(
     licenses = ["notice"],  # Apache 2.0
 )
-
-load("//jre/java:j2cl_mirror_from_gwt.bzl", "j2cl_mirror_from_gwt", "java_source_copy")
 
 j2cl_mirror_from_gwt(
     name = "emul_tests_lib",
@@ -70,8 +73,6 @@ java_test(
     ],
 )
 
-load(":j2cl_multi_test.bzl", "j2cl_multi_test")
-
 j2cl_multi_test(
     name = "BigDecimal",
     shard_count = 5,
@@ -129,8 +130,6 @@ j2cl_test(
     ],
 )
 
-load("@bazel_tools//tools/build_rules:build_test.bzl", "build_test")
-
 build_test(
     name = "conformance_test",
     targets = [
@@ -139,9 +138,6 @@ build_test(
         ":conformance_binary_whitespace_only",
     ],
 )
-
-load("//build_defs:rules.bzl", "j2cl_library")
-load("//javascript/tools/jscompiler/builddefs:flags.bzl", "VERBOSE_WARNING_FLAGS_STRICT", "WHITESPACE_ONLY_FLAGS")
 
 COMFORMANCE_CHECK_FLAGS = VERBOSE_WARNING_FLAGS_STRICT + [
     "--conformance_config=conformance_proto.txt",

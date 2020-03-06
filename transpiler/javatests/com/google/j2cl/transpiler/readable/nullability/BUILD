@@ -1,10 +1,11 @@
-package(
-    licenses = ["notice"],  # Apache 2.0
-)
-
 load(
     "//transpiler/javatests/com/google/j2cl/transpiler/readable:readable_example.bzl",
     "readable_example",
+)
+load("//build_defs:rules.bzl", "j2cl_library")
+
+package(
+    licenses = ["notice"],  # Apache 2.0
 )
 
 # Creates verification target
@@ -18,8 +19,6 @@ readable_example(
         "//third_party/java/checker_framework_annotations:checker_framework_annotations-j2cl",
     ],
 )
-
-load("//build_defs:rules.bzl", "j2cl_library")
 
 j2cl_library(
     name = "subpackage",

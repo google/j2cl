@@ -1,8 +1,8 @@
+load("@com_google_j2cl//build_defs:rules.bzl", "j2cl_test")
+
 package(
     licenses = ["notice"],  # Apache 2.0
 )
-
-load("@com_google_j2cl//build_defs:rules.bzl", "j2cl_test")
 
 j2cl_test(
     name = "HelloWorldTest",

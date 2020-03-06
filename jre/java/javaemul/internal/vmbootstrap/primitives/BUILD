@@ -3,12 +3,12 @@
 #
 # Depends on the JRE JS.
 
+load(":generate_primitive.bzl", "generate_primitive_type")
+
 package(
     default_visibility = ["//jre/java:__pkg__"],
     licenses = ["notice"],  # Apache 2.0
 )
-
-load(":generate_primitive.bzl", "generate_primitive_type")
 
 # You can see the generated file with following commands:
 # blaze build third_party/java_src/j2cl/transpiler/vmbootstrap/primitives:all

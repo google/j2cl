@@ -1,9 +1,9 @@
+load("//build_defs:rules.bzl", "j2cl_library")
+load("//tools/javatests/com/google/j2cl/tools/rta:rta_test.bzl", "rta_test")
+
 package(
     licenses = ["notice"],  # Apache 2.0
 )
-
-load("//build_defs:rules.bzl", "j2cl_library")
-load("//tools/javatests/com/google/j2cl/tools/rta:rta_test.bzl", "rta_test")
 
 j2cl_library(
     name = "unusedclasses_library",

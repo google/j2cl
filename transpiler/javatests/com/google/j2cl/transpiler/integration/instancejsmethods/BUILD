@@ -1,11 +1,11 @@
-package(
-    licenses = ["notice"],  # Apache 2.0
-)
-
 load("//build_defs:rules.bzl", "j2cl_library")
 load(
     "//transpiler/javatests/com/google/j2cl/transpiler/integration:integration_test.bzl",
     "integration_test",
+)
+
+package(
+    licenses = ["notice"],  # Apache 2.0
 )
 
 j2cl_library(
