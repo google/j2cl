@@ -43,7 +43,7 @@ public abstract class TestClass {
   }
 
   public boolean needsAsyncTeardown() {
-    return beforeMethods().stream().anyMatch(TestMethod::isAsync);
+    return afterMethods().stream().anyMatch(TestMethod::isAsync);
   }
 
   public String jsUnitPackageName() {
