@@ -220,6 +220,23 @@ public class J2clAsyncTest extends IntegrationTestBase {
   }
 
   @Test
+  public void testReturnsNullForAsyncAfter() throws Exception {
+    String testName = "TestReturnsNullForAsyncAfter";
+
+    TestResult testResult =
+        newTestResultBuilder()
+            .testClassName(testName)
+            .addJavaLogLineSequence("test method ran!")
+            .addTestFailure("testMethod")
+            .addLogLineContains(
+                "java.lang.IllegalStateException: Test returned null as its promise")
+            .build();
+
+    List<String> logLines = runTest(testName);
+    assertThat(logLines).matches(testResult);
+  }
+
+  @Test
   public void testReturnsNullForAsyncBefore() throws Exception {
     String testName = "TestReturnsNullForAsyncBefore";
 

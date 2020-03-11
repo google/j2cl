@@ -18,6 +18,7 @@ j2cl_test_integration_test(
         "//junit/generator/javatests/com/google/j2cl/junit/integration/async/data:TestMethodOrder",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/async/data:TestNonAsyncTest",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/async/data:TestResolvesAfterDelay",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/async/data:TestReturnsNullForAsyncAfter",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/async/data:TestReturnsNullForAsyncBefore",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/async/data:TestReturnsNullForPromise",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/async/data:TestWillTimeOut",

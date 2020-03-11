@@ -70,6 +70,11 @@ j2cl_test_integration_test_data(
 )
 
 j2cl_test_integration_test_data(
+    name = "TestReturnsNullForAsyncAfter",
+    deps = ASYNC_TEST_DEPS,
+)
+
+j2cl_test_integration_test_data(
     name = "TestReturnsNullForAsyncBefore",
     deps = ASYNC_TEST_DEPS,
 )
