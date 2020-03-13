@@ -65,7 +65,9 @@ public final class LibraryInfoBuilder {
             .setImplSourceFilePath(implFilePath);
 
     DeclaredTypeDescriptor superTypeDescriptor = type.getSuperTypeDescriptor();
-    if (superTypeDescriptor != null && !superTypeDescriptor.isNative()) {
+    if (superTypeDescriptor != null
+        && !superTypeDescriptor.isNative()
+        && !TypeDescriptors.isJavaLangObject(superTypeDescriptor)) {
       typeInfoBuilder.setExtendsType(getTypeId(superTypeDescriptor));
     }
 
