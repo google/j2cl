@@ -60,6 +60,11 @@ alias(
     actual = "@com_google_auto_value",
 )
 
+j2cl_import(
+    name = "auto_value-j2cl",
+    jar = "@com_google_auto_value//jar",
+)
+
 alias(
     name = "auto_service",
     actual = "@com_google_auto_service//jar",
