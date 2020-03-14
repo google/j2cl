@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.integration.autovalue_ref;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 final class ComponentB {
@@ -22,12 +23,19 @@ final class ComponentB {
   private final boolean booleanField;
   private final String stringField;
   private final Double doubleField;
+  private final int[] arrayField;
 
-  public ComponentB(int intField, boolean booleanField, String stringField, Double doubleField) {
+  public ComponentB(
+      int intField,
+      boolean booleanField,
+      String stringField,
+      Double doubleField,
+      int[] arrayField) {
     this.intField = intField;
     this.booleanField = booleanField;
     this.stringField = stringField;
     this.doubleField = doubleField;
+    this.arrayField = arrayField;
   }
 
   public int getIntField() {
@@ -46,6 +54,10 @@ final class ComponentB {
     return doubleField;
   }
 
+  public int[] getArrayField() {
+    return arrayField;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -54,17 +66,19 @@ final class ComponentB {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-
-    ComponentB child = (ComponentB) o;
-    return intField == child.intField
-        && booleanField == child.booleanField
-        && Objects.equals(stringField, child.stringField)
-        && Objects.equals(doubleField, child.doubleField);
+    ComponentB that = (ComponentB) o;
+    return intField == that.intField
+        && booleanField == that.booleanField
+        && Objects.equals(stringField, that.stringField)
+        && Objects.equals(doubleField, that.doubleField)
+        && Arrays.equals(arrayField, that.arrayField);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(intField, booleanField, stringField, doubleField);
+    int result = Objects.hash(intField, booleanField, stringField, doubleField);
+    result = 31 * result + Arrays.hashCode(arrayField);
+    return result;
   }
 
   @Override
@@ -79,6 +93,8 @@ final class ComponentB {
         + '\''
         + ", doubleField="
         + doubleField
+        + ", arrayField="
+        + Arrays.toString(arrayField)
         + '}';
   }
 }

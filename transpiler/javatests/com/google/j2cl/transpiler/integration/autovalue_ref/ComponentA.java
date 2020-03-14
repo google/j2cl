@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.integration.autovalue_ref;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 final class ComponentA {
@@ -22,12 +23,19 @@ final class ComponentA {
   private final boolean booleanField;
   private final String stringField;
   private final Double doubleField;
+  private final int[] arrayField;
 
-  public ComponentA(int intField, boolean booleanField, String stringField, Double doubleField) {
+  public ComponentA(
+      int intField,
+      boolean booleanField,
+      String stringField,
+      Double doubleField,
+      int[] arrayField) {
     this.intField = intField;
     this.booleanField = booleanField;
     this.stringField = stringField;
     this.doubleField = doubleField;
+    this.arrayField = arrayField;
   }
 
   public int getIntField() {
@@ -46,6 +54,10 @@ final class ComponentA {
     return doubleField;
   }
 
+  public int[] getArrayField() {
+    return arrayField;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -54,17 +66,19 @@ final class ComponentA {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-
-    ComponentA componentA = (ComponentA) o;
-    return intField == componentA.intField
-        && booleanField == componentA.booleanField
-        && Objects.equals(stringField, componentA.stringField)
-        && Objects.equals(doubleField, componentA.doubleField);
+    ComponentA that = (ComponentA) o;
+    return intField == that.intField
+        && booleanField == that.booleanField
+        && Objects.equals(stringField, that.stringField)
+        && Objects.equals(doubleField, that.doubleField)
+        && Arrays.equals(arrayField, that.arrayField);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(intField, booleanField, stringField, doubleField);
+    int result = Objects.hash(intField, booleanField, stringField, doubleField);
+    result = 31 * result + Arrays.hashCode(arrayField);
+    return result;
   }
 
   @Override
@@ -79,6 +93,8 @@ final class ComponentA {
         + '\''
         + ", doubleField="
         + doubleField
+        + ", arrayField="
+        + Arrays.toString(arrayField)
         + '}';
   }
 }

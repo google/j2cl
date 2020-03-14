@@ -19,7 +19,6 @@ import com.google.auto.value.AutoValue;
 
 @AutoValue
 abstract class CompositeA {
-
   public abstract int getIntField();
 
   public abstract boolean getBooleanField();
