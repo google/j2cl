@@ -2383,6 +2383,13 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  @Override",
             "  @JsMethod public String bar(Object o) { return null; }",
             "}",
+            "interface I<T> {",
+            "  @JsMethod void m(@JsOptional T t);",
+            "}",
+            "class Implementor implements I<Integer> {",
+            // TODO(b/151655770): This should not pass restriction checks.
+            "  public void m(Integer i) {}",
+            "}",
             "@JsFunction interface Function {",
             "  void m(String a, @JsOptional String b);",
             "}",
