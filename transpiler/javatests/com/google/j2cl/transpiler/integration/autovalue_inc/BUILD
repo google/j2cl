@@ -4,7 +4,6 @@ load(
 )
 
 package(
-    default_visibility = ["//transpiler/javatests/com/google/j2cl/transpiler/integration:__subpackages__"],
     licenses = ["notice"],  # Apache 2.0
 )
 
@@ -15,5 +14,8 @@ package(
 integration_test(
     name = "autovalue",
     srcs = glob(["*.java"]),
-    deps = ["//third_party:auto_value-j2cl"],
+    deps = [
+        "//third_party:auto_value-j2cl",
+        "//transpiler/javatests/com/google/j2cl/transpiler/integration/autovalue",
+    ],
 )

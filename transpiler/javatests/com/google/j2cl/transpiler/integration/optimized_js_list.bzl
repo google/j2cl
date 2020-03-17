@@ -36,6 +36,8 @@ OPTIMIZED_JS_LIST = [
     "//transpiler/javatests/com/google/j2cl/transpiler/integration/autoboxing:optimized_js.esnext",
     "//transpiler/javatests/com/google/j2cl/transpiler/integration/autovalue:optimized_js",
     "//transpiler/javatests/com/google/j2cl/transpiler/integration/autovalue:optimized_js.esnext",
+    "//transpiler/javatests/com/google/j2cl/transpiler/integration/autovalue_inc:optimized_js",
+    "//transpiler/javatests/com/google/j2cl/transpiler/integration/autovalue_inc:optimized_js.esnext",
     "//transpiler/javatests/com/google/j2cl/transpiler/integration/autovalue_ref:optimized_js",
     "//transpiler/javatests/com/google/j2cl/transpiler/integration/autovalue_ref:optimized_js.esnext",
     "//transpiler/javatests/com/google/j2cl/transpiler/integration/backwardbridgemethod:optimized_js",
