@@ -78,7 +78,6 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
     // imports using goog.require as an alias to the exports symbol of the goog.module file being
     // imported. This mapping will help kythe understand that the exports symbol is really just
     // the Java class.
-    // TODO(b/150152766): Verify that this gets indexed properly by kythe.
     sourceBuilder.emitWithMapping(type.getSourcePosition(), () -> sourceBuilder.append("exports"));
     sourceBuilder.append(" = " + className + ";");
     return sourceBuilder.build();
