@@ -23,6 +23,8 @@ j2cl_test_integration_test(
         "//junit/generator/javatests/com/google/j2cl/junit/integration/async/data:TestReturnsNullForPromise",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/async/data:TestWillTimeOut",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/async/data:TestStructuralThenable",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/async/data:TestFailingAsyncAfter",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/async/data:TestFailingAsyncBefore",
     ],
     test_data_java_only = [
         "//junit/generator/javatests/com/google/j2cl/junit/integration/async/data:TestListenableFuture",

@@ -146,6 +146,37 @@ public class J2clAsyncTest extends IntegrationTestBase {
   }
 
   @Test
+  public void testFailingAsyncAfter() throws Exception {
+    String testName = "TestFailingAsyncAfter";
+    TestResult testResult =
+        newTestResultBuilder()
+            .testClassName(testName)
+            .addTestFailure("test")
+            .addTestSuccess("testOther")
+            .addJavaLogLineSequence("test", "after", "testOther", "after")
+            .build();
+
+    List<String> logLines = runTest(testName);
+    assertThat(logLines).matches(testResult);
+  }
+
+  @Test
+  public void testFailingAsyncBefore() throws Exception {
+    String testName = "TestFailingAsyncBefore";
+    TestResult testResult =
+        newTestResultBuilder()
+            .testClassName(testName)
+            .addTestFailure("test")
+            .addTestSuccess("testOther")
+            .addJavaLogLineSequence("before", "before", "testOther")
+            .addBlackListedWord("should_not_be_in_log")
+            .build();
+
+    List<String> logLines = runTest(testName);
+    assertThat(logLines).matches(testResult);
+  }
+
+  @Test
   public void testReturnTypeNotStructuralThenable() throws Exception {
     if (testMode.isJ2cl()) {
       // No j2cl version of this test since these would be a compile error and thus are handled

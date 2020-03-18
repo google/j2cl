@@ -123,3 +123,13 @@ j2cl_test_integration_test_data(
     name = "TestWithExpectedException",
     deps = ASYNC_TEST_DEPS,
 )
+
+j2cl_test_integration_test_data(
+    name = "TestFailingAsyncAfter",
+    deps = ASYNC_TEST_DEPS,
+)
+
+j2cl_test_integration_test_data(
+    name = "TestFailingAsyncBefore",
+    deps = ASYNC_TEST_DEPS,
+)
