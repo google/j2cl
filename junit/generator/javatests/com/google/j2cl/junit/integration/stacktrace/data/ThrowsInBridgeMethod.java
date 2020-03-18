@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.junit.integration.stacktrace.data;
 
-import java.util.ArrayList;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -24,16 +23,20 @@ import org.junit.runners.JUnit4;
 @RunWith(JUnit4.class)
 public class ThrowsInBridgeMethod extends StacktraceTestBase {
 
-  public static class MyList extends ArrayList<String> {
+  public static class AbstractList<T> {
+    public void add(T t) {}
+  }
+
+  public static class MyList extends AbstractList<String> {
     @Override
-    public boolean add(String e) {
+    public void add(String e) {
       throw new RuntimeException("__the_message__!");
     }
   }
 
   @Test
   public void test() {
-    ArrayList<String> list = new MyList();
+    AbstractList<String> list = new MyList();
     list.add("asdf"); // calls through the bridge
   }
 }

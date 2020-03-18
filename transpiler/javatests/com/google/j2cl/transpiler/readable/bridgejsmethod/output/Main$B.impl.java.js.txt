@@ -27,7 +27,7 @@ class B extends A {
     this.$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_A__();
   }
   /** @return {?string} */
-  m_fun__java_lang_String(/** ?string */ s) {
+  fun(/** ?string */ s) {
     return s;
   }
 
@@ -36,12 +36,6 @@ class B extends A {
   /** @override */
   m_bar__java_lang_Object(/** * */ arg0) {
     this.bar(/**@type {?string}*/ ($Casts.$to(arg0, j_l_String)));
-  }
-  // Bridge method.
-  /** @override @return {?string} */
-  fun(/** * */ arg0) {
-    return this.m_fun__java_lang_String(
-        /**@type {?string}*/ ($Casts.$to(arg0, j_l_String)));
   }
 
   static $clinit() {

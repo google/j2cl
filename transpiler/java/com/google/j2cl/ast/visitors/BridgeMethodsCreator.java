@@ -21,7 +21,6 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
-import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
@@ -96,40 +95,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
           targetMethodDescriptor.getDeclarationDescriptor(), bridgeMethod);
     }
 
-    fixJsInfo(type, bridgeMethodsByTargetMethodDescriptor);
     return bridgeMethodsByTargetMethodDescriptor.values();
-  }
-
-  private static void fixJsInfo(
-      Type type, final Multimap<MethodDescriptor, Method> bridgeMethodsByTargetMethodDescriptor) {
-    type.accept(
-        new AbstractRewriter() {
-          @Override
-          public Method rewriteMethod(Method method) {
-            MethodDescriptor methodDescriptor = method.getDescriptor();
-            Collection<Method> bridgeJsMethods =
-                bridgeMethodsByTargetMethodDescriptor.get(methodDescriptor).stream()
-                    .filter(bridgeMethod -> bridgeMethod.getDescriptor().isJsMethod())
-                    .collect(toImmutableList());
-            if (bridgeJsMethods.isEmpty()) {
-              return method;
-            }
-
-            // Now that the bridge method is created (and marked JsMethod), "demote" to a plain
-            // Java method by setting JsInfo to NONE and resetting parameter optionality.
-            return Method.Builder.from(method)
-                .setMethodDescriptor(
-                    MethodDescriptor.Builder.from(methodDescriptor)
-                        .setJsInfo(JsInfo.NONE)
-                        .removeParameterOptionality()
-                        .build())
-                // TODO(b/31312257): avoid declaring the method override if there is a chance that
-                // it is not; this avoid jscompiler errors when there are none but might miss real
-                // overrides. See readable/jsmethod.
-                .setOverride(false)
-                .build();
-          }
-        });
   }
 
   /** Returns the mappings from the needed bridge method to the targeted method. */
@@ -152,8 +118,10 @@ public class BridgeMethodsCreator extends NormalizationPass {
               typeDeclaration.toUnparameterizedTypeDescriptor(),
               false /* findDefaultMethods */);
       if (targetMethodDescriptor != null) {
-        targetMethodDescriptorByBridgeMethodDescriptor.put(
-            potentialBridgeMethodDescriptor, targetMethodDescriptor);
+        recordBridgeMethodNeeded(
+            targetMethodDescriptorByBridgeMethodDescriptor,
+            potentialBridgeMethodDescriptor,
+            targetMethodDescriptor);
         continue;
       }
 
@@ -163,8 +131,10 @@ public class BridgeMethodsCreator extends NormalizationPass {
         MethodDescriptor backwardingMethodDescriptor =
             findBridgeDueToAccidentalOverride(potentialBridgeMethodDescriptor, typeDeclaration);
         if (backwardingMethodDescriptor != null) {
-          targetMethodDescriptorByBridgeMethodDescriptor.put(
-              backwardingMethodDescriptor, potentialBridgeMethodDescriptor);
+          recordBridgeMethodNeeded(
+              targetMethodDescriptorByBridgeMethodDescriptor,
+              backwardingMethodDescriptor,
+              potentialBridgeMethodDescriptor);
           continue;
         }
       }
@@ -182,6 +152,17 @@ public class BridgeMethodsCreator extends NormalizationPass {
       }
     }
     return targetMethodDescriptorByBridgeMethodDescriptor;
+  }
+
+  private static void recordBridgeMethodNeeded(
+      Map<MethodDescriptor, MethodDescriptor> targetMethodDescriptorByBridgeMethodDescriptor,
+      MethodDescriptor bridgeMethod,
+      MethodDescriptor targetMethod) {
+    if (!bridgeMethod.isJsMethod() || !targetMethod.isJsMethod()) {
+      // Only create a bridge if the actual JavaScript signatures are different. If both
+      // methods are JsMethod then they will have the same name, hence no need for bridges.
+      targetMethodDescriptorByBridgeMethodDescriptor.put(bridgeMethod, targetMethod);
+    }
   }
 
   /**

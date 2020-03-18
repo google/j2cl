@@ -4,9 +4,6 @@ const I = goog.require('com.google.j2cl.transpiler.readable.jsoptional.Main.I$im
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let j_l_String = goog.forwardDeclare('java.lang.String$impl');
-let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-
 /**
  * @implements {I<?string>}
  */
@@ -28,13 +25,7 @@ class NonJsTypeSubtype extends j_l_Object {
     this.$ctor__java_lang_Object__();
   }
 
-  m_m__java_lang_String__java_lang_Object(/** ?string */ t, /** * */ o) {}
-  // Bridge method.
-  /** @override */
-  m(/** * */ arg0, /** *= */ arg1) {
-    this.m_m__java_lang_String__java_lang_Object(
-        /**@type {?string}*/ ($Casts.$to(arg0, j_l_String)), arg1);
-  }
+  m(/** ?string */ t, /** *= */ o) {}
 
   static $clinit() {
     NonJsTypeSubtype.$clinit = () => {};
@@ -46,10 +37,7 @@ class NonJsTypeSubtype extends j_l_Object {
     return instance instanceof NonJsTypeSubtype;
   }
 
-  static $loadModules() {
-    j_l_String = goog.module.get('java.lang.String$impl');
-    $Casts = goog.module.get('vmbootstrap.Casts$impl');
-  }
+  static $loadModules() {}
 }
 $Util.$setClassMetadata(
     NonJsTypeSubtype,
