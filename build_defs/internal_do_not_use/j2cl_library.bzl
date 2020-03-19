@@ -45,14 +45,6 @@ def j2cl_library(
       deps: Labels of other j2cl_library() rules.
             NOT labels of java_library() rules.
     """
-    # Private Args:
-    #   _js_deps: Direct JavaScript dependencies needed by native code (either
-    #       via srcs in _js_srcs or via JsInterop/native.js).
-    #       For the JsInterop scenario, we encourage developers to create
-    #       proper JsInterop stubs next to the js_library rule and create a
-    #       j2cl_import rule there.
-    #   _js_exports: Exported JavaScript dependencies.
-
     args = dict(kwargs)
 
     _ensureList(args, "srcs")
@@ -76,8 +68,7 @@ def j2cl_library(
         build_test(name, kwargs.get("tags", []))
 
 def _ensureList(args, name):
-    # TODO(goktug): Remove to_list() coercions after cleaning the callsites w/ depsets since it is
-    #  slotted for deprecation in favor of explicit to_list calls.
+    # TODO(goktug): Remove to_list() coercions after cleaning the callsites w/ depsets.
     old_value = args.get(name) or []
     if type(old_value) == type(depset()):
         old_value = old_value.to_list()
