@@ -21,6 +21,7 @@ import com.google.j2cl.common.FrontendUtils.FileInfo;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.frontend.common.FrontendConstants;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -116,7 +117,7 @@ public class JdtParser {
 
   private String[] getEncodings(int length) {
     String[] encodings = new String[length];
-    Arrays.fill(encodings, "UTF_8");
+    Arrays.fill(encodings, StandardCharsets.UTF_8.name());
     return encodings;
   }
 
