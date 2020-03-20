@@ -45,10 +45,12 @@ public abstract class J2clTranspilerOptions {
 
   public abstract boolean getGenerateKytheIndexingMetadata();
 
+  public abstract boolean getExperimentalOptimizeAutovalue();
+
   public abstract Frontend getFrontend();
 
   public static Builder newBuilder() {
-    return new AutoValue_J2clTranspilerOptions.Builder();
+    return new AutoValue_J2clTranspilerOptions.Builder().setExperimentalOptimizeAutovalue(false);
   }
 
   /** A Builder for J2clTranspilerOptions. */
@@ -70,6 +72,8 @@ public abstract class J2clTranspilerOptions {
     public abstract Builder setEmitReadableSourceMap(boolean b);
 
     public abstract Builder setGenerateKytheIndexingMetadata(boolean b);
+
+    public abstract Builder setExperimentalOptimizeAutovalue(boolean b);
 
     public abstract Builder setFrontend(Frontend frontend);
 

@@ -54,6 +54,7 @@ def _collect_runfiles(ctx, files, deps):
 _J2CL_INTERNAL_LIB_ATTRS = {
     "readable_source_maps": attr.bool(default = False),
     "readable_library_info": attr.bool(default = False),
+    "experimental_optimize_autovalue": attr.bool(default = False),
 }
 
 _J2CL_LIB_ATTRS = {

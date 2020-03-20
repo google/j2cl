@@ -74,6 +74,12 @@ final class BazelJ2clBuilder extends BazelWorker {
   @Option(name = "-generatekytheindexingmetadata", hidden = true)
   protected boolean generateKytheIndexingMetadata = false;
 
+  @Option(
+      name = "-experimentaloptimizeautovalue",
+      usage = "Enables experomental optimizations for AutoValue. Not production ready.",
+      hidden = true)
+  protected boolean experimentalOptimizeAutovalue = false;
+
   /** Temporary flag to select the frontend during the transition to javac. */
   private static final Frontend FRONTEND =
       Frontend.valueOf(Ascii.toUpperCase(System.getProperty("j2cl.frontend", "jdt")));
@@ -125,6 +131,7 @@ final class BazelJ2clBuilder extends BazelWorker {
         .setEmitReadableLibraryInfo(readableLibraryInfo)
         .setEmitReadableSourceMap(this.readableSourceMaps)
         .setGenerateKytheIndexingMetadata(this.generateKytheIndexingMetadata)
+        .setExperimentalOptimizeAutovalue(this.experimentalOptimizeAutovalue)
         .setFrontend(FRONTEND)
         .build();
   }
