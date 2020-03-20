@@ -107,11 +107,18 @@ public class CommandLineInvocationTest extends TestCase {
             "public class NativeClass {",
             "  public native void nativeInstanceMethod();",
             "}")
+        .addCompilationUnit(
+            "NativeClass2",
+            "public class NativeClass2 {",
+            "  public native void nativeInstanceMethod();",
+            "}")
         .addNativeFile(
             "BadNameNativeClass", "NativeClass.prototype.m_nativeInstanceMethod = function () {}")
         .assertTranspileFails()
         .assertErrorsWithoutSourcePosition(
-            "Cannot find matching native file 'nativeclasstest/NativeClass.native.js'.");
+            "Unused native file 'nativeclasstest/BadNameNativeClass.native.js'.",
+            "Cannot find matching native file 'nativeclasstest/NativeClass.native.js'.",
+            "Cannot find matching native file 'nativeclasstest/NativeClass2.native.js'.");
   }
 
   public void testNativeJsFileForJsEnum() {

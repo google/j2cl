@@ -30,7 +30,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Optional;
 
 /**
@@ -77,7 +76,6 @@ public class OutputGeneratorStage {
       for (Type type : j2clCompilationUnit.getTypes()) {
         JavaScriptImplGenerator jsImplGenerator = new JavaScriptImplGenerator(problems, type);
 
-        // If the java type contains any native methods, search for matching native file.
         String typeRelativePath = getRelativePath(type.getDeclaration());
 
         NativeJavaScriptFile matchingNativeFile =
@@ -97,17 +95,14 @@ public class OutputGeneratorStage {
                 "%s '%s' does not support having a '.native.js' file.",
                 typeDeclaration.isJsEnum() ? "JsEnum" : "Native JsType",
                 typeDeclaration.getReadableDescription());
-            return;
+            continue;
           }
-        }
 
-        // If not matching native file is found, and the java type contains non-JsMethod native
-        // method, reports an error.
-        if (matchingNativeFile == null && type.containsNonJsNativeMethods()) {
+        } else if (type.containsNonJsNativeMethods()) {
           problems.error(
               "Cannot find matching native file '%s'.",
               typeRelativePath + NativeJavaScriptFile.NATIVE_EXTENSION);
-          return;
+          continue;
         }
 
         String javaScriptImplementationSource = jsImplGenerator.renderOutput();
@@ -184,7 +179,7 @@ public class OutputGeneratorStage {
     }
 
     // Error if any of the native implementation files were not used.
-    for (Entry<String, NativeJavaScriptFile> fileEntry : nativeFilesByPath.entrySet()) {
+    for (Map.Entry<String, NativeJavaScriptFile> fileEntry : nativeFilesByPath.entrySet()) {
       if (!fileEntry.getValue().wasUsed()) {
         problems.error("Unused native file '%s'.", fileEntry.getValue());
       }
@@ -199,7 +194,7 @@ public class OutputGeneratorStage {
       Map<SourcePosition, SourcePosition> javaSourcePositionByOutputSourcePosition) {
     KytheIndexingMetadata metadata = new KytheIndexingMetadata();
 
-    for (Entry<SourcePosition, SourcePosition> entry :
+    for (Map.Entry<SourcePosition, SourcePosition> entry :
         javaSourcePositionByOutputSourcePosition.entrySet()) {
 
       SourcePosition javaSourcePosition = entry.getValue();
@@ -282,31 +277,29 @@ public class OutputGeneratorStage {
     return Paths.get(packageName.replace('.', '/'), suffix).toString();
   }
 
-  /** Returns the absolute binary path for a given type. */
-  private static String getAbsolutePath(
-      CompilationUnit compilationUnit, TypeDeclaration typeDeclaration) {
-    String typeName = typeDeclaration.getSimpleBinaryName();
-    return compilationUnit.getDirectoryPath() + '/' + typeName;
-  }
-
   private static NativeJavaScriptFile getMatchingNativeFile(
       Map<String, NativeJavaScriptFile> nativeFilesByPath,
       CompilationUnit j2clCompilationUnit,
       Type type) {
-    NativeJavaScriptFile matchingNativeFile;
     // Locate matching native files that either have the same relative package as their Java
     // class (useful when Java and native.js files started in different directories on disk).
     // TODO(goktug): reconsider matching with relative name.
     TypeDeclaration typeDeclaration = getUnderlyingTypeDeclaration(type);
     String typeRelativePath = getRelativePath(typeDeclaration);
 
-    matchingNativeFile = nativeFilesByPath.get(typeRelativePath);
+    NativeJavaScriptFile matchingNativeFile = nativeFilesByPath.get(typeRelativePath);
     if (matchingNativeFile != null) {
       return matchingNativeFile;
     }
     String typeAbsolutePath =
         FrontendUtils.getJavaPath(getAbsolutePath(j2clCompilationUnit, typeDeclaration));
     return nativeFilesByPath.get(typeAbsolutePath);
+  }
+
+  /** Returns the absolute binary path for a given type. */
+  private static String getAbsolutePath(
+      CompilationUnit compilationUnit, TypeDeclaration typeDeclaration) {
+    return compilationUnit.getDirectoryPath() + '/' + typeDeclaration.getSimpleBinaryName();
   }
 
   private static TypeDeclaration getUnderlyingTypeDeclaration(Type type) {
