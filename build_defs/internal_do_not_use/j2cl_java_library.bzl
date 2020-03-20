@@ -16,8 +16,8 @@ def _impl_j2cl_library(ctx):
         output_jar = ctx.outputs.jar,
         javac_opts = ctx.attr.javacopts,
         internal_transpiler_flags = {
-            "readable_source_maps": ctx.attr.readable_source_maps,
-            "readable_library_info": ctx.attr.readable_library_info,
+            k: getattr(ctx.attr, k)
+            for k in _J2CL_INTERNAL_LIB_ATTRS.keys()
         },
     )
 

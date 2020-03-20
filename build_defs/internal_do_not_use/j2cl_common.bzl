@@ -200,12 +200,11 @@ def _j2cl_transpile(
     args.use_param_file("@%s", use_always = True)
     args.set_param_file_format("multiline")
     args.add_joined("-classpath", classpath, join_with = ctx.configuration.host_path_separator)
-    args.add("-output", output_dir.path)
+    args.add("-output", output_dir)
     args.add("-libraryinfooutput", library_info_output)
-    if internal_transpiler_flags.get("readable_source_maps"):
-        args.add("-readablesourcemaps")
-    if internal_transpiler_flags.get("readable_library_info"):
-        args.add("-readablelibraryinfo")
+    for flag, value in internal_transpiler_flags.items():
+        if value:
+            args.add("-" + flag.replace("_", ""))
     if ctx.var.get("GROK_ELLIPSIS_BUILD", None):
         args.add("-generatekytheindexingmetadata")
     args.add_all(srcs)
