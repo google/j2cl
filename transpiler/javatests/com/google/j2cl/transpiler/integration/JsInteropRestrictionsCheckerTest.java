@@ -2401,8 +2401,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  }",
             "}")
         .assertErrorsWithoutSourcePosition(
-            "Method 'void Buggy.foo(Object o)' should declare parameter 'o' as JsOptional",
-            "Method 'String Buggy.bar(Object o)' should declare parameter 'o' as JsOptional");
+            "Method 'void Buggy.foo(Object o)' should declare parameter 'o' as JsOptional.",
+            "Method 'String Buggy.bar(Object o)' should declare parameter 'o' as JsOptional.");
   }
 
   public void testJsOptionalNotAtEndFails() {

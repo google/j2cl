@@ -1559,7 +1559,7 @@ public class JsInteropRestrictionsChecker {
         if (!methodDescriptor.isParameterOptional(i)) {
           problems.error(
               method.getSourcePosition(),
-              "Method '%s' should declare parameter '%s' as JsOptional",
+              "Method '%s' should declare parameter '%s' as JsOptional.",
               method.getReadableDescription(),
               method.getParameters().get(i).getName());
           return;
