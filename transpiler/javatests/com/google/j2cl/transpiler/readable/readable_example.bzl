@@ -48,8 +48,8 @@ def readable_example(
         plugins = plugins,
         generate_build_test = False,
         tags = j2cl_library_tags,
-        _readable_source_maps = True,
-        _readable_library_info = generate_library_info,
+        readable_source_maps = True,
+        readable_library_info = generate_library_info,
     )
 
     if generate_library_info:

@@ -50,10 +50,6 @@ def j2cl_library(
     _ensureList(args, "srcs")
     _ensureList(args, "deps")
 
-    hidden_arg_names = [i for i in args if i.startswith("_")]
-    for arg_name in hidden_arg_names:
-        args[arg_name[1:]] = args.pop(arg_name)
-
     # If this is JRE itself, don't synthesize the JRE dep.
     target_name = "//" + native.package_name() + ":" + name
     if args["srcs"] and target_name != "//jre/java:jre":
