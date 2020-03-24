@@ -1,0 +1,140 @@
+goog.module('com.google.j2cl.transpiler.readable.autovalue.AutoValue_ExtendingAutoValue$impl');
+
+const ExtendingAutoValue = goog.require('com.google.j2cl.transpiler.readable.autovalue.ExtendingAutoValue$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let NullPointerException = goog.forwardDeclare('java.lang.NullPointerException$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+
+class AutoValue__ExtendingAutoValue extends ExtendingAutoValue {
+  /** @protected */
+  constructor() {
+    super();
+    /**@type {number}*/
+    this.f_baseField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_ExtendingAutoValue_ =
+        0;
+    /**@type {boolean}*/
+    this.f_booleanField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_ExtendingAutoValue_ =
+        false;
+    /**@type {?string}*/
+    this.f_stringField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_ExtendingAutoValue_;
+  }
+  /** @return {!AutoValue__ExtendingAutoValue} */
+  static $create__int__boolean__java_lang_String(
+      /** number */ baseField, /** boolean */ booleanField,
+      /** ?string */ stringField) {
+    AutoValue__ExtendingAutoValue.$clinit();
+    let $instance = new AutoValue__ExtendingAutoValue();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_autovalue_AutoValue_ExtendingAutoValue__int__boolean__java_lang_String(
+            baseField, booleanField, stringField);
+    return $instance;
+  }
+
+  $ctor__com_google_j2cl_transpiler_readable_autovalue_AutoValue_ExtendingAutoValue__int__boolean__java_lang_String(
+      /** number */ baseField, /** boolean */ booleanField,
+      /** ?string */ stringField) {
+    this.$ctor__com_google_j2cl_transpiler_readable_autovalue_ExtendingAutoValue__();
+    this.f_baseField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_ExtendingAutoValue_ =
+        baseField;
+    this.f_booleanField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_ExtendingAutoValue_ =
+        booleanField;
+    if ($Equality.$same(stringField, null)) {
+      throw $Exceptions.toJs(
+          NullPointerException.$create__java_lang_String('Null stringField'));
+    }
+    this.f_stringField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_ExtendingAutoValue_ =
+        stringField;
+  }
+  /** @override @return {number} */
+  m_getBaseField__() {
+    return this
+        .f_baseField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_ExtendingAutoValue_;
+  }
+  /** @override @return {boolean} */
+  m_getBooleanField__() {
+    return this
+        .f_booleanField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_ExtendingAutoValue_;
+  }
+  /** @override @return {?string} */
+  m_getStringField__() {
+    return this
+        .f_stringField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_ExtendingAutoValue_;
+  }
+  /** @override @return {?string} */
+  toString() {
+    return 'ExtendingAutoValue{' +
+        'baseField=' +
+        this.f_baseField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_ExtendingAutoValue_ +
+        ', ' +
+        'booleanField=' +
+        this.f_booleanField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_ExtendingAutoValue_ +
+        ', ' +
+        'stringField=' +
+        j_l_String.m_valueOf__java_lang_Object(
+            this.f_stringField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_ExtendingAutoValue_) +
+        '}';
+  }
+  /** @override @return {boolean} */
+  equals(/** * */ o) {
+    if ($Equality.$same(o, this)) {
+      return true;
+    }
+    if (ExtendingAutoValue.$isInstance(o)) {
+      let that =
+          /**@type {ExtendingAutoValue}*/ ($Casts.$to(o, ExtendingAutoValue));
+      return this.f_baseField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_ExtendingAutoValue_ ==
+          that.m_getBaseField__() &&
+          this.f_booleanField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_ExtendingAutoValue_ ==
+          that.m_getBooleanField__() &&
+          j_l_String.m_equals__java_lang_String__java_lang_Object(
+              this.f_stringField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_ExtendingAutoValue_,
+              that.m_getStringField__());
+    }
+    return false;
+  }
+  /** @override @return {number} */
+  hashCode() {
+    let h$ = 1;
+    h$ *= 1000003;
+    h$ ^=
+        this.f_baseField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_ExtendingAutoValue_;
+    h$ *= 1000003;
+    h$ ^=
+        this.f_booleanField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_ExtendingAutoValue_ ?
+        1231 :
+        1237;
+    h$ *= 1000003;
+    h$ ^= j_l_String.m_hashCode__java_lang_String(
+        this.f_stringField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_ExtendingAutoValue_);
+    return h$;
+  }
+
+  static $clinit() {
+    AutoValue__ExtendingAutoValue.$clinit = () => {};
+    AutoValue__ExtendingAutoValue.$loadModules();
+    ExtendingAutoValue.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof AutoValue__ExtendingAutoValue;
+  }
+
+  static $loadModules() {
+    NullPointerException =
+        goog.module.get('java.lang.NullPointerException$impl');
+    j_l_String = goog.module.get('java.lang.String$impl');
+    $Equality = goog.module.get('nativebootstrap.Equality$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+    $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+  }
+}
+$Util.$setClassMetadata(
+    AutoValue__ExtendingAutoValue,
+    'com.google.j2cl.transpiler.readable.autovalue.AutoValue_ExtendingAutoValue');
+
+exports = AutoValue__ExtendingAutoValue;
+//# sourceMappingURL=AutoValue_ExtendingAutoValue.js.map

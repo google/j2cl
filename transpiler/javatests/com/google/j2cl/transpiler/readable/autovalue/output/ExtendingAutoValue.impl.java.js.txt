@@ -1,0 +1,40 @@
+goog.module('com.google.j2cl.transpiler.readable.autovalue.ExtendingAutoValue$impl');
+
+const BaseClass = goog.require('com.google.j2cl.transpiler.readable.autovalue.BaseClass$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @abstract
+ */
+class ExtendingAutoValue extends BaseClass {
+  /** @protected */
+  constructor() {
+    super();
+  }
+
+  $ctor__com_google_j2cl_transpiler_readable_autovalue_ExtendingAutoValue__() {
+    this.$ctor__com_google_j2cl_transpiler_readable_autovalue_BaseClass__();
+  }
+  /** @abstract @return {boolean} */
+  m_getBooleanField__() {}
+  /** @abstract @return {?string} */
+  m_getStringField__() {}
+
+  static $clinit() {
+    ExtendingAutoValue.$clinit = () => {};
+    ExtendingAutoValue.$loadModules();
+    BaseClass.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof ExtendingAutoValue;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(
+    ExtendingAutoValue,
+    'com.google.j2cl.transpiler.readable.autovalue.ExtendingAutoValue');
+
+exports = ExtendingAutoValue;
+//# sourceMappingURL=ExtendingAutoValue.js.map
