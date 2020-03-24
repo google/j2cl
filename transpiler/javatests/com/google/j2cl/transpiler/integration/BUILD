@@ -6,8 +6,6 @@
 # Other integration tests will want to run transpiled output as JS and
 # should make use of j2cl_library macro.
 
-load(":optimized_js_list.bzl", "OPTIMIZED_JS_LIST")
-
 package(
     licenses = ["notice"],  # Apache 2.0
 )
