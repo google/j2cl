@@ -144,12 +144,24 @@ public class NormalizeJsOverlayMembers extends NormalizationPass {
   }
 
   private static MethodCall redirectCall(MethodCall methodCall, DeclaredTypeDescriptor targetType) {
-    if (methodCall.getTarget().isStatic()) {
-      MethodDescriptor methodDescriptor =
+    MethodDescriptor methodDescriptor = methodCall.getTarget();
+    if (methodDescriptor.isStatic()) {
+      MethodDescriptor declarationDescriptor =
+          methodDescriptor.getDeclarationDescriptor() == methodDescriptor
+              ? null
+              : MethodDescriptor.Builder.from(methodDescriptor.getDeclarationDescriptor())
+                  .setDeclarationMethodDescriptor(null)
+                  .setEnclosingTypeDescriptor(targetType)
+                  .setJsInfo(JsInfo.NONE)
+                  .build();
+
+      methodDescriptor =
           MethodDescriptor.Builder.from(methodCall.getTarget())
+              .setDeclarationMethodDescriptor(declarationDescriptor)
               .setEnclosingTypeDescriptor(targetType)
               .setJsInfo(JsInfo.NONE)
               .build();
+
       return MethodCall.Builder.from(methodCall)
           .setMethodDescriptor(methodDescriptor)
           .setQualifier(null)
