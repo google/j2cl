@@ -75,10 +75,21 @@ public class NormalizeStaticNativeMemberReferences extends NormalizationPass {
               return methodCall;
             }
             // A.abs() -> Math.abs().
+            MethodDescriptor declarationDescriptor =
+                methodDescriptor == methodDescriptor.getDeclarationDescriptor()
+                    ? null
+                    : MethodDescriptor.Builder.from(methodDescriptor.getDeclarationDescriptor())
+                        .setEnclosingTypeDescriptor(
+                            AstUtils.getNamespaceAsTypeDescriptor(
+                                methodDescriptor.getDeclarationDescriptor()))
+                        .setDeclarationMethodDescriptor(null)
+                        .build();
+
             MethodDescriptor newMethodDescriptor =
                 MethodDescriptor.Builder.from(methodDescriptor)
                     .setEnclosingTypeDescriptor(
                         AstUtils.getNamespaceAsTypeDescriptor(methodDescriptor))
+                    .setDeclarationMethodDescriptor(declarationDescriptor)
                     .build();
             checkArgument(methodCall.getQualifier() instanceof JavaScriptConstructorReference);
             return MethodCall.Builder.from(newMethodDescriptor)
