@@ -893,7 +893,7 @@ public class AstUtils {
 
   /**
    * Devirtualizes {@code Method} by making {@code this} into an explicit argument and placing the
-   * resulting method in {@enclosingTypeDescriptor}.
+   * resulting method in {@code enclosingTypeDescriptor}.
    */
   public static Method devirtualizeMethod(
       Method method, DeclaredTypeDescriptor enclosingTypeDescriptor) {
@@ -902,8 +902,8 @@ public class AstUtils {
 
   /**
    * Devirtualizes {@code Method} by making {@code this} into an explicit argument and placing the
-   * resulting method in {@enclosingTypeDescriptor} and adding {@code postfix} to its name to avoid
-   * possible name collisions with already existing static methods.
+   * resulting method in {@code enclosingTypeDescriptor} and adding {@code postfix} to its name to
+   * avoid possible name collisions with already existing static methods.
    */
   public static Method devirtualizeMethod(Method method, String postfix) {
     checkArgument(!postfix.isEmpty());
