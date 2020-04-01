@@ -16,6 +16,7 @@
 package com.google.j2cl.ast.processors;
 
 /**
- * Created by rluble on 6/19/15.
+ * Exception thrown when annotation processing should be aborted for the current class. Processing
+ * can continue on other classes.
  */
 public class AbortProcessingException extends RuntimeException {}
