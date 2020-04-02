@@ -301,10 +301,10 @@ public final class ConversionContextVisitor extends AbstractRewriter {
 
     // JsEnum boxing conversion context.
     if (AstUtils.matchesJsEnumBoxingConversionContext(binaryExpression)) {
-      if (AstUtils.isNonNativeJsEnum(leftOperand.getTypeDescriptor())) {
+      if (AstUtils.isNonNativeJsEnum(leftOperand.getDeclaredTypeDescriptor())) {
         leftOperand = contextRewriter.rewriteJsEnumBoxingConversionContext(leftOperand);
       }
-      if (AstUtils.isNonNativeJsEnum(rightOperand.getTypeDescriptor())) {
+      if (AstUtils.isNonNativeJsEnum(rightOperand.getDeclaredTypeDescriptor())) {
         rightOperand = contextRewriter.rewriteJsEnumBoxingConversionContext(rightOperand);
       }
     }

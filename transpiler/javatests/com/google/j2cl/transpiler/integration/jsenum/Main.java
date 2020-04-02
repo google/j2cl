@@ -53,6 +53,7 @@ public class Main {
     testNativeEnumClassInitialization();
     testDoNotAutoboxJsEnum();
     testUnckeckedCastJsEnum();
+    testAutoBoxing_relationalOperations();
     testAutoBoxing_typeInference();
     testAutoBoxing_specialMethods();
     testAutoBoxing_parameterizedLambda();
@@ -709,6 +710,25 @@ public class Main {
   @UncheckedCast
   private static <T> T uncheckedCast(@DoNotAutobox Object object) {
     return (T) object;
+  }
+
+  private static void testAutoBoxing_relationalOperations() {
+    PlainJsEnum one = PlainJsEnum.ONE;
+    Object boxedOne = PlainJsEnum.ONE;
+    assertTrue(one == boxingPassthrough(one));
+    assertTrue(boxedOne == boxingPassthrough(one));
+    assertTrue(boxingPassthrough(one) == one);
+    assertTrue(boxingPassthrough(one) == boxedOne);
+    assertFalse(one != boxedOne);
+    assertFalse(boxedOne != one);
+    assertFalse(one != boxingPassthrough(one));
+    assertFalse(boxedOne != boxingPassthrough(one));
+    assertFalse(boxingPassthrough(one) != one);
+    assertFalse(boxingPassthrough(one) != boxedOne);
+  }
+
+  private static <T> T boxingPassthrough(T t) {
+    return t;
   }
 
   private static void testAutoBoxing_specialMethods() {

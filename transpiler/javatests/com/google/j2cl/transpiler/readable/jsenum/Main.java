@@ -145,6 +145,7 @@ public class Main {
     templatedField.value = ComparableJsEnum.ONE;
     Arrays.asList(ComparableJsEnum.ONE);
     templatedField.getValue().ordinal();
+    boolean b = ComparableJsEnum.ONE == boxingPassthrough(ComparableJsEnum.ONE);
   }
 
   private static class TemplatedField<T> {
@@ -157,5 +158,9 @@ public class Main {
     T getValue() {
       return this.value;
     }
+  }
+
+  private static <T> T boxingPassthrough(T t) {
+    return t;
   }
 }

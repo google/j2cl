@@ -15,6 +15,8 @@
  */
 package javaemul.internal;
 
+import static javaemul.internal.InternalPreconditions.checkArgument;
+
 import java.io.Serializable;
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsFunction;
@@ -62,6 +64,7 @@ class Enums {
     if (value == null) {
       return null;
     }
+    checkArgument(!(value instanceof BoxedLightEnum));
     return cache(ctor, "$$enumValues/" + value, () -> new BoxedLightEnum<T>(value, ctor));
   }
 
@@ -87,6 +90,7 @@ class Enums {
     if (value == null) {
       return null;
     }
+    checkArgument(!(value instanceof BoxedLightEnum));
     return cache(ctor, "$$enumValues/" + value, () -> new BoxedComparableLightEnum<T>(value, ctor));
   }
 

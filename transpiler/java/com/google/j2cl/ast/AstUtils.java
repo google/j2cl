@@ -472,8 +472,12 @@ public class AstUtils {
   /** JsEnum comparison context. */
   public static boolean matchesJsEnumBoxingConversionContext(BinaryExpression binaryExpression) {
     BinaryOperator operator = binaryExpression.getOperator();
-    TypeDescriptor lhsTypeDescriptor = binaryExpression.getLeftOperand().getTypeDescriptor();
-    TypeDescriptor rhsTypeDescriptor = binaryExpression.getRightOperand().getTypeDescriptor();
+    // Use the declaration descriptor to ignore the specialization of type variables to JsEnums
+    // to understand whether the (returned) enum was boxed or unboxed.
+    TypeDescriptor lhsTypeDescriptor =
+        binaryExpression.getLeftOperand().getDeclaredTypeDescriptor();
+    TypeDescriptor rhsTypeDescriptor =
+        binaryExpression.getRightOperand().getDeclaredTypeDescriptor();
 
     return operator.isRelationalOperator()
         && (isNonNativeJsEnum(lhsTypeDescriptor) || isNonNativeJsEnum(rhsTypeDescriptor))
