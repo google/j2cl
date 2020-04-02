@@ -21,6 +21,7 @@ import static com.google.common.base.Preconditions.checkState;
 import com.google.j2cl.ast.annotations.Context;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.ast.processors.common.Processor;
+import com.google.j2cl.common.InternalCompilerError;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -81,6 +82,11 @@ public class CompilationUnit extends Node {
 
   @Override
   public Node accept(Processor processor) {
-    return Visitor_CompilationUnit.visit(processor, this);
+    try {
+      return Visitor_CompilationUnit.visit(processor, this);
+    } catch (Exception e) {
+      Node node = (Node) processor.getCurrentContext();
+      throw new InternalCompilerError(e, "Error while processing node:\n\n%s\n", node);
+    }
   }
 }

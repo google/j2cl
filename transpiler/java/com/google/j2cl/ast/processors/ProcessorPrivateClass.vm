@@ -1,13 +1,33 @@
 package ${packageName};
 
 import com.google.j2cl.ast.processors.common.Processor;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 abstract class ProcessorPrivate implements Processor {
+
+  private Deque<Object> stackOfContext = new ArrayDeque<Object>();
+
+  @Override
+  public final Object getCurrentContext() {
+    return stackOfContext.peek();
+  }
+
 #foreach($clazz in $classes)
 #if(${clazz.isContext()})
 
-  abstract void push${clazz.SimpleName}(${clazz.SimpleName} node);
-  abstract ${clazz.SimpleName} pop${clazz.SimpleName}();
+  private Deque<${clazz.SimpleName}> stackOf${clazz.SimpleName} = new ArrayDeque<>();
+  final void push${clazz.SimpleName}(${clazz.SimpleName} node) {
+    stackOfContext.push(node);
+    stackOf${clazz.SimpleName}.push(node);
+  }
+  final ${clazz.SimpleName} pop${clazz.SimpleName}() {
+    stackOfContext.pop();
+    return stackOf${clazz.SimpleName}.pop();
+  }
+  public final ${clazz.SimpleName} getCurrent${clazz.SimpleName}() {
+    return stackOf${clazz.SimpleName}.peek();
+  }
 #end
 #end
 

@@ -13,9 +13,9 @@
  */
 package com.google.j2cl.transpiler;
 
-
+import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableList;
-import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.Uninterruptibles;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.visitors.ArrayAccessNormalizer;
 import com.google.j2cl.ast.visitors.BridgeMethodsCreator;
@@ -93,6 +93,7 @@ import com.google.j2cl.generator.OutputGeneratorStage;
 import java.io.IOException;
 import java.nio.file.FileSystem;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -113,7 +114,14 @@ class J2clTranspiler {
     // ends all threads. But when the transpilation throws an exception, the exception propagates
     // out of main() and the process lingers due the live threads from these executors.
     executorService.shutdown();
-    return Futures.getUnchecked(result);
+
+    try {
+      return Uninterruptibles.getUninterruptibly(result);
+    } catch (ExecutionException e) {
+      // Try unwrapping the cause...
+      Throwables.throwIfUnchecked(e.getCause());
+      throw new AssertionError(e.getCause());
+    }
   }
 
   private final Problems problems = new Problems();

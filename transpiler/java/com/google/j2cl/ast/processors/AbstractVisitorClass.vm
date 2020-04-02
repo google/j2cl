@@ -1,24 +1,6 @@
 package ${packageName};
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-
 public abstract class AbstractVisitor extends ProcessorPrivate implements Visitor {
-#foreach($clazz in $classes)
-#if(${clazz.isContext()})
-
-  private Deque<${clazz.SimpleName}> stackOf${clazz.SimpleName} = new ArrayDeque<>();
-  final void push${clazz.SimpleName}(${clazz.SimpleName} node) {
-    stackOf${clazz.SimpleName}.push(node);
-  }
-  final ${clazz.SimpleName} pop${clazz.SimpleName}() {
-    return stackOf${clazz.SimpleName}.pop();
-  }
-  public final ${clazz.SimpleName} getCurrent${clazz.SimpleName}() {
-    return stackOf${clazz.SimpleName}.peek();
-  }
-#end
-#end
 #foreach($clazz in $classes)
 
   @Override

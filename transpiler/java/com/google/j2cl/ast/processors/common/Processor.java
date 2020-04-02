@@ -16,4 +16,6 @@
 package com.google.j2cl.ast.processors.common;
 
 /** An opaque interface representing a visitor. */
-public interface Processor {}
+public interface Processor {
+  Object getCurrentContext();
+}
