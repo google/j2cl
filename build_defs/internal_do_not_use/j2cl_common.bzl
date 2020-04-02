@@ -159,7 +159,8 @@ def _java_compile(ctx, name, srcs, deps, exports, plugins, exported_plugins, out
     )
 
 def _strip_gwt_incompatible(ctx, name, java_srcs):
-    output_file = ctx.actions.declare_file(name + "_stripped-src.jar")
+    # Paths are matched by Kythe to identify generated J2CL sources.
+    output_file = ctx.actions.declare_file(name + "_j2cl_stripped-src.jar")
 
     args = ctx.actions.args()
     args.use_param_file("@%s", use_always = True)
