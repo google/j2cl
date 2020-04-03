@@ -39,34 +39,22 @@ def j2cl_library(
     Implicit output targets:
       lib<name>.jar: A java archive containing the byte code.
       lib<name>-src.jar: A java archive containing the sources (source jar).
-
-    Args:
-      srcs: Source files (.java or .srcjar) to compile.
-      deps: Labels of other j2cl_library() rules.
-            NOT labels of java_library() rules.
     """
     args = dict(kwargs)
 
-    _ensureList(args, "srcs")
-    _ensureList(args, "deps")
-
     # If this is JRE itself, don't synthesize the JRE dep.
     target_name = "//" + native.package_name() + ":" + name
-    if args["srcs"] and target_name != "//jre/java:jre":
-        args["deps"].append(Label("//build_defs/internal_do_not_use:jre", relative_to_caller_repository = False))
+    if args.get("srcs") and target_name != "//jre/java:jre":
+        jre = Label(
+            "//build_defs/internal_do_not_use:jre",
+            relative_to_caller_repository = False,
+        )
+        args["deps"] = (args.get("deps") or []) + [jre]
 
     j2cl_library_rule(
         name = name,
         **args
     )
 
-    if args["srcs"] and (generate_build_test == None or generate_build_test):
+    if args.get("srcs") and (generate_build_test == None or generate_build_test):
         build_test(name, kwargs.get("tags", []))
-
-def _ensureList(args, name):
-    # TODO(goktug): Remove to_list() coercions after cleaning the callsites w/ depsets.
-    old_value = args.get(name) or []
-    if type(old_value) == type(depset()):
-        old_value = old_value.to_list()
-
-    args[name] = old_value + []
