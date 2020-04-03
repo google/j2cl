@@ -32,11 +32,11 @@ public abstract class Statement extends Node implements HasSourcePosition, Clone
   }
 
   @Override
-  public SourcePosition getSourcePosition() {
+  public final SourcePosition getSourcePosition() {
     return sourcePosition;
   }
 
-  public void setSourcePosition(SourcePosition sourcePosition) {
+  public final void setSourcePosition(SourcePosition sourcePosition) {
     this.sourcePosition = checkNotNull(sourcePosition);
   }
 
