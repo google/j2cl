@@ -18,7 +18,6 @@ package com.google.j2cl.ast.visitors;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 
-import com.google.common.collect.ImmutableList;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CastExpression;
@@ -27,23 +26,21 @@ import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldDescriptor;
-import com.google.j2cl.ast.InitializerBlock;
+import com.google.j2cl.ast.FieldDescriptor.FieldOrigin;
 import com.google.j2cl.ast.JsDocCastExpression;
-import com.google.j2cl.ast.JsInfo;
-import com.google.j2cl.ast.Member;
+import com.google.j2cl.ast.Literal;
 import com.google.j2cl.ast.MemberReference;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.NewInstance;
+import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.Type;
-import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.common.InternalCompilerError;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Normalizes JsEnum classes into a native JsEnum with overlays and a JsEnum that represents the
@@ -53,7 +50,6 @@ public class NormalizeJsEnums extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     normalizeNonNativeJsEnums(compilationUnit);
-    normalizeJsEnumMemberReferencesToJsOverlay(compilationUnit);
     fixEnumMethodCalls(compilationUnit);
   }
 
@@ -62,183 +58,80 @@ public class NormalizeJsEnums extends NormalizationPass {
    * JsEnum with only the Enum constants.
    */
   private void normalizeNonNativeJsEnums(CompilationUnit compilationUnit) {
-    for (Type type : ImmutableList.copyOf(compilationUnit.getTypes())) {
-      if (type.isJsEnum() && !type.isNative()) {
-        compilationUnit.addType(createClosureJsEnum(type));
-        convertJsEnumToNative(type);
-      }
-    }
-  }
+    compilationUnit.accept(
+        new AbstractRewriter() {
+          @Override
+          public boolean shouldProcessType(Type type) {
+            return AstUtils.isNonNativeJsEnum(type.getTypeDescriptor());
+          }
 
-  /**
-   * Extracts a type that represents the closure enum containing only fields derived from the enum
-   * fields in {@code type}.
-   */
-  private static Type createClosureJsEnum(Type type) {
-    Type jsEnumType =
-        new Type(type.getSourcePosition(), type.getVisibility(), type.getDeclaration());
+          @Override
+          public Node rewriteField(Field field) {
+            if (AstUtils.isJsEnumCustomValueField(field.getDescriptor())) {
+              // remove value field which are only needed for definition.
+              return null;
+            }
 
-    int nextOrdinal = 0;
-    // rewrite enum fields to be initialized directly the corresponding literal
-    for (Field enumField : type.getEnumFields()) {
-      jsEnumType.addField(createClosureEnumConstant(enumField, nextOrdinal++));
-    }
-    return jsEnumType;
+            if (field.getDescriptor().getOrigin() == FieldOrigin.SYNTHETIC_ORDINAL_FIELD) {
+              // remove synthesized ordinal constants since there are not needed for JsEnum.
+              return null;
+            }
+
+            if (field.isEnumField()) {
+              return createJsEnumConstant(field);
+            }
+
+            checkArgument(field.isStatic());
+            return field;
+          }
+
+          @Override
+          public Node rewriteMethod(Method method) {
+            if (method.isConstructor()) {
+              // remove constructor since it is only needed for definition.
+              return null;
+            }
+
+            return method;
+          }
+        });
   }
 
   /**
    * Rewrites the initializer enum constants by extracting the literal for the constructor
    * invocation.
    */
-  private static Field createClosureEnumConstant(Field field, int ordinal) {
-
-    Expression initializer = getJsEnumConstantValue(field);
-    if (initializer == null) {
-      initializer = NumberLiteral.fromInt(ordinal);
-    }
-
-    FieldDescriptor fieldDescriptor = field.getDescriptor();
-    TypeDescriptor closureEnumUnderlyingType =
+  private static Field createJsEnumConstant(Field field) {
+    TypeDescriptor enumValueType =
         AstUtils.getJsEnumValueFieldType(
-            fieldDescriptor.getEnclosingTypeDescriptor().getTypeDeclaration());
-
+            field.getDescriptor().getEnclosingTypeDescriptor().getTypeDeclaration());
     FieldDescriptor closureEnumConstantFieldDescriptor =
-        FieldDescriptor.Builder.from(fieldDescriptor)
-            .setTypeDescriptor(closureEnumUnderlyingType)
+        FieldDescriptor.Builder.from(field.getDescriptor())
+            .setTypeDescriptor(enumValueType)
             .setFinal(true)
             .setCompileTimeConstant(true)
-            .setEnumConstant(false)
+            .setEnumConstant(true)
             .build();
     return Field.Builder.from(field)
         .setDescriptor(closureEnumConstantFieldDescriptor)
-        .setInitializer(initializer)
+        .setInitializer(getJsEnumConstantValue(field))
         .build();
   }
 
   /** Returns the initialization value for a JsEnum constant. */
   private static Expression getJsEnumConstantValue(Field field) {
     checkState(field.isEnumField());
-    NewInstance initializer = (NewInstance) field.getInitializer();
-    List<Expression> arguments = initializer.getArguments();
-    if (arguments.size() != 1) {
-      // Not a valid initialization. The code will be rejected.
-      return null;
-    }
-    return arguments.get(0);
-  }
 
-  /** Convert the JsEnum to a native JsEnum so that they are handled uniformly. */
-  private static void convertJsEnumToNative(Type type) {
-
-    type.setMembers(
-        type.getMembers().stream()
-            .filter(NormalizeJsEnums::shouldMoveToNativeType)
-            .map(NormalizeJsEnums::createJsOverlayMember)
-            .collect(Collectors.toList()));
-
-    // Change to a native type.
-    type.setTypeDeclaration(createNativeEnumTypeDeclaration(type.getDeclaration()));
-  }
-
-  /** Returns the type declaration corresponding to the native enum. */
-  private static TypeDeclaration createNativeEnumTypeDeclaration(TypeDeclaration typeDeclaration) {
-    return TypeDeclaration.Builder.from(typeDeclaration)
-        .setClassComponents(
-            ImmutableList.<String>builder()
-                .addAll(typeDeclaration.getClassComponents())
-                .add("$ClosureEnum")
-                .build())
-        .setCustomizedJsNamespace(typeDeclaration.getJsNamespace())
-        .setSimpleJsName(typeDeclaration.getSimpleJsName())
-        .setJsType(true)
-        .setNative(true)
-        .build();
-  }
-
-  private static boolean shouldMoveToNativeType(Member member) {
-    if (member.isEnumField()) {
-      return false;
-    }
-    if (AstUtils.isJsEnumCustomValueField(member.getDescriptor())) {
-      // remove value field which are only needed for definition.
-      return false;
-    }
-    if (member.isConstructor()) {
-      // remove constructor since it is only needed for definition.
-      return false;
-    }
-    return true;
-  }
-
-  /**
-   * Converts member to {@code @JsOverlay} so that it is handled by {@link
-   * NormalizeJsOverlayMembers}.
-   */
-  private static Member createJsOverlayMember(Member member) {
-    if (member.isField()) {
-      checkArgument(member.isStatic());
-      Field field = (Field) member;
-      return Field.Builder.from(field).setDescriptor(toJsOverlay(field.getDescriptor())).build();
-    } else if (member.isMethod()) {
-      Method method = (Method) member;
-      return Method.Builder.from(method)
-          .setMethodDescriptor(toJsOverlay(method.getDescriptor()))
-          .build();
+    List<Expression> arguments = ((NewInstance) field.getInitializer()).getArguments();
+    if (field.getDescriptor().getEnclosingTypeDescriptor().getJsEnumInfo().hasCustomValue()) {
+      checkState(arguments.size() == 3);
+      Expression valueLiteral = arguments.get(2);
+      checkState(valueLiteral instanceof Literal);
+      return valueLiteral;
     } else {
-      checkArgument(member.isStatic());
-      InitializerBlock initializerBlock = (InitializerBlock) member;
-      return InitializerBlock.Builder.from(initializerBlock)
-          .setDescriptor(toJsOverlay(initializerBlock.getDescriptor()))
-          .build();
+      checkState(arguments.size() == 2);
+      return NumberLiteral.fromInt(field.getEnumOrdinal());
     }
-  }
-
-  /** Rewrites member references to JsOverlay references. */
-  private void normalizeJsEnumMemberReferencesToJsOverlay(CompilationUnit compilationUnit) {
-    compilationUnit.accept(
-        new AbstractRewriter() {
-          @Override
-          public FieldAccess rewriteFieldAccess(FieldAccess fieldAccess) {
-            FieldDescriptor fieldDescriptor = fieldAccess.getTarget();
-            if (!fieldDescriptor.getEnclosingTypeDescriptor().isJsEnum()
-                || fieldDescriptor.isEnumConstant()
-                || AstUtils.isJsEnumCustomValueField(fieldDescriptor)) {
-              return fieldAccess;
-            }
-
-            // References to static fields now need to be rewritten as references to the
-            // JsOverlay field.
-            return FieldAccess.Builder.from(fieldAccess)
-                .setTargetFieldDescriptor(toJsOverlay(fieldAccess.getTarget()))
-                .build();
-          }
-
-          @Override
-          public MethodCall rewriteMethodCall(MethodCall methodCall) {
-            MethodDescriptor methodDescriptor = methodCall.getTarget();
-            if (!methodDescriptor.getEnclosingTypeDescriptor().isJsEnum()) {
-              return methodCall;
-            }
-
-            // JsEnum method calls now need to be rewritten as calls to the overlay method.
-            return MethodCall.Builder.from(methodCall)
-                .setMethodDescriptor(toJsOverlay(methodDescriptor))
-                .build();
-          }
-        });
-  }
-
-  private static FieldDescriptor toJsOverlay(FieldDescriptor fieldDescriptor) {
-    checkState(fieldDescriptor.isStatic());
-    return FieldDescriptor.Builder.from(fieldDescriptor)
-        .setJsInfo(JsInfo.Builder.from(fieldDescriptor.getJsInfo()).setJsOverlay(true).build())
-        .build();
-  }
-
-  private static MethodDescriptor toJsOverlay(MethodDescriptor methodDescriptor) {
-    return MethodDescriptor.Builder.from(methodDescriptor)
-        .setJsInfo(JsInfo.Builder.from(methodDescriptor.getJsInfo()).setJsOverlay(true).build())
-        .build();
   }
 
   /**

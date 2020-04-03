@@ -16,6 +16,7 @@
 package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
 
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.ast.processors.common.Processor;
@@ -31,6 +32,8 @@ public class Field extends Member {
   private final Variable capturedVariable;
   // TODO(b/112150736): generalize concept of the source position for names to members.
   private final Optional<SourcePosition> nameSourcePosition;
+  // Only valid for enum fields, where it is >= 0.
+  private int enumOrdinal = -1;
 
   private Field(
       SourcePosition sourcePosition,
@@ -71,13 +74,24 @@ public class Field extends Member {
   }
 
   @Override
+  public boolean isField() {
+    return true;
+  }
+
+  @Override
   public boolean isEnumField() {
     return getDescriptor().isEnumConstant();
   }
 
-  @Override
-  public boolean isField() {
-    return true;
+  public void setEnumOrdinal(int ordinal) {
+    checkState(isEnumField());
+    this.enumOrdinal = ordinal;
+  }
+
+  public int getEnumOrdinal() {
+    checkState(isEnumField());
+    checkState(enumOrdinal != -1);
+    return enumOrdinal;
   }
 
   @Override

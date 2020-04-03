@@ -48,7 +48,7 @@ public class NormalizeEnumClasses extends NormalizationPass {
   public void applyTo(CompilationUnit compilationUnit) {
 
     for (Type type : compilationUnit.getTypes()) {
-      if (!type.isEnumOrSubclass() || type.isJsEnum()) {
+      if (!type.isEnumOrSubclass() || type.isNative()) {
         continue;
       }
 
@@ -144,15 +144,15 @@ public class NormalizeEnumClasses extends NormalizationPass {
     int nextOrdinal = 0;
     List<Field> ordinalConstantFields = new ArrayList<>();
     for (Field enumField : type.getEnumFields()) {
+      enumField.setEnumOrdinal(nextOrdinal++);
+
       FieldDescriptor ordinalConstantFieldDescriptor =
           AstUtils.getEnumOrdinalConstantFieldDescriptor(enumField.getDescriptor());
-
-      final int currentOrdinal = nextOrdinal++;
       // Create a constant field to hold the ordinal for the current enum value.
       ordinalConstantFields.add(
           Field.Builder.from(ordinalConstantFieldDescriptor)
               .setSourcePosition(enumField.getSourcePosition())
-              .setInitializer(NumberLiteral.fromInt(currentOrdinal))
+              .setInitializer(NumberLiteral.fromInt(enumField.getEnumOrdinal()))
               .build());
     }
     type.addFields(ordinalConstantFields);

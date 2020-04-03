@@ -67,12 +67,12 @@ import com.google.j2cl.ast.visitors.NormalizeJsAwaitMethodInvocations;
 import com.google.j2cl.ast.visitors.NormalizeJsDocCastExpressions;
 import com.google.j2cl.ast.visitors.NormalizeJsEnums;
 import com.google.j2cl.ast.visitors.NormalizeJsFunctionPropertyInvocations;
-import com.google.j2cl.ast.visitors.NormalizeJsOverlayMembers;
 import com.google.j2cl.ast.visitors.NormalizeJsVarargs;
 import com.google.j2cl.ast.visitors.NormalizeLiterals;
 import com.google.j2cl.ast.visitors.NormalizeLongs;
 import com.google.j2cl.ast.visitors.NormalizeMultiExpressions;
 import com.google.j2cl.ast.visitors.NormalizeNestedClassConstructors;
+import com.google.j2cl.ast.visitors.NormalizeOverlayMembers;
 import com.google.j2cl.ast.visitors.NormalizeStaticMemberQualifiers;
 import com.google.j2cl.ast.visitors.NormalizeStaticNativeMemberReferences;
 import com.google.j2cl.ast.visitors.NormalizeSwitchStatements;
@@ -167,7 +167,6 @@ class J2clTranspiler {
             new ImplementLambdaExpressions(),
             new OptimizeAnonymousInnerClassesToFunctionExpressions(),
             new NormalizeFunctionExpressions(),
-            new NormalizeJsEnums(),
             // Default constructors and explicit super calls should be synthesized first.
             new CreateDefaultConstructors(),
             new InsertExplicitSuperCalls(),
@@ -187,8 +186,9 @@ class J2clTranspiler {
             new FixSuperCallQualifiers(),
 
             // Runs after all passes that synthesize overlays.
-            new NormalizeJsOverlayMembers(),
             new NormalizeEnumClasses(),
+            new NormalizeJsEnums(),
+            new NormalizeOverlayMembers(),
             new NormalizeInterfaceMethods(),
             // End of class structure normalization.
 

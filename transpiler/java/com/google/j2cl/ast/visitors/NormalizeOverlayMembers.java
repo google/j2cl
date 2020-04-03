@@ -28,6 +28,7 @@ import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.InitializerBlock;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.Member;
+import com.google.j2cl.ast.MemberDescriptor;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -36,7 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /** Creates Overlay types, devirtualizes instance overlay methods and redirects member accesses. */
-public class NormalizeJsOverlayMembers extends NormalizationPass {
+public class NormalizeOverlayMembers extends NormalizationPass {
 
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
@@ -70,7 +71,7 @@ public class NormalizeJsOverlayMembers extends NormalizationPass {
     overlayClass.setOverlaidTypeDescriptor(type.getDeclaration().toUnparameterizedTypeDescriptor());
 
     for (Member member : type.getMembers()) {
-      if (!member.getDescriptor().isJsOverlay()) {
+      if (!isOverlay(member.getDescriptor())) {
         continue;
       }
       if (member.isMethod()) {
@@ -91,7 +92,7 @@ public class NormalizeJsOverlayMembers extends NormalizationPass {
       }
     }
 
-    type.getMembers().removeIf(member -> member.getDescriptor().isJsOverlay());
+    type.getMembers().removeIf(member -> isOverlay(member.getDescriptor()));
     return overlayClass;
   }
 
@@ -115,7 +116,7 @@ public class NormalizeJsOverlayMembers extends NormalizationPass {
           public MethodCall rewriteMethodCall(MethodCall methodCall) {
             MethodDescriptor methodDescriptor = methodCall.getTarget();
 
-            if (methodDescriptor.isJsOverlay()) {
+            if (isOverlay(methodDescriptor)) {
               return redirectCall(
                   methodCall,
                   methodDescriptor
@@ -128,7 +129,7 @@ public class NormalizeJsOverlayMembers extends NormalizationPass {
           @Override
           public FieldAccess rewriteFieldAccess(FieldAccess fieldAccess) {
             FieldDescriptor target = fieldAccess.getTarget();
-            if (target.isJsOverlay()) {
+            if (isOverlay(target)) {
               checkArgument(target.isStatic());
               DeclaredTypeDescriptor overlayTypeDescriptor =
                   target.getEnclosingTypeDescriptor().getOverlayImplementationTypeDescriptor();
@@ -168,5 +169,11 @@ public class NormalizeJsOverlayMembers extends NormalizationPass {
           .build();
     }
     return AstUtils.devirtualizeMethodCall(methodCall, targetType, OVERLAY_METHOD_SUFFIX);
+  }
+
+  private static boolean isOverlay(MemberDescriptor memberDescriptor) {
+    return memberDescriptor.isJsOverlay()
+        || (AstUtils.isNonNativeJsEnum(memberDescriptor.getEnclosingTypeDescriptor())
+            && !memberDescriptor.isEnumConstant());
   }
 }
