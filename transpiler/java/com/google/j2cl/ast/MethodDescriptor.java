@@ -26,8 +26,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import com.google.common.collect.Streams;
-import com.google.j2cl.ast.annotations.Visitable;
-import com.google.j2cl.ast.processors.common.Processor;
 import com.google.j2cl.common.ThreadLocalInterner;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -42,7 +40,6 @@ import javax.annotation.Nullable;
 
 /** A reference to a method. */
 @AutoValue
-@Visitable
 public abstract class MethodDescriptor extends MemberDescriptor {
   /** A method parameter descriptor */
   @AutoValue
@@ -422,11 +419,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         .setParameterDescriptors(Collections.emptyList())
         .setTypeParameterTypeDescriptors(Collections.emptyList())
         .setReturnTypeDescriptor(PrimitiveTypes.VOID);
-  }
-
-  @Override
-  public Node accept(Processor processor) {
-    return Visitor_MethodDescriptor.visit(processor, this);
   }
 
   /** Returns a description that is useful for error messages. */

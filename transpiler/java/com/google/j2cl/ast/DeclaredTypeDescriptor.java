@@ -30,8 +30,6 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.MoreCollectors;
 import com.google.j2cl.ast.MethodDescriptor.MethodOrigin;
-import com.google.j2cl.ast.annotations.Visitable;
-import com.google.j2cl.ast.processors.common.Processor;
 import com.google.j2cl.common.ThreadLocalInterner;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -54,7 +52,6 @@ import javax.annotation.Nullable;
  * this class is a value type. Those properties are set through {@code DescriptorFactory}.
  */
 @AutoValue
-@Visitable
 public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     implements HasUnusableByJsSuppression {
 
@@ -684,11 +681,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
                 .map(TypeDescriptor::getReadableDescription)
                 .collect(Collectors.joining(", ", "<", ">"))
             : "");
-  }
-
-  @Override
-  public Node accept(Processor processor) {
-    return Visitor_DeclaredTypeDescriptor.visit(processor, this);
   }
 
   abstract Builder toBuilder();

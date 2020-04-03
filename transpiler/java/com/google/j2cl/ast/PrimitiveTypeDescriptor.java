@@ -20,15 +20,10 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.collect.ImmutableMap;
-import com.google.j2cl.ast.annotations.Visitable;
-import com.google.j2cl.ast.processors.common.Processor;
 import java.util.Map;
 import java.util.function.Function;
-import javax.annotation.concurrent.Immutable;
 
 /** A primitive type. */
-@Visitable
-@Immutable
 public class PrimitiveTypeDescriptor extends TypeDescriptor {
   private final String name;
   private final String boxedClassName;
@@ -188,11 +183,6 @@ public class PrimitiveTypeDescriptor extends TypeDescriptor {
   @Override
   public String getUniqueId() {
     return getSimpleSourceName();
-  }
-
-  @Override
-  public Node accept(Processor processor) {
-    return Visitor_PrimitiveTypeDescriptor.visit(processor, this);
   }
 
   PrimitiveTypeDescriptor(String name, String boxedClassName, int precisionOrder) {

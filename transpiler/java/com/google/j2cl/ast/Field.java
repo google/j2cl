@@ -26,7 +26,7 @@ import javax.annotation.Nullable;
 /** Field declaration node. */
 @Visitable
 public class Field extends Member {
-  @Visitable FieldDescriptor fieldDescriptor;
+  private final FieldDescriptor fieldDescriptor;
   @Visitable @Nullable Expression initializer;
   private final Variable capturedVariable;
   // TODO(b/112150736): generalize concept of the source position for names to members.

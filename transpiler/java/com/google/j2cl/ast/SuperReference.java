@@ -25,9 +25,9 @@ import com.google.j2cl.ast.processors.common.Processor;
  */
 @Visitable
 public class SuperReference extends Expression {
-  @Visitable TypeDescriptor typeDescriptor;
+  private final DeclaredTypeDescriptor typeDescriptor;
 
-  public SuperReference(TypeDescriptor typeDescriptor) {
+  public SuperReference(DeclaredTypeDescriptor typeDescriptor) {
     this.typeDescriptor = checkNotNull(typeDescriptor);
   }
 

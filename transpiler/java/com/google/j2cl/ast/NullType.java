@@ -16,15 +16,12 @@
 package com.google.j2cl.ast;
 
 import com.google.common.collect.ImmutableMap;
-import com.google.j2cl.ast.annotations.Visitable;
-import com.google.j2cl.ast.processors.common.Processor;
 import com.google.j2cl.common.InternalCompilerError;
 import java.util.Map;
 import java.util.function.Function;
 import javax.annotation.Nullable;
 
 /** The type of the null value. */
-@Visitable
 public class NullType extends TypeDescriptor {
   @Override
   public boolean isNullable() {
@@ -87,11 +84,6 @@ public class NullType extends TypeDescriptor {
   public String getUniqueId() {
     // Return an id that can not clash with those of other type descriptors.
     return ":null";
-  }
-
-  @Override
-  public Node accept(Processor processor) {
-    return Visitor_NullType.visit(processor, this);
   }
 
   // Only instantiated by TypeDescriptors.

@@ -29,7 +29,7 @@ import javax.annotation.Nullable;
 @Visitable
 public class NewInstance extends Invocation {
   @Visitable @Nullable Expression qualifier;
-  @Visitable MethodDescriptor constructorMethodDescriptor;
+  private final MethodDescriptor constructorMethodDescriptor;
   @Visitable List<Expression> arguments = new ArrayList<>();
 
   private NewInstance(

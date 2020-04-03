@@ -32,8 +32,6 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import com.google.common.collect.Streams;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
-import com.google.j2cl.ast.annotations.Visitable;
-import com.google.j2cl.ast.processors.common.Processor;
 import com.google.j2cl.common.ThreadLocalInterner;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -61,8 +59,7 @@ import javax.annotation.Nullable;
  * thought of as type parameters.
  */
 @AutoValue
-@Visitable
-public abstract class TypeDeclaration extends Node
+public abstract class TypeDeclaration
     implements HasJsNameInfo, HasReadableDescription, HasUnusableByJsSuppression {
   /**
    * References to some descriptors need to be deferred in some cases since it will cause infinite
@@ -70,11 +67,6 @@ public abstract class TypeDeclaration extends Node
    */
   public interface DescriptorFactory<T> {
     T get(TypeDeclaration typeDeclaration);
-  }
-
-  @Override
-  public Node accept(Processor processor) {
-    return Visitor_TypeDeclaration.visit(processor, this);
   }
 
   @Override

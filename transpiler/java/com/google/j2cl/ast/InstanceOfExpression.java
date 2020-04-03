@@ -26,8 +26,8 @@ import com.google.j2cl.common.SourcePosition;
 @Visitable
 public class InstanceOfExpression extends Expression implements HasSourcePosition {
   @Visitable Expression expression;
-  @Visitable TypeDescriptor testTypeDescriptor;
-  SourcePosition sourcePosition;
+  private final TypeDescriptor testTypeDescriptor;
+  private final SourcePosition sourcePosition;
 
   private InstanceOfExpression(
       SourcePosition sourcePosition, Expression expression, TypeDescriptor testTypeDescriptor) {

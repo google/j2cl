@@ -23,7 +23,7 @@ import com.google.j2cl.ast.processors.common.Processor;
 /** Refers a constructor in Javascript. */
 @Visitable
 public class JavaScriptConstructorReference extends Expression {
-  @Visitable TypeDeclaration typeDeclaration;
+  private final TypeDeclaration typeDeclaration;
 
   public JavaScriptConstructorReference(TypeDeclaration typeDeclaration) {
     this.typeDeclaration = checkNotNull(typeDeclaration);

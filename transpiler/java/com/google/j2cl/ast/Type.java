@@ -32,11 +32,11 @@ import java.util.List;
 @Visitable
 @Context
 public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasReadableDescription {
-  private Visibility visibility;
+  private final Visibility visibility;
   private boolean isStatic;
-  @Visitable TypeDeclaration typeDeclaration;
+  private TypeDeclaration typeDeclaration;
   @Visitable List<Member> members = new ArrayList<>();
-  private SourcePosition sourcePosition;
+  private final SourcePosition sourcePosition;
 
   /** The underlying type descriptor for synthetic @JsOverlay implementation types. */
   private DeclaredTypeDescriptor overlaidTypeDescriptor;

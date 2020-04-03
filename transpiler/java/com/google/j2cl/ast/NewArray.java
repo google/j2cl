@@ -29,7 +29,7 @@ import javax.annotation.Nullable;
  */
 @Visitable
 public class NewArray extends Expression {
-  @Visitable ArrayTypeDescriptor typeDescriptor;
+  private final ArrayTypeDescriptor typeDescriptor;
   @Visitable List<Expression> dimensionExpressions = new ArrayList<>();
   @Nullable @Visitable ArrayLiteral arrayLiteral;
 

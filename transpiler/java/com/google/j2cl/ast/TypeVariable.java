@@ -18,8 +18,6 @@ package com.google.j2cl.ast;
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
 import com.google.common.collect.ImmutableSet;
-import com.google.j2cl.ast.annotations.Visitable;
-import com.google.j2cl.ast.processors.common.Processor;
 import com.google.j2cl.common.ThreadLocalInterner;
 import java.util.Map;
 import java.util.Set;
@@ -37,7 +35,6 @@ import javax.annotation.Nullable;
  * TypeVariable class is a value type. Those properties are set through {@code Supplier}.
  */
 @AutoValue
-@Visitable
 public abstract class TypeVariable extends TypeDescriptor implements HasName {
 
   public abstract String getName();
@@ -143,11 +140,6 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
   public String getUniqueId() {
     String prefix = isNullable() ? "?" : "!";
     return prefix + getUniqueKey();
-  }
-
-  @Override
-  public Node accept(Processor processor) {
-    return Visitor_TypeVariable.visit(processor, this);
   }
 
   abstract Builder toBuilder();

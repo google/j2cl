@@ -20,14 +20,11 @@ import static com.google.common.base.Preconditions.checkState;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.BooleanLiteral;
 import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.MemberDescriptor;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.NullLiteral;
 import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.StringLiteral;
-import com.google.j2cl.ast.TypeDeclaration;
-import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.VariableReference;
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -54,11 +51,6 @@ public class VerifySingleAstReference {
     compilationUnit.accept(
         new AbstractVisitor() {
           Deque<Statement> statementStack = new ArrayDeque<>();
-
-          @Override
-          public boolean enterMemberDescriptor(MemberDescriptor memberDescriptor) {
-            return false;
-          }
 
           @Override
           public boolean enterNode(final Node node) {
@@ -104,17 +96,6 @@ public class VerifySingleAstReference {
             return false;
           }
 
-          // TypeDeclarations are references and can appear multiple times in the ast.
-          @Override
-          public boolean enterTypeDeclaration(TypeDeclaration typeDeclaration) {
-            return false;
-          }
-
-          // TypeDescriptors are references and can appear multiple times in the ast.
-          @Override
-          public boolean enterTypeDescriptor(TypeDescriptor typeDescriptor) {
-            return false;
-          }
 
           @Override
           public boolean enterVariableReference(VariableReference variableReference) {

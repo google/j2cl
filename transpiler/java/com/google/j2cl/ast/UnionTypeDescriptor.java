@@ -21,8 +21,6 @@ import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
-import com.google.j2cl.ast.annotations.Visitable;
-import com.google.j2cl.ast.processors.common.Processor;
 import com.google.j2cl.common.ThreadLocalInterner;
 import java.util.Map;
 import java.util.Set;
@@ -48,7 +46,6 @@ import javax.annotation.Nullable;
  * </pre>
  */
 @AutoValue
-@Visitable
 public abstract class UnionTypeDescriptor extends TypeDescriptor {
 
   public abstract ImmutableList<TypeDescriptor> getUnionTypeDescriptors();
@@ -165,11 +162,6 @@ public abstract class UnionTypeDescriptor extends TypeDescriptor {
             .collect(ImmutableList.toImmutableList());
 
     return newBuilder().setUnionTypeDescriptors(specializedUnionTypes).build();
-  }
-
-  @Override
-  public Node accept(Processor processor) {
-    return Visitor_UnionTypeDescriptor.visit(processor, this);
   }
 
   public static Builder newBuilder() {

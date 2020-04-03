@@ -28,7 +28,7 @@ import java.util.Optional;
 public class Variable extends Node
     implements Cloneable<Variable>, HasUnusableByJsSuppression, HasName {
   private final String name;
-  @Visitable TypeDescriptor typeDescriptor;
+  private TypeDescriptor typeDescriptor;
   private final boolean isFinal;
   private final boolean isParameter;
   private final Optional<SourcePosition> sourcePosition;

@@ -27,8 +27,8 @@ import java.util.Optional;
 @Visitable
 public class FieldAccess extends Expression implements MemberReference {
   @Visitable Expression qualifier;
-  @Visitable FieldDescriptor targetFieldDescriptor;
-  final Optional<SourcePosition> sourcePosition;
+  private final FieldDescriptor targetFieldDescriptor;
+  private final Optional<SourcePosition> sourcePosition;
 
   private FieldAccess(
       Expression qualifier,

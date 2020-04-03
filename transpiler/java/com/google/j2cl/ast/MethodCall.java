@@ -30,7 +30,7 @@ import java.util.Optional;
 @Visitable
 public class MethodCall extends Invocation {
   @Visitable Expression qualifier;
-  @Visitable MethodDescriptor targetMethodDescriptor;
+  private final MethodDescriptor targetMethodDescriptor;
   @Visitable List<Expression> arguments = new ArrayList<>();
   private final Optional<SourcePosition> sourcePosition;
 

@@ -18,8 +18,6 @@ package com.google.j2cl.ast;
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
 import com.google.common.base.Strings;
-import com.google.j2cl.ast.annotations.Visitable;
-import com.google.j2cl.ast.processors.common.Processor;
 import com.google.j2cl.common.ThreadLocalInterner;
 import java.util.Map;
 import java.util.Set;
@@ -28,7 +26,6 @@ import javax.annotation.Nullable;
 
 /** An array type. */
 @AutoValue
-@Visitable
 public abstract class ArrayTypeDescriptor extends TypeDescriptor {
 
   @Nullable
@@ -185,11 +182,6 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
             getComponentTypeDescriptor()
                 .specializeTypeVariables(replacementTypeArgumentByTypeVariable))
         .build();
-  }
-
-  @Override
-  public Node accept(Processor processor) {
-    return Visitor_ArrayTypeDescriptor.visit(processor, this);
   }
 
   abstract Builder toBuilder();

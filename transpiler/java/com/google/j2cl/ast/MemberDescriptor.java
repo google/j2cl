@@ -19,14 +19,11 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.ast.MethodDescriptor.MethodOrigin;
-import com.google.j2cl.ast.annotations.Visitable;
-import com.google.j2cl.ast.processors.common.Processor;
 import com.google.j2cl.common.InternalCompilerError;
 import javax.annotation.Nullable;
 
 /** Abstract base class for member descriptors. */
-@Visitable
-public abstract class MemberDescriptor extends Node
+public abstract class MemberDescriptor
     implements HasJsNameInfo, HasReadableDescription, HasUnusableByJsSuppression {
 
   /** Represents the origin of a specific member */
@@ -225,9 +222,4 @@ public abstract class MemberDescriptor extends Node
   }
 
   public abstract String getBinaryName();
-
-  @Override
-  public Node accept(Processor processor) {
-    return Visitor_MemberDescriptor.visit(processor, this);
-  }
 }

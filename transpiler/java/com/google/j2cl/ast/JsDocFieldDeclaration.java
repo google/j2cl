@@ -25,7 +25,7 @@ import com.google.j2cl.ast.processors.common.Processor;
 @Visitable
 public class JsDocFieldDeclaration extends Expression {
   @Visitable Expression expression;
-  @Visitable TypeDescriptor fieldType;
+  private final TypeDescriptor fieldType;
   private final boolean isPublic;
   private final boolean isConst;
   private final boolean isDeprecated;

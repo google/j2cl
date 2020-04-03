@@ -22,8 +22,6 @@ import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
-import com.google.j2cl.ast.annotations.Visitable;
-import com.google.j2cl.ast.processors.common.Processor;
 import com.google.j2cl.common.ThreadLocalInterner;
 import java.util.Map;
 import java.util.Set;
@@ -38,7 +36,6 @@ import javax.annotation.Nullable;
  * variable upper bounds like {@code <T extends A&B>}
  */
 @AutoValue
-@Visitable
 public abstract class IntersectionTypeDescriptor extends TypeDescriptor {
 
   public abstract ImmutableList<DeclaredTypeDescriptor> getIntersectionTypeDescriptors();
@@ -66,11 +63,6 @@ public abstract class IntersectionTypeDescriptor extends TypeDescriptor {
   @Memoized
   public DeclaredTypeDescriptor getFirstType() {
     return getIntersectionTypeDescriptors().get(0);
-  }
-
-  @Override
-  public Node accept(Processor processor) {
-    return Visitor_IntersectionTypeDescriptor.visit(processor, this);
   }
 
   @Override

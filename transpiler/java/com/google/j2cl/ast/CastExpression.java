@@ -24,7 +24,7 @@ import com.google.j2cl.ast.processors.common.Processor;
 @Visitable
 public class CastExpression extends Expression {
   @Visitable Expression expression;
-  @Visitable TypeDescriptor castTypeDescriptor;
+  private final TypeDescriptor castTypeDescriptor;
 
   private CastExpression(Expression expression, TypeDescriptor castTypeDescriptor) {
     this.expression = checkNotNull(expression);

@@ -16,17 +16,13 @@
 package com.google.j2cl.ast;
 
 import com.google.common.collect.ImmutableSet;
-import com.google.j2cl.ast.annotations.Visitable;
-import com.google.j2cl.ast.processors.common.Processor;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
 import javax.annotation.Nullable;
 
 /** A usage-site reference to a type. */
-@Visitable
-public abstract class TypeDescriptor extends Node
-    implements Comparable<TypeDescriptor>, HasReadableDescription {
+public abstract class TypeDescriptor implements Comparable<TypeDescriptor>, HasReadableDescription {
 
   public boolean isJsType() {
     return false;
@@ -276,10 +272,5 @@ public abstract class TypeDescriptor extends Node
   @Override
   public final String toString() {
     return getUniqueId();
-  }
-
-  @Override
-  public Node accept(Processor processor) {
-    return Visitor_TypeDescriptor.visit(processor, this);
   }
 }

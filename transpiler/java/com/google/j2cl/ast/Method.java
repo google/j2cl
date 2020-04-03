@@ -34,11 +34,11 @@ import java.util.List;
 /** Method declaration. */
 @Visitable
 public class Method extends Member implements MethodLike {
-  @Visitable MethodDescriptor methodDescriptor;
+  private final MethodDescriptor methodDescriptor;
   @Visitable List<Variable> parameters = new ArrayList<>();
   @Visitable Block body;
   private boolean isOverride;
-  private String jsDocDescription;
+  private final String jsDocDescription;
 
   private Method(
       SourcePosition sourcePosition,

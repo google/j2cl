@@ -234,14 +234,6 @@ class ToStringRenderer {
       }
 
       @Override
-      public boolean enterFieldDescriptor(FieldDescriptor fieldDescriptor) {
-        print(fieldDescriptor.getEnclosingTypeDescriptor());
-        print(".");
-        print(fieldDescriptor.getName());
-        return false;
-      }
-
-      @Override
       public boolean enterForStatement(ForStatement forStatement) {
         print("for (");
         printSeparated(",", forStatement.getInitializers());
@@ -319,14 +311,6 @@ class ToStringRenderer {
           print(".");
         }
         printInvocation(methodCall);
-        return false;
-      }
-
-      @Override
-      public boolean enterMethodDescriptor(MethodDescriptor methodDescriptor) {
-        print(methodDescriptor.getEnclosingTypeDescriptor());
-        print(".");
-        print(methodDescriptor.getName());
         return false;
       }
 
@@ -536,18 +520,6 @@ class ToStringRenderer {
         unIndent();
         newLine();
         print("}");
-        return false;
-      }
-
-      @Override
-      public boolean enterTypeDeclaration(TypeDeclaration typeDeclaration) {
-        print(typeDeclaration.getQualifiedSourceName());
-        return false;
-      }
-
-      @Override
-      public boolean enterTypeDescriptor(TypeDescriptor typeDescriptor) {
-        print(typeDescriptor.getReadableDescription());
         return false;
       }
 

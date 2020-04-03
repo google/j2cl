@@ -25,7 +25,7 @@ import com.google.j2cl.ast.processors.common.Processor;
  */
 @Visitable
 public class ThisReference extends Expression {
-  @Visitable DeclaredTypeDescriptor typeDescriptor;
+  private final DeclaredTypeDescriptor typeDescriptor;
 
   public ThisReference(DeclaredTypeDescriptor typeDescriptor) {
     this.typeDescriptor = checkNotNull(typeDescriptor);

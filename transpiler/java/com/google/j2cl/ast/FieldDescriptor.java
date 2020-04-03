@@ -19,15 +19,12 @@ import static com.google.common.base.Preconditions.checkState;
 
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
-import com.google.j2cl.ast.annotations.Visitable;
-import com.google.j2cl.ast.processors.common.Processor;
 import com.google.j2cl.common.ThreadLocalInterner;
 import java.util.Optional;
 import javax.annotation.Nullable;
 
 /** A (by signature) reference to a field. */
 @AutoValue
-@Visitable
 public abstract class FieldDescriptor extends MemberDescriptor {
 
   public abstract TypeDescriptor getTypeDescriptor();
@@ -153,11 +150,6 @@ public abstract class FieldDescriptor extends MemberDescriptor {
     FieldDescriptor thisField = this.getDeclarationDescriptor();
     FieldDescriptor thatField = (FieldDescriptor) thatMember.getDeclarationDescriptor();
     return thisField.getName().equals(thatField.getName());
-  }
-
-  @Override
-  public Node accept(Processor processor) {
-    return Visitor_FieldDescriptor.visit(processor, this);
   }
 
   abstract Builder toBuilder();
