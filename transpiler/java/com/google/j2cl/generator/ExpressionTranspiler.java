@@ -21,7 +21,7 @@ import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
-import com.google.j2cl.ast.AbstractTransformer;
+import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.ArrayAccess;
 import com.google.j2cl.ast.ArrayLength;
 import com.google.j2cl.ast.ArrayLiteral;
@@ -83,72 +83,76 @@ public class ExpressionTranspiler {
 
     // TODO(rluble): create a visitor based abstraction for cases like this where the only
     // feature that is needed is the delegated dynamic dispatch.
-    new AbstractTransformer<Void>() {
+    new AbstractVisitor() {
       ClosureTypesGenerator closureTypesGenerator = new ClosureTypesGenerator(environment);
 
+      void process(Node node) {
+        node.accept(this);
+      }
+
       @Override
-      public Void transformArrayAccess(ArrayAccess arrayAccess) {
+      public boolean enterArrayAccess(ArrayAccess arrayAccess) {
         process(arrayAccess.getArrayExpression());
         sourceBuilder.append("[");
         process(arrayAccess.getIndexExpression());
         sourceBuilder.append("]");
-        return null;
+        return false;
       }
 
       @Override
-      public Void transformArrayLength(ArrayLength arrayLength) {
+      public boolean enterArrayLength(ArrayLength arrayLength) {
         process(arrayLength.getArrayExpression());
         sourceBuilder.append(".length");
-        return null;
+        return false;
       }
 
       @Override
-      public Void transformArrayLiteral(ArrayLiteral arrayLiteral) {
+      public boolean enterArrayLiteral(ArrayLiteral arrayLiteral) {
         renderDelimitedAndSeparated("[", ", ", "]", arrayLiteral.getValueExpressions());
-        return null;
+        return false;
       }
 
       @Override
-      public Void transformAwaitExpression(AwaitExpression awaitExpression) {
+      public boolean enterAwaitExpression(AwaitExpression awaitExpression) {
         sourceBuilder.append("(await ");
         process(awaitExpression.getExpression());
         sourceBuilder.append(")");
-        return null;
+        return false;
       }
 
       @Override
-      public Void transformBinaryExpression(BinaryExpression expression) {
+      public boolean enterBinaryExpression(BinaryExpression expression) {
         process(expression.getLeftOperand());
         sourceBuilder.append(" " + expression.getOperator() + " ");
         process(expression.getRightOperand());
-        return null;
+        return false;
       }
 
       @Override
-      public Void transformBooleanLiteral(BooleanLiteral expression) {
+      public boolean enterBooleanLiteral(BooleanLiteral expression) {
         sourceBuilder.append(expression.getValue() ? "true" : "false");
-        return null;
+        return false;
       }
 
       @Override
-      public Void transformCastExpression(CastExpression castExpression) {
+      public boolean enterCastExpression(CastExpression castExpression) {
         checkArgument(
             false, castExpression + " CastExpression should have been normalized to method call.");
-        return null;
+        return false;
       }
 
       @Override
-      public Void transformJsDocCastExpression(JsDocCastExpression jsDocCastExpression) {
+      public boolean enterJsDocCastExpression(JsDocCastExpression jsDocCastExpression) {
         String jsdoc =
             closureTypesGenerator.getClosureTypeString(jsDocCastExpression.getTypeDescriptor());
         sourceBuilder.append("/**@type {" + jsdoc + "}*/ (");
         process(jsDocCastExpression.getExpression());
         sourceBuilder.append(")");
-        return null;
+        return false;
       }
 
       @Override
-      public Void transformJsDocFieldDeclaration(JsDocFieldDeclaration declaration) {
+      public boolean enterJsDocFieldDeclaration(JsDocFieldDeclaration declaration) {
         String typeJsDoc =
             closureTypesGenerator.getClosureTypeString(declaration.getTypeDescriptor());
         ArrayList<String> jsDocs = new ArrayList<>();
@@ -167,26 +171,26 @@ public class ExpressionTranspiler {
         }
         sourceBuilder.appendln("/**" + String.join(" ", jsDocs) + "*/");
         process(declaration.getExpression());
-        return null;
+        return false;
       }
 
       @Override
-      public Void transformExpressionWithComment(ExpressionWithComment expressionWithComment) {
+      public boolean enterExpressionWithComment(ExpressionWithComment expressionWithComment) {
         process(expressionWithComment.getExpression());
         sourceBuilder.append(" /* " + expressionWithComment.getComment() + " */");
-        return null;
+        return false;
       }
 
       @Override
-      public Void transformFieldAccess(FieldAccess fieldAccess) {
+      public boolean enterFieldAccess(FieldAccess fieldAccess) {
         String fieldMangledName = ManglingNameUtils.getMangledName(fieldAccess.getTarget());
         renderQualifiedName(
             fieldAccess.getQualifier(), fieldMangledName, fieldAccess.getSourcePosition());
-        return null;
+        return false;
       }
 
       @Override
-      public Void transformFunctionExpression(FunctionExpression expression) {
+      public boolean enterFunctionExpression(FunctionExpression expression) {
         if (expression.getDescriptor().isJsAsync()) {
           sourceBuilder.append("async ");
         }
@@ -197,7 +201,7 @@ public class ExpressionTranspiler {
         sourceBuilder.append(" =>");
         new StatementTranspiler(sourceBuilder, environment).renderStatement(expression.getBody());
 
-        return null;
+        return false;
       }
 
       private void emitParameters(FunctionExpression expression) {
@@ -248,23 +252,23 @@ public class ExpressionTranspiler {
       }
 
       @Override
-      public Void transformInstanceOfExpression(InstanceOfExpression expression) {
+      public boolean enterInstanceOfExpression(InstanceOfExpression expression) {
         checkArgument(false, "InstanceOf expression should have been normalized.");
-        return null;
+        return false;
       }
 
       @Override
-      public Void transformConditionalExpression(ConditionalExpression conditionalExpression) {
+      public boolean enterConditionalExpression(ConditionalExpression conditionalExpression) {
         process(conditionalExpression.getConditionExpression());
         sourceBuilder.append(" ? ");
         process(conditionalExpression.getTrueExpression());
         sourceBuilder.append(" : ");
         process(conditionalExpression.getFalseExpression());
-        return null;
+        return false;
       }
 
       @Override
-      public Void transformMethodCall(MethodCall expression) {
+      public boolean enterMethodCall(MethodCall expression) {
         if (expression.isStaticDispatch()) {
           renderStaticDispatchMethodCall(expression);
         } else if (expression.getTarget().isJsPropertyGetter()) {
@@ -275,7 +279,7 @@ public class ExpressionTranspiler {
           renderMethodCallHeader(expression);
           renderDelimitedAndSeparated("(", ", ", ")", expression.getArguments());
         }
-        return null;
+        return false;
       }
 
       private void renderStaticDispatchMethodCall(MethodCall expression) {
@@ -328,11 +332,10 @@ public class ExpressionTranspiler {
       }
 
       /** JsProperty setter is emitted as property set: qualifier.property = argument. */
-      private String renderJsPropertySetter(MethodCall expression) {
+      private void renderJsPropertySetter(MethodCall expression) {
         renderJsPropertyAccess(expression);
         sourceBuilder.append(" = ");
         process(expression.getArguments().get(0));
-        return null;
       }
 
       private void renderMethodCallHeader(MethodCall expression) {
@@ -349,7 +352,7 @@ public class ExpressionTranspiler {
       }
 
       @Override
-      public Void transformMultiExpression(MultiExpression multiExpression) {
+      public boolean enterMultiExpression(MultiExpression multiExpression) {
         List<Expression> expressions = multiExpression.getExpressions();
         if (expressions.stream()
             .anyMatch(Predicates.instanceOf(VariableDeclarationExpression.class))) {
@@ -366,89 +369,89 @@ public class ExpressionTranspiler {
         } else {
           renderDelimitedAndSeparated("(", ", ", ")", expressions);
         }
-        return null;
+        return false;
       }
 
       @Override
-      public Void transformNewArray(NewArray newArrayExpression) {
+      public boolean enterNewArray(NewArray newArrayExpression) {
         checkArgument(false, "NewArray should have been normalized.");
-        return null;
+        return false;
       }
 
       @Override
-      public Void transformNewInstance(NewInstance expression) {
+      public boolean enterNewInstance(NewInstance expression) {
         checkArgument(expression.getQualifier() == null);
         DeclaredTypeDescriptor targetTypeDescriptor =
             expression.getTarget().getEnclosingTypeDescriptor().toRawTypeDescriptor();
 
         sourceBuilder.append("new " + environment.aliasForType(targetTypeDescriptor));
         renderDelimitedAndSeparated("(", ", ", ")", expression.getArguments());
-        return null;
+        return false;
       }
 
       @Override
-      public Void transformNullLiteral(NullLiteral expression) {
+      public boolean enterNullLiteral(NullLiteral expression) {
         sourceBuilder.append("null");
-        return null;
+        return false;
       }
 
       @Override
-      public Void transformNumberLiteral(NumberLiteral expression) {
+      public boolean enterNumberLiteral(NumberLiteral expression) {
         checkState(!TypeDescriptors.isPrimitiveLong(expression.getTypeDescriptor()));
         sourceBuilder.append(expression.getValue().toString());
-        return null;
+        return false;
       }
 
       @Override
-      public Void transformPostfixExpression(PostfixExpression expression) {
+      public boolean enterPostfixExpression(PostfixExpression expression) {
         checkArgument(!TypeDescriptors.isPrimitiveLong(expression.getTypeDescriptor()));
         process(expression.getOperand());
         sourceBuilder.append(expression.getOperator().toString());
-        return null;
+        return false;
       }
 
       @Override
-      public Void transformPrefixExpression(PrefixExpression expression) {
+      public boolean enterPrefixExpression(PrefixExpression expression) {
         sourceBuilder.append(expression.getOperator().toString());
         process(expression.getOperand());
-        return null;
+        return false;
       }
 
       @Override
-      public Void transformStringLiteral(StringLiteral expression) {
+      public boolean enterStringLiteral(StringLiteral expression) {
         sourceBuilder.append(expression.getEscapedValue());
-        return null;
+        return false;
       }
 
       @Override
-      public Void transformSuperReference(SuperReference expression) {
+      public boolean enterSuperReference(SuperReference expression) {
         sourceBuilder.append("super");
-        return null;
+        return false;
       }
 
       @Override
-      public Void transformThisReference(ThisReference expression) {
+      public boolean enterThisReference(ThisReference expression) {
         sourceBuilder.append("this");
-        return null;
+        return false;
       }
 
       @Override
-      public Void transformJavaScriptConstructorReference(
+      public boolean enterJavaScriptConstructorReference(
           JavaScriptConstructorReference constructorReference) {
         sourceBuilder.append(
             environment.aliasForType(constructorReference.getReferencedTypeDeclaration()));
-        return null;
+        return false;
       }
 
       @Override
-      public Void transformVariableDeclarationExpression(
+      public boolean enterVariableDeclarationExpression(
           VariableDeclarationExpression variableDeclarationExpression) {
         renderDelimitedAndSeparated("let ", ", ", "", variableDeclarationExpression.getFragments());
-        return null;
+        return false;
       }
 
       @Override
-      public Void transformVariableDeclarationFragment(VariableDeclarationFragment fragment) {
+      public boolean enterVariableDeclarationFragment(VariableDeclarationFragment fragment) {
         Variable variable = fragment.getVariable();
         if (fragment.needsTypeDeclaration()) {
           sourceBuilder.append(
@@ -463,23 +466,23 @@ public class ExpressionTranspiler {
           sourceBuilder.append(" = ");
           process(fragment.getInitializer());
         }
-        return null;
+        return false;
       }
 
       @Override
-      public Void transformVariable(Variable variable) {
+      public boolean enterVariable(Variable variable) {
         sourceBuilder.emitWithMapping(
             // Only map variables if they are named.
             AstUtils.emptySourcePositionIfNotNamed(variable.getSourcePosition()),
             () -> sourceBuilder.append(environment.getUniqueNameForVariable(variable)));
 
-        return null;
+        return false;
       }
 
       @Override
-      public Void transformVariableReference(VariableReference expression) {
+      public boolean enterVariableReference(VariableReference expression) {
         sourceBuilder.append(environment.getUniqueNameForVariable(expression.getTarget()));
-        return null;
+        return false;
       }
 
       private void renderDelimitedAndSeparated(
