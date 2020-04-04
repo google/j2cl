@@ -2,12 +2,12 @@
 #   j2cl/jre: JRE subset for transpilation.
 
 load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_binary")
+load(":j2cl_multi_test.bzl", "j2cl_multi_test")
+load("//javascript/tools/jscompiler/builddefs:flags.bzl", "VERBOSE_WARNING_FLAGS_STRICT", "WHITESPACE_ONLY_FLAGS")
 load("//third_party/java/j2cl:j2cl_test.bzl", "j2cl_test")
 load("//jre/java:j2cl_mirror_from_gwt.bzl", "j2cl_mirror_from_gwt", "java_source_copy")
-load(":j2cl_multi_test.bzl", "j2cl_multi_test")
-load("@bazel_tools//tools/build_rules:build_test.bzl", "build_test")
 load("//build_defs:rules.bzl", "j2cl_library")
-load("//javascript/tools/jscompiler/builddefs:flags.bzl", "VERBOSE_WARNING_FLAGS_STRICT", "WHITESPACE_ONLY_FLAGS")
+load("@bazel_skylib//rules:build_test.bzl", "build_test")
 
 package(
     licenses = ["notice"],  # Apache 2.0
