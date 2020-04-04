@@ -210,9 +210,7 @@ class ToStringRenderer {
 
       @Override
       public boolean enterField(Field field) {
-        print(field.getDescriptor().getTypeDescriptor());
-        print(" ");
-        print(field.getDescriptor().toString());
+        print(field.getReadableDescription());
         indent();
         if (field.getInitializer() != null) {
           print(" = ");
@@ -297,9 +295,7 @@ class ToStringRenderer {
 
       @Override
       public boolean enterMethod(Method method) {
-        print(method.getDescriptor() + "(");
-        printSeparated(",", method.getParameters());
-        print(") ");
+        print(method.getReadableDescription() + " ");
         accept(method.body);
         return false;
       }
@@ -499,7 +495,7 @@ class ToStringRenderer {
       @Override
       public boolean enterType(Type type) {
         print(type.isInterface() ? "interface " : (type.isEnum() ? "enum " : "class "));
-        print(type.getDeclaration().toString());
+        print(type.getDeclaration().getReadableDescription());
         if (type.getSuperTypeDescriptor() != null) {
           print(" extends " + type.getSuperTypeDescriptor());
         }
