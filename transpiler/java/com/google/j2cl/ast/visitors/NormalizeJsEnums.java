@@ -28,7 +28,6 @@ import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.FieldDescriptor.FieldOrigin;
 import com.google.j2cl.ast.JsDocCastExpression;
-import com.google.j2cl.ast.Literal;
 import com.google.j2cl.ast.MemberReference;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
@@ -125,9 +124,9 @@ public class NormalizeJsEnums extends NormalizationPass {
     List<Expression> arguments = ((NewInstance) field.getInitializer()).getArguments();
     if (field.getDescriptor().getEnclosingTypeDescriptor().getJsEnumInfo().hasCustomValue()) {
       checkState(arguments.size() == 3);
-      Expression valueLiteral = arguments.get(2);
-      checkState(valueLiteral instanceof Literal);
-      return valueLiteral;
+      Expression constantValue = arguments.get(2);
+      checkState(constantValue.isCompileTimeConstant());
+      return constantValue;
     } else {
       checkState(arguments.size() == 2);
       return NumberLiteral.fromInt(field.getEnumOrdinal());
