@@ -11,12 +11,12 @@ public class Visitor_${className} {
 
     ProcessorPrivate processorImpl = (ProcessorPrivate) processor;
 
+    pushContext(processor, node);
     if (processorImpl.shouldProcess${className}(node)) {
-      pushContext(processor, node);
       visitMembers(processorImpl, node);
-      popContext(processor, node);
     }
     result = processorImpl.postProcess${className}(node);
+    popContext(processor, node);
     return result;
   }
 
