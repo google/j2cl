@@ -369,4 +369,12 @@ public class Main {
 
     void sort(JsFunctionInterface func);
   }
+
+  @JsFunction
+  interface ParameterizedMethod {
+    <T> T ident(T t);
+  }
+
+  // Repro for b/153176433.
+  private static void acceptsParameterizedMethod(ParameterizedMethod m) {}
 }
