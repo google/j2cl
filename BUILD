@@ -54,12 +54,6 @@ alias(
     actual = "//tools/java/com/google/j2cl/tools/minifier",
 )
 
-sh_binary(
-    name = "deploy",
-    srcs = ["deploy.sh"],
-    visibility = ["//visibility:private"],
-)
-
 bool_flag(
     name = "enable_experimental_tree_artifact_mode",
     build_setting_default = False,
