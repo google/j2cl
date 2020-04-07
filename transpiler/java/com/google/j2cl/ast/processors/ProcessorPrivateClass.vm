@@ -8,8 +8,7 @@ abstract class ProcessorPrivate implements Processor {
 
   private Deque<Object> stackOfContext = new ArrayDeque<Object>();
 
-  @Override
-  public final Object getCurrentContext() {
+  final Object getCurrentContext() {
     return stackOfContext.peek();
   }
 

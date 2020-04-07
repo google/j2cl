@@ -3,6 +3,7 @@ package ${packageName};
 import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.processors.common.ListVisitor;
 import com.google.j2cl.ast.processors.common.Processor;
+import com.google.j2cl.ast.processors.common.ProcessorError;
 
 public class Visitor_${className} {
 
@@ -10,12 +11,20 @@ public class Visitor_${className} {
     ${visitableClass.TopClassName} result = node;
 
     ProcessorPrivate processorImpl = (ProcessorPrivate) processor;
-
     pushContext(processor, node);
-    if (processorImpl.shouldProcess${className}(node)) {
-      visitMembers(processorImpl, node);
+
+    try {
+      if (processorImpl.shouldProcess${className}(node)) {
+        visitMembers(processorImpl, node);
+      }
+      result = processorImpl.postProcess${className}(node);
+    } catch (RuntimeException|Error e) {
+      if (e instanceof ProcessorError) {
+        throw e;
+      }
+      throw new ProcessorError(processorImpl.getCurrentContext(), node, e);
     }
-    result = processorImpl.postProcess${className}(node);
+
     popContext(processor, node);
     return result;
   }
