@@ -113,15 +113,18 @@ class ToStringRenderer {
 
       @Override
       public boolean enterCastExpression(CastExpression castExpression) {
-        print(String.format("(%s) ", castExpression.getCastTypeDescriptor()));
+        print("(");
+        print(castExpression.getCastTypeDescriptor());
+        print(") ");
         accept(castExpression.getExpression());
         return false;
       }
 
       @Override
       public boolean enterJsDocCastExpression(JsDocCastExpression castExpression) {
-        print(String.format("/** @type {%s} */ ", castExpression.getTypeDescriptor()));
-        accept(castExpression.getExpression());
+        print(
+            String.format(
+                "/** @type {%s} */ ", castExpression.getTypeDescriptor().getReadableDescription()));
         return false;
       }
 
@@ -131,7 +134,7 @@ class ToStringRenderer {
             String.format(
                 "/** %s {%s} %s */ ",
                 fieldDeclaration.isPublic() ? "@public" : "@private",
-                fieldDeclaration.getTypeDescriptor(),
+                fieldDeclaration.getTypeDescriptor().getReadableDescription(),
                 fieldDeclaration.isConst() ? "@const" : ""));
         accept(fieldDeclaration.getExpression());
         return false;
@@ -497,7 +500,8 @@ class ToStringRenderer {
         print(type.isInterface() ? "interface " : (type.isEnum() ? "enum " : "class "));
         print(type.getDeclaration().getReadableDescription());
         if (type.getSuperTypeDescriptor() != null) {
-          print(" extends " + type.getSuperTypeDescriptor());
+          print(" extends ");
+          print(type.getSuperTypeDescriptor());
         }
         String separator = " implements ";
         for (TypeDescriptor interfaceTypeDescriptor : type.getSuperInterfaceTypeDescriptors()) {
