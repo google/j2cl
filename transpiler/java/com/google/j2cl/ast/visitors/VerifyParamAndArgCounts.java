@@ -17,79 +17,41 @@ package com.google.j2cl.ast.visitors;
 
 import static com.google.common.base.Preconditions.checkState;
 
-import com.google.common.collect.ImmutableList;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.Expression;
+import com.google.j2cl.ast.Invocation;
 import com.google.j2cl.ast.Method;
-import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
-import com.google.j2cl.ast.NewInstance;
-import com.google.j2cl.ast.TypeDescriptor;
-import com.google.j2cl.ast.Variable;
-import java.util.List;
 
 /**
  * Verifies that the method call argument counts match the method descriptor parameter counts and
  * method declaration parameter counts match the method descriptor.
  */
-public class VerifyParamAndArgCounts extends AbstractVisitor {
+public class VerifyParamAndArgCounts {
 
   public static void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new VerifyParamAndArgCounts());
+    compilationUnit.accept(
+        new AbstractVisitor() {
+          @Override
+          public void exitMethod(Method method) {
+            checkState(
+                method.getParameters().size()
+                    == method.getDescriptor().getParameterTypeDescriptors().size());
+          }
+
+          @Override
+          public void exitInvocation(Invocation invocation) {
+            MethodDescriptor methodDescriptor = invocation.getTarget();
+            int paramCount = methodDescriptor.getParameterTypeDescriptors().size();
+            int argumentCount = invocation.getArguments().size();
+            if (methodDescriptor.isJsMethodVarargs()) {
+              checkState(argumentCount >= paramCount - 1, "Invalid call argument count.");
+            } else {
+              checkState(argumentCount == paramCount, "Invalid call argument count.");
+            }
+          }
+        });
   }
 
-  @Override
-  public void exitMethod(Method method) {
-    verifyParameters(method.getParameters(), method.getDescriptor());
-  }
-
-  @Override
-  public void exitMethodCall(MethodCall methodCall) {
-    verifyArguments(methodCall.getArguments(), methodCall.getTarget());
-  }
-
-  @Override
-  public void exitNewInstance(NewInstance newInstance) {
-    verifyArguments(newInstance.getArguments(), newInstance.getTarget());
-  }
-
-  private void verifyArguments(
-      List<Expression> passedArguments, MethodDescriptor methodDescriptor) {
-    ImmutableList<TypeDescriptor> declaredParameterTypes =
-        methodDescriptor.getParameterTypeDescriptors();
-    if (methodDescriptor.isJsMethodVarargs()) {
-      checkState(
-          passedArguments.size() >= declaredParameterTypes.size() - 1,
-          "Invalid method call argument count. Expected at least %s arguments but received "
-              + "%s in call to method '%s() from compilation unit %s",
-          declaredParameterTypes.size(),
-          passedArguments.size(),
-          methodDescriptor.getName(),
-          getCurrentCompilationUnit().getName());
-    } else {
-      checkState(
-          passedArguments.size() == declaredParameterTypes.size(),
-          "Invalid method call argument count. Expected %s arguments but received "
-              + "%s in call to method '%s() from compilation unit %s",
-          declaredParameterTypes.size(),
-          passedArguments.size(),
-          methodDescriptor.getName(),
-          getCurrentCompilationUnit().getName());
-    }
-  }
-
-  private void verifyParameters(
-      List<Variable> declaredParameters, MethodDescriptor methodDescriptor) {
-    ImmutableList<TypeDescriptor> declaredParameterTypes =
-        methodDescriptor.getParameterTypeDescriptors();
-    checkState(
-        declaredParameters.size() == declaredParameterTypes.size(),
-        "Invalid method call argument count. Expected %s arguments but received "
-            + "%s in call to method '%s() from compilation unit %s",
-        declaredParameterTypes.size(),
-        declaredParameters.size(),
-        methodDescriptor.getName(),
-        getCurrentCompilationUnit().getName());
-  }
+  private VerifyParamAndArgCounts() {}
 }
