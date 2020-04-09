@@ -20,7 +20,7 @@ import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.visitors.ArrayAccessNormalizer;
 import com.google.j2cl.ast.visitors.BridgeMethodsCreator;
 import com.google.j2cl.ast.visitors.ControlStatementFormatter;
-import com.google.j2cl.ast.visitors.CreateDefaultConstructors;
+import com.google.j2cl.ast.visitors.CreateImplicitConstructors;
 import com.google.j2cl.ast.visitors.DefaultMethodsResolver;
 import com.google.j2cl.ast.visitors.DevirtualizeBoxedTypesAndJsFunctionImplementations;
 import com.google.j2cl.ast.visitors.DevirtualizeMethodCalls;
@@ -168,7 +168,7 @@ class J2clTranspiler {
             new OptimizeAnonymousInnerClassesToFunctionExpressions(),
             new NormalizeFunctionExpressions(),
             // Default constructors and explicit super calls should be synthesized first.
-            new CreateDefaultConstructors(),
+            new CreateImplicitConstructors(),
             new InsertExplicitSuperCalls(),
             new DefaultMethodsResolver(),
             new PackagePrivateMethodsDispatcher(),
