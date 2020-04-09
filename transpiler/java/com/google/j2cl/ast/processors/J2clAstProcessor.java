@@ -104,8 +104,6 @@ public class J2clAstProcessor extends AbstractProcessor {
         writeGeneralClass(
             ABSTRACT_REWRITER_TEMPLATE_FILE, "AbstractRewriter", packageName, classes);
         writeGeneralClass(
-            ABSTRACT_TRANSFORMER_TEMPLATE_FILE, "AbstractTransformer", packageName, classes);
-        writeGeneralClass(
             PROCESSOR_PRIVATE_CLASS_TEMPLATE_FILE, "ProcessorPrivate", packageName, classes);
         writeGeneralClass(VISITOR_INTERFACE_TEMPLATE_FILE, "Visitor", packageName, classes);
         writeGeneralClass(REWRITER_INTERFACE_TEMPLATE_FILE, "Rewriter", packageName, classes);
@@ -278,9 +276,6 @@ public class J2clAstProcessor extends AbstractProcessor {
 
   private static final String ABSTRACT_REWRITER_TEMPLATE_FILE =
       "com/google/j2cl/ast/processors/AbstractRewriterClass.vm";
-
-  private static final String ABSTRACT_TRANSFORMER_TEMPLATE_FILE =
-      "com/google/j2cl/ast/processors/AbstractTransformerClass.vm";
 
   private static final String PROCESSOR_PRIVATE_CLASS_TEMPLATE_FILE =
       "com/google/j2cl/ast/processors/ProcessorPrivateClass.vm";
