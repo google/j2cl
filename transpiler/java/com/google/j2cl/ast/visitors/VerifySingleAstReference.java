@@ -41,9 +41,10 @@ import java.util.Map;
  * <p>The other special situation are VariableReferences which are allowed to point to the same
  * Variable.
  */
-public class VerifySingleAstReference {
+public class VerifySingleAstReference extends NormalizationPass {
 
-  public static void applyTo(CompilationUnit compilationUnit) {
+  @Override
+  public void applyTo(CompilationUnit compilationUnit) {
     // This map keeps track of the nodes that have been found so far in the AST as well as the
     // context of their first appearance for better error reporting.
     final Map<Node, Node> contextByNode = new HashMap<>();
@@ -95,7 +96,6 @@ public class VerifySingleAstReference {
           public boolean enterBooleanLiteral(BooleanLiteral booleanLiteral) {
             return false;
           }
-
 
           @Override
           public boolean enterVariableReference(VariableReference variableReference) {

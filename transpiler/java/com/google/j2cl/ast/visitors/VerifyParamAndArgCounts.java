@@ -27,9 +27,10 @@ import com.google.j2cl.ast.MethodDescriptor;
  * Verifies that the method call argument counts match the method descriptor parameter counts and
  * method declaration parameter counts match the method descriptor.
  */
-public class VerifyParamAndArgCounts {
+public class VerifyParamAndArgCounts extends NormalizationPass {
 
-  public static void applyTo(CompilationUnit compilationUnit) {
+  @Override
+  public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(
         new AbstractVisitor() {
           @Override
@@ -52,6 +53,4 @@ public class VerifyParamAndArgCounts {
           }
         });
   }
-
-  private VerifyParamAndArgCounts() {}
 }

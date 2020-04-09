@@ -160,19 +160,21 @@ class J2clTranspiler {
   }
 
   private static void normalizeUnits(List<CompilationUnit> j2clUnits) {
-
     for (CompilationUnit j2clUnit : j2clUnits) {
-      verifyUnit(j2clUnit);
       for (NormalizationPass pass : getPasses()) {
         pass.applyTo(j2clUnit);
       }
-      verifyNormalizedUnit(j2clUnit);
     }
   }
 
   private static ImmutableList<NormalizationPass> getPasses() {
     // TODO(b/117155139): Review the ordering of passes.
     return ImmutableList.of(
+        // Pre-verifications
+        new VerifySingleAstReference(),
+        new VerifyParamAndArgCounts(),
+        new VerifyVariableScoping(),
+
         // Class structure normalizations.
         new ImplementLambdaExpressions(),
         new OptimizeAnonymousInnerClassesToFunctionExpressions(),
@@ -270,18 +272,13 @@ class J2clTranspiler {
         new RemoveNoopStatements(),
 
         // Enrich source mapping information for better stack deobfuscation.
-        new FilloutMissingSourceMapInformation());
-  }
+        new FilloutMissingSourceMapInformation(),
 
-  private static void verifyUnit(CompilationUnit j2clUnit) {
-    VerifySingleAstReference.applyTo(j2clUnit);
-    VerifyParamAndArgCounts.applyTo(j2clUnit);
-    VerifyVariableScoping.applyTo(j2clUnit);
-  }
-
-  private static void verifyNormalizedUnit(CompilationUnit j2clUnit) {
-    verifyUnit(j2clUnit);
-    VerifyNormalizedUnits.applyTo(j2clUnit);
+        // Post-verifications
+        new VerifySingleAstReference(),
+        new VerifyParamAndArgCounts(),
+        new VerifyVariableScoping(),
+        new VerifyNormalizedUnits());
   }
 
   private void generateOutputs(List<CompilationUnit> j2clCompilationUnits) {

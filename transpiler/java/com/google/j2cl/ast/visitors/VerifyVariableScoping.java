@@ -36,9 +36,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 /** Verifies that variables are referenced within their scopes. */
-public class VerifyVariableScoping {
+public class VerifyVariableScoping extends NormalizationPass {
 
-  public static void applyTo(CompilationUnit compilationUnit) {
+  @Override
+  public void applyTo(CompilationUnit compilationUnit) {
 
     class Scope {
       Scope() {}

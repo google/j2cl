@@ -25,9 +25,10 @@ import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.Type;
 
 /** Verifies that the AST satisfies the normalization invariants. */
-public class VerifyNormalizedUnits {
+public class VerifyNormalizedUnits extends NormalizationPass {
 
-  public static void applyTo(CompilationUnit compilationUnit) {
+  @Override
+  public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(
         new AbstractVisitor() {
           @Override
@@ -57,6 +58,4 @@ public class VerifyNormalizedUnits {
           }
         });
   }
-
-  private VerifyNormalizedUnits() {}
 }
