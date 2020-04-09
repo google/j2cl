@@ -17,7 +17,6 @@ package com.google.j2cl.ast.visitors;
 
 import static com.google.common.base.Preconditions.checkState;
 
-import com.google.common.base.Predicates;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Field;
@@ -29,9 +28,15 @@ import com.google.j2cl.ast.Type;
 public class VerifyNormalizedUnits {
 
   public static void applyTo(CompilationUnit compilationUnit) {
-    // All native methods should be empty.
     compilationUnit.accept(
         new AbstractVisitor() {
+          @Override
+          public void exitType(Type type) {
+            // Native and JsFunction types should have been removed from the AST.
+            checkState(!type.isNative());
+            checkState(!type.isJsFunctionInterface());
+          }
+
           @Override
           public void exitField(Field field) {
             checkState(!field.isNative());
@@ -39,20 +44,18 @@ public class VerifyNormalizedUnits {
 
           @Override
           public void exitMethod(Method method) {
+            // All native methods should be empty.
             checkState(!method.isNative() || method.getBody().isEmpty());
           }
-        });
 
-    for (Type type : compilationUnit.getTypes()) {
-      // Native and JsFunction types should have been removed from the AST.
-      checkState(!type.isNative());
-      checkState(!type.isJsFunctionInterface());
-      // JsEnum only contains the enum fields.
-      if (type.isJsEnum()) {
-        checkState(
-            type.getMembers().stream().allMatch(Predicates.and(Member::isField, Member::isStatic)));
-      }
-    }
+          @Override
+          public void exitMember(Member member) {
+            // JsEnum only contains the enum fields.
+            if (getCurrentType().isJsEnum()) {
+              checkState(member.isField() || member.isStatic());
+            }
+          }
+        });
   }
 
   private VerifyNormalizedUnits() {}
