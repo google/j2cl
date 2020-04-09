@@ -233,7 +233,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   }
 
   private void renderTypeAnnotation() {
-    if (type.isJsOverlayImplementation()) {
+    if (type.isOverlayImplementation()) {
       // Do nothing.
     } else if (type.isInterface()) {
       sourceBuilder.appendLines("/**", " * @interface");
@@ -434,7 +434,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   }
 
   private void renderMarkImplementorMethod() {
-    if (!type.isInterface() || type.isJsOverlayImplementation()) {
+    if (!type.isInterface() || type.isOverlayImplementation()) {
       return; // Only render markImplementor code for interfaces.
     }
 
@@ -454,7 +454,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     }
     sourceBuilder.appendLines(
         "ctor.prototype.$implements__"
-            + ManglingNameUtils.getMangledName(type.getTypeDescriptor())
+            + ManglingNameUtils.getMangledName(type.getDeclaration())
             + " = true;");
     sourceBuilder.closeBrace();
     sourceBuilder.newLine();
@@ -462,10 +462,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   // TODO(b/34928687): Move this to the ast in a normalization pass.
   private void renderIsInstanceMethod() {
-    DeclaredTypeDescriptor underlyingType =
-        type.isJsOverlayImplementation()
-            ? type.getOverlaidTypeDescriptor()
-            : type.getTypeDescriptor();
+    TypeDeclaration underlyingType = type.getUnderlyingTypeDeclaration();
+
     if (underlyingType.isJsFunctionInterface()) {
       // JsFunction interfaces use the custom class JavaScriptFunction for casts, instanceof and
       // class literal purposes. Hence no need to emit $isInstance in the overlay class.
@@ -474,6 +472,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     if (underlyingType.isNoopCast()) {
       return;
     }
+
     if (type.containsMethod(MethodDescriptor.IS_INSTANCE_METHOD_NAME)) {
       sourceBuilder.appendLines(
           "/**", " * $isInstance() function implementation is provided separately.", " */");
@@ -484,35 +483,35 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.openBrace();
     sourceBuilder.newLine();
     if (type.getDeclaration().isJsFunctionImplementation()) {
-      renderIsInstanceOfJsFunctionImplementationStatement(type.getTypeDescriptor());
-    } else if (type.isJsOverlayImplementation()) {
-      DeclaredTypeDescriptor overlaidTypeDescriptor = type.getOverlaidTypeDescriptor();
-      if (overlaidTypeDescriptor.isJsEnum()) {
-        renderIsInstanceOfJsEnumStatement(overlaidTypeDescriptor);
+      renderIsInstanceOfJsFunctionImplementationStatement(type.getDeclaration());
+    } else if (type.isOverlayImplementation()) {
+      TypeDeclaration overlaidTypeDeclaration = type.getOverlaidTypeDeclaration();
+      if (overlaidTypeDeclaration.isJsEnum()) {
+        renderIsInstanceOfJsEnumStatement(overlaidTypeDeclaration);
       } else {
-        renderIsInstanceOfClassStatement(type.getOverlaidTypeDescriptor());
+        renderIsInstanceOfClassStatement(type.getOverlaidTypeDeclaration());
       }
     } else if (type.isInterface()) {
-      renderIsInstanceOfInterfaceStatement(type.getTypeDescriptor());
+      renderIsInstanceOfInterfaceStatement(type.getDeclaration());
     } else {
-      renderIsInstanceOfClassStatement(type.getTypeDescriptor());
+      renderIsInstanceOfClassStatement(type.getDeclaration());
     }
     sourceBuilder.closeBrace();
     sourceBuilder.newLine();
   }
 
-  private void renderIsInstanceOfJsEnumStatement(DeclaredTypeDescriptor typeDescriptor) {
-    if (AstUtils.isNonNativeJsEnum(typeDescriptor)) {
+  private void renderIsInstanceOfJsEnumStatement(TypeDeclaration typeDeclaration) {
+    if (typeDeclaration.isJsEnum() && !typeDeclaration.isNative()) {
       sourceBuilder.append(
           "return "
               + environment.aliasForType(BootstrapType.ENUMS.getDeclaration())
               + ".isInstanceOf(instance, "
-              + environment.aliasForType(typeDescriptor.getMetadataTypeDeclaration())
+              + environment.aliasForType(typeDeclaration.getMetadataTypeDeclaration())
               + ");");
     } else {
-      checkState(typeDescriptor.getJsEnumInfo().hasCustomValue());
+      checkState(typeDeclaration.getJsEnumInfo().hasCustomValue());
       DeclaredTypeDescriptor instanceOfValueType =
-          AstUtils.getJsEnumValueFieldInstanceCheckType(typeDescriptor.getTypeDeclaration());
+          AstUtils.getJsEnumValueFieldInstanceCheckType(typeDeclaration);
       sourceBuilder.append(
           "return "
               + environment.aliasForType(instanceOfValueType.getTypeDeclaration())
@@ -521,23 +520,22 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     }
   }
 
-  private void renderIsInstanceOfClassStatement(DeclaredTypeDescriptor typeDescriptor) {
+  private void renderIsInstanceOfClassStatement(TypeDeclaration typeDescriptor) {
     sourceBuilder.append(
         "return instance instanceof " + environment.aliasForType(typeDescriptor) + ";");
   }
 
-  private void renderIsInstanceOfInterfaceStatement(DeclaredTypeDescriptor typeDescriptor) {
+  private void renderIsInstanceOfInterfaceStatement(TypeDeclaration type) {
     sourceBuilder.append(
         "return instance != null && !!instance.$implements__"
-            + ManglingNameUtils.getMangledName(typeDescriptor)
+            + ManglingNameUtils.getMangledName(type)
             + ";");
   }
 
-  private void renderIsInstanceOfJsFunctionImplementationStatement(
-      DeclaredTypeDescriptor typeDescriptor) {
+  private void renderIsInstanceOfJsFunctionImplementationStatement(TypeDeclaration type) {
     sourceBuilder.appendln(
         "return instance != null && !!instance.$is__"
-            + ManglingNameUtils.getMangledName(typeDescriptor)
+            + ManglingNameUtils.getMangledName(type)
             + ";");
   }
 
@@ -560,16 +558,16 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.newLine();
     sourceBuilder.appendLines(
         "// Marks the object is an instance of this class.",
-        "to.$is__" + ManglingNameUtils.getMangledName(type.getTypeDescriptor()) + " = true;");
+        "to.$is__" + ManglingNameUtils.getMangledName(type.getDeclaration()) + " = true;");
     sourceBuilder.closeBrace();
     sourceBuilder.newLine();
   }
 
   // TODO(b/67965153): Move this to the ast in a normalization pass.
   private void renderClassMetadata() {
-    if (type.isJsOverlayImplementation()
-        && (type.getOverlaidTypeDescriptor().isJsFunctionInterface()
-            || type.getOverlaidTypeDescriptor().isInterface())) {
+    if (type.isOverlayImplementation()
+        && (type.getOverlaidTypeDeclaration().isJsFunctionInterface()
+            || type.getOverlaidTypeDeclaration().isInterface())) {
       // JsFunction and Native interface overlays do not need class metadata.
       sourceBuilder.newLine();
       return;
@@ -577,10 +575,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
     String utilAlias = environment.aliasForType(BootstrapType.NATIVE_UTIL.getDescriptor());
 
-    TypeDeclaration targetTypeDescriptor =
-        type.isJsOverlayImplementation()
-            ? type.getOverlaidTypeDescriptor().getTypeDeclaration()
-            : type.getDeclaration();
+    TypeDeclaration targetTypeDescriptor = type.getUnderlyingTypeDeclaration();
 
     String name =
         targetTypeDescriptor.isNative()
@@ -652,7 +647,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
    * to determine if it implements an interface.
    */
   private void renderMarkImplementorCalls() {
-    if (type.isJsOverlayImplementation()) {
+    if (type.isOverlayImplementation()) {
       return; // Do nothing
     }
 

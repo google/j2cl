@@ -1656,7 +1656,7 @@ public class JsInteropRestrictionsChecker {
     }
 
     List<MethodDescriptor> superJsConstructorMethodDescriptors =
-        type.getSuperTypeDescriptor().getJsConstructorMethodDescriptors();
+        type.getSuperTypeDescriptor().getTypeDeclaration().getJsConstructorMethodDescriptors();
 
     Method jsConstructor = getJsConstructor(type);
     if (jsConstructor == null) {

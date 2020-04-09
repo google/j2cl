@@ -33,6 +33,7 @@ import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Type;
+import com.google.j2cl.ast.TypeDeclaration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,14 +62,9 @@ public class NormalizeOverlayMembers extends NormalizationPass {
   }
 
   private static Type createOverlayImplementationType(Type type) {
-    DeclaredTypeDescriptor overlayImplTypeDescriptor =
-        type.getTypeDescriptor().getOverlayImplementationTypeDescriptor();
-    Type overlayClass =
-        new Type(
-            type.getSourcePosition(),
-            type.getVisibility(),
-            overlayImplTypeDescriptor.getTypeDeclaration());
-    overlayClass.setOverlaidTypeDescriptor(type.getDeclaration().toUnparameterizedTypeDescriptor());
+    TypeDeclaration overlayImpl = type.getDeclaration().getOverlayImplementationTypeDeclaration();
+    DeclaredTypeDescriptor overlayImplDescriptor = overlayImpl.toUnparameterizedTypeDescriptor();
+    Type overlayClass = new Type(type.getSourcePosition(), type.getVisibility(), overlayImpl);
 
     for (Member member : type.getMembers()) {
       if (!isOverlay(member.getDescriptor())) {
@@ -76,14 +72,14 @@ public class NormalizeOverlayMembers extends NormalizationPass {
       }
       if (member.isMethod()) {
         Method method = (Method) member;
-        overlayClass.addMethod(createOverlayMethod(method, overlayImplTypeDescriptor));
+        overlayClass.addMethod(createOverlayMethod(method, overlayImplDescriptor));
       } else if (member.isField()) {
         Field field = (Field) member;
         checkState(field.getDescriptor().isStatic());
         overlayClass.addField(
             Field.Builder.from(field)
                 .setInitializer(AstUtils.clone(field.getInitializer()))
-                .setEnclosingClass(overlayImplTypeDescriptor)
+                .setEnclosingClass(overlayImplDescriptor)
                 .build());
       } else {
         InitializerBlock initializerBlock = (InitializerBlock) member;

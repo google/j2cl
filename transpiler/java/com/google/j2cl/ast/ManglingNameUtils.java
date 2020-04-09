@@ -26,21 +26,24 @@ import java.util.List;
  * Utility functions for mangling names.
  */
 public class ManglingNameUtils {
-  /**
-   * Returns the mangled name of a type.
-   */
-  public static String getMangledName(TypeDescriptor typeDescriptor) {
-    // Method signature should be decided by the erasure type.
-    TypeDescriptor rawTypeDescriptor = typeDescriptor.toRawTypeDescriptor();
-    if (rawTypeDescriptor.isArray()) {
-      ArrayTypeDescriptor arrayTypeDescriptor = (ArrayTypeDescriptor) rawTypeDescriptor;
+
+  /** Returns the mangled name of a type. */
+  public static String getMangledName(TypeDeclaration typeDeclaration) {
+    return typeDeclaration.getQualifiedSourceName().replace('.', '_');
+  }
+
+  /** Returns the mangled name for a type descriptor. */
+  private static String getMangledName(TypeDescriptor typeDescriptor) {
+    if (typeDescriptor.isArray()) {
+      ArrayTypeDescriptor arrayTypeDescriptor = (ArrayTypeDescriptor) typeDescriptor;
+      // Method signature should be decided by the erasure type.
       return Strings.repeat("arrayOf_", arrayTypeDescriptor.getDimensions())
           + getMangledName(arrayTypeDescriptor.getLeafTypeDescriptor());
     }
-    if (rawTypeDescriptor.isPrimitive()) {
-      return ((PrimitiveTypeDescriptor) rawTypeDescriptor).getSimpleSourceName();
+    if (typeDescriptor.isPrimitive()) {
+      return ((PrimitiveTypeDescriptor) typeDescriptor).getSimpleSourceName();
     }
-    return ((DeclaredTypeDescriptor) rawTypeDescriptor).getQualifiedSourceName().replace('.', '_');
+    return getMangledName(((DeclaredTypeDescriptor) typeDescriptor).getTypeDeclaration());
   }
 
   /** Returns the mangled name of a member. */

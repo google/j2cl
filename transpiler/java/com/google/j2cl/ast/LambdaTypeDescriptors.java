@@ -113,8 +113,9 @@ public class LambdaTypeDescriptors {
       DeclaredTypeDescriptor jsFunctionInterface,
       Optional<Integer> uniqueId) {
 
+    TypeDeclaration enclosingTypeDeclaration = enclosingTypeDescriptor.getTypeDeclaration();
     List<String> classComponents =
-        enclosingTypeDescriptor.synthesizeInnerClassComponents(
+        enclosingTypeDeclaration.synthesizeInnerClassComponents(
             FUNCTIONAL_INTERFACE_ADAPTOR_CLASS_NAME, uniqueId.orElse(null));
 
     ImmutableList<TypeVariable> typeParameterDescriptors =
@@ -131,7 +132,7 @@ public class LambdaTypeDescriptors {
             .build();
 
     return TypeDeclaration.newBuilder()
-        .setEnclosingTypeDeclaration(enclosingTypeDescriptor.getTypeDeclaration())
+        .setEnclosingTypeDeclaration(enclosingTypeDeclaration)
         .setSuperTypeDescriptorFactory(() -> TypeDescriptors.get().javaLangObject)
         .setClassComponents(classComponents)
         .setDeclaredMethodDescriptorsFactory(
@@ -253,14 +254,13 @@ public class LambdaTypeDescriptors {
   private static TypeDeclaration createJsFunctionTypeDeclaration(
       DeclaredTypeDescriptor functionalTypeDescriptor) {
 
+    TypeDeclaration typeDeclaration = functionalTypeDescriptor.getTypeDeclaration();
     List<String> classComponents =
-        functionalTypeDescriptor.synthesizeInnerClassComponents(
-            FUNCTIONAL_INTERFACE_JSFUNCTION_CLASS_NAME);
+        typeDeclaration.synthesizeInnerClassComponents(FUNCTIONAL_INTERFACE_JSFUNCTION_CLASS_NAME);
 
     return TypeDeclaration.newBuilder()
-        .setEnclosingTypeDeclaration(functionalTypeDescriptor.getTypeDeclaration())
-        .setTypeParameterDescriptors(
-            functionalTypeDescriptor.getTypeDeclaration().getTypeParameterDescriptors())
+        .setEnclosingTypeDeclaration(typeDeclaration)
+        .setTypeParameterDescriptors(typeDeclaration.getTypeParameterDescriptors())
         .setClassComponents(classComponents)
         .setJsFunctionInterface(true)
         .setFunctionalInterface(true)

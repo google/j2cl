@@ -38,9 +38,6 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   @Visitable List<Member> members = new ArrayList<>();
   private final SourcePosition sourcePosition;
 
-  /** The underlying type descriptor for synthetic @JsOverlay implementation types. */
-  private DeclaredTypeDescriptor overlaidTypeDescriptor;
-
   public Type(
       SourcePosition sourcePosition, Visibility visibility, TypeDeclaration typeDeclaration) {
     this.sourcePosition = checkNotNull(sourcePosition);
@@ -102,20 +99,20 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
     return typeDeclaration.isClass();
   }
 
-  public DeclaredTypeDescriptor getOverlaidTypeDescriptor() {
-    return this.overlaidTypeDescriptor;
-  }
-
-  public void setOverlaidTypeDescriptor(DeclaredTypeDescriptor overlaidTypeDescriptor) {
-    this.overlaidTypeDescriptor = overlaidTypeDescriptor;
-  }
-
   public void setTypeDeclaration(TypeDeclaration typeDeclaration) {
     this.typeDeclaration = typeDeclaration;
   }
 
-  public boolean isJsOverlayImplementation() {
-    return getOverlaidTypeDescriptor() != null;
+  public TypeDeclaration getOverlaidTypeDeclaration() {
+    return typeDeclaration.getOverlaidTypeDeclaration();
+  }
+
+  public boolean isOverlayImplementation() {
+    return typeDeclaration.getOverlaidTypeDeclaration() != null;
+  }
+
+  public TypeDeclaration getUnderlyingTypeDeclaration() {
+    return isOverlayImplementation() ? getOverlaidTypeDeclaration() : getDeclaration();
   }
 
   public boolean isJsEnum() {
@@ -169,7 +166,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   }
 
   public void addMethod(Method method) {
-    checkArgument(!method.isConstructor() || (!isInterface() && !isJsOverlayImplementation()));
+    checkArgument(!method.isConstructor() || (!isInterface() && !isOverlayImplementation()));
     members.add(method);
   }
 
@@ -260,10 +257,6 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
         .filter(Member::isStatic)
         .map(Field.class::cast)
         .collect(ImmutableList.toImmutableList());
-  }
-
-  public ImmutableList<Member> getStaticMembers() {
-    return members.stream().filter(Member::isStatic).collect(ImmutableList.toImmutableList());
   }
 
   public ImmutableList<InitializerBlock> getStaticInitializerBlocks() {

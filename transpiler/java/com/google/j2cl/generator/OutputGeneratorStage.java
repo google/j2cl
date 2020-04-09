@@ -89,7 +89,7 @@ public class OutputGeneratorStage {
           // through native.js files does not make sense. Non-native JsEnums on the other hand are
           // emitted by J2CL but are not JavaScript classes, "native.js" files are not allowed in
           // this case to avoid surprises.
-          TypeDeclaration typeDeclaration = getUnderlyingTypeDeclaration(type);
+          TypeDeclaration typeDeclaration = type.getUnderlyingTypeDeclaration();
           if (typeDeclaration.isNative() || typeDeclaration.isJsEnum()) {
             problems.error(
                 "%s '%s' does not support having a '.native.js' file.",
@@ -284,7 +284,7 @@ public class OutputGeneratorStage {
     // Locate matching native files that either have the same relative package as their Java
     // class (useful when Java and native.js files started in different directories on disk).
     // TODO(goktug): reconsider matching with relative name.
-    TypeDeclaration typeDeclaration = getUnderlyingTypeDeclaration(type);
+    TypeDeclaration typeDeclaration = type.getUnderlyingTypeDeclaration();
     String typeRelativePath = getRelativePath(typeDeclaration);
 
     NativeJavaScriptFile matchingNativeFile = nativeFilesByPath.get(typeRelativePath);
@@ -302,10 +302,4 @@ public class OutputGeneratorStage {
     return compilationUnit.getDirectoryPath() + '/' + typeDeclaration.getSimpleBinaryName();
   }
 
-  private static TypeDeclaration getUnderlyingTypeDeclaration(Type type) {
-    if (type.isJsOverlayImplementation()) {
-      return type.getOverlaidTypeDescriptor().getTypeDeclaration();
-    }
-    return type.getDeclaration();
-  }
 }

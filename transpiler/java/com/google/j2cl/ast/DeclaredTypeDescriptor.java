@@ -23,7 +23,6 @@ import static java.util.stream.Collectors.joining;
 
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
-import com.google.common.base.Joiner;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -125,7 +124,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   @Override
   public abstract boolean isNullable();
 
-  @Override
   public boolean isStarOrUnknown() {
     return getTypeDeclaration().isStarOrUnknown();
   }
@@ -288,12 +286,8 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     return getTypeDeclaration().isSubtypeOf(that.getTypeDeclaration());
   }
 
-  /** Whether the type is in the same package as {@code other}. */
   public boolean isInSamePackage(DeclaredTypeDescriptor other) {
-    return other
-        .getTypeDeclaration()
-        .getPackageName()
-        .equals(getTypeDeclaration().getPackageName());
+    return other.getTypeDeclaration().isInSamePackage(getTypeDeclaration());
   }
 
   public boolean extendsNativeClass() {
@@ -505,24 +499,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         .orElse(null);
   }
 
-  /** Returns the JsConstructors for this class. */
-  @Memoized
-  @Nullable
-  public List<MethodDescriptor> getJsConstructorMethodDescriptors() {
-    return getDeclaredMethodDescriptors()
-        .stream()
-        .filter(MethodDescriptor::isJsConstructor)
-        .collect(toImmutableList());
-  }
-
-  /** Returns new synthesized inner class components. */
-  public ImmutableList<String> synthesizeInnerClassComponents(Object... parts) {
-    return ImmutableList.<String>builder()
-        .addAll(getTypeDeclaration().getClassComponents())
-        .add("$" + Joiner.on("$").skipNulls().join(parts))
-        .build();
-  }
-
   /**
    * Returns the corresponding primitive type if the {@code setTypeDescriptor} is a boxed type;
    * throws an exception otherwise.
@@ -558,7 +534,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
       return false;
     }
 
-    if (getTypeDeclaration().isJsType()
+    if (isJsType()
         || isJsFunctionInterface()
         || TypeDescriptors.isBoxedTypeAsJsPrimitives(this)
         || TypeDescriptors.isJavaLangObject(this)) {

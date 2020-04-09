@@ -158,9 +158,7 @@ public class NormalizeConstructors extends NormalizationPass {
       // Here we remove the "this" call since this is already taken care of by the
       // $create method.
       final MethodCall constructorInvocation = AstUtils.getConstructorInvocation(method);
-      if (constructorInvocation
-          .getTarget()
-          .isMemberOf(type.getDeclaration().getSuperTypeDescriptor())) {
+      if (constructorInvocation.getTarget().isMemberOf(type.getSuperTypeDescriptor())) {
         // super() call should be called with the es6 "super(args)" in the es6 constructor
         // if the super class has a @JsConstructor.
         // If the super class is just a normal Java class then we should rely on the
@@ -288,7 +286,7 @@ public class NormalizeConstructors extends NormalizationPass {
 
     List<Statement> body = generateInstanceFieldDeclarationStatements(type, sourcePosition);
 
-    if (type.getDeclaration().getSuperTypeDescriptor() != null) {
+    if (type.getSuperTypeDescriptor() != null) {
       body.add(
           0, synthesizeEmptySuperCall(type.getSuperTypeDescriptor()).makeStatement(sourcePosition));
     } else {
@@ -549,7 +547,8 @@ public class NormalizeConstructors extends NormalizationPass {
     // Synthesize a name that is unique per class to avoid property clashes in JS.
     return MethodDescriptor.CTOR_METHOD_PREFIX
         + "__"
-        + ManglingNameUtils.getMangledName(methodDescriptor.getEnclosingTypeDescriptor());
+        + ManglingNameUtils.getMangledName(
+            methodDescriptor.getEnclosingTypeDescriptor().getTypeDeclaration());
   }
 
   /** Method descriptor for $create methods. */

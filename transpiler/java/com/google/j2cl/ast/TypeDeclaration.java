@@ -35,7 +35,6 @@ import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.common.ThreadLocalInterner;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -61,6 +60,9 @@ import javax.annotation.Nullable;
 @AutoValue
 public abstract class TypeDeclaration
     implements HasJsNameInfo, HasReadableDescription, HasUnusableByJsSuppression {
+
+  private static final String OVERLAY_IMPLEMENTATION_CLASS_SUFFIX = "Overlay";
+
   /**
    * References to some descriptors need to be deferred in some cases since it will cause infinite
    * loops.
@@ -161,12 +163,24 @@ public abstract class TypeDeclaration
   @Nullable
   public abstract String getPackageName();
 
+  public boolean isInSamePackage(TypeDeclaration other) {
+    return getPackageName().equals(other.getPackageName());
+  }
+
   /**
    * Returns a list of Strings representing the current type's simple name and enclosing type simple
    * names. For example for "com.google.foo.Outer" the class components are ["Outer"] and for
    * "com.google.foo.Outer.Inner" the class components are ["Outer", "Inner"].
    */
   public abstract ImmutableList<String> getClassComponents();
+
+  /** Returns new synthesized inner class components. */
+  public ImmutableList<String> synthesizeInnerClassComponents(Object... parts) {
+    return ImmutableList.<String>builder()
+        .addAll(getClassComponents())
+        .add("$" + Joiner.on("$").skipNulls().join(parts))
+        .build();
+  }
 
   @Nullable
   public abstract TypeDeclaration getEnclosingTypeDeclaration();
@@ -277,12 +291,12 @@ public abstract class TypeDeclaration
 
   @Memoized
   public boolean extendsNativeClass() {
-    DeclaredTypeDescriptor superTypeDescriptor = getSuperTypeDescriptor();
-    if (superTypeDescriptor == null) {
+    TypeDeclaration superType = getSuperTypeDeclaration();
+    if (superType == null) {
       return false;
     }
 
-    return superTypeDescriptor.isNative() || superTypeDescriptor.extendsNativeClass();
+    return superType.isNative() || superType.extendsNativeClass();
   }
 
   public boolean hasJsConstructor() {
@@ -290,8 +304,8 @@ public abstract class TypeDeclaration
   }
 
   public boolean isJsConstructorSubtype() {
-    DeclaredTypeDescriptor superTypeDescriptor = getSuperTypeDescriptor();
-    return superTypeDescriptor != null && superTypeDescriptor.hasJsConstructor();
+    TypeDeclaration superType = getSuperTypeDeclaration();
+    return superType != null && superType.hasJsConstructor();
   }
 
   /** Whether cast to this type are checked or not. */
@@ -386,25 +400,29 @@ public abstract class TypeDeclaration
 
   @Memoized
   public TypeDeclaration getMetadataTypeDeclaration() {
-    DeclaredTypeDescriptor rawTypeDescriptor = toRawTypeDescriptor();
-
-    if (rawTypeDescriptor.isNative() || rawTypeDescriptor.isJsEnum()) {
-      return getOverlayImplementationTypeDeclaration()
-          .toUnparameterizedTypeDescriptor()
-          .getTypeDeclaration();
+    if (isNative() || isJsEnum()) {
+      return getOverlayImplementationTypeDeclaration();
     }
 
-    if (rawTypeDescriptor.isJsFunctionInterface()) {
+    if (isJsFunctionInterface()) {
       return BootstrapType.JAVA_SCRIPT_FUNCTION.getDeclaration();
     }
 
-    return rawTypeDescriptor.getTypeDeclaration();
+    return this;
   }
+
+  @Nullable
+  public abstract TypeDeclaration getOverlaidTypeDeclaration();
 
   @Memoized
   public TypeDeclaration getOverlayImplementationTypeDeclaration() {
-    return TypeDescriptors.createOverlayImplementationTypeDeclaration(
-        toUnparameterizedTypeDescriptor());
+    return newBuilder()
+        .setEnclosingTypeDeclaration(this)
+        .setOverlaidTypeDeclaration(this)
+        .setClassComponents(synthesizeInnerClassComponents(OVERLAY_IMPLEMENTATION_CLASS_SUFFIX))
+        .setVisibility(Visibility.PUBLIC)
+        .setKind(getKind())
+        .build();
   }
 
   @Memoized
@@ -448,23 +466,8 @@ public abstract class TypeDeclaration
    * Returns a set of the type descriptors of interfaces that are explicitly implemented either
    * directly on this type or on some super type or super interface.
    */
-  @Memoized
   public Set<DeclaredTypeDescriptor> getTransitiveInterfaceTypeDescriptors() {
-    Set<DeclaredTypeDescriptor> typeDescriptors = new LinkedHashSet<>();
-
-    // Recursively gather from super interfaces.
-    for (DeclaredTypeDescriptor interfaceTypeDescriptor : getInterfaceTypeDescriptors()) {
-      typeDescriptors.add(interfaceTypeDescriptor);
-      typeDescriptors.addAll(interfaceTypeDescriptor.getTransitiveInterfaceTypeDescriptors());
-    }
-
-    // Recursively gather from super type.
-    DeclaredTypeDescriptor superTypeDescriptor = getSuperTypeDescriptor();
-    if (superTypeDescriptor != null) {
-      typeDescriptors.addAll(superTypeDescriptor.getTransitiveInterfaceTypeDescriptors());
-    }
-
-    return typeDescriptors;
+    return toUnparameterizedTypeDescriptor().getTransitiveInterfaceTypeDescriptors();
   }
 
   /**
@@ -531,6 +534,10 @@ public abstract class TypeDeclaration
     return getSuperTypeDescriptorFactory().get(this);
   }
 
+  private TypeDeclaration getSuperTypeDeclaration() {
+    return getSuperTypeDescriptor() == null ? null : getSuperTypeDescriptor().getTypeDeclaration();
+  }
+
   /**
    * Returns the usage site TypeDescriptor corresponding to this declaration site TypeDeclaration.
    *
@@ -578,33 +585,6 @@ public abstract class TypeDeclaration
   }
 
   /**
-   * The list of methods in the type from the JDT. Note: this does not include methods we synthesize
-   * and add to the type like bridge methods.
-   */
-  @Memoized
-  Map<String, MethodDescriptor> getMethodDescriptorsBySignature() {
-    // TODO(rluble): update this code to handle package private methods, bridges and verify that it
-    // correctly handles default methods.
-    Map<String, MethodDescriptor> methodDescriptorsBySignature = new LinkedHashMap<>();
-
-    // Add all methods declared in the current type itself
-    methodDescriptorsBySignature.putAll(getDeclaredMethodDescriptorsBySignature());
-
-    // Add all the methods from the super class.
-    if (getSuperTypeDescriptor() != null) {
-      AstUtils.addInheritedMethodsBySignature(
-          methodDescriptorsBySignature, getSuperTypeDescriptor().getMethodDescriptors());
-    }
-
-    // Finally add the methods that appear in super interfaces.
-    for (DeclaredTypeDescriptor implementedInterface : getInterfaceTypeDescriptors()) {
-      AstUtils.addInheritedMethodsBySignature(
-          methodDescriptorsBySignature, implementedInterface.getMethodDescriptors());
-    }
-    return methodDescriptorsBySignature;
-  }
-
-  /**
    * Returns true if {@code TypeDescriptor} declares a method with the same signature as {@code
    * methodDescriptor} in its body.
    */
@@ -630,9 +610,8 @@ public abstract class TypeDeclaration
   protected Set<TypeDeclaration> getAllSuperTypesIncludingSelf() {
     Set<TypeDeclaration> allSupertypesIncludingSelf = new LinkedHashSet<>();
     allSupertypesIncludingSelf.add(this);
-    if (getSuperTypeDescriptor() != null) {
-      allSupertypesIncludingSelf.addAll(
-          getSuperTypeDescriptor().getTypeDeclaration().getAllSuperTypesIncludingSelf());
+    if (getSuperTypeDeclaration() != null) {
+      allSupertypesIncludingSelf.addAll(getSuperTypeDeclaration().getAllSuperTypesIncludingSelf());
     }
     for (DeclaredTypeDescriptor interfaceTypeDescriptor : getInterfaceTypeDescriptors()) {
       allSupertypesIncludingSelf.addAll(
@@ -666,22 +645,6 @@ public abstract class TypeDeclaration
   @Memoized
   public Collection<FieldDescriptor> getDeclaredFieldDescriptors() {
     return getDeclaredFieldDescriptorsFactory().get(this);
-  }
-
-  /** The list of all methods available on a given type. */
-  public Collection<MethodDescriptor> getMethodDescriptors() {
-    return getMethodDescriptorsBySignature().values();
-  }
-
-  /** Returns the default (parameterless) constructor for the type.. */
-  @Memoized
-  public MethodDescriptor getDefaultConstructorMethodDescriptor() {
-    return getDeclaredMethodDescriptors()
-        .stream()
-        .filter(MethodDescriptor::isConstructor)
-        .filter(methodDescriptor -> methodDescriptor.getParameterTypeDescriptors().isEmpty())
-        .findFirst()
-        .orElse(null);
   }
 
   /**
@@ -726,9 +689,9 @@ public abstract class TypeDeclaration
     }
 
     // Recurse into immediate super class and interfaces for overridden method.
-    if (getSuperTypeDescriptor() != null) {
+    if (getSuperTypeDeclaration() != null) {
       methodDescriptorsByOverrideSignature.putAll(
-          getSuperTypeDescriptor().getTypeDeclaration().getMethodDescriptorsByOverrideSignature());
+          getSuperTypeDeclaration().getMethodDescriptorsByOverrideSignature());
     }
 
     for (DeclaredTypeDescriptor interfaceTypeDescriptor : getInterfaceTypeDescriptors()) {
@@ -881,6 +844,8 @@ public abstract class TypeDeclaration
     public abstract Builder setClassComponents(List<String> classComponents);
 
     public abstract Builder setEnclosingTypeDeclaration(TypeDeclaration enclosingTypeDeclaration);
+
+    public abstract Builder setOverlaidTypeDeclaration(TypeDeclaration typeDeclaration);
 
     public abstract Builder setHasAbstractModifier(boolean hasAbstractModifier);
 

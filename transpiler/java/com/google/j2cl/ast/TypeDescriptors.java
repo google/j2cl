@@ -32,7 +32,6 @@ import java.util.function.Function;
 
 /** Utility class holding type descriptors that need to be referenced directly. */
 public class TypeDescriptors {
-  private static final String OVERLAY_IMPLEMENTATION_CLASS_SUFFIX = "Overlay";
 
   public DeclaredTypeDescriptor javaLangBoolean;
   public DeclaredTypeDescriptor javaLangByte;
@@ -268,25 +267,6 @@ public class TypeDescriptors {
 
   public static boolean isNonBoxedReferenceType(TypeDescriptor typeDescriptor) {
     return !typeDescriptor.isPrimitive() && !isBoxedType(typeDescriptor);
-  }
-
-  /** Returns the TypeDeclaration for the Overlay implementation type. */
-  static TypeDeclaration createOverlayImplementationTypeDeclaration(
-      DeclaredTypeDescriptor typeDescriptor) {
-
-    DeclaredTypeDescriptor unparameterizedTypeDescriptor =
-        typeDescriptor.toUnparameterizedTypeDescriptor();
-
-    List<String> classComponents =
-        unparameterizedTypeDescriptor.synthesizeInnerClassComponents(
-            OVERLAY_IMPLEMENTATION_CLASS_SUFFIX);
-
-    return TypeDeclaration.newBuilder()
-        .setEnclosingTypeDeclaration(unparameterizedTypeDescriptor.getTypeDeclaration())
-        .setClassComponents(classComponents)
-        .setVisibility(Visibility.PUBLIC)
-        .setKind(unparameterizedTypeDescriptor.getTypeDeclaration().getKind())
-        .build();
   }
 
   static Function<TypeVariable, ? extends TypeDescriptor> mappingFunctionFromMap(

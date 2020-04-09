@@ -109,24 +109,21 @@ class ImportGatherer extends AbstractVisitor {
   public void exitType(Type type) {
     addTypeDeclaration(type.getDeclaration(), ImportCategory.SELF);
 
-    if (type.isJsOverlayImplementation() && type.getOverlaidTypeDescriptor().isNative()) {
+    if (type.isOverlayImplementation() && type.getOverlaidTypeDeclaration().isNative()) {
       // The synthesized JsOverlayImpl type should import the native type eagerly for $isInstance.
       // Also requiring native type makes sure the native type is not pruned by AJD.
-      addTypeDeclaration(
-          type.getOverlaidTypeDescriptor().getTypeDeclaration(), ImportCategory.LOADTIME);
+      addTypeDeclaration(type.getOverlaidTypeDeclaration(), ImportCategory.LOADTIME);
     }
 
-    if (type.isJsOverlayImplementation() && type.getOverlaidTypeDescriptor().isJsEnum()) {
+    if (type.isOverlayImplementation() && type.getOverlaidTypeDeclaration().isJsEnum()) {
       // Add Enums bootstrap type as it is referred to at code generation from $isInstance.
       // $isInstance does not call $clinit, for that reason it needs to be imported eagerly.
       addTypeDeclaration(BootstrapType.ENUMS.getDeclaration(), ImportCategory.LOADTIME);
-      DeclaredTypeDescriptor overlaidTypeDescriptor = type.getOverlaidTypeDescriptor();
-      if (overlaidTypeDescriptor.getJsEnumInfo().hasCustomValue()
-          && overlaidTypeDescriptor.isNative()) {
+      TypeDeclaration overlaidType = type.getOverlaidTypeDeclaration();
+      if (overlaidType.getJsEnumInfo().hasCustomValue()
+          && overlaidType.toUnparameterizedTypeDescriptor().isNative()) {
         // Add the type needed to for $IsInstance on native JsEnums.
-        TypeDescriptor instanceofType =
-            AstUtils.getJsEnumValueFieldInstanceCheckType(
-                overlaidTypeDescriptor.getTypeDeclaration());
+        TypeDescriptor instanceofType = AstUtils.getJsEnumValueFieldInstanceCheckType(overlaidType);
         addTypeDeclaration(instanceofType.getMetadataTypeDeclaration(), ImportCategory.LOADTIME);
       }
     }
