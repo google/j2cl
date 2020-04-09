@@ -160,115 +160,117 @@ class J2clTranspiler {
   }
 
   private static void normalizeUnits(List<CompilationUnit> j2clUnits) {
-    // TODO(b/117155139): Review the ordering of passes.
-    List<NormalizationPass> passes =
-        ImmutableList.of(
-            // Class structure normalizations.
-            new ImplementLambdaExpressions(),
-            new OptimizeAnonymousInnerClassesToFunctionExpressions(),
-            new NormalizeFunctionExpressions(),
-            // Default constructors and explicit super calls should be synthesized first.
-            new CreateImplicitConstructors(),
-            new InsertExplicitSuperCalls(),
-            new DefaultMethodsResolver(),
-            new PackagePrivateMethodsDispatcher(),
-            new BridgeMethodsCreator(),
-            new JsBridgeMethodsCreator(),
-            // TODO(b/31865368): Remove RewriteStringEquals pass once delayed field initialization
-            //  is introduced and String.java gets updated to use it.
-            new RewriteStringEquals(),
-            new DevirtualizeBoxedTypesAndJsFunctionImplementations(),
-            new NormalizeTryWithResources(),
-            new NormalizeCatchClauses(),
-            // Runs before normalizing nested classes.
-            new InsertCastOnNewInstances(),
-            // Must run before Enum normalization
-            new FixSuperCallQualifiers(),
-
-            // Runs after all passes that synthesize overlays.
-            new NormalizeEnumClasses(),
-            new NormalizeJsEnums(),
-            new NormalizeOverlayMembers(),
-            new NormalizeInterfaceMethods(),
-            // End of class structure normalization.
-
-            // Statement/Expression normalizations
-            new NormalizeArrayLiterals(),
-            new NormalizeStaticMemberQualifiers(),
-            // Runs after NormalizeStaticMemberQualifiersPass.
-            new DevirtualizeMethodCalls(),
-            new ControlStatementFormatter(),
-            new NormalizeMultiExpressions(),
-            // Runs after NormalizeMultiExpressions to make sure it only sees valid l-values.
-            new ExpandCompoundAssignments(),
-            new InsertErasureTypeSafetyCasts(),
-            // Runs before unboxing conversion.
-            new InsertStringConversions(),
-            new InsertNarrowingReferenceConversions(),
-            new InsertUnboxingConversions(),
-            new InsertBoxingConversions(),
-            new InsertNarrowingPrimitiveConversions(),
-            new InsertWideningPrimitiveConversions(),
-            new NormalizeLongs(),
-            new InsertDivisionCoercions(),
-            new InsertBitwiseOperatorBooleanCoercions(),
-            new InsertUnsignedRightShiftCoercions(),
-            new NormalizeJsFunctionPropertyInvocations(),
-            // Run before other passes that normalize JsEnum expressions, but after all the normal
-            // Java semantic conversions.
-            new InsertJsEnumBoxingAndUnboxingConversions(),
-            new NormalizeSwitchStatements(),
-            new ArrayAccessNormalizer(),
-            new ImplementAssertStatements(),
-            new ImplementSynchronizedStatements(),
-            new NormalizeFieldInitialization(),
-            new ImplementInstanceInitialization(),
-            new NormalizeNestedClassConstructors(),
-            new NormalizeConstructors(),
-            new NormalizeTypeLiterals(),
-            new NormalizeCasts(),
-            new NormalizeInstanceOfs(),
-            new NormalizeEquality(),
-            new NormalizeStaticNativeMemberReferences(),
-            new NormalizeJsVarargs(),
-            new NormalizeArrayCreations(),
-            new InsertExceptionConversions(),
-            new NormalizeLiterals(),
-
-            // Needs to run after passes that do code synthesis are run so that it handles the
-            // synthesize code as well.
-            // TODO(b/35241823): Revisit this pass if jscompiler adds a way to express constraints
-            // to template variables.
-            new InsertCastsToTypeBounds(),
-
-            // TODO(b/72652198): remove the temporary fix once switch to JSCompiler's new type
-            // checker.
-            new InsertTypeAnnotationOnGenericReturnTypes(),
-
-            // Perform post cleanups.
-            new ImplementStaticInitialization(),
-            // Normalize multiexpressions again to remove unnecessary clutter, but run before
-            // variable motion.
-            new NormalizeMultiExpressions(),
-            new MoveVariableDeclarationsToEnclosingBlock(),
-            // Remove redundant JsDocCasts.
-            new RemoveUnneededJsDocCasts(),
-            new NormalizeJsDocCastExpressions(),
-
-            // Handle await keyword.
-            new NormalizeJsAwaitMethodInvocations(),
-            new RemoveNoopStatements(),
-
-            // Enrich source mapping information for better stack deobfuscation.
-            new FilloutMissingSourceMapInformation());
 
     for (CompilationUnit j2clUnit : j2clUnits) {
       verifyUnit(j2clUnit);
-      for (NormalizationPass pass : passes) {
+      for (NormalizationPass pass : getPasses()) {
         pass.applyTo(j2clUnit);
       }
       verifyNormalizedUnit(j2clUnit);
     }
+  }
+
+  private static ImmutableList<NormalizationPass> getPasses() {
+    // TODO(b/117155139): Review the ordering of passes.
+    return ImmutableList.of(
+        // Class structure normalizations.
+        new ImplementLambdaExpressions(),
+        new OptimizeAnonymousInnerClassesToFunctionExpressions(),
+        new NormalizeFunctionExpressions(),
+        // Default constructors and explicit super calls should be synthesized first.
+        new CreateImplicitConstructors(),
+        new InsertExplicitSuperCalls(),
+        new DefaultMethodsResolver(),
+        new PackagePrivateMethodsDispatcher(),
+        new BridgeMethodsCreator(),
+        new JsBridgeMethodsCreator(),
+        // TODO(b/31865368): Remove RewriteStringEquals pass once delayed field initialization
+        //  is introduced and String.java gets updated to use it.
+        new RewriteStringEquals(),
+        new DevirtualizeBoxedTypesAndJsFunctionImplementations(),
+        new NormalizeTryWithResources(),
+        new NormalizeCatchClauses(),
+        // Runs before normalizing nested classes.
+        new InsertCastOnNewInstances(),
+        // Must run before Enum normalization
+        new FixSuperCallQualifiers(),
+
+        // Runs after all passes that synthesize overlays.
+        new NormalizeEnumClasses(),
+        new NormalizeJsEnums(),
+        new NormalizeOverlayMembers(),
+        new NormalizeInterfaceMethods(),
+        // End of class structure normalization.
+
+        // Statement/Expression normalizations
+        new NormalizeArrayLiterals(),
+        new NormalizeStaticMemberQualifiers(),
+        // Runs after NormalizeStaticMemberQualifiersPass.
+        new DevirtualizeMethodCalls(),
+        new ControlStatementFormatter(),
+        new NormalizeMultiExpressions(),
+        // Runs after NormalizeMultiExpressions to make sure it only sees valid l-values.
+        new ExpandCompoundAssignments(),
+        new InsertErasureTypeSafetyCasts(),
+        // Runs before unboxing conversion.
+        new InsertStringConversions(),
+        new InsertNarrowingReferenceConversions(),
+        new InsertUnboxingConversions(),
+        new InsertBoxingConversions(),
+        new InsertNarrowingPrimitiveConversions(),
+        new InsertWideningPrimitiveConversions(),
+        new NormalizeLongs(),
+        new InsertDivisionCoercions(),
+        new InsertBitwiseOperatorBooleanCoercions(),
+        new InsertUnsignedRightShiftCoercions(),
+        new NormalizeJsFunctionPropertyInvocations(),
+        // Run before other passes that normalize JsEnum expressions, but after all the normal
+        // Java semantic conversions.
+        new InsertJsEnumBoxingAndUnboxingConversions(),
+        new NormalizeSwitchStatements(),
+        new ArrayAccessNormalizer(),
+        new ImplementAssertStatements(),
+        new ImplementSynchronizedStatements(),
+        new NormalizeFieldInitialization(),
+        new ImplementInstanceInitialization(),
+        new NormalizeNestedClassConstructors(),
+        new NormalizeConstructors(),
+        new NormalizeTypeLiterals(),
+        new NormalizeCasts(),
+        new NormalizeInstanceOfs(),
+        new NormalizeEquality(),
+        new NormalizeStaticNativeMemberReferences(),
+        new NormalizeJsVarargs(),
+        new NormalizeArrayCreations(),
+        new InsertExceptionConversions(),
+        new NormalizeLiterals(),
+
+        // Needs to run after passes that do code synthesis are run so that it handles the
+        // synthesize code as well.
+        // TODO(b/35241823): Revisit this pass if jscompiler adds a way to express constraints
+        // to template variables.
+        new InsertCastsToTypeBounds(),
+
+        // TODO(b/72652198): remove the temporary fix once switch to JSCompiler's new type
+        // checker.
+        new InsertTypeAnnotationOnGenericReturnTypes(),
+
+        // Perform post cleanups.
+        new ImplementStaticInitialization(),
+        // Normalize multiexpressions again to remove unnecessary clutter, but run before
+        // variable motion.
+        new NormalizeMultiExpressions(),
+        new MoveVariableDeclarationsToEnclosingBlock(),
+        // Remove redundant JsDocCasts.
+        new RemoveUnneededJsDocCasts(),
+        new NormalizeJsDocCastExpressions(),
+
+        // Handle await keyword.
+        new NormalizeJsAwaitMethodInvocations(),
+        new RemoveNoopStatements(),
+
+        // Enrich source mapping information for better stack deobfuscation.
+        new FilloutMissingSourceMapInformation());
   }
 
   private static void verifyUnit(CompilationUnit j2clUnit) {
