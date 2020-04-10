@@ -19,8 +19,8 @@ import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.MoreCollectors;
+import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.AstUtils;
-import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Method;
@@ -37,21 +37,33 @@ import java.util.Optional;
  * <p>The implicit super call invokes the default constructor that has an empty parameter list.
  */
 public class InsertExplicitSuperCalls extends NormalizationPass {
+
   @Override
-  public void applyTo(CompilationUnit compilationUnit) {
-    for (Type type : compilationUnit.getTypes()) {
-      if (type.isInterface() || type.getSuperTypeDescriptor() == null) {
-        continue;
-      }
-      for (Method constructor : type.getConstructors()) {
-        if (AstUtils.hasConstructorInvocation(constructor)) {
-          continue;
-        }
-        // Only inserts explicit super() call to a constructor that does not have
-        // super() or this() call (provided that the type has a superclass).
-        synthesizeSuperCall(constructor);
-      }
+  public void applyTo(Type type) {
+    if (type.isInterface() || type.getSuperTypeDescriptor() == null) {
+      return;
     }
+
+    type.accept(
+        new AbstractVisitor() {
+          @Override
+          public boolean enterType(Type node) {
+            return !type.isInterface() && type.getSuperTypeDescriptor() != null;
+          }
+
+          @Override
+          public void exitMethod(Method method) {
+            if (!method.isConstructor()) {
+              return;
+            }
+            if (AstUtils.hasConstructorInvocation(method)) {
+              return;
+            }
+            // Only inserts explicit super() call to a constructor that does not have
+            // super() or this() call (provided that the type has a superclass).
+            synthesizeSuperCall(method);
+          }
+        });
   }
 
   private static void synthesizeSuperCall(Method constructor) {

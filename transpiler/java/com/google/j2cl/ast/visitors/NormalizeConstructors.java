@@ -24,7 +24,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.MoreCollectors;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AstUtils;
-import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.JsInfo;
@@ -121,27 +120,28 @@ public class NormalizeConstructors extends NormalizationPass {
    * </ul>
    */
   @Override
-  public void applyTo(CompilationUnit compilationUnit) {
-    rewriteNewInstances(compilationUnit);
+  public void applyTo(Type type) {
+    rewriteNewInstances(type);
+    rewriteConstructors(type);
+  }
 
-    for (Type type : compilationUnit.getTypes()) {
-      if (type.getConstructors().isEmpty()) {
-        // No constructors => no normalization.
-        continue;
-      }
-      // Synthesize the es6 constructor BEFORE altering any of the constructor's code, but do not
-      // add it to the type yet, the code for the es6 constructor should not be transformed.
-      Method es6Constructor =
-          type.getDeclaration().hasJsConstructor()
-              ? synthesizeJsConstructor(type)
-              : synthesizePrivateConstructor(type);
-
-      insertFactoryMethods(type);
-      removeSuperCallsFromConstructor(type);
-      rewriteConstructorsAsCtorMethods(type);
-
-      type.addMethod(0, es6Constructor);
+  private static void rewriteConstructors(Type type) {
+    if (type.getConstructors().isEmpty()) {
+      // No constructors => no normalization.
+      return;
     }
+    // Synthesize the es6 constructor BEFORE altering any of the constructor's code, but do not
+    // add it to the type yet, the code for the es6 constructor should not be transformed.
+    Method es6Constructor =
+        type.getDeclaration().hasJsConstructor()
+            ? synthesizeJsConstructor(type)
+            : synthesizePrivateConstructor(type);
+
+    insertFactoryMethods(type);
+    removeSuperCallsFromConstructor(type);
+    rewriteConstructorsAsCtorMethods(type);
+
+    type.addMethod(0, es6Constructor);
   }
 
   private static void removeSuperCallsFromConstructor(Type type) {
@@ -324,8 +324,8 @@ public class NormalizeConstructors extends NormalizationPass {
   }
 
   /** Rewrite NewInstance nodes to MethodCall nodes to the $create factory method. */
-  private static void rewriteNewInstances(CompilationUnit compilationUnit) {
-    compilationUnit.accept(
+  private static void rewriteNewInstances(Type type) {
+    type.accept(
         new AbstractRewriter() {
           @Override
           public Expression rewriteNewInstance(NewInstance constructorInvocation) {
@@ -521,8 +521,7 @@ public class NormalizeConstructors extends NormalizationPass {
   }
 
   private static Method getJsConstructor(Type type) {
-    return type.getMethods()
-        .stream()
+    return type.getMethods().stream()
         .filter(method -> method.getDescriptor().isJsConstructor())
         .collect(MoreCollectors.onlyElement());
   }
@@ -603,8 +602,7 @@ public class NormalizeConstructors extends NormalizationPass {
 
   private static List<Statement> generateInstanceFieldDeclarationStatements(
       Type type, SourcePosition sourcePosition) {
-    return type.getInstanceFields()
-        .stream()
+    return type.getInstanceFields().stream()
         .map(field -> AstUtils.declarationStatement(field, sourcePosition))
         .collect(toList());
   }

@@ -18,7 +18,6 @@ package com.google.j2cl.ast.visitors;
 import static com.google.common.base.Preconditions.checkArgument;
 
 import com.google.j2cl.ast.AstUtils;
-import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -31,14 +30,12 @@ import java.util.stream.Collectors;
 /** Synthesizes instance initialization method $init and adds calls to them in each constructor. */
 public class ImplementInstanceInitialization extends NormalizationPass {
   @Override
-  public void applyTo(CompilationUnit compilationUnit) {
-    for (Type type : compilationUnit.getTypes()) {
-      if (type.getInstanceInitializerBlocks().isEmpty()) {
-        continue;
-      }
-      implementInitMethod(type);
-      insertInitCalls(type);
+  public void applyTo(Type type) {
+    if (type.getInstanceInitializerBlocks().isEmpty()) {
+      return;
     }
+    implementInitMethod(type);
+    insertInitCalls(type);
   }
 
   /** Implements the instance initialization method. */
@@ -87,4 +84,3 @@ public class ImplementInstanceInitialization extends NormalizationPass {
         MethodCall.Builder.from(initMethodDescriptor).build().makeStatement(sourcePosition));
   }
 }
-

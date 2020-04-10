@@ -18,7 +18,6 @@ package com.google.j2cl.ast.visitors;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryExpression;
-import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldAccess;
@@ -45,17 +44,13 @@ public class NormalizeEnumClasses extends NormalizationPass {
   private static final String VALUE_NAME_PARAMETER_NAME = "$name";
 
   @Override
-  public void applyTo(CompilationUnit compilationUnit) {
-
-    for (Type type : compilationUnit.getTypes()) {
-      if (!type.isEnumOrSubclass() || type.isNative()) {
-        continue;
-      }
-
-      rewriteEnumConstructors(type);
-      createEnumOrdinalConstants(type);
-      rewriteEnumValueFieldsInitialization(type);
+  public void applyTo(Type type) {
+    if (!type.isEnumOrSubclass() || type.isNative()) {
+      return;
     }
+    rewriteEnumConstructors(type);
+    createEnumOrdinalConstants(type);
+    rewriteEnumValueFieldsInitialization(type);
   }
 
   /** Rewrites enum constructors to include parameters for the ordinal and name. */

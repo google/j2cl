@@ -16,7 +16,6 @@
 package com.google.j2cl.ast.visitors;
 
 import com.google.j2cl.ast.AstUtils;
-import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -34,30 +33,26 @@ import java.util.stream.Collectors;
 public class PackagePrivateMethodsDispatcher extends NormalizationPass {
   /** Creates dispatch methods for package private methods and adds them to the java type. */
   @Override
-  public void applyTo(CompilationUnit compilationUnit) {
-    for (Type type : compilationUnit.getTypes()) {
-      List<Method> dispatchMethods =
-          findExposedOverriddenMethods(type.getDeclaration())
-              .entrySet()
-              .stream()
-              .map(
-                  entry ->
-                      AstUtils.createForwardingMethod(
-                          type.getSourcePosition(),
-                          null,
-                          MethodDescriptor.Builder.from(entry.getValue())
-                              .setEnclosingTypeDescriptor(type.getTypeDescriptor())
-                              .setSynthetic(true)
-                              .setBridge(true)
-                              .setNative(false)
-                              .setAbstract(false)
-                              .build(),
-                          entry.getKey(),
-                          "Forwarding method for package private method.",
-                          true))
-              .collect(Collectors.toList());
-      type.addMethods(dispatchMethods);
-    }
+  public void applyTo(Type type) {
+    List<Method> dispatchMethods =
+        findExposedOverriddenMethods(type.getDeclaration()).entrySet().stream()
+            .map(
+                entry ->
+                    AstUtils.createForwardingMethod(
+                        type.getSourcePosition(),
+                        null,
+                        MethodDescriptor.Builder.from(entry.getValue())
+                            .setEnclosingTypeDescriptor(type.getTypeDescriptor())
+                            .setSynthetic(true)
+                            .setBridge(true)
+                            .setNative(false)
+                            .setAbstract(false)
+                            .build(),
+                        entry.getKey(),
+                        "Forwarding method for package private method.",
+                        true))
+            .collect(Collectors.toList());
+    type.addMethods(dispatchMethods);
   }
 
   /** Returns the mapping from public/protected method to its package private overridden method. */

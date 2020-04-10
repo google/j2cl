@@ -18,10 +18,10 @@ package com.google.j2cl.ast.visitors;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.ArrayLiteral;
-import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.NewArray;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.NullLiteral;
+import com.google.j2cl.ast.Type;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -31,52 +31,39 @@ import java.util.Set;
  * more common long form (like "int[] foo = new int[] {1, 2, 3};").
  */
 public class NormalizeArrayLiterals extends NormalizationPass {
+
+  private final Set<ArrayLiteral> longFormArrayLiterals = new HashSet<>();
+
   @Override
-  public void applyTo(CompilationUnit compilationUnit) {
-    Set<ArrayLiteral> longFormArrayLiterals = new HashSet<>();
-    compilationUnit.accept(new CollectLongFormArrayLiteralsVisitor(longFormArrayLiterals));
-    compilationUnit.accept(new RewriteShortFormToLongFormRewriter(longFormArrayLiterals));
-  }
+  public void applyTo(Type type) {
+    // Collect long form array literals
+    type.accept(
+        new AbstractVisitor() {
+          @Override
+          public void exitNewArray(NewArray newArray) {
+            if (newArray.getArrayLiteral() != null) {
+              longFormArrayLiterals.add(newArray.getArrayLiteral());
+            }
+          }
+        });
 
-  private static class CollectLongFormArrayLiteralsVisitor extends AbstractVisitor {
+    // Rewrite short form array literals
+    type.accept(
+        new AbstractRewriter() {
+          @Override
+          public Node rewriteArrayLiteral(ArrayLiteral arrayLiteral) {
+            if (longFormArrayLiterals.contains(arrayLiteral)) {
+              return arrayLiteral;
+            }
 
-    private final Set<ArrayLiteral> longFormArrayLiterals;
-
-    CollectLongFormArrayLiteralsVisitor(Set<ArrayLiteral> longFormArrayLiterals) {
-      this.longFormArrayLiterals = longFormArrayLiterals;
-    }
-
-    @Override
-    public boolean enterNewArray(NewArray newArray) {
-      if (newArray.getArrayLiteral() != null) {
-        longFormArrayLiterals.add(newArray.getArrayLiteral());
-      }
-      return true;
-    }
-  }
-
-  private static class RewriteShortFormToLongFormRewriter extends AbstractRewriter {
-
-    private final Set<ArrayLiteral> longFormArrayLiterals;
-
-    RewriteShortFormToLongFormRewriter(Set<ArrayLiteral> longFormArrayLiterals) {
-      this.longFormArrayLiterals = longFormArrayLiterals;
-    }
-
-    @Override
-    public Node rewriteArrayLiteral(ArrayLiteral arrayLiteral) {
-      if (longFormArrayLiterals.contains(arrayLiteral)) {
-        return arrayLiteral;
-      }
-
-      // Rewrite ArrayLiteral as NewArray(ArrayLiteral).
-      return NewArray.newBuilder()
-          .setTypeDescriptor(arrayLiteral.getTypeDescriptor())
-          .setDimensionExpressions(
-              Collections.nCopies(
-                  arrayLiteral.getTypeDescriptor().getDimensions(), NullLiteral.get()))
-          .setArrayLiteral(arrayLiteral)
-          .build();
-    }
+            return NewArray.newBuilder()
+                .setTypeDescriptor(arrayLiteral.getTypeDescriptor())
+                .setDimensionExpressions(
+                    Collections.nCopies(
+                        arrayLiteral.getTypeDescriptor().getDimensions(), NullLiteral.get()))
+                .setArrayLiteral(arrayLiteral)
+                .build();
+          }
+        });
   }
 }

@@ -18,7 +18,6 @@ package com.google.j2cl.ast.visitors;
 import static com.google.common.collect.ImmutableSet.toImmutableSet;
 
 import com.google.j2cl.ast.AstUtils;
-import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.Method;
@@ -37,10 +36,8 @@ import java.util.Set;
 public class JsBridgeMethodsCreator extends NormalizationPass {
 
   @Override
-  public void applyTo(CompilationUnit compilationUnit) {
-    for (Type type : compilationUnit.getTypes()) {
-      type.addMethods(createBridgeMethods(type));
-    }
+  public void applyTo(Type type) {
+    type.addMethods(createBridgeMethods(type));
   }
 
   /**

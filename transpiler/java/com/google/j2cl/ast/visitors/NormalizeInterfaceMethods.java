@@ -19,7 +19,6 @@ import static com.google.common.base.Preconditions.checkState;
 
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AstUtils;
-import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.MemberDescriptor;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
@@ -36,39 +35,37 @@ public class NormalizeInterfaceMethods extends NormalizationPass {
   private static final String PRIVATE_POSTFIX = "__$private";
 
   @Override
-  public void applyTo(CompilationUnit compilationUnit) {
-    devirtualizeInterfaceMethods(compilationUnit);
-    devirtualizeMethodCalls(compilationUnit);
+  public void applyTo(Type type) {
+    devirtualizeInterfaceMethods(type);
+    devirtualizeMethodCalls(type);
   }
 
-  private void devirtualizeInterfaceMethods(CompilationUnit compilationUnit) {
-    for (Type type : compilationUnit.getTypes()) {
-      if (!type.isInterface()) {
-        continue;
-      }
-      type.accept(
-          new AbstractRewriter() {
-            @Override
-            public Method rewriteMethod(Method method) {
-              MethodDescriptor methodDescriptor = method.getDescriptor();
-              checkState(!methodDescriptor.isJsOverlay());
-
-              if (methodDescriptor.isDefaultMethod()) {
-                type.addMethod(AstUtils.devirtualizeMethod(method, DEFAULT_POSTFIX));
-                // Retain the interface method declaration.
-                return createInterfaceMethodDeclaration(method);
-              } else if (isInterfacePrivateInstanceMethod(methodDescriptor)) {
-                type.addMethod(AstUtils.devirtualizeMethod(method, PRIVATE_POSTFIX));
-                return null;
-              } else {
-                return method;
-              }
-            }
-          });
+  private static void devirtualizeInterfaceMethods(Type type) {
+    if (!type.isInterface()) {
+      return;
     }
+    type.accept(
+        new AbstractRewriter() {
+          @Override
+          public Method rewriteMethod(Method method) {
+            MethodDescriptor methodDescriptor = method.getDescriptor();
+            checkState(!methodDescriptor.isJsOverlay());
+
+            if (methodDescriptor.isDefaultMethod()) {
+              type.addMethod(AstUtils.devirtualizeMethod(method, DEFAULT_POSTFIX));
+              // Retain the interface method declaration.
+              return createInterfaceMethodDeclaration(method);
+            } else if (isInterfacePrivateInstanceMethod(methodDescriptor)) {
+              type.addMethod(AstUtils.devirtualizeMethod(method, PRIVATE_POSTFIX));
+              return null;
+            } else {
+              return method;
+            }
+          }
+        });
   }
 
-  private Method createInterfaceMethodDeclaration(Method method) {
+  private static Method createInterfaceMethodDeclaration(Method method) {
     MethodDescriptor methodDescriptor = method.getDescriptor();
     return Method.newBuilder()
         .setMethodDescriptor(
@@ -91,8 +88,8 @@ public class NormalizeInterfaceMethods extends NormalizationPass {
         && !methodDescriptor.isStatic();
   }
 
-  private void devirtualizeMethodCalls(CompilationUnit compilationUnit) {
-    compilationUnit.accept(
+  private static void devirtualizeMethodCalls(Type type) {
+    type.accept(
         new AbstractRewriter() {
           @Override
           public MethodCall rewriteMethodCall(MethodCall methodCall) {

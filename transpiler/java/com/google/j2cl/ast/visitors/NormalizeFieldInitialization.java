@@ -18,7 +18,6 @@ package com.google.j2cl.ast.visitors;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.Block;
-import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
@@ -37,42 +36,40 @@ import java.util.List;
  */
 public class NormalizeFieldInitialization extends NormalizationPass {
   @Override
-  public void applyTo(CompilationUnit compilationUnit) {
-    for (Type type : compilationUnit.getTypes()) {
-      // Move field initialization to InitializerBlocks keeping them in source order.
-      List<Field> fieldDeclarations = new ArrayList<>();
-      type.accept(
-          new AbstractRewriter() {
-            @Override
-            public Member rewriteField(Field field) {
-              fieldDeclarations.add(
-                  Field.Builder.from(field)
-                      .setInitializer(getDeclarationValue(field))
-                      .setSourcePosition(field.getSourcePosition())
-                      .build());
+  public void applyTo(Type type) {
+    // Move field initialization to InitializerBlocks keeping them in source order.
+    List<Field> fieldDeclarations = new ArrayList<>();
+    type.accept(
+        new AbstractRewriter() {
+          @Override
+          public Member rewriteField(Field field) {
+            fieldDeclarations.add(
+                Field.Builder.from(field)
+                    .setInitializer(getDeclarationValue(field))
+                    .setSourcePosition(field.getSourcePosition())
+                    .build());
 
-              if (!field.hasInitializer() || field.isCompileTimeConstant()) {
-                // Not initialized in <clinit> nor <init>.
-                return null;
-              }
-
-              // Replace the field declaration with an initializer block inplace to preserve
-              // ordering.
-              DeclaredTypeDescriptor enclosingTypeDescriptor =
-                  field.getDescriptor().getEnclosingTypeDescriptor();
-              return InitializerBlock.newBuilder()
-                  .setDescriptor(
-                      field.isStatic()
-                          ? enclosingTypeDescriptor.getClinitMethodDescriptor()
-                          : enclosingTypeDescriptor.getInitMethodDescriptor())
-                  .setSourcePosition(field.getSourcePosition())
-                  .setBlock(createInitializerBlockFromFieldInitializer(field))
-                  .build();
+            if (!field.hasInitializer() || field.isCompileTimeConstant()) {
+              // Not initialized in <clinit> nor <init>.
+              return null;
             }
-          });
-      // Keep the fields for declaration purpose.
-      type.addFields(fieldDeclarations);
-    }
+
+            // Replace the field declaration with an initializer block inplace to preserve
+            // ordering.
+            DeclaredTypeDescriptor enclosingTypeDescriptor =
+                field.getDescriptor().getEnclosingTypeDescriptor();
+            return InitializerBlock.newBuilder()
+                .setDescriptor(
+                    field.isStatic()
+                        ? enclosingTypeDescriptor.getClinitMethodDescriptor()
+                        : enclosingTypeDescriptor.getInitMethodDescriptor())
+                .setSourcePosition(field.getSourcePosition())
+                .setBlock(createInitializerBlockFromFieldInitializer(field))
+                .build();
+          }
+        });
+    // Keep the fields for declaration purpose.
+    type.addFields(fieldDeclarations);
   }
 
   private static Expression getDeclarationValue(Field field) {

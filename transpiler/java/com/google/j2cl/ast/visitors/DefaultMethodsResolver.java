@@ -17,7 +17,6 @@ package com.google.j2cl.ast.visitors;
 
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AstUtils;
-import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -32,38 +31,35 @@ import java.util.Map;
 public class DefaultMethodsResolver extends NormalizationPass {
   /** Creates forwarding stubs in classes that 'inherit' a default method implementation. */
   @Override
-  public void applyTo(CompilationUnit compilationUnit) {
-    for (Type type : compilationUnit.getTypes()) {
-      if (type.isInterface()) {
-        // Only classes inherit default methods.
-        continue;
-      }
-
-      // Collect all super interfaces with more specific interfaces first since default methods in
-      // more specific interfaces take precedence over default methods in less specific interfaces.
-      List<DeclaredTypeDescriptor> declarationSuperInterfaceTypeDescriptors =
-          collectDeclarationSuperInterfaces(type.getDeclaration());
-
-      // Gather all (most specific) default methods declared through the interfaces of this class.
-      Map<String, MethodDescriptor> defaultMethodDescriptorsBySignature =
-          getDefaultMethodDescriptorsBySignature(
-              type.getDeclaration(), declarationSuperInterfaceTypeDescriptors);
-
-      // Remove methods that are already implemented in the class or any of its superclasses
-      DeclaredTypeDescriptor declaringClassTypeDescriptor =
-          type.isInterface() ? null : type.getTypeDescriptor();
-      while (declaringClassTypeDescriptor != null) {
-        for (MethodDescriptor declaredMethodDescriptor :
-            declaringClassTypeDescriptor.getDeclaredMethodDescriptors()) {
-          defaultMethodDescriptorsBySignature.remove(
-              declaredMethodDescriptor.getOverrideSignature());
-        }
-        declaringClassTypeDescriptor = declaringClassTypeDescriptor.getSuperTypeDescriptor();
-      }
-
-      // Finally implement a forwarding method to the actual interface method.
-      implementDefaultMethods(type, defaultMethodDescriptorsBySignature);
+  public void applyTo(Type type) {
+    if (type.isInterface()) {
+      // Only classes inherit default methods.
+      return;
     }
+
+    // Collect all super interfaces with more specific interfaces first since default methods in
+    // more specific interfaces take precedence over default methods in less specific interfaces.
+    List<DeclaredTypeDescriptor> declarationSuperInterfaceTypeDescriptors =
+        collectDeclarationSuperInterfaces(type.getDeclaration());
+
+    // Gather all (most specific) default methods declared through the interfaces of this class.
+    Map<String, MethodDescriptor> defaultMethodDescriptorsBySignature =
+        getDefaultMethodDescriptorsBySignature(
+            type.getDeclaration(), declarationSuperInterfaceTypeDescriptors);
+
+    // Remove methods that are already implemented in the class or any of its superclasses
+    DeclaredTypeDescriptor declaringClassTypeDescriptor =
+        type.isInterface() ? null : type.getTypeDescriptor();
+    while (declaringClassTypeDescriptor != null) {
+      for (MethodDescriptor declaredMethodDescriptor :
+          declaringClassTypeDescriptor.getDeclaredMethodDescriptors()) {
+        defaultMethodDescriptorsBySignature.remove(declaredMethodDescriptor.getOverrideSignature());
+      }
+      declaringClassTypeDescriptor = declaringClassTypeDescriptor.getSuperTypeDescriptor();
+    }
+
+    // Finally implement a forwarding method to the actual interface method.
+    implementDefaultMethods(type, defaultMethodDescriptorsBySignature);
   }
 
   private static Map<String, MethodDescriptor> getDefaultMethodDescriptorsBySignature(

@@ -16,7 +16,6 @@
 package com.google.j2cl.ast.visitors;
 
 import com.google.j2cl.ast.AstUtils;
-import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Type;
@@ -29,13 +28,11 @@ import com.google.j2cl.ast.Type;
  */
 public class CreateImplicitConstructors extends NormalizationPass {
   @Override
-  public void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.getTypes().stream()
-        .filter(t -> !t.isInterface() && t.getConstructors().isEmpty())
-        .forEach(CreateImplicitConstructors::synthesizeImplicitConstructor);
-  }
+  public void applyTo(Type type) {
+    if (type.isInterface() || !type.getConstructors().isEmpty()) {
+      return;
+    }
 
-  private static void synthesizeImplicitConstructor(Type type) {
     MethodDescriptor methodDescriptor =
         AstUtils.createImplicitConstructorDescriptor(type.getTypeDescriptor());
     type.addMethod(

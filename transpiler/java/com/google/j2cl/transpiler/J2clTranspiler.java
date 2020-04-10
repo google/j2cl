@@ -162,7 +162,7 @@ class J2clTranspiler {
   private static void normalizeUnits(List<CompilationUnit> j2clUnits) {
     for (CompilationUnit j2clUnit : j2clUnits) {
       for (NormalizationPass pass : getPasses()) {
-        pass.applyTo(j2clUnit);
+        pass.execute(j2clUnit);
       }
     }
   }

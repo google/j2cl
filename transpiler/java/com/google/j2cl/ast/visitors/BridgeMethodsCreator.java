@@ -23,7 +23,6 @@ import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CastExpression;
-import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.JsInfo;
@@ -51,18 +50,17 @@ import java.util.Set;
  */
 public class BridgeMethodsCreator extends NormalizationPass {
   @Override
-  public void applyTo(CompilationUnit compilationUnit) {
-    for (Type type : compilationUnit.getTypes()) {
-      // TODO(b/64280462): Emit the bridge as high in the class hierarchy as possible including
-      //  abstract classes. That would reduce the number bridges created and also enable JavaScript
-      //  to extend a class and inherit all the necessary bridges.
-      if (type.getDeclaration().isAbstract()
-          && !TypeDescriptors.isBoxedTypeAsJsPrimitives(type.getTypeDescriptor())) {
-        continue;
-      }
+  public void applyTo(Type type) {
+    // TODO(b/64280462): Emit the bridge as high in the class hierarchy as possible including
+    //  abstract classes. That would reduce the number bridges created and also enable JavaScript
+    //  to extend a class and inherit all the necessary bridges.
 
-      type.addMethods(createBridgeMethods(type));
+    if (type.getDeclaration().isAbstract()
+        && !TypeDescriptors.isBoxedTypeAsJsPrimitives(type.getTypeDescriptor())) {
+      return;
     }
+
+    type.addMethods(createBridgeMethods(type));
   }
 
   /** Creates and adds bridge methods to the Java type and fixes the target JS methods. */
@@ -472,10 +470,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
                 createMethodDescriptor(
                     typeDeclaration, bridgeMethodDescriptor, returnTypeDescriptor))
             .setParameterDescriptors(
-                bridgeMethodDescriptor
-                    .getDeclarationDescriptor()
-                    .getParameterDescriptors()
-                    .stream()
+                bridgeMethodDescriptor.getDeclarationDescriptor().getParameterDescriptors().stream()
                     .map(
                         p ->
                             p.toBuilder()
