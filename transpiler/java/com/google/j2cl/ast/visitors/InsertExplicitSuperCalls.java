@@ -47,11 +47,6 @@ public class InsertExplicitSuperCalls extends NormalizationPass {
     type.accept(
         new AbstractVisitor() {
           @Override
-          public boolean enterType(Type node) {
-            return !type.isInterface() && type.getSuperTypeDescriptor() != null;
-          }
-
-          @Override
           public void exitMethod(Method method) {
             if (!method.isConstructor()) {
               return;
