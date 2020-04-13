@@ -47,11 +47,12 @@ public class VerifySingleAstReference extends NormalizationPass {
   public void applyTo(CompilationUnit compilationUnit) {
     // This map keeps track of the nodes that have been found so far in the AST as well as the
     // context of their first appearance for better error reporting.
-    final Map<Node, Node> contextByNode = new HashMap<>();
+    Map<Node, Node> contextByNode = new HashMap<>();
+
+    Deque<Statement> statementStack = new ArrayDeque<>();
 
     compilationUnit.accept(
         new AbstractVisitor() {
-          Deque<Statement> statementStack = new ArrayDeque<>();
 
           @Override
           public boolean enterNode(final Node node) {

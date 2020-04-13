@@ -17,6 +17,7 @@ package com.google.j2cl.ast.visitors;
 
 import static com.google.common.base.Preconditions.checkState;
 
+import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.CatchClause;
@@ -30,7 +31,6 @@ import com.google.j2cl.ast.TryStatement;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableReference;
 import java.util.ArrayDeque;
-import java.util.Collections;
 import java.util.Deque;
 import java.util.HashSet;
 import java.util.Set;
@@ -38,27 +38,27 @@ import java.util.Set;
 /** Verifies that variables are referenced within their scopes. */
 public class VerifyVariableScoping extends NormalizationPass {
 
+  private static class Scope {
+    Scope() {}
+
+    Scope(Scope parent) {
+      accessibleVariables.addAll(parent.accessibleVariables);
+    }
+
+    // Variables that are accessible in a given scope. It is meant to include all the
+    // variables defined in parent scopes to make checking simpler.
+    Set<Variable> accessibleVariables = new HashSet<>();
+  }
+
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
-
-    class Scope {
-      Scope() {}
-
-      Scope(Scope parent) {
-        accessibleVariables.addAll(parent.accessibleVariables);
-      }
-
-      // Variables that are accessible in a given scope. It is meant to include all the
-      // variables defined in parent scopes to make checking simpler.
-      Set<Variable> accessibleVariables = new HashSet<>();
-    }
+    // Keep track of current statement for nicer error messages.
+    Deque<Statement> statementStack = new ArrayDeque<>();
+    // Keep track of scopes.
+    Deque<Scope> scopeStack = new ArrayDeque<>(ImmutableSet.of(new Scope()));
 
     compilationUnit.accept(
         new AbstractVisitor() {
-          // Keep track of current statement for nicer error messages.
-          Deque<Statement> statementStack = new ArrayDeque<>();
-          // Keep track of scopes.
-          Deque<Scope> scopeStack = new ArrayDeque<>(Collections.singleton(new Scope()));
 
           @Override
           public boolean enterVariableReference(VariableReference variableReference) {
