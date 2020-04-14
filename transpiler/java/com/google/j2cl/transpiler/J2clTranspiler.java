@@ -79,6 +79,7 @@ import com.google.j2cl.ast.visitors.NormalizeSwitchStatements;
 import com.google.j2cl.ast.visitors.NormalizeTryWithResources;
 import com.google.j2cl.ast.visitors.NormalizeTypeLiterals;
 import com.google.j2cl.ast.visitors.OptimizeAnonymousInnerClassesToFunctionExpressions;
+import com.google.j2cl.ast.visitors.OptimizeAutoValue;
 import com.google.j2cl.ast.visitors.PackagePrivateMethodsDispatcher;
 import com.google.j2cl.ast.visitors.RemoveNoopStatements;
 import com.google.j2cl.ast.visitors.RemoveUnneededJsDocCasts;
@@ -159,7 +160,7 @@ class J2clTranspiler {
     problems.abortIfHasErrors();
   }
 
-  private static void normalizeUnits(List<CompilationUnit> j2clUnits) {
+  private void normalizeUnits(List<CompilationUnit> j2clUnits) {
     for (CompilationUnit j2clUnit : j2clUnits) {
       for (NormalizationPass pass : getPasses()) {
         pass.execute(j2clUnit);
@@ -167,7 +168,7 @@ class J2clTranspiler {
     }
   }
 
-  private static ImmutableList<NormalizationPass> getPasses() {
+  private ImmutableList<NormalizationPass> getPasses() {
     // TODO(b/117155139): Review the ordering of passes.
     return ImmutableList.of(
         // Pre-verifications
@@ -176,6 +177,7 @@ class J2clTranspiler {
         new VerifyVariableScoping(),
 
         // Class structure normalizations.
+        new OptimizeAutoValue(options.getExperimentalOptimizeAutovalue()),
         new ImplementLambdaExpressions(),
         new OptimizeAnonymousInnerClassesToFunctionExpressions(),
         new NormalizeFunctionExpressions(),

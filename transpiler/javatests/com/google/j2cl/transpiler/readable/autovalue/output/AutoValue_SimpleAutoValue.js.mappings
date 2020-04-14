@@ -66,47 +66,6 @@
 [return doubleField;] => [return this.f_doubleField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_SimpleAutoValue_;] "com.google.j2cl.transpiler.readable.autovalue.AutoValue_SimpleAutoValue.getDoubleField"
 [getArrayField] => [m_getArrayField__]
 [return arrayField;] => [return this.f_arrayField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_SimpleAutoValue_;] "com.google.j2cl.transpiler.readable.autovalue.AutoValue_SimpleAutoValue.getArrayField"
-[toString] => [toString]
-[return "SimpleAutoValue{"
-        + "intField=" + intField + ", "
-...        + "arrayField=" + Arrays.toString(arrayField)
-        + "}";] => [return "SimpleAutoValue{" + "intField=" + this.f_intField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_SimpleAutoValue_ + ", " + "booleanField=" + this.f_booleanField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_SimpleAutoValue_ + ", " + "stringField=" + j_l_String.m_valueOf__java_lang_Object(this.f_stringField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_SimpleAutoValue_) + ", " + "doubleField=" + j_l_String.m_valueOf__java_lang_Object(this.f_doubleField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_SimpleAutoValue_) + ", " + "arrayField=" + j_l_String.m_valueOf__java_lang_Object(Arrays.m_toString__arrayOf_int(this.f_arrayField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_SimpleAutoValue_)) + "}";] "com.google.j2cl.transpiler.readable.autovalue.AutoValue_SimpleAutoValue.toString"
-[equals] => [equals]
-[o] => [o] "o"
-[if (o == this) {
-      return true;
-    }] => [if ($Equality.$same(o, this)) {
-   return true;
-  }] "com.google.j2cl.transpiler.readable.autovalue.AutoValue_SimpleAutoValue.equals"
-[return true;] => [return true;] "com.google.j2cl.transpiler.readable.autovalue.AutoValue_SimpleAutoValue.equals"
-[if (o instanceof SimpleAutoValue) {
-      SimpleAutoValue that = (SimpleAutoValue) o;
-...          && Arrays.equals(this.arrayField, (that instanceof AutoValue_SimpleAutoValue) ? ((AutoValue_SimpleAutoValue) that).arrayField : that.getArrayField());
-    }] => [if (SimpleAutoValue.$isInstance(o)) {
-   let that = /**@type {SimpleAutoValue}*/ ($Casts.$to(o, SimpleAutoValue));
-   return this.f_intField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_SimpleAutoValue_ == that.m_getIntField__() && this.f_booleanField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_SimpleAutoValue_ == that.m_getBooleanField__() && j_l_String.m_equals__java_lang_String__java_lang_Object(this.f_stringField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_SimpleAutoValue_, that.m_getStringField__()) && Double.m_equals__java_lang_Double__java_lang_Object(this.f_doubleField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_SimpleAutoValue_, that.m_getDoubleField__()) && Arrays.m_equals__arrayOf_int__arrayOf_int(this.f_arrayField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_SimpleAutoValue_, AutoValue__SimpleAutoValue.$isInstance(that) ? /**@type {AutoValue__SimpleAutoValue}*/ ($Casts.$to(that, AutoValue__SimpleAutoValue)).f_arrayField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_SimpleAutoValue_ : that.m_getArrayField__());
-  }] "com.google.j2cl.transpiler.readable.autovalue.AutoValue_SimpleAutoValue.equals"
-[SimpleAutoValue that = (SimpleAutoValue) o;] => [let that = /**@type {SimpleAutoValue}*/ ($Casts.$to(o, SimpleAutoValue));] "com.google.j2cl.transpiler.readable.autovalue.AutoValue_SimpleAutoValue.equals"
-[that] => [that] "that"
-[return this.intField == that.getIntField()
-          && this.booleanField == that.getBooleanField()
-...          && this.doubleField.equals(that.getDoubleField())
-          && Arrays.equals(this.arrayField, (that instanceof AutoValue_SimpleAutoValue) ? ((AutoValue_SimpleAutoValue) that).arrayField : that.getArrayField());] => [return this.f_intField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_SimpleAutoValue_ == that.m_getIntField__() && this.f_booleanField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_SimpleAutoValue_ == that.m_getBooleanField__() && j_l_String.m_equals__java_lang_String__java_lang_Object(this.f_stringField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_SimpleAutoValue_, that.m_getStringField__()) && Double.m_equals__java_lang_Double__java_lang_Object(this.f_doubleField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_SimpleAutoValue_, that.m_getDoubleField__()) && Arrays.m_equals__arrayOf_int__arrayOf_int(this.f_arrayField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_SimpleAutoValue_, AutoValue__SimpleAutoValue.$isInstance(that) ? /**@type {AutoValue__SimpleAutoValue}*/ ($Casts.$to(that, AutoValue__SimpleAutoValue)).f_arrayField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_SimpleAutoValue_ : that.m_getArrayField__());] "com.google.j2cl.transpiler.readable.autovalue.AutoValue_SimpleAutoValue.equals"
-[return false;] => [return false;] "com.google.j2cl.transpiler.readable.autovalue.AutoValue_SimpleAutoValue.equals"
-[hashCode] => [hashCode]
-[int h$ = 1;] => [let h$ = 1;] "com.google.j2cl.transpiler.readable.autovalue.AutoValue_SimpleAutoValue.hashCode"
-[h$] => [h$] "h$"
-[h$ *= 1000003;] => [h$ *= 1000003;] "com.google.j2cl.transpiler.readable.autovalue.AutoValue_SimpleAutoValue.hashCode"
-[h$ ^= intField;] => [h$ ^= this.f_intField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_SimpleAutoValue_;] "com.google.j2cl.transpiler.readable.autovalue.AutoValue_SimpleAutoValue.hashCode"
-[h$ *= 1000003;] => [h$ *= 1000003;] "com.google.j2cl.transpiler.readable.autovalue.AutoValue_SimpleAutoValue.hashCode"
-[h$ ^= booleanField ? 1231 : 1237;] => [h$ ^= this.f_booleanField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_SimpleAutoValue_ ? 1231 : 1237;] "com.google.j2cl.transpiler.readable.autovalue.AutoValue_SimpleAutoValue.hashCode"
-[h$ *= 1000003;] => [h$ *= 1000003;] "com.google.j2cl.transpiler.readable.autovalue.AutoValue_SimpleAutoValue.hashCode"
-[h$ ^= stringField.hashCode();] => [h$ ^= j_l_String.m_hashCode__java_lang_String(this.f_stringField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_SimpleAutoValue_);] "com.google.j2cl.transpiler.readable.autovalue.AutoValue_SimpleAutoValue.hashCode"
-[h$ *= 1000003;] => [h$ *= 1000003;] "com.google.j2cl.transpiler.readable.autovalue.AutoValue_SimpleAutoValue.hashCode"
-[h$ ^= doubleField.hashCode();] => [h$ ^= Double.m_hashCode__java_lang_Double(this.f_doubleField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_SimpleAutoValue_);] "com.google.j2cl.transpiler.readable.autovalue.AutoValue_SimpleAutoValue.hashCode"
-[h$ *= 1000003;] => [h$ *= 1000003;] "com.google.j2cl.transpiler.readable.autovalue.AutoValue_SimpleAutoValue.hashCode"
-[h$ ^= Arrays.hashCode(arrayField);] => [h$ ^= Arrays.m_hashCode__arrayOf_int(this.f_arrayField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_SimpleAutoValue_);] "com.google.j2cl.transpiler.readable.autovalue.AutoValue_SimpleAutoValue.hashCode"
-[return h$;] => [return h$;] "com.google.j2cl.transpiler.readable.autovalue.AutoValue_SimpleAutoValue.hashCode"
 [AutoValue_SimpleAutoValue] => [$clinit]
 [AutoValue_SimpleAutoValue] => [AutoValue__SimpleAutoValue.$clinit = () =>{};] "com.google.j2cl.transpiler.readable.autovalue.AutoValue_SimpleAutoValue.<clinit>"
 [AutoValue_SimpleAutoValue] => [AutoValue__SimpleAutoValue.$loadModules();] "com.google.j2cl.transpiler.readable.autovalue.AutoValue_SimpleAutoValue.<clinit>"

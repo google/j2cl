@@ -25,11 +25,9 @@ def readable_example(
         plugins = [],
         defs = [],
         generate_library_info = False,
-        j2cl_library_tags = []):
+        j2cl_library_tags = [],
+        **kwargs):
     """Macro that confirms the JS compilability of some transpiled Java.
-
-    deps are Labels of j2cl_library() rules. NOT labels of
-    java_library() rules.
 
     Args:
       srcs: Source files to make readable output for.
@@ -37,6 +35,8 @@ def readable_example(
       plugins: APT processors to execute when generating readable output.
       defs: Custom flags to pass to the JavaScript compiler.
       generate_library_info: Wheter to copy the call graph for the library in the output dir.
+      j2cl_library_tags: Tags to apply j2cl_library
+      **kwargs: passes to j2cl_library
     """
 
     # Transpile the Java files.
@@ -50,6 +50,7 @@ def readable_example(
         tags = j2cl_library_tags,
         readable_source_maps = True,
         readable_library_info = generate_library_info,
+        **kwargs
     )
 
     if generate_library_info:

@@ -10,5 +10,6 @@ package(
 # Creates verification target
 readable_example(
     srcs = glob(["*.java"]),
+    experimental_optimize_autovalue = True,
     deps = ["//third_party:auto_value-j2cl"],
 )

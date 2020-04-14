@@ -37,6 +37,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   private TypeDeclaration typeDeclaration;
   @Visitable List<Member> members = new ArrayList<>();
   private final SourcePosition sourcePosition;
+  private DeclaredTypeDescriptor superTypeDescriptor;
 
   public Type(
       SourcePosition sourcePosition, Visibility visibility, TypeDeclaration typeDeclaration) {
@@ -45,6 +46,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
         typeDeclaration.isInterface() || typeDeclaration.isClass() || typeDeclaration.isEnum());
     this.visibility = visibility;
     this.typeDeclaration = typeDeclaration;
+    this.superTypeDescriptor = typeDeclaration.getSuperTypeDescriptor();
   }
 
   /**
@@ -99,8 +101,8 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
     return typeDeclaration.isClass();
   }
 
-  public void setTypeDeclaration(TypeDeclaration typeDeclaration) {
-    this.typeDeclaration = typeDeclaration;
+  public void setSuperTypeDescriptor(DeclaredTypeDescriptor superTypeDescriptor) {
+    this.superTypeDescriptor = superTypeDescriptor;
   }
 
   public TypeDeclaration getOverlaidTypeDeclaration() {
@@ -226,7 +228,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   }
 
   public DeclaredTypeDescriptor getSuperTypeDescriptor() {
-    return typeDeclaration.getSuperTypeDescriptor();
+    return superTypeDescriptor;
   }
 
   public List<DeclaredTypeDescriptor> getSuperInterfaceTypeDescriptors() {

@@ -15,5 +15,6 @@ package(
 integration_test(
     name = "autovalue",
     srcs = glob(["*.java"]),
+    experimental_optimize_autovalue = True,
     deps = ["//third_party:auto_value-j2cl"],
 )

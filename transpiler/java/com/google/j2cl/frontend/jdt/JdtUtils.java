@@ -1009,10 +1009,7 @@ class JdtUtils {
                 () -> createMethodDescriptor(typeBinding.getFunctionalInterfaceMethod()))
             .setJsFunctionMethodDescriptorFactory(() -> getJsFunctionMethodDescriptor(typeBinding))
             .setSuperTypeDescriptorFactory(
-                () ->
-                    (typeDeclaration.isJsEnum()
-                        ? TypeDescriptors.get().javaLangObject
-                        : createDeclaredTypeDescriptor(typeBinding.getSuperclass())))
+                getSuperTypeFactory(typeDeclaration.isJsEnum(), typeBinding))
             .setTypeArgumentDescriptors(getTypeArgumentTypeDescriptors(typeBinding))
             .setDeclaredFieldDescriptorsFactory(declaredFields)
             .setDeclaredMethodDescriptorsFactory(declaredMethods)
@@ -1128,6 +1125,7 @@ class JdtUtils {
         .setFunctionalInterface(typeBinding.getFunctionalInterfaceMethod() != null)
         .setJsFunctionInterface(JsInteropUtils.isJsFunction(typeBinding))
         .setAnnotatedWithFunctionalInterface(isAnnotatedWithFunctionalInterface(typeBinding))
+        .setAnnotatedWithAutoValue(isAnnotatedWithAutoValue(typeBinding))
         .setJsType(JsInteropUtils.isJsType(typeBinding))
         .setJsEnumInfo(jsEnumInfo)
         .setNative(JsInteropUtils.isJsNativeType(typeBinding))
@@ -1136,11 +1134,7 @@ class JdtUtils {
         .setSimpleJsName(getJsName(typeBinding))
         .setCustomizedJsNamespace(getJsNamespace(typeBinding, packageInfoCache))
         .setPackageName(packageName)
-        .setSuperTypeDescriptorFactory(
-            () ->
-                (jsEnumInfo != null
-                    ? TypeDescriptors.get().javaLangObject
-                    : createDeclaredTypeDescriptor(typeBinding.getSuperclass())))
+        .setSuperTypeDescriptorFactory(getSuperTypeFactory(jsEnumInfo != null, typeBinding))
         .setTypeParameterDescriptors(
             getTypeArgumentTypeDescriptors(typeBinding, TypeVariable.class))
         .setVisibility(getVisibility(typeBinding))
@@ -1151,8 +1145,20 @@ class JdtUtils {
         .build();
   }
 
+  private static Supplier<DeclaredTypeDescriptor> getSuperTypeFactory(
+      boolean isJsEnum, ITypeBinding typeBinding) {
+    return () ->
+        isJsEnum
+            ? TypeDescriptors.get().javaLangObject
+            : createDeclaredTypeDescriptor(typeBinding.getSuperclass());
+  }
+
   private static boolean isAnnotatedWithFunctionalInterface(ITypeBinding typeBinding) {
     return JdtAnnotationUtils.hasAnnotation(typeBinding, FunctionalInterface.class.getName());
+  }
+
+  private static boolean isAnnotatedWithAutoValue(ITypeBinding typeBinding) {
+    return JdtAnnotationUtils.hasAnnotation(typeBinding, "com.google.auto.value.AutoValue");
   }
 
   private JdtUtils() {}

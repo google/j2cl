@@ -53,5 +53,6 @@ public class FrontendConstants {
           "java.lang.Runnable",
           "java.lang.String",
           "java.lang.Throwable",
+          "javaemul.internal.ValueType",
           "javaemul.internal.InternalPreconditions");
 }

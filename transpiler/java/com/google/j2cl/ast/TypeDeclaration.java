@@ -227,6 +227,9 @@ public abstract class TypeDeclaration
   /** Returns whether the described type has the @FunctionalInterface annotation. */
   public abstract boolean isAnnotatedWithFunctionalInterface();
 
+  /** Returns whether the described type has the @AutoValue annotation. */
+  public abstract boolean isAnnotatedWithAutoValue();
+
   @Memoized
   public boolean isJsFunctionImplementation() {
     return isClass()
@@ -455,8 +458,7 @@ public abstract class TypeDeclaration
   @Memoized
   public int getMaxInterfaceDepth() {
     return 1
-        + getInterfaceTypeDescriptors()
-            .stream()
+        + getInterfaceTypeDescriptors().stream()
             .mapToInt(i -> i.getTypeDeclaration().getMaxInterfaceDepth())
             .max()
             .orElse(0);
@@ -563,8 +565,7 @@ public abstract class TypeDeclaration
     if (typeParameterDescriptors == null || typeParameterDescriptors.isEmpty()) {
       return "";
     }
-    return typeParameterDescriptors
-        .stream()
+    return typeParameterDescriptors.stream()
         .map(TypeVariable::getUniqueId)
         .collect(joining(", ", "<", ">"));
   }
@@ -633,8 +634,7 @@ public abstract class TypeDeclaration
   @Memoized
   @Nullable
   public List<MethodDescriptor> getJsConstructorMethodDescriptors() {
-    return getDeclaredMethodDescriptors()
-        .stream()
+    return getDeclaredMethodDescriptors().stream()
         .filter(MethodDescriptor::isJsConstructor)
         .collect(ImmutableList.toImmutableList());
   }
@@ -720,9 +720,7 @@ public abstract class TypeDeclaration
   /** Returns the method descriptors that are declared in a particular super type but not here. */
   private List<MethodDescriptor> getNotOverriddenMethodDescriptors(
       DeclaredTypeDescriptor superTypeDescriptor) {
-    return superTypeDescriptor
-        .getDeclaredMethodDescriptors()
-        .stream()
+    return superTypeDescriptor.getDeclaredMethodDescriptors().stream()
         .filter(methodDescriptor -> !isOverriddenHere(methodDescriptor))
         .collect(toImmutableList());
   }
@@ -819,6 +817,7 @@ public abstract class TypeDeclaration
         .setFinal(false)
         .setFunctionalInterface(false)
         .setAnnotatedWithFunctionalInterface(false)
+        .setAnnotatedWithAutoValue(false)
         .setJsFunctionInterface(false)
         .setJsType(false)
         .setLocal(false)
@@ -858,6 +857,8 @@ public abstract class TypeDeclaration
     public abstract Builder setFunctionalInterface(boolean isFunctionalInterface);
 
     public abstract Builder setAnnotatedWithFunctionalInterface(boolean isAnnotated);
+
+    public abstract Builder setAnnotatedWithAutoValue(boolean annotatedWithAutoValue);
 
     public abstract Builder setJsFunctionInterface(boolean isJsFunctionInterface);
 
@@ -967,9 +968,7 @@ public abstract class TypeDeclaration
       checkState(typeDeclaration.isInterface() || !typeDeclaration.isFunctionalInterface());
 
       checkState(
-          typeDeclaration
-              .getTypeParameterDescriptors()
-              .stream()
+          typeDeclaration.getTypeParameterDescriptors().stream()
               .noneMatch(TypeVariable::isWildcardOrCapture));
       return interner.intern(typeDeclaration);
     }

@@ -1,9 +1,9 @@
 Integration tests size report:
 **************************************
-There are 2 optimized size changes.
+There are 4 optimized size changes.
 Total optimized size (of already existing tests) changed from
-  2117439 to 2117844 bytes (100%->100.0%) and from
-  741626 to 741711 bytes (100%->100.0%) gzipped.
+  2117887 to 2126672 bytes (100%->100.4%) and from
+  741732 to 745581 bytes (100%->100.5%) gzipped.
 
 
 Shrinkage report highlights:
@@ -14,25 +14,27 @@ Shrinkage report highlights:
 Expansion report highlights:
 **************************************
         old      new
-       6511     6558 jsenum (0.7%)
-       6043     6081 jsenum.esnext (0.6%)
+       2437     3407 autovalue.esnext (39.8%)
+       2633     3655 autovalue (38.8%)
+       2807     3728 autovalue_inc.esnext (32.8%)
+       3024     3960 autovalue_inc (31.0%)
 
 
 Incremental size reports (non-gzip):
 **************************************
         old      new
-       3563     3563 autovalue (unchanged)
+       3563     1641 autovalue (-53.9%)
 
 
 Uncompiled bundle reports:
 **************************************
         old      new
-    4198056  4198473 box2d_default (0.0%)
-    2299896  2300171 box2d_default.minified (0.0%)
-     757033   757308 box2d_default.rta (0.0%)
-    2602571  2602988 emptyclass (0.0%)
-    1539654  1539929 emptyclass.minified (0.0%)
-     715611   715886 emptyclass.rta (0.0%)
+    4198473  4198473 box2d_default (unchanged)
+    2300171  2300171 box2d_default.minified (unchanged)
+     757308   770996 box2d_default.rta (1.8%)
+    2602988  2602988 emptyclass (unchanged)
+    1539929  1539929 emptyclass.minified (unchanged)
+     715886   729574 emptyclass.rta (1.9%)
 
 
 All reports:
@@ -70,10 +72,10 @@ All reports:
        2290     2290 assertsimple.esnext (unchanged)
        5812     5812 autoboxing (unchanged)
        5268     5268 autoboxing.esnext (unchanged)
-       2633     2633 autovalue (unchanged)
-       2437     2437 autovalue.esnext (unchanged)
-       3024     3024 autovalue_inc (unchanged)
-       2807     2807 autovalue_inc.esnext (unchanged)
+       2633     3655 autovalue (38.8%)
+       2437     3407 autovalue.esnext (39.8%)
+       3024     3960 autovalue_inc (31.0%)
+       2807     3728 autovalue_inc.esnext (32.8%)
        2848     2848 autovalue_ref (unchanged)
        2668     2668 autovalue_ref.esnext (unchanged)
        1016     1016 backwardbridgemethod (unchanged)
@@ -210,7 +212,7 @@ All reports:
        1390     1390 intersectiontype.esnext (unchanged)
        1272     1272 iteratormethodresolution (unchanged)
         985      985 iteratormethodresolution.esnext (unchanged)
-       3665     3665 jsasync (unchanged)
+       3686     3686 jsasync (unchanged)
        1162     1162 jsasync.esnext (unchanged)
          22       22 jsbridgebackward (unchanged)
          22       22 jsbridgebackward.esnext (unchanged)
@@ -226,8 +228,8 @@ All reports:
         803      803 jsconstructorfieldinitorder.esnext (unchanged)
        1069     1069 jsconstructornested (unchanged)
         854      854 jsconstructornested.esnext (unchanged)
-       6511     6558 jsenum (0.7%)
-       6043     6081 jsenum.esnext (0.6%)
+       6558     6558 jsenum (unchanged)
+       6081     6081 jsenum.esnext (unchanged)
        1255     1255 jsfunction (unchanged)
        1025     1025 jsfunction.esnext (unchanged)
        1409     1409 jsfunctionbridge (unchanged)

@@ -54,10 +54,10 @@ public class TypeDescriptors {
   public DeclaredTypeDescriptor javaLangNumber;
   public DeclaredTypeDescriptor javaLangComparable;
   public DeclaredTypeDescriptor javaLangCharSequence;
-
   public DeclaredTypeDescriptor javaLangCloneable;
   public DeclaredTypeDescriptor javaIoSerializable;
 
+  public DeclaredTypeDescriptor javaemulValueType;
   public DeclaredTypeDescriptor javaemulInternalPreconditions;
 
   public ArrayTypeDescriptor javaLangObjectArray;
@@ -406,8 +406,7 @@ public class TypeDescriptors {
   @SuppressWarnings("unchecked")
   public static <T extends TypeDescriptor> ImmutableList<T> toUnparameterizedTypeDescriptors(
       List<T> typeDescriptors) {
-    return typeDescriptors
-        .stream()
+    return typeDescriptors.stream()
         .map(TypeDescriptor::toUnparameterizedTypeDescriptor)
         .map(typeDescriptor -> (T) typeDescriptor)
         .collect(ImmutableList.toImmutableList());
@@ -503,6 +502,9 @@ public class TypeDescriptors {
           break;
         case "java.lang.Runnable":
           typeDescriptors.javaLangRunnable = referenceType;
+          break;
+        case "javaemul.internal.ValueType":
+          typeDescriptors.javaemulValueType = referenceType;
           break;
         case "javaemul.internal.InternalPreconditions":
           typeDescriptors.javaemulInternalPreconditions = referenceType;

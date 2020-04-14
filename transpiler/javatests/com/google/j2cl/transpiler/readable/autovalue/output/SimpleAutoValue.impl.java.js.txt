@@ -1,12 +1,12 @@
 goog.module('com.google.j2cl.transpiler.readable.autovalue.SimpleAutoValue$impl');
 
-const j_l_Object = goog.require('java.lang.Object$impl');
+const ValueType = goog.require('javaemul.internal.ValueType$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 /**
  * @abstract
  */
-class SimpleAutoValue extends j_l_Object {
+class SimpleAutoValue extends ValueType {
   /** @protected */
   constructor() {
     super();
@@ -29,7 +29,7 @@ class SimpleAutoValue extends j_l_Object {
   static $clinit() {
     SimpleAutoValue.$clinit = () => {};
     SimpleAutoValue.$loadModules();
-    j_l_Object.$clinit();
+    ValueType.$clinit();
   }
   /** @return {boolean} */
   static $isInstance(/** ? */ instance) {
