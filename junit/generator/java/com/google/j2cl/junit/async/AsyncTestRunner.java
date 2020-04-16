@@ -16,6 +16,7 @@
 package com.google.j2cl.junit.async;
 
 import static com.google.common.base.Preconditions.checkState;
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
 import com.google.common.reflect.Reflection;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -92,7 +93,7 @@ public class AsyncTestRunner extends BlockJUnit4ClassRunner {
     public void evaluate() throws Throwable {
       ListenableFuture<?> future = (ListenableFuture) method.invokeExplosively(test);
       try {
-        future.get();
+        future.get(getTimeout(method), MILLISECONDS);
       } catch (ExecutionException e) {
         throw e.getCause();
       }
@@ -116,7 +117,7 @@ public class AsyncTestRunner extends BlockJUnit4ClassRunner {
       Object promiseLike = method.invokeExplosively(test);
       registerCallbacks(promiseLike);
       try {
-        future.get();
+        future.get(getTimeout(method), MILLISECONDS);
       } catch (ExecutionException e) {
         throw e.getCause();
       }
@@ -266,14 +267,8 @@ public class AsyncTestRunner extends BlockJUnit4ClassRunner {
     }
 
     Test testAnnotation = testMethod.getAnnotation(Test.class);
-    Timeout timeoutAnnotation = testMethod.getAnnotation(Timeout.class);
-    long timeout =
-        testAnnotation != null
-            ? testAnnotation.timeout()
-            : timeoutAnnotation != null ? timeoutAnnotation.value() : 0;
-
     // Make sure we have a value greater than zero for test timeout
-    if (timeout <= 0) {
+    if (getTimeout(testMethod) <= 0) {
       errors.add(
           makeError(ErrorMessage.ASYNC_HAS_NO_TIMEOUT.format(testMethod.getMethod().getName())));
     }
@@ -283,6 +278,14 @@ public class AsyncTestRunner extends BlockJUnit4ClassRunner {
           makeError(
               ErrorMessage.ASYNC_HAS_EXPECTED_EXCEPTION.format(testMethod.getMethod().getName())));
     }
+  }
+
+  private static long getTimeout(FrameworkMethod testMethod) {
+    Test testAnnotation = testMethod.getAnnotation(Test.class);
+    Timeout timeoutAnnotation = testMethod.getAnnotation(Timeout.class);
+    return testAnnotation != null
+        ? testAnnotation.timeout()
+        : timeoutAnnotation != null ? timeoutAnnotation.value() : 0;
   }
 
   private static Exception makeError(String message) {

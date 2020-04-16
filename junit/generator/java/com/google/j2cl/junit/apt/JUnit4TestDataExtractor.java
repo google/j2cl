@@ -24,6 +24,7 @@ import com.google.auto.common.MoreElements;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
+import com.google.j2cl.junit.async.Timeout;
 import java.lang.annotation.Annotation;
 import java.util.HashSet;
 import java.util.List;
@@ -104,7 +105,10 @@ class JUnit4TestDataExtractor {
   }
 
   private static long getTimeout(Element method) {
-    Test test = method.getAnnotation(Test.class);
-    return test == null ? 0L : test.timeout();
+    Test testAnnotation = method.getAnnotation(Test.class);
+    Timeout timeoutAnnotation = method.getAnnotation(Timeout.class);
+    return testAnnotation != null
+        ? testAnnotation.timeout()
+        : timeoutAnnotation != null ? timeoutAnnotation.value() : 0;
   }
 }

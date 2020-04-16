@@ -1,3 +1,15 @@
+#macro( methodExecution $testMethod )
+  #if($testMethod.isAsync())
+await(withTimeout(actualTest.${testMethod.javaMethodName()}(), ${testMethod.timeout()}));
+  #else
+actualTest.${testMethod.javaMethodName()}();
+  #end
+#end
+#macro( methodExecutions $testMethods )
+  #foreach($testMethod in $testMethods)
+#methodExecution( $testMethod )
+  #end
+#end
 /**
  * Generated test suite from j2cl_test target
  */
@@ -23,25 +35,24 @@ public class ${testClass.jsUnitAdapterClassName()} {
   @JsMethod(namespace = JsPackage.GLOBAL)
   private static native void await(IThenable<?> thenable);
 
-  private static IThenable<?> asIThenable(Object thenable) {
+  private static IThenable<?> withTimeout(Object thenable, double timeout) {
     if (thenable == null) {
       throw new IllegalStateException("Test returned null as its promise");
     }
-    return (IThenable<?>) thenable;
+    GoogTestCase.getActiveTestCase().promiseTimeout = timeout;
+    return ((IThenable<?>) thenable);
   }
 
   private ${testClass.qualifiedName()} actualTest;
 
   public void setUpPage() throws Throwable {
-#foreach($beforeClassMethod in ${testClass.beforeClassMethods()})
-    ${testClass.qualifiedName()}.${beforeClassMethod.javaMethodName()}();
-#end
+#methodExecutions( $testClass.beforeClassMethods() )
+
   }
 
   public void tearDownPage() throws Throwable {
-#foreach($afterClassMethod in ${testClass.afterClassMethods()})
-    ${testClass.qualifiedName()}.${afterClassMethod.javaMethodName()}();
-#end
+#methodExecutions( $testClass.afterClassMethods() )
+
   }
 
 #if($testClass.needsAsyncSetup())
@@ -49,13 +60,9 @@ public class ${testClass.jsUnitAdapterClassName()} {
 #end
   public IThenable<?> setUp() throws Throwable {
     actualTest = new ${testClass.qualifiedName()}();
-#foreach($beforeMethod in ${testClass.beforeMethods()})
-#if($beforeMethod.isAsync())
-      await(asIThenable(actualTest.${beforeMethod.javaMethodName()}()));
-#else
-      actualTest.${beforeMethod.javaMethodName()}();
-#end
-#end
+
+  #methodExecutions( $testClass.beforeMethods() )
+
     return null;
   }
 
@@ -69,13 +76,9 @@ public class ${testClass.jsUnitAdapterClassName()} {
     }
 
     try {
-#foreach($afterMethod in ${testClass.afterMethods()})
-#if($afterMethod.isAsync())
-      await(asIThenable(actualTest.${afterMethod.javaMethodName()}()));
-#else
-      actualTest.${afterMethod.javaMethodName()}();
-#end
-#end
+
+  #methodExecutions( $testClass.afterMethods() )
+
       return null;
     } finally {
       // Ensures that the test instance is always reset to null so that if the
@@ -93,14 +96,7 @@ public class ${testClass.jsUnitAdapterClassName()} {
 #if ($testMethod.expectedExceptionQualifiedName())
     try {
 #end
-
-#if($testMethod.isAsync())
-      GoogTestCase.getActiveTestCase().promiseTimeout = ${testMethod.timeout()};
-      await(asIThenable(actualTest.${testMethod.javaMethodName()}()));
-#else
-      actualTest.${testMethod.javaMethodName()}();
-#end
-
+    #methodExecution( $testMethod )
 #if ($testMethod.expectedExceptionQualifiedName())
     } catch (${testMethod.expectedExceptionQualifiedName()} e) {
       return null;
@@ -109,7 +105,6 @@ public class ${testClass.jsUnitAdapterClassName()} {
 #else
     return null;
 #end
-
   }
 #end
 }
