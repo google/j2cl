@@ -20,7 +20,10 @@ public class ProcessorError extends Error {
 
   public ProcessorError(Object context, Object node, Throwable cause) {
     super("Context:\n\n" + context + "\n");
-    initCause(new ProcessorError("Error while processing:\n\n" + node + "\n", cause));
+    initCause(
+        context != node
+            ? new ProcessorError("Error while processing:\n\n" + node + "\n", cause)
+            : cause);
   }
 
   private ProcessorError(String msg, Throwable cause) {
