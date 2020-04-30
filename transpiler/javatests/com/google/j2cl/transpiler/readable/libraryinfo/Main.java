@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.readable.libraryinfo;
 
+import jsinterop.annotations.JsEnum;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
@@ -39,6 +40,13 @@ public class Main {
 
   private static final class FunctionImpl implements Function {
     public void apply(String s) {}
+  }
+
+  @JsEnum
+  enum MyEnum {
+    A,
+    B,
+    C
   }
 
   @JsType
