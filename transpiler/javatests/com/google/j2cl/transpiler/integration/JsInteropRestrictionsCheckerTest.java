@@ -1438,6 +1438,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
     assertTranspileFails(
             "Buggy",
             "import jsinterop.annotations.*;",
+            "import java.util.List;",
             "@JsFunction",
             "interface Function {",
             "  int getFoo();",
@@ -1502,6 +1503,53 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "}",
             "abstract class AbstractFunctionImplementation implements Function {",
             "}",
+            "@JsFunction",
+            "interface MutuallyRecursiveFunctionA {",
+            "  void m(MutuallyRecursiveFunctionB f);",
+            "}",
+            "@JsFunction",
+            "interface MutuallyRecursiveFunctionB {",
+            "  MutuallyRecursiveFunctionA m();",
+            "}",
+            "@JsFunction",
+            "interface WithoutError {",
+            "  void m(IndirectReference f);",
+            "}",
+            "@JsFunction",
+            "interface IndirectReference {",
+            "  void m(List<List<IndirectReference>> f);",
+            "}",
+            "@JsFunction",
+            "interface JsFunctionNotInvolvedInCycle<T> {",
+            "  void m(T t);",
+            "}",
+            "@JsFunction",
+            "interface IndirectReferenceThroughJsFunction {",
+            "  void m(JsFunctionNotInvolvedInCycle<IndirectReferenceThroughJsFunction> f);",
+            "}",
+            "@JsFunction",
+            "interface ArrayReference {",
+            "  void m(IndirectReference[] f);",
+            "}",
+            "@JsFunction",
+            "interface TypeVariableReference<T extends TypeVariableReference<T>> {",
+            "  void m(T f);",
+            "}",
+            "@JsFunction",
+            "interface TypeVariableWithIntersectionBound<",
+            "    T extends Comparable<T> & TypeVariableWithIntersectionBound<T>> {",
+            "  void m(T f);",
+            "}",
+            "@JsFunction interface JsFunctionWithErrorInImplementation {",
+            "  void m(RecursiveJsFunctionImplementation f);",
+            "}",
+            "final class RecursiveJsFunctionImplementation implements",
+            "    JsFunctionWithErrorInImplementation {",
+            "  public void m(RecursiveJsFunctionImplementation f) {}",
+            "}",
+            "@JsFunction interface JsFunctionWithRecursiveBoundInMethod {",
+            "  <T extends JsFunctionWithRecursiveBoundInMethod> void m(T f);",
+            "}",
             "class Main {",
             "  public static void main() {",
             "    Object o;",
@@ -1551,7 +1599,28 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "JsFunction implementation member 'Buggy()' cannot be JsMethod nor JsProperty "
                 + "nor JsConstructor.",
             "JsFunction implementation 'AbstractFunctionImplementation' must be final.",
-            "JsFunction lambda can only implement the JsFunction interface.");
+            "JsFunction lambda can only implement the JsFunction interface.",
+            "JsFunction 'void MutuallyRecursiveFunctionA.m(MutuallyRecursiveFunctionB f)' cannot "
+                + "refer recursively to itself "
+                + "(via MutuallyRecursiveFunctionA MutuallyRecursiveFunctionB.m()) (b/153591461).",
+            "JsFunction 'MutuallyRecursiveFunctionA MutuallyRecursiveFunctionB.m()' cannot refer "
+                + "recursively to itself "
+                + "(via void MutuallyRecursiveFunctionA.m(MutuallyRecursiveFunctionB)) "
+                + "(b/153591461).",
+            "JsFunction 'void IndirectReference.m(List<List<IndirectReference>> f)' cannot refer"
+                + " recursively to itself (b/153591461).",
+            "JsFunction 'void TypeVariableReference.m(T f)' cannot refer recursively to itself "
+                + "(b/153591461).",
+            "JsFunction 'void TypeVariableWithIntersectionBound.m(T f)' cannot refer recursively"
+                + " to itself (b/153591461).",
+            "JsFunction 'void IndirectReferenceThroughJsFunction.m("
+                + "JsFunctionNotInvolvedInCycle<IndirectReferenceThroughJsFunction> f)' cannot "
+                + "refer recursively to itself (b/153591461).",
+            "JsFunction 'void RecursiveJsFunctionImplementation.m("
+                + "RecursiveJsFunctionImplementation f)' cannot refer recursively to "
+                + "itself (b/153591461).",
+            "JsFunction 'void JsFunctionWithRecursiveBoundInMethod.m(T f)' cannot refer "
+                + "recursively to itself (b/153591461).");
   }
 
   public void testNativeJsTypeStaticInitializerSucceeds() {

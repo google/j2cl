@@ -64,14 +64,17 @@ import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeLiteral;
+import com.google.j2cl.ast.TypeVariable;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableReference;
 import com.google.j2cl.ast.visitors.ConversionContextVisitor.ContextRewriter;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourcePosition;
+import java.util.ArrayDeque;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Queue;
 import java.util.Set;
 
 /** Checks and throws errors for invalid JsInterop constructs. */
@@ -307,7 +310,7 @@ public class JsInteropRestrictionsChecker {
         .orElse(null);
   }
 
-  private boolean requiresConstructor(TypeDeclaration typeDeclaration) {
+  private static boolean requiresConstructor(TypeDeclaration typeDeclaration) {
     return typeDeclaration.getJsEnumInfo().hasCustomValue() && !typeDeclaration.isNative();
   }
 
@@ -367,7 +370,7 @@ public class JsInteropRestrictionsChecker {
         field.getReadableDescription());
   }
 
-  private Expression getEnumConstantValue(Field field) {
+  private static Expression getEnumConstantValue(Field field) {
     NewInstance initializer = (NewInstance) field.getInitializer();
     List<Expression> arguments = initializer.getArguments();
     if (arguments.size() != 1) {
@@ -574,11 +577,11 @@ public class JsInteropRestrictionsChecker {
         });
   }
 
-  private String getJsEnumTypeText(TypeDeclaration typeDeclaration) {
+  private static String getJsEnumTypeText(TypeDeclaration typeDeclaration) {
     return getJsEnumTypeText(typeDeclaration.toUnparameterizedTypeDescriptor());
   }
 
-  private String getJsEnumTypeText(TypeDescriptor typeDescriptor) {
+  private static String getJsEnumTypeText(TypeDescriptor typeDescriptor) {
     checkArgument(typeDescriptor.isJsEnum());
     if (typeDescriptor.isNative()) {
       return "Native JsEnum";
@@ -1301,11 +1304,11 @@ public class JsInteropRestrictionsChecker {
     }
 
     for (Member member : type.getMembers()) {
-      checkMemberOfJsFunction(member);
+      checkMemberOfJsFunction(type, member);
     }
   }
 
-  private void checkMemberOfJsFunction(Member member) {
+  private void checkMemberOfJsFunction(Type type, Member member) {
     MemberDescriptor memberDescriptor = member.getDescriptor();
     String messagePrefix = "JsFunction interface";
 
@@ -1318,10 +1321,79 @@ public class JsInteropRestrictionsChecker {
     }
 
     if (memberDescriptor.isJsFunction()) {
+      checkJsFunctionMethodSignature(type, (Method) member);
       return;
     }
 
     checkMustBeJsOverlay(member, messagePrefix);
+  }
+
+  private void checkJsFunctionMethodSignature(Type type, Method method) {
+    Set<TypeDeclaration> foundJsFunctions = new LinkedHashSet<>();
+
+    Queue<MethodDescriptor> unexploredJsFunctionMethods = new ArrayDeque<>();
+    unexploredJsFunctionMethods.offer(type.getTypeDescriptor().getJsFunctionMethodDescriptor());
+
+    MethodDescriptor jsFunctionMethod;
+    while ((jsFunctionMethod = unexploredJsFunctionMethods.poll()) != null) {
+
+      Set<TypeDescriptor> referencedTypes = new LinkedHashSet<>();
+      // Find references to JsFunctions in the parameters,
+      jsFunctionMethod
+          .getParameterTypeDescriptors()
+          .forEach(t -> addReferencedTypes(t, referencedTypes));
+      // and in the return type,
+      addReferencedTypes(jsFunctionMethod.getReturnTypeDescriptor(), referencedTypes);
+
+      // only explore further the newly found jsfunctions.
+      referencedTypes.forEach(
+          t -> {
+            if (!t.isJsFunctionInterface() && !t.isJsFunctionImplementation()) {
+              return;
+            }
+            DeclaredTypeDescriptor jsFunctionType = (DeclaredTypeDescriptor) t;
+            if (foundJsFunctions.add(jsFunctionType.getTypeDeclaration())) {
+              unexploredJsFunctionMethods.offer(
+                  jsFunctionType.toUnparameterizedTypeDescriptor().getJsFunctionMethodDescriptor());
+            }
+          });
+
+      if (foundJsFunctions.contains(type.getDeclaration())) {
+        problems.error(
+            method.getSourcePosition(),
+            "JsFunction '%s' cannot refer recursively to itself %s(b/153591461).",
+            method.getReadableDescription(),
+            jsFunctionMethod.getEnclosingTypeDescriptor() == type.getTypeDescriptor()
+                ? ""
+                : "(via " + jsFunctionMethod.getReadableDescription() + ") ");
+        return;
+      }
+    }
+  }
+
+  // Collects all references to JsFunctions that appear in the type signature.
+  private static void addReferencedTypes(
+      TypeDescriptor typeDescriptor, Set<TypeDescriptor> referencedTypes) {
+    if (!referencedTypes.add(typeDescriptor)) {
+      return;
+    }
+    if (typeDescriptor instanceof DeclaredTypeDescriptor) {
+      DeclaredTypeDescriptor declaredTypeDescriptor = (DeclaredTypeDescriptor) typeDescriptor;
+      declaredTypeDescriptor
+          .getTypeArgumentDescriptors()
+          .forEach(t -> addReferencedTypes(t, referencedTypes));
+    } else if (typeDescriptor.isArray()) {
+      addReferencedTypes(
+          ((ArrayTypeDescriptor) typeDescriptor).getLeafTypeDescriptor(), referencedTypes);
+    } else if (typeDescriptor.isIntersection()) {
+      ((IntersectionTypeDescriptor) typeDescriptor)
+          .getIntersectionTypeDescriptors()
+          .forEach(t -> addReferencedTypes(t, referencedTypes));
+    } else if (typeDescriptor.isTypeVariable()) {
+      addReferencedTypes(((TypeVariable) typeDescriptor).getBoundTypeDescriptor(), referencedTypes);
+    } else {
+      checkState(typeDescriptor.isPrimitive());
+    }
   }
 
   private void checkMustBeJsOverlay(Member member, String messagePrefix) {
@@ -1372,16 +1444,22 @@ public class JsInteropRestrictionsChecker {
     }
 
     for (Member member : type.getMembers()) {
-      checkMemberOfJsFunctionImplementation(member);
+      checkMemberOfJsFunctionImplementation(type, member);
     }
   }
 
-  private void checkMemberOfJsFunctionImplementation(Member member) {
-    if (member.getDescriptor().isSynthetic()) {
+  private void checkMemberOfJsFunctionImplementation(Type type, Member member) {
+    MemberDescriptor memberDescriptor = member.getDescriptor();
+    if (memberDescriptor.isSynthetic()) {
       return;
     }
 
     checkImplementableStatically(member, "JsFunction implementation");
+
+    if (memberDescriptor.isJsFunction()) {
+      checkJsFunctionMethodSignature(type, (Method) member);
+      return;
+    }
   }
 
   private void checkImplementableStatically(Member member, String messagePrefix) {
