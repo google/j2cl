@@ -21,6 +21,17 @@ overhead for using language primitives to discourage people from writing native
 code for simple stuff only for performance considerations. Having
 JavaScript-like array semantics help that story.
 
+## Float is emulated with extra precission
+
+J2CL doesn't emulate 32 bit floating point arithmetic for performance reasons.
+Instead JavaScript `number` is used to emulate `float` without any
+instrumentation and results in 64 bit precision. This makes them effectively
+same as the `double` type in Java.
+
+This is rarely noticable in practice but if for your application repeatability
+of the floating point arithmetic really matters across different platforms, this
+is something to keep in mind.
+
 ## Limitations of JRE Emulation
 
 J2CL emulates a substantial portion of the Java Standard Library (a.k.a JRE).
