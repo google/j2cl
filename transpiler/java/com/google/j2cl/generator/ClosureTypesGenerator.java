@@ -291,12 +291,9 @@ class ClosureTypesGenerator {
     }
 
     if (typeDeclaration.isJsEnum()) {
-      // TODO(b/116748526):  add a way to represent unknown nullability.
-      // In Closure, the default nullability for enums is the default nullability of its value type,
-      // whereas in Java enums are implicitly nullable.
-      return new ClosureNamedType(
-              environment.aliasForType(typeDeclaration),
-              AstUtils.getJsEnumValueFieldType(typeDeclaration).isNullable())
+      // We need to be always explicit about Enums nullability since we may not know nullability
+      // in the case of native ones and also it is inconsistent when aliased (b/156407201).
+      return new ClosureNamedTypeWithUnknownNullability(environment.aliasForType(typeDeclaration))
           .toNullable();
     }
 
@@ -395,7 +392,6 @@ class ClosureTypesGenerator {
 
   /** Represents named types which are by default nullable. */
   private static class ClosureNamedType extends ClosureType {
-    private final boolean isNullable;
     private final String name;
     private final ImmutableList<ClosureType> typeParameters;
 
@@ -403,23 +399,14 @@ class ClosureTypesGenerator {
       this(name, Arrays.asList(typeParameters));
     }
 
-    ClosureNamedType(String name, boolean isNullable, ClosureType... typeParameters) {
-      this(name, isNullable, Arrays.asList(typeParameters));
-    }
-
     ClosureNamedType(String name, Iterable<ClosureType> typeParameters) {
-      this(name, true, typeParameters);
-    }
-
-    ClosureNamedType(String name, boolean isNullable, Iterable<ClosureType> typeParameters) {
       this.name = name;
-      this.isNullable = isNullable;
       this.typeParameters = ImmutableList.copyOf(typeParameters);
     }
 
     @Override
     boolean isNullable() {
-      return isNullable;
+      return true;
     }
 
     @Override
@@ -431,6 +418,22 @@ class ClosureTypesGenerator {
                   .stream()
                   .map(ClosureType::render)
                   .collect(Collectors.joining(", ", "<", ">")));
+    }
+  }
+
+  private static class ClosureNamedTypeWithUnknownNullability extends ClosureNamedType {
+    ClosureNamedTypeWithUnknownNullability(String name) {
+      super(name);
+    }
+
+    @Override
+    ClosureType toNullable() {
+      return new ClosureWildcardDecoratedType(this);
+    }
+
+    @Override
+    ClosureType toNonNullable() {
+      return new ClosureBangDecoratedType(this);
     }
   }
 
