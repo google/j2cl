@@ -40,6 +40,16 @@ j2cl_test_integration_test_data(
 )
 
 j2cl_test_integration_test_data(
+    name = "TestAsyncAfterWillTimeOut",
+    deps = ASYNC_TEST_DEPS,
+)
+
+j2cl_test_integration_test_data(
+    name = "TestAsyncBeforeWillTimeOut",
+    deps = ASYNC_TEST_DEPS,
+)
+
+j2cl_test_integration_test_data(
     name = "TestChainingWithException",
     deps = ASYNC_TEST_DEPS,
 )

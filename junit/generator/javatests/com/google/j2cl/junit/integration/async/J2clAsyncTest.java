@@ -52,6 +52,36 @@ public class J2clAsyncTest extends IntegrationTestBase {
   }
 
   @Test
+  public void testAsyncAfterWillTimeOut() throws Exception {
+    String testName = "TestAsyncAfterWillTimeOut";
+    TestResult testResult =
+        newTestResultBuilder()
+            .testClassName(testName)
+            .addTestFailure("test")
+            .addTestSuccess("testOther")
+            .addJavaLogLineSequence("test", "after", "testOther", "after")
+            .build();
+
+    List<String> logLines = runTest(testName);
+    assertThat(logLines).matches(testResult);
+  }
+
+  @Test
+  public void testAsyncBeforeWillTimeOut() throws Exception {
+    String testName = "TestAsyncBeforeWillTimeOut";
+    TestResult testResult =
+        newTestResultBuilder()
+            .testClassName(testName)
+            .addTestFailure("test")
+            .addTestSuccess("testOther")
+            .addJavaLogLineSequence("before", "before", "testOther")
+            .build();
+
+    List<String> logLines = runTest(testName);
+    assertThat(logLines).matches(testResult);
+  }
+
+  @Test
   public void testChainingWithException() throws Exception {
     String testName = "TestChainingWithException";
 

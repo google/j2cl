@@ -14,6 +14,8 @@ j2cl_test_integration_test(
     name = "J2clAsyncTest",
     test_data = [
         "//junit/generator/javatests/com/google/j2cl/junit/integration/async/data:TestAfterWithFailingAsyncTest",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/async/data:TestAsyncAfterWillTimeOut",
+        "//junit/generator/javatests/com/google/j2cl/junit/integration/async/data:TestAsyncBeforeWillTimeOut",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/async/data:TestChainingWithException",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/async/data:TestMethodOrder",
         "//junit/generator/javatests/com/google/j2cl/junit/integration/async/data:TestNonAsyncTest",
