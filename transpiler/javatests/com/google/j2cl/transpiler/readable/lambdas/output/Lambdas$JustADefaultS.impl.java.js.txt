@@ -1,0 +1,44 @@
+goog.module('com.google.j2cl.transpiler.readable.lambdas.Lambdas.JustADefaultS$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ * @template S
+ */
+class JustADefaultS {
+  /** @abstract */
+  m_method__java_lang_Object(/** S */ t) {}
+  /** @template S */
+  static m_method__$default__com_google_j2cl_transpiler_readable_lambdas_Lambdas_JustADefaultS__java_lang_Object(
+      /** !JustADefaultS<S> */ $thisArg, /** S */ t) {
+    JustADefaultS.$clinit();
+  }
+
+  static $clinit() {
+    JustADefaultS.$clinit = () => {};
+    JustADefaultS.$loadModules();
+  }
+
+  static $markImplementor(/** Function*/ ctor) {
+    ctor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_lambdas_Lambdas_JustADefaultS =
+        true;
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance != null &&
+        !!instance
+              .$implements__com_google_j2cl_transpiler_readable_lambdas_Lambdas_JustADefaultS;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadataForInterface(
+    JustADefaultS,
+    'com.google.j2cl.transpiler.readable.lambdas.Lambdas$JustADefaultS');
+
+JustADefaultS.$markImplementor(/** @type {Function} */ (JustADefaultS));
+
+exports = JustADefaultS;
+//# sourceMappingURL=Lambdas$JustADefaultS.js.map

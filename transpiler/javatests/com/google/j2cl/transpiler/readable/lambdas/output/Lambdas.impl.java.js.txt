@@ -7,6 +7,10 @@ let $1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambda
 let $2 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.$2$impl');
 let $3 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.$3$impl');
 let $LambdaAdaptor$1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.$LambdaAdaptor$1$impl');
+let $LambdaAdaptor$2 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.$LambdaAdaptor$2$impl');
+let $LambdaAdaptor$3 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.$LambdaAdaptor$3$impl');
+let $LambdaAdaptor$4 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.$LambdaAdaptor$4$impl');
+let $LambdaAdaptor$5 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.$LambdaAdaptor$5$impl');
 let $Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.AnotherThenable.$Overlay$impl');
 let BiFunction = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.BiFunction$impl');
 let Lambdas_Function = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.Function$impl');
@@ -254,6 +258,33 @@ class Lambdas extends j_l_Object {
     equals.equals(null);
     equals.m_get__();
   }
+  /** @template U, V */
+  static m_testIntersectionTyping__() {
+    Lambdas.$clinit();
+    let o = /**@type {GenericFunctionalInterface<?string>}*/ (
+        new $LambdaAdaptor$2((x) => {
+          let x_1 = /**@type {?string}*/ ($Casts.$to(x, j_l_String));
+          return x_1;
+        }));
+    o = /**@type {GenericFunctionalInterface<?string>}*/ (
+        new $LambdaAdaptor$3((x_2) => {
+          let x_3 = /**@type {?string}*/ ($Casts.$to(x_2, j_l_String));
+          return x_3;
+        }));
+    o = /**@type {GenericFunctionalInterface<U>}*/ (
+        new $LambdaAdaptor$4((/** U */ x_4) => {
+          return x_4;
+        }));
+  }
+
+  m_testDefaultMethodsInIntersectionAdaptor__() {
+    let o = /**@type {BiFunction<?string, ?string, ?string>}*/ (
+        new $LambdaAdaptor$5((t, u) => {
+          let t_1 = /**@type {?string}*/ ($Casts.$to(t, j_l_String));
+          let u_1 = /**@type {?string}*/ ($Casts.$to(u, j_l_String));
+          return null;
+        }));
+  }
   /** @private */
   $init___$p_com_google_j2cl_transpiler_readable_lambdas_Lambdas() {
     this.f_field__com_google_j2cl_transpiler_readable_lambdas_Lambdas = 100;
@@ -281,6 +312,14 @@ class Lambdas extends j_l_Object {
         'com.google.j2cl.transpiler.readable.lambdas.Lambdas.$3$impl');
     $LambdaAdaptor$1 = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdas.Lambdas.$LambdaAdaptor$1$impl');
+    $LambdaAdaptor$2 = goog.module.get(
+        'com.google.j2cl.transpiler.readable.lambdas.Lambdas.$LambdaAdaptor$2$impl');
+    $LambdaAdaptor$3 = goog.module.get(
+        'com.google.j2cl.transpiler.readable.lambdas.Lambdas.$LambdaAdaptor$3$impl');
+    $LambdaAdaptor$4 = goog.module.get(
+        'com.google.j2cl.transpiler.readable.lambdas.Lambdas.$LambdaAdaptor$4$impl');
+    $LambdaAdaptor$5 = goog.module.get(
+        'com.google.j2cl.transpiler.readable.lambdas.Lambdas.$LambdaAdaptor$5$impl');
     $Overlay = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdas.Lambdas.AnotherThenable.$Overlay$impl');
     BiFunction = goog.module.get(

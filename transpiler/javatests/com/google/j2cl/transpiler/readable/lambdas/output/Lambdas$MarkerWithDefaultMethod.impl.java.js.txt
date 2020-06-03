@@ -1,0 +1,44 @@
+goog.module('com.google.j2cl.transpiler.readable.lambdas.Lambdas.MarkerWithDefaultMethod$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ */
+class MarkerWithDefaultMethod {
+  /** @abstract */
+  m_defaultMethod__() {}
+
+  static m_defaultMethod__$default__com_google_j2cl_transpiler_readable_lambdas_Lambdas_MarkerWithDefaultMethod(
+      /** !MarkerWithDefaultMethod */ $thisArg) {
+    MarkerWithDefaultMethod.$clinit();
+  }
+
+  static $clinit() {
+    MarkerWithDefaultMethod.$clinit = () => {};
+    MarkerWithDefaultMethod.$loadModules();
+  }
+
+  static $markImplementor(/** Function*/ ctor) {
+    ctor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_lambdas_Lambdas_MarkerWithDefaultMethod =
+        true;
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance != null &&
+        !!instance
+              .$implements__com_google_j2cl_transpiler_readable_lambdas_Lambdas_MarkerWithDefaultMethod;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadataForInterface(
+    MarkerWithDefaultMethod,
+    'com.google.j2cl.transpiler.readable.lambdas.Lambdas$MarkerWithDefaultMethod');
+
+MarkerWithDefaultMethod.$markImplementor(
+    /** @type {Function} */ (MarkerWithDefaultMethod));
+
+exports = MarkerWithDefaultMethod;
+//# sourceMappingURL=Lambdas$MarkerWithDefaultMethod.js.map

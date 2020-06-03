@@ -1,0 +1,70 @@
+goog.module('com.google.j2cl.transpiler.readable.lambdas.Lambdas.$LambdaAdaptor$5$impl');
+
+const BiFunction = goog.require('com.google.j2cl.transpiler.readable.lambdas.Lambdas.BiFunction$impl');
+const MarkerWithDefaultMethod = goog.require('com.google.j2cl.transpiler.readable.lambdas.Lambdas.MarkerWithDefaultMethod$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Lambdas_Function = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdas.Lambdas.Function$impl');
+
+/**
+ * @template T, U, R
+ * @implements {BiFunction<T, U, R>}
+ * @implements {MarkerWithDefaultMethod}
+ */
+class $LambdaAdaptor$5 extends j_l_Object {
+  constructor(/** ?function(T, U):R */ fn) {
+    $LambdaAdaptor$5.$clinit();
+    super();
+    /**@type {?function(T, U):R}*/
+    this.f_$$fn__com_google_j2cl_transpiler_readable_lambdas_Lambdas_$LambdaAdaptor$5;
+    this.$ctor__com_google_j2cl_transpiler_readable_lambdas_Lambdas_$LambdaAdaptor$5__com_google_j2cl_transpiler_readable_lambdas_Lambdas_BiFunction_$JsFunction(
+        fn);
+  }
+
+  $ctor__com_google_j2cl_transpiler_readable_lambdas_Lambdas_$LambdaAdaptor$5__com_google_j2cl_transpiler_readable_lambdas_Lambdas_BiFunction_$JsFunction(
+      /** ?function(T, U):R */ fn) {
+    this.$ctor__java_lang_Object__();
+    this.f_$$fn__com_google_j2cl_transpiler_readable_lambdas_Lambdas_$LambdaAdaptor$5 =
+        fn;
+  }
+  /** @return {R} */
+  m_apply__java_lang_Object__java_lang_Object(/** T */ arg0, /** U */ arg1) {
+    let /** ?function(T, U):R */ $function;
+    return (
+        $function =
+            this.f_$$fn__com_google_j2cl_transpiler_readable_lambdas_Lambdas_$LambdaAdaptor$5,
+        $function(arg0, arg1));
+  }
+  // Default method forwarding stub.
+  /** @override @template V @return {BiFunction<T, U, V>} */
+  m_andThen__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Function(
+      /** Lambdas_Function<?, ?> */ arg0) {
+    return /**@type {BiFunction<T, U, V>}*/ (
+        BiFunction
+            .m_andThen__$default__com_google_j2cl_transpiler_readable_lambdas_Lambdas_BiFunction__com_google_j2cl_transpiler_readable_lambdas_Lambdas_Function(
+                this, arg0));
+  }
+
+  static $clinit() {
+    $LambdaAdaptor$5.$clinit = () => {};
+    $LambdaAdaptor$5.$loadModules();
+    j_l_Object.$clinit();
+    BiFunction.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof $LambdaAdaptor$5;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(
+    $LambdaAdaptor$5,
+    'com.google.j2cl.transpiler.readable.lambdas.Lambdas$$LambdaAdaptor$5');
+
+BiFunction.$markImplementor($LambdaAdaptor$5);
+MarkerWithDefaultMethod.$markImplementor($LambdaAdaptor$5);
+
+exports = $LambdaAdaptor$5;
+//# sourceMappingURL=Lambdas$$LambdaAdaptor$5.js.map

@@ -259,5 +259,36 @@ public class Lambdas {
     equals.equals(null);
     equals.get();
   }
+
+  interface JustADefaultT<T> {
+    default void method(T t) {}
+  }
+
+  interface JustADefaultS<S> {
+    default void method(S t) {}
+  }
+
+  // This is related to b/158085463.
+  public static <U, V> void testIntersectionTyping() {
+    // Shows the case where the types in the intersection declare type variables with the same name;
+    // these type variables are actually different variables and should be unaliased.
+    Object o = (GenericFunctionalInterface<String> & JustADefaultT<Number>) x -> x;
+    // Shows the case where the types in the intersection declare type variables with the different
+    // names; these type variables should be explicitly declared in the adaptor.
+    o = (GenericFunctionalInterface<String> & JustADefaultS<Number>) x -> x;
+    // Shows the case where type variables from the calling context are passed as type arguments
+    // in the intersection types. If the non shared adaptor were to be specialized, these are
+    // the variables that should be declared in it.
+    o = (GenericFunctionalInterface<U> & JustADefaultS<V>) x -> x;
+  }
+
+  interface MarkerWithDefaultMethod {
+    default void defaultMethod() {}
+  }
+
+  // This is related to b/158090696.
+  public void testDefaultMethodsInIntersectionAdaptor() {
+    Object o = (BiFunction<String, String, String> & MarkerWithDefaultMethod) (t, u) -> null;
+  }
 }
 

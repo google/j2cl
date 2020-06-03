@@ -1,0 +1,58 @@
+goog.module('com.google.j2cl.transpiler.readable.lambdas.Lambdas.$LambdaAdaptor$3$impl');
+
+const GenericFunctionalInterface = goog.require('com.google.j2cl.transpiler.readable.lambdas.Lambdas.GenericFunctionalInterface$impl');
+const JustADefaultS = goog.require('com.google.j2cl.transpiler.readable.lambdas.Lambdas.JustADefaultS$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @template T
+ * @implements {GenericFunctionalInterface<T>}
+ * @implements {JustADefaultS<S>}
+ */
+class $LambdaAdaptor$3 extends j_l_Object {
+  constructor(/** ?function(T):T */ fn) {
+    $LambdaAdaptor$3.$clinit();
+    super();
+    /**@type {?function(T):T}*/
+    this.f_$$fn__com_google_j2cl_transpiler_readable_lambdas_Lambdas_$LambdaAdaptor$3;
+    this.$ctor__com_google_j2cl_transpiler_readable_lambdas_Lambdas_$LambdaAdaptor$3__com_google_j2cl_transpiler_readable_lambdas_Lambdas_GenericFunctionalInterface_$JsFunction(
+        fn);
+  }
+
+  $ctor__com_google_j2cl_transpiler_readable_lambdas_Lambdas_$LambdaAdaptor$3__com_google_j2cl_transpiler_readable_lambdas_Lambdas_GenericFunctionalInterface_$JsFunction(
+      /** ?function(T):T */ fn) {
+    this.$ctor__java_lang_Object__();
+    this.f_$$fn__com_google_j2cl_transpiler_readable_lambdas_Lambdas_$LambdaAdaptor$3 =
+        fn;
+  }
+  /** @return {T} */
+  m_m__java_lang_Object(/** T */ arg0) {
+    let /** ?function(T):T */ $function;
+    return (
+        $function =
+            this.f_$$fn__com_google_j2cl_transpiler_readable_lambdas_Lambdas_$LambdaAdaptor$3,
+        $function(arg0));
+  }
+
+  static $clinit() {
+    $LambdaAdaptor$3.$clinit = () => {};
+    $LambdaAdaptor$3.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof $LambdaAdaptor$3;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(
+    $LambdaAdaptor$3,
+    'com.google.j2cl.transpiler.readable.lambdas.Lambdas$$LambdaAdaptor$3');
+
+GenericFunctionalInterface.$markImplementor($LambdaAdaptor$3);
+JustADefaultS.$markImplementor($LambdaAdaptor$3);
+
+exports = $LambdaAdaptor$3;
+//# sourceMappingURL=Lambdas$$LambdaAdaptor$3.js.map

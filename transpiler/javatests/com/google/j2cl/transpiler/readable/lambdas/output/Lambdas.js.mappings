@@ -231,6 +231,43 @@
 [equals] => [equals] "equals"
 [equals.equals(null);] => [equals.equals(null);] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testJsInteropLambdas"
 [equals.get();] => [equals.m_get__();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testJsInteropLambdas"
+[testIntersectionTyping] => [m_testIntersectionTyping__]
+[testIntersectionTyping] => [Lambdas.$clinit();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testIntersectionTyping"
+[Object o = (GenericFunctionalInterface<String> & JustADefaultT<Number>) x -> x;] => [let o = /**@type {GenericFunctionalInterface<?string>}*/ (new $LambdaAdaptor$2((x) =>{
+   let x_1 = /**@type {?string}*/ ($Casts.$to(x, j_l_String));
+   return x_1;
+  }));] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testIntersectionTyping"
+[o] => [o] "o"
+[x] => [x] "x"
+[x -> x] => [let x_1 = /**@type {?string}*/ ($Casts.$to(x, j_l_String));] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testIntersectionTyping>"
+[x] => [x_1] "x"
+[x] => [return x_1;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testIntersectionTyping>"
+[o = (GenericFunctionalInterface<String> & JustADefaultS<Number>) x -> x;] => [o = /**@type {GenericFunctionalInterface<?string>}*/ (new $LambdaAdaptor$3((x_2) =>{
+   let x_3 = /**@type {?string}*/ ($Casts.$to(x_2, j_l_String));
+   return x_3;
+  }));] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testIntersectionTyping"
+[x] => [x_2] "x"
+[x -> x] => [let x_3 = /**@type {?string}*/ ($Casts.$to(x_2, j_l_String));] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testIntersectionTyping>"
+[x] => [x_3] "x"
+[x] => [return x_3;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testIntersectionTyping>"
+[o = (GenericFunctionalInterface<U> & JustADefaultS<V>) x -> x;] => [o = /**@type {GenericFunctionalInterface<U>}*/ (new $LambdaAdaptor$4((/** U */ x_4) =>{
+   return x_4;
+  }));] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testIntersectionTyping"
+[x] => [x_4] "x"
+[x] => [return x_4;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testIntersectionTyping>"
+[testDefaultMethodsInIntersectionAdaptor] => [m_testDefaultMethodsInIntersectionAdaptor__]
+[Object o = (BiFunction<String, String, String> & MarkerWithDefaultMethod) (t, u) -> null;] => [let o = /**@type {BiFunction<?string, ?string, ?string>}*/ (new $LambdaAdaptor$5((t, u) =>{
+   let t_1 = /**@type {?string}*/ ($Casts.$to(t, j_l_String));
+...   return null;
+  }));] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testDefaultMethodsInIntersectionAdaptor"
+[o] => [o] "o"
+[t] => [t] "t"
+[u] => [u] "u"
+[(t, u) -> null] => [let t_1 = /**@type {?string}*/ ($Casts.$to(t, j_l_String));] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testDefaultMethodsInIntersectionAdaptor>"
+[t] => [t_1] "t"
+[(t, u) -> null] => [let u_1 = /**@type {?string}*/ ($Casts.$to(u, j_l_String));] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testDefaultMethodsInIntersectionAdaptor>"
+[u] => [u_1] "u"
+[null] => [return null;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testDefaultMethodsInIntersectionAdaptor>"
 [Lambdas] => [$init___$p_com_google_j2cl_transpiler_readable_lambdas_Lambdas]
 [public int field = 100;] => [this.f_field__com_google_j2cl_transpiler_readable_lambdas_Lambdas = 100;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<init>"
 [Lambdas] => [$clinit]
