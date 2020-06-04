@@ -36,6 +36,7 @@ public class Main {
     testSerializableLambda();
     testNestedLambdas();
     testArbitraryNesting();
+    testIntersectionTypeLambdas();
   }
 
   private interface IntToIntFunction {
@@ -215,5 +216,30 @@ public class Main {
           return ii.apply(100);
         };
     assertTrue((i.apply(200) == 330));
+  }
+
+  private interface IdentityWithDefault<T> {
+    T identityaccept(T t);
+
+    default IdentityWithDefault<T> self() {
+      return this;
+    }
+  }
+
+  private interface InterfaceWithDefaultMethod {
+    static final String MY_TEXT = "from Non Functional";
+
+    default String defaultMethod() {
+      return MY_TEXT;
+    }
+  }
+
+  private static void testIntersectionTypeLambdas() {
+    Object obj = (IdentityWithDefault<String> & InterfaceWithDefaultMethod) o -> o;
+    assertTrue(obj instanceof IdentityWithDefault);
+    assertTrue(obj instanceof InterfaceWithDefaultMethod);
+    assertEquals(obj, ((IdentityWithDefault<String>) obj).self());
+    assertEquals(
+        InterfaceWithDefaultMethod.MY_TEXT, ((InterfaceWithDefaultMethod) obj).defaultMethod());
   }
 }

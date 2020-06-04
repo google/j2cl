@@ -71,6 +71,7 @@ public class LambdaTypeDescriptors {
 
     TypeDeclaration adaptorDeclaration =
         createLambdaAdaptorTypeDeclaration(
+            typeDescriptor,
             enclosingTypeDescriptor,
             interfaceTypeDescriptors,
             functionalInterfaceTypeDescriptor,
@@ -107,6 +108,7 @@ public class LambdaTypeDescriptors {
 
   /** Returns the TypeDeclaration for the LambdaAdaptor class. */
   private static TypeDeclaration createLambdaAdaptorTypeDeclaration(
+      TypeDescriptor lambdaTypeDescriptor,
       DeclaredTypeDescriptor enclosingTypeDescriptor,
       List<DeclaredTypeDescriptor> interfaceTypeDescriptors,
       DeclaredTypeDescriptor functionalInterfaceTypeDescriptor,
@@ -145,12 +147,11 @@ public class LambdaTypeDescriptors {
         .setUnparameterizedTypeDescriptorFactory(
             () ->
                 createLambdaAdaptorTypeDescriptor(
-                    functionalInterfaceTypeDescriptor.toUnparameterizedTypeDescriptor(),
+                    lambdaTypeDescriptor.toUnparameterizedTypeDescriptor(),
                     enclosingTypeDescriptor.toUnparameterizedTypeDescriptor(),
                     uniqueId))
         .setVisibility(Visibility.PUBLIC)
         .setKind(Kind.CLASS)
-        .setTypeParameterDescriptors(typeParameterDescriptors)
         .build();
   }
 
