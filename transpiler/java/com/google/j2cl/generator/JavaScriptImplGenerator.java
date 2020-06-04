@@ -27,7 +27,6 @@ import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.JavaScriptConstructorReference;
-import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.MethodLike;
@@ -80,8 +79,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     MethodDescriptor methodDescriptor = method.getDescriptor();
     sourceBuilder.append(getMethodQualifiers(methodDescriptor));
     sourceBuilder.emitWithMapping(
-        method.getSourcePosition(),
-        () -> sourceBuilder.append(ManglingNameUtils.getMangledName(methodDescriptor)));
+        method.getSourcePosition(), () -> sourceBuilder.append(methodDescriptor.getMangledName()));
 
     sourceBuilder.append("(");
 
@@ -168,7 +166,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
             sourceBuilder.emitWithMapping(
                 field.getSourcePosition(),
                 () -> {
-                  sourceBuilder.append(ManglingNameUtils.getMangledName(field.getDescriptor()));
+                  sourceBuilder.append(field.getDescriptor().getMangledName());
                 });
             sourceBuilder.append(" : ");
             renderExpression(field.getInitializer());
@@ -453,9 +451,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       sourceBuilder.appendln(superInterfaceName + ".$markImplementor(ctor);");
     }
     sourceBuilder.appendLines(
-        "ctor.prototype.$implements__"
-            + ManglingNameUtils.getMangledName(type.getDeclaration())
-            + " = true;");
+        "ctor.prototype.$implements__" + type.getDeclaration().getMangledName() + " = true;");
     sourceBuilder.closeBrace();
     sourceBuilder.newLine();
   }
@@ -527,16 +523,12 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   private void renderIsInstanceOfInterfaceStatement(TypeDeclaration type) {
     sourceBuilder.append(
-        "return instance != null && !!instance.$implements__"
-            + ManglingNameUtils.getMangledName(type)
-            + ";");
+        "return instance != null && !!instance.$implements__" + type.getMangledName() + ";");
   }
 
   private void renderIsInstanceOfJsFunctionImplementationStatement(TypeDeclaration type) {
     sourceBuilder.appendln(
-        "return instance != null && !!instance.$is__"
-            + ManglingNameUtils.getMangledName(type)
-            + ";");
+        "return instance != null && !!instance.$is__" + type.getMangledName() + ";");
   }
 
   // TODO(b/34928687): Move this to the ast in a normalization pass.
@@ -551,14 +543,14 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
             + "*/ from, /** ? */ to) ");
     sourceBuilder.openBrace();
     for (Field field : type.getInstanceFields()) {
-      String fieldName = ManglingNameUtils.getMangledName(field.getDescriptor());
+      String fieldName = field.getDescriptor().getMangledName();
       sourceBuilder.newLine();
       sourceBuilder.append("to." + fieldName + " = from." + fieldName + ";");
     }
     sourceBuilder.newLine();
     sourceBuilder.appendLines(
         "// Marks the object is an instance of this class.",
-        "to.$is__" + ManglingNameUtils.getMangledName(type.getDeclaration()) + " = true;");
+        "to.$is__" + type.getDeclaration().getMangledName() + " = true;");
     sourceBuilder.closeBrace();
     sourceBuilder.newLine();
   }
@@ -609,8 +601,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   private void renderLoadModules() {
     MethodDescriptor methodDescriptor = AstUtils.getLoadModulesDescriptor(type.getTypeDescriptor());
     sourceBuilder.newLine();
-    sourceBuilder.appendLines(
-        "static " + ManglingNameUtils.getMangledName(methodDescriptor) + "() ");
+    sourceBuilder.appendLines("static " + methodDescriptor.getMangledName() + "() ");
     sourceBuilder.openBrace();
 
     // goog.module.get(...) for lazy imports.

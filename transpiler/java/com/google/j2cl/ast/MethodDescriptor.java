@@ -22,8 +22,10 @@ import static java.util.stream.Collectors.joining;
 
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
+import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.common.collect.Streams;
 import com.google.j2cl.common.ThreadLocalInterner;
@@ -305,6 +307,66 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   @Memoized
   public String getBinaryName() {
     return getOrigin() == MethodOrigin.SOURCE ? getName() : getOrigin().getName();
+  }
+
+  @Memoized
+  @Override
+  public String getMangledName() {
+    if (isConstructor()) {
+      return "constructor";
+    }
+
+    if (isPropertyGetter()) {
+      return "get " + computePropertyMangledName();
+    }
+
+    if (isPropertySetter()) {
+      return "set " + computePropertyMangledName();
+    }
+
+    if (isJsMethod()) {
+      return getSimpleJsName();
+    }
+
+    // All special cases have been handled. Go ahead and construct the mangled name for a plain
+    // Java method.
+    String suffix = "";
+    if (!isStatic()) {
+      // Only use suffixes for instance methods. Static methods are always called through the
+      // right constructor, no need to add a suffix to avoid collisions.
+      switch (getVisibility()) {
+        case PRIVATE:
+          // To ensure that private methods never override each other.
+          suffix = "_$p_" + getEnclosingTypeDescriptor().getMangledName();
+          break;
+        case PACKAGE_PRIVATE:
+          // To ensure that package private methods only override one another when
+          // they are in the same package.
+          suffix =
+              "_$pp_"
+                  + getEnclosingTypeDescriptor()
+                      .getTypeDeclaration()
+                      .getPackageName()
+                      .replace('.', '_');
+          break;
+        default:
+          break;
+      }
+    }
+    String prefix = "m_";
+    if (getName().startsWith("$")) {
+      // This is an internal method so we render the actual name
+      prefix = "";
+    }
+    String parameterSignature = "__" + Joiner.on("__").join(getMangledParameterTypes());
+    return String.format("%s%s%s%s", prefix, getName(), parameterSignature, suffix);
+  }
+
+  /** Returns the list of mangled name of parameters' types. */
+  private List<String> getMangledParameterTypes() {
+    return Lists.transform(
+        getDeclarationDescriptor().getParameterTypeDescriptors(),
+        parameterTypeDescriptor -> parameterTypeDescriptor.toRawTypeDescriptor().getMangledName());
   }
 
   @Override

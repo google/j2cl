@@ -104,6 +104,18 @@ public abstract class TypeDescriptor implements Comparable<TypeDescriptor>, HasR
     return false;
   }
 
+  /**
+   * Returns the mangled name of a type.
+   *
+   * <p>The mangled name of a type is a string that uniquely identifies the type and will become
+   * part of the JavaScript method name to be able to differentiate method overloads.
+   */
+  public String getMangledName() {
+    // Some type descriptors don't have a mangled name. Mangled names are only needed from
+    // the "raw" type descriptors, i.e. declared types, primitives and arrays.
+    throw new UnsupportedOperationException();
+  }
+
   /** Returns the type that holds the metadata for the class type */
   @Nullable
   public abstract TypeDeclaration getMetadataTypeDeclaration();

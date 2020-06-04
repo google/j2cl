@@ -222,4 +222,39 @@ public abstract class MemberDescriptor
   }
 
   public abstract String getBinaryName();
+
+  /**
+   * Returns the mangled name of a member.
+   *
+   * <p>The mangled name of a member is string that uniquely identifies the method for the purpose
+   * of giving it a property name in JavaScript. The need for mangling arises due to Java overloads
+   * and Java visibility rules where methods that are not in the same override change might have the
+   * same Java name. Methods in separate override chains needs different property names in
+   * JavaScript.
+   *
+   * <p>Mangled names include the parameter names and other identifying information, e.g. the class
+   * for private methods or the package for package-private methods and whether it is a method or a
+   * field.
+   *
+   * <p>The current version does not include the return type, since overrides are allowed to
+   * specialize the return type.
+   */
+  public abstract String getMangledName();
+
+  /** Utility to compute the mangled name of a member as if it were a property. */
+  // TODO(b/158014657): make this method package protected once the bug is fixed.
+  public String computePropertyMangledName() {
+    if (isJsMember()) {
+      return getSimpleJsName();
+    }
+
+    String prefix = getOrigin().getPrefix();
+
+    TypeDescriptor enclosingTypeDescriptor = getEnclosingTypeDescriptor();
+    checkArgument(!enclosingTypeDescriptor.isArray());
+    String name = getName();
+    String typeMangledName = enclosingTypeDescriptor.getMangledName();
+    String privateSuffix = getVisibility().isPrivate() ? "_" : "";
+    return String.format("%sf_%s__%s%s", prefix, name, typeMangledName, privateSuffix);
+  }
 }

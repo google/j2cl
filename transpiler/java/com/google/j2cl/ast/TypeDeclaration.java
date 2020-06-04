@@ -108,6 +108,17 @@ public abstract class TypeDeclaration
     return AstUtils.buildQualifiedName(getPackageName(), getSimpleBinaryName());
   }
 
+  /**
+   * Returns the mangled name of a type.
+   *
+   * <p>The mangled name of a type is a string that uniquely identifies the type and will become
+   * part of the JavaScript method name to be able to differentiate method overloads.
+   */
+  @Memoized
+  public String getMangledName() {
+    return getQualifiedSourceName().replace('.', '_');
+  }
+
   /** Returns the globally unique qualified name by which this type should be defined/imported. */
   public String getModuleName() {
     return getQualifiedJsName();

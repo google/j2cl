@@ -26,7 +26,6 @@ import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.JsInfo;
-import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -82,7 +81,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
       Method bridgeMethod =
           createBridgeMethod(type, bridgeMethodDescriptor, targetMethodDescriptor);
 
-      if (!usedMangledNames.add(ManglingNameUtils.getMangledName(bridgeMethod.getDescriptor()))) {
+      if (!usedMangledNames.add(bridgeMethod.getDescriptor().getMangledName())) {
         // TODO(b/64280462): there should not be any ambiguity here depending on the order in which
         //  the bridges are created.
         // Do not generate duplicate bridge methods in one class.

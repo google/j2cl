@@ -362,6 +362,11 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     return getTypeDeclaration().getQualifiedBinaryName();
   }
 
+  @Override
+  public String getMangledName() {
+    return getTypeDeclaration().getMangledName();
+  }
+
   @Memoized
   @Nullable
   public DeclaredTypeDescriptor getSuperTypeDescriptor() {

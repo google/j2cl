@@ -160,6 +160,12 @@ public abstract class FieldDescriptor extends MemberDescriptor {
     return getName();
   }
 
+  @Memoized
+  @Override
+  public String getMangledName() {
+    return computePropertyMangledName();
+  }
+
   public static Builder newBuilder() {
     return new AutoValue_FieldDescriptor.Builder()
         // Default values.

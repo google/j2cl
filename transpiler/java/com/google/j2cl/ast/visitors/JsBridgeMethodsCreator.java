@@ -19,7 +19,6 @@ import static com.google.common.collect.ImmutableSet.toImmutableSet;
 
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.DeclaredTypeDescriptor;
-import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Type;
@@ -62,13 +61,13 @@ public class JsBridgeMethodsCreator extends NormalizationPass {
     Set<String> generatedBridgeMethodMangledNames = new HashSet<>();
     Set<String> existingMethodMangledNames =
         type.getMethods().stream()
-            .map(method -> ManglingNameUtils.getMangledName(method.getDescriptor()))
+            .map(method -> method.getDescriptor().getMangledName())
             .collect(toImmutableSet());
     for (Entry<MethodDescriptor, MethodDescriptor> entry :
         delegatedMethodDescriptorsByBridgeMethodDescriptor(type).entrySet()) {
       MethodDescriptor bridgeMethodDescriptor = entry.getKey();
 
-      String manglingName = ManglingNameUtils.getMangledName(bridgeMethodDescriptor);
+      String manglingName = bridgeMethodDescriptor.getMangledName();
       if (generatedBridgeMethodMangledNames.contains(manglingName)
           || existingMethodMangledNames.contains(manglingName)) {
         // Do not generate duplicate methods that have the same signature of the existing methods

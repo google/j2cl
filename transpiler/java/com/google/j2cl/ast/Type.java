@@ -67,8 +67,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
 
   public boolean containsMethod(String mangledName) {
     return getMethods().stream()
-        .anyMatch(
-            method -> ManglingNameUtils.getMangledName(method.getDescriptor()).equals(mangledName));
+        .anyMatch(method -> method.getDescriptor().getMangledName().equals(mangledName));
   }
 
   public boolean containsNonJsNativeMethods() {

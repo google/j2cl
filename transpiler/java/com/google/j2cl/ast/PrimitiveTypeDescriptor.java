@@ -53,6 +53,11 @@ public class PrimitiveTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
+  public String getMangledName() {
+    return getSimpleSourceName();
+  }
+
+  @Override
   public boolean isNullable() {
     return false;
   }

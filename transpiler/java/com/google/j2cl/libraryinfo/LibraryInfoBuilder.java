@@ -24,7 +24,6 @@ import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.Invocation;
 import com.google.j2cl.ast.JavaScriptConstructorReference;
-import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.Member;
 import com.google.j2cl.ast.MemberDescriptor;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -253,21 +252,22 @@ public final class LibraryInfoBuilder {
   }
 
   private static String getMemberId(MemberDescriptor memberDescriptor) {
-    if (memberDescriptor instanceof MethodDescriptor
-        && !isPropertyAccessor((MethodDescriptor) memberDescriptor)) {
-      return ManglingNameUtils.getMangledName((MethodDescriptor) memberDescriptor);
-    }
+    // TODO(b/158014657): remove this once the bug is fixed.
+    return isPropertyAccessor(memberDescriptor)
+        ? memberDescriptor.computePropertyMangledName()
+        : memberDescriptor.getMangledName();
+  }
 
-    // Property (could be a property getter or setter)
-    return ManglingNameUtils.getPropertyMangledName(memberDescriptor);
+  private static boolean isPropertyAccessor(MemberDescriptor memberDescriptor) {
+    if (!memberDescriptor.isMethod()) {
+      return false;
+    }
+    MethodDescriptor methodDescriptor = (MethodDescriptor) memberDescriptor;
+    return methodDescriptor.isPropertyGetter() || methodDescriptor.isPropertySetter();
   }
 
   private static boolean isPrunableType(DeclaredTypeDescriptor typeDescriptor) {
     return !typeDescriptor.isNative() && !typeDescriptor.isJsEnum();
-  }
-
-  private static boolean isPropertyAccessor(MethodDescriptor methodDescriptor) {
-    return methodDescriptor.isPropertyGetter() || methodDescriptor.isPropertySetter();
   }
 
   private static boolean isJsAccessible(MemberDescriptor memberDescriptor) {

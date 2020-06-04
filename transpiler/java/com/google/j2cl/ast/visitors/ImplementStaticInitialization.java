@@ -36,7 +36,6 @@ import com.google.j2cl.ast.Invocation;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.JsMemberType;
 import com.google.j2cl.ast.LambdaTypeDescriptors;
-import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.Member;
 import com.google.j2cl.ast.MemberDescriptor;
 import com.google.j2cl.ast.Method;
@@ -210,7 +209,7 @@ public class ImplementStaticInitialization extends NormalizationPass {
     return Joiner.on("___")
         .join(
             memberDescriptor.getEnclosingTypeDescriptor().getQualifiedBinaryName(),
-            ManglingNameUtils.getMangledName(memberDescriptor));
+            memberDescriptor.getMangledName());
   }
 
   public void synthesizePropertyGetter(Type type, Field field) {

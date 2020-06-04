@@ -28,7 +28,6 @@ import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.JsMemberType;
-import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.Member;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
@@ -358,8 +357,7 @@ public class NormalizeConstructors extends NormalizationPass {
         continue;
       }
 
-      if (type.containsMethod(
-          ManglingNameUtils.getMangledName(factoryDescriptorForConstructor(methodDescriptor)))) {
+      if (type.containsMethod(factoryDescriptorForConstructor(methodDescriptor).getMangledName())) {
         continue;
       }
 
@@ -546,8 +544,7 @@ public class NormalizeConstructors extends NormalizationPass {
     // Synthesize a name that is unique per class to avoid property clashes in JS.
     return MethodDescriptor.CTOR_METHOD_PREFIX
         + "__"
-        + ManglingNameUtils.getMangledName(
-            methodDescriptor.getEnclosingTypeDescriptor().getTypeDeclaration());
+        + methodDescriptor.getEnclosingTypeDescriptor().getMangledName();
   }
 
   /** Method descriptor for $create methods. */

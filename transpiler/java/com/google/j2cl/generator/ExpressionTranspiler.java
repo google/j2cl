@@ -41,7 +41,6 @@ import com.google.j2cl.ast.InstanceOfExpression;
 import com.google.j2cl.ast.JavaScriptConstructorReference;
 import com.google.j2cl.ast.JsDocCastExpression;
 import com.google.j2cl.ast.JsDocFieldDeclaration;
-import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.MultiExpression;
@@ -183,7 +182,7 @@ public class ExpressionTranspiler {
 
       @Override
       public boolean enterFieldAccess(FieldAccess fieldAccess) {
-        String fieldMangledName = ManglingNameUtils.getMangledName(fieldAccess.getTarget());
+        String fieldMangledName = fieldAccess.getTarget().getMangledName();
         renderQualifiedName(
             fieldAccess.getQualifier(), fieldMangledName, fieldAccess.getSourcePosition());
         return false;
@@ -288,8 +287,7 @@ public class ExpressionTranspiler {
         String qualifier = methodDescriptor.isStatic() ? typeName : typeName + ".prototype";
 
         sourceBuilder.append(
-            AstUtils.buildQualifiedName(
-                qualifier, ManglingNameUtils.getMangledName(methodDescriptor), "call"));
+            AstUtils.buildQualifiedName(qualifier, methodDescriptor.getMangledName(), "call"));
         renderDelimitedAndSeparated(
             "(",
             ", ",
@@ -347,7 +345,7 @@ public class ExpressionTranspiler {
           // Call to a JsFunction method is emitted as the call on the qualifier itself:
           process(expression.getQualifier().parenthesize());
         } else {
-          renderQualifiedName(expression.getQualifier(), ManglingNameUtils.getMangledName(target));
+          renderQualifiedName(expression.getQualifier(), target.getMangledName());
         }
       }
 

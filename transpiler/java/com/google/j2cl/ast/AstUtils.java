@@ -583,8 +583,7 @@ public class AstUtils {
         lambdaType.getFunctionalInterface().getJsFunctionMethodDescriptor();
 
     // Class.prototype.apply
-    String functionalMethodMangledName =
-        ManglingNameUtils.getMangledName(jsFunctionMethodDescriptor);
+    String functionalMethodMangledName = jsFunctionMethodDescriptor.getMangledName();
 
     FieldAccess prototypeFieldAccess =
         FieldAccess.Builder.from(

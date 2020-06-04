@@ -134,6 +134,12 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
 
   @Override
   @Memoized
+  public String getMangledName() {
+    return Strings.repeat("arrayOf_", getDimensions()) + getLeafTypeDescriptor().getMangledName();
+  }
+
+  @Override
+  @Memoized
   public String getReadableDescription() {
     return synthesizeArrayName(getLeafTypeDescriptor().getReadableDescription());
   }
