@@ -12,7 +12,6 @@ load(
     "RTA_ASPECT_ATTRS",
     "get_aspect_providers",
     "get_j2cl_info_from_aspect_providers",
-    "write_module_names_file",
 )
 
 _TransitiveLibraryInfo = provider(fields = ["files"])
@@ -76,9 +75,6 @@ def _j2cl_rta_impl(ctx):
         mnemonic = "J2clRta",
     )
 
-    # Store module names in a file so they can be accessed later
-    write_module_names_file(ctx)
-
     return [
         _J2clRtaInfo(
             unused_types_list = unused_types_list,
@@ -102,7 +98,6 @@ j2cl_rta = rule(
     outputs = {
         "unused_types_list": "%{name}_unused_types.list",
         "removal_code_info_file": "%{name}_removal_code_info",
-        "module_name_list": "%{name}_module_names.list",
     },
     implementation = _j2cl_rta_impl,
 )
