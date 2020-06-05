@@ -46,10 +46,10 @@ public class NativeJavaScriptFile {
   public String getRelativeFilePath() {
     // Replace .native.js by .native_js so that the file is not seen as a JavaScript source
     // by jscompiler.
-    return getPathWithoutExtension() + ".native_js";
+    return getRelativePathWithoutExtension() + ".native_js";
   }
 
-  public String getPathWithoutExtension() {
+  public String getRelativePathWithoutExtension() {
     return relativePath.substring(0, relativePath.lastIndexOf(NATIVE_EXTENSION));
   }
 
@@ -88,7 +88,7 @@ public class NativeJavaScriptFile {
         String content =
             MoreFiles.asCharSource(Paths.get(file.sourcePath()), StandardCharsets.UTF_8).read();
         NativeJavaScriptFile nativeFile = new NativeJavaScriptFile(file.targetPath(), content);
-        loadedFilesByPath.put(nativeFile.getPathWithoutExtension(), nativeFile);
+        loadedFilesByPath.put(nativeFile.getRelativePathWithoutExtension(), nativeFile);
       } catch (IOException e) {
         problems.fatal(FatalError.CANNOT_OPEN_FILE, e.toString());
       }

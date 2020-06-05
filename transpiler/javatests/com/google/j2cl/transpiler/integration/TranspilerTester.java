@@ -56,7 +56,6 @@ public class TranspilerTester {
    */
   public static TranspilerTester newTesterWithDefaults() {
     return newTester()
-        .setJavaPackage("test")
         .setClassPath(
             "transpiler/javatests/com/google/j2cl/transpiler/integration/jre_bundle_deploy.jar");
   }
@@ -76,6 +75,8 @@ public class TranspilerTester {
 
     public void createFileIn(Path basePath) {
       try {
+        Files.createDirectories(
+            basePath.resolve(filePath.getParent() == null ? Paths.get("") : filePath.getParent()));
         Files.write(basePath.resolve(filePath), content.getBytes(Charset.forName("UTF-8")));
       } catch (IOException e) {
         throw new AssertionError(e);
@@ -98,21 +99,49 @@ public class TranspilerTester {
   private List<File> files = new ArrayList<>();
   private List<String> args = new ArrayList<>();
   private String temporaryDirectoryPrefix = "transpile_tester";
-  private String packageName = "";
+  private boolean useZipForNativeFiles = false;
   private Path outputPath;
 
-  public TranspilerTester addCompilationUnit(String compilationUnitName, String... code) {
+  public TranspilerTester addFile(Path path, String... code) {
+    return addPath(path, Joiner.on('\n').join(code));
+  }
+
+  public TranspilerTester addCompilationUnit(String qualifiedCompilationUnitName, String... code) {
     List<String> content = new ArrayList<>(Arrays.asList(code));
+
+    String packageName = getPackageName(qualifiedCompilationUnitName);
     if (!packageName.isEmpty()) {
       content.add(0, "package " + packageName + ";");
     }
-    return addPath(
-        getPackageRelativePath(compilationUnitName + ".java"), Joiner.on('\n').join(content));
+
+    return addFile(
+        getPackageRelativePath(qualifiedCompilationUnitName)
+            .resolve(getSimpleUnitName(qualifiedCompilationUnitName) + ".java"),
+        content.toArray(new String[0]));
   }
 
-  public TranspilerTester addNativeFile(String compilationUnitName, String... code) {
+  private String getPackageName(String qualifiedCompilationUnitName) {
+    int dotIndex = qualifiedCompilationUnitName.lastIndexOf('.');
+    if (dotIndex == -1) {
+      return "";
+    }
+    return qualifiedCompilationUnitName.substring(0, dotIndex);
+  }
+
+  private Path getPackageRelativePath(String qualifiedCompilationUnitName) {
+    return Paths.get(getPackageName(qualifiedCompilationUnitName).replace('.', '/'));
+  }
+
+  private String getSimpleUnitName(String qualifiedCompilationUnitName) {
+    return qualifiedCompilationUnitName.substring(
+        qualifiedCompilationUnitName.lastIndexOf('.') + 1);
+  }
+
+  public TranspilerTester addNativeFile(String qualifiedCompilationUnitName, String... code) {
     return addPath(
-        getPackageRelativePath(compilationUnitName + ".native.js"), Joiner.on('\n').join(code));
+        getPackageRelativePath(qualifiedCompilationUnitName)
+            .resolve(getSimpleUnitName(qualifiedCompilationUnitName) + ".native.js"),
+        Joiner.on('\n').join(code));
   }
 
   public TranspilerTester addFile(String filename, String content) {
@@ -136,6 +165,11 @@ public class TranspilerTester {
     return this.addArgs(toTestPath(path));
   }
 
+  public TranspilerTester setUseZipForNativeFiles(boolean use) {
+    this.useZipForNativeFiles = use;
+    return this;
+  }
+
   private static String toTestPath(String path) {
     return path;
   }
@@ -155,11 +189,6 @@ public class TranspilerTester {
 
   public TranspilerTester addArgs(Collection<String> args) {
     this.args.addAll(args);
-    return this;
-  }
-
-  public TranspilerTester setJavaPackage(String packageName) {
-    this.packageName = packageName;
     return this;
   }
 
@@ -351,29 +380,38 @@ public class TranspilerTester {
         Path inputPath = tempDir.resolve("input");
         Files.createDirectories(inputPath);
 
-        checkState(!packageName.contains(".") && !packageName.contains("/"));
-        Path packagePath = inputPath.resolve(packageName);
-        Files.createDirectories(packagePath);
-
         // 2. Create all declared files on disk
         files.forEach(file -> file.createFileIn(inputPath));
 
-        // 3. Add Java source files and srcjar files to command line.
+        // 3. Add Java source files, srcjar and native files to command line.
         commandLineArgsBuilder.addAll(
             files.stream()
-                .filter(Predicates.or(File::isJavaSourceFile, File::isSrcJar))
+                .filter(Predicates.or(File::isSrcJar, File::isJavaSourceFile))
                 .map(file -> inputPath.resolve(file.getFilePath()))
                 .map(Path::toAbsolutePath)
                 .map(Path::toString)
                 .collect(toImmutableList()));
 
-        // 4. Create a source zip containing the native.js sources.
+        // 4 Create native files or zip.
         List<File> nativeSources =
             files.stream().filter(File::isNativeJsFile).collect(toImmutableList());
-        if (!nativeSources.isEmpty()) {
-          Path nativeZipPath = createNativeZipFile(inputPath, nativeSources, "nativefiles.zip");
-          commandLineArgsBuilder.add("-nativesourcepath", nativeZipPath.toString());
+        if (useZipForNativeFiles) {
+          // Create a source zip containing the native.js sources.
+          if (!nativeSources.isEmpty()) {
+            Path nativeZipPath = createNativeZipFile(inputPath, nativeSources, "nativefiles.zip");
+            commandLineArgsBuilder.add("-nativesourcepath", nativeZipPath.toString());
+          }
+        } else {
+          nativeSources.forEach(file -> file.createFileIn(inputPath));
+
+          nativeSources.stream()
+              .map(file -> inputPath.resolve(file.getFilePath()))
+              .map(Path::toAbsolutePath)
+              .map(Path::toString)
+              .forEach(path -> commandLineArgsBuilder.add("-nativesourcepath", path));
         }
+
+
       }
 
       // Passthru explicitly defined args
@@ -400,13 +438,6 @@ public class TranspilerTester {
     }
 
     return zipFilePath;
-  }
-
-  private Path getPackageRelativePath(String compilationUnitName) {
-    Path filePath = Paths.get(compilationUnitName);
-    return packageName != null && !packageName.isEmpty()
-        ? Paths.get(packageName).resolve(filePath)
-        : filePath;
   }
 
   private TranspilerTester() {}

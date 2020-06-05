@@ -21,6 +21,7 @@ import static com.google.j2cl.transpiler.integration.TranspilerTester.newTesterW
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.zip.ZipFile;
 import junit.framework.TestCase;
 
@@ -99,21 +100,52 @@ public class CommandLineInvocationTest extends TestCase {
         .assertErrorsContainsSnippets("/corrupt.srcjar");
   }
 
+  public void testNativeJsInSameDir() {
+    Path sourcesPath = Paths.get("deep/package");
+    newTesterWithDefaults()
+        .addFile(
+            sourcesPath.resolve("NativeClass.java"),
+            "package random;",
+            "public class NativeClass {",
+            "  public native void nativeInstanceMethod();",
+            "}")
+        .addFile(
+            sourcesPath.resolve("NativeClass.native.js"),
+            "NativeClass.prototype.m_nativeInstanceMethod = function () {}")
+        .assertTranspileSucceeds();
+  }
+
+  public void testNativeJsInPackageRelativePath() {
+    Path sourcesPath = Paths.get("deep/package");
+    newTesterWithDefaults()
+        .addFile(
+            sourcesPath.resolve("NativeClass.java"),
+            "package random;",
+            "public class NativeClass {",
+            "  public native void nativeInstanceMethod();",
+            "}")
+        .addFile(
+            Paths.get("java/random/NativeClass.native.js"),
+            "NativeClass.prototype.m_nativeInstanceMethod = function () {}")
+        .assertTranspileSucceeds();
+  }
+
   public void testNoMatchingSource() {
     newTesterWithDefaults()
-        .setJavaPackage("nativeclasstest")
+        .setUseZipForNativeFiles(true)
         .addCompilationUnit(
-            "NativeClass",
+            "nativeclasstest.NativeClass",
             "public class NativeClass {",
             "  public native void nativeInstanceMethod();",
             "}")
         .addCompilationUnit(
-            "NativeClass2",
+            "nativeclasstest.NativeClass2",
             "public class NativeClass2 {",
             "  public native void nativeInstanceMethod();",
             "}")
         .addNativeFile(
-            "BadNameNativeClass", "NativeClass.prototype.m_nativeInstanceMethod = function () {}")
+            "nativeclasstest.BadNameNativeClass",
+            "NativeClass.prototype.m_nativeInstanceMethod = function () {}")
         .assertTranspileFails()
         .assertErrorsWithoutSourcePosition(
             "Unused native file 'nativeclasstest/BadNameNativeClass.native.js'.",
@@ -123,16 +155,16 @@ public class CommandLineInvocationTest extends TestCase {
 
   public void testNativeJsFileForJsEnum() {
     newTesterWithDefaults()
-        .setJavaPackage("nativeclasstest")
         .addCompilationUnit(
-            "ClosureEnum",
+            "nativeclasstest.ClosureEnum",
             "import jsinterop.annotations.*;",
             "@JsEnum",
             "public enum ClosureEnum{",
             "  OK,",
             "  CANCEL",
             "}")
-        .addNativeFile("ClosureEnum", "const ClosureEnum ={ OK : 'OK', CANCEL : 'Cancel' }")
+        .addNativeFile(
+            "nativeclasstest.ClosureEnum", "const ClosureEnum ={ OK : 'OK', CANCEL : 'Cancel' }")
         .assertTranspileFails()
         .assertErrorsWithoutSourcePosition(
             "JsEnum 'ClosureEnum' does not support having a '.native.js' file.");
@@ -140,16 +172,16 @@ public class CommandLineInvocationTest extends TestCase {
 
   public void testNativeJsFileForNativeJsEnum() {
     newTesterWithDefaults()
-        .setJavaPackage("nativeclasstest")
         .addCompilationUnit(
-            "ClosureEnum",
+            "nativeclasstest.ClosureEnum",
             "import jsinterop.annotations.*;",
             "@JsEnum(isNative=true)",
             "public enum ClosureEnum{",
             "  OK,",
             "  CANCEL",
             "}")
-        .addNativeFile("ClosureEnum", "const ClosureEnum ={ OK : 'OK', CANCEL : 'Cancel' }")
+        .addNativeFile(
+            "nativeclasstest.ClosureEnum", "const ClosureEnum ={ OK : 'OK', CANCEL : 'Cancel' }")
         .assertTranspileFails()
         .assertErrorsWithoutSourcePosition(
             "JsEnum 'ClosureEnum' does not support having a '.native.js' file.");
@@ -157,14 +189,13 @@ public class CommandLineInvocationTest extends TestCase {
 
   public void testNativeJsFileForNativeJsType() {
     newTesterWithDefaults()
-        .setJavaPackage("nativeclasstest")
         .addCompilationUnit(
-            "NativeClass",
+            "nativeclasstest.NativeClass",
             "import jsinterop.annotations.*;",
             "@JsType(isNative=true)",
             "public class NativeClass{",
             "}")
-        .addNativeFile("NativeClass", "Class NativeClass{}")
+        .addNativeFile("nativeclasstest.NativeClass", "Class NativeClass{}")
         .assertTranspileFails()
         .assertErrorsWithoutSourcePosition(
             "Native JsType 'NativeClass' does not support having a '.native.js' file.");
@@ -172,27 +203,28 @@ public class CommandLineInvocationTest extends TestCase {
 
   public void testUnusedSource() {
     newTesterWithDefaults()
-        .setJavaPackage("nativeclasstest")
+        .setUseZipForNativeFiles(true)
         .addCompilationUnit(
-            "NativeClass",
+            "nativeclasstest.NativeClass",
             "public class NativeClass {",
             "  public native void nativeInstanceMethod();",
             "}")
         .addNativeFile(
-            "NativeClass", "NativeClass.prototype.m_nativeInstanceMethod = function () {}")
-        .addNativeFile("ExtraClass", "ExtraClass.prototype.m_nativeInstanceMethod = function () {}")
+            "nativeclasstest.NativeClass",
+            "NativeClass.prototype.m_nativeInstanceMethod = function () {}")
+        .addNativeFile(
+            "nativeclasstest.ExtraClass",
+            "ExtraClass.prototype.m_nativeInstanceMethod = function () {}")
         .assertTranspileFails()
         .assertErrorsWithoutSourcePosition(
             "Unused native file 'nativeclasstest/ExtraClass.native.js'.");
   }
 
   public void testOutputsToDirectory() throws IOException {
-    Path outputLocation = Files.createTempDirectory("outputdir");
     newTesterWithDefaults()
-        .setOutputPath(outputLocation)
-        .setJavaPackage("test")
-        .addCompilationUnit("Foo", "public class Foo {", "  public class InnerFoo {}", "}")
-        .addCompilationUnit("Bar", "public class Bar {", "  public class InnerBar {}", "}")
+        .setOutputPath(Files.createTempDirectory("outputdir"))
+        .addCompilationUnit("test.Foo", "public class Foo {", "  public class InnerFoo {}", "}")
+        .addCompilationUnit("test.Bar", "public class Bar {", "  public class InnerBar {}", "}")
         .assertTranspileSucceeds()
         .assertOutputFilesExist(
             "test/Foo.java.js",
@@ -203,8 +235,7 @@ public class CommandLineInvocationTest extends TestCase {
 
     // Test transpilation of java file without java package
     newTesterWithDefaults()
-        .setOutputPath(outputLocation)
-        .setJavaPackage("")
+        .setOutputPath(Files.createTempDirectory("outputdir"))
         .addCompilationUnit("Foo", "public class Foo {}")
         .assertTranspileSucceeds()
         .assertOutputFilesExist("Foo.java.js", "Foo.impl.java.js");
@@ -214,9 +245,8 @@ public class CommandLineInvocationTest extends TestCase {
     Path outputLocation = Files.createTempFile("output", ".zip");
     newTesterWithDefaults()
         .setOutputPath(outputLocation)
-        .setJavaPackage("test")
-        .addCompilationUnit("Foo", "public class Foo {", "  public class InnerFoo {}", "}")
-        .addCompilationUnit("Bar", "public class Bar {", "  public class InnerBar {}", "}")
+        .addCompilationUnit("test.Foo", "public class Foo {", "  public class InnerFoo {}", "}")
+        .addCompilationUnit("test.Bar", "public class Bar {", "  public class InnerBar {}", "}")
         .assertTranspileSucceeds();
 
     try (ZipFile zipFile = new ZipFile(outputLocation.toFile())) {

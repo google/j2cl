@@ -76,7 +76,7 @@ public class OutputGeneratorStage {
       for (Type type : j2clCompilationUnit.getTypes()) {
         JavaScriptImplGenerator jsImplGenerator = new JavaScriptImplGenerator(problems, type);
 
-        String typeRelativePath = getRelativePath(type.getDeclaration());
+        String typeRelativePath = getPackageRelativePath(type.getDeclaration());
 
         NativeJavaScriptFile matchingNativeFile =
             getMatchingNativeFile(nativeFilesByPath, j2clCompilationUnit, type);
@@ -179,9 +179,9 @@ public class OutputGeneratorStage {
     }
 
     // Error if any of the native implementation files were not used.
-    for (Map.Entry<String, NativeJavaScriptFile> fileEntry : nativeFilesByPath.entrySet()) {
-      if (!fileEntry.getValue().wasUsed()) {
-        problems.error("Unused native file '%s'.", fileEntry.getValue());
+    for (NativeJavaScriptFile file : nativeFilesByPath.values()) {
+      if (!file.wasUsed()) {
+        problems.error("Unused native file '%s'.", file);
       }
     }
   }
@@ -242,7 +242,8 @@ public class OutputGeneratorStage {
             problems);
     if (!readableOutput.isEmpty()) {
       Path absolutePathForReadableSourceMap =
-          outputPath.resolve(getRelativePath(type.getDeclaration()) + READABLE_MAPPINGS_SUFFIX);
+          outputPath.resolve(
+              getPackageRelativePath(type.getDeclaration()) + READABLE_MAPPINGS_SUFFIX);
       J2clUtils.writeToFile(absolutePathForReadableSourceMap, readableOutput, problems);
     }
   }
@@ -252,7 +253,7 @@ public class OutputGeneratorStage {
    * and having it available as output simplifies the process of source debugging in the browser.
    */
   private void copyJavaSourcesToOutput(CompilationUnit j2clUnit) {
-    String relativePath = getRelativePath(j2clUnit);
+    String relativePath = getPackageRelativePath(j2clUnit);
     Path absolutePath = outputPath.resolve(relativePath + ".java");
     J2clUtils.copyFile(Paths.get(j2clUnit.getFilePath()), absolutePath, problems);
   }
@@ -263,17 +264,18 @@ public class OutputGeneratorStage {
   }
 
   /** Returns the relative output path for a given type. */
-  private static String getRelativePath(TypeDeclaration typeDeclaration) {
-    return getRelativePath(typeDeclaration.getPackageName(), typeDeclaration.getSimpleBinaryName());
+  private static String getPackageRelativePath(TypeDeclaration typeDeclaration) {
+    return getPackageRelativePath(
+        typeDeclaration.getPackageName(), typeDeclaration.getSimpleBinaryName());
   }
 
   /** Returns the relative output path for a given type. */
-  private static String getRelativePath(CompilationUnit compilationUnit) {
-    return getRelativePath(compilationUnit.getPackageName(), compilationUnit.getName());
+  private static String getPackageRelativePath(CompilationUnit compilationUnit) {
+    return getPackageRelativePath(compilationUnit.getPackageName(), compilationUnit.getName());
   }
 
   /** Returns the relative output path for a given type. */
-  private static String getRelativePath(String packageName, String suffix) {
+  private static String getPackageRelativePath(String packageName, String suffix) {
     return Paths.get(packageName.replace('.', '/'), suffix).toString();
   }
 
@@ -281,16 +283,17 @@ public class OutputGeneratorStage {
       Map<String, NativeJavaScriptFile> nativeFilesByPath,
       CompilationUnit j2clCompilationUnit,
       Type type) {
-    // Locate matching native files that either have the same relative package as their Java
-    // class (useful when Java and native.js files started in different directories on disk).
-    // TODO(goktug): reconsider matching with relative name.
+
+    // Locate the files that have a package path relative to the root according to Java convention.
+    // This is useful when the files are in different directories on disk.
     TypeDeclaration typeDeclaration = type.getUnderlyingTypeDeclaration();
-    String typeRelativePath = getRelativePath(typeDeclaration);
+    String typeRelativePath = getPackageRelativePath(typeDeclaration);
 
     NativeJavaScriptFile matchingNativeFile = nativeFilesByPath.get(typeRelativePath);
     if (matchingNativeFile != null) {
       return matchingNativeFile;
     }
+
     String typeAbsolutePath =
         FrontendUtils.getJavaPath(getAbsolutePath(j2clCompilationUnit, typeDeclaration));
     return nativeFilesByPath.get(typeAbsolutePath);

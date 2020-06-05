@@ -49,10 +49,21 @@ public class FrontendUtils {
       return new AutoValue_FrontendUtils_FileInfo(sourcePath, originalPath, targetPath);
     }
 
+    /**
+     * The location of the file on disk, for the purpose of reading its contents.
+     *
+     * <p>This might be the original file path or a path in a temp directory where the file was
+     * extracted from a zip file for example.
+     */
     public abstract String sourcePath();
 
     public abstract String originalPath();
 
+    /**
+     * The root relative path.
+     *
+     * <p>This is the path from the java root or the absolute path on disk if there is no Java root.
+     */
     public abstract String targetPath();
 
     @Override

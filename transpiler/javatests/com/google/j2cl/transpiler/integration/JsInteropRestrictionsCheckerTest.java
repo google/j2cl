@@ -25,7 +25,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testSystemGetPropertyFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType",
             "class Main {",
@@ -50,7 +50,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testSystemGetPropertySucceeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType",
             "class Main {",
@@ -64,7 +64,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
   // TODO(b/37579830): Finalize checker implementation and enable this test.
   public void disabled_testCollidingAccidentalOverrideConcreteMethodFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType",
             "interface Foo {",
@@ -87,7 +87,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testCollidingAccidentalOverrideAbstractMethodFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType",
             "interface Foo {",
@@ -110,7 +110,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
   // TODO(b/37579830): Finalize checker implementation and enable this test.
   public void disabled_testCollidingAccidentalOverrideHalfAndHalfFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "interface Foo {",
             "  void doIt(Foo foo);",
@@ -134,7 +134,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testOverrideNoNameSucceeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "class Parent {",
             "  @JsMethod(name = \"a\")",
@@ -175,7 +175,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testCollidingFieldsFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "public class Buggy {",
             "  @JsProperty",
@@ -190,7 +190,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testJsPropertyNonGetterStyleSucceeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType",
             "public interface Buggy {",
@@ -202,7 +202,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testJsPropertyGetterStyleSucceeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType",
             "public abstract class Buggy {",
@@ -218,7 +218,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testJsPropertyIncorrectGetterStyleFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "public interface Buggy {",
             "  @JsProperty int isX();",
@@ -245,7 +245,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testJsPropertyNonGetterStyleFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType",
             "public interface Buggy {",
@@ -264,7 +264,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testCollidingJsPropertiesTwoGettersFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType",
             "public interface Buggy {",
@@ -280,7 +280,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testCollidingNativeJsPropertiesSucceeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType(isNative=true)",
             "public class Buggy {",
@@ -302,7 +302,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testCollidingJsPropertiesTwoSettersFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType",
             "public interface Buggy {",
@@ -318,7 +318,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testCollidingJsMethodAndJsPropertyGetterFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "interface IBuggy {",
             "  @JsMethod",
@@ -339,7 +339,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testCollidingJsMethodAndJsPropertySetterFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "interface IBuggy {",
             "  @JsMethod",
@@ -360,7 +360,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testCollidingPropertyAccessorsFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "public class Buggy {",
             "  @JsProperty",
@@ -375,7 +375,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testCollidingMethodsFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "public class Buggy {",
             "  @JsMethod",
@@ -390,7 +390,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testCollidingMethodToPropertyAccessorFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "public class Buggy {",
             "  @JsProperty",
@@ -405,7 +405,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testCollidingMethodToFieldFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "public class Buggy {",
             "  @JsMethod",
@@ -420,7 +420,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testCollidingMethodToFieldJsTypeFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType",
             "public class Buggy {",
@@ -434,7 +434,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testCollidingJsMethodWithObjectMethod() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "interface Buggy {",
             "  @JsMethod(name = \"equals\")",
@@ -447,7 +447,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testCollidingMethodToMethodJsTypeFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType",
             "public class Buggy {",
@@ -461,7 +461,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testValidCollidingSubclassMembersSucceeds() {
     assertTranspileSucceeds(
-            "NonJsTypeSubclass",
+            "test.NonJsTypeSubclass",
             "import jsinterop.annotations.*;",
             "@JsType",
             "class JsTypeParent {",
@@ -492,7 +492,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testCollidingSubclassMembersJsTypeFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType",
             "class ParentBuggy {",
@@ -515,7 +515,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testCollidingSubclassMethodToMethodInterfaceJsTypeFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType",
             "interface IBuggy1 {",
@@ -556,7 +556,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
   // TODO(b/36232268): enable once the bug is fixed.
   public void disabled_testCollidingSubclassMethodToBridgeFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "public class Buggy<T> {",
             "  @JsMethod",
@@ -575,7 +575,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testCollidingSubclassMethodToMethodJsTypeFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType",
             "class ParentBuggy {",
@@ -592,7 +592,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testCollidingJsMethodToJsPropertyFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "class ParentBuggy {",
             "  @JsMethod boolean foo() { return false; }",
@@ -621,7 +621,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testCollidingSubclassMethodToMethodTwoLayerInterfaceJsTypeFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType",
             "interface IParentBuggy1 {",
@@ -648,7 +648,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testNonCollidingSyntheticBridgeMethodSucceeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "interface Comparable<T> {",
             "  int compareTo(T other);",
@@ -663,7 +663,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testCollidingSyntheticBridgeMethodSucceeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType",
             "interface Comparable<T> {",
@@ -679,7 +679,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testSpecializeReturnTypeInImplementorSucceeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType",
             "interface I {",
@@ -694,7 +694,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testSpecializeReturnTypeInSubclassSucceeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType",
             "class S {",
@@ -709,7 +709,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testCollidingTwoLayerSubclassFieldToFieldJsTypeFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType",
             "class ParentParentBuggy {",
@@ -730,7 +730,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testShadowedSuperclassJsMethodFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "class ParentBuggy {",
             "  @JsMethod private void foo() {}",
@@ -745,7 +745,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testRenamedSuperclassJsMethodFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType",
             "class ParentBuggy {",
@@ -763,7 +763,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testRenamedSuperInterfaceJsMethodFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType",
             "interface ParentBuggy {",
@@ -781,7 +781,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
   // TODO(b/37579830): Finalize checker implementation and enable this test.
   public void disabled_testAccidentallyRenamedSuperInterfaceJsMethodFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType",
             "interface IBuggy {",
@@ -801,7 +801,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testRenamedSuperclassJsPropertyFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "class ParentBuggy {",
             "  @JsProperty public int getFoo() { return 0; }",
@@ -817,7 +817,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testJsPropertyDifferentFlavourInSubclassFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType",
             "class ParentBuggy {",
@@ -834,7 +834,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testConsistentPropertyTypeSucceeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType",
             "interface IBuggy {",
@@ -852,7 +852,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testInconsistentGetSetPropertyTypeFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType",
             "interface IBuggy {",
@@ -874,7 +874,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testInconsistentIsSetPropertyTypeFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType",
             "interface IBuggy {",
@@ -896,7 +896,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testJsPropertySuperCallSucceeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType class Super {",
             "  @JsProperty public int getX() { return 5; }",
@@ -909,7 +909,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testJsPropertyOnStaticMethodSucceeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType public class Buggy {",
             "  @JsProperty public static int getX() { return 0; }",
@@ -919,7 +919,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testJsPropertyCallSucceeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType class Super {",
             "  @JsProperty public int getX() { return 5; }",
@@ -932,7 +932,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testJsPropertyAccidentalSuperCallSucceeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType class Super {",
             "  @JsProperty public int getX() { return 5; }",
@@ -947,7 +947,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testJsPropertyOverrideSucceeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType class Super {",
             "  @JsProperty public void setX(int x) {  }",
@@ -970,7 +970,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testMixingJsMethodJsPropertyFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "class Super {",
             "  @JsMethod public int getY() { return 5; }",
@@ -994,7 +994,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
   // should fail for JSNI reasons.
   public void testJsMethodJSNIVarargsSucceeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "public class Buggy {",
             "  @JsMethod public native void m(int i, int... z) /*-{ return arguments[i]; }-*/;",
@@ -1006,7 +1006,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testMultiplePrivateConstructorsSucceeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType",
             "public class Buggy {",
@@ -1019,7 +1019,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
   public void testJsConstructorSubclassSucceeds() {
     newTesterWithDefaults()
         .addCompilationUnit(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType",
             "public class Buggy {",
@@ -1067,31 +1067,31 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  public ExplicitSubImplicitSuper() { super(); }",
             "}")
         .addCompilationUnit(
-            "ImplicitConstructor",
+            "test.ImplicitConstructor",
             "import jsinterop.annotations.*;",
             "@JsType",
             "public class ImplicitConstructor extends Buggy {",
             "}")
         .addCompilationUnit(
-            "SubImplicitConstructor",
+            "test.SubImplicitConstructor",
             "import jsinterop.annotations.*;",
             "@JsType",
             "public class SubImplicitConstructor extends ImplicitConstructor {",
             "}")
         .addCompilationUnit(
-            "ImplicitSubImplicitSuper",
+            "test.ImplicitSubImplicitSuper",
             "import jsinterop.annotations.*;",
             "@JsType",
             "public class ImplicitSubImplicitSuper extends ImplicitSubNativeSuper {",
             "}")
         .addCompilationUnit(
-            "ImplicitSubNativeSuper",
+            "test.ImplicitSubNativeSuper",
             "import jsinterop.annotations.*;",
             "@JsType",
             "public class ImplicitSubNativeSuper extends NativeBuggy {",
             "}")
         .addCompilationUnit(
-            "ImplicitSubExplicitSuper",
+            "test.ImplicitSubExplicitSuper",
             "import jsinterop.annotations.*;",
             "@JsType",
             "public class ImplicitSubExplicitSuper extends ExplicitSubImplicitSuper {",
@@ -1102,7 +1102,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
   public void testJsConstructorBadSubclassFails() {
     newTesterWithDefaults()
         .addCompilationUnit(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType",
             "class BuggyJsType {",
@@ -1172,21 +1172,21 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "class SomeClass2 extends NativeType {",
             "}")
         .addCompilationUnit(
-            "BadImplicitJsConstructor",
+            "test.BadImplicitJsConstructor",
             "import jsinterop.annotations.*;",
             "@JsType",
             "public class BadImplicitJsConstructor extends SubBuggyJsType {",
             // Error: Implicit constructor delegates to the wrong super constructor.
             "}")
         .addCompilationUnit(
-            "ImplicitConstructor",
+            "test.ImplicitConstructor",
             "import jsinterop.annotations.*;",
             "@JsType",
             "public class ImplicitConstructor extends BuggyJsType {",
             // Correct: Implicit constructor delegating to the JsConstructor.
             "}")
         .addCompilationUnit(
-            "ImplicitJsConstructor",
+            "test.ImplicitJsConstructor",
             "import jsinterop.annotations.*;",
             "@JsType",
             "public class ImplicitJsConstructor extends BuggyJsType {",
@@ -1215,7 +1215,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testMultipleConstructorsNotAllDelegatedToJsConstructorFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType",
             "public class Buggy {",
@@ -1231,7 +1231,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testMultipleJsConstructorsFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType",
             "public class Buggy {",
@@ -1245,7 +1245,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testNonCollidingAccidentalOverrideSucceeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "interface Foo {",
             "  void doIt(Object foo);",
@@ -1264,7 +1264,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testJsNameInvalidNamesFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType(name = \"a.b.c\") public class Buggy {",
             "   @JsMethod(name = \"34s\") public void m() {}",
@@ -1298,7 +1298,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testJsNameInvalidNamespacesFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType class Super {",
             "   @JsMethod(name = \"custom\") public void r() {}",
@@ -1341,7 +1341,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testJsNameGlobalNamespacesSucceeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType(namespace = JsPackage.GLOBAL) public class Buggy {",
             "   @JsMethod(namespace = JsPackage.GLOBAL) public static native void m();",
@@ -1372,7 +1372,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testSingleJsTypeSucceeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType",
             "public class Buggy {",
@@ -1384,7 +1384,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testJsFunctionSucceeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsFunction",
             "interface Function {",
@@ -1436,7 +1436,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testJsFunctionFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "import java.util.List;",
             "@JsFunction",
@@ -1625,7 +1625,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testNativeJsTypeStaticInitializerSucceeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType(isNative = true)",
             "public class Buggy {",
@@ -1644,7 +1644,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testNativeJsTypeInstanceInitializerFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType(isNative = true)",
             "public class Buggy {",
@@ -1658,7 +1658,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testNativeJsTypeNonEmptyConstructorFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType(isNative = true)",
             "public class Buggy {",
@@ -1673,14 +1673,14 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
   public void testNativeJsTypeImplicitSuperSucceeds() {
     newTesterWithDefaults()
         .addCompilationUnit(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType(isNative = true)",
             "public class Buggy extends Super {",
             "  public Buggy(int n) {}",
             "}")
         .addCompilationUnit(
-            "Super",
+            "test.Super",
             "import jsinterop.annotations.*;",
             "@JsType(isNative = true)",
             "public class Super {",
@@ -1693,7 +1693,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
   public void testNativeJsTypeExplicitSuperSucceeds() {
     newTesterWithDefaults()
         .addCompilationUnit(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType(isNative = true)",
             "public class Buggy extends Super {",
@@ -1702,7 +1702,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  }",
             "}")
         .addCompilationUnit(
-            "Super",
+            "test.Super",
             "import jsinterop.annotations.*;",
             "@JsType(isNative = true)",
             "public class Super {",
@@ -1715,7 +1715,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
   public void testNativeJsTypeExplicitSuperWithEffectSucceeds() {
     newTesterWithDefaults()
         .addCompilationUnit(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType(isNative = true)",
             "public class Buggy extends Super {",
@@ -1724,7 +1724,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  }",
             "}")
         .addCompilationUnit(
-            "Super",
+            "test.Super",
             "import jsinterop.annotations.*;",
             "@JsType(isNative = true)",
             "public class Super {",
@@ -1736,7 +1736,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testJsTypeInterfaceInInstanceofFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType(isNative=true) interface IBuggy {}",
             "@JsType public class Buggy {",
@@ -1748,7 +1748,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testNativeJsTypeEnumFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType(isNative = true)",
             "public enum Buggy {",
@@ -1761,7 +1761,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testJsEnumFails() {
     assertTranspileFails(
-            "MyJsEnum",
+            "test.MyJsEnum",
             "import jsinterop.annotations.*;",
             "@JsEnum",
             "public enum MyJsEnum {",
@@ -1850,7 +1850,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testJsEnumSucceeds() {
     assertTranspileSucceeds(
-            "MyJsEnum",
+            "test.MyJsEnum",
             "import jsinterop.annotations.*;",
             "import java.util.function.*;",
             "@JsEnum",
@@ -1876,7 +1876,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testCustomValuedJsEnumFails() {
     assertTranspileFails(
-            "CustomValued",
+            "test.CustomValued",
             "import jsinterop.annotations.*;",
             "@JsEnum(hasCustomValue = true)",
             "public enum CustomValued {",
@@ -1955,7 +1955,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testCustomValuedJsEnumSucceeds() {
     assertTranspileSucceeds(
-            "CustomValued",
+            "test.CustomValued",
             "import jsinterop.annotations.*;",
             "@JsEnum(hasCustomValue = true)",
             "public enum CustomValued {",
@@ -1971,7 +1971,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testNativeJsEnumFails() {
     assertTranspileFails(
-            "Native",
+            "test.Native",
             "import jsinterop.annotations.*;",
             "@JsEnum(isNative = true)",
             "public enum Native {",
@@ -2018,7 +2018,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testNativeJsEnumSucceeds() {
     assertTranspileSucceeds(
-            "Native",
+            "test.Native",
             "import jsinterop.annotations.*;",
             "@JsEnum(isNative = true)",
             "public enum Native {",
@@ -2052,7 +2052,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testJsEnumAssignmentExpressionFails() {
     assertTranspileFails(
-            "Main",
+            "test.Main",
             "import java.io.Serializable;",
             "import jsinterop.annotations.*;",
             "public class Main {",
@@ -2083,7 +2083,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testJsEnumParameterAssignmentFails() {
     assertTranspileFails(
-            "Main",
+            "test.Main",
             "import java.io.Serializable;",
             "import java.util.ArrayList;",
             "import java.util.List;",
@@ -2120,7 +2120,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testJsEnumAssignmentSucceeds() {
     assertTranspileSucceeds(
-            "Main",
+            "test.Main",
             "import java.io.Serializable;",
             "import java.util.ArrayList;",
             "import java.util.List;",
@@ -2222,7 +2222,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testJsEnumArraysSucceeds() {
     assertTranspileSucceeds(
-            "Main",
+            "test.Main",
             "import java.util.List;",
             "import java.util.function.Function;",
             "import jsinterop.annotations.*;",
@@ -2271,7 +2271,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testLocalJsTypeFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "public class Buggy { void m() { @JsType class Local {} } }")
         .assertErrorsWithoutSourcePosition("Local class 'Local' cannot be a JsType.");
@@ -2280,12 +2280,12 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
   public void testNativeJsTypeImplementsNativeJsTypeSucceeds() {
     newTesterWithDefaults()
         .addCompilationUnit(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType(isNative = true)",
             "public class Buggy implements Super {}")
         .addCompilationUnit(
-            "Super",
+            "test.Super",
             "import jsinterop.annotations.*;",
             "@JsType(isNative = true)",
             "public interface Super {}")
@@ -2296,12 +2296,12 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
   public void testNativeJsTypeInterfaceImplementsNativeJsTypeSucceeds() {
     newTesterWithDefaults()
         .addCompilationUnit(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType(isNative = true)",
             "public interface Buggy extends Super {}")
         .addCompilationUnit(
-            "Super",
+            "test.Super",
             "import jsinterop.annotations.*;",
             "@JsType(isNative = true)",
             "public interface Super {}")
@@ -2312,12 +2312,12 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
   public void testNativeJsTypeExtendsJsTypeFails() {
     newTesterWithDefaults()
         .addCompilationUnit(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType(isNative = true)",
             "public class Buggy extends Super {}")
         .addCompilationUnit(
-            "Super", "import jsinterop.annotations.*;", "@JsType", "public class Super {}")
+            "test.Super", "import jsinterop.annotations.*;", "@JsType", "public class Super {}")
         .assertTranspileFails()
         .assertErrorsWithoutSourcePosition(
             "Native JsType 'Buggy' can only extend native JsType classes.");
@@ -2326,12 +2326,12 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
   public void testNativeJsTypeImplementsJsTypeInterfaceFails() {
     newTesterWithDefaults()
         .addCompilationUnit(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType(isNative = true)",
             "public class Buggy implements Interface {}")
         .addCompilationUnit(
-            "Interface",
+            "test.Interface",
             "import jsinterop.annotations.*;",
             "@JsType",
             "public interface Interface {}")
@@ -2343,12 +2343,12 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
   public void testNativeJsTypeInterfaceExtendsJsTypeInterfaceFails() {
     newTesterWithDefaults()
         .addCompilationUnit(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType(isNative = true)",
             "public interface Buggy extends Interface {}")
         .addCompilationUnit(
-            "Interface",
+            "test.Interface",
             "import jsinterop.annotations.*;",
             "@JsType",
             "public interface Interface {}")
@@ -2360,11 +2360,11 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
   public void testNativeJsTypeImplementsNonJsTypeFails() {
     newTesterWithDefaults()
         .addCompilationUnit(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType(isNative = true)",
             "public class Buggy implements Interface {}")
-        .addCompilationUnit("Interface", "public interface Interface {}")
+        .addCompilationUnit("test.Interface", "public interface Interface {}")
         .assertTranspileFails()
         .assertErrorsWithoutSourcePosition(
             "Native JsType 'Buggy' can only implement native JsType interfaces.");
@@ -2373,11 +2373,11 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
   public void testNativeJsTypeInterfaceExtendsNonJsTypeFails() {
     newTesterWithDefaults()
         .addCompilationUnit(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType(isNative = true)",
             "public interface Buggy extends Super {}")
-        .addCompilationUnit("Super", "public interface Super {}")
+        .addCompilationUnit("test.Super", "public interface Super {}")
         .assertTranspileFails()
         .assertErrorsWithoutSourcePosition(
             "Native JsType 'Buggy' can only extend native JsType interfaces.");
@@ -2385,7 +2385,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testNativeJsTypeInterfaceDefaultMethodsFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType(isNative=true) interface Interface {",
             "  @JsOverlay default void someOtherMethod() {}",
@@ -2408,7 +2408,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testJsOptionalSucceeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "public class Buggy<T> {",
             "  @JsConstructor public Buggy(@JsOptional Object a) {}",
@@ -2440,7 +2440,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testJsOptionalNotJsOptionalOverrideFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "interface Interface {",
             "  @JsMethod void foo(@JsOptional Object o);",
@@ -2476,7 +2476,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testJsOptionalNotAtEndFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "public class Buggy {",
             "   @JsConstructor",
@@ -2500,7 +2500,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testJsOptionalOnInvalidParametersFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "public class Buggy {",
             "   @JsConstructor public Buggy(@JsOptional int a) {}",
@@ -2514,7 +2514,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testJsOptionalOnNonJsExposedMethodsFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "public class Buggy {",
             "  public void fun(int a, @JsOptional Object b, @JsOptional String c) {}",
@@ -2534,7 +2534,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testJsOverlayOnNativeJsTypeInterfaceSucceeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType(isNative = true)",
             "public interface Buggy {",
@@ -2546,7 +2546,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testJsOverlayOnNativeJsTypeMemberSucceeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType(isNative=true) final class FinalType {",
             "  @JsOverlay public void n() { }",
@@ -2575,7 +2575,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testJsOverlayWithSuperFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType(isNative=true) class SuperBuggy {",
             "  public native void m();",
@@ -2589,7 +2589,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testJsOverlayImplementingInterfaceMethodFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType(isNative=true) interface IBuggy {",
             "  void m();",
@@ -2606,7 +2606,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testJsOverlayOverridingSuperclassMethodFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType(isNative=true) class Super {",
             "  public native void m();",
@@ -2623,7 +2623,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testJsOverlayOnNonFinalMethodAndInstanceFieldFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType(isNative = true)",
             "public class Buggy {",
@@ -2638,7 +2638,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testJsOverlayWithStaticInitializerSucceeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType(isNative = true)",
             "public class Buggy {",
@@ -2651,7 +2651,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testJsOverlayOnNativeMethodFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType(isNative = true)",
             "public class Buggy {",
@@ -2668,7 +2668,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
   public void testJsOverlayOnJsMemberFails() {
     // JsOverlay in constructors is checked by JDT.
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType(isNative=true) public class Buggy {",
             "  @JsOverlay public Buggy() { }",
@@ -2677,7 +2677,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "The annotation @JsOverlay is disallowed for this location");
 
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType(isNative=true) public class Buggy {",
             "  @JsMethod @JsOverlay public final void m() { }",
@@ -2695,7 +2695,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testJsOverlayOnNonNativeJsTypeFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType",
             "public class Buggy {",
@@ -2712,7 +2712,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testJsTypeExtendsNativeJsTypeSucceeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType(isNative=true) class Super {",
             "}",
@@ -2723,7 +2723,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testJsTypeExtendsNonJsTypeSucceeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "class Super {",
             "}",
@@ -2734,7 +2734,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testJsTypeImplementsNativeJsTypeInterfaceSucceeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType(isNative=true) interface Interface {",
             "}",
@@ -2745,7 +2745,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testJsTypeImplementsNonJsTypeInterfaceSucceeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "interface Interface {",
             "}",
@@ -2756,7 +2756,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testJsTypeInterfaceExtendsNativeJsTypeInterfaceSucceeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType(isNative=true) interface Interface {",
             "}",
@@ -2767,7 +2767,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testJsTypeInterfaceExtendsNonJsTypeInterfaceSucceeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "interface Interface {",
             "}",
@@ -2778,7 +2778,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testNativeJsTypeExtendsNativeJsTypeSucceeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType(isNative=true) class Super {",
             "  public native int hashCode();",
@@ -2808,7 +2808,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testNativeJsTypeBadMembersFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType(isNative=true) interface Interface {",
             "  @JsIgnore public void n();",
@@ -2861,7 +2861,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testNativeJsTypeImplementingJavaLangObjectMethodsSucceeds() {
     assertTranspileSucceeds(
-            "NativeType",
+            "test.NativeType",
             "import jsinterop.annotations.*;",
             "@JsType(isNative=true) class NativeType {}",
             "interface B { int hashCode(); }",
@@ -2873,7 +2873,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testSubclassOfNativeJsTypeBadMembersFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType(isNative=true) class NativeType {",
             "  @JsMethod(name =\"string\")",
@@ -2916,7 +2916,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testNativeMethodOnJsTypeSucceeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType",
             "public class Buggy {",
@@ -2931,12 +2931,12 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
   public void testNativeMethodNotJsMethodWarns() {
     newTesterWithDefaults()
         .addCompilationUnit(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "public class Buggy {",
             "  public native void m();",
             "}")
-        .addNativeFile("Buggy")
+        .addNativeFile("test.Buggy")
         .assertTranspileSucceeds()
         .assertWarningsWithoutSourcePosition(
             "[unusable-by-js] Native 'void Buggy.m()' is exposed to JavaScript without "
@@ -2945,7 +2945,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testNativeJsTypeSucceeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType(isNative=true) abstract class Buggy {",
             "  public static native void m();",
@@ -2986,7 +2986,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testNativeJsTypeFieldsSucceeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType(isNative = true)",
             "public class Buggy {",
@@ -3002,7 +3002,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testNativeJsTypeDefaultConstructorSucceeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType(isNative = true)",
             "public class Buggy {}",
@@ -3012,7 +3012,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testNonJsTypeExtendingNativeJsTypeWithInstanceMethodSucceeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType(isNative=true) class Super {",
             "  public native void m(Object o);",
@@ -3026,7 +3026,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testClassesExtendingNativeJsTypeInterfaceWithOverlaySucceeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType(isNative=true) interface Super {",
             "  @JsOverlay default void fun() {}",
@@ -3040,7 +3040,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testNonJsTypeExtendingNativeJsTypeWithInstanceMethodOverloadsSucceeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType(isNative=true) class Super {",
             "  public native void m(Object o);",
@@ -3055,7 +3055,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testNonJsTypeWithNativeStaticMethodOverloadsSucceeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "public class Buggy {",
             "  @JsMethod public static native void m(Object o);",
@@ -3092,7 +3092,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testNonSingleOverloadImplementationFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "class Super {",
             "  @JsMethod public void m(int o) { }",
@@ -3108,7 +3108,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testNonJsTypeExtendsJsTypeSucceeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType class Super {",
             "  Super() {}",
@@ -3120,7 +3120,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testNonJsTypeImplementsJsTypeInterfaceSucceeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType interface Interface {",
             "}",
@@ -3131,7 +3131,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testNonJsTypeInterfaceExtendsJsTypeInterfaceSucceeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType interface Interface {",
             "}",
@@ -3142,7 +3142,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testNonJsTypeExtendsNativeJsTypeSucceeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType(isNative=true) class Super {",
             "  public native void m();",
@@ -3156,7 +3156,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testNonJsTypeImplementsNativeJsTypeInterfaceSucceeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType(isNative=true) interface Interface {",
             "}",
@@ -3167,9 +3167,9 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testNonJsTypeInterfaceExtendsNativeJsTypeInterfaceSucceeds() {
     newTesterWithDefaults()
-        .addCompilationUnit("Buggy", "public interface Buggy extends Interface {}")
+        .addCompilationUnit("test.Buggy", "public interface Buggy extends Interface {}")
         .addCompilationUnit(
-            "Interface",
+            "test.Interface",
             "import jsinterop.annotations.*;",
             "@JsType(isNative = true)",
             "public interface Interface {}")
@@ -3179,7 +3179,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testJsAsyncSucceeeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType(namespace = JsPackage.GLOBAL)",
             "class Promise {",
@@ -3198,7 +3198,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testJsAsyncFails() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "import java.util.List;",
             "@JsType(namespace = JsPackage.GLOBAL)",
@@ -3231,7 +3231,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testUnusableByJsSuppressionSucceeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "class A {}",
             "@JsType @SuppressWarnings(\"unusable-by-js\")", // SuppressWarnings on the class.
@@ -3255,7 +3255,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testUsableByJsTypesSucceeds() {
     assertTranspileSucceeds(
-            "A",
+            "test.A",
             "import jsinterop.annotations.*;",
             "@JsType public class A {}",
             "@JsType interface I<T> {",
@@ -3301,7 +3301,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testUnusableByNonJsMembersSucceeds() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "class A {}",
             "@JsType public class Buggy {",
@@ -3313,8 +3313,9 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testUnusableByJsWarns() {
     newTesterWithDefaults()
+        .setUseZipForNativeFiles(true)
         .addCompilationUnit(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "class A {}",
             "@JsType interface I {}",
@@ -3349,7 +3350,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  public void f8(List<List<MyJsEnum>> l) {}", // parameterized by List<JsEnum> fails
             "  public void f17() { new Object() { @JsMethod void b(Long a){} }; }",
             "}")
-        .addNativeFile("C")
+        .addNativeFile("test.C")
         .assertTranspileSucceeds()
         .assertWarningsWithoutSourcePosition(
             "[unusable-by-js] Type of parameter 'a' in 'void C.fc1(A a)' is not usable by but "
@@ -3398,7 +3399,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testUnusableByJsAccidentalOverrideSuppressionWarns() {
     assertTranspileSucceeds(
-            "Buggy",
+            "test.Buggy",
             "import jsinterop.annotations.*;",
             "@JsType",
             "interface Foo {",
@@ -3419,7 +3420,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testCorrectLineNumbers() {
     assertTranspileFails(
-            "Buggy",
+            "test.Buggy",
             // line 1: package test; // implicit
             // line 2
             "import jsinterop.annotations.*;",
