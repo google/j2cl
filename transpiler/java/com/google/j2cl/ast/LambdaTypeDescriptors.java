@@ -17,6 +17,7 @@ package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.ImmutableMap.toImmutableMap;
 
 import com.google.common.collect.ImmutableList;
@@ -55,6 +56,9 @@ public class LambdaTypeDescriptors {
     DeclaredTypeDescriptor jsFunctionInterface =
         createJsFunctionTypeDescriptor(functionalInterfaceTypeDescriptor);
 
+    // TODO(b/158085463): type arguments are only considering that type functional interface is
+    // the only interface parameterized missing the case of intersection types with parameters
+    // in the non functional interfaces.
     ImmutableList<TypeDescriptor> typeArgumentDescriptors =
         ImmutableList.<TypeDescriptor>builder()
             .addAll(functionalInterfaceTypeDescriptor.getTypeArgumentDescriptors())
@@ -120,6 +124,9 @@ public class LambdaTypeDescriptors {
         enclosingTypeDeclaration.synthesizeInnerClassComponents(
             FUNCTIONAL_INTERFACE_ADAPTOR_CLASS_NAME, uniqueId.orElse(null));
 
+    // TODO(b/158085463): type parameters are only considering that type functional interface is
+    // the only interface parameterized missing the case of intersection types with parameters
+    // in the non functional interfaces.
     ImmutableList<TypeVariable> typeParameterDescriptors =
         ImmutableList.<TypeVariable>builder()
             .addAll(
@@ -127,10 +134,10 @@ public class LambdaTypeDescriptors {
                     .getTypeDeclaration()
                     .getTypeParameterDescriptors())
             .addAll(
-                    functionalInterfaceTypeDescriptor
-                        .toUnparameterizedTypeDescriptor()
-                        .getSingleAbstractMethodDescriptor()
-                        .getTypeParameterTypeDescriptors())
+                functionalInterfaceTypeDescriptor
+                    .toUnparameterizedTypeDescriptor()
+                    .getSingleAbstractMethodDescriptor()
+                    .getTypeParameterTypeDescriptors())
             .build();
 
     return TypeDeclaration.newBuilder()
@@ -196,19 +203,19 @@ public class LambdaTypeDescriptors {
   /** Returns the TypeDescriptor for lambda instances of the functional interface. */
   public static DeclaredTypeDescriptor createJsFunctionTypeDescriptor(
       TypeDescriptor typeDescriptor) {
-    DeclaredTypeDescriptor functionalTypeDescriptor =
-        typeDescriptor.getFunctionalInterface().toUnparameterizedTypeDescriptor();
+    DeclaredTypeDescriptor functionalTypeDescriptor = typeDescriptor.getFunctionalInterface();
     checkArgument(!functionalTypeDescriptor.isJsFunctionInterface());
 
     MethodDescriptor functionalMethodDescriptor =
         functionalTypeDescriptor.getSingleAbstractMethodDescriptor();
 
     // Remove varargs if the functional method is not a JsMethod, otherwise it will become
-    // JsVarargs and loose runtime type checking on the varargs parameter.
+    // JsVarargs due to being varargs in a JsFunction, that will cause it to loose
+    // runtime type checking on the varargs parameter.
     MethodDescriptor jsFunctionMethodDescriptor =
-        functionalMethodDescriptor.isJsMethod()
-            ? functionalMethodDescriptor
-            : removeVarargs(functionalMethodDescriptor);
+        !functionalMethodDescriptor.isJsMethod()
+            ? removeJsMethodVarargs(functionalMethodDescriptor)
+            : functionalMethodDescriptor;
 
     TypeDeclaration jsFunctionDeclaration =
         createJsFunctionTypeDeclaration(functionalTypeDescriptor);
@@ -234,7 +241,12 @@ public class LambdaTypeDescriptors {
    * Removes the varargs attribute from the varargs parameter if {@code functionalMethodDescriptor}
    * is a varargs method.
    */
-  private static MethodDescriptor removeVarargs(MethodDescriptor functionalMethodDescriptor) {
+  private static MethodDescriptor removeJsMethodVarargs(
+      MethodDescriptor functionalMethodDescriptor) {
+    MethodDescriptor declarationDescriptor =
+        functionalMethodDescriptor.equals(functionalMethodDescriptor.getDeclarationDescriptor())
+            ? null
+            : removeJsMethodVarargs(functionalMethodDescriptor.getDeclarationDescriptor());
     return MethodDescriptor.Builder.from(functionalMethodDescriptor)
         .setParameterDescriptors(
             functionalMethodDescriptor.getParameterDescriptors().stream()
@@ -243,11 +255,8 @@ public class LambdaTypeDescriptors {
                         ParameterDescriptor.newBuilder()
                             .setTypeDescriptor(parameterDescriptor.getTypeDescriptor())
                             .build())
-                .collect(ImmutableList.toImmutableList()))
-        .setJsInfo(
-            JsInfo.Builder.from(functionalMethodDescriptor.getJsInfo())
-                .setJsMemberType(JsMemberType.NONE)
-                .build())
+                .collect(toImmutableList()))
+        .setDeclarationMethodDescriptor(declarationDescriptor)
         .build();
   }
 

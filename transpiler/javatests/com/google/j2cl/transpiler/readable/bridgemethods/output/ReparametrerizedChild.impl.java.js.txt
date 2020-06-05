@@ -32,12 +32,12 @@ class ReparametrerizedChild extends ParameterizedParent {
     return null;
   }
   // Bridge method.
-  /** @override @template Q @return {S} */
+  /** @override @template Q @return {Q} */
   m_m__com_google_j2cl_transpiler_readable_bridgemethods_ParameterizedParent_$pp_com_google_j2cl_transpiler_readable_bridgemethods(
-      /** ParameterizedParent */ arg0) {
-    return this
-        .m_m__com_google_j2cl_transpiler_readable_bridgemethods_ReparametrerizedChild_$pp_com_google_j2cl_transpiler_readable_bridgemethods(
-            /**@type {Q}*/ ($Casts.$to(arg0, ReparametrerizedChild)));
+      /** Q */ arg0) {
+    return /**@type {Q}*/ (
+        this.m_m__com_google_j2cl_transpiler_readable_bridgemethods_ReparametrerizedChild_$pp_com_google_j2cl_transpiler_readable_bridgemethods(
+            /**@type {?}*/ ($Casts.$to(arg0, ReparametrerizedChild))));
   }
 
   static $clinit() {

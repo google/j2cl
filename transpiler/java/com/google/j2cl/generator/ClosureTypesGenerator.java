@@ -34,7 +34,6 @@ import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.TypeVariable;
 import com.google.j2cl.ast.UnionTypeDescriptor;
-import com.google.j2cl.ast.Variable;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -77,9 +76,8 @@ class ClosureTypesGenerator {
   public String getJsDocForParameter(MethodLike methodLike, int index) {
     MethodDescriptor methodDescriptor = methodLike.getDescriptor();
     ParameterDescriptor parameterDescriptor = methodDescriptor.getParameterDescriptors().get(index);
-    Variable parameter = methodLike.getParameters().get(index);
     return toClosureTypeParameter(
-            methodDescriptor, parameterDescriptor, parameter.getTypeDescriptor())
+            methodDescriptor, parameterDescriptor, parameterDescriptor.getTypeDescriptor())
         .render();
   }
 

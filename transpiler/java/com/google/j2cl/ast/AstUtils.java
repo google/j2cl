@@ -1032,7 +1032,9 @@ public class AstUtils {
                 ImmutableList.<ParameterDescriptor>builder()
                     .add(
                         ParameterDescriptor.newBuilder()
-                            .setTypeDescriptor(enclosingTypeDescriptor)
+                            // the instance ($thisArg) parameter is assumed non nullable for
+                            // the typing perspective.
+                            .setTypeDescriptor(enclosingTypeDescriptor.toNonNullable())
                             .build())
                     .addAll(methodDescriptor.getParameterDescriptors())
                     .build())

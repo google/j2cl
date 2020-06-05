@@ -239,10 +239,40 @@ public class ImplementLambdaExpressions extends NormalizationPass {
       TypeDescriptor typeDescriptor,
       DeclaredTypeDescriptor adaptorTypeDescriptor) {
 
+    // In most cases, e.g. when the adaptor type is shared, adaptorTypeDescriptor is already
+    // an unparameterized type descriptor since the creation of the adaptor is driven from
+    // the declaration of the functional interface and not from a usage.
+    // In the cases where the adaptor is not shared and driven from a usage (e.g. intersection
+    // types) the adaptor class could either use the paramterization found in the usage
+    // or use the more general parameterization from the declaration (e.g. if it is an intersection
+    // that should come from the declarations of all types in the intersection).
+    // The choice made here is to have the more general adaptor and that results in an inference
+    // by jscompiler in the call site, mimicking the case for the shared adaptors.
+    //
+    // Example:
+    //   interface Consumer<T> {
+    //      void accept(T t);
+    //   }
+    //
+    //   Callsite:      Object fn = (Consumer<String> and Serializable)  t -> {};
+    //
+    //   Unparameterized adaptor: (this is the one generated below),
+    //
+    //   class Consumer$Adaptor<T> implements Consumer<T>, Serializable {
+    //       Consumer$Adaptor( /** function(T):void */ fn);
+    //   }
+    //
+    //   Parameterized adaptor:
+    //
+    //   class Consumer$Adaptor implements Consumer<String>, Serializable {
+    //       Consumer$Adaptor( /** function(String):void */ fn);
+    //   }
+    //
     adaptorTypeDescriptor = adaptorTypeDescriptor.toUnparameterizedTypeDescriptor();
 
     DeclaredTypeDescriptor jsFunctionTypeDescriptor =
-        LambdaTypeDescriptors.createJsFunctionTypeDescriptor(typeDescriptor);
+        LambdaTypeDescriptors.createJsFunctionTypeDescriptor(
+            typeDescriptor.toUnparameterizedTypeDescriptor());
     Type adaptorType =
         new Type(sourcePosition, Visibility.PUBLIC, adaptorTypeDescriptor.getTypeDeclaration());
 

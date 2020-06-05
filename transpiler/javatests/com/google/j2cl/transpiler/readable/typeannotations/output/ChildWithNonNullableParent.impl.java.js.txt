@@ -42,18 +42,20 @@ class ChildWithNonNullableParent extends Parent {
                 this, arg0));
   }
   // Bridge method.
-  /** @override @return {Parent} */
-  m_m__java_lang_String__java_lang_Object(/** ?string */ arg0, /** * */ arg1) {
+  /** @override @return {!Parent} */
+  m_m__java_lang_String__java_lang_Object(
+      /** string */ arg0, /** !Parent */ arg1) {
     return super
         .m_m__java_lang_String__com_google_j2cl_transpiler_readable_typeannotations_Parent(
-            arg0, /**@type {!Parent}*/ ($Casts.$to(arg1, Parent)));
+            arg0, /**@type {Parent}*/ ($Casts.$to(arg1, Parent)));
   }
   // Bridge method.
   /** @override @return {List<!Parent>} */
-  m_m__java_util_List__java_lang_Object(/** List */ arg0, /** * */ arg1) {
+  m_m__java_util_List__java_lang_Object(
+      /** List<string> */ arg0, /** !Parent */ arg1) {
     return super
         .m_m__java_util_List__com_google_j2cl_transpiler_readable_typeannotations_Parent(
-            arg0, /**@type {!Parent}*/ ($Casts.$to(arg1, Parent)));
+            arg0, /**@type {Parent}*/ ($Casts.$to(arg1, Parent)));
   }
 
   static $clinit() {

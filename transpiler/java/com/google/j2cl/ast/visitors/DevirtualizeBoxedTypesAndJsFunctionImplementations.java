@@ -53,19 +53,29 @@ public class DevirtualizeBoxedTypesAndJsFunctionImplementations extends Normaliz
               return false;
             }
 
-            TypeDescriptor enclosingTypeDescriptor = methodDescriptor.getEnclosingTypeDescriptor();
-
-            if (methodDescriptor.isJsFunction()) {
-              // If the JsFunction method has different method signature from the SAM method, it
-              // should be devirtualized.
-              return !methodDescriptor.isSameSignature(
-                  enclosingTypeDescriptor
-                      .getFunctionalInterface()
-                      .getJsFunctionMethodDescriptor()
-                      .getDeclarationDescriptor());
+            if (isActualJsFunction(methodDescriptor)) {
+              return false;
             }
             return true;
           }
         });
+  }
+
+  private static boolean isActualJsFunction(MethodDescriptor methodDescriptor) {
+    // If the user specialized the JsFunction, then the JsFunction method will have a different
+    // signature from the overridden method from the JsFunction interface.
+    // In this case there will be a bridge that will become the actual JsFunction implementation
+    // that delegates to the user written JsFunction method. Both methods are marked as JsFunction
+    // (it would be better if the bridge creator removed the JsFunction property on the specialized
+    // method). The user written specialized would need to be devirtualized.
+    TypeDescriptor enclosingTypeDescriptor = methodDescriptor.getEnclosingTypeDescriptor();
+    return methodDescriptor.isJsFunction()
+        && methodDescriptor
+            .getDeclarationDescriptor()
+            .isSameSignature(
+                enclosingTypeDescriptor
+                    .getFunctionalInterface()
+                    .getJsFunctionMethodDescriptor()
+                    .getDeclarationDescriptor());
   }
 }

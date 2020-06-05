@@ -620,10 +620,8 @@ class JavaEnvironment {
   boolean isOrOverridesJsFunctionMethod(ExecutableElement methodBinding) {
     Element declaringType = methodBinding.getEnclosingElement();
     if (JsInteropUtils.isJsFunction(declaringType)
-        && getFunctionalInterfaceMethod(declaringType.asType()) != null
-        && getFunctionalInterfaceMethod(declaringType.asType())
-            .baseSymbol()
-            .equals(methodBinding)) {
+        && methodBinding.equals(
+            getFunctionalInterfaceMethodDecl(declaringType.asType()).baseSymbol())) {
       return true;
     }
     for (MethodSymbol overriddenMethodBinding : getOverriddenMethods(methodBinding)) {
@@ -917,53 +915,6 @@ class JavaEnvironment {
         && !method.getModifiers().contains(Modifier.PRIVATE);
   }
 
-  private MethodDescriptor getJsFunctionMethodDescriptor(DeclaredType type) {
-    ClassSymbol classSymbol = (ClassSymbol) type.asElement();
-    DeclaredTypeDescriptor declaredTypeDescriptor = createDeclaredTypeDescriptor(type);
-    if (JsInteropUtils.isJsFunction(classSymbol) && getFunctionalInterfaceMethod(type) != null) {
-      // type.getFunctionalInterfaceMethod returns in some cases the method declaration
-      // instead of the method with the corresponding parameterization. Note: this is observed in
-      // the case when a type is parameterized with a wildcard, e.g. JsFunction<?>.
-      // MethodSymbol jsFunctionMethodBinding =
-      //     getMethods(classSymbol).stream()
-      //         .filter(methodSymbol -> methodSymbol == getFunctionalInterfaceMethod(type))
-      //         .findFirst()
-      //         .get();
-      MethodSymbol jsFunctionMethodBinding = getFunctionalInterfaceMethod(type);
-      return createMethodDescriptor(
-          declaredTypeDescriptor,
-          (MethodSymbol) jsFunctionMethodBinding.asMemberOf((ClassType) type, internalTypes),
-          jsFunctionMethodBinding);
-    }
-
-    // Find implementation method that corresponds to JsFunction.
-    Optional<Type> jsFunctionInterface =
-        classSymbol.getInterfaces().stream()
-            .map(Type::asElement)
-            .filter(JsInteropUtils::isJsFunction)
-            .map(TypeSymbol::asType)
-            .findFirst();
-
-    return jsFunctionInterface
-        .map(this::getFunctionalInterfaceMethod)
-        .flatMap(jsFunctionMethod -> getOverrideInType((ClassType) type, jsFunctionMethod))
-        .map(
-            methodSymbol ->
-                createMethodDescriptor(
-                    declaredTypeDescriptor,
-                    (MethodSymbol) methodSymbol.asMemberOf((ClassType) type, internalTypes),
-                    methodSymbol))
-        .orElse(null);
-  }
-
-  private Optional<MethodSymbol> getOverrideInType(ClassType type, MethodSymbol method) {
-    ClassSymbol classSymbol = (ClassSymbol) type.asElement();
-    return getDeclaredMethods(type).stream()
-        .map(MethodDeclarationPair::getDeclarationMethodSymbol)
-        .filter(m -> m.overrides(method, classSymbol, internalTypes, false))
-        .findFirst();
-  }
-
   public ImmutableList<TypeDescriptor> createTypeDescriptors(
       List<? extends TypeMirror> typeMirrors) {
     return typeMirrors.stream().map(this::createTypeDescriptor).collect(toImmutableList());
@@ -1118,7 +1069,7 @@ class JavaEnvironment {
                       (MethodSymbol)
                           functionalInterfaceMethod.asMemberOf(
                               ((ClassSymbol) classType.asElement()).asType(), internalTypes),
-                      functionalInterfaceMethod);
+                      getFunctionalInterfaceMethodDecl(classType));
                 })
             .setJsFunctionMethodDescriptorFactory(() -> getJsFunctionMethodDescriptor(classType))
             .setTypeArgumentDescriptors(createTypeDescriptors(getTypeArguments(classType)))
@@ -1164,7 +1115,7 @@ class JavaEnvironment {
         .collect(toImmutableList());
   }
 
-  private static final class MethodDeclarationPair {
+  static final class MethodDeclarationPair {
     private final MethodSymbol methodSymbol;
     private final MethodSymbol declarationMethodSymbol;
 
@@ -1381,7 +1332,7 @@ class JavaEnvironment {
     return (TypeElement) enclosing;
   }
 
-  public TypeMirror getFunctionalInterface(Type type) {
+  private TypeMirror getFunctionalInterface(Type type) {
     if (type.isIntersection()) {
       return ((IntersectionType) type)
           .getBounds().stream().filter(this::isFunctionalInterface).findFirst().orElse(null);
@@ -1390,7 +1341,75 @@ class JavaEnvironment {
     return type;
   }
 
-  MethodSymbol getFunctionalInterfaceMethod(TypeMirror typeMirror) {
+  private MethodDescriptor getJsFunctionMethodDescriptor(DeclaredType type) {
+    ClassSymbol classSymbol = (ClassSymbol) type.asElement();
+    DeclaredTypeDescriptor declaredTypeDescriptor = createDeclaredTypeDescriptor(type);
+    if (JsInteropUtils.isJsFunction(classSymbol) && getFunctionalInterfaceMethod(type) != null) {
+      // type.getFunctionalInterfaceMethod returns in some cases the method declaration
+      // instead of the method with the corresponding parameterization. Note: this is observed in
+      // the case when a type is parameterized with a wildcard, e.g. JsFunction<?>.
+      // MethodSymbol jsFunctionMethodBinding =
+      //     getMethods(classSymbol).stream()
+      //         .filter(methodSymbol -> methodSymbol == getFunctionalInterfaceMethod(type))
+      //         .findFirst()
+      //         .get();
+      MethodSymbol jsFunctionMethodBinding = getFunctionalInterfaceMethod(type);
+      return createMethodDescriptor(
+          declaredTypeDescriptor,
+          (MethodSymbol) jsFunctionMethodBinding.asMemberOf((ClassType) type, internalTypes),
+          getFunctionalInterfaceMethodDecl(type));
+    }
+
+    // Find implementation method that corresponds to JsFunction.
+    Optional<Type> jsFunctionInterface =
+        classSymbol.getInterfaces().stream()
+            .map(Type::asElement)
+            .filter(JsInteropUtils::isJsFunction)
+            .map(TypeSymbol::asType)
+            .findFirst();
+
+    return jsFunctionInterface
+        .map(this::getFunctionalInterfaceMethod)
+        .flatMap(jsFunctionMethod -> getOverrideInType((ClassType) type, jsFunctionMethod))
+        .map(
+            methodSymbol ->
+                createMethodDescriptor(
+                    declaredTypeDescriptor,
+                    (MethodSymbol) methodSymbol.asMemberOf((ClassType) type, internalTypes),
+                    methodSymbol))
+        .orElse(null);
+  }
+
+  private Optional<MethodSymbol> getOverrideInType(ClassType type, MethodSymbol method) {
+    ClassSymbol classSymbol = (ClassSymbol) type.asElement();
+    return getDeclaredMethods(type).stream()
+        .map(MethodDeclarationPair::getDeclarationMethodSymbol)
+        .filter(m -> m.overrides(method, classSymbol, internalTypes, false))
+        .findFirst();
+  }
+
+  MethodDescriptor getJsFunctionMethodDescriptor(TypeMirror type) {
+    DeclaredTypeDescriptor expressionTypeDescriptor =
+        createTypeDescriptor(getFunctionalInterface((Type) type), DeclaredTypeDescriptor.class);
+    return createMethodDescriptor(
+        expressionTypeDescriptor,
+        (MethodSymbol) getFunctionalInterfaceMethod(type).asMemberOf((Type) type, internalTypes),
+        getFunctionalInterfaceMethod(type));
+  }
+
+  private MethodSymbol getFunctionalInterfaceMethodDecl(TypeMirror typeMirror) {
+    return Optional.ofNullable(getFunctionalInterfaceMethodPair(typeMirror))
+        .map(MethodDeclarationPair::getDeclarationMethodSymbol)
+        .orElse(null);
+  }
+
+  private MethodSymbol getFunctionalInterfaceMethod(TypeMirror typeMirror) {
+    return Optional.ofNullable(getFunctionalInterfaceMethodPair(typeMirror))
+        .map(MethodDeclarationPair::getMethodSymbol)
+        .orElse(null);
+  }
+
+  private MethodDeclarationPair getFunctionalInterfaceMethodPair(TypeMirror typeMirror) {
     Type type = (Type) typeMirror;
     if (!internalTypes.isFunctionalInterface(type)) {
       return null;
@@ -1400,13 +1419,15 @@ class JavaEnvironment {
       return ((IntersectionType) type)
           .getBounds().stream()
               .filter(this::isFunctionalInterface)
-              .map(this::getFunctionalInterfaceMethod)
+              .map(this::getFunctionalInterfaceMethodPair)
               .findFirst()
               .orElse(null);
     }
     return getMethods((ClassType) type).stream()
-        .map(MethodDeclarationPair::getDeclarationMethodSymbol)
-        .filter(m -> isAbstract(m) && !isJavaLangObjectOverride(m))
+        .filter(
+            p ->
+                isAbstract(p.getDeclarationMethodSymbol())
+                    && !isJavaLangObjectOverride(p.getDeclarationMethodSymbol()))
         .findFirst()
         .orElse(null);
   }

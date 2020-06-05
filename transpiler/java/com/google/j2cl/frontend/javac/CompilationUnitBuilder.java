@@ -968,18 +968,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   }
 
   private Expression convertLambda(JCLambda expression) {
-    DeclaredTypeDescriptor functionalTypeDescriptor =
-        environment.createTypeDescriptor(
-            environment.getFunctionalInterface(expression.type), DeclaredTypeDescriptor.class);
-
-    MethodSymbol functionalInterfaceMethod =
-        environment.getFunctionalInterfaceMethod(expression.type);
     MethodDescriptor functionalMethodDescriptor =
-        environment.createMethodDescriptor(
-            functionalTypeDescriptor,
-            (MethodSymbol)
-                functionalInterfaceMethod.asMemberOf(expression.type, environment.internalTypes),
-            functionalInterfaceMethod);
+        environment.getJsFunctionMethodDescriptor(expression.type);
 
     return processEnclosedBy(
         functionalMethodDescriptor,
@@ -1036,13 +1026,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     DeclaredTypeDescriptor expressionTypeDescriptor =
         environment.createTypeDescriptor(memberReference.type, DeclaredTypeDescriptor.class);
     MethodDescriptor functionalMethodDescriptor =
-        environment.createMethodDescriptor(
-            expressionTypeDescriptor,
-            (MethodSymbol)
-                environment
-                    .getFunctionalInterfaceMethod(memberReference.type)
-                    .asMemberOf(memberReference.type, environment.internalTypes),
-            environment.getFunctionalInterfaceMethod(memberReference.type));
+        environment.getJsFunctionMethodDescriptor(memberReference.type);
 
     if (methodSymbol.getEnclosingElement().getQualifiedName().contentEquals("Array")) {
       // Arrays member references are seen as references to members on a class Array.
