@@ -56,30 +56,34 @@ public class LambdaTypeDescriptors {
     DeclaredTypeDescriptor jsFunctionInterface =
         createJsFunctionTypeDescriptor(functionalInterfaceTypeDescriptor);
 
-    // TODO(b/158085463): type arguments are only considering that type functional interface is
-    // the only interface parameterized missing the case of intersection types with parameters
-    // in the non functional interfaces.
-    ImmutableList<TypeDescriptor> typeArgumentDescriptors =
-        ImmutableList.<TypeDescriptor>builder()
-            .addAll(functionalInterfaceTypeDescriptor.getTypeArgumentDescriptors())
-            .addAll(
-                functionalInterfaceTypeDescriptor
-                    .getSingleAbstractMethodDescriptor()
-                    .getTypeParameterTypeDescriptors())
-            .build();
-
     List<DeclaredTypeDescriptor> interfaceTypeDescriptors =
         typeDescriptor.isIntersection()
             ? ((IntersectionTypeDescriptor) typeDescriptor).getIntersectionTypeDescriptors()
             : ImmutableList.of((DeclaredTypeDescriptor) typeDescriptor);
 
+    List<TypeDescriptor> typeArgumentDescriptors =
+        ImmutableList.<TypeDescriptor>builder()
+            .addAll(
+                interfaceTypeDescriptors.stream()
+                    .flatMap(i -> i.getTypeArgumentDescriptors().stream())
+                    .collect(ImmutableList.toImmutableList()))
+            // TODO(b/153176433): Find a better alternative for type variables defined in the
+            // method.
+            // The lambda is "converted" into a JsFunction (i.e. a native JavaScript function), but
+            // there is no way to express a parameterized function type in Closure and the
+            // the type variables defined in the method are moved to the lambda adaptor.
+            .addAll(
+                functionalInterfaceTypeDescriptor
+                    .getSingleAbstractMethodDescriptor()
+                    .getTypeParameterTypeDescriptors())
+            .build();
+    ;
     TypeDeclaration adaptorDeclaration =
         createLambdaAdaptorTypeDeclaration(
-            typeDescriptor,
-            enclosingTypeDescriptor,
-            interfaceTypeDescriptors,
-            functionalInterfaceTypeDescriptor,
-            jsFunctionInterface,
+            typeDescriptor.toUnparameterizedTypeDescriptor(),
+            enclosingTypeDescriptor.toUnparameterizedTypeDescriptor(),
+            TypeDescriptors.toUnparameterizedTypeDescriptors(interfaceTypeDescriptors),
+            jsFunctionInterface.toUnparameterizedTypeDescriptor(),
             uniqueId);
 
     return DeclaredTypeDescriptor.newBuilder()
@@ -87,8 +91,7 @@ public class LambdaTypeDescriptors {
         .setTypeDeclaration(adaptorDeclaration)
         .setTypeArgumentDescriptors(functionalInterfaceTypeDescriptor.getTypeArgumentDescriptors())
         .setSuperTypeDescriptorFactory(() -> TypeDescriptors.get().javaLangObject)
-        .setInterfaceTypeDescriptorsFactory(
-            () -> TypeDescriptors.toUnparameterizedTypeDescriptors(interfaceTypeDescriptors))
+        .setInterfaceTypeDescriptorsFactory(() -> ImmutableList.copyOf(interfaceTypeDescriptors))
         .setTypeArgumentDescriptors(typeArgumentDescriptors)
         .setDeclaredMethodDescriptorsFactory(
             adaptorTypeDescriptor ->
@@ -115,7 +118,6 @@ public class LambdaTypeDescriptors {
       TypeDescriptor lambdaTypeDescriptor,
       DeclaredTypeDescriptor enclosingTypeDescriptor,
       List<DeclaredTypeDescriptor> interfaceTypeDescriptors,
-      DeclaredTypeDescriptor functionalInterfaceTypeDescriptor,
       DeclaredTypeDescriptor jsFunctionInterface,
       Optional<Integer> uniqueId) {
 
@@ -124,18 +126,20 @@ public class LambdaTypeDescriptors {
         enclosingTypeDeclaration.synthesizeInnerClassComponents(
             FUNCTIONAL_INTERFACE_ADAPTOR_CLASS_NAME, uniqueId.orElse(null));
 
-    // TODO(b/158085463): type parameters are only considering that type functional interface is
-    // the only interface parameterized missing the case of intersection types with parameters
-    // in the non functional interfaces.
     ImmutableList<TypeVariable> typeParameterDescriptors =
         ImmutableList.<TypeVariable>builder()
             .addAll(
-                functionalInterfaceTypeDescriptor
-                    .getTypeDeclaration()
-                    .getTypeParameterDescriptors())
+                interfaceTypeDescriptors.stream()
+                    .flatMap(i -> i.getTypeDeclaration().getTypeParameterDescriptors().stream())
+                    .collect(ImmutableList.toImmutableList()))
+            // TODO(b/153176433): Find a better alternative for type variables defined in the
+            // method.
+            // The lambda is "converted" into a JsFunction (i.e. a native JavaScript function), but
+            // there is no way to express a parameterized function type in Closure.
+            // The type variables defined in the method are moved to the lambda adaptor.
             .addAll(
-                functionalInterfaceTypeDescriptor
-                    .toUnparameterizedTypeDescriptor()
+                lambdaTypeDescriptor
+                    .getFunctionalInterface()
                     .getSingleAbstractMethodDescriptor()
                     .getTypeParameterTypeDescriptors())
             .build();
@@ -148,15 +152,12 @@ public class LambdaTypeDescriptors {
             adaptorTypeDeclaration ->
                 getLambdaAdaptorMethodDescriptors(
                     jsFunctionInterface, adaptorTypeDeclaration.toUnparameterizedTypeDescriptor()))
-        .setInterfaceTypeDescriptorsFactory(
-            () -> TypeDescriptors.toUnparameterizedTypeDescriptors(interfaceTypeDescriptors))
+        .setInterfaceTypeDescriptorsFactory(() -> ImmutableList.copyOf(interfaceTypeDescriptors))
         .setTypeParameterDescriptors(typeParameterDescriptors)
         .setUnparameterizedTypeDescriptorFactory(
             () ->
                 createLambdaAdaptorTypeDescriptor(
-                    lambdaTypeDescriptor.toUnparameterizedTypeDescriptor(),
-                    enclosingTypeDescriptor.toUnparameterizedTypeDescriptor(),
-                    uniqueId))
+                    lambdaTypeDescriptor, enclosingTypeDescriptor, uniqueId))
         .setVisibility(Visibility.PUBLIC)
         .setKind(Kind.CLASS)
         .build();
