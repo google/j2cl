@@ -22,6 +22,7 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.io.MoreFiles;
 import com.google.common.truth.Correspondence;
 import com.google.j2cl.common.J2clUtils;
@@ -56,7 +57,7 @@ public class TranspilerTester {
    */
   public static TranspilerTester newTesterWithDefaults() {
     return newTester()
-        .setClassPath(
+        .setClassPathArg(
             "transpiler/javatests/com/google/j2cl/transpiler/integration/jre_bundle_deploy.jar");
   }
 
@@ -102,22 +103,29 @@ public class TranspilerTester {
   private boolean useZipForNativeFiles = false;
   private Path outputPath;
 
-  public TranspilerTester addFile(Path path, String... code) {
-    return addPath(path, Joiner.on('\n').join(code));
-  }
-
   public TranspilerTester addCompilationUnit(String qualifiedCompilationUnitName, String... code) {
-    List<String> content = new ArrayList<>(Arrays.asList(code));
+    List<String> content = Lists.newArrayList(code);
 
     String packageName = getPackageName(qualifiedCompilationUnitName);
     if (!packageName.isEmpty()) {
       content.add(0, "package " + packageName + ";");
     }
 
+    return addFileUsingQualifiedName(
+        qualifiedCompilationUnitName, ".java", content.toArray(new String[0]));
+  }
+
+  public TranspilerTester addNativeJsForCompilationUnit(
+      String qualifiedCompilationUnitName, String... code) {
+    return addFileUsingQualifiedName(qualifiedCompilationUnitName, ".native.js", code);
+  }
+
+  private TranspilerTester addFileUsingQualifiedName(
+      String qualifiedCompilationUnitName, String ext, String... code) {
     return addFile(
         getPackageRelativePath(qualifiedCompilationUnitName)
-            .resolve(getSimpleUnitName(qualifiedCompilationUnitName) + ".java"),
-        content.toArray(new String[0]));
+            .resolve(getSimpleUnitName(qualifiedCompilationUnitName) + ext),
+        code);
   }
 
   private String getPackageName(String qualifiedCompilationUnitName) {
@@ -137,31 +145,24 @@ public class TranspilerTester {
         qualifiedCompilationUnitName.lastIndexOf('.') + 1);
   }
 
-  public TranspilerTester addNativeFile(String qualifiedCompilationUnitName, String... code) {
-    return addPath(
-        getPackageRelativePath(qualifiedCompilationUnitName)
-            .resolve(getSimpleUnitName(qualifiedCompilationUnitName) + ".native.js"),
-        Joiner.on('\n').join(code));
+  public TranspilerTester addFile(String filename, String... code) {
+    return addFile(Paths.get(filename), code);
   }
 
-  public TranspilerTester addFile(String filename, String content) {
-    return addPath(Paths.get(filename), content);
-  }
-
-  private TranspilerTester addPath(Path filePath, String content) {
-    this.files.add(new File(filePath, content));
+  public TranspilerTester addFile(Path path, String... code) {
+    this.files.add(new File(path, Joiner.on('\n').join(code)));
     return this;
   }
 
-  public TranspilerTester setClassPath(String path) {
+  public TranspilerTester setClassPathArg(String path) {
     return this.addArgs("-cp", toTestPath(path));
   }
 
-  public TranspilerTester setNativeSourcePath(String path) {
+  public TranspilerTester setNativeSourcePathArg(String path) {
     return this.addArgs("-nativesourcepath", toTestPath(path));
   }
 
-  public TranspilerTester addSourcePath(String path) {
+  public TranspilerTester addSourcePathArg(String path) {
     return this.addArgs(toTestPath(path));
   }
 
@@ -410,8 +411,6 @@ public class TranspilerTester {
               .map(Path::toString)
               .forEach(path -> commandLineArgsBuilder.add("-nativesourcepath", path));
         }
-
-
       }
 
       // Passthru explicitly defined args

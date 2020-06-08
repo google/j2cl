@@ -2936,7 +2936,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "public class Buggy {",
             "  public native void m();",
             "}")
-        .addNativeFile("test.Buggy")
+        .addNativeJsForCompilationUnit("test.Buggy")
         .assertTranspileSucceeds()
         .assertWarningsWithoutSourcePosition(
             "[unusable-by-js] Native 'void Buggy.m()' is exposed to JavaScript without "
@@ -3350,7 +3350,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  public void f8(List<List<MyJsEnum>> l) {}", // parameterized by List<JsEnum> fails
             "  public void f17() { new Object() { @JsMethod void b(Long a){} }; }",
             "}")
-        .addNativeFile("test.C")
+        .addNativeJsForCompilationUnit("test.C")
         .assertTranspileSucceeds()
         .assertWarningsWithoutSourcePosition(
             "[unusable-by-js] Type of parameter 'a' in 'void C.fc1(A a)' is not usable by but "

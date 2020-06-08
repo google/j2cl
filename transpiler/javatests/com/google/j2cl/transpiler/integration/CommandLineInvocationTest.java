@@ -143,7 +143,7 @@ public class CommandLineInvocationTest extends TestCase {
             "public class NativeClass2 {",
             "  public native void nativeInstanceMethod();",
             "}")
-        .addNativeFile(
+        .addNativeJsForCompilationUnit(
             "nativeclasstest.BadNameNativeClass",
             "NativeClass.prototype.m_nativeInstanceMethod = function () {}")
         .assertTranspileFails()
@@ -163,7 +163,7 @@ public class CommandLineInvocationTest extends TestCase {
             "  OK,",
             "  CANCEL",
             "}")
-        .addNativeFile(
+        .addNativeJsForCompilationUnit(
             "nativeclasstest.ClosureEnum", "const ClosureEnum ={ OK : 'OK', CANCEL : 'Cancel' }")
         .assertTranspileFails()
         .assertErrorsWithoutSourcePosition(
@@ -180,7 +180,7 @@ public class CommandLineInvocationTest extends TestCase {
             "  OK,",
             "  CANCEL",
             "}")
-        .addNativeFile(
+        .addNativeJsForCompilationUnit(
             "nativeclasstest.ClosureEnum", "const ClosureEnum ={ OK : 'OK', CANCEL : 'Cancel' }")
         .assertTranspileFails()
         .assertErrorsWithoutSourcePosition(
@@ -195,7 +195,7 @@ public class CommandLineInvocationTest extends TestCase {
             "@JsType(isNative=true)",
             "public class NativeClass{",
             "}")
-        .addNativeFile("nativeclasstest.NativeClass", "Class NativeClass{}")
+        .addNativeJsForCompilationUnit("nativeclasstest.NativeClass", "Class NativeClass{}")
         .assertTranspileFails()
         .assertErrorsWithoutSourcePosition(
             "Native JsType 'NativeClass' does not support having a '.native.js' file.");
@@ -209,10 +209,10 @@ public class CommandLineInvocationTest extends TestCase {
             "public class NativeClass {",
             "  public native void nativeInstanceMethod();",
             "}")
-        .addNativeFile(
+        .addNativeJsForCompilationUnit(
             "nativeclasstest.NativeClass",
             "NativeClass.prototype.m_nativeInstanceMethod = function () {}")
-        .addNativeFile(
+        .addNativeJsForCompilationUnit(
             "nativeclasstest.ExtraClass",
             "ExtraClass.prototype.m_nativeInstanceMethod = function () {}")
         .assertTranspileFails()

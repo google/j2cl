@@ -27,9 +27,9 @@ public class RerunningJ2clTranspilerTest extends TestCase {
 
   private static TranspileResult compileJre() throws Exception {
     return newTesterWithDefaults()
-        .setNativeSourcePath(
+        .setNativeSourcePathArg(
             "transpiler/javatests/com/google/j2cl/transpiler/integration/libjre_native.jar")
-        .addSourcePath(
+        .addSourcePathArg(
             "transpiler/javatests/com/google/j2cl/transpiler/integration/jre_bundle_deploy-src.jar")
         .assertTranspileSucceeds()
         .assertNoWarnings();
