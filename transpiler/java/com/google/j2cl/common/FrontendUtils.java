@@ -72,6 +72,8 @@ public class FrontendUtils {
     }
   }
 
+  private static final String TEMP_ROOT = "j2cl_sources";
+
   /** Returns all individual sources where source jars extracted and flattened. */
   public static Stream<FileInfo> getAllSources(List<String> sources, Problems problems) {
     // Make sure to extract all of the Jars into a single temp dir so that when later sorting
@@ -79,7 +81,9 @@ public class FrontendUtils {
     // temp dir prefixes.
     Path sourcesDir;
     try {
-      sourcesDir = Files.createTempDirectory("j2cl_sources");
+      Path tempDir = Files.createTempDirectory(null);
+      // Make sure we create a root so getJavaPath is still reasonable in case of no Java root.
+      sourcesDir = Files.createDirectory(tempDir.resolve(TEMP_ROOT));
     } catch (IOException e) {
       problems.fatal(FatalError.CANNOT_CREATE_TEMP_DIR, e.getMessage());
       return null;
@@ -127,6 +131,9 @@ public class FrontendUtils {
     // Choose the one that matches earlier.
     int index = Math.min(indexAfterRoot(path, "java"), indexAfterRoot(path, "javatests"));
     String javaRelativePath = path.substring(index);
+    if (javaRelativePath.isEmpty()) {
+      javaRelativePath = path.substring(indexAfterRoot(path, TEMP_ROOT));
+    }
     return javaRelativePath.isEmpty() ? path : javaRelativePath;
   }
 

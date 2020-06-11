@@ -294,9 +294,9 @@ public class OutputGeneratorStage {
       return matchingNativeFile;
     }
 
-    String typeAbsolutePath =
+    String typeJavaRootRelativePath =
         FrontendUtils.getJavaPath(getAbsolutePath(j2clCompilationUnit, typeDeclaration));
-    return nativeFilesByPath.get(typeAbsolutePath);
+    return nativeFilesByPath.get(typeJavaRootRelativePath);
   }
 
   /** Returns the absolute binary path for a given type. */

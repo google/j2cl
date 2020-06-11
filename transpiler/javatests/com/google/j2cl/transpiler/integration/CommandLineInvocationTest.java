@@ -115,6 +115,38 @@ public class CommandLineInvocationTest extends TestCase {
         .assertTranspileSucceeds();
   }
 
+  public void testNativeJsInDifferentSourceJar() {
+    newTesterWithDefaults()
+        .addFileToZipFile(
+            "sources.srcjar",
+            "src/random/NativeClass.java",
+            "package random;",
+            "public class NativeClass {",
+            "  public native void nativeInstanceMethod();",
+            "}")
+        .addFileToZipFile(
+            "native.zip",
+            "src/random/NativeClass.native.js",
+            "NativeClass.prototype.m_nativeInstanceMethod = function () {}")
+        .assertTranspileSucceeds();
+  }
+
+  // TODO(b/158564515): Enable when the bug is fixed.
+  public void disabled_testNativeJsInSameDirSourceInDifferentSourceJar() {
+    newTesterWithDefaults()
+        .addFileToZipFile(
+            "sources.srcjar",
+            "src/random/NativeClass.java",
+            "package random;",
+            "public class NativeClass {",
+            "  public native void nativeInstanceMethod();",
+            "}")
+        .addFile(
+            "src/random/NativeClass.native.js",
+            "NativeClass.prototype.m_nativeInstanceMethod = function () {}")
+        .assertTranspileSucceeds();
+  }
+
   public void testNativeJsInPackageRelativePath() {
     Path sourcesPath = Paths.get("deep/package");
     newTesterWithDefaults()
@@ -125,14 +157,13 @@ public class CommandLineInvocationTest extends TestCase {
             "  public native void nativeInstanceMethod();",
             "}")
         .addFile(
-            Paths.get("java/random/NativeClass.native.js"),
+            "java/random/NativeClass.native.js",
             "NativeClass.prototype.m_nativeInstanceMethod = function () {}")
         .assertTranspileSucceeds();
   }
 
   public void testNoMatchingSource() {
     newTesterWithDefaults()
-        .setUseZipForNativeFiles(true)
         .addCompilationUnit(
             "nativeclasstest.NativeClass",
             "public class NativeClass {",
@@ -143,8 +174,9 @@ public class CommandLineInvocationTest extends TestCase {
             "public class NativeClass2 {",
             "  public native void nativeInstanceMethod();",
             "}")
-        .addNativeJsForCompilationUnit(
-            "nativeclasstest.BadNameNativeClass",
+        .addFileToZipFile(
+            "native.zip",
+            "nativeclasstest/BadNameNativeClass.native.js",
             "NativeClass.prototype.m_nativeInstanceMethod = function () {}")
         .assertTranspileFails()
         .assertErrorsWithoutSourcePosition(
@@ -203,17 +235,18 @@ public class CommandLineInvocationTest extends TestCase {
 
   public void testUnusedSource() {
     newTesterWithDefaults()
-        .setUseZipForNativeFiles(true)
         .addCompilationUnit(
             "nativeclasstest.NativeClass",
             "public class NativeClass {",
             "  public native void nativeInstanceMethod();",
             "}")
-        .addNativeJsForCompilationUnit(
-            "nativeclasstest.NativeClass",
+        .addFileToZipFile(
+            "native.zip",
+            "nativeclasstest/NativeClass.native.js",
             "NativeClass.prototype.m_nativeInstanceMethod = function () {}")
-        .addNativeJsForCompilationUnit(
-            "nativeclasstest.ExtraClass",
+        .addFileToZipFile(
+            "native.zip",
+            "nativeclasstest/ExtraClass.native.js",
             "ExtraClass.prototype.m_nativeInstanceMethod = function () {}")
         .assertTranspileFails()
         .assertErrorsWithoutSourcePosition(

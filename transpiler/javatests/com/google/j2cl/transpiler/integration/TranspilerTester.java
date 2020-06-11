@@ -32,13 +32,16 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
@@ -61,28 +64,18 @@ public class TranspilerTester {
             "transpiler/javatests/com/google/j2cl/transpiler/integration/jre_bundle_deploy.jar");
   }
 
-  private static class File {
+  private abstract static class File {
     private Path filePath;
-    private String content;
 
-    public File(Path filePath, String content) {
+    public File(Path filePath) {
       this.filePath = filePath;
-      this.content = content;
     }
 
     public Path getFilePath() {
       return filePath;
     }
 
-    public void createFileIn(Path basePath) {
-      try {
-        Files.createDirectories(
-            basePath.resolve(filePath.getParent() == null ? Paths.get("") : filePath.getParent()));
-        Files.write(basePath.resolve(filePath), content.getBytes(Charset.forName("UTF-8")));
-      } catch (IOException e) {
-        throw new AssertionError(e);
-      }
-    }
+    public abstract void createFileIn(Path basePath);
 
     private boolean isNativeJsFile() {
       return filePath.toString().endsWith(".native.js");
@@ -95,12 +88,70 @@ public class TranspilerTester {
     private boolean isSrcJar() {
       return filePath.toString().endsWith(".srcjar");
     }
+
+    private boolean isZip() {
+      return filePath.toString().endsWith(".zip");
+    }
   }
 
-  private List<File> files = new ArrayList<>();
+  private static class SourceFile extends File {
+    private String content;
+
+    public SourceFile(Path filePath, String content) {
+      super(filePath);
+      this.content = content;
+    }
+
+    public String getContent() {
+      return content;
+    }
+
+    @Override
+    public void createFileIn(Path basePath) {
+      try {
+        Files.createDirectories(
+            basePath.resolve(
+                getFilePath().getParent() == null ? Paths.get("") : getFilePath().getParent()));
+        Files.write(basePath.resolve(getFilePath()), content.getBytes(Charset.forName("UTF-8")));
+      } catch (IOException e) {
+        throw new AssertionError(e);
+      }
+    }
+  }
+
+  private static class ZipFile extends File {
+    private List<SourceFile> contents = new ArrayList<>();
+
+    public ZipFile(Path filePath) {
+      super(filePath);
+    }
+
+    public void addFile(SourceFile file) {
+      contents.add(file);
+    }
+
+    @Override
+    public void createFileIn(Path basePath) {
+      try {
+        Path zipFilePath = basePath.resolve(getFilePath());
+
+        try (ZipOutputStream out =
+            new ZipOutputStream(new FileOutputStream(zipFilePath.toFile()))) {
+          for (SourceFile nativeSource : contents) {
+            out.putNextEntry(new ZipEntry(nativeSource.getFilePath().toString()));
+            out.write(nativeSource.getContent().getBytes(StandardCharsets.UTF_8));
+            out.closeEntry();
+          }
+        }
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
+    }
+  }
+
+  private Map<Path, File> filesByPath = new LinkedHashMap<>();
   private List<String> args = new ArrayList<>();
   private String temporaryDirectoryPrefix = "transpile_tester";
-  private boolean useZipForNativeFiles = false;
   private Path outputPath;
 
   public TranspilerTester addCompilationUnit(String qualifiedCompilationUnitName, String... code) {
@@ -150,7 +201,21 @@ public class TranspilerTester {
   }
 
   public TranspilerTester addFile(Path path, String... code) {
-    this.files.add(new File(path, Joiner.on('\n').join(code)));
+    this.filesByPath.put(path, new SourceFile(path, Joiner.on('\n').join(code)));
+    return this;
+  }
+
+  public TranspilerTester addFileToZipFile(String zipfilename, String filename, String... code) {
+    addFileToZipFile(Paths.get(zipfilename), Paths.get(filename), code);
+    return this;
+  }
+
+  public TranspilerTester addFileToZipFile(Path zipfilePath, Path filePath, String... code) {
+    if (!filesByPath.containsKey(zipfilePath)) {
+      filesByPath.put(zipfilePath, new ZipFile(zipfilePath));
+    }
+    ((ZipFile) filesByPath.get(zipfilePath))
+        .addFile(new SourceFile(filePath, Joiner.on('\n').join(code)));
     return this;
   }
 
@@ -164,11 +229,6 @@ public class TranspilerTester {
 
   public TranspilerTester addSourcePathArg(String path) {
     return this.addArgs(toTestPath(path));
-  }
-
-  public TranspilerTester setUseZipForNativeFiles(boolean use) {
-    this.useZipForNativeFiles = use;
-    return this;
   }
 
   private static String toTestPath(String path) {
@@ -342,7 +402,7 @@ public class TranspilerTester {
     }
   }
 
-  private static TranspileResult invokeTranspiler(Iterable<String> args, Path outputPath) {
+  private static TranspileResult invokeTranspiler(List<String> args, Path outputPath) {
     try {
       return new TranspileResult(transpile(args), outputPath);
     } catch (Exception e) {
@@ -376,41 +436,31 @@ public class TranspilerTester {
               // Output dir
               .add("-d", outputPath.toAbsolutePath().toString());
 
-      if (!files.isEmpty()) {
+      if (!filesByPath.isEmpty()) {
         // 1. Create an input directory
         Path inputPath = tempDir.resolve("input");
         Files.createDirectories(inputPath);
 
         // 2. Create all declared files on disk
-        files.forEach(file -> file.createFileIn(inputPath));
+        filesByPath.values().forEach(file -> file.createFileIn(inputPath));
 
-        // 3. Add Java source files, srcjar and native files to command line.
+        // 3. Add Java source files and srcjar to command line.
         commandLineArgsBuilder.addAll(
-            files.stream()
+            filesByPath.values().stream()
                 .filter(Predicates.or(File::isSrcJar, File::isJavaSourceFile))
                 .map(file -> inputPath.resolve(file.getFilePath()))
-                .map(Path::toAbsolutePath)
                 .map(Path::toString)
                 .collect(toImmutableList()));
 
-        // 4 Create native files or zip.
+        // 4. Add the native sources to the command line.
         List<File> nativeSources =
-            files.stream().filter(File::isNativeJsFile).collect(toImmutableList());
-        if (useZipForNativeFiles) {
-          // Create a source zip containing the native.js sources.
-          if (!nativeSources.isEmpty()) {
-            Path nativeZipPath = createNativeZipFile(inputPath, nativeSources, "nativefiles.zip");
-            commandLineArgsBuilder.add("-nativesourcepath", nativeZipPath.toString());
-          }
-        } else {
-          nativeSources.forEach(file -> file.createFileIn(inputPath));
-
-          nativeSources.stream()
-              .map(file -> inputPath.resolve(file.getFilePath()))
-              .map(Path::toAbsolutePath)
-              .map(Path::toString)
-              .forEach(path -> commandLineArgsBuilder.add("-nativesourcepath", path));
-        }
+            filesByPath.values().stream()
+                .filter(Predicates.or(File::isNativeJsFile, File::isZip))
+                .collect(toImmutableList());
+        nativeSources.stream()
+            .map(file -> inputPath.resolve(file.getFilePath()))
+            .map(Path::toString)
+            .forEach(path -> commandLineArgsBuilder.add("-nativesourcepath", path));
       }
 
       // Passthru explicitly defined args
@@ -420,23 +470,6 @@ public class TranspilerTester {
     } catch (IOException e) {
       throw new AssertionError(e);
     }
-  }
-
-  private Path createNativeZipFile(Path inputPath, List<File> nativeSources, String outputFileName)
-      throws IOException {
-    Path zipFilePath = inputPath.resolve(outputFileName);
-
-    try (ZipOutputStream out = new ZipOutputStream(new FileOutputStream(zipFilePath.toFile()))) {
-      for (File nativeSource : nativeSources) {
-        Path nativeSourceAbsolutePath =
-            inputPath.resolve(nativeSource.getFilePath()).toAbsolutePath();
-        out.putNextEntry(new ZipEntry(inputPath.relativize(nativeSourceAbsolutePath).toString()));
-        Files.copy(nativeSourceAbsolutePath, out);
-        out.closeEntry();
-      }
-    }
-
-    return zipFilePath;
   }
 
   private TranspilerTester() {}

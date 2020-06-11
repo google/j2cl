@@ -3313,7 +3313,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
 
   public void testUnusableByJsWarns() {
     newTesterWithDefaults()
-        .setUseZipForNativeFiles(true)
         .addCompilationUnit(
             "test.Buggy",
             "import jsinterop.annotations.*;",
@@ -3350,7 +3349,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  public void f8(List<List<MyJsEnum>> l) {}", // parameterized by List<JsEnum> fails
             "  public void f17() { new Object() { @JsMethod void b(Long a){} }; }",
             "}")
-        .addNativeJsForCompilationUnit("test.C")
+        .addFileToZipFile("native.zip", "test/C.native.js")
         .assertTranspileSucceeds()
         .assertWarningsWithoutSourcePosition(
             "[unusable-by-js] Type of parameter 'a' in 'void C.fc1(A a)' is not usable by but "
