@@ -44,7 +44,11 @@ final class GwtIncompatibleStripperCommandLineRunner extends CommandLineTool {
     return GwtIncompatibleStripper.strip(files, outputPath);
   }
 
+  public static int run(String[] args) {
+    return new GwtIncompatibleStripperCommandLineRunner().execute(args);
+  }
+
   public static void main(String[] args) {
-    new GwtIncompatibleStripperCommandLineRunner().execute(args);
+    System.exit(run(args));
   }
 }

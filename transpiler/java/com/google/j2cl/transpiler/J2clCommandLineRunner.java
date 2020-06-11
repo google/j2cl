@@ -147,7 +147,11 @@ public final class J2clCommandLineRunner extends CommandLineTool {
     return new J2clCommandLineRunner().processRequest(args);
   }
 
+  public static int run(String[] args) {
+    return new J2clCommandLineRunner().execute(args);
+  }
+
   public static void main(String[] args) {
-    new J2clCommandLineRunner().execute(args);
+    System.exit(run(args));
   }
 }

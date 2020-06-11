@@ -61,8 +61,8 @@ public abstract class CommandLineTool {
     }
   }
 
-  protected final void execute(String[] args) {
+  protected final int execute(String[] args) {
     Problems problems = this.processRequest(args);
-    System.exit(problems.reportAndGetExitCode(System.err));
+    return problems.reportAndGetExitCode(System.err);
   }
 }
