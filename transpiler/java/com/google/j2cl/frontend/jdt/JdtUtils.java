@@ -871,7 +871,7 @@ class JdtUtils {
                           == typeBinding.getFunctionalInterfaceMethod().getMethodDeclaration())
               .findFirst()
               .get();
-      return createMethodDescriptor(jsFunctionMethodBinding);
+      return createMethodDescriptor(jsFunctionMethodBinding).withoutTypeParameters();
     }
 
     // Find implementation method that corresponds to JsFunction.
@@ -881,6 +881,7 @@ class JdtUtils {
     return jsFunctionInterface
         .map(ITypeBinding::getFunctionalInterfaceMethod)
         .flatMap(jsFunctionMethod -> getOverrideInType(typeBinding, jsFunctionMethod))
+        .map(MethodDescriptor::withoutTypeParameters)
         .orElse(null);
   }
 

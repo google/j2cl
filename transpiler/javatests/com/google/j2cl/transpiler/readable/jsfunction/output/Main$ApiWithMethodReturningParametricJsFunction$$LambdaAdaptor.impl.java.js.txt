@@ -5,32 +5,31 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 /**
- * @template T
  * @implements {ApiWithMethodReturningParametricJsFunction}
  */
 class $LambdaAdaptor extends j_l_Object {
-  constructor(/** ?function():?function(T):void */ fn) {
+  constructor(/** ?function():?function(?):void */ fn) {
     $LambdaAdaptor.$clinit();
     super();
-    /**@type {?function():?function(T):void}*/
+    /**@type {?function():?function(?):void}*/
     this.f_$$fn__com_google_j2cl_transpiler_readable_jsfunction_Main_ApiWithMethodReturningParametricJsFunction_$LambdaAdaptor;
     this.$ctor__com_google_j2cl_transpiler_readable_jsfunction_Main_ApiWithMethodReturningParametricJsFunction_$LambdaAdaptor__com_google_j2cl_transpiler_readable_jsfunction_Main_ApiWithMethodReturningParametricJsFunction_$JsFunction(
         fn);
   }
 
   $ctor__com_google_j2cl_transpiler_readable_jsfunction_Main_ApiWithMethodReturningParametricJsFunction_$LambdaAdaptor__com_google_j2cl_transpiler_readable_jsfunction_Main_ApiWithMethodReturningParametricJsFunction_$JsFunction(
-      /** ?function():?function(T):void */ fn) {
+      /** ?function():?function(?):void */ fn) {
     this.$ctor__java_lang_Object__();
     this.f_$$fn__com_google_j2cl_transpiler_readable_jsfunction_Main_ApiWithMethodReturningParametricJsFunction_$LambdaAdaptor =
         fn;
   }
   /** @return {?function(T):void} */
   m_anApi__() {
-    let /** ?function():?function(T):void */ $function;
-    return /**@type {?function(T):void}*/ ((
+    let /** ?function():?function(?):void */ $function;
+    return (
         $function =
             this.f_$$fn__com_google_j2cl_transpiler_readable_jsfunction_Main_ApiWithMethodReturningParametricJsFunction_$LambdaAdaptor,
-        $function()));
+        $function());
   }
 
   static $clinit() {

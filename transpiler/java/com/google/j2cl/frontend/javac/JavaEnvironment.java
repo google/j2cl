@@ -1355,9 +1355,10 @@ class JavaEnvironment {
       //         .get();
       MethodSymbol jsFunctionMethodBinding = getFunctionalInterfaceMethod(type);
       return createMethodDescriptor(
-          declaredTypeDescriptor,
-          (MethodSymbol) jsFunctionMethodBinding.asMemberOf((ClassType) type, internalTypes),
-          getFunctionalInterfaceMethodDecl(type));
+              declaredTypeDescriptor,
+              (MethodSymbol) jsFunctionMethodBinding.asMemberOf((ClassType) type, internalTypes),
+              getFunctionalInterfaceMethodDecl(type))
+          .withoutTypeParameters();
     }
 
     // Find implementation method that corresponds to JsFunction.
@@ -1374,9 +1375,10 @@ class JavaEnvironment {
         .map(
             methodSymbol ->
                 createMethodDescriptor(
-                    declaredTypeDescriptor,
-                    (MethodSymbol) methodSymbol.asMemberOf((ClassType) type, internalTypes),
-                    methodSymbol))
+                        declaredTypeDescriptor,
+                        (MethodSymbol) methodSymbol.asMemberOf((ClassType) type, internalTypes),
+                        methodSymbol)
+                    .withoutTypeParameters())
         .orElse(null);
   }
 

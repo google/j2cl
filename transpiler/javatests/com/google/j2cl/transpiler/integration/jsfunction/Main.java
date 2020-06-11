@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.integration.jsfunction;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertEquals;
 import static com.google.j2cl.transpiler.utils.Asserts.assertThrowsClassCastException;
 import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
 
@@ -25,6 +26,7 @@ public class Main {
   public static void main(String... args) {
     testJsFunction();
     testSpecializedJsFunction();
+    testParameterizedJsFunctionMethod();
   }
 
   @JsFunction
@@ -74,5 +76,52 @@ public class Main {
   @JsFunction
   interface Consumer<T> {
     void accept(T t);
+  }
+
+  @JsFunction
+  interface ParameterizedInterface<T> {
+    T f(T t);
+  }
+
+  @JsFunction
+  interface ParameterizedMethod {
+    <T> T f(T t);
+  }
+
+  static <T> T identity(T t) {
+    return t;
+  }
+
+  static <T> T nullFn(T t) {
+    return null;
+  }
+
+  private static void testParameterizedJsFunctionMethod() {
+    class A {
+      String m() {
+        return "HelloA";
+      }
+    }
+
+    class B extends A {
+      String m() {
+        return "HelloB";
+      }
+    }
+
+    ParameterizedInterface<B> parameterInterfaceFn;
+    ParameterizedMethod parameterizedMethod;
+    // Use a random to make the compiler not know which method is actually passed so that
+    // whatever optimization is made on the call to B::m is based solely on types.
+    if (Math.random() < -1) {
+      parameterInterfaceFn = Main::nullFn;
+      parameterizedMethod = Main::nullFn;
+    } else {
+      parameterInterfaceFn = Main::identity;
+      parameterizedMethod = Main::identity;
+    }
+    new A();
+    assertEquals("HelloB", parameterInterfaceFn.f(new B()).m());
+    assertEquals("HelloB", parameterizedMethod.f(new B()).m());
   }
 }

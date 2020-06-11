@@ -62,22 +62,10 @@ public class LambdaTypeDescriptors {
             : ImmutableList.of((DeclaredTypeDescriptor) typeDescriptor);
 
     List<TypeDescriptor> typeArgumentDescriptors =
-        ImmutableList.<TypeDescriptor>builder()
-            .addAll(
-                interfaceTypeDescriptors.stream()
-                    .flatMap(i -> i.getTypeArgumentDescriptors().stream())
-                    .collect(ImmutableList.toImmutableList()))
-            // TODO(b/153176433): Find a better alternative for type variables defined in the
-            // method.
-            // The lambda is "converted" into a JsFunction (i.e. a native JavaScript function), but
-            // there is no way to express a parameterized function type in Closure and the
-            // the type variables defined in the method are moved to the lambda adaptor.
-            .addAll(
-                functionalInterfaceTypeDescriptor
-                    .getSingleAbstractMethodDescriptor()
-                    .getTypeParameterTypeDescriptors())
-            .build();
-    ;
+        interfaceTypeDescriptors.stream()
+            .flatMap(i -> i.getTypeArgumentDescriptors().stream())
+            .collect(toImmutableList());
+
     TypeDeclaration adaptorDeclaration =
         createLambdaAdaptorTypeDeclaration(
             typeDescriptor.toUnparameterizedTypeDescriptor(),
@@ -127,22 +115,10 @@ public class LambdaTypeDescriptors {
             FUNCTIONAL_INTERFACE_ADAPTOR_CLASS_NAME, uniqueId.orElse(null));
 
     ImmutableList<TypeVariable> typeParameterDescriptors =
-        ImmutableList.<TypeVariable>builder()
-            .addAll(
-                interfaceTypeDescriptors.stream()
-                    .flatMap(i -> i.getTypeDeclaration().getTypeParameterDescriptors().stream())
-                    .collect(ImmutableList.toImmutableList()))
-            // TODO(b/153176433): Find a better alternative for type variables defined in the
-            // method.
-            // The lambda is "converted" into a JsFunction (i.e. a native JavaScript function), but
-            // there is no way to express a parameterized function type in Closure.
-            // The type variables defined in the method are moved to the lambda adaptor.
-            .addAll(
-                lambdaTypeDescriptor
-                    .getFunctionalInterface()
-                    .getSingleAbstractMethodDescriptor()
-                    .getTypeParameterTypeDescriptors())
-            .build();
+        interfaceTypeDescriptors.stream()
+            .flatMap(i -> i.getTypeDeclaration().getTypeParameterDescriptors().stream())
+            .collect(toImmutableList());
+    ;
 
     return TypeDeclaration.newBuilder()
         .setEnclosingTypeDeclaration(enclosingTypeDeclaration)
@@ -308,7 +284,8 @@ public class LambdaTypeDescriptors {
                 .build())
         .setNative(false)
         .setJsFunction(true)
-        .build();
+        .build()
+        .withoutTypeParameters();
   }
 
   private static ImmutableMap<String, MethodDescriptor> createMethodDescriptorBySignatureMap(

@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -196,7 +197,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   public ImmutableList<TypeDescriptor> getParameterTypeDescriptors() {
     return getParameterDescriptors().stream()
         .map(ParameterDescriptor::getTypeDescriptor)
-        .collect(ImmutableList.toImmutableList());
+        .collect(toImmutableList());
   }
 
   @Override
@@ -248,6 +249,29 @@ public abstract class MethodDescriptor extends MemberDescriptor {
             getParameterDescriptors().stream()
                 .map(ParameterDescriptor::toRawParameterDescriptor)
                 .collect(toImmutableList()))
+        .build();
+  }
+
+  /** Removes the type parameters declared in the method. */
+  // TODO(b/13096948): This is only needed to remove the type parameters from JsFunction
+  // methods. JsCompiler does not have a way to represent type parameterized function types; if
+  // typedefs were allowed templates, J2CL could represent JsFunctions using typedefs allowing
+  // the methods be parameterized.
+  @Memoized
+  public MethodDescriptor withoutTypeParameters() {
+    MethodDescriptor declarationDescriptor =
+        getDeclarationDescriptor() == this
+            ? null
+            : getDeclarationDescriptor().withoutTypeParameters();
+    Set<TypeVariable> typeParameters = new HashSet<>(getTypeParameterTypeDescriptors());
+    return Builder.from(
+            specializeTypeVariables(
+                p ->
+                    typeParameters.contains(p)
+                        ? TypeVariable.createWildcardWithBound(p.getBoundTypeDescriptor())
+                        : p))
+        .setDeclarationMethodDescriptor(declarationDescriptor)
+        .setTypeParameterTypeDescriptors(ImmutableList.of())
         .build();
   }
 
@@ -627,7 +651,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
                   getParameterDescriptors().stream(),
                   parameterTypeDescriptors.stream(),
                   (pd, td) -> pd.toBuilder().setTypeDescriptor(td).build())
-              .collect(ImmutableList.toImmutableList()));
+              .collect(toImmutableList()));
     }
 
     public Builder addParameterTypeDescriptors(
@@ -659,7 +683,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
           .map(
               typeDescriptor ->
                   ParameterDescriptor.newBuilder().setTypeDescriptor(typeDescriptor).build())
-          .collect(ImmutableList.toImmutableList());
+          .collect(toImmutableList());
     }
 
     public Builder setParameterDescriptors(ParameterDescriptor... parameterDescriptors) {
@@ -678,7 +702,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
               .map(
                   parameterDescriptor ->
                       parameterDescriptor.toBuilder().setJsOptional(false).build())
-              .collect(ImmutableList.toImmutableList()));
+              .collect(toImmutableList()));
     }
 
     public Builder setDeclarationMethodDescriptor(MethodDescriptor declarationMethodDescriptor) {
