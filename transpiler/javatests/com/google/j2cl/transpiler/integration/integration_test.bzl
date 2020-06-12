@@ -32,18 +32,12 @@ def integration_test(
         deps = [],
         defs = [],
         main_class = None,
-        enable_gwt = False,
-        enable_rta = True,
-        enable_bundle_size_report = False,
-        gwt_deps = [],
         closure_defines = dict(),
-        disable_uncompiled_test = False,
-        disable_compiled_test = False,
-        disable_esnext_compiled_test = False,
         suppress = [],
         j2cl_library_tags = [],
         tags = [],
-        plugins = []):
+        plugins = [],
+        **kwargs):
     """Macro that turns Java files into integration test targets.
 
     deps are Labels of j2cl_library() rules. NOT labels of
