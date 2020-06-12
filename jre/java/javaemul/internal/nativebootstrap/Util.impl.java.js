@@ -105,6 +105,10 @@ class Util {
     if (jre.classMetadata == 'SIMPLE') {
       return ctor.prototype.$$classMetadata[0];
     } else if (jre.classMetadata == 'STRIPPED') {
+      if (goog.DEBUG) {
+        return ctor.prototype.$$classMetadata[0] + '_' +
+            Util.$getGeneratedClassName_(ctor);
+      }
       return Util.$getGeneratedClassName_(ctor);
     } else {
       throw new Error('Incorrect value: ' + jre.classMetadata);
@@ -120,6 +124,10 @@ class Util {
     if (jre.classMetadata == 'SIMPLE') {
       return ctor.prototype.$$classMetadata[2];
     } else if (jre.classMetadata == 'STRIPPED') {
+      if (goog.DEBUG) {
+        return ctor.prototype.$$classMetadata[2] + '_' +
+            Util.$getGeneratedClassName_(ctor);
+      }
       return Util.$getGeneratedClassName_(ctor);
     } else {
       throw new Error('Incorrect value: ' + jre.classMetadata);

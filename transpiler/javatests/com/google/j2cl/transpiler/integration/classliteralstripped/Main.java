@@ -134,8 +134,8 @@ public class Main {
   }
 
   private static void assertClassName(String name, String canonicalName, String simpleName) {
-    assertTrue("Name should have the pattern Class$obf_1XXX", name.startsWith("Class$obf_10"));
-    assertEquals(name, simpleName);
+    assertTrue("Name should have the pattern XXX_Class$obf_1XXX", name.contains("Class$obf_10"));
+    assertTrue(name.endsWith(simpleName));
     assertEquals(name, canonicalName);
   }
 
