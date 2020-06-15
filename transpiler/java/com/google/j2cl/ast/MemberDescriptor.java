@@ -20,6 +20,8 @@ import static com.google.common.base.Preconditions.checkArgument;
 import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.ast.MethodDescriptor.MethodOrigin;
 import com.google.j2cl.common.InternalCompilerError;
+import java.util.Map;
+import java.util.function.Function;
 import javax.annotation.Nullable;
 
 /** Abstract base class for member descriptors. */
@@ -257,4 +259,10 @@ public abstract class MemberDescriptor
     String privateSuffix = getVisibility().isPrivate() ? "_" : "";
     return String.format("%sf_%s__%s%s", prefix, name, typeMangledName, privateSuffix);
   }
+
+  public abstract MemberDescriptor specializeTypeVariables(
+      Map<TypeVariable, TypeDescriptor> applySpecializedTypeArgumentByTypeParameters);
+
+  public abstract MemberDescriptor specializeTypeVariables(
+      Function<TypeVariable, ? extends TypeDescriptor> replacingTypeDescriptorByTypeVariable);
 }

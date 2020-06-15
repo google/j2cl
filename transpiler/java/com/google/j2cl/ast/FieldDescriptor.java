@@ -20,7 +20,9 @@ import static com.google.common.base.Preconditions.checkState;
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
 import com.google.j2cl.common.ThreadLocalInterner;
+import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
 import javax.annotation.Nullable;
 
 /** A (by signature) reference to a field. */
@@ -152,8 +154,6 @@ public abstract class FieldDescriptor extends MemberDescriptor {
     return thisField.getName().equals(thatField.getName());
   }
 
-  abstract Builder toBuilder();
-
   @Override
   @Memoized
   public String getBinaryName() {
@@ -165,6 +165,28 @@ public abstract class FieldDescriptor extends MemberDescriptor {
   public String getMangledName() {
     return computePropertyMangledName();
   }
+
+  @Override
+  public FieldDescriptor specializeTypeVariables(
+      Map<TypeVariable, TypeDescriptor> applySpecializedTypeArgumentByTypeParameters) {
+    return specializeTypeVariables(
+        TypeDescriptors.mappingFunctionFromMap(applySpecializedTypeArgumentByTypeParameters));
+  }
+
+  @Override
+  public FieldDescriptor specializeTypeVariables(
+      Function<TypeVariable, ? extends TypeDescriptor> replacingTypeDescriptorByTypeVariable) {
+    if (AstUtils.isIdentityFunction(replacingTypeDescriptorByTypeVariable)) {
+      return this;
+    }
+
+    return FieldDescriptor.Builder.from(this)
+        .setTypeDescriptor(
+            getTypeDescriptor().specializeTypeVariables(replacingTypeDescriptorByTypeVariable))
+        .build();
+  }
+
+  abstract Builder toBuilder();
 
   public static Builder newBuilder() {
     return new AutoValue_FieldDescriptor.Builder()

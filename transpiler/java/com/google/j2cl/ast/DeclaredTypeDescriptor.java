@@ -19,6 +19,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
+import static com.google.common.collect.ImmutableMap.toImmutableMap;
 import static java.util.stream.Collectors.joining;
 
 import com.google.auto.value.AutoValue;
@@ -627,7 +628,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   }
 
   @Override
-  public TypeDescriptor specializeTypeVariables(
+  public DeclaredTypeDescriptor specializeTypeVariables(
       Function<TypeVariable, ? extends TypeDescriptor> replacementTypeArgumentByTypeVariable) {
     if (AstUtils.isIdentityFunction(replacementTypeArgumentByTypeVariable)) {
       return this;
@@ -641,16 +642,45 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
 
     return Builder.from(this)
         .setTypeArgumentDescriptors(
-            getTypeArgumentDescriptors()
-                .stream()
+            getTypeArgumentDescriptors().stream()
                 .map(t -> t.specializeTypeVariables(replacementTypeArgumentByTypeVariable))
                 .collect(toImmutableList()))
+        .setSuperTypeDescriptorFactory(
+            () ->
+                getSuperTypeDescriptor() != null
+                    ? getSuperTypeDescriptor()
+                        .specializeTypeVariables(replacementTypeArgumentByTypeVariable)
+                    : null)
+        .setInterfaceTypeDescriptorsFactory(
+            () ->
+                getInterfaceTypeDescriptors().stream()
+                    .map(t -> t.specializeTypeVariables(replacementTypeArgumentByTypeVariable))
+                    .collect(toImmutableList()))
         .setJsFunctionMethodDescriptorFactory(
             () ->
                 getJsFunctionMethodDescriptor() != null
                     ? getJsFunctionMethodDescriptor()
                         .specializeTypeVariables(replacementTypeArgumentByTypeVariable)
                     : null)
+        .setSingleAbstractMethodDescriptorFactory(
+            () ->
+                getSingleAbstractMethodDescriptor() != null
+                    ? getSingleAbstractMethodDescriptor()
+                        .specializeTypeVariables(replacementTypeArgumentByTypeVariable)
+                    : null)
+        .setDeclaredFieldDescriptorsFactory(
+            () ->
+                getDeclaredFieldDescriptors().stream()
+                    .map(f -> f.specializeTypeVariables(replacementTypeArgumentByTypeVariable))
+                    .collect(toImmutableList()))
+        .setDeclaredMethodDescriptorsFactory(
+            () ->
+                getDeclaredMethodDescriptors().stream()
+                    .map(m -> m.specializeTypeVariables(replacementTypeArgumentByTypeVariable))
+                    .collect(
+                        toImmutableMap(
+                            m -> m.getDeclarationDescriptor().getMethodSignature(),
+                            Function.identity())))
         .build();
   }
 

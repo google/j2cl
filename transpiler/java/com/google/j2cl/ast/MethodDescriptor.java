@@ -561,12 +561,14 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     return getEnclosingTypeDescriptor().getTypeDeclaration().getOverriddenMethodDescriptors(this);
   }
 
+  @Override
   public MethodDescriptor specializeTypeVariables(
       Map<TypeVariable, TypeDescriptor> applySpecializedTypeArgumentByTypeParameters) {
     return specializeTypeVariables(
         TypeDescriptors.mappingFunctionFromMap(applySpecializedTypeArgumentByTypeParameters));
   }
 
+  @Override
   public MethodDescriptor specializeTypeVariables(
       Function<TypeVariable, ? extends TypeDescriptor> replacingTypeDescriptorByTypeVariable) {
     if (AstUtils.isIdentityFunction(replacingTypeDescriptorByTypeVariable)) {
