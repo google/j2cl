@@ -175,7 +175,9 @@ def setup_j2cl_workspace():
 
     http_archive(
         name = "org_gwtproject_gwt",
-        url = "https://gwt.googlesource.com/gwt/+archive/master.tar.gz",
+        strip_prefix = "gwt-release-2.9.0",
+        url = "https://github.com/gwtproject/gwt/archive/release/2.9.0.zip",
+        sha256 = "e4931f9d6ff4477e16e22cdfe318c69c0f2088c1528d8743ce54c530cd3e89fa",
     )
 
     http_archive(
