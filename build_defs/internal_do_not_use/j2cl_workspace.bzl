@@ -32,9 +32,10 @@ def setup_j2cl_workspace():
 
     # We cannot replace com_google_jsinterop_annotations so choose a different name
     http_archive(
-        name = "com_google_jsinterop_annotations_head",
-        urls = ["https://github.com/google/jsinterop-annotations/archive/master.zip"],
-        strip_prefix = "jsinterop-annotations-master",
+        name = "com_google_jsinterop_annotations-j2cl",
+        urls = ["https://github.com/google/jsinterop-annotations/archive/2.0.1.zip"],
+        strip_prefix = "jsinterop-annotations-2.0.1",
+        sha256 = "29379768aa64811f8bcb515a9da2a4eb44acd6b439ea20b3e622155687e6843d",
     )
 
     jvm_maven_import_external(
