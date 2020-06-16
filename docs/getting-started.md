@@ -116,6 +116,8 @@ and you are done.
 
 *   [JsInterop Cookbook](jsinterop-by-example.md) for examples on how to interop
     with Java and JavaScript.
+*   [Guava Example](https://github.com/google/j2cl/tree/master/samples/guava)
+    for a Hello World example using Guava.
 *   [J2CL Best Practices](best-practices.md) to make informed decisions for your
     project.
 *   [J2CL Transpiler Readable Repo](https://github.com/google/j2cl/tree/master/transpiler/javatests/com/google/j2cl/transpiler/readable)

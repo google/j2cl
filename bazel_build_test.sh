@@ -27,4 +27,5 @@ bazel test transpiler/javatests/com/google/j2cl/transpiler/integration/emptyclas
 # Run CI test if requested
 if [[ $1 == "CI" ]]; then
   bazel test transpiler/javatests/com/google/j2cl/transpiler/integration/...
+  (cd samples/guava && bazel build src/main/...)
 fi
