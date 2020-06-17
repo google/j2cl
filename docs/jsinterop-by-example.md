@@ -36,11 +36,11 @@ const Linkify = goog.require("goog.string.linkify");
 Linkify.findFirstEmail("this is an email: aaa@gmail.com");
 ```
 
-### `@JsType` - Interface with a Closure type.
+### `@JsType` - Interface with a Closure type. {#closure_type}
+
 Note that `@JsType` is just syntactical sugar for applying `@JsConstructor`,
 `@JsMethod` or`@JsProperty` to all public constructors, methods and properties
 respectively.
-
 
 ```java
 @JsType(isNative=true, namespace="goog.html.sanitizer")
@@ -64,6 +64,18 @@ static void main() {
   builder.allowCssStyles();
   SafeHtml html = new HtmlSanitizer(builder).sanitize("<div />");
 }
+```
+
+
+### `@JsType` - Interface with non top-level exports and TypeScript types.
+
+Similar to interfacing with [Closure type with inner classes](#closure_type).
+However if you don't want to declare a Java type for the top level export,
+you can use 'dot' notation when specifying the type's name.
+
+```java
+@JsType(isNative=true, name="bar.Foo" namespace="path.for.directory.of.type")
+public class Foo {}
 ```
 
 ### `@JsType` - Interface with an [extern type](https://github.com/google/closure-compiler/wiki/Externs-For-Common-Libraries).
