@@ -23,7 +23,7 @@ import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.Option;
 
 /** A javac-like command line driver for @GwtIncompatible stripper. */
-final class GwtIncompatibleStripperCommandLineRunner extends CommandLineTool {
+public final class GwtIncompatibleStripperCommandLineRunner extends CommandLineTool {
   @Argument(metaVar = "<source files .java|.srcjar>", usage = "source files")
   protected List<String> files = new ArrayList<>();
 
