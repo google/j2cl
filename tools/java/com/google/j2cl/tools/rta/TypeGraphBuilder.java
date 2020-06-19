@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.Map;
 
 /** Give information about inheritance relationships between types. */
-public class TypeGraphBuilder {
+class TypeGraphBuilder {
 
   static Collection<Type> build(List<LibraryInfo> libraryInfos) {
     Map<String, Type> typesByName = new LinkedHashMap<>();

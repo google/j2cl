@@ -33,7 +33,7 @@ import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.Option;
 
 /** Runs The J2clRta as a worker. */
-public class BazelJ2clRta extends BazelWorker {
+final class BazelJ2clRta extends BazelWorker {
 
   private static final int CACHE_SIZE =
       Integer.parseInt(System.getProperty("j2cl.rta.protocachesize", "5000"));

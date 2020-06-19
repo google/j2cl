@@ -23,7 +23,7 @@ import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.Option;
 
 /** Runs The @GwtIncompatible stripper as a worker. */
-public class BazelGwtIncompatibleStripper extends BazelWorker {
+final class BazelGwtIncompatibleStripper extends BazelWorker {
   @Argument(metaVar = "<source files .java|.srcjar>", usage = "source files")
   protected List<String> files = new ArrayList<>();
 
