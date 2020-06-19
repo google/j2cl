@@ -21,6 +21,7 @@ j2cl_mirror_from_gwt(
     extra_js_srcs = [":test_defines"],
     generate_build_test = False,
     javacopts = [
+        "-Xep:DoNotCall:OFF",
         "-Xep:CheckReturnValue:OFF",
         "-Xep:EqualsIncompatibleType:OFF",
         "-Xep:ReturnValueIgnored:OFF",
@@ -58,6 +59,7 @@ java_test(
         ":java_emul_internal",
     ],
     javacopts = [
+        "-Xep:DoNotCall:OFF",
         "-Xep:IdentityBinaryExpression:OFF",
         "-Xep:EqualsIncompatibleType:OFF",
         "-Xep:SelfComparison:OFF",
