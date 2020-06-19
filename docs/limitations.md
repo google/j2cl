@@ -1,3 +1,5 @@
+[comment]: # TOC
+
 # Limitations of J2CL - Java compatibility
 
 ## No Support for Java Reflection

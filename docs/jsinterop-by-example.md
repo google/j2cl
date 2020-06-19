@@ -1,3 +1,5 @@
+[comment]: # TOC
+
 # J2CL JsInterop by Example
 
 This is meant to be a quick guide on how to use JsInterop. More details can be

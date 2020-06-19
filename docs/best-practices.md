@@ -1,3 +1,5 @@
+[comment]: # TOC
+
 # J2CL Best Practices
 
 ## Build Performance
