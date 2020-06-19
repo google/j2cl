@@ -3,8 +3,8 @@ package(
 )
 
 java_test(
-    name = "JavaPreprocessorTest",
-    srcs = ["JavaPreprocessorTest.java"],
+    name = "GwtIncompatibleStripperTest",
+    srcs = ["GwtIncompatibleStripperTest.java"],
     deps = [
         "//third_party:guava",
         "//third_party:junit",

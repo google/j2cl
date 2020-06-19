@@ -25,18 +25,18 @@ import org.junit.runners.JUnit4;
 
 /** Tests for {@link JavaPreprocessor}. */
 @RunWith(JUnit4.class)
-public class JavaPreprocessorTest {
+public class GwtIncompatibleStripperTest {
 
   @Test
   public void testNoProcess() {
     String content = "public class Foo {}";
-    assertEquals(content, JavaPreprocessor.processFile(content));
+    assertEquals(content, GwtIncompatibleStripper.processFile(content));
   }
 
   @Test
   public void testNoProcessString() {
     String content = "public class Foo {String a = \"@GwtIncompatible\");}";
-    assertEquals(content, JavaPreprocessor.processFile(content));
+    assertEquals(content, GwtIncompatibleStripper.processFile(content));
   }
 
   @Test
@@ -57,7 +57,7 @@ public class JavaPreprocessorTest {
                 Strings.repeat(" ", "public class Foo {".length()),
                 Strings.repeat(" ", "  public X m() {return null;}".length()),
                 Strings.repeat(" ", "}".length()));
-    assertEquals(after, JavaPreprocessor.processFile(before));
+    assertEquals(after, GwtIncompatibleStripper.processFile(before));
   }
 
   @Test
@@ -84,7 +84,7 @@ public class JavaPreprocessorTest {
                 Strings.repeat(" ", "  @GwtIncompatible".length()),
                 Strings.repeat(" ", "  public D n() {}".length()),
                 "}");
-    assertEquals(after, JavaPreprocessor.processFile(before));
+    assertEquals(after, GwtIncompatibleStripper.processFile(before));
   }
 
   @Test
@@ -107,7 +107,7 @@ public class JavaPreprocessorTest {
                 Strings.repeat(" ", "  public String b;".length()),
                 "  public String c;",
                 "}");
-    assertEquals(after, JavaPreprocessor.processFile(before));
+    assertEquals(after, GwtIncompatibleStripper.processFile(before));
   }
 
   @Test
@@ -148,7 +148,7 @@ public class JavaPreprocessorTest {
                 Strings.repeat(" ", "  }".length()),
                 "  String s;",
                 "}");
-    assertEquals(after, JavaPreprocessor.processFile(before));
+    assertEquals(after, GwtIncompatibleStripper.processFile(before));
   }
 
   @Test
@@ -169,7 +169,7 @@ public class JavaPreprocessorTest {
                 Strings.repeat(" ", "  @GwtIncompatible".length()),
                 Strings.repeat(" ", "  public void n() {foo(x /* the value of x */);}".length()),
                 "}");
-    assertEquals(after, JavaPreprocessor.processFile(before));
+    assertEquals(after, GwtIncompatibleStripper.processFile(before));
   }
 
   @Test
@@ -190,7 +190,7 @@ public class JavaPreprocessorTest {
                 Strings.repeat(" ", "  @GwtIncompatible".length()),
                 "  \t" + Strings.repeat(" ", "public B n() {}".length()),
                 "}");
-    assertEquals(after, JavaPreprocessor.processFile(before));
+    assertEquals(after, GwtIncompatibleStripper.processFile(before));
   }
 
   @Test
@@ -213,6 +213,6 @@ public class JavaPreprocessorTest {
                 Strings.repeat(" ", "  //மெ.பை.".length()),
                 Strings.repeat(" ", "  public B n() {}".length()),
                 "}");
-    assertEquals(after, JavaPreprocessor.processFile(before));
+    assertEquals(after, GwtIncompatibleStripper.processFile(before));
   }
 }

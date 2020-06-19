@@ -26,8 +26,8 @@ import org.eclipse.jdt.core.dom.Name;
 import org.eclipse.jdt.core.dom.QualifiedName;
 import org.eclipse.jdt.core.dom.SimpleName;
 
-/** Collects unused imports, so they can be commented out, {@see JavaPreprocessor}. */
-public class UnusedImportsNodeCollector extends ASTVisitor {
+/** Collects unused imports, so they can be commented out, {@see GwtIncompatibleStripper}. */
+class UnusedImportsNodeCollector extends ASTVisitor {
   private List<ImportDeclaration> unusedImports = new ArrayList<>();
   private Set<String> referencedNames = new HashSet<>();
 
