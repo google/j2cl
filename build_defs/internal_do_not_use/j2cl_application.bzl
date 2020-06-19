@@ -91,13 +91,24 @@ def j2cl_application(
     }
     _define_js("%s_dev_config" % name, define_dev_defaults, closure_defines)
 
-    index_html = "<script src='http://localhost:35729/livereload.js'></script>"
-    index_html += "<script src='%s_dev_config.js'></script>" % name
-    index_html += "<script src='%s_dev.js'></script>" % name
+    index_html = """
+<head><script>
+const appName = "%s";
+function loadScript(url) {
+  const scriptElement = document.createElement("script");
+  scriptElement.setAttribute("src", url);
+  document.head.appendChild(scriptElement);
+}
+loadScript(`$${location.protocol}//$${location.hostname}:35729/livereload.js`);
+loadScript(`$${appName}_dev_config.js`);
+loadScript(`$${appName}_dev.js`);
+</script></head>
+"""
+
     dev_resources = [
         ":%s_dev.js" % name,
         ":%s_dev_config.js" % name,
-        _generate_file("%s_dev.html" % name, index_html),
+        _generate_file("%s_dev.html" % name, index_html % name),
     ] + extra_dev_resources
 
     js_devserver(

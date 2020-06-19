@@ -28,7 +28,7 @@ const HelloWorld = goog.require('com.google.j2cl.samples.helloworldlib.HelloWorl
  * @return {void}
  */
 function sayHello() {
-  document.write(HelloWorld.getHelloWorld() + ' and JS!');
+  document.body.innerText = `${HelloWorld.getHelloWorld()} and JS!`;
 }
 
 // Export our method so it could be used outside of the module.

@@ -57,7 +57,7 @@ optimized output looks like:
 ```shell
       $ cat bazel-bin/src/main/java/com/google/j2cl/samples/helloworld/helloworld.js
       Output:
-      document.write('Hello from Java! and JS!');
+      document.body.innerText='Hello from Java! and JS!';
 ```
 
 Amazing, isn't it? When we say J2CL tightly optimizes, we really mean it!
