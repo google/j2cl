@@ -713,9 +713,6 @@ class JdtUtils {
         && enclosingTypeDescriptor.getSuperTypeDescriptor().hasJsConstructor()) {
       jsInfo = JsInfo.Builder.from(jsInfo).setJsMemberType(JsMemberType.CONSTRUCTOR).build();
     }
-    // JDT does not provide method bindings for any bridge methods so the current one must not be a
-    // bridge.
-    boolean isBridge = false;
     return MethodDescriptor.newBuilder()
         .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
         .setName(isConstructor ? null : methodName)
@@ -734,7 +731,6 @@ class JdtUtils {
         .setAbstract(Modifier.isAbstract(methodBinding.getModifiers()))
         .setSynthetic(methodBinding.isSynthetic())
         .setEnumSyntheticMethod(isEnumSyntheticMethod(methodBinding))
-        .setBridge(isBridge)
         .setUnusableByJsSuppressed(JsInteropAnnotationUtils.isUnusableByJsSuppressed(methodBinding))
         .setDeprecated(isDeprecated(methodBinding))
         .build();

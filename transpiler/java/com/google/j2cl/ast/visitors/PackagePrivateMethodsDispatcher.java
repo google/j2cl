@@ -37,20 +37,28 @@ public class PackagePrivateMethodsDispatcher extends NormalizationPass {
     List<Method> dispatchMethods =
         findExposedOverriddenMethods(type.getDeclaration()).entrySet().stream()
             .map(
-                entry ->
-                    AstUtils.createForwardingMethod(
-                        type.getSourcePosition(),
-                        null,
-                        MethodDescriptor.Builder.from(entry.getValue())
-                            .setEnclosingTypeDescriptor(type.getTypeDescriptor())
-                            .setSynthetic(true)
-                            .setBridge(true)
-                            .setNative(false)
-                            .setAbstract(false)
-                            .build(),
-                        entry.getKey(),
-                        "Forwarding method for package private method.",
-                        true))
+                entry -> {
+                  MethodDescriptor originalMethodDescriptor = entry.getValue();
+                  MethodDescriptor declarationDescriptor =
+                      MethodDescriptor.Builder.from(
+                              originalMethodDescriptor.getDeclarationDescriptor())
+                          .setEnclosingTypeDescriptor(type.getTypeDescriptor())
+                          .setDeclarationMethodDescriptor(null)
+                          .setBridge()
+                          .build();
+
+                  return AstUtils.createForwardingMethod(
+                      type.getSourcePosition(),
+                      /* qualifier */ null,
+                      MethodDescriptor.Builder.from(originalMethodDescriptor)
+                          .setEnclosingTypeDescriptor(type.getTypeDescriptor())
+                          .setDeclarationMethodDescriptor(declarationDescriptor)
+                          .setBridge()
+                          .build(),
+                      entry.getKey(),
+                      "Forwarding method for package private method.",
+                      /* isOverride */ true);
+                })
             .collect(Collectors.toList());
     type.addMethods(dispatchMethods);
   }

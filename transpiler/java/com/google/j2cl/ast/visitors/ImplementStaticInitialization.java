@@ -88,18 +88,12 @@ public class ImplementStaticInitialization extends NormalizationPass {
           @Override
           @SuppressWarnings("ReferenceEquality")
           public void exitInvocation(Invocation invocation) {
-            // TODO(b/35802406): Do not use the target declaration descriptor here, since there are
-            // cases, e.g. JsOverlays, in which the enclosing class of the declaration descriptor
-            // is not the same as the actual class of the target.
             recordMemberReference(getCurrentType().getDeclaration(), invocation.getTarget());
           }
 
           @Override
           @SuppressWarnings("ReferenceEquality")
           public void exitFieldAccess(FieldAccess fieldAccess) {
-            // TODO(b/35802406): Do not use the target declaration descriptor here, since there are
-            // cases, e.g. JsOverlays, in which the enclosing class of the declaration descriptor
-            // is not the same as the actual class of the target.
             recordMemberReference(getCurrentType().getDeclaration(), fieldAccess.getTarget());
           }
         });

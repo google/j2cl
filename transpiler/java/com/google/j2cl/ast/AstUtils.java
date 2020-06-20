@@ -209,39 +209,22 @@ public class AstUtils {
       DeclaredTypeDescriptor fromTypeDescriptor,
       String jsDocDescription) {
 
-    /**
-     * When synthesizing methods in a class it is never OK to be accidentally referencing type
-     * variables from some other class (since the output will reference template variables that are
-     * unknown in the current context). So make sure that the descriptor for this new method has
-     * been adequately specialized into the context of the class into which it is going to be
-     * placed.
-     */
-    Map<TypeVariable, TypeDescriptor> specializedTypeArgumentByTypeParameters =
-        fromTypeDescriptor.getSpecializedTypeArgumentByTypeParameters();
-
     return createForwardingMethod(
         sourcePosition,
-        null,
-        MethodDescriptor.Builder.from(
-                targetMethodDescriptor.specializeTypeVariables(
-                    specializedTypeArgumentByTypeParameters))
+        /* qualifier */ null,
+        MethodDescriptor.Builder.from(targetMethodDescriptor)
+            .setDeclarationMethodDescriptor(
+                MethodDescriptor.Builder.from(targetMethodDescriptor.getDeclarationDescriptor())
+                    .setEnclosingTypeDescriptor(fromTypeDescriptor)
+                    .setBridge()
+                    .build())
             .setEnclosingTypeDescriptor(fromTypeDescriptor)
-            // TODO(b/35802406): don't synthesize methods with a separate declaration site.
-            .setDeclarationMethodDescriptor(targetMethodDescriptor)
-            .setSynthetic(true)
-            .setBridge(true)
-            .setAbstract(false)
-            .setNative(false)
-            .setDefaultMethod(false)
+            .setBridge()
             .build(),
-        MethodDescriptor.Builder.from(
-                targetMethodDescriptor.specializeTypeVariables(
-                    specializedTypeArgumentByTypeParameters))
-            .setDeclarationMethodDescriptor(targetMethodDescriptor)
-            .build(),
+        targetMethodDescriptor,
         jsDocDescription,
-        true,
-        true);
+        /* isStaticDispatch */ true,
+        /* isOverride */ true);
   }
 
   /**
@@ -263,7 +246,7 @@ public class AstUtils {
         fromMethodDescriptor,
         toMethodDescriptor,
         jsDocDescription,
-        false,
+        /* isStaticDispatch */ false,
         isOverride);
   }
 

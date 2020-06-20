@@ -589,7 +589,9 @@ class JavaEnvironment {
 
     TypeMirror returnType = methodElement.getReturnType();
     if (isSpecialized(declarationMethodElement, parameters, returnType)) {
-      declarationMethodDescriptor = createDeclarationMethodDescriptor(declarationMethodElement);
+      declarationMethodDescriptor =
+          createDeclarationMethodDescriptor(
+              declarationMethodElement, enclosingTypeDescriptor.toUnparameterizedTypeDescriptor());
     }
 
     TypeDescriptor returnTypeDescriptor =
@@ -636,8 +638,15 @@ class JavaEnvironment {
   MethodDescriptor createDeclarationMethodDescriptor(ExecutableElement methodElement) {
     DeclaredTypeDescriptor enclosingTypeDescriptor =
         createDeclaredTypeDescriptor(methodElement.getEnclosingElement().asType());
+    return createDeclarationMethodDescriptor(methodElement, enclosingTypeDescriptor);
+  }
+
+  /** Create a MethodDescriptor directly based on the given JavaC ExecutableElement. */
+  MethodDescriptor createDeclarationMethodDescriptor(
+      ExecutableElement methodElement, DeclaredTypeDescriptor enclosingTypeDescriptor) {
     return createMethodDescriptor(enclosingTypeDescriptor, methodElement, methodElement);
   }
+
 
   /////////////////////////////////////////////////////////////////////////////////////////////////
   // Utility methods to process nullability annotations on classes that are compiled separately.
@@ -808,9 +817,6 @@ class JavaEnvironment {
         && enclosingTypeDescriptor.getSuperTypeDescriptor().hasJsConstructor()) {
       jsInfo = JsInfo.Builder.from(jsInfo).setJsMemberType(JsMemberType.CONSTRUCTOR).build();
     }
-    // JDT does not provide method bindings for any bridge methods so the current one must not be a
-    // bridge.
-    boolean isBridge = false;
     return MethodDescriptor.newBuilder()
         .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
         .setName(isConstructor ? null : methodName)
@@ -829,7 +835,6 @@ class JavaEnvironment {
         .setAbstract(isAbstract(declarationMethodElement))
         .setSynthetic(isSynthetic(declarationMethodElement))
         .setEnumSyntheticMethod(isEnumSyntheticMethod(declarationMethodElement))
-        .setBridge(isBridge)
         .setUnusableByJsSuppressed(
             JsInteropAnnotationUtils.isUnusableByJsSuppressed(declarationMethodElement))
         .setDeprecated(isDeprecated(declarationMethodElement))

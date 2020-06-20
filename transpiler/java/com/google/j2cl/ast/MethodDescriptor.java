@@ -613,7 +613,16 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     public abstract Builder setSynthetic(boolean isSynthetic);
 
-    public abstract Builder setBridge(boolean isBridge);
+    /* Internal method to set the bridge attribute. Use setBridge() instead. */
+    abstract Builder setBridge(boolean isBridge);
+
+    public Builder setBridge() {
+      return setBridge(true)
+          .setDefaultMethod(false)
+          .setSynthetic(true)
+          .setAbstract(false)
+          .setNative(false);
+    }
 
     public abstract Builder setEnumSyntheticMethod(boolean isEnumSyntheticMethod);
 
@@ -780,6 +789,14 @@ public abstract class MethodDescriptor extends MemberDescriptor {
                     .count()
                 <= 1);
 
+        // Make sure that the enclosing type in the descriptor is the same as the one
+        // in the declaration.
+        checkState(
+            methodDescriptor
+                .getDeclarationDescriptor()
+                .getEnclosingTypeDescriptor()
+                .isSameBaseType(methodDescriptor.getEnclosingTypeDescriptor()));
+
         // varargs parameter is the last one.
         checkState(
             !methodDescriptor.isVarargs()
@@ -796,7 +813,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
                   + "."
                   + methodDescriptor.getName(),
               methodDeclarationParameterTypeDescriptors);
-          // TODO(b/35802406): Add an assertion that the declaration has the same enclosing type.
         }
       }
       return internedMethodDescriptor;
@@ -807,6 +823,9 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       if (builder.isConstructor()) {
         // clear the name.
         builder.setName(null);
+      }
+      if (methodDescriptor == methodDescriptor.getDeclarationDescriptor()) {
+        builder.setDeclarationMethodDescriptor(null);
       }
       return builder;
     }

@@ -446,27 +446,16 @@ public class BridgeMethodsCreator extends NormalizationPass {
     // Use the bridge declaration to get the right mangled name but keep the parameterization to
     // provide the right type signatures.
     MethodDescriptor declaration =
-        setBridgeMethodAttributes(
-                MethodDescriptor.Builder.from(bridgeMethodDescriptor.getDeclarationDescriptor())
-                    .setEnclosingTypeDescriptor(typeDeclaration.toUnparameterizedTypeDescriptor()))
+        MethodDescriptor.Builder.from(bridgeMethodDescriptor.getDeclarationDescriptor())
+            .setEnclosingTypeDescriptor(typeDeclaration.toUnparameterizedTypeDescriptor())
+            .setBridge()
             .build();
-    bridgeMethodDescriptor =
-        setBridgeMethodAttributes(
-                MethodDescriptor.Builder.from(bridgeMethodDescriptor)
-                    .setEnclosingTypeDescriptor(typeDeclaration.toUnparameterizedTypeDescriptor())
-                    .setDeclarationMethodDescriptor(declaration)
-                    .setJsFunction(bridgeMethodDescriptor.isJsFunction()))
-            .build();
-    return bridgeMethodDescriptor;
-  }
 
-  private static MethodDescriptor.Builder setBridgeMethodAttributes(
-      MethodDescriptor.Builder builder) {
-    return builder
-        .setBridge(true)
-        .setDefaultMethod(false)
-        .setSynthetic(true)
-        .setAbstract(false)
-        .setNative(false);
+    return MethodDescriptor.Builder.from(bridgeMethodDescriptor)
+        .setEnclosingTypeDescriptor(typeDeclaration.toUnparameterizedTypeDescriptor())
+        .setDeclarationMethodDescriptor(declaration)
+        .setJsFunction(bridgeMethodDescriptor.isJsFunction())
+        .setBridge()
+        .build();
   }
 }

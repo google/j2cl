@@ -64,8 +64,6 @@ public class Main {
     }
   }
 
-  // TODO(b/35802406): This is an example where staticMethod in the Overlay type will have a
-  // declaration descriptor with the native type as the enclosing class.
   @JsType(isNative = true, namespace = "test.foo", name = "NativeJsTypeWithOverlay")
   static final class NativesTypeWithOnlyPrivateOverlay<T> {
     @JsOverlay private static Integer field = new Integer(42);

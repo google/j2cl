@@ -93,12 +93,6 @@ public class DefaultMethodsResolver extends NormalizationPass {
       TypeDeclaration typeDeclaration) {
     List<DeclaredTypeDescriptor> typeDescriptors =
         Lists.newArrayList(typeDeclaration.getTransitiveInterfaceTypeDescriptors());
-    // Make sure the interface descriptors are declaration versions. This improves cache hits in
-    // some later analysis.
-    for (int i = 0; i < typeDescriptors.size(); i++) {
-      DeclaredTypeDescriptor superInterfaceTypeDescriptor = typeDescriptors.get(i);
-      typeDescriptors.set(i, superInterfaceTypeDescriptor.toUnparameterizedTypeDescriptor());
-    }
 
     // Sort so most specific interfaces are first.
     Collections.sort(
