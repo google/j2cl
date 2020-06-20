@@ -454,7 +454,6 @@ public class BridgeMethodsCreator extends NormalizationPass {
     return MethodDescriptor.Builder.from(bridgeMethodDescriptor)
         .setEnclosingTypeDescriptor(typeDeclaration.toUnparameterizedTypeDescriptor())
         .setDeclarationMethodDescriptor(declaration)
-        .setJsFunction(bridgeMethodDescriptor.isJsFunction())
         .setBridge()
         .build();
   }
