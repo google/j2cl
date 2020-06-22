@@ -29,6 +29,7 @@ public class Main {
     testSuperCallDefaultMethod();
     testStaticMethods();
     testPrivateMethods();
+    testDiamondProperty();
   }
 
   public interface SomeInterface {
@@ -189,5 +190,67 @@ public class Main {
     }
 
     assertEquals("default-method", new SubClass().defaultMethod());
+  }
+
+  interface DiamondLeft<T extends DiamondLeft<T>> {
+    String NAME = "DiamondLeft";
+
+    default String name(T t) {
+      return NAME;
+    }
+  }
+
+  interface DiamondRight<T extends DiamondRight<T>> {
+    String NAME = "DiamondRight";
+
+    default String name(T t) {
+      return NAME;
+    }
+  }
+
+  interface Bottom<T extends Bottom<T>> extends DiamondLeft<T>, DiamondRight<T> {
+    String NAME = "Bottom";
+
+    @Override
+    default String name(T t) {
+      return NAME;
+    }
+  }
+
+  static class A<T extends DiamondLeft<T>, V extends DiamondRight<V>>
+      implements DiamondLeft<T>, DiamondRight<V> {}
+
+  // TODO(b/159627606): Uncomment when the bug is fixed.
+  // static class B extends A<B, B> implements Bottom<B> {}
+
+  static class C implements Bottom<C> {
+    static String NAME = "C";
+
+    @Override
+    public String name(C c) {
+      return NAME;
+    }
+  }
+
+  private static void testDiamondProperty() {
+    A<? extends DiamondLeft<?>, ? extends DiamondRight<?>> a = new A<>();
+    DiamondLeft<?> dl = a;
+    assertEquals(DiamondLeft.NAME, dl.name(null));
+    DiamondRight<?> dr = a;
+    assertEquals(DiamondRight.NAME, dr.name(null));
+
+    // TODO(b/159627606): Uncomment when the bug is fixed.
+    // a = new B();
+    // dl = a;
+    // assertEquals(Bottom.NAME, dl.name(null));
+    // dr = a;
+    // assertEquals(Bottom.NAME, dr.name(null));
+
+    C c = new C();
+    dl = c;
+    assertEquals(C.NAME, dl.name(null));
+    dr = c;
+    assertEquals(C.NAME, dr.name(null));
+    assertEquals(C.NAME, c.name(null));
   }
 }
