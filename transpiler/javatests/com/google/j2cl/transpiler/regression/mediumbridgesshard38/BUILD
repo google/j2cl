@@ -10,7 +10,6 @@ j2cl_test(
         "TestCases.srcjar",
         "TestShard.java",
     ],
-    tags = ["manual"],
     deps = [
         "//third_party:gwt-jsinterop-annotations-j2cl",
         "//third_party:junit-j2cl",
