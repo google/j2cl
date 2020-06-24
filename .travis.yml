@@ -1,8 +1,7 @@
 dist: xenial
 sudo: required
 
-# Not technically required but suppresses 'Ruby' in Job status message.
-language: java
+language: python3
 
 os:
   - linux
@@ -16,11 +15,13 @@ before_install:
       sysctl kernel.unprivileged_userns_clone=1
       OS=linux
     fi
-    BAZEL=$(cat ".bazelversion")
-    wget -O install.sh "https://github.com/bazelbuild/bazel/releases/download/${BAZEL}/bazel-${BAZEL}-installer-${OS}-x86_64.sh"
-    chmod +x install.sh
-    ./install.sh --user
-    rm -f install.sh
+
+    BAZELISK_VERSION=v1.5.0
+    if [ ! -d "${HOME}/bin" ]; then
+      mkdir "${HOME}/bin"
+    fi
+    wget -O "${HOME}/bin/bazel" "https://github.com/bazelbuild/bazelisk/releases/download/${BAZELISK_VERSION}/bazelisk-${OS}-amd64"
+    chmod +x "${HOME}/bin/bazel"
 
 before_script:
   - echo "startup --output_base=$HOME/.cache/bazel" >> .bazelrc
