@@ -27,16 +27,12 @@ since J2CL closely follows Bazel Java idioms.
 Let's get started with cloning the repository and build a sample app from
 source:
 
-
--   Install Bazel 2.2.0:
+-   Install [Bazelisk](https://github.com/bazelbuild/bazelisk):
 
 ```shell
-    $ npm install -g @bazel/bazel@2.2.0
+    $ npm install -g @bazel/bazelisk
+    $ alias bazel=bazelisk
 ```
-
-(See [Install Bazel](https://bazel.build/versions/master/docs/install.html) for
-different platforms.)
-
 
 -   Clone this repository:
 
