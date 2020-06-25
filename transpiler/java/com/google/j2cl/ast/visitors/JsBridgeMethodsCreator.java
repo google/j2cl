@@ -171,19 +171,13 @@ public class JsBridgeMethodsCreator extends NormalizationPass {
       DeclaredTypeDescriptor targetTypeDescriptor,
       MethodDescriptor bridgeMethodDescriptor,
       MethodDescriptor forwardToMethodDescriptor) {
-    MethodDescriptor declarationDescriptor =
-        MethodDescriptor.Builder.from(bridgeMethodDescriptor.getDeclarationDescriptor())
-            .setEnclosingTypeDescriptor(targetTypeDescriptor)
-            .setBridge()
-            .build();
 
     return AstUtils.createForwardingMethod(
         sourcePosition,
         /* qualifier */ null,
         MethodDescriptor.Builder.from(bridgeMethodDescriptor)
             .setEnclosingTypeDescriptor(targetTypeDescriptor)
-            .setDeclarationMethodDescriptor(declarationDescriptor)
-            .setBridge()
+            .setBridge(bridgeMethodDescriptor.getDeclarationDescriptor())
             .build(),
         forwardToMethodDescriptor,
         "Bridge method for exposing non-JsMethod.",

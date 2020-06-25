@@ -18,8 +18,6 @@ package com.google.j2cl.ast.visitors;
 import static com.google.common.base.Preconditions.checkArgument;
 
 import com.google.common.collect.Collections2;
-import com.google.common.collect.LinkedHashMultimap;
-import com.google.common.collect.Multimap;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.DeclaredTypeDescriptor;
@@ -64,8 +62,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
   /** Creates and adds bridge methods to the Java type and fixes the target JS methods. */
   private static Collection<Method> createBridgeMethods(Type type) {
     Set<String> usedMangledNames = new HashSet<>();
-    Multimap<MethodDescriptor, Method> bridgeMethodsByTargetMethodDescriptor =
-        LinkedHashMultimap.create();
+    List<Method> bridgeMethods = new ArrayList<>();
 
     // Plan bridge methods.
     Map<MethodDescriptor, MethodDescriptor> targetMethodDescriptorsByBridgeMethodDescriptor =
@@ -87,11 +84,10 @@ public class BridgeMethodsCreator extends NormalizationPass {
         continue;
       }
 
-      bridgeMethodsByTargetMethodDescriptor.put(
-          targetMethodDescriptor.getDeclarationDescriptor(), bridgeMethod);
+      bridgeMethods.add(bridgeMethod);
     }
 
-    return bridgeMethodsByTargetMethodDescriptor.values();
+    return bridgeMethods;
   }
 
   /** Returns the mappings from the needed bridge method to the targeted method. */
@@ -345,8 +341,6 @@ public class BridgeMethodsCreator extends NormalizationPass {
     List<Variable> parameters = new ArrayList<>();
     List<Expression> arguments = new ArrayList<>();
 
-    MethodDescriptor declarationBridgeMethodDescriptor =
-        bridgeMethodDescriptor.getDeclarationDescriptor();
     for (int i = 0; i < bridgeMethodDescriptor.getParameterTypeDescriptors().size(); i++) {
       Variable parameter =
           Variable.newBuilder()
@@ -361,7 +355,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
               // type check cast that is inserted below would be considered redundant are removed at
               // a later stage.
               .setTypeDescriptor(
-                  bridgeMethodDescriptor
+                  causeMethod
                       .getDeclarationDescriptor()
                       .getParameterTypeDescriptors()
                       .get(i)
@@ -377,7 +371,8 @@ public class BridgeMethodsCreator extends NormalizationPass {
       TypeDescriptor castToParameterTypeDescriptor =
           targetMethod.getParameterTypeDescriptors().get(i);
       Expression argument =
-          declarationBridgeMethodDescriptor
+          causeMethod
+                  .getDeclarationDescriptor()
                   .getParameterTypeDescriptors()
                   .get(i)
                   .hasSameRawType(castToParameterTypeDescriptor)
@@ -425,7 +420,6 @@ public class BridgeMethodsCreator extends NormalizationPass {
   private static MethodDescriptor adjustTargetForJsFunction(
       MethodDescriptor causeMethod, MethodDescriptor targetMethod) {
     // The MethodDescriptor of the targeted method.
-    JsInfo targetMethodJsInfo = targetMethod.getJsInfo();
     MethodDescriptor.Builder methodDescriptorBuilder = MethodDescriptor.Builder.from(targetMethod);
 
     // If a JsFunction method needs a bridge, only the bridge method is a JsFunction method, and it
@@ -433,28 +427,20 @@ public class BridgeMethodsCreator extends NormalizationPass {
     // If both a method and the bridge method are JsMethod, only the bridge method is a JsMethod,
     // and it targets the *real* implementation, which should be emit as non-JsMethod.
     if (causeMethod.isJsMethod() && targetMethod.inSameTypeAs(causeMethod)) {
-      targetMethodJsInfo = JsInfo.NONE;
-      methodDescriptorBuilder.removeParameterOptionality();
+      methodDescriptorBuilder.removeParameterOptionality().setJsInfo(JsInfo.NONE);
     }
 
-    return methodDescriptorBuilder.setJsInfo(targetMethodJsInfo).setJsFunction(false).build();
+    return methodDescriptorBuilder.setJsFunction(false).build();
   }
 
   private static MethodDescriptor createBridgeMethodDescriptor(
       TypeDeclaration typeDeclaration, MethodDescriptor bridgeMethodDescriptor) {
 
-    // Use the bridge declaration to get the right mangled name but keep the parameterization to
-    // provide the right type signatures.
-    MethodDescriptor declaration =
-        MethodDescriptor.Builder.from(bridgeMethodDescriptor.getDeclarationDescriptor())
-            .setEnclosingTypeDescriptor(typeDeclaration.toUnparameterizedTypeDescriptor())
-            .setBridge()
-            .build();
+    MethodDescriptor bridgeOrigin = bridgeMethodDescriptor.getDeclarationDescriptor();
 
     return MethodDescriptor.Builder.from(bridgeMethodDescriptor)
         .setEnclosingTypeDescriptor(typeDeclaration.toUnparameterizedTypeDescriptor())
-        .setDeclarationMethodDescriptor(declaration)
-        .setBridge()
+        .setBridge(bridgeOrigin)
         .build();
   }
 }

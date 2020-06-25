@@ -180,7 +180,9 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   @Override
   public abstract boolean isDefaultMethod();
 
-  public abstract boolean isBridge();
+  public boolean isBridge() {
+    return getBridgeOrigin() != null;
+  }
 
   public abstract ImmutableList<ParameterDescriptor> getParameterDescriptors();
 
@@ -202,6 +204,9 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
   @Override
   public abstract MethodOrigin getOrigin();
+
+  @Nullable
+  public abstract MethodDescriptor getBridgeOrigin();
 
   public boolean isInit() {
     return getOrigin() == MethodOrigin.SYNTHETIC_INSTANCE_INITIALIZER;
@@ -336,6 +341,14 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   @Memoized
   @Override
   public String getMangledName() {
+    if (isBridge()) {
+      // Bridges are methods that fill the gap between the overridden parent method and
+      // a specialized override, For that reason their mangled name has to be the same as the
+      // method they override but the other properties (e.g. parameter types, etc) are derived
+      // from the specialized method.
+      return getBridgeOrigin().getDeclarationDescriptor().getMangledName();
+    }
+
     if (isConstructor()) {
       return "constructor";
     }
@@ -497,7 +510,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         .setFinal(false)
         .setSynthetic(false)
         .setEnumSyntheticMethod(false)
-        .setBridge(false)
         .setJsFunction(false)
         .setUnusableByJsSuppressed(false)
         .setDeprecated(false)
@@ -613,16 +625,19 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     public abstract Builder setSynthetic(boolean isSynthetic);
 
-    /* Internal method to set the bridge attribute. Use setBridge() instead. */
-    abstract Builder setBridge(boolean isBridge);
-
-    public Builder setBridge() {
-      return setBridge(true)
-          .setDefaultMethod(false)
+    public Builder setBridge(MethodDescriptor methodDescriptor) {
+      return setBridgeOrigin(methodDescriptor)
           .setSynthetic(true)
+          // Clear properties that might have been carried over when creating this
+          // descriptor from an exisiting one.
+          .setDeclarationMethodDescriptor(null)
+          .setDefaultMethod(false)
           .setAbstract(false)
           .setNative(false);
     }
+
+    /** Internal use only. Use {@link #setBridge}. */
+    abstract Builder setBridgeOrigin(MethodDescriptor bridgeOrigin);
 
     public abstract Builder setEnumSyntheticMethod(boolean isEnumSyntheticMethod);
 

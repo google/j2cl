@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.regression.compiler;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.junit.Assert.assertThrows;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -69,6 +70,7 @@ public class NativeDevirtualizationTest {
     assertThat(((Comparable) "Z").compareTo(b) > 0).isTrue();
     assertThat(b.compareTo("Z") < 0).isTrue();
     assertThat(b instanceof String).isTrue();
+    assertThrows(ClassCastException.class, () -> b.compareTo(new Object()));
 
     CharSequence c = HELLO_WORLD;
     assertThat(c.getClass()).isEqualTo(String.class);
@@ -98,6 +100,7 @@ public class NativeDevirtualizationTest {
     assertThat(b.getClass()).isEqualTo(Boolean.class);
     assertThat(b.toString()).isEqualTo("false");
     assertThat(b.hashCode()).isEqualTo(FALSE.hashCode());
+    assertThrows(ClassCastException.class, () -> b.compareTo(new Object()));
   }
 
   @Test
@@ -117,6 +120,7 @@ public class NativeDevirtualizationTest {
     assertThat(b.toString()).isEqualTo("1.1");
     assertThat(b.hashCode()).isEqualTo(ONE_POINT_ONE.hashCode());
     assertThat(b.compareTo((Double) 1.2d) < 0).isTrue();
+    assertThrows(ClassCastException.class, () -> b.compareTo(new Object()));
 
     Number c = ONE_POINT_ONE;
     assertThat(c.getClass()).isEqualTo(Double.class);

@@ -36,14 +36,15 @@ class Comparables {
   static m_compareTo__java_lang_Comparable__java_lang_Object(a, b) {
     Comparables.$clinit();
     var type = typeof a;
+    // Dispatch through the corresponding devirtualized 'bridge' method.
     if (type == 'number') {
-      return Double.m_compareTo__java_lang_Double__java_lang_Object(
+      return Double.m_compareTo__java_lang_Object(
           /**@type {number} */ (a), /**@type {number} */ (b));
     } else if (type == 'boolean') {
-      return Boolean.m_compareTo__java_lang_Boolean__java_lang_Object(
+      return Boolean.m_compareTo__java_lang_Object(
           /**@type {boolean} */ (a), /**@type {boolean} */ (b));
     } else if (type == 'string') {
-      return String.m_compareTo__java_lang_String__java_lang_Object(
+      return String.m_compareTo__java_lang_Object(
           /**@type {string} */ (a), /**@type {string} */ (b));
     }
     return a.m_compareTo__java_lang_Object(b);

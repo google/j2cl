@@ -39,21 +39,13 @@ public class PackagePrivateMethodsDispatcher extends NormalizationPass {
             .map(
                 entry -> {
                   MethodDescriptor originalMethodDescriptor = entry.getValue();
-                  MethodDescriptor declarationDescriptor =
-                      MethodDescriptor.Builder.from(
-                              originalMethodDescriptor.getDeclarationDescriptor())
-                          .setEnclosingTypeDescriptor(type.getTypeDescriptor())
-                          .setDeclarationMethodDescriptor(null)
-                          .setBridge()
-                          .build();
 
                   return AstUtils.createForwardingMethod(
                       type.getSourcePosition(),
                       /* qualifier */ null,
                       MethodDescriptor.Builder.from(originalMethodDescriptor)
                           .setEnclosingTypeDescriptor(type.getTypeDescriptor())
-                          .setDeclarationMethodDescriptor(declarationDescriptor)
-                          .setBridge()
+                          .setBridge(originalMethodDescriptor.getDeclarationDescriptor())
                           .build(),
                       entry.getKey(),
                       "Forwarding method for package private method.",

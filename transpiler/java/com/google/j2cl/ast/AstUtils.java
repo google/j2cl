@@ -213,13 +213,8 @@ public class AstUtils {
         sourcePosition,
         /* qualifier */ null,
         MethodDescriptor.Builder.from(targetMethodDescriptor)
-            .setDeclarationMethodDescriptor(
-                MethodDescriptor.Builder.from(targetMethodDescriptor.getDeclarationDescriptor())
-                    .setEnclosingTypeDescriptor(fromTypeDescriptor)
-                    .setBridge()
-                    .build())
             .setEnclosingTypeDescriptor(fromTypeDescriptor)
-            .setBridge()
+            .setBridge(targetMethodDescriptor.getDeclarationDescriptor())
             .build(),
         targetMethodDescriptor,
         jsDocDescription,

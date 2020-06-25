@@ -267,6 +267,7 @@ public class Method extends Member implements MethodLike {
               .setStatements(statements)
               .build();
       checkState(parameters.size() == methodDescriptor.getParameterDescriptors().size());
+      checkState(methodDescriptor.getDeclarationDescriptor() == methodDescriptor);
 
       return new Method(
           sourcePosition, methodDescriptor, parameters, body, isOverride, jsDocDescription);

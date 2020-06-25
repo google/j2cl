@@ -71,11 +71,12 @@ public class DevirtualizeBoxedTypesAndJsFunctionImplementations extends Normaliz
     TypeDescriptor enclosingTypeDescriptor = methodDescriptor.getEnclosingTypeDescriptor();
     return methodDescriptor.isJsFunction()
         && methodDescriptor
-            .getDeclarationDescriptor()
-            .isSameSignature(
+            .getMangledName()
+            .equals(
                 enclosingTypeDescriptor
                     .getFunctionalInterface()
                     .getJsFunctionMethodDescriptor()
-                    .getDeclarationDescriptor());
+                    .getDeclarationDescriptor()
+                    .getMangledName());
   }
 }
