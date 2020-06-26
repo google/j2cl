@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.ast;
 
-import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static java.util.stream.Collectors.joining;
@@ -804,33 +803,42 @@ public abstract class MethodDescriptor extends MemberDescriptor {
                     .count()
                 <= 1);
 
-        // Make sure that the enclosing type in the descriptor is the same as the one
-        // in the declaration.
-        checkState(
-            methodDescriptor
-                .getDeclarationDescriptor()
-                .getEnclosingTypeDescriptor()
-                .isSameBaseType(methodDescriptor.getEnclosingTypeDescriptor()));
 
         // varargs parameter is the last one.
         checkState(
             !methodDescriptor.isVarargs()
                 || Iterables.getLast(methodDescriptor.getParameterDescriptors()).isVarargs());
-        if (methodDescriptor != methodDescriptor.getDeclarationDescriptor()) {
-          List<TypeDescriptor> methodDeclarationParameterTypeDescriptors =
-              methodDescriptor.getDeclarationDescriptor().getParameterTypeDescriptors();
-          checkArgument(
-              methodDeclarationParameterTypeDescriptors.size()
-                  == methodDescriptor.getParameterTypeDescriptors().size(),
-              "Method parameters (%s) for method %s don't match method declaration (%s)",
-              methodDescriptor.getParameterTypeDescriptors(),
-              methodDescriptor.getEnclosingTypeDescriptor().getReadableDescription()
-                  + "."
-                  + methodDescriptor.getName(),
-              methodDeclarationParameterTypeDescriptors);
-        }
+
+        // Check that the properties of the declaration descriptor are consistent with those
+        // of the method descriptor itself.
+        checkDeclarationDescriptor(methodDescriptor);
       }
       return internedMethodDescriptor;
+    }
+
+    private static void checkDeclarationDescriptor(MethodDescriptor methodDescriptor) {
+      MethodDescriptor declaration = methodDescriptor.getDeclarationDescriptor();
+      if (methodDescriptor == declaration) {
+        return;
+      }
+
+      checkState(
+          declaration
+              .getEnclosingTypeDescriptor()
+              .isSameBaseType(methodDescriptor.getEnclosingTypeDescriptor()));
+
+      checkState(methodDescriptor.getName().equals(declaration.getName()));
+
+      checkState(methodDescriptor.isConstructor() == declaration.isConstructor());
+      // TODO(b/159983149): Uncomment when fixed.
+      // checkState(methodDescriptor.isAbstract() == declaration.isAbstract());
+      // checkState(methodDescriptor.isNative() == declaration.isNative());
+      checkState(methodDescriptor.isDefaultMethod() == declaration.isDefaultMethod());
+      checkState(methodDescriptor.isFinal() == declaration.isFinal());
+      checkState(methodDescriptor.isStatic() == declaration.isStatic());
+      checkState(
+          declaration.getParameterTypeDescriptors().size()
+              == methodDescriptor.getParameterTypeDescriptors().size());
     }
 
     public static Builder from(MethodDescriptor methodDescriptor) {

@@ -299,7 +299,8 @@ class Main extends j_l_Object {
 
   static m_testNewInstance__() {
     Main.$clinit();
-    let rawTIntegerJsBiFunction = TIntegerJsBiFunction.$create__();
+    let rawTIntegerJsBiFunction =
+        /**@type {function(*, Integer):*}*/ (TIntegerJsBiFunction.$create__());
     let parameterizedTIntegerJsBiFunction =
         /**@type {?function(*, Integer):*}*/ (TIntegerJsBiFunction.$create__());
     let rawJsBiFunction = DoubleDoubleJsBiFunction.$create__();
