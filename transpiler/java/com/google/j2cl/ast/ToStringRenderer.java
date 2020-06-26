@@ -124,7 +124,10 @@ class ToStringRenderer {
       public boolean enterJsDocCastExpression(JsDocCastExpression castExpression) {
         print(
             String.format(
-                "/** @type {%s} */ ", castExpression.getTypeDescriptor().getReadableDescription()));
+                "/** @type {%s} */ (",
+                castExpression.getTypeDescriptor().getReadableDescription()));
+        accept(castExpression.getExpression());
+        print(")");
         return false;
       }
 
