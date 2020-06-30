@@ -65,8 +65,7 @@ public class Main {
         Foo.class.getCanonicalName());
 
     assertEquals("Main", Main.class.getSimpleName());
-    // J2CL doesn't follow JLS here:
-    assertEquals("Main$Foo", Foo.class.getSimpleName());
+    assertEquals("Foo", Foo.class.getSimpleName());
 
     assertEquals(
         "class com.google.j2cl.transpiler.integration.classliteral.Main", Main.class.toString());
@@ -87,7 +86,7 @@ public class Main {
     assertEquals(
         "com.google.j2cl.transpiler.integration.classliteral.Main$IFoo",
         IFoo.class.getCanonicalName());
-    assertEquals("Main$IFoo", IFoo.class.getSimpleName());
+    assertEquals("IFoo", IFoo.class.getSimpleName());
     // J2CL doesn't follow JLS here:
     assertEquals(
         "interface com.google.j2cl.transpiler.integration.classliteral.Main$IFoo",
@@ -123,8 +122,7 @@ public class Main {
     assertEquals(
         "com.google.j2cl.transpiler.integration.classliteral.Main$Bar",
         o.getClass().getCanonicalName());
-    // J2CL doesn't follow JLS here:
-    assertEquals("Main$Bar", o.getClass().getSimpleName());
+    assertEquals("Bar", o.getClass().getSimpleName());
     assertEquals(
         "class com.google.j2cl.transpiler.integration.classliteral.Main$Bar",
         o.getClass().toString());
@@ -164,8 +162,7 @@ public class Main {
     assertEquals(
         "com.google.j2cl.transpiler.integration.classliteral.Main$MyJsEnum",
         o.getClass().getCanonicalName());
-    // J2CL doesn't follow JLS here:
-    assertEquals("Main$MyJsEnum", o.getClass().getSimpleName());
+    assertEquals("MyJsEnum", o.getClass().getSimpleName());
     assertEquals(
         "class com.google.j2cl.transpiler.integration.classliteral.Main$MyJsEnum",
         o.getClass().toString());
@@ -297,8 +294,8 @@ public class Main {
   private static void testGeneric() {
     GenericClass<Number> g = new GenericClass<>();
     assertSame(GenericClass.class, g.getClass());
-    assertEquals("Main$GenericClass", GenericClass.class.getSimpleName());
-    assertEquals("Main$GenericInterface", GenericInterface.class.getSimpleName());
+    assertEquals("GenericClass", GenericClass.class.getSimpleName());
+    assertEquals("GenericInterface", GenericInterface.class.getSimpleName());
 
     assertLiteralType("generic.getClass()", LiteralType.CLASS, g.getClass());
   }

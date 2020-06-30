@@ -73,8 +73,11 @@ public final class Class<T> implements Type, Serializable {
   // J2CL doesn't follow JLS strictly here and provides an approximation that is good enough for
   // debugging and testing uses.
   public String getSimpleName() {
-    String canonicalName = getCanonicalName();
-    return canonicalName.substring(canonicalName.lastIndexOf(".") + 1);
+    return stripToLastOccurrenceOf(stripToLastOccurrenceOf(getCanonicalName(), "."), "$");
+  }
+
+  private static String stripToLastOccurrenceOf(String str, String token) {
+    return str.substring(str.lastIndexOf(token) + 1);
   }
 
   public Class<?> getComponentType() {
