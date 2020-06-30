@@ -166,7 +166,7 @@ public class LambdaTypeDescriptors {
     return MethodDescriptor.Builder.from(functionalInterfaceMethodDescriptor)
         .setNative(false)
         // This is the declaration.
-        .setDeclarationMethodDescriptor(
+        .setDeclarationDescriptor(
             createRelatedMethodDeclaration(
                 LambdaTypeDescriptors::getAdaptorForwardingMethod, adaptorTypeDescriptor))
         .setEnclosingTypeDescriptor(adaptorTypeDescriptor)
@@ -220,10 +220,6 @@ public class LambdaTypeDescriptors {
    */
   private static MethodDescriptor removeJsMethodVarargs(
       MethodDescriptor functionalMethodDescriptor) {
-    MethodDescriptor declarationDescriptor =
-        functionalMethodDescriptor.equals(functionalMethodDescriptor.getDeclarationDescriptor())
-            ? null
-            : removeJsMethodVarargs(functionalMethodDescriptor.getDeclarationDescriptor());
     return MethodDescriptor.Builder.from(functionalMethodDescriptor)
         .setParameterDescriptors(
             functionalMethodDescriptor.getParameterDescriptors().stream()
@@ -233,7 +229,10 @@ public class LambdaTypeDescriptors {
                             .setTypeDescriptor(parameterDescriptor.getTypeDescriptor())
                             .build())
                 .collect(toImmutableList()))
-        .setDeclarationMethodDescriptor(declarationDescriptor)
+        .setDeclarationDescriptor(
+            functionalMethodDescriptor.isDeclaration()
+                ? null
+                : removeJsMethodVarargs(functionalMethodDescriptor.getDeclarationDescriptor()))
         .build();
   }
 
@@ -271,7 +270,7 @@ public class LambdaTypeDescriptors {
       DeclaredTypeDescriptor jsfunctionTypeDescriptor, MethodDescriptor singleAbstractMethod) {
     return MethodDescriptor.Builder.from(singleAbstractMethod)
         .setEnclosingTypeDescriptor(jsfunctionTypeDescriptor)
-        .setDeclarationMethodDescriptor(
+        .setDeclarationDescriptor(
             createRelatedMethodDeclaration(
                 t ->
                     createJsFunctionMethodDescriptor(

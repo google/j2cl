@@ -86,9 +86,9 @@ public abstract class FieldDescriptor extends MemberDescriptor {
    */
   @Override
   public FieldDescriptor getDeclarationDescriptor() {
-    return getDeclarationFieldDescriptorOrNullIfSelf() == null
+    return getDeclarationDescriptorOrNullIfSelf() == null
         ? this
-        : getDeclarationFieldDescriptorOrNullIfSelf();
+        : getDeclarationDescriptorOrNullIfSelf();
   }
 
   @Nullable
@@ -96,7 +96,7 @@ public abstract class FieldDescriptor extends MemberDescriptor {
   // reference to the value object being created, so we use a backing nullable property where null
   // encodes a self reference for AutoValue purposes and provide the accessor above to hide
   // the details.
-  abstract FieldDescriptor getDeclarationFieldDescriptorOrNullIfSelf();
+  abstract FieldDescriptor getDeclarationDescriptorOrNullIfSelf();
 
   @Override
   @Memoized
@@ -149,7 +149,7 @@ public abstract class FieldDescriptor extends MemberDescriptor {
       return false;
     }
 
-    FieldDescriptor thisField = this.getDeclarationDescriptor();
+    FieldDescriptor thisField = getDeclarationDescriptor();
     FieldDescriptor thatField = (FieldDescriptor) thatMember.getDeclarationDescriptor();
     return thisField.getName().equals(thatField.getName());
   }
@@ -245,12 +245,12 @@ public abstract class FieldDescriptor extends MemberDescriptor {
 
     public abstract Builder setOrigin(FieldOrigin fieldOrigin);
 
-    public Builder setDeclarationFieldDescriptor(FieldDescriptor declarationFieldDescriptor) {
-      return setDeclarationFieldDescriptorOrNullIfSelf(declarationFieldDescriptor);
+    public Builder setDeclarationDescriptor(FieldDescriptor declarationFieldDescriptor) {
+      return setDeclarationDescriptorOrNullIfSelf(declarationFieldDescriptor);
     }
 
     // Accessors to support validation, default construction and custom setters.
-    abstract Builder setDeclarationFieldDescriptorOrNullIfSelf(
+    abstract Builder setDeclarationDescriptorOrNullIfSelf(
         FieldDescriptor declarationFieldDescriptor);
 
     abstract Optional<String> getName();

@@ -1028,15 +1028,10 @@ public class AstUtils {
             .setJsInfo(methodDescriptor.isJsAsync() ? JsInfo.NONE_ASYNC : JsInfo.NONE)
             .removeParameterOptionality();
 
-    if (methodDescriptor != methodDescriptor.getDeclarationDescriptor()) {
-      methodBuilder.setDeclarationMethodDescriptor(
+    if (!methodDescriptor.isDeclaration()) {
+      methodBuilder.setDeclarationDescriptor(
           devirtualizeMethodDescriptor(
-              MethodDescriptor.Builder.from(methodDescriptor.getDeclarationDescriptor())
-                  .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
-                  .setDefaultMethod(false)
-                  .build(),
-              targetTypeDescriptor,
-              postfix));
+              methodDescriptor.getDeclarationDescriptor(), targetTypeDescriptor, postfix));
     }
     return methodBuilder.build();
   }

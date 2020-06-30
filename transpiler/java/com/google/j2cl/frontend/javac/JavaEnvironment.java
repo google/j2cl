@@ -289,7 +289,7 @@ class JavaEnvironment {
         .setJsInfo(jsInfo)
         .setFinal(isFinal)
         .setCompileTimeConstant(isCompileTimeConstant)
-        .setDeclarationFieldDescriptor(declarationFieldDescriptor)
+        .setDeclarationDescriptor(declarationFieldDescriptor)
         .setEnumConstant(isEnumConstant)
         .setUnusableByJsSuppressed(
             JsInteropAnnotationUtils.isUnusableByJsSuppressed(variableElement))
@@ -821,7 +821,7 @@ class JavaEnvironment {
         .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
         .setName(isConstructor ? null : methodName)
         .setParameterDescriptors(parameterDescriptorBuilder.build())
-        .setDeclarationMethodDescriptor(declarationMethodDescriptor)
+        .setDeclarationDescriptor(declarationMethodDescriptor)
         .setReturnTypeDescriptor(returnTypeDescriptor)
         .setTypeParameterTypeDescriptors(typeParameterTypeDescriptors)
         .setJsInfo(jsInfo)

@@ -230,9 +230,9 @@ public abstract class MethodDescriptor extends MemberDescriptor {
    */
   @Override
   public MethodDescriptor getDeclarationDescriptor() {
-    return getDeclarationMethodDescriptorOrNullIfSelf() == null
+    return getDeclarationDescriptorOrNullIfSelf() == null
         ? this
-        : getDeclarationMethodDescriptorOrNullIfSelf();
+        : getDeclarationDescriptorOrNullIfSelf();
   }
 
   @Nullable
@@ -240,7 +240,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   // reference to the value object being created, so we use a backing nullable property where null
   // encodes a self reference for AutoValue purposes and provide the accessor above to hide
   // the details.
-  abstract MethodDescriptor getDeclarationMethodDescriptorOrNullIfSelf();
+  abstract MethodDescriptor getDeclarationDescriptorOrNullIfSelf();
 
   @Override
   @Memoized
@@ -263,10 +263,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   // the methods be parameterized.
   @Memoized
   public MethodDescriptor withoutTypeParameters() {
-    MethodDescriptor declarationDescriptor =
-        getDeclarationDescriptor() == this
-            ? null
-            : getDeclarationDescriptor().withoutTypeParameters();
+
     Set<TypeVariable> typeParameters = new HashSet<>(getTypeParameterTypeDescriptors());
     return Builder.from(
             specializeTypeVariables(
@@ -274,7 +271,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
                     typeParameters.contains(p)
                         ? TypeVariable.createWildcardWithBound(p.getBoundTypeDescriptor())
                         : p))
-        .setDeclarationMethodDescriptor(declarationDescriptor)
+        .setDeclarationDescriptor(
+            isDeclaration() ? null : getDeclarationDescriptor().withoutTypeParameters())
         .setTypeParameterTypeDescriptors(ImmutableList.of())
         .build();
   }
@@ -421,7 +419,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       return false;
     }
 
-    MethodDescriptor thisMethod = this.getDeclarationDescriptor();
+    MethodDescriptor thisMethod = getDeclarationDescriptor();
     MethodDescriptor thatMethod = (MethodDescriptor) thatMember.getDeclarationDescriptor();
     return thisMethod.getMethodSignature().equals(thatMethod.getMethodSignature());
   }
@@ -629,7 +627,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
           .setSynthetic(true)
           // Clear properties that might have been carried over when creating this
           // descriptor from an exisiting one.
-          .setDeclarationMethodDescriptor(null)
+          .setDeclarationDescriptor(null)
           .setDefaultMethod(false)
           .setAbstract(false)
           .setNative(false);
@@ -689,16 +687,16 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       List<ParameterDescriptor> newParameterDescriptors =
           new ArrayList<>(getParameterDescriptors());
       newParameterDescriptors.addAll(index, toParameterDescriptors(parameterTypeDescriptors));
-      if (getDeclarationMethodDescriptorOrNullIfSelf() != null) {
-        setDeclarationMethodDescriptorOrNullIfSelf(
-            MethodDescriptor.Builder.from(getDeclarationMethodDescriptorOrNullIfSelf())
+      if (getDeclarationDescriptorOrNullIfSelf() != null) {
+        setDeclarationDescriptorOrNullIfSelf(
+            MethodDescriptor.Builder.from(getDeclarationDescriptorOrNullIfSelf())
                 .addParameterTypeDescriptors(index, parameterTypeDescriptors)
                 .build());
       }
       return setParameterDescriptors(newParameterDescriptors);
     }
 
-    abstract MethodDescriptor getDeclarationMethodDescriptorOrNullIfSelf();
+    abstract MethodDescriptor getDeclarationDescriptorOrNullIfSelf();
 
     abstract ImmutableList<ParameterDescriptor> getParameterDescriptors();
 
@@ -730,12 +728,12 @@ public abstract class MethodDescriptor extends MemberDescriptor {
               .collect(toImmutableList()));
     }
 
-    public Builder setDeclarationMethodDescriptor(MethodDescriptor declarationMethodDescriptor) {
-      return setDeclarationMethodDescriptorOrNullIfSelf(declarationMethodDescriptor);
+    public Builder setDeclarationDescriptor(MethodDescriptor declarationMethodDescriptor) {
+      return setDeclarationDescriptorOrNullIfSelf(declarationMethodDescriptor);
     }
 
     // Accessors to support validation, default construction and custom setters.
-    abstract Builder setDeclarationMethodDescriptorOrNullIfSelf(
+    abstract Builder setDeclarationDescriptorOrNullIfSelf(
         MethodDescriptor declarationMethodDescriptor);
 
     abstract boolean isConstructor();
@@ -817,10 +815,12 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     }
 
     private static void checkDeclarationDescriptor(MethodDescriptor methodDescriptor) {
-      MethodDescriptor declaration = methodDescriptor.getDeclarationDescriptor();
-      if (methodDescriptor == declaration) {
+      if (methodDescriptor.isDeclaration()) {
         return;
       }
+
+      MethodDescriptor declaration = methodDescriptor.getDeclarationDescriptor();
+      checkState(declaration.isDeclaration());
 
       checkState(
           declaration
@@ -846,9 +846,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       if (builder.isConstructor()) {
         // clear the name.
         builder.setName(null);
-      }
-      if (methodDescriptor == methodDescriptor.getDeclarationDescriptor()) {
-        builder.setDeclarationMethodDescriptor(null);
       }
       return builder;
     }

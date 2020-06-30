@@ -237,7 +237,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
             methodDescriptor.isPolymorphic()
                 && !methodDescriptor.isSynthetic()
                 // is a parameterized method.
-                && methodDescriptor != methodDescriptor.getDeclarationDescriptor()
+                && !methodDescriptor.isDeclaration()
                 // type erasure changes the signature
                 && !methodDescriptor.isJsOverride(methodDescriptor.getDeclarationDescriptor()));
   }
@@ -311,7 +311,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
     for (DeclaredTypeDescriptor superInterface :
         typeDeclaration.getTransitiveInterfaceTypeDescriptors()) {
       for (MethodDescriptor methodDescriptor : superInterface.getDeclaredMethodDescriptors()) {
-        if (methodDescriptor == methodDescriptor.getDeclarationDescriptor() // non-generic method,
+        if (methodDescriptor.isDeclaration() // non-generic method,
             // generic method has been investigated by findForwardingMethod.
             && methodDescriptor.isJsOverride(bridgeMethodDescriptor)
             // is overridden by a generic method with different erasure parameter types.

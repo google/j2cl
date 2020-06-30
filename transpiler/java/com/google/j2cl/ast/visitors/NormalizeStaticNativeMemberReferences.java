@@ -56,14 +56,8 @@ public class NormalizeStaticNativeMemberReferences extends NormalizationPass {
               return fieldAccess;
             }
 
-            // A.abs -> Math.abs.
-            FieldDescriptor newFieldDescriptor =
-                FieldDescriptor.Builder.from(fieldDescriptor)
-                    .setEnclosingTypeDescriptor(
-                        AstUtils.getNamespaceAsTypeDescriptor(fieldDescriptor))
-                    .build();
             checkArgument(fieldAccess.getQualifier() instanceof JavaScriptConstructorReference);
-            return FieldAccess.Builder.from(newFieldDescriptor).build();
+            return FieldAccess.Builder.from(rewriteFieldDescriptor(fieldDescriptor)).build();
           }
 
           @Override
@@ -74,29 +68,34 @@ public class NormalizeStaticNativeMemberReferences extends NormalizationPass {
                 || !methodDescriptor.hasJsNamespace()) {
               return methodCall;
             }
-            // A.abs() -> Math.abs().
-            MethodDescriptor declarationDescriptor =
-                methodDescriptor == methodDescriptor.getDeclarationDescriptor()
-                    ? null
-                    : MethodDescriptor.Builder.from(methodDescriptor.getDeclarationDescriptor())
-                        .setEnclosingTypeDescriptor(
-                            AstUtils.getNamespaceAsTypeDescriptor(
-                                methodDescriptor.getDeclarationDescriptor()))
-                        .setDeclarationMethodDescriptor(null)
-                        .build();
 
-            MethodDescriptor newMethodDescriptor =
-                MethodDescriptor.Builder.from(methodDescriptor)
-                    .setEnclosingTypeDescriptor(
-                        AstUtils.getNamespaceAsTypeDescriptor(methodDescriptor))
-                    .setDeclarationMethodDescriptor(declarationDescriptor)
-                    .build();
             checkArgument(methodCall.getQualifier() instanceof JavaScriptConstructorReference);
-            return MethodCall.Builder.from(newMethodDescriptor)
+            return MethodCall.Builder.from(rewriteMethodDescriptor(methodDescriptor))
                 .setArguments(methodCall.getArguments())
                 .build();
           }
         });
   }
 
+  private static FieldDescriptor rewriteFieldDescriptor(FieldDescriptor fieldDescriptor) {
+    // A.abs -> Math.abs.
+    return FieldDescriptor.Builder.from(fieldDescriptor)
+        .setEnclosingTypeDescriptor(AstUtils.getNamespaceAsTypeDescriptor(fieldDescriptor))
+        .setDeclarationDescriptor(
+            fieldDescriptor.isDeclaration()
+                ? null
+                : rewriteFieldDescriptor(fieldDescriptor.getDeclarationDescriptor()))
+        .build();
+  }
+
+  private static MethodDescriptor rewriteMethodDescriptor(MethodDescriptor methodDescriptor) {
+    // A.abs() -> Math.abs().
+    return MethodDescriptor.Builder.from(methodDescriptor)
+        .setEnclosingTypeDescriptor(AstUtils.getNamespaceAsTypeDescriptor(methodDescriptor))
+        .setDeclarationDescriptor(
+            methodDescriptor.isDeclaration()
+                ? null
+                : rewriteMethodDescriptor(methodDescriptor.getDeclarationDescriptor()))
+        .build();
+  }
 }

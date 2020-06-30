@@ -120,7 +120,7 @@ class JdtUtils {
         .setJsInfo(jsInfo)
         .setFinal(isFinal)
         .setCompileTimeConstant(isCompileTimeConstant)
-        .setDeclarationFieldDescriptor(declarationFieldDescriptor)
+        .setDeclarationDescriptor(declarationFieldDescriptor)
         .setEnumConstant(variableBinding.isEnumConstant())
         .setUnusableByJsSuppressed(
             JsInteropAnnotationUtils.isUnusableByJsSuppressed(variableBinding))
@@ -684,7 +684,11 @@ class JdtUtils {
 
     MethodDescriptor declarationMethodDescriptor = null;
     if (methodBinding.getMethodDeclaration() != methodBinding) {
-      declarationMethodDescriptor = createMethodDescriptor(methodBinding.getMethodDeclaration());
+      // The declaration for methods in a lambda binding is two hops away. Since the declaration
+      // binding of a declaration is itself, we get the declaration of the declaration here.
+      IMethodBinding declarationBinding =
+          methodBinding.getMethodDeclaration().getMethodDeclaration();
+      declarationMethodDescriptor = createMethodDescriptor(declarationBinding);
     }
 
     // generate type parameters declared in the method.
@@ -717,7 +721,7 @@ class JdtUtils {
         .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
         .setName(isConstructor ? null : methodName)
         .setParameterDescriptors(parameterDescriptorBuilder.build())
-        .setDeclarationMethodDescriptor(declarationMethodDescriptor)
+        .setDeclarationDescriptor(declarationMethodDescriptor)
         .setReturnTypeDescriptor(returnTypeDescriptor)
         .setTypeParameterTypeDescriptors(typeParameterTypeDescriptors)
         .setJsInfo(jsInfo)

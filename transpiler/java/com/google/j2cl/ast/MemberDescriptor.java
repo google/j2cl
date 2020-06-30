@@ -68,6 +68,10 @@ public abstract class MemberDescriptor
 
   public abstract Visibility getVisibility();
 
+  public boolean isDeclaration() {
+    return this == getDeclarationDescriptor();
+  }
+
   @Override
   public abstract boolean isNative();
 

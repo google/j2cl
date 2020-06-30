@@ -144,17 +144,17 @@ public class NormalizeOverlayMembers extends NormalizationPass {
     MethodDescriptor methodDescriptor = methodCall.getTarget();
     if (methodDescriptor.isStatic()) {
       MethodDescriptor declarationDescriptor =
-          methodDescriptor.getDeclarationDescriptor() == methodDescriptor
+          methodDescriptor.isDeclaration()
               ? null
               : MethodDescriptor.Builder.from(methodDescriptor.getDeclarationDescriptor())
-                  .setDeclarationMethodDescriptor(null)
+                  .setDeclarationDescriptor(null)
                   .setEnclosingTypeDescriptor(targetType)
                   .setJsInfo(JsInfo.NONE)
                   .build();
 
       methodDescriptor =
           MethodDescriptor.Builder.from(methodCall.getTarget())
-              .setDeclarationMethodDescriptor(declarationDescriptor)
+              .setDeclarationDescriptor(declarationDescriptor)
               .setEnclosingTypeDescriptor(targetType)
               .setJsInfo(JsInfo.NONE)
               .build();

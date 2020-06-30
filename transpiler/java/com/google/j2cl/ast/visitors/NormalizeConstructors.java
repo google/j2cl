@@ -529,8 +529,8 @@ public class NormalizeConstructors extends NormalizationPass {
       MethodDescriptor constructor) {
     checkArgument(constructor.isConstructor());
     return MethodDescriptor.Builder.from(constructor)
-        .setDeclarationMethodDescriptor(
-            constructor == constructor.getDeclarationDescriptor()
+        .setDeclarationDescriptor(
+            constructor.isDeclaration()
                 ? null
                 : ctorMethodDescriptorFromJavaConstructor(constructor.getDeclarationDescriptor()))
         .setName(getCtorName(constructor))
@@ -555,8 +555,8 @@ public class NormalizeConstructors extends NormalizationPass {
   private static MethodDescriptor factoryDescriptorForConstructor(MethodDescriptor constructor) {
     checkArgument(constructor.isConstructor());
     return MethodDescriptor.Builder.from(constructor)
-        .setDeclarationMethodDescriptor(
-            constructor == constructor.getDeclarationDescriptor()
+        .setDeclarationDescriptor(
+            constructor.isDeclaration()
                 ? null
                 : factoryDescriptorForConstructor(constructor.getDeclarationDescriptor()))
         .setStatic(true)
@@ -600,7 +600,7 @@ public class NormalizeConstructors extends NormalizationPass {
             .build();
 
     return MethodDescriptor.Builder.from(javascriptConstructorDeclaration)
-        .setDeclarationMethodDescriptor(javascriptConstructorDeclaration)
+        .setDeclarationDescriptor(javascriptConstructorDeclaration)
         .setParameterDescriptors(constructorDescriptor.getParameterDescriptors())
         .build();
   }
