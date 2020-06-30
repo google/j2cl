@@ -1,9 +1,9 @@
 Integration tests size report:
 **************************************
-There are 9 optimized size changes.
+There are 14 optimized size changes.
 Total optimized size (of already existing tests) changed from
-  2124276 to 2124568 bytes (100%->100.0%) and from
-  744580 to 744648 bytes (100%->100.0%) gzipped.
+  2124568 to 2126068 bytes (100%->100.1%) and from
+  744648 to 745373 bytes (100%->100.1%) gzipped.
 
 
 Shrinkage report highlights:
@@ -14,10 +14,10 @@ Shrinkage report highlights:
 Expansion report highlights:
 **************************************
         old      new
-       2184     2193 classliteralstripped (0.4%)
-       1924     1930 classliteralstripped.esnext (0.3%)
-       3571     3581 varargs.esnext (0.3%)
-       3655     3665 autovalue (0.3%)
+       2655     2709 numberdevirtualcalls.esnext (2.0%)
+       2709     2763 numberobjectcalls.esnext (2.0%)
+       3020     3072 numberobjectcalls (1.7%)
+       3231     3284 arrayofboxedtype.esnext (1.6%)
 
 
 Incremental size reports (non-gzip):
@@ -29,12 +29,12 @@ Incremental size reports (non-gzip):
 Uncompiled bundle reports:
 **************************************
         old      new
-    4195328  4195552 box2d_default (0.0%)
-    2295193  2295260 box2d_default.minified (0.0%)
-     767906   767973 box2d_default.rta (0.0%)
-    2599749  2599973 emptyclass (0.0%)
-    1534951  1535018 emptyclass.minified (0.0%)
-     726484   726551 emptyclass.rta (0.0%)
+    4195334  4195440 box2d_default (0.0%)
+    2295042  2295148 box2d_default.minified (0.0%)
+     767755   767757 box2d_default.rta (0.0%)
+    2599755  2599861 emptyclass (0.0%)
+    1534800  1534906 emptyclass.minified (0.0%)
+     726333   726335 emptyclass.rta (0.0%)
 
 
 All reports:
@@ -64,18 +64,18 @@ All reports:
        1732     1732 arrayliteral.esnext (unchanged)
        1696     1696 arrayobjectcalls (unchanged)
        1468     1468 arrayobjectcalls.esnext (unchanged)
-       3515     3515 arrayofboxedtype (unchanged)
-       3231     3231 arrayofboxedtype.esnext (unchanged)
+       3515     3568 arrayofboxedtype (1.5%)
+       3231     3284 arrayofboxedtype.esnext (1.6%)
        3636     3636 arrayreadwrite (unchanged)
        3382     3382 arrayreadwrite.esnext (unchanged)
        2495     2495 assertsimple (unchanged)
        2290     2290 assertsimple.esnext (unchanged)
-       5812     5812 autoboxing (unchanged)
-       5268     5268 autoboxing.esnext (unchanged)
-       3655     3665 autovalue (0.3%)
-       3408     3412 autovalue.esnext (0.1%)
-       3960     3968 autovalue_inc (0.2%)
-       3728     3735 autovalue_inc.esnext (0.2%)
+       5812     5859 autoboxing (0.8%)
+       5268     5324 autoboxing.esnext (1.1%)
+       3665     3665 autovalue (unchanged)
+       3412     3412 autovalue.esnext (unchanged)
+       3968     3968 autovalue_inc (unchanged)
+       3735     3735 autovalue_inc.esnext (unchanged)
        2848     2848 autovalue_ref (unchanged)
        2668     2668 autovalue_ref.esnext (unchanged)
        1016     1016 backwardbridgemethod (unchanged)
@@ -108,16 +108,16 @@ All reports:
          22       22 castsdisabled.esnext (unchanged)
        1157     1157 castsenabled (unchanged)
         925      925 castsenabled.esnext (unchanged)
-       4033     4033 casttoprimitives (unchanged)
-       3714     3714 casttoprimitives.esnext (unchanged)
+       4033     4088 casttoprimitives (1.4%)
+       3714     3769 casttoprimitives.esnext (1.5%)
         974      974 circularcompiletimeconstant (unchanged)
         754      754 circularcompiletimeconstant.esnext (unchanged)
        3198     3198 classliteral (unchanged)
-       2857     2862 classliteral.esnext (0.2%)
+       2862     2862 classliteral.esnext (unchanged)
         965      965 classliteralobfuscated (unchanged)
         739      739 classliteralobfuscated.esnext (unchanged)
-       2184     2193 classliteralstripped (0.4%)
-       1924     1930 classliteralstripped.esnext (0.3%)
+       2193     2193 classliteralstripped (unchanged)
+       1930     1930 classliteralstripped.esnext (unchanged)
        1100     1100 compiletimeconstant (unchanged)
         878      878 compiletimeconstant.esnext (unchanged)
        1046     1046 complexcascadingconstructor (unchanged)
@@ -196,14 +196,14 @@ All reports:
        1821     1821 instanceinnerclass.esnext (unchanged)
        1253     1253 instancejsmethods (unchanged)
         974      974 instancejsmethods.esnext (unchanged)
-       3765     3765 instanceofs (unchanged)
-       3400     3400 instanceofs.esnext (unchanged)
+       3765     3814 instanceofs (1.3%)
+       3400     3449 instanceofs.esnext (1.4%)
        1137     1137 instancequalifieronstaticfield (unchanged)
         915      915 instancequalifieronstaticfield.esnext (unchanged)
          22       22 interfaceabstractimpl (unchanged)
          22       22 interfaceabstractimpl.esnext (unchanged)
-       3750     3750 interfacedevirtualize (unchanged)
-       3485     3485 interfacedevirtualize.esnext (unchanged)
+       3750     3802 interfacedevirtualize (1.4%)
+       3485     3535 interfacedevirtualize.esnext (1.4%)
          22       22 interfacejsbridge (unchanged)
          22       22 interfacejsbridge.esnext (unchanged)
        1602     1602 interfaces (unchanged)
@@ -304,10 +304,10 @@ All reports:
         938      938 npecatch.esnext (unchanged)
        2295     2295 numberchilddevirtualcalls (unchanged)
        2086     2086 numberchilddevirtualcalls.esnext (unchanged)
-       2932     2932 numberdevirtualcalls (unchanged)
-       2655     2655 numberdevirtualcalls.esnext (unchanged)
-       3020     3020 numberobjectcalls (unchanged)
-       2709     2709 numberobjectcalls.esnext (unchanged)
+       2932     2978 numberdevirtualcalls (1.6%)
+       2655     2709 numberdevirtualcalls.esnext (2.0%)
+       3020     3072 numberobjectcalls (1.7%)
+       2709     2763 numberobjectcalls.esnext (2.0%)
        1703     1703 objectchilddevirtualcalls (unchanged)
        1460     1460 objectchilddevirtualcalls.esnext (unchanged)
        1524     1524 objectdevirtualcalls (unchanged)
@@ -404,8 +404,8 @@ All reports:
        3102     3102 underflowoverflowconversion.esnext (unchanged)
         203      203 unusedmultiexpressionreturn (unchanged)
         221      221 unusedmultiexpressionreturn.esnext (unchanged)
-       3853     3862 varargs (0.2%)
-       3571     3581 varargs.esnext (0.3%)
+       3862     3862 varargs (unchanged)
+       3581     3581 varargs.esnext (unchanged)
        1060     1060 variables (unchanged)
         831      831 variables.esnext (unchanged)
         954      954 whilestatement (unchanged)
