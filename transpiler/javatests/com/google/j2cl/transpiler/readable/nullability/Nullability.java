@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.transpiler.readable.nullability;
 
-import com.google.common.collect.Lists;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -41,7 +40,7 @@ public class Nullability {
   // Nullable array of non-nullable strings.
   private @NonNull String[] f10 = {};
   // Conversion from generic type parameter.
-  private List<String> f12 = Lists.newArrayList();
+  private List<String> f12 = new ArrayList<>();
 
   @JsConstructor
   public Nullability(@Nonnull String a) {}

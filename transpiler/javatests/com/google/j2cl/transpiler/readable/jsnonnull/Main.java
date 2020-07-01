@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.transpiler.readable.jsnonnull;
 
-import com.google.common.collect.Lists;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -37,7 +36,7 @@ public class Main {
   // Nullable array of non-nullable strings.
   private @JsNonNull String[] f10 = {};
   // Conversion from generic type parameter.
-  private List<String> f12 = Lists.newArrayList();
+  private List<String> f12 = new ArrayList<>();
 
   @JsConstructor
   public Main(@JsNonNull String a) {}

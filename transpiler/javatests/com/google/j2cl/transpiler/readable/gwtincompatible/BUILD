@@ -9,13 +9,16 @@ package(
 )
 
 j2cl_library(
+    name = "annotation",
+    srcs = ["GwtIncompatible.java"],
+)
+
+j2cl_library(
     name = "interface",
     srcs = [
         "Interface.java",
     ],
-    deps = [
-        "//third_party:guava-j2cl",
-    ],
+    deps = [":annotation"],
 )
 
 # Creates verification target
@@ -24,7 +27,7 @@ readable_example(
         "Implementor.java",
     ],
     deps = [
+        ":annotation",
         ":interface",
-        "//third_party:guava-j2cl",
     ],
 )
