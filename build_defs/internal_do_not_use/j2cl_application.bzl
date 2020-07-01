@@ -12,6 +12,7 @@ def j2cl_application(
         jre_class_metadata = "STRIPPED",
         closure_defines = dict(),
         extra_dev_resources = [],
+        extra_production_args = [],
         **kwargs):
     """Create a J2CL application target.
 
@@ -51,6 +52,7 @@ def j2cl_application(
           with debugging.
         closure_defines: override the value of a variable defined by goog.define.
         extra_dev_resources: extra resource to serve for development server.
+        extra_production_args: extra 'args' to pass to production binary.
         **kwargs: passed to underlying compilation and dev server.
     """
 
@@ -69,7 +71,7 @@ def j2cl_application(
         name = name,
         defs = J2CL_OPTIMIZED_DEFS + entry_point_defs + [
             "--rewrite_polyfills=%s" % rewrite_polyfills,
-        ],
+        ] + extra_production_args,
         deps = [":%s_config" % name] + deps,
         **kwargs
     )
