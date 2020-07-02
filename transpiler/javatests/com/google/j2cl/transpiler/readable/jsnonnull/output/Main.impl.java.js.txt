@@ -3,7 +3,6 @@ goog.module('com.google.j2cl.transpiler.readable.jsnonnull.Main$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let Lists = goog.forwardDeclare('com.google.common.collect.Lists$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
 let List = goog.forwardDeclare('java.util.List$impl');
@@ -78,7 +77,7 @@ class Main extends j_l_Object {
     this.f_f10__com_google_j2cl_transpiler_readable_jsnonnull_Main_ =
         /**@type {!Array<string>}*/ ($Arrays.$init([], j_l_String));
     this.f_f12__com_google_j2cl_transpiler_readable_jsnonnull_Main_ =
-        /**@type {ArrayList<?string>}*/ (Lists.m_newArrayList__());
+        /**@type {!ArrayList<?string>}*/ (ArrayList.$create__());
   }
 
   static $clinit() {
@@ -92,7 +91,6 @@ class Main extends j_l_Object {
   }
 
   static $loadModules() {
-    Lists = goog.module.get('com.google.common.collect.Lists$impl');
     j_l_String = goog.module.get('java.lang.String$impl');
     ArrayList = goog.module.get('java.util.ArrayList$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
