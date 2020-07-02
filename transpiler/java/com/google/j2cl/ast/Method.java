@@ -84,10 +84,15 @@ public class Method extends Member implements MethodLike {
     return body;
   }
 
+  public void setBody(Block body) {
+    this.body = checkNotNull(body);
+  }
+
   @Override
   public boolean isConstructor() {
     return methodDescriptor.isConstructor();
   }
+
   @Override
   public boolean isMethod() {
     return true;
@@ -204,8 +209,7 @@ public class Method extends Member implements MethodLike {
           MethodDescriptor.Builder.from(methodDescriptor)
               .addParameterTypeDescriptors(
                   index,
-                  newParameters
-                      .stream()
+                  newParameters.stream()
                       .map(Variable::getTypeDescriptor)
                       .collect(toImmutableList()))
               .build();

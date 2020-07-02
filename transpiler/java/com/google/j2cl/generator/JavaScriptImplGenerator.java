@@ -185,6 +185,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     renderClassMetadata();
     renderMarkImplementorCalls();
     renderStaticFieldDeclarations();
+    renderLoadTimeStatements();
     renderNativeSource();
   }
 
@@ -669,6 +670,10 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         sourceBuilder.newLine();
       }
     }
+  }
+
+  private void renderLoadTimeStatements() {
+    type.getLoadTimeStatements().forEach(statementTranspiler::renderStatement);
   }
 
   private void renderNativeSource() {

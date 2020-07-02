@@ -36,6 +36,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   private boolean isStatic;
   private TypeDeclaration typeDeclaration;
   @Visitable List<Member> members = new ArrayList<>();
+  @Visitable List<Statement> loadTimeStatements = new ArrayList<>();
   private final SourcePosition sourcePosition;
   private DeclaredTypeDescriptor superTypeDescriptor;
 
@@ -199,10 +200,6 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
             .build());
   }
 
-  public boolean hasStaticInitializerBlocks() {
-    return members.stream().filter(Member::isStatic).anyMatch(Member::isInitializerBlock);
-  }
-
   public void addStaticInitializerBlock(Block staticInitializer) {
     members.add(
         InitializerBlock.newBuilder()
@@ -220,6 +217,14 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
             .setSourcePosition(staticInitializer.getSourcePosition())
             .setDescriptor(getTypeDescriptor().getClinitMethodDescriptor())
             .build());
+  }
+
+  public void addLoadTimeStatement(Statement loadTimeStatement) {
+    loadTimeStatements.add(loadTimeStatement);
+  }
+
+  public List<Statement> getLoadTimeStatements() {
+    return loadTimeStatements;
   }
 
   public TypeDeclaration getEnclosingTypeDeclaration() {

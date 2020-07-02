@@ -24,6 +24,9 @@ import jsinterop.annotations.JsPackage;
 /**
  * A base type that provides 'value' type semantics for equals/hashcode/toString via reflection.
  *
+ * <p>Note that even this is base type, it is not necessarily need to used in an 'extends' clause;
+ * instead it can be used via {@code ValueType.mixin}) helper as well.
+ *
  * <p>Note that for the properties that is never read by the app this may change the behavior
  * compared to handwritten versions. Such that instances would considered equal even if never read
  * properties are set to different values.
@@ -45,10 +48,13 @@ public abstract class ValueType {
     return toString(this);
   }
 
-  private static boolean equals(ValueType thisObject, Object thatObject) {
-    if (thisObject.getClass() != thatObject.getClass()) {
+  // Package private to ensure clinit is run when called from types that use this class as a mixin.
+  static boolean equals(ValueType thisObject, Object o) {
+    if (thisObject.getClass() != o.getClass()) {
       return false;
     }
+
+    ValueType thatObject = JsUtils.uncheckedCast(o);
 
     String[] thisKeys = keys(thisObject);
 
@@ -56,7 +62,7 @@ public abstract class ValueType {
     // (e.g. property set to 'null' or 'undefined' might be considered as non-existent for
     // comparison) however based on our code generation, the properties will be always set for value
     // type hence this should never happen.
-    if (thisKeys.length != keys((ValueType) thatObject).length) {
+    if (thisKeys.length != keys(thatObject).length) {
       return false;
     }
 
@@ -70,7 +76,8 @@ public abstract class ValueType {
     return true;
   }
 
-  private static int hashCode(ValueType thisObject) {
+  // Package private to ensure clinit is run when called from types that use this class as a mixin.
+  static int hashCode(ValueType thisObject) {
     int hashCode = 1;
     for (Object e : values(thisObject)) {
       if (e == null) {
@@ -82,7 +89,8 @@ public abstract class ValueType {
     return hashCode;
   }
 
-  private static String toString(ValueType thisObject) {
+  // Package private to ensure clinit is run when called from types that use this class as a mixin.
+  static String toString(ValueType thisObject) {
     StringJoiner joiner = new StringJoiner(",", thisObject.getClass().getSimpleName() + "{", "}");
     for (String p : keys(thisObject)) {
       Object value = JsUtils.getProperty(thisObject, p);

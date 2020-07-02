@@ -15,7 +15,14 @@
  */
 package com.google.j2cl.ast.visitors;
 
+import com.google.j2cl.ast.DeclaredTypeDescriptor;
+import com.google.j2cl.ast.JavaScriptConstructorReference;
+import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.Method;
+import com.google.j2cl.ast.MethodCall;
+import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.NumberLiteral;
+import com.google.j2cl.ast.PrimitiveTypes;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptors;
@@ -36,25 +43,76 @@ public class OptimizeAutoValue extends NormalizationPass {
     }
 
     // Change the parent type of AutoValue class to ValueType.
-    if (isOptimizableAutoValue(type.getDeclaration())) {
+    if (canExtendValueType(type.getDeclaration())) {
       type.setSuperTypeDescriptor(TypeDescriptors.get().javaemulValueType);
       return;
     }
 
-    // Remove generated j.l.Object overrides from AutoValue implementation class.
-
-    if (type.getSuperTypeDescriptor() == null
-        || !isOptimizableAutoValue(type.getSuperTypeDescriptor().getTypeDeclaration())) {
+    DeclaredTypeDescriptor superType = type.getSuperTypeDescriptor();
+    if (superType == null || !superType.getTypeDeclaration().isAnnotatedWithAutoValue()) {
       return;
     }
 
-    type.getMembers()
-        .removeIf(
-            m -> m.isMethod() && ((Method) m).getDescriptor().isOrOverridesJavaLangObjectMethod());
+    optimizeAutoValueImplementationType(type, superType);
   }
 
-  private static boolean isOptimizableAutoValue(TypeDeclaration declaration) {
+  private static void optimizeAutoValueImplementationType(
+      Type type, DeclaredTypeDescriptor autoValueType) {
+    if (TypeDescriptors.isJavaLangObject(autoValueType.getSuperTypeDescriptor())) {
+      // This is already optimized to extend Value Type, no mixin needed.
+    } else {
+      // Add mixin that will provide the implementation for java.lang.Object.
+      int mask = calculateJavaLangObjectMethodMask(type);
+      addValueTypeMixin(type, mask);
+    }
+
+    // Now safely remove existing implementation methods.
+    type.getMembers().removeIf(m -> m.getDescriptor().isOrOverridesJavaLangObjectMethod());
+  }
+
+  private static boolean canExtendValueType(TypeDeclaration declaration) {
     return declaration.isAnnotatedWithAutoValue()
-        && declaration.getSuperTypeDescriptor() == TypeDescriptors.get().javaLangObject;
+        && TypeDescriptors.isJavaLangObject(declaration.getSuperTypeDescriptor());
+  }
+
+  private static int calculateJavaLangObjectMethodMask(Type type) {
+    int mask = 0;
+    for (Method method : type.getMethods()) {
+      if (!method.getDescriptor().isOrOverridesJavaLangObjectMethod()) {
+        continue;
+      }
+      switch (method.getDescriptor().getName()) {
+        case "equals":
+          mask |= 1;
+          break;
+        case "hashCode":
+          mask |= 2;
+          break;
+        case "toString":
+          mask |= 4;
+          break;
+        default:
+          throw new AssertionError(method.getDescriptor().getName());
+      }
+    }
+    return mask;
+  }
+
+  private static void addValueTypeMixin(Type type, int mask) {
+    MethodDescriptor mixinMethodDescriptor =
+        MethodDescriptor.newBuilder()
+            .setJsInfo(JsInfo.RAW)
+            .setStatic(true)
+            .setEnclosingTypeDescriptor(TypeDescriptors.get().javaemulValueType)
+            .setName("mixin")
+            .setParameterTypeDescriptors(TypeDescriptors.get().nativeFunction, PrimitiveTypes.INT)
+            .build();
+    MethodCall mixinCall =
+        MethodCall.Builder.from(mixinMethodDescriptor)
+            .setArguments(
+                new JavaScriptConstructorReference(type.getDeclaration()),
+                NumberLiteral.fromInt(mask))
+            .build();
+    type.addLoadTimeStatement(mixinCall.makeStatement(type.getSourcePosition()));
   }
 }
