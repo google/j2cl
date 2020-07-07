@@ -219,7 +219,7 @@ public abstract class AbstractCompilationUnitBuilder {
             qualifier,
             targetMethodDescriptor,
             isStaticDispatch,
-            forwardingParameters,
+            forwardingParameters.stream().map(Variable::getReference).collect(toImmutableList()),
             functionalMethodDescriptor.getReturnTypeDescriptor());
     return FunctionExpression.newBuilder()
         .setTypeDescriptor(expressionTypeDescriptor)

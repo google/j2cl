@@ -1322,8 +1322,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       MethodDescriptor methodDescriptor, List<JCExpression> argumentExpressions) {
     List<Expression> arguments =
         argumentExpressions.stream().map(this::convertExpression).collect(Collectors.toList());
-    AstUtils.maybePackageVarargs(methodDescriptor, arguments);
-    return arguments;
+
+    return AstUtils.maybePackageVarargs(methodDescriptor, arguments);
   }
 
   /**

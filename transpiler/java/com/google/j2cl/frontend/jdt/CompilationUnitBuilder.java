@@ -1358,8 +1358,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
                               JdtUtils.createTypeDescriptor(expression.resolveTypeBinding()))
                           : convert(expression))
               .collect(toList());
-      AstUtils.maybePackageVarargs(methodDescriptor, arguments);
-      return arguments;
+      return AstUtils.maybePackageVarargs(methodDescriptor, arguments);
     }
 
     private NumberLiteral convert(org.eclipse.jdt.core.dom.NumberLiteral literal) {

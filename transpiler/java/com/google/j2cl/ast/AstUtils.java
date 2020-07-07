@@ -19,7 +19,6 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
-import static java.util.stream.Collectors.toList;
 
 import com.google.common.base.Predicates;
 import com.google.common.base.Splitter;
@@ -264,7 +263,7 @@ public class AstUtils {
             qualifier,
             toMethodDescriptor,
             isStaticDispatch,
-            parameters,
+            parameters.stream().map(Variable::getReference).collect(Collectors.toList()),
             fromMethodDescriptor.getReturnTypeDescriptor());
     return Method.newBuilder()
         .setMethodDescriptor(fromMethodDescriptor)
@@ -294,19 +293,14 @@ public class AstUtils {
       Expression qualifier,
       MethodDescriptor toMethodDescriptor,
       boolean isStaticDispatch,
-      List<Variable> parameters,
+      List<Expression> arguments,
       TypeDescriptor returnTypeDescriptor) {
-
-    List<Expression> arguments = parameters.stream().map(Variable::getReference).collect(toList());
-
-    maybePackageVarargs(toMethodDescriptor, arguments);
-
     // TODO(rluble): Casts are probably needed on arguments if the types differ between the
     // targetMethodDescriptor and its declarationMethodDescriptor.
     Expression forwardingMethodCall =
         MethodCall.Builder.from(toMethodDescriptor)
             .setQualifier(qualifier)
-            .setArguments(arguments)
+            .setArguments(maybePackageVarargs(toMethodDescriptor, arguments))
             .setStaticDispatch(isStaticDispatch)
             .build();
 
@@ -1044,17 +1038,19 @@ public class AstUtils {
             sourcePosition.getName() == null ? Optional.empty() : Optional.of(sourcePosition));
   }
 
-  /** Replaces the var arguments with packaged array. */
-  public static void maybePackageVarargs(
+  /** Returns the arguments with the vararg arguments packaged together as an array if necessary. */
+  public static List<Expression> maybePackageVarargs(
       MethodDescriptor methodDescriptor, List<Expression> arguments) {
-    if (shouldPackageVarargs(methodDescriptor, arguments)) {
-      Expression packagedVarargs = getPackagedVarargs(methodDescriptor, arguments);
-      int parameterLength = methodDescriptor.getParameterDescriptors().size();
-      while (arguments.size() >= parameterLength) {
-        arguments.remove(parameterLength - 1);
-      }
-      arguments.add(packagedVarargs);
+    if (!shouldPackageVarargs(methodDescriptor, arguments)) {
+      return arguments;
     }
+
+    int parameterLength = methodDescriptor.getParameterDescriptors().size();
+    Expression packagedVarargs = getPackagedVarargs(methodDescriptor, arguments);
+    List<Expression> result = new ArrayList<>();
+    result.addAll(arguments.subList(0, parameterLength - 1));
+    result.add(packagedVarargs);
+    return result;
   }
 
   /** Returns if a method call is invoked with varargs that are not in an explicit array format. */

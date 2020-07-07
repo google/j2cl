@@ -17,18 +17,16 @@ package com.google.j2cl.ast.visitors;
 
 import static com.google.common.base.Preconditions.checkState;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.MoreCollectors;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.DeclaredTypeDescriptor;
-import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Type;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -66,15 +64,13 @@ public class InsertExplicitSuperCalls extends NormalizationPass {
         constructor.getDescriptor().getEnclosingTypeDescriptor();
     MethodDescriptor superConstructor = getDefaultSuperConstructorTarget(typeDescriptor);
 
-    List<Expression> arguments = new ArrayList<>();
-    AstUtils.maybePackageVarargs(superConstructor, arguments);
     constructor
         .getBody()
         .getStatements()
         .add(
             0,
             MethodCall.Builder.from(superConstructor)
-                .setArguments(arguments)
+                .setArguments(AstUtils.maybePackageVarargs(superConstructor, ImmutableList.of()))
                 .build()
                 .makeStatement(constructor.getBody().getSourcePosition()));
   }
