@@ -162,7 +162,6 @@ public class EnumsTest {
 
   // TODO(b/36858702): Enable this test once Class.getDeclaringClass() is implemented.
   // @Test
-  // @Test
   public void testGetDeclaringClass() {
     assertThat((Object) Basic.A.getDeclaringClass()).isEqualTo(Basic.class);
     assertThat((Object) Complex.A.getDeclaringClass()).isEqualTo(Complex.class);
