@@ -59,4 +59,10 @@ j2cl_mirror_from_gwt(
 java_library(
     name = "jre_bootclasspath",
     srcs = glob(["javasynth/**"]),
+    javacopts = [
+        "-source",
+        "8",
+        "-target",
+        "8",
+    ],
 )
