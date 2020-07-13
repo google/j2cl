@@ -65,9 +65,21 @@ j2cl_import(
     jar = "@com_google_auto_value//jar",
 )
 
-alias(
+java_library(
     name = "auto_service",
-    actual = "@com_google_auto_service//jar",
+    exports = ["@com_google_auto_service_annotations//jar"],
+    exported_plugins = [":auto_service_plugin"],
+)
+
+java_plugin(
+    name = "auto_service_plugin",
+    processor_class = "com.google.auto.service.processor.AutoServiceProcessor",
+    deps = [
+        "@com_google_auto_service_annotations//jar",
+        "@com_google_auto_service//jar",
+        ":auto_common",
+        ":guava",
+    ],
 )
 
 alias(
