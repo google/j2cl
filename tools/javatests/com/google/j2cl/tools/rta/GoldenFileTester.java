@@ -86,6 +86,7 @@ public class GoldenFileTester {
 
   private static boolean skipLineFromJre(String line) {
     return !line.startsWith("java.")
+        && !line.startsWith("javax.")
         && !line.startsWith("javaemul.")
         && !line.startsWith("vmbootstrap.");
   }
