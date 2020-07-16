@@ -24,8 +24,15 @@ def setup_j2cl_workspace():
     )
 
     jvm_maven_import_external(
+        name = "com_google_auto_service_annotations",
+        artifact = "com.google.auto.service:auto-service-annotations:1.0-rc7",
+        server_urls = _MAVEN_CENTRAL_URLS,
+        licenses = ["notice"],
+    )
+
+    jvm_maven_import_external(
         name = "com_google_auto_service",
-        artifact = "com.google.auto.service:auto-service:1.0-rc2",
+        artifact = "com.google.auto.service:auto-service:1.0-rc7",
         server_urls = _MAVEN_CENTRAL_URLS,
         licenses = ["notice"],
     )
