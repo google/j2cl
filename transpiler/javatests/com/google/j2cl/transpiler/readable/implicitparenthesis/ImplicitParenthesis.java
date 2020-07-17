@@ -95,4 +95,8 @@ public class ImplicitParenthesis {
       assert boxedBoolean == false;
     }
   }
+
+  private static void parenthesisRemoval() {
+    new Integer(((1 + 2)));
+  }
 }

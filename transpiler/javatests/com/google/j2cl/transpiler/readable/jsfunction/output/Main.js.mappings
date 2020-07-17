@@ -159,12 +159,12 @@
 [o = SimpleJsFunction[].class;] => [o = Class.$get($JavaScriptFunction, 1);] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionClassLiterals"
 [testJsFunctionOptional] => [m_testJsFunctionOptional___$pp_com_google_j2cl_transpiler_readable_jsfunction]
 [JsFunctionOptional f = (i, n) -> (int) (i + n);] => [let f = (/** number */ i, /** ?number= */ n) =>{
-   return $Primitives.$narrowDoubleToInt((i + Double.m_doubleValue__java_lang_Double(n)));
+   return $Primitives.$narrowDoubleToInt(i + Double.m_doubleValue__java_lang_Double(n));
   };] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionOptional"
 [f] => [f] "f"
 [i] => [i] "i"
 [n] => [n] "n"
-[(int) (i + n)] => [return $Primitives.$narrowDoubleToInt((i + Double.m_doubleValue__java_lang_Double(n)));] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in testJsFunctionOptional>"
+[(int) (i + n)] => [return $Primitives.$narrowDoubleToInt(i + Double.m_doubleValue__java_lang_Double(n));] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in testJsFunctionOptional>"
 [setParametricJsFunction] => [set parametricJsFunction]
 [fn] => [fn] "fn"
 [setParametricJsFunction] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.jsfunction.Main.setParametricJsFunction"

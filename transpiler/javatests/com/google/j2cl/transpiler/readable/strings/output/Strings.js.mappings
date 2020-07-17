@@ -36,7 +36,7 @@
 [char c2 = 'o';] => [let c2 = 111 /* 'o' */;] "com.google.j2cl.transpiler.readable.strings.Strings.test"
 [c2] => [c2] "c2"
 [s4 = c1 + c2 + "o";] => [s4 = c1 + c2 + "o";] "com.google.j2cl.transpiler.readable.strings.Strings.test"
-[s4 += 1L + "";] => [s4 = j_l_String.m_valueOf__java_lang_Object(s4) + j_l_String.m_valueOf__java_lang_Object(($Long.fromInt(1) + ""));] "com.google.j2cl.transpiler.readable.strings.Strings.test"
+[s4 += 1L + "";] => [s4 = j_l_String.m_valueOf__java_lang_Object(s4) + j_l_String.m_valueOf__java_lang_Object($Long.fromInt(1) + "");] "com.google.j2cl.transpiler.readable.strings.Strings.test"
 [s4 += 1L;] => [s4 = j_l_String.m_valueOf__java_lang_Object(s4) + $Long.fromInt(1);] "com.google.j2cl.transpiler.readable.strings.Strings.test"
 [s4 += 'C';] => [s4 = j_l_String.m_valueOf__java_lang_Object(s4) + j_l_String.m_valueOf__char(67 /* 'C' */);] "com.google.j2cl.transpiler.readable.strings.Strings.test"
 [s4 += 1;] => [s4 = j_l_String.m_valueOf__java_lang_Object(s4) + 1;] "com.google.j2cl.transpiler.readable.strings.Strings.test"
