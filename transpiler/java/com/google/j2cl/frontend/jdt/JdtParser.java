@@ -110,6 +110,7 @@ public class JdtParser {
 
     parser.setCompilerOptions(compilerOptions);
     parser.setResolveBindings(resolveBinding);
+    parser.setBindingsRecovery(true);
     parser.setEnvironment(
         Iterables.toArray(classpathEntries, String.class), new String[0], new String[0], false);
     return parser;

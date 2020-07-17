@@ -115,7 +115,7 @@ public class JsInteropAnnotationUtils {
   }
 
   private static boolean isJsNative(IAnnotationBinding annotationBinding) {
-    return JdtAnnotationUtils.getAnnotationParameterBoolean(annotationBinding, "isNative", false);
+    return JdtAnnotationUtils.getBooleanAttribute(annotationBinding, "isNative", false);
   }
 
   public static boolean isUnusableByJsSuppressed(IBinding binding) {
@@ -125,8 +125,7 @@ public class JsInteropAnnotationUtils {
     if (suppressWarningsBinding == null) {
       return false;
     }
-    Object[] suppressions =
-        JdtAnnotationUtils.getAnnotationParameterArray(suppressWarningsBinding, "value");
+    Object[] suppressions = JdtAnnotationUtils.getArrayAttribute(suppressWarningsBinding, "value");
     return Arrays.stream(suppressions).anyMatch("unusable-by-js"::equals);
   }
 
@@ -136,7 +135,7 @@ public class JsInteropAnnotationUtils {
   }
 
   public static String getJsNamespace(IAnnotationBinding annotationBinding) {
-    return JdtAnnotationUtils.getAnnotationParameterString(annotationBinding, "namespace");
+    return JdtAnnotationUtils.getStringAttribute(annotationBinding, "namespace");
   }
 
   public static String getJsName(ITypeBinding typeBinding) {
@@ -144,7 +143,7 @@ public class JsInteropAnnotationUtils {
   }
 
   public static String getJsName(IAnnotationBinding annotationBinding) {
-    return JdtAnnotationUtils.getAnnotationParameterString(annotationBinding, "name");
+    return JdtAnnotationUtils.getStringAttribute(annotationBinding, "name");
   }
 
   private static IAnnotationBinding getJsTypeOrJsEnumAnnotation(ITypeBinding typeBinding) {
@@ -157,7 +156,6 @@ public class JsInteropAnnotationUtils {
   }
 
   private static boolean hasCustomValue(IAnnotationBinding annotationBinding) {
-    return JdtAnnotationUtils.getAnnotationParameterBoolean(
-        annotationBinding, "hasCustomValue", false);
+    return JdtAnnotationUtils.getBooleanAttribute(annotationBinding, "hasCustomValue", false);
   }
 }
