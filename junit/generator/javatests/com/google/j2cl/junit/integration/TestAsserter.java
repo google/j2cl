@@ -58,7 +58,7 @@ public class TestAsserter {
     }
   }
 
-  public void matches(Stacktrace stacktrace) {
+  public void matches(List<String> stacktrace) {
     new StacktraceAsserter(testMode, consoleLogs).matches(stacktrace);
   }
 

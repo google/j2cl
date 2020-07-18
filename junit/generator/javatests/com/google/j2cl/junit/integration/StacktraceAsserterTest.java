@@ -1,5 +1,19 @@
+/*
+ * Copyright 2017 Google Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
 package com.google.j2cl.junit.integration;
-
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
@@ -13,7 +27,6 @@ import org.junit.runners.JUnit4;
 public class StacktraceAsserterTest {
 
   private static class LogLineBuilder {
-
     private final ImmutableList.Builder<String> builder = new Builder<>();
 
     public static LogLineBuilder builder() {
@@ -37,13 +50,8 @@ public class StacktraceAsserterTest {
 
   @Test
   public void testSimpleStacktrace() {
-    Stacktrace expectedTrace =
-        Stacktrace.newStacktraceBuilder()
-            .message("java.lang.RuntimeException: __the_message__!")
-            .addFrame("at A")
-            .addFrame("at B")
-            .addFrame("at C")
-            .build();
+    ImmutableList<String> expectedTrace =
+        ImmutableList.of("java.lang.RuntimeException: __the_message__!", "at A", "at B", "at C");
 
     StacktraceAsserter stacktraceAsserter =
         new StacktraceAsserter(
@@ -60,13 +68,8 @@ public class StacktraceAsserterTest {
 
   @Test
   public void testSimpleStacktrace_notWorking() {
-    Stacktrace expectedTrace =
-        Stacktrace.newStacktraceBuilder()
-            .message("java.lang.RuntimeException: __the_message__!")
-            .addFrame("at A")
-            .addFrame("at B")
-            .addFrame("at C")
-            .build();
+    ImmutableList<String> expectedTrace =
+        ImmutableList.of("java.lang.RuntimeException: __the_message__!", "at A", "at B", "at C");
 
     StacktraceAsserter stacktraceAsserter =
         new StacktraceAsserter(
@@ -83,15 +86,9 @@ public class StacktraceAsserterTest {
 
   @Test
   public void testSimpleOptionalFrame_notPresent() {
-
-    Stacktrace expectedTrace =
-        Stacktrace.newStacktraceBuilder()
-            .message("java.lang.RuntimeException: __the_message__!")
-            .addFrame("at A")
-            .addOptionalFrame()
-            .addFrame("at B")
-            .addFrame("at C")
-            .build();
+    ImmutableList<String> expectedTrace =
+        ImmutableList.of(
+            "java.lang.RuntimeException: __the_message__!", "at A", "__OPTIONAL__", "at B", "at C");
 
     StacktraceAsserter stacktraceAsserter =
         new StacktraceAsserter(
@@ -108,15 +105,9 @@ public class StacktraceAsserterTest {
 
   @Test
   public void testSimpleOptionalFrame_present() {
-
-    Stacktrace expectedTrace =
-        Stacktrace.newStacktraceBuilder()
-            .message("java.lang.RuntimeException: __the_message__!")
-            .addFrame("at A")
-            .addOptionalFrame()
-            .addFrame("at B")
-            .addFrame("at C")
-            .build();
+    ImmutableList<String> expectedTrace =
+        ImmutableList.of(
+            "java.lang.RuntimeException: __the_message__!", "at A", "__OPTIONAL__", "at B", "at C");
 
     StacktraceAsserter stacktraceAsserter =
         new StacktraceAsserter(
@@ -134,15 +125,9 @@ public class StacktraceAsserterTest {
 
   @Test
   public void testSimpleOptionalFrame_twoFramesNotWorking() {
-
-    Stacktrace expectedTrace =
-        Stacktrace.newStacktraceBuilder()
-            .message("java.lang.RuntimeException: __the_message__!")
-            .addFrame("at A")
-            .addOptionalFrame()
-            .addFrame("at B")
-            .addFrame("at C")
-            .build();
+    ImmutableList<String> expectedTrace =
+        ImmutableList.of(
+            "java.lang.RuntimeException: __the_message__!", "at A", "__OPTIONAL__", "at B", "at C");
 
     StacktraceAsserter stacktraceAsserter =
         new StacktraceAsserter(
@@ -161,16 +146,15 @@ public class StacktraceAsserterTest {
 
   @Test
   public void testMultipleOptionalFrames_threeFramesTwoUsed() {
-    Stacktrace expectedTrace =
-        Stacktrace.newStacktraceBuilder()
-            .message("java.lang.RuntimeException: __the_message__!")
-            .addFrame("at A")
-            .addOptionalFrame()
-            .addOptionalFrame()
-            .addOptionalFrame()
-            .addFrame("at B")
-            .addFrame("at C")
-            .build();
+    ImmutableList<String> expectedTrace =
+        ImmutableList.of(
+            "java.lang.RuntimeException: __the_message__!",
+            "at A",
+            "__OPTIONAL__",
+            "__OPTIONAL__",
+            "__OPTIONAL__",
+            "at B",
+            "at C");
 
     StacktraceAsserter stacktraceAsserter =
         new StacktraceAsserter(
@@ -189,16 +173,15 @@ public class StacktraceAsserterTest {
 
   @Test
   public void testMultipleOptionalFrames_threeFramesThreeUsed() {
-    Stacktrace expectedTrace =
-        Stacktrace.newStacktraceBuilder()
-            .message("java.lang.RuntimeException: __the_message__!")
-            .addFrame("at A")
-            .addOptionalFrame()
-            .addOptionalFrame()
-            .addOptionalFrame()
-            .addFrame("at B")
-            .addFrame("at C")
-            .build();
+    ImmutableList<String> expectedTrace =
+        ImmutableList.of(
+            "java.lang.RuntimeException: __the_message__!",
+            "at A",
+            "__OPTIONAL__",
+            "__OPTIONAL__",
+            "__OPTIONAL__",
+            "at B",
+            "at C");
 
     StacktraceAsserter stacktraceAsserter =
         new StacktraceAsserter(
@@ -218,16 +201,15 @@ public class StacktraceAsserterTest {
 
   @Test
   public void testMultipleOptionalFrames_threeFramesFourUsed() {
-    Stacktrace expectedTrace =
-        Stacktrace.newStacktraceBuilder()
-            .message("java.lang.RuntimeException: __the_message__!")
-            .addFrame("at A")
-            .addOptionalFrame()
-            .addOptionalFrame()
-            .addOptionalFrame()
-            .addFrame("at B")
-            .addFrame("at C")
-            .build();
+    ImmutableList<String> expectedTrace =
+        ImmutableList.of(
+            "java.lang.RuntimeException: __the_message__!",
+            "at A",
+            "__OPTIONAL__",
+            "__OPTIONAL__",
+            "__OPTIONAL__",
+            "at B",
+            "at C");
 
     StacktraceAsserter stacktraceAsserter =
         new StacktraceAsserter(
@@ -248,15 +230,14 @@ public class StacktraceAsserterTest {
 
   @Test
   public void testOptionalAtStart_noneUsed() {
-    Stacktrace expectedTrace =
-        Stacktrace.newStacktraceBuilder()
-            .message("java.lang.RuntimeException: __the_message__!")
-            .addOptionalFrame()
-            .addOptionalFrame()
-            .addFrame("at A")
-            .addFrame("at B")
-            .addFrame("at C")
-            .build();
+    ImmutableList<String> expectedTrace =
+        ImmutableList.of(
+            "java.lang.RuntimeException: __the_message__!",
+            "__OPTIONAL__",
+            "__OPTIONAL__",
+            "at A",
+            "at B",
+            "at C");
 
     StacktraceAsserter stacktraceAsserter =
         new StacktraceAsserter(
@@ -273,15 +254,14 @@ public class StacktraceAsserterTest {
 
   @Test
   public void testOptionalAtStart_oneUsed() {
-    Stacktrace expectedTrace =
-        Stacktrace.newStacktraceBuilder()
-            .message("java.lang.RuntimeException: __the_message__!")
-            .addOptionalFrame()
-            .addOptionalFrame()
-            .addFrame("at A")
-            .addFrame("at B")
-            .addFrame("at C")
-            .build();
+    ImmutableList<String> expectedTrace =
+        ImmutableList.of(
+            "java.lang.RuntimeException: __the_message__!",
+            "__OPTIONAL__",
+            "__OPTIONAL__",
+            "at A",
+            "at B",
+            "at C");
 
     StacktraceAsserter stacktraceAsserter =
         new StacktraceAsserter(
@@ -299,15 +279,14 @@ public class StacktraceAsserterTest {
 
   @Test
   public void testOptionalAtStart_twoUsed() {
-    Stacktrace expectedTrace =
-        Stacktrace.newStacktraceBuilder()
-            .message("java.lang.RuntimeException: __the_message__!")
-            .addOptionalFrame()
-            .addOptionalFrame()
-            .addFrame("at A")
-            .addFrame("at B")
-            .addFrame("at C")
-            .build();
+    ImmutableList<String> expectedTrace =
+        ImmutableList.of(
+            "java.lang.RuntimeException: __the_message__!",
+            "__OPTIONAL__",
+            "__OPTIONAL__",
+            "at A",
+            "at B",
+            "at C");
 
     StacktraceAsserter stacktraceAsserter =
         new StacktraceAsserter(
@@ -326,15 +305,14 @@ public class StacktraceAsserterTest {
 
   @Test
   public void testOptionalAtStart_threeUsed() {
-    Stacktrace expectedTrace =
-        Stacktrace.newStacktraceBuilder()
-            .message("java.lang.RuntimeException: __the_message__!")
-            .addOptionalFrame()
-            .addOptionalFrame()
-            .addFrame("at A")
-            .addFrame("at B")
-            .addFrame("at C")
-            .build();
+    ImmutableList<String> expectedTrace =
+        ImmutableList.of(
+            "java.lang.RuntimeException: __the_message__!",
+            "__OPTIONAL__",
+            "__OPTIONAL__",
+            "at A",
+            "at B",
+            "at C");
 
     StacktraceAsserter stacktraceAsserter =
         new StacktraceAsserter(
@@ -354,15 +332,14 @@ public class StacktraceAsserterTest {
 
   @Test
   public void testOptionalAtEnd_noneUsed() {
-    Stacktrace expectedTrace =
-        Stacktrace.newStacktraceBuilder()
-            .message("java.lang.RuntimeException: __the_message__!")
-            .addFrame("at A")
-            .addFrame("at B")
-            .addFrame("at C")
-            .addOptionalFrame()
-            .addOptionalFrame()
-            .build();
+    ImmutableList<String> expectedTrace =
+        ImmutableList.of(
+            "java.lang.RuntimeException: __the_message__!",
+            "at A",
+            "at B",
+            "at C",
+            "__OPTIONAL__",
+            "__OPTIONAL__");
 
     StacktraceAsserter stacktraceAsserter =
         new StacktraceAsserter(
@@ -379,15 +356,14 @@ public class StacktraceAsserterTest {
 
   @Test
   public void testOptionalAtEnd_oneUsed() {
-    Stacktrace expectedTrace =
-        Stacktrace.newStacktraceBuilder()
-            .message("java.lang.RuntimeException: __the_message__!")
-            .addFrame("at A")
-            .addFrame("at B")
-            .addFrame("at C")
-            .addOptionalFrame()
-            .addOptionalFrame()
-            .build();
+    ImmutableList<String> expectedTrace =
+        ImmutableList.of(
+            "java.lang.RuntimeException: __the_message__!",
+            "at A",
+            "at B",
+            "at C",
+            "__OPTIONAL__",
+            "__OPTIONAL__");
 
     StacktraceAsserter stacktraceAsserter =
         new StacktraceAsserter(
@@ -405,15 +381,14 @@ public class StacktraceAsserterTest {
 
   @Test
   public void testOptionalAtEnd_twoUsed() {
-    Stacktrace expectedTrace =
-        Stacktrace.newStacktraceBuilder()
-            .message("java.lang.RuntimeException: __the_message__!")
-            .addFrame("at A")
-            .addFrame("at B")
-            .addFrame("at C")
-            .addOptionalFrame()
-            .addOptionalFrame()
-            .build();
+    ImmutableList<String> expectedTrace =
+        ImmutableList.of(
+            "java.lang.RuntimeException: __the_message__!",
+            "at A",
+            "at B",
+            "at C",
+            "__OPTIONAL__",
+            "__OPTIONAL__");
 
     StacktraceAsserter stacktraceAsserter =
         new StacktraceAsserter(
@@ -432,15 +407,14 @@ public class StacktraceAsserterTest {
 
   @Test
   public void testOptionalAtEnd_threeUsed() {
-    Stacktrace expectedTrace =
-        Stacktrace.newStacktraceBuilder()
-            .message("java.lang.RuntimeException: __the_message__!")
-            .addFrame("at A")
-            .addFrame("at B")
-            .addFrame("at C")
-            .addOptionalFrame()
-            .addOptionalFrame()
-            .build();
+    ImmutableList<String> expectedTrace =
+        ImmutableList.of(
+            "java.lang.RuntimeException: __the_message__!",
+            "at A",
+            "at B",
+            "at C",
+            "__OPTIONAL__",
+            "__OPTIONAL__");
 
     StacktraceAsserter stacktraceAsserter =
         new StacktraceAsserter(
@@ -456,5 +430,107 @@ public class StacktraceAsserterTest {
                 .build());
 
     Assert.assertThrows(AssertionError.class, () -> stacktraceAsserter.matches(expectedTrace));
+  }
+
+  @Test
+  public void testSkipFrameJ2CLMode_firstFrameOnlySkipped() {
+    ImmutableList<String> expectedTrace =
+        ImmutableList.of(
+            "java.lang.RuntimeException: __the_message__!",
+            "and submessage",
+            "at java.lang.RuntimeException.notskipped",
+            "at A",
+            "at B",
+            "at C");
+
+    StacktraceAsserter stacktraceAsserter =
+        new StacktraceAsserter(
+            TestMode.J2CL_UNCOMPILED,
+            LogLineBuilder.builder()
+                .addLine("com.google.testing.javascript.runner.core.JavaScriptFailure:")
+                .addLine("java.lang.RuntimeException: __the_message__!")
+                .addLine("and submessage")
+                .addTrace("java.lang.RuntimeException.skipped")
+                .addTrace("java.lang.RuntimeException.notskipped")
+                .addTrace("A")
+                .addTrace("B")
+                .addTrace("C")
+                .build());
+
+    stacktraceAsserter.matches(expectedTrace);
+  }
+
+  @Test
+  public void testSkipFrameJ2CLMode_jsTestInfraFramesSkipped() {
+    ImmutableList<String> expectedTrace =
+        ImmutableList.of("java.lang.RuntimeException: __the_message__!", "at A", "at B", "at C");
+
+    StacktraceAsserter stacktraceAsserter =
+        new StacktraceAsserter(
+            TestMode.J2CL_UNCOMPILED,
+            LogLineBuilder.builder()
+                .addLine("com.google.testing.javascript.runner.core.JavaScriptFailure:")
+                .addLine("java.lang.RuntimeException: __the_message__!")
+                .addTrace("A")
+                .addTrace("B")
+                .addTrace("C")
+                .addTrace("javascript/closure/testing/testcase.js")
+                .addTrace("javascript/closure/testing/testrunner.js")
+                .addTrace("javascript/closure/promise/promise.js")
+                .addTrace("javascript/closure/testing/jsunit.js")
+                .build());
+
+    stacktraceAsserter.matches(expectedTrace);
+  }
+
+  @Test
+  public void testSkipFrameJavaMode_javaTestInfraFramesSkipped() {
+    ImmutableList<String> expectedTrace =
+        ImmutableList.of(
+            "java.lang.RuntimeException: __the_message__!",
+            "at java.lang.RuntimeException.notskipped",
+            "at A",
+            "at B",
+            "at C");
+
+    StacktraceAsserter stacktraceAsserter =
+        new StacktraceAsserter(
+            TestMode.JAVA,
+            LogLineBuilder.builder()
+                .addLine("com.google.testing.javascript.runner.core.JavaScriptFailure:")
+                .addLine("java.lang.RuntimeException: __the_message__!")
+                .addTrace("java.lang.RuntimeException.notskipped")
+                .addTrace("A")
+                .addTrace("B")
+                .addTrace("C")
+                .addTrace("sun.reflect.skipped")
+                .addTrace("java.lang.reflect.skipped")
+                .addTrace("org.junit.skipped")
+                .addTrace("com.google.testing.skipped")
+                .addTrace("java.base/java.skipped")
+                .build());
+
+    stacktraceAsserter.matches(expectedTrace);
+  }
+
+  @Test
+  public void testStacktraceExtraction() {
+    ImmutableList<String> expectedTrace =
+        ImmutableList.of("java.lang.RuntimeException: __the_message__!", "at A", "at B", "at C");
+
+    StacktraceAsserter stacktraceAsserter =
+        new StacktraceAsserter(
+            TestMode.JAVA,
+            LogLineBuilder.builder()
+                .addLine("other log line 1")
+                .addLine("java.lang.RuntimeException: __the_message__!")
+                .addTrace("A")
+                .addTrace("B")
+                .addTrace("C")
+                .addLine("FAILURES!!!")
+                .addLine("other log line 2")
+                .build());
+
+    stacktraceAsserter.matches(expectedTrace);
   }
 }

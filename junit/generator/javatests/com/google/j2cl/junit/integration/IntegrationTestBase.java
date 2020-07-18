@@ -18,6 +18,7 @@ package com.google.j2cl.junit.integration;
 import static org.junit.Assert.assertTrue;
 
 import com.google.common.base.Splitter;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.io.CharStreams;
 import com.google.common.io.Files;
@@ -76,13 +77,35 @@ public abstract class IntegrationTestBase {
     List<String> logLines = runTest(testName);
     assertThat(logLines).matches(testResult);
 
-    Stacktrace stacktrace = loadStackTrace(testName);
+    ImmutableList<String> stacktrace = loadStackTrace(testName);
     assertThat(logLines).matches(stacktrace);
   }
 
-  private Stacktrace loadStackTrace(String testName) throws IOException {
-    return Stacktrace.parse(
+  private ImmutableList<String> loadStackTrace(String testName) throws IOException {
+    return parseStacktrace(
         Files.asCharSource(getStackTraceFile(testName), StandardCharsets.UTF_8).read());
+  }
+
+  private static ImmutableList<String> parseStacktrace(String stacktrace) {
+    ImmutableList.Builder<String> builder = ImmutableList.builder();
+
+    for (String line : Splitter.on("\n").split(stacktrace)) {
+
+      // cut off comments
+      int index = line.indexOf('#');
+
+      if (index != -1) {
+        line = line.substring(0, index);
+      }
+      // if the line is empty after removing the comment do not add it
+      if (line.trim().isEmpty()) {
+        continue;
+      }
+
+      builder.add(line.trim().replaceAll("blaze-out/.*/bin", "<blaze-out>"));
+    }
+
+    return builder.build();
   }
 
   private File getStackTraceFile(String testName) throws IOException {
