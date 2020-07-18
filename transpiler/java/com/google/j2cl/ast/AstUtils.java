@@ -499,6 +499,21 @@ public class AstUtils {
   }
 
   /**
+   * Returns the type of the numeric unary expression, which is the type of its operand, or int if
+   * it is wider.
+   *
+   * <p>See JLS 5.6.1.
+   */
+  public static PrimitiveTypeDescriptor getNumericUnaryExpressionTypeDescriptor(
+      PrimitiveTypeDescriptor thisTypeDescriptor) {
+    if (PrimitiveTypes.INT.isWiderThan(thisTypeDescriptor)) {
+      return PrimitiveTypes.INT;
+    }
+
+    return thisTypeDescriptor;
+  }
+
+  /**
    * Returns explicit qualifier for member reference (field access or method call).
    *
    * <p>If {@code qualifier} is null, returns EnclosingTypeDescriptor as the qualifier for static

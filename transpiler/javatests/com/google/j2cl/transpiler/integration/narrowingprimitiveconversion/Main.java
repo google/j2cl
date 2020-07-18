@@ -140,6 +140,9 @@ public class Main {
     assertTrue((char) fmin == (char) Integer.MIN_VALUE);
     assertTrue((char) fmax == (char) Integer.MAX_VALUE);
     assertTrue((char) fnan == (char) 0);
+
+    byte three = 0b11;
+    assertTrue(-128 == (byte) (three << 7));
   }
 
   private static void testStaticCoercions() {

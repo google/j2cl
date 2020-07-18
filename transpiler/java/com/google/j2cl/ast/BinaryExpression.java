@@ -139,7 +139,7 @@ public class BinaryExpression extends Expression {
       return PrimitiveTypes.BOOLEAN;
     }
 
-    leftOperandType = leftOperandType.toUnboxedType();
+    PrimitiveTypeDescriptor primitiveLeftOperandType = leftOperandType.toUnboxedType();
 
     /**
      * Rules per JLS (Chapter 15) require that binary promotion be previously applied to the
@@ -159,9 +159,9 @@ public class BinaryExpression extends Expression {
       case BIT_AND:
       case BIT_OR:
       case BIT_XOR:
-        if (TypeDescriptors.isPrimitiveBoolean(leftOperandType)) {
+        if (TypeDescriptors.isPrimitiveBoolean(primitiveLeftOperandType)) {
           // Handle logical operations (on type boolean).
-          return leftOperandType;
+          return primitiveLeftOperandType;
         }
         // fallthrough for bitwise operations on numbers.
         /*
@@ -181,7 +181,7 @@ public class BinaryExpression extends Expression {
          */
         checkArgument(TypeDescriptors.isBoxedOrPrimitiveType(rightOperandType));
         return AstUtils.getNumericBinaryExpressionTypeDescriptor(
-            (PrimitiveTypeDescriptor) leftOperandType, rightOperandType.toUnboxedType());
+            primitiveLeftOperandType, rightOperandType.toUnboxedType());
       case LEFT_SHIFT:
       case RIGHT_SHIFT_SIGNED:
       case RIGHT_SHIFT_UNSIGNED:
@@ -190,7 +190,7 @@ public class BinaryExpression extends Expression {
          *
          * <p>Type type of the operation is the type of the promoted left hand operand.
          */
-        return leftOperandType;
+        return AstUtils.getNumericUnaryExpressionTypeDescriptor(primitiveLeftOperandType);
       default:
         // All binary operators should have been handled.
         throw new IllegalStateException("Unhandled operator: " + operator);
