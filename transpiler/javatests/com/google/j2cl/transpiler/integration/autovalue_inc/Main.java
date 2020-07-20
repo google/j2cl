@@ -44,7 +44,6 @@ public class Main {
     ComponentB componentB = new AutoValue_ComponentB(2, false, "hello", 43d, new int[] {5, 6, 7});
     assertEquals(2, componentB.getIntField());
     assertEquals(false, componentB.getBooleanField());
-
     assertEquals(43d, componentB.getDoubleField());
     assertEquals("hello", componentB.getStringField());
     assertEquals(6, componentB.getArrayField()[1]);
