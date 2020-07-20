@@ -26,6 +26,7 @@ def readable_example(
         defs = [],
         generate_library_info = False,
         j2cl_library_tags = [],
+        javacopts = [],
         **kwargs):
     """Macro that confirms the JS compilability of some transpiled Java.
 
@@ -36,6 +37,7 @@ def readable_example(
       defs: Custom flags to pass to the JavaScript compiler.
       generate_library_info: Wheter to copy the call graph for the library in the output dir.
       j2cl_library_tags: Tags to apply j2cl_library
+      javacopts: javacopts to apply j2cl_library
       **kwargs: passes to j2cl_library
     """
 
@@ -43,7 +45,7 @@ def readable_example(
     j2cl_library(
         name = "readable",
         srcs = srcs,
-        javacopts = JAVAC_FLAGS,
+        javacopts = JAVAC_FLAGS + javacopts,
         deps = deps,
         plugins = plugins,
         generate_build_test = False,
