@@ -51,4 +51,9 @@ public class StacktraceIntegration2Test extends IntegrationTestBase {
   public void testThrowsInJsProperty() throws Exception {
     runStacktraceTest("ThrowsInJsProperty");
   }
+
+  @Test
+  public void testExceptionWithCause() throws Exception {
+    runStacktraceTest("ExceptionWithCauseStacktraceTest");
+  }
 }

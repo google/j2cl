@@ -533,4 +533,42 @@ public class StacktraceAsserterTest {
 
     stacktraceAsserter.matches(expectedTrace);
   }
+
+  @Test
+  public void testStacktraceWithCausedByChain() {
+    ImmutableList<String> expectedTrace =
+        ImmutableList.of(
+            "java.lang.RuntimeException: __the_message__!",
+            "at A",
+            "at B",
+            "__OPTIONAL__",
+            "Caused by: java.lang.RuntimeException: cause 1",
+            "at D",
+            "at E",
+            "__OPTIONAL__",
+            "Caused by: java.lang.RuntimeException: cause 2",
+            "at G",
+            "at H",
+            "... 3 mores");
+
+    StacktraceAsserter stacktraceAsserter =
+        new StacktraceAsserter(
+            TestMode.JAVA,
+            LogLineBuilder.builder()
+                .addLine("java.lang.RuntimeException: __the_message__!")
+                .addTrace("A")
+                .addTrace("B")
+                .addTrace("C")
+                .addLine("Caused by: java.lang.RuntimeException: cause 1")
+                .addTrace("D")
+                .addTrace("E")
+                .addTrace("F")
+                .addLine("Caused by: java.lang.RuntimeException: cause 2")
+                .addTrace("G")
+                .addTrace("H")
+                .addLine("... 3 mores")
+                .build());
+
+    stacktraceAsserter.matches(expectedTrace);
+  }
 }
