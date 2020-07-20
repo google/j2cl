@@ -396,7 +396,7 @@ public class ExpressionTranspiler {
       @Override
       public boolean enterNumberLiteral(NumberLiteral expression) {
         checkState(!TypeDescriptors.isPrimitiveLong(expression.getTypeDescriptor()));
-        sourceBuilder.append(expression.getValue().toString());
+        sourceBuilder.append(expression.toString());
         return false;
       }
 

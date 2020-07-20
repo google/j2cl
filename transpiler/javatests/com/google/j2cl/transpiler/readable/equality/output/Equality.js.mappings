@@ -12,8 +12,8 @@
 [assert false == false;] => [$Asserts.$assert(false == false);] "com.google.j2cl.transpiler.readable.equality.Equality.test"
 [assert 0 != 1;] => [$Asserts.$assert(0 != 1);] "com.google.j2cl.transpiler.readable.equality.Equality.test"
 [assert new Object() != new Object();] => [$Asserts.$assert(!$Equality.$same(j_l_Object.$create__(), j_l_Object.$create__()));] "com.google.j2cl.transpiler.readable.equality.Equality.test"
-[assert (Double) 0.0 == (Double) 0.0;] => [$Asserts.$assert($Equality.$same(/**@type {?number}*/ ($Casts.$to(0.0, Double)), /**@type {?number}*/ ($Casts.$to(0.0, Double))));] "com.google.j2cl.transpiler.readable.equality.Equality.test"
-[assert (Float) 0.0f == (Float) 0.0f;] => [$Asserts.$assert($Equality.$same(Float.m_valueOf__float(0.0), Float.m_valueOf__float(0.0)));] "com.google.j2cl.transpiler.readable.equality.Equality.test"
+[assert (Double) 0.0 == (Double) 0.0;] => [$Asserts.$assert($Equality.$same(/**@type {?number}*/ ($Casts.$to(0, Double)), /**@type {?number}*/ ($Casts.$to(0, Double))));] "com.google.j2cl.transpiler.readable.equality.Equality.test"
+[assert (Float) 0.0f == (Float) 0.0f;] => [$Asserts.$assert($Equality.$same(Float.m_valueOf__float(0), Float.m_valueOf__float(0)));] "com.google.j2cl.transpiler.readable.equality.Equality.test"
 [assert null != new Object();] => [$Asserts.$assert(!$Equality.$same(null, j_l_Object.$create__()));] "com.google.j2cl.transpiler.readable.equality.Equality.test"
 [assert new Object() != null;] => [$Asserts.$assert(!$Equality.$same(j_l_Object.$create__(), null));] "com.google.j2cl.transpiler.readable.equality.Equality.test"
 [Equality] => [$clinit]

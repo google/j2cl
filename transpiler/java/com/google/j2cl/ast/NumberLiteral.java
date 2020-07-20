@@ -82,6 +82,15 @@ public class NumberLiteral extends Literal {
   }
 
   @Override
+  public String toString() {
+    if (value.intValue() == value.doubleValue()) {
+      // Print as an integer to avoid JavaScript literals of the form of 0.0.
+      return Integer.toString(value.intValue());
+    }
+    return value.toString();
+  }
+
+  @Override
   public Node accept(Processor processor) {
     return Visitor_NumberLiteral.visit(processor, this);
   }
