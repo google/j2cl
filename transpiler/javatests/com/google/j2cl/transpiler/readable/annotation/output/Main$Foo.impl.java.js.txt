@@ -16,7 +16,7 @@ class Foo {
     Foo.$loadModules();
   }
 
-  static $markImplementor(/** Function*/ ctor) {
+  static $markImplementor(/** Function */ ctor) {
     Annotation.$markImplementor(ctor);
     ctor.prototype
         .$implements__com_google_j2cl_transpiler_readable_annotation_Main_Foo =
@@ -38,6 +38,5 @@ Foo.$markImplementor(/** @type {Function} */ (Foo));
 
 /**@const {number}*/
 Foo.f_CONSTANT__com_google_j2cl_transpiler_readable_annotation_Main_Foo = 123;
-
 exports = Foo;
 //# sourceMappingURL=Main$Foo.js.map

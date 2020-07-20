@@ -25,7 +25,7 @@ class AsyncInterface {
     AsyncInterface.$loadModules();
   }
 
-  static $markImplementor(/** Function*/ ctor) {
+  static $markImplementor(/** Function */ ctor) {
     BaseInterface.$markImplementor(ctor);
     ctor.prototype
         .$implements__com_google_j2cl_transpiler_readable_jsasync_Main_AsyncInterface =

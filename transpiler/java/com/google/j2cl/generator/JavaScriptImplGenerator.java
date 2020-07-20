@@ -441,7 +441,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.appendln(
         "static $markImplementor(/** "
             + TypeDescriptors.get().nativeFunction.getQualifiedJsName()
-            + "*/ ctor)");
+            + " */ ctor)");
     sourceBuilder.openBrace();
     sourceBuilder.newLine();
     for (DeclaredTypeDescriptor superInterface : type.getSuperInterfaceTypeDescriptors()) {
@@ -618,7 +618,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   }
 
   private void renderStaticFieldDeclarations() {
-    boolean hasFields = false;
     for (Field staticField : type.getStaticFields()) {
       sourceBuilder.emitWithMemberMapping(
           staticField,
@@ -627,10 +626,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
                 AstUtils.declarationStatement(staticField, type.getSourcePosition()));
             sourceBuilder.newLine();
           });
-      hasFields = true;
-    }
-    if (hasFields) {
-      sourceBuilder.newLine();
     }
   }
 

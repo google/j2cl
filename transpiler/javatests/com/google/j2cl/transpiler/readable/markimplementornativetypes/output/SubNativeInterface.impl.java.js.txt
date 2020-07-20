@@ -17,7 +17,7 @@ class SubNativeInterface {
     SubNativeInterface.$loadModules();
   }
 
-  static $markImplementor(/** Function*/ ctor) {
+  static $markImplementor(/** Function */ ctor) {
     RegularInterface.$markImplementor(ctor);
     ctor.prototype
         .$implements__com_google_j2cl_transpiler_readable_markimplementornativetypes_SubNativeInterface =

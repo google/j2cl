@@ -25,7 +25,7 @@ class SomeInterface {
         $1.$create__int(1);
   }
 
-  static $markImplementor(/** Function*/ ctor) {
+  static $markImplementor(/** Function */ ctor) {
     ctor.prototype
         .$implements__com_google_j2cl_transpiler_readable_anonymousclass_SomeInterface =
         true;
@@ -51,6 +51,5 @@ SomeInterface.$markImplementor(/** @type {Function} */ (SomeInterface));
 /**@private {SomeClass}*/
 SomeInterface
     .$f_implicitlyStatic__com_google_j2cl_transpiler_readable_anonymousclass_SomeInterface;
-
 exports = SomeInterface;
 //# sourceMappingURL=SomeInterface.js.map

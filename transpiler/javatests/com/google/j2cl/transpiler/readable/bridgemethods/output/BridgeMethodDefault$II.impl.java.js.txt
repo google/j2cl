@@ -21,7 +21,7 @@ class II {
     II.$loadModules();
   }
 
-  static $markImplementor(/** Function*/ ctor) {
+  static $markImplementor(/** Function */ ctor) {
     I.$markImplementor(ctor);
     ctor.prototype
         .$implements__com_google_j2cl_transpiler_readable_bridgemethods_BridgeMethodDefault_II =
