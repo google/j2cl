@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.ast.visitors;
 
-import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.AbstractRewriter;
@@ -25,7 +24,6 @@ import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.EmptyStatement;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
-import com.google.j2cl.ast.Invocation;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor.MethodOrigin;
 import com.google.j2cl.ast.MultiExpression;
@@ -72,10 +70,11 @@ public class NormalizeMultiExpressions extends NormalizationPass {
                     .collect(Collectors.toList());
 
         if (expressions.isEmpty()) {
-          // Eliminate empty multi expressions.
+          // No expressions with side effects in this top level multexpression, remove completely.
           return new EmptyStatement(statement.getSourcePosition());
         } else if (expressions.size() == 1) {
-          // If the multi expression contains only one expression, then unwrap it.
+          // Only one expression with side effects in this top level multiexpression, make it
+          // an expression statement.
           return expressions.get(0).makeStatement(statement.getSourcePosition());
         } else {
           // If there are multiple expressions then turn it into a block so that any var creation
@@ -97,20 +96,6 @@ public class NormalizeMultiExpressions extends NormalizationPass {
     }
 
     @Override
-    public Invocation rewriteInvocation(Invocation invocation) {
-      if (invocation.getArguments().stream().noneMatch(e -> e instanceof MultiExpression)) {
-        return invocation;
-      }
-
-      return Invocation.Builder.from(invocation)
-          .setArguments(
-              invocation.getArguments().stream()
-                  .map(NormalizeMultiExpressions::removeOuterParenthesis)
-                  .collect(toImmutableList()))
-          .build();
-    }
-
-    @Override
     public Expression rewriteMultiExpression(MultiExpression multiExpression) {
       List<Expression> flattenedExpressions = new ArrayList<>();
       for (Expression expression : multiExpression.getExpressions()) {
@@ -120,30 +105,8 @@ public class NormalizeMultiExpressions extends NormalizationPass {
           flattenedExpressions.add(expression);
         }
       }
-
-      if (flattenedExpressions.size() == 1) {
-        Expression expression = Iterables.getOnlyElement(flattenedExpressions);
-        // TODO(b/67753876): All of this would be unnecessary if we parenthesize according to
-        // precedence.
-        if (expression.areEnclosingParenthesisUnnecessary()) {
-          return expression;
-        }
-      }
       return MultiExpression.newBuilder().setExpressions(flattenedExpressions).build();
     }
-  }
-
-  private static Expression removeOuterParenthesis(Expression expression) {
-    if (!(expression instanceof MultiExpression)) {
-      return expression;
-    }
-
-    MultiExpression multiExpression = (MultiExpression) expression;
-    if (multiExpression.getExpressions().size() != 1) {
-      return expression;
-    }
-
-    return Iterables.getOnlyElement(multiExpression.getExpressions());
   }
 
   private static class SwitchMultiExpressionsAndSideEffectingExpressions extends AbstractRewriter {

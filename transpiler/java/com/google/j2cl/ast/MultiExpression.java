@@ -15,7 +15,7 @@
  */
 package com.google.j2cl.ast;
 
-import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.annotations.Visitable;
@@ -35,7 +35,6 @@ public class MultiExpression extends Expression {
   @Visitable List<Expression> expressions;
 
   private MultiExpression(List<Expression> expressions) {
-    checkArgument(!expressions.isEmpty());
     this.expressions = expressions;
   }
 
@@ -74,7 +73,13 @@ public class MultiExpression extends Expression {
   }
 
   @Override
-  public MultiExpression clone() {
+  public Expression.Precedence getPrecedence() {
+    // MutliExpressions are emitted always with a parenthesis, so no need for extra.
+    return Precedence.HIGHEST;
+  }
+
+  @Override
+  public Expression clone() {
     return MultiExpression.newBuilder().setExpressions(AstUtils.clone(expressions)).build();
   }
 
@@ -110,7 +115,11 @@ public class MultiExpression extends Expression {
       return this;
     }
 
-    public MultiExpression build() {
+    public Expression build() {
+      checkState(!expressions.isEmpty());
+      if (expressions.size() == 1) {
+        return Iterables.getOnlyElement(expressions);
+      }
       return new MultiExpression(expressions);
     }
   }

@@ -97,27 +97,107 @@ public abstract class Expression extends Node implements Cloneable<Expression> {
 
   /** Returns expression prefixed with unary operator {@code prefixOperator}. */
   public UnaryExpression prefix(PrefixOperator prefixOperator) {
-    // TODO(b/67753876): Remove explicit parenthesis once J2cl handles precedence.
-    // Parenthesize the operand to enforce the correct precedence unless it is a prefix expression.
-    Expression operand = this instanceof PrefixExpression ? this : this.parenthesize();
-    return PrefixExpression.newBuilder().setOperator(prefixOperator).setOperand(operand).build();
-  }
-
-  /** Return the expression enclosed in parenthesis. */
-  public Expression parenthesize() {
-    // TODO(b/67753876): Remove explicit parenthesis insertion once J2cl handles precedence.
-    if (this.areEnclosingParenthesisUnnecessary()) {
-      return this;
-    }
-    return MultiExpression.newBuilder().setExpressions(this).build();
+    return PrefixExpression.newBuilder().setOperator(prefixOperator).setOperand(this).build();
   }
 
   /**
-   * Returns true if it is guaranteed that removing parenthesis around this expression won't change
-   * the meaning of expressions enclosing it.
+   * The JavaScript precedence of this expression.
+   *
+   * <p>Used to decide whether parenthesis are needed when expressions are nested. e.g.
+   *
+   * <pre>
+   *         *
+   *        / \
+   *       +   -
+   *      / \   \
+   *     1   2   4
+   * </pre>
+   *
+   * <p>Should be rendered as {@code (1 + 2) * -4}. Since the lhs is of lower precedence, therefore
+   * needs parenthesis; while the rhs is of higher precedence and does not need parenthesis.
+   *
+   * <p>The operator precedence is implied by the JavaScript spec. See {@link
+   * http://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence}
    */
-  public boolean areEnclosingParenthesisUnnecessary() {
-    return false;
+  public abstract Precedence getPrecedence();
+
+  /** Returns whether the expression needs parenthesis if it is emitted as the left operand. */
+  public final boolean requiresParensOnLeft(Expression expression) {
+    if (getPrecedence().getValue() > expression.getPrecedence().getValue()) {
+      return true;
+    }
+    return getPrecedence().getAssociativity() != Associativity.LEFT
+        && getPrecedence() == expression.getPrecedence();
+  }
+
+  /** Returns whether the expression needs parenthesis if it is emitted as the right operand. */
+  public final boolean requiresParensOnRight(Expression expression) {
+    if (getPrecedence().getValue() > expression.getPrecedence().getValue()) {
+      return true;
+    }
+    return getPrecedence().getAssociativity() != Associativity.RIGHT
+        && getPrecedence() == expression.getPrecedence();
+  }
+
+  /**
+   * The associativity of an expression.
+   *
+   * <p>Used to decide whether parenthesis are needed when expressions of the same precedence are
+   * nested. e.g.
+   *
+   * <pre>
+   *         +
+   *        / \
+   *       -   -
+   *      / \ / \
+   *     1  2 3  4
+   * </pre>
+   *
+   * <p>Should be rendered as {@code (1 - 2) + 3 - 4}. Because + and - are of the same precedence
+   * and left associative, the left operand needs parenthesis but not the right. Note that all
+   * expression that have the same precedence have the same associativity.
+   */
+  public enum Associativity {
+    LEFT,
+    RIGHT,
+    NONE
+  }
+
+  /** Precedence and associativity of expressions. */
+  public enum Precedence {
+    HIGHEST(21, Associativity.NONE),
+    MEMBER_ACCESS(20, Expression.Associativity.LEFT),
+    FUNCTION(19, Expression.Associativity.RIGHT),
+    POSTFIX(18, Expression.Associativity.NONE),
+    PREFIX(17, Expression.Associativity.RIGHT),
+    MULTIPLICATIVE(15, Expression.Associativity.LEFT),
+    ADDITIVE(14, Expression.Associativity.LEFT),
+    SHIFT_OPERATOR(13, Expression.Associativity.LEFT),
+    RELATIONAL(12, Expression.Associativity.LEFT),
+    EQUALITY(11, Expression.Associativity.LEFT),
+    BITWISE_AND(10, Expression.Associativity.LEFT),
+    BITWISE_XOR(9, Expression.Associativity.LEFT),
+    BITWISE_OR(8, Expression.Associativity.LEFT),
+    LOGICAL_AND(7, Expression.Associativity.LEFT),
+    LOGICAL_OR(6, Expression.Associativity.LEFT),
+    CONDITIONAL(4, Expression.Associativity.RIGHT),
+    ASSIGNMENT(3, Expression.Associativity.RIGHT);
+
+    Precedence(int value, Expression.Associativity associativity) {
+      this.value = value;
+      this.associativity = associativity;
+    }
+
+    private final int value;
+    private final Expression.Associativity associativity;
+
+    public int getValue() {
+      return value;
+    }
+
+    public Expression.Associativity getAssociativity() {
+      return associativity;
+    }
   }
 
   /** Returns true if the expression is guaranteed to be a non null string. */

@@ -338,11 +338,9 @@ public class AstUtils {
         boxType.getMethodDescriptorByName(
             primitiveType.getSimpleSourceName() + MethodDescriptor.VALUE_METHOD_SUFFIX);
 
-    // We want "(a ? b : c).intValue()", not "a ? b : c.intValue()".
     MethodCall methodCall =
-        MethodCall.Builder.from(valueMethodDescriptor)
-            .setQualifier(expression.parenthesize())
-            .build();
+        MethodCall.Builder.from(valueMethodDescriptor).setQualifier(expression).build();
+
     if (TypeDescriptors.isBoxedBooleanOrDouble(boxType)) {
       methodCall = devirtualizeMethodCall(methodCall, boxType);
     }

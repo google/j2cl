@@ -59,7 +59,7 @@ public final class RemoveUnneededJsDocCasts extends NormalizationPass {
           public Expression rewriteMultiExpression(MultiExpression multiExpression) {
             // Remove JsDoc casts from all the expressions. Except for the last expression, the
             // result of each expression is not used, so any JsDoc cast on those is not relevant.
-            MultiExpression multiExpressionWithoutJsDocCasts =
+            Expression multiExpressionWithoutJsDocCasts =
                 MultiExpression.newBuilder()
                     .setExpressions(
                         multiExpression.getExpressions().stream()

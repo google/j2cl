@@ -18,6 +18,7 @@ package com.google.j2cl.ast;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.common.collect.Iterables;
+import com.google.j2cl.ast.Expression.Precedence;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.ast.processors.common.Processor;
 import com.google.j2cl.common.SourcePosition;
@@ -81,6 +82,11 @@ public class FunctionExpression extends Expression implements MethodLike {
 
   public boolean isJsVarargs() {
     return getDescriptor().isJsMethodVarargs();
+  }
+
+  @Override
+  public Precedence getPrecedence() {
+    return Precedence.FUNCTION;
   }
 
   @Override

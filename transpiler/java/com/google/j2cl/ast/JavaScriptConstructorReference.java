@@ -45,6 +45,13 @@ public class JavaScriptConstructorReference extends Expression {
   }
 
   @Override
+  public Precedence getPrecedence() {
+    // A JavaScript constructor might be a qualified expression, so it is treated as a member
+    // access.
+    return Precedence.MEMBER_ACCESS;
+  }
+
+  @Override
   public JavaScriptConstructorReference clone() {
     return new JavaScriptConstructorReference(typeDeclaration);
   }

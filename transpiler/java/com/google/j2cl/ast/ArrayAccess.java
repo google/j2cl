@@ -60,9 +60,8 @@ public class ArrayAccess extends Expression {
   }
 
   @Override
-  public boolean areEnclosingParenthesisUnnecessary() {
-    // Array access are always safe to unparenthesize.
-    return true;
+  public Precedence getPrecedence() {
+    return Precedence.MEMBER_ACCESS;
   }
 
   @Override

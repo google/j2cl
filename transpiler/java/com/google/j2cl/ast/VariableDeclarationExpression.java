@@ -47,6 +47,12 @@ public class VariableDeclarationExpression extends Expression {
   }
 
   @Override
+  public Precedence getPrecedence() {
+    // Variable declaration expressions are never nested in places that need precedence.
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
   public VariableDeclarationExpression clone() {
     return VariableDeclarationExpression.newBuilder()
         .setVariableDeclarationFragments(AstUtils.clone(fragments))

@@ -53,8 +53,9 @@ public class ArrayLiteral extends Expression {
   }
 
   @Override
-  public boolean areEnclosingParenthesisUnnecessary() {
-    return true;
+  public Precedence getPrecedence() {
+    // Array literals do no need parenthesis as they are already enclosed by square brackets.
+    return Precedence.HIGHEST;
   }
 
   @Override

@@ -40,6 +40,11 @@ public class PostfixExpression extends UnaryExpression {
   }
 
   @Override
+  public Precedence getPrecedence() {
+    return Precedence.POSTFIX;
+  }
+
+  @Override
   public PostfixExpression clone() {
     return new PostfixExpression(getOperand().clone(), operator);
   }

@@ -41,10 +41,9 @@ public class JsDocCastExpression extends Expression {
   }
 
   @Override
-  public boolean areEnclosingParenthesisUnnecessary() {
-    // JsDoc casts are rendered with an explicit parenthesis so additional parenthesis around them
-    // are unnecessary.
-    return true;
+  public Precedence getPrecedence() {
+    // These are always emitted with parens.
+    return Precedence.HIGHEST;
   }
 
   @Override

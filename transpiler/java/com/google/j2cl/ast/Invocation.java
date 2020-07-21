@@ -19,6 +19,7 @@ import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.collect.Lists;
+import com.google.j2cl.ast.Expression.Precedence;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.ast.processors.common.Processor;
 import java.util.ArrayList;
@@ -38,8 +39,8 @@ public abstract class Invocation extends Expression implements MemberReference {
   public abstract List<Expression> getArguments();
 
   @Override
-  public boolean areEnclosingParenthesisUnnecessary() {
-    return true;
+  public Precedence getPrecedence() {
+    return Precedence.MEMBER_ACCESS;
   }
 
   abstract Builder<?, ?> createBuilder();

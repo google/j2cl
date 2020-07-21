@@ -197,11 +197,6 @@ public class MoveVariableDeclarationsToEnclosingBlock extends NormalizationPass 
             if (assignments.isEmpty()) {
               return NullLiteral.get();
             }
-
-            if (assignments.size() == 1) {
-              return assignments.get(0);
-            }
-
             return MultiExpression.newBuilder().addExpressions(assignments).build();
           }
         });

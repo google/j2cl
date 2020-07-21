@@ -34,7 +34,7 @@
 [return LocalNameCollision
         && Asserts instanceof LocalNameCollision
         && $Asserts instanceof Asserts
-        && (l_Asserts == A);] => [return LocalNameCollision_1 && LocalNameCollision.$isInstance(Asserts_1) && Asserts.$isInstance($Asserts_1) && (l_Asserts == A_1);] "com.google.j2cl.transpiler.readable.localnamecollision.LocalNameCollision.testClassParameterCollision"
+        && (l_Asserts == A);] => [return LocalNameCollision_1 && LocalNameCollision.$isInstance(Asserts_1) && Asserts.$isInstance($Asserts_1) && l_Asserts == A_1;] "com.google.j2cl.transpiler.readable.localnamecollision.LocalNameCollision.testClassParameterCollision"
 [LocalNameCollision] => [$create__boolean__java_lang_Object__java_lang_Object__int__int]
 [LocalNameCollision] => [LocalNameCollision_1] "LocalNameCollision"
 [Asserts] => [Asserts_1] "Asserts"
@@ -55,7 +55,7 @@
 [boolean result =
         LocalNameCollision
 ...            && $Asserts instanceof Asserts
-            && (l_Asserts == A);] => [let result = LocalNameCollision_1 && LocalNameCollision.$isInstance(Asserts_1) && Asserts.$isInstance($Asserts_1) && (l_Asserts == A_1);] "com.google.j2cl.transpiler.readable.localnamecollision.LocalNameCollision.<init>"
+            && (l_Asserts == A);] => [let result = LocalNameCollision_1 && LocalNameCollision.$isInstance(Asserts_1) && Asserts.$isInstance($Asserts_1) && l_Asserts == A_1;] "com.google.j2cl.transpiler.readable.localnamecollision.LocalNameCollision.<init>"
 [result] => [result] "result"
 [LocalNameCollision] => [$clinit]
 [LocalNameCollision] => [LocalNameCollision.$clinit = () =>{};] "com.google.j2cl.transpiler.readable.localnamecollision.LocalNameCollision.<clinit>"

@@ -45,10 +45,9 @@ public class CastExpression extends Expression {
   }
 
   @Override
-  public boolean areEnclosingParenthesisUnnecessary() {
-    // Cast expressions are emitted as a method call and parenthesis around method calls are
-    // always unnecessary.
-    return true;
+  public Precedence getPrecedence() {
+    // Casts never reach the backend as CastExpression but rather as method calls.
+    throw new UnsupportedOperationException();
   }
 
   @Override

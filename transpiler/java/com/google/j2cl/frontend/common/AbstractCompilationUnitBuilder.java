@@ -179,9 +179,7 @@ public abstract class AbstractCompilationUnitBuilder {
             referencedMethodDescriptor,
             false));
 
-    return result.size() == 1
-        ? Iterables.getOnlyElement(result)
-        : MultiExpression.newBuilder().setExpressions(result).build();
+    return MultiExpression.newBuilder().setExpressions(result).build();
   }
 
   /**

@@ -42,8 +42,7 @@ public class InsertUnsignedRightShiftCoercions extends NormalizationPass {
                   .setLeftOperand(binaryExpression)
                   .setOperator(BinaryOperator.BIT_OR)
                   .setRightOperand(NumberLiteral.fromInt(0))
-                  .build()
-                  .parenthesize();
+                  .build();
             }
             return binaryExpression;
           }

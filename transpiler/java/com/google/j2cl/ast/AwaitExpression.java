@@ -41,6 +41,12 @@ public class AwaitExpression extends Expression {
   }
 
   @Override
+  public Precedence getPrecedence() {
+    // Await is considered exactly like a prefix operator w.r.t. precedence.
+    return Precedence.PREFIX;
+  }
+
+  @Override
   public AwaitExpression clone() {
     return new AwaitExpression(expression.clone(), typeDescriptor);
   }

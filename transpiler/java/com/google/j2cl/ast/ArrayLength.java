@@ -57,9 +57,8 @@ public class ArrayLength extends Expression {
   }
 
   @Override
-  public boolean areEnclosingParenthesisUnnecessary() {
-    // Array length expressions are always safe to unparenthesize.
-    return true;
+  public Precedence getPrecedence() {
+    return Precedence.MEMBER_ACCESS;
   }
 
   @Override

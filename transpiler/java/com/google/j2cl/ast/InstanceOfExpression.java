@@ -18,6 +18,7 @@ package com.google.j2cl.ast;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import com.google.j2cl.ast.Expression.Precedence;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.ast.processors.common.Processor;
 import com.google.j2cl.common.SourcePosition;
@@ -55,6 +56,12 @@ public class InstanceOfExpression extends Expression implements HasSourcePositio
   @Override
   public boolean isIdempotent() {
     return expression.isIdempotent();
+  }
+
+  @Override
+  public Precedence getPrecedence() {
+    // instanceof is treated like a relational infix operator.
+    return Precedence.RELATIONAL;
   }
 
   @Override

@@ -58,6 +58,12 @@ public class JsDocFieldDeclaration extends Expression {
     return fieldType;
   }
 
+  @Override
+  public Precedence getPrecedence() {
+    // These are always emitted directly in a statement, their precedence should never be required.
+    throw new UnsupportedOperationException();
+  }
+
   public boolean isPublic() {
     return isPublic;
   }

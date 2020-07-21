@@ -289,10 +289,9 @@ public class CompoundOperationsUtils {
       // be taken to avoid double side-effects from dereferencing the qualifier twice.
       // ++a => (a = a + 1)
       return assignToLeftOperand(
-              operand,
-              operator.getUnderlyingBinaryOperator(),
-              createLiteralOne(operand.getTypeDescriptor()))
-          .parenthesize();
+          operand,
+          operator.getUnderlyingBinaryOperator(),
+          createLiteralOne(operand.getTypeDescriptor()));
     }
 
     if (operand instanceof FieldAccess) {
@@ -326,10 +325,7 @@ public class CompoundOperationsUtils {
                 BinaryExpression.newBuilder()
                     .setLeftOperand(leftOperand.clone())
                     .setOperator(operator)
-                    // TODO(b/67753876): Remove explicit parenthesis once J2cl handles precedence.
-                    // Add parenthesis to the right expression to handle cases like a += b += c, and
-                    // emit code that is syntactically correct.
-                    .setRightOperand(rightOperand.parenthesize())
+                    .setRightOperand(rightOperand)
                     .build()))
         .build();
   }

@@ -47,6 +47,7 @@ import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.DoWhileStatement;
 import com.google.j2cl.ast.EmptyStatement;
 import com.google.j2cl.ast.Expression;
+import com.google.j2cl.ast.Expression.Associativity;
 import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldAccess;
@@ -1228,7 +1229,9 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       Expression rightOperand = convert(expression.getRightOperand());
       BinaryOperator operator = JdtUtils.getBinaryOperator(expression.getOperator());
 
-      checkArgument(!expression.hasExtendedOperands() || operator.isLeftAssociative());
+      checkArgument(
+          !expression.hasExtendedOperands()
+              || operator.getPrecedence().getAssociativity() == Associativity.LEFT);
 
       BinaryExpression binaryExpression =
           BinaryExpression.newBuilder()
@@ -1369,9 +1372,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     }
 
     private Expression convert(org.eclipse.jdt.core.dom.ParenthesizedExpression expression) {
-      // Preserve the parenthesis. J2CL does not yet handle properly parenthesizing the output
-      // according to operator precedence.
-      return convert(expression.getExpression()).parenthesize();
+      return convert(expression.getExpression());
     }
 
     private UnaryExpression convert(org.eclipse.jdt.core.dom.PostfixExpression expression) {

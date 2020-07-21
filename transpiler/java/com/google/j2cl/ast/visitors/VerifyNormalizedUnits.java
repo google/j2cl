@@ -22,6 +22,7 @@ import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.Member;
 import com.google.j2cl.ast.Method;
+import com.google.j2cl.ast.MultiExpression;
 import com.google.j2cl.ast.Type;
 
 /** Verifies that the AST satisfies the normalization invariants. */
@@ -55,6 +56,12 @@ public class VerifyNormalizedUnits extends NormalizationPass {
             if (getCurrentType().isJsEnum()) {
               checkState(member.isField() || member.isStatic());
             }
+          }
+
+          @Override
+          public void exitMultiExpression(MultiExpression multiExpression) {
+            // No empty nor singleton multiexpressions should remain.
+            checkState(multiExpression.getExpressions().size() > 1);
           }
         });
   }

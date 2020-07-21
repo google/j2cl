@@ -42,8 +42,9 @@ public abstract class Literal extends Expression {
   }
 
   @Override
-  public boolean areEnclosingParenthesisUnnecessary() {
-    return true;
+  public Precedence getPrecedence() {
+    // Literals never need enclosing parens.
+    return Precedence.HIGHEST;
   }
 
   @Override

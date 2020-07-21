@@ -41,6 +41,7 @@ import com.google.j2cl.ast.InstanceOfExpression;
 import com.google.j2cl.ast.JavaScriptConstructorReference;
 import com.google.j2cl.ast.JsDocCastExpression;
 import com.google.j2cl.ast.JsDocFieldDeclaration;
+import com.google.j2cl.ast.MemberReference;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.MultiExpression;
@@ -85,45 +86,40 @@ public class ExpressionTranspiler {
     new AbstractVisitor() {
       ClosureTypesGenerator closureTypesGenerator = new ClosureTypesGenerator(environment);
 
-      void process(Node node) {
-        node.accept(this);
-      }
-
       @Override
       public boolean enterArrayAccess(ArrayAccess arrayAccess) {
-        process(arrayAccess.getArrayExpression());
+        processLeftSubExpression(arrayAccess, arrayAccess.getArrayExpression());
         sourceBuilder.append("[");
-        process(arrayAccess.getIndexExpression());
+        renderNoParens(arrayAccess.getIndexExpression());
         sourceBuilder.append("]");
         return false;
       }
 
       @Override
       public boolean enterArrayLength(ArrayLength arrayLength) {
-        process(arrayLength.getArrayExpression());
+        processLeftSubExpression(arrayLength, arrayLength.getArrayExpression());
         sourceBuilder.append(".length");
         return false;
       }
 
       @Override
       public boolean enterArrayLiteral(ArrayLiteral arrayLiteral) {
-        renderDelimitedAndSeparated("[", ", ", "]", arrayLiteral.getValueExpressions());
+        renderDelimitedAndCommaSeparated("[", "]", arrayLiteral.getValueExpressions());
         return false;
       }
 
       @Override
       public boolean enterAwaitExpression(AwaitExpression awaitExpression) {
-        sourceBuilder.append("(await ");
-        process(awaitExpression.getExpression());
-        sourceBuilder.append(")");
+        sourceBuilder.append("await ");
+        processRightSubExpression(awaitExpression, awaitExpression.getExpression());
         return false;
       }
 
       @Override
       public boolean enterBinaryExpression(BinaryExpression expression) {
-        process(expression.getLeftOperand());
+        processLeftSubExpression(expression, expression.getLeftOperand());
         sourceBuilder.append(" " + expression.getOperator() + " ");
-        process(expression.getRightOperand());
+        processRightSubExpression(expression, expression.getRightOperand());
         return false;
       }
 
@@ -144,8 +140,9 @@ public class ExpressionTranspiler {
       public boolean enterJsDocCastExpression(JsDocCastExpression jsDocCastExpression) {
         String jsdoc =
             closureTypesGenerator.getClosureTypeString(jsDocCastExpression.getTypeDescriptor());
+        // Parenthesis are part of JsDoc casts no need to add extra.
         sourceBuilder.append("/**@type {" + jsdoc + "}*/ (");
-        process(jsDocCastExpression.getExpression());
+        renderNoParens(jsDocCastExpression.getExpression());
         sourceBuilder.append(")");
         return false;
       }
@@ -169,13 +166,17 @@ public class ExpressionTranspiler {
           jsDocs.add("@deprecated");
         }
         sourceBuilder.appendln("/**" + String.join(" ", jsDocs) + "*/");
-        process(declaration.getExpression());
+        // Always emitted at the top level, no need for parens.
+        renderNoParens(declaration.getExpression());
         return false;
       }
 
       @Override
       public boolean enterExpressionWithComment(ExpressionWithComment expressionWithComment) {
-        process(expressionWithComment.getExpression());
+        // Comments do not count as operations, but parenthesis will be emitted by the
+        // outer context if needed given that getPrecedence is just a passthrough to the inner
+        // expression.
+        renderNoParens(expressionWithComment.getExpression());
         sourceBuilder.append(" /* " + expressionWithComment.getComment() + " */");
         return false;
       }
@@ -183,8 +184,7 @@ public class ExpressionTranspiler {
       @Override
       public boolean enterFieldAccess(FieldAccess fieldAccess) {
         String fieldMangledName = fieldAccess.getTarget().getMangledName();
-        renderQualifiedName(
-            fieldAccess.getQualifier(), fieldMangledName, fieldAccess.getSourcePosition());
+        renderQualifiedName(fieldAccess, fieldMangledName, fieldAccess.getSourcePosition());
         return false;
       }
 
@@ -228,14 +228,15 @@ public class ExpressionTranspiler {
         // conformance errors. Parameter annotations are not required for anonymous functions so
         // they can be safely skipped here.
         if (!isUnknownTypeParameter(expression, i)) {
-          // The inline type annotation for parameters has to be just right preceding the parameter
+          // The inline type annotation for parameters has to be just right preceding the  parameter
           // name, hence if it is a varargs parameter then it would be emitted as follows:
           // ... /* <inline type annotation> */ <parameter name>
           //
           sourceBuilder.append(
               "/** " + closureTypesGenerator.getJsDocForParameter(expression, i) + " */ ");
         }
-        process(parameter);
+        // Render the parameter, which is not an expression but is just a name, so no parens.
+        renderNoParens(parameter);
       }
 
       private boolean isUnknownTypeParameter(FunctionExpression functionExpression, int i) {
@@ -258,11 +259,14 @@ public class ExpressionTranspiler {
 
       @Override
       public boolean enterConditionalExpression(ConditionalExpression conditionalExpression) {
-        process(conditionalExpression.getConditionExpression());
+        // Conditional expressions are in its own precedence class. So when they are nested in the
+        // in the condition position they need parenthesis, but not in the second or third position.
+        processLeftSubExpression(
+            conditionalExpression, conditionalExpression.getConditionExpression());
         sourceBuilder.append(" ? ");
-        process(conditionalExpression.getTrueExpression());
+        renderNoParens(conditionalExpression.getTrueExpression());
         sourceBuilder.append(" : ");
-        process(conditionalExpression.getFalseExpression());
+        renderNoParens(conditionalExpression.getFalseExpression());
         return false;
       }
 
@@ -276,7 +280,7 @@ public class ExpressionTranspiler {
           renderJsPropertySetter(expression);
         } else {
           renderMethodCallHeader(expression);
-          renderDelimitedAndSeparated("(", ", ", ")", expression.getArguments());
+          renderDelimitedAndCommaSeparated("(", ")", expression.getArguments());
         }
         return false;
       }
@@ -288,22 +292,25 @@ public class ExpressionTranspiler {
 
         sourceBuilder.append(
             AstUtils.buildQualifiedName(qualifier, methodDescriptor.getMangledName(), "call"));
-        renderDelimitedAndSeparated(
+        renderDelimitedAndCommaSeparated(
             "(",
-            ", ",
             ")",
             Iterables.concat(
                 Collections.singletonList(expression.getQualifier()), expression.getArguments()));
       }
 
-      private void renderQualifiedName(Expression qualifier, String jsPropertyName) {
-        renderQualifiedName(qualifier, jsPropertyName, /* sourcePosition */ Optional.empty());
+      private void renderQualifiedName(Expression enclosingExpression, String jsPropertyName) {
+        renderQualifiedName(
+            enclosingExpression, jsPropertyName, /* sourcePosition */ Optional.empty());
       }
 
       private void renderQualifiedName(
-          Expression qualifier, String jsPropertyName, Optional<SourcePosition> sourcePosition) {
+          Expression enclosingExpression,
+          String jsPropertyName,
+          Optional<SourcePosition> sourcePosition) {
+        Expression qualifier = ((MemberReference) enclosingExpression).getQualifier();
         if (shouldRenderQualifier(qualifier)) {
-          process(qualifier);
+          processLeftSubExpression(enclosingExpression, qualifier);
           sourceBuilder.append(".");
         }
         sourceBuilder.emitWithMapping(sourcePosition, () -> sourceBuilder.append(jsPropertyName));
@@ -326,14 +333,16 @@ public class ExpressionTranspiler {
 
       /** JsProperty getter is emitted as property access: qualifier.property. */
       private void renderJsPropertyAccess(MethodCall expression) {
-        renderQualifiedName(expression.getQualifier(), expression.getTarget().getSimpleJsName());
+        renderQualifiedName(expression, expression.getTarget().getSimpleJsName());
       }
 
       /** JsProperty setter is emitted as property set: qualifier.property = argument. */
       private void renderJsPropertySetter(MethodCall expression) {
         renderJsPropertyAccess(expression);
         sourceBuilder.append(" = ");
-        process(expression.getArguments().get(0));
+        // Setters are a special case. They cannot be nested in any non top level expression as they
+        // return void.
+        renderNoParens(expression.getArguments().get(0));
       }
 
       private void renderMethodCallHeader(MethodCall expression) {
@@ -342,10 +351,10 @@ public class ExpressionTranspiler {
         if (target.isConstructor()) {
           sourceBuilder.append("super");
         } else if (target.isJsFunction()) {
-          // Call to a JsFunction method is emitted as the call on the qualifier itself:
-          process(expression.getQualifier().parenthesize());
+          // Call to a JsFunction method is emitted as the call on the qualifier itself.
+          processLeftSubExpression(expression, expression.getQualifier());
         } else {
-          renderQualifiedName(expression.getQualifier(), target.getMangledName());
+          renderQualifiedName(expression, target.getMangledName());
         }
       }
 
@@ -354,18 +363,22 @@ public class ExpressionTranspiler {
         List<Expression> expressions = multiExpression.getExpressions();
         if (expressions.stream()
             .anyMatch(Predicates.instanceOf(VariableDeclarationExpression.class))) {
-          // If the multiexpression declares variables enclosing in an anonymous function context.
+          // If the multiexpression declares variables enclosing in an anonymous function
+          // context.
           sourceBuilder.append("( () => {");
           for (Expression expression : expressions.subList(0, expressions.size() - 1)) {
-            process(expression);
+            // Top level expression no need for parens.
+            renderNoParens(expression);
             sourceBuilder.append(";");
           }
           Expression returnValue = Iterables.getLast(expressions);
           sourceBuilder.append(" return ");
-          process(returnValue);
+          // Return values never need enclosing parens.
+          renderNoParens(returnValue);
           sourceBuilder.append(";})()");
         } else {
-          renderDelimitedAndSeparated("(", ", ", ")", expressions);
+          checkArgument(expressions.size() > 1);
+          renderDelimitedAndCommaSeparated("(", ")", expressions);
         }
         return false;
       }
@@ -383,7 +396,7 @@ public class ExpressionTranspiler {
             expression.getTarget().getEnclosingTypeDescriptor().toRawTypeDescriptor();
 
         sourceBuilder.append("new " + environment.aliasForType(targetTypeDescriptor));
-        renderDelimitedAndSeparated("(", ", ", ")", expression.getArguments());
+        renderDelimitedAndCommaSeparated("(", ")", expression.getArguments());
         return false;
       }
 
@@ -403,7 +416,7 @@ public class ExpressionTranspiler {
       @Override
       public boolean enterPostfixExpression(PostfixExpression expression) {
         checkArgument(!TypeDescriptors.isPrimitiveLong(expression.getTypeDescriptor()));
-        process(expression.getOperand());
+        processLeftSubExpression(expression, expression.getOperand());
         sourceBuilder.append(expression.getOperator().toString());
         return false;
       }
@@ -411,7 +424,7 @@ public class ExpressionTranspiler {
       @Override
       public boolean enterPrefixExpression(PrefixExpression expression) {
         sourceBuilder.append(expression.getOperator().toString());
-        process(expression.getOperand());
+        processRightSubExpression(expression, expression.getOperand());
         return false;
       }
 
@@ -444,7 +457,7 @@ public class ExpressionTranspiler {
       @Override
       public boolean enterVariableDeclarationExpression(
           VariableDeclarationExpression variableDeclarationExpression) {
-        renderDelimitedAndSeparated("let ", ", ", "", variableDeclarationExpression.getFragments());
+        renderDelimitedAndCommaSeparated("let ", "", variableDeclarationExpression.getFragments());
         return false;
       }
 
@@ -458,11 +471,12 @@ public class ExpressionTranspiler {
                   + " */ ");
         }
 
-        process(variable);
+        // Variable declarations are separated with comma, so no need for parens.
+        renderNoParens(variable);
 
         if (fragment.getInitializer() != null) {
           sourceBuilder.append(" = ");
-          process(fragment.getInitializer());
+          renderNoParens(fragment.getInitializer());
         }
         return false;
       }
@@ -483,14 +497,15 @@ public class ExpressionTranspiler {
         return false;
       }
 
-      private void renderDelimitedAndSeparated(
-          String prefix, String separator, String suffix, Iterable<? extends Node> nodes) {
+      private void renderDelimitedAndCommaSeparated(
+          String prefix, String suffix, Iterable<? extends Node> nodes) {
         sourceBuilder.append(prefix);
-        renderSeparated(separator, nodes);
+        renderCommaSeparated(nodes);
         sourceBuilder.append(suffix);
       }
 
-      private void renderSeparated(String separator, Iterable<? extends Node> nodes) {
+      private void renderCommaSeparated(Iterable<? extends Node> nodes) {
+        String separator = ", ";
         String currentSeparator = "";
         for (Node node : nodes) {
           if (node == null) {
@@ -498,9 +513,32 @@ public class ExpressionTranspiler {
           }
           sourceBuilder.append(currentSeparator);
           currentSeparator = separator;
-          process(node);
+          // Comma separated expressions never need enclosing parens.
+          renderNoParens(node);
         }
       }
-    }.process(expression);
+
+      private void processLeftSubExpression(Expression expression, Expression operand) {
+        renderExpression(operand, expression.requiresParensOnLeft(operand));
+      }
+
+      private void processRightSubExpression(Expression expression, Expression operand) {
+        renderExpression(operand, expression.requiresParensOnRight(operand));
+      }
+
+      private void renderExpression(Expression expression, boolean needsParentheses) {
+        if (needsParentheses) {
+          sourceBuilder.append("(");
+          renderNoParens(expression);
+          sourceBuilder.append(")");
+        } else {
+          renderNoParens(expression);
+        }
+      }
+
+      private void renderNoParens(Node node) {
+        node.accept(this);
+      }
+    }.renderNoParens(expression);
   }
 }

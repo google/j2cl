@@ -19,8 +19,8 @@ class InterfaceWithAsyncDefaultMethod {
     InterfaceWithAsyncDefaultMethod.$clinit();
     return /**@type {Promise<Integer>}*/ (
         Promise.resolve(/**@type {Integer}*/ ($Casts.$to(
-            (await /**@type {Promise<Integer>}*/ (
-                Promise.resolve(Integer.m_valueOf__int(5)))),
+            await /**@type {Promise<Integer>}*/ (
+                Promise.resolve(Integer.m_valueOf__int(5))),
             Integer))));
   }
 

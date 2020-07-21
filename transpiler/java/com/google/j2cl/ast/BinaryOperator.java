@@ -17,53 +17,59 @@ package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import com.google.j2cl.ast.Expression.Precedence;
+
 /**
  * Binary Operator.
  */
 public enum BinaryOperator implements Operator {
-  TIMES("*"),
-  DIVIDE("/"),
-  REMAINDER("%"),
-  PLUS("+"),
-  MINUS("-"),
-  LEFT_SHIFT("<<"),
-  RIGHT_SHIFT_SIGNED(">>"),
-  RIGHT_SHIFT_UNSIGNED(">>>"),
-  LESS("<"),
-  GREATER(">"),
-  LESS_EQUALS("<="),
-  GREATER_EQUALS(">="),
-  EQUALS("=="),
-  NOT_EQUALS("!="),
-  BIT_XOR("^"),
-  BIT_AND("&"),
-  BIT_OR("|"),
-  CONDITIONAL_AND("&&"),
-  CONDITIONAL_OR("||"),
+  // Precedence for JavaScript, see.
+  TIMES(Precedence.MULTIPLICATIVE, "*"),
+  DIVIDE(Precedence.MULTIPLICATIVE, "/"),
+  REMAINDER(Precedence.MULTIPLICATIVE, "%"),
+  PLUS(Precedence.ADDITIVE, "+"),
+  MINUS(Precedence.ADDITIVE, "-"),
+  LEFT_SHIFT(Precedence.SHIFT_OPERATOR, "<<"),
+  RIGHT_SHIFT_SIGNED(Precedence.SHIFT_OPERATOR, ">>"),
+  RIGHT_SHIFT_UNSIGNED(Precedence.SHIFT_OPERATOR, ">>>"),
+  LESS(Precedence.RELATIONAL, "<"),
+  GREATER(Precedence.RELATIONAL, ">"),
+  LESS_EQUALS(Precedence.RELATIONAL, "<="),
+  GREATER_EQUALS(Precedence.RELATIONAL, ">="),
+  EQUALS(Precedence.EQUALITY, "=="),
+  NOT_EQUALS(Precedence.EQUALITY, "!="),
+  BIT_XOR(Precedence.BITWISE_XOR, "^"),
+  BIT_AND(Precedence.BITWISE_AND, "&"),
+  BIT_OR(Precedence.BITWISE_OR, "|"),
+  CONDITIONAL_AND(Precedence.LOGICAL_AND, "&&"),
+  CONDITIONAL_OR(Precedence.LOGICAL_OR, "||"),
   // Assignment operators.
-  ASSIGN("="),
-  PLUS_ASSIGN("+=", PLUS),
-  MINUS_ASSIGN("-=", MINUS),
-  TIMES_ASSIGN("*=", TIMES),
-  DIVIDE_ASSIGN("/=", DIVIDE),
-  BIT_AND_ASSIGN("&=", BIT_AND),
-  BIT_OR_ASSIGN("|=", BIT_OR),
-  BIT_XOR_ASSIGN("^=", BIT_XOR),
-  REMAINDER_ASSIGN("%=", REMAINDER),
-  LEFT_SHIFT_ASSIGN("<<=", LEFT_SHIFT),
-  RIGHT_SHIFT_SIGNED_ASSIGN(">>=", RIGHT_SHIFT_SIGNED),
-  RIGHT_SHIFT_UNSIGNED_ASSIGN(">>>=", RIGHT_SHIFT_UNSIGNED);
+  ASSIGN(Precedence.ASSIGNMENT, "="),
+  PLUS_ASSIGN(Precedence.ASSIGNMENT, "+=", PLUS),
+  MINUS_ASSIGN(Precedence.ASSIGNMENT, "-=", MINUS),
+  TIMES_ASSIGN(Precedence.ASSIGNMENT, "*=", TIMES),
+  DIVIDE_ASSIGN(Precedence.ASSIGNMENT, "/=", DIVIDE),
+  BIT_AND_ASSIGN(Precedence.ASSIGNMENT, "&=", BIT_AND),
+  BIT_OR_ASSIGN(Precedence.ASSIGNMENT, "|=", BIT_OR),
+  BIT_XOR_ASSIGN(Precedence.ASSIGNMENT, "^=", BIT_XOR),
+  REMAINDER_ASSIGN(Precedence.ASSIGNMENT, "%=", REMAINDER),
+  LEFT_SHIFT_ASSIGN(Precedence.ASSIGNMENT, "<<=", LEFT_SHIFT),
+  RIGHT_SHIFT_SIGNED_ASSIGN(Precedence.ASSIGNMENT, ">>=", RIGHT_SHIFT_SIGNED),
+  RIGHT_SHIFT_UNSIGNED_ASSIGN(Precedence.ASSIGNMENT, ">>>=", RIGHT_SHIFT_UNSIGNED);
 
   private final String symbol;
   private final BinaryOperator underlyingBinaryOperator;
+  private final Expression.Precedence precedence;
 
-  BinaryOperator(String symbol) {
-    this(symbol, null);
+  BinaryOperator(Expression.Precedence precedence, String symbol) {
+    this(precedence, symbol, null);
   }
 
-  BinaryOperator(String symbol, BinaryOperator underlyingBinaryOperator) {
+  BinaryOperator(
+      Expression.Precedence precedence, String symbol, BinaryOperator underlyingBinaryOperator) {
     this.symbol = checkNotNull(symbol);
     this.underlyingBinaryOperator = underlyingBinaryOperator;
+    this.precedence = precedence;
   }
 
   @Override
@@ -134,9 +140,9 @@ public enum BinaryOperator implements Operator {
     }
   }
 
-  public boolean isLeftAssociative() {
-    // All binary operators except for assignment operators are left-associative;
-    return !isAssignmentOperator();
+  /** Returns the precedence of this operator. See {@link Expression#getPrecedence()}. */
+  public Expression.Precedence getPrecedence() {
+    return precedence;
   }
 
   @Override

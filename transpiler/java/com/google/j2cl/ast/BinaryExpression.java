@@ -93,6 +93,11 @@ public class BinaryExpression extends Expression {
   }
 
   @Override
+  public Expression.Precedence getPrecedence() {
+    return getOperator().getPrecedence();
+  }
+
+  @Override
   public boolean isIdempotent() {
     return !operator.hasSideEffect() && leftOperand.isIdempotent() && rightOperand.isIdempotent();
   }

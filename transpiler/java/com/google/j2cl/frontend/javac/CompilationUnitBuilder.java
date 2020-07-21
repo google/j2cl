@@ -1434,9 +1434,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   }
 
   private Expression convertParens(JCParens expression) {
-    // Preserve the parenthesis. J2CL does not yet handle properly parenthesizing the output
-    // according to operator precedence.
-    return convertExpression(expression.getExpression()).parenthesize();
+    return convertExpression(expression.getExpression());
   }
 
   private Expression convertExpression(JCExpression jcExpression) {

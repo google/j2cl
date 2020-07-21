@@ -52,8 +52,8 @@ public class SuperReference extends Expression {
   }
 
   @Override
-  public boolean areEnclosingParenthesisUnnecessary() {
-    return true;
+  public Precedence getPrecedence() {
+    return Precedence.HIGHEST;
   }
 
   @Override

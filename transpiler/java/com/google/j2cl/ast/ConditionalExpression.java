@@ -57,6 +57,11 @@ public class ConditionalExpression extends Expression {
   }
 
   @Override
+  public Expression.Precedence getPrecedence() {
+    return Precedence.CONDITIONAL;
+  }
+
+  @Override
   public ConditionalExpression clone() {
     return new ConditionalExpression(
         typeDescriptor,

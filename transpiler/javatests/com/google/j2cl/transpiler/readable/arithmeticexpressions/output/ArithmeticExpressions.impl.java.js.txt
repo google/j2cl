@@ -67,7 +67,7 @@ class ArithmeticExpressions extends j_l_Object {
     let i = 1 + 1 + 2 - 5;
     let j = (1 + 2) * (3 + 4);
     let k = !(1 + 2 + 3 == 4);
-    let l = (1 + 2 != 4);
+    let l = 1 + 2 != 4;
     let m = $Primitives.$widenLongToDouble(Long.f_MAX_VALUE__java_lang_Long) !=
         9.223372036854778E18;
     let o = $Primitives.$coerceDivision(5 / 2) - 0;
@@ -141,8 +141,8 @@ class ArithmeticExpressions extends j_l_Object {
     d = Integer.m_valueOf__int(d.m_intValue__() + i);
     d = Integer.m_valueOf__int(d.m_intValue__() << i);
     i += c.m_intValue__();
-    let e = (c = Integer.m_valueOf__int(c.m_intValue__() + 1));
-    e = (c = Integer.m_valueOf__int(c.m_intValue__() + 1));
+    let e = c = Integer.m_valueOf__int(c.m_intValue__() + 1);
+    e = c = Integer.m_valueOf__int(c.m_intValue__() + 1);
     let e2 = 100;
     e2 = Double.m_doubleValue__java_lang_Double(e2) + 1;
     let f =

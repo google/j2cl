@@ -63,6 +63,12 @@ public class NewArray extends Expression {
   }
 
   @Override
+  public Precedence getPrecedence() {
+    // Treated exactly as new, which is modeled as a member access.
+    return Precedence.MEMBER_ACCESS;
+  }
+
+  @Override
   public NewArray clone() {
     return NewArray.newBuilder()
         .setTypeDescriptor(typeDescriptor)

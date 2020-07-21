@@ -39,8 +39,8 @@ class Main extends j_l_Object {
   async m_asyncMethod___$pp_com_google_j2cl_transpiler_readable_jsasync() {
     let result = /**@type {Integer}*/ (
                      $Casts.$to(
-                         (await /**@type {Promise<Integer>}*/ (
-                             Promise.resolve(Integer.m_valueOf__int(7)))),
+                         await /**@type {Promise<Integer>}*/ (
+                             Promise.resolve(Integer.m_valueOf__int(7))),
                          Integer))
                      .m_intValue__();
     return /**@type {IThenable<Integer>}*/ (
@@ -51,15 +51,15 @@ class Main extends j_l_Object {
   async m_parametricAsyncMethod__java_lang_Object_$pp_com_google_j2cl_transpiler_readable_jsasync(
       /** T */ value) {
     return /**@type {Promise<T>}*/ (Promise.resolve(
-        (await /**@type {Promise<T>}*/ (Promise.resolve(value)))));
+        await /**@type {Promise<T>}*/ (Promise.resolve(value))));
   }
   /** @return {IThenable<?void>} */
   static async m_staticAsyncMethod__() {
     Main.$clinit();
     return /**@type {Promise<?void>}*/ (
         Promise.resolve(/**@type {?void}*/ ($Casts.$to(
-            (await /**@type {Promise<?void>}*/ (
-                Promise.resolve(/**@type {?void}*/ (null)))),
+            await /**@type {Promise<?void>}*/ (
+                Promise.resolve(/**@type {?void}*/ (null))),
             Void))));
   }
 
@@ -67,16 +67,16 @@ class Main extends j_l_Object {
     let i = AsyncInterface.$adapt(async () => {
       return /**@type {Promise<Integer>}*/ (
           Promise.resolve(/**@type {Integer}*/ ($Casts.$to(
-              (await /**@type {Promise<Integer>}*/ (
-                  Promise.resolve(Integer.m_valueOf__int(5)))),
+              await /**@type {Promise<Integer>}*/ (
+                  Promise.resolve(Integer.m_valueOf__int(5))),
               Integer))));
     });
     let o = $1.$create__com_google_j2cl_transpiler_readable_jsasync_Main(this);
     let j = async () => {
       return /**@type {Promise<Integer>}*/ (
           Promise.resolve(/**@type {Integer}*/ ($Casts.$to(
-              (await /**@type {Promise<Integer>}*/ (
-                  Promise.resolve(Integer.m_valueOf__int(5)))),
+              await /**@type {Promise<Integer>}*/ (
+                  Promise.resolve(Integer.m_valueOf__int(5))),
               Integer))));
     };
     let optimizableJsFunction = () => {

@@ -17,6 +17,7 @@ package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import com.google.j2cl.ast.Expression.Precedence;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.ast.processors.common.Processor;
 
@@ -55,9 +56,9 @@ public class ExpressionWithComment extends Expression {
   }
 
   @Override
-  public boolean areEnclosingParenthesisUnnecessary() {
-    // expressions with comment are safe to unparenthesize if the underlying expression is.
-    return expression.areEnclosingParenthesisUnnecessary();
+  public Precedence getPrecedence() {
+    // The added comment does not affect the precedence of the underlying expression.
+    return expression.getPrecedence();
   }
 
   @Override
