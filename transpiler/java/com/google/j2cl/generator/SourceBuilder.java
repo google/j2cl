@@ -21,7 +21,7 @@ import static com.google.common.base.Preconditions.checkState;
 import com.google.common.base.CharMatcher;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
-import com.google.j2cl.ast.Member;
+import com.google.j2cl.ast.MemberDescriptor;
 import com.google.j2cl.common.FilePosition;
 import com.google.j2cl.common.SourcePosition;
 import java.util.HashMap;
@@ -47,7 +47,7 @@ class SourceBuilder {
   private int currentIndentation = 0;
   private final SortedMap<SourcePosition, SourcePosition> javaSourceInfoByOutputSourceInfo =
       new TreeMap<>();
-  private final Map<Member, SourcePosition> outputSourceInfoByMember = new HashMap<>();
+  private final Map<MemberDescriptor, SourcePosition> outputSourceInfoByMember = new HashMap<>();
   private boolean finished = false;
 
   public void emitWithMapping(Optional<SourcePosition> javaSourcePosition, Runnable codeEmitter) {
@@ -70,11 +70,11 @@ class SourceBuilder {
     javaSourceInfoByOutputSourceInfo.put(jsSourcePosition.get(), javaSourcePosition);
   }
 
-  public void emitWithMemberMapping(Member member, Runnable codeEmitter) {
+  public void emitWithMemberMapping(MemberDescriptor memberDescriptor, Runnable codeEmitter) {
     checkState(
-        !outputSourceInfoByMember.containsKey(member),
+        !outputSourceInfoByMember.containsKey(memberDescriptor),
         "Output source info already exists for this member %s",
-        member);
+        memberDescriptor);
 
     Optional<SourcePosition> jsSourcePosition = emit(codeEmitter);
 
@@ -83,7 +83,7 @@ class SourceBuilder {
       return;
     }
 
-    outputSourceInfoByMember.put(member, jsSourcePosition.get());
+    outputSourceInfoByMember.put(memberDescriptor, jsSourcePosition.get());
   }
 
   private Optional<SourcePosition> emit(Runnable codeEmitter) {
@@ -124,7 +124,7 @@ class SourceBuilder {
     return javaSourceInfoByOutputSourceInfo;
   }
 
-  public ImmutableMap<Member, SourcePosition> getOutputSourceInfoByMember() {
+  public ImmutableMap<MemberDescriptor, SourcePosition> getOutputSourceInfoByMember() {
     return ImmutableMap.copyOf(outputSourceInfoByMember);
   }
 

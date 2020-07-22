@@ -51,7 +51,7 @@ public final class LibraryInfoBuilder {
       Type type,
       String headerFilePath,
       String implFilePath,
-      Map<Member, com.google.j2cl.common.SourcePosition> outputSourceInfoByMember) {
+      Map<MemberDescriptor, com.google.j2cl.common.SourcePosition> outputSourceInfoByMember) {
 
     if (!isPrunableType(type.getTypeDescriptor())) {
       return;
@@ -96,7 +96,8 @@ public final class LibraryInfoBuilder {
                       .setStatic(member.isStatic())
                       .setJsAccessible(isJsAccessible));
 
-      com.google.j2cl.common.SourcePosition jsSourcePosition = outputSourceInfoByMember.get(member);
+      com.google.j2cl.common.SourcePosition jsSourcePosition =
+          outputSourceInfoByMember.get(member.getDescriptor());
       if (jsSourcePosition != null) {
         builder.setPosition(createSourcePosition(jsSourcePosition));
       }
@@ -115,7 +116,8 @@ public final class LibraryInfoBuilder {
       com.google.j2cl.common.SourcePosition position) {
     return SourcePosition.newBuilder()
         .setStart(position.getStartFilePosition().getLine())
-        .setEnd(position.getEndFilePosition().getLine())
+        // For the minifier, end position is exclusive.
+        .setEnd(position.getEndFilePosition().getLine() + 1)
         .build();
   }
 

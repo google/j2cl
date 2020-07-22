@@ -158,7 +158,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.newLine();
     for (Field field : type.getStaticFields()) {
       sourceBuilder.emitWithMemberMapping(
-          field,
+          field.getDescriptor(),
           () -> {
             if (field.getDescriptor().isDeprecated()) {
               sourceBuilder.appendln(" /** @deprecated */");
@@ -338,28 +338,33 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   private void renderTypeMethods() {
     for (Method method : type.getMethods()) {
-      sourceBuilder.emitWithMemberMapping(
-          method,
-          () -> {
-            if (method.isNative()) {
-              // If the method is native, output JsDoc comments so it can serve as a template for
-              // native.js. However if the method is pointing to a different namespace then there
-              // is no point on doing that since it cannot be provided via a native.js file.
-              if (method.getDescriptor().hasJsNamespace()) {
-                return;
-              }
+      if (method.isNative()) {
+        // If the method is native, output JsDoc comments so it can serve as a template for
+        // native.js. However if the method is pointing to a different namespace then there
+        // is no point on doing that since it cannot be provided via a native.js file.
+        if (method.getDescriptor().hasJsNamespace()) {
+          continue;
+        }
+
+        sourceBuilder.emitWithMemberMapping(
+            method.getDescriptor(),
+            () -> {
               sourceBuilder.append("// ");
               renderMethodJsDoc(method);
               sourceBuilder.append("// native ");
               emitMethodHeader(method);
-            } else {
+            });
+      } else {
 
+        sourceBuilder.emitWithMemberMapping(
+            method.getDescriptor(),
+            () -> {
               renderMethodJsDoc(method);
               emitMethodHeader(method);
               statementTranspiler.renderStatement(method.getBody());
-            }
-            sourceBuilder.newLine();
-          });
+            });
+      }
+      sourceBuilder.newLine();
     }
   }
 
@@ -620,12 +625,12 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   private void renderStaticFieldDeclarations() {
     for (Field staticField : type.getStaticFields()) {
       sourceBuilder.emitWithMemberMapping(
-          staticField,
+          staticField.getDescriptor(),
           () -> {
             statementTranspiler.renderStatement(
                 AstUtils.declarationStatement(staticField, type.getSourcePosition()));
-            sourceBuilder.newLine();
           });
+      sourceBuilder.newLine();
     }
   }
 

@@ -132,12 +132,12 @@ class ToStringRenderer {
       }
 
       @Override
-      public boolean enterJsDocFieldDeclaration(JsDocFieldDeclaration fieldDeclaration) {
+      public boolean enterFieldDeclarationStatement(FieldDeclarationStatement fieldDeclaration) {
         print(
             String.format(
                 "/** %s {%s} %s */ ",
                 fieldDeclaration.isPublic() ? "@public" : "@private",
-                fieldDeclaration.getTypeDescriptor().getReadableDescription(),
+                fieldDeclaration.getFieldDescriptor().getTypeDescriptor().getReadableDescription(),
                 fieldDeclaration.isConst() ? "@const" : ""));
         accept(fieldDeclaration.getExpression());
         return false;

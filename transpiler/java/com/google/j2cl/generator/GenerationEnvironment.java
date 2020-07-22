@@ -20,7 +20,9 @@ import static com.google.common.base.Preconditions.checkState;
 
 import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.HasName;
+import com.google.j2cl.ast.MethodLike;
 import com.google.j2cl.ast.TypeDeclaration;
+import com.google.j2cl.ast.TypeDescriptor;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,6 +36,8 @@ public class GenerationEnvironment {
   private Map<String, String> aliasByTypeBinaryName = new HashMap<>();
 
   private final Map<HasName, String> uniqueNameByVariable;
+
+  private final ClosureTypesGenerator closureTypesGenerator = new ClosureTypesGenerator(this);
 
   public GenerationEnvironment(
       Collection<Import> imports, Map<HasName, String> uniqueNameByVariable) {
@@ -68,5 +72,13 @@ public class GenerationEnvironment {
     String innerTypeQualifier = typeDeclaration.getInnerTypeQualifier();
 
     return innerTypeQualifier.isEmpty() ? moduleAlias : moduleAlias + "." + innerTypeQualifier;
+  }
+
+  public String getClosureTypeString(TypeDescriptor typeDescriptor) {
+    return closureTypesGenerator.getClosureTypeString(typeDescriptor);
+  }
+
+  public String getJsDocForParameter(MethodLike methodLike, int index) {
+    return closureTypesGenerator.getJsDocForParameter(methodLike, index);
   }
 }

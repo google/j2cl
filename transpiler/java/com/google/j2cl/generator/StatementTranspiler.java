@@ -24,6 +24,7 @@ import com.google.j2cl.ast.ContinueStatement;
 import com.google.j2cl.ast.DoWhileStatement;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
+import com.google.j2cl.ast.FieldDeclarationStatement;
 import com.google.j2cl.ast.ForStatement;
 import com.google.j2cl.ast.IfStatement;
 import com.google.j2cl.ast.LabeledStatement;
@@ -37,6 +38,7 @@ import com.google.j2cl.ast.ThrowStatement;
 import com.google.j2cl.ast.TryStatement;
 import com.google.j2cl.ast.WhileStatement;
 import com.google.j2cl.common.InternalCompilerError;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -162,6 +164,34 @@ public class StatementTranspiler {
                 builder.append(" else ");
                 render(ifStatement.getElseStatement());
               }
+            });
+        return false;
+      }
+
+      @Override
+      public boolean enterFieldDeclarationStatement(FieldDeclarationStatement declaration) {
+        String typeJsDoc =
+            environment.getClosureTypeString(declaration.getFieldDescriptor().getTypeDescriptor());
+        ArrayList<String> jsDocs = new ArrayList<>();
+        if (!declaration.isPublic()) {
+          jsDocs.add("@private");
+        }
+        if (declaration.isConst()) {
+          jsDocs.add("@const");
+        }
+        if (jsDocs.isEmpty()) {
+          jsDocs.add("@type");
+        }
+        jsDocs.add("{" + typeJsDoc + "}");
+        if (declaration.isDeprecated()) {
+          jsDocs.add("@deprecated");
+        }
+        builder.emitWithMapping(
+            declaration.getSourcePosition(),
+            () -> {
+              builder.appendln("/**" + String.join(" ", jsDocs) + "*/");
+              renderExpression(declaration.getExpression());
+              builder.append(";");
             });
         return false;
       }

@@ -40,7 +40,6 @@ import com.google.j2cl.ast.FunctionExpression;
 import com.google.j2cl.ast.InstanceOfExpression;
 import com.google.j2cl.ast.JavaScriptConstructorReference;
 import com.google.j2cl.ast.JsDocCastExpression;
-import com.google.j2cl.ast.JsDocFieldDeclaration;
 import com.google.j2cl.ast.MemberReference;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -63,7 +62,6 @@ import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.VariableDeclarationFragment;
 import com.google.j2cl.ast.VariableReference;
 import com.google.j2cl.common.SourcePosition;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -84,8 +82,6 @@ public class ExpressionTranspiler {
     // TODO(rluble): create a visitor based abstraction for cases like this where the only
     // feature that is needed is the delegated dynamic dispatch.
     new AbstractVisitor() {
-      ClosureTypesGenerator closureTypesGenerator = new ClosureTypesGenerator(environment);
-
       @Override
       public boolean enterArrayAccess(ArrayAccess arrayAccess) {
         processLeftSubExpression(arrayAccess, arrayAccess.getArrayExpression());
@@ -138,36 +134,11 @@ public class ExpressionTranspiler {
 
       @Override
       public boolean enterJsDocCastExpression(JsDocCastExpression jsDocCastExpression) {
-        String jsdoc =
-            closureTypesGenerator.getClosureTypeString(jsDocCastExpression.getTypeDescriptor());
+        String jsdoc = environment.getClosureTypeString(jsDocCastExpression.getTypeDescriptor());
         // Parenthesis are part of JsDoc casts no need to add extra.
         sourceBuilder.append("/**@type {" + jsdoc + "}*/ (");
         renderNoParens(jsDocCastExpression.getExpression());
         sourceBuilder.append(")");
-        return false;
-      }
-
-      @Override
-      public boolean enterJsDocFieldDeclaration(JsDocFieldDeclaration declaration) {
-        String typeJsDoc =
-            closureTypesGenerator.getClosureTypeString(declaration.getTypeDescriptor());
-        ArrayList<String> jsDocs = new ArrayList<>();
-        if (!declaration.isPublic()) {
-          jsDocs.add("@private");
-        }
-        if (declaration.isConst()) {
-          jsDocs.add("@const");
-        }
-        if (jsDocs.isEmpty()) {
-          jsDocs.add("@type");
-        }
-        jsDocs.add("{" + typeJsDoc + "}");
-        if (declaration.isDeprecated()) {
-          jsDocs.add("@deprecated");
-        }
-        sourceBuilder.appendln("/**" + String.join(" ", jsDocs) + "*/");
-        // Always emitted at the top level, no need for parens.
-        renderNoParens(declaration.getExpression());
         return false;
       }
 
@@ -232,8 +203,7 @@ public class ExpressionTranspiler {
           // name, hence if it is a varargs parameter then it would be emitted as follows:
           // ... /* <inline type annotation> */ <parameter name>
           //
-          sourceBuilder.append(
-              "/** " + closureTypesGenerator.getJsDocForParameter(expression, i) + " */ ");
+          sourceBuilder.append("/** " + environment.getJsDocForParameter(expression, i) + " */ ");
         }
         // Render the parameter, which is not an expression but is just a name, so no parens.
         renderNoParens(parameter);
@@ -466,9 +436,7 @@ public class ExpressionTranspiler {
         Variable variable = fragment.getVariable();
         if (fragment.needsTypeDeclaration()) {
           sourceBuilder.append(
-              "/** "
-                  + closureTypesGenerator.getClosureTypeString(variable.getTypeDescriptor())
-                  + " */ ");
+              "/** " + environment.getClosureTypeString(variable.getTypeDescriptor()) + " */ ");
         }
 
         // Variable declarations are separated with comma, so no need for parens.

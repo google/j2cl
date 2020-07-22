@@ -20,32 +20,34 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.ast.processors.common.Processor;
+import com.google.j2cl.common.SourcePosition;
 
 /** A node that represent a closure field declaration "@public {type}". */
 @Visitable
-public class JsDocFieldDeclaration extends Expression {
+public class FieldDeclarationStatement extends Statement {
   @Visitable Expression expression;
-  private final TypeDescriptor fieldType;
+  private final FieldDescriptor fieldDescriptor;
   private final boolean isPublic;
   private final boolean isConst;
   private final boolean isDeprecated;
 
-  private JsDocFieldDeclaration(
+  private FieldDeclarationStatement(
+      SourcePosition sourcePosition,
       Expression expression,
-      TypeDescriptor fieldType,
+      FieldDescriptor fieldDescriptor,
       boolean isPublic,
       boolean isConst,
       boolean isDeprecated) {
-    checkArgument(!(expression instanceof JsDocFieldDeclaration));
+    super(sourcePosition);
     this.expression = checkNotNull(expression);
-    this.fieldType = checkNotNull(fieldType);
+    this.fieldDescriptor = checkNotNull(fieldDescriptor);
     this.isPublic = isPublic;
     this.isConst = isConst;
     this.isDeprecated = isDeprecated;
     checkArgument(
         expression instanceof FieldAccess
             || (expression instanceof BinaryExpression
-            && ((BinaryExpression) expression).getOperator() == BinaryOperator.ASSIGN),
+                && ((BinaryExpression) expression).getOperator() == BinaryOperator.ASSIGN),
         "Declaration annotations can only applied to assignments and field references.");
   }
 
@@ -53,15 +55,8 @@ public class JsDocFieldDeclaration extends Expression {
     return expression;
   }
 
-  @Override
-  public TypeDescriptor getTypeDescriptor() {
-    return fieldType;
-  }
-
-  @Override
-  public Precedence getPrecedence() {
-    // These are always emitted directly in a statement, their precedence should never be required.
-    throw new UnsupportedOperationException();
+  public FieldDescriptor getFieldDescriptor() {
+    return fieldDescriptor;
   }
 
   public boolean isPublic() {
@@ -78,13 +73,13 @@ public class JsDocFieldDeclaration extends Expression {
 
   @Override
   public Node accept(Processor processor) {
-    return Visitor_JsDocFieldDeclaration.visit(processor, this);
+    return Visitor_FieldDeclarationStatement.visit(processor, this);
   }
 
   @Override
-  public JsDocFieldDeclaration clone() {
-    return new JsDocFieldDeclaration(
-        expression.clone(), fieldType, isPublic, isConst, isDeprecated);
+  public FieldDeclarationStatement clone() {
+    return new FieldDeclarationStatement(
+        getSourcePosition(), expression.clone(), fieldDescriptor, isPublic, isConst, isDeprecated);
   }
 
   public static Builder newBuilder() {
@@ -94,28 +89,31 @@ public class JsDocFieldDeclaration extends Expression {
   /** Builder for JsDocFieldDeclaration */
   public static class Builder {
     private Expression expression;
-    private TypeDescriptor fieldType;
+    private FieldDescriptor fieldDescriptor;
     private boolean isPublic;
     private boolean isConst;
     private Boolean isDeprecated;
+    private SourcePosition sourcePosition;
 
-    public static Builder from(JsDocFieldDeclaration annotation) {
+    public static Builder from(FieldDeclarationStatement fieldDeclaration) {
       Builder builder = new Builder();
-      builder.expression = annotation.getExpression();
-      builder.fieldType = annotation.getTypeDescriptor();
-      builder.isPublic = annotation.isPublic();
-      builder.isConst = annotation.isConst();
-      builder.isDeprecated = annotation.isDeprecated();
+      builder.expression = fieldDeclaration.getExpression();
+      builder.fieldDescriptor = fieldDeclaration.getFieldDescriptor();
+      builder.isPublic = fieldDeclaration.isPublic();
+      builder.isConst = fieldDeclaration.isConst();
+      builder.isDeprecated = fieldDeclaration.isDeprecated();
+      builder.sourcePosition = fieldDeclaration.getSourcePosition();
+
       return builder;
     }
 
-    public Builder setExpression(Expression expression) {
-      this.expression = expression;
+    public Builder setExpression(Expression initializer) {
+      this.expression = initializer;
       return this;
     }
 
-    public Builder setFieldType(TypeDescriptor fieldType) {
-      this.fieldType = fieldType;
+    public Builder setFieldDescriptor(FieldDescriptor fieldDescriptor) {
+      this.fieldDescriptor = fieldDescriptor;
       return this;
     }
 
@@ -134,8 +132,14 @@ public class JsDocFieldDeclaration extends Expression {
       return this;
     }
 
-    public JsDocFieldDeclaration build() {
-      return new JsDocFieldDeclaration(expression, fieldType, isPublic, isConst, isDeprecated);
+    public Builder setSourcePosition(SourcePosition sourcePosition) {
+      this.sourcePosition = sourcePosition;
+      return this;
+    }
+
+    public FieldDeclarationStatement build() {
+      return new FieldDeclarationStatement(
+          sourcePosition, expression, fieldDescriptor, isPublic, isConst, isDeprecated);
     }
   }
 }

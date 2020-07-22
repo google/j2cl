@@ -625,14 +625,15 @@ public class AstUtils {
               .build();
     }
 
-    return JsDocFieldDeclaration.newBuilder()
+    return FieldDeclarationStatement.newBuilder()
         .setExpression(declarationExpression)
-        .setFieldType(field.getDescriptor().getTypeDescriptor())
+        .setFieldDescriptor(field.getDescriptor())
         .setPublic(isPublic)
         .setConst(field.isCompileTimeConstant())
         .setDeprecated(field.getDescriptor().isDeprecated())
-        .build()
-        .makeStatement(field.isCompileTimeConstant() ? field.getSourcePosition() : sourcePosition);
+        .setSourcePosition(
+            field.isCompileTimeConstant() ? field.getSourcePosition() : sourcePosition)
+        .build();
   }
 
   public static String getSimpleSourceName(List<String> classComponents) {

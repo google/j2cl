@@ -34,11 +34,11 @@ import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldAccess;
+import com.google.j2cl.ast.FieldDeclarationStatement;
 import com.google.j2cl.ast.FunctionExpression;
 import com.google.j2cl.ast.IntersectionTypeDescriptor;
 import com.google.j2cl.ast.JavaScriptConstructorReference;
 import com.google.j2cl.ast.JsDocCastExpression;
-import com.google.j2cl.ast.JsDocFieldDeclaration;
 import com.google.j2cl.ast.Member;
 import com.google.j2cl.ast.MemberDescriptor;
 import com.google.j2cl.ast.Method;
@@ -153,8 +153,8 @@ class ImportGatherer extends AbstractVisitor {
   }
 
   @Override
-  public void exitJsDocFieldDeclaration(JsDocFieldDeclaration jsDocFieldDeclaration) {
-    collectForJsDoc(jsDocFieldDeclaration.getTypeDescriptor());
+  public void exitFieldDeclarationStatement(FieldDeclarationStatement fieldDeclarationStatement) {
+    collectForJsDoc(fieldDeclarationStatement.getFieldDescriptor().getTypeDescriptor());
   }
 
   @Override

@@ -21,7 +21,7 @@ import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 import com.google.j2cl.ast.HasName;
-import com.google.j2cl.ast.Member;
+import com.google.j2cl.ast.MemberDescriptor;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourcePosition;
@@ -57,7 +57,7 @@ public abstract class JavaScriptGenerator {
     return sourceBuilder.getMappings();
   }
 
-  public Map<Member, SourcePosition> getOutputSourceInfoByMember() {
+  public Map<MemberDescriptor, SourcePosition> getOutputSourceInfoByMember() {
     return sourceBuilder.getOutputSourceInfoByMember();
   }
 
