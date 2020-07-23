@@ -10,7 +10,7 @@ class SubNativeJsType extends MyNativeJsType {
 
   constructor(/** number */ x) {
     SubNativeJsType.$clinit();
-    super(x + 1);
+    super(x + 1 | 0);
     this.$ctor__com_google_j2cl_transpiler_readable_subnativejstype_SubNativeJsType__int(
         x);
   }

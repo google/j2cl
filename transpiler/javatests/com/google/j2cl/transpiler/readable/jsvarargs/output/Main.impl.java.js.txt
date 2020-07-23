@@ -35,25 +35,27 @@ class Main extends j_l_Object {
   static f1(/** number */ multiplier, .../** ...number */ numbers) {
     Main.$clinit();
     $Arrays.$stampType(numbers, $int, 1);
-    return numbers.length + numbers[0] + multiplier;
+    return numbers.length + numbers[0] + multiplier | 0;
   }
   /** @return {number} */
   static f2(.../** ...number */ numbers) {
     Main.$clinit();
     $Arrays.$stampType(numbers, $int, 1);
-    return numbers.length + numbers[0];
+    return numbers.length + numbers[0] | 0;
   }
   /** @return {number} */
   f3(/** number */ m, .../** ...number */ numbers) {
     $Arrays.$stampType(numbers, $int, 1);
     return this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main +
-        m + numbers[1];
+        m + numbers[1] |
+        0;
   }
   /** @return {number} */
   f4(.../** ...number */ numbers) {
     $Arrays.$stampType(numbers, $int, 1);
     return this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main +
-        numbers[1];
+        numbers[1] |
+        0;
   }
   /** @template T @return {T} */
   static generics(.../** ...T */ elements) {

@@ -520,9 +520,12 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
             .setFinal(true)
             .build();
 
-    // int index = 0;
+    // Declare the indexing variable double instead of int to avoid integer coercions. Since Java
+    // arrays can only be up to Integer.MAX_VALUE size, this change would not have any observable
+    // effect.
+    // double $index = 0;
     Variable indexVariable =
-        Variable.newBuilder().setName("$index").setTypeDescriptor(PrimitiveTypes.INT).build();
+        Variable.newBuilder().setName("$index").setTypeDescriptor(PrimitiveTypes.DOUBLE).build();
 
     // $index < $array.length
     Expression condition =

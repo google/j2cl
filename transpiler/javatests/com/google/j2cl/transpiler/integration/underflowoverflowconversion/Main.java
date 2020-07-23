@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.integration.underflowoverflowconversion;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertEquals;
 import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
 
 @SuppressWarnings("IdentityBinaryExpression")
@@ -31,6 +32,8 @@ public class Main {
     m.testMethodInvocation();
     m.testReturnAssignment();
     m.testInlineEquality();
+    testByteOverflow();
+    testNestedOperationsOverflow();
   }
 
   private byte mb = 127; // Byte.MAX_VALUE
@@ -96,7 +99,7 @@ public class Main {
     // Int
     {
       ri = mi + mi;
-      assertTrue(ri == 4294967294d); // we don't honor int overflow for some operations
+      assertTrue(ri == -2);
 
       ri = mi / mi;
       assertTrue(ri == 1);
@@ -199,6 +202,32 @@ public class Main {
     assertTrue(rb == -128);
   }
 
+  private static void testByteOverflow() {
+    // Perform Byte.MAX_VALUE / (Byte.MAX_VALUE + Byte.MAX_VALUE) all in byte precision first ...
+    byte m = Byte.MAX_VALUE;
+    assertEquals(-63, (byte) (m / (byte) (m + m)));
+
+    // and note that it is different than writing it as a single expression because it will be
+    // performed in integer precision an no overflow occurs.
+    assertEquals(0, (byte) (m / (m + m)));
+  }
+
+  private static void testNestedOperationsOverflow() {
+    int intermediate;
+    // Tests that the minimal coercions inserted by J2CL are sufficient.
+    assertEquals(-1, (-1 >>> 32) >>> 32);
+    intermediate = (-1 >>> 32);
+    assertEquals(-1, intermediate >>> 32);
+
+    assertEquals(-3, (-1 >>> 32) + (-1 >>> 32) + (-1 >>> 32));
+    intermediate = (-1 >>> 32) + (-1 >>> 32);
+    assertEquals(-3, intermediate + (-1 >>> 32));
+
+    assertEquals(-2, (Integer.MAX_VALUE + Integer.MAX_VALUE) >>> 32);
+    intermediate = Integer.MAX_VALUE + Integer.MAX_VALUE;
+    assertEquals(-2, intermediate >>> 32);
+  }
+
   private void testInlineEquality() {
     // Shouldn't check byte/char/short because they will inevitably involve widening and narrowing
     // to and from int and so are handled in narrowing and widening primitive conversion, not in
@@ -238,7 +267,7 @@ public class Main {
     // underflow/overflow.
 
     takesInt(11 / 2, 5);
-    takesDouble(mi + 1, 2147483648d); // we don't honor int overflow for some operations
+    takesDouble(mi + 1, Integer.MIN_VALUE); // we don't honor int overflow for some operations
     takesLong(ml + 1L, -9223372036854775808L);
   }
 
@@ -261,7 +290,7 @@ public class Main {
 
     ri = mi;
     ri++;
-    assertTrue(ri == 2147483648d); // we don't honor int overflow for some operations
+    assertTrue(ri == -2147483648);
 
     rl = ml;
     rl++;
@@ -311,7 +340,7 @@ public class Main {
 
     ri = mi;
     ++ri;
-    assertTrue(ri == 2147483648d); // we don't honor int overflow for some operations
+    assertTrue(ri == -2147483648);
 
     rl = ml;
     ++rl;

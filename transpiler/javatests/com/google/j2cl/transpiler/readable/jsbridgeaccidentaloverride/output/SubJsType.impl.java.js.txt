@@ -26,7 +26,7 @@ class SubJsType extends MyJsType {
   }
   /** @override @return {number} */
   bar(/** number */ a) {
-    return a + 2;
+    return a + 2 | 0;
   }
   // Bridge method for exposing non-JsMethod.
   /** @override @return {number} */

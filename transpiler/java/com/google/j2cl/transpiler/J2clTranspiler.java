@@ -36,17 +36,16 @@ import com.google.j2cl.ast.visitors.InsertBitwiseOperatorBooleanCoercions;
 import com.google.j2cl.ast.visitors.InsertBoxingConversions;
 import com.google.j2cl.ast.visitors.InsertCastOnNewInstances;
 import com.google.j2cl.ast.visitors.InsertCastsToTypeBounds;
-import com.google.j2cl.ast.visitors.InsertDivisionCoercions;
 import com.google.j2cl.ast.visitors.InsertErasureTypeSafetyCasts;
 import com.google.j2cl.ast.visitors.InsertExceptionConversions;
 import com.google.j2cl.ast.visitors.InsertExplicitSuperCalls;
+import com.google.j2cl.ast.visitors.InsertIntegerCoercions;
 import com.google.j2cl.ast.visitors.InsertJsEnumBoxingAndUnboxingConversions;
 import com.google.j2cl.ast.visitors.InsertNarrowingPrimitiveConversions;
 import com.google.j2cl.ast.visitors.InsertNarrowingReferenceConversions;
 import com.google.j2cl.ast.visitors.InsertStringConversions;
 import com.google.j2cl.ast.visitors.InsertTypeAnnotationOnGenericReturnTypes;
 import com.google.j2cl.ast.visitors.InsertUnboxingConversions;
-import com.google.j2cl.ast.visitors.InsertUnsignedRightShiftCoercions;
 import com.google.j2cl.ast.visitors.InsertWideningPrimitiveConversions;
 import com.google.j2cl.ast.visitors.JsBridgeMethodsCreator;
 import com.google.j2cl.ast.visitors.JsInteropRestrictionsChecker;
@@ -224,9 +223,8 @@ class J2clTranspiler {
         new InsertNarrowingPrimitiveConversions(),
         new InsertWideningPrimitiveConversions(),
         new NormalizeLongs(),
-        new InsertDivisionCoercions(),
+        new InsertIntegerCoercions(),
         new InsertBitwiseOperatorBooleanCoercions(),
-        new InsertUnsignedRightShiftCoercions(),
         new NormalizeJsFunctionPropertyInvocations(),
         // Run before other passes that normalize JsEnum expressions, but after all the normal
         // Java semantic conversions.

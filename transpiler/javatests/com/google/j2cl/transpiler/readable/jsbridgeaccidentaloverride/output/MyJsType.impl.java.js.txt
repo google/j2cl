@@ -30,11 +30,11 @@ class MyJsType extends j_l_Object {
   }
   /** @return {number} */
   bar(/** number */ a) {
-    return a + 1;
+    return a + 1 | 0;
   }
   /** @return {number} */
   fun(/** number */ a) {
-    return a - 1;
+    return a - 1 | 0;
   }
   // Bridge method for exposing non-JsMethod.
   /** @override @return {number} */

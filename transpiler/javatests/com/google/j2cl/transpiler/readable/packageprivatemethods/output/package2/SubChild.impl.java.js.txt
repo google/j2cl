@@ -22,7 +22,7 @@ class SubChild extends Child {
   }
   /** @override @return {number} */
   m_foo__int(/** number */ a) {
-    return a + 3;
+    return a + 3 | 0;
   }
 
   static $clinit() {

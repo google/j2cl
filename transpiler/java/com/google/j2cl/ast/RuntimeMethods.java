@@ -226,6 +226,27 @@ public class RuntimeMethods {
         BootstrapType.NATIVE_LONG.getDescriptor(), methodName, arguments);
   }
 
+  public static Expression createMathImulMethodCall(
+      Expression leftOperand, Expression rightOperand) {
+    return MethodCall.Builder.from(
+            MethodDescriptor.newBuilder()
+                .setJsInfo(
+                    JsInfo.newBuilder()
+                        .setJsMemberType(JsMemberType.METHOD)
+                        .setJsName("Math.imul")
+                        .setJsNamespace(JsUtils.JS_PACKAGE_GLOBAL)
+                        .build())
+                .setName("imul")
+                .setStatic(true)
+                .setNative(true)
+                .setEnclosingTypeDescriptor(TypeDescriptors.get().nativeObject)
+                .setParameterTypeDescriptors(PrimitiveTypes.INT, PrimitiveTypes.INT)
+                .setReturnTypeDescriptor(PrimitiveTypes.INT)
+                .build())
+        .setArguments(leftOperand, rightOperand)
+        .build();
+  }
+
   /** Create a call to a Primitives method. */
   public static MethodCall createPrimitivesMethodCall(String methodName, Expression... arguments) {
     return createPrimitivesMethodCall(methodName, Arrays.asList(arguments));

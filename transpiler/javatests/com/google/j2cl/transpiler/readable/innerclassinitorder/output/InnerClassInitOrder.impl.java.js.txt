@@ -178,7 +178,7 @@ class InnerClassInitOrder extends j_l_Object {
   m_testInnerClassLoop__() {
     let results =
         /**@type {!Array<$1AddNumber>}*/ ($Arrays.$create([10], $1AddNumber));
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 10; i = i + 1 | 0) {
       let ap =
           $1.$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder__int(
               this, i);

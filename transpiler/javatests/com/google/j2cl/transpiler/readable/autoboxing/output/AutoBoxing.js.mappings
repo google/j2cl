@@ -166,7 +166,7 @@
 [boxL = boxL / boxL;] => [boxL = Long.m_valueOf__long($LongUtils.$divide(boxL.m_longValue__(), boxL.m_longValue__()));] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testBoxing"
 [boxBool = !boxBool;] => [boxBool = !Boolean.m_booleanValue__java_lang_Boolean(boxBool);] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testBoxing"
 [boxI = +boxI;] => [boxI = Integer.m_valueOf__int(+boxI.m_intValue__());] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testBoxing"
-[boxI = -boxI;] => [boxI = Integer.m_valueOf__int(-boxI.m_intValue__());] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testBoxing"
+[boxI = -boxI;] => [boxI = Integer.m_valueOf__int(-boxI.m_intValue__() | 0);] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testBoxing"
 [o = (Integer & Comparable<Integer>) 15;] => [o = Integer.m_valueOf__int(15);] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testBoxing"
 [testUnboxing] => [m_testUnboxing__]
 [Boolean boxBool = new Boolean(true);] => [let boxBool = Boolean.$create__boolean(true);] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxing"
@@ -226,20 +226,20 @@
 [bool = boxBool && boxBool;] => [bool = Boolean.m_booleanValue__java_lang_Boolean(boxBool) && Boolean.m_booleanValue__java_lang_Boolean(boxBool);] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxing"
 [d = boxD + boxD;] => [d = Double.m_doubleValue__java_lang_Double(boxD) + Double.m_doubleValue__java_lang_Double(boxD);] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxing"
 [f = boxF - boxF;] => [f = boxF.m_floatValue__() - boxF.m_floatValue__();] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxing"
-[i = boxI * boxI;] => [i = boxI.m_intValue__() * boxI.m_intValue__();] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxing"
+[i = boxI * boxI;] => [i = Math.imul(boxI.m_intValue__(), boxI.m_intValue__());] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxing"
 [l = boxL / boxL;] => [l = $LongUtils.$divide(boxL.m_longValue__(), boxL.m_longValue__());] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxing"
 [bool = !boxBool;] => [bool = !Boolean.m_booleanValue__java_lang_Boolean(boxBool);] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxing"
 [i = +boxI;] => [i = +boxI.m_intValue__();] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxing"
-[i = -boxI;] => [i = -boxI.m_intValue__();] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxing"
+[i = -boxI;] => [i = -boxI.m_intValue__() | 0;] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxing"
 [i = ~boxI;] => [i = ~boxI.m_intValue__();] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxing"
 [boxD = -boxD;] => [boxD = -Double.m_doubleValue__java_lang_Double(boxD);] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxing"
-[boxI = -boxI;] => [boxI = Integer.m_valueOf__int(-boxI.m_intValue__());] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxing"
+[boxI = -boxI;] => [boxI = Integer.m_valueOf__int(-boxI.m_intValue__() | 0);] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxing"
 [switch (boxI) {
       default:
     }] => [switch (boxI.m_intValue__()) {
    default:
   }] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxing"
-[i += boxI += i += boxI;] => [i += (boxI = Integer.m_valueOf__int(boxI.m_intValue__() + (i += boxI.m_intValue__()))).m_intValue__();] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxing"
+[i += boxI += i += boxI;] => [i = i + (boxI = Integer.m_valueOf__int(boxI.m_intValue__() + (i = i + boxI.m_intValue__() | 0) | 0)).m_intValue__() | 0;] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxing"
 [l = l << boxL;] => [l = $LongUtils.$leftShift(l, $Primitives.$narrowLongToInt(boxL.m_longValue__()));] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxing"
 [testUnboxingBoolean] => [m_testUnboxingBoolean__]
 [Boolean boxB1 = new Boolean(true);] => [let boxB1 = Boolean.$create__boolean(true);] "com.google.j2cl.transpiler.readable.autoboxing.AutoBoxing.testUnboxingBoolean"

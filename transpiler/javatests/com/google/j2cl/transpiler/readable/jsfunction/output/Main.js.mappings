@@ -33,18 +33,18 @@
 [final int n = 4;] => [let n = 4;] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionsCapturingLocal"
 [n] => [n] "n"
 [callFn((number) -> number + n, n);] => [Main.m_callFn__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionInterface__int((/** number */ number_1) =>{
-   return number_1 + n;
+   return number_1 + n | 0;
   }, n);] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionsCapturingLocal"
 [number] => [number_1] "number"
-[number + n] => [return number_1 + n;] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in testJsFunctionsCapturingLocal>"
+[number + n] => [return number_1 + n | 0;] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in testJsFunctionsCapturingLocal>"
 [callFn(
         new JsFunctionInterface() {
 ...        },
         n);] => [Main.m_callFn__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionInterface__int((/** number */ a) =>{
-   return a + n;
+   return a + n | 0;
   }, n);] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionsCapturingLocal"
 [a] => [a] "a"
-[return a + n;] => [return a + n;] "com.google.j2cl.transpiler.readable.jsfunction.Main$1.foo"
+[return a + n;] => [return a + n | 0;] "com.google.j2cl.transpiler.readable.jsfunction.Main$1.foo"
 [new JsFunctionInterface() {
       @Override
 ...      }
@@ -95,13 +95,13 @@
             sum += number;
           }] => [for (let $array = numbers, $index = 0; $index < $array.length; $index++) {
     let number_1 = $array[$index];
-    sum += number_1;
+    sum = sum + number_1 | 0;
    }] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in testJsFunctionVarargs>"
 [for (int number : numbers) {
             sum += number;
           }] => [let number_1 = $array[$index];] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in testJsFunctionVarargs>"
 [number] => [number_1] "number"
-[sum += number;] => [sum += number_1;] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in testJsFunctionVarargs>"
+[sum += number;] => [sum = sum + number_1 | 0;] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in testJsFunctionVarargs>"
 [return sum;] => [return sum;] "com.google.j2cl.transpiler.readable.jsfunction.Main.<lambda in testJsFunctionVarargs>"
 [return f;] => [return f;] "com.google.j2cl.transpiler.readable.jsfunction.Main.testJsFunctionVarargs"
 [testJsFunctionVarargsInnerClass] => [m_testJsFunctionVarargsInnerClass___$pp_com_google_j2cl_transpiler_readable_jsfunction]
@@ -121,13 +121,13 @@
           sum += number;
         }] => [for (let $array = numbers, $index = 0; $index < $array.length; $index++) {
     let number_1 = $array[$index];
-    sum += number_1;
+    sum = sum + number_1 | 0;
    }] "com.google.j2cl.transpiler.readable.jsfunction.Main$4.m"
 [for (int number : numbers) {
           sum += number;
         }] => [let number_1 = $array[$index];] "com.google.j2cl.transpiler.readable.jsfunction.Main$4.m"
 [number] => [number_1] "number"
-[sum += number;] => [sum += number_1;] "com.google.j2cl.transpiler.readable.jsfunction.Main$4.m"
+[sum += number;] => [sum = sum + number_1 | 0;] "com.google.j2cl.transpiler.readable.jsfunction.Main$4.m"
 [return sum;] => [return sum;] "com.google.j2cl.transpiler.readable.jsfunction.Main$4.m"
 [testVarArgsMethodReferenceToJsFuncion] => [m_testVarArgsMethodReferenceToJsFuncion__]
 [ForEachCallBack<ElementalJsFunction> c = ElementalJsFunction::call;] => [let c = (arg0, /** number */ arg1, arg2) =>{

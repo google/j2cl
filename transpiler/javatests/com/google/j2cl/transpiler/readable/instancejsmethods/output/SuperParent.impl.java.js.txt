@@ -22,11 +22,11 @@ class SuperParent extends j_l_Object {
   }
   /** @return {number} */
   m_fun__int__int(/** number */ a, /** number */ b) {
-    return a + b + 111;
+    return a + b + 111 | 0;
   }
   /** @return {number} */
   m_bar__int__int(/** number */ a, /** number */ b) {
-    return a * b + 222;
+    return Math.imul(a, b) + 222 | 0;
   }
 
   static $clinit() {

@@ -204,7 +204,7 @@ class AutoBoxing extends j_l_Object {
         $LongUtils.$divide(boxL.m_longValue__(), boxL.m_longValue__()));
     boxBool = !Boolean.m_booleanValue__java_lang_Boolean(boxBool);
     boxI = Integer.m_valueOf__int(+boxI.m_intValue__());
-    boxI = Integer.m_valueOf__int(-boxI.m_intValue__());
+    boxI = Integer.m_valueOf__int(-boxI.m_intValue__() | 0);
     o = Integer.m_valueOf__int(15);
   }
 
@@ -254,18 +254,20 @@ class AutoBoxing extends j_l_Object {
     d = Double.m_doubleValue__java_lang_Double(boxD) +
         Double.m_doubleValue__java_lang_Double(boxD);
     f = boxF.m_floatValue__() - boxF.m_floatValue__();
-    i = boxI.m_intValue__() * boxI.m_intValue__();
+    i = Math.imul(boxI.m_intValue__(), boxI.m_intValue__());
     l = $LongUtils.$divide(boxL.m_longValue__(), boxL.m_longValue__());
     bool = !Boolean.m_booleanValue__java_lang_Boolean(boxBool);
     i = +boxI.m_intValue__();
-    i = -boxI.m_intValue__();
+    i = -boxI.m_intValue__() | 0;
     i = ~boxI.m_intValue__();
     boxD = -Double.m_doubleValue__java_lang_Double(boxD);
-    boxI = Integer.m_valueOf__int(-boxI.m_intValue__());
+    boxI = Integer.m_valueOf__int(-boxI.m_intValue__() | 0);
     switch (boxI.m_intValue__()) { default: }
-    i += (boxI = Integer.m_valueOf__int(
-              boxI.m_intValue__() + (i += boxI.m_intValue__())))
-             .m_intValue__();
+    i = i +
+            (boxI = Integer.m_valueOf__int(
+                 boxI.m_intValue__() + (i = i + boxI.m_intValue__() | 0) | 0))
+                .m_intValue__() |
+        0;
     l = $LongUtils.$leftShift(
         l, $Primitives.$narrowLongToInt(boxL.m_longValue__()));
   }

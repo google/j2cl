@@ -8,7 +8,7 @@ class C extends B {
 
   constructor(/** number */ x) {
     C.$clinit();
-    super(x * 2);
+    super(Math.imul(x, 2));
     /**@type {number}*/
     this.f_fC__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_C =
         0;
@@ -27,7 +27,7 @@ class C extends B {
   /** @return {!C} */
   static $create__int__int(/** number */ x, /** number */ y) {
     C.$clinit();
-    let $instance = new C(x + y);
+    let $instance = new C(x + y | 0);
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_C__int__int(
             x, y);

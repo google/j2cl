@@ -25,10 +25,10 @@
 [fun] => [m_fun__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionImplementation]
 [fun] => [JsFunctionImplementation.$clinit();] "com.google.j2cl.transpiler.readable.jsfunction.Main$JsFunctionImplementation.fun"
 [field = 1;] => [$thisArg.f_field__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionImplementation = 1;] "com.google.j2cl.transpiler.readable.jsfunction.Main$JsFunctionImplementation.fun"
-[return bar() + foo(1);] => [return JsFunctionImplementation.m_bar__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionImplementation($thisArg) + $thisArg(1);] "com.google.j2cl.transpiler.readable.jsfunction.Main$JsFunctionImplementation.fun"
+[return bar() + foo(1);] => [return JsFunctionImplementation.m_bar__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionImplementation($thisArg) + $thisArg(1) | 0;] "com.google.j2cl.transpiler.readable.jsfunction.Main$JsFunctionImplementation.fun"
 [foo] => [m_foo__int]
 [a] => [a] "a"
-[return a + this.bar() + this.field;] => [return a + JsFunctionImplementation.m_bar__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionImplementation(this) + this.f_field__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionImplementation;] "com.google.j2cl.transpiler.readable.jsfunction.Main$JsFunctionImplementation.foo"
+[return a + this.bar() + this.field;] => [return a + JsFunctionImplementation.m_bar__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionImplementation(this) + this.f_field__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionImplementation | 0;] "com.google.j2cl.transpiler.readable.jsfunction.Main$JsFunctionImplementation.foo"
 [JsFunctionImplementation] => [$clinit]
 [JsFunctionImplementation] => [JsFunctionImplementation.$clinit = () =>{};] "com.google.j2cl.transpiler.readable.jsfunction.Main$JsFunctionImplementation.<clinit>"
 [JsFunctionImplementation] => [JsFunctionImplementation.$loadModules();] "com.google.j2cl.transpiler.readable.jsfunction.Main$JsFunctionImplementation.<clinit>"

@@ -103,29 +103,16 @@ public class Main {
     assertTrue(Byte.MAX_VALUE * Byte.MAX_VALUE == 0x3f01);
     assertTrue(Short.MAX_VALUE * Short.MAX_VALUE == 0x3fff0001);
 
-    // Overflow in long precision which is emulated
+    // Overflows.
     assertTrue(Long.MAX_VALUE * Long.MAX_VALUE == 1L);
+    assertTrue(Character.MAX_VALUE * Character.MAX_VALUE == -131071 /*0xfffe0001*/);
+    assertTrue(Integer.MAX_VALUE * Integer.MAX_VALUE == 1);
 
-    // Overflow followed by an explicit int coercion results in the correct value because this
-    // 32-bit integer overflow does not exceed the 52-bit JS integer precision.
-    assertTrue((Character.MAX_VALUE * Character.MAX_VALUE | 0) == -131071);
-
-    // TODO(b/72332921): overflow in integer precision has different semantics in J2CL, the code
-    // below should have been:
-    // assertTrue(Character.MAX_VALUE * Character.MAX_VALUE == -131071 /*0xfffe0001*/);
-    assertTrue(Character.MAX_VALUE * Character.MAX_VALUE == 4294836225d);
-
-    // TODO(b/72332921): overflow in integer precision has different semantics in J2CL, the code
-    // below should have been:
-    // assertTrue(Integer.MAX_VALUE * Integer.MAX_VALUE == 1);
-    assertTrue(Integer.MAX_VALUE * Integer.MAX_VALUE == 4611686014132420600d);
-    // TODO(b/72332921): overflow in integer precision has different semantics in J2CL, the code
-    // below should have been:
-    // assertTrue((Integer.MAX_VALUE * Integer.MAX_VALUE | 0) == 1);
-    assertTrue((Integer.MAX_VALUE * Integer.MAX_VALUE | 0) == 0);
+    assertTrue(Integer.MAX_VALUE + Integer.MAX_VALUE == -2);
+    assertTrue(Integer.MAX_VALUE + Integer.MAX_VALUE == -2.0d);
   }
 
-  private static void testBooleanOperations() {
+  public static void testBooleanOperations() {
     boolean bool = true;
     bool &= false;
     assertTrue(("" + bool).equals("false"));

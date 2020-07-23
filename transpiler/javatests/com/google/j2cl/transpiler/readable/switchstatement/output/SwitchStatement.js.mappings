@@ -61,7 +61,7 @@
 ...    return;
   }] "com.google.j2cl.transpiler.readable.switchstatement.SwitchStatement.testSwitchVariableDeclarations"
 [int i = 0;] => [i = 0;] "com.google.j2cl.transpiler.readable.switchstatement.SwitchStatement.testSwitchVariableDeclarations"
-[int j = 2, b = j + 1;] => [(j = 2, b = j + 1);] "com.google.j2cl.transpiler.readable.switchstatement.SwitchStatement.testSwitchVariableDeclarations"
+[int j = 2, b = j + 1;] => [(j = 2, b = j + 1 | 0);] "com.google.j2cl.transpiler.readable.switchstatement.SwitchStatement.testSwitchVariableDeclarations"
 [break;] => [break;] "com.google.j2cl.transpiler.readable.switchstatement.SwitchStatement.testSwitchVariableDeclarations"
 [i = 3;] => [i = 3;] "com.google.j2cl.transpiler.readable.switchstatement.SwitchStatement.testSwitchVariableDeclarations"
 [assert i == 3;] => [$Asserts.$assert(i == 3);] "com.google.j2cl.transpiler.readable.switchstatement.SwitchStatement.testSwitchVariableDeclarations"

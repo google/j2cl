@@ -20,7 +20,7 @@ class B extends A {
   $ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_B__int(
       /** number */ x) {
     this.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_A__int(
-        x + 1);
+        x + 1 | 0);
     this.$init___$p_com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_B();
     this.f_fB__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_B =
         3;
@@ -44,7 +44,7 @@ class B extends A {
   /** @return {!B} */
   static $create__int__int(/** number */ x, /** number */ y) {
     B.$clinit();
-    let $instance = new B(x + y);
+    let $instance = new B(x + y | 0);
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_B__int__int(
             x, y);
@@ -55,7 +55,7 @@ class B extends A {
   $ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_B__int__int(
       /** number */ x, /** number */ y) {
     this.f_fB__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_B =
-        x * y;
+        Math.imul(x, y);
   }
   /** @private */
   $init___$p_com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass_B() {

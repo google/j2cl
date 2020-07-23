@@ -22,11 +22,11 @@ class Parent extends SuperParent {
   }
   /** @return {number} */
   sum(/** number */ a, /** number */ b) {
-    return a + b;
+    return a + b | 0;
   }
   /** @return {number} */
   bar(/** number */ a, /** number */ b) {
-    return a * b;
+    return Math.imul(a, b);
   }
   /** @return {number} */
   myFoo(/** number */ a) {

@@ -22,15 +22,15 @@ class Child extends Parent {
   }
   /** @return {number} */
   m_foo__int(/** number */ a) {
-    return a + 1;
+    return a + 1 | 0;
   }
   /** @return {number} */
   m_fun__int__int(/** number */ a, /** number */ b) {
-    return a + b + 1;
+    return a + b + 1 | 0;
   }
   /** @override @return {number} */
   m_bar__int__int__int(/** number */ a, /** number */ b, /** number */ c) {
-    return a + b + c + 2;
+    return a + b + c + 2 | 0;
   }
   // Forwarding method for package private method.
   /** @override @return {number} */

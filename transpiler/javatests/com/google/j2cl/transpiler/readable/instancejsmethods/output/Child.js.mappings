@@ -11,11 +11,11 @@
 [fun] => [sum]
 [a] => [a] "a"
 [b] => [b] "b"
-[return a + b + 1;] => [return a + b + 1;] "com.google.j2cl.transpiler.readable.instancejsmethods.Child.fun"
+[return a + b + 1;] => [return a + b + 1 | 0;] "com.google.j2cl.transpiler.readable.instancejsmethods.Child.fun"
 [bar] => [bar]
 [a] => [a] "a"
 [b] => [b] "b"
-[return a * b + 1;] => [return a * b + 1;] "com.google.j2cl.transpiler.readable.instancejsmethods.Child.bar"
+[return a * b + 1;] => [return Math.imul(a, b) + 1 | 0;] "com.google.j2cl.transpiler.readable.instancejsmethods.Child.bar"
 [foo] => [myFoo]
 [a] => [a] "a"
 [return a;] => [return a;] "com.google.j2cl.transpiler.readable.instancejsmethods.Child.foo"

@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.regression.compiler;
 
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.Truth.assertWithMessage;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import com.google.common.truth.MathUtil;
@@ -349,4 +350,11 @@ public class CompilerMiscRegressionTest {
   }
 
   private static <T> void acceptsSupplier(Supplier<T> supplier) {}
+
+  @Test
+  public void testOverflow() {
+    int i = 1 << 30;
+    double u = 1.0 / (1 << 30) * ((i << 1) + 1 - (1 << 30));
+    assertEquals(1.0000000009313226d, u, 0);
+  }
 }

@@ -104,14 +104,18 @@ public class ExpandCompoundAssignments extends NormalizationPass {
       return false;
     }
 
-    // For int, native arithmetic is mostly good but we need instrumentaion in a few cases:
-    // - Division operations (/ and %) requires truncation and divide-by-zero check
-    // - Right-shift requires truncation
-    // - Right-hand-size w/ a wider type that upgrades the all arithmetic to a wider type
+    // For int, native arithmetic is mostly good but we need instrumentation in a few cases:
+    // - Division operations (/ and %) requires 32-bit coercion and divide-by-zero check
+    // - Addition, subtraction and multiplication require 32-bit coercion
+    // - Right-shift requires 32-bit coercion
+    // - Right-hand-size w/ a wider type requires 32-bit coercion
     if (TypeDescriptors.isPrimitiveInt(lhsTypeDescriptor)
         && operator != BinaryOperator.DIVIDE_ASSIGN
         && operator != BinaryOperator.REMAINDER_ASSIGN
         && operator != BinaryOperator.RIGHT_SHIFT_UNSIGNED_ASSIGN
+        && operator != BinaryOperator.PLUS_ASSIGN
+        && operator != BinaryOperator.MINUS_ASSIGN
+        && operator != BinaryOperator.TIMES_ASSIGN
         && !rhsTypeDescriptor.toUnboxedType().isWiderThan(PrimitiveTypes.INT)) {
       return false;
     }
@@ -126,9 +130,8 @@ public class ExpandCompoundAssignments extends NormalizationPass {
       return false;
     }
 
-    // For floating point and int, native arithmetic is good enough for unary operations.
-    if (TypeDescriptors.isPrimitiveFloatOrDouble(targetTypeDescriptor)
-        || TypeDescriptors.isPrimitiveInt(targetTypeDescriptor)) {
+    // For floating point, native arithmetic is good enough for unary operations.
+    if (TypeDescriptors.isPrimitiveFloatOrDouble(targetTypeDescriptor)) {
       return false;
     }
 

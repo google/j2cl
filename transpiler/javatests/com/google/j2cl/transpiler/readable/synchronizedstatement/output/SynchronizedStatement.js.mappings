@@ -19,8 +19,8 @@
       a++;
       b--;
     }] => [$Util.$synchronized(this);] "com.google.j2cl.transpiler.readable.synchronizedstatement.SynchronizedStatement.main"
-[a++;] => [this.f_a__com_google_j2cl_transpiler_readable_synchronizedstatement_SynchronizedStatement_++;] "com.google.j2cl.transpiler.readable.synchronizedstatement.SynchronizedStatement.main"
-[b--;] => [this.f_b__com_google_j2cl_transpiler_readable_synchronizedstatement_SynchronizedStatement_--;] "com.google.j2cl.transpiler.readable.synchronizedstatement.SynchronizedStatement.main"
+[a++;] => [this.f_a__com_google_j2cl_transpiler_readable_synchronizedstatement_SynchronizedStatement_ = this.f_a__com_google_j2cl_transpiler_readable_synchronizedstatement_SynchronizedStatement_ + 1 | 0;] "com.google.j2cl.transpiler.readable.synchronizedstatement.SynchronizedStatement.main"
+[b--;] => [this.f_b__com_google_j2cl_transpiler_readable_synchronizedstatement_SynchronizedStatement_ = this.f_b__com_google_j2cl_transpiler_readable_synchronizedstatement_SynchronizedStatement_ - 1 | 0;] "com.google.j2cl.transpiler.readable.synchronizedstatement.SynchronizedStatement.main"
 [SynchronizedStatement] => [$clinit]
 [SynchronizedStatement] => [SynchronizedStatement.$clinit = () =>{};] "com.google.j2cl.transpiler.readable.synchronizedstatement.SynchronizedStatement.<clinit>"
 [SynchronizedStatement] => [SynchronizedStatement.$loadModules();] "com.google.j2cl.transpiler.readable.synchronizedstatement.SynchronizedStatement.<clinit>"

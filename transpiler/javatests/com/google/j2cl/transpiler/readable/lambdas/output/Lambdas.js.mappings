@@ -15,36 +15,36 @@
 [call] => [m_call__com_google_j2cl_transpiler_readable_lambdas_Lambdas_FunctionalInterface__int]
 [intf] => [intf] "intf"
 [n] => [n] "n"
-[return this.field + intf.m(n);] => [return this.f_field__com_google_j2cl_transpiler_readable_lambdas_Lambdas + intf.m_m__int(n);] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.call"
+[return this.field + intf.m(n);] => [return this.f_field__com_google_j2cl_transpiler_readable_lambdas_Lambdas + intf.m_m__int(n) | 0;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.call"
 [testLambdaExpressionStyle] => [m_testLambdaExpressionStyle__]
 [call(i -> i + 1, 10);] => [this.m_call__com_google_j2cl_transpiler_readable_lambdas_Lambdas_FunctionalInterface__int(FunctionalInterface.$adapt((/** number */ i) =>{
-   return i + 1;
+   return i + 1 | 0;
   }), 10);] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testLambdaExpressionStyle"
 [i] => [i] "i"
-[i + 1] => [return i + 1;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testLambdaExpressionStyle>"
+[i + 1] => [return i + 1 | 0;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testLambdaExpressionStyle>"
 [testLambdaBlockStyle] => [m_testLambdaBlockStyle__]
 [call(
         i -> {
 ...        },
         10);] => [this.m_call__com_google_j2cl_transpiler_readable_lambdas_Lambdas_FunctionalInterface__int(FunctionalInterface.$adapt((/** number */ i) =>{
-   return i + 2;
+   return i + 2 | 0;
   }), 10);] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testLambdaBlockStyle"
 [i] => [i] "i"
-[return i + 2;] => [return i + 2;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testLambdaBlockStyle>"
+[return i + 2;] => [return i + 2 | 0;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testLambdaBlockStyle>"
 [testLambdaCaptureField] => [m_testLambdaCaptureField__]
 [call(i -> field + i + 1, 10);] => [this.m_call__com_google_j2cl_transpiler_readable_lambdas_Lambdas_FunctionalInterface__int(FunctionalInterface.$adapt((/** number */ i) =>{
-   return this.f_field__com_google_j2cl_transpiler_readable_lambdas_Lambdas + i + 1;
+   return this.f_field__com_google_j2cl_transpiler_readable_lambdas_Lambdas + i + 1 | 0;
   }), 10);] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testLambdaCaptureField"
 [i] => [i] "i"
-[field + i + 1] => [return this.f_field__com_google_j2cl_transpiler_readable_lambdas_Lambdas + i + 1;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testLambdaCaptureField>"
+[field + i + 1] => [return this.f_field__com_google_j2cl_transpiler_readable_lambdas_Lambdas + i + 1 | 0;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testLambdaCaptureField>"
 [testLambdaCaptureLocal] => [m_testLambdaCaptureLocal__]
 [int x = 1;] => [let x = 1;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testLambdaCaptureLocal"
 [x] => [x] "x"
 [call(i -> x + i + 1, 10);] => [this.m_call__com_google_j2cl_transpiler_readable_lambdas_Lambdas_FunctionalInterface__int(FunctionalInterface.$adapt((/** number */ i) =>{
-   return x + i + 1;
+   return x + i + 1 | 0;
   }), 10);] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testLambdaCaptureLocal"
 [i] => [i] "i"
-[x + i + 1] => [return x + i + 1;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testLambdaCaptureLocal>"
+[x + i + 1] => [return x + i + 1 | 0;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testLambdaCaptureLocal>"
 [testLambdaCaptureFieldAndLocal] => [m_testLambdaCaptureFieldAndLocal__]
 [int x = 1;] => [let x = 1;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testLambdaCaptureFieldAndLocal"
 [x] => [x] "x"
@@ -53,12 +53,12 @@
 ...        },
         10);] => [this.m_call__com_google_j2cl_transpiler_readable_lambdas_Lambdas_FunctionalInterface__int(FunctionalInterface.$adapt((/** number */ i) =>{
    let y = 1;
-   return x + y + this.f_field__com_google_j2cl_transpiler_readable_lambdas_Lambdas + i + 1;
+   return x + y + this.f_field__com_google_j2cl_transpiler_readable_lambdas_Lambdas + i + 1 | 0;
   }), 10);] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testLambdaCaptureFieldAndLocal"
 [i] => [i] "i"
 [int y = 1;] => [let y = 1;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testLambdaCaptureFieldAndLocal>"
 [y] => [y] "y"
-[return x + y + this.field + i + 1;] => [return x + y + this.f_field__com_google_j2cl_transpiler_readable_lambdas_Lambdas + i + 1;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testLambdaCaptureFieldAndLocal>"
+[return x + y + this.field + i + 1;] => [return x + y + this.f_field__com_google_j2cl_transpiler_readable_lambdas_Lambdas + i + 1 | 0;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testLambdaCaptureFieldAndLocal>"
 [funOuter] => [m_funOuter__]
 [testLambdaCallOuterFunction] => [m_testLambdaCallOuterFunction__]
 [call(
@@ -66,13 +66,13 @@
 ...        },
         10);] => [this.m_call__com_google_j2cl_transpiler_readable_lambdas_Lambdas_FunctionalInterface__int(FunctionalInterface.$adapt((/** number */ i) =>{
    this.m_funOuter__();
-...   return i + 2;
+...   return i + 2 | 0;
   }), 10);] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testLambdaCallOuterFunction"
 [i] => [i] "i"
 [funOuter();] => [this.m_funOuter__();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testLambdaCallOuterFunction>"
 [this.funOuter();] => [this.m_funOuter__();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testLambdaCallOuterFunction>"
 [Lambdas.this.funOuter();] => [this.m_funOuter__();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testLambdaCallOuterFunction>"
-[return i + 2;] => [return i + 2;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testLambdaCallOuterFunction>"
+[return i + 2;] => [return i + 2 | 0;] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.<lambda in testLambdaCallOuterFunction>"
 [testLambdaInStaticContext] => [m_testLambdaInStaticContext__]
 [testLambdaInStaticContext] => [Lambdas.$clinit();] "com.google.j2cl.transpiler.readable.lambdas.Lambdas.testLambdaInStaticContext"
 [FunctionalInterface f = (i) -> i;] => [let f = FunctionalInterface.$adapt((/** number */ i) =>{

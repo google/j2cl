@@ -11,11 +11,11 @@
 [fun] => [m_fun__int__int]
 [a] => [a] "a"
 [b] => [b] "b"
-[return a + b + 111;] => [return a + b + 111;] "com.google.j2cl.transpiler.readable.instancejsmethods.SuperParent.fun"
+[return a + b + 111;] => [return a + b + 111 | 0;] "com.google.j2cl.transpiler.readable.instancejsmethods.SuperParent.fun"
 [bar] => [m_bar__int__int]
 [a] => [a] "a"
 [b] => [b] "b"
-[return a * b + 222;] => [return a * b + 222;] "com.google.j2cl.transpiler.readable.instancejsmethods.SuperParent.bar"
+[return a * b + 222;] => [return Math.imul(a, b) + 222 | 0;] "com.google.j2cl.transpiler.readable.instancejsmethods.SuperParent.bar"
 [SuperParent] => [$clinit]
 [SuperParent] => [SuperParent.$clinit = () =>{};] "com.google.j2cl.transpiler.readable.instancejsmethods.SuperParent.<clinit>"
 [SuperParent] => [SuperParent.$loadModules();] "com.google.j2cl.transpiler.readable.instancejsmethods.SuperParent.<clinit>"

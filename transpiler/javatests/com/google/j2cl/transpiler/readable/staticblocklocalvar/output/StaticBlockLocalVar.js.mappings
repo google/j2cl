@@ -14,5 +14,5 @@
 [StaticBlockLocalVar] => [j_l_Object.$clinit();] "com.google.j2cl.transpiler.readable.staticblocklocalvar.StaticBlockLocalVar.<clinit>"
 [int i = 10;] => [let i = 10;] "com.google.j2cl.transpiler.readable.staticblocklocalvar.StaticBlockLocalVar.<clinit>"
 [i] => [i] "i"
-[i += 20;] => [i += 20;] "com.google.j2cl.transpiler.readable.staticblocklocalvar.StaticBlockLocalVar.<clinit>"
+[i += 20;] => [i = i + 20 | 0;] "com.google.j2cl.transpiler.readable.staticblocklocalvar.StaticBlockLocalVar.<clinit>"
 

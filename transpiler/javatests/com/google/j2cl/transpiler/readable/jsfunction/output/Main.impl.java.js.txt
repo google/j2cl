@@ -68,12 +68,12 @@ class Main extends j_l_Object {
     let n = 4;
     Main.m_callFn__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionInterface__int(
         (/** number */ number_1) => {
-          return number_1 + n;
+          return number_1 + n | 0;
         },
         n);
     Main.m_callFn__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionInterface__int(
         (/** number */ a) => {
-          return a + n;
+          return a + n | 0;
         },
         n);
     ((/** number */ a_1) => {
@@ -110,7 +110,7 @@ class Main extends j_l_Object {
       let sum = i;
       for (let $array = numbers, $index = 0; $index < $array.length; $index++) {
         let number_1 = $array[$index];
-        sum += number_1;
+        sum = sum + number_1 | 0;
       }
       return sum;
     };
@@ -123,7 +123,7 @@ class Main extends j_l_Object {
       let sum = i;
       for (let $array = numbers, $index = 0; $index < $array.length; $index++) {
         let number_1 = $array[$index];
-        sum += number_1;
+        sum = sum + number_1 | 0;
       }
       return sum;
     };
