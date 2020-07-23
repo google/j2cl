@@ -12,15 +12,9 @@ package(
 
 java_import(
     name = "jre",
-    jars = [
-        "//jre/java:libjre.jar",
-    ],
+    jars = ["//jre/java:libjre.jar"],
     srcjar = "//jre/java:libjre-src.jar",
-    deps = [
-        "//jre/java:jre_bootclasspath",
-        "//third_party:gwt-javaemul-internal-annotations",
-        "//third_party:gwt-jsinterop-annotations",
-    ],
+    deps = ["//jre/java:jre_bootclasspath"],
 )
 
 # A java_binary to create a merged jar of all deps of the standard runtime.
