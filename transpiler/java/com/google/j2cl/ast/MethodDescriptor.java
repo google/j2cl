@@ -604,6 +604,48 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         .build();
   }
 
+  @Override
+  public final String toString() {
+    StringBuilder sb = new StringBuilder();
+    switch (getJsInfo().getJsMemberType()) {
+      case METHOD:
+        sb.append("@JsMethod ");
+        break;
+      case PROPERTY:
+        sb.append("@JsProperty ");
+        break;
+      case CONSTRUCTOR:
+        sb.append("@JsConstructor ");
+        break;
+      default:
+        break;
+    }
+    if (isStatic()) {
+      sb.append("static ");
+    }
+    if (isDefaultMethod()) {
+      sb.append("default ");
+    }
+
+    sb.append(getReturnTypeDescriptor().getReadableDescription())
+        .append(" ")
+        .append(getEnclosingTypeDescriptor().getSimpleSourceName())
+        .append('.')
+        .append(getName())
+        .append(
+            getParameterTypeDescriptors().stream()
+                .map(TypeDescriptor::getReadableDescription)
+                .collect(joining(",", "(", ")")));
+    if (getVisibility().isPackagePrivate()) {
+      sb.append(" pp");
+    }
+    switch (getOrigin()) {
+      default:
+        sb.append(" synthetic");
+    }
+    return sb.toString();
+  }
+
   /** A Builder for MethodDescriptors. */
   @AutoValue.Builder
   public abstract static class Builder {
