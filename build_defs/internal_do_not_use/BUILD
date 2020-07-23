@@ -39,11 +39,6 @@ alias(
 # Standard library related
 # ***************************************************
 
-alias(
-    name = "jre",
-    actual = "//jre/java:jre",
-)
-
 default_java_toolchain(
     name = "j2cl_java_toolchain",
     bootclasspath = ["//jre/java:libjre_bootclasspath.jar"],
