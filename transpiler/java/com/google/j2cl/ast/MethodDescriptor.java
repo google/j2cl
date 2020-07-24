@@ -599,8 +599,12 @@ public abstract class MethodDescriptor extends MemberDescriptor {
             .collect(toImmutableList());
 
     return MethodDescriptor.Builder.from(this)
+        .setDeclarationDescriptor(getDeclarationDescriptor())
         .setReturnTypeDescriptor(specializedReturnTypeDescriptor)
         .updateParameterTypeDescriptors(specializedParameterTypeDescriptors)
+        .setEnclosingTypeDescriptor(
+            getEnclosingTypeDescriptor()
+                .specializeTypeVariables(replacingTypeDescriptorByTypeVariable))
         .build();
   }
 

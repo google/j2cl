@@ -75,9 +75,7 @@ public class DefaultMethodsResolver extends NormalizationPass {
 
         MethodDescriptor specializedMethodDescriptor =
             declaredMethodDescriptor.specializeTypeVariables(
-                typeDeclaration
-                    .toUnparameterizedTypeDescriptor()
-                    .getSpecializedTypeArgumentByTypeParameters());
+                typeDeclaration.toUnparameterizedTypeDescriptor().getTransitiveParameterization());
 
         String specializedSignature = specializedMethodDescriptor.getOverrideSignature();
         if (defaultMethodDescriptorsBySignature.containsKey(specializedSignature)) {

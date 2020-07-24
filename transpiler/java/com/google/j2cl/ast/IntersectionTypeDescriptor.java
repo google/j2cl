@@ -21,9 +21,7 @@ import static java.util.stream.Collectors.joining;
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
 import com.google.j2cl.common.ThreadLocalInterner;
-import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -145,16 +143,6 @@ public abstract class IntersectionTypeDescriptor extends TypeDescriptor {
     return getIntersectionTypeDescriptors()
         .stream()
         .anyMatch(TypeDescriptor::canBeReferencedExternally);
-  }
-
-  @Memoized
-  @Override
-  public Map<TypeVariable, TypeDescriptor> getSpecializedTypeArgumentByTypeParameters() {
-    ImmutableMap.Builder<TypeVariable, TypeDescriptor> mapBuilder = ImmutableMap.builder();
-    for (TypeDescriptor typeDescriptor : getIntersectionTypeDescriptors()) {
-      mapBuilder.putAll(typeDescriptor.getSpecializedTypeArgumentByTypeParameters());
-    }
-    return mapBuilder.build();
   }
 
   @Override

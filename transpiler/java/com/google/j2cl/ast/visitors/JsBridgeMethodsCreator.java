@@ -83,7 +83,7 @@ public class JsBridgeMethodsCreator extends NormalizationPass {
        */
       bridgeMethodDescriptor =
           bridgeMethodDescriptor.specializeTypeVariables(
-              unparameterizedEnclosingTypeDescriptor.getSpecializedTypeArgumentByTypeParameters());
+              unparameterizedEnclosingTypeDescriptor.getTransitiveParameterization());
 
       Method bridgeMethod =
           createBridgeMethod(

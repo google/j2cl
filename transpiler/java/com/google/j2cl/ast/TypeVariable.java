@@ -19,7 +19,6 @@ import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
 import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.common.ThreadLocalInterner;
-import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -110,11 +109,6 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
   @Override
   public boolean canBeReferencedExternally() {
     return toRawTypeDescriptor().canBeReferencedExternally();
-  }
-
-  @Override
-  public Map<TypeVariable, TypeDescriptor> getSpecializedTypeArgumentByTypeParameters() {
-    return getBoundTypeDescriptor().getSpecializedTypeArgumentByTypeParameters();
   }
 
   @Override

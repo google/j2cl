@@ -29,20 +29,19 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.MoreCollectors;
+import com.google.common.collect.Streams;
 import com.google.j2cl.ast.MethodDescriptor.MethodOrigin;
 import com.google.j2cl.common.ThreadLocalInterner;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.annotation.Nullable;
 
 /**
@@ -570,117 +569,107 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     return false;
   }
 
+  /**
+   * A mapping that fully describes the final specialized type argument value for every super type
+   * or interface of the current type.
+   *
+   * <p>For example given:
+   *
+   * <pre>{@code
+   * class A<A1, A2> {}
+   * class B<B1> extends A<String, B1>
+   * class C<C1> extends B<C1>
+   * }</pre>
+   *
+   * <p>If the current type is C then the resulting mappings are:
+   *
+   * <pre>{@code
+   * - A1 -> String
+   * - A2 -> C1
+   * - B1 -> C1
+   * }</pre>
+   */
   @Memoized
-  @Override
-  public Map<TypeVariable, TypeDescriptor> getSpecializedTypeArgumentByTypeParameters() {
-    Map<TypeVariable, TypeDescriptor> specializedTypeArgumentByTypeParameters = new HashMap<>();
+  public Map<TypeVariable, TypeDescriptor> getTransitiveParameterization() {
+    Map<TypeVariable, TypeDescriptor> specializedTypeArgumentByTypeParameters =
+        new LinkedHashMap<>(getLocalParameterization());
 
-    Map<TypeVariable, TypeDescriptor> immediateSpecializedTypeArgumentByTypeParameters =
-        new HashMap<>();
-
-    DeclaredTypeDescriptor superTypeDescriptor = getSuperTypeDescriptor();
-    List<DeclaredTypeDescriptor> superTypeOrInterfaceDescriptors = new ArrayList<>();
-    if (superTypeDescriptor != null) {
-      superTypeOrInterfaceDescriptors.add(superTypeDescriptor);
-    }
-    superTypeOrInterfaceDescriptors.addAll(getInterfaceTypeDescriptors());
-
-    for (DeclaredTypeDescriptor superTypeOrInterfaceDescriptor : superTypeOrInterfaceDescriptors) {
-      TypeDeclaration superTypeOrInterfaceDeclaration =
-          superTypeOrInterfaceDescriptor.getTypeDeclaration();
-
-      ImmutableList<TypeVariable> typeParameterDescriptors =
-          superTypeOrInterfaceDeclaration.getTypeParameterDescriptors();
-      ImmutableList<TypeDescriptor> typeArgumentDescriptors =
-          superTypeOrInterfaceDescriptor.getTypeArgumentDescriptors();
-
-      boolean specializedTypeIsRaw = typeArgumentDescriptors.isEmpty();
-      for (int i = 0; i < typeParameterDescriptors.size(); i++) {
-        TypeVariable typeParameterDescriptor = typeParameterDescriptors.get(i);
-        TypeDescriptor typeArgumentDescriptor =
-            specializedTypeIsRaw
-                ? typeParameterDescriptor.getBoundTypeDescriptor().toRawTypeDescriptor()
-                : typeArgumentDescriptors.get(i);
-        immediateSpecializedTypeArgumentByTypeParameters.put(
-            typeParameterDescriptor, typeArgumentDescriptor);
-      }
-      specializedTypeArgumentByTypeParameters.putAll(
-          immediateSpecializedTypeArgumentByTypeParameters);
-
-      Map<TypeVariable, TypeDescriptor> superSpecializedTypeArgumentByTypeParameters =
-          superTypeOrInterfaceDeclaration
-              .toUnparameterizedTypeDescriptor()
-              .getSpecializedTypeArgumentByTypeParameters();
-
-      for (Entry<TypeVariable, TypeDescriptor> entry :
-          superSpecializedTypeArgumentByTypeParameters.entrySet()) {
-        TypeDescriptor typeArgumentDescriptor = entry.getValue();
-
-        typeArgumentDescriptor =
-            typeArgumentDescriptor.specializeTypeVariables(
-                immediateSpecializedTypeArgumentByTypeParameters);
-
-        specializedTypeArgumentByTypeParameters.put(entry.getKey(), typeArgumentDescriptor);
-      }
-    }
+    Stream.concat(Stream.of(getSuperTypeDescriptor()), getInterfaceTypeDescriptors().stream())
+        .filter(Predicates.notNull())
+        .forEach(
+            t -> specializedTypeArgumentByTypeParameters.putAll(t.getTransitiveParameterization()));
 
     return specializedTypeArgumentByTypeParameters;
   }
 
+  private Map<TypeVariable, TypeDescriptor> getLocalParameterization() {
+    List<TypeVariable> typeVariables = getTypeDeclaration().getTypeParameterDescriptors();
+    List<TypeDescriptor> typeArguments = getTypeArgumentDescriptors();
+
+    Map<TypeVariable, TypeDescriptor> typeArgumentsByTypeVariable = new LinkedHashMap<>();
+
+    boolean isRaw = typeArguments.isEmpty();
+    if (isRaw) {
+      typeArguments =
+          typeVariables.stream().map(TypeVariable::toRawTypeDescriptor).collect(toImmutableList());
+    }
+    Streams.forEachPair(
+        typeVariables.stream(), typeArguments.stream(), typeArgumentsByTypeVariable::put);
+    return typeArgumentsByTypeVariable;
+  }
+
   @Override
   public DeclaredTypeDescriptor specializeTypeVariables(
-      Function<TypeVariable, ? extends TypeDescriptor> replacementTypeArgumentByTypeVariable) {
-    if (AstUtils.isIdentityFunction(replacementTypeArgumentByTypeVariable)) {
+      Function<TypeVariable, ? extends TypeDescriptor> parameterization) {
+    if (AstUtils.isIdentityFunction(parameterization)) {
       return this;
     }
-    if (getTypeArgumentDescriptors().isEmpty()
-        // TODO(b/70853239): See why this is needed.
-        && !isJsFunctionInterface()
-        && !isJsFunctionImplementation()) {
+    if (getTypeArgumentDescriptors().isEmpty()) {
       return this;
     }
 
     return Builder.from(this)
         .setTypeArgumentDescriptors(
             getTypeArgumentDescriptors().stream()
-                .map(t -> t.specializeTypeVariables(replacementTypeArgumentByTypeVariable))
+                .map(t -> t.specializeTypeVariables(parameterization))
                 .collect(toImmutableList()))
         .setSuperTypeDescriptorFactory(
             () ->
                 getSuperTypeDescriptor() != null
-                    ? getSuperTypeDescriptor()
-                        .specializeTypeVariables(replacementTypeArgumentByTypeVariable)
+                    ? getSuperTypeDescriptor().specializeTypeVariables(parameterization)
                     : null)
         .setInterfaceTypeDescriptorsFactory(
             () ->
                 getInterfaceTypeDescriptors().stream()
-                    .map(t -> t.specializeTypeVariables(replacementTypeArgumentByTypeVariable))
+                    .map(t -> t.specializeTypeVariables(parameterization))
                     .collect(toImmutableList()))
         .setJsFunctionMethodDescriptorFactory(
             () ->
                 getJsFunctionMethodDescriptor() != null
-                    ? getJsFunctionMethodDescriptor()
-                        .specializeTypeVariables(replacementTypeArgumentByTypeVariable)
+                    ? getJsFunctionMethodDescriptor().specializeTypeVariables(parameterization)
                     : null)
         .setSingleAbstractMethodDescriptorFactory(
             () ->
                 getSingleAbstractMethodDescriptor() != null
-                    ? getSingleAbstractMethodDescriptor()
-                        .specializeTypeVariables(replacementTypeArgumentByTypeVariable)
+                    ? getSingleAbstractMethodDescriptor().specializeTypeVariables(parameterization)
                     : null)
         .setDeclaredFieldDescriptorsFactory(
             () ->
                 getDeclaredFieldDescriptors().stream()
-                    .map(f -> f.specializeTypeVariables(replacementTypeArgumentByTypeVariable))
+                    .map(f -> f.specializeTypeVariables(parameterization))
                     .collect(toImmutableList()))
         .setDeclaredMethodDescriptorsFactory(
             () ->
                 getDeclaredMethodDescriptors().stream()
-                    .map(m -> m.specializeTypeVariables(replacementTypeArgumentByTypeVariable))
+                    .map(m -> m.specializeTypeVariables(parameterization))
                     .collect(
                         toImmutableMap(
                             m -> m.getDeclarationDescriptor().getMethodSignature(),
                             Function.identity())))
+        .setEnclosingTypeDescriptor(
+            getEnclosingTypeDescriptor() != null
+                ? getEnclosingTypeDescriptor().specializeTypeVariables(parameterization)
+                : null)
         .build();
   }
 

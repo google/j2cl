@@ -15,9 +15,7 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.common.collect.ImmutableMap;
 import com.google.j2cl.common.InternalCompilerError;
-import java.util.Map;
 import java.util.function.Function;
 import javax.annotation.Nullable;
 
@@ -62,11 +60,6 @@ public class NullType extends TypeDescriptor {
   @Override
   public TypeDeclaration getMetadataTypeDeclaration() {
     return null;
-  }
-
-  @Override
-  public Map<TypeVariable, TypeDescriptor> getSpecializedTypeArgumentByTypeParameters() {
-    return ImmutableMap.of();
   }
 
   @Override

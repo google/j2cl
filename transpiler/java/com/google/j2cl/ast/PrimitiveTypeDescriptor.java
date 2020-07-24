@@ -19,8 +19,6 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
-import com.google.common.collect.ImmutableMap;
-import java.util.Map;
 import java.util.function.Function;
 
 /** A primitive type. */
@@ -171,11 +169,6 @@ public class PrimitiveTypeDescriptor extends TypeDescriptor {
   @Override
   public TypeDeclaration getMetadataTypeDeclaration() {
     return TypeDescriptors.createPrimitiveMetadataTypeDescriptor(this).getTypeDeclaration();
-  }
-
-  @Override
-  public Map<TypeVariable, TypeDescriptor> getSpecializedTypeArgumentByTypeParameters() {
-    return ImmutableMap.of();
   }
 
   @Override

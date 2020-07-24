@@ -176,27 +176,6 @@ public abstract class TypeDescriptor implements Comparable<TypeDescriptor>, HasR
     return ImmutableSet.of();
   }
 
-  /**
-   * A mapping that fully describes the final specialized type argument value for every super type
-   * or interface of the current type.
-   *
-   * <p>For example given:
-   *
-   * <pre>
-   * class A<A1, A2> {}
-   * class B<B1> extends A<String, B1>
-   * class C<C1> extends B<C1>
-   * </pre>
-   *
-   * <p>If the current type is C then the resulting mappings are:
-   *
-   * <pre>
-   * - A1 -> String
-   * - A2 -> C1
-   * - B1 -> C1
-   * </pre>
-   */
-  public abstract Map<TypeVariable, TypeDescriptor> getSpecializedTypeArgumentByTypeParameters();
 
   public TypeDescriptor specializeTypeVariables(
       Map<TypeVariable, TypeDescriptor> replacementTypeArgumentByTypeVariable) {

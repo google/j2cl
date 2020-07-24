@@ -19,7 +19,6 @@ import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
 import com.google.common.base.Strings;
 import com.google.j2cl.common.ThreadLocalInterner;
-import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
 import javax.annotation.Nullable;
@@ -170,11 +169,6 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
     // TODO(b/36363419): Decide what to do with arrays like String[], int[], JsFunction[], etc
     // which as of now do not give warnings.
     return getLeafTypeDescriptor().canBeReferencedExternally();
-  }
-
-  @Override
-  public Map<TypeVariable, TypeDescriptor> getSpecializedTypeArgumentByTypeParameters() {
-    return getLeafTypeDescriptor().getSpecializedTypeArgumentByTypeParameters();
   }
 
   @Override
