@@ -15,7 +15,6 @@ package com.google.j2cl.tools.gwtincompatible;
 
 import static com.google.common.base.Preconditions.checkState;
 
-import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.io.MoreFiles;
@@ -44,7 +43,7 @@ import org.eclipse.jdt.core.dom.ImportDeclaration;
  * A helper to comment out source code elements annotated with @GwtIncompatible so that they are
  * ignored by tools taking that source as input such as the java compile or the j2cl transpile.
  */
-final class GwtIncompatibleStripper {
+public final class GwtIncompatibleStripper {
 
   static Problems strip(List<String> files, String outputPath) {
     try {
@@ -74,7 +73,7 @@ final class GwtIncompatibleStripper {
       try {
         String fileContent =
             MoreFiles.asCharSource(Paths.get(fileInfo.sourcePath()), StandardCharsets.UTF_8).read();
-        processedFileContent = processFile(fileContent);
+        processedFileContent = strip(fileContent);
       } catch (IOException e) {
         problems.fatal(FatalError.CANNOT_OPEN_FILE, e.toString());
         return;
@@ -86,8 +85,7 @@ final class GwtIncompatibleStripper {
     }
   }
 
-  @VisibleForTesting
-  static String processFile(String fileContent) {
+  public static String strip(String fileContent) {
     // Avoid parsing if there are no textual references to GwtIncompatible.
     if (!fileContent.contains("GwtIncompatible")) {
       return fileContent;
