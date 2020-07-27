@@ -81,7 +81,7 @@ public final class GwtIncompatibleStripper {
 
       // Write the processed file to output
       J2clUtils.writeToFile(
-          output.resolve(fileInfo.originalPath()), processedFileContent, problems);
+          output.resolve(fileInfo.targetPath()), processedFileContent, problems);
     }
   }
 
