@@ -49,16 +49,18 @@ public final class GwtIncompatibleStripper {
     try {
       Problems problems = new Problems();
       FileSystem outputZipFileSystem = FrontendUtils.initZipOutput(outputPath, problems);
-      List<FileInfo> allPaths =
-          FrontendUtils.getAllSources(files, problems)
-              .filter(f -> f.targetPath().endsWith(".java"))
-              .collect(ImmutableList.toImmutableList());
-      preprocessFiles(allPaths, outputZipFileSystem.getPath("/"), problems);
-
       try {
-        outputZipFileSystem.close();
-      } catch (IOException e) {
-        problems.fatal(FatalError.CANNOT_CLOSE_ZIP, e.getMessage());
+        List<FileInfo> allPaths =
+            FrontendUtils.getAllSources(files, problems)
+                .filter(f -> f.targetPath().endsWith(".java"))
+                .collect(ImmutableList.toImmutableList());
+        preprocessFiles(allPaths, outputZipFileSystem.getPath("/"), problems);
+      } finally {
+        try {
+          outputZipFileSystem.close();
+        } catch (IOException e) {
+          problems.fatal(FatalError.CANNOT_CLOSE_ZIP, e.getMessage());
+	}
       }
       return problems;
     } catch (Problems.Exit e) {
