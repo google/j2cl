@@ -31,6 +31,6 @@ public class ExceptionWithCauseStacktraceTest extends StacktraceTestBase {
   }
 
   public void method() {
-    throw new RuntimeException(new NullPointerException("root cause"));
+    throw new RuntimeException(new NullPointerException("root cause\nOn two lines"));
   }
 }
