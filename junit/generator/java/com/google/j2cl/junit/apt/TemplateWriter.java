@@ -49,7 +49,7 @@ class TemplateWriter {
     try {
       writeResource(
           "test_summary.json",
-          testSummary.stream().collect(Collectors.joining("','", "{'tests': ['", "']}")));
+          testSummary.stream().collect(Collectors.joining("\",\"", "{\"tests\": [\"", "\"]}")));
     } catch (Exception e) {
       errorReporter.report(ErrorMessage.CANNOT_WRITE_RESOURCE, exceptionToString(e));
     }
