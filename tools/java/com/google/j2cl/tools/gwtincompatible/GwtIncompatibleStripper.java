@@ -14,8 +14,9 @@
 package com.google.j2cl.tools.gwtincompatible;
 
 import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.collect.ImmutableList.toImmutableList;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.io.MoreFiles;
 import com.google.j2cl.common.FrontendUtils;
@@ -25,7 +26,6 @@ import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.frontend.jdt.GwtIncompatibleNodeCollector;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.FileSystem;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -48,15 +48,12 @@ public final class GwtIncompatibleStripper {
   static Problems strip(List<String> files, String outputPath) {
     try {
       Problems problems = new Problems();
-      FileSystem outputZipFileSystem = FrontendUtils.initZipOutput(outputPath, problems);
-      List<FileInfo> allPaths =
-          FrontendUtils.getAllSources(files, problems)
-              .filter(f -> f.targetPath().endsWith(".java"))
-              .collect(ImmutableList.toImmutableList());
-      preprocessFiles(allPaths, outputZipFileSystem.getPath("/"), problems);
-
-      try {
-        outputZipFileSystem.close();
+      try (FileSystem outputZipFileSystem = FrontendUtils.initZipOutput(outputPath, problems)) {
+        List<FileInfo> allPaths =
+            FrontendUtils.getAllSources(files, problems)
+                .filter(f -> f.targetPath().endsWith(".java"))
+                .collect(toImmutableList());
+        preprocessFiles(allPaths, outputZipFileSystem.getPath("/"), problems);
       } catch (IOException e) {
         problems.fatal(FatalError.CANNOT_CLOSE_ZIP, e.getMessage());
       }
@@ -71,8 +68,7 @@ public final class GwtIncompatibleStripper {
     for (FileInfo fileInfo : fileInfos) {
       String processedFileContent;
       try {
-        String fileContent =
-            MoreFiles.asCharSource(Paths.get(fileInfo.sourcePath()), StandardCharsets.UTF_8).read();
+        String fileContent = MoreFiles.asCharSource(Paths.get(fileInfo.sourcePath()), UTF_8).read();
         processedFileContent = strip(fileContent);
       } catch (IOException e) {
         problems.fatal(FatalError.CANNOT_OPEN_FILE, e.toString());
