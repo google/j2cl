@@ -186,13 +186,23 @@ public class StatementTranspiler {
         if (declaration.isDeprecated()) {
           jsDocs.add("@deprecated");
         }
-        builder.emitWithMapping(
-            declaration.getSourcePosition(),
-            () -> {
-              builder.appendln("/**" + String.join(" ", jsDocs) + "*/");
-              renderExpression(declaration.getExpression());
-              builder.append(";");
-            });
+        Runnable renderer =
+            () ->
+                builder.emitWithMapping(
+                    declaration.getSourcePosition(),
+                    () -> {
+                      builder.appendln("/**" + String.join(" ", jsDocs) + "*/");
+                      renderExpression(declaration.getExpression());
+                      builder.append(";");
+                    });
+
+        if (declaration.getFieldDescriptor().isStatic()) {
+          // Only emit the member mapping for static fields. LibraryInfoBuilder collects all member
+          // mappings and for practical reasons instance fields are not collected.
+          builder.emitWithMemberMapping(declaration.getFieldDescriptor(), renderer);
+        } else {
+          renderer.run();
+        }
         return false;
       }
 

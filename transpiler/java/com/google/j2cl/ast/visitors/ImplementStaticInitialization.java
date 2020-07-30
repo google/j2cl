@@ -56,11 +56,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-/**
- * Implements static initialization by synthesizing getter and setters for static fields and
- * instrumenting static members so that static initialization (clinit) is triggered according to
- * Java semantics.
- */
+/** Implements static initialization to comply with Java semantics. */
 public class ImplementStaticInitialization extends NormalizationPass {
 
   private final Set<String> privateStaticMembersCalledFromOtherClasses = new HashSet<>();
@@ -78,7 +74,27 @@ public class ImplementStaticInitialization extends NormalizationPass {
       synthesizeSuperClinitCalls(type);
       synthesizeSettersAndGetters(type);
       synthesizeClinitMethod(type);
+      synthesizeStaticFieldDeclaration(type);
     }
+  }
+
+  private static void synthesizeStaticFieldDeclaration(Type type) {
+    type.accept(
+        new AbstractRewriter() {
+          @Override
+          public Field rewriteField(Field field) {
+            if (!field.isStatic()) {
+              return field;
+            }
+            // Add the static field initialization to null, 0, false or compile time constant, to
+            // be executed at load time after the class definition.
+            type.addLoadTimeStatement(
+                AstUtils.declarationStatement(field, type.getSourcePosition()));
+            // Remove the initialization value from the field, to preserve the AST invariant that
+            // the AST is a proper tree, i.e. a node has only one parent.
+            return Field.Builder.from(field).setInitializer(null).build();
+          }
+        });
   }
 
   /** Collect all private static methods and fields that are accessed from outside its class. */
@@ -132,7 +148,7 @@ public class ImplementStaticInitialization extends NormalizationPass {
   }
 
   /** Synthesize a static initializer block that calls the necessary super type clinits. */
-  private void synthesizeSuperClinitCalls(Type type) {
+  private static void synthesizeSuperClinitCalls(Type type) {
     Block.Builder staticInitializerBuilder =
         Block.newBuilder().setSourcePosition(type.getSourcePosition());
 
@@ -259,7 +275,7 @@ public class ImplementStaticInitialization extends NormalizationPass {
     return MethodCall.Builder.from(typeDescriptor.getClinitMethodDescriptor()).build();
   }
 
-  private void addRequiredSuperInterfacesClinitCalls(
+  private static void addRequiredSuperInterfacesClinitCalls(
       SourcePosition sourcePosition,
       DeclaredTypeDescriptor typeDescriptor,
       Block.Builder staticInitializerBuilder) {
@@ -374,7 +390,7 @@ public class ImplementStaticInitialization extends NormalizationPass {
   }
 
   /** Implements the static initialization method ($clinit). */
-  private void synthesizeClinitMethod(Type type) {
+  private static void synthesizeClinitMethod(Type type) {
     SourcePosition sourcePosition = type.getSourcePosition();
 
     FieldDescriptor clinitMethodFieldDescriptor =

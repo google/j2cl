@@ -32,7 +32,6 @@ import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.DeclaredTypeDescriptor;
-import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldDeclarationStatement;
 import com.google.j2cl.ast.FunctionExpression;
@@ -91,12 +90,6 @@ class ImportGatherer extends AbstractVisitor {
       LinkedHashMultimap.create();
 
   private ImportGatherer() {}
-
-  @Override
-  public void exitField(Field field) {
-    maybeAddNativeReference(field);
-    collectForJsDoc(field.getDescriptor().getTypeDescriptor());
-  }
 
   @Override
   public void exitFunctionExpression(FunctionExpression functionExpression) {

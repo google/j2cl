@@ -184,7 +184,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     renderClassBody();
     renderClassMetadata();
     renderMarkImplementorCalls();
-    renderStaticFieldDeclarations();
     renderLoadTimeStatements();
     renderNativeSource();
   }
@@ -622,18 +621,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.newLine();
   }
 
-  private void renderStaticFieldDeclarations() {
-    for (Field staticField : type.getStaticFields()) {
-      sourceBuilder.emitWithMemberMapping(
-          staticField.getDescriptor(),
-          () -> {
-            statementTranspiler.renderStatement(
-                AstUtils.declarationStatement(staticField, type.getSourcePosition()));
-          });
-      sourceBuilder.newLine();
-    }
-  }
-
   /**
    * Here we call markImplementor on all interfaces such that the class can be queried at run time
    * to determine if it implements an interface.
@@ -673,7 +660,12 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   }
 
   private void renderLoadTimeStatements() {
-    type.getLoadTimeStatements().forEach(statementTranspiler::renderStatement);
+    type.getLoadTimeStatements()
+        .forEach(
+            s -> {
+              statementTranspiler.renderStatement(s);
+              sourceBuilder.newLine();
+            });
   }
 
   private void renderNativeSource() {
