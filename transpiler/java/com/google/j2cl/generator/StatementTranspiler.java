@@ -39,6 +39,7 @@ import com.google.j2cl.ast.TryStatement;
 import com.google.j2cl.ast.WhileStatement;
 import com.google.j2cl.common.InternalCompilerError;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -51,6 +52,14 @@ public class StatementTranspiler {
   public StatementTranspiler(SourceBuilder builder, GenerationEnvironment environment) {
     this.builder = builder;
     this.environment = environment;
+  }
+
+  public void renderStatements(Collection<Statement> statements) {
+    statements.forEach(
+        s -> {
+          builder.newLine();
+          renderStatement(s);
+        });
   }
 
   public void renderStatement(Statement statement) {
@@ -67,10 +76,7 @@ public class StatementTranspiler {
       @Override
       public boolean enterBlock(Block block) {
         builder.openBrace();
-        for (Statement statement : block.getStatements()) {
-          builder.newLine();
-          render(statement);
-        }
+        renderStatements(block.getStatements());
         builder.closeBrace();
         return false;
       }
@@ -243,10 +249,7 @@ public class StatementTranspiler {
           builder.append(": ");
         }
         builder.indent();
-        for (Statement statement : switchCase.getStatements()) {
-          builder.newLine();
-          render(statement);
-        }
+        renderStatements(switchCase.getStatements());
         builder.unindent();
         return false;
       }

@@ -182,8 +182,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   public void renderClass() {
     renderTypeAnnotation();
     renderClassBody();
-    renderClassMetadata();
-    renderMarkImplementorCalls();
     renderLoadTimeStatements();
     renderNativeSource();
   }
@@ -323,7 +321,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     renderCopyMethod();
     renderLoadModules();
     sourceBuilder.closeBrace();
-    sourceBuilder.newLine();
   }
 
   private static String getExtendsClause(Type type, GenerationEnvironment environment) {
@@ -566,9 +563,9 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         && (type.getOverlaidTypeDeclaration().isJsFunctionInterface()
             || type.getOverlaidTypeDeclaration().isInterface())) {
       // JsFunction and Native interface overlays do not need class metadata.
-      sourceBuilder.newLine();
       return;
     }
+    sourceBuilder.newLine();
 
     String utilAlias = environment.aliasForType(BootstrapType.NATIVE_UTIL.getDescriptor());
 
@@ -584,7 +581,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     String obfuscatableName = "'" + name + "'";
     String className = environment.aliasForType(type.getDeclaration());
     if (targetTypeDescriptor.isInterface()) {
-      sourceBuilder.appendln(
+      sourceBuilder.append(
           utilAlias
               + ".$setClassMetadataForInterface("
               + className
@@ -594,13 +591,12 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     } else if (targetTypeDescriptor.isEnum() && !targetTypeDescriptor.isJsEnum()) {
       // TODO(b/117525773): targetTypeDescriptor.isEnum should already be false for JsEnums,
       // making the second part of the condition unnecessary.
-      sourceBuilder.appendln(
+      sourceBuilder.append(
           utilAlias + ".$setClassMetadataForEnum(" + className + ", " + obfuscatableName + ");");
     } else {
-      sourceBuilder.appendln(
+      sourceBuilder.append(
           utilAlias + ".$setClassMetadata(" + className + ", " + obfuscatableName + ");");
     }
-    sourceBuilder.newLine();
   }
 
   private void renderLoadModules() {
@@ -618,7 +614,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     }
 
     sourceBuilder.closeBrace();
-    sourceBuilder.newLine();
   }
 
   /**
@@ -633,39 +628,33 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     String className = environment.aliasForType(type.getDeclaration());
     if (type.isInterface()) {
       // TODO(b/20102666): remove cast after b/20102666 is handled in Closure.
-      sourceBuilder.appendln(
+      sourceBuilder.newLine();
+      sourceBuilder.append(
           className
               + ".$markImplementor(/** @type {"
               + TypeDescriptors.get().nativeFunction.getQualifiedJsName()
               + "} */ ("
               + className
               + "));");
-      sourceBuilder.newLine();
     } else { // Not an interface so it is a Class.
-      boolean marksImplementors = false;
       for (TypeDescriptor interfaceTypeDescriptor : type.getSuperInterfaceTypeDescriptors()) {
         if (interfaceTypeDescriptor.isNative()) {
           continue;
         }
+        sourceBuilder.newLine();
         JavaScriptConstructorReference markImplementorConstructor =
             interfaceTypeDescriptor.getMetadataConstructorReference();
         renderExpression(markImplementorConstructor);
-        sourceBuilder.appendln(".$markImplementor(" + className + ");");
-        marksImplementors = true;
-      }
-      if (marksImplementors) {
-        sourceBuilder.newLine();
+        sourceBuilder.append(".$markImplementor(" + className + ");");
       }
     }
   }
 
   private void renderLoadTimeStatements() {
-    type.getLoadTimeStatements()
-        .forEach(
-            s -> {
-              statementTranspiler.renderStatement(s);
-              sourceBuilder.newLine();
-            });
+    renderClassMetadata();
+    renderMarkImplementorCalls();
+    statementTranspiler.renderStatements(type.getLoadTimeStatements());
+    sourceBuilder.newLine();
   }
 
   private void renderNativeSource() {
@@ -674,6 +663,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     }
 
     String className = environment.aliasForType(type.getDeclaration());
+    sourceBuilder.newLine();
     sourceBuilder.appendln("/* NATIVE.JS EPILOG */");
     sourceBuilder.newLine();
 
@@ -718,10 +708,10 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       nativeSourceLine++;
       currentByteOffset += line.length() + 1;
     }
-    sourceBuilder.newLine();
   }
 
   private void renderExports() {
+    sourceBuilder.newLine();
     sourceBuilder.appendLines("exports = " + environment.aliasForType(type.getDeclaration()) + ";");
     // TODO(b/77961191): add a new line once the bug is resolved.
   }
