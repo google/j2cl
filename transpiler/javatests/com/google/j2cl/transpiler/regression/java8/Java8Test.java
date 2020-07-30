@@ -331,7 +331,7 @@ public class Java8Test {
       fail("Clinit should have run for the first time");
     } catch (ClinitCalled expected) {
       // TODO(b/36781579): the code here should be catching ExceptionInInitializer and checking
-      // the cause, but J2CL does not wrat the exception.
+      // the cause, but J2CL does not wrap the exception.
       // success, it was supposed to throw!
     }
   }
@@ -548,9 +548,8 @@ public class Java8Test {
     assertThat((Object) new DefaultInterfaceImplVirtualUpRef().method2()).isEqualTo(99);
     assertThat((Object) new DefaultInterfaceImplVirtualUpRefTwoInterfaces().method2())
         .isEqualTo(99);
-    // TODO(b/36780060): Uncomment when bug is fixed.
-    // assertThat((Object) new com.google.j2cl.transpiler.regression.java8.package3.SimpleC().m())
-    //     .isEqualTo("SimpleB");
+    assertThat((Object) new com.google.j2cl.transpiler.regression.java8.package3.SimpleC().m())
+        .isEqualTo("SimpleB");
     assertThat((Object) new com.google.j2cl.transpiler.regression.java8.package1.SimpleD().m())
         .isEqualTo("SimpleASimpleB");
   }

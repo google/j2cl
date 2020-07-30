@@ -25,7 +25,6 @@ import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import com.google.common.collect.Streams;
 import com.google.j2cl.common.ThreadLocalInterner;
 import java.util.ArrayList;
@@ -101,7 +100,11 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     SYNTHETIC_PROPERTY_SETTER("<synthetic: setter>"),
     SYNTHETIC_PROPERTY_GETTER("<synthetic: getter>"),
     SYNTHETIC_ADAPT_LAMBDA("<synthetic: adapt_lambda>"),
-    SYNTHETIC_LAMBDA_ADAPTOR_CONSTRUCTOR("<synthetic: lambda_adaptor_ctor>");
+    SYNTHETIC_LAMBDA_ADAPTOR_CONSTRUCTOR("<synthetic: lambda_adaptor_ctor>"),
+    GENERALIZING_BRIDGE, // Bridges a more general signature to a more specific one.
+    SPECIALIZING_BRIDGE, // Bridges a more specific signature to a more general one.
+    DEFAULT_METHOD_BRIDGE, // Bridges to a default method interface.
+    ;
 
     private final String stackTraceFrameName;
     private final Visibility overriddenJsVisibility;
@@ -183,6 +186,69 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     return getBridgeOrigin() != null;
   }
 
+  /**
+   * A generalizing bridge is a bridge from a supertype method that is overridden in a subtype and
+   * the parameters of the implementation have been specialized.
+   *
+   * <p>An example of this situation is:
+   *
+   * <pre>{@code
+   * class AbstractList<T> {
+   *   void add(T t) {}
+   * }
+   *
+   * class StringList extends AbstractList<String> {
+   *  // add(String) here specializes AbstractList.add(Object), needing a bridge from add(Object) to
+   *  // add(String). Such a bridge is a generalizing bridge.
+   *   void add(String s) {}
+   * }
+   * }</pre>
+   */
+  public boolean isGeneralizingdBridge() {
+    return getOrigin() == MethodOrigin.GENERALIZING_BRIDGE;
+  }
+
+  /**
+   * A specializing bridge is a bridge from a supertype method that is overridden at a subtype and
+   * the parameters of the implementation are more general than those of the method that overrides
+   * it.
+   *
+   * <p>An example of this situation is:
+   *
+   * <pre>{@code
+   * class AbstractList<T> {
+   *   void add(T t) {}
+   * }
+   *
+   * interface StringList {
+   *   void add(String s) {}
+   * }
+   *
+   * class StringListImpl extends AbstractStringList<String> implements StringList {
+   *  // Since StringListImpl does not override AbstractStringList.add(Object) with an
+   *  // implementation, there is an implicit override of StringList.add(String) by
+   *  // AbstractStringList.add(Object) at this type.
+   *  // Since the actual implementation, i.e. AbstractStringList.add(Object) has a more general
+   *  // than required by the override in StringList, a specializing bridge from add(String) to
+   *  // add(Object) will be created in MyStringImpl.
+   * }
+   * }</pre>
+   */
+  public boolean isSpecializingBridge() {
+    return getOrigin() == MethodOrigin.SPECIALIZING_BRIDGE;
+  }
+
+  public boolean isDefaultMethodBridge() {
+    return getOrigin() == MethodOrigin.DEFAULT_METHOD_BRIDGE;
+  }
+
+  /** Returns true if the bridge was build with {@code candidateTarget} as its target. */
+  boolean isBridgeTarget(MethodDescriptor candidateTarget) {
+    MethodDescriptor method = getBridgeTarget();
+    return method != null
+        && method.getDeclarationDescriptor().equals(candidateTarget.getDeclarationDescriptor());
+  }
+
   public abstract ImmutableList<ParameterDescriptor> getParameterDescriptors();
 
   public abstract TypeDescriptor getReturnTypeDescriptor();
@@ -204,8 +270,22 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   @Override
   public abstract MethodOrigin getOrigin();
 
+  /**
+   * The source method that causes a bridge to be created.
+   *
+   * <p>This could be a default method declaration on an interface, or a method in a supertype that
+   * will be specialized.
+   */
   @Nullable
   public abstract MethodDescriptor getBridgeOrigin();
+
+  /**
+   * The actual source method that will be overriding this bridge.
+   *
+   * <p>This is the method that bridge will be forwarding to.
+   */
+  @Nullable
+  public abstract MethodDescriptor getBridgeTarget();
 
   public boolean isInit() {
     return getOrigin() == MethodOrigin.SYNTHETIC_INSTANCE_INITIALIZER;
@@ -307,10 +387,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     return isJsPropertySetter() || getOrigin() == MethodOrigin.SYNTHETIC_PROPERTY_SETTER;
   }
 
-  public boolean isOrOverridesJsMember() {
-    return isJsMember() || !getOverriddenJsMembers().isEmpty();
-  }
-
   public abstract boolean isEnumSyntheticMethod();
 
   @Override
@@ -332,18 +408,21 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   @Override
   @Memoized
   public String getBinaryName() {
-    return getOrigin() == MethodOrigin.SOURCE ? getName() : getOrigin().getName();
+    return getOrigin().getName() == null ? getName() : getOrigin().getName();
   }
 
   @Memoized
   @Override
   public String getMangledName() {
-    if (isBridge()) {
+    if (!isDeclaration()) {
+      return getDeclarationDescriptor().getMangledName();
+    }
+    if (isGeneralizingdBridge()) {
       // Bridges are methods that fill the gap between the overridden parent method and
       // a specialized override, For that reason their mangled name has to be the same as the
       // method they override but the other properties (e.g. parameter types, etc) are derived
       // from the specialized method.
-      return getBridgeOrigin().getDeclarationDescriptor().getMangledName();
+      return getBridgeOrigin().getMangledName();
     }
 
     if (isConstructor()) {
@@ -399,7 +478,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   /** Returns the list of mangled name of parameters' types. */
   private List<String> getMangledParameterTypes() {
     return Lists.transform(
-        getDeclarationDescriptor().getParameterTypeDescriptors(),
+        getParameterTypeDescriptors(),
         parameterTypeDescriptor -> parameterTypeDescriptor.toRawTypeDescriptor().getMangledName());
   }
 
@@ -560,10 +639,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         .collect(joining(";", getName() + "(", ")"));
   }
 
-  private Set<MethodDescriptor> getOverriddenJsMembers() {
-    return Sets.filter(getOverriddenMethodDescriptors(), MethodDescriptor::isJsMember);
-  }
-
   /** Returns a set of the method descriptors that are overridden by {@code methodDescriptor}. */
   @Memoized
   public Set<MethodDescriptor> getOverriddenMethodDescriptors() {
@@ -644,6 +719,17 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       sb.append(" pp");
     }
     switch (getOrigin()) {
+      case SPECIALIZING_BRIDGE:
+        sb.append(" s-bridge");
+        break;
+      case GENERALIZING_BRIDGE:
+        sb.append(" g-bridge");
+        break;
+      case DEFAULT_METHOD_BRIDGE:
+        sb.append(" d-bridge");
+        break;
+      case SOURCE:
+        break;
       default:
         sb.append(" synthetic");
     }
@@ -668,19 +754,27 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     public abstract Builder setSynthetic(boolean isSynthetic);
 
-    public Builder setBridge(MethodDescriptor methodDescriptor) {
-      return setBridgeOrigin(methodDescriptor)
+    public Builder makeBridge(
+        MethodOrigin methodOrigin,
+        MethodDescriptor originDescriptor,
+        MethodDescriptor targetDescriptor) {
+      return setBridgeOrigin(originDescriptor)
+          .setOrigin(methodOrigin)
+          .setBridgeTarget(targetDescriptor)
           .setSynthetic(true)
           // Clear properties that might have been carried over when creating this
-          // descriptor from an exisiting one.
+          // descriptor from an existing one.
           .setDeclarationDescriptor(null)
           .setDefaultMethod(false)
           .setAbstract(false)
           .setNative(false);
     }
 
-    /** Internal use only. Use {@link #setBridge}. */
+    /** Internal use only. Use {@link #makeBridge}. */
     abstract Builder setBridgeOrigin(MethodDescriptor bridgeOrigin);
+
+    /** Internal use only. Use {@link #makeBridge}. */
+    abstract Builder setBridgeTarget(MethodDescriptor bridgeOrigin);
 
     public abstract Builder setEnumSyntheticMethod(boolean isEnumSyntheticMethod);
 
@@ -809,10 +903,10 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
         // Bridge methods cannot be abstract nor native,
         checkState(
-            !methodDescriptor.isBridge()
+            !methodDescriptor.isGeneralizingdBridge()
                 || (!methodDescriptor.isAbstract() || !methodDescriptor.isNative()));
         // Bridge methods have to be marked synthetic,
-        checkState(!methodDescriptor.isBridge() || methodDescriptor.isSynthetic());
+        checkState(!methodDescriptor.isGeneralizingdBridge() || methodDescriptor.isSynthetic());
 
         // Static methods cannot be abstract
         checkState(!methodDescriptor.isStatic() || !methodDescriptor.isAbstract());
@@ -833,7 +927,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         checkState(!methodDescriptor.isDefaultMethod() || !methodDescriptor.isAbstract());
 
         // Default methods can not be abstract.
-        checkState(!methodDescriptor.isDefaultMethod() || !methodDescriptor.isBridge());
+        checkState(
+            !methodDescriptor.isDefaultMethod() || !methodDescriptor.isGeneralizingdBridge());
 
         // Default methods can only be in interfaces.
         checkState(

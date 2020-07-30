@@ -5,6 +5,7 @@ const SuperInterface = goog.require('com.google.j2cl.transpiler.readable.acciden
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let AssertionError = goog.forwardDeclare('java.lang.AssertionError$impl');
+let Error = goog.forwardDeclare('java.lang.Error$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 /**
@@ -31,8 +32,19 @@ class AnotherAccidentalOverride extends Parent {
   // Bridge method.
   /** @override */
   m_foo__java_lang_Object(/** AssertionError */ arg0) {
-    super.m_foo__java_lang_Error(
+    this.m_foo__java_lang_AssertionError(
         /**@type {AssertionError}*/ ($Casts.$to(arg0, AssertionError)));
+  }
+  // Bridge method.
+  /** @override */
+  m_foo__java_lang_Error(/** AssertionError */ arg0) {
+    this.m_foo__java_lang_AssertionError(
+        /**@type {AssertionError}*/ ($Casts.$to(arg0, AssertionError)));
+  }
+  // Specialized bridge method.
+
+  m_foo__java_lang_AssertionError(/** AssertionError */ arg0) {
+    super.m_foo__java_lang_Error(arg0);
   }
 
   static $clinit() {

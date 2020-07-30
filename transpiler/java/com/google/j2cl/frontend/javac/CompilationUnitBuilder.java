@@ -584,7 +584,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     MethodDescriptor iteratorMethodDescriptor =
         environment
             .createDeclaredTypeDescriptor(expressionTypeBinding)
-            .getMethodDescriptorByName("iterator");
+            .getMethodDescriptor("iterator");
     DeclaredTypeDescriptor iteratorTypeDescriptor =
         (DeclaredTypeDescriptor) iteratorMethodDescriptor.getReturnTypeDescriptor();
     Variable iteratorVariable =
@@ -605,15 +605,14 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
     // $iterator.hasNext();
     MethodDescriptor hasNextMethodDescriptor =
-        iteratorTypeDescriptor.getMethodDescriptorByName("hasNext");
+        iteratorTypeDescriptor.getMethodDescriptor("hasNext");
     Expression condition =
         MethodCall.Builder.from(hasNextMethodDescriptor)
             .setQualifier(iteratorVariable.getReference())
             .build();
 
     // T v = $iterator.next();
-    MethodDescriptor nextMethodDescriptor =
-        iteratorTypeDescriptor.getMethodDescriptorByName("next");
+    MethodDescriptor nextMethodDescriptor = iteratorTypeDescriptor.getMethodDescriptor("next");
     ExpressionStatement forVariableDeclarationStatement =
         VariableDeclarationExpression.newBuilder()
             .addVariableDeclaration(

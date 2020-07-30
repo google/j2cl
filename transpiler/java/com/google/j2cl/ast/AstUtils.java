@@ -197,31 +197,6 @@ public class AstUtils {
   }
 
   /**
-   * Creates static forwarding method that has the same signature of {@code targetMethodDescriptor}
-   * in type {@code fromTypeDescriptor}, and delegates to {@code targetMethodDescriptor}, e.g.
-   *
-   * <p>fromTypeDescriptor.method (args) { return Target.prototype.method.call(this,args); } }
-   */
-  public static Method createStaticForwardingMethod(
-      SourcePosition sourcePosition,
-      MethodDescriptor targetMethodDescriptor,
-      DeclaredTypeDescriptor fromTypeDescriptor,
-      String jsDocDescription) {
-
-    return createForwardingMethod(
-        sourcePosition,
-        /* qualifier */ null,
-        MethodDescriptor.Builder.from(targetMethodDescriptor)
-            .setEnclosingTypeDescriptor(fromTypeDescriptor)
-            .setBridge(targetMethodDescriptor.getDeclarationDescriptor())
-            .build(),
-        targetMethodDescriptor,
-        jsDocDescription,
-        /* isStaticDispatch */ true,
-        /* isOverride */ true);
-  }
-
-  /**
    * Creates forwarding method {@code fromMethodDescriptor} that delegates to {@code
    * toMethodDescriptor}, e.g.
    *
@@ -320,7 +295,7 @@ public class AstUtils {
     DeclaredTypeDescriptor boxType = primitiveType.toBoxedType();
 
     MethodDescriptor valueOfMethodDescriptor =
-        boxType.getMethodDescriptorByName(MethodDescriptor.VALUE_OF_METHOD_NAME, primitiveType);
+        boxType.getMethodDescriptor(MethodDescriptor.VALUE_OF_METHOD_NAME, primitiveType);
     return MethodCall.Builder.from(valueOfMethodDescriptor).setArguments(expression).build();
   }
 
@@ -335,7 +310,7 @@ public class AstUtils {
     PrimitiveTypeDescriptor primitiveType = boxType.toUnboxedType();
 
     MethodDescriptor valueMethodDescriptor =
-        boxType.getMethodDescriptorByName(
+        boxType.getMethodDescriptor(
             primitiveType.getSimpleSourceName() + MethodDescriptor.VALUE_METHOD_SUFFIX);
 
     MethodCall methodCall =
@@ -782,51 +757,11 @@ public class AstUtils {
       return expression.makeStatement(sourcePosition);
     }
 
-    // TODO(b/37482332): Bridge method construction incorrectly mixes type variables from the bridge
-    // method and the target method. It should instead do a simple inference for the type variables
-    // in the target method (which reaches here as a method call in expression since, this method is
-    // used for constructing the different type o bridge bodies). For now we just make sure the
-    // return value is consistent with the declared return type if the target has variables that do
-    // not appear in the expected return type.
-    boolean mightHaveUndeclaredTypeVariables =
-        expression.getTypeDescriptor().getAllTypeVariables().stream()
-            .anyMatch(
-                Predicates.not(Predicates.in(methodReturnTypeDescriptor.getAllTypeVariables())));
-    if (mightHaveUndeclaredTypeVariables) {
-      expression =
-          expression.getDeclaredTypeDescriptor().isAssignableTo(methodReturnTypeDescriptor)
-              ? JsDocCastExpression.newBuilder()
-                  .setExpression(expression)
-                  .setCastType(methodReturnTypeDescriptor)
-                  .build()
-              : CastExpression.newBuilder()
-                  .setExpression(expression)
-                  .setCastTypeDescriptor(methodReturnTypeDescriptor)
-                  .build();
-    }
-
     return ReturnStatement.newBuilder()
         .setExpression(expression)
         .setTypeDescriptor(methodReturnTypeDescriptor)
         .setSourcePosition(sourcePosition)
         .build();
-  }
-
-  public static void addInheritedMethodsBySignature(
-      Map<String, MethodDescriptor> methodsBySignature,
-      Iterable<MethodDescriptor> methodDescriptors) {
-    for (MethodDescriptor declaredMethod : methodDescriptors) {
-      if (!declaredMethod.isPolymorphic()) {
-        continue;
-      }
-      MethodDescriptor existingMethod = methodsBySignature.get(declaredMethod.getMethodSignature());
-      // TODO(rluble): implement correct default replacement when existing method != null.
-      // Only replace the method if we found a default definition that implements the method at
-      // that type; be sure to have all relevant examples, the semantics are quite particular.
-      if (existingMethod == null) {
-        methodsBySignature.put(declaredMethod.getMethodSignature(), declaredMethod);
-      }
-    }
   }
 
   /**

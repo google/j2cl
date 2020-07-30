@@ -5,7 +5,6 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
 
 /**
@@ -59,11 +58,6 @@ class Color extends Enum {
         ],
         Color));
   }
-  // Bridge method.
-  /** @override @return {number} */
-  m_compareTo__java_lang_Object(/** Color */ arg0) {
-    return super.compareTo(/**@type {Color}*/ ($Casts.$to(arg0, Color)));
-  }
   /** @return {!Color} */
   static get RED() {
     return (
@@ -114,7 +108,6 @@ class Color extends Enum {
   static $loadModules() {
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-    $Casts = goog.module.get('vmbootstrap.Casts$impl');
     $Enums = goog.module.get('vmbootstrap.Enums$impl');
   }
 }

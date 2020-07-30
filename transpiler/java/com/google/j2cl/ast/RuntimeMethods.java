@@ -177,7 +177,7 @@ public class RuntimeMethods {
     return MethodCall.Builder.from(
             TypeDescriptors.get()
                 .javaemulInternalPreconditions
-                .getMethodDescriptorByName("checkNotNull", TypeDescriptors.get().javaLangObject))
+                .getMethodDescriptor("checkNotNull", TypeDescriptors.get().javaLangObject))
         .setArguments(argument)
         .build();
   }

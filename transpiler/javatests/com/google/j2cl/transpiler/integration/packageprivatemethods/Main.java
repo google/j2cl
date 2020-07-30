@@ -91,8 +91,7 @@ public class Main {
     // calls through m_b
     assertEquals("b.N2.m", N2.callM_b(new N2()));
     assertEquals("b.N2.m", N2.callM_b(new N3()));
-    // TODO(b/160650442): Uncomment when this bug is fixed.
-    // assertEquals("b.N4.m", N2.callM_b(new N4()));
+    assertEquals("b.N4.m", N2.callM_b(new N4()));
   }
 
   private static void testCrossPackageOverrides_intermediateDummyClass() {

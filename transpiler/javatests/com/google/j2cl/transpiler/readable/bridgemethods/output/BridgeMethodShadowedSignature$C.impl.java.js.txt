@@ -5,6 +5,7 @@ const I = goog.require('com.google.j2cl.transpiler.readable.bridgemethods.Bridge
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 /**
  * @template C1
@@ -28,10 +29,16 @@ class C extends B {
   $ctor__com_google_j2cl_transpiler_readable_bridgemethods_BridgeMethodShadowedSignature_C__() {
     this.$ctor__com_google_j2cl_transpiler_readable_bridgemethods_BridgeMethodShadowedSignature_B__();
   }
-  // Bridge method.
-  /** @override @return {?string} */
+  // Specialized bridge method.
+  /** @return {?string} */
   m_get__java_util_function_Consumer(/** Consumer<?> */ arg0) {
     return super.m_get__java_lang_Object(arg0);
+  }
+  // Bridge method.
+  /** @override @return {?string} */
+  m_get__java_lang_Object(/** Consumer<?> */ arg0) {
+    return this.m_get__java_util_function_Consumer(
+        /**@type {Consumer<*>}*/ ($Casts.$to(arg0, Consumer)));
   }
 
   static $clinit() {
@@ -44,7 +51,10 @@ class C extends B {
     return instance instanceof C;
   }
 
-  static $loadModules() {}
+  static $loadModules() {
+    Consumer = goog.module.get('java.util.function.Consumer$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+  }
 }
 $Util.$setClassMetadata(
     C,

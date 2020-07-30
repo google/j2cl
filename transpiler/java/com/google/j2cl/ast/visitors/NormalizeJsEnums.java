@@ -189,7 +189,7 @@ public class NormalizeJsEnums extends NormalizationPass {
     if (declarationMethodSignature.equals("compareTo(java.lang.Enum)")) {
       return TypeDescriptors.get()
           .javaLangComparable
-          .getMethodDescriptorByName("compareTo", TypeDescriptors.get().javaLangObject);
+          .getMethodDescriptor("compareTo", TypeDescriptors.get().javaLangObject);
     }
     if (declarationMethodDescriptor.isOrOverridesJavaLangObjectMethod()) {
       return MethodDescriptor.Builder.from(declarationMethodDescriptor)

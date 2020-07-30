@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.integration.morebridgemethods;
 
+import static com.google.j2cl.transpiler.utils.Asserts.assertThrowsClassCastException;
 import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
 
 import java.util.function.Consumer;
@@ -37,8 +38,9 @@ public class TestCaseHand2 {
   @SuppressWarnings({"unchecked", "rawtypes"})
   public static void test() {
     C c = new C();
-    assertTrue(((B) c).get("").equals("B get B2"));
-    assertTrue(c.get("").equals("B get B2"));
+    assertThrowsClassCastException(() -> ((B) c).get(""), Consumer.class);
+    assertTrue(((B) c).get((String) null).equals("B get B2"));
+    assertTrue(c.get((String) null).equals("B get B2"));
     assertTrue(((I) c).get(null).equals("B get B2"));
   }
 }

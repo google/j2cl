@@ -30,6 +30,13 @@ class NativeJsTypeInterfaceWithOverlayImpl extends j_l_Object {
   m() {
     return 0;
   }
+  // Default method forwarding stub.
+  /** @return {number} */
+  m_callM__() {
+    return $Overlay
+        .m_callM__$devirt__com_google_j2cl_transpiler_readable_jsoverlay_Main_NativeJsTypeInterfaceWithOverlay(
+            this);
+  }
 
   static $clinit() {
     NativeJsTypeInterfaceWithOverlayImpl.$clinit = () => {};
@@ -41,7 +48,10 @@ class NativeJsTypeInterfaceWithOverlayImpl extends j_l_Object {
     return instance instanceof NativeJsTypeInterfaceWithOverlayImpl;
   }
 
-  static $loadModules() {}
+  static $loadModules() {
+    $Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay$impl');
+  }
 }
 $Util.$setClassMetadata(
     NativeJsTypeInterfaceWithOverlayImpl,

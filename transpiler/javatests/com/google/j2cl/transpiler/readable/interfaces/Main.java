@@ -33,9 +33,7 @@ public class Main {
   }
 
   interface SubInterface extends Interface<String> {
-    // TODO(b/73140371): When the bug is fixed rename defaultMethodX to defaultMethod so that it
-    // overrides the default method in the parent.
-    default void defaultMethodX(String s) {
+    default void defaultMethod(String s) {
       Interface.super.defaultMethod(s);
     }
   }

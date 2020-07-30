@@ -21,7 +21,6 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.ArrayLength;
 import com.google.j2cl.ast.ArrayTypeDescriptor;
@@ -965,27 +964,12 @@ class JdtUtils {
     checkArgument(!typeBinding.isArray());
     checkArgument(!typeBinding.isPrimitive());
 
-    Supplier<ImmutableMap<String, MethodDescriptor>> declaredMethods =
-        () -> {
-          ImmutableMap.Builder<String, MethodDescriptor> mapBuilder = ImmutableMap.builder();
-          for (IMethodBinding methodBinding : typeBinding.getDeclaredMethods()) {
-            MethodDescriptor methodDescriptor = JdtUtils.createMethodDescriptor(methodBinding);
-            mapBuilder.put(
-                // TODO(b/33595109): Using the method declaration signature here is kind of iffy;
-                // but needs to be done because parameterized types might make multiple
-                // superinterface methods collide which are represented by JDT as different method
-                // bindings but with the same signature, e.g.
-                //   interface I<U, V extends Serializable> {
-                //     void foo(U u);
-                //     void foo(V v);
-                //   }
-                // When considering the type I<A,A>, there are two different method bindings
-                // that describe the single method 'void foo(A a)' each with the respective
-                // method declaration.
-                methodDescriptor.getDeclarationDescriptor().getMethodSignature(), methodDescriptor);
-          }
-          return mapBuilder.build();
-        };
+    Supplier<ImmutableList<MethodDescriptor>> declaredMethods =
+        () ->
+            Arrays.stream(typeBinding.getDeclaredMethods())
+                .map(JdtUtils::createMethodDescriptor)
+                .collect(toImmutableList());
+    ;
 
     Supplier<ImmutableList<FieldDescriptor>> declaredFields =
         () ->
@@ -1083,27 +1067,12 @@ class JdtUtils {
     boolean isAbstract = isAbstract(typeBinding);
     boolean isFinal = isFinal(typeBinding);
 
-    Supplier<ImmutableMap<String, MethodDescriptor>> declaredMethods =
-        () -> {
-          ImmutableMap.Builder<String, MethodDescriptor> mapBuilder = ImmutableMap.builder();
-          for (IMethodBinding methodBinding : typeBinding.getDeclaredMethods()) {
-            MethodDescriptor methodDescriptor = createMethodDescriptor(methodBinding);
-            mapBuilder.put(
-                // TODO(b/33595109): Using the method declaration signature here is kind of iffy;
-                // but needs to be done because parameterized types might make multiple
-                // superinterface methods collide which are represented by JDT as different method
-                // bindings but with the same signature, e.g.
-                //   interface I<U, V extends Serializable> {
-                //     void foo(U u);
-                //     void foo(V v);
-                //   }
-                // When considering the type I<A,A>, there are two different method bindings
-                // that describe the single method 'void foo(A a)' each with the respective
-                // method declaration.
-                methodDescriptor.getDeclarationDescriptor().getMethodSignature(), methodDescriptor);
-          }
-          return mapBuilder.build();
-        };
+    Supplier<ImmutableList<MethodDescriptor>> declaredMethods =
+        () ->
+            Arrays.stream(typeBinding.getDeclaredMethods())
+                .map(JdtUtils::createMethodDescriptor)
+                .collect(toImmutableList());
+    ;
 
     Supplier<ImmutableList<FieldDescriptor>> declaredFields =
         () ->

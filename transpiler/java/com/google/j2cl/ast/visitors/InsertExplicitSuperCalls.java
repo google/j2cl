@@ -109,7 +109,7 @@ public class InsertExplicitSuperCalls extends NormalizationPass {
     // parameterless constructor or if there is no parameterless constructor a varargs constructor
     // that can be called with no parameters.
     Optional<MethodDescriptor> superContructor =
-        superTypeDescriptor.getMethodDescriptors().stream()
+        superTypeDescriptor.getDeclaredMethodDescriptors().stream()
             .filter(MethodDescriptor::isConstructor)
             .filter(m -> m.isVisibleFrom(typeDescriptor))
             .filter(m -> m.getParameterDescriptors().isEmpty())
@@ -125,7 +125,7 @@ public class InsertExplicitSuperCalls extends NormalizationPass {
     // point type checking succeed in the frontend and if there were any ambiguity the compile would
     // have produced an error already.
     superContructor =
-        superTypeDescriptor.getMethodDescriptors().stream()
+        superTypeDescriptor.getDeclaredMethodDescriptors().stream()
             .filter(MethodDescriptor::isConstructor)
             .filter(m -> m.isVisibleFrom(typeDescriptor))
             .filter(m -> m.getParameterDescriptors().size() == 1)
@@ -138,7 +138,7 @@ public class InsertExplicitSuperCalls extends NormalizationPass {
 
     // No appropriate constructor found, it must be the implicit constructor.
     checkState(
-        superTypeDescriptor.getMethodDescriptors().stream()
+        superTypeDescriptor.getDeclaredMethodDescriptors().stream()
             .noneMatch(MethodDescriptor::isConstructor));
     return AstUtils.createImplicitConstructorDescriptor(superTypeDescriptor);
   }

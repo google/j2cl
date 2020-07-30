@@ -5,7 +5,6 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
 
 /**
@@ -60,11 +59,6 @@ class Numbers extends Enum {
         ],
         Numbers));
   }
-  // Bridge method.
-  /** @override @return {number} */
-  m_compareTo__java_lang_Object(/** Numbers */ arg0) {
-    return super.compareTo(/**@type {Numbers}*/ ($Casts.$to(arg0, Numbers)));
-  }
   /** @return {!Numbers} */
   static get f_ONE__com_google_j2cl_transpiler_readable_switchstatement_Numbers() {
     return (
@@ -108,7 +102,6 @@ class Numbers extends Enum {
   static $loadModules() {
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-    $Casts = goog.module.get('vmbootstrap.Casts$impl');
     $Enums = goog.module.get('vmbootstrap.Enums$impl');
   }
 }

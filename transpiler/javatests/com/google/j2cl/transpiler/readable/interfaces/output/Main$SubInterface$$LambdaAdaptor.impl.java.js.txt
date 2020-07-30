@@ -4,7 +4,8 @@ const SubInterface = goog.require('com.google.j2cl.transpiler.readable.interface
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let Interface = goog.forwardDeclare('com.google.j2cl.transpiler.readable.interfaces.Main.Interface$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 /**
  * @implements {SubInterface}
@@ -33,18 +34,17 @@ class $LambdaAdaptor extends j_l_Object {
       $function();
     }
   }
-  // Default method forwarding stub.
-  /** @override */
-  m_defaultMethodX__java_lang_String(/** ?string */ arg0) {
-    SubInterface
-        .m_defaultMethodX__$default__com_google_j2cl_transpiler_readable_interfaces_Main_SubInterface__java_lang_String(
-            this, arg0);
-  }
-  // Default method forwarding stub.
+  // Bridge method.
   /** @override */
   m_defaultMethod__java_lang_Object(/** ?string */ arg0) {
-    Interface
-        .m_defaultMethod__$default__com_google_j2cl_transpiler_readable_interfaces_Main_Interface__java_lang_Object(
+    this.m_defaultMethod__java_lang_String(
+        /**@type {?string}*/ ($Casts.$to(arg0, j_l_String)));
+  }
+  // Default method forwarding stub.
+
+  m_defaultMethod__java_lang_String(/** ?string */ arg0) {
+    SubInterface
+        .m_defaultMethod__$default__com_google_j2cl_transpiler_readable_interfaces_Main_SubInterface__java_lang_String(
             this, arg0);
   }
 
@@ -60,8 +60,8 @@ class $LambdaAdaptor extends j_l_Object {
   }
 
   static $loadModules() {
-    Interface = goog.module.get(
-        'com.google.j2cl.transpiler.readable.interfaces.Main.Interface$impl');
+    j_l_String = goog.module.get('java.lang.String$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
   }
 }
 $Util.$setClassMetadata(

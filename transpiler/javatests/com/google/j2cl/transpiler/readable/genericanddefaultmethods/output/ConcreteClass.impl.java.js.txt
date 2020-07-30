@@ -4,6 +4,9 @@ const GenericClass = goog.require('com.google.j2cl.transpiler.readable.generican
 const InterfaceWithDefault = goog.require('com.google.j2cl.transpiler.readable.genericanddefaultmethods.InterfaceWithDefault$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
 /**
  * @extends {GenericClass<?string>}
  * @implements {InterfaceWithDefault}
@@ -25,10 +28,16 @@ class ConcreteClass extends GenericClass {
   $ctor__com_google_j2cl_transpiler_readable_genericanddefaultmethods_ConcreteClass__() {
     this.$ctor__com_google_j2cl_transpiler_readable_genericanddefaultmethods_GenericClass__();
   }
-  // Bridge method.
-  /** @override */
+  // Specialized bridge method.
+
   m_foo__java_lang_String(/** ?string */ arg0) {
     super.m_foo__java_lang_Object(arg0);
+  }
+  // Bridge method.
+  /** @override */
+  m_foo__java_lang_Object(/** ?string */ arg0) {
+    this.m_foo__java_lang_String(
+        /**@type {?string}*/ ($Casts.$to(arg0, j_l_String)));
   }
 
   static $clinit() {
@@ -42,7 +51,10 @@ class ConcreteClass extends GenericClass {
     return instance instanceof ConcreteClass;
   }
 
-  static $loadModules() {}
+  static $loadModules() {
+    j_l_String = goog.module.get('java.lang.String$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+  }
 }
 $Util.$setClassMetadata(
     ConcreteClass,

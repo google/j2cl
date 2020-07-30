@@ -4,9 +4,6 @@ const B = goog.require('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.
 const J = goog.require('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.J$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let j_l_String = goog.forwardDeclare('java.lang.String$impl');
-let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-
 /**
  * @implements {J<?string>}
  */
@@ -27,11 +24,6 @@ class E extends B {
   $ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_E__() {
     this.$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_B__();
   }
-  // Bridge method.
-  /** @override */
-  m_bar__java_lang_Object(/** ?string */ arg0) {
-    super.bar(/**@type {?string}*/ ($Casts.$to(arg0, j_l_String)));
-  }
 
   static $clinit() {
     E.$clinit = () => {};
@@ -43,10 +35,7 @@ class E extends B {
     return instance instanceof E;
   }
 
-  static $loadModules() {
-    j_l_String = goog.module.get('java.lang.String$impl');
-    $Casts = goog.module.get('vmbootstrap.Casts$impl');
-  }
+  static $loadModules() {}
 }
 $Util.$setClassMetadata(
     E, 'com.google.j2cl.transpiler.readable.bridgejsmethod.Main$E');

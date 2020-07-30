@@ -8,7 +8,6 @@ let $1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.enums.Enum2.$1
 let j_l_Object = goog.forwardDeclare('java.lang.Object$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
 
 /**
@@ -113,11 +112,6 @@ class Enum2 extends Enum {
         ],
         Enum2));
   }
-  // Bridge method.
-  /** @override @return {number} */
-  m_compareTo__java_lang_Object(/** Enum2 */ arg0) {
-    return super.compareTo(/**@type {Enum2}*/ ($Casts.$to(arg0, Enum2)));
-  }
   /** @private */
   $init___$p_com_google_j2cl_transpiler_readable_enums_Enum2() {
     this.f_foo__com_google_j2cl_transpiler_readable_enums_Enum2 =
@@ -206,7 +200,6 @@ class Enum2 extends Enum {
     j_l_Object = goog.module.get('java.lang.Object$impl');
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-    $Casts = goog.module.get('vmbootstrap.Casts$impl');
     $Enums = goog.module.get('vmbootstrap.Enums$impl');
   }
 }

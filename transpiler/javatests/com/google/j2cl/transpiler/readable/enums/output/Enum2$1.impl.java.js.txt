@@ -3,8 +3,6 @@ goog.module('com.google.j2cl.transpiler.readable.enums.Enum2.$1$impl');
 const Enum2 = goog.require('com.google.j2cl.transpiler.readable.enums.Enum2$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-
 class $1 extends Enum2 {
   /** @protected */
   constructor() {
@@ -26,11 +24,6 @@ class $1 extends Enum2 {
     this.$ctor__com_google_j2cl_transpiler_readable_enums_Enum2__java_lang_String__int__int(
         $name, $ordinal, $_0);
   }
-  // Bridge method.
-  /** @override @return {number} */
-  m_compareTo__java_lang_Object(/** Enum2 */ arg0) {
-    return super.compareTo(/**@type {Enum2}*/ ($Casts.$to(arg0, Enum2)));
-  }
 
   static $clinit() {
     $1.$clinit = () => {};
@@ -42,9 +35,7 @@ class $1 extends Enum2 {
     return instance instanceof $1;
   }
 
-  static $loadModules() {
-    $Casts = goog.module.get('vmbootstrap.Casts$impl');
-  }
+  static $loadModules() {}
 }
 $Util.$setClassMetadata(
     $1, 'com.google.j2cl.transpiler.readable.enums.Enum2$1');

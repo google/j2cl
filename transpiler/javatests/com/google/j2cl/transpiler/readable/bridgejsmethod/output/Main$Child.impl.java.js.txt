@@ -4,7 +4,6 @@ const Parent = goog.require('com.google.j2cl.transpiler.readable.bridgejsmethod.
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Main = goog.forwardDeclare('com.google.j2cl.transpiler.readable.bridgejsmethod.Main$impl');
-let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 /**
  * @extends {Parent<Child>}
@@ -34,20 +33,6 @@ class Child extends Parent {
     this.$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_Parent__com_google_j2cl_transpiler_readable_bridgejsmethod_Main(
         $outer_this);
   }
-  // Bridge method.
-  /** @override */
-  m_method__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_Parent(
-      /** Child */ arg0) {
-    super.m_method__java_lang_Object(
-        /**@type {Child}*/ ($Casts.$to(arg0, Child)));
-  }
-  // Bridge method.
-  /** @override */
-  m_method__java_lang_Object(/** Child */ arg0) {
-    super
-        .m_method__com_google_j2cl_transpiler_readable_bridgejsmethod_Main_Parent(
-            /**@type {Child}*/ ($Casts.$to(arg0, Child)));
-  }
 
   static $clinit() {
     Child.$clinit = () => {};
@@ -59,9 +44,7 @@ class Child extends Parent {
     return instance instanceof Child;
   }
 
-  static $loadModules() {
-    $Casts = goog.module.get('vmbootstrap.Casts$impl');
-  }
+  static $loadModules() {}
 }
 $Util.$setClassMetadata(
     Child, 'com.google.j2cl.transpiler.readable.bridgejsmethod.Main$Child');

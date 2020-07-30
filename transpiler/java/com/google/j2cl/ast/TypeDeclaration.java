@@ -24,20 +24,15 @@ import com.google.auto.value.extension.memoized.Memoized;
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
-import com.google.common.collect.Sets;
 import com.google.common.collect.Streams;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.common.ThreadLocalInterner;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
@@ -476,14 +471,6 @@ public abstract class TypeDeclaration
   }
 
   /**
-   * Returns a set of the type descriptors of interfaces that are explicitly implemented either
-   * directly on this type or on some super type or super interface.
-   */
-  public Set<DeclaredTypeDescriptor> getTransitiveInterfaceTypeDescriptors() {
-    return toUnparameterizedTypeDescriptor().getTransitiveInterfaceTypeDescriptors();
-  }
-
-  /**
    * Returns the erasure type (see definition of erasure type at
    * http://help.eclipse.org/luna/index.jsp) with an empty type arguments list.
    */
@@ -507,16 +494,10 @@ public abstract class TypeDeclaration
                     .map(FieldDescriptor::toRawMemberDescriptor)
                     .collect(toImmutableList()))
         .setDeclaredMethodDescriptorsFactory(
-            () -> {
-              ImmutableMap.Builder<String, MethodDescriptor>
-                  declaredMethodDescriptorsBySignatureBuilder = ImmutableMap.builder();
-              for (MethodDescriptor methodDescriptor : getDeclaredMethodDescriptors()) {
-                declaredMethodDescriptorsBySignatureBuilder.put(
-                    methodDescriptor.getDeclarationDescriptor().getMethodSignature(),
-                    methodDescriptor.toRawMemberDescriptor());
-              }
-              return declaredMethodDescriptorsBySignatureBuilder.build();
-            })
+            () ->
+                getDeclaredMethodDescriptors().stream()
+                    .map(MethodDescriptor::toRawMemberDescriptor)
+                    .collect(toImmutableList()))
         .setJsFunctionMethodDescriptorFactory(
             () ->
                 applyOrNull(
@@ -587,28 +568,6 @@ public abstract class TypeDeclaration
     return getUniqueId().hashCode();
   }
 
-  /**
-   * The list of methods declared in the type from the JDT. Note: this does not include methods we
-   * synthesize and add to the type like bridge methods.
-   */
-  @Memoized
-  Map<String, MethodDescriptor> getDeclaredMethodDescriptorsBySignature() {
-    return getDeclaredMethodDescriptorsFactory().get(this);
-  }
-
-  /**
-   * Returns true if {@code TypeDescriptor} declares a method with the same signature as {@code
-   * methodDescriptor} in its body.
-   */
-  private boolean isOverriddenHere(MethodDescriptor methodDescriptor) {
-    for (MethodDescriptor declaredMethodDescriptor : getDeclaredMethodDescriptors()) {
-      if (methodDescriptor.isOverride(declaredMethodDescriptor)) {
-        return true;
-      }
-    }
-    return false;
-  }
-
   /** Returns {@code true} if {@code this} is subtype of {@code that}. */
   public boolean isSubtypeOf(TypeDeclaration that) {
     // TODO(b/70951075): distinguish between Java isSubtypeOf and our target interpretation of
@@ -638,7 +597,7 @@ public abstract class TypeDeclaration
    */
   @Memoized
   public Collection<MethodDescriptor> getDeclaredMethodDescriptors() {
-    return getDeclaredMethodDescriptorsBySignature().values();
+    return getDeclaredMethodDescriptorsFactory().get(this);
   }
 
   /** Returns the JsConstructor for this class if any. */
@@ -656,31 +615,6 @@ public abstract class TypeDeclaration
   @Memoized
   public Collection<FieldDescriptor> getDeclaredFieldDescriptors() {
     return getDeclaredFieldDescriptorsFactory().get(this);
-  }
-
-  /**
-   * Returns the method descriptors in this type's interfaces that are accidentally overridden.
-   *
-   * <p>'Accidentally overridden' means the type itself does not have its own declared overriding
-   * method and the method it inherits does not really override, but just has the same signature as
-   * the overridden method.
-   */
-  @Memoized
-  public List<MethodDescriptor> getAccidentallyOverriddenMethodDescriptors() {
-    List<MethodDescriptor> accidentalOverriddenMethods = new ArrayList<>();
-
-    Set<DeclaredTypeDescriptor> transitiveSuperTypeInterfaceTypeDescriptors =
-        getSuperTypeDescriptor() != null
-            ? getSuperTypeDescriptor().getTransitiveInterfaceTypeDescriptors()
-            : ImmutableSet.of();
-    for (DeclaredTypeDescriptor superInterfaceTypeDescriptor :
-        Sets.difference(
-            getTransitiveInterfaceTypeDescriptors(), transitiveSuperTypeInterfaceTypeDescriptors)) {
-      accidentalOverriddenMethods.addAll(
-          getNotOverriddenMethodDescriptors(superInterfaceTypeDescriptor));
-    }
-
-    return accidentalOverriddenMethods;
   }
 
   /**
@@ -728,35 +662,6 @@ public abstract class TypeDeclaration
     return overriddenMethodDescriptorsExceptSelf;
   }
 
-  /** Returns the method descriptors that are declared in a particular super type but not here. */
-  private List<MethodDescriptor> getNotOverriddenMethodDescriptors(
-      DeclaredTypeDescriptor superTypeDescriptor) {
-    return superTypeDescriptor.getDeclaredMethodDescriptors().stream()
-        .filter(methodDescriptor -> !isOverriddenHere(methodDescriptor))
-        .collect(toImmutableList());
-  }
-
-  /**
-   * Returns the method descriptor of the nearest method in this type's super classes that overrides
-   * (regularly or accidentally) {@code methodDescriptor}.
-   */
-  public MethodDescriptor getOverridingMethodDescriptorInSuperclasses(
-      MethodDescriptor methodDescriptor) {
-    DeclaredTypeDescriptor superTypeDescriptor = getSuperTypeDescriptor();
-    while (superTypeDescriptor != null) {
-      for (MethodDescriptor superMethodDescriptor :
-          superTypeDescriptor.getDeclaredMethodDescriptors()) {
-        // TODO(stalcup): exclude package private method, and add a test for it.
-        if (superMethodDescriptor.isPolymorphic()
-            && superMethodDescriptor.isOverride(methodDescriptor)) {
-          return superMethodDescriptor;
-        }
-      }
-      superTypeDescriptor = superTypeDescriptor.getSuperTypeDescriptor();
-    }
-    return null;
-  }
-
   @Override
   public final String toString() {
     return getUniqueId();
@@ -793,8 +698,7 @@ public abstract class TypeDeclaration
   abstract DescriptorFactory<DeclaredTypeDescriptor> getSuperTypeDescriptorFactory();
 
   @Nullable
-  abstract DescriptorFactory<ImmutableMap<String, MethodDescriptor>>
-      getDeclaredMethodDescriptorsFactory();
+  abstract DescriptorFactory<ImmutableList<MethodDescriptor>> getDeclaredMethodDescriptorsFactory();
 
   @Nullable
   abstract DescriptorFactory<ImmutableList<FieldDescriptor>> getDeclaredFieldDescriptorsFactory();
@@ -835,7 +739,7 @@ public abstract class TypeDeclaration
         .setUnusableByJsSuppressed(false)
         .setDeprecated(false)
         .setTypeParameterDescriptors(ImmutableList.of())
-        .setDeclaredMethodDescriptorsFactory(ImmutableMap::of)
+        .setDeclaredMethodDescriptorsFactory(() -> ImmutableList.of())
         .setDeclaredFieldDescriptorsFactory(() -> ImmutableList.of())
         .setInterfaceTypeDescriptorsFactory(() -> ImmutableList.of())
         .setUnparameterizedTypeDescriptorFactory(unparameterizedFactory)
@@ -923,10 +827,10 @@ public abstract class TypeDeclaration
     }
 
     public abstract Builder setDeclaredMethodDescriptorsFactory(
-        DescriptorFactory<ImmutableMap<String, MethodDescriptor>> declaredMethodDescriptorsFactory);
+        DescriptorFactory<ImmutableList<MethodDescriptor>> declaredMethodDescriptorsFactory);
 
     public Builder setDeclaredMethodDescriptorsFactory(
-        Supplier<ImmutableMap<String, MethodDescriptor>> declaredMethodDescriptorsFactory) {
+        Supplier<ImmutableList<MethodDescriptor>> declaredMethodDescriptorsFactory) {
       return setDeclaredMethodDescriptorsFactory(
           typeDescriptor -> declaredMethodDescriptorsFactory.get());
     }

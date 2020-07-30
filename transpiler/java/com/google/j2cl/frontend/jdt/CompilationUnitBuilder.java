@@ -1074,7 +1074,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         // correctly if there were many overloads is extra complexity that can be left out until
         // it is really needed.
         String targetMethodName = expression.getName().getIdentifier();
-        return TypeDescriptors.get().javaLangObject.getMethodDescriptors().stream()
+        return TypeDescriptors.get().javaLangObject.getDeclaredMethodDescriptors().stream()
             .filter(m -> m.getName().equals(targetMethodName))
             .collect(MoreCollectors.onlyElement());
       }

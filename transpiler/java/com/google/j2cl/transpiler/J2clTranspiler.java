@@ -21,7 +21,6 @@ import com.google.j2cl.ast.visitors.ArrayAccessNormalizer;
 import com.google.j2cl.ast.visitors.BridgeMethodsCreator;
 import com.google.j2cl.ast.visitors.ControlStatementFormatter;
 import com.google.j2cl.ast.visitors.CreateImplicitConstructors;
-import com.google.j2cl.ast.visitors.DefaultMethodsResolver;
 import com.google.j2cl.ast.visitors.DevirtualizeBoxedTypesAndJsFunctionImplementations;
 import com.google.j2cl.ast.visitors.DevirtualizeMethodCalls;
 import com.google.j2cl.ast.visitors.ExpandCompoundAssignments;
@@ -47,7 +46,6 @@ import com.google.j2cl.ast.visitors.InsertStringConversions;
 import com.google.j2cl.ast.visitors.InsertTypeAnnotationOnGenericReturnTypes;
 import com.google.j2cl.ast.visitors.InsertUnboxingConversions;
 import com.google.j2cl.ast.visitors.InsertWideningPrimitiveConversions;
-import com.google.j2cl.ast.visitors.JsBridgeMethodsCreator;
 import com.google.j2cl.ast.visitors.JsInteropRestrictionsChecker;
 import com.google.j2cl.ast.visitors.MoveVariableDeclarationsToEnclosingBlock;
 import com.google.j2cl.ast.visitors.NormalizationPass;
@@ -79,7 +77,6 @@ import com.google.j2cl.ast.visitors.NormalizeTryWithResources;
 import com.google.j2cl.ast.visitors.NormalizeTypeLiterals;
 import com.google.j2cl.ast.visitors.OptimizeAnonymousInnerClassesToFunctionExpressions;
 import com.google.j2cl.ast.visitors.OptimizeAutoValue;
-import com.google.j2cl.ast.visitors.PackagePrivateMethodsDispatcher;
 import com.google.j2cl.ast.visitors.RemoveNoopStatements;
 import com.google.j2cl.ast.visitors.RemoveUnneededJsDocCasts;
 import com.google.j2cl.ast.visitors.RewriteStringEquals;
@@ -183,10 +180,7 @@ class J2clTranspiler {
         // Default constructors and explicit super calls should be synthesized first.
         new CreateImplicitConstructors(),
         new InsertExplicitSuperCalls(),
-        new DefaultMethodsResolver(),
-        new PackagePrivateMethodsDispatcher(),
         new BridgeMethodsCreator(),
-        new JsBridgeMethodsCreator(),
         // TODO(b/31865368): Remove RewriteStringEquals pass once delayed field initialization
         //  is introduced and String.java gets updated to use it.
         new RewriteStringEquals(),

@@ -19,14 +19,13 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
-import static com.google.common.collect.ImmutableMap.toImmutableMap;
+import static com.google.common.collect.MoreCollectors.toOptional;
 import static java.util.stream.Collectors.joining;
 
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.MoreCollectors;
 import com.google.common.collect.Streams;
@@ -157,8 +156,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
 
   /* PRIVATE AUTO_VALUE PROPERTIES */
   @Nullable
-  abstract DescriptorFactory<ImmutableMap<String, MethodDescriptor>>
-      getDeclaredMethodDescriptorsFactory();
+  abstract DescriptorFactory<ImmutableList<MethodDescriptor>> getDeclaredMethodDescriptorsFactory();
 
   @Nullable
   abstract DescriptorFactory<MethodDescriptor> getSingleAbstractMethodDescriptorFactory();
@@ -183,29 +181,6 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   @Memoized
   public ImmutableList<DeclaredTypeDescriptor> getInterfaceTypeDescriptors() {
     return getInterfaceTypeDescriptorsFactory().get(this);
-  }
-
-  /**
-   * Returns a set of the type descriptors of interfaces that are explicitly implemented either
-   * directly on this type or on some super type or super interface.
-   */
-  @Memoized
-  public Set<DeclaredTypeDescriptor> getTransitiveInterfaceTypeDescriptors() {
-    Set<DeclaredTypeDescriptor> typeDescriptors = new LinkedHashSet<>();
-
-    // Recursively gather from super interfaces.
-    for (DeclaredTypeDescriptor interfaceTypeDescriptor : getInterfaceTypeDescriptors()) {
-      typeDescriptors.add(interfaceTypeDescriptor);
-      typeDescriptors.addAll(interfaceTypeDescriptor.getTransitiveInterfaceTypeDescriptors());
-    }
-
-    // Recursively gather from super type.
-    DeclaredTypeDescriptor superTypeDescriptor = getSuperTypeDescriptor();
-    if (superTypeDescriptor != null) {
-      typeDescriptors.addAll(superTypeDescriptor.getTransitiveInterfaceTypeDescriptors());
-    }
-
-    return typeDescriptors;
   }
 
   @Nullable
@@ -417,48 +392,12 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   }
 
   /**
-   * The list of methods declared in the type from the JDT. Note: this does not include methods we
-   * synthesize and add to the type like bridge methods.
-   */
-  @Memoized
-  Map<String, MethodDescriptor> getDeclaredMethodDescriptorsBySignature() {
-    return getDeclaredMethodDescriptorsFactory().get(this);
-  }
-
-  /**
-   * The list of methods in the type from the JDT. Note: this does not include methods we synthesize
-   * and add to the type like bridge methods.
-   */
-  @Memoized
-  Map<String, MethodDescriptor> getMethodDescriptorsBySignature() {
-    // TODO(rluble): update this code to handle package private methods, bridges and verify that it
-    // correctly handles default methods.
-    Map<String, MethodDescriptor> methodDescriptorsBySignature = new LinkedHashMap<>();
-
-    // Add all methods declared in the current type itself
-    methodDescriptorsBySignature.putAll(getDeclaredMethodDescriptorsBySignature());
-
-    // Add all the methods from the super class.
-    if (getSuperTypeDescriptor() != null) {
-      AstUtils.addInheritedMethodsBySignature(
-          methodDescriptorsBySignature, getSuperTypeDescriptor().getMethodDescriptors());
-    }
-
-    // Finally add the methods that appear in super interfaces.
-    for (DeclaredTypeDescriptor implementedInterface : getInterfaceTypeDescriptors()) {
-      AstUtils.addInheritedMethodsBySignature(
-          methodDescriptorsBySignature, implementedInterface.getMethodDescriptors());
-    }
-    return methodDescriptorsBySignature;
-  }
-
-  /**
    * The list of methods declared in the type. Note: this does not include methods synthetic methods
    * (like bridge methods) nor supertype methods that are not overridden in the type.
    */
   @Memoized
   public Collection<MethodDescriptor> getDeclaredMethodDescriptors() {
-    return getDeclaredMethodDescriptorsBySignature().values();
+    return getDeclaredMethodDescriptorsFactory().get(this);
   }
 
   /**
@@ -482,15 +421,378 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
    * Retrieves the method descriptor with name {@code name} and the corresponding parameter types if
    * there is a method with that signature.
    */
-  public MethodDescriptor getMethodDescriptorByName(
-      String methodName, TypeDescriptor... parameters) {
-    return getMethodDescriptorsBySignature()
-        .get(MethodDescriptor.buildMethodSignature(methodName, parameters));
+  public MethodDescriptor getMethodDescriptor(String methodName, TypeDescriptor... parameters) {
+    return getMethodDescriptors().stream()
+        .filter(Predicates.not(MethodDescriptor::isGeneralizingdBridge))
+        .filter(
+            m ->
+                m.getOverrideSignature()
+                    .equals(MethodDescriptor.buildMethodSignature(methodName, parameters)))
+        .collect(toOptional())
+        .orElse(null);
   }
 
   /** The list of all methods available on a given type. */
-  public Collection<MethodDescriptor> getMethodDescriptors() {
-    return getMethodDescriptorsBySignature().values();
+  private ImmutableList<MethodDescriptor> getMethodDescriptors() {
+    return Streams.concat(
+            getPolymorphicMethods().stream(),
+            getDeclaredMethodDescriptors().stream()
+                .filter(Predicates.not(DeclaredTypeDescriptor::isActuallyPolymorphic)))
+        .collect(toImmutableList());
+  }
+
+  // The goal of this algorithm is to find: (1) all the mangled names that this type needs to
+  // respond to, and (2) which method, i.e. which implementation, should respond to the mangle name.
+  //
+  // The first part is easier. We can collect all the mangled names for the super type hierarchy and
+  // add the ones introduced by this type.
+  //
+  // Once we have a list of all the mangled names for the type, we can iterate over them and see if
+  // the implementation responding to it is the correct one; if it is not the correct one or there
+  // is none (e.g. default method) we create a bridge method.
+  //
+  // The complex part is how to find the correct implementation method. To answer that we need to
+  // find out how mangled names are related to each other with respect to Java override semantics.
+  //
+  // The key to this relation is to describe each set of related mangled names by a unique
+  // "override key", and to find out which implementation method is the one that will handle the
+  // mangled names in the set corresponding to each "override key".
+  //
+  // The method getPolymorphicMethods() does most of the hard work including the recursive discovery
+  // of all the mangled names.
+  //
+  // The method getMangledNameToOverrideKeyMap() computes the "override key" corresponding to each
+  // mangled name as a map.
+  //
+  // The method getOverrideKeyToTargetMap() computes the implementation method for each set also as
+  // a map by the "override key".
+
+  /**
+   * Computes all the methods exposed by this type, including supertype methods and synthetic
+   * bridges. In the results there is one method per mangled name handled by this type.
+   */
+  @Memoized
+  public Collection<MethodDescriptor> getPolymorphicMethods() {
+    DeclaredTypeDescriptor declaration = toUnparameterizedTypeDescriptor();
+    if (!declaration.equals(this)) {
+      return specializeMethods(
+          declaration.getPolymorphicMethods(), getTransitiveParameterization());
+    }
+
+    // The bridges need to be computed at the type declaration in order to create them as
+    // declarations. That is why the computation is performed at the unparameterized type descriptor
+    // (as it is equivalent to the type declaration).
+
+    Map<String, MethodDescriptor> methodsByMangledName = new LinkedHashMap<>();
+
+    // 1. Add interface methods.
+    getInterfaceTypeDescriptors().stream()
+        .flatMap(s -> s.getPolymorphicMethods().stream())
+        .forEach(m -> methodsByMangledName.put(m.getMangledName(), m));
+
+    // 2.Add methods from the super class.
+    if (getSuperTypeDescriptor() != null) {
+      getSuperTypeDescriptor()
+          .getPolymorphicMethods()
+          .forEach(m -> methodsByMangledName.put(m.getMangledName(), m));
+    }
+
+    // 3. Add the new methods that are declared in the class, replacing the overridden methods.
+    getDeclaredMethodDescriptors().stream()
+        .filter(DeclaredTypeDescriptor::isActuallyPolymorphic)
+        .forEach(m -> methodsByMangledName.put(m.getMangledName(), m));
+
+    if (isInterface()) {
+      // Even though it is possible to do some bridge synthesis in interfaces through default
+      // methods, it introduces complexity and is less optimal since the default method will
+      // still need a bridge stub in the implementing class.
+      // Hence all bridge stubs are synthesized in classes.
+      return methodsByMangledName.values();
+    }
+
+    // At this point we have ALL the mangled names that NEED to be handled by this class and
+    // what is the method that is handling those before the bridge computation.
+    // In what follows we will have to determine whether the method handling the mangled name is
+    // at the right target or not, and if not a bridge will be created.
+    Map<String, String> overrideKeysByMangledName = getMangledNameToOverrideKeyMap();
+    Map<String, MethodDescriptor> targetMethodsByOverrideKey =
+        new LinkedHashMap<>(getOverrideKeyToTargetMap());
+
+    // Bridge method creation proceeds in two stages: the first stage determines the bridges that
+    // are specialized overrides of the targets (see MethodDescriptor.isSpecializingBridge); since
+    // these might need to be targets of generalizing bridges (created in stage 2).
+    //
+    // Specialized overrides happen when an implemented interface exposes a superclass method with
+    // specialized parameter types. E.g.
+    //
+    //  class AbstractList<T> { void add(T t) {...} }
+    //  interface StringList {  void add(String s); }
+    //  class MyStringList extends AbstractList<String> implements StringList {}
+    //
+    // In this example StringList.add specializes the parameter types from AbstractList.add. That
+    // means that MyStringList would need to handle m_add__String by using m_add__Object from the
+    // super class. Hence there will be a bridge. We call these bridges specializing bridges.
+    // Default methods are also handled in this first stage. Both specializing bridges and default
+    // method bridges might become targets of the other type of bridges.
+
+    // Stage 1: Create specializing bridges.
+    for (String mangledName : overrideKeysByMangledName.keySet()) {
+
+      MethodDescriptor currentTarget = methodsByMangledName.get(mangledName);
+      MethodDescriptor targetImplementation =
+          targetMethodsByOverrideKey.get(overrideKeysByMangledName.get(mangledName));
+
+      if (isCorrectTarget(currentTarget, targetImplementation)) {
+        continue;
+      }
+
+      if (needsSpecializingBridge(targetImplementation) || targetImplementation.isDefaultMethod()) {
+        MethodOrigin methodOrigin =
+            targetImplementation.isDefaultMethod()
+                ? MethodOrigin.DEFAULT_METHOD_BRIDGE
+                : MethodOrigin.SPECIALIZING_BRIDGE;
+
+        // Create a specializing bridge.
+        MethodDescriptor newBridge =
+            createBridgeMethodDescriptor(methodOrigin, currentTarget, targetImplementation);
+        methodsByMangledName.put(newBridge.getMangledName(), newBridge);
+
+        // Now that the specializing bridge is in the class, it acts exactly as if a user wrote
+        // the override by hand and this method becomes the target for the other bridges.
+        targetMethodsByOverrideKey.put(getOverrideKey(newBridge), newBridge);
+      }
+    }
+
+    // Stage 2: Create all standard bridges.
+    for (String mangledName : overrideKeysByMangledName.keySet()) {
+      MethodDescriptor currentTarget = methodsByMangledName.get(mangledName);
+      MethodDescriptor targetImplementation =
+          targetMethodsByOverrideKey.get(overrideKeysByMangledName.get(mangledName));
+
+      if (isCorrectTarget(currentTarget, targetImplementation)) {
+        // No need to bridge; the mangled name already dispatches to the correct target.
+        continue;
+      }
+
+      // Add the bridge and note that the target might be an abstract method in a superclass
+      // or an interface. This guarantees that the bridges will be in place as high up in
+      // the hierarchy allowing JavaScript subclassing.
+      MethodDescriptor newBridge =
+          createBridgeMethodDescriptor(
+              MethodOrigin.GENERALIZING_BRIDGE, currentTarget, targetImplementation);
+      checkState(newBridge.isGeneralizingdBridge());
+      methodsByMangledName.put(newBridge.getMangledName(), newBridge);
+    }
+
+    return methodsByMangledName.values();
+  }
+
+  private static ImmutableList<MethodDescriptor> specializeMethods(
+      Collection<MethodDescriptor> methods, Map<TypeVariable, TypeDescriptor> parameterization) {
+    return methods.stream()
+        .map(m -> m.getDeclarationDescriptor().specializeTypeVariables(parameterization))
+        .collect(toImmutableList());
+  }
+
+  /** Whether mangled name already has the actual method that handles that name. */
+  private static boolean isCorrectTarget(MethodDescriptor method, MethodDescriptor newTarget) {
+    if (method.isGeneralizingdBridge()) {
+      // Generalizing bridges always dispatch to the right target by construction, but they might
+      // do so indirectly.
+      return true;
+    }
+
+    if (method.isBridgeTarget(newTarget)) {
+      // There is a bridge in place that implements the forwarding to the needed target.
+      return true;
+    }
+
+    if (newTarget.isDefaultMethod()) {
+      // This is a default method in an interface. Because this is the target for a mangled name in
+      // a class it needs a default method bridge; even if the mangled name is correct.
+      return false;
+    }
+
+    if (newTarget.getMangledName().equals(method.getMangledName())) {
+      // Since current target is an implementation in a class and the new target is not a default
+      // method (which is the only case in which a target already implemented in a class which same
+      // mangled name as the new target might be overridden) it is already correct.
+      return true;
+    }
+
+    return false;
+  }
+
+  /** Computes the set of all the mangled names that should target the same implementation. */
+  // TODO(b/70853239): This computation should be done in the traversal in getPolymorphicMethods(),
+  // but due to inaccuracies in specializeTypeVariables it cannot be move there yet. Move
+  // once specializeTypeVariables is fixed.
+  @Memoized
+  Map<String, String> getMangledNameToOverrideKeyMap() {
+    Map<String, String> overrideKeysByMangledName = new LinkedHashMap<>();
+
+    for (DeclaredTypeDescriptor interfaceDescriptor : getInterfaceTypeDescriptors()) {
+      overrideKeysByMangledName.putAll(interfaceDescriptor.getMangledNameToOverrideKeyMap());
+    }
+
+    if (getSuperTypeDescriptor() != null) {
+      overrideKeysByMangledName.putAll(getSuperTypeDescriptor().getMangledNameToOverrideKeyMap());
+    }
+
+    for (MethodDescriptor declaredMethod : getDeclaredMethodDescriptors()) {
+      if (!isActuallyPolymorphic(declaredMethod)) {
+        continue;
+      }
+      // TODO(b/150876433): Select the target override key in a principled manner when there is a
+      // collision due to JsMethod. If it wasn't for JsMethods the mapping would be 1-1, because
+      // the override key uses the same elements as the mangled name (i.e. name, parameter types
+      // and the package if it is package private).
+      // However, two different JsMethods with different override key might have the same name. In
+      // those cases, we choose the last one in the super type hierarchy. It is safe because all
+      // the override keys corresponding to a JsMethod will have the same target otherwise it
+      // would not have passed restriction checking.
+      overrideKeysByMangledName.put(
+          declaredMethod.getMangledName(), getOverrideKey(declaredMethod));
+    }
+
+    return overrideKeysByMangledName;
+  }
+
+  /**
+   * The override key defines a grouping of method descriptors at a type that will be handled by the
+   * same actual implementation.
+   *
+   * <p>The difference between an override signature and an override key is that the override key
+   * will be different for package private methods in different packages even if they have the same
+   * signature.
+   */
+  // TODO(b/160656610): Cleanup signature related methods getOverrideKey, getMethodSignature, etc.
+  private static String getOverrideKey(MethodDescriptor methodDescriptor) {
+    if (!isActuallyPolymorphic(methodDescriptor)) {
+      return null;
+    }
+    if (methodDescriptor.getVisibility().isPackagePrivate()) {
+      return getPackagePrivateOverrideKey(methodDescriptor);
+    }
+    return methodDescriptor.getOverrideSignature();
+  }
+
+  // This is a somewhat hacky way to differentiate package private override keys. A more principled
+  // approach is to introduce a value type with two fields, so that we can use it as a key in
+  // the maps used for the bridge method computations.
+  private static final String PACKAGE_PRIVATE_MARKER = "{pp}-";
+
+  private static String getPackagePrivateOverrideKey(MethodDescriptor m) {
+    return m.getOverrideSignature()
+        + PACKAGE_PRIVATE_MARKER
+        + m.getEnclosingTypeDescriptor().getTypeDeclaration().getPackageName();
+  }
+
+  /**
+   * Determines the actual implementation target that will handle all the mangled names associated
+   * with an override key.
+   */
+  // TODO(b/70853239): This computation should be done in the traversal in getPolymorphicMethods(),
+  // but due to inaccuracies in specializeTypeVariables it cannot be move there yet. Move
+  // once specializeTypeVariables is fixed.
+  @Memoized
+  Map<String, MethodDescriptor> getOverrideKeyToTargetMap() {
+    Map<String, MethodDescriptor> targetByOverrideKey = new LinkedHashMap<>();
+
+    // 1. Initially the implementations for each override key will be the same as in the superclass.
+    if (getSuperTypeDescriptor() != null) {
+      targetByOverrideKey.putAll(getSuperTypeDescriptor().getOverrideKeyToTargetMap());
+    }
+
+    // 2. Now replace the ones that are overridden in this class and add the new override keys and
+    // their corresponding targets introduced by this class. This subclass might override supertype
+    // methods and hence these overriding methods need to become the target for the corresponding
+    // override key.
+    getDeclaredMethodDescriptors().stream()
+        .filter(DeclaredTypeDescriptor::isActuallyPolymorphic)
+        .forEach(
+            m -> {
+              targetByOverrideKey.put(getOverrideKey(m), m);
+              if (!m.getVisibility().isPackagePrivate()) {
+                // The non package private methods are ALSO targets for the package private
+                // signature.
+                String packagePrivateOverridingKey = getPackagePrivateOverrideKey(m);
+                targetByOverrideKey.put(packagePrivateOverridingKey, m);
+              }
+            });
+
+    // 3. Now add the override keys and the corresponding targets introduced by interfaces. These
+    // might be a new abstract method, a new default method or a default method that overrode an
+    // existing target. Methods in an interface that are already implements in the class are not
+    // targets but an interface might introduce a new methods (default or abstract) or might
+    // override a default method that is not implemented in the class.
+    for (DeclaredTypeDescriptor superInterface : getInterfaceTypeDescriptors()) {
+      for (MethodDescriptor methodDescriptor :
+          superInterface.getOverrideKeyToTargetMap().values()) {
+        String overrideKey = getOverrideKey(methodDescriptor);
+        MethodDescriptor overriddenMethod = targetByOverrideKey.get(overrideKey);
+        // Looking at the superinterfaces to see if we find new targets for new override chains
+        // introduced by this interface, or default methods that will need to replace an overridden
+        // (default) method.
+        if (overriddenMethod == null
+            || isOverridingDefaultMethod(methodDescriptor, overriddenMethod)) {
+          targetByOverrideKey.put(overrideKey, methodDescriptor);
+        }
+      }
+    }
+
+    return targetByOverrideKey;
+  }
+
+  /**
+   * Returns true if {@code candidateMethod} is a default method that overrides {@code method}.
+   *
+   * <p>Note that in the case that a new method overrides the current method, the current method
+   * might be a default method or an abstract interface method.
+   */
+  private static boolean isOverridingDefaultMethod(
+      MethodDescriptor candidateMethod, MethodDescriptor method) {
+    if (!candidateMethod.isDefaultMethod()) {
+      return false;
+    }
+
+    if (!method.getEnclosingTypeDescriptor().isInterface()) {
+      return false;
+    }
+
+    // Keep the method at the bottom of the hierarchy since if that one is a default method the one
+    // further down has to be the target.
+    TypeDeclaration candidateDeclaration =
+        candidateMethod.getEnclosingTypeDescriptor().getTypeDeclaration();
+    TypeDeclaration currentDeclaration = method.getEnclosingTypeDescriptor().getTypeDeclaration();
+    return candidateDeclaration.getMaxInterfaceDepth() >= currentDeclaration.getMaxInterfaceDepth();
+  }
+
+  /** Returns true if the method needs a specializing bridge. */
+  private static boolean needsSpecializingBridge(MethodDescriptor method) {
+    // The method is a superclass method that is specialized by the current type and that
+    // specialization introduced an new overridden method from some interface.
+    return !method.getEnclosingTypeDescriptor().isInterface()
+        && !getOverrideKey(method).equals(getOverrideKey(method.getDeclarationDescriptor()));
+  }
+
+  private static boolean isActuallyPolymorphic(MethodDescriptor methodDescriptor) {
+    return methodDescriptor.isPolymorphic() && !methodDescriptor.getVisibility().isPrivate();
+  }
+
+  private MethodDescriptor createBridgeMethodDescriptor(
+      MethodOrigin origin,
+      MethodDescriptor bridgeMethodDescriptor,
+      MethodDescriptor targetMethodDescriptor) {
+
+    MethodDescriptor bridgeOrigin = bridgeMethodDescriptor.getDeclarationDescriptor();
+    return MethodDescriptor.Builder.from(targetMethodDescriptor)
+        .setJsInfo(bridgeMethodDescriptor.getJsInfo())
+        .setEnclosingTypeDescriptor(this)
+        .setDeclarationDescriptor(null)
+        .makeBridge(origin, bridgeOrigin, targetMethodDescriptor)
+        .setFinal(bridgeMethodDescriptor.isGeneralizingdBridge())
+        .build();
   }
 
   /** Returns the default (parameterless) constructor for the type.. */
@@ -662,10 +964,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
             () ->
                 getDeclaredMethodDescriptors().stream()
                     .map(m -> m.specializeTypeVariables(parameterization))
-                    .collect(
-                        toImmutableMap(
-                            m -> m.getDeclarationDescriptor().getMethodSignature(),
-                            Function.identity())))
+                    .collect(toImmutableList()))
         .setEnclosingTypeDescriptor(
             getEnclosingTypeDescriptor() != null
                 ? getEnclosingTypeDescriptor().specializeTypeVariables(parameterization)
@@ -690,7 +989,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         // Default values.
         .setNullable(true)
         .setTypeArgumentDescriptors(ImmutableList.of())
-        .setDeclaredMethodDescriptorsFactory(ImmutableMap::of)
+        .setDeclaredMethodDescriptorsFactory(() -> ImmutableList.of())
         .setDeclaredFieldDescriptorsFactory(() -> ImmutableList.of())
         .setInterfaceTypeDescriptorsFactory(() -> ImmutableList.of())
         .setJsFunctionMethodDescriptorFactory(() -> null)
@@ -745,10 +1044,10 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     }
 
     public abstract Builder setDeclaredMethodDescriptorsFactory(
-        DescriptorFactory<ImmutableMap<String, MethodDescriptor>> declaredMethodDescriptorsFactory);
+        DescriptorFactory<ImmutableList<MethodDescriptor>> declaredMethodDescriptorsFactory);
 
     public Builder setDeclaredMethodDescriptorsFactory(
-        Supplier<ImmutableMap<String, MethodDescriptor>> declaredMethodDescriptorsFactory) {
+        Supplier<ImmutableList<MethodDescriptor>> declaredMethodDescriptorsFactory) {
       return setDeclaredMethodDescriptorsFactory(
           typeDescriptor -> declaredMethodDescriptorsFactory.get());
     }

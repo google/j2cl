@@ -21,7 +21,6 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import com.google.common.base.Ascii;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Streams;
 import com.google.j2cl.ast.ArrayTypeDescriptor;
@@ -1004,32 +1003,16 @@ class JavaEnvironment {
       return cachedDeclaredTypeDescriptorByDeclaredType.get(classType);
     }
 
-    Supplier<ImmutableMap<String, MethodDescriptor>> declaredMethods =
-        () -> {
-          ImmutableMap.Builder<String, MethodDescriptor> mapBuilder = ImmutableMap.builder();
-          for (MethodDeclarationPair methodElement : getDeclaredMethods((ClassType) classType)) {
-            DeclaredTypeDescriptor enclosingType = createDeclaredTypeDescriptor(classType);
-            MethodDescriptor methodDescriptor =
-                createMethodDescriptor(
-                    enclosingType,
-                    methodElement.getMethodSymbol(),
-                    methodElement.getDeclarationMethodSymbol());
-            mapBuilder.put(
-                // TODO(b/33595109): Using the method declaration signature here is kind of iffy;
-                // but needs to be done because parameterized types might make multiple
-                // superinterface methods collide which are represented by JDT as different method
-                // bindings but with the same signature, e.g.
-                //   interface I<U, V extends Serializable> {
-                //     void foo(U u);
-                //     void foo(V v);
-                //   }
-                // When considering the type I<A,A>, there are two different method bindings
-                // that describe the single method 'void foo(A a)' each with the respective
-                // method declaration.
-                methodDescriptor.getDeclarationDescriptor().getMethodSignature(), methodDescriptor);
-          }
-          return mapBuilder.build();
-        };
+    Supplier<ImmutableList<MethodDescriptor>> declaredMethods =
+        () ->
+            getDeclaredMethods((ClassType) classType).stream()
+                .map(
+                    methodDeclarationPair ->
+                        createMethodDescriptor(
+                            createDeclaredTypeDescriptor(classType),
+                            methodDeclarationPair.getMethodSymbol(),
+                            methodDeclarationPair.getDeclarationMethodSymbol()))
+                .collect(toImmutableList());
 
     Supplier<ImmutableList<FieldDescriptor>> declaredFields =
         () ->
@@ -1206,9 +1189,9 @@ class JavaEnvironment {
     boolean isAbstract = isAbstract(typeElement) && !isInterface(typeElement);
     boolean isFinal = isFinal(typeElement);
 
-    Supplier<ImmutableMap<String, MethodDescriptor>> declaredMethods =
+    Supplier<ImmutableList<MethodDescriptor>> declaredMethods =
         () -> {
-          ImmutableMap.Builder<String, MethodDescriptor> mapBuilder = ImmutableMap.builder();
+          ImmutableList.Builder<MethodDescriptor> listBuilder = ImmutableList.builder();
           for (MethodSymbol methodElement :
               typeElement.getEnclosedElements().stream()
                   .filter(
@@ -1218,21 +1201,9 @@ class JavaEnvironment {
                   .map(MethodSymbol.class::cast)
                   .collect(toImmutableList())) {
             MethodDescriptor methodDescriptor = createDeclarationMethodDescriptor(methodElement);
-            mapBuilder.put(
-                // TODO(b/33595109): Using the method declaration signature here is kind of iffy;
-                // but needs to be done because parameterized types might make multiple
-                // superinterface methods collide which are represented by JDT as different method
-                // bindings but with the same signature, e.g.
-                //   interface I<U, V extends Serializable> {
-                //     void foo(U u);
-                //     void foo(V v);
-                //   }
-                // When considering the type I<A,A>, there are two different method bindings
-                // that describe the single method 'void foo(A a)' each with the respective
-                // method declaration.
-                methodDescriptor.getDeclarationDescriptor().getMethodSignature(), methodDescriptor);
+            listBuilder.add(methodDescriptor);
           }
-          return mapBuilder.build();
+          return listBuilder.build();
         };
 
     Supplier<ImmutableList<FieldDescriptor>> declaredFields =

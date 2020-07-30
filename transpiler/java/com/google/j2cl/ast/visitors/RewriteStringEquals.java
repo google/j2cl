@@ -49,7 +49,7 @@ public class RewriteStringEquals extends NormalizationPass {
   private static MethodDescriptor getStringEquals() {
     return TypeDescriptors.get()
         .javaLangString
-        .getMethodDescriptorByName(
+        .getMethodDescriptor(
             MethodDescriptor.EQUALS_METHOD_NAME, TypeDescriptors.get().javaLangObject);
   }
 }

@@ -33,11 +33,17 @@ class AccidentalOverrideBridge extends ClassWithParameterizedGet {
     let g = AccidentalOverrideBridge.$create__();
     g.m_get__java_lang_String('');
   }
-  // Bridge method.
-  /** @override @return {?string} */
+  // Specialized bridge method.
+  /** @return {?string} */
   m_get__java_lang_String(/** ?string */ arg0) {
     return /**@type {?string}*/ (
         $Casts.$to(super.m_get__java_lang_Object(arg0), j_l_String));
+  }
+  // Bridge method.
+  /** @override @return {?string} */
+  m_get__java_lang_Object(/** ?string */ arg0) {
+    return this.m_get__java_lang_String(
+        /**@type {?string}*/ ($Casts.$to(arg0, j_l_String)));
   }
 
   static $clinit() {

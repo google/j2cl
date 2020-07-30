@@ -18,12 +18,9 @@ package com.google.j2cl.ast;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
-import static com.google.common.collect.ImmutableMap.toImmutableMap;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
 import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -94,9 +91,9 @@ public class LambdaTypeDescriptors {
    * <li>a constructor taking the synthetic @JsFunction interface
    * <li>a SAM method implementation forwarding to the @JsFunction interface.
    */
-  private static ImmutableMap<String, MethodDescriptor> getLambdaAdaptorMethodDescriptors(
+  private static ImmutableList<MethodDescriptor> getLambdaAdaptorMethodDescriptors(
       DeclaredTypeDescriptor jsFunctionInterface, DeclaredTypeDescriptor adaptorTypeDescriptor) {
-    return createMethodDescriptorBySignatureMap(
+    return ImmutableList.of(
         getLambdaAdaptorConstructor(jsFunctionInterface, adaptorTypeDescriptor),
         getAdaptorForwardingMethod(adaptorTypeDescriptor));
   }
@@ -209,8 +206,7 @@ public class LambdaTypeDescriptors {
             DeclaredTypeDescriptor::getSingleAbstractMethodDescriptor)
         .setDeclaredMethodDescriptorsFactory(
             jsfunctionTypeDescriptor ->
-                createMethodDescriptorBySignatureMap(
-                    jsfunctionTypeDescriptor.getSingleAbstractMethodDescriptor()))
+                ImmutableList.of(jsfunctionTypeDescriptor.getSingleAbstractMethodDescriptor()))
         .build();
   }
 
@@ -252,7 +248,7 @@ public class LambdaTypeDescriptors {
         .setFunctionalInterface(true)
         .setDeclaredMethodDescriptorsFactory(
             jsfunctionTypeDeclaration ->
-                createMethodDescriptorBySignatureMap(
+                ImmutableList.of(
                     createJsFunctionMethodDescriptor(
                         jsfunctionTypeDeclaration.toUnparameterizedTypeDescriptor(),
                         functionalTypeDescriptor.getSingleAbstractMethodDescriptor())))
@@ -285,12 +281,6 @@ public class LambdaTypeDescriptors {
         .setJsFunction(true)
         .build()
         .withoutTypeParameters();
-  }
-
-  private static ImmutableMap<String, MethodDescriptor> createMethodDescriptorBySignatureMap(
-      MethodDescriptor... methodDescriptors) {
-    return Arrays.stream(methodDescriptors)
-        .collect(toImmutableMap(MethodDescriptor::getMethodSignature, Function.identity()));
   }
 
   private static MethodDescriptor createRelatedMethodDeclaration(

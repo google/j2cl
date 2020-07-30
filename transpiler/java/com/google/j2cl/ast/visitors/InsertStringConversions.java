@@ -72,6 +72,6 @@ public class InsertStringConversions extends NormalizationPass {
 
     return TypeDescriptors.get()
         .javaLangString
-        .getMethodDescriptorByName(MethodDescriptor.VALUE_OF_METHOD_NAME, typeDescriptor);
+        .getMethodDescriptor(MethodDescriptor.VALUE_OF_METHOD_NAME, typeDescriptor);
   }
 }

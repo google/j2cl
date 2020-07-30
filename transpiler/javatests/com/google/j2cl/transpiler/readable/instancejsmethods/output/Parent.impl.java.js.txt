@@ -32,15 +32,15 @@ class Parent extends SuperParent {
   myFoo(/** number */ a) {
     return a;
   }
-  // Bridge method for exposing non-JsMethod.
-  /** @override @return {number} */
-  m_fun__int__int(/** number */ arg0, /** number */ arg1) {
-    return this.sum(arg0, arg1);
-  }
-  // Bridge method for exposing non-JsMethod.
+  // Bridge method.
   /** @override @return {number} */
   m_bar__int__int(/** number */ arg0, /** number */ arg1) {
     return this.bar(arg0, arg1);
+  }
+  // Bridge method.
+  /** @override @return {number} */
+  m_fun__int__int(/** number */ arg0, /** number */ arg1) {
+    return this.sum(arg0, arg1);
   }
 
   static $clinit() {

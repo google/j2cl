@@ -3,11 +3,6 @@ goog.module('com.google.j2cl.transpiler.readable.nullability.Nullability.StringL
 const ArrayList = goog.require('java.util.ArrayList$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let Collection = goog.forwardDeclare('java.util.Collection$impl');
-let List = goog.forwardDeclare('java.util.List$impl');
-let Spliterator = goog.forwardDeclare('java.util.Spliterator$impl');
-let Stream = goog.forwardDeclare('java.util.stream.Stream$impl');
-
 /**
  * @extends {ArrayList<?string>}
  */
@@ -28,24 +23,6 @@ class StringList extends ArrayList {
   $ctor__com_google_j2cl_transpiler_readable_nullability_Nullability_StringList__() {
     this.$ctor__java_util_ArrayList__();
   }
-  // Default method forwarding stub.
-  /** @override @return {Spliterator<?string>} */
-  m_spliterator__() {
-    return /**@type {Spliterator<?string>}*/ (
-        List.m_spliterator__$default__java_util_List(this));
-  }
-  // Default method forwarding stub.
-  /** @override @return {Stream<?string>} */
-  m_parallelStream__() {
-    return /**@type {Stream<?string>}*/ (
-        Collection.m_parallelStream__$default__java_util_Collection(this));
-  }
-  // Default method forwarding stub.
-  /** @override @return {Stream<?string>} */
-  m_stream__() {
-    return /**@type {Stream<?string>}*/ (
-        Collection.m_stream__$default__java_util_Collection(this));
-  }
 
   static $clinit() {
     StringList.$clinit = () => {};
@@ -57,10 +34,7 @@ class StringList extends ArrayList {
     return instance instanceof StringList;
   }
 
-  static $loadModules() {
-    Collection = goog.module.get('java.util.Collection$impl');
-    List = goog.module.get('java.util.List$impl');
-  }
+  static $loadModules() {}
 }
 $Util.$setClassMetadata(
     StringList,

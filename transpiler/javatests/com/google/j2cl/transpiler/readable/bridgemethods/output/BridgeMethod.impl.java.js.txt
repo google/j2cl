@@ -39,22 +39,14 @@ class BridgeMethod extends Parent {
   m_fun__java_lang_Number(/** (Number|number) */ t) {}
   // Bridge method.
   /** @override */
-  m_foo__java_lang_Error__java_lang_Number(
+  m_foo__java_lang_Object__java_lang_Number(
       /** AssertionError */ arg0, /** (Number|number) */ arg1) {
     this.m_foo__java_lang_AssertionError__java_lang_Number(
         /**@type {AssertionError}*/ ($Casts.$to(arg0, AssertionError)), arg1);
   }
   // Bridge method.
   /** @override */
-  m_foo__java_lang_Object__java_lang_Object(
-      /** AssertionError */ arg0, /** (Number|number) */ arg1) {
-    this.m_foo__java_lang_AssertionError__java_lang_Number(
-        /**@type {AssertionError}*/ ($Casts.$to(arg0, AssertionError)),
-        /**@type {(Number|number)}*/ ($Casts.$to(arg1, Number)));
-  }
-  // Bridge method.
-  /** @override */
-  m_foo__java_lang_Object__java_lang_Number(
+  m_foo__java_lang_Error__java_lang_Number(
       /** AssertionError */ arg0, /** (Number|number) */ arg1) {
     this.m_foo__java_lang_AssertionError__java_lang_Number(
         /**@type {AssertionError}*/ ($Casts.$to(arg0, AssertionError)), arg1);
@@ -72,7 +64,6 @@ class BridgeMethod extends Parent {
 
   static $loadModules() {
     AssertionError = goog.module.get('java.lang.AssertionError$impl');
-    Number = goog.module.get('java.lang.Number$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
   }
 }

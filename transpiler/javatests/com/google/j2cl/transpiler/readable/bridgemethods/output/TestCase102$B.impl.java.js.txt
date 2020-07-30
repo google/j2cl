@@ -22,6 +22,11 @@ class B extends j_l_Object {
   }
   /** @abstract */
   m_set__java_lang_Object(/** B1 */ value) {}
+  // Bridge method.
+  /** @override */
+  set(/** ?string */ arg0) {
+    this.m_set__java_lang_String(arg0);
+  }
 
   static $clinit() {
     B.$clinit = () => {};

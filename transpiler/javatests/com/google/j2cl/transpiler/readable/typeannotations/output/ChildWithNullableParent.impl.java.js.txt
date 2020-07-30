@@ -29,7 +29,7 @@ class ChildWithNullableParent extends Parent {
     this.$ctor__com_google_j2cl_transpiler_readable_typeannotations_Parent__();
   }
   // Default method forwarding stub.
-  /** @override @return {!List<Parent>} */
+  /** @return {!List<Parent>} */
   m_m__java_util_List(
       /**
          !List<!Map<!Array<string>, Map<Array<!List<string>>,
@@ -45,15 +45,15 @@ class ChildWithNullableParent extends Parent {
   /** @override @return {Parent} */
   m_m__java_lang_String__java_lang_Object(
       /** string */ arg0, /** Parent */ arg1) {
-    return super
+    return this
         .m_m__java_lang_String__com_google_j2cl_transpiler_readable_typeannotations_Parent(
             arg0, /**@type {Parent}*/ ($Casts.$to(arg1, Parent)));
   }
   // Bridge method.
-  /** @override @return {List<Parent>} */
+  /** @override @return {List<!Parent>} */
   m_m__java_util_List__java_lang_Object(
       /** List<string> */ arg0, /** Parent */ arg1) {
-    return super
+    return this
         .m_m__java_util_List__com_google_j2cl_transpiler_readable_typeannotations_Parent(
             arg0, /**@type {Parent}*/ ($Casts.$to(arg1, Parent)));
   }

@@ -176,7 +176,6 @@ public abstract class TypeDescriptor implements Comparable<TypeDescriptor>, HasR
     return ImmutableSet.of();
   }
 
-
   public TypeDescriptor specializeTypeVariables(
       Map<TypeVariable, TypeDescriptor> replacementTypeArgumentByTypeVariable) {
     return specializeTypeVariables(

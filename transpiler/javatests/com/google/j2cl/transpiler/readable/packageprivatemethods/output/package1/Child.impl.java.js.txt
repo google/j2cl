@@ -32,13 +32,13 @@ class Child extends Parent {
   m_bar__int__int__int(/** number */ a, /** number */ b, /** number */ c) {
     return a + b + c + 2 | 0;
   }
-  // Forwarding method for package private method.
+  // Bridge method.
   /** @override @return {number} */
   m_foo__int_$pp_com_google_j2cl_transpiler_readable_packageprivatemethods_package1(
       /** number */ arg0) {
     return this.m_foo__int(arg0);
   }
-  // Forwarding method for package private method.
+  // Bridge method.
   /** @override @return {number} */
   m_fun__int__int_$pp_com_google_j2cl_transpiler_readable_packageprivatemethods_package1(
       /** number */ arg0, /** number */ arg1) {

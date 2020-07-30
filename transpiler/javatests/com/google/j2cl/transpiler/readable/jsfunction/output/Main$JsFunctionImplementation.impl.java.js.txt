@@ -64,6 +64,14 @@ class JsFunctionImplementation extends j_l_Object {
         this.f_field__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionImplementation |
         0;
   }
+  /** @return {number} */
+  static m_overlayMethod__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionImplementation(
+      /** function(number):number */ $thisArg) {
+    JsFunctionImplementation.$clinit();
+    return $Overlay
+        .m_overlayMethod__$devirt__com_google_j2cl_transpiler_readable_jsfunction_Main_JsFunctionInterface(
+            $thisArg);
+  }
 
   static $clinit() {
     JsFunctionImplementation.$clinit = () => {};
@@ -88,7 +96,10 @@ class JsFunctionImplementation extends j_l_Object {
         true;
   }
 
-  static $loadModules() {}
+  static $loadModules() {
+    $Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.jsfunction.Main.JsFunctionInterface.$Overlay$impl');
+  }
 }
 $Util.$setClassMetadata(
     JsFunctionImplementation,

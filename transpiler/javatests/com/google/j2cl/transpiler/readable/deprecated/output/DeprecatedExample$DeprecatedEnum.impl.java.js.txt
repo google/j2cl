@@ -5,7 +5,6 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
 
 /**
@@ -59,12 +58,6 @@ class DeprecatedEnum extends Enum {
         ],
         DeprecatedEnum));
   }
-  // Bridge method.
-  /** @override @return {number} */
-  m_compareTo__java_lang_Object(/** DeprecatedEnum */ arg0) {
-    return super.compareTo(
-        /**@type {DeprecatedEnum}*/ ($Casts.$to(arg0, DeprecatedEnum)));
-  }
   /** @return {!DeprecatedEnum} @deprecated */
   static get A_VALUE() {
     return (
@@ -95,7 +88,6 @@ class DeprecatedEnum extends Enum {
   static $loadModules() {
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-    $Casts = goog.module.get('vmbootstrap.Casts$impl');
     $Enums = goog.module.get('vmbootstrap.Enums$impl');
   }
 }

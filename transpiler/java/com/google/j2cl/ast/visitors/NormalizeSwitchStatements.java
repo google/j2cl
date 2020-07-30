@@ -72,7 +72,7 @@ public class NormalizeSwitchStatements extends NormalizationPass {
     return SwitchStatement.Builder.from(switchStatement)
         .setSwitchExpression(
             MethodCall.Builder.from(
-                    TypeDescriptors.get().javaLangEnum.getMethodDescriptorByName("ordinal"))
+                    TypeDescriptors.get().javaLangEnum.getMethodDescriptor("ordinal"))
                 .setQualifier(switchStatement.getSwitchExpression())
                 .build())
         .setCases(

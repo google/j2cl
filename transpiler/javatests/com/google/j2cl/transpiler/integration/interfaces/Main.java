@@ -220,8 +220,7 @@ public class Main {
   static class A<T extends DiamondLeft<T>, V extends DiamondRight<V>>
       implements DiamondLeft<T>, DiamondRight<V> {}
 
-  // TODO(b/159627606): Uncomment when the bug is fixed.
-  // static class B extends A<B, B> implements Bottom<B> {}
+  static class B extends A<B, B> implements Bottom<B> {}
 
   static class C implements Bottom<C> {
     static String NAME = "C";
@@ -239,12 +238,11 @@ public class Main {
     DiamondRight<?> dr = a;
     assertEquals(DiamondRight.NAME, dr.name(null));
 
-    // TODO(b/159627606): Uncomment when the bug is fixed.
-    // a = new B();
-    // dl = a;
-    // assertEquals(Bottom.NAME, dl.name(null));
-    // dr = a;
-    // assertEquals(Bottom.NAME, dr.name(null));
+    a = new B();
+    dl = a;
+    assertEquals(Bottom.NAME, dl.name(null));
+    dr = a;
+    assertEquals(Bottom.NAME, dr.name(null));
 
     C c = new C();
     dl = c;

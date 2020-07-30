@@ -3,8 +3,6 @@ goog.module('com.google.j2cl.transpiler.readable.gwtincompatible.Implementor.Som
 const SomeEnum = goog.require('com.google.j2cl.transpiler.readable.gwtincompatible.Implementor.SomeEnum$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-
 class $1 extends SomeEnum {
   /** @protected */
   constructor() {
@@ -28,11 +26,6 @@ class $1 extends SomeEnum {
   }
   /** @override */
   m_method___$pp_com_google_j2cl_transpiler_readable_gwtincompatible() {}
-  // Bridge method.
-  /** @override @return {number} */
-  m_compareTo__java_lang_Object(/** SomeEnum */ arg0) {
-    return super.compareTo(/**@type {SomeEnum}*/ ($Casts.$to(arg0, SomeEnum)));
-  }
 
   static $clinit() {
     $1.$clinit = () => {};
@@ -44,9 +37,7 @@ class $1 extends SomeEnum {
     return instance instanceof $1;
   }
 
-  static $loadModules() {
-    $Casts = goog.module.get('vmbootstrap.Casts$impl');
-  }
+  static $loadModules() {}
 }
 $Util.$setClassMetadata(
     $1,
