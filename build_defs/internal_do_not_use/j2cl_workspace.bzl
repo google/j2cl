@@ -182,9 +182,9 @@ def setup_j2cl_workspace():
 
     http_archive(
         name = "org_gwtproject_gwt",
-        strip_prefix = "gwt-release-2.9.0",
-        url = "https://github.com/gwtproject/gwt/archive/release/2.9.0.zip",
-        sha256 = "e4931f9d6ff4477e16e22cdfe318c69c0f2088c1528d8743ce54c530cd3e89fa",
+        strip_prefix = "gwt-7de9ce8930d029cef35a41f79202213a736b9e86",
+        url = "https://github.com/gwtproject/gwt/archive/7de9ce8930d029cef35a41f79202213a736b9e86.zip",
+        sha256 = "b78d9228c006f0b28a4e0a9e04ac6dabaa4098fd20137473bfd2ae169c971899",
     )
 
     http_archive(
@@ -204,7 +204,9 @@ filegroup(
             "**/Timer.java",
             "**/profile/**",
         ],
-    ) + glob(["src/main/java/org/jbox2d/gwtemul/**/*.java"]),
+    ) + glob(["src/main/java/org/jbox2d/gwtemul/**/*.java"],
+        exclude = ["**/StrictMath.java"],
+    ),
     visibility = ["//visibility:public"],
 )''',
     )
