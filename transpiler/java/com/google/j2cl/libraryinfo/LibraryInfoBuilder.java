@@ -284,7 +284,7 @@ public final class LibraryInfoBuilder {
   private static boolean isJsAccessible(DeclaredTypeDescriptor typeDescriptor) {
     return isInBootstrap(typeDescriptor)
         || typeDescriptor.getDeclaredMemberDescriptors().stream()
-            .filter(Predicates.not(MemberDescriptor::isPolymorphic))
+            .filter(Predicates.not(MemberDescriptor::isInstanceMember))
             .anyMatch(MemberDescriptor::isJsMember);
   }
 

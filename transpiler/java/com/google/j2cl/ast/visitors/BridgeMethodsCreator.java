@@ -53,7 +53,6 @@ public class BridgeMethodsCreator extends NormalizationPass {
 
   /** Returns bridge method that calls the targeted method in its body. */
   private static Method createBridgeMethod(Type type, MethodDescriptor bridgeMethodDescriptor) {
-    MethodDescriptor causeMethod = bridgeMethodDescriptor.getBridgeOrigin();
     MethodDescriptor targetMethod =
         adjustTargetForJsFunction(bridgeMethodDescriptor, bridgeMethodDescriptor.getBridgeTarget());
 
@@ -80,11 +79,6 @@ public class BridgeMethodsCreator extends NormalizationPass {
     checkArgument(bridgeMethodDescriptor.isSynthetic());
     checkArgument(bridgeMethodDescriptor.isBridge());
 
-    // TODO(b/31312257): fix or decide to not emit @override and suppress the error.
-    // Determine whether the method needs @override annotation.
-    boolean isOverride =
-        bridgeMethodDescriptor.isGeneralizingdBridge()
-            && AstUtils.overrideNeedsAtOverrideAnnotation(causeMethod);
     return Method.newBuilder()
         .setMethodDescriptor(bridgeMethodDescriptor)
         .setParameters(parameters)
@@ -96,7 +90,6 @@ public class BridgeMethodsCreator extends NormalizationPass {
                 targetMethod.isDefaultMethod(),
                 arguments,
                 bridgeMethodDescriptor.getReturnTypeDescriptor()))
-        .setOverride(isOverride)
         .setJsDocDescription(getJsDocDescription(bridgeMethodDescriptor))
         .setSourcePosition(type.getSourcePosition())
         .build();

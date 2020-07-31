@@ -392,13 +392,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     }
 
     private Method.Builder newMethodBuilder(MethodDescriptor methodDescriptor) {
-      // TODO(b/31312257): fix or decide to not emit @override and suppress the error.
-      boolean isOverride =
-          methodDescriptor
-              .getOverriddenMethodDescriptors()
-              .stream()
-              .anyMatch(m -> requiresOverrideAnnotation(methodDescriptor, m));
-      return Method.newBuilder().setMethodDescriptor(methodDescriptor).setOverride(isOverride);
+      return Method.newBuilder().setMethodDescriptor(methodDescriptor);
     }
 
     private ArrayAccess convert(org.eclipse.jdt.core.dom.ArrayAccess expression) {

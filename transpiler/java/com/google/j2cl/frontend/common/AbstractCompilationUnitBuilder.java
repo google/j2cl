@@ -579,16 +579,6 @@ public abstract class AbstractCompilationUnitBuilder {
         .build();
   }
 
-  protected boolean requiresOverrideAnnotation(
-      MethodDescriptor methodDescriptor, MethodDescriptor overriddenMethodDescriptor) {
-    if (methodDescriptor.isJsMember()) {
-      return overriddenMethodDescriptor.isJsMember()
-          && AstUtils.overrideNeedsAtOverrideAnnotation(overriddenMethodDescriptor);
-    }
-    return methodDescriptor.isJsOverride(overriddenMethodDescriptor)
-        && AstUtils.overrideNeedsAtOverrideAnnotation(overriddenMethodDescriptor);
-  }
-
   protected Expression convertConstantToLiteral(
       Object constantValue, TypeDescriptor typeDescriptor) {
     if (constantValue instanceof Boolean) {

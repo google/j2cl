@@ -147,8 +147,8 @@ public class NormalizeJsEnums extends NormalizationPass {
           public Expression rewriteMethodCall(MethodCall methodCall) {
             MethodDescriptor methodDescriptor = methodCall.getTarget();
 
-            if (!methodDescriptor.isPolymorphic()) {
-              // Only rewrite polymorphic methods.
+            if (!methodDescriptor.isInstanceMember()) {
+              // Only rewrite instance methods.
               return methodCall;
             }
             if (!TypeDescriptors.isJavaLangEnum(methodDescriptor.getEnclosingTypeDescriptor())) {
@@ -161,7 +161,7 @@ public class NormalizeJsEnums extends NormalizationPass {
               return methodCall;
             }
 
-            if (methodCall.getTarget().getMethodSignature().equals("ordinal()")) {
+            if (methodCall.getTarget().getSignature().equals("ordinal()")) {
               return castJsEnumToValue(methodCall);
             }
 
@@ -183,7 +183,7 @@ public class NormalizeJsEnums extends NormalizationPass {
 
   private MethodDescriptor fixEnumMethodDescriptor(MethodDescriptor methodDescriptor) {
     MethodDescriptor declarationMethodDescriptor = methodDescriptor.getDeclarationDescriptor();
-    String declarationMethodSignature = declarationMethodDescriptor.getMethodSignature();
+    String declarationMethodSignature = declarationMethodDescriptor.getSignature();
 
     // Reroute overridden methods to the super method they override.
     if (declarationMethodSignature.equals("compareTo(java.lang.Enum)")) {

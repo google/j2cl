@@ -426,7 +426,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         .filter(Predicates.not(MethodDescriptor::isGeneralizingdBridge))
         .filter(
             m ->
-                m.getOverrideSignature()
+                m.getSignature()
                     .equals(MethodDescriptor.buildMethodSignature(methodName, parameters)))
         .collect(toOptional())
         .orElse(null);
@@ -437,7 +437,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     return Streams.concat(
             getPolymorphicMethods().stream(),
             getDeclaredMethodDescriptors().stream()
-                .filter(Predicates.not(DeclaredTypeDescriptor::isActuallyPolymorphic)))
+                .filter(Predicates.not(MethodDescriptor::isPolymorphic)))
         .collect(toImmutableList());
   }
 
@@ -499,7 +499,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
 
     // 3. Add the new methods that are declared in the class, replacing the overridden methods.
     getDeclaredMethodDescriptors().stream()
-        .filter(DeclaredTypeDescriptor::isActuallyPolymorphic)
+        .filter(MethodDescriptor::isPolymorphic)
         .forEach(m -> methodsByMangledName.put(m.getMangledName(), m));
 
     if (isInterface()) {
@@ -559,7 +559,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
 
         // Now that the specializing bridge is in the class, it acts exactly as if a user wrote
         // the override by hand and this method becomes the target for the other bridges.
-        targetMethodsByOverrideKey.put(getOverrideKey(newBridge), newBridge);
+        targetMethodsByOverrideKey.put(newBridge.getOverrideKey(), newBridge);
       }
     }
 
@@ -640,7 +640,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     }
 
     for (MethodDescriptor declaredMethod : getDeclaredMethodDescriptors()) {
-      if (!isActuallyPolymorphic(declaredMethod)) {
+      if (!declaredMethod.isPolymorphic()) {
         continue;
       }
       // TODO(b/150876433): Select the target override key in a principled manner when there is a
@@ -652,40 +652,10 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
       // the override keys corresponding to a JsMethod will have the same target otherwise it
       // would not have passed restriction checking.
       overrideKeysByMangledName.put(
-          declaredMethod.getMangledName(), getOverrideKey(declaredMethod));
+          declaredMethod.getMangledName(), declaredMethod.getOverrideKey());
     }
 
     return overrideKeysByMangledName;
-  }
-
-  /**
-   * The override key defines a grouping of method descriptors at a type that will be handled by the
-   * same actual implementation.
-   *
-   * <p>The difference between an override signature and an override key is that the override key
-   * will be different for package private methods in different packages even if they have the same
-   * signature.
-   */
-  // TODO(b/160656610): Cleanup signature related methods getOverrideKey, getMethodSignature, etc.
-  private static String getOverrideKey(MethodDescriptor methodDescriptor) {
-    if (!isActuallyPolymorphic(methodDescriptor)) {
-      return null;
-    }
-    if (methodDescriptor.getVisibility().isPackagePrivate()) {
-      return getPackagePrivateOverrideKey(methodDescriptor);
-    }
-    return methodDescriptor.getOverrideSignature();
-  }
-
-  // This is a somewhat hacky way to differentiate package private override keys. A more principled
-  // approach is to introduce a value type with two fields, so that we can use it as a key in
-  // the maps used for the bridge method computations.
-  private static final String PACKAGE_PRIVATE_MARKER = "{pp}-";
-
-  private static String getPackagePrivateOverrideKey(MethodDescriptor m) {
-    return m.getOverrideSignature()
-        + PACKAGE_PRIVATE_MARKER
-        + m.getEnclosingTypeDescriptor().getTypeDeclaration().getPackageName();
   }
 
   /**
@@ -709,14 +679,14 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     // methods and hence these overriding methods need to become the target for the corresponding
     // override key.
     getDeclaredMethodDescriptors().stream()
-        .filter(DeclaredTypeDescriptor::isActuallyPolymorphic)
+        .filter(MethodDescriptor::isPolymorphic)
         .forEach(
             m -> {
-              targetByOverrideKey.put(getOverrideKey(m), m);
+              targetByOverrideKey.put(m.getOverrideKey(), m);
               if (!m.getVisibility().isPackagePrivate()) {
                 // The non package private methods are ALSO targets for the package private
                 // signature.
-                String packagePrivateOverridingKey = getPackagePrivateOverrideKey(m);
+                String packagePrivateOverridingKey = m.getPackagePrivateOverrideKey();
                 targetByOverrideKey.put(packagePrivateOverridingKey, m);
               }
             });
@@ -729,7 +699,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     for (DeclaredTypeDescriptor superInterface : getInterfaceTypeDescriptors()) {
       for (MethodDescriptor methodDescriptor :
           superInterface.getOverrideKeyToTargetMap().values()) {
-        String overrideKey = getOverrideKey(methodDescriptor);
+        String overrideKey = methodDescriptor.getOverrideKey();
         MethodDescriptor overriddenMethod = targetByOverrideKey.get(overrideKey);
         // Looking at the superinterfaces to see if we find new targets for new override chains
         // introduced by this interface, or default methods that will need to replace an overridden
@@ -773,11 +743,7 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     // The method is a superclass method that is specialized by the current type and that
     // specialization introduced an new overridden method from some interface.
     return !method.getEnclosingTypeDescriptor().isInterface()
-        && !getOverrideKey(method).equals(getOverrideKey(method.getDeclarationDescriptor()));
-  }
-
-  private static boolean isActuallyPolymorphic(MethodDescriptor methodDescriptor) {
-    return methodDescriptor.isPolymorphic() && !methodDescriptor.getVisibility().isPrivate();
+        && !method.getOverrideKey().equals(method.getDeclarationDescriptor().getOverrideKey());
   }
 
   private MethodDescriptor createBridgeMethodDescriptor(

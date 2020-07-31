@@ -363,14 +363,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   private Method.Builder newMethodBuilder(ExecutableElement methodElement) {
     MethodDescriptor methodDescriptor =
         environment.createDeclarationMethodDescriptor(methodElement);
-    // TODO(b/31312257): fix or decide to not emit @override and suppress the error.
-    boolean isOverride =
-        environment.getOverriddenMethods(methodElement).stream()
-            .anyMatch(
-                m ->
-                    requiresOverrideAnnotation(
-                        methodDescriptor, environment.createDeclarationMethodDescriptor(m)));
-    return Method.newBuilder().setMethodDescriptor(methodDescriptor).setOverride(isOverride);
+    return Method.newBuilder().setMethodDescriptor(methodDescriptor);
   }
 
   private Expression convertConstantToLiteral(VariableElement variableElement) {
@@ -1291,7 +1284,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       qualifier =
           resolveOuterClassReference((DeclaredTypeDescriptor) qualifier.getTypeDescriptor(), false);
     }
-    if (qualifier == null && methodDescriptor.isPolymorphic()) {
+    if (qualifier == null && methodDescriptor.isInstanceMember()) {
       DeclaredTypeDescriptor enclosingTypeDescriptor =
           methodDescriptor.getEnclosingTypeDescriptor();
       qualifier = resolveOuterClassReference(enclosingTypeDescriptor, false);

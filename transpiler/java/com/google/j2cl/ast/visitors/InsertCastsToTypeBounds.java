@@ -111,7 +111,7 @@ public class InsertCastsToTypeBounds extends NormalizationPass {
   }
 
   private static Expression maybeAddJsDocAnnotation(MemberDescriptor target, Expression qualifier) {
-    if (!target.isPolymorphic()) {
+    if (!target.isInstanceMember()) {
       // Nothing to do for static methods or constructors. For static methods the qualifier is an
       // explicit constructor reference, whereas constructors do not have a qualifier at all so
       // cannot be a bounded type variable.

@@ -121,7 +121,7 @@ public abstract class FieldDescriptor extends MemberDescriptor {
   }
 
   @Override
-  public boolean isPolymorphic() {
+  public boolean isInstanceMember() {
     return !isStatic();
   }
 

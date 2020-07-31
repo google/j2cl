@@ -2456,7 +2456,6 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  @JsMethod void m(@JsOptional T t);",
             "}",
             "class Implementor implements I<Integer> {",
-            // TODO(b/151655770): This should not pass restriction checks.
             "  public void m(Integer i) {}",
             "}",
             "@JsFunction interface Function {",
@@ -2471,7 +2470,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "}")
         .assertErrorsWithoutSourcePosition(
             "Method 'void Buggy.foo(Object o)' should declare parameter 'o' as JsOptional.",
-            "Method 'String Buggy.bar(Object o)' should declare parameter 'o' as JsOptional.");
+            "Method 'String Buggy.bar(Object o)' should declare parameter 'o' as JsOptional.",
+            "Method 'void Implementor.m(Integer i)' should declare parameter 'i' as JsOptional.");
   }
 
   public void testJsOptionalNotAtEndFails() {
@@ -2902,7 +2902,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
                 + "('String Object.toString()' with JavaScript name 'toString').",
             "'String Buggy.toString()' cannot be assigned JavaScript name 'string' that is "
                 + "different from the JavaScript name of a method it overrides "
-                + "('String Object.toString()' with JavaScript name 'toString').",
+                + "('String NativeType.toString()' with JavaScript name 'toString').",
             "'int Buggy.hashCode()' cannot be assigned JavaScript name 'blah' "
                 + "that is different from the JavaScript name of a method it overrides "
                 + "('int Object.hashCode()' with JavaScript name 'hashCode').",

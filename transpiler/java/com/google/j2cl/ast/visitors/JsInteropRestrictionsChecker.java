@@ -545,7 +545,7 @@ public class JsInteropRestrictionsChecker {
 
             String messagePrefix = "JsEnum";
 
-            String targetMethodSignature = target.getDeclarationDescriptor().getMethodSignature();
+            String targetMethodSignature = target.getDeclarationDescriptor().getSignature();
             if (targetMethodSignature.equals("compareTo(java.lang.Enum)")) {
               if (qualifierTypeDescriptor.getJsEnumInfo().supportsComparable()) {
                 return;
@@ -895,10 +895,7 @@ public class JsInteropRestrictionsChecker {
 
   private void checkIllegalOverrides(Method method) {
     Optional<MethodDescriptor> jsOverlayOverride =
-        method
-            .getDescriptor()
-            .getOverriddenMethodDescriptors()
-            .stream()
+        method.getDescriptor().getJavaOverriddenMethodDescriptors().stream()
             .filter(MethodDescriptor::isJsOverlay)
             .findFirst();
 
@@ -913,7 +910,7 @@ public class JsInteropRestrictionsChecker {
 
     if (AstUtils.isNonNativeJsEnum(method.getDescriptor().getReturnTypeDescriptor())) {
       Optional<MethodDescriptor> nonJsEnumReturnOverride =
-          method.getDescriptor().getOverriddenMethodDescriptors().stream()
+          method.getDescriptor().getJavaOverriddenMethodDescriptors().stream()
               .filter(m -> !m.getReturnTypeDescriptor().toRawTypeDescriptor().isJsEnum())
               .findFirst();
 
@@ -1045,7 +1042,7 @@ public class JsInteropRestrictionsChecker {
     Method method = (Method) member;
     String jsName = method.getSimpleJsName();
     for (MethodDescriptor overriddenMethodDescriptor :
-        method.getDescriptor().getOverriddenMethodDescriptors()) {
+        method.getDescriptor().getJavaOverriddenMethodDescriptors()) {
       if (!overriddenMethodDescriptor.isJsMember()) {
         continue;
       }
@@ -1468,7 +1465,7 @@ public class JsInteropRestrictionsChecker {
     if (member.isMethod()) {
       Method method = (Method) member;
       boolean hasNonJsFunctionOverride =
-          method.getDescriptor().getOverriddenMethodDescriptors().stream()
+          method.getDescriptor().getJavaOverriddenMethodDescriptors().stream()
               .anyMatch(Predicates.not(MethodDescriptor::isJsFunction));
 
       if (hasNonJsFunctionOverride) {
@@ -1629,7 +1626,7 @@ public class JsInteropRestrictionsChecker {
 
     // Check that parameters that are declared JsOptional in overridden methods remain JsOptional.
     for (MethodDescriptor overriddenMethodDescriptor :
-        methodDescriptor.getOverriddenMethodDescriptors()) {
+        methodDescriptor.getJavaOverriddenMethodDescriptors()) {
       for (int i = 0; i < overriddenMethodDescriptor.getParameterDescriptors().size(); i++) {
         if (!overriddenMethodDescriptor.isParameterOptional(i)) {
           continue;
@@ -1890,7 +1887,7 @@ public class JsInteropRestrictionsChecker {
   }
 
   private static boolean isInstanceJsMember(MemberDescriptor memberDescriptor) {
-    return memberDescriptor.isPolymorphic()
+    return memberDescriptor.isInstanceMember()
         && memberDescriptor.isJsMember()
         && !memberDescriptor.isSynthetic();
   }

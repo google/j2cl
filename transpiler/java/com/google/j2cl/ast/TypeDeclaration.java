@@ -25,8 +25,6 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.LinkedHashMultimap;
-import com.google.common.collect.Multimap;
 import com.google.common.collect.Streams;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.common.ThreadLocalInterner;
@@ -615,51 +613,6 @@ public abstract class TypeDeclaration
   @Memoized
   public Collection<FieldDescriptor> getDeclaredFieldDescriptors() {
     return getDeclaredFieldDescriptorsFactory().get(this);
-  }
-
-  /**
-   * Builds and caches a mapping from method override signature to matching method descriptors from
-   * the entire super-type hierarchy. This map can *greatly* speed up method override checks.
-   */
-  @Memoized
-  Multimap<String, MethodDescriptor> getMethodDescriptorsByOverrideSignature() {
-    Multimap<String, MethodDescriptor> methodDescriptorsByOverrideSignature =
-        LinkedHashMultimap.create();
-
-    for (MethodDescriptor declaredMethodDescriptor : getDeclaredMethodDescriptors()) {
-      if (declaredMethodDescriptor.isPolymorphic()) {
-        methodDescriptorsByOverrideSignature.put(
-            declaredMethodDescriptor.getOverrideSignature(), declaredMethodDescriptor);
-      }
-    }
-
-    // Recurse into immediate super class and interfaces for overridden method.
-    if (getSuperTypeDeclaration() != null) {
-      methodDescriptorsByOverrideSignature.putAll(
-          getSuperTypeDeclaration().getMethodDescriptorsByOverrideSignature());
-    }
-
-    for (DeclaredTypeDescriptor interfaceTypeDescriptor : getInterfaceTypeDescriptors()) {
-      methodDescriptorsByOverrideSignature.putAll(
-          interfaceTypeDescriptor.getTypeDeclaration().getMethodDescriptorsByOverrideSignature());
-    }
-
-    return methodDescriptorsByOverrideSignature;
-  }
-
-  /**
-   * Returns a set of the method descriptors of methods in this type's super hierarchy that are
-   * overridden by {@code methodDescriptor}.
-   */
-  public Set<MethodDescriptor> getOverriddenMethodDescriptors(MethodDescriptor methodDescriptor) {
-    Set<MethodDescriptor> overriddenMethodDescriptors =
-        (Set<MethodDescriptor>)
-            getMethodDescriptorsByOverrideSignature().get(methodDescriptor.getOverrideSignature());
-
-    Set<MethodDescriptor> overriddenMethodDescriptorsExceptSelf = new LinkedHashSet<>();
-    overriddenMethodDescriptorsExceptSelf.addAll(overriddenMethodDescriptors);
-    overriddenMethodDescriptorsExceptSelf.remove(methodDescriptor);
-    return overriddenMethodDescriptorsExceptSelf;
   }
 
   @Override

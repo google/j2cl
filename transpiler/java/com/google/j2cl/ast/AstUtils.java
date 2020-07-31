@@ -207,16 +207,14 @@ public class AstUtils {
       Expression qualifier,
       MethodDescriptor fromMethodDescriptor,
       MethodDescriptor toMethodDescriptor,
-      String jsDocDescription,
-      boolean isOverride) {
+      String jsDocDescription) {
     return createForwardingMethod(
         sourcePosition,
         qualifier,
         fromMethodDescriptor,
         toMethodDescriptor,
         jsDocDescription,
-        /* isStaticDispatch */ false,
-        isOverride);
+        /* isStaticDispatch */ false);
   }
 
   private static Method createForwardingMethod(
@@ -225,8 +223,7 @@ public class AstUtils {
       MethodDescriptor fromMethodDescriptor,
       MethodDescriptor toMethodDescriptor,
       String jsDocDescription,
-      boolean isStaticDispatch,
-      boolean isOverride) {
+      boolean isStaticDispatch) {
     checkArgument(!fromMethodDescriptor.getEnclosingTypeDescriptor().isInterface());
 
     List<Variable> parameters =
@@ -244,7 +241,6 @@ public class AstUtils {
         .setMethodDescriptor(fromMethodDescriptor)
         .setParameters(parameters)
         .addStatements(statement)
-        .setOverride(isOverride)
         .setJsDocDescription(jsDocDescription)
         .setSourcePosition(sourcePosition)
         .build();
@@ -845,7 +841,7 @@ public class AstUtils {
             && !method.getDescriptor().isJsPropertySetter(),
         "JsPropery getter and setters should never be devirtualized %s",
         method.getReadableDescription());
-    checkArgument(method.getDescriptor().isPolymorphic());
+    checkArgument(method.getDescriptor().isInstanceMember());
     checkArgument(!method.getDescriptor().isInit(), "Do not devirtualize init().");
 
     MethodDescriptor devirtualizedMethodDescriptor =
@@ -940,7 +936,7 @@ public class AstUtils {
       MethodDescriptor methodDescriptor,
       DeclaredTypeDescriptor targetTypeDescriptor,
       Optional<String> postfix) {
-    checkArgument(methodDescriptor.isPolymorphic());
+    checkArgument(methodDescriptor.isInstanceMember());
 
     DeclaredTypeDescriptor enclosingTypeDescriptor = methodDescriptor.getEnclosingTypeDescriptor();
 
@@ -1064,13 +1060,6 @@ public class AstUtils {
               : arguments.get(i));
     }
     return new ArrayLiteral(varargsTypeDescriptor, valueExpressions);
-  }
-
-  /** Whether this method require methods that override it to have an @override @JsDoc annotation */
-  // TODO(b/31312257): fix or decide to not emit @override and suppress the error.
-  public static boolean overrideNeedsAtOverrideAnnotation(MethodDescriptor overrideMethod) {
-    return !overrideMethod.getEnclosingTypeDescriptor().isStarOrUnknown()
-        && !overrideMethod.getEnclosingTypeDescriptor().isJsFunctionInterface();
   }
 
   /** Whether the function is the identity function. */

@@ -79,7 +79,7 @@ public abstract class MemberDescriptor
 
   public abstract boolean isFinal();
 
-  public abstract boolean isPolymorphic();
+  public abstract boolean isInstanceMember();
 
   public abstract boolean isSynthetic();
 

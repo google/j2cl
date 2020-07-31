@@ -37,7 +37,6 @@ public class Method extends Member implements MethodLike {
   private final MethodDescriptor methodDescriptor;
   @Visitable List<Variable> parameters = new ArrayList<>();
   @Visitable Block body;
-  private boolean isOverride;
   private final String jsDocDescription;
 
   private Method(
@@ -45,12 +44,10 @@ public class Method extends Member implements MethodLike {
       MethodDescriptor methodDescriptor,
       List<Variable> parameters,
       Block body,
-      boolean isOverride,
       String jsDocDescription) {
     super(sourcePosition);
     this.methodDescriptor = checkNotNull(methodDescriptor);
     this.parameters.addAll(checkNotNull(parameters));
-    this.isOverride = isOverride;
     this.jsDocDescription = jsDocDescription;
     this.body = checkNotNull(body);
   }
@@ -99,20 +96,12 @@ public class Method extends Member implements MethodLike {
   }
 
   public boolean isBridge() {
-    return methodDescriptor.isBridge();
+    return methodDescriptor.isGeneralizingdBridge();
   }
 
   @Override
   public boolean isAbstract() {
     return methodDescriptor.isAbstract();
-  }
-
-  public boolean isOverride() {
-    return this.isOverride;
-  }
-
-  public void setOverride(boolean isOverride) {
-    this.isOverride = isOverride;
   }
 
   public String getJsDocDescription() {
@@ -182,7 +171,6 @@ public class Method extends Member implements MethodLike {
     private MethodDescriptor methodDescriptor;
     private List<Variable> parameters = new ArrayList<>();
     private List<Statement> statements = new ArrayList<>();
-    private boolean isOverride;
     private String jsDocDescription;
     private SourcePosition bodySourcePosition;
     private SourcePosition sourcePosition;
@@ -192,7 +180,6 @@ public class Method extends Member implements MethodLike {
       builder.methodDescriptor = method.getDescriptor();
       builder.parameters = Lists.newArrayList(method.getParameters());
       builder.statements = Lists.newArrayList(method.getBody().getStatements());
-      builder.isOverride = method.isOverride();
       builder.jsDocDescription = method.getJsDocDescription();
       builder.bodySourcePosition = method.getBody().getSourcePosition();
       builder.sourcePosition = method.getSourcePosition();
@@ -246,11 +233,6 @@ public class Method extends Member implements MethodLike {
       return this;
     }
 
-    public Builder setOverride(boolean isOverride) {
-      this.isOverride = isOverride;
-      return this;
-    }
-
     public Builder setJsDocDescription(String jsDocDescription) {
       this.jsDocDescription = jsDocDescription;
       return this;
@@ -273,8 +255,7 @@ public class Method extends Member implements MethodLike {
       checkState(parameters.size() == methodDescriptor.getParameterDescriptors().size());
       checkState(methodDescriptor.isDeclaration());
 
-      return new Method(
-          sourcePosition, methodDescriptor, parameters, body, isOverride, jsDocDescription);
+      return new Method(sourcePosition, methodDescriptor, parameters, body, jsDocDescription);
     }
   }
 }

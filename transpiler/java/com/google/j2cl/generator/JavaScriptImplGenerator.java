@@ -382,7 +382,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     if (methodDescriptor.isAbstract()) {
       jsDocBuilder.append(" @abstract");
     }
-    if (method.isOverride() && !method.isConstructor()) {
+    if (method.getDescriptor().isJsOverride()) {
       jsDocBuilder.append(" @override");
     }
     if (!methodDescriptor.getTypeParameterTypeDescriptors().isEmpty()) {
@@ -393,7 +393,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     }
 
     if (type.getDeclaration().isJsFunctionImplementation()
-        && methodDescriptor.isPolymorphic()
+        && methodDescriptor.isInstanceMember()
         && !method.getBody().getStatements().isEmpty()) {
       // TODO(b/120800425): Solve the object<->function duality in JsFunction implementations in a
       // more principled way.

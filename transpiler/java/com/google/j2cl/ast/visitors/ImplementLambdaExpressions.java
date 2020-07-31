@@ -315,8 +315,7 @@ public class ImplementLambdaExpressions extends NormalizationPass {
             FieldAccess.Builder.from(jsFunctionFieldDescriptor).build(),
             adaptorForwarderMethodDescriptor,
             jsFunctionMethodDescriptor,
-            /* jsDocDescription */ null,
-            /* isOverride */ false));
+            /* jsDocDescription */ null));
 
     return adaptorType;
   }

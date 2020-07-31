@@ -49,7 +49,7 @@ public class DevirtualizeBoxedTypesAndJsFunctionImplementations extends Normaliz
 
           private boolean shouldDevirtualize(Method method) {
             MethodDescriptor methodDescriptor = method.getDescriptor();
-            if (!methodDescriptor.isPolymorphic()) {
+            if (!methodDescriptor.isInstanceMember()) {
               return false;
             }
 

@@ -118,7 +118,7 @@ public class ImplementStaticInitialization extends NormalizationPass {
   /** Records access to member {@code targetMember} from type {@code callerEnclosingType}. */
   private void recordMemberReference(
       TypeDeclaration callerEnclosingType, MemberDescriptor targetMember) {
-    if (targetMember.isPolymorphic() || !targetMember.getVisibility().isPrivate()) {
+    if (targetMember.isInstanceMember() || !targetMember.getVisibility().isPrivate()) {
       return;
     }
 

@@ -68,7 +68,7 @@ public class DevirtualizeMethodCalls extends NormalizationPass {
           public Expression rewriteMethodCall(MethodCall methodCall) {
             MethodDescriptor targetMethodDescriptor = methodCall.getTarget();
 
-            if (!targetMethodDescriptor.isPolymorphic()) {
+            if (!targetMethodDescriptor.isInstanceMember()) {
               return methodCall;
             }
 

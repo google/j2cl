@@ -22,6 +22,7 @@ import static java.util.stream.Collectors.joining;
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
 import com.google.common.base.Joiner;
+import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -32,11 +33,14 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 import javax.annotation.Nullable;
 
 /** A reference to a method. */
@@ -370,8 +374,13 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   }
 
   @Override
-  public boolean isPolymorphic() {
+  public boolean isInstanceMember() {
     return !isStatic() && !isConstructor();
+  }
+
+  /** Whether the method does dynamic dispatch and can be overridden. */
+  boolean isPolymorphic() {
+    return isInstanceMember() && !getVisibility().isPrivate();
   }
 
   @Override
@@ -400,7 +409,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       return true;
     }
 
-    return getOverriddenMethodDescriptors().stream()
+    return getJavaOverriddenMethodDescriptors().stream()
         .map(MethodDescriptor::getEnclosingTypeDescriptor)
         .anyMatch(TypeDescriptors::isJavaLangObject);
   }
@@ -500,7 +509,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     MethodDescriptor thisMethod = getDeclarationDescriptor();
     MethodDescriptor thatMethod = (MethodDescriptor) thatMember.getDeclarationDescriptor();
-    return thisMethod.getMethodSignature().equals(thatMethod.getMethodSignature());
+    return thisMethod.getSignature().equals(thatMethod.getSignature());
   }
 
   /**
@@ -539,36 +548,41 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
   /** Returns {@code true} is {@code this} has the same signature as {@code that}. */
   public boolean isSameSignature(MethodDescriptor that) {
-    return getOverrideSignature().equals(that.getOverrideSignature());
-  }
-
-  /**
-   * Returns whether this method descriptor overrides the provided method descriptor from the JS
-   * source perspective.
-   *
-   * <p>In JS, methods override if they have the exact same name. Since we output package private
-   * methods with a different name than public or protected methods the methods that override in our
-   * output JS is slightly more restrictive than it is in the Java source.
-   */
-  public boolean isJsOverride(MethodDescriptor that) {
-    if (!isOverride(that)) {
-      return false;
-    }
-
-    Visibility thisVisibility = this.getVisibility();
-    Visibility thatVisibility = that.getVisibility();
-
-    return (thisVisibility.isPublicOrProtected() && thatVisibility.isPublicOrProtected())
-        || thisVisibility == thatVisibility;
+    return getSignature().equals(that.getSignature());
   }
 
   public Visibility getJsVisibility() {
-    // TODO(29632512): stop overriding visibility and reflect the java visibilities.
+    // TODO(b/29632512): stop overriding visibility and reflect the java visibilities.
     return getOrigin().overriddenJsVisibility;
   }
 
-  public String getMethodSignature() {
+  /** Returns a signature suitable for override checking from the Java source perspective. */
+  public String getSignature() {
     return buildMethodSignature(getName(), getParameterTypeDescriptors());
+  }
+
+  /**
+   * The override key defines a grouping of method descriptors at a type that will be handled by the
+   * same actual implementation.
+   *
+   * <p>The difference between an override signature and an override key is that the override key
+   * will be different for package private methods in different packages even if they have the same
+   * signature.
+   */
+  String getOverrideKey() {
+    checkState(isPolymorphic());
+    return getVisibility().isPackagePrivate() ? getPackagePrivateOverrideKey() : getSignature();
+  }
+
+  // This is a somewhat hacky way to differentiate package private override keys. A more principled
+  // approach is to introduce a value type with two fields, so that we can use it as a key in
+  // the maps used for the bridge method computations.
+  private static final String PACKAGE_PRIVATE_MARKER = "{pp}-";
+
+  String getPackagePrivateOverrideKey() {
+    return getSignature()
+        + PACKAGE_PRIVATE_MARKER
+        + getEnclosingTypeDescriptor().getTypeDeclaration().getPackageName();
   }
 
   abstract Builder toBuilder();
@@ -631,18 +645,65 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     return parameterTypeDescriptor.getReadableDescription();
   }
 
-  /** Returns a signature suitable for override checking from the Java source perspective. */
+  /**
+   * Returns a set of the method descriptors that are overridden by {@code methodDescriptor} from
+   * the Java semantics persepective.
+   */
   @Memoized
-  public String getOverrideSignature() {
-    return getParameterTypeDescriptors().stream()
-        .map(MethodDescriptor::getSignatureStringForParameter)
-        .collect(joining(";", getName() + "(", ")"));
+  public Set<MethodDescriptor> getJavaOverriddenMethodDescriptors() {
+    return getOverriddenMethodDescriptors(
+        this::isOverride, MethodDescriptor::getJavaOverriddenMethodDescriptors);
   }
 
-  /** Returns a set of the method descriptors that are overridden by {@code methodDescriptor}. */
+  /**
+   * Returns a set of the method descriptors that are overridden by {@code methodDescriptor} from
+   * the JavaScript perspective.
+   */
   @Memoized
-  public Set<MethodDescriptor> getOverriddenMethodDescriptors() {
-    return getEnclosingTypeDescriptor().getTypeDeclaration().getOverriddenMethodDescriptors(this);
+  public Set<MethodDescriptor> getJsOverriddenMethodDescriptors() {
+    return getOverriddenMethodDescriptors(
+        m -> m.getMangledName().equals(getMangledName()),
+        MethodDescriptor::getJsOverriddenMethodDescriptors);
+  }
+
+  /**
+   * Generic recursive computation of overridden.
+   *
+   * <p>Note that the getOverriddenMethodsFn is passed as a parameter to take advantage of the
+   * memoization and limit the computation cost.
+   */
+  private Set<MethodDescriptor> getOverriddenMethodDescriptors(
+      Predicate<MethodDescriptor> isOverrideFn,
+      Function<MethodDescriptor, Set<MethodDescriptor>> getOverriddenMethodsFn) {
+    Set<MethodDescriptor> overriddenMethods = new LinkedHashSet<>();
+    DeclaredTypeDescriptor enclosingTypeDescriptor = getEnclosingTypeDescriptor();
+    Streams.concat(
+            Stream.of(enclosingTypeDescriptor.getSuperTypeDescriptor()),
+            enclosingTypeDescriptor.getInterfaceTypeDescriptors().stream())
+        .filter(Predicates.notNull())
+        .flatMap(t -> t.getPolymorphicMethods().stream())
+        .filter(isOverrideFn)
+        .forEach(
+            m -> {
+              overriddenMethods.add(m);
+              overriddenMethods.addAll(getOverriddenMethodsFn.apply(m));
+            });
+
+    return overriddenMethods;
+  }
+
+  public boolean isJsOverride() {
+    return getJsOverriddenMethodDescriptors().stream().anyMatch(MethodDescriptor::isJsOverrideable);
+  }
+
+  /**
+   * Whether it is valid to emit a JsDoc @override annotations for methods that override methods in
+   * this type.
+   */
+  private boolean isJsOverrideable() {
+    return !isJsOverlay()
+        && !getEnclosingTypeDescriptor().isStarOrUnknown()
+        && !getEnclosingTypeDescriptor().isJsFunctionInterface();
   }
 
   @Override
