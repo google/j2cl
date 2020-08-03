@@ -554,7 +554,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
   }
 
   // TODO(b/36232268): enable once the bug is fixed.
-  public void disabled_testCollidingSubclassMethodToBridgeFails() {
+  public void testCollidingSubclassMethodToBridgeFails() {
     assertTranspileFails(
             "test.Buggy",
             "import jsinterop.annotations.*;",
@@ -568,9 +568,9 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  public void show(String s) {}",
             "}")
         .assertErrorsWithoutSourcePosition(
-            "'void SubBuggy.show(String)' cannot be assigned JavaScript name 'display' that is "
+            "'void SubBuggy.show(String s)' cannot be assigned JavaScript name 'display' that is "
                 + "different from the JavaScript name of a method it overrides "
-                + "('void Buggy.show(Object)' with JavaScript name 'show').");
+                + "('void Buggy.show(String)' with JavaScript name 'show').");
   }
 
   public void testCollidingSubclassMethodToMethodJsTypeFails() {
