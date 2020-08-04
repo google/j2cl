@@ -123,21 +123,17 @@ class ImportGatherer extends AbstractVisitor {
 
     // Super type and super interface imports are needed eagerly because they are used during the
     // declaration phase of JS execution. All other imports are lazy.
-    if (type.getSuperTypeDescriptor() != null) {
-      collectForJsDoc(type.getSuperTypeDescriptor());
-      addTypeDeclaration(
-          type.getSuperTypeDescriptor().getTypeDeclaration(), ImportCategory.LOADTIME);
-    }
-    for (DeclaredTypeDescriptor superInterfaceTypeDescriptor :
-        type.getSuperInterfaceTypeDescriptors()) {
-      collectForJsDoc(superInterfaceTypeDescriptor);
-      // JsFunction super interface reference is replaced with generic one by the code generator.
-      if (superInterfaceTypeDescriptor.isJsFunctionInterface()) {
-        superInterfaceTypeDescriptor = BootstrapType.JAVA_SCRIPT_FUNCTION.getDescriptor();
-      }
-      addTypeDeclaration(
-          superInterfaceTypeDescriptor.getTypeDeclaration(), ImportCategory.LOADTIME);
-    }
+    type.getSuperTypesStream()
+        .forEach(
+            t -> {
+              if (t.isJsFunctionInterface()) {
+                // JsFunction super interface reference is replaced with generic one by the code
+                // generator.
+                t = BootstrapType.JAVA_SCRIPT_FUNCTION.getDescriptor();
+              }
+              collectForJsDoc(t);
+              addTypeDeclaration(t.getTypeDeclaration(), ImportCategory.LOADTIME);
+            });
   }
 
   @Override

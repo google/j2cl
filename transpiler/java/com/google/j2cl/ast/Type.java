@@ -27,6 +27,7 @@ import com.google.j2cl.common.SourcePosition;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Stream;
 
 /** A node that represents a Java Type declaration in the compilation unit. */
 @Visitable
@@ -237,6 +238,13 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
 
   public List<DeclaredTypeDescriptor> getSuperInterfaceTypeDescriptors() {
     return typeDeclaration.getInterfaceTypeDescriptors();
+  }
+
+  public Stream<DeclaredTypeDescriptor> getSuperTypesStream() {
+    return superTypeDescriptor == null
+        ? getSuperInterfaceTypeDescriptors().stream()
+        : Stream.concat(
+            getSuperInterfaceTypeDescriptors().stream(), Stream.of(superTypeDescriptor));
   }
 
   public TypeDeclaration getDeclaration() {

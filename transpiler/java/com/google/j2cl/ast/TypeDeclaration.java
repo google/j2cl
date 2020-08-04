@@ -579,13 +579,12 @@ public abstract class TypeDeclaration
   protected Set<TypeDeclaration> getAllSuperTypesIncludingSelf() {
     Set<TypeDeclaration> allSupertypesIncludingSelf = new LinkedHashSet<>();
     allSupertypesIncludingSelf.add(this);
-    if (getSuperTypeDeclaration() != null) {
-      allSupertypesIncludingSelf.addAll(getSuperTypeDeclaration().getAllSuperTypesIncludingSelf());
-    }
-    for (DeclaredTypeDescriptor interfaceTypeDescriptor : getInterfaceTypeDescriptors()) {
-      allSupertypesIncludingSelf.addAll(
-          interfaceTypeDescriptor.getTypeDeclaration().getAllSuperTypesIncludingSelf());
-    }
+    toUnparameterizedTypeDescriptor()
+        .getSuperTypesStream()
+        .forEach(
+            t ->
+                allSupertypesIncludingSelf.addAll(
+                    t.getTypeDeclaration().getAllSuperTypesIncludingSelf()));
     return allSupertypesIncludingSelf;
   }
 

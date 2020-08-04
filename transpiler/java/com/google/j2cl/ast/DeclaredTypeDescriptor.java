@@ -485,19 +485,12 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
 
     Map<String, MethodDescriptor> methodsByMangledName = new LinkedHashMap<>();
 
-    // 1. Add interface methods.
-    getInterfaceTypeDescriptors().stream()
+    // 1. Add super type methods.
+    getSuperTypesStream()
         .flatMap(s -> s.getPolymorphicMethods().stream())
         .forEach(m -> methodsByMangledName.put(m.getMangledName(), m));
 
-    // 2.Add methods from the super class.
-    if (getSuperTypeDescriptor() != null) {
-      getSuperTypeDescriptor()
-          .getPolymorphicMethods()
-          .forEach(m -> methodsByMangledName.put(m.getMangledName(), m));
-    }
-
-    // 3. Add the new methods that are declared in the class, replacing the overridden methods.
+    // 2. Add the new methods that are declared in the class, replacing the overridden methods.
     getDeclaredMethodDescriptors().stream()
         .filter(MethodDescriptor::isPolymorphic)
         .forEach(m -> methodsByMangledName.put(m.getMangledName(), m));
@@ -631,13 +624,8 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   Map<String, String> getMangledNameToOverrideKeyMap() {
     Map<String, String> overrideKeysByMangledName = new LinkedHashMap<>();
 
-    for (DeclaredTypeDescriptor interfaceDescriptor : getInterfaceTypeDescriptors()) {
-      overrideKeysByMangledName.putAll(interfaceDescriptor.getMangledNameToOverrideKeyMap());
-    }
-
-    if (getSuperTypeDescriptor() != null) {
-      overrideKeysByMangledName.putAll(getSuperTypeDescriptor().getMangledNameToOverrideKeyMap());
-    }
+    getSuperTypesStream()
+        .forEach(t -> overrideKeysByMangledName.putAll(t.getMangledNameToOverrideKeyMap()));
 
     for (MethodDescriptor declaredMethod : getDeclaredMethodDescriptors()) {
       if (!declaredMethod.isPolymorphic()) {
@@ -862,12 +850,18 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     Map<TypeVariable, TypeDescriptor> specializedTypeArgumentByTypeParameters =
         new LinkedHashMap<>(getLocalParameterization());
 
-    Stream.concat(Stream.of(getSuperTypeDescriptor()), getInterfaceTypeDescriptors().stream())
-        .filter(Predicates.notNull())
+    getSuperTypesStream()
         .forEach(
             t -> specializedTypeArgumentByTypeParameters.putAll(t.getTransitiveParameterization()));
 
     return specializedTypeArgumentByTypeParameters;
+  }
+
+  Stream<DeclaredTypeDescriptor> getSuperTypesStream() {
+    return getSuperTypeDescriptor() == null
+        ? getInterfaceTypeDescriptors().stream()
+        : Stream.concat(
+            getInterfaceTypeDescriptors().stream(), Stream.of(getSuperTypeDescriptor()));
   }
 
   private Map<TypeVariable, TypeDescriptor> getLocalParameterization() {

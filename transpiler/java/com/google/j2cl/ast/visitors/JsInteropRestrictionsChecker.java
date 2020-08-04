@@ -206,20 +206,17 @@ public class JsInteropRestrictionsChecker {
   }
 
   private void checkSuperTypes(Type type) {
-    if (hasNonNativeJsEnumTypeArgument(type.getSuperTypeDescriptor())) {
-      problems.error(
-          type.getSourcePosition(),
-          "Type '%s' cannot subclass a class parameterized by JsEnum. (b/118304241)",
-          type.getReadableDescription());
-    }
-
-    if (type.getSuperInterfaceTypeDescriptors().stream()
-        .anyMatch(JsInteropRestrictionsChecker::hasNonNativeJsEnumTypeArgument)) {
-      problems.error(
-          type.getSourcePosition(),
-          "Type '%s' cannot implement an interface parameterized by JsEnum. (b/118304241)",
-          type.getReadableDescription());
-    }
+    type.getSuperTypesStream()
+        .filter(JsInteropRestrictionsChecker::hasNonNativeJsEnumTypeArgument)
+        .forEach(
+            t ->
+                problems.error(
+                    type.getSourcePosition(),
+                    t.isClass()
+                        ? "Type '%s' cannot extend a class parameterized by JsEnum. (b/118304241)"
+                        : "Type '%s' cannot implement an interface parameterized by JsEnum."
+                            + " (b/118304241)",
+                    type.getReadableDescription()));
   }
 
   private static boolean hasNonNativeJsEnumTypeArgument(DeclaredTypeDescriptor typeDescriptor) {
@@ -1195,24 +1192,18 @@ public class JsInteropRestrictionsChecker {
       return false;
     }
 
-    TypeDescriptor superTypeDescriptor = type.getSuperTypeDescriptor();
-    if (superTypeDescriptor != null
-        && !TypeDescriptors.isJavaLangObject(superTypeDescriptor)
-        && !superTypeDescriptor.isNative()) {
-      problems.error(
-          type.getSourcePosition(),
-          "Native JsType '%s' can only extend native JsType classes.",
-          readableDescription);
-    }
-    for (TypeDescriptor interfaceType : type.getSuperInterfaceTypeDescriptors()) {
-      if (!interfaceType.isNative()) {
-        problems.error(
-            type.getSourcePosition(),
-            "Native JsType '%s' can only %s native JsType interfaces.",
-            readableDescription,
-            type.isInterface() ? "extend" : "implement");
-      }
-    }
+    type.getSuperTypesStream()
+        .filter(Predicates.not(TypeDescriptors::isJavaLangObject))
+        .filter(Predicates.not(TypeDescriptor::isNative))
+        .findFirst()
+        .ifPresent(
+            t ->
+                problems.error(
+                    type.getSourcePosition(),
+                    "Native JsType '%s' can only %s native JsType %s.",
+                    readableDescription,
+                    type.isInterface() || t.isClass() ? "extend" : "implement",
+                    t.isClass() ? "classes" : "interfaces"));
 
     if (type.hasInstanceInitializerBlocks()) {
       problems.error(
@@ -1518,15 +1509,16 @@ public class JsInteropRestrictionsChecker {
   }
 
   private void checkJsFunctionSubtype(Type type) {
-    for (TypeDescriptor superInterface : type.getSuperInterfaceTypeDescriptors()) {
-      if (superInterface.isJsFunctionInterface()) {
-        problems.error(
-            type.getSourcePosition(),
-            "'%s' cannot extend JsFunction '%s'.",
-            type.getDeclaration().getReadableDescription(),
-            superInterface.getReadableDescription());
-      }
-    }
+    type.getSuperTypesStream()
+        .filter(DeclaredTypeDescriptor::isJsFunctionInterface)
+        .findFirst()
+        .ifPresent(
+            superInterface ->
+                problems.error(
+                    type.getSourcePosition(),
+                    "'%s' cannot extend JsFunction '%s'.",
+                    type.getDeclaration().getReadableDescription(),
+                    superInterface.getReadableDescription()));
   }
 
   private <T extends HasJsNameInfo & HasSourcePosition & HasReadableDescription>

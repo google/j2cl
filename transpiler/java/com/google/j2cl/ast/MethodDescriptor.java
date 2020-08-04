@@ -22,7 +22,6 @@ import static java.util.stream.Collectors.joining;
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
 import com.google.common.base.Joiner;
-import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -40,7 +39,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.stream.Stream;
 import javax.annotation.Nullable;
 
 /** A reference to a method. */
@@ -676,11 +674,9 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       Predicate<MethodDescriptor> isOverrideFn,
       Function<MethodDescriptor, Set<MethodDescriptor>> getOverriddenMethodsFn) {
     Set<MethodDescriptor> overriddenMethods = new LinkedHashSet<>();
-    DeclaredTypeDescriptor enclosingTypeDescriptor = getEnclosingTypeDescriptor();
-    Streams.concat(
-            Stream.of(enclosingTypeDescriptor.getSuperTypeDescriptor()),
-            enclosingTypeDescriptor.getInterfaceTypeDescriptors().stream())
-        .filter(Predicates.notNull())
+
+    getEnclosingTypeDescriptor()
+        .getSuperTypesStream()
         .flatMap(t -> t.getPolymorphicMethods().stream())
         .filter(isOverrideFn)
         .forEach(

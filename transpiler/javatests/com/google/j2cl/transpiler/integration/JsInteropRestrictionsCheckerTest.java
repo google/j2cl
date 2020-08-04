@@ -1839,7 +1839,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "JsEnum 'MyJsEnum' cannot have instance field 'MyJsEnum.instanceField'.",
             "JsEnum 'MyJsEnum' cannot have an instance initializer.",
             "Type 'AListSubclass' cannot define a type variable with a JsEnum as a bound.",
-            "Type 'AListSubclass' cannot subclass a class parameterized by JsEnum. (b/118304241)",
+            "Type 'AListSubclass' cannot extend a class parameterized by JsEnum. (b/118304241)",
             "Type 'AListSubclass' cannot implement an interface parameterized by JsEnum. "
                 + "(b/118304241)",
             "Method 'MyJsEnum AListSubclass.getObject()' returning JsEnum cannot override method "
