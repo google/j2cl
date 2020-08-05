@@ -23,6 +23,7 @@ import com.google.j2cl.ast.visitors.ControlStatementFormatter;
 import com.google.j2cl.ast.visitors.CreateImplicitConstructors;
 import com.google.j2cl.ast.visitors.DevirtualizeBoxedTypesAndJsFunctionImplementations;
 import com.google.j2cl.ast.visitors.DevirtualizeMethodCalls;
+import com.google.j2cl.ast.visitors.EnumMethodsCreator;
 import com.google.j2cl.ast.visitors.ExpandCompoundAssignments;
 import com.google.j2cl.ast.visitors.FilloutMissingSourceMapInformation;
 import com.google.j2cl.ast.visitors.FixSuperCallQualifiers;
@@ -181,6 +182,7 @@ class J2clTranspiler {
         new CreateImplicitConstructors(),
         new InsertExplicitSuperCalls(),
         new BridgeMethodsCreator(),
+        new EnumMethodsCreator(),
         // TODO(b/31865368): Remove RewriteStringEquals pass once delayed field initialization
         //  is introduced and String.java gets updated to use it.
         new RewriteStringEquals(),

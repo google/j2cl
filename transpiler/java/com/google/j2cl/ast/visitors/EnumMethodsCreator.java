@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.frontend.common;
+package com.google.j2cl.ast.visitors;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.collect.ImmutableList.toImmutableList;
@@ -49,13 +49,14 @@ import java.util.List;
  * Enum types. Additionally, we add a private static field "namesToValuesMap" which is created the
  * first time valueOf() is called and allows for quick lookup of Enum values by (String) name.
  */
-public class EnumMethodsCreator {
+public class EnumMethodsCreator extends NormalizationPass {
   private static final String VALUE_OF_METHOD_NAME = "valueOf";
   private static final String VALUES_METHOD_NAME = "values";
   private static final String NAMES_TO_VALUES_MAP_FIELD_NAME = "namesToValuesMap";
 
-  public static void applyTo(Type enumType) {
-    if (enumType.isJsEnum()) {
+  @Override
+  public void applyTo(Type enumType) {
+    if (enumType.isJsEnum() || !enumType.isEnum()) {
       // JsEnums do not support values() nor valueOf().
       return;
     }
@@ -202,9 +203,7 @@ public class EnumMethodsCreator {
 
     // Create method body.
     List<Expression> values =
-        enumType
-            .getEnumFields()
-            .stream()
+        enumType.getEnumFields().stream()
             .map(enumField -> FieldAccess.Builder.from(enumField.getDescriptor()).build())
             .collect(toImmutableList());
 
@@ -225,6 +224,4 @@ public class EnumMethodsCreator {
             .setSourcePosition(sourcePosition)
             .build());
   }
-
-  private EnumMethodsCreator() {}
 }

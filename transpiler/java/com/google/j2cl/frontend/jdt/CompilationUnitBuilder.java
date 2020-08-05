@@ -95,7 +95,6 @@ import com.google.j2cl.ast.WhileStatement;
 import com.google.j2cl.common.FilePosition;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.frontend.common.AbstractCompilationUnitBuilder;
-import com.google.j2cl.frontend.common.EnumMethodsCreator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -205,7 +204,6 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
               enumType.addField(ordinal, convert(enumConstantDeclaration));
               ordinal++;
             }
-            EnumMethodsCreator.applyTo(enumType);
             return null;
           });
     }

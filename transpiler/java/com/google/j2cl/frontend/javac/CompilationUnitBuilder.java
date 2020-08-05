@@ -90,7 +90,6 @@ import com.google.j2cl.ast.WhileStatement;
 import com.google.j2cl.common.FilePosition;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.frontend.common.AbstractCompilationUnitBuilder;
-import com.google.j2cl.frontend.common.EnumMethodsCreator;
 import com.google.j2cl.frontend.common.PackageInfoCache;
 import com.sun.source.tree.CompilationUnitTree;
 import com.sun.source.tree.Tree.Kind;
@@ -216,16 +215,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
   private Type convertClassDeclaration(JCClassDecl classDecl, JCTree sourcePositionNode) {
     return convertAndAddType(
-        classDecl.sym,
-        classDecl.getMembers(),
-        sourcePositionNode,
-        type -> {
-          if (type.isEnum()) {
-            EnumMethodsCreator.applyTo(type);
-          }
-
-          return null;
-        });
+        classDecl.sym, classDecl.getMembers(), sourcePositionNode, type -> null);
   }
 
   private void convertTypeBody(Type type, ClassSymbol classSymbol, List<JCTree> bodyDeclarations) {
