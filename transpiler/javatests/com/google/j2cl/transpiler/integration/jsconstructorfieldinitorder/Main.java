@@ -15,7 +15,7 @@
  */
 package com.google.j2cl.transpiler.integration.jsconstructorfieldinitorder;
 
-import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+import static com.google.j2cl.transpiler.utils.Asserts.assertEquals;
 
 import jsinterop.annotations.JsConstructor;
 
@@ -24,6 +24,7 @@ public class Main {
   static class Foo extends Bar {
     private String foo;
     private int bar;
+    private int zoo = 5;
 
     @JsConstructor
     public Foo() {
@@ -32,9 +33,13 @@ public class Main {
 
     @Override
     protected void initialize() {
-      super.initialize();
-      bar = 42;
+      assertEquals(null, this.foo);
+      // Fields are not initialized via JsConstructor yet so following doesn't hold (b/27484158).
+      // assertEquals(0, this.bar);
+      // assertEquals(0, this.zoo);
       foo = ""; // Note: "" chosen to detect potential 'falsey' mistake.
+      bar = 42;
+      zoo = 1000;
     }
   }
 
@@ -49,8 +54,9 @@ public class Main {
   }
 
   public static void main(String... args) {
-    // Reproduces b/27484158
-    // assertTrue(new Foo().bar == 42);
-    assertTrue(new Foo().foo.equals(""));
+    assertEquals("", new Foo().foo);
+    // Fields are initialized late via JsConstructor and the value is overridden (b/27484158).
+    // assertEquals(42, new Foo().bar);
+    assertEquals(5, new Foo().zoo);
   }
 }
