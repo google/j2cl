@@ -29,7 +29,6 @@ import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.IfStatement;
-import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -50,7 +49,6 @@ import java.util.List;
  * first time valueOf() is called and allows for quick lookup of Enum values by (String) name.
  */
 public class EnumMethodsCreator extends NormalizationPass {
-  private static final String VALUE_OF_METHOD_NAME = "valueOf";
   private static final String VALUES_METHOD_NAME = "values";
   private static final String NAMES_TO_VALUES_MAP_FIELD_NAME = "namesToValuesMap";
 
@@ -147,31 +145,29 @@ public class EnumMethodsCreator extends NormalizationPass {
 
   private static MethodDescriptor getValueOfMethodDescriptor(
       DeclaredTypeDescriptor enumTypeDescriptor) {
-    boolean isJsType = enumTypeDescriptor.getTypeDeclaration().isJsType();
-    return MethodDescriptor.newBuilder()
-        .setStatic(true)
-        .setEnclosingTypeDescriptor(enumTypeDescriptor)
-        .setName(VALUE_OF_METHOD_NAME)
-        .setReturnTypeDescriptor(enumTypeDescriptor.toNonNullable())
+    MethodDescriptor valueOfMethodDescriptor =
+        enumTypeDescriptor.getMethodDescriptor(
+            MethodDescriptor.VALUE_OF_METHOD_NAME, TypeDescriptors.get().javaLangString);
+
+    // Adjust the nullability of the return since the method is guaranteed not to return null.
+    return MethodDescriptor.Builder.from(valueOfMethodDescriptor)
         .setParameterTypeDescriptors(TypeDescriptors.get().javaLangString.toNonNullable())
-        .setJsInfo(isJsType ? JsInfo.RAW : JsInfo.NONE)
+        .setReturnTypeDescriptor(enumTypeDescriptor.toNonNullable())
         .build();
   }
 
   private static MethodDescriptor getValuesMethodDescriptor(
       DeclaredTypeDescriptor enumTypeDescriptor) {
-    return MethodDescriptor.newBuilder()
-        .setStatic(true)
-        .setEnclosingTypeDescriptor(enumTypeDescriptor)
-        .setName(VALUES_METHOD_NAME)
-        // Set the expected nullability for jsinterop purposes. Values returns a nonnullable
-        // array of nonnullable enum values.
+    MethodDescriptor valuesMethodDescriptor =
+        enumTypeDescriptor.getMethodDescriptor(VALUES_METHOD_NAME);
+    // Adjust the nullability of the return since the method is guaranteed not to return a null
+    // array nor an array containing nulls.
+    return MethodDescriptor.Builder.from(valuesMethodDescriptor)
         .setReturnTypeDescriptor(
             ArrayTypeDescriptor.newBuilder()
                 .setComponentTypeDescriptor(enumTypeDescriptor.toNonNullable())
-                .setNullable(false)
-                .build())
-        .setJsInfo(enumTypeDescriptor.getTypeDeclaration().isJsType() ? JsInfo.RAW : JsInfo.NONE)
+                .build()
+                .toNonNullable())
         .build();
   }
 

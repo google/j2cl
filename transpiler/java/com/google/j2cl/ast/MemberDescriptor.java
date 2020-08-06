@@ -61,7 +61,9 @@ public abstract class MemberDescriptor
    * Returns true if both members are references/declaration of the same particular member in the
    * same enclosing class.
    */
-  public abstract boolean isSameMember(MemberDescriptor thatMember);
+  public final boolean isSameMember(MemberDescriptor thatMember) {
+    return getDeclarationDescriptor().equals(thatMember.getDeclarationDescriptor());
+  }
 
   @Nullable
   public abstract String getName();

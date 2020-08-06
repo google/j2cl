@@ -443,7 +443,7 @@ class JavaEnvironment {
           .add(
               // If it is a class-level type variable, use the simple name (with prefix "C_") as the
               // current name component.
-              "C_" + typeVariable)
+              "C_" + typeVariable.asElement().getSimpleName())
           .build();
     } else {
       return ImmutableList.<String>builder()
