@@ -4,21 +4,29 @@
 load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_binary")
 load(":j2cl_multi_test.bzl", "j2cl_multi_test")
 load("//javascript/tools/jscompiler/builddefs:flags.bzl", "VERBOSE_WARNING_FLAGS_STRICT", "WHITESPACE_ONLY_FLAGS")
-load("//third_party/java/j2cl:j2cl_test.bzl", "j2cl_test")
-load("//jre/java:j2cl_mirror_from_gwt.bzl", "j2cl_mirror_from_gwt", "java_source_copy")
-load("//build_defs:rules.bzl", "j2cl_library")
+load("//jre/java:package_sources.bzl", "package_sources")
+load("//build_defs:rules.bzl", "j2cl_library", "j2cl_test")
 load("@bazel_skylib//rules:build_test.bzl", "build_test")
 
 package(
     licenses = ["notice"],  # Apache 2.0
 )
 
-j2cl_mirror_from_gwt(
+package_sources(
+    name = "emul_tests_lib_java_files",
+    srcs = ["//third_party/java_src/gwt/svn/trunk/user:java_emul_test"],
+    super_srcs = glob(["**/*.java"]),
+)
+
+j2cl_library(
     name = "emul_tests_lib",
     testonly = 1,
-    # Bootstrap files are dropped in compiled mode so we add it as a _js_srcs here.
-    # TODO(b/62039178): Remove this.
-    extra_js_srcs = [":test_defines"],
+    srcs = [
+        ":emul_tests_lib_java_files",
+        # Bootstrap files are dropped in compiled mode so we add it as a srcs here.
+        # TODO(b/62039178): Remove this.
+        ":test_defines",
+    ] + glob(["**/*.js"]),
     generate_build_test = False,
     javacopts = [
         "-Xep:DoNotCall:OFF",
@@ -30,14 +38,13 @@ j2cl_mirror_from_gwt(
         "-Xep:SelfEquality:OFF",
         "-Xep:SelfEquals:OFF",
     ],
-    mirrored_files = ["//third_party/java_src/gwt/svn/trunk/user:java_emul_test"],
     deps = [
         "//third_party:gwt-jsinterop-annotations-j2cl",
         "//third_party:junit-j2cl",
     ],
 )
 
-java_source_copy(
+package_sources(
     name = "java_emul_internal",
     srcs = ["//third_party/java_src/gwt/svn/trunk/user:java_emul_internal"],
     excludes = [
@@ -153,7 +160,7 @@ closure_js_binary(
     name = "conformance_binary",
     defs = COMFORMANCE_CHECK_FLAGS,
     extra_inputs = ["conformance_proto.txt"],
-    deps = ["//jre/java:jre"],
+    deps = ["//:jre"],
 )
 
 closure_js_binary(
@@ -161,7 +168,7 @@ closure_js_binary(
     compiler = "//javascript/tools/jscompiler:head",
     defs = COMFORMANCE_CHECK_FLAGS,
     extra_inputs = ["conformance_proto.txt"],
-    deps = ["//jre/java:jre"],
+    deps = ["//:jre"],
 )
 
 closure_js_binary(
@@ -169,7 +176,7 @@ closure_js_binary(
     compiler = "//javascript/tools/jscompiler:head",
     defs = COMFORMANCE_CHECK_FLAGS + WHITESPACE_ONLY_FLAGS,
     extra_inputs = ["conformance_proto.txt"],
-    deps = ["//jre/java:jre"],
+    deps = ["//:jre"],
 )
 
 closure_js_binary(
@@ -179,7 +186,7 @@ closure_js_binary(
         "analyzerChecks",
         "deprecated",
     ],
-    deps = ["//jre/java:jre"],
+    deps = ["//:jre"],
 )
 
 genrule(

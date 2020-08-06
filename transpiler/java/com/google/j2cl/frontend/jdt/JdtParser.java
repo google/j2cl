@@ -95,7 +95,11 @@ public class JdtParser {
           }
         };
     parser.createASTs(
-        filePaths.stream().map(f -> f.sourcePath()).toArray(String[]::new),
+        filePaths.stream()
+            .map(FileInfo::sourcePath)
+            // Skip module-info in JDT to avoid NPEs. They are not used regardless...
+            .filter(f -> !f.endsWith("module-info.java"))
+            .toArray(String[]::new),
         getEncodings(filePaths.size()),
         FrontendConstants.WELL_KNOWN_CLASS_NAMES.stream()
             .map(BindingKey::createTypeBindingKey)

@@ -1,8 +1,6 @@
 # Description:
 #   Build rules used by J2CL and BUILD targets used by the rules.
 
-load("@bazel_tools//tools/jdk:default_java_toolchain.bzl", "default_java_toolchain")
-
 package(
     default_visibility = ["//visibility:public"],
     licenses = ["notice"],  # Apache 2.0
@@ -39,9 +37,9 @@ alias(
 # Standard library related
 # ***************************************************
 
-default_java_toolchain(
+alias(
     name = "j2cl_java_toolchain",
-    bootclasspath = ["//jre/java:libjre_bootclasspath.jar"],
+    actual = "//jre/java:j2cl_java_toolchain",
 )
 
 # ***************************************************

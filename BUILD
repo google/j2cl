@@ -58,3 +58,8 @@ bool_flag(
     name = "enable_experimental_tree_artifact_mode",
     build_setting_default = False,
 )
+
+bool_flag(
+    name = "enable_experimental_java11_support",
+    build_setting_default = False,
+)

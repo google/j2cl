@@ -2,28 +2,79 @@
 #   j2cl/jre: JRE subset for transpilation.
 #
 
-load(":j2cl_mirror_from_gwt.bzl", "j2cl_mirror_from_gwt")
+load("//build_defs:rules.bzl", "j2cl_library")
+load("@bazel_tools//tools/jdk:default_java_toolchain.bzl", "default_java_toolchain")
+load(":package_sources.bzl", "package_sources")
+load(":jdk_system.bzl", "jdk_system")
 
 package(
     default_visibility = [
         "//:__pkg__",
-        "//build_defs/internal_do_not_use:__pkg__",
         "//jre/javatests:__pkg__",
         "//transpiler/javatests/com/google/j2cl/transpiler:__subpackages__",
     ],
     licenses = ["notice"],  # Apache 2.0
 )
 
-j2cl_mirror_from_gwt(
-    name = "jre",
-    excluded_srcs = ["javasynth/**"],
-    extra_js_srcs = [
-        "//jre/java/javaemul/internal/vmbootstrap/primitives",
+config_setting(
+    name = "experimental_java11_support",
+    flag_values = {
+        "//:enable_experimental_java11_support": "True",
+    },
+)
+
+JRE_JAVAC_OPTS = select({
+    ":experimental_java11_support": [
+        # Remove the system (aka pre Java9 'bootclasspath').
+        # We need this to compile JRE otherwise it will result in a split package for JRE sources.
+        "--system",
+        "none",
+        # Allow JRE classes are allowed to depend on the jsinterop annotations
+        "--add-reads",
+        "java.base=ALL-UNNAMED",
+        # Enable Java 11 for the JRE sources
+        "-source",
+        "11",
+        "-target",
+        "11",
     ],
-    mirrored_files = [
+    "//conditions:default": [
+        "-source",
+        "8",
+        "-target",
+        "8",
+    ],
+})
+
+package_sources(
+    name = "jre_java_files",
+    srcs = [
         "//third_party:gwt_java_emul",
         "//third_party:gwt_java_emul_internal",
     ],
+    super_srcs = select({
+        ":experimental_java11_support": glob(["**/*.java"]),
+        "//conditions:default": glob(
+            ["**/*.java"],
+            exclude = ["module-info.java"],
+        ),
+    }),
+)
+
+filegroup(
+    name = "jre_native_files",
+    srcs = glob(["**/*.js"]) + [
+        "//jre/java/javaemul/internal/vmbootstrap/primitives",
+    ],
+)
+
+j2cl_library(
+    name = "jre",
+    srcs = [
+        ":jre_java_files",
+        ":jre_native_files",
+    ],
+    javacopts = JRE_JAVAC_OPTS,
     deps = [
         "//third_party:closure_math_long",
         "//third_party:closure_reflect",
@@ -32,21 +83,32 @@ j2cl_mirror_from_gwt(
     ],
 )
 
-# In addition to JRE emulation, this target includes classes that are referenced
-# due to synthesized byte code and only included to satisfy the compiler checks
 # Note that this target is separately compiled as a java_library to avoid circular
 # dependency.
 java_library(
     name = "jre_bootclasspath",
-    srcs = glob(["javasynth/**"]) + [":jre_java_files"],
-    javacopts = [
-        "-source",
-        "8",
-        "-target",
-        "8",
-    ],
+    srcs = [":jre_java_files"],
+    javacopts = JRE_JAVAC_OPTS,
     deps = [
         "//third_party:gwt-javaemul-internal-annotations",
         "//third_party:gwt-jsinterop-annotations",
     ],
+)
+
+jdk_system(
+    name = "jdk_system",
+    bootclasspath = ":jre_bootclasspath",
+)
+
+JAVA_VERSION = select({
+    ":experimental_java11_support": "11",
+    "//conditions:default": "8",
+})
+
+default_java_toolchain(
+    name = "j2cl_java_toolchain",
+    bootclasspath = [":jdk_system"],
+    source_version = JAVA_VERSION,
+    target_version = JAVA_VERSION,
+    visibility = ["//build_defs/internal_do_not_use:__pkg__"],
 )
