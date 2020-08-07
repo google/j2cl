@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.readable.autovalueomitidentifier;
 
 import com.google.auto.value.AutoValue;
+import javax.annotation.Nullable;
 
 @AutoValue
 public abstract class SimpleAutoValue {
@@ -26,6 +27,9 @@ public abstract class SimpleAutoValue {
   public abstract String getStringField();
 
   public abstract Double getDoubleField();
+
+  @Nullable
+  public abstract Double getNullableField();
 
   public abstract int[] getArrayField();
 }

@@ -21,26 +21,29 @@ class AutoValue__SimpleAutoValue extends SimpleAutoValue {
     this.f_stringField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_SimpleAutoValue_;
     /**@type {?number}*/
     this.f_doubleField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_SimpleAutoValue_;
+    /**@type {?number}*/
+    this.f_nullableField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_SimpleAutoValue_;
     /**@type {Array<number>}*/
     this.f_arrayField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_SimpleAutoValue_;
   }
   /** @return {!AutoValue__SimpleAutoValue} */
-  static $create__int__boolean__java_lang_String__java_lang_Double__arrayOf_int(
+  static $create__int__boolean__java_lang_String__java_lang_Double__java_lang_Double__arrayOf_int(
       /** number */ intField, /** boolean */ booleanField,
       /** ?string */ stringField, /** ?number */ doubleField,
-      /** Array<number> */ arrayField) {
+      /** ?number */ nullableField, /** Array<number> */ arrayField) {
     AutoValue__SimpleAutoValue.$clinit();
     let $instance = new AutoValue__SimpleAutoValue();
     $instance
-        .$ctor__com_google_j2cl_transpiler_readable_autovalue_AutoValue_SimpleAutoValue__int__boolean__java_lang_String__java_lang_Double__arrayOf_int(
-            intField, booleanField, stringField, doubleField, arrayField);
+        .$ctor__com_google_j2cl_transpiler_readable_autovalue_AutoValue_SimpleAutoValue__int__boolean__java_lang_String__java_lang_Double__java_lang_Double__arrayOf_int(
+            intField, booleanField, stringField, doubleField, nullableField,
+            arrayField);
     return $instance;
   }
 
-  $ctor__com_google_j2cl_transpiler_readable_autovalue_AutoValue_SimpleAutoValue__int__boolean__java_lang_String__java_lang_Double__arrayOf_int(
+  $ctor__com_google_j2cl_transpiler_readable_autovalue_AutoValue_SimpleAutoValue__int__boolean__java_lang_String__java_lang_Double__java_lang_Double__arrayOf_int(
       /** number */ intField, /** boolean */ booleanField,
       /** ?string */ stringField, /** ?number */ doubleField,
-      /** Array<number> */ arrayField) {
+      /** ?number */ nullableField, /** Array<number> */ arrayField) {
     this.$ctor__com_google_j2cl_transpiler_readable_autovalue_SimpleAutoValue__();
     this.f_intField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_SimpleAutoValue_ =
         intField;
@@ -58,6 +61,8 @@ class AutoValue__SimpleAutoValue extends SimpleAutoValue {
     }
     this.f_doubleField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_SimpleAutoValue_ =
         doubleField;
+    this.f_nullableField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_SimpleAutoValue_ =
+        nullableField;
     if ($Equality.$same(arrayField, null)) {
       throw $Exceptions.toJs(
           NullPointerException.$create__java_lang_String('Null arrayField'));
@@ -84,6 +89,11 @@ class AutoValue__SimpleAutoValue extends SimpleAutoValue {
   m_getDoubleField__() {
     return this
         .f_doubleField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_SimpleAutoValue_;
+  }
+  /** @override @return {?number} */
+  m_getNullableField__() {
+    return this
+        .f_nullableField__com_google_j2cl_transpiler_readable_autovalue_AutoValue_SimpleAutoValue_;
   }
   /** @override @return {Array<number>} */
   m_getArrayField__() {
