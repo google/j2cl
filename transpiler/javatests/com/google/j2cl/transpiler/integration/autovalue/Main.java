@@ -16,11 +16,20 @@
 package com.google.j2cl.transpiler.integration.autovalue;
 
 import static com.google.j2cl.transpiler.utils.Asserts.assertEquals;
+import static com.google.j2cl.transpiler.utils.Asserts.assertNotEquals;
 import static com.google.j2cl.transpiler.utils.Asserts.assertNotNull;
+
+import com.google.auto.value.AutoValue;
 
 public class Main {
 
   public static void main(String... args) {
+    testComposite();
+    // TODO(b/155944756): Fix the equals behavior for unread values.
+    // testUnreadValue();
+  }
+
+  private static void testComposite() {
     // Note that we created two copies of each class to increase variety and avoid potential
     // optimizations that wouldn't applicable in the real life.
 
@@ -53,5 +62,15 @@ public class Main {
     assertEquals(componentB, parent.getComponentField());
     assertEquals(componentB.hashCode(), parent.getComponentField().hashCode());
     assertNotNull(parent.toString());
+  }
+
+  @AutoValue
+  protected abstract static class TypeWithUnreadField {
+    public abstract int getUnreadField();
+  }
+
+  private static void testUnreadValue() {
+    assertNotEquals(
+        new AutoValue_Main_TypeWithUnreadField(5), new AutoValue_Main_TypeWithUnreadField(6));
   }
 }
