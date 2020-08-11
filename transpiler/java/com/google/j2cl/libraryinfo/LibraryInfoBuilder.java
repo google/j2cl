@@ -83,6 +83,12 @@ public final class LibraryInfoBuilder {
         Maps.newLinkedHashMapWithExpectedSize(type.getMembers().size());
 
     for (Member member : type.getMembers()) {
+      if (member.getDescriptor().isExternalizedMember()) {
+        // Externalized members don't really belong to the type. But they are static members marked
+        // with a jsinterop annotation and hence considered JsAccessible entry points, resulting in
+        // the class being retained by rta.
+        continue;
+      }
       MemberDescriptor memberDescriptor = member.getDescriptor();
       String memberName = getMemberId(memberDescriptor);
       boolean isJsAccessible = isJsAccessible(memberDescriptor);

@@ -168,10 +168,7 @@ class ImportGatherer extends AbstractVisitor {
 
   private void maybeAddNativeReference(Member member) {
     MemberDescriptor memberDescriptor = member.getDescriptor();
-    if (memberDescriptor.isNative()
-        && memberDescriptor.isStatic()
-        && memberDescriptor.hasJsNamespace()
-        && !memberDescriptor.isExtern()) {
+    if (memberDescriptor.isExternalizedMember() && !memberDescriptor.isExtern()) {
       addTypeDeclaration(
           AstUtils.getNamespaceAsTypeDescriptor(memberDescriptor).getTypeDeclaration(),
           ImportCategory.RUNTIME);

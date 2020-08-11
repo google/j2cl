@@ -124,27 +124,3 @@ NativeJsTypeTest.NativeJsTypeWithOverlay = class extends Object {
 
 /** @interface */
 NativeJsTypeTest.MyNativeJsTypeInterface = class {};
-
-/**
- * @return {!AbstractSuperClassForJs}
- */
-NativeJsTypeTest.createBridgesNativeSubclass = function() {
-  const implementingClass = class extends AbstractSuperClassForJs {
-    /**
-     * @return {string}
-     * @override
-     */
-    method() {
-      return 'method';
-    }
-
-    /**
-     * @return {string}
-     * @override
-     */
-    packagePrivateMethod() {
-      return 'package-private-override';
-    }
-  };
-  return new implementingClass;
-};
