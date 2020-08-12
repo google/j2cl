@@ -21,7 +21,6 @@ import static com.google.common.base.Preconditions.checkState;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CastExpression;
-import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldAccess;
@@ -47,23 +46,26 @@ import java.util.List;
  */
 public class NormalizeJsEnums extends NormalizationPass {
   @Override
-  public void applyTo(CompilationUnit compilationUnit) {
-    normalizeNonNativeJsEnums(compilationUnit);
-    fixEnumMethodCalls(compilationUnit);
+  public void applyTo(Type type) {
+    if (type.isJsEnum()) {
+      // TODO(b/116751296): Once the type model is refactored it should reflect the correct
+      // superclass for JsEnums.
+      type.setSuperTypeDescriptor(null);
+    }
+    normalizeNonNativeJsEnums(type);
+    fixEnumMethodCalls(type);
   }
 
   /**
    * Normalizes non native JsEnums into a Native JsEnum with JsOverlay members and an non native
    * JsEnum with only the Enum constants.
    */
-  private void normalizeNonNativeJsEnums(CompilationUnit compilationUnit) {
-    compilationUnit.accept(
+  private static void normalizeNonNativeJsEnums(Type type) {
+    if (!AstUtils.isNonNativeJsEnum(type.getTypeDescriptor())) {
+      return;
+    }
+    type.accept(
         new AbstractRewriter() {
-          @Override
-          public boolean shouldProcessType(Type type) {
-            return AstUtils.isNonNativeJsEnum(type.getTypeDescriptor());
-          }
-
           @Override
           public Node rewriteField(Field field) {
             if (AstUtils.isJsEnumCustomValueField(field.getDescriptor())) {
@@ -140,8 +142,8 @@ public class NormalizeJsEnums extends NormalizationPass {
    * devirtualizing, conversion, etc. But since JsEnums do not really extend Enum this prevents
    * those passes from taking decisions based on incorrect information.
    */
-  private void fixEnumMethodCalls(CompilationUnit compilationUnit) {
-    compilationUnit.accept(
+  private static void fixEnumMethodCalls(Type type) {
+    type.accept(
         new AbstractRewriter() {
           @Override
           public Expression rewriteMethodCall(MethodCall methodCall) {
@@ -181,7 +183,7 @@ public class NormalizeJsEnums extends NormalizationPass {
         });
   }
 
-  private MethodDescriptor fixEnumMethodDescriptor(MethodDescriptor methodDescriptor) {
+  private static MethodDescriptor fixEnumMethodDescriptor(MethodDescriptor methodDescriptor) {
     MethodDescriptor declarationMethodDescriptor = methodDescriptor.getDeclarationDescriptor();
     String declarationMethodSignature = declarationMethodDescriptor.getSignature();
 
