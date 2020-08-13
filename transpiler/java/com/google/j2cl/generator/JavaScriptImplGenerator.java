@@ -631,9 +631,9 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       sourceBuilder.newLine();
       sourceBuilder.append(
           className
-              + ".$markImplementor(/** @type {"
+              + ".$markImplementor(/**@type {"
               + TypeDescriptors.get().nativeFunction.getQualifiedJsName()
-              + "} */ ("
+              + "}*/ ("
               + className
               + "));");
     } else { // Not an interface so it is a Class.
