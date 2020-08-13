@@ -21,7 +21,7 @@ import static com.google.common.base.Preconditions.checkState;
 import com.google.common.base.CharMatcher;
 import com.google.common.base.Splitter;
 import com.google.common.base.Strings;
-import com.google.common.collect.Iterables;
+import com.google.common.collect.ImmutableList;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Expression;
@@ -42,8 +42,8 @@ import com.google.j2cl.common.FilePosition;
 import com.google.j2cl.common.InternalCompilerError;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourcePosition;
-import com.google.j2cl.generator.ImportGatherer.ImportCategory;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -56,8 +56,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   public static final String FILE_SUFFIX = ".impl.java.js";
 
-  public JavaScriptImplGenerator(Problems problems, Type type) {
-    super(problems, type);
+  public JavaScriptImplGenerator(Problems problems, Type type, List<Import> imports) {
+    super(problems, type, imports);
     this.statementTranspiler = new StatementTranspiler(sourceBuilder, environment);
     this.closureTypesGenerator = new ClosureTypesGenerator(environment);
   }
@@ -195,37 +195,33 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
     // goog.require(...) for eager imports.
     Map<String, String> aliasesByPath = new HashMap<>();
-    Iterable<Import> eagerImports = sortImports(importsByCategory.get(ImportCategory.LOADTIME));
-    for (Import eagerImport : eagerImports) {
-      String alias = eagerImport.getAlias();
-      String path = eagerImport.getImplModulePath();
-      String previousAlias = aliasesByPath.get(path);
-      if (previousAlias == null) {
-        sourceBuilder.appendln("const " + alias + " = goog.require('" + path + "');");
-        aliasesByPath.put(path, alias);
-      } else {
-        // Do not goog.require second time to avoid JsCompiler warnings.
-        sourceBuilder.appendln("const " + alias + " = " + previousAlias + ";");
-      }
-    }
-    if (!Iterables.isEmpty(eagerImports)) {
-      sourceBuilder.newLine();
-    }
+    sourceBuilder.emitBlock(
+        imports.stream()
+            .filter(i -> i.getImportCategory().needsGoogRequireInImpl())
+            .collect(ImmutableList.toImmutableList()),
+        eagerImport -> {
+          String alias = eagerImport.getAlias();
+          String path = eagerImport.getImplModulePath();
+          String previousAlias = aliasesByPath.get(path);
+          if (previousAlias == null) {
+            sourceBuilder.appendln("const " + alias + " = goog.require('" + path + "');");
+            aliasesByPath.put(path, alias);
+          } else {
+            // Do not goog.require second time to avoid JsCompiler warnings.
+            sourceBuilder.appendln("const " + alias + " = " + previousAlias + ";");
+          }
+        });
 
     // goog.forwardDeclare(...) for lazy imports.
-    Iterable<Import> lazyImports =
-        sortImports(
-            Iterables.concat(
-                importsByCategory.get(ImportCategory.RUNTIME),
-                importsByCategory.get(ImportCategory.JSDOC)));
-    for (Import lazyImport : lazyImports) {
-      String alias = lazyImport.getAlias();
-      String path = lazyImport.getImplModulePath();
-      sourceBuilder.appendln("let " + alias + " = goog.forwardDeclare('" + path + "');");
-    }
-    if (!Iterables.isEmpty(lazyImports)) {
-      sourceBuilder.newLine();
-    }
+    sourceBuilder.emitBlock(
+        imports.stream()
+            .filter(i -> i.getImportCategory().needsGoogForwardDeclare())
+            .collect(ImmutableList.toImmutableList()),
+        lazyImport -> {
+          String alias = lazyImport.getAlias();
+          String path = lazyImport.getImplModulePath();
+          sourceBuilder.appendln("let " + alias + " = goog.forwardDeclare('" + path + "');");
+        });
   }
 
   private void renderTypeAnnotation() {
@@ -606,12 +602,15 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.openBrace();
 
     // goog.module.get(...) for lazy imports.
-    for (Import lazyImport : sortImports(importsByCategory.get(ImportCategory.RUNTIME))) {
-      String alias = lazyImport.getAlias();
-      String path = lazyImport.getImplModulePath();
-      sourceBuilder.newLine();
-      sourceBuilder.append(alias + " = goog.module.get('" + path + "');");
-    }
+    imports.stream()
+        .filter(i -> i.getImportCategory().needsGoogModuleGet())
+        .forEach(
+            lazyImport -> {
+              String alias = lazyImport.getAlias();
+              String path = lazyImport.getImplModulePath();
+              sourceBuilder.newLine();
+              sourceBuilder.append(alias + " = goog.module.get('" + path + "');");
+            });
 
     sourceBuilder.closeBrace();
   }

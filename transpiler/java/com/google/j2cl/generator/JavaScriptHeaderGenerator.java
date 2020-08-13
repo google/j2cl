@@ -15,12 +15,11 @@
  */
 package com.google.j2cl.generator;
 
-import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.common.Problems;
-import com.google.j2cl.generator.ImportGatherer.ImportCategory;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /** Generates JavaScript source header files. */
@@ -28,8 +27,8 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
 
   public static final String FILE_SUFFIX = ".java.js";
 
-  public JavaScriptHeaderGenerator(Problems problems, Type type) {
-    super(problems, type);
+  public JavaScriptHeaderGenerator(Problems problems, Type type, List<Import> imports) {
+    super(problems, type, imports);
   }
 
   @Override
@@ -46,25 +45,17 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
     Set<String> alreadyRequiredPaths = new HashSet<>();
     // Make sure we don't self-import
     alreadyRequiredPaths.add(type.getDeclaration().getQualifiedJsName());
-    // goog.require(...) for eager imports.
-    for (Import eagerImport : sortImports(importsByCategory.get(ImportCategory.LOADTIME))) {
-      String path = eagerImport.getHeaderModulePath();
-      if (alreadyRequiredPaths.add(path)) {
-        sourceBuilder.appendln("goog.require('" + path + "');");
-      }
-    }
-    // goog.require(...) for lazy imports
-    Iterable<Import> lazyImports =
-        sortImports(
-            Iterables.concat(
-                importsByCategory.get(ImportCategory.RUNTIME),
-                importsByCategory.get(ImportCategory.JSDOC)));
-    for (Import lazyImport : lazyImports) {
-      String path = lazyImport.getHeaderModulePath();
-      if (alreadyRequiredPaths.add(path)) {
-        sourceBuilder.appendln("goog.require('" + path + "');");
-      }
-    }
+
+    // goog.require(...) for all imports
+    imports.stream()
+        .filter(i -> i.getImportCategory().needsGoogRequireInHeader())
+        .forEach(
+            headerImport -> {
+              String path = headerImport.getHeaderModulePath();
+              if (alreadyRequiredPaths.add(path)) {
+                sourceBuilder.appendln("goog.require('" + path + "');");
+              }
+            });
     // externs imports are always available in the browser and don't need a header reference.
     sourceBuilder.newLine();
 

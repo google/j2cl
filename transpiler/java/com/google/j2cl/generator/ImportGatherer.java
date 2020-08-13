@@ -17,16 +17,12 @@ package com.google.j2cl.generator;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
-import static com.google.common.collect.ImmutableSet.toImmutableSet;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.LinkedHashMultimap;
-import com.google.common.collect.Multimap;
-import com.google.common.collect.SetMultimap;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.AstUtils;
@@ -52,8 +48,11 @@ import com.google.j2cl.ast.TypeVariable;
 import com.google.j2cl.ast.UnionTypeDescriptor;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationFragment;
+import com.google.j2cl.generator.Import.ImportCategory;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -62,21 +61,7 @@ import java.util.Set;
  */
 class ImportGatherer extends AbstractVisitor {
 
-  /** Describes the category of an import. */
-  public enum ImportCategory {
-    /** Used in load-time during initial load of the classes. */
-    LOADTIME,
-    /** Used in run-time during method execution. */
-    RUNTIME,
-    /** Used for JsDoc purposes and in some cases for circumventing AJD pruning. */
-    JSDOC,
-    /** Not emitted and only exists to ensure that the name is preserved. */
-    EXTERN,
-    /** Not emitted and only exists to ensure that an alias is created for the current type. */
-    SELF
-  }
-
-  public static Multimap<ImportCategory, Import> gatherImports(Type type) {
+  public static List<Import> gatherImports(Type type) {
     return new ImportGatherer().doGatherImports(type);
   }
 
@@ -85,8 +70,8 @@ class ImportGatherer extends AbstractVisitor {
 
   private final Set<TypeDescriptor> collectedForJsDoc = new HashSet<>();
 
-  private final SetMultimap<ImportCategory, TypeDeclaration> typeDeclarationByCategory =
-      LinkedHashMultimap.create();
+  private final Map<TypeDeclaration, ImportCategory> categoryForTypeDeclaration =
+      new LinkedHashMap<>();
 
   private ImportGatherer() {}
 
@@ -320,9 +305,11 @@ class ImportGatherer extends AbstractVisitor {
     checkArgument(!typeDeclaration.isJsFunctionInterface());
     checkArgument(!typeDeclaration.getQualifiedJsName().isEmpty());
 
-    typeDeclarationByCategory.put(
+    categoryForTypeDeclaration.merge(
+        typeDeclaration.getEnclosingModule(),
         typeDeclaration.isExtern() ? ImportCategory.EXTERN : importCategory,
-        typeDeclaration.getEnclosingModule());
+        (existing, other) -> existing == null || other.strongerThan(existing) ? other : existing);
+
     // Reserve the name earlier on so that these are never aliased.
     if (typeDeclaration.isExtern()) {
       localNameUses.add(typeDeclaration.getEnclosingModule().getQualifiedJsName());
@@ -338,7 +325,7 @@ class ImportGatherer extends AbstractVisitor {
         TypeDescriptors.createGlobalNativeTypeDescriptor(topScopeQualifier).getTypeDeclaration());
   }
 
-  private Multimap<ImportCategory, Import> doGatherImports(Type type) {
+  private List<Import> doGatherImports(Type type) {
     // TODO(b/67965153): Remove special casing once getClass() metatdata initialization is moved to
     //  the AST.
     if (!type.isJsEnum()) {
@@ -350,50 +337,14 @@ class ImportGatherer extends AbstractVisitor {
     // Collect type references.
     type.accept(this);
 
-    checkState(typeDeclarationByCategory.get(ImportCategory.SELF).size() == 1);
-
-    typeDeclarationByCategory
-        .get(ImportCategory.RUNTIME)
-        .removeAll(typeDeclarationByCategory.get(ImportCategory.LOADTIME));
-    typeDeclarationByCategory
-        .get(ImportCategory.RUNTIME)
-        .removeAll(typeDeclarationByCategory.get(ImportCategory.SELF));
-    typeDeclarationByCategory
-        .get(ImportCategory.LOADTIME)
-        .removeAll(typeDeclarationByCategory.get(ImportCategory.SELF));
-
-    typeDeclarationByCategory
-        .get(ImportCategory.JSDOC)
-        .removeAll(typeDeclarationByCategory.get(ImportCategory.LOADTIME));
-    typeDeclarationByCategory
-        .get(ImportCategory.JSDOC)
-        .removeAll(typeDeclarationByCategory.get(ImportCategory.RUNTIME));
-    typeDeclarationByCategory
-        .get(ImportCategory.JSDOC)
-        .removeAll(typeDeclarationByCategory.get(ImportCategory.SELF));
-
-    Multimap<ImportCategory, Import> importsByCategory = LinkedHashMultimap.create();
-    importsByCategory.putAll(
-        ImportCategory.RUNTIME, toImports(typeDeclarationByCategory.get(ImportCategory.RUNTIME)));
-    importsByCategory.putAll(
-        ImportCategory.LOADTIME, toImports(typeDeclarationByCategory.get(ImportCategory.LOADTIME)));
-    importsByCategory.putAll(
-        ImportCategory.JSDOC, toImports(typeDeclarationByCategory.get(ImportCategory.JSDOC)));
-    importsByCategory.putAll(
-        ImportCategory.EXTERN, toImports(typeDeclarationByCategory.get(ImportCategory.EXTERN)));
-    // Creates an alias for the current type, last, to make sure that its name dodges externs
-    // when necessary.
-    importsByCategory.putAll(
-        ImportCategory.SELF, toImports(typeDeclarationByCategory.get(ImportCategory.SELF)));
-    return importsByCategory;
+    return categoryForTypeDeclaration.entrySet().stream()
+        .map(entry -> createImport(entry.getKey(), entry.getValue()))
+        .sorted()
+        .collect(ImmutableList.toImmutableList());
   }
 
-  private Set<Import> toImports(Set<TypeDeclaration> typeDeclarations) {
-    return typeDeclarations.stream().map(this::createImport).collect(toImmutableSet());
-  }
-
-  private Import createImport(TypeDeclaration typeDeclaration) {
-    return new Import(computeAlias(typeDeclaration), typeDeclaration);
+  private Import createImport(TypeDeclaration typeDeclaration, ImportCategory importCategory) {
+    return new Import(computeAlias(typeDeclaration), typeDeclaration, importCategory);
   }
 
   private String computeAlias(TypeDeclaration typeDeclaration) {

@@ -74,7 +74,9 @@ public class OutputGeneratorStage {
 
     for (CompilationUnit j2clCompilationUnit : j2clCompilationUnits) {
       for (Type type : j2clCompilationUnit.getTypes()) {
-        JavaScriptImplGenerator jsImplGenerator = new JavaScriptImplGenerator(problems, type);
+        List<Import> imports = ImportGatherer.gatherImports(type);
+        JavaScriptImplGenerator jsImplGenerator =
+            new JavaScriptImplGenerator(problems, type, imports);
 
         String typeRelativePath = getPackageRelativePath(type.getDeclaration());
 
@@ -107,7 +109,8 @@ public class OutputGeneratorStage {
 
         String javaScriptImplementationSource = jsImplGenerator.renderOutput();
 
-        JavaScriptHeaderGenerator jsHeaderGenerator = new JavaScriptHeaderGenerator(problems, type);
+        JavaScriptHeaderGenerator jsHeaderGenerator =
+            new JavaScriptHeaderGenerator(problems, type, imports);
         String javaScriptHeaderSource = jsHeaderGenerator.renderOutput();
 
         if (generateKytheIndexingMetadata) {

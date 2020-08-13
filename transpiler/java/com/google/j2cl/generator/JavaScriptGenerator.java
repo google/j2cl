@@ -18,17 +18,11 @@ package com.google.j2cl.generator;
 import static com.google.common.base.Preconditions.checkArgument;
 
 import com.google.common.base.Joiner;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Multimap;
 import com.google.j2cl.ast.HasName;
 import com.google.j2cl.ast.MemberDescriptor;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourcePosition;
-import com.google.j2cl.generator.ImportGatherer.ImportCategory;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -39,15 +33,14 @@ import java.util.Map;
 public abstract class JavaScriptGenerator {
   protected final Type type;
   protected final GenerationEnvironment environment;
-  protected final Multimap<ImportCategory, Import> importsByCategory;
+  protected final List<Import> imports;
   protected final SourceBuilder sourceBuilder = new SourceBuilder();
   protected final Problems problems;
 
-  public JavaScriptGenerator(Problems problems, Type type) {
+  public JavaScriptGenerator(Problems problems, Type type, List<Import> imports) {
     this.problems = problems;
     this.type = type;
-    importsByCategory = ImportGatherer.gatherImports(type);
-    Collection<Import> imports = importsByCategory.values();
+    this.imports = imports;
     Map<HasName, String> uniqueNameByVariable =
         UniqueVariableNamesGatherer.computeUniqueVariableNames(imports, type);
     environment = new GenerationEnvironment(imports, uniqueNameByVariable);
@@ -74,12 +67,5 @@ public abstract class JavaScriptGenerator {
     sourceBuilder.appendLines(
         "/** @fileoverview @suppress {" + Joiner.on(", ").join(suppressions) + "} */");
     sourceBuilder.newLine();
-  }
-
-  static Iterable<Import> sortImports(Iterable<Import> iterable) {
-    List<Import> sortedList = new ArrayList<>();
-    Iterables.addAll(sortedList, iterable);
-    Collections.sort(sortedList);
-    return sortedList;
   }
 }

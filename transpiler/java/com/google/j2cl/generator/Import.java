@@ -28,17 +28,64 @@ import com.google.j2cl.ast.TypeDeclaration;
  */
 class Import implements Comparable<Import> {
 
+  /**
+   * Describes the category of an import.
+   *
+   * <p>Note that tne enum values are sorted by strength, with strongest first, to simplify the
+   * collection of imports.
+   */
+  public enum ImportCategory {
+    /** Not emitted and only exists to ensure that the name is preserved. */
+    EXTERN,
+    /** Not emitted and only exists to ensure that an alias is created for the current type. */
+    SELF,
+    /** Used in load-time during initial load of the classes. */
+    LOADTIME,
+    /** Used in run-time during method execution. */
+    RUNTIME,
+    /** Used for JsDoc purposes. */
+    JSDOC,
+    ;
+
+    public boolean needsGoogRequireInHeader() {
+      return this == LOADTIME || this == RUNTIME || this == JSDOC;
+    }
+
+    public boolean needsGoogRequireInImpl() {
+      return this == LOADTIME;
+    }
+
+    public boolean needsGoogForwardDeclare() {
+      return this == RUNTIME || this == JSDOC;
+    }
+
+    public boolean needsGoogModuleGet() {
+      return this == RUNTIME;
+    }
+
+    boolean strongerThan(ImportCategory other) {
+      return compareTo(other) < 0;
+    }
+  }
+
   private final String alias;
   private final TypeDeclaration typeDeclaration;
+  private final ImportCategory importCategory;
 
-  Import(String alias, TypeDeclaration typeDeclaration) {
+  Import(String alias, TypeDeclaration typeDeclaration, ImportCategory importCategory) {
     this.alias = alias;
     this.typeDeclaration = typeDeclaration;
+    this.importCategory = importCategory;
   }
 
   /** Returns the alias. */
   public String getAlias() {
     return alias;
+  }
+
+  /** Returns the importCategory. */
+  public ImportCategory getImportCategory() {
+    return importCategory;
   }
 
   /**
@@ -70,6 +117,6 @@ class Import implements Comparable<Import> {
 
   @Override
   public String toString() {
-    return alias + " => " + typeDeclaration;
+    return alias + " => " + typeDeclaration + " (" + importCategory + ")";
   }
 }

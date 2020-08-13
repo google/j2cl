@@ -25,10 +25,12 @@ import com.google.j2cl.ast.MemberDescriptor;
 import com.google.j2cl.common.FilePosition;
 import com.google.j2cl.common.SourcePosition;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import java.util.function.Consumer;
 
 /** Builds source and tracks line numbers using a StringBuilder. */
 class SourceBuilder {
@@ -118,6 +120,14 @@ class SourceBuilder {
           () -> append(" "));
     }
     finished = true;
+  }
+
+  /** Emits a block of code dictated by {@items} followed by a newline. */
+  public <T> void emitBlock(List<T> item, Consumer<T> renderer) {
+    item.forEach(renderer);
+    if (!item.isEmpty()) {
+      newLine();
+    }
   }
 
   public SortedMap<SourcePosition, SourcePosition> getMappings() {
