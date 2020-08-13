@@ -17,8 +17,6 @@ package com.google.j2cl.ast.visitors;
 
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.AbstractRewriter;
-import com.google.j2cl.ast.BinaryExpression;
-import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.MethodCall;
@@ -37,11 +35,9 @@ public class RewriteStringEquals extends NormalizationPass {
                 || !methodCall.getQualifier().isNonNullString()) {
               return methodCall;
             }
-            return BinaryExpression.newBuilder()
-                .setLeftOperand(methodCall.getQualifier())
-                .setRightOperand(Iterables.getOnlyElement(methodCall.getArguments()))
-                .setOperator(BinaryOperator.EQUALS)
-                .build();
+            return methodCall
+                .getQualifier()
+                .infixEquals(Iterables.getOnlyElement(methodCall.getArguments()));
           }
         });
   }

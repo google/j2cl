@@ -21,7 +21,6 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import com.google.j2cl.ast.ArrayLiteral;
 import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.BinaryExpression;
-import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Expression;
@@ -99,12 +98,9 @@ public class EnumMethodsCreator extends NormalizationPass {
         IfStatement.newBuilder()
             .setSourcePosition(sourcePosition)
             .setConditionExpression(
-                BinaryExpression.newBuilder()
-                    .setLeftOperand(
-                        FieldAccess.Builder.from(namesToValuesMapFieldDescriptor).build())
-                    .setOperator(BinaryOperator.EQUALS)
-                    .setRightOperand(NullLiteral.get())
-                    .build())
+                FieldAccess.Builder.from(namesToValuesMapFieldDescriptor)
+                    .build()
+                    .infixEquals(NullLiteral.get()))
             .setThenStatement(
                 Block.newBuilder()
                     .setSourcePosition(sourcePosition)

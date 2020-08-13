@@ -19,7 +19,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.BinaryExpression;
-import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.CatchClause;
 import com.google.j2cl.ast.CompilationUnit;
@@ -185,11 +184,7 @@ public class NormalizeTryWithResources extends NormalizationPass {
     ThrowStatement throwPrimaryException =
         new ThrowStatement(sourcePosition, primaryException.getReference());
     Expression primaryExceptionNotEqualsNull =
-        BinaryExpression.newBuilder()
-            .setLeftOperand(primaryException)
-            .setOperator(BinaryOperator.NOT_EQUALS)
-            .setRightOperand(NullLiteral.get())
-            .build();
+        primaryException.getReference().infixNotEquals(NullLiteral.get());
     IfStatement primaryExceptionNullStatement =
         IfStatement.newBuilder()
             .setSourcePosition(sourcePosition)

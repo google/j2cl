@@ -506,23 +506,6 @@ public class AstUtils {
         && memberReference.getTarget().isMemberOf(((ThisReference) qualifier).getTypeDescriptor());
   }
 
-  public static Expression joinExpressionsWithBinaryOperator(
-      BinaryOperator operator, List<? extends Expression> expressions) {
-    if (expressions.isEmpty()) {
-      return null;
-    }
-    if (expressions.size() == 1) {
-      return expressions.get(0);
-    }
-    Expression joinedExpressions =
-        joinExpressionsWithBinaryOperator(operator, expressions.subList(1, expressions.size()));
-    return BinaryExpression.newBuilder()
-        .setLeftOperand(expressions.get(0))
-        .setOperator(operator)
-        .setRightOperand(joinedExpressions)
-        .build();
-  }
-
   /**
    * Generates the following code:
    *

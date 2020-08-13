@@ -19,8 +19,6 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.j2cl.ast.AbstractRewriter;
-import com.google.j2cl.ast.AstUtils;
-import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.CatchClause;
 import com.google.j2cl.ast.CompilationUnit;
@@ -172,7 +170,7 @@ public class NormalizeCatchClauses extends NormalizationPass {
                         .setTestTypeDescriptor(t)
                         .build())
             .collect(toImmutableList());
-    return AstUtils.joinExpressionsWithBinaryOperator(BinaryOperator.CONDITIONAL_OR, instanceofs);
+    return Expression.infixOrAll(instanceofs);
   }
 
   private static Statement transformCatchBody(

@@ -29,7 +29,6 @@ import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.AssertStatement;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryExpression;
-import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.BooleanLiteral;
 import com.google.j2cl.ast.BreakStatement;
@@ -512,12 +511,10 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
     // $index < $array.length
     Expression condition =
-        BinaryExpression.newBuilder()
-            .setLeftOperand(indexVariable)
-            .setOperator(BinaryOperator.LESS)
-            .setRightOperand(
-                ArrayLength.newBuilder().setArrayExpression(arrayVariable.getReference()).build())
-            .build();
+        indexVariable
+            .getReference()
+            .infixLessThan(
+                ArrayLength.newBuilder().setArrayExpression(arrayVariable.getReference()).build());
 
     ExpressionStatement forVariableDeclarationStatement =
         VariableDeclarationExpression.newBuilder()

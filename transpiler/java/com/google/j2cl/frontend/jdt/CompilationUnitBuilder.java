@@ -831,12 +831,12 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
       // $index < $array.length
       Expression condition =
-          BinaryExpression.newBuilder()
-              .setLeftOperand(indexVariable)
-              .setOperator(BinaryOperator.LESS)
-              .setRightOperand(
-                  ArrayLength.newBuilder().setArrayExpression(arrayVariable.getReference()).build())
-              .build();
+          indexVariable
+              .getReference()
+              .infixLessThan(
+                  ArrayLength.newBuilder()
+                      .setArrayExpression(arrayVariable.getReference())
+                      .build());
 
       ExpressionStatement forVariableDeclarationStatement =
           VariableDeclarationExpression.newBuilder()

@@ -106,11 +106,7 @@ public class InsertIntegerCoercions extends NormalizationPass {
 
   /** Coerces the result of the expression to a 32-bit integer. */
   private static Expression coerceToInt(Expression expression) {
-    return BinaryExpression.newBuilder()
-        .setOperator(BinaryOperator.BIT_OR)
-        .setLeftOperand(removeCoercion(expression))
-        .setRightOperand(NumberLiteral.fromInt(0))
-        .build();
+    return expression.infixBitwiseOr(NumberLiteral.fromInt(0));
   }
 
   /** Removes coercions of integer operations. */

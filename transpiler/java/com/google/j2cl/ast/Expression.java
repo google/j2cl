@@ -15,9 +15,12 @@
  */
 package com.google.j2cl.ast;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.ast.processors.common.Processor;
 import com.google.j2cl.common.SourcePosition;
+import java.util.List;
 
 /** Base class for expressions. */
 @Visitable
@@ -90,7 +93,7 @@ public abstract class Expression extends Node implements Cloneable<Expression> {
     return prefix(PrefixOperator.PLUS);
   }
 
-  /** Prefix expression with a not unary operator. */
+  /** Returns the logically negated expression. */
   public UnaryExpression prefixNot() {
     return prefix(PrefixOperator.NOT);
   }
@@ -98,6 +101,54 @@ public abstract class Expression extends Node implements Cloneable<Expression> {
   /** Returns expression prefixed with unary operator {@code prefixOperator}. */
   public UnaryExpression prefix(PrefixOperator prefixOperator) {
     return PrefixExpression.newBuilder().setOperator(prefixOperator).setOperand(this).build();
+  }
+
+  /** Return the logical or of this expression and {@code rhs}. */
+  public Expression infixOr(Expression rhs) {
+    return infix(BinaryOperator.CONDITIONAL_OR, this, rhs);
+  }
+
+  /** Return the logical or of {@code expressions}. */
+  public static Expression infixOrAll(List<? extends Expression> expressions) {
+    checkArgument(!expressions.isEmpty());
+    Expression result = null;
+    for (Expression e : expressions) {
+      result = result == null ? e : result.infixOr(e);
+    }
+    return result;
+  }
+
+  /** Return the logical and of this expression and {@code rhs}. */
+  public Expression infixAnd(Expression rhs) {
+    return infix(BinaryOperator.CONDITIONAL_AND, this, rhs);
+  }
+
+  /** Return an expression representing {@code this | rhs}. */
+  public Expression infixBitwiseOr(Expression rhs) {
+    return infix(BinaryOperator.BIT_OR, this, rhs);
+  }
+
+  /** Return an expression representing {@code this != rhs}. */
+  public Expression infixEquals(Expression rhs) {
+    return infix(BinaryOperator.EQUALS, this, rhs);
+  }
+
+  /** Return an expression representing {@code this < rhs}. */
+  public Expression infixLessThan(Expression rhs) {
+    return infix(BinaryOperator.LESS, this, rhs);
+  }
+
+  /** Return an expression representing {@code this != rhs}. */
+  public Expression infixNotEquals(Expression rhs) {
+    return infix(BinaryOperator.NOT_EQUALS, this, rhs);
+  }
+
+  private static Expression infix(BinaryOperator operator, Expression lhs, Expression rhs) {
+    return BinaryExpression.newBuilder()
+        .setOperator(operator)
+        .setLeftOperand(lhs)
+        .setRightOperand(rhs)
+        .build();
   }
 
   /**
@@ -212,5 +263,4 @@ public abstract class Expression extends Node implements Cloneable<Expression> {
   public Node accept(Processor processor) {
     return Visitor_Expression.visit(processor, this);
   }
-
 }

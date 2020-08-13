@@ -19,8 +19,6 @@ import static com.google.common.base.Preconditions.checkState;
 
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.ArrayTypeDescriptor;
-import com.google.j2cl.ast.BinaryExpression;
-import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.Expression;
@@ -49,11 +47,7 @@ public class NormalizeInstanceOfs extends NormalizationPass {
             Expression subject = expression.getExpression();
             // Replace trivial instanceof expression with a null check.
             if (subject.getTypeDescriptor().isAssignableTo(expression.getTestTypeDescriptor())) {
-              return BinaryExpression.newBuilder()
-                  .setLeftOperand(subject)
-                  .setOperator(BinaryOperator.NOT_EQUALS)
-                  .setRightOperand(NullLiteral.get())
-                  .build();
+              return subject.infixNotEquals(NullLiteral.get());
             }
 
             if (expression.getTestTypeDescriptor().isArray()) {
