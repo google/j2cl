@@ -61,7 +61,8 @@ public final class LibraryInfoBuilder {
         TypeInfo.newBuilder()
             .setTypeId(getTypeId(type.getTypeDescriptor()))
             .setHeaderSourceFilePath(headerFilePath)
-            .setImplSourceFilePath(implFilePath);
+            .setImplSourceFilePath(implFilePath)
+            .setJstypeInterface(type.isInterface() && type.getTypeDescriptor().isJsType());
 
     DeclaredTypeDescriptor superTypeDescriptor = type.getSuperTypeDescriptor();
     if (superTypeDescriptor != null

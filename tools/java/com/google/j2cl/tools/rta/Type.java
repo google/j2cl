@@ -33,6 +33,7 @@ final class Type {
   private String headerSourceFile;
   private boolean live;
   private boolean instantiated;
+  private boolean isJsTypeInterface;
   private final List<Member> potentiallyLiveMembers = new ArrayList<>();
 
   static Type buildFrom(TypeInfo typeInfo, String name) {
@@ -40,6 +41,7 @@ final class Type {
     type.name = name;
     type.headerSourceFile = typeInfo.getHeaderSourceFilePath();
     type.implSourceFile = typeInfo.getImplSourceFilePath();
+    type.isJsTypeInterface = typeInfo.getJstypeInterface();
     typeInfo
         .getMemberList()
         .forEach(memberInfo -> type.addMember(Member.buildFrom(memberInfo, type)));
@@ -122,5 +124,9 @@ final class Type {
 
   public List<Type> getImmediateSubtypes() {
     return immediateSubtypes;
+  }
+
+  boolean isJsTypeInterface() {
+    return isJsTypeInterface;
   }
 }

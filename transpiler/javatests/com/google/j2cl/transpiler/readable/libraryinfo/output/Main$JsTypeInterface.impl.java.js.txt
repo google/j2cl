@@ -1,0 +1,39 @@
+goog.module('com.google.j2cl.transpiler.readable.libraryinfo.Main.JsTypeInterface$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ */
+class JsTypeInterface {
+  /** @abstract */
+  foo() {}
+  /** @abstract */
+  bar() {}
+
+  static $clinit() {
+    JsTypeInterface.$clinit = () => {};
+    JsTypeInterface.$loadModules();
+  }
+
+  static $markImplementor(/** Function */ ctor) {
+    ctor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_libraryinfo_Main_JsTypeInterface =
+        true;
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance != null &&
+        !!instance
+              .$implements__com_google_j2cl_transpiler_readable_libraryinfo_Main_JsTypeInterface;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadataForInterface(
+    JsTypeInterface,
+    'com.google.j2cl.transpiler.readable.libraryinfo.Main$JsTypeInterface');
+JsTypeInterface.$markImplementor(/** @type {Function} */ (JsTypeInterface));
+
+exports = JsTypeInterface;
+//# sourceMappingURL=Main$JsTypeInterface.js.map

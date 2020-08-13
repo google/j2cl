@@ -53,6 +53,14 @@ final class BazelJ2clRta extends BazelWorker {
       required = true)
   String removalCodeInfoOutputFilePath = null;
 
+  @Option(
+      name = "--legacy_keep_jstype_interfaces_do_not_use",
+      usage =
+          "When this flag is set all JsType interfaces, even uninstantiated ones, are "
+              + "retained.",
+      required = false)
+  boolean keepJsTypeInterfaces = false;
+
   @Argument(required = true, usage = "The list of call graph files", multiValued = true)
   List<String> inputs = null;
 
@@ -61,7 +69,7 @@ final class BazelJ2clRta extends BazelWorker {
     List<LibraryInfo> libraryInfos =
         inputs.parallelStream().map(libraryInfoCache::get).collect(toImmutableList());
 
-    RtaResult rtaResult = RapidTypeAnalyser.analyse(libraryInfos);
+    RtaResult rtaResult = RapidTypeAnalyser.analyse(libraryInfos, keepJsTypeInterfaces);
 
     writeToFile(unusedTypesOutputFilePath, rtaResult.getUnusedTypes());
     writeToFile(removalCodeInfoOutputFilePath, rtaResult.getCodeRemovalInfo());

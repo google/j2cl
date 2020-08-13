@@ -22,8 +22,12 @@ import java.util.List;
 
 final class RapidTypeAnalyser {
 
-  static RtaResult analyse(List<LibraryInfo> libraryInfos) {
+  static RtaResult analyse(List<LibraryInfo> libraryInfos, boolean keepJsTypeInterfaces) {
     Collection<Type> types = TypeGraphBuilder.build(libraryInfos);
+
+    if (keepJsTypeInterfaces) {
+      types.stream().filter(Type::isJsTypeInterface).forEach(RapidTypeAnalyser::markTypeLive);
+    }
 
     // Go over the entry points to start the traversal.
     types.stream()

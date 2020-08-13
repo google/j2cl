@@ -58,6 +58,8 @@ def _j2cl_rta_impl(ctx):
     rta_args.use_param_file("@%s", use_always = True)
     rta_args.add("--unusedTypesOutput", unused_types_list)
     rta_args.add("--removalCodeInfoOutput", removal_code_info_file)
+    if ctx.attr.legacy_keep_jstype_interfaces_do_not_use:
+        rta_args.add("--legacy_keep_jstype_interfaces_do_not_use")
     rta_args.add_all(all_library_info_files)
 
     jvm_args = []
@@ -87,6 +89,7 @@ j2cl_rta = rule(
         # TODO(b/114732596): Add a check on targets provided in "targets" field.
         "targets": attr.label_list(aspects = [_library_info_aspect]),
         "generate_unused_methods_for_testing_do_not_use": attr.bool(default = False),
+        "legacy_keep_jstype_interfaces_do_not_use": attr.bool(default = False),
         "_rta_runner": attr.label(
             cfg = "host",
             executable = True,

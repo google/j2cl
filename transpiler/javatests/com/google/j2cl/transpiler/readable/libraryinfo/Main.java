@@ -24,6 +24,13 @@ import jsinterop.annotations.JsType;
 public class Main {
   public static String STATIC_FIELD = "STATIC_FIELD";
 
+  @JsType
+  interface JsTypeInterface {
+    void foo();
+
+    void bar();
+  }
+
   interface FunctionnalInterface {
     void foo();
   }
