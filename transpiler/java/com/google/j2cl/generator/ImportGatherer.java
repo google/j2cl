@@ -256,7 +256,13 @@ class ImportGatherer extends AbstractVisitor {
     }
 
     if (typeDescriptor.isJsFunctionInterface() || typeDescriptor.isJsFunctionImplementation()) {
+      // Both JsFunction interfaces and implementations emit a function signature that is derived
+      // from the functional method. Such method might refer to types that need to be collected.
       collectTypeDescriptorsIntroducedByJsFunction(declaredTypeDescriptor);
+    }
+
+    if (typeDescriptor.isJsFunctionInterface()) {
+      // In contrast to other native classes, JsFunction classes do not exist at all at runtime.
       return;
     }
 
