@@ -432,12 +432,6 @@ public class RuntimeMethods {
                                       .setParameters(TypeDescriptors.get().javaLangObject)
                                       .build())
                               .put(
-                                  "$getPrototype",
-                                  MethodInfo.newBuilder()
-                                      .setReturnType(TypeDescriptors.get().javaLangObject)
-                                      .setParameters(TypeDescriptors.get().nativeFunction)
-                                      .build())
-                              .put(
                                   "$makeLambdaFunction",
                                   MethodInfo.newBuilder()
                                       .setReturnType(TypeDescriptors.get().nativeFunction)
