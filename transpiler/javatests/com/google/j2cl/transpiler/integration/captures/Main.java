@@ -25,6 +25,9 @@ public class Main {
     testVariableCapture();
     testVariableCapture_nested();
     testVariableCapture_indirect();
+    // TODO(b/165431807): Uncomment when bug is fixed
+    // testVariableCapture_nameClashes_inheritance();
+    // testVariableCapture_nameClashes_nested();
     testParameterCapture();
     testOuterCapture();
     testOuterCapture_nested();
@@ -73,6 +76,67 @@ public class Main {
     }
     assertTrue(new ClassIndirectlyCapturingLocal().returnIndirectCapture() == 3);
   }
+
+  // private static void testVariableCapture_nameClashes_inheritance() {
+  //   int local = 3;
+  //   class ClassCapturingLocal {
+  //
+  //     int returnLocal() {
+  //       return local;
+  //     }
+  //
+  //     final int returnOriginalLocal() {
+  //       return local;
+  //     }
+  //   }
+  //   class UnrelatedClass {
+  //
+  //     ClassCapturingLocal getInnerClass() {
+  //       int local = 4;
+  //       return new ClassCapturingLocal() {
+  //         @Override
+  //         int returnLocal() {
+  //           return local;
+  //         }
+  //       };
+  //     }
+  //   }
+  //
+  //   ClassCapturingLocal outer = new ClassCapturingLocal();
+  //   ClassCapturingLocal inner = new UnrelatedClass().getInnerClass();
+  //   assertEquals(3, outer.returnLocal());
+  //   assertEquals(4, inner.returnLocal());
+  //   assertEquals(3, inner.returnOriginalLocal());
+  //
+  // }
+
+  // private static void testVariableCapture_nameClashes_nested() {
+  //   int local = 3;
+  //   class ClassCapturingLocal {
+  //     int returnLocal() {
+  //       return local;
+  //     }
+  //
+  //     final int returnOriginalLocal() {
+  //       return local;
+  //     }
+  //
+  //     ClassCapturingLocal getInnerClass() {
+  //       int local = 4;
+  //       return new ClassCapturingLocal() {
+  //         @Override
+  //         int returnLocal() {
+  //           return local;
+  //         }
+  //       };
+  //     }
+  //   }
+  //   ClassCapturingLocal outer = new ClassCapturingLocal();
+  //   ClassCapturingLocal inner = outer.getInnerClass();
+  //   assertEquals(3, outer.returnLocal());
+  //   assertEquals(4, inner.returnLocal());
+  //   assertEquals(3, inner.returnOriginalLocal());
+  // }
 
   private static void testCaptures_constructor() {
     final int variable = 1;
