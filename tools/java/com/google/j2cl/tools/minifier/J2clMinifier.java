@@ -15,6 +15,7 @@ package com.google.j2cl.tools.minifier;
 
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.Iterables.getLast;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.HashMultiset;
@@ -27,7 +28,6 @@ import com.google.j2cl.tools.rta.UnusedLines;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -65,7 +65,7 @@ public class J2clMinifier {
 
   private interface TransitionFunction {
     StringBuilder transition(
-        StringBuilder minifiedContentBuffer, StringBuilder identifierBuffer, char c, int state);
+        StringBuilder minifiedContentBuffer, StringBuilder identifierBuffer, char c);
   }
 
   private static final String MINIFICATION_SEPARATOR = "_$";
@@ -144,8 +144,7 @@ public class J2clMinifier {
   private static StringBuilder bufferIdentifierChar(
       @SuppressWarnings("unused") StringBuilder minifiedContentBuffer,
       StringBuilder identifierBuffer,
-      char c,
-      int state) {
+      char c) {
     identifierBuffer.append(c);
     return identifierBuffer;
   }
@@ -230,29 +229,29 @@ public class J2clMinifier {
 
   @SuppressWarnings("unused")
   private static StringBuilder skipChar(
-      StringBuilder minifiedContentBuffer, StringBuilder identifierBuffer, char c, int state) {
+      StringBuilder minifiedContentBuffer, StringBuilder identifierBuffer, char c) {
     return identifierBuffer;
   }
 
   private static StringBuilder skipCharUnlessNewLine(
-      StringBuilder minifiedContentBuffer, StringBuilder identifierBuffer, char c, int state) {
+      StringBuilder minifiedContentBuffer, StringBuilder identifierBuffer, char c) {
     if (c == '\n') {
-      identifierBuffer = writeChar(minifiedContentBuffer, identifierBuffer, c, state);
+      identifierBuffer = writeChar(minifiedContentBuffer, identifierBuffer, c);
     }
     return identifierBuffer;
   }
 
   @SuppressWarnings("unused")
   private static StringBuilder startNewIdentifier(
-      StringBuilder minifiedContentBuffer, StringBuilder identifierBuffer, char c, int state) {
+      StringBuilder minifiedContentBuffer, StringBuilder identifierBuffer, char c) {
     StringBuilder identifierBuilder = new StringBuilder();
     identifierBuilder.append(c);
     return identifierBuilder;
   }
 
-  private static StringBuilder writeCharOrReplace(
-      StringBuilder minifiedContentBuffer, StringBuilder identifierBuffer, char c, int state) {
-    if ((c == '\n' || c == 0) && state == S_NON_IDENTIFIER) {
+  private static StringBuilder writeNonIdentifierCharOrReplace(
+      StringBuilder minifiedContentBuffer, StringBuilder identifierBuffer, char c) {
+    if (c == '\n' || c == 0) {
       maybeReplaceGoogStatement(minifiedContentBuffer);
     }
     if (c != 0) {
@@ -290,35 +289,35 @@ public class J2clMinifier {
   }
 
   private static StringBuilder writeChar(
-      StringBuilder minifiedContentBuffer, StringBuilder identifierBuffer, char c, int state) {
+      StringBuilder minifiedContentBuffer, StringBuilder identifierBuffer, char c) {
     minifiedContentBuffer.append(c);
     return identifierBuffer;
   }
 
   @SuppressWarnings("unused")
   private static StringBuilder writeSlash(
-      StringBuilder minifiedContentBuffer, StringBuilder identifierBuffer, char c, int state) {
-    identifierBuffer = writeChar(minifiedContentBuffer, identifierBuffer, '/', state);
+      StringBuilder minifiedContentBuffer, StringBuilder identifierBuffer, char c) {
+    identifierBuffer = writeChar(minifiedContentBuffer, identifierBuffer, '/');
     return identifierBuffer;
   }
 
   private static StringBuilder writeSlashAndChar(
-      StringBuilder minifiedContentBuffer, StringBuilder identifierBuffer, char c, int state) {
-    identifierBuffer = writeChar(minifiedContentBuffer, identifierBuffer, '/', state);
-    identifierBuffer = writeChar(minifiedContentBuffer, identifierBuffer, c, state);
+      StringBuilder minifiedContentBuffer, StringBuilder identifierBuffer, char c) {
+    identifierBuffer = writeChar(minifiedContentBuffer, identifierBuffer, '/');
+    identifierBuffer = writeChar(minifiedContentBuffer, identifierBuffer, c);
     return identifierBuffer;
   }
 
   private static StringBuilder writeDoubleSlashAndChar(
-      StringBuilder minifiedContentBuffer, StringBuilder identifierBuffer, char c, int state) {
-    identifierBuffer = writeChar(minifiedContentBuffer, identifierBuffer, '/', state);
-    return writeSlashAndChar(minifiedContentBuffer, identifierBuffer, c, state);
+      StringBuilder minifiedContentBuffer, StringBuilder identifierBuffer, char c) {
+    identifierBuffer = writeChar(minifiedContentBuffer, identifierBuffer, '/');
+    return writeSlashAndChar(minifiedContentBuffer, identifierBuffer, c);
   }
 
   private static StringBuilder writeSlashAndStartNewIdentifier(
-      StringBuilder minifiedContentBuffer, StringBuilder identifierBuffer, char c, int state) {
-    identifierBuffer = writeChar(minifiedContentBuffer, identifierBuffer, '/', state);
-    identifierBuffer = startNewIdentifier(minifiedContentBuffer, identifierBuffer, c, state);
+      StringBuilder minifiedContentBuffer, StringBuilder identifierBuffer, char c) {
+    identifierBuffer = writeChar(minifiedContentBuffer, identifierBuffer, '/');
+    identifierBuffer = startNewIdentifier(minifiedContentBuffer, identifierBuffer, c);
     return identifierBuffer;
   }
 
@@ -382,11 +381,11 @@ public class J2clMinifier {
     transFn = new TransitionFunction[numberOfStates][numberOfStates];
 
     transFn[S_NON_IDENTIFIER][S_IDENTIFIER] = J2clMinifier::startNewIdentifier;
-    transFn[S_NON_IDENTIFIER][S_NON_IDENTIFIER] = J2clMinifier::writeCharOrReplace;
+    transFn[S_NON_IDENTIFIER][S_NON_IDENTIFIER] = J2clMinifier::writeNonIdentifierCharOrReplace;
     transFn[S_NON_IDENTIFIER][S_MAYBE_COMMENT_START] = J2clMinifier::skipChar;
     transFn[S_NON_IDENTIFIER][S_SINGLE_QUOTED_STRING] = J2clMinifier::writeChar;
     transFn[S_NON_IDENTIFIER][S_DOUBLE_QUOTED_STRING] = J2clMinifier::writeChar;
-    transFn[S_NON_IDENTIFIER][S_END_STATE] = J2clMinifier::writeCharOrReplace;
+    transFn[S_NON_IDENTIFIER][S_END_STATE] = J2clMinifier::writeNonIdentifierCharOrReplace;
 
     transFn[S_IDENTIFIER][S_IDENTIFIER] = J2clMinifier::bufferIdentifierChar;
     transFn[S_IDENTIFIER][S_NON_IDENTIFIER] = this::writeIdentifierAndChar;
@@ -501,8 +500,7 @@ public class J2clMinifier {
       int parseState = nextState[lastParseState][c < 256 ? c : 0];
 
       TransitionFunction transitionFunction = transFn[lastParseState][parseState];
-      identifierBuffer =
-          transitionFunction.transition(minifiedContentBuffer, identifierBuffer, c, lastParseState);
+      identifierBuffer = transitionFunction.transition(minifiedContentBuffer, identifierBuffer, c);
 
       lastParseState = parseState;
     }
@@ -512,8 +510,7 @@ public class J2clMinifier {
 
     // Transition to the end state
     TransitionFunction transitionFunction = transFn[lastParseState][S_END_STATE];
-    transitionFunction.transition(
-        minifiedContentBuffer, identifierBuffer, (char) 0, lastParseState);
+    transitionFunction.transition(minifiedContentBuffer, identifierBuffer, (char) 0);
 
     minifiedContent = minifiedContentBuffer.toString();
     // Update the minified content cache for next time.
@@ -554,8 +551,7 @@ public class J2clMinifier {
   private StringBuilder writeIdentifier(
       StringBuilder minifiedContentBuffer,
       StringBuilder identifierBuffer,
-      @SuppressWarnings("unused") char c,
-      int state) {
+      @SuppressWarnings("unused") char c) {
     String identifier = identifierBuffer.toString();
     if (isMinifiableIdentifier(identifier)) {
       minifiedContentBuffer.append(getMinifiedIdentifier(identifier));
@@ -566,8 +562,8 @@ public class J2clMinifier {
   }
 
   private StringBuilder writeIdentifierAndChar(
-      StringBuilder minifiedContentBuffer, StringBuilder identifierBuffer, char c, int state) {
-    writeIdentifier(minifiedContentBuffer, identifierBuffer, c, state);
+      StringBuilder minifiedContentBuffer, StringBuilder identifierBuffer, char c) {
+    writeIdentifier(minifiedContentBuffer, identifierBuffer, c);
     minifiedContentBuffer.append(c);
     return identifierBuffer;
   }
@@ -627,7 +623,7 @@ public class J2clMinifier {
   public static void main(String... args) throws IOException {
     checkState(args.length == 1, "Provide a input file to minify");
     String file = args[0];
-    String contents = new String(Files.readAllBytes(Paths.get(file)), StandardCharsets.UTF_8);
+    String contents = new String(Files.readAllBytes(Paths.get(file)), UTF_8);
     System.out.println(new J2clMinifier().minify(file, contents));
   }
 }
