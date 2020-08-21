@@ -35,26 +35,28 @@ public abstract class FieldDescriptor extends MemberDescriptor {
 
   public abstract boolean isEnumConstant();
 
-  public abstract boolean isVariableCapture();
-
-  public abstract boolean isEnclosingInstanceCapture();
-
   public abstract boolean isDeprecated();
+
+  public boolean isVariableCapture() {
+    return getOrigin() == FieldOrigin.SYNTHETIC_CAPTURE_FIELD;
+  }
+
+  public boolean isEnclosingInstanceCapture() {
+    return getOrigin() == FieldOrigin.SYNTHETIC_OUTER_FIELD;
+  }
 
   @Override
   public abstract FieldOrigin getOrigin();
 
   /** Whether this field originates in the source code or is synthetic. */
   public enum FieldOrigin implements MemberDescriptor.Origin {
-    SOURCE,
-    SYNTHETIC_BACKING_FIELD("$"),
-    SYNTHETIC_ORDINAL_FIELD("$ordinal$");
+    SOURCE("f_"),
+    SYNTHETIC_OUTER_FIELD("$outer_"),
+    SYNTHETIC_CAPTURE_FIELD("$captured_"),
+    SYNTHETIC_BACKING_FIELD("$static_"),
+    SYNTHETIC_ORDINAL_FIELD("$ordinal_");
 
     private final String prefix;
-
-    FieldOrigin() {
-      this("");
-    }
 
     FieldOrigin(String prefix) {
       this.prefix = prefix;
@@ -177,8 +179,6 @@ public abstract class FieldDescriptor extends MemberDescriptor {
         .setCompileTimeConstant(false)
         .setStatic(false)
         .setFinal(false)
-        .setVariableCapture(false)
-        .setEnclosingInstanceCapture(false)
         .setSynthetic(false)
         .setUnusableByJsSuppressed(false)
         .setDeprecated(false)
@@ -200,10 +200,6 @@ public abstract class FieldDescriptor extends MemberDescriptor {
     public abstract Builder setStatic(boolean isStatic);
 
     public abstract Builder setFinal(boolean isFinal);
-
-    public abstract Builder setVariableCapture(boolean isVariableCapture);
-
-    public abstract Builder setEnclosingInstanceCapture(boolean isEnclosingInstanceCapture);
 
     public abstract Builder setEnclosingTypeDescriptor(
         DeclaredTypeDescriptor enclosingTypeDescriptor);

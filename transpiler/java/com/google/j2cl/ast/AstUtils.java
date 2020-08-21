@@ -40,8 +40,7 @@ import java.util.stream.Stream;
 
 /** Utility functions to manipulate J2CL AST. */
 public class AstUtils {
-  private static final String CAPTURES_PREFIX = "$c_";
-  private static final String ENCLOSING_INSTANCE_NAME = "$outer_this";
+  private static final String ENCLOSING_INSTANCE_NAME = "this";
 
   /** Returns the loadModules method descriptor for a particular type */
   public static MethodDescriptor getLoadModulesDescriptor(DeclaredTypeDescriptor typeDescriptor) {
@@ -163,13 +162,12 @@ public class AstUtils {
       DeclaredTypeDescriptor enclosingTypeDescriptor, Variable capturedVariable) {
     return FieldDescriptor.newBuilder()
         .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
-        .setName(CAPTURES_PREFIX + capturedVariable.getName())
-        .setVariableCapture(true)
+        .setName(capturedVariable.getName())
         .setTypeDescriptor(capturedVariable.getTypeDescriptor())
         .setStatic(false)
         .setFinal(true)
         .setSynthetic(true)
-        .setJsInfo(JsInfo.RAW_FIELD)
+        .setOrigin(FieldOrigin.SYNTHETIC_CAPTURE_FIELD)
         .build();
   }
 
@@ -180,19 +178,9 @@ public class AstUtils {
         .setEnclosingTypeDescriptor(enclosingClassDescriptor)
         .setName(ENCLOSING_INSTANCE_NAME)
         .setFinal(true)
-        .setEnclosingInstanceCapture(true)
         .setSynthetic(true)
         .setTypeDescriptor(fieldTypeDescriptor)
-        .build();
-  }
-
-  /** Returns the added outer parameter in constructor corresponding to the added field. */
-  public static Variable createOuterParamByField(Field field) {
-    return Variable.newBuilder()
-        .setName(field.getDescriptor().getName())
-        .setTypeDescriptor(field.getDescriptor().getTypeDescriptor())
-        .setParameter(true)
-        .setFinal(true)
+        .setOrigin(FieldOrigin.SYNTHETIC_OUTER_FIELD)
         .build();
   }
 

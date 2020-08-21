@@ -267,14 +267,21 @@ public abstract class MemberDescriptor
       return getSimpleJsName();
     }
 
-    String prefix = getOrigin().getPrefix();
-
     TypeDescriptor enclosingTypeDescriptor = getEnclosingTypeDescriptor();
     checkArgument(!enclosingTypeDescriptor.isArray());
-    String name = getName();
+
     String typeMangledName = enclosingTypeDescriptor.getMangledName();
     String privateSuffix = getVisibility().isPrivate() ? "_" : "";
-    return String.format("%sf_%s__%s%s", prefix, name, typeMangledName, privateSuffix);
+    return buildMangledName(typeMangledName + privateSuffix);
+  }
+
+  final String buildMangledName(String suffix) {
+    return String.format("%s%s__%s", getManglingPrefix(), getName(), suffix);
+  }
+
+  /** Returns the mangling prefix for the member. */
+  String getManglingPrefix() {
+    return getOrigin().getPrefix();
   }
 
   public abstract MemberDescriptor specializeTypeVariables(

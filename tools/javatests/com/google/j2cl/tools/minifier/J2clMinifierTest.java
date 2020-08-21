@@ -85,7 +85,9 @@ public class J2clMinifierTest extends TestCase {
 
   public void testFields() {
     assertChange("f_someInstanceField__com_google_j2cl_MyClass", "someInstanceField_$1");
-    assertChange("$f_someStaticField__com_google_j2cl_MyClass", "someStaticField_$1");
+    assertChange("$static_someStaticField__com_google_j2cl_MyClass", "someStaticField_$1");
+    assertChange("$ordinal_ordinalField__com_google_j2cl_MyClass", "ordinalField_$1");
+    assertChange("$captured_capturedField__com_google_j2cl_MyClass", "capturedField_$1");
   }
 
   public void testFindsIdentifiersInContext() {
@@ -101,11 +103,11 @@ public class J2clMinifierTest extends TestCase {
     assertChange("{f_bar__com_google_j2cl_MyClass}", "{bar_$1}");
     assertChange("(f_bar__com_google_j2cl_MyClass)", "(bar_$1)");
 
-    assertChange(" $f_baz__com_google_j2cl_MyClass ", " baz_$1 ");
-    assertChange(".$f_baz__com_google_j2cl_MyClass(", ".baz_$1(");
-    assertChange(".$f_baz__com_google_j2cl_MyClass;", ".baz_$1;");
-    assertChange("{$f_baz__com_google_j2cl_MyClass}", "{baz_$1}");
-    assertChange("($f_baz__com_google_j2cl_MyClass)", "(baz_$1)");
+    assertChange(" $static_baz__com_google_j2cl_MyClass ", " baz_$1 ");
+    assertChange(".$static_baz__com_google_j2cl_MyClass(", ".baz_$1(");
+    assertChange(".$static_baz__com_google_j2cl_MyClass;", ".baz_$1;");
+    assertChange("{$static_baz__com_google_j2cl_MyClass}", "{baz_$1}");
+    assertChange("($static_baz__com_google_j2cl_MyClass)", "(baz_$1)");
 
     assertChange(" $implements__java_util_Map$Entry ", " implements_$1 ");
     assertChange(".$implements__java_util_Map$Entry(", ".implements_$1(");
@@ -113,7 +115,7 @@ public class J2clMinifierTest extends TestCase {
     assertChange("{$implements__java_util_Map$Entry}", "{implements_$1}");
     assertChange("($implements__java_util_Map$Entry)", "(implements_$1)");
 
-    assertChange("abc.$f_baz__com_google_j2cl_MyClass.klm", "abc.baz_$1.klm");
+    assertChange("abc.$static_baz__com_google_j2cl_MyClass.klm", "abc.baz_$1.klm");
   }
 
   public void testLineComments() {

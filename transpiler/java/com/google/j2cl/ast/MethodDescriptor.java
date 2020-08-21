@@ -21,11 +21,11 @@ import static java.util.stream.Collectors.joining;
 
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
-import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Streams;
+import com.google.j2cl.ast.FieldDescriptor.FieldOrigin;
 import com.google.j2cl.common.ThreadLocalInterner;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -130,7 +130,21 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     @Override
     public String getPrefix() {
-      return "";
+      switch (this) {
+          // User written methods and bridges need to be mangled the same way.
+        case SOURCE:
+        case GENERALIZING_BRIDGE:
+        case SPECIALIZING_BRIDGE:
+        case DEFAULT_METHOD_BRIDGE:
+          return "m_";
+          // Getters and setters need to be mangled as fields.
+        case SYNTHETIC_PROPERTY_SETTER:
+        case SYNTHETIC_PROPERTY_GETTER:
+          return FieldOrigin.SOURCE.getPrefix();
+          // Don't prefix the rest, they all start with "$"
+        default:
+          return "";
+      }
     }
   }
 
@@ -473,13 +487,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
           break;
       }
     }
-    String prefix = "m_";
-    if (getName().startsWith("$")) {
-      // This is an internal method so we render the actual name
-      prefix = "";
-    }
-    String parameterSignature = "__" + Joiner.on("__").join(getMangledParameterTypes());
-    return String.format("%s%s%s%s", prefix, getName(), parameterSignature, suffix);
+    String parameterSignature = String.join("__", getMangledParameterTypes());
+    return buildMangledName(parameterSignature + suffix);
   }
 
   /** Returns the list of mangled name of parameters' types. */
@@ -487,6 +496,18 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     return Lists.transform(
         getParameterTypeDescriptors(),
         parameterTypeDescriptor -> parameterTypeDescriptor.toRawTypeDescriptor().getMangledName());
+  }
+
+  @Override
+  String getManglingPrefix() {
+    String name = getName();
+    checkState(!getOrigin().getPrefix().isEmpty() || name.startsWith("$"));
+
+    // Do not add a prefix to user written methods whose name start with '$'. Some of those internal
+    // members like $create, $isInstance, etc could also be provided by the user to customize the
+    // behaviour.
+    boolean isInternal = name.startsWith("$") && getOrigin() == MethodOrigin.SOURCE;
+    return isInternal ? "" : getOrigin().getPrefix();
   }
 
   /**

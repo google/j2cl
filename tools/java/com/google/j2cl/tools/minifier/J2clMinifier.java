@@ -191,16 +191,23 @@ public class J2clMinifier {
       return identifier.indexOf("__", underScoreIndex + 1) != -1;
     }
 
+    // TODO(b/146071810): Have a more consistent way to detect mangling patterns.
     return identifier.startsWith("$create__")
         || identifier.startsWith("$ctor__")
+        || identifier.startsWith("$fn__")
         || identifier.startsWith("$implements__")
-        || identifier.startsWith("$init__");
+        || identifier.startsWith("$init__")
+        || identifier.startsWith("$is__");
   }
 
   private static boolean startsLikeJavaMethodOrField(String identifier) {
+    // TODO(b/146071810): Have a more consistent way to detect mangling patterns.
     return identifier.startsWith("f_")
         || identifier.startsWith("m_")
-        || identifier.startsWith("$f_");
+        || identifier.startsWith("$static_")
+        || identifier.startsWith("$outer_")
+        || identifier.startsWith("$ordinal_")
+        || identifier.startsWith("$captured_");
   }
 
   private static void setDefaultTransitions(int currentState, int nextState) {

@@ -22,6 +22,7 @@ public class Main {
   public static void main(String[] args) {
     testStaticFields_visibilities();
     testStaticFields_superInterface();
+    testStaticFields_internal();
   }
 
   public static int a = 2;
@@ -30,6 +31,17 @@ public class Main {
   private static void testStaticFields_visibilities() {
     assertTrue(Main.a == 2);
     assertTrue(Main.b == 6);
+  }
+
+  // Fields and methods that start with $ do not get a prefix. This is a static field and will be
+  // rewritten into getter/setter plus backing field. The backing field name will also start with
+  // $, but in this case since it is synthetic it will be appropriately prefixed.
+  public static int $internal = 3;
+
+  private static void testStaticFields_internal() {
+    assertTrue(Main.$internal == 3);
+    Main.$internal++;
+    assertTrue(Main.$internal == 4);
   }
 
   interface Super {

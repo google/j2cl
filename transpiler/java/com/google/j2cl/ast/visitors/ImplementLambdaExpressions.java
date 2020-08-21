@@ -221,14 +221,14 @@ public class ImplementLambdaExpressions extends NormalizationPass {
    *
    * <p><code>
    *   class FunctionalInterface$$LambdaAdaptor implements FunctionalInterface {
-   *     private FunctionalInterface$$JsFunction $$fn;
+   *     private FunctionalInterface$$JsFunction fn;
    *
    *     public FunctionalInterface$$LambdaAdaptor(FunctionalInterface$$JsFunction fn) {
-   *       this.$$fn = fn;
+   *       this.fn = fn;
    *     }
    *
    *     public t method(t1 p1, t2 p2, .....) {
-   *       return this.$$fn.method(p1, p2, ....);
+   *       return this.fn.method(p1, p2, ....);
    *     }
    *
    *   }
@@ -280,7 +280,7 @@ public class ImplementLambdaExpressions extends NormalizationPass {
     FieldDescriptor jsFunctionFieldDescriptor =
         FieldDescriptor.newBuilder()
             .setEnclosingTypeDescriptor(adaptorTypeDescriptor)
-            .setName("$$fn")
+            .setName("fn")
             .setTypeDescriptor(jsFunctionTypeDescriptor)
             .build();
     adaptorType.addField(
@@ -299,7 +299,7 @@ public class ImplementLambdaExpressions extends NormalizationPass {
     adaptorType.addMethod(
         //  @JsConstructor
         //  FunctionalInterface$$LambdaAdaptor(FunctionalInterface$$JsFunction fn) {
-        //    this.$$fn = fn;
+        //    this.fn = fn;
         //  }
         createLambdaAdaptorConstructor(
             sourcePosition,
@@ -308,7 +308,7 @@ public class ImplementLambdaExpressions extends NormalizationPass {
             jsFunctionFieldDescriptor));
     adaptorType.addMethod(
         // public t method(t1 p1, t2 p2, .....) {
-        //   return this.$$fn.method(p1, p2, ....);
+        //   return this.fn.method(p1, p2, ....);
         // }
         AstUtils.createForwardingMethod(
             sourcePosition,
@@ -343,7 +343,7 @@ public class ImplementLambdaExpressions extends NormalizationPass {
         .setParameters(jsFunctionParameter)
         .addStatements(
             // Store the JsFunction lambda in the corresponding field.
-            // this.$$fn = fn;
+            // this.fn = fn;
             BinaryExpression.Builder.asAssignmentTo(jsFunctionFieldDescriptor)
                 .setRightOperand(jsFunctionParameter)
                 .build()

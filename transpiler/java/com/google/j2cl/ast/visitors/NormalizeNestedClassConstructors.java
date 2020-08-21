@@ -95,10 +95,26 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
           .addParameters(
               0,
               Streams.stream(getFieldsForCaptures(getCurrentType()))
-                  .map(AstUtils::createOuterParamByField)
+                  .map(NormalizeNestedClassConstructors::createConstructorParameterForCapture)
                   .collect(Collectors.toList()))
           .build();
     }
+  }
+
+  /**
+   * Returns a new parameter variable corresponding to the capture to be used in the constructor.
+   */
+  private static Variable createConstructorParameterForCapture(Field field) {
+    return Variable.newBuilder()
+        .setName(getCapturingParameterName(field.getDescriptor()))
+        .setTypeDescriptor(field.getDescriptor().getTypeDescriptor())
+        .setParameter(true)
+        .setFinal(true)
+        .build();
+  }
+
+  private static String getCapturingParameterName(FieldDescriptor fieldDescriptor) {
+    return fieldDescriptor.getOrigin().getPrefix() + fieldDescriptor.getName();
   }
 
   /** Makes the qualifier in a nested class instantiation an argument to its constructors. */
@@ -331,10 +347,9 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
     // Parameters in constructors corresponding to captures share the same name as the backing
     // field.
     Variable parameter =
-        method
-            .getParameters()
-            .stream()
-            .filter(variable -> variable.getName().equals(fieldDescriptor.getName()))
+        method.getParameters().stream()
+            .filter(
+                variable -> variable.getName().equals(getCapturingParameterName(fieldDescriptor)))
             .findFirst()
             .orElse(null);
 
