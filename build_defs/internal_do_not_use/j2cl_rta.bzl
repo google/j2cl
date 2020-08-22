@@ -22,16 +22,13 @@ def _library_info_aspect_impl(target, ctx):
 
     library_info_file = j2cl_info._private_.library_info if j2cl_info else []
 
-    # Because the aspect propagates along attributes listed in _RTA_ASPECT_ATTRS,
-    # the aspect has been previously applied to targets listed in those attributes.
-    # We can safely assume that _TransitiveLibraryInfo exists on those targets.
     transitive_library_infos = []
     for attr in RTA_ASPECT_ATTRS:
         if hasattr(ctx.rule.attr, attr):
-            transitive_library_infos += [
-                target[_TransitiveLibraryInfo].files
-                for target in getattr(ctx.rule.attr, attr)
-            ]
+            for target in getattr(ctx.rule.attr, attr):
+                # The aspect is not applied on source files and they don't have any provider.
+                if _TransitiveLibraryInfo in target:
+                    transitive_library_infos.append(target[_TransitiveLibraryInfo].files)
 
     return [_TransitiveLibraryInfo(
         files = depset(library_info_file, transitive = transitive_library_infos),
