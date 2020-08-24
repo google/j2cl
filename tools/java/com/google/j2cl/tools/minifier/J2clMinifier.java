@@ -41,8 +41,8 @@ import java.util.regex.Pattern;
  * A thread-safe, fast and pretty minifier/comment stripper for J2CL generated code.
  *
  * <p>Converts mangled J2CL names to minified (but still pretty and unique) versions and strips
- * comments (doing both these things while doing no AST construction and respecting the sanctity of
- * strings).
+ * block comments (doing both these things while doing no AST construction and respecting the
+ * sanctity of strings).
  *
  * <p>The imagined use case for this minifier is to be part of fast concatenating uncompiled JS
  * servers used as part of the development cycle. There is an expectation that because uncompiled
@@ -64,9 +64,13 @@ public class J2clMinifier {
   private static class Buffer {
     private final StringBuilder contentBuffer = new StringBuilder();
     private int identifierStartIndex = -1;
+    private int lastLineIndex = 0;
 
     void append(char c) {
       contentBuffer.append(c);
+      if (c == '\n') {
+        lastLineIndex = contentBuffer.length();
+      }
     }
 
     void recordStartOfNewIdentifier() {
@@ -80,6 +84,19 @@ public class J2clMinifier {
     void replaceIdentifier(String newIdentifier) {
       contentBuffer.replace(identifierStartIndex, contentBuffer.length(), newIdentifier);
       identifierStartIndex = -1;
+    }
+
+    int lastLineIndexOf(String name) {
+      int index = contentBuffer.indexOf(name, lastLineIndex);
+      return index == -1 ? -1 : index - lastLineIndex;
+    }
+
+    Matcher matchLastLine(Pattern pattern) {
+      return pattern.matcher(contentBuffer).region(lastLineIndex, contentBuffer.length());
+    }
+
+    void replaceLastLine(String newContent) {
+      contentBuffer.replace(lastLineIndex, contentBuffer.length(), newContent);
     }
 
     @Override
@@ -176,12 +193,6 @@ public class J2clMinifier {
     }
   }
 
-  private static char[] getChars(String content) {
-    char[] chars = new char[content.length()];
-    content.getChars(0, content.length(), chars, 0);
-    return chars;
-  }
-
   private static boolean isIdentifierChar(char c) {
     return c == '_'
         || c == '$'
@@ -262,8 +273,7 @@ public class J2clMinifier {
 
   private static void writeNonIdentifierCharOrReplace(Buffer buffer, char c) {
     if (c == '\n' || c == 0) {
-      // TODO(goktug): Remove access to content buffer
-      maybeReplaceGoogStatement(buffer.contentBuffer);
+      maybeReplaceGoogStatement(buffer);
     }
     if (c != 0) {
       writeChar(buffer, c);
@@ -276,25 +286,27 @@ public class J2clMinifier {
   private static final Pattern GOOG_REQUIRE =
       Pattern.compile("goog.require\\(" + MODULE_NAME + "\\);");
 
-  private static void maybeReplaceGoogStatement(StringBuilder minifiedContentBuffer) {
-    int start = minifiedContentBuffer.lastIndexOf("\n") + 1;
-    int end = minifiedContentBuffer.length();
-    if (start == end) {
+  private static void maybeReplaceGoogStatement(Buffer buffer) {
+    int index = buffer.lastLineIndexOf("goog.");
+    if (index == -1) {
       return;
     }
 
-    // goog.forwardDeclare is only useful for compiler except the variable declaration.
-    Matcher m = GOOG_FORWARD_DECLARE.matcher(minifiedContentBuffer).region(start, end);
-    if (m.matches()) {
-      minifiedContentBuffer.replace(start, minifiedContentBuffer.length(), m.group(1)).append(';');
-      return;
-    }
-
-    // Unassigned goog.require is only useful for compiler and bundling.
-    m = GOOG_REQUIRE.matcher(minifiedContentBuffer).region(start, end);
-    if (m.matches()) {
-      minifiedContentBuffer.delete(start, minifiedContentBuffer.length());
-      return;
+    if (index == 0) {
+      // Unassigned goog.require is only useful for compiler and bundling.
+      Matcher m = buffer.matchLastLine(GOOG_REQUIRE);
+      if (m.matches()) {
+        buffer.replaceLastLine("");
+        return;
+      }
+    } else {
+      // goog.forwardDeclare is only useful for compiler except the variable declaration.
+      Matcher m = buffer.matchLastLine(GOOG_FORWARD_DECLARE);
+      if (m.matches()) {
+        buffer.replaceLastLine(m.group(1));
+        buffer.append(';');
+        return;
+      }
     }
   }
 
@@ -472,7 +484,6 @@ public class J2clMinifier {
 
     boolean[] unusedLines = unusedLinesPerFile.get(fileKey);
 
-    char[] chars = getChars(content);
     Buffer buffer = new Buffer();
     int lastParseState = S_NON_IDENTIFIER;
     int lineNumber = 0;
@@ -483,8 +494,8 @@ public class J2clMinifier {
      * non-identifier chars immediately and accumulating identifiers chars for minifying and copying
      * when the identifier ends.
      */
-    for (int i = 0; i < chars.length; i++) {
-      char c = chars[i];
+    for (int i = 0; i < content.length(); i++) {
+      char c = content.charAt(i);
 
       // Skip unused lines if necessary. Any unused line should not effect the state machine.
       if (unusedLines != null) {
