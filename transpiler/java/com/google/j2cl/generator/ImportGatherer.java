@@ -33,7 +33,6 @@ import com.google.j2cl.ast.FunctionExpression;
 import com.google.j2cl.ast.IntersectionTypeDescriptor;
 import com.google.j2cl.ast.JavaScriptConstructorReference;
 import com.google.j2cl.ast.JsDocCastExpression;
-import com.google.j2cl.ast.Member;
 import com.google.j2cl.ast.MemberDescriptor;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
@@ -141,17 +140,20 @@ class ImportGatherer extends AbstractVisitor {
 
   @Override
   public void exitMethod(Method method) {
-    maybeAddNativeReference(method);
+    MethodDescriptor methodDescriptor = method.getDescriptor();
+    maybeAddNativeReference(methodDescriptor);
 
-    collectForJsDoc(method.getDescriptor().getReturnTypeDescriptor());
-
-    for (Variable parameter : method.getParameters()) {
-      collectForJsDoc(parameter.getTypeDescriptor());
-    }
+    collectForJsDoc(methodDescriptor.getReturnTypeDescriptor());
+    // Collect the types of the parameters from the method descriptor as those are the ones
+    // used for the inline @param declaration. Do not collect explicitly the types of the
+    // Variable object used to represent the parameter in the AST since its type is never used
+    // implicitly and might be different from the type in the method descriptor (as the bridge
+    // construction algorithm leverages the fact that the type of the parameter variable can be
+    // different from the parameter type declaration to implement the erasure cast checks).
+    methodDescriptor.getParameterTypeDescriptors().forEach(this::collectForJsDoc);
   }
 
-  private void maybeAddNativeReference(Member member) {
-    MemberDescriptor memberDescriptor = member.getDescriptor();
+  private void maybeAddNativeReference(MemberDescriptor memberDescriptor) {
     if (memberDescriptor.isExternalizedMember() && !memberDescriptor.isExtern()) {
       addTypeDeclaration(
           AstUtils.getNamespaceAsTypeDescriptor(memberDescriptor).getTypeDeclaration(),
