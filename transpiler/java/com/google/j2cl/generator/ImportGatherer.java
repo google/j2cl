@@ -29,6 +29,7 @@ import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldDeclarationStatement;
+import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.FunctionExpression;
 import com.google.j2cl.ast.IntersectionTypeDescriptor;
 import com.google.j2cl.ast.JavaScriptConstructorReference;
@@ -86,9 +87,7 @@ class ImportGatherer extends AbstractVisitor {
     addTypeDeclaration(type.getDeclaration(), ImportCategory.SELF);
 
     if (type.isOverlayImplementation() && type.getOverlaidTypeDeclaration().isNative()) {
-      // The synthesized JsOverlayImpl type should import the native type eagerly for $isInstance.
-      // Also requiring native type makes sure the native type is not pruned by AJD.
-      addTypeDeclaration(type.getOverlaidTypeDeclaration(), ImportCategory.LOADTIME);
+      collectImportsFromNativeType(type.getOverlaidTypeDeclaration());
     }
 
     if (type.isOverlayImplementation() && type.getOverlaidTypeDeclaration().isJsEnum()) {
@@ -116,6 +115,35 @@ class ImportGatherer extends AbstractVisitor {
               }
               collectForJsDoc(t);
               addTypeDeclaration(t.getTypeDeclaration(), ImportCategory.LOADTIME);
+            });
+  }
+
+  /**
+   * Collects types that need to be imported from native types.
+   *
+   * <p>Overlay types synthesized from native types might not refer to types that might be exposed
+   * by the native type. So here all the relevant imports are collected directly from the native
+   * type declaration.
+   */
+  private void collectImportsFromNativeType(TypeDeclaration nativeType) {
+    // The synthesized JsOverlayImpl type should import the native type eagerly for $isInstance.
+    // Also requiring native type makes sure the native type is not pruned by AJD.
+    addTypeDeclaration(nativeType, ImportCategory.LOADTIME);
+    // Collect types that could be reached through chaining methods or fields. Through chaining
+    // one can access devirtualized overlay methods and static methods, and those need a direct
+    // reference to the declaring class at the usage site. In order of AJD to preserve those,
+    // wherever they are exposed they need to be required.
+    nativeType
+        .toUnparameterizedTypeDescriptor()
+        .getDeclaredMemberDescriptors()
+        .forEach(
+            m -> {
+              maybeAddNativeReference(m);
+              if (m.isMethod()) {
+                collectForJsDoc(((MethodDescriptor) m).getReturnTypeDescriptor());
+              } else if (m.isField()) {
+                collectForJsDoc(((FieldDescriptor) m).getTypeDescriptor());
+              }
             });
   }
 

@@ -2,6 +2,8 @@ goog.module('com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers
 
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let Bar = goog.forwardDeclare('foo.Bar');
+
 class $Overlay {
   static $clinit() {
     $Overlay.$clinit = () => {};
@@ -12,7 +14,9 @@ class $Overlay {
     return instance instanceof Object;
   }
 
-  static $loadModules() {}
+  static $loadModules() {
+    Bar = goog.module.get('foo.Bar');
+  }
 }
 $Util.$setClassMetadata($Overlay, 'Object');
 
