@@ -156,17 +156,6 @@ public abstract class MemberDescriptor
             && getJsNamespace().equals(getEnclosingTypeDescriptor().getQualifiedJsName()));
   }
 
-  /**
-   * Returns true if is a native static member with a custom namespace.
-   *
-   * <p>Having a custom namespace in a native member gives a way to expose JavaScript properties
-   * that are defined in some other module (typically a JavaScript module) as if they where part of
-   * the enclosing Java class.
-   */
-  public boolean isExternalizedMember() {
-    return isStatic() && isNative() && hasJsNamespace();
-  }
-
   /** Whether this member overrides a java.lang.Object method. */
   public boolean isOrOverridesJavaLangObjectMethod() {
     return false;

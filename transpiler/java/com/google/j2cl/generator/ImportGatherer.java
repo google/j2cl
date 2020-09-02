@@ -182,10 +182,12 @@ class ImportGatherer extends AbstractVisitor {
   }
 
   private void maybeAddNativeReference(MemberDescriptor memberDescriptor) {
-    if (memberDescriptor.isExternalizedMember() && !memberDescriptor.isExtern()) {
+    if (memberDescriptor.hasJsNamespace() && !memberDescriptor.isExtern()) {
+      // The member exposes an unrelated namespace that needs to be imported in order to prevent
+      // it from beign pruned by AJD.
       addTypeDeclaration(
           AstUtils.getNamespaceAsTypeDescriptor(memberDescriptor).getTypeDeclaration(),
-          ImportCategory.RUNTIME);
+          ImportCategory.JSDOC);
     }
   }
 

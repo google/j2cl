@@ -84,10 +84,10 @@ public final class LibraryInfoBuilder {
         Maps.newLinkedHashMapWithExpectedSize(type.getMembers().size());
 
     for (Member member : type.getMembers()) {
-      if (member.getDescriptor().isExternalizedMember()) {
-        // Externalized members don't really belong to the type. But they are static members marked
-        // with a jsinterop annotation and hence considered JsAccessible entry points, resulting in
-        // the class being retained by rta.
+      if (member.getDescriptor().hasJsNamespace()) {
+        // Members with an explicit namespace members don't really belong to the type. Skip them
+        // here, otherwise they would be an entry point for this type, and the type might be
+        // unnecessarily retained by rta.
         continue;
       }
       MemberDescriptor memberDescriptor = member.getDescriptor();

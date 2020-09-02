@@ -50,7 +50,7 @@ public class NormalizeStaticNativeMemberReferences extends NormalizationPass {
           @Override
           public Node rewriteFieldAccess(FieldAccess fieldAccess) {
             FieldDescriptor fieldDescriptor = fieldAccess.getTarget();
-            if (!fieldDescriptor.isExternalizedMember()) {
+            if (!fieldDescriptor.hasJsNamespace()) {
               return fieldAccess;
             }
 
@@ -61,7 +61,7 @@ public class NormalizeStaticNativeMemberReferences extends NormalizationPass {
           @Override
           public Node rewriteMethodCall(MethodCall methodCall) {
             MethodDescriptor methodDescriptor = methodCall.getTarget();
-            if (!methodDescriptor.isExternalizedMember()) {
+            if (!methodDescriptor.hasJsNamespace()) {
               return methodCall;
             }
 
