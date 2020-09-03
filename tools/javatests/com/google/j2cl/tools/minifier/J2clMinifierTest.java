@@ -39,6 +39,8 @@ public class J2clMinifierTest extends TestCase {
     assertNoChange("m___parseAndValidateInt__java_lang_String__int__int__int");
     assertNoChange("m___");
     assertNoChange("m__parseAndValidate");
+    assertNoChange("m__x");
+    assertNoChange("m_____x");
     assertNoChange("thism_baz__java_lang_Number();");
     assertNoChange("ClassEndingInLowercasem__InnerClass");
     // TODO(b/109721646): Uncomment once the regex literals are handled correctly.

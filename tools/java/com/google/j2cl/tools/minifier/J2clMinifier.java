@@ -179,18 +179,11 @@ public class J2clMinifier {
   }
 
   private static String computePrettyIdentifier(String identifier) {
-    // Because we have a different mangling pattern for meta functions you can't extract the pretty
-    // name with a single simple regex match group.
+    // Extract a simplified name to the form of <name> or static_<name> or _<name>
+    String simplifiedName = identifier.substring(1, identifier.indexOf("__"));
 
-    if (startsLikeJavaMethodOrField(identifier)) {
-      // It's a regular field or method, extract its name.
-      int beginIndex = identifier.indexOf('_') + 1;
-      int endIndex = identifier.indexOf("__", beginIndex);
-      return identifier.substring(beginIndex, endIndex);
-    } else {
-      // It's one of the meta functions like "$create__".
-      return identifier.substring(1, identifier.indexOf('_'));
-    }
+    // Remove before underscore in the simplified name (if it exists).
+    return simplifiedName.substring(simplifiedName.indexOf('_') + 1);
   }
 
   private static boolean isIdentifierChar(char c) {
@@ -201,36 +194,32 @@ public class J2clMinifier {
         || (c >= 'A' && c <= 'Z');
   }
 
+  // Note that the regular member form is the current shortest identifier style. (Please see the
+  // identifier forms described in #startsLikeJavaMangledName).
+  private static final int MIN_JAVA_IDENTIFIER_SIZE = "f_x__".length();
+
   private static boolean isMinifiableIdentifier(String identifier) {
-    char firstChar = identifier.charAt(0);
-    if (firstChar != '$' && firstChar != 'm' && firstChar != 'f') {
+    if (identifier.length() < MIN_JAVA_IDENTIFIER_SIZE) {
       return false;
     }
-
-    // This is faster than a regex and more readable as well.
-    if (startsLikeJavaMethodOrField(identifier)) {
-      int underScoreIndex = identifier.indexOf('_');
-      // Match mangled Java member names of the form:  m_<name>__<par1>_ ....
-      return identifier.indexOf("__", underScoreIndex + 1) != -1;
-    }
-
-    // TODO(b/146071810): Have a more consistent way to detect mangling patterns.
-    return identifier.startsWith("$create__")
-        || identifier.startsWith("$ctor__")
-        || identifier.startsWith("$fn__")
-        || identifier.startsWith("$implements__")
-        || identifier.startsWith("$init__")
-        || identifier.startsWith("$is__");
+    return startsLikeJavaMangledName(identifier) && identifier.contains("__");
   }
 
-  private static boolean startsLikeJavaMethodOrField(String identifier) {
-    // TODO(b/146071810): Have a more consistent way to detect mangling patterns.
-    return identifier.startsWith("f_")
-        || identifier.startsWith("m_")
-        || identifier.startsWith("$static_")
-        || identifier.startsWith("$outer_")
-        || identifier.startsWith("$ordinal_")
-        || identifier.startsWith("$captured_");
+  private static boolean startsLikeJavaMangledName(String identifier) {
+    char firstChar = identifier.charAt(0);
+    char secondChar = identifier.charAt(1);
+
+    // Form of m_ or f_ (i.e. regular members).
+    if ((firstChar == 'm' || firstChar == 'f') && secondChar == '_') {
+      return true;
+    }
+
+    // Form of $create, $implements $static etc. (i.e. synthetic members)
+    if (firstChar == '$' && secondChar > 'a' && secondChar < 'z') {
+      return true;
+    }
+
+    return false;
   }
 
   private static void setDefaultTransitions(int currentState, int nextState) {
