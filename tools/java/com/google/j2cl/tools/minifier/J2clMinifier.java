@@ -311,17 +311,25 @@ public class J2clMinifier {
       writeChar(buffer, c);
     }
     if (buffer.endOfStatement()) {
-      maybeReplaceGoogStatement(buffer);
+      maybeReplaceStatement(buffer);
     }
   }
 
+  private static final Pattern FIELD_STATEMENT = Pattern.compile(" *[\\w_$]+(\\.[\\w_$]+)+;");
   private static final String MODULE_NAME = "['\"][\\w\\.$]+['\"]";
   private static final Pattern GOOG_FORWARD_DECLARE =
       Pattern.compile("((?:let|var) [\\w$]+) = goog.forwardDeclare\\(" + MODULE_NAME + "\\);");
   private static final Pattern GOOG_REQUIRE =
       Pattern.compile("goog.require\\(" + MODULE_NAME + "\\);");
 
-  private static void maybeReplaceGoogStatement(Buffer buffer) {
+  private static void maybeReplaceStatement(Buffer buffer) {
+    // Unassigned field access is only useful for compiler.
+    Matcher m = buffer.matchLastStatement(FIELD_STATEMENT);
+    if (m.matches()) {
+      buffer.replaceStatement("");
+      return;
+    }
+
     int index = buffer.lastStatementIndexOf("goog.");
     if (index == -1) {
       return;
@@ -329,13 +337,13 @@ public class J2clMinifier {
 
     if (index == 0) {
       // Unassigned goog.require is only useful for compiler and bundling.
-      Matcher m = buffer.matchLastStatement(GOOG_REQUIRE);
+      m = buffer.matchLastStatement(GOOG_REQUIRE);
       if (m.matches()) {
         buffer.replaceStatement("");
       }
     } else {
       // goog.forwardDeclare is only useful for compiler except the variable declaration.
-      Matcher m = buffer.matchLastStatement(GOOG_FORWARD_DECLARE);
+      m = buffer.matchLastStatement(GOOG_FORWARD_DECLARE);
       if (m.matches()) {
         buffer.replaceStatement(m.group(1) + ";");
       }
@@ -432,7 +440,7 @@ public class J2clMinifier {
     transFn[S_NON_IDENTIFIER][S_END_STATE] = J2clMinifier::writeNonIdentifierCharOrReplace;
 
     transFn[S_IDENTIFIER][S_IDENTIFIER] = J2clMinifier::writeChar;
-    transFn[S_IDENTIFIER][S_NON_IDENTIFIER] = this::maybeReplaceIdentifierAndWriteChar;
+    transFn[S_IDENTIFIER][S_NON_IDENTIFIER] = this::maybeReplaceIdentifierAndWriteNonIdentifier;
     transFn[S_IDENTIFIER][S_MAYBE_COMMENT_START] = this::maybeReplaceIdentifier;
     transFn[S_IDENTIFIER][S_SINGLE_QUOTED_STRING] = this::maybeReplaceIdentifierAndWriteChar;
     transFn[S_IDENTIFIER][S_DOUBLE_QUOTED_STRING] = this::maybeReplaceIdentifierAndWriteChar;
@@ -598,6 +606,11 @@ public class J2clMinifier {
   private void maybeReplaceIdentifierAndWriteChar(Buffer buffer, char c) {
     maybeReplaceIdentifier(buffer, c);
     writeChar(buffer, c);
+  }
+
+  private void maybeReplaceIdentifierAndWriteNonIdentifier(Buffer buffer, char c) {
+    maybeReplaceIdentifier(buffer, c);
+    writeNonIdentifierCharOrReplace(buffer, c);
   }
 
   private static CodeRemovalInfo readCodeRemovalInfoFile(String codeRemovalInfoFilePath) {

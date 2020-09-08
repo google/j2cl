@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.junit.integration.stacktrace.data;
 
+import static org.junit.Assert.assertNotNull;
+
 import jsinterop.annotations.JsProperty;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,7 +27,7 @@ import org.junit.runners.JUnit4;
 public class ThrowsInJsProperty extends StacktraceTestBase {
   @Test
   public void test() {
-    getSomeProperty();
+    assertNotNull(getSomeProperty());
   }
 
   @JsProperty
