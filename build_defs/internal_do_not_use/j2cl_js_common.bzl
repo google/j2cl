@@ -16,7 +16,7 @@ def create_js_lib_struct(j2cl_info, extra_providers = []):
         exports = j2cl_info._private_.js_info.exports,
     )
 
-def j2cl_js_provider(ctx, srcs = [], deps = [], exports = []):
+def j2cl_js_provider(ctx, srcs = [], deps = [], exports = [], artifact_suffix = ""):
     """ Creates a js provider from provided sources, deps and exports. """
 
     default_j2cl_suppresses = [

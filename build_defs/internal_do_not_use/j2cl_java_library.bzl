@@ -6,7 +6,6 @@ load(":j2cl_js_common.bzl", "J2CL_JS_ATTRS", "JS_PROVIDER_NAME", "j2cl_js_provid
 def _impl_j2cl_library(ctx):
     j2cl_provider = j2cl_common.compile(
         ctx,
-        name = ctx.attr.name,
         srcs = ctx.files.srcs,
         deps = _j2cl_or_js_providers_of(ctx.attr.deps),
         exports = _j2cl_or_js_providers_of(ctx.attr.exports),

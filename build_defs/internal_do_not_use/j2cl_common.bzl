@@ -12,7 +12,6 @@ def _get_jsinfo_provider(j2cl_info):
 
 def _compile(
         ctx,
-        name,
         srcs = [],
         deps = [],
         exports = [],
@@ -21,7 +20,10 @@ def _compile(
         output_jszip = None,
         output_jar = None,
         javac_opts = [],
-        internal_transpiler_flags = {}):
+        internal_transpiler_flags = {},
+        artifact_suffix = ""):
+    name = ctx.label.name + artifact_suffix
+
     # Categorize the sources.
     js_srcs = []
     java_srcs = []
@@ -80,7 +82,13 @@ def _compile(
             java_info = java_provider,
             library_info = library_info,
             output_js = output_js,
-            js_info = j2cl_js_provider(ctx, js_provider_srcs, js_deps, js_exports),
+            js_info = j2cl_js_provider(
+                ctx,
+                js_provider_srcs,
+                js_deps,
+                js_exports,
+                artifact_suffix,
+            ),
         ),
         _is_j2cl_provider = 1,
     )
