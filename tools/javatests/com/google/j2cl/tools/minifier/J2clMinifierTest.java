@@ -158,6 +158,19 @@ public class J2clMinifierTest extends TestCase {
     assertChange("m_baz__java_lang_Object__java_lang_String", "baz_$1");
   }
 
+  public void testWhiteSpace() {
+    assertChange(" \n", "\n");
+    assertChange("  \n  \n", "\n\n");
+    assertChange("m_bar__java_lang_Object \n", "bar_$1\n");
+    assertChange("  /* */\n", "\n");
+    assertChange("  //abc\n", "\n");
+    assertChange("x = {};   \n", "x = {};\n");
+    assertChange("if (a) {    \n", "if (a) {\n");
+    assertChange("\"     \"    \n", "\"     \"\n");
+
+    assertNoChange("  this.call();");
+  }
+
   public void testForwardDeclare() {
     assertChange("let Byte = goog.forwardDeclare('java.lang.Byte$impl');", "let Byte;");
     assertChange("let Byte = goog.forwardDeclare(\"java.lang.Byte$impl\");", "let Byte;");
@@ -169,7 +182,6 @@ public class J2clMinifierTest extends TestCase {
             + "var Foo = goog.forwardDeclare('java.lang.Foo');",
         "let Byte;\nvar Foo;");
 
-    assertNoChange("let Byte = goog.forwardDeclare('java.lang.Byte');('$impl');");
     assertNoChange("goog.forwardDeclare('java.lang.Foo');");
     assertNoChange("var Foo = goog.forwardDeclare('java.lang.Foo')");
     assertNoChange("identvar Foo = goog.forwardDeclare('java.lang.Foo');");
@@ -222,6 +234,28 @@ public class J2clMinifierTest extends TestCase {
     // Mixed
     assertNoChange("\"'/* */'\"");
     assertNoChange("'\"/* */\"'");
+  }
+
+  public void testExample() {
+    assertChange(
+        String.join(
+            "\n",
+            "constructor(fn) {",
+            "  $LambdaAdaptor.$clinit();",
+            "  super();",
+            "  /**@type{number}*/",
+            "  this.m_boo__;",
+            "  this.$ctor__hoo__(fn);",
+            "}"),
+        String.join(
+            "\n",
+            "constructor(fn) {",
+            "  $LambdaAdaptor.$clinit();",
+            "  super();",
+            "",
+            "  this.boo_$1;",
+            "  this.ctor_$1(fn);",
+            "}"));
   }
 
   private void assertChange(String input, String output) {

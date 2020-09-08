@@ -64,13 +64,52 @@ public class J2clMinifier {
   private static class Buffer {
     private final StringBuilder contentBuffer = new StringBuilder();
     private int identifierStartIndex = -1;
-    private int lastLineIndex = 0;
+    private int whitespaceStartIndex = 0;
+    // We essentially want the ability to see if the last meaningful character we saw is something
+    // that is clearly a statement start semi-colon so we know that is not inside an expression.
+    // We could easily achive that by tracing back the characters but that is inefficient vs. our
+    // tracking here via append.
+    private int statementStartIndex = 0;
+    private boolean nextIsStatementStart = true;
 
     void append(char c) {
-      contentBuffer.append(c);
-      if (c == '\n') {
-        lastLineIndex = contentBuffer.length();
+      int nextIndex = contentBuffer.length();
+      if (nextIsStatementStart) {
+        statementStartIndex = nextIndex;
+        nextIsStatementStart = false;
       }
+
+      if (c == ' ') {
+        contentBuffer.append(c);
+        return; // Exit early since we don't want to increment the whiteSpaceStartIndex.
+      }
+
+      if (c == '\n') {
+        // Trim the trailing whitespace since it doesn't break sourcemaps.
+        nextIndex = trimTrailingWhitespace(nextIndex);
+
+        // Also move the statetementStartIndex to point new line if it was looking at the
+        // whitespace. This also simplifies the statement matches.
+        if (statementStartIndex == nextIndex) {
+          statementStartIndex = nextIndex + 1;
+        }
+      } else if (c == ';' || c == '{' || c == '}') {
+        // There are other ways to start statements but this is enough in the context of minifier.
+        nextIsStatementStart = true;
+      }
+
+      contentBuffer.append(c);
+      // The character that is placed in the buffer is not a whitespace, update whitespace index.
+      whitespaceStartIndex = nextIndex + 1;
+    }
+
+    private int trimTrailingWhitespace(int nextIndex) {
+      if (whitespaceStartIndex != nextIndex) {
+        // There are trailing whitespace characters, trim them.
+        nextIndex = whitespaceStartIndex;
+        contentBuffer.setLength(nextIndex);
+      }
+      return nextIndex;
     }
 
     void recordStartOfNewIdentifier() {
@@ -84,19 +123,26 @@ public class J2clMinifier {
     void replaceIdentifier(String newIdentifier) {
       contentBuffer.replace(identifierStartIndex, contentBuffer.length(), newIdentifier);
       identifierStartIndex = -1;
+      whitespaceStartIndex = contentBuffer.length();
     }
 
-    int lastLineIndexOf(String name) {
-      int index = contentBuffer.indexOf(name, lastLineIndex);
-      return index == -1 ? -1 : index - lastLineIndex;
+    boolean endOfStatement() {
+      return nextIsStatementStart;
     }
 
-    Matcher matchLastLine(Pattern pattern) {
-      return pattern.matcher(contentBuffer).region(lastLineIndex, contentBuffer.length());
+    int lastStatementIndexOf(String name) {
+      int index = contentBuffer.indexOf(name, statementStartIndex);
+      return index == -1 ? -1 : index - statementStartIndex;
     }
 
-    void replaceLastLine(String newContent) {
-      contentBuffer.replace(lastLineIndex, contentBuffer.length(), newContent);
+    Matcher matchLastStatement(Pattern pattern) {
+      return pattern.matcher(contentBuffer).region(statementStartIndex, contentBuffer.length());
+    }
+
+    void replaceStatement(String replacement) {
+      contentBuffer.replace(statementStartIndex, contentBuffer.length(), replacement);
+      statementStartIndex = contentBuffer.length();
+      whitespaceStartIndex = statementStartIndex;
     }
 
     @Override
@@ -261,11 +307,11 @@ public class J2clMinifier {
   }
 
   private static void writeNonIdentifierCharOrReplace(Buffer buffer, char c) {
-    if (c == '\n' || c == 0) {
-      maybeReplaceGoogStatement(buffer);
-    }
     if (c != 0) {
       writeChar(buffer, c);
+    }
+    if (buffer.endOfStatement()) {
+      maybeReplaceGoogStatement(buffer);
     }
   }
 
@@ -276,25 +322,22 @@ public class J2clMinifier {
       Pattern.compile("goog.require\\(" + MODULE_NAME + "\\);");
 
   private static void maybeReplaceGoogStatement(Buffer buffer) {
-    int index = buffer.lastLineIndexOf("goog.");
+    int index = buffer.lastStatementIndexOf("goog.");
     if (index == -1) {
       return;
     }
 
     if (index == 0) {
       // Unassigned goog.require is only useful for compiler and bundling.
-      Matcher m = buffer.matchLastLine(GOOG_REQUIRE);
+      Matcher m = buffer.matchLastStatement(GOOG_REQUIRE);
       if (m.matches()) {
-        buffer.replaceLastLine("");
-        return;
+        buffer.replaceStatement("");
       }
     } else {
       // goog.forwardDeclare is only useful for compiler except the variable declaration.
-      Matcher m = buffer.matchLastLine(GOOG_FORWARD_DECLARE);
+      Matcher m = buffer.matchLastStatement(GOOG_FORWARD_DECLARE);
       if (m.matches()) {
-        buffer.replaceLastLine(m.group(1));
-        buffer.append(';');
-        return;
+        buffer.replaceStatement(m.group(1) + ";");
       }
     }
   }
