@@ -12,6 +12,7 @@ readable_example(
 
 """
 
+load("@io_bazel_rules_closure//closure:defs.bzl", "js_binary")
 load("//build_defs:rules.bzl", "J2CL_OPTIMIZED_DEFS", "j2cl_library")
 load("@bazel_skylib//rules:build_test.bzl", "build_test")
 
@@ -66,7 +67,7 @@ def readable_example(
         )
 
     # Verify compilability of generated JS.
-    native.js_binary(
+    js_binary(
         name = "readable_binary",
         defs = J2CL_OPTIMIZED_DEFS + [
             "--conformance_config=third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/conformance_proto.txt",
