@@ -24,7 +24,6 @@ java_binary(
     main_class = "com.google.j2cl.tools.rta.BazelJ2clRta",
     visibility = [
         "//:__subpackages__",
-        "//java/com/google/caribou/ui/pinto/modules:__subpackages__",
     ],
     runtime_deps = [":rta"],
 )
