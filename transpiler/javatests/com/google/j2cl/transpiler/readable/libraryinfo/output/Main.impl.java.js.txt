@@ -4,8 +4,10 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.libraryinfo.Main.$1$impl');
+let Foo = goog.forwardDeclare('com.google.j2cl.transpiler.readable.libraryinfo.Main.Foo$impl');
 let FunctionImpl = goog.forwardDeclare('com.google.j2cl.transpiler.readable.libraryinfo.Main.FunctionImpl$impl');
 let MyJsType = goog.forwardDeclare('com.google.j2cl.transpiler.readable.libraryinfo.Main.MyJsType$impl');
+let Class = goog.forwardDeclare('java.lang.Class$impl');
 
 class Main extends j_l_Object {
   /** @protected */
@@ -44,6 +46,13 @@ class Main extends j_l_Object {
   toString() {
     return super.toString();
   }
+
+  static main() {
+    Main.$clinit();
+    let foo = null;
+    foo.m_instanceMethod___$pp_com_google_j2cl_transpiler_readable_libraryinfo();
+    let clazz = Class.$get(Foo);
+  }
   /** @return {?string} */
   static get f_STATIC_FIELD__com_google_j2cl_transpiler_readable_libraryinfo_Main() {
     return (
@@ -73,10 +82,13 @@ class Main extends j_l_Object {
   static $loadModules() {
     $1 = goog.module.get(
         'com.google.j2cl.transpiler.readable.libraryinfo.Main.$1$impl');
+    Foo = goog.module.get(
+        'com.google.j2cl.transpiler.readable.libraryinfo.Main.Foo$impl');
     FunctionImpl = goog.module.get(
         'com.google.j2cl.transpiler.readable.libraryinfo.Main.FunctionImpl$impl');
     MyJsType = goog.module.get(
         'com.google.j2cl.transpiler.readable.libraryinfo.Main.MyJsType$impl');
+    Class = goog.module.get('java.lang.Class$impl');
   }
 }
 $Util.$setClassMetadata(

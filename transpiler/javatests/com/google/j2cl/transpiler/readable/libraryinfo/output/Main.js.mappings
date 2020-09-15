@@ -28,6 +28,13 @@
 [log("Foo");] => [console.log("Foo");] "com.google.j2cl.transpiler.readable.libraryinfo.Main.execute"
 [toString] => [toString]
 [return super.toString();] => [return super.toString();] "com.google.j2cl.transpiler.readable.libraryinfo.Main.toString"
+[main] => [main]
+[main] => [Main.$clinit();] "com.google.j2cl.transpiler.readable.libraryinfo.Main.main"
+[Foo foo = null;] => [let foo = null;] "com.google.j2cl.transpiler.readable.libraryinfo.Main.main"
+[foo] => [foo] "foo"
+[foo.instanceMethod();] => [foo.m_instanceMethod___$pp_com_google_j2cl_transpiler_readable_libraryinfo();] "com.google.j2cl.transpiler.readable.libraryinfo.Main.main"
+[Class<?> clazz = Foo.class;] => [let clazz = Class.$get(Foo);] "com.google.j2cl.transpiler.readable.libraryinfo.Main.main"
+[clazz] => [clazz] "clazz"
 [public static String STATIC_FIELD = "STATIC_FIELD";] => [get f_STATIC_FIELD__com_google_j2cl_transpiler_readable_libraryinfo_Main]
 [public static String STATIC_FIELD = "STATIC_FIELD";] => [return (Main.$clinit(), Main.$static_STATIC_FIELD__com_google_j2cl_transpiler_readable_libraryinfo_Main);] "com.google.j2cl.transpiler.readable.libraryinfo.Main.<synthetic: getter>"
 [public static String STATIC_FIELD = "STATIC_FIELD";] => [set f_STATIC_FIELD__com_google_j2cl_transpiler_readable_libraryinfo_Main]

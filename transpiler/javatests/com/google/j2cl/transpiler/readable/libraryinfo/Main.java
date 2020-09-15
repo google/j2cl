@@ -92,4 +92,16 @@ public class Main {
 
   @JsMethod(namespace = JsPackage.GLOBAL, name = "console.log")
   public static native void log(Object o);
+
+  public class Foo {
+    void instanceMethod() {}
+  }
+
+  @JsMethod
+  public static void main() {
+    Foo foo = null;
+    foo.instanceMethod();
+
+    Class<?> clazz = Foo.class;
+  }
 }
