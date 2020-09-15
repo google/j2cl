@@ -18,6 +18,7 @@ package com.google.j2cl.libraryinfo;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.ast.FieldAccess;
@@ -35,6 +36,7 @@ import com.google.protobuf.util.JsonFormat;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
@@ -130,9 +132,22 @@ public final class LibraryInfoBuilder {
 
   private void collectReferencedTypesAndMethodInvocations(
       Member member, MemberInfo.Builder memberInfoBuilder) {
-    Set<MethodInvocation> methodInvocationSet =
+    Set<MethodInvocation> invokedMethods =
         new LinkedHashSet<>(memberInfoBuilder.getInvokedMethodsList());
-    Set<Integer> referencedTypes = new LinkedHashSet<>(memberInfoBuilder.getReferencedTypesList());
+
+    // The set of types that are explicitly referenced in this member; these come from
+    // JavaScriptConstructorReferences that appear in the AST from type literals, casts,
+    // instanceofs and ALSO also the qualifier in every static member reference.
+    // References to static members already include the enclosing class, so in order to avoid
+    // redundancy in library info these types are tracked separately and removed.
+    Set<Integer> explicitlyReferencedTypes =
+        new LinkedHashSet<>(memberInfoBuilder.getReferencedTypesList());
+
+    // The set of types that are implicitly referenced in this member; these come from static
+    // Invocations in the AST, e.g. the enclosing class of a static method call. These types will be
+    // preserved by RTA when seeing the reference to the static member so there is no need to
+    // separately record them as referenced types.
+    Set<Integer> typesReferencedViaStaticMemberReferences = new HashSet<>();
 
     member.accept(
         new AbstractVisitor() {
@@ -155,7 +170,7 @@ public final class LibraryInfoBuilder {
             }
 
             // In Javascript a Class is statically referenced by using it's constructor function.
-            referencedTypes.add(getTypeId(referencedType));
+            explicitlyReferencedTypes.add(getTypeId(referencedType));
           }
 
           @Override
@@ -177,9 +192,9 @@ public final class LibraryInfoBuilder {
             }
 
             // Register static FieldAccess as getter/setter invocations. We are conservative here
-            // because getter and setter functions has the same name: the name of the field. If a
-            // field is accessed, we visit both getter and setter.
-            methodInvocationSet.add(createMethodInvocation(target));
+            // because getter and setter functions have the same name: i.e. the name of the field.
+            // If a field is accessed, we visit both getter and setter.
+            addInvokedMethod(target);
           }
 
           @Override
@@ -208,21 +223,25 @@ public final class LibraryInfoBuilder {
               return;
             }
 
-            methodInvocationSet.add(createMethodInvocation(target));
+            addInvokedMethod(target);
+          }
+
+          private void addInvokedMethod(MemberDescriptor target) {
+            invokedMethods.add(createMethodInvocation(target));
+            if (!target.isInstanceMember()) {
+              typesReferencedViaStaticMemberReferences.add(
+                  getTypeId(target.getEnclosingTypeDescriptor()));
+            }
           }
         });
-
-    // Remove redundant references recorded due to JavaScriptConstructorReferences which are already
-    // recorded via invocations (e.g. all static calls introduce JavaScriptConstructorReference).
-    methodInvocationSet.stream()
-        .map(MethodInvocation::getEnclosingType)
-        .forEach(referencedTypes::remove);
 
     memberInfoBuilder
         .clearReferencedTypes()
         .clearInvokedMethods()
-        .addAllInvokedMethods(methodInvocationSet)
-        .addAllReferencedTypes(referencedTypes);
+        .addAllInvokedMethods(invokedMethods)
+        // Record only the explicit type references without the implicit ones which are redundant.
+        .addAllReferencedTypes(
+            Sets.difference(explicitlyReferencedTypes, typesReferencedViaStaticMemberReferences));
   }
 
   private MethodInvocation createMethodInvocation(MemberDescriptor memberDescriptor) {
