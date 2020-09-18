@@ -25,6 +25,7 @@ import org.junit.runners.Suite.SuiteClasses;
   BigDecimalSuite.class,
   BigIntegerSuite.class,
   CollectionsSuite.class,
+  ConcurrentSuite.class,
   EmulSuite.class,
   EmulJava8Suite.class,
 })
