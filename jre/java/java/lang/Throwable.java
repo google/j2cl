@@ -161,8 +161,17 @@ public class Throwable implements Serializable {
     return stackTrace;
   }
 
-  @SuppressWarnings("unusable-by-js")
-  private native StackTraceElement[] constructJavaStackTrace();
+  private StackTraceElement[] constructJavaStackTrace() {
+    StackTraceElement[] stackTraceElements = new StackTraceElement[0]; // Will auto-grow...
+    Object e = this.backingJsObject;
+    if (e instanceof NativeError) {
+      String[] splitStack = ((NativeError) e).stack.split("\n");
+      for (int i = 0; i < splitStack.length; i++) {
+        stackTraceElements[i] = new StackTraceElement("", splitStack[i], null, -1);
+      }
+    }
+    return stackTraceElements;
+  }
 
   /** Returns the array of Exception that this one suppressedExceptions. */
   public final Throwable[] getSuppressed() {

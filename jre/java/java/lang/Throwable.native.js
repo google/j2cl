@@ -12,23 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/**
- * @return {!Array<!StackTraceElement>}
- * @public
- */
-Throwable.prototype.m_constructJavaStackTrace___$p_java_lang_Throwable =
-    function() {
-  var stackTraceElements = $Arrays.$create([0], StackTraceElement);
-  var e = this.backingJsObject;
-  var splitStack = (e && e.stack) ? e.stack.split(/\n/) : [];
-  for (var i = 0; i < splitStack.length; i++) {
-    stackTraceElements[i] =
-        StackTraceElement
-            .$create__java_lang_String__java_lang_String__java_lang_String__int(
-                '', splitStack[i], null, -1);
-  }
-  return stackTraceElements;
-};
 
 /**
  * @param {*} error
