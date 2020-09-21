@@ -21,6 +21,7 @@ import com.google.common.io.CharSink;
 import com.google.common.io.Files;
 import com.google.j2cl.bazel.BazelWorker;
 import com.google.j2cl.common.Problems;
+import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.libraryinfo.LibraryInfo;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -71,10 +72,10 @@ final class BazelJ2clRta extends BazelWorker {
 
     RtaResult rtaResult = RapidTypeAnalyser.analyse(libraryInfos, keepJsTypeInterfaces);
 
-    writeToFile(unusedTypesOutputFilePath, rtaResult.getUnusedTypes());
-    writeToFile(removalCodeInfoOutputFilePath, rtaResult.getCodeRemovalInfo());
-
-    return new Problems();
+    Problems problems = new Problems();
+    writeToFile(unusedTypesOutputFilePath, rtaResult.getUnusedTypes(), problems);
+    writeToFile(removalCodeInfoOutputFilePath, rtaResult.getCodeRemovalInfo(), problems);
+    return problems;
   }
 
   private static LibraryInfo readLibraryInfo(Path libraryInfoPath) throws IOException {
@@ -83,20 +84,20 @@ final class BazelJ2clRta extends BazelWorker {
     }
   }
 
-  private static void writeToFile(String filePath, List<String> lines) {
+  private static void writeToFile(String filePath, List<String> lines, Problems problems) {
     CharSink outputSink = Files.asCharSink(new File(filePath), StandardCharsets.UTF_8);
     try {
       outputSink.writeLines(lines);
     } catch (IOException e) {
-      throw new RuntimeException(e);
+      problems.fatal(FatalError.CANNOT_WRITE_FILE, e.toString());
     }
   }
 
-  private static void writeToFile(String filePath, CodeRemovalInfo results) {
+  private static void writeToFile(String filePath, CodeRemovalInfo results, Problems problems) {
     try (FileOutputStream outputStream = new FileOutputStream(filePath)) {
       results.writeTo(outputStream);
     } catch (IOException e) {
-      throw new RuntimeException(e);
+      problems.fatal(FatalError.CANNOT_WRITE_FILE, e.toString());
     }
   }
 
