@@ -18,8 +18,9 @@ package com.google.j2cl.junit.apt;
 import static com.google.auto.common.MoreElements.isAnnotationPresent;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
+import com.google.common.base.Predicates;
+import com.google.common.collect.ImmutableList;
 import com.google.j2cl.junit.async.Timeout;
-import java.util.List;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
@@ -43,9 +44,6 @@ class JUnit4Validator extends BaseValidator {
     boolean isValid = true;
     for (TypeElement type : MoreApt.getClassHierarchy(typeElement)) {
       isValid &= validateType(type);
-      isValid &= validateMethods(getAllMethodsAnnotatedWithTest(type));
-      isValid &= validateMethods(getAllMethodsAnnotatedWithAfter(type));
-      isValid &= validateMethods(getAllMethodsAnnotatedWithBefore(type));
     }
 
     return isValid;
@@ -59,16 +57,12 @@ class JUnit4Validator extends BaseValidator {
   }
 
   private final boolean validateType(TypeElement type) {
+    boolean isValid = true;
     if (isAnnotationPresent(type, Ignore.class)) {
       errorReporter.report(ErrorMessage.IGNORE_ON_TYPE, type);
-      return false;
+      isValid = false;
     }
-    return true;
-  }
-
-  private final boolean validateMethods(List<ExecutableElement> methods) {
-    boolean isValid = true;
-    for (ExecutableElement executableElement : methods) {
+    for (ExecutableElement executableElement : getAllTestMethods(type)) {
       isValid &= validateMethodPublic(executableElement);
       isValid &= validateMethodNotStatic(executableElement);
       isValid &= validateMethodNoArguments(executableElement);
@@ -126,24 +120,13 @@ class JUnit4Validator extends BaseValidator {
     return isValid;
   }
 
-  private List<ExecutableElement> getAllMethodsAnnotatedWithTest(TypeElement typeElement) {
+  private static ImmutableList<ExecutableElement> getAllTestMethods(TypeElement typeElement) {
     return ElementFilter.methodsIn(typeElement.getEnclosedElements()).stream()
-        .filter(TestingPredicates.hasAnnotation(Test.class))
-        .filter(TestingPredicates.hasAnnotation(Ignore.class).negate())
-        .collect(toImmutableList());
-  }
-
-  private List<ExecutableElement> getAllMethodsAnnotatedWithAfter(TypeElement typeElement) {
-    return ElementFilter.methodsIn(typeElement.getEnclosedElements()).stream()
-        .filter(TestingPredicates.hasAnnotation(After.class))
-        .filter(TestingPredicates.hasAnnotation(Ignore.class).negate())
-        .collect(toImmutableList());
-  }
-
-  private List<ExecutableElement> getAllMethodsAnnotatedWithBefore(TypeElement typeElement) {
-    return ElementFilter.methodsIn(typeElement.getEnclosedElements()).stream()
-        .filter(TestingPredicates.hasAnnotation(Before.class))
-        .filter(TestingPredicates.hasAnnotation(Ignore.class).negate())
+        .filter(
+            Predicates.or(
+                TestingPredicates.hasAnnotation(Test.class),
+                TestingPredicates.hasAnnotation(Before.class),
+                TestingPredicates.hasAnnotation(After.class)))
         .collect(toImmutableList());
   }
 }
