@@ -186,11 +186,6 @@ public final class LibraryInfoBuilder {
               return;
             }
 
-            // TODO(b/34928687): Remove after $isinstance and $loadmodule moved the AST.
-            if (target.getName().equals("prototype") || target.getName().equals("$copy")) {
-              return;
-            }
-
             // Register static FieldAccess as getter/setter invocations. We are conservative here
             // because getter and setter functions have the same name: i.e. the name of the field.
             // If a field is accessed, we visit both getter and setter.
@@ -218,8 +213,8 @@ public final class LibraryInfoBuilder {
               return;
             }
 
-            // TODO(b/34928687): Remove after $isinstance and $loadmodule moved the AST.
-            if (target.getName().equals("$isInstance") || target.getName().equals("$loadModules")) {
+            // TODO(b/34928687): Remove after $loadmodule moved the AST.
+            if (target.getName().equals("$loadModules")) {
               return;
             }
 
