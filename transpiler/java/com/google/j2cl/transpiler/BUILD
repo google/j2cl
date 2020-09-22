@@ -62,6 +62,7 @@ java_binary(
     jvm_flags = [
         "-XX:+TieredCompilation",
         "-Dj2cl.deterministicTimestamps=true",
+        "-Xss2M",
     ] + select({
         ":javac": [
             "-Dj2cl.frontend=javac",
