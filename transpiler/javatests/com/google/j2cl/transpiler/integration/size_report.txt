@@ -1,17 +1,27 @@
 Integration tests size report:
 **************************************
-There are 0 optimized size changes.
-Total size (of already existing tests) did not change.
+There are 23 optimized size changes.
+Total optimized size (of already existing tests) changed from
+  2138548 to 2138561 bytes (100%->100.0%) and from
+  751259 to 751275 bytes (100%->100.0%) gzipped.
 
 
 Shrinkage report highlights:
 **************************************
-  none
+        old      new
+       1395     1390 strictequality.esnext (-0.4%)
+       5895     5888 autoboxing (-0.1%)
+       1415     1414 stringdevirtualcalls.esnext (-0.1%)
+       2900     2898 autovalue_ref (-0.1%)
 
 
 Expansion report highlights:
 **************************************
-  none
+        old      new
+        968      971 unaryexpressions.esnext (0.3%)
+       2757     2763 numberobjectcalls.esnext (0.2%)
+       2412     2417 arithmeticexception.esnext (0.2%)
+       2704     2708 autovalue_ref.esnext (0.1%)
 
 
 Incremental size reports (non-gzip):
@@ -24,12 +34,12 @@ Incremental size reports (non-gzip):
 Uncompiled bundle reports:
 **************************************
         old      new
-    4035968  4035948 box2d_default (-0.0%)
-    2200309  2200320 box2d_default.minified (0.0%)
-    1174421  1173989 box2d_default.rta (-0.0%)
-    2432815  2432795 emptyclass (-0.0%)
-    1458507  1458518 emptyclass.minified (0.0%)
-     709116   708684 emptyclass.rta (-0.1%)
+    4036185  4033038 box2d_default (-0.1%)
+    2200557  2198429 box2d_default.minified (-0.1%)
+    1174226  1171674 box2d_default.rta (-0.2%)
+    2433032  2429885 emptyclass (-0.1%)
+    1458755  1456627 emptyclass.minified (-0.1%)
+     708921   706371 emptyclass.rta (-0.4%)
 
 
 All reports:
@@ -43,8 +53,8 @@ All reports:
        3214     3214 allsimplebridges.esnext (unchanged)
        2352     2352 argumentimplicitcasts (unchanged)
        2114     2114 argumentimplicitcasts.esnext (unchanged)
-       2636     2636 arithmeticexception (unchanged)
-       2411     2411 arithmeticexception.esnext (unchanged)
+       2637     2637 arithmeticexception (unchanged)
+       2412     2417 arithmeticexception.esnext (0.2%)
          22       22 arithmeticexceptiondisabled (unchanged)
          22       22 arithmeticexceptiondisabled.esnext (unchanged)
         954      954 arithmeticexceptiondisabledresultused (unchanged)
@@ -56,23 +66,23 @@ All reports:
        1709     1709 arrayleafinsertion (unchanged)
        1485     1485 arrayleafinsertion.esnext (unchanged)
        1978     1978 arrayliteral (unchanged)
-       1739     1739 arrayliteral.esnext (unchanged)
-       1737     1737 arrayobjectcalls (unchanged)
+       1739     1738 arrayliteral.esnext (-0.1%)
+       1737     1736 arrayobjectcalls (-0.1%)
        1500     1500 arrayobjectcalls.esnext (unchanged)
        3577     3577 arrayofboxedtype (unchanged)
        3289     3289 arrayofboxedtype.esnext (unchanged)
-       3899     3899 arrayreadwrite (unchanged)
-       3564     3564 arrayreadwrite.esnext (unchanged)
+       3899     3898 arrayreadwrite (-0.0%)
+       3564     3565 arrayreadwrite.esnext (0.0%)
        2501     2501 assertsimple (unchanged)
        2293     2293 assertsimple.esnext (unchanged)
-       5895     5895 autoboxing (unchanged)
-       5329     5329 autoboxing.esnext (unchanged)
+       5895     5888 autoboxing (-0.1%)
+       5329     5328 autoboxing.esnext (-0.0%)
        3263     3263 autovalue (unchanged)
        3014     3014 autovalue.esnext (unchanged)
        3519     3519 autovalue_inc (unchanged)
        3274     3274 autovalue_inc.esnext (unchanged)
-       2900     2900 autovalue_ref (unchanged)
-       2704     2704 autovalue_ref.esnext (unchanged)
+       2900     2898 autovalue_ref (-0.1%)
+       2704     2708 autovalue_ref.esnext (0.1%)
        1056     1056 backwardbridgemethod (unchanged)
         828      828 backwardbridgemethod.esnext (unchanged)
        2662     2662 binaryexpressions (unchanged)
@@ -103,8 +113,8 @@ All reports:
          22       22 castsdisabled.esnext (unchanged)
        1167     1167 castsenabled (unchanged)
         933      933 castsenabled.esnext (unchanged)
-       4093     4093 casttoprimitives (unchanged)
-       3776     3776 casttoprimitives.esnext (unchanged)
+       4093     4095 casttoprimitives (0.0%)
+       3776     3777 casttoprimitives.esnext (0.0%)
         983      983 circularcompiletimeconstant (unchanged)
         761      761 circularcompiletimeconstant.esnext (unchanged)
        3221     3221 classliteral (unchanged)
@@ -197,7 +207,7 @@ All reports:
         958      958 instancequalifieronstaticfield.esnext (unchanged)
          22       22 interfaceabstractimpl (unchanged)
          22       22 interfaceabstractimpl.esnext (unchanged)
-       3838     3838 interfacedevirtualize (unchanged)
+       3839     3843 interfacedevirtualize (0.1%)
        3572     3572 interfacedevirtualize.esnext (unchanged)
          22       22 interfacejsbridge (unchanged)
          22       22 interfacejsbridge.esnext (unchanged)
@@ -211,7 +221,7 @@ All reports:
        1178     1178 jsasync.esnext (unchanged)
          22       22 jsbridgebackward (unchanged)
          22       22 jsbridgebackward.esnext (unchanged)
-       1318     1318 jsbridgemethodaccidentaloverride (unchanged)
+       1319     1319 jsbridgemethodaccidentaloverride (unchanged)
        1088     1088 jsbridgemethodaccidentaloverride.esnext (unchanged)
          22       22 jsbridgemultipleaccidental (unchanged)
          22       22 jsbridgemultipleaccidental.esnext (unchanged)
@@ -224,7 +234,7 @@ All reports:
        1076     1076 jsconstructornested (unchanged)
         863      863 jsconstructornested.esnext (unchanged)
        6568     6568 jsenum (unchanged)
-       6118     6118 jsenum.esnext (unchanged)
+       6118     6122 jsenum.esnext (0.1%)
        1262     1262 jsfunction (unchanged)
        1029     1029 jsfunction.esnext (unchanged)
        1413     1413 jsfunctionbridge (unchanged)
@@ -267,7 +277,7 @@ All reports:
        2342     2342 morebridgemethods.esnext (unchanged)
        1121     1121 multipleabstractparents (unchanged)
         892      892 multipleabstractparents.esnext (unchanged)
-       1275     1275 multipleanonymousclass (unchanged)
+       1276     1276 multipleanonymousclass (unchanged)
        1038     1038 multipleanonymousclass.esnext (unchanged)
        1222     1222 multiplecatch (unchanged)
         996      996 multiplecatch.esnext (unchanged)
@@ -286,7 +296,7 @@ All reports:
        1101     1101 nativejstypes (unchanged)
         863      863 nativejstypes.esnext (unchanged)
        1238     1238 nestedanonymousclass (unchanged)
-        994      994 nestedanonymousclass.esnext (unchanged)
+        995      995 nestedanonymousclass.esnext (unchanged)
        1137     1137 nestedgenericclass (unchanged)
         898      898 nestedgenericclass.esnext (unchanged)
        1031     1031 nestednativetype (unchanged)
@@ -301,12 +311,12 @@ All reports:
        2089     2089 numberchilddevirtualcalls.esnext (unchanged)
        2990     2990 numberdevirtualcalls (unchanged)
        2711     2711 numberdevirtualcalls.esnext (unchanged)
-       3076     3076 numberobjectcalls (unchanged)
-       2757     2757 numberobjectcalls.esnext (unchanged)
+       3076     3078 numberobjectcalls (0.1%)
+       2757     2763 numberobjectcalls.esnext (0.2%)
        1745     1745 objectchilddevirtualcalls (unchanged)
-       1496     1496 objectchilddevirtualcalls.esnext (unchanged)
-       1560     1560 objectdevirtualcalls (unchanged)
-       1333     1333 objectdevirtualcalls.esnext (unchanged)
+       1498     1498 objectchilddevirtualcalls.esnext (unchanged)
+       1561     1561 objectdevirtualcalls (unchanged)
+       1334     1335 objectdevirtualcalls.esnext (0.1%)
         959      959 overloadedmethods (unchanged)
          22       22 overloadedmethods.esnext (unchanged)
        1074     1074 overridingclassmethods (unchanged)
@@ -364,11 +374,11 @@ All reports:
        1056     1056 staticnestedclass (unchanged)
         840      840 staticnestedclass.esnext (unchanged)
        1653     1653 strictequality (unchanged)
-       1395     1395 strictequality.esnext (unchanged)
+       1395     1390 strictequality.esnext (-0.4%)
        1356     1356 stringconversion (unchanged)
        1135     1135 stringconversion.esnext (unchanged)
-       1642     1642 stringdevirtualcalls (unchanged)
-       1413     1413 stringdevirtualcalls.esnext (unchanged)
+       1646     1646 stringdevirtualcalls (unchanged)
+       1415     1414 stringdevirtualcalls.esnext (-0.1%)
        1122     1122 stringescapecodes (unchanged)
         900      900 stringescapecodes.esnext (unchanged)
        1041     1041 subclassgenericclass (unchanged)
@@ -381,7 +391,7 @@ All reports:
        1023     1023 superfieldaccess.esnext (unchanged)
        1401     1401 supermethodcall (unchanged)
        1110     1110 supermethodcall.esnext (unchanged)
-       2016     2016 switchstatement (unchanged)
+       2017     2017 switchstatement (unchanged)
        1766     1766 switchstatement.esnext (unchanged)
         951      951 synchronizedblock (unchanged)
         721      721 synchronizedblock.esnext (unchanged)
@@ -389,14 +399,14 @@ All reports:
          22       22 systemgetproperty.esnext (unchanged)
        1100     1100 ternaryexpression (unchanged)
         864      864 ternaryexpression.esnext (unchanged)
-       4106     4106 trywithresource (unchanged)
-       3398     3398 trywithresource.esnext (unchanged)
+       4106     4107 trywithresource (0.0%)
+       3398     3400 trywithresource.esnext (0.1%)
        1111     1111 typewildcards (unchanged)
         879      879 typewildcards.esnext (unchanged)
        1197     1197 unaryexpressions (unchanged)
-        968      968 unaryexpressions.esnext (unchanged)
-       3559     3559 underflowoverflowconversion (unchanged)
-       3304     3304 underflowoverflowconversion.esnext (unchanged)
+        968      971 unaryexpressions.esnext (0.3%)
+       3559     3557 underflowoverflowconversion (-0.1%)
+       3304     3305 underflowoverflowconversion.esnext (0.0%)
         177      177 unusedmultiexpressionreturn (unchanged)
         193      193 unusedmultiexpressionreturn.esnext (unchanged)
        3941     3941 varargs (unchanged)
