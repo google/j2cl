@@ -91,15 +91,6 @@ class Objects {
    * @public
    */
   static m_toString__java_lang_Object(obj) {
-    Objects.$clinit();
-
-    // We only special case 'toString' for arrays to enforce the Java behavior.
-    if (Array.isArray(obj)) {
-      return Arrays.m_toString__java_lang_Object(obj);
-    }
-
-    // For the rest including Java objects, 'toString' already has the behavior
-    // we want.
     return obj.toString();
   }
 

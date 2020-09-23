@@ -18,16 +18,12 @@
 goog.module('vmbootstrap.Arrays$impl');
 
 
-// Don't reformat these imports! The uncompiled test harness contains a bug
-// that will miss some multiline goog.require's.
-const Constructor = goog.require('javaemul.internal.Constructor');
-const Hashing = goog.require('nativebootstrap.Hashing$impl');
-const Util = goog.require('nativebootstrap.Util$impl');
 let Class = goog.forwardDeclare('java.lang.Class');
-let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+const Constructor = goog.require('javaemul.internal.Constructor');
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 let JavaLangObject = goog.forwardDeclare('java.lang.Object');
 let Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
+const Util = goog.require('nativebootstrap.Util$impl');
 
 /**
  * Static Array helper and devirtualized functions.
@@ -421,17 +417,6 @@ class Arrays {
 
   /**
    * @param {Array<*>} obj
-   * @return {string}
-   * @public
-   */
-  static m_toString__java_lang_Object(obj) {
-    Arrays.$clinit();
-    return Arrays.m_getClass__java_lang_Object(obj).m_getName__() + '@' +
-        Integer.m_toHexString__int(Hashing.$getHashCode(obj));
-  }
-
-  /**
-   * @param {Array<*>} obj
    * @return {Class}
    * @public
    */
@@ -492,7 +477,6 @@ class Arrays {
     Class = goog.module.get('java.lang.Class');
     JavaLangObject = goog.module.get('java.lang.Object');
     Objects = goog.module.get('vmbootstrap.Objects$impl');
-    Integer = goog.module.get('java.lang.Integer$impl');
     InternalPreconditions =
         goog.module.get('javaemul.internal.InternalPreconditions$impl');
   }

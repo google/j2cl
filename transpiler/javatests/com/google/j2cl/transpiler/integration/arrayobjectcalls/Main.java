@@ -34,7 +34,6 @@ public class Main {
     assertTrue(!mains.equals(other));
     assertTrue(mains.hashCode() == mains.hashCode());
     assertTrue(mains.hashCode() != other.hashCode());
-    assertTrue(mains.toString() != other.toString());
     assertTrue(mains.getClass() == other.getClass());
   }
 }

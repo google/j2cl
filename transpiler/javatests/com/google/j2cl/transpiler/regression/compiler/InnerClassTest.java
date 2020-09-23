@@ -30,7 +30,8 @@ public class InnerClassTest {
 
   static class OuterRefFromSuperCtorBase {
     OuterRefFromSuperCtorBase(Object o) {
-      o.toString();
+      // Ensure side effect of toString is not lost.
+      assertThat(o.toString()).isNotNull();
     }
   }
 

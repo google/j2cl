@@ -1121,7 +1121,7 @@ public class CompilerTest {
     UninstantiableType f = null;
 
     try {
-      f.returnNull().toString();
+      f.returnNull().getClass();
       fail();
     } catch (NullPointerException expected) {
     }

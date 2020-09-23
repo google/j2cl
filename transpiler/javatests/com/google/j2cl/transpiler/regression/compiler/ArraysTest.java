@@ -91,10 +91,4 @@ public class ArraysTest {
     } catch (ArrayStoreException expected) {
     }
   }
-
-  @Test
-  public void testArraysToString() {
-    Object[] array = new Object[] {1, 2, 3};
-    assertThat(Object[].class.getName()).isEqualTo(((Object) array).toString().split("@")[0]);
-  }
 }
