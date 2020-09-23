@@ -22,9 +22,7 @@ java_proto_library(
 java_binary(
     name = "J2clRta_worker",
     main_class = "com.google.j2cl.tools.rta.BazelJ2clRta",
-    visibility = [
-        "//:__subpackages__",
-    ],
+    visibility = ["//build_defs/internal_do_not_use:__pkg__"],
     runtime_deps = [":rta"],
 )
 

@@ -59,3 +59,8 @@ alias(
     name = "GwtIncompatibleStripper",
     actual = "//tools/java/com/google/j2cl/tools/gwtincompatible:GwtIncompatibleStripper_worker",
 )
+
+alias(
+    name = "J2clRta",
+    actual = "//tools/java/com/google/j2cl/tools/rta:J2clRta_worker",
+)

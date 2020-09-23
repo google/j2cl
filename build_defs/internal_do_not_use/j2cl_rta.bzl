@@ -88,11 +88,9 @@ j2cl_rta = rule(
         "generate_unused_methods_for_testing_do_not_use": attr.bool(default = False),
         "legacy_keep_jstype_interfaces_do_not_use": attr.bool(default = False),
         "_rta_runner": attr.label(
+            default = Label("//build_defs/internal_do_not_use:J2clRta"),
             cfg = "host",
             executable = True,
-            default = Label(
-                "//tools/java/com/google/j2cl/tools/rta:J2clRta_worker",
-            ),
         ),
     },
     outputs = {
