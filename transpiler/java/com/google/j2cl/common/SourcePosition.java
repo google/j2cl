@@ -27,6 +27,12 @@ import javax.annotation.Nullable;
 @AutoValue
 public abstract class SourcePosition implements Comparable<SourcePosition> {
 
+  public static final SourcePosition NONE =
+      newBuilder()
+          .setStartFilePosition(FilePosition.NONE)
+          .setEndFilePosition(FilePosition.NONE)
+          .build();
+
   public abstract FilePosition getStartFilePosition();
 
   public abstract FilePosition getEndFilePosition();

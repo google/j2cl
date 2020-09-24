@@ -22,19 +22,16 @@ import com.google.j2cl.ast.Expression.Precedence;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.ast.processors.common.Processor;
 import com.google.j2cl.common.SourcePosition;
-import java.util.Optional;
 
 /** Class for field access. */
 @Visitable
 public class FieldAccess extends Expression implements MemberReference {
   @Visitable Expression qualifier;
   private final FieldDescriptor targetFieldDescriptor;
-  private final Optional<SourcePosition> sourcePosition;
+  private final SourcePosition sourcePosition;
 
   private FieldAccess(
-      Expression qualifier,
-      FieldDescriptor targetFieldDescriptor,
-      Optional<SourcePosition> sourcePosition) {
+      Expression qualifier, FieldDescriptor targetFieldDescriptor, SourcePosition sourcePosition) {
     this.targetFieldDescriptor = checkNotNull(targetFieldDescriptor);
     this.qualifier = checkNotNull(qualifier);
     this.sourcePosition = checkNotNull(sourcePosition);
@@ -64,7 +61,7 @@ public class FieldAccess extends Expression implements MemberReference {
     return targetFieldDescriptor.getDeclarationDescriptor().getTypeDescriptor();
   }
 
-  public Optional<SourcePosition> getSourcePosition() {
+  public SourcePosition getSourcePosition() {
     return sourcePosition;
   }
 
@@ -123,7 +120,7 @@ public class FieldAccess extends Expression implements MemberReference {
 
     private FieldDescriptor targetFieldDescriptor;
     private Expression qualifier;
-    private Optional<SourcePosition> sourcePosition = Optional.empty();
+    private SourcePosition sourcePosition = SourcePosition.NONE;
 
     public static Builder from(FieldDescriptor targetFieldDescriptor) {
       return newBuilder().setTargetFieldDescriptor(targetFieldDescriptor);
@@ -150,7 +147,7 @@ public class FieldAccess extends Expression implements MemberReference {
       return this;
     }
 
-    public Builder setSourcePosition(Optional<SourcePosition> sourcePosition) {
+    public Builder setSourcePosition(SourcePosition sourcePosition) {
       this.sourcePosition = sourcePosition;
       return this;
     }

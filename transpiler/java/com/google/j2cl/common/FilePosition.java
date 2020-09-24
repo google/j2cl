@@ -23,6 +23,8 @@ import com.google.auto.value.AutoValue;
 @AutoValue
 public abstract class FilePosition {
 
+  static final FilePosition NONE = newBuilder().setLine(-1).setColumn(-1).setByteOffset(-1).build();
+
   /** @return the line number of this position. */
   public abstract int getLine();
 

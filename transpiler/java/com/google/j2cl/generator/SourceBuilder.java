@@ -27,7 +27,6 @@ import com.google.j2cl.common.SourcePosition;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.function.Consumer;
@@ -52,24 +51,16 @@ class SourceBuilder {
   private final Map<MemberDescriptor, SourcePosition> outputSourceInfoByMember = new HashMap<>();
   private boolean finished = false;
 
-  public void emitWithMapping(Optional<SourcePosition> javaSourcePosition, Runnable codeEmitter) {
-    if (!javaSourcePosition.isPresent()) {
-      codeEmitter.run();
-    } else {
-      emitWithMapping(javaSourcePosition.get(), codeEmitter);
-    }
-  }
-
   public void emitWithMapping(SourcePosition javaSourcePosition, Runnable codeEmitter) {
     checkNotNull(javaSourcePosition);
 
-    Optional<SourcePosition> jsSourcePosition = emit(codeEmitter);
+    SourcePosition jsSourcePosition = emit(codeEmitter);
 
-    if (!jsSourcePosition.isPresent()) {
+    if (jsSourcePosition == SourcePosition.NONE || javaSourcePosition == SourcePosition.NONE) {
       // Do not record empty mappings.
       return;
     }
-    javaSourceInfoByOutputSourceInfo.put(jsSourcePosition.get(), javaSourcePosition);
+    javaSourceInfoByOutputSourceInfo.put(jsSourcePosition, javaSourcePosition);
   }
 
   public void emitWithMemberMapping(MemberDescriptor memberDescriptor, Runnable codeEmitter) {
@@ -78,28 +69,27 @@ class SourceBuilder {
         "Output source info already exists for this member %s",
         memberDescriptor);
 
-    Optional<SourcePosition> jsSourcePosition = emit(codeEmitter);
+    SourcePosition jsSourcePosition = emit(codeEmitter);
 
-    if (!jsSourcePosition.isPresent()) {
+    if (jsSourcePosition == SourcePosition.NONE) {
       // Do not record empty mappings.
       return;
     }
 
-    outputSourceInfoByMember.put(memberDescriptor, jsSourcePosition.get());
+    outputSourceInfoByMember.put(memberDescriptor, jsSourcePosition);
   }
 
-  private Optional<SourcePosition> emit(Runnable codeEmitter) {
+  private SourcePosition emit(Runnable codeEmitter) {
     FilePosition startPosition = getCurrentPosition();
     codeEmitter.run();
     FilePosition endPosition = getCurrentPosition();
     if (endPosition.equals(startPosition)) {
-      return Optional.empty();
+      return SourcePosition.NONE;
     }
-    return Optional.of(
-        SourcePosition.newBuilder()
-            .setStartFilePosition(startPosition)
-            .setEndFilePosition(endPosition)
-            .build());
+    return SourcePosition.newBuilder()
+        .setStartFilePosition(startPosition)
+        .setEndFilePosition(endPosition)
+        .build();
   }
 
   /**

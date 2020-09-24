@@ -947,11 +947,8 @@ public class AstUtils {
   }
 
   /** Returns an Optional.empty() if optionalSourcePosition is empty or unnamed */
-  public static Optional<SourcePosition> emptySourcePositionIfNotNamed(
-      Optional<SourcePosition> optionalSourcePosition) {
-    return optionalSourcePosition.flatMap(
-        sourcePosition ->
-            sourcePosition.getName() == null ? Optional.empty() : Optional.of(sourcePosition));
+  public static SourcePosition removeUnnamedSourcePosition(SourcePosition sourcePosition) {
+    return sourcePosition.getName() == null ? SourcePosition.NONE : sourcePosition;
   }
 
   /** Returns the arguments with the vararg arguments packaged together as an array if necessary. */

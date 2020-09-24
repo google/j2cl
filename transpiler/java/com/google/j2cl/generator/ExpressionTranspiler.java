@@ -64,7 +64,6 @@ import com.google.j2cl.ast.VariableReference;
 import com.google.j2cl.common.SourcePosition;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Transforms Expression to JavaScript source strings.
@@ -270,14 +269,11 @@ public class ExpressionTranspiler {
       }
 
       private void renderQualifiedName(Expression enclosingExpression, String jsPropertyName) {
-        renderQualifiedName(
-            enclosingExpression, jsPropertyName, /* sourcePosition */ Optional.empty());
+        renderQualifiedName(enclosingExpression, jsPropertyName, SourcePosition.NONE);
       }
 
       private void renderQualifiedName(
-          Expression enclosingExpression,
-          String jsPropertyName,
-          Optional<SourcePosition> sourcePosition) {
+          Expression enclosingExpression, String jsPropertyName, SourcePosition sourcePosition) {
         Expression qualifier = ((MemberReference) enclosingExpression).getQualifier();
         if (shouldRenderQualifier(qualifier)) {
           processLeftSubExpression(enclosingExpression, qualifier);
@@ -453,7 +449,7 @@ public class ExpressionTranspiler {
       public boolean enterVariable(Variable variable) {
         sourceBuilder.emitWithMapping(
             // Only map variables if they are named.
-            AstUtils.emptySourcePositionIfNotNamed(variable.getSourcePosition()),
+            AstUtils.removeUnnamedSourcePosition(variable.getSourcePosition()),
             () -> sourceBuilder.append(environment.getUniqueNameForVariable(variable)));
 
         return false;

@@ -21,7 +21,6 @@ import static com.google.common.base.Preconditions.checkState;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.ast.processors.common.Processor;
 import com.google.j2cl.common.SourcePosition;
-import java.util.Optional;
 import javax.annotation.Nullable;
 
 /** Field declaration node. */
@@ -31,7 +30,7 @@ public class Field extends Member {
   @Visitable @Nullable Expression initializer;
   private final Variable capturedVariable;
   // TODO(b/112150736): generalize concept of the source position for names to members.
-  private final Optional<SourcePosition> nameSourcePosition;
+  private final SourcePosition nameSourcePosition;
   // Only valid for enum fields, where it is >= 0.
   private int enumOrdinal = -1;
 
@@ -40,7 +39,7 @@ public class Field extends Member {
       FieldDescriptor fieldDescriptor,
       Expression initializer,
       Variable capturedVariable,
-      Optional<SourcePosition> nameSourcePosition) {
+      SourcePosition nameSourcePosition) {
     super(sourcePosition);
     this.fieldDescriptor = checkNotNull(fieldDescriptor);
     this.initializer = initializer;
@@ -61,7 +60,7 @@ public class Field extends Member {
     return this.capturedVariable;
   }
 
-  public Optional<SourcePosition> getNameSourcePosition() {
+  public SourcePosition getNameSourcePosition() {
     return nameSourcePosition;
   }
 
@@ -105,7 +104,7 @@ public class Field extends Member {
     private Expression initializer;
     private Variable capturedVariable;
     private SourcePosition sourcePosition;
-    private Optional<SourcePosition> nameSourcePosition = Optional.empty();
+    private SourcePosition nameSourcePosition = SourcePosition.NONE;
 
     public static Builder from(Field field) {
       Builder builder = new Builder();
@@ -149,7 +148,7 @@ public class Field extends Member {
       return this;
     }
 
-    public Builder setNameSourcePosition(Optional<SourcePosition> nameSourcePosition) {
+    public Builder setNameSourcePosition(SourcePosition nameSourcePosition) {
       this.nameSourcePosition = nameSourcePosition;
       return this;
     }

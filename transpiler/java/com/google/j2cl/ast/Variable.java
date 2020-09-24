@@ -21,7 +21,6 @@ import static com.google.common.base.Preconditions.checkState;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.ast.processors.common.Processor;
 import com.google.j2cl.common.SourcePosition;
-import java.util.Optional;
 
 /** Class for local variable and parameter. */
 @Visitable
@@ -31,11 +30,11 @@ public class Variable extends Node
   private TypeDescriptor typeDescriptor;
   private final boolean isFinal;
   private final boolean isParameter;
-  private final Optional<SourcePosition> sourcePosition;
+  private final SourcePosition sourcePosition;
   private final boolean isUnusableByJsSuppressed;
 
   private Variable(
-      Optional<SourcePosition> sourcePosition,
+      SourcePosition sourcePosition,
       String name,
       TypeDescriptor typeDescriptor,
       boolean isFinal,
@@ -45,7 +44,7 @@ public class Variable extends Node
     setTypeDescriptor(typeDescriptor);
     this.isFinal = isFinal;
     this.isParameter = isParameter;
-    this.sourcePosition = sourcePosition;
+    this.sourcePosition = checkNotNull(sourcePosition);
     this.isUnusableByJsSuppressed = isUnusableByJsSuppressed;
   }
 
@@ -92,8 +91,8 @@ public class Variable extends Node
     return new Builder();
   }
 
-  public Optional<SourcePosition> getSourcePosition() {
-    return checkNotNull(sourcePosition);
+  public SourcePosition getSourcePosition() {
+    return sourcePosition;
   }
 
   /** Builder for Variable. */
@@ -103,7 +102,7 @@ public class Variable extends Node
     private TypeDescriptor typeDescriptor;
     private boolean isFinal;
     private boolean isParameter;
-    private Optional<SourcePosition> sourcePosition = Optional.empty();
+    private SourcePosition sourcePosition = SourcePosition.NONE;
     private boolean isUnusableByJsSuppressed = false;
 
     public static Builder from(Variable variable) {
@@ -138,7 +137,7 @@ public class Variable extends Node
     }
 
     public Builder setSourcePosition(SourcePosition sourcePosition) {
-      this.sourcePosition = Optional.of(sourcePosition);
+      this.sourcePosition = sourcePosition;
       return this;
     }
 

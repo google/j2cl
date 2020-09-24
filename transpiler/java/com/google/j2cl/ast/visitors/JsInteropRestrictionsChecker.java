@@ -666,9 +666,12 @@ public class JsInteropRestrictionsChecker {
             }
             TypeDescriptor variableTypeDescriptor = variable.getTypeDescriptor();
             String messagePrefix = String.format("Variable '%s'", variable.getName());
+            SourcePosition sourcePosition = variable.getSourcePosition();
             errorIfNonNativeJsEnumArray(
                 variableTypeDescriptor,
-                variable.getSourcePosition().orElse(getCurrentMember().getSourcePosition()),
+                sourcePosition == SourcePosition.NONE
+                    ? getCurrentMember().getSourcePosition()
+                    : sourcePosition,
                 messagePrefix);
           }
 
@@ -743,9 +746,10 @@ public class JsInteropRestrictionsChecker {
       String messagePrefix =
           String.format(
               "Parameter '%s' in '%s'", parameter.getName(), methodLike.getReadableDescription());
+      SourcePosition sourcePosition = parameter.getSourcePosition();
       errorIfNonNativeJsEnumArray(
           parameterTypeDescriptor,
-          parameter.getSourcePosition().orElse(methodLike.getSourcePosition()),
+          sourcePosition == SourcePosition.NONE ? methodLike.getSourcePosition() : sourcePosition,
           messagePrefix);
     }
 
@@ -785,8 +789,9 @@ public class JsInteropRestrictionsChecker {
               // JsEnum constructors have more stringent checks elsewhere.
               return;
             }
+            SourcePosition sourcePosition = fieldAccess.getSourcePosition();
             problems.error(
-                fieldAccess.getSourcePosition().orElse(type.getSourcePosition()),
+                sourcePosition == SourcePosition.NONE ? type.getSourcePosition() : sourcePosition,
                 "Custom-valued JsEnum value field '%s' cannot be assigned.",
                 fieldDescriptor.getReadableDescription());
           }

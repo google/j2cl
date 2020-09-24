@@ -102,7 +102,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Optional;
 import java.util.function.Function;
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.AbstractTypeDeclaration;
@@ -327,7 +326,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       return Field.Builder.from(fieldDescriptor)
           .setInitializer(initializer)
           .setSourcePosition(getSourcePosition(enumConstantDeclaration))
-          .setNameSourcePosition(Optional.of(getSourcePosition(enumConstantDeclaration.getName())))
+          .setNameSourcePosition(getSourcePosition(enumConstantDeclaration.getName()))
           .build();
     }
 
@@ -350,7 +349,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
             Field.Builder.from(JdtUtils.createFieldDescriptor(variableBinding))
                 .setInitializer(initializer)
                 .setSourcePosition(getSourcePosition(fieldDeclaration))
-                .setNameSourcePosition(Optional.of(getSourcePosition(fragment.getName())))
+                .setNameSourcePosition(getSourcePosition(fragment.getName()))
                 .build();
         fields.add(field);
       }

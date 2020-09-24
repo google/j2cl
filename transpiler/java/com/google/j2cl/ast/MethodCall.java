@@ -22,7 +22,6 @@ import com.google.j2cl.ast.processors.common.Processor;
 import com.google.j2cl.common.SourcePosition;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Class for method call expression.
@@ -32,7 +31,7 @@ public class MethodCall extends Invocation {
   @Visitable Expression qualifier;
   private final MethodDescriptor targetMethodDescriptor;
   @Visitable List<Expression> arguments = new ArrayList<>();
-  private final Optional<SourcePosition> sourcePosition;
+  private final SourcePosition sourcePosition;
 
   /**
    * If an instance call should be dispatched statically, e.g. A.super.method() invocation.
@@ -40,7 +39,7 @@ public class MethodCall extends Invocation {
   private boolean isStaticDispatch;
 
   private MethodCall(
-      Optional<SourcePosition> sourcePosition,
+      SourcePosition sourcePosition,
       Expression qualifier,
       MethodDescriptor targetMethodDescriptor,
       List<Expression> arguments,
@@ -86,7 +85,7 @@ public class MethodCall extends Invocation {
   }
 
   public SourcePosition getSourcePosition() {
-    return sourcePosition.get();
+    return sourcePosition;
   }
 
   @Override
@@ -117,7 +116,7 @@ public class MethodCall extends Invocation {
    */
   public static class Builder extends Invocation.Builder<Builder, MethodCall> {
     private boolean isStaticDispatch;
-    private Optional<SourcePosition> sourcePosition;
+    private SourcePosition sourcePosition;
 
     public static Builder from(MethodCall methodCall) {
       return new Builder(methodCall);
@@ -125,7 +124,7 @@ public class MethodCall extends Invocation {
 
     public static Builder from(MethodDescriptor methodDescriptor) {
       Builder builder = new Builder();
-      builder.setMethodDescriptor(methodDescriptor).setSourcePosition(null);
+      builder.setMethodDescriptor(methodDescriptor).setSourcePosition(SourcePosition.NONE);
       return builder;
     }
 
@@ -135,7 +134,7 @@ public class MethodCall extends Invocation {
     }
 
     public final Builder setSourcePosition(SourcePosition sourcePosition) {
-      this.sourcePosition = Optional.ofNullable(sourcePosition);
+      this.sourcePosition = sourcePosition;
       return this;
     }
 

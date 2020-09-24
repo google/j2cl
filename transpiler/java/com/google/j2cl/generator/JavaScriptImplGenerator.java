@@ -104,7 +104,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         "/** " + closureTypesGenerator.getJsDocForParameter(expression, i) + " */ ");
     sourceBuilder.emitWithMapping(
         // Only map parameters if they are named.
-        AstUtils.emptySourcePositionIfNotNamed(parameter.getSourcePosition()),
+        AstUtils.removeUnnamedSourcePosition(parameter.getSourcePosition()),
         () -> sourceBuilder.append(environment.getUniqueNameForVariable(parameter)));
   }
 

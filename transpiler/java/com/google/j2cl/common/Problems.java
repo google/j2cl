@@ -128,6 +128,7 @@ public class Problems {
   @FormatMethod
   private void problem(
       Severity severity, SourcePosition sourcePosition, String detailMessage, Object... args) {
+    checkArgument(sourcePosition != null || sourcePosition != SourcePosition.NONE);
     problem(
         severity,
         // SourcePosition lines are 0 based.

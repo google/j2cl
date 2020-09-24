@@ -147,7 +147,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import javax.lang.model.element.ElementKind;
@@ -294,7 +293,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
             environment.createFieldDescriptor(variableElement, fieldDeclaration.type))
         .setInitializer(initializer)
         .setSourcePosition(getSourcePosition(fieldDeclaration))
-        .setNameSourcePosition(Optional.of(getNamePosition(fieldDeclaration)))
+        .setNameSourcePosition(getNamePosition(fieldDeclaration))
         .build();
   }
 
