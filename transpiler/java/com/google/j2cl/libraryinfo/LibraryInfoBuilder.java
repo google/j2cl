@@ -86,13 +86,22 @@ public final class LibraryInfoBuilder {
         Maps.newLinkedHashMapWithExpectedSize(type.getMembers().size());
 
     for (Member member : type.getMembers()) {
-      if (member.getDescriptor().hasJsNamespace()) {
+      MemberDescriptor memberDescriptor = member.getDescriptor();
+
+      if (memberDescriptor.hasJsNamespace()) {
         // Members with an explicit namespace members don't really belong to the type. Skip them
         // here, otherwise they would be an entry point for this type, and the type might be
         // unnecessarily retained by rta.
         continue;
       }
-      MemberDescriptor memberDescriptor = member.getDescriptor();
+
+      if (memberDescriptor.getOrigin().isInstanceOfSupportMember()) {
+        // InstanceOf support members should not be considered methods that are prunable if there
+        // are no references, since the references are hidden by the runtime. In the end
+        // InstanceOf support members are live whenever the type is live.
+        continue;
+      }
+
       String memberName = getMemberId(memberDescriptor);
       boolean isJsAccessible = isJsAccessible(memberDescriptor);
 

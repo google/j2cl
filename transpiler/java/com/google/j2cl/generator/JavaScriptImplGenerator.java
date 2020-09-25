@@ -16,7 +16,6 @@
 package com.google.j2cl.generator;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.base.CharMatcher;
 import com.google.common.base.Splitter;
@@ -24,15 +23,12 @@ import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.DeclaredTypeDescriptor;
-import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
-import com.google.j2cl.ast.JavaScriptConstructorReference;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.MethodLike;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
-import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.TypeVariable;
@@ -169,7 +165,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
                   sourceBuilder.append(field.getDescriptor().getMangledName());
                 });
             sourceBuilder.append(" : ");
-            renderExpression(field.getInitializer());
+            ExpressionTranspiler.render(field.getInitializer(), environment, sourceBuilder);
             sourceBuilder.append(",");
             sourceBuilder.newLine();
           });
@@ -312,8 +308,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.openBrace();
     sourceBuilder.newLine();
     renderTypeMethods();
-    renderMarkImplementorMethod();
-    renderIsInstanceMethod();
     renderCopyMethod();
     renderLoadModules();
     sourceBuilder.closeBrace();
@@ -429,106 +423,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         && !TypeDescriptors.isPrimitiveVoid(methodDescriptor.getReturnTypeDescriptor());
   }
 
-  private void renderMarkImplementorMethod() {
-    if (!type.isInterface() || type.isOverlayImplementation()) {
-      return; // Only render markImplementor code for interfaces.
-    }
-
-    sourceBuilder.newLine();
-    sourceBuilder.appendln(
-        "static $markImplementor(/** "
-            + TypeDescriptors.get().nativeFunction.getQualifiedJsName()
-            + " */ ctor)");
-    sourceBuilder.openBrace();
-    sourceBuilder.newLine();
-    for (DeclaredTypeDescriptor superInterface : type.getSuperInterfaceTypeDescriptors()) {
-      if (superInterface.isNative()) {
-        continue;
-      }
-      String superInterfaceName = environment.aliasForType(superInterface);
-      sourceBuilder.appendln(superInterfaceName + ".$markImplementor(ctor);");
-    }
-    sourceBuilder.appendLines(
-        "ctor.prototype.$implements__" + type.getDeclaration().getMangledName() + " = true;");
-    sourceBuilder.closeBrace();
-    sourceBuilder.newLine();
-  }
-
-  // TODO(b/34928687): Move this to the ast in a normalization pass.
-  private void renderIsInstanceMethod() {
-    TypeDeclaration underlyingType = type.getUnderlyingTypeDeclaration();
-
-    if (underlyingType.isJsFunctionInterface()) {
-      // JsFunction interfaces use the custom class JavaScriptFunction for casts, instanceof and
-      // class literal purposes. Hence no need to emit $isInstance in the overlay class.
-      return;
-    }
-    if (underlyingType.isNoopCast()) {
-      return;
-    }
-
-    if (type.containsMethod(MethodDescriptor.IS_INSTANCE_METHOD_NAME)) {
-      sourceBuilder.appendLines(
-          "/**", " * $isInstance() function implementation is provided separately.", " */");
-      sourceBuilder.newLine();
-      return;
-    }
-    sourceBuilder.appendLines("/** @return {boolean} */", "static $isInstance(/** ? */ instance) ");
-    sourceBuilder.openBrace();
-    sourceBuilder.newLine();
-    if (type.getDeclaration().isJsFunctionImplementation()) {
-      renderIsInstanceOfJsFunctionImplementationStatement(type.getDeclaration());
-    } else if (type.isOverlayImplementation()) {
-      TypeDeclaration overlaidTypeDeclaration = type.getOverlaidTypeDeclaration();
-      if (overlaidTypeDeclaration.isJsEnum()) {
-        renderIsInstanceOfJsEnumStatement(overlaidTypeDeclaration);
-      } else {
-        renderIsInstanceOfClassStatement(type.getOverlaidTypeDeclaration());
-      }
-    } else if (type.isInterface()) {
-      renderIsInstanceOfInterfaceStatement(type.getDeclaration());
-    } else {
-      renderIsInstanceOfClassStatement(type.getDeclaration());
-    }
-    sourceBuilder.closeBrace();
-    sourceBuilder.newLine();
-  }
-
-  private void renderIsInstanceOfJsEnumStatement(TypeDeclaration typeDeclaration) {
-    if (typeDeclaration.isJsEnum() && !typeDeclaration.isNative()) {
-      sourceBuilder.append(
-          "return "
-              + environment.aliasForType(BootstrapType.ENUMS.getDeclaration())
-              + ".isInstanceOf(instance, "
-              + environment.aliasForType(typeDeclaration.getMetadataTypeDeclaration())
-              + ");");
-    } else {
-      checkState(typeDeclaration.getJsEnumInfo().hasCustomValue());
-      DeclaredTypeDescriptor instanceOfValueType =
-          AstUtils.getJsEnumValueFieldInstanceCheckType(typeDeclaration);
-      sourceBuilder.append(
-          "return "
-              + environment.aliasForType(instanceOfValueType.getTypeDeclaration())
-              + ".$isInstance(instance);");
-
-    }
-  }
-
-  private void renderIsInstanceOfClassStatement(TypeDeclaration typeDescriptor) {
-    sourceBuilder.append(
-        "return instance instanceof " + environment.aliasForType(typeDescriptor) + ";");
-  }
-
-  private void renderIsInstanceOfInterfaceStatement(TypeDeclaration type) {
-    sourceBuilder.append(
-        "return instance != null && !!instance.$implements__" + type.getMangledName() + ";");
-  }
-
-  private void renderIsInstanceOfJsFunctionImplementationStatement(TypeDeclaration type) {
-    sourceBuilder.appendln(
-        "return instance != null && !!instance.$is__" + type.getMangledName() + ";");
-  }
-
   // TODO(b/34928687): Move this to the ast in a normalization pass.
   // TODO(b/80269359): may copy Objects methods (equals, hashCode, etc. ) as well.
   private void renderCopyMethod() {
@@ -615,43 +509,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.closeBrace();
   }
 
-  /**
-   * Here we call markImplementor on all interfaces such that the class can be queried at run time
-   * to determine if it implements an interface.
-   */
-  private void renderMarkImplementorCalls() {
-    if (type.isOverlayImplementation()) {
-      return; // Do nothing
-    }
-
-    String className = environment.aliasForType(type.getDeclaration());
-    if (type.isInterface()) {
-      // TODO(b/20102666): remove cast after b/20102666 is handled in Closure.
-      sourceBuilder.newLine();
-      sourceBuilder.append(
-          className
-              + ".$markImplementor(/**@type {"
-              + TypeDescriptors.get().nativeFunction.getQualifiedJsName()
-              + "}*/ ("
-              + className
-              + "));");
-    } else { // Not an interface so it is a Class.
-      for (TypeDescriptor interfaceTypeDescriptor : type.getSuperInterfaceTypeDescriptors()) {
-        if (interfaceTypeDescriptor.isNative()) {
-          continue;
-        }
-        sourceBuilder.newLine();
-        JavaScriptConstructorReference markImplementorConstructor =
-            interfaceTypeDescriptor.getMetadataConstructorReference();
-        renderExpression(markImplementorConstructor);
-        sourceBuilder.append(".$markImplementor(" + className + ");");
-      }
-    }
-  }
-
   private void renderLoadTimeStatements() {
     renderClassMetadata();
-    renderMarkImplementorCalls();
     statementTranspiler.renderStatements(type.getLoadTimeStatements());
     sourceBuilder.newLine();
   }
@@ -715,7 +574,4 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     // TODO(b/77961191): add a new line once the bug is resolved.
   }
 
-  private void renderExpression(Expression expression) {
-    ExpressionTranspiler.render(expression, environment, sourceBuilder);
-  }
 }

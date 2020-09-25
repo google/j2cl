@@ -54,7 +54,9 @@ public abstract class FieldDescriptor extends MemberDescriptor {
     SYNTHETIC_OUTER_FIELD("$outer_"),
     SYNTHETIC_CAPTURE_FIELD("$captured_"),
     SYNTHETIC_BACKING_FIELD("$static_"),
-    SYNTHETIC_ORDINAL_FIELD("$ordinal_");
+    SYNTHETIC_ORDINAL_FIELD("$ordinal_"),
+    INSTANCE_OF_SUPPORT_FIELD(""),
+    ;
 
     private final String prefix;
 
@@ -65,6 +67,11 @@ public abstract class FieldDescriptor extends MemberDescriptor {
     @Override
     public String getPrefix() {
       return prefix;
+    }
+
+    @Override
+    public boolean isInstanceOfSupportMember() {
+      return this == INSTANCE_OF_SUPPORT_FIELD;
     }
   }
 

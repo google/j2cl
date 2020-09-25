@@ -29,6 +29,7 @@ import com.google.j2cl.ast.visitors.FilloutMissingSourceMapInformation;
 import com.google.j2cl.ast.visitors.FixSuperCallQualifiers;
 import com.google.j2cl.ast.visitors.ImplementAssertStatements;
 import com.google.j2cl.ast.visitors.ImplementInstanceInitialization;
+import com.google.j2cl.ast.visitors.ImplementInstanceOfs;
 import com.google.j2cl.ast.visitors.ImplementLambdaExpressions;
 import com.google.j2cl.ast.visitors.ImplementStaticInitialization;
 import com.google.j2cl.ast.visitors.ImplementSynchronizedStatements;
@@ -255,6 +256,9 @@ class J2clTranspiler {
 
         // Perform post cleanups.
         new ImplementStaticInitialization(),
+        // Needs to run after ImplementStaticInitialization since ImplementIsInstanceMethods creates
+        // static methods which should not call $clinit.
+        new ImplementInstanceOfs(),
         // Normalize multiexpressions again to remove unnecessary clutter, but run before
         // variable motion.
         new NormalizeMultiExpressions(),

@@ -512,17 +512,6 @@ public class AstUtils {
     // Class.prototype.apply
     String functionalMethodMangledName = jsFunctionMethodDescriptor.getMangledName();
 
-    FieldAccess prototypeFieldAccess =
-        FieldAccess.Builder.from(
-                FieldDescriptor.newBuilder()
-                    .setEnclosingTypeDescriptor(lambdaType)
-                    .setName("prototype")
-                    .setTypeDescriptor(lambdaType)
-                    .setJsInfo(JsInfo.RAW_FIELD)
-                    .build())
-            .setQualifier(new JavaScriptConstructorReference(lambdaType.getTypeDeclaration()))
-            .build();
-
     FieldAccess applyFunctionFieldAccess =
         FieldAccess.Builder.from(
                 FieldDescriptor.newBuilder()
@@ -531,7 +520,9 @@ public class AstUtils {
                     .setTypeDescriptor(TypeDescriptors.get().nativeFunction)
                     .setJsInfo(JsInfo.RAW_FIELD)
                     .build())
-            .setQualifier(prototypeFieldAccess)
+            .setQualifier(
+                new JavaScriptConstructorReference(lambdaType.getTypeDeclaration())
+                    .getPrototypeFieldAccess())
             .build();
 
     FieldAccess copyFunctionFieldAccess =

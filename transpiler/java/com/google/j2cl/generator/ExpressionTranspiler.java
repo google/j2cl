@@ -222,7 +222,13 @@ public class ExpressionTranspiler {
 
       @Override
       public boolean enterInstanceOfExpression(InstanceOfExpression expression) {
-        checkArgument(false, "InstanceOf expression should have been normalized.");
+        processLeftSubExpression(expression, expression.getExpression());
+        sourceBuilder.append(" instanceof ");
+        // At this point only a declared type can appear as the type in the lhs of an instanceof.
+        // Arrays, the only other type that can appear as a rhs of an instanceof, have been
+        // normalized away.
+        sourceBuilder.append(
+            environment.aliasForType((DeclaredTypeDescriptor) expression.getTestTypeDescriptor()));
         return false;
       }
 

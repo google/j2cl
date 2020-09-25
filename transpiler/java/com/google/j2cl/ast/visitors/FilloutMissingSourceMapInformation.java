@@ -54,7 +54,7 @@ public class FilloutMissingSourceMapInformation extends NormalizationPass {
 
           @Override
           public boolean enterMember(Member member) {
-            if (member.isField()) {
+            if (member.isField() || member.getSourcePosition() == SourcePosition.NONE) {
               return true;
             }
 
@@ -76,6 +76,7 @@ public class FilloutMissingSourceMapInformation extends NormalizationPass {
           @Override
           public boolean enterStatement(Statement statement) {
             SourcePosition sourcePosition = statement.getSourcePosition();
+
             // If there is already a name in the AST do not overwrite
             // Some synthesized methods fill out the name earlier
             if (sourcePosition.getName() != null) {

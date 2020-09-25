@@ -103,6 +103,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     SYNTHETIC_PROPERTY_GETTER("<synthetic: getter>"),
     SYNTHETIC_ADAPT_LAMBDA("<synthetic: adapt_lambda>"),
     SYNTHETIC_LAMBDA_ADAPTOR_CONSTRUCTOR("<synthetic: lambda_adaptor_ctor>"),
+    INSTANCE_OF_SUPPORT_METHOD,
     GENERALIZING_BRIDGE, // Bridges a more general signature to a more specific one.
     SPECIALIZING_BRIDGE, // Bridges a more specific signature to a more general one.
     DEFAULT_METHOD_BRIDGE, // Bridges to a default method interface.
@@ -146,6 +147,11 @@ public abstract class MethodDescriptor extends MemberDescriptor {
           return "";
       }
     }
+
+    @Override
+    public boolean isInstanceOfSupportMember() {
+      return this == INSTANCE_OF_SUPPORT_METHOD;
+    }
   }
 
   public static final String INIT_METHOD_NAME = "$init";
@@ -155,6 +161,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   public static final String VALUE_OF_METHOD_NAME = "valueOf"; // Boxed type valueOf() method.
   public static final String VALUE_METHOD_SUFFIX = "Value"; // Boxed type **Value() method.
   public static final String IS_INSTANCE_METHOD_NAME = "$isInstance";
+  public static final String MARK_IMPLEMENTOR_METHOD_NAME = "$markImplementor";
   public static final String CREATE_METHOD_NAME = "$create";
   public static final String LOAD_MODULES_METHOD_NAME = "$loadModules";
 
@@ -460,6 +467,11 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     if (isJsMethod()) {
       return getSimpleJsName();
+    }
+
+    if (getOrigin().isInstanceOfSupportMember()) {
+      // Class support methods, like $isInstance and $markImplementor, should not be mangled.
+      return getName();
     }
 
     // All special cases have been handled. Go ahead and construct the mangled name for a plain

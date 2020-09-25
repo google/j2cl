@@ -29,6 +29,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.MoreCollectors;
 import com.google.common.collect.Streams;
+import com.google.j2cl.ast.FieldDescriptor.FieldOrigin;
 import com.google.j2cl.ast.MethodDescriptor.MethodOrigin;
 import com.google.j2cl.common.ThreadLocalInterner;
 import java.util.Collection;
@@ -354,11 +355,11 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   @Memoized
   public MethodDescriptor getClinitMethodDescriptor() {
     return MethodDescriptor.newBuilder()
-        .setStatic(true)
-        .setEnclosingTypeDescriptor(this)
         .setName(MethodDescriptor.CLINIT_METHOD_NAME)
+        .setEnclosingTypeDescriptor(this)
         .setOrigin(MethodOrigin.SYNTHETIC_CLASS_INITIALIZER)
         .setJsInfo(isNative() ? JsInfo.RAW_OVERLAY : JsInfo.RAW)
+        .setStatic(true)
         .build();
   }
 
@@ -366,10 +367,51 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   @Memoized
   public MethodDescriptor getInitMethodDescriptor() {
     return MethodDescriptor.newBuilder()
-        .setEnclosingTypeDescriptor(this)
         .setName(MethodDescriptor.INIT_METHOD_NAME)
-        .setVisibility(Visibility.PRIVATE)
+        .setEnclosingTypeDescriptor(this)
         .setOrigin(MethodOrigin.SYNTHETIC_INSTANCE_INITIALIZER)
+        .setVisibility(Visibility.PRIVATE)
+        .build();
+  }
+
+  /** Returns the method descriptor for $isInstance. */
+  @Memoized
+  public MethodDescriptor getIsInstanceMethodDescriptor() {
+    return MethodDescriptor.newBuilder()
+        .setName(MethodDescriptor.IS_INSTANCE_METHOD_NAME)
+        .setEnclosingTypeDescriptor(getMetadataTypeDeclaration().toUnparameterizedTypeDescriptor())
+        .setParameterTypeDescriptors(getUnknownType())
+        .setReturnTypeDescriptor(PrimitiveTypes.BOOLEAN)
+        .setOrigin(MethodOrigin.INSTANCE_OF_SUPPORT_METHOD)
+        .setStatic(true)
+        .build();
+  }
+
+  private static TypeVariable getUnknownType() {
+    return TypeVariable.createWildcardWithBound(TypeDescriptors.get().javaLangObject);
+  }
+
+  /** Returns the method descriptor for $markImplementor. */
+  @Memoized
+  public MethodDescriptor getMarkImplementorMethodDescriptor() {
+    return MethodDescriptor.newBuilder()
+        .setName(MethodDescriptor.MARK_IMPLEMENTOR_METHOD_NAME)
+        .setEnclosingTypeDescriptor(getMetadataTypeDeclaration().toUnparameterizedTypeDescriptor())
+        .setParameterTypeDescriptors(TypeDescriptors.get().nativeFunction)
+        .setReturnTypeDescriptor(PrimitiveTypes.VOID)
+        .setOrigin(MethodOrigin.INSTANCE_OF_SUPPORT_METHOD)
+        .setStatic(true)
+        .build();
+  }
+
+  /** Returns the field descriptor for the instanceof checking marker field. */
+  public FieldDescriptor getIsInstanceMarkerField() {
+    checkState(isInterface() || isJsFunctionImplementation());
+    return FieldDescriptor.newBuilder()
+        .setName(isJsFunctionImplementation() ? "$is" : "$implements")
+        .setEnclosingTypeDescriptor(this)
+        .setTypeDescriptor(PrimitiveTypes.BOOLEAN)
+        .setOrigin(FieldOrigin.INSTANCE_OF_SUPPORT_FIELD)
         .build();
   }
 

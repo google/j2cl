@@ -151,6 +151,18 @@ public abstract class Expression extends Node implements Cloneable<Expression> {
         .build();
   }
 
+  /** Returns a member reference to the prototype field using this expression as its qualifier. */
+  public Expression getPrototypeFieldAccess() {
+    FieldDescriptor prototypeFieldDescriptor =
+        FieldDescriptor.newBuilder()
+            .setJsInfo(JsInfo.RAW_FIELD)
+            .setEnclosingTypeDescriptor(TypeDescriptors.get().javaLangObject)
+            .setTypeDescriptor(TypeDescriptors.get().javaLangObject)
+            .setName("prototype")
+            .build();
+    return FieldAccess.Builder.from(prototypeFieldDescriptor).setQualifier(this).build();
+  }
+
   /**
    * The JavaScript precedence of this expression.
    *

@@ -45,10 +45,21 @@ class Import implements Comparable<Import> {
     RUNTIME,
     /** Used for JsDoc purposes. */
     JSDOC,
+    /**
+     * Used for circumventing AJD pruning.
+     *
+     * <p>JavaScript types that are exposed as Java native JsTypes might be used by libraries
+     * upstream. Libraries that access those types using the Java native JsType might not have them
+     * in their dependencies (and that is ok). But if the exposing Java native JsType is not in the
+     * same library as the original type it exposes, AJD will prune the type if there are no
+     * goog.requires of it. For that reason those types are tracked as AJD_DEPENDENCIES so that the
+     * proper goog.require is issued for them in the corresponding overlay class.
+     */
+    AJD_DEPENDENCY,
     ;
 
     public boolean needsGoogRequireInHeader() {
-      return this == LOADTIME || this == RUNTIME || this == JSDOC;
+      return this == LOADTIME || this == RUNTIME || this == JSDOC || this == AJD_DEPENDENCY;
     }
 
     public boolean needsGoogRequireInImpl() {

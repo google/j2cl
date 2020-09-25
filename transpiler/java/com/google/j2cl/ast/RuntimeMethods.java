@@ -141,7 +141,7 @@ public class RuntimeMethods {
   }
 
   /** Create a call to an Enums method. */
-  private static MethodCall createEnumsMethodCall(String methodName, Expression... arguments) {
+  public static MethodCall createEnumsMethodCall(String methodName, Expression... arguments) {
     return createEnumsMethodCall(methodName, Arrays.asList(arguments));
   }
 

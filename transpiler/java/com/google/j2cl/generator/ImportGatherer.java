@@ -31,6 +31,7 @@ import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldDeclarationStatement;
 import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.FunctionExpression;
+import com.google.j2cl.ast.InstanceOfExpression;
 import com.google.j2cl.ast.IntersectionTypeDescriptor;
 import com.google.j2cl.ast.JavaScriptConstructorReference;
 import com.google.j2cl.ast.JsDocCastExpression;
@@ -90,32 +91,17 @@ class ImportGatherer extends AbstractVisitor {
       collectImportsFromNativeType(type.getOverlaidTypeDeclaration());
     }
 
-    if (type.isOverlayImplementation() && type.getOverlaidTypeDeclaration().isJsEnum()) {
-      // Add Enums bootstrap type as it is referred to at code generation from $isInstance.
-      // $isInstance does not call $clinit, for that reason it needs to be imported eagerly.
-      addTypeDeclaration(BootstrapType.ENUMS.getDeclaration(), ImportCategory.LOADTIME);
-      TypeDeclaration overlaidType = type.getOverlaidTypeDeclaration();
-      if (overlaidType.getJsEnumInfo().hasCustomValue()
-          && overlaidType.toUnparameterizedTypeDescriptor().isNative()) {
-        // Add the type needed to for $IsInstance on native JsEnums.
-        TypeDescriptor instanceofType = AstUtils.getJsEnumValueFieldInstanceCheckType(overlaidType);
-        addTypeDeclaration(instanceofType.getMetadataTypeDeclaration(), ImportCategory.LOADTIME);
-      }
+    if (type.getSuperTypeDescriptor() != null) {
+      // The superclass appears in the extends clause, hence collect for loadtime.
+      addTypeDeclaration(
+          type.getSuperTypeDescriptor().getTypeDeclaration(), ImportCategory.LOADTIME);
     }
 
-    // Super type and super interface imports are needed eagerly because they are used during the
-    // declaration phase of JS execution. All other imports are lazy.
-    type.getSuperTypesStream()
-        .forEach(
-            t -> {
-              if (t.isJsFunctionInterface()) {
-                // JsFunction super interface reference is replaced with generic one by the code
-                // generator.
-                t = BootstrapType.JAVA_SCRIPT_FUNCTION.getDescriptor();
-              }
-              collectForJsDoc(t);
-              addTypeDeclaration(t.getTypeDeclaration(), ImportCategory.LOADTIME);
-            });
+    // All supertypes, including the super class, need to be collected for JsDoc, so that the types
+    // themselves and all the types they might reference as type arguments are properly imported,
+    // that includes interfaces that are only in @implements and type arguments for the
+    // superclass which appear in the @extends.
+    type.getSuperTypesStream().forEach(this::collectForJsDoc);
   }
 
   /**
@@ -215,6 +201,16 @@ class ImportGatherer extends AbstractVisitor {
     addTypeDeclaration(newInstance.getTarget().getEnclosingTypeDescriptor().getTypeDeclaration());
   }
 
+  @Override
+  public void exitInstanceOfExpression(InstanceOfExpression instanceOfExpression) {
+    // At this point only a declared type can appear as the type in the lhs of an instanceof.
+    // Arrays, the only other type that can appear as a rhs of an instanceof, have been
+    // normalized away.
+    DeclaredTypeDescriptor testTypeDescriptor =
+        (DeclaredTypeDescriptor) instanceOfExpression.getTestTypeDescriptor();
+    addTypeDeclaration(testTypeDescriptor.getTypeDeclaration());
+  }
+
   @SuppressWarnings("ReferenceEquality")
   @Override
   public void exitJavaScriptConstructorReference(
@@ -284,7 +280,9 @@ class ImportGatherer extends AbstractVisitor {
     // separately. In order for these classes to be preserved and not pruned by AJD, any user of the
     // original class should have a dependency on the overlay class.
     if (declaredTypeDescriptor.hasOverlayImplementationType()) {
-      collectForJsDoc(declaredTypeDescriptor.getOverlayImplementationTypeDescriptor());
+      addTypeDeclaration(
+          declaredTypeDescriptor.getOverlayImplementationTypeDescriptor().getTypeDeclaration(),
+          ImportCategory.AJD_DEPENDENCY);
     }
 
     if (typeDescriptor.isJsFunctionInterface() || typeDescriptor.isJsFunctionImplementation()) {
@@ -334,9 +332,36 @@ class ImportGatherer extends AbstractVisitor {
 
   /** Adds a type declaration and figuring out whether is a LOADTIME or RUNTIME dependency. */
   private void addTypeDeclaration(TypeDeclaration typeDeclaration) {
-    boolean isLoadTimeStatement = getCurrentMember() == null || getCurrentMember().isField();
-    addTypeDeclaration(
-        typeDeclaration, isLoadTimeStatement ? ImportCategory.LOADTIME : ImportCategory.RUNTIME);
+    addTypeDeclaration(typeDeclaration, getImplicitImportCategory());
+  }
+
+  /**
+   * Determines the import category of a type descriptor appearing in the code depending on the
+   * context.
+   */
+  private ImportCategory getImplicitImportCategory() {
+
+    if (getCurrentMember() == null) {
+      // The reference appears in a load time statement, hence needs a LOADTIME import category.
+      return ImportCategory.LOADTIME;
+    }
+
+    if (getCurrentMember().isField()) {
+      // The reference appears in a field initializer, hence it needs a LOADTIME import category.
+      // Note that at this stage all field initialization has already been moved to the constructor
+      // or $clinit. Hence the initializers that read this point are the default values for
+      // their types and the compiler type constancts. The only type reference that needs and import
+      // and that can appear here is the type for primitive longs.
+      return ImportCategory.LOADTIME;
+    }
+
+    if (getCurrentMember().getDescriptor().getOrigin().isInstanceOfSupportMember()) {
+      // InstanceOf support members, e.g. $isInstance, might not call $clinit hence all the
+      // types used in their implementation need to be imported as LOADTIME.
+      return ImportCategory.LOADTIME;
+    }
+
+    return ImportCategory.RUNTIME;
   }
 
   private void addTypeDeclaration(TypeDeclaration typeDeclaration, ImportCategory importCategory) {
@@ -364,7 +389,7 @@ class ImportGatherer extends AbstractVisitor {
   }
 
   private List<Import> doGatherImports(Type type) {
-    // TODO(b/67965153): Remove special casing once getClass() metatdata initialization is moved to
+    // TODO(b/67965153): Remove special casing once getClass() metadata initialization is moved to
     //  the AST.
     if (!type.isJsEnum()) {
       // Util class implements some utility functions and does not depend on any other class, always

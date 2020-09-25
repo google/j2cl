@@ -32,6 +32,9 @@ public abstract class MemberDescriptor
   public interface Origin {
     /** Returns the prefix to be used for mangling members */
     String getPrefix();
+
+    /** Returns whether this member is supporting the implementation of the instanceof operation. */
+    boolean isInstanceOfSupportMember();
   }
 
   public abstract JsInfo getJsInfo();
