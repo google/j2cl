@@ -25,10 +25,10 @@ class RegularInterface {
 
   static $loadModules() {}
 }
+RegularInterface.$markImplementor(/**@type {Function}*/ (RegularInterface));
 $Util.$setClassMetadataForInterface(
     RegularInterface,
     'com.google.j2cl.transpiler.readable.markimplementornativetypes.RegularInterface');
-RegularInterface.$markImplementor(/**@type {Function}*/ (RegularInterface));
 
 exports = RegularInterface;
 //# sourceMappingURL=RegularInterface.js.map

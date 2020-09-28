@@ -31,11 +31,11 @@ class Foo {
 
   static $loadModules() {}
 }
-$Util.$setClassMetadataForInterface(
-    Foo, 'com.google.j2cl.transpiler.readable.annotation.Main$Foo');
 /**@const {number}*/
 Foo.f_CONSTANT__com_google_j2cl_transpiler_readable_annotation_Main_Foo = 123;
 Foo.$markImplementor(/**@type {Function}*/ (Foo));
+$Util.$setClassMetadataForInterface(
+    Foo, 'com.google.j2cl.transpiler.readable.annotation.Main$Foo');
 
 exports = Foo;
 //# sourceMappingURL=Main$Foo.js.map

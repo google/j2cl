@@ -42,10 +42,10 @@ class InterfaceImpl extends A {
 
   static $loadModules() {}
 }
+MyJsInterface.$markImplementor(InterfaceImpl);
 $Util.$setClassMetadata(
     InterfaceImpl,
     'com.google.j2cl.transpiler.readable.jsbridgebackward.InterfaceImpl');
-MyJsInterface.$markImplementor(InterfaceImpl);
 
 exports = InterfaceImpl;
 //# sourceMappingURL=InterfaceImpl.js.map

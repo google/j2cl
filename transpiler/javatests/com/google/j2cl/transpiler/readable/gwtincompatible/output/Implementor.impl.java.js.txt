@@ -43,11 +43,11 @@ class Implementor extends ClassWithAbstractMethod {
 
   static $loadModules() {}
 }
+Interface.$markImplementor(Implementor);
+NestedInterface.$markImplementor(Implementor);
 $Util.$setClassMetadata(
     Implementor,
     'com.google.j2cl.transpiler.readable.gwtincompatible.Implementor');
-Interface.$markImplementor(Implementor);
-NestedInterface.$markImplementor(Implementor);
 
 exports = Implementor;
 //# sourceMappingURL=Implementor.js.map

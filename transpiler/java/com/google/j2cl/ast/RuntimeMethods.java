@@ -447,6 +447,30 @@ public class RuntimeMethods {
                                       .setParameters(TypeDescriptors.get().javaLangString)
                                       .build())
                               .put(
+                                  "$setClassMetadata",
+                                  MethodInfo.newBuilder()
+                                      .setReturnType(PrimitiveTypes.VOID)
+                                      .setParameters(
+                                          TypeDescriptors.get().javaemulInternalConstructor,
+                                          TypeDescriptors.get().javaLangString)
+                                      .build())
+                              .put(
+                                  "$setClassMetadataForInterface",
+                                  MethodInfo.newBuilder()
+                                      .setReturnType(PrimitiveTypes.VOID)
+                                      .setParameters(
+                                          TypeDescriptors.get().javaemulInternalConstructor,
+                                          TypeDescriptors.get().javaLangString)
+                                      .build())
+                              .put(
+                                  "$setClassMetadataForEnum",
+                                  MethodInfo.newBuilder()
+                                      .setReturnType(PrimitiveTypes.VOID)
+                                      .setParameters(
+                                          TypeDescriptors.get().javaemulInternalConstructor,
+                                          TypeDescriptors.get().javaLangString)
+                                      .build())
+                              .put(
                                   "$synchronized",
                                   MethodInfo.newBuilder()
                                       .setReturnType(PrimitiveTypes.VOID)

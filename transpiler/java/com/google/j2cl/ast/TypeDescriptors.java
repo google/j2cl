@@ -59,6 +59,8 @@ public class TypeDescriptors {
 
   public DeclaredTypeDescriptor javaemulValueType;
   public DeclaredTypeDescriptor javaemulInternalPreconditions;
+  public DeclaredTypeDescriptor javaemulInternalEnums;
+  public DeclaredTypeDescriptor javaemulInternalConstructor;
 
   public ArrayTypeDescriptor javaLangObjectArray;
 
@@ -508,6 +510,12 @@ public class TypeDescriptors {
           break;
         case "javaemul.internal.InternalPreconditions":
           typeDescriptors.javaemulInternalPreconditions = referenceType;
+          break;
+        case "javaemul.internal.Enums":
+          typeDescriptors.javaemulInternalEnums = referenceType;
+          break;
+        case "javaemul.internal.Constructor":
+          typeDescriptors.javaemulInternalConstructor = referenceType;
           break;
         default:
           throw new IllegalStateException("Unexpected reference type in well known set: " + name);

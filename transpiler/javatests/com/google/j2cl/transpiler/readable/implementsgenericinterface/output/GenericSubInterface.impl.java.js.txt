@@ -29,11 +29,11 @@ class GenericSubInterface {
 
   static $loadModules() {}
 }
+GenericSubInterface.$markImplementor(
+    /**@type {Function}*/ (GenericSubInterface));
 $Util.$setClassMetadataForInterface(
     GenericSubInterface,
     'com.google.j2cl.transpiler.readable.implementsgenericinterface.GenericSubInterface');
-GenericSubInterface.$markImplementor(
-    /**@type {Function}*/ (GenericSubInterface));
 
 exports = GenericSubInterface;
 //# sourceMappingURL=GenericSubInterface.js.map

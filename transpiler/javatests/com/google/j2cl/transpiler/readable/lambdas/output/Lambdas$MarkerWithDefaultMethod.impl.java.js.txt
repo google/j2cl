@@ -33,11 +33,11 @@ class MarkerWithDefaultMethod {
 
   static $loadModules() {}
 }
+MarkerWithDefaultMethod.$markImplementor(
+    /**@type {Function}*/ (MarkerWithDefaultMethod));
 $Util.$setClassMetadataForInterface(
     MarkerWithDefaultMethod,
     'com.google.j2cl.transpiler.readable.lambdas.Lambdas$MarkerWithDefaultMethod');
-MarkerWithDefaultMethod.$markImplementor(
-    /**@type {Function}*/ (MarkerWithDefaultMethod));
 
 exports = MarkerWithDefaultMethod;
 //# sourceMappingURL=Lambdas$MarkerWithDefaultMethod.js.map

@@ -51,10 +51,10 @@ class SubJsType extends MyJsType {
 
   static $loadModules() {}
 }
+MyInterface.$markImplementor(SubJsType);
 $Util.$setClassMetadata(
     SubJsType,
     'com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.SubJsType');
-MyInterface.$markImplementor(SubJsType);
 
 exports = SubJsType;
 //# sourceMappingURL=SubJsType.js.map

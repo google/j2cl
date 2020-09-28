@@ -58,9 +58,9 @@ class Child extends Parent {
 
   static $loadModules() {}
 }
+MyInterface.$markImplementor(Child);
 $Util.$setClassMetadata(
     Child, 'com.google.j2cl.transpiler.readable.instancejsmethods.Child');
-MyInterface.$markImplementor(Child);
 
 exports = Child;
 //# sourceMappingURL=Child.js.map

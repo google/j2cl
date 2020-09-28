@@ -30,7 +30,6 @@ import com.google.j2cl.ast.MethodLike;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.ast.TypeDescriptors;
-import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.TypeVariable;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.Visibility;
@@ -447,48 +446,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.newLine();
   }
 
-  // TODO(b/67965153): Move this to the ast in a normalization pass.
-  private void renderClassMetadata() {
-    if (type.isOverlayImplementation()
-        && (type.getOverlaidTypeDeclaration().isJsFunctionInterface()
-            || type.getOverlaidTypeDeclaration().isInterface())) {
-      // JsFunction and Native interface overlays do not need class metadata.
-      return;
-    }
-    sourceBuilder.newLine();
-
-    String utilAlias = environment.aliasForType(BootstrapType.NATIVE_UTIL.getDescriptor());
-
-    TypeDeclaration targetTypeDescriptor = type.getUnderlyingTypeDeclaration();
-
-    String name =
-        targetTypeDescriptor.isNative()
-            // For native types the qualified JavaScript name is more useful to identify the
-            // type, in particular for debugging.
-            ? targetTypeDescriptor.getQualifiedJsName()
-            : targetTypeDescriptor.getQualifiedBinaryName();
-
-    String obfuscatableName = "'" + name + "'";
-    String className = environment.aliasForType(type.getDeclaration());
-    if (targetTypeDescriptor.isInterface()) {
-      sourceBuilder.append(
-          utilAlias
-              + ".$setClassMetadataForInterface("
-              + className
-              + ", "
-              + obfuscatableName
-              + ");");
-    } else if (targetTypeDescriptor.isEnum() && !targetTypeDescriptor.isJsEnum()) {
-      // TODO(b/117525773): targetTypeDescriptor.isEnum should already be false for JsEnums,
-      // making the second part of the condition unnecessary.
-      sourceBuilder.append(
-          utilAlias + ".$setClassMetadataForEnum(" + className + ", " + obfuscatableName + ");");
-    } else {
-      sourceBuilder.append(
-          utilAlias + ".$setClassMetadata(" + className + ", " + obfuscatableName + ");");
-    }
-  }
-
   private void renderLoadModules() {
     MethodDescriptor methodDescriptor = AstUtils.getLoadModulesDescriptor(type.getTypeDescriptor());
     sourceBuilder.newLine();
@@ -510,7 +467,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   }
 
   private void renderLoadTimeStatements() {
-    renderClassMetadata();
     statementTranspiler.renderStatements(type.getLoadTimeStatements());
     sourceBuilder.newLine();
   }
