@@ -307,7 +307,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.openBrace();
     sourceBuilder.newLine();
     renderTypeMethods();
-    renderCopyMethod();
     renderLoadModules();
     sourceBuilder.closeBrace();
   }
@@ -420,30 +419,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   private boolean needsReturnJsDoc(MethodDescriptor methodDescriptor) {
     return !methodDescriptor.isConstructor()
         && !TypeDescriptors.isPrimitiveVoid(methodDescriptor.getReturnTypeDescriptor());
-  }
-
-  // TODO(b/34928687): Move this to the ast in a normalization pass.
-  // TODO(b/80269359): may copy Objects methods (equals, hashCode, etc. ) as well.
-  private void renderCopyMethod() {
-    if (!type.getDeclaration().isJsFunctionImplementation()) {
-      return; // Only render the $copy method for jsfunctions
-    }
-    sourceBuilder.appendln(
-        "static $copy(/**"
-            + environment.aliasForType(type.getDeclaration())
-            + "*/ from, /** ? */ to) ");
-    sourceBuilder.openBrace();
-    for (Field field : type.getInstanceFields()) {
-      String fieldName = field.getDescriptor().getMangledName();
-      sourceBuilder.newLine();
-      sourceBuilder.append("to." + fieldName + " = from." + fieldName + ";");
-    }
-    sourceBuilder.newLine();
-    sourceBuilder.appendLines(
-        "// Marks the object is an instance of this class.",
-        "to.$is__" + type.getDeclaration().getMangledName() + " = true;");
-    sourceBuilder.closeBrace();
-    sourceBuilder.newLine();
   }
 
   private void renderLoadModules() {

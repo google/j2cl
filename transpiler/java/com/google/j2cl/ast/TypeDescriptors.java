@@ -101,6 +101,10 @@ public class TypeDescriptors {
     return typeDescriptors.get() != null;
   }
 
+  public static TypeVariable getUnknownType() {
+    return TypeVariable.createWildcardWithBound(get().javaLangObject);
+  }
+
   static DeclaredTypeDescriptor getBoxTypeFromPrimitiveType(PrimitiveTypeDescriptor primitiveType) {
     return get().boxedTypeByPrimitiveType.get(primitiveType);
   }

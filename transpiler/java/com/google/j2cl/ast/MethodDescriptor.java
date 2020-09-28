@@ -164,6 +164,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   public static final String MARK_IMPLEMENTOR_METHOD_NAME = "$markImplementor";
   public static final String CREATE_METHOD_NAME = "$create";
   public static final String LOAD_MODULES_METHOD_NAME = "$loadModules";
+  public static final String COPY_METHOD_NAME = "$copy";
 
   public static String buildMethodSignature(
       String name, TypeDescriptor... parameterTypeDescriptors) {

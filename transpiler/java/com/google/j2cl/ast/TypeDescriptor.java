@@ -258,4 +258,5 @@ public abstract class TypeDescriptor implements Comparable<TypeDescriptor>, HasR
   public final String toString() {
     return getUniqueId();
   }
+
 }

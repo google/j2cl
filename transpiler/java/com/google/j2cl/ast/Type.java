@@ -126,6 +126,10 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
     return typeDeclaration.isJsFunctionInterface();
   }
 
+  public boolean isJsFunctionImplementation() {
+    return typeDeclaration.isJsFunctionImplementation();
+  }
+
   public List<Member> getMembers() {
     return members;
   }

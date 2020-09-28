@@ -380,15 +380,11 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     return MethodDescriptor.newBuilder()
         .setName(MethodDescriptor.IS_INSTANCE_METHOD_NAME)
         .setEnclosingTypeDescriptor(getMetadataTypeDeclaration().toUnparameterizedTypeDescriptor())
-        .setParameterTypeDescriptors(getUnknownType())
+        .setParameterTypeDescriptors(TypeDescriptors.getUnknownType())
         .setReturnTypeDescriptor(PrimitiveTypes.BOOLEAN)
         .setOrigin(MethodOrigin.INSTANCE_OF_SUPPORT_METHOD)
         .setStatic(true)
         .build();
-  }
-
-  private static TypeVariable getUnknownType() {
-    return TypeVariable.createWildcardWithBound(TypeDescriptors.get().javaLangObject);
   }
 
   /** Returns the method descriptor for $markImplementor. */
@@ -412,6 +408,23 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         .setEnclosingTypeDescriptor(this)
         .setTypeDescriptor(PrimitiveTypes.BOOLEAN)
         .setOrigin(FieldOrigin.INSTANCE_OF_SUPPORT_FIELD)
+        .build();
+  }
+
+  /** Returns the method descriptor for $copy. */
+  @Memoized
+  public MethodDescriptor getCopyMethodDescriptor() {
+    return MethodDescriptor.newBuilder()
+        .setName(MethodDescriptor.COPY_METHOD_NAME)
+        .setEnclosingTypeDescriptor(
+            getMetadataConstructorReference()
+                .getReferencedTypeDeclaration()
+                .toUnparameterizedTypeDescriptor())
+        .setParameterTypeDescriptors(
+            TypeDescriptors.getUnknownType(), TypeDescriptors.getUnknownType())
+        .setReturnTypeDescriptor(PrimitiveTypes.VOID)
+        .setOrigin(MethodOrigin.INSTANCE_OF_SUPPORT_METHOD)
+        .setStatic(true)
         .build();
   }
 
