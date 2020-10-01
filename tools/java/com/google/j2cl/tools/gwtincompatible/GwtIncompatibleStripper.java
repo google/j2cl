@@ -19,11 +19,11 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 
 import com.google.common.collect.Lists;
 import com.google.common.io.MoreFiles;
-import com.google.j2cl.common.FrontendUtils;
-import com.google.j2cl.common.FrontendUtils.FileInfo;
 import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
+import com.google.j2cl.common.SourceUtils;
+import com.google.j2cl.common.SourceUtils.FileInfo;
 import com.google.j2cl.frontend.jdt.GwtIncompatibleNodeCollector;
 import java.io.IOException;
 import java.nio.file.FileSystem;
@@ -48,9 +48,9 @@ public final class GwtIncompatibleStripper {
   static Problems strip(List<String> files, String outputPath) {
     try {
       Problems problems = new Problems();
-      try (FileSystem outputZipFileSystem = FrontendUtils.initZipOutput(outputPath, problems)) {
+      try (FileSystem outputZipFileSystem = SourceUtils.initZipOutput(outputPath, problems)) {
         List<FileInfo> allPaths =
-            FrontendUtils.getAllSources(files, problems)
+            SourceUtils.getAllSources(files, problems)
                 .filter(f -> f.targetPath().endsWith(".java"))
                 .collect(toImmutableList());
         preprocessFiles(allPaths, outputZipFileSystem.getPath("/"), problems);

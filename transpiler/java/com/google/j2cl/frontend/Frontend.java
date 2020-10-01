@@ -16,8 +16,8 @@
 package com.google.j2cl.frontend;
 
 import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.common.FrontendUtils.FileInfo;
 import com.google.j2cl.common.Problems;
+import com.google.j2cl.common.SourceUtils.FileInfo;
 import com.google.j2cl.frontend.common.PackageInfoCache;
 import com.google.j2cl.frontend.javac.JavacParser;
 import com.google.j2cl.frontend.jdt.CompilationUnitBuilder;

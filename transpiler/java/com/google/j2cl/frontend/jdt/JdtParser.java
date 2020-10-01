@@ -17,9 +17,9 @@ package com.google.j2cl.frontend.jdt;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
-import com.google.j2cl.common.FrontendUtils.FileInfo;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
+import com.google.j2cl.common.SourceUtils.FileInfo;
 import com.google.j2cl.frontend.common.FrontendConstants;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -40,8 +40,8 @@ import org.eclipse.jdt.core.dom.IBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 
 /**
- * A delegator of JDT's ASTParser that provides a more convenient interface for
- * parsing source files into compilation unit.
+ * A delegator of JDT's ASTParser that provides a more convenient interface for parsing source files
+ * into compilation unit.
  */
 public class JdtParser {
   private static final String JAVA_VERSION = JavaCore.VERSION_11;

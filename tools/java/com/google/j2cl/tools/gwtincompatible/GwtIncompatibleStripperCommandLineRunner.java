@@ -13,7 +13,7 @@
  */
 package com.google.j2cl.tools.gwtincompatible;
 
-import static com.google.j2cl.common.FrontendUtils.checkSourceFiles;
+import static com.google.j2cl.common.SourceUtils.checkSourceFiles;
 
 import com.google.j2cl.common.CommandLineTool;
 import com.google.j2cl.common.Problems;

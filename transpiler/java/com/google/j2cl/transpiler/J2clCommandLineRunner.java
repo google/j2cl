@@ -13,15 +13,15 @@
  */
 package com.google.j2cl.transpiler;
 
-import static com.google.j2cl.common.FrontendUtils.checkSourceFiles;
+import static com.google.j2cl.common.SourceUtils.checkSourceFiles;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.CommandLineTool;
-import com.google.j2cl.common.FrontendUtils;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
+import com.google.j2cl.common.SourceUtils;
 import com.google.j2cl.frontend.Frontend;
 import java.io.File;
 import java.nio.file.FileSystem;
@@ -100,11 +100,11 @@ public final class J2clCommandLineRunner extends CommandLineTool {
 
     return J2clTranspilerOptions.newBuilder()
         .setSources(
-            FrontendUtils.getAllSources(this.files, problems)
+            SourceUtils.getAllSources(this.files, problems)
                 .filter(p -> p.sourcePath().endsWith(".java"))
                 .collect(ImmutableList.toImmutableList()))
         .setNativeSources(
-            FrontendUtils.getAllSources(getPathEntries(this.nativeSourcePath), problems)
+            SourceUtils.getAllSources(getPathEntries(this.nativeSourcePath), problems)
                 .filter(p -> p.sourcePath().endsWith(".native.js"))
                 .collect(ImmutableList.toImmutableList()))
         .setClasspaths(getPathEntries(this.classPath))
@@ -128,7 +128,7 @@ public final class J2clCommandLineRunner extends CommandLineTool {
   }
 
   private static Path getZipOutput(String output, Problems problems) {
-    FileSystem newFileSystem = FrontendUtils.initZipOutput(output, problems);
+    FileSystem newFileSystem = SourceUtils.initZipOutput(output, problems);
     return newFileSystem == null ? null : newFileSystem.getPath("/");
   }
 

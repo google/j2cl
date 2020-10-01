@@ -19,7 +19,7 @@ import static com.google.common.base.Preconditions.checkState;
 
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableList;
-import com.google.j2cl.common.FrontendUtils.FileInfo;
+import com.google.j2cl.common.SourceUtils.FileInfo;
 import com.google.j2cl.frontend.Frontend;
 import java.nio.file.Path;
 import java.util.List;

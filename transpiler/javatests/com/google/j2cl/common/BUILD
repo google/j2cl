@@ -3,8 +3,8 @@ package(
 )
 
 java_test(
-    name = "FrontendUtilsTest",
-    srcs = ["FrontendUtilsTest.java"],
+    name = "SourceUtilsTest",
+    srcs = ["SourceUtilsTest.java"],
     deps = [
         "//third_party:junit",
         "//third_party:truth",

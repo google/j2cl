@@ -17,10 +17,10 @@ import com.google.common.base.Ascii;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.bazel.BazelWorker;
-import com.google.j2cl.common.FrontendUtils;
-import com.google.j2cl.common.FrontendUtils.FileInfo;
 import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.Problems;
+import com.google.j2cl.common.SourceUtils;
+import com.google.j2cl.common.SourceUtils.FileInfo;
 import com.google.j2cl.frontend.Frontend;
 import java.io.File;
 import java.nio.file.Path;
@@ -101,8 +101,7 @@ final class BazelJ2clBuilder extends BazelWorker {
     Path libraryInfoOutputPath = Paths.get(this.libraryInfoOutput);
 
     List<FileInfo> allSources =
-        FrontendUtils.getAllSources(this.sources, problems)
-            .collect(ImmutableList.toImmutableList());
+        SourceUtils.getAllSources(this.sources, problems).collect(ImmutableList.toImmutableList());
 
     List<FileInfo> allJavaSources =
         allSources.stream()
@@ -137,7 +136,7 @@ final class BazelJ2clBuilder extends BazelWorker {
   }
 
   private static Path getZipOutput(String output, Problems problems) {
-    return FrontendUtils.initZipOutput(output, problems).getPath("/");
+    return SourceUtils.initZipOutput(output, problems).getPath("/");
   }
 
   private static List<String> getPathEntries(String path) {

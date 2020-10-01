@@ -16,9 +16,9 @@
 package com.google.j2cl.generator;
 
 import com.google.common.io.MoreFiles;
-import com.google.j2cl.common.FrontendUtils.FileInfo;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
+import com.google.j2cl.common.SourceUtils.FileInfo;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
@@ -62,9 +62,7 @@ public class NativeJavaScriptFile {
     return relativePath;
   }
 
-  /**
-   * Can only set to used.
-   */
+  /** Can only set to used. */
   public void setUsed() {
     used = true;
   }

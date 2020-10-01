@@ -35,7 +35,7 @@ import java.util.stream.Stream;
  * This class contains reusable utilities for tools needing to read from zip files and write from
  * zip files. (J2CL proper and the GwtIncompatible stripper)
  */
-public class FrontendUtils {
+public class SourceUtils {
 
   /** Stores path of files to be processed. */
   @AutoValue
@@ -46,7 +46,7 @@ public class FrontendUtils {
     }
 
     private static FileInfo create(String sourcePath, String originalPath, String targetPath) {
-      return new AutoValue_FrontendUtils_FileInfo(sourcePath, originalPath, targetPath);
+      return new AutoValue_SourceUtils_FileInfo(sourcePath, originalPath, targetPath);
     }
 
     /**
@@ -93,8 +93,7 @@ public class FrontendUtils {
     // and you can't trust the input to have been provided already in a stable order then the result
     // is that you will create an output Foo.js.zip with randomly ordered entries, and this will
     // cause unstable optimization in JSCompiler.
-    return sources
-        .stream()
+    return sources.stream()
         .flatMap(
             f ->
                 f.endsWith("jar") || f.endsWith("zip")
@@ -177,4 +176,6 @@ public class FrontendUtils {
       }
     }
   }
+
+  private SourceUtils() {}
 }

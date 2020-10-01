@@ -22,7 +22,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 @RunWith(JUnit4.class)
-public final class FrontendUtilsTest {
+public final class SourceUtilsTest {
 
   private static final String[][] JAVA_PATHS_GOOD = {
     {"java", "com/google/foo/Foo"},
@@ -47,14 +47,14 @@ public final class FrontendUtilsTest {
     for (int i = 0; i < JAVA_PATHS_GOOD.length; i++) {
       String path = JAVA_PATHS_GOOD[i][0] + "/" + JAVA_PATHS_GOOD[i][1];
       String expectedPath = JAVA_PATHS_GOOD[i][1];
-      assertThat(FrontendUtils.getJavaPath(path)).isEqualTo(expectedPath);
+      assertThat(SourceUtils.getJavaPath(path)).isEqualTo(expectedPath);
     }
   }
 
   @Test
   public void testGetJavaPath_Bad() {
     for (int i = 0; i < JAVA_PATHS_BAD.length; i++) {
-      assertThat(FrontendUtils.getJavaPath(JAVA_PATHS_BAD[i])).isEqualTo(JAVA_PATHS_BAD[i]);
+      assertThat(SourceUtils.getJavaPath(JAVA_PATHS_BAD[i])).isEqualTo(JAVA_PATHS_BAD[i]);
     }
   }
 }
