@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.ast.annotations;
+package com.google.j2cl.common.visitor;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;

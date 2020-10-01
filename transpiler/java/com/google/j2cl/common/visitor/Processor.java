@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.ast.processors.common;
+package com.google.j2cl.common.visitor;
 
 /** An opaque interface representing a visitor. */
 public interface Processor {}

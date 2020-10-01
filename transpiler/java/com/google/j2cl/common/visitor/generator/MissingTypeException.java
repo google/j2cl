@@ -13,10 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.google.j2cl.ast.processors;
+package com.google.j2cl.common.visitor.generator;
 
-/**
- * Exception thrown when annotation processing should be aborted for the current class. Processing
- * can continue on other classes.
- */
-public class AbortProcessingException extends RuntimeException {}
+@SuppressWarnings("serial")
+class MissingTypeException extends RuntimeException {}

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Google Inc.
+ * Copyright 2020 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -13,11 +13,20 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.ast.annotations;
+package com.google.j2cl.common.visitor;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Target;
+/** Wrapper for exceptions thrown from processors. */
+public class ProcessorError extends Error {
 
-/** Annotation to mark which visitable fields will act as context. */
-@Target({ElementType.TYPE})
-public @interface Context {}
+  public ProcessorError(Object context, Object node, Throwable cause) {
+    super("Context:\n\n" + context + "\n");
+    initCause(
+        context != node
+            ? new ProcessorError("Error while processing:\n\n" + node + "\n", cause)
+            : cause);
+  }
+
+  private ProcessorError(String msg, Throwable cause) {
+    super(msg, cause);
+  }
+}

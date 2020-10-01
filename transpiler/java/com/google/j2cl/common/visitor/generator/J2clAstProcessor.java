@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.ast.processors;
+package com.google.j2cl.common.visitor.generator;
 
 import static com.google.auto.common.MoreElements.isAnnotationPresent;
 import static com.google.common.collect.ImmutableList.toImmutableList;
@@ -30,8 +30,8 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
-import com.google.j2cl.ast.annotations.Context;
-import com.google.j2cl.ast.annotations.Visitable;
+import com.google.j2cl.common.visitor.Context;
+import com.google.j2cl.common.visitor.Visitable;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -82,8 +82,7 @@ public class J2clAstProcessor extends AbstractProcessor {
   @Override
   public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
     List<TypeElement> deferredTypes =
-        deferredTypeNames
-            .stream()
+        deferredTypeNames.stream()
             .map(deferred -> processingEnv.getElementUtils().getTypeElement(deferred))
             .collect(toImmutableList());
     if (roundEnv.processingOver()) {
@@ -94,8 +93,7 @@ public class J2clAstProcessor extends AbstractProcessor {
         PackageElement packageElement =
             processingEnv.getElementUtils().getPackageElement(packageName);
         List<VisitableClass> classes =
-            ElementFilter.typesIn(packageElement.getEnclosedElements())
-                .stream()
+            ElementFilter.typesIn(packageElement.getEnclosedElements()).stream()
                 .filter(input -> isAnnotationPresent(input, Visitable.class))
                 .map(this::extractVisitableClass)
                 .collect(toImmutableList());
@@ -272,22 +270,22 @@ public class J2clAstProcessor extends AbstractProcessor {
       LinkedHashMultimap.create();
 
   private static final String ABSTRACT_VISITOR_TEMPLATE_FILE =
-      "com/google/j2cl/ast/processors/AbstractVisitorClass.vm";
+      "com/google/j2cl/common/visitor/generator/AbstractVisitorClass.vm";
 
   private static final String ABSTRACT_REWRITER_TEMPLATE_FILE =
-      "com/google/j2cl/ast/processors/AbstractRewriterClass.vm";
+      "com/google/j2cl/common/visitor/generator/AbstractRewriterClass.vm";
 
   private static final String PROCESSOR_PRIVATE_CLASS_TEMPLATE_FILE =
-      "com/google/j2cl/ast/processors/ProcessorPrivateClass.vm";
+      "com/google/j2cl/common/visitor/generator/ProcessorPrivateClass.vm";
 
   private static final String VISITOR_INTERFACE_TEMPLATE_FILE =
-      "com/google/j2cl/ast/processors/VisitorInterface.vm";
+      "com/google/j2cl/common/visitor/generator/VisitorInterface.vm";
 
   private static final String REWRITER_INTERFACE_TEMPLATE_FILE =
-      "com/google/j2cl/ast/processors/RewriterInterface.vm";
+      "com/google/j2cl/common/visitor/generator/RewriterInterface.vm";
 
   private static final String VISITABLE_CLASS_TEMPLATE_FILE =
-      "com/google/j2cl/ast/processors/Visitable_Class.vm";
+      "com/google/j2cl/common/visitor/generator/Visitable_Class.vm";
 
   private static final VelocityEngine velocityEngine = VelocityUtil.createEngine();
 
@@ -373,8 +371,7 @@ public class J2clAstProcessor extends AbstractProcessor {
   }
 
   private boolean hasAcceptMethod(final TypeElement typeElement) {
-    return ElementFilter.methodsIn(typeElement.getEnclosedElements())
-        .stream()
+    return ElementFilter.methodsIn(typeElement.getEnclosedElements()).stream()
         .anyMatch(
             executableElement ->
                 executableElement.getSimpleName().contentEquals("accept")

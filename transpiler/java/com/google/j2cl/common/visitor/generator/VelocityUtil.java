@@ -13,22 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.google.j2cl.ast.processors;
+package com.google.j2cl.common.visitor.generator;
 
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 
-/**
- * Utility methods for using Apache Velocity.
- */
+/** Utility methods for using Apache Velocity. */
 class VelocityUtil {
   private static final String CLASSPATH_RESOURCE_LOADER_CLASS = "classpath.resource.loader.class";
 
-  /**
-   * Creates and returns a VelocityEngine that will find templates on the
-   * classpath.
-   */
+  /** Creates and returns a VelocityEngine that will find templates on the classpath. */
   public static VelocityEngine createEngine() {
     VelocityEngine velocityEngine = new VelocityEngine();
     velocityEngine.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
