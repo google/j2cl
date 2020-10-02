@@ -15,7 +15,7 @@
  */
 package com.google.j2cl.transpiler.integration.jsconstructor;
 
-import static com.google.j2cl.transpiler.utils.Asserts.assertTrue;
+import static com.google.j2cl.transpiler.utils.Asserts.assertEquals;
 
 import com.google.j2cl.transpiler.integration.jsconstructor.JsConstructorClass.A;
 import com.google.j2cl.transpiler.integration.jsconstructor.JsConstructorClass.B;
@@ -27,44 +27,44 @@ import com.google.j2cl.transpiler.integration.jsconstructor.JsConstructorClass.F
 public class Main {
   public static void main(String... args) {
     A a1 = new A();
-    assertTrue((a1.fA == 1));
+    assertEquals(1, a1.fA);
     A a2 = new A(10);
-    assertTrue((a2.fA == 10));
+    assertEquals(10, a2.fA);
     B b1 = new B(5);
-    assertTrue((b1.fA == 6));
-    assertTrue((b1.fB == 5));
+    assertEquals(6, b1.fA);
+    assertEquals(5, b1.fB);
     B b2 = new B();
-    assertTrue((b2.fA == 11));
-    assertTrue((b2.fB == 9));
+    assertEquals(11, b2.fA);
+    assertEquals(9, b2.fB);
     B b3 = new B(5, 6);
-    assertTrue((b3.fA == 12));
-    assertTrue((b3.fB == 35));
+    assertEquals(12, b3.fA);
+    assertEquals(35, b3.fB);
     C c1 = new C(10);
-    assertTrue((c1.fA == 21));
-    assertTrue((c1.fB == 5));
-    assertTrue((c1.fC == 7));
+    assertEquals(21, c1.fA);
+    assertEquals(5, c1.fB);
+    assertEquals(7, c1.fC);
     C c2 = new C(10, 20);
-    assertTrue((c2.fA == 61));
-    assertTrue((c2.fB == 5));
-    assertTrue((c2.fC == 14));
+    assertEquals(61, c2.fA);
+    assertEquals(5, c2.fB);
+    assertEquals(14, c2.fC);
     D d1 = new D();
-    assertTrue((d1.fA == 10));
-    assertTrue((d1.fB == 5));
-    assertTrue((d1.fD == 18));
+    assertEquals(10, d1.fA);
+    assertEquals(5, d1.fB);
+    assertEquals(18, d1.fD);
     D d2 = new D(11);
-    assertTrue((d2.fA == 10));
-    assertTrue((d2.fB == 5));
-    assertTrue((d2.fD == 29));
+    assertEquals(10, d2.fA);
+    assertEquals(5, d2.fB);
+    assertEquals(29, d2.fD);
     E e = new E();
-    assertTrue((e.fA == 21));
-    assertTrue((e.fB == 5));
-    assertTrue((e.fC == 7));
-    assertTrue((e.fE == 23));
+    assertEquals(21, e.fA);
+    assertEquals(5, e.fB);
+    assertEquals(7, e.fC);
+    assertEquals(23, e.fE);
     F f = new F(12);
-    assertTrue((f.fA == 29));
-    assertTrue((f.fB == 5));
-    assertTrue((f.fC == 7));
-    assertTrue((f.fF == 28));
+    assertEquals(29, f.fA);
+    assertEquals(5, f.fB);
+    assertEquals(7, f.fC);
+    assertEquals(28, f.fF);
 
     InstanceInitOrder.test();
     StaticInitOrder.test();
