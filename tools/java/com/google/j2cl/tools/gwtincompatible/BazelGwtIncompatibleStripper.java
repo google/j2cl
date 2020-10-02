@@ -15,8 +15,8 @@
  */
 package com.google.j2cl.tools.gwtincompatible;
 
-import com.google.j2cl.bazel.BazelWorker;
 import com.google.j2cl.common.Problems;
+import com.google.j2cl.common.bazel.BazelWorker;
 import java.util.ArrayList;
 import java.util.List;
 import org.kohsuke.args4j.Argument;

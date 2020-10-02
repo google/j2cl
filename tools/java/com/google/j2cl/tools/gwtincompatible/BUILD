@@ -38,8 +38,8 @@ java_library(
     deps = [
         ":gwtincompatible_lib",
         "//third_party:args4j",
-        "//transpiler/java/com/google/j2cl/bazel",
         "//transpiler/java/com/google/j2cl/common",
+        "//transpiler/java/com/google/j2cl/common/bazel",
     ],
 )
 

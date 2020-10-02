@@ -13,8 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.bazel;
-
+package com.google.j2cl.common.bazel;
 
 import com.google.common.base.Splitter;
 import com.google.common.collect.Iterables;

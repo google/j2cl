@@ -34,8 +34,8 @@ java_library(
         "//third_party:args4j",
         "//third_party:auto_value",
         "//third_party:guava",
-        "//transpiler/java/com/google/j2cl/bazel",
         "//transpiler/java/com/google/j2cl/common",
+        "//transpiler/java/com/google/j2cl/common/bazel",
         "//transpiler/java/com/google/j2cl/libraryinfo",
     ],
 )

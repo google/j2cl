@@ -19,9 +19,9 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.io.CharSink;
 import com.google.common.io.Files;
-import com.google.j2cl.bazel.BazelWorker;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
+import com.google.j2cl.common.bazel.BazelWorker;
 import com.google.j2cl.libraryinfo.LibraryInfo;
 import java.io.File;
 import java.io.FileOutputStream;

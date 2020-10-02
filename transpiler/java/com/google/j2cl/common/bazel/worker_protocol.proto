@@ -43,12 +43,13 @@ message WorkRequest {
   repeated Input inputs = 2;
 }
 
-// The worker sends this message to Blaze when it finished its work on the WorkRequest message.
+// The worker sends this message to Blaze when it finished its work on the
+// WorkRequest message.
 message WorkResponse {
   int32 exit_code = 1;
 
-  // This is printed to the user after the WorkResponse has been received and is supposed to contain
-  // compiler warnings / errors etc. - thus we'll use a string type here, which gives us UTF-8
-  // encoding.
+  // This is printed to the user after the WorkResponse has been received and is
+  // supposed to contain compiler warnings / errors etc. - thus we'll use a
+  // string type here, which gives us UTF-8 encoding.
   string output = 2;
 }
