@@ -15,15 +15,15 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import com.google.j2cl.ast.AstUtils;
-import com.google.j2cl.ast.CastExpression;
-import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.Expression;
-import com.google.j2cl.ast.NumberLiteral;
-import com.google.j2cl.ast.PrimitiveTypeDescriptor;
-import com.google.j2cl.ast.RuntimeMethods;
-import com.google.j2cl.ast.TypeDescriptor;
-import com.google.j2cl.ast.TypeDescriptors;
+import com.google.j2cl.transpiler.ast.AstUtils;
+import com.google.j2cl.transpiler.ast.CastExpression;
+import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.Expression;
+import com.google.j2cl.transpiler.ast.NumberLiteral;
+import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
+import com.google.j2cl.transpiler.ast.RuntimeMethods;
+import com.google.j2cl.transpiler.ast.TypeDescriptor;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
 
 /**
  * Inserts a widening operation when a smaller primitive type is being put into a large primitive

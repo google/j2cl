@@ -15,10 +15,10 @@
  */
 package com.google.j2cl.transpiler.frontend.jdt;
 
-import com.google.j2cl.ast.JsEnumInfo;
-import com.google.j2cl.ast.JsInfo;
-import com.google.j2cl.ast.JsMemberType;
-import com.google.j2cl.ast.PrimitiveTypes;
+import com.google.j2cl.transpiler.ast.JsEnumInfo;
+import com.google.j2cl.transpiler.ast.JsInfo;
+import com.google.j2cl.transpiler.ast.JsMemberType;
+import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import org.eclipse.jdt.core.dom.IAnnotationBinding;
 import org.eclipse.jdt.core.dom.IBinding;
 import org.eclipse.jdt.core.dom.IMethodBinding;
@@ -26,9 +26,7 @@ import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.IVariableBinding;
 import org.eclipse.jdt.core.dom.Modifier;
 
-/**
- * Utility functions for JsInterop properties.
- */
+/** Utility functions for JsInterop properties. */
 public class JsInteropUtils {
   /**
    * Simply resolve the JsInfo from annotations. Do not do any extra computations. For example, if

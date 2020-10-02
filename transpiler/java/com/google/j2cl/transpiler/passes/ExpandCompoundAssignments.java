@@ -16,20 +16,20 @@
 package com.google.j2cl.transpiler.passes;
 
 import com.google.common.collect.ImmutableList;
-import com.google.j2cl.ast.AbstractRewriter;
-import com.google.j2cl.ast.BinaryExpression;
-import com.google.j2cl.ast.BinaryOperator;
-import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.CompoundOperationsUtils;
-import com.google.j2cl.ast.Expression;
-import com.google.j2cl.ast.ExpressionStatement;
-import com.google.j2cl.ast.ForStatement;
-import com.google.j2cl.ast.PostfixExpression;
-import com.google.j2cl.ast.PrefixExpression;
-import com.google.j2cl.ast.PrimitiveTypes;
-import com.google.j2cl.ast.TypeDescriptor;
-import com.google.j2cl.ast.TypeDescriptors;
-import com.google.j2cl.ast.UnaryExpression;
+import com.google.j2cl.transpiler.ast.AbstractRewriter;
+import com.google.j2cl.transpiler.ast.BinaryExpression;
+import com.google.j2cl.transpiler.ast.BinaryOperator;
+import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.CompoundOperationsUtils;
+import com.google.j2cl.transpiler.ast.Expression;
+import com.google.j2cl.transpiler.ast.ExpressionStatement;
+import com.google.j2cl.transpiler.ast.ForStatement;
+import com.google.j2cl.transpiler.ast.PostfixExpression;
+import com.google.j2cl.transpiler.ast.PrefixExpression;
+import com.google.j2cl.transpiler.ast.PrimitiveTypes;
+import com.google.j2cl.transpiler.ast.TypeDescriptor;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
+import com.google.j2cl.transpiler.ast.UnaryExpression;
 
 /** Expands compound assignments where conversions need to be performed. */
 public class ExpandCompoundAssignments extends NormalizationPass {

@@ -15,14 +15,14 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import com.google.j2cl.ast.AbstractRewriter;
-import com.google.j2cl.ast.Block;
-import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.DoWhileStatement;
-import com.google.j2cl.ast.ForStatement;
-import com.google.j2cl.ast.IfStatement;
-import com.google.j2cl.ast.Statement;
-import com.google.j2cl.ast.WhileStatement;
+import com.google.j2cl.transpiler.ast.AbstractRewriter;
+import com.google.j2cl.transpiler.ast.Block;
+import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.DoWhileStatement;
+import com.google.j2cl.transpiler.ast.ForStatement;
+import com.google.j2cl.transpiler.ast.IfStatement;
+import com.google.j2cl.transpiler.ast.Statement;
+import com.google.j2cl.transpiler.ast.WhileStatement;
 
 /** Makes sure that body of conditional are always blocks (except in the else if case). */
 public class ControlStatementFormatter extends NormalizationPass {

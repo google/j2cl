@@ -15,19 +15,19 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import com.google.j2cl.ast.AbstractRewriter;
-import com.google.j2cl.ast.ArrayAccess;
-import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.ConditionalExpression;
-import com.google.j2cl.ast.Expression;
-import com.google.j2cl.ast.FieldAccess;
-import com.google.j2cl.ast.JsDocCastExpression;
-import com.google.j2cl.ast.MethodCall;
-import com.google.j2cl.ast.MethodDescriptor;
-import com.google.j2cl.ast.MultiExpression;
-import com.google.j2cl.ast.Node;
-import com.google.j2cl.ast.Variable;
-import com.google.j2cl.ast.VariableDeclarationExpression;
+import com.google.j2cl.transpiler.ast.AbstractRewriter;
+import com.google.j2cl.transpiler.ast.ArrayAccess;
+import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.ConditionalExpression;
+import com.google.j2cl.transpiler.ast.Expression;
+import com.google.j2cl.transpiler.ast.FieldAccess;
+import com.google.j2cl.transpiler.ast.JsDocCastExpression;
+import com.google.j2cl.transpiler.ast.MethodCall;
+import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.MultiExpression;
+import com.google.j2cl.transpiler.ast.Node;
+import com.google.j2cl.transpiler.ast.Variable;
+import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 
 /**
  * Normalizes @JsFunction property invocations so that they don't capture the qualifier

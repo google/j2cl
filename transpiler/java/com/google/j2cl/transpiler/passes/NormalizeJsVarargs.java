@@ -16,23 +16,23 @@
 package com.google.j2cl.transpiler.passes;
 
 import com.google.common.collect.Iterables;
-import com.google.j2cl.ast.AbstractRewriter;
-import com.google.j2cl.ast.ArrayLiteral;
-import com.google.j2cl.ast.ArrayTypeDescriptor;
-import com.google.j2cl.ast.Block;
-import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.Expression;
-import com.google.j2cl.ast.FunctionExpression;
-import com.google.j2cl.ast.Invocation;
-import com.google.j2cl.ast.Method;
-import com.google.j2cl.ast.MethodCall;
-import com.google.j2cl.ast.MethodDescriptor;
-import com.google.j2cl.ast.NewArray;
-import com.google.j2cl.ast.Node;
-import com.google.j2cl.ast.NumberLiteral;
-import com.google.j2cl.ast.RuntimeMethods;
-import com.google.j2cl.ast.Statement;
-import com.google.j2cl.ast.Variable;
+import com.google.j2cl.transpiler.ast.AbstractRewriter;
+import com.google.j2cl.transpiler.ast.ArrayLiteral;
+import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
+import com.google.j2cl.transpiler.ast.Block;
+import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.Expression;
+import com.google.j2cl.transpiler.ast.FunctionExpression;
+import com.google.j2cl.transpiler.ast.Invocation;
+import com.google.j2cl.transpiler.ast.Method;
+import com.google.j2cl.transpiler.ast.MethodCall;
+import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.NewArray;
+import com.google.j2cl.transpiler.ast.Node;
+import com.google.j2cl.transpiler.ast.NumberLiteral;
+import com.google.j2cl.transpiler.ast.RuntimeMethods;
+import com.google.j2cl.transpiler.ast.Statement;
+import com.google.j2cl.transpiler.ast.Variable;
 import java.util.List;
 
 /**

@@ -16,11 +16,11 @@
 package com.google.j2cl.transpiler.passes;
 
 import com.google.common.collect.ImmutableList;
-import com.google.j2cl.ast.AbstractRewriter;
-import com.google.j2cl.ast.AssertStatement;
-import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.RuntimeMethods;
-import com.google.j2cl.ast.Statement;
+import com.google.j2cl.transpiler.ast.AbstractRewriter;
+import com.google.j2cl.transpiler.ast.AssertStatement;
+import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.RuntimeMethods;
+import com.google.j2cl.transpiler.ast.Statement;
 
 /** Replaces assert statements with the corresponding method call to the runtime. */
 public class ImplementAssertStatements extends NormalizationPass {

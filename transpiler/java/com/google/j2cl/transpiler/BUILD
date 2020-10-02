@@ -11,8 +11,8 @@ java_library(
     deps = [
         "//third_party:auto_value",
         "//third_party:guava",
-        "//transpiler/java/com/google/j2cl/ast",
         "//transpiler/java/com/google/j2cl/common",
+        "//transpiler/java/com/google/j2cl/transpiler/ast",
         "//transpiler/java/com/google/j2cl/transpiler/backend/closure",
         "//transpiler/java/com/google/j2cl/transpiler/frontend",
         "//transpiler/java/com/google/j2cl/transpiler/passes",

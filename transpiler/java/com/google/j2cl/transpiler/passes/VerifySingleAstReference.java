@@ -17,15 +17,15 @@ package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkState;
 
-import com.google.j2cl.ast.AbstractVisitor;
-import com.google.j2cl.ast.BooleanLiteral;
-import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.Node;
-import com.google.j2cl.ast.NullLiteral;
-import com.google.j2cl.ast.NumberLiteral;
-import com.google.j2cl.ast.Statement;
-import com.google.j2cl.ast.StringLiteral;
-import com.google.j2cl.ast.VariableReference;
+import com.google.j2cl.transpiler.ast.AbstractVisitor;
+import com.google.j2cl.transpiler.ast.BooleanLiteral;
+import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.Node;
+import com.google.j2cl.transpiler.ast.NullLiteral;
+import com.google.j2cl.transpiler.ast.NumberLiteral;
+import com.google.j2cl.transpiler.ast.Statement;
+import com.google.j2cl.transpiler.ast.StringLiteral;
+import com.google.j2cl.transpiler.ast.VariableReference;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.HashMap;

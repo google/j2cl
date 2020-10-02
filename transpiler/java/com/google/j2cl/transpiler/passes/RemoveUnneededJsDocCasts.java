@@ -19,15 +19,15 @@ import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.collect.Iterables;
-import com.google.j2cl.ast.AbstractRewriter;
-import com.google.j2cl.ast.AstUtils;
-import com.google.j2cl.ast.CastExpression;
-import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.Expression;
-import com.google.j2cl.ast.ExpressionStatement;
-import com.google.j2cl.ast.JsDocCastExpression;
-import com.google.j2cl.ast.MultiExpression;
-import com.google.j2cl.ast.Node;
+import com.google.j2cl.transpiler.ast.AbstractRewriter;
+import com.google.j2cl.transpiler.ast.AstUtils;
+import com.google.j2cl.transpiler.ast.CastExpression;
+import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.Expression;
+import com.google.j2cl.transpiler.ast.ExpressionStatement;
+import com.google.j2cl.transpiler.ast.JsDocCastExpression;
+import com.google.j2cl.transpiler.ast.MultiExpression;
+import com.google.j2cl.transpiler.ast.Node;
 
 /** Removes unneeded JsDocAnnotations that arise from transformations. */
 public final class RemoveUnneededJsDocCasts extends NormalizationPass {

@@ -16,12 +16,12 @@
 package com.google.j2cl.transpiler.passes;
 
 import com.google.common.collect.Iterables;
-import com.google.j2cl.ast.AbstractRewriter;
-import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.Expression;
-import com.google.j2cl.ast.MethodCall;
-import com.google.j2cl.ast.MethodDescriptor;
-import com.google.j2cl.ast.TypeDescriptors;
+import com.google.j2cl.transpiler.ast.AbstractRewriter;
+import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.Expression;
+import com.google.j2cl.transpiler.ast.MethodCall;
+import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
 
 /** Rewrites String.equals to == when called on a non null string. */
 public class RewriteStringEquals extends NormalizationPass {

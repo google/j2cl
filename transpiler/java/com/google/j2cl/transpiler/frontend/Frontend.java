@@ -15,9 +15,9 @@
  */
 package com.google.j2cl.transpiler.frontend;
 
-import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourceUtils.FileInfo;
+import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.frontend.common.PackageInfoCache;
 import com.google.j2cl.transpiler.frontend.javac.JavacParser;
 import com.google.j2cl.transpiler.frontend.jdt.CompilationUnitBuilder;

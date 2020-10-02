@@ -17,29 +17,29 @@ package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkState;
 
-import com.google.j2cl.ast.AstUtils;
-import com.google.j2cl.ast.BinaryExpression;
-import com.google.j2cl.ast.BooleanLiteral;
-import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.DeclaredTypeDescriptor;
-import com.google.j2cl.ast.Expression;
-import com.google.j2cl.ast.ExpressionStatement;
-import com.google.j2cl.ast.FieldAccess;
-import com.google.j2cl.ast.InstanceOfExpression;
-import com.google.j2cl.ast.JavaScriptConstructorReference;
-import com.google.j2cl.ast.JsDocCastExpression;
-import com.google.j2cl.ast.Method;
-import com.google.j2cl.ast.MethodCall;
-import com.google.j2cl.ast.MethodDescriptor;
-import com.google.j2cl.ast.NullLiteral;
-import com.google.j2cl.ast.PrimitiveTypes;
-import com.google.j2cl.ast.ReturnStatement;
-import com.google.j2cl.ast.RuntimeMethods;
-import com.google.j2cl.ast.Type;
-import com.google.j2cl.ast.TypeDeclaration;
-import com.google.j2cl.ast.TypeDescriptors;
-import com.google.j2cl.ast.Variable;
 import com.google.j2cl.common.SourcePosition;
+import com.google.j2cl.transpiler.ast.AstUtils;
+import com.google.j2cl.transpiler.ast.BinaryExpression;
+import com.google.j2cl.transpiler.ast.BooleanLiteral;
+import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
+import com.google.j2cl.transpiler.ast.Expression;
+import com.google.j2cl.transpiler.ast.ExpressionStatement;
+import com.google.j2cl.transpiler.ast.FieldAccess;
+import com.google.j2cl.transpiler.ast.InstanceOfExpression;
+import com.google.j2cl.transpiler.ast.JavaScriptConstructorReference;
+import com.google.j2cl.transpiler.ast.JsDocCastExpression;
+import com.google.j2cl.transpiler.ast.Method;
+import com.google.j2cl.transpiler.ast.MethodCall;
+import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.NullLiteral;
+import com.google.j2cl.transpiler.ast.PrimitiveTypes;
+import com.google.j2cl.transpiler.ast.ReturnStatement;
+import com.google.j2cl.transpiler.ast.RuntimeMethods;
+import com.google.j2cl.transpiler.ast.Type;
+import com.google.j2cl.transpiler.ast.TypeDeclaration;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
+import com.google.j2cl.transpiler.ast.Variable;
 
 /** Implements the static $isInstance methods used to support Java instanceof semantics. */
 public class ImplementInstanceOfs extends NormalizationPass {

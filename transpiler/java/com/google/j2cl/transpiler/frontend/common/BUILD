@@ -16,7 +16,7 @@ java_library(
         "//third_party:guava",
         "//third_party:gwt-jsinterop-annotations",
         "//third_party:jsr305_annotations",
-        "//transpiler/java/com/google/j2cl/ast",
         "//transpiler/java/com/google/j2cl/common",
+        "//transpiler/java/com/google/j2cl/transpiler/ast",
     ],
 )

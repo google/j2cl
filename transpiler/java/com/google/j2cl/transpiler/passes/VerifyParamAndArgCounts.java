@@ -17,11 +17,11 @@ package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkState;
 
-import com.google.j2cl.ast.AbstractVisitor;
-import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.Invocation;
-import com.google.j2cl.ast.Method;
-import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.AbstractVisitor;
+import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.Invocation;
+import com.google.j2cl.transpiler.ast.Method;
+import com.google.j2cl.transpiler.ast.MethodDescriptor;
 
 /**
  * Verifies that the method call argument counts match the method descriptor parameter counts and

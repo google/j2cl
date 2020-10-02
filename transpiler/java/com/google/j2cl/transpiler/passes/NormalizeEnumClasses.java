@@ -15,26 +15,26 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import com.google.j2cl.ast.AbstractRewriter;
-import com.google.j2cl.ast.AstUtils;
-import com.google.j2cl.ast.BinaryExpression;
-import com.google.j2cl.ast.Expression;
-import com.google.j2cl.ast.Field;
-import com.google.j2cl.ast.FieldAccess;
-import com.google.j2cl.ast.FieldDescriptor;
-import com.google.j2cl.ast.Method;
-import com.google.j2cl.ast.MethodCall;
-import com.google.j2cl.ast.NewInstance;
-import com.google.j2cl.ast.Node;
-import com.google.j2cl.ast.NumberLiteral;
-import com.google.j2cl.ast.PrimitiveTypes;
-import com.google.j2cl.ast.RuntimeMethods;
-import com.google.j2cl.ast.StringLiteral;
-import com.google.j2cl.ast.Type;
-import com.google.j2cl.ast.TypeDescriptors;
-import com.google.j2cl.ast.Variable;
-import com.google.j2cl.ast.VariableReference;
-import com.google.j2cl.ast.Visibility;
+import com.google.j2cl.transpiler.ast.AbstractRewriter;
+import com.google.j2cl.transpiler.ast.AstUtils;
+import com.google.j2cl.transpiler.ast.BinaryExpression;
+import com.google.j2cl.transpiler.ast.Expression;
+import com.google.j2cl.transpiler.ast.Field;
+import com.google.j2cl.transpiler.ast.FieldAccess;
+import com.google.j2cl.transpiler.ast.FieldDescriptor;
+import com.google.j2cl.transpiler.ast.Method;
+import com.google.j2cl.transpiler.ast.MethodCall;
+import com.google.j2cl.transpiler.ast.NewInstance;
+import com.google.j2cl.transpiler.ast.Node;
+import com.google.j2cl.transpiler.ast.NumberLiteral;
+import com.google.j2cl.transpiler.ast.PrimitiveTypes;
+import com.google.j2cl.transpiler.ast.RuntimeMethods;
+import com.google.j2cl.transpiler.ast.StringLiteral;
+import com.google.j2cl.transpiler.ast.Type;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
+import com.google.j2cl.transpiler.ast.Variable;
+import com.google.j2cl.transpiler.ast.VariableReference;
+import com.google.j2cl.transpiler.ast.Visibility;
 import java.util.ArrayList;
 import java.util.List;
 

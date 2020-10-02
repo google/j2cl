@@ -15,11 +15,11 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import com.google.j2cl.ast.AbstractRewriter;
-import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.EmptyStatement;
-import com.google.j2cl.ast.ExpressionStatement;
-import com.google.j2cl.ast.Statement;
+import com.google.j2cl.transpiler.ast.AbstractRewriter;
+import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.EmptyStatement;
+import com.google.j2cl.transpiler.ast.ExpressionStatement;
+import com.google.j2cl.transpiler.ast.Statement;
 
 /**
  * Removes trivial statements that have no effect.

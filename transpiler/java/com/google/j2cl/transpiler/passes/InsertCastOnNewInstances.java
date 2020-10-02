@@ -13,11 +13,11 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import com.google.j2cl.ast.AbstractRewriter;
-import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.JsDocCastExpression;
-import com.google.j2cl.ast.NewInstance;
-import com.google.j2cl.ast.Node;
+import com.google.j2cl.transpiler.ast.AbstractRewriter;
+import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.JsDocCastExpression;
+import com.google.j2cl.transpiler.ast.NewInstance;
+import com.google.j2cl.transpiler.ast.Node;
 
 /** Inserts type annotation for 'new' a generic type or a JsFunction type. */
 public class InsertCastOnNewInstances extends NormalizationPass {

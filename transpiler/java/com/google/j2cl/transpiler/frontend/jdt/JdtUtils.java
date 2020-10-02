@@ -22,32 +22,32 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
-import com.google.j2cl.ast.ArrayLength;
-import com.google.j2cl.ast.ArrayTypeDescriptor;
-import com.google.j2cl.ast.BinaryOperator;
-import com.google.j2cl.ast.DeclaredTypeDescriptor;
-import com.google.j2cl.ast.Expression;
-import com.google.j2cl.ast.FieldAccess;
-import com.google.j2cl.ast.FieldDescriptor;
-import com.google.j2cl.ast.IntersectionTypeDescriptor;
-import com.google.j2cl.ast.JsEnumInfo;
-import com.google.j2cl.ast.JsInfo;
-import com.google.j2cl.ast.JsMemberType;
-import com.google.j2cl.ast.Kind;
-import com.google.j2cl.ast.MethodDescriptor;
-import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
-import com.google.j2cl.ast.PostfixOperator;
-import com.google.j2cl.ast.PrefixOperator;
-import com.google.j2cl.ast.PrimitiveTypeDescriptor;
-import com.google.j2cl.ast.PrimitiveTypes;
-import com.google.j2cl.ast.TypeDeclaration;
-import com.google.j2cl.ast.TypeDescriptor;
-import com.google.j2cl.ast.TypeDescriptors;
-import com.google.j2cl.ast.TypeVariable;
-import com.google.j2cl.ast.Variable;
-import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.common.InternalCompilerError;
 import com.google.j2cl.common.SourcePosition;
+import com.google.j2cl.transpiler.ast.ArrayLength;
+import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
+import com.google.j2cl.transpiler.ast.BinaryOperator;
+import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
+import com.google.j2cl.transpiler.ast.Expression;
+import com.google.j2cl.transpiler.ast.FieldAccess;
+import com.google.j2cl.transpiler.ast.FieldDescriptor;
+import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor;
+import com.google.j2cl.transpiler.ast.JsEnumInfo;
+import com.google.j2cl.transpiler.ast.JsInfo;
+import com.google.j2cl.transpiler.ast.JsMemberType;
+import com.google.j2cl.transpiler.ast.Kind;
+import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
+import com.google.j2cl.transpiler.ast.PostfixOperator;
+import com.google.j2cl.transpiler.ast.PrefixOperator;
+import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
+import com.google.j2cl.transpiler.ast.PrimitiveTypes;
+import com.google.j2cl.transpiler.ast.TypeDeclaration;
+import com.google.j2cl.transpiler.ast.TypeDescriptor;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
+import com.google.j2cl.transpiler.ast.TypeVariable;
+import com.google.j2cl.transpiler.ast.Variable;
+import com.google.j2cl.transpiler.ast.Visibility;
 import com.google.j2cl.transpiler.frontend.common.PackageInfoCache;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -529,7 +529,8 @@ class JdtUtils {
 
     if (capturesEnclosingInstance(typeBinding.getTypeDeclaration())) {
       // Find type parameters in the enclosing scope and copy them over as well.
-      createDeclaredTypeDescriptor(typeBinding.getDeclaringClass()).getTypeArgumentDescriptors()
+      createDeclaredTypeDescriptor(typeBinding.getDeclaringClass())
+          .getTypeArgumentDescriptors()
           .stream()
           .map(clazz::cast)
           .forEach(typeArgumentDescriptorsBuilder::add);
@@ -894,8 +895,7 @@ class JdtUtils {
 
   private static <T extends TypeDescriptor> ImmutableList<T> createTypeDescriptors(
       List<ITypeBinding> typeBindings, Class<T> clazz) {
-    return typeBindings
-        .stream()
+    return typeBindings.stream()
         .map(typeBinding -> createTypeDescriptor(typeBinding, clazz))
         .collect(toImmutableList());
   }

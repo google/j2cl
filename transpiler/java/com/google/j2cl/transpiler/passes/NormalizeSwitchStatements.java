@@ -18,17 +18,17 @@ package com.google.j2cl.transpiler.passes;
 import static com.google.common.base.Preconditions.checkArgument;
 
 import com.google.common.collect.ImmutableList;
-import com.google.j2cl.ast.AbstractRewriter;
-import com.google.j2cl.ast.AstUtils;
-import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.Expression;
-import com.google.j2cl.ast.FieldAccess;
-import com.google.j2cl.ast.MethodCall;
-import com.google.j2cl.ast.RuntimeMethods;
-import com.google.j2cl.ast.SwitchCase;
-import com.google.j2cl.ast.SwitchStatement;
-import com.google.j2cl.ast.TypeDescriptor;
-import com.google.j2cl.ast.TypeDescriptors;
+import com.google.j2cl.transpiler.ast.AbstractRewriter;
+import com.google.j2cl.transpiler.ast.AstUtils;
+import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.Expression;
+import com.google.j2cl.transpiler.ast.FieldAccess;
+import com.google.j2cl.transpiler.ast.MethodCall;
+import com.google.j2cl.transpiler.ast.RuntimeMethods;
+import com.google.j2cl.transpiler.ast.SwitchCase;
+import com.google.j2cl.transpiler.ast.SwitchStatement;
+import com.google.j2cl.transpiler.ast.TypeDescriptor;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
 
 /** Makes switch statements to comply with Java semantics. */
 public class NormalizeSwitchStatements extends NormalizationPass {

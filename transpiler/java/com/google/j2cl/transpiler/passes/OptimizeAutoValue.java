@@ -15,17 +15,17 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import com.google.j2cl.ast.DeclaredTypeDescriptor;
-import com.google.j2cl.ast.JavaScriptConstructorReference;
-import com.google.j2cl.ast.JsInfo;
-import com.google.j2cl.ast.Method;
-import com.google.j2cl.ast.MethodCall;
-import com.google.j2cl.ast.MethodDescriptor;
-import com.google.j2cl.ast.NumberLiteral;
-import com.google.j2cl.ast.PrimitiveTypes;
-import com.google.j2cl.ast.Type;
-import com.google.j2cl.ast.TypeDeclaration;
-import com.google.j2cl.ast.TypeDescriptors;
+import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
+import com.google.j2cl.transpiler.ast.JavaScriptConstructorReference;
+import com.google.j2cl.transpiler.ast.JsInfo;
+import com.google.j2cl.transpiler.ast.Method;
+import com.google.j2cl.transpiler.ast.MethodCall;
+import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.NumberLiteral;
+import com.google.j2cl.transpiler.ast.PrimitiveTypes;
+import com.google.j2cl.transpiler.ast.Type;
+import com.google.j2cl.transpiler.ast.TypeDeclaration;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
 
 /** Optimize AutoValue generated classes to reduce their code size. */
 public class OptimizeAutoValue extends NormalizationPass {

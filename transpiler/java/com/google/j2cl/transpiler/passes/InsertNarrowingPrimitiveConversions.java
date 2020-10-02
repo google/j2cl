@@ -16,14 +16,14 @@
 package com.google.j2cl.transpiler.passes;
 
 import com.google.common.collect.Sets;
-import com.google.j2cl.ast.CastExpression;
-import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.Expression;
-import com.google.j2cl.ast.NumberLiteral;
-import com.google.j2cl.ast.PrimitiveTypeDescriptor;
-import com.google.j2cl.ast.PrimitiveTypes;
-import com.google.j2cl.ast.RuntimeMethods;
-import com.google.j2cl.ast.TypeDescriptor;
+import com.google.j2cl.transpiler.ast.CastExpression;
+import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.Expression;
+import com.google.j2cl.transpiler.ast.NumberLiteral;
+import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
+import com.google.j2cl.transpiler.ast.PrimitiveTypes;
+import com.google.j2cl.transpiler.ast.RuntimeMethods;
+import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import java.util.Set;
 
 /**

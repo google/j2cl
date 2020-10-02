@@ -15,11 +15,11 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import com.google.j2cl.ast.CastExpression;
-import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.Expression;
-import com.google.j2cl.ast.TypeDescriptor;
-import com.google.j2cl.ast.TypeDescriptors;
+import com.google.j2cl.transpiler.ast.CastExpression;
+import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.Expression;
+import com.google.j2cl.transpiler.ast.TypeDescriptor;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
 
 /**
  * Inserts a narrowing operation when a non-boxed reference type is being put into a primitive type

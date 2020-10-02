@@ -25,9 +25,7 @@ import org.eclipse.jdt.internal.compiler.impl.StringConstant;
 import org.eclipse.jdt.internal.compiler.lookup.AnnotationBinding;
 import org.eclipse.jdt.internal.compiler.lookup.ElementValuePair;
 
-/**
- * Utility functions to process JDT annotations.
- */
+/** Utility functions to process JDT annotations. */
 public class JdtAnnotationUtils {
   static IAnnotationBinding findAnnotationBindingByName(
       IAnnotationBinding[] annotations, String name) {

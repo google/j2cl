@@ -15,13 +15,13 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import com.google.j2cl.ast.AbstractRewriter;
-import com.google.j2cl.ast.AbstractVisitor;
-import com.google.j2cl.ast.ArrayLiteral;
-import com.google.j2cl.ast.NewArray;
-import com.google.j2cl.ast.Node;
-import com.google.j2cl.ast.NullLiteral;
-import com.google.j2cl.ast.Type;
+import com.google.j2cl.transpiler.ast.AbstractRewriter;
+import com.google.j2cl.transpiler.ast.AbstractVisitor;
+import com.google.j2cl.transpiler.ast.ArrayLiteral;
+import com.google.j2cl.transpiler.ast.NewArray;
+import com.google.j2cl.transpiler.ast.Node;
+import com.google.j2cl.transpiler.ast.NullLiteral;
+import com.google.j2cl.transpiler.ast.Type;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;

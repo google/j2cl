@@ -16,13 +16,13 @@
 package com.google.j2cl.transpiler.passes;
 
 import com.google.common.collect.ImmutableList;
-import com.google.j2cl.ast.AbstractRewriter;
-import com.google.j2cl.ast.Block;
-import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.RuntimeMethods;
-import com.google.j2cl.ast.Statement;
-import com.google.j2cl.ast.SynchronizedStatement;
 import com.google.j2cl.common.SourcePosition;
+import com.google.j2cl.transpiler.ast.AbstractRewriter;
+import com.google.j2cl.transpiler.ast.Block;
+import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.RuntimeMethods;
+import com.google.j2cl.transpiler.ast.Statement;
+import com.google.j2cl.transpiler.ast.SynchronizedStatement;
 
 /** Replaces synchronized statements with the corresponding method call to the runtime. */
 public class ImplementSynchronizedStatements extends NormalizationPass {

@@ -15,15 +15,15 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import com.google.j2cl.ast.ArrayTypeDescriptor;
-import com.google.j2cl.ast.AstUtils;
-import com.google.j2cl.ast.CastExpression;
-import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.DeclaredTypeDescriptor;
-import com.google.j2cl.ast.Expression;
-import com.google.j2cl.ast.MethodDescriptor.ParameterDescriptor;
-import com.google.j2cl.ast.TypeDescriptor;
-import com.google.j2cl.ast.TypeDescriptors;
+import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
+import com.google.j2cl.transpiler.ast.AstUtils;
+import com.google.j2cl.transpiler.ast.CastExpression;
+import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
+import com.google.j2cl.transpiler.ast.Expression;
+import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
+import com.google.j2cl.transpiler.ast.TypeDescriptor;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
 
 /**
  * Inserts a casts needed for type safety due to type erasure.

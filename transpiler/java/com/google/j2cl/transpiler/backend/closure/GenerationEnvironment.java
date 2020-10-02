@@ -18,11 +18,11 @@ package com.google.j2cl.transpiler.backend.closure;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 
-import com.google.j2cl.ast.DeclaredTypeDescriptor;
-import com.google.j2cl.ast.HasName;
-import com.google.j2cl.ast.MethodLike;
-import com.google.j2cl.ast.TypeDeclaration;
-import com.google.j2cl.ast.TypeDescriptor;
+import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
+import com.google.j2cl.transpiler.ast.HasName;
+import com.google.j2cl.transpiler.ast.MethodLike;
+import com.google.j2cl.transpiler.ast.TypeDeclaration;
+import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;

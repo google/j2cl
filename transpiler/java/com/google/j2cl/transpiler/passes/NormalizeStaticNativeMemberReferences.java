@@ -17,15 +17,15 @@ package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
-import com.google.j2cl.ast.AbstractRewriter;
-import com.google.j2cl.ast.AstUtils;
-import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.FieldAccess;
-import com.google.j2cl.ast.FieldDescriptor;
-import com.google.j2cl.ast.JavaScriptConstructorReference;
-import com.google.j2cl.ast.MethodCall;
-import com.google.j2cl.ast.MethodDescriptor;
-import com.google.j2cl.ast.Node;
+import com.google.j2cl.transpiler.ast.AbstractRewriter;
+import com.google.j2cl.transpiler.ast.AstUtils;
+import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.FieldAccess;
+import com.google.j2cl.transpiler.ast.FieldDescriptor;
+import com.google.j2cl.transpiler.ast.JavaScriptConstructorReference;
+import com.google.j2cl.transpiler.ast.MethodCall;
+import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.Node;
 
 /**
  * Normalizes the static native js members accesses.

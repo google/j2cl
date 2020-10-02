@@ -17,14 +17,14 @@ package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import com.google.j2cl.ast.AbstractVisitor;
-import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.FunctionExpression;
-import com.google.j2cl.ast.Member;
-import com.google.j2cl.ast.MemberDescriptor;
-import com.google.j2cl.ast.Node;
-import com.google.j2cl.ast.Statement;
 import com.google.j2cl.common.SourcePosition;
+import com.google.j2cl.transpiler.ast.AbstractVisitor;
+import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.FunctionExpression;
+import com.google.j2cl.transpiler.ast.Member;
+import com.google.j2cl.transpiler.ast.MemberDescriptor;
+import com.google.j2cl.transpiler.ast.Node;
+import com.google.j2cl.transpiler.ast.Statement;
 
 /**
  * Adds method qualified names to source positions for sourcemaps and fills out missing information

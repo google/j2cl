@@ -17,11 +17,11 @@ package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
-import com.google.j2cl.ast.AbstractRewriter;
-import com.google.j2cl.ast.BinaryExpression;
-import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.Node;
-import com.google.j2cl.ast.TypeDescriptors;
+import com.google.j2cl.transpiler.ast.AbstractRewriter;
+import com.google.j2cl.transpiler.ast.BinaryExpression;
+import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.Node;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
 
 /**
  * Normalizes bitwise boolean operations.

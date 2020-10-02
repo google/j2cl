@@ -17,13 +17,13 @@ package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
-import com.google.j2cl.ast.AstUtils;
-import com.google.j2cl.ast.Method;
-import com.google.j2cl.ast.MethodCall;
-import com.google.j2cl.ast.MethodDescriptor;
-import com.google.j2cl.ast.Statement;
-import com.google.j2cl.ast.Type;
 import com.google.j2cl.common.SourcePosition;
+import com.google.j2cl.transpiler.ast.AstUtils;
+import com.google.j2cl.transpiler.ast.Method;
+import com.google.j2cl.transpiler.ast.MethodCall;
+import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.Statement;
+import com.google.j2cl.transpiler.ast.Type;
 import java.util.List;
 import java.util.stream.Collectors;
 

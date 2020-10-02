@@ -15,12 +15,12 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import com.google.j2cl.ast.JavaScriptConstructorReference;
-import com.google.j2cl.ast.RuntimeMethods;
-import com.google.j2cl.ast.StringLiteral;
-import com.google.j2cl.ast.Type;
-import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.common.SourcePosition;
+import com.google.j2cl.transpiler.ast.JavaScriptConstructorReference;
+import com.google.j2cl.transpiler.ast.RuntimeMethods;
+import com.google.j2cl.transpiler.ast.StringLiteral;
+import com.google.j2cl.transpiler.ast.Type;
+import com.google.j2cl.transpiler.ast.TypeDeclaration;
 
 /** Adds support for getClass(). */
 public class ImplementClassMetadata extends NormalizationPass {

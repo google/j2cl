@@ -24,33 +24,33 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.errorprone.annotations.FormatMethod;
-import com.google.j2cl.ast.ArrayTypeDescriptor;
-import com.google.j2cl.ast.AstUtils;
-import com.google.j2cl.ast.BooleanLiteral;
-import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.DeclaredTypeDescriptor;
-import com.google.j2cl.ast.Expression;
-import com.google.j2cl.ast.FieldAccess;
-import com.google.j2cl.ast.FieldDescriptor;
-import com.google.j2cl.ast.FunctionExpression;
-import com.google.j2cl.ast.JavaScriptConstructorReference;
-import com.google.j2cl.ast.MethodDescriptor;
-import com.google.j2cl.ast.MultiExpression;
-import com.google.j2cl.ast.NewArray;
-import com.google.j2cl.ast.NewInstance;
-import com.google.j2cl.ast.NullLiteral;
-import com.google.j2cl.ast.NumberLiteral;
-import com.google.j2cl.ast.ReturnStatement;
-import com.google.j2cl.ast.Statement;
-import com.google.j2cl.ast.StringLiteral;
-import com.google.j2cl.ast.ThisReference;
-import com.google.j2cl.ast.Type;
-import com.google.j2cl.ast.TypeDeclaration;
-import com.google.j2cl.ast.TypeDescriptor;
-import com.google.j2cl.ast.Variable;
-import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.common.InternalCompilerError;
 import com.google.j2cl.common.SourcePosition;
+import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
+import com.google.j2cl.transpiler.ast.AstUtils;
+import com.google.j2cl.transpiler.ast.BooleanLiteral;
+import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
+import com.google.j2cl.transpiler.ast.Expression;
+import com.google.j2cl.transpiler.ast.FieldAccess;
+import com.google.j2cl.transpiler.ast.FieldDescriptor;
+import com.google.j2cl.transpiler.ast.FunctionExpression;
+import com.google.j2cl.transpiler.ast.JavaScriptConstructorReference;
+import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.MultiExpression;
+import com.google.j2cl.transpiler.ast.NewArray;
+import com.google.j2cl.transpiler.ast.NewInstance;
+import com.google.j2cl.transpiler.ast.NullLiteral;
+import com.google.j2cl.transpiler.ast.NumberLiteral;
+import com.google.j2cl.transpiler.ast.ReturnStatement;
+import com.google.j2cl.transpiler.ast.Statement;
+import com.google.j2cl.transpiler.ast.StringLiteral;
+import com.google.j2cl.transpiler.ast.ThisReference;
+import com.google.j2cl.transpiler.ast.Type;
+import com.google.j2cl.transpiler.ast.TypeDeclaration;
+import com.google.j2cl.transpiler.ast.TypeDescriptor;
+import com.google.j2cl.transpiler.ast.Variable;
+import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -465,7 +465,7 @@ public abstract class AbstractCompilationUnitBuilder {
 
     if (getCurrentType().getDeclaration().equals(enclosingClassDeclaration)) {
       return variable.getReference();
-      }
+    }
 
     propagateCaptureOutward(variable);
 
@@ -473,10 +473,10 @@ public abstract class AbstractCompilationUnitBuilder {
     // reference to outer parameter, otherwise, translate to reference to corresponding
     // field created for the captured variable.
     DeclaredTypeDescriptor currentTypeDescriptor = getCurrentType().getTypeDescriptor();
-      FieldDescriptor fieldDescriptor =
-          AstUtils.getFieldDescriptorForCapture(currentTypeDescriptor, variable);
-      ThisReference qualifier = new ThisReference(currentTypeDescriptor);
-      return FieldAccess.Builder.from(fieldDescriptor).setQualifier(qualifier).build();
+    FieldDescriptor fieldDescriptor =
+        AstUtils.getFieldDescriptorForCapture(currentTypeDescriptor, variable);
+    ThisReference qualifier = new ThisReference(currentTypeDescriptor);
+    return FieldAccess.Builder.from(fieldDescriptor).setQualifier(qualifier).build();
   }
 
   /**
@@ -605,10 +605,10 @@ public abstract class AbstractCompilationUnitBuilder {
   @FormatMethod
   protected Error internalCompilerError(String format, Object... params) {
     return new InternalCompilerError(internalCompilerErrorMessage(format, params));
-    }
+  }
 
   @FormatMethod
   protected String internalCompilerErrorMessage(String format, Object... params) {
-      return String.format(format, params) + ", in file: " + currentSourceFile;
+    return String.format(format, params) + ", in file: " + currentSourceFile;
   }
 }

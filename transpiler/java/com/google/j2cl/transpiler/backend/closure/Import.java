@@ -15,7 +15,7 @@
  */
 package com.google.j2cl.transpiler.backend.closure;
 
-import com.google.j2cl.ast.TypeDeclaration;
+import com.google.j2cl.transpiler.ast.TypeDeclaration;
 
 /**
  * A Node class that represents the goog.require statement:

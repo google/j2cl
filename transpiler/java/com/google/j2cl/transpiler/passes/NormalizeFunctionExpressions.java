@@ -16,17 +16,17 @@
 package com.google.j2cl.transpiler.passes;
 
 import com.google.common.collect.ImmutableList;
-import com.google.j2cl.ast.AbstractRewriter;
-import com.google.j2cl.ast.CastExpression;
-import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.FunctionExpression;
-import com.google.j2cl.ast.MethodDescriptor;
-import com.google.j2cl.ast.ReturnStatement;
-import com.google.j2cl.ast.Statement;
-import com.google.j2cl.ast.TypeDescriptor;
-import com.google.j2cl.ast.TypeVariable;
-import com.google.j2cl.ast.Variable;
-import com.google.j2cl.ast.VariableDeclarationExpression;
+import com.google.j2cl.transpiler.ast.AbstractRewriter;
+import com.google.j2cl.transpiler.ast.CastExpression;
+import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.FunctionExpression;
+import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.ReturnStatement;
+import com.google.j2cl.transpiler.ast.Statement;
+import com.google.j2cl.transpiler.ast.TypeDescriptor;
+import com.google.j2cl.transpiler.ast.TypeVariable;
+import com.google.j2cl.transpiler.ast.Variable;
+import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import java.util.ArrayList;
 import java.util.List;
 

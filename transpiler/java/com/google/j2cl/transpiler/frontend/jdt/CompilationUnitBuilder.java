@@ -27,73 +27,73 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.ComparisonChain;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.MoreCollectors;
-import com.google.j2cl.ast.ArrayAccess;
-import com.google.j2cl.ast.ArrayLength;
-import com.google.j2cl.ast.ArrayLiteral;
-import com.google.j2cl.ast.ArrayTypeDescriptor;
-import com.google.j2cl.ast.AssertStatement;
-import com.google.j2cl.ast.AstUtils;
-import com.google.j2cl.ast.BinaryExpression;
-import com.google.j2cl.ast.BinaryOperator;
-import com.google.j2cl.ast.Block;
-import com.google.j2cl.ast.BooleanLiteral;
-import com.google.j2cl.ast.BreakStatement;
-import com.google.j2cl.ast.CastExpression;
-import com.google.j2cl.ast.CatchClause;
-import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.ConditionalExpression;
-import com.google.j2cl.ast.ContinueStatement;
-import com.google.j2cl.ast.DeclaredTypeDescriptor;
-import com.google.j2cl.ast.DoWhileStatement;
-import com.google.j2cl.ast.EmptyStatement;
-import com.google.j2cl.ast.Expression;
-import com.google.j2cl.ast.Expression.Associativity;
-import com.google.j2cl.ast.ExpressionStatement;
-import com.google.j2cl.ast.Field;
-import com.google.j2cl.ast.FieldAccess;
-import com.google.j2cl.ast.FieldDescriptor;
-import com.google.j2cl.ast.ForStatement;
-import com.google.j2cl.ast.FunctionExpression;
-import com.google.j2cl.ast.IfStatement;
-import com.google.j2cl.ast.InstanceOfExpression;
-import com.google.j2cl.ast.JsDocCastExpression;
-import com.google.j2cl.ast.LabeledStatement;
-import com.google.j2cl.ast.Method;
-import com.google.j2cl.ast.MethodCall;
-import com.google.j2cl.ast.MethodDescriptor;
-import com.google.j2cl.ast.NewArray;
-import com.google.j2cl.ast.NewInstance;
-import com.google.j2cl.ast.NullLiteral;
-import com.google.j2cl.ast.NumberLiteral;
-import com.google.j2cl.ast.PostfixExpression;
-import com.google.j2cl.ast.PostfixOperator;
-import com.google.j2cl.ast.PrefixExpression;
-import com.google.j2cl.ast.PrimitiveTypeDescriptor;
-import com.google.j2cl.ast.PrimitiveTypes;
-import com.google.j2cl.ast.ReturnStatement;
-import com.google.j2cl.ast.Statement;
-import com.google.j2cl.ast.StringLiteral;
-import com.google.j2cl.ast.SuperReference;
-import com.google.j2cl.ast.SwitchCase;
-import com.google.j2cl.ast.SwitchStatement;
-import com.google.j2cl.ast.SynchronizedStatement;
-import com.google.j2cl.ast.ThisReference;
-import com.google.j2cl.ast.ThrowStatement;
-import com.google.j2cl.ast.TryStatement;
-import com.google.j2cl.ast.Type;
-import com.google.j2cl.ast.TypeDeclaration;
-import com.google.j2cl.ast.TypeDescriptor;
-import com.google.j2cl.ast.TypeDescriptors;
-import com.google.j2cl.ast.TypeLiteral;
-import com.google.j2cl.ast.UnaryExpression;
-import com.google.j2cl.ast.UnionTypeDescriptor;
-import com.google.j2cl.ast.Variable;
-import com.google.j2cl.ast.VariableDeclarationExpression;
-import com.google.j2cl.ast.VariableDeclarationFragment;
-import com.google.j2cl.ast.Visibility;
-import com.google.j2cl.ast.WhileStatement;
 import com.google.j2cl.common.FilePosition;
 import com.google.j2cl.common.SourcePosition;
+import com.google.j2cl.transpiler.ast.ArrayAccess;
+import com.google.j2cl.transpiler.ast.ArrayLength;
+import com.google.j2cl.transpiler.ast.ArrayLiteral;
+import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
+import com.google.j2cl.transpiler.ast.AssertStatement;
+import com.google.j2cl.transpiler.ast.AstUtils;
+import com.google.j2cl.transpiler.ast.BinaryExpression;
+import com.google.j2cl.transpiler.ast.BinaryOperator;
+import com.google.j2cl.transpiler.ast.Block;
+import com.google.j2cl.transpiler.ast.BooleanLiteral;
+import com.google.j2cl.transpiler.ast.BreakStatement;
+import com.google.j2cl.transpiler.ast.CastExpression;
+import com.google.j2cl.transpiler.ast.CatchClause;
+import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.ConditionalExpression;
+import com.google.j2cl.transpiler.ast.ContinueStatement;
+import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
+import com.google.j2cl.transpiler.ast.DoWhileStatement;
+import com.google.j2cl.transpiler.ast.EmptyStatement;
+import com.google.j2cl.transpiler.ast.Expression;
+import com.google.j2cl.transpiler.ast.Expression.Associativity;
+import com.google.j2cl.transpiler.ast.ExpressionStatement;
+import com.google.j2cl.transpiler.ast.Field;
+import com.google.j2cl.transpiler.ast.FieldAccess;
+import com.google.j2cl.transpiler.ast.FieldDescriptor;
+import com.google.j2cl.transpiler.ast.ForStatement;
+import com.google.j2cl.transpiler.ast.FunctionExpression;
+import com.google.j2cl.transpiler.ast.IfStatement;
+import com.google.j2cl.transpiler.ast.InstanceOfExpression;
+import com.google.j2cl.transpiler.ast.JsDocCastExpression;
+import com.google.j2cl.transpiler.ast.LabeledStatement;
+import com.google.j2cl.transpiler.ast.Method;
+import com.google.j2cl.transpiler.ast.MethodCall;
+import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.NewArray;
+import com.google.j2cl.transpiler.ast.NewInstance;
+import com.google.j2cl.transpiler.ast.NullLiteral;
+import com.google.j2cl.transpiler.ast.NumberLiteral;
+import com.google.j2cl.transpiler.ast.PostfixExpression;
+import com.google.j2cl.transpiler.ast.PostfixOperator;
+import com.google.j2cl.transpiler.ast.PrefixExpression;
+import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
+import com.google.j2cl.transpiler.ast.PrimitiveTypes;
+import com.google.j2cl.transpiler.ast.ReturnStatement;
+import com.google.j2cl.transpiler.ast.Statement;
+import com.google.j2cl.transpiler.ast.StringLiteral;
+import com.google.j2cl.transpiler.ast.SuperReference;
+import com.google.j2cl.transpiler.ast.SwitchCase;
+import com.google.j2cl.transpiler.ast.SwitchStatement;
+import com.google.j2cl.transpiler.ast.SynchronizedStatement;
+import com.google.j2cl.transpiler.ast.ThisReference;
+import com.google.j2cl.transpiler.ast.ThrowStatement;
+import com.google.j2cl.transpiler.ast.TryStatement;
+import com.google.j2cl.transpiler.ast.Type;
+import com.google.j2cl.transpiler.ast.TypeDeclaration;
+import com.google.j2cl.transpiler.ast.TypeDescriptor;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
+import com.google.j2cl.transpiler.ast.TypeLiteral;
+import com.google.j2cl.transpiler.ast.UnaryExpression;
+import com.google.j2cl.transpiler.ast.UnionTypeDescriptor;
+import com.google.j2cl.transpiler.ast.Variable;
+import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
+import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
+import com.google.j2cl.transpiler.ast.Visibility;
+import com.google.j2cl.transpiler.ast.WhileStatement;
 import com.google.j2cl.transpiler.frontend.common.AbstractCompilationUnitBuilder;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -1173,8 +1173,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       return Block.newBuilder()
           .setSourcePosition(getSourcePosition(block))
           .setStatements(
-              statements
-                  .stream()
+              statements.stream()
                   .map(this::convert)
                   .filter(Predicates.notNull())
                   .collect(toImmutableList()))
@@ -1570,8 +1569,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     private TypeDescriptor convert(org.eclipse.jdt.core.dom.UnionType unionType) {
       return UnionTypeDescriptor.newBuilder()
           .setUnionTypeDescriptors(
-              JdtUtils.<org.eclipse.jdt.core.dom.Type>asTypedList(unionType.types())
-                  .stream()
+              JdtUtils.<org.eclipse.jdt.core.dom.Type>asTypedList(unionType.types()).stream()
                   .map(org.eclipse.jdt.core.dom.Type::resolveBinding)
                   .map(JdtUtils::createTypeDescriptor)
                   .collect(toImmutableList()))
@@ -1643,8 +1641,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     // freshness of the PackageInfoCache can be trusted.
     sortPackageInfoFirst(entries);
 
-    return entries
-        .stream()
+    return entries.stream()
         .map(
             entry ->
                 compilationUnitBuilder.buildCompilationUnit(

@@ -15,9 +15,9 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import com.google.j2cl.ast.AbstractVisitor;
-import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.Type;
+import com.google.j2cl.transpiler.ast.AbstractVisitor;
+import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.Type;
 
 /** The base class for all J2cl Normalization passes. */
 public abstract class NormalizationPass {

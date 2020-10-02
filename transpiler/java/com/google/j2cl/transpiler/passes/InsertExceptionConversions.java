@@ -15,15 +15,15 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import com.google.j2cl.ast.AbstractRewriter;
-import com.google.j2cl.ast.BinaryExpression;
-import com.google.j2cl.ast.CatchClause;
-import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.Expression;
-import com.google.j2cl.ast.MethodCall;
-import com.google.j2cl.ast.Node;
-import com.google.j2cl.ast.RuntimeMethods;
-import com.google.j2cl.ast.ThrowStatement;
+import com.google.j2cl.transpiler.ast.AbstractRewriter;
+import com.google.j2cl.transpiler.ast.BinaryExpression;
+import com.google.j2cl.transpiler.ast.CatchClause;
+import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.Expression;
+import com.google.j2cl.transpiler.ast.MethodCall;
+import com.google.j2cl.transpiler.ast.Node;
+import com.google.j2cl.transpiler.ast.RuntimeMethods;
+import com.google.j2cl.transpiler.ast.ThrowStatement;
 
 /**
  * Adds Java Throwable to JavaScript Error conversion.

@@ -37,9 +37,7 @@ import org.eclipse.jdt.core.dom.IBinding;
 import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 
-/**
- * Utility methods to get information about Js Interop annotations.
- */
+/** Utility methods to get information about Js Interop annotations. */
 public class JsInteropAnnotationUtils {
   private JsInteropAnnotationUtils() {}
 

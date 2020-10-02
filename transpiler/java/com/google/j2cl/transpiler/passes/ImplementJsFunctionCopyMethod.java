@@ -15,16 +15,16 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import com.google.j2cl.ast.BinaryExpression;
-import com.google.j2cl.ast.BinaryOperator;
-import com.google.j2cl.ast.BooleanLiteral;
-import com.google.j2cl.ast.Field;
-import com.google.j2cl.ast.FieldAccess;
-import com.google.j2cl.ast.Method;
-import com.google.j2cl.ast.Type;
-import com.google.j2cl.ast.TypeDescriptors;
-import com.google.j2cl.ast.Variable;
 import com.google.j2cl.common.SourcePosition;
+import com.google.j2cl.transpiler.ast.BinaryExpression;
+import com.google.j2cl.transpiler.ast.BinaryOperator;
+import com.google.j2cl.transpiler.ast.BooleanLiteral;
+import com.google.j2cl.transpiler.ast.Field;
+import com.google.j2cl.transpiler.ast.FieldAccess;
+import com.google.j2cl.transpiler.ast.Method;
+import com.google.j2cl.transpiler.ast.Type;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
+import com.google.j2cl.transpiler.ast.Variable;
 
 /**
  * Implements the $copy method in JsFunction implementations.

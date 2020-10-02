@@ -15,18 +15,18 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import com.google.j2cl.ast.AbstractRewriter;
-import com.google.j2cl.ast.BinaryExpression;
-import com.google.j2cl.ast.Block;
-import com.google.j2cl.ast.DeclaredTypeDescriptor;
-import com.google.j2cl.ast.Expression;
-import com.google.j2cl.ast.Field;
-import com.google.j2cl.ast.FieldDescriptor;
-import com.google.j2cl.ast.InitializerBlock;
-import com.google.j2cl.ast.Member;
-import com.google.j2cl.ast.NullLiteral;
-import com.google.j2cl.ast.Type;
 import com.google.j2cl.common.SourcePosition;
+import com.google.j2cl.transpiler.ast.AbstractRewriter;
+import com.google.j2cl.transpiler.ast.BinaryExpression;
+import com.google.j2cl.transpiler.ast.Block;
+import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
+import com.google.j2cl.transpiler.ast.Expression;
+import com.google.j2cl.transpiler.ast.Field;
+import com.google.j2cl.transpiler.ast.FieldDescriptor;
+import com.google.j2cl.transpiler.ast.InitializerBlock;
+import com.google.j2cl.transpiler.ast.Member;
+import com.google.j2cl.transpiler.ast.NullLiteral;
+import com.google.j2cl.transpiler.ast.Type;
 import java.util.ArrayList;
 import java.util.List;
 

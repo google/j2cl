@@ -15,9 +15,9 @@
  */
 package com.google.j2cl.transpiler.frontend.javac;
 
-import com.google.j2cl.ast.JsEnumInfo;
-import com.google.j2cl.ast.JsInfo;
-import com.google.j2cl.ast.JsMemberType;
+import com.google.j2cl.transpiler.ast.JsEnumInfo;
+import com.google.j2cl.transpiler.ast.JsInfo;
+import com.google.j2cl.transpiler.ast.JsMemberType;
 import java.util.Set;
 import javax.lang.model.AnnotatedConstruct;
 import javax.lang.model.element.AnnotationMirror;

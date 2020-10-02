@@ -15,9 +15,9 @@
  */
 package com.google.j2cl.transpiler.backend.closure;
 
-import com.google.j2cl.ast.Type;
-import com.google.j2cl.ast.TypeDeclaration;
 import com.google.j2cl.common.Problems;
+import com.google.j2cl.transpiler.ast.Type;
+import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
