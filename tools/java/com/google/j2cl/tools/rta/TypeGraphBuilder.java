@@ -17,11 +17,11 @@ package com.google.j2cl.tools.rta;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import com.google.j2cl.libraryinfo.LibraryInfo;
-import com.google.j2cl.libraryinfo.LibraryInfoBuilder;
-import com.google.j2cl.libraryinfo.MemberInfo;
-import com.google.j2cl.libraryinfo.MethodInvocation;
-import com.google.j2cl.libraryinfo.TypeInfo;
+import com.google.j2cl.transpiler.backend.libraryinfo.LibraryInfo;
+import com.google.j2cl.transpiler.backend.libraryinfo.LibraryInfoBuilder;
+import com.google.j2cl.transpiler.backend.libraryinfo.MemberInfo;
+import com.google.j2cl.transpiler.backend.libraryinfo.MethodInvocation;
+import com.google.j2cl.transpiler.backend.libraryinfo.TypeInfo;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;

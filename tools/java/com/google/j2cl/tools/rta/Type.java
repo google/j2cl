@@ -17,7 +17,7 @@ package com.google.j2cl.tools.rta;
 
 import static com.google.common.base.Preconditions.checkState;
 
-import com.google.j2cl.libraryinfo.TypeInfo;
+import com.google.j2cl.transpiler.backend.libraryinfo.TypeInfo;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;

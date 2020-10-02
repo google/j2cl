@@ -2,7 +2,7 @@
 #  Implementation of RTA algorithm used to do fast method pruning.
 
 package(
-    licenses = ["notice"],  # Apache 2.0
+    licenses = ["notice"],
 )
 
 proto_library(
@@ -36,6 +36,6 @@ java_library(
         "//third_party:guava",
         "//transpiler/java/com/google/j2cl/common",
         "//transpiler/java/com/google/j2cl/common/bazel",
-        "//transpiler/java/com/google/j2cl/libraryinfo",
+        "//transpiler/java/com/google/j2cl/transpiler/backend/libraryinfo",
     ],
 )

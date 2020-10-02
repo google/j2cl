@@ -15,8 +15,7 @@
  */
 package com.google.j2cl.tools.rta;
 
-
-import com.google.j2cl.libraryinfo.LibraryInfo;
+import com.google.j2cl.transpiler.backend.libraryinfo.LibraryInfo;
 import java.util.Collection;
 import java.util.List;
 

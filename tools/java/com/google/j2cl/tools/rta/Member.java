@@ -15,8 +15,8 @@
  */
 package com.google.j2cl.tools.rta;
 
-import com.google.j2cl.libraryinfo.MemberInfo;
-import com.google.j2cl.libraryinfo.SourcePosition;
+import com.google.j2cl.transpiler.backend.libraryinfo.MemberInfo;
+import com.google.j2cl.transpiler.backend.libraryinfo.SourcePosition;
 import java.util.ArrayList;
 import java.util.List;
 

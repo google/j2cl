@@ -22,7 +22,7 @@ import com.google.common.io.Files;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.common.bazel.BazelWorker;
-import com.google.j2cl.libraryinfo.LibraryInfo;
+import com.google.j2cl.transpiler.backend.libraryinfo.LibraryInfo;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;

@@ -17,7 +17,7 @@ package com.google.j2cl.tools.rta;
 
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableList;
-import com.google.j2cl.libraryinfo.SourcePosition;
+import com.google.j2cl.transpiler.backend.libraryinfo.SourcePosition;
 import java.util.ArrayList;
 import java.util.Collection;
 

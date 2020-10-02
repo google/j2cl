@@ -24,7 +24,7 @@ import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.SourceUtils;
 import com.google.j2cl.common.SourceUtils.FileInfo;
-import com.google.j2cl.libraryinfo.LibraryInfoBuilder;
+import com.google.j2cl.transpiler.backend.libraryinfo.LibraryInfoBuilder;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
