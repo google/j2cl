@@ -19,7 +19,7 @@ import com.google.common.util.concurrent.Uninterruptibles;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
-import com.google.j2cl.generator.OutputGeneratorStage;
+import com.google.j2cl.transpiler.backend.closure.OutputGeneratorStage;
 import com.google.j2cl.transpiler.passes.ArrayAccessNormalizer;
 import com.google.j2cl.transpiler.passes.BridgeMethodsCreator;
 import com.google.j2cl.transpiler.passes.ControlStatementFormatter;

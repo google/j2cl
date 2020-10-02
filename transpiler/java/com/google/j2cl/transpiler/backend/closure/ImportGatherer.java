@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.generator;
+package com.google.j2cl.transpiler.backend.closure;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
@@ -49,7 +49,7 @@ import com.google.j2cl.ast.TypeVariable;
 import com.google.j2cl.ast.UnionTypeDescriptor;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationFragment;
-import com.google.j2cl.generator.Import.ImportCategory;
+import com.google.j2cl.transpiler.backend.closure.Import.ImportCategory;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;

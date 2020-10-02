@@ -4,7 +4,7 @@ package(
 )
 
 java_library(
-    name = "generator",
+    name = "closure",
     srcs = glob(["*.java"]),
     deps = [
         "//third_party:gson",
