@@ -4,9 +4,9 @@
 package(
     default_visibility = [
         "//tools/java/com/google/j2cl/tools/gwtincompatible:__pkg__",
-        "//transpiler/java/com/google/j2cl/frontend:__subpackages__",
+        "//transpiler/java/com/google/j2cl/transpiler/frontend:__subpackages__",
     ],
-    licenses = ["notice"],  # Apache 2.0
+    licenses = ["notice"],
 )
 
 java_library(
@@ -19,6 +19,6 @@ java_library(
         "//third_party:jdt-core",
         "//transpiler/java/com/google/j2cl/ast",
         "//transpiler/java/com/google/j2cl/common",
-        "//transpiler/java/com/google/j2cl/frontend/common",
+        "//transpiler/java/com/google/j2cl/transpiler/frontend/common",
     ],
 )

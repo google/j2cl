@@ -24,7 +24,7 @@ import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.common.SourceUtils;
 import com.google.j2cl.common.SourceUtils.FileInfo;
-import com.google.j2cl.frontend.jdt.GwtIncompatibleNodeCollector;
+import com.google.j2cl.transpiler.frontend.jdt.GwtIncompatibleNodeCollector;
 import java.io.IOException;
 import java.nio.file.FileSystem;
 import java.nio.file.Path;

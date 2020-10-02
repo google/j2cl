@@ -21,7 +21,7 @@ import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourceUtils;
 import com.google.j2cl.common.SourceUtils.FileInfo;
 import com.google.j2cl.common.bazel.BazelWorker;
-import com.google.j2cl.frontend.Frontend;
+import com.google.j2cl.transpiler.frontend.Frontend;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;

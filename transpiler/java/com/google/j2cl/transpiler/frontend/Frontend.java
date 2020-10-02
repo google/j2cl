@@ -13,16 +13,16 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.frontend;
+package com.google.j2cl.transpiler.frontend;
 
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourceUtils.FileInfo;
-import com.google.j2cl.frontend.common.PackageInfoCache;
-import com.google.j2cl.frontend.javac.JavacParser;
-import com.google.j2cl.frontend.jdt.CompilationUnitBuilder;
-import com.google.j2cl.frontend.jdt.CompilationUnitsAndTypeBindings;
-import com.google.j2cl.frontend.jdt.JdtParser;
+import com.google.j2cl.transpiler.frontend.common.PackageInfoCache;
+import com.google.j2cl.transpiler.frontend.javac.JavacParser;
+import com.google.j2cl.transpiler.frontend.jdt.CompilationUnitBuilder;
+import com.google.j2cl.transpiler.frontend.jdt.CompilationUnitsAndTypeBindings;
+import com.google.j2cl.transpiler.frontend.jdt.JdtParser;
 import java.util.List;
 
 /** Drives the frontend to parse, type check and resolve Java source code. */

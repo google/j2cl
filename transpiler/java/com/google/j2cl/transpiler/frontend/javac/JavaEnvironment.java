@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.frontend.javac;
+package com.google.j2cl.transpiler.frontend.javac;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.collect.ImmutableList.toImmutableList;
@@ -47,7 +47,7 @@ import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.common.InternalCompilerError;
 import com.google.j2cl.common.SourcePosition;
-import com.google.j2cl.frontend.common.PackageInfoCache;
+import com.google.j2cl.transpiler.frontend.common.PackageInfoCache;
 import com.sun.tools.javac.code.Attribute.TypeCompound;
 import com.sun.tools.javac.code.Flags;
 import com.sun.tools.javac.code.Symbol;

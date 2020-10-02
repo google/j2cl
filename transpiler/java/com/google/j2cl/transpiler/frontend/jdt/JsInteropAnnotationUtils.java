@@ -13,22 +13,22 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.frontend.jdt;
+package com.google.j2cl.transpiler.frontend.jdt;
 
-import static com.google.j2cl.frontend.common.FrontendConstants.DO_NOT_AUTOBOX_ANNOTATION_NAME;
-import static com.google.j2cl.frontend.common.FrontendConstants.JS_ASYNC_ANNOTATION_NAME;
-import static com.google.j2cl.frontend.common.FrontendConstants.JS_CONSTRUCTOR_ANNOTATION_NAME;
-import static com.google.j2cl.frontend.common.FrontendConstants.JS_ENUM_ANNOTATION_NAME;
-import static com.google.j2cl.frontend.common.FrontendConstants.JS_FUNCTION_ANNOTATION_NAME;
-import static com.google.j2cl.frontend.common.FrontendConstants.JS_IGNORE_ANNOTATION_NAME;
-import static com.google.j2cl.frontend.common.FrontendConstants.JS_METHOD_ANNOTATION_NAME;
-import static com.google.j2cl.frontend.common.FrontendConstants.JS_NONNULL_ANNOTATION_NAME;
-import static com.google.j2cl.frontend.common.FrontendConstants.JS_OPTIONAL_ANNOTATION_NAME;
-import static com.google.j2cl.frontend.common.FrontendConstants.JS_OVERLAY_ANNOTATION_NAME;
-import static com.google.j2cl.frontend.common.FrontendConstants.JS_PACKAGE_ANNOTATION_NAME;
-import static com.google.j2cl.frontend.common.FrontendConstants.JS_PROPERTY_ANNOTATION_NAME;
-import static com.google.j2cl.frontend.common.FrontendConstants.JS_TYPE_ANNOTATION_NAME;
-import static com.google.j2cl.frontend.common.FrontendConstants.SUPPRESS_WARNINGS_ANNOTATION_NAME;
+import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.DO_NOT_AUTOBOX_ANNOTATION_NAME;
+import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_ASYNC_ANNOTATION_NAME;
+import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_CONSTRUCTOR_ANNOTATION_NAME;
+import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_ENUM_ANNOTATION_NAME;
+import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_FUNCTION_ANNOTATION_NAME;
+import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_IGNORE_ANNOTATION_NAME;
+import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_METHOD_ANNOTATION_NAME;
+import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_NONNULL_ANNOTATION_NAME;
+import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_OPTIONAL_ANNOTATION_NAME;
+import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_OVERLAY_ANNOTATION_NAME;
+import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_PACKAGE_ANNOTATION_NAME;
+import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_PROPERTY_ANNOTATION_NAME;
+import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_TYPE_ANNOTATION_NAME;
+import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.SUPPRESS_WARNINGS_ANNOTATION_NAME;
 
 import java.util.Arrays;
 import java.util.Optional;

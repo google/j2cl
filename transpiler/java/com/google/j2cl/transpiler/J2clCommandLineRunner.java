@@ -22,7 +22,7 @@ import com.google.j2cl.common.CommandLineTool;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.common.SourceUtils;
-import com.google.j2cl.frontend.Frontend;
+import com.google.j2cl.transpiler.frontend.Frontend;
 import java.io.File;
 import java.nio.file.FileSystem;
 import java.nio.file.Files;

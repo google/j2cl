@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.frontend.javac;
+package com.google.j2cl.transpiler.frontend.javac;
 
 import static java.util.stream.Collectors.toList;
 
@@ -23,7 +23,7 @@ import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.common.SourceUtils.FileInfo;
-import com.google.j2cl.frontend.common.FrontendConstants;
+import com.google.j2cl.transpiler.frontend.common.FrontendConstants;
 import com.sun.source.tree.CompilationUnitTree;
 import com.sun.tools.javac.api.JavacTaskImpl;
 import com.sun.tools.javac.file.JavacFileManager;

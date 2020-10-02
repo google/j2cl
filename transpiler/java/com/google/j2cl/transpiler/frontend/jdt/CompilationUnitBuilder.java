@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.frontend.jdt;
+package com.google.j2cl.transpiler.frontend.jdt;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -94,7 +94,7 @@ import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.ast.WhileStatement;
 import com.google.j2cl.common.FilePosition;
 import com.google.j2cl.common.SourcePosition;
-import com.google.j2cl.frontend.common.AbstractCompilationUnitBuilder;
+import com.google.j2cl.transpiler.frontend.common.AbstractCompilationUnitBuilder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;

@@ -13,14 +13,14 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.frontend.jdt;
+package com.google.j2cl.transpiler.frontend.jdt;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.common.SourceUtils.FileInfo;
-import com.google.j2cl.frontend.common.FrontendConstants;
+import com.google.j2cl.transpiler.frontend.common.FrontendConstants;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;

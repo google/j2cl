@@ -3,10 +3,10 @@
 #   Java code.
 
 package(default_visibility = [
-    "//transpiler/java/com/google/j2cl/frontend:__subpackages__",
+    "//transpiler/java/com/google/j2cl/transpiler/frontend:__subpackages__",
 ])
 
-licenses(["notice"])  # Apache 2.0
+licenses(["notice"])
 
 java_library(
     name = "javac",
@@ -18,6 +18,6 @@ java_library(
         "//third_party:javac",
         "//transpiler/java/com/google/j2cl/ast",
         "//transpiler/java/com/google/j2cl/common",
-        "//transpiler/java/com/google/j2cl/frontend/common",
+        "//transpiler/java/com/google/j2cl/transpiler/frontend/common",
     ],
 )

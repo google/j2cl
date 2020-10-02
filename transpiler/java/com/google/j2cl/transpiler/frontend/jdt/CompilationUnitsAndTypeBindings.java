@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.google.j2cl.frontend.jdt;
+package com.google.j2cl.transpiler.frontend.jdt;
 
 import java.util.Map;
 import org.eclipse.jdt.core.dom.CompilationUnit;
