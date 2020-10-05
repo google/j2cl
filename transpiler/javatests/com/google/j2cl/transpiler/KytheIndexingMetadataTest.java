@@ -13,11 +13,11 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.transpiler.integration;
+package com.google.j2cl.transpiler;
 
-import static com.google.j2cl.transpiler.integration.TranspilerTester.newTesterWithDefaults;
+import static com.google.j2cl.transpiler.TranspilerTester.newTesterWithDefaults;
 
-import com.google.j2cl.transpiler.integration.TranspilerTester.TranspileResult;
+import com.google.j2cl.transpiler.TranspilerTester.TranspileResult;
 import java.util.List;
 import junit.framework.TestCase;
 

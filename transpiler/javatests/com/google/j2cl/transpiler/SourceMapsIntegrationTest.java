@@ -13,9 +13,9 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.transpiler.integration;
+package com.google.j2cl.transpiler;
 
-import static com.google.j2cl.transpiler.integration.TranspilerTester.newTesterWithDefaults;
+import static com.google.j2cl.transpiler.TranspilerTester.newTesterWithDefaults;
 
 import junit.framework.TestCase;
 

@@ -11,7 +11,7 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.transpiler.integration;
+package com.google.j2cl.transpiler;
 
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
@@ -27,7 +27,6 @@ import com.google.common.io.MoreFiles;
 import com.google.common.truth.Correspondence;
 import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.Problems;
-import com.google.j2cl.transpiler.J2clCommandLineRunner;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -60,8 +59,7 @@ public class TranspilerTester {
    */
   public static TranspilerTester newTesterWithDefaults() {
     return newTester()
-        .setClassPathArg(
-            "transpiler/javatests/com/google/j2cl/transpiler/integration/jre_bundle_deploy.jar");
+        .setClassPathArg("transpiler/javatests/com/google/j2cl/transpiler/jre_bundle_deploy.jar");
   }
 
   private abstract static class File {

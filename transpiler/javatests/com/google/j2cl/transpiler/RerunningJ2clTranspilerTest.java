@@ -11,11 +11,11 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.transpiler.integration;
+package com.google.j2cl.transpiler;
 
-import static com.google.j2cl.transpiler.integration.TranspilerTester.newTesterWithDefaults;
+import static com.google.j2cl.transpiler.TranspilerTester.newTesterWithDefaults;
 
-import com.google.j2cl.transpiler.integration.TranspilerTester.TranspileResult;
+import com.google.j2cl.transpiler.TranspilerTester.TranspileResult;
 import junit.framework.TestCase;
 
 /** Test to run the transpiler twice and possibly uncover static state within the transpiler. */
@@ -27,10 +27,9 @@ public class RerunningJ2clTranspilerTest extends TestCase {
 
   private static TranspileResult compileJre() throws Exception {
     return newTesterWithDefaults()
-        .setNativeSourcePathArg(
-            "transpiler/javatests/com/google/j2cl/transpiler/integration/libjre_native.jar")
+        .setNativeSourcePathArg("transpiler/javatests/com/google/j2cl/transpiler/libjre_native.jar")
         .addSourcePathArg(
-            "transpiler/javatests/com/google/j2cl/transpiler/integration/jre_bundle_deploy-src.jar")
+            "transpiler/javatests/com/google/j2cl/transpiler/jre_bundle_deploy-src.jar")
         .assertTranspileSucceeds()
         .assertNoWarnings();
   }
