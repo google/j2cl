@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.google.j2cl.transpiler.optimization;
+package com.google.j2cl.optimization;
 
-import static com.google.j2cl.transpiler.optimization.OptimizationTestUtil.assertFunctionMatches;
+import static com.google.j2cl.optimization.OptimizationTestUtil.assertFunctionMatches;
 
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
@@ -24,31 +24,22 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 @RunWith(JUnit4.class)
-public class BooleanOptimizationTest {
+public class ArrayOptimizationTest {
+
+  private static class TestObject {}
+
+  private Object[] arrayField = new TestObject[3];
 
   @JsMethod
-  public boolean simpleComp() {
-    return true == true;
+  public void modifyArray() {
+    arrayField[0] = "ABC";
   }
 
   @JsProperty
-  private native Object getSimpleComp();
+  private native Object getModifyArray();
 
   @Test
-  public void simpleCompOptimizes() {
-    assertFunctionMatches(getSimpleComp(), "return !0;");
-  }
-
-  @JsMethod
-  public boolean boxedComp() {
-    return Boolean.TRUE == Boolean.TRUE;
-  }
-
-  @JsProperty
-  private native Object getBoxedComp();
-
-  @Test
-  public void boxedCompOptimizes() {
-    assertFunctionMatches(getBoxedComp(), "return !0;");
+  public void arrayStoreChecksAreRemoved() {
+    assertFunctionMatches(getModifyArray(), "this.<obf>[0]='ABC';");
   }
 }

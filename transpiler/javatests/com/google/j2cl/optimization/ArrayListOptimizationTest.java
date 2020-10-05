@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.google.j2cl.transpiler.optimization;
+package com.google.j2cl.optimization;
 
-import static com.google.j2cl.transpiler.optimization.OptimizationTestUtil.assertFunctionMatches;
+import static com.google.j2cl.optimization.OptimizationTestUtil.assertFunctionMatches;
 
 import java.util.ArrayList;
 import jsinterop.annotations.JsProperty;
