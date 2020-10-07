@@ -192,7 +192,7 @@ def setup_j2cl_workspace():
         strip_prefix = "jbox2d-jbox2d-2.2.1.1/jbox2d-library",
         urls = ["https://github.com/jbox2d/jbox2d/archive/jbox2d-2.2.1.1.zip"],
         sha256 = "088e5fc0f56c75f82c289c4721d9faf46a309e258d3ee647799622ef82e60303",
-        patches = ["@com_google_j2cl//transpiler/javatests/com/google/j2cl/transpiler/integration/box2d:jbox2d.patch"],
+        patches = ["@com_google_j2cl//transpiler/javatests/com/google/j2cl/integration/box2d:jbox2d.patch"],
         build_file_content = '''
 filegroup(
     name = "j2cl_sources",

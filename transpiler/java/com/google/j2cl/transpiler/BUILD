@@ -22,7 +22,7 @@ java_library(
 java_library(
     name = "commandlinerunner_lib",
     srcs = ["J2clCommandLineRunner.java"],
-    visibility = ["//transpiler/javatests/com/google/j2cl/transpiler:__subpackages__"],
+    visibility = ["//transpiler/javatests/com/google/j2cl:__subpackages__"],
     deps = [
         ":transpiler_lib",
         "//third_party:args4j",
