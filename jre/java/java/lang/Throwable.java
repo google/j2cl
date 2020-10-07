@@ -166,7 +166,7 @@ public class Throwable implements Serializable {
     Object e = this.backingJsObject;
     if (e instanceof NativeError) {
       NativeError error = (NativeError) e;
-      if (error.stack) {
+      if (!!error.stack) {
         String[] splitStack = error.stack.split("\n");
         for (int i = 0; i < splitStack.length; i++) {
           stackTraceElements[i] = new StackTraceElement("", splitStack[i], null, -1);
