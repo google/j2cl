@@ -1,0 +1,49 @@
+goog.module('bridgemethods.A$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @template T, S
+ */
+class A extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  /** @template T, S @return {!A<T, S>} */
+  static $create__() {
+    A.$clinit();
+    let $instance = new A();
+    $instance.$ctor__bridgemethods_A__();
+    return $instance;
+  }
+
+  $ctor__bridgemethods_A__() {
+    this.$ctor__java_lang_Object__();
+  }
+  /** @return {T} */
+  m_fun__java_lang_Object(/** S */ s) {
+    return null;
+  }
+  /** @return {T} */
+  m_get__() {
+    return null;
+  }
+
+  static $clinit() {
+    A.$clinit = () => {};
+    A.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof A;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(A, 'bridgemethods.A');
+
+exports = A;
+//# sourceMappingURL=A.js.map

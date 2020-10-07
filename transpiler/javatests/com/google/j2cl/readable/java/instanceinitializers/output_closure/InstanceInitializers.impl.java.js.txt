@@ -1,0 +1,47 @@
+goog.module('instanceinitializers.InstanceInitializers$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class InstanceInitializers extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+    /**@type {number}*/
+    this.f_field__instanceinitializers_InstanceInitializers = 0;
+  }
+  /** @return {!InstanceInitializers} */
+  static $create__() {
+    InstanceInitializers.$clinit();
+    let $instance = new InstanceInitializers();
+    $instance.$ctor__instanceinitializers_InstanceInitializers__();
+    return $instance;
+  }
+
+  $ctor__instanceinitializers_InstanceInitializers__() {
+    this.$ctor__java_lang_Object__();
+    this.$init___$p_instanceinitializers_InstanceInitializers();
+  }
+  /** @private */
+  $init___$p_instanceinitializers_InstanceInitializers() {
+    this.f_field__instanceinitializers_InstanceInitializers = 1;
+    this.f_field__instanceinitializers_InstanceInitializers = 2;
+  }
+
+  static $clinit() {
+    InstanceInitializers.$clinit = () => {};
+    InstanceInitializers.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof InstanceInitializers;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(
+    InstanceInitializers, 'instanceinitializers.InstanceInitializers');
+
+exports = InstanceInitializers;
+//# sourceMappingURL=InstanceInitializers.js.map

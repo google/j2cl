@@ -1,0 +1,60 @@
+goog.module('nativejstypeobjectmethods.Main$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let NativeJsTypeWithToString = goog.forwardDeclare('test.foo.NativeJsTypeWithToString');
+let NativeJsTypeWithoutToString = goog.forwardDeclare('test.foo.NativeJsTypeWithoutToString');
+let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
+
+class Main extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  /** @return {!Main} */
+  static $create__() {
+    Main.$clinit();
+    let $instance = new Main();
+    $instance.$ctor__nativejstypeobjectmethods_Main__();
+    return $instance;
+  }
+
+  $ctor__nativejstypeobjectmethods_Main__() {
+    this.$ctor__java_lang_Object__();
+  }
+
+  static m_test__() {
+    Main.$clinit();
+    let n1 = new NativeJsTypeWithToString();
+    n1.toString();
+    let n2 = new NativeJsTypeWithToString();
+    $Objects.m_toString__java_lang_Object(n2);
+    let n3 = new NativeJsTypeWithoutToString();
+    $Objects.m_toString__java_lang_Object(n3);
+    let n4 = new NativeJsTypeWithoutToString();
+    $Objects.m_toString__java_lang_Object(n4);
+  }
+
+  static $clinit() {
+    Main.$clinit = () => {};
+    Main.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof Main;
+  }
+
+  static $loadModules() {
+    NativeJsTypeWithToString =
+        goog.module.get('test.foo.NativeJsTypeWithToString');
+    NativeJsTypeWithoutToString =
+        goog.module.get('test.foo.NativeJsTypeWithoutToString');
+    $Objects = goog.module.get('vmbootstrap.Objects$impl');
+  }
+}
+$Util.$setClassMetadata(Main, 'nativejstypeobjectmethods.Main');
+
+exports = Main;
+//# sourceMappingURL=Main.js.map

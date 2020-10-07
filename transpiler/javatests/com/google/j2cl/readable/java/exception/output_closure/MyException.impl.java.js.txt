@@ -1,0 +1,59 @@
+goog.module('exception.MyException$impl');
+
+const Exception = goog.require('java.lang.Exception$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
+
+class MyException extends Exception {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  // Factory method corresponding to constructor 'MyException()'.
+  /** @return {!MyException} */
+  static $create__() {
+    MyException.$clinit();
+    let $instance = new MyException();
+    $instance.$ctor__exception_MyException__();
+    $instance.m_privateInitError__java_lang_Object_$pp_java_lang(
+        new Error($instance));
+    return $instance;
+  }
+  // Initialization from constructor 'MyException()'.
+
+  $ctor__exception_MyException__() {
+    this.$ctor__java_lang_Exception__();
+  }
+  // Factory method corresponding to constructor 'MyException(Throwable)'.
+  /** @return {!MyException} */
+  static $create__java_lang_Throwable(/** Throwable */ cause) {
+    MyException.$clinit();
+    let $instance = new MyException();
+    $instance.$ctor__exception_MyException__java_lang_Throwable(cause);
+    $instance.m_privateInitError__java_lang_Object_$pp_java_lang(
+        new Error($instance));
+    return $instance;
+  }
+  // Initialization from constructor 'MyException(Throwable)'.
+
+  $ctor__exception_MyException__java_lang_Throwable(/** Throwable */ cause) {
+    this.$ctor__java_lang_Exception__java_lang_Throwable(cause);
+  }
+
+  static $clinit() {
+    MyException.$clinit = () => {};
+    MyException.$loadModules();
+    Exception.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof MyException;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(MyException, 'exception.MyException');
+
+exports = MyException;
+//# sourceMappingURL=MyException.js.map

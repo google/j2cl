@@ -1,0 +1,54 @@
+goog.module('lambdas.Lambdas.LambdaInSubClass$impl');
+
+const Parent = goog.require('lambdas.Lambdas.Parent$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let FunctionalInterface = goog.forwardDeclare('lambdas.Lambdas.FunctionalInterface$impl');
+
+class LambdaInSubClass extends Parent {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  /** @return {!LambdaInSubClass} */
+  static $create__() {
+    let $instance = new LambdaInSubClass();
+    $instance.$ctor__lambdas_Lambdas_LambdaInSubClass__();
+    return $instance;
+  }
+
+  $ctor__lambdas_Lambdas_LambdaInSubClass__() {
+    this.$ctor__lambdas_Lambdas_Parent__();
+  }
+
+  m_testLambdaInSubclass__() {
+    let l = FunctionalInterface.$adapt((/** number */ i) => {
+      this.m_funInParent__();
+      this.m_funInParent__();
+      this.m_funInParent__();
+      let a = this.f_fieldInParent__lambdas_Lambdas_Parent;
+      a = this.f_fieldInParent__lambdas_Lambdas_Parent;
+      a = this.f_fieldInParent__lambdas_Lambdas_Parent;
+      return a;
+    });
+  }
+
+  static $clinit() {
+    LambdaInSubClass.$clinit = () => {};
+    LambdaInSubClass.$loadModules();
+    Parent.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof LambdaInSubClass;
+  }
+
+  static $loadModules() {
+    FunctionalInterface =
+        goog.module.get('lambdas.Lambdas.FunctionalInterface$impl');
+  }
+}
+$Util.$setClassMetadata(LambdaInSubClass, 'lambdas.Lambdas$LambdaInSubClass');
+
+exports = LambdaInSubClass;
+//# sourceMappingURL=Lambdas$LambdaInSubClass.js.map

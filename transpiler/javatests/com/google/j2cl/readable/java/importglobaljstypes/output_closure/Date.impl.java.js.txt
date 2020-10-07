@@ -1,0 +1,47 @@
+goog.module('importglobaljstypes.Date$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class importglobaljstypes_Date extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  /** @return {!importglobaljstypes_Date} */
+  static $create__() {
+    importglobaljstypes_Date.$clinit();
+    let $instance = new importglobaljstypes_Date();
+    $instance.$ctor__importglobaljstypes_Date__();
+    return $instance;
+  }
+
+  $ctor__importglobaljstypes_Date__() {
+    this.$ctor__java_lang_Object__();
+  }
+  /** @return {number} */
+  static m_now__double(/** number */ x) {
+    importglobaljstypes_Date.$clinit();
+    return Date.now();
+  }
+  /** @return {Date} */
+  m_copy__importglobaljstypes_Date_NativeDate(/** Date */ d) {
+    return d;
+  }
+
+  static $clinit() {
+    importglobaljstypes_Date.$clinit = () => {};
+    importglobaljstypes_Date.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof importglobaljstypes_Date;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(importglobaljstypes_Date, 'importglobaljstypes.Date');
+
+exports = importglobaljstypes_Date;
+//# sourceMappingURL=Date.js.map

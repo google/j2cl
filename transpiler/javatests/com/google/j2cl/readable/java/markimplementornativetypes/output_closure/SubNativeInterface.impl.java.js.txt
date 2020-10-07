@@ -1,0 +1,37 @@
+goog.module('markimplementornativetypes.SubNativeInterface$impl');
+
+const RegularInterface = goog.require('markimplementornativetypes.RegularInterface$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let MyNativeInterface = goog.forwardDeclare('test.foo.MyNativeInterface');
+
+/**
+ * @interface
+ * @extends {MyNativeInterface}
+ * @extends {RegularInterface}
+ */
+class SubNativeInterface {
+  static $clinit() {
+    SubNativeInterface.$clinit = () => {};
+    SubNativeInterface.$loadModules();
+  }
+
+  static $markImplementor(/** Function */ ctor) {
+    RegularInterface.$markImplementor(ctor);
+    ctor.prototype.$implements__markimplementornativetypes_SubNativeInterface =
+        true;
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance != null &&
+        !!instance.$implements__markimplementornativetypes_SubNativeInterface;
+  }
+
+  static $loadModules() {}
+}
+SubNativeInterface.$markImplementor(/**@type {Function}*/ (SubNativeInterface));
+$Util.$setClassMetadataForInterface(
+    SubNativeInterface, 'markimplementornativetypes.SubNativeInterface');
+
+exports = SubNativeInterface;
+//# sourceMappingURL=SubNativeInterface.js.map

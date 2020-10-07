@@ -1,0 +1,60 @@
+goog.module('initmethoddispatch.InitMethodDispatch$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @template T
+ */
+class InitMethodDispatch extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+    /**@type {number}*/
+    this.f_value__initmethoddispatch_InitMethodDispatch = 0;
+  }
+  // Factory method corresponding to constructor 'InitMethodDispatch()'.
+  /** @template T @return {!InitMethodDispatch<T>} */
+  static $create__() {
+    InitMethodDispatch.$clinit();
+    let $instance = new InitMethodDispatch();
+    $instance.$ctor__initmethoddispatch_InitMethodDispatch__();
+    return $instance;
+  }
+  // Initialization from constructor 'InitMethodDispatch()'.
+
+  $ctor__initmethoddispatch_InitMethodDispatch__() {
+    this.$ctor__initmethoddispatch_InitMethodDispatch__int(1);
+  }
+  // Factory method corresponding to constructor 'InitMethodDispatch(int)'.
+  /** @template T @return {!InitMethodDispatch<T>} */
+  static $create__int(/** number */ i) {
+    InitMethodDispatch.$clinit();
+    let $instance = new InitMethodDispatch();
+    $instance.$ctor__initmethoddispatch_InitMethodDispatch__int(i);
+    return $instance;
+  }
+  // Initialization from constructor 'InitMethodDispatch(int)'.
+
+  $ctor__initmethoddispatch_InitMethodDispatch__int(/** number */ i) {
+    this.$ctor__java_lang_Object__();
+    this.f_value__initmethoddispatch_InitMethodDispatch = i;
+  }
+
+  static $clinit() {
+    InitMethodDispatch.$clinit = () => {};
+    InitMethodDispatch.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof InitMethodDispatch;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(
+    InitMethodDispatch, 'initmethoddispatch.InitMethodDispatch');
+
+exports = InitMethodDispatch;
+//# sourceMappingURL=InitMethodDispatch.js.map

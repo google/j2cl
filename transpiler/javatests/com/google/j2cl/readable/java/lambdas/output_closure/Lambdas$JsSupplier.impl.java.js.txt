@@ -1,0 +1,48 @@
+goog.module('lambdas.Lambdas.JsSupplier$impl');
+
+const Equals = goog.require('lambdas.Lambdas.Equals$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Number = goog.forwardDeclare('java.lang.Number$impl');
+let $LambdaAdaptor = goog.forwardDeclare('lambdas.Lambdas.JsSupplier.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ * @template T
+ * @extends {Equals<T>}
+ */
+class JsSupplier {
+  /** @abstract @return {T} */
+  get() {}
+  /** @template T @return {JsSupplier<T>} */
+  static $adapt(/** ?function():T */ fn) {
+    JsSupplier.$clinit();
+    return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));
+  }
+
+  static $clinit() {
+    JsSupplier.$clinit = () => {};
+    JsSupplier.$loadModules();
+    Equals.$clinit();
+  }
+
+  static $markImplementor(/** Function */ ctor) {
+    Equals.$markImplementor(ctor);
+    ctor.prototype.$implements__lambdas_Lambdas_JsSupplier = true;
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance != null &&
+        !!instance.$implements__lambdas_Lambdas_JsSupplier;
+  }
+
+  static $loadModules() {
+    $LambdaAdaptor =
+        goog.module.get('lambdas.Lambdas.JsSupplier.$LambdaAdaptor$impl');
+  }
+}
+JsSupplier.$markImplementor(/**@type {Function}*/ (JsSupplier));
+$Util.$setClassMetadataForInterface(JsSupplier, 'lambdas.Lambdas$JsSupplier');
+
+exports = JsSupplier;
+//# sourceMappingURL=Lambdas$JsSupplier.js.map

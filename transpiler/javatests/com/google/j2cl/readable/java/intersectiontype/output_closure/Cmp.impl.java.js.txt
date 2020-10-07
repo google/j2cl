@@ -1,0 +1,41 @@
+goog.module('intersectiontype.Cmp$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('intersectiontype.Cmp.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ */
+class Cmp {
+  /** @abstract @return {number} */
+  m_cmp__() {}
+  /** @return {Cmp} */
+  static $adapt(/** ?function():number */ fn) {
+    Cmp.$clinit();
+    return new $LambdaAdaptor(fn);
+  }
+
+  static $clinit() {
+    Cmp.$clinit = () => {};
+    Cmp.$loadModules();
+  }
+
+  static $markImplementor(/** Function */ ctor) {
+    ctor.prototype.$implements__intersectiontype_Cmp = true;
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance != null && !!instance.$implements__intersectiontype_Cmp;
+  }
+
+  static $loadModules() {
+    $LambdaAdaptor =
+        goog.module.get('intersectiontype.Cmp.$LambdaAdaptor$impl');
+  }
+}
+Cmp.$markImplementor(/**@type {Function}*/ (Cmp));
+$Util.$setClassMetadataForInterface(Cmp, 'intersectiontype.Cmp');
+
+exports = Cmp;
+//# sourceMappingURL=Cmp.js.map

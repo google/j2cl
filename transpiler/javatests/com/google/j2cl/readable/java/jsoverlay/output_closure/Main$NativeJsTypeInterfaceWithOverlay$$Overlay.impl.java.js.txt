@@ -1,0 +1,44 @@
+goog.module('jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const NativeJsTypeInterfaceWithOverlay = goog.require('test.foo.NativeJsTypeInterfaceWithOverlay');
+
+let j_l_Object = goog.forwardDeclare('java.lang.Object$impl');
+
+class $Overlay {
+  /** @return {number} */
+  static m_callM__$devirt__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay(
+      /** !NativeJsTypeInterfaceWithOverlay */ $thisArg) {
+    $Overlay.$clinit();
+    return $thisArg.m();
+  }
+  /** @return {*} */
+  static get f_staticField__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay() {
+    return (
+        $Overlay.$clinit(),
+        $Overlay
+            .$static_staticField__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay);
+  }
+
+  static $clinit() {
+    $Overlay.$clinit = () => {};
+    $Overlay.$loadModules();
+    $Overlay
+        .$static_staticField__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay =
+        j_l_Object.$create__();
+  }
+
+  static $loadModules() {
+    j_l_Object = goog.module.get('java.lang.Object$impl');
+  }
+}
+/**@const {?string}*/
+$Overlay
+    .f_COMPILE_TIME_CONSTANT__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay =
+    '10';
+/**@private {*}*/
+$Overlay
+    .$static_staticField__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay_$Overlay;
+
+exports = $Overlay;
+//# sourceMappingURL=Main$NativeJsTypeInterfaceWithOverlay$$Overlay.js.map

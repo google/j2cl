@@ -1,0 +1,31 @@
+goog.module('intersectiontype.IntersectionTypeTest.EmptyA$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ */
+class EmptyA {
+  static $clinit() {
+    EmptyA.$clinit = () => {};
+    EmptyA.$loadModules();
+  }
+
+  static $markImplementor(/** Function */ ctor) {
+    ctor.prototype.$implements__intersectiontype_IntersectionTypeTest_EmptyA =
+        true;
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance != null &&
+        !!instance.$implements__intersectiontype_IntersectionTypeTest_EmptyA;
+  }
+
+  static $loadModules() {}
+}
+EmptyA.$markImplementor(/**@type {Function}*/ (EmptyA));
+$Util.$setClassMetadataForInterface(
+    EmptyA, 'intersectiontype.IntersectionTypeTest$EmptyA');
+
+exports = EmptyA;
+//# sourceMappingURL=IntersectionTypeTest$EmptyA.js.map

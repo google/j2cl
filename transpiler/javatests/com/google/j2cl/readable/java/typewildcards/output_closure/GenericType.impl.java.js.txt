@@ -1,0 +1,41 @@
+goog.module('typewildcards.GenericType$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @template T
+ */
+class GenericType extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  /** @template T @return {!GenericType<T>} */
+  static $create__() {
+    GenericType.$clinit();
+    let $instance = new GenericType();
+    $instance.$ctor__typewildcards_GenericType__();
+    return $instance;
+  }
+
+  $ctor__typewildcards_GenericType__() {
+    this.$ctor__java_lang_Object__();
+  }
+
+  static $clinit() {
+    GenericType.$clinit = () => {};
+    GenericType.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof GenericType;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(GenericType, 'typewildcards.GenericType');
+
+exports = GenericType;
+//# sourceMappingURL=GenericType.js.map

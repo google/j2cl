@@ -1,0 +1,42 @@
+goog.module('genericmethod.GenericMethod.Content$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class Content extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  /** @return {!Content} */
+  static $create__() {
+    Content.$clinit();
+    let $instance = new Content();
+    $instance.$ctor__genericmethod_GenericMethod_Content__();
+    return $instance;
+  }
+
+  $ctor__genericmethod_GenericMethod_Content__() {
+    this.$ctor__java_lang_Object__();
+  }
+  /** @return {?string} */
+  m_getProp___$pp_genericmethod() {
+    return null;
+  }
+
+  static $clinit() {
+    Content.$clinit = () => {};
+    Content.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof Content;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(Content, 'genericmethod.GenericMethod$Content');
+
+exports = Content;
+//# sourceMappingURL=GenericMethod$Content.js.map

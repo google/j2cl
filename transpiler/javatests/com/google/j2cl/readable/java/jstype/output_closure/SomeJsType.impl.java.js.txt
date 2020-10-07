@@ -1,0 +1,72 @@
+goog.module('jstype.SomeJsType$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @template T
+ */
+class SomeJsType extends j_l_Object {
+  constructor() {
+    SomeJsType.$clinit();
+    super();
+    /**@type {number}*/
+    this.publicField = 0;
+    /**@type {number}*/
+    this.f_privateField__jstype_SomeJsType_ = 0;
+    /**@type {number}*/
+    this.f_packageField__jstype_SomeJsType = 0;
+    /**@type {number}*/
+    this.f_protectedField__jstype_SomeJsType = 0;
+    this.$ctor__jstype_SomeJsType__();
+  }
+
+  $ctor__jstype_SomeJsType__() {
+    this.$ctor__java_lang_Object__();
+  }
+
+  publicMethod() {}
+
+  m_privateMethod___$p_jstype_SomeJsType() {}
+
+  m_packageMethod___$pp_jstype() {}
+
+  m_protectedMethod__() {}
+
+  useFieldsAndMethods() {
+    let value = this.publicField + this.f_privateField__jstype_SomeJsType_ +
+            this.f_packageField__jstype_SomeJsType +
+            this.f_protectedField__jstype_SomeJsType |
+        0;
+    this.publicMethod();
+    this.m_privateMethod___$p_jstype_SomeJsType();
+    this.m_packageMethod___$pp_jstype();
+    this.m_protectedMethod__();
+  }
+  /** @return {?} */
+  testStarAndWildCard(/** * */ s, /** ? */ w) {
+    let object = j_l_Object.$create__();
+    let star = /**@type {*}*/ ($Casts.$to(3, j_l_Object));
+    return /**@type {?}*/ (star);
+  }
+
+  static $clinit() {
+    SomeJsType.$clinit = () => {};
+    SomeJsType.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof SomeJsType;
+  }
+
+  static $loadModules() {
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+  }
+}
+$Util.$setClassMetadata(SomeJsType, 'jstype.SomeJsType');
+
+exports = SomeJsType;
+//# sourceMappingURL=SomeJsType.js.map

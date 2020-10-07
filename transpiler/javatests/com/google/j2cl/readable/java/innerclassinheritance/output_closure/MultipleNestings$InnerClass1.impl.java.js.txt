@@ -1,0 +1,52 @@
+goog.module('innerclassinheritance.MultipleNestings.InnerClass1$impl');
+
+const Parent = goog.require('innerclassinheritance.MultipleNestings.Parent$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let MultipleNestings = goog.forwardDeclare('innerclassinheritance.MultipleNestings$impl');
+
+class InnerClass1 extends Parent {
+  /** @protected */
+  constructor() {
+    super();
+    /**@type {MultipleNestings}*/
+    this.$outer_this__innerclassinheritance_MultipleNestings_InnerClass1;
+  }
+  /** @return {!InnerClass1} */
+  static $create__innerclassinheritance_MultipleNestings(
+      /** MultipleNestings */ $outer_this) {
+    InnerClass1.$clinit();
+    let $instance = new InnerClass1();
+    $instance
+        .$ctor__innerclassinheritance_MultipleNestings_InnerClass1__innerclassinheritance_MultipleNestings(
+            $outer_this);
+    return $instance;
+  }
+
+  $ctor__innerclassinheritance_MultipleNestings_InnerClass1__innerclassinheritance_MultipleNestings(
+      /** MultipleNestings */ $outer_this) {
+    this.$outer_this__innerclassinheritance_MultipleNestings_InnerClass1 =
+        $outer_this;
+    this.$ctor__innerclassinheritance_MultipleNestings_Parent__innerclassinheritance_MultipleNestings(
+        $outer_this);
+  }
+
+  m_funInI1__() {}
+
+  static $clinit() {
+    InnerClass1.$clinit = () => {};
+    InnerClass1.$loadModules();
+    Parent.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof InnerClass1;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(
+    InnerClass1, 'innerclassinheritance.MultipleNestings$InnerClass1');
+
+exports = InnerClass1;
+//# sourceMappingURL=MultipleNestings$InnerClass1.js.map

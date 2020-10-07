@@ -1,0 +1,46 @@
+goog.module('bridgemethods.ClassWithParameterizedGet$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @template T
+ */
+class ClassWithParameterizedGet extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  /** @template T @return {!ClassWithParameterizedGet<T>} */
+  static $create__() {
+    ClassWithParameterizedGet.$clinit();
+    let $instance = new ClassWithParameterizedGet();
+    $instance.$ctor__bridgemethods_ClassWithParameterizedGet__();
+    return $instance;
+  }
+
+  $ctor__bridgemethods_ClassWithParameterizedGet__() {
+    this.$ctor__java_lang_Object__();
+  }
+  /** @return {T} */
+  m_get__java_lang_Object(/** T */ t) {
+    return null;
+  }
+
+  static $clinit() {
+    ClassWithParameterizedGet.$clinit = () => {};
+    ClassWithParameterizedGet.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof ClassWithParameterizedGet;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(
+    ClassWithParameterizedGet, 'bridgemethods.ClassWithParameterizedGet');
+
+exports = ClassWithParameterizedGet;
+//# sourceMappingURL=ClassWithParameterizedGet.js.map

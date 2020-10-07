@@ -1,0 +1,59 @@
+goog.module('interfaces.Main.Interface.$LambdaAdaptor$impl');
+
+const Interface = goog.require('interfaces.Main.Interface$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @template T
+ * @implements {Interface<T>}
+ */
+class $LambdaAdaptor extends j_l_Object {
+  constructor(/** ?function():void */ fn) {
+    $LambdaAdaptor.$clinit();
+    super();
+    /**@type {?function():void}*/
+    this.f_fn__interfaces_Main_Interface_$LambdaAdaptor;
+    this.$ctor__interfaces_Main_Interface_$LambdaAdaptor__interfaces_Main_Interface_$JsFunction(
+        fn);
+  }
+
+  $ctor__interfaces_Main_Interface_$LambdaAdaptor__interfaces_Main_Interface_$JsFunction(
+      /** ?function():void */ fn) {
+    this.$ctor__java_lang_Object__();
+    this.f_fn__interfaces_Main_Interface_$LambdaAdaptor = fn;
+  }
+  /** @override */
+  m_interfaceMethod__() {
+    {
+      let $function = this.f_fn__interfaces_Main_Interface_$LambdaAdaptor;
+      $function();
+    }
+  }
+  // Default method forwarding stub.
+  /** @override */
+  m_defaultMethod__java_lang_Object(/** T */ arg0) {
+    Interface
+        .m_defaultMethod__$default__interfaces_Main_Interface__java_lang_Object(
+            this, arg0);
+  }
+
+  static $clinit() {
+    $LambdaAdaptor.$clinit = () => {};
+    $LambdaAdaptor.$loadModules();
+    j_l_Object.$clinit();
+    Interface.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof $LambdaAdaptor;
+  }
+
+  static $loadModules() {}
+}
+Interface.$markImplementor($LambdaAdaptor);
+$Util.$setClassMetadata(
+    $LambdaAdaptor, 'interfaces.Main$Interface$$LambdaAdaptor');
+
+exports = $LambdaAdaptor;
+//# sourceMappingURL=Main$Interface$$LambdaAdaptor.js.map

@@ -1,0 +1,48 @@
+goog.module('libraryinfo.Main.FunctionImpl$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const $JavaScriptFunction = goog.require('vmbootstrap.JavaScriptFunction$impl');
+
+class FunctionImpl extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  /** @return {function(?string):void} */
+  static $create__() {
+    FunctionImpl.$clinit();
+    let $instance = new FunctionImpl();
+    $instance.$ctor__libraryinfo_Main_FunctionImpl__();
+    return $Util.$makeLambdaFunction(
+        FunctionImpl.prototype.m_apply__java_lang_String, $instance,
+        FunctionImpl.$copy);
+  }
+  /** @suppress {invalidCasts} */
+  $ctor__libraryinfo_Main_FunctionImpl__() {
+    this.$ctor__java_lang_Object__();
+  }
+
+  m_apply__java_lang_String(/** ?string */ s) {}
+
+  static $clinit() {
+    FunctionImpl.$clinit = () => {};
+    FunctionImpl.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance != null && !!instance.$is__libraryinfo_Main_FunctionImpl;
+  }
+
+  static $copy(/** ? */ from, /** ? */ to) {
+    to.$is__libraryinfo_Main_FunctionImpl = true;
+  }
+
+  static $loadModules() {}
+}
+$JavaScriptFunction.$markImplementor(FunctionImpl);
+$Util.$setClassMetadata(FunctionImpl, 'libraryinfo.Main$FunctionImpl');
+
+exports = FunctionImpl;
+//# sourceMappingURL=Main$FunctionImpl.js.map

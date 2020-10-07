@@ -1,0 +1,45 @@
+goog.module('jsoptional.Main.NonJsTypeSubtype$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const I = goog.require('jsoptional.Main.I$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @implements {I<?string>}
+ */
+class NonJsTypeSubtype extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  /** @return {!NonJsTypeSubtype} */
+  static $create__() {
+    NonJsTypeSubtype.$clinit();
+    let $instance = new NonJsTypeSubtype();
+    $instance.$ctor__jsoptional_Main_NonJsTypeSubtype__();
+    return $instance;
+  }
+
+  $ctor__jsoptional_Main_NonJsTypeSubtype__() {
+    this.$ctor__java_lang_Object__();
+  }
+  /** @override */
+  m(/** ?string */ t, /** *= */ o) {}
+
+  static $clinit() {
+    NonJsTypeSubtype.$clinit = () => {};
+    NonJsTypeSubtype.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof NonJsTypeSubtype;
+  }
+
+  static $loadModules() {}
+}
+I.$markImplementor(NonJsTypeSubtype);
+$Util.$setClassMetadata(NonJsTypeSubtype, 'jsoptional.Main$NonJsTypeSubtype');
+
+exports = NonJsTypeSubtype;
+//# sourceMappingURL=Main$NonJsTypeSubtype.js.map

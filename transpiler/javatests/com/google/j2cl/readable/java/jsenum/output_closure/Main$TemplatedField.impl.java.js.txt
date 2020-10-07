@@ -1,0 +1,48 @@
+goog.module('jsenum.Main.TemplatedField$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @template T
+ */
+class TemplatedField extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+    /**@type {T}*/
+    this.f_value__jsenum_Main_TemplatedField;
+  }
+  /** @template T @return {!TemplatedField<T>} */
+  static $create__java_lang_Object(/** T */ value) {
+    TemplatedField.$clinit();
+    let $instance = new TemplatedField();
+    $instance.$ctor__jsenum_Main_TemplatedField__java_lang_Object(value);
+    return $instance;
+  }
+
+  $ctor__jsenum_Main_TemplatedField__java_lang_Object(/** T */ value) {
+    this.$ctor__java_lang_Object__();
+    this.f_value__jsenum_Main_TemplatedField = value;
+  }
+  /** @return {T} */
+  m_getValue___$pp_jsenum() {
+    return this.f_value__jsenum_Main_TemplatedField;
+  }
+
+  static $clinit() {
+    TemplatedField.$clinit = () => {};
+    TemplatedField.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof TemplatedField;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(TemplatedField, 'jsenum.Main$TemplatedField');
+
+exports = TemplatedField;
+//# sourceMappingURL=Main$TemplatedField.js.map

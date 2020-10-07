@@ -1,0 +1,70 @@
+goog.module('devirtualizedcalls.ObjectCalls$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
+
+class ObjectCalls extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  /** @return {!ObjectCalls} */
+  static $create__() {
+    ObjectCalls.$clinit();
+    let $instance = new ObjectCalls();
+    $instance.$ctor__devirtualizedcalls_ObjectCalls__();
+    return $instance;
+  }
+
+  $ctor__devirtualizedcalls_ObjectCalls__() {
+    this.$ctor__java_lang_Object__();
+  }
+
+  m_main__() {
+    let object = j_l_Object.$create__();
+    $Objects.m_equals__java_lang_Object__java_lang_Object(object, object);
+    $Objects.m_hashCode__java_lang_Object(object);
+    $Objects.m_toString__java_lang_Object(object);
+    $Objects.m_getClass__java_lang_Object(object);
+    let objectCalls =
+        /**@type {!Array<ObjectCalls>}*/ ($Arrays.$create([1], ObjectCalls));
+    $Objects.m_equals__java_lang_Object__java_lang_Object(
+        objectCalls, objectCalls);
+    $Objects.m_hashCode__java_lang_Object(objectCalls);
+    $Objects.m_toString__java_lang_Object(objectCalls);
+    $Objects.m_getClass__java_lang_Object(objectCalls);
+  }
+
+  m_test__() {
+    this.equals(j_l_Object.$create__());
+    this.hashCode();
+    this.toString();
+    this.m_getClass__();
+    this.equals(j_l_Object.$create__());
+    this.hashCode();
+    this.toString();
+    this.m_getClass__();
+  }
+
+  static $clinit() {
+    ObjectCalls.$clinit = () => {};
+    ObjectCalls.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof ObjectCalls;
+  }
+
+  static $loadModules() {
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+    $Objects = goog.module.get('vmbootstrap.Objects$impl');
+  }
+}
+$Util.$setClassMetadata(ObjectCalls, 'devirtualizedcalls.ObjectCalls');
+
+exports = ObjectCalls;
+//# sourceMappingURL=ObjectCalls.js.map

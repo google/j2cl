@@ -1,0 +1,40 @@
+goog.module('staticconstant.StaticConstant$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class StaticConstant extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  /** @return {!StaticConstant} */
+  static $create__() {
+    StaticConstant.$clinit();
+    let $instance = new StaticConstant();
+    $instance.$ctor__staticconstant_StaticConstant__();
+    return $instance;
+  }
+
+  $ctor__staticconstant_StaticConstant__() {
+    this.$ctor__java_lang_Object__();
+  }
+
+  static $clinit() {
+    StaticConstant.$clinit = () => {};
+    StaticConstant.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof StaticConstant;
+  }
+
+  static $loadModules() {}
+}
+/**@const {number}*/
+StaticConstant.f_FOO__staticconstant_StaticConstant = 1;
+$Util.$setClassMetadata(StaticConstant, 'staticconstant.StaticConstant');
+
+exports = StaticConstant;
+//# sourceMappingURL=StaticConstant.js.map

@@ -1,0 +1,21 @@
+goog.module('nativejstypeobjectmethods.Main.NativeJsTypeWithoutToString.$Overlay$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const NativeJsTypeWithoutToString = goog.require('test.foo.NativeJsTypeWithoutToString');
+
+class $Overlay {
+  static $clinit() {
+    $Overlay.$clinit = () => {};
+    $Overlay.$loadModules();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof NativeJsTypeWithoutToString;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata($Overlay, 'test.foo.NativeJsTypeWithoutToString');
+
+exports = $Overlay;
+//# sourceMappingURL=Main$NativeJsTypeWithoutToString$$Overlay.js.map

@@ -1,0 +1,208 @@
+[{
+
+                @Override
+                public int fun(int a) {
+                  MyInterface ii =
+                      n -> {
+                        mm();
+                        aa();
+                        bb();
+                        MyInterface iii =
+                            m -> {
+                              mm();
+                              aa();
+                              bb();
+                              return new MyInterface() {
+                                @Override
+                                public int fun(int b) {
+                                  return b;
+                                }
+                              }.fun(100);
+                            };
+                        return iii.fun(200);
+                      };
+                  return ii.fun(300);
+                }
+              }] => [$1]
+[{
+
+                @Override
+                public int fun(int a) {
+                  MyInterface ii =
+                      n -> {
+                        mm();
+                        aa();
+                        bb();
+                        MyInterface iii =
+                            m -> {
+                              mm();
+                              aa();
+                              bb();
+                              return new MyInterface() {
+                                @Override
+                                public int fun(int b) {
+                                  return b;
+                                }
+                              }.fun(100);
+                            };
+                        return iii.fun(200);
+                      };
+                  return ii.fun(300);
+                }
+              }] => [constructor]
+[{
+
+...                }
+              }] => [super();] "mixednestings.MixedNestings$A$1B$1.<synthetic: ctor_js>"
+[{
+
+...                }
+              }] => [/**@type {$1B}*/
+  this.$outer_this__mixednestings_MixedNestings_A_1B_1;] "mixednestings.MixedNestings$A$1B$1.<synthetic: ctor_js>"
+[{
+
+                @Override
+                public int fun(int a) {
+                  MyInterface ii =
+                      n -> {
+                        mm();
+                        aa();
+                        bb();
+                        MyInterface iii =
+                            m -> {
+                              mm();
+                              aa();
+                              bb();
+                              return new MyInterface() {
+                                @Override
+                                public int fun(int b) {
+                                  return b;
+                                }
+                              }.fun(100);
+                            };
+                        return iii.fun(200);
+                      };
+                  return ii.fun(300);
+                }
+              }] => [$create__mixednestings_MixedNestings_A_1B]
+[{
+
+...                }
+              }] => [$1.$clinit();] "mixednestings.MixedNestings$A$1B$1.<synthetic: ctor_create>"
+[{
+
+...                }
+              }] => [let $instance = new $1();] "mixednestings.MixedNestings$A$1B$1.<synthetic: ctor_create>"
+[{
+
+...                }
+              }] => [$instance.$ctor__mixednestings_MixedNestings_A_1B_1__mixednestings_MixedNestings_A_1B($outer_this);] "mixednestings.MixedNestings$A$1B$1.<synthetic: ctor_create>"
+[{
+
+...                }
+              }] => [return $instance;] "mixednestings.MixedNestings$A$1B$1.<synthetic: ctor_create>"
+[{
+
+                @Override
+                public int fun(int a) {
+                  MyInterface ii =
+                      n -> {
+                        mm();
+                        aa();
+                        bb();
+                        MyInterface iii =
+                            m -> {
+                              mm();
+                              aa();
+                              bb();
+                              return new MyInterface() {
+                                @Override
+                                public int fun(int b) {
+                                  return b;
+                                }
+                              }.fun(100);
+                            };
+                        return iii.fun(200);
+                      };
+                  return ii.fun(300);
+                }
+              }] => [$ctor__mixednestings_MixedNestings_A_1B_1__mixednestings_MixedNestings_A_1B]
+[{
+
+...                }
+              }] => [this.$outer_this__mixednestings_MixedNestings_A_1B_1 = $outer_this;] "mixednestings.MixedNestings$A$1B$1.<init>"
+[{
+
+...                }
+              }] => [this.$ctor__java_lang_Object__();] "mixednestings.MixedNestings$A$1B$1.<init>"
+[fun] => [m_fun__int]
+[a] => [a] "a"
+[MyInterface ii =
+                      n -> {
+...                        return iii.fun(200);
+                      };] => [let ii = MyInterface.$adapt((/** number */ n) =>{
+   this.$outer_this__mixednestings_MixedNestings_A_1B_1.$outer_this__mixednestings_MixedNestings_A_1B.$outer_this__mixednestings_MixedNestings_A.m_mm__();
+...   return iii.m_fun__int(200);
+  });] "mixednestings.MixedNestings$A$1B$1.fun"
+[ii] => [ii] "ii"
+[n] => [n] "n"
+[mm();] => [this.$outer_this__mixednestings_MixedNestings_A_1B_1.$outer_this__mixednestings_MixedNestings_A_1B.$outer_this__mixednestings_MixedNestings_A.m_mm__();] "mixednestings.MixedNestings$A$1B$1.<lambda in fun>"
+[aa();] => [this.$outer_this__mixednestings_MixedNestings_A_1B_1.$outer_this__mixednestings_MixedNestings_A_1B.m_aa__();] "mixednestings.MixedNestings$A$1B$1.<lambda in fun>"
+[bb();] => [this.$outer_this__mixednestings_MixedNestings_A_1B_1.m_bb__();] "mixednestings.MixedNestings$A$1B$1.<lambda in fun>"
+[MyInterface iii =
+                            m -> {
+...                              }.fun(100);
+                            };] => [let iii = MyInterface.$adapt((/** number */ m) =>{
+    this.$outer_this__mixednestings_MixedNestings_A_1B_1.$outer_this__mixednestings_MixedNestings_A_1B.$outer_this__mixednestings_MixedNestings_A.m_mm__();
+...    return $1_$1.$create__mixednestings_MixedNestings_A_1B_1(this).m_fun__int(100);
+   });] "mixednestings.MixedNestings$A$1B$1.<lambda in fun>"
+[iii] => [iii] "iii"
+[m] => [m] "m"
+[mm();] => [this.$outer_this__mixednestings_MixedNestings_A_1B_1.$outer_this__mixednestings_MixedNestings_A_1B.$outer_this__mixednestings_MixedNestings_A.m_mm__();] "mixednestings.MixedNestings$A$1B$1.<lambda in fun>"
+[aa();] => [this.$outer_this__mixednestings_MixedNestings_A_1B_1.$outer_this__mixednestings_MixedNestings_A_1B.m_aa__();] "mixednestings.MixedNestings$A$1B$1.<lambda in fun>"
+[bb();] => [this.$outer_this__mixednestings_MixedNestings_A_1B_1.m_bb__();] "mixednestings.MixedNestings$A$1B$1.<lambda in fun>"
+[return new MyInterface() {
+                                @Override
+...                                }
+                              }.fun(100);] => [return $1_$1.$create__mixednestings_MixedNestings_A_1B_1(this).m_fun__int(100);] "mixednestings.MixedNestings$A$1B$1.<lambda in fun>"
+[return iii.fun(200);] => [return iii.m_fun__int(200);] "mixednestings.MixedNestings$A$1B$1.<lambda in fun>"
+[return ii.fun(300);] => [return ii.m_fun__int(300);] "mixednestings.MixedNestings$A$1B$1.fun"
+[{
+
+                @Override
+                public int fun(int a) {
+                  MyInterface ii =
+                      n -> {
+                        mm();
+                        aa();
+                        bb();
+                        MyInterface iii =
+                            m -> {
+                              mm();
+                              aa();
+                              bb();
+                              return new MyInterface() {
+                                @Override
+                                public int fun(int b) {
+                                  return b;
+                                }
+                              }.fun(100);
+                            };
+                        return iii.fun(200);
+                      };
+                  return ii.fun(300);
+                }
+              }] => [$clinit]
+[{
+
+...                }
+              }] => [$1.$clinit = () =>{};] "mixednestings.MixedNestings$A$1B$1.<clinit>"
+[{
+
+...                }
+              }] => [$1.$loadModules();] "mixednestings.MixedNestings$A$1B$1.<clinit>"
+[{
+
+...                }
+              }] => [j_l_Object.$clinit();] "mixednestings.MixedNestings$A$1B$1.<clinit>"
+

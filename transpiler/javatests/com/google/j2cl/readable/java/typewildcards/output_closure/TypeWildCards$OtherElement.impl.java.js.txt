@@ -1,0 +1,47 @@
+goog.module('typewildcards.TypeWildCards.OtherElement$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const HasKey = goog.require('typewildcards.TypeWildCards.HasKey$impl');
+const IntegerSupplier = goog.require('typewildcards.TypeWildCards.IntegerSupplier$impl');
+
+let TypeWildCards = goog.forwardDeclare('typewildcards.TypeWildCards$impl');
+
+/**
+ * @abstract
+ * @implements {IntegerSupplier}
+ * @implements {HasKey}
+ */
+class OtherElement extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+    /**@type {TypeWildCards}*/
+    this.$outer_this__typewildcards_TypeWildCards_OtherElement;
+  }
+
+  $ctor__typewildcards_TypeWildCards_OtherElement__typewildcards_TypeWildCards(
+      /** TypeWildCards */ $outer_this) {
+    this.$outer_this__typewildcards_TypeWildCards_OtherElement = $outer_this;
+    this.$ctor__java_lang_Object__();
+  }
+
+  static $clinit() {
+    OtherElement.$clinit = () => {};
+    OtherElement.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof OtherElement;
+  }
+
+  static $loadModules() {}
+}
+IntegerSupplier.$markImplementor(OtherElement);
+HasKey.$markImplementor(OtherElement);
+$Util.$setClassMetadata(
+    OtherElement, 'typewildcards.TypeWildCards$OtherElement');
+
+exports = OtherElement;
+//# sourceMappingURL=TypeWildCards$OtherElement.js.map

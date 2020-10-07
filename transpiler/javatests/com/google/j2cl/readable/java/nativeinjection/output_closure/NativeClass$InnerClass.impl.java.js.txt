@@ -1,0 +1,53 @@
+goog.module('nativeinjection.NativeClass.InnerClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class InnerClass extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  /** @return {!InnerClass} */
+  static $create__() {
+    InnerClass.$clinit();
+    let $instance = new InnerClass();
+    $instance.$ctor__nativeinjection_NativeClass_InnerClass__();
+    return $instance;
+  }
+
+  $ctor__nativeinjection_NativeClass_InnerClass__() {
+    this.$ctor__java_lang_Object__();
+  }
+  // /** @return {?string} */
+  // native m_nativeInstanceMethod__()
+
+  static $clinit() {
+    InnerClass.$clinit = () => {};
+    InnerClass.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof InnerClass;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(InnerClass, 'nativeinjection.NativeClass$InnerClass');
+
+/* NATIVE.JS EPILOG */
+
+const nativeinjection_NativeClass_InnerClass = InnerClass;
+
+/**
+ * @return {string}
+ * @public
+ */
+InnerClass.prototype.m_nativeInstanceMethod__ = function() {
+  return 'nativeInstanceMethod';
+};
+
+
+exports = InnerClass;
+//# sourceMappingURL=NativeClass$InnerClass.js.map

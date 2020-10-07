@@ -1,0 +1,42 @@
+goog.module('packageprivatemethods.package2.SubChild$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const Child = goog.require('packageprivatemethods.package1.Child$impl');
+
+class SubChild extends Child {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  /** @return {!SubChild} */
+  static $create__() {
+    SubChild.$clinit();
+    let $instance = new SubChild();
+    $instance.$ctor__packageprivatemethods_package2_SubChild__();
+    return $instance;
+  }
+
+  $ctor__packageprivatemethods_package2_SubChild__() {
+    this.$ctor__packageprivatemethods_package1_Child__();
+  }
+  /** @override @return {number} */
+  m_foo__int(/** number */ a) {
+    return a + 3 | 0;
+  }
+
+  static $clinit() {
+    SubChild.$clinit = () => {};
+    SubChild.$loadModules();
+    Child.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof SubChild;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(SubChild, 'packageprivatemethods.package2.SubChild');
+
+exports = SubChild;
+//# sourceMappingURL=SubChild.js.map

@@ -1,0 +1,37 @@
+goog.module('jsnonnull.Main.NonNullableTemplate$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ * @template T
+ */
+class NonNullableTemplate {
+  /** @abstract @return {T} */
+  m_get__() {}
+  /** @abstract @return {Array<T>} */
+  m_getArray__() {}
+
+  static $clinit() {
+    NonNullableTemplate.$clinit = () => {};
+    NonNullableTemplate.$loadModules();
+  }
+
+  static $markImplementor(/** Function */ ctor) {
+    ctor.prototype.$implements__jsnonnull_Main_NonNullableTemplate = true;
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance != null &&
+        !!instance.$implements__jsnonnull_Main_NonNullableTemplate;
+  }
+
+  static $loadModules() {}
+}
+NonNullableTemplate.$markImplementor(
+    /**@type {Function}*/ (NonNullableTemplate));
+$Util.$setClassMetadataForInterface(
+    NonNullableTemplate, 'jsnonnull.Main$NonNullableTemplate');
+
+exports = NonNullableTemplate;
+//# sourceMappingURL=Main$NonNullableTemplate.js.map

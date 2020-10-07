@@ -1,0 +1,81 @@
+goog.module('autovalue.AutoValue_ExtendingAutoValue$impl');
+
+const ExtendingAutoValue = goog.require('autovalue.ExtendingAutoValue$impl');
+const ValueType = goog.require('javaemul.internal.ValueType$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let NullPointerException = goog.forwardDeclare('java.lang.NullPointerException$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+
+class AutoValue__ExtendingAutoValue extends ExtendingAutoValue {
+  /** @protected */
+  constructor() {
+    super();
+    /**@type {number}*/
+    this.f_baseField__autovalue_AutoValue_ExtendingAutoValue_ = 0;
+    /**@type {boolean}*/
+    this.f_booleanField__autovalue_AutoValue_ExtendingAutoValue_ = false;
+    /**@type {?string}*/
+    this.f_stringField__autovalue_AutoValue_ExtendingAutoValue_;
+  }
+  /** @return {!AutoValue__ExtendingAutoValue} */
+  static $create__int__boolean__java_lang_String(
+      /** number */ baseField, /** boolean */ booleanField,
+      /** ?string */ stringField) {
+    AutoValue__ExtendingAutoValue.$clinit();
+    let $instance = new AutoValue__ExtendingAutoValue();
+    $instance
+        .$ctor__autovalue_AutoValue_ExtendingAutoValue__int__boolean__java_lang_String(
+            baseField, booleanField, stringField);
+    return $instance;
+  }
+
+  $ctor__autovalue_AutoValue_ExtendingAutoValue__int__boolean__java_lang_String(
+      /** number */ baseField, /** boolean */ booleanField,
+      /** ?string */ stringField) {
+    this.$ctor__autovalue_ExtendingAutoValue__();
+    this.f_baseField__autovalue_AutoValue_ExtendingAutoValue_ = baseField;
+    this.f_booleanField__autovalue_AutoValue_ExtendingAutoValue_ = booleanField;
+    if ($Equality.$same(stringField, null)) {
+      throw $Exceptions.toJs(
+          NullPointerException.$create__java_lang_String('Null stringField'));
+    }
+    this.f_stringField__autovalue_AutoValue_ExtendingAutoValue_ = stringField;
+  }
+  /** @override @return {number} */
+  m_getBaseField__() {
+    return this.f_baseField__autovalue_AutoValue_ExtendingAutoValue_;
+  }
+  /** @override @return {boolean} */
+  m_getBooleanField__() {
+    return this.f_booleanField__autovalue_AutoValue_ExtendingAutoValue_;
+  }
+  /** @override @return {?string} */
+  m_getStringField__() {
+    return this.f_stringField__autovalue_AutoValue_ExtendingAutoValue_;
+  }
+
+  static $clinit() {
+    AutoValue__ExtendingAutoValue.$clinit = () => {};
+    AutoValue__ExtendingAutoValue.$loadModules();
+    ExtendingAutoValue.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof AutoValue__ExtendingAutoValue;
+  }
+
+  static $loadModules() {
+    NullPointerException =
+        goog.module.get('java.lang.NullPointerException$impl');
+    $Equality = goog.module.get('nativebootstrap.Equality$impl');
+    $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+  }
+}
+ValueType.mixin(AutoValue__ExtendingAutoValue, 7);
+$Util.$setClassMetadata(
+    AutoValue__ExtendingAutoValue, 'autovalue.AutoValue_ExtendingAutoValue');
+
+exports = AutoValue__ExtendingAutoValue;
+//# sourceMappingURL=AutoValue_ExtendingAutoValue.js.map

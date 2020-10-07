@@ -1,0 +1,45 @@
+goog.module('methodreferences.MethodReferences.BiFunction$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('methodreferences.MethodReferences.BiFunction.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ * @template T, U, V
+ */
+class BiFunction {
+  /** @abstract @return {V} */
+  m_apply__java_lang_Object__java_lang_Object(/** T */ t, /** U */ u) {}
+  /** @template T, U, V @return {BiFunction<T, U, V>} */
+  static $adapt(/** ?function(T, U):V */ fn) {
+    BiFunction.$clinit();
+    return /**@type {!$LambdaAdaptor<T, U, V>}*/ (new $LambdaAdaptor(fn));
+  }
+
+  static $clinit() {
+    BiFunction.$clinit = () => {};
+    BiFunction.$loadModules();
+  }
+
+  static $markImplementor(/** Function */ ctor) {
+    ctor.prototype.$implements__methodreferences_MethodReferences_BiFunction =
+        true;
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance != null &&
+        !!instance.$implements__methodreferences_MethodReferences_BiFunction;
+  }
+
+  static $loadModules() {
+    $LambdaAdaptor = goog.module.get(
+        'methodreferences.MethodReferences.BiFunction.$LambdaAdaptor$impl');
+  }
+}
+BiFunction.$markImplementor(/**@type {Function}*/ (BiFunction));
+$Util.$setClassMetadataForInterface(
+    BiFunction, 'methodreferences.MethodReferences$BiFunction');
+
+exports = BiFunction;
+//# sourceMappingURL=MethodReferences$BiFunction.js.map

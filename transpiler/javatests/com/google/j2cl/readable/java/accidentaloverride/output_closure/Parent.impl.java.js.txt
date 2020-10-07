@@ -1,0 +1,45 @@
+goog.module('accidentaloverride.Parent$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Error = goog.forwardDeclare('java.lang.Error$impl');
+
+/**
+ * @template T
+ */
+class Parent extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  /** @template T @return {!Parent<T>} */
+  static $create__() {
+    Parent.$clinit();
+    let $instance = new Parent();
+    $instance.$ctor__accidentaloverride_Parent__();
+    return $instance;
+  }
+
+  $ctor__accidentaloverride_Parent__() {
+    this.$ctor__java_lang_Object__();
+  }
+
+  m_foo__java_lang_Error(/** T */ e) {}
+
+  static $clinit() {
+    Parent.$clinit = () => {};
+    Parent.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof Parent;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(Parent, 'accidentaloverride.Parent');
+
+exports = Parent;
+//# sourceMappingURL=Parent.js.map

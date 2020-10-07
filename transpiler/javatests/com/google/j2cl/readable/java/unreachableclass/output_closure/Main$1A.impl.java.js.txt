@@ -1,0 +1,47 @@
+goog.module('unreachableclass.Main.$1A$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Main = goog.forwardDeclare('unreachableclass.Main$impl');
+
+class $1A extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+    /**@type {Main}*/
+    this.$outer_this__unreachableclass_Main_1A;
+  }
+  /** @return {!$1A} */
+  static $create__unreachableclass_Main(/** Main */ $outer_this) {
+    $1A.$clinit();
+    let $instance = new $1A();
+    $instance.$ctor__unreachableclass_Main_1A__unreachableclass_Main(
+        $outer_this);
+    return $instance;
+  }
+
+  $ctor__unreachableclass_Main_1A__unreachableclass_Main(
+      /** Main */ $outer_this) {
+    this.$outer_this__unreachableclass_Main_1A = $outer_this;
+    this.$ctor__java_lang_Object__();
+  }
+
+  m_m___$pp_unreachableclass() {}
+
+  static $clinit() {
+    $1A.$clinit = () => {};
+    $1A.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof $1A;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata($1A, 'unreachableclass.Main$1A');
+
+exports = $1A;
+//# sourceMappingURL=Main$1A.js.map

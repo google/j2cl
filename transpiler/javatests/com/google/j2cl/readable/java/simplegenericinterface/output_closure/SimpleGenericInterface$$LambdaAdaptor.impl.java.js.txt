@@ -1,0 +1,54 @@
+goog.module('simplegenericinterface.SimpleGenericInterface.$LambdaAdaptor$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const SimpleGenericInterface = goog.require('simplegenericinterface.SimpleGenericInterface$impl');
+
+/**
+ * @template T
+ * @implements {SimpleGenericInterface<T>}
+ */
+class $LambdaAdaptor extends j_l_Object {
+  constructor(/** ?function(T):T */ fn) {
+    $LambdaAdaptor.$clinit();
+    super();
+    /**@type {?function(T):T}*/
+    this.f_fn__simplegenericinterface_SimpleGenericInterface_$LambdaAdaptor;
+    this.$ctor__simplegenericinterface_SimpleGenericInterface_$LambdaAdaptor__simplegenericinterface_SimpleGenericInterface_$JsFunction(
+        fn);
+  }
+
+  $ctor__simplegenericinterface_SimpleGenericInterface_$LambdaAdaptor__simplegenericinterface_SimpleGenericInterface_$JsFunction(
+      /** ?function(T):T */ fn) {
+    this.$ctor__java_lang_Object__();
+    this.f_fn__simplegenericinterface_SimpleGenericInterface_$LambdaAdaptor =
+        fn;
+  }
+  /** @override @return {T} */
+  m_fun__java_lang_Object(/** T */ arg0) {
+    let /** ?function(T):T */ $function;
+    return (
+        $function =
+            this.f_fn__simplegenericinterface_SimpleGenericInterface_$LambdaAdaptor,
+        $function(arg0));
+  }
+
+  static $clinit() {
+    $LambdaAdaptor.$clinit = () => {};
+    $LambdaAdaptor.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof $LambdaAdaptor;
+  }
+
+  static $loadModules() {}
+}
+SimpleGenericInterface.$markImplementor($LambdaAdaptor);
+$Util.$setClassMetadata(
+    $LambdaAdaptor,
+    'simplegenericinterface.SimpleGenericInterface$$LambdaAdaptor');
+
+exports = $LambdaAdaptor;
+//# sourceMappingURL=SimpleGenericInterface$$LambdaAdaptor.js.map

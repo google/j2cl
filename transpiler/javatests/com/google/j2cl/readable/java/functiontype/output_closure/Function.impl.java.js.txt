@@ -1,0 +1,30 @@
+goog.module('functiontype.Function$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ */
+class functiontype_Function {
+  static $clinit() {
+    functiontype_Function.$clinit = () => {};
+    functiontype_Function.$loadModules();
+  }
+
+  static $markImplementor(/** Function */ ctor) {
+    ctor.prototype.$implements__functiontype_Function = true;
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance != null && !!instance.$implements__functiontype_Function;
+  }
+
+  static $loadModules() {}
+}
+functiontype_Function.$markImplementor(
+    /**@type {Function}*/ (functiontype_Function));
+$Util.$setClassMetadataForInterface(
+    functiontype_Function, 'functiontype.Function');
+
+exports = functiontype_Function;
+//# sourceMappingURL=Function.js.map

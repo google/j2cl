@@ -1,0 +1,53 @@
+goog.module('lambdas.Lambdas.AnotherThenable.$LambdaAdaptor$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
+
+/**
+ * @template T
+ */
+class $LambdaAdaptor extends j_l_Object {
+  constructor(
+      /** ?function(?function(T):?void, ?function(Throwable):?void):void */
+      fn) {
+    $LambdaAdaptor.$clinit();
+    super();
+    /**@type {?function(?function(T):?void, ?function(Throwable):?void):void}*/
+    this.f_fn__lambdas_Lambdas_AnotherThenable_$LambdaAdaptor;
+    this.$ctor__lambdas_Lambdas_AnotherThenable_$LambdaAdaptor__lambdas_Lambdas_AnotherThenable_$JsFunction(
+        fn);
+  }
+
+  $ctor__lambdas_Lambdas_AnotherThenable_$LambdaAdaptor__lambdas_Lambdas_AnotherThenable_$JsFunction(
+      /** ?function(?function(T):?void, ?function(Throwable):?void):void */
+      fn) {
+    this.$ctor__java_lang_Object__();
+    this.f_fn__lambdas_Lambdas_AnotherThenable_$LambdaAdaptor = fn;
+  }
+
+  then(/** ?function(T):?void */ arg0, /** ?function(Throwable):?void */ arg1) {
+    {
+      let $function = this.f_fn__lambdas_Lambdas_AnotherThenable_$LambdaAdaptor;
+      $function(arg0, arg1);
+    }
+  }
+
+  static $clinit() {
+    $LambdaAdaptor.$clinit = () => {};
+    $LambdaAdaptor.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof $LambdaAdaptor;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(
+    $LambdaAdaptor, 'lambdas.Lambdas$AnotherThenable$$LambdaAdaptor');
+
+exports = $LambdaAdaptor;
+//# sourceMappingURL=Lambdas$AnotherThenable$$LambdaAdaptor.js.map

@@ -1,0 +1,58 @@
+goog.module('devirtualizedsupermethodcall.Main$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let FooCallsSuperObjectMethod = goog.forwardDeclare('devirtualizedsupermethodcall.FooCallsSuperObjectMethod$impl');
+let SubNumber = goog.forwardDeclare('devirtualizedsupermethodcall.SubNumber$impl');
+let $Numbers = goog.forwardDeclare('vmbootstrap.Numbers$impl');
+
+class Main extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  /** @return {!Main} */
+  static $create__() {
+    Main.$clinit();
+    let $instance = new Main();
+    $instance.$ctor__devirtualizedsupermethodcall_Main__();
+    return $instance;
+  }
+
+  $ctor__devirtualizedsupermethodcall_Main__() {
+    this.$ctor__java_lang_Object__();
+  }
+
+  m_main__() {
+    let fooCallsSuperObjectMethods = FooCallsSuperObjectMethod.$create__();
+    fooCallsSuperObjectMethods.hashCode();
+    let sn = SubNumber.$create__();
+    $Numbers.m_byteValue__java_lang_Number(sn);
+    sn.m_doubleValue__();
+    sn.m_floatValue__();
+    sn.m_intValue__();
+    $Numbers.m_shortValue__java_lang_Number(sn);
+  }
+
+  static $clinit() {
+    Main.$clinit = () => {};
+    Main.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof Main;
+  }
+
+  static $loadModules() {
+    FooCallsSuperObjectMethod = goog.module.get(
+        'devirtualizedsupermethodcall.FooCallsSuperObjectMethod$impl');
+    SubNumber = goog.module.get('devirtualizedsupermethodcall.SubNumber$impl');
+    $Numbers = goog.module.get('vmbootstrap.Numbers$impl');
+  }
+}
+$Util.$setClassMetadata(Main, 'devirtualizedsupermethodcall.Main');
+
+exports = Main;
+//# sourceMappingURL=Main.js.map

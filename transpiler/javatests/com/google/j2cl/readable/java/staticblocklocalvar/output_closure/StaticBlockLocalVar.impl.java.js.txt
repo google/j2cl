@@ -1,0 +1,41 @@
+goog.module('staticblocklocalvar.StaticBlockLocalVar$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class StaticBlockLocalVar extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  /** @return {!StaticBlockLocalVar} */
+  static $create__() {
+    StaticBlockLocalVar.$clinit();
+    let $instance = new StaticBlockLocalVar();
+    $instance.$ctor__staticblocklocalvar_StaticBlockLocalVar__();
+    return $instance;
+  }
+
+  $ctor__staticblocklocalvar_StaticBlockLocalVar__() {
+    this.$ctor__java_lang_Object__();
+  }
+
+  static $clinit() {
+    StaticBlockLocalVar.$clinit = () => {};
+    StaticBlockLocalVar.$loadModules();
+    j_l_Object.$clinit();
+    let i = 10;
+    i = i + 20 | 0;
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof StaticBlockLocalVar;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(
+    StaticBlockLocalVar, 'staticblocklocalvar.StaticBlockLocalVar');
+
+exports = StaticBlockLocalVar;
+//# sourceMappingURL=StaticBlockLocalVar.js.map

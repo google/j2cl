@@ -1,0 +1,88 @@
+goog.module('localnamecollision.LocalNameCollision$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
+let Asserts = goog.forwardDeclare('localnamecollision.Asserts$impl');
+let Class = goog.forwardDeclare('localnamecollision.Class$impl');
+let A = goog.forwardDeclare('localnamecollision.package1.A$impl');
+let localnamecollision_package2_A = goog.forwardDeclare('localnamecollision.package2.A$impl');
+let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
+
+class LocalNameCollision extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+  }
+
+  m_testClassLocalVarCollision__() {
+    let LocalNameCollision_1 = false;
+    let RuntimeException_1 = null;
+    let Asserts_1 = 1;
+    let $Asserts_1 = 1;
+    let l_Asserts = 1;
+    let com_google_j2cl_readable_localnamecollision_Class = 1;
+    let com_google_j2cl_readable_localnamecollision_package1_A = 1;
+    let com_google_j2cl_readable_localnamecollision_package2_A = 1;
+    let A_1 = 1;
+    LocalNameCollision_1 = LocalNameCollision.$isInstance(RuntimeException_1) ||
+        RuntimeException.$isInstance(RuntimeException_1) ||
+        A.$isInstance(RuntimeException_1) ||
+        localnamecollision_package2_A.$isInstance(RuntimeException_1) ||
+        Class.$isInstance(RuntimeException_1);
+    $Asserts.$assert(Asserts.$create__().m_n___$pp_localnamecollision() == 5);
+  }
+  /** @return {boolean} */
+  m_testClassParameterCollision__boolean__java_lang_Object__java_lang_Object__int__int(
+      /** boolean */ LocalNameCollision_1, /** * */ Asserts_1,
+      /** * */ $Asserts_1, /** number */ l_Asserts, /** number */ A_1) {
+    return LocalNameCollision_1 && LocalNameCollision.$isInstance(Asserts_1) &&
+        Asserts.$isInstance($Asserts_1) && l_Asserts == A_1;
+  }
+  /** @return {!LocalNameCollision} */
+  static $create__boolean__java_lang_Object__java_lang_Object__int__int(
+      /** boolean */ LocalNameCollision_1, /** * */ Asserts_1,
+      /** * */ $Asserts_1, /** number */ l_Asserts, /** number */ A_1) {
+    LocalNameCollision.$clinit();
+    let $instance = new LocalNameCollision();
+    $instance
+        .$ctor__localnamecollision_LocalNameCollision__boolean__java_lang_Object__java_lang_Object__int__int(
+            LocalNameCollision_1, Asserts_1, $Asserts_1, l_Asserts, A_1);
+    return $instance;
+  }
+
+  $ctor__localnamecollision_LocalNameCollision__boolean__java_lang_Object__java_lang_Object__int__int(
+      /** boolean */ LocalNameCollision_1, /** * */ Asserts_1,
+      /** * */ $Asserts_1, /** number */ l_Asserts, /** number */ A_1) {
+    this.$ctor__java_lang_Object__();
+    let result = LocalNameCollision_1 &&
+        LocalNameCollision.$isInstance(Asserts_1) &&
+        Asserts.$isInstance($Asserts_1) && l_Asserts == A_1;
+  }
+
+  static $clinit() {
+    LocalNameCollision.$clinit = () => {};
+    LocalNameCollision.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof LocalNameCollision;
+  }
+
+  static $loadModules() {
+    RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
+    Asserts = goog.module.get('localnamecollision.Asserts$impl');
+    Class = goog.module.get('localnamecollision.Class$impl');
+    A = goog.module.get('localnamecollision.package1.A$impl');
+    localnamecollision_package2_A =
+        goog.module.get('localnamecollision.package2.A$impl');
+    $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
+  }
+}
+$Util.$setClassMetadata(
+    LocalNameCollision, 'localnamecollision.LocalNameCollision');
+
+exports = LocalNameCollision;
+//# sourceMappingURL=LocalNameCollision.js.map

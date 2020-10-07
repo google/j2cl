@@ -1,0 +1,64 @@
+goog.module('supermethodcall.Child$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const Parent = goog.require('supermethodcall.Parent$impl');
+
+class Child extends Parent {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  /** @return {!Child} */
+  static $create__() {
+    Child.$clinit();
+    let $instance = new Child();
+    $instance.$ctor__supermethodcall_Child__();
+    return $instance;
+  }
+
+  $ctor__supermethodcall_Child__() {
+    this.$ctor__supermethodcall_Parent__();
+  }
+  /** @override */
+  m_parentSimplest__() {
+    super.m_parentSimplest__();
+  }
+  /** @override */
+  m_parentWithParams__int(/** number */ foo) {
+    super.m_parentWithParams__int(foo);
+  }
+  /** @override @return {Child} */
+  m_parentWithChangingReturn__() {
+    super.m_parentWithChangingReturn__();
+    return this;
+  }
+  /** @override */
+  m_grandParentSimplest__() {
+    super.m_grandParentSimplest__();
+  }
+  /** @override */
+  m_grandParentWithParams__int(/** number */ foo) {
+    super.m_grandParentWithParams__int(foo);
+  }
+  /** @override @return {Child} */
+  m_grandParentWithChangingReturn__() {
+    super.m_grandParentWithChangingReturn__();
+    return this;
+  }
+
+  static $clinit() {
+    Child.$clinit = () => {};
+    Child.$loadModules();
+    Parent.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof Child;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(Child, 'supermethodcall.Child');
+
+exports = Child;
+//# sourceMappingURL=Child.js.map

@@ -1,0 +1,55 @@
+goog.module('mixednestings.MixedNestings.A.$1B.$1.$1$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const MyInterface = goog.require('mixednestings.MyInterface$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $1 = goog.forwardDeclare('mixednestings.MixedNestings.A.$1B.$1$impl');
+
+/**
+ * @implements {MyInterface}
+ */
+class $1_$1 extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+    /**@type {$1}*/
+    this.$outer_this__mixednestings_MixedNestings_A_1B_1_1;
+  }
+  /** @return {!$1_$1} */
+  static $create__mixednestings_MixedNestings_A_1B_1(/** $1 */ $outer_this) {
+    $1_$1.$clinit();
+    let $instance = new $1_$1();
+    $instance
+        .$ctor__mixednestings_MixedNestings_A_1B_1_1__mixednestings_MixedNestings_A_1B_1(
+            $outer_this);
+    return $instance;
+  }
+
+  $ctor__mixednestings_MixedNestings_A_1B_1_1__mixednestings_MixedNestings_A_1B_1(
+      /** $1 */ $outer_this) {
+    this.$outer_this__mixednestings_MixedNestings_A_1B_1_1 = $outer_this;
+    this.$ctor__java_lang_Object__();
+  }
+  /** @override @return {number} */
+  m_fun__int(/** number */ b) {
+    return b;
+  }
+
+  static $clinit() {
+    $1_$1.$clinit = () => {};
+    $1_$1.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof $1_$1;
+  }
+
+  static $loadModules() {}
+}
+MyInterface.$markImplementor($1_$1);
+$Util.$setClassMetadata($1_$1, 'mixednestings.MixedNestings$A$1B$1$1');
+
+exports = $1_$1;
+//# sourceMappingURL=MixedNestings$A$1B$1$1.js.map

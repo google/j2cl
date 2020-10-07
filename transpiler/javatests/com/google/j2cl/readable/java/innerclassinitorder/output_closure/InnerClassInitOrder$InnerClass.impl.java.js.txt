@@ -1,0 +1,69 @@
+goog.module('innerclassinitorder.InnerClassInitOrder.InnerClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let InnerClassInitOrder = goog.forwardDeclare('innerclassinitorder.InnerClassInitOrder$impl');
+let $1ReallyInnerClass = goog.forwardDeclare('innerclassinitorder.InnerClassInitOrder.InnerClass.$1ReallyInnerClass$impl');
+
+class InnerClass extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+    /**@type {InnerClassInitOrder}*/
+    this.$outer_this__innerclassinitorder_InnerClassInitOrder_InnerClass;
+  }
+  /** @return {!InnerClass} */
+  static $create__innerclassinitorder_InnerClassInitOrder(
+      /** InnerClassInitOrder */ $outer_this) {
+    InnerClass.$clinit();
+    let $instance = new InnerClass();
+    $instance
+        .$ctor__innerclassinitorder_InnerClassInitOrder_InnerClass__innerclassinitorder_InnerClassInitOrder(
+            $outer_this);
+    return $instance;
+  }
+
+  $ctor__innerclassinitorder_InnerClassInitOrder_InnerClass__innerclassinitorder_InnerClassInitOrder(
+      /** InnerClassInitOrder */ $outer_this) {
+    this.$outer_this__innerclassinitorder_InnerClassInitOrder_InnerClass =
+        $outer_this;
+    this.$ctor__java_lang_Object__();
+    this.$init___$p_innerclassinitorder_InnerClassInitOrder_InnerClass();
+  }
+
+  m_callInner___$pp_innerclassinitorder() {
+    this.$outer_this__innerclassinitorder_InnerClassInitOrder_InnerClass
+        .f_number__innerclassinitorder_InnerClassInitOrder =
+        this.$outer_this__innerclassinitorder_InnerClassInitOrder_InnerClass
+                .f_number__innerclassinitorder_InnerClassInitOrder +
+            1 |
+        0;
+    $1ReallyInnerClass
+        .$create__innerclassinitorder_InnerClassInitOrder_InnerClass(this);
+  }
+  /** @private */
+  $init___$p_innerclassinitorder_InnerClassInitOrder_InnerClass() {
+    this.m_callInner___$pp_innerclassinitorder();
+  }
+
+  static $clinit() {
+    InnerClass.$clinit = () => {};
+    InnerClass.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof InnerClass;
+  }
+
+  static $loadModules() {
+    $1ReallyInnerClass = goog.module.get(
+        'innerclassinitorder.InnerClassInitOrder.InnerClass.$1ReallyInnerClass$impl');
+  }
+}
+$Util.$setClassMetadata(
+    InnerClass, 'innerclassinitorder.InnerClassInitOrder$InnerClass');
+
+exports = InnerClass;
+//# sourceMappingURL=InnerClassInitOrder$InnerClass.js.map

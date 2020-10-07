@@ -1,0 +1,11 @@
+goog.module('bridgemethods.BridgeMethod');
+
+goog.require('bridgemethods.Parent');
+goog.require('bridgemethods.SomeInterface');
+goog.require('java.lang.AssertionError');
+goog.require('java.lang.Number');
+goog.require('nativebootstrap.Util');
+goog.require('vmbootstrap.Casts');
+
+const BridgeMethod = goog.require('bridgemethods.BridgeMethod$impl');
+exports = BridgeMethod;

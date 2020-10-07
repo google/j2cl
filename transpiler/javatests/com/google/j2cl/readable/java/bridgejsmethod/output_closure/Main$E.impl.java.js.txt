@@ -1,0 +1,43 @@
+goog.module('bridgejsmethod.Main.E$impl');
+
+const B = goog.require('bridgejsmethod.Main.B$impl');
+const J = goog.require('bridgejsmethod.Main.J$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @implements {J<?string>}
+ */
+class E extends B {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  /** @return {!E} */
+  static $create__() {
+    E.$clinit();
+    let $instance = new E();
+    $instance.$ctor__bridgejsmethod_Main_E__();
+    return $instance;
+  }
+
+  $ctor__bridgejsmethod_Main_E__() {
+    this.$ctor__bridgejsmethod_Main_B__();
+  }
+
+  static $clinit() {
+    E.$clinit = () => {};
+    E.$loadModules();
+    B.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof E;
+  }
+
+  static $loadModules() {}
+}
+J.$markImplementor(E);
+$Util.$setClassMetadata(E, 'bridgejsmethod.Main$E');
+
+exports = E;
+//# sourceMappingURL=Main$E.js.map

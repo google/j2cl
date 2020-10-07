@@ -1,0 +1,46 @@
+goog.module('importsreturntype.ImportsReturnType$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Entry = goog.forwardDeclare('importsreturntype.ImportsReturnType.Entry$impl');
+let Set = goog.forwardDeclare('importsreturntype.ImportsReturnType.Set$impl');
+
+class ImportsReturnType extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  /** @return {!ImportsReturnType} */
+  static $create__() {
+    ImportsReturnType.$clinit();
+    let $instance = new ImportsReturnType();
+    $instance.$ctor__importsreturntype_ImportsReturnType__();
+    return $instance;
+  }
+
+  $ctor__importsreturntype_ImportsReturnType__() {
+    this.$ctor__java_lang_Object__();
+  }
+  /** @return {Set<Entry>} */
+  m_get__() {
+    return null;
+  }
+
+  static $clinit() {
+    ImportsReturnType.$clinit = () => {};
+    ImportsReturnType.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof ImportsReturnType;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(
+    ImportsReturnType, 'importsreturntype.ImportsReturnType');
+
+exports = ImportsReturnType;
+//# sourceMappingURL=ImportsReturnType.js.map

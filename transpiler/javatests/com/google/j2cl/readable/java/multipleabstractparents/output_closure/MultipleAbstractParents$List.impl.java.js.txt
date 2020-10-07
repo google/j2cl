@@ -1,0 +1,47 @@
+goog.module('multipleabstractparents.MultipleAbstractParents.List$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('multipleabstractparents.MultipleAbstractParents.List.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ * @template T
+ */
+class List {
+  /** @abstract @return {?string} */
+  m_getFoo__java_lang_Object(/** T */ t) {}
+  /** @template T @return {List<T>} */
+  static $adapt(/** ?function(T):?string */ fn) {
+    List.$clinit();
+    return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));
+  }
+
+  static $clinit() {
+    List.$clinit = () => {};
+    List.$loadModules();
+  }
+
+  static $markImplementor(/** Function */ ctor) {
+    ctor.prototype
+        .$implements__multipleabstractparents_MultipleAbstractParents_List =
+        true;
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance != null &&
+        !!instance
+              .$implements__multipleabstractparents_MultipleAbstractParents_List;
+  }
+
+  static $loadModules() {
+    $LambdaAdaptor = goog.module.get(
+        'multipleabstractparents.MultipleAbstractParents.List.$LambdaAdaptor$impl');
+  }
+}
+List.$markImplementor(/**@type {Function}*/ (List));
+$Util.$setClassMetadataForInterface(
+    List, 'multipleabstractparents.MultipleAbstractParents$List');
+
+exports = List;
+//# sourceMappingURL=MultipleAbstractParents$List.js.map

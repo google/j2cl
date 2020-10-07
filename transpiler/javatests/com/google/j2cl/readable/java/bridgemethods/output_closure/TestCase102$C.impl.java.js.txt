@@ -1,0 +1,58 @@
+goog.module('bridgemethods.TestCase102.C$impl');
+
+const B = goog.require('bridgemethods.TestCase102.B$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let TestCase102 = goog.forwardDeclare('bridgemethods.TestCase102$impl');
+
+/**
+ * @template B1
+ * @extends {B<B1>}
+ */
+class C extends B {
+  /** @protected */
+  constructor() {
+    super();
+    /**@type {TestCase102}*/
+    this.$outer_this__bridgemethods_TestCase102_C;
+  }
+  /** @template B1 @return {!C<B1>} */
+  static $create__bridgemethods_TestCase102(/** TestCase102 */ $outer_this) {
+    C.$clinit();
+    let $instance = new C();
+    $instance.$ctor__bridgemethods_TestCase102_C__bridgemethods_TestCase102(
+        $outer_this);
+    return $instance;
+  }
+
+  $ctor__bridgemethods_TestCase102_C__bridgemethods_TestCase102(
+      /** TestCase102 */ $outer_this) {
+    this.$outer_this__bridgemethods_TestCase102_C = $outer_this;
+    this.$ctor__bridgemethods_TestCase102_B__();
+  }
+  /** @override */
+  set(/** ?string */ value) {}
+  /** @override */
+  m_set__java_lang_Object(/** B1 */ value) {}
+  // Bridge method.
+  /** @override */
+  m_set__java_lang_String(/** ?string */ arg0) {
+    this.set(arg0);
+  }
+
+  static $clinit() {
+    C.$clinit = () => {};
+    C.$loadModules();
+    B.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof C;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(C, 'bridgemethods.TestCase102$C');
+
+exports = C;
+//# sourceMappingURL=TestCase102$C.js.map

@@ -1,0 +1,51 @@
+goog.module('simplebridgemethods.Callable.$LambdaAdaptor$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const Callable = goog.require('simplebridgemethods.Callable$impl');
+
+/**
+ * @template V
+ * @implements {Callable<V>}
+ */
+class $LambdaAdaptor extends j_l_Object {
+  constructor(/** ?function(V):void */ fn) {
+    $LambdaAdaptor.$clinit();
+    super();
+    /**@type {?function(V):void}*/
+    this.f_fn__simplebridgemethods_Callable_$LambdaAdaptor;
+    this.$ctor__simplebridgemethods_Callable_$LambdaAdaptor__simplebridgemethods_Callable_$JsFunction(
+        fn);
+  }
+
+  $ctor__simplebridgemethods_Callable_$LambdaAdaptor__simplebridgemethods_Callable_$JsFunction(
+      /** ?function(V):void */ fn) {
+    this.$ctor__java_lang_Object__();
+    this.f_fn__simplebridgemethods_Callable_$LambdaAdaptor = fn;
+  }
+  /** @override */
+  m_call__java_lang_Object(/** V */ arg0) {
+    {
+      let $function = this.f_fn__simplebridgemethods_Callable_$LambdaAdaptor;
+      $function(arg0);
+    }
+  }
+
+  static $clinit() {
+    $LambdaAdaptor.$clinit = () => {};
+    $LambdaAdaptor.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof $LambdaAdaptor;
+  }
+
+  static $loadModules() {}
+}
+Callable.$markImplementor($LambdaAdaptor);
+$Util.$setClassMetadata(
+    $LambdaAdaptor, 'simplebridgemethods.Callable$$LambdaAdaptor');
+
+exports = $LambdaAdaptor;
+//# sourceMappingURL=Callable$$LambdaAdaptor.js.map

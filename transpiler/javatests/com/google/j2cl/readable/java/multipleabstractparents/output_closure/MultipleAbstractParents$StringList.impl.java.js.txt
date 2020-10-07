@@ -1,0 +1,40 @@
+goog.module('multipleabstractparents.MultipleAbstractParents.StringList$impl');
+
+const AbstractStringList = goog.require('multipleabstractparents.MultipleAbstractParents.AbstractStringList$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class StringList extends AbstractStringList {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  /** @return {!StringList} */
+  static $create__() {
+    StringList.$clinit();
+    let $instance = new StringList();
+    $instance
+        .$ctor__multipleabstractparents_MultipleAbstractParents_StringList__();
+    return $instance;
+  }
+
+  $ctor__multipleabstractparents_MultipleAbstractParents_StringList__() {
+    this.$ctor__multipleabstractparents_MultipleAbstractParents_AbstractStringList__();
+  }
+
+  static $clinit() {
+    StringList.$clinit = () => {};
+    StringList.$loadModules();
+    AbstractStringList.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof StringList;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(
+    StringList, 'multipleabstractparents.MultipleAbstractParents$StringList');
+
+exports = StringList;
+//# sourceMappingURL=MultipleAbstractParents$StringList.js.map

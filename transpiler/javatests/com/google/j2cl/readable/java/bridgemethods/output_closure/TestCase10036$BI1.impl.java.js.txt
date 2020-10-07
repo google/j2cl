@@ -1,0 +1,46 @@
+goog.module('bridgemethods.TestCase10036.BI1$impl');
+
+const BI3 = goog.require('bridgemethods.TestCase10036.BI3$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('bridgemethods.TestCase10036.BI1.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ * @extends {BI3}
+ */
+class BI1 {
+  /** @abstract @override @return {?string} */
+  get(/** ?string */ value) {}
+  /** @return {BI1} */
+  static $adapt(/** ?function(?string):?string */ fn) {
+    BI1.$clinit();
+    return new $LambdaAdaptor(fn);
+  }
+
+  static $clinit() {
+    BI1.$clinit = () => {};
+    BI1.$loadModules();
+    BI3.$clinit();
+  }
+
+  static $markImplementor(/** Function */ ctor) {
+    BI3.$markImplementor(ctor);
+    ctor.prototype.$implements__bridgemethods_TestCase10036_BI1 = true;
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance != null &&
+        !!instance.$implements__bridgemethods_TestCase10036_BI1;
+  }
+
+  static $loadModules() {
+    $LambdaAdaptor =
+        goog.module.get('bridgemethods.TestCase10036.BI1.$LambdaAdaptor$impl');
+  }
+}
+BI1.$markImplementor(/**@type {Function}*/ (BI1));
+$Util.$setClassMetadataForInterface(BI1, 'bridgemethods.TestCase10036$BI1');
+
+exports = BI1;
+//# sourceMappingURL=TestCase10036$BI1.js.map

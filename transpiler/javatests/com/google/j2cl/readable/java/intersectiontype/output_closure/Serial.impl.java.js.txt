@@ -1,0 +1,28 @@
+goog.module('intersectiontype.Serial$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ */
+class Serial {
+  static $clinit() {
+    Serial.$clinit = () => {};
+    Serial.$loadModules();
+  }
+
+  static $markImplementor(/** Function */ ctor) {
+    ctor.prototype.$implements__intersectiontype_Serial = true;
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance != null && !!instance.$implements__intersectiontype_Serial;
+  }
+
+  static $loadModules() {}
+}
+Serial.$markImplementor(/**@type {Function}*/ (Serial));
+$Util.$setClassMetadataForInterface(Serial, 'intersectiontype.Serial');
+
+exports = Serial;
+//# sourceMappingURL=Serial.js.map

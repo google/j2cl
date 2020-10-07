@@ -1,0 +1,51 @@
+goog.module('abstractinnerclass.InnerClasses.A.$LambdaAdaptor$impl');
+
+const A = goog.require('abstractinnerclass.InnerClasses.A$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @implements {A}
+ */
+class $LambdaAdaptor extends j_l_Object {
+  constructor(/** ?function():void */ fn) {
+    $LambdaAdaptor.$clinit();
+    super();
+    /**@type {?function():void}*/
+    this.f_fn__abstractinnerclass_InnerClasses_A_$LambdaAdaptor;
+    this.$ctor__abstractinnerclass_InnerClasses_A_$LambdaAdaptor__abstractinnerclass_InnerClasses_A_$JsFunction(
+        fn);
+  }
+
+  $ctor__abstractinnerclass_InnerClasses_A_$LambdaAdaptor__abstractinnerclass_InnerClasses_A_$JsFunction(
+      /** ?function():void */ fn) {
+    this.$ctor__java_lang_Object__();
+    this.f_fn__abstractinnerclass_InnerClasses_A_$LambdaAdaptor = fn;
+  }
+  /** @override */
+  m_foo__() {
+    {
+      let $function =
+          this.f_fn__abstractinnerclass_InnerClasses_A_$LambdaAdaptor;
+      $function();
+    }
+  }
+
+  static $clinit() {
+    $LambdaAdaptor.$clinit = () => {};
+    $LambdaAdaptor.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof $LambdaAdaptor;
+  }
+
+  static $loadModules() {}
+}
+A.$markImplementor($LambdaAdaptor);
+$Util.$setClassMetadata(
+    $LambdaAdaptor, 'abstractinnerclass.InnerClasses$A$$LambdaAdaptor');
+
+exports = $LambdaAdaptor;
+//# sourceMappingURL=InnerClasses$A$$LambdaAdaptor.js.map

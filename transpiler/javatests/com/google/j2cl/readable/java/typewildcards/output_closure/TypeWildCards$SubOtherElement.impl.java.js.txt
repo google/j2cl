@@ -1,0 +1,45 @@
+goog.module('typewildcards.TypeWildCards.SubOtherElement$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const HasKey = goog.require('typewildcards.TypeWildCards.HasKey$impl');
+const OtherElement = goog.require('typewildcards.TypeWildCards.OtherElement$impl');
+
+let TypeWildCards = goog.forwardDeclare('typewildcards.TypeWildCards$impl');
+
+/**
+ * @abstract
+ * @implements {HasKey}
+ */
+class SubOtherElement extends OtherElement {
+  /** @protected */
+  constructor() {
+    super();
+    /**@type {TypeWildCards}*/
+    this.$outer_this__typewildcards_TypeWildCards_SubOtherElement;
+  }
+
+  $ctor__typewildcards_TypeWildCards_SubOtherElement__typewildcards_TypeWildCards(
+      /** TypeWildCards */ $outer_this) {
+    this.$outer_this__typewildcards_TypeWildCards_SubOtherElement = $outer_this;
+    this.$ctor__typewildcards_TypeWildCards_OtherElement__typewildcards_TypeWildCards(
+        $outer_this);
+  }
+
+  static $clinit() {
+    SubOtherElement.$clinit = () => {};
+    SubOtherElement.$loadModules();
+    OtherElement.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof SubOtherElement;
+  }
+
+  static $loadModules() {}
+}
+HasKey.$markImplementor(SubOtherElement);
+$Util.$setClassMetadata(
+    SubOtherElement, 'typewildcards.TypeWildCards$SubOtherElement');
+
+exports = SubOtherElement;
+//# sourceMappingURL=TypeWildCards$SubOtherElement.js.map

@@ -1,0 +1,38 @@
+goog.module('collisions.goog$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class collisions_goog extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  /** @return {!collisions_goog} */
+  static $create__() {
+    collisions_goog.$clinit();
+    let $instance = new collisions_goog();
+    $instance.$ctor__collisions_goog__();
+    return $instance;
+  }
+
+  $ctor__collisions_goog__() {
+    this.$ctor__java_lang_Object__();
+  }
+
+  static $clinit() {
+    collisions_goog.$clinit = () => {};
+    collisions_goog.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof collisions_goog;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(collisions_goog, 'collisions.goog');
+
+exports = collisions_goog;
+//# sourceMappingURL=goog.js.map

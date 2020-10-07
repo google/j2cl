@@ -1,0 +1,94 @@
+goog.module('varargs.Varargs$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Serializable = goog.forwardDeclare('java.io.Serializable$impl');
+let Cloneable = goog.forwardDeclare('java.lang.Cloneable$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+class Varargs extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  // Factory method corresponding to constructor 'Varargs(int...)'.
+  /** @return {!Varargs} */
+  static $create__arrayOf_int(/** Array<number> */ args) {
+    Varargs.$clinit();
+    let $instance = new Varargs();
+    $instance.$ctor__varargs_Varargs__arrayOf_int(args);
+    return $instance;
+  }
+  // Initialization from constructor 'Varargs(int...)'.
+
+  $ctor__varargs_Varargs__arrayOf_int(/** Array<number> */ args) {
+    this.$ctor__java_lang_Object__();
+  }
+  // Factory method corresponding to constructor 'Varargs()'.
+  /** @return {!Varargs} */
+  static $create__() {
+    Varargs.$clinit();
+    let $instance = new Varargs();
+    $instance.$ctor__varargs_Varargs__();
+    return $instance;
+  }
+  // Initialization from constructor 'Varargs()'.
+
+  $ctor__varargs_Varargs__() {
+    this.$ctor__varargs_Varargs__arrayOf_int(
+        /**@type {!Array<number>}*/ ($Arrays.$init([1], $int)));
+  }
+
+  m_test__int__arrayOf_java_lang_Object(/** number */ a, /** Array<*> */ args) {
+  }
+
+  m_testCloneable__arrayOf_java_lang_Cloneable(
+      /** Array<(Cloneable|Array)> */ args) {}
+
+  m_testSerializable__arrayOf_java_io_Serializable(
+      /** Array<(Serializable|Array)> */ args) {}
+  /** @template T */
+  static m_fun__arrayOf_java_lang_Object(/** Array<T> */ elements) {
+    Varargs.$clinit();
+  }
+  /** @template E */
+  static m_bar__java_lang_Object__java_lang_Object(/** E */ a, /** E */ b) {
+    Varargs.$clinit();
+    Varargs.m_fun__arrayOf_java_lang_Object([a, b]);
+  }
+
+  m_main__() {
+    let v = Varargs.$create__();
+    v.m_test__int__arrayOf_java_lang_Object(1, []);
+    v.m_test__int__arrayOf_java_lang_Object(1, [j_l_Object.$create__()]);
+    v.m_test__int__arrayOf_java_lang_Object(1, [j_l_Object.$create__()]);
+    v.m_test__int__arrayOf_java_lang_Object(1, []);
+    v.m_test__int__arrayOf_java_lang_Object(
+        1, /**@type {!Array<Array<*>>}*/ ($Arrays.$init([], j_l_Object, 2)));
+    v.m_testCloneable__arrayOf_java_lang_Cloneable(
+        /**@type {!Array<Array<*>>}*/ ($Arrays.$init([], j_l_Object, 2)));
+    v.m_testSerializable__arrayOf_java_io_Serializable(
+        /**@type {!Array<Array<*>>}*/ ($Arrays.$init([], j_l_Object, 2)));
+  }
+
+  static $clinit() {
+    Varargs.$clinit = () => {};
+    Varargs.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof Varargs;
+  }
+
+  static $loadModules() {
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+  }
+}
+$Util.$setClassMetadata(Varargs, 'varargs.Varargs');
+
+exports = Varargs;
+//# sourceMappingURL=Varargs.js.map

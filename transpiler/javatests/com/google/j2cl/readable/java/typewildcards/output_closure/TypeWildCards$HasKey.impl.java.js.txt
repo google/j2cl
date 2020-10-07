@@ -1,0 +1,43 @@
+goog.module('typewildcards.TypeWildCards.HasKey$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('typewildcards.TypeWildCards.HasKey.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ */
+class HasKey {
+  /** @abstract @return {?string} */
+  m_getKey__() {}
+  /** @return {HasKey} */
+  static $adapt(/** ?function():?string */ fn) {
+    HasKey.$clinit();
+    return new $LambdaAdaptor(fn);
+  }
+
+  static $clinit() {
+    HasKey.$clinit = () => {};
+    HasKey.$loadModules();
+  }
+
+  static $markImplementor(/** Function */ ctor) {
+    ctor.prototype.$implements__typewildcards_TypeWildCards_HasKey = true;
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance != null &&
+        !!instance.$implements__typewildcards_TypeWildCards_HasKey;
+  }
+
+  static $loadModules() {
+    $LambdaAdaptor = goog.module.get(
+        'typewildcards.TypeWildCards.HasKey.$LambdaAdaptor$impl');
+  }
+}
+HasKey.$markImplementor(/**@type {Function}*/ (HasKey));
+$Util.$setClassMetadataForInterface(
+    HasKey, 'typewildcards.TypeWildCards$HasKey');
+
+exports = HasKey;
+//# sourceMappingURL=TypeWildCards$HasKey.js.map

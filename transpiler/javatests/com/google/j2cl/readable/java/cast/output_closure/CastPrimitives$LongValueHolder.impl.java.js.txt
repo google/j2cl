@@ -1,0 +1,40 @@
+goog.module('cast.CastPrimitives.LongValueHolder$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
+
+class LongValueHolder extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  /** @return {!LongValueHolder} */
+  static $create__long(/** !$Long */ value) {
+    LongValueHolder.$clinit();
+    let $instance = new LongValueHolder();
+    $instance.$ctor__cast_CastPrimitives_LongValueHolder__long(value);
+    return $instance;
+  }
+
+  $ctor__cast_CastPrimitives_LongValueHolder__long(/** !$Long */ value) {
+    this.$ctor__java_lang_Object__();
+  }
+
+  static $clinit() {
+    LongValueHolder.$clinit = () => {};
+    LongValueHolder.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof LongValueHolder;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(LongValueHolder, 'cast.CastPrimitives$LongValueHolder');
+
+exports = LongValueHolder;
+//# sourceMappingURL=CastPrimitives$LongValueHolder.js.map

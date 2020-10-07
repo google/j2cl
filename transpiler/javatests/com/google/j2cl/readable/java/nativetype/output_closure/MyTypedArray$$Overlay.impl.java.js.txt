@@ -1,0 +1,32 @@
+goog.module('nativetype.MyTypedArray.$Overlay$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class $Overlay {
+  /** @template T @return {number} */
+  static m_size__$devirt__nativetype_MyTypedArray(/** !Array<T> */ $thisArg) {
+    $Overlay.$clinit();
+    return $thisArg.length;
+  }
+  /** @template T @return {T} */
+  static m_get__$devirt__nativetype_MyTypedArray__int(
+      /** !Array<T> */ $thisArg, /** number */ index) {
+    $Overlay.$clinit();
+    return null;
+  }
+
+  static $clinit() {
+    $Overlay.$clinit = () => {};
+    $Overlay.$loadModules();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof Array;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata($Overlay, 'Array');
+
+exports = $Overlay;
+//# sourceMappingURL=MyTypedArray$$Overlay.js.map

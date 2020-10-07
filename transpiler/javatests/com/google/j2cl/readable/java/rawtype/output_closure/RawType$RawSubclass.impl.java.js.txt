@@ -1,0 +1,48 @@
+goog.module('rawtype.RawType.RawSubclass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const I = goog.require('rawtype.RawType.I$impl');
+
+let RawType = goog.forwardDeclare('rawtype.RawType$impl');
+
+/**
+ * @implements {I}
+ */
+class RawSubclass extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  /** @return {!RawSubclass} */
+  static $create__() {
+    RawSubclass.$clinit();
+    let $instance = new RawSubclass();
+    $instance.$ctor__rawtype_RawType_RawSubclass__();
+    return $instance;
+  }
+
+  $ctor__rawtype_RawType_RawSubclass__() {
+    this.$ctor__java_lang_Object__();
+  }
+  /** @override */
+  m_f__rawtype_RawType(/** RawType */ t) {}
+
+  static $clinit() {
+    RawSubclass.$clinit = () => {};
+    RawSubclass.$loadModules();
+    j_l_Object.$clinit();
+    I.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof RawSubclass;
+  }
+
+  static $loadModules() {}
+}
+I.$markImplementor(RawSubclass);
+$Util.$setClassMetadata(RawSubclass, 'rawtype.RawType$RawSubclass');
+
+exports = RawSubclass;
+//# sourceMappingURL=RawType$RawSubclass.js.map

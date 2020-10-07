@@ -1,0 +1,42 @@
+goog.module('jsmethod.JsMethodExample.I$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('jsmethod.JsMethodExample.I.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ */
+class I {
+  /** @abstract */
+  m(/** ?string */ s) {}
+  /** @return {I} */
+  static $adapt(/** ?function(?string):void */ fn) {
+    I.$clinit();
+    return new $LambdaAdaptor(fn);
+  }
+
+  static $clinit() {
+    I.$clinit = () => {};
+    I.$loadModules();
+  }
+
+  static $markImplementor(/** Function */ ctor) {
+    ctor.prototype.$implements__jsmethod_JsMethodExample_I = true;
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance != null &&
+        !!instance.$implements__jsmethod_JsMethodExample_I;
+  }
+
+  static $loadModules() {
+    $LambdaAdaptor =
+        goog.module.get('jsmethod.JsMethodExample.I.$LambdaAdaptor$impl');
+  }
+}
+I.$markImplementor(/**@type {Function}*/ (I));
+$Util.$setClassMetadataForInterface(I, 'jsmethod.JsMethodExample$I');
+
+exports = I;
+//# sourceMappingURL=JsMethodExample$I.js.map

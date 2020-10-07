@@ -1,0 +1,99 @@
+goog.module('localclasswithconstructor.LocalClassWithConstructor.$1LocalClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let LocalClassWithConstructor = goog.forwardDeclare('localclasswithconstructor.LocalClassWithConstructor$impl');
+
+class $1LocalClass extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+    /**@type {LocalClassWithConstructor}*/
+    this.$outer_this__localclasswithconstructor_LocalClassWithConstructor_1LocalClass;
+    /**@type {number}*/
+    this.f_field__localclasswithconstructor_LocalClassWithConstructor_1LocalClass =
+        0;
+    /**@type {number}*/
+    this.$captured_localVar__localclasswithconstructor_LocalClassWithConstructor_1LocalClass =
+        0;
+    /**@type {number}*/
+    this.$captured_p__localclasswithconstructor_LocalClassWithConstructor_1LocalClass =
+        0;
+  }
+  // Factory method corresponding to constructor
+  // 'LocalClass(LocalClassWithConstructor, int, int, int, int)'.
+  /** @return {!$1LocalClass} */
+  static $create__localclasswithconstructor_LocalClassWithConstructor__int__int__int__int(
+      /** LocalClassWithConstructor */ $outer_this,
+      /** number */ $captured_localVar, /** number */ $captured_p,
+      /** number */ a, /** number */ b) {
+    $1LocalClass.$clinit();
+    let $instance = new $1LocalClass();
+    $instance
+        .$ctor__localclasswithconstructor_LocalClassWithConstructor_1LocalClass__localclasswithconstructor_LocalClassWithConstructor__int__int__int__int(
+            $outer_this, $captured_localVar, $captured_p, a, b);
+    return $instance;
+  }
+  // Initialization from constructor 'LocalClass(LocalClassWithConstructor, int,
+  // int, int, int)'.
+
+  $ctor__localclasswithconstructor_LocalClassWithConstructor_1LocalClass__localclasswithconstructor_LocalClassWithConstructor__int__int__int__int(
+      /** LocalClassWithConstructor */ $outer_this,
+      /** number */ $captured_localVar, /** number */ $captured_p,
+      /** number */ a, /** number */ b) {
+    this.$outer_this__localclasswithconstructor_LocalClassWithConstructor_1LocalClass =
+        $outer_this;
+    this.$captured_localVar__localclasswithconstructor_LocalClassWithConstructor_1LocalClass =
+        $captured_localVar;
+    this.$captured_p__localclasswithconstructor_LocalClassWithConstructor_1LocalClass =
+        $captured_p;
+    this.$ctor__java_lang_Object__();
+    this.f_field__localclasswithconstructor_LocalClassWithConstructor_1LocalClass =
+        $captured_localVar + a + b | 0;
+  }
+  // Factory method corresponding to constructor
+  // 'LocalClass(LocalClassWithConstructor, int, int, int)'.
+  /** @return {!$1LocalClass} */
+  static $create__localclasswithconstructor_LocalClassWithConstructor__int__int__int(
+      /** LocalClassWithConstructor */ $outer_this,
+      /** number */ $captured_localVar, /** number */ $captured_p,
+      /** number */ a) {
+    $1LocalClass.$clinit();
+    let $instance = new $1LocalClass();
+    $instance
+        .$ctor__localclasswithconstructor_LocalClassWithConstructor_1LocalClass__localclasswithconstructor_LocalClassWithConstructor__int__int__int(
+            $outer_this, $captured_localVar, $captured_p, a);
+    return $instance;
+  }
+  // Initialization from constructor 'LocalClass(LocalClassWithConstructor, int,
+  // int, int)'.
+
+  $ctor__localclasswithconstructor_LocalClassWithConstructor_1LocalClass__localclasswithconstructor_LocalClassWithConstructor__int__int__int(
+      /** LocalClassWithConstructor */ $outer_this,
+      /** number */ $captured_localVar, /** number */ $captured_p,
+      /** number */ a) {
+    this.$ctor__localclasswithconstructor_LocalClassWithConstructor_1LocalClass__localclasswithconstructor_LocalClassWithConstructor__int__int__int__int(
+        $outer_this, $captured_localVar, $captured_p, a, $captured_p);
+    this.f_field__localclasswithconstructor_LocalClassWithConstructor_1LocalClass =
+        $captured_localVar;
+  }
+
+  static $clinit() {
+    $1LocalClass.$clinit = () => {};
+    $1LocalClass.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof $1LocalClass;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(
+    $1LocalClass,
+    'localclasswithconstructor.LocalClassWithConstructor$1LocalClass');
+
+exports = $1LocalClass;
+//# sourceMappingURL=LocalClassWithConstructor$1LocalClass.js.map

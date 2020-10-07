@@ -1,0 +1,53 @@
+goog.module('innerclassinitorder.InnerClassInitOrder.ESWGOuter$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let ESWGInner = goog.forwardDeclare('innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner$impl');
+
+/**
+ * @template T
+ */
+class ESWGOuter extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  /** @template T @return {!ESWGOuter<T>} */
+  static $create__() {
+    ESWGOuter.$clinit();
+    let $instance = new ESWGOuter();
+    $instance.$ctor__innerclassinitorder_InnerClassInitOrder_ESWGOuter__();
+    return $instance;
+  }
+
+  $ctor__innerclassinitorder_InnerClassInitOrder_ESWGOuter__() {
+    this.$ctor__java_lang_Object__();
+  }
+  /** @return {ESWGInner<T>} */
+  m_newESWGInner__() {
+    return /**@type {!ESWGInner<T>}*/ (
+        ESWGInner.$create__innerclassinitorder_InnerClassInitOrder_ESWGOuter(
+            this));
+  }
+
+  static $clinit() {
+    ESWGOuter.$clinit = () => {};
+    ESWGOuter.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof ESWGOuter;
+  }
+
+  static $loadModules() {
+    ESWGInner = goog.module.get(
+        'innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner$impl');
+  }
+}
+$Util.$setClassMetadata(
+    ESWGOuter, 'innerclassinitorder.InnerClassInitOrder$ESWGOuter');
+
+exports = ESWGOuter;
+//# sourceMappingURL=InnerClassInitOrder$ESWGOuter.js.map

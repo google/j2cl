@@ -1,0 +1,58 @@
+goog.module('methodreferences.MethodReferences.ObjectCapturingOuter$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let MethodReferences = goog.forwardDeclare('methodreferences.MethodReferences$impl');
+
+/**
+ * @template T
+ */
+class ObjectCapturingOuter extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+    /**@type {MethodReferences<T>}*/
+    this.$outer_this__methodreferences_MethodReferences_ObjectCapturingOuter;
+  }
+  /** @template T @return {!ObjectCapturingOuter<T>} */
+  static $create__methodreferences_MethodReferences(
+      /** MethodReferences<T> */ $outer_this) {
+    ObjectCapturingOuter.$clinit();
+    let $instance = new ObjectCapturingOuter();
+    $instance
+        .$ctor__methodreferences_MethodReferences_ObjectCapturingOuter__methodreferences_MethodReferences(
+            $outer_this);
+    return $instance;
+  }
+
+  $ctor__methodreferences_MethodReferences_ObjectCapturingOuter__methodreferences_MethodReferences(
+      /** MethodReferences<T> */ $outer_this) {
+    this.$outer_this__methodreferences_MethodReferences_ObjectCapturingOuter =
+        $outer_this;
+    this.$ctor__java_lang_Object__();
+  }
+  /** @return {MethodReferences<T>} */
+  m_getMain___$pp_methodreferences() {
+    return this
+        .$outer_this__methodreferences_MethodReferences_ObjectCapturingOuter;
+  }
+
+  static $clinit() {
+    ObjectCapturingOuter.$clinit = () => {};
+    ObjectCapturingOuter.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof ObjectCapturingOuter;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(
+    ObjectCapturingOuter,
+    'methodreferences.MethodReferences$ObjectCapturingOuter');
+
+exports = ObjectCapturingOuter;
+//# sourceMappingURL=MethodReferences$ObjectCapturingOuter.js.map

@@ -1,0 +1,47 @@
+goog.module('assertsimple.AssertSimple$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
+
+class AssertSimple extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  /** @return {!AssertSimple} */
+  static $create__() {
+    AssertSimple.$clinit();
+    let $instance = new AssertSimple();
+    $instance.$ctor__assertsimple_AssertSimple__();
+    return $instance;
+  }
+
+  $ctor__assertsimple_AssertSimple__() {
+    this.$ctor__java_lang_Object__();
+  }
+
+  static m_main__arrayOf_java_lang_String(/** Array<?string> */ args) {
+    AssertSimple.$clinit();
+    $Asserts.$assert((1 + 2 | 0) == 3);
+  }
+
+  static $clinit() {
+    AssertSimple.$clinit = () => {};
+    AssertSimple.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof AssertSimple;
+  }
+
+  static $loadModules() {
+    $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
+  }
+}
+$Util.$setClassMetadata(AssertSimple, 'assertsimple.AssertSimple');
+
+exports = AssertSimple;
+//# sourceMappingURL=AssertSimple.js.map

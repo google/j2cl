@@ -1,0 +1,53 @@
+goog.module('abstractmethodoverridedefault.AbstractMethodOverrideDefault.I$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('abstractmethodoverridedefault.AbstractMethodOverrideDefault.I.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ */
+class I {
+  /** @abstract */
+  m_foo__() {}
+  /** @abstract */
+  m_bar__() {}
+  /** @return {I} */
+  static $adapt(/** ?function():void */ fn) {
+    I.$clinit();
+    return new $LambdaAdaptor(fn);
+  }
+
+  static m_bar__$default__abstractmethodoverridedefault_AbstractMethodOverrideDefault_I(
+      /** !I */ $thisArg) {
+    I.$clinit();
+  }
+
+  static $clinit() {
+    I.$clinit = () => {};
+    I.$loadModules();
+  }
+
+  static $markImplementor(/** Function */ ctor) {
+    ctor.prototype
+        .$implements__abstractmethodoverridedefault_AbstractMethodOverrideDefault_I =
+        true;
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance != null &&
+        !!instance
+              .$implements__abstractmethodoverridedefault_AbstractMethodOverrideDefault_I;
+  }
+
+  static $loadModules() {
+    $LambdaAdaptor = goog.module.get(
+        'abstractmethodoverridedefault.AbstractMethodOverrideDefault.I.$LambdaAdaptor$impl');
+  }
+}
+I.$markImplementor(/**@type {Function}*/ (I));
+$Util.$setClassMetadataForInterface(
+    I, 'abstractmethodoverridedefault.AbstractMethodOverrideDefault$I');
+
+exports = I;
+//# sourceMappingURL=AbstractMethodOverrideDefault$I.js.map

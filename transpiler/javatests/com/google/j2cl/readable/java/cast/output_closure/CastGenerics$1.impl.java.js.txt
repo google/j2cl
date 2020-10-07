@@ -1,0 +1,42 @@
+goog.module('cast.CastGenerics.$1$impl');
+
+const Foo = goog.require('cast.CastGenerics.Foo$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @template T
+ * @extends {Foo<T>}
+ */
+class $1 extends Foo {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  /** @template T @return {!$1<T>} */
+  static $create__() {
+    $1.$clinit();
+    let $instance = new $1();
+    $instance.$ctor__cast_CastGenerics_1__();
+    return $instance;
+  }
+
+  $ctor__cast_CastGenerics_1__() {
+    this.$ctor__cast_CastGenerics_Foo__();
+  }
+
+  static $clinit() {
+    $1.$clinit = () => {};
+    $1.$loadModules();
+    Foo.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof $1;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata($1, 'cast.CastGenerics$1');
+
+exports = $1;
+//# sourceMappingURL=CastGenerics$1.js.map

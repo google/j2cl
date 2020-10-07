@@ -1,0 +1,41 @@
+goog.module('bar.foo.baz.InnerClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class InnerClass extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  /** @return {!InnerClass} */
+  static $create__() {
+    InnerClass.$clinit();
+    let $instance = new InnerClass();
+    $instance
+        .$ctor__jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace_InnerClass__();
+    return $instance;
+  }
+
+  $ctor__jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace_InnerClass__() {
+    this.$ctor__java_lang_Object__();
+  }
+
+  static $clinit() {
+    InnerClass.$clinit = () => {};
+    InnerClass.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof InnerClass;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(
+    InnerClass,
+    'jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace$InnerClass');
+
+exports = InnerClass;
+//# sourceMappingURL=JsTypeInnerClassWithNamespace$InnerClass.js.map

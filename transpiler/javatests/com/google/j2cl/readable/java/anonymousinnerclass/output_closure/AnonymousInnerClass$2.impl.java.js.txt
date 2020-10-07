@@ -1,0 +1,49 @@
+goog.module('anonymousinnerclass.AnonymousInnerClass.$2$impl');
+
+const B = goog.require('anonymousinnerclass.A.B$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let A = goog.forwardDeclare('anonymousinnerclass.A$impl');
+let AnonymousInnerClass = goog.forwardDeclare('anonymousinnerclass.AnonymousInnerClass$impl');
+
+class $2 extends B {
+  /** @protected */
+  constructor() {
+    super();
+    /**@type {AnonymousInnerClass}*/
+    this.$outer_this__anonymousinnerclass_AnonymousInnerClass_2;
+  }
+  /** @return {!$2} */
+  static $create__anonymousinnerclass_AnonymousInnerClass__anonymousinnerclass_A(
+      /** AnonymousInnerClass */ $outer_this, /** A */ $super_outer_this) {
+    $2.$clinit();
+    let $instance = new $2();
+    $instance
+        .$ctor__anonymousinnerclass_AnonymousInnerClass_2__anonymousinnerclass_AnonymousInnerClass__anonymousinnerclass_A(
+            $outer_this, $super_outer_this);
+    return $instance;
+  }
+
+  $ctor__anonymousinnerclass_AnonymousInnerClass_2__anonymousinnerclass_AnonymousInnerClass__anonymousinnerclass_A(
+      /** AnonymousInnerClass */ $outer_this, /** A */ $super_outer_this) {
+    this.$outer_this__anonymousinnerclass_AnonymousInnerClass_2 = $outer_this;
+    this.$ctor__anonymousinnerclass_A_B__anonymousinnerclass_A(
+        $super_outer_this);
+  }
+
+  static $clinit() {
+    $2.$clinit = () => {};
+    $2.$loadModules();
+    B.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof $2;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata($2, 'anonymousinnerclass.AnonymousInnerClass$2');
+
+exports = $2;
+//# sourceMappingURL=AnonymousInnerClass$2.js.map

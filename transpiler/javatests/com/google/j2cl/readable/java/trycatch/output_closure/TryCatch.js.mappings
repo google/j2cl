@@ -1,0 +1,324 @@
+[TryCatch] => [TryCatch]
+[TryCatch] => [constructor]
+[TryCatch] => [super();] "trycatch.TryCatch.<synthetic: ctor_js>"
+[TryCatch] => [$create__]
+[TryCatch] => [TryCatch.$clinit();] "trycatch.TryCatch.<synthetic: ctor_create>"
+[TryCatch] => [let $instance = new TryCatch();] "trycatch.TryCatch.<synthetic: ctor_create>"
+[TryCatch] => [$instance.$ctor__trycatch_TryCatch__();] "trycatch.TryCatch.<synthetic: ctor_create>"
+[TryCatch] => [return $instance;] "trycatch.TryCatch.<synthetic: ctor_create>"
+[TryCatch] => [$ctor__trycatch_TryCatch__]
+[TryCatch] => [this.$ctor__java_lang_Object__();] "trycatch.TryCatch.<init>"
+[testMultiCatch] => [m_testMultiCatch__]
+[try {
+      throw new ClassCastException();
+...      r = null; // used to show exception variable is transpiled correctly.
+    }] => [try {
+   throw $Exceptions.toJs(ClassCastException.$create__());
+...   }
+  }] "trycatch.TryCatch.testMultiCatch"
+[throw new ClassCastException();] => [throw $Exceptions.toJs(ClassCastException.$create__());] "trycatch.TryCatch.testMultiCatch"
+[{
+      throw e;
+    }] => [__$exc = $Exceptions.toJava(__$exc);] "trycatch.TryCatch.testMultiCatch"
+[{
+      throw e;
+    }] => [if (NullPointerException.$isInstance(__$exc) || ClassCastException.$isInstance(__$exc)) {
+    let e = /**@type {(NullPointerException|ClassCastException)}*/ (__$exc);
+...    throw $Exceptions.toJs(__$exc);
+   }] "trycatch.TryCatch.testMultiCatch"
+[{
+      throw e;
+    }] => [let e = /**@type {(NullPointerException|ClassCastException)}*/ (__$exc);] "trycatch.TryCatch.testMultiCatch"
+[e] => [e] "e"
+[throw e;] => [throw $Exceptions.toJs(e);] "trycatch.TryCatch.testMultiCatch"
+[{
+      r = null; // used to show exception variable is transpiled correctly.
+    }] => [if (RuntimeException.$isInstance(__$exc)) {
+    let r = /**@type {RuntimeException}*/ (__$exc);
+...    throw $Exceptions.toJs(__$exc);
+   }] "trycatch.TryCatch.testMultiCatch"
+[{
+      r = null; // used to show exception variable is transpiled correctly.
+    }] => [let r = /**@type {RuntimeException}*/ (__$exc);] "trycatch.TryCatch.testMultiCatch"
+[r] => [r] "r"
+[r = null;] => [r = null;] "trycatch.TryCatch.testMultiCatch"
+[{
+      throw e;
+    }] => [throw $Exceptions.toJs(__$exc);] "trycatch.TryCatch.testMultiCatch"
+[testEmptyThrowableCatch] => [m_testEmptyThrowableCatch__]
+[try {
+      throw new ClassCastException();
+...      // expected empty body.
+    }] => [try {
+   throw $Exceptions.toJs(ClassCastException.$create__());
+  } catch (__$exc) {}] "trycatch.TryCatch.testEmptyThrowableCatch"
+[throw new ClassCastException();] => [throw $Exceptions.toJs(ClassCastException.$create__());] "trycatch.TryCatch.testEmptyThrowableCatch"
+[try {
+      throw new ClassCastException();
+...      // expected empty body.
+    }] => [try {
+   throw $Exceptions.toJs(ClassCastException.$create__());
+...   if (Exception.$isInstance(__$exc_1)) {} else {}
+  }] "trycatch.TryCatch.testEmptyThrowableCatch"
+[throw new ClassCastException();] => [throw $Exceptions.toJs(ClassCastException.$create__());] "trycatch.TryCatch.testEmptyThrowableCatch"
+[{
+      // expected empty body.
+    }] => [__$exc_1 = $Exceptions.toJava(__$exc_1);] "trycatch.TryCatch.testEmptyThrowableCatch"
+[{
+      // expected empty body.
+    }] => [if (Exception.$isInstance(__$exc_1)) {} else {}] "trycatch.TryCatch.testEmptyThrowableCatch"
+[testEmptyThrowableRethrow] => [m_testEmptyThrowableRethrow__]
+[try {
+      throw new ClassCastException();
+...      throw e;
+    }] => [try {
+   throw $Exceptions.toJs(ClassCastException.$create__());
+...   }
+  }] "trycatch.TryCatch.testEmptyThrowableRethrow"
+[throw new ClassCastException();] => [throw $Exceptions.toJs(ClassCastException.$create__());] "trycatch.TryCatch.testEmptyThrowableRethrow"
+[{
+      throw e;
+    }] => [__$exc = $Exceptions.toJava(__$exc);] "trycatch.TryCatch.testEmptyThrowableRethrow"
+[{
+      throw e;
+    }] => [let e = /**@type {Throwable}*/ (__$exc);] "trycatch.TryCatch.testEmptyThrowableRethrow"
+[e] => [e] "e"
+[throw e;] => [throw $Exceptions.toJs(e);] "trycatch.TryCatch.testEmptyThrowableRethrow"
+[testFinally] => [m_testFinally__]
+[try {
+      assert true;
+    } finally {
+    }] => [try {
+   $Asserts.$assert(true);
+  } finally {}] "trycatch.TryCatch.testFinally"
+[assert true;] => [$Asserts.$assert(true);] "trycatch.TryCatch.testFinally"
+[testTryWithResource] => [m_testTryWithResource__]
+[try (ClosableThing thing = new ClosableThing();
+        ClosableThing thing2 = new ClosableThing()) {
+...      // expected empty body.
+    }] => [try {
+   let $primaryExc = null;
+...   }
+  }] "trycatch.TryCatch.testTryWithResource"
+[try (ClosableThing thing = new ClosableThing();
+        ClosableThing thing2 = new ClosableThing()) {
+...      // expected empty body.
+    }] => [let $primaryExc = null;] "trycatch.TryCatch.testTryWithResource"
+[try (ClosableThing thing = new ClosableThing();
+        ClosableThing thing2 = new ClosableThing()) {
+...      // expected empty body.
+    }] => [let thing = null;] "trycatch.TryCatch.testTryWithResource"
+[thing] => [thing] "thing"
+[try (ClosableThing thing = new ClosableThing();
+        ClosableThing thing2 = new ClosableThing()) {
+...      // expected empty body.
+    }] => [let thing2 = null;] "trycatch.TryCatch.testTryWithResource"
+[thing2] => [thing2] "thing2"
+[try (ClosableThing thing = new ClosableThing();
+        ClosableThing thing2 = new ClosableThing()) {
+...      // expected empty body.
+    }] => [try {
+    thing = ClosableThing.$create__();
+...    }
+   }] "trycatch.TryCatch.testTryWithResource"
+[try (ClosableThing thing = new ClosableThing();
+        ClosableThing thing2 = new ClosableThing()) {
+...      // expected empty body.
+    }] => [thing = ClosableThing.$create__();] "trycatch.TryCatch.testTryWithResource"
+[try (ClosableThing thing = new ClosableThing();
+        ClosableThing thing2 = new ClosableThing()) {
+...      // expected empty body.
+    }] => [thing2 = ClosableThing.$create__();] "trycatch.TryCatch.testTryWithResource"
+[throw new Exception();] => [throw $Exceptions.toJs(Exception.$create__());] "trycatch.TryCatch.testTryWithResource"
+[try (ClosableThing thing = new ClosableThing();
+        ClosableThing thing2 = new ClosableThing()) {
+...      // expected empty body.
+    }] => [__$exc = $Exceptions.toJava(__$exc);] "trycatch.TryCatch.testTryWithResource"
+[try (ClosableThing thing = new ClosableThing();
+        ClosableThing thing2 = new ClosableThing()) {
+...      // expected empty body.
+    }] => [let $exceptionFromTry = /**@type {Throwable}*/ (__$exc);] "trycatch.TryCatch.testTryWithResource"
+[try (ClosableThing thing = new ClosableThing();
+        ClosableThing thing2 = new ClosableThing()) {
+...      // expected empty body.
+    }] => [$primaryExc = $exceptionFromTry;] "trycatch.TryCatch.testTryWithResource"
+[try (ClosableThing thing = new ClosableThing();
+        ClosableThing thing2 = new ClosableThing()) {
+...      // expected empty body.
+    }] => [throw $Exceptions.toJs($exceptionFromTry);] "trycatch.TryCatch.testTryWithResource"
+[try (ClosableThing thing = new ClosableThing();
+        ClosableThing thing2 = new ClosableThing()) {
+...      // expected empty body.
+    }] => [$primaryExc = $Exceptions.safeClose(thing2, $primaryExc);] "trycatch.TryCatch.testTryWithResource"
+[try (ClosableThing thing = new ClosableThing();
+        ClosableThing thing2 = new ClosableThing()) {
+...      // expected empty body.
+    }] => [$primaryExc = $Exceptions.safeClose(thing, $primaryExc);] "trycatch.TryCatch.testTryWithResource"
+[try (ClosableThing thing = new ClosableThing();
+        ClosableThing thing2 = new ClosableThing()) {
+...      // expected empty body.
+    }] => [if (!$Equality.$same($primaryExc, null)) {
+     throw $Exceptions.toJs($primaryExc);
+    }] "trycatch.TryCatch.testTryWithResource"
+[try (ClosableThing thing = new ClosableThing();
+        ClosableThing thing2 = new ClosableThing()) {
+...      // expected empty body.
+    }] => [throw $Exceptions.toJs($primaryExc);] "trycatch.TryCatch.testTryWithResource"
+[{
+      // expected empty body.
+    }] => [__$exc_1 = $Exceptions.toJava(__$exc_1);] "trycatch.TryCatch.testTryWithResource"
+[{
+      // expected empty body.
+    }] => [if (Exception.$isInstance(__$exc_1)) {} else {
+    throw $Exceptions.toJs(__$exc_1);
+   }] "trycatch.TryCatch.testTryWithResource"
+[{
+      // expected empty body.
+    }] => [throw $Exceptions.toJs(__$exc_1);] "trycatch.TryCatch.testTryWithResource"
+[testTryWithResourceJava9] => [m_testTryWithResourceJava9__]
+[ClosableThing thing = new ClosableThing();] => [let thing = ClosableThing.$create__();] "trycatch.TryCatch.testTryWithResourceJava9"
+[thing] => [thing] "thing"
+[ClosableThing thing2 = new ClosableThing();] => [let thing2 = ClosableThing.$create__();] "trycatch.TryCatch.testTryWithResourceJava9"
+[thing2] => [thing2] "thing2"
+[try (thing; thing2) {
+      throw new Exception();
+...      // expected empty body.
+    }] => [try {
+   let $primaryExc = null;
+...   }
+  }] "trycatch.TryCatch.testTryWithResourceJava9"
+[try (thing; thing2) {
+      throw new Exception();
+...      // expected empty body.
+    }] => [let $primaryExc = null;] "trycatch.TryCatch.testTryWithResourceJava9"
+[try (thing; thing2) {
+      throw new Exception();
+...      // expected empty body.
+    }] => [let $resource = null;] "trycatch.TryCatch.testTryWithResourceJava9"
+[try (thing; thing2) {
+      throw new Exception();
+...      // expected empty body.
+    }] => [let $resource_1 = null;] "trycatch.TryCatch.testTryWithResourceJava9"
+[try (thing; thing2) {
+      throw new Exception();
+...      // expected empty body.
+    }] => [try {
+    $resource = thing;
+...    }
+   }] "trycatch.TryCatch.testTryWithResourceJava9"
+[try (thing; thing2) {
+      throw new Exception();
+...      // expected empty body.
+    }] => [$resource = thing;] "trycatch.TryCatch.testTryWithResourceJava9"
+[try (thing; thing2) {
+      throw new Exception();
+...      // expected empty body.
+    }] => [$resource_1 = thing2;] "trycatch.TryCatch.testTryWithResourceJava9"
+[throw new Exception();] => [throw $Exceptions.toJs(Exception.$create__());] "trycatch.TryCatch.testTryWithResourceJava9"
+[try (thing; thing2) {
+      throw new Exception();
+...      // expected empty body.
+    }] => [__$exc = $Exceptions.toJava(__$exc);] "trycatch.TryCatch.testTryWithResourceJava9"
+[try (thing; thing2) {
+      throw new Exception();
+...      // expected empty body.
+    }] => [let $exceptionFromTry = /**@type {Throwable}*/ (__$exc);] "trycatch.TryCatch.testTryWithResourceJava9"
+[try (thing; thing2) {
+      throw new Exception();
+...      // expected empty body.
+    }] => [$primaryExc = $exceptionFromTry;] "trycatch.TryCatch.testTryWithResourceJava9"
+[try (thing; thing2) {
+      throw new Exception();
+...      // expected empty body.
+    }] => [throw $Exceptions.toJs($exceptionFromTry);] "trycatch.TryCatch.testTryWithResourceJava9"
+[try (thing; thing2) {
+      throw new Exception();
+...      // expected empty body.
+    }] => [$primaryExc = $Exceptions.safeClose($resource_1, $primaryExc);] "trycatch.TryCatch.testTryWithResourceJava9"
+[try (thing; thing2) {
+      throw new Exception();
+...      // expected empty body.
+    }] => [$primaryExc = $Exceptions.safeClose($resource, $primaryExc);] "trycatch.TryCatch.testTryWithResourceJava9"
+[try (thing; thing2) {
+      throw new Exception();
+...      // expected empty body.
+    }] => [if (!$Equality.$same($primaryExc, null)) {
+     throw $Exceptions.toJs($primaryExc);
+    }] "trycatch.TryCatch.testTryWithResourceJava9"
+[try (thing; thing2) {
+      throw new Exception();
+...      // expected empty body.
+    }] => [throw $Exceptions.toJs($primaryExc);] "trycatch.TryCatch.testTryWithResourceJava9"
+[{
+      // expected empty body.
+    }] => [__$exc_1 = $Exceptions.toJava(__$exc_1);] "trycatch.TryCatch.testTryWithResourceJava9"
+[{
+      // expected empty body.
+    }] => [if (Exception.$isInstance(__$exc_1)) {} else {
+    throw $Exceptions.toJs(__$exc_1);
+   }] "trycatch.TryCatch.testTryWithResourceJava9"
+[{
+      // expected empty body.
+    }] => [throw $Exceptions.toJs(__$exc_1);] "trycatch.TryCatch.testTryWithResourceJava9"
+[testNestedTryCatch] => [m_testNestedTryCatch__]
+[try {
+      throw new Exception();
+...      }
+    }] => [try {
+   throw $Exceptions.toJs(Exception.$create__());
+...   }
+  }] "trycatch.TryCatch.testNestedTryCatch"
+[throw new Exception();] => [throw $Exceptions.toJs(Exception.$create__());] "trycatch.TryCatch.testNestedTryCatch"
+[{
+      try {
+...      }
+    }] => [__$exc = $Exceptions.toJava(__$exc);] "trycatch.TryCatch.testNestedTryCatch"
+[{
+      try {
+...      }
+    }] => [if (Exception.$isInstance(__$exc)) {
+    let ae = /**@type {Exception}*/ (__$exc);
+...    throw $Exceptions.toJs(__$exc);
+   }] "trycatch.TryCatch.testNestedTryCatch"
+[{
+      try {
+...      }
+    }] => [let ae = /**@type {Exception}*/ (__$exc);] "trycatch.TryCatch.testNestedTryCatch"
+[ae] => [ae] "ae"
+[try {
+        throw new Exception();
+...        // expected empty body.
+      }] => [try {
+     throw $Exceptions.toJs(Exception.$create__());
+...     }
+    }] "trycatch.TryCatch.testNestedTryCatch"
+[throw new Exception();] => [throw $Exceptions.toJs(Exception.$create__());] "trycatch.TryCatch.testNestedTryCatch"
+[{
+        // expected empty body.
+      }] => [__$exc_1 = $Exceptions.toJava(__$exc_1);] "trycatch.TryCatch.testNestedTryCatch"
+[{
+        // expected empty body.
+      }] => [if (Exception.$isInstance(__$exc_1)) {} else {
+      throw $Exceptions.toJs(__$exc_1);
+     }] "trycatch.TryCatch.testNestedTryCatch"
+[{
+        // expected empty body.
+      }] => [throw $Exceptions.toJs(__$exc_1);] "trycatch.TryCatch.testNestedTryCatch"
+[{
+      try {
+...      }
+    }] => [throw $Exceptions.toJs(__$exc);] "trycatch.TryCatch.testNestedTryCatch"
+[testThrowGenerics] => [m_testThrowGenerics__]
+[throw getT(new Exception());] => [throw $Exceptions.toJs(this.m_getT__java_lang_Object_$p_trycatch_TryCatch(Exception.$create__()));] "trycatch.TryCatch.testThrowGenerics"
+[getT] => [m_getT__java_lang_Object_$p_trycatch_TryCatch]
+[t] => [t] "t"
+[return t;] => [return t;] "trycatch.TryCatch.getT"
+[testThrowBoundGenerics] => [m_testThrowBoundGenerics__]
+[throw getThrowable();] => [throw $Exceptions.toJs(this.m_getThrowable___$p_trycatch_TryCatch());] "trycatch.TryCatch.testThrowBoundGenerics"
+[getThrowable] => [m_getThrowable___$p_trycatch_TryCatch]
+[return null;] => [return null;] "trycatch.TryCatch.getThrowable"
+[TryCatch] => [$clinit]
+[TryCatch] => [TryCatch.$clinit = () =>{};] "trycatch.TryCatch.<clinit>"
+[TryCatch] => [TryCatch.$loadModules();] "trycatch.TryCatch.<clinit>"
+[TryCatch] => [j_l_Object.$clinit();] "trycatch.TryCatch.<clinit>"
+

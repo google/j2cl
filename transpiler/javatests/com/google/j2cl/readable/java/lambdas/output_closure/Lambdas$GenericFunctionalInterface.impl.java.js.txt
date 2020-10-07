@@ -1,0 +1,46 @@
+goog.module('lambdas.Lambdas.GenericFunctionalInterface$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('lambdas.Lambdas.GenericFunctionalInterface.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ * @template T
+ */
+class GenericFunctionalInterface {
+  /** @abstract @return {T} */
+  m_m__java_lang_Object(/** T */ i) {}
+  /** @template T @return {GenericFunctionalInterface<T>} */
+  static $adapt(/** ?function(T):T */ fn) {
+    GenericFunctionalInterface.$clinit();
+    return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));
+  }
+
+  static $clinit() {
+    GenericFunctionalInterface.$clinit = () => {};
+    GenericFunctionalInterface.$loadModules();
+  }
+
+  static $markImplementor(/** Function */ ctor) {
+    ctor.prototype.$implements__lambdas_Lambdas_GenericFunctionalInterface =
+        true;
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance != null &&
+        !!instance.$implements__lambdas_Lambdas_GenericFunctionalInterface;
+  }
+
+  static $loadModules() {
+    $LambdaAdaptor = goog.module.get(
+        'lambdas.Lambdas.GenericFunctionalInterface.$LambdaAdaptor$impl');
+  }
+}
+GenericFunctionalInterface.$markImplementor(
+    /**@type {Function}*/ (GenericFunctionalInterface));
+$Util.$setClassMetadataForInterface(
+    GenericFunctionalInterface, 'lambdas.Lambdas$GenericFunctionalInterface');
+
+exports = GenericFunctionalInterface;
+//# sourceMappingURL=Lambdas$GenericFunctionalInterface.js.map

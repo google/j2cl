@@ -1,0 +1,49 @@
+goog.module('newinnerclasswithsameouter.NewInnerClassWithSameOuter.B$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let NewInnerClassWithSameOuter = goog.forwardDeclare('newinnerclasswithsameouter.NewInnerClassWithSameOuter$impl');
+
+class B extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+    /**@type {NewInnerClassWithSameOuter}*/
+    this.$outer_this__newinnerclasswithsameouter_NewInnerClassWithSameOuter_B;
+  }
+  /** @return {!B} */
+  static $create__newinnerclasswithsameouter_NewInnerClassWithSameOuter(
+      /** NewInnerClassWithSameOuter */ $outer_this) {
+    B.$clinit();
+    let $instance = new B();
+    $instance
+        .$ctor__newinnerclasswithsameouter_NewInnerClassWithSameOuter_B__newinnerclasswithsameouter_NewInnerClassWithSameOuter(
+            $outer_this);
+    return $instance;
+  }
+
+  $ctor__newinnerclasswithsameouter_NewInnerClassWithSameOuter_B__newinnerclasswithsameouter_NewInnerClassWithSameOuter(
+      /** NewInnerClassWithSameOuter */ $outer_this) {
+    this.$outer_this__newinnerclasswithsameouter_NewInnerClassWithSameOuter_B =
+        $outer_this;
+    this.$ctor__java_lang_Object__();
+  }
+
+  static $clinit() {
+    B.$clinit = () => {};
+    B.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof B;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(
+    B, 'newinnerclasswithsameouter.NewInnerClassWithSameOuter$B');
+
+exports = B;
+//# sourceMappingURL=NewInnerClassWithSameOuter$B.js.map

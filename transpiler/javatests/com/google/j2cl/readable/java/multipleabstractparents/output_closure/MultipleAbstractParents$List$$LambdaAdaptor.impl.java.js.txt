@@ -1,0 +1,54 @@
+goog.module('multipleabstractparents.MultipleAbstractParents.List.$LambdaAdaptor$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const List = goog.require('multipleabstractparents.MultipleAbstractParents.List$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @template T
+ * @implements {List<T>}
+ */
+class $LambdaAdaptor extends j_l_Object {
+  constructor(/** ?function(T):?string */ fn) {
+    $LambdaAdaptor.$clinit();
+    super();
+    /**@type {?function(T):?string}*/
+    this.f_fn__multipleabstractparents_MultipleAbstractParents_List_$LambdaAdaptor;
+    this.$ctor__multipleabstractparents_MultipleAbstractParents_List_$LambdaAdaptor__multipleabstractparents_MultipleAbstractParents_List_$JsFunction(
+        fn);
+  }
+
+  $ctor__multipleabstractparents_MultipleAbstractParents_List_$LambdaAdaptor__multipleabstractparents_MultipleAbstractParents_List_$JsFunction(
+      /** ?function(T):?string */ fn) {
+    this.$ctor__java_lang_Object__();
+    this.f_fn__multipleabstractparents_MultipleAbstractParents_List_$LambdaAdaptor =
+        fn;
+  }
+  /** @override @return {?string} */
+  m_getFoo__java_lang_Object(/** T */ arg0) {
+    let /** ?function(T):?string */ $function;
+    return (
+        $function =
+            this.f_fn__multipleabstractparents_MultipleAbstractParents_List_$LambdaAdaptor,
+        $function(arg0));
+  }
+
+  static $clinit() {
+    $LambdaAdaptor.$clinit = () => {};
+    $LambdaAdaptor.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof $LambdaAdaptor;
+  }
+
+  static $loadModules() {}
+}
+List.$markImplementor($LambdaAdaptor);
+$Util.$setClassMetadata(
+    $LambdaAdaptor,
+    'multipleabstractparents.MultipleAbstractParents$List$$LambdaAdaptor');
+
+exports = $LambdaAdaptor;
+//# sourceMappingURL=MultipleAbstractParents$List$$LambdaAdaptor.js.map

@@ -1,0 +1,64 @@
+goog.module('nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let OuterClass = goog.forwardDeclare('nestedinstanceinnerclass.OuterClass$impl');
+let InnerClass = goog.forwardDeclare('nestedinstanceinnerclass.OuterClass.InnerClass$impl');
+
+class InnerInnerClass extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+    /**@type {InnerClass}*/
+    this.$outer_this__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass;
+    /**@type {InnerClass}*/
+    this.f_x__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass;
+    /**@type {OuterClass}*/
+    this.f_y__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass;
+  }
+  /** @return {!InnerInnerClass} */
+  static $create__nestedinstanceinnerclass_OuterClass_InnerClass(
+      /** InnerClass */ $outer_this) {
+    InnerInnerClass.$clinit();
+    let $instance = new InnerInnerClass();
+    $instance
+        .$ctor__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass__nestedinstanceinnerclass_OuterClass_InnerClass(
+            $outer_this);
+    return $instance;
+  }
+
+  $ctor__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass__nestedinstanceinnerclass_OuterClass_InnerClass(
+      /** InnerClass */ $outer_this) {
+    this.$outer_this__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass =
+        $outer_this;
+    this.$ctor__java_lang_Object__();
+    this.$init___$p_nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass();
+  }
+  /** @private */
+  $init___$p_nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass() {
+    this.f_x__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass =
+        this.$outer_this__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass;
+    this.f_y__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass =
+        this.$outer_this__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass
+            .$outer_this__nestedinstanceinnerclass_OuterClass_InnerClass;
+  }
+
+  static $clinit() {
+    InnerInnerClass.$clinit = () => {};
+    InnerInnerClass.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof InnerInnerClass;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(
+    InnerInnerClass,
+    'nestedinstanceinnerclass.OuterClass$InnerClass$InnerInnerClass');
+
+exports = InnerInnerClass;
+//# sourceMappingURL=OuterClass$InnerClass$InnerInnerClass.js.map

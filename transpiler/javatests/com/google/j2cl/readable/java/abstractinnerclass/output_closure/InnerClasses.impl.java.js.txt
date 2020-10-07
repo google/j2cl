@@ -1,0 +1,38 @@
+goog.module('abstractinnerclass.InnerClasses$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class InnerClasses extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  /** @return {!InnerClasses} */
+  static $create__() {
+    InnerClasses.$clinit();
+    let $instance = new InnerClasses();
+    $instance.$ctor__abstractinnerclass_InnerClasses__();
+    return $instance;
+  }
+
+  $ctor__abstractinnerclass_InnerClasses__() {
+    this.$ctor__java_lang_Object__();
+  }
+
+  static $clinit() {
+    InnerClasses.$clinit = () => {};
+    InnerClasses.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof InnerClasses;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(InnerClasses, 'abstractinnerclass.InnerClasses');
+
+exports = InnerClasses;
+//# sourceMappingURL=InnerClasses.js.map

@@ -1,0 +1,57 @@
+goog.module('overwrittentypevariables.HashFunctions$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Enum = goog.forwardDeclare('java.lang.Enum$impl');
+let HashFunction = goog.forwardDeclare('overwrittentypevariables.HashFunction$impl');
+let $1 = goog.forwardDeclare('overwrittentypevariables.HashFunctions.$1$impl');
+let $2 = goog.forwardDeclare('overwrittentypevariables.HashFunctions.$2$impl');
+
+class HashFunctions extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  /** @return {!HashFunctions} */
+  static $create__() {
+    HashFunctions.$clinit();
+    let $instance = new HashFunctions();
+    $instance.$ctor__overwrittentypevariables_HashFunctions__();
+    return $instance;
+  }
+
+  $ctor__overwrittentypevariables_HashFunctions__() {
+    this.$ctor__java_lang_Object__();
+  }
+  /** @template T @return {HashFunction<T>} */
+  static m_hashFunction__() {
+    HashFunctions.$clinit();
+    return /**@type {!$1<T>}*/ ($1.$create__());
+  }
+  /** @template T @return {HashFunction<T>} */
+  static m_enumHashFunction__() {
+    HashFunctions.$clinit();
+    return /**@type {!$2<T>}*/ ($2.$create__());
+  }
+
+  static $clinit() {
+    HashFunctions.$clinit = () => {};
+    HashFunctions.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof HashFunctions;
+  }
+
+  static $loadModules() {
+    $1 = goog.module.get('overwrittentypevariables.HashFunctions.$1$impl');
+    $2 = goog.module.get('overwrittentypevariables.HashFunctions.$2$impl');
+  }
+}
+$Util.$setClassMetadata(
+    HashFunctions, 'overwrittentypevariables.HashFunctions');
+
+exports = HashFunctions;
+//# sourceMappingURL=HashFunctions.js.map

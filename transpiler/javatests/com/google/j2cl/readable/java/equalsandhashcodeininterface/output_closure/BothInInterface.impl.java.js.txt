@@ -1,0 +1,36 @@
+goog.module('equalsandhashcodeininterface.BothInInterface$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ */
+class BothInInterface {
+  /** @abstract @return {boolean} */
+  equals(/** * */ obj) {}
+  /** @abstract @return {number} */
+  hashCode() {}
+
+  static $clinit() {
+    BothInInterface.$clinit = () => {};
+    BothInInterface.$loadModules();
+  }
+
+  static $markImplementor(/** Function */ ctor) {
+    ctor.prototype.$implements__equalsandhashcodeininterface_BothInInterface =
+        true;
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance != null &&
+        !!instance.$implements__equalsandhashcodeininterface_BothInInterface;
+  }
+
+  static $loadModules() {}
+}
+BothInInterface.$markImplementor(/**@type {Function}*/ (BothInInterface));
+$Util.$setClassMetadataForInterface(
+    BothInInterface, 'equalsandhashcodeininterface.BothInInterface');
+
+exports = BothInInterface;
+//# sourceMappingURL=BothInInterface.js.map

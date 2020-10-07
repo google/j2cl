@@ -1,0 +1,46 @@
+goog.module('jsmethod.JsMethodExample.Sub$impl');
+
+const Base = goog.require('jsmethod.JsMethodExample.Base$impl');
+const I = goog.require('jsmethod.JsMethodExample.I$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @extends {Base<?string>}
+ * @implements {I}
+ */
+class Sub extends Base {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  /** @return {!Sub} */
+  static $create__() {
+    Sub.$clinit();
+    let $instance = new Sub();
+    $instance.$ctor__jsmethod_JsMethodExample_Sub__();
+    return $instance;
+  }
+
+  $ctor__jsmethod_JsMethodExample_Sub__() {
+    this.$ctor__jsmethod_JsMethodExample_Base__();
+  }
+  /** @override */
+  m(/** ?string */ s) {}
+
+  static $clinit() {
+    Sub.$clinit = () => {};
+    Sub.$loadModules();
+    Base.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof Sub;
+  }
+
+  static $loadModules() {}
+}
+I.$markImplementor(Sub);
+$Util.$setClassMetadata(Sub, 'jsmethod.JsMethodExample$Sub');
+
+exports = Sub;
+//# sourceMappingURL=JsMethodExample$Sub.js.map

@@ -1,0 +1,45 @@
+goog.module('overwrittentypevariables.HashFunction$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const MyFunction = goog.require('overwrittentypevariables.MyFunction$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('overwrittentypevariables.HashFunction.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ * @template T
+ * @extends {MyFunction<T, ?string>}
+ */
+class HashFunction {
+  /** @template T @return {HashFunction<T>} */
+  static $adapt(/** ?function(T):?string */ fn) {
+    HashFunction.$clinit();
+    return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));
+  }
+
+  static $clinit() {
+    HashFunction.$clinit = () => {};
+    HashFunction.$loadModules();
+  }
+
+  static $markImplementor(/** Function */ ctor) {
+    MyFunction.$markImplementor(ctor);
+    ctor.prototype.$implements__overwrittentypevariables_HashFunction = true;
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance != null &&
+        !!instance.$implements__overwrittentypevariables_HashFunction;
+  }
+
+  static $loadModules() {
+    $LambdaAdaptor = goog.module.get(
+        'overwrittentypevariables.HashFunction.$LambdaAdaptor$impl');
+  }
+}
+HashFunction.$markImplementor(/**@type {Function}*/ (HashFunction));
+$Util.$setClassMetadataForInterface(
+    HashFunction, 'overwrittentypevariables.HashFunction');
+
+exports = HashFunction;
+//# sourceMappingURL=HashFunction.js.map

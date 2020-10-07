@@ -1,0 +1,41 @@
+goog.module('subclassgenericclass.GenericClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @template T
+ */
+class GenericClass extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  /** @template T @return {!GenericClass<T>} */
+  static $create__() {
+    GenericClass.$clinit();
+    let $instance = new GenericClass();
+    $instance.$ctor__subclassgenericclass_GenericClass__();
+    return $instance;
+  }
+
+  $ctor__subclassgenericclass_GenericClass__() {
+    this.$ctor__java_lang_Object__();
+  }
+
+  static $clinit() {
+    GenericClass.$clinit = () => {};
+    GenericClass.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof GenericClass;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(GenericClass, 'subclassgenericclass.GenericClass');
+
+exports = GenericClass;
+//# sourceMappingURL=GenericClass.js.map

@@ -1,0 +1,50 @@
+goog.module('bridgemethods.TestCase10036.BI2.$LambdaAdaptor$impl');
+
+const BI2 = goog.require('bridgemethods.TestCase10036.BI2$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @implements {BI2}
+ */
+class $LambdaAdaptor extends j_l_Object {
+  constructor(/** ?function(?string):?string */ fn) {
+    $LambdaAdaptor.$clinit();
+    super();
+    /**@type {?function(?string):?string}*/
+    this.f_fn__bridgemethods_TestCase10036_BI2_$LambdaAdaptor;
+    this.$ctor__bridgemethods_TestCase10036_BI2_$LambdaAdaptor__bridgemethods_TestCase10036_BI2_$JsFunction(
+        fn);
+  }
+
+  $ctor__bridgemethods_TestCase10036_BI2_$LambdaAdaptor__bridgemethods_TestCase10036_BI2_$JsFunction(
+      /** ?function(?string):?string */ fn) {
+    this.$ctor__java_lang_Object__();
+    this.f_fn__bridgemethods_TestCase10036_BI2_$LambdaAdaptor = fn;
+  }
+  /** @override @return {?string} */
+  m_get__java_lang_String(/** ?string */ arg0) {
+    let /** ?function(?string):?string */ $function;
+    return (
+        $function = this.f_fn__bridgemethods_TestCase10036_BI2_$LambdaAdaptor,
+        $function(arg0));
+  }
+
+  static $clinit() {
+    $LambdaAdaptor.$clinit = () => {};
+    $LambdaAdaptor.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof $LambdaAdaptor;
+  }
+
+  static $loadModules() {}
+}
+BI2.$markImplementor($LambdaAdaptor);
+$Util.$setClassMetadata(
+    $LambdaAdaptor, 'bridgemethods.TestCase10036$BI2$$LambdaAdaptor');
+
+exports = $LambdaAdaptor;
+//# sourceMappingURL=TestCase10036$BI2$$LambdaAdaptor.js.map

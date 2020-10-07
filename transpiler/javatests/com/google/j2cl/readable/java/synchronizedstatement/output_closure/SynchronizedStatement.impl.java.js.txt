@@ -1,0 +1,53 @@
+goog.module('synchronizedstatement.SynchronizedStatement$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class SynchronizedStatement extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+    /**@type {number}*/
+    this.f_a__synchronizedstatement_SynchronizedStatement_ = 0;
+    /**@type {number}*/
+    this.f_b__synchronizedstatement_SynchronizedStatement_ = 0;
+  }
+  /** @return {!SynchronizedStatement} */
+  static $create__() {
+    SynchronizedStatement.$clinit();
+    let $instance = new SynchronizedStatement();
+    $instance.$ctor__synchronizedstatement_SynchronizedStatement__();
+    return $instance;
+  }
+
+  $ctor__synchronizedstatement_SynchronizedStatement__() {
+    this.$ctor__java_lang_Object__();
+  }
+
+  m_main__() {
+    {
+      $Util.$synchronized(this);
+      this.f_a__synchronizedstatement_SynchronizedStatement_ =
+          this.f_a__synchronizedstatement_SynchronizedStatement_ + 1 | 0;
+      this.f_b__synchronizedstatement_SynchronizedStatement_ =
+          this.f_b__synchronizedstatement_SynchronizedStatement_ - 1 | 0;
+    }
+  }
+
+  static $clinit() {
+    SynchronizedStatement.$clinit = () => {};
+    SynchronizedStatement.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof SynchronizedStatement;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(
+    SynchronizedStatement, 'synchronizedstatement.SynchronizedStatement');
+
+exports = SynchronizedStatement;
+//# sourceMappingURL=SynchronizedStatement.js.map

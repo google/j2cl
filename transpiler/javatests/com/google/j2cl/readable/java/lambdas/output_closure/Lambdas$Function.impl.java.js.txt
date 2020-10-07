@@ -1,0 +1,51 @@
+goog.module('lambdas.Lambdas.Function$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('lambdas.Lambdas.Function.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ * @template T, R
+ */
+class Lambdas_Function {
+  /** @template T_1 @return {Lambdas_Function<T_1, T_1>} */
+  static m_identity__() {
+    Lambdas_Function.$clinit();
+    return /**@type {Lambdas_Function<T_1, T_1>}*/ (
+        Lambdas_Function.$adapt((/** T_1 */ t) => {
+          return t;
+        }));
+  }
+  /** @abstract @return {R} */
+  m_apply__java_lang_Object(/** T */ t) {}
+  /** @template T, R @return {Lambdas_Function<T, R>} */
+  static $adapt(/** ?function(T):R */ fn) {
+    Lambdas_Function.$clinit();
+    return /**@type {!$LambdaAdaptor<T, R>}*/ (new $LambdaAdaptor(fn));
+  }
+
+  static $clinit() {
+    Lambdas_Function.$clinit = () => {};
+    Lambdas_Function.$loadModules();
+  }
+
+  static $markImplementor(/** Function */ ctor) {
+    ctor.prototype.$implements__lambdas_Lambdas_Function = true;
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance != null && !!instance.$implements__lambdas_Lambdas_Function;
+  }
+
+  static $loadModules() {
+    $LambdaAdaptor =
+        goog.module.get('lambdas.Lambdas.Function.$LambdaAdaptor$impl');
+  }
+}
+Lambdas_Function.$markImplementor(/**@type {Function}*/ (Lambdas_Function));
+$Util.$setClassMetadataForInterface(
+    Lambdas_Function, 'lambdas.Lambdas$Function');
+
+exports = Lambdas_Function;
+//# sourceMappingURL=Lambdas$Function.js.map

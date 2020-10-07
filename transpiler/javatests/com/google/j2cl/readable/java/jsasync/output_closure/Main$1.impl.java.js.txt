@@ -1,0 +1,60 @@
+goog.module('jsasync.Main.$1$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const BaseInterface = goog.require('jsasync.Main.BaseInterface$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let Main = goog.forwardDeclare('jsasync.Main$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @implements {BaseInterface}
+ */
+class $1 extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+    /**@type {Main}*/
+    this.$outer_this__jsasync_Main_1;
+  }
+  /** @return {!$1} */
+  static $create__jsasync_Main(/** Main */ $outer_this) {
+    $1.$clinit();
+    let $instance = new $1();
+    $instance.$ctor__jsasync_Main_1__jsasync_Main($outer_this);
+    return $instance;
+  }
+
+  $ctor__jsasync_Main_1__jsasync_Main(/** Main */ $outer_this) {
+    this.$outer_this__jsasync_Main_1 = $outer_this;
+    this.$ctor__java_lang_Object__();
+  }
+  /** @override @return {IThenable<Integer>} */
+  async m_asyncCall__() {
+    return /**@type {Promise<Integer>}*/ (
+        Promise.resolve(/**@type {Integer}*/ ($Casts.$to(
+            await this.$outer_this__jsasync_Main_1.f_x__jsasync_Main_,
+            Integer))));
+  }
+
+  static $clinit() {
+    $1.$clinit = () => {};
+    $1.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof $1;
+  }
+
+  static $loadModules() {
+    Integer = goog.module.get('java.lang.Integer$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+  }
+}
+BaseInterface.$markImplementor($1);
+$Util.$setClassMetadata($1, 'jsasync.Main$1');
+
+exports = $1;
+//# sourceMappingURL=Main$1.js.map

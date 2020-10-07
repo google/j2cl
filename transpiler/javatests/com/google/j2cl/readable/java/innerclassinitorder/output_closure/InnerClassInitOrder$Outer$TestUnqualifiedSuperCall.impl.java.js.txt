@@ -1,0 +1,51 @@
+goog.module('innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall$impl');
+
+const OuterIsNotSuper = goog.require('innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Outer = goog.forwardDeclare('innerclassinitorder.InnerClassInitOrder.Outer$impl');
+
+class TestUnqualifiedSuperCall extends OuterIsNotSuper {
+  /** @protected */
+  constructor() {
+    super();
+    /**@type {Outer}*/
+    this.$outer_this__innerclassinitorder_InnerClassInitOrder_Outer_TestUnqualifiedSuperCall;
+  }
+  /** @return {!TestUnqualifiedSuperCall} */
+  static $create__innerclassinitorder_InnerClassInitOrder_Outer(
+      /** Outer */ $outer_this) {
+    TestUnqualifiedSuperCall.$clinit();
+    let $instance = new TestUnqualifiedSuperCall();
+    $instance
+        .$ctor__innerclassinitorder_InnerClassInitOrder_Outer_TestUnqualifiedSuperCall__innerclassinitorder_InnerClassInitOrder_Outer(
+            $outer_this);
+    return $instance;
+  }
+
+  $ctor__innerclassinitorder_InnerClassInitOrder_Outer_TestUnqualifiedSuperCall__innerclassinitorder_InnerClassInitOrder_Outer(
+      /** Outer */ $outer_this) {
+    this.$outer_this__innerclassinitorder_InnerClassInitOrder_Outer_TestUnqualifiedSuperCall =
+        $outer_this;
+    this.$ctor__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper__innerclassinitorder_InnerClassInitOrder_Outer(
+        $outer_this);
+  }
+
+  static $clinit() {
+    TestUnqualifiedSuperCall.$clinit = () => {};
+    TestUnqualifiedSuperCall.$loadModules();
+    OuterIsNotSuper.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof TestUnqualifiedSuperCall;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(
+    TestUnqualifiedSuperCall,
+    'innerclassinitorder.InnerClassInitOrder$Outer$TestUnqualifiedSuperCall');
+
+exports = TestUnqualifiedSuperCall;
+//# sourceMappingURL=InnerClassInitOrder$Outer$TestUnqualifiedSuperCall.js.map

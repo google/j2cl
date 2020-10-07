@@ -1,0 +1,37 @@
+goog.module('jstypewithdefault.Interface$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ */
+class Interface {
+  /** @abstract */
+  defaultMethod() {}
+
+  static m_defaultMethod__$default__jstypewithdefault_Interface(
+      /** !Interface */ $thisArg) {
+    Interface.$clinit();
+  }
+
+  static $clinit() {
+    Interface.$clinit = () => {};
+    Interface.$loadModules();
+  }
+
+  static $markImplementor(/** Function */ ctor) {
+    ctor.prototype.$implements__jstypewithdefault_Interface = true;
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance != null &&
+        !!instance.$implements__jstypewithdefault_Interface;
+  }
+
+  static $loadModules() {}
+}
+Interface.$markImplementor(/**@type {Function}*/ (Interface));
+$Util.$setClassMetadataForInterface(Interface, 'jstypewithdefault.Interface');
+
+exports = Interface;
+//# sourceMappingURL=Interface.js.map

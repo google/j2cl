@@ -1,0 +1,62 @@
+goog.module('foreachstatement.ForEachStatement$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Iterable = goog.forwardDeclare('java.lang.Iterable$impl');
+let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+class ForEachStatement extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  /** @return {!ForEachStatement} */
+  static $create__() {
+    ForEachStatement.$clinit();
+    let $instance = new ForEachStatement();
+    $instance.$ctor__foreachstatement_ForEachStatement__();
+    return $instance;
+  }
+
+  $ctor__foreachstatement_ForEachStatement__() {
+    this.$ctor__java_lang_Object__();
+  }
+
+  m_test__java_lang_Iterable(/** Iterable<Throwable> */ iterable) {
+    for (let $iterator = iterable.m_iterator__(); $iterator.m_hasNext__();) {
+      let t =
+          /**@type {Throwable}*/ ($Casts.$to($iterator.m_next__(), Throwable));
+      t.toString();
+    }
+    for (let $array = /**@type {!Array<Throwable>}*/ (
+                 $Arrays.$create([10], Throwable)),
+             $index = 0;
+         $index < $array.length; $index++) {
+      let t_1 = $array[$index];
+      t_1.toString();
+    }
+  }
+
+  static $clinit() {
+    ForEachStatement.$clinit = () => {};
+    ForEachStatement.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof ForEachStatement;
+  }
+
+  static $loadModules() {
+    Throwable = goog.module.get('java.lang.Throwable$impl');
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+  }
+}
+$Util.$setClassMetadata(ForEachStatement, 'foreachstatement.ForEachStatement');
+
+exports = ForEachStatement;
+//# sourceMappingURL=ForEachStatement.js.map

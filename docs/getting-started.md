@@ -118,6 +118,6 @@ and you are done.
     for a Hello World example using Guava.
 *   [J2CL Best Practices](best-practices.md) to make informed decisions for your
     project.
-*   [J2CL Transpiler Readable Repo](https://github.com/google/j2cl/tree/master/transpiler/javatests/com/google/j2cl/transpiler/readable)
+*   [J2CL Transpiler Readable Repo](https://github.com/google/j2cl/tree/master/transpiler/javatests/com/google/j2cl/readable)
     to dive into internals and see how J2CL generated code looks like in
     different situations.

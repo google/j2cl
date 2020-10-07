@@ -1,0 +1,13 @@
+goog.module('localnamecollision.LocalNameCollision');
+
+goog.require('java.lang.Object');
+goog.require('java.lang.RuntimeException');
+goog.require('localnamecollision.Asserts');
+goog.require('localnamecollision.Class');
+goog.require('localnamecollision.package1.A');
+goog.require('localnamecollision.package2.A');
+goog.require('nativebootstrap.Util');
+goog.require('vmbootstrap.Asserts');
+
+const LocalNameCollision = goog.require('localnamecollision.LocalNameCollision$impl');
+exports = LocalNameCollision;

@@ -1,0 +1,48 @@
+goog.module('aptgeneratorplugin.Foo$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Dummy = goog.forwardDeclare('aptgeneratorplugin.Dummy$impl');
+let Class = goog.forwardDeclare('java.lang.Class$impl');
+
+class Foo extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  /** @return {!Foo} */
+  static $create__() {
+    Foo.$clinit();
+    let $instance = new Foo();
+    $instance.$ctor__aptgeneratorplugin_Foo__();
+    return $instance;
+  }
+
+  $ctor__aptgeneratorplugin_Foo__() {
+    this.$ctor__java_lang_Object__();
+  }
+  /** @override @return {?string} */
+  toString() {
+    return Class.$get(Dummy).m_getSimpleName__();
+  }
+
+  static $clinit() {
+    Foo.$clinit = () => {};
+    Foo.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof Foo;
+  }
+
+  static $loadModules() {
+    Dummy = goog.module.get('aptgeneratorplugin.Dummy$impl');
+    Class = goog.module.get('java.lang.Class$impl');
+  }
+}
+$Util.$setClassMetadata(Foo, 'aptgeneratorplugin.Foo');
+
+exports = Foo;
+//# sourceMappingURL=Foo.js.map

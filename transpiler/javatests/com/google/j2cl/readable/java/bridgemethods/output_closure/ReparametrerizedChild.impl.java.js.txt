@@ -1,0 +1,57 @@
+goog.module('bridgemethods.ReparametrerizedChild$impl');
+
+const ParameterizedParent = goog.require('bridgemethods.ParameterizedParent$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @template E
+ * @extends {ParameterizedParent<E>}
+ */
+class ReparametrerizedChild extends ParameterizedParent {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  /** @template E @return {!ReparametrerizedChild<E>} */
+  static $create__() {
+    ReparametrerizedChild.$clinit();
+    let $instance = new ReparametrerizedChild();
+    $instance.$ctor__bridgemethods_ReparametrerizedChild__();
+    return $instance;
+  }
+
+  $ctor__bridgemethods_ReparametrerizedChild__() {
+    this.$ctor__bridgemethods_ParameterizedParent__();
+  }
+  /** @template S @return {S} */
+  m_m__bridgemethods_ReparametrerizedChild_$pp_bridgemethods(/** S */ t) {
+    return null;
+  }
+  // Bridge method.
+  /** @override @template S @return {S} */
+  m_m__bridgemethods_ParameterizedParent_$pp_bridgemethods(/** S */ arg0) {
+    return this.m_m__bridgemethods_ReparametrerizedChild_$pp_bridgemethods(
+        /**@type {S}*/ ($Casts.$to(arg0, ReparametrerizedChild)));
+  }
+
+  static $clinit() {
+    ReparametrerizedChild.$clinit = () => {};
+    ReparametrerizedChild.$loadModules();
+    ParameterizedParent.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof ReparametrerizedChild;
+  }
+
+  static $loadModules() {
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+  }
+}
+$Util.$setClassMetadata(
+    ReparametrerizedChild, 'bridgemethods.ReparametrerizedChild');
+
+exports = ReparametrerizedChild;
+//# sourceMappingURL=ReparametrerizedChild.js.map

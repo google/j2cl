@@ -1,0 +1,42 @@
+goog.module('mixednestings.MyInterface$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('mixednestings.MyInterface.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ */
+class MyInterface {
+  /** @abstract @return {number} */
+  m_fun__int(/** number */ a) {}
+  /** @return {MyInterface} */
+  static $adapt(/** ?function(number):number */ fn) {
+    MyInterface.$clinit();
+    return new $LambdaAdaptor(fn);
+  }
+
+  static $clinit() {
+    MyInterface.$clinit = () => {};
+    MyInterface.$loadModules();
+  }
+
+  static $markImplementor(/** Function */ ctor) {
+    ctor.prototype.$implements__mixednestings_MyInterface = true;
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance != null &&
+        !!instance.$implements__mixednestings_MyInterface;
+  }
+
+  static $loadModules() {
+    $LambdaAdaptor =
+        goog.module.get('mixednestings.MyInterface.$LambdaAdaptor$impl');
+  }
+}
+MyInterface.$markImplementor(/**@type {Function}*/ (MyInterface));
+$Util.$setClassMetadataForInterface(MyInterface, 'mixednestings.MyInterface');
+
+exports = MyInterface;
+//# sourceMappingURL=MyInterface.js.map

@@ -1,0 +1,63 @@
+goog.module('bridgejsmethod.Main.Parent$impl');
+
+const GrandParent = goog.require('bridgejsmethod.Main.GrandParent$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Main = goog.forwardDeclare('bridgejsmethod.Main$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @template T
+ * @extends {GrandParent<T>}
+ */
+class Parent extends GrandParent {
+  /** @protected */
+  constructor() {
+    super();
+    /**@type {Main}*/
+    this.$outer_this__bridgejsmethod_Main_Parent;
+  }
+  /** @template T @return {!Parent<T>} */
+  static $create__bridgejsmethod_Main(/** Main */ $outer_this) {
+    Parent.$clinit();
+    let $instance = new Parent();
+    $instance.$ctor__bridgejsmethod_Main_Parent__bridgejsmethod_Main(
+        $outer_this);
+    return $instance;
+  }
+
+  $ctor__bridgejsmethod_Main_Parent__bridgejsmethod_Main(
+      /** Main */ $outer_this) {
+    this.$outer_this__bridgejsmethod_Main_Parent = $outer_this;
+    this.$ctor__bridgejsmethod_Main_GrandParent__bridgejsmethod_Main(
+        $outer_this);
+  }
+  /** @override */
+  jsMethod(/** T */ t) {}
+
+  m_method__bridgejsmethod_Main_Parent(/** T */ t) {}
+  // Bridge method.
+  /** @override */
+  m_method__java_lang_Object(/** T */ arg0) {
+    this.m_method__bridgejsmethod_Main_Parent(
+        /**@type {T}*/ ($Casts.$to(arg0, Parent)));
+  }
+
+  static $clinit() {
+    Parent.$clinit = () => {};
+    Parent.$loadModules();
+    GrandParent.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof Parent;
+  }
+
+  static $loadModules() {
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+  }
+}
+$Util.$setClassMetadata(Parent, 'bridgejsmethod.Main$Parent');
+
+exports = Parent;
+//# sourceMappingURL=Main$Parent.js.map

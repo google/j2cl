@@ -1,0 +1,42 @@
+goog.module('rawtype.RawType$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
+
+class RawType extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+    /**@type {(Comparable|boolean|number|string)}*/
+    this.f_c__rawtype_RawType;
+  }
+  /** @return {!RawType} */
+  static $create__() {
+    RawType.$clinit();
+    let $instance = new RawType();
+    $instance.$ctor__rawtype_RawType__();
+    return $instance;
+  }
+
+  $ctor__rawtype_RawType__() {
+    this.$ctor__java_lang_Object__();
+  }
+
+  static $clinit() {
+    RawType.$clinit = () => {};
+    RawType.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof RawType;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(RawType, 'rawtype.RawType');
+
+exports = RawType;
+//# sourceMappingURL=RawType.js.map

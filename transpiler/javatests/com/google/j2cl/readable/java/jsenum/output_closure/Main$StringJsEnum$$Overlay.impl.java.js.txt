@@ -1,0 +1,30 @@
+goog.module('jsenum.Main.StringJsEnum.$Overlay$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const $Enums = goog.require('vmbootstrap.Enums$impl');
+
+let StringJsEnum = goog.forwardDeclare('jsenum.Main.StringJsEnum$impl');
+
+class $Overlay {
+  /** @return {?string} */
+  static m_getValue__$devirt__jsenum_Main_StringJsEnum(
+      /** !StringJsEnum */ $thisArg) {
+    $Overlay.$clinit();
+    return /**@type {?string}*/ ($thisArg);
+  }
+
+  static $clinit() {
+    $Overlay.$clinit = () => {};
+    $Overlay.$loadModules();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return $Enums.isInstanceOf(instance, $Overlay);
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata($Overlay, 'jsenum.Main$StringJsEnum');
+
+exports = $Overlay;
+//# sourceMappingURL=Main$StringJsEnum$$Overlay.js.map

@@ -1,0 +1,42 @@
+goog.module('array.Arrays.ArrayContainer$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @template T
+ */
+class ArrayContainer extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+    /**@type {Array<T>}*/
+    this.f_data__array_Arrays_ArrayContainer;
+  }
+  /** @template T @return {!ArrayContainer<T>} */
+  static $create__() {
+    let $instance = new ArrayContainer();
+    $instance.$ctor__array_Arrays_ArrayContainer__();
+    return $instance;
+  }
+
+  $ctor__array_Arrays_ArrayContainer__() {
+    this.$ctor__java_lang_Object__();
+  }
+
+  static $clinit() {
+    ArrayContainer.$clinit = () => {};
+    ArrayContainer.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof ArrayContainer;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(ArrayContainer, 'array.Arrays$ArrayContainer');
+
+exports = ArrayContainer;
+//# sourceMappingURL=Arrays$ArrayContainer.js.map

@@ -1,0 +1,85 @@
+goog.module('nestedgenericclass.NestedGenericClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Error = goog.forwardDeclare('java.lang.Error$impl');
+let Exception = goog.forwardDeclare('java.lang.Exception$impl');
+let Number = goog.forwardDeclare('java.lang.Number$impl');
+let $1E = goog.forwardDeclare('nestedgenericclass.NestedGenericClass.$1E$impl');
+let $1F = goog.forwardDeclare('nestedgenericclass.NestedGenericClass.$1F$impl');
+let $1G = goog.forwardDeclare('nestedgenericclass.NestedGenericClass.$1G$impl');
+let A = goog.forwardDeclare('nestedgenericclass.NestedGenericClass.A$impl');
+let B = goog.forwardDeclare('nestedgenericclass.NestedGenericClass.A.B$impl');
+let C = goog.forwardDeclare('nestedgenericclass.NestedGenericClass.C$impl');
+let D = goog.forwardDeclare('nestedgenericclass.NestedGenericClass.C.D$impl');
+
+/**
+ * @template T
+ */
+class NestedGenericClass extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  /** @template T @return {!NestedGenericClass<T>} */
+  static $create__() {
+    NestedGenericClass.$clinit();
+    let $instance = new NestedGenericClass();
+    $instance.$ctor__nestedgenericclass_NestedGenericClass__();
+    return $instance;
+  }
+
+  $ctor__nestedgenericclass_NestedGenericClass__() {
+    this.$ctor__java_lang_Object__();
+  }
+  /** @template S */
+  m_fun__java_lang_Object(/** S */ t) {
+    $1E.$create__nestedgenericclass_NestedGenericClass(this);
+    $1F.$create__nestedgenericclass_NestedGenericClass(this);
+  }
+  /** @template T_1 */
+  m_bar__() {
+    /**@type {!$1G<Error, T_1, T>}*/ (
+        $1G.$create__nestedgenericclass_NestedGenericClass(this))
+        .m_bar__();
+  }
+
+  m_test__() {
+    let n = /**@type {!NestedGenericClass<(Number|number)>}*/ (
+        NestedGenericClass.$create__());
+    let a = /**@type {!A<Error, (Number|number)>}*/ (
+        A.$create__nestedgenericclass_NestedGenericClass(n));
+    let b = /**@type {!B<Exception, Error, (Number|number)>}*/ (
+        B.$create__nestedgenericclass_NestedGenericClass_A(a));
+    C.$create__nestedgenericclass_NestedGenericClass(n);
+    D.$create__nestedgenericclass_NestedGenericClass_C(
+        /**@type {!C<(Number|number)>}*/ (
+            C.$create__nestedgenericclass_NestedGenericClass(n)));
+  }
+
+  static $clinit() {
+    NestedGenericClass.$clinit = () => {};
+    NestedGenericClass.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof NestedGenericClass;
+  }
+
+  static $loadModules() {
+    $1E = goog.module.get('nestedgenericclass.NestedGenericClass.$1E$impl');
+    $1F = goog.module.get('nestedgenericclass.NestedGenericClass.$1F$impl');
+    $1G = goog.module.get('nestedgenericclass.NestedGenericClass.$1G$impl');
+    A = goog.module.get('nestedgenericclass.NestedGenericClass.A$impl');
+    B = goog.module.get('nestedgenericclass.NestedGenericClass.A.B$impl');
+    C = goog.module.get('nestedgenericclass.NestedGenericClass.C$impl');
+    D = goog.module.get('nestedgenericclass.NestedGenericClass.C.D$impl');
+  }
+}
+$Util.$setClassMetadata(
+    NestedGenericClass, 'nestedgenericclass.NestedGenericClass');
+
+exports = NestedGenericClass;
+//# sourceMappingURL=NestedGenericClass.js.map

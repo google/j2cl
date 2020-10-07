@@ -1,0 +1,55 @@
+goog.module('interfaces.Main.SubInterface$impl');
+
+const Interface = goog.require('interfaces.Main.Interface$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('interfaces.Main.SubInterface.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ * @extends {Interface<?string>}
+ */
+class SubInterface {
+  /** @abstract */
+  m_defaultMethod__java_lang_String(/** ?string */ s) {}
+  /** @return {SubInterface} */
+  static $adapt(/** ?function():void */ fn) {
+    SubInterface.$clinit();
+    return new $LambdaAdaptor(fn);
+  }
+
+  static m_defaultMethod__$default__interfaces_Main_SubInterface__java_lang_String(
+      /** !SubInterface */ $thisArg, /** ?string */ s) {
+    SubInterface.$clinit();
+    Interface
+        .m_defaultMethod__$default__interfaces_Main_Interface__java_lang_Object(
+            $thisArg, s);
+  }
+
+  static $clinit() {
+    SubInterface.$clinit = () => {};
+    SubInterface.$loadModules();
+    Interface.$clinit();
+  }
+
+  static $markImplementor(/** Function */ ctor) {
+    Interface.$markImplementor(ctor);
+    ctor.prototype.$implements__interfaces_Main_SubInterface = true;
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance != null &&
+        !!instance.$implements__interfaces_Main_SubInterface;
+  }
+
+  static $loadModules() {
+    $LambdaAdaptor =
+        goog.module.get('interfaces.Main.SubInterface.$LambdaAdaptor$impl');
+  }
+}
+SubInterface.$markImplementor(/**@type {Function}*/ (SubInterface));
+$Util.$setClassMetadataForInterface(
+    SubInterface, 'interfaces.Main$SubInterface');
+
+exports = SubInterface;
+//# sourceMappingURL=Main$SubInterface.js.map

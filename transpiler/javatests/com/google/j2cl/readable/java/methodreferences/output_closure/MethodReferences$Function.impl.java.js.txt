@@ -1,0 +1,46 @@
+goog.module('methodreferences.MethodReferences.Function$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('methodreferences.MethodReferences.Function.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ * @template T, U
+ */
+class MethodReferences_Function {
+  /** @abstract @return {U} */
+  m_apply__java_lang_Object(/** T */ t) {}
+  /** @template T, U @return {MethodReferences_Function<T, U>} */
+  static $adapt(/** ?function(T):U */ fn) {
+    MethodReferences_Function.$clinit();
+    return /**@type {!$LambdaAdaptor<T, U>}*/ (new $LambdaAdaptor(fn));
+  }
+
+  static $clinit() {
+    MethodReferences_Function.$clinit = () => {};
+    MethodReferences_Function.$loadModules();
+  }
+
+  static $markImplementor(/** Function */ ctor) {
+    ctor.prototype.$implements__methodreferences_MethodReferences_Function =
+        true;
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance != null &&
+        !!instance.$implements__methodreferences_MethodReferences_Function;
+  }
+
+  static $loadModules() {
+    $LambdaAdaptor = goog.module.get(
+        'methodreferences.MethodReferences.Function.$LambdaAdaptor$impl');
+  }
+}
+MethodReferences_Function.$markImplementor(
+    /**@type {Function}*/ (MethodReferences_Function));
+$Util.$setClassMetadataForInterface(
+    MethodReferences_Function, 'methodreferences.MethodReferences$Function');
+
+exports = MethodReferences_Function;
+//# sourceMappingURL=MethodReferences$Function.js.map

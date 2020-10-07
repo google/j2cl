@@ -1,0 +1,51 @@
+goog.module('jsbridgeaccidentaloverride.OtherInterface.$LambdaAdaptor$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const OtherInterface = goog.require('jsbridgeaccidentaloverride.OtherInterface$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @implements {OtherInterface}
+ */
+class $LambdaAdaptor extends j_l_Object {
+  constructor(/** ?function(number):number */ fn) {
+    $LambdaAdaptor.$clinit();
+    super();
+    /**@type {?function(number):number}*/
+    this.f_fn__jsbridgeaccidentaloverride_OtherInterface_$LambdaAdaptor;
+    this.$ctor__jsbridgeaccidentaloverride_OtherInterface_$LambdaAdaptor__jsbridgeaccidentaloverride_OtherInterface_$JsFunction(
+        fn);
+  }
+
+  $ctor__jsbridgeaccidentaloverride_OtherInterface_$LambdaAdaptor__jsbridgeaccidentaloverride_OtherInterface_$JsFunction(
+      /** ?function(number):number */ fn) {
+    this.$ctor__java_lang_Object__();
+    this.f_fn__jsbridgeaccidentaloverride_OtherInterface_$LambdaAdaptor = fn;
+  }
+  /** @override @return {number} */
+  m_fun__int(/** number */ arg0) {
+    let /** ?function(number):number */ $function;
+    return (
+        $function =
+            this.f_fn__jsbridgeaccidentaloverride_OtherInterface_$LambdaAdaptor,
+        $function(arg0));
+  }
+
+  static $clinit() {
+    $LambdaAdaptor.$clinit = () => {};
+    $LambdaAdaptor.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof $LambdaAdaptor;
+  }
+
+  static $loadModules() {}
+}
+OtherInterface.$markImplementor($LambdaAdaptor);
+$Util.$setClassMetadata(
+    $LambdaAdaptor, 'jsbridgeaccidentaloverride.OtherInterface$$LambdaAdaptor');
+
+exports = $LambdaAdaptor;
+//# sourceMappingURL=OtherInterface$$LambdaAdaptor.js.map

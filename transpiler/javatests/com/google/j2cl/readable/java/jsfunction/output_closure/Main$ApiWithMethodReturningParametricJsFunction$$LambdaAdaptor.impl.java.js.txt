@@ -1,0 +1,54 @@
+goog.module('jsfunction.Main.ApiWithMethodReturningParametricJsFunction.$LambdaAdaptor$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const ApiWithMethodReturningParametricJsFunction = goog.require('jsfunction.Main.ApiWithMethodReturningParametricJsFunction$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @implements {ApiWithMethodReturningParametricJsFunction}
+ */
+class $LambdaAdaptor extends j_l_Object {
+  constructor(/** ?function():?function(?):void */ fn) {
+    $LambdaAdaptor.$clinit();
+    super();
+    /**@type {?function():?function(?):void}*/
+    this.f_fn__jsfunction_Main_ApiWithMethodReturningParametricJsFunction_$LambdaAdaptor;
+    this.$ctor__jsfunction_Main_ApiWithMethodReturningParametricJsFunction_$LambdaAdaptor__jsfunction_Main_ApiWithMethodReturningParametricJsFunction_$JsFunction(
+        fn);
+  }
+
+  $ctor__jsfunction_Main_ApiWithMethodReturningParametricJsFunction_$LambdaAdaptor__jsfunction_Main_ApiWithMethodReturningParametricJsFunction_$JsFunction(
+      /** ?function():?function(?):void */ fn) {
+    this.$ctor__java_lang_Object__();
+    this.f_fn__jsfunction_Main_ApiWithMethodReturningParametricJsFunction_$LambdaAdaptor =
+        fn;
+  }
+  /** @override @return {?function(T):void} */
+  m_anApi__() {
+    let /** ?function():?function(?):void */ $function;
+    return (
+        $function =
+            this.f_fn__jsfunction_Main_ApiWithMethodReturningParametricJsFunction_$LambdaAdaptor,
+        $function());
+  }
+
+  static $clinit() {
+    $LambdaAdaptor.$clinit = () => {};
+    $LambdaAdaptor.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof $LambdaAdaptor;
+  }
+
+  static $loadModules() {}
+}
+ApiWithMethodReturningParametricJsFunction.$markImplementor($LambdaAdaptor);
+$Util.$setClassMetadata(
+    $LambdaAdaptor,
+    'jsfunction.Main$ApiWithMethodReturningParametricJsFunction$$LambdaAdaptor');
+
+exports = $LambdaAdaptor;
+//#
+//sourceMappingURL=Main$ApiWithMethodReturningParametricJsFunction$$LambdaAdaptor.js.map

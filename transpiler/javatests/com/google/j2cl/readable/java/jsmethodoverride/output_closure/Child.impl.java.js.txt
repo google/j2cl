@@ -1,0 +1,34 @@
+goog.module('jsmethodoverride.Child$impl');
+
+const Parent = goog.require('jsmethodoverride.Parent$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class Child extends Parent {
+  constructor() {
+    Child.$clinit();
+    super();
+    this.$ctor__jsmethodoverride_Child__();
+  }
+
+  $ctor__jsmethodoverride_Child__() {
+    this.$ctor__jsmethodoverride_Parent__();
+  }
+  /** @override */
+  bar() {}
+
+  static $clinit() {
+    Child.$clinit = () => {};
+    Child.$loadModules();
+    Parent.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof Child;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(Child, 'jsmethodoverride.Child');
+
+exports = Child;
+//# sourceMappingURL=Child.js.map

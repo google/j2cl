@@ -1,0 +1,50 @@
+goog.module('typewildcards.TypeWildCards.X.$LambdaAdaptor$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const X = goog.require('typewildcards.TypeWildCards.X$impl');
+
+/**
+ * @implements {X}
+ */
+class $LambdaAdaptor extends j_l_Object {
+  constructor(/** ?function():void */ fn) {
+    $LambdaAdaptor.$clinit();
+    super();
+    /**@type {?function():void}*/
+    this.f_fn__typewildcards_TypeWildCards_X_$LambdaAdaptor;
+    this.$ctor__typewildcards_TypeWildCards_X_$LambdaAdaptor__typewildcards_TypeWildCards_X_$JsFunction(
+        fn);
+  }
+
+  $ctor__typewildcards_TypeWildCards_X_$LambdaAdaptor__typewildcards_TypeWildCards_X_$JsFunction(
+      /** ?function():void */ fn) {
+    this.$ctor__java_lang_Object__();
+    this.f_fn__typewildcards_TypeWildCards_X_$LambdaAdaptor = fn;
+  }
+  /** @override */
+  m_m__() {
+    {
+      let $function = this.f_fn__typewildcards_TypeWildCards_X_$LambdaAdaptor;
+      $function();
+    }
+  }
+
+  static $clinit() {
+    $LambdaAdaptor.$clinit = () => {};
+    $LambdaAdaptor.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof $LambdaAdaptor;
+  }
+
+  static $loadModules() {}
+}
+X.$markImplementor($LambdaAdaptor);
+$Util.$setClassMetadata(
+    $LambdaAdaptor, 'typewildcards.TypeWildCards$X$$LambdaAdaptor');
+
+exports = $LambdaAdaptor;
+//# sourceMappingURL=TypeWildCards$X$$LambdaAdaptor.js.map

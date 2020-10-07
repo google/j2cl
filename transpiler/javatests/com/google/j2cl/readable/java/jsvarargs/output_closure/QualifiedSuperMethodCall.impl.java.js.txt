@@ -1,0 +1,39 @@
+goog.module('jsvarargs.QualifiedSuperMethodCall$impl');
+
+const Main = goog.require('jsvarargs.Main$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class QualifiedSuperMethodCall extends Main {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  /** @return {!QualifiedSuperMethodCall} */
+  static $create__() {
+    QualifiedSuperMethodCall.$clinit();
+    let $instance = new QualifiedSuperMethodCall();
+    $instance.$ctor__jsvarargs_QualifiedSuperMethodCall__();
+    return $instance;
+  }
+
+  $ctor__jsvarargs_QualifiedSuperMethodCall__() {
+    this.$ctor__jsvarargs_Main__int(0);
+  }
+
+  static $clinit() {
+    QualifiedSuperMethodCall.$clinit = () => {};
+    QualifiedSuperMethodCall.$loadModules();
+    Main.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof QualifiedSuperMethodCall;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(
+    QualifiedSuperMethodCall, 'jsvarargs.QualifiedSuperMethodCall');
+
+exports = QualifiedSuperMethodCall;
+//# sourceMappingURL=QualifiedSuperMethodCall.js.map

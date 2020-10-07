@@ -1,0 +1,40 @@
+goog.module('jsmethodoverride.Parent$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class Parent extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  /** @return {!Parent} */
+  static $create__() {
+    Parent.$clinit();
+    let $instance = new Parent();
+    $instance.$ctor__jsmethodoverride_Parent__();
+    return $instance;
+  }
+
+  $ctor__jsmethodoverride_Parent__() {
+    this.$ctor__java_lang_Object__();
+  }
+
+  bar() {}
+
+  static $clinit() {
+    Parent.$clinit = () => {};
+    Parent.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof Parent;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(Parent, 'jsmethodoverride.Parent');
+
+exports = Parent;
+//# sourceMappingURL=Parent.js.map

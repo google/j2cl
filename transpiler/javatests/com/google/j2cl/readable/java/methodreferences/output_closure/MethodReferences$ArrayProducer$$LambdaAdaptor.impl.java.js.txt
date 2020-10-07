@@ -1,0 +1,54 @@
+goog.module('methodreferences.MethodReferences.ArrayProducer.$LambdaAdaptor$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const ArrayProducer = goog.require('methodreferences.MethodReferences.ArrayProducer$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @template T
+ * @implements {ArrayProducer<T>}
+ */
+class $LambdaAdaptor extends j_l_Object {
+  constructor(/** ?function(number):Array<T> */ fn) {
+    $LambdaAdaptor.$clinit();
+    super();
+    /**@type {?function(number):Array<T>}*/
+    this.f_fn__methodreferences_MethodReferences_ArrayProducer_$LambdaAdaptor;
+    this.$ctor__methodreferences_MethodReferences_ArrayProducer_$LambdaAdaptor__methodreferences_MethodReferences_ArrayProducer_$JsFunction(
+        fn);
+  }
+
+  $ctor__methodreferences_MethodReferences_ArrayProducer_$LambdaAdaptor__methodreferences_MethodReferences_ArrayProducer_$JsFunction(
+      /** ?function(number):Array<T> */ fn) {
+    this.$ctor__java_lang_Object__();
+    this.f_fn__methodreferences_MethodReferences_ArrayProducer_$LambdaAdaptor =
+        fn;
+  }
+  /** @override @return {Array<T>} */
+  m_produce__int(/** number */ arg0) {
+    let /** ?function(number):Array<T> */ $function;
+    return (
+        $function =
+            this.f_fn__methodreferences_MethodReferences_ArrayProducer_$LambdaAdaptor,
+        $function(arg0));
+  }
+
+  static $clinit() {
+    $LambdaAdaptor.$clinit = () => {};
+    $LambdaAdaptor.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof $LambdaAdaptor;
+  }
+
+  static $loadModules() {}
+}
+ArrayProducer.$markImplementor($LambdaAdaptor);
+$Util.$setClassMetadata(
+    $LambdaAdaptor,
+    'methodreferences.MethodReferences$ArrayProducer$$LambdaAdaptor');
+
+exports = $LambdaAdaptor;
+//# sourceMappingURL=MethodReferences$ArrayProducer$$LambdaAdaptor.js.map

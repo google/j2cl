@@ -1,0 +1,47 @@
+goog.module('overridingmethods.Child$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const Parent = goog.require('overridingmethods.Parent$impl');
+const SomeInterface = goog.require('overridingmethods.SomeInterface$impl');
+
+/**
+ * @implements {SomeInterface}
+ */
+class Child extends Parent {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  /** @return {!Child} */
+  static $create__() {
+    Child.$clinit();
+    let $instance = new Child();
+    $instance.$ctor__overridingmethods_Child__();
+    return $instance;
+  }
+
+  $ctor__overridingmethods_Child__() {
+    this.$ctor__overridingmethods_Parent__();
+  }
+  /** @override */
+  m_fun__() {}
+  /** @override */
+  m_bar__() {}
+
+  static $clinit() {
+    Child.$clinit = () => {};
+    Child.$loadModules();
+    Parent.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof Child;
+  }
+
+  static $loadModules() {}
+}
+SomeInterface.$markImplementor(Child);
+$Util.$setClassMetadata(Child, 'overridingmethods.Child');
+
+exports = Child;
+//# sourceMappingURL=Child.js.map

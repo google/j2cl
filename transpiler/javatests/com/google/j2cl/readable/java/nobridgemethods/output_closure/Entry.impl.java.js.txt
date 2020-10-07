@@ -1,0 +1,29 @@
+goog.module('nobridgemethods.Entry$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ * @template K
+ */
+class Entry {
+  static $clinit() {
+    Entry.$clinit = () => {};
+    Entry.$loadModules();
+  }
+
+  static $markImplementor(/** Function */ ctor) {
+    ctor.prototype.$implements__nobridgemethods_Entry = true;
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance != null && !!instance.$implements__nobridgemethods_Entry;
+  }
+
+  static $loadModules() {}
+}
+Entry.$markImplementor(/**@type {Function}*/ (Entry));
+$Util.$setClassMetadataForInterface(Entry, 'nobridgemethods.Entry');
+
+exports = Entry;
+//# sourceMappingURL=Entry.js.map

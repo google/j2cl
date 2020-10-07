@@ -1,0 +1,44 @@
+goog.module('overwrittentypevariables.MyFunction$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('overwrittentypevariables.MyFunction.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ * @template F, T
+ */
+class MyFunction {
+  /** @abstract @return {T} */
+  m_apply__java_lang_Object(/** F */ input) {}
+  /** @template F, T @return {MyFunction<F, T>} */
+  static $adapt(/** ?function(F):T */ fn) {
+    MyFunction.$clinit();
+    return /**@type {!$LambdaAdaptor<F, T>}*/ (new $LambdaAdaptor(fn));
+  }
+
+  static $clinit() {
+    MyFunction.$clinit = () => {};
+    MyFunction.$loadModules();
+  }
+
+  static $markImplementor(/** Function */ ctor) {
+    ctor.prototype.$implements__overwrittentypevariables_MyFunction = true;
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance != null &&
+        !!instance.$implements__overwrittentypevariables_MyFunction;
+  }
+
+  static $loadModules() {
+    $LambdaAdaptor = goog.module.get(
+        'overwrittentypevariables.MyFunction.$LambdaAdaptor$impl');
+  }
+}
+MyFunction.$markImplementor(/**@type {Function}*/ (MyFunction));
+$Util.$setClassMetadataForInterface(
+    MyFunction, 'overwrittentypevariables.MyFunction');
+
+exports = MyFunction;
+//# sourceMappingURL=MyFunction.js.map

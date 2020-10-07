@@ -1,0 +1,37 @@
+goog.module('jsmethod.JsMethodExample.Base$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @abstract
+ * @template T
+ */
+class Base extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+  }
+
+  $ctor__jsmethod_JsMethodExample_Base__() {
+    this.$ctor__java_lang_Object__();
+  }
+
+  m(/** T */ t) {}
+
+  static $clinit() {
+    Base.$clinit = () => {};
+    Base.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof Base;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(Base, 'jsmethod.JsMethodExample$Base');
+
+exports = Base;
+//# sourceMappingURL=JsMethodExample$Base.js.map

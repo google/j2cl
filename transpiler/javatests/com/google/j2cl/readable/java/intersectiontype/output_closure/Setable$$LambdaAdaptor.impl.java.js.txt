@@ -1,0 +1,50 @@
+goog.module('intersectiontype.Setable.$LambdaAdaptor$impl');
+
+const Setable = goog.require('intersectiontype.Setable$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @implements {Setable}
+ */
+class $LambdaAdaptor extends j_l_Object {
+  constructor(/** ?function(number):void */ fn) {
+    $LambdaAdaptor.$clinit();
+    super();
+    /**@type {?function(number):void}*/
+    this.f_fn__intersectiontype_Setable_$LambdaAdaptor;
+    this.$ctor__intersectiontype_Setable_$LambdaAdaptor__intersectiontype_Setable_$JsFunction(
+        fn);
+  }
+
+  $ctor__intersectiontype_Setable_$LambdaAdaptor__intersectiontype_Setable_$JsFunction(
+      /** ?function(number):void */ fn) {
+    this.$ctor__java_lang_Object__();
+    this.f_fn__intersectiontype_Setable_$LambdaAdaptor = fn;
+  }
+  /** @override */
+  m_set__int(/** number */ arg0) {
+    {
+      let $function = this.f_fn__intersectiontype_Setable_$LambdaAdaptor;
+      $function(arg0);
+    }
+  }
+
+  static $clinit() {
+    $LambdaAdaptor.$clinit = () => {};
+    $LambdaAdaptor.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof $LambdaAdaptor;
+  }
+
+  static $loadModules() {}
+}
+Setable.$markImplementor($LambdaAdaptor);
+$Util.$setClassMetadata(
+    $LambdaAdaptor, 'intersectiontype.Setable$$LambdaAdaptor');
+
+exports = $LambdaAdaptor;
+//# sourceMappingURL=Setable$$LambdaAdaptor.js.map

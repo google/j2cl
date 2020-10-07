@@ -1,0 +1,20 @@
+goog.module('importglobaljstypes.Date.NativeDate.$Overlay$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class $Overlay {
+  static $clinit() {
+    $Overlay.$clinit = () => {};
+    $Overlay.$loadModules();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof Date;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata($Overlay, 'Date');
+
+exports = $Overlay;
+//# sourceMappingURL=Date$NativeDate$$Overlay.js.map

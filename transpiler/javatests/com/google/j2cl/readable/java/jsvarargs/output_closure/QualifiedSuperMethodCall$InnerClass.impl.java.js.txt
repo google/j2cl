@@ -1,0 +1,76 @@
+goog.module('jsvarargs.QualifiedSuperMethodCall.InnerClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let Main = goog.forwardDeclare('jsvarargs.Main$impl');
+let QualifiedSuperMethodCall = goog.forwardDeclare('jsvarargs.QualifiedSuperMethodCall$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+class InnerClass extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+    /**@type {QualifiedSuperMethodCall}*/
+    this.$outer_this__jsvarargs_QualifiedSuperMethodCall_InnerClass;
+  }
+  /** @return {!InnerClass} */
+  static $create__jsvarargs_QualifiedSuperMethodCall(
+      /** QualifiedSuperMethodCall */ $outer_this) {
+    InnerClass.$clinit();
+    let $instance = new InnerClass();
+    $instance
+        .$ctor__jsvarargs_QualifiedSuperMethodCall_InnerClass__jsvarargs_QualifiedSuperMethodCall(
+            $outer_this);
+    return $instance;
+  }
+
+  $ctor__jsvarargs_QualifiedSuperMethodCall_InnerClass__jsvarargs_QualifiedSuperMethodCall(
+      /** QualifiedSuperMethodCall */ $outer_this) {
+    this.$outer_this__jsvarargs_QualifiedSuperMethodCall_InnerClass =
+        $outer_this;
+    this.$ctor__java_lang_Object__();
+  }
+
+  m_test__() {
+    Main.prototype.f3.call(
+        this.$outer_this__jsvarargs_QualifiedSuperMethodCall_InnerClass, 1, 1,
+        2);
+    Main.prototype.f3.call(
+        this.$outer_this__jsvarargs_QualifiedSuperMethodCall_InnerClass, 1);
+    Main.prototype.f3.call(
+        this.$outer_this__jsvarargs_QualifiedSuperMethodCall_InnerClass, 1, 1,
+        2);
+    Main.prototype.f3.call(
+        this.$outer_this__jsvarargs_QualifiedSuperMethodCall_InnerClass, 1);
+    let ints = /**@type {!Array<number>}*/ ($Arrays.$init([1, 2], $int));
+    Main.prototype.f3.call(
+        this.$outer_this__jsvarargs_QualifiedSuperMethodCall_InnerClass, 1,
+        ...InternalPreconditions.m_checkNotNull__java_lang_Object(ints));
+  }
+
+  static $clinit() {
+    InnerClass.$clinit = () => {};
+    InnerClass.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof InnerClass;
+  }
+
+  static $loadModules() {
+    InternalPreconditions =
+        goog.module.get('javaemul.internal.InternalPreconditions$impl');
+    Main = goog.module.get('jsvarargs.Main$impl');
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+  }
+}
+$Util.$setClassMetadata(
+    InnerClass, 'jsvarargs.QualifiedSuperMethodCall$InnerClass');
+
+exports = InnerClass;
+//# sourceMappingURL=QualifiedSuperMethodCall$InnerClass.js.map

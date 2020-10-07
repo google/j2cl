@@ -1,0 +1,37 @@
+goog.module('unimplementedbridgemethod.Bar$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const J = goog.require('unimplementedbridgemethod.J$impl');
+
+/**
+ * @abstract
+ * @implements {J}
+ */
+class Bar extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+  }
+
+  $ctor__unimplementedbridgemethod_Bar__() {
+    this.$ctor__java_lang_Object__();
+  }
+
+  static $clinit() {
+    Bar.$clinit = () => {};
+    Bar.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof Bar;
+  }
+
+  static $loadModules() {}
+}
+J.$markImplementor(Bar);
+$Util.$setClassMetadata(Bar, 'unimplementedbridgemethod.Bar');
+
+exports = Bar;
+//# sourceMappingURL=Bar.js.map

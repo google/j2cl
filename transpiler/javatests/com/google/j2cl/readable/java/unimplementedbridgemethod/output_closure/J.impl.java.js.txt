@@ -1,0 +1,43 @@
+goog.module('unimplementedbridgemethod.J$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const I = goog.require('unimplementedbridgemethod.I$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('unimplementedbridgemethod.J.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ * @extends {I<?string>}
+ */
+class J {
+  /** @return {J} */
+  static $adapt(/** ?function(?string):number */ fn) {
+    J.$clinit();
+    return new $LambdaAdaptor(fn);
+  }
+
+  static $clinit() {
+    J.$clinit = () => {};
+    J.$loadModules();
+  }
+
+  static $markImplementor(/** Function */ ctor) {
+    I.$markImplementor(ctor);
+    ctor.prototype.$implements__unimplementedbridgemethod_J = true;
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance != null &&
+        !!instance.$implements__unimplementedbridgemethod_J;
+  }
+
+  static $loadModules() {
+    $LambdaAdaptor =
+        goog.module.get('unimplementedbridgemethod.J.$LambdaAdaptor$impl');
+  }
+}
+J.$markImplementor(/**@type {Function}*/ (J));
+$Util.$setClassMetadataForInterface(J, 'unimplementedbridgemethod.J');
+
+exports = J;
+//# sourceMappingURL=J.js.map

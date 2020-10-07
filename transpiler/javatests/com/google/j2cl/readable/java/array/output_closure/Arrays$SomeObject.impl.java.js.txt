@@ -1,0 +1,42 @@
+goog.module('array.Arrays.SomeObject$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Arrays = goog.forwardDeclare('array.Arrays$impl');
+
+class SomeObject extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+    /**@type {Arrays}*/
+    this.$outer_this__array_Arrays_SomeObject;
+  }
+  /** @return {!SomeObject} */
+  static $create__array_Arrays(/** Arrays */ $outer_this) {
+    let $instance = new SomeObject();
+    $instance.$ctor__array_Arrays_SomeObject__array_Arrays($outer_this);
+    return $instance;
+  }
+
+  $ctor__array_Arrays_SomeObject__array_Arrays(/** Arrays */ $outer_this) {
+    this.$outer_this__array_Arrays_SomeObject = $outer_this;
+    this.$ctor__java_lang_Object__();
+  }
+
+  static $clinit() {
+    SomeObject.$clinit = () => {};
+    SomeObject.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof SomeObject;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(SomeObject, 'array.Arrays$SomeObject');
+
+exports = SomeObject;
+//# sourceMappingURL=Arrays$SomeObject.js.map

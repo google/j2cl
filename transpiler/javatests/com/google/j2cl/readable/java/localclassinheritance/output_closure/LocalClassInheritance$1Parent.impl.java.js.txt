@@ -1,0 +1,58 @@
+goog.module('localclassinheritance.LocalClassInheritance.$1Parent$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let LocalClassInheritance = goog.forwardDeclare('localclassinheritance.LocalClassInheritance$impl');
+
+class $1Parent extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+    /**@type {LocalClassInheritance}*/
+    this.$outer_this__localclassinheritance_LocalClassInheritance_1Parent;
+    /**@type {number}*/
+    this.$captured_f__localclassinheritance_LocalClassInheritance_1Parent = 0;
+  }
+  /** @return {!$1Parent} */
+  static $create__localclassinheritance_LocalClassInheritance__int(
+      /** LocalClassInheritance */ $outer_this, /** number */ $captured_f) {
+    $1Parent.$clinit();
+    let $instance = new $1Parent();
+    $instance
+        .$ctor__localclassinheritance_LocalClassInheritance_1Parent__localclassinheritance_LocalClassInheritance__int(
+            $outer_this, $captured_f);
+    return $instance;
+  }
+
+  $ctor__localclassinheritance_LocalClassInheritance_1Parent__localclassinheritance_LocalClassInheritance__int(
+      /** LocalClassInheritance */ $outer_this, /** number */ $captured_f) {
+    this.$outer_this__localclassinheritance_LocalClassInheritance_1Parent =
+        $outer_this;
+    this.$captured_f__localclassinheritance_LocalClassInheritance_1Parent =
+        $captured_f;
+    this.$ctor__java_lang_Object__();
+  }
+
+  m_n__() {
+    let i =
+        this.$captured_f__localclassinheritance_LocalClassInheritance_1Parent;
+  }
+
+  static $clinit() {
+    $1Parent.$clinit = () => {};
+    $1Parent.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof $1Parent;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(
+    $1Parent, 'localclassinheritance.LocalClassInheritance$1Parent');
+
+exports = $1Parent;
+//# sourceMappingURL=LocalClassInheritance$1Parent.js.map

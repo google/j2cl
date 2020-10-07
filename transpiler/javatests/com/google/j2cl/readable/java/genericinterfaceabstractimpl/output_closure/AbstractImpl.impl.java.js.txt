@@ -1,0 +1,40 @@
+goog.module('genericinterfaceabstractimpl.AbstractImpl$impl');
+
+const MyInterface = goog.require('genericinterfaceabstractimpl.MyInterface$impl');
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+
+/**
+ * @abstract
+ * @implements {MyInterface<Integer>}
+ */
+class AbstractImpl extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+  }
+
+  $ctor__genericinterfaceabstractimpl_AbstractImpl__() {
+    this.$ctor__java_lang_Object__();
+  }
+
+  static $clinit() {
+    AbstractImpl.$clinit = () => {};
+    AbstractImpl.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof AbstractImpl;
+  }
+
+  static $loadModules() {}
+}
+MyInterface.$markImplementor(AbstractImpl);
+$Util.$setClassMetadata(
+    AbstractImpl, 'genericinterfaceabstractimpl.AbstractImpl');
+
+exports = AbstractImpl;
+//# sourceMappingURL=AbstractImpl.js.map

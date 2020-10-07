@@ -1,0 +1,20 @@
+goog.module('externs.Main.TopLevelExtern.$Overlay$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class $Overlay {
+  static $clinit() {
+    $Overlay.$clinit = () => {};
+    $Overlay.$loadModules();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof TopLevelExtern;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata($Overlay, 'TopLevelExtern');
+
+exports = $Overlay;
+//# sourceMappingURL=Main$TopLevelExtern$$Overlay.js.map

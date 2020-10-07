@@ -1,0 +1,50 @@
+goog.module('overridingmethods.SomeInterface.$LambdaAdaptor$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const SomeInterface = goog.require('overridingmethods.SomeInterface$impl');
+
+/**
+ * @implements {SomeInterface}
+ */
+class $LambdaAdaptor extends j_l_Object {
+  constructor(/** ?function():void */ fn) {
+    $LambdaAdaptor.$clinit();
+    super();
+    /**@type {?function():void}*/
+    this.f_fn__overridingmethods_SomeInterface_$LambdaAdaptor;
+    this.$ctor__overridingmethods_SomeInterface_$LambdaAdaptor__overridingmethods_SomeInterface_$JsFunction(
+        fn);
+  }
+
+  $ctor__overridingmethods_SomeInterface_$LambdaAdaptor__overridingmethods_SomeInterface_$JsFunction(
+      /** ?function():void */ fn) {
+    this.$ctor__java_lang_Object__();
+    this.f_fn__overridingmethods_SomeInterface_$LambdaAdaptor = fn;
+  }
+  /** @override */
+  m_bar__() {
+    {
+      let $function = this.f_fn__overridingmethods_SomeInterface_$LambdaAdaptor;
+      $function();
+    }
+  }
+
+  static $clinit() {
+    $LambdaAdaptor.$clinit = () => {};
+    $LambdaAdaptor.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof $LambdaAdaptor;
+  }
+
+  static $loadModules() {}
+}
+SomeInterface.$markImplementor($LambdaAdaptor);
+$Util.$setClassMetadata(
+    $LambdaAdaptor, 'overridingmethods.SomeInterface$$LambdaAdaptor');
+
+exports = $LambdaAdaptor;
+//# sourceMappingURL=SomeInterface$$LambdaAdaptor.js.map

@@ -1,0 +1,47 @@
+goog.module('multipleabstractparents.MultipleAbstractParents.Collection$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('multipleabstractparents.MultipleAbstractParents.Collection.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ * @template T
+ */
+class Collection {
+  /** @abstract @return {?string} */
+  m_getFoo__java_lang_Object(/** T */ t) {}
+  /** @template T @return {Collection<T>} */
+  static $adapt(/** ?function(T):?string */ fn) {
+    Collection.$clinit();
+    return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));
+  }
+
+  static $clinit() {
+    Collection.$clinit = () => {};
+    Collection.$loadModules();
+  }
+
+  static $markImplementor(/** Function */ ctor) {
+    ctor.prototype
+        .$implements__multipleabstractparents_MultipleAbstractParents_Collection =
+        true;
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance != null &&
+        !!instance
+              .$implements__multipleabstractparents_MultipleAbstractParents_Collection;
+  }
+
+  static $loadModules() {
+    $LambdaAdaptor = goog.module.get(
+        'multipleabstractparents.MultipleAbstractParents.Collection.$LambdaAdaptor$impl');
+  }
+}
+Collection.$markImplementor(/**@type {Function}*/ (Collection));
+$Util.$setClassMetadataForInterface(
+    Collection, 'multipleabstractparents.MultipleAbstractParents$Collection');
+
+exports = Collection;
+//# sourceMappingURL=MultipleAbstractParents$Collection.js.map

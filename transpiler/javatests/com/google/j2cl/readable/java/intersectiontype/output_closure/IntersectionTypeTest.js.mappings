@@ -1,0 +1,79 @@
+[IntersectionTypeTest] => [IntersectionTypeTest]
+[IntersectionTypeTest] => [constructor]
+[IntersectionTypeTest] => [super();] "intersectiontype.IntersectionTypeTest.<synthetic: ctor_js>"
+[IntersectionTypeTest] => [$create__]
+[IntersectionTypeTest] => [IntersectionTypeTest.$clinit();] "intersectiontype.IntersectionTypeTest.<synthetic: ctor_create>"
+[IntersectionTypeTest] => [let $instance = new IntersectionTypeTest();] "intersectiontype.IntersectionTypeTest.<synthetic: ctor_create>"
+[IntersectionTypeTest] => [$instance.$ctor__intersectiontype_IntersectionTypeTest__();] "intersectiontype.IntersectionTypeTest.<synthetic: ctor_create>"
+[IntersectionTypeTest] => [return $instance;] "intersectiontype.IntersectionTypeTest.<synthetic: ctor_create>"
+[IntersectionTypeTest] => [$ctor__intersectiontype_IntersectionTypeTest__]
+[IntersectionTypeTest] => [this.$ctor__java_lang_Object__();] "intersectiontype.IntersectionTypeTest.<init>"
+[getAndSet] => [m_getAndSet__intersectiontype_Getable]
+[object] => [object] "object"
+[getAndSet] => [IntersectionTypeTest.$clinit();] "intersectiontype.IntersectionTypeTest.getAndSet"
+[object.set(1);] => [/**@type {Setable}*/ ($Casts.$to(object, Setable)).m_set__int(1);] "intersectiontype.IntersectionTypeTest.getAndSet"
+[object.get();] => [/**@type {Getable}*/ (object).m_get__();] "intersectiontype.IntersectionTypeTest.getAndSet"
+[cast] => [m_cast__java_lang_Object]
+[o] => [o] "o"
+[cast] => [IntersectionTypeTest.$clinit();] "intersectiontype.IntersectionTypeTest.cast"
+[if (o == null) {
+      return (Setable & Getable<T>) o;
+    }] => [if ($Equality.$same(o, null)) {
+   return /**@type {Getable<T>}*/ ($Casts.$to($Casts.$to(o, Getable), Setable));
+  }] "intersectiontype.IntersectionTypeTest.cast"
+[return (Setable & Getable<T>) o;] => [return /**@type {Getable<T>}*/ ($Casts.$to($Casts.$to(o, Getable), Setable));] "intersectiontype.IntersectionTypeTest.cast"
+[return (Getable<T> & Setable) o;] => [return /**@type {Getable<T>}*/ ($Casts.$to($Casts.$to(o, Getable), Setable));] "intersectiontype.IntersectionTypeTest.cast"
+[cast1] => [m_cast1__java_lang_Object]
+[s] => [s] "s"
+[cast1] => [IntersectionTypeTest.$clinit();] "intersectiontype.IntersectionTypeTest.cast1"
+[return (Getable<Comparable<String>> & Setable) s;] => [return /**@type {Getable<(Comparable<?string>|boolean|number|string)>}*/ ($Casts.$to($Casts.$to(s, Getable), Setable));] "intersectiontype.IntersectionTypeTest.cast1"
+[cast2] => [m_cast2__java_lang_Object]
+[s] => [s] "s"
+[cast2] => [IntersectionTypeTest.$clinit();] "intersectiontype.IntersectionTypeTest.cast2"
+[return (Getable<Comparable<T>> & Setable) s;] => [return /**@type {Getable<(Comparable<T>|boolean|number|string)>}*/ ($Casts.$to($Casts.$to(s, Getable), Setable));] "intersectiontype.IntersectionTypeTest.cast2"
+[cast3] => [m_cast3__java_lang_Object]
+[s] => [s] "s"
+[return s;] => [return s;] "intersectiontype.IntersectionTypeTest.cast3"
+[method] => [m_method__]
+[method] => [IntersectionTypeTest.$clinit();] "intersectiontype.IntersectionTypeTest.method"
+[return (Cmp & Serial) () -> 1;] => [return /**@type {Cmp}*/ (new $LambdaAdaptor$1(() =>{
+   return 1;
+  }));] "intersectiontype.IntersectionTypeTest.method"
+[1] => [return 1;] "intersectiontype.IntersectionTypeTest.<lambda in method>"
+[method2] => [m_method2__]
+[method2] => [IntersectionTypeTest.$clinit();] "intersectiontype.IntersectionTypeTest.method2"
+[return (Cmp2 & Serial) (a) -> 1;] => [return /**@type {Cmp2}*/ (new $LambdaAdaptor$2((/** number */ a) =>{
+   return 1;
+  }));] "intersectiontype.IntersectionTypeTest.method2"
+[a] => [a] "a"
+[1] => [return 1;] "intersectiontype.IntersectionTypeTest.<lambda in method2>"
+[testClosureAssignment] => [m_testClosureAssignment__java_lang_Object]
+[o] => [o] "o"
+[testClosureAssignment] => [IntersectionTypeTest.$clinit();] "intersectiontype.IntersectionTypeTest.testClosureAssignment"
+[A e = (A & EmptyA & EmptyB) o;] => [let e = /**@type {A}*/ ($Casts.$to($Casts.$to($Casts.$to(o, A), EmptyA), EmptyB));] "intersectiontype.IntersectionTypeTest.testClosureAssignment"
+[e] => [e] "e"
+[EmptyA g = (A & EmptyA & EmptyB) o;] => [let g = /**@type {EmptyA}*/ ($Casts.$to($Casts.$to($Casts.$to(o, A), EmptyA), EmptyB));] "intersectiontype.IntersectionTypeTest.testClosureAssignment"
+[g] => [g] "g"
+[EmptyB s = (A & EmptyA & EmptyB) o;] => [let s = /**@type {EmptyB}*/ ($Casts.$to($Casts.$to($Casts.$to(o, A), EmptyA), EmptyB));] "intersectiontype.IntersectionTypeTest.testClosureAssignment"
+[s] => [s] "s"
+[get] => [m_get__java_lang_Object]
+[t] => [t] "t"
+[return t;] => [return t;] "intersectiontype.IntersectionTypeTest.get"
+[m] => [m_m__]
+[return (T) get(new Object());] => [return /**@type {T}*/ ($Casts.$to(IntersectionTypeTest.m_get__java_lang_Object(j_l_Object.$create__()), A));] "intersectiontype.IntersectionTypeTest.m"
+[n] => [m_n__]
+[return null;] => [return null;] "intersectiontype.IntersectionTypeTest.n"
+[set] => [m_set__intersectiontype_IntersectionTypeTest_A]
+[t] => [t] "t"
+[testMethodCall] => [m_testMethodCall__]
+[Object o = m();] => [let o = IntersectionTypeTest.m_m__();] "intersectiontype.IntersectionTypeTest.testMethodCall"
+[o] => [o] "o"
+[set((A & EmptyA) o);] => [IntersectionTypeTest.m_set__intersectiontype_IntersectionTypeTest_A(/**@type {A}*/ ($Casts.$to($Casts.$to(o, A), EmptyA)));] "intersectiontype.IntersectionTypeTest.testMethodCall"
+[set(m());] => [IntersectionTypeTest.m_set__intersectiontype_IntersectionTypeTest_A(IntersectionTypeTest.m_m__());] "intersectiontype.IntersectionTypeTest.testMethodCall"
+[Getable<?> g = n();] => [let g = /**@type {Getable<A>}*/ (IntersectionTypeTest.m_n__());] "intersectiontype.IntersectionTypeTest.testMethodCall"
+[g] => [g] "g"
+[IntersectionTypeTest] => [$clinit]
+[IntersectionTypeTest] => [IntersectionTypeTest.$clinit = () =>{};] "intersectiontype.IntersectionTypeTest.<clinit>"
+[IntersectionTypeTest] => [IntersectionTypeTest.$loadModules();] "intersectiontype.IntersectionTypeTest.<clinit>"
+[IntersectionTypeTest] => [j_l_Object.$clinit();] "intersectiontype.IntersectionTypeTest.<clinit>"
+

@@ -1,0 +1,47 @@
+goog.module('labelstatement.LabeledStatement$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class LabeledStatement extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  /** @return {!LabeledStatement} */
+  static $create__() {
+    LabeledStatement.$clinit();
+    let $instance = new LabeledStatement();
+    $instance.$ctor__labelstatement_LabeledStatement__();
+    return $instance;
+  }
+
+  $ctor__labelstatement_LabeledStatement__() {
+    this.$ctor__java_lang_Object__();
+  }
+
+  m_test__() {
+    LABEL: for (;;) {
+      break LABEL;
+    }
+    LABEL1: for (;;) {
+      continue LABEL1;
+    }
+  }
+
+  static $clinit() {
+    LabeledStatement.$clinit = () => {};
+    LabeledStatement.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof LabeledStatement;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(LabeledStatement, 'labelstatement.LabeledStatement');
+
+exports = LabeledStatement;
+//# sourceMappingURL=LabeledStatement.js.map

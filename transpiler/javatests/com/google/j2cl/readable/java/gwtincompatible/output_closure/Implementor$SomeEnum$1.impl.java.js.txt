@@ -1,0 +1,45 @@
+goog.module('gwtincompatible.Implementor.SomeEnum.$1$impl');
+
+const SomeEnum = goog.require('gwtincompatible.Implementor.SomeEnum$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class $1 extends SomeEnum {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  /** @return {!$1} */
+  static $create__java_lang_String__int(
+      /** ?string */ $name, /** number */ $ordinal) {
+    $1.$clinit();
+    let $instance = new $1();
+    $instance
+        .$ctor__gwtincompatible_Implementor_SomeEnum_1__java_lang_String__int(
+            $name, $ordinal);
+    return $instance;
+  }
+
+  $ctor__gwtincompatible_Implementor_SomeEnum_1__java_lang_String__int(
+      /** ?string */ $name, /** number */ $ordinal) {
+    this.$ctor__gwtincompatible_Implementor_SomeEnum__java_lang_String__int(
+        $name, $ordinal);
+  }
+  /** @override */
+  m_method___$pp_gwtincompatible() {}
+
+  static $clinit() {
+    $1.$clinit = () => {};
+    $1.$loadModules();
+    SomeEnum.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof $1;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata($1, 'gwtincompatible.Implementor$SomeEnum$1');
+
+exports = $1;
+//# sourceMappingURL=Implementor$SomeEnum$1.js.map

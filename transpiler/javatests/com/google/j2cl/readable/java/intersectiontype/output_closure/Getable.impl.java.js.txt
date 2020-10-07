@@ -1,0 +1,42 @@
+goog.module('intersectiontype.Getable$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('intersectiontype.Getable.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ * @template T
+ */
+class Getable {
+  /** @abstract @return {T} */
+  m_get__() {}
+  /** @template T @return {Getable<T>} */
+  static $adapt(/** ?function():T */ fn) {
+    Getable.$clinit();
+    return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));
+  }
+
+  static $clinit() {
+    Getable.$clinit = () => {};
+    Getable.$loadModules();
+  }
+
+  static $markImplementor(/** Function */ ctor) {
+    ctor.prototype.$implements__intersectiontype_Getable = true;
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance != null && !!instance.$implements__intersectiontype_Getable;
+  }
+
+  static $loadModules() {
+    $LambdaAdaptor =
+        goog.module.get('intersectiontype.Getable.$LambdaAdaptor$impl');
+  }
+}
+Getable.$markImplementor(/**@type {Function}*/ (Getable));
+$Util.$setClassMetadataForInterface(Getable, 'intersectiontype.Getable');
+
+exports = Getable;
+//# sourceMappingURL=Getable.js.map

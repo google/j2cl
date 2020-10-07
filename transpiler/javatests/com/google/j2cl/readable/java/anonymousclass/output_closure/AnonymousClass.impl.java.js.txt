@@ -1,0 +1,46 @@
+goog.module('anonymousclass.AnonymousClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $1 = goog.forwardDeclare('anonymousclass.AnonymousClass.$1$impl');
+
+class AnonymousClass extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  /** @return {!AnonymousClass} */
+  static $create__() {
+    AnonymousClass.$clinit();
+    let $instance = new AnonymousClass();
+    $instance.$ctor__anonymousclass_AnonymousClass__();
+    return $instance;
+  }
+
+  $ctor__anonymousclass_AnonymousClass__() {
+    this.$ctor__java_lang_Object__();
+  }
+
+  m_main__() {
+    let instance = $1.$create__anonymousclass_AnonymousClass__int(this, 1);
+  }
+
+  static $clinit() {
+    AnonymousClass.$clinit = () => {};
+    AnonymousClass.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof AnonymousClass;
+  }
+
+  static $loadModules() {
+    $1 = goog.module.get('anonymousclass.AnonymousClass.$1$impl');
+  }
+}
+$Util.$setClassMetadata(AnonymousClass, 'anonymousclass.AnonymousClass');
+
+exports = AnonymousClass;
+//# sourceMappingURL=AnonymousClass.js.map

@@ -1,0 +1,72 @@
+goog.module('innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2$impl');
+
+const Parent = goog.require('innerclassinheritance.MultipleNestings.Parent$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let InnerClass1 = goog.forwardDeclare('innerclassinheritance.MultipleNestings.InnerClass1$impl');
+
+class InnerClass2 extends Parent {
+  /** @protected */
+  constructor() {
+    super();
+    /**@type {InnerClass1}*/
+    this.$outer_this__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2;
+  }
+  /** @return {!InnerClass2} */
+  static $create__innerclassinheritance_MultipleNestings_InnerClass1(
+      /** InnerClass1 */ $outer_this) {
+    InnerClass2.$clinit();
+    let $instance = new InnerClass2();
+    $instance
+        .$ctor__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2__innerclassinheritance_MultipleNestings_InnerClass1(
+            $outer_this);
+    return $instance;
+  }
+
+  $ctor__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2__innerclassinheritance_MultipleNestings_InnerClass1(
+      /** InnerClass1 */ $outer_this) {
+    this.$outer_this__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2 =
+        $outer_this;
+    this.$ctor__innerclassinheritance_MultipleNestings_Parent__innerclassinheritance_MultipleNestings(
+        $outer_this
+            .$outer_this__innerclassinheritance_MultipleNestings_InnerClass1);
+  }
+
+  m_funInI2__() {}
+
+  m_test__() {
+    this.m_fun__();
+    this.m_fun__();
+    this.$outer_this__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2
+        .m_fun__();
+    this.$outer_this__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2
+        .$outer_this__innerclassinheritance_MultipleNestings_InnerClass1
+        .m_funInM__();
+    this.$outer_this__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2
+        .$outer_this__innerclassinheritance_MultipleNestings_InnerClass1
+        .m_funInM__();
+    this.$outer_this__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2
+        .m_funInI1__();
+    this.$outer_this__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2
+        .m_funInI1__();
+    this.m_funInI2__();
+  }
+
+  static $clinit() {
+    InnerClass2.$clinit = () => {};
+    InnerClass2.$loadModules();
+    Parent.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof InnerClass2;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(
+    InnerClass2,
+    'innerclassinheritance.MultipleNestings$InnerClass1$InnerClass2');
+
+exports = InnerClass2;
+//# sourceMappingURL=MultipleNestings$InnerClass1$InnerClass2.js.map

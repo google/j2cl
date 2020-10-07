@@ -1,0 +1,47 @@
+goog.module('autovalueomitidentifier.SimpleAutoValue$impl');
+
+const ValueType = goog.require('javaemul.internal.ValueType$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @abstract
+ */
+class SimpleAutoValue extends ValueType {
+  /** @protected */
+  constructor() {
+    super();
+  }
+
+  $ctor__autovalueomitidentifier_SimpleAutoValue__() {
+    this.$ctor__java_lang_Object__();
+  }
+  /** @abstract @return {number} */
+  m_getIntField__() {}
+  /** @abstract @return {boolean} */
+  m_getBooleanField__() {}
+  /** @abstract @return {?string} */
+  m_getStringField__() {}
+  /** @abstract @return {?number} */
+  m_getDoubleField__() {}
+  /** @abstract @return {?number} */
+  m_getNullableField__() {}
+  /** @abstract @return {Array<number>} */
+  m_getArrayField__() {}
+
+  static $clinit() {
+    SimpleAutoValue.$clinit = () => {};
+    SimpleAutoValue.$loadModules();
+    ValueType.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof SimpleAutoValue;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(
+    SimpleAutoValue, 'autovalueomitidentifier.SimpleAutoValue');
+
+exports = SimpleAutoValue;
+//# sourceMappingURL=SimpleAutoValue.js.map

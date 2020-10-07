@@ -1,0 +1,42 @@
+goog.module('innerclasswithconstructor.InnerClassWithConstructor$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class InnerClassWithConstructor extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+    /**@type {number}*/
+    this.f_a__innerclasswithconstructor_InnerClassWithConstructor = 0;
+  }
+  /** @return {!InnerClassWithConstructor} */
+  static $create__() {
+    InnerClassWithConstructor.$clinit();
+    let $instance = new InnerClassWithConstructor();
+    $instance.$ctor__innerclasswithconstructor_InnerClassWithConstructor__();
+    return $instance;
+  }
+
+  $ctor__innerclasswithconstructor_InnerClassWithConstructor__() {
+    this.$ctor__java_lang_Object__();
+  }
+
+  static $clinit() {
+    InnerClassWithConstructor.$clinit = () => {};
+    InnerClassWithConstructor.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof InnerClassWithConstructor;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(
+    InnerClassWithConstructor,
+    'innerclasswithconstructor.InnerClassWithConstructor');
+
+exports = InnerClassWithConstructor;
+//# sourceMappingURL=InnerClassWithConstructor.js.map

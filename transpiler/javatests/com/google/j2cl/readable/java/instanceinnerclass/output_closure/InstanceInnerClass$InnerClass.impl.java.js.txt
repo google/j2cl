@@ -1,0 +1,72 @@
+goog.module('instanceinnerclass.InstanceInnerClass.InnerClass$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let InstanceInnerClass = goog.forwardDeclare('instanceinnerclass.InstanceInnerClass$impl');
+
+class InnerClass extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+    /**@type {InstanceInnerClass}*/
+    this.$outer_this__instanceinnerclass_InstanceInnerClass_InnerClass;
+    /**@type {number}*/
+    this.f_field__instanceinnerclass_InstanceInnerClass_InnerClass = 0;
+    /**@type {InstanceInnerClass}*/
+    this.f_enclosingInstance__instanceinnerclass_InstanceInnerClass_InnerClass;
+  }
+  /** @return {!InnerClass} */
+  static $create__instanceinnerclass_InstanceInnerClass(
+      /** InstanceInnerClass */ $outer_this) {
+    InnerClass.$clinit();
+    let $instance = new InnerClass();
+    $instance
+        .$ctor__instanceinnerclass_InstanceInnerClass_InnerClass__instanceinnerclass_InstanceInnerClass(
+            $outer_this);
+    return $instance;
+  }
+
+  $ctor__instanceinnerclass_InstanceInnerClass_InnerClass__instanceinnerclass_InstanceInnerClass(
+      /** InstanceInnerClass */ $outer_this) {
+    this.$outer_this__instanceinnerclass_InstanceInnerClass_InnerClass =
+        $outer_this;
+    this.$ctor__java_lang_Object__();
+    this.$init___$p_instanceinnerclass_InstanceInnerClass_InnerClass();
+  }
+
+  m_funInner__() {
+    this.$outer_this__instanceinnerclass_InstanceInnerClass_InnerClass
+        .m_funOuter__();
+    this.$outer_this__instanceinnerclass_InstanceInnerClass_InnerClass
+        .m_funOuter__();
+  }
+  /** @private */
+  $init___$p_instanceinnerclass_InstanceInnerClass_InnerClass() {
+    this.f_field__instanceinnerclass_InstanceInnerClass_InnerClass =
+        this.$outer_this__instanceinnerclass_InstanceInnerClass_InnerClass
+                .f_instanceField__instanceinnerclass_InstanceInnerClass +
+            this.$outer_this__instanceinnerclass_InstanceInnerClass_InnerClass
+                .f_instanceField__instanceinnerclass_InstanceInnerClass |
+        0;
+    this.f_enclosingInstance__instanceinnerclass_InstanceInnerClass_InnerClass =
+        this.$outer_this__instanceinnerclass_InstanceInnerClass_InnerClass;
+  }
+
+  static $clinit() {
+    InnerClass.$clinit = () => {};
+    InnerClass.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof InnerClass;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(
+    InnerClass, 'instanceinnerclass.InstanceInnerClass$InnerClass');
+
+exports = InnerClass;
+//# sourceMappingURL=InstanceInnerClass$InnerClass.js.map

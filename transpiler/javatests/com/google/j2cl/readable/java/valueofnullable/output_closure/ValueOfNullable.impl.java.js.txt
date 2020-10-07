@@ -1,0 +1,59 @@
+goog.module('valueofnullable.ValueOfNullable$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+
+class ValueOfNullable extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+    /**@type {?string}*/
+    this.f_nullableString__valueofnullable_ValueOfNullable;
+    /**@type {number}*/
+    this.f_someChar__valueofnullable_ValueOfNullable = 0 /* '\u0000' */;
+    /**@type {?string}*/
+    this.f_result__valueofnullable_ValueOfNullable;
+  }
+  /** @return {!ValueOfNullable} */
+  static $create__() {
+    ValueOfNullable.$clinit();
+    let $instance = new ValueOfNullable();
+    $instance.$ctor__valueofnullable_ValueOfNullable__();
+    return $instance;
+  }
+
+  $ctor__valueofnullable_ValueOfNullable__() {
+    this.$ctor__java_lang_Object__();
+    this.$init___$p_valueofnullable_ValueOfNullable();
+  }
+  /** @private */
+  $init___$p_valueofnullable_ValueOfNullable() {
+    this.f_nullableString__valueofnullable_ValueOfNullable = 'b';
+    this.f_someChar__valueofnullable_ValueOfNullable = 97 /* 'a' */;
+    this.f_result__valueofnullable_ValueOfNullable =
+        j_l_String.m_valueOf__char(
+            this.f_someChar__valueofnullable_ValueOfNullable) +
+        j_l_String.m_valueOf__java_lang_Object(
+            this.f_nullableString__valueofnullable_ValueOfNullable);
+  }
+
+  static $clinit() {
+    ValueOfNullable.$clinit = () => {};
+    ValueOfNullable.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof ValueOfNullable;
+  }
+
+  static $loadModules() {
+    j_l_String = goog.module.get('java.lang.String$impl');
+  }
+}
+$Util.$setClassMetadata(ValueOfNullable, 'valueofnullable.ValueOfNullable');
+
+exports = ValueOfNullable;
+//# sourceMappingURL=ValueOfNullable.js.map

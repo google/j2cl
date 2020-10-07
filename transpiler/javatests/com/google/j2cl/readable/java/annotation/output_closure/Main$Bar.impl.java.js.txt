@@ -1,0 +1,52 @@
+goog.module('annotation.Main.Bar$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Main = goog.forwardDeclare('annotation.Main$impl');
+let Foo = goog.forwardDeclare('annotation.Main.Foo$impl');
+
+class Bar extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+    /**@type {Main}*/
+    this.$outer_this__annotation_Main_Bar;
+  }
+  /** @return {!Bar} */
+  static $create__annotation_Main(/** Main */ $outer_this) {
+    Bar.$clinit();
+    let $instance = new Bar();
+    $instance.$ctor__annotation_Main_Bar__annotation_Main($outer_this);
+    return $instance;
+  }
+
+  $ctor__annotation_Main_Bar__annotation_Main(/** Main */ $outer_this) {
+    this.$outer_this__annotation_Main_Bar = $outer_this;
+    this.$ctor__java_lang_Object__();
+  }
+  /** @return {number} */
+  m_baz___$pp_annotation() {
+    let foo = null;
+    foo.m_bar__();
+    return Foo.f_CONSTANT__annotation_Main_Foo;
+  }
+
+  static $clinit() {
+    Bar.$clinit = () => {};
+    Bar.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof Bar;
+  }
+
+  static $loadModules() {
+    Foo = goog.module.get('annotation.Main.Foo$impl');
+  }
+}
+$Util.$setClassMetadata(Bar, 'annotation.Main$Bar');
+
+exports = Bar;
+//# sourceMappingURL=Main$Bar.js.map

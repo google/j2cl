@@ -1,0 +1,45 @@
+goog.module('strings.Strings.StringHolder$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class StringHolder extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+    /**@type {?string}*/
+    this.f_s__strings_Strings_StringHolder;
+  }
+  /** @return {!StringHolder} */
+  static $create__() {
+    StringHolder.$clinit();
+    let $instance = new StringHolder();
+    $instance.$ctor__strings_Strings_StringHolder__();
+    return $instance;
+  }
+
+  $ctor__strings_Strings_StringHolder__() {
+    this.$ctor__java_lang_Object__();
+    this.$init___$p_strings_Strings_StringHolder();
+  }
+  /** @private */
+  $init___$p_strings_Strings_StringHolder() {
+    this.f_s__strings_Strings_StringHolder = 'A';
+  }
+
+  static $clinit() {
+    StringHolder.$clinit = () => {};
+    StringHolder.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof StringHolder;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(StringHolder, 'strings.Strings$StringHolder');
+
+exports = StringHolder;
+//# sourceMappingURL=Strings$StringHolder.js.map

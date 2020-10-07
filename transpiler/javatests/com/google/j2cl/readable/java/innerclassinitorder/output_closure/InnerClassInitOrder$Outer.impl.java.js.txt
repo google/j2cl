@@ -1,0 +1,45 @@
+goog.module('innerclassinitorder.InnerClassInitOrder.Outer$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class Outer extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+    /**@type {number}*/
+    this.f_value__innerclassinitorder_InnerClassInitOrder_Outer = 0;
+  }
+  /** @return {!Outer} */
+  static $create__int(/** number */ i) {
+    Outer.$clinit();
+    let $instance = new Outer();
+    $instance.$ctor__innerclassinitorder_InnerClassInitOrder_Outer__int(i);
+    return $instance;
+  }
+
+  $ctor__innerclassinitorder_InnerClassInitOrder_Outer__int(/** number */ i) {
+    this.$ctor__java_lang_Object__();
+    this.f_value__innerclassinitorder_InnerClassInitOrder_Outer = i;
+  }
+  /** @return {number} */
+  m_checkDispatch__() {
+    return 1;
+  }
+
+  static $clinit() {
+    Outer.$clinit = () => {};
+    Outer.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof Outer;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(Outer, 'innerclassinitorder.InnerClassInitOrder$Outer');
+
+exports = Outer;
+//# sourceMappingURL=InnerClassInitOrder$Outer.js.map

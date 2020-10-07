@@ -1,0 +1,49 @@
+goog.module('multipleabstractparents.MultipleAbstractParents.IStringList$impl');
+
+const List = goog.require('multipleabstractparents.MultipleAbstractParents.List$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('multipleabstractparents.MultipleAbstractParents.IStringList.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ * @extends {List<?string>}
+ */
+class IStringList {
+  /** @abstract @return {?string} */
+  m_getFoo__java_lang_String(/** ?string */ string_1) {}
+  /** @return {IStringList} */
+  static $adapt(/** ?function(?string):?string */ fn) {
+    IStringList.$clinit();
+    return new $LambdaAdaptor(fn);
+  }
+
+  static $clinit() {
+    IStringList.$clinit = () => {};
+    IStringList.$loadModules();
+  }
+
+  static $markImplementor(/** Function */ ctor) {
+    List.$markImplementor(ctor);
+    ctor.prototype
+        .$implements__multipleabstractparents_MultipleAbstractParents_IStringList =
+        true;
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance != null &&
+        !!instance
+              .$implements__multipleabstractparents_MultipleAbstractParents_IStringList;
+  }
+
+  static $loadModules() {
+    $LambdaAdaptor = goog.module.get(
+        'multipleabstractparents.MultipleAbstractParents.IStringList.$LambdaAdaptor$impl');
+  }
+}
+IStringList.$markImplementor(/**@type {Function}*/ (IStringList));
+$Util.$setClassMetadataForInterface(
+    IStringList, 'multipleabstractparents.MultipleAbstractParents$IStringList');
+
+exports = IStringList;
+//# sourceMappingURL=MultipleAbstractParents$IStringList.js.map

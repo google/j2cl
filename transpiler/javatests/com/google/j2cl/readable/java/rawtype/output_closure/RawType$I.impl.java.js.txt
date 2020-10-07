@@ -1,0 +1,39 @@
+goog.module('rawtype.RawType.I$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let RawType = goog.forwardDeclare('rawtype.RawType$impl');
+
+/**
+ * @interface
+ * @template T
+ */
+class I {
+  /** @abstract */
+  m_f__rawtype_RawType(/** T */ t) {}
+  /** @template T */
+  static m_f__$default__rawtype_RawType_I__rawtype_RawType(
+      /** !I<T> */ $thisArg, /** T */ t) {
+    I.$clinit();
+  }
+
+  static $clinit() {
+    I.$clinit = () => {};
+    I.$loadModules();
+  }
+
+  static $markImplementor(/** Function */ ctor) {
+    ctor.prototype.$implements__rawtype_RawType_I = true;
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance != null && !!instance.$implements__rawtype_RawType_I;
+  }
+
+  static $loadModules() {}
+}
+I.$markImplementor(/**@type {Function}*/ (I));
+$Util.$setClassMetadataForInterface(I, 'rawtype.RawType$I');
+
+exports = I;
+//# sourceMappingURL=RawType$I.js.map

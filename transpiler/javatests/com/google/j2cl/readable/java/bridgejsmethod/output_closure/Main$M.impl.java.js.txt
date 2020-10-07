@@ -1,0 +1,42 @@
+goog.module('bridgejsmethod.Main.M$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let B = goog.forwardDeclare('bridgejsmethod.Main.B$impl');
+let $LambdaAdaptor = goog.forwardDeclare('bridgejsmethod.Main.M.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ */
+class M {
+  /** @abstract @return {B} */
+  m_getB__() {}
+  /** @return {M} */
+  static $adapt(/** ?function():B */ fn) {
+    M.$clinit();
+    return new $LambdaAdaptor(fn);
+  }
+
+  static $clinit() {
+    M.$clinit = () => {};
+    M.$loadModules();
+  }
+
+  static $markImplementor(/** Function */ ctor) {
+    ctor.prototype.$implements__bridgejsmethod_Main_M = true;
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance != null && !!instance.$implements__bridgejsmethod_Main_M;
+  }
+
+  static $loadModules() {
+    $LambdaAdaptor =
+        goog.module.get('bridgejsmethod.Main.M.$LambdaAdaptor$impl');
+  }
+}
+M.$markImplementor(/**@type {Function}*/ (M));
+$Util.$setClassMetadataForInterface(M, 'bridgejsmethod.Main$M');
+
+exports = M;
+//# sourceMappingURL=Main$M.js.map

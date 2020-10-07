@@ -1,0 +1,41 @@
+goog.module('jsoptional.Main.I$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('jsoptional.Main.I.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ * @template T
+ */
+class I {
+  /** @abstract */
+  m(/** T */ t, /** *= */ o) {}
+  /** @template T @return {I<T>} */
+  static $adapt(/** ?function(T, *=):void */ fn) {
+    I.$clinit();
+    return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));
+  }
+
+  static $clinit() {
+    I.$clinit = () => {};
+    I.$loadModules();
+  }
+
+  static $markImplementor(/** Function */ ctor) {
+    ctor.prototype.$implements__jsoptional_Main_I = true;
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance != null && !!instance.$implements__jsoptional_Main_I;
+  }
+
+  static $loadModules() {
+    $LambdaAdaptor = goog.module.get('jsoptional.Main.I.$LambdaAdaptor$impl');
+  }
+}
+I.$markImplementor(/**@type {Function}*/ (I));
+$Util.$setClassMetadataForInterface(I, 'jsoptional.Main$I');
+
+exports = I;
+//# sourceMappingURL=Main$I.js.map

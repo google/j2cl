@@ -1,0 +1,38 @@
+goog.module('supercallnondefault.Child$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const Parent = goog.require('supercallnondefault.Parent$impl');
+
+class Child extends Parent {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  /** @return {!Child} */
+  static $create__int(/** number */ a) {
+    Child.$clinit();
+    let $instance = new Child();
+    $instance.$ctor__supercallnondefault_Child__int(a);
+    return $instance;
+  }
+
+  $ctor__supercallnondefault_Child__int(/** number */ a) {
+    this.$ctor__supercallnondefault_Parent__int(a);
+  }
+
+  static $clinit() {
+    Child.$clinit = () => {};
+    Child.$loadModules();
+    Parent.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof Child;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(Child, 'supercallnondefault.Child');
+
+exports = Child;
+//# sourceMappingURL=Child.js.map

@@ -1,0 +1,39 @@
+goog.module('lambdas.Lambdas.Equals$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @interface
+ * @template T
+ */
+class Equals {
+  /** @abstract @return {boolean} */
+  equals(/** * */ o) {}
+  /** @abstract @return {T} */
+  m_get__() {}
+  /** @template T @return {T} */
+  static m_get__$default__lambdas_Lambdas_Equals(/** !Equals<T> */ $thisArg) {
+    Equals.$clinit();
+    return null;
+  }
+
+  static $clinit() {
+    Equals.$clinit = () => {};
+    Equals.$loadModules();
+  }
+
+  static $markImplementor(/** Function */ ctor) {
+    ctor.prototype.$implements__lambdas_Lambdas_Equals = true;
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance != null && !!instance.$implements__lambdas_Lambdas_Equals;
+  }
+
+  static $loadModules() {}
+}
+Equals.$markImplementor(/**@type {Function}*/ (Equals));
+$Util.$setClassMetadataForInterface(Equals, 'lambdas.Lambdas$Equals');
+
+exports = Equals;
+//# sourceMappingURL=Lambdas$Equals.js.map

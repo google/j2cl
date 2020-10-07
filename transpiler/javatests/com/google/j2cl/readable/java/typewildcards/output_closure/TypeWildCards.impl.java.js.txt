@@ -1,0 +1,122 @@
+goog.module('typewildcards.TypeWildCards$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let List = goog.forwardDeclare('java.util.List$impl');
+let j_u_function_Function = goog.forwardDeclare('java.util.function.Function$impl');
+let GenericType = goog.forwardDeclare('typewildcards.GenericType$impl');
+let A = goog.forwardDeclare('typewildcards.TypeWildCards.A$impl');
+let Foo = goog.forwardDeclare('typewildcards.TypeWildCards.Foo$impl');
+let HasKey = goog.forwardDeclare('typewildcards.TypeWildCards.HasKey$impl');
+let IntegerSupplier = goog.forwardDeclare('typewildcards.TypeWildCards.IntegerSupplier$impl');
+let Y = goog.forwardDeclare('typewildcards.TypeWildCards.Y$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+class TypeWildCards extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  /** @return {!TypeWildCards} */
+  static $create__() {
+    TypeWildCards.$clinit();
+    let $instance = new TypeWildCards();
+    $instance.$ctor__typewildcards_TypeWildCards__();
+    return $instance;
+  }
+
+  $ctor__typewildcards_TypeWildCards__() {
+    this.$ctor__java_lang_Object__();
+  }
+
+  m_unbounded__typewildcards_GenericType(/** GenericType<?> */ g) {}
+
+  m_upperBound__typewildcards_GenericType(/** GenericType<?> */ g) {}
+
+  m_lowerBound__typewildcards_GenericType(/** GenericType<?> */ g) {}
+
+  m_test__() {
+    this.m_unbounded__typewildcards_GenericType(
+        /**@type {!GenericType<TypeWildCards>}*/ (GenericType.$create__()));
+    this.m_upperBound__typewildcards_GenericType(
+        /**@type {!GenericType<TypeWildCards>}*/ (GenericType.$create__()));
+    this.m_lowerBound__typewildcards_GenericType(
+        /**@type {!GenericType<TypeWildCards>}*/ (GenericType.$create__()));
+  }
+  /** @template T */
+  static m_testBoundedTypeMemberAccess__typewildcards_TypeWildCards_A(
+      /** T */ t) {
+    TypeWildCards.$clinit();
+    let i = /**@type {A}*/ (t).f_f__typewildcards_TypeWildCards_A;
+    /**@type {A}*/ (t).m_m__();
+  }
+  /** @template T */
+  static m_testIntersectionBoundedTypeMemberAccess__typewildcards_TypeWildCards_A(
+      /** T */ t) {
+    TypeWildCards.$clinit();
+    let i = /**@type {A}*/ (t).f_f__typewildcards_TypeWildCards_A;
+    /**@type {A}*/ (t).m_m__();
+    /**@type {Y}*/ ($Casts.$to(t, Y)).m_n__();
+  }
+  /** @template F, V @return {List<V>} */
+  static m_transform__java_util_List__java_util_function_Function(
+      /** List<F> */ from, /** j_u_function_Function<?, ?> */ function_1) {
+    return null;
+  }
+  /** @template E @return {List<E>} */
+  static m_concat__java_util_List__java_util_List(
+      /** List<?> */ a, /** List<?> */ b) {
+    return null;
+  }
+
+  m_testInferredGenericIntersection__() {
+    let elements = null;
+    let otherElements = null;
+    let integers = /**@type {List<Integer>}*/ (
+        TypeWildCards.m_transform__java_util_List__java_util_function_Function(
+            /**@type {List<*>}*/ (
+                TypeWildCards.m_concat__java_util_List__java_util_List(
+                    elements, otherElements)),
+            j_u_function_Function.$adapt((/** * */ a) => {
+              /**@type {HasKey}*/ ($Casts.$to(a, HasKey)).m_getKey__();
+              return /**@type {IntegerSupplier}*/ (
+                         $Casts.$to(a, IntegerSupplier))
+                  .m_get__();
+            })));
+  }
+
+  static m_takesRecursiveGeneric__typewildcards_GenericType(
+      /** GenericType<Foo> */ foo) {}
+
+  m_testRecursiveGeneric__() {
+    TypeWildCards.m_takesRecursiveGeneric__typewildcards_GenericType(
+        Foo.$create__typewildcards_TypeWildCards(this));
+  }
+
+  static $clinit() {
+    TypeWildCards.$clinit = () => {};
+    TypeWildCards.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof TypeWildCards;
+  }
+
+  static $loadModules() {
+    j_u_function_Function = goog.module.get('java.util.function.Function$impl');
+    GenericType = goog.module.get('typewildcards.GenericType$impl');
+    Foo = goog.module.get('typewildcards.TypeWildCards.Foo$impl');
+    HasKey = goog.module.get('typewildcards.TypeWildCards.HasKey$impl');
+    IntegerSupplier =
+        goog.module.get('typewildcards.TypeWildCards.IntegerSupplier$impl');
+    Y = goog.module.get('typewildcards.TypeWildCards.Y$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+  }
+}
+$Util.$setClassMetadata(TypeWildCards, 'typewildcards.TypeWildCards');
+
+exports = TypeWildCards;
+//# sourceMappingURL=TypeWildCards.js.map

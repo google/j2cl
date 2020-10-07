@@ -1,0 +1,64 @@
+goog.module('intersectiontype.IntersectionTypeTest.MapEntry$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Getable = goog.forwardDeclare('intersectiontype.Getable$impl');
+let IntersectionTypeTest = goog.forwardDeclare('intersectiontype.IntersectionTypeTest$impl');
+let Setable = goog.forwardDeclare('intersectiontype.Setable$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @template U
+ */
+class MapEntry extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+    /**@type {IntersectionTypeTest<U>}*/
+    this.$outer_this__intersectiontype_IntersectionTypeTest_MapEntry;
+  }
+  /** @template U @return {!MapEntry<U>} */
+  static $create__intersectiontype_IntersectionTypeTest(
+      /** IntersectionTypeTest<U> */ $outer_this) {
+    MapEntry.$clinit();
+    let $instance = new MapEntry();
+    $instance
+        .$ctor__intersectiontype_IntersectionTypeTest_MapEntry__intersectiontype_IntersectionTypeTest(
+            $outer_this);
+    return $instance;
+  }
+
+  $ctor__intersectiontype_IntersectionTypeTest_MapEntry__intersectiontype_IntersectionTypeTest(
+      /** IntersectionTypeTest<U> */ $outer_this) {
+    this.$outer_this__intersectiontype_IntersectionTypeTest_MapEntry =
+        $outer_this;
+    this.$ctor__java_lang_Object__();
+  }
+  /** @template T @return {Getable<T>} */
+  m_method__java_lang_Object(/** * */ o) {
+    return /**@type {Getable<T>}*/ (
+        $Casts.$to($Casts.$to(o, Getable), Setable));
+  }
+
+  static $clinit() {
+    MapEntry.$clinit = () => {};
+    MapEntry.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof MapEntry;
+  }
+
+  static $loadModules() {
+    Getable = goog.module.get('intersectiontype.Getable$impl');
+    Setable = goog.module.get('intersectiontype.Setable$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+  }
+}
+$Util.$setClassMetadata(
+    MapEntry, 'intersectiontype.IntersectionTypeTest$MapEntry');
+
+exports = MapEntry;
+//# sourceMappingURL=IntersectionTypeTest$MapEntry.js.map

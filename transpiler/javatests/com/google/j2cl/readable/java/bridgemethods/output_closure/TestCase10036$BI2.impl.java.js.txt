@@ -1,0 +1,42 @@
+goog.module('bridgemethods.TestCase10036.BI2$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $LambdaAdaptor = goog.forwardDeclare('bridgemethods.TestCase10036.BI2.$LambdaAdaptor$impl');
+
+/**
+ * @interface
+ */
+class BI2 {
+  /** @abstract @return {?string} */
+  m_get__java_lang_String(/** ?string */ value) {}
+  /** @return {BI2} */
+  static $adapt(/** ?function(?string):?string */ fn) {
+    BI2.$clinit();
+    return new $LambdaAdaptor(fn);
+  }
+
+  static $clinit() {
+    BI2.$clinit = () => {};
+    BI2.$loadModules();
+  }
+
+  static $markImplementor(/** Function */ ctor) {
+    ctor.prototype.$implements__bridgemethods_TestCase10036_BI2 = true;
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance != null &&
+        !!instance.$implements__bridgemethods_TestCase10036_BI2;
+  }
+
+  static $loadModules() {
+    $LambdaAdaptor =
+        goog.module.get('bridgemethods.TestCase10036.BI2.$LambdaAdaptor$impl');
+  }
+}
+BI2.$markImplementor(/**@type {Function}*/ (BI2));
+$Util.$setClassMetadataForInterface(BI2, 'bridgemethods.TestCase10036$BI2');
+
+exports = BI2;
+//# sourceMappingURL=TestCase10036$BI2.js.map

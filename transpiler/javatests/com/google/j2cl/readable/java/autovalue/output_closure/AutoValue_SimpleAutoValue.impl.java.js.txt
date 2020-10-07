@@ -1,0 +1,111 @@
+goog.module('autovalue.AutoValue_SimpleAutoValue$impl');
+
+const SimpleAutoValue = goog.require('autovalue.SimpleAutoValue$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let NullPointerException = goog.forwardDeclare('java.lang.NullPointerException$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+
+class AutoValue__SimpleAutoValue extends SimpleAutoValue {
+  /** @protected */
+  constructor() {
+    super();
+    /**@type {number}*/
+    this.f_intField__autovalue_AutoValue_SimpleAutoValue_ = 0;
+    /**@type {boolean}*/
+    this.f_booleanField__autovalue_AutoValue_SimpleAutoValue_ = false;
+    /**@type {?string}*/
+    this.f_stringField__autovalue_AutoValue_SimpleAutoValue_;
+    /**@type {?number}*/
+    this.f_doubleField__autovalue_AutoValue_SimpleAutoValue_;
+    /**@type {?number}*/
+    this.f_nullableField__autovalue_AutoValue_SimpleAutoValue_;
+    /**@type {Array<number>}*/
+    this.f_arrayField__autovalue_AutoValue_SimpleAutoValue_;
+  }
+  /** @return {!AutoValue__SimpleAutoValue} */
+  static $create__int__boolean__java_lang_String__java_lang_Double__java_lang_Double__arrayOf_int(
+      /** number */ intField, /** boolean */ booleanField,
+      /** ?string */ stringField, /** ?number */ doubleField,
+      /** ?number */ nullableField, /** Array<number> */ arrayField) {
+    AutoValue__SimpleAutoValue.$clinit();
+    let $instance = new AutoValue__SimpleAutoValue();
+    $instance
+        .$ctor__autovalue_AutoValue_SimpleAutoValue__int__boolean__java_lang_String__java_lang_Double__java_lang_Double__arrayOf_int(
+            intField, booleanField, stringField, doubleField, nullableField,
+            arrayField);
+    return $instance;
+  }
+
+  $ctor__autovalue_AutoValue_SimpleAutoValue__int__boolean__java_lang_String__java_lang_Double__java_lang_Double__arrayOf_int(
+      /** number */ intField, /** boolean */ booleanField,
+      /** ?string */ stringField, /** ?number */ doubleField,
+      /** ?number */ nullableField, /** Array<number> */ arrayField) {
+    this.$ctor__autovalue_SimpleAutoValue__();
+    this.f_intField__autovalue_AutoValue_SimpleAutoValue_ = intField;
+    this.f_booleanField__autovalue_AutoValue_SimpleAutoValue_ = booleanField;
+    if ($Equality.$same(stringField, null)) {
+      throw $Exceptions.toJs(
+          NullPointerException.$create__java_lang_String('Null stringField'));
+    }
+    this.f_stringField__autovalue_AutoValue_SimpleAutoValue_ = stringField;
+    if ($Equality.$same(doubleField, null)) {
+      throw $Exceptions.toJs(
+          NullPointerException.$create__java_lang_String('Null doubleField'));
+    }
+    this.f_doubleField__autovalue_AutoValue_SimpleAutoValue_ = doubleField;
+    this.f_nullableField__autovalue_AutoValue_SimpleAutoValue_ = nullableField;
+    if ($Equality.$same(arrayField, null)) {
+      throw $Exceptions.toJs(
+          NullPointerException.$create__java_lang_String('Null arrayField'));
+    }
+    this.f_arrayField__autovalue_AutoValue_SimpleAutoValue_ = arrayField;
+  }
+  /** @override @return {number} */
+  m_getIntField__() {
+    return this.f_intField__autovalue_AutoValue_SimpleAutoValue_;
+  }
+  /** @override @return {boolean} */
+  m_getBooleanField__() {
+    return this.f_booleanField__autovalue_AutoValue_SimpleAutoValue_;
+  }
+  /** @override @return {?string} */
+  m_getStringField__() {
+    return this.f_stringField__autovalue_AutoValue_SimpleAutoValue_;
+  }
+  /** @override @return {?number} */
+  m_getDoubleField__() {
+    return this.f_doubleField__autovalue_AutoValue_SimpleAutoValue_;
+  }
+  /** @override @return {?number} */
+  m_getNullableField__() {
+    return this.f_nullableField__autovalue_AutoValue_SimpleAutoValue_;
+  }
+  /** @override @return {Array<number>} */
+  m_getArrayField__() {
+    return this.f_arrayField__autovalue_AutoValue_SimpleAutoValue_;
+  }
+
+  static $clinit() {
+    AutoValue__SimpleAutoValue.$clinit = () => {};
+    AutoValue__SimpleAutoValue.$loadModules();
+    SimpleAutoValue.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof AutoValue__SimpleAutoValue;
+  }
+
+  static $loadModules() {
+    NullPointerException =
+        goog.module.get('java.lang.NullPointerException$impl');
+    $Equality = goog.module.get('nativebootstrap.Equality$impl');
+    $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+  }
+}
+$Util.$setClassMetadata(
+    AutoValue__SimpleAutoValue, 'autovalue.AutoValue_SimpleAutoValue');
+
+exports = AutoValue__SimpleAutoValue;
+//# sourceMappingURL=AutoValue_SimpleAutoValue.js.map

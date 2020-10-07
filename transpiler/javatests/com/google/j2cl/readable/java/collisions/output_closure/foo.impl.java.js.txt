@@ -1,0 +1,38 @@
+goog.module('collisions.foo$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class foo extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  /** @return {!foo} */
+  static $create__() {
+    foo.$clinit();
+    let $instance = new foo();
+    $instance.$ctor__collisions_foo__();
+    return $instance;
+  }
+
+  $ctor__collisions_foo__() {
+    this.$ctor__java_lang_Object__();
+  }
+
+  static $clinit() {
+    foo.$clinit = () => {};
+    foo.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof foo;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(foo, 'collisions.foo');
+
+exports = foo;
+//# sourceMappingURL=foo.js.map
