@@ -165,9 +165,12 @@ public class Throwable implements Serializable {
     StackTraceElement[] stackTraceElements = new StackTraceElement[0]; // Will auto-grow...
     Object e = this.backingJsObject;
     if (e instanceof NativeError) {
-      String[] splitStack = ((NativeError) e).stack.split("\n");
-      for (int i = 0; i < splitStack.length; i++) {
-        stackTraceElements[i] = new StackTraceElement("", splitStack[i], null, -1);
+      NativeError error = ((NativeError) e);
+      if (error.stack != null) {
+        String[] splitStack = error.stack.split("\n");
+        for (int i = 0; i < splitStack.length; i++) {
+          stackTraceElements[i] = new StackTraceElement("", splitStack[i], null, -1);
+        }
       }
     }
     return stackTraceElements;
