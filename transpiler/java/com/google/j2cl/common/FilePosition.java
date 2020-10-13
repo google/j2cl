@@ -21,7 +21,7 @@ import com.google.auto.value.AutoValue;
 
 /** J2cl's implementation of sourcemap file position. */
 @AutoValue
-public abstract class FilePosition {
+public abstract class FilePosition implements Comparable<FilePosition> {
 
   static final FilePosition NONE = newBuilder().setLine(-1).setColumn(-1).setByteOffset(-1).build();
 
@@ -33,6 +33,14 @@ public abstract class FilePosition {
 
   /** @return the byte offset of this position. */
   public abstract int getByteOffset();
+
+  @Override
+  public int compareTo(FilePosition other) {
+    if (getLine() != other.getLine()) {
+      return getLine() - other.getLine();
+    }
+    return getColumn() - other.getColumn();
+  }
 
   public static Builder newBuilder() {
     return new AutoValue_FilePosition.Builder();
@@ -48,11 +56,7 @@ public abstract class FilePosition {
 
     public abstract Builder setByteOffset(int byteOffset);
 
-    abstract FilePosition autoBuild();
-
-    public FilePosition build() {
-      return autoBuild();
-    }
+    public abstract FilePosition build();
   }
 
   @Override
