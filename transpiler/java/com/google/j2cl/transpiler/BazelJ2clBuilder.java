@@ -21,6 +21,7 @@ import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourceUtils;
 import com.google.j2cl.common.SourceUtils.FileInfo;
 import com.google.j2cl.common.bazel.BazelWorker;
+import com.google.j2cl.transpiler.backend.Backend;
 import com.google.j2cl.transpiler.frontend.Frontend;
 import java.io.File;
 import java.nio.file.Path;
@@ -84,6 +85,13 @@ final class BazelJ2clBuilder extends BazelWorker {
   private static final Frontend FRONTEND =
       Frontend.valueOf(Ascii.toUpperCase(System.getProperty("j2cl.frontend", "jdt")));
 
+  @Option(
+      name = "-experimentalBackend",
+      metaVar = "(CLOSURE | WASM)",
+      usage = "Select the backend to use: CLOSURE (default), WASM (experimental).",
+      hidden = true)
+  protected Backend backend = Backend.CLOSURE;
+
   @Override
   protected Problems run() {
     return J2clTranspiler.transpile(createOptions());
@@ -132,6 +140,7 @@ final class BazelJ2clBuilder extends BazelWorker {
         .setGenerateKytheIndexingMetadata(this.generateKytheIndexingMetadata)
         .setExperimentalOptimizeAutovalue(this.experimentalOptimizeAutovalue)
         .setFrontend(FRONTEND)
+        .setBackend(this.backend)
         .build();
   }
 

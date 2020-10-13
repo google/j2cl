@@ -22,6 +22,7 @@ import com.google.j2cl.common.CommandLineTool;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.common.SourceUtils;
+import com.google.j2cl.transpiler.backend.Backend;
 import com.google.j2cl.transpiler.frontend.Frontend;
 import java.io.File;
 import java.nio.file.FileSystem;
@@ -116,6 +117,7 @@ public final class J2clCommandLineRunner extends CommandLineTool {
         .setEmitReadableLibraryInfo(false)
         .setGenerateKytheIndexingMetadata(this.generateKytheIndexingMetadata)
         .setFrontend(this.frontEnd)
+        .setBackend(Backend.CLOSURE)
         .build();
   }
 

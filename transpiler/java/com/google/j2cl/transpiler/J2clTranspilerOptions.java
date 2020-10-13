@@ -20,6 +20,7 @@ import static com.google.common.base.Preconditions.checkState;
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.SourceUtils.FileInfo;
+import com.google.j2cl.transpiler.backend.Backend;
 import com.google.j2cl.transpiler.frontend.Frontend;
 import java.nio.file.Path;
 import java.util.List;
@@ -49,6 +50,8 @@ public abstract class J2clTranspilerOptions {
 
   public abstract Frontend getFrontend();
 
+  public abstract Backend getBackend();
+
   public static Builder newBuilder() {
     return new AutoValue_J2clTranspilerOptions.Builder().setExperimentalOptimizeAutovalue(false);
   }
@@ -76,6 +79,8 @@ public abstract class J2clTranspilerOptions {
     public abstract Builder setExperimentalOptimizeAutovalue(boolean b);
 
     public abstract Builder setFrontend(Frontend frontend);
+
+    public abstract Builder setBackend(Backend backend);
 
     abstract J2clTranspilerOptions autoBuild();
 
