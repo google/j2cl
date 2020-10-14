@@ -21,12 +21,12 @@ bazel build :all {jre,transpiler,tools}/java/...
 # Do a quick smoke check of integration test
 bazel test transpiler/javatests/com/google/j2cl/integration/emptyclass/...
 
-# Build Hello World sample in its own workspace
-(cd samples/helloworld && bazel build src/main/...)
-
 # Run CI test if requested
 if [[ $1 == "CI" ]]; then
   bazel test transpiler/javatests/com/google/j2cl/integration/...
+
+  # Build Hello World sample in its own workspace
+  (cd samples/helloworld && bazel build src/main/...)
 
   # Build Guave sample in its own workspace
   (cd samples/guava && bazel build src/main/...)
