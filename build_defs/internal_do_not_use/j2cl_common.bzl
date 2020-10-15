@@ -136,8 +136,8 @@ def _create_empty_zip(ctx, output_js_zip):
         mnemonic = "J2clZip",
     )
 
-def _java_compile(ctx, name, srcs, deps, exports, plugins, exported_plugins, output_jar, javac_opts):
-    stripped_java_srcs = [_strip_gwt_incompatible(ctx, name, srcs)] if srcs else []
+def _java_compile(ctx, name, srcs, deps, exports, plugins, exported_plugins, output_jar, javac_opts, mnemonic = "J2cl"):
+    stripped_java_srcs = [_strip_gwt_incompatible(ctx, name, srcs, mnemonic)] if srcs else []
 
     default_j2cl_javac_opts = [
         # Avoid log site injection which introduces calls to unsupported APIs
@@ -166,7 +166,7 @@ def _java_compile(ctx, name, srcs, deps, exports, plugins, exported_plugins, out
         javac_opts = default_j2cl_javac_opts + javac_opts,
     )
 
-def _strip_gwt_incompatible(ctx, name, java_srcs):
+def _strip_gwt_incompatible(ctx, name, java_srcs, mnemonic):
     # Paths are matched by Kythe to identify generated J2CL sources.
     output_file = ctx.actions.declare_file(name + "_j2cl_stripped-src.jar")
 
@@ -184,7 +184,7 @@ def _strip_gwt_incompatible(ctx, name, java_srcs):
         arguments = [args],
         env = dict(LANG = "en_US.UTF-8"),
         execution_requirements = {"supports-workers": "1"},
-        mnemonic = "J2cl",
+        mnemonic = mnemonic,
     )
 
     return output_file
@@ -229,7 +229,7 @@ def _j2cl_transpile(
         mnemonic = "J2cl",
     )
 
-J2CL_TOOLCHAIN_ATTRS = {
+J2CL_JAVA_TOOLCHAIN_ATTRS = {
     "_java_toolchain": attr.label(
         default = Label("//build_defs/internal_do_not_use:j2cl_java_toolchain"),
     ),
@@ -237,13 +237,16 @@ J2CL_TOOLCHAIN_ATTRS = {
         default = Label("@bazel_tools//tools/jdk:current_host_java_runtime"),
         cfg = "host",
     ),
-    "_j2cl_transpiler": attr.label(
-        default = Label("//build_defs/internal_do_not_use:BazelJ2clBuilder"),
+    "_j2cl_stripper": attr.label(
+        default = Label("//build_defs/internal_do_not_use:GwtIncompatibleStripper"),
         cfg = "host",
         executable = True,
     ),
-    "_j2cl_stripper": attr.label(
-        default = Label("//build_defs/internal_do_not_use:GwtIncompatibleStripper"),
+}
+
+J2CL_TOOLCHAIN_ATTRS = {
+    "_j2cl_transpiler": attr.label(
+        default = Label("//build_defs/internal_do_not_use:BazelJ2clBuilder"),
         cfg = "host",
         executable = True,
     ),
@@ -256,10 +259,12 @@ J2CL_TOOLCHAIN_ATTRS = {
         default = Label("//:enable_experimental_tree_artifact_mode"),
     ),
 }
+J2CL_TOOLCHAIN_ATTRS.update(J2CL_JAVA_TOOLCHAIN_ATTRS)
 J2CL_TOOLCHAIN_ATTRS.update(J2CL_JS_TOOLCHAIN_ATTRS)
 
 j2cl_common = struct(
     compile = _compile,
     create_js_lib_struct = create_js_lib_struct,
     get_jsinfo_provider = _get_jsinfo_provider,
+    java_compile = _java_compile,
 )
