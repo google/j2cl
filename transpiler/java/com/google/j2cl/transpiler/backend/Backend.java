@@ -92,7 +92,6 @@ import com.google.j2cl.transpiler.passes.VerifySingleAstReference;
 import com.google.j2cl.transpiler.passes.VerifyVariableScoping;
 import java.nio.file.Path;
 import java.util.List;
-import java.util.Optional;
 
 /** Drives the backend to generate outputs. */
 public enum Backend {
@@ -102,7 +101,7 @@ public enum Backend {
         List<CompilationUnit> j2clCompilationUnits,
         ImmutableList<FileInfo> nativeSources,
         Path output,
-        Optional<Path> libraryInfoOutput,
+        Path libraryInfoOutput,
         boolean emitReadableLibraryInfo,
         boolean emitReadableSourceMap,
         boolean generateKytheIndexingMetadata,
@@ -243,7 +242,7 @@ public enum Backend {
         List<CompilationUnit> j2clUnits,
         ImmutableList<FileInfo> nativeSources,
         Path output,
-        Optional<Path> libraryInfoOutput,
+        Path libraryInfoOutput,
         boolean emitReadableLibraryInfo,
         boolean emitReadableSourceMap,
         boolean generateKytheIndexingMetadata,
@@ -263,7 +262,7 @@ public enum Backend {
       List<CompilationUnit> j2clUnits,
       ImmutableList<FileInfo> nativeSources,
       Path output,
-      Optional<Path> libraryInfoOutput,
+      Path libraryInfoOutput,
       boolean emitReadableLibraryInfo,
       boolean emitReadableSourceMap,
       boolean generateKytheIndexingMetadata,

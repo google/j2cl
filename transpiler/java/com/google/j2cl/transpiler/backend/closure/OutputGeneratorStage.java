@@ -30,7 +30,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 /**
  * The OutputGeneratorStage contains all necessary information for generating the JavaScript output
@@ -41,7 +40,7 @@ public class OutputGeneratorStage {
   private final List<FileInfo> nativeJavaScriptFiles;
   private final Problems problems;
   private final Path outputPath;
-  private final Optional<Path> libraryInfoOutputPath;
+  private final Path libraryInfoOutputPath;
   private final boolean shouldGenerateReadableSourceMaps;
   private final boolean shouldGenerateReadableLibraryInfo;
   private final boolean generateKytheIndexingMetadata;
@@ -49,7 +48,7 @@ public class OutputGeneratorStage {
   public OutputGeneratorStage(
       List<FileInfo> nativeJavaScriptFiles,
       Path outputPath,
-      Optional<Path> libraryInfoOutputPath,
+      Path libraryInfoOutputPath,
       boolean shouldGenerateReadableLibraryInfo,
       boolean shouldGenerateReadableSourceMaps,
       boolean generateKytheIndexingMetadata,
@@ -151,7 +150,7 @@ public class OutputGeneratorStage {
         J2clUtils.writeToFile(
             outputPath.resolve(headerRelativePath), javaScriptHeaderSource, problems);
 
-        if (libraryInfoOutputPath.isPresent() || shouldGenerateReadableLibraryInfo) {
+        if (libraryInfoOutputPath != null || shouldGenerateReadableLibraryInfo) {
           libraryInfoBuilder.addType(
               type,
               headerRelativePath,
@@ -169,9 +168,8 @@ public class OutputGeneratorStage {
       }
     }
 
-    if (libraryInfoOutputPath.isPresent()) {
-      J2clUtils.writeToFile(
-          libraryInfoOutputPath.get(), libraryInfoBuilder.toByteArray(), problems);
+    if (libraryInfoOutputPath != null) {
+      J2clUtils.writeToFile(libraryInfoOutputPath, libraryInfoBuilder.toByteArray(), problems);
     }
 
     if (shouldGenerateReadableLibraryInfo) {

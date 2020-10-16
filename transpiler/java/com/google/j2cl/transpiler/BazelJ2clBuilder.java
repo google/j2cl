@@ -18,6 +18,7 @@ import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.Problems;
+import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.common.SourceUtils;
 import com.google.j2cl.common.SourceUtils.FileInfo;
 import com.google.j2cl.common.bazel.BazelWorker;
@@ -61,7 +62,6 @@ final class BazelJ2clBuilder extends BazelWorker {
 
   @Option(
       name = "-libraryinfooutput",
-      required = true,
       metaVar = "<path>",
       usage = "Specifies the file into which to place the call graph.")
   protected String libraryInfoOutput;
@@ -106,7 +106,15 @@ final class BazelJ2clBuilder extends BazelWorker {
     }
 
     Path outputPath = getZipOutput(this.output, problems);
-    Path libraryInfoOutputPath = Paths.get(this.libraryInfoOutput);
+
+    Path libraryInfoOutputPath = null;
+    if (backend == Backend.CLOSURE) {
+      if (libraryInfoOutput == null) {
+        problems.fatal(FatalError.LIBRARY_INFO_OUTPUT_ARG_MISSING);
+      }
+
+      libraryInfoOutputPath = Paths.get(this.libraryInfoOutput);
+    }
 
     List<FileInfo> allSources =
         SourceUtils.getAllSources(this.sources, problems).collect(ImmutableList.toImmutableList());

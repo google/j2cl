@@ -10,22 +10,19 @@ def _impl_j2wasm_application(ctx):
     srcs = _get_transitive_srcs(ctx.attr.deps)
     classpath = _get_transitive_classpath(ctx.attr.deps)
 
-    # TODO(dramaix): Make library_info optional in the transpiler and remove it here.
-    output_library_info = ctx.actions.declare_file("%s_library_info" % ctx.label.name)
-
     args = ctx.actions.args()
     args.use_param_file("@%s", use_always = True)
     args.set_param_file_format("multiline")
     args.add_joined("-classpath", classpath, join_with = ctx.configuration.host_path_separator)
     args.add("-output", ctx.outputs.zip)
     args.add("-experimentalBackend", "WASM")
-    args.add("-libraryinfooutput", output_library_info)
+
     args.add_all(srcs)
 
     ctx.actions.run(
         progress_message = "Transpiling to WASM %s" % ctx.label,
         inputs = depset(transitive = [srcs, classpath]),
-        outputs = [ctx.outputs.zip, output_library_info],
+        outputs = [ctx.outputs.zip],
         executable = ctx.executable._j2cl_transpiler,
         arguments = [args],
         env = dict(LANG = "en_US.UTF-8"),

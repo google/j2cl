@@ -24,7 +24,7 @@ import com.google.j2cl.transpiler.backend.Backend;
 import com.google.j2cl.transpiler.frontend.Frontend;
 import java.nio.file.Path;
 import java.util.List;
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 /** Frontend options, which is initialized by a Flag instance that is already parsed. */
 @AutoValue
@@ -38,7 +38,8 @@ public abstract class J2clTranspilerOptions {
 
   public abstract Path getOutput();
 
-  public abstract Optional<Path> getLibraryInfoOutput();
+  @Nullable
+  public abstract Path getLibraryInfoOutput();
 
   public abstract boolean getEmitReadableLibraryInfo();
 
@@ -68,7 +69,7 @@ public abstract class J2clTranspilerOptions {
 
     public abstract Builder setOutput(Path path);
 
-    public abstract Builder setLibraryInfoOutput(Path path);
+    public abstract Builder setLibraryInfoOutput(@Nullable Path path);
 
     public abstract Builder setEmitReadableLibraryInfo(boolean b);
 
@@ -88,8 +89,7 @@ public abstract class J2clTranspilerOptions {
       J2clTranspilerOptions options = autoBuild();
       checkState(
           !options.getEmitReadableSourceMap() || !options.getGenerateKytheIndexingMetadata());
-      checkState(
-          !options.getEmitReadableLibraryInfo() || options.getLibraryInfoOutput().isPresent());
+      checkState(!options.getEmitReadableLibraryInfo() || options.getLibraryInfoOutput() != null);
       return options;
     }
   }
