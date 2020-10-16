@@ -37,6 +37,7 @@ import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.TypeVariable;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.Visibility;
+import com.google.j2cl.transpiler.backend.common.SourceBuilder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

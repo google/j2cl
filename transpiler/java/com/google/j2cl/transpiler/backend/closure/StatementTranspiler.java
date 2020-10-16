@@ -38,6 +38,7 @@ import com.google.j2cl.transpiler.ast.SynchronizedStatement;
 import com.google.j2cl.transpiler.ast.ThrowStatement;
 import com.google.j2cl.transpiler.ast.TryStatement;
 import com.google.j2cl.transpiler.ast.WhileStatement;
+import com.google.j2cl.transpiler.backend.common.SourceBuilder;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;

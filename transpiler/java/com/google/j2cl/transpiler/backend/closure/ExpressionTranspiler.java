@@ -62,6 +62,7 @@ import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
 import com.google.j2cl.transpiler.ast.VariableReference;
+import com.google.j2cl.transpiler.backend.common.SourceBuilder;
 import java.util.Collections;
 import java.util.List;
 

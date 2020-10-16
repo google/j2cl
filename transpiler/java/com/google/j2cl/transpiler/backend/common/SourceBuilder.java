@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.transpiler.backend.closure;
+package com.google.j2cl.transpiler.backend.common;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
@@ -32,7 +32,7 @@ import java.util.TreeMap;
 import java.util.function.Consumer;
 
 /** Builds source and tracks line numbers using a StringBuilder. */
-class SourceBuilder {
+public class SourceBuilder {
 
   // Simple platform dependent new line helps us to not think about potential implications in
   // J2clMinifier/RTA and other potential mistakes in the tooling. Since this is generated code we
@@ -54,13 +54,13 @@ class SourceBuilder {
   public void emitWithMapping(SourcePosition javaSourcePosition, Runnable codeEmitter) {
     checkNotNull(javaSourcePosition);
 
-    SourcePosition jsSourcePosition = emit(codeEmitter);
+    SourcePosition outputSourcePosition = emit(codeEmitter);
 
-    if (jsSourcePosition == SourcePosition.NONE || javaSourcePosition == SourcePosition.NONE) {
+    if (outputSourcePosition == SourcePosition.NONE || javaSourcePosition == SourcePosition.NONE) {
       // Do not record empty mappings.
       return;
     }
-    javaSourceInfoByOutputSourceInfo.put(jsSourcePosition, javaSourcePosition);
+    javaSourceInfoByOutputSourceInfo.put(outputSourcePosition, javaSourcePosition);
   }
 
   public void emitWithMemberMapping(MemberDescriptor memberDescriptor, Runnable codeEmitter) {
@@ -69,14 +69,14 @@ class SourceBuilder {
         "Output source info already exists for this member %s",
         memberDescriptor);
 
-    SourcePosition jsSourcePosition = emit(codeEmitter);
+    SourcePosition outputSourcePosition = emit(codeEmitter);
 
-    if (jsSourcePosition == SourcePosition.NONE) {
+    if (outputSourcePosition == SourcePosition.NONE) {
       // Do not record empty mappings.
       return;
     }
 
-    outputSourceInfoByMember.put(memberDescriptor, jsSourcePosition);
+    outputSourceInfoByMember.put(memberDescriptor, outputSourcePosition);
   }
 
   private SourcePosition emit(Runnable codeEmitter) {

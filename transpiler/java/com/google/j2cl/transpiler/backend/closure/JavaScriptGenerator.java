@@ -23,6 +23,7 @@ import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.HasName;
 import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.Type;
+import com.google.j2cl.transpiler.backend.common.SourceBuilder;
 import java.util.List;
 import java.util.Map;
 
