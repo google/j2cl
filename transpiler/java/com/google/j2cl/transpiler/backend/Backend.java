@@ -20,6 +20,7 @@ import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourceUtils.FileInfo;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.backend.closure.OutputGeneratorStage;
+import com.google.j2cl.transpiler.backend.wasm.WasmModuleGenerator;
 import com.google.j2cl.transpiler.passes.ArrayAccessNormalizer;
 import com.google.j2cl.transpiler.passes.BridgeMethodsCreator;
 import com.google.j2cl.transpiler.passes.ControlStatementFormatter;
@@ -247,12 +248,12 @@ public enum Backend {
         boolean emitReadableSourceMap,
         boolean generateKytheIndexingMetadata,
         Problems problems) {
-      throw new UnsupportedOperationException("Not implemented yet.");
+      new WasmModuleGenerator(output, problems).generateOutputs(j2clUnits);
     }
 
     @Override
     public ImmutableList<NormalizationPass> getPasses(boolean experimentalOptimizeAutovalue) {
-      throw new UnsupportedOperationException("Not implemented yet.");
+      return ImmutableList.of();
     }
   };
 
