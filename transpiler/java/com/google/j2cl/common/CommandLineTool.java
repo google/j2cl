@@ -29,7 +29,7 @@ public abstract class CommandLineTool {
     this.toolName = toolName;
   }
 
-  protected abstract Problems run();
+  protected abstract void run(Problems problems);
 
   // TODO(goktug): reduce visibility.
   protected Problems processRequest(String[] args) {
@@ -55,10 +55,11 @@ public abstract class CommandLineTool {
     }
 
     try {
-      return run();
+      run(problems);
     } catch (Problems.Exit e) {
-      return e.getProblems();
+      // Program aborted due to errors recorded in problems.
     }
+    return problems;
   }
 
   protected final int execute(String[] args) {

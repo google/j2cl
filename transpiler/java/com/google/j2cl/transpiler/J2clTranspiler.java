@@ -32,12 +32,12 @@ import java.util.concurrent.Future;
 class J2clTranspiler {
 
   /** Runs the entire J2CL pipeline. */
-  static Problems transpile(J2clTranspilerOptions options) {
+  static void transpile(J2clTranspilerOptions options, Problems problems) {
     // Compiler has no static state, but rather uses thread local variables.
     // Because of this, we invoke the compiler on a different thread each time.
     ExecutorService executorService = Executors.newSingleThreadExecutor();
-    Future<Problems> result =
-        executorService.submit(() -> new J2clTranspiler(options).transpileImpl());
+    Future<?> result =
+        executorService.submit(() -> new J2clTranspiler(options, problems).transpileImpl());
     // Shutdown the executor service since it will only run a single transpilation. If not shutdown
     // it prevents the JVM from ending the process (see Executors.newFixedThreadPool()). This is not
     // normally observed since the transpiler in normal circumstances ends with System.exit() which
@@ -46,7 +46,7 @@ class J2clTranspiler {
     executorService.shutdown();
 
     try {
-      return Uninterruptibles.getUninterruptibly(result);
+      Uninterruptibles.getUninterruptibly(result);
     } catch (ExecutionException e) {
       // Try unwrapping the cause...
       Throwables.throwIfUnchecked(e.getCause());
@@ -54,15 +54,17 @@ class J2clTranspiler {
     }
   }
 
-  private final Problems problems = new Problems();
   private final J2clTranspilerOptions options;
+  private final Problems problems;
 
-  private J2clTranspiler(J2clTranspilerOptions options) {
+  private J2clTranspiler(J2clTranspilerOptions options, Problems problems) {
     this.options = options;
+    this.problems = problems;
   }
 
-  private Problems transpileImpl() {
+  private void transpileImpl() {
     try {
+
       List<CompilationUnit> j2clUnits =
           options
               .getFrontend()
@@ -86,9 +88,6 @@ class J2clTranspiler {
               options.getEmitReadableSourceMap(),
               options.getGenerateKytheIndexingMetadata(),
               problems);
-      return problems;
-    } catch (Problems.Exit e) {
-      return e.getProblems();
     } finally {
       maybeCloseFileSystem();
     }

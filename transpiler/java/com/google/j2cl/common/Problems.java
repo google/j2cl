@@ -199,8 +199,8 @@ public class Problems {
     }
   }
 
-  public void abort() {
-    throw new Exit(this);
+  private void abort() {
+    throw new Exit();
   }
 
   public List<String> getErrors() {
@@ -237,15 +237,5 @@ public class Problems {
    *
    * <p>Note: It should never be caught except on the top level.
    */
-  public static class Exit extends java.lang.Error {
-    private final Problems problems;
-
-    private Exit(Problems problems) {
-      this.problems = problems;
-    }
-
-    public Problems getProblems() {
-      return problems;
-    }
-  }
+  public static class Exit extends java.lang.Error {}
 }

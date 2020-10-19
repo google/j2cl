@@ -166,13 +166,14 @@ public class SourceUtils {
     }
   }
 
-  public static void checkSourceFiles(List<String> sourceFiles, String... validExtensions) {
+  public static void checkSourceFiles(
+      Problems problems, List<String> sourceFiles, String... validExtensions) {
     for (String sourceFile : sourceFiles) {
       if (Arrays.stream(validExtensions).noneMatch(x -> sourceFile.endsWith(x))) {
-        new Problems().fatal(FatalError.UNKNOWN_INPUT_TYPE, sourceFile);
+        problems.fatal(FatalError.UNKNOWN_INPUT_TYPE, sourceFile);
       }
       if (!Files.isRegularFile(Paths.get(sourceFile))) {
-        new Problems().fatal(FatalError.FILE_NOT_FOUND, sourceFile);
+        problems.fatal(FatalError.FILE_NOT_FOUND, sourceFile);
       }
     }
   }

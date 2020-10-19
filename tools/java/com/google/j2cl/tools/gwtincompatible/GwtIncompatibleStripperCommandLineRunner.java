@@ -39,9 +39,9 @@ public final class GwtIncompatibleStripperCommandLineRunner extends CommandLineT
   }
 
   @Override
-  protected Problems run() {
-    checkSourceFiles(files, ".java", ".srcjar", ".jar");
-    return GwtIncompatibleStripper.strip(files, outputPath);
+  protected void run(Problems problems) {
+    checkSourceFiles(problems, files, ".java", ".srcjar", ".jar");
+    GwtIncompatibleStripper.strip(files, outputPath, problems);
   }
 
   public static int run(String[] args) {

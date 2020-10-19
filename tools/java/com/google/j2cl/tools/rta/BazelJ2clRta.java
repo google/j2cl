@@ -66,16 +66,14 @@ final class BazelJ2clRta extends BazelWorker {
   List<String> inputs = null;
 
   @Override
-  protected Problems run() {
+  protected void run(Problems problems) {
     List<LibraryInfo> libraryInfos =
         inputs.parallelStream().map(libraryInfoCache::get).collect(toImmutableList());
 
     RtaResult rtaResult = RapidTypeAnalyser.analyse(libraryInfos, keepJsTypeInterfaces);
 
-    Problems problems = new Problems();
     writeToFile(unusedTypesOutputFilePath, rtaResult.getUnusedTypes(), problems);
     writeToFile(removalCodeInfoOutputFilePath, rtaResult.getCodeRemovalInfo(), problems);
-    return problems;
   }
 
   private static LibraryInfo readLibraryInfo(Path libraryInfoPath) throws IOException {

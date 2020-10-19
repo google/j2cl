@@ -35,8 +35,8 @@ final class BazelGwtIncompatibleStripper extends BazelWorker {
   protected String outputPath;
 
   @Override
-  protected Problems run() {
-    return GwtIncompatibleStripper.strip(files, outputPath);
+  protected void run(Problems problems) {
+    GwtIncompatibleStripper.strip(files, outputPath, problems);
   }
 
   public static void main(String[] workerArgs) throws Exception {

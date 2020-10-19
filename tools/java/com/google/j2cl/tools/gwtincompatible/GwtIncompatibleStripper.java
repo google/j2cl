@@ -45,21 +45,15 @@ import org.eclipse.jdt.core.dom.ImportDeclaration;
  */
 public final class GwtIncompatibleStripper {
 
-  static Problems strip(List<String> files, String outputPath) {
-    try {
-      Problems problems = new Problems();
-      try (FileSystem outputZipFileSystem = SourceUtils.initZipOutput(outputPath, problems)) {
-        List<FileInfo> allPaths =
-            SourceUtils.getAllSources(files, problems)
-                .filter(f -> f.targetPath().endsWith(".java"))
-                .collect(toImmutableList());
-        preprocessFiles(allPaths, outputZipFileSystem.getPath("/"), problems);
-      } catch (IOException e) {
-        problems.fatal(FatalError.CANNOT_CLOSE_ZIP, e.getMessage());
-      }
-      return problems;
-    } catch (Problems.Exit e) {
-      return e.getProblems();
+  static void strip(List<String> files, String outputPath, Problems problems) {
+    try (FileSystem outputZipFileSystem = SourceUtils.initZipOutput(outputPath, problems)) {
+      List<FileInfo> allPaths =
+          SourceUtils.getAllSources(files, problems)
+              .filter(f -> f.targetPath().endsWith(".java"))
+              .collect(toImmutableList());
+      preprocessFiles(allPaths, outputZipFileSystem.getPath("/"), problems);
+    } catch (IOException e) {
+      problems.fatal(FatalError.CANNOT_CLOSE_ZIP, e.getMessage());
     }
   }
 

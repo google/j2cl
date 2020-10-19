@@ -93,12 +93,12 @@ final class BazelJ2clBuilder extends BazelWorker {
   protected Backend backend = Backend.CLOSURE;
 
   @Override
-  protected Problems run() {
-    return J2clTranspiler.transpile(createOptions());
+  protected void run(Problems problems) {
+    J2clTranspiler.transpile(createOptions(problems), problems);
   }
 
-  private J2clTranspilerOptions createOptions() {
-    Problems problems = new Problems();
+  private J2clTranspilerOptions createOptions(Problems problems) {
+
     if (this.readableSourceMaps && this.generateKytheIndexingMetadata) {
       problems.warning(
           "Readable source maps are not available when generating Kythe indexing metadata.");

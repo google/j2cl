@@ -85,14 +85,13 @@ public final class J2clCommandLineRunner extends CommandLineTool {
   }
 
   @Override
-  protected Problems run() {
-    return J2clTranspiler.transpile(createOptions());
+  protected void run(Problems problems) {
+    J2clTranspiler.transpile(createOptions(problems), problems);
   }
 
-  private J2clTranspilerOptions createOptions() {
-    checkSourceFiles(files, ".java", ".srcjar", ".jar");
+  private J2clTranspilerOptions createOptions(Problems problems) {
+    checkSourceFiles(problems, files, ".java", ".srcjar", ".jar");
 
-    Problems problems = new Problems();
     if (this.readableSourceMaps && this.generateKytheIndexingMetadata) {
       problems.warning(
           "Readable source maps are not available when generating Kythe indexing metadata.");
