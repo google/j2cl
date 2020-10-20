@@ -17,6 +17,8 @@ import com.google.common.base.Ascii;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.J2clUtils;
+import com.google.j2cl.common.OutputUtils;
+import com.google.j2cl.common.OutputUtils.Output;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.common.SourceUtils;
@@ -57,14 +59,14 @@ final class BazelJ2clBuilder extends BazelWorker {
       name = "-output",
       required = true,
       metaVar = "<path>",
-      usage = "Specifies the zip into which to place compiled output.")
-  protected String output;
+      usage = "Directory or zip into which to place compiled output.")
+  protected Path output;
 
   @Option(
       name = "-libraryinfooutput",
       metaVar = "<path>",
       usage = "Specifies the file into which to place the call graph.")
-  protected String libraryInfoOutput;
+  protected Path libraryInfoOutput;
 
   @Option(name = "-readablelibraryinfo", hidden = true)
   protected boolean readableLibraryInfo = false;
@@ -94,10 +96,12 @@ final class BazelJ2clBuilder extends BazelWorker {
 
   @Override
   protected void run(Problems problems) {
-    J2clTranspiler.transpile(createOptions(problems), problems);
+    try (Output out = OutputUtils.initOutput(this.output, problems)) {
+      J2clTranspiler.transpile(createOptions(out.getRoot(), problems), problems);
+    }
   }
 
-  private J2clTranspilerOptions createOptions(Problems problems) {
+  private J2clTranspilerOptions createOptions(Path outputPath, Problems problems) {
 
     if (this.readableSourceMaps && this.generateKytheIndexingMetadata) {
       problems.warning(
@@ -105,15 +109,8 @@ final class BazelJ2clBuilder extends BazelWorker {
       this.readableSourceMaps = false;
     }
 
-    Path outputPath = getZipOutput(this.output, problems);
-
-    Path libraryInfoOutputPath = null;
-    if (backend == Backend.CLOSURE) {
-      if (libraryInfoOutput == null) {
-        problems.fatal(FatalError.LIBRARY_INFO_OUTPUT_ARG_MISSING);
-      }
-
-      libraryInfoOutputPath = Paths.get(this.libraryInfoOutput);
+    if (backend == Backend.CLOSURE && libraryInfoOutput == null) {
+      problems.fatal(FatalError.LIBRARY_INFO_OUTPUT_ARG_MISSING);
     }
 
     List<FileInfo> allSources =
@@ -142,7 +139,7 @@ final class BazelJ2clBuilder extends BazelWorker {
         .setNativeSources(allNativeSources)
         .setClasspaths(getPathEntries(this.classPath))
         .setOutput(outputPath)
-        .setLibraryInfoOutput(libraryInfoOutputPath)
+        .setLibraryInfoOutput(this.libraryInfoOutput)
         .setEmitReadableLibraryInfo(readableLibraryInfo)
         .setEmitReadableSourceMap(this.readableSourceMaps)
         .setGenerateKytheIndexingMetadata(this.generateKytheIndexingMetadata)
@@ -150,10 +147,6 @@ final class BazelJ2clBuilder extends BazelWorker {
         .setFrontend(FRONTEND)
         .setBackend(this.backend)
         .build();
-  }
-
-  private static Path getZipOutput(String output, Problems problems) {
-    return SourceUtils.initZipOutput(output, problems).getPath("/");
   }
 
   private static List<String> getPathEntries(String path) {

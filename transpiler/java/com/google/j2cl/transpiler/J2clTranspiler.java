@@ -16,12 +16,9 @@ package com.google.j2cl.transpiler;
 import com.google.common.base.Throwables;
 import com.google.common.util.concurrent.Uninterruptibles;
 import com.google.j2cl.common.Problems;
-import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.passes.JsInteropRestrictionsChecker;
 import com.google.j2cl.transpiler.passes.NormalizationPass;
-import java.io.IOException;
-import java.nio.file.FileSystem;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -63,34 +60,29 @@ class J2clTranspiler {
   }
 
   private void transpileImpl() {
-    try {
-
-      List<CompilationUnit> j2clUnits =
-          options
-              .getFrontend()
-              .getCompilationUnits(
-                  options.getClasspaths(),
-                  options.getSources(),
-                  options.getGenerateKytheIndexingMetadata(),
-                  problems);
-      if (!j2clUnits.isEmpty()) {
-        checkUnits(j2clUnits);
-        normalizeUnits(j2clUnits);
-      }
-      options
-          .getBackend()
-          .generateOutputs(
-              j2clUnits,
-              options.getNativeSources(),
-              options.getOutput(),
-              options.getLibraryInfoOutput(),
-              options.getEmitReadableLibraryInfo(),
-              options.getEmitReadableSourceMap(),
-              options.getGenerateKytheIndexingMetadata(),
-              problems);
-    } finally {
-      maybeCloseFileSystem();
+    List<CompilationUnit> j2clUnits =
+        options
+            .getFrontend()
+            .getCompilationUnits(
+                options.getClasspaths(),
+                options.getSources(),
+                options.getGenerateKytheIndexingMetadata(),
+                problems);
+    if (!j2clUnits.isEmpty()) {
+      checkUnits(j2clUnits);
+      normalizeUnits(j2clUnits);
     }
+    options
+        .getBackend()
+        .generateOutputs(
+            j2clUnits,
+            options.getNativeSources(),
+            options.getOutput(),
+            options.getLibraryInfoOutput(),
+            options.getEmitReadableLibraryInfo(),
+            options.getEmitReadableSourceMap(),
+            options.getGenerateKytheIndexingMetadata(),
+            problems);
   }
 
   private void checkUnits(List<CompilationUnit> j2clUnits) {
@@ -103,18 +95,6 @@ class J2clTranspiler {
       for (NormalizationPass pass :
           options.getBackend().getPasses(options.getExperimentalOptimizeAutovalue())) {
         pass.execute(j2clUnit);
-      }
-    }
-  }
-
-  private void maybeCloseFileSystem() {
-    FileSystem outputFileSystem = options.getOutput().getFileSystem();
-    if (outputFileSystem.getClass().getCanonicalName().equals("com.sun.nio.zipfs.ZipFileSystem")
-        || outputFileSystem.getClass().getCanonicalName().equals("jdk.nio.zipfs.ZipFileSystem")) {
-      try {
-        outputFileSystem.close();
-      } catch (IOException e) {
-        problems.fatal(FatalError.CANNOT_CLOSE_ZIP, e.getMessage());
       }
     }
   }

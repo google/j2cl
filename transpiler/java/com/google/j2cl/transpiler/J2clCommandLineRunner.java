@@ -15,18 +15,16 @@ package com.google.j2cl.transpiler;
 
 import static com.google.j2cl.common.SourceUtils.checkSourceFiles;
 
-import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.CommandLineTool;
+import com.google.j2cl.common.OutputUtils;
+import com.google.j2cl.common.OutputUtils.Output;
 import com.google.j2cl.common.Problems;
-import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.common.SourceUtils;
 import com.google.j2cl.transpiler.backend.Backend;
 import com.google.j2cl.transpiler.frontend.Frontend;
 import java.io.File;
-import java.nio.file.FileSystem;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -38,47 +36,46 @@ import org.kohsuke.args4j.Option;
 public final class J2clCommandLineRunner extends CommandLineTool {
 
   @Argument(metaVar = "<source files>", required = true)
-  protected List<String> files = new ArrayList<>();
+  List<String> files = new ArrayList<>();
 
   @Option(
       name = "-classpath",
       aliases = "-cp",
       metaVar = "<path>",
       usage = "Specifies where to find user class files and annotation processors.")
-  protected String classPath = "";
+  String classPath = "";
 
   @Option(
       name = "-nativesourcepath",
       metaVar = "<path>",
       usage = "Specifies where to find zip files containing native.js files for native methods.")
-  protected String nativeSourcePath = "";
+  String nativeSourcePath = "";
 
   @Option(
       name = "-d",
       metaVar = "<path>",
       usage = "Directory or zip into which to place compiled output.")
-  @VisibleForTesting
-  public String output = ".";
+  Path output = Paths.get(".");
 
   @Option(
       name = "-readablesourcemaps",
       usage = "Coerces generated source maps to human readable form.",
       hidden = true)
-  protected boolean readableSourceMaps = false;
+  boolean readableSourceMaps = false;
 
   @Option(
       name = "-generatekytheindexingmetadata",
       usage =
           "Generates Kythe indexing metadata and appends it onto the generated JavaScript files.",
       hidden = true)
-  protected boolean generateKytheIndexingMetadata = false;
+  boolean generateKytheIndexingMetadata = false;
 
   @Option(
       name = "-frontend",
       metaVar = "(JDT | JAVAC)",
       usage = "Select the frontend to use: JDT (default), JAVAC (experimental).",
       hidden = true)
-  protected Frontend frontEnd = Frontend.JDT;
+  Frontend frontEnd = Frontend.JDT;
 
   private J2clCommandLineRunner() {
     super("j2cl");
@@ -86,10 +83,12 @@ public final class J2clCommandLineRunner extends CommandLineTool {
 
   @Override
   protected void run(Problems problems) {
-    J2clTranspiler.transpile(createOptions(problems), problems);
+    try (Output out = OutputUtils.initOutput(this.output, problems)) {
+      J2clTranspiler.transpile(createOptions(out.getRoot(), problems), problems);
+    }
   }
 
-  private J2clTranspilerOptions createOptions(Problems problems) {
+  private J2clTranspilerOptions createOptions(Path outputPath, Problems problems) {
     checkSourceFiles(problems, files, ".java", ".srcjar", ".jar");
 
     if (this.readableSourceMaps && this.generateKytheIndexingMetadata) {
@@ -108,29 +107,13 @@ public final class J2clCommandLineRunner extends CommandLineTool {
                 .filter(p -> p.sourcePath().endsWith(".native.js"))
                 .collect(ImmutableList.toImmutableList()))
         .setClasspaths(getPathEntries(this.classPath))
-        .setOutput(
-            this.output.endsWith(".zip")
-                ? getZipOutput(this.output, problems)
-                : getDirOutput(this.output, problems))
+        .setOutput(outputPath)
         .setEmitReadableSourceMap(this.readableSourceMaps)
         .setEmitReadableLibraryInfo(false)
         .setGenerateKytheIndexingMetadata(this.generateKytheIndexingMetadata)
         .setFrontend(this.frontEnd)
         .setBackend(Backend.CLOSURE)
         .build();
-  }
-
-  private static Path getDirOutput(String output, Problems problems) {
-    Path outputPath = Paths.get(output);
-    if (Files.isRegularFile(outputPath)) {
-      problems.fatal(FatalError.OUTPUT_LOCATION, outputPath);
-    }
-    return outputPath;
-  }
-
-  private static Path getZipOutput(String output, Problems problems) {
-    FileSystem newFileSystem = SourceUtils.initZipOutput(output, problems);
-    return newFileSystem == null ? null : newFileSystem.getPath("/");
   }
 
   private static List<String> getPathEntries(String path) {

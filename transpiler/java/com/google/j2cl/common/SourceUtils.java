@@ -17,13 +17,9 @@ package com.google.j2cl.common;
 
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
 import com.google.j2cl.common.Problems.FatalError;
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
-import java.nio.file.FileSystem;
-import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -31,10 +27,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
-/**
- * This class contains reusable utilities for tools needing to read from zip files and write from
- * zip files. (J2CL proper and the GwtIncompatible stripper)
- */
+/** Utilities for tools to process source files. */
 public class SourceUtils {
 
   /** Stores path of files to be processed. */
@@ -145,25 +138,6 @@ public class SourceUtils {
     rootPath = "/" + rootPath;
     int index = path.indexOf(rootPath);
     return index == -1 ? path.length() : index + rootPath.length();
-  }
-
-  public static FileSystem initZipOutput(String output, Problems problems) {
-    Path outputPath = Paths.get(output);
-    if (Files.isDirectory(outputPath)) {
-      problems.fatal(FatalError.OUTPUT_LOCATION, outputPath);
-    }
-
-    // Ensures that we will not fail if the zip already exists.
-    outputPath.toFile().delete();
-
-    try {
-      return FileSystems.newFileSystem(
-          URI.create("jar:" + outputPath.toAbsolutePath().toUri()),
-          ImmutableMap.of("create", "true"));
-    } catch (IOException e) {
-      problems.fatal(FatalError.CANNOT_CREATE_ZIP, outputPath, e.getMessage());
-      return null;
-    }
   }
 
   public static void checkSourceFiles(

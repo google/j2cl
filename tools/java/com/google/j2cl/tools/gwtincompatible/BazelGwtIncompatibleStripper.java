@@ -17,6 +17,7 @@ package com.google.j2cl.tools.gwtincompatible;
 
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.bazel.BazelWorker;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import org.kohsuke.args4j.Argument;
@@ -25,14 +26,14 @@ import org.kohsuke.args4j.Option;
 /** Runs The @GwtIncompatible stripper as a worker. */
 final class BazelGwtIncompatibleStripper extends BazelWorker {
   @Argument(metaVar = "<source files .java|.srcjar>", usage = "source files")
-  protected List<String> files = new ArrayList<>();
+  List<String> files = new ArrayList<>();
 
   @Option(
       name = "-d",
       required = true,
       metaVar = "<file>",
-      usage = "The location into which to place output srcjar.")
-  protected String outputPath;
+      usage = "The directory or zip file into which to place the output.")
+  Path outputPath;
 
   @Override
   protected void run(Problems problems) {

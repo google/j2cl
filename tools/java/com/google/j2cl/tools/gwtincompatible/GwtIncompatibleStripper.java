@@ -20,13 +20,14 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import com.google.common.collect.Lists;
 import com.google.common.io.MoreFiles;
 import com.google.j2cl.common.J2clUtils;
+import com.google.j2cl.common.OutputUtils;
+import com.google.j2cl.common.OutputUtils.Output;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.common.SourceUtils;
 import com.google.j2cl.common.SourceUtils.FileInfo;
 import com.google.j2cl.transpiler.frontend.jdt.GwtIncompatibleNodeCollector;
 import java.io.IOException;
-import java.nio.file.FileSystem;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
@@ -45,15 +46,13 @@ import org.eclipse.jdt.core.dom.ImportDeclaration;
  */
 public final class GwtIncompatibleStripper {
 
-  static void strip(List<String> files, String outputPath, Problems problems) {
-    try (FileSystem outputZipFileSystem = SourceUtils.initZipOutput(outputPath, problems)) {
+  static void strip(List<String> files, Path outputPath, Problems problems) {
+    try (Output out = OutputUtils.initOutput(outputPath, problems)) {
       List<FileInfo> allPaths =
           SourceUtils.getAllSources(files, problems)
               .filter(f -> f.targetPath().endsWith(".java"))
               .collect(toImmutableList());
-      preprocessFiles(allPaths, outputZipFileSystem.getPath("/"), problems);
-    } catch (IOException e) {
-      problems.fatal(FatalError.CANNOT_CLOSE_ZIP, e.getMessage());
+      preprocessFiles(allPaths, out.getRoot(), problems);
     }
   }
 
