@@ -37,7 +37,6 @@ import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.TypeVariable;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.Visibility;
-import com.google.j2cl.transpiler.backend.common.SourceBuilder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -221,55 +220,57 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   }
 
   private void renderTypeAnnotation() {
+    StringBuilder sb = new StringBuilder();
     if (type.isOverlayImplementation()) {
       // Do nothing.
     } else if (type.isInterface()) {
-      sourceBuilder.appendLines("/**", " * @interface");
-      sourceBuilder.newLine();
+      appendln(sb, " * @interface");
       if (type.getDeclaration().hasTypeParameters()) {
         String templates =
             closureTypesGenerator.getCommaSeparatedClosureTypesString(
                 type.getDeclaration().getTypeParameterDescriptors());
-        sourceBuilder.appendln(" * @template " + templates);
+        appendln(sb, " * @template " + templates);
       }
       for (DeclaredTypeDescriptor superInterfaceType : type.getSuperInterfaceTypeDescriptors()) {
-        renderIfClassExists(" * @extends {%s}", superInterfaceType, sourceBuilder);
+        renderIfClassExists(" * @extends {%s}", superInterfaceType, sb);
       }
       if (type.getDeclaration().isDeprecated()) {
-        sourceBuilder.appendln(" * @deprecated");
+        appendln(sb, " * @deprecated");
       }
-      sourceBuilder.appendln(" */");
     } else { // Not an interface so it is a Class.
-      SourceBuilder buffer = new SourceBuilder();
       if (type.isAbstract()) {
-        buffer.appendln(" * @abstract");
+        appendln(sb, " * @abstract");
       }
       if (type.getDeclaration().hasTypeParameters()) {
         String templates =
             closureTypesGenerator.getCommaSeparatedClosureTypesString(
                 type.getDeclaration().getTypeParameterDescriptors());
-        buffer.appendln(" * @template " + templates);
+        appendln(sb, " * @template " + templates);
       }
       if (type.getDeclaration().isDeprecated()) {
-        buffer.appendln(" * @deprecated");
+        appendln(sb, " * @deprecated");
       }
       if (type.getSuperTypeDescriptor() != null
           && type.getSuperTypeDescriptor().hasTypeArguments()) {
         // No need to render if it does not have type arguments as it will also appear in the
         // extends clause of the class definition.
-        renderIfClassExists(" * @extends {%s}", type.getSuperTypeDescriptor(), buffer);
+        renderIfClassExists(" * @extends {%s}", type.getSuperTypeDescriptor(), sb);
       }
       for (DeclaredTypeDescriptor superInterfaceType : type.getSuperInterfaceTypeDescriptors()) {
-        renderIfClassExists(" * @implements {%s}", superInterfaceType, buffer);
-      }
-
-      String annotation = buffer.build();
-      if (!annotation.isEmpty()) {
-        sourceBuilder.appendln("/**");
-        sourceBuilder.append(annotation);
-        sourceBuilder.appendln(" */");
+        renderIfClassExists(" * @implements {%s}", superInterfaceType, sb);
       }
     }
+    String classJsDoc = sb.toString();
+    if (!classJsDoc.isEmpty()) {
+      sourceBuilder.appendln("/**");
+      sourceBuilder.append(classJsDoc);
+      sourceBuilder.appendln(" */");
+    }
+  }
+
+  private static void appendln(StringBuilder sb, String string) {
+    sb.append(string);
+    sb.append("\n");
   }
 
   /**
@@ -279,7 +280,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
    * <p>Used to render the @extends/@implements clauses.
    */
   private void renderIfClassExists(
-      String formatString, DeclaredTypeDescriptor typeDescriptor, SourceBuilder sourceBuilder) {
+      String formatString, DeclaredTypeDescriptor typeDescriptor, StringBuilder sb) {
     if (doesClassExistInJavaScript(typeDescriptor)) {
       String typeArgumentsString =
           typeDescriptor.hasTypeArguments()
@@ -288,7 +289,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
                   .collect(Collectors.joining(", ", "<", ">"))
               : "";
 
-      sourceBuilder.appendln(
+      appendln(
+          sb,
           String.format(
               formatString,
               environment.aliasForType(typeDescriptor.getTypeDeclaration()) + typeArgumentsString));

@@ -107,7 +107,7 @@ public class SourceBuilder {
               .setEndFilePosition(
                   FilePosition.newBuilder().setLine(0).setColumn(0).setByteOffset(0).build())
               .build(),
-          () -> append(" "));
+          this::newLine);
     }
     finished = true;
   }
