@@ -13,7 +13,13 @@ readable_example(
 """
 
 load("@io_bazel_rules_closure//closure:defs.bzl", "js_binary")
-load("//build_defs:rules.bzl", "J2CL_OPTIMIZED_DEFS", "j2cl_library")
+load(
+    "//build_defs:rules.bzl",
+    "J2CL_OPTIMIZED_DEFS",
+    "j2cl_library",
+    "j2wasm_application",
+    "j2wasm_library",
+)
 load("@bazel_skylib//rules:build_test.bzl", "build_test")
 
 JAVAC_FLAGS = [
@@ -28,6 +34,7 @@ def readable_example(
         generate_library_info = False,
         j2cl_library_tags = [],
         javacopts = [],
+        generate_wasm_readables = False,
         **kwargs):
     """Macro that confirms the JS compilability of some transpiled Java.
 
@@ -56,16 +63,6 @@ def readable_example(
         **kwargs
     )
 
-    if generate_library_info:
-        # Used by replace_all.py script to know wheter the generated output libraryinfo.json has to
-        # be copied or deleted
-        native.genrule(
-            name = "copy_library_info",
-            srcs = [],
-            outs = ["copy_library_info.flag"],
-            cmd = "echo 'true' > \"$@\"",
-        )
-
     # Verify compilability of generated JS.
     js_binary(
         name = "readable_binary",
@@ -84,3 +81,17 @@ def readable_example(
         name = "readable_build_test",
         targets = ["readable_binary"],
     )
+
+    if generate_wasm_readables:
+        # TODO(dramaix): remove this when j2cl_library automatically generates
+        # j2wasm_library
+        j2wasm_library(
+            name = "readable-wasm-lib",
+            srcs = srcs,
+            deps = deps,
+        )
+
+        j2wasm_application(
+            name = "readable_wasm",
+            deps = [":readable-wasm-lib"],
+        )

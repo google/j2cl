@@ -170,7 +170,7 @@ public class WasmModuleGenerator {
 
   private void renderTypeStruct(Type type) {
     builder.newLine();
-    builder.append("(type $" + type.getDeclaration().getMangledName() + " (struct ");
+    builder.append("(type $" + type.getDeclaration().getMangledName() + " (struct");
     builder.indent();
     renderTypeFields(type);
     builder.unindent();

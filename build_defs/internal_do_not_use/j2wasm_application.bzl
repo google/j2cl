@@ -49,7 +49,6 @@ j2wasm_application = rule(
         ),
     },
     outputs = {
-        # TODO(dramaix): Modify transpiler to accept something else than a zip output
-        "zip": "%{name}.wasm.zip",
+        "zip": "%{name}.zip",
     },
 )
