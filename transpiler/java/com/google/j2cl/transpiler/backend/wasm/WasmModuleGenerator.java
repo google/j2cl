@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Google Inc.
+ * Copyright 2020 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -15,24 +15,30 @@
  */
 package com.google.j2cl.transpiler.backend.wasm;
 
-import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.collect.ImmutableMap.toImmutableMap;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.Problems;
+import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Field;
+import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
+import com.google.j2cl.transpiler.ast.Variable;
+import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
 import java.nio.file.Path;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
 /** Generates a WASM module containing all the code for the application. */
 public class WasmModuleGenerator {
@@ -56,7 +62,7 @@ public class WasmModuleGenerator {
    * Maps type declarations to the corresponding type objects to allow access to the implementations
    * of super classes.
    */
-  private final Map<TypeDeclaration, Type> typesByTypeDeclaration = new HashMap<>();
+  private Map<TypeDeclaration, Type> typesByTypeDeclaration;
 
   public WasmModuleGenerator(Path outputPath, Problems problems) {
     this.outputPath = outputPath;
@@ -65,16 +71,19 @@ public class WasmModuleGenerator {
 
   public void generateOutputs(List<CompilationUnit> j2clCompilationUnits) {
     // Collect the implementations for all types
-    j2clCompilationUnits.stream()
-        .flatMap(cu -> cu.getTypes().stream())
-        .forEach(
-            type -> checkState(typesByTypeDeclaration.put(type.getDeclaration(), type) == null));
+    typesByTypeDeclaration =
+        j2clCompilationUnits.stream()
+            .flatMap(cu -> cu.getTypes().stream())
+            .collect(toImmutableMap(Type::getDeclaration, Function.identity()));
     builder.append("(module");
     builder.indent();
     for (CompilationUnit j2clCompilationUnit : j2clCompilationUnits) {
       builder.newLine();
       builder.append(
-          ";;; " + j2clCompilationUnit.getPackageName() + "." + j2clCompilationUnit.getName());
+          ";;; Code for "
+              + j2clCompilationUnit.getPackageName()
+              + "."
+              + j2clCompilationUnit.getName());
       for (Type type : j2clCompilationUnit.getTypes()) {
         renderType(type);
       }
@@ -88,6 +97,75 @@ public class WasmModuleGenerator {
 
   private void renderType(Type type) {
     renderTypeStruct(type);
+    renderTypeMethods(type);
+  }
+
+  private void renderTypeMethods(Type type) {
+    for (Method method : type.getMethods()) {
+      renderMethod(method);
+    }
+  }
+
+  private void renderMethod(Method method) {
+    builder.newLine();
+    builder.append("(func " + getMethodImplementationName(method) + " ");
+    // Emit parameters
+    builder.indent();
+    for (Variable parameter : method.getParameters()) {
+      builder.newLine();
+      builder.append(
+          "(param $"
+              + parameter.getName()
+              + " "
+              + getWasmType(parameter.getTypeDescriptor())
+              + ")");
+    }
+    // Emit return type
+    if (!TypeDescriptors.isPrimitiveVoid(method.getDescriptor().getReturnTypeDescriptor())) {
+      builder.newLine();
+      builder.append(
+          "(result " + getWasmType(method.getDescriptor().getReturnTypeDescriptor()) + ")");
+    }
+    // Emit locals.
+    // TODO(rluble): add variable collision resolver.
+    for (Variable variable : collectLocals(method)) {
+      builder.newLine();
+      builder.append(
+          "(local $" + variable.getName() + " " + getWasmType(variable.getTypeDescriptor()) + ") ");
+    }
+    builder.newLine();
+    new StatementTranspiler(builder).renderStatement(method.getBody());
+    builder.unindent();
+    builder.newLine();
+    builder.append(")");
+  }
+
+  /**
+   * Returns the name of the global function that implements the method.
+   *
+   * <p>Note that this names need to be globally unique and this are different than the names of the
+   * slots in the vtable which maps nicely to our concept of mangled names.
+   */
+  private static String getMethodImplementationName(Method method) {
+    // TODO(b/171329507): review naming, the current mangled name concept used for JavaScript is not
+    // enough since method names (in the implementation) need to be globally unique.
+    // It is the fields in the vtables that can use the concept of mangled names to name the slots.
+    return "$"
+        + method.getDescriptor().getMangledName()
+        + "__"
+        + method.getDescriptor().getEnclosingTypeDescriptor().getMangledName();
+  }
+
+  private static List<Variable> collectLocals(Method method) {
+    List<Variable> locals = new ArrayList<>();
+    method.accept(
+        new AbstractVisitor() {
+          @Override
+          public void exitVariableDeclarationFragment(VariableDeclarationFragment node) {
+            locals.add(node.getVariable());
+          }
+        });
+    return locals;
   }
 
   private void renderTypeStruct(Type type) {
@@ -106,7 +184,7 @@ public class WasmModuleGenerator {
       Type supertype = typesByTypeDeclaration.get(superTypeDescriptor.getTypeDeclaration());
       if (supertype == null) {
         builder.newLine();
-        builder.append(";; Missing superttype " + superTypeDescriptor.getReadableDescription());
+        builder.append(";; Missing supertype " + superTypeDescriptor.getReadableDescription());
       } else {
         renderTypeFields(typesByTypeDeclaration.get(superTypeDescriptor.getTypeDeclaration()));
       }

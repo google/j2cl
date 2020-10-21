@@ -184,6 +184,19 @@ public class SourceBuilder {
     append("}");
   }
 
+  public void openParens() {
+    append("(");
+    indent();
+  }
+
+  public void closeParens() {
+    unindent();
+    if (sb.charAt(sb.length() - 1) != ')') {
+      newLine();
+    }
+    append(")");
+  }
+
   private FilePosition getCurrentPosition() {
     return FilePosition.newBuilder()
         .setLine(currentLine)
