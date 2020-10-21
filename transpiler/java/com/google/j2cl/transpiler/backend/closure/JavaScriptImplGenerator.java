@@ -220,46 +220,35 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   }
 
   private void renderTypeAnnotation() {
-    StringBuilder sb = new StringBuilder();
     if (type.isOverlayImplementation()) {
-      // Do nothing.
-    } else if (type.isInterface()) {
-      appendln(sb, " * @interface");
-      if (type.getDeclaration().hasTypeParameters()) {
-        String templates =
-            closureTypesGenerator.getCommaSeparatedClosureTypesString(
-                type.getDeclaration().getTypeParameterDescriptors());
-        appendln(sb, " * @template " + templates);
-      }
-      for (DeclaredTypeDescriptor superInterfaceType : type.getSuperInterfaceTypeDescriptors()) {
-        renderIfClassExists(" * @extends {%s}", superInterfaceType, sb);
-      }
-      if (type.getDeclaration().isDeprecated()) {
-        appendln(sb, " * @deprecated");
-      }
-    } else { // Not an interface so it is a Class.
-      if (type.isAbstract()) {
-        appendln(sb, " * @abstract");
-      }
-      if (type.getDeclaration().hasTypeParameters()) {
-        String templates =
-            closureTypesGenerator.getCommaSeparatedClosureTypesString(
-                type.getDeclaration().getTypeParameterDescriptors());
-        appendln(sb, " * @template " + templates);
-      }
-      if (type.getDeclaration().isDeprecated()) {
-        appendln(sb, " * @deprecated");
-      }
-      if (type.getSuperTypeDescriptor() != null
-          && type.getSuperTypeDescriptor().hasTypeArguments()) {
-        // No need to render if it does not have type arguments as it will also appear in the
-        // extends clause of the class definition.
-        renderIfClassExists(" * @extends {%s}", type.getSuperTypeDescriptor(), sb);
-      }
-      for (DeclaredTypeDescriptor superInterfaceType : type.getSuperInterfaceTypeDescriptors()) {
-        renderIfClassExists(" * @implements {%s}", superInterfaceType, sb);
-      }
+      // Overlays do not need any JsDoc.
+      return;
     }
+    StringBuilder sb = new StringBuilder();
+    if (type.isInterface()) {
+      appendln(sb, " * @interface");
+    } else if (type.isAbstract()) {
+      appendln(sb, " * @abstract");
+    }
+    if (type.getDeclaration().hasTypeParameters()) {
+      String templates =
+          closureTypesGenerator.getCommaSeparatedClosureTypesString(
+              type.getDeclaration().getTypeParameterDescriptors());
+      appendln(sb, " * @template " + templates);
+    }
+    if (type.getSuperTypeDescriptor() != null && type.getSuperTypeDescriptor().hasTypeArguments()) {
+      // No need to render if it does not have type arguments as it will also appear in the
+      // extends clause of the class definition.
+      renderIfClassExists(" * @extends {%s}", type.getSuperTypeDescriptor(), sb);
+    }
+    for (DeclaredTypeDescriptor superInterfaceType : type.getSuperInterfaceTypeDescriptors()) {
+      String superInterfaceJsDoc = type.isInterface() ? "@extends" : "@implements";
+      renderIfClassExists(" * " + superInterfaceJsDoc + " {%s}", superInterfaceType, sb);
+    }
+    if (type.getDeclaration().isDeprecated()) {
+      appendln(sb, " * @deprecated");
+    }
+
     String classJsDoc = sb.toString();
     if (!classJsDoc.isEmpty()) {
       sourceBuilder.appendln("/**");
