@@ -16,15 +16,20 @@
 package com.google.j2cl.transpiler.backend.wasm;
 
 import static com.google.common.collect.ImmutableMap.toImmutableMap;
+import static java.util.stream.Collectors.joining;
 
+import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
 import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
+import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Field;
+import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.Method;
+import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.Type;
@@ -91,6 +96,9 @@ public class WasmModuleGenerator {
   }
 
   private void renderType(Type type) {
+    builder.newLine();
+    builder.newLine();
+    builder.append(";;; " + type.getKind() + "  " + type.getReadableDescription());
     renderTypeStruct(type);
     renderTypeMethods(type);
   }
@@ -102,6 +110,9 @@ public class WasmModuleGenerator {
   }
 
   private void renderMethod(Method method) {
+    builder.newLine();
+    builder.newLine();
+    builder.append(";;; " + method.getReadableDescription());
     builder.newLine();
     builder.append("(func " + getMethodImplementationName(method));
     // Emit parameters
@@ -133,22 +144,6 @@ public class WasmModuleGenerator {
     builder.unindent();
     builder.newLine();
     builder.append(")");
-  }
-
-  /**
-   * Returns the name of the global function that implements the method.
-   *
-   * <p>Note that this names need to be globally unique and this are different than the names of the
-   * slots in the vtable which maps nicely to our concept of mangled names.
-   */
-  private static String getMethodImplementationName(Method method) {
-    // TODO(b/171329507): review naming, the current mangled name concept used for JavaScript is not
-    // enough since method names (in the implementation) need to be globally unique.
-    // It is the fields in the vtables that can use the concept of mangled names to name the slots.
-    return "$"
-        + method.getDescriptor().getMangledName()
-        + "__"
-        + method.getDescriptor().getEnclosingTypeDescriptor().getMangledName();
   }
 
   private static List<Variable> collectLocals(Method method) {
@@ -198,15 +193,53 @@ public class WasmModuleGenerator {
     }
   }
 
+  /**
+   * Returns the name of the global function that implements the method.
+   *
+   * <p>Note that these names need to be globally unique and are different than the names of the
+   * slots in the vtable which maps nicely to our concept of mangled names.
+   */
+  private static String getMethodImplementationName(Method method) {
+    MethodDescriptor methodDescriptor = method.getDescriptor();
+    return "$"
+        + methodDescriptor.getName()
+        + method.getParameters().stream()
+            .map(p -> getTypeSignature(p.getTypeDescriptor()))
+            .collect(joining("|", "<", ">:"))
+        + getTypeSignature(methodDescriptor.getReturnTypeDescriptor())
+        + "@"
+        + methodDescriptor.getEnclosingTypeDescriptor().getQualifiedSourceName();
+  }
+
   private static String getFieldName(Field field) {
-    return "$" + field.getDescriptor().getMangledName();
+    FieldDescriptor fieldDescriptor = field.getDescriptor();
+    return "$"
+        + fieldDescriptor.getName()
+        + "@"
+        + fieldDescriptor.getEnclosingTypeDescriptor().getQualifiedSourceName();
   }
 
   private static String getWasmType(TypeDescriptor typeDescriptor) {
     if (typeDescriptor.isPrimitive()) {
       return WASM_TYPES_BY_PRIMITIVE_TYPES.get(typeDescriptor);
     }
+    return "(ref null $" + getTypeSignature(typeDescriptor) + ")";
+  }
 
-    return "(ref null $" + typeDescriptor.getMangledName() + ")";
+  private static String getTypeSignature(TypeDescriptor typeDescriptor) {
+    if (typeDescriptor.isPrimitive()) {
+      return typeDescriptor.getReadableDescription();
+    }
+    typeDescriptor = typeDescriptor.toRawTypeDescriptor();
+    if (typeDescriptor instanceof DeclaredTypeDescriptor) {
+      return ((DeclaredTypeDescriptor) typeDescriptor).getQualifiedSourceName();
+    }
+
+    if (typeDescriptor.isArray()) {
+      ArrayTypeDescriptor arrayTypeDescriptor = (ArrayTypeDescriptor) typeDescriptor;
+      return getTypeSignature(arrayTypeDescriptor.getLeafTypeDescriptor())
+          + Strings.repeat("<>", arrayTypeDescriptor.getDimensions());
+    }
+    throw new AssertionError("Unexpected type: " + typeDescriptor.getReadableDescription());
   }
 }
