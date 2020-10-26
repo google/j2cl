@@ -15,19 +15,19 @@
  */
 package com.google.j2cl.common.bazel;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import com.google.common.base.Splitter;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.io.Files;
 import com.google.devtools.build.lib.worker.WorkerProtocol.WorkRequest;
 import com.google.devtools.build.lib.worker.WorkerProtocol.WorkResponse;
 import com.google.j2cl.common.Problems;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.io.PrintStream;
 import java.util.List;
 import java.util.function.Supplier;
 import org.kohsuke.args4j.CmdLineException;
@@ -47,7 +47,7 @@ public abstract class BazelWorker {
    * Process the request described by the arguments. Note that you must output errors and warnings
    * via {@link Problems} to avoid interrupting the worker protocol which occurs over stdout.
    */
-  private Problems processRequest(String[] args) {
+  private int processRequest(List<String> args) {
     CmdLineParser parser = new CmdLineParser(this);
     Problems problems = new Problems();
 
@@ -55,7 +55,7 @@ public abstract class BazelWorker {
       parser.parseArgument(args);
     } catch (CmdLineException e) {
       problems.error("%s", e.getMessage());
-      return problems;
+      return problems.reportAndGetExitCode(System.err);
     }
 
     try {
@@ -63,7 +63,7 @@ public abstract class BazelWorker {
     } catch (Problems.Exit e) {
       // Program aborted due to errors recorded in problems.
     }
-    return problems;
+    return problems.reportAndGetExitCode(System.err);
   }
 
   public static final void start(String[] args, Supplier<BazelWorker> workerSupplier)
@@ -75,14 +75,22 @@ public abstract class BazelWorker {
     }
   }
 
-  private static void runStandaloneWorker(Supplier<BazelWorker> workerSupplier, String[] args)
+  private static void runStandaloneWorker(Supplier<BazelWorker> workerSupplier, List<String> args)
       throws IOException {
     // This is a single invocation of builder that exits after it processed the request.
-    int exitCode = workerSupplier.get().processRequest(args).reportAndGetExitCode(System.err);
+    int exitCode = workerSupplier.get().processRequest(args);
     System.exit(exitCode);
   }
 
   private static void runPersistentWorker(Supplier<BazelWorker> workerSupplier) throws IOException {
+    PrintStream realStdOut = System.out;
+
+    // Ensure we capture stdout/sterr for potential debug/error messages.
+    ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+    PrintStream ps = new PrintStream(buffer, true);
+    System.setOut(ps);
+    System.setErr(ps);
+
     while (true) {
       WorkRequest request = WorkRequest.parseDelimitedFrom(System.in);
 
@@ -90,21 +98,13 @@ public abstract class BazelWorker {
         break;
       }
 
-      StringWriter sw = new StringWriter();
-      PrintWriter pw = new PrintWriter(sw);
-      String[] args = request.getArgumentsList().toArray(new String[0]);
-      int exitCode = workerSupplier.get().processRequest(args).reportAndGetExitCode(pw);
+      int exitCode = workerSupplier.get().processRequest(request.getArgumentsList());
       WorkResponse.newBuilder()
-          .setOutput(sw.toString())
+          .setOutput(buffer.toString())
           .setExitCode(exitCode)
           .build()
-          .writeDelimitedTo(System.out);
-      System.out.flush();
-
-      // Hint to the system that now would be a good time to run a gc.  After a compile
-      // completes lots of objects should be available for collection and it should be cheap to
-      // collect them.
-      System.gc();
+          .writeDelimitedTo(realStdOut);
+      realStdOut.flush();
     }
   }
 
@@ -112,26 +112,18 @@ public abstract class BazelWorker {
    * Loads a potential flag file and returns the flags. Flag files are only allowed as the last
    * parameter and need to start with an '@'.
    */
-  private static String[] expandFlagFile(String[] args) throws IOException {
-    if (args.length == 0) {
-      return args;
+  private static List<String> expandFlagFile(String[] args) throws IOException {
+    List<String> combinedArgs = Lists.newArrayList(args);
+    String lastArg = Iterables.getLast(combinedArgs, null);
+    if (lastArg != null && lastArg.startsWith("@")) {
+      combinedArgs.remove(combinedArgs.size() - 1); // Remove flag file
+      combinedArgs.addAll(getArgsFromFlagFile(lastArg.substring(1)));
     }
-
-    String lastArg = args[args.length - 1];
-    if (lastArg == null || !lastArg.startsWith("@") || lastArg.length() == 1) {
-      return args;
-    }
-
-    List<String> combinedArgs = new ArrayList<>();
-    Collections.addAll(combinedArgs, args);
-    combinedArgs.remove(combinedArgs.size() - 1); // Remove flag file
-    Iterables.addAll(combinedArgs, getArgsFromFlagFile(lastArg.substring(1)));
-    return combinedArgs.toArray(new String[0]);
+    return combinedArgs;
   }
 
-  private static Iterable<String> getArgsFromFlagFile(String flagFileName) throws IOException {
-    String flagFileContent =
-        Files.asCharSource(new File(flagFileName), StandardCharsets.UTF_8).read();
-    return Splitter.on('\n').omitEmptyStrings().split(flagFileContent);
+  private static List<String> getArgsFromFlagFile(String flagFileName) throws IOException {
+    String flagFileContent = Files.asCharSource(new File(flagFileName), UTF_8).read();
+    return Splitter.on('\n').omitEmptyStrings().splitToList(flagFileContent);
   }
 }
