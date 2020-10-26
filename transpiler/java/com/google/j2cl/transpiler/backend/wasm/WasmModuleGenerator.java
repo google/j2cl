@@ -16,25 +16,16 @@
 package com.google.j2cl.transpiler.backend.wasm;
 
 import static com.google.common.collect.ImmutableMap.toImmutableMap;
-import static java.util.stream.Collectors.joining;
 
-import com.google.common.base.Strings;
-import com.google.common.collect.ImmutableMap;
 import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
-import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Field;
-import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.Method;
-import com.google.j2cl.transpiler.ast.MethodDescriptor;
-import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
-import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
-import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
@@ -47,22 +38,10 @@ import java.util.function.Function;
 
 /** Generates a WASM module containing all the code for the application. */
 public class WasmModuleGenerator {
-
-  private static final ImmutableMap<PrimitiveTypeDescriptor, String> WASM_TYPES_BY_PRIMITIVE_TYPES =
-      ImmutableMap.<PrimitiveTypeDescriptor, String>builder()
-          .put(PrimitiveTypes.BOOLEAN, "i32")
-          .put(PrimitiveTypes.BYTE, "i32")
-          .put(PrimitiveTypes.CHAR, "i32")
-          .put(PrimitiveTypes.SHORT, "i32")
-          .put(PrimitiveTypes.INT, "i32")
-          .put(PrimitiveTypes.LONG, "i64")
-          .put(PrimitiveTypes.FLOAT, "f32")
-          .put(PrimitiveTypes.DOUBLE, "f64")
-          .build();
-
   private final Problems problems;
   private final Path outputPath;
   private final SourceBuilder builder = new SourceBuilder();
+  private final GenerationEnvironment environment = new GenerationEnvironment();
   /**
    * Maps type declarations to the corresponding type objects to allow access to the implementations
    * of super classes.
@@ -99,8 +78,25 @@ public class WasmModuleGenerator {
     builder.newLine();
     builder.newLine();
     builder.append(";;; " + type.getKind() + "  " + type.getReadableDescription());
+    renderStaticFields(type);
     renderTypeStruct(type);
     renderTypeMethods(type);
+  }
+
+  private void renderStaticFields(Type type) {
+    builder.newLine();
+    for (Field field : type.getStaticFields()) {
+      builder.newLine();
+      builder.append(
+          "(global "
+              + environment.getFieldName(field)
+              + " "
+              + environment.getWasmType(field.getDescriptor().getTypeDescriptor())
+              + " ");
+      ExpressionTranspiler.render(
+          field.getDescriptor().getTypeDescriptor().getDefaultValue(), builder, environment);
+      builder.append(")");
+    }
   }
 
   private void renderTypeMethods(Type type) {
@@ -114,7 +110,7 @@ public class WasmModuleGenerator {
     builder.newLine();
     builder.append(";;; " + method.getReadableDescription());
     builder.newLine();
-    builder.append("(func " + getMethodImplementationName(method));
+    builder.append("(func " + environment.getMethodImplementationName(method));
     // Emit parameters
     builder.indent();
     for (Variable parameter : method.getParameters()) {
@@ -123,24 +119,30 @@ public class WasmModuleGenerator {
           "(param $"
               + parameter.getName()
               + " "
-              + getWasmType(parameter.getTypeDescriptor())
+              + environment.getWasmType(parameter.getTypeDescriptor())
               + ")");
     }
     // Emit return type
     if (!TypeDescriptors.isPrimitiveVoid(method.getDescriptor().getReturnTypeDescriptor())) {
       builder.newLine();
       builder.append(
-          "(result " + getWasmType(method.getDescriptor().getReturnTypeDescriptor()) + ")");
+          "(result "
+              + environment.getWasmType(method.getDescriptor().getReturnTypeDescriptor())
+              + ")");
     }
     // Emit locals.
     // TODO(rluble): add variable collision resolver.
     for (Variable variable : collectLocals(method)) {
       builder.newLine();
       builder.append(
-          "(local $" + variable.getName() + " " + getWasmType(variable.getTypeDescriptor()) + ")");
+          "(local $"
+              + variable.getName()
+              + " "
+              + environment.getWasmType(variable.getTypeDescriptor())
+              + ")");
     }
     builder.newLine();
-    new StatementTranspiler(builder).renderStatement(method.getBody());
+    new StatementTranspiler(builder, environment).renderStatement(method.getBody());
     builder.unindent();
     builder.newLine();
     builder.append(")");
@@ -186,60 +188,10 @@ public class WasmModuleGenerator {
       builder.newLine();
       builder.append(
           "(field "
-              + getFieldName(field)
+              + environment.getFieldName(field)
               + " "
-              + getWasmType(field.getDescriptor().getTypeDescriptor())
+              + environment.getWasmType(field.getDescriptor().getTypeDescriptor())
               + ")");
     }
-  }
-
-  /**
-   * Returns the name of the global function that implements the method.
-   *
-   * <p>Note that these names need to be globally unique and are different than the names of the
-   * slots in the vtable which maps nicely to our concept of mangled names.
-   */
-  private static String getMethodImplementationName(Method method) {
-    MethodDescriptor methodDescriptor = method.getDescriptor();
-    return "$"
-        + methodDescriptor.getName()
-        + method.getParameters().stream()
-            .map(p -> getTypeSignature(p.getTypeDescriptor()))
-            .collect(joining("|", "<", ">:"))
-        + getTypeSignature(methodDescriptor.getReturnTypeDescriptor())
-        + "@"
-        + methodDescriptor.getEnclosingTypeDescriptor().getQualifiedSourceName();
-  }
-
-  private static String getFieldName(Field field) {
-    FieldDescriptor fieldDescriptor = field.getDescriptor();
-    return "$"
-        + fieldDescriptor.getName()
-        + "@"
-        + fieldDescriptor.getEnclosingTypeDescriptor().getQualifiedSourceName();
-  }
-
-  private static String getWasmType(TypeDescriptor typeDescriptor) {
-    if (typeDescriptor.isPrimitive()) {
-      return WASM_TYPES_BY_PRIMITIVE_TYPES.get(typeDescriptor);
-    }
-    return "(ref null $" + getTypeSignature(typeDescriptor) + ")";
-  }
-
-  private static String getTypeSignature(TypeDescriptor typeDescriptor) {
-    if (typeDescriptor.isPrimitive()) {
-      return typeDescriptor.getReadableDescription();
-    }
-    typeDescriptor = typeDescriptor.toRawTypeDescriptor();
-    if (typeDescriptor instanceof DeclaredTypeDescriptor) {
-      return ((DeclaredTypeDescriptor) typeDescriptor).getQualifiedSourceName();
-    }
-
-    if (typeDescriptor.isArray()) {
-      ArrayTypeDescriptor arrayTypeDescriptor = (ArrayTypeDescriptor) typeDescriptor;
-      return getTypeSignature(arrayTypeDescriptor.getLeafTypeDescriptor())
-          + Strings.repeat("<>", arrayTypeDescriptor.getDimensions());
-    }
-    throw new AssertionError("Unexpected type: " + typeDescriptor.getReadableDescription());
   }
 }

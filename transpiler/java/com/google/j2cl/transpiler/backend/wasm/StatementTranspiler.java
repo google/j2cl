@@ -26,9 +26,11 @@ import java.util.Collection;
 /** Transforms Statements into WASM code. */
 class StatementTranspiler {
   SourceBuilder builder;
+  GenerationEnvironment environment;
 
-  public StatementTranspiler(SourceBuilder builder) {
+  public StatementTranspiler(SourceBuilder builder, GenerationEnvironment environment) {
     this.builder = builder;
+    this.environment = environment;
   }
 
   public void renderStatements(Collection<Statement> statements) {
@@ -63,7 +65,6 @@ class StatementTranspiler {
             expressionStatement.getSourcePosition(),
             () -> {
               renderExpression(expressionStatement.getExpression());
-              builder.append(";");
             });
         return false;
       }
@@ -74,7 +75,7 @@ class StatementTranspiler {
       }
 
       private void renderExpression(Expression expression) {
-        ExpressionTranspiler.render(expression, builder);
+        ExpressionTranspiler.render(expression, builder, environment);
       }
     }
 

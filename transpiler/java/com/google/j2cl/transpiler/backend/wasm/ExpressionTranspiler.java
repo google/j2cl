@@ -15,17 +15,32 @@
  */
 package com.google.j2cl.transpiler.backend.wasm;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
+import com.google.j2cl.transpiler.ast.BooleanLiteral;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.ExpressionWithComment;
 import com.google.j2cl.transpiler.ast.MultiExpression;
+import com.google.j2cl.transpiler.ast.NullLiteral;
+import com.google.j2cl.transpiler.ast.NumberLiteral;
+import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
 
 /** Transforms expressions into WASM code. */
 final class ExpressionTranspiler {
-  public static void render(Expression expression, final SourceBuilder sourceBuilder) {
+  public static void render(
+      Expression expression,
+      final SourceBuilder sourceBuilder,
+      final GenerationEnvironment environment) {
 
     new AbstractVisitor() {
+      @Override
+      public boolean enterBooleanLiteral(BooleanLiteral booleanLiteral) {
+        sourceBuilder.append("(i32.const " + (booleanLiteral.getValue() ? "1" : "0") + ")");
+        return false;
+      }
+
       @Override
       public boolean enterExpressionWithComment(ExpressionWithComment expressionWithComment) {
         sourceBuilder.append(";; " + expressionWithComment.getComment());
@@ -36,6 +51,20 @@ final class ExpressionTranspiler {
       @Override
       public boolean enterMultiExpression(MultiExpression multiExpression) {
         multiExpression.getExpressions().forEach(this::render);
+        return false;
+      }
+
+      @Override
+      public boolean enterNullLiteral(NullLiteral nullLiteral) {
+        sourceBuilder.append("(ref.null MISSING TYPE)");
+        return false;
+      }
+
+      @Override
+      public boolean enterNumberLiteral(NumberLiteral numberLiteral) {
+        PrimitiveTypeDescriptor typeDescriptor = numberLiteral.getTypeDescriptor();
+        String wasmType = checkNotNull(environment.getWasmType(typeDescriptor));
+        sourceBuilder.append("(" + wasmType + ".const " + numberLiteral.getValue() + ")");
         return false;
       }
 
