@@ -27,28 +27,12 @@ import java.nio.file.attribute.BasicFileAttributeView;
 import java.nio.file.attribute.FileTime;
 import java.util.Collections;
 import java.util.function.Consumer;
-import org.apache.commons.text.StringEscapeUtils;
 
 /**
  * Utility methods to replace calls to Java methods that J2cl does not support, so they can be
  * supersourced when compiling J2CL with J2CL.
  */
 public class J2clUtils {
-
-  /** Escapes a string into a representation suitable for literals. */
-  public static String escapeJavaString(String string) {
-    // NOTE: StringEscapeUtils.escapeJava does not escape unprintable character 127 (delete).
-    return StringEscapeUtils.escapeJava(string).replace("\u007f", "\\u007F");
-  }
-
-  /** Escapes a character into a representation suitable for literals. */
-  public static String escapeJavaChar(char ch) {
-    if (ch == '\'') {
-      // Extra escaping needed since the single quotes is the delimiter.
-      return "\\'";
-    }
-    return escapeJavaString(String.valueOf(ch));
-  }
 
   /** Adapts a method that outputs to a stream to directly return the output as a String. */
   public static String streamToString(Consumer<? super PrintStream> streamOutputer) {

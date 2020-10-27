@@ -15,12 +15,12 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
+import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 
 /** Replaces literals that are required to be emulated. */
@@ -50,7 +50,8 @@ public class NormalizeLiterals extends NormalizationPass {
               }
             } else if (TypeDescriptors.isPrimitiveChar(numberLiteral.getTypeDescriptor())) {
               return numberLiteral.withComment(
-                  "'" + J2clUtils.escapeJavaChar((char) numberLiteral.getValue().intValue()) + "'");
+                  new StringLiteral("" + ((char) numberLiteral.getValue().intValue()))
+                      .getEscapedValue());
             } else {
               return numberLiteral;
             }

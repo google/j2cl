@@ -17,9 +17,9 @@ package com.google.j2cl.transpiler.ast;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
+import org.apache.commons.text.StringEscapeUtils;
 
 /** String literal node. */
 @Visitable
@@ -31,7 +31,12 @@ public class StringLiteral extends Literal {
   }
 
   public String getEscapedValue() {
-    return "\"" + J2clUtils.escapeJavaString(value) + "\"";
+    return "\"" + escapeJavaString(value) + "\"";
+  }
+
+  private static String escapeJavaString(String string) {
+    // NOTE: StringEscapeUtils.escapeJava does not escape unprintable character 127 (delete).
+    return StringEscapeUtils.escapeJava(string).replace("\u007f", "\\u007F");
   }
 
   @Override

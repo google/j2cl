@@ -37,7 +37,7 @@ class CastPrimitives extends j_l_Object {
 
   m_testPrimitiveCasts__() {
     let b = 1;
-    let c = 1 /* '\u0001' */;
+    let c = 1 /* "\u0001" */;
     let s = 1;
     let i = 1;
     let l = $Long.fromInt(1);
@@ -119,7 +119,7 @@ class CastPrimitives extends j_l_Object {
 
   m_testImplicitArgumentCasts__() {
     let b = 127;
-    let c = 65535 /* '\uFFFF' */;
+    let c = 65535 /* "\uFFFF" */;
     let s = 32767;
     let i = 2147483647;
     let l = $Long.fromBits(-1, 2147483647) /* 9223372036854775807 */;
@@ -163,7 +163,7 @@ class CastPrimitives extends j_l_Object {
 
   m_testImplicitLongAssignmentCasts__() {
     let fbyte = 11;
-    let fchar = 12 /* '\f' */;
+    let fchar = 12 /* "\f" */;
     let fshort = 13;
     let fint = 14;
     let flong = $Long.fromInt(15);

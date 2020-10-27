@@ -11,7 +11,7 @@
 [testPrimitiveCasts] => [m_testPrimitiveCasts__]
 [byte b = 1;] => [let b = 1;] "cast.CastPrimitives.testPrimitiveCasts"
 [b] => [b] "b"
-[char c = 1;] => [let c = 1 /* '\u0001' */;] "cast.CastPrimitives.testPrimitiveCasts"
+[char c = 1;] => [let c = 1 /* "\u0001" */;] "cast.CastPrimitives.testPrimitiveCasts"
 [c] => [c] "c"
 [short s = 1;] => [let s = 1;] "cast.CastPrimitives.testPrimitiveCasts"
 [s] => [s] "s"
@@ -107,7 +107,7 @@
 [testImplicitArgumentCasts] => [m_testImplicitArgumentCasts__]
 [final byte b = 127;] => [let b = 127;] "cast.CastPrimitives.testImplicitArgumentCasts"
 [b] => [b] "b"
-[final char c = 65535;] => [let c = 65535 /* '\uFFFF' */;] "cast.CastPrimitives.testImplicitArgumentCasts"
+[final char c = 65535;] => [let c = 65535 /* "\uFFFF" */;] "cast.CastPrimitives.testImplicitArgumentCasts"
 [c] => [c] "c"
 [final short s = 32767;] => [let s = 32767;] "cast.CastPrimitives.testImplicitArgumentCasts"
 [s] => [s] "s"
@@ -151,7 +151,7 @@
 [testImplicitLongAssignmentCasts] => [m_testImplicitLongAssignmentCasts__]
 [byte fbyte = 11;] => [let fbyte = 11;] "cast.CastPrimitives.testImplicitLongAssignmentCasts"
 [fbyte] => [fbyte] "fbyte"
-[char fchar = 12;] => [let fchar = 12 /* '\f' */;] "cast.CastPrimitives.testImplicitLongAssignmentCasts"
+[char fchar = 12;] => [let fchar = 12 /* "\f" */;] "cast.CastPrimitives.testImplicitLongAssignmentCasts"
 [fchar] => [fchar] "fchar"
 [short fshort = 13;] => [let fshort = 13;] "cast.CastPrimitives.testImplicitLongAssignmentCasts"
 [fshort] => [fshort] "fshort"

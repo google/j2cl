@@ -23,7 +23,7 @@ public class CompileTimeConstant {
   public static final int C = A * B;
 
   public static final String D = "Tur\"tle";
-  public static final String E = "Do\"ve";
+  public static final String E = "Do\'ve";
   public static final String F = D + E;
 
   public static final long G = 10000L;
