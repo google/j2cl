@@ -32,7 +32,8 @@ public class CommandLineInvocationTest extends TestCase {
         .setArgs("-help")
         .assertTranspileSucceeds()
         // Just a smoke test to verify that we printing some flags with description
-        .assertOutputStreamContainsSnippets("-classpath", "Specifies where to find");
+        .assertInfoMessagesContainsSnippets("-classpath")
+        .assertInfoMessagesContainsSnippets("Specifies where to find");
   }
 
   public void testInvalidFlag() {

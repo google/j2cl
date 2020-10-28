@@ -19,7 +19,6 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 
 import com.google.common.collect.Lists;
 import com.google.common.io.MoreFiles;
-import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.OutputUtils;
 import com.google.j2cl.common.OutputUtils.Output;
 import com.google.j2cl.common.Problems;
@@ -69,7 +68,7 @@ public final class GwtIncompatibleStripper {
       }
 
       // Write the processed file to output
-      J2clUtils.writeToFile(
+      OutputUtils.writeToFile(
           output.resolve(fileInfo.originalPath()), processedFileContent, problems);
     }
   }

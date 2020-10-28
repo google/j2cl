@@ -13,10 +13,10 @@
  */
 package com.google.j2cl.transpiler;
 
+import static com.google.common.collect.ImmutableList.toImmutableList;
+
 import com.google.common.base.Ascii;
 import com.google.common.base.Splitter;
-import com.google.common.collect.ImmutableList;
-import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.OutputUtils;
 import com.google.j2cl.common.OutputUtils.Output;
 import com.google.j2cl.common.Problems;
@@ -114,24 +114,24 @@ final class BazelJ2clBuilder extends BazelWorker {
     }
 
     List<FileInfo> allSources =
-        SourceUtils.getAllSources(this.sources, problems).collect(ImmutableList.toImmutableList());
+        SourceUtils.getAllSources(this.sources, problems).collect(toImmutableList());
 
     List<FileInfo> allJavaSources =
         allSources.stream()
             .filter(p -> p.sourcePath().endsWith(".java"))
-            .collect(ImmutableList.toImmutableList());
+            .collect(toImmutableList());
 
     List<FileInfo> allNativeSources =
         allSources.stream()
             .filter(p -> p.sourcePath().endsWith(".native.js"))
-            .collect(ImmutableList.toImmutableList());
+            .collect(toImmutableList());
 
     // Directly put all supplied js sources into the zip file.
     allSources.stream()
         .filter(p -> p.sourcePath().endsWith(".js") && !p.sourcePath().endsWith("native.js"))
         .forEach(
             f ->
-                J2clUtils.copyFile(
+                OutputUtils.copyFile(
                     Paths.get(f.sourcePath()), outputPath.resolve(f.targetPath()), problems));
 
     return J2clTranspilerOptions.newBuilder()

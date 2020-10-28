@@ -13,6 +13,10 @@
  */
 package com.google.j2cl.common;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.Option;
@@ -50,7 +54,9 @@ public abstract class CommandLineTool {
 
     if (this.help) {
       String message = "%s\nwhere possible options include:\n%s";
-      problems.info(message, usage, J2clUtils.streamToString(parser::printUsage));
+      ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+      parser.printUsage(new PrintStream(outputStream));
+      problems.info(message, usage, new String(outputStream.toByteArray(), UTF_8));
       return problems;
     }
 

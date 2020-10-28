@@ -17,7 +17,7 @@ package com.google.j2cl.transpiler.backend.wasm;
 
 import static com.google.common.collect.ImmutableMap.toImmutableMap;
 
-import com.google.j2cl.common.J2clUtils;
+import com.google.j2cl.common.OutputUtils;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
@@ -71,7 +71,7 @@ public class WasmModuleGenerator {
         renderType(type);
       }
     }
-    J2clUtils.writeToFile(outputPath.resolve("module.wat"), builder.build(), problems);
+    OutputUtils.writeToFile(outputPath.resolve("module.wat"), builder.build(), problems);
   }
 
   private void renderType(Type type) {

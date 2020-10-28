@@ -15,7 +15,7 @@
  */
 package com.google.j2cl.transpiler.backend.closure;
 
-import com.google.j2cl.common.J2clUtils;
+import com.google.j2cl.common.OutputUtils;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.common.SourcePosition;
@@ -129,7 +129,7 @@ public class OutputGeneratorStage {
                     type.getDeclaration().getSimpleBinaryName() + SOURCE_MAP_SUFFIX);
             Path absolutePathForSourceMap =
                 outputPath.resolve(typeRelativePath + SOURCE_MAP_SUFFIX);
-            J2clUtils.writeToFile(absolutePathForSourceMap, sourceMap, problems);
+            OutputUtils.writeToFile(absolutePathForSourceMap, sourceMap, problems);
           }
         }
 
@@ -143,11 +143,11 @@ public class OutputGeneratorStage {
         }
 
         String implRelativePath = typeRelativePath + jsImplGenerator.getSuffix();
-        J2clUtils.writeToFile(
+        OutputUtils.writeToFile(
             outputPath.resolve(implRelativePath), javaScriptImplementationSource, problems);
 
         String headerRelativePath = typeRelativePath + jsHeaderGenerator.getSuffix();
-        J2clUtils.writeToFile(
+        OutputUtils.writeToFile(
             outputPath.resolve(headerRelativePath), javaScriptHeaderSource, problems);
 
         if (libraryInfoOutputPath != null || shouldGenerateReadableLibraryInfo) {
@@ -169,11 +169,11 @@ public class OutputGeneratorStage {
     }
 
     if (libraryInfoOutputPath != null) {
-      J2clUtils.writeToFile(libraryInfoOutputPath, libraryInfoBuilder.toByteArray(), problems);
+      OutputUtils.writeToFile(libraryInfoOutputPath, libraryInfoBuilder.toByteArray(), problems);
     }
 
     if (shouldGenerateReadableLibraryInfo) {
-      J2clUtils.writeToFile(
+      OutputUtils.writeToFile(
           outputPath.resolve("library_info_debug.json"),
           libraryInfoBuilder.toJson(problems),
           problems);
@@ -245,7 +245,7 @@ public class OutputGeneratorStage {
       Path absolutePathForReadableSourceMap =
           outputPath.resolve(
               getPackageRelativePath(type.getDeclaration()) + READABLE_MAPPINGS_SUFFIX);
-      J2clUtils.writeToFile(absolutePathForReadableSourceMap, readableOutput, problems);
+      OutputUtils.writeToFile(absolutePathForReadableSourceMap, readableOutput, problems);
     }
   }
 
@@ -256,12 +256,12 @@ public class OutputGeneratorStage {
   private void copyJavaSourcesToOutput(CompilationUnit j2clUnit) {
     String relativePath = getPackageRelativePath(j2clUnit);
     Path absolutePath = outputPath.resolve(relativePath + ".java");
-    J2clUtils.copyFile(Paths.get(j2clUnit.getFilePath()), absolutePath, problems);
+    OutputUtils.copyFile(Paths.get(j2clUnit.getFilePath()), absolutePath, problems);
   }
 
   private void copyNativeJsFileToOutput(NativeJavaScriptFile nativeJavaScriptFile) {
     Path absolutePath = outputPath.resolve(nativeJavaScriptFile.getRelativeFilePath());
-    J2clUtils.writeToFile(absolutePath, nativeJavaScriptFile.getContent(), problems);
+    OutputUtils.writeToFile(absolutePath, nativeJavaScriptFile.getContent(), problems);
   }
 
   /** Returns the relative output path for a given type. */

@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.common;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import com.google.common.collect.ImmutableMap;
 import com.google.j2cl.common.Problems.FatalError;
 import java.io.IOException;
@@ -23,6 +25,10 @@ import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+import java.nio.file.attribute.BasicFileAttributeView;
+import java.nio.file.attribute.FileTime;
+import java.util.Collections;
 
 /** Utilities for tools to process output. */
 public class OutputUtils {
@@ -92,6 +98,67 @@ public class OutputUtils {
       problems.fatal(FatalError.CANNOT_CREATE_ZIP, output, e.getMessage());
       return null;
     }
+  }
+
+  public static void writeToFile(Path outputPath, String content, Problems problems) {
+    try {
+      createDirectories(outputPath.getParent());
+      Files.write(outputPath, Collections.singleton(content), UTF_8);
+      // Wipe entries modification time so that input->output mapping is stable
+      // regardless of the time of day.
+      maybeResetAllTimeStamps(outputPath);
+    } catch (IOException e) {
+      problems.fatal(FatalError.CANNOT_WRITE_FILE, e.toString());
+    }
+  }
+
+  public static void writeToFile(Path outputPath, byte[] content, Problems problems) {
+    try {
+      createDirectories(outputPath.getParent());
+      Files.write(outputPath, content);
+      // Wipe entries modification time so that input->output mapping is stable
+      // regardless of the time of day.
+      maybeResetAllTimeStamps(outputPath);
+    } catch (IOException e) {
+      problems.fatal(FatalError.CANNOT_WRITE_FILE, e.toString());
+    }
+  }
+
+  public static void copyFile(Path from, Path to, Problems problems) {
+    try {
+      createDirectories(to.getParent());
+      Files.copy(from, to, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.COPY_ATTRIBUTES);
+      // Wipe entries modification time so that input->output mapping is stable
+      // regardless of the time of day.
+      maybeResetAllTimeStamps(to);
+    } catch (IOException e) {
+      problems.fatal(FatalError.CANNOT_COPY_FILE, e.toString());
+    }
+  }
+
+  private static final boolean DETERMINISTIC_TIMESTAMPS =
+      Boolean.getBoolean("j2cl.deterministicTimestamps");
+
+  private static void createDirectories(Path outputPath) throws IOException {
+    if (!DETERMINISTIC_TIMESTAMPS) {
+      Files.createDirectories(outputPath);
+      return;
+    }
+    // We are creating directories one by one so that we can reset the timestamp for each one.
+    if (outputPath == null || Files.exists(outputPath)) {
+      return;
+    }
+    createDirectories(outputPath.getParent());
+    Files.createDirectory(outputPath);
+    maybeResetAllTimeStamps(outputPath);
+  }
+
+  private static void maybeResetAllTimeStamps(Path path) throws IOException {
+    if (!DETERMINISTIC_TIMESTAMPS) {
+      return;
+    }
+    Files.getFileAttributeView(path, BasicFileAttributeView.class)
+        .setTimes(FileTime.fromMillis(0), FileTime.fromMillis(0), FileTime.fromMillis(0));
   }
 
   private OutputUtils() {}

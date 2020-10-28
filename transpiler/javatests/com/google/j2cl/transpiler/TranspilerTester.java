@@ -16,7 +16,6 @@ package com.google.j2cl.transpiler;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.truth.Truth.assertThat;
-import static com.google.common.truth.Truth.assertWithMessage;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Predicates;
@@ -25,7 +24,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.io.MoreFiles;
 import com.google.common.truth.Correspondence;
-import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.common.Problems;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -317,8 +315,7 @@ public class TranspilerTester {
     }
 
     public TranspileResult assertErrorsWithSourcePosition(String... expectedErrors) {
-      assertThat(getProblems().getErrors())
-          .containsExactlyElementsIn(Arrays.asList(expectedErrors));
+      assertThat(getProblems().getErrors()).containsExactlyElementsIn(expectedErrors);
       return this;
     }
 
@@ -330,17 +327,17 @@ public class TranspilerTester {
     }
 
     public TranspileResult assertErrorsContainsSnippets(String... snippets) {
-      assertThat(getProblems().getErrors())
-          .comparingElementsUsing(Correspondence.from(String::contains, "contained within"))
-          .containsAtLeastElementsIn(Arrays.asList(snippets));
-      return this;
+      return assertContainsSnippets(getProblems().getErrors(), snippets);
     }
 
-    public TranspileResult assertOutputStreamContainsSnippets(String... snippets) {
-      String output =
-          J2clUtils.streamToString(stream -> getProblems().reportAndGetExitCode(stream));
-      Arrays.stream(snippets)
-          .forEach(snippet -> assertWithMessage("Output").that(output).contains(snippet));
+    public TranspileResult assertInfoMessagesContainsSnippets(String... snippets) {
+      return assertContainsSnippets(getProblems().getInfoMessages(), snippets);
+    }
+
+    private TranspileResult assertContainsSnippets(List<String> problems, String... snippets) {
+      assertThat(problems)
+          .comparingElementsUsing(Correspondence.from(String::contains, "contained within"))
+          .containsAtLeastElementsIn(Arrays.asList(snippets));
       return this;
     }
 
