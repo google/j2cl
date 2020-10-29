@@ -34,6 +34,7 @@ def readable_example(
         j2cl_library_tags = [],
         javacopts = [],
         generate_wasm_readables = False,
+        wasm_entry_points = [],
         **kwargs):
     """Macro that confirms the JS compilability of some transpiled Java.
 
@@ -85,4 +86,5 @@ def readable_example(
         j2wasm_application(
             name = "readable_wasm",
             deps = [":readable-j2wasm"],
+            entry_points = wasm_entry_points,
         )

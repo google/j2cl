@@ -82,6 +82,7 @@ class J2clTranspiler {
             options.getEmitReadableLibraryInfo(),
             options.getEmitReadableSourceMap(),
             options.getGenerateKytheIndexingMetadata(),
+            options.getWasmEntryPoints(),
             problems);
   }
 

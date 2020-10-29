@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.backend;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourceUtils.FileInfo;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
@@ -106,6 +107,7 @@ public enum Backend {
         boolean emitReadableLibraryInfo,
         boolean emitReadableSourceMap,
         boolean generateKytheIndexingMetadata,
+        ImmutableSet<String> entryPoints,
         Problems problems) {
 
       new OutputGeneratorStage(
@@ -247,8 +249,9 @@ public enum Backend {
         boolean emitReadableLibraryInfo,
         boolean emitReadableSourceMap,
         boolean generateKytheIndexingMetadata,
+        ImmutableSet<String> entryPoints,
         Problems problems) {
-      new WasmModuleGenerator(output, problems).generateOutputs(j2clUnits);
+      new WasmModuleGenerator(output, entryPoints, problems).generateOutputs(j2clUnits);
     }
 
     @Override
@@ -267,5 +270,6 @@ public enum Backend {
       boolean emitReadableLibraryInfo,
       boolean emitReadableSourceMap,
       boolean generateKytheIndexingMetadata,
+      ImmutableSet<String> entryPoints,
       Problems problems);
 }

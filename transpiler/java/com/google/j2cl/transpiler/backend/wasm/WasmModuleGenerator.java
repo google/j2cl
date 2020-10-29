@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.backend.wasm;
 
 import static com.google.common.collect.ImmutableMap.toImmutableMap;
 
+import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.common.OutputUtils;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
@@ -32,14 +33,17 @@ import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Function;
 
 /** Generates a WASM module containing all the code for the application. */
 public class WasmModuleGenerator {
   private final Problems problems;
   private final Path outputPath;
+  private final Set<String> pendingEntryPoints;
   private final SourceBuilder builder = new SourceBuilder();
   private final GenerationEnvironment environment = new GenerationEnvironment();
   /**
@@ -48,8 +52,9 @@ public class WasmModuleGenerator {
    */
   private Map<TypeDeclaration, Type> typesByTypeDeclaration;
 
-  public WasmModuleGenerator(Path outputPath, Problems problems) {
+  public WasmModuleGenerator(Path outputPath, ImmutableSet<String> entryPoints, Problems problems) {
     this.outputPath = outputPath;
+    this.pendingEntryPoints = new HashSet<>(entryPoints);
     this.problems = problems;
   }
 
@@ -72,6 +77,9 @@ public class WasmModuleGenerator {
       }
     }
     OutputUtils.writeToFile(outputPath.resolve("module.wat"), builder.build(), problems);
+    if (!pendingEntryPoints.isEmpty()) {
+      problems.error("Entry points %s not found.", pendingEntryPoints);
+    }
   }
 
   private void renderType(Type type) {
@@ -111,6 +119,14 @@ public class WasmModuleGenerator {
     builder.append(";;; " + method.getReadableDescription());
     builder.newLine();
     builder.append("(func " + environment.getMethodImplementationName(method));
+
+    if (pendingEntryPoints.remove(method.getQualifiedBinaryName())) {
+      if (!method.isStatic()) {
+        problems.error("Entry point [%s] is not a static method.", method.getQualifiedBinaryName());
+      }
+      builder.append(" (export \"" + method.getDescriptor().getName() + "\")");
+    }
+
     // Emit parameters
     builder.indent();
     for (Variable parameter : method.getParameters()) {

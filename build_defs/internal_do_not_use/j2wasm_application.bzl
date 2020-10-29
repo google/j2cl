@@ -16,6 +16,7 @@ def _impl_j2wasm_application(ctx):
     args.add_joined("-classpath", classpath, join_with = ctx.configuration.host_path_separator)
     args.add("-output", ctx.outputs.zip)
     args.add("-experimentalBackend", "WASM")
+    args.add_all(ctx.attr.entry_points, before_each = "-experimentalGenerateWasmExport")
 
     args.add_all(srcs)
 
@@ -40,6 +41,7 @@ j2wasm_application = rule(
     implementation = _impl_j2wasm_application,
     attrs = {
         "deps": attr.label_list(providers = [J2wasmInfo]),
+        "entry_points": attr.string_list(),
         "_j2cl_transpiler": attr.label(
             default = Label(
                 "//build_defs/internal_do_not_use:BazelJ2clBuilder",

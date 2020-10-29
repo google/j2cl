@@ -17,6 +17,7 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.base.Ascii;
 import com.google.common.base.Splitter;
+import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.common.OutputUtils;
 import com.google.j2cl.common.OutputUtils.Output;
 import com.google.j2cl.common.Problems;
@@ -94,6 +95,9 @@ final class BazelJ2clBuilder extends BazelWorker {
       hidden = true)
   protected Backend backend = Backend.CLOSURE;
 
+  @Option(name = "-experimentalGenerateWasmExport", hidden = true)
+  protected List<String> wasmEntryPoints = new ArrayList<>();
+
   @Override
   protected void run(Problems problems) {
     try (Output out = OutputUtils.initOutput(this.output, problems)) {
@@ -146,6 +150,7 @@ final class BazelJ2clBuilder extends BazelWorker {
         .setExperimentalOptimizeAutovalue(this.experimentalOptimizeAutovalue)
         .setFrontend(FRONTEND)
         .setBackend(this.backend)
+        .setWasmEntryPoints(ImmutableSet.copyOf(wasmEntryPoints))
         .build();
   }
 
