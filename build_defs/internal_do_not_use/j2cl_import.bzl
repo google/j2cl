@@ -23,6 +23,8 @@ j2cl_library(
 """
 
 load(":j2cl_java_library.bzl", "j2cl_java_import")
+load(":j2wasm_import.bzl", "j2wasm_import")
+load(":j2wasm_library.bzl", "to_j2wasm_name")
 
 def j2cl_import(
         name,
@@ -40,4 +42,14 @@ def j2cl_import(
         jar = jar,
         visibility = visibility,
         **kwargs
+    )
+
+    j2wasm_args = dict(kwargs)
+    j2wasm_args["tags"] = (j2wasm_args.get("tags") or []) + ["manual", "notap"]
+
+    j2wasm_import(
+        name = to_j2wasm_name(name),
+        jar = jar,
+        visibility = visibility,
+        **j2wasm_args
     )

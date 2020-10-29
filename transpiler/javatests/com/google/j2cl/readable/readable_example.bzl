@@ -18,7 +18,6 @@ load(
     "J2CL_OPTIMIZED_DEFS",
     "j2cl_library",
     "j2wasm_application",
-    "j2wasm_library",
 )
 load("@bazel_skylib//rules:build_test.bzl", "build_test")
 
@@ -83,15 +82,7 @@ def readable_example(
     )
 
     if generate_wasm_readables:
-        # TODO(dramaix): remove this when j2cl_library automatically generates
-        # j2wasm_library
-        j2wasm_library(
-            name = "readable-wasm-lib",
-            srcs = srcs,
-            deps = deps,
-        )
-
         j2wasm_application(
             name = "readable_wasm",
-            deps = [":readable-wasm-lib"],
+            deps = [":readable-j2wasm"],
         )

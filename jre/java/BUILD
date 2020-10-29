@@ -2,7 +2,7 @@
 #   j2cl/jre: JRE subset for transpilation.
 #
 
-load("//build_defs:rules.bzl", "j2cl_library")
+load("//build_defs:rules.bzl", "j2cl_library", "j2wasm_library")
 load("@bazel_tools//tools/jdk:default_java_toolchain.bzl", "default_java_toolchain")
 load(":package_sources.bzl", "package_sources")
 load(":jdk_system.bzl", "jdk_system")
@@ -11,7 +11,7 @@ package(
     default_visibility = [
         "//:__pkg__",
         "//jre/javatests:__pkg__",
-        "//transpiler/javatests/com/google/j2cl/transpiler:__subpackages__",
+        "//transpiler/javatests:__subpackages__",
     ],
     licenses = ["notice"],  # Apache 2.0
 )
@@ -65,6 +65,18 @@ filegroup(
     name = "jre_native_files",
     srcs = glob(["**/*.js"]) + [
         "//jre/java/javaemul/internal/vmbootstrap/primitives",
+    ],
+)
+
+j2wasm_library(
+    name = "jre-j2wasm",
+    srcs = [
+        ":jre_java_files",
+    ],
+    javacopts = JRE_JAVAC_OPTS,
+    deps = [
+        "//third_party:gwt-javaemul-internal-annotations-j2wasm",
+        "//third_party:gwt-jsinterop-annotations-j2wasm",
     ],
 )
 

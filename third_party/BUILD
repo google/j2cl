@@ -183,6 +183,11 @@ alias(
     actual = "@com_google_jsinterop_annotations-j2cl//:jsinterop-annotations-j2cl",
 )
 
+alias(
+    name = "gwt-jsinterop-annotations-j2wasm",
+    actual = "@com_google_jsinterop_annotations-j2cl//:jsinterop-annotations-j2wasm",
+)
+
 j2cl_library(
     name = "jbox2d",
     srcs = ["@org_jbox2d//:j2cl_sources"],
