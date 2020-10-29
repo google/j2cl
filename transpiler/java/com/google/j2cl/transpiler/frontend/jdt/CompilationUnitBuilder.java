@@ -65,7 +65,6 @@ import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.NewArray;
 import com.google.j2cl.transpiler.ast.NewInstance;
-import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PostfixExpression;
 import com.google.j2cl.transpiler.ast.PostfixOperator;
@@ -404,10 +403,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
       List<Expression> dimensionExpressions =
           convertExpressions(JdtUtils.asTypedList(expression.dimensions()));
-      // If some dimensions are not initialized then make that explicit.
-      while (dimensionExpressions.size() < arrayType.getDimensions()) {
-        dimensionExpressions.add(NullLiteral.get());
-      }
+      // Pad the dimension expressions with null values to denote omitted dimensions.
+      AstUtils.addNullPadding(dimensionExpressions, arrayType.getDimensions());
 
       ArrayLiteral arrayLiteral =
           expression.getInitializer() == null ? null : convert(expression.getInitializer());
@@ -604,7 +601,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         case ASTNode.METHOD_INVOCATION:
           return convert((org.eclipse.jdt.core.dom.MethodInvocation) expression);
         case ASTNode.NULL_LITERAL:
-          return NullLiteral.get();
+          return JdtUtils.createTypeDescriptor(expression.resolveTypeBinding()).getNullValue();
         case ASTNode.NUMBER_LITERAL:
           return convert((org.eclipse.jdt.core.dom.NumberLiteral) expression);
         case ASTNode.PARENTHESIZED_EXPRESSION:

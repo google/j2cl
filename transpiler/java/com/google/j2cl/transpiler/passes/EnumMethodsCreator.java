@@ -32,7 +32,6 @@ import com.google.j2cl.transpiler.ast.IfStatement;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
-import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.Statement;
@@ -82,7 +81,7 @@ public class EnumMethodsCreator extends NormalizationPass {
         getNamesToValuesMapFieldDescriptor(typeDescriptor);
     enumType.addField(
         Field.Builder.from(namesToValuesMapFieldDescriptor)
-            .setInitializer(NullLiteral.get())
+            .setInitializer(namesToValuesMapFieldDescriptor.getTypeDescriptor().getNullValue())
             .setSourcePosition(enumType.getSourcePosition())
             .build());
 
@@ -98,9 +97,7 @@ public class EnumMethodsCreator extends NormalizationPass {
         IfStatement.newBuilder()
             .setSourcePosition(sourcePosition)
             .setConditionExpression(
-                FieldAccess.Builder.from(namesToValuesMapFieldDescriptor)
-                    .build()
-                    .infixEquals(NullLiteral.get()))
+                FieldAccess.Builder.from(namesToValuesMapFieldDescriptor).build().infixEqualsNull())
             .setThenStatement(
                 Block.newBuilder()
                     .setSourcePosition(sourcePosition)

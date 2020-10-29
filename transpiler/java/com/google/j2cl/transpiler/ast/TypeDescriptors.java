@@ -64,8 +64,6 @@ public class TypeDescriptors {
 
   public ArrayTypeDescriptor javaLangObjectArray;
 
-  public NullType nullType;
-
   // Common browser native types.
   public final DeclaredTypeDescriptor nativeFunction = createGlobalNativeTypeDescriptor("Function");
   public final DeclaredTypeDescriptor nativeObject = createGlobalNativeTypeDescriptor("Object");
@@ -429,7 +427,6 @@ public class TypeDescriptors {
           ArrayTypeDescriptor.newBuilder()
               .setComponentTypeDescriptor(typeDescriptors.javaLangObject)
               .build();
-      typeDescriptors.nullType = new NullType();
     }
 
     public SingletonBuilder addPrimitiveBoxedTypeDescriptorPair(

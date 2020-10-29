@@ -26,7 +26,6 @@ import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.IfStatement;
 import com.google.j2cl.transpiler.ast.MethodCall;
-import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.ThrowStatement;
@@ -125,7 +124,7 @@ public class NormalizeTryWithResources extends NormalizationPass {
     List<Statement> transformedStatements = new ArrayList<>();
     transformedStatements.add(
         VariableDeclarationExpression.newBuilder()
-            .addVariableDeclaration(primaryException, NullLiteral.get())
+            .addVariableDeclarations(primaryException)
             .build()
             // TODO(b/65465035): this should be the source position for the variable declaration,
             // but it is not currently available.
@@ -139,7 +138,7 @@ public class NormalizeTryWithResources extends NormalizationPass {
       VariableDeclarationFragment originalResourceDeclaration = declaration.getFragments().get(0);
       transformedStatements.add(
           VariableDeclarationExpression.newBuilder()
-              .addVariableDeclaration(originalResourceDeclaration.getVariable(), NullLiteral.get())
+              .addVariableDeclarations(originalResourceDeclaration.getVariable())
               .build()
               .makeStatement(sourcePosition));
 
@@ -183,8 +182,7 @@ public class NormalizeTryWithResources extends NormalizationPass {
 
     ThrowStatement throwPrimaryException =
         new ThrowStatement(sourcePosition, primaryException.getReference());
-    Expression primaryExceptionNotEqualsNull =
-        primaryException.getReference().infixNotEquals(NullLiteral.get());
+    Expression primaryExceptionNotEqualsNull = primaryException.getReference().infixNotEqualsNull();
     IfStatement primaryExceptionNullStatement =
         IfStatement.newBuilder()
             .setSourcePosition(sourcePosition)

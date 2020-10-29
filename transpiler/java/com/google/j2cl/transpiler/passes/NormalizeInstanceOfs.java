@@ -28,7 +28,6 @@ import com.google.j2cl.transpiler.ast.JsInfo;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.Node;
-import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
@@ -47,7 +46,7 @@ public class NormalizeInstanceOfs extends NormalizationPass {
             Expression subject = expression.getExpression();
             // Replace trivial instanceof expression with a null check.
             if (subject.getTypeDescriptor().isAssignableTo(expression.getTestTypeDescriptor())) {
-              return subject.infixNotEquals(NullLiteral.get());
+              return subject.infixNotEqualsNull();
             }
 
             if (expression.getTestTypeDescriptor().isArray()) {

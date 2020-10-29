@@ -40,7 +40,6 @@ import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MultiExpression;
 import com.google.j2cl.transpiler.ast.NewArray;
 import com.google.j2cl.transpiler.ast.NewInstance;
-import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.Statement;
@@ -54,7 +53,6 @@ import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.List;
@@ -328,7 +326,7 @@ public abstract class AbstractCompilationUnitBuilder {
     ImmutableList<Expression> dimensionExpressions =
         ImmutableList.<Expression>builder()
             .add(parameter.getReference())
-            .addAll(Collections.nCopies(arrayType.getDimensions() - 1, NullLiteral.get()))
+            .addAll(AstUtils.createListOfNullValues(arrayType.getDimensions() - 1))
             .build();
 
     return FunctionExpression.newBuilder()

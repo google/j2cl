@@ -22,21 +22,24 @@ import com.google.j2cl.common.visitor.Visitable;
 @Visitable
 public class NullLiteral extends Literal {
 
-  private static final ThreadLocal<NullLiteral> NULL_INSTANCE =
-      ThreadLocal.withInitial(() -> new NullLiteral());
-
-  public static NullLiteral get() {
-    return NULL_INSTANCE.get();
+  static NullLiteral get(TypeDescriptor typeDescriptor) {
+    return new NullLiteral(typeDescriptor);
   }
+
+  private NullLiteral(TypeDescriptor typeDescriptor) {
+    this.typeDescriptor = typeDescriptor;
+  }
+
+  private final TypeDescriptor typeDescriptor;
 
   @Override
   public TypeDescriptor getTypeDescriptor() {
-    return TypeDescriptors.get().nullType;
+    return typeDescriptor;
   }
 
   @Override
   public NullLiteral clone() {
-    // Null literal is a singleton, no need to clone.
+    // Null literals are value types do not need to actually clone.
     return this;
   }
 
@@ -44,6 +47,4 @@ public class NullLiteral extends Literal {
   public Node accept(Processor processor) {
     return Visitor_NullLiteral.visit(processor, this);
   }
-
-  private NullLiteral() {}
 }

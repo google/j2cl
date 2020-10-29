@@ -97,22 +97,22 @@
         ClosableThing thing2 = new ClosableThing()) {
 ...      // expected empty body.
     }] => [try {
-   let $primaryExc = null;
+   let /** Throwable */ $primaryExc;
 ...   }
   }] "trycatch.TryCatch.testTryWithResource"
 [try (ClosableThing thing = new ClosableThing();
         ClosableThing thing2 = new ClosableThing()) {
 ...      // expected empty body.
-    }] => [let $primaryExc = null;] "trycatch.TryCatch.testTryWithResource"
+    }] => [let /** Throwable */ $primaryExc;] "trycatch.TryCatch.testTryWithResource"
 [try (ClosableThing thing = new ClosableThing();
         ClosableThing thing2 = new ClosableThing()) {
 ...      // expected empty body.
-    }] => [let thing = null;] "trycatch.TryCatch.testTryWithResource"
+    }] => [let /** ClosableThing */ thing;] "trycatch.TryCatch.testTryWithResource"
 [thing] => [thing] "thing"
 [try (ClosableThing thing = new ClosableThing();
         ClosableThing thing2 = new ClosableThing()) {
 ...      // expected empty body.
-    }] => [let thing2 = null;] "trycatch.TryCatch.testTryWithResource"
+    }] => [let /** ClosableThing */ thing2;] "trycatch.TryCatch.testTryWithResource"
 [thing2] => [thing2] "thing2"
 [try (ClosableThing thing = new ClosableThing();
         ClosableThing thing2 = new ClosableThing()) {
@@ -184,21 +184,21 @@
       throw new Exception();
 ...      // expected empty body.
     }] => [try {
-   let $primaryExc = null;
+   let /** Throwable */ $primaryExc;
 ...   }
   }] "trycatch.TryCatch.testTryWithResourceJava9"
 [try (thing; thing2) {
       throw new Exception();
 ...      // expected empty body.
-    }] => [let $primaryExc = null;] "trycatch.TryCatch.testTryWithResourceJava9"
+    }] => [let /** Throwable */ $primaryExc;] "trycatch.TryCatch.testTryWithResourceJava9"
 [try (thing; thing2) {
       throw new Exception();
 ...      // expected empty body.
-    }] => [let $resource = null;] "trycatch.TryCatch.testTryWithResourceJava9"
+    }] => [let /** ClosableThing */ $resource;] "trycatch.TryCatch.testTryWithResourceJava9"
 [try (thing; thing2) {
       throw new Exception();
 ...      // expected empty body.
-    }] => [let $resource_1 = null;] "trycatch.TryCatch.testTryWithResourceJava9"
+    }] => [let /** ClosableThing */ $resource_1;] "trycatch.TryCatch.testTryWithResourceJava9"
 [try (thing; thing2) {
       throw new Exception();
 ...      // expected empty body.

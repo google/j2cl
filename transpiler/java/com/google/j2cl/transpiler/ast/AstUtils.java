@@ -30,6 +30,7 @@ import com.google.j2cl.transpiler.ast.MethodDescriptor.MethodOrigin;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -971,7 +972,7 @@ public class AstUtils {
     ParameterDescriptor lastParameter =
         methodDescriptor.getParameterDescriptors().get(parametersLength - 1);
 
-    return lastArgument != NullLiteral.get()
+    return !(lastArgument instanceof NullLiteral)
         && !lastArgument.getTypeDescriptor().isAssignableTo(lastParameter.getTypeDescriptor());
   }
 
@@ -1093,5 +1094,17 @@ public class AstUtils {
   public static boolean isNonNativeJsEnumArray(TypeDescriptor typeDescriptor) {
     return typeDescriptor.isArray()
         && isNonNativeJsEnum(((ArrayTypeDescriptor) typeDescriptor).getLeafTypeDescriptor());
+  }
+
+  /** Retuns a list of null values. */
+  public static List<Expression> createListOfNullValues(int size) {
+    return Collections.nCopies(size, TypeDescriptors.get().javaLangObject.getNullValue());
+  }
+
+  /** Pads the expression list with null literals to the requested {@code size}. */
+  public static void addNullPadding(List<Expression> expressionList, int size) {
+    while (expressionList.size() < size) {
+      expressionList.add(TypeDescriptors.get().javaLangObject.getNullValue());
+    }
   }
 }

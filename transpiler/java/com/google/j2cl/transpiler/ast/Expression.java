@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.ast;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkState;
 
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.visitor.Processor;
@@ -141,6 +142,18 @@ public abstract class Expression extends Node implements Cloneable<Expression> {
   /** Return an expression representing {@code this != rhs}. */
   public Expression infixNotEquals(Expression rhs) {
     return infix(BinaryOperator.NOT_EQUALS, this, rhs);
+  }
+
+  /** Return an expression representing {@code this == null}. */
+  public Expression infixEqualsNull() {
+    checkState(!getTypeDescriptor().isPrimitive());
+    return infix(BinaryOperator.EQUALS, this, getTypeDescriptor().getNullValue());
+  }
+
+  /** Return an expression representing {@code this != null}. */
+  public Expression infixNotEqualsNull() {
+    checkState(!getTypeDescriptor().isPrimitive());
+    return infix(BinaryOperator.NOT_EQUALS, this, getTypeDescriptor().getNullValue());
   }
 
   private static Expression infix(BinaryOperator operator, Expression lhs, Expression rhs) {

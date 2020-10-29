@@ -78,7 +78,7 @@ public class NormalizeFieldInitialization extends NormalizationPass {
             ? field.getInitializer()
             : field.getDescriptor().getTypeDescriptor().getDefaultValue();
 
-    if (declarationValue == NullLiteral.get()) {
+    if (declarationValue instanceof NullLiteral) {
       // Skip initialization for fields that are initialized with null as an optimization.
       declarationValue = null;
     }

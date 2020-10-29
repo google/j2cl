@@ -32,7 +32,6 @@ import com.google.j2cl.transpiler.ast.JsDocCastExpression;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
-import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
@@ -169,7 +168,7 @@ public class ImplementInstanceOfs extends NormalizationPass {
     // instance != null && !!instance.$implements_Interface.
     return instance
         .getReference()
-        .infixNotEquals(NullLiteral.get())
+        .infixNotEqualsNull()
         .infixAnd(
             FieldAccess.Builder.from(type.getTypeDescriptor().getIsInstanceMarkerField())
                 .setQualifier(instance.getReference())

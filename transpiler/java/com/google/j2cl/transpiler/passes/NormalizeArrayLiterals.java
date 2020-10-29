@@ -18,11 +18,10 @@ package com.google.j2cl.transpiler.passes;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
+import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.NewArray;
 import com.google.j2cl.transpiler.ast.Node;
-import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.Type;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -59,8 +58,8 @@ public class NormalizeArrayLiterals extends NormalizationPass {
             return NewArray.newBuilder()
                 .setTypeDescriptor(arrayLiteral.getTypeDescriptor())
                 .setDimensionExpressions(
-                    Collections.nCopies(
-                        arrayLiteral.getTypeDescriptor().getDimensions(), NullLiteral.get()))
+                    AstUtils.createListOfNullValues(
+                        arrayLiteral.getTypeDescriptor().getDimensions()))
                 .setArrayLiteral(arrayLiteral)
                 .build();
           }

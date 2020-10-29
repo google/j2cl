@@ -31,6 +31,7 @@ import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MultiExpression;
 import com.google.j2cl.transpiler.ast.Node;
+import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
@@ -71,10 +72,11 @@ public class NormalizeCasts extends NormalizationPass {
 
   private static boolean canRemoveCast(TypeDescriptor castTypeDescriptor, Expression expression) {
     boolean isStaticallyGuaranteedToHoldAtRuntime =
-        expression
-            .getDeclaredTypeDescriptor()
-            .toRawTypeDescriptor()
-            .isAssignableTo(castTypeDescriptor);
+        expression instanceof NullLiteral
+            || expression
+                .getDeclaredTypeDescriptor()
+                .toRawTypeDescriptor()
+                .isAssignableTo(castTypeDescriptor);
     return castTypeDescriptor.isNoopCast()
         || isStaticallyGuaranteedToHoldAtRuntime
         || isRedundantCast(castTypeDescriptor, expression);

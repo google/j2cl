@@ -30,10 +30,10 @@ import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.ExpressionStatement;
 import com.google.j2cl.transpiler.ast.ForStatement;
 import com.google.j2cl.transpiler.ast.MultiExpression;
-import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.SwitchCase;
 import com.google.j2cl.transpiler.ast.SwitchStatement;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
@@ -183,9 +183,7 @@ public class MoveVariableDeclarationsToEnclosingBlock extends NormalizationPass 
               return variableDeclarationExpression;
             }
             List<Expression> assignments =
-                variableDeclarationExpression
-                    .getFragments()
-                    .stream()
+                variableDeclarationExpression.getFragments().stream()
                     .filter(fragment -> fragment.getInitializer() != null)
                     .map(
                         fragment ->
@@ -195,7 +193,7 @@ public class MoveVariableDeclarationsToEnclosingBlock extends NormalizationPass 
                     .collect(toImmutableList());
 
             if (assignments.isEmpty()) {
-              return NullLiteral.get();
+              return TypeDescriptors.get().javaLangObject.getNullValue();
             }
             return MultiExpression.newBuilder().addExpressions(assignments).build();
           }

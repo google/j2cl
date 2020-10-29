@@ -59,7 +59,6 @@ import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.NewArray;
 import com.google.j2cl.transpiler.ast.NewInstance;
-import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PostfixExpression;
 import com.google.j2cl.transpiler.ast.PostfixOperator;
@@ -1063,10 +1062,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         environment.createTypeDescriptor(expression.type, ArrayTypeDescriptor.class);
 
     List<Expression> dimensionExpressions = convertExpressions(expression.getDimensions());
-    // If some dimensions are not initialized then make that explicit.
-    while (dimensionExpressions.size() < typeDescriptor.getDimensions()) {
-      dimensionExpressions.add(NullLiteral.get());
-    }
+    // Pad the dimension expressions with null values to denote omitted dimensions.
+    AstUtils.addNullPadding(dimensionExpressions, typeDescriptor.getDimensions());
 
     ArrayLiteral arrayLiteral =
         expression.getInitializers() == null
@@ -1340,7 +1337,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           environment.createDeclarationForType((ClassSymbol) identifier.sym));
     }
     if (symbol instanceof MethodSymbol) {
-      return NullLiteral.get().withComment(identifier.toString());
+      throw new AssertionError("Unexpected symbol class: " + symbol.getClass());
     }
 
     VarSymbol varSymbol = (VarSymbol) symbol;
@@ -1461,8 +1458,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       case STRING_LITERAL:
         return convertStringLiteral((JCLiteral) jcExpression);
       case NULL_LITERAL:
-        return NullLiteral.get();
-
+        return environment.createTypeDescriptor(jcExpression.type).getNullValue();
       case AND:
       case CONDITIONAL_AND:
       case CONDITIONAL_OR:

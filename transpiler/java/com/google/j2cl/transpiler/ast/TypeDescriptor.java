@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.ast;
 
+import static com.google.common.base.Preconditions.checkState;
+
 import com.google.common.collect.ImmutableSet;
 import java.util.Map;
 import java.util.Set;
@@ -140,7 +142,13 @@ public abstract class TypeDescriptor implements Comparable<TypeDescriptor>, HasR
 
   /** Returns the value for uninitialized expression of this type. */
   public Expression getDefaultValue() {
-    return NullLiteral.get();
+    return getNullValue();
+  }
+
+  /** Returns a null literal value with this specific type. */
+  public Expression getNullValue() {
+    checkState(!isPrimitive());
+    return NullLiteral.get(this);
   }
 
   /** Return whether this type is nullable or not. */
