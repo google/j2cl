@@ -1,23 +1,25 @@
 Integration tests size report:
 **************************************
-There are 4 optimized size changes.
+There are 8 optimized size changes.
 Total optimized size (of already existing tests) changed from
-  2072966 to 2072680 bytes (100%->100.0%) and from
-  723565 to 723523 bytes (100%->100.0%) gzipped.
+  2072680 to 2072698 bytes (100%->100.0%) and from
+  723523 to 723585 bytes (100%->100.0%) gzipped.
 
 
 Shrinkage report highlights:
 **************************************
         old      new
-       4043     4009 trywithresource (-0.8%)
-       3280     3264 trywithresource.esnext (-0.5%)
+      14204    14187 jsinteroptests (-0.1%)
+       3650     3648 loggingstripped.esnext (-0.1%)
 
 
 Expansion report highlights:
 **************************************
         old      new
-       3347     3352 instanceofs.esnext (0.1%)
-       3757     3760 instanceofs (0.1%)
+       1032     1040 jsbridgemethodaccidentaloverride.esnext (0.8%)
+       1261     1269 jsbridgemethodaccidentaloverride (0.6%)
+       4763     4792 logging (0.6%)
+       4034     4046 loggingstripped (0.3%)
 
 
 Incremental size reports (non-gzip):
@@ -30,12 +32,12 @@ Incremental size reports (non-gzip):
 Uncompiled bundle reports:
 **************************************
         old      new
-    4028055  4028055 box2d_default (unchanged)
-    2198367  2198367 box2d_default.minified (unchanged)
-    1171061  1171061 box2d_default.rta (unchanged)
-    2425249  2425249 emptyclass (unchanged)
-    1456365  1456365 emptyclass.minified (unchanged)
-     705611   705611 emptyclass.rta (unchanged)
+    4027286  4027286 box2d_default (unchanged)
+    2197598  2197598 box2d_default.minified (unchanged)
+    1170292  1170292 box2d_default.rta (unchanged)
+    2424480  2424480 emptyclass (unchanged)
+    1455596  1455596 emptyclass.minified (unchanged)
+     704842   704842 emptyclass.rta (unchanged)
 
 
 All reports:
@@ -197,8 +199,8 @@ All reports:
        1741     1741 instanceinnerclass.esnext (unchanged)
        1205     1205 instancejsmethods (unchanged)
         870      870 instancejsmethods.esnext (unchanged)
-       3757     3760 instanceofs (0.1%)
-       3347     3352 instanceofs.esnext (0.1%)
+       3760     3760 instanceofs (unchanged)
+       3352     3352 instanceofs.esnext (unchanged)
        1115     1115 instancequalifieronstaticfield (unchanged)
         837      837 instancequalifieronstaticfield.esnext (unchanged)
          22       22 interfaceabstractimpl (unchanged)
@@ -217,8 +219,8 @@ All reports:
        1078     1078 jsasync.esnext (unchanged)
          22       22 jsbridgebackward (unchanged)
          22       22 jsbridgebackward.esnext (unchanged)
-       1261     1261 jsbridgemethodaccidentaloverride (unchanged)
-       1032     1032 jsbridgemethodaccidentaloverride.esnext (unchanged)
+       1261     1269 jsbridgemethodaccidentaloverride (0.6%)
+       1032     1040 jsbridgemethodaccidentaloverride.esnext (0.8%)
          22       22 jsbridgemultipleaccidental (unchanged)
          22       22 jsbridgemultipleaccidental.esnext (unchanged)
        1010     1010 jsbridgemultipleexposing (unchanged)
@@ -239,8 +241,8 @@ All reports:
        1458     1458 jsfunctiontypeannotation.esnext (unchanged)
         966      966 jsinnerclass (unchanged)
         672      672 jsinnerclass.esnext (unchanged)
-      14204    14204 jsinteroptests (unchanged)
-      12511    12511 jsinteroptests.esnext (unchanged)
+      14204    14187 jsinteroptests (-0.1%)
+      12511    12526 jsinteroptests.esnext (0.1%)
         973      973 jsmethodoverride (unchanged)
         676      676 jsmethodoverride.esnext (unchanged)
        1154     1154 jsoverlay (unchanged)
@@ -259,10 +261,10 @@ All reports:
        1907     1907 lambdas.esnext (unchanged)
         984      984 localgenericclassinitjustonce (unchanged)
         708      708 localgenericclassinitjustonce.esnext (unchanged)
-       4763     4763 logging (unchanged)
-       4350     4350 logging.esnext (unchanged)
-       4034     4034 loggingstripped (unchanged)
-       3650     3650 loggingstripped.esnext (unchanged)
+       4763     4792 logging (0.6%)
+       4350     4359 logging.esnext (0.2%)
+       4034     4046 loggingstripped (0.3%)
+       3650     3648 loggingstripped.esnext (-0.1%)
        2755     2755 longimplicitcasts (unchanged)
        2501     2501 longimplicitcasts.esnext (unchanged)
        2531     2531 longoperationsinglesideeffect (unchanged)
@@ -395,8 +397,8 @@ All reports:
          22       22 systemgetproperty.esnext (unchanged)
        1037     1037 ternaryexpression (unchanged)
         746      746 ternaryexpression.esnext (unchanged)
-       4043     4009 trywithresource (-0.8%)
-       3280     3264 trywithresource.esnext (-0.5%)
+       4009     4009 trywithresource (unchanged)
+       3264     3264 trywithresource.esnext (unchanged)
        1042     1042 typewildcards (unchanged)
         756      756 typewildcards.esnext (unchanged)
        1142     1142 unaryexpressions (unchanged)
