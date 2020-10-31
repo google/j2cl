@@ -91,7 +91,7 @@ def _to_j2wasm_target(label):
     return label.relative(":%s" % to_j2wasm_name(label.name))
 
 def _absolute_label(label):
-    if label.startswith("//"):
+    if label.startswith("//") or label.startswith("@"):
         if ":" in label:
             return label
         return "%s:%s" % (label, label.rsplit("/", 1)[-1])
