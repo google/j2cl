@@ -46,16 +46,3 @@ javaemul_internal_JsUtils.m_getProperty__java_lang_Object__java_lang_String =
   javaemul_internal_JsUtils.$clinit();
   return map[key];
 };
-
-/**
- * @param {*} map
- * @param {string} key
- * @param {*} value
- * @return {*}
- */
-javaemul_internal_JsUtils
-    .m_setProperty__java_lang_Object__java_lang_String__java_lang_Object =
-    function(map, key, value) {
-  javaemul_internal_JsUtils.$clinit();
-  map[key] = value;
-};
