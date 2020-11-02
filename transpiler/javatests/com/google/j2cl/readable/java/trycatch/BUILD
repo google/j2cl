@@ -10,6 +10,7 @@ package(
 # Creates verification target
 readable_example(
     srcs = glob(["*.java"]),
+    generate_wasm_readables = True,
     # TODO(b/118184493): remove when Java 9 language support is enabled.
     j2cl_library_tags = ["manual"],
 )

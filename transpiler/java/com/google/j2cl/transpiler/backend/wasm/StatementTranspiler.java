@@ -20,6 +20,7 @@ import com.google.j2cl.transpiler.ast.Block;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.ExpressionStatement;
 import com.google.j2cl.transpiler.ast.Statement;
+import com.google.j2cl.transpiler.ast.ThrowStatement;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
 import java.util.Collection;
@@ -85,6 +86,17 @@ class StatementTranspiler {
           // Remove the result of the expression from the stack.
           builder.append("drop");
         }
+        return false;
+      }
+
+      @Override
+      public boolean enterThrowStatement(ThrowStatement throwStatement) {
+        renderExpression(throwStatement.getExpression());
+        builder.newLine();
+        // TODO(rluble): This is a nominal placeholder implementation that throws to JavaScript
+        // until WASM exception handling is added.
+        builder.emitWithMapping(
+            throwStatement.getSourcePosition(), () -> builder.append("unreachable"));
         return false;
       }
 

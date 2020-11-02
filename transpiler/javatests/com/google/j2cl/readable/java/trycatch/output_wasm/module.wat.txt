@@ -1,0 +1,218 @@
+;;; Code for trycatch.TryCatch
+
+;;; CLASS  TryCatch
+
+(type $trycatch.TryCatch (struct
+))
+
+;;; void TryCatch.testMultiCatch()
+(func $testMultiCatch<>:void@trycatch.TryCatch
+ (block
+  ;; try {
+  ;;   throw new ClassCastException.<init>();
+  ;; } catch ((NullPointerException|ClassCastException) e) {
+  ;;   throw e;
+  ;; } catch (RuntimeException r) {
+  ;;   r = null;
+  ;; }
+  ;; unimplemented statement TryStatement
+  (block
+   ;; throw new ClassCastException.<init>();
+   (ref.null $java.lang.ClassCastException)unreachable
+  )(block
+   ;; throw e;
+   (ref.null $java.lang.RuntimeException)unreachable
+  )(block
+   ;; r = null;
+   (ref.null $java.lang.RuntimeException)
+   drop
+  ))
+)
+
+;;; void TryCatch.testEmptyThrowableCatch()
+(func $testEmptyThrowableCatch<>:void@trycatch.TryCatch
+ (block
+  ;; try {
+  ;;   throw new ClassCastException.<init>();
+  ;; } catch (Throwable e) {
+  ;; }
+  ;; unimplemented statement TryStatement
+  (block
+   ;; throw new ClassCastException.<init>();
+   (ref.null $java.lang.ClassCastException)unreachable
+  )(block
+  )
+  ;; try {
+  ;;   throw new ClassCastException.<init>();
+  ;; } catch (Exception e) {
+  ;; } catch (Throwable e) {
+  ;; }
+  ;; unimplemented statement TryStatement
+  (block
+   ;; throw new ClassCastException.<init>();
+   (ref.null $java.lang.ClassCastException)unreachable
+  )(block
+  )(block
+  ))
+)
+
+;;; void TryCatch.testEmptyThrowableRethrow()
+(func $testEmptyThrowableRethrow<>:void@trycatch.TryCatch
+ (block
+  ;; try {
+  ;;   throw new ClassCastException.<init>();
+  ;; } catch (Throwable e) {
+  ;;   throw e;
+  ;; }
+  ;; unimplemented statement TryStatement
+  (block
+   ;; throw new ClassCastException.<init>();
+   (ref.null $java.lang.ClassCastException)unreachable
+  )(block
+   ;; throw e;
+   (ref.null $java.lang.Throwable)unreachable
+  ))
+)
+
+;;; void TryCatch.testFinally()
+(func $testFinally<>:void@trycatch.TryCatch
+ (block
+  ;; try {
+  ;;   assert true;
+  ;; } finally {
+  ;; }
+  ;; unimplemented statement TryStatement
+  (block
+   ;; assert true;
+   ;; unimplemented statement AssertStatement
+   
+  )(block
+  ))
+)
+
+;;; void TryCatch.testTryWithResource()
+(func $testTryWithResource<>:void@trycatch.TryCatch
+ (local $thing1965786032 (ref null $trycatch.TryCatch.ClosableThing))
+ (local $thing212773918 (ref null $trycatch.TryCatch.ClosableThing))
+ (block
+  ;; try (
+  ;;     ClosableThing thing = new ClosableThing.<init>();
+  ;;     ClosableThing thing2 = new ClosableThing.<init>()) {
+  ;;   throw new Exception.<init>();
+  ;; } catch (Exception e) {
+  ;; }
+  ;; unimplemented statement TryStatement
+  (block
+   ;; throw new Exception.<init>();
+   (ref.null $java.lang.Exception)unreachable
+  )(block
+  ))
+)
+
+;;; void TryCatch.testTryWithResourceJava9()
+(func $testTryWithResourceJava9<>:void@trycatch.TryCatch
+ (local $thing1035433787 (ref null $trycatch.TryCatch.ClosableThing))
+ (local $thing2346572094 (ref null $trycatch.TryCatch.ClosableThing))
+ (local $$resource809546909 (ref null $trycatch.TryCatch.ClosableThing))
+ (local $$resource1972803126 (ref null $trycatch.TryCatch.ClosableThing))
+ (block
+  ;; ClosableThing thing = new ClosableThing.<init>();
+  (ref.null $trycatch.TryCatch.ClosableThing)
+  drop
+  ;; ClosableThing thing2 = new ClosableThing.<init>();
+  (ref.null $trycatch.TryCatch.ClosableThing)
+  drop
+  ;; try (
+  ;;     ClosableThing $resource = thing;
+  ;;     ClosableThing $resource = thing2) {
+  ;;   throw new Exception.<init>();
+  ;; } catch (Exception e) {
+  ;; }
+  ;; unimplemented statement TryStatement
+  (block
+   ;; throw new Exception.<init>();
+   (ref.null $java.lang.Exception)unreachable
+  )(block
+  ))
+)
+
+;;; void TryCatch.testNestedTryCatch()
+(func $testNestedTryCatch<>:void@trycatch.TryCatch
+ (block
+  ;; try {
+  ;;   throw new Exception.<init>();
+  ;; } catch (Exception ae) {
+  ;;   try {
+  ;;     throw new Exception.<init>();
+  ;;   } catch (Exception ie) {
+  ;;   }
+  ;; }
+  ;; unimplemented statement TryStatement
+  (block
+   ;; throw new Exception.<init>();
+   (ref.null $java.lang.Exception)unreachable
+  )(block
+   ;; try {
+   ;;   throw new Exception.<init>();
+   ;; } catch (Exception ie) {
+   ;; }
+   ;; unimplemented statement TryStatement
+   (block
+    ;; throw new Exception.<init>();
+    (ref.null $java.lang.Exception)unreachable
+   )(block
+   )))
+)
+
+;;; void TryCatch.testThrowGenerics()
+(func $testThrowGenerics<>:void@trycatch.TryCatch
+ (block
+  ;; throw TryCatch.this.getT(new Exception.<init>());
+  (ref.null $java.lang.Exception)unreachable
+ )
+)
+
+;;; T TryCatch.getT(T t)
+(func $getT<java.lang.Object>:java.lang.Object@trycatch.TryCatch
+ (param $t (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (block
+  ;; return t;
+  ;; unimplemented statement ReturnStatement
+  
+ )
+
+(ref.null $java.lang.Object)
+)
+
+;;; void TryCatch.testThrowBoundGenerics()
+(func $testThrowBoundGenerics<>:void@trycatch.TryCatch
+ (block
+  ;; throw TryCatch.this.getThrowable();
+  (ref.null $java.lang.Throwable)unreachable
+ )
+)
+
+;;; T TryCatch.getThrowable()
+(func $getThrowable<>:java.lang.Throwable@trycatch.TryCatch
+ (result (ref null $java.lang.Throwable))
+ (block
+  ;; return null;
+  ;; unimplemented statement ReturnStatement
+  
+ )
+
+(ref.null $java.lang.Throwable)
+)
+
+;;; CLASS  ClosableThing
+
+(type $trycatch.TryCatch.ClosableThing (struct
+))
+
+;;; void ClosableThing.close()
+(func $close<>:void@trycatch.TryCatch.ClosableThing
+ (block
+ )
+)
+
