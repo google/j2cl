@@ -21,13 +21,17 @@ import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.BooleanLiteral;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.ExpressionWithComment;
-import com.google.j2cl.transpiler.ast.MultiExpression;
 import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
 
-/** Transforms expressions into WASM code. */
+/**
+ * Transforms expressions into WASM code.
+ *
+ * <p>As is typical in stack based VMs, expressions evaluate leaving the result in the stack.
+ */
 final class ExpressionTranspiler {
   public static void render(
       Expression expression,
@@ -42,6 +46,19 @@ final class ExpressionTranspiler {
       }
 
       @Override
+      public boolean enterExpression(Expression expression) {
+        // TODO(rluble): remove this method which is only a place holder until all expressions are
+        // implemented.
+        if (!TypeDescriptors.isPrimitiveVoid(expression.getTypeDescriptor())) {
+          // This is an unimplemented expression that returns a value (i.e. not a call to a
+          // method returning void).
+          // Emit the default value for the type as a place holder so that the module compiles.
+          render(expression.getTypeDescriptor().getDefaultValue());
+        }
+        return false;
+      }
+
+      @Override
       public boolean enterExpressionWithComment(ExpressionWithComment expressionWithComment) {
         sourceBuilder.append(";; " + expressionWithComment.getComment());
         render(expressionWithComment.getExpression());
@@ -49,14 +66,9 @@ final class ExpressionTranspiler {
       }
 
       @Override
-      public boolean enterMultiExpression(MultiExpression multiExpression) {
-        multiExpression.getExpressions().forEach(this::render);
-        return false;
-      }
-
-      @Override
       public boolean enterNullLiteral(NullLiteral nullLiteral) {
-        sourceBuilder.append("(ref.null MISSING TYPE)");
+        sourceBuilder.append(
+            "(ref.null " + environment.getWasmTypeName(nullLiteral.getTypeDescriptor()) + ")");
         return false;
       }
 

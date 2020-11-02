@@ -28,6 +28,7 @@ import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
 
 /** Allows mapping of middle end constructors to the backend. */
 class GenerationEnvironment {
@@ -48,7 +49,16 @@ class GenerationEnvironment {
     if (typeDescriptor.isPrimitive()) {
       return WASM_TYPES_BY_PRIMITIVE_TYPES.get(typeDescriptor);
     }
-    return "(ref null $" + getTypeSignature(typeDescriptor) + ")";
+    return "(ref null " + getWasmTypeName(typeDescriptor) + ")";
+  }
+
+  String getWasmTypeName(TypeDescriptor typeDescriptor) {
+    // TODO(rluble): remove j.l.O as a placeholder for arrays once arrays are implemented.
+    if (typeDescriptor.isArray()) {
+      return getWasmTypeName(TypeDescriptors.get().javaLangObject);
+    }
+
+    return "$" + getTypeSignature(typeDescriptor);
   }
 
   String getTypeSignature(TypeDescriptor typeDescriptor) {

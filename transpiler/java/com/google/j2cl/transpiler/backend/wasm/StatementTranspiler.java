@@ -20,6 +20,7 @@ import com.google.j2cl.transpiler.ast.Block;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.ExpressionStatement;
 import com.google.j2cl.transpiler.ast.Statement;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
 import java.util.Collection;
 
@@ -37,8 +38,19 @@ class StatementTranspiler {
     statements.forEach(
         s -> {
           builder.newLine();
+          builder.appendln(renderAsSingleLineComments(s.toString()));
           renderStatement(s);
         });
+  }
+
+  /**
+   * Transforms a comment that can have multiple lines into multiple single line comments.
+   *
+   * <p>WASM does not have multiline comments, so comments that span multiple lines need to be
+   * rendered as multiple single line comments.
+   */
+  private static String renderAsSingleLineComments(String s) {
+    return ";; " + s.replace("\n", "\n;; ");
   }
 
   public void renderStatement(Statement statement) {
@@ -46,7 +58,8 @@ class StatementTranspiler {
 
       @Override
       public boolean enterStatement(Statement assertStatement) {
-        builder.append(";;; unimplemented statement " + assertStatement.getClass().getSimpleName());
+        builder.appendln(
+            ";; unimplemented statement " + assertStatement.getClass().getSimpleName());
         return true;
       }
 
@@ -61,17 +74,18 @@ class StatementTranspiler {
 
       @Override
       public boolean enterExpressionStatement(ExpressionStatement expressionStatement) {
+        Expression expression = expressionStatement.getExpression();
         builder.emitWithMapping(
             expressionStatement.getSourcePosition(),
             () -> {
-              renderExpression(expressionStatement.getExpression());
+              renderExpression(expression);
             });
+        if (!TypeDescriptors.isPrimitiveVoid(expression.getTypeDescriptor())) {
+          builder.newLine();
+          // Remove the result of the expression from the stack.
+          builder.append("drop");
+        }
         return false;
-      }
-
-      @Override
-      public String toString() {
-        return builder.build();
       }
 
       private void renderExpression(Expression expression) {

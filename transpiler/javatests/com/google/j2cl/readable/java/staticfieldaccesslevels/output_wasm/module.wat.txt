@@ -4,16 +4,20 @@
 
 (global $a@staticfieldaccesslevels.StaticFieldAccessLevels i32 (i32.const 0))
 (global $b@staticfieldaccesslevels.StaticFieldAccessLevels i32 (i32.const 0))
-(global $c@staticfieldaccesslevels.StaticFieldAccessLevels (ref null $java.lang.Object) (ref.null MISSING TYPE))
+(global $c@staticfieldaccesslevels.StaticFieldAccessLevels (ref null $java.lang.Object) (ref.null $java.lang.Object))
 (global $d@staticfieldaccesslevels.StaticFieldAccessLevels i32 (i32.const 0))
-(type $staticfieldaccesslevels_StaticFieldAccessLevels (struct
+(type $staticfieldaccesslevels.StaticFieldAccessLevels (struct
 ))
 
 ;;; int StaticFieldAccessLevels.test()
 (func $test<>:int@staticfieldaccesslevels.StaticFieldAccessLevels
  (result i32)
  (block
-  ;;; unimplemented statement ReturnStatement
+  ;; return staticfieldaccesslevels.StaticFieldAccessLevels.b ? staticfieldaccesslevels.StaticFieldAccessLevels.a : staticfieldaccesslevels.StaticFieldAccessLevels.d;
+  ;; unimplemented statement ReturnStatement
+  
  )
+
+(i32.const 0)
 )
 
