@@ -29,6 +29,9 @@ import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
+import com.google.j2cl.transpiler.ast.Variable;
+import java.util.HashMap;
+import java.util.Map;
 
 /** Allows mapping of middle end constructors to the backend. */
 class GenerationEnvironment {
@@ -102,5 +105,13 @@ class GenerationEnvironment {
         + fieldDescriptor.getName()
         + "@"
         + fieldDescriptor.getEnclosingTypeDescriptor().getQualifiedSourceName();
+  }
+
+  private final Map<Variable, String> variableNameByVariable = new HashMap<>();
+
+  String getVariableName(Variable variable) {
+    // TODO(rluble): add a proper variable name collision resolver.
+    return variableNameByVariable.computeIfAbsent(
+        variable, v -> "$" + v.getName() + "." + variableNameByVariable.size());
   }
 }

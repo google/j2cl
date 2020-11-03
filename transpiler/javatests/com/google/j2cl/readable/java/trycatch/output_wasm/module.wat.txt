@@ -18,10 +18,12 @@
   ;; unimplemented statement TryStatement
   (block
    ;; throw new ClassCastException.<init>();
-   (ref.null $java.lang.ClassCastException)unreachable
+   (ref.null $java.lang.ClassCastException)
+   unreachable
   )(block
    ;; throw e;
-   (ref.null $java.lang.RuntimeException)unreachable
+   (ref.null $java.lang.RuntimeException)
+   unreachable
   )(block
    ;; r = null;
    (ref.null $java.lang.RuntimeException)
@@ -39,7 +41,8 @@
   ;; unimplemented statement TryStatement
   (block
    ;; throw new ClassCastException.<init>();
-   (ref.null $java.lang.ClassCastException)unreachable
+   (ref.null $java.lang.ClassCastException)
+   unreachable
   )(block
   )
   ;; try {
@@ -50,7 +53,8 @@
   ;; unimplemented statement TryStatement
   (block
    ;; throw new ClassCastException.<init>();
-   (ref.null $java.lang.ClassCastException)unreachable
+   (ref.null $java.lang.ClassCastException)
+   unreachable
   )(block
   )(block
   ))
@@ -67,10 +71,12 @@
   ;; unimplemented statement TryStatement
   (block
    ;; throw new ClassCastException.<init>();
-   (ref.null $java.lang.ClassCastException)unreachable
+   (ref.null $java.lang.ClassCastException)
+   unreachable
   )(block
    ;; throw e;
-   (ref.null $java.lang.Throwable)unreachable
+   (ref.null $java.lang.Throwable)
+   unreachable
   ))
 )
 
@@ -92,8 +98,8 @@
 
 ;;; void TryCatch.testTryWithResource()
 (func $testTryWithResource<>:void@trycatch.TryCatch
- (local $thing1965786032 (ref null $trycatch.TryCatch.ClosableThing))
- (local $thing212773918 (ref null $trycatch.TryCatch.ClosableThing))
+ (local $thing.1854 (ref null $trycatch.TryCatch.ClosableThing))
+ (local $thing2.1855 (ref null $trycatch.TryCatch.ClosableThing))
  (block
   ;; try (
   ;;     ClosableThing thing = new ClosableThing.<init>();
@@ -104,17 +110,18 @@
   ;; unimplemented statement TryStatement
   (block
    ;; throw new Exception.<init>();
-   (ref.null $java.lang.Exception)unreachable
+   (ref.null $java.lang.Exception)
+   unreachable
   )(block
   ))
 )
 
 ;;; void TryCatch.testTryWithResourceJava9()
 (func $testTryWithResourceJava9<>:void@trycatch.TryCatch
- (local $thing1035433787 (ref null $trycatch.TryCatch.ClosableThing))
- (local $thing2346572094 (ref null $trycatch.TryCatch.ClosableThing))
- (local $$resource809546909 (ref null $trycatch.TryCatch.ClosableThing))
- (local $$resource1972803126 (ref null $trycatch.TryCatch.ClosableThing))
+ (local $thing.1856 (ref null $trycatch.TryCatch.ClosableThing))
+ (local $thing2.1857 (ref null $trycatch.TryCatch.ClosableThing))
+ (local $$resource.1858 (ref null $trycatch.TryCatch.ClosableThing))
+ (local $$resource.1859 (ref null $trycatch.TryCatch.ClosableThing))
  (block
   ;; ClosableThing thing = new ClosableThing.<init>();
   (ref.null $trycatch.TryCatch.ClosableThing)
@@ -131,7 +138,8 @@
   ;; unimplemented statement TryStatement
   (block
    ;; throw new Exception.<init>();
-   (ref.null $java.lang.Exception)unreachable
+   (ref.null $java.lang.Exception)
+   unreachable
   )(block
   ))
 )
@@ -150,7 +158,8 @@
   ;; unimplemented statement TryStatement
   (block
    ;; throw new Exception.<init>();
-   (ref.null $java.lang.Exception)unreachable
+   (ref.null $java.lang.Exception)
+   unreachable
   )(block
    ;; try {
    ;;   throw new Exception.<init>();
@@ -159,7 +168,8 @@
    ;; unimplemented statement TryStatement
    (block
     ;; throw new Exception.<init>();
-    (ref.null $java.lang.Exception)unreachable
+    (ref.null $java.lang.Exception)
+    unreachable
    )(block
    )))
 )
@@ -168,7 +178,8 @@
 (func $testThrowGenerics<>:void@trycatch.TryCatch
  (block
   ;; throw TryCatch.this.getT(new Exception.<init>());
-  (ref.null $java.lang.Exception)unreachable
+  (ref.null $java.lang.Exception)
+  unreachable
  )
 )
 
@@ -189,7 +200,8 @@
 (func $testThrowBoundGenerics<>:void@trycatch.TryCatch
  (block
   ;; throw TryCatch.this.getThrowable();
-  (ref.null $java.lang.Throwable)unreachable
+  (ref.null $java.lang.Throwable)
+  unreachable
  )
 )
 

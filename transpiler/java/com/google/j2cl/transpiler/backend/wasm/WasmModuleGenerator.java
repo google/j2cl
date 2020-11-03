@@ -150,10 +150,8 @@ public class WasmModuleGenerator {
     for (Variable variable : collectLocals(method)) {
       builder.newLine();
       builder.append(
-          "(local $"
-              + variable.getName()
-              // TODO(rluble): add variable collision resolver.
-              + variable.hashCode()
+          "(local "
+              + environment.getVariableName(variable)
               + " "
               + environment.getWasmType(variable.getTypeDescriptor())
               + ")");
