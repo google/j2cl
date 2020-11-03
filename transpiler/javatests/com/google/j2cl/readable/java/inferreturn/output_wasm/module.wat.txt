@@ -1,0 +1,98 @@
+;;; Code for inferreturn.InferReturn
+
+;;; CLASS  InferReturn
+
+(type $inferreturn.InferReturn (struct
+))
+
+;;; InferReturn<T> InferReturn.inferGeneric(T foo)
+(func $inferGeneric<java.lang.Object>:inferreturn.InferReturn@inferreturn.InferReturn
+ (param $foo (ref null $java.lang.Object))
+ (result (ref null $inferreturn.InferReturn))
+ (block
+  ;; return new InferReturn.<init>();
+  ;; unimplemented statement ReturnStatement
+  
+ )
+
+(ref.null $inferreturn.InferReturn)
+)
+
+;;; InferReturn<InferReturn<String>> InferReturn.tightenType(InferReturn<String> foo)
+(func $tightenType<inferreturn.InferReturn>:inferreturn.InferReturn@inferreturn.InferReturn
+ (param $foo (ref null $inferreturn.InferReturn))
+ (result (ref null $inferreturn.InferReturn))
+ (block
+  ;; if (foo != null) {
+  ;;   return inferreturn.InferReturn.inferGeneric(foo);
+  ;; }
+  (if (i32.const 0) (then (block
+   ;; return inferreturn.InferReturn.inferGeneric(foo);
+   ;; unimplemented statement ReturnStatement
+   
+  )))
+  ;; return null;
+  ;; unimplemented statement ReturnStatement
+  
+ )
+
+(ref.null $inferreturn.InferReturn)
+)
+
+;;; void InferReturn.main()
+(func $main<>:void@inferreturn.InferReturn
+ (local $list.1854 (ref null $java.util.ArrayList))
+ (local $array.1855 (ref null $java.lang.Object))
+ (block
+  ;; ArrayList<Object> list = inferreturn.InferReturn.newArrayList("foo");
+  (ref.null $java.util.ArrayList)
+  drop
+  ;; inferreturn.InferReturn.acceptsArrayListOfObject(list);
+  (call $acceptsArrayListOfObject<java.util.ArrayList>:void@inferreturn.InferReturn (ref.null $java.util.ArrayList))
+  ;; Object[] array = inferreturn.InferReturn.newArray("foo");
+  (ref.null $java.lang.Object)
+  drop
+  ;; inferreturn.InferReturn.acceptsArrayOfObject(array);
+  (call $acceptsArrayOfObject<java.lang.Object<>>:void@inferreturn.InferReturn (ref.null $java.lang.Object)))
+)
+
+;;; ArrayList<V> InferReturn.newArrayList(V foo)
+(func $newArrayList<java.lang.Object>:java.util.ArrayList@inferreturn.InferReturn
+ (param $foo (ref null $java.lang.Object))
+ (result (ref null $java.util.ArrayList))
+ (block
+  ;; return new ArrayList.<init>();
+  ;; unimplemented statement ReturnStatement
+  
+ )
+
+(ref.null $java.util.ArrayList)
+)
+
+;;; V[] InferReturn.newArray(V foo)
+(func $newArray<java.lang.Object>:java.lang.Object<>@inferreturn.InferReturn
+ (param $foo (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (block
+  ;; return (V[]) new Object[0];
+  ;; unimplemented statement ReturnStatement
+  
+ )
+
+(ref.null $java.lang.Object)
+)
+
+;;; void InferReturn.acceptsArrayListOfObject(ArrayList<Object> foo)
+(func $acceptsArrayListOfObject<java.util.ArrayList>:void@inferreturn.InferReturn
+ (param $foo (ref null $java.util.ArrayList))
+ (block
+ )
+)
+
+;;; void InferReturn.acceptsArrayOfObject(Object[] foo)
+(func $acceptsArrayOfObject<java.lang.Object<>>:void@inferreturn.InferReturn
+ (param $foo (ref null $java.lang.Object))
+ (block
+ )
+)
+

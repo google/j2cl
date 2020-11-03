@@ -23,7 +23,6 @@ import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
-import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
@@ -64,7 +63,7 @@ class GenerationEnvironment {
     return "$" + getTypeSignature(typeDescriptor);
   }
 
-  String getTypeSignature(TypeDescriptor typeDescriptor) {
+  private static String getTypeSignature(TypeDescriptor typeDescriptor) {
     if (typeDescriptor.isPrimitive()) {
       return typeDescriptor.getReadableDescription();
     }
@@ -87,12 +86,12 @@ class GenerationEnvironment {
    * <p>Note that these names need to be globally unique and are different than the names of the
    * slots in the vtable which maps nicely to our concept of mangled names.
    */
-  String getMethodImplementationName(Method method) {
-    MethodDescriptor methodDescriptor = method.getDescriptor();
+  String getMethodImplementationName(MethodDescriptor methodDescriptor) {
+    methodDescriptor = methodDescriptor.getDeclarationDescriptor();
     return "$"
         + methodDescriptor.getName()
-        + method.getParameters().stream()
-            .map(p -> getTypeSignature(p.getTypeDescriptor()))
+        + methodDescriptor.getDeclarationDescriptor().getParameterTypeDescriptors().stream()
+            .map(GenerationEnvironment::getTypeSignature)
             .collect(joining("|", "<", ">:"))
         + getTypeSignature(methodDescriptor.getReturnTypeDescriptor())
         + "@"

@@ -178,7 +178,7 @@
 (func $testThrowGenerics<>:void@trycatch.TryCatch
  (block
   ;; throw TryCatch.this.getT(new Exception.<init>());
-  (ref.null $java.lang.Exception)
+  
   unreachable
  )
 )
@@ -200,7 +200,7 @@
 (func $testThrowBoundGenerics<>:void@trycatch.TryCatch
  (block
   ;; throw TryCatch.this.getThrowable();
-  (ref.null $java.lang.Throwable)
+  
   unreachable
  )
 )

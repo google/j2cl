@@ -21,9 +21,12 @@ import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.BooleanLiteral;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.ExpressionWithComment;
+import com.google.j2cl.transpiler.ast.MethodCall;
+import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
+import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
 
@@ -54,6 +57,25 @@ final class ExpressionTranspiler {
           // method returning void).
           // Emit the default value for the type as a place holder so that the module compiles.
           render(expression.getTypeDescriptor().getDefaultValue());
+        }
+        return false;
+      }
+
+      @Override
+      public boolean enterMethodCall(MethodCall methodCall) {
+        MethodDescriptor target = methodCall.getTarget();
+        if (target.isStatic()) {
+
+          sourceBuilder.append("(call " + environment.getMethodImplementationName(target) + " ");
+          // TODO(rluble): evaluate and pass the paramters once the class hierarchy is modeled by
+          // rtts and proper casts have been inserted.
+          for (TypeDescriptor parameterTypeDescriptor : target.getParameterTypeDescriptors()) {
+            render(parameterTypeDescriptor.getDefaultValue());
+          }
+          sourceBuilder.append(")");
+        } else {
+          // TODO(rluble): remove once all method call types are implemented.
+          return super.enterMethodCall(methodCall);
         }
         return false;
       }

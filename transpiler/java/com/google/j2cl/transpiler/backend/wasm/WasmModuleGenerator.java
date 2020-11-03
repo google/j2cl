@@ -118,7 +118,7 @@ public class WasmModuleGenerator {
     builder.newLine();
     builder.append(";;; " + method.getReadableDescription());
     builder.newLine();
-    builder.append("(func " + environment.getMethodImplementationName(method));
+    builder.append("(func " + environment.getMethodImplementationName(method.getDescriptor()));
 
     if (pendingEntryPoints.remove(method.getQualifiedBinaryName())) {
       if (!method.isStatic()) {
