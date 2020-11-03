@@ -19,6 +19,7 @@ import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.Block;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.ExpressionStatement;
+import com.google.j2cl.transpiler.ast.IfStatement;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.ThrowStatement;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
@@ -86,6 +87,24 @@ class StatementTranspiler {
           // Remove the result of the expression from the stack.
           builder.append("drop");
         }
+        return false;
+      }
+
+      @Override
+      public boolean enterIfStatement(IfStatement ifStatement) {
+        builder.append("(if ");
+        builder.emitWithMapping(
+            ifStatement.getSourcePosition(),
+            () -> renderExpression(ifStatement.getConditionExpression()));
+        builder.append(" (then ");
+        renderStatement(ifStatement.getThenStatement());
+        builder.append(")");
+        if (ifStatement.getElseStatement() != null) {
+          builder.append(" (else ");
+          renderStatement(ifStatement.getElseStatement());
+          builder.append(")");
+        }
+        builder.append(")");
         return false;
       }
 

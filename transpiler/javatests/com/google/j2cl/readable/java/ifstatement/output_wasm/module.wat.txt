@@ -1,0 +1,48 @@
+;;; Code for ifstatement.IfStatement
+
+;;; CLASS  IfStatement
+
+(type $ifstatement.IfStatement (struct
+))
+
+;;; void IfStatement.test()
+(func $test<>:void@ifstatement.IfStatement
+ (local $a.1854 i32)
+ (local $b.1855 i32)
+ (local $number.1856 i32)
+ (block
+  ;; boolean a = true;
+  (i32.const 0)
+  drop
+  ;; boolean b = true;
+  (i32.const 0)
+  drop
+  ;; int number = 1;
+  (i32.const 0)
+  drop
+  ;; if (a) {
+  ;;   number = 2;
+  ;; } else if (b) {
+  ;;   number = 3;
+  ;; } else {
+  ;;   number = 4;
+  ;; }
+  (if (i32.const 0) (then (block
+   ;; number = 2;
+   (i32.const 0)
+   drop
+  )) (else (if (i32.const 0) (then (block
+   ;; number = 3;
+   (i32.const 0)
+   drop
+  )) (else (block
+   ;; number = 4;
+   (i32.const 0)
+   drop
+  )))))
+  ;; if (a) number = 5; else number = 6;
+  (if (i32.const 0) (then (i32.const 0)
+  drop) (else (i32.const 0)
+  drop)))
+)
+
