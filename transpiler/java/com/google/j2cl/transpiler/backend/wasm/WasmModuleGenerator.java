@@ -29,7 +29,6 @@ import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.Variable;
-import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -132,8 +131,8 @@ public class WasmModuleGenerator {
     for (Variable parameter : method.getParameters()) {
       builder.newLine();
       builder.append(
-          "(param $"
-              + parameter.getName()
+          "(param "
+              + environment.getVariableName(parameter)
               + " "
               + environment.getWasmType(parameter.getTypeDescriptor())
               + ")");
@@ -173,13 +172,15 @@ public class WasmModuleGenerator {
 
   private static List<Variable> collectLocals(Method method) {
     List<Variable> locals = new ArrayList<>();
-    method.accept(
-        new AbstractVisitor() {
-          @Override
-          public void exitVariableDeclarationFragment(VariableDeclarationFragment node) {
-            locals.add(node.getVariable());
-          }
-        });
+    method
+        .getBody()
+        .accept(
+            new AbstractVisitor() {
+              @Override
+              public void exitVariable(Variable variable) {
+                locals.add(variable);
+              }
+            });
     return locals;
   }
 
