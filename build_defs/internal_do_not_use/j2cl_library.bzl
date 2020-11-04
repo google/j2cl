@@ -94,7 +94,11 @@ def _absolute_label(label):
     if label.startswith("//") or label.startswith("@"):
         if ":" in label:
             return label
-        return "%s:%s" % (label, label.rsplit("/", 1)[-1])
+        elif "/" in label:
+            return "%s:%s" % (label, label.rsplit("/", 1)[-1])
+        if not label.startswith("@"):
+            fail("Unexpected label format: %s" % label)
+        return "%s//:%s" % (label, label[1:])
 
     package_name = native.package_name()
 
