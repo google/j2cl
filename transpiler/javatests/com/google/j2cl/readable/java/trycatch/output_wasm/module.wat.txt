@@ -124,11 +124,9 @@
  (local $$resource.1859 (ref null $trycatch.TryCatch.ClosableThing))
  (block
   ;; ClosableThing thing = new ClosableThing.<init>();
-  (ref.null $trycatch.TryCatch.ClosableThing)
-  drop
+  
   ;; ClosableThing thing2 = new ClosableThing.<init>();
-  (ref.null $trycatch.TryCatch.ClosableThing)
-  drop
+  
   ;; try (
   ;;     ClosableThing $resource = thing;
   ;;     ClosableThing $resource = thing2) {
@@ -178,7 +176,7 @@
 (func $testThrowGenerics<>:void@trycatch.TryCatch
  (block
   ;; throw TryCatch.this.getT(new Exception.<init>());
-  
+  (ref.null $java.lang.Exception)
   unreachable
  )
 )
@@ -200,7 +198,7 @@
 (func $testThrowBoundGenerics<>:void@trycatch.TryCatch
  (block
   ;; throw TryCatch.this.getThrowable();
-  
+  (ref.null $java.lang.Throwable)
   unreachable
  )
 )

@@ -43,7 +43,7 @@ public class VariableDeclarationExpression extends Expression {
 
   @Override
   public TypeDescriptor getTypeDescriptor() {
-    return fragments.get(0).getVariable().getTypeDescriptor();
+    return PrimitiveTypes.VOID;
   }
 
   @Override
