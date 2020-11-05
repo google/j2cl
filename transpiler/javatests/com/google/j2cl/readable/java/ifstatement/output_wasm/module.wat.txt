@@ -11,11 +11,15 @@
  (local $b.6752 i32)
  (local $number.6753 i32)
  (block
-  ;; boolean a = true;
-  
-  ;; boolean b = true;
+  ;; boolean a = true,boolean b = true;
+  (local.tee $a.6751 (i32.const 1))
+  drop
+  (local.tee $b.6752 (i32.const 1))
+  drop
   
   ;; int number = 1;
+  (local.tee $number.6753 (i32.const 1))
+  drop
   
   ;; if (a) {
   ;;   number = 2;
@@ -26,20 +30,20 @@
   ;; }
   (if (i32.const 0) (then (block
    ;; number = 2;
-   (i32.const 0)
+   (local.tee $number.6753 (i32.const 2))
    drop
   )) (else (if (i32.const 0) (then (block
    ;; number = 3;
-   (i32.const 0)
+   (local.tee $number.6753 (i32.const 3))
    drop
   )) (else (block
    ;; number = 4;
-   (i32.const 0)
+   (local.tee $number.6753 (i32.const 4))
    drop
   )))))
   ;; if (a) number = 5; else number = 6;
-  (if (i32.const 0) (then (i32.const 0)
-  drop) (else (i32.const 0)
+  (if (i32.const 0) (then (local.tee $number.6753 (i32.const 5))
+  drop) (else (local.tee $number.6753 (i32.const 6))
   drop)))
 )
 

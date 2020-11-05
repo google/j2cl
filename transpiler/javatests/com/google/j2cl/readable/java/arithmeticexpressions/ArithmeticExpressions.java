@@ -36,19 +36,17 @@ public class ArithmeticExpressions {
   }
 
   public void testPrimitives() {
-    int a = 10;
-    int b = a++;
-    int c = a--;
-    int d = ++a;
-    int e = --a;
-    int f = -a;
-    int g = +a;
-    int h = ~a;
-    int i = 1 + 1 + 2 - 5;
-    int j = (1 + 2) * (3 + 4);
-    boolean k = !(1 + 2 + 3 == 4);
-    boolean l = (1 + 2 != 4);
-    boolean m = Long.MAX_VALUE != 9223372036854776833d;
+    int a = 10,
+        b = a++,
+        c = a--,
+        d = ++a,
+        e = --a,
+        f = -a,
+        g = +a,
+        h = ~a,
+        i = 1 + 1 + 2 - 5,
+        j = (1 + 2) * (3 + 4);
+    boolean k = !(1 + 2 + 3 == 4), l = (1 + 2 != 4), m = Long.MAX_VALUE != 9223372036854776833d;
     double o = ((5 + 1) / 2) - 0.0;
 
     a = a << 31L;

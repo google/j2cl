@@ -28,7 +28,7 @@
    unreachable
   )(block
    ;; r = null;
-   (ref.null $java.lang.RuntimeException)
+   (local.tee $r.6752 (ref.null $java.lang.RuntimeException))
    drop
   ))
 )
@@ -132,8 +132,12 @@
  (local $e.6764 (ref null $java.lang.Exception))
  (block
   ;; ClosableThing thing = new ClosableThing.<init>();
+  (local.tee $thing.6760 (ref.null $trycatch.TryCatch.ClosableThing))
+  drop
   
   ;; ClosableThing thing2 = new ClosableThing.<init>();
+  (local.tee $thing2.6761 (ref.null $trycatch.TryCatch.ClosableThing))
+  drop
   
   ;; try (
   ;;     ClosableThing $resource = thing;

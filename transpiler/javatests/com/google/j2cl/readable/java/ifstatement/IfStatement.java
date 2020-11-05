@@ -17,8 +17,7 @@ package ifstatement;
 
 public class IfStatement {
   public void test() {
-    boolean a = true;
-    boolean b = true;
+    boolean a = true, b = true;
     int number = 1;
     if (a) {
       number = 2;

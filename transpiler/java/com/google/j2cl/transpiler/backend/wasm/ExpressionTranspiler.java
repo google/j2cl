@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.backend.wasm;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
+import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.BooleanLiteral;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.ExpressionWithComment;
@@ -28,6 +29,10 @@ import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
+import com.google.j2cl.transpiler.ast.Variable;
+import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
+import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
+import com.google.j2cl.transpiler.ast.VariableReference;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
 
 /**
@@ -46,6 +51,26 @@ final class ExpressionTranspiler {
       public boolean enterBooleanLiteral(BooleanLiteral booleanLiteral) {
         sourceBuilder.append("(i32.const " + (booleanLiteral.getValue() ? "1" : "0") + ")");
         return false;
+      }
+
+      @Override
+      public boolean enterBinaryExpression(BinaryExpression expression) {
+        switch (expression.getOperator()) {
+          case ASSIGN:
+            return renderAssignmentExpression(expression);
+          default:
+            return enterExpression(expression);
+        }
+      }
+
+      private boolean renderAssignmentExpression(BinaryExpression expression) {
+        Expression left = expression.getLeftOperand();
+        if (left instanceof VariableReference) {
+          renderVariableAssignment(
+              ((VariableReference) left).getTarget(), expression.getRightOperand());
+          return false;
+        }
+        return enterExpression(expression);
       }
 
       @Override
@@ -100,6 +125,33 @@ final class ExpressionTranspiler {
         String wasmType = checkNotNull(environment.getWasmType(typeDescriptor));
         sourceBuilder.append("(" + wasmType + ".const " + numberLiteral.getValue() + ")");
         return false;
+      }
+
+      @Override
+      public boolean enterVariableDeclarationExpression(VariableDeclarationExpression expression) {
+        expression.getFragments().forEach(this::renderVariableDeclarationFragment);
+        return false;
+      }
+
+      private void renderVariableDeclarationFragment(VariableDeclarationFragment fragment) {
+        if (fragment.getInitializer() != null) {
+          renderVariableAssignment(fragment.getVariable(), fragment.getInitializer());
+          sourceBuilder.newLine();
+          sourceBuilder.append("drop");
+          sourceBuilder.newLine();
+        }
+      }
+
+      private void renderVariableAssignment(Variable variable, Expression assignment) {
+        sourceBuilder.append("(local.tee " + environment.getVariableName(variable) + " ");
+
+        // TODO(dramaix): remove when coercions and casting are in place.
+        if (variable.getTypeDescriptor().hasSameRawType(assignment.getTypeDescriptor())) {
+          render(assignment);
+        } else {
+          render(variable.getTypeDescriptor().getDefaultValue());
+        }
+        sourceBuilder.append(")");
       }
 
       private void render(Expression expression) {

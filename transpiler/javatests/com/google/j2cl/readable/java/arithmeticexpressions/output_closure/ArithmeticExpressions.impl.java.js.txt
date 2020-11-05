@@ -55,19 +55,12 @@ class ArithmeticExpressions extends j_l_Object {
 
   m_testPrimitives__() {
     let /** number */ $value, /** number */ $value_1;
-    let a = 10;
-    let b = ($value = a, a = a + 1 | 0, $value);
-    let c = ($value_1 = a, a = a - 1 | 0, $value_1);
-    let d = a = a + 1 | 0;
-    let e = a = a - 1 | 0;
-    let f = -a | 0;
-    let g = +a;
-    let h = ~a;
-    let i = 1 + 1 + 2 - 5 | 0;
-    let j = Math.imul(1 + 2, 3 + 4);
-    let k = !((1 + 2 + 3 | 0) == 4);
-    let l = (1 + 2 | 0) != 4;
-    let m = $Primitives.$widenLongToDouble(Long.f_MAX_VALUE__java_lang_Long) !=
+    let a = 10, b = ($value = a, a = a + 1 | 0, $value),
+        c = ($value_1 = a, a = a - 1 | 0, $value_1), d = a = a + 1 | 0,
+        e = a = a - 1 | 0, f = -a | 0, g = +a, h = ~a, i = 1 + 1 + 2 - 5 | 0,
+        j = Math.imul(1 + 2, 3 + 4);
+    let k = !((1 + 2 + 3 | 0) == 4), l = (1 + 2 | 0) != 4,
+        m = $Primitives.$widenLongToDouble(Long.f_MAX_VALUE__java_lang_Long) !=
         9.223372036854778E18;
     let o = $Primitives.$coerceDivision((5 + 1 | 0) / 2) - 0;
     a = a << 31;
