@@ -15,7 +15,7 @@
   ;; } catch ((NullPointerException|ClassCastException) e) {
   ;;   throw e;
   ;; } catch (RuntimeException r) {
-  ;;   r = null;
+  ;;   (r = null);
   ;; }
   ;; unimplemented statement TryStatement
   (block
@@ -27,7 +27,7 @@
    (ref.null $java.lang.RuntimeException)
    unreachable
   )(block
-   ;; r = null;
+   ;; (r = null);
    (local.tee $r.6752 (ref.null $java.lang.RuntimeException))
    drop
   ))

@@ -23,7 +23,7 @@
  (param $foo.6752 (ref null $inferreturn.InferReturn))
  (result (ref null $inferreturn.InferReturn))
  (block
-  ;; if (foo != null) {
+  ;; if ((foo != null)) {
   ;;   return inferreturn.InferReturn.inferGeneric(foo);
   ;; }
   (if (i32.const 0) (then (block
@@ -76,7 +76,7 @@
  (param $foo.6756 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (block
-  ;; return (V[]) new Object[0];
+  ;; return ((V[]) new Object[0]);
   ;; unimplemented statement ReturnStatement
   
  )

@@ -21,46 +21,46 @@
  (local $f.6755 f32)
  (local $d.6756 f64)
  (block
-  ;; byte b = (byte) 1;
+  ;; byte b = ((byte) 1);
   (local.tee $b.6751 (i32.const 0))
   drop
   
-  ;; char c = (char) 1;
+  ;; char c = ((char) 1);
   (local.tee $c.6752 (i32.const 0))
   drop
   
-  ;; short s = (short) 1;
+  ;; short s = ((short) 1);
   (local.tee $s.6753 (i32.const 0))
   drop
   
-  ;; int i = (int) 1;
+  ;; int i = ((int) 1);
   (local.tee $i.6754 (i32.const 0))
   drop
   
-  ;; float f = (float) 1;
+  ;; float f = ((float) 1);
   (local.tee $f.6755 (f32.const 0.0))
   drop
   
-  ;; double d = (double) 1;
+  ;; double d = ((double) 1);
   (local.tee $d.6756 (f64.const 0.0))
   drop
   
-  ;; b = (byte) 9223372036854775807;
+  ;; (b = ((byte) 9223372036854775807));
   (local.tee $b.6751 (i32.const 0))
   drop
-  ;; c = (char) 9223372036854775807;
+  ;; (c = ((char) 9223372036854775807));
   (local.tee $c.6752 (i32.const 0))
   drop
-  ;; s = (short) 9223372036854775807;
+  ;; (s = ((short) 9223372036854775807));
   (local.tee $s.6753 (i32.const 0))
   drop
-  ;; i = (int) 9223372036854775807;
+  ;; (i = ((int) 9223372036854775807));
   (local.tee $i.6754 (i32.const 0))
   drop
-  ;; f = (float) 9223372036854775807;
+  ;; (f = ((float) 9223372036854775807));
   (local.tee $f.6755 (f32.const 0.0))
   drop
-  ;; d = (double) 9223372036854775807;
+  ;; (d = ((double) 9223372036854775807));
   (local.tee $d.6756 (f64.const 0.0))
   drop
  )
@@ -84,7 +84,7 @@
  (local $o.6770 f64)
  (local $s.6771 i32)
  (block
-  ;; int a = 10,int b = a++,int c = a--,int d = ++a,int e = --a,int f = -a,int g = +a,int h = ~a,int i = 1 + 1 + 2 - 5,int j = 1 + 2 * 3 + 4;
+  ;; int a = 10,int b = a++,int c = a--,int d = ++a,int e = --a,int f = -a,int g = +a,int h = ~a,int i = (((1 + 1) + 2) - 5),int j = ((1 + 2) * (3 + 4));
   (local.tee $a.6757 (i32.const 10))
   drop
   (local.tee $b.6758 (i32.const 0))
@@ -106,7 +106,7 @@
   (local.tee $j.6766 (i32.const 0))
   drop
   
-  ;; boolean k = !1 + 2 + 3 == 4,boolean l = 1 + 2 != 4,boolean m = java.lang.Long.MAX_VALUE != 9.223372036854778E18;
+  ;; boolean k = !(((1 + 2) + 3) == 4),boolean l = ((1 + 2) != 4),boolean m = (java.lang.Long.MAX_VALUE != 9.223372036854778E18);
   (local.tee $k.6767 (i32.const 0))
   drop
   (local.tee $l.6768 (i32.const 0))
@@ -114,33 +114,33 @@
   (local.tee $m.6769 (i32.const 0))
   drop
   
-  ;; double o = 5 + 1 / 2 - 0.0;
+  ;; double o = (((5 + 1) / 2) - 0.0);
   (local.tee $o.6770 (f64.const 0.0))
   drop
   
-  ;; a = a << 31;
+  ;; (a = (a << 31));
   (local.tee $a.6757 (i32.const 0))
   drop
-  ;; a <<= 1;
+  ;; (a <<= 1);
   (i32.const 0)
   drop
-  ;; a += 1;
+  ;; (a += 1);
   (i32.const 0)
   drop
-  ;; a /= 1;
+  ;; (a /= 1);
   (i32.const 0)
   drop
-  ;; a += java.lang.Double.MAX_VALUE;
+  ;; (a += java.lang.Double.MAX_VALUE);
   (i32.const 0)
   drop
-  ;; k |= true;
+  ;; (k |= true);
   (i32.const 0)
   drop
   ;; short s = 10;
   (local.tee $s.6771 (i32.const 0))
   drop
   
-  ;; k = ++s == 10;
+  ;; (k = (++s == 10));
   (local.tee $k.6767 (i32.const 0))
   drop
  )
@@ -160,37 +160,37 @@
   (local.tee $ints.6772 (ref.null $java.lang.Object))
   drop
   
-  ;; ints[0] += 1;
+  ;; (ints[0] += 1);
   (i32.const 0)
   drop
-  ;; ints[0] -= 1;
+  ;; (ints[0] -= 1);
   (i32.const 0)
   drop
-  ;; ints[0] *= 1;
+  ;; (ints[0] *= 1);
   (i32.const 0)
   drop
-  ;; ints[0] /= 1;
+  ;; (ints[0] /= 1);
   (i32.const 0)
   drop
-  ;; ints[0] &= 1;
+  ;; (ints[0] &= 1);
   (i32.const 0)
   drop
-  ;; ints[0] ^= 1;
+  ;; (ints[0] ^= 1);
   (i32.const 0)
   drop
-  ;; ints[0] |= 1;
+  ;; (ints[0] |= 1);
   (i32.const 0)
   drop
-  ;; ints[0] %= 1;
+  ;; (ints[0] %= 1);
   (i32.const 0)
   drop
-  ;; ints[0] <<= 1;
+  ;; (ints[0] <<= 1);
   (i32.const 0)
   drop
-  ;; ints[0] >>= 1;
+  ;; (ints[0] >>= 1);
   (i32.const 0)
   drop
-  ;; ints[0] >>>= 1;
+  ;; (ints[0] >>>= 1);
   (i32.const 0)
   drop
   ;; ints[0]++;
@@ -209,14 +209,14 @@
   ;; ++ints[++i];
   (i32.const 0)
   drop
-  ;; ints[i++] /= 1;
+  ;; (ints[i++] /= 1);
   (i32.const 0)
   drop
   ;; long[] longs = null;
   (local.tee $longs.6774 (ref.null $java.lang.Object))
   drop
   
-  ;; longs[0] += 1;
+  ;; (longs[0] += 1);
   (i64.const 0)
   drop
   ;; longs[0]--;
@@ -232,21 +232,21 @@
   (local.tee $booleans.6775 (ref.null $java.lang.Object))
   drop
   
-  ;; booleans[0] |= true;
+  ;; (booleans[0] |= true);
   (i32.const 0)
   drop
   ;; String[] strings = null;
   (local.tee $strings.6776 (ref.null $java.lang.Object))
   drop
   
-  ;; strings[0] += null;
+  ;; (strings[0] += null);
   (ref.null $java.lang.String)
   drop
   ;; short[] shorts = null;
   (local.tee $shorts.6777 (ref.null $java.lang.Object))
   drop
   
-  ;; boolean b = ++shorts[0] == 10;
+  ;; boolean b = (++shorts[0] == 10);
   (local.tee $b.6778 (i32.const 0))
   drop
   
@@ -286,27 +286,27 @@
   (local.tee $d.6780 (ref.null $java.lang.Integer))
   drop
   
-  ;; d += c;
+  ;; (d += c);
   (ref.null $java.lang.Integer)
   drop
   ;; int i = 43;
   (local.tee $i.6781 (i32.const 43))
   drop
   
-  ;; d += i;
+  ;; (d += i);
   (ref.null $java.lang.Integer)
   drop
-  ;; d <<= i;
+  ;; (d <<= i);
   (ref.null $java.lang.Integer)
   drop
-  ;; i += c;
+  ;; (i += c);
   (i32.const 0)
   drop
   ;; Integer e = ++c;
   (local.tee $e.6782 (ref.null $java.lang.Integer))
   drop
   
-  ;; e = ++c;
+  ;; (e = ++c);
   (local.tee $e.6782 (ref.null $java.lang.Integer))
   drop
   ;; Double e2 = 100.0;
@@ -320,7 +320,7 @@
   (local.tee $f.6784 (ref.null $java.lang.Integer))
   drop
   
-  ;; f = c++;
+  ;; (f = c++);
   (local.tee $f.6784 (ref.null $java.lang.Integer))
   drop
   ;; Byte b = 0;
@@ -350,7 +350,7 @@
   ;; ref.field++;
   (ref.null $java.lang.Integer)
   drop
-  ;; int n = 1 + ref.field;
+  ;; int n = (1 + ref.field);
   (local.tee $n.6788 (i32.const 0))
   drop
   
@@ -372,7 +372,7 @@
 ;;; void ArithmeticExpressions.testSideEffect()
 (func $testSideEffect<>:void@arithmeticexpressions.ArithmeticExpressions
  (block
-  ;; arithmeticexpressions.ArithmeticExpressions.getWithSideEffect().intField += 5;
+  ;; (arithmeticexpressions.ArithmeticExpressions.getWithSideEffect().intField += 5);
   (i64.const 0)
   drop
  )
@@ -407,28 +407,28 @@
   
   ;; double d;
   
-  ;; l = 2 - boxedInteger - 2;
+  ;; (l = ((2 - boxedInteger) - 2));
   (local.tee $l.6791 (i64.const 0))
   drop
-  ;; l = 2 | boxedInteger | 2;
+  ;; (l = ((2 | boxedInteger) | 2));
   (local.tee $l.6791 (i64.const 0))
   drop
-  ;; l = 1000000 * l * 60 * 60 * 24;
+  ;; (l = ((((1000000 * l) * 60) * 60) * 24));
   (local.tee $l.6791 (i64.const 0))
   drop
-  ;; l = 24 * 60 * 60 * l * 1000000;
+  ;; (l = ((((24 * 60) * 60) * l) * 1000000));
   (local.tee $l.6791 (i64.const 0))
   drop
-  ;; d = l = i = 20;
+  ;; (d = (l = (i = 20)));
   (local.tee $d.6792 (f64.const 0.0))
   drop
-  ;; l = boxedInteger = i = 20;
+  ;; (l = (boxedInteger = (i = 20)));
   (local.tee $l.6791 (i64.const 0))
   drop
-  ;; l = i + boxedInteger + l + 20;
+  ;; (l = (((i + boxedInteger) + l) + 20));
   (local.tee $l.6791 (i64.const 0))
   drop
-  ;; d = 20 + l + d;
+  ;; (d = ((20 + l) + d));
   (local.tee $d.6792 (f64.const 0.0))
   drop
  )

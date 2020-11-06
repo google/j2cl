@@ -22,26 +22,26 @@
   drop
   
   ;; if (a) {
-  ;;   number = 2;
+  ;;   (number = 2);
   ;; } else if (b) {
-  ;;   number = 3;
+  ;;   (number = 3);
   ;; } else {
-  ;;   number = 4;
+  ;;   (number = 4);
   ;; }
   (if (i32.const 0) (then (block
-   ;; number = 2;
+   ;; (number = 2);
    (local.tee $number.6753 (i32.const 2))
    drop
   )) (else (if (i32.const 0) (then (block
-   ;; number = 3;
+   ;; (number = 3);
    (local.tee $number.6753 (i32.const 3))
    drop
   )) (else (block
-   ;; number = 4;
+   ;; (number = 4);
    (local.tee $number.6753 (i32.const 4))
    drop
   )))))
-  ;; if (a) number = 5; else number = 6;
+  ;; if (a) (number = 5); else (number = 6);
   (if (i32.const 0) (then (local.tee $number.6753 (i32.const 5))
   drop) (else (local.tee $number.6753 (i32.const 6))
   drop)))

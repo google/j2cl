@@ -61,11 +61,13 @@ class ToStringRenderer {
 
       @Override
       public boolean enterBinaryExpression(BinaryExpression binaryExpression) {
+        print("(");
         accept(binaryExpression.getLeftOperand());
         print(" ");
         print(binaryExpression.getOperator().getSymbol());
         print(" ");
         accept(binaryExpression.getRightOperand());
+        print(")");
         return false;
       }
 
@@ -113,10 +115,11 @@ class ToStringRenderer {
 
       @Override
       public boolean enterCastExpression(CastExpression castExpression) {
-        print("(");
+        print("((");
         print(castExpression.getCastTypeDescriptor());
         print(") ");
         accept(castExpression.getExpression());
+        print(")");
         return false;
       }
 
@@ -157,11 +160,13 @@ class ToStringRenderer {
 
       @Override
       public boolean enterConditionalExpression(ConditionalExpression conditionalExpression) {
+        print("(");
         accept(conditionalExpression.getConditionExpression());
-        print(" ? ");
+        print(") ? (");
         accept(conditionalExpression.getTrueExpression());
-        print(" : ");
+        print(") : (");
         accept(conditionalExpression.getFalseExpression());
+        print(")");
         return false;
       }
 
