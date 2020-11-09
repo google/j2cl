@@ -1,0 +1,52 @@
+;;; Code for multipleconstructors.MultipleConstructors
+
+;;; CLASS  MultipleConstructors
+
+(type $multipleconstructors.MultipleConstructors (struct
+ (field $id@multipleconstructors.MultipleConstructors i32)
+ (field $flag@multipleconstructors.MultipleConstructors i32)
+))
+
+;;; MultipleConstructors(int id)
+(func $<init><int>:void@multipleconstructors.MultipleConstructors
+ (param $this (ref null $multipleconstructors.MultipleConstructors))
+ (param $id.6751 i32)
+ (block
+  ;; (MultipleConstructors.this.id = id);
+  (i32.const 0)
+  drop
+  ;; (MultipleConstructors.this.flag = (id == 0));
+  (i32.const 0)
+  drop
+ )
+)
+
+;;; MultipleConstructors(boolean flag)
+(func $<init><boolean>:void@multipleconstructors.MultipleConstructors
+ (param $this (ref null $multipleconstructors.MultipleConstructors))
+ (param $flag.6752 i32)
+ (block
+  ;; (MultipleConstructors.this.id = -1);
+  (i32.const 0)
+  drop
+  ;; (MultipleConstructors.this.flag = flag);
+  (i32.const 0)
+  drop
+ )
+)
+
+;;; MultipleConstructors(int id, boolean flag)
+(func $<init><int|boolean>:void@multipleconstructors.MultipleConstructors
+ (param $this (ref null $multipleconstructors.MultipleConstructors))
+ (param $id.6753 i32)
+ (param $flag.6754 i32)
+ (block
+  ;; (MultipleConstructors.this.id = id);
+  (i32.const 0)
+  drop
+  ;; (MultipleConstructors.this.flag = flag);
+  (i32.const 0)
+  drop
+ )
+)
+

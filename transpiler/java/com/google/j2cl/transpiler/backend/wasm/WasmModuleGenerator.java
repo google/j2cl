@@ -25,8 +25,10 @@ import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.Method;
+import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
+import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
@@ -119,15 +121,33 @@ public class WasmModuleGenerator {
     builder.newLine();
     builder.append("(func " + environment.getMethodImplementationName(method.getDescriptor()));
 
+    MethodDescriptor methodDescriptor = method.getDescriptor();
     if (pendingEntryPoints.remove(method.getQualifiedBinaryName())) {
       if (!method.isStatic()) {
         problems.error("Entry point [%s] is not a static method.", method.getQualifiedBinaryName());
       }
-      builder.append(" (export \"" + method.getDescriptor().getName() + "\")");
+      builder.append(" (export \"" + methodDescriptor.getName() + "\")");
     }
 
     // Emit parameters
     builder.indent();
+    if (!method.isStatic()) {
+      // Add the implicit "this" parameter to instance methods and constructors.
+      // Note that constructors and private methods can declare the parameter type to be the
+      // enclosing type because they are not overridden but normal instance methods have to
+      // declare the parameter more generically as java.lang.Object, since all the overrides need
+      // to have matching signatures.
+      // TODO(rluble): revisit once the wasm gc spec and implementation have function subtyping.
+      builder.newLine();
+      builder.append(
+          "(param $this"
+              + " "
+              + environment.getWasmType(
+                  (method.isConstructor() || methodDescriptor.getVisibility().isPrivate())
+                      ? methodDescriptor.getEnclosingTypeDescriptor()
+                      : TypeDescriptors.get().javaLangObject)
+              + ")");
+    }
     for (Variable parameter : method.getParameters()) {
       builder.newLine();
       builder.append(
@@ -138,12 +158,10 @@ public class WasmModuleGenerator {
               + ")");
     }
     // Emit return type
-    if (!TypeDescriptors.isPrimitiveVoid(method.getDescriptor().getReturnTypeDescriptor())) {
+    TypeDescriptor returnTypeDescriptor = methodDescriptor.getReturnTypeDescriptor();
+    if (!TypeDescriptors.isPrimitiveVoid(returnTypeDescriptor)) {
       builder.newLine();
-      builder.append(
-          "(result "
-              + environment.getWasmType(method.getDescriptor().getReturnTypeDescriptor())
-              + ")");
+      builder.append("(result " + environment.getWasmType(returnTypeDescriptor) + ")");
     }
     // Emit locals.
     for (Variable variable : collectLocals(method)) {
