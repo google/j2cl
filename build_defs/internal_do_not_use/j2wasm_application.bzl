@@ -31,6 +31,38 @@ def _impl_j2wasm_application(ctx):
         mnemonic = "J2wasm",
     )
 
+    # unzip wat file
+    ctx.actions.run_shell(
+        progress_message = "Unzipping wat file",
+        inputs = [ctx.outputs.zip],
+        outputs = [ctx.outputs.wat],
+        command = (
+            "tmp=$(mktemp -d);" +
+            "%s x %s -d $tmp;" % (ctx.executable._zip.path, ctx.outputs.zip.path) +
+            "cp $tmp/module.wat %s;" % ctx.outputs.wat.path +
+            "rm -R $tmp;"
+        ),
+        tools = [ctx.executable._zip],
+        mnemonic = "J2wasmZip",
+    )
+
+    args = ctx.actions.args()
+    args.add("wat2wasm")
+    args.add(ctx.outputs.wat)
+    args.add("--enable-exceptions")
+    args.add("--enable-function-references")
+    args.add("--enable-gc")
+    args.add("--enable-reference-types")
+
+    ctx.actions.run(
+        executable = ctx.executable._wasp,
+        arguments = [args],
+        inputs = [ctx.outputs.wat],
+        outputs = [ctx.outputs.wasm],
+        mnemonic = "J2wasm",
+        progress_message = "Compiling wat2wasm",
+    )
+
 def _get_transitive_srcs(deps):
     return depset(transitive = [d[J2wasmInfo]._private_.transitive_srcs for d in deps])
 
@@ -49,8 +81,20 @@ j2wasm_application = rule(
             cfg = "host",
             executable = True,
         ),
+        "_zip": attr.label(
+            cfg = "host",
+            executable = True,
+            default = Label("@bazel_tools//tools/zip:zipper"),
+        ),
+        "_wasp": attr.label(
+            cfg = "host",
+            executable = True,
+            default = Label("//third_party/wasp"),
+        ),
     },
     outputs = {
         "zip": "%{name}.zip",
+        "wat": "%{name}.wat",
+        "wasm": "%{name}.wasm",
     },
 )
