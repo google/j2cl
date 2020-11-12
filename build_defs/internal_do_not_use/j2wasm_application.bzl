@@ -38,7 +38,7 @@ def _impl_j2wasm_application(ctx):
         outputs = [ctx.outputs.wat],
         command = (
             "tmp=$(mktemp -d);" +
-            "%s x %s -d $tmp;" % (ctx.executable._zip.path, ctx.outputs.zip.path) +
+            "%s %s -d $tmp;" % (ctx.executable._zip.path, ctx.outputs.zip.path) +
             "cp $tmp/module.wat %s;" % ctx.outputs.wat.path +
             "rm -R $tmp;"
         ),
@@ -84,7 +84,7 @@ j2wasm_application = rule(
         "_zip": attr.label(
             cfg = "host",
             executable = True,
-            default = Label("@bazel_tools//tools/zip:zipper"),
+            default = Label("//third_party/unzip"),
         ),
         "_wasp": attr.label(
             cfg = "host",
