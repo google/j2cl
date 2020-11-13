@@ -6,8 +6,6 @@
 # Other integration tests will want to run transpiled output as JS and
 # should make use of j2cl_library macro.
 
-load("//testing/web/build_defs:web.bzl", "web_test_config")  # copybara_strip(not available in oss)
-
 package(
     licenses = ["notice"],
 )

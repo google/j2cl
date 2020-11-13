@@ -29,7 +29,7 @@ before_script:
   # This is so we understand failures better
   - echo "build --verbose_failures" >> .bazelrc
 
-script: ./build_test.sh
+script: ./build_test.sh CI
 
 notifications:
   email: false
