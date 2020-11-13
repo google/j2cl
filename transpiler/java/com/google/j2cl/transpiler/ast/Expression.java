@@ -129,7 +129,7 @@ public abstract class Expression extends Node implements Cloneable<Expression> {
     return infix(BinaryOperator.BIT_OR, this, rhs);
   }
 
-  /** Return an expression representing {@code this != rhs}. */
+  /** Return an expression representing {@code this == rhs}. */
   public Expression infixEquals(Expression rhs) {
     return infix(BinaryOperator.EQUALS, this, rhs);
   }
