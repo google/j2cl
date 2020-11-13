@@ -6,7 +6,7 @@
 # Other integration tests will want to run transpiled output as JS and
 # should make use of j2cl_library macro.
 
-load("//testing/web/build_defs:web.bzl", "web_test_config")
+load("//testing/web/build_defs:web.bzl", "web_test_config")  # copybara_strip(not available in oss)
 
 package(
     licenses = ["notice"],
@@ -34,11 +34,5 @@ filegroup(
         ":tree_artifact_enabled": ["tree_artifact_integration_tests_warnings_whitelist.txt"],
         "//conditions:default": ["integration_tests_warnings_whitelist.txt"],
     }),
-    visibility = [":__subpackages__"],
-)
-
-web_test_config(
-    name = "enable_wasmgc",
-    metadata = "chrome_linux_enable_wasmgc.json",
     visibility = [":__subpackages__"],
 )
