@@ -18,7 +18,9 @@ package com.google.j2cl.transpiler.backend.wasm;
 import static java.util.stream.Collectors.joining;
 
 import com.google.common.base.Strings;
+import com.google.common.collect.HashMultiset;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Multiset;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Field;
@@ -107,10 +109,11 @@ class GenerationEnvironment {
   }
 
   private final Map<Variable, String> variableNameByVariable = new HashMap<>();
+  private final Multiset<String> variableNameFrequency = HashMultiset.create();
 
   String getVariableName(Variable variable) {
     // TODO(rluble): add a proper variable name collision resolver.
     return variableNameByVariable.computeIfAbsent(
-        variable, v -> "$" + v.getName() + "." + variableNameByVariable.size());
+        variable, v -> "$" + v.getName() + "." + variableNameFrequency.add(v.getName(), 1));
   }
 }

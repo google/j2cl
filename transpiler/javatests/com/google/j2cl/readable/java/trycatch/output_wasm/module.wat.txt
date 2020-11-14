@@ -8,8 +8,8 @@
 ;;; void TryCatch.testMultiCatch()
 (func $testMultiCatch<>:void@trycatch.TryCatch
  (param $this (ref null $java.lang.Object))
- (local $e.6751 (ref null $java.lang.RuntimeException))
- (local $r.6752 (ref null $java.lang.RuntimeException))
+ (local $e.106 (ref null $java.lang.RuntimeException))
+ (local $r.9 (ref null $java.lang.RuntimeException))
  (block
   ;; try {
   ;;   throw new ClassCastException.<init>();
@@ -29,7 +29,7 @@
    unreachable
   )(block
    ;; (r = null);
-   (local.tee $r.6752 (ref.null $java.lang.RuntimeException))
+   (local.tee $r.9 (ref.null $java.lang.RuntimeException))
    drop
   ))
 )
@@ -37,9 +37,9 @@
 ;;; void TryCatch.testEmptyThrowableCatch()
 (func $testEmptyThrowableCatch<>:void@trycatch.TryCatch
  (param $this (ref null $java.lang.Object))
- (local $e.6753 (ref null $java.lang.Throwable))
- (local $e.6754 (ref null $java.lang.Exception))
- (local $e.6755 (ref null $java.lang.Throwable))
+ (local $e.107 (ref null $java.lang.Throwable))
+ (local $e.108 (ref null $java.lang.Exception))
+ (local $e.109 (ref null $java.lang.Throwable))
  (block
   ;; try {
   ;;   throw new ClassCastException.<init>();
@@ -70,7 +70,7 @@
 ;;; void TryCatch.testEmptyThrowableRethrow()
 (func $testEmptyThrowableRethrow<>:void@trycatch.TryCatch
  (param $this (ref null $java.lang.Object))
- (local $e.6756 (ref null $java.lang.Throwable))
+ (local $e.110 (ref null $java.lang.Throwable))
  (block
   ;; try {
   ;;   throw new ClassCastException.<init>();
@@ -109,9 +109,9 @@
 ;;; void TryCatch.testTryWithResource()
 (func $testTryWithResource<>:void@trycatch.TryCatch
  (param $this (ref null $java.lang.Object))
- (local $thing.6757 (ref null $trycatch.TryCatch.ClosableThing))
- (local $thing2.6758 (ref null $trycatch.TryCatch.ClosableThing))
- (local $e.6759 (ref null $java.lang.Exception))
+ (local $thing.0 (ref null $trycatch.TryCatch.ClosableThing))
+ (local $thing2.0 (ref null $trycatch.TryCatch.ClosableThing))
+ (local $e.111 (ref null $java.lang.Exception))
  (block
   ;; try (
   ;;     ClosableThing thing = new ClosableThing.<init>();
@@ -131,18 +131,18 @@
 ;;; void TryCatch.testTryWithResourceJava9()
 (func $testTryWithResourceJava9<>:void@trycatch.TryCatch
  (param $this (ref null $java.lang.Object))
- (local $thing.6760 (ref null $trycatch.TryCatch.ClosableThing))
- (local $thing2.6761 (ref null $trycatch.TryCatch.ClosableThing))
- (local $$resource.6762 (ref null $trycatch.TryCatch.ClosableThing))
- (local $$resource.6763 (ref null $trycatch.TryCatch.ClosableThing))
- (local $e.6764 (ref null $java.lang.Exception))
+ (local $thing.1 (ref null $trycatch.TryCatch.ClosableThing))
+ (local $thing2.1 (ref null $trycatch.TryCatch.ClosableThing))
+ (local $$resource.0 (ref null $trycatch.TryCatch.ClosableThing))
+ (local $$resource.1 (ref null $trycatch.TryCatch.ClosableThing))
+ (local $e.112 (ref null $java.lang.Exception))
  (block
   ;; ClosableThing thing = new ClosableThing.<init>();
-  (local.tee $thing.6760 (ref.null $trycatch.TryCatch.ClosableThing))
+  (local.tee $thing.1 (ref.null $trycatch.TryCatch.ClosableThing))
   drop
   
   ;; ClosableThing thing2 = new ClosableThing.<init>();
-  (local.tee $thing2.6761 (ref.null $trycatch.TryCatch.ClosableThing))
+  (local.tee $thing2.1 (ref.null $trycatch.TryCatch.ClosableThing))
   drop
   
   ;; try (
@@ -163,8 +163,8 @@
 ;;; void TryCatch.testNestedTryCatch()
 (func $testNestedTryCatch<>:void@trycatch.TryCatch
  (param $this (ref null $java.lang.Object))
- (local $ae.6765 (ref null $java.lang.Exception))
- (local $ie.6766 (ref null $java.lang.Exception))
+ (local $ae.0 (ref null $java.lang.Exception))
+ (local $ie.0 (ref null $java.lang.Exception))
  (block
   ;; try {
   ;;   throw new Exception.<init>();
@@ -206,7 +206,7 @@
 ;;; T TryCatch.getT(T t)
 (func $getT<java.lang.Object>:java.lang.Object@trycatch.TryCatch
  (param $this (ref null $trycatch.TryCatch))
- (param $t.6767 (ref null $java.lang.Object))
+ (param $t.71 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (block
   ;; return t;

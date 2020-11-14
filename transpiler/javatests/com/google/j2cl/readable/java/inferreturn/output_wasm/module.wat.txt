@@ -7,7 +7,7 @@
 
 ;;; InferReturn<T> InferReturn.inferGeneric(T foo)
 (func $inferGeneric<java.lang.Object>:inferreturn.InferReturn@inferreturn.InferReturn
- (param $foo.6751 (ref null $java.lang.Object))
+ (param $foo.0 (ref null $java.lang.Object))
  (result (ref null $inferreturn.InferReturn))
  (block
   ;; return new InferReturn.<init>();
@@ -20,7 +20,7 @@
 
 ;;; InferReturn<InferReturn<String>> InferReturn.tightenType(InferReturn<String> foo)
 (func $tightenType<inferreturn.InferReturn>:inferreturn.InferReturn@inferreturn.InferReturn
- (param $foo.6752 (ref null $inferreturn.InferReturn))
+ (param $foo.1 (ref null $inferreturn.InferReturn))
  (result (ref null $inferreturn.InferReturn))
  (block
   ;; if ((foo != null)) {
@@ -41,17 +41,17 @@
 
 ;;; void InferReturn.main()
 (func $main<>:void@inferreturn.InferReturn
- (local $list.6753 (ref null $java.util.ArrayList))
- (local $array.6754 (ref null $java.lang.Object))
+ (local $list.21 (ref null $java.util.ArrayList))
+ (local $array.154 (ref null $java.lang.Object))
  (block
   ;; ArrayList<Object> list = inferreturn.InferReturn.newArrayList("foo");
-  (local.tee $list.6753 (call $newArrayList<java.lang.Object>:java.util.ArrayList@inferreturn.InferReturn (ref.null $java.lang.Object)))
+  (local.tee $list.21 (call $newArrayList<java.lang.Object>:java.util.ArrayList@inferreturn.InferReturn (ref.null $java.lang.Object)))
   drop
   
   ;; inferreturn.InferReturn.acceptsArrayListOfObject(list);
   (call $acceptsArrayListOfObject<java.util.ArrayList>:void@inferreturn.InferReturn (ref.null $java.util.ArrayList))
   ;; Object[] array = inferreturn.InferReturn.newArray("foo");
-  (local.tee $array.6754 (ref.null $java.lang.Object))
+  (local.tee $array.154 (ref.null $java.lang.Object))
   drop
   
   ;; inferreturn.InferReturn.acceptsArrayOfObject(array);
@@ -60,7 +60,7 @@
 
 ;;; ArrayList<V> InferReturn.newArrayList(V foo)
 (func $newArrayList<java.lang.Object>:java.util.ArrayList@inferreturn.InferReturn
- (param $foo.6755 (ref null $java.lang.Object))
+ (param $foo.2 (ref null $java.lang.Object))
  (result (ref null $java.util.ArrayList))
  (block
   ;; return new ArrayList.<init>();
@@ -73,7 +73,7 @@
 
 ;;; V[] InferReturn.newArray(V foo)
 (func $newArray<java.lang.Object>:java.lang.Object<>@inferreturn.InferReturn
- (param $foo.6756 (ref null $java.lang.Object))
+ (param $foo.3 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (block
   ;; return ((V[]) new Object[0]);
@@ -86,14 +86,14 @@
 
 ;;; void InferReturn.acceptsArrayListOfObject(ArrayList<Object> foo)
 (func $acceptsArrayListOfObject<java.util.ArrayList>:void@inferreturn.InferReturn
- (param $foo.6757 (ref null $java.util.ArrayList))
+ (param $foo.4 (ref null $java.util.ArrayList))
  (block
  )
 )
 
 ;;; void InferReturn.acceptsArrayOfObject(Object[] foo)
 (func $acceptsArrayOfObject<java.lang.Object<>>:void@inferreturn.InferReturn
- (param $foo.6758 (ref null $java.lang.Object))
+ (param $foo.5 (ref null $java.lang.Object))
  (block
  )
 )
