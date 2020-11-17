@@ -1,0 +1,197 @@
+;;; Code for booleanoperations.BooleanOperations
+
+;;; CLASS  BooleanOperations
+
+(type $booleanoperations.BooleanOperations (struct
+))
+
+;;; void BooleanOperations.acceptBoolean(boolean b)
+(func $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations
+ (param $b.89 i32)
+ (block
+ )
+)
+
+;;; void BooleanOperations.test()
+(func $test<>:void@booleanoperations.BooleanOperations
+ (param $this (ref null $java.lang.Object))
+ (local $ls.0 i32)
+ (local $rs.0 i32)
+ (local $r.9 i32)
+ (local $br.0 (ref null $java.lang.Boolean))
+ (local $finalOuter.0 (ref null $booleanoperations.BooleanOperations.1Outer))
+ (local $outer.0 (ref null $booleanoperations.BooleanOperations.1Outer))
+ (block
+  ;; boolean ls = true;
+  (local.tee $ls.0 (i32.const 1))
+  drop
+  
+  ;; boolean rs = true;
+  (local.tee $rs.0 (i32.const 1))
+  drop
+  
+  ;; boolean r = true;
+  (local.tee $r.9 (i32.const 1))
+  drop
+  
+  ;; (r = (ls == rs));
+  (local.tee $r.9 (i32.eq (i32.const 0) (i32.const 0)))
+  drop
+  ;; (r = (ls != rs));
+  (local.tee $r.9 (i32.ne (i32.const 0) (i32.const 0)))
+  drop
+  ;; (r = (ls ^ rs));
+  (local.tee $r.9 (i32.xor (i32.const 0) (i32.const 0)))
+  drop
+  ;; (r = (ls & rs));
+  (local.tee $r.9 (i32.and (i32.const 0) (i32.const 0)))
+  drop
+  ;; (r = (ls | rs));
+  (local.tee $r.9 (i32.or (i32.const 0) (i32.const 0)))
+  drop
+  ;; (r = (ls && rs));
+  (local.tee $r.9 (i32.const 0))
+  drop
+  ;; (r = (ls || rs));
+  (local.tee $r.9 (i32.const 0))
+  drop
+  ;; (r = (ls = rs));
+  (local.tee $r.9 (local.tee $ls.0 (i32.const 0)))
+  drop
+  ;; (r ^= rs);
+  (i32.const 0)
+  drop
+  ;; (r &= rs);
+  (i32.const 0)
+  drop
+  ;; (r |= rs);
+  (i32.const 0)
+  drop
+  ;; booleanoperations.BooleanOperations.acceptBoolean((ls == rs));
+  (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (i32.const 0))
+  ;; booleanoperations.BooleanOperations.acceptBoolean((ls != rs));
+  (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (i32.const 0))
+  ;; booleanoperations.BooleanOperations.acceptBoolean((ls ^ rs));
+  (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (i32.const 0))
+  ;; booleanoperations.BooleanOperations.acceptBoolean((ls & rs));
+  (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (i32.const 0))
+  ;; booleanoperations.BooleanOperations.acceptBoolean((ls | rs));
+  (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (i32.const 0))
+  ;; booleanoperations.BooleanOperations.acceptBoolean((ls && rs));
+  (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (i32.const 0))
+  ;; booleanoperations.BooleanOperations.acceptBoolean((ls || rs));
+  (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (i32.const 0))
+  ;; booleanoperations.BooleanOperations.acceptBoolean((ls = rs));
+  (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (i32.const 0))
+  ;; Boolean br;
+  
+  ;; (br = ((Boolean) (ls == rs)));
+  (local.tee $br.0 (ref.null $java.lang.Boolean))
+  drop
+  ;; (br = ((Boolean) (ls != rs)));
+  (local.tee $br.0 (ref.null $java.lang.Boolean))
+  drop
+  ;; (br = ((Boolean) (ls ^ rs)));
+  (local.tee $br.0 (ref.null $java.lang.Boolean))
+  drop
+  ;; (br = ((Boolean) (ls & rs)));
+  (local.tee $br.0 (ref.null $java.lang.Boolean))
+  drop
+  ;; (br = ((Boolean) (ls | rs)));
+  (local.tee $br.0 (ref.null $java.lang.Boolean))
+  drop
+  ;; (br = ((Boolean) (ls && rs)));
+  (local.tee $br.0 (ref.null $java.lang.Boolean))
+  drop
+  ;; (br = ((Boolean) (ls || rs)));
+  (local.tee $br.0 (ref.null $java.lang.Boolean))
+  drop
+  ;; (br = ((Boolean) (ls = rs)));
+  (local.tee $br.0 (ref.null $java.lang.Boolean))
+  drop
+  ;; if ((ls == rs)) {
+  ;;   (r = true);
+  ;; }
+  (if (i32.eq (i32.const 0) (i32.const 0)) (then (block
+   ;; (r = true);
+   (local.tee $r.9 (i32.const 1))
+   drop
+  )))
+  ;; if ((ls != rs)) {
+  ;;   (r = true);
+  ;; }
+  (if (i32.ne (i32.const 0) (i32.const 0)) (then (block
+   ;; (r = true);
+   (local.tee $r.9 (i32.const 1))
+   drop
+  )))
+  ;; if ((ls ^ rs)) {
+  ;;   (r = true);
+  ;; }
+  (if (i32.xor (i32.const 0) (i32.const 0)) (then (block
+   ;; (r = true);
+   (local.tee $r.9 (i32.const 1))
+   drop
+  )))
+  ;; if ((ls & rs)) {
+  ;;   (r = true);
+  ;; }
+  (if (i32.and (i32.const 0) (i32.const 0)) (then (block
+   ;; (r = true);
+   (local.tee $r.9 (i32.const 1))
+   drop
+  )))
+  ;; if ((ls | rs)) {
+  ;;   (r = true);
+  ;; }
+  (if (i32.or (i32.const 0) (i32.const 0)) (then (block
+   ;; (r = true);
+   (local.tee $r.9 (i32.const 1))
+   drop
+  )))
+  ;; if ((ls && rs)) {
+  ;;   (r = true);
+  ;; }
+  (if (i32.const 0) (then (block
+   ;; (r = true);
+   (local.tee $r.9 (i32.const 1))
+   drop
+  )))
+  ;; if ((ls || rs)) {
+  ;;   (r = true);
+  ;; }
+  (if (i32.const 0) (then (block
+   ;; (r = true);
+   (local.tee $r.9 (i32.const 1))
+   drop
+  )))
+  ;; Outer finalOuter = BooleanOperations.this.new $1Outer.<init>();
+  (local.tee $finalOuter.0 (ref.null $booleanoperations.BooleanOperations.1Outer))
+  drop
+  
+  ;; (finalOuter.b |= true);
+  (i32.const 0)
+  drop
+  ;; Outer outer = BooleanOperations.this.new $1Outer.<init>();
+  (local.tee $outer.0 (ref.null $booleanoperations.BooleanOperations.1Outer))
+  drop
+  
+  ;; (outer.b |= ((outer = null) == null));
+  (i32.const 0)
+  drop
+ )
+)
+
+;;; CLASS  Outer
+
+(type $booleanoperations.BooleanOperations.1Outer (struct
+ (field $this@booleanoperations.BooleanOperations.1Outer (ref null $booleanoperations.BooleanOperations))
+ (field $b@booleanoperations.BooleanOperations.1Outer i32)
+))
+
+;;; CLASS  Inner
+
+(type $booleanoperations.BooleanOperations.1Outer.Inner (struct
+ (field $this@booleanoperations.BooleanOperations.1Outer.Inner (ref null $booleanoperations.BooleanOperations.1Outer))
+))
+

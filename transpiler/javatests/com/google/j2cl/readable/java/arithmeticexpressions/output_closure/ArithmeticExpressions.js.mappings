@@ -38,8 +38,8 @@
 [testPrimitives] => [let /** number */ $value, /** number */ $value_1;] "arithmeticexpressions.ArithmeticExpressions.testPrimitives"
 [int a = 10,
         b = a++,
-...        i = 1 + 1 + 2 - 5,
-        j = (1 + 2) * (3 + 4);] => [let a = 10, b = ($value = a, a = a + 1 | 0, $value), c = ($value_1 = a, a = a - 1 | 0, $value_1), d = a = a + 1 | 0, e = a = a - 1 | 0, f = -a | 0, g = +a, h = ~a, i = 1 + 1 + 2 - 5 | 0, j = Math.imul(1 + 2, 3 + 4);] "arithmeticexpressions.ArithmeticExpressions.testPrimitives"
+...        j = (1 + 2) * (3 + 4),
+        p = 1 / 2 * 3 % 4;] => [let a = 10, b = ($value = a, a = a + 1 | 0, $value), c = ($value_1 = a, a = a - 1 | 0, $value_1), d = a = a + 1 | 0, e = a = a - 1 | 0, f = -a | 0, g = +a, h = ~a, i = 1 + 1 + 2 - 5 | 0, j = Math.imul(1 + 2, 3 + 4), p = $Primitives.$coerceDivision(Math.imul($Primitives.$coerceDivision(1 / 2), 3) % 4);] "arithmeticexpressions.ArithmeticExpressions.testPrimitives"
 [a] => [a] "a"
 [b] => [b] "b"
 [c] => [c] "c"
@@ -50,6 +50,7 @@
 [h] => [h] "h"
 [i] => [i] "i"
 [j] => [j] "j"
+[p] => [p] "p"
 [boolean k = !(1 + 2 + 3 == 4), l = (1 + 2 != 4), m = Long.MAX_VALUE != 9223372036854776833d;] => [let k = !((1 + 2 + 3 | 0) == 4), l = (1 + 2 | 0) != 4, m = $Primitives.$widenLongToDouble(Long.f_MAX_VALUE__java_lang_Long) != 9.223372036854778E18;] "arithmeticexpressions.ArithmeticExpressions.testPrimitives"
 [k] => [k] "k"
 [l] => [l] "l"
@@ -65,6 +66,9 @@
 [short s = 10;] => [let s = 10;] "arithmeticexpressions.ArithmeticExpressions.testPrimitives"
 [s] => [s] "s"
 [k = ++s == 10;] => [k = (s = $Primitives.$narrowIntToShort(s + 1 | 0)) == 10;] "arithmeticexpressions.ArithmeticExpressions.testPrimitives"
+[int q = 3 >> 2;] => [let q = 3 >> 2;] "arithmeticexpressions.ArithmeticExpressions.testPrimitives"
+[q] => [q] "q"
+[q = 3 >>> 2;] => [q = 3 >>> 2 | 0;] "arithmeticexpressions.ArithmeticExpressions.testPrimitives"
 [testCompoundArray] => [m_testCompoundArray__]
 [int[] ints = null;] => [let ints = null;] "arithmeticexpressions.ArithmeticExpressions.testCompoundArray"
 [ints] => [ints] "ints"

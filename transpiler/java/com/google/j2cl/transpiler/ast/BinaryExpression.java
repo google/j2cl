@@ -114,6 +114,12 @@ public class BinaryExpression extends Expression {
     return AstUtils.matchesStringContext(this);
   }
 
+  public boolean isReferenceComparison() {
+    return (getOperator() == BinaryOperator.EQUALS || getOperator() == BinaryOperator.NOT_EQUALS)
+        && !getLeftOperand().getTypeDescriptor().isPrimitive()
+        && !getRightOperand().getTypeDescriptor().isPrimitive();
+  }
+
   @Override
   public BinaryExpression clone() {
     return newBuilder()

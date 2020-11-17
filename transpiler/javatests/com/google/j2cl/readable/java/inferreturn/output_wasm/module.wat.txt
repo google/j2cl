@@ -23,7 +23,7 @@
  (param $foo.1 (ref null $inferreturn.InferReturn))
  (result (ref null $inferreturn.InferReturn))
  (block
-  ;; if ((foo != null)) {
+  ;; if (!(foo == null)) {
   ;;   return inferreturn.InferReturn.inferGeneric(foo);
   ;; }
   (if (i32.const 0) (then (block
@@ -51,7 +51,7 @@
   ;; inferreturn.InferReturn.acceptsArrayListOfObject(list);
   (call $acceptsArrayListOfObject<java.util.ArrayList>:void@inferreturn.InferReturn (ref.null $java.util.ArrayList))
   ;; Object[] array = inferreturn.InferReturn.newArray("foo");
-  (local.tee $array.154 (ref.null $java.lang.Object))
+  (local.tee $array.154 (call $newArray<java.lang.Object>:java.lang.Object<>@inferreturn.InferReturn (ref.null $java.lang.String)))
   drop
   
   ;; inferreturn.InferReturn.acceptsArrayOfObject(array);

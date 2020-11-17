@@ -87,6 +87,7 @@ import com.google.j2cl.transpiler.passes.OptimizeAnonymousInnerClassesToFunction
 import com.google.j2cl.transpiler.passes.OptimizeAutoValue;
 import com.google.j2cl.transpiler.passes.RemoveNoopStatements;
 import com.google.j2cl.transpiler.passes.RemoveUnneededJsDocCasts;
+import com.google.j2cl.transpiler.passes.RewriteReferenceNotEquals;
 import com.google.j2cl.transpiler.passes.RewriteStringEquals;
 import com.google.j2cl.transpiler.passes.VerifyNormalizedUnits;
 import com.google.j2cl.transpiler.passes.VerifyParamAndArgCounts;
@@ -256,7 +257,21 @@ public enum Backend {
 
     @Override
     public ImmutableList<NormalizationPass> getPasses(boolean experimentalOptimizeAutovalue) {
-      return ImmutableList.of();
+      return ImmutableList.of(
+          // Pre-verifications
+          new VerifySingleAstReference(),
+          new VerifyParamAndArgCounts(),
+          new VerifyVariableScoping(),
+
+          // Rewrite 'a != b' to '!(a == b)'
+          new RewriteReferenceNotEquals(),
+
+          // Post-verifications
+          new VerifySingleAstReference(),
+          new VerifyParamAndArgCounts(),
+          new VerifyVariableScoping());
+      // TODO(b/173478946): enable it
+      // new VerifyNormalizedUnits());
     }
   };
 

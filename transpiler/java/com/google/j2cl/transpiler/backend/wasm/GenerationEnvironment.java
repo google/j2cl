@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.backend.wasm;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static java.util.stream.Collectors.joining;
 
 import com.google.common.base.Strings;
@@ -49,9 +50,14 @@ class GenerationEnvironment {
           .put(PrimitiveTypes.DOUBLE, "f64")
           .build();
 
+  static String getWasmTypeForPrimitive(TypeDescriptor typeDescriptor) {
+    checkArgument(typeDescriptor.isPrimitive());
+    return WASM_TYPES_BY_PRIMITIVE_TYPES.get(typeDescriptor);
+  }
+
   String getWasmType(TypeDescriptor typeDescriptor) {
     if (typeDescriptor.isPrimitive()) {
-      return WASM_TYPES_BY_PRIMITIVE_TYPES.get(typeDescriptor);
+      return getWasmTypeForPrimitive(typeDescriptor);
     }
     return "(ref null " + getWasmTypeName(typeDescriptor) + ")";
   }

@@ -45,7 +45,8 @@ public class ArithmeticExpressions {
         g = +a,
         h = ~a,
         i = 1 + 1 + 2 - 5,
-        j = (1 + 2) * (3 + 4);
+        j = (1 + 2) * (3 + 4),
+        p = 1 / 2 * 3 % 4;
     boolean k = !(1 + 2 + 3 == 4), l = (1 + 2 != 4), m = Long.MAX_VALUE != 9223372036854776833d;
     double o = ((5 + 1) / 2) - 0.0;
 
@@ -59,6 +60,9 @@ public class ArithmeticExpressions {
 
     short s = 10;
     k = ++s == 10;
+
+    int q = 3 >> 2;
+    q = 3 >>> 2;
   }
 
   // Compount assignments in static fields

@@ -19,6 +19,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
+import com.google.j2cl.transpiler.ast.BinaryOperator;
 import com.google.j2cl.transpiler.ast.BooleanLiteral;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.ExpressionWithComment;
@@ -55,12 +56,30 @@ final class ExpressionTranspiler {
 
       @Override
       public boolean enterBinaryExpression(BinaryExpression expression) {
-        switch (expression.getOperator()) {
-          case ASSIGN:
-            return renderAssignmentExpression(expression);
-          default:
-            return enterExpression(expression);
+        BinaryOperator operator = expression.getOperator();
+        if (operator == BinaryOperator.ASSIGN) {
+          return renderAssignmentExpression(expression);
         }
+
+        renderBinaryOperation(expression);
+        return false;
+      }
+
+      private void renderBinaryOperation(BinaryExpression expression) {
+        WasmBinaryOperation wasmOperation = WasmBinaryOperation.getOperation(expression);
+        if (wasmOperation == null) {
+          // TODO(dramaix): remove and checkArgument once every operator is implemented.
+          enterExpression(expression);
+          return;
+        }
+
+        sourceBuilder.append("(" + wasmOperation.getInstruction(expression) + " ");
+        renderTypedExpression(
+            wasmOperation.getOperandType(expression), expression.getLeftOperand());
+        sourceBuilder.append(" ");
+        renderTypedExpression(
+            wasmOperation.getOperandType(expression), expression.getRightOperand());
+        sourceBuilder.append(")");
       }
 
       private boolean renderAssignmentExpression(BinaryExpression expression) {
@@ -144,14 +163,21 @@ final class ExpressionTranspiler {
 
       private void renderVariableAssignment(Variable variable, Expression assignment) {
         sourceBuilder.append("(local.tee " + environment.getVariableName(variable) + " ");
-
-        // TODO(dramaix): remove when coercions and casting are in place.
-        if (variable.getTypeDescriptor().hasSameRawType(assignment.getTypeDescriptor())) {
-          render(assignment);
-        } else {
-          render(variable.getTypeDescriptor().getDefaultValue());
-        }
+        renderTypedExpression(variable.getTypeDescriptor(), assignment);
         sourceBuilder.append(")");
+      }
+
+      private void renderTypedExpression(TypeDescriptor typeDescriptor, Expression expression) {
+        boolean isAssignable =
+            typeDescriptor.isPrimitive()
+                ? typeDescriptor.equals(expression.getTypeDescriptor())
+                : expression.getTypeDescriptor().isAssignableTo(typeDescriptor);
+        // TODO(dramaix): remove when coercions and casting are in place.
+        if (isAssignable) {
+          render(expression);
+        } else {
+          render(typeDescriptor.getDefaultValue());
+        }
       }
 
       private void render(Expression expression) {
