@@ -105,6 +105,7 @@ public abstract class BazelWorker {
           .build()
           .writeDelimitedTo(realStdOut);
       realStdOut.flush();
+      buffer.reset();
     }
   }
 
