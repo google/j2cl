@@ -180,6 +180,13 @@ final class ExpressionTranspiler {
         }
       }
 
+      @Override
+      public boolean enterVariableReference(VariableReference variableReference) {
+        sourceBuilder.append(
+            "(local.get " + environment.getVariableName(variableReference.getTarget()) + ")");
+        return false;
+      }
+
       private void render(Expression expression) {
         expression.accept(this);
       }

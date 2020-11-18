@@ -125,7 +125,7 @@
   drop
   
   ;; (a = (a << 31));
-  (local.tee $a.146 (i32.shl (i32.const 0) (i32.const 0)))
+  (local.tee $a.146 (i32.shl (local.get $a.146) (i32.const 0)))
   drop
   ;; (a <<= 1);
   (i32.const 0)
@@ -430,10 +430,10 @@
   (local.tee $l.8 (i64.or (i64.const 0) (i64.const 2)))
   drop
   ;; (l = ((((1000000 * l) * 60) * 60) * 24));
-  (local.tee $l.8 (i64.mul (i64.mul (i64.mul (i64.mul (i64.const 1000000) (i64.const 0)) (i64.const 0)) (i64.const 0)) (i64.const 0)))
+  (local.tee $l.8 (i64.mul (i64.mul (i64.mul (i64.mul (i64.const 1000000) (local.get $l.8)) (i64.const 0)) (i64.const 0)) (i64.const 0)))
   drop
   ;; (l = ((((24 * 60) * 60) * l) * 1000000));
-  (local.tee $l.8 (i64.mul (i64.mul (i64.const 0) (i64.const 0)) (i64.const 1000000)))
+  (local.tee $l.8 (i64.mul (i64.mul (i64.const 0) (local.get $l.8)) (i64.const 1000000)))
   drop
   ;; (d = (l = (i = 20)));
   (local.tee $d.82 (f64.const 0.0))
@@ -442,10 +442,10 @@
   (local.tee $l.8 (i64.const 0))
   drop
   ;; (l = (((i + boxedInteger) + l) + 20));
-  (local.tee $l.8 (i64.add (i64.add (i64.const 0) (i64.const 0)) (i64.const 0)))
+  (local.tee $l.8 (i64.add (i64.add (i64.const 0) (local.get $l.8)) (i64.const 0)))
   drop
   ;; (d = ((20 + l) + d));
-  (local.tee $d.82 (f64.add (f64.const 0.0) (f64.const 0.0)))
+  (local.tee $d.82 (f64.add (f64.const 0.0) (local.get $d.82)))
   drop
  )
 )

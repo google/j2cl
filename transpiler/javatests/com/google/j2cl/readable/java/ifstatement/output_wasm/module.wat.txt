@@ -29,11 +29,11 @@
   ;; } else {
   ;;   (number = 4);
   ;; }
-  (if (i32.const 0) (then (block
+  (if (local.get $a.146) (then (block
    ;; (number = 2);
    (local.tee $number.4 (i32.const 2))
    drop
-  )) (else (if (i32.const 0) (then (block
+  )) (else (if (local.get $b.89) (then (block
    ;; (number = 3);
    (local.tee $number.4 (i32.const 3))
    drop
@@ -43,7 +43,7 @@
    drop
   )))))
   ;; if (a) (number = 5); else (number = 6);
-  (if (i32.const 0) (then (local.tee $number.4 (i32.const 5))
+  (if (local.get $a.146) (then (local.tee $number.4 (i32.const 5))
   drop) (else (local.tee $number.4 (i32.const 6))
   drop)))
 )
