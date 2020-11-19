@@ -21,6 +21,7 @@ import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.BinaryOperator;
 import com.google.j2cl.transpiler.ast.BooleanLiteral;
+import com.google.j2cl.transpiler.ast.ConditionalExpression;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.ExpressionWithComment;
 import com.google.j2cl.transpiler.ast.MethodCall;
@@ -28,6 +29,7 @@ import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
+import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.Variable;
@@ -90,6 +92,20 @@ final class ExpressionTranspiler {
           return false;
         }
         return enterExpression(expression);
+      }
+
+      @Override
+      public boolean enterConditionalExpression(ConditionalExpression conditionalExpression) {
+        TypeDescriptor typeDescriptor = conditionalExpression.getTypeDescriptor();
+        sourceBuilder.append("(if (result " + environment.getWasmType(typeDescriptor) + ") ");
+        renderTypedExpression(
+            PrimitiveTypes.BOOLEAN, conditionalExpression.getConditionExpression());
+        sourceBuilder.append(" (then ");
+        renderTypedExpression(typeDescriptor, conditionalExpression.getTrueExpression());
+        sourceBuilder.append(") (else ");
+        renderTypedExpression(typeDescriptor, conditionalExpression.getFalseExpression());
+        sourceBuilder.append("))");
+        return false;
       }
 
       @Override
