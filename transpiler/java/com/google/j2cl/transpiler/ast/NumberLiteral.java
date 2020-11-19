@@ -33,6 +33,10 @@ public class NumberLiteral extends Literal {
     return new NumberLiteral(PrimitiveTypes.CHAR, (int) value);
   }
 
+  public static NumberLiteral fromLong(long value) {
+    return new NumberLiteral(PrimitiveTypes.LONG, value);
+  }
+
   private final PrimitiveTypeDescriptor typeDescriptor;
   private final Number value;
 

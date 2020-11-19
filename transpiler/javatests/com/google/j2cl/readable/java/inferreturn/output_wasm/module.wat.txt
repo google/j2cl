@@ -26,7 +26,7 @@
   ;; if (!(foo == null)) {
   ;;   return inferreturn.InferReturn.inferGeneric(foo);
   ;; }
-  (if (i32.const 0) (then (block
+  (if (i32.eqz (ref.eq (local.get $foo.1) (ref.null $java.lang.Object))) (then (block
    ;; return inferreturn.InferReturn.inferGeneric(foo);
    ;; unimplemented statement ReturnStatement
    

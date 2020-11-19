@@ -89,6 +89,7 @@ import com.google.j2cl.transpiler.passes.RemoveNoopStatements;
 import com.google.j2cl.transpiler.passes.RemoveUnneededJsDocCasts;
 import com.google.j2cl.transpiler.passes.RewriteReferenceNotEquals;
 import com.google.j2cl.transpiler.passes.RewriteStringEquals;
+import com.google.j2cl.transpiler.passes.RewriteUnaryExpressions;
 import com.google.j2cl.transpiler.passes.VerifyNormalizedUnits;
 import com.google.j2cl.transpiler.passes.VerifyParamAndArgCounts;
 import com.google.j2cl.transpiler.passes.VerifySingleAstReference;
@@ -265,6 +266,8 @@ public enum Backend {
 
           // Rewrite 'a != b' to '!(a == b)'
           new RewriteReferenceNotEquals(),
+          new ExpandCompoundAssignments(/* expandAll */ true),
+          new RewriteUnaryExpressions(),
 
           // Post-verifications
           new VerifySingleAstReference(),

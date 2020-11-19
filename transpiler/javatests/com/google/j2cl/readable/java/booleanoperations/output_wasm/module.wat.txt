@@ -58,14 +58,14 @@
   ;; (r = (ls = rs));
   (local.tee $r.9 (local.tee $ls.0 (local.get $rs.0)))
   drop
-  ;; (r ^= rs);
-  (i32.const 0)
+  ;; (r = (r ^ rs));
+  (local.tee $r.9 (i32.xor (local.get $r.9) (local.get $rs.0)))
   drop
-  ;; (r &= rs);
-  (i32.const 0)
+  ;; (r = (r & rs));
+  (local.tee $r.9 (i32.and (local.get $r.9) (local.get $rs.0)))
   drop
-  ;; (r |= rs);
-  (i32.const 0)
+  ;; (r = (r | rs));
+  (local.tee $r.9 (i32.or (local.get $r.9) (local.get $rs.0)))
   drop
   ;; booleanoperations.BooleanOperations.acceptBoolean((ls == rs));
   (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (i32.const 0))
@@ -169,14 +169,14 @@
   (local.tee $finalOuter.0 (ref.null $booleanoperations.BooleanOperations.1Outer))
   drop
   
-  ;; (finalOuter.b |= true);
+  ;; (finalOuter.b = (finalOuter.b | true));
   (i32.const 0)
   drop
   ;; Outer outer = BooleanOperations.this.new $1Outer.<init>();
   (local.tee $outer.0 (ref.null $booleanoperations.BooleanOperations.1Outer))
   drop
   
-  ;; (outer.b |= ((outer = null) == null));
+  ;; (outer.b = (outer.b | ((outer = null) == null)));
   (i32.const 0)
   drop
  )

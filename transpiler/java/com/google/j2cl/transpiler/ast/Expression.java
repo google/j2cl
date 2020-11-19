@@ -129,6 +129,11 @@ public abstract class Expression extends Node implements Cloneable<Expression> {
     return infix(BinaryOperator.BIT_OR, this, rhs);
   }
 
+  /** Return an expression representing {@code this ^ rhs}. */
+  public Expression infixBitwiseXor(Expression rhs) {
+    return infix(BinaryOperator.BIT_XOR, this, rhs);
+  }
+
   /** Return an expression representing {@code this == rhs}. */
   public Expression infixEquals(Expression rhs) {
     return infix(BinaryOperator.EQUALS, this, rhs);
@@ -154,6 +159,11 @@ public abstract class Expression extends Node implements Cloneable<Expression> {
   public Expression infixNotEqualsNull() {
     checkState(!getTypeDescriptor().isPrimitive());
     return infix(BinaryOperator.NOT_EQUALS, this, getTypeDescriptor().getNullValue());
+  }
+
+  /** Return an expression representing {@code this - rhs}. */
+  public Expression infixMinus(Expression rhs) {
+    return infix(BinaryOperator.MINUS, this, rhs);
   }
 
   private static Expression infix(BinaryOperator operator, Expression lhs, Expression rhs) {

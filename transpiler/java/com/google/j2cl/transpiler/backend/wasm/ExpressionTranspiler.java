@@ -32,6 +32,7 @@ import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
+import com.google.j2cl.transpiler.ast.UnaryExpression;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
@@ -122,6 +123,13 @@ final class ExpressionTranspiler {
       }
 
       @Override
+      public boolean enterExpressionWithComment(ExpressionWithComment expressionWithComment) {
+        sourceBuilder.append(";; " + expressionWithComment.getComment());
+        render(expressionWithComment.getExpression());
+        return false;
+      }
+
+      @Override
       public boolean enterMethodCall(MethodCall methodCall) {
         MethodDescriptor target = methodCall.getTarget();
         if (target.isStatic()) {
@@ -141,13 +149,6 @@ final class ExpressionTranspiler {
       }
 
       @Override
-      public boolean enterExpressionWithComment(ExpressionWithComment expressionWithComment) {
-        sourceBuilder.append(";; " + expressionWithComment.getComment());
-        render(expressionWithComment.getExpression());
-        return false;
-      }
-
-      @Override
       public boolean enterNullLiteral(NullLiteral nullLiteral) {
         sourceBuilder.append(
             "(ref.null " + environment.getWasmTypeName(nullLiteral.getTypeDescriptor()) + ")");
@@ -159,6 +160,18 @@ final class ExpressionTranspiler {
         PrimitiveTypeDescriptor typeDescriptor = numberLiteral.getTypeDescriptor();
         String wasmType = checkNotNull(environment.getWasmType(typeDescriptor));
         sourceBuilder.append("(" + wasmType + ".const " + numberLiteral.getValue() + ")");
+        return false;
+      }
+
+      @Override
+      public boolean enterUnaryExpression(UnaryExpression expression) {
+        WasmUnaryOperation wasmUnaryOperation = WasmUnaryOperation.get(expression);
+
+        sourceBuilder.append("(" + wasmUnaryOperation.getInstruction(expression) + " ");
+        renderTypedExpression(
+            wasmUnaryOperation.getOperandType(expression), expression.getOperand());
+
+        sourceBuilder.append(")");
         return false;
       }
 

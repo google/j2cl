@@ -33,6 +33,21 @@ import com.google.j2cl.transpiler.ast.UnaryExpression;
 
 /** Expands compound assignments where conversions need to be performed. */
 public class ExpandCompoundAssignments extends NormalizationPass {
+
+  /**
+   * Whether to expand every compound assignment or select ones. Note that wasm does not have
+   * compound assignment instructions whereas JavaScript does.
+   */
+  private final boolean expandAll;
+
+  public ExpandCompoundAssignments() {
+    this(false);
+  }
+
+  public ExpandCompoundAssignments(boolean expandAll) {
+    this.expandAll = expandAll;
+  }
+
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(
@@ -52,11 +67,11 @@ public class ExpandCompoundAssignments extends NormalizationPass {
             return ForStatement.Builder.from(forStatement)
                 .setInitializers(
                     forStatement.getInitializers().stream()
-                        .map(ExpandCompoundAssignments::normalizePostfixExpression)
+                        .map(ExpandCompoundAssignments.this::normalizePostfixExpression)
                         .collect(ImmutableList.toImmutableList()))
                 .setUpdates(
                     forStatement.getUpdates().stream()
-                        .map(ExpandCompoundAssignments::normalizePostfixExpression)
+                        .map(ExpandCompoundAssignments.this::normalizePostfixExpression)
                         .collect(ImmutableList.toImmutableList()))
                 .build();
           }
@@ -90,13 +105,17 @@ public class ExpandCompoundAssignments extends NormalizationPass {
         });
   }
 
-  private static boolean needsExpansion(BinaryExpression expression) {
+  private boolean needsExpansion(BinaryExpression expression) {
     TypeDescriptor lhsTypeDescriptor = expression.getLeftOperand().getTypeDescriptor();
     TypeDescriptor rhsTypeDescriptor = expression.getRightOperand().getTypeDescriptor();
     BinaryOperator operator = expression.getOperator();
 
     if (!operator.isCompoundAssignment()) {
       return false;
+    }
+
+    if (expandAll) {
+      return true;
     }
 
     // For floating point, native arithmetic is good enough and doesn't need instrumentation.
@@ -123,11 +142,15 @@ public class ExpandCompoundAssignments extends NormalizationPass {
     return true;
   }
 
-  private static boolean needsExpansion(UnaryExpression expression) {
+  private boolean needsExpansion(UnaryExpression expression) {
     TypeDescriptor targetTypeDescriptor = expression.getOperand().getTypeDescriptor();
 
     if (!expression.getOperator().hasSideEffect()) {
       return false;
+    }
+
+    if (expandAll) {
+      return true;
     }
 
     // For floating point, native arithmetic is good enough for unary operations.
@@ -139,7 +162,7 @@ public class ExpandCompoundAssignments extends NormalizationPass {
   }
 
   /** Normalizes expandable postfix expressions into the corresponding prefix expressions. */
-  private static Expression normalizePostfixExpression(Expression expression) {
+  private Expression normalizePostfixExpression(Expression expression) {
     if (expression instanceof PostfixExpression) {
       PostfixExpression postfixExpression = (PostfixExpression) expression;
       if (needsExpansion(postfixExpression)) {
