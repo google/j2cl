@@ -88,3 +88,8 @@ def readable_example(
             deps = [":readable-j2wasm"],
             entry_points = wasm_entry_points,
         )
+
+        build_test(
+            name = "readable_wasm_build_test",
+            targets = ["readable_wasm"],
+        )
