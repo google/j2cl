@@ -49,11 +49,11 @@
   ;; (r = (ls | rs));
   (local.tee $r.9 (i32.or (local.get $ls.0) (local.get $rs.0)))
   drop
-  ;; (r = (ls && rs));
-  (local.tee $r.9 (i32.const 0))
+  ;; (r = (ls) ? (rs) : (false));
+  (local.tee $r.9 (if (result i32) (local.get $ls.0) (then (local.get $rs.0)) (else (i32.const 0))))
   drop
-  ;; (r = (ls || rs));
-  (local.tee $r.9 (i32.const 0))
+  ;; (r = (ls) ? (true) : (rs));
+  (local.tee $r.9 (if (result i32) (local.get $ls.0) (then (i32.const 1)) (else (local.get $rs.0))))
   drop
   ;; (r = (ls = rs));
   (local.tee $r.9 (local.tee $ls.0 (local.get $rs.0)))
@@ -77,9 +77,9 @@
   (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (i32.const 0))
   ;; booleanoperations.BooleanOperations.acceptBoolean((ls | rs));
   (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (i32.const 0))
-  ;; booleanoperations.BooleanOperations.acceptBoolean((ls && rs));
+  ;; booleanoperations.BooleanOperations.acceptBoolean((ls) ? (rs) : (false));
   (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (i32.const 0))
-  ;; booleanoperations.BooleanOperations.acceptBoolean((ls || rs));
+  ;; booleanoperations.BooleanOperations.acceptBoolean((ls) ? (true) : (rs));
   (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (i32.const 0))
   ;; booleanoperations.BooleanOperations.acceptBoolean((ls = rs));
   (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (i32.const 0))
@@ -100,10 +100,10 @@
   ;; (br = ((Boolean) (ls | rs)));
   (local.tee $br.0 (ref.null $java.lang.Boolean))
   drop
-  ;; (br = ((Boolean) (ls && rs)));
+  ;; (br = ((Boolean) (ls) ? (rs) : (false)));
   (local.tee $br.0 (ref.null $java.lang.Boolean))
   drop
-  ;; (br = ((Boolean) (ls || rs)));
+  ;; (br = ((Boolean) (ls) ? (true) : (rs)));
   (local.tee $br.0 (ref.null $java.lang.Boolean))
   drop
   ;; (br = ((Boolean) (ls = rs)));
@@ -149,18 +149,18 @@
    (local.tee $r.9 (i32.const 1))
    drop
   )))
-  ;; if ((ls && rs)) {
+  ;; if ((ls) ? (rs) : (false)) {
   ;;   (r = true);
   ;; }
-  (if (i32.const 0) (then (block
+  (if (if (result i32) (local.get $ls.0) (then (local.get $rs.0)) (else (i32.const 0))) (then (block
    ;; (r = true);
    (local.tee $r.9 (i32.const 1))
    drop
   )))
-  ;; if ((ls || rs)) {
+  ;; if ((ls) ? (true) : (rs)) {
   ;;   (r = true);
   ;; }
-  (if (i32.const 0) (then (block
+  (if (if (result i32) (local.get $ls.0) (then (i32.const 1)) (else (local.get $rs.0))) (then (block
    ;; (r = true);
    (local.tee $r.9 (i32.const 1))
    drop
