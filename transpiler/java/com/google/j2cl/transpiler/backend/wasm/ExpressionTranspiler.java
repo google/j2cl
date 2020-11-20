@@ -16,7 +16,9 @@
 package com.google.j2cl.transpiler.backend.wasm;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveVoid;
 
+import com.google.common.collect.Iterables;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.BinaryOperator;
@@ -26,18 +28,19 @@ import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.ExpressionWithComment;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.MultiExpression;
 import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
-import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.UnaryExpression;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
 import com.google.j2cl.transpiler.ast.VariableReference;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
+import java.util.List;
 
 /**
  * Transforms expressions into WASM code.
@@ -113,7 +116,7 @@ final class ExpressionTranspiler {
       public boolean enterExpression(Expression expression) {
         // TODO(rluble): remove this method which is only a place holder until all expressions are
         // implemented.
-        if (!TypeDescriptors.isPrimitiveVoid(expression.getTypeDescriptor())) {
+        if (!isPrimitiveVoid(expression.getTypeDescriptor())) {
           // This is an unimplemented expression that returns a value (i.e. not a call to a
           // method returning void).
           // Emit the default value for the type as a place holder so that the module compiles.
@@ -145,6 +148,31 @@ final class ExpressionTranspiler {
           // TODO(rluble): remove once all method call types are implemented.
           return super.enterMethodCall(methodCall);
         }
+        return false;
+      }
+
+      @Override
+      public boolean enterMultiExpression(MultiExpression multiExpression) {
+        List<Expression> expressions = multiExpression.getExpressions();
+        Expression returnValue = Iterables.getLast(expressions);
+        sourceBuilder.append("(block");
+        sourceBuilder.indent();
+        sourceBuilder.newLine();
+        sourceBuilder.append(
+            "(result " + environment.getWasmType(returnValue.getTypeDescriptor()) + ")");
+        expressions.forEach(
+            expression -> {
+              sourceBuilder.newLine();
+              render(expression);
+              if (!isPrimitiveVoid(expression.getTypeDescriptor()) && expression != returnValue) {
+                // Remove the result of the expression from the stack.
+                sourceBuilder.newLine();
+                sourceBuilder.append("drop");
+              }
+            });
+        sourceBuilder.unindent();
+        sourceBuilder.newLine();
+        sourceBuilder.append(")");
         return false;
       }
 

@@ -93,9 +93,25 @@
   ;; int a = 10,int b = (int $value = a,(a = (a + 1)),$value),int c = (int $value = a,(a = (a - 1)),$value),int d = (a = (a + 1)),int e = (a = (a - 1)),int f = (0 - a),int g = a,int h = (-1 ^ a),int i = (((1 + 1) + 2) - 5),int j = ((1 + 2) * (3 + 4)),int p = (((1 / 2) * 3) % 4);
   (local.tee $a.146 (i32.const 10))
   drop
-  (local.tee $b.90 (i32.const 0))
+  (local.tee $b.90 (block
+   (result i32)
+   (local.tee $$value.67 (local.get $a.146))
+   drop
+   
+   (local.tee $a.146 (i32.add (local.get $a.146) (i32.const 1)))
+   drop
+   (local.get $$value.67)
+  ))
   drop
-  (local.tee $c.89 (i32.const 0))
+  (local.tee $c.89 (block
+   (result i32)
+   (local.tee $$value.68 (local.get $a.146))
+   drop
+   
+   (local.tee $a.146 (i32.sub (local.get $a.146) (i32.const 1)))
+   drop
+   (local.get $$value.68)
+  ))
   drop
   (local.tee $d.80 (local.tee $a.146 (i32.add (local.get $a.146) (i32.const 1))))
   drop
@@ -229,13 +245,53 @@
   drop
   
   ;; (int[] $array = ints,int $index = (int $value = i,(i = (i + 1)),$value),($array[$index] = ($array[$index] + 1)));
-  (i32.const 0)
+  (block
+   (result i32)
+   (local.tee $$array.35 (local.get $ints.0))
+   drop
+   (local.tee $$index.35 (block
+    (result i32)
+    (local.tee $$value.69 (local.get $i.205))
+    drop
+    
+    (local.tee $i.205 (i32.add (local.get $i.205) (i32.const 1)))
+    drop
+    (local.get $$value.69)
+   ))
+   drop
+   
+   (i32.const 0)
+  )
   drop
   ;; (int[] $array = ints,int $index = (i = (i + 1)),($array[$index] = ($array[$index] + 1)));
-  (i32.const 0)
+  (block
+   (result i32)
+   (local.tee $$array.36 (local.get $ints.0))
+   drop
+   (local.tee $$index.36 (local.tee $i.205 (i32.add (local.get $i.205) (i32.const 1))))
+   drop
+   
+   (i32.const 0)
+  )
   drop
   ;; (int[] $array = ints,int $index = (int $value = i,(i = (i + 1)),$value),($array[$index] = ($array[$index] / 1)));
-  (i32.const 0)
+  (block
+   (result i32)
+   (local.tee $$array.37 (local.get $ints.0))
+   drop
+   (local.tee $$index.37 (block
+    (result i32)
+    (local.tee $$value.70 (local.get $i.205))
+    drop
+    
+    (local.tee $i.205 (i32.add (local.get $i.205) (i32.const 1)))
+    drop
+    (local.get $$value.70)
+   ))
+   drop
+   
+   (i32.const 0)
+  )
   drop
   ;; long[] longs = null;
   (local.tee $longs.1 (ref.null $java.lang.Object))
@@ -251,7 +307,13 @@
   (i64.const 0)
   drop
   ;; (long[] $array = arithmeticexpressions.ArithmeticExpressions.getLongArray(),($array[0] = ($array[0] + 1)));
-  (i64.const 0)
+  (block
+   (result i64)
+   (local.tee $$array.38 (call $getLongArray<>:long<>@arithmeticexpressions.ArithmeticExpressions ))
+   drop
+   
+   (i64.const 0)
+  )
   drop
   ;; boolean[] booleans = null;
   (local.tee $booleans.0 (ref.null $java.lang.Object))
@@ -346,11 +408,27 @@
   (local.tee $e2.0 (ref.null $java.lang.Double))
   drop
   ;; Integer f = (Integer $value = c,(c = (c + 1)),$value);
-  (local.tee $f.14 (ref.null $java.lang.Integer))
+  (local.tee $f.14 (block
+   (result (ref null $java.lang.Integer))
+   (local.tee $$value.71 (local.get $c.90))
+   drop
+   
+   (local.tee $c.90 (ref.null $java.lang.Integer))
+   drop
+   (local.get $$value.71)
+  ))
   drop
   
   ;; (f = (Integer $value = c,(c = (c + 1)),$value));
-  (local.tee $f.14 (ref.null $java.lang.Integer))
+  (local.tee $f.14 (block
+   (result (ref null $java.lang.Integer))
+   (local.tee $$value.72 (local.get $c.90))
+   drop
+   
+   (local.tee $c.90 (ref.null $java.lang.Integer))
+   drop
+   (local.get $$value.72)
+  ))
   drop
   ;; Byte b = 0;
   (local.tee $b.92 (ref.null $java.lang.Byte))
@@ -403,7 +481,13 @@
  (local $$qualifier.0 (ref null $arithmeticexpressions.ArithmeticExpressions))
  (block
   ;; (ArithmeticExpressions $qualifier = arithmeticexpressions.ArithmeticExpressions.getWithSideEffect(),($qualifier.intField = ($qualifier.intField + 5)));
-  (i64.const 0)
+  (block
+   (result i64)
+   (local.tee $$qualifier.0 (call $getWithSideEffect<>:arithmeticexpressions.ArithmeticExpressions@arithmeticexpressions.ArithmeticExpressions ))
+   drop
+   
+   (i64.const 0)
+  )
   drop
  )
 )
