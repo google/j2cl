@@ -54,5 +54,16 @@ public class Main {
     assertTrue(i == 100);
     assertTrue(j == 5);
     assertTrue(count == 500);
+
+    count = 0;
+    boolean unreachable = true;
+    SKIP:
+    {
+      if (count == 0) {
+        break SKIP; // jumps to the end of the labeled block.
+      }
+      unreachable = false;
+    }
+    assertTrue(unreachable);
   }
 }
