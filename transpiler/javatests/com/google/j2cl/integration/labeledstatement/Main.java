@@ -58,6 +58,7 @@ public class Main {
     count = 0;
     boolean unreachable = true;
     SKIP:
+    NESTED_LABEL:
     {
       if (count == 0) {
         break SKIP; // jumps to the end of the labeled block.
