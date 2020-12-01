@@ -45,17 +45,17 @@
  (local $array.154 (ref null $java.lang.Object))
  (block
   ;; ArrayList<Object> list = inferreturn.InferReturn.newArrayList("foo");
-  (local.tee $list.21 (call $newArrayList<java.lang.Object>:java.util.ArrayList@inferreturn.InferReturn (ref.null $java.lang.Object)))
+  (local.tee $list.21 (call $newArrayList<java.lang.Object>:java.util.ArrayList@inferreturn.InferReturn (ref.null $java.lang.String)))
   drop
   
   ;; inferreturn.InferReturn.acceptsArrayListOfObject(list);
-  (call $acceptsArrayListOfObject<java.util.ArrayList>:void@inferreturn.InferReturn (ref.null $java.util.ArrayList))
+  (call $acceptsArrayListOfObject<java.util.ArrayList>:void@inferreturn.InferReturn (local.get $list.21))
   ;; Object[] array = inferreturn.InferReturn.newArray("foo");
   (local.tee $array.154 (call $newArray<java.lang.Object>:java.lang.Object<>@inferreturn.InferReturn (ref.null $java.lang.String)))
   drop
   
   ;; inferreturn.InferReturn.acceptsArrayOfObject(array);
-  (call $acceptsArrayOfObject<java.lang.Object<>>:void@inferreturn.InferReturn (ref.null $java.lang.Object)))
+  (call $acceptsArrayOfObject<java.lang.Object<>>:void@inferreturn.InferReturn (local.get $array.154)))
 )
 
 ;;; ArrayList<V> InferReturn.newArrayList(V foo)

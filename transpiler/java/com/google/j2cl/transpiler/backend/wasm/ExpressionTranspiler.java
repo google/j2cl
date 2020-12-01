@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.backend.wasm;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveVoid;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
@@ -136,12 +137,12 @@ final class ExpressionTranspiler {
       public boolean enterMethodCall(MethodCall methodCall) {
         MethodDescriptor target = methodCall.getTarget();
         if (target.isStatic()) {
-
           sourceBuilder.append("(call " + environment.getMethodImplementationName(target) + " ");
-          // TODO(rluble): evaluate and pass the paramters once the class hierarchy is modeled by
-          // rtts and proper casts have been inserted.
-          for (TypeDescriptor parameterTypeDescriptor : target.getParameterTypeDescriptors()) {
-            render(parameterTypeDescriptor.getDefaultValue());
+          ImmutableList<TypeDescriptor> parameterTypeDescriptors =
+              target.getParameterTypeDescriptors();
+          for (int i = 0; i < parameterTypeDescriptors.size(); i++) {
+            renderTypedExpression(
+                parameterTypeDescriptors.get(i), methodCall.getArguments().get(i));
           }
           sourceBuilder.append(")");
         } else {

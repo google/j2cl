@@ -68,21 +68,21 @@
   (local.tee $r.9 (i32.or (local.get $r.9) (local.get $rs.0)))
   drop
   ;; booleanoperations.BooleanOperations.acceptBoolean((ls == rs));
-  (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (i32.const 0))
+  (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (i32.eq (local.get $ls.0) (local.get $rs.0)))
   ;; booleanoperations.BooleanOperations.acceptBoolean((ls != rs));
-  (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (i32.const 0))
+  (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (i32.ne (local.get $ls.0) (local.get $rs.0)))
   ;; booleanoperations.BooleanOperations.acceptBoolean((ls ^ rs));
-  (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (i32.const 0))
+  (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (i32.xor (local.get $ls.0) (local.get $rs.0)))
   ;; booleanoperations.BooleanOperations.acceptBoolean((ls & rs));
-  (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (i32.const 0))
+  (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (i32.and (local.get $ls.0) (local.get $rs.0)))
   ;; booleanoperations.BooleanOperations.acceptBoolean((ls | rs));
-  (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (i32.const 0))
+  (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (i32.or (local.get $ls.0) (local.get $rs.0)))
   ;; booleanoperations.BooleanOperations.acceptBoolean((ls) ? (rs) : (false));
-  (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (i32.const 0))
+  (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (if (result i32) (local.get $ls.0) (then (local.get $rs.0)) (else (i32.const 0))))
   ;; booleanoperations.BooleanOperations.acceptBoolean((ls) ? (true) : (rs));
-  (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (i32.const 0))
+  (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (if (result i32) (local.get $ls.0) (then (i32.const 1)) (else (local.get $rs.0))))
   ;; booleanoperations.BooleanOperations.acceptBoolean((ls = rs));
-  (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (i32.const 0))
+  (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (local.tee $ls.0 (local.get $rs.0)))
   ;; Boolean br;
   
   ;; (br = ((Boolean) (ls == rs)));
