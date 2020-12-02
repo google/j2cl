@@ -25,11 +25,11 @@ public class Main {
     int i = 0;
     int j = 0;
 
-    LABEL1:
+    LABEL:
     for (; i < 100; i++) {
       for (j = 0; j < 10; j++) {
         if (i == 10 && j == 5) {
-          break LABEL1;
+          break LABEL;
         }
       }
     }
@@ -41,11 +41,12 @@ public class Main {
     j = 0;
     int count = 0;
 
-    LABEL2:
+    // Use the same label as before. Labels need only to be unique from the nesting perspective.
+    LABEL:
     for (; i < 100; i++) {
       for (j = 0; j < 10; j++) {
         if (j == 5) {
-          continue LABEL2;
+          continue LABEL;
         }
         count++;
       }
