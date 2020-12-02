@@ -70,7 +70,11 @@ def _compile(
         _create_empty_zip(ctx, output_jszip)
         library_info = []
 
-    generate_tree_artifact = ctx.attr._enable_tree_artifact[BuildSettingInfo].value
+    # TODO(b/155112462): Remove support for --define=J2CL_TREE_ARTIFACTS=1.
+    generate_tree_artifact = (
+        ctx.var.get("J2CL_TREE_ARTIFACTS", None) == "1" or
+        ctx.attr._enable_tree_artifact[BuildSettingInfo].value
+    )
     output_js = _unzip_output(ctx, output_jszip, name) if generate_tree_artifact else output_jszip
 
     # Don't pass anything to the js provider if we didn't transpile anything.
