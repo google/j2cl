@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.backend.wasm;
 
+import static com.google.common.base.Predicates.not;
 import static com.google.common.collect.ImmutableMap.toImmutableMap;
 
 import com.google.common.collect.ImmutableSet;
@@ -66,6 +67,15 @@ public class WasmModuleGenerator {
         compilationUnits.stream()
             .flatMap(cu -> cu.getTypes().stream())
             .collect(toImmutableMap(Type::getDeclaration, Function.identity()));
+    emitRttHierarchy(compilationUnits);
+    emitTypes(compilationUnits);
+    OutputUtils.writeToFile(outputPath.resolve("module.wat"), builder.build(), problems);
+    if (!pendingEntryPoints.isEmpty()) {
+      problems.error("Entry points %s not found.", pendingEntryPoints);
+    }
+  }
+
+  private void emitTypes(List<CompilationUnit> compilationUnits) {
     for (CompilationUnit j2clCompilationUnit : compilationUnits) {
       builder.newLine();
       builder.append(
@@ -77,10 +87,43 @@ public class WasmModuleGenerator {
         renderType(type);
       }
     }
-    OutputUtils.writeToFile(outputPath.resolve("module.wat"), builder.build(), problems);
-    if (!pendingEntryPoints.isEmpty()) {
-      problems.error("Entry points %s not found.", pendingEntryPoints);
+  }
+
+  /** Emits the rtt hierarchy by assigning a global to each rtt. */
+  private void emitRttHierarchy(List<CompilationUnit> compilationUnits) {
+    // TODO(b/174715079): Consider tagging or emitting together with the rest of the type
+    // to make the rtts show in the readables.
+    Set<TypeDeclaration> emittedRtts = new HashSet<>();
+    compilationUnits.stream()
+        .flatMap(c -> c.getTypes().stream())
+        .filter(not(Type::isInterface)) // Interfaces do not have rtts.
+        .forEach(t -> emitRttGlobal(t.getDeclaration(), emittedRtts));
+  }
+
+  private void emitRttGlobal(TypeDeclaration typeDeclaration, Set<TypeDeclaration> emittedRtts) {
+    if (!emittedRtts.add(typeDeclaration)) {
+      return;
     }
+    DeclaredTypeDescriptor superTypeDescriptor = typeDeclaration.getSuperTypeDescriptor();
+    if (superTypeDescriptor != null) {
+      // Supertype rtt needs to be emitted before the subtype since globals can only refer to
+      // globals that are initialized before.
+      emitRttGlobal(superTypeDescriptor.getTypeDeclaration(), emittedRtts);
+    }
+    int depth = typeDeclaration.getClassHierarchyDepth();
+    String wasmTypeName = environment.getWasmTypeName(typeDeclaration);
+    String superTypeRtt =
+        superTypeDescriptor == null
+            ? "(rtt.canon " + wasmTypeName + ")"
+            : String.format(
+                "(rtt.sub %s (global.get %s))",
+                wasmTypeName,
+                environment.getRttGlobalName(superTypeDescriptor.getTypeDeclaration()));
+    builder.newLine();
+    builder.append(
+        String.format(
+            "(global %s (rtt %d %s) %s)",
+            environment.getRttGlobalName(typeDeclaration), depth, wasmTypeName, superTypeRtt));
   }
 
   private void renderType(Type type) {

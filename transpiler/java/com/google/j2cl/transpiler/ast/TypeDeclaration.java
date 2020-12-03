@@ -306,6 +306,16 @@ public abstract class TypeDeclaration
     return superType.isNative() || superType.extendsNativeClass();
   }
 
+  /** Returns the depths of this type in the class hierarchy tree. */
+  @Memoized
+  public int getClassHierarchyDepth() {
+    checkState(!isInterface());
+    if (getSuperTypeDeclaration() == null) {
+      return 1;
+    }
+    return getSuperTypeDeclaration().getClassHierarchyDepth() + 1;
+  }
+
   public boolean hasJsConstructor() {
     return !getJsConstructorMethodDescriptors().isEmpty();
   }

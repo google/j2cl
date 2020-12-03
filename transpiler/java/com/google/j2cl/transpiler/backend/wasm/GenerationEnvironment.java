@@ -29,6 +29,7 @@ import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
+import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.Variable;
@@ -62,6 +63,10 @@ class GenerationEnvironment {
     return "(ref null " + getWasmTypeName(typeDescriptor) + ")";
   }
 
+  String getWasmTypeName(TypeDeclaration typeDeclaration) {
+    return getWasmTypeName(typeDeclaration.toUnparameterizedTypeDescriptor());
+  }
+
   String getWasmTypeName(TypeDescriptor typeDescriptor) {
     // TODO(rluble): remove j.l.O as a placeholder for arrays once arrays are implemented.
     if (typeDescriptor.isArray()) {
@@ -86,6 +91,11 @@ class GenerationEnvironment {
           + Strings.repeat("<>", arrayTypeDescriptor.getDimensions());
     }
     throw new AssertionError("Unexpected type: " + typeDescriptor.getReadableDescription());
+  }
+
+  /** Returns the name of the global containing the rtt for {@code typeDeclaration}. */
+  String getRttGlobalName(TypeDeclaration typeDeclaration) {
+    return getWasmTypeName(typeDeclaration.toUnparameterizedTypeDescriptor()) + ".rtt";
   }
 
   /**
