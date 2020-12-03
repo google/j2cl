@@ -445,7 +445,7 @@ class ImportGatherer extends AbstractVisitor {
       proposedAlias = Joiner.on('_').skipNulls().join(lastComponent, proposedAlias);
 
       nameComponents = nameComponents.subList(0, nameComponents.size() - 1);
-    } while (localNameUses.contains(proposedAlias) || !JsProtectedNames.isLegalName(proposedAlias));
+    } while (localNameUses.contains(proposedAlias) || !JsKeywords.isKeyword(proposedAlias));
 
     localNameUses.add(proposedAlias);
     return proposedAlias;

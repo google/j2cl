@@ -17,13 +17,13 @@ package com.google.j2cl.transpiler.backend.closure;
 
 import com.google.common.collect.ImmutableSet;
 
-/** All JavaScript keywords. */
-class JsProtectedNames {
-  private static final ImmutableSet<String> protectedNames =
+/** All JavaScript keywords and Closure predefined types. */
+final class JsKeywords {
+  private static final ImmutableSet<String> KEYWORDS =
       ImmutableSet.of(
           // Main closure namespace, used at generation time.
           "goog",
-          // TODO(b/80241817): Cleanup when all non keywords that are used appear in the AST.
+          // TODO(b/80241817): Cleanup when all non KEYWORDS that are used appear in the AST.
           // Names of externs that might used at generation time without a presence in the ast.
           // These should be explicitly avoided.
           "Function",
@@ -107,7 +107,13 @@ class JsProtectedNames {
           "with",
           "yield");
 
-  public static boolean isLegalName(String s) {
-    return !protectedNames.contains(s);
+  static ImmutableSet<String> getKeywords() {
+    return KEYWORDS;
   }
+
+  static boolean isKeyword(String s) {
+    return !KEYWORDS.contains(s);
+  }
+
+  private JsKeywords() {}
 }

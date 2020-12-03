@@ -8,8 +8,8 @@
 ;;; void TryCatch.testMultiCatch()
 (func $testMultiCatch<>:void@trycatch.TryCatch
  (param $this (ref null $java.lang.Object))
- (local $e.106 (ref null $java.lang.RuntimeException))
- (local $r.9 (ref null $java.lang.RuntimeException))
+ (local $e (ref null $java.lang.RuntimeException))
+ (local $r (ref null $java.lang.RuntimeException))
  (block
   ;; try {
   ;;   throw new ClassCastException.<init>();
@@ -25,11 +25,11 @@
    unreachable
   )(block
    ;; throw e;
-   (local.get $e.106)
+   (local.get $e)
    unreachable
   )(block
    ;; (r = null);
-   (local.tee $r.9 (ref.null $java.lang.RuntimeException))
+   (local.tee $r (ref.null $java.lang.RuntimeException))
    drop
   ))
 )
@@ -37,9 +37,9 @@
 ;;; void TryCatch.testEmptyThrowableCatch()
 (func $testEmptyThrowableCatch<>:void@trycatch.TryCatch
  (param $this (ref null $java.lang.Object))
- (local $e.107 (ref null $java.lang.Throwable))
- (local $e.108 (ref null $java.lang.Exception))
- (local $e.109 (ref null $java.lang.Throwable))
+ (local $e (ref null $java.lang.Throwable))
+ (local $e_1 (ref null $java.lang.Exception))
+ (local $e_2 (ref null $java.lang.Throwable))
  (block
   ;; try {
   ;;   throw new ClassCastException.<init>();
@@ -70,7 +70,7 @@
 ;;; void TryCatch.testEmptyThrowableRethrow()
 (func $testEmptyThrowableRethrow<>:void@trycatch.TryCatch
  (param $this (ref null $java.lang.Object))
- (local $e.110 (ref null $java.lang.Throwable))
+ (local $e (ref null $java.lang.Throwable))
  (block
   ;; try {
   ;;   throw new ClassCastException.<init>();
@@ -84,7 +84,7 @@
    unreachable
   )(block
    ;; throw e;
-   (local.get $e.110)
+   (local.get $e)
    unreachable
   ))
 )
@@ -109,9 +109,9 @@
 ;;; void TryCatch.testTryWithResource()
 (func $testTryWithResource<>:void@trycatch.TryCatch
  (param $this (ref null $java.lang.Object))
- (local $thing.0 (ref null $trycatch.TryCatch.ClosableThing))
- (local $thing2.0 (ref null $trycatch.TryCatch.ClosableThing))
- (local $e.111 (ref null $java.lang.Exception))
+ (local $thing (ref null $trycatch.TryCatch.ClosableThing))
+ (local $thing2 (ref null $trycatch.TryCatch.ClosableThing))
+ (local $e (ref null $java.lang.Exception))
  (block
   ;; try (
   ;;     ClosableThing thing = new ClosableThing.<init>();
@@ -131,18 +131,18 @@
 ;;; void TryCatch.testTryWithResourceJava9()
 (func $testTryWithResourceJava9<>:void@trycatch.TryCatch
  (param $this (ref null $java.lang.Object))
- (local $thing.1 (ref null $trycatch.TryCatch.ClosableThing))
- (local $thing2.1 (ref null $trycatch.TryCatch.ClosableThing))
- (local $$resource.0 (ref null $trycatch.TryCatch.ClosableThing))
- (local $$resource.1 (ref null $trycatch.TryCatch.ClosableThing))
- (local $e.112 (ref null $java.lang.Exception))
+ (local $thing (ref null $trycatch.TryCatch.ClosableThing))
+ (local $thing2 (ref null $trycatch.TryCatch.ClosableThing))
+ (local $$resource (ref null $trycatch.TryCatch.ClosableThing))
+ (local $$resource_1 (ref null $trycatch.TryCatch.ClosableThing))
+ (local $e (ref null $java.lang.Exception))
  (block
   ;; ClosableThing thing = new ClosableThing.<init>();
-  (local.tee $thing.1 (ref.null $trycatch.TryCatch.ClosableThing))
+  (local.tee $thing (ref.null $trycatch.TryCatch.ClosableThing))
   drop
   
   ;; ClosableThing thing2 = new ClosableThing.<init>();
-  (local.tee $thing2.1 (ref.null $trycatch.TryCatch.ClosableThing))
+  (local.tee $thing2 (ref.null $trycatch.TryCatch.ClosableThing))
   drop
   
   ;; try (
@@ -163,8 +163,8 @@
 ;;; void TryCatch.testNestedTryCatch()
 (func $testNestedTryCatch<>:void@trycatch.TryCatch
  (param $this (ref null $java.lang.Object))
- (local $ae.0 (ref null $java.lang.Exception))
- (local $ie.0 (ref null $java.lang.Exception))
+ (local $ae (ref null $java.lang.Exception))
+ (local $ie (ref null $java.lang.Exception))
  (block
   ;; try {
   ;;   throw new Exception.<init>();
@@ -206,7 +206,7 @@
 ;;; T TryCatch.getT(T t)
 (func $getT<java.lang.Object>:java.lang.Object@trycatch.TryCatch
  (param $this (ref null $trycatch.TryCatch))
- (param $t.71 (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (block
   ;; return t;

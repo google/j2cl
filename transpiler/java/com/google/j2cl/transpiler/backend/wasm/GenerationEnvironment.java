@@ -16,16 +16,18 @@
 package com.google.j2cl.transpiler.backend.wasm;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 import static java.util.stream.Collectors.joining;
 
 import com.google.common.base.Strings;
-import com.google.common.collect.HashMultiset;
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Multiset;
+import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
+import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
+import com.google.j2cl.transpiler.ast.HasName;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
@@ -33,7 +35,9 @@ import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.Variable;
+import com.google.j2cl.transpiler.backend.common.UniqueVariableNamesGatherer;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /** Allows mapping of middle end constructors to the backend. */
@@ -124,12 +128,18 @@ class GenerationEnvironment {
         + fieldDescriptor.getEnclosingTypeDescriptor().getQualifiedSourceName();
   }
 
-  private final Map<Variable, String> variableNameByVariable = new HashMap<>();
-  private final Multiset<String> variableNameFrequency = HashMultiset.create();
+  private final Map<HasName, String> variableNameByVariable = new HashMap<>();
 
   String getVariableName(Variable variable) {
-    // TODO(rluble): add a proper variable name collision resolver.
-    return variableNameByVariable.computeIfAbsent(
-        variable, v -> "$" + v.getName() + "." + variableNameFrequency.add(v.getName(), 1));
+    return "$" + checkNotNull(variableNameByVariable.get(variable));
+  }
+
+  GenerationEnvironment(List<CompilationUnit> compilationUnits) {
+    compilationUnits.stream()
+        .flatMap(c -> c.getTypes().stream())
+        .forEach(
+            t ->
+                variableNameByVariable.putAll(
+                    UniqueVariableNamesGatherer.computeUniqueVariableNames(ImmutableSet.of(), t)));
   }
 }

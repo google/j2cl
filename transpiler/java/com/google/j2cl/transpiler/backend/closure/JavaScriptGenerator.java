@@ -16,14 +16,20 @@
 package com.google.j2cl.transpiler.backend.closure;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.collect.ImmutableSet.toImmutableSet;
 
 import com.google.common.base.Joiner;
+import com.google.common.base.Splitter;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.HasName;
 import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
+import com.google.j2cl.transpiler.backend.common.UniqueVariableNamesGatherer;
 import java.util.List;
 import java.util.Map;
 
@@ -42,8 +48,18 @@ public abstract class JavaScriptGenerator {
     this.problems = problems;
     this.type = type;
     this.imports = imports;
+    ImmutableSet<String> namesUsedInAliases =
+        imports.stream()
+            // Take the first component of the alias. Most aliases are not qualified names, but
+            // externs might be qualified names and only the first component needs to be considered
+            // to avoid top level name clashes.
+            .map(
+                anImport ->
+                    Iterables.get(Splitter.onPattern("\\\\.").split(anImport.getAlias()), 0))
+            .collect(toImmutableSet());
     Map<HasName, String> uniqueNameByVariable =
-        UniqueVariableNamesGatherer.computeUniqueVariableNames(imports, type);
+        UniqueVariableNamesGatherer.computeUniqueVariableNames(
+            Sets.union(namesUsedInAliases, JsKeywords.getKeywords()), type);
     environment = new GenerationEnvironment(imports, uniqueNameByVariable);
   }
 
