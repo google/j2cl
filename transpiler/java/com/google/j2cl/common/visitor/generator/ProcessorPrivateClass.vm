@@ -16,9 +16,9 @@ abstract class ProcessorPrivate implements Processor {
 #if(${clazz.isContext()})
 
   private Deque<${clazz.SimpleName}> stackOf${clazz.SimpleName} = new ArrayDeque<>();
-  final void push${clazz.SimpleName}(${clazz.SimpleName} node) {
-    stackOfContext.push(node);
-    stackOf${clazz.SimpleName}.push(node);
+  final void push${clazz.SimpleName}(${clazz.SimpleName} ${clazz.ParameterName}) {
+    stackOfContext.push(${clazz.ParameterName});
+    stackOf${clazz.SimpleName}.push(${clazz.ParameterName});
   }
   final ${clazz.SimpleName} pop${clazz.SimpleName}() {
     stackOfContext.pop();
@@ -31,10 +31,10 @@ abstract class ProcessorPrivate implements Processor {
 #end
 
 #foreach($clazz in $classes)
-  abstract boolean shouldProcess${clazz.SimpleName}(${clazz.SimpleName} node);
+  abstract boolean shouldProcess${clazz.SimpleName}(${clazz.SimpleName} ${clazz.ParameterName});
 #end
 
 #foreach($clazz in $classes)
-  abstract ${clazz.TopClassName} postProcess${clazz.SimpleName}(${clazz.SimpleName} node);
+  abstract ${clazz.TopClassName} postProcess${clazz.SimpleName}(${clazz.SimpleName} ${clazz.ParameterName});
 #end
 }

@@ -4,29 +4,29 @@ public abstract class AbstractRewriter extends ProcessorPrivate implements Rewri
 #foreach($clazz in $classes)
 
   @Override
-  public boolean shouldProcess${clazz.SimpleName}(${clazz.SimpleName} node) {
+  public boolean shouldProcess${clazz.SimpleName}(${clazz.SimpleName} ${clazz.ParameterName}) {
 #if(${clazz.isTop()})
     return true;
 #else
-    return shouldProcess${clazz.SuperclassName}(node);
+    return shouldProcess${clazz.SuperclassName}(${clazz.ParameterName});
 #end
   }
 #end
 #foreach($clazz in $classes)
   @Override
-  final ${clazz.TopClassName} postProcess${clazz.SimpleName}(${clazz.SimpleName} node) {
-    return rewrite${clazz.SimpleName}(node);
+  final ${clazz.TopClassName} postProcess${clazz.SimpleName}(${clazz.SimpleName} ${clazz.ParameterName}) {
+    return rewrite${clazz.SimpleName}(${clazz.ParameterName});
   }
 
 #end
 #foreach($clazz in $classes)
 
   @Override
-  public ${clazz.TopClassName}  rewrite${clazz.SimpleName}(${clazz.SimpleName} node) {
+  public ${clazz.TopClassName}  rewrite${clazz.SimpleName}(${clazz.SimpleName} ${clazz.ParameterName}) {
 #if(${clazz.isTop()})
-    return node;
+    return ${clazz.ParameterName};
 #else
-    return rewrite${clazz.SuperclassName}(node);
+    return rewrite${clazz.SuperclassName}(${clazz.ParameterName});
 #end
   }
 #end

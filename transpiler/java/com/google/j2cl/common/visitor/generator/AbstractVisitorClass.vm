@@ -4,35 +4,35 @@ public abstract class AbstractVisitor extends ProcessorPrivate implements Visito
 #foreach($clazz in $classes)
 
   @Override
-  final boolean shouldProcess${clazz.SimpleName}(${clazz.SimpleName} node) {
-    return enter${clazz.SimpleName}(node);
+  final boolean shouldProcess${clazz.SimpleName}(${clazz.SimpleName} ${clazz.ParameterName}) {
+    return enter${clazz.SimpleName}(${clazz.ParameterName});
   }
 #end
 #foreach($clazz in $classes)
 
   @Override
-  final ${clazz.TopClassName} postProcess${clazz.SimpleName}(${clazz.SimpleName} node) {
-    exit${clazz.SimpleName}(node);
-    return node;
+  final ${clazz.TopClassName} postProcess${clazz.SimpleName}(${clazz.SimpleName} ${clazz.ParameterName}) {
+    exit${clazz.SimpleName}(${clazz.ParameterName});
+    return ${clazz.ParameterName};
   }
 #end
 #foreach($clazz in $classes)
 
   @Override
-  public boolean enter${clazz.SimpleName}(${clazz.SimpleName} node) {
+  public boolean enter${clazz.SimpleName}(${clazz.SimpleName} ${clazz.ParameterName}) {
 #if(${clazz.isTop()})
     return true;
 #else
-    return enter${clazz.SuperclassName}(node);
+    return enter${clazz.SuperclassName}(${clazz.ParameterName});
 #end
   }
 #end
 
 #foreach($clazz in $classes)
   @Override
-  public void exit${clazz.SimpleName}(${clazz.SimpleName} node) {
+  public void exit${clazz.SimpleName}(${clazz.SimpleName} ${clazz.ParameterName}) {
 #if(!${clazz.isTop()})
-    exit${clazz.SuperclassName}(node);
+    exit${clazz.SuperclassName}(${clazz.ParameterName});
 #end
   }
 #end

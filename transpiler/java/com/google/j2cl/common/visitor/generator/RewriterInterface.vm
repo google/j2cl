@@ -3,10 +3,10 @@ package ${packageName};
 interface Rewriter {
 
 #foreach($clazz in $classes)
-  boolean shouldProcess${clazz.SimpleName}(${clazz.SimpleName} node);
+  boolean shouldProcess${clazz.SimpleName}(${clazz.SimpleName} ${clazz.ParameterName});
 #end
 
 #foreach($clazz in $classes)
-  ${clazz.TopClassName} rewrite${clazz.SimpleName}(${clazz.SimpleName} node);
+  ${clazz.TopClassName} rewrite${clazz.SimpleName}(${clazz.SimpleName} ${clazz.ParameterName});
 #end
 }

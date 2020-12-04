@@ -7,69 +7,69 @@ import com.google.j2cl.common.visitor.ProcessorError;
 
 public class Visitor_${className} {
 
-  public static ${visitableClass.TopClassName} visit(Processor processor, ${className} node) {
-    ${visitableClass.TopClassName} result = node;
+  public static ${visitableClass.TopClassName} visit(Processor processor, ${className} ${visitableClass.ParameterName}) {
+    ${visitableClass.TopClassName} result = ${visitableClass.ParameterName};
 
     ProcessorPrivate processorImpl = (ProcessorPrivate) processor;
-    pushContext(processor, node);
+    pushContext(processor, ${visitableClass.ParameterName});
 
     try {
-      if (processorImpl.shouldProcess${className}(node)) {
-        visitMembers(processorImpl, node);
+      if (processorImpl.shouldProcess${className}(${visitableClass.ParameterName})) {
+        visitMembers(processorImpl, ${visitableClass.ParameterName});
       }
-      result = processorImpl.postProcess${className}(node);
+      result = processorImpl.postProcess${className}(${visitableClass.ParameterName});
     } catch (RuntimeException|Error e) {
       if (e instanceof ProcessorError) {
         throw e;
       }
-      throw new ProcessorError(processorImpl.getCurrentContext(), node, e);
+      throw new ProcessorError(processorImpl.getCurrentContext(), ${visitableClass.ParameterName}, e);
     }
 
-    popContext(processor, node);
+    popContext(processor, ${visitableClass.ParameterName});
     return result;
   }
 
-  static void pushContext(Processor processor, ${className} node) {
+  static void pushContext(Processor processor, ${className} ${visitableClass.ParameterName}) {
 #if(${visitableClass.isTop()})
 #else
-    Visitor_${visitableClass.SuperclassName}.pushContext(processor, node);
+    Visitor_${visitableClass.SuperclassName}.pushContext(processor, ${visitableClass.ParameterName});
 #end
 #if (${visitableClass.isContext()})
     ProcessorPrivate processorImpl = (ProcessorPrivate) processor;
-    processorImpl.push${className}(node);
+    processorImpl.push${className}(${visitableClass.ParameterName});
 #end
   }
 
-  static void popContext(Processor processor, ${className} node) {
+  static void popContext(Processor processor, ${className} ${visitableClass.ParameterName}) {
 #if (${visitableClass.isContext()})
     ProcessorPrivate processorImpl = (ProcessorPrivate) processor;
-    Preconditions.checkState(processorImpl.pop${className}() == node);
+    Preconditions.checkState(processorImpl.pop${className}() == ${visitableClass.ParameterName});
 #end
 #if(${visitableClass.isTop()})
 #else
-    Visitor_${visitableClass.SuperclassName}.popContext(processor, node);
+    Visitor_${visitableClass.SuperclassName}.popContext(processor, ${visitableClass.ParameterName});
 #end
   }
 
-  static void visitMembers(Processor processor, ${className} node) {
+  static void visitMembers(Processor processor, ${className} ${visitableClass.ParameterName}) {
     ProcessorPrivate processorImpl = (ProcessorPrivate) processor;
 #if(${visitableClass.isTop()})
 #else
-    Visitor_${visitableClass.SuperclassName}.visitMembers(processorImpl, node);
+    Visitor_${visitableClass.SuperclassName}.visitMembers(processorImpl, ${visitableClass.ParameterName});
 #end
 #foreach($field in $fields)
 #if(${field.isNullable()})
-    if (node.${field.Name} != null) {
+    if (${visitableClass.ParameterName}.${field.Name} != null) {
 #end
 #if(${field.isList()})
       ListVisitor.visit(
-          node.${field.Name},
+          ${visitableClass.ParameterName}.${field.Name},
           n -> (${field.ComponentTypeName}) n.accept(processorImpl));
 #elseif (${field.isNullable()})
-      node.${field.Name} = (${field.TypeName}) node.${field.Name}.accept(processorImpl);
+      ${visitableClass.ParameterName}.${field.Name} = (${field.TypeName}) ${visitableClass.ParameterName}.${field.Name}.accept(processorImpl);
 #else
-      node.${field.Name} = (${field.TypeName}) Preconditions.checkNotNull(
-      node.${field.Name}.accept(processorImpl),
+      ${visitableClass.ParameterName}.${field.Name} = (${field.TypeName}) Preconditions.checkNotNull(
+      ${visitableClass.ParameterName}.${field.Name}.accept(processorImpl),
           "Field \"${field.Name}\" in class \"${className}\" cannot be null");
 #end
 #if(${field.isNullable()})

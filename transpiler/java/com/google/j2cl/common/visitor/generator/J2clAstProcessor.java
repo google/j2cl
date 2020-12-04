@@ -21,6 +21,7 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import com.google.auto.common.MoreElements;
 import com.google.auto.common.MoreTypes;
 import com.google.auto.service.AutoService;
+import com.google.common.base.CaseFormat;
 import com.google.common.base.Joiner;
 import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
@@ -232,6 +233,10 @@ public class J2clAstProcessor extends AbstractProcessor {
 
     public String getSimpleName() {
       return simpleName;
+    }
+
+    public String getParameterName() {
+      return CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_CAMEL, simpleName);
     }
 
     public boolean isTop() {
