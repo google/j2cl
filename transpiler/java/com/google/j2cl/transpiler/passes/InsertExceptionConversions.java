@@ -64,7 +64,7 @@ public class InsertExceptionConversions extends NormalizationPass {
 
             MethodCall toJavaCall =
                 RuntimeMethods.createExceptionsMethodCall(
-                    "toJava", catchClause.getExceptionVariable().getReference());
+                    "toJava", catchClause.getExceptionVariable().createReference());
 
             Expression assignment =
                 BinaryExpression.Builder.asAssignmentTo(catchClause.getExceptionVariable())

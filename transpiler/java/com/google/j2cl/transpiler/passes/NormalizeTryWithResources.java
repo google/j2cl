@@ -162,15 +162,15 @@ public class NormalizeTryWithResources extends NormalizationPass {
                 .setRightOperand(exceptionFromTry)
                 .build()
                 .makeStatement(sourcePosition),
-            new ThrowStatement(sourcePosition, exceptionFromTry.getReference()));
+            new ThrowStatement(sourcePosition, exceptionFromTry.createReference()));
 
     List<Statement> finallyBlockStatements = new ArrayList<>();
     for (VariableDeclarationExpression declaration : Lists.reverse(resourceDeclarations)) {
       MethodCall safeCloseCall =
           RuntimeMethods.createExceptionsMethodCall(
               "safeClose",
-              declaration.getFragments().get(0).getVariable().getReference(),
-              primaryException.getReference());
+              declaration.getFragments().get(0).getVariable().createReference(),
+              primaryException.createReference());
 
       Expression assignExceptionFromSafeCloseCall =
           BinaryExpression.Builder.asAssignmentTo(primaryException)
@@ -181,8 +181,9 @@ public class NormalizeTryWithResources extends NormalizationPass {
     }
 
     ThrowStatement throwPrimaryException =
-        new ThrowStatement(sourcePosition, primaryException.getReference());
-    Expression primaryExceptionNotEqualsNull = primaryException.getReference().infixNotEqualsNull();
+        new ThrowStatement(sourcePosition, primaryException.createReference());
+    Expression primaryExceptionNotEqualsNull =
+        primaryException.createReference().infixNotEqualsNull();
     IfStatement primaryExceptionNullStatement =
         IfStatement.newBuilder()
             .setSourcePosition(sourcePosition)

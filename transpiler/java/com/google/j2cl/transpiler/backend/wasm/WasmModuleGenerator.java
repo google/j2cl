@@ -196,7 +196,7 @@ public class WasmModuleGenerator {
       builder.newLine();
       builder.append(
           "(param "
-              + environment.getVariableName(parameter)
+              + environment.getDeclarationName(parameter)
               + " "
               + environment.getWasmType(parameter.getTypeDescriptor())
               + ")");
@@ -215,7 +215,7 @@ public class WasmModuleGenerator {
       builder.newLine();
       builder.append(
           "(local "
-              + environment.getVariableName(variable)
+              + environment.getDeclarationName(variable)
               + " "
               + environment.getWasmType(variable.getTypeDescriptor())
               + ")");

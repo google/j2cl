@@ -20,30 +20,25 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
 
-/**
- * Class for variable reference.
- */
+/** Class for variable reference. */
 @Visitable
-public class VariableReference extends Expression {
-  // Do not mark the target as @Visitable, VariableReference acts as an opaque reference from
-  // the visitor perspective.
-  private Variable target;
+public class VariableReference extends Expression implements Reference<Variable> {
+  // Do not mark the target variable as @Visitable, VariableReference acts as an opaque reference
+  // from the visitor perspective.
+  private final Variable variable;
 
-  public VariableReference(Variable target) {
-    setTarget(target);
+  public VariableReference(Variable variable) {
+    this.variable = checkNotNull(variable);
   }
 
+  @Override
   public Variable getTarget() {
-    return target;
-  }
-
-  public void setTarget(Variable target) {
-    this.target = checkNotNull(target);
+    return variable;
   }
 
   @Override
   public TypeDescriptor getTypeDescriptor() {
-    return target.getTypeDescriptor();
+    return variable.getTypeDescriptor();
   }
 
   @Override
@@ -53,7 +48,7 @@ public class VariableReference extends Expression {
 
   @Override
   public boolean isEffectivelyInvariant() {
-    return target.isFinal();
+    return variable.isFinal();
   }
 
   @Override
@@ -73,7 +68,7 @@ public class VariableReference extends Expression {
 
   @Override
   public VariableReference clone() {
-    return new VariableReference(target);
+    return new VariableReference(variable);
   }
 
   @Override

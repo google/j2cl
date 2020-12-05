@@ -193,7 +193,7 @@ public class ImplementLambdaExpressions extends NormalizationPass {
                     .setExpression(
                         NewInstance.newBuilder()
                             .setMethodDescriptor(adaptorConstructor)
-                            .setArguments(jsFunctionParameter.getReference())
+                            .setArguments(jsFunctionParameter.createReference())
                             .build())
                     .setTypeDescriptor(adaptorConstructor.getReturnTypeDescriptor())
                     .setSourcePosition(functionalInterfaceType.getSourcePosition())

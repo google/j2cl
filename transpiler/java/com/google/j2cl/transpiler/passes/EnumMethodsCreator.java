@@ -121,7 +121,7 @@ public class EnumMethodsCreator extends NormalizationPass {
             .setExpression(
                 RuntimeMethods.createEnumsGetValueMethodCall(
                     typeDescriptor,
-                    nameParameter.getReference(),
+                    nameParameter.createReference(),
                     FieldAccess.Builder.from(namesToValuesMapFieldDescriptor).build()))
             .setTypeDescriptor(typeDescriptor)
             .setSourcePosition(sourcePosition)

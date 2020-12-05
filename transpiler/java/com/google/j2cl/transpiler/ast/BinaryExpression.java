@@ -258,7 +258,7 @@ public class BinaryExpression extends Expression {
 
     public static Builder asAssignmentTo(Variable variable) {
       return new Builder()
-          .setLeftOperand(variable.getReference())
+          .setLeftOperand(variable.createReference())
           .setOperator(BinaryOperator.ASSIGN);
     }
 
@@ -268,7 +268,7 @@ public class BinaryExpression extends Expression {
     }
 
     public Builder setLeftOperand(Variable variable) {
-      this.leftOperand = variable.getReference();
+      this.leftOperand = variable.createReference();
       return this;
     }
 
@@ -278,7 +278,7 @@ public class BinaryExpression extends Expression {
     }
 
     public Builder setRightOperand(Variable variable) {
-      this.rightOperand = variable.getReference();
+      this.rightOperand = variable.createReference();
       return this;
     }
 

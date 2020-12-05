@@ -119,7 +119,7 @@ public class NormalizeCatchClauses extends NormalizationPass {
     // Base case. If no more clauses left the last statement throws the exception.
     if (clauses.isEmpty()) {
       Statement noMatchThrowException =
-          new ThrowStatement(firstClauseSourcePosition, exceptionVariable.getReference());
+          new ThrowStatement(firstClauseSourcePosition, exceptionVariable.createReference());
       return Block.newBuilder()
           .setSourcePosition(firstClauseSourcePosition)
           .setStatements(noMatchThrowException)
@@ -161,12 +161,11 @@ public class NormalizeCatchClauses extends NormalizationPass {
   private static Expression checkTypeExpression(
       Variable exceptionVariable, List<TypeDescriptor> typeDescriptors) {
     List<InstanceOfExpression> instanceofs =
-        typeDescriptors
-            .stream()
+        typeDescriptors.stream()
             .map(
                 t ->
                     InstanceOfExpression.newBuilder()
-                        .setExpression(exceptionVariable.getReference())
+                        .setExpression(exceptionVariable.createReference())
                         .setTestTypeDescriptor(t)
                         .build())
             .collect(toImmutableList());
@@ -184,7 +183,7 @@ public class NormalizeCatchClauses extends NormalizationPass {
             .addVariableDeclaration(
                 catchVariable,
                 JsDocCastExpression.newBuilder()
-                    .setExpression(exceptionVariable.getReference())
+                    .setExpression(exceptionVariable.createReference())
                     .setCastType(catchVariable.getTypeDescriptor())
                     .build())
             .build()

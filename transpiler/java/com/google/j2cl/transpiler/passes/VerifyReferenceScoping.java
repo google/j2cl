@@ -24,30 +24,33 @@ import com.google.j2cl.transpiler.ast.CatchClause;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.ForStatement;
 import com.google.j2cl.transpiler.ast.FunctionExpression;
+import com.google.j2cl.transpiler.ast.LabelReference;
+import com.google.j2cl.transpiler.ast.LabeledStatement;
 import com.google.j2cl.transpiler.ast.Method;
+import com.google.j2cl.transpiler.ast.NameDeclaration;
 import com.google.j2cl.transpiler.ast.Node;
+import com.google.j2cl.transpiler.ast.Reference;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.TryStatement;
-import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableReference;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.HashSet;
 import java.util.Set;
 
-/** Verifies that variables are referenced within their scopes. */
-public class VerifyVariableScoping extends NormalizationPass {
+/** Verifies that variables and labels are referenced within their scopes. */
+public class VerifyReferenceScoping extends NormalizationPass {
 
   private static class Scope {
     Scope() {}
 
     Scope(Scope parent) {
-      accessibleVariables.addAll(parent.accessibleVariables);
+      accessibleDeclarations.addAll(parent.accessibleDeclarations);
     }
 
-    // Variables that are accessible in a given scope. It is meant to include all the
-    // variables defined in parent scopes to make checking simpler.
-    Set<Variable> accessibleVariables = new HashSet<>();
+    // Variables and labels that are accessible in a given scope. It is meant to include all the
+    // variables and labels defined in parent scopes to make checking simpler.
+    Set<NameDeclaration> accessibleDeclarations = new HashSet<>();
   }
 
   @Override
@@ -61,27 +64,39 @@ public class VerifyVariableScoping extends NormalizationPass {
         new AbstractVisitor() {
 
           @Override
+          public boolean enterLabelReference(LabelReference labelReference) {
+            checkReference(labelReference);
+            return false;
+          }
+
+          @Override
           public boolean enterVariableReference(VariableReference variableReference) {
-            // Verify that the VariableReference references a variable that is in scope.
+            checkReference(variableReference);
+            return false;
+          }
+
+          private void checkReference(Reference<? extends NameDeclaration> reference) {
+            // Verify that the reference references a declaration that is in scope.
             final Node context =
                 !statementStack.isEmpty()
                     ? statementStack.peek()
                     : getCurrentMember() != null ? getCurrentMember() : getCurrentType();
             checkState(
-                getCurrentScope().accessibleVariables.contains(variableReference.getTarget()),
-                "%s in %s not defined in enclosing scope.",
-                variableReference.getTarget(),
+                getCurrentScope().accessibleDeclarations.contains(reference.getTarget()),
+                "%s %s in %s not defined in enclosing scope.",
+                reference.getTarget().getClass().getSimpleName(),
+                reference.getTarget().getName(),
                 context);
-            return false;
           }
 
           @Override
-          public boolean enterVariable(Variable variable) {
-            // Check that the variable is defined only once.
+          public boolean enterNameDeclaration(NameDeclaration declaration) {
+            // Check that the name is declared only once, and was not accidentally duplicated.
             checkState(
-                getCurrentScope().accessibleVariables.add(variable),
-                "Variable %s already in scope.",
-                variable.getName());
+                getCurrentScope().accessibleDeclarations.add(declaration),
+                "%s %s already in scope.",
+                declaration.getClass().getSimpleName(),
+                declaration.getName());
             return true;
           }
 
@@ -94,6 +109,17 @@ public class VerifyVariableScoping extends NormalizationPass {
           @Override
           public void exitForStatement(ForStatement statement) {
             exitScopedStatement(statement);
+          }
+
+          @Override
+          public boolean enterLabeledStatement(LabeledStatement labeledStatement) {
+            enterScope();
+            return true;
+          }
+
+          @Override
+          public void exitLabeledStatement(LabeledStatement labeledStatement) {
+            exitScope();
           }
 
           @Override

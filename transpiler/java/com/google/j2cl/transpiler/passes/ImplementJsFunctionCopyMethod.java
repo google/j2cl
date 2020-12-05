@@ -74,13 +74,13 @@ public class ImplementJsFunctionCopyMethod extends NormalizationPass {
           BinaryExpression.newBuilder()
               .setLeftOperand(
                   FieldAccess.newBuilder()
-                      .setQualifier(toParameter.getReference())
+                      .setQualifier(toParameter.createReference())
                       .setTargetFieldDescriptor(field.getDescriptor())
                       .build())
               .setOperator(BinaryOperator.ASSIGN)
               .setRightOperand(
                   FieldAccess.newBuilder()
-                      .setQualifier(fromParameter.getReference())
+                      .setQualifier(fromParameter.createReference())
                       .setTargetFieldDescriptor(field.getDescriptor())
                       .build())
               .build()
@@ -90,7 +90,7 @@ public class ImplementJsFunctionCopyMethod extends NormalizationPass {
         BinaryExpression.newBuilder()
             .setLeftOperand(
                 FieldAccess.newBuilder()
-                    .setQualifier(toParameter.getReference())
+                    .setQualifier(toParameter.createReference())
                     .setTargetFieldDescriptor(type.getTypeDescriptor().getIsInstanceMarkerField())
                     .build())
             .setOperator(BinaryOperator.ASSIGN)

@@ -94,9 +94,9 @@ class ToStringRenderer {
       @Override
       public boolean enterBreakStatement(BreakStatement breakStatement) {
         print("break");
-        if (breakStatement.getLabel() != null) {
+        if (breakStatement.getLabelReference() != null) {
           print(" ");
-          print(breakStatement.getLabel());
+          print(breakStatement.getLabelReference().getTarget().getName());
         }
         print(";");
         return false;
@@ -173,9 +173,9 @@ class ToStringRenderer {
       @Override
       public boolean enterContinueStatement(ContinueStatement continueStatement) {
         print("continue");
-        if (continueStatement.getLabel() != null) {
+        if (continueStatement.getLabelReference() != null) {
           print(" ");
-          print(continueStatement.getLabel());
+          print(continueStatement.getLabelReference().getTarget().getName());
         }
         print(";");
         return false;
@@ -289,7 +289,7 @@ class ToStringRenderer {
 
       @Override
       public boolean enterLabeledStatement(LabeledStatement labeledStatement) {
-        print(labeledStatement.getLabel());
+        print(labeledStatement.getLabel().getName());
         print(": ");
         accept(labeledStatement.getStatement());
         return false;

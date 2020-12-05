@@ -24,20 +24,20 @@ import javax.annotation.Nullable;
 @Visitable
 public class BreakStatement extends Statement {
 
-  @Nullable private final String label;
+  @Nullable private final LabelReference labelReference;
 
-  private BreakStatement(SourcePosition sourcePosition, String label) {
+  private BreakStatement(SourcePosition sourcePosition, LabelReference labelReference) {
     super(sourcePosition);
-    this.label = label;
+    this.labelReference = labelReference;
   }
 
-  public String getLabel() {
-    return label;
+  public LabelReference getLabelReference() {
+    return labelReference;
   }
 
   @Override
   public BreakStatement clone() {
-    return new BreakStatement(getSourcePosition(), label);
+    return new BreakStatement(getSourcePosition(), AstUtils.clone(labelReference));
   }
 
   @Override
@@ -51,13 +51,13 @@ public class BreakStatement extends Statement {
 
   /** Builder for BreakStatement. */
   public static class Builder {
-    private String label;
+    private LabelReference labelReference;
     private SourcePosition sourcePosition;
 
     public static Builder from(BreakStatement breakStatement) {
       return newBuilder()
           .setSourcePosition(breakStatement.getSourcePosition())
-          .setLabel(breakStatement.getLabel());
+          .setLabelReference(breakStatement.getLabelReference());
     }
 
     public Builder setSourcePosition(SourcePosition sourcePosition) {
@@ -65,13 +65,13 @@ public class BreakStatement extends Statement {
       return this;
     }
 
-    public Builder setLabel(String label) {
-      this.label = label;
+    public Builder setLabelReference(LabelReference labelReference) {
+      this.labelReference = labelReference;
       return this;
     }
 
     public BreakStatement build() {
-      return new BreakStatement(sourcePosition, label);
+      return new BreakStatement(sourcePosition, labelReference);
     }
   }
 }

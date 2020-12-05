@@ -255,7 +255,7 @@ public class NormalizeConstructors extends NormalizationPass {
     }
     body.add(
         0,
-        AstUtils.replaceVariables(
+        AstUtils.replaceDeclarations(
             jsConstructor.getParameters(),
             jsConstructorParameters,
             superConstructorInvocation.makeStatement(jsConstructorSourcePosition)));
@@ -429,7 +429,7 @@ public class NormalizeConstructors extends NormalizationPass {
     List<Variable> factoryMethodParameters = AstUtils.clone(constructor.getParameters());
     List<Expression> relayArguments = AstUtils.getReferences(factoryMethodParameters);
     javascriptConstructorArguments =
-        AstUtils.replaceVariables(
+        AstUtils.replaceDeclarations(
             constructor.getParameters(), factoryMethodParameters, javascriptConstructorArguments);
     // let $instance = new Class(<javascriptConstructorArguments>);
     Variable newInstance =
@@ -437,7 +437,7 @@ public class NormalizeConstructors extends NormalizationPass {
 
     SourcePosition constructorSourcePosition = constructor.getSourcePosition();
     Statement newInstanceStatement =
-        AstUtils.replaceVariables(
+        AstUtils.replaceDeclarations(
                 constructor.getParameters(),
                 factoryMethodParameters,
                 VariableDeclarationExpression.newBuilder()
@@ -453,7 +453,7 @@ public class NormalizeConstructors extends NormalizationPass {
     // $instance.$ctor...();
     Statement ctorCallStatement =
         MethodCall.Builder.from(constructor.getDescriptor())
-            .setQualifier(newInstance.getReference())
+            .setQualifier(newInstance.createReference())
             .setArguments(relayArguments)
             .build()
             .makeStatement(constructorSourcePosition);
@@ -463,7 +463,7 @@ public class NormalizeConstructors extends NormalizationPass {
       // $instance.privateInitError(new Error);
       statements.add(
           createThrowableInit(
-                  newInstance.getReference(),
+                  newInstance.createReference(),
                   enclosingType.isAssignableTo(TypeDescriptors.get().javaLangNulPointerException)
                       ? TypeDescriptors.get().nativeTypeError
                       : TypeDescriptors.get().nativeError)
@@ -475,8 +475,8 @@ public class NormalizeConstructors extends NormalizationPass {
         ReturnStatement.newBuilder()
             .setExpression(
                 enclosingType.isJsFunctionImplementation()
-                    ? AstUtils.createLambdaInstance(enclosingType, newInstance.getReference())
-                    : newInstance.getReference())
+                    ? AstUtils.createLambdaInstance(enclosingType, newInstance.createReference())
+                    : newInstance.createReference())
             .setTypeDescriptor(enclosingType)
             .setSourcePosition(constructorSourcePosition)
             .build();

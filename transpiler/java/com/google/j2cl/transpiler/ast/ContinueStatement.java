@@ -24,20 +24,20 @@ import javax.annotation.Nullable;
 @Visitable
 public class ContinueStatement extends Statement {
 
-  @Nullable private final String label;
+  @Nullable private final LabelReference labelReference;
 
-  private ContinueStatement(SourcePosition sourcePosition, String label) {
+  private ContinueStatement(SourcePosition sourcePosition, LabelReference labelReference) {
     super(sourcePosition);
-    this.label = label;
+    this.labelReference = labelReference;
   }
 
-  public String getLabel() {
-    return label;
+  public LabelReference getLabelReference() {
+    return labelReference;
   }
 
   @Override
   public ContinueStatement clone() {
-    return new ContinueStatement(getSourcePosition(), label);
+    return new ContinueStatement(getSourcePosition(), AstUtils.clone(labelReference));
   }
 
   @Override
@@ -51,13 +51,13 @@ public class ContinueStatement extends Statement {
 
   /** Builder for ContinueStatement. */
   public static class Builder {
-    private String label;
+    private LabelReference labelReference;
     private SourcePosition sourcePosition;
 
     public static Builder from(ContinueStatement continueStatement) {
       return newBuilder()
           .setSourcePosition(continueStatement.getSourcePosition())
-          .setLabel(continueStatement.getLabel());
+          .setLabelReference(continueStatement.getLabelReference());
     }
 
     public Builder setSourcePosition(SourcePosition sourcePosition) {
@@ -65,13 +65,13 @@ public class ContinueStatement extends Statement {
       return this;
     }
 
-    public Builder setLabel(String label) {
-      this.label = label;
+    public Builder setLabelReference(LabelReference labelReference) {
+      this.labelReference = labelReference;
       return this;
     }
 
     public ContinueStatement build() {
-      return new ContinueStatement(sourcePosition, label);
+      return new ContinueStatement(sourcePosition, labelReference);
     }
   }
 }

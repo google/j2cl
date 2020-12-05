@@ -92,7 +92,7 @@ public class NormalizeJsVarargs extends NormalizationPass {
       MethodCall arrayStampTypeMethodCall =
           RuntimeMethods.createArraysMethodCall(
               "$stampType",
-              varargsParameter.getReference(),
+              varargsParameter.createReference(),
               varargsParameterTypeDescriptor
                   .getLeafTypeDescriptor()
                   .getMetadataConstructorReference(),

@@ -165,7 +165,7 @@ public abstract class AbstractCompilationUnitBuilder {
               .build());
       // Use the newly introduced variable as a qualifier when forwarding the call within the
       // lambda expression.
-      qualifier = variable.getReference();
+      qualifier = variable.createReference();
     }
 
     result.add(
@@ -205,7 +205,7 @@ public abstract class AbstractCompilationUnitBuilder {
           parameters.size() == targetMethodDescriptor.getParameterTypeDescriptors().size() + 1
               || (parameters.size() >= targetMethodDescriptor.getParameterTypeDescriptors().size()
                   && targetMethodDescriptor.isVarargs()));
-      qualifier = parameters.get(0).getReference();
+      qualifier = parameters.get(0).createReference();
       forwardingParameters = parameters.subList(1, parameters.size());
     }
 
@@ -215,7 +215,7 @@ public abstract class AbstractCompilationUnitBuilder {
             qualifier,
             targetMethodDescriptor,
             isStaticDispatch,
-            forwardingParameters.stream().map(Variable::getReference).collect(toImmutableList()),
+            forwardingParameters.stream().map(Variable::createReference).collect(toImmutableList()),
             functionalMethodDescriptor.getReturnTypeDescriptor());
     return FunctionExpression.newBuilder()
         .setTypeDescriptor(expressionTypeDescriptor)
@@ -255,7 +255,7 @@ public abstract class AbstractCompilationUnitBuilder {
         NewInstance.Builder.from(targetConstructorMethodDescriptor)
             .setQualifier(qualifier)
             .setArguments(
-                parameters.stream().map(Variable::getReference).collect(toImmutableList()))
+                parameters.stream().map(Variable::createReference).collect(toImmutableList()))
             .build();
 
     return FunctionExpression.newBuilder()
@@ -325,7 +325,7 @@ public abstract class AbstractCompilationUnitBuilder {
     // array type, hence the missing dimensions are padded with null.
     ImmutableList<Expression> dimensionExpressions =
         ImmutableList.<Expression>builder()
-            .add(parameter.getReference())
+            .add(parameter.createReference())
             .addAll(AstUtils.createListOfNullValues(arrayType.getDimensions() - 1))
             .build();
 
@@ -462,7 +462,7 @@ public abstract class AbstractCompilationUnitBuilder {
         checkNotNull(enclosingTypeByVariable.get(variable).getDeclaration());
 
     if (getCurrentType().getDeclaration().equals(enclosingClassDeclaration)) {
-      return variable.getReference();
+      return variable.createReference();
     }
 
     propagateCaptureOutward(variable);

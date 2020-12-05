@@ -92,7 +92,9 @@ public class NormalizeEnumClasses extends NormalizationPass {
 
                         return MethodCall.Builder.from(methodCall)
                             .addArgumentsAndUpdateDescriptor(
-                                0, nameParameter.getReference(), ordinalParameter.getReference())
+                                0,
+                                nameParameter.createReference(),
+                                ordinalParameter.createReference())
                             .build();
                       }
                     });
@@ -101,8 +103,8 @@ public class NormalizeEnumClasses extends NormalizationPass {
               // Initialize name and ordinal fields.
               // TODO(b/74986525): revert to initialization of these fields in superclass
               // once removal of unused values is guaranteed or more stable.
-              initJavaLangEnumField(method, "ordinal", ordinalParameter.getReference());
-              initJavaLangEnumField(method, "name", nameParameter.getReference());
+              initJavaLangEnumField(method, "ordinal", ordinalParameter.createReference());
+              initJavaLangEnumField(method, "name", nameParameter.createReference());
             }
 
             return Method.Builder.from(method)

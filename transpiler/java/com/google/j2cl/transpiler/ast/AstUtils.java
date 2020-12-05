@@ -224,7 +224,7 @@ public class AstUtils {
             qualifier,
             toMethodDescriptor,
             isStaticDispatch,
-            parameters.stream().map(Variable::getReference).collect(Collectors.toList()),
+            parameters.stream().map(Variable::createReference).collect(Collectors.toList()),
             fromMethodDescriptor.getReturnTypeDescriptor());
     return Method.newBuilder()
         .setMethodDescriptor(fromMethodDescriptor)
@@ -593,57 +593,70 @@ public class AstUtils {
   }
 
   /**
-   * Replaces references to variables in {@code fromVariables} to reference to variables in {@code
-   * toVariables}.
+   * Replaces references to {@code fromDeclarations} by references to {@code toDeclarations} in
+   * {@code nodes}.
    */
-  public static <T extends Node> List<T> replaceVariables(
-      List<Variable> fromVariables, List<Variable> toVariable, List<T> nodes) {
+  public static <T extends Node> List<T> replaceDeclarations(
+      List<? extends NameDeclaration> fromDeclarations,
+      List<? extends NameDeclaration> toDeclarations,
+      List<T> nodes) {
     List<T> result = new ArrayList<>();
     for (T node : nodes) {
-      result.add(replaceVariables(fromVariables, toVariable, node));
+      result.add(replaceDeclarations(fromDeclarations, toDeclarations, node));
     }
     return result;
   }
 
   /**
-   * Replaces references to variables in {@code fromVariables} to reference to variables in {@code
-   * toVariables}.
+   * Replaces references to {@code fromDeclarations} by references to {@code toDeclarations} in
+   * {@code node}.
    */
   @SuppressWarnings("unchecked")
-  public static <T extends Node> T replaceVariables(
-      List<Variable> fromVariables, List<Variable> toVariable, T node) {
-    class VariableReplacer extends AbstractRewriter {
-      Map<Variable, Variable> toVariableByFromVariable = new HashMap<>();
+  public static <T extends Node> T replaceDeclarations(
+      List<? extends NameDeclaration> fromDeclarations,
+      List<? extends NameDeclaration> toDeclarations,
+      T node) {
+    checkArgument(fromDeclarations.size() == toDeclarations.size());
 
-      public VariableReplacer(List<Variable> fromVariables, List<Variable> toVariables) {
-        checkArgument(fromVariables.size() == toVariables.size());
-        for (int i = 0; i < fromVariables.size(); i++) {
-          toVariableByFromVariable.put(fromVariables.get(i), toVariables.get(i));
-        }
-      }
-
-      @Override
-      public Variable rewriteVariable(Variable variable) {
-        Variable toVariable = toVariableByFromVariable.get(variable);
-        return toVariable == null ? variable : toVariable;
-      }
-
-      @Override
-      public Expression rewriteVariableReference(VariableReference variableReference) {
-        Variable toVariable = toVariableByFromVariable.get(variableReference.getTarget());
-        if (toVariable != null) {
-          return toVariable.getReference();
-        }
-        return variableReference;
-      }
+    Map<NameDeclaration, NameDeclaration> toDeclarationByFromDeclaration = new HashMap<>();
+    for (int i = 0; i < fromDeclarations.size(); i++) {
+      toDeclarationByFromDeclaration.put(fromDeclarations.get(i), toDeclarations.get(i));
     }
 
-    return (T) node.accept(new VariableReplacer(fromVariables, toVariable));
+    return (T)
+        node.accept(
+            new AbstractRewriter() {
+              @Override
+              public NameDeclaration rewriteNameDeclaration(NameDeclaration nameDeclaration) {
+                Label toLabel = (Label) toDeclarationByFromDeclaration.get(nameDeclaration);
+                return toLabel == null ? nameDeclaration : toLabel;
+              }
+
+              @Override
+              public LabelReference rewriteLabelReference(LabelReference labelReference) {
+                return (LabelReference) replaceReference(labelReference);
+              }
+
+              @Override
+              public VariableReference rewriteVariableReference(
+                  VariableReference variableReference) {
+                return (VariableReference) replaceReference(variableReference);
+              }
+
+              private Reference<?> replaceReference(Reference<?> reference) {
+                NameDeclaration nameDeclaration =
+                    toDeclarationByFromDeclaration.get(reference.getTarget());
+                if (nameDeclaration != null) {
+                  return nameDeclaration.createReference();
+                }
+                return reference;
+              }
+            });
   }
 
   /** Get a list of references for {@code variables}. */
   public static List<Expression> getReferences(List<Variable> variables) {
-    return variables.stream().map(Variable::getReference).collect(toImmutableList());
+    return variables.stream().map(Variable::createReference).collect(toImmutableList());
   }
 
   /** Creates an implicit constructor that forwards to a specific super constructor. */
@@ -673,15 +686,13 @@ public class AstUtils {
     }
 
     Expression qualifier =
-        firstParameterIsSuperQualifier ? constructorParameters.get(0).getReference() : null;
+        firstParameterIsSuperQualifier ? constructorParameters.get(0).createReference() : null;
 
     List<Expression> superConstructorArguments =
         (firstParameterIsSuperQualifier
                 ? constructorParameters.subList(1, constructorParameters.size())
                 : constructorParameters)
-            .stream()
-            .map(Variable::getReference)
-            .collect(toImmutableList());
+            .stream().map(Variable::createReference).collect(toImmutableList());
 
     return Method.newBuilder()
         .setMethodDescriptor(constructorDescriptor)
@@ -827,7 +838,7 @@ public class AstUtils {
         new AbstractRewriter() {
           @Override
           public Node rewriteThisReference(ThisReference thisReference) {
-            return thisArg.getReference();
+            return thisArg.createReference();
           }
 
           @Override

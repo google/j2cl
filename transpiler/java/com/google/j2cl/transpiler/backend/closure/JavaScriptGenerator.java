@@ -29,7 +29,7 @@ import com.google.j2cl.transpiler.ast.HasName;
 import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
-import com.google.j2cl.transpiler.backend.common.UniqueVariableNamesGatherer;
+import com.google.j2cl.transpiler.backend.common.UniqueNamesResolver;
 import java.util.List;
 import java.util.Map;
 
@@ -58,7 +58,7 @@ public abstract class JavaScriptGenerator {
                     Iterables.get(Splitter.onPattern("\\\\.").split(anImport.getAlias()), 0))
             .collect(toImmutableSet());
     Map<HasName, String> uniqueNameByVariable =
-        UniqueVariableNamesGatherer.computeUniqueVariableNames(
+        UniqueNamesResolver.computeUniqueNames(
             Sets.union(namesUsedInAliases, JsKeywords.getKeywords()), type);
     environment = new GenerationEnvironment(imports, uniqueNameByVariable);
   }

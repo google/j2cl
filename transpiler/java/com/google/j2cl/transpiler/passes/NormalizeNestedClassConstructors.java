@@ -207,7 +207,7 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
           && fieldAccess.getTarget().inSameTypeAs(currentMember.getDescriptor())) {
 
         return getParameterForCapturedField(fieldAccess.getTarget(), (Method) currentMember)
-            .getReference();
+            .createReference();
       }
       return fieldAccess;
     }
@@ -263,7 +263,7 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
                     capturedField ->
                         getParameterForCapturedField(
                                 capturedField.getDescriptor(), (Method) getCurrentMember())
-                            .getReference())
+                            .createReference())
                 .collect(Collectors.toList()));
       } else {
         // thread captures to super call if necessary.
@@ -310,7 +310,7 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
               .build()
           // otherwise, the captured variable is in the scope of the current type,
           // so pass the variable directly as an argument.
-          : capturedVariable.getReference();
+          : capturedVariable.createReference();
     }
   }
 

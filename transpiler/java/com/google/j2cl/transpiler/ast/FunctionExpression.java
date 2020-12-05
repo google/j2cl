@@ -21,7 +21,6 @@ import com.google.common.collect.Iterables;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
-import com.google.j2cl.transpiler.ast.Expression.Precedence;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -97,7 +96,7 @@ public class FunctionExpression extends Expression implements MethodLike {
   @Override
   public FunctionExpression clone() {
     List<Variable> clonedParameters = AstUtils.clone(parameters);
-    Block clonedBody = AstUtils.replaceVariables(parameters, clonedParameters, body.clone());
+    Block clonedBody = AstUtils.replaceDeclarations(parameters, clonedParameters, body.clone());
 
     return FunctionExpression.newBuilder()
         .setTypeDescriptor(typeDescriptor)

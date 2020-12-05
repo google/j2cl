@@ -87,7 +87,7 @@ public class NormalizeFunctionExpressions extends NormalizationPass {
                     parameter,
                     CastExpression.newBuilder()
                         .setCastTypeDescriptor(parameter.getTypeDescriptor().toRawTypeDescriptor())
-                        .setExpression(newParameter.getReference())
+                        .setExpression(newParameter.createReference())
                         .build())
                 .build()
                 .makeStatement(functionExpression.getSourcePosition());

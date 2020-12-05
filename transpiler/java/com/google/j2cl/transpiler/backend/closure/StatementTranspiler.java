@@ -88,8 +88,8 @@ public class StatementTranspiler {
             breakStatement.getSourcePosition(),
             () -> {
               builder.append("break");
-              if (breakStatement.getLabel() != null) {
-                builder.append(" " + breakStatement.getLabel());
+              if (breakStatement.getLabelReference() != null) {
+                builder.append(" " + breakStatement.getLabelReference().getTarget().getName());
               }
               builder.append(";");
             });
@@ -108,8 +108,8 @@ public class StatementTranspiler {
             continueStatement.getSourcePosition(),
             () -> {
               builder.append("continue");
-              if (continueStatement.getLabel() != null) {
-                builder.append(" " + continueStatement.getLabel());
+              if (continueStatement.getLabelReference() != null) {
+                builder.append(" " + continueStatement.getLabelReference().getTarget().getName());
               }
               builder.append(";");
             });
@@ -218,7 +218,7 @@ public class StatementTranspiler {
         builder.emitWithMapping(
             labelStatement.getSourcePosition(),
             () -> {
-              builder.append(labelStatement.getLabel() + ": ");
+              builder.append(labelStatement.getLabel().getName() + ": ");
 
               Statement innerStatement = labelStatement.getStatement();
               // TODO(b/174246745): Remove block braces once the underlying jscompiler bug is fixed.

@@ -59,6 +59,8 @@ import com.google.j2cl.transpiler.ast.FunctionExpression;
 import com.google.j2cl.transpiler.ast.IfStatement;
 import com.google.j2cl.transpiler.ast.InstanceOfExpression;
 import com.google.j2cl.transpiler.ast.JsDocCastExpression;
+import com.google.j2cl.transpiler.ast.Label;
+import com.google.j2cl.transpiler.ast.LabelReference;
 import com.google.j2cl.transpiler.ast.LabeledStatement;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
@@ -132,7 +134,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
   private class ASTConverter {
     private org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit;
-    private Map<IVariableBinding, Variable> variableByJdtBinding = new HashMap<>();
+    private final Map<IVariableBinding, Variable> variableByJdtBinding = new HashMap<>();
+    private final Map<String, Label> labelsInScope = new HashMap<>();
 
     @SuppressWarnings({"cast"})
     private CompilationUnit convert(
@@ -749,29 +752,34 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     }
 
     private LabeledStatement convert(org.eclipse.jdt.core.dom.LabeledStatement statement) {
-      return LabeledStatement.newBuilder()
-          .setSourcePosition(getSourcePosition(statement))
-          .setLabel(statement.getLabel().getIdentifier())
-          .setStatement(convert(statement.getBody()))
-          .build();
+      Label label = Label.newBuilder().setName(statement.getLabel().getIdentifier()).build();
+      checkState(labelsInScope.put(label.getName(), label) == null);
+      LabeledStatement labeledStatment =
+          LabeledStatement.newBuilder()
+              .setSourcePosition(getSourcePosition(statement))
+              .setLabel(label)
+              .setStatement(convert(statement.getBody()))
+              .build();
+      labelsInScope.remove(label.getName());
+      return labeledStatment;
     }
 
     private BreakStatement convert(org.eclipse.jdt.core.dom.BreakStatement statement) {
       return BreakStatement.newBuilder()
           .setSourcePosition(getSourcePosition(statement))
-          .setLabel(getIdentifierOrNull(statement.getLabel()))
+          .setLabelReference(getLabelReferenceOrNull(statement.getLabel()))
           .build();
     }
 
     private ContinueStatement convert(org.eclipse.jdt.core.dom.ContinueStatement statement) {
       return ContinueStatement.newBuilder()
           .setSourcePosition(getSourcePosition(statement))
-          .setLabel(getIdentifierOrNull(statement.getLabel()))
+          .setLabelReference(getLabelReferenceOrNull(statement.getLabel()))
           .build();
     }
 
-    private String getIdentifierOrNull(SimpleName label) {
-      return label == null ? null : label.getIdentifier();
+    private LabelReference getLabelReferenceOrNull(SimpleName label) {
+      return label == null ? null : labelsInScope.get(label.getIdentifier()).createReference();
     }
 
     private ForStatement convert(org.eclipse.jdt.core.dom.ForStatement statement) {
@@ -828,10 +836,10 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       // $index < $array.length
       Expression condition =
           indexVariable
-              .getReference()
+              .createReference()
               .infixLessThan(
                   ArrayLength.newBuilder()
-                      .setArrayExpression(arrayVariable.getReference())
+                      .setArrayExpression(arrayVariable.createReference())
                       .build());
 
       ExpressionStatement forVariableDeclarationStatement =
@@ -839,8 +847,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
               .addVariableDeclaration(
                   convert(statement.getParameter()),
                   ArrayAccess.newBuilder()
-                      .setArrayExpression(arrayVariable.getReference())
-                      .setIndexExpression(indexVariable.getReference())
+                      .setArrayExpression(arrayVariable.createReference())
+                      .setIndexExpression(indexVariable.createReference())
                       .build())
               .build()
               .makeStatement(getSourcePosition(statement));
@@ -858,7 +866,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
                   .build())
           .setUpdates(
               PostfixExpression.newBuilder()
-                  .setOperand(indexVariable.getReference())
+                  .setOperand(indexVariable.createReference())
                   .setOperator(PostfixOperator.INCREMENT)
                   .build())
           .setSourcePosition(getSourcePosition(statement))
@@ -906,7 +914,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           JdtUtils.getMethodBinding(iteratorMethodBinding.getReturnType(), "hasNext");
       Expression condition =
           MethodCall.Builder.from(JdtUtils.createMethodDescriptor(hasNextMethodBinding))
-              .setQualifier(iteratorVariable.getReference())
+              .setQualifier(iteratorVariable.createReference())
               .build();
 
       // T v = $iterator.next();
@@ -917,7 +925,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
               .addVariableDeclaration(
                   convert(statement.getParameter()),
                   MethodCall.Builder.from(JdtUtils.createMethodDescriptor(nextMethodBinding))
-                      .setQualifier(iteratorVariable.getReference())
+                      .setQualifier(iteratorVariable.createReference())
                       .build())
               .build()
               .makeStatement(getSourcePosition(statement));

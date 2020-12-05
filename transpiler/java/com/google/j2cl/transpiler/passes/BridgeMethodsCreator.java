@@ -101,7 +101,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
    */
   private static Expression performRuntimeChecksOnParameter(
       Variable parameter, TypeDescriptor requiredType) {
-    Expression parameterReference = parameter.getReference();
+    Expression parameterReference = parameter.createReference();
 
     // If the parameter type in bridge method is different from the one in the method
     // that will handle the call, add a cast to perform the runtime type check.

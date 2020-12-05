@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.ast;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
@@ -25,16 +26,16 @@ import com.google.j2cl.common.visitor.Visitable;
 @Visitable
 public class LabeledStatement extends Statement {
 
-  private final String label;
+  @Visitable Label label;
   @Visitable Statement statement;
 
-  private LabeledStatement(SourcePosition sourcePosition, String label, Statement statement) {
+  private LabeledStatement(SourcePosition sourcePosition, Label label, Statement statement) {
     super(sourcePosition);
     this.label = checkNotNull(label);
     this.statement = checkNotNull(statement);
   }
 
-  public String getLabel() {
+  public Label getLabel() {
     return label;
   }
 
@@ -44,7 +45,12 @@ public class LabeledStatement extends Statement {
 
   @Override
   public LabeledStatement clone() {
-    return new LabeledStatement(getSourcePosition(), label, statement.clone());
+    Label newLabel = label.clone();
+    return new LabeledStatement(
+        getSourcePosition(),
+        newLabel,
+        AstUtils.replaceDeclarations(
+            ImmutableList.of(label), ImmutableList.of(newLabel), statement.clone()));
   }
 
   @Override
@@ -59,7 +65,7 @@ public class LabeledStatement extends Statement {
   /** Builder for LabeledStatement. */
   public static class Builder {
     private Statement statement;
-    private String label;
+    private Label label;
     private SourcePosition sourcePosition;
 
     public static Builder from(LabeledStatement labeledStatement) {
@@ -74,7 +80,7 @@ public class LabeledStatement extends Statement {
       return this;
     }
 
-    public Builder setLabel(String label) {
+    public Builder setLabel(Label label) {
       this.label = label;
       return this;
     }

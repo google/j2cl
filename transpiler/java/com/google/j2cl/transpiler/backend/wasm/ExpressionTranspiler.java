@@ -231,7 +231,7 @@ final class ExpressionTranspiler {
       }
 
       private void renderVariableAssignment(Variable variable, Expression assignment) {
-        sourceBuilder.append("(local.tee " + environment.getVariableName(variable) + " ");
+        sourceBuilder.append("(local.tee " + environment.getDeclarationName(variable) + " ");
         renderTypedExpression(variable.getTypeDescriptor(), assignment);
         sourceBuilder.append(")");
       }
@@ -260,7 +260,7 @@ final class ExpressionTranspiler {
       @Override
       public boolean enterVariableReference(VariableReference variableReference) {
         sourceBuilder.append(
-            "(local.get " + environment.getVariableName(variableReference.getTarget()) + ")");
+            "(local.get " + environment.getDeclarationName(variableReference.getTarget()) + ")");
         return false;
       }
 

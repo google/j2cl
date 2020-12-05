@@ -23,9 +23,9 @@ import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.HasName;
 import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.Method;
+import com.google.j2cl.transpiler.ast.NameDeclaration;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeVariable;
-import com.google.j2cl.transpiler.ast.Variable;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -36,10 +36,10 @@ import java.util.Set;
  * parameters, avoiding collisions with names that are forbidden (keywords, JavaScript referenced
  * externs, module aliases, etc) and other variables accessible in the same member scope.
  */
-public final class UniqueVariableNamesGatherer {
+public final class UniqueNamesResolver {
 
   /** Computes variable names that are contextually unique avoiding collisions. */
-  public static Map<HasName, String> computeUniqueVariableNames(
+  public static Map<HasName, String> computeUniqueNames(
       Set<String> initiallyForbiddenNames, Type type) {
     final Set<String> forbiddenNames = new HashSet<>(initiallyForbiddenNames);
 
@@ -73,8 +73,8 @@ public final class UniqueVariableNamesGatherer {
           }
 
           @Override
-          public void exitVariable(Variable variable) {
-            registerUniqueName(getCurrentMember().getDescriptor(), variable);
+          public void exitNameDeclaration(NameDeclaration nameDeclaration) {
+            registerUniqueName(getCurrentMember().getDescriptor(), nameDeclaration);
           }
 
           private void registerUniqueName(
@@ -113,5 +113,5 @@ public final class UniqueVariableNamesGatherer {
     return variableName;
   }
 
-  private UniqueVariableNamesGatherer() {}
+  private UniqueNamesResolver() {}
 }

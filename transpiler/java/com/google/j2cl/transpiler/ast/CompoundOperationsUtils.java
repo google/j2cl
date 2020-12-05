@@ -80,7 +80,7 @@ public class CompoundOperationsUtils {
                 .build(),
             assignToLeftOperand(
                 FieldAccess.Builder.from(targetFieldAccess)
-                    .setQualifier(qualifierVariable.getReference())
+                    .setQualifier(qualifierVariable.createReference())
                     .build(),
                 operator,
                 rightOperand))
@@ -152,7 +152,7 @@ public class CompoundOperationsUtils {
               .setVariable(arrayExpressionVariable)
               .setInitializer(arrayExpression)
               .build());
-      arrayExpression = arrayExpressionVariable.getReference();
+      arrayExpression = arrayExpressionVariable.createReference();
     }
 
     if (!indexExpression.isIdempotent()) {
@@ -168,7 +168,7 @@ public class CompoundOperationsUtils {
               .setVariable(indexExpressionVariable)
               .setInitializer(indexExpression)
               .build());
-      indexExpression = indexExpressionVariable.getReference();
+      indexExpression = indexExpressionVariable.createReference();
     }
 
     ArrayAccess arrayAccess =
@@ -196,7 +196,7 @@ public class CompoundOperationsUtils {
     expressions.add(assignToLeftOperand(arrayAccess, operator, rightOperand));
     if (valueVariable != null) {
       // Return the saved value.
-      expressions.add(valueVariable.getReference());
+      expressions.add(valueVariable.createReference());
     }
 
     // Leave the multi expression even if there is only one expression, because the expansion might
@@ -229,7 +229,7 @@ public class CompoundOperationsUtils {
                   operand.clone(),
                   operator.getUnderlyingBinaryOperator(),
                   createLiteralOne(operand.getTypeDescriptor())),
-              valueVariable.getReference())
+              valueVariable.createReference())
           .build();
     }
 
@@ -253,7 +253,7 @@ public class CompoundOperationsUtils {
             .build();
     expandedOperand =
         FieldAccess.Builder.from(fieldAccess)
-            .setQualifier(qualifierVariable.getReference())
+            .setQualifier(qualifierVariable.createReference())
             .build();
     variableDeclaration =
         VariableDeclarationExpression.newBuilder()
@@ -274,7 +274,7 @@ public class CompoundOperationsUtils {
                 expandedOperand,
                 operator.getUnderlyingBinaryOperator(),
                 createLiteralOne(operand.getTypeDescriptor())),
-            valueVariable.getReference())
+            valueVariable.createReference())
         .build();
   }
 

@@ -90,7 +90,7 @@ public class NormalizeJsFunctionPropertyInvocations extends NormalizationPass {
                         .addVariableDeclaration(qualifierVariable, qualifier)
                         .build(),
                     MethodCall.Builder.from(methodCall)
-                        .setQualifier(qualifierVariable.getReference())
+                        .setQualifier(qualifierVariable.createReference())
                         .build())
                 .build();
           }

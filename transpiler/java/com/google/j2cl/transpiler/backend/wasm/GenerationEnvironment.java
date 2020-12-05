@@ -29,13 +29,13 @@ import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.HasName;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.NameDeclaration;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
-import com.google.j2cl.transpiler.ast.Variable;
-import com.google.j2cl.transpiler.backend.common.UniqueVariableNamesGatherer;
+import com.google.j2cl.transpiler.backend.common.UniqueNamesResolver;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -128,10 +128,10 @@ class GenerationEnvironment {
         + fieldDescriptor.getEnclosingTypeDescriptor().getQualifiedSourceName();
   }
 
-  private final Map<HasName, String> variableNameByVariable = new HashMap<>();
+  private final Map<HasName, String> nameByDeclaration = new HashMap<>();
 
-  String getVariableName(Variable variable) {
-    return "$" + checkNotNull(variableNameByVariable.get(variable));
+  String getDeclarationName(NameDeclaration declaration) {
+    return "$" + checkNotNull(nameByDeclaration.get(declaration));
   }
 
   GenerationEnvironment(List<CompilationUnit> compilationUnits) {
@@ -139,7 +139,7 @@ class GenerationEnvironment {
         .flatMap(c -> c.getTypes().stream())
         .forEach(
             t ->
-                variableNameByVariable.putAll(
-                    UniqueVariableNamesGatherer.computeUniqueVariableNames(ImmutableSet.of(), t)));
+                nameByDeclaration.putAll(
+                    UniqueNamesResolver.computeUniqueNames(ImmutableSet.of(), t)));
   }
 }

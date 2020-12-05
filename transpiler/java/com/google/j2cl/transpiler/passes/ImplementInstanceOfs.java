@@ -157,7 +157,7 @@ public class ImplementInstanceOfs extends NormalizationPass {
   private static Expression synthesizeInstanceOfClass(Variable instance, Type type) {
     // instance instanceof Type.
     return InstanceOfExpression.newBuilder()
-        .setExpression(instance.getReference())
+        .setExpression(instance.createReference())
         .setTestTypeDescriptor(
             type.getUnderlyingTypeDeclaration().toUnparameterizedTypeDescriptor())
         .build();
@@ -167,11 +167,11 @@ public class ImplementInstanceOfs extends NormalizationPass {
   private static Expression synthesizeInstanceOfJavaInterface(Variable instance, Type type) {
     // instance != null && !!instance.$implements_Interface.
     return instance
-        .getReference()
+        .createReference()
         .infixNotEqualsNull()
         .infixAnd(
             FieldAccess.Builder.from(type.getTypeDescriptor().getIsInstanceMarkerField())
-                .setQualifier(instance.getReference())
+                .setQualifier(instance.createReference())
                 .build()
                 .prefixNot()
                 .prefixNot());
@@ -190,7 +190,7 @@ public class ImplementInstanceOfs extends NormalizationPass {
 
       //   ValueType.$isInstance(instance)
       return MethodCall.Builder.from(instanceOfValueType.getIsInstanceMethodDescriptor())
-          .setArguments(instance.getReference())
+          .setArguments(instance.createReference())
           .build();
     }
     // Non native JsEnums will always appear as instance of BoxedLightEnum in instanceOf and casts
@@ -199,7 +199,7 @@ public class ImplementInstanceOfs extends NormalizationPass {
     //   $Enums.isInstanceOf(instance, Type)
     return RuntimeMethods.createEnumsMethodCall(
         "isInstanceOf",
-        instance.getReference(),
+        instance.createReference(),
         typeDeclaration.toUnparameterizedTypeDescriptor().getMetadataConstructorReference());
   }
 
@@ -235,7 +235,7 @@ public class ImplementInstanceOfs extends NormalizationPass {
       }
       /** SuperInterface.$markImplementor(ctor); */
       methodBuilder.addStatements(
-          createMarkImplementorCall(superInterface, ctorParameter.getReference()));
+          createMarkImplementorCall(superInterface, ctorParameter.createReference()));
     }
 
     // And finally add the marker corresponding to the current interface type.
@@ -243,7 +243,7 @@ public class ImplementInstanceOfs extends NormalizationPass {
     methodBuilder.addStatements(
         BinaryExpression.Builder.asAssignmentTo(
                 FieldAccess.Builder.from(type.getTypeDescriptor().getIsInstanceMarkerField())
-                    .setQualifier(ctorParameter.getReference().getPrototypeFieldAccess())
+                    .setQualifier(ctorParameter.createReference().getPrototypeFieldAccess())
                     .build())
             .setRightOperand(BooleanLiteral.get(true))
             .build()

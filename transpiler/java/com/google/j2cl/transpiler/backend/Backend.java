@@ -93,8 +93,8 @@ import com.google.j2cl.transpiler.passes.RewriteStringEquals;
 import com.google.j2cl.transpiler.passes.RewriteUnaryExpressions;
 import com.google.j2cl.transpiler.passes.VerifyNormalizedUnits;
 import com.google.j2cl.transpiler.passes.VerifyParamAndArgCounts;
+import com.google.j2cl.transpiler.passes.VerifyReferenceScoping;
 import com.google.j2cl.transpiler.passes.VerifySingleAstReference;
-import com.google.j2cl.transpiler.passes.VerifyVariableScoping;
 import java.nio.file.Path;
 import java.util.List;
 
@@ -131,7 +131,7 @@ public enum Backend {
           // Pre-verifications
           new VerifySingleAstReference(),
           new VerifyParamAndArgCounts(),
-          new VerifyVariableScoping(),
+          new VerifyReferenceScoping(),
 
           // Class structure normalizations.
           new OptimizeAutoValue(experimentalOptimizeAutovalue),
@@ -238,7 +238,7 @@ public enum Backend {
           // Post-verifications
           new VerifySingleAstReference(),
           new VerifyParamAndArgCounts(),
-          new VerifyVariableScoping(),
+          new VerifyReferenceScoping(),
           new VerifyNormalizedUnits());
     }
   },
@@ -263,7 +263,7 @@ public enum Backend {
           // Pre-verifications
           new VerifySingleAstReference(),
           new VerifyParamAndArgCounts(),
-          new VerifyVariableScoping(),
+          new VerifyReferenceScoping(),
 
           // Default constructors and explicit super calls should be synthesized first.
           new CreateImplicitConstructors(),
@@ -280,7 +280,7 @@ public enum Backend {
           // Post-verifications
           new VerifySingleAstReference(),
           new VerifyParamAndArgCounts(),
-          new VerifyVariableScoping());
+          new VerifyReferenceScoping());
       // TODO(b/173478946): enable it
       // new VerifyNormalizedUnits());
     }

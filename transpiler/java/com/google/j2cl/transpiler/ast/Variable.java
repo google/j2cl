@@ -24,9 +24,8 @@ import com.google.j2cl.common.visitor.Visitable;
 
 /** Class for local variable and parameter. */
 @Visitable
-public class Variable extends Node
-    implements Cloneable<Variable>, HasUnusableByJsSuppression, HasName {
-  private final String name;
+public class Variable extends NameDeclaration
+    implements Cloneable<Variable>, HasUnusableByJsSuppression {
   private TypeDescriptor typeDescriptor;
   private final boolean isFinal;
   private final boolean isParameter;
@@ -40,16 +39,12 @@ public class Variable extends Node
       boolean isFinal,
       boolean isParameter,
       boolean isUnusableByJsSuppressed) {
-    this.name = checkNotNull(name);
+    super(name);
     setTypeDescriptor(typeDescriptor);
     this.isFinal = isFinal;
     this.isParameter = isParameter;
     this.sourcePosition = checkNotNull(sourcePosition);
     this.isUnusableByJsSuppressed = isUnusableByJsSuppressed;
-  }
-
-  public String getName() {
-    return name;
   }
 
   public TypeDescriptor getTypeDescriptor() {
@@ -78,7 +73,8 @@ public class Variable extends Node
     return Visitor_Variable.visit(processor, this);
   }
 
-  public VariableReference getReference() {
+  @Override
+  public VariableReference createReference() {
     return new VariableReference(this);
   }
 

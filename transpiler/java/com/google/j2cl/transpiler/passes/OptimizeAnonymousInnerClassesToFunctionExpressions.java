@@ -183,7 +183,7 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
                 && fieldAccess.getQualifier() instanceof ThisReference) {
               Variable capturedVariable = capturesByFieldDescriptor.get(fieldAccess.getTarget());
               if (capturedVariable != null && !enclosingCaptures.contains(capturedVariable)) {
-                return capturedVariable.getReference();
+                return capturedVariable.createReference();
               } else if (fieldAccess.getTarget().isEnclosingInstanceCapture()) {
                 return new ThisReference(
                     type.getEnclosingTypeDeclaration().toUnparameterizedTypeDescriptor());

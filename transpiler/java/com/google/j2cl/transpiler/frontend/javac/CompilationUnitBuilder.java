@@ -53,6 +53,8 @@ import com.google.j2cl.transpiler.ast.IfStatement;
 import com.google.j2cl.transpiler.ast.InstanceOfExpression;
 import com.google.j2cl.transpiler.ast.JavaScriptConstructorReference;
 import com.google.j2cl.transpiler.ast.JsDocCastExpression;
+import com.google.j2cl.transpiler.ast.Label;
+import com.google.j2cl.transpiler.ast.LabelReference;
 import com.google.j2cl.transpiler.ast.LabeledStatement;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
@@ -160,6 +162,7 @@ import javax.lang.model.type.TypeMirror;
 public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   private final JavaEnvironment environment;
   private final Map<VariableElement, Variable> variableByVariableElement = new HashMap<>();
+  private final Map<String, Label> labelsInScope = new HashMap<>();
   private JCCompilationUnit javacUnit;
 
   private CompilationUnitBuilder(JavaEnvironment environment) {
@@ -387,29 +390,34 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   }
 
   private LabeledStatement convertLabeledStatement(JCLabeledStatement statement) {
-    return LabeledStatement.newBuilder()
-        .setSourcePosition(getSourcePosition(statement))
-        .setLabel(statement.getLabel().toString())
-        .setStatement(convertStatement(statement.getStatement()))
-        .build();
+    Label label = Label.newBuilder().setName(statement.getLabel().toString()).build();
+    checkState(labelsInScope.put(label.getName(), label) == null);
+    LabeledStatement labeledStatment =
+        LabeledStatement.newBuilder()
+            .setSourcePosition(getSourcePosition(statement))
+            .setLabel(label)
+            .setStatement(convertStatement(statement.getStatement()))
+            .build();
+    labelsInScope.remove(label.getName());
+    return labeledStatment;
   }
 
   private BreakStatement convertBreak(JCBreak statement) {
     return BreakStatement.newBuilder()
         .setSourcePosition(getSourcePosition(statement))
-        .setLabel(getIdentifierOrNull(statement.getLabel()))
+        .setLabelReference(getLabelReferenceOrNull(statement.getLabel()))
         .build();
   }
 
   private ContinueStatement convertContinue(JCContinue statement) {
     return ContinueStatement.newBuilder()
         .setSourcePosition(getSourcePosition(statement))
-        .setLabel(getIdentifierOrNull(statement.getLabel()))
+        .setLabelReference(getLabelReferenceOrNull(statement.getLabel()))
         .build();
   }
 
-  private static String getIdentifierOrNull(Name label) {
-    return label == null ? null : label.toString();
+  private LabelReference getLabelReferenceOrNull(Name label) {
+    return label == null ? null : labelsInScope.get(label.toString()).createReference();
   }
 
   private DoWhileStatement convertDoWhileLoop(JCDoWhileLoop statement) {
@@ -510,17 +518,19 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     // $index < $array.length
     Expression condition =
         indexVariable
-            .getReference()
+            .createReference()
             .infixLessThan(
-                ArrayLength.newBuilder().setArrayExpression(arrayVariable.getReference()).build());
+                ArrayLength.newBuilder()
+                    .setArrayExpression(arrayVariable.createReference())
+                    .build());
 
     ExpressionStatement forVariableDeclarationStatement =
         VariableDeclarationExpression.newBuilder()
             .addVariableDeclaration(
                 createVariable(statement.getVariable(), false),
                 ArrayAccess.newBuilder()
-                    .setArrayExpression(arrayVariable.getReference())
-                    .setIndexExpression(indexVariable.getReference())
+                    .setArrayExpression(arrayVariable.createReference())
+                    .setIndexExpression(indexVariable.createReference())
                     .build())
             .build()
             .makeStatement(getSourcePosition(statement));
@@ -538,7 +548,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
                 .build())
         .setUpdates(
             PostfixExpression.newBuilder()
-                .setOperand(indexVariable.getReference())
+                .setOperand(indexVariable.createReference())
                 .setOperator(PostfixOperator.INCREMENT)
                 .build())
         .setSourcePosition(getSourcePosition(statement))
@@ -586,7 +596,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         iteratorTypeDescriptor.getMethodDescriptor("hasNext");
     Expression condition =
         MethodCall.Builder.from(hasNextMethodDescriptor)
-            .setQualifier(iteratorVariable.getReference())
+            .setQualifier(iteratorVariable.createReference())
             .build();
 
     // T v = $iterator.next();
@@ -596,7 +606,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
             .addVariableDeclaration(
                 createVariable(statement.getVariable(), false),
                 MethodCall.Builder.from(nextMethodDescriptor)
-                    .setQualifier(iteratorVariable.getReference())
+                    .setQualifier(iteratorVariable.createReference())
                     .build())
             .build()
             .makeStatement(getSourcePosition(statement));

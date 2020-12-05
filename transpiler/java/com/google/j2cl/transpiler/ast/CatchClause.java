@@ -51,7 +51,7 @@ public class CatchClause extends Node implements Cloneable<CatchClause> {
   public CatchClause clone() {
     Variable clonedExceptionVariable = exceptionVariable.clone();
     Block clonedBody =
-        AstUtils.replaceVariables(
+        AstUtils.replaceDeclarations(
             Collections.singletonList(exceptionVariable),
             Collections.singletonList(clonedExceptionVariable),
             body.clone());
