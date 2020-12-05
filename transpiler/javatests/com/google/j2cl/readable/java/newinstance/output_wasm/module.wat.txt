@@ -1,0 +1,30 @@
+;;; Code for newinstance.NewInstanceExpr
+
+;;; CLASS  NewInstanceExpr
+
+(type $newinstance.NewInstanceExpr (struct
+))
+
+;;; NewInstanceExpr()
+(func $<init><>:void@newinstance.NewInstanceExpr
+ (param $this (ref null $newinstance.NewInstanceExpr))
+ (result (ref null $newinstance.NewInstanceExpr))
+ (block
+  ;; Object.this.Object.<init>();
+  
+ )
+ (local.get $this)
+)
+
+;;; void NewInstanceExpr.main(String[] args)
+(func $main<java.lang.String<>>:void@newinstance.NewInstanceExpr
+ (param $args (ref null $java.lang.Object))
+ (local $a (ref null $newinstance.NewInstanceExpr))
+ (block
+  ;; NewInstanceExpr a = new NewInstanceExpr.<init>();
+  (local.tee $a (call $<init><>:void@newinstance.NewInstanceExpr (struct.new_default_with_rtt $newinstance.NewInstanceExpr (global.get $newinstance.NewInstanceExpr.rtt)) ))
+  drop
+  
+ )
+)
+

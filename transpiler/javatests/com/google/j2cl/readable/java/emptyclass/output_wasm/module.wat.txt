@@ -5,3 +5,14 @@
 (type $emptyclass.EmptyClass (struct
 ))
 
+;;; EmptyClass()
+(func $<init><>:void@emptyclass.EmptyClass
+ (param $this (ref null $emptyclass.EmptyClass))
+ (result (ref null $emptyclass.EmptyClass))
+ (block
+  ;; Object.this.Object.<init>();
+  
+ )
+ (local.get $this)
+)
+

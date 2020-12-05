@@ -9,6 +9,17 @@
 (type $staticfieldaccesslevels.StaticFieldAccessLevels (struct
 ))
 
+;;; StaticFieldAccessLevels()
+(func $<init><>:void@staticfieldaccesslevels.StaticFieldAccessLevels
+ (param $this (ref null $staticfieldaccesslevels.StaticFieldAccessLevels))
+ (result (ref null $staticfieldaccesslevels.StaticFieldAccessLevels))
+ (block
+  ;; Object.this.Object.<init>();
+  
+ )
+ (local.get $this)
+)
+
 ;;; int StaticFieldAccessLevels.test()
 (func $test<>:int@staticfieldaccesslevels.StaticFieldAccessLevels
  (param $this (ref null $java.lang.Object))
@@ -18,7 +29,6 @@
   ;; unimplemented statement ReturnStatement
   
  )
-
-(i32.const 0)
+ (i32.const 0)
 )
 

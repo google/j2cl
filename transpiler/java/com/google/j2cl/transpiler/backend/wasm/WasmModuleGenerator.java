@@ -202,7 +202,10 @@ public class WasmModuleGenerator {
               + ")");
     }
     // Emit return type
-    TypeDescriptor returnTypeDescriptor = methodDescriptor.getReturnTypeDescriptor();
+    TypeDescriptor returnTypeDescriptor =
+        method.isConstructor()
+            ? methodDescriptor.getEnclosingTypeDescriptor()
+            : methodDescriptor.getReturnTypeDescriptor();
     if (!TypeDescriptors.isPrimitiveVoid(returnTypeDescriptor)) {
       builder.newLine();
       builder.append("(result " + environment.getWasmType(returnTypeDescriptor) + ")");
@@ -219,16 +222,19 @@ public class WasmModuleGenerator {
     }
     builder.newLine();
     new StatementTranspiler(builder, environment).renderStatement(method.getBody());
-    builder.unindent();
-    builder.newLine();
-    // TODO(rluble): remove the dummy return value to keep WASM happy until the return statement
-    // is properly implemented.
-    if (!TypeDescriptors.isPrimitiveVoid(method.getDescriptor().getReturnTypeDescriptor())) {
+    if (method.isConstructor()) {
+      // TODO(rluble): Add a pass to transform constructors into static methods.
+      builder.newLine();
+      builder.append("(local.get $this)");
+    } else if (!TypeDescriptors.isPrimitiveVoid(method.getDescriptor().getReturnTypeDescriptor())) {
+      // TODO(rluble): remove the dummy return value to keep WASM happy until the return statement
+      // is properly implemented.
       builder.newLine();
       ExpressionTranspiler.render(
           method.getDescriptor().getReturnTypeDescriptor().getDefaultValue(), builder, environment);
-      builder.newLine();
     }
+    builder.unindent();
+    builder.newLine();
     builder.append(")");
   }
 

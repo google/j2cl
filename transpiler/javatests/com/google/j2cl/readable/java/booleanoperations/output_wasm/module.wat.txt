@@ -5,6 +5,17 @@
 (type $booleanoperations.BooleanOperations (struct
 ))
 
+;;; BooleanOperations()
+(func $<init><>:void@booleanoperations.BooleanOperations
+ (param $this (ref null $booleanoperations.BooleanOperations))
+ (result (ref null $booleanoperations.BooleanOperations))
+ (block
+  ;; Object.this.Object.<init>();
+  
+ )
+ (local.get $this)
+)
+
 ;;; void BooleanOperations.acceptBoolean(boolean b)
 (func $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations
  (param $b i32)
@@ -166,14 +177,14 @@
    drop
   )))
   ;; Outer finalOuter = BooleanOperations.this.new $1Outer.<init>();
-  (local.tee $finalOuter (ref.null $booleanoperations.BooleanOperations.1Outer))
+  (local.tee $finalOuter (call $<init><>:void@booleanoperations.BooleanOperations.1Outer (struct.new_default_with_rtt $booleanoperations.BooleanOperations.1Outer (global.get $booleanoperations.BooleanOperations.1Outer.rtt)) ))
   drop
   
   ;; (finalOuter.b = (finalOuter.b | true));
   (i32.const 0)
   drop
   ;; Outer outer = BooleanOperations.this.new $1Outer.<init>();
-  (local.tee $outer (ref.null $booleanoperations.BooleanOperations.1Outer))
+  (local.tee $outer (call $<init><>:void@booleanoperations.BooleanOperations.1Outer (struct.new_default_with_rtt $booleanoperations.BooleanOperations.1Outer (global.get $booleanoperations.BooleanOperations.1Outer.rtt)) ))
   drop
   
   ;; (outer.b = (outer.b | ((outer = null) == null)));
@@ -189,9 +200,31 @@
  (field $b@booleanoperations.BooleanOperations.1Outer i32)
 ))
 
+;;; Outer()
+(func $<init><>:void@booleanoperations.BooleanOperations.1Outer
+ (param $this (ref null $booleanoperations.BooleanOperations.1Outer))
+ (result (ref null $booleanoperations.BooleanOperations.1Outer))
+ (block
+  ;; Object.this.Object.<init>();
+  
+ )
+ (local.get $this)
+)
+
 ;;; CLASS  Inner
 
 (type $booleanoperations.BooleanOperations.1Outer.Inner (struct
  (field $this@booleanoperations.BooleanOperations.1Outer.Inner (ref null $booleanoperations.BooleanOperations.1Outer))
 ))
+
+;;; Inner()
+(func $<init><>:void@booleanoperations.BooleanOperations.1Outer.Inner
+ (param $this (ref null $booleanoperations.BooleanOperations.1Outer.Inner))
+ (result (ref null $booleanoperations.BooleanOperations.1Outer.Inner))
+ (block
+  ;; Object.this.Object.<init>();
+  
+ )
+ (local.get $this)
+)
 

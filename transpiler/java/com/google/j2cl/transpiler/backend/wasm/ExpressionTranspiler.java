@@ -15,10 +15,10 @@
  */
 package com.google.j2cl.transpiler.backend.wasm;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveVoid;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
@@ -30,6 +30,7 @@ import com.google.j2cl.transpiler.ast.ExpressionWithComment;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MultiExpression;
+import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
@@ -138,12 +139,7 @@ final class ExpressionTranspiler {
         MethodDescriptor target = methodCall.getTarget();
         if (target.isStatic()) {
           sourceBuilder.append("(call " + environment.getMethodImplementationName(target) + " ");
-          ImmutableList<TypeDescriptor> parameterTypeDescriptors =
-              target.getParameterTypeDescriptors();
-          for (int i = 0; i < parameterTypeDescriptors.size(); i++) {
-            renderTypedExpression(
-                parameterTypeDescriptors.get(i), methodCall.getArguments().get(i));
-          }
+          renderTypedExpressions(target.getParameterTypeDescriptors(), methodCall.getArguments());
           sourceBuilder.append(")");
         } else {
           // TODO(rluble): remove once all method call types are implemented.
@@ -173,6 +169,21 @@ final class ExpressionTranspiler {
             });
         sourceBuilder.unindent();
         sourceBuilder.newLine();
+        sourceBuilder.append(")");
+        return false;
+      }
+
+      @Override
+      public boolean enterNewInstance(NewInstance newInstance) {
+        MethodDescriptor target = newInstance.getTarget();
+        sourceBuilder.append("(call " + environment.getMethodImplementationName(target) + " ");
+        sourceBuilder.append(
+            String.format(
+                "(struct.new_default_with_rtt %s (global.get %s)) ",
+                environment.getWasmTypeName(newInstance.getTypeDescriptor()),
+                environment.getRttGlobalName(
+                    newInstance.getTypeDescriptor().getTypeDeclaration())));
+        renderTypedExpressions(target.getParameterTypeDescriptors(), newInstance.getArguments());
         sourceBuilder.append(")");
         return false;
       }
@@ -235,6 +246,14 @@ final class ExpressionTranspiler {
           render(expression);
         } else {
           render(typeDescriptor.getDefaultValue());
+        }
+      }
+
+      private void renderTypedExpressions(
+          List<TypeDescriptor> typeDescriptors, List<Expression> expressions) {
+        checkArgument(typeDescriptors.size() == expressions.size());
+        for (int i = 0; i < typeDescriptors.size(); i++) {
+          renderTypedExpression(typeDescriptors.get(i), expressions.get(i));
         }
       }
 

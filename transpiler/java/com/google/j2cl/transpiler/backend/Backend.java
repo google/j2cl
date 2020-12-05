@@ -264,6 +264,12 @@ public enum Backend {
           new VerifySingleAstReference(),
           new VerifyParamAndArgCounts(),
           new VerifyVariableScoping(),
+
+          // Default constructors and explicit super calls should be synthesized first.
+          new CreateImplicitConstructors(),
+          new InsertExplicitSuperCalls(),
+
+          // Rewrite operations that do not have direct support in wasm into ones that have.
           new ExpandCompoundAssignments(/* expandAll */ true),
           // Rewrite 'a != b' to '!(a == b)'
           new RewriteReferenceNotEquals(),

@@ -5,6 +5,17 @@
 (type $trycatch.TryCatch (struct
 ))
 
+;;; TryCatch()
+(func $<init><>:void@trycatch.TryCatch
+ (param $this (ref null $trycatch.TryCatch))
+ (result (ref null $trycatch.TryCatch))
+ (block
+  ;; Object.this.Object.<init>();
+  
+ )
+ (local.get $this)
+)
+
 ;;; void TryCatch.testMultiCatch()
 (func $testMultiCatch<>:void@trycatch.TryCatch
  (param $this (ref null $java.lang.Object))
@@ -21,7 +32,7 @@
   ;; unimplemented statement TryStatement
   (block
    ;; throw new ClassCastException.<init>();
-   (ref.null $java.lang.ClassCastException)
+   (call $<init><>:void@java.lang.ClassCastException (struct.new_default_with_rtt $java.lang.ClassCastException (global.get $java.lang.ClassCastException.rtt)) )
    unreachable
   )(block
    ;; throw e;
@@ -48,7 +59,7 @@
   ;; unimplemented statement TryStatement
   (block
    ;; throw new ClassCastException.<init>();
-   (ref.null $java.lang.ClassCastException)
+   (call $<init><>:void@java.lang.ClassCastException (struct.new_default_with_rtt $java.lang.ClassCastException (global.get $java.lang.ClassCastException.rtt)) )
    unreachable
   )(block
   )
@@ -60,7 +71,7 @@
   ;; unimplemented statement TryStatement
   (block
    ;; throw new ClassCastException.<init>();
-   (ref.null $java.lang.ClassCastException)
+   (call $<init><>:void@java.lang.ClassCastException (struct.new_default_with_rtt $java.lang.ClassCastException (global.get $java.lang.ClassCastException.rtt)) )
    unreachable
   )(block
   )(block
@@ -80,7 +91,7 @@
   ;; unimplemented statement TryStatement
   (block
    ;; throw new ClassCastException.<init>();
-   (ref.null $java.lang.ClassCastException)
+   (call $<init><>:void@java.lang.ClassCastException (struct.new_default_with_rtt $java.lang.ClassCastException (global.get $java.lang.ClassCastException.rtt)) )
    unreachable
   )(block
    ;; throw e;
@@ -122,7 +133,7 @@
   ;; unimplemented statement TryStatement
   (block
    ;; throw new Exception.<init>();
-   (ref.null $java.lang.Exception)
+   (call $<init><>:void@java.lang.Exception (struct.new_default_with_rtt $java.lang.Exception (global.get $java.lang.Exception.rtt)) )
    unreachable
   )(block
   ))
@@ -138,11 +149,11 @@
  (local $e (ref null $java.lang.Exception))
  (block
   ;; ClosableThing thing = new ClosableThing.<init>();
-  (local.tee $thing (ref.null $trycatch.TryCatch.ClosableThing))
+  (local.tee $thing (call $<init><>:void@trycatch.TryCatch.ClosableThing (struct.new_default_with_rtt $trycatch.TryCatch.ClosableThing (global.get $trycatch.TryCatch.ClosableThing.rtt)) ))
   drop
   
   ;; ClosableThing thing2 = new ClosableThing.<init>();
-  (local.tee $thing2 (ref.null $trycatch.TryCatch.ClosableThing))
+  (local.tee $thing2 (call $<init><>:void@trycatch.TryCatch.ClosableThing (struct.new_default_with_rtt $trycatch.TryCatch.ClosableThing (global.get $trycatch.TryCatch.ClosableThing.rtt)) ))
   drop
   
   ;; try (
@@ -154,7 +165,7 @@
   ;; unimplemented statement TryStatement
   (block
    ;; throw new Exception.<init>();
-   (ref.null $java.lang.Exception)
+   (call $<init><>:void@java.lang.Exception (struct.new_default_with_rtt $java.lang.Exception (global.get $java.lang.Exception.rtt)) )
    unreachable
   )(block
   ))
@@ -177,7 +188,7 @@
   ;; unimplemented statement TryStatement
   (block
    ;; throw new Exception.<init>();
-   (ref.null $java.lang.Exception)
+   (call $<init><>:void@java.lang.Exception (struct.new_default_with_rtt $java.lang.Exception (global.get $java.lang.Exception.rtt)) )
    unreachable
   )(block
    ;; try {
@@ -187,7 +198,7 @@
    ;; unimplemented statement TryStatement
    (block
     ;; throw new Exception.<init>();
-    (ref.null $java.lang.Exception)
+    (call $<init><>:void@java.lang.Exception (struct.new_default_with_rtt $java.lang.Exception (global.get $java.lang.Exception.rtt)) )
     unreachable
    )(block
    )))
@@ -213,8 +224,7 @@
   ;; unimplemented statement ReturnStatement
   
  )
-
-(ref.null $java.lang.Object)
+ (ref.null $java.lang.Object)
 )
 
 ;;; void TryCatch.testThrowBoundGenerics()
@@ -236,14 +246,24 @@
   ;; unimplemented statement ReturnStatement
   
  )
-
-(ref.null $java.lang.Throwable)
+ (ref.null $java.lang.Throwable)
 )
 
 ;;; CLASS  ClosableThing
 
 (type $trycatch.TryCatch.ClosableThing (struct
 ))
+
+;;; ClosableThing()
+(func $<init><>:void@trycatch.TryCatch.ClosableThing
+ (param $this (ref null $trycatch.TryCatch.ClosableThing))
+ (result (ref null $trycatch.TryCatch.ClosableThing))
+ (block
+  ;; Object.this.Object.<init>();
+  
+ )
+ (local.get $this)
+)
 
 ;;; void ClosableThing.close()
 (func $close<>:void@trycatch.TryCatch.ClosableThing

@@ -5,6 +5,17 @@
 (type $inferreturn.InferReturn (struct
 ))
 
+;;; InferReturn()
+(func $<init><>:void@inferreturn.InferReturn
+ (param $this (ref null $inferreturn.InferReturn))
+ (result (ref null $inferreturn.InferReturn))
+ (block
+  ;; Object.this.Object.<init>();
+  
+ )
+ (local.get $this)
+)
+
 ;;; InferReturn<T> InferReturn.inferGeneric(T foo)
 (func $inferGeneric<java.lang.Object>:inferreturn.InferReturn@inferreturn.InferReturn
  (param $foo (ref null $java.lang.Object))
@@ -14,8 +25,7 @@
   ;; unimplemented statement ReturnStatement
   
  )
-
-(ref.null $inferreturn.InferReturn)
+ (ref.null $inferreturn.InferReturn)
 )
 
 ;;; InferReturn<InferReturn<String>> InferReturn.tightenType(InferReturn<String> foo)
@@ -35,8 +45,7 @@
   ;; unimplemented statement ReturnStatement
   
  )
-
-(ref.null $inferreturn.InferReturn)
+ (ref.null $inferreturn.InferReturn)
 )
 
 ;;; void InferReturn.main()
@@ -67,8 +76,7 @@
   ;; unimplemented statement ReturnStatement
   
  )
-
-(ref.null $java.util.ArrayList)
+ (ref.null $java.util.ArrayList)
 )
 
 ;;; V[] InferReturn.newArray(V foo)
@@ -80,8 +88,7 @@
   ;; unimplemented statement ReturnStatement
   
  )
-
-(ref.null $java.lang.Object)
+ (ref.null $java.lang.Object)
 )
 
 ;;; void InferReturn.acceptsArrayListOfObject(ArrayList<Object> foo)
