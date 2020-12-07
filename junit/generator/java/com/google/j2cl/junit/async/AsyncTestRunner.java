@@ -255,15 +255,13 @@ public class AsyncTestRunner extends BlockJUnit4ClassRunner {
       return;
     }
 
-    if (returnType == ListenableFuture.class) {
-      return;
-    }
-
-    try {
-      getPromiseType(returnType);
-    } catch (InvalidTypeException e) {
-      errors.add(makeError(e.getMessage()));
-      return;
+    if (returnType != ListenableFuture.class) {
+      try {
+        getPromiseType(returnType);
+      } catch (InvalidTypeException e) {
+        errors.add(makeError(e.getMessage()));
+        return;
+      }
     }
 
     Test testAnnotation = testMethod.getAnnotation(Test.class);

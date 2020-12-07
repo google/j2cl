@@ -390,13 +390,24 @@ public class J2clAsyncTest extends IntegrationTestBase {
             .testClassName(testName)
             .addTestFailure(
                 "initializationError",
-                AsyncTestRunner.ErrorMessage.ASYNC_HAS_NO_TIMEOUT.format("before"))
+                AsyncTestRunner.ErrorMessage.ASYNC_HAS_NO_TIMEOUT.format("beforeThenable"))
             .addTestFailure(
                 "initializationError",
-                AsyncTestRunner.ErrorMessage.ASYNC_HAS_NO_TIMEOUT.format("after"))
+                AsyncTestRunner.ErrorMessage.ASYNC_HAS_NO_TIMEOUT.format("beforeFuture"))
             .addTestFailure(
                 "initializationError",
-                AsyncTestRunner.ErrorMessage.ASYNC_HAS_NO_TIMEOUT.format("doesNotHaveTimeout"))
+                AsyncTestRunner.ErrorMessage.ASYNC_HAS_NO_TIMEOUT.format("afterThenable"))
+            .addTestFailure(
+                "initializationError",
+                AsyncTestRunner.ErrorMessage.ASYNC_HAS_NO_TIMEOUT.format("afterFuture"))
+            .addTestFailure(
+                "initializationError",
+                AsyncTestRunner.ErrorMessage.ASYNC_HAS_NO_TIMEOUT.format(
+                    "thenableDoesNotHaveTimeout"))
+            .addTestFailure(
+                "initializationError",
+                AsyncTestRunner.ErrorMessage.ASYNC_HAS_NO_TIMEOUT.format(
+                    "futureDoesNotHaveTimeout"))
             .build();
 
     List<String> logLines = runTest(testName);

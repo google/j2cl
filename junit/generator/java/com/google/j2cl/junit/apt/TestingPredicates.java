@@ -47,6 +47,12 @@ class TestingPredicates {
       return false;
     }
 
+    // Listenable futures are implicitly thenable in JS
+    if (type.getQualifiedName()
+        .contentEquals("com.google.common.util.concurrent.ListenableFuture")) {
+      return true;
+    }
+
     Predicate<ExecutableElement> isJsMethod =
         method ->
             (isAnnotationPresent(method.getEnclosingElement(), JsType.class)

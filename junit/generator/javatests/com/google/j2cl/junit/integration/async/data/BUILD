@@ -121,7 +121,7 @@ j2cl_test_integration_test_data(
 
 j2cl_test_integration_test_data(
     name = "TestTimeOutNotProvided",
-    deps = ASYNC_TEST_DEPS,
+    deps = ASYNC_TEST_DEPS + ["//third_party:guava"],
 )
 
 j2cl_test_integration_test_data(

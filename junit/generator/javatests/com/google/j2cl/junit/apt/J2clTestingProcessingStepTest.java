@@ -159,9 +159,12 @@ public class J2clTestingProcessingStepTest {
     assertError(
         ErrorMessage.ASYNC_HAS_NO_TIMEOUT,
         TestTimeOutNotProvided.class,
-        "doesNotHaveTimeout",
-        "before",
-        "after");
+        "beforeThenable",
+        "beforeFuture",
+        "afterFuture",
+        "afterThenable",
+        "futureDoesNotHaveTimeout",
+        "thenableDoesNotHaveTimeout");
   }
 
   @Test

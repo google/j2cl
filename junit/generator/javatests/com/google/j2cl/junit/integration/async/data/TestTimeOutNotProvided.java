@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.junit.integration.async.data;
 
+import com.google.common.util.concurrent.ListenableFuture;
 import com.google.j2cl.junit.async.AsyncTestRunner;
 import org.junit.After;
 import org.junit.Before;
@@ -25,17 +26,32 @@ import org.junit.runner.RunWith;
 @RunWith(AsyncTestRunner.class)
 public class TestTimeOutNotProvided {
   @Before
-  public Thenable before() {
+  public Thenable beforeThenable() {
+    return null;
+  }
+
+  @Before
+  public ListenableFuture<Void> beforeFuture() {
     return null;
   }
 
   @After
-  public Thenable after() {
+  public Thenable afterThenable() {
+    return null;
+  }
+
+  @After
+  public ListenableFuture<Void> afterFuture() {
     return null;
   }
 
   @Test
-  public Thenable doesNotHaveTimeout() {
+  public Thenable thenableDoesNotHaveTimeout() {
+    return null;
+  }
+
+  @Test
+  public ListenableFuture<Void> futureDoesNotHaveTimeout() {
     return null;
   }
 }
