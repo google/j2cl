@@ -45,7 +45,10 @@ public class CompoundOperationsUtils {
     Expression rightOperand = binaryExpression.getRightOperand();
 
     List<VariableDeclarationFragment> temporaryVariableDeclarations = new ArrayList<>();
-    Expression lhs = decomposeLhs(leftOperand, temporaryVariableDeclarations);
+    Expression lhs =
+        leftOperand.isIdempotent()
+            ? leftOperand
+            : decomposeLhs(leftOperand, temporaryVariableDeclarations);
 
     return constructReturnedExpression(
         temporaryVariableDeclarations,
@@ -58,7 +61,7 @@ public class CompoundOperationsUtils {
    */
   private static Expression decomposeLhs(
       Expression lhs, List<VariableDeclarationFragment> temporaryVariableDeclarations) {
-    if (lhs.isIdempotent()) {
+    if (lhs instanceof VariableReference) {
       // The lhs will be modified but it can be safely evaluated twice in a row without caring to
       // avoid double side-effects if expanded. See the counter example showing an incorrect
       // rewrite:
@@ -91,6 +94,7 @@ public class CompoundOperationsUtils {
       String variableName,
       Expression expression,
       List<VariableDeclarationFragment> temporaryVariableDeclarations) {
+
     Variable qualifierVariable =
         Variable.newBuilder()
             .setFinal(true)
@@ -107,36 +111,19 @@ public class CompoundOperationsUtils {
 
   private static ArrayAccess decomposeArrayAccess(
       ArrayAccess lhs, List<VariableDeclarationFragment> temporaryVariableDeclarations) {
+    Variable arrayExpressionVariable =
+        createTemporaryVariableDeclaration(
+            lhs.getArrayExpression().getTypeDescriptor(),
+            "$array",
+            lhs.getArrayExpression(),
+            temporaryVariableDeclarations);
 
-    Expression arrayExpression = lhs.getArrayExpression();
-    Expression indexExpression = lhs.getIndexExpression();
-
-    if (!arrayExpression.isIdempotent() || !indexExpression.isIdempotent()) {
-      // If index expression can not be evaluated twice it might have a side effect that affects
-      // the array expression. In that case, the value for the array expression is obtained and
-      // stored in $array.
-      Variable arrayExpressionVariable =
-          createTemporaryVariableDeclaration(
-              arrayExpression.getTypeDescriptor(),
-              "$array",
-              arrayExpression,
-              temporaryVariableDeclarations);
-      arrayExpression = arrayExpressionVariable.createReference();
-    }
-
-
-    if (!indexExpression.isIdempotent()) {
-      // Store the index expression so that it is not evaluated twice.
-      Variable indexExpressionVariable =
-          createTemporaryVariableDeclaration(
-              PrimitiveTypes.INT, "$index", indexExpression, temporaryVariableDeclarations);
-      indexExpression = indexExpressionVariable.createReference();
-    }
-
-    checkState(!temporaryVariableDeclarations.isEmpty());
+    Variable indexExpressionVariable =
+        createTemporaryVariableDeclaration(
+            PrimitiveTypes.INT, "$index", lhs.getIndexExpression(), temporaryVariableDeclarations);
     return ArrayAccess.newBuilder()
-        .setArrayExpression(arrayExpression)
-        .setIndexExpression(indexExpression)
+        .setArrayExpression(arrayExpressionVariable.createReference())
+        .setIndexExpression(indexExpressionVariable.createReference())
         .build();
   }
 
@@ -162,7 +149,8 @@ public class CompoundOperationsUtils {
     PostfixOperator operator = postfixExpression.getOperator();
 
     List<VariableDeclarationFragment> temporaryVariableDeclarations = new ArrayList<>();
-    Expression lhs = decomposeLhs(operand, temporaryVariableDeclarations);
+    Expression lhs =
+        operand.isIdempotent() ? operand : decomposeLhs(operand, temporaryVariableDeclarations);
 
     Variable valueVariable =
         createTemporaryVariableDeclaration(
@@ -185,7 +173,7 @@ public class CompoundOperationsUtils {
     PrefixOperator operator = prefixExpression.getOperator();
 
     List<VariableDeclarationFragment> temporaryVariables = new ArrayList<>();
-    Expression lhs = decomposeLhs(operand, temporaryVariables);
+    Expression lhs = operand.isIdempotent() ? operand : decomposeLhs(operand, temporaryVariables);
     return constructReturnedExpression(
         temporaryVariables,
         assignToLeftOperand(

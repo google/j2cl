@@ -77,6 +77,15 @@ public class WasmModuleGenerator {
   }
 
   private void emitTypes(List<CompilationUnit> compilationUnits) {
+    // TODO(b/175140899): references to JavaScript externs should not arrive to the WASM backend.
+    // Remove when that is fixed.
+    // Emit type declararions for native types.
+    builder.newLine();
+    builder.append(
+        String.format(
+            "(type %s (struct ))",
+            environment.getWasmTypeName(TypeDescriptors.get().nativeFunction)));
+
     for (CompilationUnit j2clCompilationUnit : compilationUnits) {
       builder.newLine();
       builder.append(

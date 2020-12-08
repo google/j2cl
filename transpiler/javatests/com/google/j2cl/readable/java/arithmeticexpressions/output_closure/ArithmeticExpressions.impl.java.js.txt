@@ -117,9 +117,10 @@ class ArithmeticExpressions extends j_l_Object {
     $Arrays.$set(longs, 0, $LongUtils.$minus(longs[0], $Long.fromInt(1)));
     $Arrays.$set(longs, 0, $LongUtils.$minus(longs[0], $Long.fromInt(1)));
     {
-      let $array_3 = ArithmeticExpressions.m_getLongArray__();
+      let $array_3 = ArithmeticExpressions.m_getLongArray__(), $index_3 = 0;
       $Arrays.$set(
-          $array_3, 0, $LongUtils.$plus($array_3[0], $Long.fromInt(1)));
+          $array_3, $index_3,
+          $LongUtils.$plus($array_3[$index_3], $Long.fromInt(1)));
     }
     let booleans = null;
     $Arrays.$set(booleans, 0, !!(+booleans[0] | +true));

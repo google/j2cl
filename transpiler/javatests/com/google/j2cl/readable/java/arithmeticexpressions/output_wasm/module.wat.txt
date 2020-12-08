@@ -203,6 +203,7 @@
  (local $$value_1 i32)
  (local $longs (ref null $java.lang.Object))
  (local $$array_3 (ref null $java.lang.Object))
+ (local $$index_3 i32)
  (local $booleans (ref null $java.lang.Object))
  (local $strings (ref null $java.lang.Object))
  (local $shorts (ref null $java.lang.Object))
@@ -317,10 +318,12 @@
   ;; (longs[0] = (longs[0] - 1));
   (i64.const 0)
   drop
-  ;; (long[] $array = arithmeticexpressions.ArithmeticExpressions.getLongArray(),($array[0] = ($array[0] + 1)));
+  ;; (long[] $array = arithmeticexpressions.ArithmeticExpressions.getLongArray(),int $index = 0,($array[$index] = ($array[$index] + 1)));
   (block
    (result i64)
    (local.tee $$array_3 (call $getLongArray<>:long<>@arithmeticexpressions.ArithmeticExpressions ))
+   drop
+   (local.tee $$index_3 (i32.const 0))
    drop
    
    (i64.const 0)
