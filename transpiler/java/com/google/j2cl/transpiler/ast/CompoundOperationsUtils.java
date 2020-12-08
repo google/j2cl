@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.ast;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkState;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,239 +44,138 @@ public class CompoundOperationsUtils {
     Expression leftOperand = binaryExpression.getLeftOperand();
     Expression rightOperand = binaryExpression.getRightOperand();
 
-    if (leftOperand.isIdempotent()) {
-      // The referenced expression *is* being modified but it has no qualifier so no care needs to
-      // be taken to avoid double side-effects from dereferencing the qualifier twice.
-      // a += x => a = a + x
-      return assignToLeftOperand(leftOperand, operator.getUnderlyingBinaryOperator(), rightOperand);
-    }
+    List<VariableDeclarationFragment> temporaryVariableDeclarations = new ArrayList<>();
+    Expression lhs = decomposeLhs(leftOperand, temporaryVariableDeclarations);
 
-    if (leftOperand instanceof ArrayAccess) {
-      return expandArrayAccess(
-          operator.getUnderlyingBinaryOperator(), (ArrayAccess) leftOperand, rightOperand);
-    }
-    return expandQualifiedFieldAccess(
-        operator.getUnderlyingBinaryOperator(), (FieldAccess) leftOperand, rightOperand);
-  }
-
-  private static Expression expandQualifiedFieldAccess(
-      BinaryOperator operator, FieldAccess leftOperand, Expression rightOperand) {
-    // The referenced expression is being modified and it has a qualifier. Take special
-    // care to only dereference the qualifier once (to avoid double side effects), store it in a
-    // temporary variable and use that temporary variable in the rest of the computation.
-    // q.a += b; => (let $qualifier = q, $qualifier.a = $qualifier.a + b)
-    FieldAccess targetFieldAccess = leftOperand;
-    Expression qualifier = targetFieldAccess.getQualifier().clone();
-    Variable qualifierVariable =
-        Variable.newBuilder()
-            .setFinal(true)
-            .setName("$qualifier")
-            .setTypeDescriptor(qualifier.getTypeDescriptor())
-            .build();
-    return MultiExpression.newBuilder()
-        .setExpressions(
-            // Declare the temporary variable and initialize to the evaluated qualifier.
-            VariableDeclarationExpression.newBuilder()
-                .addVariableDeclaration(qualifierVariable, qualifier)
-                .build(),
-            assignToLeftOperand(
-                FieldAccess.Builder.from(targetFieldAccess)
-                    .setQualifier(qualifierVariable.createReference())
-                    .build(),
-                operator,
-                rightOperand))
-        .build();
-  }
-
-
-  private static Expression expandArrayAccess(
-      BinaryOperator operator, ArrayAccess leftOperand, Expression rightOperand) {
-    return expandArrayAccessReturningPreValue(operator, leftOperand, rightOperand, null);
+    return constructReturnedExpression(
+        temporaryVariableDeclarations,
+        assignToLeftOperand(lhs, operator.getUnderlyingBinaryOperator(), rightOperand));
   }
 
   /**
-   * Expands a binary expression that has an array access in the lhs. If {@code valueVariable} is
-   * not {@code null}, the prior lhs value is stored in it and that returned by the resulting
-   * expression.
-   *
-   * <ul>
-   *   <li>Array and index expressions are idempotent (i.e. can be evaluated more that one time)
-   *       <pre><code> array[0] += expression =>
-   *     ($valueVariable = array[0],              // store in $valueVariable if it was passed
-   *      array[0] = array[0] + expression,
-   *      $valueVariable)                         // return $valueVariable if it was passed
-   *   </code></pre>
-   *   <li>Array expression is idempotent but index expression is not.
-   *       <pre><code> getAndChangeArray()[0] += expression =>
-   *     ($array = getAndChangeArray(),
-   *      $valueVariable = $array[0],             // store in $valueVariable if it was passed
-   *      $array[0] = $array[0] + expression,
-   *      $valueVariable)                         // return $valueVariable if it was passed
-   *   </code></pre>
-   *   <li>Index expression is not idempotent (and might have a side-effect on the array
-   *       expression).
-   *       <pre><code> array[getIndexButModifyArrayOrIndex()] += expression =>
-   *     ($array = array,
-   *      $index = getIndexButModifyArrayOrIndex(),
-   *      $valueVariable = $array[$index],        // store in $valueVariable if it was passed
-   *      $array[$index] = $array[$index] + expression,
-   *      $valueVariable)                         // return $valueVariable if it was passed
-   *   </code></pre>
-   * </ul>
-   *
-   * <p>If {@code valueVariable} is {@code null} then the assigment to it is omitted, and the
-   * expression evaluates to the result of the binary expression.
+   * Decomposes the lhs of a compound assignment (or the operand of a prefix/postfix expressions
+   * introducing temporary variables if necessary.
    */
-  private static Expression expandArrayAccessReturningPreValue(
-      BinaryOperator operator,
-      ArrayAccess leftOperand,
-      Expression rightOperand,
-      Variable valueVariable) {
+  private static Expression decomposeLhs(
+      Expression lhs, List<VariableDeclarationFragment> temporaryVariableDeclarations) {
+    if (lhs.isIdempotent()) {
+      // The lhs will be modified but it can be safely evaluated twice in a row without caring to
+      // avoid double side-effects if expanded. See the counter example showing an incorrect
+      // rewrite:
+      //     a[++i] += i => a[++i] = a[++i] + x
+      return lhs;
+    }
 
-    List<Expression> expressions = new ArrayList<>();
-    List<VariableDeclarationFragment> variableDeclarationFragments = new ArrayList<>();
+    if (lhs instanceof ArrayAccess) {
+      return decomposeArrayAccess((ArrayAccess) lhs, temporaryVariableDeclarations);
+    }
+    checkState(lhs instanceof FieldAccess);
+    return decomposeFieldAccess((FieldAccess) lhs, temporaryVariableDeclarations);
+  }
 
-    Expression arrayExpression = leftOperand.getArrayExpression();
-    Expression indexExpression = leftOperand.getIndexExpression();
+  private static FieldAccess decomposeFieldAccess(
+      FieldAccess lhs, List<VariableDeclarationFragment> temporaryVariableDeclarations) {
+
+    // The qualifier is not guaranteed to be free of side effects, so evaluate it first and assign
+    // to a temporary variable.
+    Expression qualifier = lhs.getQualifier();
+    Variable qualifierVariable =
+        createTemporaryVariableDeclaration(
+            qualifier.getTypeDescriptor(), "$qualifier", qualifier, temporaryVariableDeclarations);
+    return FieldAccess.Builder.from(lhs).setQualifier(qualifierVariable.createReference()).build();
+  }
+
+  /** Creates a variable that holds the value of {@code expression} to avoid evaluating it twice. */
+  private static Variable createTemporaryVariableDeclaration(
+      TypeDescriptor variableType,
+      String variableName,
+      Expression expression,
+      List<VariableDeclarationFragment> temporaryVariableDeclarations) {
+    Variable qualifierVariable =
+        Variable.newBuilder()
+            .setFinal(true)
+            .setName(variableName)
+            .setTypeDescriptor(variableType)
+            .build();
+    temporaryVariableDeclarations.add(
+        VariableDeclarationFragment.newBuilder()
+            .setVariable(qualifierVariable)
+            .setInitializer(expression)
+            .build());
+    return qualifierVariable;
+  }
+
+  private static ArrayAccess decomposeArrayAccess(
+      ArrayAccess lhs, List<VariableDeclarationFragment> temporaryVariableDeclarations) {
+
+    Expression arrayExpression = lhs.getArrayExpression();
+    Expression indexExpression = lhs.getIndexExpression();
+
     if (!arrayExpression.isIdempotent() || !indexExpression.isIdempotent()) {
       // If index expression can not be evaluated twice it might have a side effect that affects
       // the array expression. In that case, the value for the array expression is obtained and
       // stored in $array.
       Variable arrayExpressionVariable =
-          Variable.newBuilder()
-              .setFinal(true)
-              .setName("$array")
-              .setTypeDescriptor(arrayExpression.getTypeDescriptor())
-              .build();
-      variableDeclarationFragments.add(
-          VariableDeclarationFragment.newBuilder()
-              .setVariable(arrayExpressionVariable)
-              .setInitializer(arrayExpression)
-              .build());
+          createTemporaryVariableDeclaration(
+              arrayExpression.getTypeDescriptor(),
+              "$array",
+              arrayExpression,
+              temporaryVariableDeclarations);
       arrayExpression = arrayExpressionVariable.createReference();
     }
+
 
     if (!indexExpression.isIdempotent()) {
       // Store the index expression so that it is not evaluated twice.
       Variable indexExpressionVariable =
-          Variable.newBuilder()
-              .setFinal(true)
-              .setName("$index")
-              .setTypeDescriptor(PrimitiveTypes.INT)
-              .build();
-      variableDeclarationFragments.add(
-          VariableDeclarationFragment.newBuilder()
-              .setVariable(indexExpressionVariable)
-              .setInitializer(indexExpression)
-              .build());
+          createTemporaryVariableDeclaration(
+              PrimitiveTypes.INT, "$index", indexExpression, temporaryVariableDeclarations);
       indexExpression = indexExpressionVariable.createReference();
     }
 
-    ArrayAccess arrayAccess =
-        ArrayAccess.newBuilder()
-            .setArrayExpression(arrayExpression)
-            .setIndexExpression(indexExpression)
-            .build();
-    if (valueVariable != null) {
-      // Evaluate the left hand side before evaluating the binary expression.
-      variableDeclarationFragments.add(
-          VariableDeclarationFragment.newBuilder()
-              .setVariable(valueVariable)
-              .setInitializer(arrayAccess.clone())
-              .build());
-    }
+    checkState(!temporaryVariableDeclarations.isEmpty());
+    return ArrayAccess.newBuilder()
+        .setArrayExpression(arrayExpression)
+        .setIndexExpression(indexExpression)
+        .build();
+  }
 
-    if (!variableDeclarationFragments.isEmpty()) {
-      // Declare the temporary variable and initialize to the evaluated qualifier.
-      expressions.add(
+  /**
+   * Returns a multiexpression that declares {@code temporaryVariableDeclarations} and executes
+   * {@code expressions}.
+   */
+  private static Expression constructReturnedExpression(
+      List<VariableDeclarationFragment> temporaryVariableDeclarations, Expression... expressions) {
+
+    MultiExpression.Builder builder = MultiExpression.newBuilder();
+    if (!temporaryVariableDeclarations.isEmpty()) {
+      builder.addExpressions(
           VariableDeclarationExpression.newBuilder()
-              .setVariableDeclarationFragments(variableDeclarationFragments)
+              .addVariableDeclarationFragments(temporaryVariableDeclarations)
               .build());
     }
-    // Evaluate the binary expression.
-    expressions.add(assignToLeftOperand(arrayAccess, operator, rightOperand));
-    if (valueVariable != null) {
-      // Return the saved value.
-      expressions.add(valueVariable.createReference());
-    }
-
-    // Leave the multi expression even if there is only one expression, because the expansion might
-    // need to be parenthesized to preserve precedence.
-    return MultiExpression.newBuilder().addExpressions(expressions).build();
+    return builder.addExpressions(expressions).build();
   }
 
   public static Expression expandExpression(PostfixExpression postfixExpression) {
     Expression operand = postfixExpression.getOperand();
     PostfixOperator operator = postfixExpression.getOperator();
+
+    List<VariableDeclarationFragment> temporaryVariableDeclarations = new ArrayList<>();
+    Expression lhs = decomposeLhs(operand, temporaryVariableDeclarations);
+
     Variable valueVariable =
-        Variable.newBuilder()
-            .setFinal(true)
-            .setName("$value")
-            .setTypeDescriptor(operand.getTypeDescriptor())
-            .build();
+        createTemporaryVariableDeclaration(
+            operand.getTypeDescriptor(), "$value", lhs, temporaryVariableDeclarations);
 
-    if (operand.isIdempotent()) {
-      // The referenced expression *is* being modified but it has no qualifier so no care needs to
-      // be taken to avoid double side-effects from dereferencing the qualifier twice.
-      // a++; => (let $value = a, a = a + 1, $value)
-
-      return MultiExpression.newBuilder()
-          .setExpressions(
-              // Declare the temporary variable to hold the initial value.
-              VariableDeclarationExpression.newBuilder()
-                  .addVariableDeclaration(valueVariable, operand)
-                  .build(),
-              assignToLeftOperand(
-                  operand.clone(),
-                  operator.getUnderlyingBinaryOperator(),
-                  createLiteralOne(operand.getTypeDescriptor())),
-              valueVariable.createReference())
-          .build();
-    }
-
-    VariableDeclarationExpression variableDeclaration;
-    Expression expandedOperand;
-    if (operand instanceof ArrayAccess) {
-      return expandArrayAccessReturningPreValue(
-          operator.getUnderlyingBinaryOperator(),
-          (ArrayAccess) operand,
-          createLiteralOne(operand.getTypeDescriptor()),
-          valueVariable);
-    }
-
-    FieldAccess fieldAccess = (FieldAccess) operand;
-    Expression qualifier = fieldAccess.getQualifier().clone();
-    Variable qualifierVariable =
-        Variable.newBuilder()
-            .setFinal(true)
-            .setName("$qualifier")
-            .setTypeDescriptor(qualifier.getTypeDescriptor())
-            .build();
-    expandedOperand =
-        FieldAccess.Builder.from(fieldAccess)
-            .setQualifier(qualifierVariable.createReference())
-            .build();
-    variableDeclaration =
-        VariableDeclarationExpression.newBuilder()
-            .addVariableDeclaration(qualifierVariable, qualifier)
-            .addVariableDeclaration(valueVariable, expandedOperand.clone())
-            .build();
-
-    // The referenced expression is being modified and it has a qualifier. Take special
-    // care to only dereference the qualifier once (to avoid double side effects), store it in a
-    // temporary variable and use that temporary variable in the rest of the computation.
-    // q.a++; =>
-    // (let $qualifier = q, let $value = $qualifier.a, $qualifier.a = $qualifier.a + 1, $value)
-    return MultiExpression.newBuilder()
-        .setExpressions(
-            // Declare the temporary variables to hold the qualifier and the initial value.
-            variableDeclaration,
-            assignToLeftOperand(
-                expandedOperand,
-                operator.getUnderlyingBinaryOperator(),
-                createLiteralOne(operand.getTypeDescriptor())),
-            valueVariable.createReference())
-        .build();
+    return constructReturnedExpression(
+        temporaryVariableDeclarations,
+        // a++; => (let $value = a, a = a + 1, $value)
+        assignToLeftOperand(
+            lhs.clone(),
+            operator.getUnderlyingBinaryOperator(),
+            createLiteralOne(operand.getTypeDescriptor())),
+        valueVariable.createReference());
   }
 
   public static Expression expandExpression(PrefixExpression prefixExpression) {
@@ -284,29 +184,14 @@ public class CompoundOperationsUtils {
     Expression operand = prefixExpression.getOperand();
     PrefixOperator operator = prefixExpression.getOperator();
 
-    if (operand.isIdempotent()) {
-      // The referenced expression *is* being modified but it has no qualifier so no care needs to
-      // be taken to avoid double side-effects from dereferencing the qualifier twice.
-      // ++a => (a = a + 1)
-      return assignToLeftOperand(
-          operand,
-          operator.getUnderlyingBinaryOperator(),
-          createLiteralOne(operand.getTypeDescriptor()));
-    }
-
-    if (operand instanceof FieldAccess) {
-      // Treat as a++ as a += 1.
-      return expandQualifiedFieldAccess(
-          operator.getUnderlyingBinaryOperator(),
-          (FieldAccess) operand,
-          createLiteralOne(operand.getTypeDescriptor()));
-    }
-
-    // Treat as ++a[i] as a[i] += 1.
-    return expandArrayAccess(
-        operator.getUnderlyingBinaryOperator(),
-        (ArrayAccess) operand,
-        createLiteralOne(operand.getTypeDescriptor()));
+    List<VariableDeclarationFragment> temporaryVariables = new ArrayList<>();
+    Expression lhs = decomposeLhs(operand, temporaryVariables);
+    return constructReturnedExpression(
+        temporaryVariables,
+        assignToLeftOperand(
+            lhs,
+            operator.getUnderlyingBinaryOperator(),
+            createLiteralOne(operand.getTypeDescriptor())));
   }
 
   /** Returns number literal with value 1. */
@@ -318,6 +203,7 @@ public class CompoundOperationsUtils {
   private static BinaryExpression assignToLeftOperand(
       Expression leftOperand, BinaryOperator operator, Expression rightOperand) {
 
+    checkArgument(leftOperand.isIdempotent());
     return BinaryExpression.Builder.asAssignmentTo(leftOperand)
         .setRightOperand(
             maybeCast(
@@ -357,5 +243,4 @@ public class CompoundOperationsUtils {
         .setExpression(expression)
         .build();
   }
-
 }
