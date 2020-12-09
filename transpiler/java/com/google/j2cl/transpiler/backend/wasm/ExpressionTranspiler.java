@@ -24,7 +24,9 @@ import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.BinaryOperator;
 import com.google.j2cl.transpiler.ast.BooleanLiteral;
+import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.ConditionalExpression;
+import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.ExpressionWithComment;
 import com.google.j2cl.transpiler.ast.MethodCall;
@@ -98,6 +100,36 @@ final class ExpressionTranspiler {
           return false;
         }
         return enterExpression(expression);
+      }
+
+      @Override
+      public boolean enterCastExpression(CastExpression castExpression) {
+        TypeDescriptor castTypeDescriptor = castExpression.getCastTypeDescriptor();
+        if (castExpression.getExpression().getTypeDescriptor().isPrimitive()) {
+          // TODO(b/170691747): Remove when boxing is done.
+          return enterExpression(castExpression);
+        }
+        if (castTypeDescriptor.isInterface()) {
+          // TODO(rluble): implement interface casts.
+          render(castExpression.getExpression());
+          return false;
+        } else if (castTypeDescriptor.isClass() || castTypeDescriptor.isEnum()) {
+          sourceBuilder.append(
+              String.format(
+                  "(ref.cast %s %s ",
+                  environment.getWasmTypeName(
+                      castExpression.getExpression().getDeclaredTypeDescriptor()),
+                  environment.getWasmTypeName(castTypeDescriptor)));
+          render(castExpression.getExpression());
+          sourceBuilder.append(
+              String.format(
+                  " (global.get %s))",
+                  environment.getRttGlobalName(
+                      ((DeclaredTypeDescriptor) castTypeDescriptor).getTypeDeclaration())));
+          return false;
+        }
+        // TODO(rluble): handle primitive and array casts.
+        return enterExpression(castExpression);
       }
 
       @Override

@@ -271,6 +271,8 @@ public enum Backend {
 
           // Rewrite operations that do not have direct support in wasm into ones that have.
           new ExpandCompoundAssignments(/* expandAll */ true),
+          new InsertErasureTypeSafetyCasts(),
+
           // Rewrite 'a != b' to '!(a == b)'
           new RewriteReferenceNotEquals(),
           new RewriteUnaryExpressions(),

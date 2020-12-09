@@ -467,10 +467,10 @@
   (local.tee $ref (ref.null $arithmeticexpressions.ArithmeticExpressions.1Ref))
   drop
   
-  ;; (ref.field = (ref.field + 1));
+  ;; (ref.field = (((Integer) ref.field) + 1));
   (ref.null $java.lang.Integer)
   drop
-  ;; int n = (1 + ref.field);
+  ;; int n = (1 + ((Integer) ref.field));
   (local.tee $n (i32.add (i32.const 1) (i32.const 0)))
   drop
   
