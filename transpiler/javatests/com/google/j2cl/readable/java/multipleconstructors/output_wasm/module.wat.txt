@@ -12,15 +12,17 @@
  (param $this (ref null $multipleconstructors.MultipleConstructors))
  (param $id i32)
  (result (ref null $multipleconstructors.MultipleConstructors))
- (block
-  ;; Object.this.Object.<init>();
-  
-  ;; (MultipleConstructors.this.id = id);
-  (i32.const 0)
-  drop
-  ;; (MultipleConstructors.this.flag = (id == 0));
-  (i32.const 0)
-  drop
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+   ;; (MultipleConstructors.this.id = id);
+   (i32.const 0)
+   drop
+   ;; (MultipleConstructors.this.flag = (id == 0));
+   (i32.const 0)
+   drop
+  )
  )
  (local.get $this)
 )
@@ -30,15 +32,17 @@
  (param $this (ref null $multipleconstructors.MultipleConstructors))
  (param $flag i32)
  (result (ref null $multipleconstructors.MultipleConstructors))
- (block
-  ;; Object.this.Object.<init>();
-  
-  ;; (MultipleConstructors.this.id = (0 - 1));
-  (i32.const 0)
-  drop
-  ;; (MultipleConstructors.this.flag = flag);
-  (i32.const 0)
-  drop
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+   ;; (MultipleConstructors.this.id = (0 - 1));
+   (i32.const 0)
+   drop
+   ;; (MultipleConstructors.this.flag = flag);
+   (i32.const 0)
+   drop
+  )
  )
  (local.get $this)
 )
@@ -49,15 +53,17 @@
  (param $id i32)
  (param $flag i32)
  (result (ref null $multipleconstructors.MultipleConstructors))
- (block
-  ;; Object.this.Object.<init>();
-  
-  ;; (MultipleConstructors.this.id = id);
-  (i32.const 0)
-  drop
-  ;; (MultipleConstructors.this.flag = flag);
-  (i32.const 0)
-  drop
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+   ;; (MultipleConstructors.this.id = id);
+   (i32.const 0)
+   drop
+   ;; (MultipleConstructors.this.flag = flag);
+   (i32.const 0)
+   drop
+  )
  )
  (local.get $this)
 )

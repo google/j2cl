@@ -10,9 +10,11 @@
 (func $<init><>:void@cast.CastGenerics
  (param $this (ref null $cast.CastGenerics))
  (result (ref null $cast.CastGenerics))
- (block
-  ;; Object.this.Object.<init>();
-  
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
  )
  (local.get $this)
 )
@@ -21,12 +23,14 @@
 (func $method<>:java.lang.Object@cast.CastGenerics
  (param $this (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
- (block
-  ;; return null;
-  ;; unimplemented statement ReturnStatement
-  
+ (local $return.value (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; return null;
+   (local.set $return.value (ref.null $java.lang.Object))
+   (br $return.label))
  )
- (ref.null $java.lang.Object)
+ (local.get $return.value)
 )
 
 ;;; void CastGenerics.testErasureCast()
@@ -42,84 +46,86 @@
  (local $arrU (ref null $java.lang.Object))
  (local $containerBase (ref null $cast.CastGenerics.Container))
  (local $containerImplementor (ref null $cast.CastGenerics.Container))
- (block
-  ;; String str = ((String) new CastGenerics.<init>().field);
-  (local.tee $str (ref.cast $java.lang.Object $java.lang.String (ref.null $java.lang.String) (global.get $java.lang.String.rtt)))
-  drop
-  
-  ;; (str = ((String) new CastGenerics.<init>().method()));
-  (local.tee $str (ref.cast $java.lang.Object $java.lang.String (ref.null $java.lang.String) (global.get $java.lang.String.rtt)))
-  drop
-  ;; Container<T> containerT = null;
-  (local.tee $containerT (ref.null $cast.CastGenerics.Container))
-  drop
-  
-  ;; ((A) containerT.get()).mA();
-  
-  ;; ((B) containerT.get()).mB();
-  
-  ;; Container<U> containerU = null;
-  (local.tee $containerU (ref.null $cast.CastGenerics.Container))
-  drop
-  
-  ;; ((A) containerU.get()).mA();
-  
-  ;; ((B) containerU.get()).mB();
-  
-  ;; Container<T[]> containerArrT = null;
-  (local.tee $containerArrT (ref.null $cast.CastGenerics.Container))
-  drop
-  
-  ;; T[] arrT = ((T[]) containerArrT.get());
-  (local.tee $arrT (ref.null $java.lang.Object))
-  drop
-  
-  ;; arrT[0].mA();
-  
-  ;; ((B) arrT[0]).mB();
-  
-  ;; A[] arrA = ((A[]) containerArrT.get());
-  (local.tee $arrA (ref.null $java.lang.Object))
-  drop
-  
-  ;; B[] arrB = ((B[]) containerArrT.get());
-  (local.tee $arrB (ref.null $java.lang.Object))
-  drop
-  
-  ;; Container<U[]> containerArrU = null;
-  (local.tee $containerArrU (ref.null $cast.CastGenerics.Container))
-  drop
-  
-  ;; U[] arrU = ((U[]) containerArrU.get());
-  (local.tee $arrU (ref.null $java.lang.Object))
-  drop
-  
-  ;; arrU[0].mA();
-  
-  ;; ((B) arrU[0]).mB();
-  
-  ;; (arrA = ((A[]) containerArrU.get()));
-  (local.tee $arrA (ref.null $java.lang.Object))
-  drop
-  ;; (arrB = ((B[]) containerArrU.get()));
-  (local.tee $arrB (ref.null $java.lang.Object))
-  drop
-  ;; Container<BaseImplementor> containerBase = null;
-  (local.tee $containerBase (ref.null $cast.CastGenerics.Container))
-  drop
-  
-  ;; ((BaseImplementor) containerBase.get()).mA();
-  
-  ;; ((BaseImplementor) containerBase.get()).mB();
-  
-  ;; Container<Implementor> containerImplementor = null;
-  (local.tee $containerImplementor (ref.null $cast.CastGenerics.Container))
-  drop
-  
-  ;; ((Implementor) containerImplementor.get()).mA();
-  
-  ;; ((Implementor) containerImplementor.get()).mB();
-  
+ (block $return.label
+  (block
+   ;; String str = ((String) new CastGenerics.<init>().field);
+   (local.tee $str (ref.cast $java.lang.Object $java.lang.String (ref.null $java.lang.String) (global.get $java.lang.String.rtt)))
+   drop
+   
+   ;; (str = ((String) new CastGenerics.<init>().method()));
+   (local.tee $str (ref.cast $java.lang.Object $java.lang.String (ref.null $java.lang.String) (global.get $java.lang.String.rtt)))
+   drop
+   ;; Container<T> containerT = null;
+   (local.tee $containerT (ref.null $cast.CastGenerics.Container))
+   drop
+   
+   ;; ((A) containerT.get()).mA();
+   
+   ;; ((B) containerT.get()).mB();
+   
+   ;; Container<U> containerU = null;
+   (local.tee $containerU (ref.null $cast.CastGenerics.Container))
+   drop
+   
+   ;; ((A) containerU.get()).mA();
+   
+   ;; ((B) containerU.get()).mB();
+   
+   ;; Container<T[]> containerArrT = null;
+   (local.tee $containerArrT (ref.null $cast.CastGenerics.Container))
+   drop
+   
+   ;; T[] arrT = ((T[]) containerArrT.get());
+   (local.tee $arrT (ref.null $java.lang.Object))
+   drop
+   
+   ;; arrT[0].mA();
+   
+   ;; ((B) arrT[0]).mB();
+   
+   ;; A[] arrA = ((A[]) containerArrT.get());
+   (local.tee $arrA (ref.null $java.lang.Object))
+   drop
+   
+   ;; B[] arrB = ((B[]) containerArrT.get());
+   (local.tee $arrB (ref.null $java.lang.Object))
+   drop
+   
+   ;; Container<U[]> containerArrU = null;
+   (local.tee $containerArrU (ref.null $cast.CastGenerics.Container))
+   drop
+   
+   ;; U[] arrU = ((U[]) containerArrU.get());
+   (local.tee $arrU (ref.null $java.lang.Object))
+   drop
+   
+   ;; arrU[0].mA();
+   
+   ;; ((B) arrU[0]).mB();
+   
+   ;; (arrA = ((A[]) containerArrU.get()));
+   (local.tee $arrA (ref.null $java.lang.Object))
+   drop
+   ;; (arrB = ((B[]) containerArrU.get()));
+   (local.tee $arrB (ref.null $java.lang.Object))
+   drop
+   ;; Container<BaseImplementor> containerBase = null;
+   (local.tee $containerBase (ref.null $cast.CastGenerics.Container))
+   drop
+   
+   ;; ((BaseImplementor) containerBase.get()).mA();
+   
+   ;; ((BaseImplementor) containerBase.get()).mB();
+   
+   ;; Container<Implementor> containerImplementor = null;
+   (local.tee $containerImplementor (ref.null $cast.CastGenerics.Container))
+   drop
+   
+   ;; ((Implementor) containerImplementor.get()).mA();
+   
+   ;; ((Implementor) containerImplementor.get()).mB();
+   
+  )
  )
 )
 
@@ -127,18 +133,20 @@
 (func $testCastToParamterizedType<>:void@cast.CastGenerics
  (local $o (ref null $java.lang.Object))
  (local $cc (ref null $cast.CastGenerics))
- (block
-  ;; Object o = new Integer.<init>(1);
-  (local.tee $o (call $<init><int>:void@java.lang.Integer (struct.new_default_with_rtt $java.lang.Integer (global.get $java.lang.Integer.rtt)) (i32.const 1)))
-  drop
-  
-  ;; CastGenerics<Error, Number> cc = ((CastGenerics<Error, Number>) o);
-  (local.tee $cc (ref.cast $java.lang.Object $cast.CastGenerics (local.get $o) (global.get $cast.CastGenerics.rtt)))
-  drop
-  
-  ;; (cc = ((CastGenerics) o));
-  (local.tee $cc (ref.cast $java.lang.Object $cast.CastGenerics (local.get $o) (global.get $cast.CastGenerics.rtt)))
-  drop
+ (block $return.label
+  (block
+   ;; Object o = new Integer.<init>(1);
+   (local.tee $o (call $<init><int>:void@java.lang.Integer (struct.new_default_with_rtt $java.lang.Integer (global.get $java.lang.Integer.rtt)) (i32.const 1)))
+   drop
+   
+   ;; CastGenerics<Error, Number> cc = ((CastGenerics<Error, Number>) o);
+   (local.tee $cc (ref.cast $java.lang.Object $cast.CastGenerics (local.get $o) (global.get $cast.CastGenerics.rtt)))
+   drop
+   
+   ;; (cc = ((CastGenerics) o));
+   (local.tee $cc (ref.cast $java.lang.Object $cast.CastGenerics (local.get $o) (global.get $cast.CastGenerics.rtt)))
+   drop
+  )
  )
 )
 
@@ -150,27 +158,29 @@
  (local $t (ref null $java.lang.Object))
  (local $es (ref null $java.lang.Object))
  (local $ts (ref null $java.lang.Object))
- (block
-  ;; Object o = new Integer.<init>(1);
-  (local.tee $o (call $<init><int>:void@java.lang.Integer (struct.new_default_with_rtt $java.lang.Integer (global.get $java.lang.Integer.rtt)) (i32.const 1)))
-  drop
-  
-  ;; E e = ((E) o);
-  (local.tee $e (ref.null $java.lang.Number))
-  drop
-  
-  ;; T t = ((T) o);
-  (local.tee $t (ref.null $java.lang.Object))
-  drop
-  
-  ;; E[] es = ((E[]) o);
-  (local.tee $es (ref.null $java.lang.Object))
-  drop
-  
-  ;; T[] ts = ((T[]) o);
-  (local.tee $ts (ref.null $java.lang.Object))
-  drop
-  
+ (block $return.label
+  (block
+   ;; Object o = new Integer.<init>(1);
+   (local.tee $o (call $<init><int>:void@java.lang.Integer (struct.new_default_with_rtt $java.lang.Integer (global.get $java.lang.Integer.rtt)) (i32.const 1)))
+   drop
+   
+   ;; E e = ((E) o);
+   (local.tee $e (ref.null $java.lang.Number))
+   drop
+   
+   ;; T t = ((T) o);
+   (local.tee $t (ref.null $java.lang.Object))
+   drop
+   
+   ;; E[] es = ((E[]) o);
+   (local.tee $es (ref.null $java.lang.Object))
+   drop
+   
+   ;; T[] ts = ((T[]) o);
+   (local.tee $ts (ref.null $java.lang.Object))
+   drop
+   
+  )
  )
 )
 
@@ -180,32 +190,36 @@
  (local $o (ref null $java.lang.Object))
  (local $s (ref null $java.lang.Object))
  (local $c (ref null $java.lang.Object))
- (block
-  ;; Object o = new Integer.<init>(1);
-  (local.tee $o (call $<init><int>:void@java.lang.Integer (struct.new_default_with_rtt $java.lang.Integer (global.get $java.lang.Integer.rtt)) (i32.const 1)))
-  drop
-  
-  ;; S s = ((S) o);
-  (local.tee $s (ref.null $java.lang.Object))
-  drop
-  
-  ;; Object c = ((CastGenerics<S, Number>) o);
-  (local.tee $c (ref.cast $java.lang.Object $cast.CastGenerics (local.get $o) (global.get $cast.CastGenerics.rtt)))
-  drop
-  
-  ;; (c = ((S[]) o));
-  (local.tee $c (ref.null $java.lang.Object))
-  drop
-  ;; (c = ((V) o));
-  (local.tee $c (ref.null $java.lang.Enum))
-  drop
+ (block $return.label
+  (block
+   ;; Object o = new Integer.<init>(1);
+   (local.tee $o (call $<init><int>:void@java.lang.Integer (struct.new_default_with_rtt $java.lang.Integer (global.get $java.lang.Integer.rtt)) (i32.const 1)))
+   drop
+   
+   ;; S s = ((S) o);
+   (local.tee $s (ref.null $java.lang.Object))
+   drop
+   
+   ;; Object c = ((CastGenerics<S, Number>) o);
+   (local.tee $c (ref.cast $java.lang.Object $cast.CastGenerics (local.get $o) (global.get $cast.CastGenerics.rtt)))
+   drop
+   
+   ;; (c = ((S[]) o));
+   (local.tee $c (ref.null $java.lang.Object))
+   drop
+   ;; (c = ((V) o));
+   (local.tee $c (ref.null $java.lang.Enum))
+   drop
+  )
  )
 )
 
 ;;; void CastGenerics.outerGenericMethod()
 (func $outerGenericMethod<>:void@cast.CastGenerics
  (param $this (ref null $java.lang.Object))
- (block
+ (block $return.label
+  (block
+  )
  )
 )
 
@@ -214,31 +228,34 @@
  (param $this (ref null $java.lang.Object))
  (param $o (ref null $java.lang.Object))
  (result (ref null $cast.CastGenerics.Empty1))
- (block
-  ;; if (o instanceof Empty1) {
-  ;;   return ((EE) o);
-  ;; }
-  (if (i32.const 0) (then (block
-   ;; return ((EE) o);
-   ;; unimplemented statement ReturnStatement
-   
-  )))
-  ;; return null;
-  ;; unimplemented statement ReturnStatement
-  
+ (local $return.value (ref null $cast.CastGenerics.Empty1))
+ (block $return.label
+  (block
+   ;; if (o instanceof Empty1) {
+   ;;   return ((EE) o);
+   ;; }
+   (if (i32.const 0) (then (block
+    ;; return ((EE) o);
+    (local.set $return.value (ref.null $cast.CastGenerics.Empty1))
+    (br $return.label))))
+   ;; return null;
+   (local.set $return.value (ref.null $cast.CastGenerics.Empty1))
+   (br $return.label))
  )
- (ref.null $cast.CastGenerics.Empty1)
+ (local.get $return.value)
 )
 
 ;;; Foo<T> CastGenerics.doSomething()
 (func $doSomething<>:cast.CastGenerics.Foo@cast.CastGenerics
  (result (ref null $cast.CastGenerics.Foo))
- (block
-  ;; return new $1.<init>();
-  ;; unimplemented statement ReturnStatement
-  
+ (local $return.value (ref null $cast.CastGenerics.Foo))
+ (block $return.label
+  (block
+   ;; return new $1.<init>();
+   (local.set $return.value (call $<init><>:void@cast.CastGenerics.1 (struct.new_default_with_rtt $cast.CastGenerics.1 (global.get $cast.CastGenerics.1.rtt)) ))
+   (br $return.label))
  )
- (ref.null $cast.CastGenerics.Foo)
+ (local.get $return.value)
 )
 
 ;;; INTERFACE  A
@@ -246,24 +263,10 @@
 (type $cast.CastGenerics.A (struct
 ))
 
-;;; void A.mA()
-(func $mA<>:void@cast.CastGenerics.A
- (param $this (ref null $java.lang.Object))
- (block
- )
-)
-
 ;;; INTERFACE  B
 
 (type $cast.CastGenerics.B (struct
 ))
-
-;;; void B.mB()
-(func $mB<>:void@cast.CastGenerics.B
- (param $this (ref null $java.lang.Object))
- (block
- )
-)
 
 ;;; CLASS  BaseImplementor
 
@@ -274,9 +277,11 @@
 (func $<init><>:void@cast.CastGenerics.BaseImplementor
  (param $this (ref null $cast.CastGenerics.BaseImplementor))
  (result (ref null $cast.CastGenerics.BaseImplementor))
- (block
-  ;; Object.this.Object.<init>();
-  
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
  )
  (local.get $this)
 )
@@ -290,9 +295,11 @@
 (func $<init><>:void@cast.CastGenerics.Implementor
  (param $this (ref null $cast.CastGenerics.Implementor))
  (result (ref null $cast.CastGenerics.Implementor))
- (block
-  ;; BaseImplementor.this.BaseImplementor.<init>();
-  
+ (block $return.label
+  (block
+   ;; BaseImplementor.this.BaseImplementor.<init>();
+   
+  )
  )
  (local.get $this)
 )
@@ -300,14 +307,18 @@
 ;;; void Implementor.mA()
 (func $mA<>:void@cast.CastGenerics.Implementor
  (param $this (ref null $java.lang.Object))
- (block
+ (block $return.label
+  (block
+  )
  )
 )
 
 ;;; void Implementor.mB()
 (func $mB<>:void@cast.CastGenerics.Implementor
  (param $this (ref null $java.lang.Object))
- (block
+ (block $return.label
+  (block
+  )
  )
 )
 
@@ -320,9 +331,11 @@
 (func $<init><>:void@cast.CastGenerics.Container
  (param $this (ref null $cast.CastGenerics.Container))
  (result (ref null $cast.CastGenerics.Container))
- (block
-  ;; Object.this.Object.<init>();
-  
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
  )
  (local.get $this)
 )
@@ -331,12 +344,14 @@
 (func $get<>:java.lang.Object@cast.CastGenerics.Container
  (param $this (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
- (block
-  ;; return null;
-  ;; unimplemented statement ReturnStatement
-  
+ (local $return.value (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; return null;
+   (local.set $return.value (ref.null $java.lang.Object))
+   (br $return.label))
  )
- (ref.null $java.lang.Object)
+ (local.get $return.value)
 )
 
 ;;; CLASS  Nested
@@ -349,9 +364,11 @@
 (func $<init><>:void@cast.CastGenerics.1Nested
  (param $this (ref null $cast.CastGenerics.1Nested))
  (result (ref null $cast.CastGenerics.1Nested))
- (block
-  ;; Object.this.Object.<init>();
-  
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
  )
  (local.get $this)
 )
@@ -361,11 +378,13 @@
  (param $this (ref null $cast.CastGenerics.1Nested))
  (param $o (ref null $java.lang.Object))
  (local $t (ref null $java.lang.Enum))
- (block
-  ;; TT t = ((TT) o);
-  (local.tee $t (ref.null $java.lang.Enum))
-  drop
-  
+ (block $return.label
+  (block
+   ;; TT t = ((TT) o);
+   (local.tee $t (ref.null $java.lang.Enum))
+   drop
+   
+  )
  )
 )
 
@@ -388,9 +407,11 @@
 (func $<init><>:void@cast.CastGenerics.1
  (param $this (ref null $cast.CastGenerics.1))
  (result (ref null $cast.CastGenerics.1))
- (block
-  ;; Foo.this.Foo.<init>();
-  
+ (block $return.label
+  (block
+   ;; Foo.this.Foo.<init>();
+   
+  )
  )
  (local.get $this)
 )
@@ -404,9 +425,11 @@
 (func $<init><>:void@cast.CastGenerics.Foo
  (param $this (ref null $cast.CastGenerics.Foo))
  (result (ref null $cast.CastGenerics.Foo))
- (block
-  ;; Object.this.Object.<init>();
-  
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
  )
  (local.get $this)
 )
@@ -421,9 +444,11 @@
 (func $<init><>:void@cast.CastPrimitives
  (param $this (ref null $cast.CastPrimitives))
  (result (ref null $cast.CastPrimitives))
- (block
-  ;; Object.this.Object.<init>();
-  
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
  )
  (local.get $this)
 )
@@ -438,182 +463,184 @@
  (local $l i64)
  (local $f f32)
  (local $d f64)
- (block
-  ;; byte b = 1;
-  (local.tee $b (i32.const 0))
-  drop
-  
-  ;; char c = 1;
-  (local.tee $c (i32.const 0))
-  drop
-  
-  ;; short s = 1;
-  (local.tee $s (i32.const 0))
-  drop
-  
-  ;; int i = 1;
-  (local.tee $i (i32.const 1))
-  drop
-  
-  ;; long l = 1;
-  (local.tee $l (i64.const 1))
-  drop
-  
-  ;; float f = 1.100000023841858;
-  (local.tee $f (f32.const 1.100000023841858))
-  drop
-  
-  ;; double d = 1.1;
-  (local.tee $d (f64.const 1.1))
-  drop
-  
-  ;; (b = ((byte) b));
-  (local.tee $b (i32.const 0))
-  drop
-  ;; (c = ((char) b));
-  (local.tee $c (i32.const 0))
-  drop
-  ;; (s = ((short) b));
-  (local.tee $s (i32.const 0))
-  drop
-  ;; (i = ((int) b));
-  (local.tee $i (i32.const 0))
-  drop
-  ;; (l = ((long) b));
-  (local.tee $l (i64.const 0))
-  drop
-  ;; (f = ((float) b));
-  (local.tee $f (f32.const 0.0))
-  drop
-  ;; (d = ((double) b));
-  (local.tee $d (f64.const 0.0))
-  drop
-  ;; (b = ((byte) c));
-  (local.tee $b (i32.const 0))
-  drop
-  ;; (c = ((char) c));
-  (local.tee $c (i32.const 0))
-  drop
-  ;; (s = ((short) c));
-  (local.tee $s (i32.const 0))
-  drop
-  ;; (i = ((int) c));
-  (local.tee $i (i32.const 0))
-  drop
-  ;; (l = ((long) c));
-  (local.tee $l (i64.const 0))
-  drop
-  ;; (f = ((float) c));
-  (local.tee $f (f32.const 0.0))
-  drop
-  ;; (d = ((double) c));
-  (local.tee $d (f64.const 0.0))
-  drop
-  ;; (b = ((byte) s));
-  (local.tee $b (i32.const 0))
-  drop
-  ;; (c = ((char) s));
-  (local.tee $c (i32.const 0))
-  drop
-  ;; (s = ((short) s));
-  (local.tee $s (i32.const 0))
-  drop
-  ;; (i = ((int) s));
-  (local.tee $i (i32.const 0))
-  drop
-  ;; (l = ((long) s));
-  (local.tee $l (i64.const 0))
-  drop
-  ;; (f = ((float) s));
-  (local.tee $f (f32.const 0.0))
-  drop
-  ;; (d = ((double) s));
-  (local.tee $d (f64.const 0.0))
-  drop
-  ;; (b = ((byte) i));
-  (local.tee $b (i32.const 0))
-  drop
-  ;; (c = ((char) i));
-  (local.tee $c (i32.const 0))
-  drop
-  ;; (s = ((short) i));
-  (local.tee $s (i32.const 0))
-  drop
-  ;; (i = ((int) i));
-  (local.tee $i (i32.const 0))
-  drop
-  ;; (l = ((long) i));
-  (local.tee $l (i64.const 0))
-  drop
-  ;; (f = ((float) i));
-  (local.tee $f (f32.const 0.0))
-  drop
-  ;; (d = ((double) i));
-  (local.tee $d (f64.const 0.0))
-  drop
-  ;; (b = ((byte) l));
-  (local.tee $b (i32.const 0))
-  drop
-  ;; (c = ((char) l));
-  (local.tee $c (i32.const 0))
-  drop
-  ;; (s = ((short) l));
-  (local.tee $s (i32.const 0))
-  drop
-  ;; (i = ((int) l));
-  (local.tee $i (i32.const 0))
-  drop
-  ;; (l = ((long) l));
-  (local.tee $l (i64.const 0))
-  drop
-  ;; (f = ((float) l));
-  (local.tee $f (f32.const 0.0))
-  drop
-  ;; (d = ((double) l));
-  (local.tee $d (f64.const 0.0))
-  drop
-  ;; (b = ((byte) f));
-  (local.tee $b (i32.const 0))
-  drop
-  ;; (c = ((char) f));
-  (local.tee $c (i32.const 0))
-  drop
-  ;; (s = ((short) f));
-  (local.tee $s (i32.const 0))
-  drop
-  ;; (i = ((int) f));
-  (local.tee $i (i32.const 0))
-  drop
-  ;; (l = ((long) f));
-  (local.tee $l (i64.const 0))
-  drop
-  ;; (f = ((float) f));
-  (local.tee $f (f32.const 0.0))
-  drop
-  ;; (d = ((double) f));
-  (local.tee $d (f64.const 0.0))
-  drop
-  ;; (b = ((byte) d));
-  (local.tee $b (i32.const 0))
-  drop
-  ;; (c = ((char) d));
-  (local.tee $c (i32.const 0))
-  drop
-  ;; (s = ((short) d));
-  (local.tee $s (i32.const 0))
-  drop
-  ;; (i = ((int) d));
-  (local.tee $i (i32.const 0))
-  drop
-  ;; (l = ((long) d));
-  (local.tee $l (i64.const 0))
-  drop
-  ;; (f = ((float) d));
-  (local.tee $f (f32.const 0.0))
-  drop
-  ;; (d = ((double) d));
-  (local.tee $d (f64.const 0.0))
-  drop
+ (block $return.label
+  (block
+   ;; byte b = 1;
+   (local.tee $b (i32.const 0))
+   drop
+   
+   ;; char c = 1;
+   (local.tee $c (i32.const 0))
+   drop
+   
+   ;; short s = 1;
+   (local.tee $s (i32.const 0))
+   drop
+   
+   ;; int i = 1;
+   (local.tee $i (i32.const 1))
+   drop
+   
+   ;; long l = 1;
+   (local.tee $l (i64.const 1))
+   drop
+   
+   ;; float f = 1.100000023841858;
+   (local.tee $f (f32.const 1.100000023841858))
+   drop
+   
+   ;; double d = 1.1;
+   (local.tee $d (f64.const 1.1))
+   drop
+   
+   ;; (b = ((byte) b));
+   (local.tee $b (i32.const 0))
+   drop
+   ;; (c = ((char) b));
+   (local.tee $c (i32.const 0))
+   drop
+   ;; (s = ((short) b));
+   (local.tee $s (i32.const 0))
+   drop
+   ;; (i = ((int) b));
+   (local.tee $i (i32.const 0))
+   drop
+   ;; (l = ((long) b));
+   (local.tee $l (i64.const 0))
+   drop
+   ;; (f = ((float) b));
+   (local.tee $f (f32.const 0.0))
+   drop
+   ;; (d = ((double) b));
+   (local.tee $d (f64.const 0.0))
+   drop
+   ;; (b = ((byte) c));
+   (local.tee $b (i32.const 0))
+   drop
+   ;; (c = ((char) c));
+   (local.tee $c (i32.const 0))
+   drop
+   ;; (s = ((short) c));
+   (local.tee $s (i32.const 0))
+   drop
+   ;; (i = ((int) c));
+   (local.tee $i (i32.const 0))
+   drop
+   ;; (l = ((long) c));
+   (local.tee $l (i64.const 0))
+   drop
+   ;; (f = ((float) c));
+   (local.tee $f (f32.const 0.0))
+   drop
+   ;; (d = ((double) c));
+   (local.tee $d (f64.const 0.0))
+   drop
+   ;; (b = ((byte) s));
+   (local.tee $b (i32.const 0))
+   drop
+   ;; (c = ((char) s));
+   (local.tee $c (i32.const 0))
+   drop
+   ;; (s = ((short) s));
+   (local.tee $s (i32.const 0))
+   drop
+   ;; (i = ((int) s));
+   (local.tee $i (i32.const 0))
+   drop
+   ;; (l = ((long) s));
+   (local.tee $l (i64.const 0))
+   drop
+   ;; (f = ((float) s));
+   (local.tee $f (f32.const 0.0))
+   drop
+   ;; (d = ((double) s));
+   (local.tee $d (f64.const 0.0))
+   drop
+   ;; (b = ((byte) i));
+   (local.tee $b (i32.const 0))
+   drop
+   ;; (c = ((char) i));
+   (local.tee $c (i32.const 0))
+   drop
+   ;; (s = ((short) i));
+   (local.tee $s (i32.const 0))
+   drop
+   ;; (i = ((int) i));
+   (local.tee $i (i32.const 0))
+   drop
+   ;; (l = ((long) i));
+   (local.tee $l (i64.const 0))
+   drop
+   ;; (f = ((float) i));
+   (local.tee $f (f32.const 0.0))
+   drop
+   ;; (d = ((double) i));
+   (local.tee $d (f64.const 0.0))
+   drop
+   ;; (b = ((byte) l));
+   (local.tee $b (i32.const 0))
+   drop
+   ;; (c = ((char) l));
+   (local.tee $c (i32.const 0))
+   drop
+   ;; (s = ((short) l));
+   (local.tee $s (i32.const 0))
+   drop
+   ;; (i = ((int) l));
+   (local.tee $i (i32.const 0))
+   drop
+   ;; (l = ((long) l));
+   (local.tee $l (i64.const 0))
+   drop
+   ;; (f = ((float) l));
+   (local.tee $f (f32.const 0.0))
+   drop
+   ;; (d = ((double) l));
+   (local.tee $d (f64.const 0.0))
+   drop
+   ;; (b = ((byte) f));
+   (local.tee $b (i32.const 0))
+   drop
+   ;; (c = ((char) f));
+   (local.tee $c (i32.const 0))
+   drop
+   ;; (s = ((short) f));
+   (local.tee $s (i32.const 0))
+   drop
+   ;; (i = ((int) f));
+   (local.tee $i (i32.const 0))
+   drop
+   ;; (l = ((long) f));
+   (local.tee $l (i64.const 0))
+   drop
+   ;; (f = ((float) f));
+   (local.tee $f (f32.const 0.0))
+   drop
+   ;; (d = ((double) f));
+   (local.tee $d (f64.const 0.0))
+   drop
+   ;; (b = ((byte) d));
+   (local.tee $b (i32.const 0))
+   drop
+   ;; (c = ((char) d));
+   (local.tee $c (i32.const 0))
+   drop
+   ;; (s = ((short) d));
+   (local.tee $s (i32.const 0))
+   drop
+   ;; (i = ((int) d));
+   (local.tee $i (i32.const 0))
+   drop
+   ;; (l = ((long) d));
+   (local.tee $l (i64.const 0))
+   drop
+   ;; (f = ((float) d));
+   (local.tee $f (f32.const 0.0))
+   drop
+   ;; (d = ((double) d));
+   (local.tee $d (f64.const 0.0))
+   drop
+  )
  )
 )
 
@@ -629,43 +656,45 @@
  (local $l i64)
  (local $f f32)
  (local $d f64)
- (block
-  ;; Object o = new Object.<init>();
-  (local.tee $o (call $<init><>:void@java.lang.Object (struct.new_default_with_rtt $java.lang.Object (global.get $java.lang.Object.rtt)) ))
-  drop
-  
-  ;; boolean bool = ((boolean) o);
-  (local.tee $bool (i32.const 0))
-  drop
-  
-  ;; byte b = ((byte) o);
-  (local.tee $b (i32.const 0))
-  drop
-  
-  ;; char c = ((char) o);
-  (local.tee $c (i32.const 0))
-  drop
-  
-  ;; short s = ((short) o);
-  (local.tee $s (i32.const 0))
-  drop
-  
-  ;; int i = ((int) o);
-  (local.tee $i (i32.const 0))
-  drop
-  
-  ;; long l = ((long) o);
-  (local.tee $l (i64.const 0))
-  drop
-  
-  ;; float f = ((float) o);
-  (local.tee $f (f32.const 0.0))
-  drop
-  
-  ;; double d = ((double) o);
-  (local.tee $d (f64.const 0.0))
-  drop
-  
+ (block $return.label
+  (block
+   ;; Object o = new Object.<init>();
+   (local.tee $o (call $<init><>:void@java.lang.Object (struct.new_default_with_rtt $java.lang.Object (global.get $java.lang.Object.rtt)) ))
+   drop
+   
+   ;; boolean bool = ((boolean) o);
+   (local.tee $bool (i32.const 0))
+   drop
+   
+   ;; byte b = ((byte) o);
+   (local.tee $b (i32.const 0))
+   drop
+   
+   ;; char c = ((char) o);
+   (local.tee $c (i32.const 0))
+   drop
+   
+   ;; short s = ((short) o);
+   (local.tee $s (i32.const 0))
+   drop
+   
+   ;; int i = ((int) o);
+   (local.tee $i (i32.const 0))
+   drop
+   
+   ;; long l = ((long) o);
+   (local.tee $l (i64.const 0))
+   drop
+   
+   ;; float f = ((float) o);
+   (local.tee $f (f32.const 0.0))
+   drop
+   
+   ;; double d = ((double) o);
+   (local.tee $d (f64.const 0.0))
+   drop
+   
+  )
  )
 )
 
@@ -678,31 +707,33 @@
  (local $l i64)
  (local $f f32)
  (local $d f64)
- (block
-  ;; Byte boxedByte = java.lang.Byte.valueOf(((byte) 0));
-  (local.tee $boxedByte (call $valueOf<byte>:java.lang.Byte@java.lang.Byte (i32.const 0)))
-  drop
-  
-  ;; short s = ((short) boxedByte);
-  (local.tee $s (i32.const 0))
-  drop
-  
-  ;; int i = ((int) boxedByte);
-  (local.tee $i (i32.const 0))
-  drop
-  
-  ;; long l = ((long) boxedByte);
-  (local.tee $l (i64.const 0))
-  drop
-  
-  ;; float f = ((float) boxedByte);
-  (local.tee $f (f32.const 0.0))
-  drop
-  
-  ;; double d = ((double) boxedByte);
-  (local.tee $d (f64.const 0.0))
-  drop
-  
+ (block $return.label
+  (block
+   ;; Byte boxedByte = java.lang.Byte.valueOf(((byte) 0));
+   (local.tee $boxedByte (call $valueOf<byte>:java.lang.Byte@java.lang.Byte (i32.const 0)))
+   drop
+   
+   ;; short s = ((short) boxedByte);
+   (local.tee $s (i32.const 0))
+   drop
+   
+   ;; int i = ((int) boxedByte);
+   (local.tee $i (i32.const 0))
+   drop
+   
+   ;; long l = ((long) boxedByte);
+   (local.tee $l (i64.const 0))
+   drop
+   
+   ;; float f = ((float) boxedByte);
+   (local.tee $f (f32.const 0.0))
+   drop
+   
+   ;; double d = ((double) boxedByte);
+   (local.tee $d (f64.const 0.0))
+   drop
+   
+  )
  )
 )
 
@@ -716,77 +747,79 @@
  (local $l i64)
  (local $f f32)
  (local $d f64)
- (block
-  ;; byte b = 127;
-  (local.tee $b (i32.const 0))
-  drop
-  
-  ;; char c = 65535;
-  (local.tee $c (i32.const 0))
-  drop
-  
-  ;; short s = 32767;
-  (local.tee $s (i32.const 0))
-  drop
-  
-  ;; int i = 2147483647;
-  (local.tee $i (i32.const 2147483647))
-  drop
-  
-  ;; long l = 9223372036854775807;
-  (local.tee $l (i64.const 9223372036854775807))
-  drop
-  
-  ;; float f = 3.4028234663852886E38;
-  (local.tee $f (f32.const 3.4028234663852886E38))
-  drop
-  
-  ;; double d = 1.7976931348623157E308;
-  (local.tee $d (f64.const 1.7976931348623157E308))
-  drop
-  
-  ;; cast.CastPrimitives.getShort(b);
-  (call $getShort<short>:short@cast.CastPrimitives (i32.const 0))
-  drop
-  ;; cast.CastPrimitives.getInt(b);
-  (call $getInt<int>:int@cast.CastPrimitives (i32.const 0))
-  drop
-  ;; cast.CastPrimitives.getLong(b);
-  (call $getLong<long>:long@cast.CastPrimitives (i64.const 0))
-  drop
-  ;; cast.CastPrimitives.getFloat(b);
-  (call $getFloat<float>:float@cast.CastPrimitives (f32.const 0.0))
-  drop
-  ;; cast.CastPrimitives.getDouble(b);
-  (call $getDouble<double>:double@cast.CastPrimitives (f64.const 0.0))
-  drop
-  ;; cast.CastPrimitives.getFloat(l);
-  (call $getFloat<float>:float@cast.CastPrimitives (f32.const 0.0))
-  drop
-  ;; cast.CastPrimitives.getDouble(l);
-  (call $getDouble<double>:double@cast.CastPrimitives (f64.const 0.0))
-  drop
-  ;; cast.CastPrimitives.getDouble(f);
-  (call $getDouble<double>:double@cast.CastPrimitives (f64.const 0.0))
-  drop
-  ;; new IntValueHolder.<init>(b);
-  (call $<init><int>:void@cast.CastPrimitives.IntValueHolder (struct.new_default_with_rtt $cast.CastPrimitives.IntValueHolder (global.get $cast.CastPrimitives.IntValueHolder.rtt)) (i32.const 0))
-  drop
-  ;; new IntValueHolder.<init>(c);
-  (call $<init><int>:void@cast.CastPrimitives.IntValueHolder (struct.new_default_with_rtt $cast.CastPrimitives.IntValueHolder (global.get $cast.CastPrimitives.IntValueHolder.rtt)) (i32.const 0))
-  drop
-  ;; new IntValueHolder.<init>(s);
-  (call $<init><int>:void@cast.CastPrimitives.IntValueHolder (struct.new_default_with_rtt $cast.CastPrimitives.IntValueHolder (global.get $cast.CastPrimitives.IntValueHolder.rtt)) (i32.const 0))
-  drop
-  ;; new LongValueHolder.<init>(b);
-  (call $<init><long>:void@cast.CastPrimitives.LongValueHolder (struct.new_default_with_rtt $cast.CastPrimitives.LongValueHolder (global.get $cast.CastPrimitives.LongValueHolder.rtt)) (i64.const 0))
-  drop
-  ;; new LongValueHolder.<init>(c);
-  (call $<init><long>:void@cast.CastPrimitives.LongValueHolder (struct.new_default_with_rtt $cast.CastPrimitives.LongValueHolder (global.get $cast.CastPrimitives.LongValueHolder.rtt)) (i64.const 0))
-  drop
-  ;; new LongValueHolder.<init>(i);
-  (call $<init><long>:void@cast.CastPrimitives.LongValueHolder (struct.new_default_with_rtt $cast.CastPrimitives.LongValueHolder (global.get $cast.CastPrimitives.LongValueHolder.rtt)) (i64.const 0))
-  drop
+ (block $return.label
+  (block
+   ;; byte b = 127;
+   (local.tee $b (i32.const 0))
+   drop
+   
+   ;; char c = 65535;
+   (local.tee $c (i32.const 0))
+   drop
+   
+   ;; short s = 32767;
+   (local.tee $s (i32.const 0))
+   drop
+   
+   ;; int i = 2147483647;
+   (local.tee $i (i32.const 2147483647))
+   drop
+   
+   ;; long l = 9223372036854775807;
+   (local.tee $l (i64.const 9223372036854775807))
+   drop
+   
+   ;; float f = 3.4028234663852886E38;
+   (local.tee $f (f32.const 3.4028234663852886E38))
+   drop
+   
+   ;; double d = 1.7976931348623157E308;
+   (local.tee $d (f64.const 1.7976931348623157E308))
+   drop
+   
+   ;; cast.CastPrimitives.getShort(b);
+   (call $getShort<short>:short@cast.CastPrimitives (i32.const 0))
+   drop
+   ;; cast.CastPrimitives.getInt(b);
+   (call $getInt<int>:int@cast.CastPrimitives (i32.const 0))
+   drop
+   ;; cast.CastPrimitives.getLong(b);
+   (call $getLong<long>:long@cast.CastPrimitives (i64.const 0))
+   drop
+   ;; cast.CastPrimitives.getFloat(b);
+   (call $getFloat<float>:float@cast.CastPrimitives (f32.const 0.0))
+   drop
+   ;; cast.CastPrimitives.getDouble(b);
+   (call $getDouble<double>:double@cast.CastPrimitives (f64.const 0.0))
+   drop
+   ;; cast.CastPrimitives.getFloat(l);
+   (call $getFloat<float>:float@cast.CastPrimitives (f32.const 0.0))
+   drop
+   ;; cast.CastPrimitives.getDouble(l);
+   (call $getDouble<double>:double@cast.CastPrimitives (f64.const 0.0))
+   drop
+   ;; cast.CastPrimitives.getDouble(f);
+   (call $getDouble<double>:double@cast.CastPrimitives (f64.const 0.0))
+   drop
+   ;; new IntValueHolder.<init>(b);
+   (call $<init><int>:void@cast.CastPrimitives.IntValueHolder (struct.new_default_with_rtt $cast.CastPrimitives.IntValueHolder (global.get $cast.CastPrimitives.IntValueHolder.rtt)) (i32.const 0))
+   drop
+   ;; new IntValueHolder.<init>(c);
+   (call $<init><int>:void@cast.CastPrimitives.IntValueHolder (struct.new_default_with_rtt $cast.CastPrimitives.IntValueHolder (global.get $cast.CastPrimitives.IntValueHolder.rtt)) (i32.const 0))
+   drop
+   ;; new IntValueHolder.<init>(s);
+   (call $<init><int>:void@cast.CastPrimitives.IntValueHolder (struct.new_default_with_rtt $cast.CastPrimitives.IntValueHolder (global.get $cast.CastPrimitives.IntValueHolder.rtt)) (i32.const 0))
+   drop
+   ;; new LongValueHolder.<init>(b);
+   (call $<init><long>:void@cast.CastPrimitives.LongValueHolder (struct.new_default_with_rtt $cast.CastPrimitives.LongValueHolder (global.get $cast.CastPrimitives.LongValueHolder.rtt)) (i64.const 0))
+   drop
+   ;; new LongValueHolder.<init>(c);
+   (call $<init><long>:void@cast.CastPrimitives.LongValueHolder (struct.new_default_with_rtt $cast.CastPrimitives.LongValueHolder (global.get $cast.CastPrimitives.LongValueHolder.rtt)) (i64.const 0))
+   drop
+   ;; new LongValueHolder.<init>(i);
+   (call $<init><long>:void@cast.CastPrimitives.LongValueHolder (struct.new_default_with_rtt $cast.CastPrimitives.LongValueHolder (global.get $cast.CastPrimitives.LongValueHolder.rtt)) (i64.const 0))
+   drop
+  )
  )
 )
 
@@ -794,60 +827,70 @@
 (func $getShort<short>:short@cast.CastPrimitives
  (param $value i32)
  (result i32)
- (block
-  ;; return value;
-  ;; unimplemented statement ReturnStatement
-  
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return value;
+   (local.set $return.value (local.get $value))
+   (br $return.label))
  )
- (i32.const 0)
+ (local.get $return.value)
 )
 
 ;;; int CastPrimitives.getInt(int value)
 (func $getInt<int>:int@cast.CastPrimitives
  (param $value i32)
  (result i32)
- (block
-  ;; return value;
-  ;; unimplemented statement ReturnStatement
-  
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return value;
+   (local.set $return.value (local.get $value))
+   (br $return.label))
  )
- (i32.const 0)
+ (local.get $return.value)
 )
 
 ;;; long CastPrimitives.getLong(long value)
 (func $getLong<long>:long@cast.CastPrimitives
  (param $value i64)
  (result i64)
- (block
-  ;; return value;
-  ;; unimplemented statement ReturnStatement
-  
+ (local $return.value i64)
+ (block $return.label
+  (block
+   ;; return value;
+   (local.set $return.value (local.get $value))
+   (br $return.label))
  )
- (i64.const 0)
+ (local.get $return.value)
 )
 
 ;;; float CastPrimitives.getFloat(float value)
 (func $getFloat<float>:float@cast.CastPrimitives
  (param $value f32)
  (result f32)
- (block
-  ;; return value;
-  ;; unimplemented statement ReturnStatement
-  
+ (local $return.value f32)
+ (block $return.label
+  (block
+   ;; return value;
+   (local.set $return.value (local.get $value))
+   (br $return.label))
  )
- (f32.const 0.0)
+ (local.get $return.value)
 )
 
 ;;; double CastPrimitives.getDouble(double value)
 (func $getDouble<double>:double@cast.CastPrimitives
  (param $value f64)
  (result f64)
- (block
-  ;; return value;
-  ;; unimplemented statement ReturnStatement
-  
+ (local $return.value f64)
+ (block $return.label
+  (block
+   ;; return value;
+   (local.set $return.value (local.get $value))
+   (br $return.label))
  )
- (f64.const 0.0)
+ (local.get $return.value)
 )
 
 ;;; void CastPrimitives.testImplicitLongAssignmentCasts()
@@ -861,127 +904,129 @@
  (local $ffloat f32)
  (local $fdouble f64)
  (local $tlong i64)
- (block
-  ;; byte fbyte = 11;
-  (local.tee $fbyte (i32.const 0))
-  drop
-  
-  ;; char fchar = 12;
-  (local.tee $fchar (i32.const 0))
-  drop
-  
-  ;; short fshort = 13;
-  (local.tee $fshort (i32.const 0))
-  drop
-  
-  ;; int fint = 14;
-  (local.tee $fint (i32.const 14))
-  drop
-  
-  ;; long flong = 15;
-  (local.tee $flong (i64.const 0))
-  drop
-  
-  ;; float ffloat = 16;
-  (local.tee $ffloat (f32.const 0.0))
-  drop
-  
-  ;; double fdouble = 17;
-  (local.tee $fdouble (f64.const 0.0))
-  drop
-  
-  ;; long tlong = 0;
-  (local.tee $tlong (i64.const 0))
-  drop
-  
-  ;; {
-  ;;   (tlong = fbyte);
-  ;;   (tlong = flong);
-  ;; }
+ (block $return.label
   (block
-   ;; (tlong = fbyte);
+   ;; byte fbyte = 11;
+   (local.tee $fbyte (i32.const 0))
+   drop
+   
+   ;; char fchar = 12;
+   (local.tee $fchar (i32.const 0))
+   drop
+   
+   ;; short fshort = 13;
+   (local.tee $fshort (i32.const 0))
+   drop
+   
+   ;; int fint = 14;
+   (local.tee $fint (i32.const 14))
+   drop
+   
+   ;; long flong = 15;
+   (local.tee $flong (i64.const 0))
+   drop
+   
+   ;; float ffloat = 16;
+   (local.tee $ffloat (f32.const 0.0))
+   drop
+   
+   ;; double fdouble = 17;
+   (local.tee $fdouble (f64.const 0.0))
+   drop
+   
+   ;; long tlong = 0;
    (local.tee $tlong (i64.const 0))
    drop
-   ;; (tlong = flong);
-   (local.tee $tlong (local.get $flong))
-   drop
-  )
-  ;; {
-  ;;   (tlong = fint);
-  ;;   (tlong = (tlong + fint));
-  ;;   (tlong = (tlong << fint));
-  ;; }
-  (block
-   ;; (tlong = fint);
-   (local.tee $tlong (i64.const 0))
-   drop
-   ;; (tlong = (tlong + fint));
-   (local.tee $tlong (i64.add (local.get $tlong) (i64.const 0)))
-   drop
-   ;; (tlong = (tlong << fint));
-   (local.tee $tlong (i64.shl (local.get $tlong) (i64.const 0)))
-   drop
-  )
-  ;; {
-  ;;   (tlong = (tlong + fchar));
-  ;;   (tlong = (tlong + flong));
-  ;;   (tlong = ((long) (tlong + ffloat)));
-  ;; }
-  (block
-   ;; (tlong = (tlong + fchar));
-   (local.tee $tlong (i64.add (local.get $tlong) (i64.const 0)))
-   drop
-   ;; (tlong = (tlong + flong));
-   (local.tee $tlong (i64.add (local.get $tlong) (local.get $flong)))
-   drop
-   ;; (tlong = ((long) (tlong + ffloat)));
-   (local.tee $tlong (i64.const 0))
-   drop
-  )
-  ;; {
-  ;;   (tlong = (flong * fint));
-  ;;   (tlong = (flong >> fint));
-  ;; }
-  (block
-   ;; (tlong = (flong * fint));
-   (local.tee $tlong (i64.mul (local.get $flong) (i64.const 0)))
-   drop
-   ;; (tlong = (flong >> fint));
-   (local.tee $tlong (i64.shr_s (local.get $flong) (i64.const 0)))
-   drop
-  )
-  ;; {
-  ;;   (tlong = (flong + fshort));
-  ;;   (tlong = (flong + flong));
-  ;; }
-  (block
-   ;; (tlong = (flong + fshort));
-   (local.tee $tlong (i64.add (local.get $flong) (i64.const 0)))
-   drop
-   ;; (tlong = (flong + flong));
-   (local.tee $tlong (i64.add (local.get $flong) (local.get $flong)))
-   drop
-  )
-  ;; {
-  ;;   (tlong = (flong << tlong));
-  ;;   (tlong = (tlong << flong));
-  ;; }
-  (block
-   ;; (tlong = (flong << tlong));
-   (local.tee $tlong (i64.shl (local.get $flong) (local.get $tlong)))
-   drop
-   ;; (tlong = (tlong << flong));
-   (local.tee $tlong (i64.shl (local.get $tlong) (local.get $flong)))
-   drop
-  )
-  ;; {
-  ;;   (tlong = ((0 + 1) + 2));
-  ;; }
-  (block
-   ;; (tlong = ((0 + 1) + 2));
-   (local.tee $tlong (i64.add (i64.const 0) (i64.const 2)))
-   drop
-  ))
+   
+   ;; {
+   ;;   (tlong = fbyte);
+   ;;   (tlong = flong);
+   ;; }
+   (block
+    ;; (tlong = fbyte);
+    (local.tee $tlong (i64.const 0))
+    drop
+    ;; (tlong = flong);
+    (local.tee $tlong (local.get $flong))
+    drop
+   )
+   ;; {
+   ;;   (tlong = fint);
+   ;;   (tlong = (tlong + fint));
+   ;;   (tlong = (tlong << fint));
+   ;; }
+   (block
+    ;; (tlong = fint);
+    (local.tee $tlong (i64.const 0))
+    drop
+    ;; (tlong = (tlong + fint));
+    (local.tee $tlong (i64.add (local.get $tlong) (i64.const 0)))
+    drop
+    ;; (tlong = (tlong << fint));
+    (local.tee $tlong (i64.shl (local.get $tlong) (i64.const 0)))
+    drop
+   )
+   ;; {
+   ;;   (tlong = (tlong + fchar));
+   ;;   (tlong = (tlong + flong));
+   ;;   (tlong = ((long) (tlong + ffloat)));
+   ;; }
+   (block
+    ;; (tlong = (tlong + fchar));
+    (local.tee $tlong (i64.add (local.get $tlong) (i64.const 0)))
+    drop
+    ;; (tlong = (tlong + flong));
+    (local.tee $tlong (i64.add (local.get $tlong) (local.get $flong)))
+    drop
+    ;; (tlong = ((long) (tlong + ffloat)));
+    (local.tee $tlong (i64.const 0))
+    drop
+   )
+   ;; {
+   ;;   (tlong = (flong * fint));
+   ;;   (tlong = (flong >> fint));
+   ;; }
+   (block
+    ;; (tlong = (flong * fint));
+    (local.tee $tlong (i64.mul (local.get $flong) (i64.const 0)))
+    drop
+    ;; (tlong = (flong >> fint));
+    (local.tee $tlong (i64.shr_s (local.get $flong) (i64.const 0)))
+    drop
+   )
+   ;; {
+   ;;   (tlong = (flong + fshort));
+   ;;   (tlong = (flong + flong));
+   ;; }
+   (block
+    ;; (tlong = (flong + fshort));
+    (local.tee $tlong (i64.add (local.get $flong) (i64.const 0)))
+    drop
+    ;; (tlong = (flong + flong));
+    (local.tee $tlong (i64.add (local.get $flong) (local.get $flong)))
+    drop
+   )
+   ;; {
+   ;;   (tlong = (flong << tlong));
+   ;;   (tlong = (tlong << flong));
+   ;; }
+   (block
+    ;; (tlong = (flong << tlong));
+    (local.tee $tlong (i64.shl (local.get $flong) (local.get $tlong)))
+    drop
+    ;; (tlong = (tlong << flong));
+    (local.tee $tlong (i64.shl (local.get $tlong) (local.get $flong)))
+    drop
+   )
+   ;; {
+   ;;   (tlong = ((0 + 1) + 2));
+   ;; }
+   (block
+    ;; (tlong = ((0 + 1) + 2));
+    (local.tee $tlong (i64.add (i64.const 0) (i64.const 2)))
+    drop
+   ))
+ )
 )
 
 ;;; CLASS  IntValueHolder
@@ -994,9 +1039,11 @@
  (param $this (ref null $cast.CastPrimitives.IntValueHolder))
  (param $value i32)
  (result (ref null $cast.CastPrimitives.IntValueHolder))
- (block
-  ;; Object.this.Object.<init>();
-  
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
  )
  (local.get $this)
 )
@@ -1011,9 +1058,11 @@
  (param $this (ref null $cast.CastPrimitives.LongValueHolder))
  (param $value i64)
  (result (ref null $cast.CastPrimitives.LongValueHolder))
- (block
-  ;; Object.this.Object.<init>();
-  
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
  )
  (local.get $this)
 )
@@ -1028,9 +1077,11 @@
 (func $<init><>:void@cast.Casts
  (param $this (ref null $cast.Casts))
  (result (ref null $cast.Casts))
- (block
-  ;; Object.this.Object.<init>();
-  
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
  )
  (local.get $this)
 )
@@ -1040,15 +1091,17 @@
  (param $this (ref null $java.lang.Object))
  (local $o (ref null $java.lang.Object))
  (local $c (ref null $cast.Casts))
- (block
-  ;; Object o = new Object.<init>();
-  (local.tee $o (call $<init><>:void@java.lang.Object (struct.new_default_with_rtt $java.lang.Object (global.get $java.lang.Object.rtt)) ))
-  drop
-  
-  ;; Casts c = ((Casts) o);
-  (local.tee $c (ref.cast $java.lang.Object $cast.Casts (local.get $o) (global.get $cast.Casts.rtt)))
-  drop
-  
+ (block $return.label
+  (block
+   ;; Object o = new Object.<init>();
+   (local.tee $o (call $<init><>:void@java.lang.Object (struct.new_default_with_rtt $java.lang.Object (global.get $java.lang.Object.rtt)) ))
+   drop
+   
+   ;; Casts c = ((Casts) o);
+   (local.tee $c (ref.cast $java.lang.Object $cast.Casts (local.get $o) (global.get $cast.Casts.rtt)))
+   drop
+   
+  )
  )
 )
 
@@ -1057,15 +1110,17 @@
  (param $this (ref null $java.lang.Object))
  (local $o (ref null $java.lang.Object))
  (local $s (ref null $java.io.Serializable))
- (block
-  ;; Object o = new Object.<init>();
-  (local.tee $o (call $<init><>:void@java.lang.Object (struct.new_default_with_rtt $java.lang.Object (global.get $java.lang.Object.rtt)) ))
-  drop
-  
-  ;; Serializable s = ((Serializable) o);
-  (local.tee $s (local.get $o))
-  drop
-  
+ (block $return.label
+  (block
+   ;; Object o = new Object.<init>();
+   (local.tee $o (call $<init><>:void@java.lang.Object (struct.new_default_with_rtt $java.lang.Object (global.get $java.lang.Object.rtt)) ))
+   drop
+   
+   ;; Serializable s = ((Serializable) o);
+   (local.tee $s (local.get $o))
+   drop
+   
+  )
  )
 )
 
@@ -1082,47 +1137,49 @@
  (local $n (ref null $java.lang.Number))
  (local $c (ref null $java.lang.Character))
  (local $bool (ref null $java.lang.Boolean))
- (block
-  ;; Object o = new Integer.<init>(1);
-  (local.tee $o (call $<init><int>:void@java.lang.Integer (struct.new_default_with_rtt $java.lang.Integer (global.get $java.lang.Integer.rtt)) (i32.const 1)))
-  drop
-  
-  ;; Byte b = ((Byte) o);
-  (local.tee $b (ref.cast $java.lang.Object $java.lang.Byte (local.get $o) (global.get $java.lang.Byte.rtt)))
-  drop
-  
-  ;; Double d = ((Double) o);
-  (local.tee $d (ref.cast $java.lang.Object $java.lang.Double (local.get $o) (global.get $java.lang.Double.rtt)))
-  drop
-  
-  ;; Float f = ((Float) o);
-  (local.tee $f (ref.cast $java.lang.Object $java.lang.Float (local.get $o) (global.get $java.lang.Float.rtt)))
-  drop
-  
-  ;; Integer i = ((Integer) o);
-  (local.tee $i (ref.cast $java.lang.Object $java.lang.Integer (local.get $o) (global.get $java.lang.Integer.rtt)))
-  drop
-  
-  ;; Long l = ((Long) o);
-  (local.tee $l (ref.cast $java.lang.Object $java.lang.Long (local.get $o) (global.get $java.lang.Long.rtt)))
-  drop
-  
-  ;; Short s = ((Short) o);
-  (local.tee $s (ref.cast $java.lang.Object $java.lang.Short (local.get $o) (global.get $java.lang.Short.rtt)))
-  drop
-  
-  ;; Number n = ((Number) o);
-  (local.tee $n (ref.cast $java.lang.Object $java.lang.Number (local.get $o) (global.get $java.lang.Number.rtt)))
-  drop
-  
-  ;; Character c = ((Character) o);
-  (local.tee $c (ref.cast $java.lang.Object $java.lang.Character (local.get $o) (global.get $java.lang.Character.rtt)))
-  drop
-  
-  ;; Boolean bool = ((Boolean) o);
-  (local.tee $bool (ref.cast $java.lang.Object $java.lang.Boolean (local.get $o) (global.get $java.lang.Boolean.rtt)))
-  drop
-  
+ (block $return.label
+  (block
+   ;; Object o = new Integer.<init>(1);
+   (local.tee $o (call $<init><int>:void@java.lang.Integer (struct.new_default_with_rtt $java.lang.Integer (global.get $java.lang.Integer.rtt)) (i32.const 1)))
+   drop
+   
+   ;; Byte b = ((Byte) o);
+   (local.tee $b (ref.cast $java.lang.Object $java.lang.Byte (local.get $o) (global.get $java.lang.Byte.rtt)))
+   drop
+   
+   ;; Double d = ((Double) o);
+   (local.tee $d (ref.cast $java.lang.Object $java.lang.Double (local.get $o) (global.get $java.lang.Double.rtt)))
+   drop
+   
+   ;; Float f = ((Float) o);
+   (local.tee $f (ref.cast $java.lang.Object $java.lang.Float (local.get $o) (global.get $java.lang.Float.rtt)))
+   drop
+   
+   ;; Integer i = ((Integer) o);
+   (local.tee $i (ref.cast $java.lang.Object $java.lang.Integer (local.get $o) (global.get $java.lang.Integer.rtt)))
+   drop
+   
+   ;; Long l = ((Long) o);
+   (local.tee $l (ref.cast $java.lang.Object $java.lang.Long (local.get $o) (global.get $java.lang.Long.rtt)))
+   drop
+   
+   ;; Short s = ((Short) o);
+   (local.tee $s (ref.cast $java.lang.Object $java.lang.Short (local.get $o) (global.get $java.lang.Short.rtt)))
+   drop
+   
+   ;; Number n = ((Number) o);
+   (local.tee $n (ref.cast $java.lang.Object $java.lang.Number (local.get $o) (global.get $java.lang.Number.rtt)))
+   drop
+   
+   ;; Character c = ((Character) o);
+   (local.tee $c (ref.cast $java.lang.Object $java.lang.Character (local.get $o) (global.get $java.lang.Character.rtt)))
+   drop
+   
+   ;; Boolean bool = ((Boolean) o);
+   (local.tee $bool (ref.cast $java.lang.Object $java.lang.Boolean (local.get $o) (global.get $java.lang.Boolean.rtt)))
+   drop
+   
+  )
  )
 )
 
@@ -1131,15 +1188,17 @@
  (param $this (ref null $java.lang.Object))
  (local $foo (ref null $java.lang.Object))
  (local $bar (ref null $java.lang.Object))
- (block
-  ;; Object foo = ((Object[]) null);
-  (local.tee $foo (ref.null $java.lang.Object))
-  drop
-  
-  ;; Object bar = ((Object[][]) null);
-  (local.tee $bar (ref.null $java.lang.Object))
-  drop
-  
+ (block $return.label
+  (block
+   ;; Object foo = ((Object[]) null);
+   (local.tee $foo (ref.null $java.lang.Object))
+   drop
+   
+   ;; Object bar = ((Object[][]) null);
+   (local.tee $bar (ref.null $java.lang.Object))
+   drop
+   
+  )
  )
 )
 

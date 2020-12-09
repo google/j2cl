@@ -13,9 +13,11 @@
 (func $<init><>:void@staticfieldaccesslevels.StaticFieldAccessLevels
  (param $this (ref null $staticfieldaccesslevels.StaticFieldAccessLevels))
  (result (ref null $staticfieldaccesslevels.StaticFieldAccessLevels))
- (block
-  ;; Object.this.Object.<init>();
-  
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
  )
  (local.get $this)
 )
@@ -24,11 +26,13 @@
 (func $test<>:int@staticfieldaccesslevels.StaticFieldAccessLevels
  (param $this (ref null $java.lang.Object))
  (result i32)
- (block
-  ;; return (staticfieldaccesslevels.StaticFieldAccessLevels.b) ? (staticfieldaccesslevels.StaticFieldAccessLevels.a) : (staticfieldaccesslevels.StaticFieldAccessLevels.d);
-  ;; unimplemented statement ReturnStatement
-  
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return (staticfieldaccesslevels.StaticFieldAccessLevels.b) ? (staticfieldaccesslevels.StaticFieldAccessLevels.a) : (staticfieldaccesslevels.StaticFieldAccessLevels.d);
+   (local.set $return.value (if (result i32) (i32.const 0) (then (i32.const 0)) (else (i32.const 0))))
+   (br $return.label))
  )
- (i32.const 0)
+ (local.get $return.value)
 )
 

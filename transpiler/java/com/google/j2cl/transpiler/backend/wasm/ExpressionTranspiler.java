@@ -268,17 +268,10 @@ final class ExpressionTranspiler {
         sourceBuilder.append(")");
       }
 
+      // TODO(dramaix): remove when coercions and casting are in place.
       private void renderTypedExpression(TypeDescriptor typeDescriptor, Expression expression) {
-        boolean isAssignable =
-            typeDescriptor.isPrimitive()
-                ? typeDescriptor.equals(expression.getTypeDescriptor())
-                : expression.getTypeDescriptor().isAssignableTo(typeDescriptor);
-        // TODO(dramaix): remove when coercions and casting are in place.
-        if (isAssignable) {
-          render(expression);
-        } else {
-          render(typeDescriptor.getDefaultValue());
-        }
+        ExpressionTranspiler.renderTypedExpression(
+            typeDescriptor, expression, sourceBuilder, environment);
       }
 
       private void renderTypedExpressions(
@@ -300,6 +293,23 @@ final class ExpressionTranspiler {
         expression.accept(this);
       }
     }.render(expression);
+  }
+
+  // TODO(dramaix): remove when coercions and casting are in place.
+  public static void renderTypedExpression(
+      TypeDescriptor typeDescriptor,
+      Expression expression,
+      SourceBuilder sourceBuilder,
+      GenerationEnvironment environment) {
+    boolean isAssignable =
+        typeDescriptor.isPrimitive() || expression.getTypeDescriptor().isPrimitive()
+            ? typeDescriptor.equals(expression.getTypeDescriptor())
+            : expression.getTypeDescriptor().isAssignableTo(typeDescriptor);
+    if (isAssignable) {
+      render(expression, sourceBuilder, environment);
+    } else {
+      render(typeDescriptor.getDefaultValue(), sourceBuilder, environment);
+    }
   }
 
   private ExpressionTranspiler() {}

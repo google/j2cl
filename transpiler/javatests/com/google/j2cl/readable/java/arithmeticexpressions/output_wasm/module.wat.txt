@@ -16,9 +16,11 @@
 (func $<init><>:void@arithmeticexpressions.ArithmeticExpressions
  (param $this (ref null $arithmeticexpressions.ArithmeticExpressions))
  (result (ref null $arithmeticexpressions.ArithmeticExpressions))
- (block
-  ;; Object.this.Object.<init>();
-  
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
  )
  (local.get $this)
 )
@@ -32,49 +34,51 @@
  (local $i i32)
  (local $f f32)
  (local $d f64)
- (block
-  ;; byte b = ((byte) 1);
-  (local.tee $b (i32.const 0))
-  drop
-  
-  ;; char c = ((char) 1);
-  (local.tee $c (i32.const 0))
-  drop
-  
-  ;; short s = ((short) 1);
-  (local.tee $s (i32.const 0))
-  drop
-  
-  ;; int i = ((int) 1);
-  (local.tee $i (i32.const 0))
-  drop
-  
-  ;; float f = ((float) 1);
-  (local.tee $f (f32.const 0.0))
-  drop
-  
-  ;; double d = ((double) 1);
-  (local.tee $d (f64.const 0.0))
-  drop
-  
-  ;; (b = ((byte) 9223372036854775807));
-  (local.tee $b (i32.const 0))
-  drop
-  ;; (c = ((char) 9223372036854775807));
-  (local.tee $c (i32.const 0))
-  drop
-  ;; (s = ((short) 9223372036854775807));
-  (local.tee $s (i32.const 0))
-  drop
-  ;; (i = ((int) 9223372036854775807));
-  (local.tee $i (i32.const 0))
-  drop
-  ;; (f = ((float) 9223372036854775807));
-  (local.tee $f (f32.const 0.0))
-  drop
-  ;; (d = ((double) 9223372036854775807));
-  (local.tee $d (f64.const 0.0))
-  drop
+ (block $return.label
+  (block
+   ;; byte b = ((byte) 1);
+   (local.tee $b (i32.const 0))
+   drop
+   
+   ;; char c = ((char) 1);
+   (local.tee $c (i32.const 0))
+   drop
+   
+   ;; short s = ((short) 1);
+   (local.tee $s (i32.const 0))
+   drop
+   
+   ;; int i = ((int) 1);
+   (local.tee $i (i32.const 0))
+   drop
+   
+   ;; float f = ((float) 1);
+   (local.tee $f (f32.const 0.0))
+   drop
+   
+   ;; double d = ((double) 1);
+   (local.tee $d (f64.const 0.0))
+   drop
+   
+   ;; (b = ((byte) 9223372036854775807));
+   (local.tee $b (i32.const 0))
+   drop
+   ;; (c = ((char) 9223372036854775807));
+   (local.tee $c (i32.const 0))
+   drop
+   ;; (s = ((short) 9223372036854775807));
+   (local.tee $s (i32.const 0))
+   drop
+   ;; (i = ((int) 9223372036854775807));
+   (local.tee $i (i32.const 0))
+   drop
+   ;; (f = ((float) 9223372036854775807));
+   (local.tee $f (f32.const 0.0))
+   drop
+   ;; (d = ((double) 9223372036854775807));
+   (local.tee $d (f64.const 0.0))
+   drop
+  )
  )
 )
 
@@ -100,91 +104,93 @@
  (local $o f64)
  (local $s i32)
  (local $q i32)
- (block
-  ;; int a = 10,int b = (int $value = a,(a = (a + 1)),$value),int c = (int $value = a,(a = (a - 1)),$value),int d = (a = (a + 1)),int e = (a = (a - 1)),int f = (0 - a),int g = a,int h = (-1 ^ a),int i = (((1 + 1) + 2) - 5),int j = ((1 + 2) * (3 + 4)),int p = (((1 / 2) * 3) % 4);
-  (local.tee $a (i32.const 10))
-  drop
-  (local.tee $b (block
-   (result i32)
-   (local.tee $$value (local.get $a))
+ (block $return.label
+  (block
+   ;; int a = 10,int b = (int $value = a,(a = (a + 1)),$value),int c = (int $value = a,(a = (a - 1)),$value),int d = (a = (a + 1)),int e = (a = (a - 1)),int f = (0 - a),int g = a,int h = (-1 ^ a),int i = (((1 + 1) + 2) - 5),int j = ((1 + 2) * (3 + 4)),int p = (((1 / 2) * 3) % 4);
+   (local.tee $a (i32.const 10))
+   drop
+   (local.tee $b (block
+    (result i32)
+    (local.tee $$value (local.get $a))
+    drop
+    
+    (local.tee $a (i32.add (local.get $a) (i32.const 1)))
+    drop
+    (local.get $$value)
+   ))
+   drop
+   (local.tee $c (block
+    (result i32)
+    (local.tee $$value_1 (local.get $a))
+    drop
+    
+    (local.tee $a (i32.sub (local.get $a) (i32.const 1)))
+    drop
+    (local.get $$value_1)
+   ))
+   drop
+   (local.tee $d (local.tee $a (i32.add (local.get $a) (i32.const 1))))
+   drop
+   (local.tee $e (local.tee $a (i32.sub (local.get $a) (i32.const 1))))
+   drop
+   (local.tee $f (i32.sub (i32.const 0) (local.get $a)))
+   drop
+   (local.tee $g (local.get $a))
+   drop
+   (local.tee $h (i32.xor (i32.const -1) (local.get $a)))
+   drop
+   (local.tee $i (i32.sub (i32.add (i32.add (i32.const 1) (i32.const 1)) (i32.const 2)) (i32.const 5)))
+   drop
+   (local.tee $j (i32.mul (i32.add (i32.const 1) (i32.const 2)) (i32.add (i32.const 3) (i32.const 4))))
+   drop
+   (local.tee $p (i32.rem_s (i32.mul (i32.div_s (i32.const 1) (i32.const 2)) (i32.const 3)) (i32.const 4)))
    drop
    
-   (local.tee $a (i32.add (local.get $a) (i32.const 1)))
+   ;; boolean k = !(((1 + 2) + 3) == 4),boolean l = ((1 + 2) != 4),boolean m = (java.lang.Long.MAX_VALUE != 9.223372036854778E18);
+   (local.tee $k (i32.eqz (i32.eq (i32.add (i32.add (i32.const 1) (i32.const 2)) (i32.const 3)) (i32.const 4))))
    drop
-   (local.get $$value)
-  ))
-  drop
-  (local.tee $c (block
-   (result i32)
-   (local.tee $$value_1 (local.get $a))
+   (local.tee $l (i32.ne (i32.add (i32.const 1) (i32.const 2)) (i32.const 4)))
+   drop
+   (local.tee $m (i64.ne (i64.const 0) (i64.const 0)))
    drop
    
-   (local.tee $a (i32.sub (local.get $a) (i32.const 1)))
+   ;; double o = (((5 + 1) / 2) - 0.0);
+   (local.tee $o (f64.sub (f64.const 0.0) (f64.const 0.0)))
    drop
-   (local.get $$value_1)
-  ))
-  drop
-  (local.tee $d (local.tee $a (i32.add (local.get $a) (i32.const 1))))
-  drop
-  (local.tee $e (local.tee $a (i32.sub (local.get $a) (i32.const 1))))
-  drop
-  (local.tee $f (i32.sub (i32.const 0) (local.get $a)))
-  drop
-  (local.tee $g (local.get $a))
-  drop
-  (local.tee $h (i32.xor (i32.const -1) (local.get $a)))
-  drop
-  (local.tee $i (i32.sub (i32.add (i32.add (i32.const 1) (i32.const 1)) (i32.const 2)) (i32.const 5)))
-  drop
-  (local.tee $j (i32.mul (i32.add (i32.const 1) (i32.const 2)) (i32.add (i32.const 3) (i32.const 4))))
-  drop
-  (local.tee $p (i32.rem_s (i32.mul (i32.div_s (i32.const 1) (i32.const 2)) (i32.const 3)) (i32.const 4)))
-  drop
-  
-  ;; boolean k = !(((1 + 2) + 3) == 4),boolean l = ((1 + 2) != 4),boolean m = (java.lang.Long.MAX_VALUE != 9.223372036854778E18);
-  (local.tee $k (i32.eqz (i32.eq (i32.add (i32.add (i32.const 1) (i32.const 2)) (i32.const 3)) (i32.const 4))))
-  drop
-  (local.tee $l (i32.ne (i32.add (i32.const 1) (i32.const 2)) (i32.const 4)))
-  drop
-  (local.tee $m (i64.ne (i64.const 0) (i64.const 0)))
-  drop
-  
-  ;; double o = (((5 + 1) / 2) - 0.0);
-  (local.tee $o (f64.sub (f64.const 0.0) (f64.const 0.0)))
-  drop
-  
-  ;; (a = (a << 31));
-  (local.tee $a (i32.shl (local.get $a) (i32.const 0)))
-  drop
-  ;; (a = (a << 1));
-  (local.tee $a (i32.shl (local.get $a) (i32.const 0)))
-  drop
-  ;; (a = ((int) (a + 1)));
-  (local.tee $a (i32.const 0))
-  drop
-  ;; (a = ((int) (a / 1)));
-  (local.tee $a (i32.const 0))
-  drop
-  ;; (a = ((int) (a + java.lang.Double.MAX_VALUE)));
-  (local.tee $a (i32.const 0))
-  drop
-  ;; (k = (k | true));
-  (local.tee $k (i32.or (local.get $k) (i32.const 1)))
-  drop
-  ;; short s = 10;
-  (local.tee $s (i32.const 0))
-  drop
-  
-  ;; (k = ((s = ((short) (s + 1))) == 10));
-  (local.tee $k (i32.eq (local.tee $s (i32.const 0)) (i32.const 0)))
-  drop
-  ;; int q = (3 >> 2);
-  (local.tee $q (i32.shr_s (i32.const 3) (i32.const 2)))
-  drop
-  
-  ;; (q = (3 >>> 2));
-  (local.tee $q (i32.shr_u (i32.const 3) (i32.const 2)))
-  drop
+   
+   ;; (a = (a << 31));
+   (local.tee $a (i32.shl (local.get $a) (i32.const 0)))
+   drop
+   ;; (a = (a << 1));
+   (local.tee $a (i32.shl (local.get $a) (i32.const 0)))
+   drop
+   ;; (a = ((int) (a + 1)));
+   (local.tee $a (i32.const 0))
+   drop
+   ;; (a = ((int) (a / 1)));
+   (local.tee $a (i32.const 0))
+   drop
+   ;; (a = ((int) (a + java.lang.Double.MAX_VALUE)));
+   (local.tee $a (i32.const 0))
+   drop
+   ;; (k = (k | true));
+   (local.tee $k (i32.or (local.get $k) (i32.const 1)))
+   drop
+   ;; short s = 10;
+   (local.tee $s (i32.const 0))
+   drop
+   
+   ;; (k = ((s = ((short) (s + 1))) == 10));
+   (local.tee $k (i32.eq (local.tee $s (i32.const 0)) (i32.const 0)))
+   drop
+   ;; int q = (3 >> 2);
+   (local.tee $q (i32.shr_s (i32.const 3) (i32.const 2)))
+   drop
+   
+   ;; (q = (3 >>> 2));
+   (local.tee $q (i32.shr_u (i32.const 3) (i32.const 2)))
+   drop
+  )
  )
 )
 
@@ -208,161 +214,165 @@
  (local $strings (ref null $java.lang.Object))
  (local $shorts (ref null $java.lang.Object))
  (local $b i32)
- (block
-  ;; int[] ints = null;
-  (local.tee $ints (ref.null $java.lang.Object))
-  drop
-  
-  ;; (ints[0] = (ints[0] + 1));
-  (i32.const 0)
-  drop
-  ;; (ints[0] = (ints[0] - 1));
-  (i32.const 0)
-  drop
-  ;; (ints[0] = (ints[0] * 1));
-  (i32.const 0)
-  drop
-  ;; (ints[0] = (ints[0] / 1));
-  (i32.const 0)
-  drop
-  ;; (ints[0] = (ints[0] & 1));
-  (i32.const 0)
-  drop
-  ;; (ints[0] = (ints[0] ^ 1));
-  (i32.const 0)
-  drop
-  ;; (ints[0] = (ints[0] | 1));
-  (i32.const 0)
-  drop
-  ;; (ints[0] = (ints[0] % 1));
-  (i32.const 0)
-  drop
-  ;; (ints[0] = (ints[0] << 1));
-  (i32.const 0)
-  drop
-  ;; (ints[0] = (ints[0] >> 1));
-  (i32.const 0)
-  drop
-  ;; (ints[0] = (ints[0] >>> 1));
-  (i32.const 0)
-  drop
-  ;; (ints[0] = (ints[0] + 1));
-  (i32.const 0)
-  drop
-  ;; (ints[0] = (ints[0] + 1));
-  (i32.const 0)
-  drop
-  ;; int i = 0;
-  (local.tee $i (i32.const 0))
-  drop
-  
-  ;; (int[] $array = ints,int $index = (int $value = i,(i = (i + 1)),$value),($array[$index] = ($array[$index] + 1)));
+ (block $return.label
   (block
-   (result i32)
-   (local.tee $$array (local.get $ints))
+   ;; int[] ints = null;
+   (local.tee $ints (ref.null $java.lang.Object))
    drop
-   (local.tee $$index (block
+   
+   ;; (ints[0] = (ints[0] + 1));
+   (i32.const 0)
+   drop
+   ;; (ints[0] = (ints[0] - 1));
+   (i32.const 0)
+   drop
+   ;; (ints[0] = (ints[0] * 1));
+   (i32.const 0)
+   drop
+   ;; (ints[0] = (ints[0] / 1));
+   (i32.const 0)
+   drop
+   ;; (ints[0] = (ints[0] & 1));
+   (i32.const 0)
+   drop
+   ;; (ints[0] = (ints[0] ^ 1));
+   (i32.const 0)
+   drop
+   ;; (ints[0] = (ints[0] | 1));
+   (i32.const 0)
+   drop
+   ;; (ints[0] = (ints[0] % 1));
+   (i32.const 0)
+   drop
+   ;; (ints[0] = (ints[0] << 1));
+   (i32.const 0)
+   drop
+   ;; (ints[0] = (ints[0] >> 1));
+   (i32.const 0)
+   drop
+   ;; (ints[0] = (ints[0] >>> 1));
+   (i32.const 0)
+   drop
+   ;; (ints[0] = (ints[0] + 1));
+   (i32.const 0)
+   drop
+   ;; (ints[0] = (ints[0] + 1));
+   (i32.const 0)
+   drop
+   ;; int i = 0;
+   (local.tee $i (i32.const 0))
+   drop
+   
+   ;; (int[] $array = ints,int $index = (int $value = i,(i = (i + 1)),$value),($array[$index] = ($array[$index] + 1)));
+   (block
     (result i32)
-    (local.tee $$value (local.get $i))
+    (local.tee $$array (local.get $ints))
+    drop
+    (local.tee $$index (block
+     (result i32)
+     (local.tee $$value (local.get $i))
+     drop
+     
+     (local.tee $i (i32.add (local.get $i) (i32.const 1)))
+     drop
+     (local.get $$value)
+    ))
     drop
     
-    (local.tee $i (i32.add (local.get $i) (i32.const 1)))
-    drop
-    (local.get $$value)
-   ))
+    (i32.const 0)
+   )
    drop
-   
-   (i32.const 0)
-  )
-  drop
-  ;; (int[] $array = ints,int $index = (i = (i + 1)),($array[$index] = ($array[$index] + 1)));
-  (block
-   (result i32)
-   (local.tee $$array_1 (local.get $ints))
-   drop
-   (local.tee $$index_1 (local.tee $i (i32.add (local.get $i) (i32.const 1))))
-   drop
-   
-   (i32.const 0)
-  )
-  drop
-  ;; (int[] $array = ints,int $index = (int $value = i,(i = (i + 1)),$value),($array[$index] = ($array[$index] / 1)));
-  (block
-   (result i32)
-   (local.tee $$array_2 (local.get $ints))
-   drop
-   (local.tee $$index_2 (block
+   ;; (int[] $array = ints,int $index = (i = (i + 1)),($array[$index] = ($array[$index] + 1)));
+   (block
     (result i32)
-    (local.tee $$value_1 (local.get $i))
+    (local.tee $$array_1 (local.get $ints))
+    drop
+    (local.tee $$index_1 (local.tee $i (i32.add (local.get $i) (i32.const 1))))
     drop
     
-    (local.tee $i (i32.add (local.get $i) (i32.const 1)))
+    (i32.const 0)
+   )
+   drop
+   ;; (int[] $array = ints,int $index = (int $value = i,(i = (i + 1)),$value),($array[$index] = ($array[$index] / 1)));
+   (block
+    (result i32)
+    (local.tee $$array_2 (local.get $ints))
     drop
-    (local.get $$value_1)
-   ))
+    (local.tee $$index_2 (block
+     (result i32)
+     (local.tee $$value_1 (local.get $i))
+     drop
+     
+     (local.tee $i (i32.add (local.get $i) (i32.const 1)))
+     drop
+     (local.get $$value_1)
+    ))
+    drop
+    
+    (i32.const 0)
+   )
+   drop
+   ;; long[] longs = null;
+   (local.tee $longs (ref.null $java.lang.Object))
    drop
    
-   (i32.const 0)
-  )
-  drop
-  ;; long[] longs = null;
-  (local.tee $longs (ref.null $java.lang.Object))
-  drop
-  
-  ;; (longs[0] = (longs[0] + 1));
-  (i64.const 0)
-  drop
-  ;; (longs[0] = (longs[0] - 1));
-  (i64.const 0)
-  drop
-  ;; (longs[0] = (longs[0] - 1));
-  (i64.const 0)
-  drop
-  ;; (long[] $array = arithmeticexpressions.ArithmeticExpressions.getLongArray(),int $index = 0,($array[$index] = ($array[$index] + 1)));
-  (block
-   (result i64)
-   (local.tee $$array_3 (call $getLongArray<>:long<>@arithmeticexpressions.ArithmeticExpressions ))
-   drop
-   (local.tee $$index_3 (i32.const 0))
-   drop
-   
+   ;; (longs[0] = (longs[0] + 1));
    (i64.const 0)
+   drop
+   ;; (longs[0] = (longs[0] - 1));
+   (i64.const 0)
+   drop
+   ;; (longs[0] = (longs[0] - 1));
+   (i64.const 0)
+   drop
+   ;; (long[] $array = arithmeticexpressions.ArithmeticExpressions.getLongArray(),int $index = 0,($array[$index] = ($array[$index] + 1)));
+   (block
+    (result i64)
+    (local.tee $$array_3 (call $getLongArray<>:long<>@arithmeticexpressions.ArithmeticExpressions ))
+    drop
+    (local.tee $$index_3 (i32.const 0))
+    drop
+    
+    (i64.const 0)
+   )
+   drop
+   ;; boolean[] booleans = null;
+   (local.tee $booleans (ref.null $java.lang.Object))
+   drop
+   
+   ;; (booleans[0] = (booleans[0] | true));
+   (i32.const 0)
+   drop
+   ;; String[] strings = null;
+   (local.tee $strings (ref.null $java.lang.Object))
+   drop
+   
+   ;; (strings[0] = (strings[0] + null));
+   (ref.null $java.lang.String)
+   drop
+   ;; short[] shorts = null;
+   (local.tee $shorts (ref.null $java.lang.Object))
+   drop
+   
+   ;; boolean b = ((shorts[0] = ((short) (shorts[0] + 1))) == 10);
+   (local.tee $b (i32.eq (i32.const 0) (i32.const 0)))
+   drop
+   
   )
-  drop
-  ;; boolean[] booleans = null;
-  (local.tee $booleans (ref.null $java.lang.Object))
-  drop
-  
-  ;; (booleans[0] = (booleans[0] | true));
-  (i32.const 0)
-  drop
-  ;; String[] strings = null;
-  (local.tee $strings (ref.null $java.lang.Object))
-  drop
-  
-  ;; (strings[0] = (strings[0] + null));
-  (ref.null $java.lang.String)
-  drop
-  ;; short[] shorts = null;
-  (local.tee $shorts (ref.null $java.lang.Object))
-  drop
-  
-  ;; boolean b = ((shorts[0] = ((short) (shorts[0] + 1))) == 10);
-  (local.tee $b (i32.eq (i32.const 0) (i32.const 0)))
-  drop
-  
  )
 )
 
 ;;; long[] ArithmeticExpressions.getLongArray()
 (func $getLongArray<>:long<>@arithmeticexpressions.ArithmeticExpressions
  (result (ref null $java.lang.Object))
- (block
-  ;; return null;
-  ;; unimplemented statement ReturnStatement
-  
+ (local $return.value (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; return null;
+   (local.set $return.value (ref.null $java.lang.Object))
+   (br $return.label))
  )
- (ref.null $java.lang.Object)
+ (local.get $return.value)
 )
 
 ;;; void ArithmeticExpressions.testCompoundBoxedTypes()
@@ -381,138 +391,146 @@
  (local $$value_2 (ref null $java.lang.Integer))
  (local $ref (ref null $arithmeticexpressions.ArithmeticExpressions.1Ref))
  (local $n i32)
- (block
-  ;; Integer c = 1000;
-  (local.tee $c (ref.null $java.lang.Integer))
-  drop
-  
-  ;; Integer d = 10000;
-  (local.tee $d (ref.null $java.lang.Integer))
-  drop
-  
-  ;; (d = (d + c));
-  (local.tee $d (ref.null $java.lang.Integer))
-  drop
-  ;; int i = 43;
-  (local.tee $i (i32.const 43))
-  drop
-  
-  ;; (d = (d + i));
-  (local.tee $d (ref.null $java.lang.Integer))
-  drop
-  ;; (d = (d << i));
-  (local.tee $d (ref.null $java.lang.Integer))
-  drop
-  ;; (i = (i + c));
-  (local.tee $i (i32.add (local.get $i) (i32.const 0)))
-  drop
-  ;; Integer e = (c = (c + 1));
-  (local.tee $e (local.tee $c (ref.null $java.lang.Integer)))
-  drop
-  
-  ;; (e = (c = (c + 1)));
-  (local.tee $e (local.tee $c (ref.null $java.lang.Integer)))
-  drop
-  ;; Double e2 = 100.0;
-  (local.tee $e2 (ref.null $java.lang.Double))
-  drop
-  
-  ;; (e2 = (e2 + 1.0));
-  (local.tee $e2 (ref.null $java.lang.Double))
-  drop
-  ;; Integer f = (Integer $value = c,(c = (c + 1)),$value);
-  (local.tee $f (block
-   (result (ref null $java.lang.Integer))
-   (local.tee $$value (local.get $c))
-   drop
-   
+ (block $return.label
+  (block
+   ;; Integer c = 1000;
    (local.tee $c (ref.null $java.lang.Integer))
    drop
-   (local.get $$value)
-  ))
-  drop
-  
-  ;; (f = (Integer $value = c,(c = (c + 1)),$value));
-  (local.tee $f (block
-   (result (ref null $java.lang.Integer))
-   (local.tee $$value_1 (local.get $c))
+   
+   ;; Integer d = 10000;
+   (local.tee $d (ref.null $java.lang.Integer))
    drop
    
-   (local.tee $c (ref.null $java.lang.Integer))
+   ;; (d = (d + c));
+   (local.tee $d (ref.null $java.lang.Integer))
    drop
-   (local.get $$value_1)
-  ))
-  drop
-  ;; Byte b = 0;
-  (local.tee $b (ref.null $java.lang.Byte))
-  drop
-  
-  ;; (b = ((byte) (b + 1)));
-  (local.tee $b (ref.null $java.lang.Byte))
-  drop
-  ;; Character ch = 99;
-  (local.tee $ch (ref.null $java.lang.Character))
-  drop
-  
-  ;; (ch = ((char) (ch + 1)));
-  (local.tee $ch (ref.null $java.lang.Character))
-  drop
-  ;; (f = (f + 1)).intValue();
-  (i32.const 0)
-  drop
-  ;; (Integer $value = f,(f = (f - 1)),$value).intValue();
-  (i32.const 0)
-  drop
-  ;; Ref<Integer> ref = null;
-  (local.tee $ref (ref.null $arithmeticexpressions.ArithmeticExpressions.1Ref))
-  drop
-  
-  ;; (ref.field = (((Integer) ref.field) + 1));
-  (ref.null $java.lang.Integer)
-  drop
-  ;; int n = (1 + ((Integer) ref.field));
-  (local.tee $n (i32.add (i32.const 1) (i32.const 0)))
-  drop
-  
+   ;; int i = 43;
+   (local.tee $i (i32.const 43))
+   drop
+   
+   ;; (d = (d + i));
+   (local.tee $d (ref.null $java.lang.Integer))
+   drop
+   ;; (d = (d << i));
+   (local.tee $d (ref.null $java.lang.Integer))
+   drop
+   ;; (i = (i + c));
+   (local.tee $i (i32.add (local.get $i) (i32.const 0)))
+   drop
+   ;; Integer e = (c = (c + 1));
+   (local.tee $e (local.tee $c (ref.null $java.lang.Integer)))
+   drop
+   
+   ;; (e = (c = (c + 1)));
+   (local.tee $e (local.tee $c (ref.null $java.lang.Integer)))
+   drop
+   ;; Double e2 = 100.0;
+   (local.tee $e2 (ref.null $java.lang.Double))
+   drop
+   
+   ;; (e2 = (e2 + 1.0));
+   (local.tee $e2 (ref.null $java.lang.Double))
+   drop
+   ;; Integer f = (Integer $value = c,(c = (c + 1)),$value);
+   (local.tee $f (block
+    (result (ref null $java.lang.Integer))
+    (local.tee $$value (local.get $c))
+    drop
+    
+    (local.tee $c (ref.null $java.lang.Integer))
+    drop
+    (local.get $$value)
+   ))
+   drop
+   
+   ;; (f = (Integer $value = c,(c = (c + 1)),$value));
+   (local.tee $f (block
+    (result (ref null $java.lang.Integer))
+    (local.tee $$value_1 (local.get $c))
+    drop
+    
+    (local.tee $c (ref.null $java.lang.Integer))
+    drop
+    (local.get $$value_1)
+   ))
+   drop
+   ;; Byte b = 0;
+   (local.tee $b (ref.null $java.lang.Byte))
+   drop
+   
+   ;; (b = ((byte) (b + 1)));
+   (local.tee $b (ref.null $java.lang.Byte))
+   drop
+   ;; Character ch = 99;
+   (local.tee $ch (ref.null $java.lang.Character))
+   drop
+   
+   ;; (ch = ((char) (ch + 1)));
+   (local.tee $ch (ref.null $java.lang.Character))
+   drop
+   ;; (f = (f + 1)).intValue();
+   (i32.const 0)
+   drop
+   ;; (Integer $value = f,(f = (f - 1)),$value).intValue();
+   (i32.const 0)
+   drop
+   ;; Ref<Integer> ref = null;
+   (local.tee $ref (ref.null $arithmeticexpressions.ArithmeticExpressions.1Ref))
+   drop
+   
+   ;; (ref.field = (((Integer) ref.field) + 1));
+   (ref.null $java.lang.Integer)
+   drop
+   ;; int n = (1 + ((Integer) ref.field));
+   (local.tee $n (i32.add (i32.const 1) (i32.const 0)))
+   drop
+   
+  )
  )
 )
 
 ;;; Integer ArithmeticExpressions.getInteger()
 (func $getInteger<>:java.lang.Integer@arithmeticexpressions.ArithmeticExpressions
  (result (ref null $java.lang.Integer))
- (block
-  ;; return null;
-  ;; unimplemented statement ReturnStatement
-  
+ (local $return.value (ref null $java.lang.Integer))
+ (block $return.label
+  (block
+   ;; return null;
+   (local.set $return.value (ref.null $java.lang.Integer))
+   (br $return.label))
  )
- (ref.null $java.lang.Integer)
+ (local.get $return.value)
 )
 
 ;;; void ArithmeticExpressions.testSideEffect()
 (func $testSideEffect<>:void@arithmeticexpressions.ArithmeticExpressions
  (local $$qualifier (ref null $arithmeticexpressions.ArithmeticExpressions))
- (block
-  ;; (ArithmeticExpressions $qualifier = arithmeticexpressions.ArithmeticExpressions.getWithSideEffect(),($qualifier.intField = ($qualifier.intField + 5)));
+ (block $return.label
   (block
-   (result i64)
-   (local.tee $$qualifier (call $getWithSideEffect<>:arithmeticexpressions.ArithmeticExpressions@arithmeticexpressions.ArithmeticExpressions ))
+   ;; (ArithmeticExpressions $qualifier = arithmeticexpressions.ArithmeticExpressions.getWithSideEffect(),($qualifier.intField = ($qualifier.intField + 5)));
+   (block
+    (result i64)
+    (local.tee $$qualifier (call $getWithSideEffect<>:arithmeticexpressions.ArithmeticExpressions@arithmeticexpressions.ArithmeticExpressions ))
+    drop
+    
+    (i64.const 0)
+   )
    drop
-   
-   (i64.const 0)
   )
-  drop
  )
 )
 
 ;;; ArithmeticExpressions ArithmeticExpressions.getWithSideEffect()
 (func $getWithSideEffect<>:arithmeticexpressions.ArithmeticExpressions@arithmeticexpressions.ArithmeticExpressions
  (result (ref null $arithmeticexpressions.ArithmeticExpressions))
- (block
-  ;; return null;
-  ;; unimplemented statement ReturnStatement
-  
+ (local $return.value (ref null $arithmeticexpressions.ArithmeticExpressions))
+ (block $return.label
+  (block
+   ;; return null;
+   (local.set $return.value (ref.null $arithmeticexpressions.ArithmeticExpressions))
+   (br $return.label))
  )
- (ref.null $arithmeticexpressions.ArithmeticExpressions)
+ (local.get $return.value)
 )
 
 ;;; void ArithmeticExpressions.testExtendedOperands()
@@ -522,41 +540,43 @@
  (local $i i32)
  (local $l i64)
  (local $d f64)
- (block
-  ;; Integer boxedInteger = 3;
-  (local.tee $boxedInteger (ref.null $java.lang.Integer))
-  drop
-  
-  ;; int i;
-  
-  ;; long l;
-  
-  ;; double d;
-  
-  ;; (l = ((2 - boxedInteger) - 2));
-  (local.tee $l (i64.sub (i64.const 0) (i64.const 2)))
-  drop
-  ;; (l = ((2 | boxedInteger) | 2));
-  (local.tee $l (i64.or (i64.const 0) (i64.const 2)))
-  drop
-  ;; (l = ((((1000000 * l) * 60) * 60) * 24));
-  (local.tee $l (i64.mul (i64.mul (i64.mul (i64.mul (i64.const 1000000) (local.get $l)) (i64.const 0)) (i64.const 0)) (i64.const 0)))
-  drop
-  ;; (l = ((((24 * 60) * 60) * l) * 1000000));
-  (local.tee $l (i64.mul (i64.mul (i64.const 0) (local.get $l)) (i64.const 1000000)))
-  drop
-  ;; (d = (l = (i = 20)));
-  (local.tee $d (f64.const 0.0))
-  drop
-  ;; (l = (boxedInteger = (i = 20)));
-  (local.tee $l (i64.const 0))
-  drop
-  ;; (l = (((i + boxedInteger) + l) + 20));
-  (local.tee $l (i64.add (i64.add (i64.const 0) (local.get $l)) (i64.const 0)))
-  drop
-  ;; (d = ((20 + l) + d));
-  (local.tee $d (f64.add (f64.const 0.0) (local.get $d)))
-  drop
+ (block $return.label
+  (block
+   ;; Integer boxedInteger = 3;
+   (local.tee $boxedInteger (ref.null $java.lang.Integer))
+   drop
+   
+   ;; int i;
+   
+   ;; long l;
+   
+   ;; double d;
+   
+   ;; (l = ((2 - boxedInteger) - 2));
+   (local.tee $l (i64.sub (i64.const 0) (i64.const 2)))
+   drop
+   ;; (l = ((2 | boxedInteger) | 2));
+   (local.tee $l (i64.or (i64.const 0) (i64.const 2)))
+   drop
+   ;; (l = ((((1000000 * l) * 60) * 60) * 24));
+   (local.tee $l (i64.mul (i64.mul (i64.mul (i64.mul (i64.const 1000000) (local.get $l)) (i64.const 0)) (i64.const 0)) (i64.const 0)))
+   drop
+   ;; (l = ((((24 * 60) * 60) * l) * 1000000));
+   (local.tee $l (i64.mul (i64.mul (i64.const 0) (local.get $l)) (i64.const 1000000)))
+   drop
+   ;; (d = (l = (i = 20)));
+   (local.tee $d (f64.const 0.0))
+   drop
+   ;; (l = (boxedInteger = (i = 20)));
+   (local.tee $l (i64.const 0))
+   drop
+   ;; (l = (((i + boxedInteger) + l) + 20));
+   (local.tee $l (i64.add (i64.add (i64.const 0) (local.get $l)) (i64.const 0)))
+   drop
+   ;; (d = ((20 + l) + d));
+   (local.tee $d (f64.add (f64.const 0.0) (local.get $d)))
+   drop
+  )
  )
 )
 
@@ -571,9 +591,11 @@
 (func $<init><>:void@arithmeticexpressions.ArithmeticExpressions.1Ref
  (param $this (ref null $arithmeticexpressions.ArithmeticExpressions.1Ref))
  (result (ref null $arithmeticexpressions.ArithmeticExpressions.1Ref))
- (block
-  ;; Object.this.Object.<init>();
-  
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
  )
  (local.get $this)
 )

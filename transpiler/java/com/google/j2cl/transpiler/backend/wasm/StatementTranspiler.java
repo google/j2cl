@@ -20,6 +20,7 @@ import com.google.j2cl.transpiler.ast.Block;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.ExpressionStatement;
 import com.google.j2cl.transpiler.ast.IfStatement;
+import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.ThrowStatement;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
@@ -105,6 +106,26 @@ class StatementTranspiler {
           builder.append(")");
         }
         builder.append(")");
+        return false;
+      }
+
+      @Override
+      public boolean enterReturnStatement(ReturnStatement returnStatement) {
+        builder.emitWithMapping(
+            returnStatement.getSourcePosition(),
+            () -> {
+              if (returnStatement.getExpression() != null) {
+                builder.append("(local.set $return.value ");
+                ExpressionTranspiler.renderTypedExpression(
+                    returnStatement.getTypeDescriptor(),
+                    returnStatement.getExpression(),
+                    builder,
+                    environment);
+                builder.append(")");
+                builder.newLine();
+              }
+              builder.append("(br $return.label)");
+            });
         return false;
       }
 

@@ -9,9 +9,11 @@
 (func $<init><>:void@booleanoperations.BooleanOperations
  (param $this (ref null $booleanoperations.BooleanOperations))
  (result (ref null $booleanoperations.BooleanOperations))
- (block
-  ;; Object.this.Object.<init>();
-  
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
  )
  (local.get $this)
 )
@@ -19,7 +21,9 @@
 ;;; void BooleanOperations.acceptBoolean(boolean b)
 (func $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations
  (param $b i32)
- (block
+ (block $return.label
+  (block
+  )
  )
 )
 
@@ -32,164 +36,166 @@
  (local $br (ref null $java.lang.Boolean))
  (local $finalOuter (ref null $booleanoperations.BooleanOperations.1Outer))
  (local $outer (ref null $booleanoperations.BooleanOperations.1Outer))
- (block
-  ;; boolean ls = true;
-  (local.tee $ls (i32.const 1))
-  drop
-  
-  ;; boolean rs = true;
-  (local.tee $rs (i32.const 1))
-  drop
-  
-  ;; boolean r = true;
-  (local.tee $r (i32.const 1))
-  drop
-  
-  ;; (r = (ls == rs));
-  (local.tee $r (i32.eq (local.get $ls) (local.get $rs)))
-  drop
-  ;; (r = (ls != rs));
-  (local.tee $r (i32.ne (local.get $ls) (local.get $rs)))
-  drop
-  ;; (r = (ls ^ rs));
-  (local.tee $r (i32.xor (local.get $ls) (local.get $rs)))
-  drop
-  ;; (r = (ls & rs));
-  (local.tee $r (i32.and (local.get $ls) (local.get $rs)))
-  drop
-  ;; (r = (ls | rs));
-  (local.tee $r (i32.or (local.get $ls) (local.get $rs)))
-  drop
-  ;; (r = (ls) ? (rs) : (false));
-  (local.tee $r (if (result i32) (local.get $ls) (then (local.get $rs)) (else (i32.const 0))))
-  drop
-  ;; (r = (ls) ? (true) : (rs));
-  (local.tee $r (if (result i32) (local.get $ls) (then (i32.const 1)) (else (local.get $rs))))
-  drop
-  ;; (r = (ls = rs));
-  (local.tee $r (local.tee $ls (local.get $rs)))
-  drop
-  ;; (r = (r ^ rs));
-  (local.tee $r (i32.xor (local.get $r) (local.get $rs)))
-  drop
-  ;; (r = (r & rs));
-  (local.tee $r (i32.and (local.get $r) (local.get $rs)))
-  drop
-  ;; (r = (r | rs));
-  (local.tee $r (i32.or (local.get $r) (local.get $rs)))
-  drop
-  ;; booleanoperations.BooleanOperations.acceptBoolean((ls == rs));
-  (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (i32.eq (local.get $ls) (local.get $rs)))
-  ;; booleanoperations.BooleanOperations.acceptBoolean((ls != rs));
-  (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (i32.ne (local.get $ls) (local.get $rs)))
-  ;; booleanoperations.BooleanOperations.acceptBoolean((ls ^ rs));
-  (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (i32.xor (local.get $ls) (local.get $rs)))
-  ;; booleanoperations.BooleanOperations.acceptBoolean((ls & rs));
-  (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (i32.and (local.get $ls) (local.get $rs)))
-  ;; booleanoperations.BooleanOperations.acceptBoolean((ls | rs));
-  (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (i32.or (local.get $ls) (local.get $rs)))
-  ;; booleanoperations.BooleanOperations.acceptBoolean((ls) ? (rs) : (false));
-  (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (if (result i32) (local.get $ls) (then (local.get $rs)) (else (i32.const 0))))
-  ;; booleanoperations.BooleanOperations.acceptBoolean((ls) ? (true) : (rs));
-  (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (if (result i32) (local.get $ls) (then (i32.const 1)) (else (local.get $rs))))
-  ;; booleanoperations.BooleanOperations.acceptBoolean((ls = rs));
-  (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (local.tee $ls (local.get $rs)))
-  ;; Boolean br;
-  
-  ;; (br = ((Boolean) (ls == rs)));
-  (local.tee $br (ref.null $java.lang.Boolean))
-  drop
-  ;; (br = ((Boolean) (ls != rs)));
-  (local.tee $br (ref.null $java.lang.Boolean))
-  drop
-  ;; (br = ((Boolean) (ls ^ rs)));
-  (local.tee $br (ref.null $java.lang.Boolean))
-  drop
-  ;; (br = ((Boolean) (ls & rs)));
-  (local.tee $br (ref.null $java.lang.Boolean))
-  drop
-  ;; (br = ((Boolean) (ls | rs)));
-  (local.tee $br (ref.null $java.lang.Boolean))
-  drop
-  ;; (br = ((Boolean) (ls) ? (rs) : (false)));
-  (local.tee $br (ref.null $java.lang.Boolean))
-  drop
-  ;; (br = ((Boolean) (ls) ? (true) : (rs)));
-  (local.tee $br (ref.null $java.lang.Boolean))
-  drop
-  ;; (br = ((Boolean) (ls = rs)));
-  (local.tee $br (ref.null $java.lang.Boolean))
-  drop
-  ;; if ((ls == rs)) {
-  ;;   (r = true);
-  ;; }
-  (if (i32.eq (local.get $ls) (local.get $rs)) (then (block
-   ;; (r = true);
+ (block $return.label
+  (block
+   ;; boolean ls = true;
+   (local.tee $ls (i32.const 1))
+   drop
+   
+   ;; boolean rs = true;
+   (local.tee $rs (i32.const 1))
+   drop
+   
+   ;; boolean r = true;
    (local.tee $r (i32.const 1))
    drop
-  )))
-  ;; if ((ls != rs)) {
-  ;;   (r = true);
-  ;; }
-  (if (i32.ne (local.get $ls) (local.get $rs)) (then (block
-   ;; (r = true);
-   (local.tee $r (i32.const 1))
+   
+   ;; (r = (ls == rs));
+   (local.tee $r (i32.eq (local.get $ls) (local.get $rs)))
    drop
-  )))
-  ;; if ((ls ^ rs)) {
-  ;;   (r = true);
-  ;; }
-  (if (i32.xor (local.get $ls) (local.get $rs)) (then (block
-   ;; (r = true);
-   (local.tee $r (i32.const 1))
+   ;; (r = (ls != rs));
+   (local.tee $r (i32.ne (local.get $ls) (local.get $rs)))
    drop
-  )))
-  ;; if ((ls & rs)) {
-  ;;   (r = true);
-  ;; }
-  (if (i32.and (local.get $ls) (local.get $rs)) (then (block
-   ;; (r = true);
-   (local.tee $r (i32.const 1))
+   ;; (r = (ls ^ rs));
+   (local.tee $r (i32.xor (local.get $ls) (local.get $rs)))
    drop
-  )))
-  ;; if ((ls | rs)) {
-  ;;   (r = true);
-  ;; }
-  (if (i32.or (local.get $ls) (local.get $rs)) (then (block
-   ;; (r = true);
-   (local.tee $r (i32.const 1))
+   ;; (r = (ls & rs));
+   (local.tee $r (i32.and (local.get $ls) (local.get $rs)))
    drop
-  )))
-  ;; if ((ls) ? (rs) : (false)) {
-  ;;   (r = true);
-  ;; }
-  (if (if (result i32) (local.get $ls) (then (local.get $rs)) (else (i32.const 0))) (then (block
-   ;; (r = true);
-   (local.tee $r (i32.const 1))
+   ;; (r = (ls | rs));
+   (local.tee $r (i32.or (local.get $ls) (local.get $rs)))
    drop
-  )))
-  ;; if ((ls) ? (true) : (rs)) {
-  ;;   (r = true);
-  ;; }
-  (if (if (result i32) (local.get $ls) (then (i32.const 1)) (else (local.get $rs))) (then (block
-   ;; (r = true);
-   (local.tee $r (i32.const 1))
+   ;; (r = (ls) ? (rs) : (false));
+   (local.tee $r (if (result i32) (local.get $ls) (then (local.get $rs)) (else (i32.const 0))))
    drop
-  )))
-  ;; Outer finalOuter = BooleanOperations.this.new $1Outer.<init>();
-  (local.tee $finalOuter (call $<init><>:void@booleanoperations.BooleanOperations.1Outer (struct.new_default_with_rtt $booleanoperations.BooleanOperations.1Outer (global.get $booleanoperations.BooleanOperations.1Outer.rtt)) ))
-  drop
-  
-  ;; (finalOuter.b = (finalOuter.b | true));
-  (i32.const 0)
-  drop
-  ;; Outer outer = BooleanOperations.this.new $1Outer.<init>();
-  (local.tee $outer (call $<init><>:void@booleanoperations.BooleanOperations.1Outer (struct.new_default_with_rtt $booleanoperations.BooleanOperations.1Outer (global.get $booleanoperations.BooleanOperations.1Outer.rtt)) ))
-  drop
-  
-  ;; (outer.b = (outer.b | ((outer = null) == null)));
-  (i32.const 0)
-  drop
+   ;; (r = (ls) ? (true) : (rs));
+   (local.tee $r (if (result i32) (local.get $ls) (then (i32.const 1)) (else (local.get $rs))))
+   drop
+   ;; (r = (ls = rs));
+   (local.tee $r (local.tee $ls (local.get $rs)))
+   drop
+   ;; (r = (r ^ rs));
+   (local.tee $r (i32.xor (local.get $r) (local.get $rs)))
+   drop
+   ;; (r = (r & rs));
+   (local.tee $r (i32.and (local.get $r) (local.get $rs)))
+   drop
+   ;; (r = (r | rs));
+   (local.tee $r (i32.or (local.get $r) (local.get $rs)))
+   drop
+   ;; booleanoperations.BooleanOperations.acceptBoolean((ls == rs));
+   (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (i32.eq (local.get $ls) (local.get $rs)))
+   ;; booleanoperations.BooleanOperations.acceptBoolean((ls != rs));
+   (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (i32.ne (local.get $ls) (local.get $rs)))
+   ;; booleanoperations.BooleanOperations.acceptBoolean((ls ^ rs));
+   (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (i32.xor (local.get $ls) (local.get $rs)))
+   ;; booleanoperations.BooleanOperations.acceptBoolean((ls & rs));
+   (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (i32.and (local.get $ls) (local.get $rs)))
+   ;; booleanoperations.BooleanOperations.acceptBoolean((ls | rs));
+   (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (i32.or (local.get $ls) (local.get $rs)))
+   ;; booleanoperations.BooleanOperations.acceptBoolean((ls) ? (rs) : (false));
+   (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (if (result i32) (local.get $ls) (then (local.get $rs)) (else (i32.const 0))))
+   ;; booleanoperations.BooleanOperations.acceptBoolean((ls) ? (true) : (rs));
+   (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (if (result i32) (local.get $ls) (then (i32.const 1)) (else (local.get $rs))))
+   ;; booleanoperations.BooleanOperations.acceptBoolean((ls = rs));
+   (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (local.tee $ls (local.get $rs)))
+   ;; Boolean br;
+   
+   ;; (br = ((Boolean) (ls == rs)));
+   (local.tee $br (ref.null $java.lang.Boolean))
+   drop
+   ;; (br = ((Boolean) (ls != rs)));
+   (local.tee $br (ref.null $java.lang.Boolean))
+   drop
+   ;; (br = ((Boolean) (ls ^ rs)));
+   (local.tee $br (ref.null $java.lang.Boolean))
+   drop
+   ;; (br = ((Boolean) (ls & rs)));
+   (local.tee $br (ref.null $java.lang.Boolean))
+   drop
+   ;; (br = ((Boolean) (ls | rs)));
+   (local.tee $br (ref.null $java.lang.Boolean))
+   drop
+   ;; (br = ((Boolean) (ls) ? (rs) : (false)));
+   (local.tee $br (ref.null $java.lang.Boolean))
+   drop
+   ;; (br = ((Boolean) (ls) ? (true) : (rs)));
+   (local.tee $br (ref.null $java.lang.Boolean))
+   drop
+   ;; (br = ((Boolean) (ls = rs)));
+   (local.tee $br (ref.null $java.lang.Boolean))
+   drop
+   ;; if ((ls == rs)) {
+   ;;   (r = true);
+   ;; }
+   (if (i32.eq (local.get $ls) (local.get $rs)) (then (block
+    ;; (r = true);
+    (local.tee $r (i32.const 1))
+    drop
+   )))
+   ;; if ((ls != rs)) {
+   ;;   (r = true);
+   ;; }
+   (if (i32.ne (local.get $ls) (local.get $rs)) (then (block
+    ;; (r = true);
+    (local.tee $r (i32.const 1))
+    drop
+   )))
+   ;; if ((ls ^ rs)) {
+   ;;   (r = true);
+   ;; }
+   (if (i32.xor (local.get $ls) (local.get $rs)) (then (block
+    ;; (r = true);
+    (local.tee $r (i32.const 1))
+    drop
+   )))
+   ;; if ((ls & rs)) {
+   ;;   (r = true);
+   ;; }
+   (if (i32.and (local.get $ls) (local.get $rs)) (then (block
+    ;; (r = true);
+    (local.tee $r (i32.const 1))
+    drop
+   )))
+   ;; if ((ls | rs)) {
+   ;;   (r = true);
+   ;; }
+   (if (i32.or (local.get $ls) (local.get $rs)) (then (block
+    ;; (r = true);
+    (local.tee $r (i32.const 1))
+    drop
+   )))
+   ;; if ((ls) ? (rs) : (false)) {
+   ;;   (r = true);
+   ;; }
+   (if (if (result i32) (local.get $ls) (then (local.get $rs)) (else (i32.const 0))) (then (block
+    ;; (r = true);
+    (local.tee $r (i32.const 1))
+    drop
+   )))
+   ;; if ((ls) ? (true) : (rs)) {
+   ;;   (r = true);
+   ;; }
+   (if (if (result i32) (local.get $ls) (then (i32.const 1)) (else (local.get $rs))) (then (block
+    ;; (r = true);
+    (local.tee $r (i32.const 1))
+    drop
+   )))
+   ;; Outer finalOuter = BooleanOperations.this.new $1Outer.<init>();
+   (local.tee $finalOuter (call $<init><>:void@booleanoperations.BooleanOperations.1Outer (struct.new_default_with_rtt $booleanoperations.BooleanOperations.1Outer (global.get $booleanoperations.BooleanOperations.1Outer.rtt)) ))
+   drop
+   
+   ;; (finalOuter.b = (finalOuter.b | true));
+   (i32.const 0)
+   drop
+   ;; Outer outer = BooleanOperations.this.new $1Outer.<init>();
+   (local.tee $outer (call $<init><>:void@booleanoperations.BooleanOperations.1Outer (struct.new_default_with_rtt $booleanoperations.BooleanOperations.1Outer (global.get $booleanoperations.BooleanOperations.1Outer.rtt)) ))
+   drop
+   
+   ;; (outer.b = (outer.b | ((outer = null) == null)));
+   (i32.const 0)
+   drop
+  )
  )
 )
 
@@ -204,9 +210,11 @@
 (func $<init><>:void@booleanoperations.BooleanOperations.1Outer
  (param $this (ref null $booleanoperations.BooleanOperations.1Outer))
  (result (ref null $booleanoperations.BooleanOperations.1Outer))
- (block
-  ;; Object.this.Object.<init>();
-  
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
  )
  (local.get $this)
 )
@@ -221,9 +229,11 @@
 (func $<init><>:void@booleanoperations.BooleanOperations.1Outer.Inner
  (param $this (ref null $booleanoperations.BooleanOperations.1Outer.Inner))
  (result (ref null $booleanoperations.BooleanOperations.1Outer.Inner))
- (block
-  ;; Object.this.Object.<init>();
-  
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
  )
  (local.get $this)
 )

@@ -162,9 +162,7 @@ public class WasmModuleGenerator {
   }
 
   private void renderTypeMethods(Type type) {
-    for (Method method : type.getMethods()) {
-      renderMethod(method);
-    }
+    type.getMethods().stream().filter(not(Method::isAbstract)).forEach(this::renderMethod);
   }
 
   private void renderMethod(Method method) {
@@ -211,14 +209,26 @@ public class WasmModuleGenerator {
               + ")");
     }
     // Emit return type
-    TypeDescriptor returnTypeDescriptor =
-        method.isConstructor()
-            ? methodDescriptor.getEnclosingTypeDescriptor()
-            : methodDescriptor.getReturnTypeDescriptor();
-    if (!TypeDescriptors.isPrimitiveVoid(returnTypeDescriptor)) {
+    if (method.isConstructor()) {
+      // TODO(rluble): Remove after constructor normalization is in place, constructors should not
+      // reach the back end.
+      // Constructors are modelled for now as if they return the object that was created.
+      builder.newLine();
+      builder.append(
+          "(result "
+              + environment.getWasmType(methodDescriptor.getEnclosingTypeDescriptor())
+              + ")");
+    } else if (!TypeDescriptors.isPrimitiveVoid(methodDescriptor.getReturnTypeDescriptor())) {
+      TypeDescriptor returnTypeDescriptor = methodDescriptor.getReturnTypeDescriptor();
       builder.newLine();
       builder.append("(result " + environment.getWasmType(returnTypeDescriptor) + ")");
+      // TODO(rluble): Add a pass to make all methods return from the top block.
+      // Define a local variable to hold the result value to allow for returns that appear in
+      // the inner blocks.
+      builder.newLine();
+      builder.append("(local $return.value " + environment.getWasmType(returnTypeDescriptor) + ")");
     }
+
     // Emit locals.
     for (Variable variable : collectLocals(method)) {
       builder.newLine();
@@ -230,17 +240,21 @@ public class WasmModuleGenerator {
               + ")");
     }
     builder.newLine();
+    builder.append("(block $return.label");
+    builder.indent();
+    builder.newLine();
+
     new StatementTranspiler(builder, environment).renderStatement(method.getBody());
+    builder.unindent();
+    builder.newLine();
+    builder.append(")");
     if (method.isConstructor()) {
       // TODO(rluble): Add a pass to transform constructors into static methods.
       builder.newLine();
       builder.append("(local.get $this)");
     } else if (!TypeDescriptors.isPrimitiveVoid(method.getDescriptor().getReturnTypeDescriptor())) {
-      // TODO(rluble): remove the dummy return value to keep WASM happy until the return statement
-      // is properly implemented.
       builder.newLine();
-      ExpressionTranspiler.render(
-          method.getDescriptor().getReturnTypeDescriptor().getDefaultValue(), builder, environment);
+      builder.append("(local.get $return.value)");
     }
     builder.unindent();
     builder.newLine();

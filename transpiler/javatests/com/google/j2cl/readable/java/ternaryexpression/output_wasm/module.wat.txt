@@ -9,9 +9,11 @@
 (func $<init><>:void@ternaryexpression.TernaryExpression
  (param $this (ref null $ternaryexpression.TernaryExpression))
  (result (ref null $ternaryexpression.TernaryExpression))
- (block
-  ;; Object.this.Object.<init>();
-  
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
  )
  (local.get $this)
 )
@@ -23,23 +25,25 @@
  (local $number i32)
  (local $b i32)
  (local $value i32)
- (block
-  ;; boolean a = true;
-  (local.tee $a (i32.const 1))
-  drop
-  
-  ;; int number = (a) ? (1) : (2);
-  (local.tee $number (if (result i32) (local.get $a) (then (i32.const 1)) (else (i32.const 2))))
-  drop
-  
-  ;; boolean b = ((number == 1)) ? ((number == 2)) : ((number == 1));
-  (local.tee $b (if (result i32) (i32.eq (local.get $number) (i32.const 1)) (then (i32.eq (local.get $number) (i32.const 2))) (else (i32.eq (local.get $number) (i32.const 1)))))
-  drop
-  
-  ;; int value = (b) ? (new Integer.<init>(15)) : (new Integer.<init>(30));
-  (local.tee $value (i32.const 0))
-  drop
-  
+ (block $return.label
+  (block
+   ;; boolean a = true;
+   (local.tee $a (i32.const 1))
+   drop
+   
+   ;; int number = (a) ? (1) : (2);
+   (local.tee $number (if (result i32) (local.get $a) (then (i32.const 1)) (else (i32.const 2))))
+   drop
+   
+   ;; boolean b = ((number == 1)) ? ((number == 2)) : ((number == 1));
+   (local.tee $b (if (result i32) (i32.eq (local.get $number) (i32.const 1)) (then (i32.eq (local.get $number) (i32.const 2))) (else (i32.eq (local.get $number) (i32.const 1)))))
+   drop
+   
+   ;; int value = (b) ? (new Integer.<init>(15)) : (new Integer.<init>(30));
+   (local.tee $value (i32.const 0))
+   drop
+   
+  )
  )
 )
 
