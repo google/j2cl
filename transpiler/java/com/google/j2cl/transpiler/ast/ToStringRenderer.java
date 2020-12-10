@@ -247,9 +247,7 @@ class ToStringRenderer {
         print("for (");
         printSeparated(",", forStatement.getInitializers());
         print(";");
-        if (forStatement.getConditionExpression() != null) {
-          accept(forStatement.getConditionExpression());
-        }
+        accept(forStatement.getConditionExpression());
         print(";");
         printSeparated(",", forStatement.getUpdates());
         print(") ");

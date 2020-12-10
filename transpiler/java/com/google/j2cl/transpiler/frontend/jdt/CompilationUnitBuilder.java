@@ -788,7 +788,10 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           // These can be used in the expression, updaters or the body
           // This is why we need to process initializers first
           .setInitializers(convertExpressions(JdtUtils.asTypedList(statement.initializers())))
-          .setConditionExpression(convertOrNull(statement.getExpression()))
+          .setConditionExpression(
+              statement.getExpression() == null
+                  ? BooleanLiteral.get(true)
+                  : convert(statement.getExpression()))
           .setBody(convert(statement.getBody()))
           .setUpdates(convertExpressions(JdtUtils.asTypedList(statement.updaters())))
           .setSourcePosition(getSourcePosition(statement))

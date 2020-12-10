@@ -395,9 +395,6 @@ public final class ConversionContextVisitor extends AbstractRewriter {
 
   @Override
   public ForStatement rewriteForStatement(ForStatement forStatement) {
-    if (forStatement.getConditionExpression() == null) {
-      return forStatement;
-    }
     return ForStatement.Builder.from(forStatement)
         .setConditionExpression(
             contextRewriter.rewriteBooleanConversionContext(forStatement.getConditionExpression()))

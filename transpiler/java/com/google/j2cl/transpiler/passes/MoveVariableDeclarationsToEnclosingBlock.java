@@ -136,9 +136,7 @@ public class MoveVariableDeclarationsToEnclosingBlock extends NormalizationPass 
                 initializer.accept(this);
               }
             }
-            if (forStatement.getConditionExpression() != null) {
-              forStatement.getConditionExpression().accept(this);
-            }
+            forStatement.getConditionExpression().accept(this);
             for (Expression update : forStatement.getUpdates()) {
               update.accept(this);
             }

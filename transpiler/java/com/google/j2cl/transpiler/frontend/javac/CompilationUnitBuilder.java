@@ -438,7 +438,10 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         // These can be used in the expression, updaters or the body
         // This is why we need to process initializers first
         .setInitializers(convertInitializers(statement.getInitializer()))
-        .setConditionExpression(convertExpressionOrNull(statement.getCondition()))
+        .setConditionExpression(
+            statement.getCondition() == null
+                ? BooleanLiteral.get(true)
+                : convertExpression(statement.getCondition()))
         .setBody(convertStatement(statement.getStatement()))
         .setUpdates(
             convertExpressions(

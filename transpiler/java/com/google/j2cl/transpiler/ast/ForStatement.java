@@ -23,7 +23,6 @@ import com.google.j2cl.common.visitor.Visitable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import javax.annotation.Nullable;
 
 /**
  * For Statement.
@@ -34,7 +33,7 @@ public class ForStatement extends Statement {
   // The components of the ForStatement need to be traversed in order so that variable declarations
   // are visited before their references.
   @Visitable List<Expression> initializers = new ArrayList<>();
-  @Visitable @Nullable Expression conditionExpression;
+  @Visitable Expression conditionExpression;
   @Visitable List<Expression> updates = new ArrayList<>();
   @Visitable Statement body;
 

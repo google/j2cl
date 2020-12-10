@@ -340,9 +340,6 @@ public class StatementTranspiler {
       }
 
       private void renderExpression(Expression expression) {
-        if (expression == null) {
-          return;
-        }
         ExpressionTranspiler.render(expression, environment, builder);
       }
 
