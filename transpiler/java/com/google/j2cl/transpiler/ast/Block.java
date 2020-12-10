@@ -61,7 +61,9 @@ public class Block extends Statement {
   /** A Builder for Block. */
   public static class Builder {
     private final List<Statement> statements = new ArrayList<>();
-    private SourcePosition sourcePosition;
+    // Ok to have blocks without source position, since there is not code that they directly
+    // execute.
+    private SourcePosition sourcePosition = SourcePosition.NONE;
 
     public static Builder from(Block block) {
       return newBuilder()

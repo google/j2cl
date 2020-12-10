@@ -856,9 +856,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       return ForStatement.newBuilder()
           .setConditionExpression(condition)
           //  {   T t = $array[$index]; S; }
-          .setBody(convert(statement.getBody()))
-          // prepend the variable declaration.
-          .addStatement(0, forVariableDeclarationStatement)
+          .setBodyStatements(forVariableDeclarationStatement, convert(statement.getBody()))
           .setInitializers(
               VariableDeclarationExpression.newBuilder()
                   .addVariableDeclaration(arrayVariable, convert(statement.getExpression()))
@@ -932,9 +930,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
       return ForStatement.newBuilder()
           .setConditionExpression(condition)
-          .setBody(convert(statement.getBody()))
-          // Prepend the variable declaration.
-          .addStatement(0, forVariableDeclarationStatement)
+          .setBodyStatements(forVariableDeclarationStatement, convert(statement.getBody()))
           .setInitializers(iteratorDeclaration)
           .setSourcePosition(getSourcePosition(statement))
           .build();

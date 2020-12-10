@@ -72,11 +72,12 @@ public class ControlStatementFormatter extends NormalizationPass {
               return forStatement;
             }
 
-            return ForStatement.newBuilder()
-                .setConditionExpression(forStatement.getConditionExpression())
-                .setBody(body)
-                .setInitializers(forStatement.getInitializers())
-                .setUpdates(forStatement.getUpdates())
+            return ForStatement.Builder.from(forStatement)
+                .setBody(
+                    Block.newBuilder()
+                        .setSourcePosition(body.getSourcePosition())
+                        .setStatements(body)
+                        .build())
                 .build();
           }
 
@@ -87,9 +88,7 @@ public class ControlStatementFormatter extends NormalizationPass {
               return doWhileStatement;
             }
 
-            return DoWhileStatement.newBuilder()
-                .setSourcePosition(doWhileStatement.getSourcePosition())
-                .setConditionExpression(doWhileStatement.getConditionExpression())
+            return DoWhileStatement.Builder.from(doWhileStatement)
                 .setBody(
                     Block.newBuilder()
                         .setSourcePosition(body.getSourcePosition())
@@ -105,9 +104,7 @@ public class ControlStatementFormatter extends NormalizationPass {
               return whileStatement;
             }
 
-            return WhileStatement.newBuilder()
-                .setSourcePosition(whileStatement.getSourcePosition())
-                .setConditionExpression(whileStatement.getConditionExpression())
+            return WhileStatement.Builder.from(whileStatement)
                 .setBody(
                     Block.newBuilder()
                         .setSourcePosition(body.getSourcePosition())

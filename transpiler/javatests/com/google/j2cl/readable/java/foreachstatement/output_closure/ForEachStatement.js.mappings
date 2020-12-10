@@ -14,7 +14,7 @@
       t.toString();
     }] => [for (let $iterator = iterable.m_iterator__(); $iterator.m_hasNext__(); ) {
    let t = /**@type {Throwable}*/ ($Casts.$to($iterator.m_next__(), Throwable));
-   t.toString();
+...   }
   }] "foreachstatement.ForEachStatement.test"
 [for (Throwable t : iterable) {
       t.toString();
@@ -25,7 +25,7 @@
       t.toString();
     }] => [for (let $array = /**@type {!Array<Throwable>}*/ ($Arrays.$create([10], Throwable)), $index = 0; $index < $array.length; $index++) {
    let t_1 = $array[$index];
-   t_1.toString();
+...   }
   }] "foreachstatement.ForEachStatement.test"
 [for (Throwable t : new Throwable[10]) {
       t.toString();

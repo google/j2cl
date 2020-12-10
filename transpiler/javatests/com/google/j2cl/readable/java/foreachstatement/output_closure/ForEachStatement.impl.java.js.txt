@@ -29,14 +29,14 @@ class ForEachStatement extends j_l_Object {
     for (let $iterator = iterable.m_iterator__(); $iterator.m_hasNext__();) {
       let t =
           /**@type {Throwable}*/ ($Casts.$to($iterator.m_next__(), Throwable));
-      t.toString();
+      { t.toString(); }
     }
     for (let $array = /**@type {!Array<Throwable>}*/ (
                  $Arrays.$create([10], Throwable)),
              $index = 0;
          $index < $array.length; $index++) {
       let t_1 = $array[$index];
-      t_1.toString();
+      { t_1.toString(); }
     }
   }
 
