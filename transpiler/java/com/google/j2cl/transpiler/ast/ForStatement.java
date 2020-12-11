@@ -24,11 +24,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * For Statement.
- */
+/** For Statement. */
 @Visitable
-public class ForStatement extends Statement {
+public class ForStatement extends LoopStatement {
   // The visitors traverse the @Visitable members of the class in the order they appear.
   // The components of the ForStatement need to be traversed in order so that variable declarations
   // are visited before their references.
@@ -50,10 +48,12 @@ public class ForStatement extends Statement {
     this.updates.addAll(checkNotNull(updates));
   }
 
+  @Override
   public Expression getConditionExpression() {
     return conditionExpression;
   }
 
+  @Override
   public Statement getBody() {
     return body;
   }
@@ -82,30 +82,30 @@ public class ForStatement extends Statement {
     return Visitor_ForStatement.visit(processor, this);
   }
 
+  @Override
+  Builder toBuilder() {
+    return new Builder(this);
+  }
+
   public static Builder newBuilder() {
     return new Builder();
   }
 
   /** Builder for ForStatement. */
-  public static class Builder {
+  public static class Builder extends LoopStatement.Builder<Builder, ForStatement> {
     private List<Expression> initializers = new ArrayList<>();
-    private Expression conditionExpression;
     private List<Expression> updates = new ArrayList<>();
-    private Statement body;
-    private SourcePosition sourcePosition;
 
     public static Builder from(ForStatement forStatement) {
-      return newBuilder()
-          .setInitializers(forStatement.getInitializers())
-          .setConditionExpression(forStatement.getConditionExpression())
-          .setUpdates(forStatement.getUpdates())
-          .setBody(forStatement.getBody())
-          .setSourcePosition(forStatement.getSourcePosition());
+      return new Builder(forStatement);
     }
 
-    public Builder setConditionExpression(Expression conditionExpression) {
-      this.conditionExpression = conditionExpression;
-      return this;
+    private Builder() {}
+
+    private Builder(ForStatement forStatement) {
+      super(forStatement);
+      setInitializers(forStatement.getInitializers());
+      setUpdates(forStatement.getUpdates());
     }
 
     public Builder setInitializers(List<Expression> initializers) {
@@ -126,21 +126,9 @@ public class ForStatement extends Statement {
       return setUpdates(Arrays.asList(updates));
     }
 
-    public Builder setBody(Statement body) {
-      this.body = body;
-      return this;
-    }
-
-    public Builder setBodyStatements(Statement... statements) {
-      return setBody(Block.newBuilder().setStatements(statements).build());
-    }
-
-    public Builder setSourcePosition(SourcePosition sourcePosition) {
-      this.sourcePosition = sourcePosition;
-      return this;
-    }
-
-    public ForStatement build() {
+    @Override
+    protected ForStatement doCreateInvocation(
+        Expression conditionExpression, Statement body, SourcePosition sourcePosition) {
       return new ForStatement(sourcePosition, conditionExpression, body, initializers, updates);
     }
 

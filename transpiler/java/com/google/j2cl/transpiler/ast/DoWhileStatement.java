@@ -23,7 +23,7 @@ import com.google.j2cl.common.visitor.Visitable;
 
 /** DoWhile Statement. */
 @Visitable
-public class DoWhileStatement extends Statement {
+public class DoWhileStatement extends LoopStatement {
   @Visitable Expression conditionExpression;
   @Visitable Statement body;
 
@@ -34,10 +34,12 @@ public class DoWhileStatement extends Statement {
     this.body = checkNotNull(body);
   }
 
+  @Override
   public Expression getConditionExpression() {
     return conditionExpression;
   }
 
+  @Override
   public Statement getBody() {
     return body;
   }
@@ -53,39 +55,31 @@ public class DoWhileStatement extends Statement {
     return Visitor_DoWhileStatement.visit(processor, this);
   }
 
+  @Override
+  Builder toBuilder() {
+    return new Builder(this);
+  }
+
   public static Builder newBuilder() {
     return new Builder();
   }
 
   /** A Builder for DoWhileStatement. */
-  public static class Builder {
-    private Expression conditionExpression;
-    private Statement body;
-    private SourcePosition sourcePosition;
+  public static class Builder extends LoopStatement.Builder<Builder, DoWhileStatement> {
 
     public static Builder from(DoWhileStatement doWhileStatement) {
-      return new Builder()
-          .setSourcePosition(doWhileStatement.getSourcePosition())
-          .setConditionExpression(doWhileStatement.getConditionExpression())
-          .setBody(doWhileStatement.getBody());
+      return new Builder(doWhileStatement);
     }
 
-    public Builder setSourcePosition(SourcePosition sourcePosition) {
-      this.sourcePosition = sourcePosition;
-      return this;
+    private Builder() {}
+
+    private Builder(DoWhileStatement doWhileStatement) {
+      super(doWhileStatement);
     }
 
-    public Builder setConditionExpression(Expression conditionExpression) {
-      this.conditionExpression = conditionExpression;
-      return this;
-    }
-
-    public Builder setBody(Statement body) {
-      this.body = body;
-      return this;
-    }
-
-    public DoWhileStatement build() {
+    @Override
+    protected DoWhileStatement doCreateInvocation(
+        Expression conditionExpression, Statement body, SourcePosition sourcePosition) {
       return new DoWhileStatement(sourcePosition, conditionExpression, body);
     }
   }

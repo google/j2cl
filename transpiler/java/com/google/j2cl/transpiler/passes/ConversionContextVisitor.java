@@ -31,14 +31,12 @@ import com.google.j2cl.transpiler.ast.BreakStatement;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.ConditionalExpression;
 import com.google.j2cl.transpiler.ast.ContinueStatement;
-import com.google.j2cl.transpiler.ast.DoWhileStatement;
 import com.google.j2cl.transpiler.ast.EmptyStatement;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.ExpressionStatement;
 import com.google.j2cl.transpiler.ast.ExpressionWithComment;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldAccess;
-import com.google.j2cl.transpiler.ast.ForStatement;
 import com.google.j2cl.transpiler.ast.FunctionExpression;
 import com.google.j2cl.transpiler.ast.IfStatement;
 import com.google.j2cl.transpiler.ast.InstanceOfExpression;
@@ -47,6 +45,7 @@ import com.google.j2cl.transpiler.ast.JavaScriptConstructorReference;
 import com.google.j2cl.transpiler.ast.JsDocCastExpression;
 import com.google.j2cl.transpiler.ast.LabeledStatement;
 import com.google.j2cl.transpiler.ast.Literal;
+import com.google.j2cl.transpiler.ast.LoopStatement;
 import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
@@ -69,7 +68,6 @@ import com.google.j2cl.transpiler.ast.UnaryExpression;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
 import com.google.j2cl.transpiler.ast.VariableReference;
-import com.google.j2cl.transpiler.ast.WhileStatement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -383,21 +381,10 @@ public final class ConversionContextVisitor extends AbstractRewriter {
   }
 
   @Override
-  public DoWhileStatement rewriteDoWhileStatement(DoWhileStatement doWhileStatement) {
-    return DoWhileStatement.newBuilder()
-        .setSourcePosition(doWhileStatement.getSourcePosition())
+  public LoopStatement rewriteLoopStatement(LoopStatement loopStatement) {
+    return LoopStatement.Builder.from(loopStatement)
         .setConditionExpression(
-            contextRewriter.rewriteBooleanConversionContext(
-                doWhileStatement.getConditionExpression()))
-        .setBody(doWhileStatement.getBody())
-        .build();
-  }
-
-  @Override
-  public ForStatement rewriteForStatement(ForStatement forStatement) {
-    return ForStatement.Builder.from(forStatement)
-        .setConditionExpression(
-            contextRewriter.rewriteBooleanConversionContext(forStatement.getConditionExpression()))
+            contextRewriter.rewriteBooleanConversionContext(loopStatement.getConditionExpression()))
         .build();
   }
 
@@ -595,16 +582,6 @@ public final class ConversionContextVisitor extends AbstractRewriter {
         .build();
   }
 
-  @Override
-  public WhileStatement rewriteWhileStatement(WhileStatement whileStatement) {
-    return WhileStatement.newBuilder()
-        .setSourcePosition(whileStatement.getSourcePosition())
-        .setConditionExpression(
-            contextRewriter.rewriteBooleanConversionContext(
-                whileStatement.getConditionExpression()))
-        .setBody(whileStatement.getBody())
-        .build();
-  }
 
   private Expression rewriteTypeConversionContextWithoutDeclaration(
       TypeDescriptor toTypeDescriptor, Expression expression) {

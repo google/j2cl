@@ -23,7 +23,7 @@ import com.google.j2cl.common.visitor.Visitable;
 
 /** While Statement. */
 @Visitable
-public class WhileStatement extends Statement {
+public class WhileStatement extends LoopStatement {
   @Visitable Expression conditionExpression;
   @Visitable Statement body;
 
@@ -34,10 +34,12 @@ public class WhileStatement extends Statement {
     this.body = checkNotNull(body);
   }
 
+  @Override
   public Expression getConditionExpression() {
     return conditionExpression;
   }
 
+  @Override
   public Statement getBody() {
     return body;
   }
@@ -53,39 +55,31 @@ public class WhileStatement extends Statement {
     return Visitor_WhileStatement.visit(processor, this);
   }
 
+  @Override
+  Builder toBuilder() {
+    return new Builder(this);
+  }
+
   public static Builder newBuilder() {
     return new Builder();
   }
 
   /** A Builder for WhileStatement. */
-  public static class Builder {
-    private Expression conditionExpression;
-    private Statement body;
-    private SourcePosition sourcePosition;
-
+  public static class Builder
+      extends LoopStatement.Builder<WhileStatement.Builder, WhileStatement> {
     public static Builder from(WhileStatement whileStatement) {
-      return new Builder()
-          .setSourcePosition(whileStatement.getSourcePosition())
-          .setConditionExpression(whileStatement.getConditionExpression())
-          .setBody(whileStatement.getBody());
+      return new Builder(whileStatement);
     }
 
-    public Builder setSourcePosition(SourcePosition sourcePosition) {
-      this.sourcePosition = sourcePosition;
-      return this;
+    private Builder() {}
+
+    private Builder(WhileStatement whileStatement) {
+      super(whileStatement);
     }
 
-    public Builder setConditionExpression(Expression conditionExpression) {
-      this.conditionExpression = conditionExpression;
-      return this;
-    }
-
-    public Builder setBody(Statement body) {
-      this.body = body;
-      return this;
-    }
-
-    public WhileStatement build() {
+    @Override
+    protected WhileStatement doCreateInvocation(
+        Expression conditionExpression, Statement body, SourcePosition sourcePosition) {
       return new WhileStatement(sourcePosition, conditionExpression, body);
     }
   }

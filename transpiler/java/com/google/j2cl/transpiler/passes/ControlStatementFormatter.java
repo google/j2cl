@@ -18,11 +18,9 @@ package com.google.j2cl.transpiler.passes;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.Block;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
-import com.google.j2cl.transpiler.ast.DoWhileStatement;
-import com.google.j2cl.transpiler.ast.ForStatement;
 import com.google.j2cl.transpiler.ast.IfStatement;
+import com.google.j2cl.transpiler.ast.LoopStatement;
 import com.google.j2cl.transpiler.ast.Statement;
-import com.google.j2cl.transpiler.ast.WhileStatement;
 
 /** Makes sure that body of conditional are always blocks (except in the else if case). */
 public class ControlStatementFormatter extends NormalizationPass {
@@ -66,45 +64,13 @@ public class ControlStatementFormatter extends NormalizationPass {
           }
 
           @Override
-          public ForStatement rewriteForStatement(ForStatement forStatement) {
-            Statement body = forStatement.getBody();
+          public LoopStatement rewriteLoopStatement(LoopStatement loopStatement) {
+            Statement body = loopStatement.getBody();
             if (body instanceof Block) {
-              return forStatement;
+              return loopStatement;
             }
 
-            return ForStatement.Builder.from(forStatement)
-                .setBody(
-                    Block.newBuilder()
-                        .setSourcePosition(body.getSourcePosition())
-                        .setStatements(body)
-                        .build())
-                .build();
-          }
-
-          @Override
-          public DoWhileStatement rewriteDoWhileStatement(DoWhileStatement doWhileStatement) {
-            Statement body = doWhileStatement.getBody();
-            if (body instanceof Block) {
-              return doWhileStatement;
-            }
-
-            return DoWhileStatement.Builder.from(doWhileStatement)
-                .setBody(
-                    Block.newBuilder()
-                        .setSourcePosition(body.getSourcePosition())
-                        .setStatements(body)
-                        .build())
-                .build();
-          }
-
-          @Override
-          public WhileStatement rewriteWhileStatement(WhileStatement whileStatement) {
-            Statement body = whileStatement.getBody();
-            if (body instanceof Block) {
-              return whileStatement;
-            }
-
-            return WhileStatement.Builder.from(whileStatement)
+            return LoopStatement.Builder.from(loopStatement)
                 .setBody(
                     Block.newBuilder()
                         .setSourcePosition(body.getSourcePosition())
