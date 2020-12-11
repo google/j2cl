@@ -20,10 +20,10 @@ import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.BinaryOperator;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
-import com.google.j2cl.transpiler.ast.CompoundOperationsUtils;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.ExpressionStatement;
 import com.google.j2cl.transpiler.ast.ForStatement;
+import com.google.j2cl.transpiler.ast.OperationExpansionUtils;
 import com.google.j2cl.transpiler.ast.PostfixExpression;
 import com.google.j2cl.transpiler.ast.PrefixExpression;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
@@ -82,7 +82,7 @@ public class ExpandCompoundAssignments extends NormalizationPass {
           @Override
           public Expression rewriteBinaryExpression(BinaryExpression binaryExpression) {
             if (needsExpansion(binaryExpression)) {
-              return CompoundOperationsUtils.expandCompoundExpression(binaryExpression);
+              return OperationExpansionUtils.expandCompoundExpression(binaryExpression);
             }
             return binaryExpression;
           }
@@ -90,7 +90,7 @@ public class ExpandCompoundAssignments extends NormalizationPass {
           @Override
           public Expression rewritePrefixExpression(PrefixExpression prefixExpression) {
             if (needsExpansion(prefixExpression)) {
-              return CompoundOperationsUtils.expandExpression(prefixExpression);
+              return OperationExpansionUtils.expandExpression(prefixExpression);
             }
             return prefixExpression;
           }
@@ -98,7 +98,7 @@ public class ExpandCompoundAssignments extends NormalizationPass {
           @Override
           public Expression rewritePostfixExpression(PostfixExpression postfixExpression) {
             if (needsExpansion(postfixExpression)) {
-              return CompoundOperationsUtils.expandExpression(postfixExpression);
+              return OperationExpansionUtils.expandExpression(postfixExpression);
             }
             return postfixExpression;
           }

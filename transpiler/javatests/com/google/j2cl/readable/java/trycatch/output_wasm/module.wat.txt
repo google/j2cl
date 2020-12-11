@@ -43,9 +43,7 @@
     unreachable
    )(block
     ;; (r = null);
-    (local.tee $r (ref.null $java.lang.RuntimeException))
-    drop
-   ))
+    (local.set $r (ref.null $java.lang.RuntimeException))))
  )
 )
 
@@ -162,12 +160,10 @@
  (block $return.label
   (block
    ;; ClosableThing thing = new ClosableThing.<init>();
-   (local.tee $thing (call $<init><>:void@trycatch.TryCatch.ClosableThing (struct.new_default_with_rtt $trycatch.TryCatch.ClosableThing (global.get $trycatch.TryCatch.ClosableThing.rtt)) ))
-   drop
+   (local.set $thing (call $<init><>:void@trycatch.TryCatch.ClosableThing (struct.new_default_with_rtt $trycatch.TryCatch.ClosableThing (global.get $trycatch.TryCatch.ClosableThing.rtt)) ))
    
    ;; ClosableThing thing2 = new ClosableThing.<init>();
-   (local.tee $thing2 (call $<init><>:void@trycatch.TryCatch.ClosableThing (struct.new_default_with_rtt $trycatch.TryCatch.ClosableThing (global.get $trycatch.TryCatch.ClosableThing.rtt)) ))
-   drop
+   (local.set $thing2 (call $<init><>:void@trycatch.TryCatch.ClosableThing (struct.new_default_with_rtt $trycatch.TryCatch.ClosableThing (global.get $trycatch.TryCatch.ClosableThing.rtt)) ))
    
    ;; try (
    ;;     ClosableThing $resource = thing;

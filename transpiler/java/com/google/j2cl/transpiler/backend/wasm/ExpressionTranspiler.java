@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.backend.wasm;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveVoid;
 
 import com.google.common.collect.Iterables;
@@ -150,7 +151,7 @@ final class ExpressionTranspiler {
       public boolean enterExpression(Expression expression) {
         // TODO(rluble): remove this method which is only a place holder until all expressions are
         // implemented.
-        if (!isPrimitiveVoid(expression.getTypeDescriptor())) {
+        if (!returnsVoid(expression)) {
           // This is an unimplemented expression that returns a value (i.e. not a call to a
           // method returning void).
           // Emit the default value for the type as a place holder so that the module compiles.
@@ -193,11 +194,10 @@ final class ExpressionTranspiler {
             expression -> {
               sourceBuilder.newLine();
               render(expression);
-              if (!isPrimitiveVoid(expression.getTypeDescriptor()) && expression != returnValue) {
-                // Remove the result of the expression from the stack.
-                sourceBuilder.newLine();
-                sourceBuilder.append("drop");
-              }
+              checkState(
+                  expression == returnValue || returnsVoid(expression),
+                  "%s inside MultiExpression should return void.",
+                  expression.getClass());
             });
         sourceBuilder.unindent();
         sourceBuilder.newLine();
@@ -257,13 +257,11 @@ final class ExpressionTranspiler {
         if (fragment.getInitializer() != null) {
           renderVariableAssignment(fragment.getVariable(), fragment.getInitializer());
           sourceBuilder.newLine();
-          sourceBuilder.append("drop");
-          sourceBuilder.newLine();
         }
       }
 
       private void renderVariableAssignment(Variable variable, Expression assignment) {
-        sourceBuilder.append("(local.tee " + environment.getDeclarationName(variable) + " ");
+        sourceBuilder.append("(local.set " + environment.getDeclarationName(variable) + " ");
         renderTypedExpression(variable.getTypeDescriptor(), assignment);
         sourceBuilder.append(")");
       }
@@ -293,6 +291,16 @@ final class ExpressionTranspiler {
         expression.accept(this);
       }
     }.render(expression);
+  }
+
+  public static boolean returnsVoid(Expression expression) {
+    // Even though per our Java based AST an assignment is an expression that returns the value of
+    // its rhs, the AST is transformed so that the resulting value is never used and the assignment
+    // can be safely considered not to produce a value.
+    boolean isAssignmentExpression =
+        expression instanceof BinaryExpression
+            && ((BinaryExpression) expression).getOperator() == BinaryOperator.ASSIGN;
+    return isPrimitiveVoid(expression.getTypeDescriptor()) || isAssignmentExpression;
   }
 
   // TODO(dramaix): remove when coercions and casting are in place.

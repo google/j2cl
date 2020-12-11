@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.backend.wasm;
 
+import static com.google.j2cl.transpiler.backend.wasm.ExpressionTranspiler.returnsVoid;
+
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.Block;
 import com.google.j2cl.transpiler.ast.Expression;
@@ -23,7 +25,6 @@ import com.google.j2cl.transpiler.ast.IfStatement;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.ThrowStatement;
-import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
 import java.util.Collection;
 
@@ -83,7 +84,7 @@ class StatementTranspiler {
             () -> {
               renderExpression(expression);
             });
-        if (!TypeDescriptors.isPrimitiveVoid(expression.getTypeDescriptor())) {
+        if (!returnsVoid(expression)) {
           builder.newLine();
           // Remove the result of the expression from the stack.
           builder.append("drop");

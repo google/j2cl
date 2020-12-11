@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Utility functions for expanding compound, increment and decrement expressions.
+ * Utility functions for expanding assignment, increment and decrement expressions.
  *
  * <p>For example:
  *
@@ -36,7 +36,7 @@ import java.util.List;
  * immutable emulation class or when a conversion operation (such as boxing or unboxing) needs to be
  * inserted between the numeric and assignment stages of an operation.
  */
-public class CompoundOperationsUtils {
+public class OperationExpansionUtils {
   public static Expression expandCompoundExpression(BinaryExpression binaryExpression) {
     checkArgument(binaryExpression.getOperator().isCompoundAssignment());
 
@@ -182,6 +182,33 @@ public class CompoundOperationsUtils {
             createLiteralOne(operand.getTypeDescriptor())));
   }
 
+  public static Expression expandAssignmentExpression(BinaryExpression binaryExpression) {
+    checkArgument(binaryExpression.getOperator() == BinaryOperator.ASSIGN);
+
+    List<VariableDeclarationFragment> temporaryVariables = new ArrayList<>();
+    Expression newLhs = decomposeLhs(binaryExpression.getLeftOperand(), temporaryVariables);
+
+    Variable returnedVariable;
+    Expression newRhs = binaryExpression.getRightOperand();
+    if (newLhs instanceof VariableReference) {
+      // No need to introduce a temporary variable for the result since even if the rhs modifies it,
+      // it will be overwritten by the assignment operation itself.
+      returnedVariable = ((VariableReference) newLhs).getTarget();
+    } else {
+      returnedVariable =
+          createTemporaryVariableDeclaration(
+              newLhs.getTypeDescriptor(),
+              "$value",
+              binaryExpression.getRightOperand(),
+              temporaryVariables);
+      newRhs = returnedVariable.createReference();
+    }
+    return constructReturnedExpression(
+        temporaryVariables,
+        BinaryExpression.Builder.asAssignmentTo(newLhs).setRightOperand(newRhs).build(),
+        returnedVariable.createReference());
+  }
+
   /** Returns number literal with value 1. */
   private static NumberLiteral createLiteralOne(TypeDescriptor typeDescriptor) {
     return new NumberLiteral(typeDescriptor.toUnboxedType(), 1);
@@ -231,4 +258,6 @@ public class CompoundOperationsUtils {
         .setExpression(expression)
         .build();
   }
+
+  private OperationExpansionUtils() {}
 }

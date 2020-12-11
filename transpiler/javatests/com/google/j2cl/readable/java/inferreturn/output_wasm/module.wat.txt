@@ -60,14 +60,12 @@
  (block $return.label
   (block
    ;; ArrayList<Object> list = inferreturn.InferReturn.newArrayList("foo");
-   (local.tee $list (call $newArrayList<java.lang.Object>:java.util.ArrayList@inferreturn.InferReturn (ref.null $java.lang.String)))
-   drop
+   (local.set $list (call $newArrayList<java.lang.Object>:java.util.ArrayList@inferreturn.InferReturn (ref.null $java.lang.String)))
    
    ;; inferreturn.InferReturn.acceptsArrayListOfObject(list);
    (call $acceptsArrayListOfObject<java.util.ArrayList>:void@inferreturn.InferReturn (local.get $list))
    ;; Object[] array = inferreturn.InferReturn.newArray("foo");
-   (local.tee $array (call $newArray<java.lang.Object>:java.lang.Object<>@inferreturn.InferReturn (ref.null $java.lang.String)))
-   drop
+   (local.set $array (call $newArray<java.lang.Object>:java.lang.Object<>@inferreturn.InferReturn (ref.null $java.lang.String)))
    
    ;; inferreturn.InferReturn.acceptsArrayOfObject(array);
    (call $acceptsArrayOfObject<java.lang.Object<>>:void@inferreturn.InferReturn (local.get $array)))

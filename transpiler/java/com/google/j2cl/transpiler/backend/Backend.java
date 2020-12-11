@@ -87,6 +87,7 @@ import com.google.j2cl.transpiler.passes.OptimizeAnonymousInnerClassesToFunction
 import com.google.j2cl.transpiler.passes.OptimizeAutoValue;
 import com.google.j2cl.transpiler.passes.RemoveNoopStatements;
 import com.google.j2cl.transpiler.passes.RemoveUnneededJsDocCasts;
+import com.google.j2cl.transpiler.passes.RewriteAssignmentExpressions;
 import com.google.j2cl.transpiler.passes.RewriteReferenceNotEquals;
 import com.google.j2cl.transpiler.passes.RewriteShortcutOperators;
 import com.google.j2cl.transpiler.passes.RewriteStringEquals;
@@ -272,12 +273,18 @@ public enum Backend {
           // Rewrite operations that do not have direct support in wasm into ones that have.
           new ExpandCompoundAssignments(/* expandAll */ true),
           new InsertErasureTypeSafetyCasts(),
-
           // Rewrite 'a != b' to '!(a == b)'
           new RewriteReferenceNotEquals(),
           new RewriteUnaryExpressions(),
           // Rewrite 'a || b' into 'a ? true : b' and 'a && b' into 'a ? b : false'
           new RewriteShortcutOperators(),
+
+          // Normalize multiexpressions before rewriting assignments so that whenever there is a
+          // multiexpression, the result is used.
+          new NormalizeMultiExpressions(),
+
+          // a = b => (a = b, a)
+          new RewriteAssignmentExpressions(),
 
           // Post-verifications
           new VerifySingleAstReference(),

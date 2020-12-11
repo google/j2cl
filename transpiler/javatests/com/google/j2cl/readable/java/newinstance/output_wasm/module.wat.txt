@@ -25,8 +25,7 @@
  (block $return.label
   (block
    ;; NewInstanceExpr a = new NewInstanceExpr.<init>();
-   (local.tee $a (call $<init><>:void@newinstance.NewInstanceExpr (struct.new_default_with_rtt $newinstance.NewInstanceExpr (global.get $newinstance.NewInstanceExpr.rtt)) ))
-   drop
+   (local.set $a (call $<init><>:void@newinstance.NewInstanceExpr (struct.new_default_with_rtt $newinstance.NewInstanceExpr (global.get $newinstance.NewInstanceExpr.rtt)) ))
    
   )
  )
