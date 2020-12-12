@@ -203,8 +203,6 @@
  (block $return.label
   (block
    ;; if (o instanceof Empty1) {
-   ;;   return ((EE) o);
-   ;; }
    (if (i32.const 0) (then (block
     ;; return ((EE) o);
     (local.set $return.value (ref.null $cast.CastGenerics.Empty1))
@@ -821,20 +819,11 @@
    ;; long tlong = 0;
    (local.set $tlong (i64.const 0))
    
-   ;; {
-   ;;   (tlong = fbyte);
-   ;;   (tlong = flong);
-   ;; }
    (block
     ;; (tlong = fbyte);
     (local.set $tlong (i64.const 0))
     ;; (tlong = flong);
     (local.set $tlong (local.get $flong)))
-   ;; {
-   ;;   (tlong = fint);
-   ;;   (tlong = (tlong + fint));
-   ;;   (tlong = (tlong << fint));
-   ;; }
    (block
     ;; (tlong = fint);
     (local.set $tlong (i64.const 0))
@@ -842,11 +831,6 @@
     (local.set $tlong (i64.add (local.get $tlong) (i64.const 0)))
     ;; (tlong = (tlong << fint));
     (local.set $tlong (i64.shl (local.get $tlong) (i64.const 0))))
-   ;; {
-   ;;   (tlong = (tlong + fchar));
-   ;;   (tlong = (tlong + flong));
-   ;;   (tlong = ((long) (tlong + ffloat)));
-   ;; }
    (block
     ;; (tlong = (tlong + fchar));
     (local.set $tlong (i64.add (local.get $tlong) (i64.const 0)))
@@ -854,36 +838,21 @@
     (local.set $tlong (i64.add (local.get $tlong) (local.get $flong)))
     ;; (tlong = ((long) (tlong + ffloat)));
     (local.set $tlong (i64.const 0)))
-   ;; {
-   ;;   (tlong = (flong * fint));
-   ;;   (tlong = (flong >> fint));
-   ;; }
    (block
     ;; (tlong = (flong * fint));
     (local.set $tlong (i64.mul (local.get $flong) (i64.const 0)))
     ;; (tlong = (flong >> fint));
     (local.set $tlong (i64.shr_s (local.get $flong) (i64.const 0))))
-   ;; {
-   ;;   (tlong = (flong + fshort));
-   ;;   (tlong = (flong + flong));
-   ;; }
    (block
     ;; (tlong = (flong + fshort));
     (local.set $tlong (i64.add (local.get $flong) (i64.const 0)))
     ;; (tlong = (flong + flong));
     (local.set $tlong (i64.add (local.get $flong) (local.get $flong))))
-   ;; {
-   ;;   (tlong = (flong << tlong));
-   ;;   (tlong = (tlong << flong));
-   ;; }
    (block
     ;; (tlong = (flong << tlong));
     (local.set $tlong (i64.shl (local.get $flong) (local.get $tlong)))
     ;; (tlong = (tlong << flong));
     (local.set $tlong (i64.shl (local.get $tlong) (local.get $flong))))
-   ;; {
-   ;;   (tlong = ((0 + 1) + 2));
-   ;; }
    (block
     ;; (tlong = ((0 + 1) + 2));
     (local.set $tlong (i64.add (i64.const 0) (i64.const 2)))))

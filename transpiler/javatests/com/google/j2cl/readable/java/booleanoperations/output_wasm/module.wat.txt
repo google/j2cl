@@ -112,44 +112,30 @@
    ;; (br = ((Boolean) ((ls = rs),ls)));
    (local.set $br (ref.null $java.lang.Boolean))
    ;; if ((ls == rs)) {
-   ;;   (r = true);
-   ;; }
    (if (i32.eq (local.get $ls) (local.get $rs)) (then (block
     ;; (r = true);
     (local.set $r (i32.const 1)))))
    ;; if ((ls != rs)) {
-   ;;   (r = true);
-   ;; }
    (if (i32.ne (local.get $ls) (local.get $rs)) (then (block
     ;; (r = true);
     (local.set $r (i32.const 1)))))
    ;; if ((ls ^ rs)) {
-   ;;   (r = true);
-   ;; }
    (if (i32.xor (local.get $ls) (local.get $rs)) (then (block
     ;; (r = true);
     (local.set $r (i32.const 1)))))
    ;; if ((ls & rs)) {
-   ;;   (r = true);
-   ;; }
    (if (i32.and (local.get $ls) (local.get $rs)) (then (block
     ;; (r = true);
     (local.set $r (i32.const 1)))))
    ;; if ((ls | rs)) {
-   ;;   (r = true);
-   ;; }
    (if (i32.or (local.get $ls) (local.get $rs)) (then (block
     ;; (r = true);
     (local.set $r (i32.const 1)))))
    ;; if ((ls) ? (rs) : (false)) {
-   ;;   (r = true);
-   ;; }
    (if (if (result i32) (local.get $ls) (then (local.get $rs)) (else (i32.const 0))) (then (block
     ;; (r = true);
     (local.set $r (i32.const 1)))))
    ;; if ((ls) ? (true) : (rs)) {
-   ;;   (r = true);
-   ;; }
    (if (if (result i32) (local.get $ls) (then (i32.const 1)) (else (local.get $rs))) (then (block
     ;; (r = true);
     (local.set $r (i32.const 1)))))

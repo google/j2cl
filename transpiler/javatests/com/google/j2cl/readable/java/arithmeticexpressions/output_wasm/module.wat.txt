@@ -220,10 +220,6 @@
    ;; int i = 0;
    (local.set $i (i32.const 0))
    
-   ;; {
-   ;;   int[] $array = ints,int $index = (int $value = i,(i = (i + 1)),$value);
-   ;;   ($array[$index] = ($array[$index] + 1));
-   ;; }
    (block
     ;; int[] $array = ints,int $index = (int $value = i,(i = (i + 1)),$value);
     (local.set $$array (local.get $ints))
@@ -238,10 +234,6 @@
     ;; ($array[$index] = ($array[$index] + 1));
     
    )
-   ;; {
-   ;;   int[] $array = ints,int $index = ((i = (i + 1)),i);
-   ;;   ($array[$index] = ($array[$index] + 1));
-   ;; }
    (block
     ;; int[] $array = ints,int $index = ((i = (i + 1)),i);
     (local.set $$array_1 (local.get $ints))
@@ -254,10 +246,6 @@
     ;; ($array[$index] = ($array[$index] + 1));
     
    )
-   ;; {
-   ;;   int[] $array = ints,int $index = (int $value = i,(i = (i + 1)),$value);
-   ;;   ($array[$index] = ($array[$index] / 1));
-   ;; }
    (block
     ;; int[] $array = ints,int $index = (int $value = i,(i = (i + 1)),$value);
     (local.set $$array_2 (local.get $ints))
@@ -281,10 +269,6 @@
    
    ;; (longs[0] = (longs[0] - 1));
    
-   ;; {
-   ;;   long[] $array = arithmeticexpressions.ArithmeticExpressions.getLongArray(),int $index = 0;
-   ;;   ($array[$index] = ($array[$index] + 1));
-   ;; }
    (block
     ;; long[] $array = arithmeticexpressions.ArithmeticExpressions.getLongArray(),int $index = 0;
     (local.set $$array_3 (call $getLongArray<>:long<>@arithmeticexpressions.ArithmeticExpressions ))
@@ -450,10 +434,6 @@
  (local $$qualifier (ref null $arithmeticexpressions.ArithmeticExpressions))
  (block $return.label
   (block
-   ;; {
-   ;;   ArithmeticExpressions $qualifier = arithmeticexpressions.ArithmeticExpressions.getWithSideEffect();
-   ;;   ($qualifier.intField = ($qualifier.intField + 5));
-   ;; }
    (block
     ;; ArithmeticExpressions $qualifier = arithmeticexpressions.ArithmeticExpressions.getWithSideEffect();
     (local.set $$qualifier (call $getWithSideEffect<>:arithmeticexpressions.ArithmeticExpressions@arithmeticexpressions.ArithmeticExpressions ))

@@ -42,19 +42,8 @@ class StatementTranspiler {
     statements.forEach(
         s -> {
           builder.newLine();
-          builder.appendln(renderAsSingleLineComments(s.toString()));
           renderStatement(s);
         });
-  }
-
-  /**
-   * Transforms a comment that can have multiple lines into multiple single line comments.
-   *
-   * <p>WASM does not have multiline comments, so comments that span multiple lines need to be
-   * rendered as multiple single line comments.
-   */
-  private static String renderAsSingleLineComments(String s) {
-    return ";; " + s.replace("\n", "\n;; ");
   }
 
   public void renderStatement(Statement statement) {
@@ -146,6 +135,18 @@ class StatementTranspiler {
       }
     }
 
+    renderFirstLineAsComment(statement);
     statement.accept(new SourceTransformer());
+  }
+
+  /** Render first line of the source code for {@code statement} as a WASM comment. * */
+  private void renderFirstLineAsComment(Statement s) {
+    if (s instanceof Block) {
+      return;
+    }
+    String[] parts = s.toString().split("\n", 2);
+    builder.append(";; ");
+    builder.append(parts[0]);
+    builder.newLine();
   }
 }

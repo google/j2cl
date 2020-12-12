@@ -40,8 +40,6 @@
  (block $return.label
   (block
    ;; if (!(foo == null)) {
-   ;;   return inferreturn.InferReturn.inferGeneric(foo);
-   ;; }
    (if (i32.eqz (ref.eq (local.get $foo) (ref.null $java.lang.Object))) (then (block
     ;; return inferreturn.InferReturn.inferGeneric(foo);
     (local.set $return.value (call $inferGeneric<java.lang.Object>:inferreturn.InferReturn@inferreturn.InferReturn (local.get $foo)))

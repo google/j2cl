@@ -26,12 +26,6 @@
  (block $return.label
   (block
    ;; try {
-   ;;   throw new ClassCastException.<init>();
-   ;; } catch ((NullPointerException|ClassCastException) e) {
-   ;;   throw e;
-   ;; } catch (RuntimeException r) {
-   ;;   (r = null);
-   ;; }
    ;; unimplemented statement TryStatement
    (block
     ;; throw new ClassCastException.<init>();
@@ -56,9 +50,6 @@
  (block $return.label
   (block
    ;; try {
-   ;;   throw new ClassCastException.<init>();
-   ;; } catch (Throwable e) {
-   ;; }
    ;; unimplemented statement TryStatement
    (block
     ;; throw new ClassCastException.<init>();
@@ -67,10 +58,6 @@
    )(block
    )
    ;; try {
-   ;;   throw new ClassCastException.<init>();
-   ;; } catch (Exception e) {
-   ;; } catch (Throwable e) {
-   ;; }
    ;; unimplemented statement TryStatement
    (block
     ;; throw new ClassCastException.<init>();
@@ -89,10 +76,6 @@
  (block $return.label
   (block
    ;; try {
-   ;;   throw new ClassCastException.<init>();
-   ;; } catch (Throwable e) {
-   ;;   throw e;
-   ;; }
    ;; unimplemented statement TryStatement
    (block
     ;; throw new ClassCastException.<init>();
@@ -112,9 +95,6 @@
  (block $return.label
   (block
    ;; try {
-   ;;   assert true;
-   ;; } finally {
-   ;; }
    ;; unimplemented statement TryStatement
    (block
     ;; assert true;
@@ -134,11 +114,6 @@
  (block $return.label
   (block
    ;; try (
-   ;;     ClosableThing thing = new ClosableThing.<init>();
-   ;;     ClosableThing thing2 = new ClosableThing.<init>()) {
-   ;;   throw new Exception.<init>();
-   ;; } catch (Exception e) {
-   ;; }
    ;; unimplemented statement TryStatement
    (block
     ;; throw new Exception.<init>();
@@ -166,11 +141,6 @@
    (local.set $thing2 (call $<init><>:void@trycatch.TryCatch.ClosableThing (struct.new_default_with_rtt $trycatch.TryCatch.ClosableThing (global.get $trycatch.TryCatch.ClosableThing.rtt)) ))
    
    ;; try (
-   ;;     ClosableThing $resource = thing;
-   ;;     ClosableThing $resource = thing2) {
-   ;;   throw new Exception.<init>();
-   ;; } catch (Exception e) {
-   ;; }
    ;; unimplemented statement TryStatement
    (block
     ;; throw new Exception.<init>();
@@ -189,13 +159,6 @@
  (block $return.label
   (block
    ;; try {
-   ;;   throw new Exception.<init>();
-   ;; } catch (Exception ae) {
-   ;;   try {
-   ;;     throw new Exception.<init>();
-   ;;   } catch (Exception ie) {
-   ;;   }
-   ;; }
    ;; unimplemented statement TryStatement
    (block
     ;; throw new Exception.<init>();
@@ -203,9 +166,6 @@
     unreachable
    )(block
     ;; try {
-    ;;   throw new Exception.<init>();
-    ;; } catch (Exception ie) {
-    ;; }
     ;; unimplemented statement TryStatement
     (block
      ;; throw new Exception.<init>();
