@@ -590,7 +590,7 @@ class ToStringRenderer {
       public boolean enterWhileStatement(WhileStatement whileStatement) {
         print("while (");
         accept(whileStatement.getConditionExpression());
-        print(");");
+        print(") ");
         accept(whileStatement.getBody());
         return false;
       }
