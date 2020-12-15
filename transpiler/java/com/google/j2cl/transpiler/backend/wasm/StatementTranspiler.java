@@ -53,7 +53,7 @@ class StatementTranspiler {
       public boolean enterStatement(Statement assertStatement) {
         builder.appendln(
             ";; unimplemented statement " + assertStatement.getClass().getSimpleName());
-        return true;
+        return false;
       }
 
       @Override
