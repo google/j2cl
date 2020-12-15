@@ -38,12 +38,12 @@ def _impl_j2wasm_library_rule(ctx):
     return [J2wasmInfo(
         _private_ = struct(
             transitive_srcs = java_provider.transitive_source_jars,
-            transitive_classpath = _get_transitive_classpath(java_provider, all_deps),
+            transitive_classpath = _get_transitive_classpath(all_deps),
             java_info = java_provider,
         ),
     )]
 
-def _get_transitive_classpath(java_provider, deps):
+def _get_transitive_classpath(deps):
     return depset(transitive = [d[J2wasmInfo]._private_.transitive_classpath for d in deps])
 
 def _to_java_providers(libs):
