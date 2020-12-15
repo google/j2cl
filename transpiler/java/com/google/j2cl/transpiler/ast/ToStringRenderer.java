@@ -96,7 +96,7 @@ class ToStringRenderer {
         print("break");
         if (breakStatement.getLabelReference() != null) {
           print(" ");
-          print(breakStatement.getLabelReference().getTarget().getName());
+          accept(breakStatement.getLabelReference());
         }
         print(";");
         return false;
@@ -175,7 +175,7 @@ class ToStringRenderer {
         print("continue");
         if (continueStatement.getLabelReference() != null) {
           print(" ");
-          print(continueStatement.getLabelReference().getTarget().getName());
+          accept(continueStatement.getLabelReference());
         }
         print(";");
         return false;
@@ -287,7 +287,7 @@ class ToStringRenderer {
 
       @Override
       public boolean enterLabeledStatement(LabeledStatement labeledStatement) {
-        print(labeledStatement.getLabel().getName());
+        accept(labeledStatement.getLabel());
         print(": ");
         accept(labeledStatement.getStatement());
         return false;
@@ -299,6 +299,18 @@ class ToStringRenderer {
           print("static ");
         }
         accept(initializerBlock.getBlock());
+        return false;
+      }
+
+      @Override
+      public boolean enterLabel(Label label) {
+        print(label.getName());
+        return false;
+      }
+
+      @Override
+      public boolean enterLabelReference(LabelReference labelReference) {
+        print(labelReference.getTarget().getName());
         return false;
       }
 
@@ -629,4 +641,6 @@ class ToStringRenderer {
     }.accept(node);
     return result.toString();
   }
+
+  private ToStringRenderer() {}
 }
