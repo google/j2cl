@@ -160,7 +160,7 @@ public class ImplementStaticInitialization extends NormalizationPass {
         type.getSourcePosition(), type.getTypeDescriptor(), staticInitializerBuilder);
 
     Block staticInitiliazerBlock = staticInitializerBuilder.build();
-    if (!staticInitiliazerBlock.isEmpty()) {
+    if (!staticInitiliazerBlock.isNoop()) {
       type.addStaticInitializerBlock(0, staticInitiliazerBlock);
     }
   }

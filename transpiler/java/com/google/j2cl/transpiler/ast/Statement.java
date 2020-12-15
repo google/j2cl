@@ -40,6 +40,10 @@ public abstract class Statement extends Node implements HasSourcePosition, Clone
     this.sourcePosition = checkNotNull(sourcePosition);
   }
 
+  public boolean isNoop() {
+    return false;
+  }
+
   @Override
   public abstract Statement clone();
 

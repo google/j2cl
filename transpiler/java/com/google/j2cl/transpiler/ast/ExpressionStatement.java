@@ -38,6 +38,11 @@ public class ExpressionStatement extends Statement {
   }
 
   @Override
+  public boolean isNoop() {
+    return !getExpression().hasSideEffects();
+  }
+
+  @Override
   public ExpressionStatement clone() {
     return new ExpressionStatement(getSourcePosition(), expression.clone());
   }

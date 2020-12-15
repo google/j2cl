@@ -37,8 +37,9 @@ public class Block extends Statement {
     return statements;
   }
 
-  public boolean isEmpty() {
-    return statements.stream().allMatch(s -> s instanceof EmptyStatement);
+  @Override
+  public boolean isNoop() {
+    return statements.stream().allMatch(Statement::isNoop);
   }
 
   @Override

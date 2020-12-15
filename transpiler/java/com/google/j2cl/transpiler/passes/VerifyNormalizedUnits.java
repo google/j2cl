@@ -47,7 +47,7 @@ public class VerifyNormalizedUnits extends NormalizationPass {
           @Override
           public void exitMethod(Method method) {
             // All native methods should be empty.
-            checkState(!method.isNative() || method.getBody().isEmpty());
+            checkState(!method.isNative() || method.getBody().getStatements().isEmpty());
           }
 
           @Override

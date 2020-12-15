@@ -15,14 +15,14 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import com.google.j2cl.transpiler.ast.AbstractRewriter;
+import com.google.j2cl.transpiler.ast.AbstractVisitor;
+import com.google.j2cl.transpiler.ast.Block;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
-import com.google.j2cl.transpiler.ast.EmptyStatement;
-import com.google.j2cl.transpiler.ast.ExpressionStatement;
 import com.google.j2cl.transpiler.ast.Statement;
+import com.google.j2cl.transpiler.ast.SwitchCase;
 
 /**
- * Removes trivial statements that have no effect.
+ * Removes statements that have no effect.
  *
  * <p>Some of the normalization passes might leave statements that are empty or just a literal, this
  * pass performs the cleanup.
@@ -31,22 +31,15 @@ public class RemoveNoopStatements extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(
-        new AbstractRewriter() {
+        new AbstractVisitor() {
           @Override
-          public Statement rewriteEmptyStatement(EmptyStatement emptyStatement) {
-            // Remove empty statements.
-            return null;
+          public void exitBlock(Block block) {
+            block.getStatements().removeIf(Statement::isNoop);
           }
 
           @Override
-          public Statement rewriteExpressionStatement(ExpressionStatement expressionStatement) {
-            if (!expressionStatement.getExpression().hasSideEffects()) {
-              // Remove statements that are just an expression that does not have side effects.
-              // This removes some statements that are added by other normalization passes when
-              // rewriting expressions.
-              return null;
-            }
-            return expressionStatement;
+          public void exitSwitchCase(SwitchCase switchCase) {
+            switchCase.getStatements().removeIf(Statement::isNoop);
           }
         });
   }

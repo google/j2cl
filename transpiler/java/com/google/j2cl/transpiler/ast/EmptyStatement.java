@@ -30,6 +30,11 @@ public class EmptyStatement extends Statement {
   }
 
   @Override
+  public boolean isNoop() {
+    return true;
+  }
+
+  @Override
   public EmptyStatement clone() {
     EmptyStatement emptyStatement = new EmptyStatement(getSourcePosition());
     return emptyStatement;

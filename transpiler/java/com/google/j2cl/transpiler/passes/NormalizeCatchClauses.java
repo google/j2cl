@@ -174,7 +174,7 @@ public class NormalizeCatchClauses extends NormalizationPass {
 
   private static Statement transformCatchBody(
       Block catchBody, Variable catchVariable, Variable exceptionVariable) {
-    if (catchBody.isEmpty()) {
+    if (catchBody.isNoop()) {
       return new EmptyStatement(catchBody.getSourcePosition());
     }
 
