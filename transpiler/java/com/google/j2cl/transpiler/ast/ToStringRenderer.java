@@ -192,12 +192,6 @@ class ToStringRenderer {
       }
 
       @Override
-      public boolean enterEmptyStatement(EmptyStatement emptyStatement) {
-        print(";");
-        return false;
-      }
-
-      @Override
       public boolean enterExpression(Expression expression) {
         print("<expr>");
         return false;

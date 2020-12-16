@@ -47,7 +47,6 @@ import com.google.j2cl.transpiler.ast.ConditionalExpression;
 import com.google.j2cl.transpiler.ast.ContinueStatement;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.DoWhileStatement;
-import com.google.j2cl.transpiler.ast.EmptyStatement;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Expression.Associativity;
 import com.google.j2cl.transpiler.ast.ExpressionStatement;
@@ -677,7 +676,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         case ASTNode.DO_STATEMENT:
           return convert((org.eclipse.jdt.core.dom.DoStatement) statement);
         case ASTNode.EMPTY_STATEMENT:
-          return new EmptyStatement(getSourcePosition(statement));
+          return Statement.createNoopStatement();
         case ASTNode.EXPRESSION_STATEMENT:
           return convert((org.eclipse.jdt.core.dom.ExpressionStatement) statement);
         case ASTNode.FOR_STATEMENT:

@@ -31,7 +31,6 @@ import com.google.j2cl.transpiler.ast.BreakStatement;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.ConditionalExpression;
 import com.google.j2cl.transpiler.ast.ContinueStatement;
-import com.google.j2cl.transpiler.ast.EmptyStatement;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.ExpressionStatement;
 import com.google.j2cl.transpiler.ast.ExpressionWithComment;
@@ -543,7 +542,6 @@ public final class ConversionContextVisitor extends AbstractRewriter {
         || statement instanceof ContinueStatement
         || statement instanceof TryStatement
         || statement instanceof ThrowStatement
-        || statement instanceof EmptyStatement
         || statement instanceof LabeledStatement
         || statement instanceof SynchronizedStatement) {
       // These statements do not need rewriting.

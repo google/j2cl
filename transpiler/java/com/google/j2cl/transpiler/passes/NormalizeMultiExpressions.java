@@ -20,7 +20,6 @@ import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.Block;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
-import com.google.j2cl.transpiler.ast.EmptyStatement;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.ExpressionStatement;
 import com.google.j2cl.transpiler.ast.Method;
@@ -70,7 +69,7 @@ public class NormalizeMultiExpressions extends NormalizationPass {
 
         if (expressions.isEmpty()) {
           // No expressions with side effects in this top level multexpression, remove completely.
-          return new EmptyStatement(statement.getSourcePosition());
+          return Statement.createNoopStatement();
         } else if (expressions.size() == 1) {
           // Only one expression with side effects in this top level multiexpression, make it
           // an expression statement.

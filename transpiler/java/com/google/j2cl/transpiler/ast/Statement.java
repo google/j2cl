@@ -51,4 +51,8 @@ public abstract class Statement extends Node implements HasSourcePosition, Clone
   public Node accept(Processor processor) {
     return Visitor_Statement.visit(processor, this);
   }
+
+  public static Statement createNoopStatement() {
+    return Block.newBuilder().build();
+  }
 }

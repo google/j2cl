@@ -23,7 +23,6 @@ import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.Block;
 import com.google.j2cl.transpiler.ast.CatchClause;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
-import com.google.j2cl.transpiler.ast.EmptyStatement;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.ExpressionStatement;
 import com.google.j2cl.transpiler.ast.IfStatement;
@@ -175,7 +174,7 @@ public class NormalizeCatchClauses extends NormalizationPass {
   private static Statement transformCatchBody(
       Block catchBody, Variable catchVariable, Variable exceptionVariable) {
     if (catchBody.isNoop()) {
-      return new EmptyStatement(catchBody.getSourcePosition());
+      return catchBody;
     }
 
     ExpressionStatement assignment =

@@ -41,7 +41,6 @@ import com.google.j2cl.transpiler.ast.ConditionalExpression;
 import com.google.j2cl.transpiler.ast.ContinueStatement;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.DoWhileStatement;
-import com.google.j2cl.transpiler.ast.EmptyStatement;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.ExpressionStatement;
 import com.google.j2cl.transpiler.ast.Field;
@@ -758,7 +757,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       case DO_WHILE_LOOP:
         return convertDoWhileLoop((JCDoWhileLoop) jcStatement);
       case EMPTY_STATEMENT:
-        return new EmptyStatement(getSourcePosition(jcStatement));
+        return Statement.createNoopStatement();
       case ENHANCED_FOR_LOOP:
         return convertEnhancedForLoop((JCEnhancedForLoop) jcStatement);
       case EXPRESSION_STATEMENT:
