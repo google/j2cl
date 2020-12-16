@@ -26,8 +26,8 @@ if [[ $1 == "CI" ]]; then
   bazel test transpiler/javatests/com/google/j2cl/integration/...
 
   # Build Hello World sample in its own workspace
-  (cd samples/helloworld && bazel build src/main/...)
+  cd samples/helloworld && bazel build src/main/...
 
   # Build Guave sample in its own workspace
-  (cd samples/guava && bazel build src/main/...)
+  cd samples/guava && bazel build src/main/...
 fi
