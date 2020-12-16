@@ -7,8 +7,9 @@ This is an experimental tool and should not be used.
 load(":j2wasm_library.bzl", "J2wasmInfo")
 
 def _impl_j2wasm_application(ctx):
-    srcs = _get_transitive_srcs(ctx.attr.deps)
-    classpath = _get_transitive_classpath(ctx.attr.deps)
+    deps = ctx.attr.deps + [ctx.attr._jre]
+    srcs = _get_transitive_srcs(deps)
+    classpath = _get_transitive_classpath(deps)
 
     args = ctx.actions.args()
     args.use_param_file("@%s", use_always = True)
@@ -85,6 +86,7 @@ j2wasm_application = rule(
     attrs = {
         "deps": attr.label_list(providers = [J2wasmInfo]),
         "entry_points": attr.string_list(),
+        "_jre": attr.label(default = Label("//build_defs/internal_do_not_use:j2wasm_jre")),
         "_j2cl_transpiler": attr.label(
             default = Label(
                 "//build_defs/internal_do_not_use:BazelJ2clBuilder",

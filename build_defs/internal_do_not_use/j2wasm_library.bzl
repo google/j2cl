@@ -52,7 +52,7 @@ def _get_transitive_classpath(deps):
 def _to_java_providers(libs):
     return [lib[J2wasmInfo]._private_.java_info for lib in libs]
 
-_j2wasm_library_rule = rule(
+j2wasm_library = rule(
     implementation = _impl_j2wasm_library_rule,
     attrs = J2WASM_LIB_ATTRS,
     fragments = ["java"],
@@ -61,21 +61,6 @@ _j2wasm_library_rule = rule(
         "srcjar": "lib%{name}-src.jar",
     },
 )
-
-def j2wasm_library(name, **kwargs):
-    """j2wasm_library build macro."""
-    args = dict(kwargs)
-
-    # If this is JRE itself, don't synthesize the JRE dep.
-    target_name = "//" + native.package_name() + ":" + name
-    if args.get("srcs") and target_name != "//jre/java:jre-j2wasm":
-        jre = Label("//jre/java:jre-j2wasm", relative_to_caller_repository = False)
-        args["deps"] = (args.get("deps") or []) + [jre]
-
-    _j2wasm_library_rule(
-        name = name,
-        **args
-    )
 
 # Helpers methods
 def to_j2wasm_name(name):

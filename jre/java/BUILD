@@ -8,11 +8,7 @@ load(":package_sources.bzl", "package_sources")
 load(":jdk_system.bzl", "jdk_system")
 
 package(
-    default_visibility = [
-        "//:__pkg__",
-        "//jre/javatests:__pkg__",
-        "//transpiler/javatests:__subpackages__",
-    ],
+    default_visibility = ["//transpiler/javatests:__subpackages__"],
     licenses = ["notice"],  # Apache 2.0
 )
 
@@ -74,6 +70,7 @@ j2wasm_library(
         ":jre_java_files",
     ],
     javacopts = JRE_JAVAC_OPTS,
+    visibility = ["//build_defs/internal_do_not_use:__pkg__"],
     deps = [
         "//third_party:gwt-javaemul-internal-annotations-j2wasm",
         "//third_party:gwt-jsinterop-annotations-j2wasm",
@@ -87,6 +84,10 @@ j2cl_library(
         ":jre_native_files",
     ],
     javacopts = JRE_JAVAC_OPTS,
+    visibility = [
+        "//:__pkg__",
+        "//transpiler/javatests:__subpackages__",
+    ],
     deps = [
         "//third_party:closure_math_long",
         "//third_party:closure_reflect",
@@ -101,6 +102,7 @@ java_library(
     name = "jre_bootclasspath",
     srcs = [":jre_java_files"],
     javacopts = JRE_JAVAC_OPTS,
+    visibility = ["//transpiler/javatests:__subpackages__"],
     deps = [
         "//third_party:gwt-javaemul-internal-annotations",
         "//third_party:gwt-jsinterop-annotations",

@@ -42,6 +42,11 @@ alias(
     actual = "//jre/java:j2cl_java_toolchain",
 )
 
+alias(
+    name = "j2wasm_jre",
+    actual = "//jre/java:jre-j2wasm",
+)
+
 # ***************************************************
 # JUnit library related
 # ***************************************************
