@@ -25,6 +25,8 @@
  (local $count i32)
  (local $l i64)
  (local $count_1 i64)
+ (local $a i32)
+ (local $b i32)
  (block $return.label
   (block
    (block
@@ -80,7 +82,59 @@
        ;; continue $LOOP;
        (br $$LOOP_1)
        
-      )))))
+      ))))
+   ;; boolean a = false;
+   (local.set $a (i32.const 0))
+   
+   ;; $BREAK: $LOOP: while (true) {
+   (block $$BREAK_2 
+    ;; $LOOP: while (true) {
+    (loop $$LOOP_2 
+     (block
+      ;; if (!((a = (a | true)),a)) break $BREAK;
+      (if (i32.eqz (block
+       (result i32)
+       (local.set $a (i32.or (local.get $a) (i32.const 1)))
+       (local.get $a)
+      )) (then ;; break $BREAK;
+      (br $$BREAK_2)
+      ))
+      ;; $CONTINUE: {
+      (block $$CONTINUE_2 
+       (block
+       ))
+      (block
+      )
+      ;; continue $LOOP;
+      (br $$LOOP_2)
+      
+     )))
+   ;; boolean b = false;
+   (local.set $b (i32.const 0))
+   
+   ;; $BREAK: $LOOP: while (true) {
+   (block $$BREAK_3 
+    ;; $LOOP: while (true) {
+    (loop $$LOOP_3 
+     (block
+      ;; if (!((b = a),b)) break $BREAK;
+      (if (i32.eqz (block
+       (result i32)
+       (local.set $b (local.get $a))
+       (local.get $b)
+      )) (then ;; break $BREAK;
+      (br $$BREAK_3)
+      ))
+      ;; $CONTINUE: {
+      (block $$CONTINUE_3 
+       (block
+       ))
+      (block
+      )
+      ;; continue $LOOP;
+      (br $$LOOP_3)
+      
+     ))))
  )
 )
 
