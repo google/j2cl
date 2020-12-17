@@ -315,6 +315,21 @@ public class AstUtils {
     return methodCall.getTarget().isMemberOf(targetTypeDescriptor);
   }
 
+  /** Returns {@code true} if the expression result is used by the parent. */
+  public static boolean isExpressionResultUsed(Expression expression, Object parent) {
+    if (parent instanceof ExpressionStatement) {
+      return false;
+    } else if (parent instanceof TryStatement) {
+      return false;
+    } else if (parent instanceof MultiExpression) {
+      return expression == Iterables.getLast(((MultiExpression) parent).getExpressions());
+    } else if (parent instanceof ForStatement) {
+      return expression == ((ForStatement) parent).getConditionExpression();
+    } else {
+      return true;
+    }
+  }
+
   /**
    * See JLS 5.2.
    *

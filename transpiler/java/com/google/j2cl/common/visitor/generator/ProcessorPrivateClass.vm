@@ -30,6 +30,20 @@ abstract class ProcessorPrivate implements Processor {
 #end
 #end
 
+  private Deque<Object> stackOfParent = new ArrayDeque<Object>();
+
+  public Object getParent() {
+    return stackOfParent.peek();
+  }
+
+  final void pushParent(Object p) {
+    stackOfParent.push(p);
+  }
+
+  final void popParent() {
+    stackOfParent.pop();
+  }
+
 #foreach($clazz in $classes)
   abstract boolean shouldProcess${clazz.SimpleName}(${clazz.SimpleName} ${clazz.ParameterName});
 #end

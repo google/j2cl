@@ -15,7 +15,9 @@ public class Visitor_${className} {
 
     try {
       if (processorImpl.shouldProcess${className}(${visitableClass.ParameterName})) {
+        processorImpl.pushParent(${visitableClass.ParameterName});
         visitMembers(processorImpl, ${visitableClass.ParameterName});
+        processorImpl.popParent();
       }
       result = processorImpl.postProcess${className}(${visitableClass.ParameterName});
     } catch (RuntimeException|Error e) {

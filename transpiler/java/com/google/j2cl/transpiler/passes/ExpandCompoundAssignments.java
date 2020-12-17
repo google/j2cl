@@ -15,14 +15,12 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import com.google.common.collect.ImmutableList;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
+import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.BinaryOperator;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
-import com.google.j2cl.transpiler.ast.ExpressionStatement;
-import com.google.j2cl.transpiler.ast.ForStatement;
 import com.google.j2cl.transpiler.ast.OperationExpansionUtils;
 import com.google.j2cl.transpiler.ast.PostfixExpression;
 import com.google.j2cl.transpiler.ast.PrefixExpression;
@@ -55,24 +53,13 @@ public class ExpandCompoundAssignments extends NormalizationPass {
         // result value is not needed.
         new AbstractRewriter() {
           @Override
-          public ExpressionStatement rewriteExpressionStatement(
-              ExpressionStatement expressionStatement) {
-            return normalizePostfixExpression(expressionStatement.getExpression())
-                .makeStatement(expressionStatement.getSourcePosition());
-          }
-
-          @Override
-          public ForStatement rewriteForStatement(ForStatement forStatement) {
-
-            return ForStatement.Builder.from(forStatement)
-                .setInitializers(
-                    forStatement.getInitializers().stream()
-                        .map(ExpandCompoundAssignments.this::normalizePostfixExpression)
-                        .collect(ImmutableList.toImmutableList()))
-                .setUpdates(
-                    forStatement.getUpdates().stream()
-                        .map(ExpandCompoundAssignments.this::normalizePostfixExpression)
-                        .collect(ImmutableList.toImmutableList()))
+          public Expression rewritePostfixExpression(PostfixExpression expression) {
+            if (AstUtils.isExpressionResultUsed(expression, getParent())
+                || !needsExpansion(expression)) {
+              return expression;
+            }
+            return PrefixExpression.Builder.from(expression)
+                .setOperator(expression.getOperator().toPrefixOperator())
                 .build();
           }
         });
@@ -159,19 +146,5 @@ public class ExpandCompoundAssignments extends NormalizationPass {
     }
 
     return true;
-  }
-
-  /** Normalizes expandable postfix expressions into the corresponding prefix expressions. */
-  private Expression normalizePostfixExpression(Expression expression) {
-    if (expression instanceof PostfixExpression) {
-      PostfixExpression postfixExpression = (PostfixExpression) expression;
-      if (needsExpansion(postfixExpression)) {
-        // Only normalize the ones that are expanded.
-        return PrefixExpression.Builder.from(postfixExpression)
-            .setOperator(postfixExpression.getOperator().toPrefixOperator())
-            .build();
-      }
-    }
-    return expression;
   }
 }
