@@ -24,5 +24,11 @@ public class ForStatement {
     for (long l = 0, count = 0; l < 100; l++, l++) {
       count++;
     }
+
+    boolean a = false;
+    for (; a |= true; ) {}
+
+    boolean b = false;
+    for (; b = a; ) {}
   }
 }
