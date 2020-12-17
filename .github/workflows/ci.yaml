@@ -1,0 +1,85 @@
+# Copyright 2020 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Format reference: https://docs.github.com/en/actions/reference
+
+name: build and tests
+
+# https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#on
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  schedule:
+    # Daily at 12pm UTC
+    - cron: '0 12 * * *'
+
+env:
+  BAZELISK_VERSION: '1.5.0'
+  BAZELISK_BIN: "${HOME}/bin/bazelisk"
+
+# https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobs
+jobs:
+  build-and-test:
+    name: Build and Test
+
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            bazelisk-os: linux
+          - os: macos-latest
+            bazelisk-os: darwin
+
+    steps:
+      - name: Checkout current commit
+        uses: actions/checkout@v2
+
+      - name: Mount bazelisk binary cache
+        id: bazelisk-cache
+        uses: actions/cache@v2
+        with:
+          path: ${HOME}/bin/bazelisk
+          key: ${{ runner.os }}-bazelisk-${{ env.BAZELISK_VERSION }}
+
+      - name: Install bazelisk
+        if: steps.bazelisk-cache.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p ${BAZELISK_BIN}
+          curl -L "https://github.com/bazelbuild/bazelisk/releases/download/${BAZELISK_VERSION}/bazelisk-${{ matrix.bazelisk-os }}-amd64" -o ${BAZELISK_BIN}/bazel
+          chmod +x "${BAZELISK_BIN}/bazel"
+
+      - name: Alias bazel
+        run:  alias bazel="${BAZELISK_BIN}/bazel"
+
+      - name: Mount bazel cache
+        uses: actions/cache@v2
+        with:
+          path: "${HOME}/.cache/bazel"
+          key: ${{ runner.os }}-bazel
+
+      - name: Configure bazel
+        run: |
+          echo "startup --output_base=$HOME/.cache/bazel" >> .bazelrc
+          # Avoid progress indicators that can blow out log which makes using WEB UI difficult
+          echo "common --noshow_progress" >> .bazelrc
+          echo "common --noshow_loading_progress" >> .bazelrc
+          # This is so we understand failures better
+          echo "build --verbose_failures" >> .bazelrc
+
+      - name: Build and Test
+        run: ./build_test.sh CI
