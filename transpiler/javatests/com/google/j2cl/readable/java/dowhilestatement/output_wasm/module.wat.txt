@@ -1,0 +1,50 @@
+;;; Code for dowhilestatement.DoWhileStatement
+
+;;; CLASS  DoWhileStatement
+
+(type $dowhilestatement.DoWhileStatement (struct
+))
+
+;;; DoWhileStatement()
+(func $<init><>:void@dowhilestatement.DoWhileStatement
+ (param $this (ref null $dowhilestatement.DoWhileStatement))
+ (result (ref null $dowhilestatement.DoWhileStatement))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void DoWhileStatement.test()
+(func $test<>:void@dowhilestatement.DoWhileStatement
+ (param $this (ref null $java.lang.Object))
+ (local $count i32)
+ (block $return.label
+  (block
+   ;; int count = 0;
+   (local.set $count (i32.const 0))
+   
+   ;; $BREAK: $LOOP: while (true) {
+   (block $$BREAK 
+    ;; $LOOP: while (true) {
+    (loop $$LOOP 
+     (block
+      ;; $CONTINUE: {
+      (block $$CONTINUE 
+       (block
+        ;; (count = (count + 1));
+        (local.set $count (i32.add (local.get $count) (i32.const 1)))))
+      ;; if (!(count < 5)) break $BREAK;
+      (if (i32.eqz (i32.lt_s (local.get $count) (i32.const 5))) (then ;; break $BREAK;
+      (br $$BREAK)
+      ))
+      ;; continue $LOOP;
+      (br $$LOOP)
+      
+     ))))
+ )
+)
+

@@ -1,0 +1,72 @@
+;;; Code for labelstatement.LabeledStatement
+
+;;; CLASS  LabeledStatement
+
+(type $labelstatement.LabeledStatement (struct
+))
+
+;;; LabeledStatement()
+(func $<init><>:void@labelstatement.LabeledStatement
+ (param $this (ref null $labelstatement.LabeledStatement))
+ (result (ref null $labelstatement.LabeledStatement))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void LabeledStatement.test()
+(func $test<>:void@labelstatement.LabeledStatement
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; $BREAK: $LOOP: while (true) {
+   (block $$BREAK 
+    ;; $LOOP: while (true) {
+    (loop $$LOOP 
+     (block
+      ;; if (!true) break $BREAK;
+      (if (i32.eqz (i32.const 1)) (then ;; break $BREAK;
+      (br $$BREAK)
+      ))
+      ;; LABEL: {
+      (block $LABEL 
+       (block
+        ;; break $BREAK;
+        (br $$BREAK)
+        
+       ))
+      (block
+      )
+      ;; continue $LOOP;
+      (br $$LOOP)
+      
+     )))
+   ;; $BREAK: $LOOP: while (true) {
+   (block $$BREAK_1 
+    ;; $LOOP: while (true) {
+    (loop $$LOOP_1 
+     (block
+      ;; if (!true) break $BREAK;
+      (if (i32.eqz (i32.const 1)) (then ;; break $BREAK;
+      (br $$BREAK_1)
+      ))
+      ;; LABEL1: {
+      (block $LABEL1 
+       (block
+        ;; break LABEL1;
+        (br $LABEL1)
+        
+       ))
+      (block
+      )
+      ;; continue $LOOP;
+      (br $$LOOP_1)
+      
+     ))))
+ )
+)
+

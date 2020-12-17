@@ -1,0 +1,50 @@
+;;; Code for continuestatement.ContinueStatement
+
+;;; CLASS  ContinueStatement
+
+(type $continuestatement.ContinueStatement (struct
+))
+
+;;; ContinueStatement()
+(func $<init><>:void@continuestatement.ContinueStatement
+ (param $this (ref null $continuestatement.ContinueStatement))
+ (result (ref null $continuestatement.ContinueStatement))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void ContinueStatement.test()
+(func $test<>:void@continuestatement.ContinueStatement
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; $BREAK: $LOOP: while (true) {
+   (block $$BREAK 
+    ;; $LOOP: while (true) {
+    (loop $$LOOP 
+     (block
+      ;; if (!true) break $BREAK;
+      (if (i32.eqz (i32.const 1)) (then ;; break $BREAK;
+      (br $$BREAK)
+      ))
+      ;; $CONTINUE: {
+      (block $$CONTINUE 
+       (block
+        ;; break $CONTINUE;
+        (br $$CONTINUE)
+        
+       ))
+      (block
+      )
+      ;; continue $LOOP;
+      (br $$LOOP)
+      
+     ))))
+ )
+)
+

@@ -67,5 +67,17 @@ public class Main {
       unreachable = false;
     }
     assertTrue(unreachable);
+
+    count = 0;
+    BREAK:
+    CONTINUE:
+    for (; ; count++) {
+      if (count > 1) {
+        break BREAK;
+      }
+
+      continue CONTINUE;
+    }
+    assertTrue(count == 2);
   }
 }

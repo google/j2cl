@@ -15,16 +15,24 @@
  */
 package com.google.j2cl.transpiler.backend.wasm;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
 import static com.google.j2cl.transpiler.backend.wasm.ExpressionTranspiler.returnsVoid;
 
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.Block;
+import com.google.j2cl.transpiler.ast.BooleanLiteral;
+import com.google.j2cl.transpiler.ast.BreakStatement;
+import com.google.j2cl.transpiler.ast.ContinueStatement;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.ExpressionStatement;
 import com.google.j2cl.transpiler.ast.IfStatement;
+import com.google.j2cl.transpiler.ast.LabelReference;
+import com.google.j2cl.transpiler.ast.LabeledStatement;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.ThrowStatement;
+import com.google.j2cl.transpiler.ast.WhileStatement;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
 import java.util.Collection;
 
@@ -66,6 +74,23 @@ class StatementTranspiler {
       }
 
       @Override
+      public boolean enterBreakStatement(BreakStatement breakStatement) {
+        renderBranchStatement(breakStatement.getLabelReference());
+        return false;
+      }
+
+      @Override
+      public boolean enterContinueStatement(ContinueStatement continueStatement) {
+        renderBranchStatement(continueStatement.getLabelReference());
+        return false;
+      }
+
+      private void renderBranchStatement(LabelReference labelReference) {
+        checkNotNull(labelReference);
+        builder.appendln("(br " + environment.getDeclarationName(labelReference.getTarget()) + ")");
+      }
+
+      @Override
       public boolean enterExpressionStatement(ExpressionStatement expressionStatement) {
         Expression expression = expressionStatement.getExpression();
         builder.emitWithMapping(
@@ -96,6 +121,24 @@ class StatementTranspiler {
           builder.append(")");
         }
         builder.append(")");
+        return false;
+      }
+
+      @Override
+      public boolean enterLabeledStatement(LabeledStatement labeledStatement) {
+        builder.openParens();
+        String label = environment.getDeclarationName(labeledStatement.getLabel());
+
+        if (labeledStatement.getStatement() instanceof WhileStatement) {
+          WhileStatement whileStatement = (WhileStatement) labeledStatement.getStatement();
+          checkState(whileStatement.getConditionExpression().equals(BooleanLiteral.get(true)));
+          builder.appendln("loop " + label + " ");
+          renderStatement(((WhileStatement) labeledStatement.getStatement()).getBody());
+        } else {
+          builder.appendln("block " + label + " ");
+          renderStatement(labeledStatement.getStatement());
+        }
+        builder.closeParens();
         return false;
       }
 

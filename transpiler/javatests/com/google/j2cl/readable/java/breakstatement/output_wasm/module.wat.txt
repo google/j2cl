@@ -1,0 +1,50 @@
+;;; Code for breakstatement.BreakStatement
+
+;;; CLASS  BreakStatement
+
+(type $breakstatement.BreakStatement (struct
+))
+
+;;; BreakStatement()
+(func $<init><>:void@breakstatement.BreakStatement
+ (param $this (ref null $breakstatement.BreakStatement))
+ (result (ref null $breakstatement.BreakStatement))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void BreakStatement.test()
+(func $test<>:void@breakstatement.BreakStatement
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; $BREAK: $LOOP: while (true) {
+   (block $$BREAK 
+    ;; $LOOP: while (true) {
+    (loop $$LOOP 
+     (block
+      ;; if (!true) break $BREAK;
+      (if (i32.eqz (i32.const 1)) (then ;; break $BREAK;
+      (br $$BREAK)
+      ))
+      ;; $CONTINUE: {
+      (block $$CONTINUE 
+       (block
+        ;; break $BREAK;
+        (br $$BREAK)
+        
+       ))
+      (block
+      )
+      ;; continue $LOOP;
+      (br $$LOOP)
+      
+     ))))
+ )
+)
+

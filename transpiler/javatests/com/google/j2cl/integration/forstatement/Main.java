@@ -50,5 +50,15 @@ public class Main {
     for (count = 0; count < 10; count++) ;
 
     assertTrue(count == 10);
+
+    OUTER:
+    for (int i = 0; i < 1; count++) {
+      for (; ; count++) {
+        i++;
+        continue OUTER;
+      }
+    }
+
+    assertTrue(count == 11);
   }
 }
