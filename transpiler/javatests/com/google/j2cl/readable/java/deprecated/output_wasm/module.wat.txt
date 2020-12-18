@@ -2,9 +2,9 @@
 
 ;;; CLASS  DeprecatedExample
 
-(global $DEPRECATED_STATIC_FIELD@deprecated.DeprecatedExample (ref null $java.lang.String) (ref.null $java.lang.String))
+(global $DEPRECATED_STATIC_FIELD@deprecated.DeprecatedExample (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 (type $deprecated.DeprecatedExample (struct
- (field $deprecatedInstanceField@deprecated.DeprecatedExample (ref null $java.lang.String))
+ (field $deprecatedInstanceField@deprecated.DeprecatedExample (mut (ref null $java.lang.String)))
 ))
 
 ;;; void DeprecatedExample.deprecatedStaticMethod(Object someObject)
@@ -51,10 +51,10 @@
 
 ;;; ENUM  DeprecatedEnum
 
-(global $A_VALUE@deprecated.DeprecatedExample.DeprecatedEnum (ref null $deprecated.DeprecatedExample.DeprecatedEnum) (ref.null $deprecated.DeprecatedExample.DeprecatedEnum))
+(global $A_VALUE@deprecated.DeprecatedExample.DeprecatedEnum (mut (ref null $deprecated.DeprecatedExample.DeprecatedEnum)) (ref.null $deprecated.DeprecatedExample.DeprecatedEnum))
 (type $deprecated.DeprecatedExample.DeprecatedEnum (struct
- (field $name@java.lang.Enum (ref null $java.lang.String))
- (field $ordinal@java.lang.Enum i32)
+ (field $name@java.lang.Enum (mut (ref null $java.lang.String)))
+ (field $ordinal@java.lang.Enum (mut i32))
 ))
 
 ;;; DeprecatedEnum()
@@ -72,7 +72,7 @@
 
 ;;; ENUM  DeprecatedJsEnum
 
-(global $A_VALUE@deprecated.DeprecatedExample.DeprecatedJsEnum (ref null $deprecated.DeprecatedExample.DeprecatedJsEnum) (ref.null $deprecated.DeprecatedExample.DeprecatedJsEnum))
+(global $A_VALUE@deprecated.DeprecatedExample.DeprecatedJsEnum (mut (ref null $deprecated.DeprecatedExample.DeprecatedJsEnum)) (ref.null $deprecated.DeprecatedExample.DeprecatedJsEnum))
 (type $deprecated.DeprecatedExample.DeprecatedJsEnum (struct
 ))
 

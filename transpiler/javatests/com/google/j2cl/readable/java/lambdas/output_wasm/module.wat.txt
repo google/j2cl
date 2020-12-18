@@ -2,9 +2,9 @@
 
 ;;; CLASS  Lambdas
 
-(global $identityFunction@lambdas.Lambdas (ref null $lambdas.Lambdas.IdentityFunction) (ref.null $lambdas.Lambdas.IdentityFunction))
+(global $identityFunction@lambdas.Lambdas (mut (ref null $lambdas.Lambdas.IdentityFunction)) (ref.null $lambdas.Lambdas.IdentityFunction))
 (type $lambdas.Lambdas (struct
- (field $field@lambdas.Lambdas i32)
+ (field $field@lambdas.Lambdas (mut i32))
 ))
 
 ;;; Lambdas()
@@ -30,7 +30,7 @@
  (block $return.label
   (block
    ;; return (Lambdas.this.field + intf.m(n));
-   (local.set $return.value (i32.add (i32.const 0) (i32.const 0)))
+   (local.set $return.value (i32.add (struct.get $lambdas.Lambdas $field@lambdas.Lambdas  (ref.null $lambdas.Lambdas)) (i32.const 0)))
    (br $return.label))
  )
  (local.get $return.value)
@@ -324,12 +324,11 @@
  (block $return.label
   (block
    ;; if ((lambdas.Lambdas.identityFunction == null)) {
-   (if (ref.eq (ref.null $lambdas.Lambdas.IdentityFunction) (ref.null $java.lang.Object)) (then (block
+   (if (ref.eq (global.get $identityFunction@lambdas.Lambdas) (ref.null $java.lang.Object)) (then (block
     ;; (lambdas.Lambdas.identityFunction = new IdentityFunction.<init>());
-    
-   )))
+    (global.set $identityFunction@lambdas.Lambdas (call $<init><>:void@lambdas.Lambdas.IdentityFunction (struct.new_default_with_rtt $lambdas.Lambdas.IdentityFunction (global.get $lambdas.Lambdas.IdentityFunction.rtt)) )))))
    ;; return ((GenericJsFunction<E, E>) lambdas.Lambdas.identityFunction);
-   (local.set $return.value (ref.null $lambdas.Lambdas.IdentityFunction))
+   (local.set $return.value (global.get $identityFunction@lambdas.Lambdas))
    (br $return.label))
  )
  (local.get $return.value)
@@ -418,7 +417,7 @@
 ;;; CLASS  <anonymous> implements Functional<T>
 
 (type $lambdas.Lambdas.1 (struct
- (field $this@lambdas.Lambdas.1 (ref null $lambdas.Lambdas))
+ (field $this@lambdas.Lambdas.1 (mut (ref null $lambdas.Lambdas)))
 ))
 
 ;;; <anonymous> implements Functional<T>()
@@ -536,7 +535,7 @@
 ;;; CLASS  <anonymous> extends Object
 
 (type $lambdas.Lambdas.3 (struct
- (field $this@lambdas.Lambdas.3 (ref null $lambdas.Lambdas))
+ (field $this@lambdas.Lambdas.3 (mut (ref null $lambdas.Lambdas)))
 ))
 
 ;;; <anonymous> extends Object()
@@ -555,7 +554,7 @@
 ;;; CLASS  Parent
 
 (type $lambdas.Lambdas.Parent (struct
- (field $fieldInParent@lambdas.Lambdas.Parent i32)
+ (field $fieldInParent@lambdas.Lambdas.Parent (mut i32))
 ))
 
 ;;; Parent()
@@ -583,7 +582,7 @@
 ;;; CLASS  LambdaInSubClass
 
 (type $lambdas.Lambdas.LambdaInSubClass (struct
- (field $fieldInParent@lambdas.Lambdas.Parent i32)
+ (field $fieldInParent@lambdas.Lambdas.Parent (mut i32))
 ))
 
 ;;; LambdaInSubClass()

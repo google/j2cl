@@ -3,7 +3,7 @@
 ;;; CLASS  ParentOuter
 
 (type $innerclassinheritance.ParentOuter (struct
- (field $fieldInParentOuter@innerclassinheritance.ParentOuter i32)
+ (field $fieldInParentOuter@innerclassinheritance.ParentOuter (mut i32))
 ))
 
 ;;; ParentOuter()
@@ -31,7 +31,7 @@
 ;;; CLASS  ParentInner
 
 (type $innerclassinheritance.ParentInner (struct
- (field $fieldInParentInner@innerclassinheritance.ParentInner i32)
+ (field $fieldInParentInner@innerclassinheritance.ParentInner (mut i32))
 ))
 
 ;;; ParentInner()
@@ -59,8 +59,8 @@
 ;;; CLASS  ChildClass
 
 (type $innerclassinheritance.ChildClass (struct
- (field $fieldInParentOuter@innerclassinheritance.ParentOuter i32)
- (field $fieldInOuter@innerclassinheritance.ChildClass i32)
+ (field $fieldInParentOuter@innerclassinheritance.ParentOuter (mut i32))
+ (field $fieldInOuter@innerclassinheritance.ChildClass (mut i32))
 ))
 
 ;;; ChildClass()
@@ -99,9 +99,9 @@
 ;;; CLASS  InnerClass
 
 (type $innerclassinheritance.ChildClass.InnerClass (struct
- (field $fieldInParentInner@innerclassinheritance.ParentInner i32)
- (field $this@innerclassinheritance.ChildClass.InnerClass (ref null $innerclassinheritance.ChildClass))
- (field $fieldInInner@innerclassinheritance.ChildClass.InnerClass i32)
+ (field $fieldInParentInner@innerclassinheritance.ParentInner (mut i32))
+ (field $this@innerclassinheritance.ChildClass.InnerClass (mut (ref null $innerclassinheritance.ChildClass)))
+ (field $fieldInInner@innerclassinheritance.ChildClass.InnerClass (mut i32))
 ))
 
 ;;; InnerClass()
@@ -151,22 +151,22 @@
    ;; InnerClass.this.funInInner();
    
    ;; int a = InnerClass.this.this.fieldInParentOuter;
-   (local.set $a (i32.const 0))
+   (local.set $a (struct.get $innerclassinheritance.ParentOuter $fieldInParentOuter@innerclassinheritance.ParentOuter  (struct.get $innerclassinheritance.ChildClass.InnerClass $this@innerclassinheritance.ChildClass.InnerClass  (ref.null $innerclassinheritance.ChildClass.InnerClass))))
    
    ;; (a = InnerClass.this.this.fieldInParentOuter);
-   (local.set $a (i32.const 0))
+   (local.set $a (struct.get $innerclassinheritance.ParentOuter $fieldInParentOuter@innerclassinheritance.ParentOuter  (struct.get $innerclassinheritance.ChildClass.InnerClass $this@innerclassinheritance.ChildClass.InnerClass  (ref.null $innerclassinheritance.ChildClass.InnerClass))))
    ;; (a = InnerClass.this.this.fieldInOuter);
-   (local.set $a (i32.const 0))
+   (local.set $a (struct.get $innerclassinheritance.ChildClass $fieldInOuter@innerclassinheritance.ChildClass  (struct.get $innerclassinheritance.ChildClass.InnerClass $this@innerclassinheritance.ChildClass.InnerClass  (ref.null $innerclassinheritance.ChildClass.InnerClass))))
    ;; (a = InnerClass.this.this.fieldInOuter);
-   (local.set $a (i32.const 0))
+   (local.set $a (struct.get $innerclassinheritance.ChildClass $fieldInOuter@innerclassinheritance.ChildClass  (struct.get $innerclassinheritance.ChildClass.InnerClass $this@innerclassinheritance.ChildClass.InnerClass  (ref.null $innerclassinheritance.ChildClass.InnerClass))))
    ;; (a = InnerClass.this.fieldInParentInner);
-   (local.set $a (i32.const 0))
+   (local.set $a (struct.get $innerclassinheritance.ParentInner $fieldInParentInner@innerclassinheritance.ParentInner  (ref.null $innerclassinheritance.ChildClass.InnerClass)))
    ;; (a = InnerClass.this.fieldInParentInner);
-   (local.set $a (i32.const 0))
+   (local.set $a (struct.get $innerclassinheritance.ParentInner $fieldInParentInner@innerclassinheritance.ParentInner  (ref.null $innerclassinheritance.ChildClass.InnerClass)))
    ;; (a = InnerClass.this.fieldInInner);
-   (local.set $a (i32.const 0))
+   (local.set $a (struct.get $innerclassinheritance.ChildClass.InnerClass $fieldInInner@innerclassinheritance.ChildClass.InnerClass  (ref.null $innerclassinheritance.ChildClass.InnerClass)))
    ;; (a = InnerClass.this.fieldInInner);
-   (local.set $a (i32.const 0))
+   (local.set $a (struct.get $innerclassinheritance.ChildClass.InnerClass $fieldInInner@innerclassinheritance.ChildClass.InnerClass  (ref.null $innerclassinheritance.ChildClass.InnerClass)))
    ;; return a;
    (local.set $return.value (local.get $a))
    (br $return.label))
@@ -177,10 +177,10 @@
 ;;; CLASS  LocalClass
 
 (type $innerclassinheritance.ChildClass.1LocalClass (struct
- (field $fieldInParentOuter@innerclassinheritance.ParentOuter i32)
- (field $fieldInOuter@innerclassinheritance.ChildClass i32)
- (field $this@innerclassinheritance.ChildClass.1LocalClass (ref null $innerclassinheritance.ChildClass))
- (field $object@innerclassinheritance.ChildClass.1LocalClass (ref null $java.lang.Object))
+ (field $fieldInParentOuter@innerclassinheritance.ParentOuter (mut i32))
+ (field $fieldInOuter@innerclassinheritance.ChildClass (mut i32))
+ (field $this@innerclassinheritance.ChildClass.1LocalClass (mut (ref null $innerclassinheritance.ChildClass)))
+ (field $object@innerclassinheritance.ChildClass.1LocalClass (mut (ref null $java.lang.Object)))
 ))
 
 ;;; LocalClass()
@@ -255,7 +255,7 @@
 ;;; CLASS  Parent
 
 (type $innerclassinheritance.MultipleNestings.Parent (struct
- (field $this@innerclassinheritance.MultipleNestings.Parent (ref null $innerclassinheritance.MultipleNestings))
+ (field $this@innerclassinheritance.MultipleNestings.Parent (mut (ref null $innerclassinheritance.MultipleNestings)))
 ))
 
 ;;; Parent()
@@ -283,8 +283,8 @@
 ;;; CLASS  InnerClass1
 
 (type $innerclassinheritance.MultipleNestings.InnerClass1 (struct
- (field $this@innerclassinheritance.MultipleNestings.Parent (ref null $innerclassinheritance.MultipleNestings))
- (field $this@innerclassinheritance.MultipleNestings.InnerClass1 (ref null $innerclassinheritance.MultipleNestings))
+ (field $this@innerclassinheritance.MultipleNestings.Parent (mut (ref null $innerclassinheritance.MultipleNestings)))
+ (field $this@innerclassinheritance.MultipleNestings.InnerClass1 (mut (ref null $innerclassinheritance.MultipleNestings)))
 ))
 
 ;;; InnerClass1()
@@ -312,8 +312,8 @@
 ;;; CLASS  InnerClass2
 
 (type $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 (struct
- (field $this@innerclassinheritance.MultipleNestings.Parent (ref null $innerclassinheritance.MultipleNestings))
- (field $this@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 (ref null $innerclassinheritance.MultipleNestings.InnerClass1))
+ (field $this@innerclassinheritance.MultipleNestings.Parent (mut (ref null $innerclassinheritance.MultipleNestings)))
+ (field $this@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 (mut (ref null $innerclassinheritance.MultipleNestings.InnerClass1)))
 ))
 
 ;;; InnerClass2()

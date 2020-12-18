@@ -3,7 +3,7 @@
 ;;; CLASS  InstanceInnerClass
 
 (type $instanceinnerclass.InstanceInnerClass (struct
- (field $instanceField@instanceinnerclass.InstanceInnerClass i32)
+ (field $instanceField@instanceinnerclass.InstanceInnerClass (mut i32))
 ))
 
 ;;; InstanceInnerClass()
@@ -43,9 +43,9 @@
 ;;; CLASS  InnerClass
 
 (type $instanceinnerclass.InstanceInnerClass.InnerClass (struct
- (field $this@instanceinnerclass.InstanceInnerClass.InnerClass (ref null $instanceinnerclass.InstanceInnerClass))
- (field $field@instanceinnerclass.InstanceInnerClass.InnerClass i32)
- (field $enclosingInstance@instanceinnerclass.InstanceInnerClass.InnerClass (ref null $instanceinnerclass.InstanceInnerClass))
+ (field $this@instanceinnerclass.InstanceInnerClass.InnerClass (mut (ref null $instanceinnerclass.InstanceInnerClass)))
+ (field $field@instanceinnerclass.InstanceInnerClass.InnerClass (mut i32))
+ (field $enclosingInstance@instanceinnerclass.InstanceInnerClass.InnerClass (mut (ref null $instanceinnerclass.InstanceInnerClass)))
 ))
 
 ;;; InnerClass()

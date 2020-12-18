@@ -3,8 +3,8 @@
 ;;; CLASS  SimpleGenericType
 
 (type $simplegenerictype.SimpleGenericType (struct
- (field $first@simplegenerictype.SimpleGenericType (ref null $java.lang.Object))
- (field $second@simplegenerictype.SimpleGenericType (ref null $java.lang.Object))
+ (field $first@simplegenerictype.SimpleGenericType (mut (ref null $java.lang.Object)))
+ (field $second@simplegenerictype.SimpleGenericType (mut (ref null $java.lang.Object)))
 ))
 
 ;;; SimpleGenericType(T t, S s)
@@ -18,10 +18,9 @@
    ;; Object.this.Object.<init>();
    
    ;; (SimpleGenericType.this.first = t);
-   
+   (struct.set $simplegenerictype.SimpleGenericType $first@simplegenerictype.SimpleGenericType  (ref.null $simplegenerictype.SimpleGenericType) (local.get $t))
    ;; (SimpleGenericType.this.second = s);
-   
-  )
+   (struct.set $simplegenerictype.SimpleGenericType $second@simplegenerictype.SimpleGenericType  (ref.null $simplegenerictype.SimpleGenericType) (local.get $s)))
  )
  (local.get $this)
 )

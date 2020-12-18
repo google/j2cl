@@ -152,9 +152,9 @@ public class WasmModuleGenerator {
       builder.append(
           "(global "
               + environment.getFieldName(field)
-              + " "
+              + " (mut "
               + environment.getWasmType(field.getDescriptor().getTypeDescriptor())
-              + " ");
+              + ") ");
       ExpressionTranspiler.render(
           field.getDescriptor().getTypeDescriptor().getDefaultValue(), builder, environment);
       builder.append(")");
@@ -304,9 +304,9 @@ public class WasmModuleGenerator {
       builder.append(
           "(field "
               + environment.getFieldName(field)
-              + " "
+              + " (mut "
               + environment.getWasmType(field.getDescriptor().getTypeDescriptor())
-              + ")");
+              + "))");
     }
   }
 }

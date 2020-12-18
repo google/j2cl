@@ -63,9 +63,9 @@
 ;;; CLASS  InnerClass
 
 (type $simplelocalclass.SimpleLocalClass.1InnerClass (struct
- (field $this@simplelocalclass.SimpleLocalClass.1InnerClass (ref null $simplelocalclass.SimpleLocalClass))
- (field $localVar@simplelocalclass.SimpleLocalClass.1InnerClass i32)
- (field $p@simplelocalclass.SimpleLocalClass.1InnerClass i32)
+ (field $this@simplelocalclass.SimpleLocalClass.1InnerClass (mut (ref null $simplelocalclass.SimpleLocalClass)))
+ (field $localVar@simplelocalclass.SimpleLocalClass.1InnerClass (mut i32))
+ (field $p@simplelocalclass.SimpleLocalClass.1InnerClass (mut i32))
 ))
 
 ;;; InnerClass()
@@ -89,7 +89,7 @@
  (block $return.label
   (block
    ;; return ($1InnerClass.this.localVar + $1InnerClass.this.p);
-   (local.set $return.value (i32.add (i32.const 0) (i32.const 0)))
+   (local.set $return.value (i32.add (struct.get $simplelocalclass.SimpleLocalClass.1InnerClass $localVar@simplelocalclass.SimpleLocalClass.1InnerClass  (ref.null $simplelocalclass.SimpleLocalClass.1InnerClass)) (struct.get $simplelocalclass.SimpleLocalClass.1InnerClass $p@simplelocalclass.SimpleLocalClass.1InnerClass  (ref.null $simplelocalclass.SimpleLocalClass.1InnerClass))))
    (br $return.label))
  )
  (local.get $return.value)
@@ -98,7 +98,7 @@
 ;;; CLASS  InnerClassWithoutCaptures
 
 (type $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (struct
- (field $this@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (ref null $simplelocalclass.SimpleLocalClass))
+ (field $this@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (mut (ref null $simplelocalclass.SimpleLocalClass)))
 ))
 
 ;;; InnerClassWithoutCaptures()
@@ -117,9 +117,9 @@
 ;;; CLASS  InnerClass
 
 (type $simplelocalclass.SimpleLocalClass.2InnerClass (struct
- (field $this@simplelocalclass.SimpleLocalClass.2InnerClass (ref null $simplelocalclass.SimpleLocalClass))
- (field $field@simplelocalclass.SimpleLocalClass.2InnerClass i32)
- (field $localVar@simplelocalclass.SimpleLocalClass.2InnerClass i32)
+ (field $this@simplelocalclass.SimpleLocalClass.2InnerClass (mut (ref null $simplelocalclass.SimpleLocalClass)))
+ (field $field@simplelocalclass.SimpleLocalClass.2InnerClass (mut i32))
+ (field $localVar@simplelocalclass.SimpleLocalClass.2InnerClass (mut i32))
 ))
 
 ;;; InnerClass()
@@ -138,7 +138,7 @@
 ;;; CLASS  Abc$InnerClass
 
 (type $simplelocalclass.SimpleLocalClass.1Abc$InnerClass (struct
- (field $this@simplelocalclass.SimpleLocalClass.1Abc$InnerClass (ref null $simplelocalclass.SimpleLocalClass))
+ (field $this@simplelocalclass.SimpleLocalClass.1Abc$InnerClass (mut (ref null $simplelocalclass.SimpleLocalClass)))
 ))
 
 ;;; Abc$InnerClass()
@@ -157,7 +157,7 @@
 ;;; CLASS  Klm$InnerClass
 
 (type $simplelocalclass.SimpleLocalClass.1Klm$InnerClass (struct
- (field $this@simplelocalclass.SimpleLocalClass.1Klm$InnerClass (ref null $simplelocalclass.SimpleLocalClass))
+ (field $this@simplelocalclass.SimpleLocalClass.1Klm$InnerClass (mut (ref null $simplelocalclass.SimpleLocalClass)))
 ))
 
 ;;; Klm$InnerClass()

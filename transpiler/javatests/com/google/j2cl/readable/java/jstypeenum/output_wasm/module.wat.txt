@@ -2,12 +2,12 @@
 
 ;;; ENUM  Color
 
-(global $RED@jstypeenum.Color (ref null $jstypeenum.Color) (ref.null $jstypeenum.Color))
-(global $GREEN@jstypeenum.Color (ref null $jstypeenum.Color) (ref.null $jstypeenum.Color))
-(global $BLUE@jstypeenum.Color (ref null $jstypeenum.Color) (ref.null $jstypeenum.Color))
+(global $RED@jstypeenum.Color (mut (ref null $jstypeenum.Color)) (ref.null $jstypeenum.Color))
+(global $GREEN@jstypeenum.Color (mut (ref null $jstypeenum.Color)) (ref.null $jstypeenum.Color))
+(global $BLUE@jstypeenum.Color (mut (ref null $jstypeenum.Color)) (ref.null $jstypeenum.Color))
 (type $jstypeenum.Color (struct
- (field $name@java.lang.Enum (ref null $java.lang.String))
- (field $ordinal@java.lang.Enum i32)
+ (field $name@java.lang.Enum (mut (ref null $java.lang.String)))
+ (field $ordinal@java.lang.Enum (mut i32))
 ))
 
 ;;; Color()

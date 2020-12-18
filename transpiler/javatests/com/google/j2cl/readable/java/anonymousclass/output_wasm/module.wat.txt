@@ -53,9 +53,9 @@
 ;;; CLASS  <anonymous> extends SomeClass
 
 (type $anonymousclass.AnonymousClass.1 (struct
- (field $this@anonymousclass.AnonymousClass.1 (ref null $anonymousclass.AnonymousClass))
- (field $object@anonymousclass.AnonymousClass.1 (ref null $java.lang.Object))
- (field $outer@anonymousclass.AnonymousClass.1 (ref null $java.lang.Object))
+ (field $this@anonymousclass.AnonymousClass.1 (mut (ref null $anonymousclass.AnonymousClass)))
+ (field $object@anonymousclass.AnonymousClass.1 (mut (ref null $java.lang.Object)))
+ (field $outer@anonymousclass.AnonymousClass.1 (mut (ref null $java.lang.Object)))
 ))
 
 ;;; <anonymous> extends SomeClass(int $_0)
@@ -88,7 +88,7 @@
 
 ;;; INTERFACE  SomeInterface
 
-(global $implicitlyStatic@anonymousclass.SomeInterface (ref null $anonymousclass.SomeClass) (ref.null $anonymousclass.SomeClass))
+(global $implicitlyStatic@anonymousclass.SomeInterface (mut (ref null $anonymousclass.SomeClass)) (ref.null $anonymousclass.SomeClass))
 (type $anonymousclass.SomeInterface (struct
 ))
 

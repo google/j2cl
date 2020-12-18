@@ -3,8 +3,8 @@
 ;;; CLASS  CascadingConstructor
 
 (type $cascadingconstructor.CascadingConstructor (struct
- (field $a@cascadingconstructor.CascadingConstructor i32)
- (field $b@cascadingconstructor.CascadingConstructor i32)
+ (field $a@cascadingconstructor.CascadingConstructor (mut i32))
+ (field $b@cascadingconstructor.CascadingConstructor (mut i32))
 ))
 
 ;;; CascadingConstructor(int a, int b)
@@ -18,10 +18,9 @@
    ;; Object.this.Object.<init>();
    
    ;; (CascadingConstructor.this.a = a);
-   
+   (struct.set $cascadingconstructor.CascadingConstructor $a@cascadingconstructor.CascadingConstructor  (ref.null $cascadingconstructor.CascadingConstructor) (local.get $a))
    ;; (CascadingConstructor.this.b = b);
-   
-  )
+   (struct.set $cascadingconstructor.CascadingConstructor $b@cascadingconstructor.CascadingConstructor  (ref.null $cascadingconstructor.CascadingConstructor) (local.get $b)))
  )
  (local.get $this)
 )

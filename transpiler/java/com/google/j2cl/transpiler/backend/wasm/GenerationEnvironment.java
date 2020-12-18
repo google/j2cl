@@ -121,7 +121,10 @@ class GenerationEnvironment {
   }
 
   String getFieldName(Field field) {
-    FieldDescriptor fieldDescriptor = field.getDescriptor();
+    return getFieldName(field.getDescriptor());
+  }
+
+  String getFieldName(FieldDescriptor fieldDescriptor) {
     return "$"
         + fieldDescriptor.getName()
         + "@"

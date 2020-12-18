@@ -386,7 +386,7 @@
 ;;; CLASS  N
 
 (type $bridgejsmethod.Main.N (struct
- (field $this@bridgejsmethod.Main.N (ref null $bridgejsmethod.Main))
+ (field $this@bridgejsmethod.Main.N (mut (ref null $bridgejsmethod.Main)))
 ))
 
 ;;; N()
@@ -405,9 +405,9 @@
 ;;; CLASS  O
 
 (type $bridgejsmethod.Main.O (struct
- (field $this@bridgejsmethod.Main.N (ref null $bridgejsmethod.Main))
- (field $this@bridgejsmethod.Main.O (ref null $bridgejsmethod.Main))
- (field $b@bridgejsmethod.Main.O (ref null $bridgejsmethod.Main.B))
+ (field $this@bridgejsmethod.Main.N (mut (ref null $bridgejsmethod.Main)))
+ (field $this@bridgejsmethod.Main.O (mut (ref null $bridgejsmethod.Main)))
+ (field $b@bridgejsmethod.Main.O (mut (ref null $bridgejsmethod.Main.B)))
 ))
 
 ;;; O()
@@ -431,7 +431,7 @@
  (block $return.label
   (block
    ;; return O.this.b;
-   (local.set $return.value (ref.null $bridgejsmethod.Main.B))
+   (local.set $return.value (struct.get $bridgejsmethod.Main.O $b@bridgejsmethod.Main.O  (ref.null $bridgejsmethod.Main.O)))
    (br $return.label))
  )
  (local.get $return.value)
@@ -445,7 +445,7 @@
 ;;; CLASS  Q
 
 (type $bridgejsmethod.Main.Q (struct
- (field $this@bridgejsmethod.Main.Q (ref null $bridgejsmethod.Main))
+ (field $this@bridgejsmethod.Main.Q (mut (ref null $bridgejsmethod.Main)))
 ))
 
 ;;; Q()
@@ -464,8 +464,8 @@
 ;;; CLASS  R
 
 (type $bridgejsmethod.Main.R (struct
- (field $this@bridgejsmethod.Main.Q (ref null $bridgejsmethod.Main))
- (field $this@bridgejsmethod.Main.R (ref null $bridgejsmethod.Main))
+ (field $this@bridgejsmethod.Main.Q (mut (ref null $bridgejsmethod.Main)))
+ (field $this@bridgejsmethod.Main.R (mut (ref null $bridgejsmethod.Main)))
 ))
 
 ;;; R()
@@ -498,9 +498,9 @@
 ;;; CLASS  S
 
 (type $bridgejsmethod.Main.S (struct
- (field $this@bridgejsmethod.Main.Q (ref null $bridgejsmethod.Main))
- (field $this@bridgejsmethod.Main.R (ref null $bridgejsmethod.Main))
- (field $this@bridgejsmethod.Main.S (ref null $bridgejsmethod.Main))
+ (field $this@bridgejsmethod.Main.Q (mut (ref null $bridgejsmethod.Main)))
+ (field $this@bridgejsmethod.Main.R (mut (ref null $bridgejsmethod.Main)))
+ (field $this@bridgejsmethod.Main.S (mut (ref null $bridgejsmethod.Main)))
 ))
 
 ;;; S()
@@ -519,7 +519,7 @@
 ;;; CLASS  GrandParent
 
 (type $bridgejsmethod.Main.GrandParent (struct
- (field $this@bridgejsmethod.Main.GrandParent (ref null $bridgejsmethod.Main))
+ (field $this@bridgejsmethod.Main.GrandParent (mut (ref null $bridgejsmethod.Main)))
 ))
 
 ;;; GrandParent()
@@ -558,8 +558,8 @@
 ;;; CLASS  Parent
 
 (type $bridgejsmethod.Main.Parent (struct
- (field $this@bridgejsmethod.Main.GrandParent (ref null $bridgejsmethod.Main))
- (field $this@bridgejsmethod.Main.Parent (ref null $bridgejsmethod.Main))
+ (field $this@bridgejsmethod.Main.GrandParent (mut (ref null $bridgejsmethod.Main)))
+ (field $this@bridgejsmethod.Main.Parent (mut (ref null $bridgejsmethod.Main)))
 ))
 
 ;;; Parent()
@@ -598,9 +598,9 @@
 ;;; CLASS  Child
 
 (type $bridgejsmethod.Main.Child (struct
- (field $this@bridgejsmethod.Main.GrandParent (ref null $bridgejsmethod.Main))
- (field $this@bridgejsmethod.Main.Parent (ref null $bridgejsmethod.Main))
- (field $this@bridgejsmethod.Main.Child (ref null $bridgejsmethod.Main))
+ (field $this@bridgejsmethod.Main.GrandParent (mut (ref null $bridgejsmethod.Main)))
+ (field $this@bridgejsmethod.Main.Parent (mut (ref null $bridgejsmethod.Main)))
+ (field $this@bridgejsmethod.Main.Child (mut (ref null $bridgejsmethod.Main)))
 ))
 
 ;;; Child()

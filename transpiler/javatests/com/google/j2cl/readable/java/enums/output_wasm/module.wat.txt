@@ -2,11 +2,11 @@
 
 ;;; ENUM  Enum1
 
-(global $V1@enums.Enum1 (ref null $enums.Enum1) (ref.null $enums.Enum1))
-(global $V2@enums.Enum1 (ref null $enums.Enum1) (ref.null $enums.Enum1))
+(global $V1@enums.Enum1 (mut (ref null $enums.Enum1)) (ref.null $enums.Enum1))
+(global $V2@enums.Enum1 (mut (ref null $enums.Enum1)) (ref.null $enums.Enum1))
 (type $enums.Enum1 (struct
- (field $name@java.lang.Enum (ref null $java.lang.String))
- (field $ordinal@java.lang.Enum i32)
+ (field $name@java.lang.Enum (mut (ref null $java.lang.String)))
+ (field $ordinal@java.lang.Enum (mut i32))
 ))
 
 ;;; Enum1()
@@ -24,15 +24,15 @@
 
 ;;; ENUM  Enum2
 
-(global $VALUE1@enums.Enum2 (ref null $enums.Enum2) (ref.null $enums.Enum2))
-(global $VALUE2@enums.Enum2 (ref null $enums.Enum2) (ref.null $enums.Enum2))
-(global $VALUE3@enums.Enum2 (ref null $enums.Enum2) (ref.null $enums.Enum2))
-(global $VALUE4@enums.Enum2 (ref null $enums.Enum2) (ref.null $enums.Enum2))
-(global $C@enums.Enum2 (ref null $enums.Enum2) (ref.null $enums.Enum2))
+(global $VALUE1@enums.Enum2 (mut (ref null $enums.Enum2)) (ref.null $enums.Enum2))
+(global $VALUE2@enums.Enum2 (mut (ref null $enums.Enum2)) (ref.null $enums.Enum2))
+(global $VALUE3@enums.Enum2 (mut (ref null $enums.Enum2)) (ref.null $enums.Enum2))
+(global $VALUE4@enums.Enum2 (mut (ref null $enums.Enum2)) (ref.null $enums.Enum2))
+(global $C@enums.Enum2 (mut (ref null $enums.Enum2)) (ref.null $enums.Enum2))
 (type $enums.Enum2 (struct
- (field $name@java.lang.Enum (ref null $java.lang.String))
- (field $ordinal@java.lang.Enum i32)
- (field $foo@enums.Enum2 i32)
+ (field $name@java.lang.Enum (mut (ref null $java.lang.String)))
+ (field $ordinal@java.lang.Enum (mut i32))
+ (field $foo@enums.Enum2 (mut i32))
 ))
 
 ;;; Enum2(int foo)
@@ -45,8 +45,7 @@
    ;; Enum.this.Enum.<init>();
    
    ;; (Enum2.this.foo = foo);
-   
-  )
+   (struct.set $enums.Enum2 $foo@enums.Enum2  (ref.null $enums.Enum2) (local.get $foo)))
  )
  (local.get $this)
 )
@@ -96,9 +95,9 @@
 ;;; CLASS  <anonymous> extends Enum2
 
 (type $enums.Enum2.1 (struct
- (field $name@java.lang.Enum (ref null $java.lang.String))
- (field $ordinal@java.lang.Enum i32)
- (field $foo@enums.Enum2 i32)
+ (field $name@java.lang.Enum (mut (ref null $java.lang.String)))
+ (field $ordinal@java.lang.Enum (mut i32))
+ (field $foo@enums.Enum2 (mut i32))
 ))
 
 ;;; <anonymous> extends Enum2(int $_0)
@@ -117,10 +116,10 @@
 
 ;;; ENUM  Enum3
 
-(global $VALUE1@enums.Enum3 (ref null $enums.Enum3) (ref.null $enums.Enum3))
+(global $VALUE1@enums.Enum3 (mut (ref null $enums.Enum3)) (ref.null $enums.Enum3))
 (type $enums.Enum3 (struct
- (field $name@java.lang.Enum (ref null $java.lang.String))
- (field $ordinal@java.lang.Enum i32)
+ (field $name@java.lang.Enum (mut (ref null $java.lang.String)))
+ (field $ordinal@java.lang.Enum (mut i32))
 ))
 
 ;;; Enum3(Function<Integer, Integer> function)

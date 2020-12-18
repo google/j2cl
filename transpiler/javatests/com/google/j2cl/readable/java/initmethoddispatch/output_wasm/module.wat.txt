@@ -3,7 +3,7 @@
 ;;; CLASS  InitMethodDispatch
 
 (type $initmethoddispatch.InitMethodDispatch (struct
- (field $value@initmethoddispatch.InitMethodDispatch i32)
+ (field $value@initmethoddispatch.InitMethodDispatch (mut i32))
 ))
 
 ;;; InitMethodDispatch()
@@ -29,8 +29,7 @@
    ;; Object.this.Object.<init>();
    
    ;; (InitMethodDispatch.this.value = i);
-   
-  )
+   (struct.set $initmethoddispatch.InitMethodDispatch $value@initmethoddispatch.InitMethodDispatch  (ref.null $initmethoddispatch.InitMethodDispatch) (local.get $i)))
  )
  (local.get $this)
 )

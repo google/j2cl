@@ -3,9 +3,9 @@
 ;;; CLASS  InnerClassInitOrder
 
 (type $innerclassinitorder.InnerClassInitOrder (struct
- (field $number@innerclassinitorder.InnerClassInitOrder i32)
- (field $outer@innerclassinitorder.InnerClassInitOrder (ref null $innerclassinitorder.InnerClassInitOrder.Outer))
- (field $outerIsSuper@innerclassinitorder.InnerClassInitOrder (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper))
+ (field $number@innerclassinitorder.InnerClassInitOrder (mut i32))
+ (field $outer@innerclassinitorder.InnerClassInitOrder (mut (ref null $innerclassinitorder.InnerClassInitOrder.Outer)))
+ (field $outerIsSuper@innerclassinitorder.InnerClassInitOrder (mut (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper)))
 ))
 
 ;;; InnerClassInitOrder()
@@ -255,7 +255,7 @@
  (block $return.label
   (block
    ;; OuterIsNotSuper x = InnerClassInitOrder.this.new $2.<init>(InnerClassInitOrder.this.outerIsSuper);
-   (local.set $x (call $<init><innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper>:void@innerclassinitorder.InnerClassInitOrder.2 (struct.new_default_with_rtt $innerclassinitorder.InnerClassInitOrder.2 (global.get $innerclassinitorder.InnerClassInitOrder.2.rtt)) (ref.null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper)))
+   (local.set $x (call $<init><innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper>:void@innerclassinitorder.InnerClassInitOrder.2 (struct.new_default_with_rtt $innerclassinitorder.InnerClassInitOrder.2 (global.get $innerclassinitorder.InnerClassInitOrder.2.rtt)) (struct.get $innerclassinitorder.InnerClassInitOrder $outerIsSuper@innerclassinitorder.InnerClassInitOrder  (ref.null $innerclassinitorder.InnerClassInitOrder))))
    
    ;; assert (2 == x.getValue());
    ;; unimplemented statement AssertStatement
@@ -350,7 +350,7 @@
  (block $return.label
   (block
    ;; TestUnqualifiedSuperCall x = InnerClassInitOrder.this.new $4.<init>(InnerClassInitOrder.this.outerIsSuper);
-   (local.set $x (call $<init><innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper>:void@innerclassinitorder.InnerClassInitOrder.4 (struct.new_default_with_rtt $innerclassinitorder.InnerClassInitOrder.4 (global.get $innerclassinitorder.InnerClassInitOrder.4.rtt)) (ref.null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper)))
+   (local.set $x (call $<init><innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper>:void@innerclassinitorder.InnerClassInitOrder.4 (struct.new_default_with_rtt $innerclassinitorder.InnerClassInitOrder.4 (global.get $innerclassinitorder.InnerClassInitOrder.4.rtt)) (struct.get $innerclassinitorder.InnerClassInitOrder $outerIsSuper@innerclassinitorder.InnerClassInitOrder  (ref.null $innerclassinitorder.InnerClassInitOrder))))
    
    ;; assert (2 == x.getValue());
    ;; unimplemented statement AssertStatement
@@ -427,7 +427,7 @@
 ;;; CLASS  OuterRefFromSuperCtorCall
 
 (type $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall (struct
- (field $this@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall (ref null $innerclassinitorder.InnerClassInitOrder))
+ (field $this@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall (mut (ref null $innerclassinitorder.InnerClassInitOrder)))
 ))
 
 ;;; OuterRefFromSuperCtorCall()
@@ -446,7 +446,7 @@
 ;;; CLASS  <anonymous> extends Object
 
 (type $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1 (struct
- (field $this@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1 (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall))
+ (field $this@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1 (mut (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall)))
 ))
 
 ;;; <anonymous> extends Object()
@@ -470,7 +470,7 @@
  (block $return.label
   (block
    ;; ($1.this.this.this.number = ($1.this.this.this.number + 100));
-   
+   (struct.set $innerclassinitorder.InnerClassInitOrder $number@innerclassinitorder.InnerClassInitOrder  (struct.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall $this@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall  (struct.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1 $this@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1  (ref.null $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1))) (i32.add (struct.get $innerclassinitorder.InnerClassInitOrder $number@innerclassinitorder.InnerClassInitOrder  (struct.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall $this@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall  (struct.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1 $this@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1  (ref.null $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1)))) (i32.const 100)))
    ;; return "";
    (local.set $return.value (ref.null $java.lang.String))
    (br $return.label))
@@ -481,7 +481,7 @@
 ;;; CLASS  OuterRefFromThisCtorCall
 
 (type $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall (struct
- (field $this@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall (ref null $innerclassinitorder.InnerClassInitOrder))
+ (field $this@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall (mut (ref null $innerclassinitorder.InnerClassInitOrder)))
 ))
 
 ;;; OuterRefFromThisCtorCall(Object object)
@@ -514,7 +514,7 @@
 ;;; CLASS  <anonymous> extends Object
 
 (type $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1 (struct
- (field $this@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1 (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall))
+ (field $this@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1 (mut (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall)))
 ))
 
 ;;; <anonymous> extends Object()
@@ -538,7 +538,7 @@
  (block $return.label
   (block
    ;; ($1.this.this.this.number = ($1.this.this.this.number + 1000));
-   
+   (struct.set $innerclassinitorder.InnerClassInitOrder $number@innerclassinitorder.InnerClassInitOrder  (struct.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall $this@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall  (struct.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1 $this@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1  (ref.null $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1))) (i32.add (struct.get $innerclassinitorder.InnerClassInitOrder $number@innerclassinitorder.InnerClassInitOrder  (struct.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall $this@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall  (struct.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1 $this@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1  (ref.null $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1)))) (i32.const 1000)))
    ;; return "";
    (local.set $return.value (ref.null $java.lang.String))
    (br $return.label))
@@ -549,7 +549,7 @@
 ;;; CLASS  InnerClass
 
 (type $innerclassinitorder.InnerClassInitOrder.InnerClass (struct
- (field $this@innerclassinitorder.InnerClassInitOrder.InnerClass (ref null $innerclassinitorder.InnerClassInitOrder))
+ (field $this@innerclassinitorder.InnerClassInitOrder.InnerClass (mut (ref null $innerclassinitorder.InnerClassInitOrder)))
 ))
 
 ;;; InnerClass()
@@ -571,7 +571,7 @@
  (block $return.label
   (block
    ;; (InnerClass.this.this.number = (InnerClass.this.this.number + 1));
-   
+   (struct.set $innerclassinitorder.InnerClassInitOrder $number@innerclassinitorder.InnerClassInitOrder  (struct.get $innerclassinitorder.InnerClassInitOrder.InnerClass $this@innerclassinitorder.InnerClassInitOrder.InnerClass  (ref.null $innerclassinitorder.InnerClassInitOrder.InnerClass)) (i32.add (struct.get $innerclassinitorder.InnerClassInitOrder $number@innerclassinitorder.InnerClassInitOrder  (struct.get $innerclassinitorder.InnerClassInitOrder.InnerClass $this@innerclassinitorder.InnerClassInitOrder.InnerClass  (ref.null $innerclassinitorder.InnerClassInitOrder.InnerClass))) (i32.const 1)))
    ;; InnerClass.this.new $1ReallyInnerClass.<init>();
    (call $<init><>:void@innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass (struct.new_default_with_rtt $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass (global.get $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass.rtt)) )
    drop
@@ -582,7 +582,7 @@
 ;;; CLASS  ReallyInnerClass
 
 (type $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass (struct
- (field $this@innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass (ref null $innerclassinitorder.InnerClassInitOrder.InnerClass))
+ (field $this@innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass (mut (ref null $innerclassinitorder.InnerClassInitOrder.InnerClass)))
 ))
 
 ;;; ReallyInnerClass()
@@ -604,15 +604,14 @@
  (block $return.label
   (block
    ;; ($1ReallyInnerClass.this.this.this.number = ($1ReallyInnerClass.this.this.this.number + 10));
-   
-  )
+   (struct.set $innerclassinitorder.InnerClassInitOrder $number@innerclassinitorder.InnerClassInitOrder  (struct.get $innerclassinitorder.InnerClassInitOrder.InnerClass $this@innerclassinitorder.InnerClassInitOrder.InnerClass  (struct.get $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass $this@innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass  (ref.null $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass))) (i32.add (struct.get $innerclassinitorder.InnerClassInitOrder $number@innerclassinitorder.InnerClassInitOrder  (struct.get $innerclassinitorder.InnerClassInitOrder.InnerClass $this@innerclassinitorder.InnerClassInitOrder.InnerClass  (struct.get $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass $this@innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass  (ref.null $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass)))) (i32.const 10))))
  )
 )
 
 ;;; CLASS  P1
 
 (type $innerclassinitorder.InnerClassInitOrder.P1 (struct
- (field $value@innerclassinitorder.InnerClassInitOrder.P1 i32)
+ (field $value@innerclassinitorder.InnerClassInitOrder.P1 (mut i32))
 ))
 
 ;;; P1()
@@ -638,8 +637,7 @@
    ;; Object.this.Object.<init>();
    
    ;; (P1.this.value = i);
-   
-  )
+   (struct.set $innerclassinitorder.InnerClassInitOrder.P1 $value@innerclassinitorder.InnerClassInitOrder.P1  (ref.null $innerclassinitorder.InnerClassInitOrder.P1) (local.get $i)))
  )
  (local.get $this)
 )
@@ -647,8 +645,8 @@
 ;;; CLASS  P2
 
 (type $innerclassinitorder.InnerClassInitOrder.P1.P2 (struct
- (field $value@innerclassinitorder.InnerClassInitOrder.P1 i32)
- (field $this@innerclassinitorder.InnerClassInitOrder.P1.P2 (ref null $innerclassinitorder.InnerClassInitOrder.P1))
+ (field $value@innerclassinitorder.InnerClassInitOrder.P1 (mut i32))
+ (field $this@innerclassinitorder.InnerClassInitOrder.P1.P2 (mut (ref null $innerclassinitorder.InnerClassInitOrder.P1)))
 ))
 
 ;;; P2()
@@ -681,9 +679,9 @@
 ;;; CLASS  P3
 
 (type $innerclassinitorder.InnerClassInitOrder.P1.P2.P3 (struct
- (field $value@innerclassinitorder.InnerClassInitOrder.P1 i32)
- (field $this@innerclassinitorder.InnerClassInitOrder.P1.P2 (ref null $innerclassinitorder.InnerClassInitOrder.P1))
- (field $this@innerclassinitorder.InnerClassInitOrder.P1.P2.P3 (ref null $innerclassinitorder.InnerClassInitOrder.P1.P2))
+ (field $value@innerclassinitorder.InnerClassInitOrder.P1 (mut i32))
+ (field $this@innerclassinitorder.InnerClassInitOrder.P1.P2 (mut (ref null $innerclassinitorder.InnerClassInitOrder.P1)))
+ (field $this@innerclassinitorder.InnerClassInitOrder.P1.P2.P3 (mut (ref null $innerclassinitorder.InnerClassInitOrder.P1.P2)))
 ))
 
 ;;; P3()
@@ -748,8 +746,8 @@
 ;;; CLASS  ESInner
 
 (type $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner (struct
- (field $this@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter))
- (field $value@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner i32)
+ (field $this@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner (mut (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter)))
+ (field $value@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner (mut i32))
 ))
 
 ;;; ESInner()
@@ -761,8 +759,7 @@
    ;; Object.this.Object.<init>();
    
    ;; (ESInner.this.value = 1);
-   
-  )
+   (struct.set $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner $value@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner  (ref.null $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner) (i32.const 1)))
  )
  (local.get $this)
 )
@@ -777,8 +774,7 @@
    ;; Object.this.Object.<init>();
    
    ;; (ESInner.this.value = value);
-   
-  )
+   (struct.set $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner $value@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner  (ref.null $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner) (local.get $value)))
  )
  (local.get $this)
 )
@@ -786,8 +782,8 @@
 ;;; CLASS  ESInnerSubclass
 
 (type $innerclassinitorder.InnerClassInitOrder.ESInnerSubclass (struct
- (field $this@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter))
- (field $value@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner i32)
+ (field $this@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner (mut (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter)))
+ (field $value@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner (mut i32))
 ))
 
 ;;; ESInnerSubclass(ESOuter outer)
@@ -854,8 +850,8 @@
 ;;; CLASS  ESWGInner
 
 (type $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner (struct
- (field $this@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter))
- (field $value@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner i32)
+ (field $this@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner (mut (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter)))
+ (field $value@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner (mut i32))
 ))
 
 ;;; ESWGInner()
@@ -867,8 +863,7 @@
    ;; Object.this.Object.<init>();
    
    ;; (ESWGInner.this.value = 1);
-   
-  )
+   (struct.set $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner $value@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner  (ref.null $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner) (i32.const 1)))
  )
  (local.get $this)
 )
@@ -883,8 +878,7 @@
    ;; Object.this.Object.<init>();
    
    ;; (ESWGInner.this.value = value);
-   
-  )
+   (struct.set $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner $value@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner  (ref.null $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner) (local.get $value)))
  )
  (local.get $this)
 )
@@ -892,8 +886,8 @@
 ;;; CLASS  ESWGInnerSubclass
 
 (type $innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass (struct
- (field $this@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter))
- (field $value@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner i32)
+ (field $this@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner (mut (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter)))
+ (field $value@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner (mut i32))
 ))
 
 ;;; ESWGInnerSubclass(ESWGOuter<String> outer)
@@ -928,8 +922,8 @@
 ;;; CLASS  AddNumber
 
 (type $innerclassinitorder.InnerClassInitOrder.1AddNumber (struct
- (field $this@innerclassinitorder.InnerClassInitOrder.1AddNumber (ref null $innerclassinitorder.InnerClassInitOrder))
- (field $num@innerclassinitorder.InnerClassInitOrder.1AddNumber i32)
+ (field $this@innerclassinitorder.InnerClassInitOrder.1AddNumber (mut (ref null $innerclassinitorder.InnerClassInitOrder)))
+ (field $num@innerclassinitorder.InnerClassInitOrder.1AddNumber (mut i32))
 ))
 
 ;;; AddNumber(int i)
@@ -942,8 +936,7 @@
    ;; Object.this.Object.<init>();
    
    ;; ($1AddNumber.this.num = i);
-   
-  )
+   (struct.set $innerclassinitorder.InnerClassInitOrder.1AddNumber $num@innerclassinitorder.InnerClassInitOrder.1AddNumber  (ref.null $innerclassinitorder.InnerClassInitOrder.1AddNumber) (local.get $i)))
  )
  (local.get $this)
 )
@@ -951,9 +944,9 @@
 ;;; CLASS  <anonymous> extends AddNumber
 
 (type $innerclassinitorder.InnerClassInitOrder.1 (struct
- (field $this@innerclassinitorder.InnerClassInitOrder.1AddNumber (ref null $innerclassinitorder.InnerClassInitOrder))
- (field $num@innerclassinitorder.InnerClassInitOrder.1AddNumber i32)
- (field $this@innerclassinitorder.InnerClassInitOrder.1 (ref null $innerclassinitorder.InnerClassInitOrder))
+ (field $this@innerclassinitorder.InnerClassInitOrder.1AddNumber (mut (ref null $innerclassinitorder.InnerClassInitOrder)))
+ (field $num@innerclassinitorder.InnerClassInitOrder.1AddNumber (mut i32))
+ (field $this@innerclassinitorder.InnerClassInitOrder.1 (mut (ref null $innerclassinitorder.InnerClassInitOrder)))
 ))
 
 ;;; <anonymous> extends AddNumber(int $_0)
@@ -976,15 +969,14 @@
  (block $return.label
   (block
    ;; ($1.this.this.number = ($1.this.this.number + $1.this.num));
-   
-  )
+   (struct.set $innerclassinitorder.InnerClassInitOrder $number@innerclassinitorder.InnerClassInitOrder  (struct.get $innerclassinitorder.InnerClassInitOrder.1 $this@innerclassinitorder.InnerClassInitOrder.1  (ref.null $innerclassinitorder.InnerClassInitOrder.1)) (i32.add (struct.get $innerclassinitorder.InnerClassInitOrder $number@innerclassinitorder.InnerClassInitOrder  (struct.get $innerclassinitorder.InnerClassInitOrder.1 $this@innerclassinitorder.InnerClassInitOrder.1  (ref.null $innerclassinitorder.InnerClassInitOrder.1))) (struct.get $innerclassinitorder.InnerClassInitOrder.1AddNumber $num@innerclassinitorder.InnerClassInitOrder.1AddNumber  (ref.null $innerclassinitorder.InnerClassInitOrder.1)))))
  )
 )
 
 ;;; CLASS  Outer
 
 (type $innerclassinitorder.InnerClassInitOrder.Outer (struct
- (field $value@innerclassinitorder.InnerClassInitOrder.Outer i32)
+ (field $value@innerclassinitorder.InnerClassInitOrder.Outer (mut i32))
 ))
 
 ;;; Outer(int i)
@@ -997,8 +989,7 @@
    ;; Object.this.Object.<init>();
    
    ;; (Outer.this.value = i);
-   
-  )
+   (struct.set $innerclassinitorder.InnerClassInitOrder.Outer $value@innerclassinitorder.InnerClassInitOrder.Outer  (ref.null $innerclassinitorder.InnerClassInitOrder.Outer) (local.get $i)))
  )
  (local.get $this)
 )
@@ -1020,7 +1011,7 @@
 ;;; CLASS  OuterIsNotSuper
 
 (type $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (struct
- (field $this@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (ref null $innerclassinitorder.InnerClassInitOrder.Outer))
+ (field $this@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (mut (ref null $innerclassinitorder.InnerClassInitOrder.Outer)))
 ))
 
 ;;; OuterIsNotSuper()
@@ -1044,7 +1035,7 @@
  (block $return.label
   (block
    ;; return OuterIsNotSuper.this.this.value;
-   (local.set $return.value (i32.const 0))
+   (local.set $return.value (struct.get $innerclassinitorder.InnerClassInitOrder.Outer $value@innerclassinitorder.InnerClassInitOrder.Outer  (struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper $this@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper  (ref.null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper))))
    (br $return.label))
  )
  (local.get $return.value)
@@ -1053,8 +1044,8 @@
 ;;; CLASS  OuterIsSuper
 
 (type $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper (struct
- (field $value@innerclassinitorder.InnerClassInitOrder.Outer i32)
- (field $this@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper (ref null $innerclassinitorder.InnerClassInitOrder.Outer))
+ (field $value@innerclassinitorder.InnerClassInitOrder.Outer (mut i32))
+ (field $this@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper (mut (ref null $innerclassinitorder.InnerClassInitOrder.Outer)))
 ))
 
 ;;; OuterIsSuper(int i)
@@ -1130,8 +1121,8 @@
 ;;; CLASS  <anonymous> extends Outer
 
 (type $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1 (struct
- (field $value@innerclassinitorder.InnerClassInitOrder.Outer i32)
- (field $this@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1 (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper))
+ (field $value@innerclassinitorder.InnerClassInitOrder.Outer (mut i32))
+ (field $this@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1 (mut (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper)))
 ))
 
 ;;; <anonymous> extends Outer(int $_0)
@@ -1165,7 +1156,7 @@
 ;;; CLASS  TestQualifiedSuperCall
 
 (type $innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall (struct
- (field $this@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (ref null $innerclassinitorder.InnerClassInitOrder.Outer))
+ (field $this@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (mut (ref null $innerclassinitorder.InnerClassInitOrder.Outer)))
 ))
 
 ;;; TestQualifiedSuperCall()
@@ -1184,8 +1175,8 @@
 ;;; CLASS  TestUnqualifiedSuperCall
 
 (type $innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall (struct
- (field $this@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (ref null $innerclassinitorder.InnerClassInitOrder.Outer))
- (field $this@innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall (ref null $innerclassinitorder.InnerClassInitOrder.Outer))
+ (field $this@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (mut (ref null $innerclassinitorder.InnerClassInitOrder.Outer)))
+ (field $this@innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall (mut (ref null $innerclassinitorder.InnerClassInitOrder.Outer)))
 ))
 
 ;;; TestUnqualifiedSuperCall()
@@ -1204,8 +1195,8 @@
 ;;; CLASS  <anonymous> extends OuterIsNotSuper
 
 (type $innerclassinitorder.InnerClassInitOrder.2 (struct
- (field $this@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (ref null $innerclassinitorder.InnerClassInitOrder.Outer))
- (field $this@innerclassinitorder.InnerClassInitOrder.2 (ref null $innerclassinitorder.InnerClassInitOrder))
+ (field $this@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (mut (ref null $innerclassinitorder.InnerClassInitOrder.Outer)))
+ (field $this@innerclassinitorder.InnerClassInitOrder.2 (mut (ref null $innerclassinitorder.InnerClassInitOrder)))
 ))
 
 ;;; <anonymous> extends OuterIsNotSuper(OuterIsSuper $super_outer_this)
@@ -1225,8 +1216,8 @@
 ;;; CLASS  <anonymous> extends TestQualifiedSuperCall
 
 (type $innerclassinitorder.InnerClassInitOrder.3 (struct
- (field $this@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (ref null $innerclassinitorder.InnerClassInitOrder.Outer))
- (field $this@innerclassinitorder.InnerClassInitOrder.3 (ref null $innerclassinitorder.InnerClassInitOrder))
+ (field $this@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (mut (ref null $innerclassinitorder.InnerClassInitOrder.Outer)))
+ (field $this@innerclassinitorder.InnerClassInitOrder.3 (mut (ref null $innerclassinitorder.InnerClassInitOrder)))
 ))
 
 ;;; <anonymous> extends TestQualifiedSuperCall()
@@ -1245,9 +1236,9 @@
 ;;; CLASS  <anonymous> extends TestUnqualifiedSuperCall
 
 (type $innerclassinitorder.InnerClassInitOrder.4 (struct
- (field $this@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (ref null $innerclassinitorder.InnerClassInitOrder.Outer))
- (field $this@innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall (ref null $innerclassinitorder.InnerClassInitOrder.Outer))
- (field $this@innerclassinitorder.InnerClassInitOrder.4 (ref null $innerclassinitorder.InnerClassInitOrder))
+ (field $this@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (mut (ref null $innerclassinitorder.InnerClassInitOrder.Outer)))
+ (field $this@innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall (mut (ref null $innerclassinitorder.InnerClassInitOrder.Outer)))
+ (field $this@innerclassinitorder.InnerClassInitOrder.4 (mut (ref null $innerclassinitorder.InnerClassInitOrder)))
 ))
 
 ;;; <anonymous> extends TestUnqualifiedSuperCall(OuterIsSuper $super_outer_this)

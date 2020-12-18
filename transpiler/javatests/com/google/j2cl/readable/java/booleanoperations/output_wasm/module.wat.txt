@@ -143,21 +143,24 @@
    (local.set $finalOuter (call $<init><>:void@booleanoperations.BooleanOperations.1Outer (struct.new_default_with_rtt $booleanoperations.BooleanOperations.1Outer (global.get $booleanoperations.BooleanOperations.1Outer.rtt)) ))
    
    ;; (finalOuter.b = (finalOuter.b | true));
-   
+   (struct.set $booleanoperations.BooleanOperations.1Outer $b@booleanoperations.BooleanOperations.1Outer  (local.get $finalOuter) (i32.or (struct.get $booleanoperations.BooleanOperations.1Outer $b@booleanoperations.BooleanOperations.1Outer  (local.get $finalOuter)) (i32.const 1)))
    ;; Outer outer = BooleanOperations.this.new $1Outer.<init>();
    (local.set $outer (call $<init><>:void@booleanoperations.BooleanOperations.1Outer (struct.new_default_with_rtt $booleanoperations.BooleanOperations.1Outer (global.get $booleanoperations.BooleanOperations.1Outer.rtt)) ))
    
    ;; (outer.b = (outer.b | (((outer = null),outer) == null)));
-   
-  )
+   (struct.set $booleanoperations.BooleanOperations.1Outer $b@booleanoperations.BooleanOperations.1Outer  (local.get $outer) (i32.or (struct.get $booleanoperations.BooleanOperations.1Outer $b@booleanoperations.BooleanOperations.1Outer  (local.get $outer)) (ref.eq (block
+    (result (ref null $booleanoperations.BooleanOperations.1Outer))
+    (local.set $outer (ref.null $booleanoperations.BooleanOperations.1Outer))
+    (local.get $outer)
+   ) (ref.null $java.lang.Object)))))
  )
 )
 
 ;;; CLASS  Outer
 
 (type $booleanoperations.BooleanOperations.1Outer (struct
- (field $this@booleanoperations.BooleanOperations.1Outer (ref null $booleanoperations.BooleanOperations))
- (field $b@booleanoperations.BooleanOperations.1Outer i32)
+ (field $this@booleanoperations.BooleanOperations.1Outer (mut (ref null $booleanoperations.BooleanOperations)))
+ (field $b@booleanoperations.BooleanOperations.1Outer (mut i32))
 ))
 
 ;;; Outer()
@@ -176,7 +179,7 @@
 ;;; CLASS  Inner
 
 (type $booleanoperations.BooleanOperations.1Outer.Inner (struct
- (field $this@booleanoperations.BooleanOperations.1Outer.Inner (ref null $booleanoperations.BooleanOperations.1Outer))
+ (field $this@booleanoperations.BooleanOperations.1Outer.Inner (mut (ref null $booleanoperations.BooleanOperations.1Outer)))
 ))
 
 ;;; Inner()

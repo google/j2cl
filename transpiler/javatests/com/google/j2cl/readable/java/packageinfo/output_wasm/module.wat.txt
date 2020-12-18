@@ -22,7 +22,7 @@
 ;;; CLASS  Inner
 
 (type $packageinfo.Outer.Inner (struct
- (field $this@packageinfo.Outer.Inner (ref null $packageinfo.Outer))
+ (field $this@packageinfo.Outer.Inner (mut (ref null $packageinfo.Outer)))
 ))
 
 ;;; Inner()
@@ -42,7 +42,7 @@
 ;;; CLASS  Foo
 
 (type $packageinfo.subpackage.Foo (struct
- (field $outer@packageinfo.subpackage.Foo (ref null $packageinfo.Outer))
+ (field $outer@packageinfo.subpackage.Foo (mut (ref null $packageinfo.Outer)))
 ))
 
 ;;; Foo()

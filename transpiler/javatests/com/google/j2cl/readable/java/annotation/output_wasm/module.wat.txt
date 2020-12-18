@@ -20,14 +20,14 @@
 
 ;;; INTERFACE  Foo
 
-(global $CONSTANT@annotation.Main.Foo i32 (i32.const 0))
+(global $CONSTANT@annotation.Main.Foo (mut i32) (i32.const 0))
 (type $annotation.Main.Foo (struct
 ))
 
 ;;; CLASS  Bar
 
 (type $annotation.Main.Bar (struct
- (field $this@annotation.Main.Bar (ref null $annotation.Main))
+ (field $this@annotation.Main.Bar (mut (ref null $annotation.Main)))
 ))
 
 ;;; Bar()
@@ -58,7 +58,7 @@
    (i32.const 0)
    drop
    ;; return annotation.Main.Foo.CONSTANT;
-   (local.set $return.value (i32.const 0))
+   (local.set $return.value (global.get $CONSTANT@annotation.Main.Foo))
    (br $return.label))
  )
  (local.get $return.value)

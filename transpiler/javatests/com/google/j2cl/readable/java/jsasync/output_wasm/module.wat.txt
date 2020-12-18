@@ -3,7 +3,7 @@
 ;;; CLASS  Main
 
 (type $jsasync.Main (struct
- (field $x@jsasync.Main (ref null $jsasync.Main.IThenable))
+ (field $x@jsasync.Main (mut (ref null $jsasync.Main.IThenable)))
 ))
 
 ;;; Main()
@@ -123,7 +123,7 @@
 ;;; CLASS  <anonymous> implements BaseInterface
 
 (type $jsasync.Main.1 (struct
- (field $this@jsasync.Main.1 (ref null $jsasync.Main))
+ (field $this@jsasync.Main.1 (mut (ref null $jsasync.Main)))
 ))
 
 ;;; <anonymous> implements BaseInterface()
@@ -147,7 +147,7 @@
  (block $return.label
   (block
    ;; return jsasync.Main.Promise.resolve(((Integer) jsasync.Main.await($1.this.this.x)));
-   (local.set $return.value (call $resolve<java.lang.Object>:jsasync.Main.Promise@jsasync.Main.Promise (ref.cast $java.lang.Object $java.lang.Integer (call $await<jsasync.Main.IThenable>:java.lang.Object@jsasync.Main (ref.null $jsasync.Main.IThenable)) (global.get $java.lang.Integer.rtt))))
+   (local.set $return.value (call $resolve<java.lang.Object>:jsasync.Main.Promise@jsasync.Main.Promise (ref.cast $java.lang.Object $java.lang.Integer (call $await<jsasync.Main.IThenable>:java.lang.Object@jsasync.Main (struct.get $jsasync.Main $x@jsasync.Main  (struct.get $jsasync.Main.1 $this@jsasync.Main.1  (ref.null $jsasync.Main.1)))) (global.get $java.lang.Integer.rtt))))
    (br $return.label))
  )
  (local.get $return.value)
@@ -156,7 +156,7 @@
 ;;; CLASS  <anonymous> implements JsFunctionInterface
 
 (type $jsasync.Main.2 (struct
- (field $this@jsasync.Main.2 (ref null $jsasync.Main))
+ (field $this@jsasync.Main.2 (mut (ref null $jsasync.Main)))
 ))
 
 ;;; <anonymous> implements JsFunctionInterface()
@@ -189,7 +189,7 @@
 ;;; CLASS  <anonymous> implements JsFunctionInterface
 
 (type $jsasync.Main.3 (struct
- (field $this@jsasync.Main.3 (ref null $jsasync.Main))
+ (field $this@jsasync.Main.3 (mut (ref null $jsasync.Main)))
 ))
 
 ;;; <anonymous> implements JsFunctionInterface()
@@ -217,7 +217,7 @@
    (local.set $tmp (ref.null $jsasync.Main.3))
    
    ;; return jsasync.Main.Promise.resolve(((Integer) jsasync.Main.await($3.this.this.x)));
-   (local.set $return.value (call $resolve<java.lang.Object>:jsasync.Main.Promise@jsasync.Main.Promise (ref.cast $java.lang.Object $java.lang.Integer (call $await<jsasync.Main.IThenable>:java.lang.Object@jsasync.Main (ref.null $jsasync.Main.IThenable)) (global.get $java.lang.Integer.rtt))))
+   (local.set $return.value (call $resolve<java.lang.Object>:jsasync.Main.Promise@jsasync.Main.Promise (ref.cast $java.lang.Object $java.lang.Integer (call $await<jsasync.Main.IThenable>:java.lang.Object@jsasync.Main (struct.get $jsasync.Main $x@jsasync.Main  (struct.get $jsasync.Main.3 $this@jsasync.Main.3  (ref.null $jsasync.Main.3)))) (global.get $java.lang.Integer.rtt))))
    (br $return.label))
  )
  (local.get $return.value)

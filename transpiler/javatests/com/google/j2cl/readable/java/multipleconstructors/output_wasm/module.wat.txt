@@ -3,8 +3,8 @@
 ;;; CLASS  MultipleConstructors
 
 (type $multipleconstructors.MultipleConstructors (struct
- (field $id@multipleconstructors.MultipleConstructors i32)
- (field $flag@multipleconstructors.MultipleConstructors i32)
+ (field $id@multipleconstructors.MultipleConstructors (mut i32))
+ (field $flag@multipleconstructors.MultipleConstructors (mut i32))
 ))
 
 ;;; MultipleConstructors(int id)
@@ -17,10 +17,9 @@
    ;; Object.this.Object.<init>();
    
    ;; (MultipleConstructors.this.id = id);
-   
+   (struct.set $multipleconstructors.MultipleConstructors $id@multipleconstructors.MultipleConstructors  (ref.null $multipleconstructors.MultipleConstructors) (local.get $id))
    ;; (MultipleConstructors.this.flag = (id == 0));
-   
-  )
+   (struct.set $multipleconstructors.MultipleConstructors $flag@multipleconstructors.MultipleConstructors  (ref.null $multipleconstructors.MultipleConstructors) (i32.eq (local.get $id) (i32.const 0))))
  )
  (local.get $this)
 )
@@ -35,10 +34,9 @@
    ;; Object.this.Object.<init>();
    
    ;; (MultipleConstructors.this.id = (0 - 1));
-   
+   (struct.set $multipleconstructors.MultipleConstructors $id@multipleconstructors.MultipleConstructors  (ref.null $multipleconstructors.MultipleConstructors) (i32.sub (i32.const 0) (i32.const 1)))
    ;; (MultipleConstructors.this.flag = flag);
-   
-  )
+   (struct.set $multipleconstructors.MultipleConstructors $flag@multipleconstructors.MultipleConstructors  (ref.null $multipleconstructors.MultipleConstructors) (local.get $flag)))
  )
  (local.get $this)
 )
@@ -54,10 +52,9 @@
    ;; Object.this.Object.<init>();
    
    ;; (MultipleConstructors.this.id = id);
-   
+   (struct.set $multipleconstructors.MultipleConstructors $id@multipleconstructors.MultipleConstructors  (ref.null $multipleconstructors.MultipleConstructors) (local.get $id))
    ;; (MultipleConstructors.this.flag = flag);
-   
-  )
+   (struct.set $multipleconstructors.MultipleConstructors $flag@multipleconstructors.MultipleConstructors  (ref.null $multipleconstructors.MultipleConstructors) (local.get $flag)))
  )
  (local.get $this)
 )

@@ -3,17 +3,17 @@
 ;;; CLASS  Nullability
 
 (type $nullability.Nullability (struct
- (field $f1@nullability.Nullability (ref null $java.lang.String))
- (field $f2@nullability.Nullability (ref null $java.lang.String))
- (field $f3@nullability.Nullability (ref null $java.lang.String))
- (field $f4@nullability.Nullability (ref null $java.util.List))
- (field $f5@nullability.Nullability (ref null $java.util.List))
- (field $f6@nullability.Nullability (ref null $java.util.List))
- (field $f7@nullability.Nullability (ref null $java.util.List))
- (field $f8@nullability.Nullability (ref null $java.lang.Object))
- (field $f9@nullability.Nullability (ref null $java.lang.Object))
- (field $f10@nullability.Nullability (ref null $java.lang.Object))
- (field $f12@nullability.Nullability (ref null $java.util.List))
+ (field $f1@nullability.Nullability (mut (ref null $java.lang.String)))
+ (field $f2@nullability.Nullability (mut (ref null $java.lang.String)))
+ (field $f3@nullability.Nullability (mut (ref null $java.lang.String)))
+ (field $f4@nullability.Nullability (mut (ref null $java.util.List)))
+ (field $f5@nullability.Nullability (mut (ref null $java.util.List)))
+ (field $f6@nullability.Nullability (mut (ref null $java.util.List)))
+ (field $f7@nullability.Nullability (mut (ref null $java.util.List)))
+ (field $f8@nullability.Nullability (mut (ref null $java.lang.Object)))
+ (field $f9@nullability.Nullability (mut (ref null $java.lang.Object)))
+ (field $f10@nullability.Nullability (mut (ref null $java.lang.Object)))
+ (field $f12@nullability.Nullability (mut (ref null $java.util.List)))
 ))
 
 ;;; Nullability(String a)
@@ -153,9 +153,9 @@
 ;;; CLASS  StringList
 
 (type $nullability.Nullability.StringList (struct
- (field $modCount@java.util.AbstractList i32)
- (field $array@java.util.ArrayList (ref null $java.lang.Object))
- (field $exposeElement@java.util.ArrayList (ref null $java.lang.Object))
+ (field $modCount@java.util.AbstractList (mut i32))
+ (field $array@java.util.ArrayList (mut (ref null $java.lang.Object)))
+ (field $exposeElement@java.util.ArrayList (mut (ref null $java.lang.Object)))
 ))
 
 ;;; StringList()

@@ -35,7 +35,7 @@
    ;; interfaces.Main.Interface.staticInterfaceMethod();
    (call $staticInterfaceMethod<>:void@interfaces.Main.Interface )
    ;; int x = (Main.this.new Implementor.<init>().a + interfaces.Main.Interface.b);
-   (local.set $x (i32.add (i32.const 0) (i32.const 0)))
+   (local.set $x (i32.add (global.get $a@interfaces.Main.Interface) (global.get $b@interfaces.Main.Interface)))
    
   )
  )
@@ -43,8 +43,8 @@
 
 ;;; INTERFACE  Interface
 
-(global $a@interfaces.Main.Interface i32 (i32.const 0))
-(global $b@interfaces.Main.Interface i32 (i32.const 0))
+(global $a@interfaces.Main.Interface (mut i32) (i32.const 0))
+(global $b@interfaces.Main.Interface (mut i32) (i32.const 0))
 (type $interfaces.Main.Interface (struct
 ))
 
@@ -98,7 +98,7 @@
 ;;; CLASS  Implementor
 
 (type $interfaces.Main.Implementor (struct
- (field $this@interfaces.Main.Implementor (ref null $interfaces.Main))
+ (field $this@interfaces.Main.Implementor (mut (ref null $interfaces.Main)))
 ))
 
 ;;; Implementor()
@@ -126,7 +126,7 @@
 ;;; CLASS  AbstractImplementor
 
 (type $interfaces.Main.AbstractImplementor (struct
- (field $this@interfaces.Main.AbstractImplementor (ref null $interfaces.Main))
+ (field $this@interfaces.Main.AbstractImplementor (mut (ref null $interfaces.Main)))
 ))
 
 ;;; AbstractImplementor()

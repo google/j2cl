@@ -35,8 +35,8 @@
 ;;; CLASS  InnerClass
 
 (type $nestedlocalclasses.NestedLocalClasses.1InnerClass (struct
- (field $this@nestedlocalclasses.NestedLocalClasses.1InnerClass (ref null $nestedlocalclasses.NestedLocalClasses))
- (field $localVar@nestedlocalclasses.NestedLocalClasses.1InnerClass i32)
+ (field $this@nestedlocalclasses.NestedLocalClasses.1InnerClass (mut (ref null $nestedlocalclasses.NestedLocalClasses)))
+ (field $localVar@nestedlocalclasses.NestedLocalClasses.1InnerClass (mut i32))
 ))
 
 ;;; InnerClass()
@@ -71,10 +71,10 @@
 ;;; CLASS  InnerInnerClass
 
 (type $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass (struct
- (field $this@nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass (ref null $nestedlocalclasses.NestedLocalClasses.1InnerClass))
- (field $fieldInInnerInnerClass@nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass i32)
- (field $localVar@nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass i32)
- (field $localVarInInnerClass@nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass i32)
+ (field $this@nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass (mut (ref null $nestedlocalclasses.NestedLocalClasses.1InnerClass)))
+ (field $fieldInInnerInnerClass@nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass (mut i32))
+ (field $localVar@nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass (mut i32))
+ (field $localVarInInnerClass@nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass (mut i32))
 ))
 
 ;;; InnerInnerClass()
@@ -93,9 +93,9 @@
 ;;; CLASS  ClassIndirectlyCapturingLocal
 
 (type $nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal (struct
- (field $this@nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal (ref null $nestedlocalclasses.NestedLocalClasses.1InnerClass))
- (field $localVar@nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal i32)
- (field $localVarInInnerClass@nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal i32)
+ (field $this@nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal (mut (ref null $nestedlocalclasses.NestedLocalClasses.1InnerClass)))
+ (field $localVar@nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal (mut i32))
+ (field $localVarInInnerClass@nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal (mut i32))
 ))
 
 ;;; ClassIndirectlyCapturingLocal()

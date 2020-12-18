@@ -88,7 +88,7 @@
  (block $return.label
   (block
    ;; int i = t.f;
-   (local.set $i (i32.const 0))
+   (local.set $i (struct.get $typewildcards.TypeWildCards.A $f@typewildcards.TypeWildCards.A  (local.get $t)))
    
    ;; t.m();
    
@@ -103,7 +103,7 @@
  (block $return.label
   (block
    ;; int i = t.f;
-   (local.set $i (i32.const 0))
+   (local.set $i (struct.get $typewildcards.TypeWildCards.A $f@typewildcards.TypeWildCards.A  (local.get $t)))
    
    ;; t.m();
    
@@ -197,7 +197,7 @@
 ;;; CLASS  A
 
 (type $typewildcards.TypeWildCards.A (struct
- (field $f@typewildcards.TypeWildCards.A i32)
+ (field $f@typewildcards.TypeWildCards.A (mut i32))
 ))
 
 ;;; A()
@@ -235,7 +235,7 @@
 ;;; CLASS  Element
 
 (type $typewildcards.TypeWildCards.Element (struct
- (field $this@typewildcards.TypeWildCards.Element (ref null $typewildcards.TypeWildCards))
+ (field $this@typewildcards.TypeWildCards.Element (mut (ref null $typewildcards.TypeWildCards)))
 ))
 
 ;;; Element()
@@ -254,7 +254,7 @@
 ;;; CLASS  OtherElement
 
 (type $typewildcards.TypeWildCards.OtherElement (struct
- (field $this@typewildcards.TypeWildCards.OtherElement (ref null $typewildcards.TypeWildCards))
+ (field $this@typewildcards.TypeWildCards.OtherElement (mut (ref null $typewildcards.TypeWildCards)))
 ))
 
 ;;; OtherElement()
@@ -273,8 +273,8 @@
 ;;; CLASS  SubOtherElement
 
 (type $typewildcards.TypeWildCards.SubOtherElement (struct
- (field $this@typewildcards.TypeWildCards.OtherElement (ref null $typewildcards.TypeWildCards))
- (field $this@typewildcards.TypeWildCards.SubOtherElement (ref null $typewildcards.TypeWildCards))
+ (field $this@typewildcards.TypeWildCards.OtherElement (mut (ref null $typewildcards.TypeWildCards)))
+ (field $this@typewildcards.TypeWildCards.SubOtherElement (mut (ref null $typewildcards.TypeWildCards)))
 ))
 
 ;;; SubOtherElement()
@@ -293,7 +293,7 @@
 ;;; CLASS  Foo
 
 (type $typewildcards.TypeWildCards.Foo (struct
- (field $this@typewildcards.TypeWildCards.Foo (ref null $typewildcards.TypeWildCards))
+ (field $this@typewildcards.TypeWildCards.Foo (mut (ref null $typewildcards.TypeWildCards)))
 ))
 
 ;;; Foo()

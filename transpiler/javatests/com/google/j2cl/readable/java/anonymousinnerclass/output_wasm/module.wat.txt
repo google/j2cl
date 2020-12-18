@@ -21,7 +21,7 @@
 ;;; CLASS  B
 
 (type $anonymousinnerclass.A.B (struct
- (field $this@anonymousinnerclass.A.B (ref null $anonymousinnerclass.A))
+ (field $this@anonymousinnerclass.A.B (mut (ref null $anonymousinnerclass.A)))
 ))
 
 ;;; B()
@@ -84,7 +84,7 @@
 ;;; CLASS  InnerClass
 
 (type $anonymousinnerclass.AnonymousInnerClass.InnerClass (struct
- (field $this@anonymousinnerclass.AnonymousInnerClass.InnerClass (ref null $anonymousinnerclass.AnonymousInnerClass))
+ (field $this@anonymousinnerclass.AnonymousInnerClass.InnerClass (mut (ref null $anonymousinnerclass.AnonymousInnerClass)))
 ))
 
 ;;; InnerClass()
@@ -103,8 +103,8 @@
 ;;; CLASS  <anonymous> extends InnerClass
 
 (type $anonymousinnerclass.AnonymousInnerClass.1 (struct
- (field $this@anonymousinnerclass.AnonymousInnerClass.InnerClass (ref null $anonymousinnerclass.AnonymousInnerClass))
- (field $this@anonymousinnerclass.AnonymousInnerClass.1 (ref null $anonymousinnerclass.AnonymousInnerClass))
+ (field $this@anonymousinnerclass.AnonymousInnerClass.InnerClass (mut (ref null $anonymousinnerclass.AnonymousInnerClass)))
+ (field $this@anonymousinnerclass.AnonymousInnerClass.1 (mut (ref null $anonymousinnerclass.AnonymousInnerClass)))
 ))
 
 ;;; <anonymous> extends InnerClass()
@@ -123,8 +123,8 @@
 ;;; CLASS  <anonymous> extends B
 
 (type $anonymousinnerclass.AnonymousInnerClass.2 (struct
- (field $this@anonymousinnerclass.A.B (ref null $anonymousinnerclass.A))
- (field $this@anonymousinnerclass.AnonymousInnerClass.2 (ref null $anonymousinnerclass.AnonymousInnerClass))
+ (field $this@anonymousinnerclass.A.B (mut (ref null $anonymousinnerclass.A)))
+ (field $this@anonymousinnerclass.AnonymousInnerClass.2 (mut (ref null $anonymousinnerclass.AnonymousInnerClass)))
 ))
 
 ;;; <anonymous> extends B(A $super_outer_this)
@@ -144,9 +144,9 @@
 ;;; CLASS  C
 
 (type $anonymousinnerclass.AnonymousInnerClass.1C (struct
- (field $this@anonymousinnerclass.AnonymousInnerClass.1C (ref null $anonymousinnerclass.AnonymousInnerClass))
- (field $fInC@anonymousinnerclass.AnonymousInnerClass.1C i32)
- (field $arg@anonymousinnerclass.AnonymousInnerClass.1C i32)
+ (field $this@anonymousinnerclass.AnonymousInnerClass.1C (mut (ref null $anonymousinnerclass.AnonymousInnerClass)))
+ (field $fInC@anonymousinnerclass.AnonymousInnerClass.1C (mut i32))
+ (field $arg@anonymousinnerclass.AnonymousInnerClass.1C (mut i32))
 ))
 
 ;;; C()
@@ -165,11 +165,11 @@
 ;;; CLASS  <anonymous> extends C
 
 (type $anonymousinnerclass.AnonymousInnerClass.3 (struct
- (field $this@anonymousinnerclass.AnonymousInnerClass.1C (ref null $anonymousinnerclass.AnonymousInnerClass))
- (field $fInC@anonymousinnerclass.AnonymousInnerClass.1C i32)
- (field $arg@anonymousinnerclass.AnonymousInnerClass.1C i32)
- (field $this@anonymousinnerclass.AnonymousInnerClass.3 (ref null $anonymousinnerclass.AnonymousInnerClass))
- (field $arg@anonymousinnerclass.AnonymousInnerClass.3 i32)
+ (field $this@anonymousinnerclass.AnonymousInnerClass.1C (mut (ref null $anonymousinnerclass.AnonymousInnerClass)))
+ (field $fInC@anonymousinnerclass.AnonymousInnerClass.1C (mut i32))
+ (field $arg@anonymousinnerclass.AnonymousInnerClass.1C (mut i32))
+ (field $this@anonymousinnerclass.AnonymousInnerClass.3 (mut (ref null $anonymousinnerclass.AnonymousInnerClass)))
+ (field $arg@anonymousinnerclass.AnonymousInnerClass.3 (mut i32))
 ))
 
 ;;; <anonymous> extends C()

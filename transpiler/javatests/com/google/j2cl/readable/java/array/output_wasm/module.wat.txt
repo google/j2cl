@@ -316,7 +316,7 @@
 ;;; CLASS  SomeObject
 
 (type $array.Arrays.SomeObject (struct
- (field $this@array.Arrays.SomeObject (ref null $array.Arrays))
+ (field $this@array.Arrays.SomeObject (mut (ref null $array.Arrays)))
 ))
 
 ;;; SomeObject()
@@ -353,7 +353,7 @@
 ;;; CLASS  ArrayContainer
 
 (type $array.Arrays.ArrayContainer (struct
- (field $data@array.Arrays.ArrayContainer (ref null $java.lang.Object))
+ (field $data@array.Arrays.ArrayContainer (mut (ref null $java.lang.Object)))
 ))
 
 ;;; ArrayContainer()

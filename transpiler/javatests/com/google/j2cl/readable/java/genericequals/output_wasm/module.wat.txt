@@ -3,8 +3,8 @@
 ;;; CLASS  GenericEquals
 
 (type $genericequals.GenericEquals (struct
- (field $value@genericequals.GenericEquals (ref null $java.lang.Object))
- (field $value2@genericequals.GenericEquals (ref null $genericequals.GenericEquals))
+ (field $value@genericequals.GenericEquals (mut (ref null $java.lang.Object)))
+ (field $value2@genericequals.GenericEquals (mut (ref null $genericequals.GenericEquals)))
 ))
 
 ;;; GenericEquals(T value)
@@ -17,10 +17,9 @@
    ;; Object.this.Object.<init>();
    
    ;; (GenericEquals.this.value = value);
-   
+   (struct.set $genericequals.GenericEquals $value@genericequals.GenericEquals  (ref.null $genericequals.GenericEquals) (local.get $value))
    ;; (GenericEquals.this.value2 = null);
-   
-  )
+   (struct.set $genericequals.GenericEquals $value2@genericequals.GenericEquals  (ref.null $genericequals.GenericEquals) (ref.null $genericequals.GenericEquals)))
  )
  (local.get $this)
 )
@@ -34,7 +33,7 @@
  (block $return.label
   (block
    ;; return other.value2.value;
-   (local.set $return.value (ref.null $java.lang.Object))
+   (local.set $return.value (struct.get $genericequals.GenericEquals $value@genericequals.GenericEquals  (struct.get $genericequals.GenericEquals $value2@genericequals.GenericEquals  (local.get $other))))
    (br $return.label))
  )
  (local.get $return.value)

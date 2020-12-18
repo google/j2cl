@@ -2,14 +2,14 @@
 
 ;;; CLASS  ArithmeticExpressions
 
-(global $FLOAT_CONSTANT@arithmeticexpressions.ArithmeticExpressions f32 (f32.const 0.0))
-(global $DOUBLE_CONSTANT@arithmeticexpressions.ArithmeticExpressions f64 (f64.const 0.0))
-(global $DOUBLE_CONSTANT_WITH_ARITHMETIC@arithmeticexpressions.ArithmeticExpressions f64 (f64.const 0.0))
-(global $one@arithmeticexpressions.ArithmeticExpressions i64 (i64.const 0))
-(global $foo@arithmeticexpressions.ArithmeticExpressions i64 (i64.const 0))
+(global $FLOAT_CONSTANT@arithmeticexpressions.ArithmeticExpressions (mut f32) (f32.const 0.0))
+(global $DOUBLE_CONSTANT@arithmeticexpressions.ArithmeticExpressions (mut f64) (f64.const 0.0))
+(global $DOUBLE_CONSTANT_WITH_ARITHMETIC@arithmeticexpressions.ArithmeticExpressions (mut f64) (f64.const 0.0))
+(global $one@arithmeticexpressions.ArithmeticExpressions (mut i64) (i64.const 0))
+(global $foo@arithmeticexpressions.ArithmeticExpressions (mut i64) (i64.const 0))
 (type $arithmeticexpressions.ArithmeticExpressions (struct
- (field $bar@arithmeticexpressions.ArithmeticExpressions i64)
- (field $intField@arithmeticexpressions.ArithmeticExpressions i64)
+ (field $bar@arithmeticexpressions.ArithmeticExpressions (mut i64))
+ (field $intField@arithmeticexpressions.ArithmeticExpressions (mut i64))
 ))
 
 ;;; ArithmeticExpressions()
@@ -129,7 +129,7 @@
    ;; boolean k = !(((1 + 2) + 3) == 4),boolean l = ((1 + 2) != 4),boolean m = (java.lang.Long.MAX_VALUE != 9.223372036854778E18);
    (local.set $k (i32.eqz (i32.eq (i32.add (i32.add (i32.const 1) (i32.const 2)) (i32.const 3)) (i32.const 4))))
    (local.set $l (i32.ne (i32.add (i32.const 1) (i32.const 2)) (i32.const 4)))
-   (local.set $m (i64.ne (i64.const 0) (i64.const 0)))
+   (local.set $m (i64.ne (global.get $MAX_VALUE@java.lang.Long) (i64.const 0)))
    
    ;; double o = (((5 + 1) / 2) - 0.0);
    (local.set $o (f64.sub (f64.const 0.0) (f64.const 0.0)))
@@ -408,7 +408,7 @@
    (local.set $ref (ref.null $arithmeticexpressions.ArithmeticExpressions.1Ref))
    
    ;; (ref.field = (((Integer) ref.field) + 1));
-   
+   (struct.set $arithmeticexpressions.ArithmeticExpressions.1Ref $field@arithmeticexpressions.ArithmeticExpressions.1Ref  (local.get $ref) (ref.null $java.lang.Integer))
    ;; int n = (1 + ((Integer) ref.field));
    (local.set $n (i32.add (i32.const 1) (i32.const 0)))
    
@@ -439,8 +439,7 @@
     (local.set $$qualifier (call $getWithSideEffect<>:arithmeticexpressions.ArithmeticExpressions@arithmeticexpressions.ArithmeticExpressions ))
     
     ;; ($qualifier.intField = ($qualifier.intField + 5));
-    
-   ))
+    (struct.set $arithmeticexpressions.ArithmeticExpressions $intField@arithmeticexpressions.ArithmeticExpressions  (local.get $$qualifier) (i64.add (struct.get $arithmeticexpressions.ArithmeticExpressions $intField@arithmeticexpressions.ArithmeticExpressions  (local.get $$qualifier)) (i64.const 0)))))
  )
 )
 
@@ -497,8 +496,8 @@
 ;;; CLASS  Ref
 
 (type $arithmeticexpressions.ArithmeticExpressions.1Ref (struct
- (field $this@arithmeticexpressions.ArithmeticExpressions.1Ref (ref null $arithmeticexpressions.ArithmeticExpressions))
- (field $field@arithmeticexpressions.ArithmeticExpressions.1Ref (ref null $java.lang.Object))
+ (field $this@arithmeticexpressions.ArithmeticExpressions.1Ref (mut (ref null $arithmeticexpressions.ArithmeticExpressions)))
+ (field $field@arithmeticexpressions.ArithmeticExpressions.1Ref (mut (ref null $java.lang.Object)))
 ))
 
 ;;; Ref()

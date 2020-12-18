@@ -19,6 +19,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveVoid;
+import static java.lang.String.format;
 
 import com.google.common.collect.Iterables;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
@@ -30,6 +31,8 @@ import com.google.j2cl.transpiler.ast.ConditionalExpression;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.ExpressionWithComment;
+import com.google.j2cl.transpiler.ast.FieldAccess;
+import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MultiExpression;
@@ -99,8 +102,34 @@ final class ExpressionTranspiler {
           renderVariableAssignment(
               ((VariableReference) left).getTarget(), expression.getRightOperand());
           return false;
+        } else if (left instanceof FieldAccess) {
+          renderFieldAccessOperation((FieldAccess) left, expression.getRightOperand());
         }
         return enterExpression(expression);
+      }
+
+      private void renderFieldAccessOperation(FieldAccess fieldAccess, Expression assignment) {
+        FieldDescriptor fieldDescriptor = fieldAccess.getTarget();
+        String wasmOperation = assignment != null ? "set" : "get";
+
+        if (fieldDescriptor.isStatic()) {
+          sourceBuilder.append(
+              format("(global.%s %s", wasmOperation, environment.getFieldName(fieldDescriptor)));
+        } else {
+          sourceBuilder.append(
+              format(
+                  "(struct.%s %s %s ",
+                  wasmOperation,
+                  environment.getWasmTypeName(fieldDescriptor.getEnclosingTypeDescriptor()),
+                  environment.getFieldName(fieldDescriptor) + " "));
+          render(fieldAccess.getQualifier());
+        }
+
+        if (assignment != null) {
+          sourceBuilder.append(" ");
+          renderTypedExpression(fieldAccess.getTypeDescriptor(), assignment);
+        }
+        sourceBuilder.append(")");
       }
 
       @Override
@@ -116,14 +145,14 @@ final class ExpressionTranspiler {
           return false;
         } else if (castTypeDescriptor.isClass() || castTypeDescriptor.isEnum()) {
           sourceBuilder.append(
-              String.format(
+              format(
                   "(ref.cast %s %s ",
                   environment.getWasmTypeName(
                       castExpression.getExpression().getDeclaredTypeDescriptor()),
                   environment.getWasmTypeName(castTypeDescriptor)));
           render(castExpression.getExpression());
           sourceBuilder.append(
-              String.format(
+              format(
                   " (global.get %s))",
                   environment.getRttGlobalName(
                       ((DeclaredTypeDescriptor) castTypeDescriptor).getTypeDeclaration())));
@@ -157,6 +186,12 @@ final class ExpressionTranspiler {
           // Emit the default value for the type as a place holder so that the module compiles.
           render(expression.getTypeDescriptor().getDefaultValue());
         }
+        return false;
+      }
+
+      @Override
+      public boolean enterFieldAccess(FieldAccess fieldAccess) {
+        renderFieldAccessOperation(fieldAccess, null);
         return false;
       }
 
@@ -210,7 +245,7 @@ final class ExpressionTranspiler {
         MethodDescriptor target = newInstance.getTarget();
         sourceBuilder.append("(call " + environment.getMethodImplementationName(target) + " ");
         sourceBuilder.append(
-            String.format(
+            format(
                 "(struct.new_default_with_rtt %s (global.get %s)) ",
                 environment.getWasmTypeName(newInstance.getTypeDescriptor()),
                 environment.getRttGlobalName(

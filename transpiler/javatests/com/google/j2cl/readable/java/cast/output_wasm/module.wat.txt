@@ -3,7 +3,7 @@
 ;;; CLASS  CastGenerics
 
 (type $cast.CastGenerics (struct
- (field $field@cast.CastGenerics (ref null $java.lang.Object))
+ (field $field@cast.CastGenerics (mut (ref null $java.lang.Object)))
 ))
 
 ;;; CastGenerics()
@@ -49,7 +49,7 @@
  (block $return.label
   (block
    ;; String str = ((String) new CastGenerics.<init>().field);
-   (local.set $str (ref.cast $java.lang.Object $java.lang.String (ref.null $java.lang.String) (global.get $java.lang.String.rtt)))
+   (local.set $str (ref.cast $java.lang.Object $java.lang.String (struct.get $cast.CastGenerics $field@cast.CastGenerics  (call $<init><>:void@cast.CastGenerics (struct.new_default_with_rtt $cast.CastGenerics (global.get $cast.CastGenerics.rtt)) )) (global.get $java.lang.String.rtt)))
    
    ;; (str = ((String) new CastGenerics.<init>().method()));
    (local.set $str (ref.cast $java.lang.Object $java.lang.String (ref.null $java.lang.String) (global.get $java.lang.String.rtt)))
@@ -326,7 +326,7 @@
 ;;; CLASS  Nested
 
 (type $cast.CastGenerics.1Nested (struct
- (field $this@cast.CastGenerics.1Nested (ref null $cast.CastGenerics))
+ (field $this@cast.CastGenerics.1Nested (mut (ref null $cast.CastGenerics)))
 ))
 
 ;;; Nested()

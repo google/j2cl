@@ -2,7 +2,7 @@
 
 ;;; CLASS  Main
 
-(global $STATIC_FIELD@libraryinfo.Main (ref null $java.lang.String) (ref.null $java.lang.String))
+(global $STATIC_FIELD@libraryinfo.Main (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 (type $libraryinfo.Main (struct
 ))
 
@@ -145,9 +145,9 @@
 
 ;;; ENUM  MyEnum
 
-(global $A@libraryinfo.Main.MyEnum (ref null $libraryinfo.Main.MyEnum) (ref.null $libraryinfo.Main.MyEnum))
-(global $B@libraryinfo.Main.MyEnum (ref null $libraryinfo.Main.MyEnum) (ref.null $libraryinfo.Main.MyEnum))
-(global $C@libraryinfo.Main.MyEnum (ref null $libraryinfo.Main.MyEnum) (ref.null $libraryinfo.Main.MyEnum))
+(global $A@libraryinfo.Main.MyEnum (mut (ref null $libraryinfo.Main.MyEnum)) (ref.null $libraryinfo.Main.MyEnum))
+(global $B@libraryinfo.Main.MyEnum (mut (ref null $libraryinfo.Main.MyEnum)) (ref.null $libraryinfo.Main.MyEnum))
+(global $C@libraryinfo.Main.MyEnum (mut (ref null $libraryinfo.Main.MyEnum)) (ref.null $libraryinfo.Main.MyEnum))
 (type $libraryinfo.Main.MyEnum (struct
 ))
 
@@ -167,7 +167,7 @@
 ;;; CLASS  MyJsType
 
 (type $libraryinfo.Main.MyJsType (struct
- (field $someField@libraryinfo.Main.MyJsType (ref null $java.lang.Object))
+ (field $someField@libraryinfo.Main.MyJsType (mut (ref null $java.lang.Object)))
 ))
 
 ;;; MyJsType()
@@ -179,8 +179,7 @@
    ;; Object.this.Object.<init>();
    
    ;; (MyJsType.this.someField = new Main.<init>());
-   
-  )
+   (struct.set $libraryinfo.Main.MyJsType $someField@libraryinfo.Main.MyJsType  (ref.null $libraryinfo.Main.MyJsType) (call $<init><>:void@libraryinfo.Main (struct.new_default_with_rtt $libraryinfo.Main (global.get $libraryinfo.Main.rtt)) )))
  )
  (local.get $this)
 )
@@ -215,7 +214,7 @@
 ;;; CLASS  Foo
 
 (type $libraryinfo.Main.Foo (struct
- (field $this@libraryinfo.Main.Foo (ref null $libraryinfo.Main))
+ (field $this@libraryinfo.Main.Foo (mut (ref null $libraryinfo.Main)))
 ))
 
 ;;; Foo()

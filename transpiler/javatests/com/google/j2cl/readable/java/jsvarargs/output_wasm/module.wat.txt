@@ -3,7 +3,7 @@
 ;;; CLASS  Main
 
 (type $jsvarargs.Main (struct
- (field $field@jsvarargs.Main i32)
+ (field $field@jsvarargs.Main (mut i32))
 ))
 
 ;;; Main(int f)
@@ -16,8 +16,7 @@
    ;; Object.this.Object.<init>();
    
    ;; (Main.this.field = f);
-   
-  )
+   (struct.set $jsvarargs.Main $field@jsvarargs.Main  (ref.null $jsvarargs.Main) (local.get $f)))
  )
  (local.get $this)
 )
@@ -61,7 +60,7 @@
  (block $return.label
   (block
    ;; return ((Main.this.field + m) + numbers[1]);
-   (local.set $return.value (i32.add (i32.add (i32.const 0) (local.get $m)) (i32.const 0)))
+   (local.set $return.value (i32.add (i32.add (struct.get $jsvarargs.Main $field@jsvarargs.Main  (ref.null $jsvarargs.Main)) (local.get $m)) (i32.const 0)))
    (br $return.label))
  )
  (local.get $return.value)
@@ -76,7 +75,7 @@
  (block $return.label
   (block
    ;; return (Main.this.field + numbers[1]);
-   (local.set $return.value (i32.add (i32.const 0) (i32.const 0)))
+   (local.set $return.value (i32.add (struct.get $jsvarargs.Main $field@jsvarargs.Main  (ref.null $jsvarargs.Main)) (i32.const 0)))
    (br $return.label))
  )
  (local.get $return.value)
@@ -508,7 +507,7 @@
 ;;; CLASS  SubMain
 
 (type $jsvarargs.Main.SubMain (struct
- (field $field@jsvarargs.Main i32)
+ (field $field@jsvarargs.Main (mut i32))
 ))
 
 ;;; SubMain()
@@ -565,7 +564,7 @@
 ;;; CLASS  QualifiedSuperMethodCall
 
 (type $jsvarargs.QualifiedSuperMethodCall (struct
- (field $field@jsvarargs.Main i32)
+ (field $field@jsvarargs.Main (mut i32))
 ))
 
 ;;; QualifiedSuperMethodCall()
@@ -584,7 +583,7 @@
 ;;; CLASS  InnerClass
 
 (type $jsvarargs.QualifiedSuperMethodCall.InnerClass (struct
- (field $this@jsvarargs.QualifiedSuperMethodCall.InnerClass (ref null $jsvarargs.QualifiedSuperMethodCall))
+ (field $this@jsvarargs.QualifiedSuperMethodCall.InnerClass (mut (ref null $jsvarargs.QualifiedSuperMethodCall)))
 ))
 
 ;;; InnerClass()

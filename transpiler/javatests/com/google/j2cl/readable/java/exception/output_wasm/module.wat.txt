@@ -3,13 +3,13 @@
 ;;; CLASS  MyException
 
 (type $exception.MyException (struct
- (field $detailMessage@java.lang.Throwable (ref null $java.lang.String))
- (field $cause@java.lang.Throwable (ref null $java.lang.Throwable))
- (field $suppressedExceptions@java.lang.Throwable (ref null $java.lang.Object))
- (field $stackTrace@java.lang.Throwable (ref null $java.lang.Object))
- (field $disableSuppression@java.lang.Throwable i32)
- (field $disableStackTrace@java.lang.Throwable i32)
- (field $backingJsObject@java.lang.Throwable (ref null $java.lang.Object))
+ (field $detailMessage@java.lang.Throwable (mut (ref null $java.lang.String)))
+ (field $cause@java.lang.Throwable (mut (ref null $java.lang.Throwable)))
+ (field $suppressedExceptions@java.lang.Throwable (mut (ref null $java.lang.Object)))
+ (field $stackTrace@java.lang.Throwable (mut (ref null $java.lang.Object)))
+ (field $disableSuppression@java.lang.Throwable (mut i32))
+ (field $disableStackTrace@java.lang.Throwable (mut i32))
+ (field $backingJsObject@java.lang.Throwable (mut (ref null $java.lang.Object)))
 ))
 
 ;;; MyException()
@@ -43,13 +43,13 @@
 ;;; CLASS  MyJsException
 
 (type $exception.MyJsException (struct
- (field $detailMessage@java.lang.Throwable (ref null $java.lang.String))
- (field $cause@java.lang.Throwable (ref null $java.lang.Throwable))
- (field $suppressedExceptions@java.lang.Throwable (ref null $java.lang.Object))
- (field $stackTrace@java.lang.Throwable (ref null $java.lang.Object))
- (field $disableSuppression@java.lang.Throwable i32)
- (field $disableStackTrace@java.lang.Throwable i32)
- (field $backingJsObject@java.lang.Throwable (ref null $java.lang.Object))
+ (field $detailMessage@java.lang.Throwable (mut (ref null $java.lang.String)))
+ (field $cause@java.lang.Throwable (mut (ref null $java.lang.Throwable)))
+ (field $suppressedExceptions@java.lang.Throwable (mut (ref null $java.lang.Object)))
+ (field $stackTrace@java.lang.Throwable (mut (ref null $java.lang.Object)))
+ (field $disableSuppression@java.lang.Throwable (mut i32))
+ (field $disableStackTrace@java.lang.Throwable (mut i32))
+ (field $backingJsObject@java.lang.Throwable (mut (ref null $java.lang.Object)))
 ))
 
 ;;; MyJsException()

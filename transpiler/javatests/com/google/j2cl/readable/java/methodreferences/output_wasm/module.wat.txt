@@ -2,7 +2,7 @@
 
 ;;; CLASS  MethodReferences
 
-(global $staticStringProducer@methodreferences.MethodReferences (ref null $methodreferences.MethodReferences.Producer) (ref.null $methodreferences.MethodReferences.Producer))
+(global $staticStringProducer@methodreferences.MethodReferences (mut (ref null $methodreferences.MethodReferences.Producer)) (ref.null $methodreferences.MethodReferences.Producer))
 (type $methodreferences.MethodReferences (struct
 ))
 
@@ -202,7 +202,7 @@
 ;;; CLASS  ObjectCapturingOuter
 
 (type $methodreferences.MethodReferences.ObjectCapturingOuter (struct
- (field $this@methodreferences.MethodReferences.ObjectCapturingOuter (ref null $methodreferences.MethodReferences))
+ (field $this@methodreferences.MethodReferences.ObjectCapturingOuter (mut (ref null $methodreferences.MethodReferences)))
 ))
 
 ;;; ObjectCapturingOuter()
@@ -226,7 +226,7 @@
  (block $return.label
   (block
    ;; return ObjectCapturingOuter.this.this;
-   (local.set $return.value (ref.null $methodreferences.MethodReferences))
+   (local.set $return.value (struct.get $methodreferences.MethodReferences.ObjectCapturingOuter $this@methodreferences.MethodReferences.ObjectCapturingOuter  (ref.null $methodreferences.MethodReferences.ObjectCapturingOuter)))
    (br $return.label))
  )
  (local.get $return.value)

@@ -34,8 +34,8 @@
 ;;; CLASS  Parent
 
 (type $localclassinheritance.LocalClassInheritance.1Parent (struct
- (field $this@localclassinheritance.LocalClassInheritance.1Parent (ref null $localclassinheritance.LocalClassInheritance))
- (field $f@localclassinheritance.LocalClassInheritance.1Parent i32)
+ (field $this@localclassinheritance.LocalClassInheritance.1Parent (mut (ref null $localclassinheritance.LocalClassInheritance)))
+ (field $f@localclassinheritance.LocalClassInheritance.1Parent (mut i32))
 ))
 
 ;;; Parent()
@@ -58,7 +58,7 @@
  (block $return.label
   (block
    ;; int i = $1Parent.this.f;
-   (local.set $i (i32.const 0))
+   (local.set $i (struct.get $localclassinheritance.LocalClassInheritance.1Parent $f@localclassinheritance.LocalClassInheritance.1Parent  (ref.null $localclassinheritance.LocalClassInheritance.1Parent)))
    
   )
  )
@@ -67,10 +67,10 @@
 ;;; CLASS  Child
 
 (type $localclassinheritance.LocalClassInheritance.1Child (struct
- (field $this@localclassinheritance.LocalClassInheritance.1Parent (ref null $localclassinheritance.LocalClassInheritance))
- (field $f@localclassinheritance.LocalClassInheritance.1Parent i32)
- (field $this@localclassinheritance.LocalClassInheritance.1Child (ref null $localclassinheritance.LocalClassInheritance))
- (field $f@localclassinheritance.LocalClassInheritance.1Child i32)
+ (field $this@localclassinheritance.LocalClassInheritance.1Parent (mut (ref null $localclassinheritance.LocalClassInheritance)))
+ (field $f@localclassinheritance.LocalClassInheritance.1Parent (mut i32))
+ (field $this@localclassinheritance.LocalClassInheritance.1Child (mut (ref null $localclassinheritance.LocalClassInheritance)))
+ (field $f@localclassinheritance.LocalClassInheritance.1Child (mut i32))
 ))
 
 ;;; Child()
@@ -93,7 +93,7 @@
  (block $return.label
   (block
    ;; int i = $1Child.this.f;
-   (local.set $i (i32.const 0))
+   (local.set $i (struct.get $localclassinheritance.LocalClassInheritance.1Child $f@localclassinheritance.LocalClassInheritance.1Child  (ref.null $localclassinheritance.LocalClassInheritance.1Child)))
    
   )
  )

@@ -3,7 +3,7 @@
 ;;; CLASS  Main
 
 (type $jsoptional.Main (struct
- (field $f@jsoptional.Main (ref null $jsoptional.Main.Function))
+ (field $f@jsoptional.Main (mut (ref null $jsoptional.Main.Function)))
 ))
 
 ;;; void Main.method1(int i1, Double d, Integer i)
@@ -140,7 +140,7 @@
 ;;; CLASS  SpecializedSubtype
 
 (type $jsoptional.Main.SpecializedSubtype (struct
- (field $this@jsoptional.Main.SpecializedSubtype (ref null $jsoptional.Main))
+ (field $this@jsoptional.Main.SpecializedSubtype (mut (ref null $jsoptional.Main)))
 ))
 
 ;;; SpecializedSubtype(Object a)

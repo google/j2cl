@@ -3,10 +3,10 @@
 ;;; CLASS  SomeJsType
 
 (type $jstype.SomeJsType (struct
- (field $publicField@jstype.SomeJsType i32)
- (field $privateField@jstype.SomeJsType i32)
- (field $packageField@jstype.SomeJsType i32)
- (field $protectedField@jstype.SomeJsType i32)
+ (field $publicField@jstype.SomeJsType (mut i32))
+ (field $privateField@jstype.SomeJsType (mut i32))
+ (field $packageField@jstype.SomeJsType (mut i32))
+ (field $protectedField@jstype.SomeJsType (mut i32))
 ))
 
 ;;; SomeJsType()
@@ -65,7 +65,7 @@
  (block $return.label
   (block
    ;; int value = (((SomeJsType.this.publicField + SomeJsType.this.privateField) + SomeJsType.this.packageField) + SomeJsType.this.protectedField);
-   (local.set $value (i32.add (i32.add (i32.add (i32.const 0) (i32.const 0)) (i32.const 0)) (i32.const 0)))
+   (local.set $value (i32.add (i32.add (i32.add (struct.get $jstype.SomeJsType $publicField@jstype.SomeJsType  (ref.null $jstype.SomeJsType)) (struct.get $jstype.SomeJsType $privateField@jstype.SomeJsType  (ref.null $jstype.SomeJsType))) (struct.get $jstype.SomeJsType $packageField@jstype.SomeJsType  (ref.null $jstype.SomeJsType))) (struct.get $jstype.SomeJsType $protectedField@jstype.SomeJsType  (ref.null $jstype.SomeJsType))))
    
    ;; SomeJsType.this.publicMethod();
    

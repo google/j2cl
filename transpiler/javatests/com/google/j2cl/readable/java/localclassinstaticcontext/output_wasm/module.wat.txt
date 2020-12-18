@@ -2,7 +2,7 @@
 
 ;;; CLASS  LocalClassInStaticContext
 
-(global $f@localclassinstaticcontext.LocalClassInStaticContext (ref null $java.lang.Object) (ref.null $java.lang.Object))
+(global $f@localclassinstaticcontext.LocalClassInStaticContext (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
 (type $localclassinstaticcontext.LocalClassInStaticContext (struct
 ))
 
@@ -139,7 +139,7 @@
 ;;; CLASS  C
 
 (type $localclassinstaticcontext.LocalClassInStaticContext.C (struct
- (field $f@localclassinstaticcontext.LocalClassInStaticContext.C i32)
+ (field $f@localclassinstaticcontext.LocalClassInStaticContext.C (mut i32))
 ))
 
 ;;; C()
@@ -170,7 +170,7 @@
 ;;; CLASS  D
 
 (type $localclassinstaticcontext.LocalClassInStaticContext.C.1D (struct
- (field $this@localclassinstaticcontext.LocalClassInStaticContext.C.1D (ref null $localclassinstaticcontext.LocalClassInStaticContext.C))
+ (field $this@localclassinstaticcontext.LocalClassInStaticContext.C.1D (mut (ref null $localclassinstaticcontext.LocalClassInStaticContext.C)))
 ))
 
 ;;; D()
@@ -194,7 +194,7 @@
  (block $return.label
   (block
    ;; return $1D.this.this.f;
-   (local.set $return.value (i32.const 0))
+   (local.set $return.value (struct.get $localclassinstaticcontext.LocalClassInStaticContext.C $f@localclassinstaticcontext.LocalClassInStaticContext.C  (struct.get $localclassinstaticcontext.LocalClassInStaticContext.C.1D $this@localclassinstaticcontext.LocalClassInStaticContext.C.1D  (ref.null $localclassinstaticcontext.LocalClassInStaticContext.C.1D))))
    (br $return.label))
  )
  (local.get $return.value)

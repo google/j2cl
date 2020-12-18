@@ -2,12 +2,12 @@
 
 ;;; CLASS  Strings
 
-(global $ESCAPE_CODES@strings.Strings (ref null $java.lang.String) (ref.null $java.lang.String))
-(global $ESCAPE_CODES_COPY@strings.Strings (ref null $java.lang.String) (ref.null $java.lang.String))
+(global $ESCAPE_CODES@strings.Strings (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $ESCAPE_CODES_COPY@strings.Strings (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 (type $strings.Strings (struct
- (field $someString@strings.Strings (ref null $java.lang.String))
- (field $nonBmpChar@strings.Strings (ref null $java.lang.String))
- (field $wideColon@strings.Strings (ref null $java.lang.String))
+ (field $someString@strings.Strings (mut (ref null $java.lang.String)))
+ (field $nonBmpChar@strings.Strings (mut (ref null $java.lang.String)))
+ (field $wideColon@strings.Strings (mut (ref null $java.lang.String)))
 ))
 
 ;;; Strings()
@@ -83,29 +83,26 @@
     (local.set $$qualifier (call $<init><>:void@strings.Strings.StringHolder (struct.new_default_with_rtt $strings.Strings.StringHolder (global.get $strings.Strings.StringHolder.rtt)) ))
     
     ;; ($qualifier.s = ($qualifier.s + s4));
-    
-   )
+    (struct.set $strings.Strings.StringHolder $s@strings.Strings.StringHolder  (local.get $$qualifier) (ref.null $java.lang.String)))
    (block
     ;; StringHolder $qualifier = new StringHolder.<init>();
     (local.set $$qualifier_1 (call $<init><>:void@strings.Strings.StringHolder (struct.new_default_with_rtt $strings.Strings.StringHolder (global.get $strings.Strings.StringHolder.rtt)) ))
     
     ;; ($qualifier.s = ($qualifier.s + c1));
-    
-   )
+    (struct.set $strings.Strings.StringHolder $s@strings.Strings.StringHolder  (local.get $$qualifier_1) (ref.null $java.lang.String)))
    (block
     ;; StringHolder $qualifier = new StringHolder.<init>();
     (local.set $$qualifier_2 (call $<init><>:void@strings.Strings.StringHolder (struct.new_default_with_rtt $strings.Strings.StringHolder (global.get $strings.Strings.StringHolder.rtt)) ))
     
     ;; ($qualifier.s = ($qualifier.s + "o"));
-    
-   ))
+    (struct.set $strings.Strings.StringHolder $s@strings.Strings.StringHolder  (local.get $$qualifier_2) (ref.null $java.lang.String))))
  )
 )
 
 ;;; CLASS  StringHolder
 
 (type $strings.Strings.StringHolder (struct
- (field $s@strings.Strings.StringHolder (ref null $java.lang.String))
+ (field $s@strings.Strings.StringHolder (mut (ref null $java.lang.String)))
 ))
 
 ;;; StringHolder()

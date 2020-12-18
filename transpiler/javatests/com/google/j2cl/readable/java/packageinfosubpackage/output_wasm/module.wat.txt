@@ -4,7 +4,7 @@
 ;;; CLASS  Foo
 
 (type $packageinfosubpackage.Foo (struct
- (field $nativeBar@packageinfosubpackage.Foo (ref null $packageinfosubpackage.Foo.NativeBar))
+ (field $nativeBar@packageinfosubpackage.Foo (mut (ref null $packageinfosubpackage.Foo.NativeBar)))
 ))
 
 ;;; Foo()
@@ -41,7 +41,7 @@
 
 ;;; CLASS  Bar
 
-(global $WOO@packageinfosubpackage.subpackage.Bar i32 (i32.const 0))
+(global $WOO@packageinfosubpackage.subpackage.Bar (mut i32) (i32.const 0))
 (type $packageinfosubpackage.subpackage.Bar (struct
 ))
 
