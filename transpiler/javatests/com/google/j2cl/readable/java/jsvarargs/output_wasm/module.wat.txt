@@ -16,7 +16,8 @@
    ;; Object.this.Object.<init>();
    
    ;; (Main.this.field = f);
-   (struct.set $jsvarargs.Main $field@jsvarargs.Main  (ref.null $jsvarargs.Main) (local.get $f)))
+   (struct.set $jsvarargs.Main $field@jsvarargs.Main  (ref.null $jsvarargs.Main) (local.get $f))
+  )
  )
  (local.get $this)
 )
@@ -31,7 +32,8 @@
   (block
    ;; return ((<expr> + numbers[0]) + multiplier);
    (local.set $return.value (i32.add (i32.add (i32.const 0) (i32.const 0)) (local.get $multiplier)))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -45,7 +47,8 @@
   (block
    ;; return (<expr> + numbers[0]);
    (local.set $return.value (i32.add (i32.const 0) (i32.const 0)))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -61,7 +64,8 @@
   (block
    ;; return ((Main.this.field + m) + numbers[1]);
    (local.set $return.value (i32.add (i32.add (struct.get $jsvarargs.Main $field@jsvarargs.Main  (ref.null $jsvarargs.Main)) (local.get $m)) (i32.const 0)))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -76,7 +80,8 @@
   (block
    ;; return (Main.this.field + numbers[1]);
    (local.set $return.value (i32.add (struct.get $jsvarargs.Main $field@jsvarargs.Main  (ref.null $jsvarargs.Main)) (i32.const 0)))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -90,7 +95,8 @@
   (block
    ;; return elements[0];
    (local.set $return.value (ref.null $java.lang.Object))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -104,7 +110,8 @@
   (block
    ;; return ((Main) elements[0].get(0));
    (local.set $return.value (ref.cast $java.lang.Object $jsvarargs.Main (ref.null $jsvarargs.Main) (global.get $jsvarargs.Main.rtt)))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -118,7 +125,8 @@
   (block
    ;; return elements[0].get(0);
    (local.set $return.value (ref.null $java.lang.Object))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -154,8 +162,8 @@
    (call $f1<int|int<>>:int@jsvarargs.Main (i32.const 1)(ref.null $java.lang.Object))
    drop
    ;; int[] ints = new int[] {1,2};
-   (local.set $ints (ref.null $java.lang.Object))
    
+   (local.set $ints (ref.null $java.lang.Object))
    ;; jsvarargs.Main.f1(1,ints);
    (call $f1<int|int<>>:int@jsvarargs.Main (i32.const 1)(local.get $ints))
    drop
@@ -225,11 +233,11 @@
    (call $generics<java.lang.Object<>>:java.lang.Object@jsvarargs.Main (ref.null $java.lang.Object))
    drop
    ;; int[] ints = new int[] {1,2};
+   
    (local.set $ints (ref.null $java.lang.Object))
-   
    ;; Integer[] integers = new Integer[] {1,2};
-   (local.set $integers (ref.null $java.lang.Object))
    
+   (local.set $integers (ref.null $java.lang.Object))
    ;; jsvarargs.Main.f2(ints);
    (call $f2<int<>>:int@jsvarargs.Main (local.get $ints))
    drop
@@ -251,8 +259,8 @@
  (block $return.label
   (block
    ;; Main m = new Main.<init>(1);
-   (local.set $m (call $<init><int>:void@jsvarargs.Main (struct.new_default_with_rtt $jsvarargs.Main (global.get $jsvarargs.Main.rtt)) (i32.const 1)))
    
+   (local.set $m (call $<init><int>:void@jsvarargs.Main (struct.new_default_with_rtt $jsvarargs.Main (global.get $jsvarargs.Main.rtt)) (i32.const 1)))
    ;; m.f3(1,[1,2]);
    (i32.const 0)
    drop
@@ -266,8 +274,8 @@
    (i32.const 0)
    drop
    ;; int[] ints = new int[] {1,2};
-   (local.set $ints (ref.null $java.lang.Object))
    
+   (local.set $ints (ref.null $java.lang.Object))
    ;; m.f3(1,ints);
    (i32.const 0)
    drop
@@ -283,8 +291,8 @@
  (block $return.label
   (block
    ;; Main m = new Main.<init>(1);
-   (local.set $m (call $<init><int>:void@jsvarargs.Main (struct.new_default_with_rtt $jsvarargs.Main (global.get $jsvarargs.Main.rtt)) (i32.const 1)))
    
+   (local.set $m (call $<init><int>:void@jsvarargs.Main (struct.new_default_with_rtt $jsvarargs.Main (global.get $jsvarargs.Main.rtt)) (i32.const 1)))
    ;; m.f4([1,2]);
    (i32.const 0)
    drop
@@ -298,8 +306,8 @@
    (i32.const 0)
    drop
    ;; int[] ints = new int[] {1,2};
-   (local.set $ints (ref.null $java.lang.Object))
    
+   (local.set $ints (ref.null $java.lang.Object))
    ;; m.f4(ints);
    (i32.const 0)
    drop
@@ -317,14 +325,14 @@
  (block $return.label
   (block
    ;; AFunction a = new AFunction.<init>();
+   
    (local.set $a (call $<init><>:void@jsvarargs.Main.AFunction (struct.new_default_with_rtt $jsvarargs.Main.AFunction (global.get $jsvarargs.Main.AFunction.rtt)) ))
-   
    ;; Object o1 = new Object.<init>();
+   
    (local.set $o1 (call $<init><>:void@java.lang.Object (struct.new_default_with_rtt $java.lang.Object (global.get $java.lang.Object.rtt)) ))
-   
    ;; Object o2 = new Object.<init>();
-   (local.set $o2 (call $<init><>:void@java.lang.Object (struct.new_default_with_rtt $java.lang.Object (global.get $java.lang.Object.rtt)) ))
    
+   (local.set $o2 (call $<init><>:void@java.lang.Object (struct.new_default_with_rtt $java.lang.Object (global.get $java.lang.Object.rtt)) ))
    ;; a.f1(0,[o1,o2]);
    (ref.null $java.lang.Object)
    drop
@@ -338,8 +346,8 @@
    (ref.null $java.lang.Object)
    drop
    ;; Object[] os = new Object[] {o1,o2};
-   (local.set $os (ref.null $java.lang.Object))
    
+   (local.set $os (ref.null $java.lang.Object))
    ;; a.f1(0,os);
    (ref.null $java.lang.Object)
    drop
@@ -354,8 +362,8 @@
  (block $return.label
   (block
    ;; int[] ints = new int[] {1,2};
-   (local.set $ints (ref.null $java.lang.Object))
    
+   (local.set $ints (ref.null $java.lang.Object))
    ;; new Main.<init>(1).f3(1,ints);
    (i32.const 0)
    drop
@@ -370,8 +378,8 @@
  (block $return.label
   (block
    ;; int[] ints = null;
-   (local.set $ints (ref.null $java.lang.Object))
    
+   (local.set $ints (ref.null $java.lang.Object))
    ;; jsvarargs.Main.f2(ints);
    (call $f2<int<>>:int@jsvarargs.Main (local.get $ints))
    drop
@@ -388,8 +396,8 @@
  (block $return.label
   (block
    ;; GenericFunction<U> function = function (U n,U[] param){
-   (local.set $function (ref.null $jsvarargs.Main.GenericFunction))
    
+   (local.set $function (ref.null $jsvarargs.Main.GenericFunction))
   )
  )
 )
@@ -499,7 +507,8 @@
   (block
    ;; return args[i];
    (local.set $return.value (ref.null $java.lang.Object))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -535,8 +544,8 @@
  (block $return.label
   (block
    ;; int a = super.f3(1,[1,2]);
-   (local.set $a (i32.const 0))
    
+   (local.set $a (i32.const 0))
    ;; (a = (a + super.f3(1,[])));
    (local.set $a (i32.add (local.get $a) (i32.const 0)))
    ;; (a = (a + super.f3(1,new int[] {1,2})));
@@ -544,13 +553,14 @@
    ;; (a = (a + super.f3(1,new int[] {})));
    (local.set $a (i32.add (local.get $a) (i32.const 0)))
    ;; int[] ints = new int[] {1,2};
-   (local.set $ints (ref.null $java.lang.Object))
    
+   (local.set $ints (ref.null $java.lang.Object))
    ;; (a = (a + super.f3(1,ints)));
    (local.set $a (i32.add (local.get $a) (i32.const 0)))
    ;; return a;
    (local.set $return.value (local.get $a))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -618,8 +628,8 @@
    (i32.const 0)
    drop
    ;; int[] ints = new int[] {1,2};
-   (local.set $ints (ref.null $java.lang.Object))
    
+   (local.set $ints (ref.null $java.lang.Object))
    ;; InnerClass.this.this.f3(1,ints);
    (i32.const 0)
    drop

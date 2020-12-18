@@ -120,11 +120,12 @@
  (block $return.label
   (block
    ;; MyInterface i = $1B.this.new $1.<init>();
-   (local.set $i (call $<init><>:void@mixednestings.MixedNestings.A.1B.1 (struct.new_default_with_rtt $mixednestings.MixedNestings.A.1B.1 (global.get $mixednestings.MixedNestings.A.1B.1.rtt)) ))
    
+   (local.set $i (call $<init><>:void@mixednestings.MixedNestings.A.1B.1 (struct.new_default_with_rtt $mixednestings.MixedNestings.A.1B.1 (global.get $mixednestings.MixedNestings.A.1B.1.rtt)) ))
    ;; return i.fun(400);
    (local.set $return.value (i32.const 0))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -161,11 +162,12 @@
  (block $return.label
   (block
    ;; MyInterface ii = function (int n){
-   (local.set $ii (ref.null $mixednestings.MyInterface))
    
+   (local.set $ii (ref.null $mixednestings.MyInterface))
    ;; return ii.fun(300);
    (local.set $return.value (i32.const 0))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -199,7 +201,8 @@
   (block
    ;; return b;
    (local.set $return.value (local.get $b))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )

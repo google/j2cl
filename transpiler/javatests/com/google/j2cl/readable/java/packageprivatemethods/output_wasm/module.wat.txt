@@ -28,7 +28,8 @@
   (block
    ;; return (a + 1);
    (local.set $return.value (i32.add (local.get $a) (i32.const 1)))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -44,7 +45,8 @@
   (block
    ;; return ((a + b) + 1);
    (local.set $return.value (i32.add (i32.add (local.get $a) (local.get $b)) (i32.const 1)))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -61,7 +63,8 @@
   (block
    ;; return (((a + b) + c) + 2);
    (local.set $return.value (i32.add (i32.add (i32.add (local.get $a) (local.get $b)) (local.get $c)) (i32.const 2)))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -95,7 +98,8 @@
   (block
    ;; return a;
    (local.set $return.value (local.get $a))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -129,7 +133,8 @@
   (block
    ;; return (a - 1);
    (local.set $return.value (i32.sub (local.get $a) (i32.const 1)))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -145,7 +150,8 @@
   (block
    ;; return (a + b);
    (local.set $return.value (i32.add (local.get $a) (local.get $b)))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -162,7 +168,8 @@
   (block
    ;; return ((a + b) + c);
    (local.set $return.value (i32.add (i32.add (local.get $a) (local.get $b)) (local.get $c)))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -196,7 +203,8 @@
   (block
    ;; return (a + 3);
    (local.set $return.value (i32.add (local.get $a) (i32.const 3)))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -230,7 +238,8 @@
   (block
    ;; return a;
    (local.set $return.value (local.get $a))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )

@@ -24,47 +24,60 @@
  (block $return.label
   (block
    ;; LABEL: {
-   (block $LABEL 
+   (block $LABEL
     (block
      ;; while (true) {
      (loop
       (block
        ;; if (!true) break LABEL;
-       (if (i32.eqz (i32.const 1)) (then ;; break LABEL;
-       (br $LABEL)
-       ))
+       (if (i32.eqz (i32.const 1))
+        (then
+         ;; break LABEL;
+         (br $LABEL)
+        )
+       )
        ;; LOOP_CONTINUE: {
-       (block $LOOP_CONTINUE 
+       (block $LOOP_CONTINUE
         (block
          ;; break LABEL;
          (br $LABEL)
-         
-        ))
+        )
+       )
        (block
-       ))(br 0)
-      
-     )))
+       )
+      )
+      (br 0)
+     )
+    )
+   )
    ;; LABEL1: {
-   (block $LABEL1 
+   (block $LABEL1
     (block
      ;; while (true) {
      (loop
       (block
        ;; if (!true) break LABEL1;
-       (if (i32.eqz (i32.const 1)) (then ;; break LABEL1;
-       (br $LABEL1)
-       ))
+       (if (i32.eqz (i32.const 1))
+        (then
+         ;; break LABEL1;
+         (br $LABEL1)
+        )
+       )
        ;; LOOP_CONTINUE: {
-       (block $LOOP_CONTINUE_1 
+       (block $LOOP_CONTINUE_1
         (block
          ;; break LOOP_CONTINUE;
          (br $LOOP_CONTINUE_1)
-         
-        ))
+        )
+       )
        (block
-       ))(br 0)
-      
-     ))))
+       )
+      )
+      (br 0)
+     )
+    )
+   )
+  )
  )
 )
 

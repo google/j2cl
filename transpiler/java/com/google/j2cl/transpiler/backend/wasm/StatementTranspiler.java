@@ -58,15 +58,13 @@ class StatementTranspiler {
 
       @Override
       public boolean enterStatement(Statement assertStatement) {
-        builder.appendln(
-            ";; unimplemented statement " + assertStatement.getClass().getSimpleName());
+        builder.append(";; unimplemented statement " + assertStatement.getClass().getSimpleName());
         return false;
       }
 
       @Override
       public boolean enterBlock(Block block) {
-        builder.openParens();
-        builder.append("block");
+        builder.openParens("block");
         renderStatements(block.getStatements());
         builder.closeParens();
         return false;
@@ -76,7 +74,7 @@ class StatementTranspiler {
       public boolean enterBreakStatement(BreakStatement breakStatement) {
         LabelReference labelReference = breakStatement.getLabelReference();
         checkNotNull(labelReference);
-        builder.appendln("(br " + environment.getDeclarationName(labelReference.getTarget()) + ")");
+        builder.append("(br " + environment.getDeclarationName(labelReference.getTarget()) + ")");
         return false;
       }
 
@@ -98,27 +96,30 @@ class StatementTranspiler {
 
       @Override
       public boolean enterIfStatement(IfStatement ifStatement) {
-        builder.append("(if ");
+        builder.openParens("if ");
         builder.emitWithMapping(
             ifStatement.getSourcePosition(),
             () -> renderExpression(ifStatement.getConditionExpression()));
-        builder.append(" (then ");
+        builder.newLine();
+        builder.openParens("then");
+        builder.newLine();
         renderStatement(ifStatement.getThenStatement());
-        builder.append(")");
+        builder.closeParens();
         if (ifStatement.getElseStatement() != null) {
-          builder.append(" (else ");
+          builder.openParens("else");
+          builder.newLine();
           renderStatement(ifStatement.getElseStatement());
-          builder.append(")");
+          builder.closeParens();
         }
-        builder.append(")");
+        builder.closeParens();
         return false;
       }
 
       @Override
       public boolean enterLabeledStatement(LabeledStatement labeledStatement) {
-        builder.openParens();
         String label = environment.getDeclarationName(labeledStatement.getLabel());
-        builder.appendln("block " + label + " ");
+        builder.openParens("block " + label);
+        builder.newLine();
         renderStatement(labeledStatement.getStatement());
         builder.closeParens();
         return false;
@@ -147,7 +148,6 @@ class StatementTranspiler {
       @Override
       public boolean enterThrowStatement(ThrowStatement throwStatement) {
         renderExpression(throwStatement.getExpression());
-        builder.newLine();
         // TODO(rluble): This is a nominal placeholder implementation that throws to JavaScript
         // until WASM exception handling is added.
         builder.emitWithMapping(
@@ -158,10 +158,11 @@ class StatementTranspiler {
       @Override
       public boolean enterWhileStatement(WhileStatement whileStatement) {
         checkArgument(whileStatement.getConditionExpression().equals(BooleanLiteral.get(true)));
-        builder.openParens();
-        builder.appendln("loop");
+        builder.openParens("loop");
+        builder.newLine();
         renderStatement(whileStatement.getBody());
-        builder.appendln("(br 0)");
+        builder.newLine();
+        builder.append("(br 0)");
         builder.closeParens();
         return false;
       }

@@ -28,7 +28,8 @@
   (block
    ;; return null;
    (local.set $return.value (ref.null $java.lang.Object))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -49,46 +50,46 @@
  (block $return.label
   (block
    ;; String str = ((String) new CastGenerics.<init>().field);
-   (local.set $str (ref.cast $java.lang.Object $java.lang.String (struct.get $cast.CastGenerics $field@cast.CastGenerics  (call $<init><>:void@cast.CastGenerics (struct.new_default_with_rtt $cast.CastGenerics (global.get $cast.CastGenerics.rtt)) )) (global.get $java.lang.String.rtt)))
    
+   (local.set $str (ref.cast $java.lang.Object $java.lang.String (struct.get $cast.CastGenerics $field@cast.CastGenerics  (call $<init><>:void@cast.CastGenerics (struct.new_default_with_rtt $cast.CastGenerics (global.get $cast.CastGenerics.rtt)) )) (global.get $java.lang.String.rtt)))
    ;; (str = ((String) new CastGenerics.<init>().method()));
    (local.set $str (ref.cast $java.lang.Object $java.lang.String (ref.null $java.lang.String) (global.get $java.lang.String.rtt)))
    ;; Container<T> containerT = null;
-   (local.set $containerT (ref.null $cast.CastGenerics.Container))
    
+   (local.set $containerT (ref.null $cast.CastGenerics.Container))
    ;; ((A) containerT.get()).mA();
    
    ;; ((B) containerT.get()).mB();
    
    ;; Container<U> containerU = null;
-   (local.set $containerU (ref.null $cast.CastGenerics.Container))
    
+   (local.set $containerU (ref.null $cast.CastGenerics.Container))
    ;; ((A) containerU.get()).mA();
    
    ;; ((B) containerU.get()).mB();
    
    ;; Container<T[]> containerArrT = null;
+   
    (local.set $containerArrT (ref.null $cast.CastGenerics.Container))
-   
    ;; T[] arrT = ((T[]) containerArrT.get());
-   (local.set $arrT (ref.null $java.lang.Object))
    
+   (local.set $arrT (ref.null $java.lang.Object))
    ;; arrT[0].mA();
    
    ;; ((B) arrT[0]).mB();
    
    ;; A[] arrA = ((A[]) containerArrT.get());
+   
    (local.set $arrA (ref.null $java.lang.Object))
-   
    ;; B[] arrB = ((B[]) containerArrT.get());
+   
    (local.set $arrB (ref.null $java.lang.Object))
-   
    ;; Container<U[]> containerArrU = null;
+   
    (local.set $containerArrU (ref.null $cast.CastGenerics.Container))
-   
    ;; U[] arrU = ((U[]) containerArrU.get());
-   (local.set $arrU (ref.null $java.lang.Object))
    
+   (local.set $arrU (ref.null $java.lang.Object))
    ;; arrU[0].mA();
    
    ;; ((B) arrU[0]).mB();
@@ -98,15 +99,15 @@
    ;; (arrB = ((B[]) containerArrU.get()));
    (local.set $arrB (ref.null $java.lang.Object))
    ;; Container<BaseImplementor> containerBase = null;
-   (local.set $containerBase (ref.null $cast.CastGenerics.Container))
    
+   (local.set $containerBase (ref.null $cast.CastGenerics.Container))
    ;; ((BaseImplementor) containerBase.get()).mA();
    
    ;; ((BaseImplementor) containerBase.get()).mB();
    
    ;; Container<Implementor> containerImplementor = null;
-   (local.set $containerImplementor (ref.null $cast.CastGenerics.Container))
    
+   (local.set $containerImplementor (ref.null $cast.CastGenerics.Container))
    ;; ((Implementor) containerImplementor.get()).mA();
    
    ;; ((Implementor) containerImplementor.get()).mB();
@@ -122,13 +123,14 @@
  (block $return.label
   (block
    ;; Object o = new Integer.<init>(1);
+   
    (local.set $o (call $<init><int>:void@java.lang.Integer (struct.new_default_with_rtt $java.lang.Integer (global.get $java.lang.Integer.rtt)) (i32.const 1)))
-   
    ;; CastGenerics<Error, Number> cc = ((CastGenerics<Error, Number>) o);
-   (local.set $cc (ref.cast $java.lang.Object $cast.CastGenerics (local.get $o) (global.get $cast.CastGenerics.rtt)))
    
+   (local.set $cc (ref.cast $java.lang.Object $cast.CastGenerics (local.get $o) (global.get $cast.CastGenerics.rtt)))
    ;; (cc = ((CastGenerics) o));
-   (local.set $cc (ref.cast $java.lang.Object $cast.CastGenerics (local.get $o) (global.get $cast.CastGenerics.rtt))))
+   (local.set $cc (ref.cast $java.lang.Object $cast.CastGenerics (local.get $o) (global.get $cast.CastGenerics.rtt)))
+  )
  )
 )
 
@@ -143,20 +145,20 @@
  (block $return.label
   (block
    ;; Object o = new Integer.<init>(1);
+   
    (local.set $o (call $<init><int>:void@java.lang.Integer (struct.new_default_with_rtt $java.lang.Integer (global.get $java.lang.Integer.rtt)) (i32.const 1)))
-   
    ;; E e = ((E) o);
+   
    (local.set $e (ref.null $java.lang.Number))
-   
    ;; T t = ((T) o);
+   
    (local.set $t (ref.null $java.lang.Object))
-   
    ;; E[] es = ((E[]) o);
+   
    (local.set $es (ref.null $java.lang.Object))
-   
    ;; T[] ts = ((T[]) o);
-   (local.set $ts (ref.null $java.lang.Object))
    
+   (local.set $ts (ref.null $java.lang.Object))
   )
  )
 )
@@ -170,18 +172,19 @@
  (block $return.label
   (block
    ;; Object o = new Integer.<init>(1);
+   
    (local.set $o (call $<init><int>:void@java.lang.Integer (struct.new_default_with_rtt $java.lang.Integer (global.get $java.lang.Integer.rtt)) (i32.const 1)))
-   
    ;; S s = ((S) o);
+   
    (local.set $s (ref.null $java.lang.Object))
-   
    ;; Object c = ((CastGenerics<S, Number>) o);
-   (local.set $c (ref.cast $java.lang.Object $cast.CastGenerics (local.get $o) (global.get $cast.CastGenerics.rtt)))
    
+   (local.set $c (ref.cast $java.lang.Object $cast.CastGenerics (local.get $o) (global.get $cast.CastGenerics.rtt)))
    ;; (c = ((S[]) o));
    (local.set $c (ref.null $java.lang.Object))
    ;; (c = ((V) o));
-   (local.set $c (ref.null $java.lang.Enum)))
+   (local.set $c (ref.null $java.lang.Enum))
+  )
  )
 )
 
@@ -203,13 +206,19 @@
  (block $return.label
   (block
    ;; if (o instanceof Empty1) {
-   (if (i32.const 0) (then (block
-    ;; return ((EE) o);
-    (local.set $return.value (ref.null $cast.CastGenerics.Empty1))
-    (br $return.label))))
+   (if (i32.const 0)
+    (then
+     (block
+      ;; return ((EE) o);
+      (local.set $return.value (ref.null $cast.CastGenerics.Empty1))
+      (br $return.label)
+     )
+    )
+   )
    ;; return null;
    (local.set $return.value (ref.null $cast.CastGenerics.Empty1))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -222,7 +231,8 @@
   (block
    ;; return new $1.<init>();
    (local.set $return.value (call $<init><>:void@cast.CastGenerics.1 (struct.new_default_with_rtt $cast.CastGenerics.1 (global.get $cast.CastGenerics.1.rtt)) ))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -318,7 +328,8 @@
   (block
    ;; return null;
    (local.set $return.value (ref.null $java.lang.Object))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -350,8 +361,8 @@
  (block $return.label
   (block
    ;; TT t = ((TT) o);
-   (local.set $t (ref.null $java.lang.Enum))
    
+   (local.set $t (ref.null $java.lang.Enum))
   )
  )
 )
@@ -434,26 +445,26 @@
  (block $return.label
   (block
    ;; byte b = 1;
+   
    (local.set $b (i32.const 0))
-   
    ;; char c = 1;
+   
    (local.set $c (i32.const 0))
-   
    ;; short s = 1;
+   
    (local.set $s (i32.const 0))
-   
    ;; int i = 1;
+   
    (local.set $i (i32.const 1))
-   
    ;; long l = 1;
+   
    (local.set $l (i64.const 1))
-   
    ;; float f = 1.100000023841858;
+   
    (local.set $f (f32.const 1.100000023841858))
-   
    ;; double d = 1.1;
-   (local.set $d (f64.const 1.1))
    
+   (local.set $d (f64.const 1.1))
    ;; (b = ((byte) b));
    (local.set $b (i32.const 0))
    ;; (c = ((char) b));
@@ -551,7 +562,8 @@
    ;; (f = ((float) d));
    (local.set $f (f32.const 0.0))
    ;; (d = ((double) d));
-   (local.set $d (f64.const 0.0)))
+   (local.set $d (f64.const 0.0))
+  )
  )
 )
 
@@ -570,32 +582,32 @@
  (block $return.label
   (block
    ;; Object o = new Object.<init>();
+   
    (local.set $o (call $<init><>:void@java.lang.Object (struct.new_default_with_rtt $java.lang.Object (global.get $java.lang.Object.rtt)) ))
-   
    ;; boolean bool = ((boolean) o);
+   
    (local.set $bool (i32.const 0))
-   
    ;; byte b = ((byte) o);
+   
    (local.set $b (i32.const 0))
-   
    ;; char c = ((char) o);
+   
    (local.set $c (i32.const 0))
-   
    ;; short s = ((short) o);
+   
    (local.set $s (i32.const 0))
-   
    ;; int i = ((int) o);
+   
    (local.set $i (i32.const 0))
-   
    ;; long l = ((long) o);
+   
    (local.set $l (i64.const 0))
-   
    ;; float f = ((float) o);
+   
    (local.set $f (f32.const 0.0))
-   
    ;; double d = ((double) o);
-   (local.set $d (f64.const 0.0))
    
+   (local.set $d (f64.const 0.0))
   )
  )
 )
@@ -612,23 +624,23 @@
  (block $return.label
   (block
    ;; Byte boxedByte = java.lang.Byte.valueOf(((byte) 0));
+   
    (local.set $boxedByte (call $valueOf<byte>:java.lang.Byte@java.lang.Byte (i32.const 0)))
-   
    ;; short s = ((short) boxedByte);
+   
    (local.set $s (i32.const 0))
-   
    ;; int i = ((int) boxedByte);
+   
    (local.set $i (i32.const 0))
-   
    ;; long l = ((long) boxedByte);
+   
    (local.set $l (i64.const 0))
-   
    ;; float f = ((float) boxedByte);
+   
    (local.set $f (f32.const 0.0))
-   
    ;; double d = ((double) boxedByte);
-   (local.set $d (f64.const 0.0))
    
+   (local.set $d (f64.const 0.0))
   )
  )
 )
@@ -646,26 +658,26 @@
  (block $return.label
   (block
    ;; byte b = 127;
+   
    (local.set $b (i32.const 0))
-   
    ;; char c = 65535;
+   
    (local.set $c (i32.const 0))
-   
    ;; short s = 32767;
+   
    (local.set $s (i32.const 0))
-   
    ;; int i = 2147483647;
+   
    (local.set $i (i32.const 2147483647))
-   
    ;; long l = 9223372036854775807;
+   
    (local.set $l (i64.const 9223372036854775807))
-   
    ;; float f = 3.4028234663852886E38;
+   
    (local.set $f (f32.const 3.4028234663852886E38))
-   
    ;; double d = 1.7976931348623157E308;
-   (local.set $d (f64.const 1.7976931348623157E308))
    
+   (local.set $d (f64.const 1.7976931348623157E308))
    ;; cast.CastPrimitives.getShort(b);
    (call $getShort<short>:short@cast.CastPrimitives (i32.const 0))
    drop
@@ -721,7 +733,8 @@
   (block
    ;; return value;
    (local.set $return.value (local.get $value))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -735,7 +748,8 @@
   (block
    ;; return value;
    (local.set $return.value (local.get $value))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -749,7 +763,8 @@
   (block
    ;; return value;
    (local.set $return.value (local.get $value))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -763,7 +778,8 @@
   (block
    ;; return value;
    (local.set $return.value (local.get $value))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -777,7 +793,8 @@
   (block
    ;; return value;
    (local.set $return.value (local.get $value))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -796,66 +813,74 @@
  (block $return.label
   (block
    ;; byte fbyte = 11;
+   
    (local.set $fbyte (i32.const 0))
-   
    ;; char fchar = 12;
+   
    (local.set $fchar (i32.const 0))
-   
    ;; short fshort = 13;
+   
    (local.set $fshort (i32.const 0))
-   
    ;; int fint = 14;
+   
    (local.set $fint (i32.const 14))
-   
    ;; long flong = 15;
+   
    (local.set $flong (i64.const 0))
-   
    ;; float ffloat = 16;
+   
    (local.set $ffloat (f32.const 0.0))
-   
    ;; double fdouble = 17;
+   
    (local.set $fdouble (f64.const 0.0))
-   
    ;; long tlong = 0;
-   (local.set $tlong (i64.const 0))
    
+   (local.set $tlong (i64.const 0))
    (block
     ;; (tlong = fbyte);
     (local.set $tlong (i64.const 0))
     ;; (tlong = flong);
-    (local.set $tlong (local.get $flong)))
+    (local.set $tlong (local.get $flong))
+   )
    (block
     ;; (tlong = fint);
     (local.set $tlong (i64.const 0))
     ;; (tlong = (tlong + fint));
     (local.set $tlong (i64.add (local.get $tlong) (i64.const 0)))
     ;; (tlong = (tlong << fint));
-    (local.set $tlong (i64.shl (local.get $tlong) (i64.const 0))))
+    (local.set $tlong (i64.shl (local.get $tlong) (i64.const 0)))
+   )
    (block
     ;; (tlong = (tlong + fchar));
     (local.set $tlong (i64.add (local.get $tlong) (i64.const 0)))
     ;; (tlong = (tlong + flong));
     (local.set $tlong (i64.add (local.get $tlong) (local.get $flong)))
     ;; (tlong = ((long) (tlong + ffloat)));
-    (local.set $tlong (i64.const 0)))
+    (local.set $tlong (i64.const 0))
+   )
    (block
     ;; (tlong = (flong * fint));
     (local.set $tlong (i64.mul (local.get $flong) (i64.const 0)))
     ;; (tlong = (flong >> fint));
-    (local.set $tlong (i64.shr_s (local.get $flong) (i64.const 0))))
+    (local.set $tlong (i64.shr_s (local.get $flong) (i64.const 0)))
+   )
    (block
     ;; (tlong = (flong + fshort));
     (local.set $tlong (i64.add (local.get $flong) (i64.const 0)))
     ;; (tlong = (flong + flong));
-    (local.set $tlong (i64.add (local.get $flong) (local.get $flong))))
+    (local.set $tlong (i64.add (local.get $flong) (local.get $flong)))
+   )
    (block
     ;; (tlong = (flong << tlong));
     (local.set $tlong (i64.shl (local.get $flong) (local.get $tlong)))
     ;; (tlong = (tlong << flong));
-    (local.set $tlong (i64.shl (local.get $tlong) (local.get $flong))))
+    (local.set $tlong (i64.shl (local.get $tlong) (local.get $flong)))
+   )
    (block
     ;; (tlong = ((0 + 1) + 2));
-    (local.set $tlong (i64.add (i64.const 0) (i64.const 2)))))
+    (local.set $tlong (i64.add (i64.const 0) (i64.const 2)))
+   )
+  )
  )
 )
 
@@ -924,11 +949,11 @@
  (block $return.label
   (block
    ;; Object o = new Object.<init>();
+   
    (local.set $o (call $<init><>:void@java.lang.Object (struct.new_default_with_rtt $java.lang.Object (global.get $java.lang.Object.rtt)) ))
-   
    ;; Casts c = ((Casts) o);
-   (local.set $c (ref.cast $java.lang.Object $cast.Casts (local.get $o) (global.get $cast.Casts.rtt)))
    
+   (local.set $c (ref.cast $java.lang.Object $cast.Casts (local.get $o) (global.get $cast.Casts.rtt)))
   )
  )
 )
@@ -941,11 +966,11 @@
  (block $return.label
   (block
    ;; Object o = new Object.<init>();
+   
    (local.set $o (call $<init><>:void@java.lang.Object (struct.new_default_with_rtt $java.lang.Object (global.get $java.lang.Object.rtt)) ))
-   
    ;; Serializable s = ((Serializable) o);
-   (local.set $s (local.get $o))
    
+   (local.set $s (local.get $o))
   )
  )
 )
@@ -966,35 +991,35 @@
  (block $return.label
   (block
    ;; Object o = new Integer.<init>(1);
+   
    (local.set $o (call $<init><int>:void@java.lang.Integer (struct.new_default_with_rtt $java.lang.Integer (global.get $java.lang.Integer.rtt)) (i32.const 1)))
-   
    ;; Byte b = ((Byte) o);
+   
    (local.set $b (ref.cast $java.lang.Object $java.lang.Byte (local.get $o) (global.get $java.lang.Byte.rtt)))
-   
    ;; Double d = ((Double) o);
+   
    (local.set $d (ref.cast $java.lang.Object $java.lang.Double (local.get $o) (global.get $java.lang.Double.rtt)))
-   
    ;; Float f = ((Float) o);
+   
    (local.set $f (ref.cast $java.lang.Object $java.lang.Float (local.get $o) (global.get $java.lang.Float.rtt)))
-   
    ;; Integer i = ((Integer) o);
+   
    (local.set $i (ref.cast $java.lang.Object $java.lang.Integer (local.get $o) (global.get $java.lang.Integer.rtt)))
-   
    ;; Long l = ((Long) o);
+   
    (local.set $l (ref.cast $java.lang.Object $java.lang.Long (local.get $o) (global.get $java.lang.Long.rtt)))
-   
    ;; Short s = ((Short) o);
+   
    (local.set $s (ref.cast $java.lang.Object $java.lang.Short (local.get $o) (global.get $java.lang.Short.rtt)))
-   
    ;; Number n = ((Number) o);
+   
    (local.set $n (ref.cast $java.lang.Object $java.lang.Number (local.get $o) (global.get $java.lang.Number.rtt)))
-   
    ;; Character c = ((Character) o);
+   
    (local.set $c (ref.cast $java.lang.Object $java.lang.Character (local.get $o) (global.get $java.lang.Character.rtt)))
-   
    ;; Boolean bool = ((Boolean) o);
-   (local.set $bool (ref.cast $java.lang.Object $java.lang.Boolean (local.get $o) (global.get $java.lang.Boolean.rtt)))
    
+   (local.set $bool (ref.cast $java.lang.Object $java.lang.Boolean (local.get $o) (global.get $java.lang.Boolean.rtt)))
   )
  )
 )
@@ -1007,11 +1032,11 @@
  (block $return.label
   (block
    ;; Object foo = ((Object[]) null);
+   
    (local.set $foo (ref.null $java.lang.Object))
-   
    ;; Object bar = ((Object[][]) null);
-   (local.set $bar (ref.null $java.lang.Object))
    
+   (local.set $bar (ref.null $java.lang.Object))
   )
  )
 )

@@ -27,7 +27,8 @@
   (block
    ;; return 0;
    (local.set $return.value (i32.const 0))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -41,7 +42,8 @@
   (block
    ;; return ((long) 0);
    (local.set $return.value (i64.const 0))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -55,7 +57,8 @@
   (block
    ;; return 0;
    (local.set $return.value (f32.const 0.0))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -69,7 +72,8 @@
   (block
    ;; return 0;
    (local.set $return.value (f64.const 0.0))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -101,7 +105,8 @@
   (block
    ;; return super.hashCode();
    (local.set $return.value (i32.const 0))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -132,14 +137,14 @@
  (block $return.label
   (block
    ;; FooCallsSuperObjectMethod fooCallsSuperObjectMethods = new FooCallsSuperObjectMethod.<init>();
-   (local.set $fooCallsSuperObjectMethods (call $<init><>:void@devirtualizedsupermethodcall.FooCallsSuperObjectMethod (struct.new_default_with_rtt $devirtualizedsupermethodcall.FooCallsSuperObjectMethod (global.get $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.rtt)) ))
    
+   (local.set $fooCallsSuperObjectMethods (call $<init><>:void@devirtualizedsupermethodcall.FooCallsSuperObjectMethod (struct.new_default_with_rtt $devirtualizedsupermethodcall.FooCallsSuperObjectMethod (global.get $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.rtt)) ))
    ;; fooCallsSuperObjectMethods.hashCode();
    (i32.const 0)
    drop
    ;; SubNumber sn = new SubNumber.<init>();
-   (local.set $sn (call $<init><>:void@devirtualizedsupermethodcall.SubNumber (struct.new_default_with_rtt $devirtualizedsupermethodcall.SubNumber (global.get $devirtualizedsupermethodcall.SubNumber.rtt)) ))
    
+   (local.set $sn (call $<init><>:void@devirtualizedsupermethodcall.SubNumber (struct.new_default_with_rtt $devirtualizedsupermethodcall.SubNumber (global.get $devirtualizedsupermethodcall.SubNumber.rtt)) ))
    ;; sn.byteValue();
    (i32.const 0)
    drop

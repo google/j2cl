@@ -25,7 +25,6 @@
   (block
    ;; assert (new Outer.<init>().method() == 5);
    ;; unimplemented statement AssertStatement
-   
   )
  )
 )
@@ -58,7 +57,8 @@
   (block
    ;; return (Outer.this.new Inner.<init>().getB() + Outer.this.a);
    (local.set $return.value (i32.add (i32.const 0) (struct.get $jsinnerclass.Main.Outer $a@jsinnerclass.Main.Outer  (ref.null $jsinnerclass.Main.Outer))))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -79,7 +79,8 @@
    ;; Object.this.Object.<init>();
    
    ;; (Inner.this.b = (Inner.this.this.a + 1));
-   (struct.set $jsinnerclass.Main.Outer.Inner $b@jsinnerclass.Main.Outer.Inner  (ref.null $jsinnerclass.Main.Outer.Inner) (i32.add (struct.get $jsinnerclass.Main.Outer $a@jsinnerclass.Main.Outer  (struct.get $jsinnerclass.Main.Outer.Inner $this@jsinnerclass.Main.Outer.Inner  (ref.null $jsinnerclass.Main.Outer.Inner))) (i32.const 1))))
+   (struct.set $jsinnerclass.Main.Outer.Inner $b@jsinnerclass.Main.Outer.Inner  (ref.null $jsinnerclass.Main.Outer.Inner) (i32.add (struct.get $jsinnerclass.Main.Outer $a@jsinnerclass.Main.Outer  (struct.get $jsinnerclass.Main.Outer.Inner $this@jsinnerclass.Main.Outer.Inner  (ref.null $jsinnerclass.Main.Outer.Inner))) (i32.const 1)))
+  )
  )
  (local.get $this)
 )
@@ -93,7 +94,8 @@
   (block
    ;; return Inner.this.b;
    (local.set $return.value (struct.get $jsinnerclass.Main.Outer.Inner $b@jsinnerclass.Main.Outer.Inner  (ref.null $jsinnerclass.Main.Outer.Inner)))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )

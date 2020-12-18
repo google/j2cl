@@ -27,7 +27,6 @@
   (block
    ;; try {
    ;; unimplemented statement TryStatement
-   
   )
  )
 )
@@ -42,10 +41,8 @@
   (block
    ;; try {
    ;; unimplemented statement TryStatement
-   
    ;; try {
    ;; unimplemented statement TryStatement
-   
   )
  )
 )
@@ -58,7 +55,6 @@
   (block
    ;; try {
    ;; unimplemented statement TryStatement
-   
   )
  )
 )
@@ -70,7 +66,6 @@
   (block
    ;; try {
    ;; unimplemented statement TryStatement
-   
   )
  )
 )
@@ -85,7 +80,6 @@
   (block
    ;; try (
    ;; unimplemented statement TryStatement
-   
   )
  )
 )
@@ -101,14 +95,13 @@
  (block $return.label
   (block
    ;; ClosableThing thing = new ClosableThing.<init>();
+   
    (local.set $thing (call $<init><>:void@trycatch.TryCatch.ClosableThing (struct.new_default_with_rtt $trycatch.TryCatch.ClosableThing (global.get $trycatch.TryCatch.ClosableThing.rtt)) ))
-   
    ;; ClosableThing thing2 = new ClosableThing.<init>();
-   (local.set $thing2 (call $<init><>:void@trycatch.TryCatch.ClosableThing (struct.new_default_with_rtt $trycatch.TryCatch.ClosableThing (global.get $trycatch.TryCatch.ClosableThing.rtt)) ))
    
+   (local.set $thing2 (call $<init><>:void@trycatch.TryCatch.ClosableThing (struct.new_default_with_rtt $trycatch.TryCatch.ClosableThing (global.get $trycatch.TryCatch.ClosableThing.rtt)) ))
    ;; try (
    ;; unimplemented statement TryStatement
-   
   )
  )
 )
@@ -122,7 +115,6 @@
   (block
    ;; try {
    ;; unimplemented statement TryStatement
-   
   )
  )
 )
@@ -133,8 +125,7 @@
  (block $return.label
   (block
    ;; throw TryCatch.this.getT(new Exception.<init>());
-   (ref.null $java.lang.Exception)
-   unreachable
+   (ref.null $java.lang.Exception)unreachable
   )
  )
 )
@@ -149,7 +140,8 @@
   (block
    ;; return t;
    (local.set $return.value (local.get $t))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -160,8 +152,7 @@
  (block $return.label
   (block
    ;; throw TryCatch.this.getThrowable();
-   (ref.null $java.lang.Throwable)
-   unreachable
+   (ref.null $java.lang.Throwable)unreachable
   )
  )
 )
@@ -175,7 +166,8 @@
   (block
    ;; return null;
    (local.set $return.value (ref.null $java.lang.Throwable))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )

@@ -26,8 +26,8 @@
  (block $return.label
   (block
    ;; int localVar = 1;
-   (local.set $localVar (i32.const 1))
    
+   (local.set $localVar (i32.const 1))
   )
  )
 )
@@ -59,8 +59,8 @@
  (block $return.label
   (block
    ;; int localVarInInnerClass = 1;
-   (local.set $localVarInInnerClass (i32.const 1))
    
+   (local.set $localVarInInnerClass (i32.const 1))
    ;; $1InnerClass.this.new $1InnerInnerClass.<init>();
    (call $<init><>:void@nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass (struct.new_default_with_rtt $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass (global.get $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass.rtt)) )
    drop

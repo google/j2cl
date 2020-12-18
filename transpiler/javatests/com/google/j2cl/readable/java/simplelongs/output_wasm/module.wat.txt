@@ -29,7 +29,8 @@
   (block
    ;; return 0;
    (local.set $return.value (i64.const 0))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -45,7 +46,8 @@
    (struct.set $simplelongs.SimpleLongs $sideEffect@simplelongs.SimpleLongs  (ref.null $simplelongs.SimpleLongs) (i32.add (struct.get $simplelongs.SimpleLongs $sideEffect@simplelongs.SimpleLongs  (ref.null $simplelongs.SimpleLongs)) (i32.const 1)))
    ;; return SimpleLongs.this;
    (local.set $return.value (ref.null $simplelongs.SimpleLongs))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -71,15 +73,15 @@
  (block $return.label
   (block
    ;; long a = 0;
-   (local.set $a (i64.const 0))
    
+   (local.set $a (i64.const 0))
    ;; (a = (0 - 100000));
    (local.set $a (i64.sub (i64.const 0) (i64.const 100000)))
    ;; (a = 100000);
    (local.set $a (i64.const 100000))
    ;; long b = (0 - 2147483648);
-   (local.set $b (i64.sub (i64.const 0) (i64.const 2147483648)))
    
+   (local.set $b (i64.sub (i64.const 0) (i64.const 2147483648)))
    ;; (b = 2147483648);
    (local.set $b (i64.const 2147483648))
    ;; (b = -9223372036854775808);
@@ -87,71 +89,65 @@
    ;; (b = 9223372036854775807);
    (local.set $b (i64.const 9223372036854775807))
    ;; long c = (a + b);
-   (local.set $c (i64.add (local.get $a) (local.get $b)))
    
+   (local.set $c (i64.add (local.get $a) (local.get $b)))
    ;; (c = (a / b));
    (local.set $c (i64.div_s (local.get $a) (local.get $b)))
    ;; long e = ((a = (a + 1)),a);
-   (local.set $e (block
-    (result i64)
+   
+   (local.set $e (block (result i64)
     (local.set $a (i64.add (local.get $a) (i64.const 1)))
     (local.get $a)
    ))
-   
    ;; (e = (SimpleLongs $qualifier = SimpleLongs.this,long $value = (SimpleLongs.this.foo + 1),($qualifier.foo = $value),$value));
-   (local.set $e (block
-    (result i64)
+   (local.set $e (block (result i64)
+    
     (local.set $$qualifier (ref.null $simplelongs.SimpleLongs))
     (local.set $$value (i64.add (struct.get $simplelongs.SimpleLongs $foo@simplelongs.SimpleLongs  (ref.null $simplelongs.SimpleLongs)) (i64.const 1)))
-    
     (struct.set $simplelongs.SimpleLongs $foo@simplelongs.SimpleLongs  (local.get $$qualifier) (local.get $$value))
     (local.get $$value)
    ))
    ;; (e = (SimpleLongs $qualifier = SimpleLongs.this.getWithSideEffect(),(SimpleLongs $qualifier = $qualifier,long $value = ($qualifier.foo + 1),($qualifier.foo = $value),$value)));
-   (local.set $e (block
-    (result i64)
-    (local.set $$qualifier_1 (ref.null $simplelongs.SimpleLongs))
+   (local.set $e (block (result i64)
     
-    (block
-     (result i64)
+    (local.set $$qualifier_1 (ref.null $simplelongs.SimpleLongs))
+    (block (result i64)
+     
      (local.set $$qualifier_2 (local.get $$qualifier_1))
      (local.set $$value_1 (i64.add (struct.get $simplelongs.SimpleLongs $foo@simplelongs.SimpleLongs  (local.get $$qualifier_1)) (i64.const 1)))
-     
      (struct.set $simplelongs.SimpleLongs $foo@simplelongs.SimpleLongs  (local.get $$qualifier_2) (local.get $$value_1))
      (local.get $$value_1)
     )
    ))
    ;; long f = (long $value = a,(a = (a + 1)),$value);
-   (local.set $f (block
-    (result i64)
-    (local.set $$value_2 (local.get $a))
+   
+   (local.set $f (block (result i64)
     
+    (local.set $$value_2 (local.get $a))
     (local.set $a (i64.add (local.get $a) (i64.const 1)))
     (local.get $$value_2)
    ))
-   
    ;; (f = (long $value = SimpleLongs.this.foo,(SimpleLongs.this.foo = (SimpleLongs.this.foo + 1)),$value));
-   (local.set $f (block
-    (result i64)
-    (local.set $$value_3 (struct.get $simplelongs.SimpleLongs $foo@simplelongs.SimpleLongs  (ref.null $simplelongs.SimpleLongs)))
+   (local.set $f (block (result i64)
     
+    (local.set $$value_3 (struct.get $simplelongs.SimpleLongs $foo@simplelongs.SimpleLongs  (ref.null $simplelongs.SimpleLongs)))
     (struct.set $simplelongs.SimpleLongs $foo@simplelongs.SimpleLongs  (ref.null $simplelongs.SimpleLongs) (i64.add (struct.get $simplelongs.SimpleLongs $foo@simplelongs.SimpleLongs  (ref.null $simplelongs.SimpleLongs)) (i64.const 1)))
     (local.get $$value_3)
    ))
    ;; (f = (SimpleLongs $qualifier = SimpleLongs.this.getWithSideEffect(),long $value = $qualifier.foo,($qualifier.foo = ($qualifier.foo + 1)),$value));
-   (local.set $f (block
-    (result i64)
+   (local.set $f (block (result i64)
+    
     (local.set $$qualifier_3 (ref.null $simplelongs.SimpleLongs))
     (local.set $$value_4 (struct.get $simplelongs.SimpleLongs $foo@simplelongs.SimpleLongs  (local.get $$qualifier_3)))
-    
     (struct.set $simplelongs.SimpleLongs $foo@simplelongs.SimpleLongs  (local.get $$qualifier_3) (i64.add (struct.get $simplelongs.SimpleLongs $foo@simplelongs.SimpleLongs  (local.get $$qualifier_3)) (i64.const 1)))
     (local.get $$value_4)
    ))
    ;; long g = SimpleLongs.this.foo;
-   (local.set $g (struct.get $simplelongs.SimpleLongs $foo@simplelongs.SimpleLongs  (ref.null $simplelongs.SimpleLongs)))
    
+   (local.set $g (struct.get $simplelongs.SimpleLongs $foo@simplelongs.SimpleLongs  (ref.null $simplelongs.SimpleLongs)))
    ;; (g = SimpleLongs.this.getBar());
-   (local.set $g (i64.const 0)))
+   (local.set $g (i64.const 0))
+  )
  )
 )
 

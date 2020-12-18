@@ -28,7 +28,8 @@
   (block
    ;; return instancequalifieronstaticfield.InstanceQualifiers.staticField;
    (local.set $return.value (global.get $staticField@instancequalifieronstaticfield.InstanceQualifiers))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -41,7 +42,8 @@
   (block
    ;; return null;
    (local.set $return.value (ref.null $instancequalifieronstaticfield.InstanceQualifiers))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -56,42 +58,50 @@
  (block $return.label
   (block
    ;; InstanceQualifiers main = new InstanceQualifiers.<init>();
+   
    (local.set $main (call $<init><>:void@instancequalifieronstaticfield.InstanceQualifiers (struct.new_default_with_rtt $instancequalifieronstaticfield.InstanceQualifiers (global.get $instancequalifieronstaticfield.InstanceQualifiers.rtt)) ))
-   
    ;; int i = 0;
-   (local.set $i (i32.const 0))
    
+   (local.set $i (i32.const 0))
    (block
     ;; (instancequalifieronstaticfield.InstanceQualifiers.staticField = 100);
-    (global.set $staticField@instancequalifieronstaticfield.InstanceQualifiers (i32.const 100)))
+    (global.set $staticField@instancequalifieronstaticfield.InstanceQualifiers (i32.const 100))
+   )
    (block
     ;; (main.staticField = 100);
     (global.set $staticField@instancequalifieronstaticfield.InstanceQualifiers (i32.const 100))
     ;; (main.getStaticInstanceQualifiers().staticField = 300);
-    (global.set $staticField@instancequalifieronstaticfield.InstanceQualifiers (i32.const 300)))
+    (global.set $staticField@instancequalifieronstaticfield.InstanceQualifiers (i32.const 300))
+   )
    (block
     ;; (i = main.staticField);
     (local.set $i (global.get $staticField@instancequalifieronstaticfield.InstanceQualifiers))
     ;; (i = main.getStaticValue());
     (local.set $i (call $getStaticValue<>:int@instancequalifieronstaticfield.InstanceQualifiers ))
     ;; (i = main.getStaticInstanceQualifiers().staticField);
-    (local.set $i (global.get $staticField@instancequalifieronstaticfield.InstanceQualifiers)))
+    (local.set $i (global.get $staticField@instancequalifieronstaticfield.InstanceQualifiers))
+   )
    (block
     ;; (main.staticField = (main.staticField + 100));
     (global.set $staticField@instancequalifieronstaticfield.InstanceQualifiers (i32.add (global.get $staticField@instancequalifieronstaticfield.InstanceQualifiers) (i32.const 100)))
     (block
      ;; InstanceQualifiers $qualifier = main.getStaticInstanceQualifiers();
-     (local.set $$qualifier (call $getStaticInstanceQualifiers<>:instancequalifieronstaticfield.InstanceQualifiers@instancequalifieronstaticfield.InstanceQualifiers ))
      
+     (local.set $$qualifier (call $getStaticInstanceQualifiers<>:instancequalifieronstaticfield.InstanceQualifiers@instancequalifieronstaticfield.InstanceQualifiers ))
      ;; ($qualifier.staticField = ($qualifier.staticField + 100));
-     (global.set $staticField@instancequalifieronstaticfield.InstanceQualifiers (i32.add (global.get $staticField@instancequalifieronstaticfield.InstanceQualifiers) (i32.const 100)))))
+     (global.set $staticField@instancequalifieronstaticfield.InstanceQualifiers (i32.add (global.get $staticField@instancequalifieronstaticfield.InstanceQualifiers) (i32.const 100)))
+    )
+   )
    (block
     (block
      ;; InstanceQualifiers $qualifier = main.getStaticInstanceQualifiers().getStaticInstanceQualifiers();
-     (local.set $$qualifier_1 (call $getStaticInstanceQualifiers<>:instancequalifieronstaticfield.InstanceQualifiers@instancequalifieronstaticfield.InstanceQualifiers ))
      
+     (local.set $$qualifier_1 (call $getStaticInstanceQualifiers<>:instancequalifieronstaticfield.InstanceQualifiers@instancequalifieronstaticfield.InstanceQualifiers ))
      ;; ($qualifier.staticField = ($qualifier.staticField + main.getStaticInstanceQualifiers().getStaticInstanceQualifiers().getStaticValue()));
-     (global.set $staticField@instancequalifieronstaticfield.InstanceQualifiers (i32.add (global.get $staticField@instancequalifieronstaticfield.InstanceQualifiers) (call $getStaticValue<>:int@instancequalifieronstaticfield.InstanceQualifiers ))))))
+     (global.set $staticField@instancequalifieronstaticfield.InstanceQualifiers (i32.add (global.get $staticField@instancequalifieronstaticfield.InstanceQualifiers) (call $getStaticValue<>:int@instancequalifieronstaticfield.InstanceQualifiers )))
+    )
+   )
+  )
  )
 )
 

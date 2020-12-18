@@ -20,7 +20,8 @@
    ;; (SimpleGenericType.this.first = t);
    (struct.set $simplegenerictype.SimpleGenericType $first@simplegenerictype.SimpleGenericType  (ref.null $simplegenerictype.SimpleGenericType) (local.get $t))
    ;; (SimpleGenericType.this.second = s);
-   (struct.set $simplegenerictype.SimpleGenericType $second@simplegenerictype.SimpleGenericType  (ref.null $simplegenerictype.SimpleGenericType) (local.get $s)))
+   (struct.set $simplegenerictype.SimpleGenericType $second@simplegenerictype.SimpleGenericType  (ref.null $simplegenerictype.SimpleGenericType) (local.get $s))
+  )
  )
  (local.get $this)
 )
@@ -32,8 +33,8 @@
  (block $return.label
   (block
    ;; SimpleGenericType<Object, Error> g = new SimpleGenericType.<init>(new Object.<init>(),new Error.<init>());
-   (local.set $g (call $<init><java.lang.Object|java.lang.Object>:void@simplegenerictype.SimpleGenericType (struct.new_default_with_rtt $simplegenerictype.SimpleGenericType (global.get $simplegenerictype.SimpleGenericType.rtt)) (call $<init><>:void@java.lang.Object (struct.new_default_with_rtt $java.lang.Object (global.get $java.lang.Object.rtt)) )(call $<init><>:void@java.lang.Error (struct.new_default_with_rtt $java.lang.Error (global.get $java.lang.Error.rtt)) )))
    
+   (local.set $g (call $<init><java.lang.Object|java.lang.Object>:void@simplegenerictype.SimpleGenericType (struct.new_default_with_rtt $simplegenerictype.SimpleGenericType (global.get $simplegenerictype.SimpleGenericType.rtt)) (call $<init><>:void@java.lang.Object (struct.new_default_with_rtt $java.lang.Object (global.get $java.lang.Object.rtt)) )(call $<init><>:void@java.lang.Error (struct.new_default_with_rtt $java.lang.Error (global.get $java.lang.Error.rtt)) )))
   )
  )
 )

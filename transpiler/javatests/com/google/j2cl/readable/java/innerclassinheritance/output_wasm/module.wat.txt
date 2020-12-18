@@ -151,8 +151,8 @@
    ;; InnerClass.this.funInInner();
    
    ;; int a = InnerClass.this.this.fieldInParentOuter;
-   (local.set $a (struct.get $innerclassinheritance.ParentOuter $fieldInParentOuter@innerclassinheritance.ParentOuter  (struct.get $innerclassinheritance.ChildClass.InnerClass $this@innerclassinheritance.ChildClass.InnerClass  (ref.null $innerclassinheritance.ChildClass.InnerClass))))
    
+   (local.set $a (struct.get $innerclassinheritance.ParentOuter $fieldInParentOuter@innerclassinheritance.ParentOuter  (struct.get $innerclassinheritance.ChildClass.InnerClass $this@innerclassinheritance.ChildClass.InnerClass  (ref.null $innerclassinheritance.ChildClass.InnerClass))))
    ;; (a = InnerClass.this.this.fieldInParentOuter);
    (local.set $a (struct.get $innerclassinheritance.ParentOuter $fieldInParentOuter@innerclassinheritance.ParentOuter  (struct.get $innerclassinheritance.ChildClass.InnerClass $this@innerclassinheritance.ChildClass.InnerClass  (ref.null $innerclassinheritance.ChildClass.InnerClass))))
    ;; (a = InnerClass.this.this.fieldInOuter);
@@ -169,7 +169,8 @@
    (local.set $a (struct.get $innerclassinheritance.ChildClass.InnerClass $fieldInInner@innerclassinheritance.ChildClass.InnerClass  (ref.null $innerclassinheritance.ChildClass.InnerClass)))
    ;; return a;
    (local.set $return.value (local.get $a))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )

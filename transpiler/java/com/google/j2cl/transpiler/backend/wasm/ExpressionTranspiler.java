@@ -220,9 +220,7 @@ final class ExpressionTranspiler {
       public boolean enterMultiExpression(MultiExpression multiExpression) {
         List<Expression> expressions = multiExpression.getExpressions();
         Expression returnValue = Iterables.getLast(expressions);
-        sourceBuilder.append("(block");
-        sourceBuilder.indent();
-        sourceBuilder.newLine();
+        sourceBuilder.openParens("block ");
         sourceBuilder.append(
             "(result " + environment.getWasmType(returnValue.getTypeDescriptor()) + ")");
         expressions.forEach(
@@ -234,9 +232,7 @@ final class ExpressionTranspiler {
                   "%s inside MultiExpression should return void.",
                   expression.getClass());
             });
-        sourceBuilder.unindent();
-        sourceBuilder.newLine();
-        sourceBuilder.append(")");
+        sourceBuilder.closeParens();
         return false;
       }
 
@@ -290,8 +286,8 @@ final class ExpressionTranspiler {
 
       private void renderVariableDeclarationFragment(VariableDeclarationFragment fragment) {
         if (fragment.getInitializer() != null) {
-          renderVariableAssignment(fragment.getVariable(), fragment.getInitializer());
           sourceBuilder.newLine();
+          renderVariableAssignment(fragment.getVariable(), fragment.getInitializer());
         }
       }
 

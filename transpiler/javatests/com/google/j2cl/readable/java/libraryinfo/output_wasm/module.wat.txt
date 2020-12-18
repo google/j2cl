@@ -28,8 +28,8 @@
    ;; new Main.<init>().execute();
    
    ;; Function jsFunction = new FunctionImpl.<init>();
-   (local.set $jsFunction (call $<init><>:void@libraryinfo.Main.FunctionImpl (struct.new_default_with_rtt $libraryinfo.Main.FunctionImpl (global.get $libraryinfo.Main.FunctionImpl.rtt)) ))
    
+   (local.set $jsFunction (call $<init><>:void@libraryinfo.Main.FunctionImpl (struct.new_default_with_rtt $libraryinfo.Main.FunctionImpl (global.get $libraryinfo.Main.FunctionImpl.rtt)) ))
    ;; (jsFunction = function (String s){
    (local.set $jsFunction (ref.null $libraryinfo.Main.Function))
    ;; jsFunction.apply("foo");
@@ -50,7 +50,8 @@
  (block $return.label
   (block
    ;; libraryinfo.Main.log("Foo");
-   (call $log<java.lang.Object>:void@libraryinfo.Main (ref.null $java.lang.String)))
+   (call $log<java.lang.Object>:void@libraryinfo.Main (ref.null $java.lang.String))
+  )
  )
 )
 
@@ -63,7 +64,8 @@
   (block
    ;; return super.toString();
    (local.set $return.value (ref.null $java.lang.String))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -84,13 +86,13 @@
  (block $return.label
   (block
    ;; Foo foo = null;
-   (local.set $foo (ref.null $libraryinfo.Main.Foo))
    
+   (local.set $foo (ref.null $libraryinfo.Main.Foo))
    ;; foo.instanceMethod();
    
    ;; Class<?> clazz = <expr>;
-   (local.set $clazz (ref.null $java.lang.Class))
    
+   (local.set $clazz (ref.null $java.lang.Class))
   )
  )
 )
@@ -179,7 +181,8 @@
    ;; Object.this.Object.<init>();
    
    ;; (MyJsType.this.someField = new Main.<init>());
-   (struct.set $libraryinfo.Main.MyJsType $someField@libraryinfo.Main.MyJsType  (ref.null $libraryinfo.Main.MyJsType) (call $<init><>:void@libraryinfo.Main (struct.new_default_with_rtt $libraryinfo.Main (global.get $libraryinfo.Main.rtt)) )))
+   (struct.set $libraryinfo.Main.MyJsType $someField@libraryinfo.Main.MyJsType  (ref.null $libraryinfo.Main.MyJsType) (call $<init><>:void@libraryinfo.Main (struct.new_default_with_rtt $libraryinfo.Main (global.get $libraryinfo.Main.rtt)) ))
+  )
  )
  (local.get $this)
 )

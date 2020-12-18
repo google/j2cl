@@ -65,13 +65,19 @@
  (block $return.label
   (block
    ;; if ((o == null)) {
-   (if (ref.eq (local.get $o) (ref.null $java.lang.Object)) (then (block
-    ;; return (((Getable<T>&Setable)) o);
-    (local.set $return.value (ref.null $intersectiontype.Getable))
-    (br $return.label))))
+   (if (ref.eq (local.get $o) (ref.null $java.lang.Object))
+    (then
+     (block
+      ;; return (((Getable<T>&Setable)) o);
+      (local.set $return.value (ref.null $intersectiontype.Getable))
+      (br $return.label)
+     )
+    )
+   )
    ;; return (((Getable<T>&Setable)) o);
    (local.set $return.value (ref.null $intersectiontype.Getable))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -85,7 +91,8 @@
   (block
    ;; return (((Getable<Comparable<String>>&Setable)) s);
    (local.set $return.value (ref.null $intersectiontype.Getable))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -99,7 +106,8 @@
   (block
    ;; return (((Getable<Comparable<T>>&Setable)) s);
    (local.set $return.value (ref.null $intersectiontype.Getable))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -114,7 +122,8 @@
   (block
    ;; return s;
    (local.set $return.value (local.get $s))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -127,7 +136,8 @@
   (block
    ;; return (((Cmp&Serial)) function (){
    (local.set $return.value (ref.null $intersectiontype.Cmp))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -141,7 +151,8 @@
   (block
    ;; return (((Cmp2&Serial)) function (int a){
    (local.set $return.value (ref.null $intersectiontype.Cmp2))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -155,14 +166,14 @@
  (block $return.label
   (block
    ;; A e = (((A&EmptyA&EmptyB)) o);
+   
    (local.set $e (ref.null $intersectiontype.IntersectionTypeTest.A))
-   
    ;; EmptyA g = ((EmptyA) (((A&EmptyA&EmptyB)) o));
+   
    (local.set $g (ref.null $intersectiontype.IntersectionTypeTest.A))
-   
    ;; EmptyB s = ((EmptyB) (((A&EmptyA&EmptyB)) o));
-   (local.set $s (ref.null $intersectiontype.IntersectionTypeTest.A))
    
+   (local.set $s (ref.null $intersectiontype.IntersectionTypeTest.A))
   )
  )
 )
@@ -176,7 +187,8 @@
   (block
    ;; return t;
    (local.set $return.value (local.get $t))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -189,7 +201,8 @@
   (block
    ;; return ((T) intersectiontype.IntersectionTypeTest.get(new Object.<init>()));
    (local.set $return.value (ref.null $intersectiontype.IntersectionTypeTest.A))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -202,7 +215,8 @@
   (block
    ;; return null;
    (local.set $return.value (ref.null $intersectiontype.Getable))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -224,15 +238,15 @@
  (block $return.label
   (block
    ;; Object o = intersectiontype.IntersectionTypeTest.m();
-   (local.set $o (call $m<>:intersectiontype.IntersectionTypeTest.A@intersectiontype.IntersectionTypeTest ))
    
+   (local.set $o (call $m<>:intersectiontype.IntersectionTypeTest.A@intersectiontype.IntersectionTypeTest ))
    ;; intersectiontype.IntersectionTypeTest.set((((A&EmptyA)) o));
    (call $set<intersectiontype.IntersectionTypeTest.A>:void@intersectiontype.IntersectionTypeTest (ref.null $intersectiontype.IntersectionTypeTest.A))
    ;; intersectiontype.IntersectionTypeTest.set(intersectiontype.IntersectionTypeTest.m());
    (call $set<intersectiontype.IntersectionTypeTest.A>:void@intersectiontype.IntersectionTypeTest (call $m<>:intersectiontype.IntersectionTypeTest.A@intersectiontype.IntersectionTypeTest ))
    ;; Getable<?> g = intersectiontype.IntersectionTypeTest.n();
-   (local.set $g (call $n<>:intersectiontype.Getable@intersectiontype.IntersectionTypeTest ))
    
+   (local.set $g (call $n<>:intersectiontype.Getable@intersectiontype.IntersectionTypeTest ))
   )
  )
 )
@@ -266,7 +280,8 @@
   (block
    ;; return (((Getable<T>&Setable)) o);
    (local.set $return.value (ref.null $intersectiontype.Getable))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )

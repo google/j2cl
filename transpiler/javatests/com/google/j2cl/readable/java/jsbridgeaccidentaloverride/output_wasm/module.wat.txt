@@ -28,17 +28,17 @@
  (block $return.label
   (block
    ;; MyJsType a = new MyJsType.<init>();
+   
    (local.set $a (call $<init><>:void@jsbridgeaccidentaloverride.MyJsType (struct.new_default_with_rtt $jsbridgeaccidentaloverride.MyJsType (global.get $jsbridgeaccidentaloverride.MyJsType.rtt)) ))
-   
    ;; SubJsType b = new SubJsType.<init>();
+   
    (local.set $b (call $<init><>:void@jsbridgeaccidentaloverride.SubJsType (struct.new_default_with_rtt $jsbridgeaccidentaloverride.SubJsType (global.get $jsbridgeaccidentaloverride.SubJsType.rtt)) ))
-   
    ;; MyInterface c = new SubJsType.<init>();
+   
    (local.set $c (call $<init><>:void@jsbridgeaccidentaloverride.SubJsType (struct.new_default_with_rtt $jsbridgeaccidentaloverride.SubJsType (global.get $jsbridgeaccidentaloverride.SubJsType.rtt)) ))
-   
    ;; OtherInterface d = new SubJsType.<init>();
-   (local.set $d (call $<init><>:void@jsbridgeaccidentaloverride.SubJsType (struct.new_default_with_rtt $jsbridgeaccidentaloverride.SubJsType (global.get $jsbridgeaccidentaloverride.SubJsType.rtt)) ))
    
+   (local.set $d (call $<init><>:void@jsbridgeaccidentaloverride.SubJsType (struct.new_default_with_rtt $jsbridgeaccidentaloverride.SubJsType (global.get $jsbridgeaccidentaloverride.SubJsType.rtt)) ))
    ;; a.foo(1);
    (i32.const 0)
    drop
@@ -104,7 +104,8 @@
   (block
    ;; return a;
    (local.set $return.value (local.get $a))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -119,7 +120,8 @@
   (block
    ;; return (a + 1);
    (local.set $return.value (i32.add (local.get $a) (i32.const 1)))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -134,7 +136,8 @@
   (block
    ;; return (a - 1);
    (local.set $return.value (i32.sub (local.get $a) (i32.const 1)))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -172,7 +175,8 @@
   (block
    ;; return (a + 2);
    (local.set $return.value (i32.add (local.get $a) (i32.const 2)))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )

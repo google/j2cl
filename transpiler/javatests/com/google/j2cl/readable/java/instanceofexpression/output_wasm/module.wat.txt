@@ -26,8 +26,8 @@
  (block $return.label
   (block
    ;; Object object = new InstanceofExpressions.<init>();
-   (local.set $object (call $<init><>:void@instanceofexpression.InstanceofExpressions (struct.new_default_with_rtt $instanceofexpression.InstanceofExpressions (global.get $instanceofexpression.InstanceofExpressions.rtt)) ))
    
+   (local.set $object (call $<init><>:void@instanceofexpression.InstanceofExpressions (struct.new_default_with_rtt $instanceofexpression.InstanceofExpressions (global.get $instanceofexpression.InstanceofExpressions.rtt)) ))
    ;; boolean b;
    
    ;; (b = object instanceof Object);
@@ -35,7 +35,8 @@
    ;; (b = object instanceof InstanceofExpressions);
    (local.set $b (i32.const 0))
    ;; (b = object instanceof String);
-   (local.set $b (i32.const 0)))
+   (local.set $b (i32.const 0))
+  )
  )
 )
 
@@ -47,14 +48,15 @@
  (block $return.label
   (block
    ;; Object o = new Object.<init>();
-   (local.set $o (call $<init><>:void@java.lang.Object (struct.new_default_with_rtt $java.lang.Object (global.get $java.lang.Object.rtt)) ))
    
+   (local.set $o (call $<init><>:void@java.lang.Object (struct.new_default_with_rtt $java.lang.Object (global.get $java.lang.Object.rtt)) ))
    ;; boolean b;
    
    ;; (b = o instanceof Serializable);
    (local.set $b (i32.const 0))
    ;; (b = InstanceofExpressions.this.new $1.<init>() instanceof Serializable);
-   (local.set $b (i32.const 0)))
+   (local.set $b (i32.const 0))
+  )
  )
 )
 
@@ -67,11 +69,11 @@
  (block $return.label
   (block
    ;; Object b = new Integer.<init>(1);
+   
    (local.set $b (call $<init><int>:void@java.lang.Integer (struct.new_default_with_rtt $java.lang.Integer (global.get $java.lang.Integer.rtt)) (i32.const 1)))
-   
    ;; boolean a = b instanceof Byte;
-   (local.set $a (i32.const 0))
    
+   (local.set $a (i32.const 0))
    ;; (a = b instanceof Double);
    (local.set $a (i32.const 0))
    ;; (a = b instanceof Float);
@@ -89,14 +91,15 @@
    ;; (a = b instanceof Boolean);
    (local.set $a (i32.const 0))
    ;; Double d = null;
-   (local.set $d (ref.null $java.lang.Double))
    
+   (local.set $d (ref.null $java.lang.Double))
    ;; (a = d instanceof Object);
    (local.set $a (i32.const 0))
    ;; (a = d instanceof Number);
    (local.set $a (i32.const 0))
    ;; (a = d instanceof Double);
-   (local.set $a (i32.const 0)))
+   (local.set $a (i32.const 0))
+  )
  )
 )
 
@@ -111,17 +114,17 @@
  (block $return.label
   (block
    ;; Object object = new Object.<init>();
+   
    (local.set $object (call $<init><>:void@java.lang.Object (struct.new_default_with_rtt $java.lang.Object (global.get $java.lang.Object.rtt)) ))
-   
    ;; Object[] objectArray = new Object[0];
+   
    (local.set $objectArray (ref.null $java.lang.Object))
-   
    ;; Object[][] objectDoubleArray = new Object[0][];
+   
    (local.set $objectDoubleArray (ref.null $java.lang.Object))
-   
    ;; String[] stringArray = new String[0];
-   (local.set $stringArray (ref.null $java.lang.Object))
    
+   (local.set $stringArray (ref.null $java.lang.Object))
    ;; boolean a;
    
    ;; (a = object instanceof Object[]);
@@ -149,7 +152,8 @@
    ;; (a = stringArray instanceof Object[]);
    (local.set $a (i32.const 0))
    ;; (a = stringArray instanceof String[]);
-   (local.set $a (i32.const 0)))
+   (local.set $a (i32.const 0))
+  )
  )
 )
 

@@ -45,7 +45,8 @@
    ;; Enum.this.Enum.<init>();
    
    ;; (Enum2.this.foo = foo);
-   (struct.set $enums.Enum2 $foo@enums.Enum2  (ref.null $enums.Enum2) (local.get $foo)))
+   (struct.set $enums.Enum2 $foo@enums.Enum2  (ref.null $enums.Enum2) (local.get $foo))
+  )
  )
  (local.get $this)
 )
@@ -87,7 +88,8 @@
   (block
    ;; return null;
    (local.set $return.value (ref.null $enums.Enum2))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )

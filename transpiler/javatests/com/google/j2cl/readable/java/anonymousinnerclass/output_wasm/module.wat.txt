@@ -66,17 +66,17 @@
  (block $return.label
   (block
    ;; InnerClass ic = AnonymousInnerClass.this.new $1.<init>();
+   
    (local.set $ic (call $<init><>:void@anonymousinnerclass.AnonymousInnerClass.1 (struct.new_default_with_rtt $anonymousinnerclass.AnonymousInnerClass.1 (global.get $anonymousinnerclass.AnonymousInnerClass.1.rtt)) ))
-   
    ;; A a = new A.<init>();
+   
    (local.set $a (call $<init><>:void@anonymousinnerclass.A (struct.new_default_with_rtt $anonymousinnerclass.A (global.get $anonymousinnerclass.A.rtt)) ))
-   
    ;; B b = AnonymousInnerClass.this.new $2.<init>(a);
+   
    (local.set $b (call $<init><anonymousinnerclass.A>:void@anonymousinnerclass.AnonymousInnerClass.2 (struct.new_default_with_rtt $anonymousinnerclass.AnonymousInnerClass.2 (global.get $anonymousinnerclass.AnonymousInnerClass.2.rtt)) (local.get $a)))
-   
    ;; C c = AnonymousInnerClass.this.new $3.<init>();
-   (local.set $c (call $<init><>:void@anonymousinnerclass.AnonymousInnerClass.3 (struct.new_default_with_rtt $anonymousinnerclass.AnonymousInnerClass.3 (global.get $anonymousinnerclass.AnonymousInnerClass.3.rtt)) ))
    
+   (local.set $c (call $<init><>:void@anonymousinnerclass.AnonymousInnerClass.3 (struct.new_default_with_rtt $anonymousinnerclass.AnonymousInnerClass.3 (global.get $anonymousinnerclass.AnonymousInnerClass.3.rtt)) ))
   )
  )
 )

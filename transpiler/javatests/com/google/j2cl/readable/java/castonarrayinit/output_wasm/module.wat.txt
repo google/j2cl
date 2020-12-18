@@ -34,13 +34,14 @@
  (block $return.label
   (block
    ;; Foo<E> f1 = new Foo.<init>();
+   
    (local.set $f1 (call $<init><>:void@castonarrayinit.CastOnArrayInit.Foo (struct.new_default_with_rtt $castonarrayinit.CastOnArrayInit.Foo (global.get $castonarrayinit.CastOnArrayInit.Foo.rtt)) ))
-   
    ;; Foo<E> f2 = new Foo.<init>();
-   (local.set $f2 (call $<init><>:void@castonarrayinit.CastOnArrayInit.Foo (struct.new_default_with_rtt $castonarrayinit.CastOnArrayInit.Foo (global.get $castonarrayinit.CastOnArrayInit.Foo.rtt)) ))
    
+   (local.set $f2 (call $<init><>:void@castonarrayinit.CastOnArrayInit.Foo (struct.new_default_with_rtt $castonarrayinit.CastOnArrayInit.Foo (global.get $castonarrayinit.CastOnArrayInit.Foo.rtt)) ))
    ;; castonarrayinit.CastOnArrayInit.fun([f1,f2]);
-   (call $fun<castonarrayinit.CastOnArrayInit.Foo<>>:void@castonarrayinit.CastOnArrayInit (ref.null $java.lang.Object)))
+   (call $fun<castonarrayinit.CastOnArrayInit.Foo<>>:void@castonarrayinit.CastOnArrayInit (ref.null $java.lang.Object))
+  )
  )
 )
 

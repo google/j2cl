@@ -119,14 +119,15 @@
  (block $return.label
   (block
    ;; int T = 5;
+   
    (local.set $T_1 (i32.const 5))
-   
    ;; Other<T> o = ((Other<T>) null);
-   (local.set $o (ref.cast $java.lang.Object $collisions.Other (ref.null $java.lang.Object) (global.get $collisions.Other.rtt)))
    
+   (local.set $o (ref.cast $java.lang.Object $collisions.Other (ref.null $java.lang.Object) (global.get $collisions.Other.rtt)))
    ;; return null;
    (local.set $return.value (ref.null $java.lang.Object))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -158,7 +159,8 @@
   (block
    ;; return null;
    (local.set $return.value (ref.null $java.lang.Number))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -172,14 +174,15 @@
  (block $return.label
   (block
    ;; T t = new T.<init>().m();
-   (local.set $t (ref.null $java.lang.Number))
    
+   (local.set $t (ref.null $java.lang.Number))
    ;; t.byteValue();
    (i32.const 0)
    drop
    ;; return t;
    (local.set $return.value (local.get $t))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )

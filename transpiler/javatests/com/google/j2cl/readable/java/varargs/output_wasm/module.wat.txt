@@ -79,7 +79,8 @@
  (block $return.label
   (block
    ;; varargs.Varargs.fun([a,b]);
-   (call $fun<java.lang.Object<>>:void@varargs.Varargs (ref.null $java.lang.Object)))
+   (call $fun<java.lang.Object<>>:void@varargs.Varargs (ref.null $java.lang.Object))
+  )
  )
 )
 
@@ -90,8 +91,8 @@
  (block $return.label
   (block
    ;; Varargs v = new Varargs.<init>();
-   (local.set $v (call $<init><>:void@varargs.Varargs (struct.new_default_with_rtt $varargs.Varargs (global.get $varargs.Varargs.rtt)) ))
    
+   (local.set $v (call $<init><>:void@varargs.Varargs (struct.new_default_with_rtt $varargs.Varargs (global.get $varargs.Varargs.rtt)) ))
    ;; v.test(1,[]);
    
    ;; v.test(1,[new Object.<init>()]);

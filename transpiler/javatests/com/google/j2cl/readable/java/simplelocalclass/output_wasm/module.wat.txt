@@ -26,8 +26,8 @@
  (block $return.label
   (block
    ;; int localVar = 1;
-   (local.set $localVar (i32.const 1))
    
+   (local.set $localVar (i32.const 1))
    ;; SimpleLocalClass.this.new $1InnerClass.<init>().fun();
    (i32.const 0)
    drop
@@ -45,8 +45,8 @@
  (block $return.label
   (block
    ;; int localVar = 1;
-   (local.set $localVar (i32.const 1))
    
+   (local.set $localVar (i32.const 1))
   )
  )
 )
@@ -90,7 +90,8 @@
   (block
    ;; return ($1InnerClass.this.localVar + $1InnerClass.this.p);
    (local.set $return.value (i32.add (struct.get $simplelocalclass.SimpleLocalClass.1InnerClass $localVar@simplelocalclass.SimpleLocalClass.1InnerClass  (ref.null $simplelocalclass.SimpleLocalClass.1InnerClass)) (struct.get $simplelocalclass.SimpleLocalClass.1InnerClass $p@simplelocalclass.SimpleLocalClass.1InnerClass  (ref.null $simplelocalclass.SimpleLocalClass.1InnerClass))))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )

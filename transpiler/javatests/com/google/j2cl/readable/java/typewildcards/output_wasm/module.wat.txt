@@ -88,8 +88,8 @@
  (block $return.label
   (block
    ;; int i = t.f;
-   (local.set $i (struct.get $typewildcards.TypeWildCards.A $f@typewildcards.TypeWildCards.A  (local.get $t)))
    
+   (local.set $i (struct.get $typewildcards.TypeWildCards.A $f@typewildcards.TypeWildCards.A  (local.get $t)))
    ;; t.m();
    
   )
@@ -103,8 +103,8 @@
  (block $return.label
   (block
    ;; int i = t.f;
-   (local.set $i (struct.get $typewildcards.TypeWildCards.A $f@typewildcards.TypeWildCards.A  (local.get $t)))
    
+   (local.set $i (struct.get $typewildcards.TypeWildCards.A $f@typewildcards.TypeWildCards.A  (local.get $t)))
    ;; t.m();
    
    ;; ((Y) t).n();
@@ -123,7 +123,8 @@
   (block
    ;; return null;
    (local.set $return.value (ref.null $java.util.List))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -138,7 +139,8 @@
   (block
    ;; return null;
    (local.set $return.value (ref.null $java.util.List))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -153,14 +155,14 @@
  (block $return.label
   (block
    ;; List<Element> elements = null;
+   
    (local.set $elements (ref.null $java.util.List))
-   
    ;; List<SubOtherElement> otherElements = null;
+   
    (local.set $otherElements (ref.null $java.util.List))
-   
    ;; List<Integer> integers = typewildcards.TypeWildCards.transform(typewildcards.TypeWildCards.concat(elements,otherElements),function ((Object&HasKey&IntegerSupplier) a){
-   (local.set $integers (call $transform<java.util.List|java.util.function.Function>:java.util.List@typewildcards.TypeWildCards (call $concat<java.util.List|java.util.List>:java.util.List@typewildcards.TypeWildCards (local.get $elements)(local.get $otherElements))(ref.null $java.util.function.Function)))
    
+   (local.set $integers (call $transform<java.util.List|java.util.function.Function>:java.util.List@typewildcards.TypeWildCards (call $concat<java.util.List|java.util.List>:java.util.List@typewildcards.TypeWildCards (local.get $elements)(local.get $otherElements))(ref.null $java.util.function.Function)))
   )
  )
 )
@@ -180,7 +182,8 @@
  (block $return.label
   (block
    ;; typewildcards.TypeWildCards.takesRecursiveGeneric(TypeWildCards.this.new Foo.<init>());
-   (call $takesRecursiveGeneric<typewildcards.GenericType>:void@typewildcards.TypeWildCards (call $<init><>:void@typewildcards.TypeWildCards.Foo (struct.new_default_with_rtt $typewildcards.TypeWildCards.Foo (global.get $typewildcards.TypeWildCards.Foo.rtt)) )))
+   (call $takesRecursiveGeneric<typewildcards.GenericType>:void@typewildcards.TypeWildCards (call $<init><>:void@typewildcards.TypeWildCards.Foo (struct.new_default_with_rtt $typewildcards.TypeWildCards.Foo (global.get $typewildcards.TypeWildCards.Foo.rtt)) ))
+  )
  )
 )
 

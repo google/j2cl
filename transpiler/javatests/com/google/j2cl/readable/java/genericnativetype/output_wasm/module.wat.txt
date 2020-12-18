@@ -27,11 +27,12 @@
  (block $return.label
   (block
    ;; BoundedJsArray<V> array = null;
-   (local.set $array (ref.null $genericnativetype.BoundedJsArray))
    
+   (local.set $array (ref.null $genericnativetype.BoundedJsArray))
    ;; return array;
    (local.set $return.value (local.get $array))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -45,11 +46,12 @@
  (block $return.label
   (block
    ;; BoundedJsArray<V> array = new BoundedJsArray.<init>(size);
-   (local.set $array (call $<init><int>:void@genericnativetype.BoundedJsArray (struct.new_default_with_rtt $genericnativetype.BoundedJsArray (global.get $genericnativetype.BoundedJsArray.rtt)) (local.get $size)))
    
+   (local.set $array (call $<init><int>:void@genericnativetype.BoundedJsArray (struct.new_default_with_rtt $genericnativetype.BoundedJsArray (global.get $genericnativetype.BoundedJsArray.rtt)) (local.get $size)))
    ;; return array;
    (local.set $return.value (local.get $array))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -81,7 +83,8 @@
   (block
    ;; return genericnativetype.BoundedJsArray.create();
    (local.set $return.value (call $create<>:genericnativetype.BoundedJsArray@genericnativetype.BoundedJsArray ))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -95,7 +98,8 @@
   (block
    ;; return genericnativetype.BoundedJsArray.create(size);
    (local.set $return.value (call $create<int>:genericnativetype.BoundedJsArray@genericnativetype.BoundedJsArray (local.get $size)))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )

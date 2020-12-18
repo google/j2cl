@@ -74,7 +74,8 @@
   (block
    ;; return null;
    (local.set $return.value (ref.null $genericmethod.GenericMethod))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -89,7 +90,8 @@
   (block
    ;; return array;
    (local.set $return.value (local.get $array))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -103,7 +105,8 @@
   (block
    ;; return null;
    (local.set $return.value (ref.null $java.lang.Object))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -117,7 +120,8 @@
   (block
    ;; return null;
    (local.set $return.value (ref.null $java.lang.Object))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -130,8 +134,8 @@
  (block $return.label
   (block
    ;; GenericMethod<Number> g = new GenericMethod.<init>();
-   (local.set $g (call $<init><>:void@genericmethod.GenericMethod (struct.new_default_with_rtt $genericmethod.GenericMethod (global.get $genericmethod.GenericMethod.rtt)) ))
    
+   (local.set $g (call $<init><>:void@genericmethod.GenericMethod (struct.new_default_with_rtt $genericmethod.GenericMethod (global.get $genericmethod.GenericMethod.rtt)) ))
    ;; g.foo(g,g);
    
    ;; g.foo(new Error.<init>(),new Exception.<init>());
@@ -146,10 +150,11 @@
    (ref.null $java.lang.Object)
    drop
    ;; String s = ((String) GenericMethod.this.checked());
-   (local.set $s (ref.cast $java.lang.Object $java.lang.String (ref.null $java.lang.String) (global.get $java.lang.String.rtt)))
    
+   (local.set $s (ref.cast $java.lang.Object $java.lang.String (ref.null $java.lang.String) (global.get $java.lang.String.rtt)))
    ;; (s = /** @type {String} */ (GenericMethod.this.unchecked()));
-   (local.set $s (ref.null $java.lang.String)))
+   (local.set $s (ref.null $java.lang.String))
+  )
  )
 )
 
@@ -182,35 +187,36 @@
  (block $return.label
   (block
    ;; List<Container<?>> list = null;
+   
    (local.set $list (ref.null $java.util.List))
-   
    ;; Content content = ((Container<?>) list.get(0)).get();
-   (local.set $content (ref.null $genericmethod.GenericMethod.Content))
    
+   (local.set $content (ref.null $genericmethod.GenericMethod.Content))
    ;; genericmethod.GenericMethod.acceptsString(content.getProp());
    (call $acceptsString<java.lang.String>:void@genericmethod.GenericMethod (ref.null $java.lang.String))
    ;; genericmethod.GenericMethod.acceptsContent(content);
    (call $acceptsContent<genericmethod.GenericMethod.Content>:void@genericmethod.GenericMethod (local.get $content))
    ;; List<SuperContainer<? extends Container<? extends Content>>> nestedWildcardList = null;
+   
    (local.set $nestedWildcardList (ref.null $java.util.List))
-   
    ;; Content nestedContent = ((SuperContainer<? extends Container<? extends Content>>) nestedWildcardList.get(0)).get().get();
-   (local.set $nestedContent (ref.null $genericmethod.GenericMethod.Content))
    
+   (local.set $nestedContent (ref.null $genericmethod.GenericMethod.Content))
    ;; genericmethod.GenericMethod.acceptsString(nestedContent.getProp());
    (call $acceptsString<java.lang.String>:void@genericmethod.GenericMethod (ref.null $java.lang.String))
    ;; genericmethod.GenericMethod.acceptsContent(nestedContent);
    (call $acceptsContent<genericmethod.GenericMethod.Content>:void@genericmethod.GenericMethod (local.get $nestedContent))
    ;; List<SuperContainer<Container<? extends Content>>> deepWildcardList = null;
+   
    (local.set $deepWildcardList (ref.null $java.util.List))
-   
    ;; Content deepContent = ((SuperContainer<Container<? extends Content>>) deepWildcardList.get(0)).get().get();
-   (local.set $deepContent (ref.null $genericmethod.GenericMethod.Content))
    
+   (local.set $deepContent (ref.null $genericmethod.GenericMethod.Content))
    ;; genericmethod.GenericMethod.acceptsString(deepContent.getProp());
    (call $acceptsString<java.lang.String>:void@genericmethod.GenericMethod (ref.null $java.lang.String))
    ;; genericmethod.GenericMethod.acceptsContent(deepContent);
-   (call $acceptsContent<genericmethod.GenericMethod.Content>:void@genericmethod.GenericMethod (local.get $deepContent)))
+   (call $acceptsContent<genericmethod.GenericMethod.Content>:void@genericmethod.GenericMethod (local.get $deepContent))
+  )
  )
 )
 
@@ -225,35 +231,36 @@
  (block $return.label
   (block
    ;; List<Container<C>> list = null;
+   
    (local.set $list (ref.null $java.util.List))
-   
    ;; Content content = ((Container<C>) list.get(0)).get();
-   (local.set $content (ref.null $genericmethod.GenericMethod.Content))
    
+   (local.set $content (ref.null $genericmethod.GenericMethod.Content))
    ;; genericmethod.GenericMethod.acceptsString(content.getProp());
    (call $acceptsString<java.lang.String>:void@genericmethod.GenericMethod (ref.null $java.lang.String))
    ;; genericmethod.GenericMethod.acceptsContent(content);
    (call $acceptsContent<genericmethod.GenericMethod.Content>:void@genericmethod.GenericMethod (local.get $content))
    ;; List<SuperContainer<CT>> nestedTypeVariableList = null;
+   
    (local.set $nestedTypeVariableList (ref.null $java.util.List))
-   
    ;; Content nestedContent = ((SuperContainer<CT>) nestedTypeVariableList.get(0)).get().get();
-   (local.set $nestedContent (ref.null $genericmethod.GenericMethod.Content))
    
+   (local.set $nestedContent (ref.null $genericmethod.GenericMethod.Content))
    ;; genericmethod.GenericMethod.acceptsString(nestedContent.getProp());
    (call $acceptsString<java.lang.String>:void@genericmethod.GenericMethod (ref.null $java.lang.String))
    ;; genericmethod.GenericMethod.acceptsContent(nestedContent);
    (call $acceptsContent<genericmethod.GenericMethod.Content>:void@genericmethod.GenericMethod (local.get $nestedContent))
    ;; List<SuperContainer<Container<C>>> deepTypeVariableList = null;
+   
    (local.set $deepTypeVariableList (ref.null $java.util.List))
-   
    ;; Content deepContent = ((SuperContainer<Container<C>>) deepTypeVariableList.get(0)).get().get();
-   (local.set $deepContent (ref.null $genericmethod.GenericMethod.Content))
    
+   (local.set $deepContent (ref.null $genericmethod.GenericMethod.Content))
    ;; genericmethod.GenericMethod.acceptsString(deepContent.getProp());
    (call $acceptsString<java.lang.String>:void@genericmethod.GenericMethod (ref.null $java.lang.String))
    ;; genericmethod.GenericMethod.acceptsContent(deepContent);
-   (call $acceptsContent<genericmethod.GenericMethod.Content>:void@genericmethod.GenericMethod (local.get $deepContent)))
+   (call $acceptsContent<genericmethod.GenericMethod.Content>:void@genericmethod.GenericMethod (local.get $deepContent))
+  )
  )
 )
 
@@ -362,7 +369,8 @@
   (block
    ;; return null;
    (local.set $return.value (ref.null $genericmethod.GenericMethod.Container))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -394,7 +402,8 @@
   (block
    ;; return null;
    (local.set $return.value (ref.null $genericmethod.GenericMethod.Content))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -426,7 +435,8 @@
   (block
    ;; return null;
    (local.set $return.value (ref.null $java.lang.String))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )

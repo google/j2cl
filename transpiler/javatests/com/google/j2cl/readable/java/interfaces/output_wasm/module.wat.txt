@@ -26,8 +26,8 @@
  (block $return.label
   (block
    ;; Interface i = Main.this.new Implementor.<init>();
-   (local.set $i (call $<init><>:void@interfaces.Main.Implementor (struct.new_default_with_rtt $interfaces.Main.Implementor (global.get $interfaces.Main.Implementor.rtt)) ))
    
+   (local.set $i (call $<init><>:void@interfaces.Main.Implementor (struct.new_default_with_rtt $interfaces.Main.Implementor (global.get $interfaces.Main.Implementor.rtt)) ))
    ;; i.interfaceMethod();
    
    ;; i.defaultMethod(null);
@@ -35,8 +35,8 @@
    ;; interfaces.Main.Interface.staticInterfaceMethod();
    (call $staticInterfaceMethod<>:void@interfaces.Main.Interface )
    ;; int x = (Main.this.new Implementor.<init>().a + interfaces.Main.Interface.b);
-   (local.set $x (i32.add (global.get $a@interfaces.Main.Interface) (global.get $b@interfaces.Main.Interface)))
    
+   (local.set $x (i32.add (global.get $a@interfaces.Main.Interface) (global.get $b@interfaces.Main.Interface)))
   )
  )
 )

@@ -27,25 +27,47 @@
  (block $return.label
   (block
    ;; boolean a = true,boolean b = true;
+   
    (local.set $a (i32.const 1))
    (local.set $b (i32.const 1))
-   
    ;; int number = 1;
-   (local.set $number (i32.const 1))
    
+   (local.set $number (i32.const 1))
    ;; if (a) {
-   (if (local.get $a) (then (block
-    ;; (number = 2);
-    (local.set $number (i32.const 2)))) (else ;; if (b) {
-   (if (local.get $b) (then (block
-    ;; (number = 3);
-    (local.set $number (i32.const 3)))) (else (block
-    ;; (number = 4);
-    (local.set $number (i32.const 4)))))))
+   (if (local.get $a)
+    (then
+     (block
+      ;; (number = 2);
+      (local.set $number (i32.const 2))
+     )
+    )(else
+     ;; if (b) {
+     (if (local.get $b)
+      (then
+       (block
+        ;; (number = 3);
+        (local.set $number (i32.const 3))
+       )
+      )(else
+       (block
+        ;; (number = 4);
+        (local.set $number (i32.const 4))
+       )
+      )
+     )
+    )
+   )
    ;; if (a) (number = 5); else (number = 6);
-   (if (local.get $a) (then ;; (number = 5);
-   (local.set $number (i32.const 5))) (else ;; (number = 6);
-   (local.set $number (i32.const 6)))))
+   (if (local.get $a)
+    (then
+     ;; (number = 5);
+     (local.set $number (i32.const 5))
+    )(else
+     ;; (number = 6);
+     (local.set $number (i32.const 6))
+    )
+   )
+  )
  )
 )
 

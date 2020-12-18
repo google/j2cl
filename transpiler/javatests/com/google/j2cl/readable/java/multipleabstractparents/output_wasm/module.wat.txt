@@ -25,13 +25,10 @@
   (block
    ;; assert new ArrayList.<init>().getFoo(null).equals("AbstractCollection");
    ;; unimplemented statement AssertStatement
-   
    ;; assert new StringList.<init>().getFoo(null).equals("AbstractCollection");
    ;; unimplemented statement AssertStatement
-   
    ;; assert ((IStringList) new StringList.<init>()).getFoo(null).equals("AbstractCollection");
    ;; unimplemented statement AssertStatement
-   
   )
  )
 )
@@ -92,7 +89,8 @@
   (block
    ;; return "AbstractCollection";
    (local.set $return.value (ref.null $java.lang.String))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )

@@ -30,23 +30,23 @@
  (block $return.label
   (block
    ;; boolean a = false;
+   
    (local.set $a (i32.const 0))
-   
    ;; char b = 97;
+   
    (local.set $b (i32.const 97))
-   
    ;; Object c = null;
+   
    (local.set $c (ref.null $java.lang.Object))
-   
    ;; int d = 101;
+   
    (local.set $d (i32.const 101))
-   
    ;; String e = "foo";
+   
    (local.set $e (ref.null $java.lang.String))
-   
    ;; Class<?> f = <expr>;
-   (local.set $f (ref.null $java.lang.Class))
    
+   (local.set $f (ref.null $java.lang.Class))
   )
  )
 )

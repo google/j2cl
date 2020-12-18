@@ -31,7 +31,8 @@
   (block
    ;; return (Lambdas.this.field + intf.m(n));
    (local.set $return.value (i32.add (struct.get $lambdas.Lambdas $field@lambdas.Lambdas  (ref.null $lambdas.Lambdas)) (i32.const 0)))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -83,8 +84,8 @@
  (block $return.label
   (block
    ;; int x = 1;
-   (local.set $x (i32.const 1))
    
+   (local.set $x (i32.const 1))
    ;; Lambdas.this.call(function (int i){
    (i32.const 0)
    drop
@@ -101,8 +102,8 @@
  (block $return.label
   (block
    ;; int x = 1;
-   (local.set $x (i32.const 1))
    
+   (local.set $x (i32.const 1))
    ;; Lambdas.this.call(function (int i){
    (i32.const 0)
    drop
@@ -139,8 +140,8 @@
  (block $return.label
   (block
    ;; FunctionalInterface f = function (int i){
-   (local.set $f (ref.null $lambdas.Lambdas.FunctionalInterface))
    
+   (local.set $f (ref.null $lambdas.Lambdas.FunctionalInterface))
   )
  )
 )
@@ -153,8 +154,8 @@
  (block $return.label
   (block
    ;; Functional<T> wrapped = function (Functional<T> f){
-   (local.set $wrapped (ref.null $lambdas.Lambdas.Functional))
    
+   (local.set $wrapped (ref.null $lambdas.Lambdas.Functional))
   )
  )
 )
@@ -166,8 +167,8 @@
  (block $return.label
   (block
    ;; Functional<T> wrapped = function (Functional<T> f){
-   (local.set $wrapped (ref.null $lambdas.Lambdas.Functional))
    
+   (local.set $wrapped (ref.null $lambdas.Lambdas.Functional))
   )
  )
 )
@@ -183,7 +184,8 @@
   (block
    ;; return intf.m(e);
    (local.set $return.value (ref.null $java.lang.Object))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -199,7 +201,8 @@
   (block
    ;; return ((Error) intf.m(e));
    (local.set $return.value (ref.cast $java.lang.Object $java.lang.Error (ref.null $java.lang.Error) (global.get $java.lang.Error.rtt)))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -214,7 +217,8 @@
   (block
    ;; return ((Enum<T>) intf.m(e));
    (local.set $return.value (ref.cast $java.lang.Object $java.lang.Enum (ref.null $java.lang.Enum) (global.get $java.lang.Enum.rtt)))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -229,7 +233,8 @@
   (block
    ;; return null;
    (local.set $return.value (ref.null $lambdas.Lambdas.GenericFunctionalInterface))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -259,8 +264,8 @@
    (ref.null $lambdas.Lambdas.GenericFunctionalInterface)
    drop
    ;; Function<? super T, ?> f = function (T item){
-   (local.set $f (ref.null $lambdas.Lambdas.Function))
    
+   (local.set $f (ref.null $lambdas.Lambdas.Function))
   )
  )
 )
@@ -273,7 +278,8 @@
   (block
    ;; return null;
    (local.set $return.value (ref.null $java.lang.Object))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -285,8 +291,8 @@
  (block $return.label
   (block
    ;; Function<Object, ?> f = function (Object l){
-   (local.set $f (ref.null $lambdas.Lambdas.Function))
    
+   (local.set $f (ref.null $lambdas.Lambdas.Function))
   )
  )
 )
@@ -298,8 +304,8 @@
  (block $return.label
   (block
    ;; FunctionalInterfaceWithMethodReturningVoid runner = function (){
-   (local.set $runner (ref.null $lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid))
    
+   (local.set $runner (ref.null $lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid))
   )
  )
 )
@@ -311,8 +317,8 @@
  (block $return.label
   (block
    ;; FunctionalInterfaceWithMethodReturningVoid runner = function (){
-   (local.set $runner (ref.null $lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid))
    
+   (local.set $runner (ref.null $lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid))
   )
  )
 )
@@ -324,12 +330,18 @@
  (block $return.label
   (block
    ;; if ((lambdas.Lambdas.identityFunction == null)) {
-   (if (ref.eq (global.get $identityFunction@lambdas.Lambdas) (ref.null $java.lang.Object)) (then (block
-    ;; (lambdas.Lambdas.identityFunction = new IdentityFunction.<init>());
-    (global.set $identityFunction@lambdas.Lambdas (call $<init><>:void@lambdas.Lambdas.IdentityFunction (struct.new_default_with_rtt $lambdas.Lambdas.IdentityFunction (global.get $lambdas.Lambdas.IdentityFunction.rtt)) )))))
+   (if (ref.eq (global.get $identityFunction@lambdas.Lambdas) (ref.null $java.lang.Object))
+    (then
+     (block
+      ;; (lambdas.Lambdas.identityFunction = new IdentityFunction.<init>());
+      (global.set $identityFunction@lambdas.Lambdas (call $<init><>:void@lambdas.Lambdas.IdentityFunction (struct.new_default_with_rtt $lambdas.Lambdas.IdentityFunction (global.get $lambdas.Lambdas.IdentityFunction.rtt)) ))
+     )
+    )
+   )
    ;; return ((GenericJsFunction<E, E>) lambdas.Lambdas.identityFunction);
    (local.set $return.value (global.get $identityFunction@lambdas.Lambdas))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -347,20 +359,20 @@
  (block $return.label
   (block
    ;; Thenable<String> thenable = function (GenericJsFunction<Void, String> f1,GenericJsFunction<Void, Throwable> f2){
+   
    (local.set $thenable (ref.null $lambdas.Lambdas.Thenable))
-   
    ;; AnotherThenable<String> otherThenable = function (GenericJsFunction<Void, String> f1,GenericJsFunction<Void, Throwable> f2){
+   
    (local.set $otherThenable (ref.null $lambdas.Lambdas.AnotherThenable))
-   
    ;; JsSupplier<Integer> stringJsSupplier = function (){
-   (local.set $stringJsSupplier (ref.null $lambdas.Lambdas.JsSupplier))
    
+   (local.set $stringJsSupplier (ref.null $lambdas.Lambdas.JsSupplier))
    ;; stringJsSupplier.get();
    (ref.null $java.lang.Integer)
    drop
    ;; Equals equals = stringJsSupplier;
-   (local.set $equals (local.get $stringJsSupplier))
    
+   (local.set $equals (local.get $stringJsSupplier))
    ;; equals.equals(null);
    (i32.const 0)
    drop
@@ -380,12 +392,13 @@
  (block $return.label
   (block
    ;; Object o = (((GenericFunctionalInterface<String>&JustADefaultT<Number>)) function (String x){
-   (local.set $o (ref.null $lambdas.Lambdas.GenericFunctionalInterface))
    
+   (local.set $o (ref.null $lambdas.Lambdas.GenericFunctionalInterface))
    ;; (o = (((GenericFunctionalInterface<String>&JustADefaultS<Number>)) function (String x){
    (local.set $o (ref.null $lambdas.Lambdas.GenericFunctionalInterface))
    ;; (o = (((GenericFunctionalInterface<U>&JustADefaultS<V>)) function (U x){
-   (local.set $o (ref.null $lambdas.Lambdas.GenericFunctionalInterface)))
+   (local.set $o (ref.null $lambdas.Lambdas.GenericFunctionalInterface))
+  )
  )
 )
 
@@ -398,8 +411,8 @@
  (block $return.label
   (block
    ;; Object o = (((BiFunction<String, String, String>&MarkerWithDefaultMethod)) function (String t,String u){
-   (local.set $o (ref.null $lambdas.Lambdas.BiFunction))
    
+   (local.set $o (ref.null $lambdas.Lambdas.BiFunction))
   )
  )
 )
@@ -443,7 +456,8 @@
   (block
    ;; return null;
    (local.set $return.value (ref.null $lambdas.Lambdas.Functional))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -476,7 +490,8 @@
   (block
    ;; return null;
    (local.set $return.value (ref.null $lambdas.Lambdas.Functional))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -503,7 +518,8 @@
   (block
    ;; return function (T t,U u){
    (local.set $return.value (ref.null $lambdas.Lambdas.BiFunction))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -522,7 +538,8 @@
   (block
    ;; return function (T t){
    (local.set $return.value (ref.null $lambdas.Lambdas.Function))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -607,8 +624,8 @@
  (block $return.label
   (block
    ;; FunctionalInterface l = function (int i){
-   (local.set $l (ref.null $lambdas.Lambdas.FunctionalInterface))
    
+   (local.set $l (ref.null $lambdas.Lambdas.FunctionalInterface))
   )
  )
 )
@@ -656,7 +673,8 @@
   (block
    ;; return o;
    (local.set $return.value (local.get $o))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -675,7 +693,8 @@
   (block
    ;; return null;
    (local.set $return.value (ref.null $java.lang.Object))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )

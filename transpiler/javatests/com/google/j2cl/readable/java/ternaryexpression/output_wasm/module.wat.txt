@@ -28,17 +28,17 @@
  (block $return.label
   (block
    ;; boolean a = true;
+   
    (local.set $a (i32.const 1))
-   
    ;; int number = (a) ? (1) : (2);
+   
    (local.set $number (if (result i32) (local.get $a) (then (i32.const 1)) (else (i32.const 2))))
-   
    ;; boolean b = ((number == 1)) ? ((number == 2)) : ((number == 1));
+   
    (local.set $b (if (result i32) (i32.eq (local.get $number) (i32.const 1)) (then (i32.eq (local.get $number) (i32.const 2))) (else (i32.eq (local.get $number) (i32.const 1)))))
-   
    ;; int value = (b) ? (new Integer.<init>(15)) : (new Integer.<init>(30));
-   (local.set $value (i32.const 0))
    
+   (local.set $value (i32.const 0))
   )
  )
 )

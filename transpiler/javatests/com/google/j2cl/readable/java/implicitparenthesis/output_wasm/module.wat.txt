@@ -26,7 +26,8 @@
    ;; implicitparenthesis.ImplicitParenthesis.examples();
    (call $examples<>:void@implicitparenthesis.ImplicitParenthesis )
    ;; implicitparenthesis.ImplicitParenthesis.nonExamples();
-   (call $nonExamples<>:void@implicitparenthesis.ImplicitParenthesis ))
+   (call $nonExamples<>:void@implicitparenthesis.ImplicitParenthesis )
+  )
  )
 )
 
@@ -50,7 +51,6 @@
     (local.set $primitiveInt (i32.const 0))
     ;; assert (primitiveInt == 15);
     ;; unimplemented statement AssertStatement
-    
    )
    (block
     ;; (primitiveInt = 5);
@@ -61,7 +61,6 @@
     (local.set $primitiveInt (i32.const 0))
     ;; assert (primitiveInt == 15);
     ;; unimplemented statement AssertStatement
-    
    )
    (block
     ;; (primitiveInt = 5);
@@ -72,7 +71,6 @@
     (local.set $primitiveInt (i32.const 0))
     ;; assert (primitiveInt == 5);
     ;; unimplemented statement AssertStatement
-    
    )
    (block
     ;; (primitiveInt = 5);
@@ -83,7 +81,6 @@
     (local.set $primitiveInt (i32.const 0))
     ;; assert (primitiveInt == 10);
     ;; unimplemented statement AssertStatement
-    
    )
    (block
     ;; (primitiveInt = 5);
@@ -94,8 +91,8 @@
     (local.set $primitiveInt (i32.const 0))
     ;; assert (primitiveInt == 11);
     ;; unimplemented statement AssertStatement
-    
-   ))
+   )
+  )
  )
 )
 
@@ -121,7 +118,6 @@
     (local.set $primitiveInt (i32.sub (i32.const 0) (local.get $primitiveInt)))
     ;; assert (primitiveInt == 5);
     ;; unimplemented statement AssertStatement
-    
    )
    (block
     ;; (primitiveInt = 5);
@@ -134,8 +130,8 @@
     (local.set $boxedBoolean (ref.null $java.lang.Boolean))
     ;; assert (boxedBoolean == false);
     ;; unimplemented statement AssertStatement
-    
-   ))
+   )
+  )
  )
 )
 

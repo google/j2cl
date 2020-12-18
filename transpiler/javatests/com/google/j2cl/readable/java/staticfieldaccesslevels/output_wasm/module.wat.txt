@@ -31,7 +31,8 @@
   (block
    ;; return (staticfieldaccesslevels.StaticFieldAccessLevels.b) ? (staticfieldaccesslevels.StaticFieldAccessLevels.a) : (staticfieldaccesslevels.StaticFieldAccessLevels.d);
    (local.set $return.value (if (result i32) (global.get $b@staticfieldaccesslevels.StaticFieldAccessLevels) (then (global.get $a@staticfieldaccesslevels.StaticFieldAccessLevels)) (else (global.get $d@staticfieldaccesslevels.StaticFieldAccessLevels))))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )

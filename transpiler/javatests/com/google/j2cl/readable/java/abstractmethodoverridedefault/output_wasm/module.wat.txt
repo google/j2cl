@@ -88,10 +88,15 @@
  (block $return.label
   (block
    ;; if (false) {
-   (if (i32.const 0) (then (block
-    ;; B.this.bar();
-    
-   ))))
+   (if (i32.const 0)
+    (then
+     (block
+      ;; B.this.bar();
+      
+     )
+    )
+   )
+  )
  )
 )
 

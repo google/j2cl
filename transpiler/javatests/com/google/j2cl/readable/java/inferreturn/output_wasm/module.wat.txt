@@ -27,7 +27,8 @@
   (block
    ;; return new InferReturn.<init>();
    (local.set $return.value (call $<init><>:void@inferreturn.InferReturn (struct.new_default_with_rtt $inferreturn.InferReturn (global.get $inferreturn.InferReturn.rtt)) ))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -40,13 +41,19 @@
  (block $return.label
   (block
    ;; if (!(foo == null)) {
-   (if (i32.eqz (ref.eq (local.get $foo) (ref.null $java.lang.Object))) (then (block
-    ;; return inferreturn.InferReturn.inferGeneric(foo);
-    (local.set $return.value (call $inferGeneric<java.lang.Object>:inferreturn.InferReturn@inferreturn.InferReturn (local.get $foo)))
-    (br $return.label))))
+   (if (i32.eqz (ref.eq (local.get $foo) (ref.null $java.lang.Object)))
+    (then
+     (block
+      ;; return inferreturn.InferReturn.inferGeneric(foo);
+      (local.set $return.value (call $inferGeneric<java.lang.Object>:inferreturn.InferReturn@inferreturn.InferReturn (local.get $foo)))
+      (br $return.label)
+     )
+    )
+   )
    ;; return null;
    (local.set $return.value (ref.null $inferreturn.InferReturn))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -58,15 +65,16 @@
  (block $return.label
   (block
    ;; ArrayList<Object> list = inferreturn.InferReturn.newArrayList("foo");
-   (local.set $list (call $newArrayList<java.lang.Object>:java.util.ArrayList@inferreturn.InferReturn (ref.null $java.lang.String)))
    
+   (local.set $list (call $newArrayList<java.lang.Object>:java.util.ArrayList@inferreturn.InferReturn (ref.null $java.lang.String)))
    ;; inferreturn.InferReturn.acceptsArrayListOfObject(list);
    (call $acceptsArrayListOfObject<java.util.ArrayList>:void@inferreturn.InferReturn (local.get $list))
    ;; Object[] array = inferreturn.InferReturn.newArray("foo");
-   (local.set $array (call $newArray<java.lang.Object>:java.lang.Object<>@inferreturn.InferReturn (ref.null $java.lang.String)))
    
+   (local.set $array (call $newArray<java.lang.Object>:java.lang.Object<>@inferreturn.InferReturn (ref.null $java.lang.String)))
    ;; inferreturn.InferReturn.acceptsArrayOfObject(array);
-   (call $acceptsArrayOfObject<java.lang.Object<>>:void@inferreturn.InferReturn (local.get $array)))
+   (call $acceptsArrayOfObject<java.lang.Object<>>:void@inferreturn.InferReturn (local.get $array))
+  )
  )
 )
 
@@ -79,7 +87,8 @@
   (block
    ;; return new ArrayList.<init>();
    (local.set $return.value (call $<init><>:void@java.util.ArrayList (struct.new_default_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.rtt)) ))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -93,7 +102,8 @@
   (block
    ;; return ((V[]) new Object[0]);
    (local.set $return.value (ref.null $java.lang.Object))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )

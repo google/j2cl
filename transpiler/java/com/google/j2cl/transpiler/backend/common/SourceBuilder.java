@@ -184,14 +184,14 @@ public class SourceBuilder {
     append("}");
   }
 
-  public void openParens() {
-    append("(");
+  public void openParens(String text) {
+    append("(" + text);
     indent();
   }
 
   public void closeParens() {
     unindent();
-    if (sb.charAt(sb.length() - 1) != ')') {
+    if (sb.charAt(sb.length() - 1) != '(') {
       newLine();
     }
     append(")");

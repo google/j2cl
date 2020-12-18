@@ -26,8 +26,8 @@
  (block $return.label
   (block
    ;; int localVar = 1;
-   (local.set $localVar (i32.const 1))
    
+   (local.set $localVar (i32.const 1))
    ;; LocalClassWithConstructor.this.new $1LocalClass.<init>(1);
    (call $<init><int>:void@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (struct.new_default_with_rtt $localclasswithconstructor.LocalClassWithConstructor.1LocalClass (global.get $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.rtt)) (i32.const 1))
    drop
@@ -55,7 +55,8 @@
    ;; Object.this.Object.<init>();
    
    ;; ($1LocalClass.this.field = (($1LocalClass.this.localVar + a) + b));
-   (struct.set $localclasswithconstructor.LocalClassWithConstructor.1LocalClass $field@localclasswithconstructor.LocalClassWithConstructor.1LocalClass  (ref.null $localclasswithconstructor.LocalClassWithConstructor.1LocalClass) (i32.add (i32.add (struct.get $localclasswithconstructor.LocalClassWithConstructor.1LocalClass $localVar@localclasswithconstructor.LocalClassWithConstructor.1LocalClass  (ref.null $localclasswithconstructor.LocalClassWithConstructor.1LocalClass)) (local.get $a)) (local.get $b))))
+   (struct.set $localclasswithconstructor.LocalClassWithConstructor.1LocalClass $field@localclasswithconstructor.LocalClassWithConstructor.1LocalClass  (ref.null $localclasswithconstructor.LocalClassWithConstructor.1LocalClass) (i32.add (i32.add (struct.get $localclasswithconstructor.LocalClassWithConstructor.1LocalClass $localVar@localclasswithconstructor.LocalClassWithConstructor.1LocalClass  (ref.null $localclasswithconstructor.LocalClassWithConstructor.1LocalClass)) (local.get $a)) (local.get $b)))
+  )
  )
  (local.get $this)
 )
@@ -70,7 +71,8 @@
    ;; $1LocalClass.this.$1LocalClass.<init>(a,$1LocalClass.this.p);
    
    ;; ($1LocalClass.this.field = $1LocalClass.this.localVar);
-   (struct.set $localclasswithconstructor.LocalClassWithConstructor.1LocalClass $field@localclasswithconstructor.LocalClassWithConstructor.1LocalClass  (ref.null $localclasswithconstructor.LocalClassWithConstructor.1LocalClass) (struct.get $localclasswithconstructor.LocalClassWithConstructor.1LocalClass $localVar@localclasswithconstructor.LocalClassWithConstructor.1LocalClass  (ref.null $localclasswithconstructor.LocalClassWithConstructor.1LocalClass))))
+   (struct.set $localclasswithconstructor.LocalClassWithConstructor.1LocalClass $field@localclasswithconstructor.LocalClassWithConstructor.1LocalClass  (ref.null $localclasswithconstructor.LocalClassWithConstructor.1LocalClass) (struct.get $localclasswithconstructor.LocalClassWithConstructor.1LocalClass $localVar@localclasswithconstructor.LocalClassWithConstructor.1LocalClass  (ref.null $localclasswithconstructor.LocalClassWithConstructor.1LocalClass)))
+  )
  )
  (local.get $this)
 )

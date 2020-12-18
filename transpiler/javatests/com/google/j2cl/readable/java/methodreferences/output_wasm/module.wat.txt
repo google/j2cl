@@ -27,7 +27,8 @@
   (block
    ;; return new Object.<init>();
    (local.set $return.value (call $<init><>:void@java.lang.Object (struct.new_default_with_rtt $java.lang.Object (global.get $java.lang.Object.rtt)) ))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -41,7 +42,8 @@
   (block
    ;; return true;
    (local.set $return.value (ref.null $java.lang.Boolean))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -55,7 +57,8 @@
   (block
    ;; return MethodReferences.this;
    (local.set $return.value (ref.null $methodreferences.MethodReferences))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -70,7 +73,8 @@
   (block
    ;; return false;
    (local.set $return.value (ref.null $java.lang.Boolean))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -111,75 +115,72 @@
  (block $return.label
   (block
    ;; Producer<Object> objectFactory = function (){
-   (local.set $objectFactory (ref.null $methodreferences.MethodReferences.Producer))
    
+   (local.set $objectFactory (ref.null $methodreferences.MethodReferences.Producer))
    ;; (objectFactory = function (){
    (local.set $objectFactory (ref.null $methodreferences.MethodReferences.Producer))
    ;; (objectFactory = (MethodReferences<T> $$q = new MethodReferences.<init>(),function (){
-   (local.set $objectFactory (block
-    (result (ref null $methodreferences.MethodReferences.Producer))
-    (local.set $$$q (call $<init><>:void@methodreferences.MethodReferences (struct.new_default_with_rtt $methodreferences.MethodReferences (global.get $methodreferences.MethodReferences.rtt)) ))
+   (local.set $objectFactory (block (result (ref null $methodreferences.MethodReferences.Producer))
     
+    (local.set $$$q (call $<init><>:void@methodreferences.MethodReferences (struct.new_default_with_rtt $methodreferences.MethodReferences (global.get $methodreferences.MethodReferences.rtt)) ))
     (ref.null $methodreferences.MethodReferences.Producer)
    ))
    ;; BiFunction<MethodReferences<T>, Number, Boolean> biFunction = function (MethodReferences<T> arg0,Number arg1){
+   
    (local.set $biFunction (ref.null $methodreferences.MethodReferences.BiFunction))
-   
    ;; Function<Number, Boolean> functionWithParameters = function (Number arg0){
+   
    (local.set $functionWithParameters (ref.null $methodreferences.MethodReferences.Function))
-   
    ;; Predicate<MethodReferences<T>> objectPredicate = function (MethodReferences<T> arg0){
+   
    (local.set $objectPredicate (ref.null $methodreferences.MethodReferences.Predicate))
-   
    ;; Producer<ObjectCapturingOuter<T>> objectCapturingOuterProducer = function (){
+   
    (local.set $objectCapturingOuterProducer (ref.null $methodreferences.MethodReferences.Producer))
-   
    ;; ArrayProducer<Object> arrayProducer = function (int arg0){
-   (local.set $arrayProducer (ref.null $methodreferences.MethodReferences.ArrayProducer))
    
+   (local.set $arrayProducer (ref.null $methodreferences.MethodReferences.ArrayProducer))
    ;; (objectFactory = (MethodReferences<Object> $$q = new MethodReferences.<init>(),function (){
-   (local.set $objectFactory (block
-    (result (ref null $methodreferences.MethodReferences.Producer))
-    (local.set $$$q_1 (call $<init><>:void@methodreferences.MethodReferences (struct.new_default_with_rtt $methodreferences.MethodReferences (global.get $methodreferences.MethodReferences.rtt)) ))
+   (local.set $objectFactory (block (result (ref null $methodreferences.MethodReferences.Producer))
     
+    (local.set $$$q_1 (call $<init><>:void@methodreferences.MethodReferences (struct.new_default_with_rtt $methodreferences.MethodReferences (global.get $methodreferences.MethodReferences.rtt)) ))
     (ref.null $methodreferences.MethodReferences.Producer)
    ))
    ;; Function<MethodReferences<T>, Object> function = function (MethodReferences<T> arg0){
+   
    (local.set $function (ref.null $methodreferences.MethodReferences.Function))
-   
    ;; Function<Integer, Object[]> arrayFactory = function (Integer arg0){
+   
    (local.set $arrayFactory (ref.null $methodreferences.MethodReferences.Function))
-   
    ;; Producer<String> superToStringProducer = function (){
+   
    (local.set $superToStringProducer (ref.null $methodreferences.MethodReferences.Producer))
-   
    ;; JsProducer<Object> jsobjectFactory = function (){
-   (local.set $jsobjectFactory (ref.null $methodreferences.MethodReferences.JsProducer))
    
+   (local.set $jsobjectFactory (ref.null $methodreferences.MethodReferences.JsProducer))
    ;; (jsobjectFactory = function (){
    (local.set $jsobjectFactory (ref.null $methodreferences.MethodReferences.JsProducer))
    ;; (jsobjectFactory = (MethodReferences<Object> $$q = new MethodReferences.<init>(),function (){
-   (local.set $jsobjectFactory (block
-    (result (ref null $methodreferences.MethodReferences.JsProducer))
-    (local.set $$$q_2 (call $<init><>:void@methodreferences.MethodReferences (struct.new_default_with_rtt $methodreferences.MethodReferences (global.get $methodreferences.MethodReferences.rtt)) ))
+   (local.set $jsobjectFactory (block (result (ref null $methodreferences.MethodReferences.JsProducer))
     
+    (local.set $$$q_2 (call $<init><>:void@methodreferences.MethodReferences (struct.new_default_with_rtt $methodreferences.MethodReferences (global.get $methodreferences.MethodReferences.rtt)) ))
     (ref.null $methodreferences.MethodReferences.JsProducer)
    ))
    ;; JsFunctionInterface<MethodReferences<T>, Object> jsfunction = function (MethodReferences<T> arg0){
+   
    (local.set $jsfunction (ref.null $methodreferences.MethodReferences.JsFunctionInterface))
-   
    ;; JsFunctionInterface<Integer, Object[]> jsarrayFactory = function (Integer arg0){
+   
    (local.set $jsarrayFactory (ref.null $methodreferences.MethodReferences.JsFunctionInterface))
-   
    ;; JsProducer<String> jsSuperToStringProducer = function (){
+   
    (local.set $jsSuperToStringProducer (ref.null $methodreferences.MethodReferences.JsProducer))
-   
    ;; JsBiFunction<MethodReferences<T>, Number, Boolean> jsbiFunction = function (MethodReferences<T> arg0,Number arg1){
+   
    (local.set $jsbiFunction (ref.null $methodreferences.MethodReferences.JsBiFunction))
-   
    ;; JsFunctionInterface<Number, Boolean> jsFunctionWithParameters = function (Number arg0){
-   (local.set $jsFunctionWithParameters (ref.null $methodreferences.MethodReferences.JsFunctionInterface))
    
+   (local.set $jsFunctionWithParameters (ref.null $methodreferences.MethodReferences.JsFunctionInterface))
   )
  )
 )
@@ -227,7 +228,8 @@
   (block
    ;; return ObjectCapturingOuter.this.this;
    (local.set $return.value (struct.get $methodreferences.MethodReferences.ObjectCapturingOuter $this@methodreferences.MethodReferences.ObjectCapturingOuter  (ref.null $methodreferences.MethodReferences.ObjectCapturingOuter)))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )

@@ -19,7 +19,8 @@
    ;; (GenericEquals.this.value = value);
    (struct.set $genericequals.GenericEquals $value@genericequals.GenericEquals  (ref.null $genericequals.GenericEquals) (local.get $value))
    ;; (GenericEquals.this.value2 = null);
-   (struct.set $genericequals.GenericEquals $value2@genericequals.GenericEquals  (ref.null $genericequals.GenericEquals) (ref.null $genericequals.GenericEquals)))
+   (struct.set $genericequals.GenericEquals $value2@genericequals.GenericEquals  (ref.null $genericequals.GenericEquals) (ref.null $genericequals.GenericEquals))
+  )
  )
  (local.get $this)
 )
@@ -34,7 +35,8 @@
   (block
    ;; return other.value2.value;
    (local.set $return.value (struct.get $genericequals.GenericEquals $value@genericequals.GenericEquals  (struct.get $genericequals.GenericEquals $value2@genericequals.GenericEquals  (local.get $other))))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -49,21 +51,32 @@
  (block $return.label
   (block
    ;; if ((obj == GenericEquals.this)) {
-   (if (ref.eq (local.get $obj) (ref.null $genericequals.GenericEquals)) (then (block
-    ;; return true;
-    (local.set $return.value (i32.const 1))
-    (br $return.label))))
+   (if (ref.eq (local.get $obj) (ref.null $genericequals.GenericEquals))
+    (then
+     (block
+      ;; return true;
+      (local.set $return.value (i32.const 1))
+      (br $return.label)
+     )
+    )
+   )
    ;; if (!obj instanceof GenericEquals) {
-   (if (i32.eqz (i32.const 0)) (then (block
-    ;; return false;
-    (local.set $return.value (i32.const 0))
-    (br $return.label))))
+   (if (i32.eqz (i32.const 0))
+    (then
+     (block
+      ;; return false;
+      (local.set $return.value (i32.const 0))
+      (br $return.label)
+     )
+    )
+   )
    ;; GenericEquals<?> other = ((GenericEquals<?>) obj);
-   (local.set $other (ref.cast $java.lang.Object $genericequals.GenericEquals (local.get $obj) (global.get $genericequals.GenericEquals.rtt)))
    
+   (local.set $other (ref.cast $java.lang.Object $genericequals.GenericEquals (local.get $obj) (global.get $genericequals.GenericEquals.rtt)))
    ;; return GenericEquals.this.value.equals(other.value);
    (local.set $return.value (i32.const 0))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )

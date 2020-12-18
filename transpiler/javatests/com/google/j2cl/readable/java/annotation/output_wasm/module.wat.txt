@@ -52,14 +52,15 @@
  (block $return.label
   (block
    ;; Foo foo = null;
-   (local.set $foo (ref.null $annotation.Main.Foo))
    
+   (local.set $foo (ref.null $annotation.Main.Foo))
    ;; foo.bar();
    (i32.const 0)
    drop
    ;; return annotation.Main.Foo.CONSTANT;
    (local.set $return.value (global.get $CONSTANT@annotation.Main.Foo))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )

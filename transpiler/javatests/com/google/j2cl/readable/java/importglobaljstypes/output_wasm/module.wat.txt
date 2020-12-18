@@ -27,7 +27,8 @@
   (block
    ;; return importglobaljstypes.Date.NativeDate.now();
    (local.set $return.value (call $now<>:double@importglobaljstypes.Date.NativeDate ))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -42,7 +43,8 @@
   (block
    ;; return d;
    (local.set $return.value (local.get $d))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -116,7 +118,8 @@
   (block
    ;; return importglobaljstypes.Number.fun(x);
    (local.set $return.value (call $fun<double>:boolean@importglobaljstypes.Number (local.get $x)))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -141,7 +144,8 @@
   (block
    ;; return ((String) importglobaljstypes.Number.getFromCharCodeFunction().apply(null,array));
    (local.set $return.value (ref.cast $java.lang.Object $java.lang.String (ref.null $java.lang.String) (global.get $java.lang.String.rtt)))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
@@ -156,7 +160,8 @@
   (block
    ;; return a;
    (local.set $return.value (local.get $a))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )

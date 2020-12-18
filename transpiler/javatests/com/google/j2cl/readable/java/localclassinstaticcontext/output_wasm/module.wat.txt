@@ -28,8 +28,8 @@
    (call $<init><>:void@localclassinstaticcontext.LocalClassInStaticContext.1A (struct.new_default_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.1A (global.get $localclassinstaticcontext.LocalClassInStaticContext.1A.rtt)) )
    drop
    ;; Object a = new $3.<init>();
-   (local.set $a (call $<init><>:void@localclassinstaticcontext.LocalClassInStaticContext.3 (struct.new_default_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.3 (global.get $localclassinstaticcontext.LocalClassInStaticContext.3.rtt)) ))
    
+   (local.set $a (call $<init><>:void@localclassinstaticcontext.LocalClassInStaticContext.3 (struct.new_default_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.3 (global.get $localclassinstaticcontext.LocalClassInStaticContext.3.rtt)) ))
   )
  )
 )
@@ -195,7 +195,8 @@
   (block
    ;; return $1D.this.this.f;
    (local.set $return.value (struct.get $localclassinstaticcontext.LocalClassInStaticContext.C $f@localclassinstaticcontext.LocalClassInStaticContext.C  (struct.get $localclassinstaticcontext.LocalClassInStaticContext.C.1D $this@localclassinstaticcontext.LocalClassInStaticContext.C.1D  (ref.null $localclassinstaticcontext.LocalClassInStaticContext.C.1D))))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )

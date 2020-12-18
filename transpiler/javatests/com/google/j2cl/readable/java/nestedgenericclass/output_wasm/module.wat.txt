@@ -54,14 +54,14 @@
  (block $return.label
   (block
    ;; NestedGenericClass<Number> n = new NestedGenericClass.<init>();
+   
    (local.set $n (call $<init><>:void@nestedgenericclass.NestedGenericClass (struct.new_default_with_rtt $nestedgenericclass.NestedGenericClass (global.get $nestedgenericclass.NestedGenericClass.rtt)) ))
-   
    ;; A<Error, Number> a = n.new A.<init>();
+   
    (local.set $a (call $<init><>:void@nestedgenericclass.NestedGenericClass.A (struct.new_default_with_rtt $nestedgenericclass.NestedGenericClass.A (global.get $nestedgenericclass.NestedGenericClass.A.rtt)) ))
-   
    ;; B<Exception, Error, Number> b = a.new B.<init>();
-   (local.set $b (call $<init><>:void@nestedgenericclass.NestedGenericClass.A.B (struct.new_default_with_rtt $nestedgenericclass.NestedGenericClass.A.B (global.get $nestedgenericclass.NestedGenericClass.A.B.rtt)) ))
    
+   (local.set $b (call $<init><>:void@nestedgenericclass.NestedGenericClass.A.B (struct.new_default_with_rtt $nestedgenericclass.NestedGenericClass.A.B (global.get $nestedgenericclass.NestedGenericClass.A.B.rtt)) ))
    ;; n.new C.<init>();
    (call $<init><>:void@nestedgenericclass.NestedGenericClass.C (struct.new_default_with_rtt $nestedgenericclass.NestedGenericClass.C (global.get $nestedgenericclass.NestedGenericClass.C.rtt)) )
    drop

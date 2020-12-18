@@ -28,11 +28,12 @@
  (block $return.label
   (block
    ;; int let = 0;
-   (local.set $let (i32.const 0))
    
+   (local.set $let (i32.const 0))
    ;; return (let + in);
    (local.set $return.value (i32.add (local.get $let) (local.get $in)))
-   (br $return.label))
+   (br $return.label)
+  )
  )
  (local.get $return.value)
 )
