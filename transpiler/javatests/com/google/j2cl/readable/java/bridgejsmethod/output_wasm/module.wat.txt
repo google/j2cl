@@ -1,0 +1,618 @@
+;;; Code for bridgejsmethod.Main
+
+;;; CLASS  Main
+
+(type $bridgejsmethod.Main (struct
+))
+
+;;; Main()
+(func $<init><>:void@bridgejsmethod.Main
+ (param $this (ref null $bridgejsmethod.Main))
+ (result (ref null $bridgejsmethod.Main))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void Main.test()
+(func $test<>:void@bridgejsmethod.Main
+ (local $a (ref null $bridgejsmethod.Main.A))
+ (local $b (ref null $bridgejsmethod.Main.B))
+ (local $c (ref null $bridgejsmethod.Main.C))
+ (local $d (ref null $bridgejsmethod.Main.D))
+ (local $e (ref null $bridgejsmethod.Main.E))
+ (local $h (ref null $bridgejsmethod.Main.H))
+ (local $l (ref null $bridgejsmethod.Main.L))
+ (block $return.label
+  (block
+   ;; A a = new A.<init>();
+   (local.set $a (call $<init><>:void@bridgejsmethod.Main.A (struct.new_default_with_rtt $bridgejsmethod.Main.A (global.get $bridgejsmethod.Main.A.rtt)) ))
+   
+   ;; a.fun(1);
+   (ref.null $java.lang.Object)
+   drop
+   ;; a.bar(1);
+   
+   ;; B b = new B.<init>();
+   (local.set $b (call $<init><>:void@bridgejsmethod.Main.B (struct.new_default_with_rtt $bridgejsmethod.Main.B (global.get $bridgejsmethod.Main.B.rtt)) ))
+   
+   ;; b.fun("abc");
+   (ref.null $java.lang.String)
+   drop
+   ;; b.bar("abc");
+   
+   ;; C c = new C.<init>();
+   (local.set $c (call $<init><>:void@bridgejsmethod.Main.C (struct.new_default_with_rtt $bridgejsmethod.Main.C (global.get $bridgejsmethod.Main.C.rtt)) ))
+   
+   ;; c.fun(1);
+   (ref.null $java.lang.Integer)
+   drop
+   ;; c.bar(1);
+   
+   ;; D d = new D.<init>();
+   (local.set $d (call $<init><>:void@bridgejsmethod.Main.D (struct.new_default_with_rtt $bridgejsmethod.Main.D (global.get $bridgejsmethod.Main.D.rtt)) ))
+   
+   ;; d.fun(1);
+   (ref.null $java.lang.Integer)
+   drop
+   ;; d.bar(1);
+   
+   ;; E e = new E.<init>();
+   (local.set $e (call $<init><>:void@bridgejsmethod.Main.E (struct.new_default_with_rtt $bridgejsmethod.Main.E (global.get $bridgejsmethod.Main.E.rtt)) ))
+   
+   ;; e.fun("abc");
+   (ref.null $java.lang.String)
+   drop
+   ;; e.bar("abc");
+   
+   ;; H<Integer> h = new H.<init>();
+   (local.set $h (call $<init><>:void@bridgejsmethod.Main.H (struct.new_default_with_rtt $bridgejsmethod.Main.H (global.get $bridgejsmethod.Main.H.rtt)) ))
+   
+   ;; h.enclose(1);
+   (ref.null $java.lang.Integer)
+   drop
+   ;; L<Integer> l = new L.<init>();
+   (local.set $l (call $<init><>:void@bridgejsmethod.Main.L (struct.new_default_with_rtt $bridgejsmethod.Main.L (global.get $bridgejsmethod.Main.L.rtt)) ))
+   
+   ;; l.fun("foo",1);
+   
+  )
+ )
+)
+
+;;; CLASS  A
+
+(type $bridgejsmethod.Main.A (struct
+))
+
+;;; A()
+(func $<init><>:void@bridgejsmethod.Main.A
+ (param $this (ref null $bridgejsmethod.Main.A))
+ (result (ref null $bridgejsmethod.Main.A))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; T A.fun(T t)
+(func $fun<java.lang.Object>:java.lang.Object@bridgejsmethod.Main.A
+ (param $this (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; return t;
+   (local.set $return.value (local.get $t))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; void A.bar(T t)
+(func $bar<java.lang.Object>:void@bridgejsmethod.Main.A
+ (param $this (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; INTERFACE  I
+
+(type $bridgejsmethod.Main.I (struct
+))
+
+;;; INTERFACE  J
+
+(type $bridgejsmethod.Main.J (struct
+))
+
+;;; CLASS  B
+
+(type $bridgejsmethod.Main.B (struct
+))
+
+;;; B()
+(func $<init><>:void@bridgejsmethod.Main.B
+ (param $this (ref null $bridgejsmethod.Main.B))
+ (result (ref null $bridgejsmethod.Main.B))
+ (block $return.label
+  (block
+   ;; A.this.A.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; String B.fun(String s)
+(func $fun<java.lang.String>:java.lang.String@bridgejsmethod.Main.B
+ (param $this (ref null $java.lang.Object))
+ (param $s (ref null $java.lang.String))
+ (result (ref null $java.lang.String))
+ (local $return.value (ref null $java.lang.String))
+ (block $return.label
+  (block
+   ;; return s;
+   (local.set $return.value (local.get $s))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; void B.bar(String s)
+(func $bar<java.lang.String>:void@bridgejsmethod.Main.B
+ (param $this (ref null $java.lang.Object))
+ (param $s (ref null $java.lang.String))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; CLASS  C
+
+(type $bridgejsmethod.Main.C (struct
+))
+
+;;; C()
+(func $<init><>:void@bridgejsmethod.Main.C
+ (param $this (ref null $bridgejsmethod.Main.C))
+ (result (ref null $bridgejsmethod.Main.C))
+ (block $return.label
+  (block
+   ;; A.this.A.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; Integer C.fun(Integer i)
+(func $fun<java.lang.Integer>:java.lang.Integer@bridgejsmethod.Main.C
+ (param $this (ref null $java.lang.Object))
+ (param $i (ref null $java.lang.Integer))
+ (result (ref null $java.lang.Integer))
+ (local $return.value (ref null $java.lang.Integer))
+ (block $return.label
+  (block
+   ;; return i;
+   (local.set $return.value (local.get $i))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; CLASS  D
+
+(type $bridgejsmethod.Main.D (struct
+))
+
+;;; D()
+(func $<init><>:void@bridgejsmethod.Main.D
+ (param $this (ref null $bridgejsmethod.Main.D))
+ (result (ref null $bridgejsmethod.Main.D))
+ (block $return.label
+  (block
+   ;; A.this.A.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; Integer D.fun(Integer i)
+(func $fun<java.lang.Integer>:java.lang.Integer@bridgejsmethod.Main.D
+ (param $this (ref null $java.lang.Object))
+ (param $i (ref null $java.lang.Integer))
+ (result (ref null $java.lang.Integer))
+ (local $return.value (ref null $java.lang.Integer))
+ (block $return.label
+  (block
+   ;; return i;
+   (local.set $return.value (local.get $i))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; CLASS  E
+
+(type $bridgejsmethod.Main.E (struct
+))
+
+;;; E()
+(func $<init><>:void@bridgejsmethod.Main.E
+ (param $this (ref null $bridgejsmethod.Main.E))
+ (result (ref null $bridgejsmethod.Main.E))
+ (block $return.label
+  (block
+   ;; B.this.B.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  F
+
+(type $bridgejsmethod.Main.F (struct
+))
+
+;;; F()
+(func $<init><>:void@bridgejsmethod.Main.F
+ (param $this (ref null $bridgejsmethod.Main.F))
+ (result (ref null $bridgejsmethod.Main.F))
+ (block $return.label
+  (block
+   ;; A.this.A.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; INTERFACE  G
+
+(type $bridgejsmethod.Main.G (struct
+))
+
+;;; CLASS  H
+
+(type $bridgejsmethod.Main.H (struct
+))
+
+;;; H()
+(func $<init><>:void@bridgejsmethod.Main.H
+ (param $this (ref null $bridgejsmethod.Main.H))
+ (result (ref null $bridgejsmethod.Main.H))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; V H.enclose(V value)
+(func $enclose<java.lang.Object>:java.lang.Object@bridgejsmethod.Main.H
+ (param $this (ref null $java.lang.Object))
+ (param $value (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; return null;
+   (local.set $return.value (ref.null $java.lang.Object))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; CLASS  K
+
+(type $bridgejsmethod.Main.K (struct
+))
+
+;;; K()
+(func $<init><>:void@bridgejsmethod.Main.K
+ (param $this (ref null $bridgejsmethod.Main.K))
+ (result (ref null $bridgejsmethod.Main.K))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void K.fun(K1 k1, K2 k2)
+(func $fun<java.lang.Object|java.lang.Object>:void@bridgejsmethod.Main.K
+ (param $this (ref null $java.lang.Object))
+ (param $k1 (ref null $java.lang.Object))
+ (param $k2 (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; CLASS  L
+
+(type $bridgejsmethod.Main.L (struct
+))
+
+;;; L()
+(func $<init><>:void@bridgejsmethod.Main.L
+ (param $this (ref null $bridgejsmethod.Main.L))
+ (result (ref null $bridgejsmethod.Main.L))
+ (block $return.label
+  (block
+   ;; K.this.K.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void L.fun(String string, L1 l1)
+(func $fun<java.lang.String|java.lang.Object>:void@bridgejsmethod.Main.L
+ (param $this (ref null $java.lang.Object))
+ (param $string (ref null $java.lang.String))
+ (param $l1 (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; INTERFACE  M
+
+(type $bridgejsmethod.Main.M (struct
+))
+
+;;; CLASS  N
+
+(type $bridgejsmethod.Main.N (struct
+ (field $this@bridgejsmethod.Main.N (ref null $bridgejsmethod.Main))
+))
+
+;;; N()
+(func $<init><>:void@bridgejsmethod.Main.N
+ (param $this (ref null $bridgejsmethod.Main.N))
+ (result (ref null $bridgejsmethod.Main.N))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  O
+
+(type $bridgejsmethod.Main.O (struct
+ (field $this@bridgejsmethod.Main.N (ref null $bridgejsmethod.Main))
+ (field $this@bridgejsmethod.Main.O (ref null $bridgejsmethod.Main))
+ (field $b@bridgejsmethod.Main.O (ref null $bridgejsmethod.Main.B))
+))
+
+;;; O()
+(func $<init><>:void@bridgejsmethod.Main.O
+ (param $this (ref null $bridgejsmethod.Main.O))
+ (result (ref null $bridgejsmethod.Main.O))
+ (block $return.label
+  (block
+   ;; N.this.N.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; B O.getB()
+(func $getB<>:bridgejsmethod.Main.B@bridgejsmethod.Main.O
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $bridgejsmethod.Main.B))
+ (local $return.value (ref null $bridgejsmethod.Main.B))
+ (block $return.label
+  (block
+   ;; return O.this.b;
+   (local.set $return.value (ref.null $bridgejsmethod.Main.B))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; INTERFACE  P
+
+(type $bridgejsmethod.Main.P (struct
+))
+
+;;; CLASS  Q
+
+(type $bridgejsmethod.Main.Q (struct
+ (field $this@bridgejsmethod.Main.Q (ref null $bridgejsmethod.Main))
+))
+
+;;; Q()
+(func $<init><>:void@bridgejsmethod.Main.Q
+ (param $this (ref null $bridgejsmethod.Main.Q))
+ (result (ref null $bridgejsmethod.Main.Q))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  R
+
+(type $bridgejsmethod.Main.R (struct
+ (field $this@bridgejsmethod.Main.Q (ref null $bridgejsmethod.Main))
+ (field $this@bridgejsmethod.Main.R (ref null $bridgejsmethod.Main))
+))
+
+;;; R()
+(func $<init><>:void@bridgejsmethod.Main.R
+ (param $this (ref null $bridgejsmethod.Main.R))
+ (result (ref null $bridgejsmethod.Main.R))
+ (block $return.label
+  (block
+   ;; Q.this.Q.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; String R.getKey()
+(func $getKey<>:java.lang.String@bridgejsmethod.Main.R
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.String))
+ (local $return.value (ref null $java.lang.String))
+ (block $return.label
+  (block
+   ;; return null;
+   (local.set $return.value (ref.null $java.lang.String))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; CLASS  S
+
+(type $bridgejsmethod.Main.S (struct
+ (field $this@bridgejsmethod.Main.Q (ref null $bridgejsmethod.Main))
+ (field $this@bridgejsmethod.Main.R (ref null $bridgejsmethod.Main))
+ (field $this@bridgejsmethod.Main.S (ref null $bridgejsmethod.Main))
+))
+
+;;; S()
+(func $<init><>:void@bridgejsmethod.Main.S
+ (param $this (ref null $bridgejsmethod.Main.S))
+ (result (ref null $bridgejsmethod.Main.S))
+ (block $return.label
+  (block
+   ;; R.this.R.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  GrandParent
+
+(type $bridgejsmethod.Main.GrandParent (struct
+ (field $this@bridgejsmethod.Main.GrandParent (ref null $bridgejsmethod.Main))
+))
+
+;;; GrandParent()
+(func $<init><>:void@bridgejsmethod.Main.GrandParent
+ (param $this (ref null $bridgejsmethod.Main.GrandParent))
+ (result (ref null $bridgejsmethod.Main.GrandParent))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void GrandParent.jsMethod(T t)
+(func $jsMethod<java.lang.Object>:void@bridgejsmethod.Main.GrandParent
+ (param $this (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; void GrandParent.method(T t)
+(func $method<java.lang.Object>:void@bridgejsmethod.Main.GrandParent
+ (param $this (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; CLASS  Parent
+
+(type $bridgejsmethod.Main.Parent (struct
+ (field $this@bridgejsmethod.Main.GrandParent (ref null $bridgejsmethod.Main))
+ (field $this@bridgejsmethod.Main.Parent (ref null $bridgejsmethod.Main))
+))
+
+;;; Parent()
+(func $<init><>:void@bridgejsmethod.Main.Parent
+ (param $this (ref null $bridgejsmethod.Main.Parent))
+ (result (ref null $bridgejsmethod.Main.Parent))
+ (block $return.label
+  (block
+   ;; GrandParent.this.GrandParent.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void Parent.jsMethod(T t)
+(func $jsMethod<bridgejsmethod.Main.Parent>:void@bridgejsmethod.Main.Parent
+ (param $this (ref null $java.lang.Object))
+ (param $t (ref null $bridgejsmethod.Main.Parent))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; void Parent.method(T t)
+(func $method<bridgejsmethod.Main.Parent>:void@bridgejsmethod.Main.Parent
+ (param $this (ref null $java.lang.Object))
+ (param $t (ref null $bridgejsmethod.Main.Parent))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; CLASS  Child
+
+(type $bridgejsmethod.Main.Child (struct
+ (field $this@bridgejsmethod.Main.GrandParent (ref null $bridgejsmethod.Main))
+ (field $this@bridgejsmethod.Main.Parent (ref null $bridgejsmethod.Main))
+ (field $this@bridgejsmethod.Main.Child (ref null $bridgejsmethod.Main))
+))
+
+;;; Child()
+(func $<init><>:void@bridgejsmethod.Main.Child
+ (param $this (ref null $bridgejsmethod.Main.Child))
+ (result (ref null $bridgejsmethod.Main.Child))
+ (block $return.label
+  (block
+   ;; Parent.this.Parent.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+

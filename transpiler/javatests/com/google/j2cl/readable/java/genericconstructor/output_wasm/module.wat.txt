@@ -1,0 +1,51 @@
+;;; Code for genericconstructor.GenericConstructor
+
+;;; CLASS  GenericConstructor
+
+(type $genericconstructor.GenericConstructor (struct
+))
+
+;;; GenericConstructor(S s, T t)
+(func $<init><java.lang.Object|java.lang.Object>:void@genericconstructor.GenericConstructor
+ (param $this (ref null $genericconstructor.GenericConstructor))
+ (param $s (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
+ (result (ref null $genericconstructor.GenericConstructor))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; GenericConstructor(T t)
+(func $<init><java.lang.Object>:void@genericconstructor.GenericConstructor
+ (param $this (ref null $genericconstructor.GenericConstructor))
+ (param $t (ref null $java.lang.Object))
+ (result (ref null $genericconstructor.GenericConstructor))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void GenericConstructor.test()
+(func $test<>:void@genericconstructor.GenericConstructor
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; new GenericConstructor.<init>(new Exception.<init>(),new Error.<init>());
+   (call $<init><java.lang.Object|java.lang.Object>:void@genericconstructor.GenericConstructor (struct.new_default_with_rtt $genericconstructor.GenericConstructor (global.get $genericconstructor.GenericConstructor.rtt)) (call $<init><>:void@java.lang.Exception (struct.new_default_with_rtt $java.lang.Exception (global.get $java.lang.Exception.rtt)) )(call $<init><>:void@java.lang.Error (struct.new_default_with_rtt $java.lang.Error (global.get $java.lang.Error.rtt)) ))
+   drop
+   ;; new GenericConstructor.<init>(new Exception.<init>());
+   (call $<init><java.lang.Object>:void@genericconstructor.GenericConstructor (struct.new_default_with_rtt $genericconstructor.GenericConstructor (global.get $genericconstructor.GenericConstructor.rtt)) (call $<init><>:void@java.lang.Exception (struct.new_default_with_rtt $java.lang.Exception (global.get $java.lang.Exception.rtt)) ))
+   drop
+  )
+ )
+)
+

@@ -13,5 +13,6 @@ readable_example(
         "*.java",
         "native_sources/*.js",
     ]),
+    generate_wasm_readables = False,
     deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )

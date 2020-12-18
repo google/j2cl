@@ -1,0 +1,130 @@
+;;; Code for varargs.Varargs
+
+;;; CLASS  Varargs
+
+(type $varargs.Varargs (struct
+))
+
+;;; Varargs(int... args)
+(func $<init><int<>>:void@varargs.Varargs
+ (param $this (ref null $varargs.Varargs))
+ (param $args (ref null $java.lang.Object))
+ (result (ref null $varargs.Varargs))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; Varargs()
+(func $<init><>:void@varargs.Varargs
+ (param $this (ref null $varargs.Varargs))
+ (result (ref null $varargs.Varargs))
+ (block $return.label
+  (block
+   ;; Varargs.this.Varargs.<init>([1]);
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void Varargs.test(int a, Object... args)
+(func $test<int|java.lang.Object<>>:void@varargs.Varargs
+ (param $this (ref null $java.lang.Object))
+ (param $a i32)
+ (param $args (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; void Varargs.testCloneable(Cloneable... args)
+(func $testCloneable<java.lang.Cloneable<>>:void@varargs.Varargs
+ (param $this (ref null $java.lang.Object))
+ (param $args (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; void Varargs.testSerializable(Serializable... args)
+(func $testSerializable<java.io.Serializable<>>:void@varargs.Varargs
+ (param $this (ref null $java.lang.Object))
+ (param $args (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; void Varargs.fun(T... elements)
+(func $fun<java.lang.Object<>>:void@varargs.Varargs
+ (param $elements (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; void Varargs.bar(E a, E b)
+(func $bar<java.lang.Object|java.lang.Object>:void@varargs.Varargs
+ (param $a (ref null $java.lang.Object))
+ (param $b (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; varargs.Varargs.fun([a,b]);
+   (call $fun<java.lang.Object<>>:void@varargs.Varargs (ref.null $java.lang.Object)))
+ )
+)
+
+;;; void Varargs.main()
+(func $main<>:void@varargs.Varargs
+ (param $this (ref null $java.lang.Object))
+ (local $v (ref null $varargs.Varargs))
+ (block $return.label
+  (block
+   ;; Varargs v = new Varargs.<init>();
+   (local.set $v (call $<init><>:void@varargs.Varargs (struct.new_default_with_rtt $varargs.Varargs (global.get $varargs.Varargs.rtt)) ))
+   
+   ;; v.test(1,[]);
+   
+   ;; v.test(1,[new Object.<init>()]);
+   
+   ;; v.test(1,new Object[] {new Object.<init>()});
+   
+   ;; v.test(1,new Object[] {});
+   
+   ;; v.test(1,new Object[][] {});
+   
+   ;; v.testCloneable(new Object[][] {});
+   
+   ;; v.testSerializable(new Object[][] {});
+   
+  )
+ )
+)
+
+;;; CLASS  Child
+
+(type $varargs.Child (struct
+))
+
+;;; Child()
+(func $<init><>:void@varargs.Child
+ (param $this (ref null $varargs.Child))
+ (result (ref null $varargs.Child))
+ (block $return.label
+  (block
+   ;; Varargs.this.Varargs.<init>([1]);
+   
+  )
+ )
+ (local.get $this)
+)
+

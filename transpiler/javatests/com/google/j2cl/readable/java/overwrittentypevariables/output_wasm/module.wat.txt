@@ -1,0 +1,122 @@
+;;; Code for overwrittentypevariables.HashFunctions
+
+;;; INTERFACE  MyFunction
+
+(type $overwrittentypevariables.MyFunction (struct
+))
+
+;;; INTERFACE  HashFunction
+
+(type $overwrittentypevariables.HashFunction (struct
+))
+
+;;; CLASS  HashFunctions
+
+(type $overwrittentypevariables.HashFunctions (struct
+))
+
+;;; HashFunctions()
+(func $<init><>:void@overwrittentypevariables.HashFunctions
+ (param $this (ref null $overwrittentypevariables.HashFunctions))
+ (result (ref null $overwrittentypevariables.HashFunctions))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; HashFunction<T> HashFunctions.hashFunction()
+(func $hashFunction<>:overwrittentypevariables.HashFunction@overwrittentypevariables.HashFunctions
+ (result (ref null $overwrittentypevariables.HashFunction))
+ (local $return.value (ref null $overwrittentypevariables.HashFunction))
+ (block $return.label
+  (block
+   ;; return new $1.<init>();
+   (local.set $return.value (call $<init><>:void@overwrittentypevariables.HashFunctions.1 (struct.new_default_with_rtt $overwrittentypevariables.HashFunctions.1 (global.get $overwrittentypevariables.HashFunctions.1.rtt)) ))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; HashFunction<T> HashFunctions.enumHashFunction()
+(func $enumHashFunction<>:overwrittentypevariables.HashFunction@overwrittentypevariables.HashFunctions
+ (result (ref null $overwrittentypevariables.HashFunction))
+ (local $return.value (ref null $overwrittentypevariables.HashFunction))
+ (block $return.label
+  (block
+   ;; return new $2.<init>();
+   (local.set $return.value (call $<init><>:void@overwrittentypevariables.HashFunctions.2 (struct.new_default_with_rtt $overwrittentypevariables.HashFunctions.2 (global.get $overwrittentypevariables.HashFunctions.2.rtt)) ))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; CLASS  <anonymous> implements HashFunction<T>
+
+(type $overwrittentypevariables.HashFunctions.1 (struct
+))
+
+;;; <anonymous> implements HashFunction<T>()
+(func $<init><>:void@overwrittentypevariables.HashFunctions.1
+ (param $this (ref null $overwrittentypevariables.HashFunctions.1))
+ (result (ref null $overwrittentypevariables.HashFunctions.1))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; String <anonymous> implements HashFunction<T>.apply(T input)
+(func $apply<java.lang.Object>:java.lang.String@overwrittentypevariables.HashFunctions.1
+ (param $this (ref null $java.lang.Object))
+ (param $input (ref null $java.lang.Object))
+ (result (ref null $java.lang.String))
+ (local $return.value (ref null $java.lang.String))
+ (block $return.label
+  (block
+   ;; return "";
+   (local.set $return.value (ref.null $java.lang.String))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; CLASS  <anonymous> implements HashFunction<T>
+
+(type $overwrittentypevariables.HashFunctions.2 (struct
+))
+
+;;; <anonymous> implements HashFunction<T>()
+(func $<init><>:void@overwrittentypevariables.HashFunctions.2
+ (param $this (ref null $overwrittentypevariables.HashFunctions.2))
+ (result (ref null $overwrittentypevariables.HashFunctions.2))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; String <anonymous> implements HashFunction<T>.apply(T input)
+(func $apply<java.lang.Enum>:java.lang.String@overwrittentypevariables.HashFunctions.2
+ (param $this (ref null $java.lang.Object))
+ (param $input (ref null $java.lang.Enum))
+ (result (ref null $java.lang.String))
+ (local $return.value (ref null $java.lang.String))
+ (block $return.label
+  (block
+   ;; return ("" + input.ordinal());
+   (local.set $return.value (ref.null $java.lang.String))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+

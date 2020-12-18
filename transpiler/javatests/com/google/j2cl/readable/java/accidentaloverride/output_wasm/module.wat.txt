@@ -1,0 +1,71 @@
+;;; Code for accidentaloverride.AccidentalOverride
+
+;;; CLASS  Parent
+
+(type $accidentaloverride.Parent (struct
+))
+
+;;; Parent()
+(func $<init><>:void@accidentaloverride.Parent
+ (param $this (ref null $accidentaloverride.Parent))
+ (result (ref null $accidentaloverride.Parent))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void Parent.foo(T e)
+(func $foo<java.lang.Error>:void@accidentaloverride.Parent
+ (param $this (ref null $java.lang.Object))
+ (param $e (ref null $java.lang.Error))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; INTERFACE  SuperInterface
+
+(type $accidentaloverride.SuperInterface (struct
+))
+
+;;; CLASS  AnotherAccidentalOverride
+
+(type $accidentaloverride.AnotherAccidentalOverride (struct
+))
+
+;;; AnotherAccidentalOverride()
+(func $<init><>:void@accidentaloverride.AnotherAccidentalOverride
+ (param $this (ref null $accidentaloverride.AnotherAccidentalOverride))
+ (result (ref null $accidentaloverride.AnotherAccidentalOverride))
+ (block $return.label
+  (block
+   ;; Parent.this.Parent.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  AccidentalOverride
+
+(type $accidentaloverride.AccidentalOverride (struct
+))
+
+;;; AccidentalOverride()
+(func $<init><>:void@accidentaloverride.AccidentalOverride
+ (param $this (ref null $accidentaloverride.AccidentalOverride))
+ (result (ref null $accidentaloverride.AccidentalOverride))
+ (block $return.label
+  (block
+   ;; Parent.this.Parent.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+

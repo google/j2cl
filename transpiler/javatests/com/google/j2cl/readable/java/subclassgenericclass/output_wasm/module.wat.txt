@@ -1,0 +1,56 @@
+;;; Code for subclassgenericclass.SubclassGenericClass
+
+;;; CLASS  GenericClass
+
+(type $subclassgenericclass.GenericClass (struct
+))
+
+;;; GenericClass()
+(func $<init><>:void@subclassgenericclass.GenericClass
+ (param $this (ref null $subclassgenericclass.GenericClass))
+ (result (ref null $subclassgenericclass.GenericClass))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  GenericSubclassGenericClass
+
+(type $subclassgenericclass.GenericSubclassGenericClass (struct
+))
+
+;;; GenericSubclassGenericClass()
+(func $<init><>:void@subclassgenericclass.GenericSubclassGenericClass
+ (param $this (ref null $subclassgenericclass.GenericSubclassGenericClass))
+ (result (ref null $subclassgenericclass.GenericSubclassGenericClass))
+ (block $return.label
+  (block
+   ;; GenericClass.this.GenericClass.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  SubclassGenericClass
+
+(type $subclassgenericclass.SubclassGenericClass (struct
+))
+
+;;; SubclassGenericClass()
+(func $<init><>:void@subclassgenericclass.SubclassGenericClass
+ (param $this (ref null $subclassgenericclass.SubclassGenericClass))
+ (result (ref null $subclassgenericclass.SubclassGenericClass))
+ (block $return.label
+  (block
+   ;; GenericClass.this.GenericClass.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+

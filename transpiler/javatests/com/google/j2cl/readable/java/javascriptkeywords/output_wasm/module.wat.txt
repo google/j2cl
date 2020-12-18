@@ -1,0 +1,39 @@
+;;; Code for javascriptkeywords.JSKeyWords
+
+;;; CLASS  JSKeyWords
+
+(type $javascriptkeywords.JSKeyWords (struct
+))
+
+;;; JSKeyWords()
+(func $<init><>:void@javascriptkeywords.JSKeyWords
+ (param $this (ref null $javascriptkeywords.JSKeyWords))
+ (result (ref null $javascriptkeywords.JSKeyWords))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; int JSKeyWords.test(int in)
+(func $test<int>:int@javascriptkeywords.JSKeyWords
+ (param $this (ref null $java.lang.Object))
+ (param $in i32)
+ (result i32)
+ (local $return.value i32)
+ (local $let i32)
+ (block $return.label
+  (block
+   ;; int let = 0;
+   (local.set $let (i32.const 0))
+   
+   ;; return (let + in);
+   (local.set $return.value (i32.add (local.get $let) (local.get $in)))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+

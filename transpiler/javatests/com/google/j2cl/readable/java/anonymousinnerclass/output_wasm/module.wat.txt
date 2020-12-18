@@ -1,0 +1,187 @@
+;;; Code for anonymousinnerclass.AnonymousInnerClass
+
+;;; CLASS  A
+
+(type $anonymousinnerclass.A (struct
+))
+
+;;; A()
+(func $<init><>:void@anonymousinnerclass.A
+ (param $this (ref null $anonymousinnerclass.A))
+ (result (ref null $anonymousinnerclass.A))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  B
+
+(type $anonymousinnerclass.A.B (struct
+ (field $this@anonymousinnerclass.A.B (ref null $anonymousinnerclass.A))
+))
+
+;;; B()
+(func $<init><>:void@anonymousinnerclass.A.B
+ (param $this (ref null $anonymousinnerclass.A.B))
+ (result (ref null $anonymousinnerclass.A.B))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  AnonymousInnerClass
+
+(type $anonymousinnerclass.AnonymousInnerClass (struct
+))
+
+;;; AnonymousInnerClass()
+(func $<init><>:void@anonymousinnerclass.AnonymousInnerClass
+ (param $this (ref null $anonymousinnerclass.AnonymousInnerClass))
+ (result (ref null $anonymousinnerclass.AnonymousInnerClass))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void AnonymousInnerClass.test(int arg)
+(func $test<int>:void@anonymousinnerclass.AnonymousInnerClass
+ (param $this (ref null $java.lang.Object))
+ (param $arg i32)
+ (local $ic (ref null $anonymousinnerclass.AnonymousInnerClass.InnerClass))
+ (local $a (ref null $anonymousinnerclass.A))
+ (local $b (ref null $anonymousinnerclass.A.B))
+ (local $c (ref null $anonymousinnerclass.AnonymousInnerClass.1C))
+ (block $return.label
+  (block
+   ;; InnerClass ic = AnonymousInnerClass.this.new $1.<init>();
+   (local.set $ic (call $<init><>:void@anonymousinnerclass.AnonymousInnerClass.1 (struct.new_default_with_rtt $anonymousinnerclass.AnonymousInnerClass.1 (global.get $anonymousinnerclass.AnonymousInnerClass.1.rtt)) ))
+   
+   ;; A a = new A.<init>();
+   (local.set $a (call $<init><>:void@anonymousinnerclass.A (struct.new_default_with_rtt $anonymousinnerclass.A (global.get $anonymousinnerclass.A.rtt)) ))
+   
+   ;; B b = AnonymousInnerClass.this.new $2.<init>(a);
+   (local.set $b (call $<init><anonymousinnerclass.A>:void@anonymousinnerclass.AnonymousInnerClass.2 (struct.new_default_with_rtt $anonymousinnerclass.AnonymousInnerClass.2 (global.get $anonymousinnerclass.AnonymousInnerClass.2.rtt)) (local.get $a)))
+   
+   ;; C c = AnonymousInnerClass.this.new $3.<init>();
+   (local.set $c (call $<init><>:void@anonymousinnerclass.AnonymousInnerClass.3 (struct.new_default_with_rtt $anonymousinnerclass.AnonymousInnerClass.3 (global.get $anonymousinnerclass.AnonymousInnerClass.3.rtt)) ))
+   
+  )
+ )
+)
+
+;;; CLASS  InnerClass
+
+(type $anonymousinnerclass.AnonymousInnerClass.InnerClass (struct
+ (field $this@anonymousinnerclass.AnonymousInnerClass.InnerClass (ref null $anonymousinnerclass.AnonymousInnerClass))
+))
+
+;;; InnerClass()
+(func $<init><>:void@anonymousinnerclass.AnonymousInnerClass.InnerClass
+ (param $this (ref null $anonymousinnerclass.AnonymousInnerClass.InnerClass))
+ (result (ref null $anonymousinnerclass.AnonymousInnerClass.InnerClass))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  <anonymous> extends InnerClass
+
+(type $anonymousinnerclass.AnonymousInnerClass.1 (struct
+ (field $this@anonymousinnerclass.AnonymousInnerClass.InnerClass (ref null $anonymousinnerclass.AnonymousInnerClass))
+ (field $this@anonymousinnerclass.AnonymousInnerClass.1 (ref null $anonymousinnerclass.AnonymousInnerClass))
+))
+
+;;; <anonymous> extends InnerClass()
+(func $<init><>:void@anonymousinnerclass.AnonymousInnerClass.1
+ (param $this (ref null $anonymousinnerclass.AnonymousInnerClass.1))
+ (result (ref null $anonymousinnerclass.AnonymousInnerClass.1))
+ (block $return.label
+  (block
+   ;; InnerClass.this.InnerClass.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  <anonymous> extends B
+
+(type $anonymousinnerclass.AnonymousInnerClass.2 (struct
+ (field $this@anonymousinnerclass.A.B (ref null $anonymousinnerclass.A))
+ (field $this@anonymousinnerclass.AnonymousInnerClass.2 (ref null $anonymousinnerclass.AnonymousInnerClass))
+))
+
+;;; <anonymous> extends B(A $super_outer_this)
+(func $<init><anonymousinnerclass.A>:void@anonymousinnerclass.AnonymousInnerClass.2
+ (param $this (ref null $anonymousinnerclass.AnonymousInnerClass.2))
+ (param $$super_outer_this (ref null $anonymousinnerclass.A))
+ (result (ref null $anonymousinnerclass.AnonymousInnerClass.2))
+ (block $return.label
+  (block
+   ;; $super_outer_this.B.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  C
+
+(type $anonymousinnerclass.AnonymousInnerClass.1C (struct
+ (field $this@anonymousinnerclass.AnonymousInnerClass.1C (ref null $anonymousinnerclass.AnonymousInnerClass))
+ (field $fInC@anonymousinnerclass.AnonymousInnerClass.1C i32)
+ (field $arg@anonymousinnerclass.AnonymousInnerClass.1C i32)
+))
+
+;;; C()
+(func $<init><>:void@anonymousinnerclass.AnonymousInnerClass.1C
+ (param $this (ref null $anonymousinnerclass.AnonymousInnerClass.1C))
+ (result (ref null $anonymousinnerclass.AnonymousInnerClass.1C))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  <anonymous> extends C
+
+(type $anonymousinnerclass.AnonymousInnerClass.3 (struct
+ (field $this@anonymousinnerclass.AnonymousInnerClass.1C (ref null $anonymousinnerclass.AnonymousInnerClass))
+ (field $fInC@anonymousinnerclass.AnonymousInnerClass.1C i32)
+ (field $arg@anonymousinnerclass.AnonymousInnerClass.1C i32)
+ (field $this@anonymousinnerclass.AnonymousInnerClass.3 (ref null $anonymousinnerclass.AnonymousInnerClass))
+ (field $arg@anonymousinnerclass.AnonymousInnerClass.3 i32)
+))
+
+;;; <anonymous> extends C()
+(func $<init><>:void@anonymousinnerclass.AnonymousInnerClass.3
+ (param $this (ref null $anonymousinnerclass.AnonymousInnerClass.3))
+ (result (ref null $anonymousinnerclass.AnonymousInnerClass.3))
+ (block $return.label
+  (block
+   ;; $1C.this.$1C.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+

@@ -13,4 +13,5 @@ readable_example(
         "*.java",
         "*.native.js",
     ]),
+    generate_wasm_readables = False,
 )

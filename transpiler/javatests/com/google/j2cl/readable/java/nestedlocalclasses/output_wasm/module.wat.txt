@@ -1,0 +1,113 @@
+;;; Code for nestedlocalclasses.NestedLocalClasses
+
+;;; CLASS  NestedLocalClasses
+
+(type $nestedlocalclasses.NestedLocalClasses (struct
+))
+
+;;; NestedLocalClasses()
+(func $<init><>:void@nestedlocalclasses.NestedLocalClasses
+ (param $this (ref null $nestedlocalclasses.NestedLocalClasses))
+ (result (ref null $nestedlocalclasses.NestedLocalClasses))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void NestedLocalClasses.test(int p)
+(func $test<int>:void@nestedlocalclasses.NestedLocalClasses
+ (param $this (ref null $java.lang.Object))
+ (param $p i32)
+ (local $localVar i32)
+ (block $return.label
+  (block
+   ;; int localVar = 1;
+   (local.set $localVar (i32.const 1))
+   
+  )
+ )
+)
+
+;;; CLASS  InnerClass
+
+(type $nestedlocalclasses.NestedLocalClasses.1InnerClass (struct
+ (field $this@nestedlocalclasses.NestedLocalClasses.1InnerClass (ref null $nestedlocalclasses.NestedLocalClasses))
+ (field $localVar@nestedlocalclasses.NestedLocalClasses.1InnerClass i32)
+))
+
+;;; InnerClass()
+(func $<init><>:void@nestedlocalclasses.NestedLocalClasses.1InnerClass
+ (param $this (ref null $nestedlocalclasses.NestedLocalClasses.1InnerClass))
+ (result (ref null $nestedlocalclasses.NestedLocalClasses.1InnerClass))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void InnerClass.fun()
+(func $fun<>:void@nestedlocalclasses.NestedLocalClasses.1InnerClass
+ (param $this (ref null $java.lang.Object))
+ (local $localVarInInnerClass i32)
+ (block $return.label
+  (block
+   ;; int localVarInInnerClass = 1;
+   (local.set $localVarInInnerClass (i32.const 1))
+   
+   ;; $1InnerClass.this.new $1InnerInnerClass.<init>();
+   (call $<init><>:void@nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass (struct.new_default_with_rtt $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass (global.get $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass.rtt)) )
+   drop
+  )
+ )
+)
+
+;;; CLASS  InnerInnerClass
+
+(type $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass (struct
+ (field $this@nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass (ref null $nestedlocalclasses.NestedLocalClasses.1InnerClass))
+ (field $fieldInInnerInnerClass@nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass i32)
+ (field $localVar@nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass i32)
+ (field $localVarInInnerClass@nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass i32)
+))
+
+;;; InnerInnerClass()
+(func $<init><>:void@nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass
+ (param $this (ref null $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass))
+ (result (ref null $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  ClassIndirectlyCapturingLocal
+
+(type $nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal (struct
+ (field $this@nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal (ref null $nestedlocalclasses.NestedLocalClasses.1InnerClass))
+ (field $localVar@nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal i32)
+ (field $localVarInInnerClass@nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal i32)
+))
+
+;;; ClassIndirectlyCapturingLocal()
+(func $<init><>:void@nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal
+ (param $this (ref null $nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal))
+ (result (ref null $nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+

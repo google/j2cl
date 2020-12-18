@@ -1,0 +1,68 @@
+;;; Code for staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace
+
+;;; CLASS  StaticJsMethodsWithClassNamespace
+
+(type $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace (struct
+))
+
+;;; StaticJsMethodsWithClassNamespace()
+(func $<init><>:void@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace
+ (param $this (ref null $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace))
+ (result (ref null $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void StaticJsMethodsWithClassNamespace.originalName()
+(func $originalName<>:void@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; void StaticJsMethodsWithClassNamespace.test()
+(func $test<>:void@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.originalName();
+   (call $originalName<>:void@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace )
+   ;; staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.originalName();
+   (call $originalName<>:void@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace ))
+ )
+)
+
+;;; CLASS  ExternalCaller
+
+(type $staticjsmethodswithclassnamespace.ExternalCaller (struct
+))
+
+;;; ExternalCaller()
+(func $<init><>:void@staticjsmethodswithclassnamespace.ExternalCaller
+ (param $this (ref null $staticjsmethodswithclassnamespace.ExternalCaller))
+ (result (ref null $staticjsmethodswithclassnamespace.ExternalCaller))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void ExternalCaller.test()
+(func $test<>:void@staticjsmethodswithclassnamespace.ExternalCaller
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.originalName();
+   (call $originalName<>:void@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace ))
+ )
+)
+

@@ -1,0 +1,101 @@
+;;; Code for localclassinheritance.LocalClassInheritance
+
+;;; CLASS  LocalClassInheritance
+
+(type $localclassinheritance.LocalClassInheritance (struct
+))
+
+;;; LocalClassInheritance()
+(func $<init><>:void@localclassinheritance.LocalClassInheritance
+ (param $this (ref null $localclassinheritance.LocalClassInheritance))
+ (result (ref null $localclassinheritance.LocalClassInheritance))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void LocalClassInheritance.test()
+(func $test<>:void@localclassinheritance.LocalClassInheritance
+ (param $this (ref null $java.lang.Object))
+ (local $f i32)
+ (block $return.label
+  (block
+   ;; int f = 1;
+   (local.set $f (i32.const 1))
+   
+  )
+ )
+)
+
+;;; CLASS  Parent
+
+(type $localclassinheritance.LocalClassInheritance.1Parent (struct
+ (field $this@localclassinheritance.LocalClassInheritance.1Parent (ref null $localclassinheritance.LocalClassInheritance))
+ (field $f@localclassinheritance.LocalClassInheritance.1Parent i32)
+))
+
+;;; Parent()
+(func $<init><>:void@localclassinheritance.LocalClassInheritance.1Parent
+ (param $this (ref null $localclassinheritance.LocalClassInheritance.1Parent))
+ (result (ref null $localclassinheritance.LocalClassInheritance.1Parent))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void Parent.n()
+(func $n<>:void@localclassinheritance.LocalClassInheritance.1Parent
+ (param $this (ref null $java.lang.Object))
+ (local $i i32)
+ (block $return.label
+  (block
+   ;; int i = $1Parent.this.f;
+   (local.set $i (i32.const 0))
+   
+  )
+ )
+)
+
+;;; CLASS  Child
+
+(type $localclassinheritance.LocalClassInheritance.1Child (struct
+ (field $this@localclassinheritance.LocalClassInheritance.1Parent (ref null $localclassinheritance.LocalClassInheritance))
+ (field $f@localclassinheritance.LocalClassInheritance.1Parent i32)
+ (field $this@localclassinheritance.LocalClassInheritance.1Child (ref null $localclassinheritance.LocalClassInheritance))
+ (field $f@localclassinheritance.LocalClassInheritance.1Child i32)
+))
+
+;;; Child()
+(func $<init><>:void@localclassinheritance.LocalClassInheritance.1Child
+ (param $this (ref null $localclassinheritance.LocalClassInheritance.1Child))
+ (result (ref null $localclassinheritance.LocalClassInheritance.1Child))
+ (block $return.label
+  (block
+   ;; $1Parent.this.$1Parent.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void Child.n()
+(func $n<>:void@localclassinheritance.LocalClassInheritance.1Child
+ (param $this (ref null $java.lang.Object))
+ (local $i i32)
+ (block $return.label
+  (block
+   ;; int i = $1Child.this.f;
+   (local.set $i (i32.const 0))
+   
+  )
+ )
+)
+

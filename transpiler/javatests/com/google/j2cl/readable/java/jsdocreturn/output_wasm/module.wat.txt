@@ -1,0 +1,43 @@
+;;; Code for jsdocreturn.JsDocReturn
+
+;;; CLASS  JsDocReturn
+
+(type $jsdocreturn.JsDocReturn (struct
+))
+
+;;; JsDocReturn()
+(func $<init><>:void@jsdocreturn.JsDocReturn
+ (param $this (ref null $jsdocreturn.JsDocReturn))
+ (result (ref null $jsdocreturn.JsDocReturn))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void JsDocReturn.test1()
+(func $test1<>:void@jsdocreturn.JsDocReturn
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; int JsDocReturn.test2()
+(func $test2<>:int@jsdocreturn.JsDocReturn
+ (param $this (ref null $java.lang.Object))
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return 1;
+   (local.set $return.value (i32.const 1))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+

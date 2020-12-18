@@ -1,0 +1,186 @@
+;;; Code for collisions.goog
+
+;;; CLASS  goog
+
+(type $collisions.goog (struct
+))
+
+;;; goog()
+(func $<init><>:void@collisions.goog
+ (param $this (ref null $collisions.goog))
+ (result (ref null $collisions.goog))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  Blah
+
+(type $collisions.Blah (struct
+))
+
+;;; Blah()
+(func $<init><>:void@collisions.Blah
+ (param $this (ref null $collisions.Blah))
+ (result (ref null $collisions.Blah))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void Blah.m()
+(func $m<>:void@collisions.Blah
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; double Blah.getN()
+(func $getN<>:double@collisions.Blah
+ (result f64)
+ (local $return.value f64)
+ (block $return.label
+  (block
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; CLASS  foo
+
+(type $collisions.foo (struct
+))
+
+;;; foo()
+(func $<init><>:void@collisions.foo
+ (param $this (ref null $collisions.foo))
+ (result (ref null $collisions.foo))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  bar
+
+(type $collisions.bar (struct
+))
+
+;;; bar()
+(func $<init><>:void@collisions.bar
+ (param $this (ref null $collisions.bar))
+ (result (ref null $collisions.bar))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  Other
+
+(type $collisions.Other (struct
+))
+
+;;; Other()
+(func $<init><>:void@collisions.Other
+ (param $this (ref null $collisions.Other))
+ (result (ref null $collisions.Other))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; T Other.m()
+(func $m<>:java.lang.Object@collisions.Other
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (local $T_1 i32)
+ (local $o (ref null $collisions.Other))
+ (block $return.label
+  (block
+   ;; int T = 5;
+   (local.set $T_1 (i32.const 5))
+   
+   ;; Other<T> o = ((Other<T>) null);
+   (local.set $o (ref.cast $java.lang.Object $collisions.Other (ref.null $java.lang.Object) (global.get $collisions.Other.rtt)))
+   
+   ;; return null;
+   (local.set $return.value (ref.null $java.lang.Object))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; CLASS  T
+
+(type $collisions.T (struct
+))
+
+;;; T()
+(func $<init><>:void@collisions.T
+ (param $this (ref null $collisions.T))
+ (result (ref null $collisions.T))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; T T.m()
+(func $m<>:java.lang.Number@collisions.T
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Number))
+ (local $return.value (ref null $java.lang.Number))
+ (block $return.label
+  (block
+   ;; return null;
+   (local.set $return.value (ref.null $java.lang.Number))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; T T.n()
+(func $n<>:java.lang.Number@collisions.T
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Number))
+ (local $return.value (ref null $java.lang.Number))
+ (local $t (ref null $java.lang.Number))
+ (block $return.label
+  (block
+   ;; T t = new T.<init>().m();
+   (local.set $t (ref.null $java.lang.Number))
+   
+   ;; t.byteValue();
+   (i32.const 0)
+   drop
+   ;; return t;
+   (local.set $return.value (local.get $t))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+

@@ -1,0 +1,433 @@
+;;; Code for genericmethod.GenericMethod
+
+;;; CLASS  GenericMethod
+
+(type $genericmethod.GenericMethod (struct
+))
+
+;;; GenericMethod()
+(func $<init><>:void@genericmethod.GenericMethod
+ (param $this (ref null $genericmethod.GenericMethod))
+ (result (ref null $genericmethod.GenericMethod))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void GenericMethod.foo(T f, S s)
+(func $foo<java.lang.Object|java.lang.Object>:void@genericmethod.GenericMethod
+ (param $this (ref null $java.lang.Object))
+ (param $f (ref null $java.lang.Object))
+ (param $s (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; void GenericMethod.fun(Object o)
+(func $fun<java.lang.Object>:void@genericmethod.GenericMethod
+ (param $this (ref null $java.lang.Object))
+ (param $o (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; void GenericMethod.fun(T t)
+(func $fun<java.lang.Exception>:void@genericmethod.GenericMethod
+ (param $this (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Exception))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; void GenericMethod.fun(T t)
+(func $fun<java.lang.Error>:void@genericmethod.GenericMethod
+ (param $this (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Error))
+ (block $return.label
+  (block
+   ;; GenericMethod.this.new $1.<init>();
+   (call $<init><>:void@genericmethod.GenericMethod.1 (struct.new_default_with_rtt $genericmethod.GenericMethod.1 (global.get $genericmethod.GenericMethod.1.rtt)) )
+   drop
+   ;; GenericMethod.this.new $1LocalClass.<init>();
+   (call $<init><>:void@genericmethod.GenericMethod.1LocalClass (struct.new_default_with_rtt $genericmethod.GenericMethod.1LocalClass (global.get $genericmethod.GenericMethod.1LocalClass.rtt)) )
+   drop
+  )
+ )
+)
+
+;;; GenericMethod<T> GenericMethod.bar()
+(func $bar<>:genericmethod.GenericMethod@genericmethod.GenericMethod
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $genericmethod.GenericMethod))
+ (local $return.value (ref null $genericmethod.GenericMethod))
+ (block $return.label
+  (block
+   ;; return null;
+   (local.set $return.value (ref.null $genericmethod.GenericMethod))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; T[] GenericMethod.fun(T[] array)
+(func $fun<java.lang.Object<>>:java.lang.Object<>@genericmethod.GenericMethod
+ (param $this (ref null $java.lang.Object))
+ (param $array (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; return array;
+   (local.set $return.value (local.get $array))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; T GenericMethod.checked()
+(func $checked<>:java.lang.Object@genericmethod.GenericMethod
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; return null;
+   (local.set $return.value (ref.null $java.lang.Object))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; T GenericMethod.unchecked()
+(func $unchecked<>:java.lang.Object@genericmethod.GenericMethod
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; return null;
+   (local.set $return.value (ref.null $java.lang.Object))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; void GenericMethod.test()
+(func $test<>:void@genericmethod.GenericMethod
+ (param $this (ref null $java.lang.Object))
+ (local $g (ref null $genericmethod.GenericMethod))
+ (local $s (ref null $java.lang.String))
+ (block $return.label
+  (block
+   ;; GenericMethod<Number> g = new GenericMethod.<init>();
+   (local.set $g (call $<init><>:void@genericmethod.GenericMethod (struct.new_default_with_rtt $genericmethod.GenericMethod (global.get $genericmethod.GenericMethod.rtt)) ))
+   
+   ;; g.foo(g,g);
+   
+   ;; g.foo(new Error.<init>(),new Exception.<init>());
+   
+   ;; g.fun(new Object.<init>());
+   
+   ;; g.fun(new Exception.<init>());
+   
+   ;; g.fun(new Error.<init>());
+   
+   ;; g.fun(new String[] {"asdf"});
+   (ref.null $java.lang.Object)
+   drop
+   ;; String s = ((String) GenericMethod.this.checked());
+   (local.set $s (ref.cast $java.lang.Object $java.lang.String (ref.null $java.lang.String) (global.get $java.lang.String.rtt)))
+   
+   ;; (s = /** @type {String} */ (GenericMethod.this.unchecked()));
+   (local.set $s (ref.null $java.lang.String)))
+ )
+)
+
+;;; void GenericMethod.acceptsContent(Content content)
+(func $acceptsContent<genericmethod.GenericMethod.Content>:void@genericmethod.GenericMethod
+ (param $content (ref null $genericmethod.GenericMethod.Content))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; void GenericMethod.acceptsString(String string)
+(func $acceptsString<java.lang.String>:void@genericmethod.GenericMethod
+ (param $string (ref null $java.lang.String))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; void GenericMethod.testErasureCast_wildcard()
+(func $testErasureCast_wildcard<>:void@genericmethod.GenericMethod
+ (local $list (ref null $java.util.List))
+ (local $content (ref null $genericmethod.GenericMethod.Content))
+ (local $nestedWildcardList (ref null $java.util.List))
+ (local $nestedContent (ref null $genericmethod.GenericMethod.Content))
+ (local $deepWildcardList (ref null $java.util.List))
+ (local $deepContent (ref null $genericmethod.GenericMethod.Content))
+ (block $return.label
+  (block
+   ;; List<Container<?>> list = null;
+   (local.set $list (ref.null $java.util.List))
+   
+   ;; Content content = ((Container<?>) list.get(0)).get();
+   (local.set $content (ref.null $genericmethod.GenericMethod.Content))
+   
+   ;; genericmethod.GenericMethod.acceptsString(content.getProp());
+   (call $acceptsString<java.lang.String>:void@genericmethod.GenericMethod (ref.null $java.lang.String))
+   ;; genericmethod.GenericMethod.acceptsContent(content);
+   (call $acceptsContent<genericmethod.GenericMethod.Content>:void@genericmethod.GenericMethod (local.get $content))
+   ;; List<SuperContainer<? extends Container<? extends Content>>> nestedWildcardList = null;
+   (local.set $nestedWildcardList (ref.null $java.util.List))
+   
+   ;; Content nestedContent = ((SuperContainer<? extends Container<? extends Content>>) nestedWildcardList.get(0)).get().get();
+   (local.set $nestedContent (ref.null $genericmethod.GenericMethod.Content))
+   
+   ;; genericmethod.GenericMethod.acceptsString(nestedContent.getProp());
+   (call $acceptsString<java.lang.String>:void@genericmethod.GenericMethod (ref.null $java.lang.String))
+   ;; genericmethod.GenericMethod.acceptsContent(nestedContent);
+   (call $acceptsContent<genericmethod.GenericMethod.Content>:void@genericmethod.GenericMethod (local.get $nestedContent))
+   ;; List<SuperContainer<Container<? extends Content>>> deepWildcardList = null;
+   (local.set $deepWildcardList (ref.null $java.util.List))
+   
+   ;; Content deepContent = ((SuperContainer<Container<? extends Content>>) deepWildcardList.get(0)).get().get();
+   (local.set $deepContent (ref.null $genericmethod.GenericMethod.Content))
+   
+   ;; genericmethod.GenericMethod.acceptsString(deepContent.getProp());
+   (call $acceptsString<java.lang.String>:void@genericmethod.GenericMethod (ref.null $java.lang.String))
+   ;; genericmethod.GenericMethod.acceptsContent(deepContent);
+   (call $acceptsContent<genericmethod.GenericMethod.Content>:void@genericmethod.GenericMethod (local.get $deepContent)))
+ )
+)
+
+;;; void GenericMethod.testErasureCast_typeVariable()
+(func $testErasureCast_typeVariable<>:void@genericmethod.GenericMethod
+ (local $list (ref null $java.util.List))
+ (local $content (ref null $genericmethod.GenericMethod.Content))
+ (local $nestedTypeVariableList (ref null $java.util.List))
+ (local $nestedContent (ref null $genericmethod.GenericMethod.Content))
+ (local $deepTypeVariableList (ref null $java.util.List))
+ (local $deepContent (ref null $genericmethod.GenericMethod.Content))
+ (block $return.label
+  (block
+   ;; List<Container<C>> list = null;
+   (local.set $list (ref.null $java.util.List))
+   
+   ;; Content content = ((Container<C>) list.get(0)).get();
+   (local.set $content (ref.null $genericmethod.GenericMethod.Content))
+   
+   ;; genericmethod.GenericMethod.acceptsString(content.getProp());
+   (call $acceptsString<java.lang.String>:void@genericmethod.GenericMethod (ref.null $java.lang.String))
+   ;; genericmethod.GenericMethod.acceptsContent(content);
+   (call $acceptsContent<genericmethod.GenericMethod.Content>:void@genericmethod.GenericMethod (local.get $content))
+   ;; List<SuperContainer<CT>> nestedTypeVariableList = null;
+   (local.set $nestedTypeVariableList (ref.null $java.util.List))
+   
+   ;; Content nestedContent = ((SuperContainer<CT>) nestedTypeVariableList.get(0)).get().get();
+   (local.set $nestedContent (ref.null $genericmethod.GenericMethod.Content))
+   
+   ;; genericmethod.GenericMethod.acceptsString(nestedContent.getProp());
+   (call $acceptsString<java.lang.String>:void@genericmethod.GenericMethod (ref.null $java.lang.String))
+   ;; genericmethod.GenericMethod.acceptsContent(nestedContent);
+   (call $acceptsContent<genericmethod.GenericMethod.Content>:void@genericmethod.GenericMethod (local.get $nestedContent))
+   ;; List<SuperContainer<Container<C>>> deepTypeVariableList = null;
+   (local.set $deepTypeVariableList (ref.null $java.util.List))
+   
+   ;; Content deepContent = ((SuperContainer<Container<C>>) deepTypeVariableList.get(0)).get().get();
+   (local.set $deepContent (ref.null $genericmethod.GenericMethod.Content))
+   
+   ;; genericmethod.GenericMethod.acceptsString(deepContent.getProp());
+   (call $acceptsString<java.lang.String>:void@genericmethod.GenericMethod (ref.null $java.lang.String))
+   ;; genericmethod.GenericMethod.acceptsContent(deepContent);
+   (call $acceptsContent<genericmethod.GenericMethod.Content>:void@genericmethod.GenericMethod (local.get $deepContent)))
+ )
+)
+
+;;; CLASS  <anonymous> extends GenericMethod<T>
+
+(type $genericmethod.GenericMethod.1 (struct
+ (field $this@genericmethod.GenericMethod.1 (ref null $genericmethod.GenericMethod))
+))
+
+;;; <anonymous> extends GenericMethod<T>()
+(func $<init><>:void@genericmethod.GenericMethod.1
+ (param $this (ref null $genericmethod.GenericMethod.1))
+ (result (ref null $genericmethod.GenericMethod.1))
+ (block $return.label
+  (block
+   ;; GenericMethod.this.GenericMethod.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void <anonymous> extends GenericMethod<T>.fun2(T t)
+(func $fun2<java.lang.Error>:void@genericmethod.GenericMethod.1
+ (param $this (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Error))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; void <anonymous> extends GenericMethod<T>.fun2(T t)
+(func $fun2<java.lang.Object>:void@genericmethod.GenericMethod.1
+ (param $this (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; CLASS  LocalClass
+
+(type $genericmethod.GenericMethod.1LocalClass (struct
+ (field $this@genericmethod.GenericMethod.1LocalClass (ref null $genericmethod.GenericMethod))
+))
+
+;;; LocalClass()
+(func $<init><>:void@genericmethod.GenericMethod.1LocalClass
+ (param $this (ref null $genericmethod.GenericMethod.1LocalClass))
+ (result (ref null $genericmethod.GenericMethod.1LocalClass))
+ (block $return.label
+  (block
+   ;; GenericMethod.this.GenericMethod.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void LocalClass.fun2(T t)
+(func $fun2<java.lang.Object>:void@genericmethod.GenericMethod.1LocalClass
+ (param $this (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; void LocalClass.fun2(T t)
+(func $fun2<java.lang.Number>:void@genericmethod.GenericMethod.1LocalClass
+ (param $this (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Number))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; CLASS  SuperContainer
+
+(type $genericmethod.GenericMethod.SuperContainer (struct
+))
+
+;;; SuperContainer()
+(func $<init><>:void@genericmethod.GenericMethod.SuperContainer
+ (param $this (ref null $genericmethod.GenericMethod.SuperContainer))
+ (result (ref null $genericmethod.GenericMethod.SuperContainer))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; C SuperContainer.get()
+(func $get<>:genericmethod.GenericMethod.Container@genericmethod.GenericMethod.SuperContainer
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $genericmethod.GenericMethod.Container))
+ (local $return.value (ref null $genericmethod.GenericMethod.Container))
+ (block $return.label
+  (block
+   ;; return null;
+   (local.set $return.value (ref.null $genericmethod.GenericMethod.Container))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; CLASS  Container
+
+(type $genericmethod.GenericMethod.Container (struct
+))
+
+;;; Container()
+(func $<init><>:void@genericmethod.GenericMethod.Container
+ (param $this (ref null $genericmethod.GenericMethod.Container))
+ (result (ref null $genericmethod.GenericMethod.Container))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CT Container.get()
+(func $get<>:genericmethod.GenericMethod.Content@genericmethod.GenericMethod.Container
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $genericmethod.GenericMethod.Content))
+ (local $return.value (ref null $genericmethod.GenericMethod.Content))
+ (block $return.label
+  (block
+   ;; return null;
+   (local.set $return.value (ref.null $genericmethod.GenericMethod.Content))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; CLASS  Content
+
+(type $genericmethod.GenericMethod.Content (struct
+))
+
+;;; Content()
+(func $<init><>:void@genericmethod.GenericMethod.Content
+ (param $this (ref null $genericmethod.GenericMethod.Content))
+ (result (ref null $genericmethod.GenericMethod.Content))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; String Content.getProp()
+(func $getProp<>:java.lang.String@genericmethod.GenericMethod.Content
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.String))
+ (local $return.value (ref null $java.lang.String))
+ (block $return.label
+  (block
+   ;; return null;
+   (local.set $return.value (ref.null $java.lang.String))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+

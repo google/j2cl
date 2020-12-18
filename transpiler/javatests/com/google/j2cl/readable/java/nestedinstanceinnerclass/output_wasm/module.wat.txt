@@ -1,0 +1,72 @@
+;;; Code for nestedinstanceinnerclass.OuterClass
+
+;;; CLASS  OuterClass
+
+(type $nestedinstanceinnerclass.OuterClass (struct
+))
+
+;;; OuterClass()
+(func $<init><>:void@nestedinstanceinnerclass.OuterClass
+ (param $this (ref null $nestedinstanceinnerclass.OuterClass))
+ (result (ref null $nestedinstanceinnerclass.OuterClass))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void OuterClass.test()
+(func $test<>:void@nestedinstanceinnerclass.OuterClass
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; new OuterClass.<init>().new InnerClass.<init>().new InnerInnerClass.<init>();
+   (call $<init><>:void@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (struct.new_default_with_rtt $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (global.get $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.rtt)) )
+   drop
+  )
+ )
+)
+
+;;; CLASS  InnerClass
+
+(type $nestedinstanceinnerclass.OuterClass.InnerClass (struct
+ (field $this@nestedinstanceinnerclass.OuterClass.InnerClass (ref null $nestedinstanceinnerclass.OuterClass))
+))
+
+;;; InnerClass()
+(func $<init><>:void@nestedinstanceinnerclass.OuterClass.InnerClass
+ (param $this (ref null $nestedinstanceinnerclass.OuterClass.InnerClass))
+ (result (ref null $nestedinstanceinnerclass.OuterClass.InnerClass))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  InnerInnerClass
+
+(type $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (struct
+ (field $this@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (ref null $nestedinstanceinnerclass.OuterClass.InnerClass))
+ (field $x@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (ref null $nestedinstanceinnerclass.OuterClass.InnerClass))
+ (field $y@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (ref null $nestedinstanceinnerclass.OuterClass))
+))
+
+;;; InnerInnerClass()
+(func $<init><>:void@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass
+ (param $this (ref null $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass))
+ (result (ref null $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+

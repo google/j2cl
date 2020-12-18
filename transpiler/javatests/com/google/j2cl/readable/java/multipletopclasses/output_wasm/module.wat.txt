@@ -1,0 +1,38 @@
+;;; Code for multipletopclasses.MultipleTopClasses
+
+;;; CLASS  AnotherClass
+
+(type $multipletopclasses.AnotherClass (struct
+))
+
+;;; AnotherClass()
+(func $<init><>:void@multipletopclasses.AnotherClass
+ (param $this (ref null $multipletopclasses.AnotherClass))
+ (result (ref null $multipletopclasses.AnotherClass))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  MultipleTopClasses
+
+(type $multipletopclasses.MultipleTopClasses (struct
+))
+
+;;; MultipleTopClasses()
+(func $<init><>:void@multipletopclasses.MultipleTopClasses
+ (param $this (ref null $multipletopclasses.MultipleTopClasses))
+ (result (ref null $multipletopclasses.MultipleTopClasses))
+ (block $return.label
+  (block
+   ;; AnotherClass.this.AnotherClass.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+

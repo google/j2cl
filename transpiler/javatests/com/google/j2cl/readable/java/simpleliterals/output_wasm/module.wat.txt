@@ -1,0 +1,53 @@
+;;; Code for simpleliterals.SimpleLiterals
+
+;;; CLASS  SimpleLiterals
+
+(type $simpleliterals.SimpleLiterals (struct
+))
+
+;;; SimpleLiterals()
+(func $<init><>:void@simpleliterals.SimpleLiterals
+ (param $this (ref null $simpleliterals.SimpleLiterals))
+ (result (ref null $simpleliterals.SimpleLiterals))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void SimpleLiterals.main()
+(func $main<>:void@simpleliterals.SimpleLiterals
+ (param $this (ref null $java.lang.Object))
+ (local $a i32)
+ (local $b i32)
+ (local $c (ref null $java.lang.Object))
+ (local $d i32)
+ (local $e (ref null $java.lang.String))
+ (local $f (ref null $java.lang.Class))
+ (block $return.label
+  (block
+   ;; boolean a = false;
+   (local.set $a (i32.const 0))
+   
+   ;; char b = 97;
+   (local.set $b (i32.const 97))
+   
+   ;; Object c = null;
+   (local.set $c (ref.null $java.lang.Object))
+   
+   ;; int d = 101;
+   (local.set $d (i32.const 101))
+   
+   ;; String e = "foo";
+   (local.set $e (ref.null $java.lang.String))
+   
+   ;; Class<?> f = <expr>;
+   (local.set $f (ref.null $java.lang.Class))
+   
+  )
+ )
+)
+

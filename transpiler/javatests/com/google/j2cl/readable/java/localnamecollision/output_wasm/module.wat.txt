@@ -1,0 +1,231 @@
+;;; Code for localnamecollision.Asserts
+
+;;; CLASS  Asserts
+
+(type $localnamecollision.Asserts (struct
+))
+
+;;; Asserts()
+(func $<init><>:void@localnamecollision.Asserts
+ (param $this (ref null $localnamecollision.Asserts))
+ (result (ref null $localnamecollision.Asserts))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; int Asserts.n()
+(func $n<>:int@localnamecollision.Asserts
+ (param $this (ref null $java.lang.Object))
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; assert (5 != 4);
+   ;; unimplemented statement AssertStatement
+   
+   ;; return 5;
+   (local.set $return.value (i32.const 5))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+;;; Code for localnamecollision.Class
+
+;;; CLASS  Class
+
+(type $localnamecollision.Class (struct
+))
+
+;;; Class()
+(func $<init><>:void@localnamecollision.Class
+ (param $this (ref null $localnamecollision.Class))
+ (result (ref null $localnamecollision.Class))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void Class.main()
+(func $main<>:void@localnamecollision.Class
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; new Class.<init>().getClass();
+   (ref.null $java.lang.Class)
+   drop
+  )
+ )
+)
+;;; Code for localnamecollision.LocalNameCollision
+
+;;; CLASS  LocalNameCollision
+
+(type $localnamecollision.LocalNameCollision (struct
+))
+
+;;; void LocalNameCollision.testClassLocalVarCollision()
+(func $testClassLocalVarCollision<>:void@localnamecollision.LocalNameCollision
+ (param $this (ref null $java.lang.Object))
+ (local $LocalNameCollision i32)
+ (local $RuntimeException (ref null $java.lang.Object))
+ (local $Asserts i32)
+ (local $$Asserts i32)
+ (local $l_Asserts i32)
+ (local $com_google_j2cl_readable_localnamecollision_Class i32)
+ (local $com_google_j2cl_readable_localnamecollision_package1_A i32)
+ (local $com_google_j2cl_readable_localnamecollision_package2_A i32)
+ (local $A i32)
+ (block $return.label
+  (block
+   ;; boolean LocalNameCollision = false;
+   (local.set $LocalNameCollision (i32.const 0))
+   
+   ;; Object RuntimeException = null;
+   (local.set $RuntimeException (ref.null $java.lang.Object))
+   
+   ;; int Asserts = 1;
+   (local.set $Asserts (i32.const 1))
+   
+   ;; int $Asserts = 1;
+   (local.set $$Asserts (i32.const 1))
+   
+   ;; int l_Asserts = 1;
+   (local.set $l_Asserts (i32.const 1))
+   
+   ;; int com_google_j2cl_readable_localnamecollision_Class = 1;
+   (local.set $com_google_j2cl_readable_localnamecollision_Class (i32.const 1))
+   
+   ;; int com_google_j2cl_readable_localnamecollision_package1_A = 1;
+   (local.set $com_google_j2cl_readable_localnamecollision_package1_A (i32.const 1))
+   
+   ;; int com_google_j2cl_readable_localnamecollision_package2_A = 1;
+   (local.set $com_google_j2cl_readable_localnamecollision_package2_A (i32.const 1))
+   
+   ;; int A = 1;
+   (local.set $A (i32.const 1))
+   
+   ;; (LocalNameCollision = ((((RuntimeException instanceof LocalNameCollision) ? (true) : (RuntimeException instanceof RuntimeException)) ? (true) : (RuntimeException instanceof A)) ? (true) : (RuntimeException instanceof A)) ? (true) : (RuntimeException instanceof Class));
+   (local.set $LocalNameCollision (if (result i32) (if (result i32) (if (result i32) (if (result i32) (i32.const 0) (then (i32.const 1)) (else (i32.const 0))) (then (i32.const 1)) (else (i32.const 0))) (then (i32.const 1)) (else (i32.const 0))) (then (i32.const 1)) (else (i32.const 0))))
+   ;; assert (new Asserts.<init>().n() == 5);
+   ;; unimplemented statement AssertStatement
+   
+  )
+ )
+)
+
+;;; boolean LocalNameCollision.testClassParameterCollision(boolean LocalNameCollision, Object Asserts, Object $Asserts, int l_Asserts, int A)
+(func $testClassParameterCollision<boolean|java.lang.Object|java.lang.Object|int|int>:boolean@localnamecollision.LocalNameCollision
+ (param $this (ref null $java.lang.Object))
+ (param $LocalNameCollision i32)
+ (param $Asserts (ref null $java.lang.Object))
+ (param $$Asserts (ref null $java.lang.Object))
+ (param $l_Asserts i32)
+ (param $A i32)
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return (((LocalNameCollision) ? (Asserts instanceof LocalNameCollision) : (false)) ? ($Asserts instanceof Asserts) : (false)) ? ((l_Asserts == A)) : (false);
+   (local.set $return.value (if (result i32) (if (result i32) (if (result i32) (local.get $LocalNameCollision) (then (i32.const 0)) (else (i32.const 0))) (then (i32.const 0)) (else (i32.const 0))) (then (i32.eq (local.get $l_Asserts) (local.get $A))) (else (i32.const 0))))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; LocalNameCollision(boolean LocalNameCollision, Object Asserts, Object $Asserts, int l_Asserts, int A)
+(func $<init><boolean|java.lang.Object|java.lang.Object|int|int>:void@localnamecollision.LocalNameCollision
+ (param $this (ref null $localnamecollision.LocalNameCollision))
+ (param $LocalNameCollision i32)
+ (param $Asserts (ref null $java.lang.Object))
+ (param $$Asserts (ref null $java.lang.Object))
+ (param $l_Asserts i32)
+ (param $A i32)
+ (result (ref null $localnamecollision.LocalNameCollision))
+ (local $result i32)
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+   ;; boolean result = (((LocalNameCollision) ? (Asserts instanceof LocalNameCollision) : (false)) ? ($Asserts instanceof Asserts) : (false)) ? ((l_Asserts == A)) : (false);
+   (local.set $result (if (result i32) (if (result i32) (if (result i32) (local.get $LocalNameCollision) (then (i32.const 0)) (else (i32.const 0))) (then (i32.const 0)) (else (i32.const 0))) (then (i32.eq (local.get $l_Asserts) (local.get $A))) (else (i32.const 0))))
+   
+  )
+ )
+ (local.get $this)
+)
+;;; Code for localnamecollision.package1.A
+
+;;; CLASS  A
+
+(type $localnamecollision.package1.A (struct
+))
+
+;;; A()
+(func $<init><>:void@localnamecollision.package1.A
+ (param $this (ref null $localnamecollision.package1.A))
+ (result (ref null $localnamecollision.package1.A))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; int A.m()
+(func $m<>:int@localnamecollision.package1.A
+ (param $this (ref null $java.lang.Object))
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return 1;
+   (local.set $return.value (i32.const 1))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+;;; Code for localnamecollision.package2.A
+
+;;; CLASS  A
+
+(type $localnamecollision.package2.A (struct
+))
+
+;;; A()
+(func $<init><>:void@localnamecollision.package2.A
+ (param $this (ref null $localnamecollision.package2.A))
+ (result (ref null $localnamecollision.package2.A))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; int A.m()
+(func $m<>:int@localnamecollision.package2.A
+ (param $this (ref null $java.lang.Object))
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return 2;
+   (local.set $return.value (i32.const 2))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+

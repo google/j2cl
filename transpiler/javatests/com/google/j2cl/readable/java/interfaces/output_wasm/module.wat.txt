@@ -1,0 +1,144 @@
+;;; Code for interfaces.Main
+
+;;; CLASS  Main
+
+(type $interfaces.Main (struct
+))
+
+;;; Main()
+(func $<init><>:void@interfaces.Main
+ (param $this (ref null $interfaces.Main))
+ (result (ref null $interfaces.Main))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void Main.testInterfaceMembers()
+(func $testInterfaceMembers<>:void@interfaces.Main
+ (param $this (ref null $java.lang.Object))
+ (local $i (ref null $interfaces.Main.Interface))
+ (local $x i32)
+ (block $return.label
+  (block
+   ;; Interface i = Main.this.new Implementor.<init>();
+   (local.set $i (call $<init><>:void@interfaces.Main.Implementor (struct.new_default_with_rtt $interfaces.Main.Implementor (global.get $interfaces.Main.Implementor.rtt)) ))
+   
+   ;; i.interfaceMethod();
+   
+   ;; i.defaultMethod(null);
+   
+   ;; interfaces.Main.Interface.staticInterfaceMethod();
+   (call $staticInterfaceMethod<>:void@interfaces.Main.Interface )
+   ;; int x = (Main.this.new Implementor.<init>().a + interfaces.Main.Interface.b);
+   (local.set $x (i32.add (i32.const 0) (i32.const 0)))
+   
+  )
+ )
+)
+
+;;; INTERFACE  Interface
+
+(global $a@interfaces.Main.Interface i32 (i32.const 0))
+(global $b@interfaces.Main.Interface i32 (i32.const 0))
+(type $interfaces.Main.Interface (struct
+))
+
+;;; void Interface.defaultMethod(T t)
+(func $defaultMethod<java.lang.Object>:void@interfaces.Main.Interface
+ (param $this (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; Interface.this.privateMethod(t);
+   
+  )
+ )
+)
+
+;;; void Interface.privateMethod(T t)
+(func $privateMethod<java.lang.Object>:void@interfaces.Main.Interface
+ (param $this (ref null $interfaces.Main.Interface))
+ (param $t (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; void Interface.staticInterfaceMethod()
+(func $staticInterfaceMethod<>:void@interfaces.Main.Interface
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; INTERFACE  SubInterface
+
+(type $interfaces.Main.SubInterface (struct
+))
+
+;;; void SubInterface.defaultMethod(String s)
+(func $defaultMethod<java.lang.String>:void@interfaces.Main.SubInterface
+ (param $this (ref null $java.lang.Object))
+ (param $s (ref null $java.lang.String))
+ (block $return.label
+  (block
+   ;; Interface.this.defaultMethod(s);
+   
+  )
+ )
+)
+
+;;; CLASS  Implementor
+
+(type $interfaces.Main.Implementor (struct
+ (field $this@interfaces.Main.Implementor (ref null $interfaces.Main))
+))
+
+;;; Implementor()
+(func $<init><>:void@interfaces.Main.Implementor
+ (param $this (ref null $interfaces.Main.Implementor))
+ (result (ref null $interfaces.Main.Implementor))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void Implementor.interfaceMethod()
+(func $interfaceMethod<>:void@interfaces.Main.Implementor
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; CLASS  AbstractImplementor
+
+(type $interfaces.Main.AbstractImplementor (struct
+ (field $this@interfaces.Main.AbstractImplementor (ref null $interfaces.Main))
+))
+
+;;; AbstractImplementor()
+(func $<init><>:void@interfaces.Main.AbstractImplementor
+ (param $this (ref null $interfaces.Main.AbstractImplementor))
+ (result (ref null $interfaces.Main.AbstractImplementor))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+

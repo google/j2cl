@@ -1,0 +1,892 @@
+;;; Code for bridgemethods.AccidentalOverride
+
+;;; INTERFACE  I
+
+(type $bridgemethods.I (struct
+))
+
+;;; CLASS  A
+
+(type $bridgemethods.A (struct
+))
+
+;;; A()
+(func $<init><>:void@bridgemethods.A
+ (param $this (ref null $bridgemethods.A))
+ (result (ref null $bridgemethods.A))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; T A.fun(S s)
+(func $fun<java.lang.Object>:java.lang.Object@bridgemethods.A
+ (param $this (ref null $java.lang.Object))
+ (param $s (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; return null;
+   (local.set $return.value (ref.null $java.lang.Object))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; T A.get()
+(func $get<>:java.lang.Object@bridgemethods.A
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; return null;
+   (local.set $return.value (ref.null $java.lang.Object))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; CLASS  B
+
+(type $bridgemethods.B (struct
+))
+
+;;; B()
+(func $<init><>:void@bridgemethods.B
+ (param $this (ref null $bridgemethods.B))
+ (result (ref null $bridgemethods.B))
+ (block $return.label
+  (block
+   ;; A.this.A.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; Integer B.fun(String s)
+(func $fun<java.lang.String>:java.lang.Integer@bridgemethods.B
+ (param $this (ref null $java.lang.Object))
+ (param $s (ref null $java.lang.String))
+ (result (ref null $java.lang.Integer))
+ (local $return.value (ref null $java.lang.Integer))
+ (block $return.label
+  (block
+   ;; return new Integer.<init>(1);
+   (local.set $return.value (call $<init><int>:void@java.lang.Integer (struct.new_default_with_rtt $java.lang.Integer (global.get $java.lang.Integer.rtt)) (i32.const 1)))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; INTERFACE  SpecializedInterface
+
+(type $bridgemethods.SpecializedInterface (struct
+))
+
+;;; CLASS  AccidentalOverride
+
+(type $bridgemethods.AccidentalOverride (struct
+))
+
+;;; AccidentalOverride()
+(func $<init><>:void@bridgemethods.AccidentalOverride
+ (param $this (ref null $bridgemethods.AccidentalOverride))
+ (result (ref null $bridgemethods.AccidentalOverride))
+ (block $return.label
+  (block
+   ;; A.this.A.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+;;; Code for bridgemethods.BridgeMethod
+
+;;; INTERFACE  SomeInterface
+
+(type $bridgemethods.SomeInterface (struct
+))
+
+;;; CLASS  SuperParent
+
+(type $bridgemethods.SuperParent (struct
+))
+
+;;; SuperParent()
+(func $<init><>:void@bridgemethods.SuperParent
+ (param $this (ref null $bridgemethods.SuperParent))
+ (result (ref null $bridgemethods.SuperParent))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void SuperParent.foo(T t, S s)
+(func $foo<java.lang.Object|java.lang.Object>:void@bridgemethods.SuperParent
+ (param $this (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
+ (param $s (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; CLASS  Parent
+
+(type $bridgemethods.Parent (struct
+))
+
+;;; Parent()
+(func $<init><>:void@bridgemethods.Parent
+ (param $this (ref null $bridgemethods.Parent))
+ (result (ref null $bridgemethods.Parent))
+ (block $return.label
+  (block
+   ;; SuperParent.this.SuperParent.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void Parent.foo(T t, Number s)
+(func $foo<java.lang.Error|java.lang.Number>:void@bridgemethods.Parent
+ (param $this (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Error))
+ (param $s (ref null $java.lang.Number))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; void Parent.bar(T t)
+(func $bar<java.lang.Number>:void@bridgemethods.Parent
+ (param $this (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Number))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; void Parent.fun(T t)
+(func $fun<java.lang.Object>:void@bridgemethods.Parent
+ (param $this (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; CLASS  BridgeMethod
+
+(type $bridgemethods.BridgeMethod (struct
+))
+
+;;; BridgeMethod()
+(func $<init><>:void@bridgemethods.BridgeMethod
+ (param $this (ref null $bridgemethods.BridgeMethod))
+ (result (ref null $bridgemethods.BridgeMethod))
+ (block $return.label
+  (block
+   ;; Parent.this.Parent.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void BridgeMethod.foo(AssertionError a, Number n)
+(func $foo<java.lang.AssertionError|java.lang.Number>:void@bridgemethods.BridgeMethod
+ (param $this (ref null $java.lang.Object))
+ (param $a (ref null $java.lang.AssertionError))
+ (param $n (ref null $java.lang.Number))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; void BridgeMethod.bar(Number t)
+(func $bar<java.lang.Number>:void@bridgemethods.BridgeMethod
+ (param $this (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Number))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; void BridgeMethod.fun(Number t)
+(func $fun<java.lang.Number>:void@bridgemethods.BridgeMethod
+ (param $this (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Number))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; INTERFACE  SomeOtherFooInterface
+
+(type $bridgemethods.SomeOtherFooInterface (struct
+))
+
+;;; CLASS  DualUnrelatedBridges
+
+(type $bridgemethods.DualUnrelatedBridges (struct
+))
+
+;;; DualUnrelatedBridges()
+(func $<init><>:void@bridgemethods.DualUnrelatedBridges
+ (param $this (ref null $bridgemethods.DualUnrelatedBridges))
+ (result (ref null $bridgemethods.DualUnrelatedBridges))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void DualUnrelatedBridges.foo(String s, Double n)
+(func $foo<java.lang.String|java.lang.Double>:void@bridgemethods.DualUnrelatedBridges
+ (param $this (ref null $java.lang.Object))
+ (param $s (ref null $java.lang.String))
+ (param $n (ref null $java.lang.Double))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; void DualUnrelatedBridges.foo(String s, Number n)
+(func $foo<java.lang.String|java.lang.Number>:void@bridgemethods.DualUnrelatedBridges
+ (param $this (ref null $java.lang.Object))
+ (param $s (ref null $java.lang.String))
+ (param $n (ref null $java.lang.Number))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; CLASS  SuperDualUnrelatedAccidentalBridges
+
+(type $bridgemethods.SuperDualUnrelatedAccidentalBridges (struct
+))
+
+;;; SuperDualUnrelatedAccidentalBridges()
+(func $<init><>:void@bridgemethods.SuperDualUnrelatedAccidentalBridges
+ (param $this (ref null $bridgemethods.SuperDualUnrelatedAccidentalBridges))
+ (result (ref null $bridgemethods.SuperDualUnrelatedAccidentalBridges))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void SuperDualUnrelatedAccidentalBridges.foo(String s, Double n)
+(func $foo<java.lang.String|java.lang.Double>:void@bridgemethods.SuperDualUnrelatedAccidentalBridges
+ (param $this (ref null $java.lang.Object))
+ (param $s (ref null $java.lang.String))
+ (param $n (ref null $java.lang.Double))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; void SuperDualUnrelatedAccidentalBridges.foo(String s, Number n)
+(func $foo<java.lang.String|java.lang.Number>:void@bridgemethods.SuperDualUnrelatedAccidentalBridges
+ (param $this (ref null $java.lang.Object))
+ (param $s (ref null $java.lang.String))
+ (param $n (ref null $java.lang.Number))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; CLASS  DualUnrelatedAccidentalBridges
+
+(type $bridgemethods.DualUnrelatedAccidentalBridges (struct
+))
+
+;;; DualUnrelatedAccidentalBridges()
+(func $<init><>:void@bridgemethods.DualUnrelatedAccidentalBridges
+ (param $this (ref null $bridgemethods.DualUnrelatedAccidentalBridges))
+ (result (ref null $bridgemethods.DualUnrelatedAccidentalBridges))
+ (block $return.label
+  (block
+   ;; SuperDualUnrelatedAccidentalBridges.this.SuperDualUnrelatedAccidentalBridges.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; INTERFACE  Getter
+
+(type $bridgemethods.Getter (struct
+))
+
+;;; CLASS  ClassWithParameterizedGet
+
+(type $bridgemethods.ClassWithParameterizedGet (struct
+))
+
+;;; ClassWithParameterizedGet()
+(func $<init><>:void@bridgemethods.ClassWithParameterizedGet
+ (param $this (ref null $bridgemethods.ClassWithParameterizedGet))
+ (result (ref null $bridgemethods.ClassWithParameterizedGet))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; T ClassWithParameterizedGet.get(T t)
+(func $get<java.lang.Object>:java.lang.Object@bridgemethods.ClassWithParameterizedGet
+ (param $this (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; return null;
+   (local.set $return.value (ref.null $java.lang.Object))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; CLASS  AccidentalOverrideBridge
+
+(type $bridgemethods.AccidentalOverrideBridge (struct
+))
+
+;;; AccidentalOverrideBridge()
+(func $<init><>:void@bridgemethods.AccidentalOverrideBridge
+ (param $this (ref null $bridgemethods.AccidentalOverrideBridge))
+ (result (ref null $bridgemethods.AccidentalOverrideBridge))
+ (block $return.label
+  (block
+   ;; ClassWithParameterizedGet.this.ClassWithParameterizedGet.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void AccidentalOverrideBridge.test()
+(func $test<>:void@bridgemethods.AccidentalOverrideBridge
+ (param $this (ref null $java.lang.Object))
+ (local $g (ref null $bridgemethods.Getter))
+ (block $return.label
+  (block
+   ;; Getter g = new AccidentalOverrideBridge.<init>();
+   (local.set $g (call $<init><>:void@bridgemethods.AccidentalOverrideBridge (struct.new_default_with_rtt $bridgemethods.AccidentalOverrideBridge (global.get $bridgemethods.AccidentalOverrideBridge.rtt)) ))
+   
+   ;; g.get("");
+   (ref.null $java.lang.String)
+   drop
+  )
+ )
+)
+
+;;; CLASS  TestCase10036
+
+(type $bridgemethods.TestCase10036 (struct
+))
+
+;;; TestCase10036()
+(func $<init><>:void@bridgemethods.TestCase10036
+ (param $this (ref null $bridgemethods.TestCase10036))
+ (result (ref null $bridgemethods.TestCase10036))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; INTERFACE  BI3
+
+(type $bridgemethods.TestCase10036.BI3 (struct
+))
+
+;;; String BI3.get(String value)
+(func $get<java.lang.String>:java.lang.String@bridgemethods.TestCase10036.BI3
+ (param $this (ref null $java.lang.Object))
+ (param $value (ref null $java.lang.String))
+ (result (ref null $java.lang.String))
+ (local $return.value (ref null $java.lang.String))
+ (block $return.label
+  (block
+   ;; return "BI3 get String";
+   (local.set $return.value (ref.null $java.lang.String))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; INTERFACE  BI2
+
+(type $bridgemethods.TestCase10036.BI2 (struct
+))
+
+;;; INTERFACE  BI1
+
+(type $bridgemethods.TestCase10036.BI1 (struct
+))
+
+;;; CLASS  B
+
+(type $bridgemethods.TestCase10036.B (struct
+))
+
+;;; B()
+(func $<init><>:void@bridgemethods.TestCase10036.B
+ (param $this (ref null $bridgemethods.TestCase10036.B))
+ (result (ref null $bridgemethods.TestCase10036.B))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  TestCase102
+
+(type $bridgemethods.TestCase102 (struct
+))
+
+;;; TestCase102()
+(func $<init><>:void@bridgemethods.TestCase102
+ (param $this (ref null $bridgemethods.TestCase102))
+ (result (ref null $bridgemethods.TestCase102))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; INTERFACE  BI2
+
+(type $bridgemethods.TestCase102.BI2 (struct
+))
+
+;;; INTERFACE  BI1
+
+(type $bridgemethods.TestCase102.BI1 (struct
+))
+
+;;; CLASS  B
+
+(type $bridgemethods.TestCase102.B (struct
+))
+
+;;; B()
+(func $<init><>:void@bridgemethods.TestCase102.B
+ (param $this (ref null $bridgemethods.TestCase102.B))
+ (result (ref null $bridgemethods.TestCase102.B))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  C
+
+(type $bridgemethods.TestCase102.C (struct
+ (field $this@bridgemethods.TestCase102.C (ref null $bridgemethods.TestCase102))
+))
+
+;;; C()
+(func $<init><>:void@bridgemethods.TestCase102.C
+ (param $this (ref null $bridgemethods.TestCase102.C))
+ (result (ref null $bridgemethods.TestCase102.C))
+ (block $return.label
+  (block
+   ;; B.this.B.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void C.set(String value)
+(func $set<java.lang.String>:void@bridgemethods.TestCase102.C
+ (param $this (ref null $java.lang.Object))
+ (param $value (ref null $java.lang.String))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; void C.set(B1 value)
+(func $set<java.lang.Object>:void@bridgemethods.TestCase102.C
+ (param $this (ref null $java.lang.Object))
+ (param $value (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; CLASS  ParameterizedParent
+
+(type $bridgemethods.ParameterizedParent (struct
+))
+
+;;; ParameterizedParent()
+(func $<init><>:void@bridgemethods.ParameterizedParent
+ (param $this (ref null $bridgemethods.ParameterizedParent))
+ (result (ref null $bridgemethods.ParameterizedParent))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; Q ParameterizedParent.m(Q t)
+(func $m<bridgemethods.ParameterizedParent>:bridgemethods.ParameterizedParent@bridgemethods.ParameterizedParent
+ (param $this (ref null $java.lang.Object))
+ (param $t (ref null $bridgemethods.ParameterizedParent))
+ (result (ref null $bridgemethods.ParameterizedParent))
+ (local $return.value (ref null $bridgemethods.ParameterizedParent))
+ (block $return.label
+  (block
+   ;; return null;
+   (local.set $return.value (ref.null $bridgemethods.ParameterizedParent))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; CLASS  ReparametrerizedChild
+
+(type $bridgemethods.ReparametrerizedChild (struct
+))
+
+;;; ReparametrerizedChild()
+(func $<init><>:void@bridgemethods.ReparametrerizedChild
+ (param $this (ref null $bridgemethods.ReparametrerizedChild))
+ (result (ref null $bridgemethods.ReparametrerizedChild))
+ (block $return.label
+  (block
+   ;; ParameterizedParent.this.ParameterizedParent.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; S ReparametrerizedChild.m(S t)
+(func $m<bridgemethods.ReparametrerizedChild>:bridgemethods.ReparametrerizedChild@bridgemethods.ReparametrerizedChild
+ (param $this (ref null $java.lang.Object))
+ (param $t (ref null $bridgemethods.ReparametrerizedChild))
+ (result (ref null $bridgemethods.ReparametrerizedChild))
+ (local $return.value (ref null $bridgemethods.ReparametrerizedChild))
+ (block $return.label
+  (block
+   ;; return null;
+   (local.set $return.value (ref.null $bridgemethods.ReparametrerizedChild))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; CLASS  LeafChild
+
+(type $bridgemethods.LeafChild (struct
+))
+
+;;; LeafChild()
+(func $<init><>:void@bridgemethods.LeafChild
+ (param $this (ref null $bridgemethods.LeafChild))
+ (result (ref null $bridgemethods.LeafChild))
+ (block $return.label
+  (block
+   ;; ReparametrerizedChild.this.ReparametrerizedChild.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+;;; Code for bridgemethods.BridgeMethodDefault
+
+;;; CLASS  BridgeMethodDefault
+
+(type $bridgemethods.BridgeMethodDefault (struct
+))
+
+;;; BridgeMethodDefault()
+(func $<init><>:void@bridgemethods.BridgeMethodDefault
+ (param $this (ref null $bridgemethods.BridgeMethodDefault))
+ (result (ref null $bridgemethods.BridgeMethodDefault))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; INTERFACE  I
+
+(type $bridgemethods.BridgeMethodDefault.I (struct
+))
+
+;;; INTERFACE  II
+
+(type $bridgemethods.BridgeMethodDefault.II (struct
+))
+
+;;; void II.m(String s)
+(func $m<java.lang.String>:void@bridgemethods.BridgeMethodDefault.II
+ (param $this (ref null $java.lang.Object))
+ (param $s (ref null $java.lang.String))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; CLASS  A
+
+(type $bridgemethods.BridgeMethodDefault.A (struct
+))
+
+;;; A()
+(func $<init><>:void@bridgemethods.BridgeMethodDefault.A
+ (param $this (ref null $bridgemethods.BridgeMethodDefault.A))
+ (result (ref null $bridgemethods.BridgeMethodDefault.A))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; INTERFACE  JJ
+
+(type $bridgemethods.BridgeMethodDefault.JJ (struct
+))
+
+;;; void JJ.m(Object o)
+(func $m<java.lang.Object>:void@bridgemethods.BridgeMethodDefault.JJ
+ (param $this (ref null $java.lang.Object))
+ (param $o (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; CLASS  B
+
+(type $bridgemethods.BridgeMethodDefault.B (struct
+))
+
+;;; B()
+(func $<init><>:void@bridgemethods.BridgeMethodDefault.B
+ (param $this (ref null $bridgemethods.BridgeMethodDefault.B))
+ (result (ref null $bridgemethods.BridgeMethodDefault.B))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+;;; Code for bridgemethods.BridgeMethodShadowedSignature
+
+;;; CLASS  BridgeMethodShadowedSignature
+
+(type $bridgemethods.BridgeMethodShadowedSignature (struct
+))
+
+;;; BridgeMethodShadowedSignature()
+(func $<init><>:void@bridgemethods.BridgeMethodShadowedSignature
+ (param $this (ref null $bridgemethods.BridgeMethodShadowedSignature))
+ (result (ref null $bridgemethods.BridgeMethodShadowedSignature))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; INTERFACE  I
+
+(type $bridgemethods.BridgeMethodShadowedSignature.I (struct
+))
+
+;;; CLASS  B
+
+(type $bridgemethods.BridgeMethodShadowedSignature.B (struct
+))
+
+;;; B()
+(func $<init><>:void@bridgemethods.BridgeMethodShadowedSignature.B
+ (param $this (ref null $bridgemethods.BridgeMethodShadowedSignature.B))
+ (result (ref null $bridgemethods.BridgeMethodShadowedSignature.B))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; String B.get(B2 consumer)
+(func $get<java.lang.Object>:java.lang.String@bridgemethods.BridgeMethodShadowedSignature.B
+ (param $this (ref null $java.lang.Object))
+ (param $consumer (ref null $java.lang.Object))
+ (result (ref null $java.lang.String))
+ (local $return.value (ref null $java.lang.String))
+ (block $return.label
+  (block
+   ;; return "B get B2";
+   (local.set $return.value (ref.null $java.lang.String))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; CLASS  C
+
+(type $bridgemethods.BridgeMethodShadowedSignature.C (struct
+))
+
+;;; C()
+(func $<init><>:void@bridgemethods.BridgeMethodShadowedSignature.C
+ (param $this (ref null $bridgemethods.BridgeMethodShadowedSignature.C))
+ (result (ref null $bridgemethods.BridgeMethodShadowedSignature.C))
+ (block $return.label
+  (block
+   ;; B.this.B.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+;;; Code for bridgemethods.EnumMap
+
+;;; INTERFACE  Map
+
+(type $bridgemethods.Map (struct
+))
+
+;;; CLASS  AbstractMap
+
+(type $bridgemethods.AbstractMap (struct
+))
+
+;;; AbstractMap()
+(func $<init><>:void@bridgemethods.AbstractMap
+ (param $this (ref null $bridgemethods.AbstractMap))
+ (result (ref null $bridgemethods.AbstractMap))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; V AbstractMap.put(K key, V value)
+(func $put<java.lang.Object|java.lang.Object>:java.lang.Object@bridgemethods.AbstractMap
+ (param $this (ref null $java.lang.Object))
+ (param $key (ref null $java.lang.Object))
+ (param $value (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; return value;
+   (local.set $return.value (local.get $value))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; CLASS  EnumMap
+
+(type $bridgemethods.EnumMap (struct
+))
+
+;;; EnumMap()
+(func $<init><>:void@bridgemethods.EnumMap
+ (param $this (ref null $bridgemethods.EnumMap))
+ (result (ref null $bridgemethods.EnumMap))
+ (block $return.label
+  (block
+   ;; AbstractMap.this.AbstractMap.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; V EnumMap.put(K key, V value)
+(func $put<java.lang.Enum|java.lang.Object>:java.lang.Object@bridgemethods.EnumMap
+ (param $this (ref null $java.lang.Object))
+ (param $key (ref null $java.lang.Enum))
+ (param $value (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; return value;
+   (local.set $return.value (local.get $value))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+

@@ -1,0 +1,173 @@
+;;; Code for importglobaljstypes.Date
+
+;;; CLASS  Date
+
+(type $importglobaljstypes.Date (struct
+))
+
+;;; Date()
+(func $<init><>:void@importglobaljstypes.Date
+ (param $this (ref null $importglobaljstypes.Date))
+ (result (ref null $importglobaljstypes.Date))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; double Date.now(double x)
+(func $now<double>:double@importglobaljstypes.Date
+ (param $x f64)
+ (result f64)
+ (local $return.value f64)
+ (block $return.label
+  (block
+   ;; return importglobaljstypes.Date.NativeDate.now();
+   (local.set $return.value (call $now<>:double@importglobaljstypes.Date.NativeDate ))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; NativeDate Date.copy(NativeDate d)
+(func $copy<importglobaljstypes.Date.NativeDate>:importglobaljstypes.Date.NativeDate@importglobaljstypes.Date
+ (param $this (ref null $java.lang.Object))
+ (param $d (ref null $importglobaljstypes.Date.NativeDate))
+ (result (ref null $importglobaljstypes.Date.NativeDate))
+ (local $return.value (ref null $importglobaljstypes.Date.NativeDate))
+ (block $return.label
+  (block
+   ;; return d;
+   (local.set $return.value (local.get $d))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; CLASS  NativeDate
+
+(type $importglobaljstypes.Date.NativeDate (struct
+))
+
+;;; NativeDate()
+(func $<init><>:void@importglobaljstypes.Date.NativeDate
+ (param $this (ref null $importglobaljstypes.Date.NativeDate))
+ (result (ref null $importglobaljstypes.Date.NativeDate))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; double NativeDate.now()
+(func $now<>:double@importglobaljstypes.Date.NativeDate
+ (result f64)
+ (local $return.value f64)
+ (block $return.label
+  (block
+  )
+ )
+ (local.get $return.value)
+)
+;;; Code for importglobaljstypes.Number
+
+;;; CLASS  Number
+
+(type $importglobaljstypes.Number (struct
+))
+
+;;; Number()
+(func $<init><>:void@importglobaljstypes.Number
+ (param $this (ref null $importglobaljstypes.Number))
+ (result (ref null $importglobaljstypes.Number))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; boolean Number.fun(double x)
+(func $fun<double>:boolean@importglobaljstypes.Number
+ (param $x f64)
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; boolean Number.test(double x)
+(func $test<double>:boolean@importglobaljstypes.Number
+ (param $x f64)
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return importglobaljstypes.Number.fun(x);
+   (local.set $return.value (call $fun<double>:boolean@importglobaljstypes.Number (local.get $x)))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; NativeFunction<String> Number.getFromCharCodeFunction()
+(func $getFromCharCodeFunction<>:importglobaljstypes.Number.NativeFunction@importglobaljstypes.Number
+ (result (ref null $importglobaljstypes.Number.NativeFunction))
+ (local $return.value (ref null $importglobaljstypes.Number.NativeFunction))
+ (block $return.label
+  (block
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; String Number.fromCharCode(int[] array)
+(func $fromCharCode<int<>>:java.lang.String@importglobaljstypes.Number
+ (param $array (ref null $java.lang.Object))
+ (result (ref null $java.lang.String))
+ (local $return.value (ref null $java.lang.String))
+ (block $return.label
+  (block
+   ;; return ((String) importglobaljstypes.Number.getFromCharCodeFunction().apply(null,array));
+   (local.set $return.value (ref.cast $java.lang.Object $java.lang.String (ref.null $java.lang.String) (global.get $java.lang.String.rtt)))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; MyLiteralType Number.testJsDocForLiteralType(MyLiteralType a)
+(func $testJsDocForLiteralType<importglobaljstypes.Number.MyLiteralType>:importglobaljstypes.Number.MyLiteralType@importglobaljstypes.Number
+ (param $this (ref null $java.lang.Object))
+ (param $a (ref null $importglobaljstypes.Number.MyLiteralType))
+ (result (ref null $importglobaljstypes.Number.MyLiteralType))
+ (local $return.value (ref null $importglobaljstypes.Number.MyLiteralType))
+ (block $return.label
+  (block
+   ;; return a;
+   (local.set $return.value (local.get $a))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; INTERFACE  NativeFunction
+
+(type $importglobaljstypes.Number.NativeFunction (struct
+))
+
+;;; INTERFACE  MyLiteralType
+
+(type $importglobaljstypes.Number.MyLiteralType (struct
+))
+

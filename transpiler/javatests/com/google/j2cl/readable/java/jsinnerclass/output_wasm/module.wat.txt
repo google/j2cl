@@ -1,0 +1,101 @@
+;;; Code for jsinnerclass.Main
+
+;;; CLASS  Main
+
+(type $jsinnerclass.Main (struct
+))
+
+;;; Main()
+(func $<init><>:void@jsinnerclass.Main
+ (param $this (ref null $jsinnerclass.Main))
+ (result (ref null $jsinnerclass.Main))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void Main.main(String... args)
+(func $main<java.lang.String<>>:void@jsinnerclass.Main
+ (param $args (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; assert (new Outer.<init>().method() == 5);
+   ;; unimplemented statement AssertStatement
+   
+  )
+ )
+)
+
+;;; CLASS  Outer
+
+(type $jsinnerclass.Main.Outer (struct
+ (field $a@jsinnerclass.Main.Outer i32)
+))
+
+;;; Outer()
+(func $<init><>:void@jsinnerclass.Main.Outer
+ (param $this (ref null $jsinnerclass.Main.Outer))
+ (result (ref null $jsinnerclass.Main.Outer))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; int Outer.method()
+(func $method<>:int@jsinnerclass.Main.Outer
+ (param $this (ref null $java.lang.Object))
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return (Outer.this.new Inner.<init>().getB() + Outer.this.a);
+   (local.set $return.value (i32.add (i32.const 0) (i32.const 0)))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; CLASS  Inner
+
+(type $jsinnerclass.Main.Outer.Inner (struct
+ (field $this@jsinnerclass.Main.Outer.Inner (ref null $jsinnerclass.Main.Outer))
+ (field $b@jsinnerclass.Main.Outer.Inner i32)
+))
+
+;;; Inner()
+(func $<init><>:void@jsinnerclass.Main.Outer.Inner
+ (param $this (ref null $jsinnerclass.Main.Outer.Inner))
+ (result (ref null $jsinnerclass.Main.Outer.Inner))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+   ;; (Inner.this.b = (Inner.this.this.a + 1));
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; int Inner.getB()
+(func $getB<>:int@jsinnerclass.Main.Outer.Inner
+ (param $this (ref null $java.lang.Object))
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return Inner.this.b;
+   (local.set $return.value (i32.const 0))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+

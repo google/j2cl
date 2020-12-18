@@ -1,0 +1,96 @@
+;;; Code for foreachstatement.ForEachStatement
+
+;;; CLASS  ForEachStatement
+
+(type $foreachstatement.ForEachStatement (struct
+))
+
+;;; ForEachStatement()
+(func $<init><>:void@foreachstatement.ForEachStatement
+ (param $this (ref null $foreachstatement.ForEachStatement))
+ (result (ref null $foreachstatement.ForEachStatement))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void ForEachStatement.test(Iterable<Throwable> iterable)
+(func $test<java.lang.Iterable>:void@foreachstatement.ForEachStatement
+ (param $this (ref null $java.lang.Object))
+ (param $iterable (ref null $java.lang.Iterable))
+ (local $$iterator (ref null $java.util.Iterator))
+ (local $t (ref null $java.lang.Throwable))
+ (local $$array (ref null $java.lang.Object))
+ (local $$index f64)
+ (local $t_1 (ref null $java.lang.Throwable))
+ (block $return.label
+  (block
+   (block
+    ;; Iterator<Throwable> $iterator = iterable.iterator();
+    (local.set $$iterator (ref.null $java.util.Iterator))
+    
+    ;; $BREAK: $LOOP: while (true) {
+    (block $$BREAK 
+     ;; $LOOP: while (true) {
+     (loop $$LOOP 
+      (block
+       ;; if (!$iterator.hasNext()) break $BREAK;
+       (if (i32.eqz (i32.const 0)) (then ;; break $BREAK;
+       (br $$BREAK)
+       ))
+       ;; $CONTINUE: {
+       (block $$CONTINUE 
+        (block
+         ;; Throwable t = ((Throwable) $iterator.next());
+         (local.set $t (ref.cast $java.lang.Object $java.lang.Throwable (ref.null $java.lang.Throwable) (global.get $java.lang.Throwable.rtt)))
+         
+         (block
+          ;; t.toString();
+          (ref.null $java.lang.String)
+          drop
+         )))
+       (block
+       )
+       ;; continue $LOOP;
+       (br $$LOOP)
+       
+      ))))
+   (block
+    ;; Throwable[] $array = new Throwable[10],double $index = 0;
+    (local.set $$array (ref.null $java.lang.Object))
+    (local.set $$index (f64.const 0.0))
+    
+    ;; $BREAK: $LOOP: while (true) {
+    (block $$BREAK_1 
+     ;; $LOOP: while (true) {
+     (loop $$LOOP_1 
+      (block
+       ;; if (!($index < <expr>)) break $BREAK;
+       (if (i32.eqz (f64.lt (local.get $$index) (f64.const 0.0))) (then ;; break $BREAK;
+       (br $$BREAK_1)
+       ))
+       ;; $CONTINUE: {
+       (block $$CONTINUE_1 
+        (block
+         ;; Throwable t = $array[$index];
+         (local.set $t_1 (ref.null $java.lang.Throwable))
+         
+         (block
+          ;; t.toString();
+          (ref.null $java.lang.String)
+          drop
+         )))
+       (block
+        ;; ($index = ($index + 1.0));
+        (local.set $$index (f64.add (local.get $$index) (f64.const 1.0))))
+       ;; continue $LOOP;
+       (br $$LOOP_1)
+       
+      )))))
+ )
+)
+

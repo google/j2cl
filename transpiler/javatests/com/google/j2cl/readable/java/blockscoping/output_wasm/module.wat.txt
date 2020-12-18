@@ -1,0 +1,40 @@
+;;; Code for blockscoping.BlockScoping
+
+;;; CLASS  BlockScoping
+
+(type $blockscoping.BlockScoping (struct
+))
+
+;;; BlockScoping()
+(func $<init><>:void@blockscoping.BlockScoping
+ (param $this (ref null $blockscoping.BlockScoping))
+ (result (ref null $blockscoping.BlockScoping))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void BlockScoping.main()
+(func $main<>:void@blockscoping.BlockScoping
+ (param $this (ref null $java.lang.Object))
+ (local $i i32)
+ (local $i_1 i32)
+ (block $return.label
+  (block
+   (block
+    ;; int i = 0;
+    (local.set $i (i32.const 0))
+    
+   )
+   (block
+    ;; int i = 1;
+    (local.set $i_1 (i32.const 1))
+    
+   ))
+ )
+)
+

@@ -1,0 +1,237 @@
+;;; Code for packageprivatemethods.package1.Child
+
+;;; CLASS  Child
+
+(type $packageprivatemethods.package1.Child (struct
+))
+
+;;; Child()
+(func $<init><>:void@packageprivatemethods.package1.Child
+ (param $this (ref null $packageprivatemethods.package1.Child))
+ (result (ref null $packageprivatemethods.package1.Child))
+ (block $return.label
+  (block
+   ;; Parent.this.Parent.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; int Child.foo(int a)
+(func $foo<int>:int@packageprivatemethods.package1.Child
+ (param $this (ref null $java.lang.Object))
+ (param $a i32)
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return (a + 1);
+   (local.set $return.value (i32.add (local.get $a) (i32.const 1)))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; int Child.fun(int a, int b)
+(func $fun<int|int>:int@packageprivatemethods.package1.Child
+ (param $this (ref null $java.lang.Object))
+ (param $a i32)
+ (param $b i32)
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return ((a + b) + 1);
+   (local.set $return.value (i32.add (i32.add (local.get $a) (local.get $b)) (i32.const 1)))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; int Child.bar(int a, int b, int c)
+(func $bar<int|int|int>:int@packageprivatemethods.package1.Child
+ (param $this (ref null $java.lang.Object))
+ (param $a i32)
+ (param $b i32)
+ (param $c i32)
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return (((a + b) + c) + 2);
+   (local.set $return.value (i32.add (i32.add (i32.add (local.get $a) (local.get $b)) (local.get $c)) (i32.const 2)))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+;;; Code for packageprivatemethods.package1.Parent
+
+;;; CLASS  Parent
+
+(type $packageprivatemethods.package1.Parent (struct
+))
+
+;;; Parent()
+(func $<init><>:void@packageprivatemethods.package1.Parent
+ (param $this (ref null $packageprivatemethods.package1.Parent))
+ (result (ref null $packageprivatemethods.package1.Parent))
+ (block $return.label
+  (block
+   ;; SuperParent.this.SuperParent.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; int Parent.foo(int a)
+(func $foo<int>:int@packageprivatemethods.package1.Parent
+ (param $this (ref null $java.lang.Object))
+ (param $a i32)
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return a;
+   (local.set $return.value (local.get $a))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+;;; Code for packageprivatemethods.package1.SuperParent
+
+;;; CLASS  SuperParent
+
+(type $packageprivatemethods.package1.SuperParent (struct
+))
+
+;;; SuperParent()
+(func $<init><>:void@packageprivatemethods.package1.SuperParent
+ (param $this (ref null $packageprivatemethods.package1.SuperParent))
+ (result (ref null $packageprivatemethods.package1.SuperParent))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; int SuperParent.foo(int a)
+(func $foo<int>:int@packageprivatemethods.package1.SuperParent
+ (param $this (ref null $java.lang.Object))
+ (param $a i32)
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return (a - 1);
+   (local.set $return.value (i32.sub (local.get $a) (i32.const 1)))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; int SuperParent.fun(int a, int b)
+(func $fun<int|int>:int@packageprivatemethods.package1.SuperParent
+ (param $this (ref null $java.lang.Object))
+ (param $a i32)
+ (param $b i32)
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return (a + b);
+   (local.set $return.value (i32.add (local.get $a) (local.get $b)))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; int SuperParent.bar(int a, int b, int c)
+(func $bar<int|int|int>:int@packageprivatemethods.package1.SuperParent
+ (param $this (ref null $java.lang.Object))
+ (param $a i32)
+ (param $b i32)
+ (param $c i32)
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return ((a + b) + c);
+   (local.set $return.value (i32.add (i32.add (local.get $a) (local.get $b)) (local.get $c)))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+;;; Code for packageprivatemethods.package2.SubChild
+
+;;; CLASS  SubChild
+
+(type $packageprivatemethods.package2.SubChild (struct
+))
+
+;;; SubChild()
+(func $<init><>:void@packageprivatemethods.package2.SubChild
+ (param $this (ref null $packageprivatemethods.package2.SubChild))
+ (result (ref null $packageprivatemethods.package2.SubChild))
+ (block $return.label
+  (block
+   ;; Child.this.Child.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; int SubChild.foo(int a)
+(func $foo<int>:int@packageprivatemethods.package2.SubChild
+ (param $this (ref null $java.lang.Object))
+ (param $a i32)
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return (a + 3);
+   (local.set $return.value (i32.add (local.get $a) (i32.const 3)))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+;;; Code for packageprivatemethods.package2.SubParent
+
+;;; CLASS  SubParent
+
+(type $packageprivatemethods.package2.SubParent (struct
+))
+
+;;; SubParent()
+(func $<init><>:void@packageprivatemethods.package2.SubParent
+ (param $this (ref null $packageprivatemethods.package2.SubParent))
+ (result (ref null $packageprivatemethods.package2.SubParent))
+ (block $return.label
+  (block
+   ;; Parent.this.Parent.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; int SubParent.foo(int a)
+(func $foo<int>:int@packageprivatemethods.package2.SubParent
+ (param $this (ref null $java.lang.Object))
+ (param $a i32)
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return a;
+   (local.set $return.value (local.get $a))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+

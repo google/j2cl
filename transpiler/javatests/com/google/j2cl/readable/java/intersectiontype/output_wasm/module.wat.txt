@@ -1,0 +1,301 @@
+;;; Code for intersectiontype.IntersectionTypeTest
+
+;;; INTERFACE  Getable
+
+(type $intersectiontype.Getable (struct
+))
+
+;;; INTERFACE  Setable
+
+(type $intersectiontype.Setable (struct
+))
+
+;;; INTERFACE  Serial
+
+(type $intersectiontype.Serial (struct
+))
+
+;;; INTERFACE  Cmp
+
+(type $intersectiontype.Cmp (struct
+))
+
+;;; INTERFACE  Cmp2
+
+(type $intersectiontype.Cmp2 (struct
+))
+
+;;; CLASS  IntersectionTypeTest
+
+(type $intersectiontype.IntersectionTypeTest (struct
+))
+
+;;; IntersectionTypeTest()
+(func $<init><>:void@intersectiontype.IntersectionTypeTest
+ (param $this (ref null $intersectiontype.IntersectionTypeTest))
+ (result (ref null $intersectiontype.IntersectionTypeTest))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void IntersectionTypeTest.getAndSet(T object)
+(func $getAndSet<intersectiontype.Getable>:void@intersectiontype.IntersectionTypeTest
+ (param $object (ref null $intersectiontype.Getable))
+ (block $return.label
+  (block
+   ;; ((Setable) object).set(1);
+   
+   ;; object.get();
+   (ref.null $java.lang.Object)
+   drop
+  )
+ )
+)
+
+;;; Getable<T> IntersectionTypeTest.cast(Object o)
+(func $cast<java.lang.Object>:intersectiontype.Getable@intersectiontype.IntersectionTypeTest
+ (param $o (ref null $java.lang.Object))
+ (result (ref null $intersectiontype.Getable))
+ (local $return.value (ref null $intersectiontype.Getable))
+ (block $return.label
+  (block
+   ;; if ((o == null)) {
+   (if (ref.eq (local.get $o) (ref.null $java.lang.Object)) (then (block
+    ;; return (((Getable<T>&Setable)) o);
+    (local.set $return.value (ref.null $intersectiontype.Getable))
+    (br $return.label))))
+   ;; return (((Getable<T>&Setable)) o);
+   (local.set $return.value (ref.null $intersectiontype.Getable))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; Getable<Comparable<String>> IntersectionTypeTest.cast1(Object s)
+(func $cast1<java.lang.Object>:intersectiontype.Getable@intersectiontype.IntersectionTypeTest
+ (param $s (ref null $java.lang.Object))
+ (result (ref null $intersectiontype.Getable))
+ (local $return.value (ref null $intersectiontype.Getable))
+ (block $return.label
+  (block
+   ;; return (((Getable<Comparable<String>>&Setable)) s);
+   (local.set $return.value (ref.null $intersectiontype.Getable))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; Getable<Comparable<T>> IntersectionTypeTest.cast2(Object s)
+(func $cast2<java.lang.Object>:intersectiontype.Getable@intersectiontype.IntersectionTypeTest
+ (param $s (ref null $java.lang.Object))
+ (result (ref null $intersectiontype.Getable))
+ (local $return.value (ref null $intersectiontype.Getable))
+ (block $return.label
+  (block
+   ;; return (((Getable<Comparable<T>>&Setable)) s);
+   (local.set $return.value (ref.null $intersectiontype.Getable))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; Object IntersectionTypeTest.cast3(Object s)
+(func $cast3<java.lang.Object>:java.lang.Object@intersectiontype.IntersectionTypeTest
+ (param $this (ref null $java.lang.Object))
+ (param $s (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; return s;
+   (local.set $return.value (local.get $s))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; Cmp IntersectionTypeTest.method()
+(func $method<>:intersectiontype.Cmp@intersectiontype.IntersectionTypeTest
+ (result (ref null $intersectiontype.Cmp))
+ (local $return.value (ref null $intersectiontype.Cmp))
+ (block $return.label
+  (block
+   ;; return (((Cmp&Serial)) function (){
+   (local.set $return.value (ref.null $intersectiontype.Cmp))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; Cmp2 IntersectionTypeTest.method2()
+(func $method2<>:intersectiontype.Cmp2@intersectiontype.IntersectionTypeTest
+ (result (ref null $intersectiontype.Cmp2))
+ (local $return.value (ref null $intersectiontype.Cmp2))
+ (local $a i32)
+ (block $return.label
+  (block
+   ;; return (((Cmp2&Serial)) function (int a){
+   (local.set $return.value (ref.null $intersectiontype.Cmp2))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; void IntersectionTypeTest.testClosureAssignment(Object o)
+(func $testClosureAssignment<java.lang.Object>:void@intersectiontype.IntersectionTypeTest
+ (param $o (ref null $java.lang.Object))
+ (local $e (ref null $intersectiontype.IntersectionTypeTest.A))
+ (local $g (ref null $intersectiontype.IntersectionTypeTest.EmptyA))
+ (local $s (ref null $intersectiontype.IntersectionTypeTest.EmptyB))
+ (block $return.label
+  (block
+   ;; A e = (((A&EmptyA&EmptyB)) o);
+   (local.set $e (ref.null $intersectiontype.IntersectionTypeTest.A))
+   
+   ;; EmptyA g = ((EmptyA) (((A&EmptyA&EmptyB)) o));
+   (local.set $g (ref.null $intersectiontype.IntersectionTypeTest.A))
+   
+   ;; EmptyB s = ((EmptyB) (((A&EmptyA&EmptyB)) o));
+   (local.set $s (ref.null $intersectiontype.IntersectionTypeTest.A))
+   
+  )
+ )
+)
+
+;;; T IntersectionTypeTest.get(T t)
+(func $get<java.lang.Object>:java.lang.Object@intersectiontype.IntersectionTypeTest
+ (param $t (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; return t;
+   (local.set $return.value (local.get $t))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; T IntersectionTypeTest.m()
+(func $m<>:intersectiontype.IntersectionTypeTest.A@intersectiontype.IntersectionTypeTest
+ (result (ref null $intersectiontype.IntersectionTypeTest.A))
+ (local $return.value (ref null $intersectiontype.IntersectionTypeTest.A))
+ (block $return.label
+  (block
+   ;; return ((T) intersectiontype.IntersectionTypeTest.get(new Object.<init>()));
+   (local.set $return.value (ref.null $intersectiontype.IntersectionTypeTest.A))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; Getable<T> IntersectionTypeTest.n()
+(func $n<>:intersectiontype.Getable@intersectiontype.IntersectionTypeTest
+ (result (ref null $intersectiontype.Getable))
+ (local $return.value (ref null $intersectiontype.Getable))
+ (block $return.label
+  (block
+   ;; return null;
+   (local.set $return.value (ref.null $intersectiontype.Getable))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; void IntersectionTypeTest.set(T t)
+(func $set<intersectiontype.IntersectionTypeTest.A>:void@intersectiontype.IntersectionTypeTest
+ (param $t (ref null $intersectiontype.IntersectionTypeTest.A))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; void IntersectionTypeTest.testMethodCall()
+(func $testMethodCall<>:void@intersectiontype.IntersectionTypeTest
+ (param $this (ref null $java.lang.Object))
+ (local $o (ref null $java.lang.Object))
+ (local $g (ref null $intersectiontype.Getable))
+ (block $return.label
+  (block
+   ;; Object o = intersectiontype.IntersectionTypeTest.m();
+   (local.set $o (call $m<>:intersectiontype.IntersectionTypeTest.A@intersectiontype.IntersectionTypeTest ))
+   
+   ;; intersectiontype.IntersectionTypeTest.set((((A&EmptyA)) o));
+   (call $set<intersectiontype.IntersectionTypeTest.A>:void@intersectiontype.IntersectionTypeTest (ref.null $intersectiontype.IntersectionTypeTest.A))
+   ;; intersectiontype.IntersectionTypeTest.set(intersectiontype.IntersectionTypeTest.m());
+   (call $set<intersectiontype.IntersectionTypeTest.A>:void@intersectiontype.IntersectionTypeTest (call $m<>:intersectiontype.IntersectionTypeTest.A@intersectiontype.IntersectionTypeTest ))
+   ;; Getable<?> g = intersectiontype.IntersectionTypeTest.n();
+   (local.set $g (call $n<>:intersectiontype.Getable@intersectiontype.IntersectionTypeTest ))
+   
+  )
+ )
+)
+
+;;; CLASS  MapEntry
+
+(type $intersectiontype.IntersectionTypeTest.MapEntry (struct
+ (field $this@intersectiontype.IntersectionTypeTest.MapEntry (ref null $intersectiontype.IntersectionTypeTest))
+))
+
+;;; MapEntry()
+(func $<init><>:void@intersectiontype.IntersectionTypeTest.MapEntry
+ (param $this (ref null $intersectiontype.IntersectionTypeTest.MapEntry))
+ (result (ref null $intersectiontype.IntersectionTypeTest.MapEntry))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; Getable<T> MapEntry.method(Object o)
+(func $method<java.lang.Object>:intersectiontype.Getable@intersectiontype.IntersectionTypeTest.MapEntry
+ (param $this (ref null $java.lang.Object))
+ (param $o (ref null $java.lang.Object))
+ (result (ref null $intersectiontype.Getable))
+ (local $return.value (ref null $intersectiontype.Getable))
+ (block $return.label
+  (block
+   ;; return (((Getable<T>&Setable)) o);
+   (local.set $return.value (ref.null $intersectiontype.Getable))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; CLASS  A
+
+(type $intersectiontype.IntersectionTypeTest.A (struct
+))
+
+;;; A()
+(func $<init><>:void@intersectiontype.IntersectionTypeTest.A
+ (param $this (ref null $intersectiontype.IntersectionTypeTest.A))
+ (result (ref null $intersectiontype.IntersectionTypeTest.A))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; INTERFACE  EmptyA
+
+(type $intersectiontype.IntersectionTypeTest.EmptyA (struct
+))
+
+;;; INTERFACE  EmptyB
+
+(type $intersectiontype.IntersectionTypeTest.EmptyB (struct
+))
+

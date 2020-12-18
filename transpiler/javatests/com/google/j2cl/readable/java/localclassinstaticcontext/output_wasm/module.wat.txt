@@ -1,0 +1,202 @@
+;;; Code for localclassinstaticcontext.LocalClassInStaticContext
+
+;;; CLASS  LocalClassInStaticContext
+
+(global $f@localclassinstaticcontext.LocalClassInStaticContext (ref null $java.lang.Object) (ref.null $java.lang.Object))
+(type $localclassinstaticcontext.LocalClassInStaticContext (struct
+))
+
+;;; LocalClassInStaticContext()
+(func $<init><>:void@localclassinstaticcontext.LocalClassInStaticContext
+ (param $this (ref null $localclassinstaticcontext.LocalClassInStaticContext))
+ (result (ref null $localclassinstaticcontext.LocalClassInStaticContext))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void LocalClassInStaticContext.test()
+(func $test<>:void@localclassinstaticcontext.LocalClassInStaticContext
+ (local $a (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; new $1A.<init>();
+   (call $<init><>:void@localclassinstaticcontext.LocalClassInStaticContext.1A (struct.new_default_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.1A (global.get $localclassinstaticcontext.LocalClassInStaticContext.1A.rtt)) )
+   drop
+   ;; Object a = new $3.<init>();
+   (local.set $a (call $<init><>:void@localclassinstaticcontext.LocalClassInStaticContext.3 (struct.new_default_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.3 (global.get $localclassinstaticcontext.LocalClassInStaticContext.3.rtt)) ))
+   
+  )
+ )
+)
+
+;;; CLASS  <anonymous> extends Object
+
+(type $localclassinstaticcontext.LocalClassInStaticContext.1 (struct
+))
+
+;;; <anonymous> extends Object()
+(func $<init><>:void@localclassinstaticcontext.LocalClassInStaticContext.1
+ (param $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.1))
+ (result (ref null $localclassinstaticcontext.LocalClassInStaticContext.1))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  A
+
+(type $localclassinstaticcontext.LocalClassInStaticContext.1A (struct
+))
+
+;;; A()
+(func $<init><>:void@localclassinstaticcontext.LocalClassInStaticContext.1A
+ (param $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.1A))
+ (result (ref null $localclassinstaticcontext.LocalClassInStaticContext.1A))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  <anonymous> extends Object
+
+(type $localclassinstaticcontext.LocalClassInStaticContext.3 (struct
+))
+
+;;; <anonymous> extends Object()
+(func $<init><>:void@localclassinstaticcontext.LocalClassInStaticContext.3
+ (param $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.3))
+ (result (ref null $localclassinstaticcontext.LocalClassInStaticContext.3))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void <anonymous> extends Object.m()
+(func $m<>:void@localclassinstaticcontext.LocalClassInStaticContext.3
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; new $1A.<init>();
+   (call $<init><>:void@localclassinstaticcontext.LocalClassInStaticContext.1A (struct.new_default_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.1A (global.get $localclassinstaticcontext.LocalClassInStaticContext.1A.rtt)) )
+   drop
+  )
+ )
+)
+
+;;; CLASS  B
+
+(type $localclassinstaticcontext.LocalClassInStaticContext.1B (struct
+))
+
+;;; B()
+(func $<init><>:void@localclassinstaticcontext.LocalClassInStaticContext.1B
+ (param $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.1B))
+ (result (ref null $localclassinstaticcontext.LocalClassInStaticContext.1B))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  <anonymous> extends Object
+
+(type $localclassinstaticcontext.LocalClassInStaticContext.2 (struct
+))
+
+;;; <anonymous> extends Object()
+(func $<init><>:void@localclassinstaticcontext.LocalClassInStaticContext.2
+ (param $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.2))
+ (result (ref null $localclassinstaticcontext.LocalClassInStaticContext.2))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  C
+
+(type $localclassinstaticcontext.LocalClassInStaticContext.C (struct
+ (field $f@localclassinstaticcontext.LocalClassInStaticContext.C i32)
+))
+
+;;; C()
+(func $<init><>:void@localclassinstaticcontext.LocalClassInStaticContext.C
+ (param $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.C))
+ (result (ref null $localclassinstaticcontext.LocalClassInStaticContext.C))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void C.test()
+(func $test<>:void@localclassinstaticcontext.LocalClassInStaticContext.C
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; C.this.new $1D.<init>().fun();
+   (i32.const 0)
+   drop
+  )
+ )
+)
+
+;;; CLASS  D
+
+(type $localclassinstaticcontext.LocalClassInStaticContext.C.1D (struct
+ (field $this@localclassinstaticcontext.LocalClassInStaticContext.C.1D (ref null $localclassinstaticcontext.LocalClassInStaticContext.C))
+))
+
+;;; D()
+(func $<init><>:void@localclassinstaticcontext.LocalClassInStaticContext.C.1D
+ (param $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.C.1D))
+ (result (ref null $localclassinstaticcontext.LocalClassInStaticContext.C.1D))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; int D.fun()
+(func $fun<>:int@localclassinstaticcontext.LocalClassInStaticContext.C.1D
+ (param $this (ref null $java.lang.Object))
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return $1D.this.this.f;
+   (local.set $return.value (i32.const 0))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+

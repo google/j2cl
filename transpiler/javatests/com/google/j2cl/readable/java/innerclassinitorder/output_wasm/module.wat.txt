@@ -1,0 +1,1266 @@
+;;; Code for innerclassinitorder.InnerClassInitOrder
+
+;;; CLASS  InnerClassInitOrder
+
+(type $innerclassinitorder.InnerClassInitOrder (struct
+ (field $number@innerclassinitorder.InnerClassInitOrder i32)
+ (field $outer@innerclassinitorder.InnerClassInitOrder (ref null $innerclassinitorder.InnerClassInitOrder.Outer))
+ (field $outerIsSuper@innerclassinitorder.InnerClassInitOrder (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper))
+))
+
+;;; InnerClassInitOrder()
+(func $<init><>:void@innerclassinitorder.InnerClassInitOrder
+ (param $this (ref null $innerclassinitorder.InnerClassInitOrder))
+ (result (ref null $innerclassinitorder.InnerClassInitOrder))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void InnerClassInitOrder.testOuterThisFromSuperCall()
+(func $testOuterThisFromSuperCall<>:void@innerclassinitorder.InnerClassInitOrder
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; InnerClassInitOrder.this.new OuterRefFromSuperCtorCall.<init>();
+   (call $<init><>:void@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall (struct.new_default_with_rtt $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall (global.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.rtt)) )
+   drop
+   ;; assert (InnerClassInitOrder.this.number == 100);
+   ;; unimplemented statement AssertStatement
+   
+  )
+ )
+)
+
+;;; void InnerClassInitOrder.testOuterThisFromThisCall()
+(func $testOuterThisFromThisCall<>:void@innerclassinitorder.InnerClassInitOrder
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; InnerClassInitOrder.this.new OuterRefFromThisCtorCall.<init>();
+   (call $<init><>:void@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall (struct.new_default_with_rtt $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall (global.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.rtt)) )
+   drop
+   ;; assert (InnerClassInitOrder.this.number == 1100);
+   ;; unimplemented statement AssertStatement
+   
+  )
+ )
+)
+
+;;; void InnerClassInitOrder.testExtendsNested()
+(func $testExtendsNested<>:void@innerclassinitorder.InnerClassInitOrder
+ (param $this (ref null $java.lang.Object))
+ (local $o (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter))
+ (block $return.label
+  (block
+   ;; ESOuter o = new ESOuter.<init>();
+   (local.set $o (call $<init><>:void@innerclassinitorder.InnerClassInitOrder.ESOuter (struct.new_default_with_rtt $innerclassinitorder.InnerClassInitOrder.ESOuter (global.get $innerclassinitorder.InnerClassInitOrder.ESOuter.rtt)) ))
+   
+   ;; assert (1 == o.new ESInner.<init>().value);
+   ;; unimplemented statement AssertStatement
+   
+   ;; assert (2 == o.new ESInner.<init>(2).value);
+   ;; unimplemented statement AssertStatement
+   
+   ;; assert (1 == new ESInnerSubclass.<init>(o).value);
+   ;; unimplemented statement AssertStatement
+   
+   ;; assert (2 == new ESInnerSubclass.<init>(2,o).value);
+   ;; unimplemented statement AssertStatement
+   
+  )
+ )
+)
+
+;;; void InnerClassInitOrder.testExtendsNestedWithGenerics()
+(func $testExtendsNestedWithGenerics<>:void@innerclassinitorder.InnerClassInitOrder
+ (param $this (ref null $java.lang.Object))
+ (local $o (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter))
+ (block $return.label
+  (block
+   ;; ESWGOuter<String> o = new ESWGOuter.<init>();
+   (local.set $o (call $<init><>:void@innerclassinitorder.InnerClassInitOrder.ESWGOuter (struct.new_default_with_rtt $innerclassinitorder.InnerClassInitOrder.ESWGOuter (global.get $innerclassinitorder.InnerClassInitOrder.ESWGOuter.rtt)) ))
+   
+   ;; assert (1 == o.new ESWGInner.<init>().value);
+   ;; unimplemented statement AssertStatement
+   
+   ;; assert (2 == o.new ESWGInner.<init>(2).value);
+   ;; unimplemented statement AssertStatement
+   
+   ;; assert (1 == new ESWGInnerSubclass.<init>(o).value);
+   ;; unimplemented statement AssertStatement
+   
+   ;; assert (2 == new ESWGInnerSubclass.<init>(2,o).value);
+   ;; unimplemented statement AssertStatement
+   
+  )
+ )
+)
+
+;;; void InnerClassInitOrder.testInnerClassCtors()
+(func $testInnerClassCtors<>:void@innerclassinitorder.InnerClassInitOrder
+ (param $this (ref null $java.lang.Object))
+ (local $p1 (ref null $innerclassinitorder.InnerClassInitOrder.P1))
+ (local $p2 (ref null $innerclassinitorder.InnerClassInitOrder.P1.P2))
+ (block $return.label
+  (block
+   ;; P1<?> p1 = new P1.<init>();
+   (local.set $p1 (call $<init><>:void@innerclassinitorder.InnerClassInitOrder.P1 (struct.new_default_with_rtt $innerclassinitorder.InnerClassInitOrder.P1 (global.get $innerclassinitorder.InnerClassInitOrder.P1.rtt)) ))
+   
+   ;; assert (1 == p1.value);
+   ;; unimplemented statement AssertStatement
+   
+   ;; assert (2 == new P1.<init>(2).value);
+   ;; unimplemented statement AssertStatement
+   
+   ;; P2<?, ?> p2 = p1.new P2.<init>();
+   (local.set $p2 (call $<init><>:void@innerclassinitorder.InnerClassInitOrder.P1.P2 (struct.new_default_with_rtt $innerclassinitorder.InnerClassInitOrder.P1.P2 (global.get $innerclassinitorder.InnerClassInitOrder.P1.P2.rtt)) ))
+   
+   ;; assert (1 == p2.value);
+   ;; unimplemented statement AssertStatement
+   
+   ;; assert (2 == p1.new P2.<init>(2).value);
+   ;; unimplemented statement AssertStatement
+   
+   ;; assert (1 == p2.new P3.<init>().value);
+   ;; unimplemented statement AssertStatement
+   
+   ;; assert (2 == p2.new P3.<init>(2).value);
+   ;; unimplemented statement AssertStatement
+   
+  )
+ )
+)
+
+;;; void InnerClassInitOrder.testInnerClassInitialization()
+(func $testInnerClassInitialization<>:void@innerclassinitorder.InnerClassInitOrder
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; InnerClassInitOrder.this.new InnerClass.<init>();
+   (call $<init><>:void@innerclassinitorder.InnerClassInitOrder.InnerClass (struct.new_default_with_rtt $innerclassinitorder.InnerClassInitOrder.InnerClass (global.get $innerclassinitorder.InnerClassInitOrder.InnerClass.rtt)) )
+   drop
+   ;; assert (InnerClassInitOrder.this.number == 1111);
+   ;; unimplemented statement AssertStatement
+   
+  )
+ )
+)
+
+;;; void InnerClassInitOrder.testInnerClassLoop()
+(func $testInnerClassLoop<>:void@innerclassinitorder.InnerClassInitOrder
+ (param $this (ref null $java.lang.Object))
+ (local $results (ref null $java.lang.Object))
+ (local $i i32)
+ (local $ap (ref null $innerclassinitorder.InnerClassInitOrder.1AddNumber))
+ (local $$array (ref null $java.lang.Object))
+ (local $$index f64)
+ (local $theAp (ref null $innerclassinitorder.InnerClassInitOrder.1AddNumber))
+ (block $return.label
+  (block
+   ;; AddNumber[] results = new AddNumber[10];
+   (local.set $results (ref.null $java.lang.Object))
+   
+   (block
+    ;; int i = 0;
+    (local.set $i (i32.const 0))
+    
+    ;; $BREAK: $LOOP: while (true) {
+    (block $$BREAK 
+     ;; $LOOP: while (true) {
+     (loop $$LOOP 
+      (block
+       ;; if (!(i < 10)) break $BREAK;
+       (if (i32.eqz (i32.lt_s (local.get $i) (i32.const 10))) (then ;; break $BREAK;
+       (br $$BREAK)
+       ))
+       ;; $CONTINUE: {
+       (block $$CONTINUE 
+        (block
+         ;; AddNumber ap = InnerClassInitOrder.this.new $1.<init>(i);
+         (local.set $ap (call $<init><int>:void@innerclassinitorder.InnerClassInitOrder.1 (struct.new_default_with_rtt $innerclassinitorder.InnerClassInitOrder.1 (global.get $innerclassinitorder.InnerClassInitOrder.1.rtt)) (local.get $i)))
+         
+         ;; (results[i] = ap);
+         
+        ))
+       (block
+        ;; (i = (i + 1));
+        (local.set $i (i32.add (local.get $i) (i32.const 1))))
+       ;; continue $LOOP;
+       (br $$LOOP)
+       
+      ))))
+   (block
+    ;; AddNumber[] $array = results,double $index = 0;
+    (local.set $$array (local.get $results))
+    (local.set $$index (f64.const 0.0))
+    
+    ;; $BREAK: $LOOP: while (true) {
+    (block $$BREAK_1 
+     ;; $LOOP: while (true) {
+     (loop $$LOOP_1 
+      (block
+       ;; if (!($index < <expr>)) break $BREAK;
+       (if (i32.eqz (f64.lt (local.get $$index) (f64.const 0.0))) (then ;; break $BREAK;
+       (br $$BREAK_1)
+       ))
+       ;; $CONTINUE: {
+       (block $$CONTINUE_1 
+        (block
+         ;; AddNumber theAp = $array[$index];
+         (local.set $theAp (ref.null $innerclassinitorder.InnerClassInitOrder.1AddNumber))
+         
+         (block
+          ;; theAp.act();
+          
+         )))
+       (block
+        ;; ($index = ($index + 1.0));
+        (local.set $$index (f64.add (local.get $$index) (f64.const 1.0))))
+       ;; continue $LOOP;
+       (br $$LOOP_1)
+       
+      ))))
+   ;; assert (InnerClassInitOrder.this.number == 1156);
+   ;; unimplemented statement AssertStatement
+   
+  )
+ )
+)
+
+;;; void InnerClassInitOrder.testOuterIsNotSuper()
+(func $testOuterIsNotSuper<>:void@innerclassinitorder.InnerClassInitOrder
+ (param $this (ref null $java.lang.Object))
+ (local $x (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper))
+ (block $return.label
+  (block
+   ;; OuterIsNotSuper x = InnerClassInitOrder.this.outerIsSuper.new OuterIsNotSuper.<init>();
+   (local.set $x (call $<init><>:void@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (struct.new_default_with_rtt $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (global.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper.rtt)) ))
+   
+   ;; assert (2 == x.getValue());
+   ;; unimplemented statement AssertStatement
+   
+  )
+ )
+)
+
+;;; void InnerClassInitOrder.testOuterIsNotSuperAnon()
+(func $testOuterIsNotSuperAnon<>:void@innerclassinitorder.InnerClassInitOrder
+ (param $this (ref null $java.lang.Object))
+ (local $x (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper))
+ (block $return.label
+  (block
+   ;; OuterIsNotSuper x = InnerClassInitOrder.this.new $2.<init>(InnerClassInitOrder.this.outerIsSuper);
+   (local.set $x (call $<init><innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper>:void@innerclassinitorder.InnerClassInitOrder.2 (struct.new_default_with_rtt $innerclassinitorder.InnerClassInitOrder.2 (global.get $innerclassinitorder.InnerClassInitOrder.2.rtt)) (ref.null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper)))
+   
+   ;; assert (2 == x.getValue());
+   ;; unimplemented statement AssertStatement
+   
+  )
+ )
+)
+
+;;; void InnerClassInitOrder.testQualifiedSuperCall()
+(func $testQualifiedSuperCall<>:void@innerclassinitorder.InnerClassInitOrder
+ (param $this (ref null $java.lang.Object))
+ (local $x (ref null $innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall))
+ (block $return.label
+  (block
+   ;; TestQualifiedSuperCall x = new TestQualifiedSuperCall.<init>();
+   (local.set $x (call $<init><>:void@innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall (struct.new_default_with_rtt $innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall (global.get $innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall.rtt)) ))
+   
+   ;; assert (2 == x.getValue());
+   ;; unimplemented statement AssertStatement
+   
+  )
+ )
+)
+
+;;; void InnerClassInitOrder.testQualifiedSuperCallAnon()
+(func $testQualifiedSuperCallAnon<>:void@innerclassinitorder.InnerClassInitOrder
+ (param $this (ref null $java.lang.Object))
+ (local $x (ref null $innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall))
+ (block $return.label
+  (block
+   ;; TestQualifiedSuperCall x = InnerClassInitOrder.this.new $3.<init>();
+   (local.set $x (call $<init><>:void@innerclassinitorder.InnerClassInitOrder.3 (struct.new_default_with_rtt $innerclassinitorder.InnerClassInitOrder.3 (global.get $innerclassinitorder.InnerClassInitOrder.3.rtt)) ))
+   
+   ;; assert (2 == x.getValue());
+   ;; unimplemented statement AssertStatement
+   
+  )
+ )
+)
+
+;;; void InnerClassInitOrder.testSuperDispatch()
+(func $testSuperDispatch<>:void@innerclassinitorder.InnerClassInitOrder
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; assert (1 == InnerClassInitOrder.this.outerIsSuper.checkDispatchFromSub1());
+   ;; unimplemented statement AssertStatement
+   
+   ;; assert (1 == InnerClassInitOrder.this.outerIsSuper.checkDispatchFromSub2());
+   ;; unimplemented statement AssertStatement
+   
+  )
+ )
+)
+
+;;; void InnerClassInitOrder.testUnqualifiedAlloc()
+(func $testUnqualifiedAlloc<>:void@innerclassinitorder.InnerClassInitOrder
+ (param $this (ref null $java.lang.Object))
+ (local $x (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper))
+ (block $return.label
+  (block
+   ;; OuterIsNotSuper x = InnerClassInitOrder.this.outerIsSuper.unqualifiedAlloc();
+   (local.set $x (ref.null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper))
+   
+   ;; assert (2 == x.getValue());
+   ;; unimplemented statement AssertStatement
+   
+  )
+ )
+)
+
+;;; void InnerClassInitOrder.testUnqualifiedSuperCall()
+(func $testUnqualifiedSuperCall<>:void@innerclassinitorder.InnerClassInitOrder
+ (param $this (ref null $java.lang.Object))
+ (local $x (ref null $innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall))
+ (block $return.label
+  (block
+   ;; TestUnqualifiedSuperCall x = InnerClassInitOrder.this.outerIsSuper.new TestUnqualifiedSuperCall.<init>();
+   (local.set $x (call $<init><>:void@innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall (struct.new_default_with_rtt $innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall (global.get $innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall.rtt)) ))
+   
+   ;; assert (2 == x.getValue());
+   ;; unimplemented statement AssertStatement
+   
+  )
+ )
+)
+
+;;; void InnerClassInitOrder.testUnqualifiedSuperCallAnon()
+(func $testUnqualifiedSuperCallAnon<>:void@innerclassinitorder.InnerClassInitOrder
+ (param $this (ref null $java.lang.Object))
+ (local $x (ref null $innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall))
+ (block $return.label
+  (block
+   ;; TestUnqualifiedSuperCall x = InnerClassInitOrder.this.new $4.<init>(InnerClassInitOrder.this.outerIsSuper);
+   (local.set $x (call $<init><innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper>:void@innerclassinitorder.InnerClassInitOrder.4 (struct.new_default_with_rtt $innerclassinitorder.InnerClassInitOrder.4 (global.get $innerclassinitorder.InnerClassInitOrder.4.rtt)) (ref.null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper)))
+   
+   ;; assert (2 == x.getValue());
+   ;; unimplemented statement AssertStatement
+   
+  )
+ )
+)
+
+;;; void InnerClassInitOrder.main(String... args)
+(func $main<java.lang.String<>>:void@innerclassinitorder.InnerClassInitOrder
+ (param $args (ref null $java.lang.Object))
+ (local $m (ref null $innerclassinitorder.InnerClassInitOrder))
+ (block $return.label
+  (block
+   ;; InnerClassInitOrder m = new InnerClassInitOrder.<init>();
+   (local.set $m (call $<init><>:void@innerclassinitorder.InnerClassInitOrder (struct.new_default_with_rtt $innerclassinitorder.InnerClassInitOrder (global.get $innerclassinitorder.InnerClassInitOrder.rtt)) ))
+   
+   ;; m.testOuterThisFromSuperCall();
+   
+   ;; m.testOuterThisFromThisCall();
+   
+   ;; m.testExtendsNested();
+   
+   ;; m.testExtendsNestedWithGenerics();
+   
+   ;; m.testInnerClassCtors();
+   
+   ;; m.testInnerClassInitialization();
+   
+   ;; m.testInnerClassLoop();
+   
+   ;; m.testOuterIsNotSuper();
+   
+   ;; m.testOuterIsNotSuperAnon();
+   
+   ;; m.testQualifiedSuperCall();
+   
+   ;; m.testQualifiedSuperCallAnon();
+   
+   ;; m.testSuperDispatch();
+   
+   ;; m.testUnqualifiedAlloc();
+   
+   ;; m.testUnqualifiedSuperCall();
+   
+   ;; m.testUnqualifiedSuperCallAnon();
+   
+  )
+ )
+)
+
+;;; CLASS  OuterRefFromSuperCtorBase
+
+(type $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase (struct
+))
+
+;;; OuterRefFromSuperCtorBase(Object o)
+(func $<init><java.lang.Object>:void@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase
+ (param $this (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase))
+ (param $o (ref null $java.lang.Object))
+ (result (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+   ;; o.toString();
+   (ref.null $java.lang.String)
+   drop
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  OuterRefFromSuperCtorCall
+
+(type $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall (struct
+ (field $this@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall (ref null $innerclassinitorder.InnerClassInitOrder))
+))
+
+;;; OuterRefFromSuperCtorCall()
+(func $<init><>:void@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall
+ (param $this (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall))
+ (result (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall))
+ (block $return.label
+  (block
+   ;; OuterRefFromSuperCtorBase.this.OuterRefFromSuperCtorBase.<init>(OuterRefFromSuperCtorCall.this.new $1.<init>());
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  <anonymous> extends Object
+
+(type $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1 (struct
+ (field $this@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1 (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall))
+))
+
+;;; <anonymous> extends Object()
+(func $<init><>:void@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1
+ (param $this (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1))
+ (result (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; String <anonymous> extends Object.toString()
+(func $toString<>:java.lang.String@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.String))
+ (local $return.value (ref null $java.lang.String))
+ (block $return.label
+  (block
+   ;; ($1.this.this.this.number = ($1.this.this.this.number + 100));
+   
+   ;; return "";
+   (local.set $return.value (ref.null $java.lang.String))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; CLASS  OuterRefFromThisCtorCall
+
+(type $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall (struct
+ (field $this@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall (ref null $innerclassinitorder.InnerClassInitOrder))
+))
+
+;;; OuterRefFromThisCtorCall(Object object)
+(func $<init><java.lang.Object>:void@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall
+ (param $this (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall))
+ (param $object (ref null $java.lang.Object))
+ (result (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall))
+ (block $return.label
+  (block
+   ;; OuterRefFromSuperCtorBase.this.OuterRefFromSuperCtorBase.<init>(object);
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; OuterRefFromThisCtorCall()
+(func $<init><>:void@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall
+ (param $this (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall))
+ (result (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall))
+ (block $return.label
+  (block
+   ;; OuterRefFromThisCtorCall.this.OuterRefFromThisCtorCall.<init>(OuterRefFromThisCtorCall.this.new $1.<init>());
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  <anonymous> extends Object
+
+(type $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1 (struct
+ (field $this@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1 (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall))
+))
+
+;;; <anonymous> extends Object()
+(func $<init><>:void@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1
+ (param $this (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1))
+ (result (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; String <anonymous> extends Object.toString()
+(func $toString<>:java.lang.String@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.String))
+ (local $return.value (ref null $java.lang.String))
+ (block $return.label
+  (block
+   ;; ($1.this.this.this.number = ($1.this.this.this.number + 1000));
+   
+   ;; return "";
+   (local.set $return.value (ref.null $java.lang.String))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; CLASS  InnerClass
+
+(type $innerclassinitorder.InnerClassInitOrder.InnerClass (struct
+ (field $this@innerclassinitorder.InnerClassInitOrder.InnerClass (ref null $innerclassinitorder.InnerClassInitOrder))
+))
+
+;;; InnerClass()
+(func $<init><>:void@innerclassinitorder.InnerClassInitOrder.InnerClass
+ (param $this (ref null $innerclassinitorder.InnerClassInitOrder.InnerClass))
+ (result (ref null $innerclassinitorder.InnerClassInitOrder.InnerClass))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void InnerClass.callInner()
+(func $callInner<>:void@innerclassinitorder.InnerClassInitOrder.InnerClass
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; (InnerClass.this.this.number = (InnerClass.this.this.number + 1));
+   
+   ;; InnerClass.this.new $1ReallyInnerClass.<init>();
+   (call $<init><>:void@innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass (struct.new_default_with_rtt $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass (global.get $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass.rtt)) )
+   drop
+  )
+ )
+)
+
+;;; CLASS  ReallyInnerClass
+
+(type $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass (struct
+ (field $this@innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass (ref null $innerclassinitorder.InnerClassInitOrder.InnerClass))
+))
+
+;;; ReallyInnerClass()
+(func $<init><>:void@innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass
+ (param $this (ref null $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass))
+ (result (ref null $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void ReallyInnerClass.callReallyInner()
+(func $callReallyInner<>:void@innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; ($1ReallyInnerClass.this.this.this.number = ($1ReallyInnerClass.this.this.this.number + 10));
+   
+  )
+ )
+)
+
+;;; CLASS  P1
+
+(type $innerclassinitorder.InnerClassInitOrder.P1 (struct
+ (field $value@innerclassinitorder.InnerClassInitOrder.P1 i32)
+))
+
+;;; P1()
+(func $<init><>:void@innerclassinitorder.InnerClassInitOrder.P1
+ (param $this (ref null $innerclassinitorder.InnerClassInitOrder.P1))
+ (result (ref null $innerclassinitorder.InnerClassInitOrder.P1))
+ (block $return.label
+  (block
+   ;; P1.this.P1.<init>(1);
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; P1(int i)
+(func $<init><int>:void@innerclassinitorder.InnerClassInitOrder.P1
+ (param $this (ref null $innerclassinitorder.InnerClassInitOrder.P1))
+ (param $i i32)
+ (result (ref null $innerclassinitorder.InnerClassInitOrder.P1))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+   ;; (P1.this.value = i);
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  P2
+
+(type $innerclassinitorder.InnerClassInitOrder.P1.P2 (struct
+ (field $value@innerclassinitorder.InnerClassInitOrder.P1 i32)
+ (field $this@innerclassinitorder.InnerClassInitOrder.P1.P2 (ref null $innerclassinitorder.InnerClassInitOrder.P1))
+))
+
+;;; P2()
+(func $<init><>:void@innerclassinitorder.InnerClassInitOrder.P1.P2
+ (param $this (ref null $innerclassinitorder.InnerClassInitOrder.P1.P2))
+ (result (ref null $innerclassinitorder.InnerClassInitOrder.P1.P2))
+ (block $return.label
+  (block
+   ;; P2.this.P2.<init>(1);
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; P2(int i)
+(func $<init><int>:void@innerclassinitorder.InnerClassInitOrder.P1.P2
+ (param $this (ref null $innerclassinitorder.InnerClassInitOrder.P1.P2))
+ (param $i i32)
+ (result (ref null $innerclassinitorder.InnerClassInitOrder.P1.P2))
+ (block $return.label
+  (block
+   ;; P1.this.P1.<init>(i);
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  P3
+
+(type $innerclassinitorder.InnerClassInitOrder.P1.P2.P3 (struct
+ (field $value@innerclassinitorder.InnerClassInitOrder.P1 i32)
+ (field $this@innerclassinitorder.InnerClassInitOrder.P1.P2 (ref null $innerclassinitorder.InnerClassInitOrder.P1))
+ (field $this@innerclassinitorder.InnerClassInitOrder.P1.P2.P3 (ref null $innerclassinitorder.InnerClassInitOrder.P1.P2))
+))
+
+;;; P3()
+(func $<init><>:void@innerclassinitorder.InnerClassInitOrder.P1.P2.P3
+ (param $this (ref null $innerclassinitorder.InnerClassInitOrder.P1.P2.P3))
+ (result (ref null $innerclassinitorder.InnerClassInitOrder.P1.P2.P3))
+ (block $return.label
+  (block
+   ;; P3.this.P3.<init>(1);
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; P3(int i)
+(func $<init><int>:void@innerclassinitorder.InnerClassInitOrder.P1.P2.P3
+ (param $this (ref null $innerclassinitorder.InnerClassInitOrder.P1.P2.P3))
+ (param $i i32)
+ (result (ref null $innerclassinitorder.InnerClassInitOrder.P1.P2.P3))
+ (block $return.label
+  (block
+   ;; P3.this.this.P2.<init>(i);
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  ESOuter
+
+(type $innerclassinitorder.InnerClassInitOrder.ESOuter (struct
+))
+
+;;; ESOuter()
+(func $<init><>:void@innerclassinitorder.InnerClassInitOrder.ESOuter
+ (param $this (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter))
+ (result (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; ESInner ESOuter.newESInner()
+(func $newESInner<>:innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner@innerclassinitorder.InnerClassInitOrder.ESOuter
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner))
+ (local $return.value (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner))
+ (block $return.label
+  (block
+   ;; return ESOuter.this.new ESInner.<init>();
+   (local.set $return.value (call $<init><>:void@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner (struct.new_default_with_rtt $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner (global.get $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner.rtt)) ))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; CLASS  ESInner
+
+(type $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner (struct
+ (field $this@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter))
+ (field $value@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner i32)
+))
+
+;;; ESInner()
+(func $<init><>:void@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner
+ (param $this (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner))
+ (result (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+   ;; (ESInner.this.value = 1);
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; ESInner(int value)
+(func $<init><int>:void@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner
+ (param $this (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner))
+ (param $value i32)
+ (result (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+   ;; (ESInner.this.value = value);
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  ESInnerSubclass
+
+(type $innerclassinitorder.InnerClassInitOrder.ESInnerSubclass (struct
+ (field $this@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter))
+ (field $value@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner i32)
+))
+
+;;; ESInnerSubclass(ESOuter outer)
+(func $<init><innerclassinitorder.InnerClassInitOrder.ESOuter>:void@innerclassinitorder.InnerClassInitOrder.ESInnerSubclass
+ (param $this (ref null $innerclassinitorder.InnerClassInitOrder.ESInnerSubclass))
+ (param $outer (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter))
+ (result (ref null $innerclassinitorder.InnerClassInitOrder.ESInnerSubclass))
+ (block $return.label
+  (block
+   ;; outer.ESInner.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; ESInnerSubclass(int value, ESOuter outer)
+(func $<init><int|innerclassinitorder.InnerClassInitOrder.ESOuter>:void@innerclassinitorder.InnerClassInitOrder.ESInnerSubclass
+ (param $this (ref null $innerclassinitorder.InnerClassInitOrder.ESInnerSubclass))
+ (param $value i32)
+ (param $outer (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter))
+ (result (ref null $innerclassinitorder.InnerClassInitOrder.ESInnerSubclass))
+ (block $return.label
+  (block
+   ;; outer.ESInner.<init>(value);
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  ESWGOuter
+
+(type $innerclassinitorder.InnerClassInitOrder.ESWGOuter (struct
+))
+
+;;; ESWGOuter()
+(func $<init><>:void@innerclassinitorder.InnerClassInitOrder.ESWGOuter
+ (param $this (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter))
+ (result (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; ESWGInner<T> ESWGOuter.newESWGInner()
+(func $newESWGInner<>:innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner@innerclassinitorder.InnerClassInitOrder.ESWGOuter
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner))
+ (local $return.value (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner))
+ (block $return.label
+  (block
+   ;; return ESWGOuter.this.new ESWGInner.<init>();
+   (local.set $return.value (call $<init><>:void@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner (struct.new_default_with_rtt $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner (global.get $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner.rtt)) ))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; CLASS  ESWGInner
+
+(type $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner (struct
+ (field $this@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter))
+ (field $value@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner i32)
+))
+
+;;; ESWGInner()
+(func $<init><>:void@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner
+ (param $this (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner))
+ (result (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+   ;; (ESWGInner.this.value = 1);
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; ESWGInner(int value)
+(func $<init><int>:void@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner
+ (param $this (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner))
+ (param $value i32)
+ (result (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+   ;; (ESWGInner.this.value = value);
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  ESWGInnerSubclass
+
+(type $innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass (struct
+ (field $this@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter))
+ (field $value@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner i32)
+))
+
+;;; ESWGInnerSubclass(ESWGOuter<String> outer)
+(func $<init><innerclassinitorder.InnerClassInitOrder.ESWGOuter>:void@innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass
+ (param $this (ref null $innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass))
+ (param $outer (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter))
+ (result (ref null $innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass))
+ (block $return.label
+  (block
+   ;; outer.ESWGInner.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; ESWGInnerSubclass(int value, ESWGOuter<String> outer)
+(func $<init><int|innerclassinitorder.InnerClassInitOrder.ESWGOuter>:void@innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass
+ (param $this (ref null $innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass))
+ (param $value i32)
+ (param $outer (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter))
+ (result (ref null $innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass))
+ (block $return.label
+  (block
+   ;; outer.ESWGInner.<init>(value);
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  AddNumber
+
+(type $innerclassinitorder.InnerClassInitOrder.1AddNumber (struct
+ (field $this@innerclassinitorder.InnerClassInitOrder.1AddNumber (ref null $innerclassinitorder.InnerClassInitOrder))
+ (field $num@innerclassinitorder.InnerClassInitOrder.1AddNumber i32)
+))
+
+;;; AddNumber(int i)
+(func $<init><int>:void@innerclassinitorder.InnerClassInitOrder.1AddNumber
+ (param $this (ref null $innerclassinitorder.InnerClassInitOrder.1AddNumber))
+ (param $i i32)
+ (result (ref null $innerclassinitorder.InnerClassInitOrder.1AddNumber))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+   ;; ($1AddNumber.this.num = i);
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  <anonymous> extends AddNumber
+
+(type $innerclassinitorder.InnerClassInitOrder.1 (struct
+ (field $this@innerclassinitorder.InnerClassInitOrder.1AddNumber (ref null $innerclassinitorder.InnerClassInitOrder))
+ (field $num@innerclassinitorder.InnerClassInitOrder.1AddNumber i32)
+ (field $this@innerclassinitorder.InnerClassInitOrder.1 (ref null $innerclassinitorder.InnerClassInitOrder))
+))
+
+;;; <anonymous> extends AddNumber(int $_0)
+(func $<init><int>:void@innerclassinitorder.InnerClassInitOrder.1
+ (param $this (ref null $innerclassinitorder.InnerClassInitOrder.1))
+ (param $$_0 i32)
+ (result (ref null $innerclassinitorder.InnerClassInitOrder.1))
+ (block $return.label
+  (block
+   ;; $1AddNumber.this.$1AddNumber.<init>($_0);
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void <anonymous> extends AddNumber.act()
+(func $act<>:void@innerclassinitorder.InnerClassInitOrder.1
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; ($1.this.this.number = ($1.this.this.number + $1.this.num));
+   
+  )
+ )
+)
+
+;;; CLASS  Outer
+
+(type $innerclassinitorder.InnerClassInitOrder.Outer (struct
+ (field $value@innerclassinitorder.InnerClassInitOrder.Outer i32)
+))
+
+;;; Outer(int i)
+(func $<init><int>:void@innerclassinitorder.InnerClassInitOrder.Outer
+ (param $this (ref null $innerclassinitorder.InnerClassInitOrder.Outer))
+ (param $i i32)
+ (result (ref null $innerclassinitorder.InnerClassInitOrder.Outer))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+   ;; (Outer.this.value = i);
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; int Outer.checkDispatch()
+(func $checkDispatch<>:int@innerclassinitorder.InnerClassInitOrder.Outer
+ (param $this (ref null $java.lang.Object))
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return 1;
+   (local.set $return.value (i32.const 1))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; CLASS  OuterIsNotSuper
+
+(type $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (struct
+ (field $this@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (ref null $innerclassinitorder.InnerClassInitOrder.Outer))
+))
+
+;;; OuterIsNotSuper()
+(func $<init><>:void@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper
+ (param $this (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper))
+ (result (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; int OuterIsNotSuper.getValue()
+(func $getValue<>:int@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper
+ (param $this (ref null $java.lang.Object))
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return OuterIsNotSuper.this.this.value;
+   (local.set $return.value (i32.const 0))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; CLASS  OuterIsSuper
+
+(type $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper (struct
+ (field $value@innerclassinitorder.InnerClassInitOrder.Outer i32)
+ (field $this@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper (ref null $innerclassinitorder.InnerClassInitOrder.Outer))
+))
+
+;;; OuterIsSuper(int i)
+(func $<init><int>:void@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper
+ (param $this (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper))
+ (param $i i32)
+ (result (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper))
+ (block $return.label
+  (block
+   ;; Outer.this.Outer.<init>(i);
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; int OuterIsSuper.checkDispatch()
+(func $checkDispatch<>:int@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper
+ (param $this (ref null $java.lang.Object))
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return 2;
+   (local.set $return.value (i32.const 2))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; int OuterIsSuper.checkDispatchFromSub1()
+(func $checkDispatchFromSub1<>:int@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper
+ (param $this (ref null $java.lang.Object))
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return super.checkDispatch();
+   (local.set $return.value (i32.const 0))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; int OuterIsSuper.checkDispatchFromSub2()
+(func $checkDispatchFromSub2<>:int@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper
+ (param $this (ref null $java.lang.Object))
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return OuterIsSuper.this.new $1.<init>(1).go();
+   (local.set $return.value (i32.const 0))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; OuterIsNotSuper OuterIsSuper.unqualifiedAlloc()
+(func $unqualifiedAlloc<>:innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper))
+ (local $return.value (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper))
+ (block $return.label
+  (block
+   ;; return OuterIsSuper.this.new OuterIsNotSuper.<init>();
+   (local.set $return.value (call $<init><>:void@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (struct.new_default_with_rtt $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (global.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper.rtt)) ))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; CLASS  <anonymous> extends Outer
+
+(type $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1 (struct
+ (field $value@innerclassinitorder.InnerClassInitOrder.Outer i32)
+ (field $this@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1 (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper))
+))
+
+;;; <anonymous> extends Outer(int $_0)
+(func $<init><int>:void@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1
+ (param $this (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1))
+ (param $$_0 i32)
+ (result (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1))
+ (block $return.label
+  (block
+   ;; Outer.this.Outer.<init>($_0);
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; int <anonymous> extends Outer.go()
+(func $go<>:int@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1
+ (param $this (ref null $java.lang.Object))
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return $1.this.this.checkDispatch();
+   (local.set $return.value (i32.const 0))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; CLASS  TestQualifiedSuperCall
+
+(type $innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall (struct
+ (field $this@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (ref null $innerclassinitorder.InnerClassInitOrder.Outer))
+))
+
+;;; TestQualifiedSuperCall()
+(func $<init><>:void@innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall
+ (param $this (ref null $innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall))
+ (result (ref null $innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall))
+ (block $return.label
+  (block
+   ;; new Outer.<init>(1).new OuterIsSuper.<init>(2).OuterIsNotSuper.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  TestUnqualifiedSuperCall
+
+(type $innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall (struct
+ (field $this@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (ref null $innerclassinitorder.InnerClassInitOrder.Outer))
+ (field $this@innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall (ref null $innerclassinitorder.InnerClassInitOrder.Outer))
+))
+
+;;; TestUnqualifiedSuperCall()
+(func $<init><>:void@innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall
+ (param $this (ref null $innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall))
+ (result (ref null $innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall))
+ (block $return.label
+  (block
+   ;; TestUnqualifiedSuperCall.this.this.OuterIsNotSuper.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  <anonymous> extends OuterIsNotSuper
+
+(type $innerclassinitorder.InnerClassInitOrder.2 (struct
+ (field $this@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (ref null $innerclassinitorder.InnerClassInitOrder.Outer))
+ (field $this@innerclassinitorder.InnerClassInitOrder.2 (ref null $innerclassinitorder.InnerClassInitOrder))
+))
+
+;;; <anonymous> extends OuterIsNotSuper(OuterIsSuper $super_outer_this)
+(func $<init><innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper>:void@innerclassinitorder.InnerClassInitOrder.2
+ (param $this (ref null $innerclassinitorder.InnerClassInitOrder.2))
+ (param $$super_outer_this (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper))
+ (result (ref null $innerclassinitorder.InnerClassInitOrder.2))
+ (block $return.label
+  (block
+   ;; $super_outer_this.OuterIsNotSuper.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  <anonymous> extends TestQualifiedSuperCall
+
+(type $innerclassinitorder.InnerClassInitOrder.3 (struct
+ (field $this@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (ref null $innerclassinitorder.InnerClassInitOrder.Outer))
+ (field $this@innerclassinitorder.InnerClassInitOrder.3 (ref null $innerclassinitorder.InnerClassInitOrder))
+))
+
+;;; <anonymous> extends TestQualifiedSuperCall()
+(func $<init><>:void@innerclassinitorder.InnerClassInitOrder.3
+ (param $this (ref null $innerclassinitorder.InnerClassInitOrder.3))
+ (result (ref null $innerclassinitorder.InnerClassInitOrder.3))
+ (block $return.label
+  (block
+   ;; TestQualifiedSuperCall.this.TestQualifiedSuperCall.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  <anonymous> extends TestUnqualifiedSuperCall
+
+(type $innerclassinitorder.InnerClassInitOrder.4 (struct
+ (field $this@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (ref null $innerclassinitorder.InnerClassInitOrder.Outer))
+ (field $this@innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall (ref null $innerclassinitorder.InnerClassInitOrder.Outer))
+ (field $this@innerclassinitorder.InnerClassInitOrder.4 (ref null $innerclassinitorder.InnerClassInitOrder))
+))
+
+;;; <anonymous> extends TestUnqualifiedSuperCall(OuterIsSuper $super_outer_this)
+(func $<init><innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper>:void@innerclassinitorder.InnerClassInitOrder.4
+ (param $this (ref null $innerclassinitorder.InnerClassInitOrder.4))
+ (param $$super_outer_this (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper))
+ (result (ref null $innerclassinitorder.InnerClassInitOrder.4))
+ (block $return.label
+  (block
+   ;; $super_outer_this.TestUnqualifiedSuperCall.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+

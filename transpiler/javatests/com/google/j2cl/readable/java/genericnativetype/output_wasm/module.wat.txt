@@ -1,0 +1,102 @@
+;;; Code for genericnativetype.BoundedJsArray
+
+;;; CLASS  BoundedJsArray
+
+(type $genericnativetype.BoundedJsArray (struct
+))
+
+;;; BoundedJsArray(int size)
+(func $<init><int>:void@genericnativetype.BoundedJsArray
+ (param $this (ref null $genericnativetype.BoundedJsArray))
+ (param $size i32)
+ (result (ref null $genericnativetype.BoundedJsArray))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; BoundedJsArray<V> BoundedJsArray.create()
+(func $create<>:genericnativetype.BoundedJsArray@genericnativetype.BoundedJsArray
+ (result (ref null $genericnativetype.BoundedJsArray))
+ (local $return.value (ref null $genericnativetype.BoundedJsArray))
+ (local $array (ref null $genericnativetype.BoundedJsArray))
+ (block $return.label
+  (block
+   ;; BoundedJsArray<V> array = null;
+   (local.set $array (ref.null $genericnativetype.BoundedJsArray))
+   
+   ;; return array;
+   (local.set $return.value (local.get $array))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; BoundedJsArray<V> BoundedJsArray.create(int size)
+(func $create<int>:genericnativetype.BoundedJsArray@genericnativetype.BoundedJsArray
+ (param $size i32)
+ (result (ref null $genericnativetype.BoundedJsArray))
+ (local $return.value (ref null $genericnativetype.BoundedJsArray))
+ (local $array (ref null $genericnativetype.BoundedJsArray))
+ (block $return.label
+  (block
+   ;; BoundedJsArray<V> array = new BoundedJsArray.<init>(size);
+   (local.set $array (call $<init><int>:void@genericnativetype.BoundedJsArray (struct.new_default_with_rtt $genericnativetype.BoundedJsArray (global.get $genericnativetype.BoundedJsArray.rtt)) (local.get $size)))
+   
+   ;; return array;
+   (local.set $return.value (local.get $array))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+;;; Code for genericnativetype.BoundedJsArrays
+
+;;; CLASS  BoundedJsArrays
+
+(type $genericnativetype.BoundedJsArrays (struct
+))
+
+;;; BoundedJsArrays()
+(func $<init><>:void@genericnativetype.BoundedJsArrays
+ (param $this (ref null $genericnativetype.BoundedJsArrays))
+ (result (ref null $genericnativetype.BoundedJsArrays))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; BoundedJsArray<V> BoundedJsArrays.create()
+(func $create<>:genericnativetype.BoundedJsArray@genericnativetype.BoundedJsArrays
+ (result (ref null $genericnativetype.BoundedJsArray))
+ (local $return.value (ref null $genericnativetype.BoundedJsArray))
+ (block $return.label
+  (block
+   ;; return genericnativetype.BoundedJsArray.create();
+   (local.set $return.value (call $create<>:genericnativetype.BoundedJsArray@genericnativetype.BoundedJsArray ))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; BoundedJsArray<V> BoundedJsArrays.createWithSize(int size)
+(func $createWithSize<int>:genericnativetype.BoundedJsArray@genericnativetype.BoundedJsArrays
+ (param $size i32)
+ (result (ref null $genericnativetype.BoundedJsArray))
+ (local $return.value (ref null $genericnativetype.BoundedJsArray))
+ (block $return.label
+  (block
+   ;; return genericnativetype.BoundedJsArray.create(size);
+   (local.set $return.value (call $create<int>:genericnativetype.BoundedJsArray@genericnativetype.BoundedJsArray (local.get $size)))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+

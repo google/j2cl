@@ -1,0 +1,64 @@
+;;; Code for rawtype.RawType
+
+;;; CLASS  RawType
+
+(type $rawtype.RawType (struct
+ (field $c@rawtype.RawType (ref null $java.lang.Comparable))
+))
+
+;;; RawType()
+(func $<init><>:void@rawtype.RawType
+ (param $this (ref null $rawtype.RawType))
+ (result (ref null $rawtype.RawType))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; INTERFACE  I
+
+(type $rawtype.RawType.I (struct
+))
+
+;;; void I.f(T t)
+(func $f<rawtype.RawType>:void@rawtype.RawType.I
+ (param $this (ref null $java.lang.Object))
+ (param $t (ref null $rawtype.RawType))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; CLASS  RawSubclass
+
+(type $rawtype.RawType.RawSubclass (struct
+))
+
+;;; RawSubclass()
+(func $<init><>:void@rawtype.RawType.RawSubclass
+ (param $this (ref null $rawtype.RawType.RawSubclass))
+ (result (ref null $rawtype.RawType.RawSubclass))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void RawSubclass.f(RawType t)
+(func $f<rawtype.RawType>:void@rawtype.RawType.RawSubclass
+ (param $this (ref null $java.lang.Object))
+ (param $t (ref null $rawtype.RawType))
+ (block $return.label
+  (block
+  )
+ )
+)
+

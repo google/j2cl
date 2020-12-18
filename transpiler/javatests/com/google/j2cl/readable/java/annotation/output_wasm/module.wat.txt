@@ -1,0 +1,66 @@
+;;; Code for annotation.Main
+
+;;; CLASS  Main
+
+(type $annotation.Main (struct
+))
+
+;;; Main()
+(func $<init><>:void@annotation.Main
+ (param $this (ref null $annotation.Main))
+ (result (ref null $annotation.Main))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; INTERFACE  Foo
+
+(global $CONSTANT@annotation.Main.Foo i32 (i32.const 0))
+(type $annotation.Main.Foo (struct
+))
+
+;;; CLASS  Bar
+
+(type $annotation.Main.Bar (struct
+ (field $this@annotation.Main.Bar (ref null $annotation.Main))
+))
+
+;;; Bar()
+(func $<init><>:void@annotation.Main.Bar
+ (param $this (ref null $annotation.Main.Bar))
+ (result (ref null $annotation.Main.Bar))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; int Bar.baz()
+(func $baz<>:int@annotation.Main.Bar
+ (param $this (ref null $java.lang.Object))
+ (result i32)
+ (local $return.value i32)
+ (local $foo (ref null $annotation.Main.Foo))
+ (block $return.label
+  (block
+   ;; Foo foo = null;
+   (local.set $foo (ref.null $annotation.Main.Foo))
+   
+   ;; foo.bar();
+   (i32.const 0)
+   drop
+   ;; return annotation.Main.Foo.CONSTANT;
+   (local.set $return.value (i32.const 0))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+

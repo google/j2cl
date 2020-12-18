@@ -1,0 +1,152 @@
+;;; Code for implicitparenthesis.ImplicitParenthesis
+
+;;; CLASS  ImplicitParenthesis
+
+(type $implicitparenthesis.ImplicitParenthesis (struct
+))
+
+;;; ImplicitParenthesis()
+(func $<init><>:void@implicitparenthesis.ImplicitParenthesis
+ (param $this (ref null $implicitparenthesis.ImplicitParenthesis))
+ (result (ref null $implicitparenthesis.ImplicitParenthesis))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void ImplicitParenthesis.test()
+(func $test<>:void@implicitparenthesis.ImplicitParenthesis
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; implicitparenthesis.ImplicitParenthesis.examples();
+   (call $examples<>:void@implicitparenthesis.ImplicitParenthesis )
+   ;; implicitparenthesis.ImplicitParenthesis.nonExamples();
+   (call $nonExamples<>:void@implicitparenthesis.ImplicitParenthesis ))
+ )
+)
+
+;;; void ImplicitParenthesis.examples()
+(func $examples<>:void@implicitparenthesis.ImplicitParenthesis
+ (local $primitiveInt i32)
+ (local $boxedInt (ref null $java.lang.Integer))
+ (local $$value (ref null $java.lang.Integer))
+ (block $return.label
+  (block
+   ;; int primitiveInt;
+   
+   ;; Integer boxedInt;
+   
+   (block
+    ;; (primitiveInt = 5);
+    (local.set $primitiveInt (i32.const 5))
+    ;; (boxedInt = new Integer.<init>(10));
+    (local.set $boxedInt (call $<init><int>:void@java.lang.Integer (struct.new_default_with_rtt $java.lang.Integer (global.get $java.lang.Integer.rtt)) (i32.const 10)))
+    ;; (primitiveInt = ((primitiveInt == 5)) ? (new Integer.<init>(15)) : (new Integer.<init>(30)));
+    (local.set $primitiveInt (i32.const 0))
+    ;; assert (primitiveInt == 15);
+    ;; unimplemented statement AssertStatement
+    
+   )
+   (block
+    ;; (primitiveInt = 5);
+    (local.set $primitiveInt (i32.const 5))
+    ;; (boxedInt = new Integer.<init>(10));
+    (local.set $boxedInt (call $<init><int>:void@java.lang.Integer (struct.new_default_with_rtt $java.lang.Integer (global.get $java.lang.Integer.rtt)) (i32.const 10)))
+    ;; (primitiveInt = ((boxedInt = (boxedInt + primitiveInt)),boxedInt));
+    (local.set $primitiveInt (i32.const 0))
+    ;; assert (primitiveInt == 15);
+    ;; unimplemented statement AssertStatement
+    
+   )
+   (block
+    ;; (primitiveInt = 5);
+    (local.set $primitiveInt (i32.const 5))
+    ;; (boxedInt = new Integer.<init>(10));
+    (local.set $boxedInt (call $<init><int>:void@java.lang.Integer (struct.new_default_with_rtt $java.lang.Integer (global.get $java.lang.Integer.rtt)) (i32.const 10)))
+    ;; (primitiveInt = ((boxedInt = primitiveInt),boxedInt));
+    (local.set $primitiveInt (i32.const 0))
+    ;; assert (primitiveInt == 5);
+    ;; unimplemented statement AssertStatement
+    
+   )
+   (block
+    ;; (primitiveInt = 5);
+    (local.set $primitiveInt (i32.const 5))
+    ;; (boxedInt = new Integer.<init>(10));
+    (local.set $boxedInt (call $<init><int>:void@java.lang.Integer (struct.new_default_with_rtt $java.lang.Integer (global.get $java.lang.Integer.rtt)) (i32.const 10)))
+    ;; (primitiveInt = (Integer $value = boxedInt,(boxedInt = (boxedInt + 1)),$value));
+    (local.set $primitiveInt (i32.const 0))
+    ;; assert (primitiveInt == 10);
+    ;; unimplemented statement AssertStatement
+    
+   )
+   (block
+    ;; (primitiveInt = 5);
+    (local.set $primitiveInt (i32.const 5))
+    ;; (boxedInt = new Integer.<init>(10));
+    (local.set $boxedInt (call $<init><int>:void@java.lang.Integer (struct.new_default_with_rtt $java.lang.Integer (global.get $java.lang.Integer.rtt)) (i32.const 10)))
+    ;; (primitiveInt = ((boxedInt = (boxedInt + 1)),boxedInt));
+    (local.set $primitiveInt (i32.const 0))
+    ;; assert (primitiveInt == 11);
+    ;; unimplemented statement AssertStatement
+    
+   ))
+ )
+)
+
+;;; void ImplicitParenthesis.nonExamples()
+(func $nonExamples<>:void@implicitparenthesis.ImplicitParenthesis
+ (local $primitiveInt i32)
+ (local $boxedInt (ref null $java.lang.Integer))
+ (local $boxedBoolean (ref null $java.lang.Boolean))
+ (block $return.label
+  (block
+   ;; int primitiveInt;
+   
+   ;; Integer boxedInt;
+   
+   ;; Boolean boxedBoolean;
+   
+   (block
+    ;; (primitiveInt = 5);
+    (local.set $primitiveInt (i32.const 5))
+    ;; (boxedInt = new Integer.<init>(10));
+    (local.set $boxedInt (call $<init><int>:void@java.lang.Integer (struct.new_default_with_rtt $java.lang.Integer (global.get $java.lang.Integer.rtt)) (i32.const 10)))
+    ;; (primitiveInt = (boxedInt - primitiveInt));
+    (local.set $primitiveInt (i32.sub (i32.const 0) (local.get $primitiveInt)))
+    ;; assert (primitiveInt == 5);
+    ;; unimplemented statement AssertStatement
+    
+   )
+   (block
+    ;; (primitiveInt = 5);
+    (local.set $primitiveInt (i32.const 5))
+    ;; (boxedInt = new Integer.<init>(10));
+    (local.set $boxedInt (call $<init><int>:void@java.lang.Integer (struct.new_default_with_rtt $java.lang.Integer (global.get $java.lang.Integer.rtt)) (i32.const 10)))
+    ;; (boxedBoolean = true);
+    (local.set $boxedBoolean (ref.null $java.lang.Boolean))
+    ;; (boxedBoolean = (boxedInt == primitiveInt));
+    (local.set $boxedBoolean (ref.null $java.lang.Boolean))
+    ;; assert (boxedBoolean == false);
+    ;; unimplemented statement AssertStatement
+    
+   ))
+ )
+)
+
+;;; void ImplicitParenthesis.parenthesisRemoval()
+(func $parenthesisRemoval<>:void@implicitparenthesis.ImplicitParenthesis
+ (block $return.label
+  (block
+   ;; new Integer.<init>((1 + 2));
+   (call $<init><int>:void@java.lang.Integer (struct.new_default_with_rtt $java.lang.Integer (global.get $java.lang.Integer.rtt)) (i32.add (i32.const 1) (i32.const 2)))
+   drop
+  )
+ )
+)
+

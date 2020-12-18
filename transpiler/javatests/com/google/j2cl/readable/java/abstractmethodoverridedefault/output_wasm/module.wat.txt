@@ -1,0 +1,135 @@
+;;; Code for abstractmethodoverridedefault.AbstractMethodOverrideDefault
+
+;;; CLASS  AbstractMethodOverrideDefault
+
+(type $abstractmethodoverridedefault.AbstractMethodOverrideDefault (struct
+))
+
+;;; AbstractMethodOverrideDefault()
+(func $<init><>:void@abstractmethodoverridedefault.AbstractMethodOverrideDefault
+ (param $this (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault))
+ (result (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; INTERFACE  I
+
+(type $abstractmethodoverridedefault.AbstractMethodOverrideDefault.I (struct
+))
+
+;;; void I.bar()
+(func $bar<>:void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.I
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; INTERFACE  J
+
+(type $abstractmethodoverridedefault.AbstractMethodOverrideDefault.J (struct
+))
+
+;;; void J.foo()
+(func $foo<>:void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.J
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; CLASS  A
+
+(type $abstractmethodoverridedefault.AbstractMethodOverrideDefault.A (struct
+))
+
+;;; A()
+(func $<init><>:void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.A
+ (param $this (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.A))
+ (result (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.A))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  B
+
+(type $abstractmethodoverridedefault.AbstractMethodOverrideDefault.B (struct
+))
+
+;;; B()
+(func $<init><>:void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.B
+ (param $this (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.B))
+ (result (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.B))
+ (block $return.label
+  (block
+   ;; A.this.A.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void B.bar()
+(func $bar<>:void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.B
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; if (false) {
+   (if (i32.const 0) (then (block
+    ;; B.this.bar();
+    
+   ))))
+ )
+)
+
+;;; CLASS  C
+
+(type $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C (struct
+))
+
+;;; C()
+(func $<init><>:void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C
+ (param $this (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C))
+ (result (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C))
+ (block $return.label
+  (block
+   ;; A.this.A.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void C.foo()
+(func $foo<>:void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; void C.bar()
+(func $bar<>:void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; I.this.bar();
+   
+  )
+ )
+)
+

@@ -1,0 +1,58 @@
+;;; Code for jsbridgebackward.InterfaceImpl
+
+;;; INTERFACE  MyJsInterface
+
+(type $jsbridgebackward.MyJsInterface (struct
+))
+
+;;; CLASS  A
+
+(type $jsbridgebackward.A (struct
+))
+
+;;; A()
+(func $<init><>:void@jsbridgebackward.A
+ (param $this (ref null $jsbridgebackward.A))
+ (result (ref null $jsbridgebackward.A))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; int A.foo(int a)
+(func $foo<int>:int@jsbridgebackward.A
+ (param $this (ref null $java.lang.Object))
+ (param $a i32)
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return a;
+   (local.set $return.value (local.get $a))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; CLASS  InterfaceImpl
+
+(type $jsbridgebackward.InterfaceImpl (struct
+))
+
+;;; InterfaceImpl()
+(func $<init><>:void@jsbridgebackward.InterfaceImpl
+ (param $this (ref null $jsbridgebackward.InterfaceImpl))
+ (result (ref null $jsbridgebackward.InterfaceImpl))
+ (block $return.label
+  (block
+   ;; A.this.A.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+

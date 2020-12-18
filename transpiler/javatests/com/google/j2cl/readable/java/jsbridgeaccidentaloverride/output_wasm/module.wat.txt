@@ -1,0 +1,179 @@
+;;; Code for jsbridgeaccidentaloverride.Main
+
+;;; CLASS  Main
+
+(type $jsbridgeaccidentaloverride.Main (struct
+))
+
+;;; Main()
+(func $<init><>:void@jsbridgeaccidentaloverride.Main
+ (param $this (ref null $jsbridgeaccidentaloverride.Main))
+ (result (ref null $jsbridgeaccidentaloverride.Main))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void Main.test()
+(func $test<>:void@jsbridgeaccidentaloverride.Main
+ (param $this (ref null $java.lang.Object))
+ (local $a (ref null $jsbridgeaccidentaloverride.MyJsType))
+ (local $b (ref null $jsbridgeaccidentaloverride.SubJsType))
+ (local $c (ref null $jsbridgeaccidentaloverride.MyInterface))
+ (local $d (ref null $jsbridgeaccidentaloverride.OtherInterface))
+ (block $return.label
+  (block
+   ;; MyJsType a = new MyJsType.<init>();
+   (local.set $a (call $<init><>:void@jsbridgeaccidentaloverride.MyJsType (struct.new_default_with_rtt $jsbridgeaccidentaloverride.MyJsType (global.get $jsbridgeaccidentaloverride.MyJsType.rtt)) ))
+   
+   ;; SubJsType b = new SubJsType.<init>();
+   (local.set $b (call $<init><>:void@jsbridgeaccidentaloverride.SubJsType (struct.new_default_with_rtt $jsbridgeaccidentaloverride.SubJsType (global.get $jsbridgeaccidentaloverride.SubJsType.rtt)) ))
+   
+   ;; MyInterface c = new SubJsType.<init>();
+   (local.set $c (call $<init><>:void@jsbridgeaccidentaloverride.SubJsType (struct.new_default_with_rtt $jsbridgeaccidentaloverride.SubJsType (global.get $jsbridgeaccidentaloverride.SubJsType.rtt)) ))
+   
+   ;; OtherInterface d = new SubJsType.<init>();
+   (local.set $d (call $<init><>:void@jsbridgeaccidentaloverride.SubJsType (struct.new_default_with_rtt $jsbridgeaccidentaloverride.SubJsType (global.get $jsbridgeaccidentaloverride.SubJsType.rtt)) ))
+   
+   ;; a.foo(1);
+   (i32.const 0)
+   drop
+   ;; b.foo(1);
+   (i32.const 0)
+   drop
+   ;; c.foo(1);
+   (i32.const 0)
+   drop
+   ;; a.bar(1);
+   (i32.const 0)
+   drop
+   ;; b.bar(1);
+   (i32.const 0)
+   drop
+   ;; c.bar(1);
+   (i32.const 0)
+   drop
+   ;; a.fun(1);
+   (i32.const 0)
+   drop
+   ;; b.fun(1);
+   (i32.const 0)
+   drop
+   ;; d.fun(1);
+   (i32.const 0)
+   drop
+  )
+ )
+)
+;;; Code for jsbridgeaccidentaloverride.MyJsType
+
+;;; INTERFACE  OtherInterface
+
+(type $jsbridgeaccidentaloverride.OtherInterface (struct
+))
+
+;;; CLASS  MyJsType
+
+(type $jsbridgeaccidentaloverride.MyJsType (struct
+))
+
+;;; MyJsType()
+(func $<init><>:void@jsbridgeaccidentaloverride.MyJsType
+ (param $this (ref null $jsbridgeaccidentaloverride.MyJsType))
+ (result (ref null $jsbridgeaccidentaloverride.MyJsType))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; int MyJsType.foo(int a)
+(func $foo<int>:int@jsbridgeaccidentaloverride.MyJsType
+ (param $this (ref null $java.lang.Object))
+ (param $a i32)
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return a;
+   (local.set $return.value (local.get $a))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; int MyJsType.bar(int a)
+(func $bar<int>:int@jsbridgeaccidentaloverride.MyJsType
+ (param $this (ref null $java.lang.Object))
+ (param $a i32)
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return (a + 1);
+   (local.set $return.value (i32.add (local.get $a) (i32.const 1)))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; int MyJsType.fun(int a)
+(func $fun<int>:int@jsbridgeaccidentaloverride.MyJsType
+ (param $this (ref null $java.lang.Object))
+ (param $a i32)
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return (a - 1);
+   (local.set $return.value (i32.sub (local.get $a) (i32.const 1)))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; INTERFACE  MyInterface
+
+(type $jsbridgeaccidentaloverride.MyInterface (struct
+))
+
+;;; CLASS  SubJsType
+
+(type $jsbridgeaccidentaloverride.SubJsType (struct
+))
+
+;;; SubJsType()
+(func $<init><>:void@jsbridgeaccidentaloverride.SubJsType
+ (param $this (ref null $jsbridgeaccidentaloverride.SubJsType))
+ (result (ref null $jsbridgeaccidentaloverride.SubJsType))
+ (block $return.label
+  (block
+   ;; MyJsType.this.MyJsType.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; int SubJsType.bar(int a)
+(func $bar<int>:int@jsbridgeaccidentaloverride.SubJsType
+ (param $this (ref null $java.lang.Object))
+ (param $a i32)
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return (a + 2);
+   (local.set $return.value (i32.add (local.get $a) (i32.const 2)))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+

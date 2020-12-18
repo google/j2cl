@@ -1,0 +1,418 @@
+;;; Code for jsconstructor.JsConstructorClass
+
+;;; CLASS  JsConstructorClass
+
+(type $jsconstructor.JsConstructorClass (struct
+))
+
+;;; JsConstructorClass()
+(func $<init><>:void@jsconstructor.JsConstructorClass
+ (param $this (ref null $jsconstructor.JsConstructorClass))
+ (result (ref null $jsconstructor.JsConstructorClass))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  A
+
+(type $jsconstructor.JsConstructorClass.A (struct
+ (field $fA@jsconstructor.JsConstructorClass.A i32)
+))
+
+;;; A(int x)
+(func $<init><int>:void@jsconstructor.JsConstructorClass.A
+ (param $this (ref null $jsconstructor.JsConstructorClass.A))
+ (param $x i32)
+ (result (ref null $jsconstructor.JsConstructorClass.A))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+   ;; (A.this.fA = x);
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; A()
+(func $<init><>:void@jsconstructor.JsConstructorClass.A
+ (param $this (ref null $jsconstructor.JsConstructorClass.A))
+ (result (ref null $jsconstructor.JsConstructorClass.A))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  B
+
+(type $jsconstructor.JsConstructorClass.B (struct
+ (field $fA@jsconstructor.JsConstructorClass.A i32)
+ (field $fB@jsconstructor.JsConstructorClass.B i32)
+))
+
+;;; B(int x)
+(func $<init><int>:void@jsconstructor.JsConstructorClass.B
+ (param $this (ref null $jsconstructor.JsConstructorClass.B))
+ (param $x i32)
+ (result (ref null $jsconstructor.JsConstructorClass.B))
+ (block $return.label
+  (block
+   ;; A.this.A.<init>((x + 1));
+   
+   ;; (B.this.fB = 3);
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; B()
+(func $<init><>:void@jsconstructor.JsConstructorClass.B
+ (param $this (ref null $jsconstructor.JsConstructorClass.B))
+ (result (ref null $jsconstructor.JsConstructorClass.B))
+ (block $return.label
+  (block
+   ;; B.this.B.<init>(10);
+   
+   ;; (B.this.fB = 4);
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; B(int x, int y)
+(func $<init><int|int>:void@jsconstructor.JsConstructorClass.B
+ (param $this (ref null $jsconstructor.JsConstructorClass.B))
+ (param $x i32)
+ (param $y i32)
+ (result (ref null $jsconstructor.JsConstructorClass.B))
+ (block $return.label
+  (block
+   ;; B.this.B.<init>((x + y));
+   
+   ;; (B.this.fB = (x * y));
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  C
+
+(type $jsconstructor.JsConstructorClass.C (struct
+ (field $fA@jsconstructor.JsConstructorClass.A i32)
+ (field $fB@jsconstructor.JsConstructorClass.B i32)
+ (field $fC@jsconstructor.JsConstructorClass.C i32)
+))
+
+;;; C(int x)
+(func $<init><int>:void@jsconstructor.JsConstructorClass.C
+ (param $this (ref null $jsconstructor.JsConstructorClass.C))
+ (param $x i32)
+ (result (ref null $jsconstructor.JsConstructorClass.C))
+ (block $return.label
+  (block
+   ;; B.this.B.<init>((x * 2));
+   
+   ;; (C.this.fC = 6);
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; C(int x, int y)
+(func $<init><int|int>:void@jsconstructor.JsConstructorClass.C
+ (param $this (ref null $jsconstructor.JsConstructorClass.C))
+ (param $x i32)
+ (param $y i32)
+ (result (ref null $jsconstructor.JsConstructorClass.C))
+ (block $return.label
+  (block
+   ;; C.this.C.<init>((x + y));
+   
+   ;; (C.this.fC = 7);
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  D
+
+(type $jsconstructor.JsConstructorClass.D (struct
+ (field $fA@jsconstructor.JsConstructorClass.A i32)
+ (field $fB@jsconstructor.JsConstructorClass.B i32)
+ (field $fD@jsconstructor.JsConstructorClass.D i32)
+))
+
+;;; D()
+(func $<init><>:void@jsconstructor.JsConstructorClass.D
+ (param $this (ref null $jsconstructor.JsConstructorClass.D))
+ (result (ref null $jsconstructor.JsConstructorClass.D))
+ (block $return.label
+  (block
+   ;; B.this.B.<init>(9);
+   
+   ;; (D.this.fD = 10);
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; D(int x)
+(func $<init><int>:void@jsconstructor.JsConstructorClass.D
+ (param $this (ref null $jsconstructor.JsConstructorClass.D))
+ (param $x i32)
+ (result (ref null $jsconstructor.JsConstructorClass.D))
+ (block $return.label
+  (block
+   ;; D.this.D.<init>();
+   
+   ;; (D.this.fD = x);
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  E
+
+(type $jsconstructor.JsConstructorClass.E (struct
+ (field $fA@jsconstructor.JsConstructorClass.A i32)
+ (field $fB@jsconstructor.JsConstructorClass.B i32)
+ (field $fC@jsconstructor.JsConstructorClass.C i32)
+ (field $fE@jsconstructor.JsConstructorClass.E i32)
+))
+
+;;; E()
+(func $<init><>:void@jsconstructor.JsConstructorClass.E
+ (param $this (ref null $jsconstructor.JsConstructorClass.E))
+ (result (ref null $jsconstructor.JsConstructorClass.E))
+ (block $return.label
+  (block
+   ;; C.this.C.<init>(10);
+   
+   ;; (E.this.fE = 12);
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  F
+
+(type $jsconstructor.JsConstructorClass.F (struct
+ (field $fA@jsconstructor.JsConstructorClass.A i32)
+ (field $fB@jsconstructor.JsConstructorClass.B i32)
+ (field $fC@jsconstructor.JsConstructorClass.C i32)
+ (field $fF@jsconstructor.JsConstructorClass.F i32)
+))
+
+;;; F(int x)
+(func $<init><int>:void@jsconstructor.JsConstructorClass.F
+ (param $this (ref null $jsconstructor.JsConstructorClass.F))
+ (param $x i32)
+ (result (ref null $jsconstructor.JsConstructorClass.F))
+ (block $return.label
+  (block
+   ;; C.this.C.<init>((x + 2));
+   
+   ;; (F.this.fF = (x + 3));
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  G
+
+(type $jsconstructor.JsConstructorClass.G (struct
+))
+
+;;; G()
+(func $<init><>:void@jsconstructor.JsConstructorClass.G
+ (param $this (ref null $jsconstructor.JsConstructorClass.G))
+ (result (ref null $jsconstructor.JsConstructorClass.G))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  H
+
+(type $jsconstructor.JsConstructorClass.H (struct
+))
+
+;;; H()
+(func $<init><>:void@jsconstructor.JsConstructorClass.H
+ (param $this (ref null $jsconstructor.JsConstructorClass.H))
+ (result (ref null $jsconstructor.JsConstructorClass.H))
+ (block $return.label
+  (block
+   ;; G.this.G.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  Varargs
+
+(type $jsconstructor.JsConstructorClass.Varargs (struct
+ (field $fA@jsconstructor.JsConstructorClass.A i32)
+))
+
+;;; Varargs(int... args)
+(func $<init><int<>>:void@jsconstructor.JsConstructorClass.Varargs
+ (param $this (ref null $jsconstructor.JsConstructorClass.Varargs))
+ (param $args (ref null $java.lang.Object))
+ (result (ref null $jsconstructor.JsConstructorClass.Varargs))
+ (block $return.label
+  (block
+   ;; A.this.A.<init>(args[1]);
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  SubVarargs
+
+(type $jsconstructor.JsConstructorClass.SubVarargs (struct
+ (field $fA@jsconstructor.JsConstructorClass.A i32)
+))
+
+;;; SubVarargs(Object i, int... args)
+(func $<init><java.lang.Object|int<>>:void@jsconstructor.JsConstructorClass.SubVarargs
+ (param $this (ref null $jsconstructor.JsConstructorClass.SubVarargs))
+ (param $i (ref null $java.lang.Object))
+ (param $args (ref null $java.lang.Object))
+ (result (ref null $jsconstructor.JsConstructorClass.SubVarargs))
+ (block $return.label
+  (block
+   ;; Varargs.this.Varargs.<init>(args);
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; SubVarargs(int j)
+(func $<init><int>:void@jsconstructor.JsConstructorClass.SubVarargs
+ (param $this (ref null $jsconstructor.JsConstructorClass.SubVarargs))
+ (param $j i32)
+ (result (ref null $jsconstructor.JsConstructorClass.SubVarargs))
+ (block $return.label
+  (block
+   ;; SubVarargs.this.SubVarargs.<init>(new Object.<init>(),[j]);
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void SubVarargs.subNativeInvocation()
+(func $subNativeInvocation<>:void@jsconstructor.JsConstructorClass.SubVarargs
+ (local $unusedS1 (ref null $jsconstructor.JsConstructorClass.SubVarargs))
+ (local $unusedS2 (ref null $jsconstructor.JsConstructorClass.SubVarargs))
+ (block $return.label
+  (block
+   ;; SubVarargs unusedS1 = new SubVarargs.<init>(2);
+   (local.set $unusedS1 (call $<init><int>:void@jsconstructor.JsConstructorClass.SubVarargs (struct.new_default_with_rtt $jsconstructor.JsConstructorClass.SubVarargs (global.get $jsconstructor.JsConstructorClass.SubVarargs.rtt)) (i32.const 2)))
+   
+   ;; SubVarargs unusedS2 = new SubVarargs.<init>(new Object.<init>(),[1,2,3]);
+   (local.set $unusedS2 (call $<init><java.lang.Object|int<>>:void@jsconstructor.JsConstructorClass.SubVarargs (struct.new_default_with_rtt $jsconstructor.JsConstructorClass.SubVarargs (global.get $jsconstructor.JsConstructorClass.SubVarargs.rtt)) (call $<init><>:void@java.lang.Object (struct.new_default_with_rtt $java.lang.Object (global.get $java.lang.Object.rtt)) )(ref.null $java.lang.Object)))
+   
+  )
+ )
+)
+
+;;; CLASS  InstanceVarargs
+
+(type $jsconstructor.JsConstructorClass.InstanceVarargs (struct
+ (field $fA@jsconstructor.JsConstructorClass.A i32)
+ (field $this@jsconstructor.JsConstructorClass.InstanceVarargs (ref null $jsconstructor.JsConstructorClass))
+))
+
+;;; InstanceVarargs(int... args)
+(func $<init><int<>>:void@jsconstructor.JsConstructorClass.InstanceVarargs
+ (param $this (ref null $jsconstructor.JsConstructorClass.InstanceVarargs))
+ (param $args (ref null $java.lang.Object))
+ (result (ref null $jsconstructor.JsConstructorClass.InstanceVarargs))
+ (block $return.label
+  (block
+   ;; A.this.A.<init>(args[1]);
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  RegularType
+
+(type $jsconstructor.JsConstructorClass.RegularType (struct
+))
+
+;;; RegularType(Object b)
+(func $<init><java.lang.Object>:void@jsconstructor.JsConstructorClass.RegularType
+ (param $this (ref null $jsconstructor.JsConstructorClass.RegularType))
+ (param $b (ref null $java.lang.Object))
+ (result (ref null $jsconstructor.JsConstructorClass.RegularType))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  JsConstructorSubtypeOfRegularType
+
+(type $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType (struct
+))
+
+;;; JsConstructorSubtypeOfRegularType(Object object)
+(func $<init><java.lang.Object>:void@jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType
+ (param $this (ref null $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType))
+ (param $object (ref null $java.lang.Object))
+ (result (ref null $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType))
+ (block $return.label
+  (block
+   ;; RegularType.this.RegularType.<init>(object);
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; JsConstructorSubtypeOfRegularType()
+(func $<init><>:void@jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType
+ (param $this (ref null $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType))
+ (result (ref null $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType))
+ (block $return.label
+  (block
+   ;; JsConstructorSubtypeOfRegularType.this.JsConstructorSubtypeOfRegularType.<init>(new Object.<init>());
+   
+  )
+ )
+ (local.get $this)
+)
+

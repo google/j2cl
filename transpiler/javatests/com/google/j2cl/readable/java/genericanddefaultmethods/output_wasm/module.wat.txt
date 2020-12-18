@@ -1,0 +1,67 @@
+;;; Code for genericanddefaultmethods.ConcreteClass
+
+;;; INTERFACE  InterfaceWithDefault
+
+(type $genericanddefaultmethods.InterfaceWithDefault (struct
+))
+
+;;; void InterfaceWithDefault.foo(String value)
+(func $foo<java.lang.String>:void@genericanddefaultmethods.InterfaceWithDefault
+ (param $this (ref null $java.lang.Object))
+ (param $value (ref null $java.lang.String))
+ (block $return.label
+  (block
+   ;; java.lang.System.out.println("in InterfaceWithDefault");
+   
+  )
+ )
+)
+
+;;; CLASS  GenericClass
+
+(type $genericanddefaultmethods.GenericClass (struct
+))
+
+;;; GenericClass()
+(func $<init><>:void@genericanddefaultmethods.GenericClass
+ (param $this (ref null $genericanddefaultmethods.GenericClass))
+ (result (ref null $genericanddefaultmethods.GenericClass))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void GenericClass.foo(T value)
+(func $foo<java.lang.Object>:void@genericanddefaultmethods.GenericClass
+ (param $this (ref null $java.lang.Object))
+ (param $value (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; java.lang.System.out.println("in GenericClass");
+   
+  )
+ )
+)
+
+;;; CLASS  ConcreteClass
+
+(type $genericanddefaultmethods.ConcreteClass (struct
+))
+
+;;; ConcreteClass()
+(func $<init><>:void@genericanddefaultmethods.ConcreteClass
+ (param $this (ref null $genericanddefaultmethods.ConcreteClass))
+ (result (ref null $genericanddefaultmethods.ConcreteClass))
+ (block $return.label
+  (block
+   ;; GenericClass.this.GenericClass.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+

@@ -1,0 +1,84 @@
+;;; Code for abstractinnerclass.InnerClasses
+
+;;; CLASS  InnerClasses
+
+(type $abstractinnerclass.InnerClasses (struct
+))
+
+;;; InnerClasses()
+(func $<init><>:void@abstractinnerclass.InnerClasses
+ (param $this (ref null $abstractinnerclass.InnerClasses))
+ (result (ref null $abstractinnerclass.InnerClasses))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; INTERFACE  A
+
+(type $abstractinnerclass.InnerClasses.A (struct
+))
+
+;;; CLASS  B
+
+(type $abstractinnerclass.InnerClasses.B (struct
+))
+
+;;; B()
+(func $<init><>:void@abstractinnerclass.InnerClasses.B
+ (param $this (ref null $abstractinnerclass.InnerClasses.B))
+ (result (ref null $abstractinnerclass.InnerClasses.B))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void B.bar()
+(func $bar<>:void@abstractinnerclass.InnerClasses.B
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; B.this.foo();
+   
+  )
+ )
+)
+
+;;; CLASS  C
+
+(type $abstractinnerclass.InnerClasses.C (struct
+ (field $this@abstractinnerclass.InnerClasses.C (ref null $abstractinnerclass.InnerClasses))
+))
+
+;;; C()
+(func $<init><>:void@abstractinnerclass.InnerClasses.C
+ (param $this (ref null $abstractinnerclass.InnerClasses.C))
+ (result (ref null $abstractinnerclass.InnerClasses.C))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void C.bar()
+(func $bar<>:void@abstractinnerclass.InnerClasses.C
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; C.this.foo();
+   
+  )
+ )
+)
+

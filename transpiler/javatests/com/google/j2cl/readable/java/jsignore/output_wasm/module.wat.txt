@@ -1,0 +1,39 @@
+;;; Code for jsignore.JsIgnoreExample
+
+;;; CLASS  JsIgnoreExample
+
+(global $exportedField@jsignore.JsIgnoreExample i32 (i32.const 0))
+(global $notExportedField@jsignore.JsIgnoreExample i32 (i32.const 0))
+(global $CONSTNAME@jsignore.JsIgnoreExample (ref null $java.lang.Object) (ref.null $java.lang.Object))
+(type $jsignore.JsIgnoreExample (struct
+))
+
+;;; JsIgnoreExample()
+(func $<init><>:void@jsignore.JsIgnoreExample
+ (param $this (ref null $jsignore.JsIgnoreExample))
+ (result (ref null $jsignore.JsIgnoreExample))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void JsIgnoreExample.exportedFunction()
+(func $exportedFunction<>:void@jsignore.JsIgnoreExample
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; void JsIgnoreExample.notExportedFunction()
+(func $notExportedFunction<>:void@jsignore.JsIgnoreExample
+ (block $return.label
+  (block
+  )
+ )
+)
+

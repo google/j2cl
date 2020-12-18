@@ -1,0 +1,74 @@
+;;; Code for defaultnullable.DefaultNullable
+
+;;; CLASS  DefaultNullable
+
+(type $defaultnullable.DefaultNullable (struct
+ (field $f1@defaultnullable.DefaultNullable (ref null $java.lang.String))
+ (field $f2@defaultnullable.DefaultNullable (ref null $java.lang.String))
+ (field $f3@defaultnullable.DefaultNullable (ref null $java.lang.String))
+ (field $f4@defaultnullable.DefaultNullable (ref null $java.util.List))
+ (field $f5@defaultnullable.DefaultNullable (ref null $java.util.List))
+ (field $f6@defaultnullable.DefaultNullable (ref null $java.util.List))
+ (field $f7@defaultnullable.DefaultNullable (ref null $java.util.List))
+ (field $f8@defaultnullable.DefaultNullable (ref null $java.lang.Object))
+ (field $f9@defaultnullable.DefaultNullable (ref null $java.lang.Object))
+ (field $f10@defaultnullable.DefaultNullable (ref null $java.lang.Object))
+ (field $f11@defaultnullable.DefaultNullable (ref null $java.lang.Void))
+ (field $f12@defaultnullable.DefaultNullable (ref null $java.lang.Object))
+))
+
+;;; DefaultNullable()
+(func $<init><>:void@defaultnullable.DefaultNullable
+ (param $this (ref null $defaultnullable.DefaultNullable))
+ (result (ref null $defaultnullable.DefaultNullable))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; String DefaultNullable.m1(String a, List<Double> b)
+(func $m1<java.lang.String|java.util.List>:java.lang.String@defaultnullable.DefaultNullable
+ (param $this (ref null $java.lang.Object))
+ (param $a (ref null $java.lang.String))
+ (param $b (ref null $java.util.List))
+ (result (ref null $java.lang.String))
+ (local $return.value (ref null $java.lang.String))
+ (block $return.label
+  (block
+   ;; return "";
+   (local.set $return.value (ref.null $java.lang.String))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; String DefaultNullable.m2(String a, List<Double> b)
+(func $m2<java.lang.String|java.util.List>:java.lang.String@defaultnullable.DefaultNullable
+ (param $this (ref null $java.lang.Object))
+ (param $a (ref null $java.lang.String))
+ (param $b (ref null $java.util.List))
+ (result (ref null $java.lang.String))
+ (local $return.value (ref null $java.lang.String))
+ (block $return.label
+  (block
+   ;; return null;
+   (local.set $return.value (ref.null $java.lang.String))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; void DefaultNullable.m3(String... args)
+(func $m3<java.lang.String<>>:void@defaultnullable.DefaultNullable
+ (param $this (ref null $java.lang.Object))
+ (param $args (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+

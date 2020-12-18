@@ -1,0 +1,125 @@
+;;; Code for nobridgemethods.CharSet
+
+;;; INTERFACE  Entry
+
+(type $nobridgemethods.Entry (struct
+))
+
+;;; CLASS  Map
+
+(type $nobridgemethods.Map (struct
+))
+
+;;; Map()
+(func $<init><>:void@nobridgemethods.Map
+ (param $this (ref null $nobridgemethods.Map))
+ (result (ref null $nobridgemethods.Map))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  TreeMap
+
+(type $nobridgemethods.TreeMap (struct
+))
+
+;;; TreeMap()
+(func $<init><>:void@nobridgemethods.TreeMap
+ (param $this (ref null $nobridgemethods.TreeMap))
+ (result (ref null $nobridgemethods.TreeMap))
+ (block $return.label
+  (block
+   ;; Map.this.Map.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; InnerEntry<K> TreeMap.getCeilingEntry(K key)
+(func $getCeilingEntry<java.lang.Object>:nobridgemethods.TreeMap.InnerEntry@nobridgemethods.TreeMap
+ (param $this (ref null $java.lang.Object))
+ (param $key (ref null $java.lang.Object))
+ (result (ref null $nobridgemethods.TreeMap.InnerEntry))
+ (local $return.value (ref null $nobridgemethods.TreeMap.InnerEntry))
+ (block $return.label
+  (block
+   ;; return new InnerEntry.<init>();
+   (local.set $return.value (call $<init><>:void@nobridgemethods.TreeMap.InnerEntry (struct.new_default_with_rtt $nobridgemethods.TreeMap.InnerEntry (global.get $nobridgemethods.TreeMap.InnerEntry.rtt)) ))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; CLASS  InnerEntry
+
+(type $nobridgemethods.TreeMap.InnerEntry (struct
+))
+
+;;; InnerEntry()
+(func $<init><>:void@nobridgemethods.TreeMap.InnerEntry
+ (param $this (ref null $nobridgemethods.TreeMap.InnerEntry))
+ (result (ref null $nobridgemethods.TreeMap.InnerEntry))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  CharSet
+
+(type $nobridgemethods.CharSet (struct
+))
+
+;;; CharSet()
+(func $<init><>:void@nobridgemethods.CharSet
+ (param $this (ref null $nobridgemethods.CharSet))
+ (result (ref null $nobridgemethods.CharSet))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void CharSet.main(String... args)
+(func $main<java.lang.String<>>:void@nobridgemethods.CharSet
+ (param $args (ref null $java.lang.Object))
+ (local $treeMap (ref null $nobridgemethods.TreeMap))
+ (block $return.label
+  (block
+   ;; TreeMap<String> treeMap = new $1.<init>();
+   (local.set $treeMap (call $<init><>:void@nobridgemethods.CharSet.1 (struct.new_default_with_rtt $nobridgemethods.CharSet.1 (global.get $nobridgemethods.CharSet.1.rtt)) ))
+   
+  )
+ )
+)
+
+;;; CLASS  <anonymous> extends TreeMap<String>
+
+(type $nobridgemethods.CharSet.1 (struct
+))
+
+;;; <anonymous> extends TreeMap<String>()
+(func $<init><>:void@nobridgemethods.CharSet.1
+ (param $this (ref null $nobridgemethods.CharSet.1))
+ (result (ref null $nobridgemethods.CharSet.1))
+ (block $return.label
+  (block
+   ;; TreeMap.this.TreeMap.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+

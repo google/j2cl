@@ -1,0 +1,56 @@
+;;; Code for jsmethodoverride.Child
+
+;;; CLASS  Parent
+
+(type $jsmethodoverride.Parent (struct
+))
+
+;;; Parent()
+(func $<init><>:void@jsmethodoverride.Parent
+ (param $this (ref null $jsmethodoverride.Parent))
+ (result (ref null $jsmethodoverride.Parent))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void Parent.foo()
+(func $foo<>:void@jsmethodoverride.Parent
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; CLASS  Child
+
+(type $jsmethodoverride.Child (struct
+))
+
+;;; Child()
+(func $<init><>:void@jsmethodoverride.Child
+ (param $this (ref null $jsmethodoverride.Child))
+ (result (ref null $jsmethodoverride.Child))
+ (block $return.label
+  (block
+   ;; Parent.this.Parent.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void Child.foo()
+(func $foo<>:void@jsmethodoverride.Child
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+

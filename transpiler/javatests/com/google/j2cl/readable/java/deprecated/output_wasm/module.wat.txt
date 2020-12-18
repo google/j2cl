@@ -1,0 +1,91 @@
+;;; Code for deprecated.DeprecatedExample
+
+;;; CLASS  DeprecatedExample
+
+(global $DEPRECATED_STATIC_FIELD@deprecated.DeprecatedExample (ref null $java.lang.String) (ref.null $java.lang.String))
+(type $deprecated.DeprecatedExample (struct
+ (field $deprecatedInstanceField@deprecated.DeprecatedExample (ref null $java.lang.String))
+))
+
+;;; void DeprecatedExample.deprecatedStaticMethod(Object someObject)
+(func $deprecatedStaticMethod<java.lang.Object>:void@deprecated.DeprecatedExample
+ (param $someObject (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; void DeprecatedExample.deprecatedInstanceMethod(String someArg)
+(func $deprecatedInstanceMethod<java.lang.String>:void@deprecated.DeprecatedExample
+ (param $this (ref null $java.lang.Object))
+ (param $someArg (ref null $java.lang.String))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; DeprecatedExample()
+(func $<init><>:void@deprecated.DeprecatedExample
+ (param $this (ref null $deprecated.DeprecatedExample))
+ (result (ref null $deprecated.DeprecatedExample))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; INTERFACE  DeprecatedInterface
+
+(type $deprecated.DeprecatedExample.DeprecatedInterface (struct
+))
+
+;;; INTERFACE  DeprecatedJsFunction
+
+(type $deprecated.DeprecatedExample.DeprecatedJsFunction (struct
+))
+
+;;; ENUM  DeprecatedEnum
+
+(global $A_VALUE@deprecated.DeprecatedExample.DeprecatedEnum (ref null $deprecated.DeprecatedExample.DeprecatedEnum) (ref.null $deprecated.DeprecatedExample.DeprecatedEnum))
+(type $deprecated.DeprecatedExample.DeprecatedEnum (struct
+ (field $name@java.lang.Enum (ref null $java.lang.String))
+ (field $ordinal@java.lang.Enum i32)
+))
+
+;;; DeprecatedEnum()
+(func $<init><>:void@deprecated.DeprecatedExample.DeprecatedEnum
+ (param $this (ref null $deprecated.DeprecatedExample.DeprecatedEnum))
+ (result (ref null $deprecated.DeprecatedExample.DeprecatedEnum))
+ (block $return.label
+  (block
+   ;; Enum.this.Enum.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; ENUM  DeprecatedJsEnum
+
+(global $A_VALUE@deprecated.DeprecatedExample.DeprecatedJsEnum (ref null $deprecated.DeprecatedExample.DeprecatedJsEnum) (ref.null $deprecated.DeprecatedExample.DeprecatedJsEnum))
+(type $deprecated.DeprecatedExample.DeprecatedJsEnum (struct
+))
+
+;;; DeprecatedJsEnum()
+(func $<init><>:void@deprecated.DeprecatedExample.DeprecatedJsEnum
+ (param $this (ref null $deprecated.DeprecatedExample.DeprecatedJsEnum))
+ (result (ref null $deprecated.DeprecatedExample.DeprecatedJsEnum))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+

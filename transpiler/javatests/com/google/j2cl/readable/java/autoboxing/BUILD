@@ -10,6 +10,8 @@ package(
 # Creates verification target
 readable_example(
     srcs = glob(["*.java"]),
+    # TODO(dramaix): enable when boxing is implemented.
+    generate_wasm_readables = False,
     deps = [
         "//third_party:gwt-javaemul-internal-annotations-j2cl",
         "//third_party:gwt-jsinterop-annotations-j2cl",

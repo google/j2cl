@@ -1,0 +1,207 @@
+;;; Code for jsnonnull.Main
+
+;;; CLASS  Main
+
+(type $jsnonnull.Main (struct
+ (field $f1@jsnonnull.Main (ref null $java.lang.String))
+ (field $f2@jsnonnull.Main (ref null $java.lang.String))
+ (field $f4@jsnonnull.Main (ref null $java.util.List))
+ (field $f5@jsnonnull.Main (ref null $java.util.List))
+ (field $f6@jsnonnull.Main (ref null $java.util.List))
+ (field $f7@jsnonnull.Main (ref null $java.util.List))
+ (field $f8@jsnonnull.Main (ref null $java.lang.Object))
+ (field $f9@jsnonnull.Main (ref null $java.lang.Object))
+ (field $f10@jsnonnull.Main (ref null $java.lang.Object))
+ (field $f12@jsnonnull.Main (ref null $java.util.List))
+))
+
+;;; Main(String a)
+(func $<init><java.lang.String>:void@jsnonnull.Main
+ (param $this (ref null $jsnonnull.Main))
+ (param $a (ref null $java.lang.String))
+ (result (ref null $jsnonnull.Main))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; String Main.m1(String a, List<Double> b, String c)
+(func $m1<java.lang.String|java.util.List|java.lang.String>:java.lang.String@jsnonnull.Main
+ (param $this (ref null $java.lang.Object))
+ (param $a (ref null $java.lang.String))
+ (param $b (ref null $java.util.List))
+ (param $c (ref null $java.lang.String))
+ (result (ref null $java.lang.String))
+ (local $return.value (ref null $java.lang.String))
+ (block $return.label
+  (block
+   ;; return "";
+   (local.set $return.value (ref.null $java.lang.String))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; String Main.m2(String a, List<Double> b)
+(func $m2<java.lang.String|java.util.List>:java.lang.String@jsnonnull.Main
+ (param $this (ref null $java.lang.Object))
+ (param $a (ref null $java.lang.String))
+ (param $b (ref null $java.util.List))
+ (result (ref null $java.lang.String))
+ (local $return.value (ref null $java.lang.String))
+ (block $return.label
+  (block
+   ;; return "";
+   (local.set $return.value (ref.null $java.lang.String))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; String Main.m3(String a, String... args)
+(func $m3<java.lang.String|java.lang.String<>>:java.lang.String@jsnonnull.Main
+ (param $this (ref null $java.lang.Object))
+ (param $a (ref null $java.lang.String))
+ (param $args (ref null $java.lang.Object))
+ (result (ref null $java.lang.String))
+ (local $return.value (ref null $java.lang.String))
+ (block $return.label
+  (block
+   ;; return null;
+   (local.set $return.value (ref.null $java.lang.String))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; void Main.m4(MyFunction f)
+(func $m4<jsnonnull.Main.MyFunction>:void@jsnonnull.Main
+ (param $this (ref null $java.lang.Object))
+ (param $f (ref null $jsnonnull.Main.MyFunction))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; INTERFACE  MyFunction
+
+(type $jsnonnull.Main.MyFunction (struct
+))
+
+;;; CLASS  StringComparator
+
+(type $jsnonnull.Main.StringComparator (struct
+))
+
+;;; StringComparator()
+(func $<init><>:void@jsnonnull.Main.StringComparator
+ (param $this (ref null $jsnonnull.Main.StringComparator))
+ (result (ref null $jsnonnull.Main.StringComparator))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; int StringComparator.compare(String a, String b)
+(func $compare<java.lang.String|java.lang.String>:int@jsnonnull.Main.StringComparator
+ (param $this (ref null $java.lang.Object))
+ (param $a (ref null $java.lang.String))
+ (param $b (ref null $java.lang.String))
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return 0;
+   (local.set $return.value (i32.const 0))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; CLASS  NullableStringComparator
+
+(type $jsnonnull.Main.NullableStringComparator (struct
+))
+
+;;; NullableStringComparator()
+(func $<init><>:void@jsnonnull.Main.NullableStringComparator
+ (param $this (ref null $jsnonnull.Main.NullableStringComparator))
+ (result (ref null $jsnonnull.Main.NullableStringComparator))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; int NullableStringComparator.compare(String a, String b)
+(func $compare<java.lang.String|java.lang.String>:int@jsnonnull.Main.NullableStringComparator
+ (param $this (ref null $java.lang.Object))
+ (param $a (ref null $java.lang.String))
+ (param $b (ref null $java.lang.String))
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return 0;
+   (local.set $return.value (i32.const 0))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; CLASS  NonNullableStringSubNullableComparator
+
+(type $jsnonnull.Main.NonNullableStringSubNullableComparator (struct
+))
+
+;;; NonNullableStringSubNullableComparator()
+(func $<init><>:void@jsnonnull.Main.NonNullableStringSubNullableComparator
+ (param $this (ref null $jsnonnull.Main.NonNullableStringSubNullableComparator))
+ (result (ref null $jsnonnull.Main.NonNullableStringSubNullableComparator))
+ (block $return.label
+  (block
+   ;; NullableStringComparator.this.NullableStringComparator.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; int NonNullableStringSubNullableComparator.compare(String a, String b)
+(func $compare<java.lang.String|java.lang.String>:int@jsnonnull.Main.NonNullableStringSubNullableComparator
+ (param $this (ref null $java.lang.Object))
+ (param $a (ref null $java.lang.String))
+ (param $b (ref null $java.lang.String))
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return 0;
+   (local.set $return.value (i32.const 0))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; INTERFACE  NonNullableTemplatedReturn
+
+(type $jsnonnull.Main.NonNullableTemplatedReturn (struct
+))
+
+;;; INTERFACE  NonNullableTemplate
+
+(type $jsnonnull.Main.NonNullableTemplate (struct
+))
+

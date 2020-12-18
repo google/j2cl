@@ -1,0 +1,112 @@
+;;; Code for jsmethod.JsMethodExample
+
+;;; CLASS  JsMethodExample
+
+(type $jsmethod.JsMethodExample (struct
+))
+
+;;; JsMethodExample()
+(func $<init><>:void@jsmethod.JsMethodExample
+ (param $this (ref null $jsmethod.JsMethodExample))
+ (result (ref null $jsmethod.JsMethodExample))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void JsMethodExample.log(String message)
+(func $log<java.lang.String>:void@jsmethod.JsMethodExample
+ (param $message (ref null $java.lang.String))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; void JsMethodExample.main(String... args)
+(func $main<java.lang.String<>>:void@jsmethod.JsMethodExample
+ (param $args (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; jsmethod.JsMethodExample.log("test");
+   (call $log<java.lang.String>:void@jsmethod.JsMethodExample (ref.null $java.lang.String)))
+ )
+)
+
+;;; T JsMethodExample.testMethod()
+(func $testMethod<>:java.util.ArrayList@jsmethod.JsMethodExample
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.util.ArrayList))
+ (local $return.value (ref null $java.util.ArrayList))
+ (block $return.label
+  (block
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; CLASS  Base
+
+(type $jsmethod.JsMethodExample.Base (struct
+))
+
+;;; Base()
+(func $<init><>:void@jsmethod.JsMethodExample.Base
+ (param $this (ref null $jsmethod.JsMethodExample.Base))
+ (result (ref null $jsmethod.JsMethodExample.Base))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void Base.m(T t)
+(func $m<java.lang.Object>:void@jsmethod.JsMethodExample.Base
+ (param $this (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; INTERFACE  I
+
+(type $jsmethod.JsMethodExample.I (struct
+))
+
+;;; CLASS  Sub
+
+(type $jsmethod.JsMethodExample.Sub (struct
+))
+
+;;; Sub()
+(func $<init><>:void@jsmethod.JsMethodExample.Sub
+ (param $this (ref null $jsmethod.JsMethodExample.Sub))
+ (result (ref null $jsmethod.JsMethodExample.Sub))
+ (block $return.label
+  (block
+   ;; Base.this.Base.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void Sub.m(String s)
+(func $m<java.lang.String>:void@jsmethod.JsMethodExample.Sub
+ (param $this (ref null $java.lang.Object))
+ (param $s (ref null $java.lang.String))
+ (block $return.label
+  (block
+  )
+ )
+)
+

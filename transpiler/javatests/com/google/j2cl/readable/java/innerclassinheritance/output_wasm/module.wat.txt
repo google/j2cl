@@ -1,0 +1,365 @@
+;;; Code for innerclassinheritance.ChildClass
+
+;;; CLASS  ParentOuter
+
+(type $innerclassinheritance.ParentOuter (struct
+ (field $fieldInParentOuter@innerclassinheritance.ParentOuter i32)
+))
+
+;;; ParentOuter()
+(func $<init><>:void@innerclassinheritance.ParentOuter
+ (param $this (ref null $innerclassinheritance.ParentOuter))
+ (result (ref null $innerclassinheritance.ParentOuter))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void ParentOuter.funInParentOuter()
+(func $funInParentOuter<>:void@innerclassinheritance.ParentOuter
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; CLASS  ParentInner
+
+(type $innerclassinheritance.ParentInner (struct
+ (field $fieldInParentInner@innerclassinheritance.ParentInner i32)
+))
+
+;;; ParentInner()
+(func $<init><>:void@innerclassinheritance.ParentInner
+ (param $this (ref null $innerclassinheritance.ParentInner))
+ (result (ref null $innerclassinheritance.ParentInner))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void ParentInner.funInParentInner()
+(func $funInParentInner<>:void@innerclassinheritance.ParentInner
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; CLASS  ChildClass
+
+(type $innerclassinheritance.ChildClass (struct
+ (field $fieldInParentOuter@innerclassinheritance.ParentOuter i32)
+ (field $fieldInOuter@innerclassinheritance.ChildClass i32)
+))
+
+;;; ChildClass()
+(func $<init><>:void@innerclassinheritance.ChildClass
+ (param $this (ref null $innerclassinheritance.ChildClass))
+ (result (ref null $innerclassinheritance.ChildClass))
+ (block $return.label
+  (block
+   ;; ParentOuter.this.ParentOuter.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void ChildClass.funInOuter()
+(func $funInOuter<>:void@innerclassinheritance.ChildClass
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; void ChildClass.testLocalClass()
+(func $testLocalClass<>:void@innerclassinheritance.ChildClass
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; ChildClass.this.new $1LocalClass.<init>().test();
+   
+  )
+ )
+)
+
+;;; CLASS  InnerClass
+
+(type $innerclassinheritance.ChildClass.InnerClass (struct
+ (field $fieldInParentInner@innerclassinheritance.ParentInner i32)
+ (field $this@innerclassinheritance.ChildClass.InnerClass (ref null $innerclassinheritance.ChildClass))
+ (field $fieldInInner@innerclassinheritance.ChildClass.InnerClass i32)
+))
+
+;;; InnerClass()
+(func $<init><>:void@innerclassinheritance.ChildClass.InnerClass
+ (param $this (ref null $innerclassinheritance.ChildClass.InnerClass))
+ (result (ref null $innerclassinheritance.ChildClass.InnerClass))
+ (block $return.label
+  (block
+   ;; ParentInner.this.ParentInner.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void InnerClass.funInInner()
+(func $funInInner<>:void@innerclassinheritance.ChildClass.InnerClass
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; int InnerClass.testInnerClass()
+(func $testInnerClass<>:int@innerclassinheritance.ChildClass.InnerClass
+ (param $this (ref null $java.lang.Object))
+ (result i32)
+ (local $return.value i32)
+ (local $a i32)
+ (block $return.label
+  (block
+   ;; InnerClass.this.this.funInParentOuter();
+   
+   ;; InnerClass.this.this.funInParentOuter();
+   
+   ;; InnerClass.this.this.funInOuter();
+   
+   ;; InnerClass.this.this.funInOuter();
+   
+   ;; InnerClass.this.funInParentInner();
+   
+   ;; InnerClass.this.funInParentInner();
+   
+   ;; InnerClass.this.funInInner();
+   
+   ;; InnerClass.this.funInInner();
+   
+   ;; int a = InnerClass.this.this.fieldInParentOuter;
+   (local.set $a (i32.const 0))
+   
+   ;; (a = InnerClass.this.this.fieldInParentOuter);
+   (local.set $a (i32.const 0))
+   ;; (a = InnerClass.this.this.fieldInOuter);
+   (local.set $a (i32.const 0))
+   ;; (a = InnerClass.this.this.fieldInOuter);
+   (local.set $a (i32.const 0))
+   ;; (a = InnerClass.this.fieldInParentInner);
+   (local.set $a (i32.const 0))
+   ;; (a = InnerClass.this.fieldInParentInner);
+   (local.set $a (i32.const 0))
+   ;; (a = InnerClass.this.fieldInInner);
+   (local.set $a (i32.const 0))
+   ;; (a = InnerClass.this.fieldInInner);
+   (local.set $a (i32.const 0))
+   ;; return a;
+   (local.set $return.value (local.get $a))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; CLASS  LocalClass
+
+(type $innerclassinheritance.ChildClass.1LocalClass (struct
+ (field $fieldInParentOuter@innerclassinheritance.ParentOuter i32)
+ (field $fieldInOuter@innerclassinheritance.ChildClass i32)
+ (field $this@innerclassinheritance.ChildClass.1LocalClass (ref null $innerclassinheritance.ChildClass))
+ (field $object@innerclassinheritance.ChildClass.1LocalClass (ref null $java.lang.Object))
+))
+
+;;; LocalClass()
+(func $<init><>:void@innerclassinheritance.ChildClass.1LocalClass
+ (param $this (ref null $innerclassinheritance.ChildClass.1LocalClass))
+ (result (ref null $innerclassinheritance.ChildClass.1LocalClass))
+ (block $return.label
+  (block
+   ;; ChildClass.this.ChildClass.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void LocalClass.funInParentOuter()
+(func $funInParentOuter<>:void@innerclassinheritance.ChildClass.1LocalClass
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; void LocalClass.test()
+(func $test<>:void@innerclassinheritance.ChildClass.1LocalClass
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; $1LocalClass.this.funInOuter();
+   
+   ;; $1LocalClass.this.this.funInOuter();
+   
+   ;; $1LocalClass.this.funInParentOuter();
+   
+   ;; $1LocalClass.this.funInParentOuter();
+   
+   ;; $1LocalClass.this.this.funInParentOuter();
+   
+  )
+ )
+)
+;;; Code for innerclassinheritance.MultipleNestings
+
+;;; CLASS  MultipleNestings
+
+(type $innerclassinheritance.MultipleNestings (struct
+))
+
+;;; MultipleNestings()
+(func $<init><>:void@innerclassinheritance.MultipleNestings
+ (param $this (ref null $innerclassinheritance.MultipleNestings))
+ (result (ref null $innerclassinheritance.MultipleNestings))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void MultipleNestings.funInM()
+(func $funInM<>:void@innerclassinheritance.MultipleNestings
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; CLASS  Parent
+
+(type $innerclassinheritance.MultipleNestings.Parent (struct
+ (field $this@innerclassinheritance.MultipleNestings.Parent (ref null $innerclassinheritance.MultipleNestings))
+))
+
+;;; Parent()
+(func $<init><>:void@innerclassinheritance.MultipleNestings.Parent
+ (param $this (ref null $innerclassinheritance.MultipleNestings.Parent))
+ (result (ref null $innerclassinheritance.MultipleNestings.Parent))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void Parent.fun()
+(func $fun<>:void@innerclassinheritance.MultipleNestings.Parent
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; CLASS  InnerClass1
+
+(type $innerclassinheritance.MultipleNestings.InnerClass1 (struct
+ (field $this@innerclassinheritance.MultipleNestings.Parent (ref null $innerclassinheritance.MultipleNestings))
+ (field $this@innerclassinheritance.MultipleNestings.InnerClass1 (ref null $innerclassinheritance.MultipleNestings))
+))
+
+;;; InnerClass1()
+(func $<init><>:void@innerclassinheritance.MultipleNestings.InnerClass1
+ (param $this (ref null $innerclassinheritance.MultipleNestings.InnerClass1))
+ (result (ref null $innerclassinheritance.MultipleNestings.InnerClass1))
+ (block $return.label
+  (block
+   ;; Parent.this.Parent.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void InnerClass1.funInI1()
+(func $funInI1<>:void@innerclassinheritance.MultipleNestings.InnerClass1
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; CLASS  InnerClass2
+
+(type $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 (struct
+ (field $this@innerclassinheritance.MultipleNestings.Parent (ref null $innerclassinheritance.MultipleNestings))
+ (field $this@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 (ref null $innerclassinheritance.MultipleNestings.InnerClass1))
+))
+
+;;; InnerClass2()
+(func $<init><>:void@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2
+ (param $this (ref null $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2))
+ (result (ref null $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2))
+ (block $return.label
+  (block
+   ;; Parent.this.Parent.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void InnerClass2.funInI2()
+(func $funInI2<>:void@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; void InnerClass2.test()
+(func $test<>:void@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; InnerClass2.this.fun();
+   
+   ;; InnerClass2.this.fun();
+   
+   ;; InnerClass2.this.this.fun();
+   
+   ;; InnerClass2.this.this.this.funInM();
+   
+   ;; InnerClass2.this.this.this.funInM();
+   
+   ;; InnerClass2.this.this.funInI1();
+   
+   ;; InnerClass2.this.this.funInI1();
+   
+   ;; InnerClass2.this.funInI2();
+   
+  )
+ )
+)
+

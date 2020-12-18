@@ -1,0 +1,199 @@
+;;; Code for jsoptional.Main
+
+;;; CLASS  Main
+
+(type $jsoptional.Main (struct
+ (field $f@jsoptional.Main (ref null $jsoptional.Main.Function))
+))
+
+;;; void Main.method1(int i1, Double d, Integer i)
+(func $method1<int|java.lang.Double|java.lang.Integer>:void@jsoptional.Main
+ (param $this (ref null $java.lang.Object))
+ (param $i1 i32)
+ (param $d (ref null $java.lang.Double))
+ (param $i (ref null $java.lang.Integer))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; void Main.method2(String s1, Double d, Boolean... i)
+(func $method2<java.lang.String|java.lang.Double|java.lang.Boolean<>>:void@jsoptional.Main
+ (param $this (ref null $java.lang.Object))
+ (param $s1 (ref null $java.lang.String))
+ (param $d (ref null $java.lang.Double))
+ (param $i (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; Main(String a)
+(func $<init><java.lang.String>:void@jsoptional.Main
+ (param $this (ref null $jsoptional.Main))
+ (param $a (ref null $java.lang.String))
+ (result (ref null $jsoptional.Main))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void Main.testFunction(Function f)
+(func $testFunction<jsoptional.Main.Function>:void@jsoptional.Main
+ (param $this (ref null $java.lang.Object))
+ (param $f (ref null $jsoptional.Main.Function))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; void Main.testOptionalFunction(Function f)
+(func $testOptionalFunction<jsoptional.Main.Function>:void@jsoptional.Main
+ (param $this (ref null $java.lang.Object))
+ (param $f (ref null $jsoptional.Main.Function))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; INTERFACE  Function
+
+(type $jsoptional.Main.Function (struct
+))
+
+;;; CLASS  AFunction
+
+(type $jsoptional.Main.AFunction (struct
+))
+
+;;; AFunction()
+(func $<init><>:void@jsoptional.Main.AFunction
+ (param $this (ref null $jsoptional.Main.AFunction))
+ (result (ref null $jsoptional.Main.AFunction))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; Object AFunction.f1(String i, Object... args)
+(func $f1<java.lang.String|java.lang.Object<>>:java.lang.Object@jsoptional.Main.AFunction
+ (param $this (ref null $java.lang.Object))
+ (param $i (ref null $java.lang.String))
+ (param $args (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; return args[0];
+   (local.set $return.value (ref.null $java.lang.Object))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; INTERFACE  I
+
+(type $jsoptional.Main.I (struct
+))
+
+;;; CLASS  TemplatedSubtype
+
+(type $jsoptional.Main.TemplatedSubtype (struct
+))
+
+;;; TemplatedSubtype()
+(func $<init><>:void@jsoptional.Main.TemplatedSubtype
+ (param $this (ref null $jsoptional.Main.TemplatedSubtype))
+ (result (ref null $jsoptional.Main.TemplatedSubtype))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void TemplatedSubtype.m(T t, Object o)
+(func $m<java.lang.String|java.lang.Object>:void@jsoptional.Main.TemplatedSubtype
+ (param $this (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.String))
+ (param $o (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; CLASS  SpecializedSubtype
+
+(type $jsoptional.Main.SpecializedSubtype (struct
+ (field $this@jsoptional.Main.SpecializedSubtype (ref null $jsoptional.Main))
+))
+
+;;; SpecializedSubtype(Object a)
+(func $<init><java.lang.Object>:void@jsoptional.Main.SpecializedSubtype
+ (param $this (ref null $jsoptional.Main.SpecializedSubtype))
+ (param $a (ref null $java.lang.Object))
+ (result (ref null $jsoptional.Main.SpecializedSubtype))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void SpecializedSubtype.m(String t, Object o)
+(func $m<java.lang.String|java.lang.Object>:void@jsoptional.Main.SpecializedSubtype
+ (param $this (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.String))
+ (param $o (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; CLASS  NonJsTypeSubtype
+
+(type $jsoptional.Main.NonJsTypeSubtype (struct
+))
+
+;;; NonJsTypeSubtype()
+(func $<init><>:void@jsoptional.Main.NonJsTypeSubtype
+ (param $this (ref null $jsoptional.Main.NonJsTypeSubtype))
+ (result (ref null $jsoptional.Main.NonJsTypeSubtype))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void NonJsTypeSubtype.m(String t, Object o)
+(func $m<java.lang.String|java.lang.Object>:void@jsoptional.Main.NonJsTypeSubtype
+ (param $this (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.String))
+ (param $o (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+

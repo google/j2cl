@@ -1,0 +1,161 @@
+;;; Code for devirtualizedsupermethodcall.Main
+
+;;; CLASS  SubNumber
+
+(type $devirtualizedsupermethodcall.SubNumber (struct
+))
+
+;;; SubNumber()
+(func $<init><>:void@devirtualizedsupermethodcall.SubNumber
+ (param $this (ref null $devirtualizedsupermethodcall.SubNumber))
+ (result (ref null $devirtualizedsupermethodcall.SubNumber))
+ (block $return.label
+  (block
+   ;; Number.this.Number.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; int SubNumber.intValue()
+(func $intValue<>:int@devirtualizedsupermethodcall.SubNumber
+ (param $this (ref null $java.lang.Object))
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return 0;
+   (local.set $return.value (i32.const 0))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; long SubNumber.longValue()
+(func $longValue<>:long@devirtualizedsupermethodcall.SubNumber
+ (param $this (ref null $java.lang.Object))
+ (result i64)
+ (local $return.value i64)
+ (block $return.label
+  (block
+   ;; return ((long) 0);
+   (local.set $return.value (i64.const 0))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; float SubNumber.floatValue()
+(func $floatValue<>:float@devirtualizedsupermethodcall.SubNumber
+ (param $this (ref null $java.lang.Object))
+ (result f32)
+ (local $return.value f32)
+ (block $return.label
+  (block
+   ;; return 0;
+   (local.set $return.value (f32.const 0.0))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; double SubNumber.doubleValue()
+(func $doubleValue<>:double@devirtualizedsupermethodcall.SubNumber
+ (param $this (ref null $java.lang.Object))
+ (result f64)
+ (local $return.value f64)
+ (block $return.label
+  (block
+   ;; return 0;
+   (local.set $return.value (f64.const 0.0))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; CLASS  FooCallsSuperObjectMethod
+
+(type $devirtualizedsupermethodcall.FooCallsSuperObjectMethod (struct
+))
+
+;;; FooCallsSuperObjectMethod()
+(func $<init><>:void@devirtualizedsupermethodcall.FooCallsSuperObjectMethod
+ (param $this (ref null $devirtualizedsupermethodcall.FooCallsSuperObjectMethod))
+ (result (ref null $devirtualizedsupermethodcall.FooCallsSuperObjectMethod))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; int FooCallsSuperObjectMethod.hashCode()
+(func $hashCode<>:int@devirtualizedsupermethodcall.FooCallsSuperObjectMethod
+ (param $this (ref null $java.lang.Object))
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return super.hashCode();
+   (local.set $return.value (i32.const 0))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; CLASS  Main
+
+(type $devirtualizedsupermethodcall.Main (struct
+))
+
+;;; Main()
+(func $<init><>:void@devirtualizedsupermethodcall.Main
+ (param $this (ref null $devirtualizedsupermethodcall.Main))
+ (result (ref null $devirtualizedsupermethodcall.Main))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void Main.main()
+(func $main<>:void@devirtualizedsupermethodcall.Main
+ (param $this (ref null $java.lang.Object))
+ (local $fooCallsSuperObjectMethods (ref null $devirtualizedsupermethodcall.FooCallsSuperObjectMethod))
+ (local $sn (ref null $devirtualizedsupermethodcall.SubNumber))
+ (block $return.label
+  (block
+   ;; FooCallsSuperObjectMethod fooCallsSuperObjectMethods = new FooCallsSuperObjectMethod.<init>();
+   (local.set $fooCallsSuperObjectMethods (call $<init><>:void@devirtualizedsupermethodcall.FooCallsSuperObjectMethod (struct.new_default_with_rtt $devirtualizedsupermethodcall.FooCallsSuperObjectMethod (global.get $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.rtt)) ))
+   
+   ;; fooCallsSuperObjectMethods.hashCode();
+   (i32.const 0)
+   drop
+   ;; SubNumber sn = new SubNumber.<init>();
+   (local.set $sn (call $<init><>:void@devirtualizedsupermethodcall.SubNumber (struct.new_default_with_rtt $devirtualizedsupermethodcall.SubNumber (global.get $devirtualizedsupermethodcall.SubNumber.rtt)) ))
+   
+   ;; sn.byteValue();
+   (i32.const 0)
+   drop
+   ;; sn.doubleValue();
+   (f64.const 0.0)
+   drop
+   ;; sn.floatValue();
+   (f32.const 0.0)
+   drop
+   ;; sn.intValue();
+   (i32.const 0)
+   drop
+   ;; sn.shortValue();
+   (i32.const 0)
+   drop
+  )
+ )
+)
+

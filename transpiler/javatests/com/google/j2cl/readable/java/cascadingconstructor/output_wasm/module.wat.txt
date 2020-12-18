@@ -1,0 +1,42 @@
+;;; Code for cascadingconstructor.CascadingConstructor
+
+;;; CLASS  CascadingConstructor
+
+(type $cascadingconstructor.CascadingConstructor (struct
+ (field $a@cascadingconstructor.CascadingConstructor i32)
+ (field $b@cascadingconstructor.CascadingConstructor i32)
+))
+
+;;; CascadingConstructor(int a, int b)
+(func $<init><int|int>:void@cascadingconstructor.CascadingConstructor
+ (param $this (ref null $cascadingconstructor.CascadingConstructor))
+ (param $a i32)
+ (param $b i32)
+ (result (ref null $cascadingconstructor.CascadingConstructor))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+   ;; (CascadingConstructor.this.a = a);
+   
+   ;; (CascadingConstructor.this.b = b);
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CascadingConstructor(int a)
+(func $<init><int>:void@cascadingconstructor.CascadingConstructor
+ (param $this (ref null $cascadingconstructor.CascadingConstructor))
+ (param $a i32)
+ (result (ref null $cascadingconstructor.CascadingConstructor))
+ (block $return.label
+  (block
+   ;; CascadingConstructor.this.CascadingConstructor.<init>(a,(a * 2));
+   
+  )
+ )
+ (local.get $this)
+)
+

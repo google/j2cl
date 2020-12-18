@@ -1,0 +1,206 @@
+;;; Code for mixednestings.MixedNestings
+
+;;; INTERFACE  MyInterface
+
+(type $mixednestings.MyInterface (struct
+))
+
+;;; CLASS  MixedNestings
+
+(type $mixednestings.MixedNestings (struct
+))
+
+;;; MixedNestings()
+(func $<init><>:void@mixednestings.MixedNestings
+ (param $this (ref null $mixednestings.MixedNestings))
+ (result (ref null $mixednestings.MixedNestings))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void MixedNestings.mm()
+(func $mm<>:void@mixednestings.MixedNestings
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; void MixedNestings.test()
+(func $test<>:void@mixednestings.MixedNestings
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; MixedNestings.this.new A.<init>().a();
+   
+  )
+ )
+)
+
+;;; CLASS  A
+
+(type $mixednestings.MixedNestings.A (struct
+ (field $this@mixednestings.MixedNestings.A (ref null $mixednestings.MixedNestings))
+))
+
+;;; A()
+(func $<init><>:void@mixednestings.MixedNestings.A
+ (param $this (ref null $mixednestings.MixedNestings.A))
+ (result (ref null $mixednestings.MixedNestings.A))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void A.aa()
+(func $aa<>:void@mixednestings.MixedNestings.A
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; void A.a()
+(func $a<>:void@mixednestings.MixedNestings.A
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; A.this.new $1B.<init>().b();
+   (i32.const 0)
+   drop
+  )
+ )
+)
+
+;;; CLASS  B
+
+(type $mixednestings.MixedNestings.A.1B (struct
+ (field $this@mixednestings.MixedNestings.A.1B (ref null $mixednestings.MixedNestings.A))
+))
+
+;;; B()
+(func $<init><>:void@mixednestings.MixedNestings.A.1B
+ (param $this (ref null $mixednestings.MixedNestings.A.1B))
+ (result (ref null $mixednestings.MixedNestings.A.1B))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void B.bb()
+(func $bb<>:void@mixednestings.MixedNestings.A.1B
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; int B.b()
+(func $b<>:int@mixednestings.MixedNestings.A.1B
+ (param $this (ref null $java.lang.Object))
+ (result i32)
+ (local $return.value i32)
+ (local $i (ref null $mixednestings.MyInterface))
+ (block $return.label
+  (block
+   ;; MyInterface i = $1B.this.new $1.<init>();
+   (local.set $i (call $<init><>:void@mixednestings.MixedNestings.A.1B.1 (struct.new_default_with_rtt $mixednestings.MixedNestings.A.1B.1 (global.get $mixednestings.MixedNestings.A.1B.1.rtt)) ))
+   
+   ;; return i.fun(400);
+   (local.set $return.value (i32.const 0))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; CLASS  <anonymous> implements MyInterface
+
+(type $mixednestings.MixedNestings.A.1B.1 (struct
+ (field $this@mixednestings.MixedNestings.A.1B.1 (ref null $mixednestings.MixedNestings.A.1B))
+))
+
+;;; <anonymous> implements MyInterface()
+(func $<init><>:void@mixednestings.MixedNestings.A.1B.1
+ (param $this (ref null $mixednestings.MixedNestings.A.1B.1))
+ (result (ref null $mixednestings.MixedNestings.A.1B.1))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; int <anonymous> implements MyInterface.fun(int a)
+(func $fun<int>:int@mixednestings.MixedNestings.A.1B.1
+ (param $this (ref null $java.lang.Object))
+ (param $a i32)
+ (result i32)
+ (local $return.value i32)
+ (local $ii (ref null $mixednestings.MyInterface))
+ (local $n i32)
+ (local $iii (ref null $mixednestings.MyInterface))
+ (local $m i32)
+ (block $return.label
+  (block
+   ;; MyInterface ii = function (int n){
+   (local.set $ii (ref.null $mixednestings.MyInterface))
+   
+   ;; return ii.fun(300);
+   (local.set $return.value (i32.const 0))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; CLASS  <anonymous> implements MyInterface
+
+(type $mixednestings.MixedNestings.A.1B.1.1 (struct
+ (field $this@mixednestings.MixedNestings.A.1B.1.1 (ref null $mixednestings.MixedNestings.A.1B.1))
+))
+
+;;; <anonymous> implements MyInterface()
+(func $<init><>:void@mixednestings.MixedNestings.A.1B.1.1
+ (param $this (ref null $mixednestings.MixedNestings.A.1B.1.1))
+ (result (ref null $mixednestings.MixedNestings.A.1B.1.1))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; int <anonymous> implements MyInterface.fun(int b)
+(func $fun<int>:int@mixednestings.MixedNestings.A.1B.1.1
+ (param $this (ref null $java.lang.Object))
+ (param $b i32)
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return b;
+   (local.set $return.value (local.get $b))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+

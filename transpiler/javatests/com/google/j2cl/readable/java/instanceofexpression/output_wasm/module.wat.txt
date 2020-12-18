@@ -1,0 +1,174 @@
+;;; Code for instanceofexpression.InstanceofExpressions
+
+;;; CLASS  InstanceofExpressions
+
+(type $instanceofexpression.InstanceofExpressions (struct
+))
+
+;;; InstanceofExpressions()
+(func $<init><>:void@instanceofexpression.InstanceofExpressions
+ (param $this (ref null $instanceofexpression.InstanceofExpressions))
+ (result (ref null $instanceofexpression.InstanceofExpressions))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void InstanceofExpressions.testInstanceofClass()
+(func $testInstanceofClass<>:void@instanceofexpression.InstanceofExpressions
+ (param $this (ref null $java.lang.Object))
+ (local $object (ref null $java.lang.Object))
+ (local $b i32)
+ (block $return.label
+  (block
+   ;; Object object = new InstanceofExpressions.<init>();
+   (local.set $object (call $<init><>:void@instanceofexpression.InstanceofExpressions (struct.new_default_with_rtt $instanceofexpression.InstanceofExpressions (global.get $instanceofexpression.InstanceofExpressions.rtt)) ))
+   
+   ;; boolean b;
+   
+   ;; (b = object instanceof Object);
+   (local.set $b (i32.const 0))
+   ;; (b = object instanceof InstanceofExpressions);
+   (local.set $b (i32.const 0))
+   ;; (b = object instanceof String);
+   (local.set $b (i32.const 0)))
+ )
+)
+
+;;; void InstanceofExpressions.testInstanceofInterface()
+(func $testInstanceofInterface<>:void@instanceofexpression.InstanceofExpressions
+ (param $this (ref null $java.lang.Object))
+ (local $o (ref null $java.lang.Object))
+ (local $b i32)
+ (block $return.label
+  (block
+   ;; Object o = new Object.<init>();
+   (local.set $o (call $<init><>:void@java.lang.Object (struct.new_default_with_rtt $java.lang.Object (global.get $java.lang.Object.rtt)) ))
+   
+   ;; boolean b;
+   
+   ;; (b = o instanceof Serializable);
+   (local.set $b (i32.const 0))
+   ;; (b = InstanceofExpressions.this.new $1.<init>() instanceof Serializable);
+   (local.set $b (i32.const 0)))
+ )
+)
+
+;;; void InstanceofExpressions.testInstanceofBoxedType()
+(func $testInstanceofBoxedType<>:void@instanceofexpression.InstanceofExpressions
+ (param $this (ref null $java.lang.Object))
+ (local $b (ref null $java.lang.Object))
+ (local $a i32)
+ (local $d (ref null $java.lang.Double))
+ (block $return.label
+  (block
+   ;; Object b = new Integer.<init>(1);
+   (local.set $b (call $<init><int>:void@java.lang.Integer (struct.new_default_with_rtt $java.lang.Integer (global.get $java.lang.Integer.rtt)) (i32.const 1)))
+   
+   ;; boolean a = b instanceof Byte;
+   (local.set $a (i32.const 0))
+   
+   ;; (a = b instanceof Double);
+   (local.set $a (i32.const 0))
+   ;; (a = b instanceof Float);
+   (local.set $a (i32.const 0))
+   ;; (a = b instanceof Integer);
+   (local.set $a (i32.const 0))
+   ;; (a = b instanceof Long);
+   (local.set $a (i32.const 0))
+   ;; (a = b instanceof Short);
+   (local.set $a (i32.const 0))
+   ;; (a = b instanceof Number);
+   (local.set $a (i32.const 0))
+   ;; (a = b instanceof Character);
+   (local.set $a (i32.const 0))
+   ;; (a = b instanceof Boolean);
+   (local.set $a (i32.const 0))
+   ;; Double d = null;
+   (local.set $d (ref.null $java.lang.Double))
+   
+   ;; (a = d instanceof Object);
+   (local.set $a (i32.const 0))
+   ;; (a = d instanceof Number);
+   (local.set $a (i32.const 0))
+   ;; (a = d instanceof Double);
+   (local.set $a (i32.const 0)))
+ )
+)
+
+;;; void InstanceofExpressions.testInstanceOfArray()
+(func $testInstanceOfArray<>:void@instanceofexpression.InstanceofExpressions
+ (param $this (ref null $java.lang.Object))
+ (local $object (ref null $java.lang.Object))
+ (local $objectArray (ref null $java.lang.Object))
+ (local $objectDoubleArray (ref null $java.lang.Object))
+ (local $stringArray (ref null $java.lang.Object))
+ (local $a i32)
+ (block $return.label
+  (block
+   ;; Object object = new Object.<init>();
+   (local.set $object (call $<init><>:void@java.lang.Object (struct.new_default_with_rtt $java.lang.Object (global.get $java.lang.Object.rtt)) ))
+   
+   ;; Object[] objectArray = new Object[0];
+   (local.set $objectArray (ref.null $java.lang.Object))
+   
+   ;; Object[][] objectDoubleArray = new Object[0][];
+   (local.set $objectDoubleArray (ref.null $java.lang.Object))
+   
+   ;; String[] stringArray = new String[0];
+   (local.set $stringArray (ref.null $java.lang.Object))
+   
+   ;; boolean a;
+   
+   ;; (a = object instanceof Object[]);
+   (local.set $a (i32.const 0))
+   ;; (a = object instanceof String[][]);
+   (local.set $a (i32.const 0))
+   ;; (a = object instanceof Object[]);
+   (local.set $a (i32.const 0))
+   ;; (a = object instanceof String[][]);
+   (local.set $a (i32.const 0))
+   ;; (a = objectArray instanceof Object[]);
+   (local.set $a (i32.const 0))
+   ;; (a = objectArray instanceof String[]);
+   (local.set $a (i32.const 0))
+   ;; (a = objectArray instanceof Object[][]);
+   (local.set $a (i32.const 0))
+   ;; (a = objectArray instanceof String[][]);
+   (local.set $a (i32.const 0))
+   ;; (a = objectDoubleArray instanceof Object[]);
+   (local.set $a (i32.const 0))
+   ;; (a = objectDoubleArray instanceof Object[][]);
+   (local.set $a (i32.const 0))
+   ;; (a = objectDoubleArray instanceof String[][]);
+   (local.set $a (i32.const 0))
+   ;; (a = stringArray instanceof Object[]);
+   (local.set $a (i32.const 0))
+   ;; (a = stringArray instanceof String[]);
+   (local.set $a (i32.const 0)))
+ )
+)
+
+;;; CLASS  <anonymous> implements Serializable
+
+(type $instanceofexpression.InstanceofExpressions.1 (struct
+ (field $this@instanceofexpression.InstanceofExpressions.1 (ref null $instanceofexpression.InstanceofExpressions))
+))
+
+;;; <anonymous> implements Serializable()
+(func $<init><>:void@instanceofexpression.InstanceofExpressions.1
+ (param $this (ref null $instanceofexpression.InstanceofExpressions.1))
+ (result (ref null $instanceofexpression.InstanceofExpressions.1))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+

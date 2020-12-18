@@ -1,0 +1,61 @@
+;;; Code for unimplementedbridgemethod.Foo
+
+;;; INTERFACE  I
+
+(type $unimplementedbridgemethod.I (struct
+))
+
+;;; int I.staticFoo()
+(func $staticFoo<>:int@unimplementedbridgemethod.I
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return 0;
+   (local.set $return.value (i32.const 0))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; INTERFACE  J
+
+(type $unimplementedbridgemethod.J (struct
+))
+
+;;; CLASS  Bar
+
+(type $unimplementedbridgemethod.Bar (struct
+))
+
+;;; Bar()
+(func $<init><>:void@unimplementedbridgemethod.Bar
+ (param $this (ref null $unimplementedbridgemethod.Bar))
+ (result (ref null $unimplementedbridgemethod.Bar))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  Foo
+
+(type $unimplementedbridgemethod.Foo (struct
+))
+
+;;; Foo()
+(func $<init><>:void@unimplementedbridgemethod.Foo
+ (param $this (ref null $unimplementedbridgemethod.Foo))
+ (result (ref null $unimplementedbridgemethod.Foo))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+

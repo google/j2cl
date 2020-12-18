@@ -1,0 +1,175 @@
+;;; Code for simplelocalclass.SimpleLocalClass
+
+;;; CLASS  SimpleLocalClass
+
+(type $simplelocalclass.SimpleLocalClass (struct
+))
+
+;;; SimpleLocalClass()
+(func $<init><>:void@simplelocalclass.SimpleLocalClass
+ (param $this (ref null $simplelocalclass.SimpleLocalClass))
+ (result (ref null $simplelocalclass.SimpleLocalClass))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void SimpleLocalClass.test(int p)
+(func $test<int>:void@simplelocalclass.SimpleLocalClass
+ (param $this (ref null $java.lang.Object))
+ (param $p i32)
+ (local $localVar i32)
+ (block $return.label
+  (block
+   ;; int localVar = 1;
+   (local.set $localVar (i32.const 1))
+   
+   ;; SimpleLocalClass.this.new $1InnerClass.<init>().fun();
+   (i32.const 0)
+   drop
+   ;; SimpleLocalClass.this.new $1InnerClassWithoutCaptures.<init>();
+   (call $<init><>:void@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (struct.new_default_with_rtt $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (global.get $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.rtt)) )
+   drop
+  )
+ )
+)
+
+;;; void SimpleLocalClass.fun()
+(func $fun<>:void@simplelocalclass.SimpleLocalClass
+ (param $this (ref null $java.lang.Object))
+ (local $localVar i32)
+ (block $return.label
+  (block
+   ;; int localVar = 1;
+   (local.set $localVar (i32.const 1))
+   
+  )
+ )
+)
+
+;;; void SimpleLocalClass.foo()
+(func $foo<>:void@simplelocalclass.SimpleLocalClass
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; CLASS  InnerClass
+
+(type $simplelocalclass.SimpleLocalClass.1InnerClass (struct
+ (field $this@simplelocalclass.SimpleLocalClass.1InnerClass (ref null $simplelocalclass.SimpleLocalClass))
+ (field $localVar@simplelocalclass.SimpleLocalClass.1InnerClass i32)
+ (field $p@simplelocalclass.SimpleLocalClass.1InnerClass i32)
+))
+
+;;; InnerClass()
+(func $<init><>:void@simplelocalclass.SimpleLocalClass.1InnerClass
+ (param $this (ref null $simplelocalclass.SimpleLocalClass.1InnerClass))
+ (result (ref null $simplelocalclass.SimpleLocalClass.1InnerClass))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; int InnerClass.fun()
+(func $fun<>:int@simplelocalclass.SimpleLocalClass.1InnerClass
+ (param $this (ref null $java.lang.Object))
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return ($1InnerClass.this.localVar + $1InnerClass.this.p);
+   (local.set $return.value (i32.add (i32.const 0) (i32.const 0)))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; CLASS  InnerClassWithoutCaptures
+
+(type $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (struct
+ (field $this@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (ref null $simplelocalclass.SimpleLocalClass))
+))
+
+;;; InnerClassWithoutCaptures()
+(func $<init><>:void@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures
+ (param $this (ref null $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures))
+ (result (ref null $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  InnerClass
+
+(type $simplelocalclass.SimpleLocalClass.2InnerClass (struct
+ (field $this@simplelocalclass.SimpleLocalClass.2InnerClass (ref null $simplelocalclass.SimpleLocalClass))
+ (field $field@simplelocalclass.SimpleLocalClass.2InnerClass i32)
+ (field $localVar@simplelocalclass.SimpleLocalClass.2InnerClass i32)
+))
+
+;;; InnerClass()
+(func $<init><>:void@simplelocalclass.SimpleLocalClass.2InnerClass
+ (param $this (ref null $simplelocalclass.SimpleLocalClass.2InnerClass))
+ (result (ref null $simplelocalclass.SimpleLocalClass.2InnerClass))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  Abc$InnerClass
+
+(type $simplelocalclass.SimpleLocalClass.1Abc$InnerClass (struct
+ (field $this@simplelocalclass.SimpleLocalClass.1Abc$InnerClass (ref null $simplelocalclass.SimpleLocalClass))
+))
+
+;;; Abc$InnerClass()
+(func $<init><>:void@simplelocalclass.SimpleLocalClass.1Abc$InnerClass
+ (param $this (ref null $simplelocalclass.SimpleLocalClass.1Abc$InnerClass))
+ (result (ref null $simplelocalclass.SimpleLocalClass.1Abc$InnerClass))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  Klm$InnerClass
+
+(type $simplelocalclass.SimpleLocalClass.1Klm$InnerClass (struct
+ (field $this@simplelocalclass.SimpleLocalClass.1Klm$InnerClass (ref null $simplelocalclass.SimpleLocalClass))
+))
+
+;;; Klm$InnerClass()
+(func $<init><>:void@simplelocalclass.SimpleLocalClass.1Klm$InnerClass
+ (param $this (ref null $simplelocalclass.SimpleLocalClass.1Klm$InnerClass))
+ (result (ref null $simplelocalclass.SimpleLocalClass.1Klm$InnerClass))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+

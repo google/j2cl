@@ -1,0 +1,60 @@
+;;; Code for packageinfosubpackage.package-info
+;;; Code for packageinfosubpackage.Foo
+
+;;; CLASS  Foo
+
+(type $packageinfosubpackage.Foo (struct
+ (field $nativeBar@packageinfosubpackage.Foo (ref null $packageinfosubpackage.Foo.NativeBar))
+))
+
+;;; Foo()
+(func $<init><>:void@packageinfosubpackage.Foo
+ (param $this (ref null $packageinfosubpackage.Foo))
+ (result (ref null $packageinfosubpackage.Foo))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  NativeBar
+
+(type $packageinfosubpackage.Foo.NativeBar (struct
+))
+
+;;; NativeBar()
+(func $<init><>:void@packageinfosubpackage.Foo.NativeBar
+ (param $this (ref null $packageinfosubpackage.Foo.NativeBar))
+ (result (ref null $packageinfosubpackage.Foo.NativeBar))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+;;; Code for packageinfosubpackage.subpackage.Bar
+
+;;; CLASS  Bar
+
+(global $WOO@packageinfosubpackage.subpackage.Bar i32 (i32.const 0))
+(type $packageinfosubpackage.subpackage.Bar (struct
+))
+
+;;; Bar()
+(func $<init><>:void@packageinfosubpackage.subpackage.Bar
+ (param $this (ref null $packageinfosubpackage.subpackage.Bar))
+ (result (ref null $packageinfosubpackage.subpackage.Bar))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+

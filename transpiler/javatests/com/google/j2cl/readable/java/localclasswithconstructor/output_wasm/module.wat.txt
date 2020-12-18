@@ -1,0 +1,79 @@
+;;; Code for localclasswithconstructor.LocalClassWithConstructor
+
+;;; CLASS  LocalClassWithConstructor
+
+(type $localclasswithconstructor.LocalClassWithConstructor (struct
+))
+
+;;; LocalClassWithConstructor()
+(func $<init><>:void@localclasswithconstructor.LocalClassWithConstructor
+ (param $this (ref null $localclasswithconstructor.LocalClassWithConstructor))
+ (result (ref null $localclasswithconstructor.LocalClassWithConstructor))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void LocalClassWithConstructor.test(int p)
+(func $test<int>:void@localclasswithconstructor.LocalClassWithConstructor
+ (param $this (ref null $java.lang.Object))
+ (param $p i32)
+ (local $localVar i32)
+ (block $return.label
+  (block
+   ;; int localVar = 1;
+   (local.set $localVar (i32.const 1))
+   
+   ;; LocalClassWithConstructor.this.new $1LocalClass.<init>(1);
+   (call $<init><int>:void@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (struct.new_default_with_rtt $localclasswithconstructor.LocalClassWithConstructor.1LocalClass (global.get $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.rtt)) (i32.const 1))
+   drop
+  )
+ )
+)
+
+;;; CLASS  LocalClass
+
+(type $localclasswithconstructor.LocalClassWithConstructor.1LocalClass (struct
+ (field $this@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (ref null $localclasswithconstructor.LocalClassWithConstructor))
+ (field $field@localclasswithconstructor.LocalClassWithConstructor.1LocalClass i32)
+ (field $localVar@localclasswithconstructor.LocalClassWithConstructor.1LocalClass i32)
+ (field $p@localclasswithconstructor.LocalClassWithConstructor.1LocalClass i32)
+))
+
+;;; LocalClass(int a, int b)
+(func $<init><int|int>:void@localclasswithconstructor.LocalClassWithConstructor.1LocalClass
+ (param $this (ref null $localclasswithconstructor.LocalClassWithConstructor.1LocalClass))
+ (param $a i32)
+ (param $b i32)
+ (result (ref null $localclasswithconstructor.LocalClassWithConstructor.1LocalClass))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+   ;; ($1LocalClass.this.field = (($1LocalClass.this.localVar + a) + b));
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; LocalClass(int a)
+(func $<init><int>:void@localclasswithconstructor.LocalClassWithConstructor.1LocalClass
+ (param $this (ref null $localclasswithconstructor.LocalClassWithConstructor.1LocalClass))
+ (param $a i32)
+ (result (ref null $localclasswithconstructor.LocalClassWithConstructor.1LocalClass))
+ (block $return.label
+  (block
+   ;; $1LocalClass.this.$1LocalClass.<init>(a,$1LocalClass.this.p);
+   
+   ;; ($1LocalClass.this.field = $1LocalClass.this.localVar);
+   
+  )
+ )
+ (local.get $this)
+)
+

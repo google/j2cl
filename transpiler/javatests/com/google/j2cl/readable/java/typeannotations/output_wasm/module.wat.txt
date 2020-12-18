@@ -1,0 +1,175 @@
+;;; Code for typeannotations.ParametricType
+
+;;; INTERFACE  ParametricType
+
+(type $typeannotations.ParametricType (struct
+))
+
+;;; List<T> ParametricType.m(List<Map<String[], Map<List<String>[], String[]>>> l)
+(func $m<java.util.List>:java.util.List@typeannotations.ParametricType
+ (param $this (ref null $java.lang.Object))
+ (param $l (ref null $java.util.List))
+ (result (ref null $java.util.List))
+ (local $return.value (ref null $java.util.List))
+ (block $return.label
+  (block
+   ;; return null;
+   (local.set $return.value (ref.null $java.util.List))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+;;; Code for typeannotations.TypeAnnotations
+
+;;; CLASS  AbstractType
+
+(type $typeannotations.AbstractType (struct
+))
+
+;;; AbstractType()
+(func $<init><>:void@typeannotations.AbstractType
+ (param $this (ref null $typeannotations.AbstractType))
+ (result (ref null $typeannotations.AbstractType))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  AbstractTypeNonNull
+
+(type $typeannotations.AbstractTypeNonNull (struct
+))
+
+;;; AbstractTypeNonNull()
+(func $<init><>:void@typeannotations.AbstractTypeNonNull
+ (param $this (ref null $typeannotations.AbstractTypeNonNull))
+ (result (ref null $typeannotations.AbstractTypeNonNull))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  Parent
+
+(type $typeannotations.Parent (struct
+))
+
+;;; Parent()
+(func $<init><>:void@typeannotations.Parent
+ (param $this (ref null $typeannotations.Parent))
+ (result (ref null $typeannotations.Parent))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; Parent Parent.m(String s, Parent c)
+(func $m<java.lang.String|typeannotations.Parent>:typeannotations.Parent@typeannotations.Parent
+ (param $this (ref null $java.lang.Object))
+ (param $s (ref null $java.lang.String))
+ (param $c (ref null $typeannotations.Parent))
+ (result (ref null $typeannotations.Parent))
+ (local $return.value (ref null $typeannotations.Parent))
+ (block $return.label
+  (block
+   ;; return c;
+   (local.set $return.value (local.get $c))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; List<Parent> Parent.m(List<String> l, Parent c)
+(func $m<java.util.List|typeannotations.Parent>:java.util.List@typeannotations.Parent
+ (param $this (ref null $java.lang.Object))
+ (param $l (ref null $java.util.List))
+ (param $c (ref null $typeannotations.Parent))
+ (result (ref null $java.util.List))
+ (local $return.value (ref null $java.util.List))
+ (block $return.label
+  (block
+   ;; return new ArrayList.<init>();
+   (local.set $return.value (call $<init><>:void@java.util.ArrayList (struct.new_default_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.rtt)) ))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; CLASS  ChildWithNullableParent
+
+(type $typeannotations.ChildWithNullableParent (struct
+))
+
+;;; ChildWithNullableParent()
+(func $<init><>:void@typeannotations.ChildWithNullableParent
+ (param $this (ref null $typeannotations.ChildWithNullableParent))
+ (result (ref null $typeannotations.ChildWithNullableParent))
+ (block $return.label
+  (block
+   ;; Parent.this.Parent.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  ChildWithNonNullableParent
+
+(type $typeannotations.ChildWithNonNullableParent (struct
+))
+
+;;; ChildWithNonNullableParent()
+(func $<init><>:void@typeannotations.ChildWithNonNullableParent
+ (param $this (ref null $typeannotations.ChildWithNonNullableParent))
+ (result (ref null $typeannotations.ChildWithNonNullableParent))
+ (block $return.label
+  (block
+   ;; Parent.this.Parent.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  TypeAnnotations
+
+(type $typeannotations.TypeAnnotations (struct
+))
+
+;;; TypeAnnotations()
+(func $<init><>:void@typeannotations.TypeAnnotations
+ (param $this (ref null $typeannotations.TypeAnnotations))
+ (result (ref null $typeannotations.TypeAnnotations))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void TypeAnnotations.main()
+(func $main<>:void@typeannotations.TypeAnnotations
+ (local $list (ref null $java.util.List))
+ (block $return.label
+  (block
+   ;; List<String> list = new ArrayList.<init>();
+   (local.set $list (call $<init><>:void@java.util.ArrayList (struct.new_default_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.rtt)) ))
+   
+  )
+ )
+)
+

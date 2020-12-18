@@ -1,0 +1,101 @@
+;;; Code for instancequalifieronstaticfield.InstanceQualifiers
+
+;;; CLASS  InstanceQualifiers
+
+(global $staticField@instancequalifieronstaticfield.InstanceQualifiers i32 (i32.const 0))
+(global $sideEffectCount@instancequalifieronstaticfield.InstanceQualifiers i32 (i32.const 0))
+(type $instancequalifieronstaticfield.InstanceQualifiers (struct
+))
+
+;;; InstanceQualifiers()
+(func $<init><>:void@instancequalifieronstaticfield.InstanceQualifiers
+ (param $this (ref null $instancequalifieronstaticfield.InstanceQualifiers))
+ (result (ref null $instancequalifieronstaticfield.InstanceQualifiers))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; int InstanceQualifiers.getStaticValue()
+(func $getStaticValue<>:int@instancequalifieronstaticfield.InstanceQualifiers
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return instancequalifieronstaticfield.InstanceQualifiers.staticField;
+   (local.set $return.value (i32.const 0))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; InstanceQualifiers InstanceQualifiers.getStaticInstanceQualifiers()
+(func $getStaticInstanceQualifiers<>:instancequalifieronstaticfield.InstanceQualifiers@instancequalifieronstaticfield.InstanceQualifiers
+ (result (ref null $instancequalifieronstaticfield.InstanceQualifiers))
+ (local $return.value (ref null $instancequalifieronstaticfield.InstanceQualifiers))
+ (block $return.label
+  (block
+   ;; return null;
+   (local.set $return.value (ref.null $instancequalifieronstaticfield.InstanceQualifiers))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; void InstanceQualifiers.main(String... args)
+(func $main<java.lang.String<>>:void@instancequalifieronstaticfield.InstanceQualifiers
+ (param $args (ref null $java.lang.Object))
+ (local $main (ref null $instancequalifieronstaticfield.InstanceQualifiers))
+ (local $i i32)
+ (local $$qualifier (ref null $instancequalifieronstaticfield.InstanceQualifiers))
+ (local $$qualifier_1 (ref null $instancequalifieronstaticfield.InstanceQualifiers))
+ (block $return.label
+  (block
+   ;; InstanceQualifiers main = new InstanceQualifiers.<init>();
+   (local.set $main (call $<init><>:void@instancequalifieronstaticfield.InstanceQualifiers (struct.new_default_with_rtt $instancequalifieronstaticfield.InstanceQualifiers (global.get $instancequalifieronstaticfield.InstanceQualifiers.rtt)) ))
+   
+   ;; int i = 0;
+   (local.set $i (i32.const 0))
+   
+   (block
+    ;; (instancequalifieronstaticfield.InstanceQualifiers.staticField = 100);
+    
+   )
+   (block
+    ;; (main.staticField = 100);
+    
+    ;; (main.getStaticInstanceQualifiers().staticField = 300);
+    
+   )
+   (block
+    ;; (i = main.staticField);
+    (local.set $i (i32.const 0))
+    ;; (i = main.getStaticValue());
+    (local.set $i (call $getStaticValue<>:int@instancequalifieronstaticfield.InstanceQualifiers ))
+    ;; (i = main.getStaticInstanceQualifiers().staticField);
+    (local.set $i (i32.const 0)))
+   (block
+    ;; (main.staticField = (main.staticField + 100));
+    
+    (block
+     ;; InstanceQualifiers $qualifier = main.getStaticInstanceQualifiers();
+     (local.set $$qualifier (call $getStaticInstanceQualifiers<>:instancequalifieronstaticfield.InstanceQualifiers@instancequalifieronstaticfield.InstanceQualifiers ))
+     
+     ;; ($qualifier.staticField = ($qualifier.staticField + 100));
+     
+    ))
+   (block
+    (block
+     ;; InstanceQualifiers $qualifier = main.getStaticInstanceQualifiers().getStaticInstanceQualifiers();
+     (local.set $$qualifier_1 (call $getStaticInstanceQualifiers<>:instancequalifieronstaticfield.InstanceQualifiers@instancequalifieronstaticfield.InstanceQualifiers ))
+     
+     ;; ($qualifier.staticField = ($qualifier.staticField + main.getStaticInstanceQualifiers().getStaticInstanceQualifiers().getStaticValue()));
+     
+    )))
+ )
+)
+

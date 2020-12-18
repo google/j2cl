@@ -1,0 +1,248 @@
+;;; Code for multipleabstractparents.MultipleAbstractParents
+
+;;; CLASS  MultipleAbstractParents
+
+(type $multipleabstractparents.MultipleAbstractParents (struct
+))
+
+;;; MultipleAbstractParents()
+(func $<init><>:void@multipleabstractparents.MultipleAbstractParents
+ (param $this (ref null $multipleabstractparents.MultipleAbstractParents))
+ (result (ref null $multipleabstractparents.MultipleAbstractParents))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void MultipleAbstractParents.main(String... args)
+(func $main<java.lang.String<>>:void@multipleabstractparents.MultipleAbstractParents
+ (param $args (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; assert new ArrayList.<init>().getFoo(null).equals("AbstractCollection");
+   ;; unimplemented statement AssertStatement
+   
+   ;; assert new StringList.<init>().getFoo(null).equals("AbstractCollection");
+   ;; unimplemented statement AssertStatement
+   
+   ;; assert ((IStringList) new StringList.<init>()).getFoo(null).equals("AbstractCollection");
+   ;; unimplemented statement AssertStatement
+   
+  )
+ )
+)
+
+;;; INTERFACE  List
+
+(type $multipleabstractparents.MultipleAbstractParents.List (struct
+))
+
+;;; INTERFACE  Collection
+
+(type $multipleabstractparents.MultipleAbstractParents.Collection (struct
+))
+
+;;; CLASS  AbstractListCollection
+
+(type $multipleabstractparents.MultipleAbstractParents.AbstractListCollection (struct
+))
+
+;;; AbstractListCollection()
+(func $<init><>:void@multipleabstractparents.MultipleAbstractParents.AbstractListCollection
+ (param $this (ref null $multipleabstractparents.MultipleAbstractParents.AbstractListCollection))
+ (result (ref null $multipleabstractparents.MultipleAbstractParents.AbstractListCollection))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  AbstractCollection
+
+(type $multipleabstractparents.MultipleAbstractParents.AbstractCollection (struct
+))
+
+;;; AbstractCollection()
+(func $<init><>:void@multipleabstractparents.MultipleAbstractParents.AbstractCollection
+ (param $this (ref null $multipleabstractparents.MultipleAbstractParents.AbstractCollection))
+ (result (ref null $multipleabstractparents.MultipleAbstractParents.AbstractCollection))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; String AbstractCollection.getFoo(T t)
+(func $getFoo<java.lang.Object>:java.lang.String@multipleabstractparents.MultipleAbstractParents.AbstractCollection
+ (param $this (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
+ (result (ref null $java.lang.String))
+ (local $return.value (ref null $java.lang.String))
+ (block $return.label
+  (block
+   ;; return "AbstractCollection";
+   (local.set $return.value (ref.null $java.lang.String))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; CLASS  AbstractList
+
+(type $multipleabstractparents.MultipleAbstractParents.AbstractList (struct
+))
+
+;;; AbstractList()
+(func $<init><>:void@multipleabstractparents.MultipleAbstractParents.AbstractList
+ (param $this (ref null $multipleabstractparents.MultipleAbstractParents.AbstractList))
+ (result (ref null $multipleabstractparents.MultipleAbstractParents.AbstractList))
+ (block $return.label
+  (block
+   ;; AbstractCollection.this.AbstractCollection.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  AbstractList2
+
+(type $multipleabstractparents.MultipleAbstractParents.AbstractList2 (struct
+))
+
+;;; AbstractList2()
+(func $<init><>:void@multipleabstractparents.MultipleAbstractParents.AbstractList2
+ (param $this (ref null $multipleabstractparents.MultipleAbstractParents.AbstractList2))
+ (result (ref null $multipleabstractparents.MultipleAbstractParents.AbstractList2))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  ArrayList
+
+(type $multipleabstractparents.MultipleAbstractParents.ArrayList (struct
+))
+
+;;; ArrayList()
+(func $<init><>:void@multipleabstractparents.MultipleAbstractParents.ArrayList
+ (param $this (ref null $multipleabstractparents.MultipleAbstractParents.ArrayList))
+ (result (ref null $multipleabstractparents.MultipleAbstractParents.ArrayList))
+ (block $return.label
+  (block
+   ;; AbstractList.this.AbstractList.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; INTERFACE  IStringList
+
+(type $multipleabstractparents.MultipleAbstractParents.IStringList (struct
+))
+
+;;; CLASS  AbstractStringList
+
+(type $multipleabstractparents.MultipleAbstractParents.AbstractStringList (struct
+))
+
+;;; AbstractStringList()
+(func $<init><>:void@multipleabstractparents.MultipleAbstractParents.AbstractStringList
+ (param $this (ref null $multipleabstractparents.MultipleAbstractParents.AbstractStringList))
+ (result (ref null $multipleabstractparents.MultipleAbstractParents.AbstractStringList))
+ (block $return.label
+  (block
+   ;; AbstractList.this.AbstractList.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  AbstractStringList2
+
+(type $multipleabstractparents.MultipleAbstractParents.AbstractStringList2 (struct
+))
+
+;;; AbstractStringList2()
+(func $<init><>:void@multipleabstractparents.MultipleAbstractParents.AbstractStringList2
+ (param $this (ref null $multipleabstractparents.MultipleAbstractParents.AbstractStringList2))
+ (result (ref null $multipleabstractparents.MultipleAbstractParents.AbstractStringList2))
+ (block $return.label
+  (block
+   ;; AbstractList2.this.AbstractList2.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  AbstractStringList3
+
+(type $multipleabstractparents.MultipleAbstractParents.AbstractStringList3 (struct
+))
+
+;;; AbstractStringList3()
+(func $<init><>:void@multipleabstractparents.MultipleAbstractParents.AbstractStringList3
+ (param $this (ref null $multipleabstractparents.MultipleAbstractParents.AbstractStringList3))
+ (result (ref null $multipleabstractparents.MultipleAbstractParents.AbstractStringList3))
+ (block $return.label
+  (block
+   ;; AbstractList2.this.AbstractList2.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  StringList
+
+(type $multipleabstractparents.MultipleAbstractParents.StringList (struct
+))
+
+;;; StringList()
+(func $<init><>:void@multipleabstractparents.MultipleAbstractParents.StringList
+ (param $this (ref null $multipleabstractparents.MultipleAbstractParents.StringList))
+ (result (ref null $multipleabstractparents.MultipleAbstractParents.StringList))
+ (block $return.label
+  (block
+   ;; AbstractStringList.this.AbstractStringList.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  StringListChild
+
+(type $multipleabstractparents.MultipleAbstractParents.StringListChild (struct
+))
+
+;;; StringListChild()
+(func $<init><>:void@multipleabstractparents.MultipleAbstractParents.StringListChild
+ (param $this (ref null $multipleabstractparents.MultipleAbstractParents.StringListChild))
+ (result (ref null $multipleabstractparents.MultipleAbstractParents.StringListChild))
+ (block $return.label
+  (block
+   ;; StringList.this.StringList.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+

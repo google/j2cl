@@ -1,0 +1,53 @@
+;;; Code for aptgeneratordep.Dummy
+
+;;; CLASS  Dummy
+
+(type $aptgeneratordep.Dummy (struct
+))
+
+;;; Dummy()
+(func $<init><>:void@aptgeneratordep.Dummy
+ (param $this (ref null $aptgeneratordep.Dummy))
+ (result (ref null $aptgeneratordep.Dummy))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+;;; Code for aptgeneratordep.Foo
+
+;;; CLASS  Foo
+
+(type $aptgeneratordep.Foo (struct
+))
+
+;;; Foo()
+(func $<init><>:void@aptgeneratordep.Foo
+ (param $this (ref null $aptgeneratordep.Foo))
+ (result (ref null $aptgeneratordep.Foo))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; String Foo.toString()
+(func $toString<>:java.lang.String@aptgeneratordep.Foo
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.String))
+ (local $return.value (ref null $java.lang.String))
+ (block $return.label
+  (block
+   ;; return <expr>.getSimpleName();
+   (local.set $return.value (ref.null $java.lang.String))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+

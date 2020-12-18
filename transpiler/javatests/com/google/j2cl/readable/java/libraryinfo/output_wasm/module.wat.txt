@@ -1,0 +1,242 @@
+;;; Code for libraryinfo.Main
+
+;;; CLASS  Main
+
+(global $STATIC_FIELD@libraryinfo.Main (ref null $java.lang.String) (ref.null $java.lang.String))
+(type $libraryinfo.Main (struct
+))
+
+;;; Main()
+(func $<init><>:void@libraryinfo.Main
+ (param $this (ref null $libraryinfo.Main))
+ (result (ref null $libraryinfo.Main))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void Main.entryPoint()
+(func $entryPoint<>:void@libraryinfo.Main
+ (local $jsFunction (ref null $libraryinfo.Main.Function))
+ (local $s (ref null $java.lang.String))
+ (block $return.label
+  (block
+   ;; new Main.<init>().execute();
+   
+   ;; Function jsFunction = new FunctionImpl.<init>();
+   (local.set $jsFunction (call $<init><>:void@libraryinfo.Main.FunctionImpl (struct.new_default_with_rtt $libraryinfo.Main.FunctionImpl (global.get $libraryinfo.Main.FunctionImpl.rtt)) ))
+   
+   ;; (jsFunction = function (String s){
+   (local.set $jsFunction (ref.null $libraryinfo.Main.Function))
+   ;; jsFunction.apply("foo");
+   
+   ;; new MyJsType.<init>();
+   (call $<init><>:void@libraryinfo.Main.MyJsType (struct.new_default_with_rtt $libraryinfo.Main.MyJsType (global.get $libraryinfo.Main.MyJsType.rtt)) )
+   drop
+   ;; new $1.<init>();
+   (call $<init><>:void@libraryinfo.Main.1 (struct.new_default_with_rtt $libraryinfo.Main.1 (global.get $libraryinfo.Main.1.rtt)) )
+   drop
+  )
+ )
+)
+
+;;; void Main.execute()
+(func $execute<>:void@libraryinfo.Main
+ (param $this (ref null $libraryinfo.Main))
+ (block $return.label
+  (block
+   ;; libraryinfo.Main.log("Foo");
+   (call $log<java.lang.Object>:void@libraryinfo.Main (ref.null $java.lang.String)))
+ )
+)
+
+;;; String Main.toString()
+(func $toString<>:java.lang.String@libraryinfo.Main
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.String))
+ (local $return.value (ref null $java.lang.String))
+ (block $return.label
+  (block
+   ;; return super.toString();
+   (local.set $return.value (ref.null $java.lang.String))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; void Main.log(Object o)
+(func $log<java.lang.Object>:void@libraryinfo.Main
+ (param $o (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; void Main.main()
+(func $main<>:void@libraryinfo.Main
+ (local $foo (ref null $libraryinfo.Main.Foo))
+ (local $clazz (ref null $java.lang.Class))
+ (block $return.label
+  (block
+   ;; Foo foo = null;
+   (local.set $foo (ref.null $libraryinfo.Main.Foo))
+   
+   ;; foo.instanceMethod();
+   
+   ;; Class<?> clazz = <expr>;
+   (local.set $clazz (ref.null $java.lang.Class))
+   
+  )
+ )
+)
+
+;;; INTERFACE  JsTypeInterface
+
+(type $libraryinfo.Main.JsTypeInterface (struct
+))
+
+;;; INTERFACE  FunctionnalInterface
+
+(type $libraryinfo.Main.FunctionnalInterface (struct
+))
+
+;;; INTERFACE  JsAccessibleFunctionnalInterface
+
+(type $libraryinfo.Main.JsAccessibleFunctionnalInterface (struct
+))
+
+;;; INTERFACE  Function
+
+(type $libraryinfo.Main.Function (struct
+))
+
+;;; CLASS  FunctionImpl
+
+(type $libraryinfo.Main.FunctionImpl (struct
+))
+
+;;; FunctionImpl()
+(func $<init><>:void@libraryinfo.Main.FunctionImpl
+ (param $this (ref null $libraryinfo.Main.FunctionImpl))
+ (result (ref null $libraryinfo.Main.FunctionImpl))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void FunctionImpl.apply(String s)
+(func $apply<java.lang.String>:void@libraryinfo.Main.FunctionImpl
+ (param $this (ref null $java.lang.Object))
+ (param $s (ref null $java.lang.String))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; ENUM  MyEnum
+
+(global $A@libraryinfo.Main.MyEnum (ref null $libraryinfo.Main.MyEnum) (ref.null $libraryinfo.Main.MyEnum))
+(global $B@libraryinfo.Main.MyEnum (ref null $libraryinfo.Main.MyEnum) (ref.null $libraryinfo.Main.MyEnum))
+(global $C@libraryinfo.Main.MyEnum (ref null $libraryinfo.Main.MyEnum) (ref.null $libraryinfo.Main.MyEnum))
+(type $libraryinfo.Main.MyEnum (struct
+))
+
+;;; MyEnum()
+(func $<init><>:void@libraryinfo.Main.MyEnum
+ (param $this (ref null $libraryinfo.Main.MyEnum))
+ (result (ref null $libraryinfo.Main.MyEnum))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  MyJsType
+
+(type $libraryinfo.Main.MyJsType (struct
+ (field $someField@libraryinfo.Main.MyJsType (ref null $java.lang.Object))
+))
+
+;;; MyJsType()
+(func $<init><>:void@libraryinfo.Main.MyJsType
+ (param $this (ref null $libraryinfo.Main.MyJsType))
+ (result (ref null $libraryinfo.Main.MyJsType))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+   ;; (MyJsType.this.someField = new Main.<init>());
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  <anonymous> extends Object
+
+(type $libraryinfo.Main.1 (struct
+))
+
+;;; <anonymous> extends Object()
+(func $<init><>:void@libraryinfo.Main.1
+ (param $this (ref null $libraryinfo.Main.1))
+ (result (ref null $libraryinfo.Main.1))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void <anonymous> extends Object.foo()
+(func $foo<>:void@libraryinfo.Main.1
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; CLASS  Foo
+
+(type $libraryinfo.Main.Foo (struct
+ (field $this@libraryinfo.Main.Foo (ref null $libraryinfo.Main))
+))
+
+;;; Foo()
+(func $<init><>:void@libraryinfo.Main.Foo
+ (param $this (ref null $libraryinfo.Main.Foo))
+ (result (ref null $libraryinfo.Main.Foo))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void Foo.instanceMethod()
+(func $instanceMethod<>:void@libraryinfo.Main.Foo
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+

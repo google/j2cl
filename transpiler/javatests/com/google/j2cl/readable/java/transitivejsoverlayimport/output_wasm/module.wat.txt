@@ -1,0 +1,205 @@
+;;; Code for transitivejsoverlayimport.Main
+
+;;; CLASS  Immediate
+
+(type $transitivejsoverlayimport.Immediate (struct
+))
+
+;;; Immediate()
+(func $<init><>:void@transitivejsoverlayimport.Immediate
+ (param $this (ref null $transitivejsoverlayimport.Immediate))
+ (result (ref null $transitivejsoverlayimport.Immediate))
+ (block $return.label
+  (block
+   ;; Transitive.this.Transitive.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void Immediate.doImmediateInstanceMethod()
+(func $doImmediateInstanceMethod<>:void@transitivejsoverlayimport.Immediate
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; CLASS  NonNativeUpper
+
+(type $transitivejsoverlayimport.NonNativeUpper (struct
+))
+
+;;; NonNativeUpper()
+(func $<init><>:void@transitivejsoverlayimport.NonNativeUpper
+ (param $this (ref null $transitivejsoverlayimport.NonNativeUpper))
+ (result (ref null $transitivejsoverlayimport.NonNativeUpper))
+ (block $return.label
+  (block
+   ;; Immediate.this.Immediate.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void NonNativeUpper.doNonNativeUpperInstanceMethod()
+(func $doNonNativeUpperInstanceMethod<>:void@transitivejsoverlayimport.NonNativeUpper
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; CLASS  NonNativeLower
+
+(type $transitivejsoverlayimport.NonNativeLower (struct
+))
+
+;;; NonNativeLower()
+(func $<init><>:void@transitivejsoverlayimport.NonNativeLower
+ (param $this (ref null $transitivejsoverlayimport.NonNativeLower))
+ (result (ref null $transitivejsoverlayimport.NonNativeLower))
+ (block $return.label
+  (block
+   ;; NonNativeUpper.this.NonNativeUpper.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void NonNativeLower.doNonNativeLowerInstanceMethod()
+(func $doNonNativeLowerInstanceMethod<>:void@transitivejsoverlayimport.NonNativeLower
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; CLASS  Transitive
+
+(type $transitivejsoverlayimport.Transitive (struct
+))
+
+;;; Transitive()
+(func $<init><>:void@transitivejsoverlayimport.Transitive
+ (param $this (ref null $transitivejsoverlayimport.Transitive))
+ (result (ref null $transitivejsoverlayimport.Transitive))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; int Transitive.getJsProperty()
+(func $getJsProperty<>:int@transitivejsoverlayimport.Transitive
+ (param $this (ref null $java.lang.Object))
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; void Transitive.doTransitiveInstanceMethod(String arg1)
+(func $doTransitiveInstanceMethod<java.lang.String>:void@transitivejsoverlayimport.Transitive
+ (param $this (ref null $java.lang.Object))
+ (param $arg1 (ref null $java.lang.String))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; CLASS  Main
+
+(type $transitivejsoverlayimport.Main (struct
+))
+
+;;; Main()
+(func $<init><>:void@transitivejsoverlayimport.Main
+ (param $this (ref null $transitivejsoverlayimport.Main))
+ (result (ref null $transitivejsoverlayimport.Main))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void Main.main(String... args)
+(func $main<java.lang.String<>>:void@transitivejsoverlayimport.Main
+ (param $args (ref null $java.lang.Object))
+ (local $transitive (ref null $transitivejsoverlayimport.Transitive))
+ (local $immediate (ref null $transitivejsoverlayimport.Immediate))
+ (local $nonNativeUpper (ref null $transitivejsoverlayimport.NonNativeUpper))
+ (local $nonNativeLower (ref null $transitivejsoverlayimport.NonNativeLower))
+ (block $return.label
+  (block
+   (block
+    ;; Transitive transitive = null;
+    (local.set $transitive (ref.null $transitivejsoverlayimport.Transitive))
+    
+    ;; transitive.doTransitiveInstanceMethod("arg1");
+    
+    ;; transitive.getJsProperty();
+    (i32.const 0)
+    drop
+   )
+   (block
+    ;; Immediate immediate = null;
+    (local.set $immediate (ref.null $transitivejsoverlayimport.Immediate))
+    
+    ;; immediate.doTransitiveInstanceMethod("arg1");
+    
+    ;; immediate.getJsProperty();
+    (i32.const 0)
+    drop
+    ;; immediate.doImmediateInstanceMethod();
+    
+   )
+   (block
+    ;; NonNativeUpper nonNativeUpper = null;
+    (local.set $nonNativeUpper (ref.null $transitivejsoverlayimport.NonNativeUpper))
+    
+    ;; nonNativeUpper.doTransitiveInstanceMethod("arg1");
+    
+    ;; nonNativeUpper.getJsProperty();
+    (i32.const 0)
+    drop
+    ;; nonNativeUpper.doImmediateInstanceMethod();
+    
+    ;; nonNativeUpper.doNonNativeUpperInstanceMethod();
+    
+   )
+   (block
+    ;; NonNativeLower nonNativeLower = null;
+    (local.set $nonNativeLower (ref.null $transitivejsoverlayimport.NonNativeLower))
+    
+    ;; nonNativeLower.doTransitiveInstanceMethod("arg1");
+    
+    ;; nonNativeLower.getJsProperty();
+    (i32.const 0)
+    drop
+    ;; nonNativeLower.doImmediateInstanceMethod();
+    
+    ;; nonNativeLower.doNonNativeUpperInstanceMethod();
+    
+    ;; nonNativeLower.doNonNativeLowerInstanceMethod();
+    
+   ))
+ )
+)
+

@@ -1,0 +1,118 @@
+;;; Code for gwtincompatible.GwtIncompatible
+
+;;; INTERFACE  GwtIncompatible
+
+(type $gwtincompatible.GwtIncompatible (struct
+))
+;;; Code for gwtincompatible.Implementor
+
+;;; CLASS  Implementor
+
+(type $gwtincompatible.Implementor (struct
+))
+
+;;; Implementor()
+(func $<init><>:void@gwtincompatible.Implementor
+ (param $this (ref null $gwtincompatible.Implementor))
+ (result (ref null $gwtincompatible.Implementor))
+ (block $return.label
+  (block
+   ;; ClassWithAbstractMethod.this.ClassWithAbstractMethod.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void Implementor.compatibleMethod()
+(func $compatibleMethod<>:void@gwtincompatible.Implementor
+ (param $this (ref null $java.lang.Object))
+ (local $a i32)
+ (block $return.label
+  (block
+   ;; int a = 4;
+   (local.set $a (i32.const 4))
+   
+  )
+ )
+)
+
+;;; ENUM  SomeEnum
+
+(global $COMPATIBLE@gwtincompatible.Implementor.SomeEnum (ref null $gwtincompatible.Implementor.SomeEnum) (ref.null $gwtincompatible.Implementor.SomeEnum))
+(type $gwtincompatible.Implementor.SomeEnum (struct
+ (field $name@java.lang.Enum (ref null $java.lang.String))
+ (field $ordinal@java.lang.Enum i32)
+))
+
+;;; SomeEnum()
+(func $<init><>:void@gwtincompatible.Implementor.SomeEnum
+ (param $this (ref null $gwtincompatible.Implementor.SomeEnum))
+ (result (ref null $gwtincompatible.Implementor.SomeEnum))
+ (block $return.label
+  (block
+   ;; Enum.this.Enum.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  <anonymous> extends SomeEnum
+
+(type $gwtincompatible.Implementor.SomeEnum.1 (struct
+ (field $name@java.lang.Enum (ref null $java.lang.String))
+ (field $ordinal@java.lang.Enum i32)
+))
+
+;;; <anonymous> extends SomeEnum()
+(func $<init><>:void@gwtincompatible.Implementor.SomeEnum.1
+ (param $this (ref null $gwtincompatible.Implementor.SomeEnum.1))
+ (result (ref null $gwtincompatible.Implementor.SomeEnum.1))
+ (block $return.label
+  (block
+   ;; SomeEnum.this.SomeEnum.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void <anonymous> extends SomeEnum.method()
+(func $method<>:void@gwtincompatible.Implementor.SomeEnum.1
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+;;; Code for gwtincompatible.Interface
+
+;;; INTERFACE  Interface
+
+(type $gwtincompatible.Interface (struct
+))
+
+;;; INTERFACE  NestedInterface
+
+(type $gwtincompatible.Interface.NestedInterface (struct
+))
+
+;;; CLASS  ClassWithAbstractMethod
+
+(type $gwtincompatible.Interface.ClassWithAbstractMethod (struct
+))
+
+;;; ClassWithAbstractMethod()
+(func $<init><>:void@gwtincompatible.Interface.ClassWithAbstractMethod
+ (param $this (ref null $gwtincompatible.Interface.ClassWithAbstractMethod))
+ (result (ref null $gwtincompatible.Interface.ClassWithAbstractMethod))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+

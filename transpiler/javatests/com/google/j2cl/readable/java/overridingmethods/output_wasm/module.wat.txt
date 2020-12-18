@@ -1,0 +1,70 @@
+;;; Code for overridingmethods.Child
+
+;;; INTERFACE  SomeInterface
+
+(type $overridingmethods.SomeInterface (struct
+))
+
+;;; CLASS  Parent
+
+(type $overridingmethods.Parent (struct
+))
+
+;;; Parent()
+(func $<init><>:void@overridingmethods.Parent
+ (param $this (ref null $overridingmethods.Parent))
+ (result (ref null $overridingmethods.Parent))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void Parent.fun()
+(func $fun<>:void@overridingmethods.Parent
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; CLASS  Child
+
+(type $overridingmethods.Child (struct
+))
+
+;;; Child()
+(func $<init><>:void@overridingmethods.Child
+ (param $this (ref null $overridingmethods.Child))
+ (result (ref null $overridingmethods.Child))
+ (block $return.label
+  (block
+   ;; Parent.this.Parent.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void Child.fun()
+(func $fun<>:void@overridingmethods.Child
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; void Child.bar()
+(func $bar<>:void@overridingmethods.Child
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+

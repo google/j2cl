@@ -1,0 +1,255 @@
+;;; Code for nestedgenericclass.NestedGenericClass
+
+;;; CLASS  NestedGenericClass
+
+(type $nestedgenericclass.NestedGenericClass (struct
+))
+
+;;; NestedGenericClass()
+(func $<init><>:void@nestedgenericclass.NestedGenericClass
+ (param $this (ref null $nestedgenericclass.NestedGenericClass))
+ (result (ref null $nestedgenericclass.NestedGenericClass))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void NestedGenericClass.fun(S t)
+(func $fun<java.lang.Object>:void@nestedgenericclass.NestedGenericClass
+ (param $this (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; NestedGenericClass.this.new $1E.<init>();
+   (call $<init><>:void@nestedgenericclass.NestedGenericClass.1E (struct.new_default_with_rtt $nestedgenericclass.NestedGenericClass.1E (global.get $nestedgenericclass.NestedGenericClass.1E.rtt)) )
+   drop
+   ;; NestedGenericClass.this.new $1F.<init>();
+   (call $<init><>:void@nestedgenericclass.NestedGenericClass.1F (struct.new_default_with_rtt $nestedgenericclass.NestedGenericClass.1F (global.get $nestedgenericclass.NestedGenericClass.1F.rtt)) )
+   drop
+  )
+ )
+)
+
+;;; void NestedGenericClass.bar()
+(func $bar<>:void@nestedgenericclass.NestedGenericClass
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; NestedGenericClass.this.new $1G.<init>().bar();
+   
+  )
+ )
+)
+
+;;; void NestedGenericClass.test()
+(func $test<>:void@nestedgenericclass.NestedGenericClass
+ (param $this (ref null $java.lang.Object))
+ (local $n (ref null $nestedgenericclass.NestedGenericClass))
+ (local $a (ref null $nestedgenericclass.NestedGenericClass.A))
+ (local $b (ref null $nestedgenericclass.NestedGenericClass.A.B))
+ (block $return.label
+  (block
+   ;; NestedGenericClass<Number> n = new NestedGenericClass.<init>();
+   (local.set $n (call $<init><>:void@nestedgenericclass.NestedGenericClass (struct.new_default_with_rtt $nestedgenericclass.NestedGenericClass (global.get $nestedgenericclass.NestedGenericClass.rtt)) ))
+   
+   ;; A<Error, Number> a = n.new A.<init>();
+   (local.set $a (call $<init><>:void@nestedgenericclass.NestedGenericClass.A (struct.new_default_with_rtt $nestedgenericclass.NestedGenericClass.A (global.get $nestedgenericclass.NestedGenericClass.A.rtt)) ))
+   
+   ;; B<Exception, Error, Number> b = a.new B.<init>();
+   (local.set $b (call $<init><>:void@nestedgenericclass.NestedGenericClass.A.B (struct.new_default_with_rtt $nestedgenericclass.NestedGenericClass.A.B (global.get $nestedgenericclass.NestedGenericClass.A.B.rtt)) ))
+   
+   ;; n.new C.<init>();
+   (call $<init><>:void@nestedgenericclass.NestedGenericClass.C (struct.new_default_with_rtt $nestedgenericclass.NestedGenericClass.C (global.get $nestedgenericclass.NestedGenericClass.C.rtt)) )
+   drop
+   ;; n.new C.<init>().new D.<init>();
+   (call $<init><>:void@nestedgenericclass.NestedGenericClass.C.D (struct.new_default_with_rtt $nestedgenericclass.NestedGenericClass.C.D (global.get $nestedgenericclass.NestedGenericClass.C.D.rtt)) )
+   drop
+  )
+ )
+)
+
+;;; CLASS  A
+
+(type $nestedgenericclass.NestedGenericClass.A (struct
+ (field $this@nestedgenericclass.NestedGenericClass.A (ref null $nestedgenericclass.NestedGenericClass))
+))
+
+;;; A()
+(func $<init><>:void@nestedgenericclass.NestedGenericClass.A
+ (param $this (ref null $nestedgenericclass.NestedGenericClass.A))
+ (result (ref null $nestedgenericclass.NestedGenericClass.A))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  B
+
+(type $nestedgenericclass.NestedGenericClass.A.B (struct
+ (field $this@nestedgenericclass.NestedGenericClass.A.B (ref null $nestedgenericclass.NestedGenericClass.A))
+))
+
+;;; B()
+(func $<init><>:void@nestedgenericclass.NestedGenericClass.A.B
+ (param $this (ref null $nestedgenericclass.NestedGenericClass.A.B))
+ (result (ref null $nestedgenericclass.NestedGenericClass.A.B))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; B(U u)
+(func $<init><java.lang.Object>:void@nestedgenericclass.NestedGenericClass.A.B
+ (param $this (ref null $nestedgenericclass.NestedGenericClass.A.B))
+ (param $u (ref null $java.lang.Object))
+ (result (ref null $nestedgenericclass.NestedGenericClass.A.B))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  C
+
+(type $nestedgenericclass.NestedGenericClass.C (struct
+ (field $this@nestedgenericclass.NestedGenericClass.C (ref null $nestedgenericclass.NestedGenericClass))
+ (field $c@nestedgenericclass.NestedGenericClass.C (ref null $java.lang.Object))
+))
+
+;;; C()
+(func $<init><>:void@nestedgenericclass.NestedGenericClass.C
+ (param $this (ref null $nestedgenericclass.NestedGenericClass.C))
+ (result (ref null $nestedgenericclass.NestedGenericClass.C))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  D
+
+(type $nestedgenericclass.NestedGenericClass.C.D (struct
+ (field $this@nestedgenericclass.NestedGenericClass.C.D (ref null $nestedgenericclass.NestedGenericClass.C))
+ (field $d@nestedgenericclass.NestedGenericClass.C.D (ref null $java.lang.Object))
+))
+
+;;; D()
+(func $<init><>:void@nestedgenericclass.NestedGenericClass.C.D
+ (param $this (ref null $nestedgenericclass.NestedGenericClass.C.D))
+ (result (ref null $nestedgenericclass.NestedGenericClass.C.D))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  E
+
+(type $nestedgenericclass.NestedGenericClass.1E (struct
+ (field $this@nestedgenericclass.NestedGenericClass.1E (ref null $nestedgenericclass.NestedGenericClass))
+))
+
+;;; E()
+(func $<init><>:void@nestedgenericclass.NestedGenericClass.1E
+ (param $this (ref null $nestedgenericclass.NestedGenericClass.1E))
+ (result (ref null $nestedgenericclass.NestedGenericClass.1E))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  F
+
+(type $nestedgenericclass.NestedGenericClass.1F (struct
+ (field $this@nestedgenericclass.NestedGenericClass.1F (ref null $nestedgenericclass.NestedGenericClass))
+ (field $f@nestedgenericclass.NestedGenericClass.1F (ref null $java.lang.Object))
+))
+
+;;; F()
+(func $<init><>:void@nestedgenericclass.NestedGenericClass.1F
+ (param $this (ref null $nestedgenericclass.NestedGenericClass.1F))
+ (result (ref null $nestedgenericclass.NestedGenericClass.1F))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  G
+
+(type $nestedgenericclass.NestedGenericClass.1G (struct
+ (field $this@nestedgenericclass.NestedGenericClass.1G (ref null $nestedgenericclass.NestedGenericClass))
+))
+
+;;; G()
+(func $<init><>:void@nestedgenericclass.NestedGenericClass.1G
+ (param $this (ref null $nestedgenericclass.NestedGenericClass.1G))
+ (result (ref null $nestedgenericclass.NestedGenericClass.1G))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void G.bar()
+(func $bar<>:void@nestedgenericclass.NestedGenericClass.1G
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; $1G.this.new $1H.<init>();
+   (call $<init><>:void@nestedgenericclass.NestedGenericClass.1G.1H (struct.new_default_with_rtt $nestedgenericclass.NestedGenericClass.1G.1H (global.get $nestedgenericclass.NestedGenericClass.1G.1H.rtt)) )
+   drop
+  )
+ )
+)
+
+;;; CLASS  H
+
+(type $nestedgenericclass.NestedGenericClass.1G.1H (struct
+ (field $this@nestedgenericclass.NestedGenericClass.1G.1H (ref null $nestedgenericclass.NestedGenericClass.1G))
+))
+
+;;; H()
+(func $<init><>:void@nestedgenericclass.NestedGenericClass.1G.1H
+ (param $this (ref null $nestedgenericclass.NestedGenericClass.1G.1H))
+ (result (ref null $nestedgenericclass.NestedGenericClass.1G.1H))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+

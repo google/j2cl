@@ -1,0 +1,81 @@
+;;; Code for exception.MyException
+
+;;; CLASS  MyException
+
+(type $exception.MyException (struct
+ (field $detailMessage@java.lang.Throwable (ref null $java.lang.String))
+ (field $cause@java.lang.Throwable (ref null $java.lang.Throwable))
+ (field $suppressedExceptions@java.lang.Throwable (ref null $java.lang.Object))
+ (field $stackTrace@java.lang.Throwable (ref null $java.lang.Object))
+ (field $disableSuppression@java.lang.Throwable i32)
+ (field $disableStackTrace@java.lang.Throwable i32)
+ (field $backingJsObject@java.lang.Throwable (ref null $java.lang.Object))
+))
+
+;;; MyException()
+(func $<init><>:void@exception.MyException
+ (param $this (ref null $exception.MyException))
+ (result (ref null $exception.MyException))
+ (block $return.label
+  (block
+   ;; Exception.this.Exception.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; MyException(Throwable cause)
+(func $<init><java.lang.Throwable>:void@exception.MyException
+ (param $this (ref null $exception.MyException))
+ (param $cause (ref null $java.lang.Throwable))
+ (result (ref null $exception.MyException))
+ (block $return.label
+  (block
+   ;; Exception.this.Exception.<init>(cause);
+   
+  )
+ )
+ (local.get $this)
+)
+;;; Code for exception.MyJsException
+
+;;; CLASS  MyJsException
+
+(type $exception.MyJsException (struct
+ (field $detailMessage@java.lang.Throwable (ref null $java.lang.String))
+ (field $cause@java.lang.Throwable (ref null $java.lang.Throwable))
+ (field $suppressedExceptions@java.lang.Throwable (ref null $java.lang.Object))
+ (field $stackTrace@java.lang.Throwable (ref null $java.lang.Object))
+ (field $disableSuppression@java.lang.Throwable i32)
+ (field $disableStackTrace@java.lang.Throwable i32)
+ (field $backingJsObject@java.lang.Throwable (ref null $java.lang.Object))
+))
+
+;;; MyJsException()
+(func $<init><>:void@exception.MyJsException
+ (param $this (ref null $exception.MyJsException))
+ (result (ref null $exception.MyJsException))
+ (block $return.label
+  (block
+   ;; Exception.this.Exception.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; MyJsException(Throwable cause)
+(func $<init><java.lang.Throwable>:void@exception.MyJsException
+ (param $this (ref null $exception.MyJsException))
+ (param $cause (ref null $java.lang.Throwable))
+ (result (ref null $exception.MyJsException))
+ (block $return.label
+  (block
+   ;; MyJsException.this.MyJsException.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+

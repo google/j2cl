@@ -1,0 +1,371 @@
+;;; Code for array.Arrays
+
+;;; CLASS  Arrays
+
+(type $array.Arrays (struct
+))
+
+;;; Arrays()
+(func $<init><>:void@array.Arrays
+ (param $this (ref null $array.Arrays))
+ (result (ref null $array.Arrays))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void Arrays.testObjectArray()
+(func $testObjectArray<>:void@array.Arrays
+ (param $this (ref null $java.lang.Object))
+ (local $objects (ref null $java.lang.Object))
+ (local $objects2d (ref null $java.lang.Object))
+ (local $object (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; Object[] objects = new Object[100];
+   (local.set $objects (ref.null $java.lang.Object))
+   
+   ;; (objects = new Object[0]);
+   (local.set $objects (ref.null $java.lang.Object))
+   ;; (objects = new Object[] {null,null});
+   (local.set $objects (ref.null $java.lang.Object))
+   ;; Object[][] objects2d = new Object[5][10];
+   (local.set $objects2d (ref.null $java.lang.Object))
+   
+   ;; (objects2d = new Object[][] {[null,null],null});
+   (local.set $objects2d (ref.null $java.lang.Object))
+   ;; (objects2d = new Object[20][]);
+   (local.set $objects2d (ref.null $java.lang.Object))
+   ;; Object object = objects[0];
+   (local.set $object (ref.null $java.lang.Object))
+   
+   ;; (object = objects2d[0][1]);
+   (local.set $object (ref.null $java.lang.Object))
+   ;; (objects[0] = null);
+   
+   ;; (objects2d[0][1] = null);
+   
+  )
+ )
+)
+
+;;; void Arrays.testJavaTypeArray()
+(func $testJavaTypeArray<>:void@array.Arrays
+ (param $this (ref null $java.lang.Object))
+ (local $objects (ref null $java.lang.Object))
+ (local $objects2d (ref null $java.lang.Object))
+ (local $someObject (ref null $array.Arrays.SomeObject))
+ (block $return.label
+  (block
+   ;; SomeObject[] objects = new SomeObject[100];
+   (local.set $objects (ref.null $java.lang.Object))
+   
+   ;; (objects = new SomeObject[0]);
+   (local.set $objects (ref.null $java.lang.Object))
+   ;; (objects = new SomeObject[] {null,null});
+   (local.set $objects (ref.null $java.lang.Object))
+   ;; SomeObject[][] objects2d = new SomeObject[5][10];
+   (local.set $objects2d (ref.null $java.lang.Object))
+   
+   ;; (objects2d = new SomeObject[][] {[null,null],null});
+   (local.set $objects2d (ref.null $java.lang.Object))
+   ;; (objects2d = new SomeObject[20][]);
+   (local.set $objects2d (ref.null $java.lang.Object))
+   ;; SomeObject someObject = objects[0];
+   (local.set $someObject (ref.null $array.Arrays.SomeObject))
+   
+   ;; (someObject = objects2d[0][1]);
+   (local.set $someObject (ref.null $array.Arrays.SomeObject))
+   ;; (objects[0] = null);
+   
+   ;; (objects2d[0][1] = null);
+   
+  )
+ )
+)
+
+;;; void Arrays.testIntArrays()
+(func $testIntArrays<>:void@array.Arrays
+ (param $this (ref null $java.lang.Object))
+ (local $ints (ref null $java.lang.Object))
+ (local $ints2d (ref null $java.lang.Object))
+ (local $n i32)
+ (block $return.label
+  (block
+   ;; int[] ints = new int[100];
+   (local.set $ints (ref.null $java.lang.Object))
+   
+   ;; (ints = new int[0]);
+   (local.set $ints (ref.null $java.lang.Object))
+   ;; (ints = new int[] {0,1});
+   (local.set $ints (ref.null $java.lang.Object))
+   ;; int[][] ints2d = new int[5][10];
+   (local.set $ints2d (ref.null $java.lang.Object))
+   
+   ;; (ints2d = new int[][] {[1,2],null});
+   (local.set $ints2d (ref.null $java.lang.Object))
+   ;; (ints2d = new int[20][]);
+   (local.set $ints2d (ref.null $java.lang.Object))
+   ;; int n = ints[0];
+   (local.set $n (i32.const 0))
+   
+   ;; (n = ints2d[0][1]);
+   (local.set $n (i32.const 0))
+   ;; (ints[0] = 1);
+   
+   ;; (ints2d[0][1] = 1);
+   
+  )
+ )
+)
+
+;;; void Arrays.testLongArrays()
+(func $testLongArrays<>:void@array.Arrays
+ (param $this (ref null $java.lang.Object))
+ (local $longs (ref null $java.lang.Object))
+ (local $longs2d (ref null $java.lang.Object))
+ (local $n i64)
+ (block $return.label
+  (block
+   ;; long[] longs = new long[100];
+   (local.set $longs (ref.null $java.lang.Object))
+   
+   ;; (longs = new long[0]);
+   (local.set $longs (ref.null $java.lang.Object))
+   ;; (longs = new long[] {0,1});
+   (local.set $longs (ref.null $java.lang.Object))
+   ;; long[][] longs2d = new long[5][10];
+   (local.set $longs2d (ref.null $java.lang.Object))
+   
+   ;; (longs2d = new long[][] {[1,2],null});
+   (local.set $longs2d (ref.null $java.lang.Object))
+   ;; (longs2d = new long[20][]);
+   (local.set $longs2d (ref.null $java.lang.Object))
+   ;; long n = longs[0];
+   (local.set $n (i64.const 0))
+   
+   ;; (n = longs2d[0][1]);
+   (local.set $n (i64.const 0))
+   ;; (longs[0] = 1);
+   
+   ;; (longs2d[0][1] = 1);
+   
+  )
+ )
+)
+
+;;; void Arrays.testDevirtualizedTypeArrays()
+(func $testDevirtualizedTypeArrays<>:void@array.Arrays
+ (param $this (ref null $java.lang.Object))
+ (local $booleans (ref null $java.lang.Object))
+ (local $booleans2d (ref null $java.lang.Object))
+ (local $b i32)
+ (block $return.label
+  (block
+   ;; Boolean[] booleans = new Boolean[100];
+   (local.set $booleans (ref.null $java.lang.Object))
+   
+   ;; (booleans = new Boolean[0]);
+   (local.set $booleans (ref.null $java.lang.Object))
+   ;; (booleans = new Boolean[] {true,false});
+   (local.set $booleans (ref.null $java.lang.Object))
+   ;; Boolean[][] booleans2d = new Boolean[5][10];
+   (local.set $booleans2d (ref.null $java.lang.Object))
+   
+   ;; (booleans2d = new Boolean[][] {[true,false],null});
+   (local.set $booleans2d (ref.null $java.lang.Object))
+   ;; (booleans2d = new Boolean[20][]);
+   (local.set $booleans2d (ref.null $java.lang.Object))
+   ;; boolean b = booleans[0];
+   (local.set $b (i32.const 0))
+   
+   ;; (b = booleans2d[0][1]);
+   (local.set $b (i32.const 0))
+   ;; (booleans[0] = true);
+   
+   ;; (booleans2d[0][1] = false);
+   
+  )
+ )
+)
+
+;;; void Arrays.testStringArrays()
+(func $testStringArrays<>:void@array.Arrays
+ (param $this (ref null $java.lang.Object))
+ (local $strings (ref null $java.lang.Object))
+ (local $strings2d (ref null $java.lang.Object))
+ (local $b (ref null $java.lang.String))
+ (block $return.label
+  (block
+   ;; String[] strings = new String[100];
+   (local.set $strings (ref.null $java.lang.Object))
+   
+   ;; (strings = new String[0]);
+   (local.set $strings (ref.null $java.lang.Object))
+   ;; (strings = new String[] {null,null});
+   (local.set $strings (ref.null $java.lang.Object))
+   ;; String[][] strings2d = new String[5][10];
+   (local.set $strings2d (ref.null $java.lang.Object))
+   
+   ;; (strings2d = new String[][] {[null,null],null});
+   (local.set $strings2d (ref.null $java.lang.Object))
+   ;; (strings2d = new String[20][]);
+   (local.set $strings2d (ref.null $java.lang.Object))
+   ;; String b = strings[0];
+   (local.set $b (ref.null $java.lang.String))
+   
+   ;; (b = strings2d[0][1]);
+   (local.set $b (ref.null $java.lang.String))
+   ;; (strings[0] = null);
+   
+   ;; (strings2d[0][1] = null);
+   
+  )
+ )
+)
+
+;;; void Arrays.testNativeArray()
+(func $testNativeArray<>:void@array.Arrays
+ (param $this (ref null $java.lang.Object))
+ (local $nativeObjects (ref null $java.lang.Object))
+ (local $nativeObjects2d (ref null $java.lang.Object))
+ (local $nativeObject (ref null $array.Arrays.NativeType))
+ (block $return.label
+  (block
+   ;; NativeType[] nativeObjects = new NativeType[100];
+   (local.set $nativeObjects (ref.null $java.lang.Object))
+   
+   ;; (nativeObjects = new NativeType[0]);
+   (local.set $nativeObjects (ref.null $java.lang.Object))
+   ;; (nativeObjects = new NativeType[] {null,null});
+   (local.set $nativeObjects (ref.null $java.lang.Object))
+   ;; NativeType[][] nativeObjects2d = new NativeType[5][10];
+   (local.set $nativeObjects2d (ref.null $java.lang.Object))
+   
+   ;; (nativeObjects2d = new NativeType[][] {[null,null],null});
+   (local.set $nativeObjects2d (ref.null $java.lang.Object))
+   ;; (nativeObjects2d = new NativeType[20][]);
+   (local.set $nativeObjects2d (ref.null $java.lang.Object))
+   ;; NativeType nativeObject = nativeObjects[0];
+   (local.set $nativeObject (ref.null $array.Arrays.NativeType))
+   
+   ;; (nativeObject = nativeObjects2d[0][1]);
+   (local.set $nativeObject (ref.null $array.Arrays.NativeType))
+   ;; (nativeObjects[0] = null);
+   
+   ;; (nativeObjects2d[0][1] = null);
+   
+  )
+ )
+)
+
+;;; void Arrays.testErasureCastsOnArrayAccess()
+(func $testErasureCastsOnArrayAccess<>:void@array.Arrays
+ (param $this (ref null $java.lang.Object))
+ (local $container (ref null $array.Arrays.ArrayContainer))
+ (local $s (ref null $java.lang.String))
+ (block $return.label
+  (block
+   ;; ArrayContainer<String> container = null;
+   (local.set $container (ref.null $array.Arrays.ArrayContainer))
+   
+   ;; String s = ((String[]) container.data)[0];
+   (local.set $s (ref.null $java.lang.String))
+   
+  )
+ )
+)
+
+;;; void Arrays.testArraysSupertypeClosureTypes()
+(func $testArraysSupertypeClosureTypes<>:void@array.Arrays
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; Arrays.this.consumesCloneable(new Object[10]);
+   
+   ;; Arrays.this.consumesSerializable(new Object[10]);
+   
+  )
+ )
+)
+
+;;; void Arrays.consumesCloneable(Cloneable cloneable)
+(func $consumesCloneable<java.lang.Cloneable>:void@array.Arrays
+ (param $this (ref null $java.lang.Object))
+ (param $cloneable (ref null $java.lang.Cloneable))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; void Arrays.consumesSerializable(Serializable serializable)
+(func $consumesSerializable<java.io.Serializable>:void@array.Arrays
+ (param $this (ref null $java.lang.Object))
+ (param $serializable (ref null $java.io.Serializable))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; CLASS  SomeObject
+
+(type $array.Arrays.SomeObject (struct
+ (field $this@array.Arrays.SomeObject (ref null $array.Arrays))
+))
+
+;;; SomeObject()
+(func $<init><>:void@array.Arrays.SomeObject
+ (param $this (ref null $array.Arrays.SomeObject))
+ (result (ref null $array.Arrays.SomeObject))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  NativeType
+
+(type $array.Arrays.NativeType (struct
+))
+
+;;; NativeType()
+(func $<init><>:void@array.Arrays.NativeType
+ (param $this (ref null $array.Arrays.NativeType))
+ (result (ref null $array.Arrays.NativeType))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  ArrayContainer
+
+(type $array.Arrays.ArrayContainer (struct
+ (field $data@array.Arrays.ArrayContainer (ref null $java.lang.Object))
+))
+
+;;; ArrayContainer()
+(func $<init><>:void@array.Arrays.ArrayContainer
+ (param $this (ref null $array.Arrays.ArrayContainer))
+ (result (ref null $array.Arrays.ArrayContainer))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+

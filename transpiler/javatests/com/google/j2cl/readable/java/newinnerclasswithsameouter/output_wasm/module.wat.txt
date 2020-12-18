@@ -1,0 +1,92 @@
+;;; Code for newinnerclasswithsameouter.NewInnerClassWithSameOuter
+
+;;; CLASS  NewInnerClassWithSameOuter
+
+(type $newinnerclasswithsameouter.NewInnerClassWithSameOuter (struct
+))
+
+;;; NewInnerClassWithSameOuter()
+(func $<init><>:void@newinnerclasswithsameouter.NewInnerClassWithSameOuter
+ (param $this (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter))
+ (result (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  A
+
+(type $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A (struct
+ (field $this@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter))
+))
+
+;;; A()
+(func $<init><>:void@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A
+ (param $this (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A))
+ (result (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void A.test()
+(func $test<>:void@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; A.this.this.new B.<init>();
+   (call $<init><>:void@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B (struct.new_default_with_rtt $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B (global.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B.rtt)) )
+   drop
+   ;; A.this.this.new C.<init>();
+   (call $<init><>:void@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C (struct.new_default_with_rtt $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C (global.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C.rtt)) )
+   drop
+  )
+ )
+)
+
+;;; CLASS  B
+
+(type $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B (struct
+ (field $this@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter))
+))
+
+;;; B()
+(func $<init><>:void@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B
+ (param $this (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B))
+ (result (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  C
+
+(type $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C (struct
+ (field $this@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter))
+))
+
+;;; C()
+(func $<init><>:void@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C
+ (param $this (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C))
+ (result (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+

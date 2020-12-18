@@ -1,0 +1,77 @@
+;;; Code for qualifiedsupercall.QualifiedSuperCall
+
+;;; CLASS  Parent
+
+(type $qualifiedsupercall.Parent (struct
+))
+
+;;; Parent()
+(func $<init><>:void@qualifiedsupercall.Parent
+ (param $this (ref null $qualifiedsupercall.Parent))
+ (result (ref null $qualifiedsupercall.Parent))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void Parent.fun()
+(func $fun<>:void@qualifiedsupercall.Parent
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; CLASS  QualifiedSuperCall
+
+(type $qualifiedsupercall.QualifiedSuperCall (struct
+))
+
+;;; QualifiedSuperCall()
+(func $<init><>:void@qualifiedsupercall.QualifiedSuperCall
+ (param $this (ref null $qualifiedsupercall.QualifiedSuperCall))
+ (result (ref null $qualifiedsupercall.QualifiedSuperCall))
+ (block $return.label
+  (block
+   ;; Parent.this.Parent.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  InnerClass
+
+(type $qualifiedsupercall.QualifiedSuperCall.InnerClass (struct
+ (field $this@qualifiedsupercall.QualifiedSuperCall.InnerClass (ref null $qualifiedsupercall.QualifiedSuperCall))
+))
+
+;;; InnerClass()
+(func $<init><>:void@qualifiedsupercall.QualifiedSuperCall.InnerClass
+ (param $this (ref null $qualifiedsupercall.QualifiedSuperCall.InnerClass))
+ (result (ref null $qualifiedsupercall.QualifiedSuperCall.InnerClass))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void InnerClass.test()
+(func $test<>:void@qualifiedsupercall.QualifiedSuperCall.InnerClass
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; InnerClass.this.this.fun();
+   
+  )
+ )
+)
+

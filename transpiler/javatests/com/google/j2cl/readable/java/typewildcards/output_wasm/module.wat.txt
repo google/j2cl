@@ -1,0 +1,311 @@
+;;; Code for typewildcards.TypeWildCards
+
+;;; CLASS  GenericType
+
+(type $typewildcards.GenericType (struct
+))
+
+;;; GenericType()
+(func $<init><>:void@typewildcards.GenericType
+ (param $this (ref null $typewildcards.GenericType))
+ (result (ref null $typewildcards.GenericType))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  TypeWildCards
+
+(type $typewildcards.TypeWildCards (struct
+))
+
+;;; TypeWildCards()
+(func $<init><>:void@typewildcards.TypeWildCards
+ (param $this (ref null $typewildcards.TypeWildCards))
+ (result (ref null $typewildcards.TypeWildCards))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void TypeWildCards.unbounded(GenericType<?> g)
+(func $unbounded<typewildcards.GenericType>:void@typewildcards.TypeWildCards
+ (param $this (ref null $java.lang.Object))
+ (param $g (ref null $typewildcards.GenericType))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; void TypeWildCards.upperBound(GenericType<? extends TypeWildCards> g)
+(func $upperBound<typewildcards.GenericType>:void@typewildcards.TypeWildCards
+ (param $this (ref null $java.lang.Object))
+ (param $g (ref null $typewildcards.GenericType))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; void TypeWildCards.lowerBound(GenericType<? super TypeWildCards> g)
+(func $lowerBound<typewildcards.GenericType>:void@typewildcards.TypeWildCards
+ (param $this (ref null $java.lang.Object))
+ (param $g (ref null $typewildcards.GenericType))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; void TypeWildCards.test()
+(func $test<>:void@typewildcards.TypeWildCards
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; TypeWildCards.this.unbounded(new GenericType.<init>());
+   
+   ;; TypeWildCards.this.upperBound(new GenericType.<init>());
+   
+   ;; TypeWildCards.this.lowerBound(new GenericType.<init>());
+   
+  )
+ )
+)
+
+;;; void TypeWildCards.testBoundedTypeMemberAccess(T t)
+(func $testBoundedTypeMemberAccess<typewildcards.TypeWildCards.A>:void@typewildcards.TypeWildCards
+ (param $t (ref null $typewildcards.TypeWildCards.A))
+ (local $i i32)
+ (block $return.label
+  (block
+   ;; int i = t.f;
+   (local.set $i (i32.const 0))
+   
+   ;; t.m();
+   
+  )
+ )
+)
+
+;;; void TypeWildCards.testIntersectionBoundedTypeMemberAccess(T t)
+(func $testIntersectionBoundedTypeMemberAccess<typewildcards.TypeWildCards.A>:void@typewildcards.TypeWildCards
+ (param $t (ref null $typewildcards.TypeWildCards.A))
+ (local $i i32)
+ (block $return.label
+  (block
+   ;; int i = t.f;
+   (local.set $i (i32.const 0))
+   
+   ;; t.m();
+   
+   ;; ((Y) t).n();
+   
+  )
+ )
+)
+
+;;; List<V> TypeWildCards.transform(List<F> from, Function<? super F, ? extends V> function)
+(func $transform<java.util.List|java.util.function.Function>:java.util.List@typewildcards.TypeWildCards
+ (param $from (ref null $java.util.List))
+ (param $function (ref null $java.util.function.Function))
+ (result (ref null $java.util.List))
+ (local $return.value (ref null $java.util.List))
+ (block $return.label
+  (block
+   ;; return null;
+   (local.set $return.value (ref.null $java.util.List))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; List<E> TypeWildCards.concat(List<? extends E> a, List<? extends E> b)
+(func $concat<java.util.List|java.util.List>:java.util.List@typewildcards.TypeWildCards
+ (param $a (ref null $java.util.List))
+ (param $b (ref null $java.util.List))
+ (result (ref null $java.util.List))
+ (local $return.value (ref null $java.util.List))
+ (block $return.label
+  (block
+   ;; return null;
+   (local.set $return.value (ref.null $java.util.List))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; void TypeWildCards.testInferredGenericIntersection()
+(func $testInferredGenericIntersection<>:void@typewildcards.TypeWildCards
+ (param $this (ref null $java.lang.Object))
+ (local $elements (ref null $java.util.List))
+ (local $otherElements (ref null $java.util.List))
+ (local $integers (ref null $java.util.List))
+ (local $a (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; List<Element> elements = null;
+   (local.set $elements (ref.null $java.util.List))
+   
+   ;; List<SubOtherElement> otherElements = null;
+   (local.set $otherElements (ref.null $java.util.List))
+   
+   ;; List<Integer> integers = typewildcards.TypeWildCards.transform(typewildcards.TypeWildCards.concat(elements,otherElements),function ((Object&HasKey&IntegerSupplier) a){
+   (local.set $integers (call $transform<java.util.List|java.util.function.Function>:java.util.List@typewildcards.TypeWildCards (call $concat<java.util.List|java.util.List>:java.util.List@typewildcards.TypeWildCards (local.get $elements)(local.get $otherElements))(ref.null $java.util.function.Function)))
+   
+  )
+ )
+)
+
+;;; void TypeWildCards.takesRecursiveGeneric(GenericType<Foo> foo)
+(func $takesRecursiveGeneric<typewildcards.GenericType>:void@typewildcards.TypeWildCards
+ (param $foo (ref null $typewildcards.GenericType))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; void TypeWildCards.testRecursiveGeneric()
+(func $testRecursiveGeneric<>:void@typewildcards.TypeWildCards
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; typewildcards.TypeWildCards.takesRecursiveGeneric(TypeWildCards.this.new Foo.<init>());
+   (call $takesRecursiveGeneric<typewildcards.GenericType>:void@typewildcards.TypeWildCards (call $<init><>:void@typewildcards.TypeWildCards.Foo (struct.new_default_with_rtt $typewildcards.TypeWildCards.Foo (global.get $typewildcards.TypeWildCards.Foo.rtt)) )))
+ )
+)
+
+;;; INTERFACE  X
+
+(type $typewildcards.TypeWildCards.X (struct
+))
+
+;;; INTERFACE  Y
+
+(type $typewildcards.TypeWildCards.Y (struct
+))
+
+;;; CLASS  A
+
+(type $typewildcards.TypeWildCards.A (struct
+ (field $f@typewildcards.TypeWildCards.A i32)
+))
+
+;;; A()
+(func $<init><>:void@typewildcards.TypeWildCards.A
+ (param $this (ref null $typewildcards.TypeWildCards.A))
+ (result (ref null $typewildcards.TypeWildCards.A))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void A.m()
+(func $m<>:void@typewildcards.TypeWildCards.A
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; INTERFACE  IntegerSupplier
+
+(type $typewildcards.TypeWildCards.IntegerSupplier (struct
+))
+
+;;; INTERFACE  HasKey
+
+(type $typewildcards.TypeWildCards.HasKey (struct
+))
+
+;;; CLASS  Element
+
+(type $typewildcards.TypeWildCards.Element (struct
+ (field $this@typewildcards.TypeWildCards.Element (ref null $typewildcards.TypeWildCards))
+))
+
+;;; Element()
+(func $<init><>:void@typewildcards.TypeWildCards.Element
+ (param $this (ref null $typewildcards.TypeWildCards.Element))
+ (result (ref null $typewildcards.TypeWildCards.Element))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  OtherElement
+
+(type $typewildcards.TypeWildCards.OtherElement (struct
+ (field $this@typewildcards.TypeWildCards.OtherElement (ref null $typewildcards.TypeWildCards))
+))
+
+;;; OtherElement()
+(func $<init><>:void@typewildcards.TypeWildCards.OtherElement
+ (param $this (ref null $typewildcards.TypeWildCards.OtherElement))
+ (result (ref null $typewildcards.TypeWildCards.OtherElement))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  SubOtherElement
+
+(type $typewildcards.TypeWildCards.SubOtherElement (struct
+ (field $this@typewildcards.TypeWildCards.OtherElement (ref null $typewildcards.TypeWildCards))
+ (field $this@typewildcards.TypeWildCards.SubOtherElement (ref null $typewildcards.TypeWildCards))
+))
+
+;;; SubOtherElement()
+(func $<init><>:void@typewildcards.TypeWildCards.SubOtherElement
+ (param $this (ref null $typewildcards.TypeWildCards.SubOtherElement))
+ (result (ref null $typewildcards.TypeWildCards.SubOtherElement))
+ (block $return.label
+  (block
+   ;; OtherElement.this.OtherElement.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  Foo
+
+(type $typewildcards.TypeWildCards.Foo (struct
+ (field $this@typewildcards.TypeWildCards.Foo (ref null $typewildcards.TypeWildCards))
+))
+
+;;; Foo()
+(func $<init><>:void@typewildcards.TypeWildCards.Foo
+ (param $this (ref null $typewildcards.TypeWildCards.Foo))
+ (result (ref null $typewildcards.TypeWildCards.Foo))
+ (block $return.label
+  (block
+   ;; GenericType.this.GenericType.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+

@@ -1,0 +1,57 @@
+;;; Code for innerclasswithconstructor.InnerClassWithConstructor
+
+;;; CLASS  InnerClassWithConstructor
+
+(type $innerclasswithconstructor.InnerClassWithConstructor (struct
+ (field $a@innerclasswithconstructor.InnerClassWithConstructor i32)
+))
+
+;;; InnerClassWithConstructor()
+(func $<init><>:void@innerclasswithconstructor.InnerClassWithConstructor
+ (param $this (ref null $innerclasswithconstructor.InnerClassWithConstructor))
+ (result (ref null $innerclasswithconstructor.InnerClassWithConstructor))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  InnerClass
+
+(type $innerclasswithconstructor.InnerClassWithConstructor.InnerClass (struct
+ (field $this@innerclasswithconstructor.InnerClassWithConstructor.InnerClass (ref null $innerclasswithconstructor.InnerClassWithConstructor))
+ (field $b@innerclasswithconstructor.InnerClassWithConstructor.InnerClass i32)
+))
+
+;;; InnerClass(int b)
+(func $<init><int>:void@innerclasswithconstructor.InnerClassWithConstructor.InnerClass
+ (param $this (ref null $innerclasswithconstructor.InnerClassWithConstructor.InnerClass))
+ (param $b i32)
+ (result (ref null $innerclasswithconstructor.InnerClassWithConstructor.InnerClass))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+   ;; (InnerClass.this.b = (InnerClass.this.this.a + b));
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; InnerClass()
+(func $<init><>:void@innerclasswithconstructor.InnerClassWithConstructor.InnerClass
+ (param $this (ref null $innerclasswithconstructor.InnerClassWithConstructor.InnerClass))
+ (result (ref null $innerclasswithconstructor.InnerClassWithConstructor.InnerClass))
+ (block $return.label
+  (block
+   ;; InnerClass.this.InnerClass.<init>(InnerClass.this.this.a);
+   
+  )
+ )
+ (local.get $this)
+)
+

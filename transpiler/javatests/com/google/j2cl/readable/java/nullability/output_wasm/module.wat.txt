@@ -1,0 +1,323 @@
+;;; Code for nullability.Nullability
+
+;;; CLASS  Nullability
+
+(type $nullability.Nullability (struct
+ (field $f1@nullability.Nullability (ref null $java.lang.String))
+ (field $f2@nullability.Nullability (ref null $java.lang.String))
+ (field $f3@nullability.Nullability (ref null $java.lang.String))
+ (field $f4@nullability.Nullability (ref null $java.util.List))
+ (field $f5@nullability.Nullability (ref null $java.util.List))
+ (field $f6@nullability.Nullability (ref null $java.util.List))
+ (field $f7@nullability.Nullability (ref null $java.util.List))
+ (field $f8@nullability.Nullability (ref null $java.lang.Object))
+ (field $f9@nullability.Nullability (ref null $java.lang.Object))
+ (field $f10@nullability.Nullability (ref null $java.lang.Object))
+ (field $f12@nullability.Nullability (ref null $java.util.List))
+))
+
+;;; Nullability(String a)
+(func $<init><java.lang.String>:void@nullability.Nullability
+ (param $this (ref null $nullability.Nullability))
+ (param $a (ref null $java.lang.String))
+ (result (ref null $nullability.Nullability))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; String Nullability.m1(String a, List<Double> b, String c)
+(func $m1<java.lang.String|java.util.List|java.lang.String>:java.lang.String@nullability.Nullability
+ (param $this (ref null $java.lang.Object))
+ (param $a (ref null $java.lang.String))
+ (param $b (ref null $java.util.List))
+ (param $c (ref null $java.lang.String))
+ (result (ref null $java.lang.String))
+ (local $return.value (ref null $java.lang.String))
+ (block $return.label
+  (block
+   ;; return "";
+   (local.set $return.value (ref.null $java.lang.String))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; String Nullability.m2(String a, List<Double> b)
+(func $m2<java.lang.String|java.util.List>:java.lang.String@nullability.Nullability
+ (param $this (ref null $java.lang.Object))
+ (param $a (ref null $java.lang.String))
+ (param $b (ref null $java.util.List))
+ (result (ref null $java.lang.String))
+ (local $return.value (ref null $java.lang.String))
+ (block $return.label
+  (block
+   ;; return "";
+   (local.set $return.value (ref.null $java.lang.String))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; String Nullability.m3(String a, String... args)
+(func $m3<java.lang.String|java.lang.String<>>:java.lang.String@nullability.Nullability
+ (param $this (ref null $java.lang.Object))
+ (param $a (ref null $java.lang.String))
+ (param $args (ref null $java.lang.Object))
+ (result (ref null $java.lang.String))
+ (local $return.value (ref null $java.lang.String))
+ (block $return.label
+  (block
+   ;; return null;
+   (local.set $return.value (ref.null $java.lang.String))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; void Nullability.m4(MyFunction f)
+(func $m4<nullability.Nullability.MyFunction>:void@nullability.Nullability
+ (param $this (ref null $java.lang.Object))
+ (param $f (ref null $nullability.Nullability.MyFunction))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; CLASS  Foo
+
+(type $nullability.Nullability.Foo (struct
+))
+
+;;; Foo()
+(func $<init><>:void@nullability.Nullability.Foo
+ (param $this (ref null $nullability.Nullability.Foo))
+ (result (ref null $nullability.Nullability.Foo))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void Foo.bar(T t)
+(func $bar<java.lang.Object>:void@nullability.Nullability.Foo
+ (param $this (ref null $java.lang.Object))
+ (param $t (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; T Foo.baz()
+(func $baz<>:java.lang.Object@nullability.Nullability.Foo
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; return null;
+   (local.set $return.value (ref.null $java.lang.Object))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; String Foo.toString()
+(func $toString<>:java.lang.String@nullability.Nullability.Foo
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.String))
+ (local $return.value (ref null $java.lang.String))
+ (block $return.label
+  (block
+   ;; return "Foo";
+   (local.set $return.value (ref.null $java.lang.String))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; INTERFACE  MyFunction
+
+(type $nullability.Nullability.MyFunction (struct
+))
+
+;;; CLASS  StringList
+
+(type $nullability.Nullability.StringList (struct
+ (field $modCount@java.util.AbstractList i32)
+ (field $array@java.util.ArrayList (ref null $java.lang.Object))
+ (field $exposeElement@java.util.ArrayList (ref null $java.lang.Object))
+))
+
+;;; StringList()
+(func $<init><>:void@nullability.Nullability.StringList
+ (param $this (ref null $nullability.Nullability.StringList))
+ (result (ref null $nullability.Nullability.StringList))
+ (block $return.label
+  (block
+   ;; ArrayList.this.ArrayList.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  StringComparator
+
+(type $nullability.Nullability.StringComparator (struct
+))
+
+;;; StringComparator()
+(func $<init><>:void@nullability.Nullability.StringComparator
+ (param $this (ref null $nullability.Nullability.StringComparator))
+ (result (ref null $nullability.Nullability.StringComparator))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; int StringComparator.compare(String a, String b)
+(func $compare<java.lang.String|java.lang.String>:int@nullability.Nullability.StringComparator
+ (param $this (ref null $java.lang.Object))
+ (param $a (ref null $java.lang.String))
+ (param $b (ref null $java.lang.String))
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return 0;
+   (local.set $return.value (i32.const 0))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; CLASS  NullableStringComparator
+
+(type $nullability.Nullability.NullableStringComparator (struct
+))
+
+;;; NullableStringComparator()
+(func $<init><>:void@nullability.Nullability.NullableStringComparator
+ (param $this (ref null $nullability.Nullability.NullableStringComparator))
+ (result (ref null $nullability.Nullability.NullableStringComparator))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; int NullableStringComparator.compare(String a, String b)
+(func $compare<java.lang.String|java.lang.String>:int@nullability.Nullability.NullableStringComparator
+ (param $this (ref null $java.lang.Object))
+ (param $a (ref null $java.lang.String))
+ (param $b (ref null $java.lang.String))
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return 0;
+   (local.set $return.value (i32.const 0))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; INTERFACE  NullableTemplatedReturn
+
+(type $nullability.Nullability.NullableTemplatedReturn (struct
+))
+
+;;; CLASS  NullableTemplatedReturnOverride
+
+(type $nullability.Nullability.NullableTemplatedReturnOverride (struct
+))
+
+;;; NullableTemplatedReturnOverride()
+(func $<init><>:void@nullability.Nullability.NullableTemplatedReturnOverride
+ (param $this (ref null $nullability.Nullability.NullableTemplatedReturnOverride))
+ (result (ref null $nullability.Nullability.NullableTemplatedReturnOverride))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; String NullableTemplatedReturnOverride.foo()
+(func $foo<>:java.lang.String@nullability.Nullability.NullableTemplatedReturnOverride
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.String))
+ (local $return.value (ref null $java.lang.String))
+ (block $return.label
+  (block
+   ;; return "foo";
+   (local.set $return.value (ref.null $java.lang.String))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+;;; Code for nullability.subpackage.ClassInSubpackage
+
+;;; CLASS  ClassInSubpackage
+
+(type $nullability.subpackage.ClassInSubpackage (struct
+))
+
+;;; ClassInSubpackage()
+(func $<init><>:void@nullability.subpackage.ClassInSubpackage
+ (param $this (ref null $nullability.subpackage.ClassInSubpackage))
+ (result (ref null $nullability.subpackage.ClassInSubpackage))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; String ClassInSubpackage.getString()
+(func $getString<>:java.lang.String@nullability.subpackage.ClassInSubpackage
+ (result (ref null $java.lang.String))
+ (local $return.value (ref null $java.lang.String))
+ (block $return.label
+  (block
+   ;; return null;
+   (local.set $return.value (ref.null $java.lang.String))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; String ClassInSubpackage.getNonNullString()
+(func $getNonNullString<>:java.lang.String@nullability.subpackage.ClassInSubpackage
+ (result (ref null $java.lang.String))
+ (local $return.value (ref null $java.lang.String))
+ (block $return.label
+  (block
+   ;; return "Hello";
+   (local.set $return.value (ref.null $java.lang.String))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+

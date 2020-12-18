@@ -1,0 +1,127 @@
+;;; Code for anonymousclass.AnonymousClass
+
+;;; CLASS  SomeClass
+
+(type $anonymousclass.SomeClass (struct
+))
+
+;;; SomeClass(int i)
+(func $<init><int>:void@anonymousclass.SomeClass
+ (param $this (ref null $anonymousclass.SomeClass))
+ (param $i i32)
+ (result (ref null $anonymousclass.SomeClass))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  AnonymousClass
+
+(type $anonymousclass.AnonymousClass (struct
+))
+
+;;; AnonymousClass()
+(func $<init><>:void@anonymousclass.AnonymousClass
+ (param $this (ref null $anonymousclass.AnonymousClass))
+ (result (ref null $anonymousclass.AnonymousClass))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void AnonymousClass.main()
+(func $main<>:void@anonymousclass.AnonymousClass
+ (param $this (ref null $java.lang.Object))
+ (local $instance (ref null $anonymousclass.SomeClass))
+ (block $return.label
+  (block
+   ;; SomeClass instance = AnonymousClass.this.new $1.<init>(1);
+   (local.set $instance (call $<init><int>:void@anonymousclass.AnonymousClass.1 (struct.new_default_with_rtt $anonymousclass.AnonymousClass.1 (global.get $anonymousclass.AnonymousClass.1.rtt)) (i32.const 1)))
+   
+  )
+ )
+)
+
+;;; CLASS  <anonymous> extends SomeClass
+
+(type $anonymousclass.AnonymousClass.1 (struct
+ (field $this@anonymousclass.AnonymousClass.1 (ref null $anonymousclass.AnonymousClass))
+ (field $object@anonymousclass.AnonymousClass.1 (ref null $java.lang.Object))
+ (field $outer@anonymousclass.AnonymousClass.1 (ref null $java.lang.Object))
+))
+
+;;; <anonymous> extends SomeClass(int $_0)
+(func $<init><int>:void@anonymousclass.AnonymousClass.1
+ (param $this (ref null $anonymousclass.AnonymousClass.1))
+ (param $$_0 i32)
+ (result (ref null $anonymousclass.AnonymousClass.1))
+ (block $return.label
+  (block
+   ;; SomeClass.this.SomeClass.<init>($_0);
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; String <anonymous> extends SomeClass.foo()
+(func $foo<>:java.lang.String@anonymousclass.AnonymousClass.1
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.String))
+ (local $return.value (ref null $java.lang.String))
+ (block $return.label
+  (block
+   ;; return "a";
+   (local.set $return.value (ref.null $java.lang.String))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+
+;;; INTERFACE  SomeInterface
+
+(global $implicitlyStatic@anonymousclass.SomeInterface (ref null $anonymousclass.SomeClass) (ref.null $anonymousclass.SomeClass))
+(type $anonymousclass.SomeInterface (struct
+))
+
+;;; CLASS  <anonymous> extends SomeClass
+
+(type $anonymousclass.SomeInterface.1 (struct
+))
+
+;;; <anonymous> extends SomeClass(int $_0)
+(func $<init><int>:void@anonymousclass.SomeInterface.1
+ (param $this (ref null $anonymousclass.SomeInterface.1))
+ (param $$_0 i32)
+ (result (ref null $anonymousclass.SomeInterface.1))
+ (block $return.label
+  (block
+   ;; SomeClass.this.SomeClass.<init>($_0);
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; String <anonymous> extends SomeClass.foo()
+(func $foo<>:java.lang.String@anonymousclass.SomeInterface.1
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.String))
+ (local $return.value (ref null $java.lang.String))
+ (block $return.label
+  (block
+   ;; return "a";
+   (local.set $return.value (ref.null $java.lang.String))
+   (br $return.label))
+ )
+ (local.get $return.value)
+)
+

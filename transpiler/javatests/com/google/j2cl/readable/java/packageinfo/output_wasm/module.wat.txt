@@ -1,0 +1,60 @@
+;;; Code for packageinfo.package-info
+;;; Code for packageinfo.Outer
+
+;;; CLASS  Outer
+
+(type $packageinfo.Outer (struct
+))
+
+;;; Outer()
+(func $<init><>:void@packageinfo.Outer
+ (param $this (ref null $packageinfo.Outer))
+ (result (ref null $packageinfo.Outer))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  Inner
+
+(type $packageinfo.Outer.Inner (struct
+ (field $this@packageinfo.Outer.Inner (ref null $packageinfo.Outer))
+))
+
+;;; Inner()
+(func $<init><>:void@packageinfo.Outer.Inner
+ (param $this (ref null $packageinfo.Outer.Inner))
+ (result (ref null $packageinfo.Outer.Inner))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+;;; Code for packageinfo.subpackage.Foo
+
+;;; CLASS  Foo
+
+(type $packageinfo.subpackage.Foo (struct
+ (field $outer@packageinfo.subpackage.Foo (ref null $packageinfo.Outer))
+))
+
+;;; Foo()
+(func $<init><>:void@packageinfo.subpackage.Foo
+ (param $this (ref null $packageinfo.subpackage.Foo))
+ (result (ref null $packageinfo.subpackage.Foo))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+

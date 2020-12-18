@@ -1,0 +1,64 @@
+;;; Code for castonarrayinit.CastOnArrayInit
+
+;;; CLASS  CastOnArrayInit
+
+(type $castonarrayinit.CastOnArrayInit (struct
+))
+
+;;; CastOnArrayInit()
+(func $<init><>:void@castonarrayinit.CastOnArrayInit
+ (param $this (ref null $castonarrayinit.CastOnArrayInit))
+ (result (ref null $castonarrayinit.CastOnArrayInit))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; void CastOnArrayInit.fun(Foo<E>... args)
+(func $fun<castonarrayinit.CastOnArrayInit.Foo<>>:void@castonarrayinit.CastOnArrayInit
+ (param $args (ref null $java.lang.Object))
+ (block $return.label
+  (block
+  )
+ )
+)
+
+;;; void CastOnArrayInit.test()
+(func $test<>:void@castonarrayinit.CastOnArrayInit
+ (local $f1 (ref null $castonarrayinit.CastOnArrayInit.Foo))
+ (local $f2 (ref null $castonarrayinit.CastOnArrayInit.Foo))
+ (block $return.label
+  (block
+   ;; Foo<E> f1 = new Foo.<init>();
+   (local.set $f1 (call $<init><>:void@castonarrayinit.CastOnArrayInit.Foo (struct.new_default_with_rtt $castonarrayinit.CastOnArrayInit.Foo (global.get $castonarrayinit.CastOnArrayInit.Foo.rtt)) ))
+   
+   ;; Foo<E> f2 = new Foo.<init>();
+   (local.set $f2 (call $<init><>:void@castonarrayinit.CastOnArrayInit.Foo (struct.new_default_with_rtt $castonarrayinit.CastOnArrayInit.Foo (global.get $castonarrayinit.CastOnArrayInit.Foo.rtt)) ))
+   
+   ;; castonarrayinit.CastOnArrayInit.fun([f1,f2]);
+   (call $fun<castonarrayinit.CastOnArrayInit.Foo<>>:void@castonarrayinit.CastOnArrayInit (ref.null $java.lang.Object)))
+ )
+)
+
+;;; CLASS  Foo
+
+(type $castonarrayinit.CastOnArrayInit.Foo (struct
+))
+
+;;; Foo()
+(func $<init><>:void@castonarrayinit.CastOnArrayInit.Foo
+ (param $this (ref null $castonarrayinit.CastOnArrayInit.Foo))
+ (result (ref null $castonarrayinit.CastOnArrayInit.Foo))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
