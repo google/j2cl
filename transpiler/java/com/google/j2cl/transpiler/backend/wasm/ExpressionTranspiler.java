@@ -33,6 +33,7 @@ import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.ExpressionWithComment;
 import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
+import com.google.j2cl.transpiler.ast.InstanceOfExpression;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MultiExpression;
@@ -200,6 +201,33 @@ final class ExpressionTranspiler {
         sourceBuilder.append(";; " + expressionWithComment.getComment());
         render(expressionWithComment.getExpression());
         return false;
+      }
+
+      @Override
+      public boolean enterInstanceOfExpression(InstanceOfExpression instanceOfExpression) {
+        TypeDescriptor testTypeDescriptor = instanceOfExpression.getTestTypeDescriptor();
+        if (instanceOfExpression.getExpression().getTypeDescriptor().isPrimitive()) {
+          // TODO(b/170691747): Remove when boxing is done.
+          return enterExpression(instanceOfExpression);
+        }
+
+        if (testTypeDescriptor.isClass() || testTypeDescriptor.isEnum()) {
+          sourceBuilder.append(
+              String.format(
+                  "(ref.test %s %s ",
+                  environment.getWasmTypeName(
+                      instanceOfExpression.getExpression().getDeclaredTypeDescriptor()),
+                  environment.getWasmTypeName(testTypeDescriptor)));
+          render(instanceOfExpression.getExpression());
+          sourceBuilder.append(
+              String.format(
+                  " (global.get %s))",
+                  environment.getRttGlobalName(
+                      ((DeclaredTypeDescriptor) testTypeDescriptor).getTypeDeclaration())));
+          return false;
+        }
+        // TODO(rluble): handle interface, primitive and array casts.
+        return enterExpression(instanceOfExpression);
       }
 
       @Override

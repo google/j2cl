@@ -61,7 +61,7 @@
     )
    )
    ;; if (!obj instanceof GenericEquals) {
-   (if (i32.eqz (i32.const 0))
+   (if (i32.eqz (ref.test $java.lang.Object $genericequals.GenericEquals (local.get $obj) (global.get $genericequals.GenericEquals.rtt)))
     (then
      (block
       ;; return false;
