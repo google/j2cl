@@ -65,7 +65,6 @@ import com.google.j2cl.transpiler.passes.NormalizeConstructors;
 import com.google.j2cl.transpiler.passes.NormalizeEnumClasses;
 import com.google.j2cl.transpiler.passes.NormalizeEquality;
 import com.google.j2cl.transpiler.passes.NormalizeFieldInitialization;
-import com.google.j2cl.transpiler.passes.NormalizeForStatements;
 import com.google.j2cl.transpiler.passes.NormalizeFunctionExpressions;
 import com.google.j2cl.transpiler.passes.NormalizeInstanceOfs;
 import com.google.j2cl.transpiler.passes.NormalizeInterfaceMethods;
@@ -280,7 +279,6 @@ public enum Backend {
           new RewriteUnaryExpressions(),
           // Rewrite 'a || b' into 'a ? true : b' and 'a && b' into 'a ? b : false'
           new RewriteShortcutOperators(),
-          new NormalizeForStatements(),
           new RewriteLoopStatements(),
 
           // Normalize multiexpressions before rewriting assignments so that whenever there is a

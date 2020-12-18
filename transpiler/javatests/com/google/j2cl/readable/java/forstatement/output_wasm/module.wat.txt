@@ -29,48 +29,46 @@
  (local $b i32)
  (block $return.label
   (block
-   (block
-    ;; int i = 0,int count = 0;
-    (local.set $i (i32.const 0))
-    (local.set $count (i32.const 0))
-    
-    ;; $BREAK: $LOOP: while (true) {
-    (block $$BREAK 
-     ;; $LOOP: while (true) {
-     (loop $$LOOP 
+   ;; LOOP_BREAK: {
+   (block $LOOP_BREAK 
+    (block
+     ;; int i = 0,int count = 0;
+     (local.set $i (i32.const 0))
+     (local.set $count (i32.const 0))
+     
+     ;; while (true) {
+     (loop
       (block
-       ;; if (!(i < 100)) break $BREAK;
-       (if (i32.eqz (i32.lt_s (local.get $i) (i32.const 100))) (then ;; break $BREAK;
-       (br $$BREAK)
+       ;; if (!(i < 100)) break LOOP_BREAK;
+       (if (i32.eqz (i32.lt_s (local.get $i) (i32.const 100))) (then ;; break LOOP_BREAK;
+       (br $LOOP_BREAK)
        ))
-       ;; $CONTINUE: {
-       (block $$CONTINUE 
+       ;; LOOP_CONTINUE: {
+       (block $LOOP_CONTINUE 
         (block
          ;; (count = (count + 1));
          (local.set $count (i32.add (local.get $count) (i32.const 1)))))
        (block
         ;; (i = (i + 1));
-        (local.set $i (i32.add (local.get $i) (i32.const 1))))
-       ;; continue $LOOP;
-       (br $$LOOP)
-       
-      ))))
-   (block
-    ;; long l = 0,long count = 0;
-    (local.set $l (i64.const 0))
-    (local.set $count_1 (i64.const 0))
-    
-    ;; $BREAK: $LOOP: while (true) {
-    (block $$BREAK_1 
-     ;; $LOOP: while (true) {
-     (loop $$LOOP_1 
+        (local.set $i (i32.add (local.get $i) (i32.const 1)))))(br 0)
+      
+     )))
+   ;; LOOP_BREAK: {
+   (block $LOOP_BREAK_1 
+    (block
+     ;; long l = 0,long count = 0;
+     (local.set $l (i64.const 0))
+     (local.set $count_1 (i64.const 0))
+     
+     ;; while (true) {
+     (loop
       (block
-       ;; if (!(l < 100)) break $BREAK;
-       (if (i32.eqz (i64.lt_s (local.get $l) (i64.const 0))) (then ;; break $BREAK;
-       (br $$BREAK_1)
+       ;; if (!(l < 100)) break LOOP_BREAK;
+       (if (i32.eqz (i64.lt_s (local.get $l) (i64.const 0))) (then ;; break LOOP_BREAK;
+       (br $LOOP_BREAK_1)
        ))
-       ;; $CONTINUE: {
-       (block $$CONTINUE_1 
+       ;; LOOP_CONTINUE: {
+       (block $LOOP_CONTINUE_1 
         (block
          ;; (count = (count + 1));
          (local.set $count_1 (i64.add (local.get $count_1) (i64.const 1)))))
@@ -78,61 +76,57 @@
         ;; (l = (l + 1));
         (local.set $l (i64.add (local.get $l) (i64.const 1)))
         ;; (l = (l + 1));
-        (local.set $l (i64.add (local.get $l) (i64.const 1))))
-       ;; continue $LOOP;
-       (br $$LOOP_1)
-       
-      ))))
+        (local.set $l (i64.add (local.get $l) (i64.const 1)))))(br 0)
+      
+     )))
    ;; boolean a = false;
    (local.set $a (i32.const 0))
    
-   ;; $BREAK: $LOOP: while (true) {
-   (block $$BREAK_2 
-    ;; $LOOP: while (true) {
-    (loop $$LOOP_2 
-     (block
-      ;; if (!((a = (a | true)),a)) break $BREAK;
-      (if (i32.eqz (block
-       (result i32)
-       (local.set $a (i32.or (local.get $a) (i32.const 1)))
-       (local.get $a)
-      )) (then ;; break $BREAK;
-      (br $$BREAK_2)
-      ))
-      ;; $CONTINUE: {
-      (block $$CONTINUE_2 
-       (block
-       ))
+   ;; LOOP_BREAK: {
+   (block $LOOP_BREAK_2 
+    (block
+     ;; while (true) {
+     (loop
       (block
-      )
-      ;; continue $LOOP;
-      (br $$LOOP_2)
+       ;; if (!((a = (a | true)),a)) break LOOP_BREAK;
+       (if (i32.eqz (block
+        (result i32)
+        (local.set $a (i32.or (local.get $a) (i32.const 1)))
+        (local.get $a)
+       )) (then ;; break LOOP_BREAK;
+       (br $LOOP_BREAK_2)
+       ))
+       ;; LOOP_CONTINUE: {
+       (block $LOOP_CONTINUE_2 
+        (block
+        ))
+       (block
+       ))(br 0)
       
      )))
    ;; boolean b = false;
    (local.set $b (i32.const 0))
    
-   ;; $BREAK: $LOOP: while (true) {
-   (block $$BREAK_3 
-    ;; $LOOP: while (true) {
-    (loop $$LOOP_3 
-     (block
-      ;; if (!((b = a),b)) break $BREAK;
-      (if (i32.eqz (block
-       (result i32)
-       (local.set $b (local.get $a))
-       (local.get $b)
-      )) (then ;; break $BREAK;
-      (br $$BREAK_3)
-      ))
-      ;; $CONTINUE: {
-      (block $$CONTINUE_3 
-       (block
-       ))
+   ;; LOOP_BREAK: {
+   (block $LOOP_BREAK_3 
+    (block
+     ;; while (true) {
+     (loop
       (block
-      )
-      ;; continue $LOOP;
-      (br $$LOOP_3)
+       ;; if (!((b = a),b)) break LOOP_BREAK;
+       (if (i32.eqz (block
+        (result i32)
+        (local.set $b (local.get $a))
+        (local.get $b)
+       )) (then ;; break LOOP_BREAK;
+       (br $LOOP_BREAK_3)
+       ))
+       ;; LOOP_CONTINUE: {
+       (block $LOOP_CONTINUE_3 
+        (block
+        ))
+       (block
+       ))(br 0)
       
      ))))
  )

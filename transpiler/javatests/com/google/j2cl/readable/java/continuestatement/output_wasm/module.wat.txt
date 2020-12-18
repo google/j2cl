@@ -23,26 +23,25 @@
  (param $this (ref null $java.lang.Object))
  (block $return.label
   (block
-   ;; $BREAK: $LOOP: while (true) {
-   (block $$BREAK 
-    ;; $LOOP: while (true) {
-    (loop $$LOOP 
-     (block
-      ;; if (!true) break $BREAK;
-      (if (i32.eqz (i32.const 1)) (then ;; break $BREAK;
-      (br $$BREAK)
-      ))
-      ;; $CONTINUE: {
-      (block $$CONTINUE 
-       (block
-        ;; break $CONTINUE;
-        (br $$CONTINUE)
-        
-       ))
+   ;; LOOP_BREAK: {
+   (block $LOOP_BREAK 
+    (block
+     ;; while (true) {
+     (loop
       (block
-      )
-      ;; continue $LOOP;
-      (br $$LOOP)
+       ;; if (!true) break LOOP_BREAK;
+       (if (i32.eqz (i32.const 1)) (then ;; break LOOP_BREAK;
+       (br $LOOP_BREAK)
+       ))
+       ;; LOOP_CONTINUE: {
+       (block $LOOP_CONTINUE 
+        (block
+         ;; break LOOP_CONTINUE;
+         (br $LOOP_CONTINUE)
+         
+        ))
+       (block
+       ))(br 0)
       
      ))))
  )

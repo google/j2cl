@@ -44,6 +44,14 @@ public abstract class Statement extends Node implements HasSourcePosition, Clone
     return false;
   }
 
+  public LabeledStatement encloseWithLabel(Label label) {
+    return LabeledStatement.newBuilder()
+        .setStatement(this)
+        .setLabel(label)
+        .setSourcePosition(getSourcePosition())
+        .build();
+  }
+
   @Override
   public abstract Statement clone();
 

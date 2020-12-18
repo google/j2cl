@@ -15,15 +15,14 @@
  */
 package com.google.j2cl.transpiler.backend.wasm;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
-import static com.google.common.base.Preconditions.checkState;
 import static com.google.j2cl.transpiler.backend.wasm.ExpressionTranspiler.returnsVoid;
 
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.Block;
 import com.google.j2cl.transpiler.ast.BooleanLiteral;
 import com.google.j2cl.transpiler.ast.BreakStatement;
-import com.google.j2cl.transpiler.ast.ContinueStatement;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.ExpressionStatement;
 import com.google.j2cl.transpiler.ast.IfStatement;
@@ -75,19 +74,10 @@ class StatementTranspiler {
 
       @Override
       public boolean enterBreakStatement(BreakStatement breakStatement) {
-        renderBranchStatement(breakStatement.getLabelReference());
-        return false;
-      }
-
-      @Override
-      public boolean enterContinueStatement(ContinueStatement continueStatement) {
-        renderBranchStatement(continueStatement.getLabelReference());
-        return false;
-      }
-
-      private void renderBranchStatement(LabelReference labelReference) {
+        LabelReference labelReference = breakStatement.getLabelReference();
         checkNotNull(labelReference);
         builder.appendln("(br " + environment.getDeclarationName(labelReference.getTarget()) + ")");
+        return false;
       }
 
       @Override
@@ -128,16 +118,8 @@ class StatementTranspiler {
       public boolean enterLabeledStatement(LabeledStatement labeledStatement) {
         builder.openParens();
         String label = environment.getDeclarationName(labeledStatement.getLabel());
-
-        if (labeledStatement.getStatement() instanceof WhileStatement) {
-          WhileStatement whileStatement = (WhileStatement) labeledStatement.getStatement();
-          checkState(whileStatement.getConditionExpression().equals(BooleanLiteral.get(true)));
-          builder.appendln("loop " + label + " ");
-          renderStatement(((WhileStatement) labeledStatement.getStatement()).getBody());
-        } else {
-          builder.appendln("block " + label + " ");
-          renderStatement(labeledStatement.getStatement());
-        }
+        builder.appendln("block " + label + " ");
+        renderStatement(labeledStatement.getStatement());
         builder.closeParens();
         return false;
       }
@@ -170,6 +152,17 @@ class StatementTranspiler {
         // until WASM exception handling is added.
         builder.emitWithMapping(
             throwStatement.getSourcePosition(), () -> builder.append("unreachable"));
+        return false;
+      }
+
+      @Override
+      public boolean enterWhileStatement(WhileStatement whileStatement) {
+        checkArgument(whileStatement.getConditionExpression().equals(BooleanLiteral.get(true)));
+        builder.openParens();
+        builder.appendln("loop");
+        renderStatement(whileStatement.getBody());
+        builder.appendln("(br 0)");
+        builder.closeParens();
         return false;
       }
 
