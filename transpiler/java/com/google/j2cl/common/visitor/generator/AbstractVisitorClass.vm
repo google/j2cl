@@ -1,6 +1,6 @@
 package ${packageName};
 
-public abstract class AbstractVisitor extends ProcessorPrivate implements Visitor {
+public abstract class AbstractVisitor extends ProcessorPrivate {
 #foreach($clazz in $classes)
 
   @Override
@@ -18,7 +18,6 @@ public abstract class AbstractVisitor extends ProcessorPrivate implements Visito
 #end
 #foreach($clazz in $classes)
 
-  @Override
   public boolean enter${clazz.SimpleName}(${clazz.SimpleName} ${clazz.ParameterName}) {
 #if(${clazz.isTop()})
     return true;
@@ -29,7 +28,6 @@ public abstract class AbstractVisitor extends ProcessorPrivate implements Visito
 #end
 
 #foreach($clazz in $classes)
-  @Override
   public void exit${clazz.SimpleName}(${clazz.SimpleName} ${clazz.ParameterName}) {
 #if(!${clazz.isTop()})
     exit${clazz.SuperclassName}(${clazz.ParameterName});

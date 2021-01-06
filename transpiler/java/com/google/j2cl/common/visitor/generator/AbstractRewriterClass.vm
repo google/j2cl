@@ -1,9 +1,8 @@
 package ${packageName};
 
-public abstract class AbstractRewriter extends ProcessorPrivate implements Rewriter {
+public abstract class AbstractRewriter extends ProcessorPrivate {
 #foreach($clazz in $classes)
 
-  @Override
   public boolean shouldProcess${clazz.SimpleName}(${clazz.SimpleName} ${clazz.ParameterName}) {
 #if(${clazz.isTop()})
     return true;
@@ -21,7 +20,6 @@ public abstract class AbstractRewriter extends ProcessorPrivate implements Rewri
 #end
 #foreach($clazz in $classes)
 
-  @Override
   public ${clazz.TopClassName}  rewrite${clazz.SimpleName}(${clazz.SimpleName} ${clazz.ParameterName}) {
 #if(${clazz.isTop()})
     return ${clazz.ParameterName};

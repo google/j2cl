@@ -104,8 +104,6 @@ public class J2clAstProcessor extends AbstractProcessor {
             ABSTRACT_REWRITER_TEMPLATE_FILE, "AbstractRewriter", packageName, classes);
         writeGeneralClass(
             PROCESSOR_PRIVATE_CLASS_TEMPLATE_FILE, "ProcessorPrivate", packageName, classes);
-        writeGeneralClass(VISITOR_INTERFACE_TEMPLATE_FILE, "Visitor", packageName, classes);
-        writeGeneralClass(REWRITER_INTERFACE_TEMPLATE_FILE, "Rewriter", packageName, classes);
       }
 
       // This means that the previous round didn't generate any new sources, so we can't have found
@@ -282,12 +280,6 @@ public class J2clAstProcessor extends AbstractProcessor {
 
   private static final String PROCESSOR_PRIVATE_CLASS_TEMPLATE_FILE =
       "com/google/j2cl/common/visitor/generator/ProcessorPrivateClass.vm";
-
-  private static final String VISITOR_INTERFACE_TEMPLATE_FILE =
-      "com/google/j2cl/common/visitor/generator/VisitorInterface.vm";
-
-  private static final String REWRITER_INTERFACE_TEMPLATE_FILE =
-      "com/google/j2cl/common/visitor/generator/RewriterInterface.vm";
 
   private static final String VISITABLE_CLASS_TEMPLATE_FILE =
       "com/google/j2cl/common/visitor/generator/Visitable_Class.vm";
