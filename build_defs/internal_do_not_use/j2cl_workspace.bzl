@@ -7,13 +7,14 @@ load("@bazel_tools//tools/build_defs/repo:jvm.bzl", "jvm_maven_import_external")
 
 _MAVEN_CENTRAL_URLS = ["https://repo1.maven.org/maven2/"]
 
-def setup_j2cl_workspace():
+def setup_j2cl_workspace(**kwargs):
     """Load all dependencies needed for J2CL."""
 
     versions.check("3.3.0")  # The version J2CL currently have a CI setup for.
 
     rules_closure_dependencies(
         omit_com_google_auto_common = True,
+        **kwargs
     )
 
     jvm_maven_import_external(
