@@ -100,9 +100,9 @@ public final class Class<T> implements Type, Serializable {
     return !isArray() && ctor.isPrimitive();
   }
 
-  // TODO(b/30745420): implement
   public T[] getEnumConstants() {
-    return null;
+    // TODO(b/30745420): implement
+    throw new UnsupportedOperationException();
   }
 
   @SuppressWarnings("unchecked")

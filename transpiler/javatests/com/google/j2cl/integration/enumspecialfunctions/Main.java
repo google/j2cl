@@ -78,12 +78,15 @@ public class Main {
       Enum.valueOf(Planet.class, null);
       // fail( "Should have thrown NullPointerException");
       // } catch (NullPointerException expected) {
-    } catch (AssertionError expected) {
+    } catch (UnsupportedOperationException expected) {
     }
 
     // TODO(b/30745420): Transform these into meaningful assertions once Class.getEnumConstants is
     // implemented.
-    assertTrue(Planet.class.getEnumConstants() == null || Planet.class.getEnumConstants() != null);
+    try {
+      Planet.class.getEnumConstants();
+    } catch (UnsupportedOperationException expected) {
+    }
   }
 
   private static boolean arrayContains(Object obj, Object[] array) {
