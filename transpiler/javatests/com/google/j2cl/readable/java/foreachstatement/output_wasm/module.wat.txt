@@ -29,79 +29,52 @@
  (local $t_1 (ref null $java.lang.Throwable))
  (block $return.label
   (block
-   ;; LOOP_BREAK: {
-   (block $LOOP_BREAK
-    (block
-     ;; Iterator<Throwable> $iterator = iterable.iterator();
-     
-     (local.set $$iterator (ref.null $java.util.Iterator))
-     ;; while (true) {
-     (loop
+   ;; LOOP: for (Iterator<Throwable> $iterator = iterable.iterator();$iterator.hasNext();) {
+   
+   
+   (local.set $$iterator (ref.null $java.util.Iterator))
+   (block $LOOP.BREAK
+    (loop
+     (br_if 1 (i32.eqz (i32.const 0)))
+     (block $LOOP.CONTINUE
       (block
-       ;; if (!$iterator.hasNext()) break LOOP_BREAK;
-       (if (i32.eqz (i32.const 0))
-        (then
-         ;; break LOOP_BREAK;
-         (br $LOOP_BREAK)
-        )
-       )
-       ;; LOOP_CONTINUE: {
-       (block $LOOP_CONTINUE
-        (block
-         ;; Throwable t = ((Throwable) $iterator.next());
-         
-         (local.set $t (ref.cast $java.lang.Object $java.lang.Throwable (ref.null $java.lang.Throwable) (global.get $java.lang.Throwable.rtt)))
-         (block
-          ;; t.toString();
-          (ref.null $java.lang.String)
-          drop
-         )
-        )
-       )
+       ;; Throwable t = ((Throwable) $iterator.next());
+       
+       (local.set $t (ref.cast $java.lang.Object $java.lang.Throwable (ref.null $java.lang.Throwable) (global.get $java.lang.Throwable.rtt)))
        (block
+        ;; t.toString();
+        (ref.null $java.lang.String)
+        drop
        )
       )
-      (br 0)
      )
+     (br 0)
+     
     )
    )
-   ;; LOOP_BREAK: {
-   (block $LOOP_BREAK_1
-    (block
-     ;; Throwable[] $array = new Throwable[10],double $index = 0;
-     
-     (local.set $$array (ref.null $java.lang.Object))
-     (local.set $$index (f64.const 0.0))
-     ;; while (true) {
-     (loop
+   ;; LOOP: for (Throwable[] $array = new Throwable[10],double $index = 0;($index < <expr>);($index = ($index + 1.0))) {
+   
+   
+   (local.set $$array (ref.null $java.lang.Object))
+   (local.set $$index (f64.const 0.0))
+   (block $LOOP_1.BREAK
+    (loop
+     (br_if 1 (i32.eqz (f64.lt (local.get $$index) (f64.const 0.0))))
+     (block $LOOP_1.CONTINUE
       (block
-       ;; if (!($index < <expr>)) break LOOP_BREAK;
-       (if (i32.eqz (f64.lt (local.get $$index) (f64.const 0.0)))
-        (then
-         ;; break LOOP_BREAK;
-         (br $LOOP_BREAK_1)
-        )
-       )
-       ;; LOOP_CONTINUE: {
-       (block $LOOP_CONTINUE_1
-        (block
-         ;; Throwable t = $array[$index];
-         
-         (local.set $t_1 (ref.null $java.lang.Throwable))
-         (block
-          ;; t.toString();
-          (ref.null $java.lang.String)
-          drop
-         )
-        )
-       )
+       ;; Throwable t = $array[$index];
+       
+       (local.set $t_1 (ref.null $java.lang.Throwable))
        (block
-        ;; ($index = ($index + 1.0));
-        (local.set $$index (f64.add (local.get $$index) (f64.const 1.0)))
+        ;; t.toString();
+        (ref.null $java.lang.String)
+        drop
        )
       )
-      (br 0)
      )
+     (local.set $$index (f64.add (local.get $$index) (f64.const 1.0)))
+     (br 0)
+     
     )
    )
   )

@@ -148,77 +148,49 @@
    ;; AddNumber[] results = new AddNumber[10];
    
    (local.set $results (ref.null $java.lang.Object))
-   ;; LOOP_BREAK: {
-   (block $LOOP_BREAK
-    (block
-     ;; int i = 0;
-     
-     (local.set $i (i32.const 0))
-     ;; while (true) {
-     (loop
+   ;; LOOP: for (int i = 0;(i < 10);(i = (i + 1))) {
+   
+   
+   (local.set $i (i32.const 0))
+   (block $LOOP.BREAK
+    (loop
+     (br_if 1 (i32.eqz (i32.lt_s (local.get $i) (i32.const 10))))
+     (block $LOOP.CONTINUE
       (block
-       ;; if (!(i < 10)) break LOOP_BREAK;
-       (if (i32.eqz (i32.lt_s (local.get $i) (i32.const 10)))
-        (then
-         ;; break LOOP_BREAK;
-         (br $LOOP_BREAK)
-        )
-       )
-       ;; LOOP_CONTINUE: {
-       (block $LOOP_CONTINUE
-        (block
-         ;; AddNumber ap = InnerClassInitOrder.this.new $1.<init>(i);
-         
-         (local.set $ap (call $<init><int>:void@innerclassinitorder.InnerClassInitOrder.1 (struct.new_default_with_rtt $innerclassinitorder.InnerClassInitOrder.1 (global.get $innerclassinitorder.InnerClassInitOrder.1.rtt)) (local.get $i)))
-         ;; (results[i] = ap);
-         
-        )
-       )
-       (block
-        ;; (i = (i + 1));
-        (local.set $i (i32.add (local.get $i) (i32.const 1)))
-       )
+       ;; AddNumber ap = InnerClassInitOrder.this.new $1.<init>(i);
+       
+       (local.set $ap (call $<init><int>:void@innerclassinitorder.InnerClassInitOrder.1 (struct.new_default_with_rtt $innerclassinitorder.InnerClassInitOrder.1 (global.get $innerclassinitorder.InnerClassInitOrder.1.rtt)) (local.get $i)))
+       ;; (results[i] = ap);
+       
       )
-      (br 0)
      )
+     (local.set $i (i32.add (local.get $i) (i32.const 1)))
+     (br 0)
+     
     )
    )
-   ;; LOOP_BREAK: {
-   (block $LOOP_BREAK_1
-    (block
-     ;; AddNumber[] $array = results,double $index = 0;
-     
-     (local.set $$array (local.get $results))
-     (local.set $$index (f64.const 0.0))
-     ;; while (true) {
-     (loop
+   ;; LOOP: for (AddNumber[] $array = results,double $index = 0;($index < <expr>);($index = ($index + 1.0))) {
+   
+   
+   (local.set $$array (local.get $results))
+   (local.set $$index (f64.const 0.0))
+   (block $LOOP_1.BREAK
+    (loop
+     (br_if 1 (i32.eqz (f64.lt (local.get $$index) (f64.const 0.0))))
+     (block $LOOP_1.CONTINUE
       (block
-       ;; if (!($index < <expr>)) break LOOP_BREAK;
-       (if (i32.eqz (f64.lt (local.get $$index) (f64.const 0.0)))
-        (then
-         ;; break LOOP_BREAK;
-         (br $LOOP_BREAK_1)
-        )
-       )
-       ;; LOOP_CONTINUE: {
-       (block $LOOP_CONTINUE_1
-        (block
-         ;; AddNumber theAp = $array[$index];
-         
-         (local.set $theAp (ref.null $innerclassinitorder.InnerClassInitOrder.1AddNumber))
-         (block
-          ;; theAp.act();
-          
-         )
-        )
-       )
+       ;; AddNumber theAp = $array[$index];
+       
+       (local.set $theAp (ref.null $innerclassinitorder.InnerClassInitOrder.1AddNumber))
        (block
-        ;; ($index = ($index + 1.0));
-        (local.set $$index (f64.add (local.get $$index) (f64.const 1.0)))
+        ;; theAp.act();
+        
        )
       )
-      (br 0)
      )
+     (local.set $$index (f64.add (local.get $$index) (f64.const 1.0)))
+     (br 0)
+     
     )
    )
    ;; assert (InnerClassInitOrder.this.number == 1156);

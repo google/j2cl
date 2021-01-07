@@ -27,27 +27,18 @@
    ;; int count = 0;
    
    (local.set $count (i32.const 0))
-   ;; LOOP_BREAK: while (true) {
-   (block $LOOP_BREAK
-    ;; while (true) {
+   ;; LOOP: do {
+   
+   (block $LOOP.BREAK
     (loop
-     (block
-      ;; LOOP_CONTINUE: {
-      (block $LOOP_CONTINUE
-       (block
-        ;; (count = (count + 1));
-        (local.set $count (i32.add (local.get $count) (i32.const 1)))
-       )
-      )
-      ;; if (!(count < 5)) break LOOP_BREAK;
-      (if (i32.eqz (i32.lt_s (local.get $count) (i32.const 5)))
-       (then
-        ;; break LOOP_BREAK;
-        (br $LOOP_BREAK)
-       )
+     (block $LOOP.CONTINUE
+      (block
+       ;; (count = (count + 1));
+       (local.set $count (i32.add (local.get $count) (i32.const 1)))
       )
      )
-     (br 0)
+     (br_if 0 (i32.lt_s (local.get $count) (i32.const 5)))
+     
     )
    )
   )

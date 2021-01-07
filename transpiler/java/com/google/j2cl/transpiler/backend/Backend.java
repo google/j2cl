@@ -73,6 +73,7 @@ import com.google.j2cl.transpiler.passes.NormalizeJsDocCastExpressions;
 import com.google.j2cl.transpiler.passes.NormalizeJsEnums;
 import com.google.j2cl.transpiler.passes.NormalizeJsFunctionPropertyInvocations;
 import com.google.j2cl.transpiler.passes.NormalizeJsVarargs;
+import com.google.j2cl.transpiler.passes.NormalizeLabels;
 import com.google.j2cl.transpiler.passes.NormalizeLiterals;
 import com.google.j2cl.transpiler.passes.NormalizeLongs;
 import com.google.j2cl.transpiler.passes.NormalizeMultiExpressions;
@@ -88,7 +89,6 @@ import com.google.j2cl.transpiler.passes.OptimizeAutoValue;
 import com.google.j2cl.transpiler.passes.RemoveNoopStatements;
 import com.google.j2cl.transpiler.passes.RemoveUnneededJsDocCasts;
 import com.google.j2cl.transpiler.passes.RewriteAssignmentExpressions;
-import com.google.j2cl.transpiler.passes.RewriteLoopStatements;
 import com.google.j2cl.transpiler.passes.RewriteReferenceNotEquals;
 import com.google.j2cl.transpiler.passes.RewriteShortcutOperators;
 import com.google.j2cl.transpiler.passes.RewriteStringEquals;
@@ -279,7 +279,7 @@ public enum Backend {
           new RewriteUnaryExpressions(),
           // Rewrite 'a || b' into 'a ? true : b' and 'a && b' into 'a ? b : false'
           new RewriteShortcutOperators(),
-          new RewriteLoopStatements(),
+          new NormalizeLabels(),
 
           // Normalize multiexpressions before rewriting assignments so that whenever there is a
           // multiexpression, the result is used.
