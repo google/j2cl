@@ -75,10 +75,6 @@ jobs:
       - name: Configure bazel
         run: |
           echo "startup --output_base=$HOME/.cache/bazel" >> .bazelrc
-          # Avoid progress indicators that can blow out log which makes using WEB UI difficult
-          echo "common --noshow_progress" >> .bazelrc
-          echo "common --noshow_loading_progress" >> .bazelrc
-          # This is so we understand failures better
           echo "build --verbose_failures" >> .bazelrc
 
       - name: Build and Test
