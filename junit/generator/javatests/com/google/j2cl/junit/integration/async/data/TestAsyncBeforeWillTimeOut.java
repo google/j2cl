@@ -31,7 +31,7 @@ public class TestAsyncBeforeWillTimeOut {
 
   private static boolean first = true;
 
-  @Timeout(10L)
+  @Timeout(50)
   @Before
   public Thenable willTimeoutOnFirstCall() {
     TestCaseLogger.log("before");

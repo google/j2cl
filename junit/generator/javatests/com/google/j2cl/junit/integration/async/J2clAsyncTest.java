@@ -339,14 +339,11 @@ public class J2clAsyncTest extends IntegrationTestBase {
             .addTestFailure("willTimeout")
             .addLogLineContains(
                 testMode.isJ2cl()
-                    ? "Timed out while waiting for a promise returned "
-                        + "from test_willTimeout to resolve. "
-                        + "Set goog.testing.TestCase.getActiveTestCase().promiseTimeout "
-                        + "to adjust the timeout."
+                    ? "Timed out while waiting for a promise returned from test_willTimeout"
                     // The exception that is thrown to indicate a timeout differs from JUnit 4.11 to
                     // JUnit 4.12. In JUnit 4.11 a java.lang.Exception is used, in JUnit 4.12 an
                     // org.junit.runners.model.TestTimedOutException is used. This works with both.
-                    : "Exception: test timed out after 10 milliseconds")
+                    : "Exception: test timed out")
             .build();
 
     List<String> logLines = runTest(testName);

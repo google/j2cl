@@ -22,7 +22,7 @@ import org.junit.runner.RunWith;
 /** Integration test used in J2clTestRunnerTest. */
 @RunWith(AsyncTestRunner.class)
 public class TestWillTimeOut {
-  @Test(timeout = 10)
+  @Test(timeout = 50)
   public Thenable willTimeout() {
     return (onFulfilled, onRejected) -> Timer.schedule(() -> onFulfilled.execute(null), 300);
   }
