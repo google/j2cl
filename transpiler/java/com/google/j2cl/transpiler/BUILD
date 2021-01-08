@@ -70,9 +70,6 @@ java_binary(
         ":javac": [
             "-Dj2cl.frontend=javac",
         ],
-        ":jdt": [
-            "-Dj2cl.frontend=jdt",
-        ],
         "//conditions:default": [
             "-Dj2cl.frontend=jdt",
         ],
