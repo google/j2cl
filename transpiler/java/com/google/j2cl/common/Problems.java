@@ -19,6 +19,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.Multimaps;
 import com.google.errorprone.annotations.FormatMethod;
 import com.google.errorprone.annotations.FormatString;
 import java.io.PrintStream;
@@ -89,7 +90,8 @@ public class Problems {
     }
   }
 
-  private final Multimap<Severity, String> problemsBySeverity = LinkedHashMultimap.create();
+  private final Multimap<Severity, String> problemsBySeverity =
+      Multimaps.synchronizedSetMultimap(LinkedHashMultimap.create());
 
   public void fatal(FatalError fatalError, Object... args) {
     checkArgument(fatalError.getNumberOfArguments() == args.length);

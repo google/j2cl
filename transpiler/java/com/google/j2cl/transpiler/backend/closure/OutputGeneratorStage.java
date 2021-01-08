@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.backend.closure;
 
+import static java.util.concurrent.TimeUnit.SECONDS;
+
 import com.google.j2cl.common.OutputUtils;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
@@ -30,6 +32,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * The OutputGeneratorStage contains all necessary information for generating the JavaScript output
@@ -37,6 +41,7 @@ import java.util.Map;
  * generating header, implementation and sourcemap files for each Java Type.
  */
 public class OutputGeneratorStage {
+  private final ExecutorService fileService = Executors.newSingleThreadExecutor();
   private final List<FileInfo> nativeJavaScriptFiles;
   private final Problems problems;
   private final Path outputPath;
@@ -129,7 +134,7 @@ public class OutputGeneratorStage {
                     type.getDeclaration().getSimpleBinaryName() + SOURCE_MAP_SUFFIX);
             Path absolutePathForSourceMap =
                 outputPath.resolve(typeRelativePath + SOURCE_MAP_SUFFIX);
-            OutputUtils.writeToFile(absolutePathForSourceMap, sourceMap, problems);
+            writeToFile(absolutePathForSourceMap, sourceMap);
           }
         }
 
@@ -143,12 +148,10 @@ public class OutputGeneratorStage {
         }
 
         String implRelativePath = typeRelativePath + jsImplGenerator.getSuffix();
-        OutputUtils.writeToFile(
-            outputPath.resolve(implRelativePath), javaScriptImplementationSource, problems);
+        writeToFile(outputPath.resolve(implRelativePath), javaScriptImplementationSource);
 
         String headerRelativePath = typeRelativePath + jsHeaderGenerator.getSuffix();
-        OutputUtils.writeToFile(
-            outputPath.resolve(headerRelativePath), javaScriptHeaderSource, problems);
+        writeToFile(outputPath.resolve(headerRelativePath), javaScriptHeaderSource);
 
         if (libraryInfoOutputPath != null || shouldGenerateReadableLibraryInfo) {
           libraryInfoBuilder.addType(
@@ -164,19 +167,17 @@ public class OutputGeneratorStage {
       }
 
       if (!generateKytheIndexingMetadata) {
-        copyJavaSourcesToOutput(j2clCompilationUnit);
+        copyJavaSourceToOutput(j2clCompilationUnit);
       }
     }
 
     if (libraryInfoOutputPath != null) {
-      OutputUtils.writeToFile(libraryInfoOutputPath, libraryInfoBuilder.toByteArray(), problems);
+      writeToFile(libraryInfoOutputPath, libraryInfoBuilder.toByteArray());
     }
 
     if (shouldGenerateReadableLibraryInfo) {
-      OutputUtils.writeToFile(
-          outputPath.resolve("library_info_debug.json"),
-          libraryInfoBuilder.toJson(problems),
-          problems);
+      writeToFile(
+          outputPath.resolve("library_info_debug.json"), libraryInfoBuilder.toJson(problems));
     }
 
     // Error if any of the native implementation files were not used.
@@ -184,6 +185,18 @@ public class OutputGeneratorStage {
       if (!file.wasUsed()) {
         problems.error("Unused native file '%s'.", file);
       }
+    }
+
+    awaitCompletionOfFileWrites();
+  }
+
+  private void awaitCompletionOfFileWrites() {
+    try {
+      fileService.shutdown();
+      fileService.awaitTermination(Long.MAX_VALUE, SECONDS);
+    } catch (InterruptedException ie) {
+      // Preserve interrupt status
+      Thread.currentThread().interrupt();
     }
   }
 
@@ -245,7 +258,7 @@ public class OutputGeneratorStage {
       Path absolutePathForReadableSourceMap =
           outputPath.resolve(
               getPackageRelativePath(type.getDeclaration()) + READABLE_MAPPINGS_SUFFIX);
-      OutputUtils.writeToFile(absolutePathForReadableSourceMap, readableOutput, problems);
+      writeToFile(absolutePathForReadableSourceMap, readableOutput);
     }
   }
 
@@ -253,15 +266,27 @@ public class OutputGeneratorStage {
    * Copy Java source files to the output. Sourcemaps reference locations in the Java source file,
    * and having it available as output simplifies the process of source debugging in the browser.
    */
-  private void copyJavaSourcesToOutput(CompilationUnit j2clUnit) {
+  private void copyJavaSourceToOutput(CompilationUnit j2clUnit) {
     String relativePath = getPackageRelativePath(j2clUnit);
     Path absolutePath = outputPath.resolve(relativePath + ".java");
-    OutputUtils.copyFile(Paths.get(j2clUnit.getFilePath()), absolutePath, problems);
+    copyFile(Paths.get(j2clUnit.getFilePath()), absolutePath);
   }
 
   private void copyNativeJsFileToOutput(NativeJavaScriptFile nativeJavaScriptFile) {
     Path absolutePath = outputPath.resolve(nativeJavaScriptFile.getRelativeFilePath());
-    OutputUtils.writeToFile(absolutePath, nativeJavaScriptFile.getContent(), problems);
+    writeToFile(absolutePath, nativeJavaScriptFile.getContent());
+  }
+
+  private void writeToFile(Path outputPath, String content) {
+    fileService.execute(() -> OutputUtils.writeToFile(outputPath, content, problems));
+  }
+
+  private void writeToFile(Path outputPath, byte[] content) {
+    fileService.execute(() -> OutputUtils.writeToFile(outputPath, content, problems));
+  }
+
+  private void copyFile(Path from, Path to) {
+    fileService.execute(() -> OutputUtils.copyFile(from, to, problems));
   }
 
   /** Returns the relative output path for a given type. */
