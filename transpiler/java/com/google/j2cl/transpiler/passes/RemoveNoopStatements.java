@@ -30,6 +30,17 @@ import com.google.j2cl.transpiler.ast.SwitchCase;
 public class RemoveNoopStatements extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
+    // In general, list of statements always appear enclosed in a block, such is the case of the
+    // statements in the body of loops, the body of a try statement, etc.
+    // However there is an exception to this rule; SwitchCase. SwitchCase is the only other node in
+    // the AST that contains a list of statements. That list of statements can not be modeled as a
+    // Block due to the scoping of variables; since a variable declared in a switch case is in scope
+    // in the rest of the cases.
+    // All the other constructs that might look as if they have lists of statements (i.e the init
+    // and update part of the 'for' loop, the resource declarations in the 'try' statement) are
+    // not statements hence cannot contain empty statements.
+    // Also empty blocks can only be removed when they are in a list of statements, not when they
+    // are the only statement as in "if (...) {}".
     compilationUnit.accept(
         new AbstractVisitor() {
           @Override
