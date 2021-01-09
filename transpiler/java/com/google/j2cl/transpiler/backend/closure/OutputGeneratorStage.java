@@ -41,7 +41,7 @@ import java.util.concurrent.Executors;
  * generating header, implementation and sourcemap files for each Java Type.
  */
 public class OutputGeneratorStage {
-  private final ExecutorService fileService = Executors.newSingleThreadExecutor();
+  private ExecutorService fileService;
   private final List<FileInfo> nativeJavaScriptFiles;
   private final Problems problems;
   private final Path outputPath;
@@ -68,6 +68,16 @@ public class OutputGeneratorStage {
   }
 
   public void generateOutputs(List<CompilationUnit> j2clCompilationUnits) {
+    fileService = Executors.newSingleThreadExecutor();
+    try {
+      generateOutputsImpl(j2clCompilationUnits);
+    } finally {
+      awaitCompletionOfFileWrites();
+      fileService = null;
+    }
+  }
+
+  private void generateOutputsImpl(List<CompilationUnit> j2clCompilationUnits) {
     // The map must be ordered because it will be iterated over later and if it was not ordered then
     // our output would be unstable. Actually this one can't actually destabilize output but since
     // it's being safely iterated over now it's best to guard against it being unsafely iterated
@@ -186,8 +196,6 @@ public class OutputGeneratorStage {
         problems.error("Unused native file '%s'.", file);
       }
     }
-
-    awaitCompletionOfFileWrites();
   }
 
   private void awaitCompletionOfFileWrites() {
