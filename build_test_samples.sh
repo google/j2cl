@@ -13,20 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Script that can be used by CI server for testing j2cl builds.
 set -e
 
-if [[ $1 == "SAMPLES" ]]; then
-  ./build_test_samples.sh
-  exit 0
-fi
+# Build Hello World sample in its own workspace
+(cd samples/helloworld && bazel build src/main/...)
 
-bazel build :all {jre,transpiler,tools}/java/...
-
-# Do a quick smoke check of integration test
-bazel test transpiler/javatests/com/google/j2cl/integration/emptyclass/...
-
-# Run CI test if requested
-if [[ $1 == "CI" ]]; then
-  bazel test transpiler/javatests/com/google/j2cl/integration/...
-fi
+# Build Guava sample in its own workspace
+(cd samples/guava && bazel build src/main/...)
