@@ -44,6 +44,9 @@ jobs:
             bazelisk-os: linux
           - os: macos-latest
             bazelisk-os: darwin
+        test-type:
+          - CI
+          - SAMPLES
 
     steps:
       - name: Checkout current commit
@@ -78,4 +81,4 @@ jobs:
           echo "build --verbose_failures" >> .bazelrc
 
       - name: Build and Test
-        run: ./build_test.sh CI
+        run: ./build_test.sh ${{ matrix['test-type'] }}
