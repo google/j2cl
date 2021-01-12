@@ -21,6 +21,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
+import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.FieldAccess;
@@ -53,7 +54,7 @@ public final class LibraryInfoBuilder {
       Type type,
       String headerFilePath,
       String implFilePath,
-      Map<MemberDescriptor, com.google.j2cl.common.SourcePosition> outputSourceInfoByMember) {
+      Map<MemberDescriptor, SourcePosition> outputSourceInfoByMember) {
 
     if (!isPrunableType(type.getTypeDescriptor())) {
       return;
@@ -79,10 +80,10 @@ public final class LibraryInfoBuilder {
       }
     }
 
-    // Collect references to getter and setter for the same field under the name of the field,
-    // creating only one MemberInfo instance that combines all the references appearing in their
-    // bodies.
-    Map<String, MemberInfo.Builder> memberInfoBuilderByName =
+    // Collect references to getter and setter for the same field under the same key to
+    // create only one MemberInfo instance that combines all the references appearing in their
+    // bodies (see #getMemberId).
+    Map<String, MemberInfo.Builder> memberInfoBuilders =
         Maps.newLinkedHashMapWithExpectedSize(type.getMembers().size());
 
     for (Member member : type.getMembers()) {
@@ -102,41 +103,41 @@ public final class LibraryInfoBuilder {
         continue;
       }
 
-      String memberName = getMemberId(memberDescriptor);
-      boolean isJsAccessible = isJsAccessible(memberDescriptor);
-
       MemberInfo.Builder builder =
-          memberInfoBuilderByName.computeIfAbsent(
-              memberName,
-              m ->
-                  MemberInfo.newBuilder()
-                      .setName(memberName)
-                      .setStatic(member.isStatic())
-                      .setJsAccessible(isJsAccessible));
-
-      com.google.j2cl.common.SourcePosition jsSourcePosition =
-          outputSourceInfoByMember.get(member.getDescriptor());
-      if (jsSourcePosition != null) {
-        builder.setPosition(createSourcePosition(jsSourcePosition));
-      }
+          memberInfoBuilders.computeIfAbsent(
+              getMemberId(memberDescriptor),
+              m -> createMemberInfo(memberDescriptor, outputSourceInfoByMember));
 
       collectReferencedTypesAndMethodInvocations(member, builder);
     }
 
     libraryInfo.addType(
         typeInfoBuilder.addAllMember(
-            memberInfoBuilderByName.values().stream()
+            memberInfoBuilders.values().stream()
                 .map(MemberInfo.Builder::build)
                 .collect(Collectors.toList())));
   }
 
-  private static SourcePosition createSourcePosition(
-      com.google.j2cl.common.SourcePosition position) {
-    return SourcePosition.newBuilder()
-        .setStart(position.getStartFilePosition().getLine())
-        // For the minifier, end position is exclusive.
-        .setEnd(position.getEndFilePosition().getLine() + 1)
-        .build();
+  private static MemberInfo.Builder createMemberInfo(
+      MemberDescriptor memberDescriptor,
+      Map<MemberDescriptor, SourcePosition> outputSourceInfoByMember) {
+    MemberInfo.Builder memberInfoBuilder =
+        MemberInfo.newBuilder()
+            .setName(getMemberId(memberDescriptor))
+            .setStatic(memberDescriptor.isStatic())
+            .setJsAccessible(isJsAccessible(memberDescriptor));
+
+    SourcePosition position = outputSourceInfoByMember.get(memberDescriptor);
+    if (position != null) {
+      memberInfoBuilder.setPosition(
+          com.google.j2cl.transpiler.backend.libraryinfo.SourcePosition.newBuilder()
+              .setStart(position.getStartFilePosition().getLine())
+              // For the minifier, end position is exclusive.
+              .setEnd(position.getEndFilePosition().getLine() + 1)
+              .build());
+    }
+
+    return memberInfoBuilder;
   }
 
   private void collectReferencedTypesAndMethodInvocations(
