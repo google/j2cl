@@ -127,6 +127,7 @@ public final class LibraryInfoBuilder {
             .setStatic(memberDescriptor.isStatic())
             .setJsAccessible(isJsAccessible(memberDescriptor));
 
+    // See the limitations of member removal in b/177365417.
     SourcePosition position = outputSourceInfoByMember.get(memberDescriptor);
     if (position != null) {
       memberInfoBuilder.setPosition(
@@ -286,9 +287,13 @@ public final class LibraryInfoBuilder {
 
   private static String getMemberId(MemberDescriptor memberDescriptor) {
     // TODO(b/158014657): remove this once the bug is fixed.
-    return isPropertyAccessor(memberDescriptor)
-        ? memberDescriptor.computePropertyMangledName()
-        : memberDescriptor.getMangledName();
+    String mangledName =
+        isPropertyAccessor(memberDescriptor)
+            ? memberDescriptor.computePropertyMangledName()
+            : memberDescriptor.getMangledName();
+
+    // Avoid unintented collissions by using the seperate namespace for static and non-static.
+    return memberDescriptor.isInstanceMember() ? mangledName + "_$i" : mangledName;
   }
 
   private static boolean isPropertyAccessor(MemberDescriptor memberDescriptor) {
