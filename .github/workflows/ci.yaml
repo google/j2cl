@@ -14,7 +14,7 @@
 
 # Format reference: https://docs.github.com/en/actions/reference
 
-name: build and tests
+name: J2CL CI
 
 # https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#on
 on:
@@ -39,6 +39,8 @@ jobs:
 
     strategy:
       matrix:
+        test-type: [CI, SAMPLES]
+        os: [macos-latest, ubuntu-latest]
         include:
           - os: ubuntu-latest
             bazelisk-os: linux
@@ -62,9 +64,7 @@ jobs:
           mkdir -p ${BAZELISK_BIN}
           curl -L "https://github.com/bazelbuild/bazelisk/releases/download/${BAZELISK_VERSION}/bazelisk-${{ matrix.bazelisk-os }}-amd64" -o ${BAZELISK_BIN}/bazel
           chmod +x "${BAZELISK_BIN}/bazel"
-
-      - name: Alias bazel
-        run:  alias bazel="${BAZELISK_BIN}/bazel"
+          alias bazel="${BAZELISK_BIN}/bazel"
 
       - name: Mount bazel cache
         uses: actions/cache@v2
@@ -77,5 +77,5 @@ jobs:
           echo "startup --output_base=$HOME/.cache/bazel" >> .bazelrc
           echo "build --verbose_failures" >> .bazelrc
 
-      - name: Build and Test
-        run: ./build_test.sh CI
+      - name: Run tests
+        run: ./build_test.sh ${{ matrix['test-type'] }}
