@@ -39,14 +39,13 @@ jobs:
 
     strategy:
       matrix:
+        os: [macos-latest, ubuntu-latest]
+        test-type: [CI, SAMPLES]
         include:
           - os: ubuntu-latest
             bazelisk-os: linux
           - os: macos-latest
             bazelisk-os: darwin
-        test-type:
-          - CI
-          - SAMPLES
 
     steps:
       - name: Checkout current commit
@@ -65,9 +64,7 @@ jobs:
           mkdir -p ${BAZELISK_BIN}
           curl -L "https://github.com/bazelbuild/bazelisk/releases/download/${BAZELISK_VERSION}/bazelisk-${{ matrix.bazelisk-os }}-amd64" -o ${BAZELISK_BIN}/bazel
           chmod +x "${BAZELISK_BIN}/bazel"
-
-      - name: Alias bazel
-        run:  alias bazel="${BAZELISK_BIN}/bazel"
+          alias bazel="${BAZELISK_BIN}/bazel"
 
       - name: Mount bazel cache
         uses: actions/cache@v2
