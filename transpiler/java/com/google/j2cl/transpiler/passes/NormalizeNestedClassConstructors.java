@@ -221,7 +221,7 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
       for (Type type : compilationUnit.getTypes()) {
         capturedVariablesByCapturingTypeName.putAll(
             type.getDeclaration().getQualifiedSourceName(),
-            Streams.stream(type.getInstanceFields())
+            type.getInstanceFields().stream()
                 .map(Field::getCapturedVariable)
                 .filter(Predicates.notNull())
                 .collect(Collectors.toList()));
@@ -327,7 +327,7 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
    */
   private static Field getCapturingFieldInType(Variable variable, Type type) {
     checkArgument(variable != null);
-    return Streams.stream(type.getFields())
+    return type.getFields().stream()
         .filter(field -> field.getCapturedVariable() == variable)
         .findFirst()
         .orElse(null);

@@ -17,7 +17,6 @@ import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableSet.toImmutableSet;
 
 import com.google.common.base.Predicates;
-import com.google.common.collect.Streams;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
@@ -76,7 +75,7 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
               //  (E e) -> { return e.toString(); }
               //
               Set<Variable> enclosingCaptures =
-                  Streams.stream(getCurrentType().getFields())
+                  getCurrentType().getFields().stream()
                       .map(Field::getCapturedVariable)
                       .filter(Predicates.notNull())
                       .collect(toImmutableSet());
@@ -217,9 +216,7 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
     }
 
     // Do not optimize if there are fields that are not captures.
-    if (!Streams.stream(type.getFields())
-        .map(Field::getDescriptor)
-        .allMatch(FieldDescriptor::isCapture)) {
+    if (!type.getFields().stream().map(Field::getDescriptor).allMatch(FieldDescriptor::isCapture)) {
       return false;
     }
     if (getSingleDeclaredMethod(type) == null) {
