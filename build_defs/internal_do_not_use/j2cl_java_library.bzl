@@ -11,7 +11,6 @@ def _impl_j2cl_library(ctx):
         exports = _j2cl_or_js_providers_of(ctx.attr.exports),
         plugins = _java_providers_of(ctx.attr.plugins),
         exported_plugins = _java_providers_of(ctx.attr.exported_plugins),
-        output_jszip = ctx.outputs.jszip,
         output_jar = ctx.outputs.jar,
         javac_opts = ctx.attr.javacopts,
         internal_transpiler_flags = {

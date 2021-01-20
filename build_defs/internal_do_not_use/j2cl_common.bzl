@@ -17,7 +17,6 @@ def _compile(
         exports = [],
         plugins = [],
         exported_plugins = [],
-        output_jszip = None,
         output_jar = None,
         javac_opts = [],
         internal_transpiler_flags = {},
@@ -53,7 +52,7 @@ def _compile(
         javac_opts,
     )
 
-    output_jszip = output_jszip or ctx.actions.declare_file("%s.js.zip" % name)
+    output_jszip = ctx.actions.declare_file("%s.js.zip" % name)
 
     if java_srcs:
         output_library_info = ctx.actions.declare_file("%s_library_info" % name)
