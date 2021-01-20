@@ -52,29 +52,41 @@ def _compile(
         javac_opts,
     )
 
-    output_jszip = ctx.actions.declare_file("%s.js.zip" % name)
-
-    if java_srcs:
-        output_library_info = ctx.actions.declare_file("%s_library_info" % name)
-        _j2cl_transpile(
-            ctx,
-            java_provider,
-            js_srcs,
-            output_jszip,
-            output_library_info,
-            internal_transpiler_flags,
-        )
-        library_info = [output_library_info]
-    else:
-        _create_empty_zip(ctx, output_jszip)
-        library_info = []
-
     # TODO(b/155112462): Remove support for --define=J2CL_TREE_ARTIFACTS=1.
     generate_tree_artifact = (
         ctx.var.get("J2CL_TREE_ARTIFACTS", None) == "1" or
         ctx.attr._enable_tree_artifact[BuildSettingInfo].value
     )
-    output_js = _unzip_output(ctx, output_jszip, name) if generate_tree_artifact else output_jszip
+
+    # A note about the zip file: It will be created if:
+    #  - tree artifacts are not enabled. In this case the zip file will be part
+    #    of the default outputs of the rule and passed to js provider, or
+    #  - a downstream rule depends directly on the zip file. When the zip
+    #    file is requested, the action that creates the zip file will be triggered.
+    # TODO(b/178020117): Remove zip artifact.
+    output_jszip = ctx.actions.declare_file("%s.js.zip" % name)
+
+    if java_srcs:
+        if generate_tree_artifact:
+            output_js = ctx.actions.declare_directory("%s_j2cl_js" % name)
+            _zip_output(ctx, output_js, output_jszip)
+        else:
+            output_js = output_jszip
+
+        output_library_info = ctx.actions.declare_file("%s_library_info" % name)
+        _j2cl_transpile(
+            ctx,
+            java_provider,
+            js_srcs,
+            output_js,
+            output_library_info,
+            internal_transpiler_flags,
+        )
+        library_info = [output_library_info]
+    else:
+        output_js = None
+        _create_empty_zip(ctx, output_jszip)
+        library_info = []
 
     # Don't pass anything to the js provider if we didn't transpile anything.
     # This case happens when j2cl_library exports another j2cl_library.
@@ -96,22 +108,20 @@ def _compile(
         _is_j2cl_provider = 1,
     )
 
-def _unzip_output(ctx, jszip, name):
-    output_dir = ctx.actions.declare_directory("%s_j2cl_js" % name)
-
+def _zip_output(ctx, input_dir, output_file):
     ctx.actions.run_shell(
-        progress_message = "Generating TreeArtifact",
-        inputs = [jszip],
-        outputs = [output_dir],
+        progress_message = "Generating J2CL zip file",
+        inputs = [input_dir],
+        outputs = [output_file],
+        # We use mkdir -p command in order to ensure srcs_dir exists on filesystem
+        # since it may not have been produced by previous actions.
         command = (
-            "mkdir -p %s && " % output_dir.path +
-            "%s x %s -d %s" % (ctx.executable._zip.path, jszip.path, output_dir.path)
+            "mkdir -p %s && " % input_dir.path +
+            "%s cfM %s -C %s ." % (ctx.executable._jar.path, output_file.path, input_dir.path)
         ),
-        tools = [ctx.executable._zip],
+        tools = [ctx.executable._jar],
         mnemonic = "J2clZip",
     )
-
-    return output_dir
 
 def _split_deps(deps):
     """ Split the provider deps into Java and JS groups. """
@@ -212,7 +222,7 @@ def _j2cl_transpile(
     args.use_param_file("@%s", use_always = True)
     args.set_param_file_format("multiline")
     args.add_joined("-classpath", classpath, join_with = ctx.configuration.host_path_separator)
-    args.add("-output", output_dir)
+    args.add("-output", output_dir.path)
     args.add("-libraryinfooutput", library_info_output)
     for flag, value in internal_transpiler_flags.items():
         if value:
@@ -253,10 +263,10 @@ J2CL_TOOLCHAIN_ATTRS = {
         cfg = "host",
         executable = True,
     ),
-    "_zip": attr.label(
+    "_jar": attr.label(
         cfg = "host",
         executable = True,
-        default = Label("@bazel_tools//tools/zip:zipper"),
+        default = Label("@bazel_tools//tools/jdk:jar"),
     ),
     "_enable_tree_artifact": attr.label(
         default = Label("//:enable_experimental_tree_artifact_mode"),
