@@ -62,6 +62,10 @@ public abstract class BazelWorker {
       run(problems);
     } catch (Problems.Exit e) {
       // Program aborted due to errors recorded in problems.
+    } catch (Throwable e) {
+      // Program crash.
+      e.printStackTrace(System.err);
+      return 1;
     }
     return problems.reportAndGetExitCode(System.err);
   }
