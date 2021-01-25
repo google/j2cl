@@ -464,15 +464,13 @@ public class JsInteropRestrictionsChecker {
       return false;
     }
 
-    // Skip the super() call if present to get the only expected statement in the custom valued
-    // JsEnum.
-    int statementIndex = AstUtils.hasSuperCall(constructor) ? 1 : 0;
-
     // Verify that the body only contains the assignment to the custom value field.
-    return constructor.getBody().getStatements().size() == statementIndex + 1
+    // Note that at this stage, we don't have super calls for enums (JLS won't let them to be
+    // explicit and we haven't normalized the AST yet).
+    return constructor.getBody().getStatements().size() == 1
         && checkJsEnumConstructorStatement(
             constructorDescriptor.getEnclosingTypeDescriptor(),
-            constructor.getBody().getStatements().get(statementIndex),
+            constructor.getBody().getStatements().get(0),
             constructor.getParameters().get(0));
   }
 
