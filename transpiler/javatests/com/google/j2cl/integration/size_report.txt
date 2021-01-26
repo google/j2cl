@@ -1,17 +1,27 @@
 Integration tests size report:
 **************************************
-There are 0 optimized size changes.
-Total size (of already existing tests) did not change.
+There are 16 optimized size changes.
+Total optimized size (of already existing tests) changed from
+  2058562 to 2057925 bytes (100%->100.0%) and from
+  719219 to 719176 bytes (100%->100.0%) gzipped.
 
 
 Shrinkage report highlights:
 **************************************
-  none
+        old      new
+      14032    13957 jsinteroptests (-0.5%)
+       1539     1532 intersectiontype (-0.5%)
+      12322    12284 jsinteroptests.esnext (-0.3%)
+       1209     1206 intersectiontype.esnext (-0.2%)
 
 
 Expansion report highlights:
 **************************************
-  none
+        old      new
+       2183     2184 staticinitsuper.esnext (0.0%)
+      27048    27060 box2d_noclassmetadata_checksopt (0.0%)
+      27212    27224 box2d_noclassmetadata (0.0%)
+      25860    25871 box2d_noclassmetadata_checksmin (0.0%)
 
 
 Incremental size reports (non-gzip):
@@ -24,11 +34,11 @@ Incremental size reports (non-gzip):
 Uncompiled bundle reports:
 **************************************
         old      new
-    4023714  4022804 box2d_default (-0.0%)
-    2196081  2195626 box2d_default.minified (-0.0%)
-    1168502  1168209 box2d_default.rta (-0.0%)
-    2420884  2420744 emptyclass (-0.0%)
-    1454055  1453985 emptyclass.minified (-0.0%)
+    4022804  4022804 box2d_default (unchanged)
+    2195626  2195626 box2d_default.minified (unchanged)
+    1168209  1168209 box2d_default.rta (unchanged)
+    2420744  2420744 emptyclass (unchanged)
+    1453985  1453985 emptyclass.minified (unchanged)
      702899   702899 emptyclass.rta (unchanged)
 
 
@@ -79,14 +89,14 @@ All reports:
        2324     2324 binaryexpressions.esnext (unchanged)
         906      906 blockscoping (unchanged)
         628      628 blockscoping.esnext (unchanged)
-      28814    28814 box2d_default (unchanged)
-      31001    31001 box2d_default.esnext (unchanged)
-      27212    27212 box2d_noclassmetadata (unchanged)
-      28892    28892 box2d_noclassmetadata.esnext (unchanged)
-      25860    25860 box2d_noclassmetadata_checksmin (unchanged)
-      27343    27343 box2d_noclassmetadata_checksmin.esnext (unchanged)
-      27048    27048 box2d_noclassmetadata_checksopt (unchanged)
-      28634    28634 box2d_noclassmetadata_checksopt.esnext (unchanged)
+      28814    28826 box2d_default (0.0%)
+      31001    31006 box2d_default.esnext (0.0%)
+      27212    27224 box2d_noclassmetadata (0.0%)
+      28892    28901 box2d_noclassmetadata.esnext (0.0%)
+      25860    25871 box2d_noclassmetadata_checksmin (0.0%)
+      27343    27353 box2d_noclassmetadata_checksmin.esnext (0.0%)
+      27048    27060 box2d_noclassmetadata_checksopt (0.0%)
+      28634    28641 box2d_noclassmetadata_checksopt.esnext (0.0%)
         959      959 breakstatement (unchanged)
         679      679 breakstatement.esnext (unchanged)
        2044     2044 bridgejsmethod (unchanged)
@@ -203,8 +213,8 @@ All reports:
          22       22 interfacejsbridge.esnext (unchanged)
        1563     1563 interfaces (unchanged)
        1224     1224 interfaces.esnext (unchanged)
-       1539     1539 intersectiontype (unchanged)
-       1209     1209 intersectiontype.esnext (unchanged)
+       1539     1532 intersectiontype (-0.5%)
+       1209     1206 intersectiontype.esnext (-0.2%)
        1226     1226 iteratormethodresolution (unchanged)
         914      914 iteratormethodresolution.esnext (unchanged)
        2270     2270 jsasync (unchanged)
@@ -224,7 +234,7 @@ All reports:
        1007     1007 jsconstructornested (unchanged)
         734      734 jsconstructornested.esnext (unchanged)
        6225     6225 jsenum (unchanged)
-       5805     5805 jsenum.esnext (unchanged)
+       5805     5806 jsenum.esnext (0.0%)
        1180     1180 jsfunction (unchanged)
         886      886 jsfunction.esnext (unchanged)
        1334     1334 jsfunctionbridge (unchanged)
@@ -233,8 +243,8 @@ All reports:
        1461     1461 jsfunctiontypeannotation.esnext (unchanged)
         969      969 jsinnerclass (unchanged)
         673      673 jsinnerclass.esnext (unchanged)
-      14032    14032 jsinteroptests (unchanged)
-      12322    12322 jsinteroptests.esnext (unchanged)
+      14032    13957 jsinteroptests (-0.5%)
+      12322    12284 jsinteroptests.esnext (-0.3%)
         973      973 jsmethodoverride (unchanged)
         677      677 jsmethodoverride.esnext (unchanged)
        1182     1182 jsoverlay (unchanged)
@@ -253,7 +263,7 @@ All reports:
        1911     1911 lambdas.esnext (unchanged)
         985      985 localgenericclassinitjustonce (unchanged)
         709      709 localgenericclassinitjustonce.esnext (unchanged)
-       4614     4614 logging (unchanged)
+       4614     4615 logging (0.0%)
        4211     4211 logging.esnext (unchanged)
        3861     3861 loggingstripped (unchanged)
        3490     3490 loggingstripped.esnext (unchanged)
@@ -357,8 +367,8 @@ All reports:
         903      903 staticinitfailfast.esnext (unchanged)
         964      964 staticinitorder (unchanged)
         688      688 staticinitorder.esnext (unchanged)
-       2499     2499 staticinitsuper (unchanged)
-       2183     2183 staticinitsuper.esnext (unchanged)
+       2499     2498 staticinitsuper (-0.0%)
+       2183     2184 staticinitsuper.esnext (0.0%)
         882      882 staticjsmethods (unchanged)
         604      604 staticjsmethods.esnext (unchanged)
         988      988 staticnestedclass (unchanged)
