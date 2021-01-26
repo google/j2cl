@@ -18,15 +18,17 @@ package com.google.j2cl.transpiler.passes;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.collect.MoreCollectors.onlyElement;
 import static java.util.stream.Collectors.toList;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.MoreCollectors;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
+import com.google.j2cl.transpiler.ast.ExpressionStatement;
 import com.google.j2cl.transpiler.ast.JsInfo;
 import com.google.j2cl.transpiler.ast.JsMemberType;
 import com.google.j2cl.transpiler.ast.Member;
@@ -41,13 +43,11 @@ import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.ThisReference;
 import com.google.j2cl.transpiler.ast.Type;
-import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import com.google.j2cl.transpiler.ast.Visibility;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -137,39 +137,24 @@ public class NormalizeConstructors extends NormalizationPass {
             : synthesizePrivateConstructor(type);
 
     insertFactoryMethods(type);
-    removeSuperCallsFromConstructor(type);
+    // Since JsConstructors include ctor logic as part of ES6 constructor and will be implcitly
+    // executed when the ES6 constructor is executed, we should remove eplicit calls to the ctor
+    // functions via 'super()' and 'this()'.
+    removeJsConstructorCallsFromCtors(type);
     rewriteConstructorsAsCtorMethods(type);
 
     type.addMethod(0, es6Constructor);
   }
 
-  private static void removeSuperCallsFromConstructor(Type type) {
-    for (Method method : type.getMethods()) {
-      if (!method.isConstructor()) {
-        continue;
+  private static void removeJsConstructorCallsFromCtors(Type type) {
+    for (Method ctor : type.getConstructors()) {
+      ExpressionStatement ctorCall = AstUtils.getConstructorInvocationStatement(ctor);
+      if (ctorCall != null
+          && ((MethodCall) ctorCall.getExpression()).getTarget().isJsConstructor()) {
+        // this() call should be replaced by a call to the es6 constructor in the $create
+        // method so we remove these from $ctor methods.
+        ctor.getBody().getStatements().remove(ctorCall);
       }
-      TypeDeclaration currentTypeDeclaration = type.getDeclaration();
-      if (!currentTypeDeclaration.hasJsConstructor()
-          || !AstUtils.hasConstructorInvocation(method)) {
-        continue;
-      }
-
-      // Here we remove the "this" call since this is already taken care of by the
-      // $create method.
-      final MethodCall constructorInvocation = AstUtils.getConstructorInvocation(method);
-      if (constructorInvocation.getTarget().isMemberOf(type.getSuperTypeDescriptor())) {
-        // super() call should be called with the es6 "super(args)" in the es6 constructor
-        // if the super class has a @JsConstructor.
-        // If the super class is just a normal Java class then we should rely on the
-        // $ctor method to call the super constructor (which is $ctor_superclass).
-        if (!currentTypeDeclaration.getSuperTypeDescriptor().hasJsConstructor()) {
-          continue; // Don't remove the super call from $ctor below.
-        }
-      }
-      // this() call should be replaced by a call to the es6 constructor in the $create
-      // method so we remove these from $ctor methods.
-      Statement statement = AstUtils.getConstructorInvocationStatement(method);
-      method.getBody().getStatements().remove(statement);
     }
   }
 
@@ -362,49 +347,34 @@ public class NormalizeConstructors extends NormalizationPass {
       }
 
       // Insert the factory method just before the corresponding constructor, and advance.
-      members.add(i++, factoryMethodForConstructor(method, type));
+      members.add(i++, synthesizeFactoryMethod(type, method));
     }
   }
 
-  private static Method factoryMethodForConstructor(Method constructor, Type type) {
-    DeclaredTypeDescriptor enclosingType = constructor.getDescriptor().getEnclosingTypeDescriptor();
+  private static Method synthesizeFactoryMethod(Type type, Method constructor) {
+    MethodDescriptor javascriptConstructor =
+        getImplicitJavascriptConstructorDescriptor(type.getTypeDescriptor());
+    List<Expression> javascriptConstructorArguments = ImmutableList.of();
 
-    String jsDocDescription =
-        getConstructorRelatedJsDocDescription(
-            "Factory method corresponding to constructor", constructor, type);
+    if (type.getDeclaration().hasJsConstructor()) {
+      // Use JsConstructor instead.
 
-    if (enclosingType.hasJsConstructor()) {
       // Verify that we are not emitting factory methods for JsConstructors.
       checkState(constructor != getJsConstructor(type));
 
-      MethodCall primaryConstructorInvocation =
-          checkNotNull(
-              AstUtils.getConstructorInvocation(constructor),
-              "Could not find constructor invocation in %s.",
-              constructor);
-
-      checkArgument(
-          primaryConstructorInvocation
-              .getTarget()
-              .getEnclosingTypeDescriptor()
-              .hasSameRawType(enclosingType),
-          "%s does not delegate to the primary constructor.",
-          constructor.getDescriptor().getReadableDescription());
-
-      return synthesizeFactoryMethod(
-          constructor,
-          jsDocDescription,
-          enclosingType,
-          primaryConstructorDescriptor(primaryConstructorInvocation.getTarget()),
-          AstUtils.clone(primaryConstructorInvocation.getArguments()));
+      MethodCall primaryConstructorInvocation = AstUtils.getConstructorInvocation(constructor);
+      javascriptConstructor =
+          getPrimaryConstructorDescriptor(primaryConstructorInvocation.getTarget());
+      javascriptConstructorArguments = AstUtils.clone(primaryConstructorInvocation.getArguments());
     }
 
     return synthesizeFactoryMethod(
         constructor,
-        jsDocDescription,
-        enclosingType,
-        getImplicitJavascriptConstructorDescriptor(enclosingType),
-        Collections.emptyList());
+        getConstructorRelatedJsDocDescription(
+            "Factory method corresponding to constructor", constructor, type),
+        type.getTypeDescriptor(),
+        javascriptConstructor,
+        javascriptConstructorArguments);
   }
 
   /**
@@ -519,9 +489,9 @@ public class NormalizeConstructors extends NormalizationPass {
   }
 
   private static Method getJsConstructor(Type type) {
-    return type.getMethods().stream()
-        .filter(method -> method.getDescriptor().isJsConstructor())
-        .collect(MoreCollectors.onlyElement());
+    return type.getConstructors().stream()
+        .filter(ctor -> ctor.getDescriptor().isJsConstructor())
+        .collect(onlyElement());
   }
 
   /** Method descriptor for $ctor methods. */
@@ -585,7 +555,7 @@ public class NormalizeConstructors extends NormalizationPass {
   }
 
   /** Method descriptor for the ES6 constructor when the class has a primary constructor */
-  private static MethodDescriptor primaryConstructorDescriptor(
+  private static MethodDescriptor getPrimaryConstructorDescriptor(
       MethodDescriptor constructorDescriptor) {
 
     DeclaredTypeDescriptor enclosingType = constructorDescriptor.getEnclosingTypeDescriptor();

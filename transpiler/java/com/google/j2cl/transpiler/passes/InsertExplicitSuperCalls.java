@@ -108,6 +108,8 @@ public class InsertExplicitSuperCalls extends NormalizationPass {
     // Get all possible targets of an implicit super() call. The targets can either be a
     // parameterless constructor or if there is no parameterless constructor a varargs constructor
     // that can be called with no parameters.
+    // TODO(b/178437774): The implicit constructor for java.lang.Enum has two parameters. Fix the
+    // behavior accordingly when we rollback the hack for b/74986525.
     Optional<MethodDescriptor> superContructor =
         superTypeDescriptor.getDeclaredMethodDescriptors().stream()
             .filter(MethodDescriptor::isConstructor)
