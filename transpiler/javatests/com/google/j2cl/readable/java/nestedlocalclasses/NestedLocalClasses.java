@@ -35,4 +35,11 @@ public class NestedLocalClasses {
       }
     }
   }
+
+  interface InterfaceWithThisReference {
+    default void foo() {
+      class Super implements InterfaceWithThisReference {}
+      new Super() {};
+    }
+  }
 }

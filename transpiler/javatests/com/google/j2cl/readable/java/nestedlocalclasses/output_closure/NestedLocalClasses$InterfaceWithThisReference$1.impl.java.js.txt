@@ -1,0 +1,51 @@
+goog.module('nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.$1$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+const $1Super = goog.require('nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.$1Super$impl');
+
+let InterfaceWithThisReference = goog.forwardDeclare('nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference$impl');
+
+class $1 extends $1Super {
+  /** @protected */
+  constructor() {
+    super();
+    /**@type {InterfaceWithThisReference}*/
+    this.$outer_this__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1;
+  }
+  /** @return {!$1} */
+  static $create__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference(
+      /** InterfaceWithThisReference */ $outer_this) {
+    $1.$clinit();
+    let $instance = new $1();
+    $instance
+        .$ctor__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference(
+            $outer_this);
+    return $instance;
+  }
+
+  $ctor__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference(
+      /** InterfaceWithThisReference */ $outer_this) {
+    this.$outer_this__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1 =
+        $outer_this;
+    this.$ctor__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1Super__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference(
+        this);
+  }
+
+  static $clinit() {
+    $1.$clinit = () => {};
+    $1.$loadModules();
+    $1Super.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof $1;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(
+    $1, 'nestedlocalclasses.NestedLocalClasses$InterfaceWithThisReference$1');
+
+exports = $1;
+
+//# sourceMappingURL=NestedLocalClasses$InterfaceWithThisReference$1.js.map

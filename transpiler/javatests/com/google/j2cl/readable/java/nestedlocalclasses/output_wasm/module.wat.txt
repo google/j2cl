@@ -111,3 +111,59 @@
  (local.get $this)
 )
 
+;;; INTERFACE  InterfaceWithThisReference
+
+(type $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference (struct
+))
+
+;;; void InterfaceWithThisReference.foo()
+(func $foo<>:void@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; InterfaceWithThisReference.this.new $1.<init>();
+   (call $<init><>:void@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1 (struct.new_default_with_rtt $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1 (global.get $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1.rtt)) )
+   drop
+  )
+ )
+)
+
+;;; CLASS  Super
+
+(type $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super (struct
+ (field $this@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super (mut (ref null $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference)))
+))
+
+;;; Super()
+(func $<init><>:void@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super
+ (param $this (ref null $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super))
+ (result (ref null $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+
+;;; CLASS  <anonymous> extends Super
+
+(type $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1 (struct
+ (field $this@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super (mut (ref null $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference)))
+ (field $this@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1 (mut (ref null $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference)))
+))
+
+;;; <anonymous> extends Super()
+(func $<init><>:void@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1
+ (param $this (ref null $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1))
+ (result (ref null $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1))
+ (block $return.label
+  (block
+   ;; $1Super.this.$1Super.<init>();
+   
+  )
+ )
+ (local.get $this)
+)
+

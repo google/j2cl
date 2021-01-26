@@ -1,0 +1,62 @@
+goog.module('nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.$1Super$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+const InterfaceWithThisReference = goog.require('nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference$impl');
+
+/**
+ * @implements {InterfaceWithThisReference}
+ */
+class $1Super extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+    /**@type {InterfaceWithThisReference}*/
+    this.$outer_this__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1Super;
+  }
+  /** @return {!$1Super} */
+  static $create__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference(
+      /** InterfaceWithThisReference */ $outer_this) {
+    $1Super.$clinit();
+    let $instance = new $1Super();
+    $instance
+        .$ctor__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1Super__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference(
+            $outer_this);
+    return $instance;
+  }
+
+  $ctor__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1Super__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference(
+      /** InterfaceWithThisReference */ $outer_this) {
+    this.$outer_this__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1Super =
+        $outer_this;
+    this.$ctor__java_lang_Object__();
+  }
+  // Default method forwarding stub.
+  /** @override */
+  m_foo__() {
+    InterfaceWithThisReference
+        .m_foo__$default__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference(
+            this);
+  }
+
+  static $clinit() {
+    $1Super.$clinit = () => {};
+    $1Super.$loadModules();
+    j_l_Object.$clinit();
+    InterfaceWithThisReference.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof $1Super;
+  }
+
+  static $loadModules() {}
+}
+InterfaceWithThisReference.$markImplementor($1Super);
+$Util.$setClassMetadata(
+    $1Super,
+    'nestedlocalclasses.NestedLocalClasses$InterfaceWithThisReference$1Super');
+
+exports = $1Super;
+
+//# sourceMappingURL=NestedLocalClasses$InterfaceWithThisReference$1Super.js.map

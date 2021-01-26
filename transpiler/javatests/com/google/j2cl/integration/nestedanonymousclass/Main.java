@@ -51,5 +51,20 @@ public class Main {
             .getName()
             .equals("com.google.j2cl.integration.nestedanonymousclass.Main$1"));
     intf1.foo();
+
+    InterfaceWithThisReference o = new InterfaceWithThisReference() {};
+    // TODO(b/178447142): Uncomment when the bug is fixed.
+    // assertSame(o, o.foo());
+  }
+
+  interface InterfaceWithThisReference {
+    default Object foo() {
+      class Super implements InterfaceWithThisReference {
+        Object bar() {
+          return InterfaceWithThisReference.this;
+        }
+      }
+      return new Super() {}.bar();
+    }
   }
 }
