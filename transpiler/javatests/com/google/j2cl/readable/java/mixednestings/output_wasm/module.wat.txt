@@ -2,11 +2,7 @@
 
 ;;; INTERFACE  MyInterface
 
-(type $mixednestings.MyInterface (struct
-))
-
 ;;; CLASS  MixedNestings
-
 (type $mixednestings.MixedNestings (struct
 ))
 
@@ -44,7 +40,6 @@
 )
 
 ;;; CLASS  A
-
 (type $mixednestings.MixedNestings.A (struct
  (field $this@mixednestings.MixedNestings.A (mut (ref null $mixednestings.MixedNestings)))
 ))
@@ -84,7 +79,6 @@
 )
 
 ;;; CLASS  B
-
 (type $mixednestings.MixedNestings.A.1B (struct
  (field $this@mixednestings.MixedNestings.A.1B (mut (ref null $mixednestings.MixedNestings.A)))
 ))
@@ -116,7 +110,7 @@
  (param $this (ref null $java.lang.Object))
  (result i32)
  (local $return.value i32)
- (local $i (ref null $mixednestings.MyInterface))
+ (local $i (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; MyInterface i = $1B.this.new $1.<init>();
@@ -131,7 +125,6 @@
 )
 
 ;;; CLASS  <anonymous> implements MyInterface
-
 (type $mixednestings.MixedNestings.A.1B.1 (struct
  (field $this@mixednestings.MixedNestings.A.1B.1 (mut (ref null $mixednestings.MixedNestings.A.1B)))
 ))
@@ -155,15 +148,15 @@
  (param $a i32)
  (result i32)
  (local $return.value i32)
- (local $ii (ref null $mixednestings.MyInterface))
+ (local $ii (ref null $java.lang.Object))
  (local $n i32)
- (local $iii (ref null $mixednestings.MyInterface))
+ (local $iii (ref null $java.lang.Object))
  (local $m i32)
  (block $return.label
   (block
    ;; MyInterface ii = function (int n){
    
-   (local.set $ii (ref.null $mixednestings.MyInterface))
+   (local.set $ii (ref.null $java.lang.Object))
    ;; return ii.fun(300);
    (local.set $return.value (i32.const 0))
    (br $return.label)
@@ -173,7 +166,6 @@
 )
 
 ;;; CLASS  <anonymous> implements MyInterface
-
 (type $mixednestings.MixedNestings.A.1B.1.1 (struct
  (field $this@mixednestings.MixedNestings.A.1B.1.1 (mut (ref null $mixednestings.MixedNestings.A.1B.1)))
 ))

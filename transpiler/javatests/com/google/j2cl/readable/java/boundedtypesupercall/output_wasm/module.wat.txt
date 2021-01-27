@@ -1,7 +1,6 @@
 ;;; Code for boundedtypesupercall.Main
 
 ;;; CLASS  Main
-
 (type $boundedtypesupercall.Main (struct
 ))
 
@@ -19,7 +18,6 @@
 )
 
 ;;; CLASS  Foo
-
 (type $boundedtypesupercall.Main.Foo (struct
 ))
 
@@ -38,7 +36,6 @@
 )
 
 ;;; CLASS  Bar
-
 (type $boundedtypesupercall.Main.Bar (struct
 ))
 
@@ -58,12 +55,12 @@
 ;;; T Bar.getSomething()
 (func $getSomething<>:java.lang.Comparable@boundedtypesupercall.Main.Bar
  (param $this (ref null $java.lang.Object))
- (result (ref null $java.lang.Comparable))
- (local $return.value (ref null $java.lang.Comparable))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; return null;
-   (local.set $return.value (ref.null $java.lang.Comparable))
+   (local.set $return.value (ref.null $java.lang.Object))
    (br $return.label)
   )
  )
@@ -78,7 +75,7 @@
  (block $return.label
   (block
    ;; return Bar.this.new $1.<init>(Bar.this.getSomething());
-   (local.set $return.value (call $<init><java.lang.Comparable>:void@boundedtypesupercall.Main.Bar.1 (struct.new_default_with_rtt $boundedtypesupercall.Main.Bar.1 (global.get $boundedtypesupercall.Main.Bar.1.rtt)) (ref.null $java.lang.Comparable)))
+   (local.set $return.value (call $<init><java.lang.Comparable>:void@boundedtypesupercall.Main.Bar.1 (struct.new_default_with_rtt $boundedtypesupercall.Main.Bar.1 (global.get $boundedtypesupercall.Main.Bar.1.rtt)) (ref.null $java.lang.Object)))
    (br $return.label)
   )
  )
@@ -86,7 +83,6 @@
 )
 
 ;;; CLASS  <anonymous> extends Foo<T>
-
 (type $boundedtypesupercall.Main.Bar.1 (struct
  (field $this@boundedtypesupercall.Main.Bar.1 (mut (ref null $boundedtypesupercall.Main.Bar)))
 ))
@@ -94,7 +90,7 @@
 ;;; <anonymous> extends Foo<T>(T $_0)
 (func $<init><java.lang.Comparable>:void@boundedtypesupercall.Main.Bar.1
  (param $this (ref null $boundedtypesupercall.Main.Bar.1))
- (param $$_0 (ref null $java.lang.Comparable))
+ (param $$_0 (ref null $java.lang.Object))
  (result (ref null $boundedtypesupercall.Main.Bar.1))
  (block $return.label
   (block

@@ -2,21 +2,11 @@
 
 ;;; INTERFACE  MyJsInterface
 
-(type $interfacejsbridge.MyJsInterface (struct
-))
-
 ;;; INTERFACE  MyInterface
-
-(type $interfacejsbridge.MyInterface (struct
-))
 
 ;;; INTERFACE  SubInterface
 
-(type $interfacejsbridge.SubInterface (struct
-))
-
 ;;; CLASS  InterfaceImpl
-
 (type $interfacejsbridge.InterfaceImpl (struct
 ))
 
@@ -51,7 +41,6 @@
 ;;; Code for interfacejsbridge.Main
 
 ;;; CLASS  Main
-
 (type $interfacejsbridge.Main (struct
 ))
 
@@ -71,9 +60,9 @@
 ;;; void Main.test()
 (func $test<>:void@interfacejsbridge.Main
  (param $this (ref null $java.lang.Object))
- (local $a (ref null $interfacejsbridge.MyJsInterface))
- (local $b (ref null $interfacejsbridge.MyInterface))
- (local $c (ref null $interfacejsbridge.SubInterface))
+ (local $a (ref null $java.lang.Object))
+ (local $b (ref null $java.lang.Object))
+ (local $c (ref null $java.lang.Object))
  (local $d (ref null $interfacejsbridge.InterfaceImpl))
  (block $return.label
   (block

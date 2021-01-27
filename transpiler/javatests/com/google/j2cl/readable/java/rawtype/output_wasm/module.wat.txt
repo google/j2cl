@@ -1,9 +1,8 @@
 ;;; Code for rawtype.RawType
 
 ;;; CLASS  RawType
-
 (type $rawtype.RawType (struct
- (field $c@rawtype.RawType (mut (ref null $java.lang.Comparable)))
+ (field $c@rawtype.RawType (mut (ref null $java.lang.Object)))
 ))
 
 ;;; RawType()
@@ -21,9 +20,6 @@
 
 ;;; INTERFACE  I
 
-(type $rawtype.RawType.I (struct
-))
-
 ;;; void I.f(T t)
 (func $f<rawtype.RawType>:void@rawtype.RawType.I
  (param $this (ref null $java.lang.Object))
@@ -35,7 +31,6 @@
 )
 
 ;;; CLASS  RawSubclass
-
 (type $rawtype.RawType.RawSubclass (struct
 ))
 

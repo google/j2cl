@@ -1,7 +1,6 @@
 ;;; Code for genericmethod.GenericMethod
 
 ;;; CLASS  GenericMethod
-
 (type $genericmethod.GenericMethod (struct
 ))
 
@@ -178,17 +177,17 @@
 
 ;;; void GenericMethod.testErasureCast_wildcard()
 (func $testErasureCast_wildcard<>:void@genericmethod.GenericMethod
- (local $list (ref null $java.util.List))
+ (local $list (ref null $java.lang.Object))
  (local $content (ref null $genericmethod.GenericMethod.Content))
- (local $nestedWildcardList (ref null $java.util.List))
+ (local $nestedWildcardList (ref null $java.lang.Object))
  (local $nestedContent (ref null $genericmethod.GenericMethod.Content))
- (local $deepWildcardList (ref null $java.util.List))
+ (local $deepWildcardList (ref null $java.lang.Object))
  (local $deepContent (ref null $genericmethod.GenericMethod.Content))
  (block $return.label
   (block
    ;; List<Container<?>> list = null;
    
-   (local.set $list (ref.null $java.util.List))
+   (local.set $list (ref.null $java.lang.Object))
    ;; Content content = ((Container<?>) list.get(0)).get();
    
    (local.set $content (ref.null $genericmethod.GenericMethod.Content))
@@ -198,7 +197,7 @@
    (call $acceptsContent<genericmethod.GenericMethod.Content>:void@genericmethod.GenericMethod (local.get $content))
    ;; List<SuperContainer<? extends Container<? extends Content>>> nestedWildcardList = null;
    
-   (local.set $nestedWildcardList (ref.null $java.util.List))
+   (local.set $nestedWildcardList (ref.null $java.lang.Object))
    ;; Content nestedContent = ((SuperContainer<? extends Container<? extends Content>>) nestedWildcardList.get(0)).get().get();
    
    (local.set $nestedContent (ref.null $genericmethod.GenericMethod.Content))
@@ -208,7 +207,7 @@
    (call $acceptsContent<genericmethod.GenericMethod.Content>:void@genericmethod.GenericMethod (local.get $nestedContent))
    ;; List<SuperContainer<Container<? extends Content>>> deepWildcardList = null;
    
-   (local.set $deepWildcardList (ref.null $java.util.List))
+   (local.set $deepWildcardList (ref.null $java.lang.Object))
    ;; Content deepContent = ((SuperContainer<Container<? extends Content>>) deepWildcardList.get(0)).get().get();
    
    (local.set $deepContent (ref.null $genericmethod.GenericMethod.Content))
@@ -222,17 +221,17 @@
 
 ;;; void GenericMethod.testErasureCast_typeVariable()
 (func $testErasureCast_typeVariable<>:void@genericmethod.GenericMethod
- (local $list (ref null $java.util.List))
+ (local $list (ref null $java.lang.Object))
  (local $content (ref null $genericmethod.GenericMethod.Content))
- (local $nestedTypeVariableList (ref null $java.util.List))
+ (local $nestedTypeVariableList (ref null $java.lang.Object))
  (local $nestedContent (ref null $genericmethod.GenericMethod.Content))
- (local $deepTypeVariableList (ref null $java.util.List))
+ (local $deepTypeVariableList (ref null $java.lang.Object))
  (local $deepContent (ref null $genericmethod.GenericMethod.Content))
  (block $return.label
   (block
    ;; List<Container<C>> list = null;
    
-   (local.set $list (ref.null $java.util.List))
+   (local.set $list (ref.null $java.lang.Object))
    ;; Content content = ((Container<C>) list.get(0)).get();
    
    (local.set $content (ref.null $genericmethod.GenericMethod.Content))
@@ -242,7 +241,7 @@
    (call $acceptsContent<genericmethod.GenericMethod.Content>:void@genericmethod.GenericMethod (local.get $content))
    ;; List<SuperContainer<CT>> nestedTypeVariableList = null;
    
-   (local.set $nestedTypeVariableList (ref.null $java.util.List))
+   (local.set $nestedTypeVariableList (ref.null $java.lang.Object))
    ;; Content nestedContent = ((SuperContainer<CT>) nestedTypeVariableList.get(0)).get().get();
    
    (local.set $nestedContent (ref.null $genericmethod.GenericMethod.Content))
@@ -252,7 +251,7 @@
    (call $acceptsContent<genericmethod.GenericMethod.Content>:void@genericmethod.GenericMethod (local.get $nestedContent))
    ;; List<SuperContainer<Container<C>>> deepTypeVariableList = null;
    
-   (local.set $deepTypeVariableList (ref.null $java.util.List))
+   (local.set $deepTypeVariableList (ref.null $java.lang.Object))
    ;; Content deepContent = ((SuperContainer<Container<C>>) deepTypeVariableList.get(0)).get().get();
    
    (local.set $deepContent (ref.null $genericmethod.GenericMethod.Content))
@@ -265,7 +264,6 @@
 )
 
 ;;; CLASS  <anonymous> extends GenericMethod<T>
-
 (type $genericmethod.GenericMethod.1 (struct
  (field $this@genericmethod.GenericMethod.1 (mut (ref null $genericmethod.GenericMethod)))
 ))
@@ -304,7 +302,6 @@
 )
 
 ;;; CLASS  LocalClass
-
 (type $genericmethod.GenericMethod.1LocalClass (struct
  (field $this@genericmethod.GenericMethod.1LocalClass (mut (ref null $genericmethod.GenericMethod)))
 ))
@@ -343,7 +340,6 @@
 )
 
 ;;; CLASS  SuperContainer
-
 (type $genericmethod.GenericMethod.SuperContainer (struct
 ))
 
@@ -376,7 +372,6 @@
 )
 
 ;;; CLASS  Container
-
 (type $genericmethod.GenericMethod.Container (struct
 ))
 
@@ -409,7 +404,6 @@
 )
 
 ;;; CLASS  Content
-
 (type $genericmethod.GenericMethod.Content (struct
 ))
 

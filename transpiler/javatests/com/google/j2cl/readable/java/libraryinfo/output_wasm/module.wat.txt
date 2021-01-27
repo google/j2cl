@@ -1,10 +1,9 @@
 ;;; Code for libraryinfo.Main
 
 ;;; CLASS  Main
-
-(global $STATIC_FIELD@libraryinfo.Main (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 (type $libraryinfo.Main (struct
 ))
+(global $STATIC_FIELD@libraryinfo.Main (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Main()
 (func $<init><>:void@libraryinfo.Main
@@ -21,7 +20,7 @@
 
 ;;; void Main.entryPoint()
 (func $entryPoint<>:void@libraryinfo.Main
- (local $jsFunction (ref null $libraryinfo.Main.Function))
+ (local $jsFunction (ref null $java.lang.Object))
  (local $s (ref null $java.lang.String))
  (block $return.label
   (block
@@ -31,7 +30,7 @@
    
    (local.set $jsFunction (call $<init><>:void@libraryinfo.Main.FunctionImpl (struct.new_default_with_rtt $libraryinfo.Main.FunctionImpl (global.get $libraryinfo.Main.FunctionImpl.rtt)) ))
    ;; (jsFunction = function (String s){
-   (local.set $jsFunction (ref.null $libraryinfo.Main.Function))
+   (local.set $jsFunction (ref.null $java.lang.Object))
    ;; jsFunction.apply("foo");
    
    ;; new MyJsType.<init>();
@@ -99,26 +98,13 @@
 
 ;;; INTERFACE  JsTypeInterface
 
-(type $libraryinfo.Main.JsTypeInterface (struct
-))
-
 ;;; INTERFACE  FunctionnalInterface
-
-(type $libraryinfo.Main.FunctionnalInterface (struct
-))
 
 ;;; INTERFACE  JsAccessibleFunctionnalInterface
 
-(type $libraryinfo.Main.JsAccessibleFunctionnalInterface (struct
-))
-
 ;;; INTERFACE  Function
 
-(type $libraryinfo.Main.Function (struct
-))
-
 ;;; CLASS  FunctionImpl
-
 (type $libraryinfo.Main.FunctionImpl (struct
 ))
 
@@ -146,12 +132,11 @@
 )
 
 ;;; ENUM  MyEnum
-
+(type $libraryinfo.Main.MyEnum (struct
+))
 (global $A@libraryinfo.Main.MyEnum (mut (ref null $libraryinfo.Main.MyEnum)) (ref.null $libraryinfo.Main.MyEnum))
 (global $B@libraryinfo.Main.MyEnum (mut (ref null $libraryinfo.Main.MyEnum)) (ref.null $libraryinfo.Main.MyEnum))
 (global $C@libraryinfo.Main.MyEnum (mut (ref null $libraryinfo.Main.MyEnum)) (ref.null $libraryinfo.Main.MyEnum))
-(type $libraryinfo.Main.MyEnum (struct
-))
 
 ;;; MyEnum()
 (func $<init><>:void@libraryinfo.Main.MyEnum
@@ -167,7 +152,6 @@
 )
 
 ;;; CLASS  MyJsType
-
 (type $libraryinfo.Main.MyJsType (struct
  (field $someField@libraryinfo.Main.MyJsType (mut (ref null $java.lang.Object)))
 ))
@@ -188,7 +172,6 @@
 )
 
 ;;; CLASS  <anonymous> extends Object
-
 (type $libraryinfo.Main.1 (struct
 ))
 
@@ -215,7 +198,6 @@
 )
 
 ;;; CLASS  Foo
-
 (type $libraryinfo.Main.Foo (struct
  (field $this@libraryinfo.Main.Foo (mut (ref null $libraryinfo.Main)))
 ))

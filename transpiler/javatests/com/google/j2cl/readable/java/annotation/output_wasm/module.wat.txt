@@ -1,7 +1,6 @@
 ;;; Code for annotation.Main
 
 ;;; CLASS  Main
-
 (type $annotation.Main (struct
 ))
 
@@ -19,13 +18,9 @@
 )
 
 ;;; INTERFACE  Foo
-
 (global $CONSTANT@annotation.Main.Foo (mut i32) (i32.const 0))
-(type $annotation.Main.Foo (struct
-))
 
 ;;; CLASS  Bar
-
 (type $annotation.Main.Bar (struct
  (field $this@annotation.Main.Bar (mut (ref null $annotation.Main)))
 ))
@@ -48,12 +43,12 @@
  (param $this (ref null $java.lang.Object))
  (result i32)
  (local $return.value i32)
- (local $foo (ref null $annotation.Main.Foo))
+ (local $foo (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; Foo foo = null;
    
-   (local.set $foo (ref.null $annotation.Main.Foo))
+   (local.set $foo (ref.null $java.lang.Object))
    ;; foo.bar();
    (i32.const 0)
    drop

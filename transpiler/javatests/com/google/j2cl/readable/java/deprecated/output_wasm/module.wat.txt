@@ -1,11 +1,10 @@
 ;;; Code for deprecated.DeprecatedExample
 
 ;;; CLASS  DeprecatedExample
-
-(global $DEPRECATED_STATIC_FIELD@deprecated.DeprecatedExample (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 (type $deprecated.DeprecatedExample (struct
  (field $deprecatedInstanceField@deprecated.DeprecatedExample (mut (ref null $java.lang.String)))
 ))
+(global $DEPRECATED_STATIC_FIELD@deprecated.DeprecatedExample (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; void DeprecatedExample.deprecatedStaticMethod(Object someObject)
 (func $deprecatedStaticMethod<java.lang.Object>:void@deprecated.DeprecatedExample
@@ -41,21 +40,14 @@
 
 ;;; INTERFACE  DeprecatedInterface
 
-(type $deprecated.DeprecatedExample.DeprecatedInterface (struct
-))
-
 ;;; INTERFACE  DeprecatedJsFunction
 
-(type $deprecated.DeprecatedExample.DeprecatedJsFunction (struct
-))
-
 ;;; ENUM  DeprecatedEnum
-
-(global $A_VALUE@deprecated.DeprecatedExample.DeprecatedEnum (mut (ref null $deprecated.DeprecatedExample.DeprecatedEnum)) (ref.null $deprecated.DeprecatedExample.DeprecatedEnum))
 (type $deprecated.DeprecatedExample.DeprecatedEnum (struct
  (field $name@java.lang.Enum (mut (ref null $java.lang.String)))
  (field $ordinal@java.lang.Enum (mut i32))
 ))
+(global $A_VALUE@deprecated.DeprecatedExample.DeprecatedEnum (mut (ref null $deprecated.DeprecatedExample.DeprecatedEnum)) (ref.null $deprecated.DeprecatedExample.DeprecatedEnum))
 
 ;;; DeprecatedEnum()
 (func $<init><>:void@deprecated.DeprecatedExample.DeprecatedEnum
@@ -71,10 +63,9 @@
 )
 
 ;;; ENUM  DeprecatedJsEnum
-
-(global $A_VALUE@deprecated.DeprecatedExample.DeprecatedJsEnum (mut (ref null $deprecated.DeprecatedExample.DeprecatedJsEnum)) (ref.null $deprecated.DeprecatedExample.DeprecatedJsEnum))
 (type $deprecated.DeprecatedExample.DeprecatedJsEnum (struct
 ))
+(global $A_VALUE@deprecated.DeprecatedExample.DeprecatedJsEnum (mut (ref null $deprecated.DeprecatedExample.DeprecatedJsEnum)) (ref.null $deprecated.DeprecatedExample.DeprecatedJsEnum))
 
 ;;; DeprecatedJsEnum()
 (func $<init><>:void@deprecated.DeprecatedExample.DeprecatedJsEnum

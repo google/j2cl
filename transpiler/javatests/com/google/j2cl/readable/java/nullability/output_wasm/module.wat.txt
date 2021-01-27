@@ -1,19 +1,18 @@
 ;;; Code for nullability.Nullability
 
 ;;; CLASS  Nullability
-
 (type $nullability.Nullability (struct
  (field $f1@nullability.Nullability (mut (ref null $java.lang.String)))
  (field $f2@nullability.Nullability (mut (ref null $java.lang.String)))
  (field $f3@nullability.Nullability (mut (ref null $java.lang.String)))
- (field $f4@nullability.Nullability (mut (ref null $java.util.List)))
- (field $f5@nullability.Nullability (mut (ref null $java.util.List)))
- (field $f6@nullability.Nullability (mut (ref null $java.util.List)))
- (field $f7@nullability.Nullability (mut (ref null $java.util.List)))
+ (field $f4@nullability.Nullability (mut (ref null $java.lang.Object)))
+ (field $f5@nullability.Nullability (mut (ref null $java.lang.Object)))
+ (field $f6@nullability.Nullability (mut (ref null $java.lang.Object)))
+ (field $f7@nullability.Nullability (mut (ref null $java.lang.Object)))
  (field $f8@nullability.Nullability (mut (ref null $java.lang.Object)))
  (field $f9@nullability.Nullability (mut (ref null $java.lang.Object)))
  (field $f10@nullability.Nullability (mut (ref null $java.lang.Object)))
- (field $f12@nullability.Nullability (mut (ref null $java.util.List)))
+ (field $f12@nullability.Nullability (mut (ref null $java.lang.Object)))
 ))
 
 ;;; Nullability(String a)
@@ -34,7 +33,7 @@
 (func $m1<java.lang.String|java.util.List|java.lang.String>:java.lang.String@nullability.Nullability
  (param $this (ref null $java.lang.Object))
  (param $a (ref null $java.lang.String))
- (param $b (ref null $java.util.List))
+ (param $b (ref null $java.lang.Object))
  (param $c (ref null $java.lang.String))
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))
@@ -52,7 +51,7 @@
 (func $m2<java.lang.String|java.util.List>:java.lang.String@nullability.Nullability
  (param $this (ref null $java.lang.Object))
  (param $a (ref null $java.lang.String))
- (param $b (ref null $java.util.List))
+ (param $b (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))
  (block $return.label
@@ -85,7 +84,7 @@
 ;;; void Nullability.m4(MyFunction f)
 (func $m4<nullability.Nullability.MyFunction>:void@nullability.Nullability
  (param $this (ref null $java.lang.Object))
- (param $f (ref null $nullability.Nullability.MyFunction))
+ (param $f (ref null $java.lang.Object))
  (block $return.label
   (block
   )
@@ -93,7 +92,6 @@
 )
 
 ;;; CLASS  Foo
-
 (type $nullability.Nullability.Foo (struct
 ))
 
@@ -152,11 +150,7 @@
 
 ;;; INTERFACE  MyFunction
 
-(type $nullability.Nullability.MyFunction (struct
-))
-
 ;;; CLASS  StringList
-
 (type $nullability.Nullability.StringList (struct
  (field $modCount@java.util.AbstractList (mut i32))
  (field $array@java.util.ArrayList (mut (ref null $java.lang.Object)))
@@ -177,7 +171,6 @@
 )
 
 ;;; CLASS  StringComparator
-
 (type $nullability.Nullability.StringComparator (struct
 ))
 
@@ -212,7 +205,6 @@
 )
 
 ;;; CLASS  NullableStringComparator
-
 (type $nullability.Nullability.NullableStringComparator (struct
 ))
 
@@ -248,11 +240,7 @@
 
 ;;; INTERFACE  NullableTemplatedReturn
 
-(type $nullability.Nullability.NullableTemplatedReturn (struct
-))
-
 ;;; CLASS  NullableTemplatedReturnOverride
-
 (type $nullability.Nullability.NullableTemplatedReturnOverride (struct
 ))
 
@@ -286,7 +274,6 @@
 ;;; Code for nullability.subpackage.ClassInSubpackage
 
 ;;; CLASS  ClassInSubpackage
-
 (type $nullability.subpackage.ClassInSubpackage (struct
 ))
 

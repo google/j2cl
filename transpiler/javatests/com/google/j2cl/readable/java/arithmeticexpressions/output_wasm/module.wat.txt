@@ -1,16 +1,15 @@
 ;;; Code for arithmeticexpressions.ArithmeticExpressions
 
 ;;; CLASS  ArithmeticExpressions
-
+(type $arithmeticexpressions.ArithmeticExpressions (struct
+ (field $bar@arithmeticexpressions.ArithmeticExpressions (mut i64))
+ (field $intField@arithmeticexpressions.ArithmeticExpressions (mut i64))
+))
 (global $FLOAT_CONSTANT@arithmeticexpressions.ArithmeticExpressions (mut f32) (f32.const 0.0))
 (global $DOUBLE_CONSTANT@arithmeticexpressions.ArithmeticExpressions (mut f64) (f64.const 0.0))
 (global $DOUBLE_CONSTANT_WITH_ARITHMETIC@arithmeticexpressions.ArithmeticExpressions (mut f64) (f64.const 0.0))
 (global $one@arithmeticexpressions.ArithmeticExpressions (mut i64) (i64.const 0))
 (global $foo@arithmeticexpressions.ArithmeticExpressions (mut i64) (i64.const 0))
-(type $arithmeticexpressions.ArithmeticExpressions (struct
- (field $bar@arithmeticexpressions.ArithmeticExpressions (mut i64))
- (field $intField@arithmeticexpressions.ArithmeticExpressions (mut i64))
-))
 
 ;;; ArithmeticExpressions()
 (func $<init><>:void@arithmeticexpressions.ArithmeticExpressions
@@ -489,7 +488,6 @@
 )
 
 ;;; CLASS  Ref
-
 (type $arithmeticexpressions.ArithmeticExpressions.1Ref (struct
  (field $this@arithmeticexpressions.ArithmeticExpressions.1Ref (mut (ref null $arithmeticexpressions.ArithmeticExpressions)))
  (field $field@arithmeticexpressions.ArithmeticExpressions.1Ref (mut (ref null $java.lang.Object)))

@@ -2,16 +2,9 @@
 
 ;;; INTERFACE  MyFunction
 
-(type $overwrittentypevariables.MyFunction (struct
-))
-
 ;;; INTERFACE  HashFunction
 
-(type $overwrittentypevariables.HashFunction (struct
-))
-
 ;;; CLASS  HashFunctions
-
 (type $overwrittentypevariables.HashFunctions (struct
 ))
 
@@ -30,8 +23,8 @@
 
 ;;; HashFunction<T> HashFunctions.hashFunction()
 (func $hashFunction<>:overwrittentypevariables.HashFunction@overwrittentypevariables.HashFunctions
- (result (ref null $overwrittentypevariables.HashFunction))
- (local $return.value (ref null $overwrittentypevariables.HashFunction))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; return new $1.<init>();
@@ -44,8 +37,8 @@
 
 ;;; HashFunction<T> HashFunctions.enumHashFunction()
 (func $enumHashFunction<>:overwrittentypevariables.HashFunction@overwrittentypevariables.HashFunctions
- (result (ref null $overwrittentypevariables.HashFunction))
- (local $return.value (ref null $overwrittentypevariables.HashFunction))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; return new $2.<init>();
@@ -57,7 +50,6 @@
 )
 
 ;;; CLASS  <anonymous> implements HashFunction<T>
-
 (type $overwrittentypevariables.HashFunctions.1 (struct
 ))
 
@@ -91,7 +83,6 @@
 )
 
 ;;; CLASS  <anonymous> implements HashFunction<T>
-
 (type $overwrittentypevariables.HashFunctions.2 (struct
 ))
 

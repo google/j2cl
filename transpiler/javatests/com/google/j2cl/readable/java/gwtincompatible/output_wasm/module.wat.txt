@@ -1,13 +1,9 @@
 ;;; Code for gwtincompatible.GwtIncompatible
 
 ;;; INTERFACE  GwtIncompatible
-
-(type $gwtincompatible.GwtIncompatible (struct
-))
 ;;; Code for gwtincompatible.Implementor
 
 ;;; CLASS  Implementor
-
 (type $gwtincompatible.Implementor (struct
 ))
 
@@ -38,12 +34,11 @@
 )
 
 ;;; ENUM  SomeEnum
-
-(global $COMPATIBLE@gwtincompatible.Implementor.SomeEnum (mut (ref null $gwtincompatible.Implementor.SomeEnum)) (ref.null $gwtincompatible.Implementor.SomeEnum))
 (type $gwtincompatible.Implementor.SomeEnum (struct
  (field $name@java.lang.Enum (mut (ref null $java.lang.String)))
  (field $ordinal@java.lang.Enum (mut i32))
 ))
+(global $COMPATIBLE@gwtincompatible.Implementor.SomeEnum (mut (ref null $gwtincompatible.Implementor.SomeEnum)) (ref.null $gwtincompatible.Implementor.SomeEnum))
 
 ;;; SomeEnum()
 (func $<init><>:void@gwtincompatible.Implementor.SomeEnum
@@ -59,7 +54,6 @@
 )
 
 ;;; CLASS  <anonymous> extends SomeEnum
-
 (type $gwtincompatible.Implementor.SomeEnum.1 (struct
  (field $name@java.lang.Enum (mut (ref null $java.lang.String)))
  (field $ordinal@java.lang.Enum (mut i32))
@@ -90,16 +84,9 @@
 
 ;;; INTERFACE  Interface
 
-(type $gwtincompatible.Interface (struct
-))
-
 ;;; INTERFACE  NestedInterface
 
-(type $gwtincompatible.Interface.NestedInterface (struct
-))
-
 ;;; CLASS  ClassWithAbstractMethod
-
 (type $gwtincompatible.Interface.ClassWithAbstractMethod (struct
 ))
 

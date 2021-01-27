@@ -1,11 +1,10 @@
 ;;; Code for lambdas.Lambdas
 
 ;;; CLASS  Lambdas
-
-(global $identityFunction@lambdas.Lambdas (mut (ref null $lambdas.Lambdas.IdentityFunction)) (ref.null $lambdas.Lambdas.IdentityFunction))
 (type $lambdas.Lambdas (struct
  (field $field@lambdas.Lambdas (mut i32))
 ))
+(global $identityFunction@lambdas.Lambdas (mut (ref null $lambdas.Lambdas.IdentityFunction)) (ref.null $lambdas.Lambdas.IdentityFunction))
 
 ;;; Lambdas()
 (func $<init><>:void@lambdas.Lambdas
@@ -23,7 +22,7 @@
 ;;; int Lambdas.call(FunctionalInterface intf, int n)
 (func $call<lambdas.Lambdas.FunctionalInterface|int>:int@lambdas.Lambdas
  (param $this (ref null $java.lang.Object))
- (param $intf (ref null $lambdas.Lambdas.FunctionalInterface))
+ (param $intf (ref null $java.lang.Object))
  (param $n i32)
  (result i32)
  (local $return.value i32)
@@ -135,13 +134,13 @@
 
 ;;; void Lambdas.testLambdaInStaticContext()
 (func $testLambdaInStaticContext<>:void@lambdas.Lambdas
- (local $f (ref null $lambdas.Lambdas.FunctionalInterface))
+ (local $f (ref null $java.lang.Object))
  (local $i i32)
  (block $return.label
   (block
    ;; FunctionalInterface f = function (int i){
    
-   (local.set $f (ref.null $lambdas.Lambdas.FunctionalInterface))
+   (local.set $f (ref.null $java.lang.Object))
   )
  )
 )
@@ -149,26 +148,26 @@
 ;;; void Lambdas.testInstanceMethodTypeVariableThroughLambda()
 (func $testInstanceMethodTypeVariableThroughLambda<>:void@lambdas.Lambdas
  (param $this (ref null $java.lang.Object))
- (local $wrapped (ref null $lambdas.Lambdas.Functional))
- (local $f (ref null $lambdas.Lambdas.Functional))
+ (local $wrapped (ref null $java.lang.Object))
+ (local $f (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; Functional<T> wrapped = function (Functional<T> f){
    
-   (local.set $wrapped (ref.null $lambdas.Lambdas.Functional))
+   (local.set $wrapped (ref.null $java.lang.Object))
   )
  )
 )
 
 ;;; void Lambdas.testStaticMethodTypeVariableThroughLambda()
 (func $testStaticMethodTypeVariableThroughLambda<>:void@lambdas.Lambdas
- (local $wrapped (ref null $lambdas.Lambdas.Functional))
- (local $f (ref null $lambdas.Lambdas.Functional))
+ (local $wrapped (ref null $java.lang.Object))
+ (local $f (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; Functional<T> wrapped = function (Functional<T> f){
    
-   (local.set $wrapped (ref.null $lambdas.Lambdas.Functional))
+   (local.set $wrapped (ref.null $java.lang.Object))
   )
  )
 )
@@ -176,7 +175,7 @@
 ;;; T Lambdas.callWithTypeVariable(GenericFunctionalInterface<T> intf, T e)
 (func $callWithTypeVariable<lambdas.Lambdas.GenericFunctionalInterface|java.lang.Object>:java.lang.Object@lambdas.Lambdas
  (param $this (ref null $java.lang.Object))
- (param $intf (ref null $lambdas.Lambdas.GenericFunctionalInterface))
+ (param $intf (ref null $java.lang.Object))
  (param $e (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
@@ -193,7 +192,7 @@
 ;;; Error Lambdas.callParameterized(GenericFunctionalInterface<Error> intf, Error e)
 (func $callParameterized<lambdas.Lambdas.GenericFunctionalInterface|java.lang.Error>:java.lang.Error@lambdas.Lambdas
  (param $this (ref null $java.lang.Object))
- (param $intf (ref null $lambdas.Lambdas.GenericFunctionalInterface))
+ (param $intf (ref null $java.lang.Object))
  (param $e (ref null $java.lang.Error))
  (result (ref null $java.lang.Error))
  (local $return.value (ref null $java.lang.Error))
@@ -209,7 +208,7 @@
 
 ;;; Enum<T> Lambdas.callTypeVariableWithBounds(GenericFunctionalInterface<Enum<T>> intf, Enum<T> e)
 (func $callTypeVariableWithBounds<lambdas.Lambdas.GenericFunctionalInterface|java.lang.Enum>:java.lang.Enum@lambdas.Lambdas
- (param $intf (ref null $lambdas.Lambdas.GenericFunctionalInterface))
+ (param $intf (ref null $java.lang.Object))
  (param $e (ref null $java.lang.Enum))
  (result (ref null $java.lang.Enum))
  (local $return.value (ref null $java.lang.Enum))
@@ -226,13 +225,13 @@
 ;;; GenericFunctionalInterface<T> Lambdas.callWithBiFunction(BiFunction<T, String, Double> fn)
 (func $callWithBiFunction<lambdas.Lambdas.BiFunction>:lambdas.Lambdas.GenericFunctionalInterface@lambdas.Lambdas
  (param $this (ref null $java.lang.Object))
- (param $fn (ref null $lambdas.Lambdas.BiFunction))
- (result (ref null $lambdas.Lambdas.GenericFunctionalInterface))
- (local $return.value (ref null $lambdas.Lambdas.GenericFunctionalInterface))
+ (param $fn (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; return null;
-   (local.set $return.value (ref.null $lambdas.Lambdas.GenericFunctionalInterface))
+   (local.set $return.value (ref.null $java.lang.Object))
    (br $return.label)
   )
  )
@@ -247,7 +246,7 @@
  (local $i_2 (ref null $java.lang.Enum))
  (local $x (ref null $java.lang.Object))
  (local $y (ref null $java.lang.String))
- (local $f (ref null $lambdas.Lambdas.Function))
+ (local $f (ref null $java.lang.Object))
  (local $item (ref null $java.lang.Enum))
  (block $return.label
   (block
@@ -258,14 +257,14 @@
    (ref.null $java.lang.Error)
    drop
    ;; lambdas.Lambdas.callTypeVariableWithBounds(function (Enum<T> i){
-   (call $callTypeVariableWithBounds<lambdas.Lambdas.GenericFunctionalInterface|java.lang.Enum>:java.lang.Enum@lambdas.Lambdas (ref.null $lambdas.Lambdas.GenericFunctionalInterface)(ref.cast $java.lang.Object $java.lang.Enum (ref.null $java.lang.Object) (global.get $java.lang.Enum.rtt)))
+   (call $callTypeVariableWithBounds<lambdas.Lambdas.GenericFunctionalInterface|java.lang.Enum>:java.lang.Enum@lambdas.Lambdas (ref.null $java.lang.Object)(ref.cast $java.lang.Object $java.lang.Enum (ref.null $java.lang.Object) (global.get $java.lang.Enum.rtt)))
    drop
    ;; Lambdas.this.callWithBiFunction(function (Object x,String y){
-   (ref.null $lambdas.Lambdas.GenericFunctionalInterface)
+   (ref.null $java.lang.Object)
    drop
    ;; Function<? super T, ?> f = function (T item){
    
-   (local.set $f (ref.null $lambdas.Lambdas.Function))
+   (local.set $f (ref.null $java.lang.Object))
   )
  )
 )
@@ -286,13 +285,13 @@
 
 ;;; void Lambdas.testLambdaCallingStaticMethod()
 (func $testLambdaCallingStaticMethod<>:void@lambdas.Lambdas
- (local $f (ref null $lambdas.Lambdas.Function))
+ (local $f (ref null $java.lang.Object))
  (local $l (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; Function<Object, ?> f = function (Object l){
    
-   (local.set $f (ref.null $lambdas.Lambdas.Function))
+   (local.set $f (ref.null $java.lang.Object))
   )
  )
 )
@@ -300,12 +299,12 @@
 ;;; void Lambdas.testLambdaReturningVoidAsExpression()
 (func $testLambdaReturningVoidAsExpression<>:void@lambdas.Lambdas
  (param $this (ref null $java.lang.Object))
- (local $runner (ref null $lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid))
+ (local $runner (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; FunctionalInterfaceWithMethodReturningVoid runner = function (){
    
-   (local.set $runner (ref.null $lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid))
+   (local.set $runner (ref.null $java.lang.Object))
   )
  )
 )
@@ -313,20 +312,20 @@
 ;;; void Lambdas.testAnonymousInsideLambda()
 (func $testAnonymousInsideLambda<>:void@lambdas.Lambdas
  (param $this (ref null $java.lang.Object))
- (local $runner (ref null $lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid))
+ (local $runner (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; FunctionalInterfaceWithMethodReturningVoid runner = function (){
    
-   (local.set $runner (ref.null $lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid))
+   (local.set $runner (ref.null $java.lang.Object))
   )
  )
 )
 
 ;;; GenericJsFunction<E, E> Lambdas.identity()
 (func $identity<>:lambdas.Lambdas.GenericJsFunction@lambdas.Lambdas
- (result (ref null $lambdas.Lambdas.GenericJsFunction))
- (local $return.value (ref null $lambdas.Lambdas.GenericJsFunction))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; if ((lambdas.Lambdas.identityFunction == null)) {
@@ -348,25 +347,25 @@
 
 ;;; void Lambdas.testJsInteropLambdas()
 (func $testJsInteropLambdas<>:void@lambdas.Lambdas
- (local $thenable (ref null $lambdas.Lambdas.Thenable))
- (local $f1 (ref null $lambdas.Lambdas.GenericJsFunction))
- (local $f2 (ref null $lambdas.Lambdas.GenericJsFunction))
- (local $otherThenable (ref null $lambdas.Lambdas.AnotherThenable))
- (local $f1_1 (ref null $lambdas.Lambdas.GenericJsFunction))
- (local $f2_1 (ref null $lambdas.Lambdas.GenericJsFunction))
- (local $stringJsSupplier (ref null $lambdas.Lambdas.JsSupplier))
- (local $equals (ref null $lambdas.Lambdas.Equals))
+ (local $thenable (ref null $java.lang.Object))
+ (local $f1 (ref null $java.lang.Object))
+ (local $f2 (ref null $java.lang.Object))
+ (local $otherThenable (ref null $java.lang.Object))
+ (local $f1_1 (ref null $java.lang.Object))
+ (local $f2_1 (ref null $java.lang.Object))
+ (local $stringJsSupplier (ref null $java.lang.Object))
+ (local $equals (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; Thenable<String> thenable = function (GenericJsFunction<Void, String> f1,GenericJsFunction<Void, Throwable> f2){
    
-   (local.set $thenable (ref.null $lambdas.Lambdas.Thenable))
+   (local.set $thenable (ref.null $java.lang.Object))
    ;; AnotherThenable<String> otherThenable = function (GenericJsFunction<Void, String> f1,GenericJsFunction<Void, Throwable> f2){
    
-   (local.set $otherThenable (ref.null $lambdas.Lambdas.AnotherThenable))
+   (local.set $otherThenable (ref.null $java.lang.Object))
    ;; JsSupplier<Integer> stringJsSupplier = function (){
    
-   (local.set $stringJsSupplier (ref.null $lambdas.Lambdas.JsSupplier))
+   (local.set $stringJsSupplier (ref.null $java.lang.Object))
    ;; stringJsSupplier.get();
    (ref.null $java.lang.Integer)
    drop
@@ -393,11 +392,11 @@
   (block
    ;; Object o = (((GenericFunctionalInterface<String>&JustADefaultT<Number>)) function (String x){
    
-   (local.set $o (ref.null $lambdas.Lambdas.GenericFunctionalInterface))
+   (local.set $o (ref.null $java.lang.Object))
    ;; (o = (((GenericFunctionalInterface<String>&JustADefaultS<Number>)) function (String x){
-   (local.set $o (ref.null $lambdas.Lambdas.GenericFunctionalInterface))
+   (local.set $o (ref.null $java.lang.Object))
    ;; (o = (((GenericFunctionalInterface<U>&JustADefaultS<V>)) function (U x){
-   (local.set $o (ref.null $lambdas.Lambdas.GenericFunctionalInterface))
+   (local.set $o (ref.null $java.lang.Object))
   )
  )
 )
@@ -412,23 +411,16 @@
   (block
    ;; Object o = (((BiFunction<String, String, String>&MarkerWithDefaultMethod)) function (String t,String u){
    
-   (local.set $o (ref.null $lambdas.Lambdas.BiFunction))
+   (local.set $o (ref.null $java.lang.Object))
   )
  )
 )
 
 ;;; INTERFACE  FunctionalInterface
 
-(type $lambdas.Lambdas.FunctionalInterface (struct
-))
-
 ;;; INTERFACE  Functional
 
-(type $lambdas.Lambdas.Functional (struct
-))
-
 ;;; CLASS  <anonymous> implements Functional<T>
-
 (type $lambdas.Lambdas.1 (struct
  (field $this@lambdas.Lambdas.1 (mut (ref null $lambdas.Lambdas)))
 ))
@@ -449,13 +441,13 @@
 ;;; Functional<T> <anonymous> implements Functional<T>.wrap(Functional<T> f)
 (func $wrap<lambdas.Lambdas.Functional>:lambdas.Lambdas.Functional@lambdas.Lambdas.1
  (param $this (ref null $java.lang.Object))
- (param $f (ref null $lambdas.Lambdas.Functional))
- (result (ref null $lambdas.Lambdas.Functional))
- (local $return.value (ref null $lambdas.Lambdas.Functional))
+ (param $f (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; return null;
-   (local.set $return.value (ref.null $lambdas.Lambdas.Functional))
+   (local.set $return.value (ref.null $java.lang.Object))
    (br $return.label)
   )
  )
@@ -463,7 +455,6 @@
 )
 
 ;;; CLASS  <anonymous> implements Functional<T>
-
 (type $lambdas.Lambdas.2 (struct
 ))
 
@@ -483,13 +474,13 @@
 ;;; Functional<T> <anonymous> implements Functional<T>.wrap(Functional<T> f)
 (func $wrap<lambdas.Lambdas.Functional>:lambdas.Lambdas.Functional@lambdas.Lambdas.2
  (param $this (ref null $java.lang.Object))
- (param $f (ref null $lambdas.Lambdas.Functional))
- (result (ref null $lambdas.Lambdas.Functional))
- (local $return.value (ref null $lambdas.Lambdas.Functional))
+ (param $f (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; return null;
-   (local.set $return.value (ref.null $lambdas.Lambdas.Functional))
+   (local.set $return.value (ref.null $java.lang.Object))
    (br $return.label)
   )
  )
@@ -498,26 +489,20 @@
 
 ;;; INTERFACE  GenericFunctionalInterface
 
-(type $lambdas.Lambdas.GenericFunctionalInterface (struct
-))
-
 ;;; INTERFACE  BiFunction
-
-(type $lambdas.Lambdas.BiFunction (struct
-))
 
 ;;; BiFunction<T, U, V> BiFunction.andThen(Function<? super R, ? extends V> after)
 (func $andThen<lambdas.Lambdas.Function>:lambdas.Lambdas.BiFunction@lambdas.Lambdas.BiFunction
  (param $this (ref null $java.lang.Object))
- (param $after (ref null $lambdas.Lambdas.Function))
- (result (ref null $lambdas.Lambdas.BiFunction))
- (local $return.value (ref null $lambdas.Lambdas.BiFunction))
+ (param $after (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
  (local $t (ref null $java.lang.Object))
  (local $u (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; return function (T t,U u){
-   (local.set $return.value (ref.null $lambdas.Lambdas.BiFunction))
+   (local.set $return.value (ref.null $java.lang.Object))
    (br $return.label)
   )
  )
@@ -526,18 +511,15 @@
 
 ;;; INTERFACE  Function
 
-(type $lambdas.Lambdas.Function (struct
-))
-
 ;;; Function<T, T> Function.identity()
 (func $identity<>:lambdas.Lambdas.Function@lambdas.Lambdas.Function
- (result (ref null $lambdas.Lambdas.Function))
- (local $return.value (ref null $lambdas.Lambdas.Function))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
  (local $t (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; return function (T t){
-   (local.set $return.value (ref.null $lambdas.Lambdas.Function))
+   (local.set $return.value (ref.null $java.lang.Object))
    (br $return.label)
   )
  )
@@ -546,11 +528,7 @@
 
 ;;; INTERFACE  FunctionalInterfaceWithMethodReturningVoid
 
-(type $lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid (struct
-))
-
 ;;; CLASS  <anonymous> extends Object
-
 (type $lambdas.Lambdas.3 (struct
  (field $this@lambdas.Lambdas.3 (mut (ref null $lambdas.Lambdas)))
 ))
@@ -569,7 +547,6 @@
 )
 
 ;;; CLASS  Parent
-
 (type $lambdas.Lambdas.Parent (struct
  (field $fieldInParent@lambdas.Lambdas.Parent (mut i32))
 ))
@@ -597,7 +574,6 @@
 )
 
 ;;; CLASS  LambdaInSubClass
-
 (type $lambdas.Lambdas.LambdaInSubClass (struct
  (field $fieldInParent@lambdas.Lambdas.Parent (mut i32))
 ))
@@ -618,35 +594,25 @@
 ;;; void LambdaInSubClass.testLambdaInSubclass()
 (func $testLambdaInSubclass<>:void@lambdas.Lambdas.LambdaInSubClass
  (param $this (ref null $java.lang.Object))
- (local $l (ref null $lambdas.Lambdas.FunctionalInterface))
+ (local $l (ref null $java.lang.Object))
  (local $i i32)
  (local $a i32)
  (block $return.label
   (block
    ;; FunctionalInterface l = function (int i){
    
-   (local.set $l (ref.null $lambdas.Lambdas.FunctionalInterface))
+   (local.set $l (ref.null $java.lang.Object))
   )
  )
 )
 
 ;;; INTERFACE  GenericJsFunction
 
-(type $lambdas.Lambdas.GenericJsFunction (struct
-))
-
 ;;; INTERFACE  Thenable
-
-(type $lambdas.Lambdas.Thenable (struct
-))
 
 ;;; INTERFACE  AnotherThenable
 
-(type $lambdas.Lambdas.AnotherThenable (struct
-))
-
 ;;; CLASS  IdentityFunction
-
 (type $lambdas.Lambdas.IdentityFunction (struct
 ))
 
@@ -681,9 +647,6 @@
 
 ;;; INTERFACE  Equals
 
-(type $lambdas.Lambdas.Equals (struct
-))
-
 ;;; T Equals.get()
 (func $get<>:java.lang.Object@lambdas.Lambdas.Equals
  (param $this (ref null $java.lang.Object))
@@ -701,13 +664,7 @@
 
 ;;; INTERFACE  JsSupplier
 
-(type $lambdas.Lambdas.JsSupplier (struct
-))
-
 ;;; INTERFACE  JustADefaultT
-
-(type $lambdas.Lambdas.JustADefaultT (struct
-))
 
 ;;; void JustADefaultT.method(T t)
 (func $method<java.lang.Object>:void@lambdas.Lambdas.JustADefaultT
@@ -721,9 +678,6 @@
 
 ;;; INTERFACE  JustADefaultS
 
-(type $lambdas.Lambdas.JustADefaultS (struct
-))
-
 ;;; void JustADefaultS.method(S t)
 (func $method<java.lang.Object>:void@lambdas.Lambdas.JustADefaultS
  (param $this (ref null $java.lang.Object))
@@ -735,9 +689,6 @@
 )
 
 ;;; INTERFACE  MarkerWithDefaultMethod
-
-(type $lambdas.Lambdas.MarkerWithDefaultMethod (struct
-))
 
 ;;; void MarkerWithDefaultMethod.defaultMethod()
 (func $defaultMethod<>:void@lambdas.Lambdas.MarkerWithDefaultMethod

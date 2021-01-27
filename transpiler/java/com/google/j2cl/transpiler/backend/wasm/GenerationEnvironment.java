@@ -72,8 +72,11 @@ class GenerationEnvironment {
   }
 
   String getWasmTypeName(TypeDescriptor typeDescriptor) {
+    typeDescriptor = typeDescriptor.toRawTypeDescriptor();
+
     // TODO(rluble): remove j.l.O as a placeholder for arrays once arrays are implemented.
-    if (typeDescriptor.isArray()) {
+    if (typeDescriptor.isInterface() || typeDescriptor.isArray()) {
+      // Interfaces are modeled as java.lang.Object at runtime.
       return getWasmTypeName(TypeDescriptors.get().javaLangObject);
     }
 

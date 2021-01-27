@@ -2,11 +2,7 @@
 
 ;;; INTERFACE  Function
 
-(type $functiontype.Function (struct
-))
-
 ;;; CLASS  FunctionImpl
-
 (type $functiontype.FunctionImpl (struct
 ))
 
@@ -26,7 +22,7 @@
 ;;; void FunctionImpl.test(Function f)
 (func $test<functiontype.Function>:void@functiontype.FunctionImpl
  (param $this (ref null $java.lang.Object))
- (param $f (ref null $functiontype.Function))
+ (param $f (ref null $java.lang.Object))
  (block $return.label
   (block
   )

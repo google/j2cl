@@ -1,7 +1,6 @@
 ;;; Code for innerclassinheritance.ChildClass
 
 ;;; CLASS  ParentOuter
-
 (type $innerclassinheritance.ParentOuter (struct
  (field $fieldInParentOuter@innerclassinheritance.ParentOuter (mut i32))
 ))
@@ -29,7 +28,6 @@
 )
 
 ;;; CLASS  ParentInner
-
 (type $innerclassinheritance.ParentInner (struct
  (field $fieldInParentInner@innerclassinheritance.ParentInner (mut i32))
 ))
@@ -57,7 +55,6 @@
 )
 
 ;;; CLASS  ChildClass
-
 (type $innerclassinheritance.ChildClass (struct
  (field $fieldInParentOuter@innerclassinheritance.ParentOuter (mut i32))
  (field $fieldInOuter@innerclassinheritance.ChildClass (mut i32))
@@ -97,7 +94,6 @@
 )
 
 ;;; CLASS  InnerClass
-
 (type $innerclassinheritance.ChildClass.InnerClass (struct
  (field $fieldInParentInner@innerclassinheritance.ParentInner (mut i32))
  (field $this@innerclassinheritance.ChildClass.InnerClass (mut (ref null $innerclassinheritance.ChildClass)))
@@ -176,7 +172,6 @@
 )
 
 ;;; CLASS  LocalClass
-
 (type $innerclassinheritance.ChildClass.1LocalClass (struct
  (field $fieldInParentOuter@innerclassinheritance.ParentOuter (mut i32))
  (field $fieldInOuter@innerclassinheritance.ChildClass (mut i32))
@@ -227,7 +222,6 @@
 ;;; Code for innerclassinheritance.MultipleNestings
 
 ;;; CLASS  MultipleNestings
-
 (type $innerclassinheritance.MultipleNestings (struct
 ))
 
@@ -254,7 +248,6 @@
 )
 
 ;;; CLASS  Parent
-
 (type $innerclassinheritance.MultipleNestings.Parent (struct
  (field $this@innerclassinheritance.MultipleNestings.Parent (mut (ref null $innerclassinheritance.MultipleNestings)))
 ))
@@ -282,7 +275,6 @@
 )
 
 ;;; CLASS  InnerClass1
-
 (type $innerclassinheritance.MultipleNestings.InnerClass1 (struct
  (field $this@innerclassinheritance.MultipleNestings.Parent (mut (ref null $innerclassinheritance.MultipleNestings)))
  (field $this@innerclassinheritance.MultipleNestings.InnerClass1 (mut (ref null $innerclassinheritance.MultipleNestings)))
@@ -311,7 +303,6 @@
 )
 
 ;;; CLASS  InnerClass2
-
 (type $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 (struct
  (field $this@innerclassinheritance.MultipleNestings.Parent (mut (ref null $innerclassinheritance.MultipleNestings)))
  (field $this@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 (mut (ref null $innerclassinheritance.MultipleNestings.InnerClass1)))

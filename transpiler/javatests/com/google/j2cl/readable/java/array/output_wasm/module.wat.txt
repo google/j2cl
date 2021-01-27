@@ -1,7 +1,6 @@
 ;;; Code for array.Arrays
 
 ;;; CLASS  Arrays
-
 (type $array.Arrays (struct
 ))
 
@@ -296,7 +295,7 @@
 ;;; void Arrays.consumesCloneable(Cloneable cloneable)
 (func $consumesCloneable<java.lang.Cloneable>:void@array.Arrays
  (param $this (ref null $java.lang.Object))
- (param $cloneable (ref null $java.lang.Cloneable))
+ (param $cloneable (ref null $java.lang.Object))
  (block $return.label
   (block
   )
@@ -306,7 +305,7 @@
 ;;; void Arrays.consumesSerializable(Serializable serializable)
 (func $consumesSerializable<java.io.Serializable>:void@array.Arrays
  (param $this (ref null $java.lang.Object))
- (param $serializable (ref null $java.io.Serializable))
+ (param $serializable (ref null $java.lang.Object))
  (block $return.label
   (block
   )
@@ -314,7 +313,6 @@
 )
 
 ;;; CLASS  SomeObject
-
 (type $array.Arrays.SomeObject (struct
  (field $this@array.Arrays.SomeObject (mut (ref null $array.Arrays)))
 ))
@@ -333,7 +331,6 @@
 )
 
 ;;; CLASS  NativeType
-
 (type $array.Arrays.NativeType (struct
 ))
 
@@ -351,7 +348,6 @@
 )
 
 ;;; CLASS  ArrayContainer
-
 (type $array.Arrays.ArrayContainer (struct
  (field $data@array.Arrays.ArrayContainer (mut (ref null $java.lang.Object)))
 ))

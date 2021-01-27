@@ -1,10 +1,9 @@
 ;;; Code for methodreferences.MethodReferences
 
 ;;; CLASS  MethodReferences
-
-(global $staticStringProducer@methodreferences.MethodReferences (mut (ref null $methodreferences.MethodReferences.Producer)) (ref.null $methodreferences.MethodReferences.Producer))
 (type $methodreferences.MethodReferences (struct
 ))
+(global $staticStringProducer@methodreferences.MethodReferences (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
 
 ;;; MethodReferences()
 (func $<init><>:void@methodreferences.MethodReferences
@@ -82,126 +81,116 @@
 ;;; void MethodReferences.main()
 (func $main<>:void@methodreferences.MethodReferences
  (param $this (ref null $java.lang.Object))
- (local $objectFactory (ref null $methodreferences.MethodReferences.Producer))
+ (local $objectFactory (ref null $java.lang.Object))
  (local $$$q (ref null $methodreferences.MethodReferences))
- (local $biFunction (ref null $methodreferences.MethodReferences.BiFunction))
+ (local $biFunction (ref null $java.lang.Object))
  (local $arg0 (ref null $methodreferences.MethodReferences))
  (local $arg1 (ref null $java.lang.Number))
- (local $functionWithParameters (ref null $methodreferences.MethodReferences.Function))
+ (local $functionWithParameters (ref null $java.lang.Object))
  (local $arg0_1 (ref null $java.lang.Number))
- (local $objectPredicate (ref null $methodreferences.MethodReferences.Predicate))
+ (local $objectPredicate (ref null $java.lang.Object))
  (local $arg0_2 (ref null $methodreferences.MethodReferences))
- (local $objectCapturingOuterProducer (ref null $methodreferences.MethodReferences.Producer))
- (local $arrayProducer (ref null $methodreferences.MethodReferences.ArrayProducer))
+ (local $objectCapturingOuterProducer (ref null $java.lang.Object))
+ (local $arrayProducer (ref null $java.lang.Object))
  (local $arg0_3 i32)
  (local $$$q_1 (ref null $methodreferences.MethodReferences))
- (local $function (ref null $methodreferences.MethodReferences.Function))
+ (local $function (ref null $java.lang.Object))
  (local $arg0_4 (ref null $methodreferences.MethodReferences))
- (local $arrayFactory (ref null $methodreferences.MethodReferences.Function))
+ (local $arrayFactory (ref null $java.lang.Object))
  (local $arg0_5 (ref null $java.lang.Integer))
- (local $superToStringProducer (ref null $methodreferences.MethodReferences.Producer))
- (local $jsobjectFactory (ref null $methodreferences.MethodReferences.JsProducer))
+ (local $superToStringProducer (ref null $java.lang.Object))
+ (local $jsobjectFactory (ref null $java.lang.Object))
  (local $$$q_2 (ref null $methodreferences.MethodReferences))
- (local $jsfunction (ref null $methodreferences.MethodReferences.JsFunctionInterface))
+ (local $jsfunction (ref null $java.lang.Object))
  (local $arg0_6 (ref null $methodreferences.MethodReferences))
- (local $jsarrayFactory (ref null $methodreferences.MethodReferences.JsFunctionInterface))
+ (local $jsarrayFactory (ref null $java.lang.Object))
  (local $arg0_7 (ref null $java.lang.Integer))
- (local $jsSuperToStringProducer (ref null $methodreferences.MethodReferences.JsProducer))
- (local $jsbiFunction (ref null $methodreferences.MethodReferences.JsBiFunction))
+ (local $jsSuperToStringProducer (ref null $java.lang.Object))
+ (local $jsbiFunction (ref null $java.lang.Object))
  (local $arg0_8 (ref null $methodreferences.MethodReferences))
  (local $arg1_1 (ref null $java.lang.Number))
- (local $jsFunctionWithParameters (ref null $methodreferences.MethodReferences.JsFunctionInterface))
+ (local $jsFunctionWithParameters (ref null $java.lang.Object))
  (local $arg0_9 (ref null $java.lang.Number))
  (block $return.label
   (block
    ;; Producer<Object> objectFactory = function (){
    
-   (local.set $objectFactory (ref.null $methodreferences.MethodReferences.Producer))
+   (local.set $objectFactory (ref.null $java.lang.Object))
    ;; (objectFactory = function (){
-   (local.set $objectFactory (ref.null $methodreferences.MethodReferences.Producer))
+   (local.set $objectFactory (ref.null $java.lang.Object))
    ;; (objectFactory = (MethodReferences<T> $$q = new MethodReferences.<init>(),function (){
-   (local.set $objectFactory (block (result (ref null $methodreferences.MethodReferences.Producer))
+   (local.set $objectFactory (block (result (ref null $java.lang.Object))
     
     (local.set $$$q (call $<init><>:void@methodreferences.MethodReferences (struct.new_default_with_rtt $methodreferences.MethodReferences (global.get $methodreferences.MethodReferences.rtt)) ))
-    (ref.null $methodreferences.MethodReferences.Producer)
+    (ref.null $java.lang.Object)
    ))
    ;; BiFunction<MethodReferences<T>, Number, Boolean> biFunction = function (MethodReferences<T> arg0,Number arg1){
    
-   (local.set $biFunction (ref.null $methodreferences.MethodReferences.BiFunction))
+   (local.set $biFunction (ref.null $java.lang.Object))
    ;; Function<Number, Boolean> functionWithParameters = function (Number arg0){
    
-   (local.set $functionWithParameters (ref.null $methodreferences.MethodReferences.Function))
+   (local.set $functionWithParameters (ref.null $java.lang.Object))
    ;; Predicate<MethodReferences<T>> objectPredicate = function (MethodReferences<T> arg0){
    
-   (local.set $objectPredicate (ref.null $methodreferences.MethodReferences.Predicate))
+   (local.set $objectPredicate (ref.null $java.lang.Object))
    ;; Producer<ObjectCapturingOuter<T>> objectCapturingOuterProducer = function (){
    
-   (local.set $objectCapturingOuterProducer (ref.null $methodreferences.MethodReferences.Producer))
+   (local.set $objectCapturingOuterProducer (ref.null $java.lang.Object))
    ;; ArrayProducer<Object> arrayProducer = function (int arg0){
    
-   (local.set $arrayProducer (ref.null $methodreferences.MethodReferences.ArrayProducer))
+   (local.set $arrayProducer (ref.null $java.lang.Object))
    ;; (objectFactory = (MethodReferences<Object> $$q = new MethodReferences.<init>(),function (){
-   (local.set $objectFactory (block (result (ref null $methodreferences.MethodReferences.Producer))
+   (local.set $objectFactory (block (result (ref null $java.lang.Object))
     
     (local.set $$$q_1 (call $<init><>:void@methodreferences.MethodReferences (struct.new_default_with_rtt $methodreferences.MethodReferences (global.get $methodreferences.MethodReferences.rtt)) ))
-    (ref.null $methodreferences.MethodReferences.Producer)
+    (ref.null $java.lang.Object)
    ))
    ;; Function<MethodReferences<T>, Object> function = function (MethodReferences<T> arg0){
    
-   (local.set $function (ref.null $methodreferences.MethodReferences.Function))
+   (local.set $function (ref.null $java.lang.Object))
    ;; Function<Integer, Object[]> arrayFactory = function (Integer arg0){
    
-   (local.set $arrayFactory (ref.null $methodreferences.MethodReferences.Function))
+   (local.set $arrayFactory (ref.null $java.lang.Object))
    ;; Producer<String> superToStringProducer = function (){
    
-   (local.set $superToStringProducer (ref.null $methodreferences.MethodReferences.Producer))
+   (local.set $superToStringProducer (ref.null $java.lang.Object))
    ;; JsProducer<Object> jsobjectFactory = function (){
    
-   (local.set $jsobjectFactory (ref.null $methodreferences.MethodReferences.JsProducer))
+   (local.set $jsobjectFactory (ref.null $java.lang.Object))
    ;; (jsobjectFactory = function (){
-   (local.set $jsobjectFactory (ref.null $methodreferences.MethodReferences.JsProducer))
+   (local.set $jsobjectFactory (ref.null $java.lang.Object))
    ;; (jsobjectFactory = (MethodReferences<Object> $$q = new MethodReferences.<init>(),function (){
-   (local.set $jsobjectFactory (block (result (ref null $methodreferences.MethodReferences.JsProducer))
+   (local.set $jsobjectFactory (block (result (ref null $java.lang.Object))
     
     (local.set $$$q_2 (call $<init><>:void@methodreferences.MethodReferences (struct.new_default_with_rtt $methodreferences.MethodReferences (global.get $methodreferences.MethodReferences.rtt)) ))
-    (ref.null $methodreferences.MethodReferences.JsProducer)
+    (ref.null $java.lang.Object)
    ))
    ;; JsFunctionInterface<MethodReferences<T>, Object> jsfunction = function (MethodReferences<T> arg0){
    
-   (local.set $jsfunction (ref.null $methodreferences.MethodReferences.JsFunctionInterface))
+   (local.set $jsfunction (ref.null $java.lang.Object))
    ;; JsFunctionInterface<Integer, Object[]> jsarrayFactory = function (Integer arg0){
    
-   (local.set $jsarrayFactory (ref.null $methodreferences.MethodReferences.JsFunctionInterface))
+   (local.set $jsarrayFactory (ref.null $java.lang.Object))
    ;; JsProducer<String> jsSuperToStringProducer = function (){
    
-   (local.set $jsSuperToStringProducer (ref.null $methodreferences.MethodReferences.JsProducer))
+   (local.set $jsSuperToStringProducer (ref.null $java.lang.Object))
    ;; JsBiFunction<MethodReferences<T>, Number, Boolean> jsbiFunction = function (MethodReferences<T> arg0,Number arg1){
    
-   (local.set $jsbiFunction (ref.null $methodreferences.MethodReferences.JsBiFunction))
+   (local.set $jsbiFunction (ref.null $java.lang.Object))
    ;; JsFunctionInterface<Number, Boolean> jsFunctionWithParameters = function (Number arg0){
    
-   (local.set $jsFunctionWithParameters (ref.null $methodreferences.MethodReferences.JsFunctionInterface))
+   (local.set $jsFunctionWithParameters (ref.null $java.lang.Object))
   )
  )
 )
 
 ;;; INTERFACE  Producer
 
-(type $methodreferences.MethodReferences.Producer (struct
-))
-
 ;;; INTERFACE  Predicate
-
-(type $methodreferences.MethodReferences.Predicate (struct
-))
 
 ;;; INTERFACE  ArrayProducer
 
-(type $methodreferences.MethodReferences.ArrayProducer (struct
-))
-
 ;;; CLASS  ObjectCapturingOuter
-
 (type $methodreferences.MethodReferences.ObjectCapturingOuter (struct
  (field $this@methodreferences.MethodReferences.ObjectCapturingOuter (mut (ref null $methodreferences.MethodReferences)))
 ))
@@ -236,26 +225,11 @@
 
 ;;; INTERFACE  Function
 
-(type $methodreferences.MethodReferences.Function (struct
-))
-
 ;;; INTERFACE  BiFunction
-
-(type $methodreferences.MethodReferences.BiFunction (struct
-))
 
 ;;; INTERFACE  JsProducer
 
-(type $methodreferences.MethodReferences.JsProducer (struct
-))
-
 ;;; INTERFACE  JsFunctionInterface
 
-(type $methodreferences.MethodReferences.JsFunctionInterface (struct
-))
-
 ;;; INTERFACE  JsBiFunction
-
-(type $methodreferences.MethodReferences.JsBiFunction (struct
-))
 

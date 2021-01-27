@@ -1,7 +1,6 @@
 ;;; Code for typewildcards.TypeWildCards
 
 ;;; CLASS  GenericType
-
 (type $typewildcards.GenericType (struct
 ))
 
@@ -19,7 +18,6 @@
 )
 
 ;;; CLASS  TypeWildCards
-
 (type $typewildcards.TypeWildCards (struct
 ))
 
@@ -115,14 +113,14 @@
 
 ;;; List<V> TypeWildCards.transform(List<F> from, Function<? super F, ? extends V> function)
 (func $transform<java.util.List|java.util.function.Function>:java.util.List@typewildcards.TypeWildCards
- (param $from (ref null $java.util.List))
- (param $function (ref null $java.util.function.Function))
- (result (ref null $java.util.List))
- (local $return.value (ref null $java.util.List))
+ (param $from (ref null $java.lang.Object))
+ (param $function (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; return null;
-   (local.set $return.value (ref.null $java.util.List))
+   (local.set $return.value (ref.null $java.lang.Object))
    (br $return.label)
   )
  )
@@ -131,14 +129,14 @@
 
 ;;; List<E> TypeWildCards.concat(List<? extends E> a, List<? extends E> b)
 (func $concat<java.util.List|java.util.List>:java.util.List@typewildcards.TypeWildCards
- (param $a (ref null $java.util.List))
- (param $b (ref null $java.util.List))
- (result (ref null $java.util.List))
- (local $return.value (ref null $java.util.List))
+ (param $a (ref null $java.lang.Object))
+ (param $b (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; return null;
-   (local.set $return.value (ref.null $java.util.List))
+   (local.set $return.value (ref.null $java.lang.Object))
    (br $return.label)
   )
  )
@@ -148,21 +146,21 @@
 ;;; void TypeWildCards.testInferredGenericIntersection()
 (func $testInferredGenericIntersection<>:void@typewildcards.TypeWildCards
  (param $this (ref null $java.lang.Object))
- (local $elements (ref null $java.util.List))
- (local $otherElements (ref null $java.util.List))
- (local $integers (ref null $java.util.List))
+ (local $elements (ref null $java.lang.Object))
+ (local $otherElements (ref null $java.lang.Object))
+ (local $integers (ref null $java.lang.Object))
  (local $a (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; List<Element> elements = null;
    
-   (local.set $elements (ref.null $java.util.List))
+   (local.set $elements (ref.null $java.lang.Object))
    ;; List<SubOtherElement> otherElements = null;
    
-   (local.set $otherElements (ref.null $java.util.List))
+   (local.set $otherElements (ref.null $java.lang.Object))
    ;; List<Integer> integers = typewildcards.TypeWildCards.transform(typewildcards.TypeWildCards.concat(elements,otherElements),function ((Object&HasKey&IntegerSupplier) a){
    
-   (local.set $integers (call $transform<java.util.List|java.util.function.Function>:java.util.List@typewildcards.TypeWildCards (call $concat<java.util.List|java.util.List>:java.util.List@typewildcards.TypeWildCards (local.get $elements)(local.get $otherElements))(ref.null $java.util.function.Function)))
+   (local.set $integers (call $transform<java.util.List|java.util.function.Function>:java.util.List@typewildcards.TypeWildCards (call $concat<java.util.List|java.util.List>:java.util.List@typewildcards.TypeWildCards (local.get $elements)(local.get $otherElements))(ref.null $java.lang.Object)))
   )
  )
 )
@@ -189,16 +187,9 @@
 
 ;;; INTERFACE  X
 
-(type $typewildcards.TypeWildCards.X (struct
-))
-
 ;;; INTERFACE  Y
 
-(type $typewildcards.TypeWildCards.Y (struct
-))
-
 ;;; CLASS  A
-
 (type $typewildcards.TypeWildCards.A (struct
  (field $f@typewildcards.TypeWildCards.A (mut i32))
 ))
@@ -227,16 +218,9 @@
 
 ;;; INTERFACE  IntegerSupplier
 
-(type $typewildcards.TypeWildCards.IntegerSupplier (struct
-))
-
 ;;; INTERFACE  HasKey
 
-(type $typewildcards.TypeWildCards.HasKey (struct
-))
-
 ;;; CLASS  Element
-
 (type $typewildcards.TypeWildCards.Element (struct
  (field $this@typewildcards.TypeWildCards.Element (mut (ref null $typewildcards.TypeWildCards)))
 ))
@@ -255,7 +239,6 @@
 )
 
 ;;; CLASS  OtherElement
-
 (type $typewildcards.TypeWildCards.OtherElement (struct
  (field $this@typewildcards.TypeWildCards.OtherElement (mut (ref null $typewildcards.TypeWildCards)))
 ))
@@ -274,7 +257,6 @@
 )
 
 ;;; CLASS  SubOtherElement
-
 (type $typewildcards.TypeWildCards.SubOtherElement (struct
  (field $this@typewildcards.TypeWildCards.OtherElement (mut (ref null $typewildcards.TypeWildCards)))
  (field $this@typewildcards.TypeWildCards.SubOtherElement (mut (ref null $typewildcards.TypeWildCards)))
@@ -294,7 +276,6 @@
 )
 
 ;;; CLASS  Foo
-
 (type $typewildcards.TypeWildCards.Foo (struct
  (field $this@typewildcards.TypeWildCards.Foo (mut (ref null $typewildcards.TypeWildCards)))
 ))

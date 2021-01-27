@@ -1,7 +1,6 @@
 ;;; Code for interfaces.Main
 
 ;;; CLASS  Main
-
 (type $interfaces.Main (struct
 ))
 
@@ -21,7 +20,7 @@
 ;;; void Main.testInterfaceMembers()
 (func $testInterfaceMembers<>:void@interfaces.Main
  (param $this (ref null $java.lang.Object))
- (local $i (ref null $interfaces.Main.Interface))
+ (local $i (ref null $java.lang.Object))
  (local $x i32)
  (block $return.label
   (block
@@ -42,11 +41,8 @@
 )
 
 ;;; INTERFACE  Interface
-
 (global $a@interfaces.Main.Interface (mut i32) (i32.const 0))
 (global $b@interfaces.Main.Interface (mut i32) (i32.const 0))
-(type $interfaces.Main.Interface (struct
-))
 
 ;;; void Interface.defaultMethod(T t)
 (func $defaultMethod<java.lang.Object>:void@interfaces.Main.Interface
@@ -62,7 +58,7 @@
 
 ;;; void Interface.privateMethod(T t)
 (func $privateMethod<java.lang.Object>:void@interfaces.Main.Interface
- (param $this (ref null $interfaces.Main.Interface))
+ (param $this (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Object))
  (block $return.label
   (block
@@ -80,9 +76,6 @@
 
 ;;; INTERFACE  SubInterface
 
-(type $interfaces.Main.SubInterface (struct
-))
-
 ;;; void SubInterface.defaultMethod(String s)
 (func $defaultMethod<java.lang.String>:void@interfaces.Main.SubInterface
  (param $this (ref null $java.lang.Object))
@@ -96,7 +89,6 @@
 )
 
 ;;; CLASS  Implementor
-
 (type $interfaces.Main.Implementor (struct
  (field $this@interfaces.Main.Implementor (mut (ref null $interfaces.Main)))
 ))
@@ -124,7 +116,6 @@
 )
 
 ;;; CLASS  AbstractImplementor
-
 (type $interfaces.Main.AbstractImplementor (struct
  (field $this@interfaces.Main.AbstractImplementor (mut (ref null $interfaces.Main)))
 ))

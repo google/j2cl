@@ -1,7 +1,6 @@
 ;;; Code for devirtualizedcalls.ArrayCalls
 
 ;;; CLASS  ArrayCalls
-
 (type $devirtualizedcalls.ArrayCalls (struct
 ))
 
@@ -41,7 +40,6 @@
 ;;; Code for devirtualizedcalls.CharSequenceCalls
 
 ;;; CLASS  CharSequenceCalls
-
 (type $devirtualizedcalls.CharSequenceCalls (struct
 ))
 
@@ -61,7 +59,7 @@
 ;;; void CharSequenceCalls.test(CharSequence cs)
 (func $test<java.lang.CharSequence>:void@devirtualizedcalls.CharSequenceCalls
  (param $this (ref null $java.lang.Object))
- (param $cs (ref null $java.lang.CharSequence))
+ (param $cs (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; cs.charAt(0);
@@ -88,7 +86,6 @@
 ;;; Code for devirtualizedcalls.NumberCalls
 
 ;;; CLASS  NumberCalls
-
 (type $devirtualizedcalls.NumberCalls (struct
 ))
 
@@ -394,7 +391,6 @@
 ;;; Code for devirtualizedcalls.ObjectCalls
 
 ;;; CLASS  ObjectCalls
-
 (type $devirtualizedcalls.ObjectCalls (struct
 ))
 
@@ -487,7 +483,6 @@
 ;;; Code for devirtualizedcalls.StringCalls
 
 ;;; CLASS  StringCalls
-
 (type $devirtualizedcalls.StringCalls (struct
 ))
 

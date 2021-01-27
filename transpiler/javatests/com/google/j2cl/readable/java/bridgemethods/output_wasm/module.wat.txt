@@ -2,11 +2,7 @@
 
 ;;; INTERFACE  I
 
-(type $bridgemethods.I (struct
-))
-
 ;;; CLASS  A
-
 (type $bridgemethods.A (struct
 ))
 
@@ -55,7 +51,6 @@
 )
 
 ;;; CLASS  B
-
 (type $bridgemethods.B (struct
 ))
 
@@ -90,11 +85,7 @@
 
 ;;; INTERFACE  SpecializedInterface
 
-(type $bridgemethods.SpecializedInterface (struct
-))
-
 ;;; CLASS  AccidentalOverride
-
 (type $bridgemethods.AccidentalOverride (struct
 ))
 
@@ -114,11 +105,7 @@
 
 ;;; INTERFACE  SomeInterface
 
-(type $bridgemethods.SomeInterface (struct
-))
-
 ;;; CLASS  SuperParent
-
 (type $bridgemethods.SuperParent (struct
 ))
 
@@ -147,7 +134,6 @@
 )
 
 ;;; CLASS  Parent
-
 (type $bridgemethods.Parent (struct
 ))
 
@@ -196,7 +182,6 @@
 )
 
 ;;; CLASS  BridgeMethod
-
 (type $bridgemethods.BridgeMethod (struct
 ))
 
@@ -246,11 +231,7 @@
 
 ;;; INTERFACE  SomeOtherFooInterface
 
-(type $bridgemethods.SomeOtherFooInterface (struct
-))
-
 ;;; CLASS  DualUnrelatedBridges
-
 (type $bridgemethods.DualUnrelatedBridges (struct
 ))
 
@@ -290,7 +271,6 @@
 )
 
 ;;; CLASS  SuperDualUnrelatedAccidentalBridges
-
 (type $bridgemethods.SuperDualUnrelatedAccidentalBridges (struct
 ))
 
@@ -330,7 +310,6 @@
 )
 
 ;;; CLASS  DualUnrelatedAccidentalBridges
-
 (type $bridgemethods.DualUnrelatedAccidentalBridges (struct
 ))
 
@@ -349,11 +328,7 @@
 
 ;;; INTERFACE  Getter
 
-(type $bridgemethods.Getter (struct
-))
-
 ;;; CLASS  ClassWithParameterizedGet
-
 (type $bridgemethods.ClassWithParameterizedGet (struct
 ))
 
@@ -387,7 +362,6 @@
 )
 
 ;;; CLASS  AccidentalOverrideBridge
-
 (type $bridgemethods.AccidentalOverrideBridge (struct
 ))
 
@@ -407,7 +381,7 @@
 ;;; void AccidentalOverrideBridge.test()
 (func $test<>:void@bridgemethods.AccidentalOverrideBridge
  (param $this (ref null $java.lang.Object))
- (local $g (ref null $bridgemethods.Getter))
+ (local $g (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; Getter g = new AccidentalOverrideBridge.<init>();
@@ -421,7 +395,6 @@
 )
 
 ;;; CLASS  TestCase10036
-
 (type $bridgemethods.TestCase10036 (struct
 ))
 
@@ -439,9 +412,6 @@
 )
 
 ;;; INTERFACE  BI3
-
-(type $bridgemethods.TestCase10036.BI3 (struct
-))
 
 ;;; String BI3.get(String value)
 (func $get<java.lang.String>:java.lang.String@bridgemethods.TestCase10036.BI3
@@ -461,16 +431,9 @@
 
 ;;; INTERFACE  BI2
 
-(type $bridgemethods.TestCase10036.BI2 (struct
-))
-
 ;;; INTERFACE  BI1
 
-(type $bridgemethods.TestCase10036.BI1 (struct
-))
-
 ;;; CLASS  B
-
 (type $bridgemethods.TestCase10036.B (struct
 ))
 
@@ -488,7 +451,6 @@
 )
 
 ;;; CLASS  TestCase102
-
 (type $bridgemethods.TestCase102 (struct
 ))
 
@@ -507,16 +469,9 @@
 
 ;;; INTERFACE  BI2
 
-(type $bridgemethods.TestCase102.BI2 (struct
-))
-
 ;;; INTERFACE  BI1
 
-(type $bridgemethods.TestCase102.BI1 (struct
-))
-
 ;;; CLASS  B
-
 (type $bridgemethods.TestCase102.B (struct
 ))
 
@@ -534,7 +489,6 @@
 )
 
 ;;; CLASS  C
-
 (type $bridgemethods.TestCase102.C (struct
  (field $this@bridgemethods.TestCase102.C (mut (ref null $bridgemethods.TestCase102)))
 ))
@@ -573,7 +527,6 @@
 )
 
 ;;; CLASS  ParameterizedParent
-
 (type $bridgemethods.ParameterizedParent (struct
 ))
 
@@ -607,7 +560,6 @@
 )
 
 ;;; CLASS  ReparametrerizedChild
-
 (type $bridgemethods.ReparametrerizedChild (struct
 ))
 
@@ -641,7 +593,6 @@
 )
 
 ;;; CLASS  LeafChild
-
 (type $bridgemethods.LeafChild (struct
 ))
 
@@ -660,7 +611,6 @@
 ;;; Code for bridgemethods.BridgeMethodDefault
 
 ;;; CLASS  BridgeMethodDefault
-
 (type $bridgemethods.BridgeMethodDefault (struct
 ))
 
@@ -679,13 +629,7 @@
 
 ;;; INTERFACE  I
 
-(type $bridgemethods.BridgeMethodDefault.I (struct
-))
-
 ;;; INTERFACE  II
-
-(type $bridgemethods.BridgeMethodDefault.II (struct
-))
 
 ;;; void II.m(String s)
 (func $m<java.lang.String>:void@bridgemethods.BridgeMethodDefault.II
@@ -698,7 +642,6 @@
 )
 
 ;;; CLASS  A
-
 (type $bridgemethods.BridgeMethodDefault.A (struct
 ))
 
@@ -717,9 +660,6 @@
 
 ;;; INTERFACE  JJ
 
-(type $bridgemethods.BridgeMethodDefault.JJ (struct
-))
-
 ;;; void JJ.m(Object o)
 (func $m<java.lang.Object>:void@bridgemethods.BridgeMethodDefault.JJ
  (param $this (ref null $java.lang.Object))
@@ -731,7 +671,6 @@
 )
 
 ;;; CLASS  B
-
 (type $bridgemethods.BridgeMethodDefault.B (struct
 ))
 
@@ -750,7 +689,6 @@
 ;;; Code for bridgemethods.BridgeMethodShadowedSignature
 
 ;;; CLASS  BridgeMethodShadowedSignature
-
 (type $bridgemethods.BridgeMethodShadowedSignature (struct
 ))
 
@@ -769,11 +707,7 @@
 
 ;;; INTERFACE  I
 
-(type $bridgemethods.BridgeMethodShadowedSignature.I (struct
-))
-
 ;;; CLASS  B
-
 (type $bridgemethods.BridgeMethodShadowedSignature.B (struct
 ))
 
@@ -807,7 +741,6 @@
 )
 
 ;;; CLASS  C
-
 (type $bridgemethods.BridgeMethodShadowedSignature.C (struct
 ))
 
@@ -827,11 +760,7 @@
 
 ;;; INTERFACE  Map
 
-(type $bridgemethods.Map (struct
-))
-
 ;;; CLASS  AbstractMap
-
 (type $bridgemethods.AbstractMap (struct
 ))
 
@@ -866,7 +795,6 @@
 )
 
 ;;; CLASS  EnumMap
-
 (type $bridgemethods.EnumMap (struct
 ))
 

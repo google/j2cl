@@ -2,7 +2,6 @@
 ;;; Code for packageinfosubpackage.Foo
 
 ;;; CLASS  Foo
-
 (type $packageinfosubpackage.Foo (struct
  (field $nativeBar@packageinfosubpackage.Foo (mut (ref null $packageinfosubpackage.Foo.NativeBar)))
 ))
@@ -21,7 +20,6 @@
 )
 
 ;;; CLASS  NativeBar
-
 (type $packageinfosubpackage.Foo.NativeBar (struct
 ))
 
@@ -40,10 +38,9 @@
 ;;; Code for packageinfosubpackage.subpackage.Bar
 
 ;;; CLASS  Bar
-
-(global $WOO@packageinfosubpackage.subpackage.Bar (mut i32) (i32.const 0))
 (type $packageinfosubpackage.subpackage.Bar (struct
 ))
+(global $WOO@packageinfosubpackage.subpackage.Bar (mut i32) (i32.const 0))
 
 ;;; Bar()
 (func $<init><>:void@packageinfosubpackage.subpackage.Bar

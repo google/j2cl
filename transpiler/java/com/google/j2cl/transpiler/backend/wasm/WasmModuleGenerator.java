@@ -77,15 +77,6 @@ public class WasmModuleGenerator {
   }
 
   private void emitTypes(List<CompilationUnit> compilationUnits) {
-    // TODO(b/175140899): references to JavaScript externs should not arrive to the WASM backend.
-    // Remove when that is fixed.
-    // Emit type declararions for native types.
-    builder.newLine();
-    builder.append(
-        String.format(
-            "(type %s (struct ))",
-            environment.getWasmTypeName(TypeDescriptors.get().nativeFunction)));
-
     for (CompilationUnit j2clCompilationUnit : compilationUnits) {
       builder.newLine();
       builder.append(
@@ -140,13 +131,17 @@ public class WasmModuleGenerator {
     builder.newLine();
     builder.newLine();
     builder.append(";;; " + type.getKind() + "  " + type.getReadableDescription());
+    if (!type.isInterface()) {
+      // Interfaces at runtime are treated as java.lang.Object; they don't have an empty structure
+      // nor rtts.
+      renderTypeStruct(type);
+    }
+
     renderStaticFields(type);
-    renderTypeStruct(type);
     renderTypeMethods(type);
   }
 
   private void renderStaticFields(Type type) {
-    builder.newLine();
     for (Field field : type.getStaticFields()) {
       builder.newLine();
       builder.append(

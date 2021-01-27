@@ -1,7 +1,6 @@
 ;;; Code for jstype.SomeJsType
 
 ;;; CLASS  SomeJsType
-
 (type $jstype.SomeJsType (struct
  (field $publicField@jstype.SomeJsType (mut i32))
  (field $privateField@jstype.SomeJsType (mut i32))
@@ -82,12 +81,12 @@
 ;;; Wildcard SomeJsType.testStarAndWildCard(Star s, Wildcard w)
 (func $testStarAndWildCard<jstype.SomeJsType.Star|jstype.SomeJsType.Wildcard>:jstype.SomeJsType.Wildcard@jstype.SomeJsType
  (param $this (ref null $java.lang.Object))
- (param $s (ref null $jstype.SomeJsType.Star))
- (param $w (ref null $jstype.SomeJsType.Wildcard))
- (result (ref null $jstype.SomeJsType.Wildcard))
- (local $return.value (ref null $jstype.SomeJsType.Wildcard))
+ (param $s (ref null $java.lang.Object))
+ (param $w (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
  (local $object (ref null $java.lang.Object))
- (local $star (ref null $jstype.SomeJsType.Star))
+ (local $star (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; Object object = new Object.<init>();
@@ -106,11 +105,5 @@
 
 ;;; INTERFACE  Star
 
-(type $jstype.SomeJsType.Star (struct
-))
-
 ;;; INTERFACE  Wildcard
-
-(type $jstype.SomeJsType.Wildcard (struct
-))
 

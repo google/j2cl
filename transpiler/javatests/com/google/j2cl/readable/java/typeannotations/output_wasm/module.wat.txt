@@ -2,19 +2,16 @@
 
 ;;; INTERFACE  ParametricType
 
-(type $typeannotations.ParametricType (struct
-))
-
 ;;; List<T> ParametricType.m(List<Map<String[], Map<List<String>[], String[]>>> l)
 (func $m<java.util.List>:java.util.List@typeannotations.ParametricType
  (param $this (ref null $java.lang.Object))
- (param $l (ref null $java.util.List))
- (result (ref null $java.util.List))
- (local $return.value (ref null $java.util.List))
+ (param $l (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; return null;
-   (local.set $return.value (ref.null $java.util.List))
+   (local.set $return.value (ref.null $java.lang.Object))
    (br $return.label)
   )
  )
@@ -23,7 +20,6 @@
 ;;; Code for typeannotations.TypeAnnotations
 
 ;;; CLASS  AbstractType
-
 (type $typeannotations.AbstractType (struct
 ))
 
@@ -41,7 +37,6 @@
 )
 
 ;;; CLASS  AbstractTypeNonNull
-
 (type $typeannotations.AbstractTypeNonNull (struct
 ))
 
@@ -59,7 +54,6 @@
 )
 
 ;;; CLASS  Parent
-
 (type $typeannotations.Parent (struct
 ))
 
@@ -96,10 +90,10 @@
 ;;; List<Parent> Parent.m(List<String> l, Parent c)
 (func $m<java.util.List|typeannotations.Parent>:java.util.List@typeannotations.Parent
  (param $this (ref null $java.lang.Object))
- (param $l (ref null $java.util.List))
+ (param $l (ref null $java.lang.Object))
  (param $c (ref null $typeannotations.Parent))
- (result (ref null $java.util.List))
- (local $return.value (ref null $java.util.List))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; return new ArrayList.<init>();
@@ -111,7 +105,6 @@
 )
 
 ;;; CLASS  ChildWithNullableParent
-
 (type $typeannotations.ChildWithNullableParent (struct
 ))
 
@@ -129,7 +122,6 @@
 )
 
 ;;; CLASS  ChildWithNonNullableParent
-
 (type $typeannotations.ChildWithNonNullableParent (struct
 ))
 
@@ -147,7 +139,6 @@
 )
 
 ;;; CLASS  TypeAnnotations
-
 (type $typeannotations.TypeAnnotations (struct
 ))
 
@@ -166,7 +157,7 @@
 
 ;;; void TypeAnnotations.main()
 (func $main<>:void@typeannotations.TypeAnnotations
- (local $list (ref null $java.util.List))
+ (local $list (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; List<String> list = new ArrayList.<init>();

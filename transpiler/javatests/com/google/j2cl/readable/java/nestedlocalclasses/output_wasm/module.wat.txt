@@ -1,7 +1,6 @@
 ;;; Code for nestedlocalclasses.NestedLocalClasses
 
 ;;; CLASS  NestedLocalClasses
-
 (type $nestedlocalclasses.NestedLocalClasses (struct
 ))
 
@@ -33,7 +32,6 @@
 )
 
 ;;; CLASS  InnerClass
-
 (type $nestedlocalclasses.NestedLocalClasses.1InnerClass (struct
  (field $this@nestedlocalclasses.NestedLocalClasses.1InnerClass (mut (ref null $nestedlocalclasses.NestedLocalClasses)))
  (field $localVar@nestedlocalclasses.NestedLocalClasses.1InnerClass (mut i32))
@@ -69,7 +67,6 @@
 )
 
 ;;; CLASS  InnerInnerClass
-
 (type $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass (struct
  (field $this@nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass (mut (ref null $nestedlocalclasses.NestedLocalClasses.1InnerClass)))
  (field $fieldInInnerInnerClass@nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass (mut i32))
@@ -91,7 +88,6 @@
 )
 
 ;;; CLASS  ClassIndirectlyCapturingLocal
-
 (type $nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal (struct
  (field $this@nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal (mut (ref null $nestedlocalclasses.NestedLocalClasses.1InnerClass)))
  (field $localVar@nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal (mut i32))
@@ -113,9 +109,6 @@
 
 ;;; INTERFACE  InterfaceWithThisReference
 
-(type $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference (struct
-))
-
 ;;; void InterfaceWithThisReference.foo()
 (func $foo<>:void@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference
  (param $this (ref null $java.lang.Object))
@@ -129,9 +122,8 @@
 )
 
 ;;; CLASS  Super
-
 (type $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super (struct
- (field $this@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super (mut (ref null $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference)))
+ (field $this@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super (mut (ref null $java.lang.Object)))
 ))
 
 ;;; Super()
@@ -148,10 +140,9 @@
 )
 
 ;;; CLASS  <anonymous> extends Super
-
 (type $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1 (struct
- (field $this@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super (mut (ref null $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference)))
- (field $this@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1 (mut (ref null $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference)))
+ (field $this@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super (mut (ref null $java.lang.Object)))
+ (field $this@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1 (mut (ref null $java.lang.Object)))
 ))
 
 ;;; <anonymous> extends Super()

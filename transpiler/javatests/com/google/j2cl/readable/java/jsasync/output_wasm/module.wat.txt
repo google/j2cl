@@ -1,9 +1,8 @@
 ;;; Code for jsasync.Main
 
 ;;; CLASS  Main
-
 (type $jsasync.Main (struct
- (field $x@jsasync.Main (mut (ref null $jsasync.Main.IThenable)))
+ (field $x@jsasync.Main (mut (ref null $java.lang.Object)))
 ))
 
 ;;; Main()
@@ -22,12 +21,12 @@
 ;;; IThenable<Void> Main.emptyAsyncMethod()
 (func $emptyAsyncMethod<>:jsasync.Main.IThenable@jsasync.Main
  (param $this (ref null $java.lang.Object))
- (result (ref null $jsasync.Main.IThenable))
- (local $return.value (ref null $jsasync.Main.IThenable))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; return null;
-   (local.set $return.value (ref.null $jsasync.Main.IThenable))
+   (local.set $return.value (ref.null $java.lang.Object))
    (br $return.label)
   )
  )
@@ -37,8 +36,8 @@
 ;;; IThenable<Integer> Main.asyncMethod()
 (func $asyncMethod<>:jsasync.Main.IThenable@jsasync.Main
  (param $this (ref null $java.lang.Object))
- (result (ref null $jsasync.Main.IThenable))
- (local $return.value (ref null $jsasync.Main.IThenable))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
  (local $result i32)
  (block $return.label
   (block
@@ -46,7 +45,7 @@
    
    (local.set $result (i32.const 0))
    ;; return Main.this.parametricAsyncMethod(result);
-   (local.set $return.value (ref.null $jsasync.Main.IThenable))
+   (local.set $return.value (ref.null $java.lang.Object))
    (br $return.label)
   )
  )
@@ -57,8 +56,8 @@
 (func $parametricAsyncMethod<java.lang.Object>:jsasync.Main.IThenable@jsasync.Main
  (param $this (ref null $java.lang.Object))
  (param $value (ref null $java.lang.Object))
- (result (ref null $jsasync.Main.IThenable))
- (local $return.value (ref null $jsasync.Main.IThenable))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; return jsasync.Main.Promise.resolve(jsasync.Main.await(jsasync.Main.Promise.resolve(value)));
@@ -71,8 +70,8 @@
 
 ;;; IThenable<Void> Main.staticAsyncMethod()
 (func $staticAsyncMethod<>:jsasync.Main.IThenable@jsasync.Main
- (result (ref null $jsasync.Main.IThenable))
- (local $return.value (ref null $jsasync.Main.IThenable))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; return jsasync.Main.Promise.resolve(((Void) jsasync.Main.await(jsasync.Main.Promise.resolve(((Void) null)))));
@@ -86,22 +85,22 @@
 ;;; void Main.testAsyncLambdas()
 (func $testAsyncLambdas<>:void@jsasync.Main
  (param $this (ref null $java.lang.Object))
- (local $i (ref null $jsasync.Main.AsyncInterface))
- (local $o (ref null $jsasync.Main.BaseInterface))
- (local $j (ref null $jsasync.Main.AsyncJsFunctionInterface))
- (local $optimizableJsFunction (ref null $jsasync.Main.JsFunctionInterface))
- (local $unoptimizableJsFunction (ref null $jsasync.Main.JsFunctionInterface))
+ (local $i (ref null $java.lang.Object))
+ (local $o (ref null $java.lang.Object))
+ (local $j (ref null $java.lang.Object))
+ (local $optimizableJsFunction (ref null $java.lang.Object))
+ (local $unoptimizableJsFunction (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; AsyncInterface i = function (){
    
-   (local.set $i (ref.null $jsasync.Main.AsyncInterface))
+   (local.set $i (ref.null $java.lang.Object))
    ;; BaseInterface o = Main.this.new $1.<init>();
    
    (local.set $o (call $<init><>:void@jsasync.Main.1 (struct.new_default_with_rtt $jsasync.Main.1 (global.get $jsasync.Main.1.rtt)) ))
    ;; AsyncJsFunctionInterface j = function (){
    
-   (local.set $j (ref.null $jsasync.Main.AsyncJsFunctionInterface))
+   (local.set $j (ref.null $java.lang.Object))
    ;; JsFunctionInterface optimizableJsFunction = Main.this.new $2.<init>();
    
    (local.set $optimizableJsFunction (call $<init><>:void@jsasync.Main.2 (struct.new_default_with_rtt $jsasync.Main.2 (global.get $jsasync.Main.2.rtt)) ))
@@ -114,7 +113,7 @@
 
 ;;; T Main.await(IThenable<T> thenable)
 (func $await<jsasync.Main.IThenable>:java.lang.Object@jsasync.Main
- (param $thenable (ref null $jsasync.Main.IThenable))
+ (param $thenable (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (block $return.label
@@ -125,7 +124,6 @@
 )
 
 ;;; CLASS  <anonymous> implements BaseInterface
-
 (type $jsasync.Main.1 (struct
  (field $this@jsasync.Main.1 (mut (ref null $jsasync.Main)))
 ))
@@ -146,8 +144,8 @@
 ;;; IThenable<Integer> <anonymous> implements BaseInterface.asyncCall()
 (func $asyncCall<>:jsasync.Main.IThenable@jsasync.Main.1
  (param $this (ref null $java.lang.Object))
- (result (ref null $jsasync.Main.IThenable))
- (local $return.value (ref null $jsasync.Main.IThenable))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; return jsasync.Main.Promise.resolve(((Integer) jsasync.Main.await($1.this.this.x)));
@@ -159,7 +157,6 @@
 )
 
 ;;; CLASS  <anonymous> implements JsFunctionInterface
-
 (type $jsasync.Main.2 (struct
  (field $this@jsasync.Main.2 (mut (ref null $jsasync.Main)))
 ))
@@ -180,8 +177,8 @@
 ;;; IThenable<Integer> <anonymous> implements JsFunctionInterface.doSomething()
 (func $doSomething<>:jsasync.Main.IThenable@jsasync.Main.2
  (param $this (ref null $java.lang.Object))
- (result (ref null $jsasync.Main.IThenable))
- (local $return.value (ref null $jsasync.Main.IThenable))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; return jsasync.Main.Promise.resolve(5);
@@ -193,7 +190,6 @@
 )
 
 ;;; CLASS  <anonymous> implements JsFunctionInterface
-
 (type $jsasync.Main.3 (struct
  (field $this@jsasync.Main.3 (mut (ref null $jsasync.Main)))
 ))
@@ -214,9 +210,9 @@
 ;;; IThenable<Integer> <anonymous> implements JsFunctionInterface.doSomething()
 (func $doSomething<>:jsasync.Main.IThenable@jsasync.Main.3
  (param $this (ref null $java.lang.Object))
- (result (ref null $jsasync.Main.IThenable))
- (local $return.value (ref null $jsasync.Main.IThenable))
- (local $tmp (ref null $jsasync.Main.JsFunctionInterface))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (local $tmp (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; JsFunctionInterface tmp = $3.this;
@@ -232,24 +228,15 @@
 
 ;;; INTERFACE  BaseInterface
 
-(type $jsasync.Main.BaseInterface (struct
-))
-
 ;;; INTERFACE  AsyncInterface
 
-(type $jsasync.Main.AsyncInterface (struct
-))
-
 ;;; INTERFACE  InterfaceWithAsyncDefaultMethod
-
-(type $jsasync.Main.InterfaceWithAsyncDefaultMethod (struct
-))
 
 ;;; IThenable<Integer> InterfaceWithAsyncDefaultMethod.asyncCall()
 (func $asyncCall<>:jsasync.Main.IThenable@jsasync.Main.InterfaceWithAsyncDefaultMethod
  (param $this (ref null $java.lang.Object))
- (result (ref null $jsasync.Main.IThenable))
- (local $return.value (ref null $jsasync.Main.IThenable))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; return jsasync.Main.Promise.resolve(((Integer) jsasync.Main.await(jsasync.Main.Promise.resolve(5))));
@@ -262,21 +249,11 @@
 
 ;;; INTERFACE  JsFunctionInterface
 
-(type $jsasync.Main.JsFunctionInterface (struct
-))
-
 ;;; INTERFACE  AsyncJsFunctionInterface
-
-(type $jsasync.Main.AsyncJsFunctionInterface (struct
-))
 
 ;;; INTERFACE  IThenable
 
-(type $jsasync.Main.IThenable (struct
-))
-
 ;;; CLASS  Promise
-
 (type $jsasync.Main.Promise (struct
 ))
 

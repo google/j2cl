@@ -1,7 +1,6 @@
 ;;; Code for jsvarargs.Main
 
 ;;; CLASS  Main
-
 (type $jsvarargs.Main (struct
  (field $field@jsvarargs.Main (mut i32))
 ))
@@ -390,20 +389,19 @@
 ;;; void Main.testGenericJsFunctionWithVarags()
 (func $testGenericJsFunctionWithVarags<>:void@jsvarargs.Main
  (param $this (ref null $java.lang.Object))
- (local $function (ref null $jsvarargs.Main.GenericFunction))
+ (local $function (ref null $java.lang.Object))
  (local $n (ref null $java.lang.Object))
  (local $param (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; GenericFunction<U> function = function (U n,U[] param){
    
-   (local.set $function (ref.null $jsvarargs.Main.GenericFunction))
+   (local.set $function (ref.null $java.lang.Object))
   )
  )
 )
 
 ;;; CLASS  NativeObject
-
 (type $jsvarargs.Main.NativeObject (struct
 ))
 
@@ -422,7 +420,6 @@
 )
 
 ;;; CLASS  SubVarargsConstructorClass
-
 (type $jsvarargs.Main.SubVarargsConstructorClass (struct
 ))
 
@@ -443,11 +440,7 @@
 
 ;;; INTERFACE  Function
 
-(type $jsvarargs.Main.Function (struct
-))
-
 ;;; CLASS  AbstractMethodWithVarargs
-
 (type $jsvarargs.Main.AbstractMethodWithVarargs (struct
 ))
 
@@ -466,9 +459,6 @@
 
 ;;; INTERFACE  StaticInterfaceMethodWithVarargs
 
-(type $jsvarargs.Main.StaticInterfaceMethodWithVarargs (struct
-))
-
 ;;; void StaticInterfaceMethodWithVarargs.staticMethod(int... args)
 (func $staticMethod<int<>>:void@jsvarargs.Main.StaticInterfaceMethodWithVarargs
  (param $args (ref null $java.lang.Object))
@@ -479,7 +469,6 @@
 )
 
 ;;; CLASS  AFunction
-
 (type $jsvarargs.Main.AFunction (struct
 ))
 
@@ -514,7 +503,6 @@
 )
 
 ;;; CLASS  SubMain
-
 (type $jsvarargs.Main.SubMain (struct
  (field $field@jsvarargs.Main (mut i32))
 ))
@@ -566,13 +554,9 @@
 )
 
 ;;; INTERFACE  GenericFunction
-
-(type $jsvarargs.Main.GenericFunction (struct
-))
 ;;; Code for jsvarargs.QualifiedSuperMethodCall
 
 ;;; CLASS  QualifiedSuperMethodCall
-
 (type $jsvarargs.QualifiedSuperMethodCall (struct
  (field $field@jsvarargs.Main (mut i32))
 ))
@@ -591,7 +575,6 @@
 )
 
 ;;; CLASS  InnerClass
-
 (type $jsvarargs.QualifiedSuperMethodCall.InnerClass (struct
  (field $this@jsvarargs.QualifiedSuperMethodCall.InnerClass (mut (ref null $jsvarargs.QualifiedSuperMethodCall)))
 ))

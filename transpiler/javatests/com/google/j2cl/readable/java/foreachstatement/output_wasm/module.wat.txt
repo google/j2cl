@@ -1,7 +1,6 @@
 ;;; Code for foreachstatement.ForEachStatement
 
 ;;; CLASS  ForEachStatement
-
 (type $foreachstatement.ForEachStatement (struct
 ))
 
@@ -21,8 +20,8 @@
 ;;; void ForEachStatement.test(Iterable<Throwable> iterable)
 (func $test<java.lang.Iterable>:void@foreachstatement.ForEachStatement
  (param $this (ref null $java.lang.Object))
- (param $iterable (ref null $java.lang.Iterable))
- (local $$iterator (ref null $java.util.Iterator))
+ (param $iterable (ref null $java.lang.Object))
+ (local $$iterator (ref null $java.lang.Object))
  (local $t (ref null $java.lang.Throwable))
  (local $$array (ref null $java.lang.Object))
  (local $$index f64)
@@ -32,7 +31,7 @@
    ;; LOOP: for (Iterator<Throwable> $iterator = iterable.iterator();$iterator.hasNext();) {
    
    
-   (local.set $$iterator (ref.null $java.util.Iterator))
+   (local.set $$iterator (ref.null $java.lang.Object))
    (block $LOOP.BREAK
     (loop
      (br_if 1 (i32.eqz (i32.const 0)))

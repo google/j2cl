@@ -2,11 +2,7 @@
 
 ;;; INTERFACE  MyInterface
 
-(type $instancejsmethods.MyInterface (struct
-))
-
 ;;; CLASS  SuperParent
-
 (type $instancejsmethods.SuperParent (struct
 ))
 
@@ -58,7 +54,6 @@
 )
 
 ;;; CLASS  Parent
-
 (type $instancejsmethods.Parent (struct
 ))
 
@@ -126,7 +121,6 @@
 )
 
 ;;; CLASS  Child
-
 (type $instancejsmethods.Child (struct
 ))
 
@@ -209,7 +203,6 @@
 )
 
 ;;; CLASS  Main
-
 (type $instancejsmethods.Main (struct
 ))
 
@@ -234,7 +227,7 @@
  (local $c (ref null $instancejsmethods.SuperParent))
  (local $pp (ref null $instancejsmethods.Parent))
  (local $cc (ref null $instancejsmethods.Parent))
- (local $intf (ref null $instancejsmethods.MyInterface))
+ (local $intf (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; SuperParent sp = new SuperParent.<init>();

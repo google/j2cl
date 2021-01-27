@@ -1,7 +1,6 @@
 ;;; Code for cast.CastGenerics
 
 ;;; CLASS  CastGenerics
-
 (type $cast.CastGenerics (struct
  (field $field@cast.CastGenerics (mut (ref null $java.lang.Object)))
 ))
@@ -201,8 +200,8 @@
 (func $method<java.lang.Object>:cast.CastGenerics.Empty1@cast.CastGenerics
  (param $this (ref null $java.lang.Object))
  (param $o (ref null $java.lang.Object))
- (result (ref null $cast.CastGenerics.Empty1))
- (local $return.value (ref null $cast.CastGenerics.Empty1))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; if (o instanceof Empty1) {
@@ -210,13 +209,13 @@
     (then
      (block
       ;; return ((EE) o);
-      (local.set $return.value (ref.null $cast.CastGenerics.Empty1))
+      (local.set $return.value (ref.null $java.lang.Object))
       (br $return.label)
      )
     )
    )
    ;; return null;
-   (local.set $return.value (ref.null $cast.CastGenerics.Empty1))
+   (local.set $return.value (ref.null $java.lang.Object))
    (br $return.label)
   )
  )
@@ -239,16 +238,9 @@
 
 ;;; INTERFACE  A
 
-(type $cast.CastGenerics.A (struct
-))
-
 ;;; INTERFACE  B
 
-(type $cast.CastGenerics.B (struct
-))
-
 ;;; CLASS  BaseImplementor
-
 (type $cast.CastGenerics.BaseImplementor (struct
 ))
 
@@ -266,7 +258,6 @@
 )
 
 ;;; CLASS  Implementor
-
 (type $cast.CastGenerics.Implementor (struct
 ))
 
@@ -302,7 +293,6 @@
 )
 
 ;;; CLASS  Container
-
 (type $cast.CastGenerics.Container (struct
 ))
 
@@ -335,7 +325,6 @@
 )
 
 ;;; CLASS  Nested
-
 (type $cast.CastGenerics.1Nested (struct
  (field $this@cast.CastGenerics.1Nested (mut (ref null $cast.CastGenerics)))
 ))
@@ -369,16 +358,9 @@
 
 ;;; INTERFACE  Empty1
 
-(type $cast.CastGenerics.Empty1 (struct
-))
-
 ;;; INTERFACE  Empty2
 
-(type $cast.CastGenerics.Empty2 (struct
-))
-
 ;;; CLASS  <anonymous> extends Foo<T>
-
 (type $cast.CastGenerics.1 (struct
 ))
 
@@ -396,7 +378,6 @@
 )
 
 ;;; CLASS  Foo
-
 (type $cast.CastGenerics.Foo (struct
 ))
 
@@ -415,7 +396,6 @@
 ;;; Code for cast.CastPrimitives
 
 ;;; CLASS  CastPrimitives
-
 (type $cast.CastPrimitives (struct
 ))
 
@@ -885,7 +865,6 @@
 )
 
 ;;; CLASS  IntValueHolder
-
 (type $cast.CastPrimitives.IntValueHolder (struct
 ))
 
@@ -904,7 +883,6 @@
 )
 
 ;;; CLASS  LongValueHolder
-
 (type $cast.CastPrimitives.LongValueHolder (struct
 ))
 
@@ -924,7 +902,6 @@
 ;;; Code for cast.Casts
 
 ;;; CLASS  Casts
-
 (type $cast.Casts (struct
 ))
 
@@ -962,7 +939,7 @@
 (func $testCasToInterface<>:void@cast.Casts
  (param $this (ref null $java.lang.Object))
  (local $o (ref null $java.lang.Object))
- (local $s (ref null $java.io.Serializable))
+ (local $s (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; Object o = new Object.<init>();
