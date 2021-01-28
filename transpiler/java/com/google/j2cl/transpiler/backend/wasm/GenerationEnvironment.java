@@ -19,6 +19,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static java.util.stream.Collectors.joining;
 
+import com.google.common.base.Predicates;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
@@ -32,11 +33,14 @@ import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.NameDeclaration;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
+import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.backend.common.UniqueNamesResolver;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -58,6 +62,14 @@ class GenerationEnvironment {
   static String getWasmTypeForPrimitive(TypeDescriptor typeDescriptor) {
     checkArgument(typeDescriptor.isPrimitive());
     return WASM_TYPES_BY_PRIMITIVE_TYPES.get(typeDescriptor);
+  }
+
+  /** Maps Java type declarations to the corresponding wasm type layout objects. */
+  private final Map<TypeDeclaration, WasmTypeLayout> wasmTypeLayoutByTypeDeclaration;
+
+  /** Returns the wasm type layout for a Java declared type. */
+  WasmTypeLayout getWasmTypeLayout(TypeDeclaration typeDeclaration) {
+    return wasmTypeLayoutByTypeDeclaration.get(typeDeclaration);
   }
 
   String getWasmType(TypeDescriptor typeDescriptor) {
@@ -141,11 +153,33 @@ class GenerationEnvironment {
   }
 
   GenerationEnvironment(List<CompilationUnit> compilationUnits) {
+    // Resolve variable names into unique wasm identifiers.
     compilationUnits.stream()
         .flatMap(c -> c.getTypes().stream())
         .forEach(
             t ->
                 nameByDeclaration.putAll(
                     UniqueNamesResolver.computeUniqueNames(ImmutableSet.of(), t)));
+
+    // Create a representation for Java classes that is useful to lay out the structs and
+    // vtables needed in the wasm output.
+    wasmTypeLayoutByTypeDeclaration = new LinkedHashMap<>();
+    compilationUnits.stream()
+        .flatMap(c -> c.getTypes().stream())
+        .filter(Predicates.not(Type::isInterface))
+        // Traverse superclasses before subclasses to ensure that the layout for the superclass
+        // is already available to build the layout for the subclass.
+        .sorted(Comparator.comparingInt(t -> t.getDeclaration().getClassHierarchyDepth()))
+        .forEach(
+            t -> {
+              WasmTypeLayout superTypeLayout = null;
+              if (t.getSuperTypeDescriptor() != null) {
+                superTypeLayout =
+                    wasmTypeLayoutByTypeDeclaration.get(
+                        t.getSuperTypeDescriptor().getTypeDeclaration());
+              }
+              wasmTypeLayoutByTypeDeclaration.put(
+                  t.getDeclaration(), WasmTypeLayout.create(t, superTypeLayout));
+            });
   }
 }

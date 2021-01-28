@@ -399,7 +399,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   }
 
   /** Whether the method does dynamic dispatch and can be overridden. */
-  boolean isPolymorphic() {
+  public boolean isPolymorphic() {
     return isInstanceMember() && !getVisibility().isPrivate();
   }
 
