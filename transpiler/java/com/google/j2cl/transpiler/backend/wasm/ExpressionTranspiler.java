@@ -270,8 +270,28 @@ final class ExpressionTranspiler {
         sourceBuilder.append("(call " + environment.getMethodImplementationName(target) + " ");
         sourceBuilder.append(
             format(
-                "(struct.new_default_with_rtt %s (global.get %s)) ",
-                environment.getWasmTypeName(newInstance.getTypeDescriptor()),
+                "(struct.new_with_rtt %s",
+                environment.getWasmTypeName(newInstance.getTypeDescriptor())));
+
+        // TODO(b/178728155): Go back to using struct.new_default_with_rtt once it supports
+        // assigning immutable fields at construction. See b/178738025 for an alternative design
+        // that might have better runtime tradeoffs.
+
+        // Initialize instance fields to their default values. Note that struct.new_default_with_rtt
+        // cannot be used here since the vtable needs to an immutable field to enable sub-typing
+        // hence will need to be initialized at construction.
+        environment
+            .getWasmTypeLayout(newInstance.getTypeDescriptor().getTypeDeclaration())
+            .getAllInstanceFields()
+            .forEach(
+                f -> {
+                  sourceBuilder.append(" ");
+                  render(f.getDescriptor().getTypeDescriptor().getDefaultValue());
+                });
+
+        sourceBuilder.append(
+            format(
+                " (global.get %s))",
                 environment.getRttGlobalName(
                     newInstance.getTypeDescriptor().getTypeDeclaration())));
         renderTypedExpressions(target.getParameterTypeDescriptors(), newInstance.getArguments());

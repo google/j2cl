@@ -173,12 +173,12 @@
    )
    ;; Outer finalOuter = BooleanOperations.this.new $1Outer.<init>();
    
-   (local.set $finalOuter (call $<init><>:void@booleanoperations.BooleanOperations.1Outer (struct.new_default_with_rtt $booleanoperations.BooleanOperations.1Outer (global.get $booleanoperations.BooleanOperations.1Outer.rtt)) ))
+   (local.set $finalOuter (call $<init><>:void@booleanoperations.BooleanOperations.1Outer (struct.new_with_rtt $booleanoperations.BooleanOperations.1Outer (ref.null $booleanoperations.BooleanOperations) (i32.const 0) (global.get $booleanoperations.BooleanOperations.1Outer.rtt))))
    ;; (finalOuter.b = (finalOuter.b | true));
    (struct.set $booleanoperations.BooleanOperations.1Outer $b@booleanoperations.BooleanOperations.1Outer  (local.get $finalOuter) (i32.or (struct.get $booleanoperations.BooleanOperations.1Outer $b@booleanoperations.BooleanOperations.1Outer  (local.get $finalOuter)) (i32.const 1)))
    ;; Outer outer = BooleanOperations.this.new $1Outer.<init>();
    
-   (local.set $outer (call $<init><>:void@booleanoperations.BooleanOperations.1Outer (struct.new_default_with_rtt $booleanoperations.BooleanOperations.1Outer (global.get $booleanoperations.BooleanOperations.1Outer.rtt)) ))
+   (local.set $outer (call $<init><>:void@booleanoperations.BooleanOperations.1Outer (struct.new_with_rtt $booleanoperations.BooleanOperations.1Outer (ref.null $booleanoperations.BooleanOperations) (i32.const 0) (global.get $booleanoperations.BooleanOperations.1Outer.rtt))))
    ;; (outer.b = (outer.b | (((outer = null),outer) == null)));
    (struct.set $booleanoperations.BooleanOperations.1Outer $b@booleanoperations.BooleanOperations.1Outer  (local.get $outer) (i32.or (struct.get $booleanoperations.BooleanOperations.1Outer $b@booleanoperations.BooleanOperations.1Outer  (local.get $outer)) (ref.eq (block (result (ref null $booleanoperations.BooleanOperations.1Outer))
     (local.set $outer (ref.null $booleanoperations.BooleanOperations.1Outer))

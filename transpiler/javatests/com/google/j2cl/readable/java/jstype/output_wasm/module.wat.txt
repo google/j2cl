@@ -91,7 +91,7 @@
   (block
    ;; Object object = new Object.<init>();
    
-   (local.set $object (call $<init><>:void@java.lang.Object (struct.new_default_with_rtt $java.lang.Object (global.get $java.lang.Object.rtt)) ))
+   (local.set $object (call $<init><>:void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.rtt))))
    ;; Star star = ((Star) ((Object) 3.0));
    
    (local.set $star (ref.null $java.lang.Object))

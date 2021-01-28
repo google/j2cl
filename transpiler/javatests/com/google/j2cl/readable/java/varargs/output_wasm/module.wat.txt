@@ -91,7 +91,7 @@
   (block
    ;; Varargs v = new Varargs.<init>();
    
-   (local.set $v (call $<init><>:void@varargs.Varargs (struct.new_default_with_rtt $varargs.Varargs (global.get $varargs.Varargs.rtt)) ))
+   (local.set $v (call $<init><>:void@varargs.Varargs (struct.new_with_rtt $varargs.Varargs (global.get $varargs.Varargs.rtt))))
    ;; v.test(1,[]);
    
    ;; v.test(1,[new Object.<init>()]);

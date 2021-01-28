@@ -325,10 +325,10 @@
   (block
    ;; SubVarargs unusedS1 = new SubVarargs.<init>(2);
    
-   (local.set $unusedS1 (call $<init><int>:void@jsconstructor.JsConstructorClass.SubVarargs (struct.new_default_with_rtt $jsconstructor.JsConstructorClass.SubVarargs (global.get $jsconstructor.JsConstructorClass.SubVarargs.rtt)) (i32.const 2)))
+   (local.set $unusedS1 (call $<init><int>:void@jsconstructor.JsConstructorClass.SubVarargs (struct.new_with_rtt $jsconstructor.JsConstructorClass.SubVarargs (i32.const 0) (global.get $jsconstructor.JsConstructorClass.SubVarargs.rtt))(i32.const 2)))
    ;; SubVarargs unusedS2 = new SubVarargs.<init>(new Object.<init>(),[1,2,3]);
    
-   (local.set $unusedS2 (call $<init><java.lang.Object|int<>>:void@jsconstructor.JsConstructorClass.SubVarargs (struct.new_default_with_rtt $jsconstructor.JsConstructorClass.SubVarargs (global.get $jsconstructor.JsConstructorClass.SubVarargs.rtt)) (call $<init><>:void@java.lang.Object (struct.new_default_with_rtt $java.lang.Object (global.get $java.lang.Object.rtt)) )(ref.null $java.lang.Object)))
+   (local.set $unusedS2 (call $<init><java.lang.Object|int<>>:void@jsconstructor.JsConstructorClass.SubVarargs (struct.new_with_rtt $jsconstructor.JsConstructorClass.SubVarargs (i32.const 0) (global.get $jsconstructor.JsConstructorClass.SubVarargs.rtt))(call $<init><>:void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.rtt)))(ref.null $java.lang.Object)))
   )
  )
 )

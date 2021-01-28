@@ -24,10 +24,10 @@
  (block $return.label
   (block
    ;; NestedGenericClass.this.new $1E.<init>();
-   (call $<init><>:void@nestedgenericclass.NestedGenericClass.1E (struct.new_default_with_rtt $nestedgenericclass.NestedGenericClass.1E (global.get $nestedgenericclass.NestedGenericClass.1E.rtt)) )
+   (call $<init><>:void@nestedgenericclass.NestedGenericClass.1E (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.1E (ref.null $nestedgenericclass.NestedGenericClass) (global.get $nestedgenericclass.NestedGenericClass.1E.rtt)))
    drop
    ;; NestedGenericClass.this.new $1F.<init>();
-   (call $<init><>:void@nestedgenericclass.NestedGenericClass.1F (struct.new_default_with_rtt $nestedgenericclass.NestedGenericClass.1F (global.get $nestedgenericclass.NestedGenericClass.1F.rtt)) )
+   (call $<init><>:void@nestedgenericclass.NestedGenericClass.1F (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.1F (ref.null $nestedgenericclass.NestedGenericClass) (ref.null $java.lang.Object) (global.get $nestedgenericclass.NestedGenericClass.1F.rtt)))
    drop
   )
  )
@@ -54,18 +54,18 @@
   (block
    ;; NestedGenericClass<Number> n = new NestedGenericClass.<init>();
    
-   (local.set $n (call $<init><>:void@nestedgenericclass.NestedGenericClass (struct.new_default_with_rtt $nestedgenericclass.NestedGenericClass (global.get $nestedgenericclass.NestedGenericClass.rtt)) ))
+   (local.set $n (call $<init><>:void@nestedgenericclass.NestedGenericClass (struct.new_with_rtt $nestedgenericclass.NestedGenericClass (global.get $nestedgenericclass.NestedGenericClass.rtt))))
    ;; A<Error, Number> a = n.new A.<init>();
    
-   (local.set $a (call $<init><>:void@nestedgenericclass.NestedGenericClass.A (struct.new_default_with_rtt $nestedgenericclass.NestedGenericClass.A (global.get $nestedgenericclass.NestedGenericClass.A.rtt)) ))
+   (local.set $a (call $<init><>:void@nestedgenericclass.NestedGenericClass.A (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.A (ref.null $nestedgenericclass.NestedGenericClass) (global.get $nestedgenericclass.NestedGenericClass.A.rtt))))
    ;; B<Exception, Error, Number> b = a.new B.<init>();
    
-   (local.set $b (call $<init><>:void@nestedgenericclass.NestedGenericClass.A.B (struct.new_default_with_rtt $nestedgenericclass.NestedGenericClass.A.B (global.get $nestedgenericclass.NestedGenericClass.A.B.rtt)) ))
+   (local.set $b (call $<init><>:void@nestedgenericclass.NestedGenericClass.A.B (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.A.B (ref.null $nestedgenericclass.NestedGenericClass.A) (global.get $nestedgenericclass.NestedGenericClass.A.B.rtt))))
    ;; n.new C.<init>();
-   (call $<init><>:void@nestedgenericclass.NestedGenericClass.C (struct.new_default_with_rtt $nestedgenericclass.NestedGenericClass.C (global.get $nestedgenericclass.NestedGenericClass.C.rtt)) )
+   (call $<init><>:void@nestedgenericclass.NestedGenericClass.C (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.C (ref.null $nestedgenericclass.NestedGenericClass) (ref.null $java.lang.Object) (global.get $nestedgenericclass.NestedGenericClass.C.rtt)))
    drop
    ;; n.new C.<init>().new D.<init>();
-   (call $<init><>:void@nestedgenericclass.NestedGenericClass.C.D (struct.new_default_with_rtt $nestedgenericclass.NestedGenericClass.C.D (global.get $nestedgenericclass.NestedGenericClass.C.D.rtt)) )
+   (call $<init><>:void@nestedgenericclass.NestedGenericClass.C.D (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.C.D (ref.null $nestedgenericclass.NestedGenericClass.C) (ref.null $java.lang.Object) (global.get $nestedgenericclass.NestedGenericClass.C.D.rtt)))
    drop
   )
  )
@@ -220,7 +220,7 @@
  (block $return.label
   (block
    ;; $1G.this.new $1H.<init>();
-   (call $<init><>:void@nestedgenericclass.NestedGenericClass.1G.1H (struct.new_default_with_rtt $nestedgenericclass.NestedGenericClass.1G.1H (global.get $nestedgenericclass.NestedGenericClass.1G.1H.rtt)) )
+   (call $<init><>:void@nestedgenericclass.NestedGenericClass.1G.1H (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.1G.1H (ref.null $nestedgenericclass.NestedGenericClass.1G) (global.get $nestedgenericclass.NestedGenericClass.1G.1H.rtt)))
    drop
   )
  )

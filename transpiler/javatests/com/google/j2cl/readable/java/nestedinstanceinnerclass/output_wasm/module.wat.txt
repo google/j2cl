@@ -23,7 +23,7 @@
  (block $return.label
   (block
    ;; new OuterClass.<init>().new InnerClass.<init>().new InnerInnerClass.<init>();
-   (call $<init><>:void@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (struct.new_default_with_rtt $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (global.get $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.rtt)) )
+   (call $<init><>:void@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (struct.new_with_rtt $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (ref.null $nestedinstanceinnerclass.OuterClass.InnerClass) (ref.null $nestedinstanceinnerclass.OuterClass.InnerClass) (ref.null $nestedinstanceinnerclass.OuterClass) (global.get $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.rtt)))
    drop
   )
  )

@@ -239,7 +239,7 @@
   (block
    ;; Bar bar = new Bar.<init>();
    
-   (local.set $bar (call $<init><>:void@jsproperties.Bar (struct.new_default_with_rtt $jsproperties.Bar (global.get $jsproperties.Bar.rtt)) ))
+   (local.set $bar (call $<init><>:void@jsproperties.Bar (struct.new_with_rtt $jsproperties.Bar (i32.const 0) (global.get $jsproperties.Bar.rtt))))
    ;; bar.getA();
    (i32.const 0)
    drop

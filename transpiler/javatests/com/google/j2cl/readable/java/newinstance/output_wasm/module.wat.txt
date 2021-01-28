@@ -25,7 +25,7 @@
   (block
    ;; NewInstanceExpr a = new NewInstanceExpr.<init>();
    
-   (local.set $a (call $<init><>:void@newinstance.NewInstanceExpr (struct.new_default_with_rtt $newinstance.NewInstanceExpr (global.get $newinstance.NewInstanceExpr.rtt)) ))
+   (local.set $a (call $<init><>:void@newinstance.NewInstanceExpr (struct.new_with_rtt $newinstance.NewInstanceExpr (global.get $newinstance.NewInstanceExpr.rtt))))
   )
  )
 )

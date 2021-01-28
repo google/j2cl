@@ -75,7 +75,7 @@
  (block $return.label
   (block
    ;; return Bar.this.new $1.<init>(Bar.this.getSomething());
-   (local.set $return.value (call $<init><java.lang.Comparable>:void@boundedtypesupercall.Main.Bar.1 (struct.new_default_with_rtt $boundedtypesupercall.Main.Bar.1 (global.get $boundedtypesupercall.Main.Bar.1.rtt)) (ref.null $java.lang.Object)))
+   (local.set $return.value (call $<init><java.lang.Comparable>:void@boundedtypesupercall.Main.Bar.1 (struct.new_with_rtt $boundedtypesupercall.Main.Bar.1 (ref.null $boundedtypesupercall.Main.Bar) (global.get $boundedtypesupercall.Main.Bar.1.rtt))(ref.null $java.lang.Object)))
    (br $return.label)
   )
  )

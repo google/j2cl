@@ -115,7 +115,7 @@
   (block
    ;; MyInterface i = $1B.this.new $1.<init>();
    
-   (local.set $i (call $<init><>:void@mixednestings.MixedNestings.A.1B.1 (struct.new_default_with_rtt $mixednestings.MixedNestings.A.1B.1 (global.get $mixednestings.MixedNestings.A.1B.1.rtt)) ))
+   (local.set $i (call $<init><>:void@mixednestings.MixedNestings.A.1B.1 (struct.new_with_rtt $mixednestings.MixedNestings.A.1B.1 (ref.null $mixednestings.MixedNestings.A.1B) (global.get $mixednestings.MixedNestings.A.1B.1.rtt))))
    ;; return i.fun(400);
    (local.set $return.value (i32.const 0))
    (br $return.label)

@@ -97,16 +97,16 @@
    (local.set $i (ref.null $java.lang.Object))
    ;; BaseInterface o = Main.this.new $1.<init>();
    
-   (local.set $o (call $<init><>:void@jsasync.Main.1 (struct.new_default_with_rtt $jsasync.Main.1 (global.get $jsasync.Main.1.rtt)) ))
+   (local.set $o (call $<init><>:void@jsasync.Main.1 (struct.new_with_rtt $jsasync.Main.1 (ref.null $jsasync.Main) (global.get $jsasync.Main.1.rtt))))
    ;; AsyncJsFunctionInterface j = function (){
    
    (local.set $j (ref.null $java.lang.Object))
    ;; JsFunctionInterface optimizableJsFunction = Main.this.new $2.<init>();
    
-   (local.set $optimizableJsFunction (call $<init><>:void@jsasync.Main.2 (struct.new_default_with_rtt $jsasync.Main.2 (global.get $jsasync.Main.2.rtt)) ))
+   (local.set $optimizableJsFunction (call $<init><>:void@jsasync.Main.2 (struct.new_with_rtt $jsasync.Main.2 (ref.null $jsasync.Main) (global.get $jsasync.Main.2.rtt))))
    ;; JsFunctionInterface unoptimizableJsFunction = Main.this.new $3.<init>();
    
-   (local.set $unoptimizableJsFunction (call $<init><>:void@jsasync.Main.3 (struct.new_default_with_rtt $jsasync.Main.3 (global.get $jsasync.Main.3.rtt)) ))
+   (local.set $unoptimizableJsFunction (call $<init><>:void@jsasync.Main.3 (struct.new_with_rtt $jsasync.Main.3 (ref.null $jsasync.Main) (global.get $jsasync.Main.3.rtt))))
   )
  )
 )

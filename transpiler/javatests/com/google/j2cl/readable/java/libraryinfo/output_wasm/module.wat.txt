@@ -28,16 +28,16 @@
    
    ;; Function jsFunction = new FunctionImpl.<init>();
    
-   (local.set $jsFunction (call $<init><>:void@libraryinfo.Main.FunctionImpl (struct.new_default_with_rtt $libraryinfo.Main.FunctionImpl (global.get $libraryinfo.Main.FunctionImpl.rtt)) ))
+   (local.set $jsFunction (call $<init><>:void@libraryinfo.Main.FunctionImpl (struct.new_with_rtt $libraryinfo.Main.FunctionImpl (global.get $libraryinfo.Main.FunctionImpl.rtt))))
    ;; (jsFunction = function (String s){
    (local.set $jsFunction (ref.null $java.lang.Object))
    ;; jsFunction.apply("foo");
    
    ;; new MyJsType.<init>();
-   (call $<init><>:void@libraryinfo.Main.MyJsType (struct.new_default_with_rtt $libraryinfo.Main.MyJsType (global.get $libraryinfo.Main.MyJsType.rtt)) )
+   (call $<init><>:void@libraryinfo.Main.MyJsType (struct.new_with_rtt $libraryinfo.Main.MyJsType (ref.null $java.lang.Object) (global.get $libraryinfo.Main.MyJsType.rtt)))
    drop
    ;; new $1.<init>();
-   (call $<init><>:void@libraryinfo.Main.1 (struct.new_default_with_rtt $libraryinfo.Main.1 (global.get $libraryinfo.Main.1.rtt)) )
+   (call $<init><>:void@libraryinfo.Main.1 (struct.new_with_rtt $libraryinfo.Main.1 (global.get $libraryinfo.Main.1.rtt)))
    drop
   )
  )
@@ -165,7 +165,7 @@
    ;; Object.this.Object.<init>();
    
    ;; (MyJsType.this.someField = new Main.<init>());
-   (struct.set $libraryinfo.Main.MyJsType $someField@libraryinfo.Main.MyJsType  (ref.null $libraryinfo.Main.MyJsType) (call $<init><>:void@libraryinfo.Main (struct.new_default_with_rtt $libraryinfo.Main (global.get $libraryinfo.Main.rtt)) ))
+   (struct.set $libraryinfo.Main.MyJsType $someField@libraryinfo.Main.MyJsType  (ref.null $libraryinfo.Main.MyJsType) (call $<init><>:void@libraryinfo.Main (struct.new_with_rtt $libraryinfo.Main (global.get $libraryinfo.Main.rtt))))
   )
  )
  (local.get $this)

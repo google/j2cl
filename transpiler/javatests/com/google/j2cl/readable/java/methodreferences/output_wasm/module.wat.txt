@@ -25,7 +25,7 @@
  (block $return.label
   (block
    ;; return new Object.<init>();
-   (local.set $return.value (call $<init><>:void@java.lang.Object (struct.new_default_with_rtt $java.lang.Object (global.get $java.lang.Object.rtt)) ))
+   (local.set $return.value (call $<init><>:void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.rtt))))
    (br $return.label)
   )
  )
@@ -121,7 +121,7 @@
    ;; (objectFactory = (MethodReferences<T> $$q = new MethodReferences.<init>(),function (){
    (local.set $objectFactory (block (result (ref null $java.lang.Object))
     
-    (local.set $$$q (call $<init><>:void@methodreferences.MethodReferences (struct.new_default_with_rtt $methodreferences.MethodReferences (global.get $methodreferences.MethodReferences.rtt)) ))
+    (local.set $$$q (call $<init><>:void@methodreferences.MethodReferences (struct.new_with_rtt $methodreferences.MethodReferences (global.get $methodreferences.MethodReferences.rtt))))
     (ref.null $java.lang.Object)
    ))
    ;; BiFunction<MethodReferences<T>, Number, Boolean> biFunction = function (MethodReferences<T> arg0,Number arg1){
@@ -142,7 +142,7 @@
    ;; (objectFactory = (MethodReferences<Object> $$q = new MethodReferences.<init>(),function (){
    (local.set $objectFactory (block (result (ref null $java.lang.Object))
     
-    (local.set $$$q_1 (call $<init><>:void@methodreferences.MethodReferences (struct.new_default_with_rtt $methodreferences.MethodReferences (global.get $methodreferences.MethodReferences.rtt)) ))
+    (local.set $$$q_1 (call $<init><>:void@methodreferences.MethodReferences (struct.new_with_rtt $methodreferences.MethodReferences (global.get $methodreferences.MethodReferences.rtt))))
     (ref.null $java.lang.Object)
    ))
    ;; Function<MethodReferences<T>, Object> function = function (MethodReferences<T> arg0){
@@ -162,7 +162,7 @@
    ;; (jsobjectFactory = (MethodReferences<Object> $$q = new MethodReferences.<init>(),function (){
    (local.set $jsobjectFactory (block (result (ref null $java.lang.Object))
     
-    (local.set $$$q_2 (call $<init><>:void@methodreferences.MethodReferences (struct.new_default_with_rtt $methodreferences.MethodReferences (global.get $methodreferences.MethodReferences.rtt)) ))
+    (local.set $$$q_2 (call $<init><>:void@methodreferences.MethodReferences (struct.new_with_rtt $methodreferences.MethodReferences (global.get $methodreferences.MethodReferences.rtt))))
     (ref.null $java.lang.Object)
    ))
    ;; JsFunctionInterface<MethodReferences<T>, Object> jsfunction = function (MethodReferences<T> arg0){

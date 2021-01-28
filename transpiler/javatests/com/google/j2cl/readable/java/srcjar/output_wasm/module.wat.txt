@@ -42,7 +42,7 @@
   (block
    ;; Foo foo = new Foo.<init>();
    
-   (local.set $foo (call $<init><>:void@srcjar.Foo (struct.new_default_with_rtt $srcjar.Foo (global.get $srcjar.Foo.rtt)) ))
+   (local.set $foo (call $<init><>:void@srcjar.Foo (struct.new_with_rtt $srcjar.Foo (global.get $srcjar.Foo.rtt))))
   )
  )
 )

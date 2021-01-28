@@ -76,7 +76,7 @@
  (block $return.label
   (block
    ;; return new Integer.<init>(1);
-   (local.set $return.value (call $<init><int>:void@java.lang.Integer (struct.new_default_with_rtt $java.lang.Integer (global.get $java.lang.Integer.rtt)) (i32.const 1)))
+   (local.set $return.value (call $<init><int>:void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
    (br $return.label)
   )
  )
@@ -386,7 +386,7 @@
   (block
    ;; Getter g = new AccidentalOverrideBridge.<init>();
    
-   (local.set $g (call $<init><>:void@bridgemethods.AccidentalOverrideBridge (struct.new_default_with_rtt $bridgemethods.AccidentalOverrideBridge (global.get $bridgemethods.AccidentalOverrideBridge.rtt)) ))
+   (local.set $g (call $<init><>:void@bridgemethods.AccidentalOverrideBridge (struct.new_with_rtt $bridgemethods.AccidentalOverrideBridge (global.get $bridgemethods.AccidentalOverrideBridge.rtt))))
    ;; g.get("");
    (ref.null $java.lang.String)
    drop

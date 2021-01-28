@@ -97,7 +97,7 @@
  (block $return.label
   (block
    ;; return new ArrayList.<init>();
-   (local.set $return.value (call $<init><>:void@java.util.ArrayList (struct.new_default_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.rtt)) ))
+   (local.set $return.value (call $<init><>:void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
    (br $return.label)
   )
  )
@@ -162,7 +162,7 @@
   (block
    ;; List<String> list = new ArrayList.<init>();
    
-   (local.set $list (call $<init><>:void@java.util.ArrayList (struct.new_default_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.rtt)) ))
+   (local.set $list (call $<init><>:void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
   )
  )
 )

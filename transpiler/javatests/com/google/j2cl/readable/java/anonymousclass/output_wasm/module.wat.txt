@@ -43,7 +43,7 @@
   (block
    ;; SomeClass instance = AnonymousClass.this.new $1.<init>(1);
    
-   (local.set $instance (call $<init><int>:void@anonymousclass.AnonymousClass.1 (struct.new_default_with_rtt $anonymousclass.AnonymousClass.1 (global.get $anonymousclass.AnonymousClass.1.rtt)) (i32.const 1)))
+   (local.set $instance (call $<init><int>:void@anonymousclass.AnonymousClass.1 (struct.new_with_rtt $anonymousclass.AnonymousClass.1 (ref.null $anonymousclass.AnonymousClass) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (global.get $anonymousclass.AnonymousClass.1.rtt))(i32.const 1)))
   )
  )
 )

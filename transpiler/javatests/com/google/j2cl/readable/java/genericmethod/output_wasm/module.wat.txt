@@ -55,10 +55,10 @@
  (block $return.label
   (block
    ;; GenericMethod.this.new $1.<init>();
-   (call $<init><>:void@genericmethod.GenericMethod.1 (struct.new_default_with_rtt $genericmethod.GenericMethod.1 (global.get $genericmethod.GenericMethod.1.rtt)) )
+   (call $<init><>:void@genericmethod.GenericMethod.1 (struct.new_with_rtt $genericmethod.GenericMethod.1 (ref.null $genericmethod.GenericMethod) (global.get $genericmethod.GenericMethod.1.rtt)))
    drop
    ;; GenericMethod.this.new $1LocalClass.<init>();
-   (call $<init><>:void@genericmethod.GenericMethod.1LocalClass (struct.new_default_with_rtt $genericmethod.GenericMethod.1LocalClass (global.get $genericmethod.GenericMethod.1LocalClass.rtt)) )
+   (call $<init><>:void@genericmethod.GenericMethod.1LocalClass (struct.new_with_rtt $genericmethod.GenericMethod.1LocalClass (ref.null $genericmethod.GenericMethod) (global.get $genericmethod.GenericMethod.1LocalClass.rtt)))
    drop
   )
  )
@@ -134,7 +134,7 @@
   (block
    ;; GenericMethod<Number> g = new GenericMethod.<init>();
    
-   (local.set $g (call $<init><>:void@genericmethod.GenericMethod (struct.new_default_with_rtt $genericmethod.GenericMethod (global.get $genericmethod.GenericMethod.rtt)) ))
+   (local.set $g (call $<init><>:void@genericmethod.GenericMethod (struct.new_with_rtt $genericmethod.GenericMethod (global.get $genericmethod.GenericMethod.rtt))))
    ;; g.foo(g,g);
    
    ;; g.foo(new Error.<init>(),new Exception.<init>());

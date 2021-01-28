@@ -232,22 +232,22 @@
   (block
    ;; SuperParent sp = new SuperParent.<init>();
    
-   (local.set $sp (call $<init><>:void@instancejsmethods.SuperParent (struct.new_default_with_rtt $instancejsmethods.SuperParent (global.get $instancejsmethods.SuperParent.rtt)) ))
+   (local.set $sp (call $<init><>:void@instancejsmethods.SuperParent (struct.new_with_rtt $instancejsmethods.SuperParent (global.get $instancejsmethods.SuperParent.rtt))))
    ;; SuperParent p = new Parent.<init>();
    
-   (local.set $p (call $<init><>:void@instancejsmethods.Parent (struct.new_default_with_rtt $instancejsmethods.Parent (global.get $instancejsmethods.Parent.rtt)) ))
+   (local.set $p (call $<init><>:void@instancejsmethods.Parent (struct.new_with_rtt $instancejsmethods.Parent (global.get $instancejsmethods.Parent.rtt))))
    ;; SuperParent c = new Child.<init>();
    
-   (local.set $c (call $<init><>:void@instancejsmethods.Child (struct.new_default_with_rtt $instancejsmethods.Child (global.get $instancejsmethods.Child.rtt)) ))
+   (local.set $c (call $<init><>:void@instancejsmethods.Child (struct.new_with_rtt $instancejsmethods.Child (global.get $instancejsmethods.Child.rtt))))
    ;; Parent pp = new Parent.<init>();
    
-   (local.set $pp (call $<init><>:void@instancejsmethods.Parent (struct.new_default_with_rtt $instancejsmethods.Parent (global.get $instancejsmethods.Parent.rtt)) ))
+   (local.set $pp (call $<init><>:void@instancejsmethods.Parent (struct.new_with_rtt $instancejsmethods.Parent (global.get $instancejsmethods.Parent.rtt))))
    ;; Parent cc = new Child.<init>();
    
-   (local.set $cc (call $<init><>:void@instancejsmethods.Child (struct.new_default_with_rtt $instancejsmethods.Child (global.get $instancejsmethods.Child.rtt)) ))
+   (local.set $cc (call $<init><>:void@instancejsmethods.Child (struct.new_with_rtt $instancejsmethods.Child (global.get $instancejsmethods.Child.rtt))))
    ;; MyInterface intf = new Child.<init>();
    
-   (local.set $intf (call $<init><>:void@instancejsmethods.Child (struct.new_default_with_rtt $instancejsmethods.Child (global.get $instancejsmethods.Child.rtt)) ))
+   (local.set $intf (call $<init><>:void@instancejsmethods.Child (struct.new_with_rtt $instancejsmethods.Child (global.get $instancejsmethods.Child.rtt))))
    ;; sp.fun(12,35);
    (i32.const 0)
    drop
@@ -288,13 +288,13 @@
   (block
    ;; SuperParent sp = new SuperParent.<init>();
    
-   (local.set $sp (call $<init><>:void@instancejsmethods.SuperParent (struct.new_default_with_rtt $instancejsmethods.SuperParent (global.get $instancejsmethods.SuperParent.rtt)) ))
+   (local.set $sp (call $<init><>:void@instancejsmethods.SuperParent (struct.new_with_rtt $instancejsmethods.SuperParent (global.get $instancejsmethods.SuperParent.rtt))))
    ;; Parent p = new Parent.<init>();
    
-   (local.set $p (call $<init><>:void@instancejsmethods.Parent (struct.new_default_with_rtt $instancejsmethods.Parent (global.get $instancejsmethods.Parent.rtt)) ))
+   (local.set $p (call $<init><>:void@instancejsmethods.Parent (struct.new_with_rtt $instancejsmethods.Parent (global.get $instancejsmethods.Parent.rtt))))
    ;; Child c = new Child.<init>();
    
-   (local.set $c (call $<init><>:void@instancejsmethods.Child (struct.new_default_with_rtt $instancejsmethods.Child (global.get $instancejsmethods.Child.rtt)) ))
+   (local.set $c (call $<init><>:void@instancejsmethods.Child (struct.new_with_rtt $instancejsmethods.Child (global.get $instancejsmethods.Child.rtt))))
    ;; sp.fun(12,35);
    (i32.const 0)
    drop

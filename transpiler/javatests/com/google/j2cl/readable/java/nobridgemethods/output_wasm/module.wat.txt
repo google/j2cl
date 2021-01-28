@@ -45,7 +45,7 @@
  (block $return.label
   (block
    ;; return new InnerEntry.<init>();
-   (local.set $return.value (call $<init><>:void@nobridgemethods.TreeMap.InnerEntry (struct.new_default_with_rtt $nobridgemethods.TreeMap.InnerEntry (global.get $nobridgemethods.TreeMap.InnerEntry.rtt)) ))
+   (local.set $return.value (call $<init><>:void@nobridgemethods.TreeMap.InnerEntry (struct.new_with_rtt $nobridgemethods.TreeMap.InnerEntry (global.get $nobridgemethods.TreeMap.InnerEntry.rtt))))
    (br $return.label)
   )
  )
@@ -94,7 +94,7 @@
   (block
    ;; TreeMap<String> treeMap = new $1.<init>();
    
-   (local.set $treeMap (call $<init><>:void@nobridgemethods.CharSet.1 (struct.new_default_with_rtt $nobridgemethods.CharSet.1 (global.get $nobridgemethods.CharSet.1.rtt)) ))
+   (local.set $treeMap (call $<init><>:void@nobridgemethods.CharSet.1 (struct.new_with_rtt $nobridgemethods.CharSet.1 (global.get $nobridgemethods.CharSet.1.rtt))))
   )
  )
 )

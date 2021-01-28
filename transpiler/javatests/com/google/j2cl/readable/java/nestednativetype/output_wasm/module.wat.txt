@@ -25,7 +25,7 @@
  (block $return.label
   (block
    ;; return NativeArray.this.new $1.<init>();
-   (local.set $return.value (call $<init><>:void@nestednativetype.NativeArray.1 (struct.new_default_with_rtt $nestednativetype.NativeArray.1 (global.get $nestednativetype.NativeArray.1.rtt)) ))
+   (local.set $return.value (call $<init><>:void@nestednativetype.NativeArray.1 (struct.new_with_rtt $nestednativetype.NativeArray.1 (ref.null $nestednativetype.NativeArray) (global.get $nestednativetype.NativeArray.1.rtt))))
    (br $return.label)
   )
  )

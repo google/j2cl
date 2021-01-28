@@ -80,21 +80,21 @@
    (block
     ;; StringHolder $qualifier = new StringHolder.<init>();
     
-    (local.set $$qualifier (call $<init><>:void@strings.Strings.StringHolder (struct.new_default_with_rtt $strings.Strings.StringHolder (global.get $strings.Strings.StringHolder.rtt)) ))
+    (local.set $$qualifier (call $<init><>:void@strings.Strings.StringHolder (struct.new_with_rtt $strings.Strings.StringHolder (ref.null $java.lang.String) (global.get $strings.Strings.StringHolder.rtt))))
     ;; ($qualifier.s = ($qualifier.s + s4));
     (struct.set $strings.Strings.StringHolder $s@strings.Strings.StringHolder  (local.get $$qualifier) (ref.null $java.lang.String))
    )
    (block
     ;; StringHolder $qualifier = new StringHolder.<init>();
     
-    (local.set $$qualifier_1 (call $<init><>:void@strings.Strings.StringHolder (struct.new_default_with_rtt $strings.Strings.StringHolder (global.get $strings.Strings.StringHolder.rtt)) ))
+    (local.set $$qualifier_1 (call $<init><>:void@strings.Strings.StringHolder (struct.new_with_rtt $strings.Strings.StringHolder (ref.null $java.lang.String) (global.get $strings.Strings.StringHolder.rtt))))
     ;; ($qualifier.s = ($qualifier.s + c1));
     (struct.set $strings.Strings.StringHolder $s@strings.Strings.StringHolder  (local.get $$qualifier_1) (ref.null $java.lang.String))
    )
    (block
     ;; StringHolder $qualifier = new StringHolder.<init>();
     
-    (local.set $$qualifier_2 (call $<init><>:void@strings.Strings.StringHolder (struct.new_default_with_rtt $strings.Strings.StringHolder (global.get $strings.Strings.StringHolder.rtt)) ))
+    (local.set $$qualifier_2 (call $<init><>:void@strings.Strings.StringHolder (struct.new_with_rtt $strings.Strings.StringHolder (ref.null $java.lang.String) (global.get $strings.Strings.StringHolder.rtt))))
     ;; ($qualifier.s = ($qualifier.s + "o"));
     (struct.set $strings.Strings.StringHolder $s@strings.Strings.StringHolder  (local.get $$qualifier_2) (ref.null $java.lang.String))
    )

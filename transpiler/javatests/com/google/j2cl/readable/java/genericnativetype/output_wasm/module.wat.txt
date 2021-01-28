@@ -46,7 +46,7 @@
   (block
    ;; BoundedJsArray<V> array = new BoundedJsArray.<init>(size);
    
-   (local.set $array (call $<init><int>:void@genericnativetype.BoundedJsArray (struct.new_default_with_rtt $genericnativetype.BoundedJsArray (global.get $genericnativetype.BoundedJsArray.rtt)) (local.get $size)))
+   (local.set $array (call $<init><int>:void@genericnativetype.BoundedJsArray (struct.new_with_rtt $genericnativetype.BoundedJsArray (global.get $genericnativetype.BoundedJsArray.rtt))(local.get $size)))
    ;; return array;
    (local.set $return.value (local.get $array))
    (br $return.label)

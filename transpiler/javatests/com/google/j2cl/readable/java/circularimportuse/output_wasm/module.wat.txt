@@ -25,7 +25,7 @@
  (block $return.label
   (block
    ;; return new Right.<init>();
-   (local.set $return.value (call $<init><>:void@circularimportuse.Right (struct.new_default_with_rtt $circularimportuse.Right (global.get $circularimportuse.Right.rtt)) ))
+   (local.set $return.value (call $<init><>:void@circularimportuse.Right (struct.new_with_rtt $circularimportuse.Right (global.get $circularimportuse.Right.rtt))))
    (br $return.label)
   )
  )
@@ -59,10 +59,10 @@
   (block
    ;; Left left = new Left.<init>();
    
-   (local.set $left (call $<init><>:void@circularimportuse.Left (struct.new_default_with_rtt $circularimportuse.Left (global.get $circularimportuse.Left.rtt)) ))
+   (local.set $left (call $<init><>:void@circularimportuse.Left (struct.new_with_rtt $circularimportuse.Left (global.get $circularimportuse.Left.rtt))))
    ;; Right right = new Right.<init>();
    
-   (local.set $right (call $<init><>:void@circularimportuse.Right (struct.new_default_with_rtt $circularimportuse.Right (global.get $circularimportuse.Right.rtt)) ))
+   (local.set $right (call $<init><>:void@circularimportuse.Right (struct.new_with_rtt $circularimportuse.Right (global.get $circularimportuse.Right.rtt))))
   )
  )
 )
@@ -93,7 +93,7 @@
  (block $return.label
   (block
    ;; return new Left.<init>();
-   (local.set $return.value (call $<init><>:void@circularimportuse.Left (struct.new_default_with_rtt $circularimportuse.Left (global.get $circularimportuse.Left.rtt)) ))
+   (local.set $return.value (call $<init><>:void@circularimportuse.Left (struct.new_with_rtt $circularimportuse.Left (global.get $circularimportuse.Left.rtt))))
    (br $return.label)
   )
  )

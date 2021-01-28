@@ -39,10 +39,10 @@
  (block $return.label
   (block
    ;; new GenericConstructor.<init>(new Exception.<init>(),new Error.<init>());
-   (call $<init><java.lang.Object|java.lang.Object>:void@genericconstructor.GenericConstructor (struct.new_default_with_rtt $genericconstructor.GenericConstructor (global.get $genericconstructor.GenericConstructor.rtt)) (call $<init><>:void@java.lang.Exception (struct.new_default_with_rtt $java.lang.Exception (global.get $java.lang.Exception.rtt)) )(call $<init><>:void@java.lang.Error (struct.new_default_with_rtt $java.lang.Error (global.get $java.lang.Error.rtt)) ))
+   (call $<init><java.lang.Object|java.lang.Object>:void@genericconstructor.GenericConstructor (struct.new_with_rtt $genericconstructor.GenericConstructor (global.get $genericconstructor.GenericConstructor.rtt))(call $<init><>:void@java.lang.Exception (struct.new_with_rtt $java.lang.Exception (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Exception.rtt)))(call $<init><>:void@java.lang.Error (struct.new_with_rtt $java.lang.Error (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Error.rtt))))
    drop
    ;; new GenericConstructor.<init>(new Exception.<init>());
-   (call $<init><java.lang.Object>:void@genericconstructor.GenericConstructor (struct.new_default_with_rtt $genericconstructor.GenericConstructor (global.get $genericconstructor.GenericConstructor.rtt)) (call $<init><>:void@java.lang.Exception (struct.new_default_with_rtt $java.lang.Exception (global.get $java.lang.Exception.rtt)) ))
+   (call $<init><java.lang.Object>:void@genericconstructor.GenericConstructor (struct.new_with_rtt $genericconstructor.GenericConstructor (global.get $genericconstructor.GenericConstructor.rtt))(call $<init><>:void@java.lang.Exception (struct.new_with_rtt $java.lang.Exception (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Exception.rtt))))
    drop
   )
  )

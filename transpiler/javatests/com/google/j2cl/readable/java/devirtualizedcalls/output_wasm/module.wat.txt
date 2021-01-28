@@ -123,7 +123,7 @@
   (block
    ;; Number i = new Integer.<init>(1);
    
-   (local.set $i (call $<init><int>:void@java.lang.Integer (struct.new_default_with_rtt $java.lang.Integer (global.get $java.lang.Integer.rtt)) (i32.const 1)))
+   (local.set $i (call $<init><int>:void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
    ;; i.byteValue();
    (i32.const 0)
    drop
@@ -144,7 +144,7 @@
    drop
    ;; Integer ii = new Integer.<init>(1);
    
-   (local.set $ii (call $<init><int>:void@java.lang.Integer (struct.new_default_with_rtt $java.lang.Integer (global.get $java.lang.Integer.rtt)) (i32.const 1)))
+   (local.set $ii (call $<init><int>:void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
    ;; ii.byteValue();
    (i32.const 0)
    drop
@@ -165,7 +165,7 @@
    drop
    ;; Number d = new Double.<init>(1.1);
    
-   (local.set $d (call $<init><double>:void@java.lang.Double (struct.new_default_with_rtt $java.lang.Double (global.get $java.lang.Double.rtt)) (f64.const 1.1)))
+   (local.set $d (call $<init><double>:void@java.lang.Double (struct.new_with_rtt $java.lang.Double (global.get $java.lang.Double.rtt))(f64.const 1.1)))
    ;; d.byteValue();
    (i32.const 0)
    drop
@@ -186,7 +186,7 @@
    drop
    ;; Double dd = new Double.<init>(1.1);
    
-   (local.set $dd (call $<init><double>:void@java.lang.Double (struct.new_default_with_rtt $java.lang.Double (global.get $java.lang.Double.rtt)) (f64.const 1.1)))
+   (local.set $dd (call $<init><double>:void@java.lang.Double (struct.new_with_rtt $java.lang.Double (global.get $java.lang.Double.rtt))(f64.const 1.1)))
    ;; dd.byteValue();
    (i32.const 0)
    drop
@@ -207,7 +207,7 @@
    drop
    ;; Number s = new Short.<init>(((short) 1));
    
-   (local.set $s (call $<init><short>:void@java.lang.Short (struct.new_default_with_rtt $java.lang.Short (global.get $java.lang.Short.rtt)) (i32.const 0)))
+   (local.set $s (call $<init><short>:void@java.lang.Short (struct.new_with_rtt $java.lang.Short (i32.const 0) (global.get $java.lang.Short.rtt))(i32.const 0)))
    ;; s.byteValue();
    (i32.const 0)
    drop
@@ -228,7 +228,7 @@
    drop
    ;; Short ss = new Short.<init>(((short) 1));
    
-   (local.set $ss (call $<init><short>:void@java.lang.Short (struct.new_default_with_rtt $java.lang.Short (global.get $java.lang.Short.rtt)) (i32.const 0)))
+   (local.set $ss (call $<init><short>:void@java.lang.Short (struct.new_with_rtt $java.lang.Short (i32.const 0) (global.get $java.lang.Short.rtt))(i32.const 0)))
    ;; ss.byteValue();
    (i32.const 0)
    drop
@@ -249,7 +249,7 @@
    drop
    ;; Number b = new Byte.<init>(((byte) 1));
    
-   (local.set $b (call $<init><byte>:void@java.lang.Byte (struct.new_default_with_rtt $java.lang.Byte (global.get $java.lang.Byte.rtt)) (i32.const 0)))
+   (local.set $b (call $<init><byte>:void@java.lang.Byte (struct.new_with_rtt $java.lang.Byte (i32.const 0) (global.get $java.lang.Byte.rtt))(i32.const 0)))
    ;; b.byteValue();
    (i32.const 0)
    drop
@@ -270,7 +270,7 @@
    drop
    ;; Byte bb = new Byte.<init>(((byte) 1));
    
-   (local.set $bb (call $<init><byte>:void@java.lang.Byte (struct.new_default_with_rtt $java.lang.Byte (global.get $java.lang.Byte.rtt)) (i32.const 0)))
+   (local.set $bb (call $<init><byte>:void@java.lang.Byte (struct.new_with_rtt $java.lang.Byte (i32.const 0) (global.get $java.lang.Byte.rtt))(i32.const 0)))
    ;; bb.byteValue();
    (i32.const 0)
    drop
@@ -291,7 +291,7 @@
    drop
    ;; Number f = new Float.<init>(1.100000023841858);
    
-   (local.set $f (call $<init><float>:void@java.lang.Float (struct.new_default_with_rtt $java.lang.Float (global.get $java.lang.Float.rtt)) (f32.const 1.100000023841858)))
+   (local.set $f (call $<init><float>:void@java.lang.Float (struct.new_with_rtt $java.lang.Float (f32.const 0.0) (global.get $java.lang.Float.rtt))(f32.const 1.100000023841858)))
    ;; f.byteValue();
    (i32.const 0)
    drop
@@ -312,7 +312,7 @@
    drop
    ;; Float ff = new Float.<init>(1.100000023841858);
    
-   (local.set $ff (call $<init><float>:void@java.lang.Float (struct.new_default_with_rtt $java.lang.Float (global.get $java.lang.Float.rtt)) (f32.const 1.100000023841858)))
+   (local.set $ff (call $<init><float>:void@java.lang.Float (struct.new_with_rtt $java.lang.Float (f32.const 0.0) (global.get $java.lang.Float.rtt))(f32.const 1.100000023841858)))
    ;; ff.byteValue();
    (i32.const 0)
    drop
@@ -333,7 +333,7 @@
    drop
    ;; Number l = new Long.<init>(1);
    
-   (local.set $l (call $<init><long>:void@java.lang.Long (struct.new_default_with_rtt $java.lang.Long (global.get $java.lang.Long.rtt)) (i64.const 1)))
+   (local.set $l (call $<init><long>:void@java.lang.Long (struct.new_with_rtt $java.lang.Long (i64.const 0) (global.get $java.lang.Long.rtt))(i64.const 1)))
    ;; l.byteValue();
    (i32.const 0)
    drop
@@ -354,7 +354,7 @@
    drop
    ;; Long ll = new Long.<init>(1);
    
-   (local.set $ll (call $<init><long>:void@java.lang.Long (struct.new_default_with_rtt $java.lang.Long (global.get $java.lang.Long.rtt)) (i64.const 1)))
+   (local.set $ll (call $<init><long>:void@java.lang.Long (struct.new_with_rtt $java.lang.Long (i64.const 0) (global.get $java.lang.Long.rtt))(i64.const 1)))
    ;; ll.byteValue();
    (i32.const 0)
    drop
@@ -375,13 +375,13 @@
    drop
    ;; Character c = new Character.<init>(97);
    
-   (local.set $c (call $<init><char>:void@java.lang.Character (struct.new_default_with_rtt $java.lang.Character (global.get $java.lang.Character.rtt)) (i32.const 97)))
+   (local.set $c (call $<init><char>:void@java.lang.Character (struct.new_with_rtt $java.lang.Character (i32.const 0) (global.get $java.lang.Character.rtt))(i32.const 97)))
    ;; c.charValue();
    (i32.const 0)
    drop
    ;; Boolean bool = new Boolean.<init>(true);
    
-   (local.set $bool (call $<init><boolean>:void@java.lang.Boolean (struct.new_default_with_rtt $java.lang.Boolean (global.get $java.lang.Boolean.rtt)) (i32.const 1)))
+   (local.set $bool (call $<init><boolean>:void@java.lang.Boolean (struct.new_with_rtt $java.lang.Boolean (global.get $java.lang.Boolean.rtt))(i32.const 1)))
    ;; bool.booleanValue();
    (i32.const 0)
    drop
@@ -416,7 +416,7 @@
   (block
    ;; Object object = new Object.<init>();
    
-   (local.set $object (call $<init><>:void@java.lang.Object (struct.new_default_with_rtt $java.lang.Object (global.get $java.lang.Object.rtt)) ))
+   (local.set $object (call $<init><>:void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.rtt))))
    ;; object.equals(object);
    (i32.const 0)
    drop

@@ -33,7 +33,7 @@
  (block $return.label
   (block
    ;; new InstanceInnerClass.<init>().new InnerClass.<init>();
-   (call $<init><>:void@instanceinnerclass.InstanceInnerClass.InnerClass (struct.new_default_with_rtt $instanceinnerclass.InstanceInnerClass.InnerClass (global.get $instanceinnerclass.InstanceInnerClass.InnerClass.rtt)) )
+   (call $<init><>:void@instanceinnerclass.InstanceInnerClass.InnerClass (struct.new_with_rtt $instanceinnerclass.InstanceInnerClass.InnerClass (ref.null $instanceinnerclass.InstanceInnerClass) (i32.const 0) (ref.null $instanceinnerclass.InstanceInnerClass) (global.get $instanceinnerclass.InstanceInnerClass.InnerClass.rtt)))
    drop
   )
  )
