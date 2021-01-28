@@ -37,7 +37,7 @@ abstract class WasmTypeLayout {
     return new AutoValue_WasmTypeLayout(javaType, wasmSupertypeLayout);
   }
 
-  /** The Java class represented byt this WASM type. */
+  /** The Java class represented by this WASM type. */
   abstract Type getJavaType();
   /** The wasm representation of the superclass for this Java class. */
   @Nullable
