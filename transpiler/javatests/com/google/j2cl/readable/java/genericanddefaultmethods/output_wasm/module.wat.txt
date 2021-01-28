@@ -3,7 +3,7 @@
 ;;; INTERFACE  InterfaceWithDefault
 
 ;;; void InterfaceWithDefault.foo(String value)
-(func $foo<java.lang.String>:void@genericanddefaultmethods.InterfaceWithDefault
+(func $m_foo__java_lang_String__void@genericanddefaultmethods.InterfaceWithDefault
  (param $this (ref null $java.lang.Object))
  (param $value (ref null $java.lang.String))
  (block $return.label
@@ -19,7 +19,7 @@
 ))
 
 ;;; GenericClass()
-(func $<init><>:void@genericanddefaultmethods.GenericClass
+(func $m_<init>__void_$pp_genericanddefaultmethods@genericanddefaultmethods.GenericClass
  (param $this (ref null $genericanddefaultmethods.GenericClass))
  (result (ref null $genericanddefaultmethods.GenericClass))
  (block $return.label
@@ -32,7 +32,7 @@
 )
 
 ;;; void GenericClass.foo(T value)
-(func $foo<java.lang.Object>:void@genericanddefaultmethods.GenericClass
+(func $m_foo__java_lang_Object__void@genericanddefaultmethods.GenericClass
  (param $this (ref null $java.lang.Object))
  (param $value (ref null $java.lang.Object))
  (block $return.label
@@ -48,7 +48,7 @@
 ))
 
 ;;; ConcreteClass()
-(func $<init><>:void@genericanddefaultmethods.ConcreteClass
+(func $m_<init>__void@genericanddefaultmethods.ConcreteClass
  (param $this (ref null $genericanddefaultmethods.ConcreteClass))
  (result (ref null $genericanddefaultmethods.ConcreteClass))
  (block $return.label
@@ -58,5 +58,29 @@
   )
  )
  (local.get $this)
+)
+
+;;; void ConcreteClass.foo(String arg0)
+(func $m_foo__java_lang_String__void@genericanddefaultmethods.ConcreteClass
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.String))
+ (block $return.label
+  (block
+   ;; super.foo(arg0);
+   
+  )
+ )
+)
+
+;;; void ConcreteClass.foo(Object arg0)
+(func $m_foo__java_lang_Object__void@genericanddefaultmethods.ConcreteClass
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; ConcreteClass.this.foo(((String) arg0));
+   
+  )
+ )
 )
 

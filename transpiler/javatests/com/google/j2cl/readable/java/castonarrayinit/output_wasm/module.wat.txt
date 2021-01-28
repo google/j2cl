@@ -5,7 +5,7 @@
 ))
 
 ;;; CastOnArrayInit()
-(func $<init><>:void@castonarrayinit.CastOnArrayInit
+(func $m_<init>__void@castonarrayinit.CastOnArrayInit
  (param $this (ref null $castonarrayinit.CastOnArrayInit))
  (result (ref null $castonarrayinit.CastOnArrayInit))
  (block $return.label
@@ -18,7 +18,7 @@
 )
 
 ;;; void CastOnArrayInit.fun(Foo<E>... args)
-(func $fun<castonarrayinit.CastOnArrayInit.Foo<>>:void@castonarrayinit.CastOnArrayInit
+(func $m_fun__arrayOf_castonarrayinit_CastOnArrayInit_Foo__void@castonarrayinit.CastOnArrayInit
  (param $args (ref null $java.lang.Object))
  (block $return.label
   (block
@@ -27,19 +27,19 @@
 )
 
 ;;; void CastOnArrayInit.test()
-(func $test<>:void@castonarrayinit.CastOnArrayInit
+(func $m_test__void@castonarrayinit.CastOnArrayInit
  (local $f1 (ref null $castonarrayinit.CastOnArrayInit.Foo))
  (local $f2 (ref null $castonarrayinit.CastOnArrayInit.Foo))
  (block $return.label
   (block
    ;; Foo<E> f1 = new Foo.<init>();
    
-   (local.set $f1 (call $<init><>:void@castonarrayinit.CastOnArrayInit.Foo (struct.new_with_rtt $castonarrayinit.CastOnArrayInit.Foo (global.get $castonarrayinit.CastOnArrayInit.Foo.rtt))))
+   (local.set $f1 (call $m_<init>__void@castonarrayinit.CastOnArrayInit.Foo (struct.new_with_rtt $castonarrayinit.CastOnArrayInit.Foo (global.get $castonarrayinit.CastOnArrayInit.Foo.rtt))))
    ;; Foo<E> f2 = new Foo.<init>();
    
-   (local.set $f2 (call $<init><>:void@castonarrayinit.CastOnArrayInit.Foo (struct.new_with_rtt $castonarrayinit.CastOnArrayInit.Foo (global.get $castonarrayinit.CastOnArrayInit.Foo.rtt))))
+   (local.set $f2 (call $m_<init>__void@castonarrayinit.CastOnArrayInit.Foo (struct.new_with_rtt $castonarrayinit.CastOnArrayInit.Foo (global.get $castonarrayinit.CastOnArrayInit.Foo.rtt))))
    ;; castonarrayinit.CastOnArrayInit.fun([f1,f2]);
-   (call $fun<castonarrayinit.CastOnArrayInit.Foo<>>:void@castonarrayinit.CastOnArrayInit (ref.null $java.lang.Object))
+   (call $m_fun__arrayOf_castonarrayinit_CastOnArrayInit_Foo__void@castonarrayinit.CastOnArrayInit (ref.null $java.lang.Object))
   )
  )
 )
@@ -49,7 +49,7 @@
 ))
 
 ;;; Foo()
-(func $<init><>:void@castonarrayinit.CastOnArrayInit.Foo
+(func $m_<init>__void@castonarrayinit.CastOnArrayInit.Foo
  (param $this (ref null $castonarrayinit.CastOnArrayInit.Foo))
  (result (ref null $castonarrayinit.CastOnArrayInit.Foo))
  (block $return.label

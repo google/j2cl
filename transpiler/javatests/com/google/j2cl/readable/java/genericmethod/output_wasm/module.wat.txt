@@ -5,7 +5,7 @@
 ))
 
 ;;; GenericMethod()
-(func $<init><>:void@genericmethod.GenericMethod
+(func $m_<init>__void@genericmethod.GenericMethod
  (param $this (ref null $genericmethod.GenericMethod))
  (result (ref null $genericmethod.GenericMethod))
  (block $return.label
@@ -18,7 +18,7 @@
 )
 
 ;;; void GenericMethod.foo(T f, S s)
-(func $foo<java.lang.Object|java.lang.Object>:void@genericmethod.GenericMethod
+(func $m_foo__java_lang_Object__java_lang_Object__void@genericmethod.GenericMethod
  (param $this (ref null $java.lang.Object))
  (param $f (ref null $java.lang.Object))
  (param $s (ref null $java.lang.Object))
@@ -29,7 +29,7 @@
 )
 
 ;;; void GenericMethod.fun(Object o)
-(func $fun<java.lang.Object>:void@genericmethod.GenericMethod
+(func $m_fun__java_lang_Object__void@genericmethod.GenericMethod
  (param $this (ref null $java.lang.Object))
  (param $o (ref null $java.lang.Object))
  (block $return.label
@@ -39,7 +39,7 @@
 )
 
 ;;; void GenericMethod.fun(T t)
-(func $fun<java.lang.Exception>:void@genericmethod.GenericMethod
+(func $m_fun__java_lang_Exception__void@genericmethod.GenericMethod
  (param $this (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Exception))
  (block $return.label
@@ -49,23 +49,23 @@
 )
 
 ;;; void GenericMethod.fun(T t)
-(func $fun<java.lang.Error>:void@genericmethod.GenericMethod
+(func $m_fun__java_lang_Error__void@genericmethod.GenericMethod
  (param $this (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Error))
  (block $return.label
   (block
    ;; GenericMethod.this.new $1.<init>();
-   (call $<init><>:void@genericmethod.GenericMethod.1 (struct.new_with_rtt $genericmethod.GenericMethod.1 (ref.null $genericmethod.GenericMethod) (global.get $genericmethod.GenericMethod.1.rtt)))
+   (call $m_<init>__void_$pp_genericmethod@genericmethod.GenericMethod.1 (struct.new_with_rtt $genericmethod.GenericMethod.1 (ref.null $genericmethod.GenericMethod) (global.get $genericmethod.GenericMethod.1.rtt)))
    drop
    ;; GenericMethod.this.new $1LocalClass.<init>();
-   (call $<init><>:void@genericmethod.GenericMethod.1LocalClass (struct.new_with_rtt $genericmethod.GenericMethod.1LocalClass (ref.null $genericmethod.GenericMethod) (global.get $genericmethod.GenericMethod.1LocalClass.rtt)))
+   (call $m_<init>__void_$pp_genericmethod@genericmethod.GenericMethod.1LocalClass (struct.new_with_rtt $genericmethod.GenericMethod.1LocalClass (ref.null $genericmethod.GenericMethod) (global.get $genericmethod.GenericMethod.1LocalClass.rtt)))
    drop
   )
  )
 )
 
 ;;; GenericMethod<T> GenericMethod.bar()
-(func $bar<>:genericmethod.GenericMethod@genericmethod.GenericMethod
+(func $m_bar__genericmethod_GenericMethod@genericmethod.GenericMethod
  (param $this (ref null $java.lang.Object))
  (result (ref null $genericmethod.GenericMethod))
  (local $return.value (ref null $genericmethod.GenericMethod))
@@ -80,7 +80,7 @@
 )
 
 ;;; T[] GenericMethod.fun(T[] array)
-(func $fun<java.lang.Object<>>:java.lang.Object<>@genericmethod.GenericMethod
+(func $m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object@genericmethod.GenericMethod
  (param $this (ref null $java.lang.Object))
  (param $array (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -96,7 +96,7 @@
 )
 
 ;;; T GenericMethod.checked()
-(func $checked<>:java.lang.Object@genericmethod.GenericMethod
+(func $m_checked__java_lang_Object@genericmethod.GenericMethod
  (param $this (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
@@ -111,7 +111,7 @@
 )
 
 ;;; T GenericMethod.unchecked()
-(func $unchecked<>:java.lang.Object@genericmethod.GenericMethod
+(func $m_unchecked__java_lang_Object@genericmethod.GenericMethod
  (param $this (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
@@ -126,7 +126,7 @@
 )
 
 ;;; void GenericMethod.test()
-(func $test<>:void@genericmethod.GenericMethod
+(func $m_test__void@genericmethod.GenericMethod
  (param $this (ref null $java.lang.Object))
  (local $g (ref null $genericmethod.GenericMethod))
  (local $s (ref null $java.lang.String))
@@ -134,7 +134,7 @@
   (block
    ;; GenericMethod<Number> g = new GenericMethod.<init>();
    
-   (local.set $g (call $<init><>:void@genericmethod.GenericMethod (struct.new_with_rtt $genericmethod.GenericMethod (global.get $genericmethod.GenericMethod.rtt))))
+   (local.set $g (call $m_<init>__void@genericmethod.GenericMethod (struct.new_with_rtt $genericmethod.GenericMethod (global.get $genericmethod.GenericMethod.rtt))))
    ;; g.foo(g,g);
    
    ;; g.foo(new Error.<init>(),new Exception.<init>());
@@ -158,7 +158,7 @@
 )
 
 ;;; void GenericMethod.acceptsContent(Content content)
-(func $acceptsContent<genericmethod.GenericMethod.Content>:void@genericmethod.GenericMethod
+(func $m_acceptsContent__genericmethod_GenericMethod_Content__void@genericmethod.GenericMethod
  (param $content (ref null $genericmethod.GenericMethod.Content))
  (block $return.label
   (block
@@ -167,7 +167,7 @@
 )
 
 ;;; void GenericMethod.acceptsString(String string)
-(func $acceptsString<java.lang.String>:void@genericmethod.GenericMethod
+(func $m_acceptsString__java_lang_String__void@genericmethod.GenericMethod
  (param $string (ref null $java.lang.String))
  (block $return.label
   (block
@@ -176,7 +176,7 @@
 )
 
 ;;; void GenericMethod.testErasureCast_wildcard()
-(func $testErasureCast_wildcard<>:void@genericmethod.GenericMethod
+(func $m_testErasureCast_wildcard__void@genericmethod.GenericMethod
  (local $list (ref null $java.lang.Object))
  (local $content (ref null $genericmethod.GenericMethod.Content))
  (local $nestedWildcardList (ref null $java.lang.Object))
@@ -192,9 +192,9 @@
    
    (local.set $content (ref.null $genericmethod.GenericMethod.Content))
    ;; genericmethod.GenericMethod.acceptsString(content.getProp());
-   (call $acceptsString<java.lang.String>:void@genericmethod.GenericMethod (ref.null $java.lang.String))
+   (call $m_acceptsString__java_lang_String__void@genericmethod.GenericMethod (ref.null $java.lang.String))
    ;; genericmethod.GenericMethod.acceptsContent(content);
-   (call $acceptsContent<genericmethod.GenericMethod.Content>:void@genericmethod.GenericMethod (local.get $content))
+   (call $m_acceptsContent__genericmethod_GenericMethod_Content__void@genericmethod.GenericMethod (local.get $content))
    ;; List<SuperContainer<? extends Container<? extends Content>>> nestedWildcardList = null;
    
    (local.set $nestedWildcardList (ref.null $java.lang.Object))
@@ -202,9 +202,9 @@
    
    (local.set $nestedContent (ref.null $genericmethod.GenericMethod.Content))
    ;; genericmethod.GenericMethod.acceptsString(nestedContent.getProp());
-   (call $acceptsString<java.lang.String>:void@genericmethod.GenericMethod (ref.null $java.lang.String))
+   (call $m_acceptsString__java_lang_String__void@genericmethod.GenericMethod (ref.null $java.lang.String))
    ;; genericmethod.GenericMethod.acceptsContent(nestedContent);
-   (call $acceptsContent<genericmethod.GenericMethod.Content>:void@genericmethod.GenericMethod (local.get $nestedContent))
+   (call $m_acceptsContent__genericmethod_GenericMethod_Content__void@genericmethod.GenericMethod (local.get $nestedContent))
    ;; List<SuperContainer<Container<? extends Content>>> deepWildcardList = null;
    
    (local.set $deepWildcardList (ref.null $java.lang.Object))
@@ -212,15 +212,15 @@
    
    (local.set $deepContent (ref.null $genericmethod.GenericMethod.Content))
    ;; genericmethod.GenericMethod.acceptsString(deepContent.getProp());
-   (call $acceptsString<java.lang.String>:void@genericmethod.GenericMethod (ref.null $java.lang.String))
+   (call $m_acceptsString__java_lang_String__void@genericmethod.GenericMethod (ref.null $java.lang.String))
    ;; genericmethod.GenericMethod.acceptsContent(deepContent);
-   (call $acceptsContent<genericmethod.GenericMethod.Content>:void@genericmethod.GenericMethod (local.get $deepContent))
+   (call $m_acceptsContent__genericmethod_GenericMethod_Content__void@genericmethod.GenericMethod (local.get $deepContent))
   )
  )
 )
 
 ;;; void GenericMethod.testErasureCast_typeVariable()
-(func $testErasureCast_typeVariable<>:void@genericmethod.GenericMethod
+(func $m_testErasureCast_typeVariable__void@genericmethod.GenericMethod
  (local $list (ref null $java.lang.Object))
  (local $content (ref null $genericmethod.GenericMethod.Content))
  (local $nestedTypeVariableList (ref null $java.lang.Object))
@@ -236,9 +236,9 @@
    
    (local.set $content (ref.null $genericmethod.GenericMethod.Content))
    ;; genericmethod.GenericMethod.acceptsString(content.getProp());
-   (call $acceptsString<java.lang.String>:void@genericmethod.GenericMethod (ref.null $java.lang.String))
+   (call $m_acceptsString__java_lang_String__void@genericmethod.GenericMethod (ref.null $java.lang.String))
    ;; genericmethod.GenericMethod.acceptsContent(content);
-   (call $acceptsContent<genericmethod.GenericMethod.Content>:void@genericmethod.GenericMethod (local.get $content))
+   (call $m_acceptsContent__genericmethod_GenericMethod_Content__void@genericmethod.GenericMethod (local.get $content))
    ;; List<SuperContainer<CT>> nestedTypeVariableList = null;
    
    (local.set $nestedTypeVariableList (ref.null $java.lang.Object))
@@ -246,9 +246,9 @@
    
    (local.set $nestedContent (ref.null $genericmethod.GenericMethod.Content))
    ;; genericmethod.GenericMethod.acceptsString(nestedContent.getProp());
-   (call $acceptsString<java.lang.String>:void@genericmethod.GenericMethod (ref.null $java.lang.String))
+   (call $m_acceptsString__java_lang_String__void@genericmethod.GenericMethod (ref.null $java.lang.String))
    ;; genericmethod.GenericMethod.acceptsContent(nestedContent);
-   (call $acceptsContent<genericmethod.GenericMethod.Content>:void@genericmethod.GenericMethod (local.get $nestedContent))
+   (call $m_acceptsContent__genericmethod_GenericMethod_Content__void@genericmethod.GenericMethod (local.get $nestedContent))
    ;; List<SuperContainer<Container<C>>> deepTypeVariableList = null;
    
    (local.set $deepTypeVariableList (ref.null $java.lang.Object))
@@ -256,9 +256,9 @@
    
    (local.set $deepContent (ref.null $genericmethod.GenericMethod.Content))
    ;; genericmethod.GenericMethod.acceptsString(deepContent.getProp());
-   (call $acceptsString<java.lang.String>:void@genericmethod.GenericMethod (ref.null $java.lang.String))
+   (call $m_acceptsString__java_lang_String__void@genericmethod.GenericMethod (ref.null $java.lang.String))
    ;; genericmethod.GenericMethod.acceptsContent(deepContent);
-   (call $acceptsContent<genericmethod.GenericMethod.Content>:void@genericmethod.GenericMethod (local.get $deepContent))
+   (call $m_acceptsContent__genericmethod_GenericMethod_Content__void@genericmethod.GenericMethod (local.get $deepContent))
   )
  )
 )
@@ -269,7 +269,7 @@
 ))
 
 ;;; <anonymous> extends GenericMethod<T>()
-(func $<init><>:void@genericmethod.GenericMethod.1
+(func $m_<init>__void_$pp_genericmethod@genericmethod.GenericMethod.1
  (param $this (ref null $genericmethod.GenericMethod.1))
  (result (ref null $genericmethod.GenericMethod.1))
  (block $return.label
@@ -282,7 +282,7 @@
 )
 
 ;;; void <anonymous> extends GenericMethod<T>.fun2(T t)
-(func $fun2<java.lang.Error>:void@genericmethod.GenericMethod.1
+(func $m_fun2__java_lang_Error__void@genericmethod.GenericMethod.1
  (param $this (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Error))
  (block $return.label
@@ -292,7 +292,7 @@
 )
 
 ;;; void <anonymous> extends GenericMethod<T>.fun2(T t)
-(func $fun2<java.lang.Object>:void@genericmethod.GenericMethod.1
+(func $m_fun2__java_lang_Object__void@genericmethod.GenericMethod.1
  (param $this (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Object))
  (block $return.label
@@ -307,7 +307,7 @@
 ))
 
 ;;; LocalClass()
-(func $<init><>:void@genericmethod.GenericMethod.1LocalClass
+(func $m_<init>__void_$pp_genericmethod@genericmethod.GenericMethod.1LocalClass
  (param $this (ref null $genericmethod.GenericMethod.1LocalClass))
  (result (ref null $genericmethod.GenericMethod.1LocalClass))
  (block $return.label
@@ -320,7 +320,7 @@
 )
 
 ;;; void LocalClass.fun2(T t)
-(func $fun2<java.lang.Object>:void@genericmethod.GenericMethod.1LocalClass
+(func $m_fun2__java_lang_Object__void@genericmethod.GenericMethod.1LocalClass
  (param $this (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Object))
  (block $return.label
@@ -330,7 +330,7 @@
 )
 
 ;;; void LocalClass.fun2(T t)
-(func $fun2<java.lang.Number>:void@genericmethod.GenericMethod.1LocalClass
+(func $m_fun2__java_lang_Number__void@genericmethod.GenericMethod.1LocalClass
  (param $this (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Number))
  (block $return.label
@@ -344,7 +344,7 @@
 ))
 
 ;;; SuperContainer()
-(func $<init><>:void@genericmethod.GenericMethod.SuperContainer
+(func $m_<init>__void_$pp_genericmethod@genericmethod.GenericMethod.SuperContainer
  (param $this (ref null $genericmethod.GenericMethod.SuperContainer))
  (result (ref null $genericmethod.GenericMethod.SuperContainer))
  (block $return.label
@@ -357,7 +357,7 @@
 )
 
 ;;; C SuperContainer.get()
-(func $get<>:genericmethod.GenericMethod.Container@genericmethod.GenericMethod.SuperContainer
+(func $m_get__genericmethod_GenericMethod_Container_$pp_genericmethod@genericmethod.GenericMethod.SuperContainer
  (param $this (ref null $java.lang.Object))
  (result (ref null $genericmethod.GenericMethod.Container))
  (local $return.value (ref null $genericmethod.GenericMethod.Container))
@@ -376,7 +376,7 @@
 ))
 
 ;;; Container()
-(func $<init><>:void@genericmethod.GenericMethod.Container
+(func $m_<init>__void_$pp_genericmethod@genericmethod.GenericMethod.Container
  (param $this (ref null $genericmethod.GenericMethod.Container))
  (result (ref null $genericmethod.GenericMethod.Container))
  (block $return.label
@@ -389,7 +389,7 @@
 )
 
 ;;; CT Container.get()
-(func $get<>:genericmethod.GenericMethod.Content@genericmethod.GenericMethod.Container
+(func $m_get__genericmethod_GenericMethod_Content_$pp_genericmethod@genericmethod.GenericMethod.Container
  (param $this (ref null $java.lang.Object))
  (result (ref null $genericmethod.GenericMethod.Content))
  (local $return.value (ref null $genericmethod.GenericMethod.Content))
@@ -408,7 +408,7 @@
 ))
 
 ;;; Content()
-(func $<init><>:void@genericmethod.GenericMethod.Content
+(func $m_<init>__void_$pp_genericmethod@genericmethod.GenericMethod.Content
  (param $this (ref null $genericmethod.GenericMethod.Content))
  (result (ref null $genericmethod.GenericMethod.Content))
  (block $return.label
@@ -421,7 +421,7 @@
 )
 
 ;;; String Content.getProp()
-(func $getProp<>:java.lang.String@genericmethod.GenericMethod.Content
+(func $m_getProp__java_lang_String_$pp_genericmethod@genericmethod.GenericMethod.Content
  (param $this (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))

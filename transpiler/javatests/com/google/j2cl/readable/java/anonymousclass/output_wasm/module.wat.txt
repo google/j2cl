@@ -5,7 +5,7 @@
 ))
 
 ;;; SomeClass(int i)
-(func $<init><int>:void@anonymousclass.SomeClass
+(func $m_<init>__int__void_$pp_anonymousclass@anonymousclass.SomeClass
  (param $this (ref null $anonymousclass.SomeClass))
  (param $i i32)
  (result (ref null $anonymousclass.SomeClass))
@@ -23,7 +23,7 @@
 ))
 
 ;;; AnonymousClass()
-(func $<init><>:void@anonymousclass.AnonymousClass
+(func $m_<init>__void@anonymousclass.AnonymousClass
  (param $this (ref null $anonymousclass.AnonymousClass))
  (result (ref null $anonymousclass.AnonymousClass))
  (block $return.label
@@ -36,14 +36,14 @@
 )
 
 ;;; void AnonymousClass.main()
-(func $main<>:void@anonymousclass.AnonymousClass
+(func $m_main__void@anonymousclass.AnonymousClass
  (param $this (ref null $java.lang.Object))
  (local $instance (ref null $anonymousclass.SomeClass))
  (block $return.label
   (block
    ;; SomeClass instance = AnonymousClass.this.new $1.<init>(1);
    
-   (local.set $instance (call $<init><int>:void@anonymousclass.AnonymousClass.1 (struct.new_with_rtt $anonymousclass.AnonymousClass.1 (ref.null $anonymousclass.AnonymousClass) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (global.get $anonymousclass.AnonymousClass.1.rtt))(i32.const 1)))
+   (local.set $instance (call $m_<init>__int__void_$pp_anonymousclass@anonymousclass.AnonymousClass.1 (struct.new_with_rtt $anonymousclass.AnonymousClass.1 (ref.null $anonymousclass.AnonymousClass) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (global.get $anonymousclass.AnonymousClass.1.rtt))(i32.const 1)))
   )
  )
 )
@@ -56,7 +56,7 @@
 ))
 
 ;;; <anonymous> extends SomeClass(int $_0)
-(func $<init><int>:void@anonymousclass.AnonymousClass.1
+(func $m_<init>__int__void_$pp_anonymousclass@anonymousclass.AnonymousClass.1
  (param $this (ref null $anonymousclass.AnonymousClass.1))
  (param $$_0 i32)
  (result (ref null $anonymousclass.AnonymousClass.1))
@@ -70,7 +70,7 @@
 )
 
 ;;; String <anonymous> extends SomeClass.foo()
-(func $foo<>:java.lang.String@anonymousclass.AnonymousClass.1
+(func $m_foo__java_lang_String@anonymousclass.AnonymousClass.1
  (param $this (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))
@@ -92,7 +92,7 @@
 ))
 
 ;;; <anonymous> extends SomeClass(int $_0)
-(func $<init><int>:void@anonymousclass.SomeInterface.1
+(func $m_<init>__int__void_$pp_anonymousclass@anonymousclass.SomeInterface.1
  (param $this (ref null $anonymousclass.SomeInterface.1))
  (param $$_0 i32)
  (result (ref null $anonymousclass.SomeInterface.1))
@@ -106,7 +106,7 @@
 )
 
 ;;; String <anonymous> extends SomeClass.foo()
-(func $foo<>:java.lang.String@anonymousclass.SomeInterface.1
+(func $m_foo__java_lang_String@anonymousclass.SomeInterface.1
  (param $this (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))

@@ -5,7 +5,7 @@
 ))
 
 ;;; NestedLocalClasses()
-(func $<init><>:void@nestedlocalclasses.NestedLocalClasses
+(func $m_<init>__void@nestedlocalclasses.NestedLocalClasses
  (param $this (ref null $nestedlocalclasses.NestedLocalClasses))
  (result (ref null $nestedlocalclasses.NestedLocalClasses))
  (block $return.label
@@ -18,7 +18,7 @@
 )
 
 ;;; void NestedLocalClasses.test(int p)
-(func $test<int>:void@nestedlocalclasses.NestedLocalClasses
+(func $m_test__int__void@nestedlocalclasses.NestedLocalClasses
  (param $this (ref null $java.lang.Object))
  (param $p i32)
  (local $localVar i32)
@@ -38,7 +38,7 @@
 ))
 
 ;;; InnerClass()
-(func $<init><>:void@nestedlocalclasses.NestedLocalClasses.1InnerClass
+(func $m_<init>__void_$pp_nestedlocalclasses@nestedlocalclasses.NestedLocalClasses.1InnerClass
  (param $this (ref null $nestedlocalclasses.NestedLocalClasses.1InnerClass))
  (result (ref null $nestedlocalclasses.NestedLocalClasses.1InnerClass))
  (block $return.label
@@ -51,7 +51,7 @@
 )
 
 ;;; void InnerClass.fun()
-(func $fun<>:void@nestedlocalclasses.NestedLocalClasses.1InnerClass
+(func $m_fun__void@nestedlocalclasses.NestedLocalClasses.1InnerClass
  (param $this (ref null $java.lang.Object))
  (local $localVarInInnerClass i32)
  (block $return.label
@@ -60,7 +60,7 @@
    
    (local.set $localVarInInnerClass (i32.const 1))
    ;; $1InnerClass.this.new $1InnerInnerClass.<init>();
-   (call $<init><>:void@nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass (struct.new_with_rtt $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass (ref.null $nestedlocalclasses.NestedLocalClasses.1InnerClass) (i32.const 0) (i32.const 0) (i32.const 0) (global.get $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass.rtt)))
+   (call $m_<init>__void_$pp_nestedlocalclasses@nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass (struct.new_with_rtt $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass (ref.null $nestedlocalclasses.NestedLocalClasses.1InnerClass) (i32.const 0) (i32.const 0) (i32.const 0) (global.get $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass.rtt)))
    drop
   )
  )
@@ -75,7 +75,7 @@
 ))
 
 ;;; InnerInnerClass()
-(func $<init><>:void@nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass
+(func $m_<init>__void_$pp_nestedlocalclasses@nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass
  (param $this (ref null $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass))
  (result (ref null $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass))
  (block $return.label
@@ -95,7 +95,7 @@
 ))
 
 ;;; ClassIndirectlyCapturingLocal()
-(func $<init><>:void@nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal
+(func $m_<init>__void_$pp_nestedlocalclasses@nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal
  (param $this (ref null $nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal))
  (result (ref null $nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal))
  (block $return.label
@@ -110,12 +110,12 @@
 ;;; INTERFACE  InterfaceWithThisReference
 
 ;;; void InterfaceWithThisReference.foo()
-(func $foo<>:void@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference
+(func $m_foo__void@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference
  (param $this (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; InterfaceWithThisReference.this.new $1.<init>();
-   (call $<init><>:void@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1 (struct.new_with_rtt $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1 (ref.null $java.lang.Object) (ref.null $java.lang.Object) (global.get $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1.rtt)))
+   (call $m_<init>__void_$pp_nestedlocalclasses@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1 (struct.new_with_rtt $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1 (ref.null $java.lang.Object) (ref.null $java.lang.Object) (global.get $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1.rtt)))
    drop
   )
  )
@@ -127,7 +127,7 @@
 ))
 
 ;;; Super()
-(func $<init><>:void@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super
+(func $m_<init>__void_$pp_nestedlocalclasses@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super
  (param $this (ref null $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super))
  (result (ref null $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super))
  (block $return.label
@@ -139,6 +139,17 @@
  (local.get $this)
 )
 
+;;; void Super.foo()
+(func $m_foo__void@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; InterfaceWithThisReference.this.foo();
+   
+  )
+ )
+)
+
 ;;; CLASS  <anonymous> extends Super
 (type $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1 (struct
  (field $this@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super (mut (ref null $java.lang.Object)))
@@ -146,7 +157,7 @@
 ))
 
 ;;; <anonymous> extends Super()
-(func $<init><>:void@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1
+(func $m_<init>__void_$pp_nestedlocalclasses@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1
  (param $this (ref null $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1))
  (result (ref null $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1))
  (block $return.label

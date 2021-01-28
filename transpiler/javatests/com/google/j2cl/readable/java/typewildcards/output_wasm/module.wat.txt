@@ -5,7 +5,7 @@
 ))
 
 ;;; GenericType()
-(func $<init><>:void@typewildcards.GenericType
+(func $m_<init>__void_$pp_typewildcards@typewildcards.GenericType
  (param $this (ref null $typewildcards.GenericType))
  (result (ref null $typewildcards.GenericType))
  (block $return.label
@@ -22,7 +22,7 @@
 ))
 
 ;;; TypeWildCards()
-(func $<init><>:void@typewildcards.TypeWildCards
+(func $m_<init>__void@typewildcards.TypeWildCards
  (param $this (ref null $typewildcards.TypeWildCards))
  (result (ref null $typewildcards.TypeWildCards))
  (block $return.label
@@ -35,7 +35,7 @@
 )
 
 ;;; void TypeWildCards.unbounded(GenericType<?> g)
-(func $unbounded<typewildcards.GenericType>:void@typewildcards.TypeWildCards
+(func $m_unbounded__typewildcards_GenericType__void@typewildcards.TypeWildCards
  (param $this (ref null $java.lang.Object))
  (param $g (ref null $typewildcards.GenericType))
  (block $return.label
@@ -45,7 +45,7 @@
 )
 
 ;;; void TypeWildCards.upperBound(GenericType<? extends TypeWildCards> g)
-(func $upperBound<typewildcards.GenericType>:void@typewildcards.TypeWildCards
+(func $m_upperBound__typewildcards_GenericType__void@typewildcards.TypeWildCards
  (param $this (ref null $java.lang.Object))
  (param $g (ref null $typewildcards.GenericType))
  (block $return.label
@@ -55,7 +55,7 @@
 )
 
 ;;; void TypeWildCards.lowerBound(GenericType<? super TypeWildCards> g)
-(func $lowerBound<typewildcards.GenericType>:void@typewildcards.TypeWildCards
+(func $m_lowerBound__typewildcards_GenericType__void@typewildcards.TypeWildCards
  (param $this (ref null $java.lang.Object))
  (param $g (ref null $typewildcards.GenericType))
  (block $return.label
@@ -65,7 +65,7 @@
 )
 
 ;;; void TypeWildCards.test()
-(func $test<>:void@typewildcards.TypeWildCards
+(func $m_test__void@typewildcards.TypeWildCards
  (param $this (ref null $java.lang.Object))
  (block $return.label
   (block
@@ -80,7 +80,7 @@
 )
 
 ;;; void TypeWildCards.testBoundedTypeMemberAccess(T t)
-(func $testBoundedTypeMemberAccess<typewildcards.TypeWildCards.A>:void@typewildcards.TypeWildCards
+(func $m_testBoundedTypeMemberAccess__typewildcards_TypeWildCards_A__void@typewildcards.TypeWildCards
  (param $t (ref null $typewildcards.TypeWildCards.A))
  (local $i i32)
  (block $return.label
@@ -95,7 +95,7 @@
 )
 
 ;;; void TypeWildCards.testIntersectionBoundedTypeMemberAccess(T t)
-(func $testIntersectionBoundedTypeMemberAccess<typewildcards.TypeWildCards.A>:void@typewildcards.TypeWildCards
+(func $m_testIntersectionBoundedTypeMemberAccess__typewildcards_TypeWildCards_A__void@typewildcards.TypeWildCards
  (param $t (ref null $typewildcards.TypeWildCards.A))
  (local $i i32)
  (block $return.label
@@ -112,7 +112,7 @@
 )
 
 ;;; List<V> TypeWildCards.transform(List<F> from, Function<? super F, ? extends V> function)
-(func $transform<java.util.List|java.util.function.Function>:java.util.List@typewildcards.TypeWildCards
+(func $m_transform__java_util_List__java_util_function_Function__java_util_List@typewildcards.TypeWildCards
  (param $from (ref null $java.lang.Object))
  (param $function (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -128,7 +128,7 @@
 )
 
 ;;; List<E> TypeWildCards.concat(List<? extends E> a, List<? extends E> b)
-(func $concat<java.util.List|java.util.List>:java.util.List@typewildcards.TypeWildCards
+(func $m_concat__java_util_List__java_util_List__java_util_List@typewildcards.TypeWildCards
  (param $a (ref null $java.lang.Object))
  (param $b (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -144,7 +144,7 @@
 )
 
 ;;; void TypeWildCards.testInferredGenericIntersection()
-(func $testInferredGenericIntersection<>:void@typewildcards.TypeWildCards
+(func $m_testInferredGenericIntersection__void@typewildcards.TypeWildCards
  (param $this (ref null $java.lang.Object))
  (local $elements (ref null $java.lang.Object))
  (local $otherElements (ref null $java.lang.Object))
@@ -160,13 +160,13 @@
    (local.set $otherElements (ref.null $java.lang.Object))
    ;; List<Integer> integers = typewildcards.TypeWildCards.transform(typewildcards.TypeWildCards.concat(elements,otherElements),function ((Object&HasKey&IntegerSupplier) a){
    
-   (local.set $integers (call $transform<java.util.List|java.util.function.Function>:java.util.List@typewildcards.TypeWildCards (call $concat<java.util.List|java.util.List>:java.util.List@typewildcards.TypeWildCards (local.get $elements)(local.get $otherElements))(ref.null $java.lang.Object)))
+   (local.set $integers (call $m_transform__java_util_List__java_util_function_Function__java_util_List@typewildcards.TypeWildCards (call $m_concat__java_util_List__java_util_List__java_util_List@typewildcards.TypeWildCards (local.get $elements)(local.get $otherElements))(ref.null $java.lang.Object)))
   )
  )
 )
 
 ;;; void TypeWildCards.takesRecursiveGeneric(GenericType<Foo> foo)
-(func $takesRecursiveGeneric<typewildcards.GenericType>:void@typewildcards.TypeWildCards
+(func $m_takesRecursiveGeneric__typewildcards_GenericType__void@typewildcards.TypeWildCards
  (param $foo (ref null $typewildcards.GenericType))
  (block $return.label
   (block
@@ -175,12 +175,12 @@
 )
 
 ;;; void TypeWildCards.testRecursiveGeneric()
-(func $testRecursiveGeneric<>:void@typewildcards.TypeWildCards
+(func $m_testRecursiveGeneric__void@typewildcards.TypeWildCards
  (param $this (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; typewildcards.TypeWildCards.takesRecursiveGeneric(TypeWildCards.this.new Foo.<init>());
-   (call $takesRecursiveGeneric<typewildcards.GenericType>:void@typewildcards.TypeWildCards (call $<init><>:void@typewildcards.TypeWildCards.Foo (struct.new_with_rtt $typewildcards.TypeWildCards.Foo (ref.null $typewildcards.TypeWildCards) (global.get $typewildcards.TypeWildCards.Foo.rtt))))
+   (call $m_takesRecursiveGeneric__typewildcards_GenericType__void@typewildcards.TypeWildCards (call $m_<init>__void_$pp_typewildcards@typewildcards.TypeWildCards.Foo (struct.new_with_rtt $typewildcards.TypeWildCards.Foo (ref.null $typewildcards.TypeWildCards) (global.get $typewildcards.TypeWildCards.Foo.rtt))))
   )
  )
 )
@@ -195,7 +195,7 @@
 ))
 
 ;;; A()
-(func $<init><>:void@typewildcards.TypeWildCards.A
+(func $m_<init>__void_$p_typewildcards_TypeWildCards_A@typewildcards.TypeWildCards.A
  (param $this (ref null $typewildcards.TypeWildCards.A))
  (result (ref null $typewildcards.TypeWildCards.A))
  (block $return.label
@@ -208,7 +208,7 @@
 )
 
 ;;; void A.m()
-(func $m<>:void@typewildcards.TypeWildCards.A
+(func $m_m__void@typewildcards.TypeWildCards.A
  (param $this (ref null $java.lang.Object))
  (block $return.label
   (block
@@ -226,7 +226,7 @@
 ))
 
 ;;; Element()
-(func $<init><>:void@typewildcards.TypeWildCards.Element
+(func $m_<init>__void@typewildcards.TypeWildCards.Element
  (param $this (ref null $typewildcards.TypeWildCards.Element))
  (result (ref null $typewildcards.TypeWildCards.Element))
  (block $return.label
@@ -244,7 +244,7 @@
 ))
 
 ;;; OtherElement()
-(func $<init><>:void@typewildcards.TypeWildCards.OtherElement
+(func $m_<init>__void@typewildcards.TypeWildCards.OtherElement
  (param $this (ref null $typewildcards.TypeWildCards.OtherElement))
  (result (ref null $typewildcards.TypeWildCards.OtherElement))
  (block $return.label
@@ -263,7 +263,7 @@
 ))
 
 ;;; SubOtherElement()
-(func $<init><>:void@typewildcards.TypeWildCards.SubOtherElement
+(func $m_<init>__void@typewildcards.TypeWildCards.SubOtherElement
  (param $this (ref null $typewildcards.TypeWildCards.SubOtherElement))
  (result (ref null $typewildcards.TypeWildCards.SubOtherElement))
  (block $return.label
@@ -281,7 +281,7 @@
 ))
 
 ;;; Foo()
-(func $<init><>:void@typewildcards.TypeWildCards.Foo
+(func $m_<init>__void_$pp_typewildcards@typewildcards.TypeWildCards.Foo
  (param $this (ref null $typewildcards.TypeWildCards.Foo))
  (result (ref null $typewildcards.TypeWildCards.Foo))
  (block $return.label

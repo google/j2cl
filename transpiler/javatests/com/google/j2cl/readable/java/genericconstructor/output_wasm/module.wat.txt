@@ -5,7 +5,7 @@
 ))
 
 ;;; GenericConstructor(S s, T t)
-(func $<init><java.lang.Object|java.lang.Object>:void@genericconstructor.GenericConstructor
+(func $m_<init>__java_lang_Object__java_lang_Object__void@genericconstructor.GenericConstructor
  (param $this (ref null $genericconstructor.GenericConstructor))
  (param $s (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Object))
@@ -20,7 +20,7 @@
 )
 
 ;;; GenericConstructor(T t)
-(func $<init><java.lang.Object>:void@genericconstructor.GenericConstructor
+(func $m_<init>__java_lang_Object__void@genericconstructor.GenericConstructor
  (param $this (ref null $genericconstructor.GenericConstructor))
  (param $t (ref null $java.lang.Object))
  (result (ref null $genericconstructor.GenericConstructor))
@@ -34,15 +34,15 @@
 )
 
 ;;; void GenericConstructor.test()
-(func $test<>:void@genericconstructor.GenericConstructor
+(func $m_test__void@genericconstructor.GenericConstructor
  (param $this (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; new GenericConstructor.<init>(new Exception.<init>(),new Error.<init>());
-   (call $<init><java.lang.Object|java.lang.Object>:void@genericconstructor.GenericConstructor (struct.new_with_rtt $genericconstructor.GenericConstructor (global.get $genericconstructor.GenericConstructor.rtt))(call $<init><>:void@java.lang.Exception (struct.new_with_rtt $java.lang.Exception (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Exception.rtt)))(call $<init><>:void@java.lang.Error (struct.new_with_rtt $java.lang.Error (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Error.rtt))))
+   (call $m_<init>__java_lang_Object__java_lang_Object__void@genericconstructor.GenericConstructor (struct.new_with_rtt $genericconstructor.GenericConstructor (global.get $genericconstructor.GenericConstructor.rtt))(call $m_<init>__void@java.lang.Exception (struct.new_with_rtt $java.lang.Exception (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Exception.rtt)))(call $m_<init>__void@java.lang.Error (struct.new_with_rtt $java.lang.Error (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Error.rtt))))
    drop
    ;; new GenericConstructor.<init>(new Exception.<init>());
-   (call $<init><java.lang.Object>:void@genericconstructor.GenericConstructor (struct.new_with_rtt $genericconstructor.GenericConstructor (global.get $genericconstructor.GenericConstructor.rtt))(call $<init><>:void@java.lang.Exception (struct.new_with_rtt $java.lang.Exception (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Exception.rtt))))
+   (call $m_<init>__java_lang_Object__void@genericconstructor.GenericConstructor (struct.new_with_rtt $genericconstructor.GenericConstructor (global.get $genericconstructor.GenericConstructor.rtt))(call $m_<init>__void@java.lang.Exception (struct.new_with_rtt $java.lang.Exception (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Exception.rtt))))
    drop
   )
  )

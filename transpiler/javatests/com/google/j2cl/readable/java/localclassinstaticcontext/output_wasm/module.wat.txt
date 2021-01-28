@@ -6,7 +6,7 @@
 (global $f@localclassinstaticcontext.LocalClassInStaticContext (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
 
 ;;; LocalClassInStaticContext()
-(func $<init><>:void@localclassinstaticcontext.LocalClassInStaticContext
+(func $m_<init>__void@localclassinstaticcontext.LocalClassInStaticContext
  (param $this (ref null $localclassinstaticcontext.LocalClassInStaticContext))
  (result (ref null $localclassinstaticcontext.LocalClassInStaticContext))
  (block $return.label
@@ -19,16 +19,16 @@
 )
 
 ;;; void LocalClassInStaticContext.test()
-(func $test<>:void@localclassinstaticcontext.LocalClassInStaticContext
+(func $m_test__void@localclassinstaticcontext.LocalClassInStaticContext
  (local $a (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; new $1A.<init>();
-   (call $<init><>:void@localclassinstaticcontext.LocalClassInStaticContext.1A (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.1A (global.get $localclassinstaticcontext.LocalClassInStaticContext.1A.rtt)))
+   (call $m_<init>__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.1A (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.1A (global.get $localclassinstaticcontext.LocalClassInStaticContext.1A.rtt)))
    drop
    ;; Object a = new $3.<init>();
    
-   (local.set $a (call $<init><>:void@localclassinstaticcontext.LocalClassInStaticContext.3 (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.3 (global.get $localclassinstaticcontext.LocalClassInStaticContext.3.rtt))))
+   (local.set $a (call $m_<init>__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.3 (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.3 (global.get $localclassinstaticcontext.LocalClassInStaticContext.3.rtt))))
   )
  )
 )
@@ -38,7 +38,7 @@
 ))
 
 ;;; <anonymous> extends Object()
-(func $<init><>:void@localclassinstaticcontext.LocalClassInStaticContext.1
+(func $m_<init>__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.1
  (param $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.1))
  (result (ref null $localclassinstaticcontext.LocalClassInStaticContext.1))
  (block $return.label
@@ -55,7 +55,7 @@
 ))
 
 ;;; A()
-(func $<init><>:void@localclassinstaticcontext.LocalClassInStaticContext.1A
+(func $m_<init>__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.1A
  (param $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.1A))
  (result (ref null $localclassinstaticcontext.LocalClassInStaticContext.1A))
  (block $return.label
@@ -72,7 +72,7 @@
 ))
 
 ;;; <anonymous> extends Object()
-(func $<init><>:void@localclassinstaticcontext.LocalClassInStaticContext.3
+(func $m_<init>__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.3
  (param $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.3))
  (result (ref null $localclassinstaticcontext.LocalClassInStaticContext.3))
  (block $return.label
@@ -85,12 +85,12 @@
 )
 
 ;;; void <anonymous> extends Object.m()
-(func $m<>:void@localclassinstaticcontext.LocalClassInStaticContext.3
+(func $m_m__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.3
  (param $this (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; new $1A.<init>();
-   (call $<init><>:void@localclassinstaticcontext.LocalClassInStaticContext.1A (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.1A (global.get $localclassinstaticcontext.LocalClassInStaticContext.1A.rtt)))
+   (call $m_<init>__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.1A (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.1A (global.get $localclassinstaticcontext.LocalClassInStaticContext.1A.rtt)))
    drop
   )
  )
@@ -101,7 +101,7 @@
 ))
 
 ;;; B()
-(func $<init><>:void@localclassinstaticcontext.LocalClassInStaticContext.1B
+(func $m_<init>__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.1B
  (param $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.1B))
  (result (ref null $localclassinstaticcontext.LocalClassInStaticContext.1B))
  (block $return.label
@@ -118,7 +118,7 @@
 ))
 
 ;;; <anonymous> extends Object()
-(func $<init><>:void@localclassinstaticcontext.LocalClassInStaticContext.2
+(func $m_<init>__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.2
  (param $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.2))
  (result (ref null $localclassinstaticcontext.LocalClassInStaticContext.2))
  (block $return.label
@@ -136,7 +136,7 @@
 ))
 
 ;;; C()
-(func $<init><>:void@localclassinstaticcontext.LocalClassInStaticContext.C
+(func $m_<init>__void@localclassinstaticcontext.LocalClassInStaticContext.C
  (param $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.C))
  (result (ref null $localclassinstaticcontext.LocalClassInStaticContext.C))
  (block $return.label
@@ -149,7 +149,7 @@
 )
 
 ;;; void C.test()
-(func $test<>:void@localclassinstaticcontext.LocalClassInStaticContext.C
+(func $m_test__void@localclassinstaticcontext.LocalClassInStaticContext.C
  (param $this (ref null $java.lang.Object))
  (block $return.label
   (block
@@ -166,7 +166,7 @@
 ))
 
 ;;; D()
-(func $<init><>:void@localclassinstaticcontext.LocalClassInStaticContext.C.1D
+(func $m_<init>__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.C.1D
  (param $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.C.1D))
  (result (ref null $localclassinstaticcontext.LocalClassInStaticContext.C.1D))
  (block $return.label
@@ -179,7 +179,7 @@
 )
 
 ;;; int D.fun()
-(func $fun<>:int@localclassinstaticcontext.LocalClassInStaticContext.C.1D
+(func $m_fun__int@localclassinstaticcontext.LocalClassInStaticContext.C.1D
  (param $this (ref null $java.lang.Object))
  (result i32)
  (local $return.value i32)

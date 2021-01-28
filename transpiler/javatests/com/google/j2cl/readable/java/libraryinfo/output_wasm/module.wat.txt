@@ -6,7 +6,7 @@
 (global $STATIC_FIELD@libraryinfo.Main (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 
 ;;; Main()
-(func $<init><>:void@libraryinfo.Main
+(func $m_<init>__void@libraryinfo.Main
  (param $this (ref null $libraryinfo.Main))
  (result (ref null $libraryinfo.Main))
  (block $return.label
@@ -19,7 +19,7 @@
 )
 
 ;;; void Main.entryPoint()
-(func $entryPoint<>:void@libraryinfo.Main
+(func $m_entryPoint__void@libraryinfo.Main
  (local $jsFunction (ref null $java.lang.Object))
  (local $s (ref null $java.lang.String))
  (block $return.label
@@ -28,34 +28,34 @@
    
    ;; Function jsFunction = new FunctionImpl.<init>();
    
-   (local.set $jsFunction (call $<init><>:void@libraryinfo.Main.FunctionImpl (struct.new_with_rtt $libraryinfo.Main.FunctionImpl (global.get $libraryinfo.Main.FunctionImpl.rtt))))
+   (local.set $jsFunction (call $m_<init>__void_$p_libraryinfo_Main_FunctionImpl@libraryinfo.Main.FunctionImpl (struct.new_with_rtt $libraryinfo.Main.FunctionImpl (global.get $libraryinfo.Main.FunctionImpl.rtt))))
    ;; (jsFunction = function (String s){
    (local.set $jsFunction (ref.null $java.lang.Object))
    ;; jsFunction.apply("foo");
    
    ;; new MyJsType.<init>();
-   (call $<init><>:void@libraryinfo.Main.MyJsType (struct.new_with_rtt $libraryinfo.Main.MyJsType (ref.null $java.lang.Object) (global.get $libraryinfo.Main.MyJsType.rtt)))
+   (call $m_<init>__void@libraryinfo.Main.MyJsType (struct.new_with_rtt $libraryinfo.Main.MyJsType (ref.null $java.lang.Object) (global.get $libraryinfo.Main.MyJsType.rtt)))
    drop
    ;; new $1.<init>();
-   (call $<init><>:void@libraryinfo.Main.1 (struct.new_with_rtt $libraryinfo.Main.1 (global.get $libraryinfo.Main.1.rtt)))
+   (call $m_<init>__void_$pp_libraryinfo@libraryinfo.Main.1 (struct.new_with_rtt $libraryinfo.Main.1 (global.get $libraryinfo.Main.1.rtt)))
    drop
   )
  )
 )
 
 ;;; void Main.execute()
-(func $execute<>:void@libraryinfo.Main
+(func $m_execute__void_$p_libraryinfo_Main@libraryinfo.Main
  (param $this (ref null $libraryinfo.Main))
  (block $return.label
   (block
    ;; libraryinfo.Main.log("Foo");
-   (call $log<java.lang.Object>:void@libraryinfo.Main (ref.null $java.lang.String))
+   (call $m_log__java_lang_Object__void@libraryinfo.Main (ref.null $java.lang.String))
   )
  )
 )
 
 ;;; String Main.toString()
-(func $toString<>:java.lang.String@libraryinfo.Main
+(func $m_toString__java_lang_String@libraryinfo.Main
  (param $this (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))
@@ -70,7 +70,7 @@
 )
 
 ;;; void Main.log(Object o)
-(func $log<java.lang.Object>:void@libraryinfo.Main
+(func $m_log__java_lang_Object__void@libraryinfo.Main
  (param $o (ref null $java.lang.Object))
  (block $return.label
   (block
@@ -79,7 +79,7 @@
 )
 
 ;;; void Main.main()
-(func $main<>:void@libraryinfo.Main
+(func $m_main__void@libraryinfo.Main
  (local $foo (ref null $libraryinfo.Main.Foo))
  (local $clazz (ref null $java.lang.Class))
  (block $return.label
@@ -109,7 +109,7 @@
 ))
 
 ;;; FunctionImpl()
-(func $<init><>:void@libraryinfo.Main.FunctionImpl
+(func $m_<init>__void_$p_libraryinfo_Main_FunctionImpl@libraryinfo.Main.FunctionImpl
  (param $this (ref null $libraryinfo.Main.FunctionImpl))
  (result (ref null $libraryinfo.Main.FunctionImpl))
  (block $return.label
@@ -122,7 +122,7 @@
 )
 
 ;;; void FunctionImpl.apply(String s)
-(func $apply<java.lang.String>:void@libraryinfo.Main.FunctionImpl
+(func $m_apply__java_lang_String__void@libraryinfo.Main.FunctionImpl
  (param $this (ref null $java.lang.Object))
  (param $s (ref null $java.lang.String))
  (block $return.label
@@ -139,7 +139,7 @@
 (global $C@libraryinfo.Main.MyEnum (mut (ref null $libraryinfo.Main.MyEnum)) (ref.null $libraryinfo.Main.MyEnum))
 
 ;;; MyEnum()
-(func $<init><>:void@libraryinfo.Main.MyEnum
+(func $m_<init>__void_$p_libraryinfo_Main_MyEnum@libraryinfo.Main.MyEnum
  (param $this (ref null $libraryinfo.Main.MyEnum))
  (result (ref null $libraryinfo.Main.MyEnum))
  (block $return.label
@@ -157,7 +157,7 @@
 ))
 
 ;;; MyJsType()
-(func $<init><>:void@libraryinfo.Main.MyJsType
+(func $m_<init>__void@libraryinfo.Main.MyJsType
  (param $this (ref null $libraryinfo.Main.MyJsType))
  (result (ref null $libraryinfo.Main.MyJsType))
  (block $return.label
@@ -165,7 +165,7 @@
    ;; Object.this.Object.<init>();
    
    ;; (MyJsType.this.someField = new Main.<init>());
-   (struct.set $libraryinfo.Main.MyJsType $someField@libraryinfo.Main.MyJsType  (ref.null $libraryinfo.Main.MyJsType) (call $<init><>:void@libraryinfo.Main (struct.new_with_rtt $libraryinfo.Main (global.get $libraryinfo.Main.rtt))))
+   (struct.set $libraryinfo.Main.MyJsType $someField@libraryinfo.Main.MyJsType  (ref.null $libraryinfo.Main.MyJsType) (call $m_<init>__void@libraryinfo.Main (struct.new_with_rtt $libraryinfo.Main (global.get $libraryinfo.Main.rtt))))
   )
  )
  (local.get $this)
@@ -176,7 +176,7 @@
 ))
 
 ;;; <anonymous> extends Object()
-(func $<init><>:void@libraryinfo.Main.1
+(func $m_<init>__void_$pp_libraryinfo@libraryinfo.Main.1
  (param $this (ref null $libraryinfo.Main.1))
  (result (ref null $libraryinfo.Main.1))
  (block $return.label
@@ -189,7 +189,7 @@
 )
 
 ;;; void <anonymous> extends Object.foo()
-(func $foo<>:void@libraryinfo.Main.1
+(func $m_foo__void_$pp_libraryinfo@libraryinfo.Main.1
  (param $this (ref null $java.lang.Object))
  (block $return.label
   (block
@@ -203,7 +203,7 @@
 ))
 
 ;;; Foo()
-(func $<init><>:void@libraryinfo.Main.Foo
+(func $m_<init>__void@libraryinfo.Main.Foo
  (param $this (ref null $libraryinfo.Main.Foo))
  (result (ref null $libraryinfo.Main.Foo))
  (block $return.label
@@ -216,7 +216,7 @@
 )
 
 ;;; void Foo.instanceMethod()
-(func $instanceMethod<>:void@libraryinfo.Main.Foo
+(func $m_instanceMethod__void_$pp_libraryinfo@libraryinfo.Main.Foo
  (param $this (ref null $java.lang.Object))
  (block $return.label
   (block

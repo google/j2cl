@@ -5,7 +5,7 @@
 ))
 
 ;;; BooleanOperations()
-(func $<init><>:void@booleanoperations.BooleanOperations
+(func $m_<init>__void@booleanoperations.BooleanOperations
  (param $this (ref null $booleanoperations.BooleanOperations))
  (result (ref null $booleanoperations.BooleanOperations))
  (block $return.label
@@ -18,7 +18,7 @@
 )
 
 ;;; void BooleanOperations.acceptBoolean(boolean b)
-(func $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations
+(func $m_acceptBoolean__boolean__void@booleanoperations.BooleanOperations
  (param $b i32)
  (block $return.label
   (block
@@ -27,7 +27,7 @@
 )
 
 ;;; void BooleanOperations.test()
-(func $test<>:void@booleanoperations.BooleanOperations
+(func $m_test__void@booleanoperations.BooleanOperations
  (param $this (ref null $java.lang.Object))
  (local $ls i32)
  (local $rs i32)
@@ -72,21 +72,21 @@
    ;; (r = (r | rs));
    (local.set $r (i32.or (local.get $r) (local.get $rs)))
    ;; booleanoperations.BooleanOperations.acceptBoolean((ls == rs));
-   (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (i32.eq (local.get $ls) (local.get $rs)))
+   (call $m_acceptBoolean__boolean__void@booleanoperations.BooleanOperations (i32.eq (local.get $ls) (local.get $rs)))
    ;; booleanoperations.BooleanOperations.acceptBoolean((ls != rs));
-   (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (i32.ne (local.get $ls) (local.get $rs)))
+   (call $m_acceptBoolean__boolean__void@booleanoperations.BooleanOperations (i32.ne (local.get $ls) (local.get $rs)))
    ;; booleanoperations.BooleanOperations.acceptBoolean((ls ^ rs));
-   (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (i32.xor (local.get $ls) (local.get $rs)))
+   (call $m_acceptBoolean__boolean__void@booleanoperations.BooleanOperations (i32.xor (local.get $ls) (local.get $rs)))
    ;; booleanoperations.BooleanOperations.acceptBoolean((ls & rs));
-   (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (i32.and (local.get $ls) (local.get $rs)))
+   (call $m_acceptBoolean__boolean__void@booleanoperations.BooleanOperations (i32.and (local.get $ls) (local.get $rs)))
    ;; booleanoperations.BooleanOperations.acceptBoolean((ls | rs));
-   (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (i32.or (local.get $ls) (local.get $rs)))
+   (call $m_acceptBoolean__boolean__void@booleanoperations.BooleanOperations (i32.or (local.get $ls) (local.get $rs)))
    ;; booleanoperations.BooleanOperations.acceptBoolean((ls) ? (rs) : (false));
-   (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (if (result i32) (local.get $ls) (then (local.get $rs)) (else (i32.const 0))))
+   (call $m_acceptBoolean__boolean__void@booleanoperations.BooleanOperations (if (result i32) (local.get $ls) (then (local.get $rs)) (else (i32.const 0))))
    ;; booleanoperations.BooleanOperations.acceptBoolean((ls) ? (true) : (rs));
-   (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (if (result i32) (local.get $ls) (then (i32.const 1)) (else (local.get $rs))))
+   (call $m_acceptBoolean__boolean__void@booleanoperations.BooleanOperations (if (result i32) (local.get $ls) (then (i32.const 1)) (else (local.get $rs))))
    ;; booleanoperations.BooleanOperations.acceptBoolean(((ls = rs),ls));
-   (call $acceptBoolean<boolean>:void@booleanoperations.BooleanOperations (block (result i32)
+   (call $m_acceptBoolean__boolean__void@booleanoperations.BooleanOperations (block (result i32)
     (local.set $ls (local.get $rs))
     (local.get $ls)
    ))
@@ -173,12 +173,12 @@
    )
    ;; Outer finalOuter = BooleanOperations.this.new $1Outer.<init>();
    
-   (local.set $finalOuter (call $<init><>:void@booleanoperations.BooleanOperations.1Outer (struct.new_with_rtt $booleanoperations.BooleanOperations.1Outer (ref.null $booleanoperations.BooleanOperations) (i32.const 0) (global.get $booleanoperations.BooleanOperations.1Outer.rtt))))
+   (local.set $finalOuter (call $m_<init>__void_$pp_booleanoperations@booleanoperations.BooleanOperations.1Outer (struct.new_with_rtt $booleanoperations.BooleanOperations.1Outer (ref.null $booleanoperations.BooleanOperations) (i32.const 0) (global.get $booleanoperations.BooleanOperations.1Outer.rtt))))
    ;; (finalOuter.b = (finalOuter.b | true));
    (struct.set $booleanoperations.BooleanOperations.1Outer $b@booleanoperations.BooleanOperations.1Outer  (local.get $finalOuter) (i32.or (struct.get $booleanoperations.BooleanOperations.1Outer $b@booleanoperations.BooleanOperations.1Outer  (local.get $finalOuter)) (i32.const 1)))
    ;; Outer outer = BooleanOperations.this.new $1Outer.<init>();
    
-   (local.set $outer (call $<init><>:void@booleanoperations.BooleanOperations.1Outer (struct.new_with_rtt $booleanoperations.BooleanOperations.1Outer (ref.null $booleanoperations.BooleanOperations) (i32.const 0) (global.get $booleanoperations.BooleanOperations.1Outer.rtt))))
+   (local.set $outer (call $m_<init>__void_$pp_booleanoperations@booleanoperations.BooleanOperations.1Outer (struct.new_with_rtt $booleanoperations.BooleanOperations.1Outer (ref.null $booleanoperations.BooleanOperations) (i32.const 0) (global.get $booleanoperations.BooleanOperations.1Outer.rtt))))
    ;; (outer.b = (outer.b | (((outer = null),outer) == null)));
    (struct.set $booleanoperations.BooleanOperations.1Outer $b@booleanoperations.BooleanOperations.1Outer  (local.get $outer) (i32.or (struct.get $booleanoperations.BooleanOperations.1Outer $b@booleanoperations.BooleanOperations.1Outer  (local.get $outer)) (ref.eq (block (result (ref null $booleanoperations.BooleanOperations.1Outer))
     (local.set $outer (ref.null $booleanoperations.BooleanOperations.1Outer))
@@ -195,7 +195,7 @@
 ))
 
 ;;; Outer()
-(func $<init><>:void@booleanoperations.BooleanOperations.1Outer
+(func $m_<init>__void_$pp_booleanoperations@booleanoperations.BooleanOperations.1Outer
  (param $this (ref null $booleanoperations.BooleanOperations.1Outer))
  (result (ref null $booleanoperations.BooleanOperations.1Outer))
  (block $return.label
@@ -213,7 +213,7 @@
 ))
 
 ;;; Inner()
-(func $<init><>:void@booleanoperations.BooleanOperations.1Outer.Inner
+(func $m_<init>__void_$pp_booleanoperations@booleanoperations.BooleanOperations.1Outer.Inner
  (param $this (ref null $booleanoperations.BooleanOperations.1Outer.Inner))
  (result (ref null $booleanoperations.BooleanOperations.1Outer.Inner))
  (block $return.label

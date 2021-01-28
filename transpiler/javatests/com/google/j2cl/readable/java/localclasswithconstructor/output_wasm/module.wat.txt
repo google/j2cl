@@ -5,7 +5,7 @@
 ))
 
 ;;; LocalClassWithConstructor()
-(func $<init><>:void@localclasswithconstructor.LocalClassWithConstructor
+(func $m_<init>__void@localclasswithconstructor.LocalClassWithConstructor
  (param $this (ref null $localclasswithconstructor.LocalClassWithConstructor))
  (result (ref null $localclasswithconstructor.LocalClassWithConstructor))
  (block $return.label
@@ -18,7 +18,7 @@
 )
 
 ;;; void LocalClassWithConstructor.test(int p)
-(func $test<int>:void@localclasswithconstructor.LocalClassWithConstructor
+(func $m_test__int__void@localclasswithconstructor.LocalClassWithConstructor
  (param $this (ref null $java.lang.Object))
  (param $p i32)
  (local $localVar i32)
@@ -28,7 +28,7 @@
    
    (local.set $localVar (i32.const 1))
    ;; LocalClassWithConstructor.this.new $1LocalClass.<init>(1);
-   (call $<init><int>:void@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (struct.new_with_rtt $localclasswithconstructor.LocalClassWithConstructor.1LocalClass (ref.null $localclasswithconstructor.LocalClassWithConstructor) (i32.const 0) (i32.const 0) (i32.const 0) (global.get $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.rtt))(i32.const 1))
+   (call $m_<init>__int__void@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (struct.new_with_rtt $localclasswithconstructor.LocalClassWithConstructor.1LocalClass (ref.null $localclasswithconstructor.LocalClassWithConstructor) (i32.const 0) (i32.const 0) (i32.const 0) (global.get $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.rtt))(i32.const 1))
    drop
   )
  )
@@ -43,7 +43,7 @@
 ))
 
 ;;; LocalClass(int a, int b)
-(func $<init><int|int>:void@localclasswithconstructor.LocalClassWithConstructor.1LocalClass
+(func $m_<init>__int__int__void@localclasswithconstructor.LocalClassWithConstructor.1LocalClass
  (param $this (ref null $localclasswithconstructor.LocalClassWithConstructor.1LocalClass))
  (param $a i32)
  (param $b i32)
@@ -60,7 +60,7 @@
 )
 
 ;;; LocalClass(int a)
-(func $<init><int>:void@localclasswithconstructor.LocalClassWithConstructor.1LocalClass
+(func $m_<init>__int__void@localclasswithconstructor.LocalClassWithConstructor.1LocalClass
  (param $this (ref null $localclasswithconstructor.LocalClassWithConstructor.1LocalClass))
  (param $a i32)
  (result (ref null $localclasswithconstructor.LocalClassWithConstructor.1LocalClass))

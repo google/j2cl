@@ -270,6 +270,7 @@ public enum Backend {
           // Default constructors and explicit super calls should be synthesized first.
           new CreateImplicitConstructors(),
           new InsertExplicitSuperCalls(),
+          new BridgeMethodsCreator(),
 
           // Rewrite operations that do not have direct support in wasm into ones that have.
           new ExpandCompoundAssignments(/* expandAll */ true),

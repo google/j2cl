@@ -5,7 +5,7 @@
 ))
 
 ;;; Child()
-(func $<init><>:void@packageprivatemethods.package1.Child
+(func $m_<init>__void@packageprivatemethods.package1.Child
  (param $this (ref null $packageprivatemethods.package1.Child))
  (result (ref null $packageprivatemethods.package1.Child))
  (block $return.label
@@ -18,7 +18,7 @@
 )
 
 ;;; int Child.foo(int a)
-(func $foo<int>:int@packageprivatemethods.package1.Child
+(func $m_foo__int__int@packageprivatemethods.package1.Child
  (param $this (ref null $java.lang.Object))
  (param $a i32)
  (result i32)
@@ -34,7 +34,7 @@
 )
 
 ;;; int Child.fun(int a, int b)
-(func $fun<int|int>:int@packageprivatemethods.package1.Child
+(func $m_fun__int__int__int@packageprivatemethods.package1.Child
  (param $this (ref null $java.lang.Object))
  (param $a i32)
  (param $b i32)
@@ -51,7 +51,7 @@
 )
 
 ;;; int Child.bar(int a, int b, int c)
-(func $bar<int|int|int>:int@packageprivatemethods.package1.Child
+(func $m_bar__int__int__int__int@packageprivatemethods.package1.Child
  (param $this (ref null $java.lang.Object))
  (param $a i32)
  (param $b i32)
@@ -67,6 +67,39 @@
  )
  (local.get $return.value)
 )
+
+;;; int Child.foo(int arg0)
+(func $m_foo__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 i32)
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return Child.this.foo(arg0);
+   (local.set $return.value (i32.const 0))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; int Child.fun(int arg0, int arg1)
+(func $m_fun__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 i32)
+ (param $arg1 i32)
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return Child.this.fun(arg0,arg1);
+   (local.set $return.value (i32.const 0))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
 ;;; Code for packageprivatemethods.package1.Parent
 
 ;;; CLASS  Parent
@@ -74,7 +107,7 @@
 ))
 
 ;;; Parent()
-(func $<init><>:void@packageprivatemethods.package1.Parent
+(func $m_<init>__void@packageprivatemethods.package1.Parent
  (param $this (ref null $packageprivatemethods.package1.Parent))
  (result (ref null $packageprivatemethods.package1.Parent))
  (block $return.label
@@ -87,7 +120,7 @@
 )
 
 ;;; int Parent.foo(int a)
-(func $foo<int>:int@packageprivatemethods.package1.Parent
+(func $m_foo__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Parent
  (param $this (ref null $java.lang.Object))
  (param $a i32)
  (result i32)
@@ -101,6 +134,24 @@
  )
  (local.get $return.value)
 )
+
+;;; int Parent.bar(int arg0, int arg1, int arg2)
+(func $m_bar__int__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Parent
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 i32)
+ (param $arg1 i32)
+ (param $arg2 i32)
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return Parent.this.bar(arg0,arg1,arg2);
+   (local.set $return.value (i32.const 0))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
 ;;; Code for packageprivatemethods.package1.SuperParent
 
 ;;; CLASS  SuperParent
@@ -108,7 +159,7 @@
 ))
 
 ;;; SuperParent()
-(func $<init><>:void@packageprivatemethods.package1.SuperParent
+(func $m_<init>__void@packageprivatemethods.package1.SuperParent
  (param $this (ref null $packageprivatemethods.package1.SuperParent))
  (result (ref null $packageprivatemethods.package1.SuperParent))
  (block $return.label
@@ -121,7 +172,7 @@
 )
 
 ;;; int SuperParent.foo(int a)
-(func $foo<int>:int@packageprivatemethods.package1.SuperParent
+(func $m_foo__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.SuperParent
  (param $this (ref null $java.lang.Object))
  (param $a i32)
  (result i32)
@@ -137,7 +188,7 @@
 )
 
 ;;; int SuperParent.fun(int a, int b)
-(func $fun<int|int>:int@packageprivatemethods.package1.SuperParent
+(func $m_fun__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.SuperParent
  (param $this (ref null $java.lang.Object))
  (param $a i32)
  (param $b i32)
@@ -154,7 +205,7 @@
 )
 
 ;;; int SuperParent.bar(int a, int b, int c)
-(func $bar<int|int|int>:int@packageprivatemethods.package1.SuperParent
+(func $m_bar__int__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.SuperParent
  (param $this (ref null $java.lang.Object))
  (param $a i32)
  (param $b i32)
@@ -177,7 +228,7 @@
 ))
 
 ;;; SubChild()
-(func $<init><>:void@packageprivatemethods.package2.SubChild
+(func $m_<init>__void@packageprivatemethods.package2.SubChild
  (param $this (ref null $packageprivatemethods.package2.SubChild))
  (result (ref null $packageprivatemethods.package2.SubChild))
  (block $return.label
@@ -190,7 +241,7 @@
 )
 
 ;;; int SubChild.foo(int a)
-(func $foo<int>:int@packageprivatemethods.package2.SubChild
+(func $m_foo__int__int@packageprivatemethods.package2.SubChild
  (param $this (ref null $java.lang.Object))
  (param $a i32)
  (result i32)
@@ -211,7 +262,7 @@
 ))
 
 ;;; SubParent()
-(func $<init><>:void@packageprivatemethods.package2.SubParent
+(func $m_<init>__void@packageprivatemethods.package2.SubParent
  (param $this (ref null $packageprivatemethods.package2.SubParent))
  (result (ref null $packageprivatemethods.package2.SubParent))
  (block $return.label
@@ -224,7 +275,7 @@
 )
 
 ;;; int SubParent.foo(int a)
-(func $foo<int>:int@packageprivatemethods.package2.SubParent
+(func $m_foo__int__int_$pp_packageprivatemethods_package2@packageprivatemethods.package2.SubParent
  (param $this (ref null $java.lang.Object))
  (param $a i32)
  (result i32)

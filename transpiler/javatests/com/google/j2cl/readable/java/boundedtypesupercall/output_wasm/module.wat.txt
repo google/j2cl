@@ -5,7 +5,7 @@
 ))
 
 ;;; Main()
-(func $<init><>:void@boundedtypesupercall.Main
+(func $m_<init>__void@boundedtypesupercall.Main
  (param $this (ref null $boundedtypesupercall.Main))
  (result (ref null $boundedtypesupercall.Main))
  (block $return.label
@@ -22,7 +22,7 @@
 ))
 
 ;;; Foo(T foo)
-(func $<init><java.lang.Object>:void@boundedtypesupercall.Main.Foo
+(func $m_<init>__java_lang_Object__void@boundedtypesupercall.Main.Foo
  (param $this (ref null $boundedtypesupercall.Main.Foo))
  (param $foo (ref null $java.lang.Object))
  (result (ref null $boundedtypesupercall.Main.Foo))
@@ -40,7 +40,7 @@
 ))
 
 ;;; Bar()
-(func $<init><>:void@boundedtypesupercall.Main.Bar
+(func $m_<init>__void@boundedtypesupercall.Main.Bar
  (param $this (ref null $boundedtypesupercall.Main.Bar))
  (result (ref null $boundedtypesupercall.Main.Bar))
  (block $return.label
@@ -53,7 +53,7 @@
 )
 
 ;;; T Bar.getSomething()
-(func $getSomething<>:java.lang.Comparable@boundedtypesupercall.Main.Bar
+(func $m_getSomething__java_lang_Comparable@boundedtypesupercall.Main.Bar
  (param $this (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
@@ -68,14 +68,14 @@
 )
 
 ;;; Foo<T> Bar.doSomething()
-(func $doSomething<>:boundedtypesupercall.Main.Foo@boundedtypesupercall.Main.Bar
+(func $m_doSomething__boundedtypesupercall_Main_Foo@boundedtypesupercall.Main.Bar
  (param $this (ref null $java.lang.Object))
  (result (ref null $boundedtypesupercall.Main.Foo))
  (local $return.value (ref null $boundedtypesupercall.Main.Foo))
  (block $return.label
   (block
    ;; return Bar.this.new $1.<init>(Bar.this.getSomething());
-   (local.set $return.value (call $<init><java.lang.Comparable>:void@boundedtypesupercall.Main.Bar.1 (struct.new_with_rtt $boundedtypesupercall.Main.Bar.1 (ref.null $boundedtypesupercall.Main.Bar) (global.get $boundedtypesupercall.Main.Bar.1.rtt))(ref.null $java.lang.Object)))
+   (local.set $return.value (call $m_<init>__java_lang_Comparable__void_$pp_boundedtypesupercall@boundedtypesupercall.Main.Bar.1 (struct.new_with_rtt $boundedtypesupercall.Main.Bar.1 (ref.null $boundedtypesupercall.Main.Bar) (global.get $boundedtypesupercall.Main.Bar.1.rtt))(ref.null $java.lang.Object)))
    (br $return.label)
   )
  )
@@ -88,7 +88,7 @@
 ))
 
 ;;; <anonymous> extends Foo<T>(T $_0)
-(func $<init><java.lang.Comparable>:void@boundedtypesupercall.Main.Bar.1
+(func $m_<init>__java_lang_Comparable__void_$pp_boundedtypesupercall@boundedtypesupercall.Main.Bar.1
  (param $this (ref null $boundedtypesupercall.Main.Bar.1))
  (param $$_0 (ref null $java.lang.Object))
  (result (ref null $boundedtypesupercall.Main.Bar.1))
@@ -102,7 +102,7 @@
 )
 
 ;;; void <anonymous> extends Foo<T>.foo()
-(func $foo<>:void@boundedtypesupercall.Main.Bar.1
+(func $m_foo__void@boundedtypesupercall.Main.Bar.1
  (param $this (ref null $java.lang.Object))
  (block $return.label
   (block

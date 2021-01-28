@@ -5,7 +5,7 @@
 ))
 
 ;;; Superclass()
-(func $<init><>:void@simplebridgemethods.Superclass
+(func $m_<init>__void_$pp_simplebridgemethods@simplebridgemethods.Superclass
  (param $this (ref null $simplebridgemethods.Superclass))
  (result (ref null $simplebridgemethods.Superclass))
  (block $return.label
@@ -18,7 +18,7 @@
 )
 
 ;;; void Superclass.m1(T t)
-(func $m1<java.lang.Error>:void@simplebridgemethods.Superclass
+(func $m_m1__java_lang_Error__void@simplebridgemethods.Superclass
  (param $this (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Error))
  (block $return.label
@@ -32,7 +32,7 @@
 ))
 
 ;;; Subclass()
-(func $<init><>:void@simplebridgemethods.Subclass
+(func $m_<init>__void_$pp_simplebridgemethods@simplebridgemethods.Subclass
  (param $this (ref null $simplebridgemethods.Subclass))
  (result (ref null $simplebridgemethods.Subclass))
  (block $return.label
@@ -45,11 +45,23 @@
 )
 
 ;;; void Subclass.m1(AssertionError a)
-(func $m1<java.lang.AssertionError>:void@simplebridgemethods.Subclass
+(func $m_m1__java_lang_AssertionError__void@simplebridgemethods.Subclass
  (param $this (ref null $java.lang.Object))
  (param $a (ref null $java.lang.AssertionError))
  (block $return.label
   (block
+  )
+ )
+)
+
+;;; void Subclass.m1(Error arg0)
+(func $m_m1__java_lang_Error__void@simplebridgemethods.Subclass
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Error))
+ (block $return.label
+  (block
+   ;; Subclass.this.m1(((AssertionError) arg0));
+   
   )
  )
 )
@@ -59,7 +71,7 @@
 ))
 
 ;;; AnotherSubclass()
-(func $<init><>:void@simplebridgemethods.AnotherSubclass
+(func $m_<init>__void_$pp_simplebridgemethods@simplebridgemethods.AnotherSubclass
  (param $this (ref null $simplebridgemethods.AnotherSubclass))
  (result (ref null $simplebridgemethods.AnotherSubclass))
  (block $return.label
@@ -78,7 +90,7 @@
 ))
 
 ;;; Task()
-(func $<init><>:void@simplebridgemethods.Task
+(func $m_<init>__void_$pp_simplebridgemethods@simplebridgemethods.Task
  (param $this (ref null $simplebridgemethods.Task))
  (result (ref null $simplebridgemethods.Task))
  (block $return.label
@@ -91,7 +103,7 @@
 )
 
 ;;; void Task.call(T t)
-(func $call<java.lang.Object>:void@simplebridgemethods.Task
+(func $m_call__java_lang_Object__void@simplebridgemethods.Task
  (param $this (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Object))
  (block $return.label
@@ -105,7 +117,7 @@
 ))
 
 ;;; AnotherTask()
-(func $<init><>:void@simplebridgemethods.AnotherTask
+(func $m_<init>__void_$pp_simplebridgemethods@simplebridgemethods.AnotherTask
  (param $this (ref null $simplebridgemethods.AnotherTask))
  (result (ref null $simplebridgemethods.AnotherTask))
  (block $return.label
@@ -118,11 +130,23 @@
 )
 
 ;;; void AnotherTask.call(Superclass<T> t)
-(func $call<simplebridgemethods.Superclass>:void@simplebridgemethods.AnotherTask
+(func $m_call__simplebridgemethods_Superclass__void@simplebridgemethods.AnotherTask
  (param $this (ref null $java.lang.Object))
  (param $t (ref null $simplebridgemethods.Superclass))
  (block $return.label
   (block
+  )
+ )
+)
+
+;;; void AnotherTask.call(Object arg0)
+(func $m_call__java_lang_Object__void@simplebridgemethods.AnotherTask
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; AnotherTask.this.call(((Superclass<T>) arg0));
+   
   )
  )
 )
@@ -132,7 +156,7 @@
 ))
 
 ;;; SimpleBridgeMethods()
-(func $<init><>:void@simplebridgemethods.SimpleBridgeMethods
+(func $m_<init>__void@simplebridgemethods.SimpleBridgeMethods
  (param $this (ref null $simplebridgemethods.SimpleBridgeMethods))
  (result (ref null $simplebridgemethods.SimpleBridgeMethods))
  (block $return.label

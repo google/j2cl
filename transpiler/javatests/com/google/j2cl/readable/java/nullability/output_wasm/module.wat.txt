@@ -16,7 +16,7 @@
 ))
 
 ;;; Nullability(String a)
-(func $<init><java.lang.String>:void@nullability.Nullability
+(func $m_<init>__java_lang_String__void@nullability.Nullability
  (param $this (ref null $nullability.Nullability))
  (param $a (ref null $java.lang.String))
  (result (ref null $nullability.Nullability))
@@ -30,7 +30,7 @@
 )
 
 ;;; String Nullability.m1(String a, List<Double> b, String c)
-(func $m1<java.lang.String|java.util.List|java.lang.String>:java.lang.String@nullability.Nullability
+(func $m_m1__java_lang_String__java_util_List__java_lang_String__java_lang_String@nullability.Nullability
  (param $this (ref null $java.lang.Object))
  (param $a (ref null $java.lang.String))
  (param $b (ref null $java.lang.Object))
@@ -48,7 +48,7 @@
 )
 
 ;;; String Nullability.m2(String a, List<Double> b)
-(func $m2<java.lang.String|java.util.List>:java.lang.String@nullability.Nullability
+(func $m_m2__java_lang_String__java_util_List__java_lang_String@nullability.Nullability
  (param $this (ref null $java.lang.Object))
  (param $a (ref null $java.lang.String))
  (param $b (ref null $java.lang.Object))
@@ -65,7 +65,7 @@
 )
 
 ;;; String Nullability.m3(String a, String... args)
-(func $m3<java.lang.String|java.lang.String<>>:java.lang.String@nullability.Nullability
+(func $m_m3__java_lang_String__arrayOf_java_lang_String__java_lang_String@nullability.Nullability
  (param $this (ref null $java.lang.Object))
  (param $a (ref null $java.lang.String))
  (param $args (ref null $java.lang.Object))
@@ -82,7 +82,7 @@
 )
 
 ;;; void Nullability.m4(MyFunction f)
-(func $m4<nullability.Nullability.MyFunction>:void@nullability.Nullability
+(func $m_m4__nullability_Nullability_MyFunction__void@nullability.Nullability
  (param $this (ref null $java.lang.Object))
  (param $f (ref null $java.lang.Object))
  (block $return.label
@@ -96,7 +96,7 @@
 ))
 
 ;;; Foo()
-(func $<init><>:void@nullability.Nullability.Foo
+(func $m_<init>__void_$pp_nullability@nullability.Nullability.Foo
  (param $this (ref null $nullability.Nullability.Foo))
  (result (ref null $nullability.Nullability.Foo))
  (block $return.label
@@ -109,7 +109,7 @@
 )
 
 ;;; void Foo.bar(T t)
-(func $bar<java.lang.Object>:void@nullability.Nullability.Foo
+(func $m_bar__java_lang_Object__void_$pp_nullability@nullability.Nullability.Foo
  (param $this (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Object))
  (block $return.label
@@ -119,7 +119,7 @@
 )
 
 ;;; T Foo.baz()
-(func $baz<>:java.lang.Object@nullability.Nullability.Foo
+(func $m_baz__java_lang_Object_$pp_nullability@nullability.Nullability.Foo
  (param $this (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
@@ -134,7 +134,7 @@
 )
 
 ;;; String Foo.toString()
-(func $toString<>:java.lang.String@nullability.Nullability.Foo
+(func $m_toString__java_lang_String@nullability.Nullability.Foo
  (param $this (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))
@@ -158,7 +158,7 @@
 ))
 
 ;;; StringList()
-(func $<init><>:void@nullability.Nullability.StringList
+(func $m_<init>__void@nullability.Nullability.StringList
  (param $this (ref null $nullability.Nullability.StringList))
  (result (ref null $nullability.Nullability.StringList))
  (block $return.label
@@ -175,7 +175,7 @@
 ))
 
 ;;; StringComparator()
-(func $<init><>:void@nullability.Nullability.StringComparator
+(func $m_<init>__void@nullability.Nullability.StringComparator
  (param $this (ref null $nullability.Nullability.StringComparator))
  (result (ref null $nullability.Nullability.StringComparator))
  (block $return.label
@@ -188,7 +188,7 @@
 )
 
 ;;; int StringComparator.compare(String a, String b)
-(func $compare<java.lang.String|java.lang.String>:int@nullability.Nullability.StringComparator
+(func $m_compare__java_lang_String__java_lang_String__int@nullability.Nullability.StringComparator
  (param $this (ref null $java.lang.Object))
  (param $a (ref null $java.lang.String))
  (param $b (ref null $java.lang.String))
@@ -204,12 +204,141 @@
  (local.get $return.value)
 )
 
+;;; int StringComparator.compare(Object arg0, Object arg1)
+(func $m_compare__java_lang_Object__java_lang_Object__int@nullability.Nullability.StringComparator
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (param $arg1 (ref null $java.lang.Object))
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return StringComparator.this.compare(((String) arg0),((String) arg1));
+   (local.set $return.value (i32.const 0))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; Comparator<String> StringComparator.reversed()
+(func $m_reversed__java_util_Comparator@nullability.Nullability.StringComparator
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; return Comparator.this.reversed();
+   (local.set $return.value (ref.null $java.lang.Object))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; Comparator<String> StringComparator.thenComparing(Comparator<? super String> arg0)
+(func $m_thenComparing__java_util_Comparator__java_util_Comparator@nullability.Nullability.StringComparator
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; return Comparator.this.thenComparing(arg0);
+   (local.set $return.value (ref.null $java.lang.Object))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; Comparator<String> StringComparator.thenComparing(Function<? super String, ? extends U> arg0, Comparator<? super U> arg1)
+(func $m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator@nullability.Nullability.StringComparator
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (param $arg1 (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; return Comparator.this.thenComparing(arg0,arg1);
+   (local.set $return.value (ref.null $java.lang.Object))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; Comparator<String> StringComparator.thenComparing(Function<? super String, ? extends U> arg0)
+(func $m_thenComparing__java_util_function_Function__java_util_Comparator@nullability.Nullability.StringComparator
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; return Comparator.this.thenComparing(arg0);
+   (local.set $return.value (ref.null $java.lang.Object))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; Comparator<String> StringComparator.thenComparingDouble(ToDoubleFunction<? super String> arg0)
+(func $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator@nullability.Nullability.StringComparator
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; return Comparator.this.thenComparingDouble(arg0);
+   (local.set $return.value (ref.null $java.lang.Object))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; Comparator<String> StringComparator.thenComparingInt(ToIntFunction<? super String> arg0)
+(func $m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator@nullability.Nullability.StringComparator
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; return Comparator.this.thenComparingInt(arg0);
+   (local.set $return.value (ref.null $java.lang.Object))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; Comparator<String> StringComparator.thenComparingLong(ToLongFunction<? super String> arg0)
+(func $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator@nullability.Nullability.StringComparator
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; return Comparator.this.thenComparingLong(arg0);
+   (local.set $return.value (ref.null $java.lang.Object))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
 ;;; CLASS  NullableStringComparator
 (type $nullability.Nullability.NullableStringComparator (struct
 ))
 
 ;;; NullableStringComparator()
-(func $<init><>:void@nullability.Nullability.NullableStringComparator
+(func $m_<init>__void@nullability.Nullability.NullableStringComparator
  (param $this (ref null $nullability.Nullability.NullableStringComparator))
  (result (ref null $nullability.Nullability.NullableStringComparator))
  (block $return.label
@@ -222,7 +351,7 @@
 )
 
 ;;; int NullableStringComparator.compare(String a, String b)
-(func $compare<java.lang.String|java.lang.String>:int@nullability.Nullability.NullableStringComparator
+(func $m_compare__java_lang_String__java_lang_String__int@nullability.Nullability.NullableStringComparator
  (param $this (ref null $java.lang.Object))
  (param $a (ref null $java.lang.String))
  (param $b (ref null $java.lang.String))
@@ -232,6 +361,135 @@
   (block
    ;; return 0;
    (local.set $return.value (i32.const 0))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; int NullableStringComparator.compare(Object arg0, Object arg1)
+(func $m_compare__java_lang_Object__java_lang_Object__int@nullability.Nullability.NullableStringComparator
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (param $arg1 (ref null $java.lang.Object))
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return NullableStringComparator.this.compare(((String) arg0),((String) arg1));
+   (local.set $return.value (i32.const 0))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; Comparator<String> NullableStringComparator.reversed()
+(func $m_reversed__java_util_Comparator@nullability.Nullability.NullableStringComparator
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; return Comparator.this.reversed();
+   (local.set $return.value (ref.null $java.lang.Object))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; Comparator<String> NullableStringComparator.thenComparing(Comparator<? super String> arg0)
+(func $m_thenComparing__java_util_Comparator__java_util_Comparator@nullability.Nullability.NullableStringComparator
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; return Comparator.this.thenComparing(arg0);
+   (local.set $return.value (ref.null $java.lang.Object))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; Comparator<String> NullableStringComparator.thenComparing(Function<? super String, ? extends U> arg0, Comparator<? super U> arg1)
+(func $m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator@nullability.Nullability.NullableStringComparator
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (param $arg1 (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; return Comparator.this.thenComparing(arg0,arg1);
+   (local.set $return.value (ref.null $java.lang.Object))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; Comparator<String> NullableStringComparator.thenComparing(Function<? super String, ? extends U> arg0)
+(func $m_thenComparing__java_util_function_Function__java_util_Comparator@nullability.Nullability.NullableStringComparator
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; return Comparator.this.thenComparing(arg0);
+   (local.set $return.value (ref.null $java.lang.Object))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; Comparator<String> NullableStringComparator.thenComparingDouble(ToDoubleFunction<? super String> arg0)
+(func $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator@nullability.Nullability.NullableStringComparator
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; return Comparator.this.thenComparingDouble(arg0);
+   (local.set $return.value (ref.null $java.lang.Object))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; Comparator<String> NullableStringComparator.thenComparingInt(ToIntFunction<? super String> arg0)
+(func $m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator@nullability.Nullability.NullableStringComparator
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; return Comparator.this.thenComparingInt(arg0);
+   (local.set $return.value (ref.null $java.lang.Object))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; Comparator<String> NullableStringComparator.thenComparingLong(ToLongFunction<? super String> arg0)
+(func $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator@nullability.Nullability.NullableStringComparator
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; return Comparator.this.thenComparingLong(arg0);
+   (local.set $return.value (ref.null $java.lang.Object))
    (br $return.label)
   )
  )
@@ -245,7 +503,7 @@
 ))
 
 ;;; NullableTemplatedReturnOverride()
-(func $<init><>:void@nullability.Nullability.NullableTemplatedReturnOverride
+(func $m_<init>__void@nullability.Nullability.NullableTemplatedReturnOverride
  (param $this (ref null $nullability.Nullability.NullableTemplatedReturnOverride))
  (result (ref null $nullability.Nullability.NullableTemplatedReturnOverride))
  (block $return.label
@@ -258,13 +516,28 @@
 )
 
 ;;; String NullableTemplatedReturnOverride.foo()
-(func $foo<>:java.lang.String@nullability.Nullability.NullableTemplatedReturnOverride
+(func $m_foo__java_lang_String@nullability.Nullability.NullableTemplatedReturnOverride
  (param $this (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))
  (block $return.label
   (block
    ;; return "foo";
+   (local.set $return.value (ref.null $java.lang.String))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; String NullableTemplatedReturnOverride.foo()
+(func $m_foo__java_lang_Object@nullability.Nullability.NullableTemplatedReturnOverride
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.String))
+ (local $return.value (ref null $java.lang.String))
+ (block $return.label
+  (block
+   ;; return NullableTemplatedReturnOverride.this.foo();
    (local.set $return.value (ref.null $java.lang.String))
    (br $return.label)
   )
@@ -278,7 +551,7 @@
 ))
 
 ;;; ClassInSubpackage()
-(func $<init><>:void@nullability.subpackage.ClassInSubpackage
+(func $m_<init>__void@nullability.subpackage.ClassInSubpackage
  (param $this (ref null $nullability.subpackage.ClassInSubpackage))
  (result (ref null $nullability.subpackage.ClassInSubpackage))
  (block $return.label
@@ -291,7 +564,7 @@
 )
 
 ;;; String ClassInSubpackage.getString()
-(func $getString<>:java.lang.String@nullability.subpackage.ClassInSubpackage
+(func $m_getString__java_lang_String@nullability.subpackage.ClassInSubpackage
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))
  (block $return.label
@@ -305,7 +578,7 @@
 )
 
 ;;; String ClassInSubpackage.getNonNullString()
-(func $getNonNullString<>:java.lang.String@nullability.subpackage.ClassInSubpackage
+(func $m_getNonNullString__java_lang_String@nullability.subpackage.ClassInSubpackage
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))
  (block $return.label

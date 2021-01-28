@@ -5,7 +5,7 @@
 ))
 
 ;;; Main()
-(func $<init><>:void@interfaces.Main
+(func $m_<init>__void@interfaces.Main
  (param $this (ref null $interfaces.Main))
  (result (ref null $interfaces.Main))
  (block $return.label
@@ -18,7 +18,7 @@
 )
 
 ;;; void Main.testInterfaceMembers()
-(func $testInterfaceMembers<>:void@interfaces.Main
+(func $m_testInterfaceMembers__void_$pp_interfaces@interfaces.Main
  (param $this (ref null $java.lang.Object))
  (local $i (ref null $java.lang.Object))
  (local $x i32)
@@ -26,13 +26,13 @@
   (block
    ;; Interface i = Main.this.new Implementor.<init>();
    
-   (local.set $i (call $<init><>:void@interfaces.Main.Implementor (struct.new_with_rtt $interfaces.Main.Implementor (ref.null $interfaces.Main) (global.get $interfaces.Main.Implementor.rtt))))
+   (local.set $i (call $m_<init>__void_$pp_interfaces@interfaces.Main.Implementor (struct.new_with_rtt $interfaces.Main.Implementor (ref.null $interfaces.Main) (global.get $interfaces.Main.Implementor.rtt))))
    ;; i.interfaceMethod();
    
    ;; i.defaultMethod(null);
    
    ;; interfaces.Main.Interface.staticInterfaceMethod();
-   (call $staticInterfaceMethod<>:void@interfaces.Main.Interface )
+   (call $m_staticInterfaceMethod__void@interfaces.Main.Interface )
    ;; int x = (Main.this.new Implementor.<init>().a + interfaces.Main.Interface.b);
    
    (local.set $x (i32.add (global.get $a@interfaces.Main.Interface) (global.get $b@interfaces.Main.Interface)))
@@ -45,7 +45,7 @@
 (global $b@interfaces.Main.Interface (mut i32) (i32.const 0))
 
 ;;; void Interface.defaultMethod(T t)
-(func $defaultMethod<java.lang.Object>:void@interfaces.Main.Interface
+(func $m_defaultMethod__java_lang_Object__void@interfaces.Main.Interface
  (param $this (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Object))
  (block $return.label
@@ -57,7 +57,7 @@
 )
 
 ;;; void Interface.privateMethod(T t)
-(func $privateMethod<java.lang.Object>:void@interfaces.Main.Interface
+(func $m_privateMethod__java_lang_Object__void_$p_interfaces_Main_Interface@interfaces.Main.Interface
  (param $this (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Object))
  (block $return.label
@@ -67,7 +67,7 @@
 )
 
 ;;; void Interface.staticInterfaceMethod()
-(func $staticInterfaceMethod<>:void@interfaces.Main.Interface
+(func $m_staticInterfaceMethod__void@interfaces.Main.Interface
  (block $return.label
   (block
   )
@@ -77,7 +77,7 @@
 ;;; INTERFACE  SubInterface
 
 ;;; void SubInterface.defaultMethod(String s)
-(func $defaultMethod<java.lang.String>:void@interfaces.Main.SubInterface
+(func $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface
  (param $this (ref null $java.lang.Object))
  (param $s (ref null $java.lang.String))
  (block $return.label
@@ -94,7 +94,7 @@
 ))
 
 ;;; Implementor()
-(func $<init><>:void@interfaces.Main.Implementor
+(func $m_<init>__void_$pp_interfaces@interfaces.Main.Implementor
  (param $this (ref null $interfaces.Main.Implementor))
  (result (ref null $interfaces.Main.Implementor))
  (block $return.label
@@ -107,10 +107,34 @@
 )
 
 ;;; void Implementor.interfaceMethod()
-(func $interfaceMethod<>:void@interfaces.Main.Implementor
+(func $m_interfaceMethod__void@interfaces.Main.Implementor
  (param $this (ref null $java.lang.Object))
  (block $return.label
   (block
+  )
+ )
+)
+
+;;; void Implementor.defaultMethod(Object arg0)
+(func $m_defaultMethod__java_lang_Object__void@interfaces.Main.Implementor
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; Implementor.this.defaultMethod(((String) arg0));
+   
+  )
+ )
+)
+
+;;; void Implementor.defaultMethod(String arg0)
+(func $m_defaultMethod__java_lang_String__void@interfaces.Main.Implementor
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.String))
+ (block $return.label
+  (block
+   ;; SubInterface.this.defaultMethod(arg0);
+   
   )
  )
 )
@@ -121,7 +145,7 @@
 ))
 
 ;;; AbstractImplementor()
-(func $<init><>:void@interfaces.Main.AbstractImplementor
+(func $m_<init>__void_$pp_interfaces@interfaces.Main.AbstractImplementor
  (param $this (ref null $interfaces.Main.AbstractImplementor))
  (result (ref null $interfaces.Main.AbstractImplementor))
  (block $return.label
@@ -131,5 +155,29 @@
   )
  )
  (local.get $this)
+)
+
+;;; void AbstractImplementor.defaultMethod(Object arg0)
+(func $m_defaultMethod__java_lang_Object__void@interfaces.Main.AbstractImplementor
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; AbstractImplementor.this.defaultMethod(((String) arg0));
+   
+  )
+ )
+)
+
+;;; void AbstractImplementor.defaultMethod(String arg0)
+(func $m_defaultMethod__java_lang_String__void@interfaces.Main.AbstractImplementor
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.String))
+ (block $return.label
+  (block
+   ;; SubInterface.this.defaultMethod(arg0);
+   
+  )
+ )
 )
 

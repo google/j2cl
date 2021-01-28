@@ -5,7 +5,7 @@
 ))
 
 ;;; TryCatch()
-(func $<init><>:void@trycatch.TryCatch
+(func $m_<init>__void@trycatch.TryCatch
  (param $this (ref null $trycatch.TryCatch))
  (result (ref null $trycatch.TryCatch))
  (block $return.label
@@ -18,7 +18,7 @@
 )
 
 ;;; void TryCatch.testMultiCatch()
-(func $testMultiCatch<>:void@trycatch.TryCatch
+(func $m_testMultiCatch__void@trycatch.TryCatch
  (param $this (ref null $java.lang.Object))
  (local $e (ref null $java.lang.RuntimeException))
  (local $r (ref null $java.lang.RuntimeException))
@@ -31,7 +31,7 @@
 )
 
 ;;; void TryCatch.testEmptyThrowableCatch()
-(func $testEmptyThrowableCatch<>:void@trycatch.TryCatch
+(func $m_testEmptyThrowableCatch__void@trycatch.TryCatch
  (param $this (ref null $java.lang.Object))
  (local $e (ref null $java.lang.Throwable))
  (local $e_1 (ref null $java.lang.Exception))
@@ -47,7 +47,7 @@
 )
 
 ;;; void TryCatch.testEmptyThrowableRethrow()
-(func $testEmptyThrowableRethrow<>:void@trycatch.TryCatch
+(func $m_testEmptyThrowableRethrow__void@trycatch.TryCatch
  (param $this (ref null $java.lang.Object))
  (local $e (ref null $java.lang.Throwable))
  (block $return.label
@@ -59,7 +59,7 @@
 )
 
 ;;; void TryCatch.testFinally()
-(func $testFinally<>:void@trycatch.TryCatch
+(func $m_testFinally__void@trycatch.TryCatch
  (param $this (ref null $java.lang.Object))
  (block $return.label
   (block
@@ -70,7 +70,7 @@
 )
 
 ;;; void TryCatch.testTryWithResource()
-(func $testTryWithResource<>:void@trycatch.TryCatch
+(func $m_testTryWithResource__void@trycatch.TryCatch
  (param $this (ref null $java.lang.Object))
  (local $thing (ref null $trycatch.TryCatch.ClosableThing))
  (local $thing2 (ref null $trycatch.TryCatch.ClosableThing))
@@ -84,7 +84,7 @@
 )
 
 ;;; void TryCatch.testTryWithResourceJava9()
-(func $testTryWithResourceJava9<>:void@trycatch.TryCatch
+(func $m_testTryWithResourceJava9__void@trycatch.TryCatch
  (param $this (ref null $java.lang.Object))
  (local $thing (ref null $trycatch.TryCatch.ClosableThing))
  (local $thing2 (ref null $trycatch.TryCatch.ClosableThing))
@@ -95,10 +95,10 @@
   (block
    ;; ClosableThing thing = new ClosableThing.<init>();
    
-   (local.set $thing (call $<init><>:void@trycatch.TryCatch.ClosableThing (struct.new_with_rtt $trycatch.TryCatch.ClosableThing (global.get $trycatch.TryCatch.ClosableThing.rtt))))
+   (local.set $thing (call $m_<init>__void_$pp_trycatch@trycatch.TryCatch.ClosableThing (struct.new_with_rtt $trycatch.TryCatch.ClosableThing (global.get $trycatch.TryCatch.ClosableThing.rtt))))
    ;; ClosableThing thing2 = new ClosableThing.<init>();
    
-   (local.set $thing2 (call $<init><>:void@trycatch.TryCatch.ClosableThing (struct.new_with_rtt $trycatch.TryCatch.ClosableThing (global.get $trycatch.TryCatch.ClosableThing.rtt))))
+   (local.set $thing2 (call $m_<init>__void_$pp_trycatch@trycatch.TryCatch.ClosableThing (struct.new_with_rtt $trycatch.TryCatch.ClosableThing (global.get $trycatch.TryCatch.ClosableThing.rtt))))
    ;; try (
    ;; unimplemented statement TryStatement
   )
@@ -106,7 +106,7 @@
 )
 
 ;;; void TryCatch.testNestedTryCatch()
-(func $testNestedTryCatch<>:void@trycatch.TryCatch
+(func $m_testNestedTryCatch__void@trycatch.TryCatch
  (param $this (ref null $java.lang.Object))
  (local $ae (ref null $java.lang.Exception))
  (local $ie (ref null $java.lang.Exception))
@@ -119,7 +119,7 @@
 )
 
 ;;; void TryCatch.testThrowGenerics()
-(func $testThrowGenerics<>:void@trycatch.TryCatch
+(func $m_testThrowGenerics__void@trycatch.TryCatch
  (param $this (ref null $java.lang.Object))
  (block $return.label
   (block
@@ -130,7 +130,7 @@
 )
 
 ;;; T TryCatch.getT(T t)
-(func $getT<java.lang.Object>:java.lang.Object@trycatch.TryCatch
+(func $m_getT__java_lang_Object__java_lang_Object_$p_trycatch_TryCatch@trycatch.TryCatch
  (param $this (ref null $trycatch.TryCatch))
  (param $t (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -146,7 +146,7 @@
 )
 
 ;;; void TryCatch.testThrowBoundGenerics()
-(func $testThrowBoundGenerics<>:void@trycatch.TryCatch
+(func $m_testThrowBoundGenerics__void@trycatch.TryCatch
  (param $this (ref null $java.lang.Object))
  (block $return.label
   (block
@@ -157,7 +157,7 @@
 )
 
 ;;; T TryCatch.getThrowable()
-(func $getThrowable<>:java.lang.Throwable@trycatch.TryCatch
+(func $m_getThrowable__java_lang_Throwable_$p_trycatch_TryCatch@trycatch.TryCatch
  (param $this (ref null $trycatch.TryCatch))
  (result (ref null $java.lang.Throwable))
  (local $return.value (ref null $java.lang.Throwable))
@@ -176,7 +176,7 @@
 ))
 
 ;;; ClosableThing()
-(func $<init><>:void@trycatch.TryCatch.ClosableThing
+(func $m_<init>__void_$pp_trycatch@trycatch.TryCatch.ClosableThing
  (param $this (ref null $trycatch.TryCatch.ClosableThing))
  (result (ref null $trycatch.TryCatch.ClosableThing))
  (block $return.label
@@ -189,7 +189,7 @@
 )
 
 ;;; void ClosableThing.close()
-(func $close<>:void@trycatch.TryCatch.ClosableThing
+(func $m_close__void@trycatch.TryCatch.ClosableThing
  (param $this (ref null $java.lang.Object))
  (block $return.label
   (block

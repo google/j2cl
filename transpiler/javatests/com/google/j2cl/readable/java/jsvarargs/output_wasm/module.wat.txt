@@ -6,7 +6,7 @@
 ))
 
 ;;; Main(int f)
-(func $<init><int>:void@jsvarargs.Main
+(func $m_<init>__int__void@jsvarargs.Main
  (param $this (ref null $jsvarargs.Main))
  (param $f i32)
  (result (ref null $jsvarargs.Main))
@@ -22,7 +22,7 @@
 )
 
 ;;; int Main.f1(int multiplier, int... numbers)
-(func $f1<int|int<>>:int@jsvarargs.Main
+(func $m_f1__int__arrayOf_int__int@jsvarargs.Main
  (param $multiplier i32)
  (param $numbers (ref null $java.lang.Object))
  (result i32)
@@ -38,7 +38,7 @@
 )
 
 ;;; int Main.f2(int... numbers)
-(func $f2<int<>>:int@jsvarargs.Main
+(func $m_f2__arrayOf_int__int@jsvarargs.Main
  (param $numbers (ref null $java.lang.Object))
  (result i32)
  (local $return.value i32)
@@ -53,7 +53,7 @@
 )
 
 ;;; int Main.f3(int m, int... numbers)
-(func $f3<int|int<>>:int@jsvarargs.Main
+(func $m_f3__int__arrayOf_int__int@jsvarargs.Main
  (param $this (ref null $java.lang.Object))
  (param $m i32)
  (param $numbers (ref null $java.lang.Object))
@@ -70,7 +70,7 @@
 )
 
 ;;; int Main.f4(int... numbers)
-(func $f4<int<>>:int@jsvarargs.Main
+(func $m_f4__arrayOf_int__int@jsvarargs.Main
  (param $this (ref null $java.lang.Object))
  (param $numbers (ref null $java.lang.Object))
  (result i32)
@@ -86,7 +86,7 @@
 )
 
 ;;; T Main.generics(T... elements)
-(func $generics<java.lang.Object<>>:java.lang.Object@jsvarargs.Main
+(func $m_generics__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main
  (param $elements (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
@@ -101,7 +101,7 @@
 )
 
 ;;; Main Main.parameterizedType(List<Main>... elements)
-(func $parameterizedType<java.util.List<>>:jsvarargs.Main@jsvarargs.Main
+(func $m_parameterizedType__arrayOf_java_util_List__jsvarargs_Main@jsvarargs.Main
  (param $elements (ref null $java.lang.Object))
  (result (ref null $jsvarargs.Main))
  (local $return.value (ref null $jsvarargs.Main))
@@ -116,7 +116,7 @@
 )
 
 ;;; T Main.parameterizedByT(List<T>... elements)
-(func $parameterizedByT<java.util.List<>>:java.lang.Object@jsvarargs.Main
+(func $m_parameterizedByT__arrayOf_java_util_List__java_lang_Object@jsvarargs.Main
  (param $elements (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
@@ -131,105 +131,105 @@
 )
 
 ;;; void Main.testStaticMethodNotFirst()
-(func $testStaticMethodNotFirst<>:void@jsvarargs.Main
+(func $m_testStaticMethodNotFirst__void@jsvarargs.Main
  (param $this (ref null $java.lang.Object))
  (local $ints (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; jsvarargs.Main.f1(1,[1,2]);
-   (call $f1<int|int<>>:int@jsvarargs.Main (i32.const 1)(ref.null $java.lang.Object))
+   (call $m_f1__int__arrayOf_int__int@jsvarargs.Main (i32.const 1)(ref.null $java.lang.Object))
    drop
    ;; jsvarargs.Main.f1(1,[1,2]);
-   (call $f1<int|int<>>:int@jsvarargs.Main (i32.const 1)(ref.null $java.lang.Object))
+   (call $m_f1__int__arrayOf_int__int@jsvarargs.Main (i32.const 1)(ref.null $java.lang.Object))
    drop
    ;; jsvarargs.Main.f1(1,[]);
-   (call $f1<int|int<>>:int@jsvarargs.Main (i32.const 1)(ref.null $java.lang.Object))
+   (call $m_f1__int__arrayOf_int__int@jsvarargs.Main (i32.const 1)(ref.null $java.lang.Object))
    drop
    ;; jsvarargs.Main.f1(1,[]);
-   (call $f1<int|int<>>:int@jsvarargs.Main (i32.const 1)(ref.null $java.lang.Object))
+   (call $m_f1__int__arrayOf_int__int@jsvarargs.Main (i32.const 1)(ref.null $java.lang.Object))
    drop
    ;; jsvarargs.Main.f1(1,new int[] {1,2});
-   (call $f1<int|int<>>:int@jsvarargs.Main (i32.const 1)(ref.null $java.lang.Object))
+   (call $m_f1__int__arrayOf_int__int@jsvarargs.Main (i32.const 1)(ref.null $java.lang.Object))
    drop
    ;; jsvarargs.Main.f1(1,new int[] {1,2});
-   (call $f1<int|int<>>:int@jsvarargs.Main (i32.const 1)(ref.null $java.lang.Object))
+   (call $m_f1__int__arrayOf_int__int@jsvarargs.Main (i32.const 1)(ref.null $java.lang.Object))
    drop
    ;; jsvarargs.Main.f1(1,new int[] {});
-   (call $f1<int|int<>>:int@jsvarargs.Main (i32.const 1)(ref.null $java.lang.Object))
+   (call $m_f1__int__arrayOf_int__int@jsvarargs.Main (i32.const 1)(ref.null $java.lang.Object))
    drop
    ;; jsvarargs.Main.f1(1,new int[] {});
-   (call $f1<int|int<>>:int@jsvarargs.Main (i32.const 1)(ref.null $java.lang.Object))
+   (call $m_f1__int__arrayOf_int__int@jsvarargs.Main (i32.const 1)(ref.null $java.lang.Object))
    drop
    ;; int[] ints = new int[] {1,2};
    
    (local.set $ints (ref.null $java.lang.Object))
    ;; jsvarargs.Main.f1(1,ints);
-   (call $f1<int|int<>>:int@jsvarargs.Main (i32.const 1)(local.get $ints))
+   (call $m_f1__int__arrayOf_int__int@jsvarargs.Main (i32.const 1)(local.get $ints))
    drop
    ;; jsvarargs.Main.f1(1,ints);
-   (call $f1<int|int<>>:int@jsvarargs.Main (i32.const 1)(local.get $ints))
+   (call $m_f1__int__arrayOf_int__int@jsvarargs.Main (i32.const 1)(local.get $ints))
    drop
    ;; jsvarargs.Main.f1(1,null);
-   (call $f1<int|int<>>:int@jsvarargs.Main (i32.const 1)(ref.null $java.lang.Object))
+   (call $m_f1__int__arrayOf_int__int@jsvarargs.Main (i32.const 1)(ref.null $java.lang.Object))
    drop
   )
  )
 )
 
 ;;; void Main.testStaticMethodFirst()
-(func $testStaticMethodFirst<>:void@jsvarargs.Main
+(func $m_testStaticMethodFirst__void@jsvarargs.Main
  (param $this (ref null $java.lang.Object))
  (local $ints (ref null $java.lang.Object))
  (local $integers (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; jsvarargs.Main.f2([1,2]);
-   (call $f2<int<>>:int@jsvarargs.Main (ref.null $java.lang.Object))
+   (call $m_f2__arrayOf_int__int@jsvarargs.Main (ref.null $java.lang.Object))
    drop
    ;; jsvarargs.Main.generics([1,2]);
-   (call $generics<java.lang.Object<>>:java.lang.Object@jsvarargs.Main (ref.null $java.lang.Object))
+   (call $m_generics__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main (ref.null $java.lang.Object))
    drop
    ;; jsvarargs.Main.f2([1,2]);
-   (call $f2<int<>>:int@jsvarargs.Main (ref.null $java.lang.Object))
+   (call $m_f2__arrayOf_int__int@jsvarargs.Main (ref.null $java.lang.Object))
    drop
    ;; jsvarargs.Main.generics([1,2]);
-   (call $generics<java.lang.Object<>>:java.lang.Object@jsvarargs.Main (ref.null $java.lang.Object))
+   (call $m_generics__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main (ref.null $java.lang.Object))
    drop
    ;; jsvarargs.Main.f2([]);
-   (call $f2<int<>>:int@jsvarargs.Main (ref.null $java.lang.Object))
+   (call $m_f2__arrayOf_int__int@jsvarargs.Main (ref.null $java.lang.Object))
    drop
    ;; jsvarargs.Main.generics([]);
-   (call $generics<java.lang.Object<>>:java.lang.Object@jsvarargs.Main (ref.null $java.lang.Object))
+   (call $m_generics__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main (ref.null $java.lang.Object))
    drop
    ;; jsvarargs.Main.f2([]);
-   (call $f2<int<>>:int@jsvarargs.Main (ref.null $java.lang.Object))
+   (call $m_f2__arrayOf_int__int@jsvarargs.Main (ref.null $java.lang.Object))
    drop
    ;; jsvarargs.Main.generics([]);
-   (call $generics<java.lang.Object<>>:java.lang.Object@jsvarargs.Main (ref.null $java.lang.Object))
+   (call $m_generics__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main (ref.null $java.lang.Object))
    drop
    ;; jsvarargs.Main.generics([]);
-   (call $generics<java.lang.Object<>>:java.lang.Object@jsvarargs.Main (ref.null $java.lang.Object))
+   (call $m_generics__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main (ref.null $java.lang.Object))
    drop
    ;; jsvarargs.Main.f2(new int[] {1,2});
-   (call $f2<int<>>:int@jsvarargs.Main (ref.null $java.lang.Object))
+   (call $m_f2__arrayOf_int__int@jsvarargs.Main (ref.null $java.lang.Object))
    drop
    ;; jsvarargs.Main.f2(new int[] {1,2});
-   (call $f2<int<>>:int@jsvarargs.Main (ref.null $java.lang.Object))
+   (call $m_f2__arrayOf_int__int@jsvarargs.Main (ref.null $java.lang.Object))
    drop
    ;; jsvarargs.Main.generics([new int[] {1,2}]);
-   (call $generics<java.lang.Object<>>:java.lang.Object@jsvarargs.Main (ref.null $java.lang.Object))
+   (call $m_generics__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main (ref.null $java.lang.Object))
    drop
    ;; jsvarargs.Main.generics(new Integer[] {1,2});
-   (call $generics<java.lang.Object<>>:java.lang.Object@jsvarargs.Main (ref.null $java.lang.Object))
+   (call $m_generics__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main (ref.null $java.lang.Object))
    drop
    ;; jsvarargs.Main.f2(new int[] {});
-   (call $f2<int<>>:int@jsvarargs.Main (ref.null $java.lang.Object))
+   (call $m_f2__arrayOf_int__int@jsvarargs.Main (ref.null $java.lang.Object))
    drop
    ;; jsvarargs.Main.f2(new int[] {});
-   (call $f2<int<>>:int@jsvarargs.Main (ref.null $java.lang.Object))
+   (call $m_f2__arrayOf_int__int@jsvarargs.Main (ref.null $java.lang.Object))
    drop
    ;; jsvarargs.Main.generics([new int[] {}]);
-   (call $generics<java.lang.Object<>>:java.lang.Object@jsvarargs.Main (ref.null $java.lang.Object))
+   (call $m_generics__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main (ref.null $java.lang.Object))
    drop
    ;; int[] ints = new int[] {1,2};
    
@@ -238,20 +238,20 @@
    
    (local.set $integers (ref.null $java.lang.Object))
    ;; jsvarargs.Main.f2(ints);
-   (call $f2<int<>>:int@jsvarargs.Main (local.get $ints))
+   (call $m_f2__arrayOf_int__int@jsvarargs.Main (local.get $ints))
    drop
    ;; jsvarargs.Main.f2(ints);
-   (call $f2<int<>>:int@jsvarargs.Main (local.get $ints))
+   (call $m_f2__arrayOf_int__int@jsvarargs.Main (local.get $ints))
    drop
    ;; jsvarargs.Main.generics(integers);
-   (call $generics<java.lang.Object<>>:java.lang.Object@jsvarargs.Main (local.get $integers))
+   (call $m_generics__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main (local.get $integers))
    drop
   )
  )
 )
 
 ;;; void Main.testInstanceMethodNotFirst()
-(func $testInstanceMethodNotFirst<>:void@jsvarargs.Main
+(func $m_testInstanceMethodNotFirst__void@jsvarargs.Main
  (param $this (ref null $java.lang.Object))
  (local $m (ref null $jsvarargs.Main))
  (local $ints (ref null $java.lang.Object))
@@ -259,7 +259,7 @@
   (block
    ;; Main m = new Main.<init>(1);
    
-   (local.set $m (call $<init><int>:void@jsvarargs.Main (struct.new_with_rtt $jsvarargs.Main (i32.const 0) (global.get $jsvarargs.Main.rtt))(i32.const 1)))
+   (local.set $m (call $m_<init>__int__void@jsvarargs.Main (struct.new_with_rtt $jsvarargs.Main (i32.const 0) (global.get $jsvarargs.Main.rtt))(i32.const 1)))
    ;; m.f3(1,[1,2]);
    (i32.const 0)
    drop
@@ -283,7 +283,7 @@
 )
 
 ;;; void Main.testInstanceMethodFirst()
-(func $testInstanceMethodFirst<>:void@jsvarargs.Main
+(func $m_testInstanceMethodFirst__void@jsvarargs.Main
  (param $this (ref null $java.lang.Object))
  (local $m (ref null $jsvarargs.Main))
  (local $ints (ref null $java.lang.Object))
@@ -291,7 +291,7 @@
   (block
    ;; Main m = new Main.<init>(1);
    
-   (local.set $m (call $<init><int>:void@jsvarargs.Main (struct.new_with_rtt $jsvarargs.Main (i32.const 0) (global.get $jsvarargs.Main.rtt))(i32.const 1)))
+   (local.set $m (call $m_<init>__int__void@jsvarargs.Main (struct.new_with_rtt $jsvarargs.Main (i32.const 0) (global.get $jsvarargs.Main.rtt))(i32.const 1)))
    ;; m.f4([1,2]);
    (i32.const 0)
    drop
@@ -315,7 +315,7 @@
 )
 
 ;;; void Main.testJsFunction()
-(func $testJsFunction<>:void@jsvarargs.Main
+(func $m_testJsFunction__void@jsvarargs.Main
  (param $this (ref null $java.lang.Object))
  (local $a (ref null $jsvarargs.Main.AFunction))
  (local $o1 (ref null $java.lang.Object))
@@ -325,13 +325,13 @@
   (block
    ;; AFunction a = new AFunction.<init>();
    
-   (local.set $a (call $<init><>:void@jsvarargs.Main.AFunction (struct.new_with_rtt $jsvarargs.Main.AFunction (global.get $jsvarargs.Main.AFunction.rtt))))
+   (local.set $a (call $m_<init>__void_$pp_jsvarargs@jsvarargs.Main.AFunction (struct.new_with_rtt $jsvarargs.Main.AFunction (global.get $jsvarargs.Main.AFunction.rtt))))
    ;; Object o1 = new Object.<init>();
    
-   (local.set $o1 (call $<init><>:void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.rtt))))
+   (local.set $o1 (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.rtt))))
    ;; Object o2 = new Object.<init>();
    
-   (local.set $o2 (call $<init><>:void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.rtt))))
+   (local.set $o2 (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.rtt))))
    ;; a.f1(0,[o1,o2]);
    (ref.null $java.lang.Object)
    drop
@@ -355,7 +355,7 @@
 )
 
 ;;; void Main.testSideEffect()
-(func $testSideEffect<>:void@jsvarargs.Main
+(func $m_testSideEffect__void@jsvarargs.Main
  (param $this (ref null $java.lang.Object))
  (local $ints (ref null $java.lang.Object))
  (block $return.label
@@ -371,7 +371,7 @@
 )
 
 ;;; void Main.testNullJsVarargs()
-(func $testNullJsVarargs<>:void@jsvarargs.Main
+(func $m_testNullJsVarargs__void@jsvarargs.Main
  (param $this (ref null $java.lang.Object))
  (local $ints (ref null $java.lang.Object))
  (block $return.label
@@ -380,14 +380,14 @@
    
    (local.set $ints (ref.null $java.lang.Object))
    ;; jsvarargs.Main.f2(ints);
-   (call $f2<int<>>:int@jsvarargs.Main (local.get $ints))
+   (call $m_f2__arrayOf_int__int@jsvarargs.Main (local.get $ints))
    drop
   )
  )
 )
 
 ;;; void Main.testGenericJsFunctionWithVarags()
-(func $testGenericJsFunctionWithVarags<>:void@jsvarargs.Main
+(func $m_testGenericJsFunctionWithVarags__void@jsvarargs.Main
  (param $this (ref null $java.lang.Object))
  (local $function (ref null $java.lang.Object))
  (local $n (ref null $java.lang.Object))
@@ -406,7 +406,7 @@
 ))
 
 ;;; NativeObject(Object... pars)
-(func $<init><java.lang.Object<>>:void@jsvarargs.Main.NativeObject
+(func $m_<init>__arrayOf_java_lang_Object__void@jsvarargs.Main.NativeObject
  (param $this (ref null $jsvarargs.Main.NativeObject))
  (param $pars (ref null $java.lang.Object))
  (result (ref null $jsvarargs.Main.NativeObject))
@@ -424,7 +424,7 @@
 ))
 
 ;;; SubVarargsConstructorClass(int i, Object... args)
-(func $<init><int|java.lang.Object<>>:void@jsvarargs.Main.SubVarargsConstructorClass
+(func $m_<init>__int__arrayOf_java_lang_Object__void@jsvarargs.Main.SubVarargsConstructorClass
  (param $this (ref null $jsvarargs.Main.SubVarargsConstructorClass))
  (param $i i32)
  (param $args (ref null $java.lang.Object))
@@ -445,7 +445,7 @@
 ))
 
 ;;; AbstractMethodWithVarargs()
-(func $<init><>:void@jsvarargs.Main.AbstractMethodWithVarargs
+(func $m_<init>__void@jsvarargs.Main.AbstractMethodWithVarargs
  (param $this (ref null $jsvarargs.Main.AbstractMethodWithVarargs))
  (result (ref null $jsvarargs.Main.AbstractMethodWithVarargs))
  (block $return.label
@@ -460,7 +460,7 @@
 ;;; INTERFACE  StaticInterfaceMethodWithVarargs
 
 ;;; void StaticInterfaceMethodWithVarargs.staticMethod(int... args)
-(func $staticMethod<int<>>:void@jsvarargs.Main.StaticInterfaceMethodWithVarargs
+(func $m_staticMethod__arrayOf_int__void@jsvarargs.Main.StaticInterfaceMethodWithVarargs
  (param $args (ref null $java.lang.Object))
  (block $return.label
   (block
@@ -473,7 +473,7 @@
 ))
 
 ;;; AFunction()
-(func $<init><>:void@jsvarargs.Main.AFunction
+(func $m_<init>__void_$pp_jsvarargs@jsvarargs.Main.AFunction
  (param $this (ref null $jsvarargs.Main.AFunction))
  (result (ref null $jsvarargs.Main.AFunction))
  (block $return.label
@@ -486,7 +486,7 @@
 )
 
 ;;; Object AFunction.f1(int i, Object... args)
-(func $f1<int|java.lang.Object<>>:java.lang.Object@jsvarargs.Main.AFunction
+(func $m_f1__int__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main.AFunction
  (param $this (ref null $java.lang.Object))
  (param $i i32)
  (param $args (ref null $java.lang.Object))
@@ -508,7 +508,7 @@
 ))
 
 ;;; SubMain()
-(func $<init><>:void@jsvarargs.Main.SubMain
+(func $m_<init>__void@jsvarargs.Main.SubMain
  (param $this (ref null $jsvarargs.Main.SubMain))
  (result (ref null $jsvarargs.Main.SubMain))
  (block $return.label
@@ -521,7 +521,7 @@
 )
 
 ;;; int SubMain.f3(int m, int... numbers)
-(func $f3<int|int<>>:int@jsvarargs.Main.SubMain
+(func $m_f3__int__arrayOf_int__int@jsvarargs.Main.SubMain
  (param $this (ref null $java.lang.Object))
  (param $m i32)
  (param $numbers (ref null $java.lang.Object))
@@ -562,7 +562,7 @@
 ))
 
 ;;; QualifiedSuperMethodCall()
-(func $<init><>:void@jsvarargs.QualifiedSuperMethodCall
+(func $m_<init>__void@jsvarargs.QualifiedSuperMethodCall
  (param $this (ref null $jsvarargs.QualifiedSuperMethodCall))
  (result (ref null $jsvarargs.QualifiedSuperMethodCall))
  (block $return.label
@@ -580,7 +580,7 @@
 ))
 
 ;;; InnerClass()
-(func $<init><>:void@jsvarargs.QualifiedSuperMethodCall.InnerClass
+(func $m_<init>__void@jsvarargs.QualifiedSuperMethodCall.InnerClass
  (param $this (ref null $jsvarargs.QualifiedSuperMethodCall.InnerClass))
  (result (ref null $jsvarargs.QualifiedSuperMethodCall.InnerClass))
  (block $return.label
@@ -593,7 +593,7 @@
 )
 
 ;;; void InnerClass.test()
-(func $test<>:void@jsvarargs.QualifiedSuperMethodCall.InnerClass
+(func $m_test__void@jsvarargs.QualifiedSuperMethodCall.InnerClass
  (param $this (ref null $java.lang.Object))
  (local $ints (ref null $java.lang.Object))
  (block $return.label

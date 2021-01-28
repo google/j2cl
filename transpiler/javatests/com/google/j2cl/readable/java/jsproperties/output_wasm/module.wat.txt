@@ -6,7 +6,7 @@
 (global $f@jsproperties.Foo (mut i32) (i32.const 0))
 
 ;;; Foo()
-(func $<init><>:void@jsproperties.Foo
+(func $m_<init>__void_$pp_jsproperties@jsproperties.Foo
  (param $this (ref null $jsproperties.Foo))
  (result (ref null $jsproperties.Foo))
  (block $return.label
@@ -19,7 +19,7 @@
 )
 
 ;;; int Foo.getA()
-(func $getA<>:int@jsproperties.Foo
+(func $m_getA__int@jsproperties.Foo
  (result i32)
  (local $return.value i32)
  (block $return.label
@@ -33,7 +33,7 @@
 )
 
 ;;; void Foo.setA(int x)
-(func $setA<int>:void@jsproperties.Foo
+(func $m_setA__int__void@jsproperties.Foo
  (param $x i32)
  (block $return.label
   (block
@@ -44,7 +44,7 @@
 )
 
 ;;; int Foo.getB()
-(func $getB<>:int@jsproperties.Foo
+(func $m_getB__int@jsproperties.Foo
  (result i32)
  (local $return.value i32)
  (block $return.label
@@ -58,7 +58,7 @@
 )
 
 ;;; void Foo.setB(int x)
-(func $setB<int>:void@jsproperties.Foo
+(func $m_setB__int__void@jsproperties.Foo
  (param $x i32)
  (block $return.label
   (block
@@ -74,7 +74,7 @@
 ))
 
 ;;; Bar()
-(func $<init><>:void@jsproperties.Bar
+(func $m_<init>__void_$pp_jsproperties@jsproperties.Bar
  (param $this (ref null $jsproperties.Bar))
  (result (ref null $jsproperties.Bar))
  (block $return.label
@@ -87,7 +87,7 @@
 )
 
 ;;; int Bar.getA()
-(func $getA<>:int@jsproperties.Bar
+(func $m_getA__int@jsproperties.Bar
  (param $this (ref null $java.lang.Object))
  (result i32)
  (local $return.value i32)
@@ -102,7 +102,7 @@
 )
 
 ;;; void Bar.setA(int x)
-(func $setA<int>:void@jsproperties.Bar
+(func $m_setA__int__void@jsproperties.Bar
  (param $this (ref null $java.lang.Object))
  (param $x i32)
  (block $return.label
@@ -114,7 +114,7 @@
 )
 
 ;;; int Bar.getB()
-(func $getB<>:int@jsproperties.Bar
+(func $m_getB__int@jsproperties.Bar
  (param $this (ref null $java.lang.Object))
  (result i32)
  (local $return.value i32)
@@ -129,7 +129,7 @@
 )
 
 ;;; void Bar.setB(int x)
-(func $setB<int>:void@jsproperties.Bar
+(func $m_setB__int__void@jsproperties.Bar
  (param $this (ref null $java.lang.Object))
  (param $x i32)
  (block $return.label
@@ -145,7 +145,7 @@
 ))
 
 ;;; NativeFoo()
-(func $<init><>:void@jsproperties.NativeFoo
+(func $m_<init>__void_$pp_jsproperties@jsproperties.NativeFoo
  (param $this (ref null $jsproperties.NativeFoo))
  (result (ref null $jsproperties.NativeFoo))
  (block $return.label
@@ -158,7 +158,7 @@
 )
 
 ;;; Object NativeFoo.getA()
-(func $getA<>:java.lang.Object@jsproperties.NativeFoo
+(func $m_getA__java_lang_Object@jsproperties.NativeFoo
  (param $this (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
@@ -170,7 +170,7 @@
 )
 
 ;;; double NativeFoo.getB()
-(func $getB<>:double@jsproperties.NativeFoo
+(func $m_getB__double@jsproperties.NativeFoo
  (result f64)
  (local $return.value f64)
  (block $return.label
@@ -185,7 +185,7 @@
 ))
 
 ;;; Main()
-(func $<init><>:void@jsproperties.Main
+(func $m_<init>__void@jsproperties.Main
  (param $this (ref null $jsproperties.Main))
  (result (ref null $jsproperties.Main))
  (block $return.label
@@ -198,7 +198,7 @@
 )
 
 ;;; void Main.testNativeJsProperty()
-(func $testNativeJsProperty<>:void@jsproperties.Main
+(func $m_testNativeJsProperty__void@jsproperties.Main
  (param $this (ref null $java.lang.Object))
  (block $return.label
   (block
@@ -206,40 +206,40 @@
    (ref.null $java.lang.Object)
    drop
    ;; jsproperties.NativeFoo.getB();
-   (call $getB<>:double@jsproperties.NativeFoo )
+   (call $m_getB__double@jsproperties.NativeFoo )
    drop
   )
  )
 )
 
 ;;; void Main.testStaticJsProperty()
-(func $testStaticJsProperty<>:void@jsproperties.Main
+(func $m_testStaticJsProperty__void@jsproperties.Main
  (param $this (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; jsproperties.Foo.getA();
-   (call $getA<>:int@jsproperties.Foo )
+   (call $m_getA__int@jsproperties.Foo )
    drop
    ;; jsproperties.Foo.setA(10);
-   (call $setA<int>:void@jsproperties.Foo (i32.const 10))
+   (call $m_setA__int__void@jsproperties.Foo (i32.const 10))
    ;; jsproperties.Foo.getB();
-   (call $getB<>:int@jsproperties.Foo )
+   (call $m_getB__int@jsproperties.Foo )
    drop
    ;; jsproperties.Foo.setB(10);
-   (call $setB<int>:void@jsproperties.Foo (i32.const 10))
+   (call $m_setB__int__void@jsproperties.Foo (i32.const 10))
   )
  )
 )
 
 ;;; void Main.testInstanceJsProperty()
-(func $testInstanceJsProperty<>:void@jsproperties.Main
+(func $m_testInstanceJsProperty__void@jsproperties.Main
  (param $this (ref null $java.lang.Object))
  (local $bar (ref null $jsproperties.Bar))
  (block $return.label
   (block
    ;; Bar bar = new Bar.<init>();
    
-   (local.set $bar (call $<init><>:void@jsproperties.Bar (struct.new_with_rtt $jsproperties.Bar (i32.const 0) (global.get $jsproperties.Bar.rtt))))
+   (local.set $bar (call $m_<init>__void_$pp_jsproperties@jsproperties.Bar (struct.new_with_rtt $jsproperties.Bar (i32.const 0) (global.get $jsproperties.Bar.rtt))))
    ;; bar.getA();
    (i32.const 0)
    drop

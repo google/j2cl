@@ -5,7 +5,7 @@
 ))
 
 ;;; JsMethodExample()
-(func $<init><>:void@jsmethod.JsMethodExample
+(func $m_<init>__void@jsmethod.JsMethodExample
  (param $this (ref null $jsmethod.JsMethodExample))
  (result (ref null $jsmethod.JsMethodExample))
  (block $return.label
@@ -18,7 +18,7 @@
 )
 
 ;;; void JsMethodExample.log(String message)
-(func $log<java.lang.String>:void@jsmethod.JsMethodExample
+(func $m_log__java_lang_String__void@jsmethod.JsMethodExample
  (param $message (ref null $java.lang.String))
  (block $return.label
   (block
@@ -27,18 +27,18 @@
 )
 
 ;;; void JsMethodExample.main(String... args)
-(func $main<java.lang.String<>>:void@jsmethod.JsMethodExample
+(func $m_main__arrayOf_java_lang_String__void@jsmethod.JsMethodExample
  (param $args (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; jsmethod.JsMethodExample.log("test");
-   (call $log<java.lang.String>:void@jsmethod.JsMethodExample (ref.null $java.lang.String))
+   (call $m_log__java_lang_String__void@jsmethod.JsMethodExample (ref.null $java.lang.String))
   )
  )
 )
 
 ;;; T JsMethodExample.testMethod()
-(func $testMethod<>:java.util.ArrayList@jsmethod.JsMethodExample
+(func $m_testMethod__java_util_ArrayList@jsmethod.JsMethodExample
  (param $this (ref null $java.lang.Object))
  (result (ref null $java.util.ArrayList))
  (local $return.value (ref null $java.util.ArrayList))
@@ -54,7 +54,7 @@
 ))
 
 ;;; Base()
-(func $<init><>:void@jsmethod.JsMethodExample.Base
+(func $m_<init>__void_$pp_jsmethod@jsmethod.JsMethodExample.Base
  (param $this (ref null $jsmethod.JsMethodExample.Base))
  (result (ref null $jsmethod.JsMethodExample.Base))
  (block $return.label
@@ -67,7 +67,7 @@
 )
 
 ;;; void Base.m(T t)
-(func $m<java.lang.Object>:void@jsmethod.JsMethodExample.Base
+(func $m_m__java_lang_Object__void@jsmethod.JsMethodExample.Base
  (param $this (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Object))
  (block $return.label
@@ -83,7 +83,7 @@
 ))
 
 ;;; Sub()
-(func $<init><>:void@jsmethod.JsMethodExample.Sub
+(func $m_<init>__void_$pp_jsmethod@jsmethod.JsMethodExample.Sub
  (param $this (ref null $jsmethod.JsMethodExample.Sub))
  (result (ref null $jsmethod.JsMethodExample.Sub))
  (block $return.label
@@ -96,11 +96,23 @@
 )
 
 ;;; void Sub.m(String s)
-(func $m<java.lang.String>:void@jsmethod.JsMethodExample.Sub
+(func $m_m__java_lang_String__void@jsmethod.JsMethodExample.Sub
  (param $this (ref null $java.lang.Object))
  (param $s (ref null $java.lang.String))
  (block $return.label
   (block
+  )
+ )
+)
+
+;;; void Sub.m(Object arg0)
+(func $m_m__java_lang_Object__void@jsmethod.JsMethodExample.Sub
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; Sub.this.m(((String) arg0));
+   
   )
  )
 )

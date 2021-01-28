@@ -7,7 +7,7 @@
 ))
 
 ;;; MixedNestings()
-(func $<init><>:void@mixednestings.MixedNestings
+(func $m_<init>__void@mixednestings.MixedNestings
  (param $this (ref null $mixednestings.MixedNestings))
  (result (ref null $mixednestings.MixedNestings))
  (block $return.label
@@ -20,7 +20,7 @@
 )
 
 ;;; void MixedNestings.mm()
-(func $mm<>:void@mixednestings.MixedNestings
+(func $m_mm__void@mixednestings.MixedNestings
  (param $this (ref null $java.lang.Object))
  (block $return.label
   (block
@@ -29,7 +29,7 @@
 )
 
 ;;; void MixedNestings.test()
-(func $test<>:void@mixednestings.MixedNestings
+(func $m_test__void@mixednestings.MixedNestings
  (param $this (ref null $java.lang.Object))
  (block $return.label
   (block
@@ -45,7 +45,7 @@
 ))
 
 ;;; A()
-(func $<init><>:void@mixednestings.MixedNestings.A
+(func $m_<init>__void_$pp_mixednestings@mixednestings.MixedNestings.A
  (param $this (ref null $mixednestings.MixedNestings.A))
  (result (ref null $mixednestings.MixedNestings.A))
  (block $return.label
@@ -58,7 +58,7 @@
 )
 
 ;;; void A.aa()
-(func $aa<>:void@mixednestings.MixedNestings.A
+(func $m_aa__void@mixednestings.MixedNestings.A
  (param $this (ref null $java.lang.Object))
  (block $return.label
   (block
@@ -67,7 +67,7 @@
 )
 
 ;;; void A.a()
-(func $a<>:void@mixednestings.MixedNestings.A
+(func $m_a__void@mixednestings.MixedNestings.A
  (param $this (ref null $java.lang.Object))
  (block $return.label
   (block
@@ -84,7 +84,7 @@
 ))
 
 ;;; B()
-(func $<init><>:void@mixednestings.MixedNestings.A.1B
+(func $m_<init>__void_$pp_mixednestings@mixednestings.MixedNestings.A.1B
  (param $this (ref null $mixednestings.MixedNestings.A.1B))
  (result (ref null $mixednestings.MixedNestings.A.1B))
  (block $return.label
@@ -97,7 +97,7 @@
 )
 
 ;;; void B.bb()
-(func $bb<>:void@mixednestings.MixedNestings.A.1B
+(func $m_bb__void@mixednestings.MixedNestings.A.1B
  (param $this (ref null $java.lang.Object))
  (block $return.label
   (block
@@ -106,7 +106,7 @@
 )
 
 ;;; int B.b()
-(func $b<>:int@mixednestings.MixedNestings.A.1B
+(func $m_b__int@mixednestings.MixedNestings.A.1B
  (param $this (ref null $java.lang.Object))
  (result i32)
  (local $return.value i32)
@@ -115,7 +115,7 @@
   (block
    ;; MyInterface i = $1B.this.new $1.<init>();
    
-   (local.set $i (call $<init><>:void@mixednestings.MixedNestings.A.1B.1 (struct.new_with_rtt $mixednestings.MixedNestings.A.1B.1 (ref.null $mixednestings.MixedNestings.A.1B) (global.get $mixednestings.MixedNestings.A.1B.1.rtt))))
+   (local.set $i (call $m_<init>__void_$pp_mixednestings@mixednestings.MixedNestings.A.1B.1 (struct.new_with_rtt $mixednestings.MixedNestings.A.1B.1 (ref.null $mixednestings.MixedNestings.A.1B) (global.get $mixednestings.MixedNestings.A.1B.1.rtt))))
    ;; return i.fun(400);
    (local.set $return.value (i32.const 0))
    (br $return.label)
@@ -130,7 +130,7 @@
 ))
 
 ;;; <anonymous> implements MyInterface()
-(func $<init><>:void@mixednestings.MixedNestings.A.1B.1
+(func $m_<init>__void_$pp_mixednestings@mixednestings.MixedNestings.A.1B.1
  (param $this (ref null $mixednestings.MixedNestings.A.1B.1))
  (result (ref null $mixednestings.MixedNestings.A.1B.1))
  (block $return.label
@@ -143,7 +143,7 @@
 )
 
 ;;; int <anonymous> implements MyInterface.fun(int a)
-(func $fun<int>:int@mixednestings.MixedNestings.A.1B.1
+(func $m_fun__int__int@mixednestings.MixedNestings.A.1B.1
  (param $this (ref null $java.lang.Object))
  (param $a i32)
  (result i32)
@@ -171,7 +171,7 @@
 ))
 
 ;;; <anonymous> implements MyInterface()
-(func $<init><>:void@mixednestings.MixedNestings.A.1B.1.1
+(func $m_<init>__void_$pp_mixednestings@mixednestings.MixedNestings.A.1B.1.1
  (param $this (ref null $mixednestings.MixedNestings.A.1B.1.1))
  (result (ref null $mixednestings.MixedNestings.A.1B.1.1))
  (block $return.label
@@ -184,7 +184,7 @@
 )
 
 ;;; int <anonymous> implements MyInterface.fun(int b)
-(func $fun<int>:int@mixednestings.MixedNestings.A.1B.1.1
+(func $m_fun__int__int@mixednestings.MixedNestings.A.1B.1.1
  (param $this (ref null $java.lang.Object))
  (param $b i32)
  (result i32)

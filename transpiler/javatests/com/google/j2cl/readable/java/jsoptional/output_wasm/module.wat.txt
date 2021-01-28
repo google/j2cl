@@ -6,7 +6,7 @@
 ))
 
 ;;; void Main.method1(int i1, Double d, Integer i)
-(func $method1<int|java.lang.Double|java.lang.Integer>:void@jsoptional.Main
+(func $m_method1__int__java_lang_Double__java_lang_Integer__void@jsoptional.Main
  (param $this (ref null $java.lang.Object))
  (param $i1 i32)
  (param $d (ref null $java.lang.Double))
@@ -18,7 +18,7 @@
 )
 
 ;;; void Main.method2(String s1, Double d, Boolean... i)
-(func $method2<java.lang.String|java.lang.Double|java.lang.Boolean<>>:void@jsoptional.Main
+(func $m_method2__java_lang_String__java_lang_Double__arrayOf_java_lang_Boolean__void@jsoptional.Main
  (param $this (ref null $java.lang.Object))
  (param $s1 (ref null $java.lang.String))
  (param $d (ref null $java.lang.Double))
@@ -30,7 +30,7 @@
 )
 
 ;;; Main(String a)
-(func $<init><java.lang.String>:void@jsoptional.Main
+(func $m_<init>__java_lang_String__void@jsoptional.Main
  (param $this (ref null $jsoptional.Main))
  (param $a (ref null $java.lang.String))
  (result (ref null $jsoptional.Main))
@@ -44,7 +44,7 @@
 )
 
 ;;; void Main.testFunction(Function f)
-(func $testFunction<jsoptional.Main.Function>:void@jsoptional.Main
+(func $m_testFunction__jsoptional_Main_Function__void@jsoptional.Main
  (param $this (ref null $java.lang.Object))
  (param $f (ref null $java.lang.Object))
  (block $return.label
@@ -54,7 +54,7 @@
 )
 
 ;;; void Main.testOptionalFunction(Function f)
-(func $testOptionalFunction<jsoptional.Main.Function>:void@jsoptional.Main
+(func $m_testOptionalFunction__jsoptional_Main_Function__void@jsoptional.Main
  (param $this (ref null $java.lang.Object))
  (param $f (ref null $java.lang.Object))
  (block $return.label
@@ -70,7 +70,7 @@
 ))
 
 ;;; AFunction()
-(func $<init><>:void@jsoptional.Main.AFunction
+(func $m_<init>__void_$pp_jsoptional@jsoptional.Main.AFunction
  (param $this (ref null $jsoptional.Main.AFunction))
  (result (ref null $jsoptional.Main.AFunction))
  (block $return.label
@@ -83,7 +83,7 @@
 )
 
 ;;; Object AFunction.f1(String i, Object... args)
-(func $f1<java.lang.String|java.lang.Object<>>:java.lang.Object@jsoptional.Main.AFunction
+(func $m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object@jsoptional.Main.AFunction
  (param $this (ref null $java.lang.Object))
  (param $i (ref null $java.lang.String))
  (param $args (ref null $java.lang.Object))
@@ -106,7 +106,7 @@
 ))
 
 ;;; TemplatedSubtype()
-(func $<init><>:void@jsoptional.Main.TemplatedSubtype
+(func $m_<init>__void_$pp_jsoptional@jsoptional.Main.TemplatedSubtype
  (param $this (ref null $jsoptional.Main.TemplatedSubtype))
  (result (ref null $jsoptional.Main.TemplatedSubtype))
  (block $return.label
@@ -119,12 +119,25 @@
 )
 
 ;;; void TemplatedSubtype.m(T t, Object o)
-(func $m<java.lang.String|java.lang.Object>:void@jsoptional.Main.TemplatedSubtype
+(func $m_m__java_lang_String__java_lang_Object__void@jsoptional.Main.TemplatedSubtype
  (param $this (ref null $java.lang.Object))
  (param $t (ref null $java.lang.String))
  (param $o (ref null $java.lang.Object))
  (block $return.label
   (block
+  )
+ )
+)
+
+;;; void TemplatedSubtype.m(Object arg0, Object arg1)
+(func $m_m__java_lang_Object__java_lang_Object__void@jsoptional.Main.TemplatedSubtype
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (param $arg1 (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; TemplatedSubtype.this.m(((T) arg0),arg1);
+   
   )
  )
 )
@@ -135,7 +148,7 @@
 ))
 
 ;;; SpecializedSubtype(Object a)
-(func $<init><java.lang.Object>:void@jsoptional.Main.SpecializedSubtype
+(func $m_<init>__java_lang_Object__void@jsoptional.Main.SpecializedSubtype
  (param $this (ref null $jsoptional.Main.SpecializedSubtype))
  (param $a (ref null $java.lang.Object))
  (result (ref null $jsoptional.Main.SpecializedSubtype))
@@ -149,7 +162,7 @@
 )
 
 ;;; void SpecializedSubtype.m(String t, Object o)
-(func $m<java.lang.String|java.lang.Object>:void@jsoptional.Main.SpecializedSubtype
+(func $m_m__java_lang_String__java_lang_Object__void@jsoptional.Main.SpecializedSubtype
  (param $this (ref null $java.lang.Object))
  (param $t (ref null $java.lang.String))
  (param $o (ref null $java.lang.Object))
@@ -159,12 +172,25 @@
  )
 )
 
+;;; void SpecializedSubtype.m(Object arg0, Object arg1)
+(func $m_m__java_lang_Object__java_lang_Object__void@jsoptional.Main.SpecializedSubtype
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (param $arg1 (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; SpecializedSubtype.this.m(((String) arg0),arg1);
+   
+  )
+ )
+)
+
 ;;; CLASS  NonJsTypeSubtype
 (type $jsoptional.Main.NonJsTypeSubtype (struct
 ))
 
 ;;; NonJsTypeSubtype()
-(func $<init><>:void@jsoptional.Main.NonJsTypeSubtype
+(func $m_<init>__void_$pp_jsoptional@jsoptional.Main.NonJsTypeSubtype
  (param $this (ref null $jsoptional.Main.NonJsTypeSubtype))
  (result (ref null $jsoptional.Main.NonJsTypeSubtype))
  (block $return.label
@@ -177,12 +203,25 @@
 )
 
 ;;; void NonJsTypeSubtype.m(String t, Object o)
-(func $m<java.lang.String|java.lang.Object>:void@jsoptional.Main.NonJsTypeSubtype
+(func $m_m__java_lang_String__java_lang_Object__void@jsoptional.Main.NonJsTypeSubtype
  (param $this (ref null $java.lang.Object))
  (param $t (ref null $java.lang.String))
  (param $o (ref null $java.lang.Object))
  (block $return.label
   (block
+  )
+ )
+)
+
+;;; void NonJsTypeSubtype.m(Object arg0, Object arg1)
+(func $m_m__java_lang_Object__java_lang_Object__void@jsoptional.Main.NonJsTypeSubtype
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (param $arg1 (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; NonJsTypeSubtype.this.m(((String) arg0),arg1);
+   
   )
  )
 )

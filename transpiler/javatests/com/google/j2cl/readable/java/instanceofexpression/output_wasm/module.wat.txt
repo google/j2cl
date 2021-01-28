@@ -5,7 +5,7 @@
 ))
 
 ;;; InstanceofExpressions()
-(func $<init><>:void@instanceofexpression.InstanceofExpressions
+(func $m_<init>__void@instanceofexpression.InstanceofExpressions
  (param $this (ref null $instanceofexpression.InstanceofExpressions))
  (result (ref null $instanceofexpression.InstanceofExpressions))
  (block $return.label
@@ -18,7 +18,7 @@
 )
 
 ;;; void InstanceofExpressions.testInstanceofClass()
-(func $testInstanceofClass<>:void@instanceofexpression.InstanceofExpressions
+(func $m_testInstanceofClass__void@instanceofexpression.InstanceofExpressions
  (param $this (ref null $java.lang.Object))
  (local $object (ref null $java.lang.Object))
  (local $b i32)
@@ -26,7 +26,7 @@
   (block
    ;; Object object = new InstanceofExpressions.<init>();
    
-   (local.set $object (call $<init><>:void@instanceofexpression.InstanceofExpressions (struct.new_with_rtt $instanceofexpression.InstanceofExpressions (global.get $instanceofexpression.InstanceofExpressions.rtt))))
+   (local.set $object (call $m_<init>__void@instanceofexpression.InstanceofExpressions (struct.new_with_rtt $instanceofexpression.InstanceofExpressions (global.get $instanceofexpression.InstanceofExpressions.rtt))))
    ;; boolean b;
    
    ;; (b = object instanceof Object);
@@ -40,7 +40,7 @@
 )
 
 ;;; void InstanceofExpressions.testInstanceofInterface()
-(func $testInstanceofInterface<>:void@instanceofexpression.InstanceofExpressions
+(func $m_testInstanceofInterface__void@instanceofexpression.InstanceofExpressions
  (param $this (ref null $java.lang.Object))
  (local $o (ref null $java.lang.Object))
  (local $b i32)
@@ -48,7 +48,7 @@
   (block
    ;; Object o = new Object.<init>();
    
-   (local.set $o (call $<init><>:void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.rtt))))
+   (local.set $o (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.rtt))))
    ;; boolean b;
    
    ;; (b = o instanceof Serializable);
@@ -60,7 +60,7 @@
 )
 
 ;;; void InstanceofExpressions.testInstanceofBoxedType()
-(func $testInstanceofBoxedType<>:void@instanceofexpression.InstanceofExpressions
+(func $m_testInstanceofBoxedType__void@instanceofexpression.InstanceofExpressions
  (param $this (ref null $java.lang.Object))
  (local $b (ref null $java.lang.Object))
  (local $a i32)
@@ -69,7 +69,7 @@
   (block
    ;; Object b = new Integer.<init>(1);
    
-   (local.set $b (call $<init><int>:void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
+   (local.set $b (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
    ;; boolean a = b instanceof Byte;
    
    (local.set $a (ref.test $java.lang.Object $java.lang.Byte (local.get $b) (global.get $java.lang.Byte.rtt)))
@@ -103,7 +103,7 @@
 )
 
 ;;; void InstanceofExpressions.testInstanceOfArray()
-(func $testInstanceOfArray<>:void@instanceofexpression.InstanceofExpressions
+(func $m_testInstanceOfArray__void@instanceofexpression.InstanceofExpressions
  (param $this (ref null $java.lang.Object))
  (local $object (ref null $java.lang.Object))
  (local $objectArray (ref null $java.lang.Object))
@@ -114,7 +114,7 @@
   (block
    ;; Object object = new Object.<init>();
    
-   (local.set $object (call $<init><>:void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.rtt))))
+   (local.set $object (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.rtt))))
    ;; Object[] objectArray = new Object[0];
    
    (local.set $objectArray (ref.null $java.lang.Object))
@@ -162,7 +162,7 @@
 ))
 
 ;;; <anonymous> implements Serializable()
-(func $<init><>:void@instanceofexpression.InstanceofExpressions.1
+(func $m_<init>__void_$pp_instanceofexpression@instanceofexpression.InstanceofExpressions.1
  (param $this (ref null $instanceofexpression.InstanceofExpressions.1))
  (result (ref null $instanceofexpression.InstanceofExpressions.1))
  (block $return.label

@@ -5,7 +5,7 @@
 ))
 
 ;;; Left()
-(func $<init><>:void@circularimportuse.Left
+(func $m_<init>__void@circularimportuse.Left
  (param $this (ref null $circularimportuse.Left))
  (result (ref null $circularimportuse.Left))
  (block $return.label
@@ -18,14 +18,14 @@
 )
 
 ;;; Right Left.createRight()
-(func $createRight<>:circularimportuse.Right@circularimportuse.Left
+(func $m_createRight__circularimportuse_Right_$pp_circularimportuse@circularimportuse.Left
  (param $this (ref null $java.lang.Object))
  (result (ref null $circularimportuse.Right))
  (local $return.value (ref null $circularimportuse.Right))
  (block $return.label
   (block
    ;; return new Right.<init>();
-   (local.set $return.value (call $<init><>:void@circularimportuse.Right (struct.new_with_rtt $circularimportuse.Right (global.get $circularimportuse.Right.rtt))))
+   (local.set $return.value (call $m_<init>__void@circularimportuse.Right (struct.new_with_rtt $circularimportuse.Right (global.get $circularimportuse.Right.rtt))))
    (br $return.label)
   )
  )
@@ -38,7 +38,7 @@
 ))
 
 ;;; Main()
-(func $<init><>:void@circularimportuse.Main
+(func $m_<init>__void@circularimportuse.Main
  (param $this (ref null $circularimportuse.Main))
  (result (ref null $circularimportuse.Main))
  (block $return.label
@@ -51,7 +51,7 @@
 )
 
 ;;; void Main.main(String... args)
-(func $main<java.lang.String<>>:void@circularimportuse.Main
+(func $m_main__arrayOf_java_lang_String__void@circularimportuse.Main
  (param $args (ref null $java.lang.Object))
  (local $left (ref null $circularimportuse.Left))
  (local $right (ref null $circularimportuse.Right))
@@ -59,10 +59,10 @@
   (block
    ;; Left left = new Left.<init>();
    
-   (local.set $left (call $<init><>:void@circularimportuse.Left (struct.new_with_rtt $circularimportuse.Left (global.get $circularimportuse.Left.rtt))))
+   (local.set $left (call $m_<init>__void@circularimportuse.Left (struct.new_with_rtt $circularimportuse.Left (global.get $circularimportuse.Left.rtt))))
    ;; Right right = new Right.<init>();
    
-   (local.set $right (call $<init><>:void@circularimportuse.Right (struct.new_with_rtt $circularimportuse.Right (global.get $circularimportuse.Right.rtt))))
+   (local.set $right (call $m_<init>__void@circularimportuse.Right (struct.new_with_rtt $circularimportuse.Right (global.get $circularimportuse.Right.rtt))))
   )
  )
 )
@@ -73,7 +73,7 @@
 ))
 
 ;;; Right()
-(func $<init><>:void@circularimportuse.Right
+(func $m_<init>__void@circularimportuse.Right
  (param $this (ref null $circularimportuse.Right))
  (result (ref null $circularimportuse.Right))
  (block $return.label
@@ -86,14 +86,14 @@
 )
 
 ;;; Left Right.createLeft()
-(func $createLeft<>:circularimportuse.Left@circularimportuse.Right
+(func $m_createLeft__circularimportuse_Left_$pp_circularimportuse@circularimportuse.Right
  (param $this (ref null $java.lang.Object))
  (result (ref null $circularimportuse.Left))
  (local $return.value (ref null $circularimportuse.Left))
  (block $return.label
   (block
    ;; return new Left.<init>();
-   (local.set $return.value (call $<init><>:void@circularimportuse.Left (struct.new_with_rtt $circularimportuse.Left (global.get $circularimportuse.Left.rtt))))
+   (local.set $return.value (call $m_<init>__void@circularimportuse.Left (struct.new_with_rtt $circularimportuse.Left (global.get $circularimportuse.Left.rtt))))
    (br $return.label)
   )
  )

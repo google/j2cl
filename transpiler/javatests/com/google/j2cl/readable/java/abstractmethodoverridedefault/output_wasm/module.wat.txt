@@ -5,7 +5,7 @@
 ))
 
 ;;; AbstractMethodOverrideDefault()
-(func $<init><>:void@abstractmethodoverridedefault.AbstractMethodOverrideDefault
+(func $m_<init>__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault
  (param $this (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault))
  (result (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault))
  (block $return.label
@@ -20,7 +20,7 @@
 ;;; INTERFACE  I
 
 ;;; void I.bar()
-(func $bar<>:void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.I
+(func $m_bar__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.I
  (param $this (ref null $java.lang.Object))
  (block $return.label
   (block
@@ -31,7 +31,7 @@
 ;;; INTERFACE  J
 
 ;;; void J.foo()
-(func $foo<>:void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.J
+(func $m_foo__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.J
  (param $this (ref null $java.lang.Object))
  (block $return.label
   (block
@@ -44,7 +44,7 @@
 ))
 
 ;;; A()
-(func $<init><>:void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.A
+(func $m_<init>__void_$pp_abstractmethodoverridedefault@abstractmethodoverridedefault.AbstractMethodOverrideDefault.A
  (param $this (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.A))
  (result (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.A))
  (block $return.label
@@ -56,12 +56,23 @@
  (local.get $this)
 )
 
+;;; void A.bar()
+(func $m_bar__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.A
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; I.this.bar();
+   
+  )
+ )
+)
+
 ;;; CLASS  B
 (type $abstractmethodoverridedefault.AbstractMethodOverrideDefault.B (struct
 ))
 
 ;;; B()
-(func $<init><>:void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.B
+(func $m_<init>__void_$pp_abstractmethodoverridedefault@abstractmethodoverridedefault.AbstractMethodOverrideDefault.B
  (param $this (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.B))
  (result (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.B))
  (block $return.label
@@ -74,7 +85,7 @@
 )
 
 ;;; void B.bar()
-(func $bar<>:void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.B
+(func $m_bar__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.B
  (param $this (ref null $java.lang.Object))
  (block $return.label
   (block
@@ -96,7 +107,7 @@
 ))
 
 ;;; C()
-(func $<init><>:void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C
+(func $m_<init>__void_$pp_abstractmethodoverridedefault@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C
  (param $this (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C))
  (result (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C))
  (block $return.label
@@ -109,7 +120,7 @@
 )
 
 ;;; void C.foo()
-(func $foo<>:void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C
+(func $m_foo__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C
  (param $this (ref null $java.lang.Object))
  (block $return.label
   (block
@@ -118,7 +129,7 @@
 )
 
 ;;; void C.bar()
-(func $bar<>:void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C
+(func $m_bar__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C
  (param $this (ref null $java.lang.Object))
  (block $return.label
   (block

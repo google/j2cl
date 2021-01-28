@@ -5,7 +5,7 @@
 ))
 
 ;;; SimpleLocalClass()
-(func $<init><>:void@simplelocalclass.SimpleLocalClass
+(func $m_<init>__void@simplelocalclass.SimpleLocalClass
  (param $this (ref null $simplelocalclass.SimpleLocalClass))
  (result (ref null $simplelocalclass.SimpleLocalClass))
  (block $return.label
@@ -18,7 +18,7 @@
 )
 
 ;;; void SimpleLocalClass.test(int p)
-(func $test<int>:void@simplelocalclass.SimpleLocalClass
+(func $m_test__int__void@simplelocalclass.SimpleLocalClass
  (param $this (ref null $java.lang.Object))
  (param $p i32)
  (local $localVar i32)
@@ -31,14 +31,14 @@
    (i32.const 0)
    drop
    ;; SimpleLocalClass.this.new $1InnerClassWithoutCaptures.<init>();
-   (call $<init><>:void@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (struct.new_with_rtt $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (ref.null $simplelocalclass.SimpleLocalClass) (global.get $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.rtt)))
+   (call $m_<init>__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (struct.new_with_rtt $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (ref.null $simplelocalclass.SimpleLocalClass) (global.get $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.rtt)))
    drop
   )
  )
 )
 
 ;;; void SimpleLocalClass.fun()
-(func $fun<>:void@simplelocalclass.SimpleLocalClass
+(func $m_fun__void@simplelocalclass.SimpleLocalClass
  (param $this (ref null $java.lang.Object))
  (local $localVar i32)
  (block $return.label
@@ -51,7 +51,7 @@
 )
 
 ;;; void SimpleLocalClass.foo()
-(func $foo<>:void@simplelocalclass.SimpleLocalClass
+(func $m_foo__void@simplelocalclass.SimpleLocalClass
  (param $this (ref null $java.lang.Object))
  (block $return.label
   (block
@@ -67,7 +67,7 @@
 ))
 
 ;;; InnerClass()
-(func $<init><>:void@simplelocalclass.SimpleLocalClass.1InnerClass
+(func $m_<init>__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1InnerClass
  (param $this (ref null $simplelocalclass.SimpleLocalClass.1InnerClass))
  (result (ref null $simplelocalclass.SimpleLocalClass.1InnerClass))
  (block $return.label
@@ -80,7 +80,7 @@
 )
 
 ;;; int InnerClass.fun()
-(func $fun<>:int@simplelocalclass.SimpleLocalClass.1InnerClass
+(func $m_fun__int@simplelocalclass.SimpleLocalClass.1InnerClass
  (param $this (ref null $java.lang.Object))
  (result i32)
  (local $return.value i32)
@@ -100,7 +100,7 @@
 ))
 
 ;;; InnerClassWithoutCaptures()
-(func $<init><>:void@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures
+(func $m_<init>__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures
  (param $this (ref null $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures))
  (result (ref null $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures))
  (block $return.label
@@ -120,7 +120,7 @@
 ))
 
 ;;; InnerClass()
-(func $<init><>:void@simplelocalclass.SimpleLocalClass.2InnerClass
+(func $m_<init>__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.2InnerClass
  (param $this (ref null $simplelocalclass.SimpleLocalClass.2InnerClass))
  (result (ref null $simplelocalclass.SimpleLocalClass.2InnerClass))
  (block $return.label
@@ -138,7 +138,7 @@
 ))
 
 ;;; Abc$InnerClass()
-(func $<init><>:void@simplelocalclass.SimpleLocalClass.1Abc$InnerClass
+(func $m_<init>__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1Abc$InnerClass
  (param $this (ref null $simplelocalclass.SimpleLocalClass.1Abc$InnerClass))
  (result (ref null $simplelocalclass.SimpleLocalClass.1Abc$InnerClass))
  (block $return.label
@@ -156,7 +156,7 @@
 ))
 
 ;;; Klm$InnerClass()
-(func $<init><>:void@simplelocalclass.SimpleLocalClass.1Klm$InnerClass
+(func $m_<init>__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1Klm$InnerClass
  (param $this (ref null $simplelocalclass.SimpleLocalClass.1Klm$InnerClass))
  (result (ref null $simplelocalclass.SimpleLocalClass.1Klm$InnerClass))
  (block $return.label

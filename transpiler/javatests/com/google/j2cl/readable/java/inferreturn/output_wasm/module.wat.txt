@@ -5,7 +5,7 @@
 ))
 
 ;;; InferReturn()
-(func $<init><>:void@inferreturn.InferReturn
+(func $m_<init>__void@inferreturn.InferReturn
  (param $this (ref null $inferreturn.InferReturn))
  (result (ref null $inferreturn.InferReturn))
  (block $return.label
@@ -18,14 +18,14 @@
 )
 
 ;;; InferReturn<T> InferReturn.inferGeneric(T foo)
-(func $inferGeneric<java.lang.Object>:inferreturn.InferReturn@inferreturn.InferReturn
+(func $m_inferGeneric__java_lang_Object__inferreturn_InferReturn@inferreturn.InferReturn
  (param $foo (ref null $java.lang.Object))
  (result (ref null $inferreturn.InferReturn))
  (local $return.value (ref null $inferreturn.InferReturn))
  (block $return.label
   (block
    ;; return new InferReturn.<init>();
-   (local.set $return.value (call $<init><>:void@inferreturn.InferReturn (struct.new_with_rtt $inferreturn.InferReturn (global.get $inferreturn.InferReturn.rtt))))
+   (local.set $return.value (call $m_<init>__void@inferreturn.InferReturn (struct.new_with_rtt $inferreturn.InferReturn (global.get $inferreturn.InferReturn.rtt))))
    (br $return.label)
   )
  )
@@ -33,7 +33,7 @@
 )
 
 ;;; InferReturn<InferReturn<String>> InferReturn.tightenType(InferReturn<String> foo)
-(func $tightenType<inferreturn.InferReturn>:inferreturn.InferReturn@inferreturn.InferReturn
+(func $m_tightenType__inferreturn_InferReturn__inferreturn_InferReturn@inferreturn.InferReturn
  (param $foo (ref null $inferreturn.InferReturn))
  (result (ref null $inferreturn.InferReturn))
  (local $return.value (ref null $inferreturn.InferReturn))
@@ -44,7 +44,7 @@
     (then
      (block
       ;; return inferreturn.InferReturn.inferGeneric(foo);
-      (local.set $return.value (call $inferGeneric<java.lang.Object>:inferreturn.InferReturn@inferreturn.InferReturn (local.get $foo)))
+      (local.set $return.value (call $m_inferGeneric__java_lang_Object__inferreturn_InferReturn@inferreturn.InferReturn (local.get $foo)))
       (br $return.label)
      )
     )
@@ -58,34 +58,34 @@
 )
 
 ;;; void InferReturn.main()
-(func $main<>:void@inferreturn.InferReturn
+(func $m_main__void@inferreturn.InferReturn
  (local $list (ref null $java.util.ArrayList))
  (local $array (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; ArrayList<Object> list = inferreturn.InferReturn.newArrayList("foo");
    
-   (local.set $list (call $newArrayList<java.lang.Object>:java.util.ArrayList@inferreturn.InferReturn (ref.null $java.lang.String)))
+   (local.set $list (call $m_newArrayList__java_lang_Object__java_util_ArrayList@inferreturn.InferReturn (ref.null $java.lang.String)))
    ;; inferreturn.InferReturn.acceptsArrayListOfObject(list);
-   (call $acceptsArrayListOfObject<java.util.ArrayList>:void@inferreturn.InferReturn (local.get $list))
+   (call $m_acceptsArrayListOfObject__java_util_ArrayList__void@inferreturn.InferReturn (local.get $list))
    ;; Object[] array = inferreturn.InferReturn.newArray("foo");
    
-   (local.set $array (call $newArray<java.lang.Object>:java.lang.Object<>@inferreturn.InferReturn (ref.null $java.lang.String)))
+   (local.set $array (call $m_newArray__java_lang_Object__arrayOf_java_lang_Object@inferreturn.InferReturn (ref.null $java.lang.String)))
    ;; inferreturn.InferReturn.acceptsArrayOfObject(array);
-   (call $acceptsArrayOfObject<java.lang.Object<>>:void@inferreturn.InferReturn (local.get $array))
+   (call $m_acceptsArrayOfObject__arrayOf_java_lang_Object__void@inferreturn.InferReturn (local.get $array))
   )
  )
 )
 
 ;;; ArrayList<V> InferReturn.newArrayList(V foo)
-(func $newArrayList<java.lang.Object>:java.util.ArrayList@inferreturn.InferReturn
+(func $m_newArrayList__java_lang_Object__java_util_ArrayList@inferreturn.InferReturn
  (param $foo (ref null $java.lang.Object))
  (result (ref null $java.util.ArrayList))
  (local $return.value (ref null $java.util.ArrayList))
  (block $return.label
   (block
    ;; return new ArrayList.<init>();
-   (local.set $return.value (call $<init><>:void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
+   (local.set $return.value (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
    (br $return.label)
   )
  )
@@ -93,7 +93,7 @@
 )
 
 ;;; V[] InferReturn.newArray(V foo)
-(func $newArray<java.lang.Object>:java.lang.Object<>@inferreturn.InferReturn
+(func $m_newArray__java_lang_Object__arrayOf_java_lang_Object@inferreturn.InferReturn
  (param $foo (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
@@ -108,7 +108,7 @@
 )
 
 ;;; void InferReturn.acceptsArrayListOfObject(ArrayList<Object> foo)
-(func $acceptsArrayListOfObject<java.util.ArrayList>:void@inferreturn.InferReturn
+(func $m_acceptsArrayListOfObject__java_util_ArrayList__void@inferreturn.InferReturn
  (param $foo (ref null $java.util.ArrayList))
  (block $return.label
   (block
@@ -117,7 +117,7 @@
 )
 
 ;;; void InferReturn.acceptsArrayOfObject(Object[] foo)
-(func $acceptsArrayOfObject<java.lang.Object<>>:void@inferreturn.InferReturn
+(func $m_acceptsArrayOfObject__arrayOf_java_lang_Object__void@inferreturn.InferReturn
  (param $foo (ref null $java.lang.Object))
  (block $return.label
   (block

@@ -7,7 +7,7 @@
 ))
 
 ;;; Map()
-(func $<init><>:void@nobridgemethods.Map
+(func $m_<init>__void_$pp_nobridgemethods@nobridgemethods.Map
  (param $this (ref null $nobridgemethods.Map))
  (result (ref null $nobridgemethods.Map))
  (block $return.label
@@ -24,7 +24,7 @@
 ))
 
 ;;; TreeMap()
-(func $<init><>:void@nobridgemethods.TreeMap
+(func $m_<init>__void_$pp_nobridgemethods@nobridgemethods.TreeMap
  (param $this (ref null $nobridgemethods.TreeMap))
  (result (ref null $nobridgemethods.TreeMap))
  (block $return.label
@@ -37,7 +37,7 @@
 )
 
 ;;; InnerEntry<K> TreeMap.getCeilingEntry(K key)
-(func $getCeilingEntry<java.lang.Object>:nobridgemethods.TreeMap.InnerEntry@nobridgemethods.TreeMap
+(func $m_getCeilingEntry__java_lang_Object__nobridgemethods_TreeMap_InnerEntry@nobridgemethods.TreeMap
  (param $this (ref null $java.lang.Object))
  (param $key (ref null $java.lang.Object))
  (result (ref null $nobridgemethods.TreeMap.InnerEntry))
@@ -45,7 +45,23 @@
  (block $return.label
   (block
    ;; return new InnerEntry.<init>();
-   (local.set $return.value (call $<init><>:void@nobridgemethods.TreeMap.InnerEntry (struct.new_with_rtt $nobridgemethods.TreeMap.InnerEntry (global.get $nobridgemethods.TreeMap.InnerEntry.rtt))))
+   (local.set $return.value (call $m_<init>__void_$pp_nobridgemethods@nobridgemethods.TreeMap.InnerEntry (struct.new_with_rtt $nobridgemethods.TreeMap.InnerEntry (global.get $nobridgemethods.TreeMap.InnerEntry.rtt))))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; InnerEntry<K> TreeMap.getCeilingEntry(Object arg0)
+(func $m_getCeilingEntry__java_lang_Object__nobridgemethods_Entry@nobridgemethods.TreeMap
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $nobridgemethods.TreeMap.InnerEntry))
+ (local $return.value (ref null $nobridgemethods.TreeMap.InnerEntry))
+ (block $return.label
+  (block
+   ;; return TreeMap.this.getCeilingEntry(arg0);
+   (local.set $return.value (ref.null $nobridgemethods.TreeMap.InnerEntry))
    (br $return.label)
   )
  )
@@ -57,7 +73,7 @@
 ))
 
 ;;; InnerEntry()
-(func $<init><>:void@nobridgemethods.TreeMap.InnerEntry
+(func $m_<init>__void_$pp_nobridgemethods@nobridgemethods.TreeMap.InnerEntry
  (param $this (ref null $nobridgemethods.TreeMap.InnerEntry))
  (result (ref null $nobridgemethods.TreeMap.InnerEntry))
  (block $return.label
@@ -74,7 +90,7 @@
 ))
 
 ;;; CharSet()
-(func $<init><>:void@nobridgemethods.CharSet
+(func $m_<init>__void@nobridgemethods.CharSet
  (param $this (ref null $nobridgemethods.CharSet))
  (result (ref null $nobridgemethods.CharSet))
  (block $return.label
@@ -87,14 +103,14 @@
 )
 
 ;;; void CharSet.main(String... args)
-(func $main<java.lang.String<>>:void@nobridgemethods.CharSet
+(func $m_main__arrayOf_java_lang_String__void@nobridgemethods.CharSet
  (param $args (ref null $java.lang.Object))
  (local $treeMap (ref null $nobridgemethods.TreeMap))
  (block $return.label
   (block
    ;; TreeMap<String> treeMap = new $1.<init>();
    
-   (local.set $treeMap (call $<init><>:void@nobridgemethods.CharSet.1 (struct.new_with_rtt $nobridgemethods.CharSet.1 (global.get $nobridgemethods.CharSet.1.rtt))))
+   (local.set $treeMap (call $m_<init>__void_$pp_nobridgemethods@nobridgemethods.CharSet.1 (struct.new_with_rtt $nobridgemethods.CharSet.1 (global.get $nobridgemethods.CharSet.1.rtt))))
   )
  )
 )
@@ -104,7 +120,7 @@
 ))
 
 ;;; <anonymous> extends TreeMap<String>()
-(func $<init><>:void@nobridgemethods.CharSet.1
+(func $m_<init>__void_$pp_nobridgemethods@nobridgemethods.CharSet.1
  (param $this (ref null $nobridgemethods.CharSet.1))
  (result (ref null $nobridgemethods.CharSet.1))
  (block $return.label

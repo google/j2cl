@@ -5,7 +5,7 @@
 ))
 
 ;;; GrandParent()
-(func $<init><>:void@supermethodcall.GrandParent
+(func $m_<init>__void_$pp_supermethodcall@supermethodcall.GrandParent
  (param $this (ref null $supermethodcall.GrandParent))
  (result (ref null $supermethodcall.GrandParent))
  (block $return.label
@@ -18,7 +18,7 @@
 )
 
 ;;; void GrandParent.grandParentSimplest()
-(func $grandParentSimplest<>:void@supermethodcall.GrandParent
+(func $m_grandParentSimplest__void@supermethodcall.GrandParent
  (param $this (ref null $java.lang.Object))
  (block $return.label
   (block
@@ -27,7 +27,7 @@
 )
 
 ;;; void GrandParent.grandParentWithParams(int foo)
-(func $grandParentWithParams<int>:void@supermethodcall.GrandParent
+(func $m_grandParentWithParams__int__void@supermethodcall.GrandParent
  (param $this (ref null $java.lang.Object))
  (param $foo i32)
  (block $return.label
@@ -37,7 +37,7 @@
 )
 
 ;;; Object GrandParent.grandParentWithChangingReturn()
-(func $grandParentWithChangingReturn<>:java.lang.Object@supermethodcall.GrandParent
+(func $m_grandParentWithChangingReturn__java_lang_Object@supermethodcall.GrandParent
  (param $this (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
@@ -56,7 +56,7 @@
 ))
 
 ;;; Parent()
-(func $<init><>:void@supermethodcall.Parent
+(func $m_<init>__void_$pp_supermethodcall@supermethodcall.Parent
  (param $this (ref null $supermethodcall.Parent))
  (result (ref null $supermethodcall.Parent))
  (block $return.label
@@ -69,7 +69,7 @@
 )
 
 ;;; void Parent.parentSimplest()
-(func $parentSimplest<>:void@supermethodcall.Parent
+(func $m_parentSimplest__void@supermethodcall.Parent
  (param $this (ref null $java.lang.Object))
  (block $return.label
   (block
@@ -78,7 +78,7 @@
 )
 
 ;;; void Parent.parentWithParams(int foo)
-(func $parentWithParams<int>:void@supermethodcall.Parent
+(func $m_parentWithParams__int__void@supermethodcall.Parent
  (param $this (ref null $java.lang.Object))
  (param $foo i32)
  (block $return.label
@@ -88,7 +88,7 @@
 )
 
 ;;; Object Parent.parentWithChangingReturn()
-(func $parentWithChangingReturn<>:java.lang.Object@supermethodcall.Parent
+(func $m_parentWithChangingReturn__java_lang_Object@supermethodcall.Parent
  (param $this (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
@@ -107,7 +107,7 @@
 ))
 
 ;;; Child()
-(func $<init><>:void@supermethodcall.Child
+(func $m_<init>__void@supermethodcall.Child
  (param $this (ref null $supermethodcall.Child))
  (result (ref null $supermethodcall.Child))
  (block $return.label
@@ -120,7 +120,7 @@
 )
 
 ;;; void Child.parentSimplest()
-(func $parentSimplest<>:void@supermethodcall.Child
+(func $m_parentSimplest__void@supermethodcall.Child
  (param $this (ref null $java.lang.Object))
  (block $return.label
   (block
@@ -131,7 +131,7 @@
 )
 
 ;;; void Child.parentWithParams(int foo)
-(func $parentWithParams<int>:void@supermethodcall.Child
+(func $m_parentWithParams__int__void@supermethodcall.Child
  (param $this (ref null $java.lang.Object))
  (param $foo i32)
  (block $return.label
@@ -143,7 +143,7 @@
 )
 
 ;;; Child Child.parentWithChangingReturn()
-(func $parentWithChangingReturn<>:supermethodcall.Child@supermethodcall.Child
+(func $m_parentWithChangingReturn__supermethodcall_Child@supermethodcall.Child
  (param $this (ref null $java.lang.Object))
  (result (ref null $supermethodcall.Child))
  (local $return.value (ref null $supermethodcall.Child))
@@ -161,7 +161,7 @@
 )
 
 ;;; void Child.grandParentSimplest()
-(func $grandParentSimplest<>:void@supermethodcall.Child
+(func $m_grandParentSimplest__void@supermethodcall.Child
  (param $this (ref null $java.lang.Object))
  (block $return.label
   (block
@@ -172,7 +172,7 @@
 )
 
 ;;; void Child.grandParentWithParams(int foo)
-(func $grandParentWithParams<int>:void@supermethodcall.Child
+(func $m_grandParentWithParams__int__void@supermethodcall.Child
  (param $this (ref null $java.lang.Object))
  (param $foo i32)
  (block $return.label
@@ -184,7 +184,7 @@
 )
 
 ;;; Child Child.grandParentWithChangingReturn()
-(func $grandParentWithChangingReturn<>:supermethodcall.Child@supermethodcall.Child
+(func $m_grandParentWithChangingReturn__supermethodcall_Child@supermethodcall.Child
  (param $this (ref null $java.lang.Object))
  (result (ref null $supermethodcall.Child))
  (local $return.value (ref null $supermethodcall.Child))
@@ -194,6 +194,36 @@
    (ref.null $java.lang.Object)
    drop
    ;; return Child.this;
+   (local.set $return.value (ref.null $supermethodcall.Child))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; Child Child.grandParentWithChangingReturn()
+(func $m_grandParentWithChangingReturn__java_lang_Object@supermethodcall.Child
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $supermethodcall.Child))
+ (local $return.value (ref null $supermethodcall.Child))
+ (block $return.label
+  (block
+   ;; return Child.this.grandParentWithChangingReturn();
+   (local.set $return.value (ref.null $supermethodcall.Child))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; Child Child.parentWithChangingReturn()
+(func $m_parentWithChangingReturn__java_lang_Object@supermethodcall.Child
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $supermethodcall.Child))
+ (local $return.value (ref null $supermethodcall.Child))
+ (block $return.label
+  (block
+   ;; return Child.this.parentWithChangingReturn();
    (local.set $return.value (ref.null $supermethodcall.Child))
    (br $return.label)
   )

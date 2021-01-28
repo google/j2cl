@@ -9,7 +9,7 @@
 ))
 
 ;;; HashFunctions()
-(func $<init><>:void@overwrittentypevariables.HashFunctions
+(func $m_<init>__void@overwrittentypevariables.HashFunctions
  (param $this (ref null $overwrittentypevariables.HashFunctions))
  (result (ref null $overwrittentypevariables.HashFunctions))
  (block $return.label
@@ -22,13 +22,13 @@
 )
 
 ;;; HashFunction<T> HashFunctions.hashFunction()
-(func $hashFunction<>:overwrittentypevariables.HashFunction@overwrittentypevariables.HashFunctions
+(func $m_hashFunction__overwrittentypevariables_HashFunction@overwrittentypevariables.HashFunctions
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; return new $1.<init>();
-   (local.set $return.value (call $<init><>:void@overwrittentypevariables.HashFunctions.1 (struct.new_with_rtt $overwrittentypevariables.HashFunctions.1 (global.get $overwrittentypevariables.HashFunctions.1.rtt))))
+   (local.set $return.value (call $m_<init>__void_$pp_overwrittentypevariables@overwrittentypevariables.HashFunctions.1 (struct.new_with_rtt $overwrittentypevariables.HashFunctions.1 (global.get $overwrittentypevariables.HashFunctions.1.rtt))))
    (br $return.label)
   )
  )
@@ -36,13 +36,13 @@
 )
 
 ;;; HashFunction<T> HashFunctions.enumHashFunction()
-(func $enumHashFunction<>:overwrittentypevariables.HashFunction@overwrittentypevariables.HashFunctions
+(func $m_enumHashFunction__overwrittentypevariables_HashFunction@overwrittentypevariables.HashFunctions
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; return new $2.<init>();
-   (local.set $return.value (call $<init><>:void@overwrittentypevariables.HashFunctions.2 (struct.new_with_rtt $overwrittentypevariables.HashFunctions.2 (global.get $overwrittentypevariables.HashFunctions.2.rtt))))
+   (local.set $return.value (call $m_<init>__void_$pp_overwrittentypevariables@overwrittentypevariables.HashFunctions.2 (struct.new_with_rtt $overwrittentypevariables.HashFunctions.2 (global.get $overwrittentypevariables.HashFunctions.2.rtt))))
    (br $return.label)
   )
  )
@@ -54,7 +54,7 @@
 ))
 
 ;;; <anonymous> implements HashFunction<T>()
-(func $<init><>:void@overwrittentypevariables.HashFunctions.1
+(func $m_<init>__void_$pp_overwrittentypevariables@overwrittentypevariables.HashFunctions.1
  (param $this (ref null $overwrittentypevariables.HashFunctions.1))
  (result (ref null $overwrittentypevariables.HashFunctions.1))
  (block $return.label
@@ -67,7 +67,7 @@
 )
 
 ;;; String <anonymous> implements HashFunction<T>.apply(T input)
-(func $apply<java.lang.Object>:java.lang.String@overwrittentypevariables.HashFunctions.1
+(func $m_apply__java_lang_Object__java_lang_String@overwrittentypevariables.HashFunctions.1
  (param $this (ref null $java.lang.Object))
  (param $input (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
@@ -82,12 +82,28 @@
  (local.get $return.value)
 )
 
+;;; String <anonymous> implements HashFunction<T>.apply(Object arg0)
+(func $m_apply__java_lang_Object__java_lang_Object@overwrittentypevariables.HashFunctions.1
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $java.lang.String))
+ (local $return.value (ref null $java.lang.String))
+ (block $return.label
+  (block
+   ;; return $1.this.apply(arg0);
+   (local.set $return.value (ref.null $java.lang.String))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
 ;;; CLASS  <anonymous> implements HashFunction<T>
 (type $overwrittentypevariables.HashFunctions.2 (struct
 ))
 
 ;;; <anonymous> implements HashFunction<T>()
-(func $<init><>:void@overwrittentypevariables.HashFunctions.2
+(func $m_<init>__void_$pp_overwrittentypevariables@overwrittentypevariables.HashFunctions.2
  (param $this (ref null $overwrittentypevariables.HashFunctions.2))
  (result (ref null $overwrittentypevariables.HashFunctions.2))
  (block $return.label
@@ -100,7 +116,7 @@
 )
 
 ;;; String <anonymous> implements HashFunction<T>.apply(T input)
-(func $apply<java.lang.Enum>:java.lang.String@overwrittentypevariables.HashFunctions.2
+(func $m_apply__java_lang_Enum__java_lang_String@overwrittentypevariables.HashFunctions.2
  (param $this (ref null $java.lang.Object))
  (param $input (ref null $java.lang.Enum))
  (result (ref null $java.lang.String))
@@ -108,6 +124,22 @@
  (block $return.label
   (block
    ;; return ("" + input.ordinal());
+   (local.set $return.value (ref.null $java.lang.String))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; String <anonymous> implements HashFunction<T>.apply(Object arg0)
+(func $m_apply__java_lang_Object__java_lang_Object@overwrittentypevariables.HashFunctions.2
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $java.lang.String))
+ (local $return.value (ref null $java.lang.String))
+ (block $return.label
+  (block
+   ;; return $2.this.apply(((T) arg0));
    (local.set $return.value (ref.null $java.lang.String))
    (br $return.label)
   )

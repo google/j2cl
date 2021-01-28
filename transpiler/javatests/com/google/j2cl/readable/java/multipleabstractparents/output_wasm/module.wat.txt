@@ -5,7 +5,7 @@
 ))
 
 ;;; MultipleAbstractParents()
-(func $<init><>:void@multipleabstractparents.MultipleAbstractParents
+(func $m_<init>__void@multipleabstractparents.MultipleAbstractParents
  (param $this (ref null $multipleabstractparents.MultipleAbstractParents))
  (result (ref null $multipleabstractparents.MultipleAbstractParents))
  (block $return.label
@@ -18,7 +18,7 @@
 )
 
 ;;; void MultipleAbstractParents.main(String... args)
-(func $main<java.lang.String<>>:void@multipleabstractparents.MultipleAbstractParents
+(func $m_main__arrayOf_java_lang_String__void@multipleabstractparents.MultipleAbstractParents
  (param $args (ref null $java.lang.Object))
  (block $return.label
   (block
@@ -41,7 +41,7 @@
 ))
 
 ;;; AbstractListCollection()
-(func $<init><>:void@multipleabstractparents.MultipleAbstractParents.AbstractListCollection
+(func $m_<init>__void@multipleabstractparents.MultipleAbstractParents.AbstractListCollection
  (param $this (ref null $multipleabstractparents.MultipleAbstractParents.AbstractListCollection))
  (result (ref null $multipleabstractparents.MultipleAbstractParents.AbstractListCollection))
  (block $return.label
@@ -58,7 +58,7 @@
 ))
 
 ;;; AbstractCollection()
-(func $<init><>:void@multipleabstractparents.MultipleAbstractParents.AbstractCollection
+(func $m_<init>__void@multipleabstractparents.MultipleAbstractParents.AbstractCollection
  (param $this (ref null $multipleabstractparents.MultipleAbstractParents.AbstractCollection))
  (result (ref null $multipleabstractparents.MultipleAbstractParents.AbstractCollection))
  (block $return.label
@@ -71,7 +71,7 @@
 )
 
 ;;; String AbstractCollection.getFoo(T t)
-(func $getFoo<java.lang.Object>:java.lang.String@multipleabstractparents.MultipleAbstractParents.AbstractCollection
+(func $m_getFoo__java_lang_Object__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractCollection
  (param $this (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
@@ -91,7 +91,7 @@
 ))
 
 ;;; AbstractList()
-(func $<init><>:void@multipleabstractparents.MultipleAbstractParents.AbstractList
+(func $m_<init>__void@multipleabstractparents.MultipleAbstractParents.AbstractList
  (param $this (ref null $multipleabstractparents.MultipleAbstractParents.AbstractList))
  (result (ref null $multipleabstractparents.MultipleAbstractParents.AbstractList))
  (block $return.label
@@ -108,7 +108,7 @@
 ))
 
 ;;; AbstractList2()
-(func $<init><>:void@multipleabstractparents.MultipleAbstractParents.AbstractList2
+(func $m_<init>__void@multipleabstractparents.MultipleAbstractParents.AbstractList2
  (param $this (ref null $multipleabstractparents.MultipleAbstractParents.AbstractList2))
  (result (ref null $multipleabstractparents.MultipleAbstractParents.AbstractList2))
  (block $return.label
@@ -125,7 +125,7 @@
 ))
 
 ;;; ArrayList()
-(func $<init><>:void@multipleabstractparents.MultipleAbstractParents.ArrayList
+(func $m_<init>__void@multipleabstractparents.MultipleAbstractParents.ArrayList
  (param $this (ref null $multipleabstractparents.MultipleAbstractParents.ArrayList))
  (result (ref null $multipleabstractparents.MultipleAbstractParents.ArrayList))
  (block $return.label
@@ -144,7 +144,7 @@
 ))
 
 ;;; AbstractStringList()
-(func $<init><>:void@multipleabstractparents.MultipleAbstractParents.AbstractStringList
+(func $m_<init>__void@multipleabstractparents.MultipleAbstractParents.AbstractStringList
  (param $this (ref null $multipleabstractparents.MultipleAbstractParents.AbstractStringList))
  (result (ref null $multipleabstractparents.MultipleAbstractParents.AbstractStringList))
  (block $return.label
@@ -156,12 +156,44 @@
  (local.get $this)
 )
 
+;;; String AbstractStringList.getFoo(Object arg0)
+(func $m_getFoo__java_lang_Object__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractStringList
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $java.lang.String))
+ (local $return.value (ref null $java.lang.String))
+ (block $return.label
+  (block
+   ;; return AbstractStringList.this.getFoo(((String) arg0));
+   (local.set $return.value (ref.null $java.lang.String))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; String AbstractStringList.getFoo(String arg0)
+(func $m_getFoo__java_lang_String__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractStringList
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.String))
+ (result (ref null $java.lang.String))
+ (local $return.value (ref null $java.lang.String))
+ (block $return.label
+  (block
+   ;; return super.getFoo(arg0);
+   (local.set $return.value (ref.null $java.lang.String))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
 ;;; CLASS  AbstractStringList2
 (type $multipleabstractparents.MultipleAbstractParents.AbstractStringList2 (struct
 ))
 
 ;;; AbstractStringList2()
-(func $<init><>:void@multipleabstractparents.MultipleAbstractParents.AbstractStringList2
+(func $m_<init>__void@multipleabstractparents.MultipleAbstractParents.AbstractStringList2
  (param $this (ref null $multipleabstractparents.MultipleAbstractParents.AbstractStringList2))
  (result (ref null $multipleabstractparents.MultipleAbstractParents.AbstractStringList2))
  (block $return.label
@@ -173,12 +205,28 @@
  (local.get $this)
 )
 
+;;; String AbstractStringList2.getFoo(String arg0)
+(func $m_getFoo__java_lang_String__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractStringList2
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.String))
+ (result (ref null $java.lang.String))
+ (local $return.value (ref null $java.lang.String))
+ (block $return.label
+  (block
+   ;; return List.this.getFoo(arg0);
+   (local.set $return.value (ref.null $java.lang.String))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
 ;;; CLASS  AbstractStringList3
 (type $multipleabstractparents.MultipleAbstractParents.AbstractStringList3 (struct
 ))
 
 ;;; AbstractStringList3()
-(func $<init><>:void@multipleabstractparents.MultipleAbstractParents.AbstractStringList3
+(func $m_<init>__void@multipleabstractparents.MultipleAbstractParents.AbstractStringList3
  (param $this (ref null $multipleabstractparents.MultipleAbstractParents.AbstractStringList3))
  (result (ref null $multipleabstractparents.MultipleAbstractParents.AbstractStringList3))
  (block $return.label
@@ -195,7 +243,7 @@
 ))
 
 ;;; StringList()
-(func $<init><>:void@multipleabstractparents.MultipleAbstractParents.StringList
+(func $m_<init>__void@multipleabstractparents.MultipleAbstractParents.StringList
  (param $this (ref null $multipleabstractparents.MultipleAbstractParents.StringList))
  (result (ref null $multipleabstractparents.MultipleAbstractParents.StringList))
  (block $return.label
@@ -212,7 +260,7 @@
 ))
 
 ;;; StringListChild()
-(func $<init><>:void@multipleabstractparents.MultipleAbstractParents.StringListChild
+(func $m_<init>__void@multipleabstractparents.MultipleAbstractParents.StringListChild
  (param $this (ref null $multipleabstractparents.MultipleAbstractParents.StringListChild))
  (result (ref null $multipleabstractparents.MultipleAbstractParents.StringListChild))
  (block $return.label

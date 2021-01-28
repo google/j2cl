@@ -440,6 +440,15 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     return getOrigin().getName() == null ? getName() : getOrigin().getName();
   }
 
+  // TODO(b/178738483): This is a temporary hack to be able to reuse bridging logic in Closure
+  // and WASM.
+  private static ThreadLocal<Boolean> useWasmManglingPatterns =
+      ThreadLocal.withInitial(() -> false);
+
+  public static void setWasmManglingPatterns() {
+    useWasmManglingPatterns.set(true);
+  }
+
   @Memoized
   @Override
   public String getMangledName() {
@@ -454,25 +463,28 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       return getBridgeOrigin().getMangledName();
     }
 
-    if (isConstructor()) {
-      return "constructor";
-    }
+    if (!useWasmManglingPatterns.get()) {
+      // Do not use JsInfo when producing mangled names for wasm.
+      if (isConstructor()) {
+        return "constructor";
+      }
 
-    if (isPropertyGetter()) {
-      return "get " + computePropertyMangledName();
-    }
+      if (isPropertyGetter()) {
+        return "get " + computePropertyMangledName();
+      }
 
-    if (isPropertySetter()) {
-      return "set " + computePropertyMangledName();
-    }
+      if (isPropertySetter()) {
+        return "set " + computePropertyMangledName();
+      }
 
-    if (isJsMethod()) {
-      return getSimpleJsName();
-    }
+      if (isJsMethod()) {
+        return getSimpleJsName();
+      }
 
-    if (getOrigin().isInstanceOfSupportMember()) {
-      // Class support methods, like $isInstance and $markImplementor, should not be mangled.
-      return getName();
+      if (getOrigin().isInstanceOfSupportMember()) {
+        // Class support methods, like $isInstance and $markImplementor, should not be mangled.
+        return getName();
+      }
     }
 
     // All special cases have been handled. Go ahead and construct the mangled name for a plain
@@ -500,8 +512,14 @@ public abstract class MethodDescriptor extends MemberDescriptor {
           break;
       }
     }
-    String parameterSignature = String.join("__", getMangledParameterTypes());
-    return buildMangledName(parameterSignature + suffix);
+
+    Iterable<String> manglingDescriptors =
+        useWasmManglingPatterns.get()
+            ? Iterables.concat(
+                getMangledParameterTypes(),
+                ImmutableList.of(getReturnTypeDescriptor().toRawTypeDescriptor().getMangledName()))
+            : getMangledParameterTypes();
+    return buildMangledName(String.join("__", manglingDescriptors) + suffix);
   }
 
   /** Returns the list of mangled name of parameters' types. */

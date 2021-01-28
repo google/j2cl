@@ -17,6 +17,8 @@ import com.google.common.base.Throwables;
 import com.google.common.util.concurrent.Uninterruptibles;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.backend.Backend;
 import com.google.j2cl.transpiler.passes.JsInteropRestrictionsChecker;
 import com.google.j2cl.transpiler.passes.NormalizationPass;
 import java.util.List;
@@ -60,6 +62,10 @@ class J2clTranspiler {
   }
 
   private void transpileImpl() {
+    if (options.getBackend() == Backend.WASM) {
+      // TODO(rluble): cleanup the static state.
+      MethodDescriptor.setWasmManglingPatterns();
+    }
     List<CompilationUnit> j2clUnits =
         options
             .getFrontend()

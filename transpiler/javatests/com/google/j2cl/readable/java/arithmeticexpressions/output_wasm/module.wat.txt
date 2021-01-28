@@ -12,7 +12,7 @@
 (global $foo@arithmeticexpressions.ArithmeticExpressions (mut i64) (i64.const 0))
 
 ;;; ArithmeticExpressions()
-(func $<init><>:void@arithmeticexpressions.ArithmeticExpressions
+(func $m_<init>__void@arithmeticexpressions.ArithmeticExpressions
  (param $this (ref null $arithmeticexpressions.ArithmeticExpressions))
  (result (ref null $arithmeticexpressions.ArithmeticExpressions))
  (block $return.label
@@ -25,7 +25,7 @@
 )
 
 ;;; void ArithmeticExpressions.testCoercions()
-(func $testCoercions<>:void@arithmeticexpressions.ArithmeticExpressions
+(func $m_testCoercions__void@arithmeticexpressions.ArithmeticExpressions
  (param $this (ref null $java.lang.Object))
  (local $b i32)
  (local $c i32)
@@ -70,7 +70,7 @@
 )
 
 ;;; void ArithmeticExpressions.testPrimitives()
-(func $testPrimitives<>:void@arithmeticexpressions.ArithmeticExpressions
+(func $m_testPrimitives__void@arithmeticexpressions.ArithmeticExpressions
  (param $this (ref null $java.lang.Object))
  (local $a i32)
  (local $b i32)
@@ -160,7 +160,7 @@
 )
 
 ;;; void ArithmeticExpressions.testCompoundArray()
-(func $testCompoundArray<>:void@arithmeticexpressions.ArithmeticExpressions
+(func $m_testCompoundArray__void@arithmeticexpressions.ArithmeticExpressions
  (param $this (ref null $java.lang.Object))
  (local $ints (ref null $java.lang.Object))
  (local $i i32)
@@ -265,7 +265,7 @@
    (block
     ;; long[] $array = arithmeticexpressions.ArithmeticExpressions.getLongArray(),int $index = 0;
     
-    (local.set $$array_3 (call $getLongArray<>:long<>@arithmeticexpressions.ArithmeticExpressions ))
+    (local.set $$array_3 (call $m_getLongArray__arrayOf_long@arithmeticexpressions.ArithmeticExpressions ))
     (local.set $$index_3 (i32.const 0))
     ;; ($array[$index] = ($array[$index] + 1));
     
@@ -298,7 +298,7 @@
 )
 
 ;;; long[] ArithmeticExpressions.getLongArray()
-(func $getLongArray<>:long<>@arithmeticexpressions.ArithmeticExpressions
+(func $m_getLongArray__arrayOf_long@arithmeticexpressions.ArithmeticExpressions
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (block $return.label
@@ -312,7 +312,7 @@
 )
 
 ;;; void ArithmeticExpressions.testCompoundBoxedTypes()
-(func $testCompoundBoxedTypes<>:void@arithmeticexpressions.ArithmeticExpressions
+(func $m_testCompoundBoxedTypes__void@arithmeticexpressions.ArithmeticExpressions
  (param $this (ref null $java.lang.Object))
  (local $c (ref null $java.lang.Integer))
  (local $d (ref null $java.lang.Integer))
@@ -406,7 +406,7 @@
 )
 
 ;;; Integer ArithmeticExpressions.getInteger()
-(func $getInteger<>:java.lang.Integer@arithmeticexpressions.ArithmeticExpressions
+(func $m_getInteger__java_lang_Integer@arithmeticexpressions.ArithmeticExpressions
  (result (ref null $java.lang.Integer))
  (local $return.value (ref null $java.lang.Integer))
  (block $return.label
@@ -420,14 +420,14 @@
 )
 
 ;;; void ArithmeticExpressions.testSideEffect()
-(func $testSideEffect<>:void@arithmeticexpressions.ArithmeticExpressions
+(func $m_testSideEffect__void@arithmeticexpressions.ArithmeticExpressions
  (local $$qualifier (ref null $arithmeticexpressions.ArithmeticExpressions))
  (block $return.label
   (block
    (block
     ;; ArithmeticExpressions $qualifier = arithmeticexpressions.ArithmeticExpressions.getWithSideEffect();
     
-    (local.set $$qualifier (call $getWithSideEffect<>:arithmeticexpressions.ArithmeticExpressions@arithmeticexpressions.ArithmeticExpressions ))
+    (local.set $$qualifier (call $m_getWithSideEffect__arithmeticexpressions_ArithmeticExpressions@arithmeticexpressions.ArithmeticExpressions ))
     ;; ($qualifier.intField = ($qualifier.intField + 5));
     (struct.set $arithmeticexpressions.ArithmeticExpressions $intField@arithmeticexpressions.ArithmeticExpressions  (local.get $$qualifier) (i64.add (struct.get $arithmeticexpressions.ArithmeticExpressions $intField@arithmeticexpressions.ArithmeticExpressions  (local.get $$qualifier)) (i64.const 0)))
    )
@@ -436,7 +436,7 @@
 )
 
 ;;; ArithmeticExpressions ArithmeticExpressions.getWithSideEffect()
-(func $getWithSideEffect<>:arithmeticexpressions.ArithmeticExpressions@arithmeticexpressions.ArithmeticExpressions
+(func $m_getWithSideEffect__arithmeticexpressions_ArithmeticExpressions@arithmeticexpressions.ArithmeticExpressions
  (result (ref null $arithmeticexpressions.ArithmeticExpressions))
  (local $return.value (ref null $arithmeticexpressions.ArithmeticExpressions))
  (block $return.label
@@ -450,7 +450,7 @@
 )
 
 ;;; void ArithmeticExpressions.testExtendedOperands()
-(func $testExtendedOperands<>:void@arithmeticexpressions.ArithmeticExpressions
+(func $m_testExtendedOperands__void@arithmeticexpressions.ArithmeticExpressions
  (param $this (ref null $java.lang.Object))
  (local $boxedInteger (ref null $java.lang.Integer))
  (local $i i32)
@@ -494,7 +494,7 @@
 ))
 
 ;;; Ref()
-(func $<init><>:void@arithmeticexpressions.ArithmeticExpressions.1Ref
+(func $m_<init>__void_$pp_arithmeticexpressions@arithmeticexpressions.ArithmeticExpressions.1Ref
  (param $this (ref null $arithmeticexpressions.ArithmeticExpressions.1Ref))
  (result (ref null $arithmeticexpressions.ArithmeticExpressions.1Ref))
  (block $return.label

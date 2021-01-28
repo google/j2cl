@@ -5,7 +5,7 @@
 ))
 
 ;;; Main()
-(func $<init><>:void@bridgejsmethod.Main
+(func $m_<init>__void@bridgejsmethod.Main
  (param $this (ref null $bridgejsmethod.Main))
  (result (ref null $bridgejsmethod.Main))
  (block $return.label
@@ -18,7 +18,7 @@
 )
 
 ;;; void Main.test()
-(func $test<>:void@bridgejsmethod.Main
+(func $m_test__void@bridgejsmethod.Main
  (local $a (ref null $bridgejsmethod.Main.A))
  (local $b (ref null $bridgejsmethod.Main.B))
  (local $c (ref null $bridgejsmethod.Main.C))
@@ -30,7 +30,7 @@
   (block
    ;; A a = new A.<init>();
    
-   (local.set $a (call $<init><>:void@bridgejsmethod.Main.A (struct.new_with_rtt $bridgejsmethod.Main.A (global.get $bridgejsmethod.Main.A.rtt))))
+   (local.set $a (call $m_<init>__void@bridgejsmethod.Main.A (struct.new_with_rtt $bridgejsmethod.Main.A (global.get $bridgejsmethod.Main.A.rtt))))
    ;; a.fun(1);
    (ref.null $java.lang.Object)
    drop
@@ -38,7 +38,7 @@
    
    ;; B b = new B.<init>();
    
-   (local.set $b (call $<init><>:void@bridgejsmethod.Main.B (struct.new_with_rtt $bridgejsmethod.Main.B (global.get $bridgejsmethod.Main.B.rtt))))
+   (local.set $b (call $m_<init>__void@bridgejsmethod.Main.B (struct.new_with_rtt $bridgejsmethod.Main.B (global.get $bridgejsmethod.Main.B.rtt))))
    ;; b.fun("abc");
    (ref.null $java.lang.String)
    drop
@@ -46,7 +46,7 @@
    
    ;; C c = new C.<init>();
    
-   (local.set $c (call $<init><>:void@bridgejsmethod.Main.C (struct.new_with_rtt $bridgejsmethod.Main.C (global.get $bridgejsmethod.Main.C.rtt))))
+   (local.set $c (call $m_<init>__void@bridgejsmethod.Main.C (struct.new_with_rtt $bridgejsmethod.Main.C (global.get $bridgejsmethod.Main.C.rtt))))
    ;; c.fun(1);
    (ref.null $java.lang.Integer)
    drop
@@ -54,7 +54,7 @@
    
    ;; D d = new D.<init>();
    
-   (local.set $d (call $<init><>:void@bridgejsmethod.Main.D (struct.new_with_rtt $bridgejsmethod.Main.D (global.get $bridgejsmethod.Main.D.rtt))))
+   (local.set $d (call $m_<init>__void@bridgejsmethod.Main.D (struct.new_with_rtt $bridgejsmethod.Main.D (global.get $bridgejsmethod.Main.D.rtt))))
    ;; d.fun(1);
    (ref.null $java.lang.Integer)
    drop
@@ -62,7 +62,7 @@
    
    ;; E e = new E.<init>();
    
-   (local.set $e (call $<init><>:void@bridgejsmethod.Main.E (struct.new_with_rtt $bridgejsmethod.Main.E (global.get $bridgejsmethod.Main.E.rtt))))
+   (local.set $e (call $m_<init>__void@bridgejsmethod.Main.E (struct.new_with_rtt $bridgejsmethod.Main.E (global.get $bridgejsmethod.Main.E.rtt))))
    ;; e.fun("abc");
    (ref.null $java.lang.String)
    drop
@@ -70,13 +70,13 @@
    
    ;; H<Integer> h = new H.<init>();
    
-   (local.set $h (call $<init><>:void@bridgejsmethod.Main.H (struct.new_with_rtt $bridgejsmethod.Main.H (global.get $bridgejsmethod.Main.H.rtt))))
+   (local.set $h (call $m_<init>__void@bridgejsmethod.Main.H (struct.new_with_rtt $bridgejsmethod.Main.H (global.get $bridgejsmethod.Main.H.rtt))))
    ;; h.enclose(1);
    (ref.null $java.lang.Integer)
    drop
    ;; L<Integer> l = new L.<init>();
    
-   (local.set $l (call $<init><>:void@bridgejsmethod.Main.L (struct.new_with_rtt $bridgejsmethod.Main.L (global.get $bridgejsmethod.Main.L.rtt))))
+   (local.set $l (call $m_<init>__void@bridgejsmethod.Main.L (struct.new_with_rtt $bridgejsmethod.Main.L (global.get $bridgejsmethod.Main.L.rtt))))
    ;; l.fun("foo",1);
    
   )
@@ -88,7 +88,7 @@
 ))
 
 ;;; A()
-(func $<init><>:void@bridgejsmethod.Main.A
+(func $m_<init>__void@bridgejsmethod.Main.A
  (param $this (ref null $bridgejsmethod.Main.A))
  (result (ref null $bridgejsmethod.Main.A))
  (block $return.label
@@ -101,7 +101,7 @@
 )
 
 ;;; T A.fun(T t)
-(func $fun<java.lang.Object>:java.lang.Object@bridgejsmethod.Main.A
+(func $m_fun__java_lang_Object__java_lang_Object@bridgejsmethod.Main.A
  (param $this (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -117,7 +117,7 @@
 )
 
 ;;; void A.bar(T t)
-(func $bar<java.lang.Object>:void@bridgejsmethod.Main.A
+(func $m_bar__java_lang_Object__void@bridgejsmethod.Main.A
  (param $this (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Object))
  (block $return.label
@@ -135,7 +135,7 @@
 ))
 
 ;;; B()
-(func $<init><>:void@bridgejsmethod.Main.B
+(func $m_<init>__void@bridgejsmethod.Main.B
  (param $this (ref null $bridgejsmethod.Main.B))
  (result (ref null $bridgejsmethod.Main.B))
  (block $return.label
@@ -148,7 +148,7 @@
 )
 
 ;;; String B.fun(String s)
-(func $fun<java.lang.String>:java.lang.String@bridgejsmethod.Main.B
+(func $m_fun__java_lang_String__java_lang_String@bridgejsmethod.Main.B
  (param $this (ref null $java.lang.Object))
  (param $s (ref null $java.lang.String))
  (result (ref null $java.lang.String))
@@ -164,7 +164,7 @@
 )
 
 ;;; void B.bar(String s)
-(func $bar<java.lang.String>:void@bridgejsmethod.Main.B
+(func $m_bar__java_lang_String__void@bridgejsmethod.Main.B
  (param $this (ref null $java.lang.Object))
  (param $s (ref null $java.lang.String))
  (block $return.label
@@ -173,12 +173,40 @@
  )
 )
 
+;;; void B.bar(Object arg0)
+(func $m_bar__java_lang_Object__void@bridgejsmethod.Main.B
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; B.this.bar(((String) arg0));
+   
+  )
+ )
+)
+
+;;; String B.fun(Object arg0)
+(func $m_fun__java_lang_Object__java_lang_Object@bridgejsmethod.Main.B
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $java.lang.String))
+ (local $return.value (ref null $java.lang.String))
+ (block $return.label
+  (block
+   ;; return B.this.fun(((String) arg0));
+   (local.set $return.value (ref.null $java.lang.String))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
 ;;; CLASS  C
 (type $bridgejsmethod.Main.C (struct
 ))
 
 ;;; C()
-(func $<init><>:void@bridgejsmethod.Main.C
+(func $m_<init>__void@bridgejsmethod.Main.C
  (param $this (ref null $bridgejsmethod.Main.C))
  (result (ref null $bridgejsmethod.Main.C))
  (block $return.label
@@ -191,7 +219,7 @@
 )
 
 ;;; Integer C.fun(Integer i)
-(func $fun<java.lang.Integer>:java.lang.Integer@bridgejsmethod.Main.C
+(func $m_fun__java_lang_Integer__java_lang_Integer@bridgejsmethod.Main.C
  (param $this (ref null $java.lang.Object))
  (param $i (ref null $java.lang.Integer))
  (result (ref null $java.lang.Integer))
@@ -206,12 +234,28 @@
  (local.get $return.value)
 )
 
+;;; Integer C.fun(Object arg0)
+(func $m_fun__java_lang_Object__java_lang_Object@bridgejsmethod.Main.C
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $java.lang.Integer))
+ (local $return.value (ref null $java.lang.Integer))
+ (block $return.label
+  (block
+   ;; return C.this.fun(((Integer) arg0));
+   (local.set $return.value (ref.null $java.lang.Integer))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
 ;;; CLASS  D
 (type $bridgejsmethod.Main.D (struct
 ))
 
 ;;; D()
-(func $<init><>:void@bridgejsmethod.Main.D
+(func $m_<init>__void@bridgejsmethod.Main.D
  (param $this (ref null $bridgejsmethod.Main.D))
  (result (ref null $bridgejsmethod.Main.D))
  (block $return.label
@@ -224,7 +268,7 @@
 )
 
 ;;; Integer D.fun(Integer i)
-(func $fun<java.lang.Integer>:java.lang.Integer@bridgejsmethod.Main.D
+(func $m_fun__java_lang_Integer__java_lang_Integer@bridgejsmethod.Main.D
  (param $this (ref null $java.lang.Object))
  (param $i (ref null $java.lang.Integer))
  (result (ref null $java.lang.Integer))
@@ -239,12 +283,44 @@
  (local.get $return.value)
 )
 
+;;; Integer D.fun(Number arg0)
+(func $m_fun__java_lang_Number__java_lang_Number@bridgejsmethod.Main.D
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Number))
+ (result (ref null $java.lang.Integer))
+ (local $return.value (ref null $java.lang.Integer))
+ (block $return.label
+  (block
+   ;; return D.this.fun(((Integer) arg0));
+   (local.set $return.value (ref.null $java.lang.Integer))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; Integer D.fun(Object arg0)
+(func $m_fun__java_lang_Object__java_lang_Object@bridgejsmethod.Main.D
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $java.lang.Integer))
+ (local $return.value (ref null $java.lang.Integer))
+ (block $return.label
+  (block
+   ;; return D.this.fun(((Integer) arg0));
+   (local.set $return.value (ref.null $java.lang.Integer))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
 ;;; CLASS  E
 (type $bridgejsmethod.Main.E (struct
 ))
 
 ;;; E()
-(func $<init><>:void@bridgejsmethod.Main.E
+(func $m_<init>__void@bridgejsmethod.Main.E
  (param $this (ref null $bridgejsmethod.Main.E))
  (result (ref null $bridgejsmethod.Main.E))
  (block $return.label
@@ -261,7 +337,7 @@
 ))
 
 ;;; F()
-(func $<init><>:void@bridgejsmethod.Main.F
+(func $m_<init>__void@bridgejsmethod.Main.F
  (param $this (ref null $bridgejsmethod.Main.F))
  (result (ref null $bridgejsmethod.Main.F))
  (block $return.label
@@ -273,6 +349,54 @@
  (local.get $this)
 )
 
+;;; Integer F.fun(Number arg0)
+(func $m_fun__java_lang_Number__java_lang_Number@bridgejsmethod.Main.F
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Number))
+ (result (ref null $java.lang.Integer))
+ (local $return.value (ref null $java.lang.Integer))
+ (block $return.label
+  (block
+   ;; return F.this.fun(((Integer) arg0));
+   (local.set $return.value (ref.null $java.lang.Integer))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; Integer F.fun(Object arg0)
+(func $m_fun__java_lang_Object__java_lang_Object@bridgejsmethod.Main.F
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $java.lang.Integer))
+ (local $return.value (ref null $java.lang.Integer))
+ (block $return.label
+  (block
+   ;; return F.this.fun(((Integer) arg0));
+   (local.set $return.value (ref.null $java.lang.Integer))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; Integer F.fun(Integer arg0)
+(func $m_fun__java_lang_Integer__java_lang_Integer@bridgejsmethod.Main.F
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Integer))
+ (result (ref null $java.lang.Integer))
+ (local $return.value (ref null $java.lang.Integer))
+ (block $return.label
+  (block
+   ;; return ((Integer) super.fun(arg0));
+   (local.set $return.value (ref.cast $java.lang.Object $java.lang.Integer (ref.null $java.lang.Integer) (global.get $java.lang.Integer.rtt)))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
 ;;; INTERFACE  G
 
 ;;; CLASS  H
@@ -280,7 +404,7 @@
 ))
 
 ;;; H()
-(func $<init><>:void@bridgejsmethod.Main.H
+(func $m_<init>__void@bridgejsmethod.Main.H
  (param $this (ref null $bridgejsmethod.Main.H))
  (result (ref null $bridgejsmethod.Main.H))
  (block $return.label
@@ -293,7 +417,7 @@
 )
 
 ;;; V H.enclose(V value)
-(func $enclose<java.lang.Object>:java.lang.Object@bridgejsmethod.Main.H
+(func $m_enclose__java_lang_Object__java_lang_Object@bridgejsmethod.Main.H
  (param $this (ref null $java.lang.Object))
  (param $value (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -313,7 +437,7 @@
 ))
 
 ;;; K()
-(func $<init><>:void@bridgejsmethod.Main.K
+(func $m_<init>__void@bridgejsmethod.Main.K
  (param $this (ref null $bridgejsmethod.Main.K))
  (result (ref null $bridgejsmethod.Main.K))
  (block $return.label
@@ -326,7 +450,7 @@
 )
 
 ;;; void K.fun(K1 k1, K2 k2)
-(func $fun<java.lang.Object|java.lang.Object>:void@bridgejsmethod.Main.K
+(func $m_fun__java_lang_Object__java_lang_Object__void_$pp_bridgejsmethod@bridgejsmethod.Main.K
  (param $this (ref null $java.lang.Object))
  (param $k1 (ref null $java.lang.Object))
  (param $k2 (ref null $java.lang.Object))
@@ -341,7 +465,7 @@
 ))
 
 ;;; L()
-(func $<init><>:void@bridgejsmethod.Main.L
+(func $m_<init>__void@bridgejsmethod.Main.L
  (param $this (ref null $bridgejsmethod.Main.L))
  (result (ref null $bridgejsmethod.Main.L))
  (block $return.label
@@ -354,12 +478,25 @@
 )
 
 ;;; void L.fun(String string, L1 l1)
-(func $fun<java.lang.String|java.lang.Object>:void@bridgejsmethod.Main.L
+(func $m_fun__java_lang_String__java_lang_Object__void_$pp_bridgejsmethod@bridgejsmethod.Main.L
  (param $this (ref null $java.lang.Object))
  (param $string (ref null $java.lang.String))
  (param $l1 (ref null $java.lang.Object))
  (block $return.label
   (block
+  )
+ )
+)
+
+;;; void L.fun(Object arg0, Object arg1)
+(func $m_fun__java_lang_Object__java_lang_Object__void_$pp_bridgejsmethod@bridgejsmethod.Main.L
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (param $arg1 (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; L.this.fun(((String) arg0),arg1);
+   
   )
  )
 )
@@ -372,7 +509,7 @@
 ))
 
 ;;; N()
-(func $<init><>:void@bridgejsmethod.Main.N
+(func $m_<init>__void_$pp_bridgejsmethod@bridgejsmethod.Main.N
  (param $this (ref null $bridgejsmethod.Main.N))
  (result (ref null $bridgejsmethod.Main.N))
  (block $return.label
@@ -392,7 +529,7 @@
 ))
 
 ;;; O()
-(func $<init><>:void@bridgejsmethod.Main.O
+(func $m_<init>__void_$pp_bridgejsmethod@bridgejsmethod.Main.O
  (param $this (ref null $bridgejsmethod.Main.O))
  (result (ref null $bridgejsmethod.Main.O))
  (block $return.label
@@ -405,7 +542,7 @@
 )
 
 ;;; B O.getB()
-(func $getB<>:bridgejsmethod.Main.B@bridgejsmethod.Main.O
+(func $m_getB__bridgejsmethod_Main_B@bridgejsmethod.Main.O
  (param $this (ref null $java.lang.Object))
  (result (ref null $bridgejsmethod.Main.B))
  (local $return.value (ref null $bridgejsmethod.Main.B))
@@ -427,7 +564,7 @@
 ))
 
 ;;; Q()
-(func $<init><>:void@bridgejsmethod.Main.Q
+(func $m_<init>__void_$pp_bridgejsmethod@bridgejsmethod.Main.Q
  (param $this (ref null $bridgejsmethod.Main.Q))
  (result (ref null $bridgejsmethod.Main.Q))
  (block $return.label
@@ -446,7 +583,7 @@
 ))
 
 ;;; R()
-(func $<init><>:void@bridgejsmethod.Main.R
+(func $m_<init>__void_$pp_bridgejsmethod@bridgejsmethod.Main.R
  (param $this (ref null $bridgejsmethod.Main.R))
  (result (ref null $bridgejsmethod.Main.R))
  (block $return.label
@@ -459,7 +596,7 @@
 )
 
 ;;; String R.getKey()
-(func $getKey<>:java.lang.String@bridgejsmethod.Main.R
+(func $m_getKey__java_lang_String@bridgejsmethod.Main.R
  (param $this (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))
@@ -481,7 +618,7 @@
 ))
 
 ;;; S()
-(func $<init><>:void@bridgejsmethod.Main.S
+(func $m_<init>__void_$pp_bridgejsmethod@bridgejsmethod.Main.S
  (param $this (ref null $bridgejsmethod.Main.S))
  (result (ref null $bridgejsmethod.Main.S))
  (block $return.label
@@ -499,7 +636,7 @@
 ))
 
 ;;; GrandParent()
-(func $<init><>:void@bridgejsmethod.Main.GrandParent
+(func $m_<init>__void_$pp_bridgejsmethod@bridgejsmethod.Main.GrandParent
  (param $this (ref null $bridgejsmethod.Main.GrandParent))
  (result (ref null $bridgejsmethod.Main.GrandParent))
  (block $return.label
@@ -512,7 +649,7 @@
 )
 
 ;;; void GrandParent.jsMethod(T t)
-(func $jsMethod<java.lang.Object>:void@bridgejsmethod.Main.GrandParent
+(func $m_jsMethod__java_lang_Object__void@bridgejsmethod.Main.GrandParent
  (param $this (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Object))
  (block $return.label
@@ -522,7 +659,7 @@
 )
 
 ;;; void GrandParent.method(T t)
-(func $method<java.lang.Object>:void@bridgejsmethod.Main.GrandParent
+(func $m_method__java_lang_Object__void@bridgejsmethod.Main.GrandParent
  (param $this (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Object))
  (block $return.label
@@ -538,7 +675,7 @@
 ))
 
 ;;; Parent()
-(func $<init><>:void@bridgejsmethod.Main.Parent
+(func $m_<init>__void_$pp_bridgejsmethod@bridgejsmethod.Main.Parent
  (param $this (ref null $bridgejsmethod.Main.Parent))
  (result (ref null $bridgejsmethod.Main.Parent))
  (block $return.label
@@ -551,7 +688,7 @@
 )
 
 ;;; void Parent.jsMethod(T t)
-(func $jsMethod<bridgejsmethod.Main.Parent>:void@bridgejsmethod.Main.Parent
+(func $m_jsMethod__bridgejsmethod_Main_Parent__void@bridgejsmethod.Main.Parent
  (param $this (ref null $java.lang.Object))
  (param $t (ref null $bridgejsmethod.Main.Parent))
  (block $return.label
@@ -561,11 +698,35 @@
 )
 
 ;;; void Parent.method(T t)
-(func $method<bridgejsmethod.Main.Parent>:void@bridgejsmethod.Main.Parent
+(func $m_method__bridgejsmethod_Main_Parent__void@bridgejsmethod.Main.Parent
  (param $this (ref null $java.lang.Object))
  (param $t (ref null $bridgejsmethod.Main.Parent))
  (block $return.label
   (block
+  )
+ )
+)
+
+;;; void Parent.jsMethod(Object arg0)
+(func $m_jsMethod__java_lang_Object__void@bridgejsmethod.Main.Parent
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; Parent.this.jsMethod(((T) arg0));
+   
+  )
+ )
+)
+
+;;; void Parent.method(Object arg0)
+(func $m_method__java_lang_Object__void@bridgejsmethod.Main.Parent
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; Parent.this.method(((T) arg0));
+   
   )
  )
 )
@@ -578,7 +739,7 @@
 ))
 
 ;;; Child()
-(func $<init><>:void@bridgejsmethod.Main.Child
+(func $m_<init>__void_$pp_bridgejsmethod@bridgejsmethod.Main.Child
  (param $this (ref null $bridgejsmethod.Main.Child))
  (result (ref null $bridgejsmethod.Main.Child))
  (block $return.label

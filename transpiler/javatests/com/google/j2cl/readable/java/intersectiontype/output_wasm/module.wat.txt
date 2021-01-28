@@ -15,7 +15,7 @@
 ))
 
 ;;; IntersectionTypeTest()
-(func $<init><>:void@intersectiontype.IntersectionTypeTest
+(func $m_<init>__void@intersectiontype.IntersectionTypeTest
  (param $this (ref null $intersectiontype.IntersectionTypeTest))
  (result (ref null $intersectiontype.IntersectionTypeTest))
  (block $return.label
@@ -28,7 +28,7 @@
 )
 
 ;;; void IntersectionTypeTest.getAndSet(T object)
-(func $getAndSet<intersectiontype.Getable>:void@intersectiontype.IntersectionTypeTest
+(func $m_getAndSet__intersectiontype_Getable__void@intersectiontype.IntersectionTypeTest
  (param $object (ref null $java.lang.Object))
  (block $return.label
   (block
@@ -42,7 +42,7 @@
 )
 
 ;;; Getable<T> IntersectionTypeTest.cast(Object o)
-(func $cast<java.lang.Object>:intersectiontype.Getable@intersectiontype.IntersectionTypeTest
+(func $m_cast__java_lang_Object__intersectiontype_Getable@intersectiontype.IntersectionTypeTest
  (param $o (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
@@ -67,7 +67,7 @@
 )
 
 ;;; Getable<Comparable<String>> IntersectionTypeTest.cast1(Object s)
-(func $cast1<java.lang.Object>:intersectiontype.Getable@intersectiontype.IntersectionTypeTest
+(func $m_cast1__java_lang_Object__intersectiontype_Getable@intersectiontype.IntersectionTypeTest
  (param $s (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
@@ -82,7 +82,7 @@
 )
 
 ;;; Getable<Comparable<T>> IntersectionTypeTest.cast2(Object s)
-(func $cast2<java.lang.Object>:intersectiontype.Getable@intersectiontype.IntersectionTypeTest
+(func $m_cast2__java_lang_Object__intersectiontype_Getable@intersectiontype.IntersectionTypeTest
  (param $s (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
@@ -97,7 +97,7 @@
 )
 
 ;;; Object IntersectionTypeTest.cast3(Object s)
-(func $cast3<java.lang.Object>:java.lang.Object@intersectiontype.IntersectionTypeTest
+(func $m_cast3__java_lang_Object__java_lang_Object@intersectiontype.IntersectionTypeTest
  (param $this (ref null $java.lang.Object))
  (param $s (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -113,7 +113,7 @@
 )
 
 ;;; Cmp IntersectionTypeTest.method()
-(func $method<>:intersectiontype.Cmp@intersectiontype.IntersectionTypeTest
+(func $m_method__intersectiontype_Cmp@intersectiontype.IntersectionTypeTest
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (block $return.label
@@ -127,7 +127,7 @@
 )
 
 ;;; Cmp2 IntersectionTypeTest.method2()
-(func $method2<>:intersectiontype.Cmp2@intersectiontype.IntersectionTypeTest
+(func $m_method2__intersectiontype_Cmp2@intersectiontype.IntersectionTypeTest
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (local $a i32)
@@ -142,7 +142,7 @@
 )
 
 ;;; void IntersectionTypeTest.testClosureAssignment(Object o)
-(func $testClosureAssignment<java.lang.Object>:void@intersectiontype.IntersectionTypeTest
+(func $m_testClosureAssignment__java_lang_Object__void@intersectiontype.IntersectionTypeTest
  (param $o (ref null $java.lang.Object))
  (local $e (ref null $intersectiontype.IntersectionTypeTest.A))
  (local $g (ref null $java.lang.Object))
@@ -163,7 +163,7 @@
 )
 
 ;;; T IntersectionTypeTest.get(T t)
-(func $get<java.lang.Object>:java.lang.Object@intersectiontype.IntersectionTypeTest
+(func $m_get__java_lang_Object__java_lang_Object@intersectiontype.IntersectionTypeTest
  (param $t (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
@@ -178,7 +178,7 @@
 )
 
 ;;; T IntersectionTypeTest.m()
-(func $m<>:intersectiontype.IntersectionTypeTest.A@intersectiontype.IntersectionTypeTest
+(func $m_m__intersectiontype_IntersectionTypeTest_A@intersectiontype.IntersectionTypeTest
  (result (ref null $intersectiontype.IntersectionTypeTest.A))
  (local $return.value (ref null $intersectiontype.IntersectionTypeTest.A))
  (block $return.label
@@ -192,7 +192,7 @@
 )
 
 ;;; Getable<T> IntersectionTypeTest.n()
-(func $n<>:intersectiontype.Getable@intersectiontype.IntersectionTypeTest
+(func $m_n__intersectiontype_Getable@intersectiontype.IntersectionTypeTest
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (block $return.label
@@ -206,7 +206,7 @@
 )
 
 ;;; void IntersectionTypeTest.set(T t)
-(func $set<intersectiontype.IntersectionTypeTest.A>:void@intersectiontype.IntersectionTypeTest
+(func $m_set__intersectiontype_IntersectionTypeTest_A__void@intersectiontype.IntersectionTypeTest
  (param $t (ref null $intersectiontype.IntersectionTypeTest.A))
  (block $return.label
   (block
@@ -215,7 +215,7 @@
 )
 
 ;;; void IntersectionTypeTest.testMethodCall()
-(func $testMethodCall<>:void@intersectiontype.IntersectionTypeTest
+(func $m_testMethodCall__void@intersectiontype.IntersectionTypeTest
  (param $this (ref null $java.lang.Object))
  (local $o (ref null $java.lang.Object))
  (local $g (ref null $java.lang.Object))
@@ -223,14 +223,14 @@
   (block
    ;; Object o = intersectiontype.IntersectionTypeTest.m();
    
-   (local.set $o (call $m<>:intersectiontype.IntersectionTypeTest.A@intersectiontype.IntersectionTypeTest ))
+   (local.set $o (call $m_m__intersectiontype_IntersectionTypeTest_A@intersectiontype.IntersectionTypeTest ))
    ;; intersectiontype.IntersectionTypeTest.set((((A&EmptyA)) o));
-   (call $set<intersectiontype.IntersectionTypeTest.A>:void@intersectiontype.IntersectionTypeTest (ref.null $intersectiontype.IntersectionTypeTest.A))
+   (call $m_set__intersectiontype_IntersectionTypeTest_A__void@intersectiontype.IntersectionTypeTest (ref.null $intersectiontype.IntersectionTypeTest.A))
    ;; intersectiontype.IntersectionTypeTest.set(intersectiontype.IntersectionTypeTest.m());
-   (call $set<intersectiontype.IntersectionTypeTest.A>:void@intersectiontype.IntersectionTypeTest (call $m<>:intersectiontype.IntersectionTypeTest.A@intersectiontype.IntersectionTypeTest ))
+   (call $m_set__intersectiontype_IntersectionTypeTest_A__void@intersectiontype.IntersectionTypeTest (call $m_m__intersectiontype_IntersectionTypeTest_A@intersectiontype.IntersectionTypeTest ))
    ;; Getable<?> g = intersectiontype.IntersectionTypeTest.n();
    
-   (local.set $g (call $n<>:intersectiontype.Getable@intersectiontype.IntersectionTypeTest ))
+   (local.set $g (call $m_n__intersectiontype_Getable@intersectiontype.IntersectionTypeTest ))
   )
  )
 )
@@ -241,7 +241,7 @@
 ))
 
 ;;; MapEntry()
-(func $<init><>:void@intersectiontype.IntersectionTypeTest.MapEntry
+(func $m_<init>__void_$pp_intersectiontype@intersectiontype.IntersectionTypeTest.MapEntry
  (param $this (ref null $intersectiontype.IntersectionTypeTest.MapEntry))
  (result (ref null $intersectiontype.IntersectionTypeTest.MapEntry))
  (block $return.label
@@ -254,7 +254,7 @@
 )
 
 ;;; Getable<T> MapEntry.method(Object o)
-(func $method<java.lang.Object>:intersectiontype.Getable@intersectiontype.IntersectionTypeTest.MapEntry
+(func $m_method__java_lang_Object__intersectiontype_Getable@intersectiontype.IntersectionTypeTest.MapEntry
  (param $this (ref null $java.lang.Object))
  (param $o (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -274,7 +274,7 @@
 ))
 
 ;;; A()
-(func $<init><>:void@intersectiontype.IntersectionTypeTest.A
+(func $m_<init>__void_$p_intersectiontype_IntersectionTypeTest_A@intersectiontype.IntersectionTypeTest.A
  (param $this (ref null $intersectiontype.IntersectionTypeTest.A))
  (result (ref null $intersectiontype.IntersectionTypeTest.A))
  (block $return.label

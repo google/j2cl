@@ -5,7 +5,7 @@
 ))
 
 ;;; Date()
-(func $<init><>:void@importglobaljstypes.Date
+(func $m_<init>__void@importglobaljstypes.Date
  (param $this (ref null $importglobaljstypes.Date))
  (result (ref null $importglobaljstypes.Date))
  (block $return.label
@@ -18,14 +18,14 @@
 )
 
 ;;; double Date.now(double x)
-(func $now<double>:double@importglobaljstypes.Date
+(func $m_now__double__double@importglobaljstypes.Date
  (param $x f64)
  (result f64)
  (local $return.value f64)
  (block $return.label
   (block
    ;; return importglobaljstypes.Date.NativeDate.now();
-   (local.set $return.value (call $now<>:double@importglobaljstypes.Date.NativeDate ))
+   (local.set $return.value (call $m_now__double@importglobaljstypes.Date.NativeDate ))
    (br $return.label)
   )
  )
@@ -33,7 +33,7 @@
 )
 
 ;;; NativeDate Date.copy(NativeDate d)
-(func $copy<importglobaljstypes.Date.NativeDate>:importglobaljstypes.Date.NativeDate@importglobaljstypes.Date
+(func $m_copy__importglobaljstypes_Date_NativeDate__importglobaljstypes_Date_NativeDate@importglobaljstypes.Date
  (param $this (ref null $java.lang.Object))
  (param $d (ref null $importglobaljstypes.Date.NativeDate))
  (result (ref null $importglobaljstypes.Date.NativeDate))
@@ -53,7 +53,7 @@
 ))
 
 ;;; NativeDate()
-(func $<init><>:void@importglobaljstypes.Date.NativeDate
+(func $m_<init>__void@importglobaljstypes.Date.NativeDate
  (param $this (ref null $importglobaljstypes.Date.NativeDate))
  (result (ref null $importglobaljstypes.Date.NativeDate))
  (block $return.label
@@ -66,7 +66,7 @@
 )
 
 ;;; double NativeDate.now()
-(func $now<>:double@importglobaljstypes.Date.NativeDate
+(func $m_now__double@importglobaljstypes.Date.NativeDate
  (result f64)
  (local $return.value f64)
  (block $return.label
@@ -82,7 +82,7 @@
 ))
 
 ;;; Number()
-(func $<init><>:void@importglobaljstypes.Number
+(func $m_<init>__void@importglobaljstypes.Number
  (param $this (ref null $importglobaljstypes.Number))
  (result (ref null $importglobaljstypes.Number))
  (block $return.label
@@ -95,7 +95,7 @@
 )
 
 ;;; boolean Number.fun(double x)
-(func $fun<double>:boolean@importglobaljstypes.Number
+(func $m_fun__double__boolean@importglobaljstypes.Number
  (param $x f64)
  (result i32)
  (local $return.value i32)
@@ -107,14 +107,14 @@
 )
 
 ;;; boolean Number.test(double x)
-(func $test<double>:boolean@importglobaljstypes.Number
+(func $m_test__double__boolean@importglobaljstypes.Number
  (param $x f64)
  (result i32)
  (local $return.value i32)
  (block $return.label
   (block
    ;; return importglobaljstypes.Number.fun(x);
-   (local.set $return.value (call $fun<double>:boolean@importglobaljstypes.Number (local.get $x)))
+   (local.set $return.value (call $m_fun__double__boolean@importglobaljstypes.Number (local.get $x)))
    (br $return.label)
   )
  )
@@ -122,7 +122,7 @@
 )
 
 ;;; NativeFunction<String> Number.getFromCharCodeFunction()
-(func $getFromCharCodeFunction<>:importglobaljstypes.Number.NativeFunction@importglobaljstypes.Number
+(func $m_getFromCharCodeFunction__importglobaljstypes_Number_NativeFunction@importglobaljstypes.Number
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (block $return.label
@@ -133,7 +133,7 @@
 )
 
 ;;; String Number.fromCharCode(int[] array)
-(func $fromCharCode<int<>>:java.lang.String@importglobaljstypes.Number
+(func $m_fromCharCode__arrayOf_int__java_lang_String@importglobaljstypes.Number
  (param $array (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))
@@ -148,7 +148,7 @@
 )
 
 ;;; MyLiteralType Number.testJsDocForLiteralType(MyLiteralType a)
-(func $testJsDocForLiteralType<importglobaljstypes.Number.MyLiteralType>:importglobaljstypes.Number.MyLiteralType@importglobaljstypes.Number
+(func $m_testJsDocForLiteralType__importglobaljstypes_Number_MyLiteralType__importglobaljstypes_Number_MyLiteralType@importglobaljstypes.Number
  (param $this (ref null $java.lang.Object))
  (param $a (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))

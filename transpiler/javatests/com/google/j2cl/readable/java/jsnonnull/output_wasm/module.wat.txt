@@ -15,7 +15,7 @@
 ))
 
 ;;; Main(String a)
-(func $<init><java.lang.String>:void@jsnonnull.Main
+(func $m_<init>__java_lang_String__void@jsnonnull.Main
  (param $this (ref null $jsnonnull.Main))
  (param $a (ref null $java.lang.String))
  (result (ref null $jsnonnull.Main))
@@ -29,7 +29,7 @@
 )
 
 ;;; String Main.m1(String a, List<Double> b, String c)
-(func $m1<java.lang.String|java.util.List|java.lang.String>:java.lang.String@jsnonnull.Main
+(func $m_m1__java_lang_String__java_util_List__java_lang_String__java_lang_String@jsnonnull.Main
  (param $this (ref null $java.lang.Object))
  (param $a (ref null $java.lang.String))
  (param $b (ref null $java.lang.Object))
@@ -47,7 +47,7 @@
 )
 
 ;;; String Main.m2(String a, List<Double> b)
-(func $m2<java.lang.String|java.util.List>:java.lang.String@jsnonnull.Main
+(func $m_m2__java_lang_String__java_util_List__java_lang_String@jsnonnull.Main
  (param $this (ref null $java.lang.Object))
  (param $a (ref null $java.lang.String))
  (param $b (ref null $java.lang.Object))
@@ -64,7 +64,7 @@
 )
 
 ;;; String Main.m3(String a, String... args)
-(func $m3<java.lang.String|java.lang.String<>>:java.lang.String@jsnonnull.Main
+(func $m_m3__java_lang_String__arrayOf_java_lang_String__java_lang_String@jsnonnull.Main
  (param $this (ref null $java.lang.Object))
  (param $a (ref null $java.lang.String))
  (param $args (ref null $java.lang.Object))
@@ -81,7 +81,7 @@
 )
 
 ;;; void Main.m4(MyFunction f)
-(func $m4<jsnonnull.Main.MyFunction>:void@jsnonnull.Main
+(func $m_m4__jsnonnull_Main_MyFunction__void@jsnonnull.Main
  (param $this (ref null $java.lang.Object))
  (param $f (ref null $java.lang.Object))
  (block $return.label
@@ -97,7 +97,7 @@
 ))
 
 ;;; StringComparator()
-(func $<init><>:void@jsnonnull.Main.StringComparator
+(func $m_<init>__void@jsnonnull.Main.StringComparator
  (param $this (ref null $jsnonnull.Main.StringComparator))
  (result (ref null $jsnonnull.Main.StringComparator))
  (block $return.label
@@ -110,7 +110,7 @@
 )
 
 ;;; int StringComparator.compare(String a, String b)
-(func $compare<java.lang.String|java.lang.String>:int@jsnonnull.Main.StringComparator
+(func $m_compare__java_lang_String__java_lang_String__int@jsnonnull.Main.StringComparator
  (param $this (ref null $java.lang.Object))
  (param $a (ref null $java.lang.String))
  (param $b (ref null $java.lang.String))
@@ -126,12 +126,141 @@
  (local.get $return.value)
 )
 
+;;; int StringComparator.compare(Object arg0, Object arg1)
+(func $m_compare__java_lang_Object__java_lang_Object__int@jsnonnull.Main.StringComparator
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (param $arg1 (ref null $java.lang.Object))
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return StringComparator.this.compare(((String) arg0),((String) arg1));
+   (local.set $return.value (i32.const 0))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; Comparator<String> StringComparator.reversed()
+(func $m_reversed__java_util_Comparator@jsnonnull.Main.StringComparator
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; return Comparator.this.reversed();
+   (local.set $return.value (ref.null $java.lang.Object))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; Comparator<String> StringComparator.thenComparing(Comparator<? super String> arg0)
+(func $m_thenComparing__java_util_Comparator__java_util_Comparator@jsnonnull.Main.StringComparator
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; return Comparator.this.thenComparing(arg0);
+   (local.set $return.value (ref.null $java.lang.Object))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; Comparator<String> StringComparator.thenComparing(Function<? super String, ? extends U> arg0, Comparator<? super U> arg1)
+(func $m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator@jsnonnull.Main.StringComparator
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (param $arg1 (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; return Comparator.this.thenComparing(arg0,arg1);
+   (local.set $return.value (ref.null $java.lang.Object))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; Comparator<String> StringComparator.thenComparing(Function<? super String, ? extends U> arg0)
+(func $m_thenComparing__java_util_function_Function__java_util_Comparator@jsnonnull.Main.StringComparator
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; return Comparator.this.thenComparing(arg0);
+   (local.set $return.value (ref.null $java.lang.Object))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; Comparator<String> StringComparator.thenComparingDouble(ToDoubleFunction<? super String> arg0)
+(func $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator@jsnonnull.Main.StringComparator
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; return Comparator.this.thenComparingDouble(arg0);
+   (local.set $return.value (ref.null $java.lang.Object))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; Comparator<String> StringComparator.thenComparingInt(ToIntFunction<? super String> arg0)
+(func $m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator@jsnonnull.Main.StringComparator
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; return Comparator.this.thenComparingInt(arg0);
+   (local.set $return.value (ref.null $java.lang.Object))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; Comparator<String> StringComparator.thenComparingLong(ToLongFunction<? super String> arg0)
+(func $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator@jsnonnull.Main.StringComparator
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; return Comparator.this.thenComparingLong(arg0);
+   (local.set $return.value (ref.null $java.lang.Object))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
 ;;; CLASS  NullableStringComparator
 (type $jsnonnull.Main.NullableStringComparator (struct
 ))
 
 ;;; NullableStringComparator()
-(func $<init><>:void@jsnonnull.Main.NullableStringComparator
+(func $m_<init>__void@jsnonnull.Main.NullableStringComparator
  (param $this (ref null $jsnonnull.Main.NullableStringComparator))
  (result (ref null $jsnonnull.Main.NullableStringComparator))
  (block $return.label
@@ -144,7 +273,7 @@
 )
 
 ;;; int NullableStringComparator.compare(String a, String b)
-(func $compare<java.lang.String|java.lang.String>:int@jsnonnull.Main.NullableStringComparator
+(func $m_compare__java_lang_String__java_lang_String__int@jsnonnull.Main.NullableStringComparator
  (param $this (ref null $java.lang.Object))
  (param $a (ref null $java.lang.String))
  (param $b (ref null $java.lang.String))
@@ -160,12 +289,141 @@
  (local.get $return.value)
 )
 
+;;; int NullableStringComparator.compare(Object arg0, Object arg1)
+(func $m_compare__java_lang_Object__java_lang_Object__int@jsnonnull.Main.NullableStringComparator
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (param $arg1 (ref null $java.lang.Object))
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return NullableStringComparator.this.compare(((String) arg0),((String) arg1));
+   (local.set $return.value (i32.const 0))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; Comparator<String> NullableStringComparator.reversed()
+(func $m_reversed__java_util_Comparator@jsnonnull.Main.NullableStringComparator
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; return Comparator.this.reversed();
+   (local.set $return.value (ref.null $java.lang.Object))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; Comparator<String> NullableStringComparator.thenComparing(Comparator<? super String> arg0)
+(func $m_thenComparing__java_util_Comparator__java_util_Comparator@jsnonnull.Main.NullableStringComparator
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; return Comparator.this.thenComparing(arg0);
+   (local.set $return.value (ref.null $java.lang.Object))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; Comparator<String> NullableStringComparator.thenComparing(Function<? super String, ? extends U> arg0, Comparator<? super U> arg1)
+(func $m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator@jsnonnull.Main.NullableStringComparator
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (param $arg1 (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; return Comparator.this.thenComparing(arg0,arg1);
+   (local.set $return.value (ref.null $java.lang.Object))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; Comparator<String> NullableStringComparator.thenComparing(Function<? super String, ? extends U> arg0)
+(func $m_thenComparing__java_util_function_Function__java_util_Comparator@jsnonnull.Main.NullableStringComparator
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; return Comparator.this.thenComparing(arg0);
+   (local.set $return.value (ref.null $java.lang.Object))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; Comparator<String> NullableStringComparator.thenComparingDouble(ToDoubleFunction<? super String> arg0)
+(func $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator@jsnonnull.Main.NullableStringComparator
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; return Comparator.this.thenComparingDouble(arg0);
+   (local.set $return.value (ref.null $java.lang.Object))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; Comparator<String> NullableStringComparator.thenComparingInt(ToIntFunction<? super String> arg0)
+(func $m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator@jsnonnull.Main.NullableStringComparator
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; return Comparator.this.thenComparingInt(arg0);
+   (local.set $return.value (ref.null $java.lang.Object))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; Comparator<String> NullableStringComparator.thenComparingLong(ToLongFunction<? super String> arg0)
+(func $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator@jsnonnull.Main.NullableStringComparator
+ (param $this (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; return Comparator.this.thenComparingLong(arg0);
+   (local.set $return.value (ref.null $java.lang.Object))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
 ;;; CLASS  NonNullableStringSubNullableComparator
 (type $jsnonnull.Main.NonNullableStringSubNullableComparator (struct
 ))
 
 ;;; NonNullableStringSubNullableComparator()
-(func $<init><>:void@jsnonnull.Main.NonNullableStringSubNullableComparator
+(func $m_<init>__void@jsnonnull.Main.NonNullableStringSubNullableComparator
  (param $this (ref null $jsnonnull.Main.NonNullableStringSubNullableComparator))
  (result (ref null $jsnonnull.Main.NonNullableStringSubNullableComparator))
  (block $return.label
@@ -178,7 +436,7 @@
 )
 
 ;;; int NonNullableStringSubNullableComparator.compare(String a, String b)
-(func $compare<java.lang.String|java.lang.String>:int@jsnonnull.Main.NonNullableStringSubNullableComparator
+(func $m_compare__java_lang_String__java_lang_String__int@jsnonnull.Main.NonNullableStringSubNullableComparator
  (param $this (ref null $java.lang.Object))
  (param $a (ref null $java.lang.String))
  (param $b (ref null $java.lang.String))

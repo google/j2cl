@@ -5,7 +5,7 @@
 ))
 
 ;;; Foo()
-(func $<init><>:void@srcjar.Foo
+(func $m_<init>__void@srcjar.Foo
  (param $this (ref null $srcjar.Foo))
  (result (ref null $srcjar.Foo))
  (block $return.label
@@ -23,7 +23,7 @@
 ))
 
 ;;; Srcjar()
-(func $<init><>:void@srcjar.Srcjar
+(func $m_<init>__void@srcjar.Srcjar
  (param $this (ref null $srcjar.Srcjar))
  (result (ref null $srcjar.Srcjar))
  (block $return.label
@@ -36,13 +36,13 @@
 )
 
 ;;; void Srcjar.test()
-(func $test<>:void@srcjar.Srcjar
+(func $m_test__void@srcjar.Srcjar
  (local $foo (ref null $srcjar.Foo))
  (block $return.label
   (block
    ;; Foo foo = new Foo.<init>();
    
-   (local.set $foo (call $<init><>:void@srcjar.Foo (struct.new_with_rtt $srcjar.Foo (global.get $srcjar.Foo.rtt))))
+   (local.set $foo (call $m_<init>__void@srcjar.Foo (struct.new_with_rtt $srcjar.Foo (global.get $srcjar.Foo.rtt))))
   )
  )
 )

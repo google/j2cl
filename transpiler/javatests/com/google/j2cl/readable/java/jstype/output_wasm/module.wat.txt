@@ -9,7 +9,7 @@
 ))
 
 ;;; SomeJsType()
-(func $<init><>:void@jstype.SomeJsType
+(func $m_<init>__void@jstype.SomeJsType
  (param $this (ref null $jstype.SomeJsType))
  (result (ref null $jstype.SomeJsType))
  (block $return.label
@@ -22,7 +22,7 @@
 )
 
 ;;; void SomeJsType.publicMethod()
-(func $publicMethod<>:void@jstype.SomeJsType
+(func $m_publicMethod__void@jstype.SomeJsType
  (param $this (ref null $java.lang.Object))
  (block $return.label
   (block
@@ -31,7 +31,7 @@
 )
 
 ;;; void SomeJsType.privateMethod()
-(func $privateMethod<>:void@jstype.SomeJsType
+(func $m_privateMethod__void_$p_jstype_SomeJsType@jstype.SomeJsType
  (param $this (ref null $jstype.SomeJsType))
  (block $return.label
   (block
@@ -40,7 +40,7 @@
 )
 
 ;;; void SomeJsType.packageMethod()
-(func $packageMethod<>:void@jstype.SomeJsType
+(func $m_packageMethod__void_$pp_jstype@jstype.SomeJsType
  (param $this (ref null $java.lang.Object))
  (block $return.label
   (block
@@ -49,7 +49,7 @@
 )
 
 ;;; void SomeJsType.protectedMethod()
-(func $protectedMethod<>:void@jstype.SomeJsType
+(func $m_protectedMethod__void@jstype.SomeJsType
  (param $this (ref null $java.lang.Object))
  (block $return.label
   (block
@@ -58,7 +58,7 @@
 )
 
 ;;; void SomeJsType.useFieldsAndMethods()
-(func $useFieldsAndMethods<>:void@jstype.SomeJsType
+(func $m_useFieldsAndMethods__void@jstype.SomeJsType
  (param $this (ref null $java.lang.Object))
  (local $value i32)
  (block $return.label
@@ -79,7 +79,7 @@
 )
 
 ;;; Wildcard SomeJsType.testStarAndWildCard(Star s, Wildcard w)
-(func $testStarAndWildCard<jstype.SomeJsType.Star|jstype.SomeJsType.Wildcard>:jstype.SomeJsType.Wildcard@jstype.SomeJsType
+(func $m_testStarAndWildCard__jstype_SomeJsType_Star__jstype_SomeJsType_Wildcard__jstype_SomeJsType_Wildcard@jstype.SomeJsType
  (param $this (ref null $java.lang.Object))
  (param $s (ref null $java.lang.Object))
  (param $w (ref null $java.lang.Object))
@@ -91,7 +91,7 @@
   (block
    ;; Object object = new Object.<init>();
    
-   (local.set $object (call $<init><>:void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.rtt))))
+   (local.set $object (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.rtt))))
    ;; Star star = ((Star) ((Object) 3.0));
    
    (local.set $star (ref.null $java.lang.Object))

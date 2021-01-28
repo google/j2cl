@@ -5,7 +5,7 @@
 ))
 
 ;;; SomeJsType()
-(func $<init><>:void@jstypewithdefault.SomeJsType
+(func $m_<init>__void@jstypewithdefault.SomeJsType
  (param $this (ref null $jstypewithdefault.SomeJsType))
  (result (ref null $jstypewithdefault.SomeJsType))
  (block $return.label
@@ -17,10 +17,21 @@
  (local.get $this)
 )
 
+;;; void SomeJsType.defaultMethod()
+(func $m_defaultMethod__void@jstypewithdefault.SomeJsType
+ (param $this (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; Interface.this.defaultMethod();
+   
+  )
+ )
+)
+
 ;;; INTERFACE  Interface
 
 ;;; void Interface.defaultMethod()
-(func $defaultMethod<>:void@jstypewithdefault.Interface
+(func $m_defaultMethod__void@jstypewithdefault.Interface
  (param $this (ref null $java.lang.Object))
  (block $return.label
   (block

@@ -17,7 +17,6 @@ package com.google.j2cl.transpiler.backend.wasm;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
-import static java.util.stream.Collectors.joining;
 
 import com.google.common.base.Predicates;
 import com.google.common.base.Strings;
@@ -126,11 +125,7 @@ class GenerationEnvironment {
   String getMethodImplementationName(MethodDescriptor methodDescriptor) {
     methodDescriptor = methodDescriptor.getDeclarationDescriptor();
     return "$"
-        + methodDescriptor.getName()
-        + methodDescriptor.getDeclarationDescriptor().getParameterTypeDescriptors().stream()
-            .map(GenerationEnvironment::getTypeSignature)
-            .collect(joining("|", "<", ">:"))
-        + getTypeSignature(methodDescriptor.getReturnTypeDescriptor())
+        + methodDescriptor.getMangledName()
         + "@"
         + methodDescriptor.getEnclosingTypeDescriptor().getQualifiedSourceName();
   }

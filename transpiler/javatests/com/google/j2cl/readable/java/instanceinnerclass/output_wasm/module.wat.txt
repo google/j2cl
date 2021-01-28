@@ -6,7 +6,7 @@
 ))
 
 ;;; InstanceInnerClass()
-(func $<init><>:void@instanceinnerclass.InstanceInnerClass
+(func $m_<init>__void@instanceinnerclass.InstanceInnerClass
  (param $this (ref null $instanceinnerclass.InstanceInnerClass))
  (result (ref null $instanceinnerclass.InstanceInnerClass))
  (block $return.label
@@ -19,7 +19,7 @@
 )
 
 ;;; void InstanceInnerClass.funOuter()
-(func $funOuter<>:void@instanceinnerclass.InstanceInnerClass
+(func $m_funOuter__void@instanceinnerclass.InstanceInnerClass
  (param $this (ref null $java.lang.Object))
  (block $return.label
   (block
@@ -28,12 +28,12 @@
 )
 
 ;;; void InstanceInnerClass.test()
-(func $test<>:void@instanceinnerclass.InstanceInnerClass
+(func $m_test__void@instanceinnerclass.InstanceInnerClass
  (param $this (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; new InstanceInnerClass.<init>().new InnerClass.<init>();
-   (call $<init><>:void@instanceinnerclass.InstanceInnerClass.InnerClass (struct.new_with_rtt $instanceinnerclass.InstanceInnerClass.InnerClass (ref.null $instanceinnerclass.InstanceInnerClass) (i32.const 0) (ref.null $instanceinnerclass.InstanceInnerClass) (global.get $instanceinnerclass.InstanceInnerClass.InnerClass.rtt)))
+   (call $m_<init>__void@instanceinnerclass.InstanceInnerClass.InnerClass (struct.new_with_rtt $instanceinnerclass.InstanceInnerClass.InnerClass (ref.null $instanceinnerclass.InstanceInnerClass) (i32.const 0) (ref.null $instanceinnerclass.InstanceInnerClass) (global.get $instanceinnerclass.InstanceInnerClass.InnerClass.rtt)))
    drop
   )
  )
@@ -47,7 +47,7 @@
 ))
 
 ;;; InnerClass()
-(func $<init><>:void@instanceinnerclass.InstanceInnerClass.InnerClass
+(func $m_<init>__void@instanceinnerclass.InstanceInnerClass.InnerClass
  (param $this (ref null $instanceinnerclass.InstanceInnerClass.InnerClass))
  (result (ref null $instanceinnerclass.InstanceInnerClass.InnerClass))
  (block $return.label
@@ -60,7 +60,7 @@
 )
 
 ;;; void InnerClass.funInner()
-(func $funInner<>:void@instanceinnerclass.InstanceInnerClass.InnerClass
+(func $m_funInner__void@instanceinnerclass.InstanceInnerClass.InnerClass
  (param $this (ref null $java.lang.Object))
  (block $return.label
   (block
