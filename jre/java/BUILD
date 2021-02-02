@@ -48,6 +48,7 @@ package_sources(
         "//third_party:gwt_java_emul",
         "//third_party:gwt_java_emul_internal",
     ],
+    excludes = glob(["super-wasm/**"]),
     super_srcs = select({
         ":experimental_java11_support": glob(["**/*.java"]),
         "//conditions:default": glob(
@@ -55,6 +56,25 @@ package_sources(
             exclude = ["module-info.java"],
         ),
     }),
+)
+
+package_sources(
+    name = "jre_java_files-j2wasm",
+    srcs = [
+        "//third_party:gwt_java_emul",
+        "//third_party:gwt_java_emul_internal",
+    ],
+    super_srcs = select({
+        ":experimental_java11_support": glob(
+            ["**/*.java"],
+            exclude = glob(["**/super-wasm/*.java"]),
+        ),
+        "//conditions:default": glob(
+            ["**/*.java"],
+            exclude = ["module-info.java"],
+        ),
+    }),
+    super_wasm_srcs = glob(["super-wasm/**/*.java"]),
 )
 
 filegroup(
@@ -67,7 +87,7 @@ filegroup(
 j2wasm_library(
     name = "jre-j2wasm",
     srcs = [
-        ":jre_java_files",
+        ":jre_java_files-j2wasm",
     ],
     javacopts = JRE_JAVAC_OPTS,
     visibility = ["//build_defs/internal_do_not_use:__pkg__"],
