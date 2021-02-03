@@ -452,15 +452,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   @Memoized
   @Override
   public String getMangledName() {
-    if (!isDeclaration()) {
-      return getDeclarationDescriptor().getMangledName();
-    }
-    if (isGeneralizingdBridge()) {
-      // Bridges are methods that fill the gap between the overridden parent method and
-      // a specialized override, For that reason their mangled name has to be the same as the
-      // method they override but the other properties (e.g. parameter types, etc) are derived
-      // from the specialized method.
-      return getBridgeOrigin().getMangledName();
+    if (getManglingDescriptor() != this) {
+      return getManglingDescriptor().getMangledName();
     }
 
     if (!useWasmManglingPatterns.get()) {
@@ -522,6 +515,25 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     return buildMangledName(String.join("__", manglingDescriptors) + suffix);
   }
 
+  /**
+   * Returns the type desciptor that is needed to determine the actual types for the method
+   * parameters used for determining the method mangled name and the types that can actually flow to
+   * the method.
+   */
+  private MethodDescriptor getManglingDescriptor() {
+    if (!isDeclaration()) {
+      return getDeclarationDescriptor().getManglingDescriptor();
+    }
+    if (isGeneralizingdBridge()) {
+      // Bridges are methods that fill the gap between the overridden parent method and
+      // a specialized override, The original method parameter and return types are then ones
+      // that determine the mangled name as well as the actual types of the objects that are
+      // expected by this method.
+      return getBridgeOrigin().getManglingDescriptor().toRawMemberDescriptor();
+    }
+    return this;
+  }
+
   /** Returns the list of mangled name of parameters' types. */
   private List<String> getMangledParameterTypes() {
     return Lists.transform(
@@ -539,6 +551,17 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     // behaviour.
     boolean isInternal = name.startsWith("$") && getOrigin() == MethodOrigin.SOURCE;
     return isInternal ? "" : getOrigin().getPrefix();
+  }
+
+  /**
+   * Returns the type of the objects that can arrive at runtime as parameters.
+   *
+   * <p>For bridge methods those will be the parameter types of the method they are bridging from.
+   * The bridge method is responsible for casting these parameters to the appropriate type before
+   * forwarding to the actual implementation.
+   */
+  public List<TypeDescriptor> getDispatchParameterTypeDescriptors() {
+    return getManglingDescriptor().getParameterTypeDescriptors();
   }
 
   /**

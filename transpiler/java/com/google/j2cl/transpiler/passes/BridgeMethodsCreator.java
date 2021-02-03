@@ -30,7 +30,6 @@ import com.google.j2cl.transpiler.ast.ThisReference;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.Variable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -57,10 +56,8 @@ public class BridgeMethodsCreator extends NormalizationPass {
         adjustTargetForJsFunction(bridgeMethodDescriptor, bridgeMethodDescriptor.getBridgeTarget());
 
     List<Variable> parameters =
-        bridgeMethodDescriptor.isGeneralizingdBridge()
-            ? createBridgeParameters(bridgeMethodDescriptor)
-            : AstUtils.createParameterVariables(
-                bridgeMethodDescriptor.getParameterTypeDescriptors());
+        AstUtils.createParameterVariables(
+            bridgeMethodDescriptor.getDispatchParameterTypeDescriptors());
 
     List<Expression> arguments =
         Streams.zip(
@@ -111,34 +108,6 @@ public class BridgeMethodsCreator extends NormalizationPass {
             .setExpression(parameterReference)
             .setCastTypeDescriptor(requiredType)
             .build();
-  }
-
-  private static List<Variable> createBridgeParameters(MethodDescriptor bridgeMethodDescriptor) {
-    List<Variable> parameters = new ArrayList<>();
-    for (int i = 0; i < bridgeMethodDescriptor.getParameterTypeDescriptors().size(); i++) {
-      parameters.add(
-          Variable.newBuilder()
-              .setName("arg" + i)
-              // Set the type for the parameter variables in the AST from the declaration
-              // of the causing methods (using its raw type to potentially remove type variables
-              // that are not in context here). This is done to support the runtime type check
-              // cast, because in the cases where the method is called from a supertype, the actual
-              // objects passed are only guaranteed to be of the type declared by the method in the
-              // super class.
-              // And If we were to declare the parameter with the more specific type, the runtime
-              // type check cast that is inserted below would be considered redundant are removed at
-              // a later stage.
-              .setTypeDescriptor(
-                  bridgeMethodDescriptor
-                      .getBridgeOrigin()
-                      .getDeclarationDescriptor()
-                      .getParameterTypeDescriptors()
-                      .get(i)
-                      .toRawTypeDescriptor())
-              .setParameter(true)
-              .build());
-    }
-    return parameters;
   }
 
   private static MethodDescriptor adjustTargetForJsFunction(
