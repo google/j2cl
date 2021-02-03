@@ -15,11 +15,17 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import static com.google.common.base.Preconditions.checkState;
+
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.Expression;
+import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.RuntimeMethods;
+import com.google.j2cl.transpiler.ast.ThisReference;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
@@ -35,6 +41,34 @@ public class DevirtualizeBoxedTypesAndJsFunctionImplementations extends Normaliz
             // Creates devirtualized static methods for the boxed types (Boolean, Double, String).
             return TypeDescriptors.isBoxedTypeAsJsPrimitives(type.getTypeDescriptor())
                 || type.getDeclaration().isJsFunctionImplementation();
+          }
+
+          @Override
+          public Expression rewriteFieldAccess(FieldAccess fieldAccess) {
+            if (!TypeDescriptors.isBoxedTypeAsJsPrimitives(
+                fieldAccess.getTarget().getEnclosingTypeDescriptor())) {
+              return fieldAccess;
+            }
+
+            //  Re-write `this.value` with `this`.
+            if (fieldAccess.getQualifier() instanceof ThisReference) {
+              checkState(fieldAccess.getTarget().getName().equals("value"));
+              Expression thisRerence = fieldAccess.getQualifier();
+
+              // For boxed types as JS primitives; the underlying JS value (this.value) can be null
+              // to represent the case where the boxed type is null. However whenever a call is made
+              // to boxed type and the underying JS value is read, we need to make sure it is not
+              // null to preverve the correct semantics and throw NPE. An alternative would be
+              // devirtualization to add checkNotNull on 'thisArg' however that would result in lots
+              // of redundant checks.
+              if (AstUtils.isExpressionResultUsed(fieldAccess, getParent())) {
+                // Note that checkNotNull also avoids auto-unboxing.
+                thisRerence = RuntimeMethods.createCheckNotNullCall(thisRerence);
+              }
+              return thisRerence;
+            }
+
+            return fieldAccess;
           }
 
           @Override

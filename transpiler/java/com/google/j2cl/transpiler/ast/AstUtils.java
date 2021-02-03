@@ -86,7 +86,6 @@ public class AstUtils {
    * returns null if it does not have one.
    */
   public static ExpressionStatement getConstructorInvocationStatement(Method method) {
-    checkArgument(method.isConstructor());
     for (Statement statement : method.getBody().getStatements()) {
       if (!(statement instanceof ExpressionStatement)) {
         continue;
@@ -325,6 +324,11 @@ public class AstUtils {
       return expression == Iterables.getLast(((MultiExpression) parent).getExpressions());
     } else if (parent instanceof ForStatement) {
       return expression == ((ForStatement) parent).getConditionExpression();
+    } else if (parent instanceof BinaryExpression) {
+      // The value of the lhs of an assignment is overwritten and not used.
+      BinaryExpression parentBinaryExpression = (BinaryExpression) parent;
+      return parentBinaryExpression.getOperator() != BinaryOperator.ASSIGN
+          || expression == parentBinaryExpression.getRightOperand();
     } else {
       return true;
     }
@@ -925,7 +929,6 @@ public class AstUtils {
       MethodDescriptor methodDescriptor,
       DeclaredTypeDescriptor targetTypeDescriptor,
       Optional<String> postfix) {
-    checkArgument(methodDescriptor.isInstanceMember());
 
     DeclaredTypeDescriptor enclosingTypeDescriptor = methodDescriptor.getEnclosingTypeDescriptor();
 
@@ -951,6 +954,7 @@ public class AstUtils {
                         enclosingTypeDescriptor.getTypeDeclaration().getTypeParameterDescriptors())
                     .build())
             .setStatic(true)
+            .setConstructor(false)
             .setAbstract(false)
             .setDefaultMethod(false)
             .setJsInfo(methodDescriptor.isJsAsync() ? JsInfo.NONE_ASYNC : JsInfo.NONE)

@@ -227,7 +227,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     StringBuilder sb = new StringBuilder();
     if (type.isInterface()) {
       appendln(sb, " * @interface");
-    } else if (type.isAbstract()) {
+    } else if (type.isAbstract()
+        || TypeDescriptors.isBoxedTypeAsJsPrimitives(type.getTypeDescriptor())) {
       appendln(sb, " * @abstract");
     }
     if (type.getDeclaration().hasTypeParameters()) {

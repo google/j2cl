@@ -219,8 +219,7 @@ public abstract class TypeDeclaration
   }
 
   public boolean isAbstract() {
-    return getHasAbstractModifier()
-        || TypeDescriptors.isBoxedTypeAsJsPrimitives(toRawTypeDescriptor());
+    return getHasAbstractModifier();
   }
 
   public abstract boolean isFinal();

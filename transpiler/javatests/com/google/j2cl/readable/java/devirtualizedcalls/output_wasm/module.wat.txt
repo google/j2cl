@@ -165,7 +165,7 @@
    drop
    ;; Number d = new Double.<init>(1.1);
    
-   (local.set $d (call $m_<init>__double__void@java.lang.Double (struct.new_with_rtt $java.lang.Double (global.get $java.lang.Double.rtt))(f64.const 1.1)))
+   (local.set $d (call $m_<init>__double__void@java.lang.Double (struct.new_with_rtt $java.lang.Double (f64.const 0.0) (global.get $java.lang.Double.rtt))(f64.const 1.1)))
    ;; d.byteValue();
    (i32.const 0)
    drop
@@ -186,7 +186,7 @@
    drop
    ;; Double dd = new Double.<init>(1.1);
    
-   (local.set $dd (call $m_<init>__double__void@java.lang.Double (struct.new_with_rtt $java.lang.Double (global.get $java.lang.Double.rtt))(f64.const 1.1)))
+   (local.set $dd (call $m_<init>__double__void@java.lang.Double (struct.new_with_rtt $java.lang.Double (f64.const 0.0) (global.get $java.lang.Double.rtt))(f64.const 1.1)))
    ;; dd.byteValue();
    (i32.const 0)
    drop
@@ -381,7 +381,7 @@
    drop
    ;; Boolean bool = new Boolean.<init>(true);
    
-   (local.set $bool (call $m_<init>__boolean__void@java.lang.Boolean (struct.new_with_rtt $java.lang.Boolean (global.get $java.lang.Boolean.rtt))(i32.const 1)))
+   (local.set $bool (call $m_<init>__boolean__void@java.lang.Boolean (struct.new_with_rtt $java.lang.Boolean (i32.const 0) (global.get $java.lang.Boolean.rtt))(i32.const 1)))
    ;; bool.booleanValue();
    (i32.const 0)
    drop

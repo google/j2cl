@@ -140,17 +140,20 @@ public class NormalizeConstructors extends NormalizationPass {
     // Since JsConstructors include ctor logic as part of ES6 constructor and will be implcitly
     // executed when the ES6 constructor is executed, we should remove eplicit calls to the ctor
     // functions via 'super()' and 'this()'.
-    removeJsConstructorCallsFromCtors(type);
+    removeUnneededCtorCalls(type);
     rewriteConstructorsAsCtorMethods(type);
 
     type.addMethod(0, es6Constructor);
   }
 
-  private static void removeJsConstructorCallsFromCtors(Type type) {
-    for (Method ctor : type.getConstructors()) {
+  private static void removeUnneededCtorCalls(Type type) {
+    for (Method ctor : type.getMethods()) {
       ExpressionStatement ctorCall = AstUtils.getConstructorInvocationStatement(ctor);
-      if (ctorCall != null
-          && ((MethodCall) ctorCall.getExpression()).getTarget().isJsConstructor()) {
+      if (ctorCall == null) {
+        continue;
+      }
+      if (TypeDescriptors.isBoxedTypeAsJsPrimitives(type.getTypeDescriptor())
+          || ((MethodCall) ctorCall.getExpression()).getTarget().isJsConstructor()) {
         // this() call should be replaced by a call to the es6 constructor in the $create
         // method so we remove these from $ctor methods.
         ctor.getBody().getStatements().remove(ctorCall);
@@ -342,13 +345,61 @@ public class NormalizeConstructors extends NormalizationPass {
         continue;
       }
 
-      if (type.containsMethod(factoryDescriptorForConstructor(methodDescriptor).getMangledName())) {
-        continue;
+      if (TypeDescriptors.isBoxedTypeAsJsPrimitives(type.getTypeDescriptor())) {
+        // Replace constructor with the factory method and advance.
+        members.set(i, synthesizeBoxedJsPrimitiveFactoryMethod(type, method));
+      } else {
+        // Insert the factory method just before the corresponding constructor, and advance.
+        members.add(i++, synthesizeFactoryMethod(type, method));
       }
-
-      // Insert the factory method just before the corresponding constructor, and advance.
-      members.add(i++, synthesizeFactoryMethod(type, method));
     }
+  }
+
+  /**
+   * Generates code of the form:
+   *
+   * <pre>{@code
+   * static $create(args)
+   *   let $this;
+   *   <devirt instructions with assignement to this>
+   *   return $this;
+   * }</pre>
+   */
+  private static Method synthesizeBoxedJsPrimitiveFactoryMethod(Type type, Method constructor) {
+    Method factory =
+        Method.newBuilder()
+            .setMethodDescriptor(factoryDescriptorForConstructor(constructor.getDescriptor()))
+            .setParameters(constructor.getParameters())
+            .setSourcePosition(constructor.getSourcePosition())
+            .build();
+
+    List<Statement> factoryStatements = factory.getBody().getStatements();
+    Variable thisArg =
+        Variable.newBuilder()
+            .setName("$thisArg")
+            .setTypeDescriptor(type.getTypeDescriptor())
+            .build();
+    factoryStatements.add(
+        VariableDeclarationExpression.newBuilder()
+            .addVariableDeclarations(thisArg)
+            .build()
+            .makeStatement(constructor.getSourcePosition()));
+    factoryStatements.addAll(constructor.getBody().getStatements());
+    factoryStatements.add(
+        ReturnStatement.newBuilder()
+            .setTypeDescriptor(type.getTypeDescriptor())
+            .setExpression(thisArg.createReference())
+            .setSourcePosition(constructor.getSourcePosition())
+            .build());
+    factory.accept(
+        new AbstractRewriter() {
+          @Override
+          public Expression rewriteThisReference(ThisReference thisReference) {
+            return thisArg.createReference();
+          }
+        });
+
+    return factory;
   }
 
   private static Method synthesizeFactoryMethod(Type type, Method constructor) {
