@@ -43,6 +43,7 @@ import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.UnaryExpression;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
@@ -148,8 +149,7 @@ final class ExpressionTranspiler {
           sourceBuilder.append(
               format(
                   "(ref.cast %s %s ",
-                  environment.getWasmTypeName(
-                      castExpression.getExpression().getDeclaredTypeDescriptor()),
+                  environment.getWasmTypeName(TypeDescriptors.get().javaLangObject),
                   environment.getWasmTypeName(castTypeDescriptor)));
           render(castExpression.getExpression());
           sourceBuilder.append(
