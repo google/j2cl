@@ -203,11 +203,9 @@
  (block $return.label
   (block
    ;; new NativeFoo.<init>().getA();
-   (ref.null $java.lang.Object)
-   drop
+   (drop (ref.null $java.lang.Object))
    ;; jsproperties.NativeFoo.getB();
-   (call $m_getB__double@jsproperties.NativeFoo )
-   drop
+   (drop (call $m_getB__double@jsproperties.NativeFoo ))
   )
  )
 )
@@ -218,13 +216,11 @@
  (block $return.label
   (block
    ;; jsproperties.Foo.getA();
-   (call $m_getA__int@jsproperties.Foo )
-   drop
+   (drop (call $m_getA__int@jsproperties.Foo ))
    ;; jsproperties.Foo.setA(10);
    (call $m_setA__int__void@jsproperties.Foo (i32.const 10))
    ;; jsproperties.Foo.getB();
-   (call $m_getB__int@jsproperties.Foo )
-   drop
+   (drop (call $m_getB__int@jsproperties.Foo ))
    ;; jsproperties.Foo.setB(10);
    (call $m_setB__int__void@jsproperties.Foo (i32.const 10))
   )
@@ -241,13 +237,11 @@
    
    (local.set $bar (call $m_<init>__void_$pp_jsproperties@jsproperties.Bar (struct.new_with_rtt $jsproperties.Bar (i32.const 0) (global.get $jsproperties.Bar.rtt))))
    ;; bar.getA();
-   (i32.const 0)
-   drop
+   (drop (i32.const 0))
    ;; bar.setA(10);
    
    ;; bar.getB();
-   (i32.const 0)
-   drop
+   (drop (i32.const 0))
    ;; bar.setB(10);
    
   )

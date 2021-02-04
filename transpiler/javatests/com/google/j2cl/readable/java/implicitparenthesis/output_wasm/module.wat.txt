@@ -139,8 +139,7 @@
  (block $return.label
   (block
    ;; new Integer.<init>((1 + 2));
-   (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.add (i32.const 1) (i32.const 2)))
-   drop
+   (drop (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.add (i32.const 1) (i32.const 2))))
   )
  )
 )

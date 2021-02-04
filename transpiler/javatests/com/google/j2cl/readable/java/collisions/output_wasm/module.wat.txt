@@ -171,8 +171,7 @@
    
    (local.set $t (ref.null $java.lang.Number))
    ;; t.byteValue();
-   (i32.const 0)
-   drop
+   (drop (i32.const 0))
    ;; return t;
    (local.set $return.value (local.get $t))
    (br $return.label)

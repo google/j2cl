@@ -50,8 +50,7 @@
    
    (local.set $foo (ref.null $java.lang.Object))
    ;; foo.bar();
-   (i32.const 0)
-   drop
+   (drop (i32.const 0))
    ;; return annotation.Main.Foo.CONSTANT;
    (local.set $return.value (global.get $CONSTANT@annotation.Main.Foo))
    (br $return.label)

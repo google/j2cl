@@ -91,15 +91,19 @@ class StatementTranspiler {
         Expression expression = expressionStatement.getExpression();
         builder.emitWithMapping(
             expressionStatement.getSourcePosition(),
-            () -> {
-              renderExpression(expression);
-            });
-        if (!returnsVoid(expression)) {
-          builder.newLine();
-          // Remove the result of the expression from the stack.
-          builder.append("drop");
-        }
+            () -> renderExpressionWithUnusedResult(expression));
+
         return false;
+      }
+
+      private void renderExpressionWithUnusedResult(Expression expression) {
+        if (returnsVoid(expression)) {
+          renderExpression(expression);
+        } else {
+          builder.append("(drop ");
+          renderExpression(expression);
+          builder.append(")");
+        }
       }
 
       @Override
@@ -226,7 +230,7 @@ class StatementTranspiler {
             .forEach(
                 i -> {
                   builder.newLine();
-                  renderExpression(i);
+                  renderExpressionWithUnusedResult(i);
                 });
 
         renderLoop(
@@ -241,7 +245,7 @@ class StatementTranspiler {
                   .forEach(
                       u -> {
                         builder.newLine();
-                        renderExpression(u);
+                        renderExpressionWithUnusedResult(u);
                       });
               renderUnconditionalBranch(0);
             });

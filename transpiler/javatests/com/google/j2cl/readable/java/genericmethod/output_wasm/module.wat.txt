@@ -55,11 +55,9 @@
  (block $return.label
   (block
    ;; GenericMethod.this.new $1.<init>();
-   (call $m_<init>__void_$pp_genericmethod@genericmethod.GenericMethod.1 (struct.new_with_rtt $genericmethod.GenericMethod.1 (ref.null $genericmethod.GenericMethod) (global.get $genericmethod.GenericMethod.1.rtt)))
-   drop
+   (drop (call $m_<init>__void_$pp_genericmethod@genericmethod.GenericMethod.1 (struct.new_with_rtt $genericmethod.GenericMethod.1 (ref.null $genericmethod.GenericMethod) (global.get $genericmethod.GenericMethod.1.rtt))))
    ;; GenericMethod.this.new $1LocalClass.<init>();
-   (call $m_<init>__void_$pp_genericmethod@genericmethod.GenericMethod.1LocalClass (struct.new_with_rtt $genericmethod.GenericMethod.1LocalClass (ref.null $genericmethod.GenericMethod) (global.get $genericmethod.GenericMethod.1LocalClass.rtt)))
-   drop
+   (drop (call $m_<init>__void_$pp_genericmethod@genericmethod.GenericMethod.1LocalClass (struct.new_with_rtt $genericmethod.GenericMethod.1LocalClass (ref.null $genericmethod.GenericMethod) (global.get $genericmethod.GenericMethod.1LocalClass.rtt))))
   )
  )
 )
@@ -146,8 +144,7 @@
    ;; g.fun(new Error.<init>());
    
    ;; g.fun(new String[] {"asdf"});
-   (ref.null $java.lang.Object)
-   drop
+   (drop (ref.null $java.lang.Object))
    ;; String s = ((String) GenericMethod.this.checked());
    
    (local.set $s (ref.cast $java.lang.Object $java.lang.String (ref.null $java.lang.String) (global.get $java.lang.String.rtt)))

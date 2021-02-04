@@ -31,6 +31,9 @@
 [boolean b = false;] => [let b = false;] "forstatement.ForStatement.test"
 [b] => [b] "b"
 [for (; b = a; ) {}] => [for (; b = a; ) {}] "forstatement.ForStatement.test"
+[for (returnsValue(); ; returnsValue()) {}] => [for (ForStatement.m_returnsValue__(); true; ForStatement.m_returnsValue__()) {}] "forstatement.ForStatement.test"
+[returnsValue] => [m_returnsValue__]
+[return 1;] => [return 1;] "forstatement.ForStatement.returnsValue"
 [ForStatement] => [$clinit]
 [ForStatement] => [ForStatement.$clinit = () =>{};] "forstatement.ForStatement.<clinit>"
 [ForStatement] => [ForStatement.$loadModules();] "forstatement.ForStatement.<clinit>"

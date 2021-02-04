@@ -388,11 +388,9 @@
    ;; (ch = ((char) (ch + 1)));
    (local.set $ch (ref.null $java.lang.Character))
    ;; ((f = (f + 1)),f).intValue();
-   (i32.const 0)
-   drop
+   (drop (i32.const 0))
    ;; (Integer $value = f,(f = (f - 1)),$value).intValue();
-   (i32.const 0)
-   drop
+   (drop (i32.const 0))
    ;; Ref<Integer> ref = null;
    
    (local.set $ref (ref.null $arithmeticexpressions.ArithmeticExpressions.1Ref))

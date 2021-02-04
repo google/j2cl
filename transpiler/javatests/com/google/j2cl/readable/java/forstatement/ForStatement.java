@@ -30,5 +30,11 @@ public class ForStatement {
 
     boolean b = false;
     for (; b = a; ) {}
+
+    for (returnsValue(); ; returnsValue()) {}
+  }
+
+  private static int returnsValue() {
+    return 1;
   }
 }

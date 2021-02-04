@@ -42,8 +42,7 @@
        (local.set $t (ref.cast $java.lang.Object $java.lang.Throwable (ref.null $java.lang.Throwable) (global.get $java.lang.Throwable.rtt)))
        (block
         ;; t.toString();
-        (ref.null $java.lang.String)
-        drop
+        (drop (ref.null $java.lang.String))
        )
       )
      )
@@ -66,8 +65,7 @@
        (local.set $t_1 (ref.null $java.lang.Throwable))
        (block
         ;; t.toString();
-        (ref.null $java.lang.String)
-        drop
+        (drop (ref.null $java.lang.String))
        )
       )
      )

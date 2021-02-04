@@ -28,11 +28,9 @@
    
    (local.set $localVar (i32.const 1))
    ;; SimpleLocalClass.this.new $1InnerClass.<init>().fun();
-   (i32.const 0)
-   drop
+   (drop (i32.const 0))
    ;; SimpleLocalClass.this.new $1InnerClassWithoutCaptures.<init>();
-   (call $m_<init>__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (struct.new_with_rtt $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (ref.null $simplelocalclass.SimpleLocalClass) (global.get $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.rtt)))
-   drop
+   (drop (call $m_<init>__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (struct.new_with_rtt $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (ref.null $simplelocalclass.SimpleLocalClass) (global.get $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.rtt))))
   )
  )
 )

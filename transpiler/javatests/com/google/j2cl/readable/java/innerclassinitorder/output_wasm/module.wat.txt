@@ -26,8 +26,7 @@
  (block $return.label
   (block
    ;; InnerClassInitOrder.this.new OuterRefFromSuperCtorCall.<init>();
-   (call $m_<init>__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall (ref.null $innerclassinitorder.InnerClassInitOrder) (global.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.rtt)))
-   drop
+   (drop (call $m_<init>__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall (ref.null $innerclassinitorder.InnerClassInitOrder) (global.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.rtt))))
    ;; assert (InnerClassInitOrder.this.number == 100);
    ;; unimplemented statement AssertStatement
   )
@@ -40,8 +39,7 @@
  (block $return.label
   (block
    ;; InnerClassInitOrder.this.new OuterRefFromThisCtorCall.<init>();
-   (call $m_<init>__void@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall (ref.null $innerclassinitorder.InnerClassInitOrder) (global.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.rtt)))
-   drop
+   (drop (call $m_<init>__void@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall (ref.null $innerclassinitorder.InnerClassInitOrder) (global.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.rtt))))
    ;; assert (InnerClassInitOrder.this.number == 1100);
    ;; unimplemented statement AssertStatement
   )
@@ -125,8 +123,7 @@
  (block $return.label
   (block
    ;; InnerClassInitOrder.this.new InnerClass.<init>();
-   (call $m_<init>__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.InnerClass (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.InnerClass (ref.null $innerclassinitorder.InnerClassInitOrder) (global.get $innerclassinitorder.InnerClassInitOrder.InnerClass.rtt)))
-   drop
+   (drop (call $m_<init>__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.InnerClass (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.InnerClass (ref.null $innerclassinitorder.InnerClassInitOrder) (global.get $innerclassinitorder.InnerClassInitOrder.InnerClass.rtt))))
    ;; assert (InnerClassInitOrder.this.number == 1111);
    ;; unimplemented statement AssertStatement
   )
@@ -373,8 +370,7 @@
    ;; Object.this.Object.<init>();
    
    ;; o.toString();
-   (ref.null $java.lang.String)
-   drop
+   (drop (ref.null $java.lang.String))
   )
  )
  (local.get $this)
@@ -526,8 +522,7 @@
    ;; (InnerClass.this.this.number = (InnerClass.this.this.number + 1));
    (struct.set $innerclassinitorder.InnerClassInitOrder $number@innerclassinitorder.InnerClassInitOrder  (struct.get $innerclassinitorder.InnerClassInitOrder.InnerClass $this@innerclassinitorder.InnerClassInitOrder.InnerClass  (ref.null $innerclassinitorder.InnerClassInitOrder.InnerClass)) (i32.add (struct.get $innerclassinitorder.InnerClassInitOrder $number@innerclassinitorder.InnerClassInitOrder  (struct.get $innerclassinitorder.InnerClassInitOrder.InnerClass $this@innerclassinitorder.InnerClassInitOrder.InnerClass  (ref.null $innerclassinitorder.InnerClassInitOrder.InnerClass))) (i32.const 1)))
    ;; InnerClass.this.new $1ReallyInnerClass.<init>();
-   (call $m_<init>__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass (ref.null $innerclassinitorder.InnerClassInitOrder.InnerClass) (global.get $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass.rtt)))
-   drop
+   (drop (call $m_<init>__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass (ref.null $innerclassinitorder.InnerClassInitOrder.InnerClass) (global.get $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass.rtt))))
   )
  )
 )

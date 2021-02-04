@@ -43,8 +43,7 @@
  (block $return.label
   (block
    ;; Lambdas.this.call(function (int i){
-   (i32.const 0)
-   drop
+   (drop (i32.const 0))
   )
  )
 )
@@ -56,8 +55,7 @@
  (block $return.label
   (block
    ;; Lambdas.this.call(function (int i){
-   (i32.const 0)
-   drop
+   (drop (i32.const 0))
   )
  )
 )
@@ -69,8 +67,7 @@
  (block $return.label
   (block
    ;; Lambdas.this.call(function (int i){
-   (i32.const 0)
-   drop
+   (drop (i32.const 0))
   )
  )
 )
@@ -86,8 +83,7 @@
    
    (local.set $x (i32.const 1))
    ;; Lambdas.this.call(function (int i){
-   (i32.const 0)
-   drop
+   (drop (i32.const 0))
   )
  )
 )
@@ -104,8 +100,7 @@
    
    (local.set $x (i32.const 1))
    ;; Lambdas.this.call(function (int i){
-   (i32.const 0)
-   drop
+   (drop (i32.const 0))
   )
  )
 )
@@ -126,8 +121,7 @@
  (block $return.label
   (block
    ;; Lambdas.this.call(function (int i){
-   (i32.const 0)
-   drop
+   (drop (i32.const 0))
   )
  )
 )
@@ -251,17 +245,13 @@
  (block $return.label
   (block
    ;; Lambdas.this.callWithTypeVariable(function (Error i){
-   (ref.null $java.lang.Error)
-   drop
+   (drop (ref.null $java.lang.Error))
    ;; Lambdas.this.callParameterized(function (Error i){
-   (ref.null $java.lang.Error)
-   drop
+   (drop (ref.null $java.lang.Error))
    ;; lambdas.Lambdas.callTypeVariableWithBounds(function (Enum<T> i){
-   (call $m_callTypeVariableWithBounds__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Enum__java_lang_Enum@lambdas.Lambdas (ref.null $java.lang.Object)(ref.cast $java.lang.Object $java.lang.Enum (ref.null $java.lang.Object) (global.get $java.lang.Enum.rtt)))
-   drop
+   (drop (call $m_callTypeVariableWithBounds__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Enum__java_lang_Enum@lambdas.Lambdas (ref.null $java.lang.Object)(ref.cast $java.lang.Object $java.lang.Enum (ref.null $java.lang.Object) (global.get $java.lang.Enum.rtt))))
    ;; Lambdas.this.callWithBiFunction(function (Object x,String y){
-   (ref.null $java.lang.Object)
-   drop
+   (drop (ref.null $java.lang.Object))
    ;; Function<? super T, ?> f = function (T item){
    
    (local.set $f (ref.null $java.lang.Object))
@@ -367,17 +357,14 @@
    
    (local.set $stringJsSupplier (ref.null $java.lang.Object))
    ;; stringJsSupplier.get();
-   (ref.null $java.lang.Integer)
-   drop
+   (drop (ref.null $java.lang.Integer))
    ;; Equals equals = stringJsSupplier;
    
    (local.set $equals (local.get $stringJsSupplier))
    ;; equals.equals(null);
-   (i32.const 0)
-   drop
+   (drop (i32.const 0))
    ;; equals.get();
-   (ref.null $java.lang.Object)
-   drop
+   (drop (ref.null $java.lang.Object))
   )
  )
 )

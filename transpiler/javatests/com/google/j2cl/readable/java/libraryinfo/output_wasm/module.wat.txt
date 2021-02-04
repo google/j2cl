@@ -34,11 +34,9 @@
    ;; jsFunction.apply("foo");
    
    ;; new MyJsType.<init>();
-   (call $m_<init>__void@libraryinfo.Main.MyJsType (struct.new_with_rtt $libraryinfo.Main.MyJsType (ref.null $java.lang.Object) (global.get $libraryinfo.Main.MyJsType.rtt)))
-   drop
+   (drop (call $m_<init>__void@libraryinfo.Main.MyJsType (struct.new_with_rtt $libraryinfo.Main.MyJsType (ref.null $java.lang.Object) (global.get $libraryinfo.Main.MyJsType.rtt))))
    ;; new $1.<init>();
-   (call $m_<init>__void_$pp_libraryinfo@libraryinfo.Main.1 (struct.new_with_rtt $libraryinfo.Main.1 (global.get $libraryinfo.Main.1.rtt)))
-   drop
+   (drop (call $m_<init>__void_$pp_libraryinfo@libraryinfo.Main.1 (struct.new_with_rtt $libraryinfo.Main.1 (global.get $libraryinfo.Main.1.rtt))))
   )
  )
 )

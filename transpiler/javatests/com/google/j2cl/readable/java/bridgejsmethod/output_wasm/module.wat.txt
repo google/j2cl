@@ -32,48 +32,42 @@
    
    (local.set $a (call $m_<init>__void@bridgejsmethod.Main.A (struct.new_with_rtt $bridgejsmethod.Main.A (global.get $bridgejsmethod.Main.A.rtt))))
    ;; a.fun(1);
-   (ref.null $java.lang.Object)
-   drop
+   (drop (ref.null $java.lang.Object))
    ;; a.bar(1);
    
    ;; B b = new B.<init>();
    
    (local.set $b (call $m_<init>__void@bridgejsmethod.Main.B (struct.new_with_rtt $bridgejsmethod.Main.B (global.get $bridgejsmethod.Main.B.rtt))))
    ;; b.fun("abc");
-   (ref.null $java.lang.String)
-   drop
+   (drop (ref.null $java.lang.String))
    ;; b.bar("abc");
    
    ;; C c = new C.<init>();
    
    (local.set $c (call $m_<init>__void@bridgejsmethod.Main.C (struct.new_with_rtt $bridgejsmethod.Main.C (global.get $bridgejsmethod.Main.C.rtt))))
    ;; c.fun(1);
-   (ref.null $java.lang.Integer)
-   drop
+   (drop (ref.null $java.lang.Integer))
    ;; c.bar(1);
    
    ;; D d = new D.<init>();
    
    (local.set $d (call $m_<init>__void@bridgejsmethod.Main.D (struct.new_with_rtt $bridgejsmethod.Main.D (global.get $bridgejsmethod.Main.D.rtt))))
    ;; d.fun(1);
-   (ref.null $java.lang.Integer)
-   drop
+   (drop (ref.null $java.lang.Integer))
    ;; d.bar(1);
    
    ;; E e = new E.<init>();
    
    (local.set $e (call $m_<init>__void@bridgejsmethod.Main.E (struct.new_with_rtt $bridgejsmethod.Main.E (global.get $bridgejsmethod.Main.E.rtt))))
    ;; e.fun("abc");
-   (ref.null $java.lang.String)
-   drop
+   (drop (ref.null $java.lang.String))
    ;; e.bar("abc");
    
    ;; H<Integer> h = new H.<init>();
    
    (local.set $h (call $m_<init>__void@bridgejsmethod.Main.H (struct.new_with_rtt $bridgejsmethod.Main.H (global.get $bridgejsmethod.Main.H.rtt))))
    ;; h.enclose(1);
-   (ref.null $java.lang.Integer)
-   drop
+   (drop (ref.null $java.lang.Integer))
    ;; L<Integer> l = new L.<init>();
    
    (local.set $l (call $m_<init>__void@bridgejsmethod.Main.L (struct.new_with_rtt $bridgejsmethod.Main.L (global.get $bridgejsmethod.Main.L.rtt))))

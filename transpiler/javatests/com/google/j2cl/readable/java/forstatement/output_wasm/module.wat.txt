@@ -105,7 +105,36 @@
      
     )
    )
+   ;; LOOP: for (forstatement.ForStatement.returnsValue();true;forstatement.ForStatement.returnsValue()) {
+   
+   (drop (call $m_returnsValue__int@forstatement.ForStatement ))
+   (block $LOOP_4.BREAK
+    (loop
+     (br_if 1 (i32.eqz (i32.const 1)))
+     (block $LOOP_4.CONTINUE
+      (block
+      )
+     )
+     (drop (call $m_returnsValue__int@forstatement.ForStatement ))
+     (br 0)
+     
+    )
+   )
   )
  )
+)
+
+;;; int ForStatement.returnsValue()
+(func $m_returnsValue__int@forstatement.ForStatement
+ (result i32)
+ (local $return.value i32)
+ (block $return.label
+  (block
+   ;; return 1;
+   (local.set $return.value (i32.const 1))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
 )
 

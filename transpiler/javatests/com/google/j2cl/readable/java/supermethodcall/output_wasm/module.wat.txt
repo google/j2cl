@@ -150,8 +150,7 @@
  (block $return.label
   (block
    ;; super.parentWithChangingReturn();
-   (ref.null $java.lang.Object)
-   drop
+   (drop (ref.null $java.lang.Object))
    ;; return Child.this;
    (local.set $return.value (ref.null $supermethodcall.Child))
    (br $return.label)
@@ -191,8 +190,7 @@
  (block $return.label
   (block
    ;; super.grandParentWithChangingReturn();
-   (ref.null $java.lang.Object)
-   drop
+   (drop (ref.null $java.lang.Object))
    ;; return Child.this;
    (local.set $return.value (ref.null $supermethodcall.Child))
    (br $return.label)
