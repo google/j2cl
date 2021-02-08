@@ -2,7 +2,17 @@
 
 ;;; CLASS  GenericConstructor
 (type $genericconstructor.GenericConstructor (struct
+ (field $vtable (ref null $genericconstructor.GenericConstructor.vtable))
 ))
+(type $genericconstructor.GenericConstructor.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_test__void (mut (ref $function.__$void)))
+))
+(global $genericconstructor.GenericConstructor.vtable (mut (ref null $genericconstructor.GenericConstructor.vtable)) (ref.null $genericconstructor.GenericConstructor.vtable))
 
 ;;; GenericConstructor(S s, T t)
 (func $m_<init>__java_lang_Object__java_lang_Object__void@genericconstructor.GenericConstructor
@@ -18,6 +28,7 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__java_lang_Object__java_lang_Object__void@genericconstructor.GenericConstructor))
 
 ;;; GenericConstructor(T t)
 (func $m_<init>__java_lang_Object__void@genericconstructor.GenericConstructor
@@ -32,17 +43,26 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__java_lang_Object__void@genericconstructor.GenericConstructor))
 
 ;;; void GenericConstructor.test()
 (func $m_test__void@genericconstructor.GenericConstructor
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
+ (local $this (ref null $genericconstructor.GenericConstructor))
+ (local.set $this (ref.cast $java.lang.Object $genericconstructor.GenericConstructor (local.get $this.untyped) (global.get $genericconstructor.GenericConstructor.rtt)))
  (block $return.label
   (block
    ;; new GenericConstructor.<init>(new Exception.<init>(),new Error.<init>());
-   (drop (call $m_<init>__java_lang_Object__java_lang_Object__void@genericconstructor.GenericConstructor (struct.new_with_rtt $genericconstructor.GenericConstructor (global.get $genericconstructor.GenericConstructor.rtt))(call $m_<init>__void@java.lang.Exception (struct.new_with_rtt $java.lang.Exception (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Exception.rtt)))(call $m_<init>__void@java.lang.Error (struct.new_with_rtt $java.lang.Error (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Error.rtt)))))
+   (drop (call $m_<init>__java_lang_Object__java_lang_Object__void@genericconstructor.GenericConstructor (struct.new_with_rtt $genericconstructor.GenericConstructor (global.get $genericconstructor.GenericConstructor.vtable) (global.get $genericconstructor.GenericConstructor.rtt))(call $m_<init>__void@java.lang.Exception (struct.new_with_rtt $java.lang.Exception (global.get $java.lang.Exception.vtable) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Exception.rtt)))(call $m_<init>__void@java.lang.Error (struct.new_with_rtt $java.lang.Error (global.get $java.lang.Error.vtable) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Error.rtt)))))
    ;; new GenericConstructor.<init>(new Exception.<init>());
-   (drop (call $m_<init>__java_lang_Object__void@genericconstructor.GenericConstructor (struct.new_with_rtt $genericconstructor.GenericConstructor (global.get $genericconstructor.GenericConstructor.rtt))(call $m_<init>__void@java.lang.Exception (struct.new_with_rtt $java.lang.Exception (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Exception.rtt)))))
+   (drop (call $m_<init>__java_lang_Object__void@genericconstructor.GenericConstructor (struct.new_with_rtt $genericconstructor.GenericConstructor (global.get $genericconstructor.GenericConstructor.vtable) (global.get $genericconstructor.GenericConstructor.rtt))(call $m_<init>__void@java.lang.Exception (struct.new_with_rtt $java.lang.Exception (global.get $java.lang.Exception.vtable) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Exception.rtt)))))
   )
  )
 )
+(global funcref (ref.func $m_test__void@genericconstructor.GenericConstructor))
+
+;;; Code for genericconstructor.GenericConstructor [vtable]
+ (global.set $genericconstructor.GenericConstructor.vtable (struct.new_with_rtt $genericconstructor.GenericConstructor.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__void@genericconstructor.GenericConstructor) (rtt.canon $genericconstructor.GenericConstructor.vtable)))
+))
+(start $.runtime.init)
 

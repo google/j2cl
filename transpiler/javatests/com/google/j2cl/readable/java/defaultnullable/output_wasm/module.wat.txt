@@ -2,6 +2,7 @@
 
 ;;; CLASS  DefaultNullable
 (type $defaultnullable.DefaultNullable (struct
+ (field $vtable (ref null $defaultnullable.DefaultNullable.vtable))
  (field $f1@defaultnullable.DefaultNullable (mut (ref null $java.lang.String)))
  (field $f2@defaultnullable.DefaultNullable (mut (ref null $java.lang.String)))
  (field $f3@defaultnullable.DefaultNullable (mut (ref null $java.lang.String)))
@@ -15,6 +16,17 @@
  (field $f11@defaultnullable.DefaultNullable (mut (ref null $java.lang.Void)))
  (field $f12@defaultnullable.DefaultNullable (mut (ref null $java.lang.Object)))
 ))
+(type $defaultnullable.DefaultNullable.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_m1__java_lang_String__java_util_List__java_lang_String (mut (ref $function.$java.lang.String__$java.lang.Object__$java.lang.String)))
+ (field $m_m2__java_lang_String__java_util_List__java_lang_String (mut (ref $function.$java.lang.String__$java.lang.Object__$java.lang.String)))
+ (field $m_m3__arrayOf_java_lang_String__void (mut (ref $function.$java.lang.Object__$void)))
+))
+(global $defaultnullable.DefaultNullable.vtable (mut (ref null $defaultnullable.DefaultNullable.vtable)) (ref.null $defaultnullable.DefaultNullable.vtable))
 
 ;;; DefaultNullable()
 (func $m_<init>__void@defaultnullable.DefaultNullable
@@ -28,14 +40,17 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@defaultnullable.DefaultNullable))
 
 ;;; String DefaultNullable.m1(String a, List<Double> b)
 (func $m_m1__java_lang_String__java_util_List__java_lang_String@defaultnullable.DefaultNullable
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $a (ref null $java.lang.String))
  (param $b (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))
+ (local $this (ref null $defaultnullable.DefaultNullable))
+ (local.set $this (ref.cast $java.lang.Object $defaultnullable.DefaultNullable (local.get $this.untyped) (global.get $defaultnullable.DefaultNullable.rtt)))
  (block $return.label
   (block
    ;; return "";
@@ -45,14 +60,17 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_m1__java_lang_String__java_util_List__java_lang_String@defaultnullable.DefaultNullable))
 
 ;;; String DefaultNullable.m2(String a, List<Double> b)
 (func $m_m2__java_lang_String__java_util_List__java_lang_String@defaultnullable.DefaultNullable
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $a (ref null $java.lang.String))
  (param $b (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))
+ (local $this (ref null $defaultnullable.DefaultNullable))
+ (local.set $this (ref.cast $java.lang.Object $defaultnullable.DefaultNullable (local.get $this.untyped) (global.get $defaultnullable.DefaultNullable.rtt)))
  (block $return.label
   (block
    ;; return null;
@@ -62,14 +80,23 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_m2__java_lang_String__java_util_List__java_lang_String@defaultnullable.DefaultNullable))
 
 ;;; void DefaultNullable.m3(String... args)
 (func $m_m3__arrayOf_java_lang_String__void@defaultnullable.DefaultNullable
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $args (ref null $java.lang.Object))
+ (local $this (ref null $defaultnullable.DefaultNullable))
+ (local.set $this (ref.cast $java.lang.Object $defaultnullable.DefaultNullable (local.get $this.untyped) (global.get $defaultnullable.DefaultNullable.rtt)))
  (block $return.label
   (block
   )
  )
 )
+(global funcref (ref.func $m_m3__arrayOf_java_lang_String__void@defaultnullable.DefaultNullable))
+
+;;; Code for defaultnullable.DefaultNullable [vtable]
+ (global.set $defaultnullable.DefaultNullable.vtable (struct.new_with_rtt $defaultnullable.DefaultNullable.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_m1__java_lang_String__java_util_List__java_lang_String@defaultnullable.DefaultNullable) (ref.func $m_m2__java_lang_String__java_util_List__java_lang_String@defaultnullable.DefaultNullable) (ref.func $m_m3__arrayOf_java_lang_String__void@defaultnullable.DefaultNullable) (rtt.canon $defaultnullable.DefaultNullable.vtable)))
+))
+(start $.runtime.init)
 

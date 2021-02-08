@@ -2,8 +2,22 @@
 
 ;;; CLASS  CastGenerics
 (type $cast.CastGenerics (struct
+ (field $vtable (ref null $cast.CastGenerics.vtable))
  (field $field@cast.CastGenerics (mut (ref null $java.lang.Object)))
 ))
+(type $cast.CastGenerics.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_method__java_lang_Object_$pp_cast (mut (ref $function.__$java.lang.Object)))
+ (field $m_testCastToTypeVariable__void (mut (ref $function.__$void)))
+ (field $m_testCastToMethodTypeVariable__void (mut (ref $function.__$void)))
+ (field $m_outerGenericMethod__void (mut (ref $function.__$void)))
+ (field $m_method__java_lang_Object__cast_CastGenerics_Empty1 (mut (ref $function.$java.lang.Object__$java.lang.Object)))
+))
+(global $cast.CastGenerics.vtable (mut (ref null $cast.CastGenerics.vtable)) (ref.null $cast.CastGenerics.vtable))
 
 ;;; CastGenerics()
 (func $m_<init>__void@cast.CastGenerics
@@ -17,12 +31,15 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@cast.CastGenerics))
 
 ;;; T CastGenerics.method()
 (func $m_method__java_lang_Object_$pp_cast@cast.CastGenerics
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
+ (local $this (ref null $cast.CastGenerics))
+ (local.set $this (ref.cast $java.lang.Object $cast.CastGenerics (local.get $this.untyped) (global.get $cast.CastGenerics.rtt)))
  (block $return.label
   (block
    ;; return null;
@@ -32,41 +49,77 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_method__java_lang_Object_$pp_cast@cast.CastGenerics))
 
 ;;; void CastGenerics.testErasureCast()
 (func $m_testErasureCast__void@cast.CastGenerics
  (local $str (ref null $java.lang.String))
+ (local $$qualifier (ref null $cast.CastGenerics))
  (local $containerT (ref null $cast.CastGenerics.Container))
+ (local $$qualifier_1 (ref null $java.lang.Object))
+ (local $$qualifier_2 (ref null $java.lang.Object))
  (local $containerU (ref null $cast.CastGenerics.Container))
+ (local $$qualifier_3 (ref null $java.lang.Object))
+ (local $$qualifier_4 (ref null $java.lang.Object))
  (local $containerArrT (ref null $cast.CastGenerics.Container))
  (local $arrT (ref null $java.lang.Object))
+ (local $$qualifier_5 (ref null $java.lang.Object))
  (local $arrA (ref null $java.lang.Object))
  (local $arrB (ref null $java.lang.Object))
  (local $containerArrU (ref null $cast.CastGenerics.Container))
  (local $arrU (ref null $java.lang.Object))
+ (local $$qualifier_6 (ref null $java.lang.Object))
  (local $containerBase (ref null $cast.CastGenerics.Container))
+ (local $$qualifier_7 (ref null $cast.CastGenerics.BaseImplementor))
+ (local $$qualifier_8 (ref null $cast.CastGenerics.BaseImplementor))
  (local $containerImplementor (ref null $cast.CastGenerics.Container))
+ (local $$qualifier_9 (ref null $cast.CastGenerics.Implementor))
+ (local $$qualifier_10 (ref null $cast.CastGenerics.Implementor))
  (block $return.label
   (block
    ;; String str = ((String) new CastGenerics.<init>().field);
    
-   (local.set $str (ref.cast $java.lang.Object $java.lang.String (struct.get $cast.CastGenerics $field@cast.CastGenerics  (call $m_<init>__void@cast.CastGenerics (struct.new_with_rtt $cast.CastGenerics (ref.null $java.lang.Object) (global.get $cast.CastGenerics.rtt)))) (global.get $java.lang.String.rtt)))
-   ;; (str = ((String) new CastGenerics.<init>().method()));
-   (local.set $str (ref.cast $java.lang.Object $java.lang.String (ref.null $java.lang.String) (global.get $java.lang.String.rtt)))
+   (local.set $str (ref.cast $java.lang.Object $java.lang.String (struct.get $cast.CastGenerics $field@cast.CastGenerics  (call $m_<init>__void@cast.CastGenerics (struct.new_with_rtt $cast.CastGenerics (global.get $cast.CastGenerics.vtable) (ref.null $java.lang.Object) (global.get $cast.CastGenerics.rtt)))) (global.get $java.lang.String.rtt)))
+   ;; (str = ((String) (CastGenerics<String, Number> $qualifier = new CastGenerics.<init>(),$qualifier.method())));
+   (local.set $str (ref.cast $java.lang.Object $java.lang.String (block (result (ref null $java.lang.String))
+    
+    (local.set $$qualifier (call $m_<init>__void@cast.CastGenerics (struct.new_with_rtt $cast.CastGenerics (global.get $cast.CastGenerics.vtable) (ref.null $java.lang.Object) (global.get $cast.CastGenerics.rtt))))
+    (call_ref (local.get $$qualifier)(struct.get $cast.CastGenerics.vtable $m_method__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics $vtable(local.get $$qualifier))))
+   ) (global.get $java.lang.String.rtt)))
    ;; Container<T> containerT = null;
    
    (local.set $containerT (ref.null $cast.CastGenerics.Container))
-   ;; ((A) containerT.get()).mA();
-   
-   ;; ((B) containerT.get()).mB();
-   
+   (block
+    ;; A $qualifier = ((A) containerT.get());
+    
+    (local.set $$qualifier_1 (call_ref (local.get $containerT)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerT)))))
+    ;; $qualifier.mA();
+    
+   )
+   (block
+    ;; B $qualifier = ((B) containerT.get());
+    
+    (local.set $$qualifier_2 (call_ref (local.get $containerT)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerT)))))
+    ;; $qualifier.mB();
+    
+   )
    ;; Container<U> containerU = null;
    
    (local.set $containerU (ref.null $cast.CastGenerics.Container))
-   ;; ((A) containerU.get()).mA();
-   
-   ;; ((B) containerU.get()).mB();
-   
+   (block
+    ;; A $qualifier = ((A) containerU.get());
+    
+    (local.set $$qualifier_3 (call_ref (local.get $containerU)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerU)))))
+    ;; $qualifier.mA();
+    
+   )
+   (block
+    ;; B $qualifier = ((B) containerU.get());
+    
+    (local.set $$qualifier_4 (call_ref (local.get $containerU)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerU)))))
+    ;; $qualifier.mB();
+    
+   )
    ;; Container<T[]> containerArrT = null;
    
    (local.set $containerArrT (ref.null $cast.CastGenerics.Container))
@@ -75,8 +128,13 @@
    (local.set $arrT (ref.null $java.lang.Object))
    ;; arrT[0].mA();
    
-   ;; ((B) arrT[0]).mB();
-   
+   (block
+    ;; B $qualifier = ((B) arrT[0]);
+    
+    (local.set $$qualifier_5 (ref.null $java.lang.Object))
+    ;; $qualifier.mB();
+    
+   )
    ;; A[] arrA = ((A[]) containerArrT.get());
    
    (local.set $arrA (ref.null $java.lang.Object))
@@ -91,8 +149,13 @@
    (local.set $arrU (ref.null $java.lang.Object))
    ;; arrU[0].mA();
    
-   ;; ((B) arrU[0]).mB();
-   
+   (block
+    ;; B $qualifier = ((B) arrU[0]);
+    
+    (local.set $$qualifier_6 (ref.null $java.lang.Object))
+    ;; $qualifier.mB();
+    
+   )
    ;; (arrA = ((A[]) containerArrU.get()));
    (local.set $arrA (ref.null $java.lang.Object))
    ;; (arrB = ((B[]) containerArrU.get()));
@@ -100,20 +163,41 @@
    ;; Container<BaseImplementor> containerBase = null;
    
    (local.set $containerBase (ref.null $cast.CastGenerics.Container))
-   ;; ((BaseImplementor) containerBase.get()).mA();
-   
-   ;; ((BaseImplementor) containerBase.get()).mB();
-   
+   (block
+    ;; BaseImplementor $qualifier = ((BaseImplementor) containerBase.get());
+    
+    (local.set $$qualifier_7 (ref.cast $java.lang.Object $cast.CastGenerics.BaseImplementor (call_ref (local.get $containerBase)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerBase)))) (global.get $cast.CastGenerics.BaseImplementor.rtt)))
+    ;; $qualifier.mA();
+    
+   )
+   (block
+    ;; BaseImplementor $qualifier = ((BaseImplementor) containerBase.get());
+    
+    (local.set $$qualifier_8 (ref.cast $java.lang.Object $cast.CastGenerics.BaseImplementor (call_ref (local.get $containerBase)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerBase)))) (global.get $cast.CastGenerics.BaseImplementor.rtt)))
+    ;; $qualifier.mB();
+    
+   )
    ;; Container<Implementor> containerImplementor = null;
    
    (local.set $containerImplementor (ref.null $cast.CastGenerics.Container))
-   ;; ((Implementor) containerImplementor.get()).mA();
-   
-   ;; ((Implementor) containerImplementor.get()).mB();
-   
+   (block
+    ;; Implementor $qualifier = ((Implementor) containerImplementor.get());
+    
+    (local.set $$qualifier_9 (ref.cast $java.lang.Object $cast.CastGenerics.Implementor (call_ref (local.get $containerImplementor)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerImplementor)))) (global.get $cast.CastGenerics.Implementor.rtt)))
+    ;; $qualifier.mA();
+    (call_ref (local.get $$qualifier_9)(struct.get $cast.CastGenerics.Implementor.vtable $m_mA__void (struct.get $cast.CastGenerics.Implementor $vtable(local.get $$qualifier_9))))
+   )
+   (block
+    ;; Implementor $qualifier = ((Implementor) containerImplementor.get());
+    
+    (local.set $$qualifier_10 (ref.cast $java.lang.Object $cast.CastGenerics.Implementor (call_ref (local.get $containerImplementor)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerImplementor)))) (global.get $cast.CastGenerics.Implementor.rtt)))
+    ;; $qualifier.mB();
+    (call_ref (local.get $$qualifier_10)(struct.get $cast.CastGenerics.Implementor.vtable $m_mB__void (struct.get $cast.CastGenerics.Implementor $vtable(local.get $$qualifier_10))))
+   )
   )
  )
 )
+(global funcref (ref.func $m_testErasureCast__void@cast.CastGenerics))
 
 ;;; void CastGenerics.testCastToParamterizedType()
 (func $m_testCastToParamterizedType__void@cast.CastGenerics
@@ -123,7 +207,7 @@
   (block
    ;; Object o = new Integer.<init>(1);
    
-   (local.set $o (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
+   (local.set $o (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
    ;; CastGenerics<Error, Number> cc = ((CastGenerics<Error, Number>) o);
    
    (local.set $cc (ref.cast $java.lang.Object $cast.CastGenerics (local.get $o) (global.get $cast.CastGenerics.rtt)))
@@ -132,20 +216,23 @@
   )
  )
 )
+(global funcref (ref.func $m_testCastToParamterizedType__void@cast.CastGenerics))
 
 ;;; void CastGenerics.testCastToTypeVariable()
 (func $m_testCastToTypeVariable__void@cast.CastGenerics
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (local $o (ref null $java.lang.Object))
  (local $e (ref null $java.lang.Number))
  (local $t (ref null $java.lang.Object))
  (local $es (ref null $java.lang.Object))
  (local $ts (ref null $java.lang.Object))
+ (local $this (ref null $cast.CastGenerics))
+ (local.set $this (ref.cast $java.lang.Object $cast.CastGenerics (local.get $this.untyped) (global.get $cast.CastGenerics.rtt)))
  (block $return.label
   (block
    ;; Object o = new Integer.<init>(1);
    
-   (local.set $o (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
+   (local.set $o (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
    ;; E e = ((E) o);
    
    (local.set $e (ref.null $java.lang.Number))
@@ -161,18 +248,21 @@
   )
  )
 )
+(global funcref (ref.func $m_testCastToTypeVariable__void@cast.CastGenerics))
 
 ;;; void CastGenerics.testCastToMethodTypeVariable()
 (func $m_testCastToMethodTypeVariable__void@cast.CastGenerics
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (local $o (ref null $java.lang.Object))
  (local $s (ref null $java.lang.Object))
  (local $c (ref null $java.lang.Object))
+ (local $this (ref null $cast.CastGenerics))
+ (local.set $this (ref.cast $java.lang.Object $cast.CastGenerics (local.get $this.untyped) (global.get $cast.CastGenerics.rtt)))
  (block $return.label
   (block
    ;; Object o = new Integer.<init>(1);
    
-   (local.set $o (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
+   (local.set $o (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
    ;; S s = ((S) o);
    
    (local.set $s (ref.null $java.lang.Object))
@@ -186,22 +276,28 @@
   )
  )
 )
+(global funcref (ref.func $m_testCastToMethodTypeVariable__void@cast.CastGenerics))
 
 ;;; void CastGenerics.outerGenericMethod()
 (func $m_outerGenericMethod__void@cast.CastGenerics
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
+ (local $this (ref null $cast.CastGenerics))
+ (local.set $this (ref.cast $java.lang.Object $cast.CastGenerics (local.get $this.untyped) (global.get $cast.CastGenerics.rtt)))
  (block $return.label
   (block
   )
  )
 )
+(global funcref (ref.func $m_outerGenericMethod__void@cast.CastGenerics))
 
 ;;; EE CastGenerics.method(Object o)
 (func $m_method__java_lang_Object__cast_CastGenerics_Empty1@cast.CastGenerics
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $o (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
+ (local $this (ref null $cast.CastGenerics))
+ (local.set $this (ref.cast $java.lang.Object $cast.CastGenerics (local.get $this.untyped) (global.get $cast.CastGenerics.rtt)))
  (block $return.label
   (block
    ;; if (o instanceof Empty1) {
@@ -221,6 +317,7 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_method__java_lang_Object__cast_CastGenerics_Empty1@cast.CastGenerics))
 
 ;;; Foo<T> CastGenerics.doSomething()
 (func $m_doSomething__cast_CastGenerics_Foo@cast.CastGenerics
@@ -229,12 +326,13 @@
  (block $return.label
   (block
    ;; return new $1.<init>();
-   (local.set $return.value (call $m_<init>__void_$pp_cast@cast.CastGenerics.1 (struct.new_with_rtt $cast.CastGenerics.1 (global.get $cast.CastGenerics.1.rtt))))
+   (local.set $return.value (call $m_<init>__void_$pp_cast@cast.CastGenerics.1 (struct.new_with_rtt $cast.CastGenerics.1 (global.get $cast.CastGenerics.1.vtable) (global.get $cast.CastGenerics.1.rtt))))
    (br $return.label)
   )
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_doSomething__cast_CastGenerics_Foo@cast.CastGenerics))
 
 ;;; INTERFACE  A
 
@@ -242,7 +340,16 @@
 
 ;;; CLASS  BaseImplementor
 (type $cast.CastGenerics.BaseImplementor (struct
+ (field $vtable (ref null $cast.CastGenerics.BaseImplementor.vtable))
 ))
+(type $cast.CastGenerics.BaseImplementor.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $cast.CastGenerics.BaseImplementor.vtable (mut (ref null $cast.CastGenerics.BaseImplementor.vtable)) (ref.null $cast.CastGenerics.BaseImplementor.vtable))
 
 ;;; BaseImplementor()
 (func $m_<init>__void_$p_cast_CastGenerics_BaseImplementor@cast.CastGenerics.BaseImplementor
@@ -256,10 +363,22 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$p_cast_CastGenerics_BaseImplementor@cast.CastGenerics.BaseImplementor))
 
 ;;; CLASS  Implementor
 (type $cast.CastGenerics.Implementor (struct
+ (field $vtable (ref null $cast.CastGenerics.Implementor.vtable))
 ))
+(type $cast.CastGenerics.Implementor.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_mA__void (mut (ref $function.__$void)))
+ (field $m_mB__void (mut (ref $function.__$void)))
+))
+(global $cast.CastGenerics.Implementor.vtable (mut (ref null $cast.CastGenerics.Implementor.vtable)) (ref.null $cast.CastGenerics.Implementor.vtable))
 
 ;;; Implementor()
 (func $m_<init>__void_$p_cast_CastGenerics_Implementor@cast.CastGenerics.Implementor
@@ -273,28 +392,45 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$p_cast_CastGenerics_Implementor@cast.CastGenerics.Implementor))
 
 ;;; void Implementor.mA()
 (func $m_mA__void@cast.CastGenerics.Implementor
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
+ (local $this (ref null $cast.CastGenerics.Implementor))
+ (local.set $this (ref.cast $java.lang.Object $cast.CastGenerics.Implementor (local.get $this.untyped) (global.get $cast.CastGenerics.Implementor.rtt)))
  (block $return.label
   (block
   )
  )
 )
+(global funcref (ref.func $m_mA__void@cast.CastGenerics.Implementor))
 
 ;;; void Implementor.mB()
 (func $m_mB__void@cast.CastGenerics.Implementor
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
+ (local $this (ref null $cast.CastGenerics.Implementor))
+ (local.set $this (ref.cast $java.lang.Object $cast.CastGenerics.Implementor (local.get $this.untyped) (global.get $cast.CastGenerics.Implementor.rtt)))
  (block $return.label
   (block
   )
  )
 )
+(global funcref (ref.func $m_mB__void@cast.CastGenerics.Implementor))
 
 ;;; CLASS  Container
 (type $cast.CastGenerics.Container (struct
+ (field $vtable (ref null $cast.CastGenerics.Container.vtable))
 ))
+(type $cast.CastGenerics.Container.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_get__java_lang_Object_$pp_cast (mut (ref $function.__$java.lang.Object)))
+))
+(global $cast.CastGenerics.Container.vtable (mut (ref null $cast.CastGenerics.Container.vtable)) (ref.null $cast.CastGenerics.Container.vtable))
 
 ;;; Container()
 (func $m_<init>__void_$p_cast_CastGenerics_Container@cast.CastGenerics.Container
@@ -308,12 +444,15 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$p_cast_CastGenerics_Container@cast.CastGenerics.Container))
 
 ;;; T Container.get()
 (func $m_get__java_lang_Object_$pp_cast@cast.CastGenerics.Container
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
+ (local $this (ref null $cast.CastGenerics.Container))
+ (local.set $this (ref.cast $java.lang.Object $cast.CastGenerics.Container (local.get $this.untyped) (global.get $cast.CastGenerics.Container.rtt)))
  (block $return.label
   (block
    ;; return null;
@@ -323,11 +462,21 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_get__java_lang_Object_$pp_cast@cast.CastGenerics.Container))
 
 ;;; CLASS  Nested
 (type $cast.CastGenerics.1Nested (struct
+ (field $vtable (ref null $cast.CastGenerics.1Nested.vtable))
  (field $this@cast.CastGenerics.1Nested (mut (ref null $cast.CastGenerics)))
 ))
+(type $cast.CastGenerics.1Nested.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $cast.CastGenerics.1Nested.vtable (mut (ref null $cast.CastGenerics.1Nested.vtable)) (ref.null $cast.CastGenerics.1Nested.vtable))
 
 ;;; Nested()
 (func $m_<init>__void_$pp_cast@cast.CastGenerics.1Nested
@@ -341,6 +490,7 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_cast@cast.CastGenerics.1Nested))
 
 ;;; void Nested.nestedGenericMethod(Object o)
 (func $m_nestedGenericMethod__java_lang_Object__void_$p_cast_CastGenerics_1Nested@cast.CastGenerics.1Nested
@@ -355,6 +505,7 @@
   )
  )
 )
+(global funcref (ref.func $m_nestedGenericMethod__java_lang_Object__void_$p_cast_CastGenerics_1Nested@cast.CastGenerics.1Nested))
 
 ;;; INTERFACE  Empty1
 
@@ -362,7 +513,16 @@
 
 ;;; CLASS  <anonymous> extends Foo<T>
 (type $cast.CastGenerics.1 (struct
+ (field $vtable (ref null $cast.CastGenerics.1.vtable))
 ))
+(type $cast.CastGenerics.1.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $cast.CastGenerics.1.vtable (mut (ref null $cast.CastGenerics.1.vtable)) (ref.null $cast.CastGenerics.1.vtable))
 
 ;;; <anonymous> extends Foo<T>()
 (func $m_<init>__void_$pp_cast@cast.CastGenerics.1
@@ -376,10 +536,20 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_cast@cast.CastGenerics.1))
 
 ;;; CLASS  Foo
 (type $cast.CastGenerics.Foo (struct
+ (field $vtable (ref null $cast.CastGenerics.Foo.vtable))
 ))
+(type $cast.CastGenerics.Foo.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $cast.CastGenerics.Foo.vtable (mut (ref null $cast.CastGenerics.Foo.vtable)) (ref.null $cast.CastGenerics.Foo.vtable))
 
 ;;; Foo()
 (func $m_<init>__void@cast.CastGenerics.Foo
@@ -393,11 +563,26 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@cast.CastGenerics.Foo))
 ;;; Code for cast.CastPrimitives
 
 ;;; CLASS  CastPrimitives
 (type $cast.CastPrimitives (struct
+ (field $vtable (ref null $cast.CastPrimitives.vtable))
 ))
+(type $cast.CastPrimitives.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_testPrimitiveCasts__void (mut (ref $function.__$void)))
+ (field $m_testReferenceToPrimitive__void (mut (ref $function.__$void)))
+ (field $m_testUnboxAndWiden__void (mut (ref $function.__$void)))
+ (field $m_testImplicitArgumentCasts__void (mut (ref $function.__$void)))
+ (field $m_testImplicitLongAssignmentCasts__void (mut (ref $function.__$void)))
+))
+(global $cast.CastPrimitives.vtable (mut (ref null $cast.CastPrimitives.vtable)) (ref.null $cast.CastPrimitives.vtable))
 
 ;;; CastPrimitives()
 (func $m_<init>__void@cast.CastPrimitives
@@ -411,10 +596,11 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@cast.CastPrimitives))
 
 ;;; void CastPrimitives.testPrimitiveCasts()
 (func $m_testPrimitiveCasts__void@cast.CastPrimitives
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (local $b i32)
  (local $c i32)
  (local $s i32)
@@ -422,6 +608,8 @@
  (local $l i64)
  (local $f f32)
  (local $d f64)
+ (local $this (ref null $cast.CastPrimitives))
+ (local.set $this (ref.cast $java.lang.Object $cast.CastPrimitives (local.get $this.untyped) (global.get $cast.CastPrimitives.rtt)))
  (block $return.label
   (block
    ;; byte b = 1;
@@ -546,10 +734,11 @@
   )
  )
 )
+(global funcref (ref.func $m_testPrimitiveCasts__void@cast.CastPrimitives))
 
 ;;; void CastPrimitives.testReferenceToPrimitive()
 (func $m_testReferenceToPrimitive__void@cast.CastPrimitives
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (local $o (ref null $java.lang.Object))
  (local $bool i32)
  (local $b i32)
@@ -559,11 +748,13 @@
  (local $l i64)
  (local $f f32)
  (local $d f64)
+ (local $this (ref null $cast.CastPrimitives))
+ (local.set $this (ref.cast $java.lang.Object $cast.CastPrimitives (local.get $this.untyped) (global.get $cast.CastPrimitives.rtt)))
  (block $return.label
   (block
    ;; Object o = new Object.<init>();
    
-   (local.set $o (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.rtt))))
+   (local.set $o (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (global.get $java.lang.Object.rtt))))
    ;; boolean bool = ((boolean) o);
    
    (local.set $bool (i32.const 0))
@@ -591,16 +782,19 @@
   )
  )
 )
+(global funcref (ref.func $m_testReferenceToPrimitive__void@cast.CastPrimitives))
 
 ;;; void CastPrimitives.testUnboxAndWiden()
 (func $m_testUnboxAndWiden__void@cast.CastPrimitives
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (local $boxedByte (ref null $java.lang.Byte))
  (local $s i32)
  (local $i i32)
  (local $l i64)
  (local $f f32)
  (local $d f64)
+ (local $this (ref null $cast.CastPrimitives))
+ (local.set $this (ref.cast $java.lang.Object $cast.CastPrimitives (local.get $this.untyped) (global.get $cast.CastPrimitives.rtt)))
  (block $return.label
   (block
    ;; Byte boxedByte = java.lang.Byte.valueOf(((byte) 0));
@@ -624,10 +818,11 @@
   )
  )
 )
+(global funcref (ref.func $m_testUnboxAndWiden__void@cast.CastPrimitives))
 
 ;;; void CastPrimitives.testImplicitArgumentCasts()
 (func $m_testImplicitArgumentCasts__void@cast.CastPrimitives
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (local $b i32)
  (local $c i32)
  (local $s i32)
@@ -635,6 +830,8 @@
  (local $l i64)
  (local $f f32)
  (local $d f64)
+ (local $this (ref null $cast.CastPrimitives))
+ (local.set $this (ref.cast $java.lang.Object $cast.CastPrimitives (local.get $this.untyped) (global.get $cast.CastPrimitives.rtt)))
  (block $return.label
   (block
    ;; byte b = 127;
@@ -675,20 +872,21 @@
    ;; cast.CastPrimitives.getDouble(f);
    (drop (call $m_getDouble__double__double@cast.CastPrimitives (f64.const 0.0)))
    ;; new IntValueHolder.<init>(b);
-   (drop (call $m_<init>__int__void_$pp_cast@cast.CastPrimitives.IntValueHolder (struct.new_with_rtt $cast.CastPrimitives.IntValueHolder (global.get $cast.CastPrimitives.IntValueHolder.rtt))(i32.const 0)))
+   (drop (call $m_<init>__int__void_$pp_cast@cast.CastPrimitives.IntValueHolder (struct.new_with_rtt $cast.CastPrimitives.IntValueHolder (global.get $cast.CastPrimitives.IntValueHolder.vtable) (global.get $cast.CastPrimitives.IntValueHolder.rtt))(i32.const 0)))
    ;; new IntValueHolder.<init>(c);
-   (drop (call $m_<init>__int__void_$pp_cast@cast.CastPrimitives.IntValueHolder (struct.new_with_rtt $cast.CastPrimitives.IntValueHolder (global.get $cast.CastPrimitives.IntValueHolder.rtt))(i32.const 0)))
+   (drop (call $m_<init>__int__void_$pp_cast@cast.CastPrimitives.IntValueHolder (struct.new_with_rtt $cast.CastPrimitives.IntValueHolder (global.get $cast.CastPrimitives.IntValueHolder.vtable) (global.get $cast.CastPrimitives.IntValueHolder.rtt))(i32.const 0)))
    ;; new IntValueHolder.<init>(s);
-   (drop (call $m_<init>__int__void_$pp_cast@cast.CastPrimitives.IntValueHolder (struct.new_with_rtt $cast.CastPrimitives.IntValueHolder (global.get $cast.CastPrimitives.IntValueHolder.rtt))(i32.const 0)))
+   (drop (call $m_<init>__int__void_$pp_cast@cast.CastPrimitives.IntValueHolder (struct.new_with_rtt $cast.CastPrimitives.IntValueHolder (global.get $cast.CastPrimitives.IntValueHolder.vtable) (global.get $cast.CastPrimitives.IntValueHolder.rtt))(i32.const 0)))
    ;; new LongValueHolder.<init>(b);
-   (drop (call $m_<init>__long__void_$pp_cast@cast.CastPrimitives.LongValueHolder (struct.new_with_rtt $cast.CastPrimitives.LongValueHolder (global.get $cast.CastPrimitives.LongValueHolder.rtt))(i64.const 0)))
+   (drop (call $m_<init>__long__void_$pp_cast@cast.CastPrimitives.LongValueHolder (struct.new_with_rtt $cast.CastPrimitives.LongValueHolder (global.get $cast.CastPrimitives.LongValueHolder.vtable) (global.get $cast.CastPrimitives.LongValueHolder.rtt))(i64.const 0)))
    ;; new LongValueHolder.<init>(c);
-   (drop (call $m_<init>__long__void_$pp_cast@cast.CastPrimitives.LongValueHolder (struct.new_with_rtt $cast.CastPrimitives.LongValueHolder (global.get $cast.CastPrimitives.LongValueHolder.rtt))(i64.const 0)))
+   (drop (call $m_<init>__long__void_$pp_cast@cast.CastPrimitives.LongValueHolder (struct.new_with_rtt $cast.CastPrimitives.LongValueHolder (global.get $cast.CastPrimitives.LongValueHolder.vtable) (global.get $cast.CastPrimitives.LongValueHolder.rtt))(i64.const 0)))
    ;; new LongValueHolder.<init>(i);
-   (drop (call $m_<init>__long__void_$pp_cast@cast.CastPrimitives.LongValueHolder (struct.new_with_rtt $cast.CastPrimitives.LongValueHolder (global.get $cast.CastPrimitives.LongValueHolder.rtt))(i64.const 0)))
+   (drop (call $m_<init>__long__void_$pp_cast@cast.CastPrimitives.LongValueHolder (struct.new_with_rtt $cast.CastPrimitives.LongValueHolder (global.get $cast.CastPrimitives.LongValueHolder.vtable) (global.get $cast.CastPrimitives.LongValueHolder.rtt))(i64.const 0)))
   )
  )
 )
+(global funcref (ref.func $m_testImplicitArgumentCasts__void@cast.CastPrimitives))
 
 ;;; short CastPrimitives.getShort(short value)
 (func $m_getShort__short__short@cast.CastPrimitives
@@ -704,6 +902,7 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_getShort__short__short@cast.CastPrimitives))
 
 ;;; int CastPrimitives.getInt(int value)
 (func $m_getInt__int__int@cast.CastPrimitives
@@ -719,6 +918,7 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_getInt__int__int@cast.CastPrimitives))
 
 ;;; long CastPrimitives.getLong(long value)
 (func $m_getLong__long__long@cast.CastPrimitives
@@ -734,6 +934,7 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_getLong__long__long@cast.CastPrimitives))
 
 ;;; float CastPrimitives.getFloat(float value)
 (func $m_getFloat__float__float@cast.CastPrimitives
@@ -749,6 +950,7 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_getFloat__float__float@cast.CastPrimitives))
 
 ;;; double CastPrimitives.getDouble(double value)
 (func $m_getDouble__double__double@cast.CastPrimitives
@@ -764,10 +966,11 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_getDouble__double__double@cast.CastPrimitives))
 
 ;;; void CastPrimitives.testImplicitLongAssignmentCasts()
 (func $m_testImplicitLongAssignmentCasts__void@cast.CastPrimitives
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (local $fbyte i32)
  (local $fchar i32)
  (local $fshort i32)
@@ -776,6 +979,8 @@
  (local $ffloat f32)
  (local $fdouble f64)
  (local $tlong i64)
+ (local $this (ref null $cast.CastPrimitives))
+ (local.set $this (ref.cast $java.lang.Object $cast.CastPrimitives (local.get $this.untyped) (global.get $cast.CastPrimitives.rtt)))
  (block $return.label
   (block
    ;; byte fbyte = 11;
@@ -849,10 +1054,20 @@
   )
  )
 )
+(global funcref (ref.func $m_testImplicitLongAssignmentCasts__void@cast.CastPrimitives))
 
 ;;; CLASS  IntValueHolder
 (type $cast.CastPrimitives.IntValueHolder (struct
+ (field $vtable (ref null $cast.CastPrimitives.IntValueHolder.vtable))
 ))
+(type $cast.CastPrimitives.IntValueHolder.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $cast.CastPrimitives.IntValueHolder.vtable (mut (ref null $cast.CastPrimitives.IntValueHolder.vtable)) (ref.null $cast.CastPrimitives.IntValueHolder.vtable))
 
 ;;; IntValueHolder(int value)
 (func $m_<init>__int__void_$pp_cast@cast.CastPrimitives.IntValueHolder
@@ -867,10 +1082,20 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__int__void_$pp_cast@cast.CastPrimitives.IntValueHolder))
 
 ;;; CLASS  LongValueHolder
 (type $cast.CastPrimitives.LongValueHolder (struct
+ (field $vtable (ref null $cast.CastPrimitives.LongValueHolder.vtable))
 ))
+(type $cast.CastPrimitives.LongValueHolder.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $cast.CastPrimitives.LongValueHolder.vtable (mut (ref null $cast.CastPrimitives.LongValueHolder.vtable)) (ref.null $cast.CastPrimitives.LongValueHolder.vtable))
 
 ;;; LongValueHolder(long value)
 (func $m_<init>__long__void_$pp_cast@cast.CastPrimitives.LongValueHolder
@@ -885,11 +1110,25 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__long__void_$pp_cast@cast.CastPrimitives.LongValueHolder))
 ;;; Code for cast.Casts
 
 ;;; CLASS  Casts
 (type $cast.Casts (struct
+ (field $vtable (ref null $cast.Casts.vtable))
 ))
+(type $cast.Casts.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_testCastToClass__void (mut (ref $function.__$void)))
+ (field $m_testCasToInterface__void (mut (ref $function.__$void)))
+ (field $m_testCastToBoxedType__void (mut (ref $function.__$void)))
+ (field $m_testCastToArray__void (mut (ref $function.__$void)))
+))
+(global $cast.Casts.vtable (mut (ref null $cast.Casts.vtable)) (ref.null $cast.Casts.vtable))
 
 ;;; Casts()
 (func $m_<init>__void@cast.Casts
@@ -903,44 +1142,51 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@cast.Casts))
 
 ;;; void Casts.testCastToClass()
 (func $m_testCastToClass__void@cast.Casts
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (local $o (ref null $java.lang.Object))
  (local $c (ref null $cast.Casts))
+ (local $this (ref null $cast.Casts))
+ (local.set $this (ref.cast $java.lang.Object $cast.Casts (local.get $this.untyped) (global.get $cast.Casts.rtt)))
  (block $return.label
   (block
    ;; Object o = new Object.<init>();
    
-   (local.set $o (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.rtt))))
+   (local.set $o (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (global.get $java.lang.Object.rtt))))
    ;; Casts c = ((Casts) o);
    
    (local.set $c (ref.cast $java.lang.Object $cast.Casts (local.get $o) (global.get $cast.Casts.rtt)))
   )
  )
 )
+(global funcref (ref.func $m_testCastToClass__void@cast.Casts))
 
 ;;; void Casts.testCasToInterface()
 (func $m_testCasToInterface__void@cast.Casts
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (local $o (ref null $java.lang.Object))
  (local $s (ref null $java.lang.Object))
+ (local $this (ref null $cast.Casts))
+ (local.set $this (ref.cast $java.lang.Object $cast.Casts (local.get $this.untyped) (global.get $cast.Casts.rtt)))
  (block $return.label
   (block
    ;; Object o = new Object.<init>();
    
-   (local.set $o (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.rtt))))
+   (local.set $o (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (global.get $java.lang.Object.rtt))))
    ;; Serializable s = ((Serializable) o);
    
    (local.set $s (local.get $o))
   )
  )
 )
+(global funcref (ref.func $m_testCasToInterface__void@cast.Casts))
 
 ;;; void Casts.testCastToBoxedType()
 (func $m_testCastToBoxedType__void@cast.Casts
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (local $o (ref null $java.lang.Object))
  (local $b (ref null $java.lang.Byte))
  (local $d (ref null $java.lang.Double))
@@ -951,11 +1197,13 @@
  (local $n (ref null $java.lang.Number))
  (local $c (ref null $java.lang.Character))
  (local $bool (ref null $java.lang.Boolean))
+ (local $this (ref null $cast.Casts))
+ (local.set $this (ref.cast $java.lang.Object $cast.Casts (local.get $this.untyped) (global.get $cast.Casts.rtt)))
  (block $return.label
   (block
    ;; Object o = new Integer.<init>(1);
    
-   (local.set $o (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
+   (local.set $o (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
    ;; Byte b = ((Byte) o);
    
    (local.set $b (ref.cast $java.lang.Object $java.lang.Byte (local.get $o) (global.get $java.lang.Byte.rtt)))
@@ -986,12 +1234,15 @@
   )
  )
 )
+(global funcref (ref.func $m_testCastToBoxedType__void@cast.Casts))
 
 ;;; void Casts.testCastToArray()
 (func $m_testCastToArray__void@cast.Casts
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (local $foo (ref null $java.lang.Object))
  (local $bar (ref null $java.lang.Object))
+ (local $this (ref null $cast.Casts))
+ (local.set $this (ref.cast $java.lang.Object $cast.Casts (local.get $this.untyped) (global.get $cast.Casts.rtt)))
  (block $return.label
   (block
    ;; Object foo = ((Object[]) null);
@@ -1003,4 +1254,28 @@
   )
  )
 )
+(global funcref (ref.func $m_testCastToArray__void@cast.Casts))
+
+;;; Code for cast.CastGenerics [vtable]
+ (global.set $cast.CastGenerics.vtable (struct.new_with_rtt $cast.CastGenerics.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_method__java_lang_Object_$pp_cast@cast.CastGenerics) (ref.func $m_testCastToTypeVariable__void@cast.CastGenerics) (ref.func $m_testCastToMethodTypeVariable__void@cast.CastGenerics) (ref.func $m_outerGenericMethod__void@cast.CastGenerics) (ref.func $m_method__java_lang_Object__cast_CastGenerics_Empty1@cast.CastGenerics) (rtt.canon $cast.CastGenerics.vtable)))
+;;; Code for cast.CastGenerics.Implementor [vtable]
+ (global.set $cast.CastGenerics.Implementor.vtable (struct.new_with_rtt $cast.CastGenerics.Implementor.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_mA__void@cast.CastGenerics.Implementor) (ref.func $m_mB__void@cast.CastGenerics.Implementor) (rtt.canon $cast.CastGenerics.Implementor.vtable)))
+;;; Code for cast.CastGenerics.Container [vtable]
+ (global.set $cast.CastGenerics.Container.vtable (struct.new_with_rtt $cast.CastGenerics.Container.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_get__java_lang_Object_$pp_cast@cast.CastGenerics.Container) (rtt.canon $cast.CastGenerics.Container.vtable)))
+;;; Code for cast.CastGenerics.1Nested [vtable]
+ (global.set $cast.CastGenerics.1Nested.vtable (struct.new_with_rtt $cast.CastGenerics.1Nested.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $cast.CastGenerics.1Nested.vtable)))
+;;; Code for cast.CastGenerics.1 [vtable]
+ (global.set $cast.CastGenerics.1.vtable (struct.new_with_rtt $cast.CastGenerics.1.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $cast.CastGenerics.1.vtable)))
+;;; Code for cast.CastGenerics.Foo [vtable]
+ (global.set $cast.CastGenerics.Foo.vtable (struct.new_with_rtt $cast.CastGenerics.Foo.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $cast.CastGenerics.Foo.vtable)))
+;;; Code for cast.CastPrimitives [vtable]
+ (global.set $cast.CastPrimitives.vtable (struct.new_with_rtt $cast.CastPrimitives.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_testPrimitiveCasts__void@cast.CastPrimitives) (ref.func $m_testReferenceToPrimitive__void@cast.CastPrimitives) (ref.func $m_testUnboxAndWiden__void@cast.CastPrimitives) (ref.func $m_testImplicitArgumentCasts__void@cast.CastPrimitives) (ref.func $m_testImplicitLongAssignmentCasts__void@cast.CastPrimitives) (rtt.canon $cast.CastPrimitives.vtable)))
+;;; Code for cast.CastPrimitives.IntValueHolder [vtable]
+ (global.set $cast.CastPrimitives.IntValueHolder.vtable (struct.new_with_rtt $cast.CastPrimitives.IntValueHolder.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $cast.CastPrimitives.IntValueHolder.vtable)))
+;;; Code for cast.CastPrimitives.LongValueHolder [vtable]
+ (global.set $cast.CastPrimitives.LongValueHolder.vtable (struct.new_with_rtt $cast.CastPrimitives.LongValueHolder.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $cast.CastPrimitives.LongValueHolder.vtable)))
+;;; Code for cast.Casts [vtable]
+ (global.set $cast.Casts.vtable (struct.new_with_rtt $cast.Casts.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_testCastToClass__void@cast.Casts) (ref.func $m_testCasToInterface__void@cast.Casts) (ref.func $m_testCastToBoxedType__void@cast.Casts) (ref.func $m_testCastToArray__void@cast.Casts) (rtt.canon $cast.Casts.vtable)))
+))
+(start $.runtime.init)
 

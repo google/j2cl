@@ -2,7 +2,17 @@
 
 ;;; CLASS  Parent
 (type $accidentaloverride.Parent (struct
+ (field $vtable (ref null $accidentaloverride.Parent.vtable))
 ))
+(type $accidentaloverride.Parent.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_foo__java_lang_Error__void (mut (ref $function.$java.lang.Error__$void)))
+))
+(global $accidentaloverride.Parent.vtable (mut (ref null $accidentaloverride.Parent.vtable)) (ref.null $accidentaloverride.Parent.vtable))
 
 ;;; Parent()
 (func $m_<init>__void_$pp_accidentaloverride@accidentaloverride.Parent
@@ -16,22 +26,38 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_accidentaloverride@accidentaloverride.Parent))
 
 ;;; void Parent.foo(T e)
 (func $m_foo__java_lang_Error__void@accidentaloverride.Parent
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $e (ref null $java.lang.Error))
+ (local $this (ref null $accidentaloverride.Parent))
+ (local.set $this (ref.cast $java.lang.Object $accidentaloverride.Parent (local.get $this.untyped) (global.get $accidentaloverride.Parent.rtt)))
  (block $return.label
   (block
   )
  )
 )
+(global funcref (ref.func $m_foo__java_lang_Error__void@accidentaloverride.Parent))
 
 ;;; INTERFACE  SuperInterface
 
 ;;; CLASS  AnotherAccidentalOverride
 (type $accidentaloverride.AnotherAccidentalOverride (struct
+ (field $vtable (ref null $accidentaloverride.AnotherAccidentalOverride.vtable))
 ))
+(type $accidentaloverride.AnotherAccidentalOverride.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_foo__java_lang_Error__void (mut (ref $function.$java.lang.Error__$void)))
+ (field $m_foo__java_lang_Object__void (mut (ref $function.$java.lang.Object__$void)))
+ (field $m_foo__java_lang_AssertionError__void (mut (ref $function.$java.lang.AssertionError__$void)))
+))
+(global $accidentaloverride.AnotherAccidentalOverride.vtable (mut (ref null $accidentaloverride.AnotherAccidentalOverride.vtable)) (ref.null $accidentaloverride.AnotherAccidentalOverride.vtable))
 
 ;;; AnotherAccidentalOverride()
 (func $m_<init>__void_$pp_accidentaloverride@accidentaloverride.AnotherAccidentalOverride
@@ -45,46 +71,67 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_accidentaloverride@accidentaloverride.AnotherAccidentalOverride))
 
 ;;; void AnotherAccidentalOverride.foo(Object arg0)
 (func $m_foo__java_lang_Object__void@accidentaloverride.AnotherAccidentalOverride
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
+ (local $this (ref null $accidentaloverride.AnotherAccidentalOverride))
+ (local.set $this (ref.cast $java.lang.Object $accidentaloverride.AnotherAccidentalOverride (local.get $this.untyped) (global.get $accidentaloverride.AnotherAccidentalOverride.rtt)))
  (block $return.label
   (block
    ;; AnotherAccidentalOverride.this.foo(((AssertionError) arg0));
-   
+   (call_ref (local.get $this)(ref.cast $java.lang.Object $java.lang.AssertionError (local.get $arg0) (global.get $java.lang.AssertionError.rtt))(struct.get $accidentaloverride.AnotherAccidentalOverride.vtable $m_foo__java_lang_AssertionError__void (struct.get $accidentaloverride.AnotherAccidentalOverride $vtable(local.get $this))))
   )
  )
 )
+(global funcref (ref.func $m_foo__java_lang_Object__void@accidentaloverride.AnotherAccidentalOverride))
 
 ;;; void AnotherAccidentalOverride.foo(Error arg0)
 (func $m_foo__java_lang_Error__void@accidentaloverride.AnotherAccidentalOverride
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Error))
+ (local $this (ref null $accidentaloverride.AnotherAccidentalOverride))
+ (local.set $this (ref.cast $java.lang.Object $accidentaloverride.AnotherAccidentalOverride (local.get $this.untyped) (global.get $accidentaloverride.AnotherAccidentalOverride.rtt)))
  (block $return.label
   (block
    ;; AnotherAccidentalOverride.this.foo(((AssertionError) arg0));
-   
+   (call_ref (local.get $this)(ref.cast $java.lang.Object $java.lang.AssertionError (local.get $arg0) (global.get $java.lang.AssertionError.rtt))(struct.get $accidentaloverride.AnotherAccidentalOverride.vtable $m_foo__java_lang_AssertionError__void (struct.get $accidentaloverride.AnotherAccidentalOverride $vtable(local.get $this))))
   )
  )
 )
+(global funcref (ref.func $m_foo__java_lang_Error__void@accidentaloverride.AnotherAccidentalOverride))
 
 ;;; void AnotherAccidentalOverride.foo(AssertionError arg0)
 (func $m_foo__java_lang_AssertionError__void@accidentaloverride.AnotherAccidentalOverride
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.AssertionError))
+ (local $this (ref null $accidentaloverride.AnotherAccidentalOverride))
+ (local.set $this (ref.cast $java.lang.Object $accidentaloverride.AnotherAccidentalOverride (local.get $this.untyped) (global.get $accidentaloverride.AnotherAccidentalOverride.rtt)))
  (block $return.label
   (block
    ;; super.foo(arg0);
-   
+   (call_ref (local.get $this)(local.get $arg0)(struct.get $accidentaloverride.Parent.vtable $m_foo__java_lang_Error__void (struct.get $accidentaloverride.Parent $vtable(local.get $this))))
   )
  )
 )
+(global funcref (ref.func $m_foo__java_lang_AssertionError__void@accidentaloverride.AnotherAccidentalOverride))
 
 ;;; CLASS  AccidentalOverride
 (type $accidentaloverride.AccidentalOverride (struct
+ (field $vtable (ref null $accidentaloverride.AccidentalOverride.vtable))
 ))
+(type $accidentaloverride.AccidentalOverride.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_foo__java_lang_Error__void (mut (ref $function.$java.lang.Error__$void)))
+ (field $m_foo__java_lang_Object__void (mut (ref $function.$java.lang.Object__$void)))
+))
+(global $accidentaloverride.AccidentalOverride.vtable (mut (ref null $accidentaloverride.AccidentalOverride.vtable)) (ref.null $accidentaloverride.AccidentalOverride.vtable))
 
 ;;; AccidentalOverride()
 (func $m_<init>__void@accidentaloverride.AccidentalOverride
@@ -98,16 +145,29 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@accidentaloverride.AccidentalOverride))
 
 ;;; void AccidentalOverride.foo(Object arg0)
 (func $m_foo__java_lang_Object__void@accidentaloverride.AccidentalOverride
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
+ (local $this (ref null $accidentaloverride.AccidentalOverride))
+ (local.set $this (ref.cast $java.lang.Object $accidentaloverride.AccidentalOverride (local.get $this.untyped) (global.get $accidentaloverride.AccidentalOverride.rtt)))
  (block $return.label
   (block
    ;; Parent.this.foo(((Error) arg0));
-   
+   (call_ref (local.get $this)(ref.cast $java.lang.Object $java.lang.Error (local.get $arg0) (global.get $java.lang.Error.rtt))(struct.get $accidentaloverride.Parent.vtable $m_foo__java_lang_Error__void (struct.get $accidentaloverride.Parent $vtable(local.get $this))))
   )
  )
 )
+(global funcref (ref.func $m_foo__java_lang_Object__void@accidentaloverride.AccidentalOverride))
+
+;;; Code for accidentaloverride.Parent [vtable]
+ (global.set $accidentaloverride.Parent.vtable (struct.new_with_rtt $accidentaloverride.Parent.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__java_lang_Error__void@accidentaloverride.Parent) (rtt.canon $accidentaloverride.Parent.vtable)))
+;;; Code for accidentaloverride.AnotherAccidentalOverride [vtable]
+ (global.set $accidentaloverride.AnotherAccidentalOverride.vtable (struct.new_with_rtt $accidentaloverride.AnotherAccidentalOverride.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__java_lang_Error__void@accidentaloverride.AnotherAccidentalOverride) (ref.func $m_foo__java_lang_Object__void@accidentaloverride.AnotherAccidentalOverride) (ref.func $m_foo__java_lang_AssertionError__void@accidentaloverride.AnotherAccidentalOverride) (rtt.canon $accidentaloverride.AnotherAccidentalOverride.vtable)))
+;;; Code for accidentaloverride.AccidentalOverride [vtable]
+ (global.set $accidentaloverride.AccidentalOverride.vtable (struct.new_with_rtt $accidentaloverride.AccidentalOverride.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__java_lang_Error__void@accidentaloverride.Parent) (ref.func $m_foo__java_lang_Object__void@accidentaloverride.AccidentalOverride) (rtt.canon $accidentaloverride.AccidentalOverride.vtable)))
+))
+(start $.runtime.init)
 

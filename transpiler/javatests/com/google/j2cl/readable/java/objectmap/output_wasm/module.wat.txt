@@ -2,7 +2,16 @@
 
 ;;; CLASS  ObjectMap
 (type $objectmap.ObjectMap (struct
+ (field $vtable (ref null $objectmap.ObjectMap.vtable))
 ))
+(type $objectmap.ObjectMap.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $objectmap.ObjectMap.vtable (mut (ref null $objectmap.ObjectMap.vtable)) (ref.null $objectmap.ObjectMap.vtable))
 
 ;;; ObjectMap()
 (func $m_<init>__void@objectmap.ObjectMap
@@ -16,6 +25,7 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@objectmap.ObjectMap))
 
 ;;; ObjectMap<T> ObjectMap.create()
 (func $m_create__objectmap_ObjectMap@objectmap.ObjectMap
@@ -30,6 +40,7 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_create__objectmap_ObjectMap@objectmap.ObjectMap))
 
 ;;; ObjectMap<String> ObjectMap.createForString()
 (func $m_createForString__objectmap_ObjectMap@objectmap.ObjectMap
@@ -44,4 +55,10 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_createForString__objectmap_ObjectMap@objectmap.ObjectMap))
+
+;;; Code for objectmap.ObjectMap [vtable]
+ (global.set $objectmap.ObjectMap.vtable (struct.new_with_rtt $objectmap.ObjectMap.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $objectmap.ObjectMap.vtable)))
+))
+(start $.runtime.init)
 

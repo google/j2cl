@@ -2,7 +2,17 @@
 
 ;;; CLASS  WhileStatement
 (type $whilestatement.WhileStatement (struct
+ (field $vtable (ref null $whilestatement.WhileStatement.vtable))
 ))
+(type $whilestatement.WhileStatement.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_test__void (mut (ref $function.__$void)))
+))
+(global $whilestatement.WhileStatement.vtable (mut (ref null $whilestatement.WhileStatement.vtable)) (ref.null $whilestatement.WhileStatement.vtable))
 
 ;;; WhileStatement()
 (func $m_<init>__void@whilestatement.WhileStatement
@@ -16,11 +26,14 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@whilestatement.WhileStatement))
 
 ;;; void WhileStatement.test()
 (func $m_test__void@whilestatement.WhileStatement
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (local $count i32)
+ (local $this (ref null $whilestatement.WhileStatement))
+ (local.set $this (ref.cast $java.lang.Object $whilestatement.WhileStatement (local.get $this.untyped) (global.get $whilestatement.WhileStatement.rtt)))
  (block $return.label
   (block
    ;; int count = 0;
@@ -44,4 +57,10 @@
   )
  )
 )
+(global funcref (ref.func $m_test__void@whilestatement.WhileStatement))
+
+;;; Code for whilestatement.WhileStatement [vtable]
+ (global.set $whilestatement.WhileStatement.vtable (struct.new_with_rtt $whilestatement.WhileStatement.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__void@whilestatement.WhileStatement) (rtt.canon $whilestatement.WhileStatement.vtable)))
+))
+(start $.runtime.init)
 

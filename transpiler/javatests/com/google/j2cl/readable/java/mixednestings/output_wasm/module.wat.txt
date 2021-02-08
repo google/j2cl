@@ -4,7 +4,18 @@
 
 ;;; CLASS  MixedNestings
 (type $mixednestings.MixedNestings (struct
+ (field $vtable (ref null $mixednestings.MixedNestings.vtable))
 ))
+(type $mixednestings.MixedNestings.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_mm__void (mut (ref $function.__$void)))
+ (field $m_test__void (mut (ref $function.__$void)))
+))
+(global $mixednestings.MixedNestings.vtable (mut (ref null $mixednestings.MixedNestings.vtable)) (ref.null $mixednestings.MixedNestings.vtable))
 
 ;;; MixedNestings()
 (func $m_<init>__void@mixednestings.MixedNestings
@@ -18,31 +29,55 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@mixednestings.MixedNestings))
 
 ;;; void MixedNestings.mm()
 (func $m_mm__void@mixednestings.MixedNestings
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
+ (local $this (ref null $mixednestings.MixedNestings))
+ (local.set $this (ref.cast $java.lang.Object $mixednestings.MixedNestings (local.get $this.untyped) (global.get $mixednestings.MixedNestings.rtt)))
  (block $return.label
   (block
   )
  )
 )
+(global funcref (ref.func $m_mm__void@mixednestings.MixedNestings))
 
 ;;; void MixedNestings.test()
 (func $m_test__void@mixednestings.MixedNestings
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
+ (local $$qualifier (ref null $mixednestings.MixedNestings.A))
+ (local $this (ref null $mixednestings.MixedNestings))
+ (local.set $this (ref.cast $java.lang.Object $mixednestings.MixedNestings (local.get $this.untyped) (global.get $mixednestings.MixedNestings.rtt)))
  (block $return.label
   (block
-   ;; MixedNestings.this.new A.<init>().a();
-   
+   (block
+    ;; A $qualifier = MixedNestings.this.new A.<init>();
+    
+    (local.set $$qualifier (call $m_<init>__void_$pp_mixednestings@mixednestings.MixedNestings.A (struct.new_with_rtt $mixednestings.MixedNestings.A (global.get $mixednestings.MixedNestings.A.vtable) (ref.null $mixednestings.MixedNestings) (global.get $mixednestings.MixedNestings.A.rtt))))
+    ;; $qualifier.a();
+    (call_ref (local.get $$qualifier)(struct.get $mixednestings.MixedNestings.A.vtable $m_a__void (struct.get $mixednestings.MixedNestings.A $vtable(local.get $$qualifier))))
+   )
   )
  )
 )
+(global funcref (ref.func $m_test__void@mixednestings.MixedNestings))
 
 ;;; CLASS  A
 (type $mixednestings.MixedNestings.A (struct
+ (field $vtable (ref null $mixednestings.MixedNestings.A.vtable))
  (field $this@mixednestings.MixedNestings.A (mut (ref null $mixednestings.MixedNestings)))
 ))
+(type $mixednestings.MixedNestings.A.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_aa__void (mut (ref $function.__$void)))
+ (field $m_a__void (mut (ref $function.__$void)))
+))
+(global $mixednestings.MixedNestings.A.vtable (mut (ref null $mixednestings.MixedNestings.A.vtable)) (ref.null $mixednestings.MixedNestings.A.vtable))
 
 ;;; A()
 (func $m_<init>__void_$pp_mixednestings@mixednestings.MixedNestings.A
@@ -56,31 +91,55 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_mixednestings@mixednestings.MixedNestings.A))
 
 ;;; void A.aa()
 (func $m_aa__void@mixednestings.MixedNestings.A
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
+ (local $this (ref null $mixednestings.MixedNestings.A))
+ (local.set $this (ref.cast $java.lang.Object $mixednestings.MixedNestings.A (local.get $this.untyped) (global.get $mixednestings.MixedNestings.A.rtt)))
  (block $return.label
   (block
   )
  )
 )
+(global funcref (ref.func $m_aa__void@mixednestings.MixedNestings.A))
 
 ;;; void A.a()
 (func $m_a__void@mixednestings.MixedNestings.A
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
+ (local $$qualifier (ref null $mixednestings.MixedNestings.A.1B))
+ (local $this (ref null $mixednestings.MixedNestings.A))
+ (local.set $this (ref.cast $java.lang.Object $mixednestings.MixedNestings.A (local.get $this.untyped) (global.get $mixednestings.MixedNestings.A.rtt)))
  (block $return.label
   (block
-   ;; A.this.new $1B.<init>().b();
-   (drop (i32.const 0))
+   (block
+    ;; B $qualifier = A.this.new $1B.<init>();
+    
+    (local.set $$qualifier (call $m_<init>__void_$pp_mixednestings@mixednestings.MixedNestings.A.1B (struct.new_with_rtt $mixednestings.MixedNestings.A.1B (global.get $mixednestings.MixedNestings.A.1B.vtable) (ref.null $mixednestings.MixedNestings.A) (global.get $mixednestings.MixedNestings.A.1B.rtt))))
+    ;; $qualifier.b();
+    (drop (call_ref (local.get $$qualifier)(struct.get $mixednestings.MixedNestings.A.1B.vtable $m_b__int (struct.get $mixednestings.MixedNestings.A.1B $vtable(local.get $$qualifier)))))
+   )
   )
  )
 )
+(global funcref (ref.func $m_a__void@mixednestings.MixedNestings.A))
 
 ;;; CLASS  B
 (type $mixednestings.MixedNestings.A.1B (struct
+ (field $vtable (ref null $mixednestings.MixedNestings.A.1B.vtable))
  (field $this@mixednestings.MixedNestings.A.1B (mut (ref null $mixednestings.MixedNestings.A)))
 ))
+(type $mixednestings.MixedNestings.A.1B.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_bb__void (mut (ref $function.__$void)))
+ (field $m_b__int (mut (ref $function.__$int)))
+))
+(global $mixednestings.MixedNestings.A.1B.vtable (mut (ref null $mixednestings.MixedNestings.A.1B.vtable)) (ref.null $mixednestings.MixedNestings.A.1B.vtable))
 
 ;;; B()
 (func $m_<init>__void_$pp_mixednestings@mixednestings.MixedNestings.A.1B
@@ -94,27 +153,33 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_mixednestings@mixednestings.MixedNestings.A.1B))
 
 ;;; void B.bb()
 (func $m_bb__void@mixednestings.MixedNestings.A.1B
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
+ (local $this (ref null $mixednestings.MixedNestings.A.1B))
+ (local.set $this (ref.cast $java.lang.Object $mixednestings.MixedNestings.A.1B (local.get $this.untyped) (global.get $mixednestings.MixedNestings.A.1B.rtt)))
  (block $return.label
   (block
   )
  )
 )
+(global funcref (ref.func $m_bb__void@mixednestings.MixedNestings.A.1B))
 
 ;;; int B.b()
 (func $m_b__int@mixednestings.MixedNestings.A.1B
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (result i32)
  (local $return.value i32)
  (local $i (ref null $java.lang.Object))
+ (local $this (ref null $mixednestings.MixedNestings.A.1B))
+ (local.set $this (ref.cast $java.lang.Object $mixednestings.MixedNestings.A.1B (local.get $this.untyped) (global.get $mixednestings.MixedNestings.A.1B.rtt)))
  (block $return.label
   (block
    ;; MyInterface i = $1B.this.new $1.<init>();
    
-   (local.set $i (call $m_<init>__void_$pp_mixednestings@mixednestings.MixedNestings.A.1B.1 (struct.new_with_rtt $mixednestings.MixedNestings.A.1B.1 (ref.null $mixednestings.MixedNestings.A.1B) (global.get $mixednestings.MixedNestings.A.1B.1.rtt))))
+   (local.set $i (call $m_<init>__void_$pp_mixednestings@mixednestings.MixedNestings.A.1B.1 (struct.new_with_rtt $mixednestings.MixedNestings.A.1B.1 (global.get $mixednestings.MixedNestings.A.1B.1.vtable) (ref.null $mixednestings.MixedNestings.A.1B) (global.get $mixednestings.MixedNestings.A.1B.1.rtt))))
    ;; return i.fun(400);
    (local.set $return.value (i32.const 0))
    (br $return.label)
@@ -122,11 +187,22 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_b__int@mixednestings.MixedNestings.A.1B))
 
 ;;; CLASS  <anonymous> implements MyInterface
 (type $mixednestings.MixedNestings.A.1B.1 (struct
+ (field $vtable (ref null $mixednestings.MixedNestings.A.1B.1.vtable))
  (field $this@mixednestings.MixedNestings.A.1B.1 (mut (ref null $mixednestings.MixedNestings.A.1B)))
 ))
+(type $mixednestings.MixedNestings.A.1B.1.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_fun__int__int (mut (ref $function.$int__$int)))
+))
+(global $mixednestings.MixedNestings.A.1B.1.vtable (mut (ref null $mixednestings.MixedNestings.A.1B.1.vtable)) (ref.null $mixednestings.MixedNestings.A.1B.1.vtable))
 
 ;;; <anonymous> implements MyInterface()
 (func $m_<init>__void_$pp_mixednestings@mixednestings.MixedNestings.A.1B.1
@@ -140,10 +216,11 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_mixednestings@mixednestings.MixedNestings.A.1B.1))
 
 ;;; int <anonymous> implements MyInterface.fun(int a)
 (func $m_fun__int__int@mixednestings.MixedNestings.A.1B.1
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (result i32)
  (local $return.value i32)
@@ -151,6 +228,9 @@
  (local $n i32)
  (local $iii (ref null $java.lang.Object))
  (local $m i32)
+ (local $$qualifier (ref null $mixednestings.MixedNestings.A.1B.1.1))
+ (local $this (ref null $mixednestings.MixedNestings.A.1B.1))
+ (local.set $this (ref.cast $java.lang.Object $mixednestings.MixedNestings.A.1B.1 (local.get $this.untyped) (global.get $mixednestings.MixedNestings.A.1B.1.rtt)))
  (block $return.label
   (block
    ;; MyInterface ii = function (int n){
@@ -163,11 +243,22 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_fun__int__int@mixednestings.MixedNestings.A.1B.1))
 
 ;;; CLASS  <anonymous> implements MyInterface
 (type $mixednestings.MixedNestings.A.1B.1.1 (struct
+ (field $vtable (ref null $mixednestings.MixedNestings.A.1B.1.1.vtable))
  (field $this@mixednestings.MixedNestings.A.1B.1.1 (mut (ref null $mixednestings.MixedNestings.A.1B.1)))
 ))
+(type $mixednestings.MixedNestings.A.1B.1.1.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_fun__int__int (mut (ref $function.$int__$int)))
+))
+(global $mixednestings.MixedNestings.A.1B.1.1.vtable (mut (ref null $mixednestings.MixedNestings.A.1B.1.1.vtable)) (ref.null $mixednestings.MixedNestings.A.1B.1.1.vtable))
 
 ;;; <anonymous> implements MyInterface()
 (func $m_<init>__void_$pp_mixednestings@mixednestings.MixedNestings.A.1B.1.1
@@ -181,13 +272,16 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_mixednestings@mixednestings.MixedNestings.A.1B.1.1))
 
 ;;; int <anonymous> implements MyInterface.fun(int b)
 (func $m_fun__int__int@mixednestings.MixedNestings.A.1B.1.1
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $b i32)
  (result i32)
  (local $return.value i32)
+ (local $this (ref null $mixednestings.MixedNestings.A.1B.1.1))
+ (local.set $this (ref.cast $java.lang.Object $mixednestings.MixedNestings.A.1B.1.1 (local.get $this.untyped) (global.get $mixednestings.MixedNestings.A.1B.1.1.rtt)))
  (block $return.label
   (block
    ;; return b;
@@ -197,4 +291,18 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_fun__int__int@mixednestings.MixedNestings.A.1B.1.1))
+
+;;; Code for mixednestings.MixedNestings [vtable]
+ (global.set $mixednestings.MixedNestings.vtable (struct.new_with_rtt $mixednestings.MixedNestings.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_mm__void@mixednestings.MixedNestings) (ref.func $m_test__void@mixednestings.MixedNestings) (rtt.canon $mixednestings.MixedNestings.vtable)))
+;;; Code for mixednestings.MixedNestings.A [vtable]
+ (global.set $mixednestings.MixedNestings.A.vtable (struct.new_with_rtt $mixednestings.MixedNestings.A.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_aa__void@mixednestings.MixedNestings.A) (ref.func $m_a__void@mixednestings.MixedNestings.A) (rtt.canon $mixednestings.MixedNestings.A.vtable)))
+;;; Code for mixednestings.MixedNestings.A.1B [vtable]
+ (global.set $mixednestings.MixedNestings.A.1B.vtable (struct.new_with_rtt $mixednestings.MixedNestings.A.1B.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_bb__void@mixednestings.MixedNestings.A.1B) (ref.func $m_b__int@mixednestings.MixedNestings.A.1B) (rtt.canon $mixednestings.MixedNestings.A.1B.vtable)))
+;;; Code for mixednestings.MixedNestings.A.1B.1 [vtable]
+ (global.set $mixednestings.MixedNestings.A.1B.1.vtable (struct.new_with_rtt $mixednestings.MixedNestings.A.1B.1.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_fun__int__int@mixednestings.MixedNestings.A.1B.1) (rtt.canon $mixednestings.MixedNestings.A.1B.1.vtable)))
+;;; Code for mixednestings.MixedNestings.A.1B.1.1 [vtable]
+ (global.set $mixednestings.MixedNestings.A.1B.1.1.vtable (struct.new_with_rtt $mixednestings.MixedNestings.A.1B.1.1.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_fun__int__int@mixednestings.MixedNestings.A.1B.1.1) (rtt.canon $mixednestings.MixedNestings.A.1B.1.1.vtable)))
+))
+(start $.runtime.init)
 

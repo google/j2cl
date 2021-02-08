@@ -2,7 +2,16 @@
 
 ;;; CLASS  Main
 (type $annotation.Main (struct
+ (field $vtable (ref null $annotation.Main.vtable))
 ))
+(type $annotation.Main.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $annotation.Main.vtable (mut (ref null $annotation.Main.vtable)) (ref.null $annotation.Main.vtable))
 
 ;;; Main()
 (func $m_<init>__void@annotation.Main
@@ -16,14 +25,25 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@annotation.Main))
 
 ;;; INTERFACE  Foo
 (global $CONSTANT@annotation.Main.Foo (mut i32) (i32.const 0))
 
 ;;; CLASS  Bar
 (type $annotation.Main.Bar (struct
+ (field $vtable (ref null $annotation.Main.Bar.vtable))
  (field $this@annotation.Main.Bar (mut (ref null $annotation.Main)))
 ))
+(type $annotation.Main.Bar.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_baz__int_$pp_annotation (mut (ref $function.__$int)))
+))
+(global $annotation.Main.Bar.vtable (mut (ref null $annotation.Main.Bar.vtable)) (ref.null $annotation.Main.Bar.vtable))
 
 ;;; Bar()
 (func $m_<init>__void_$pp_annotation@annotation.Main.Bar
@@ -37,13 +57,16 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_annotation@annotation.Main.Bar))
 
 ;;; int Bar.baz()
 (func $m_baz__int_$pp_annotation@annotation.Main.Bar
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (result i32)
  (local $return.value i32)
  (local $foo (ref null $java.lang.Object))
+ (local $this (ref null $annotation.Main.Bar))
+ (local.set $this (ref.cast $java.lang.Object $annotation.Main.Bar (local.get $this.untyped) (global.get $annotation.Main.Bar.rtt)))
  (block $return.label
   (block
    ;; Foo foo = null;
@@ -58,4 +81,12 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_baz__int_$pp_annotation@annotation.Main.Bar))
+
+;;; Code for annotation.Main [vtable]
+ (global.set $annotation.Main.vtable (struct.new_with_rtt $annotation.Main.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $annotation.Main.vtable)))
+;;; Code for annotation.Main.Bar [vtable]
+ (global.set $annotation.Main.Bar.vtable (struct.new_with_rtt $annotation.Main.Bar.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_baz__int_$pp_annotation@annotation.Main.Bar) (rtt.canon $annotation.Main.Bar.vtable)))
+))
+(start $.runtime.init)
 

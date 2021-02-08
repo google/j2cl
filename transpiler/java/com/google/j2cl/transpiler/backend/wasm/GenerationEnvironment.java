@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.backend.wasm;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
+import static java.util.stream.Collectors.joining;
 
 import com.google.common.base.Predicates;
 import com.google.common.base.Strings;
@@ -116,6 +117,31 @@ class GenerationEnvironment {
     return getWasmTypeName(typeDeclaration.toUnparameterizedTypeDescriptor()) + ".rtt";
   }
 
+  /** Returns the name of the global containing the rtt for {@code typeDescriptor}. */
+  String getRttGlobalName(TypeDescriptor typeDescriptor) {
+    if (typeDescriptor.isClass() || typeDescriptor.isEnum()) {
+      return getRttGlobalName(((DeclaredTypeDescriptor) typeDescriptor).getTypeDeclaration());
+    }
+    throw new AssertionError("Unexpected type: " + typeDescriptor.getReadableDescription());
+  }
+
+  /** Returns the name of the wasm type of the vtable for a Java type. */
+  public String getWasmVtableTypeName(DeclaredTypeDescriptor typeDescriptor) {
+    return getWasmTypeName(typeDescriptor) + ".vtable";
+  }
+
+  /** Returns the name of the global that stores the vtable for {@code typeDescriptor}. */
+  public String getWasmVtableGlobalName(DeclaredTypeDescriptor typeDescriptor) {
+    // We use the same name for the global that holds the vtable as well as for its type since
+    // the type namespace and global namespace are different naming scopes.
+    return getWasmVtableTypeName(typeDescriptor);
+  }
+
+  /** Returns the name of the field in the vtable that corresponds to {@code methodDescriptor}. */
+  public String getVtableSlot(MethodDescriptor methodDescriptor) {
+    return "$" + methodDescriptor.getMangledName();
+  }
+
   /**
    * Returns the name of the global function that implements the method.
    *
@@ -145,6 +171,22 @@ class GenerationEnvironment {
 
   String getDeclarationName(NameDeclaration declaration) {
     return "$" + checkNotNull(nameByDeclaration.get(declaration));
+  }
+
+  /**
+   * Returns the name for the type associated with a function signature.
+   *
+   * <p>In WASM in order to use function references as structure fields (e.g. in the vtable), their
+   * types needs to be declared.
+   */
+  String getFunctionTypeName(MethodDescriptor methodDescriptor) {
+    return String.format(
+        "$function.%s__%s",
+        methodDescriptor.getDispatchParameterTypeDescriptors().stream()
+            .map(TypeDescriptor::toRawTypeDescriptor)
+            .map(this::getWasmTypeName)
+            .collect(joining("__")),
+        getWasmTypeName(methodDescriptor.getDispatchReturnTypeDescriptor()));
   }
 
   GenerationEnvironment(List<CompilationUnit> compilationUnits) {

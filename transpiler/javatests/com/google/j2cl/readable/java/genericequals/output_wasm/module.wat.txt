@@ -2,9 +2,19 @@
 
 ;;; CLASS  GenericEquals
 (type $genericequals.GenericEquals (struct
+ (field $vtable (ref null $genericequals.GenericEquals.vtable))
  (field $value@genericequals.GenericEquals (mut (ref null $java.lang.Object)))
  (field $value2@genericequals.GenericEquals (mut (ref null $genericequals.GenericEquals)))
 ))
+(type $genericequals.GenericEquals.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_foo__genericequals_GenericEquals__java_lang_Object (mut (ref $function.$genericequals.GenericEquals__$java.lang.Object)))
+))
+(global $genericequals.GenericEquals.vtable (mut (ref null $genericequals.GenericEquals.vtable)) (ref.null $genericequals.GenericEquals.vtable))
 
 ;;; GenericEquals(T value)
 (func $m_<init>__java_lang_Object__void@genericequals.GenericEquals
@@ -16,20 +26,23 @@
    ;; Object.this.Object.<init>();
    
    ;; (GenericEquals.this.value = value);
-   (struct.set $genericequals.GenericEquals $value@genericequals.GenericEquals  (ref.null $genericequals.GenericEquals) (local.get $value))
+   (struct.set $genericequals.GenericEquals $value@genericequals.GenericEquals  (local.get $this) (local.get $value))
    ;; (GenericEquals.this.value2 = null);
-   (struct.set $genericequals.GenericEquals $value2@genericequals.GenericEquals  (ref.null $genericequals.GenericEquals) (ref.null $genericequals.GenericEquals))
+   (struct.set $genericequals.GenericEquals $value2@genericequals.GenericEquals  (local.get $this) (ref.null $genericequals.GenericEquals))
   )
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__java_lang_Object__void@genericequals.GenericEquals))
 
 ;;; Object GenericEquals.foo(GenericEquals<?> other)
 (func $m_foo__genericequals_GenericEquals__java_lang_Object@genericequals.GenericEquals
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $other (ref null $genericequals.GenericEquals))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
+ (local $this (ref null $genericequals.GenericEquals))
+ (local.set $this (ref.cast $java.lang.Object $genericequals.GenericEquals (local.get $this.untyped) (global.get $genericequals.GenericEquals.rtt)))
  (block $return.label
   (block
    ;; return other.value2.value;
@@ -39,18 +52,21 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_foo__genericequals_GenericEquals__java_lang_Object@genericequals.GenericEquals))
 
 ;;; boolean GenericEquals.equals(Object obj)
 (func $m_equals__java_lang_Object__boolean@genericequals.GenericEquals
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $obj (ref null $java.lang.Object))
  (result i32)
  (local $return.value i32)
  (local $other (ref null $genericequals.GenericEquals))
+ (local $this (ref null $genericequals.GenericEquals))
+ (local.set $this (ref.cast $java.lang.Object $genericequals.GenericEquals (local.get $this.untyped) (global.get $genericequals.GenericEquals.rtt)))
  (block $return.label
   (block
    ;; if ((obj == GenericEquals.this)) {
-   (if (ref.eq (local.get $obj) (ref.null $genericequals.GenericEquals))
+   (if (ref.eq (local.get $obj) (local.get $this))
     (then
      (block
       ;; return true;
@@ -73,10 +89,16 @@
    
    (local.set $other (ref.cast $java.lang.Object $genericequals.GenericEquals (local.get $obj) (global.get $genericequals.GenericEquals.rtt)))
    ;; return GenericEquals.this.value.equals(other.value);
-   (local.set $return.value (i32.const 0))
+   (local.set $return.value (call_ref (struct.get $genericequals.GenericEquals $value@genericequals.GenericEquals  (local.get $this))(struct.get $genericequals.GenericEquals $value@genericequals.GenericEquals  (local.get $other))(struct.get $java.lang.Object.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.Object $vtable(struct.get $genericequals.GenericEquals $value@genericequals.GenericEquals  (local.get $this))))))
    (br $return.label)
   )
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_equals__java_lang_Object__boolean@genericequals.GenericEquals))
+
+;;; Code for genericequals.GenericEquals [vtable]
+ (global.set $genericequals.GenericEquals.vtable (struct.new_with_rtt $genericequals.GenericEquals.vtable  (ref.func $m_equals__java_lang_Object__boolean@genericequals.GenericEquals) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__genericequals_GenericEquals__java_lang_Object@genericequals.GenericEquals) (rtt.canon $genericequals.GenericEquals.vtable)))
+))
+(start $.runtime.init)
 

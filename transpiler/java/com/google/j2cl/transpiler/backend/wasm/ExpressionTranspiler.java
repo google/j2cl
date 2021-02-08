@@ -42,6 +42,8 @@ import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
+import com.google.j2cl.transpiler.ast.SuperReference;
+import com.google.j2cl.transpiler.ast.ThisReference;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.UnaryExpression;
@@ -237,11 +239,37 @@ final class ExpressionTranspiler {
           sourceBuilder.append("(call " + environment.getMethodImplementationName(target) + " ");
           renderTypedExpressions(target.getParameterTypeDescriptors(), methodCall.getArguments());
           sourceBuilder.append(")");
+        } else if (isClassDynamicDispatch(methodCall)) {
+          sourceBuilder.append("(call_ref ");
+
+          // Pass the implicit parameter.
+          Expression implicitParameter = methodCall.getQualifier();
+          checkState(implicitParameter.isIdempotent());
+          renderTypedExpression(target.getEnclosingTypeDescriptor(), implicitParameter);
+
+          // Pass the rest of the parameters.
+          renderTypedExpressions(target.getParameterTypeDescriptors(), methodCall.getArguments());
+
+          // Retrieve the method reference from the vtable to provide it to call_ref.
+          sourceBuilder.append(
+              String.format(
+                  "(struct.get %s %s (struct.get %s $vtable",
+                  environment.getWasmVtableTypeName(target.getEnclosingTypeDescriptor()),
+                  environment.getVtableSlot(target),
+                  environment.getWasmTypeName(target.getEnclosingTypeDescriptor())));
+          renderTypedExpression(target.getEnclosingTypeDescriptor(), methodCall.getQualifier());
+
+          sourceBuilder.append("))");
+          sourceBuilder.append(")");
         } else {
           // TODO(rluble): remove once all method call types are implemented.
           return super.enterMethodCall(methodCall);
         }
         return false;
+      }
+
+      private boolean isClassDynamicDispatch(MethodCall methodCall) {
+        return methodCall.isPolymorphic() && methodCall.getTarget().isClassDynamicDispatch();
       }
 
       @Override
@@ -270,8 +298,9 @@ final class ExpressionTranspiler {
         sourceBuilder.append("(call " + environment.getMethodImplementationName(target) + " ");
         sourceBuilder.append(
             format(
-                "(struct.new_with_rtt %s",
-                environment.getWasmTypeName(newInstance.getTypeDescriptor())));
+                "(struct.new_with_rtt %s (global.get %s)",
+                environment.getWasmTypeName(newInstance.getTypeDescriptor()),
+                environment.getWasmVtableGlobalName(newInstance.getTypeDescriptor())));
 
         // TODO(b/178728155): Go back to using struct.new_default_with_rtt once it supports
         // assigning immutable fields at construction. See b/178738025 for an alternative design
@@ -311,6 +340,21 @@ final class ExpressionTranspiler {
         PrimitiveTypeDescriptor typeDescriptor = numberLiteral.getTypeDescriptor();
         String wasmType = checkNotNull(environment.getWasmType(typeDescriptor));
         sourceBuilder.append("(" + wasmType + ".const " + numberLiteral.getValue() + ")");
+        return false;
+      }
+
+      @Override
+      public boolean enterThisReference(ThisReference thisReference) {
+        if (thisReference.getTypeDescriptor().isInterface()) {
+          return super.enterThisReference(thisReference);
+        }
+        sourceBuilder.append("(local.get $this)");
+        return false;
+      }
+
+      @Override
+      public boolean enterSuperReference(SuperReference superReference) {
+        sourceBuilder.append("(local.get $this)");
         return false;
       }
 

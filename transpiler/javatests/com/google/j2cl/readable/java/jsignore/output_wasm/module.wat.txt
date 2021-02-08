@@ -2,7 +2,16 @@
 
 ;;; CLASS  JsIgnoreExample
 (type $jsignore.JsIgnoreExample (struct
+ (field $vtable (ref null $jsignore.JsIgnoreExample.vtable))
 ))
+(type $jsignore.JsIgnoreExample.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $jsignore.JsIgnoreExample.vtable (mut (ref null $jsignore.JsIgnoreExample.vtable)) (ref.null $jsignore.JsIgnoreExample.vtable))
 (global $exportedField@jsignore.JsIgnoreExample (mut i32) (i32.const 0))
 (global $notExportedField@jsignore.JsIgnoreExample (mut i32) (i32.const 0))
 (global $CONSTNAME@jsignore.JsIgnoreExample (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
@@ -19,6 +28,7 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@jsignore.JsIgnoreExample))
 
 ;;; void JsIgnoreExample.exportedFunction()
 (func $m_exportedFunction__void@jsignore.JsIgnoreExample
@@ -27,6 +37,7 @@
   )
  )
 )
+(global funcref (ref.func $m_exportedFunction__void@jsignore.JsIgnoreExample))
 
 ;;; void JsIgnoreExample.notExportedFunction()
 (func $m_notExportedFunction__void@jsignore.JsIgnoreExample
@@ -35,4 +46,10 @@
   )
  )
 )
+(global funcref (ref.func $m_notExportedFunction__void@jsignore.JsIgnoreExample))
+
+;;; Code for jsignore.JsIgnoreExample [vtable]
+ (global.set $jsignore.JsIgnoreExample.vtable (struct.new_with_rtt $jsignore.JsIgnoreExample.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $jsignore.JsIgnoreExample.vtable)))
+))
+(start $.runtime.init)
 

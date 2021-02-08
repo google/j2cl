@@ -2,7 +2,22 @@
 
 ;;; CLASS  Child
 (type $packageprivatemethods.package1.Child (struct
+ (field $vtable (ref null $packageprivatemethods.package1.Child.vtable))
 ))
+(type $packageprivatemethods.package1.Child.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_foo__int__int_$pp_packageprivatemethods_package1 (mut (ref $function.$int__$int)))
+ (field $m_fun__int__int__int_$pp_packageprivatemethods_package1 (mut (ref $function.$int__$int__$int)))
+ (field $m_bar__int__int__int__int_$pp_packageprivatemethods_package1 (mut (ref $function.$int__$int__$int__$int)))
+ (field $m_bar__int__int__int__int (mut (ref $function.$int__$int__$int__$int)))
+ (field $m_foo__int__int (mut (ref $function.$int__$int)))
+ (field $m_fun__int__int__int (mut (ref $function.$int__$int__$int)))
+))
+(global $packageprivatemethods.package1.Child.vtable (mut (ref null $packageprivatemethods.package1.Child.vtable)) (ref.null $packageprivatemethods.package1.Child.vtable))
 
 ;;; Child()
 (func $m_<init>__void@packageprivatemethods.package1.Child
@@ -16,13 +31,16 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@packageprivatemethods.package1.Child))
 
 ;;; int Child.foo(int a)
 (func $m_foo__int__int@packageprivatemethods.package1.Child
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (result i32)
  (local $return.value i32)
+ (local $this (ref null $packageprivatemethods.package1.Child))
+ (local.set $this (ref.cast $java.lang.Object $packageprivatemethods.package1.Child (local.get $this.untyped) (global.get $packageprivatemethods.package1.Child.rtt)))
  (block $return.label
   (block
    ;; return (a + 1);
@@ -32,14 +50,17 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_foo__int__int@packageprivatemethods.package1.Child))
 
 ;;; int Child.fun(int a, int b)
 (func $m_fun__int__int__int@packageprivatemethods.package1.Child
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (param $b i32)
  (result i32)
  (local $return.value i32)
+ (local $this (ref null $packageprivatemethods.package1.Child))
+ (local.set $this (ref.cast $java.lang.Object $packageprivatemethods.package1.Child (local.get $this.untyped) (global.get $packageprivatemethods.package1.Child.rtt)))
  (block $return.label
   (block
    ;; return ((a + b) + 1);
@@ -49,15 +70,18 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_fun__int__int__int@packageprivatemethods.package1.Child))
 
 ;;; int Child.bar(int a, int b, int c)
 (func $m_bar__int__int__int__int@packageprivatemethods.package1.Child
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (param $b i32)
  (param $c i32)
  (result i32)
  (local $return.value i32)
+ (local $this (ref null $packageprivatemethods.package1.Child))
+ (local.set $this (ref.cast $java.lang.Object $packageprivatemethods.package1.Child (local.get $this.untyped) (global.get $packageprivatemethods.package1.Child.rtt)))
  (block $return.label
   (block
    ;; return (((a + b) + c) + 2);
@@ -67,44 +91,64 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_bar__int__int__int__int@packageprivatemethods.package1.Child))
 
 ;;; int Child.foo(int arg0)
 (func $m_foo__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 i32)
  (result i32)
  (local $return.value i32)
+ (local $this (ref null $packageprivatemethods.package1.Child))
+ (local.set $this (ref.cast $java.lang.Object $packageprivatemethods.package1.Child (local.get $this.untyped) (global.get $packageprivatemethods.package1.Child.rtt)))
  (block $return.label
   (block
    ;; return Child.this.foo(arg0);
-   (local.set $return.value (i32.const 0))
+   (local.set $return.value (call_ref (local.get $this)(local.get $arg0)(struct.get $packageprivatemethods.package1.Child.vtable $m_foo__int__int (struct.get $packageprivatemethods.package1.Child $vtable(local.get $this)))))
    (br $return.label)
   )
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_foo__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child))
 
 ;;; int Child.fun(int arg0, int arg1)
 (func $m_fun__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 i32)
  (param $arg1 i32)
  (result i32)
  (local $return.value i32)
+ (local $this (ref null $packageprivatemethods.package1.Child))
+ (local.set $this (ref.cast $java.lang.Object $packageprivatemethods.package1.Child (local.get $this.untyped) (global.get $packageprivatemethods.package1.Child.rtt)))
  (block $return.label
   (block
    ;; return Child.this.fun(arg0,arg1);
-   (local.set $return.value (i32.const 0))
+   (local.set $return.value (call_ref (local.get $this)(local.get $arg0)(local.get $arg1)(struct.get $packageprivatemethods.package1.Child.vtable $m_fun__int__int__int (struct.get $packageprivatemethods.package1.Child $vtable(local.get $this)))))
    (br $return.label)
   )
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_fun__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child))
 ;;; Code for packageprivatemethods.package1.Parent
 
 ;;; CLASS  Parent
 (type $packageprivatemethods.package1.Parent (struct
+ (field $vtable (ref null $packageprivatemethods.package1.Parent.vtable))
 ))
+(type $packageprivatemethods.package1.Parent.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_foo__int__int_$pp_packageprivatemethods_package1 (mut (ref $function.$int__$int)))
+ (field $m_fun__int__int__int_$pp_packageprivatemethods_package1 (mut (ref $function.$int__$int__$int)))
+ (field $m_bar__int__int__int__int_$pp_packageprivatemethods_package1 (mut (ref $function.$int__$int__$int__$int)))
+ (field $m_bar__int__int__int__int (mut (ref $function.$int__$int__$int__$int)))
+))
+(global $packageprivatemethods.package1.Parent.vtable (mut (ref null $packageprivatemethods.package1.Parent.vtable)) (ref.null $packageprivatemethods.package1.Parent.vtable))
 
 ;;; Parent()
 (func $m_<init>__void@packageprivatemethods.package1.Parent
@@ -118,13 +162,16 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@packageprivatemethods.package1.Parent))
 
 ;;; int Parent.foo(int a)
 (func $m_foo__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Parent
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (result i32)
  (local $return.value i32)
+ (local $this (ref null $packageprivatemethods.package1.Parent))
+ (local.set $this (ref.cast $java.lang.Object $packageprivatemethods.package1.Parent (local.get $this.untyped) (global.get $packageprivatemethods.package1.Parent.rtt)))
  (block $return.label
   (block
    ;; return a;
@@ -134,29 +181,45 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_foo__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Parent))
 
 ;;; int Parent.bar(int arg0, int arg1, int arg2)
 (func $m_bar__int__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Parent
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 i32)
  (param $arg1 i32)
  (param $arg2 i32)
  (result i32)
  (local $return.value i32)
+ (local $this (ref null $packageprivatemethods.package1.Parent))
+ (local.set $this (ref.cast $java.lang.Object $packageprivatemethods.package1.Parent (local.get $this.untyped) (global.get $packageprivatemethods.package1.Parent.rtt)))
  (block $return.label
   (block
    ;; return Parent.this.bar(arg0,arg1,arg2);
-   (local.set $return.value (i32.const 0))
+   (local.set $return.value (call_ref (local.get $this)(local.get $arg0)(local.get $arg1)(local.get $arg2)(struct.get $packageprivatemethods.package1.Parent.vtable $m_bar__int__int__int__int (struct.get $packageprivatemethods.package1.Parent $vtable(local.get $this)))))
    (br $return.label)
   )
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_bar__int__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Parent))
 ;;; Code for packageprivatemethods.package1.SuperParent
 
 ;;; CLASS  SuperParent
 (type $packageprivatemethods.package1.SuperParent (struct
+ (field $vtable (ref null $packageprivatemethods.package1.SuperParent.vtable))
 ))
+(type $packageprivatemethods.package1.SuperParent.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_foo__int__int_$pp_packageprivatemethods_package1 (mut (ref $function.$int__$int)))
+ (field $m_fun__int__int__int_$pp_packageprivatemethods_package1 (mut (ref $function.$int__$int__$int)))
+ (field $m_bar__int__int__int__int_$pp_packageprivatemethods_package1 (mut (ref $function.$int__$int__$int__$int)))
+))
+(global $packageprivatemethods.package1.SuperParent.vtable (mut (ref null $packageprivatemethods.package1.SuperParent.vtable)) (ref.null $packageprivatemethods.package1.SuperParent.vtable))
 
 ;;; SuperParent()
 (func $m_<init>__void@packageprivatemethods.package1.SuperParent
@@ -170,13 +233,16 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@packageprivatemethods.package1.SuperParent))
 
 ;;; int SuperParent.foo(int a)
 (func $m_foo__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.SuperParent
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (result i32)
  (local $return.value i32)
+ (local $this (ref null $packageprivatemethods.package1.SuperParent))
+ (local.set $this (ref.cast $java.lang.Object $packageprivatemethods.package1.SuperParent (local.get $this.untyped) (global.get $packageprivatemethods.package1.SuperParent.rtt)))
  (block $return.label
   (block
    ;; return (a - 1);
@@ -186,14 +252,17 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_foo__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.SuperParent))
 
 ;;; int SuperParent.fun(int a, int b)
 (func $m_fun__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.SuperParent
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (param $b i32)
  (result i32)
  (local $return.value i32)
+ (local $this (ref null $packageprivatemethods.package1.SuperParent))
+ (local.set $this (ref.cast $java.lang.Object $packageprivatemethods.package1.SuperParent (local.get $this.untyped) (global.get $packageprivatemethods.package1.SuperParent.rtt)))
  (block $return.label
   (block
    ;; return (a + b);
@@ -203,15 +272,18 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_fun__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.SuperParent))
 
 ;;; int SuperParent.bar(int a, int b, int c)
 (func $m_bar__int__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.SuperParent
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (param $b i32)
  (param $c i32)
  (result i32)
  (local $return.value i32)
+ (local $this (ref null $packageprivatemethods.package1.SuperParent))
+ (local.set $this (ref.cast $java.lang.Object $packageprivatemethods.package1.SuperParent (local.get $this.untyped) (global.get $packageprivatemethods.package1.SuperParent.rtt)))
  (block $return.label
   (block
    ;; return ((a + b) + c);
@@ -221,11 +293,27 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_bar__int__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.SuperParent))
 ;;; Code for packageprivatemethods.package2.SubChild
 
 ;;; CLASS  SubChild
 (type $packageprivatemethods.package2.SubChild (struct
+ (field $vtable (ref null $packageprivatemethods.package2.SubChild.vtable))
 ))
+(type $packageprivatemethods.package2.SubChild.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_foo__int__int_$pp_packageprivatemethods_package1 (mut (ref $function.$int__$int)))
+ (field $m_fun__int__int__int_$pp_packageprivatemethods_package1 (mut (ref $function.$int__$int__$int)))
+ (field $m_bar__int__int__int__int_$pp_packageprivatemethods_package1 (mut (ref $function.$int__$int__$int__$int)))
+ (field $m_bar__int__int__int__int (mut (ref $function.$int__$int__$int__$int)))
+ (field $m_foo__int__int (mut (ref $function.$int__$int)))
+ (field $m_fun__int__int__int (mut (ref $function.$int__$int__$int)))
+))
+(global $packageprivatemethods.package2.SubChild.vtable (mut (ref null $packageprivatemethods.package2.SubChild.vtable)) (ref.null $packageprivatemethods.package2.SubChild.vtable))
 
 ;;; SubChild()
 (func $m_<init>__void@packageprivatemethods.package2.SubChild
@@ -239,13 +327,16 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@packageprivatemethods.package2.SubChild))
 
 ;;; int SubChild.foo(int a)
 (func $m_foo__int__int@packageprivatemethods.package2.SubChild
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (result i32)
  (local $return.value i32)
+ (local $this (ref null $packageprivatemethods.package2.SubChild))
+ (local.set $this (ref.cast $java.lang.Object $packageprivatemethods.package2.SubChild (local.get $this.untyped) (global.get $packageprivatemethods.package2.SubChild.rtt)))
  (block $return.label
   (block
    ;; return (a + 3);
@@ -255,11 +346,26 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_foo__int__int@packageprivatemethods.package2.SubChild))
 ;;; Code for packageprivatemethods.package2.SubParent
 
 ;;; CLASS  SubParent
 (type $packageprivatemethods.package2.SubParent (struct
+ (field $vtable (ref null $packageprivatemethods.package2.SubParent.vtable))
 ))
+(type $packageprivatemethods.package2.SubParent.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_foo__int__int_$pp_packageprivatemethods_package1 (mut (ref $function.$int__$int)))
+ (field $m_fun__int__int__int_$pp_packageprivatemethods_package1 (mut (ref $function.$int__$int__$int)))
+ (field $m_bar__int__int__int__int_$pp_packageprivatemethods_package1 (mut (ref $function.$int__$int__$int__$int)))
+ (field $m_bar__int__int__int__int (mut (ref $function.$int__$int__$int__$int)))
+ (field $m_foo__int__int_$pp_packageprivatemethods_package2 (mut (ref $function.$int__$int)))
+))
+(global $packageprivatemethods.package2.SubParent.vtable (mut (ref null $packageprivatemethods.package2.SubParent.vtable)) (ref.null $packageprivatemethods.package2.SubParent.vtable))
 
 ;;; SubParent()
 (func $m_<init>__void@packageprivatemethods.package2.SubParent
@@ -273,13 +379,16 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@packageprivatemethods.package2.SubParent))
 
 ;;; int SubParent.foo(int a)
 (func $m_foo__int__int_$pp_packageprivatemethods_package2@packageprivatemethods.package2.SubParent
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (result i32)
  (local $return.value i32)
+ (local $this (ref null $packageprivatemethods.package2.SubParent))
+ (local.set $this (ref.cast $java.lang.Object $packageprivatemethods.package2.SubParent (local.get $this.untyped) (global.get $packageprivatemethods.package2.SubParent.rtt)))
  (block $return.label
   (block
    ;; return a;
@@ -289,4 +398,14 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_foo__int__int_$pp_packageprivatemethods_package2@packageprivatemethods.package2.SubParent))
+
+;;; Code for packageprivatemethods.package1.Child [vtable]
+ (global.set $packageprivatemethods.package1.Child.vtable (struct.new_with_rtt $packageprivatemethods.package1.Child.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child) (ref.func $m_fun__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child) (ref.func $m_bar__int__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Parent) (ref.func $m_bar__int__int__int__int@packageprivatemethods.package1.Child) (ref.func $m_foo__int__int@packageprivatemethods.package1.Child) (ref.func $m_fun__int__int__int@packageprivatemethods.package1.Child) (rtt.canon $packageprivatemethods.package1.Child.vtable)))
+;;; Code for packageprivatemethods.package1.SuperParent [vtable]
+ (global.set $packageprivatemethods.package1.SuperParent.vtable (struct.new_with_rtt $packageprivatemethods.package1.SuperParent.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.SuperParent) (ref.func $m_fun__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.SuperParent) (ref.func $m_bar__int__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.SuperParent) (rtt.canon $packageprivatemethods.package1.SuperParent.vtable)))
+;;; Code for packageprivatemethods.package2.SubChild [vtable]
+ (global.set $packageprivatemethods.package2.SubChild.vtable (struct.new_with_rtt $packageprivatemethods.package2.SubChild.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child) (ref.func $m_fun__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child) (ref.func $m_bar__int__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Parent) (ref.func $m_bar__int__int__int__int@packageprivatemethods.package1.Child) (ref.func $m_foo__int__int@packageprivatemethods.package2.SubChild) (ref.func $m_fun__int__int__int@packageprivatemethods.package1.Child) (rtt.canon $packageprivatemethods.package2.SubChild.vtable)))
+))
+(start $.runtime.init)
 

@@ -403,6 +403,10 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     return isInstanceMember() && !getVisibility().isPrivate();
   }
 
+  public boolean isClassDynamicDispatch() {
+    return isPolymorphic() && !getEnclosingTypeDescriptor().isInterface();
+  }
+
   @Override
   public boolean isMethod() {
     return true;
@@ -520,7 +524,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
    * parameters used for determining the method mangled name and the types that can actually flow to
    * the method.
    */
-  private MethodDescriptor getManglingDescriptor() {
+  @Memoized
+  MethodDescriptor getManglingDescriptor() {
     if (!isDeclaration()) {
       return getDeclarationDescriptor().getManglingDescriptor();
     }
@@ -562,6 +567,10 @@ public abstract class MethodDescriptor extends MemberDescriptor {
    */
   public List<TypeDescriptor> getDispatchParameterTypeDescriptors() {
     return getManglingDescriptor().getParameterTypeDescriptors();
+  }
+
+  public TypeDescriptor getDispatchReturnTypeDescriptor() {
+    return getManglingDescriptor().getReturnTypeDescriptor();
   }
 
   /**

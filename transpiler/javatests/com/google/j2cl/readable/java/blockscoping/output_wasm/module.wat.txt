@@ -2,7 +2,17 @@
 
 ;;; CLASS  BlockScoping
 (type $blockscoping.BlockScoping (struct
+ (field $vtable (ref null $blockscoping.BlockScoping.vtable))
 ))
+(type $blockscoping.BlockScoping.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_main__void (mut (ref $function.__$void)))
+))
+(global $blockscoping.BlockScoping.vtable (mut (ref null $blockscoping.BlockScoping.vtable)) (ref.null $blockscoping.BlockScoping.vtable))
 
 ;;; BlockScoping()
 (func $m_<init>__void@blockscoping.BlockScoping
@@ -16,12 +26,15 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@blockscoping.BlockScoping))
 
 ;;; void BlockScoping.main()
 (func $m_main__void@blockscoping.BlockScoping
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (local $i i32)
  (local $i_1 i32)
+ (local $this (ref null $blockscoping.BlockScoping))
+ (local.set $this (ref.cast $java.lang.Object $blockscoping.BlockScoping (local.get $this.untyped) (global.get $blockscoping.BlockScoping.rtt)))
  (block $return.label
   (block
    (block
@@ -37,4 +50,10 @@
   )
  )
 )
+(global funcref (ref.func $m_main__void@blockscoping.BlockScoping))
+
+;;; Code for blockscoping.BlockScoping [vtable]
+ (global.set $blockscoping.BlockScoping.vtable (struct.new_with_rtt $blockscoping.BlockScoping.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_main__void@blockscoping.BlockScoping) (rtt.canon $blockscoping.BlockScoping.vtable)))
+))
+(start $.runtime.init)
 

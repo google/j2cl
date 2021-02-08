@@ -74,6 +74,11 @@ public class MethodCall extends Invocation {
     return isStaticDispatch;
   }
 
+  /** Returns true if the call needs dynamic dispatch. */
+  public boolean isPolymorphic() {
+    return targetMethodDescriptor.isPolymorphic() && !isStaticDispatch;
+  }
+
   @Override
   public TypeDescriptor getTypeDescriptor() {
     return targetMethodDescriptor.getReturnTypeDescriptor();

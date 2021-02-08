@@ -2,9 +2,18 @@
 
 ;;; CLASS  PublicInstanceFields
 (type $publicinstancefields.PublicInstanceFields (struct
+ (field $vtable (ref null $publicinstancefields.PublicInstanceFields.vtable))
  (field $a@publicinstancefields.PublicInstanceFields (mut i32))
  (field $b@publicinstancefields.PublicInstanceFields (mut i32))
 ))
+(type $publicinstancefields.PublicInstanceFields.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $publicinstancefields.PublicInstanceFields.vtable (mut (ref null $publicinstancefields.PublicInstanceFields.vtable)) (ref.null $publicinstancefields.PublicInstanceFields.vtable))
 
 ;;; PublicInstanceFields()
 (func $m_<init>__void@publicinstancefields.PublicInstanceFields
@@ -18,4 +27,10 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@publicinstancefields.PublicInstanceFields))
+
+;;; Code for publicinstancefields.PublicInstanceFields [vtable]
+ (global.set $publicinstancefields.PublicInstanceFields.vtable (struct.new_with_rtt $publicinstancefields.PublicInstanceFields.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $publicinstancefields.PublicInstanceFields.vtable)))
+))
+(start $.runtime.init)
 

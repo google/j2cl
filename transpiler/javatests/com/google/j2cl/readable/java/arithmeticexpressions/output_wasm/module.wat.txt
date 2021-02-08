@@ -2,9 +2,23 @@
 
 ;;; CLASS  ArithmeticExpressions
 (type $arithmeticexpressions.ArithmeticExpressions (struct
+ (field $vtable (ref null $arithmeticexpressions.ArithmeticExpressions.vtable))
  (field $bar@arithmeticexpressions.ArithmeticExpressions (mut i64))
  (field $intField@arithmeticexpressions.ArithmeticExpressions (mut i64))
 ))
+(type $arithmeticexpressions.ArithmeticExpressions.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_testCoercions__void (mut (ref $function.__$void)))
+ (field $m_testPrimitives__void (mut (ref $function.__$void)))
+ (field $m_testCompoundArray__void (mut (ref $function.__$void)))
+ (field $m_testCompoundBoxedTypes__void (mut (ref $function.__$void)))
+ (field $m_testExtendedOperands__void (mut (ref $function.__$void)))
+))
+(global $arithmeticexpressions.ArithmeticExpressions.vtable (mut (ref null $arithmeticexpressions.ArithmeticExpressions.vtable)) (ref.null $arithmeticexpressions.ArithmeticExpressions.vtable))
 (global $FLOAT_CONSTANT@arithmeticexpressions.ArithmeticExpressions (mut f32) (f32.const 0.0))
 (global $DOUBLE_CONSTANT@arithmeticexpressions.ArithmeticExpressions (mut f64) (f64.const 0.0))
 (global $DOUBLE_CONSTANT_WITH_ARITHMETIC@arithmeticexpressions.ArithmeticExpressions (mut f64) (f64.const 0.0))
@@ -23,16 +37,19 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@arithmeticexpressions.ArithmeticExpressions))
 
 ;;; void ArithmeticExpressions.testCoercions()
 (func $m_testCoercions__void@arithmeticexpressions.ArithmeticExpressions
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (local $b i32)
  (local $c i32)
  (local $s i32)
  (local $i i32)
  (local $f f32)
  (local $d f64)
+ (local $this (ref null $arithmeticexpressions.ArithmeticExpressions))
+ (local.set $this (ref.cast $java.lang.Object $arithmeticexpressions.ArithmeticExpressions (local.get $this.untyped) (global.get $arithmeticexpressions.ArithmeticExpressions.rtt)))
  (block $return.label
   (block
    ;; byte b = ((byte) 1);
@@ -68,10 +85,11 @@
   )
  )
 )
+(global funcref (ref.func $m_testCoercions__void@arithmeticexpressions.ArithmeticExpressions))
 
 ;;; void ArithmeticExpressions.testPrimitives()
 (func $m_testPrimitives__void@arithmeticexpressions.ArithmeticExpressions
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (local $a i32)
  (local $b i32)
  (local $$value i32)
@@ -91,6 +109,8 @@
  (local $o f64)
  (local $s i32)
  (local $q i32)
+ (local $this (ref null $arithmeticexpressions.ArithmeticExpressions))
+ (local.set $this (ref.cast $java.lang.Object $arithmeticexpressions.ArithmeticExpressions (local.get $this.untyped) (global.get $arithmeticexpressions.ArithmeticExpressions.rtt)))
  (block $return.label
   (block
    ;; int a = 10,int b = (int $value = a,(a = (a + 1)),$value),int c = (int $value = a,(a = (a - 1)),$value),int d = ((a = (a + 1)),a),int e = ((a = (a - 1)),a),int f = (0 - a),int g = a,int h = (-1 ^ a),int i = (((1 + 1) + 2) - 5),int j = ((1 + 2) * (3 + 4)),int p = (((1 / 2) * 3) % 4);
@@ -158,10 +178,11 @@
   )
  )
 )
+(global funcref (ref.func $m_testPrimitives__void@arithmeticexpressions.ArithmeticExpressions))
 
 ;;; void ArithmeticExpressions.testCompoundArray()
 (func $m_testCompoundArray__void@arithmeticexpressions.ArithmeticExpressions
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (local $ints (ref null $java.lang.Object))
  (local $i i32)
  (local $$array (ref null $java.lang.Object))
@@ -182,6 +203,8 @@
  (local $$array_4 (ref null $java.lang.Object))
  (local $$index_4 i32)
  (local $$value_2 i32)
+ (local $this (ref null $arithmeticexpressions.ArithmeticExpressions))
+ (local.set $this (ref.cast $java.lang.Object $arithmeticexpressions.ArithmeticExpressions (local.get $this.untyped) (global.get $arithmeticexpressions.ArithmeticExpressions.rtt)))
  (block $return.label
   (block
    ;; int[] ints = null;
@@ -296,6 +319,7 @@
   )
  )
 )
+(global funcref (ref.func $m_testCompoundArray__void@arithmeticexpressions.ArithmeticExpressions))
 
 ;;; long[] ArithmeticExpressions.getLongArray()
 (func $m_getLongArray__arrayOf_long@arithmeticexpressions.ArithmeticExpressions
@@ -310,10 +334,11 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_getLongArray__arrayOf_long@arithmeticexpressions.ArithmeticExpressions))
 
 ;;; void ArithmeticExpressions.testCompoundBoxedTypes()
 (func $m_testCompoundBoxedTypes__void@arithmeticexpressions.ArithmeticExpressions
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (local $c (ref null $java.lang.Integer))
  (local $d (ref null $java.lang.Integer))
  (local $i i32)
@@ -324,9 +349,13 @@
  (local $$value_1 (ref null $java.lang.Integer))
  (local $b (ref null $java.lang.Byte))
  (local $ch (ref null $java.lang.Character))
+ (local $$qualifier (ref null $java.lang.Integer))
+ (local $$qualifier_1 (ref null $java.lang.Integer))
  (local $$value_2 (ref null $java.lang.Integer))
  (local $ref (ref null $arithmeticexpressions.ArithmeticExpressions.1Ref))
  (local $n i32)
+ (local $this (ref null $arithmeticexpressions.ArithmeticExpressions))
+ (local.set $this (ref.cast $java.lang.Object $arithmeticexpressions.ArithmeticExpressions (local.get $this.untyped) (global.get $arithmeticexpressions.ArithmeticExpressions.rtt)))
  (block $return.label
   (block
    ;; Integer c = 1000;
@@ -387,10 +416,28 @@
    (local.set $ch (ref.null $java.lang.Character))
    ;; (ch = ((char) (ch + 1)));
    (local.set $ch (ref.null $java.lang.Character))
-   ;; ((f = (f + 1)),f).intValue();
-   (drop (i32.const 0))
-   ;; (Integer $value = f,(f = (f - 1)),$value).intValue();
-   (drop (i32.const 0))
+   (block
+    ;; Integer $qualifier = ((f = (f + 1)),f);
+    
+    (local.set $$qualifier (block (result (ref null $java.lang.Integer))
+     (local.set $f (ref.null $java.lang.Integer))
+     (local.get $f)
+    ))
+    ;; $qualifier.intValue();
+    (drop (call_ref (local.get $$qualifier)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier)))))
+   )
+   (block
+    ;; Integer $qualifier = (Integer $value = f,(f = (f - 1)),$value);
+    
+    (local.set $$qualifier_1 (block (result (ref null $java.lang.Integer))
+     
+     (local.set $$value_2 (local.get $f))
+     (local.set $f (ref.null $java.lang.Integer))
+     (local.get $$value_2)
+    ))
+    ;; $qualifier.intValue();
+    (drop (call_ref (local.get $$qualifier_1)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier_1)))))
+   )
    ;; Ref<Integer> ref = null;
    
    (local.set $ref (ref.null $arithmeticexpressions.ArithmeticExpressions.1Ref))
@@ -402,6 +449,7 @@
   )
  )
 )
+(global funcref (ref.func $m_testCompoundBoxedTypes__void@arithmeticexpressions.ArithmeticExpressions))
 
 ;;; Integer ArithmeticExpressions.getInteger()
 (func $m_getInteger__java_lang_Integer@arithmeticexpressions.ArithmeticExpressions
@@ -416,6 +464,7 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_getInteger__java_lang_Integer@arithmeticexpressions.ArithmeticExpressions))
 
 ;;; void ArithmeticExpressions.testSideEffect()
 (func $m_testSideEffect__void@arithmeticexpressions.ArithmeticExpressions
@@ -432,6 +481,7 @@
   )
  )
 )
+(global funcref (ref.func $m_testSideEffect__void@arithmeticexpressions.ArithmeticExpressions))
 
 ;;; ArithmeticExpressions ArithmeticExpressions.getWithSideEffect()
 (func $m_getWithSideEffect__arithmeticexpressions_ArithmeticExpressions@arithmeticexpressions.ArithmeticExpressions
@@ -446,14 +496,17 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_getWithSideEffect__arithmeticexpressions_ArithmeticExpressions@arithmeticexpressions.ArithmeticExpressions))
 
 ;;; void ArithmeticExpressions.testExtendedOperands()
 (func $m_testExtendedOperands__void@arithmeticexpressions.ArithmeticExpressions
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (local $boxedInteger (ref null $java.lang.Integer))
  (local $i i32)
  (local $l i64)
  (local $d f64)
+ (local $this (ref null $arithmeticexpressions.ArithmeticExpressions))
+ (local.set $this (ref.cast $java.lang.Object $arithmeticexpressions.ArithmeticExpressions (local.get $this.untyped) (global.get $arithmeticexpressions.ArithmeticExpressions.rtt)))
  (block $return.label
   (block
    ;; Integer boxedInteger = 3;
@@ -484,12 +537,22 @@
   )
  )
 )
+(global funcref (ref.func $m_testExtendedOperands__void@arithmeticexpressions.ArithmeticExpressions))
 
 ;;; CLASS  Ref
 (type $arithmeticexpressions.ArithmeticExpressions.1Ref (struct
+ (field $vtable (ref null $arithmeticexpressions.ArithmeticExpressions.1Ref.vtable))
  (field $this@arithmeticexpressions.ArithmeticExpressions.1Ref (mut (ref null $arithmeticexpressions.ArithmeticExpressions)))
  (field $field@arithmeticexpressions.ArithmeticExpressions.1Ref (mut (ref null $java.lang.Object)))
 ))
+(type $arithmeticexpressions.ArithmeticExpressions.1Ref.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $arithmeticexpressions.ArithmeticExpressions.1Ref.vtable (mut (ref null $arithmeticexpressions.ArithmeticExpressions.1Ref.vtable)) (ref.null $arithmeticexpressions.ArithmeticExpressions.1Ref.vtable))
 
 ;;; Ref()
 (func $m_<init>__void_$pp_arithmeticexpressions@arithmeticexpressions.ArithmeticExpressions.1Ref
@@ -503,4 +566,12 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_arithmeticexpressions@arithmeticexpressions.ArithmeticExpressions.1Ref))
+
+;;; Code for arithmeticexpressions.ArithmeticExpressions [vtable]
+ (global.set $arithmeticexpressions.ArithmeticExpressions.vtable (struct.new_with_rtt $arithmeticexpressions.ArithmeticExpressions.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_testCoercions__void@arithmeticexpressions.ArithmeticExpressions) (ref.func $m_testPrimitives__void@arithmeticexpressions.ArithmeticExpressions) (ref.func $m_testCompoundArray__void@arithmeticexpressions.ArithmeticExpressions) (ref.func $m_testCompoundBoxedTypes__void@arithmeticexpressions.ArithmeticExpressions) (ref.func $m_testExtendedOperands__void@arithmeticexpressions.ArithmeticExpressions) (rtt.canon $arithmeticexpressions.ArithmeticExpressions.vtable)))
+;;; Code for arithmeticexpressions.ArithmeticExpressions.1Ref [vtable]
+ (global.set $arithmeticexpressions.ArithmeticExpressions.1Ref.vtable (struct.new_with_rtt $arithmeticexpressions.ArithmeticExpressions.1Ref.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $arithmeticexpressions.ArithmeticExpressions.1Ref.vtable)))
+))
+(start $.runtime.init)
 

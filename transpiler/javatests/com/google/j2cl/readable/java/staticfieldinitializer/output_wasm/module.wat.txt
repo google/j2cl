@@ -2,7 +2,16 @@
 
 ;;; CLASS  StaticFieldInitializer
 (type $staticfieldinitializer.StaticFieldInitializer (struct
+ (field $vtable (ref null $staticfieldinitializer.StaticFieldInitializer.vtable))
 ))
+(type $staticfieldinitializer.StaticFieldInitializer.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $staticfieldinitializer.StaticFieldInitializer.vtable (mut (ref null $staticfieldinitializer.StaticFieldInitializer.vtable)) (ref.null $staticfieldinitializer.StaticFieldInitializer.vtable))
 (global $a@staticfieldinitializer.StaticFieldInitializer (mut i32) (i32.const 0))
 (global $b@staticfieldinitializer.StaticFieldInitializer (mut i32) (i32.const 0))
 
@@ -18,4 +27,10 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@staticfieldinitializer.StaticFieldInitializer))
+
+;;; Code for staticfieldinitializer.StaticFieldInitializer [vtable]
+ (global.set $staticfieldinitializer.StaticFieldInitializer.vtable (struct.new_with_rtt $staticfieldinitializer.StaticFieldInitializer.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $staticfieldinitializer.StaticFieldInitializer.vtable)))
+))
+(start $.runtime.init)
 

@@ -2,7 +2,17 @@
 
 ;;; CLASS  ImplicitParenthesis
 (type $implicitparenthesis.ImplicitParenthesis (struct
+ (field $vtable (ref null $implicitparenthesis.ImplicitParenthesis.vtable))
 ))
+(type $implicitparenthesis.ImplicitParenthesis.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_test__void (mut (ref $function.__$void)))
+))
+(global $implicitparenthesis.ImplicitParenthesis.vtable (mut (ref null $implicitparenthesis.ImplicitParenthesis.vtable)) (ref.null $implicitparenthesis.ImplicitParenthesis.vtable))
 
 ;;; ImplicitParenthesis()
 (func $m_<init>__void@implicitparenthesis.ImplicitParenthesis
@@ -16,10 +26,13 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@implicitparenthesis.ImplicitParenthesis))
 
 ;;; void ImplicitParenthesis.test()
 (func $m_test__void@implicitparenthesis.ImplicitParenthesis
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
+ (local $this (ref null $implicitparenthesis.ImplicitParenthesis))
+ (local.set $this (ref.cast $java.lang.Object $implicitparenthesis.ImplicitParenthesis (local.get $this.untyped) (global.get $implicitparenthesis.ImplicitParenthesis.rtt)))
  (block $return.label
   (block
    ;; implicitparenthesis.ImplicitParenthesis.examples();
@@ -29,6 +42,7 @@
   )
  )
 )
+(global funcref (ref.func $m_test__void@implicitparenthesis.ImplicitParenthesis))
 
 ;;; void ImplicitParenthesis.examples()
 (func $m_examples__void@implicitparenthesis.ImplicitParenthesis
@@ -45,7 +59,7 @@
     ;; (primitiveInt = 5);
     (local.set $primitiveInt (i32.const 5))
     ;; (boxedInt = new Integer.<init>(10));
-    (local.set $boxedInt (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 10)))
+    (local.set $boxedInt (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 10)))
     ;; (primitiveInt = ((primitiveInt == 5)) ? (new Integer.<init>(15)) : (new Integer.<init>(30)));
     (local.set $primitiveInt (i32.const 0))
     ;; assert (primitiveInt == 15);
@@ -55,7 +69,7 @@
     ;; (primitiveInt = 5);
     (local.set $primitiveInt (i32.const 5))
     ;; (boxedInt = new Integer.<init>(10));
-    (local.set $boxedInt (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 10)))
+    (local.set $boxedInt (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 10)))
     ;; (primitiveInt = ((boxedInt = (boxedInt + primitiveInt)),boxedInt));
     (local.set $primitiveInt (i32.const 0))
     ;; assert (primitiveInt == 15);
@@ -65,7 +79,7 @@
     ;; (primitiveInt = 5);
     (local.set $primitiveInt (i32.const 5))
     ;; (boxedInt = new Integer.<init>(10));
-    (local.set $boxedInt (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 10)))
+    (local.set $boxedInt (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 10)))
     ;; (primitiveInt = ((boxedInt = primitiveInt),boxedInt));
     (local.set $primitiveInt (i32.const 0))
     ;; assert (primitiveInt == 5);
@@ -75,7 +89,7 @@
     ;; (primitiveInt = 5);
     (local.set $primitiveInt (i32.const 5))
     ;; (boxedInt = new Integer.<init>(10));
-    (local.set $boxedInt (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 10)))
+    (local.set $boxedInt (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 10)))
     ;; (primitiveInt = (Integer $value = boxedInt,(boxedInt = (boxedInt + 1)),$value));
     (local.set $primitiveInt (i32.const 0))
     ;; assert (primitiveInt == 10);
@@ -85,7 +99,7 @@
     ;; (primitiveInt = 5);
     (local.set $primitiveInt (i32.const 5))
     ;; (boxedInt = new Integer.<init>(10));
-    (local.set $boxedInt (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 10)))
+    (local.set $boxedInt (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 10)))
     ;; (primitiveInt = ((boxedInt = (boxedInt + 1)),boxedInt));
     (local.set $primitiveInt (i32.const 0))
     ;; assert (primitiveInt == 11);
@@ -94,6 +108,7 @@
   )
  )
 )
+(global funcref (ref.func $m_examples__void@implicitparenthesis.ImplicitParenthesis))
 
 ;;; void ImplicitParenthesis.nonExamples()
 (func $m_nonExamples__void@implicitparenthesis.ImplicitParenthesis
@@ -112,7 +127,7 @@
     ;; (primitiveInt = 5);
     (local.set $primitiveInt (i32.const 5))
     ;; (boxedInt = new Integer.<init>(10));
-    (local.set $boxedInt (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 10)))
+    (local.set $boxedInt (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 10)))
     ;; (primitiveInt = (boxedInt - primitiveInt));
     (local.set $primitiveInt (i32.sub (i32.const 0) (local.get $primitiveInt)))
     ;; assert (primitiveInt == 5);
@@ -122,7 +137,7 @@
     ;; (primitiveInt = 5);
     (local.set $primitiveInt (i32.const 5))
     ;; (boxedInt = new Integer.<init>(10));
-    (local.set $boxedInt (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 10)))
+    (local.set $boxedInt (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 10)))
     ;; (boxedBoolean = true);
     (local.set $boxedBoolean (ref.null $java.lang.Boolean))
     ;; (boxedBoolean = (boxedInt == primitiveInt));
@@ -133,14 +148,21 @@
   )
  )
 )
+(global funcref (ref.func $m_nonExamples__void@implicitparenthesis.ImplicitParenthesis))
 
 ;;; void ImplicitParenthesis.parenthesisRemoval()
 (func $m_parenthesisRemoval__void@implicitparenthesis.ImplicitParenthesis
  (block $return.label
   (block
    ;; new Integer.<init>((1 + 2));
-   (drop (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.add (i32.const 1) (i32.const 2))))
+   (drop (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.add (i32.const 1) (i32.const 2))))
   )
  )
 )
+(global funcref (ref.func $m_parenthesisRemoval__void@implicitparenthesis.ImplicitParenthesis))
+
+;;; Code for implicitparenthesis.ImplicitParenthesis [vtable]
+ (global.set $implicitparenthesis.ImplicitParenthesis.vtable (struct.new_with_rtt $implicitparenthesis.ImplicitParenthesis.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__void@implicitparenthesis.ImplicitParenthesis) (rtt.canon $implicitparenthesis.ImplicitParenthesis.vtable)))
+))
+(start $.runtime.init)
 

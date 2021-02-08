@@ -2,7 +2,19 @@
 
 ;;; CLASS  NestedGenericClass
 (type $nestedgenericclass.NestedGenericClass (struct
+ (field $vtable (ref null $nestedgenericclass.NestedGenericClass.vtable))
 ))
+(type $nestedgenericclass.NestedGenericClass.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_fun__java_lang_Object__void (mut (ref $function.$java.lang.Object__$void)))
+ (field $m_bar__void (mut (ref $function.__$void)))
+ (field $m_test__void (mut (ref $function.__$void)))
+))
+(global $nestedgenericclass.NestedGenericClass.vtable (mut (ref null $nestedgenericclass.NestedGenericClass.vtable)) (ref.null $nestedgenericclass.NestedGenericClass.vtable))
 
 ;;; NestedGenericClass()
 (func $m_<init>__void@nestedgenericclass.NestedGenericClass
@@ -16,61 +28,86 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@nestedgenericclass.NestedGenericClass))
 
 ;;; void NestedGenericClass.fun(S t)
 (func $m_fun__java_lang_Object__void@nestedgenericclass.NestedGenericClass
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Object))
+ (local $this (ref null $nestedgenericclass.NestedGenericClass))
+ (local.set $this (ref.cast $java.lang.Object $nestedgenericclass.NestedGenericClass (local.get $this.untyped) (global.get $nestedgenericclass.NestedGenericClass.rtt)))
  (block $return.label
   (block
    ;; NestedGenericClass.this.new $1E.<init>();
-   (drop (call $m_<init>__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.1E (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.1E (ref.null $nestedgenericclass.NestedGenericClass) (global.get $nestedgenericclass.NestedGenericClass.1E.rtt))))
+   (drop (call $m_<init>__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.1E (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.1E (global.get $nestedgenericclass.NestedGenericClass.1E.vtable) (ref.null $nestedgenericclass.NestedGenericClass) (global.get $nestedgenericclass.NestedGenericClass.1E.rtt))))
    ;; NestedGenericClass.this.new $1F.<init>();
-   (drop (call $m_<init>__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.1F (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.1F (ref.null $nestedgenericclass.NestedGenericClass) (ref.null $java.lang.Object) (global.get $nestedgenericclass.NestedGenericClass.1F.rtt))))
+   (drop (call $m_<init>__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.1F (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.1F (global.get $nestedgenericclass.NestedGenericClass.1F.vtable) (ref.null $nestedgenericclass.NestedGenericClass) (ref.null $java.lang.Object) (global.get $nestedgenericclass.NestedGenericClass.1F.rtt))))
   )
  )
 )
+(global funcref (ref.func $m_fun__java_lang_Object__void@nestedgenericclass.NestedGenericClass))
 
 ;;; void NestedGenericClass.bar()
 (func $m_bar__void@nestedgenericclass.NestedGenericClass
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
+ (local $$qualifier (ref null $nestedgenericclass.NestedGenericClass.1G))
+ (local $this (ref null $nestedgenericclass.NestedGenericClass))
+ (local.set $this (ref.cast $java.lang.Object $nestedgenericclass.NestedGenericClass (local.get $this.untyped) (global.get $nestedgenericclass.NestedGenericClass.rtt)))
  (block $return.label
   (block
-   ;; NestedGenericClass.this.new $1G.<init>().bar();
-   
+   (block
+    ;; G<Error, T, T> $qualifier = NestedGenericClass.this.new $1G.<init>();
+    
+    (local.set $$qualifier (call $m_<init>__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.1G (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.1G (global.get $nestedgenericclass.NestedGenericClass.1G.vtable) (ref.null $nestedgenericclass.NestedGenericClass) (global.get $nestedgenericclass.NestedGenericClass.1G.rtt))))
+    ;; $qualifier.bar();
+    (call_ref (local.get $$qualifier)(struct.get $nestedgenericclass.NestedGenericClass.1G.vtable $m_bar__void (struct.get $nestedgenericclass.NestedGenericClass.1G $vtable(local.get $$qualifier))))
+   )
   )
  )
 )
+(global funcref (ref.func $m_bar__void@nestedgenericclass.NestedGenericClass))
 
 ;;; void NestedGenericClass.test()
 (func $m_test__void@nestedgenericclass.NestedGenericClass
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (local $n (ref null $nestedgenericclass.NestedGenericClass))
  (local $a (ref null $nestedgenericclass.NestedGenericClass.A))
  (local $b (ref null $nestedgenericclass.NestedGenericClass.A.B))
+ (local $this (ref null $nestedgenericclass.NestedGenericClass))
+ (local.set $this (ref.cast $java.lang.Object $nestedgenericclass.NestedGenericClass (local.get $this.untyped) (global.get $nestedgenericclass.NestedGenericClass.rtt)))
  (block $return.label
   (block
    ;; NestedGenericClass<Number> n = new NestedGenericClass.<init>();
    
-   (local.set $n (call $m_<init>__void@nestedgenericclass.NestedGenericClass (struct.new_with_rtt $nestedgenericclass.NestedGenericClass (global.get $nestedgenericclass.NestedGenericClass.rtt))))
+   (local.set $n (call $m_<init>__void@nestedgenericclass.NestedGenericClass (struct.new_with_rtt $nestedgenericclass.NestedGenericClass (global.get $nestedgenericclass.NestedGenericClass.vtable) (global.get $nestedgenericclass.NestedGenericClass.rtt))))
    ;; A<Error, Number> a = n.new A.<init>();
    
-   (local.set $a (call $m_<init>__void@nestedgenericclass.NestedGenericClass.A (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.A (ref.null $nestedgenericclass.NestedGenericClass) (global.get $nestedgenericclass.NestedGenericClass.A.rtt))))
+   (local.set $a (call $m_<init>__void@nestedgenericclass.NestedGenericClass.A (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.A (global.get $nestedgenericclass.NestedGenericClass.A.vtable) (ref.null $nestedgenericclass.NestedGenericClass) (global.get $nestedgenericclass.NestedGenericClass.A.rtt))))
    ;; B<Exception, Error, Number> b = a.new B.<init>();
    
-   (local.set $b (call $m_<init>__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.A.B (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.A.B (ref.null $nestedgenericclass.NestedGenericClass.A) (global.get $nestedgenericclass.NestedGenericClass.A.B.rtt))))
+   (local.set $b (call $m_<init>__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.A.B (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.A.B (global.get $nestedgenericclass.NestedGenericClass.A.B.vtable) (ref.null $nestedgenericclass.NestedGenericClass.A) (global.get $nestedgenericclass.NestedGenericClass.A.B.rtt))))
    ;; n.new C.<init>();
-   (drop (call $m_<init>__void@nestedgenericclass.NestedGenericClass.C (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.C (ref.null $nestedgenericclass.NestedGenericClass) (ref.null $java.lang.Object) (global.get $nestedgenericclass.NestedGenericClass.C.rtt))))
+   (drop (call $m_<init>__void@nestedgenericclass.NestedGenericClass.C (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.C (global.get $nestedgenericclass.NestedGenericClass.C.vtable) (ref.null $nestedgenericclass.NestedGenericClass) (ref.null $java.lang.Object) (global.get $nestedgenericclass.NestedGenericClass.C.rtt))))
    ;; n.new C.<init>().new D.<init>();
-   (drop (call $m_<init>__void@nestedgenericclass.NestedGenericClass.C.D (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.C.D (ref.null $nestedgenericclass.NestedGenericClass.C) (ref.null $java.lang.Object) (global.get $nestedgenericclass.NestedGenericClass.C.D.rtt))))
+   (drop (call $m_<init>__void@nestedgenericclass.NestedGenericClass.C.D (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.C.D (global.get $nestedgenericclass.NestedGenericClass.C.D.vtable) (ref.null $nestedgenericclass.NestedGenericClass.C) (ref.null $java.lang.Object) (global.get $nestedgenericclass.NestedGenericClass.C.D.rtt))))
   )
  )
 )
+(global funcref (ref.func $m_test__void@nestedgenericclass.NestedGenericClass))
 
 ;;; CLASS  A
 (type $nestedgenericclass.NestedGenericClass.A (struct
+ (field $vtable (ref null $nestedgenericclass.NestedGenericClass.A.vtable))
  (field $this@nestedgenericclass.NestedGenericClass.A (mut (ref null $nestedgenericclass.NestedGenericClass)))
 ))
+(type $nestedgenericclass.NestedGenericClass.A.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $nestedgenericclass.NestedGenericClass.A.vtable (mut (ref null $nestedgenericclass.NestedGenericClass.A.vtable)) (ref.null $nestedgenericclass.NestedGenericClass.A.vtable))
 
 ;;; A()
 (func $m_<init>__void@nestedgenericclass.NestedGenericClass.A
@@ -84,11 +121,21 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@nestedgenericclass.NestedGenericClass.A))
 
 ;;; CLASS  B
 (type $nestedgenericclass.NestedGenericClass.A.B (struct
+ (field $vtable (ref null $nestedgenericclass.NestedGenericClass.A.B.vtable))
  (field $this@nestedgenericclass.NestedGenericClass.A.B (mut (ref null $nestedgenericclass.NestedGenericClass.A)))
 ))
+(type $nestedgenericclass.NestedGenericClass.A.B.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $nestedgenericclass.NestedGenericClass.A.B.vtable (mut (ref null $nestedgenericclass.NestedGenericClass.A.B.vtable)) (ref.null $nestedgenericclass.NestedGenericClass.A.B.vtable))
 
 ;;; B()
 (func $m_<init>__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.A.B
@@ -102,6 +149,7 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.A.B))
 
 ;;; B(U u)
 (func $m_<init>__java_lang_Object__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.A.B
@@ -116,12 +164,22 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__java_lang_Object__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.A.B))
 
 ;;; CLASS  C
 (type $nestedgenericclass.NestedGenericClass.C (struct
+ (field $vtable (ref null $nestedgenericclass.NestedGenericClass.C.vtable))
  (field $this@nestedgenericclass.NestedGenericClass.C (mut (ref null $nestedgenericclass.NestedGenericClass)))
  (field $c@nestedgenericclass.NestedGenericClass.C (mut (ref null $java.lang.Object)))
 ))
+(type $nestedgenericclass.NestedGenericClass.C.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $nestedgenericclass.NestedGenericClass.C.vtable (mut (ref null $nestedgenericclass.NestedGenericClass.C.vtable)) (ref.null $nestedgenericclass.NestedGenericClass.C.vtable))
 
 ;;; C()
 (func $m_<init>__void@nestedgenericclass.NestedGenericClass.C
@@ -135,12 +193,22 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@nestedgenericclass.NestedGenericClass.C))
 
 ;;; CLASS  D
 (type $nestedgenericclass.NestedGenericClass.C.D (struct
+ (field $vtable (ref null $nestedgenericclass.NestedGenericClass.C.D.vtable))
  (field $this@nestedgenericclass.NestedGenericClass.C.D (mut (ref null $nestedgenericclass.NestedGenericClass.C)))
  (field $d@nestedgenericclass.NestedGenericClass.C.D (mut (ref null $java.lang.Object)))
 ))
+(type $nestedgenericclass.NestedGenericClass.C.D.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $nestedgenericclass.NestedGenericClass.C.D.vtable (mut (ref null $nestedgenericclass.NestedGenericClass.C.D.vtable)) (ref.null $nestedgenericclass.NestedGenericClass.C.D.vtable))
 
 ;;; D()
 (func $m_<init>__void@nestedgenericclass.NestedGenericClass.C.D
@@ -154,11 +222,21 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@nestedgenericclass.NestedGenericClass.C.D))
 
 ;;; CLASS  E
 (type $nestedgenericclass.NestedGenericClass.1E (struct
+ (field $vtable (ref null $nestedgenericclass.NestedGenericClass.1E.vtable))
  (field $this@nestedgenericclass.NestedGenericClass.1E (mut (ref null $nestedgenericclass.NestedGenericClass)))
 ))
+(type $nestedgenericclass.NestedGenericClass.1E.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $nestedgenericclass.NestedGenericClass.1E.vtable (mut (ref null $nestedgenericclass.NestedGenericClass.1E.vtable)) (ref.null $nestedgenericclass.NestedGenericClass.1E.vtable))
 
 ;;; E()
 (func $m_<init>__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.1E
@@ -172,12 +250,22 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.1E))
 
 ;;; CLASS  F
 (type $nestedgenericclass.NestedGenericClass.1F (struct
+ (field $vtable (ref null $nestedgenericclass.NestedGenericClass.1F.vtable))
  (field $this@nestedgenericclass.NestedGenericClass.1F (mut (ref null $nestedgenericclass.NestedGenericClass)))
  (field $f@nestedgenericclass.NestedGenericClass.1F (mut (ref null $java.lang.Object)))
 ))
+(type $nestedgenericclass.NestedGenericClass.1F.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $nestedgenericclass.NestedGenericClass.1F.vtable (mut (ref null $nestedgenericclass.NestedGenericClass.1F.vtable)) (ref.null $nestedgenericclass.NestedGenericClass.1F.vtable))
 
 ;;; F()
 (func $m_<init>__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.1F
@@ -191,11 +279,22 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.1F))
 
 ;;; CLASS  G
 (type $nestedgenericclass.NestedGenericClass.1G (struct
+ (field $vtable (ref null $nestedgenericclass.NestedGenericClass.1G.vtable))
  (field $this@nestedgenericclass.NestedGenericClass.1G (mut (ref null $nestedgenericclass.NestedGenericClass)))
 ))
+(type $nestedgenericclass.NestedGenericClass.1G.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_bar__void (mut (ref $function.__$void)))
+))
+(global $nestedgenericclass.NestedGenericClass.1G.vtable (mut (ref null $nestedgenericclass.NestedGenericClass.1G.vtable)) (ref.null $nestedgenericclass.NestedGenericClass.1G.vtable))
 
 ;;; G()
 (func $m_<init>__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.1G
@@ -209,22 +308,35 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.1G))
 
 ;;; void G.bar()
 (func $m_bar__void@nestedgenericclass.NestedGenericClass.1G
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
+ (local $this (ref null $nestedgenericclass.NestedGenericClass.1G))
+ (local.set $this (ref.cast $java.lang.Object $nestedgenericclass.NestedGenericClass.1G (local.get $this.untyped) (global.get $nestedgenericclass.NestedGenericClass.1G.rtt)))
  (block $return.label
   (block
    ;; $1G.this.new $1H.<init>();
-   (drop (call $m_<init>__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.1G.1H (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.1G.1H (ref.null $nestedgenericclass.NestedGenericClass.1G) (global.get $nestedgenericclass.NestedGenericClass.1G.1H.rtt))))
+   (drop (call $m_<init>__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.1G.1H (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.1G.1H (global.get $nestedgenericclass.NestedGenericClass.1G.1H.vtable) (ref.null $nestedgenericclass.NestedGenericClass.1G) (global.get $nestedgenericclass.NestedGenericClass.1G.1H.rtt))))
   )
  )
 )
+(global funcref (ref.func $m_bar__void@nestedgenericclass.NestedGenericClass.1G))
 
 ;;; CLASS  H
 (type $nestedgenericclass.NestedGenericClass.1G.1H (struct
+ (field $vtable (ref null $nestedgenericclass.NestedGenericClass.1G.1H.vtable))
  (field $this@nestedgenericclass.NestedGenericClass.1G.1H (mut (ref null $nestedgenericclass.NestedGenericClass.1G)))
 ))
+(type $nestedgenericclass.NestedGenericClass.1G.1H.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $nestedgenericclass.NestedGenericClass.1G.1H.vtable (mut (ref null $nestedgenericclass.NestedGenericClass.1G.1H.vtable)) (ref.null $nestedgenericclass.NestedGenericClass.1G.1H.vtable))
 
 ;;; H()
 (func $m_<init>__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.1G.1H
@@ -238,4 +350,26 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.1G.1H))
+
+;;; Code for nestedgenericclass.NestedGenericClass [vtable]
+ (global.set $nestedgenericclass.NestedGenericClass.vtable (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_fun__java_lang_Object__void@nestedgenericclass.NestedGenericClass) (ref.func $m_bar__void@nestedgenericclass.NestedGenericClass) (ref.func $m_test__void@nestedgenericclass.NestedGenericClass) (rtt.canon $nestedgenericclass.NestedGenericClass.vtable)))
+;;; Code for nestedgenericclass.NestedGenericClass.A [vtable]
+ (global.set $nestedgenericclass.NestedGenericClass.A.vtable (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.A.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $nestedgenericclass.NestedGenericClass.A.vtable)))
+;;; Code for nestedgenericclass.NestedGenericClass.A.B [vtable]
+ (global.set $nestedgenericclass.NestedGenericClass.A.B.vtable (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.A.B.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $nestedgenericclass.NestedGenericClass.A.B.vtable)))
+;;; Code for nestedgenericclass.NestedGenericClass.C [vtable]
+ (global.set $nestedgenericclass.NestedGenericClass.C.vtable (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.C.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $nestedgenericclass.NestedGenericClass.C.vtable)))
+;;; Code for nestedgenericclass.NestedGenericClass.C.D [vtable]
+ (global.set $nestedgenericclass.NestedGenericClass.C.D.vtable (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.C.D.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $nestedgenericclass.NestedGenericClass.C.D.vtable)))
+;;; Code for nestedgenericclass.NestedGenericClass.1E [vtable]
+ (global.set $nestedgenericclass.NestedGenericClass.1E.vtable (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.1E.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $nestedgenericclass.NestedGenericClass.1E.vtable)))
+;;; Code for nestedgenericclass.NestedGenericClass.1F [vtable]
+ (global.set $nestedgenericclass.NestedGenericClass.1F.vtable (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.1F.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $nestedgenericclass.NestedGenericClass.1F.vtable)))
+;;; Code for nestedgenericclass.NestedGenericClass.1G [vtable]
+ (global.set $nestedgenericclass.NestedGenericClass.1G.vtable (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.1G.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_bar__void@nestedgenericclass.NestedGenericClass.1G) (rtt.canon $nestedgenericclass.NestedGenericClass.1G.vtable)))
+;;; Code for nestedgenericclass.NestedGenericClass.1G.1H [vtable]
+ (global.set $nestedgenericclass.NestedGenericClass.1G.1H.vtable (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.1G.1H.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $nestedgenericclass.NestedGenericClass.1G.1H.vtable)))
+))
+(start $.runtime.init)
 

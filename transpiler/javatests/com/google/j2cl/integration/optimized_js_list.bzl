@@ -96,6 +96,8 @@ OPTIMIZED_JS_LIST = [
     "//transpiler/javatests/com/google/j2cl/integration/depsshallow:optimized_js.esnext",
     "//transpiler/javatests/com/google/j2cl/integration/devirtualizedsupermethodcall:optimized_js",
     "//transpiler/javatests/com/google/j2cl/integration/devirtualizedsupermethodcall:optimized_js.esnext",
+    "//transpiler/javatests/com/google/j2cl/integration/dispatch:optimized_js",
+    "//transpiler/javatests/com/google/j2cl/integration/dispatch:optimized_js.esnext",
     "//transpiler/javatests/com/google/j2cl/integration/dowhilestatement:optimized_js",
     "//transpiler/javatests/com/google/j2cl/integration/dowhilestatement:optimized_js.esnext",
     "//transpiler/javatests/com/google/j2cl/integration/emptyclass:optimized_js",

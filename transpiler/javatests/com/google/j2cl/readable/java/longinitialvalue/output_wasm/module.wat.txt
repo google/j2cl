@@ -2,7 +2,16 @@
 
 ;;; CLASS  LongInitialValue
 (type $longinitialvalue.LongInitialValue (struct
+ (field $vtable (ref null $longinitialvalue.LongInitialValue.vtable))
 ))
+(type $longinitialvalue.LongInitialValue.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $longinitialvalue.LongInitialValue.vtable (mut (ref null $longinitialvalue.LongInitialValue.vtable)) (ref.null $longinitialvalue.LongInitialValue.vtable))
 (global $LONG_VALUE@longinitialvalue.LongInitialValue (mut i64) (i64.const 0))
 
 ;;; LongInitialValue()
@@ -17,4 +26,5 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@longinitialvalue.LongInitialValue))
 

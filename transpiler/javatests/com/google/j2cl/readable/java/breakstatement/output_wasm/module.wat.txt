@@ -2,7 +2,17 @@
 
 ;;; CLASS  BreakStatement
 (type $breakstatement.BreakStatement (struct
+ (field $vtable (ref null $breakstatement.BreakStatement.vtable))
 ))
+(type $breakstatement.BreakStatement.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_test__void (mut (ref $function.__$void)))
+))
+(global $breakstatement.BreakStatement.vtable (mut (ref null $breakstatement.BreakStatement.vtable)) (ref.null $breakstatement.BreakStatement.vtable))
 
 ;;; BreakStatement()
 (func $m_<init>__void@breakstatement.BreakStatement
@@ -16,10 +26,13 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@breakstatement.BreakStatement))
 
 ;;; void BreakStatement.test()
 (func $m_test__void@breakstatement.BreakStatement
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
+ (local $this (ref null $breakstatement.BreakStatement))
+ (local.set $this (ref.cast $java.lang.Object $breakstatement.BreakStatement (local.get $this.untyped) (global.get $breakstatement.BreakStatement.rtt)))
  (block $return.label
   (block
    ;; LOOP: for (;true;) {
@@ -40,4 +53,10 @@
   )
  )
 )
+(global funcref (ref.func $m_test__void@breakstatement.BreakStatement))
+
+;;; Code for breakstatement.BreakStatement [vtable]
+ (global.set $breakstatement.BreakStatement.vtable (struct.new_with_rtt $breakstatement.BreakStatement.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__void@breakstatement.BreakStatement) (rtt.canon $breakstatement.BreakStatement.vtable)))
+))
+(start $.runtime.init)
 

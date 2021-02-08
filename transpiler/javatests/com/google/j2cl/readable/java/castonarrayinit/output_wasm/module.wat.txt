@@ -2,7 +2,16 @@
 
 ;;; CLASS  CastOnArrayInit
 (type $castonarrayinit.CastOnArrayInit (struct
+ (field $vtable (ref null $castonarrayinit.CastOnArrayInit.vtable))
 ))
+(type $castonarrayinit.CastOnArrayInit.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $castonarrayinit.CastOnArrayInit.vtable (mut (ref null $castonarrayinit.CastOnArrayInit.vtable)) (ref.null $castonarrayinit.CastOnArrayInit.vtable))
 
 ;;; CastOnArrayInit()
 (func $m_<init>__void@castonarrayinit.CastOnArrayInit
@@ -16,6 +25,7 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@castonarrayinit.CastOnArrayInit))
 
 ;;; void CastOnArrayInit.fun(Foo<E>... args)
 (func $m_fun__arrayOf_castonarrayinit_CastOnArrayInit_Foo__void@castonarrayinit.CastOnArrayInit
@@ -25,6 +35,7 @@
   )
  )
 )
+(global funcref (ref.func $m_fun__arrayOf_castonarrayinit_CastOnArrayInit_Foo__void@castonarrayinit.CastOnArrayInit))
 
 ;;; void CastOnArrayInit.test()
 (func $m_test__void@castonarrayinit.CastOnArrayInit
@@ -34,19 +45,29 @@
   (block
    ;; Foo<E> f1 = new Foo.<init>();
    
-   (local.set $f1 (call $m_<init>__void@castonarrayinit.CastOnArrayInit.Foo (struct.new_with_rtt $castonarrayinit.CastOnArrayInit.Foo (global.get $castonarrayinit.CastOnArrayInit.Foo.rtt))))
+   (local.set $f1 (call $m_<init>__void@castonarrayinit.CastOnArrayInit.Foo (struct.new_with_rtt $castonarrayinit.CastOnArrayInit.Foo (global.get $castonarrayinit.CastOnArrayInit.Foo.vtable) (global.get $castonarrayinit.CastOnArrayInit.Foo.rtt))))
    ;; Foo<E> f2 = new Foo.<init>();
    
-   (local.set $f2 (call $m_<init>__void@castonarrayinit.CastOnArrayInit.Foo (struct.new_with_rtt $castonarrayinit.CastOnArrayInit.Foo (global.get $castonarrayinit.CastOnArrayInit.Foo.rtt))))
+   (local.set $f2 (call $m_<init>__void@castonarrayinit.CastOnArrayInit.Foo (struct.new_with_rtt $castonarrayinit.CastOnArrayInit.Foo (global.get $castonarrayinit.CastOnArrayInit.Foo.vtable) (global.get $castonarrayinit.CastOnArrayInit.Foo.rtt))))
    ;; castonarrayinit.CastOnArrayInit.fun([f1,f2]);
    (call $m_fun__arrayOf_castonarrayinit_CastOnArrayInit_Foo__void@castonarrayinit.CastOnArrayInit (ref.null $java.lang.Object))
   )
  )
 )
+(global funcref (ref.func $m_test__void@castonarrayinit.CastOnArrayInit))
 
 ;;; CLASS  Foo
 (type $castonarrayinit.CastOnArrayInit.Foo (struct
+ (field $vtable (ref null $castonarrayinit.CastOnArrayInit.Foo.vtable))
 ))
+(type $castonarrayinit.CastOnArrayInit.Foo.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $castonarrayinit.CastOnArrayInit.Foo.vtable (mut (ref null $castonarrayinit.CastOnArrayInit.Foo.vtable)) (ref.null $castonarrayinit.CastOnArrayInit.Foo.vtable))
 
 ;;; Foo()
 (func $m_<init>__void@castonarrayinit.CastOnArrayInit.Foo
@@ -60,4 +81,12 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@castonarrayinit.CastOnArrayInit.Foo))
+
+;;; Code for castonarrayinit.CastOnArrayInit [vtable]
+ (global.set $castonarrayinit.CastOnArrayInit.vtable (struct.new_with_rtt $castonarrayinit.CastOnArrayInit.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $castonarrayinit.CastOnArrayInit.vtable)))
+;;; Code for castonarrayinit.CastOnArrayInit.Foo [vtable]
+ (global.set $castonarrayinit.CastOnArrayInit.Foo.vtable (struct.new_with_rtt $castonarrayinit.CastOnArrayInit.Foo.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $castonarrayinit.CastOnArrayInit.Foo.vtable)))
+))
+(start $.runtime.init)
 

@@ -4,7 +4,16 @@
 
 ;;; CLASS  AbstractImpl
 (type $genericinterfaceabstractimpl.AbstractImpl (struct
+ (field $vtable (ref null $genericinterfaceabstractimpl.AbstractImpl.vtable))
 ))
+(type $genericinterfaceabstractimpl.AbstractImpl.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $genericinterfaceabstractimpl.AbstractImpl.vtable (mut (ref null $genericinterfaceabstractimpl.AbstractImpl.vtable)) (ref.null $genericinterfaceabstractimpl.AbstractImpl.vtable))
 
 ;;; AbstractImpl()
 (func $m_<init>__void@genericinterfaceabstractimpl.AbstractImpl
@@ -18,4 +27,5 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@genericinterfaceabstractimpl.AbstractImpl))
 

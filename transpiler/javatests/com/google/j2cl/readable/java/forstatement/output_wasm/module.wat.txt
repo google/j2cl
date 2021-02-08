@@ -2,7 +2,17 @@
 
 ;;; CLASS  ForStatement
 (type $forstatement.ForStatement (struct
+ (field $vtable (ref null $forstatement.ForStatement.vtable))
 ))
+(type $forstatement.ForStatement.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_test__void (mut (ref $function.__$void)))
+))
+(global $forstatement.ForStatement.vtable (mut (ref null $forstatement.ForStatement.vtable)) (ref.null $forstatement.ForStatement.vtable))
 
 ;;; ForStatement()
 (func $m_<init>__void@forstatement.ForStatement
@@ -16,16 +26,19 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@forstatement.ForStatement))
 
 ;;; void ForStatement.test()
 (func $m_test__void@forstatement.ForStatement
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (local $i i32)
  (local $count i32)
  (local $l i64)
  (local $count_1 i64)
  (local $a i32)
  (local $b i32)
+ (local $this (ref null $forstatement.ForStatement))
+ (local.set $this (ref.cast $java.lang.Object $forstatement.ForStatement (local.get $this.untyped) (global.get $forstatement.ForStatement.rtt)))
  (block $return.label
   (block
    ;; LOOP: for (int i = 0,int count = 0;(i < 100);(i = (i + 1))) {
@@ -123,6 +136,7 @@
   )
  )
 )
+(global funcref (ref.func $m_test__void@forstatement.ForStatement))
 
 ;;; int ForStatement.returnsValue()
 (func $m_returnsValue__int@forstatement.ForStatement
@@ -137,4 +151,10 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_returnsValue__int@forstatement.ForStatement))
+
+;;; Code for forstatement.ForStatement [vtable]
+ (global.set $forstatement.ForStatement.vtable (struct.new_with_rtt $forstatement.ForStatement.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__void@forstatement.ForStatement) (rtt.canon $forstatement.ForStatement.vtable)))
+))
+(start $.runtime.init)
 

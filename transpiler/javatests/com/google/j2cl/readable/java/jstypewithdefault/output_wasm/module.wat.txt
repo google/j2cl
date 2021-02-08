@@ -2,7 +2,17 @@
 
 ;;; CLASS  SomeJsType
 (type $jstypewithdefault.SomeJsType (struct
+ (field $vtable (ref null $jstypewithdefault.SomeJsType.vtable))
 ))
+(type $jstypewithdefault.SomeJsType.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_defaultMethod__void (mut (ref $function.__$void)))
+))
+(global $jstypewithdefault.SomeJsType.vtable (mut (ref null $jstypewithdefault.SomeJsType.vtable)) (ref.null $jstypewithdefault.SomeJsType.vtable))
 
 ;;; SomeJsType()
 (func $m_<init>__void@jstypewithdefault.SomeJsType
@@ -16,10 +26,13 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@jstypewithdefault.SomeJsType))
 
 ;;; void SomeJsType.defaultMethod()
 (func $m_defaultMethod__void@jstypewithdefault.SomeJsType
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
+ (local $this (ref null $jstypewithdefault.SomeJsType))
+ (local.set $this (ref.cast $java.lang.Object $jstypewithdefault.SomeJsType (local.get $this.untyped) (global.get $jstypewithdefault.SomeJsType.rtt)))
  (block $return.label
   (block
    ;; Interface.this.defaultMethod();
@@ -27,6 +40,7 @@
   )
  )
 )
+(global funcref (ref.func $m_defaultMethod__void@jstypewithdefault.SomeJsType))
 
 ;;; INTERFACE  Interface
 
@@ -38,4 +52,10 @@
   )
  )
 )
+(global funcref (ref.func $m_defaultMethod__void@jstypewithdefault.Interface))
+
+;;; Code for jstypewithdefault.SomeJsType [vtable]
+ (global.set $jstypewithdefault.SomeJsType.vtable (struct.new_with_rtt $jstypewithdefault.SomeJsType.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_defaultMethod__void@jstypewithdefault.SomeJsType) (rtt.canon $jstypewithdefault.SomeJsType.vtable)))
+))
+(start $.runtime.init)
 

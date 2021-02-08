@@ -2,7 +2,16 @@
 
 ;;; CLASS  goog
 (type $collisions.goog (struct
+ (field $vtable (ref null $collisions.goog.vtable))
 ))
+(type $collisions.goog.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $collisions.goog.vtable (mut (ref null $collisions.goog.vtable)) (ref.null $collisions.goog.vtable))
 
 ;;; goog()
 (func $m_<init>__void@collisions.goog
@@ -16,10 +25,20 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@collisions.goog))
 
 ;;; CLASS  Blah
 (type $collisions.Blah (struct
+ (field $vtable (ref null $collisions.Blah.vtable))
 ))
+(type $collisions.Blah.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $collisions.Blah.vtable (mut (ref null $collisions.Blah.vtable)) (ref.null $collisions.Blah.vtable))
 
 ;;; Blah()
 (func $m_<init>__void_$pp_collisions@collisions.Blah
@@ -33,6 +52,7 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_collisions@collisions.Blah))
 
 ;;; void Blah.m()
 (func $m_m__void@collisions.Blah
@@ -41,6 +61,7 @@
   )
  )
 )
+(global funcref (ref.func $m_m__void@collisions.Blah))
 
 ;;; double Blah.getN()
 (func $m_getN__double@collisions.Blah
@@ -52,10 +73,20 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_getN__double@collisions.Blah))
 
 ;;; CLASS  foo
 (type $collisions.foo (struct
+ (field $vtable (ref null $collisions.foo.vtable))
 ))
+(type $collisions.foo.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $collisions.foo.vtable (mut (ref null $collisions.foo.vtable)) (ref.null $collisions.foo.vtable))
 
 ;;; foo()
 (func $m_<init>__void_$pp_collisions@collisions.foo
@@ -69,10 +100,20 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_collisions@collisions.foo))
 
 ;;; CLASS  bar
 (type $collisions.bar (struct
+ (field $vtable (ref null $collisions.bar.vtable))
 ))
+(type $collisions.bar.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $collisions.bar.vtable (mut (ref null $collisions.bar.vtable)) (ref.null $collisions.bar.vtable))
 
 ;;; bar()
 (func $m_<init>__void_$pp_collisions@collisions.bar
@@ -86,10 +127,21 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_collisions@collisions.bar))
 
 ;;; CLASS  Other
 (type $collisions.Other (struct
+ (field $vtable (ref null $collisions.Other.vtable))
 ))
+(type $collisions.Other.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_m__java_lang_Object_$pp_collisions (mut (ref $function.__$java.lang.Object)))
+))
+(global $collisions.Other.vtable (mut (ref null $collisions.Other.vtable)) (ref.null $collisions.Other.vtable))
 
 ;;; Other()
 (func $m_<init>__void_$pp_collisions@collisions.Other
@@ -103,14 +155,17 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_collisions@collisions.Other))
 
 ;;; T Other.m()
 (func $m_m__java_lang_Object_$pp_collisions@collisions.Other
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (local $T_1 i32)
  (local $o (ref null $collisions.Other))
+ (local $this (ref null $collisions.Other))
+ (local.set $this (ref.cast $java.lang.Object $collisions.Other (local.get $this.untyped) (global.get $collisions.Other.rtt)))
  (block $return.label
   (block
    ;; int T = 5;
@@ -126,10 +181,22 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_m__java_lang_Object_$pp_collisions@collisions.Other))
 
 ;;; CLASS  T
 (type $collisions.T (struct
+ (field $vtable (ref null $collisions.T.vtable))
 ))
+(type $collisions.T.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_m__java_lang_Number_$pp_collisions (mut (ref $function.__$java.lang.Number)))
+ (field $m_n__java_lang_Number_$pp_collisions (mut (ref $function.__$java.lang.Number)))
+))
+(global $collisions.T.vtable (mut (ref null $collisions.T.vtable)) (ref.null $collisions.T.vtable))
 
 ;;; T()
 (func $m_<init>__void_$pp_collisions@collisions.T
@@ -143,12 +210,15 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_collisions@collisions.T))
 
 ;;; T T.m()
 (func $m_m__java_lang_Number_$pp_collisions@collisions.T
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Number))
  (local $return.value (ref null $java.lang.Number))
+ (local $this (ref null $collisions.T))
+ (local.set $this (ref.cast $java.lang.Object $collisions.T (local.get $this.untyped) (global.get $collisions.T.rtt)))
  (block $return.label
   (block
    ;; return null;
@@ -158,20 +228,28 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_m__java_lang_Number_$pp_collisions@collisions.T))
 
 ;;; T T.n()
 (func $m_n__java_lang_Number_$pp_collisions@collisions.T
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Number))
  (local $return.value (ref null $java.lang.Number))
  (local $t (ref null $java.lang.Number))
+ (local $$qualifier (ref null $collisions.T))
+ (local $this (ref null $collisions.T))
+ (local.set $this (ref.cast $java.lang.Object $collisions.T (local.get $this.untyped) (global.get $collisions.T.rtt)))
  (block $return.label
   (block
-   ;; T t = new T.<init>().m();
+   ;; T t = (T<T> $qualifier = new T.<init>(),$qualifier.m());
    
-   (local.set $t (ref.null $java.lang.Number))
+   (local.set $t (block (result (ref null $java.lang.Number))
+    
+    (local.set $$qualifier (call $m_<init>__void_$pp_collisions@collisions.T (struct.new_with_rtt $collisions.T (global.get $collisions.T.vtable) (global.get $collisions.T.rtt))))
+    (call_ref (local.get $$qualifier)(struct.get $collisions.T.vtable $m_m__java_lang_Number_$pp_collisions (struct.get $collisions.T $vtable(local.get $$qualifier))))
+   ))
    ;; t.byteValue();
-   (drop (i32.const 0))
+   (drop (call_ref (local.get $t)(struct.get $java.lang.Number.vtable $m_byteValue__byte (struct.get $java.lang.Number $vtable(local.get $t)))))
    ;; return t;
    (local.set $return.value (local.get $t))
    (br $return.label)
@@ -179,4 +257,20 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_n__java_lang_Number_$pp_collisions@collisions.T))
+
+;;; Code for collisions.goog [vtable]
+ (global.set $collisions.goog.vtable (struct.new_with_rtt $collisions.goog.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $collisions.goog.vtable)))
+;;; Code for collisions.Blah [vtable]
+ (global.set $collisions.Blah.vtable (struct.new_with_rtt $collisions.Blah.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $collisions.Blah.vtable)))
+;;; Code for collisions.foo [vtable]
+ (global.set $collisions.foo.vtable (struct.new_with_rtt $collisions.foo.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $collisions.foo.vtable)))
+;;; Code for collisions.bar [vtable]
+ (global.set $collisions.bar.vtable (struct.new_with_rtt $collisions.bar.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $collisions.bar.vtable)))
+;;; Code for collisions.Other [vtable]
+ (global.set $collisions.Other.vtable (struct.new_with_rtt $collisions.Other.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_m__java_lang_Object_$pp_collisions@collisions.Other) (rtt.canon $collisions.Other.vtable)))
+;;; Code for collisions.T [vtable]
+ (global.set $collisions.T.vtable (struct.new_with_rtt $collisions.T.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_m__java_lang_Number_$pp_collisions@collisions.T) (ref.func $m_n__java_lang_Number_$pp_collisions@collisions.T) (rtt.canon $collisions.T.vtable)))
+))
+(start $.runtime.init)
 

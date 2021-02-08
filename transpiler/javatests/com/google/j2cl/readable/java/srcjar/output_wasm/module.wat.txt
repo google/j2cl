@@ -2,7 +2,16 @@
 
 ;;; CLASS  Foo
 (type $srcjar.Foo (struct
+ (field $vtable (ref null $srcjar.Foo.vtable))
 ))
+(type $srcjar.Foo.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $srcjar.Foo.vtable (mut (ref null $srcjar.Foo.vtable)) (ref.null $srcjar.Foo.vtable))
 
 ;;; Foo()
 (func $m_<init>__void@srcjar.Foo
@@ -16,11 +25,21 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@srcjar.Foo))
 ;;; Code for srcjar.Srcjar
 
 ;;; CLASS  Srcjar
 (type $srcjar.Srcjar (struct
+ (field $vtable (ref null $srcjar.Srcjar.vtable))
 ))
+(type $srcjar.Srcjar.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $srcjar.Srcjar.vtable (mut (ref null $srcjar.Srcjar.vtable)) (ref.null $srcjar.Srcjar.vtable))
 
 ;;; Srcjar()
 (func $m_<init>__void@srcjar.Srcjar
@@ -34,6 +53,7 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@srcjar.Srcjar))
 
 ;;; void Srcjar.test()
 (func $m_test__void@srcjar.Srcjar
@@ -42,8 +62,16 @@
   (block
    ;; Foo foo = new Foo.<init>();
    
-   (local.set $foo (call $m_<init>__void@srcjar.Foo (struct.new_with_rtt $srcjar.Foo (global.get $srcjar.Foo.rtt))))
+   (local.set $foo (call $m_<init>__void@srcjar.Foo (struct.new_with_rtt $srcjar.Foo (global.get $srcjar.Foo.vtable) (global.get $srcjar.Foo.rtt))))
   )
  )
 )
+(global funcref (ref.func $m_test__void@srcjar.Srcjar))
+
+;;; Code for srcjar.Foo [vtable]
+ (global.set $srcjar.Foo.vtable (struct.new_with_rtt $srcjar.Foo.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $srcjar.Foo.vtable)))
+;;; Code for srcjar.Srcjar [vtable]
+ (global.set $srcjar.Srcjar.vtable (struct.new_with_rtt $srcjar.Srcjar.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $srcjar.Srcjar.vtable)))
+))
+(start $.runtime.init)
 

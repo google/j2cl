@@ -62,6 +62,7 @@ import com.google.j2cl.transpiler.passes.NormalizeArrayLiterals;
 import com.google.j2cl.transpiler.passes.NormalizeCasts;
 import com.google.j2cl.transpiler.passes.NormalizeCatchClauses;
 import com.google.j2cl.transpiler.passes.NormalizeConstructors;
+import com.google.j2cl.transpiler.passes.NormalizeDynamicDispatchQualifiers;
 import com.google.j2cl.transpiler.passes.NormalizeEnumClasses;
 import com.google.j2cl.transpiler.passes.NormalizeEquality;
 import com.google.j2cl.transpiler.passes.NormalizeFieldInitialization;
@@ -281,6 +282,7 @@ public enum Backend {
           // Rewrite 'a || b' into 'a ? true : b' and 'a && b' into 'a ? b : false'
           new RewriteShortcutOperators(),
           new NormalizeLabels(),
+          new NormalizeDynamicDispatchQualifiers(),
 
           // Normalize multiexpressions before rewriting assignments so that whenever there is a
           // multiexpression, the result is used.

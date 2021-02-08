@@ -2,7 +2,17 @@
 
 ;;; CLASS  LocalClassWithConstructor
 (type $localclasswithconstructor.LocalClassWithConstructor (struct
+ (field $vtable (ref null $localclasswithconstructor.LocalClassWithConstructor.vtable))
 ))
+(type $localclasswithconstructor.LocalClassWithConstructor.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_test__int__void (mut (ref $function.$int__$void)))
+))
+(global $localclasswithconstructor.LocalClassWithConstructor.vtable (mut (ref null $localclasswithconstructor.LocalClassWithConstructor.vtable)) (ref.null $localclasswithconstructor.LocalClassWithConstructor.vtable))
 
 ;;; LocalClassWithConstructor()
 (func $m_<init>__void@localclasswithconstructor.LocalClassWithConstructor
@@ -16,30 +26,43 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@localclasswithconstructor.LocalClassWithConstructor))
 
 ;;; void LocalClassWithConstructor.test(int p)
 (func $m_test__int__void@localclasswithconstructor.LocalClassWithConstructor
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $p i32)
  (local $localVar i32)
+ (local $this (ref null $localclasswithconstructor.LocalClassWithConstructor))
+ (local.set $this (ref.cast $java.lang.Object $localclasswithconstructor.LocalClassWithConstructor (local.get $this.untyped) (global.get $localclasswithconstructor.LocalClassWithConstructor.rtt)))
  (block $return.label
   (block
    ;; int localVar = 1;
    
    (local.set $localVar (i32.const 1))
    ;; LocalClassWithConstructor.this.new $1LocalClass.<init>(1);
-   (drop (call $m_<init>__int__void@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (struct.new_with_rtt $localclasswithconstructor.LocalClassWithConstructor.1LocalClass (ref.null $localclasswithconstructor.LocalClassWithConstructor) (i32.const 0) (i32.const 0) (i32.const 0) (global.get $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.rtt))(i32.const 1)))
+   (drop (call $m_<init>__int__void@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (struct.new_with_rtt $localclasswithconstructor.LocalClassWithConstructor.1LocalClass (global.get $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable) (ref.null $localclasswithconstructor.LocalClassWithConstructor) (i32.const 0) (i32.const 0) (i32.const 0) (global.get $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.rtt))(i32.const 1)))
   )
  )
 )
+(global funcref (ref.func $m_test__int__void@localclasswithconstructor.LocalClassWithConstructor))
 
 ;;; CLASS  LocalClass
 (type $localclasswithconstructor.LocalClassWithConstructor.1LocalClass (struct
+ (field $vtable (ref null $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable))
  (field $this@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (mut (ref null $localclasswithconstructor.LocalClassWithConstructor)))
  (field $field@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (mut i32))
  (field $localVar@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (mut i32))
  (field $p@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (mut i32))
 ))
+(type $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable (mut (ref null $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable)) (ref.null $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable))
 
 ;;; LocalClass(int a, int b)
 (func $m_<init>__int__int__void@localclasswithconstructor.LocalClassWithConstructor.1LocalClass
@@ -52,11 +75,12 @@
    ;; Object.this.Object.<init>();
    
    ;; ($1LocalClass.this.field = (($1LocalClass.this.localVar + a) + b));
-   (struct.set $localclasswithconstructor.LocalClassWithConstructor.1LocalClass $field@localclasswithconstructor.LocalClassWithConstructor.1LocalClass  (ref.null $localclasswithconstructor.LocalClassWithConstructor.1LocalClass) (i32.add (i32.add (struct.get $localclasswithconstructor.LocalClassWithConstructor.1LocalClass $localVar@localclasswithconstructor.LocalClassWithConstructor.1LocalClass  (ref.null $localclasswithconstructor.LocalClassWithConstructor.1LocalClass)) (local.get $a)) (local.get $b)))
+   (struct.set $localclasswithconstructor.LocalClassWithConstructor.1LocalClass $field@localclasswithconstructor.LocalClassWithConstructor.1LocalClass  (local.get $this) (i32.add (i32.add (struct.get $localclasswithconstructor.LocalClassWithConstructor.1LocalClass $localVar@localclasswithconstructor.LocalClassWithConstructor.1LocalClass  (local.get $this)) (local.get $a)) (local.get $b)))
   )
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__int__int__void@localclasswithconstructor.LocalClassWithConstructor.1LocalClass))
 
 ;;; LocalClass(int a)
 (func $m_<init>__int__void@localclasswithconstructor.LocalClassWithConstructor.1LocalClass
@@ -68,9 +92,17 @@
    ;; $1LocalClass.this.$1LocalClass.<init>(a,$1LocalClass.this.p);
    
    ;; ($1LocalClass.this.field = $1LocalClass.this.localVar);
-   (struct.set $localclasswithconstructor.LocalClassWithConstructor.1LocalClass $field@localclasswithconstructor.LocalClassWithConstructor.1LocalClass  (ref.null $localclasswithconstructor.LocalClassWithConstructor.1LocalClass) (struct.get $localclasswithconstructor.LocalClassWithConstructor.1LocalClass $localVar@localclasswithconstructor.LocalClassWithConstructor.1LocalClass  (ref.null $localclasswithconstructor.LocalClassWithConstructor.1LocalClass)))
+   (struct.set $localclasswithconstructor.LocalClassWithConstructor.1LocalClass $field@localclasswithconstructor.LocalClassWithConstructor.1LocalClass  (local.get $this) (struct.get $localclasswithconstructor.LocalClassWithConstructor.1LocalClass $localVar@localclasswithconstructor.LocalClassWithConstructor.1LocalClass  (local.get $this)))
   )
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__int__void@localclasswithconstructor.LocalClassWithConstructor.1LocalClass))
+
+;;; Code for localclasswithconstructor.LocalClassWithConstructor [vtable]
+ (global.set $localclasswithconstructor.LocalClassWithConstructor.vtable (struct.new_with_rtt $localclasswithconstructor.LocalClassWithConstructor.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__int__void@localclasswithconstructor.LocalClassWithConstructor) (rtt.canon $localclasswithconstructor.LocalClassWithConstructor.vtable)))
+;;; Code for localclasswithconstructor.LocalClassWithConstructor.1LocalClass [vtable]
+ (global.set $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable (struct.new_with_rtt $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable)))
+))
+(start $.runtime.init)
 

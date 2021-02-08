@@ -2,7 +2,17 @@
 
 ;;; CLASS  Equality
 (type $equality.Equality (struct
+ (field $vtable (ref null $equality.Equality.vtable))
 ))
+(type $equality.Equality.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_test__void (mut (ref $function.__$void)))
+))
+(global $equality.Equality.vtable (mut (ref null $equality.Equality.vtable)) (ref.null $equality.Equality.vtable))
 
 ;;; Equality()
 (func $m_<init>__void@equality.Equality
@@ -16,10 +26,13 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@equality.Equality))
 
 ;;; void Equality.test()
 (func $m_test__void@equality.Equality
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
+ (local $this (ref null $equality.Equality))
+ (local.set $this (ref.cast $java.lang.Object $equality.Equality (local.get $this.untyped) (global.get $equality.Equality.rtt)))
  (block $return.label
   (block
    (block
@@ -49,4 +62,10 @@
   )
  )
 )
+(global funcref (ref.func $m_test__void@equality.Equality))
+
+;;; Code for equality.Equality [vtable]
+ (global.set $equality.Equality.vtable (struct.new_with_rtt $equality.Equality.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__void@equality.Equality) (rtt.canon $equality.Equality.vtable)))
+))
+(start $.runtime.init)
 

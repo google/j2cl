@@ -2,7 +2,16 @@
 
 ;;; CLASS  Main
 (type $boundedtypesupercall.Main (struct
+ (field $vtable (ref null $boundedtypesupercall.Main.vtable))
 ))
+(type $boundedtypesupercall.Main.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $boundedtypesupercall.Main.vtable (mut (ref null $boundedtypesupercall.Main.vtable)) (ref.null $boundedtypesupercall.Main.vtable))
 
 ;;; Main()
 (func $m_<init>__void@boundedtypesupercall.Main
@@ -16,10 +25,21 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@boundedtypesupercall.Main))
 
 ;;; CLASS  Foo
 (type $boundedtypesupercall.Main.Foo (struct
+ (field $vtable (ref null $boundedtypesupercall.Main.Foo.vtable))
 ))
+(type $boundedtypesupercall.Main.Foo.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_foo__void (mut (ref $function.__$void)))
+))
+(global $boundedtypesupercall.Main.Foo.vtable (mut (ref null $boundedtypesupercall.Main.Foo.vtable)) (ref.null $boundedtypesupercall.Main.Foo.vtable))
 
 ;;; Foo(T foo)
 (func $m_<init>__java_lang_Object__void@boundedtypesupercall.Main.Foo
@@ -34,10 +54,22 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__java_lang_Object__void@boundedtypesupercall.Main.Foo))
 
 ;;; CLASS  Bar
 (type $boundedtypesupercall.Main.Bar (struct
+ (field $vtable (ref null $boundedtypesupercall.Main.Bar.vtable))
 ))
+(type $boundedtypesupercall.Main.Bar.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_getSomething__java_lang_Comparable (mut (ref $function.__$java.lang.Object)))
+ (field $m_doSomething__boundedtypesupercall_Main_Foo (mut (ref $function.__$boundedtypesupercall.Main.Foo)))
+))
+(global $boundedtypesupercall.Main.Bar.vtable (mut (ref null $boundedtypesupercall.Main.Bar.vtable)) (ref.null $boundedtypesupercall.Main.Bar.vtable))
 
 ;;; Bar()
 (func $m_<init>__void@boundedtypesupercall.Main.Bar
@@ -51,12 +83,15 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@boundedtypesupercall.Main.Bar))
 
 ;;; T Bar.getSomething()
 (func $m_getSomething__java_lang_Comparable@boundedtypesupercall.Main.Bar
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
+ (local $this (ref null $boundedtypesupercall.Main.Bar))
+ (local.set $this (ref.cast $java.lang.Object $boundedtypesupercall.Main.Bar (local.get $this.untyped) (global.get $boundedtypesupercall.Main.Bar.rtt)))
  (block $return.label
   (block
    ;; return null;
@@ -66,26 +101,40 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_getSomething__java_lang_Comparable@boundedtypesupercall.Main.Bar))
 
 ;;; Foo<T> Bar.doSomething()
 (func $m_doSomething__boundedtypesupercall_Main_Foo@boundedtypesupercall.Main.Bar
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $boundedtypesupercall.Main.Foo))
  (local $return.value (ref null $boundedtypesupercall.Main.Foo))
+ (local $this (ref null $boundedtypesupercall.Main.Bar))
+ (local.set $this (ref.cast $java.lang.Object $boundedtypesupercall.Main.Bar (local.get $this.untyped) (global.get $boundedtypesupercall.Main.Bar.rtt)))
  (block $return.label
   (block
    ;; return Bar.this.new $1.<init>(Bar.this.getSomething());
-   (local.set $return.value (call $m_<init>__java_lang_Comparable__void_$pp_boundedtypesupercall@boundedtypesupercall.Main.Bar.1 (struct.new_with_rtt $boundedtypesupercall.Main.Bar.1 (ref.null $boundedtypesupercall.Main.Bar) (global.get $boundedtypesupercall.Main.Bar.1.rtt))(ref.null $java.lang.Object)))
+   (local.set $return.value (call $m_<init>__java_lang_Comparable__void_$pp_boundedtypesupercall@boundedtypesupercall.Main.Bar.1 (struct.new_with_rtt $boundedtypesupercall.Main.Bar.1 (global.get $boundedtypesupercall.Main.Bar.1.vtable) (ref.null $boundedtypesupercall.Main.Bar) (global.get $boundedtypesupercall.Main.Bar.1.rtt))(call_ref (local.get $this)(struct.get $boundedtypesupercall.Main.Bar.vtable $m_getSomething__java_lang_Comparable (struct.get $boundedtypesupercall.Main.Bar $vtable(local.get $this))))))
    (br $return.label)
   )
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_doSomething__boundedtypesupercall_Main_Foo@boundedtypesupercall.Main.Bar))
 
 ;;; CLASS  <anonymous> extends Foo<T>
 (type $boundedtypesupercall.Main.Bar.1 (struct
+ (field $vtable (ref null $boundedtypesupercall.Main.Bar.1.vtable))
  (field $this@boundedtypesupercall.Main.Bar.1 (mut (ref null $boundedtypesupercall.Main.Bar)))
 ))
+(type $boundedtypesupercall.Main.Bar.1.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_foo__void (mut (ref $function.__$void)))
+))
+(global $boundedtypesupercall.Main.Bar.1.vtable (mut (ref null $boundedtypesupercall.Main.Bar.1.vtable)) (ref.null $boundedtypesupercall.Main.Bar.1.vtable))
 
 ;;; <anonymous> extends Foo<T>(T $_0)
 (func $m_<init>__java_lang_Comparable__void_$pp_boundedtypesupercall@boundedtypesupercall.Main.Bar.1
@@ -100,13 +149,26 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__java_lang_Comparable__void_$pp_boundedtypesupercall@boundedtypesupercall.Main.Bar.1))
 
 ;;; void <anonymous> extends Foo<T>.foo()
 (func $m_foo__void@boundedtypesupercall.Main.Bar.1
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
+ (local $this (ref null $boundedtypesupercall.Main.Bar.1))
+ (local.set $this (ref.cast $java.lang.Object $boundedtypesupercall.Main.Bar.1 (local.get $this.untyped) (global.get $boundedtypesupercall.Main.Bar.1.rtt)))
  (block $return.label
   (block
   )
  )
 )
+(global funcref (ref.func $m_foo__void@boundedtypesupercall.Main.Bar.1))
+
+;;; Code for boundedtypesupercall.Main [vtable]
+ (global.set $boundedtypesupercall.Main.vtable (struct.new_with_rtt $boundedtypesupercall.Main.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $boundedtypesupercall.Main.vtable)))
+;;; Code for boundedtypesupercall.Main.Bar [vtable]
+ (global.set $boundedtypesupercall.Main.Bar.vtable (struct.new_with_rtt $boundedtypesupercall.Main.Bar.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_getSomething__java_lang_Comparable@boundedtypesupercall.Main.Bar) (ref.func $m_doSomething__boundedtypesupercall_Main_Foo@boundedtypesupercall.Main.Bar) (rtt.canon $boundedtypesupercall.Main.Bar.vtable)))
+;;; Code for boundedtypesupercall.Main.Bar.1 [vtable]
+ (global.set $boundedtypesupercall.Main.Bar.1.vtable (struct.new_with_rtt $boundedtypesupercall.Main.Bar.1.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__void@boundedtypesupercall.Main.Bar.1) (rtt.canon $boundedtypesupercall.Main.Bar.1.vtable)))
+))
+(start $.runtime.init)
 

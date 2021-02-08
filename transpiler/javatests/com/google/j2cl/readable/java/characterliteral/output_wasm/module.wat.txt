@@ -2,7 +2,17 @@
 
 ;;; CLASS  CharacterLiteral
 (type $characterliteral.CharacterLiteral (struct
+ (field $vtable (ref null $characterliteral.CharacterLiteral.vtable))
 ))
+(type $characterliteral.CharacterLiteral.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_main__void (mut (ref $function.__$void)))
+))
+(global $characterliteral.CharacterLiteral.vtable (mut (ref null $characterliteral.CharacterLiteral.vtable)) (ref.null $characterliteral.CharacterLiteral.vtable))
 
 ;;; CharacterLiteral()
 (func $m_<init>__void@characterliteral.CharacterLiteral
@@ -16,11 +26,14 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@characterliteral.CharacterLiteral))
 
 ;;; void CharacterLiteral.main()
 (func $m_main__void@characterliteral.CharacterLiteral
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (local $a i32)
+ (local $this (ref null $characterliteral.CharacterLiteral))
+ (local.set $this (ref.cast $java.lang.Object $characterliteral.CharacterLiteral (local.get $this.untyped) (global.get $characterliteral.CharacterLiteral.rtt)))
  (block $return.label
   (block
    ;; char a = 32;
@@ -267,4 +280,10 @@
   )
  )
 )
+(global funcref (ref.func $m_main__void@characterliteral.CharacterLiteral))
+
+;;; Code for characterliteral.CharacterLiteral [vtable]
+ (global.set $characterliteral.CharacterLiteral.vtable (struct.new_with_rtt $characterliteral.CharacterLiteral.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_main__void@characterliteral.CharacterLiteral) (rtt.canon $characterliteral.CharacterLiteral.vtable)))
+))
+(start $.runtime.init)
 

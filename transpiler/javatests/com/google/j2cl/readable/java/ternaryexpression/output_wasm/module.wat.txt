@@ -2,7 +2,17 @@
 
 ;;; CLASS  TernaryExpression
 (type $ternaryexpression.TernaryExpression (struct
+ (field $vtable (ref null $ternaryexpression.TernaryExpression.vtable))
 ))
+(type $ternaryexpression.TernaryExpression.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_test__void (mut (ref $function.__$void)))
+))
+(global $ternaryexpression.TernaryExpression.vtable (mut (ref null $ternaryexpression.TernaryExpression.vtable)) (ref.null $ternaryexpression.TernaryExpression.vtable))
 
 ;;; TernaryExpression()
 (func $m_<init>__void@ternaryexpression.TernaryExpression
@@ -16,14 +26,17 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@ternaryexpression.TernaryExpression))
 
 ;;; void TernaryExpression.test()
 (func $m_test__void@ternaryexpression.TernaryExpression
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (local $a i32)
  (local $number i32)
  (local $b i32)
  (local $value i32)
+ (local $this (ref null $ternaryexpression.TernaryExpression))
+ (local.set $this (ref.cast $java.lang.Object $ternaryexpression.TernaryExpression (local.get $this.untyped) (global.get $ternaryexpression.TernaryExpression.rtt)))
  (block $return.label
   (block
    ;; boolean a = true;
@@ -41,4 +54,10 @@
   )
  )
 )
+(global funcref (ref.func $m_test__void@ternaryexpression.TernaryExpression))
+
+;;; Code for ternaryexpression.TernaryExpression [vtable]
+ (global.set $ternaryexpression.TernaryExpression.vtable (struct.new_with_rtt $ternaryexpression.TernaryExpression.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__void@ternaryexpression.TernaryExpression) (rtt.canon $ternaryexpression.TernaryExpression.vtable)))
+))
+(start $.runtime.init)
 

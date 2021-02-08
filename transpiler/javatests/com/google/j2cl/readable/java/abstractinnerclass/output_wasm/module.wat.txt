@@ -2,7 +2,16 @@
 
 ;;; CLASS  InnerClasses
 (type $abstractinnerclass.InnerClasses (struct
+ (field $vtable (ref null $abstractinnerclass.InnerClasses.vtable))
 ))
+(type $abstractinnerclass.InnerClasses.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $abstractinnerclass.InnerClasses.vtable (mut (ref null $abstractinnerclass.InnerClasses.vtable)) (ref.null $abstractinnerclass.InnerClasses.vtable))
 
 ;;; InnerClasses()
 (func $m_<init>__void@abstractinnerclass.InnerClasses
@@ -16,12 +25,23 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@abstractinnerclass.InnerClasses))
 
 ;;; INTERFACE  A
 
 ;;; CLASS  B
 (type $abstractinnerclass.InnerClasses.B (struct
+ (field $vtable (ref null $abstractinnerclass.InnerClasses.B.vtable))
 ))
+(type $abstractinnerclass.InnerClasses.B.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_bar__void_$pp_abstractinnerclass (mut (ref $function.__$void)))
+))
+(global $abstractinnerclass.InnerClasses.B.vtable (mut (ref null $abstractinnerclass.InnerClasses.B.vtable)) (ref.null $abstractinnerclass.InnerClasses.B.vtable))
 
 ;;; B()
 (func $m_<init>__void_$pp_abstractinnerclass@abstractinnerclass.InnerClasses.B
@@ -35,10 +55,13 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_abstractinnerclass@abstractinnerclass.InnerClasses.B))
 
 ;;; void B.bar()
 (func $m_bar__void_$pp_abstractinnerclass@abstractinnerclass.InnerClasses.B
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
+ (local $this (ref null $abstractinnerclass.InnerClasses.B))
+ (local.set $this (ref.cast $java.lang.Object $abstractinnerclass.InnerClasses.B (local.get $this.untyped) (global.get $abstractinnerclass.InnerClasses.B.rtt)))
  (block $return.label
   (block
    ;; B.this.foo();
@@ -46,11 +69,22 @@
   )
  )
 )
+(global funcref (ref.func $m_bar__void_$pp_abstractinnerclass@abstractinnerclass.InnerClasses.B))
 
 ;;; CLASS  C
 (type $abstractinnerclass.InnerClasses.C (struct
+ (field $vtable (ref null $abstractinnerclass.InnerClasses.C.vtable))
  (field $this@abstractinnerclass.InnerClasses.C (mut (ref null $abstractinnerclass.InnerClasses)))
 ))
+(type $abstractinnerclass.InnerClasses.C.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_bar__void_$pp_abstractinnerclass (mut (ref $function.__$void)))
+))
+(global $abstractinnerclass.InnerClasses.C.vtable (mut (ref null $abstractinnerclass.InnerClasses.C.vtable)) (ref.null $abstractinnerclass.InnerClasses.C.vtable))
 
 ;;; C()
 (func $m_<init>__void_$pp_abstractinnerclass@abstractinnerclass.InnerClasses.C
@@ -64,10 +98,13 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_abstractinnerclass@abstractinnerclass.InnerClasses.C))
 
 ;;; void C.bar()
 (func $m_bar__void_$pp_abstractinnerclass@abstractinnerclass.InnerClasses.C
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
+ (local $this (ref null $abstractinnerclass.InnerClasses.C))
+ (local.set $this (ref.cast $java.lang.Object $abstractinnerclass.InnerClasses.C (local.get $this.untyped) (global.get $abstractinnerclass.InnerClasses.C.rtt)))
  (block $return.label
   (block
    ;; C.this.foo();
@@ -75,4 +112,10 @@
   )
  )
 )
+(global funcref (ref.func $m_bar__void_$pp_abstractinnerclass@abstractinnerclass.InnerClasses.C))
+
+;;; Code for abstractinnerclass.InnerClasses [vtable]
+ (global.set $abstractinnerclass.InnerClasses.vtable (struct.new_with_rtt $abstractinnerclass.InnerClasses.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $abstractinnerclass.InnerClasses.vtable)))
+))
+(start $.runtime.init)
 

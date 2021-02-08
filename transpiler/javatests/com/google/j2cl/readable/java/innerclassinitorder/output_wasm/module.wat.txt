@@ -2,10 +2,34 @@
 
 ;;; CLASS  InnerClassInitOrder
 (type $innerclassinitorder.InnerClassInitOrder (struct
+ (field $vtable (ref null $innerclassinitorder.InnerClassInitOrder.vtable))
  (field $number@innerclassinitorder.InnerClassInitOrder (mut i32))
  (field $outer@innerclassinitorder.InnerClassInitOrder (mut (ref null $innerclassinitorder.InnerClassInitOrder.Outer)))
  (field $outerIsSuper@innerclassinitorder.InnerClassInitOrder (mut (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper)))
 ))
+(type $innerclassinitorder.InnerClassInitOrder.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_testOuterThisFromSuperCall__void (mut (ref $function.__$void)))
+ (field $m_testOuterThisFromThisCall__void (mut (ref $function.__$void)))
+ (field $m_testExtendsNested__void (mut (ref $function.__$void)))
+ (field $m_testExtendsNestedWithGenerics__void (mut (ref $function.__$void)))
+ (field $m_testInnerClassCtors__void (mut (ref $function.__$void)))
+ (field $m_testInnerClassInitialization__void (mut (ref $function.__$void)))
+ (field $m_testInnerClassLoop__void (mut (ref $function.__$void)))
+ (field $m_testOuterIsNotSuper__void (mut (ref $function.__$void)))
+ (field $m_testOuterIsNotSuperAnon__void (mut (ref $function.__$void)))
+ (field $m_testQualifiedSuperCall__void (mut (ref $function.__$void)))
+ (field $m_testQualifiedSuperCallAnon__void (mut (ref $function.__$void)))
+ (field $m_testSuperDispatch__void (mut (ref $function.__$void)))
+ (field $m_testUnqualifiedAlloc__void (mut (ref $function.__$void)))
+ (field $m_testUnqualifiedSuperCall__void (mut (ref $function.__$void)))
+ (field $m_testUnqualifiedSuperCallAnon__void (mut (ref $function.__$void)))
+))
+(global $innerclassinitorder.InnerClassInitOrder.vtable (mut (ref null $innerclassinitorder.InnerClassInitOrder.vtable)) (ref.null $innerclassinitorder.InnerClassInitOrder.vtable))
 
 ;;; InnerClassInitOrder()
 (func $m_<init>__void@innerclassinitorder.InnerClassInitOrder
@@ -19,42 +43,51 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@innerclassinitorder.InnerClassInitOrder))
 
 ;;; void InnerClassInitOrder.testOuterThisFromSuperCall()
 (func $m_testOuterThisFromSuperCall__void@innerclassinitorder.InnerClassInitOrder
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
+ (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
+ (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
  (block $return.label
   (block
    ;; InnerClassInitOrder.this.new OuterRefFromSuperCtorCall.<init>();
-   (drop (call $m_<init>__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall (ref.null $innerclassinitorder.InnerClassInitOrder) (global.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.rtt))))
+   (drop (call $m_<init>__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall (global.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.vtable) (ref.null $innerclassinitorder.InnerClassInitOrder) (global.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.rtt))))
    ;; assert (InnerClassInitOrder.this.number == 100);
    ;; unimplemented statement AssertStatement
   )
  )
 )
+(global funcref (ref.func $m_testOuterThisFromSuperCall__void@innerclassinitorder.InnerClassInitOrder))
 
 ;;; void InnerClassInitOrder.testOuterThisFromThisCall()
 (func $m_testOuterThisFromThisCall__void@innerclassinitorder.InnerClassInitOrder
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
+ (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
+ (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
  (block $return.label
   (block
    ;; InnerClassInitOrder.this.new OuterRefFromThisCtorCall.<init>();
-   (drop (call $m_<init>__void@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall (ref.null $innerclassinitorder.InnerClassInitOrder) (global.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.rtt))))
+   (drop (call $m_<init>__void@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall (global.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.vtable) (ref.null $innerclassinitorder.InnerClassInitOrder) (global.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.rtt))))
    ;; assert (InnerClassInitOrder.this.number == 1100);
    ;; unimplemented statement AssertStatement
   )
  )
 )
+(global funcref (ref.func $m_testOuterThisFromThisCall__void@innerclassinitorder.InnerClassInitOrder))
 
 ;;; void InnerClassInitOrder.testExtendsNested()
 (func $m_testExtendsNested__void@innerclassinitorder.InnerClassInitOrder
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (local $o (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter))
+ (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
+ (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
  (block $return.label
   (block
    ;; ESOuter o = new ESOuter.<init>();
    
-   (local.set $o (call $m_<init>__void_$p_innerclassinitorder_InnerClassInitOrder_ESOuter@innerclassinitorder.InnerClassInitOrder.ESOuter (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.ESOuter (global.get $innerclassinitorder.InnerClassInitOrder.ESOuter.rtt))))
+   (local.set $o (call $m_<init>__void_$p_innerclassinitorder_InnerClassInitOrder_ESOuter@innerclassinitorder.InnerClassInitOrder.ESOuter (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.ESOuter (global.get $innerclassinitorder.InnerClassInitOrder.ESOuter.vtable) (global.get $innerclassinitorder.InnerClassInitOrder.ESOuter.rtt))))
    ;; assert (1 == o.new ESInner.<init>().value);
    ;; unimplemented statement AssertStatement
    ;; assert (2 == o.new ESInner.<init>(2).value);
@@ -66,16 +99,19 @@
   )
  )
 )
+(global funcref (ref.func $m_testExtendsNested__void@innerclassinitorder.InnerClassInitOrder))
 
 ;;; void InnerClassInitOrder.testExtendsNestedWithGenerics()
 (func $m_testExtendsNestedWithGenerics__void@innerclassinitorder.InnerClassInitOrder
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (local $o (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter))
+ (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
+ (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
  (block $return.label
   (block
    ;; ESWGOuter<String> o = new ESWGOuter.<init>();
    
-   (local.set $o (call $m_<init>__void_$p_innerclassinitorder_InnerClassInitOrder_ESWGOuter@innerclassinitorder.InnerClassInitOrder.ESWGOuter (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.ESWGOuter (global.get $innerclassinitorder.InnerClassInitOrder.ESWGOuter.rtt))))
+   (local.set $o (call $m_<init>__void_$p_innerclassinitorder_InnerClassInitOrder_ESWGOuter@innerclassinitorder.InnerClassInitOrder.ESWGOuter (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.ESWGOuter (global.get $innerclassinitorder.InnerClassInitOrder.ESWGOuter.vtable) (global.get $innerclassinitorder.InnerClassInitOrder.ESWGOuter.rtt))))
    ;; assert (1 == o.new ESWGInner.<init>().value);
    ;; unimplemented statement AssertStatement
    ;; assert (2 == o.new ESWGInner.<init>(2).value);
@@ -87,24 +123,27 @@
   )
  )
 )
+(global funcref (ref.func $m_testExtendsNestedWithGenerics__void@innerclassinitorder.InnerClassInitOrder))
 
 ;;; void InnerClassInitOrder.testInnerClassCtors()
 (func $m_testInnerClassCtors__void@innerclassinitorder.InnerClassInitOrder
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (local $p1 (ref null $innerclassinitorder.InnerClassInitOrder.P1))
  (local $p2 (ref null $innerclassinitorder.InnerClassInitOrder.P1.P2))
+ (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
+ (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
  (block $return.label
   (block
    ;; P1<?> p1 = new P1.<init>();
    
-   (local.set $p1 (call $m_<init>__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.P1 (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.P1 (i32.const 0) (global.get $innerclassinitorder.InnerClassInitOrder.P1.rtt))))
+   (local.set $p1 (call $m_<init>__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.P1 (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.P1 (global.get $innerclassinitorder.InnerClassInitOrder.P1.vtable) (i32.const 0) (global.get $innerclassinitorder.InnerClassInitOrder.P1.rtt))))
    ;; assert (1 == p1.value);
    ;; unimplemented statement AssertStatement
    ;; assert (2 == new P1.<init>(2).value);
    ;; unimplemented statement AssertStatement
    ;; P2<?, ?> p2 = p1.new P2.<init>();
    
-   (local.set $p2 (call $m_<init>__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.P1.P2 (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.P1.P2 (i32.const 0) (ref.null $innerclassinitorder.InnerClassInitOrder.P1) (global.get $innerclassinitorder.InnerClassInitOrder.P1.P2.rtt))))
+   (local.set $p2 (call $m_<init>__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.P1.P2 (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.P1.P2 (global.get $innerclassinitorder.InnerClassInitOrder.P1.P2.vtable) (i32.const 0) (ref.null $innerclassinitorder.InnerClassInitOrder.P1) (global.get $innerclassinitorder.InnerClassInitOrder.P1.P2.rtt))))
    ;; assert (1 == p2.value);
    ;; unimplemented statement AssertStatement
    ;; assert (2 == p1.new P2.<init>(2).value);
@@ -116,29 +155,35 @@
   )
  )
 )
+(global funcref (ref.func $m_testInnerClassCtors__void@innerclassinitorder.InnerClassInitOrder))
 
 ;;; void InnerClassInitOrder.testInnerClassInitialization()
 (func $m_testInnerClassInitialization__void@innerclassinitorder.InnerClassInitOrder
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
+ (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
+ (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
  (block $return.label
   (block
    ;; InnerClassInitOrder.this.new InnerClass.<init>();
-   (drop (call $m_<init>__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.InnerClass (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.InnerClass (ref.null $innerclassinitorder.InnerClassInitOrder) (global.get $innerclassinitorder.InnerClassInitOrder.InnerClass.rtt))))
+   (drop (call $m_<init>__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.InnerClass (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.InnerClass (global.get $innerclassinitorder.InnerClassInitOrder.InnerClass.vtable) (ref.null $innerclassinitorder.InnerClassInitOrder) (global.get $innerclassinitorder.InnerClassInitOrder.InnerClass.rtt))))
    ;; assert (InnerClassInitOrder.this.number == 1111);
    ;; unimplemented statement AssertStatement
   )
  )
 )
+(global funcref (ref.func $m_testInnerClassInitialization__void@innerclassinitorder.InnerClassInitOrder))
 
 ;;; void InnerClassInitOrder.testInnerClassLoop()
 (func $m_testInnerClassLoop__void@innerclassinitorder.InnerClassInitOrder
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (local $results (ref null $java.lang.Object))
  (local $i i32)
  (local $ap (ref null $innerclassinitorder.InnerClassInitOrder.1AddNumber))
  (local $$array (ref null $java.lang.Object))
  (local $$index f64)
  (local $theAp (ref null $innerclassinitorder.InnerClassInitOrder.1AddNumber))
+ (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
+ (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
  (block $return.label
   (block
    ;; AddNumber[] results = new AddNumber[10];
@@ -155,7 +200,7 @@
       (block
        ;; AddNumber ap = InnerClassInitOrder.this.new $1.<init>(i);
        
-       (local.set $ap (call $m_<init>__int__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.1 (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.1 (ref.null $innerclassinitorder.InnerClassInitOrder) (i32.const 0) (ref.null $innerclassinitorder.InnerClassInitOrder) (global.get $innerclassinitorder.InnerClassInitOrder.1.rtt))(local.get $i)))
+       (local.set $ap (call $m_<init>__int__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.1 (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.1 (global.get $innerclassinitorder.InnerClassInitOrder.1.vtable) (ref.null $innerclassinitorder.InnerClassInitOrder) (i32.const 0) (ref.null $innerclassinitorder.InnerClassInitOrder) (global.get $innerclassinitorder.InnerClassInitOrder.1.rtt))(local.get $i)))
        ;; (results[i] = ap);
        
       )
@@ -180,7 +225,7 @@
        (local.set $theAp (ref.null $innerclassinitorder.InnerClassInitOrder.1AddNumber))
        (block
         ;; theAp.act();
-        
+        (call_ref (local.get $theAp)(struct.get $innerclassinitorder.InnerClassInitOrder.1AddNumber.vtable $m_act__void (struct.get $innerclassinitorder.InnerClassInitOrder.1AddNumber $vtable(local.get $theAp))))
        )
       )
      )
@@ -194,70 +239,85 @@
   )
  )
 )
+(global funcref (ref.func $m_testInnerClassLoop__void@innerclassinitorder.InnerClassInitOrder))
 
 ;;; void InnerClassInitOrder.testOuterIsNotSuper()
 (func $m_testOuterIsNotSuper__void@innerclassinitorder.InnerClassInitOrder
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (local $x (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper))
+ (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
+ (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
  (block $return.label
   (block
    ;; OuterIsNotSuper x = InnerClassInitOrder.this.outerIsSuper.new OuterIsNotSuper.<init>();
    
-   (local.set $x (call $m_<init>__void@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (ref.null $innerclassinitorder.InnerClassInitOrder.Outer) (global.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper.rtt))))
+   (local.set $x (call $m_<init>__void@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (global.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper.vtable) (ref.null $innerclassinitorder.InnerClassInitOrder.Outer) (global.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper.rtt))))
    ;; assert (2 == x.getValue());
    ;; unimplemented statement AssertStatement
   )
  )
 )
+(global funcref (ref.func $m_testOuterIsNotSuper__void@innerclassinitorder.InnerClassInitOrder))
 
 ;;; void InnerClassInitOrder.testOuterIsNotSuperAnon()
 (func $m_testOuterIsNotSuperAnon__void@innerclassinitorder.InnerClassInitOrder
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (local $x (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper))
+ (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
+ (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
  (block $return.label
   (block
    ;; OuterIsNotSuper x = InnerClassInitOrder.this.new $2.<init>(InnerClassInitOrder.this.outerIsSuper);
    
-   (local.set $x (call $m_<init>__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.2 (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.2 (ref.null $innerclassinitorder.InnerClassInitOrder.Outer) (ref.null $innerclassinitorder.InnerClassInitOrder) (global.get $innerclassinitorder.InnerClassInitOrder.2.rtt))(struct.get $innerclassinitorder.InnerClassInitOrder $outerIsSuper@innerclassinitorder.InnerClassInitOrder  (ref.null $innerclassinitorder.InnerClassInitOrder))))
+   (local.set $x (call $m_<init>__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.2 (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.2 (global.get $innerclassinitorder.InnerClassInitOrder.2.vtable) (ref.null $innerclassinitorder.InnerClassInitOrder.Outer) (ref.null $innerclassinitorder.InnerClassInitOrder) (global.get $innerclassinitorder.InnerClassInitOrder.2.rtt))(struct.get $innerclassinitorder.InnerClassInitOrder $outerIsSuper@innerclassinitorder.InnerClassInitOrder  (local.get $this))))
    ;; assert (2 == x.getValue());
    ;; unimplemented statement AssertStatement
   )
  )
 )
+(global funcref (ref.func $m_testOuterIsNotSuperAnon__void@innerclassinitorder.InnerClassInitOrder))
 
 ;;; void InnerClassInitOrder.testQualifiedSuperCall()
 (func $m_testQualifiedSuperCall__void@innerclassinitorder.InnerClassInitOrder
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (local $x (ref null $innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall))
+ (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
+ (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
  (block $return.label
   (block
    ;; TestQualifiedSuperCall x = new TestQualifiedSuperCall.<init>();
    
-   (local.set $x (call $m_<init>__void@innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall (ref.null $innerclassinitorder.InnerClassInitOrder.Outer) (global.get $innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall.rtt))))
+   (local.set $x (call $m_<init>__void@innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall (global.get $innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall.vtable) (ref.null $innerclassinitorder.InnerClassInitOrder.Outer) (global.get $innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall.rtt))))
    ;; assert (2 == x.getValue());
    ;; unimplemented statement AssertStatement
   )
  )
 )
+(global funcref (ref.func $m_testQualifiedSuperCall__void@innerclassinitorder.InnerClassInitOrder))
 
 ;;; void InnerClassInitOrder.testQualifiedSuperCallAnon()
 (func $m_testQualifiedSuperCallAnon__void@innerclassinitorder.InnerClassInitOrder
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (local $x (ref null $innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall))
+ (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
+ (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
  (block $return.label
   (block
    ;; TestQualifiedSuperCall x = InnerClassInitOrder.this.new $3.<init>();
    
-   (local.set $x (call $m_<init>__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.3 (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.3 (ref.null $innerclassinitorder.InnerClassInitOrder.Outer) (ref.null $innerclassinitorder.InnerClassInitOrder) (global.get $innerclassinitorder.InnerClassInitOrder.3.rtt))))
+   (local.set $x (call $m_<init>__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.3 (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.3 (global.get $innerclassinitorder.InnerClassInitOrder.3.vtable) (ref.null $innerclassinitorder.InnerClassInitOrder.Outer) (ref.null $innerclassinitorder.InnerClassInitOrder) (global.get $innerclassinitorder.InnerClassInitOrder.3.rtt))))
    ;; assert (2 == x.getValue());
    ;; unimplemented statement AssertStatement
   )
  )
 )
+(global funcref (ref.func $m_testQualifiedSuperCallAnon__void@innerclassinitorder.InnerClassInitOrder))
 
 ;;; void InnerClassInitOrder.testSuperDispatch()
 (func $m_testSuperDispatch__void@innerclassinitorder.InnerClassInitOrder
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
+ (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
+ (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
  (block $return.label
   (block
    ;; assert (1 == InnerClassInitOrder.this.outerIsSuper.checkDispatchFromSub1());
@@ -267,51 +327,61 @@
   )
  )
 )
+(global funcref (ref.func $m_testSuperDispatch__void@innerclassinitorder.InnerClassInitOrder))
 
 ;;; void InnerClassInitOrder.testUnqualifiedAlloc()
 (func $m_testUnqualifiedAlloc__void@innerclassinitorder.InnerClassInitOrder
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (local $x (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper))
+ (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
+ (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
  (block $return.label
   (block
    ;; OuterIsNotSuper x = InnerClassInitOrder.this.outerIsSuper.unqualifiedAlloc();
    
-   (local.set $x (ref.null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper))
+   (local.set $x (call_ref (struct.get $innerclassinitorder.InnerClassInitOrder $outerIsSuper@innerclassinitorder.InnerClassInitOrder  (local.get $this))(struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.vtable $m_unqualifiedAlloc__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper (struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper $vtable(struct.get $innerclassinitorder.InnerClassInitOrder $outerIsSuper@innerclassinitorder.InnerClassInitOrder  (local.get $this))))))
    ;; assert (2 == x.getValue());
    ;; unimplemented statement AssertStatement
   )
  )
 )
+(global funcref (ref.func $m_testUnqualifiedAlloc__void@innerclassinitorder.InnerClassInitOrder))
 
 ;;; void InnerClassInitOrder.testUnqualifiedSuperCall()
 (func $m_testUnqualifiedSuperCall__void@innerclassinitorder.InnerClassInitOrder
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (local $x (ref null $innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall))
+ (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
+ (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
  (block $return.label
   (block
    ;; TestUnqualifiedSuperCall x = InnerClassInitOrder.this.outerIsSuper.new TestUnqualifiedSuperCall.<init>();
    
-   (local.set $x (call $m_<init>__void@innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall (ref.null $innerclassinitorder.InnerClassInitOrder.Outer) (ref.null $innerclassinitorder.InnerClassInitOrder.Outer) (global.get $innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall.rtt))))
+   (local.set $x (call $m_<init>__void@innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall (global.get $innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall.vtable) (ref.null $innerclassinitorder.InnerClassInitOrder.Outer) (ref.null $innerclassinitorder.InnerClassInitOrder.Outer) (global.get $innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall.rtt))))
    ;; assert (2 == x.getValue());
    ;; unimplemented statement AssertStatement
   )
  )
 )
+(global funcref (ref.func $m_testUnqualifiedSuperCall__void@innerclassinitorder.InnerClassInitOrder))
 
 ;;; void InnerClassInitOrder.testUnqualifiedSuperCallAnon()
 (func $m_testUnqualifiedSuperCallAnon__void@innerclassinitorder.InnerClassInitOrder
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (local $x (ref null $innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall))
+ (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
+ (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
  (block $return.label
   (block
    ;; TestUnqualifiedSuperCall x = InnerClassInitOrder.this.new $4.<init>(InnerClassInitOrder.this.outerIsSuper);
    
-   (local.set $x (call $m_<init>__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.4 (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.4 (ref.null $innerclassinitorder.InnerClassInitOrder.Outer) (ref.null $innerclassinitorder.InnerClassInitOrder.Outer) (ref.null $innerclassinitorder.InnerClassInitOrder) (global.get $innerclassinitorder.InnerClassInitOrder.4.rtt))(struct.get $innerclassinitorder.InnerClassInitOrder $outerIsSuper@innerclassinitorder.InnerClassInitOrder  (ref.null $innerclassinitorder.InnerClassInitOrder))))
+   (local.set $x (call $m_<init>__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.4 (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.4 (global.get $innerclassinitorder.InnerClassInitOrder.4.vtable) (ref.null $innerclassinitorder.InnerClassInitOrder.Outer) (ref.null $innerclassinitorder.InnerClassInitOrder.Outer) (ref.null $innerclassinitorder.InnerClassInitOrder) (global.get $innerclassinitorder.InnerClassInitOrder.4.rtt))(struct.get $innerclassinitorder.InnerClassInitOrder $outerIsSuper@innerclassinitorder.InnerClassInitOrder  (local.get $this))))
    ;; assert (2 == x.getValue());
    ;; unimplemented statement AssertStatement
   )
  )
 )
+(global funcref (ref.func $m_testUnqualifiedSuperCallAnon__void@innerclassinitorder.InnerClassInitOrder))
 
 ;;; void InnerClassInitOrder.main(String... args)
 (func $m_main__arrayOf_java_lang_String__void@innerclassinitorder.InnerClassInitOrder
@@ -321,44 +391,54 @@
   (block
    ;; InnerClassInitOrder m = new InnerClassInitOrder.<init>();
    
-   (local.set $m (call $m_<init>__void@innerclassinitorder.InnerClassInitOrder (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder (i32.const 0) (ref.null $innerclassinitorder.InnerClassInitOrder.Outer) (ref.null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper) (global.get $innerclassinitorder.InnerClassInitOrder.rtt))))
+   (local.set $m (call $m_<init>__void@innerclassinitorder.InnerClassInitOrder (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder (global.get $innerclassinitorder.InnerClassInitOrder.vtable) (i32.const 0) (ref.null $innerclassinitorder.InnerClassInitOrder.Outer) (ref.null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper) (global.get $innerclassinitorder.InnerClassInitOrder.rtt))))
    ;; m.testOuterThisFromSuperCall();
-   
+   (call_ref (local.get $m)(struct.get $innerclassinitorder.InnerClassInitOrder.vtable $m_testOuterThisFromSuperCall__void (struct.get $innerclassinitorder.InnerClassInitOrder $vtable(local.get $m))))
    ;; m.testOuterThisFromThisCall();
-   
+   (call_ref (local.get $m)(struct.get $innerclassinitorder.InnerClassInitOrder.vtable $m_testOuterThisFromThisCall__void (struct.get $innerclassinitorder.InnerClassInitOrder $vtable(local.get $m))))
    ;; m.testExtendsNested();
-   
+   (call_ref (local.get $m)(struct.get $innerclassinitorder.InnerClassInitOrder.vtable $m_testExtendsNested__void (struct.get $innerclassinitorder.InnerClassInitOrder $vtable(local.get $m))))
    ;; m.testExtendsNestedWithGenerics();
-   
+   (call_ref (local.get $m)(struct.get $innerclassinitorder.InnerClassInitOrder.vtable $m_testExtendsNestedWithGenerics__void (struct.get $innerclassinitorder.InnerClassInitOrder $vtable(local.get $m))))
    ;; m.testInnerClassCtors();
-   
+   (call_ref (local.get $m)(struct.get $innerclassinitorder.InnerClassInitOrder.vtable $m_testInnerClassCtors__void (struct.get $innerclassinitorder.InnerClassInitOrder $vtable(local.get $m))))
    ;; m.testInnerClassInitialization();
-   
+   (call_ref (local.get $m)(struct.get $innerclassinitorder.InnerClassInitOrder.vtable $m_testInnerClassInitialization__void (struct.get $innerclassinitorder.InnerClassInitOrder $vtable(local.get $m))))
    ;; m.testInnerClassLoop();
-   
+   (call_ref (local.get $m)(struct.get $innerclassinitorder.InnerClassInitOrder.vtable $m_testInnerClassLoop__void (struct.get $innerclassinitorder.InnerClassInitOrder $vtable(local.get $m))))
    ;; m.testOuterIsNotSuper();
-   
+   (call_ref (local.get $m)(struct.get $innerclassinitorder.InnerClassInitOrder.vtable $m_testOuterIsNotSuper__void (struct.get $innerclassinitorder.InnerClassInitOrder $vtable(local.get $m))))
    ;; m.testOuterIsNotSuperAnon();
-   
+   (call_ref (local.get $m)(struct.get $innerclassinitorder.InnerClassInitOrder.vtable $m_testOuterIsNotSuperAnon__void (struct.get $innerclassinitorder.InnerClassInitOrder $vtable(local.get $m))))
    ;; m.testQualifiedSuperCall();
-   
+   (call_ref (local.get $m)(struct.get $innerclassinitorder.InnerClassInitOrder.vtable $m_testQualifiedSuperCall__void (struct.get $innerclassinitorder.InnerClassInitOrder $vtable(local.get $m))))
    ;; m.testQualifiedSuperCallAnon();
-   
+   (call_ref (local.get $m)(struct.get $innerclassinitorder.InnerClassInitOrder.vtable $m_testQualifiedSuperCallAnon__void (struct.get $innerclassinitorder.InnerClassInitOrder $vtable(local.get $m))))
    ;; m.testSuperDispatch();
-   
+   (call_ref (local.get $m)(struct.get $innerclassinitorder.InnerClassInitOrder.vtable $m_testSuperDispatch__void (struct.get $innerclassinitorder.InnerClassInitOrder $vtable(local.get $m))))
    ;; m.testUnqualifiedAlloc();
-   
+   (call_ref (local.get $m)(struct.get $innerclassinitorder.InnerClassInitOrder.vtable $m_testUnqualifiedAlloc__void (struct.get $innerclassinitorder.InnerClassInitOrder $vtable(local.get $m))))
    ;; m.testUnqualifiedSuperCall();
-   
+   (call_ref (local.get $m)(struct.get $innerclassinitorder.InnerClassInitOrder.vtable $m_testUnqualifiedSuperCall__void (struct.get $innerclassinitorder.InnerClassInitOrder $vtable(local.get $m))))
    ;; m.testUnqualifiedSuperCallAnon();
-   
+   (call_ref (local.get $m)(struct.get $innerclassinitorder.InnerClassInitOrder.vtable $m_testUnqualifiedSuperCallAnon__void (struct.get $innerclassinitorder.InnerClassInitOrder $vtable(local.get $m))))
   )
  )
 )
+(global funcref (ref.func $m_main__arrayOf_java_lang_String__void@innerclassinitorder.InnerClassInitOrder))
 
 ;;; CLASS  OuterRefFromSuperCtorBase
 (type $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase (struct
+ (field $vtable (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase.vtable))
 ))
+(type $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase.vtable (mut (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase.vtable)) (ref.null $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase.vtable))
 
 ;;; OuterRefFromSuperCtorBase(Object o)
 (func $m_<init>__java_lang_Object__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase
@@ -370,16 +450,26 @@
    ;; Object.this.Object.<init>();
    
    ;; o.toString();
-   (drop (ref.null $java.lang.String))
+   (drop (call_ref (local.get $o)(struct.get $java.lang.Object.vtable $m_toString__java_lang_String (struct.get $java.lang.Object $vtable(local.get $o)))))
   )
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__java_lang_Object__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase))
 
 ;;; CLASS  OuterRefFromSuperCtorCall
 (type $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall (struct
+ (field $vtable (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.vtable))
  (field $this@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall (mut (ref null $innerclassinitorder.InnerClassInitOrder)))
 ))
+(type $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.vtable (mut (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.vtable)) (ref.null $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.vtable))
 
 ;;; OuterRefFromSuperCtorCall()
 (func $m_<init>__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall
@@ -393,11 +483,21 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall))
 
 ;;; CLASS  <anonymous> extends Object
 (type $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1 (struct
+ (field $vtable (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1.vtable))
  (field $this@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1 (mut (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall)))
 ))
+(type $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1.vtable (mut (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1.vtable)) (ref.null $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1.vtable))
 
 ;;; <anonymous> extends Object()
 (func $m_<init>__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1
@@ -411,16 +511,19 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1))
 
 ;;; String <anonymous> extends Object.toString()
 (func $m_toString__java_lang_String@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))
+ (local $this (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1))
+ (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1 (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1.rtt)))
  (block $return.label
   (block
    ;; ($1.this.this.this.number = ($1.this.this.this.number + 100));
-   (struct.set $innerclassinitorder.InnerClassInitOrder $number@innerclassinitorder.InnerClassInitOrder  (struct.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall $this@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall  (struct.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1 $this@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1  (ref.null $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1))) (i32.add (struct.get $innerclassinitorder.InnerClassInitOrder $number@innerclassinitorder.InnerClassInitOrder  (struct.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall $this@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall  (struct.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1 $this@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1  (ref.null $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1)))) (i32.const 100)))
+   (struct.set $innerclassinitorder.InnerClassInitOrder $number@innerclassinitorder.InnerClassInitOrder  (struct.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall $this@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall  (struct.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1 $this@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1  (local.get $this))) (i32.add (struct.get $innerclassinitorder.InnerClassInitOrder $number@innerclassinitorder.InnerClassInitOrder  (struct.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall $this@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall  (struct.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1 $this@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1  (local.get $this)))) (i32.const 100)))
    ;; return "";
    (local.set $return.value (ref.null $java.lang.String))
    (br $return.label)
@@ -428,11 +531,21 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_toString__java_lang_String@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1))
 
 ;;; CLASS  OuterRefFromThisCtorCall
 (type $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall (struct
+ (field $vtable (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.vtable))
  (field $this@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall (mut (ref null $innerclassinitorder.InnerClassInitOrder)))
 ))
+(type $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.vtable (mut (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.vtable)) (ref.null $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.vtable))
 
 ;;; OuterRefFromThisCtorCall(Object object)
 (func $m_<init>__java_lang_Object__void@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall
@@ -447,6 +560,7 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__java_lang_Object__void@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall))
 
 ;;; OuterRefFromThisCtorCall()
 (func $m_<init>__void@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall
@@ -460,11 +574,21 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall))
 
 ;;; CLASS  <anonymous> extends Object
 (type $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1 (struct
+ (field $vtable (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1.vtable))
  (field $this@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1 (mut (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall)))
 ))
+(type $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1.vtable (mut (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1.vtable)) (ref.null $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1.vtable))
 
 ;;; <anonymous> extends Object()
 (func $m_<init>__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1
@@ -478,16 +602,19 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1))
 
 ;;; String <anonymous> extends Object.toString()
 (func $m_toString__java_lang_String@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))
+ (local $this (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1))
+ (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1 (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1.rtt)))
  (block $return.label
   (block
    ;; ($1.this.this.this.number = ($1.this.this.this.number + 1000));
-   (struct.set $innerclassinitorder.InnerClassInitOrder $number@innerclassinitorder.InnerClassInitOrder  (struct.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall $this@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall  (struct.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1 $this@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1  (ref.null $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1))) (i32.add (struct.get $innerclassinitorder.InnerClassInitOrder $number@innerclassinitorder.InnerClassInitOrder  (struct.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall $this@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall  (struct.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1 $this@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1  (ref.null $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1)))) (i32.const 1000)))
+   (struct.set $innerclassinitorder.InnerClassInitOrder $number@innerclassinitorder.InnerClassInitOrder  (struct.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall $this@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall  (struct.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1 $this@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1  (local.get $this))) (i32.add (struct.get $innerclassinitorder.InnerClassInitOrder $number@innerclassinitorder.InnerClassInitOrder  (struct.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall $this@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall  (struct.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1 $this@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1  (local.get $this)))) (i32.const 1000)))
    ;; return "";
    (local.set $return.value (ref.null $java.lang.String))
    (br $return.label)
@@ -495,11 +622,22 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_toString__java_lang_String@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1))
 
 ;;; CLASS  InnerClass
 (type $innerclassinitorder.InnerClassInitOrder.InnerClass (struct
+ (field $vtable (ref null $innerclassinitorder.InnerClassInitOrder.InnerClass.vtable))
  (field $this@innerclassinitorder.InnerClassInitOrder.InnerClass (mut (ref null $innerclassinitorder.InnerClassInitOrder)))
 ))
+(type $innerclassinitorder.InnerClassInitOrder.InnerClass.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_callInner__void_$pp_innerclassinitorder (mut (ref $function.__$void)))
+))
+(global $innerclassinitorder.InnerClassInitOrder.InnerClass.vtable (mut (ref null $innerclassinitorder.InnerClassInitOrder.InnerClass.vtable)) (ref.null $innerclassinitorder.InnerClassInitOrder.InnerClass.vtable))
 
 ;;; InnerClass()
 (func $m_<init>__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.InnerClass
@@ -513,24 +651,38 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.InnerClass))
 
 ;;; void InnerClass.callInner()
 (func $m_callInner__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.InnerClass
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
+ (local $this (ref null $innerclassinitorder.InnerClassInitOrder.InnerClass))
+ (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder.InnerClass (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.InnerClass.rtt)))
  (block $return.label
   (block
    ;; (InnerClass.this.this.number = (InnerClass.this.this.number + 1));
-   (struct.set $innerclassinitorder.InnerClassInitOrder $number@innerclassinitorder.InnerClassInitOrder  (struct.get $innerclassinitorder.InnerClassInitOrder.InnerClass $this@innerclassinitorder.InnerClassInitOrder.InnerClass  (ref.null $innerclassinitorder.InnerClassInitOrder.InnerClass)) (i32.add (struct.get $innerclassinitorder.InnerClassInitOrder $number@innerclassinitorder.InnerClassInitOrder  (struct.get $innerclassinitorder.InnerClassInitOrder.InnerClass $this@innerclassinitorder.InnerClassInitOrder.InnerClass  (ref.null $innerclassinitorder.InnerClassInitOrder.InnerClass))) (i32.const 1)))
+   (struct.set $innerclassinitorder.InnerClassInitOrder $number@innerclassinitorder.InnerClassInitOrder  (struct.get $innerclassinitorder.InnerClassInitOrder.InnerClass $this@innerclassinitorder.InnerClassInitOrder.InnerClass  (local.get $this)) (i32.add (struct.get $innerclassinitorder.InnerClassInitOrder $number@innerclassinitorder.InnerClassInitOrder  (struct.get $innerclassinitorder.InnerClassInitOrder.InnerClass $this@innerclassinitorder.InnerClassInitOrder.InnerClass  (local.get $this))) (i32.const 1)))
    ;; InnerClass.this.new $1ReallyInnerClass.<init>();
-   (drop (call $m_<init>__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass (ref.null $innerclassinitorder.InnerClassInitOrder.InnerClass) (global.get $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass.rtt))))
+   (drop (call $m_<init>__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass (global.get $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass.vtable) (ref.null $innerclassinitorder.InnerClassInitOrder.InnerClass) (global.get $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass.rtt))))
   )
  )
 )
+(global funcref (ref.func $m_callInner__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.InnerClass))
 
 ;;; CLASS  ReallyInnerClass
 (type $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass (struct
+ (field $vtable (ref null $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass.vtable))
  (field $this@innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass (mut (ref null $innerclassinitorder.InnerClassInitOrder.InnerClass)))
 ))
+(type $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_callReallyInner__void_$pp_innerclassinitorder (mut (ref $function.__$void)))
+))
+(global $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass.vtable (mut (ref null $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass.vtable)) (ref.null $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass.vtable))
 
 ;;; ReallyInnerClass()
 (func $m_<init>__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass
@@ -544,22 +696,35 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass))
 
 ;;; void ReallyInnerClass.callReallyInner()
 (func $m_callReallyInner__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
+ (local $this (ref null $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass))
+ (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass.rtt)))
  (block $return.label
   (block
    ;; ($1ReallyInnerClass.this.this.this.number = ($1ReallyInnerClass.this.this.this.number + 10));
-   (struct.set $innerclassinitorder.InnerClassInitOrder $number@innerclassinitorder.InnerClassInitOrder  (struct.get $innerclassinitorder.InnerClassInitOrder.InnerClass $this@innerclassinitorder.InnerClassInitOrder.InnerClass  (struct.get $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass $this@innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass  (ref.null $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass))) (i32.add (struct.get $innerclassinitorder.InnerClassInitOrder $number@innerclassinitorder.InnerClassInitOrder  (struct.get $innerclassinitorder.InnerClassInitOrder.InnerClass $this@innerclassinitorder.InnerClassInitOrder.InnerClass  (struct.get $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass $this@innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass  (ref.null $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass)))) (i32.const 10)))
+   (struct.set $innerclassinitorder.InnerClassInitOrder $number@innerclassinitorder.InnerClassInitOrder  (struct.get $innerclassinitorder.InnerClassInitOrder.InnerClass $this@innerclassinitorder.InnerClassInitOrder.InnerClass  (struct.get $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass $this@innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass  (local.get $this))) (i32.add (struct.get $innerclassinitorder.InnerClassInitOrder $number@innerclassinitorder.InnerClassInitOrder  (struct.get $innerclassinitorder.InnerClassInitOrder.InnerClass $this@innerclassinitorder.InnerClassInitOrder.InnerClass  (struct.get $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass $this@innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass  (local.get $this)))) (i32.const 10)))
   )
  )
 )
+(global funcref (ref.func $m_callReallyInner__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass))
 
 ;;; CLASS  P1
 (type $innerclassinitorder.InnerClassInitOrder.P1 (struct
+ (field $vtable (ref null $innerclassinitorder.InnerClassInitOrder.P1.vtable))
  (field $value@innerclassinitorder.InnerClassInitOrder.P1 (mut i32))
 ))
+(type $innerclassinitorder.InnerClassInitOrder.P1.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $innerclassinitorder.InnerClassInitOrder.P1.vtable (mut (ref null $innerclassinitorder.InnerClassInitOrder.P1.vtable)) (ref.null $innerclassinitorder.InnerClassInitOrder.P1.vtable))
 
 ;;; P1()
 (func $m_<init>__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.P1
@@ -573,6 +738,7 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.P1))
 
 ;;; P1(int i)
 (func $m_<init>__int__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.P1
@@ -584,17 +750,27 @@
    ;; Object.this.Object.<init>();
    
    ;; (P1.this.value = i);
-   (struct.set $innerclassinitorder.InnerClassInitOrder.P1 $value@innerclassinitorder.InnerClassInitOrder.P1  (ref.null $innerclassinitorder.InnerClassInitOrder.P1) (local.get $i))
+   (struct.set $innerclassinitorder.InnerClassInitOrder.P1 $value@innerclassinitorder.InnerClassInitOrder.P1  (local.get $this) (local.get $i))
   )
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__int__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.P1))
 
 ;;; CLASS  P2
 (type $innerclassinitorder.InnerClassInitOrder.P1.P2 (struct
+ (field $vtable (ref null $innerclassinitorder.InnerClassInitOrder.P1.P2.vtable))
  (field $value@innerclassinitorder.InnerClassInitOrder.P1 (mut i32))
  (field $this@innerclassinitorder.InnerClassInitOrder.P1.P2 (mut (ref null $innerclassinitorder.InnerClassInitOrder.P1)))
 ))
+(type $innerclassinitorder.InnerClassInitOrder.P1.P2.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $innerclassinitorder.InnerClassInitOrder.P1.P2.vtable (mut (ref null $innerclassinitorder.InnerClassInitOrder.P1.P2.vtable)) (ref.null $innerclassinitorder.InnerClassInitOrder.P1.P2.vtable))
 
 ;;; P2()
 (func $m_<init>__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.P1.P2
@@ -608,6 +784,7 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.P1.P2))
 
 ;;; P2(int i)
 (func $m_<init>__int__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.P1.P2
@@ -622,13 +799,23 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__int__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.P1.P2))
 
 ;;; CLASS  P3
 (type $innerclassinitorder.InnerClassInitOrder.P1.P2.P3 (struct
+ (field $vtable (ref null $innerclassinitorder.InnerClassInitOrder.P1.P2.P3.vtable))
  (field $value@innerclassinitorder.InnerClassInitOrder.P1 (mut i32))
  (field $this@innerclassinitorder.InnerClassInitOrder.P1.P2 (mut (ref null $innerclassinitorder.InnerClassInitOrder.P1)))
  (field $this@innerclassinitorder.InnerClassInitOrder.P1.P2.P3 (mut (ref null $innerclassinitorder.InnerClassInitOrder.P1.P2)))
 ))
+(type $innerclassinitorder.InnerClassInitOrder.P1.P2.P3.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $innerclassinitorder.InnerClassInitOrder.P1.P2.P3.vtable (mut (ref null $innerclassinitorder.InnerClassInitOrder.P1.P2.P3.vtable)) (ref.null $innerclassinitorder.InnerClassInitOrder.P1.P2.P3.vtable))
 
 ;;; P3()
 (func $m_<init>__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.P1.P2.P3
@@ -642,6 +829,7 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.P1.P2.P3))
 
 ;;; P3(int i)
 (func $m_<init>__int__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.P1.P2.P3
@@ -656,10 +844,21 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__int__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.P1.P2.P3))
 
 ;;; CLASS  ESOuter
 (type $innerclassinitorder.InnerClassInitOrder.ESOuter (struct
+ (field $vtable (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter.vtable))
 ))
+(type $innerclassinitorder.InnerClassInitOrder.ESOuter.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_newESInner__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner (mut (ref $function.__$innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner)))
+))
+(global $innerclassinitorder.InnerClassInitOrder.ESOuter.vtable (mut (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter.vtable)) (ref.null $innerclassinitorder.InnerClassInitOrder.ESOuter.vtable))
 
 ;;; ESOuter()
 (func $m_<init>__void_$p_innerclassinitorder_InnerClassInitOrder_ESOuter@innerclassinitorder.InnerClassInitOrder.ESOuter
@@ -673,27 +872,40 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$p_innerclassinitorder_InnerClassInitOrder_ESOuter@innerclassinitorder.InnerClassInitOrder.ESOuter))
 
 ;;; ESInner ESOuter.newESInner()
 (func $m_newESInner__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner@innerclassinitorder.InnerClassInitOrder.ESOuter
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner))
  (local $return.value (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner))
+ (local $this (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter))
+ (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder.ESOuter (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.ESOuter.rtt)))
  (block $return.label
   (block
    ;; return ESOuter.this.new ESInner.<init>();
-   (local.set $return.value (call $m_<init>__void@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner (ref.null $innerclassinitorder.InnerClassInitOrder.ESOuter) (i32.const 0) (global.get $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner.rtt))))
+   (local.set $return.value (call $m_<init>__void@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner (global.get $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner.vtable) (ref.null $innerclassinitorder.InnerClassInitOrder.ESOuter) (i32.const 0) (global.get $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner.rtt))))
    (br $return.label)
   )
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_newESInner__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner@innerclassinitorder.InnerClassInitOrder.ESOuter))
 
 ;;; CLASS  ESInner
 (type $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner (struct
+ (field $vtable (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner.vtable))
  (field $this@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner (mut (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter)))
  (field $value@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner (mut i32))
 ))
+(type $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner.vtable (mut (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner.vtable)) (ref.null $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner.vtable))
 
 ;;; ESInner()
 (func $m_<init>__void@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner
@@ -704,11 +916,12 @@
    ;; Object.this.Object.<init>();
    
    ;; (ESInner.this.value = 1);
-   (struct.set $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner $value@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner  (ref.null $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner) (i32.const 1))
+   (struct.set $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner $value@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner  (local.get $this) (i32.const 1))
   )
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner))
 
 ;;; ESInner(int value)
 (func $m_<init>__int__void@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner
@@ -720,17 +933,27 @@
    ;; Object.this.Object.<init>();
    
    ;; (ESInner.this.value = value);
-   (struct.set $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner $value@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner  (ref.null $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner) (local.get $value))
+   (struct.set $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner $value@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner  (local.get $this) (local.get $value))
   )
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__int__void@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner))
 
 ;;; CLASS  ESInnerSubclass
 (type $innerclassinitorder.InnerClassInitOrder.ESInnerSubclass (struct
+ (field $vtable (ref null $innerclassinitorder.InnerClassInitOrder.ESInnerSubclass.vtable))
  (field $this@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner (mut (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter)))
  (field $value@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner (mut i32))
 ))
+(type $innerclassinitorder.InnerClassInitOrder.ESInnerSubclass.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $innerclassinitorder.InnerClassInitOrder.ESInnerSubclass.vtable (mut (ref null $innerclassinitorder.InnerClassInitOrder.ESInnerSubclass.vtable)) (ref.null $innerclassinitorder.InnerClassInitOrder.ESInnerSubclass.vtable))
 
 ;;; ESInnerSubclass(ESOuter outer)
 (func $m_<init>__innerclassinitorder_InnerClassInitOrder_ESOuter__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.ESInnerSubclass
@@ -745,6 +968,7 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__innerclassinitorder_InnerClassInitOrder_ESOuter__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.ESInnerSubclass))
 
 ;;; ESInnerSubclass(int value, ESOuter outer)
 (func $m_<init>__int__innerclassinitorder_InnerClassInitOrder_ESOuter__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.ESInnerSubclass
@@ -760,10 +984,21 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__int__innerclassinitorder_InnerClassInitOrder_ESOuter__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.ESInnerSubclass))
 
 ;;; CLASS  ESWGOuter
 (type $innerclassinitorder.InnerClassInitOrder.ESWGOuter (struct
+ (field $vtable (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter.vtable))
 ))
+(type $innerclassinitorder.InnerClassInitOrder.ESWGOuter.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_newESWGInner__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner (mut (ref $function.__$innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner)))
+))
+(global $innerclassinitorder.InnerClassInitOrder.ESWGOuter.vtable (mut (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter.vtable)) (ref.null $innerclassinitorder.InnerClassInitOrder.ESWGOuter.vtable))
 
 ;;; ESWGOuter()
 (func $m_<init>__void_$p_innerclassinitorder_InnerClassInitOrder_ESWGOuter@innerclassinitorder.InnerClassInitOrder.ESWGOuter
@@ -777,27 +1012,40 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$p_innerclassinitorder_InnerClassInitOrder_ESWGOuter@innerclassinitorder.InnerClassInitOrder.ESWGOuter))
 
 ;;; ESWGInner<T> ESWGOuter.newESWGInner()
 (func $m_newESWGInner__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner@innerclassinitorder.InnerClassInitOrder.ESWGOuter
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner))
  (local $return.value (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner))
+ (local $this (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter))
+ (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder.ESWGOuter (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.ESWGOuter.rtt)))
  (block $return.label
   (block
    ;; return ESWGOuter.this.new ESWGInner.<init>();
-   (local.set $return.value (call $m_<init>__void@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner (ref.null $innerclassinitorder.InnerClassInitOrder.ESWGOuter) (i32.const 0) (global.get $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner.rtt))))
+   (local.set $return.value (call $m_<init>__void@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner (global.get $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner.vtable) (ref.null $innerclassinitorder.InnerClassInitOrder.ESWGOuter) (i32.const 0) (global.get $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner.rtt))))
    (br $return.label)
   )
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_newESWGInner__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner@innerclassinitorder.InnerClassInitOrder.ESWGOuter))
 
 ;;; CLASS  ESWGInner
 (type $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner (struct
+ (field $vtable (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner.vtable))
  (field $this@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner (mut (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter)))
  (field $value@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner (mut i32))
 ))
+(type $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner.vtable (mut (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner.vtable)) (ref.null $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner.vtable))
 
 ;;; ESWGInner()
 (func $m_<init>__void@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner
@@ -808,11 +1056,12 @@
    ;; Object.this.Object.<init>();
    
    ;; (ESWGInner.this.value = 1);
-   (struct.set $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner $value@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner  (ref.null $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner) (i32.const 1))
+   (struct.set $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner $value@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner  (local.get $this) (i32.const 1))
   )
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner))
 
 ;;; ESWGInner(int value)
 (func $m_<init>__int__void@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner
@@ -824,17 +1073,27 @@
    ;; Object.this.Object.<init>();
    
    ;; (ESWGInner.this.value = value);
-   (struct.set $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner $value@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner  (ref.null $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner) (local.get $value))
+   (struct.set $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner $value@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner  (local.get $this) (local.get $value))
   )
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__int__void@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner))
 
 ;;; CLASS  ESWGInnerSubclass
 (type $innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass (struct
+ (field $vtable (ref null $innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass.vtable))
  (field $this@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner (mut (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter)))
  (field $value@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner (mut i32))
 ))
+(type $innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass.vtable (mut (ref null $innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass.vtable)) (ref.null $innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass.vtable))
 
 ;;; ESWGInnerSubclass(ESWGOuter<String> outer)
 (func $m_<init>__innerclassinitorder_InnerClassInitOrder_ESWGOuter__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass
@@ -849,6 +1108,7 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__innerclassinitorder_InnerClassInitOrder_ESWGOuter__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass))
 
 ;;; ESWGInnerSubclass(int value, ESWGOuter<String> outer)
 (func $m_<init>__int__innerclassinitorder_InnerClassInitOrder_ESWGOuter__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass
@@ -864,12 +1124,23 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__int__innerclassinitorder_InnerClassInitOrder_ESWGOuter__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass))
 
 ;;; CLASS  AddNumber
 (type $innerclassinitorder.InnerClassInitOrder.1AddNumber (struct
+ (field $vtable (ref null $innerclassinitorder.InnerClassInitOrder.1AddNumber.vtable))
  (field $this@innerclassinitorder.InnerClassInitOrder.1AddNumber (mut (ref null $innerclassinitorder.InnerClassInitOrder)))
  (field $num@innerclassinitorder.InnerClassInitOrder.1AddNumber (mut i32))
 ))
+(type $innerclassinitorder.InnerClassInitOrder.1AddNumber.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_act__void (mut (ref $function.__$void)))
+))
+(global $innerclassinitorder.InnerClassInitOrder.1AddNumber.vtable (mut (ref null $innerclassinitorder.InnerClassInitOrder.1AddNumber.vtable)) (ref.null $innerclassinitorder.InnerClassInitOrder.1AddNumber.vtable))
 
 ;;; AddNumber(int i)
 (func $m_<init>__int__void@innerclassinitorder.InnerClassInitOrder.1AddNumber
@@ -881,18 +1152,29 @@
    ;; Object.this.Object.<init>();
    
    ;; ($1AddNumber.this.num = i);
-   (struct.set $innerclassinitorder.InnerClassInitOrder.1AddNumber $num@innerclassinitorder.InnerClassInitOrder.1AddNumber  (ref.null $innerclassinitorder.InnerClassInitOrder.1AddNumber) (local.get $i))
+   (struct.set $innerclassinitorder.InnerClassInitOrder.1AddNumber $num@innerclassinitorder.InnerClassInitOrder.1AddNumber  (local.get $this) (local.get $i))
   )
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__int__void@innerclassinitorder.InnerClassInitOrder.1AddNumber))
 
 ;;; CLASS  <anonymous> extends AddNumber
 (type $innerclassinitorder.InnerClassInitOrder.1 (struct
+ (field $vtable (ref null $innerclassinitorder.InnerClassInitOrder.1.vtable))
  (field $this@innerclassinitorder.InnerClassInitOrder.1AddNumber (mut (ref null $innerclassinitorder.InnerClassInitOrder)))
  (field $num@innerclassinitorder.InnerClassInitOrder.1AddNumber (mut i32))
  (field $this@innerclassinitorder.InnerClassInitOrder.1 (mut (ref null $innerclassinitorder.InnerClassInitOrder)))
 ))
+(type $innerclassinitorder.InnerClassInitOrder.1.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_act__void (mut (ref $function.__$void)))
+))
+(global $innerclassinitorder.InnerClassInitOrder.1.vtable (mut (ref null $innerclassinitorder.InnerClassInitOrder.1.vtable)) (ref.null $innerclassinitorder.InnerClassInitOrder.1.vtable))
 
 ;;; <anonymous> extends AddNumber(int $_0)
 (func $m_<init>__int__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.1
@@ -907,22 +1189,36 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__int__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.1))
 
 ;;; void <anonymous> extends AddNumber.act()
 (func $m_act__void@innerclassinitorder.InnerClassInitOrder.1
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
+ (local $this (ref null $innerclassinitorder.InnerClassInitOrder.1))
+ (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder.1 (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.1.rtt)))
  (block $return.label
   (block
    ;; ($1.this.this.number = ($1.this.this.number + $1.this.num));
-   (struct.set $innerclassinitorder.InnerClassInitOrder $number@innerclassinitorder.InnerClassInitOrder  (struct.get $innerclassinitorder.InnerClassInitOrder.1 $this@innerclassinitorder.InnerClassInitOrder.1  (ref.null $innerclassinitorder.InnerClassInitOrder.1)) (i32.add (struct.get $innerclassinitorder.InnerClassInitOrder $number@innerclassinitorder.InnerClassInitOrder  (struct.get $innerclassinitorder.InnerClassInitOrder.1 $this@innerclassinitorder.InnerClassInitOrder.1  (ref.null $innerclassinitorder.InnerClassInitOrder.1))) (struct.get $innerclassinitorder.InnerClassInitOrder.1AddNumber $num@innerclassinitorder.InnerClassInitOrder.1AddNumber  (ref.null $innerclassinitorder.InnerClassInitOrder.1))))
+   (struct.set $innerclassinitorder.InnerClassInitOrder $number@innerclassinitorder.InnerClassInitOrder  (struct.get $innerclassinitorder.InnerClassInitOrder.1 $this@innerclassinitorder.InnerClassInitOrder.1  (local.get $this)) (i32.add (struct.get $innerclassinitorder.InnerClassInitOrder $number@innerclassinitorder.InnerClassInitOrder  (struct.get $innerclassinitorder.InnerClassInitOrder.1 $this@innerclassinitorder.InnerClassInitOrder.1  (local.get $this))) (struct.get $innerclassinitorder.InnerClassInitOrder.1AddNumber $num@innerclassinitorder.InnerClassInitOrder.1AddNumber  (local.get $this))))
   )
  )
 )
+(global funcref (ref.func $m_act__void@innerclassinitorder.InnerClassInitOrder.1))
 
 ;;; CLASS  Outer
 (type $innerclassinitorder.InnerClassInitOrder.Outer (struct
+ (field $vtable (ref null $innerclassinitorder.InnerClassInitOrder.Outer.vtable))
  (field $value@innerclassinitorder.InnerClassInitOrder.Outer (mut i32))
 ))
+(type $innerclassinitorder.InnerClassInitOrder.Outer.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_checkDispatch__int (mut (ref $function.__$int)))
+))
+(global $innerclassinitorder.InnerClassInitOrder.Outer.vtable (mut (ref null $innerclassinitorder.InnerClassInitOrder.Outer.vtable)) (ref.null $innerclassinitorder.InnerClassInitOrder.Outer.vtable))
 
 ;;; Outer(int i)
 (func $m_<init>__int__void@innerclassinitorder.InnerClassInitOrder.Outer
@@ -934,17 +1230,20 @@
    ;; Object.this.Object.<init>();
    
    ;; (Outer.this.value = i);
-   (struct.set $innerclassinitorder.InnerClassInitOrder.Outer $value@innerclassinitorder.InnerClassInitOrder.Outer  (ref.null $innerclassinitorder.InnerClassInitOrder.Outer) (local.get $i))
+   (struct.set $innerclassinitorder.InnerClassInitOrder.Outer $value@innerclassinitorder.InnerClassInitOrder.Outer  (local.get $this) (local.get $i))
   )
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__int__void@innerclassinitorder.InnerClassInitOrder.Outer))
 
 ;;; int Outer.checkDispatch()
 (func $m_checkDispatch__int@innerclassinitorder.InnerClassInitOrder.Outer
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (result i32)
  (local $return.value i32)
+ (local $this (ref null $innerclassinitorder.InnerClassInitOrder.Outer))
+ (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder.Outer (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.Outer.rtt)))
  (block $return.label
   (block
    ;; return 1;
@@ -954,11 +1253,22 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_checkDispatch__int@innerclassinitorder.InnerClassInitOrder.Outer))
 
 ;;; CLASS  OuterIsNotSuper
 (type $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (struct
+ (field $vtable (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper.vtable))
  (field $this@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (mut (ref null $innerclassinitorder.InnerClassInitOrder.Outer)))
 ))
+(type $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_getValue__int (mut (ref $function.__$int)))
+))
+(global $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper.vtable (mut (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper.vtable)) (ref.null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper.vtable))
 
 ;;; OuterIsNotSuper()
 (func $m_<init>__void@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper
@@ -972,27 +1282,44 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper))
 
 ;;; int OuterIsNotSuper.getValue()
 (func $m_getValue__int@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (result i32)
  (local $return.value i32)
+ (local $this (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper))
+ (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper.rtt)))
  (block $return.label
   (block
    ;; return OuterIsNotSuper.this.this.value;
-   (local.set $return.value (struct.get $innerclassinitorder.InnerClassInitOrder.Outer $value@innerclassinitorder.InnerClassInitOrder.Outer  (struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper $this@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper  (ref.null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper))))
+   (local.set $return.value (struct.get $innerclassinitorder.InnerClassInitOrder.Outer $value@innerclassinitorder.InnerClassInitOrder.Outer  (struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper $this@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper  (local.get $this))))
    (br $return.label)
   )
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_getValue__int@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper))
 
 ;;; CLASS  OuterIsSuper
 (type $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper (struct
+ (field $vtable (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.vtable))
  (field $value@innerclassinitorder.InnerClassInitOrder.Outer (mut i32))
  (field $this@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper (mut (ref null $innerclassinitorder.InnerClassInitOrder.Outer)))
 ))
+(type $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_checkDispatch__int (mut (ref $function.__$int)))
+ (field $m_checkDispatchFromSub1__int (mut (ref $function.__$int)))
+ (field $m_checkDispatchFromSub2__int (mut (ref $function.__$int)))
+ (field $m_unqualifiedAlloc__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper (mut (ref $function.__$innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper)))
+))
+(global $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.vtable (mut (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.vtable)) (ref.null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.vtable))
 
 ;;; OuterIsSuper(int i)
 (func $m_<init>__int__void@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper
@@ -1007,12 +1334,15 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__int__void@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper))
 
 ;;; int OuterIsSuper.checkDispatch()
 (func $m_checkDispatch__int@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (result i32)
  (local $return.value i32)
+ (local $this (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper))
+ (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.rtt)))
  (block $return.label
   (block
    ;; return 2;
@@ -1022,57 +1352,83 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_checkDispatch__int@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper))
 
 ;;; int OuterIsSuper.checkDispatchFromSub1()
 (func $m_checkDispatchFromSub1__int@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (result i32)
  (local $return.value i32)
+ (local $this (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper))
+ (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.rtt)))
  (block $return.label
   (block
    ;; return super.checkDispatch();
-   (local.set $return.value (i32.const 0))
+   (local.set $return.value (call_ref (local.get $this)(struct.get $innerclassinitorder.InnerClassInitOrder.Outer.vtable $m_checkDispatch__int (struct.get $innerclassinitorder.InnerClassInitOrder.Outer $vtable(local.get $this)))))
    (br $return.label)
   )
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_checkDispatchFromSub1__int@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper))
 
 ;;; int OuterIsSuper.checkDispatchFromSub2()
 (func $m_checkDispatchFromSub2__int@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (result i32)
  (local $return.value i32)
+ (local $$qualifier (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1))
+ (local $this (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper))
+ (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.rtt)))
  (block $return.label
   (block
-   ;; return OuterIsSuper.this.new $1.<init>(1).go();
-   (local.set $return.value (i32.const 0))
+   ;; return (<anonymous> extends Outer $qualifier = OuterIsSuper.this.new $1.<init>(1),$qualifier.go());
+   (local.set $return.value (block (result i32)
+    
+    (local.set $$qualifier (call $m_<init>__int__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1 (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1 (global.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1.vtable) (i32.const 0) (ref.null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper) (global.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1.rtt))(i32.const 1)))
+    (call_ref (local.get $$qualifier)(struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1.vtable $m_go__int (struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1 $vtable(local.get $$qualifier))))
+   ))
    (br $return.label)
   )
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_checkDispatchFromSub2__int@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper))
 
 ;;; OuterIsNotSuper OuterIsSuper.unqualifiedAlloc()
 (func $m_unqualifiedAlloc__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper))
  (local $return.value (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper))
+ (local $this (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper))
+ (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.rtt)))
  (block $return.label
   (block
    ;; return OuterIsSuper.this.new OuterIsNotSuper.<init>();
-   (local.set $return.value (call $m_<init>__void@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (ref.null $innerclassinitorder.InnerClassInitOrder.Outer) (global.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper.rtt))))
+   (local.set $return.value (call $m_<init>__void@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (global.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper.vtable) (ref.null $innerclassinitorder.InnerClassInitOrder.Outer) (global.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper.rtt))))
    (br $return.label)
   )
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_unqualifiedAlloc__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper))
 
 ;;; CLASS  <anonymous> extends Outer
 (type $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1 (struct
+ (field $vtable (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1.vtable))
  (field $value@innerclassinitorder.InnerClassInitOrder.Outer (mut i32))
  (field $this@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1 (mut (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper)))
 ))
+(type $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_checkDispatch__int (mut (ref $function.__$int)))
+ (field $m_go__int (mut (ref $function.__$int)))
+))
+(global $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1.vtable (mut (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1.vtable)) (ref.null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1.vtable))
 
 ;;; <anonymous> extends Outer(int $_0)
 (func $m_<init>__int__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1
@@ -1087,12 +1443,15 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__int__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1))
 
 ;;; int <anonymous> extends Outer.go()
 (func $m_go__int@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (result i32)
  (local $return.value i32)
+ (local $this (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1))
+ (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1 (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1.rtt)))
  (block $return.label
   (block
    ;; return $1.this.this.checkDispatch();
@@ -1102,11 +1461,22 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_go__int@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1))
 
 ;;; CLASS  TestQualifiedSuperCall
 (type $innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall (struct
+ (field $vtable (ref null $innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall.vtable))
  (field $this@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (mut (ref null $innerclassinitorder.InnerClassInitOrder.Outer)))
 ))
+(type $innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_getValue__int (mut (ref $function.__$int)))
+))
+(global $innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall.vtable (mut (ref null $innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall.vtable)) (ref.null $innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall.vtable))
 
 ;;; TestQualifiedSuperCall()
 (func $m_<init>__void@innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall
@@ -1120,12 +1490,23 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall))
 
 ;;; CLASS  TestUnqualifiedSuperCall
 (type $innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall (struct
+ (field $vtable (ref null $innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall.vtable))
  (field $this@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (mut (ref null $innerclassinitorder.InnerClassInitOrder.Outer)))
  (field $this@innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall (mut (ref null $innerclassinitorder.InnerClassInitOrder.Outer)))
 ))
+(type $innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_getValue__int (mut (ref $function.__$int)))
+))
+(global $innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall.vtable (mut (ref null $innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall.vtable)) (ref.null $innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall.vtable))
 
 ;;; TestUnqualifiedSuperCall()
 (func $m_<init>__void@innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall
@@ -1139,12 +1520,23 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall))
 
 ;;; CLASS  <anonymous> extends OuterIsNotSuper
 (type $innerclassinitorder.InnerClassInitOrder.2 (struct
+ (field $vtable (ref null $innerclassinitorder.InnerClassInitOrder.2.vtable))
  (field $this@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (mut (ref null $innerclassinitorder.InnerClassInitOrder.Outer)))
  (field $this@innerclassinitorder.InnerClassInitOrder.2 (mut (ref null $innerclassinitorder.InnerClassInitOrder)))
 ))
+(type $innerclassinitorder.InnerClassInitOrder.2.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_getValue__int (mut (ref $function.__$int)))
+))
+(global $innerclassinitorder.InnerClassInitOrder.2.vtable (mut (ref null $innerclassinitorder.InnerClassInitOrder.2.vtable)) (ref.null $innerclassinitorder.InnerClassInitOrder.2.vtable))
 
 ;;; <anonymous> extends OuterIsNotSuper(OuterIsSuper $super_outer_this)
 (func $m_<init>__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.2
@@ -1159,12 +1551,23 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.2))
 
 ;;; CLASS  <anonymous> extends TestQualifiedSuperCall
 (type $innerclassinitorder.InnerClassInitOrder.3 (struct
+ (field $vtable (ref null $innerclassinitorder.InnerClassInitOrder.3.vtable))
  (field $this@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (mut (ref null $innerclassinitorder.InnerClassInitOrder.Outer)))
  (field $this@innerclassinitorder.InnerClassInitOrder.3 (mut (ref null $innerclassinitorder.InnerClassInitOrder)))
 ))
+(type $innerclassinitorder.InnerClassInitOrder.3.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_getValue__int (mut (ref $function.__$int)))
+))
+(global $innerclassinitorder.InnerClassInitOrder.3.vtable (mut (ref null $innerclassinitorder.InnerClassInitOrder.3.vtable)) (ref.null $innerclassinitorder.InnerClassInitOrder.3.vtable))
 
 ;;; <anonymous> extends TestQualifiedSuperCall()
 (func $m_<init>__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.3
@@ -1178,13 +1581,24 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.3))
 
 ;;; CLASS  <anonymous> extends TestUnqualifiedSuperCall
 (type $innerclassinitorder.InnerClassInitOrder.4 (struct
+ (field $vtable (ref null $innerclassinitorder.InnerClassInitOrder.4.vtable))
  (field $this@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (mut (ref null $innerclassinitorder.InnerClassInitOrder.Outer)))
  (field $this@innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall (mut (ref null $innerclassinitorder.InnerClassInitOrder.Outer)))
  (field $this@innerclassinitorder.InnerClassInitOrder.4 (mut (ref null $innerclassinitorder.InnerClassInitOrder)))
 ))
+(type $innerclassinitorder.InnerClassInitOrder.4.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_getValue__int (mut (ref $function.__$int)))
+))
+(global $innerclassinitorder.InnerClassInitOrder.4.vtable (mut (ref null $innerclassinitorder.InnerClassInitOrder.4.vtable)) (ref.null $innerclassinitorder.InnerClassInitOrder.4.vtable))
 
 ;;; <anonymous> extends TestUnqualifiedSuperCall(OuterIsSuper $super_outer_this)
 (func $m_<init>__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.4
@@ -1199,4 +1613,62 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.4))
+
+;;; Code for innerclassinitorder.InnerClassInitOrder [vtable]
+ (global.set $innerclassinitorder.InnerClassInitOrder.vtable (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_testOuterThisFromSuperCall__void@innerclassinitorder.InnerClassInitOrder) (ref.func $m_testOuterThisFromThisCall__void@innerclassinitorder.InnerClassInitOrder) (ref.func $m_testExtendsNested__void@innerclassinitorder.InnerClassInitOrder) (ref.func $m_testExtendsNestedWithGenerics__void@innerclassinitorder.InnerClassInitOrder) (ref.func $m_testInnerClassCtors__void@innerclassinitorder.InnerClassInitOrder) (ref.func $m_testInnerClassInitialization__void@innerclassinitorder.InnerClassInitOrder) (ref.func $m_testInnerClassLoop__void@innerclassinitorder.InnerClassInitOrder) (ref.func $m_testOuterIsNotSuper__void@innerclassinitorder.InnerClassInitOrder) (ref.func $m_testOuterIsNotSuperAnon__void@innerclassinitorder.InnerClassInitOrder) (ref.func $m_testQualifiedSuperCall__void@innerclassinitorder.InnerClassInitOrder) (ref.func $m_testQualifiedSuperCallAnon__void@innerclassinitorder.InnerClassInitOrder) (ref.func $m_testSuperDispatch__void@innerclassinitorder.InnerClassInitOrder) (ref.func $m_testUnqualifiedAlloc__void@innerclassinitorder.InnerClassInitOrder) (ref.func $m_testUnqualifiedSuperCall__void@innerclassinitorder.InnerClassInitOrder) (ref.func $m_testUnqualifiedSuperCallAnon__void@innerclassinitorder.InnerClassInitOrder) (rtt.canon $innerclassinitorder.InnerClassInitOrder.vtable)))
+;;; Code for innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase [vtable]
+ (global.set $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase.vtable (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase.vtable)))
+;;; Code for innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall [vtable]
+ (global.set $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.vtable (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.vtable)))
+;;; Code for innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1 [vtable]
+ (global.set $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1.vtable (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1.vtable)))
+;;; Code for innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall [vtable]
+ (global.set $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.vtable (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.vtable)))
+;;; Code for innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1 [vtable]
+ (global.set $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1.vtable (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1.vtable)))
+;;; Code for innerclassinitorder.InnerClassInitOrder.InnerClass [vtable]
+ (global.set $innerclassinitorder.InnerClassInitOrder.InnerClass.vtable (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.InnerClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_callInner__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.InnerClass) (rtt.canon $innerclassinitorder.InnerClassInitOrder.InnerClass.vtable)))
+;;; Code for innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass [vtable]
+ (global.set $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass.vtable (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_callReallyInner__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass) (rtt.canon $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass.vtable)))
+;;; Code for innerclassinitorder.InnerClassInitOrder.P1 [vtable]
+ (global.set $innerclassinitorder.InnerClassInitOrder.P1.vtable (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.P1.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $innerclassinitorder.InnerClassInitOrder.P1.vtable)))
+;;; Code for innerclassinitorder.InnerClassInitOrder.P1.P2 [vtable]
+ (global.set $innerclassinitorder.InnerClassInitOrder.P1.P2.vtable (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.P1.P2.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $innerclassinitorder.InnerClassInitOrder.P1.P2.vtable)))
+;;; Code for innerclassinitorder.InnerClassInitOrder.P1.P2.P3 [vtable]
+ (global.set $innerclassinitorder.InnerClassInitOrder.P1.P2.P3.vtable (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.P1.P2.P3.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $innerclassinitorder.InnerClassInitOrder.P1.P2.P3.vtable)))
+;;; Code for innerclassinitorder.InnerClassInitOrder.ESOuter [vtable]
+ (global.set $innerclassinitorder.InnerClassInitOrder.ESOuter.vtable (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.ESOuter.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_newESInner__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner@innerclassinitorder.InnerClassInitOrder.ESOuter) (rtt.canon $innerclassinitorder.InnerClassInitOrder.ESOuter.vtable)))
+;;; Code for innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner [vtable]
+ (global.set $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner.vtable (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner.vtable)))
+;;; Code for innerclassinitorder.InnerClassInitOrder.ESInnerSubclass [vtable]
+ (global.set $innerclassinitorder.InnerClassInitOrder.ESInnerSubclass.vtable (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.ESInnerSubclass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $innerclassinitorder.InnerClassInitOrder.ESInnerSubclass.vtable)))
+;;; Code for innerclassinitorder.InnerClassInitOrder.ESWGOuter [vtable]
+ (global.set $innerclassinitorder.InnerClassInitOrder.ESWGOuter.vtable (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.ESWGOuter.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_newESWGInner__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner@innerclassinitorder.InnerClassInitOrder.ESWGOuter) (rtt.canon $innerclassinitorder.InnerClassInitOrder.ESWGOuter.vtable)))
+;;; Code for innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner [vtable]
+ (global.set $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner.vtable (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner.vtable)))
+;;; Code for innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass [vtable]
+ (global.set $innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass.vtable (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass.vtable)))
+;;; Code for innerclassinitorder.InnerClassInitOrder.1 [vtable]
+ (global.set $innerclassinitorder.InnerClassInitOrder.1.vtable (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.1.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_act__void@innerclassinitorder.InnerClassInitOrder.1) (rtt.canon $innerclassinitorder.InnerClassInitOrder.1.vtable)))
+;;; Code for innerclassinitorder.InnerClassInitOrder.Outer [vtable]
+ (global.set $innerclassinitorder.InnerClassInitOrder.Outer.vtable (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.Outer.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_checkDispatch__int@innerclassinitorder.InnerClassInitOrder.Outer) (rtt.canon $innerclassinitorder.InnerClassInitOrder.Outer.vtable)))
+;;; Code for innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper [vtable]
+ (global.set $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper.vtable (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_getValue__int@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper) (rtt.canon $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper.vtable)))
+;;; Code for innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper [vtable]
+ (global.set $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.vtable (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_checkDispatch__int@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper) (ref.func $m_checkDispatchFromSub1__int@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper) (ref.func $m_checkDispatchFromSub2__int@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper) (ref.func $m_unqualifiedAlloc__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper) (rtt.canon $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.vtable)))
+;;; Code for innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1 [vtable]
+ (global.set $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1.vtable (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_checkDispatch__int@innerclassinitorder.InnerClassInitOrder.Outer) (ref.func $m_go__int@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1) (rtt.canon $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1.vtable)))
+;;; Code for innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall [vtable]
+ (global.set $innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall.vtable (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_getValue__int@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper) (rtt.canon $innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall.vtable)))
+;;; Code for innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall [vtable]
+ (global.set $innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall.vtable (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_getValue__int@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper) (rtt.canon $innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall.vtable)))
+;;; Code for innerclassinitorder.InnerClassInitOrder.2 [vtable]
+ (global.set $innerclassinitorder.InnerClassInitOrder.2.vtable (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.2.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_getValue__int@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper) (rtt.canon $innerclassinitorder.InnerClassInitOrder.2.vtable)))
+;;; Code for innerclassinitorder.InnerClassInitOrder.3 [vtable]
+ (global.set $innerclassinitorder.InnerClassInitOrder.3.vtable (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.3.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_getValue__int@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper) (rtt.canon $innerclassinitorder.InnerClassInitOrder.3.vtable)))
+;;; Code for innerclassinitorder.InnerClassInitOrder.4 [vtable]
+ (global.set $innerclassinitorder.InnerClassInitOrder.4.vtable (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.4.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_getValue__int@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper) (rtt.canon $innerclassinitorder.InnerClassInitOrder.4.vtable)))
+))
+(start $.runtime.init)
 

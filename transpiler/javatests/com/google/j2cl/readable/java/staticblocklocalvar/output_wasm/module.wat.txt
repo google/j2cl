@@ -2,7 +2,16 @@
 
 ;;; CLASS  StaticBlockLocalVar
 (type $staticblocklocalvar.StaticBlockLocalVar (struct
+ (field $vtable (ref null $staticblocklocalvar.StaticBlockLocalVar.vtable))
 ))
+(type $staticblocklocalvar.StaticBlockLocalVar.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $staticblocklocalvar.StaticBlockLocalVar.vtable (mut (ref null $staticblocklocalvar.StaticBlockLocalVar.vtable)) (ref.null $staticblocklocalvar.StaticBlockLocalVar.vtable))
 
 ;;; StaticBlockLocalVar()
 (func $m_<init>__void@staticblocklocalvar.StaticBlockLocalVar
@@ -16,4 +25,10 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@staticblocklocalvar.StaticBlockLocalVar))
+
+;;; Code for staticblocklocalvar.StaticBlockLocalVar [vtable]
+ (global.set $staticblocklocalvar.StaticBlockLocalVar.vtable (struct.new_with_rtt $staticblocklocalvar.StaticBlockLocalVar.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $staticblocklocalvar.StaticBlockLocalVar.vtable)))
+))
+(start $.runtime.init)
 

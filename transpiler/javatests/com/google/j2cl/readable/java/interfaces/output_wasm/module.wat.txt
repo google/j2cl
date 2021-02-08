@@ -2,7 +2,17 @@
 
 ;;; CLASS  Main
 (type $interfaces.Main (struct
+ (field $vtable (ref null $interfaces.Main.vtable))
 ))
+(type $interfaces.Main.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_testInterfaceMembers__void_$pp_interfaces (mut (ref $function.__$void)))
+))
+(global $interfaces.Main.vtable (mut (ref null $interfaces.Main.vtable)) (ref.null $interfaces.Main.vtable))
 
 ;;; Main()
 (func $m_<init>__void@interfaces.Main
@@ -16,17 +26,20 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@interfaces.Main))
 
 ;;; void Main.testInterfaceMembers()
 (func $m_testInterfaceMembers__void_$pp_interfaces@interfaces.Main
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (local $i (ref null $java.lang.Object))
  (local $x i32)
+ (local $this (ref null $interfaces.Main))
+ (local.set $this (ref.cast $java.lang.Object $interfaces.Main (local.get $this.untyped) (global.get $interfaces.Main.rtt)))
  (block $return.label
   (block
    ;; Interface i = Main.this.new Implementor.<init>();
    
-   (local.set $i (call $m_<init>__void_$pp_interfaces@interfaces.Main.Implementor (struct.new_with_rtt $interfaces.Main.Implementor (ref.null $interfaces.Main) (global.get $interfaces.Main.Implementor.rtt))))
+   (local.set $i (call $m_<init>__void_$pp_interfaces@interfaces.Main.Implementor (struct.new_with_rtt $interfaces.Main.Implementor (global.get $interfaces.Main.Implementor.vtable) (ref.null $interfaces.Main) (global.get $interfaces.Main.Implementor.rtt))))
    ;; i.interfaceMethod();
    
    ;; i.defaultMethod(null);
@@ -39,6 +52,7 @@
   )
  )
 )
+(global funcref (ref.func $m_testInterfaceMembers__void_$pp_interfaces@interfaces.Main))
 
 ;;; INTERFACE  Interface
 (global $a@interfaces.Main.Interface (mut i32) (i32.const 0))
@@ -55,6 +69,7 @@
   )
  )
 )
+(global funcref (ref.func $m_defaultMethod__java_lang_Object__void@interfaces.Main.Interface))
 
 ;;; void Interface.privateMethod(T t)
 (func $m_privateMethod__java_lang_Object__void_$p_interfaces_Main_Interface@interfaces.Main.Interface
@@ -65,6 +80,7 @@
   )
  )
 )
+(global funcref (ref.func $m_privateMethod__java_lang_Object__void_$p_interfaces_Main_Interface@interfaces.Main.Interface))
 
 ;;; void Interface.staticInterfaceMethod()
 (func $m_staticInterfaceMethod__void@interfaces.Main.Interface
@@ -73,6 +89,7 @@
   )
  )
 )
+(global funcref (ref.func $m_staticInterfaceMethod__void@interfaces.Main.Interface))
 
 ;;; INTERFACE  SubInterface
 
@@ -87,11 +104,24 @@
   )
  )
 )
+(global funcref (ref.func $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface))
 
 ;;; CLASS  Implementor
 (type $interfaces.Main.Implementor (struct
+ (field $vtable (ref null $interfaces.Main.Implementor.vtable))
  (field $this@interfaces.Main.Implementor (mut (ref null $interfaces.Main)))
 ))
+(type $interfaces.Main.Implementor.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_interfaceMethod__void (mut (ref $function.__$void)))
+ (field $m_defaultMethod__java_lang_Object__void (mut (ref $function.$java.lang.Object__$void)))
+ (field $m_defaultMethod__java_lang_String__void (mut (ref $function.$java.lang.String__$void)))
+))
+(global $interfaces.Main.Implementor.vtable (mut (ref null $interfaces.Main.Implementor.vtable)) (ref.null $interfaces.Main.Implementor.vtable))
 
 ;;; Implementor()
 (func $m_<init>__void_$pp_interfaces@interfaces.Main.Implementor
@@ -105,32 +135,41 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_interfaces@interfaces.Main.Implementor))
 
 ;;; void Implementor.interfaceMethod()
 (func $m_interfaceMethod__void@interfaces.Main.Implementor
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
+ (local $this (ref null $interfaces.Main.Implementor))
+ (local.set $this (ref.cast $java.lang.Object $interfaces.Main.Implementor (local.get $this.untyped) (global.get $interfaces.Main.Implementor.rtt)))
  (block $return.label
   (block
   )
  )
 )
+(global funcref (ref.func $m_interfaceMethod__void@interfaces.Main.Implementor))
 
 ;;; void Implementor.defaultMethod(Object arg0)
 (func $m_defaultMethod__java_lang_Object__void@interfaces.Main.Implementor
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
+ (local $this (ref null $interfaces.Main.Implementor))
+ (local.set $this (ref.cast $java.lang.Object $interfaces.Main.Implementor (local.get $this.untyped) (global.get $interfaces.Main.Implementor.rtt)))
  (block $return.label
   (block
    ;; Implementor.this.defaultMethod(((String) arg0));
-   
+   (call_ref (local.get $this)(ref.cast $java.lang.Object $java.lang.String (local.get $arg0) (global.get $java.lang.String.rtt))(struct.get $interfaces.Main.Implementor.vtable $m_defaultMethod__java_lang_String__void (struct.get $interfaces.Main.Implementor $vtable(local.get $this))))
   )
  )
 )
+(global funcref (ref.func $m_defaultMethod__java_lang_Object__void@interfaces.Main.Implementor))
 
 ;;; void Implementor.defaultMethod(String arg0)
 (func $m_defaultMethod__java_lang_String__void@interfaces.Main.Implementor
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.String))
+ (local $this (ref null $interfaces.Main.Implementor))
+ (local.set $this (ref.cast $java.lang.Object $interfaces.Main.Implementor (local.get $this.untyped) (global.get $interfaces.Main.Implementor.rtt)))
  (block $return.label
   (block
    ;; SubInterface.this.defaultMethod(arg0);
@@ -138,11 +177,23 @@
   )
  )
 )
+(global funcref (ref.func $m_defaultMethod__java_lang_String__void@interfaces.Main.Implementor))
 
 ;;; CLASS  AbstractImplementor
 (type $interfaces.Main.AbstractImplementor (struct
+ (field $vtable (ref null $interfaces.Main.AbstractImplementor.vtable))
  (field $this@interfaces.Main.AbstractImplementor (mut (ref null $interfaces.Main)))
 ))
+(type $interfaces.Main.AbstractImplementor.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_defaultMethod__java_lang_Object__void (mut (ref $function.$java.lang.Object__$void)))
+ (field $m_defaultMethod__java_lang_String__void (mut (ref $function.$java.lang.String__$void)))
+))
+(global $interfaces.Main.AbstractImplementor.vtable (mut (ref null $interfaces.Main.AbstractImplementor.vtable)) (ref.null $interfaces.Main.AbstractImplementor.vtable))
 
 ;;; AbstractImplementor()
 (func $m_<init>__void_$pp_interfaces@interfaces.Main.AbstractImplementor
@@ -156,23 +207,29 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_interfaces@interfaces.Main.AbstractImplementor))
 
 ;;; void AbstractImplementor.defaultMethod(Object arg0)
 (func $m_defaultMethod__java_lang_Object__void@interfaces.Main.AbstractImplementor
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
+ (local $this (ref null $interfaces.Main.AbstractImplementor))
+ (local.set $this (ref.cast $java.lang.Object $interfaces.Main.AbstractImplementor (local.get $this.untyped) (global.get $interfaces.Main.AbstractImplementor.rtt)))
  (block $return.label
   (block
    ;; AbstractImplementor.this.defaultMethod(((String) arg0));
-   
+   (call_ref (local.get $this)(ref.cast $java.lang.Object $java.lang.String (local.get $arg0) (global.get $java.lang.String.rtt))(struct.get $interfaces.Main.AbstractImplementor.vtable $m_defaultMethod__java_lang_String__void (struct.get $interfaces.Main.AbstractImplementor $vtable(local.get $this))))
   )
  )
 )
+(global funcref (ref.func $m_defaultMethod__java_lang_Object__void@interfaces.Main.AbstractImplementor))
 
 ;;; void AbstractImplementor.defaultMethod(String arg0)
 (func $m_defaultMethod__java_lang_String__void@interfaces.Main.AbstractImplementor
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.String))
+ (local $this (ref null $interfaces.Main.AbstractImplementor))
+ (local.set $this (ref.cast $java.lang.Object $interfaces.Main.AbstractImplementor (local.get $this.untyped) (global.get $interfaces.Main.AbstractImplementor.rtt)))
  (block $return.label
   (block
    ;; SubInterface.this.defaultMethod(arg0);
@@ -180,4 +237,12 @@
   )
  )
 )
+(global funcref (ref.func $m_defaultMethod__java_lang_String__void@interfaces.Main.AbstractImplementor))
+
+;;; Code for interfaces.Main [vtable]
+ (global.set $interfaces.Main.vtable (struct.new_with_rtt $interfaces.Main.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_testInterfaceMembers__void_$pp_interfaces@interfaces.Main) (rtt.canon $interfaces.Main.vtable)))
+;;; Code for interfaces.Main.Implementor [vtable]
+ (global.set $interfaces.Main.Implementor.vtable (struct.new_with_rtt $interfaces.Main.Implementor.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_interfaceMethod__void@interfaces.Main.Implementor) (ref.func $m_defaultMethod__java_lang_Object__void@interfaces.Main.Implementor) (ref.func $m_defaultMethod__java_lang_String__void@interfaces.Main.Implementor) (rtt.canon $interfaces.Main.Implementor.vtable)))
+))
+(start $.runtime.init)
 

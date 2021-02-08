@@ -2,7 +2,16 @@
 
 ;;; CLASS  InferReturn
 (type $inferreturn.InferReturn (struct
+ (field $vtable (ref null $inferreturn.InferReturn.vtable))
 ))
+(type $inferreturn.InferReturn.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $inferreturn.InferReturn.vtable (mut (ref null $inferreturn.InferReturn.vtable)) (ref.null $inferreturn.InferReturn.vtable))
 
 ;;; InferReturn()
 (func $m_<init>__void@inferreturn.InferReturn
@@ -16,6 +25,7 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@inferreturn.InferReturn))
 
 ;;; InferReturn<T> InferReturn.inferGeneric(T foo)
 (func $m_inferGeneric__java_lang_Object__inferreturn_InferReturn@inferreturn.InferReturn
@@ -25,12 +35,13 @@
  (block $return.label
   (block
    ;; return new InferReturn.<init>();
-   (local.set $return.value (call $m_<init>__void@inferreturn.InferReturn (struct.new_with_rtt $inferreturn.InferReturn (global.get $inferreturn.InferReturn.rtt))))
+   (local.set $return.value (call $m_<init>__void@inferreturn.InferReturn (struct.new_with_rtt $inferreturn.InferReturn (global.get $inferreturn.InferReturn.vtable) (global.get $inferreturn.InferReturn.rtt))))
    (br $return.label)
   )
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_inferGeneric__java_lang_Object__inferreturn_InferReturn@inferreturn.InferReturn))
 
 ;;; InferReturn<InferReturn<String>> InferReturn.tightenType(InferReturn<String> foo)
 (func $m_tightenType__inferreturn_InferReturn__inferreturn_InferReturn@inferreturn.InferReturn
@@ -56,6 +67,7 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_tightenType__inferreturn_InferReturn__inferreturn_InferReturn@inferreturn.InferReturn))
 
 ;;; void InferReturn.main()
 (func $m_main__void@inferreturn.InferReturn
@@ -76,6 +88,7 @@
   )
  )
 )
+(global funcref (ref.func $m_main__void@inferreturn.InferReturn))
 
 ;;; ArrayList<V> InferReturn.newArrayList(V foo)
 (func $m_newArrayList__java_lang_Object__java_util_ArrayList@inferreturn.InferReturn
@@ -85,12 +98,13 @@
  (block $return.label
   (block
    ;; return new ArrayList.<init>();
-   (local.set $return.value (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
+   (local.set $return.value (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.vtable) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
    (br $return.label)
   )
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_newArrayList__java_lang_Object__java_util_ArrayList@inferreturn.InferReturn))
 
 ;;; V[] InferReturn.newArray(V foo)
 (func $m_newArray__java_lang_Object__arrayOf_java_lang_Object@inferreturn.InferReturn
@@ -106,6 +120,7 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_newArray__java_lang_Object__arrayOf_java_lang_Object@inferreturn.InferReturn))
 
 ;;; void InferReturn.acceptsArrayListOfObject(ArrayList<Object> foo)
 (func $m_acceptsArrayListOfObject__java_util_ArrayList__void@inferreturn.InferReturn
@@ -115,6 +130,7 @@
   )
  )
 )
+(global funcref (ref.func $m_acceptsArrayListOfObject__java_util_ArrayList__void@inferreturn.InferReturn))
 
 ;;; void InferReturn.acceptsArrayOfObject(Object[] foo)
 (func $m_acceptsArrayOfObject__arrayOf_java_lang_Object__void@inferreturn.InferReturn
@@ -124,4 +140,10 @@
   )
  )
 )
+(global funcref (ref.func $m_acceptsArrayOfObject__arrayOf_java_lang_Object__void@inferreturn.InferReturn))
+
+;;; Code for inferreturn.InferReturn [vtable]
+ (global.set $inferreturn.InferReturn.vtable (struct.new_with_rtt $inferreturn.InferReturn.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $inferreturn.InferReturn.vtable)))
+))
+(start $.runtime.init)
 

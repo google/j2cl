@@ -2,7 +2,17 @@
 
 ;;; CLASS  SomeClass
 (type $anonymousclass.SomeClass (struct
+ (field $vtable (ref null $anonymousclass.SomeClass.vtable))
 ))
+(type $anonymousclass.SomeClass.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_foo__java_lang_String (mut (ref $function.__$java.lang.String)))
+))
+(global $anonymousclass.SomeClass.vtable (mut (ref null $anonymousclass.SomeClass.vtable)) (ref.null $anonymousclass.SomeClass.vtable))
 
 ;;; SomeClass(int i)
 (func $m_<init>__int__void_$pp_anonymousclass@anonymousclass.SomeClass
@@ -17,10 +27,21 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__int__void_$pp_anonymousclass@anonymousclass.SomeClass))
 
 ;;; CLASS  AnonymousClass
 (type $anonymousclass.AnonymousClass (struct
+ (field $vtable (ref null $anonymousclass.AnonymousClass.vtable))
 ))
+(type $anonymousclass.AnonymousClass.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_main__void (mut (ref $function.__$void)))
+))
+(global $anonymousclass.AnonymousClass.vtable (mut (ref null $anonymousclass.AnonymousClass.vtable)) (ref.null $anonymousclass.AnonymousClass.vtable))
 
 ;;; AnonymousClass()
 (func $m_<init>__void@anonymousclass.AnonymousClass
@@ -34,26 +55,40 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@anonymousclass.AnonymousClass))
 
 ;;; void AnonymousClass.main()
 (func $m_main__void@anonymousclass.AnonymousClass
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (local $instance (ref null $anonymousclass.SomeClass))
+ (local $this (ref null $anonymousclass.AnonymousClass))
+ (local.set $this (ref.cast $java.lang.Object $anonymousclass.AnonymousClass (local.get $this.untyped) (global.get $anonymousclass.AnonymousClass.rtt)))
  (block $return.label
   (block
    ;; SomeClass instance = AnonymousClass.this.new $1.<init>(1);
    
-   (local.set $instance (call $m_<init>__int__void_$pp_anonymousclass@anonymousclass.AnonymousClass.1 (struct.new_with_rtt $anonymousclass.AnonymousClass.1 (ref.null $anonymousclass.AnonymousClass) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (global.get $anonymousclass.AnonymousClass.1.rtt))(i32.const 1)))
+   (local.set $instance (call $m_<init>__int__void_$pp_anonymousclass@anonymousclass.AnonymousClass.1 (struct.new_with_rtt $anonymousclass.AnonymousClass.1 (global.get $anonymousclass.AnonymousClass.1.vtable) (ref.null $anonymousclass.AnonymousClass) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (global.get $anonymousclass.AnonymousClass.1.rtt))(i32.const 1)))
   )
  )
 )
+(global funcref (ref.func $m_main__void@anonymousclass.AnonymousClass))
 
 ;;; CLASS  <anonymous> extends SomeClass
 (type $anonymousclass.AnonymousClass.1 (struct
+ (field $vtable (ref null $anonymousclass.AnonymousClass.1.vtable))
  (field $this@anonymousclass.AnonymousClass.1 (mut (ref null $anonymousclass.AnonymousClass)))
  (field $object@anonymousclass.AnonymousClass.1 (mut (ref null $java.lang.Object)))
  (field $outer@anonymousclass.AnonymousClass.1 (mut (ref null $java.lang.Object)))
 ))
+(type $anonymousclass.AnonymousClass.1.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_foo__java_lang_String (mut (ref $function.__$java.lang.String)))
+))
+(global $anonymousclass.AnonymousClass.1.vtable (mut (ref null $anonymousclass.AnonymousClass.1.vtable)) (ref.null $anonymousclass.AnonymousClass.1.vtable))
 
 ;;; <anonymous> extends SomeClass(int $_0)
 (func $m_<init>__int__void_$pp_anonymousclass@anonymousclass.AnonymousClass.1
@@ -68,12 +103,15 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__int__void_$pp_anonymousclass@anonymousclass.AnonymousClass.1))
 
 ;;; String <anonymous> extends SomeClass.foo()
 (func $m_foo__java_lang_String@anonymousclass.AnonymousClass.1
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))
+ (local $this (ref null $anonymousclass.AnonymousClass.1))
+ (local.set $this (ref.cast $java.lang.Object $anonymousclass.AnonymousClass.1 (local.get $this.untyped) (global.get $anonymousclass.AnonymousClass.1.rtt)))
  (block $return.label
   (block
    ;; return "a";
@@ -83,13 +121,24 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_foo__java_lang_String@anonymousclass.AnonymousClass.1))
 
 ;;; INTERFACE  SomeInterface
 (global $implicitlyStatic@anonymousclass.SomeInterface (mut (ref null $anonymousclass.SomeClass)) (ref.null $anonymousclass.SomeClass))
 
 ;;; CLASS  <anonymous> extends SomeClass
 (type $anonymousclass.SomeInterface.1 (struct
+ (field $vtable (ref null $anonymousclass.SomeInterface.1.vtable))
 ))
+(type $anonymousclass.SomeInterface.1.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_foo__java_lang_String (mut (ref $function.__$java.lang.String)))
+))
+(global $anonymousclass.SomeInterface.1.vtable (mut (ref null $anonymousclass.SomeInterface.1.vtable)) (ref.null $anonymousclass.SomeInterface.1.vtable))
 
 ;;; <anonymous> extends SomeClass(int $_0)
 (func $m_<init>__int__void_$pp_anonymousclass@anonymousclass.SomeInterface.1
@@ -104,12 +153,15 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__int__void_$pp_anonymousclass@anonymousclass.SomeInterface.1))
 
 ;;; String <anonymous> extends SomeClass.foo()
 (func $m_foo__java_lang_String@anonymousclass.SomeInterface.1
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))
+ (local $this (ref null $anonymousclass.SomeInterface.1))
+ (local.set $this (ref.cast $java.lang.Object $anonymousclass.SomeInterface.1 (local.get $this.untyped) (global.get $anonymousclass.SomeInterface.1.rtt)))
  (block $return.label
   (block
    ;; return "a";
@@ -119,4 +171,14 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_foo__java_lang_String@anonymousclass.SomeInterface.1))
+
+;;; Code for anonymousclass.AnonymousClass [vtable]
+ (global.set $anonymousclass.AnonymousClass.vtable (struct.new_with_rtt $anonymousclass.AnonymousClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_main__void@anonymousclass.AnonymousClass) (rtt.canon $anonymousclass.AnonymousClass.vtable)))
+;;; Code for anonymousclass.AnonymousClass.1 [vtable]
+ (global.set $anonymousclass.AnonymousClass.1.vtable (struct.new_with_rtt $anonymousclass.AnonymousClass.1.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__java_lang_String@anonymousclass.AnonymousClass.1) (rtt.canon $anonymousclass.AnonymousClass.1.vtable)))
+;;; Code for anonymousclass.SomeInterface.1 [vtable]
+ (global.set $anonymousclass.SomeInterface.1.vtable (struct.new_with_rtt $anonymousclass.SomeInterface.1.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__java_lang_String@anonymousclass.SomeInterface.1) (rtt.canon $anonymousclass.SomeInterface.1.vtable)))
+))
+(start $.runtime.init)
 

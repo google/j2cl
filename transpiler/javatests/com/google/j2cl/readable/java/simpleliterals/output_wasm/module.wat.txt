@@ -2,7 +2,17 @@
 
 ;;; CLASS  SimpleLiterals
 (type $simpleliterals.SimpleLiterals (struct
+ (field $vtable (ref null $simpleliterals.SimpleLiterals.vtable))
 ))
+(type $simpleliterals.SimpleLiterals.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_main__void (mut (ref $function.__$void)))
+))
+(global $simpleliterals.SimpleLiterals.vtable (mut (ref null $simpleliterals.SimpleLiterals.vtable)) (ref.null $simpleliterals.SimpleLiterals.vtable))
 
 ;;; SimpleLiterals()
 (func $m_<init>__void@simpleliterals.SimpleLiterals
@@ -16,16 +26,19 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@simpleliterals.SimpleLiterals))
 
 ;;; void SimpleLiterals.main()
 (func $m_main__void@simpleliterals.SimpleLiterals
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (local $a i32)
  (local $b i32)
  (local $c (ref null $java.lang.Object))
  (local $d i32)
  (local $e (ref null $java.lang.String))
  (local $f (ref null $java.lang.Class))
+ (local $this (ref null $simpleliterals.SimpleLiterals))
+ (local.set $this (ref.cast $java.lang.Object $simpleliterals.SimpleLiterals (local.get $this.untyped) (global.get $simpleliterals.SimpleLiterals.rtt)))
  (block $return.label
   (block
    ;; boolean a = false;
@@ -49,4 +62,10 @@
   )
  )
 )
+(global funcref (ref.func $m_main__void@simpleliterals.SimpleLiterals))
+
+;;; Code for simpleliterals.SimpleLiterals [vtable]
+ (global.set $simpleliterals.SimpleLiterals.vtable (struct.new_with_rtt $simpleliterals.SimpleLiterals.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_main__void@simpleliterals.SimpleLiterals) (rtt.canon $simpleliterals.SimpleLiterals.vtable)))
+))
+(start $.runtime.init)
 

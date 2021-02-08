@@ -4,7 +4,17 @@
 
 ;;; CLASS  FunctionImpl
 (type $functiontype.FunctionImpl (struct
+ (field $vtable (ref null $functiontype.FunctionImpl.vtable))
 ))
+(type $functiontype.FunctionImpl.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_test__functiontype_Function__void (mut (ref $function.$java.lang.Object__$void)))
+))
+(global $functiontype.FunctionImpl.vtable (mut (ref null $functiontype.FunctionImpl.vtable)) (ref.null $functiontype.FunctionImpl.vtable))
 
 ;;; FunctionImpl()
 (func $m_<init>__void@functiontype.FunctionImpl
@@ -18,14 +28,23 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@functiontype.FunctionImpl))
 
 ;;; void FunctionImpl.test(Function f)
 (func $m_test__functiontype_Function__void@functiontype.FunctionImpl
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $f (ref null $java.lang.Object))
+ (local $this (ref null $functiontype.FunctionImpl))
+ (local.set $this (ref.cast $java.lang.Object $functiontype.FunctionImpl (local.get $this.untyped) (global.get $functiontype.FunctionImpl.rtt)))
  (block $return.label
   (block
   )
  )
 )
+(global funcref (ref.func $m_test__functiontype_Function__void@functiontype.FunctionImpl))
+
+;;; Code for functiontype.FunctionImpl [vtable]
+ (global.set $functiontype.FunctionImpl.vtable (struct.new_with_rtt $functiontype.FunctionImpl.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__functiontype_Function__void@functiontype.FunctionImpl) (rtt.canon $functiontype.FunctionImpl.vtable)))
+))
+(start $.runtime.init)
 

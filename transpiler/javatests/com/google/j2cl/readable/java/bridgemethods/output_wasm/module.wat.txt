@@ -4,7 +4,18 @@
 
 ;;; CLASS  A
 (type $bridgemethods.A (struct
+ (field $vtable (ref null $bridgemethods.A.vtable))
 ))
+(type $bridgemethods.A.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_fun__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object)))
+ (field $m_get__java_lang_Object (mut (ref $function.__$java.lang.Object)))
+))
+(global $bridgemethods.A.vtable (mut (ref null $bridgemethods.A.vtable)) (ref.null $bridgemethods.A.vtable))
 
 ;;; A()
 (func $m_<init>__void_$pp_bridgemethods@bridgemethods.A
@@ -18,13 +29,16 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_bridgemethods@bridgemethods.A))
 
 ;;; T A.fun(S s)
 (func $m_fun__java_lang_Object__java_lang_Object@bridgemethods.A
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $s (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
+ (local $this (ref null $bridgemethods.A))
+ (local.set $this (ref.cast $java.lang.Object $bridgemethods.A (local.get $this.untyped) (global.get $bridgemethods.A.rtt)))
  (block $return.label
   (block
    ;; return null;
@@ -34,12 +48,15 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_fun__java_lang_Object__java_lang_Object@bridgemethods.A))
 
 ;;; T A.get()
 (func $m_get__java_lang_Object@bridgemethods.A
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
+ (local $this (ref null $bridgemethods.A))
+ (local.set $this (ref.cast $java.lang.Object $bridgemethods.A (local.get $this.untyped) (global.get $bridgemethods.A.rtt)))
  (block $return.label
   (block
    ;; return null;
@@ -49,10 +66,23 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_get__java_lang_Object@bridgemethods.A))
 
 ;;; CLASS  B
 (type $bridgemethods.B (struct
+ (field $vtable (ref null $bridgemethods.B.vtable))
 ))
+(type $bridgemethods.B.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_fun__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object)))
+ (field $m_get__java_lang_Object (mut (ref $function.__$java.lang.Object)))
+ (field $m_fun__java_lang_String__java_lang_Integer (mut (ref $function.$java.lang.String__$java.lang.Integer)))
+))
+(global $bridgemethods.B.vtable (mut (ref null $bridgemethods.B.vtable)) (ref.null $bridgemethods.B.vtable))
 
 ;;; B()
 (func $m_<init>__void_$pp_bridgemethods@bridgemethods.B
@@ -66,44 +96,64 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_bridgemethods@bridgemethods.B))
 
 ;;; Integer B.fun(String s)
 (func $m_fun__java_lang_String__java_lang_Integer@bridgemethods.B
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $s (ref null $java.lang.String))
  (result (ref null $java.lang.Integer))
  (local $return.value (ref null $java.lang.Integer))
+ (local $this (ref null $bridgemethods.B))
+ (local.set $this (ref.cast $java.lang.Object $bridgemethods.B (local.get $this.untyped) (global.get $bridgemethods.B.rtt)))
  (block $return.label
   (block
    ;; return new Integer.<init>(1);
-   (local.set $return.value (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
+   (local.set $return.value (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
    (br $return.label)
   )
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_fun__java_lang_String__java_lang_Integer@bridgemethods.B))
 
 ;;; Integer B.fun(Object arg0)
 (func $m_fun__java_lang_Object__java_lang_Object@bridgemethods.B
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
- (result (ref null $java.lang.Integer))
- (local $return.value (ref null $java.lang.Integer))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (local $this (ref null $bridgemethods.B))
+ (local.set $this (ref.cast $java.lang.Object $bridgemethods.B (local.get $this.untyped) (global.get $bridgemethods.B.rtt)))
  (block $return.label
   (block
    ;; return B.this.fun(((String) arg0));
-   (local.set $return.value (ref.null $java.lang.Integer))
+   (local.set $return.value (call_ref (local.get $this)(ref.cast $java.lang.Object $java.lang.String (local.get $arg0) (global.get $java.lang.String.rtt))(struct.get $bridgemethods.B.vtable $m_fun__java_lang_String__java_lang_Integer (struct.get $bridgemethods.B $vtable(local.get $this)))))
    (br $return.label)
   )
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_fun__java_lang_Object__java_lang_Object@bridgemethods.B))
 
 ;;; INTERFACE  SpecializedInterface
 
 ;;; CLASS  AccidentalOverride
 (type $bridgemethods.AccidentalOverride (struct
+ (field $vtable (ref null $bridgemethods.AccidentalOverride.vtable))
 ))
+(type $bridgemethods.AccidentalOverride.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_fun__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object)))
+ (field $m_get__java_lang_Object (mut (ref $function.__$java.lang.Object)))
+ (field $m_fun__java_lang_String__java_lang_String (mut (ref $function.$java.lang.String__$java.lang.String)))
+ (field $m_get__java_lang_String (mut (ref $function.__$java.lang.String)))
+))
+(global $bridgemethods.AccidentalOverride.vtable (mut (ref null $bridgemethods.AccidentalOverride.vtable)) (ref.null $bridgemethods.AccidentalOverride.vtable))
 
 ;;; AccidentalOverride()
 (func $m_<init>__void_$pp_bridgemethods@bridgemethods.AccidentalOverride
@@ -117,60 +167,80 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_bridgemethods@bridgemethods.AccidentalOverride))
 
 ;;; String AccidentalOverride.fun(String arg0)
 (func $m_fun__java_lang_String__java_lang_String@bridgemethods.AccidentalOverride
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.String))
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))
+ (local $this (ref null $bridgemethods.AccidentalOverride))
+ (local.set $this (ref.cast $java.lang.Object $bridgemethods.AccidentalOverride (local.get $this.untyped) (global.get $bridgemethods.AccidentalOverride.rtt)))
  (block $return.label
   (block
    ;; return ((String) super.fun(arg0));
-   (local.set $return.value (ref.cast $java.lang.Object $java.lang.String (ref.null $java.lang.String) (global.get $java.lang.String.rtt)))
+   (local.set $return.value (ref.cast $java.lang.Object $java.lang.String (call_ref (local.get $this)(local.get $arg0)(struct.get $bridgemethods.A.vtable $m_fun__java_lang_Object__java_lang_Object (struct.get $bridgemethods.A $vtable(local.get $this)))) (global.get $java.lang.String.rtt)))
    (br $return.label)
   )
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_fun__java_lang_String__java_lang_String@bridgemethods.AccidentalOverride))
 
 ;;; String AccidentalOverride.get()
 (func $m_get__java_lang_String@bridgemethods.AccidentalOverride
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))
+ (local $this (ref null $bridgemethods.AccidentalOverride))
+ (local.set $this (ref.cast $java.lang.Object $bridgemethods.AccidentalOverride (local.get $this.untyped) (global.get $bridgemethods.AccidentalOverride.rtt)))
  (block $return.label
   (block
    ;; return ((String) A.this.get());
-   (local.set $return.value (ref.cast $java.lang.Object $java.lang.String (ref.null $java.lang.String) (global.get $java.lang.String.rtt)))
+   (local.set $return.value (ref.cast $java.lang.Object $java.lang.String (call_ref (local.get $this)(struct.get $bridgemethods.A.vtable $m_get__java_lang_Object (struct.get $bridgemethods.A $vtable(local.get $this)))) (global.get $java.lang.String.rtt)))
    (br $return.label)
   )
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_get__java_lang_String@bridgemethods.AccidentalOverride))
 
 ;;; String AccidentalOverride.fun(Object arg0)
 (func $m_fun__java_lang_Object__java_lang_Object@bridgemethods.AccidentalOverride
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
- (result (ref null $java.lang.String))
- (local $return.value (ref null $java.lang.String))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (local $this (ref null $bridgemethods.AccidentalOverride))
+ (local.set $this (ref.cast $java.lang.Object $bridgemethods.AccidentalOverride (local.get $this.untyped) (global.get $bridgemethods.AccidentalOverride.rtt)))
  (block $return.label
   (block
    ;; return AccidentalOverride.this.fun(((String) arg0));
-   (local.set $return.value (ref.null $java.lang.String))
+   (local.set $return.value (call_ref (local.get $this)(ref.cast $java.lang.Object $java.lang.String (local.get $arg0) (global.get $java.lang.String.rtt))(struct.get $bridgemethods.AccidentalOverride.vtable $m_fun__java_lang_String__java_lang_String (struct.get $bridgemethods.AccidentalOverride $vtable(local.get $this)))))
    (br $return.label)
   )
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_fun__java_lang_Object__java_lang_Object@bridgemethods.AccidentalOverride))
 ;;; Code for bridgemethods.BridgeMethod
 
 ;;; INTERFACE  SomeInterface
 
 ;;; CLASS  SuperParent
 (type $bridgemethods.SuperParent (struct
+ (field $vtable (ref null $bridgemethods.SuperParent.vtable))
 ))
+(type $bridgemethods.SuperParent.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_foo__java_lang_Object__java_lang_Object__void (mut (ref $function.$java.lang.Object__$java.lang.Object__$void)))
+))
+(global $bridgemethods.SuperParent.vtable (mut (ref null $bridgemethods.SuperParent.vtable)) (ref.null $bridgemethods.SuperParent.vtable))
 
 ;;; SuperParent()
 (func $m_<init>__void_$pp_bridgemethods@bridgemethods.SuperParent
@@ -184,21 +254,38 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_bridgemethods@bridgemethods.SuperParent))
 
 ;;; void SuperParent.foo(T t, S s)
 (func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.SuperParent
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Object))
  (param $s (ref null $java.lang.Object))
+ (local $this (ref null $bridgemethods.SuperParent))
+ (local.set $this (ref.cast $java.lang.Object $bridgemethods.SuperParent (local.get $this.untyped) (global.get $bridgemethods.SuperParent.rtt)))
  (block $return.label
   (block
   )
  )
 )
+(global funcref (ref.func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.SuperParent))
 
 ;;; CLASS  Parent
 (type $bridgemethods.Parent (struct
+ (field $vtable (ref null $bridgemethods.Parent.vtable))
 ))
+(type $bridgemethods.Parent.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_foo__java_lang_Object__java_lang_Object__void (mut (ref $function.$java.lang.Object__$java.lang.Object__$void)))
+ (field $m_foo__java_lang_Error__java_lang_Number__void (mut (ref $function.$java.lang.Error__$java.lang.Number__$void)))
+ (field $m_bar__java_lang_Number__void (mut (ref $function.$java.lang.Number__$void)))
+ (field $m_fun__java_lang_Object__void (mut (ref $function.$java.lang.Object__$void)))
+))
+(global $bridgemethods.Parent.vtable (mut (ref null $bridgemethods.Parent.vtable)) (ref.null $bridgemethods.Parent.vtable))
 
 ;;; Parent()
 (func $m_<init>__void_$pp_bridgemethods@bridgemethods.Parent
@@ -212,54 +299,83 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_bridgemethods@bridgemethods.Parent))
 
 ;;; void Parent.foo(T t, Number s)
 (func $m_foo__java_lang_Error__java_lang_Number__void@bridgemethods.Parent
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Error))
  (param $s (ref null $java.lang.Number))
+ (local $this (ref null $bridgemethods.Parent))
+ (local.set $this (ref.cast $java.lang.Object $bridgemethods.Parent (local.get $this.untyped) (global.get $bridgemethods.Parent.rtt)))
  (block $return.label
   (block
   )
  )
 )
+(global funcref (ref.func $m_foo__java_lang_Error__java_lang_Number__void@bridgemethods.Parent))
 
 ;;; void Parent.bar(T t)
 (func $m_bar__java_lang_Number__void@bridgemethods.Parent
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Number))
+ (local $this (ref null $bridgemethods.Parent))
+ (local.set $this (ref.cast $java.lang.Object $bridgemethods.Parent (local.get $this.untyped) (global.get $bridgemethods.Parent.rtt)))
  (block $return.label
   (block
   )
  )
 )
+(global funcref (ref.func $m_bar__java_lang_Number__void@bridgemethods.Parent))
 
 ;;; void Parent.fun(T t)
 (func $m_fun__java_lang_Object__void@bridgemethods.Parent
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Object))
+ (local $this (ref null $bridgemethods.Parent))
+ (local.set $this (ref.cast $java.lang.Object $bridgemethods.Parent (local.get $this.untyped) (global.get $bridgemethods.Parent.rtt)))
  (block $return.label
   (block
   )
  )
 )
+(global funcref (ref.func $m_fun__java_lang_Object__void@bridgemethods.Parent))
 
 ;;; void Parent.foo(Object arg0, Object arg1)
 (func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.Parent
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Object))
+ (local $this (ref null $bridgemethods.Parent))
+ (local.set $this (ref.cast $java.lang.Object $bridgemethods.Parent (local.get $this.untyped) (global.get $bridgemethods.Parent.rtt)))
  (block $return.label
   (block
    ;; Parent.this.foo(((T) arg0),((Number) arg1));
-   
+   (call_ref (local.get $this)(ref.null $java.lang.Error)(ref.cast $java.lang.Object $java.lang.Number (local.get $arg1) (global.get $java.lang.Number.rtt))(struct.get $bridgemethods.Parent.vtable $m_foo__java_lang_Error__java_lang_Number__void (struct.get $bridgemethods.Parent $vtable(local.get $this))))
   )
  )
 )
+(global funcref (ref.func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.Parent))
 
 ;;; CLASS  BridgeMethod
 (type $bridgemethods.BridgeMethod (struct
+ (field $vtable (ref null $bridgemethods.BridgeMethod.vtable))
 ))
+(type $bridgemethods.BridgeMethod.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_foo__java_lang_Object__java_lang_Object__void (mut (ref $function.$java.lang.Object__$java.lang.Object__$void)))
+ (field $m_foo__java_lang_Error__java_lang_Number__void (mut (ref $function.$java.lang.Error__$java.lang.Number__$void)))
+ (field $m_bar__java_lang_Number__void (mut (ref $function.$java.lang.Number__$void)))
+ (field $m_fun__java_lang_Object__void (mut (ref $function.$java.lang.Object__$void)))
+ (field $m_foo__java_lang_AssertionError__java_lang_Number__void (mut (ref $function.$java.lang.AssertionError__$java.lang.Number__$void)))
+ (field $m_fun__java_lang_Number__void (mut (ref $function.$java.lang.Number__$void)))
+ (field $m_foo__java_lang_Object__java_lang_Number__void (mut (ref $function.$java.lang.Object__$java.lang.Number__$void)))
+))
+(global $bridgemethods.BridgeMethod.vtable (mut (ref null $bridgemethods.BridgeMethod.vtable)) (ref.null $bridgemethods.BridgeMethod.vtable))
 
 ;;; BridgeMethod()
 (func $m_<init>__void@bridgemethods.BridgeMethod
@@ -273,69 +389,99 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@bridgemethods.BridgeMethod))
 
 ;;; void BridgeMethod.foo(AssertionError a, Number n)
 (func $m_foo__java_lang_AssertionError__java_lang_Number__void@bridgemethods.BridgeMethod
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $a (ref null $java.lang.AssertionError))
  (param $n (ref null $java.lang.Number))
+ (local $this (ref null $bridgemethods.BridgeMethod))
+ (local.set $this (ref.cast $java.lang.Object $bridgemethods.BridgeMethod (local.get $this.untyped) (global.get $bridgemethods.BridgeMethod.rtt)))
  (block $return.label
   (block
   )
  )
 )
+(global funcref (ref.func $m_foo__java_lang_AssertionError__java_lang_Number__void@bridgemethods.BridgeMethod))
 
 ;;; void BridgeMethod.bar(Number t)
 (func $m_bar__java_lang_Number__void@bridgemethods.BridgeMethod
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Number))
+ (local $this (ref null $bridgemethods.BridgeMethod))
+ (local.set $this (ref.cast $java.lang.Object $bridgemethods.BridgeMethod (local.get $this.untyped) (global.get $bridgemethods.BridgeMethod.rtt)))
  (block $return.label
   (block
   )
  )
 )
+(global funcref (ref.func $m_bar__java_lang_Number__void@bridgemethods.BridgeMethod))
 
 ;;; void BridgeMethod.fun(Number t)
 (func $m_fun__java_lang_Number__void@bridgemethods.BridgeMethod
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Number))
+ (local $this (ref null $bridgemethods.BridgeMethod))
+ (local.set $this (ref.cast $java.lang.Object $bridgemethods.BridgeMethod (local.get $this.untyped) (global.get $bridgemethods.BridgeMethod.rtt)))
  (block $return.label
   (block
   )
  )
 )
+(global funcref (ref.func $m_fun__java_lang_Number__void@bridgemethods.BridgeMethod))
 
 ;;; void BridgeMethod.foo(Object arg0, Number arg1)
 (func $m_foo__java_lang_Object__java_lang_Number__void@bridgemethods.BridgeMethod
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Number))
+ (local $this (ref null $bridgemethods.BridgeMethod))
+ (local.set $this (ref.cast $java.lang.Object $bridgemethods.BridgeMethod (local.get $this.untyped) (global.get $bridgemethods.BridgeMethod.rtt)))
  (block $return.label
   (block
    ;; BridgeMethod.this.foo(((AssertionError) arg0),arg1);
-   
+   (call_ref (local.get $this)(ref.cast $java.lang.Object $java.lang.AssertionError (local.get $arg0) (global.get $java.lang.AssertionError.rtt))(local.get $arg1)(struct.get $bridgemethods.BridgeMethod.vtable $m_foo__java_lang_AssertionError__java_lang_Number__void (struct.get $bridgemethods.BridgeMethod $vtable(local.get $this))))
   )
  )
 )
+(global funcref (ref.func $m_foo__java_lang_Object__java_lang_Number__void@bridgemethods.BridgeMethod))
 
 ;;; void BridgeMethod.foo(Error arg0, Number arg1)
 (func $m_foo__java_lang_Error__java_lang_Number__void@bridgemethods.BridgeMethod
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Error))
  (param $arg1 (ref null $java.lang.Number))
+ (local $this (ref null $bridgemethods.BridgeMethod))
+ (local.set $this (ref.cast $java.lang.Object $bridgemethods.BridgeMethod (local.get $this.untyped) (global.get $bridgemethods.BridgeMethod.rtt)))
  (block $return.label
   (block
    ;; BridgeMethod.this.foo(((AssertionError) arg0),arg1);
-   
+   (call_ref (local.get $this)(ref.cast $java.lang.Object $java.lang.AssertionError (local.get $arg0) (global.get $java.lang.AssertionError.rtt))(local.get $arg1)(struct.get $bridgemethods.BridgeMethod.vtable $m_foo__java_lang_AssertionError__java_lang_Number__void (struct.get $bridgemethods.BridgeMethod $vtable(local.get $this))))
   )
  )
 )
+(global funcref (ref.func $m_foo__java_lang_Error__java_lang_Number__void@bridgemethods.BridgeMethod))
 
 ;;; INTERFACE  SomeOtherFooInterface
 
 ;;; CLASS  DualUnrelatedBridges
 (type $bridgemethods.DualUnrelatedBridges (struct
+ (field $vtable (ref null $bridgemethods.DualUnrelatedBridges.vtable))
 ))
+(type $bridgemethods.DualUnrelatedBridges.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_foo__java_lang_String__java_lang_Double__void (mut (ref $function.$java.lang.String__$java.lang.Double__$void)))
+ (field $m_foo__java_lang_String__java_lang_Number__void (mut (ref $function.$java.lang.String__$java.lang.Number__$void)))
+ (field $m_foo__java_lang_Object__java_lang_Object__void (mut (ref $function.$java.lang.Object__$java.lang.Object__$void)))
+ (field $m_foo__java_lang_Object__java_lang_Number__void (mut (ref $function.$java.lang.Object__$java.lang.Number__$void)))
+ (field $m_foo__java_lang_Object__java_lang_Double__void (mut (ref $function.$java.lang.Object__$java.lang.Double__$void)))
+))
+(global $bridgemethods.DualUnrelatedBridges.vtable (mut (ref null $bridgemethods.DualUnrelatedBridges.vtable)) (ref.null $bridgemethods.DualUnrelatedBridges.vtable))
 
 ;;; DualUnrelatedBridges()
 (func $m_<init>__void_$pp_bridgemethods@bridgemethods.DualUnrelatedBridges
@@ -349,71 +495,98 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_bridgemethods@bridgemethods.DualUnrelatedBridges))
 
 ;;; void DualUnrelatedBridges.foo(String s, Double n)
 (func $m_foo__java_lang_String__java_lang_Double__void@bridgemethods.DualUnrelatedBridges
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $s (ref null $java.lang.String))
  (param $n (ref null $java.lang.Double))
+ (local $this (ref null $bridgemethods.DualUnrelatedBridges))
+ (local.set $this (ref.cast $java.lang.Object $bridgemethods.DualUnrelatedBridges (local.get $this.untyped) (global.get $bridgemethods.DualUnrelatedBridges.rtt)))
  (block $return.label
   (block
   )
  )
 )
+(global funcref (ref.func $m_foo__java_lang_String__java_lang_Double__void@bridgemethods.DualUnrelatedBridges))
 
 ;;; void DualUnrelatedBridges.foo(String s, Number n)
 (func $m_foo__java_lang_String__java_lang_Number__void@bridgemethods.DualUnrelatedBridges
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $s (ref null $java.lang.String))
  (param $n (ref null $java.lang.Number))
+ (local $this (ref null $bridgemethods.DualUnrelatedBridges))
+ (local.set $this (ref.cast $java.lang.Object $bridgemethods.DualUnrelatedBridges (local.get $this.untyped) (global.get $bridgemethods.DualUnrelatedBridges.rtt)))
  (block $return.label
   (block
   )
  )
 )
+(global funcref (ref.func $m_foo__java_lang_String__java_lang_Number__void@bridgemethods.DualUnrelatedBridges))
 
 ;;; void DualUnrelatedBridges.foo(Object arg0, Object arg1)
 (func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.DualUnrelatedBridges
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Object))
+ (local $this (ref null $bridgemethods.DualUnrelatedBridges))
+ (local.set $this (ref.cast $java.lang.Object $bridgemethods.DualUnrelatedBridges (local.get $this.untyped) (global.get $bridgemethods.DualUnrelatedBridges.rtt)))
  (block $return.label
   (block
    ;; DualUnrelatedBridges.this.foo(((String) arg0),((Double) arg1));
-   
+   (call_ref (local.get $this)(ref.cast $java.lang.Object $java.lang.String (local.get $arg0) (global.get $java.lang.String.rtt))(ref.cast $java.lang.Object $java.lang.Double (local.get $arg1) (global.get $java.lang.Double.rtt))(struct.get $bridgemethods.DualUnrelatedBridges.vtable $m_foo__java_lang_String__java_lang_Double__void (struct.get $bridgemethods.DualUnrelatedBridges $vtable(local.get $this))))
   )
  )
 )
+(global funcref (ref.func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.DualUnrelatedBridges))
 
 ;;; void DualUnrelatedBridges.foo(Object arg0, Number arg1)
 (func $m_foo__java_lang_Object__java_lang_Number__void@bridgemethods.DualUnrelatedBridges
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Number))
+ (local $this (ref null $bridgemethods.DualUnrelatedBridges))
+ (local.set $this (ref.cast $java.lang.Object $bridgemethods.DualUnrelatedBridges (local.get $this.untyped) (global.get $bridgemethods.DualUnrelatedBridges.rtt)))
  (block $return.label
   (block
    ;; DualUnrelatedBridges.this.foo(((String) arg0),arg1);
-   
+   (call_ref (local.get $this)(ref.cast $java.lang.Object $java.lang.String (local.get $arg0) (global.get $java.lang.String.rtt))(local.get $arg1)(struct.get $bridgemethods.DualUnrelatedBridges.vtable $m_foo__java_lang_String__java_lang_Number__void (struct.get $bridgemethods.DualUnrelatedBridges $vtable(local.get $this))))
   )
  )
 )
+(global funcref (ref.func $m_foo__java_lang_Object__java_lang_Number__void@bridgemethods.DualUnrelatedBridges))
 
 ;;; void DualUnrelatedBridges.foo(Object arg0, Double arg1)
 (func $m_foo__java_lang_Object__java_lang_Double__void@bridgemethods.DualUnrelatedBridges
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Double))
+ (local $this (ref null $bridgemethods.DualUnrelatedBridges))
+ (local.set $this (ref.cast $java.lang.Object $bridgemethods.DualUnrelatedBridges (local.get $this.untyped) (global.get $bridgemethods.DualUnrelatedBridges.rtt)))
  (block $return.label
   (block
    ;; DualUnrelatedBridges.this.foo(((String) arg0),arg1);
-   
+   (call_ref (local.get $this)(ref.cast $java.lang.Object $java.lang.String (local.get $arg0) (global.get $java.lang.String.rtt))(local.get $arg1)(struct.get $bridgemethods.DualUnrelatedBridges.vtable $m_foo__java_lang_String__java_lang_Double__void (struct.get $bridgemethods.DualUnrelatedBridges $vtable(local.get $this))))
   )
  )
 )
+(global funcref (ref.func $m_foo__java_lang_Object__java_lang_Double__void@bridgemethods.DualUnrelatedBridges))
 
 ;;; CLASS  SuperDualUnrelatedAccidentalBridges
 (type $bridgemethods.SuperDualUnrelatedAccidentalBridges (struct
+ (field $vtable (ref null $bridgemethods.SuperDualUnrelatedAccidentalBridges.vtable))
 ))
+(type $bridgemethods.SuperDualUnrelatedAccidentalBridges.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_foo__java_lang_String__java_lang_Double__void (mut (ref $function.$java.lang.String__$java.lang.Double__$void)))
+ (field $m_foo__java_lang_String__java_lang_Number__void (mut (ref $function.$java.lang.String__$java.lang.Number__$void)))
+))
+(global $bridgemethods.SuperDualUnrelatedAccidentalBridges.vtable (mut (ref null $bridgemethods.SuperDualUnrelatedAccidentalBridges.vtable)) (ref.null $bridgemethods.SuperDualUnrelatedAccidentalBridges.vtable))
 
 ;;; SuperDualUnrelatedAccidentalBridges()
 (func $m_<init>__void_$pp_bridgemethods@bridgemethods.SuperDualUnrelatedAccidentalBridges
@@ -427,32 +600,53 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_bridgemethods@bridgemethods.SuperDualUnrelatedAccidentalBridges))
 
 ;;; void SuperDualUnrelatedAccidentalBridges.foo(String s, Double n)
 (func $m_foo__java_lang_String__java_lang_Double__void@bridgemethods.SuperDualUnrelatedAccidentalBridges
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $s (ref null $java.lang.String))
  (param $n (ref null $java.lang.Double))
+ (local $this (ref null $bridgemethods.SuperDualUnrelatedAccidentalBridges))
+ (local.set $this (ref.cast $java.lang.Object $bridgemethods.SuperDualUnrelatedAccidentalBridges (local.get $this.untyped) (global.get $bridgemethods.SuperDualUnrelatedAccidentalBridges.rtt)))
  (block $return.label
   (block
   )
  )
 )
+(global funcref (ref.func $m_foo__java_lang_String__java_lang_Double__void@bridgemethods.SuperDualUnrelatedAccidentalBridges))
 
 ;;; void SuperDualUnrelatedAccidentalBridges.foo(String s, Number n)
 (func $m_foo__java_lang_String__java_lang_Number__void@bridgemethods.SuperDualUnrelatedAccidentalBridges
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $s (ref null $java.lang.String))
  (param $n (ref null $java.lang.Number))
+ (local $this (ref null $bridgemethods.SuperDualUnrelatedAccidentalBridges))
+ (local.set $this (ref.cast $java.lang.Object $bridgemethods.SuperDualUnrelatedAccidentalBridges (local.get $this.untyped) (global.get $bridgemethods.SuperDualUnrelatedAccidentalBridges.rtt)))
  (block $return.label
   (block
   )
  )
 )
+(global funcref (ref.func $m_foo__java_lang_String__java_lang_Number__void@bridgemethods.SuperDualUnrelatedAccidentalBridges))
 
 ;;; CLASS  DualUnrelatedAccidentalBridges
 (type $bridgemethods.DualUnrelatedAccidentalBridges (struct
+ (field $vtable (ref null $bridgemethods.DualUnrelatedAccidentalBridges.vtable))
 ))
+(type $bridgemethods.DualUnrelatedAccidentalBridges.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_foo__java_lang_String__java_lang_Double__void (mut (ref $function.$java.lang.String__$java.lang.Double__$void)))
+ (field $m_foo__java_lang_String__java_lang_Number__void (mut (ref $function.$java.lang.String__$java.lang.Number__$void)))
+ (field $m_foo__java_lang_Object__java_lang_Object__void (mut (ref $function.$java.lang.Object__$java.lang.Object__$void)))
+ (field $m_foo__java_lang_Object__java_lang_Number__void (mut (ref $function.$java.lang.Object__$java.lang.Number__$void)))
+ (field $m_foo__java_lang_Object__java_lang_Double__void (mut (ref $function.$java.lang.Object__$java.lang.Double__$void)))
+))
+(global $bridgemethods.DualUnrelatedAccidentalBridges.vtable (mut (ref null $bridgemethods.DualUnrelatedAccidentalBridges.vtable)) (ref.null $bridgemethods.DualUnrelatedAccidentalBridges.vtable))
 
 ;;; DualUnrelatedAccidentalBridges()
 (func $m_<init>__void_$pp_bridgemethods@bridgemethods.DualUnrelatedAccidentalBridges
@@ -466,51 +660,71 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_bridgemethods@bridgemethods.DualUnrelatedAccidentalBridges))
 
 ;;; void DualUnrelatedAccidentalBridges.foo(Object arg0, Object arg1)
 (func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.DualUnrelatedAccidentalBridges
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Object))
+ (local $this (ref null $bridgemethods.DualUnrelatedAccidentalBridges))
+ (local.set $this (ref.cast $java.lang.Object $bridgemethods.DualUnrelatedAccidentalBridges (local.get $this.untyped) (global.get $bridgemethods.DualUnrelatedAccidentalBridges.rtt)))
  (block $return.label
   (block
    ;; SuperDualUnrelatedAccidentalBridges.this.foo(((String) arg0),((Double) arg1));
-   
+   (call_ref (local.get $this)(ref.cast $java.lang.Object $java.lang.String (local.get $arg0) (global.get $java.lang.String.rtt))(ref.cast $java.lang.Object $java.lang.Double (local.get $arg1) (global.get $java.lang.Double.rtt))(struct.get $bridgemethods.SuperDualUnrelatedAccidentalBridges.vtable $m_foo__java_lang_String__java_lang_Double__void (struct.get $bridgemethods.SuperDualUnrelatedAccidentalBridges $vtable(local.get $this))))
   )
  )
 )
+(global funcref (ref.func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.DualUnrelatedAccidentalBridges))
 
 ;;; void DualUnrelatedAccidentalBridges.foo(Object arg0, Number arg1)
 (func $m_foo__java_lang_Object__java_lang_Number__void@bridgemethods.DualUnrelatedAccidentalBridges
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Number))
+ (local $this (ref null $bridgemethods.DualUnrelatedAccidentalBridges))
+ (local.set $this (ref.cast $java.lang.Object $bridgemethods.DualUnrelatedAccidentalBridges (local.get $this.untyped) (global.get $bridgemethods.DualUnrelatedAccidentalBridges.rtt)))
  (block $return.label
   (block
    ;; SuperDualUnrelatedAccidentalBridges.this.foo(((String) arg0),arg1);
-   
+   (call_ref (local.get $this)(ref.cast $java.lang.Object $java.lang.String (local.get $arg0) (global.get $java.lang.String.rtt))(local.get $arg1)(struct.get $bridgemethods.SuperDualUnrelatedAccidentalBridges.vtable $m_foo__java_lang_String__java_lang_Number__void (struct.get $bridgemethods.SuperDualUnrelatedAccidentalBridges $vtable(local.get $this))))
   )
  )
 )
+(global funcref (ref.func $m_foo__java_lang_Object__java_lang_Number__void@bridgemethods.DualUnrelatedAccidentalBridges))
 
 ;;; void DualUnrelatedAccidentalBridges.foo(Object arg0, Double arg1)
 (func $m_foo__java_lang_Object__java_lang_Double__void@bridgemethods.DualUnrelatedAccidentalBridges
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Double))
+ (local $this (ref null $bridgemethods.DualUnrelatedAccidentalBridges))
+ (local.set $this (ref.cast $java.lang.Object $bridgemethods.DualUnrelatedAccidentalBridges (local.get $this.untyped) (global.get $bridgemethods.DualUnrelatedAccidentalBridges.rtt)))
  (block $return.label
   (block
    ;; SuperDualUnrelatedAccidentalBridges.this.foo(((String) arg0),arg1);
-   
+   (call_ref (local.get $this)(ref.cast $java.lang.Object $java.lang.String (local.get $arg0) (global.get $java.lang.String.rtt))(local.get $arg1)(struct.get $bridgemethods.SuperDualUnrelatedAccidentalBridges.vtable $m_foo__java_lang_String__java_lang_Double__void (struct.get $bridgemethods.SuperDualUnrelatedAccidentalBridges $vtable(local.get $this))))
   )
  )
 )
+(global funcref (ref.func $m_foo__java_lang_Object__java_lang_Double__void@bridgemethods.DualUnrelatedAccidentalBridges))
 
 ;;; INTERFACE  Getter
 
 ;;; CLASS  ClassWithParameterizedGet
 (type $bridgemethods.ClassWithParameterizedGet (struct
+ (field $vtable (ref null $bridgemethods.ClassWithParameterizedGet.vtable))
 ))
+(type $bridgemethods.ClassWithParameterizedGet.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_get__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object)))
+))
+(global $bridgemethods.ClassWithParameterizedGet.vtable (mut (ref null $bridgemethods.ClassWithParameterizedGet.vtable)) (ref.null $bridgemethods.ClassWithParameterizedGet.vtable))
 
 ;;; ClassWithParameterizedGet()
 (func $m_<init>__void_$pp_bridgemethods@bridgemethods.ClassWithParameterizedGet
@@ -524,13 +738,16 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_bridgemethods@bridgemethods.ClassWithParameterizedGet))
 
 ;;; T ClassWithParameterizedGet.get(T t)
 (func $m_get__java_lang_Object__java_lang_Object@bridgemethods.ClassWithParameterizedGet
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
+ (local $this (ref null $bridgemethods.ClassWithParameterizedGet))
+ (local.set $this (ref.cast $java.lang.Object $bridgemethods.ClassWithParameterizedGet (local.get $this.untyped) (global.get $bridgemethods.ClassWithParameterizedGet.rtt)))
  (block $return.label
   (block
    ;; return null;
@@ -540,10 +757,23 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_get__java_lang_Object__java_lang_Object@bridgemethods.ClassWithParameterizedGet))
 
 ;;; CLASS  AccidentalOverrideBridge
 (type $bridgemethods.AccidentalOverrideBridge (struct
+ (field $vtable (ref null $bridgemethods.AccidentalOverrideBridge.vtable))
 ))
+(type $bridgemethods.AccidentalOverrideBridge.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_get__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object)))
+ (field $m_test__void (mut (ref $function.__$void)))
+ (field $m_get__java_lang_String__java_lang_String (mut (ref $function.$java.lang.String__$java.lang.String)))
+))
+(global $bridgemethods.AccidentalOverrideBridge.vtable (mut (ref null $bridgemethods.AccidentalOverrideBridge.vtable)) (ref.null $bridgemethods.AccidentalOverrideBridge.vtable))
 
 ;;; AccidentalOverrideBridge()
 (func $m_<init>__void_$pp_bridgemethods@bridgemethods.AccidentalOverrideBridge
@@ -557,57 +787,76 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_bridgemethods@bridgemethods.AccidentalOverrideBridge))
 
 ;;; void AccidentalOverrideBridge.test()
 (func $m_test__void@bridgemethods.AccidentalOverrideBridge
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (local $g (ref null $java.lang.Object))
+ (local $this (ref null $bridgemethods.AccidentalOverrideBridge))
+ (local.set $this (ref.cast $java.lang.Object $bridgemethods.AccidentalOverrideBridge (local.get $this.untyped) (global.get $bridgemethods.AccidentalOverrideBridge.rtt)))
  (block $return.label
   (block
    ;; Getter g = new AccidentalOverrideBridge.<init>();
    
-   (local.set $g (call $m_<init>__void_$pp_bridgemethods@bridgemethods.AccidentalOverrideBridge (struct.new_with_rtt $bridgemethods.AccidentalOverrideBridge (global.get $bridgemethods.AccidentalOverrideBridge.rtt))))
+   (local.set $g (call $m_<init>__void_$pp_bridgemethods@bridgemethods.AccidentalOverrideBridge (struct.new_with_rtt $bridgemethods.AccidentalOverrideBridge (global.get $bridgemethods.AccidentalOverrideBridge.vtable) (global.get $bridgemethods.AccidentalOverrideBridge.rtt))))
    ;; g.get("");
    (drop (ref.null $java.lang.String))
   )
  )
 )
+(global funcref (ref.func $m_test__void@bridgemethods.AccidentalOverrideBridge))
 
 ;;; String AccidentalOverrideBridge.get(String arg0)
 (func $m_get__java_lang_String__java_lang_String@bridgemethods.AccidentalOverrideBridge
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.String))
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))
+ (local $this (ref null $bridgemethods.AccidentalOverrideBridge))
+ (local.set $this (ref.cast $java.lang.Object $bridgemethods.AccidentalOverrideBridge (local.get $this.untyped) (global.get $bridgemethods.AccidentalOverrideBridge.rtt)))
  (block $return.label
   (block
    ;; return ((String) super.get(arg0));
-   (local.set $return.value (ref.cast $java.lang.Object $java.lang.String (ref.null $java.lang.String) (global.get $java.lang.String.rtt)))
+   (local.set $return.value (ref.cast $java.lang.Object $java.lang.String (call_ref (local.get $this)(local.get $arg0)(struct.get $bridgemethods.ClassWithParameterizedGet.vtable $m_get__java_lang_Object__java_lang_Object (struct.get $bridgemethods.ClassWithParameterizedGet $vtable(local.get $this)))) (global.get $java.lang.String.rtt)))
    (br $return.label)
   )
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_get__java_lang_String__java_lang_String@bridgemethods.AccidentalOverrideBridge))
 
 ;;; String AccidentalOverrideBridge.get(Object arg0)
 (func $m_get__java_lang_Object__java_lang_Object@bridgemethods.AccidentalOverrideBridge
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
- (result (ref null $java.lang.String))
- (local $return.value (ref null $java.lang.String))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (local $this (ref null $bridgemethods.AccidentalOverrideBridge))
+ (local.set $this (ref.cast $java.lang.Object $bridgemethods.AccidentalOverrideBridge (local.get $this.untyped) (global.get $bridgemethods.AccidentalOverrideBridge.rtt)))
  (block $return.label
   (block
    ;; return AccidentalOverrideBridge.this.get(((String) arg0));
-   (local.set $return.value (ref.null $java.lang.String))
+   (local.set $return.value (call_ref (local.get $this)(ref.cast $java.lang.Object $java.lang.String (local.get $arg0) (global.get $java.lang.String.rtt))(struct.get $bridgemethods.AccidentalOverrideBridge.vtable $m_get__java_lang_String__java_lang_String (struct.get $bridgemethods.AccidentalOverrideBridge $vtable(local.get $this)))))
    (br $return.label)
   )
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_get__java_lang_Object__java_lang_Object@bridgemethods.AccidentalOverrideBridge))
 
 ;;; CLASS  TestCase10036
 (type $bridgemethods.TestCase10036 (struct
+ (field $vtable (ref null $bridgemethods.TestCase10036.vtable))
 ))
+(type $bridgemethods.TestCase10036.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $bridgemethods.TestCase10036.vtable (mut (ref null $bridgemethods.TestCase10036.vtable)) (ref.null $bridgemethods.TestCase10036.vtable))
 
 ;;; TestCase10036()
 (func $m_<init>__void_$pp_bridgemethods@bridgemethods.TestCase10036
@@ -621,6 +870,7 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_bridgemethods@bridgemethods.TestCase10036))
 
 ;;; INTERFACE  BI3
 
@@ -639,6 +889,7 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_get__java_lang_String__java_lang_String@bridgemethods.TestCase10036.BI3))
 
 ;;; INTERFACE  BI2
 
@@ -646,7 +897,17 @@
 
 ;;; CLASS  B
 (type $bridgemethods.TestCase10036.B (struct
+ (field $vtable (ref null $bridgemethods.TestCase10036.B.vtable))
 ))
+(type $bridgemethods.TestCase10036.B.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_get__java_lang_Comparable__java_lang_String (mut (ref $function.$java.lang.Object__$java.lang.String)))
+))
+(global $bridgemethods.TestCase10036.B.vtable (mut (ref null $bridgemethods.TestCase10036.B.vtable)) (ref.null $bridgemethods.TestCase10036.B.vtable))
 
 ;;; B()
 (func $m_<init>__void_$pp_bridgemethods@bridgemethods.TestCase10036.B
@@ -660,10 +921,20 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_bridgemethods@bridgemethods.TestCase10036.B))
 
 ;;; CLASS  TestCase102
 (type $bridgemethods.TestCase102 (struct
+ (field $vtable (ref null $bridgemethods.TestCase102.vtable))
 ))
+(type $bridgemethods.TestCase102.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $bridgemethods.TestCase102.vtable (mut (ref null $bridgemethods.TestCase102.vtable)) (ref.null $bridgemethods.TestCase102.vtable))
 
 ;;; TestCase102()
 (func $m_<init>__void_$pp_bridgemethods@bridgemethods.TestCase102
@@ -677,6 +948,7 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_bridgemethods@bridgemethods.TestCase102))
 
 ;;; INTERFACE  BI2
 
@@ -684,7 +956,17 @@
 
 ;;; CLASS  B
 (type $bridgemethods.TestCase102.B (struct
+ (field $vtable (ref null $bridgemethods.TestCase102.B.vtable))
 ))
+(type $bridgemethods.TestCase102.B.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_set__java_lang_Object__void (mut (ref $function.$java.lang.Object__$void)))
+))
+(global $bridgemethods.TestCase102.B.vtable (mut (ref null $bridgemethods.TestCase102.B.vtable)) (ref.null $bridgemethods.TestCase102.B.vtable))
 
 ;;; B()
 (func $m_<init>__void_$pp_bridgemethods@bridgemethods.TestCase102.B
@@ -698,11 +980,23 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_bridgemethods@bridgemethods.TestCase102.B))
 
 ;;; CLASS  C
 (type $bridgemethods.TestCase102.C (struct
+ (field $vtable (ref null $bridgemethods.TestCase102.C.vtable))
  (field $this@bridgemethods.TestCase102.C (mut (ref null $bridgemethods.TestCase102)))
 ))
+(type $bridgemethods.TestCase102.C.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_set__java_lang_Object__void (mut (ref $function.$java.lang.Object__$void)))
+ (field $m_set__java_lang_String__void (mut (ref $function.$java.lang.String__$void)))
+))
+(global $bridgemethods.TestCase102.C.vtable (mut (ref null $bridgemethods.TestCase102.C.vtable)) (ref.null $bridgemethods.TestCase102.C.vtable))
 
 ;;; C()
 (func $m_<init>__void_$pp_bridgemethods@bridgemethods.TestCase102.C
@@ -716,30 +1010,47 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_bridgemethods@bridgemethods.TestCase102.C))
 
 ;;; void C.set(String value)
 (func $m_set__java_lang_String__void@bridgemethods.TestCase102.C
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $value (ref null $java.lang.String))
+ (local $this (ref null $bridgemethods.TestCase102.C))
+ (local.set $this (ref.cast $java.lang.Object $bridgemethods.TestCase102.C (local.get $this.untyped) (global.get $bridgemethods.TestCase102.C.rtt)))
  (block $return.label
   (block
   )
  )
 )
+(global funcref (ref.func $m_set__java_lang_String__void@bridgemethods.TestCase102.C))
 
 ;;; void C.set(B1 value)
 (func $m_set__java_lang_Object__void@bridgemethods.TestCase102.C
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $value (ref null $java.lang.Object))
+ (local $this (ref null $bridgemethods.TestCase102.C))
+ (local.set $this (ref.cast $java.lang.Object $bridgemethods.TestCase102.C (local.get $this.untyped) (global.get $bridgemethods.TestCase102.C.rtt)))
  (block $return.label
   (block
   )
  )
 )
+(global funcref (ref.func $m_set__java_lang_Object__void@bridgemethods.TestCase102.C))
 
 ;;; CLASS  ParameterizedParent
 (type $bridgemethods.ParameterizedParent (struct
+ (field $vtable (ref null $bridgemethods.ParameterizedParent.vtable))
 ))
+(type $bridgemethods.ParameterizedParent.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_m__bridgemethods_ParameterizedParent__bridgemethods_ParameterizedParent_$pp_bridgemethods (mut (ref $function.$bridgemethods.ParameterizedParent__$bridgemethods.ParameterizedParent)))
+))
+(global $bridgemethods.ParameterizedParent.vtable (mut (ref null $bridgemethods.ParameterizedParent.vtable)) (ref.null $bridgemethods.ParameterizedParent.vtable))
 
 ;;; ParameterizedParent()
 (func $m_<init>__void_$pp_bridgemethods@bridgemethods.ParameterizedParent
@@ -753,13 +1064,16 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_bridgemethods@bridgemethods.ParameterizedParent))
 
 ;;; Q ParameterizedParent.m(Q t)
 (func $m_m__bridgemethods_ParameterizedParent__bridgemethods_ParameterizedParent_$pp_bridgemethods@bridgemethods.ParameterizedParent
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $t (ref null $bridgemethods.ParameterizedParent))
  (result (ref null $bridgemethods.ParameterizedParent))
  (local $return.value (ref null $bridgemethods.ParameterizedParent))
+ (local $this (ref null $bridgemethods.ParameterizedParent))
+ (local.set $this (ref.cast $java.lang.Object $bridgemethods.ParameterizedParent (local.get $this.untyped) (global.get $bridgemethods.ParameterizedParent.rtt)))
  (block $return.label
   (block
    ;; return null;
@@ -769,10 +1083,22 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_m__bridgemethods_ParameterizedParent__bridgemethods_ParameterizedParent_$pp_bridgemethods@bridgemethods.ParameterizedParent))
 
 ;;; CLASS  ReparametrerizedChild
 (type $bridgemethods.ReparametrerizedChild (struct
+ (field $vtable (ref null $bridgemethods.ReparametrerizedChild.vtable))
 ))
+(type $bridgemethods.ReparametrerizedChild.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_m__bridgemethods_ParameterizedParent__bridgemethods_ParameterizedParent_$pp_bridgemethods (mut (ref $function.$bridgemethods.ParameterizedParent__$bridgemethods.ParameterizedParent)))
+ (field $m_m__bridgemethods_ReparametrerizedChild__bridgemethods_ReparametrerizedChild_$pp_bridgemethods (mut (ref $function.$bridgemethods.ReparametrerizedChild__$bridgemethods.ReparametrerizedChild)))
+))
+(global $bridgemethods.ReparametrerizedChild.vtable (mut (ref null $bridgemethods.ReparametrerizedChild.vtable)) (ref.null $bridgemethods.ReparametrerizedChild.vtable))
 
 ;;; ReparametrerizedChild()
 (func $m_<init>__void_$pp_bridgemethods@bridgemethods.ReparametrerizedChild
@@ -786,13 +1112,16 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_bridgemethods@bridgemethods.ReparametrerizedChild))
 
 ;;; S ReparametrerizedChild.m(S t)
 (func $m_m__bridgemethods_ReparametrerizedChild__bridgemethods_ReparametrerizedChild_$pp_bridgemethods@bridgemethods.ReparametrerizedChild
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $t (ref null $bridgemethods.ReparametrerizedChild))
  (result (ref null $bridgemethods.ReparametrerizedChild))
  (local $return.value (ref null $bridgemethods.ReparametrerizedChild))
+ (local $this (ref null $bridgemethods.ReparametrerizedChild))
+ (local.set $this (ref.cast $java.lang.Object $bridgemethods.ReparametrerizedChild (local.get $this.untyped) (global.get $bridgemethods.ReparametrerizedChild.rtt)))
  (block $return.label
   (block
    ;; return null;
@@ -802,26 +1131,41 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_m__bridgemethods_ReparametrerizedChild__bridgemethods_ReparametrerizedChild_$pp_bridgemethods@bridgemethods.ReparametrerizedChild))
 
 ;;; S ReparametrerizedChild.m(ParameterizedParent arg0)
 (func $m_m__bridgemethods_ParameterizedParent__bridgemethods_ParameterizedParent_$pp_bridgemethods@bridgemethods.ReparametrerizedChild
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $bridgemethods.ParameterizedParent))
- (result (ref null $bridgemethods.ReparametrerizedChild))
- (local $return.value (ref null $bridgemethods.ReparametrerizedChild))
+ (result (ref null $bridgemethods.ParameterizedParent))
+ (local $return.value (ref null $bridgemethods.ParameterizedParent))
+ (local $this (ref null $bridgemethods.ReparametrerizedChild))
+ (local.set $this (ref.cast $java.lang.Object $bridgemethods.ReparametrerizedChild (local.get $this.untyped) (global.get $bridgemethods.ReparametrerizedChild.rtt)))
  (block $return.label
   (block
    ;; return ReparametrerizedChild.this.m(((S) arg0));
-   (local.set $return.value (ref.null $bridgemethods.ReparametrerizedChild))
+   (local.set $return.value (call_ref (local.get $this)(ref.null $bridgemethods.ReparametrerizedChild)(struct.get $bridgemethods.ReparametrerizedChild.vtable $m_m__bridgemethods_ReparametrerizedChild__bridgemethods_ReparametrerizedChild_$pp_bridgemethods (struct.get $bridgemethods.ReparametrerizedChild $vtable(local.get $this)))))
    (br $return.label)
   )
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_m__bridgemethods_ParameterizedParent__bridgemethods_ParameterizedParent_$pp_bridgemethods@bridgemethods.ReparametrerizedChild))
 
 ;;; CLASS  LeafChild
 (type $bridgemethods.LeafChild (struct
+ (field $vtable (ref null $bridgemethods.LeafChild.vtable))
 ))
+(type $bridgemethods.LeafChild.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_m__bridgemethods_ParameterizedParent__bridgemethods_ParameterizedParent_$pp_bridgemethods (mut (ref $function.$bridgemethods.ParameterizedParent__$bridgemethods.ParameterizedParent)))
+ (field $m_m__bridgemethods_ReparametrerizedChild__bridgemethods_ReparametrerizedChild_$pp_bridgemethods (mut (ref $function.$bridgemethods.ReparametrerizedChild__$bridgemethods.ReparametrerizedChild)))
+))
+(global $bridgemethods.LeafChild.vtable (mut (ref null $bridgemethods.LeafChild.vtable)) (ref.null $bridgemethods.LeafChild.vtable))
 
 ;;; LeafChild()
 (func $m_<init>__void_$pp_bridgemethods@bridgemethods.LeafChild
@@ -835,11 +1179,21 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_bridgemethods@bridgemethods.LeafChild))
 ;;; Code for bridgemethods.BridgeMethodDefault
 
 ;;; CLASS  BridgeMethodDefault
 (type $bridgemethods.BridgeMethodDefault (struct
+ (field $vtable (ref null $bridgemethods.BridgeMethodDefault.vtable))
 ))
+(type $bridgemethods.BridgeMethodDefault.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $bridgemethods.BridgeMethodDefault.vtable (mut (ref null $bridgemethods.BridgeMethodDefault.vtable)) (ref.null $bridgemethods.BridgeMethodDefault.vtable))
 
 ;;; BridgeMethodDefault()
 (func $m_<init>__void_$pp_bridgemethods@bridgemethods.BridgeMethodDefault
@@ -853,6 +1207,7 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_bridgemethods@bridgemethods.BridgeMethodDefault))
 
 ;;; INTERFACE  I
 
@@ -867,10 +1222,22 @@
   )
  )
 )
+(global funcref (ref.func $m_m__java_lang_String__void@bridgemethods.BridgeMethodDefault.II))
 
 ;;; CLASS  A
 (type $bridgemethods.BridgeMethodDefault.A (struct
+ (field $vtable (ref null $bridgemethods.BridgeMethodDefault.A.vtable))
 ))
+(type $bridgemethods.BridgeMethodDefault.A.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_m__java_lang_Object__void (mut (ref $function.$java.lang.Object__$void)))
+ (field $m_m__java_lang_String__void (mut (ref $function.$java.lang.String__$void)))
+))
+(global $bridgemethods.BridgeMethodDefault.A.vtable (mut (ref null $bridgemethods.BridgeMethodDefault.A.vtable)) (ref.null $bridgemethods.BridgeMethodDefault.A.vtable))
 
 ;;; A()
 (func $m_<init>__void_$pp_bridgemethods@bridgemethods.BridgeMethodDefault.A
@@ -884,23 +1251,29 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_bridgemethods@bridgemethods.BridgeMethodDefault.A))
 
 ;;; void A.m(Object arg0)
 (func $m_m__java_lang_Object__void@bridgemethods.BridgeMethodDefault.A
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
+ (local $this (ref null $bridgemethods.BridgeMethodDefault.A))
+ (local.set $this (ref.cast $java.lang.Object $bridgemethods.BridgeMethodDefault.A (local.get $this.untyped) (global.get $bridgemethods.BridgeMethodDefault.A.rtt)))
  (block $return.label
   (block
    ;; A.this.m(((String) arg0));
-   
+   (call_ref (local.get $this)(ref.cast $java.lang.Object $java.lang.String (local.get $arg0) (global.get $java.lang.String.rtt))(struct.get $bridgemethods.BridgeMethodDefault.A.vtable $m_m__java_lang_String__void (struct.get $bridgemethods.BridgeMethodDefault.A $vtable(local.get $this))))
   )
  )
 )
+(global funcref (ref.func $m_m__java_lang_Object__void@bridgemethods.BridgeMethodDefault.A))
 
 ;;; void A.m(String arg0)
 (func $m_m__java_lang_String__void@bridgemethods.BridgeMethodDefault.A
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.String))
+ (local $this (ref null $bridgemethods.BridgeMethodDefault.A))
+ (local.set $this (ref.cast $java.lang.Object $bridgemethods.BridgeMethodDefault.A (local.get $this.untyped) (global.get $bridgemethods.BridgeMethodDefault.A.rtt)))
  (block $return.label
   (block
    ;; II.this.m(arg0);
@@ -908,6 +1281,7 @@
   )
  )
 )
+(global funcref (ref.func $m_m__java_lang_String__void@bridgemethods.BridgeMethodDefault.A))
 
 ;;; INTERFACE  JJ
 
@@ -920,10 +1294,21 @@
   )
  )
 )
+(global funcref (ref.func $m_m__java_lang_Object__void@bridgemethods.BridgeMethodDefault.JJ))
 
 ;;; CLASS  B
 (type $bridgemethods.BridgeMethodDefault.B (struct
+ (field $vtable (ref null $bridgemethods.BridgeMethodDefault.B.vtable))
 ))
+(type $bridgemethods.BridgeMethodDefault.B.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_m__java_lang_Object__void (mut (ref $function.$java.lang.Object__$void)))
+))
+(global $bridgemethods.BridgeMethodDefault.B.vtable (mut (ref null $bridgemethods.BridgeMethodDefault.B.vtable)) (ref.null $bridgemethods.BridgeMethodDefault.B.vtable))
 
 ;;; B()
 (func $m_<init>__void_$pp_bridgemethods@bridgemethods.BridgeMethodDefault.B
@@ -937,11 +1322,14 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_bridgemethods@bridgemethods.BridgeMethodDefault.B))
 
 ;;; void B.m(Object arg0)
 (func $m_m__java_lang_Object__void@bridgemethods.BridgeMethodDefault.B
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
+ (local $this (ref null $bridgemethods.BridgeMethodDefault.B))
+ (local.set $this (ref.cast $java.lang.Object $bridgemethods.BridgeMethodDefault.B (local.get $this.untyped) (global.get $bridgemethods.BridgeMethodDefault.B.rtt)))
  (block $return.label
   (block
    ;; JJ.this.m(arg0);
@@ -949,11 +1337,21 @@
   )
  )
 )
+(global funcref (ref.func $m_m__java_lang_Object__void@bridgemethods.BridgeMethodDefault.B))
 ;;; Code for bridgemethods.BridgeMethodShadowedSignature
 
 ;;; CLASS  BridgeMethodShadowedSignature
 (type $bridgemethods.BridgeMethodShadowedSignature (struct
+ (field $vtable (ref null $bridgemethods.BridgeMethodShadowedSignature.vtable))
 ))
+(type $bridgemethods.BridgeMethodShadowedSignature.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $bridgemethods.BridgeMethodShadowedSignature.vtable (mut (ref null $bridgemethods.BridgeMethodShadowedSignature.vtable)) (ref.null $bridgemethods.BridgeMethodShadowedSignature.vtable))
 
 ;;; BridgeMethodShadowedSignature()
 (func $m_<init>__void@bridgemethods.BridgeMethodShadowedSignature
@@ -967,12 +1365,23 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@bridgemethods.BridgeMethodShadowedSignature))
 
 ;;; INTERFACE  I
 
 ;;; CLASS  B
 (type $bridgemethods.BridgeMethodShadowedSignature.B (struct
+ (field $vtable (ref null $bridgemethods.BridgeMethodShadowedSignature.B.vtable))
 ))
+(type $bridgemethods.BridgeMethodShadowedSignature.B.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_get__java_lang_Object__java_lang_String (mut (ref $function.$java.lang.Object__$java.lang.String)))
+))
+(global $bridgemethods.BridgeMethodShadowedSignature.B.vtable (mut (ref null $bridgemethods.BridgeMethodShadowedSignature.B.vtable)) (ref.null $bridgemethods.BridgeMethodShadowedSignature.B.vtable))
 
 ;;; B()
 (func $m_<init>__void_$pp_bridgemethods@bridgemethods.BridgeMethodShadowedSignature.B
@@ -986,13 +1395,16 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_bridgemethods@bridgemethods.BridgeMethodShadowedSignature.B))
 
 ;;; String B.get(B2 consumer)
 (func $m_get__java_lang_Object__java_lang_String@bridgemethods.BridgeMethodShadowedSignature.B
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $consumer (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))
+ (local $this (ref null $bridgemethods.BridgeMethodShadowedSignature.B))
+ (local.set $this (ref.cast $java.lang.Object $bridgemethods.BridgeMethodShadowedSignature.B (local.get $this.untyped) (global.get $bridgemethods.BridgeMethodShadowedSignature.B.rtt)))
  (block $return.label
   (block
    ;; return "B get B2";
@@ -1002,10 +1414,22 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_get__java_lang_Object__java_lang_String@bridgemethods.BridgeMethodShadowedSignature.B))
 
 ;;; CLASS  C
 (type $bridgemethods.BridgeMethodShadowedSignature.C (struct
+ (field $vtable (ref null $bridgemethods.BridgeMethodShadowedSignature.C.vtable))
 ))
+(type $bridgemethods.BridgeMethodShadowedSignature.C.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_get__java_lang_Object__java_lang_String (mut (ref $function.$java.lang.Object__$java.lang.String)))
+ (field $m_get__java_util_function_Consumer__java_lang_String (mut (ref $function.$java.lang.Object__$java.lang.String)))
+))
+(global $bridgemethods.BridgeMethodShadowedSignature.C.vtable (mut (ref null $bridgemethods.BridgeMethodShadowedSignature.C.vtable)) (ref.null $bridgemethods.BridgeMethodShadowedSignature.C.vtable))
 
 ;;; C()
 (func $m_<init>__void_$pp_bridgemethods@bridgemethods.BridgeMethodShadowedSignature.C
@@ -1019,45 +1443,62 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_bridgemethods@bridgemethods.BridgeMethodShadowedSignature.C))
 
 ;;; String C.get(Consumer<? super C1> arg0)
 (func $m_get__java_util_function_Consumer__java_lang_String@bridgemethods.BridgeMethodShadowedSignature.C
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))
+ (local $this (ref null $bridgemethods.BridgeMethodShadowedSignature.C))
+ (local.set $this (ref.cast $java.lang.Object $bridgemethods.BridgeMethodShadowedSignature.C (local.get $this.untyped) (global.get $bridgemethods.BridgeMethodShadowedSignature.C.rtt)))
  (block $return.label
   (block
    ;; return super.get(arg0);
-   (local.set $return.value (ref.null $java.lang.String))
+   (local.set $return.value (call_ref (local.get $this)(local.get $arg0)(struct.get $bridgemethods.BridgeMethodShadowedSignature.B.vtable $m_get__java_lang_Object__java_lang_String (struct.get $bridgemethods.BridgeMethodShadowedSignature.B $vtable(local.get $this)))))
    (br $return.label)
   )
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_get__java_util_function_Consumer__java_lang_String@bridgemethods.BridgeMethodShadowedSignature.C))
 
 ;;; String C.get(Object arg0)
 (func $m_get__java_lang_Object__java_lang_String@bridgemethods.BridgeMethodShadowedSignature.C
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))
+ (local $this (ref null $bridgemethods.BridgeMethodShadowedSignature.C))
+ (local.set $this (ref.cast $java.lang.Object $bridgemethods.BridgeMethodShadowedSignature.C (local.get $this.untyped) (global.get $bridgemethods.BridgeMethodShadowedSignature.C.rtt)))
  (block $return.label
   (block
    ;; return C.this.get(((Consumer<? super C1>) arg0));
-   (local.set $return.value (ref.null $java.lang.String))
+   (local.set $return.value (call_ref (local.get $this)(local.get $arg0)(struct.get $bridgemethods.BridgeMethodShadowedSignature.C.vtable $m_get__java_util_function_Consumer__java_lang_String (struct.get $bridgemethods.BridgeMethodShadowedSignature.C $vtable(local.get $this)))))
    (br $return.label)
   )
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_get__java_lang_Object__java_lang_String@bridgemethods.BridgeMethodShadowedSignature.C))
 ;;; Code for bridgemethods.EnumMap
 
 ;;; INTERFACE  Map
 
 ;;; CLASS  AbstractMap
 (type $bridgemethods.AbstractMap (struct
+ (field $vtable (ref null $bridgemethods.AbstractMap.vtable))
 ))
+(type $bridgemethods.AbstractMap.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_put__java_lang_Object__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)))
+))
+(global $bridgemethods.AbstractMap.vtable (mut (ref null $bridgemethods.AbstractMap.vtable)) (ref.null $bridgemethods.AbstractMap.vtable))
 
 ;;; AbstractMap()
 (func $m_<init>__void_$pp_bridgemethods@bridgemethods.AbstractMap
@@ -1071,14 +1512,17 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_bridgemethods@bridgemethods.AbstractMap))
 
 ;;; V AbstractMap.put(K key, V value)
 (func $m_put__java_lang_Object__java_lang_Object__java_lang_Object@bridgemethods.AbstractMap
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $key (ref null $java.lang.Object))
  (param $value (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
+ (local $this (ref null $bridgemethods.AbstractMap))
+ (local.set $this (ref.cast $java.lang.Object $bridgemethods.AbstractMap (local.get $this.untyped) (global.get $bridgemethods.AbstractMap.rtt)))
  (block $return.label
   (block
    ;; return value;
@@ -1088,10 +1532,22 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_put__java_lang_Object__java_lang_Object__java_lang_Object@bridgemethods.AbstractMap))
 
 ;;; CLASS  EnumMap
 (type $bridgemethods.EnumMap (struct
+ (field $vtable (ref null $bridgemethods.EnumMap.vtable))
 ))
+(type $bridgemethods.EnumMap.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_put__java_lang_Object__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)))
+ (field $m_put__java_lang_Enum__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Enum__$java.lang.Object__$java.lang.Object)))
+))
+(global $bridgemethods.EnumMap.vtable (mut (ref null $bridgemethods.EnumMap.vtable)) (ref.null $bridgemethods.EnumMap.vtable))
 
 ;;; EnumMap()
 (func $m_<init>__void@bridgemethods.EnumMap
@@ -1105,14 +1561,17 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@bridgemethods.EnumMap))
 
 ;;; V EnumMap.put(K key, V value)
 (func $m_put__java_lang_Enum__java_lang_Object__java_lang_Object@bridgemethods.EnumMap
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $key (ref null $java.lang.Enum))
  (param $value (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
+ (local $this (ref null $bridgemethods.EnumMap))
+ (local.set $this (ref.cast $java.lang.Object $bridgemethods.EnumMap (local.get $this.untyped) (global.get $bridgemethods.EnumMap.rtt)))
  (block $return.label
   (block
    ;; return value;
@@ -1122,21 +1581,76 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_put__java_lang_Enum__java_lang_Object__java_lang_Object@bridgemethods.EnumMap))
 
 ;;; V EnumMap.put(Object arg0, Object arg1)
 (func $m_put__java_lang_Object__java_lang_Object__java_lang_Object@bridgemethods.EnumMap
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
+ (local $this (ref null $bridgemethods.EnumMap))
+ (local.set $this (ref.cast $java.lang.Object $bridgemethods.EnumMap (local.get $this.untyped) (global.get $bridgemethods.EnumMap.rtt)))
  (block $return.label
   (block
    ;; return EnumMap.this.put(((K) arg0),arg1);
-   (local.set $return.value (ref.null $java.lang.Object))
+   (local.set $return.value (call_ref (local.get $this)(ref.null $java.lang.Enum)(local.get $arg1)(struct.get $bridgemethods.EnumMap.vtable $m_put__java_lang_Enum__java_lang_Object__java_lang_Object (struct.get $bridgemethods.EnumMap $vtable(local.get $this)))))
    (br $return.label)
   )
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_put__java_lang_Object__java_lang_Object__java_lang_Object@bridgemethods.EnumMap))
+
+;;; Code for bridgemethods.A [vtable]
+ (global.set $bridgemethods.A.vtable (struct.new_with_rtt $bridgemethods.A.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_fun__java_lang_Object__java_lang_Object@bridgemethods.A) (ref.func $m_get__java_lang_Object@bridgemethods.A) (rtt.canon $bridgemethods.A.vtable)))
+;;; Code for bridgemethods.B [vtable]
+ (global.set $bridgemethods.B.vtable (struct.new_with_rtt $bridgemethods.B.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_fun__java_lang_Object__java_lang_Object@bridgemethods.B) (ref.func $m_get__java_lang_Object@bridgemethods.A) (ref.func $m_fun__java_lang_String__java_lang_Integer@bridgemethods.B) (rtt.canon $bridgemethods.B.vtable)))
+;;; Code for bridgemethods.AccidentalOverride [vtable]
+ (global.set $bridgemethods.AccidentalOverride.vtable (struct.new_with_rtt $bridgemethods.AccidentalOverride.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_fun__java_lang_Object__java_lang_Object@bridgemethods.AccidentalOverride) (ref.func $m_get__java_lang_Object@bridgemethods.A) (ref.func $m_fun__java_lang_String__java_lang_String@bridgemethods.AccidentalOverride) (ref.func $m_get__java_lang_String@bridgemethods.AccidentalOverride) (rtt.canon $bridgemethods.AccidentalOverride.vtable)))
+;;; Code for bridgemethods.SuperParent [vtable]
+ (global.set $bridgemethods.SuperParent.vtable (struct.new_with_rtt $bridgemethods.SuperParent.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.SuperParent) (rtt.canon $bridgemethods.SuperParent.vtable)))
+;;; Code for bridgemethods.Parent [vtable]
+ (global.set $bridgemethods.Parent.vtable (struct.new_with_rtt $bridgemethods.Parent.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.Parent) (ref.func $m_foo__java_lang_Error__java_lang_Number__void@bridgemethods.Parent) (ref.func $m_bar__java_lang_Number__void@bridgemethods.Parent) (ref.func $m_fun__java_lang_Object__void@bridgemethods.Parent) (rtt.canon $bridgemethods.Parent.vtable)))
+;;; Code for bridgemethods.BridgeMethod [vtable]
+ (global.set $bridgemethods.BridgeMethod.vtable (struct.new_with_rtt $bridgemethods.BridgeMethod.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.Parent) (ref.func $m_foo__java_lang_Error__java_lang_Number__void@bridgemethods.BridgeMethod) (ref.func $m_bar__java_lang_Number__void@bridgemethods.BridgeMethod) (ref.func $m_fun__java_lang_Object__void@bridgemethods.Parent) (ref.func $m_foo__java_lang_AssertionError__java_lang_Number__void@bridgemethods.BridgeMethod) (ref.func $m_fun__java_lang_Number__void@bridgemethods.BridgeMethod) (ref.func $m_foo__java_lang_Object__java_lang_Number__void@bridgemethods.BridgeMethod) (rtt.canon $bridgemethods.BridgeMethod.vtable)))
+;;; Code for bridgemethods.DualUnrelatedBridges [vtable]
+ (global.set $bridgemethods.DualUnrelatedBridges.vtable (struct.new_with_rtt $bridgemethods.DualUnrelatedBridges.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__java_lang_String__java_lang_Double__void@bridgemethods.DualUnrelatedBridges) (ref.func $m_foo__java_lang_String__java_lang_Number__void@bridgemethods.DualUnrelatedBridges) (ref.func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.DualUnrelatedBridges) (ref.func $m_foo__java_lang_Object__java_lang_Number__void@bridgemethods.DualUnrelatedBridges) (ref.func $m_foo__java_lang_Object__java_lang_Double__void@bridgemethods.DualUnrelatedBridges) (rtt.canon $bridgemethods.DualUnrelatedBridges.vtable)))
+;;; Code for bridgemethods.SuperDualUnrelatedAccidentalBridges [vtable]
+ (global.set $bridgemethods.SuperDualUnrelatedAccidentalBridges.vtable (struct.new_with_rtt $bridgemethods.SuperDualUnrelatedAccidentalBridges.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__java_lang_String__java_lang_Double__void@bridgemethods.SuperDualUnrelatedAccidentalBridges) (ref.func $m_foo__java_lang_String__java_lang_Number__void@bridgemethods.SuperDualUnrelatedAccidentalBridges) (rtt.canon $bridgemethods.SuperDualUnrelatedAccidentalBridges.vtable)))
+;;; Code for bridgemethods.DualUnrelatedAccidentalBridges [vtable]
+ (global.set $bridgemethods.DualUnrelatedAccidentalBridges.vtable (struct.new_with_rtt $bridgemethods.DualUnrelatedAccidentalBridges.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__java_lang_String__java_lang_Double__void@bridgemethods.SuperDualUnrelatedAccidentalBridges) (ref.func $m_foo__java_lang_String__java_lang_Number__void@bridgemethods.SuperDualUnrelatedAccidentalBridges) (ref.func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.DualUnrelatedAccidentalBridges) (ref.func $m_foo__java_lang_Object__java_lang_Number__void@bridgemethods.DualUnrelatedAccidentalBridges) (ref.func $m_foo__java_lang_Object__java_lang_Double__void@bridgemethods.DualUnrelatedAccidentalBridges) (rtt.canon $bridgemethods.DualUnrelatedAccidentalBridges.vtable)))
+;;; Code for bridgemethods.ClassWithParameterizedGet [vtable]
+ (global.set $bridgemethods.ClassWithParameterizedGet.vtable (struct.new_with_rtt $bridgemethods.ClassWithParameterizedGet.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_get__java_lang_Object__java_lang_Object@bridgemethods.ClassWithParameterizedGet) (rtt.canon $bridgemethods.ClassWithParameterizedGet.vtable)))
+;;; Code for bridgemethods.AccidentalOverrideBridge [vtable]
+ (global.set $bridgemethods.AccidentalOverrideBridge.vtable (struct.new_with_rtt $bridgemethods.AccidentalOverrideBridge.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_get__java_lang_Object__java_lang_Object@bridgemethods.AccidentalOverrideBridge) (ref.func $m_test__void@bridgemethods.AccidentalOverrideBridge) (ref.func $m_get__java_lang_String__java_lang_String@bridgemethods.AccidentalOverrideBridge) (rtt.canon $bridgemethods.AccidentalOverrideBridge.vtable)))
+;;; Code for bridgemethods.TestCase10036 [vtable]
+ (global.set $bridgemethods.TestCase10036.vtable (struct.new_with_rtt $bridgemethods.TestCase10036.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $bridgemethods.TestCase10036.vtable)))
+;;; Code for bridgemethods.TestCase102 [vtable]
+ (global.set $bridgemethods.TestCase102.vtable (struct.new_with_rtt $bridgemethods.TestCase102.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $bridgemethods.TestCase102.vtable)))
+;;; Code for bridgemethods.TestCase102.C [vtable]
+ (global.set $bridgemethods.TestCase102.C.vtable (struct.new_with_rtt $bridgemethods.TestCase102.C.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_set__java_lang_Object__void@bridgemethods.TestCase102.C) (ref.func $m_set__java_lang_String__void@bridgemethods.TestCase102.C) (rtt.canon $bridgemethods.TestCase102.C.vtable)))
+;;; Code for bridgemethods.ParameterizedParent [vtable]
+ (global.set $bridgemethods.ParameterizedParent.vtable (struct.new_with_rtt $bridgemethods.ParameterizedParent.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_m__bridgemethods_ParameterizedParent__bridgemethods_ParameterizedParent_$pp_bridgemethods@bridgemethods.ParameterizedParent) (rtt.canon $bridgemethods.ParameterizedParent.vtable)))
+;;; Code for bridgemethods.ReparametrerizedChild [vtable]
+ (global.set $bridgemethods.ReparametrerizedChild.vtable (struct.new_with_rtt $bridgemethods.ReparametrerizedChild.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_m__bridgemethods_ParameterizedParent__bridgemethods_ParameterizedParent_$pp_bridgemethods@bridgemethods.ReparametrerizedChild) (ref.func $m_m__bridgemethods_ReparametrerizedChild__bridgemethods_ReparametrerizedChild_$pp_bridgemethods@bridgemethods.ReparametrerizedChild) (rtt.canon $bridgemethods.ReparametrerizedChild.vtable)))
+;;; Code for bridgemethods.LeafChild [vtable]
+ (global.set $bridgemethods.LeafChild.vtable (struct.new_with_rtt $bridgemethods.LeafChild.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_m__bridgemethods_ParameterizedParent__bridgemethods_ParameterizedParent_$pp_bridgemethods@bridgemethods.ReparametrerizedChild) (ref.func $m_m__bridgemethods_ReparametrerizedChild__bridgemethods_ReparametrerizedChild_$pp_bridgemethods@bridgemethods.ReparametrerizedChild) (rtt.canon $bridgemethods.LeafChild.vtable)))
+;;; Code for bridgemethods.BridgeMethodDefault [vtable]
+ (global.set $bridgemethods.BridgeMethodDefault.vtable (struct.new_with_rtt $bridgemethods.BridgeMethodDefault.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $bridgemethods.BridgeMethodDefault.vtable)))
+;;; Code for bridgemethods.BridgeMethodDefault.A [vtable]
+ (global.set $bridgemethods.BridgeMethodDefault.A.vtable (struct.new_with_rtt $bridgemethods.BridgeMethodDefault.A.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_m__java_lang_Object__void@bridgemethods.BridgeMethodDefault.A) (ref.func $m_m__java_lang_String__void@bridgemethods.BridgeMethodDefault.A) (rtt.canon $bridgemethods.BridgeMethodDefault.A.vtable)))
+;;; Code for bridgemethods.BridgeMethodDefault.B [vtable]
+ (global.set $bridgemethods.BridgeMethodDefault.B.vtable (struct.new_with_rtt $bridgemethods.BridgeMethodDefault.B.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_m__java_lang_Object__void@bridgemethods.BridgeMethodDefault.B) (rtt.canon $bridgemethods.BridgeMethodDefault.B.vtable)))
+;;; Code for bridgemethods.BridgeMethodShadowedSignature [vtable]
+ (global.set $bridgemethods.BridgeMethodShadowedSignature.vtable (struct.new_with_rtt $bridgemethods.BridgeMethodShadowedSignature.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $bridgemethods.BridgeMethodShadowedSignature.vtable)))
+;;; Code for bridgemethods.BridgeMethodShadowedSignature.C [vtable]
+ (global.set $bridgemethods.BridgeMethodShadowedSignature.C.vtable (struct.new_with_rtt $bridgemethods.BridgeMethodShadowedSignature.C.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_get__java_lang_Object__java_lang_String@bridgemethods.BridgeMethodShadowedSignature.C) (ref.func $m_get__java_util_function_Consumer__java_lang_String@bridgemethods.BridgeMethodShadowedSignature.C) (rtt.canon $bridgemethods.BridgeMethodShadowedSignature.C.vtable)))
+;;; Code for bridgemethods.AbstractMap [vtable]
+ (global.set $bridgemethods.AbstractMap.vtable (struct.new_with_rtt $bridgemethods.AbstractMap.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_put__java_lang_Object__java_lang_Object__java_lang_Object@bridgemethods.AbstractMap) (rtt.canon $bridgemethods.AbstractMap.vtable)))
+;;; Code for bridgemethods.EnumMap [vtable]
+ (global.set $bridgemethods.EnumMap.vtable (struct.new_with_rtt $bridgemethods.EnumMap.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_put__java_lang_Object__java_lang_Object__java_lang_Object@bridgemethods.EnumMap) (ref.func $m_put__java_lang_Enum__java_lang_Object__java_lang_Object@bridgemethods.EnumMap) (rtt.canon $bridgemethods.EnumMap.vtable)))
+))
+(start $.runtime.init)
 

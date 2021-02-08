@@ -2,8 +2,21 @@
 
 ;;; CLASS  Main
 (type $jsasync.Main (struct
+ (field $vtable (ref null $jsasync.Main.vtable))
  (field $x@jsasync.Main (mut (ref null $java.lang.Object)))
 ))
+(type $jsasync.Main.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_emptyAsyncMethod__jsasync_Main_IThenable_$pp_jsasync (mut (ref $function.__$java.lang.Object)))
+ (field $m_asyncMethod__jsasync_Main_IThenable_$pp_jsasync (mut (ref $function.__$java.lang.Object)))
+ (field $m_parametricAsyncMethod__java_lang_Object__jsasync_Main_IThenable_$pp_jsasync (mut (ref $function.$java.lang.Object__$java.lang.Object)))
+ (field $m_testAsyncLambdas__void_$pp_jsasync (mut (ref $function.__$void)))
+))
+(global $jsasync.Main.vtable (mut (ref null $jsasync.Main.vtable)) (ref.null $jsasync.Main.vtable))
 
 ;;; Main()
 (func $m_<init>__void@jsasync.Main
@@ -17,12 +30,15 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@jsasync.Main))
 
 ;;; IThenable<Void> Main.emptyAsyncMethod()
 (func $m_emptyAsyncMethod__jsasync_Main_IThenable_$pp_jsasync@jsasync.Main
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
+ (local $this (ref null $jsasync.Main))
+ (local.set $this (ref.cast $java.lang.Object $jsasync.Main (local.get $this.untyped) (global.get $jsasync.Main.rtt)))
  (block $return.label
   (block
    ;; return null;
@@ -32,32 +48,38 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_emptyAsyncMethod__jsasync_Main_IThenable_$pp_jsasync@jsasync.Main))
 
 ;;; IThenable<Integer> Main.asyncMethod()
 (func $m_asyncMethod__jsasync_Main_IThenable_$pp_jsasync@jsasync.Main
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (local $result i32)
+ (local $this (ref null $jsasync.Main))
+ (local.set $this (ref.cast $java.lang.Object $jsasync.Main (local.get $this.untyped) (global.get $jsasync.Main.rtt)))
  (block $return.label
   (block
    ;; int result = ((Integer) jsasync.Main.await(jsasync.Main.Promise.resolve(7)));
    
    (local.set $result (i32.const 0))
    ;; return Main.this.parametricAsyncMethod(result);
-   (local.set $return.value (ref.null $java.lang.Object))
+   (local.set $return.value (call_ref (local.get $this)(ref.null $java.lang.Integer)(struct.get $jsasync.Main.vtable $m_parametricAsyncMethod__java_lang_Object__jsasync_Main_IThenable_$pp_jsasync (struct.get $jsasync.Main $vtable(local.get $this)))))
    (br $return.label)
   )
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_asyncMethod__jsasync_Main_IThenable_$pp_jsasync@jsasync.Main))
 
 ;;; IThenable<T> Main.parametricAsyncMethod(T value)
 (func $m_parametricAsyncMethod__java_lang_Object__jsasync_Main_IThenable_$pp_jsasync@jsasync.Main
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $value (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
+ (local $this (ref null $jsasync.Main))
+ (local.set $this (ref.cast $java.lang.Object $jsasync.Main (local.get $this.untyped) (global.get $jsasync.Main.rtt)))
  (block $return.label
   (block
    ;; return jsasync.Main.Promise.resolve(jsasync.Main.await(jsasync.Main.Promise.resolve(value)));
@@ -67,6 +89,7 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_parametricAsyncMethod__java_lang_Object__jsasync_Main_IThenable_$pp_jsasync@jsasync.Main))
 
 ;;; IThenable<Void> Main.staticAsyncMethod()
 (func $m_staticAsyncMethod__jsasync_Main_IThenable@jsasync.Main
@@ -81,15 +104,18 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_staticAsyncMethod__jsasync_Main_IThenable@jsasync.Main))
 
 ;;; void Main.testAsyncLambdas()
 (func $m_testAsyncLambdas__void_$pp_jsasync@jsasync.Main
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (local $i (ref null $java.lang.Object))
  (local $o (ref null $java.lang.Object))
  (local $j (ref null $java.lang.Object))
  (local $optimizableJsFunction (ref null $java.lang.Object))
  (local $unoptimizableJsFunction (ref null $java.lang.Object))
+ (local $this (ref null $jsasync.Main))
+ (local.set $this (ref.cast $java.lang.Object $jsasync.Main (local.get $this.untyped) (global.get $jsasync.Main.rtt)))
  (block $return.label
   (block
    ;; AsyncInterface i = function (){
@@ -97,19 +123,20 @@
    (local.set $i (ref.null $java.lang.Object))
    ;; BaseInterface o = Main.this.new $1.<init>();
    
-   (local.set $o (call $m_<init>__void_$pp_jsasync@jsasync.Main.1 (struct.new_with_rtt $jsasync.Main.1 (ref.null $jsasync.Main) (global.get $jsasync.Main.1.rtt))))
+   (local.set $o (call $m_<init>__void_$pp_jsasync@jsasync.Main.1 (struct.new_with_rtt $jsasync.Main.1 (global.get $jsasync.Main.1.vtable) (ref.null $jsasync.Main) (global.get $jsasync.Main.1.rtt))))
    ;; AsyncJsFunctionInterface j = function (){
    
    (local.set $j (ref.null $java.lang.Object))
    ;; JsFunctionInterface optimizableJsFunction = Main.this.new $2.<init>();
    
-   (local.set $optimizableJsFunction (call $m_<init>__void_$pp_jsasync@jsasync.Main.2 (struct.new_with_rtt $jsasync.Main.2 (ref.null $jsasync.Main) (global.get $jsasync.Main.2.rtt))))
+   (local.set $optimizableJsFunction (call $m_<init>__void_$pp_jsasync@jsasync.Main.2 (struct.new_with_rtt $jsasync.Main.2 (global.get $jsasync.Main.2.vtable) (ref.null $jsasync.Main) (global.get $jsasync.Main.2.rtt))))
    ;; JsFunctionInterface unoptimizableJsFunction = Main.this.new $3.<init>();
    
-   (local.set $unoptimizableJsFunction (call $m_<init>__void_$pp_jsasync@jsasync.Main.3 (struct.new_with_rtt $jsasync.Main.3 (ref.null $jsasync.Main) (global.get $jsasync.Main.3.rtt))))
+   (local.set $unoptimizableJsFunction (call $m_<init>__void_$pp_jsasync@jsasync.Main.3 (struct.new_with_rtt $jsasync.Main.3 (global.get $jsasync.Main.3.vtable) (ref.null $jsasync.Main) (global.get $jsasync.Main.3.rtt))))
   )
  )
 )
+(global funcref (ref.func $m_testAsyncLambdas__void_$pp_jsasync@jsasync.Main))
 
 ;;; T Main.await(IThenable<T> thenable)
 (func $m_await__jsasync_Main_IThenable__java_lang_Object@jsasync.Main
@@ -122,11 +149,22 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_await__jsasync_Main_IThenable__java_lang_Object@jsasync.Main))
 
 ;;; CLASS  <anonymous> implements BaseInterface
 (type $jsasync.Main.1 (struct
+ (field $vtable (ref null $jsasync.Main.1.vtable))
  (field $this@jsasync.Main.1 (mut (ref null $jsasync.Main)))
 ))
+(type $jsasync.Main.1.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_asyncCall__jsasync_Main_IThenable (mut (ref $function.__$java.lang.Object)))
+))
+(global $jsasync.Main.1.vtable (mut (ref null $jsasync.Main.1.vtable)) (ref.null $jsasync.Main.1.vtable))
 
 ;;; <anonymous> implements BaseInterface()
 (func $m_<init>__void_$pp_jsasync@jsasync.Main.1
@@ -140,26 +178,40 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_jsasync@jsasync.Main.1))
 
 ;;; IThenable<Integer> <anonymous> implements BaseInterface.asyncCall()
 (func $m_asyncCall__jsasync_Main_IThenable@jsasync.Main.1
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
+ (local $this (ref null $jsasync.Main.1))
+ (local.set $this (ref.cast $java.lang.Object $jsasync.Main.1 (local.get $this.untyped) (global.get $jsasync.Main.1.rtt)))
  (block $return.label
   (block
    ;; return jsasync.Main.Promise.resolve(((Integer) jsasync.Main.await($1.this.this.x)));
-   (local.set $return.value (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (ref.cast $java.lang.Object $java.lang.Integer (call $m_await__jsasync_Main_IThenable__java_lang_Object@jsasync.Main (struct.get $jsasync.Main $x@jsasync.Main  (struct.get $jsasync.Main.1 $this@jsasync.Main.1  (ref.null $jsasync.Main.1)))) (global.get $java.lang.Integer.rtt))))
+   (local.set $return.value (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (ref.cast $java.lang.Object $java.lang.Integer (call $m_await__jsasync_Main_IThenable__java_lang_Object@jsasync.Main (struct.get $jsasync.Main $x@jsasync.Main  (struct.get $jsasync.Main.1 $this@jsasync.Main.1  (local.get $this)))) (global.get $java.lang.Integer.rtt))))
    (br $return.label)
   )
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_asyncCall__jsasync_Main_IThenable@jsasync.Main.1))
 
 ;;; CLASS  <anonymous> implements JsFunctionInterface
 (type $jsasync.Main.2 (struct
+ (field $vtable (ref null $jsasync.Main.2.vtable))
  (field $this@jsasync.Main.2 (mut (ref null $jsasync.Main)))
 ))
+(type $jsasync.Main.2.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_doSomething__jsasync_Main_IThenable (mut (ref $function.__$java.lang.Object)))
+))
+(global $jsasync.Main.2.vtable (mut (ref null $jsasync.Main.2.vtable)) (ref.null $jsasync.Main.2.vtable))
 
 ;;; <anonymous> implements JsFunctionInterface()
 (func $m_<init>__void_$pp_jsasync@jsasync.Main.2
@@ -173,12 +225,15 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_jsasync@jsasync.Main.2))
 
 ;;; IThenable<Integer> <anonymous> implements JsFunctionInterface.doSomething()
 (func $m_doSomething__jsasync_Main_IThenable@jsasync.Main.2
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
+ (local $this (ref null $jsasync.Main.2))
+ (local.set $this (ref.cast $java.lang.Object $jsasync.Main.2 (local.get $this.untyped) (global.get $jsasync.Main.2.rtt)))
  (block $return.label
   (block
    ;; return jsasync.Main.Promise.resolve(5);
@@ -188,11 +243,22 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_doSomething__jsasync_Main_IThenable@jsasync.Main.2))
 
 ;;; CLASS  <anonymous> implements JsFunctionInterface
 (type $jsasync.Main.3 (struct
+ (field $vtable (ref null $jsasync.Main.3.vtable))
  (field $this@jsasync.Main.3 (mut (ref null $jsasync.Main)))
 ))
+(type $jsasync.Main.3.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_doSomething__jsasync_Main_IThenable (mut (ref $function.__$java.lang.Object)))
+))
+(global $jsasync.Main.3.vtable (mut (ref null $jsasync.Main.3.vtable)) (ref.null $jsasync.Main.3.vtable))
 
 ;;; <anonymous> implements JsFunctionInterface()
 (func $m_<init>__void_$pp_jsasync@jsasync.Main.3
@@ -206,25 +272,29 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_jsasync@jsasync.Main.3))
 
 ;;; IThenable<Integer> <anonymous> implements JsFunctionInterface.doSomething()
 (func $m_doSomething__jsasync_Main_IThenable@jsasync.Main.3
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (local $tmp (ref null $java.lang.Object))
+ (local $this (ref null $jsasync.Main.3))
+ (local.set $this (ref.cast $java.lang.Object $jsasync.Main.3 (local.get $this.untyped) (global.get $jsasync.Main.3.rtt)))
  (block $return.label
   (block
    ;; JsFunctionInterface tmp = $3.this;
    
-   (local.set $tmp (ref.null $jsasync.Main.3))
+   (local.set $tmp (local.get $this))
    ;; return jsasync.Main.Promise.resolve(((Integer) jsasync.Main.await($3.this.this.x)));
-   (local.set $return.value (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (ref.cast $java.lang.Object $java.lang.Integer (call $m_await__jsasync_Main_IThenable__java_lang_Object@jsasync.Main (struct.get $jsasync.Main $x@jsasync.Main  (struct.get $jsasync.Main.3 $this@jsasync.Main.3  (ref.null $jsasync.Main.3)))) (global.get $java.lang.Integer.rtt))))
+   (local.set $return.value (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (ref.cast $java.lang.Object $java.lang.Integer (call $m_await__jsasync_Main_IThenable__java_lang_Object@jsasync.Main (struct.get $jsasync.Main $x@jsasync.Main  (struct.get $jsasync.Main.3 $this@jsasync.Main.3  (local.get $this)))) (global.get $java.lang.Integer.rtt))))
    (br $return.label)
   )
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_doSomething__jsasync_Main_IThenable@jsasync.Main.3))
 
 ;;; INTERFACE  BaseInterface
 
@@ -246,6 +316,7 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_asyncCall__jsasync_Main_IThenable@jsasync.Main.InterfaceWithAsyncDefaultMethod))
 
 ;;; INTERFACE  JsFunctionInterface
 
@@ -255,7 +326,16 @@
 
 ;;; CLASS  Promise
 (type $jsasync.Main.Promise (struct
+ (field $vtable (ref null $jsasync.Main.Promise.vtable))
 ))
+(type $jsasync.Main.Promise.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $jsasync.Main.Promise.vtable (mut (ref null $jsasync.Main.Promise.vtable)) (ref.null $jsasync.Main.Promise.vtable))
 
 ;;; Promise()
 (func $m_<init>__void_$p_jsasync_Main_Promise@jsasync.Main.Promise
@@ -269,6 +349,7 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$p_jsasync_Main_Promise@jsasync.Main.Promise))
 
 ;;; Promise<T> Promise.resolve(T value)
 (func $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise
@@ -281,4 +362,18 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise))
+
+;;; Code for jsasync.Main [vtable]
+ (global.set $jsasync.Main.vtable (struct.new_with_rtt $jsasync.Main.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_emptyAsyncMethod__jsasync_Main_IThenable_$pp_jsasync@jsasync.Main) (ref.func $m_asyncMethod__jsasync_Main_IThenable_$pp_jsasync@jsasync.Main) (ref.func $m_parametricAsyncMethod__java_lang_Object__jsasync_Main_IThenable_$pp_jsasync@jsasync.Main) (ref.func $m_testAsyncLambdas__void_$pp_jsasync@jsasync.Main) (rtt.canon $jsasync.Main.vtable)))
+;;; Code for jsasync.Main.1 [vtable]
+ (global.set $jsasync.Main.1.vtable (struct.new_with_rtt $jsasync.Main.1.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_asyncCall__jsasync_Main_IThenable@jsasync.Main.1) (rtt.canon $jsasync.Main.1.vtable)))
+;;; Code for jsasync.Main.2 [vtable]
+ (global.set $jsasync.Main.2.vtable (struct.new_with_rtt $jsasync.Main.2.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_doSomething__jsasync_Main_IThenable@jsasync.Main.2) (rtt.canon $jsasync.Main.2.vtable)))
+;;; Code for jsasync.Main.3 [vtable]
+ (global.set $jsasync.Main.3.vtable (struct.new_with_rtt $jsasync.Main.3.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_doSomething__jsasync_Main_IThenable@jsasync.Main.3) (rtt.canon $jsasync.Main.3.vtable)))
+;;; Code for jsasync.Main.Promise [vtable]
+ (global.set $jsasync.Main.Promise.vtable (struct.new_with_rtt $jsasync.Main.Promise.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $jsasync.Main.Promise.vtable)))
+))
+(start $.runtime.init)
 

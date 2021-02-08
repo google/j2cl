@@ -2,7 +2,20 @@
 
 ;;; CLASS  MethodReferences
 (type $methodreferences.MethodReferences (struct
+ (field $vtable (ref null $methodreferences.MethodReferences.vtable))
 ))
+(type $methodreferences.MethodReferences.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_isA__java_lang_Boolean (mut (ref $function.__$java.lang.Boolean)))
+ (field $m_self__java_lang_Object_$pp_methodreferences (mut (ref $function.__$java.lang.Object)))
+ (field $m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences (mut (ref $function.$java.lang.Number__$java.lang.Boolean)))
+ (field $m_main__void_$pp_methodreferences (mut (ref $function.__$void)))
+))
+(global $methodreferences.MethodReferences.vtable (mut (ref null $methodreferences.MethodReferences.vtable)) (ref.null $methodreferences.MethodReferences.vtable))
 (global $staticStringProducer@methodreferences.MethodReferences (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
 
 ;;; MethodReferences()
@@ -17,6 +30,7 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@methodreferences.MethodReferences))
 
 ;;; Object MethodReferences.m()
 (func $m_m__java_lang_Object@methodreferences.MethodReferences
@@ -25,18 +39,21 @@
  (block $return.label
   (block
    ;; return new Object.<init>();
-   (local.set $return.value (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.rtt))))
+   (local.set $return.value (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (global.get $java.lang.Object.rtt))))
    (br $return.label)
   )
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_m__java_lang_Object@methodreferences.MethodReferences))
 
 ;;; Boolean MethodReferences.isA()
 (func $m_isA__java_lang_Boolean@methodreferences.MethodReferences
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Boolean))
  (local $return.value (ref null $java.lang.Boolean))
+ (local $this (ref null $methodreferences.MethodReferences))
+ (local.set $this (ref.cast $java.lang.Object $methodreferences.MethodReferences (local.get $this.untyped) (global.get $methodreferences.MethodReferences.rtt)))
  (block $return.label
   (block
    ;; return true;
@@ -46,28 +63,34 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_isA__java_lang_Boolean@methodreferences.MethodReferences))
 
 ;;; Object MethodReferences.self()
 (func $m_self__java_lang_Object_$pp_methodreferences@methodreferences.MethodReferences
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
+ (local $this (ref null $methodreferences.MethodReferences))
+ (local.set $this (ref.cast $java.lang.Object $methodreferences.MethodReferences (local.get $this.untyped) (global.get $methodreferences.MethodReferences.rtt)))
  (block $return.label
   (block
    ;; return MethodReferences.this;
-   (local.set $return.value (ref.null $methodreferences.MethodReferences))
+   (local.set $return.value (local.get $this))
    (br $return.label)
   )
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_self__java_lang_Object_$pp_methodreferences@methodreferences.MethodReferences))
 
 ;;; Boolean MethodReferences.sameAs(Number n)
 (func $m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences@methodreferences.MethodReferences
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $n (ref null $java.lang.Number))
  (result (ref null $java.lang.Boolean))
  (local $return.value (ref null $java.lang.Boolean))
+ (local $this (ref null $methodreferences.MethodReferences))
+ (local.set $this (ref.cast $java.lang.Object $methodreferences.MethodReferences (local.get $this.untyped) (global.get $methodreferences.MethodReferences.rtt)))
  (block $return.label
   (block
    ;; return false;
@@ -77,10 +100,11 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences@methodreferences.MethodReferences))
 
 ;;; void MethodReferences.main()
 (func $m_main__void_$pp_methodreferences@methodreferences.MethodReferences
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (local $objectFactory (ref null $java.lang.Object))
  (local $$$q (ref null $methodreferences.MethodReferences))
  (local $biFunction (ref null $java.lang.Object))
@@ -111,6 +135,8 @@
  (local $arg1_1 (ref null $java.lang.Number))
  (local $jsFunctionWithParameters (ref null $java.lang.Object))
  (local $arg0_9 (ref null $java.lang.Number))
+ (local $this (ref null $methodreferences.MethodReferences))
+ (local.set $this (ref.cast $java.lang.Object $methodreferences.MethodReferences (local.get $this.untyped) (global.get $methodreferences.MethodReferences.rtt)))
  (block $return.label
   (block
    ;; Producer<Object> objectFactory = function (){
@@ -121,7 +147,7 @@
    ;; (objectFactory = (MethodReferences<T> $$q = new MethodReferences.<init>(),function (){
    (local.set $objectFactory (block (result (ref null $java.lang.Object))
     
-    (local.set $$$q (call $m_<init>__void@methodreferences.MethodReferences (struct.new_with_rtt $methodreferences.MethodReferences (global.get $methodreferences.MethodReferences.rtt))))
+    (local.set $$$q (call $m_<init>__void@methodreferences.MethodReferences (struct.new_with_rtt $methodreferences.MethodReferences (global.get $methodreferences.MethodReferences.vtable) (global.get $methodreferences.MethodReferences.rtt))))
     (ref.null $java.lang.Object)
    ))
    ;; BiFunction<MethodReferences<T>, Number, Boolean> biFunction = function (MethodReferences<T> arg0,Number arg1){
@@ -142,7 +168,7 @@
    ;; (objectFactory = (MethodReferences<Object> $$q = new MethodReferences.<init>(),function (){
    (local.set $objectFactory (block (result (ref null $java.lang.Object))
     
-    (local.set $$$q_1 (call $m_<init>__void@methodreferences.MethodReferences (struct.new_with_rtt $methodreferences.MethodReferences (global.get $methodreferences.MethodReferences.rtt))))
+    (local.set $$$q_1 (call $m_<init>__void@methodreferences.MethodReferences (struct.new_with_rtt $methodreferences.MethodReferences (global.get $methodreferences.MethodReferences.vtable) (global.get $methodreferences.MethodReferences.rtt))))
     (ref.null $java.lang.Object)
    ))
    ;; Function<MethodReferences<T>, Object> function = function (MethodReferences<T> arg0){
@@ -162,7 +188,7 @@
    ;; (jsobjectFactory = (MethodReferences<Object> $$q = new MethodReferences.<init>(),function (){
    (local.set $jsobjectFactory (block (result (ref null $java.lang.Object))
     
-    (local.set $$$q_2 (call $m_<init>__void@methodreferences.MethodReferences (struct.new_with_rtt $methodreferences.MethodReferences (global.get $methodreferences.MethodReferences.rtt))))
+    (local.set $$$q_2 (call $m_<init>__void@methodreferences.MethodReferences (struct.new_with_rtt $methodreferences.MethodReferences (global.get $methodreferences.MethodReferences.vtable) (global.get $methodreferences.MethodReferences.rtt))))
     (ref.null $java.lang.Object)
    ))
    ;; JsFunctionInterface<MethodReferences<T>, Object> jsfunction = function (MethodReferences<T> arg0){
@@ -183,6 +209,7 @@
   )
  )
 )
+(global funcref (ref.func $m_main__void_$pp_methodreferences@methodreferences.MethodReferences))
 
 ;;; INTERFACE  Producer
 
@@ -192,8 +219,18 @@
 
 ;;; CLASS  ObjectCapturingOuter
 (type $methodreferences.MethodReferences.ObjectCapturingOuter (struct
+ (field $vtable (ref null $methodreferences.MethodReferences.ObjectCapturingOuter.vtable))
  (field $this@methodreferences.MethodReferences.ObjectCapturingOuter (mut (ref null $methodreferences.MethodReferences)))
 ))
+(type $methodreferences.MethodReferences.ObjectCapturingOuter.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_getMain__methodreferences_MethodReferences_$pp_methodreferences (mut (ref $function.__$methodreferences.MethodReferences)))
+))
+(global $methodreferences.MethodReferences.ObjectCapturingOuter.vtable (mut (ref null $methodreferences.MethodReferences.ObjectCapturingOuter.vtable)) (ref.null $methodreferences.MethodReferences.ObjectCapturingOuter.vtable))
 
 ;;; ObjectCapturingOuter()
 (func $m_<init>__void_$pp_methodreferences@methodreferences.MethodReferences.ObjectCapturingOuter
@@ -207,21 +244,25 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_methodreferences@methodreferences.MethodReferences.ObjectCapturingOuter))
 
 ;;; MethodReferences<T> ObjectCapturingOuter.getMain()
 (func $m_getMain__methodreferences_MethodReferences_$pp_methodreferences@methodreferences.MethodReferences.ObjectCapturingOuter
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $methodreferences.MethodReferences))
  (local $return.value (ref null $methodreferences.MethodReferences))
+ (local $this (ref null $methodreferences.MethodReferences.ObjectCapturingOuter))
+ (local.set $this (ref.cast $java.lang.Object $methodreferences.MethodReferences.ObjectCapturingOuter (local.get $this.untyped) (global.get $methodreferences.MethodReferences.ObjectCapturingOuter.rtt)))
  (block $return.label
   (block
    ;; return ObjectCapturingOuter.this.this;
-   (local.set $return.value (struct.get $methodreferences.MethodReferences.ObjectCapturingOuter $this@methodreferences.MethodReferences.ObjectCapturingOuter  (ref.null $methodreferences.MethodReferences.ObjectCapturingOuter)))
+   (local.set $return.value (struct.get $methodreferences.MethodReferences.ObjectCapturingOuter $this@methodreferences.MethodReferences.ObjectCapturingOuter  (local.get $this)))
    (br $return.label)
   )
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_getMain__methodreferences_MethodReferences_$pp_methodreferences@methodreferences.MethodReferences.ObjectCapturingOuter))
 
 ;;; INTERFACE  Function
 
@@ -232,4 +273,11 @@
 ;;; INTERFACE  JsFunctionInterface
 
 ;;; INTERFACE  JsBiFunction
+
+;;; Code for methodreferences.MethodReferences [vtable]
+ (global.set $methodreferences.MethodReferences.vtable (struct.new_with_rtt $methodreferences.MethodReferences.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_isA__java_lang_Boolean@methodreferences.MethodReferences) (ref.func $m_self__java_lang_Object_$pp_methodreferences@methodreferences.MethodReferences) (ref.func $m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences@methodreferences.MethodReferences) (ref.func $m_main__void_$pp_methodreferences@methodreferences.MethodReferences) (rtt.canon $methodreferences.MethodReferences.vtable)))
+;;; Code for methodreferences.MethodReferences.ObjectCapturingOuter [vtable]
+ (global.set $methodreferences.MethodReferences.ObjectCapturingOuter.vtable (struct.new_with_rtt $methodreferences.MethodReferences.ObjectCapturingOuter.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_getMain__methodreferences_MethodReferences_$pp_methodreferences@methodreferences.MethodReferences.ObjectCapturingOuter) (rtt.canon $methodreferences.MethodReferences.ObjectCapturingOuter.vtable)))
+))
+(start $.runtime.init)
 

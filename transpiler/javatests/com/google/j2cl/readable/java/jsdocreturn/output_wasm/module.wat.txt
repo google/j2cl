@@ -2,7 +2,18 @@
 
 ;;; CLASS  JsDocReturn
 (type $jsdocreturn.JsDocReturn (struct
+ (field $vtable (ref null $jsdocreturn.JsDocReturn.vtable))
 ))
+(type $jsdocreturn.JsDocReturn.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_test1__void (mut (ref $function.__$void)))
+ (field $m_test2__int (mut (ref $function.__$int)))
+))
+(global $jsdocreturn.JsDocReturn.vtable (mut (ref null $jsdocreturn.JsDocReturn.vtable)) (ref.null $jsdocreturn.JsDocReturn.vtable))
 
 ;;; JsDocReturn()
 (func $m_<init>__void@jsdocreturn.JsDocReturn
@@ -16,21 +27,27 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@jsdocreturn.JsDocReturn))
 
 ;;; void JsDocReturn.test1()
 (func $m_test1__void@jsdocreturn.JsDocReturn
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
+ (local $this (ref null $jsdocreturn.JsDocReturn))
+ (local.set $this (ref.cast $java.lang.Object $jsdocreturn.JsDocReturn (local.get $this.untyped) (global.get $jsdocreturn.JsDocReturn.rtt)))
  (block $return.label
   (block
   )
  )
 )
+(global funcref (ref.func $m_test1__void@jsdocreturn.JsDocReturn))
 
 ;;; int JsDocReturn.test2()
 (func $m_test2__int@jsdocreturn.JsDocReturn
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (result i32)
  (local $return.value i32)
+ (local $this (ref null $jsdocreturn.JsDocReturn))
+ (local.set $this (ref.cast $java.lang.Object $jsdocreturn.JsDocReturn (local.get $this.untyped) (global.get $jsdocreturn.JsDocReturn.rtt)))
  (block $return.label
   (block
    ;; return 1;
@@ -40,4 +57,10 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_test2__int@jsdocreturn.JsDocReturn))
+
+;;; Code for jsdocreturn.JsDocReturn [vtable]
+ (global.set $jsdocreturn.JsDocReturn.vtable (struct.new_with_rtt $jsdocreturn.JsDocReturn.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test1__void@jsdocreturn.JsDocReturn) (ref.func $m_test2__int@jsdocreturn.JsDocReturn) (rtt.canon $jsdocreturn.JsDocReturn.vtable)))
+))
+(start $.runtime.init)
 

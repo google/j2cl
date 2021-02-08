@@ -2,9 +2,23 @@
 
 ;;; ENUM  Numbers
 (type $switchstatement.Numbers (struct
+ (field $vtable (ref null $switchstatement.Numbers.vtable))
  (field $name@java.lang.Enum (mut (ref null $java.lang.String)))
  (field $ordinal@java.lang.Enum (mut i32))
 ))
+(type $switchstatement.Numbers.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_getDeclaringClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_name__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_ordinal__int (mut (ref $function.__$int)))
+ (field $m_compareTo__java_lang_Enum__int (mut (ref $function.$java.lang.Enum__$int)))
+ (field $m_compareTo__java_lang_Object__int (mut (ref $function.$java.lang.Object__$int)))
+))
+(global $switchstatement.Numbers.vtable (mut (ref null $switchstatement.Numbers.vtable)) (ref.null $switchstatement.Numbers.vtable))
 (global $ONE@switchstatement.Numbers (mut (ref null $switchstatement.Numbers)) (ref.null $switchstatement.Numbers))
 (global $TWO@switchstatement.Numbers (mut (ref null $switchstatement.Numbers)) (ref.null $switchstatement.Numbers))
 
@@ -20,10 +34,21 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$p_switchstatement_Numbers@switchstatement.Numbers))
 
 ;;; CLASS  SwitchStatement
 (type $switchstatement.SwitchStatement (struct
+ (field $vtable (ref null $switchstatement.SwitchStatement.vtable))
 ))
+(type $switchstatement.SwitchStatement.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_main__void (mut (ref $function.__$void)))
+))
+(global $switchstatement.SwitchStatement.vtable (mut (ref null $switchstatement.SwitchStatement.vtable)) (ref.null $switchstatement.SwitchStatement.vtable))
 
 ;;; SwitchStatement()
 (func $m_<init>__void@switchstatement.SwitchStatement
@@ -37,10 +62,13 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@switchstatement.SwitchStatement))
 
 ;;; void SwitchStatement.main()
 (func $m_main__void@switchstatement.SwitchStatement
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
+ (local $this (ref null $switchstatement.SwitchStatement))
+ (local.set $this (ref.cast $java.lang.Object $switchstatement.SwitchStatement (local.get $this.untyped) (global.get $switchstatement.SwitchStatement.rtt)))
  (block $return.label
   (block
    ;; switch ("one") {
@@ -54,6 +82,7 @@
   )
  )
 )
+(global funcref (ref.func $m_main__void@switchstatement.SwitchStatement))
 
 ;;; void SwitchStatement.testSwitchVariableDeclarations()
 (func $m_testSwitchVariableDeclarations__void@switchstatement.SwitchStatement
@@ -74,4 +103,12 @@
   )
  )
 )
+(global funcref (ref.func $m_testSwitchVariableDeclarations__void@switchstatement.SwitchStatement))
+
+;;; Code for switchstatement.Numbers [vtable]
+ (global.set $switchstatement.Numbers.vtable (struct.new_with_rtt $switchstatement.Numbers.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Enum) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_getDeclaringClass__java_lang_Class@java.lang.Enum) (ref.func $m_name__java_lang_String@java.lang.Enum) (ref.func $m_ordinal__int@java.lang.Enum) (ref.func $m_compareTo__java_lang_Enum__int@java.lang.Enum) (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum) (rtt.canon $switchstatement.Numbers.vtable)))
+;;; Code for switchstatement.SwitchStatement [vtable]
+ (global.set $switchstatement.SwitchStatement.vtable (struct.new_with_rtt $switchstatement.SwitchStatement.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_main__void@switchstatement.SwitchStatement) (rtt.canon $switchstatement.SwitchStatement.vtable)))
+))
+(start $.runtime.init)
 

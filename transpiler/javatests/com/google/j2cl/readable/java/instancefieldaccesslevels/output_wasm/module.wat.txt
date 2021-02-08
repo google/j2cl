@@ -2,11 +2,20 @@
 
 ;;; CLASS  InstanceFieldAccessLevels
 (type $instancefieldaccesslevels.InstanceFieldAccessLevels (struct
+ (field $vtable (ref null $instancefieldaccesslevels.InstanceFieldAccessLevels.vtable))
  (field $a@instancefieldaccesslevels.InstanceFieldAccessLevels (mut i32))
  (field $b@instancefieldaccesslevels.InstanceFieldAccessLevels (mut i32))
  (field $c@instancefieldaccesslevels.InstanceFieldAccessLevels (mut (ref null $java.lang.Object)))
  (field $d@instancefieldaccesslevels.InstanceFieldAccessLevels (mut i32))
 ))
+(type $instancefieldaccesslevels.InstanceFieldAccessLevels.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $instancefieldaccesslevels.InstanceFieldAccessLevels.vtable (mut (ref null $instancefieldaccesslevels.InstanceFieldAccessLevels.vtable)) (ref.null $instancefieldaccesslevels.InstanceFieldAccessLevels.vtable))
 
 ;;; InstanceFieldAccessLevels()
 (func $m_<init>__void@instancefieldaccesslevels.InstanceFieldAccessLevels
@@ -20,4 +29,10 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@instancefieldaccesslevels.InstanceFieldAccessLevels))
+
+;;; Code for instancefieldaccesslevels.InstanceFieldAccessLevels [vtable]
+ (global.set $instancefieldaccesslevels.InstanceFieldAccessLevels.vtable (struct.new_with_rtt $instancefieldaccesslevels.InstanceFieldAccessLevels.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $instancefieldaccesslevels.InstanceFieldAccessLevels.vtable)))
+))
+(start $.runtime.init)
 

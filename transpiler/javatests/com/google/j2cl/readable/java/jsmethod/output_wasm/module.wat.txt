@@ -2,7 +2,17 @@
 
 ;;; CLASS  JsMethodExample
 (type $jsmethod.JsMethodExample (struct
+ (field $vtable (ref null $jsmethod.JsMethodExample.vtable))
 ))
+(type $jsmethod.JsMethodExample.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_testMethod__java_util_ArrayList (mut (ref $function.__$java.util.ArrayList)))
+))
+(global $jsmethod.JsMethodExample.vtable (mut (ref null $jsmethod.JsMethodExample.vtable)) (ref.null $jsmethod.JsMethodExample.vtable))
 
 ;;; JsMethodExample()
 (func $m_<init>__void@jsmethod.JsMethodExample
@@ -16,6 +26,7 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@jsmethod.JsMethodExample))
 
 ;;; void JsMethodExample.log(String message)
 (func $m_log__java_lang_String__void@jsmethod.JsMethodExample
@@ -25,6 +36,7 @@
   )
  )
 )
+(global funcref (ref.func $m_log__java_lang_String__void@jsmethod.JsMethodExample))
 
 ;;; void JsMethodExample.main(String... args)
 (func $m_main__arrayOf_java_lang_String__void@jsmethod.JsMethodExample
@@ -36,22 +48,36 @@
   )
  )
 )
+(global funcref (ref.func $m_main__arrayOf_java_lang_String__void@jsmethod.JsMethodExample))
 
 ;;; T JsMethodExample.testMethod()
 (func $m_testMethod__java_util_ArrayList@jsmethod.JsMethodExample
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.util.ArrayList))
  (local $return.value (ref null $java.util.ArrayList))
+ (local $this (ref null $jsmethod.JsMethodExample))
+ (local.set $this (ref.cast $java.lang.Object $jsmethod.JsMethodExample (local.get $this.untyped) (global.get $jsmethod.JsMethodExample.rtt)))
  (block $return.label
   (block
   )
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_testMethod__java_util_ArrayList@jsmethod.JsMethodExample))
 
 ;;; CLASS  Base
 (type $jsmethod.JsMethodExample.Base (struct
+ (field $vtable (ref null $jsmethod.JsMethodExample.Base.vtable))
 ))
+(type $jsmethod.JsMethodExample.Base.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_m__java_lang_Object__void (mut (ref $function.$java.lang.Object__$void)))
+))
+(global $jsmethod.JsMethodExample.Base.vtable (mut (ref null $jsmethod.JsMethodExample.Base.vtable)) (ref.null $jsmethod.JsMethodExample.Base.vtable))
 
 ;;; Base()
 (func $m_<init>__void_$pp_jsmethod@jsmethod.JsMethodExample.Base
@@ -65,22 +91,37 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_jsmethod@jsmethod.JsMethodExample.Base))
 
 ;;; void Base.m(T t)
 (func $m_m__java_lang_Object__void@jsmethod.JsMethodExample.Base
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Object))
+ (local $this (ref null $jsmethod.JsMethodExample.Base))
+ (local.set $this (ref.cast $java.lang.Object $jsmethod.JsMethodExample.Base (local.get $this.untyped) (global.get $jsmethod.JsMethodExample.Base.rtt)))
  (block $return.label
   (block
   )
  )
 )
+(global funcref (ref.func $m_m__java_lang_Object__void@jsmethod.JsMethodExample.Base))
 
 ;;; INTERFACE  I
 
 ;;; CLASS  Sub
 (type $jsmethod.JsMethodExample.Sub (struct
+ (field $vtable (ref null $jsmethod.JsMethodExample.Sub.vtable))
 ))
+(type $jsmethod.JsMethodExample.Sub.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_m__java_lang_Object__void (mut (ref $function.$java.lang.Object__$void)))
+ (field $m_m__java_lang_String__void (mut (ref $function.$java.lang.String__$void)))
+))
+(global $jsmethod.JsMethodExample.Sub.vtable (mut (ref null $jsmethod.JsMethodExample.Sub.vtable)) (ref.null $jsmethod.JsMethodExample.Sub.vtable))
 
 ;;; Sub()
 (func $m_<init>__void_$pp_jsmethod@jsmethod.JsMethodExample.Sub
@@ -94,26 +135,40 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_jsmethod@jsmethod.JsMethodExample.Sub))
 
 ;;; void Sub.m(String s)
 (func $m_m__java_lang_String__void@jsmethod.JsMethodExample.Sub
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $s (ref null $java.lang.String))
+ (local $this (ref null $jsmethod.JsMethodExample.Sub))
+ (local.set $this (ref.cast $java.lang.Object $jsmethod.JsMethodExample.Sub (local.get $this.untyped) (global.get $jsmethod.JsMethodExample.Sub.rtt)))
  (block $return.label
   (block
   )
  )
 )
+(global funcref (ref.func $m_m__java_lang_String__void@jsmethod.JsMethodExample.Sub))
 
 ;;; void Sub.m(Object arg0)
 (func $m_m__java_lang_Object__void@jsmethod.JsMethodExample.Sub
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
+ (local $this (ref null $jsmethod.JsMethodExample.Sub))
+ (local.set $this (ref.cast $java.lang.Object $jsmethod.JsMethodExample.Sub (local.get $this.untyped) (global.get $jsmethod.JsMethodExample.Sub.rtt)))
  (block $return.label
   (block
    ;; Sub.this.m(((String) arg0));
-   
+   (call_ref (local.get $this)(ref.cast $java.lang.Object $java.lang.String (local.get $arg0) (global.get $java.lang.String.rtt))(struct.get $jsmethod.JsMethodExample.Sub.vtable $m_m__java_lang_String__void (struct.get $jsmethod.JsMethodExample.Sub $vtable(local.get $this))))
   )
  )
 )
+(global funcref (ref.func $m_m__java_lang_Object__void@jsmethod.JsMethodExample.Sub))
+
+;;; Code for jsmethod.JsMethodExample [vtable]
+ (global.set $jsmethod.JsMethodExample.vtable (struct.new_with_rtt $jsmethod.JsMethodExample.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_testMethod__java_util_ArrayList@jsmethod.JsMethodExample) (rtt.canon $jsmethod.JsMethodExample.vtable)))
+;;; Code for jsmethod.JsMethodExample.Sub [vtable]
+ (global.set $jsmethod.JsMethodExample.Sub.vtable (struct.new_with_rtt $jsmethod.JsMethodExample.Sub.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_m__java_lang_Object__void@jsmethod.JsMethodExample.Sub) (ref.func $m_m__java_lang_String__void@jsmethod.JsMethodExample.Sub) (rtt.canon $jsmethod.JsMethodExample.Sub.vtable)))
+))
+(start $.runtime.init)
 

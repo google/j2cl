@@ -2,7 +2,17 @@
 
 ;;; CLASS  JSKeyWords
 (type $javascriptkeywords.JSKeyWords (struct
+ (field $vtable (ref null $javascriptkeywords.JSKeyWords.vtable))
 ))
+(type $javascriptkeywords.JSKeyWords.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_test__int__int (mut (ref $function.$int__$int)))
+))
+(global $javascriptkeywords.JSKeyWords.vtable (mut (ref null $javascriptkeywords.JSKeyWords.vtable)) (ref.null $javascriptkeywords.JSKeyWords.vtable))
 
 ;;; JSKeyWords()
 (func $m_<init>__void@javascriptkeywords.JSKeyWords
@@ -16,14 +26,17 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@javascriptkeywords.JSKeyWords))
 
 ;;; int JSKeyWords.test(int in)
 (func $m_test__int__int@javascriptkeywords.JSKeyWords
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $in i32)
  (result i32)
  (local $return.value i32)
  (local $let i32)
+ (local $this (ref null $javascriptkeywords.JSKeyWords))
+ (local.set $this (ref.cast $java.lang.Object $javascriptkeywords.JSKeyWords (local.get $this.untyped) (global.get $javascriptkeywords.JSKeyWords.rtt)))
  (block $return.label
   (block
    ;; int let = 0;
@@ -36,4 +49,10 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_test__int__int@javascriptkeywords.JSKeyWords))
+
+;;; Code for javascriptkeywords.JSKeyWords [vtable]
+ (global.set $javascriptkeywords.JSKeyWords.vtable (struct.new_with_rtt $javascriptkeywords.JSKeyWords.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__int__int@javascriptkeywords.JSKeyWords) (rtt.canon $javascriptkeywords.JSKeyWords.vtable)))
+))
+(start $.runtime.init)
 

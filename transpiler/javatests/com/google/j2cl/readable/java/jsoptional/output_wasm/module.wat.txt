@@ -2,32 +2,51 @@
 
 ;;; CLASS  Main
 (type $jsoptional.Main (struct
+ (field $vtable (ref null $jsoptional.Main.vtable))
  (field $f@jsoptional.Main (mut (ref null $java.lang.Object)))
 ))
+(type $jsoptional.Main.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_method1__int__java_lang_Double__java_lang_Integer__void (mut (ref $function.$int__$java.lang.Double__$java.lang.Integer__$void)))
+ (field $m_method2__java_lang_String__java_lang_Double__arrayOf_java_lang_Boolean__void (mut (ref $function.$java.lang.String__$java.lang.Double__$java.lang.Object__$void)))
+ (field $m_testFunction__jsoptional_Main_Function__void (mut (ref $function.$java.lang.Object__$void)))
+ (field $m_testOptionalFunction__jsoptional_Main_Function__void (mut (ref $function.$java.lang.Object__$void)))
+))
+(global $jsoptional.Main.vtable (mut (ref null $jsoptional.Main.vtable)) (ref.null $jsoptional.Main.vtable))
 
 ;;; void Main.method1(int i1, Double d, Integer i)
 (func $m_method1__int__java_lang_Double__java_lang_Integer__void@jsoptional.Main
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $i1 i32)
  (param $d (ref null $java.lang.Double))
  (param $i (ref null $java.lang.Integer))
+ (local $this (ref null $jsoptional.Main))
+ (local.set $this (ref.cast $java.lang.Object $jsoptional.Main (local.get $this.untyped) (global.get $jsoptional.Main.rtt)))
  (block $return.label
   (block
   )
  )
 )
+(global funcref (ref.func $m_method1__int__java_lang_Double__java_lang_Integer__void@jsoptional.Main))
 
 ;;; void Main.method2(String s1, Double d, Boolean... i)
 (func $m_method2__java_lang_String__java_lang_Double__arrayOf_java_lang_Boolean__void@jsoptional.Main
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $s1 (ref null $java.lang.String))
  (param $d (ref null $java.lang.Double))
  (param $i (ref null $java.lang.Object))
+ (local $this (ref null $jsoptional.Main))
+ (local.set $this (ref.cast $java.lang.Object $jsoptional.Main (local.get $this.untyped) (global.get $jsoptional.Main.rtt)))
  (block $return.label
   (block
   )
  )
 )
+(global funcref (ref.func $m_method2__java_lang_String__java_lang_Double__arrayOf_java_lang_Boolean__void@jsoptional.Main))
 
 ;;; Main(String a)
 (func $m_<init>__java_lang_String__void@jsoptional.Main
@@ -42,32 +61,49 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__java_lang_String__void@jsoptional.Main))
 
 ;;; void Main.testFunction(Function f)
 (func $m_testFunction__jsoptional_Main_Function__void@jsoptional.Main
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $f (ref null $java.lang.Object))
+ (local $this (ref null $jsoptional.Main))
+ (local.set $this (ref.cast $java.lang.Object $jsoptional.Main (local.get $this.untyped) (global.get $jsoptional.Main.rtt)))
  (block $return.label
   (block
   )
  )
 )
+(global funcref (ref.func $m_testFunction__jsoptional_Main_Function__void@jsoptional.Main))
 
 ;;; void Main.testOptionalFunction(Function f)
 (func $m_testOptionalFunction__jsoptional_Main_Function__void@jsoptional.Main
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $f (ref null $java.lang.Object))
+ (local $this (ref null $jsoptional.Main))
+ (local.set $this (ref.cast $java.lang.Object $jsoptional.Main (local.get $this.untyped) (global.get $jsoptional.Main.rtt)))
  (block $return.label
   (block
   )
  )
 )
+(global funcref (ref.func $m_testOptionalFunction__jsoptional_Main_Function__void@jsoptional.Main))
 
 ;;; INTERFACE  Function
 
 ;;; CLASS  AFunction
 (type $jsoptional.Main.AFunction (struct
+ (field $vtable (ref null $jsoptional.Main.AFunction.vtable))
 ))
+(type $jsoptional.Main.AFunction.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.String__$java.lang.Object__$java.lang.Object)))
+))
+(global $jsoptional.Main.AFunction.vtable (mut (ref null $jsoptional.Main.AFunction.vtable)) (ref.null $jsoptional.Main.AFunction.vtable))
 
 ;;; AFunction()
 (func $m_<init>__void_$pp_jsoptional@jsoptional.Main.AFunction
@@ -81,14 +117,17 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_jsoptional@jsoptional.Main.AFunction))
 
 ;;; Object AFunction.f1(String i, Object... args)
 (func $m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object@jsoptional.Main.AFunction
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $i (ref null $java.lang.String))
  (param $args (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
+ (local $this (ref null $jsoptional.Main.AFunction))
+ (local.set $this (ref.cast $java.lang.Object $jsoptional.Main.AFunction (local.get $this.untyped) (global.get $jsoptional.Main.AFunction.rtt)))
  (block $return.label
   (block
    ;; return args[0];
@@ -98,12 +137,24 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object@jsoptional.Main.AFunction))
 
 ;;; INTERFACE  I
 
 ;;; CLASS  TemplatedSubtype
 (type $jsoptional.Main.TemplatedSubtype (struct
+ (field $vtable (ref null $jsoptional.Main.TemplatedSubtype.vtable))
 ))
+(type $jsoptional.Main.TemplatedSubtype.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_m__java_lang_String__java_lang_Object__void (mut (ref $function.$java.lang.String__$java.lang.Object__$void)))
+ (field $m_m__java_lang_Object__java_lang_Object__void (mut (ref $function.$java.lang.Object__$java.lang.Object__$void)))
+))
+(global $jsoptional.Main.TemplatedSubtype.vtable (mut (ref null $jsoptional.Main.TemplatedSubtype.vtable)) (ref.null $jsoptional.Main.TemplatedSubtype.vtable))
 
 ;;; TemplatedSubtype()
 (func $m_<init>__void_$pp_jsoptional@jsoptional.Main.TemplatedSubtype
@@ -117,35 +168,53 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_jsoptional@jsoptional.Main.TemplatedSubtype))
 
 ;;; void TemplatedSubtype.m(T t, Object o)
 (func $m_m__java_lang_String__java_lang_Object__void@jsoptional.Main.TemplatedSubtype
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $t (ref null $java.lang.String))
  (param $o (ref null $java.lang.Object))
+ (local $this (ref null $jsoptional.Main.TemplatedSubtype))
+ (local.set $this (ref.cast $java.lang.Object $jsoptional.Main.TemplatedSubtype (local.get $this.untyped) (global.get $jsoptional.Main.TemplatedSubtype.rtt)))
  (block $return.label
   (block
   )
  )
 )
+(global funcref (ref.func $m_m__java_lang_String__java_lang_Object__void@jsoptional.Main.TemplatedSubtype))
 
 ;;; void TemplatedSubtype.m(Object arg0, Object arg1)
 (func $m_m__java_lang_Object__java_lang_Object__void@jsoptional.Main.TemplatedSubtype
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Object))
+ (local $this (ref null $jsoptional.Main.TemplatedSubtype))
+ (local.set $this (ref.cast $java.lang.Object $jsoptional.Main.TemplatedSubtype (local.get $this.untyped) (global.get $jsoptional.Main.TemplatedSubtype.rtt)))
  (block $return.label
   (block
    ;; TemplatedSubtype.this.m(((T) arg0),arg1);
-   
+   (call_ref (local.get $this)(ref.null $java.lang.String)(local.get $arg1)(struct.get $jsoptional.Main.TemplatedSubtype.vtable $m_m__java_lang_String__java_lang_Object__void (struct.get $jsoptional.Main.TemplatedSubtype $vtable(local.get $this))))
   )
  )
 )
+(global funcref (ref.func $m_m__java_lang_Object__java_lang_Object__void@jsoptional.Main.TemplatedSubtype))
 
 ;;; CLASS  SpecializedSubtype
 (type $jsoptional.Main.SpecializedSubtype (struct
+ (field $vtable (ref null $jsoptional.Main.SpecializedSubtype.vtable))
  (field $this@jsoptional.Main.SpecializedSubtype (mut (ref null $jsoptional.Main)))
 ))
+(type $jsoptional.Main.SpecializedSubtype.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_m__java_lang_String__java_lang_Object__void (mut (ref $function.$java.lang.String__$java.lang.Object__$void)))
+ (field $m_m__java_lang_Object__java_lang_Object__void (mut (ref $function.$java.lang.Object__$java.lang.Object__$void)))
+))
+(global $jsoptional.Main.SpecializedSubtype.vtable (mut (ref null $jsoptional.Main.SpecializedSubtype.vtable)) (ref.null $jsoptional.Main.SpecializedSubtype.vtable))
 
 ;;; SpecializedSubtype(Object a)
 (func $m_<init>__java_lang_Object__void@jsoptional.Main.SpecializedSubtype
@@ -160,34 +229,52 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__java_lang_Object__void@jsoptional.Main.SpecializedSubtype))
 
 ;;; void SpecializedSubtype.m(String t, Object o)
 (func $m_m__java_lang_String__java_lang_Object__void@jsoptional.Main.SpecializedSubtype
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $t (ref null $java.lang.String))
  (param $o (ref null $java.lang.Object))
+ (local $this (ref null $jsoptional.Main.SpecializedSubtype))
+ (local.set $this (ref.cast $java.lang.Object $jsoptional.Main.SpecializedSubtype (local.get $this.untyped) (global.get $jsoptional.Main.SpecializedSubtype.rtt)))
  (block $return.label
   (block
   )
  )
 )
+(global funcref (ref.func $m_m__java_lang_String__java_lang_Object__void@jsoptional.Main.SpecializedSubtype))
 
 ;;; void SpecializedSubtype.m(Object arg0, Object arg1)
 (func $m_m__java_lang_Object__java_lang_Object__void@jsoptional.Main.SpecializedSubtype
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Object))
+ (local $this (ref null $jsoptional.Main.SpecializedSubtype))
+ (local.set $this (ref.cast $java.lang.Object $jsoptional.Main.SpecializedSubtype (local.get $this.untyped) (global.get $jsoptional.Main.SpecializedSubtype.rtt)))
  (block $return.label
   (block
    ;; SpecializedSubtype.this.m(((String) arg0),arg1);
-   
+   (call_ref (local.get $this)(ref.cast $java.lang.Object $java.lang.String (local.get $arg0) (global.get $java.lang.String.rtt))(local.get $arg1)(struct.get $jsoptional.Main.SpecializedSubtype.vtable $m_m__java_lang_String__java_lang_Object__void (struct.get $jsoptional.Main.SpecializedSubtype $vtable(local.get $this))))
   )
  )
 )
+(global funcref (ref.func $m_m__java_lang_Object__java_lang_Object__void@jsoptional.Main.SpecializedSubtype))
 
 ;;; CLASS  NonJsTypeSubtype
 (type $jsoptional.Main.NonJsTypeSubtype (struct
+ (field $vtable (ref null $jsoptional.Main.NonJsTypeSubtype.vtable))
 ))
+(type $jsoptional.Main.NonJsTypeSubtype.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_m__java_lang_String__java_lang_Object__void (mut (ref $function.$java.lang.String__$java.lang.Object__$void)))
+ (field $m_m__java_lang_Object__java_lang_Object__void (mut (ref $function.$java.lang.Object__$java.lang.Object__$void)))
+))
+(global $jsoptional.Main.NonJsTypeSubtype.vtable (mut (ref null $jsoptional.Main.NonJsTypeSubtype.vtable)) (ref.null $jsoptional.Main.NonJsTypeSubtype.vtable))
 
 ;;; NonJsTypeSubtype()
 (func $m_<init>__void_$pp_jsoptional@jsoptional.Main.NonJsTypeSubtype
@@ -201,28 +288,48 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_jsoptional@jsoptional.Main.NonJsTypeSubtype))
 
 ;;; void NonJsTypeSubtype.m(String t, Object o)
 (func $m_m__java_lang_String__java_lang_Object__void@jsoptional.Main.NonJsTypeSubtype
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $t (ref null $java.lang.String))
  (param $o (ref null $java.lang.Object))
+ (local $this (ref null $jsoptional.Main.NonJsTypeSubtype))
+ (local.set $this (ref.cast $java.lang.Object $jsoptional.Main.NonJsTypeSubtype (local.get $this.untyped) (global.get $jsoptional.Main.NonJsTypeSubtype.rtt)))
  (block $return.label
   (block
   )
  )
 )
+(global funcref (ref.func $m_m__java_lang_String__java_lang_Object__void@jsoptional.Main.NonJsTypeSubtype))
 
 ;;; void NonJsTypeSubtype.m(Object arg0, Object arg1)
 (func $m_m__java_lang_Object__java_lang_Object__void@jsoptional.Main.NonJsTypeSubtype
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Object))
+ (local $this (ref null $jsoptional.Main.NonJsTypeSubtype))
+ (local.set $this (ref.cast $java.lang.Object $jsoptional.Main.NonJsTypeSubtype (local.get $this.untyped) (global.get $jsoptional.Main.NonJsTypeSubtype.rtt)))
  (block $return.label
   (block
    ;; NonJsTypeSubtype.this.m(((String) arg0),arg1);
-   
+   (call_ref (local.get $this)(ref.cast $java.lang.Object $java.lang.String (local.get $arg0) (global.get $java.lang.String.rtt))(local.get $arg1)(struct.get $jsoptional.Main.NonJsTypeSubtype.vtable $m_m__java_lang_String__java_lang_Object__void (struct.get $jsoptional.Main.NonJsTypeSubtype $vtable(local.get $this))))
   )
  )
 )
+(global funcref (ref.func $m_m__java_lang_Object__java_lang_Object__void@jsoptional.Main.NonJsTypeSubtype))
+
+;;; Code for jsoptional.Main [vtable]
+ (global.set $jsoptional.Main.vtable (struct.new_with_rtt $jsoptional.Main.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_method1__int__java_lang_Double__java_lang_Integer__void@jsoptional.Main) (ref.func $m_method2__java_lang_String__java_lang_Double__arrayOf_java_lang_Boolean__void@jsoptional.Main) (ref.func $m_testFunction__jsoptional_Main_Function__void@jsoptional.Main) (ref.func $m_testOptionalFunction__jsoptional_Main_Function__void@jsoptional.Main) (rtt.canon $jsoptional.Main.vtable)))
+;;; Code for jsoptional.Main.AFunction [vtable]
+ (global.set $jsoptional.Main.AFunction.vtable (struct.new_with_rtt $jsoptional.Main.AFunction.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object@jsoptional.Main.AFunction) (rtt.canon $jsoptional.Main.AFunction.vtable)))
+;;; Code for jsoptional.Main.TemplatedSubtype [vtable]
+ (global.set $jsoptional.Main.TemplatedSubtype.vtable (struct.new_with_rtt $jsoptional.Main.TemplatedSubtype.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_m__java_lang_String__java_lang_Object__void@jsoptional.Main.TemplatedSubtype) (ref.func $m_m__java_lang_Object__java_lang_Object__void@jsoptional.Main.TemplatedSubtype) (rtt.canon $jsoptional.Main.TemplatedSubtype.vtable)))
+;;; Code for jsoptional.Main.SpecializedSubtype [vtable]
+ (global.set $jsoptional.Main.SpecializedSubtype.vtable (struct.new_with_rtt $jsoptional.Main.SpecializedSubtype.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_m__java_lang_String__java_lang_Object__void@jsoptional.Main.SpecializedSubtype) (ref.func $m_m__java_lang_Object__java_lang_Object__void@jsoptional.Main.SpecializedSubtype) (rtt.canon $jsoptional.Main.SpecializedSubtype.vtable)))
+;;; Code for jsoptional.Main.NonJsTypeSubtype [vtable]
+ (global.set $jsoptional.Main.NonJsTypeSubtype.vtable (struct.new_with_rtt $jsoptional.Main.NonJsTypeSubtype.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_m__java_lang_String__java_lang_Object__void@jsoptional.Main.NonJsTypeSubtype) (ref.func $m_m__java_lang_Object__java_lang_Object__void@jsoptional.Main.NonJsTypeSubtype) (rtt.canon $jsoptional.Main.NonJsTypeSubtype.vtable)))
+))
+(start $.runtime.init)
 

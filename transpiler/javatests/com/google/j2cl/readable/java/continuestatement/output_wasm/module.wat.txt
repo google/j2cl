@@ -2,7 +2,17 @@
 
 ;;; CLASS  ContinueStatement
 (type $continuestatement.ContinueStatement (struct
+ (field $vtable (ref null $continuestatement.ContinueStatement.vtable))
 ))
+(type $continuestatement.ContinueStatement.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_test__void (mut (ref $function.__$void)))
+))
+(global $continuestatement.ContinueStatement.vtable (mut (ref null $continuestatement.ContinueStatement.vtable)) (ref.null $continuestatement.ContinueStatement.vtable))
 
 ;;; ContinueStatement()
 (func $m_<init>__void@continuestatement.ContinueStatement
@@ -16,10 +26,13 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@continuestatement.ContinueStatement))
 
 ;;; void ContinueStatement.test()
 (func $m_test__void@continuestatement.ContinueStatement
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
+ (local $this (ref null $continuestatement.ContinueStatement))
+ (local.set $this (ref.cast $java.lang.Object $continuestatement.ContinueStatement (local.get $this.untyped) (global.get $continuestatement.ContinueStatement.rtt)))
  (block $return.label
   (block
    ;; LOOP: for (;true;) {
@@ -40,4 +53,10 @@
   )
  )
 )
+(global funcref (ref.func $m_test__void@continuestatement.ContinueStatement))
+
+;;; Code for continuestatement.ContinueStatement [vtable]
+ (global.set $continuestatement.ContinueStatement.vtable (struct.new_with_rtt $continuestatement.ContinueStatement.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__void@continuestatement.ContinueStatement) (rtt.canon $continuestatement.ContinueStatement.vtable)))
+))
+(start $.runtime.init)
 

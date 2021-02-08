@@ -2,7 +2,16 @@
 
 ;;; CLASS  Main
 (type $unreachableclass.Main (struct
+ (field $vtable (ref null $unreachableclass.Main.vtable))
 ))
+(type $unreachableclass.Main.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $unreachableclass.Main.vtable (mut (ref null $unreachableclass.Main.vtable)) (ref.null $unreachableclass.Main.vtable))
 
 ;;; Main()
 (func $m_<init>__void@unreachableclass.Main
@@ -16,11 +25,22 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@unreachableclass.Main))
 
 ;;; CLASS  A
 (type $unreachableclass.Main.1A (struct
+ (field $vtable (ref null $unreachableclass.Main.1A.vtable))
  (field $this@unreachableclass.Main.1A (mut (ref null $unreachableclass.Main)))
 ))
+(type $unreachableclass.Main.1A.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_m__void_$pp_unreachableclass (mut (ref $function.__$void)))
+))
+(global $unreachableclass.Main.1A.vtable (mut (ref null $unreachableclass.Main.1A.vtable)) (ref.null $unreachableclass.Main.1A.vtable))
 
 ;;; A()
 (func $m_<init>__void_$pp_unreachableclass@unreachableclass.Main.1A
@@ -34,20 +54,33 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_unreachableclass@unreachableclass.Main.1A))
 
 ;;; void A.m()
 (func $m_m__void_$pp_unreachableclass@unreachableclass.Main.1A
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
+ (local $this (ref null $unreachableclass.Main.1A))
+ (local.set $this (ref.cast $java.lang.Object $unreachableclass.Main.1A (local.get $this.untyped) (global.get $unreachableclass.Main.1A.rtt)))
  (block $return.label
   (block
   )
  )
 )
+(global funcref (ref.func $m_m__void_$pp_unreachableclass@unreachableclass.Main.1A))
 
 ;;; CLASS  B
 (type $unreachableclass.Main.1A.1B (struct
+ (field $vtable (ref null $unreachableclass.Main.1A.1B.vtable))
  (field $this@unreachableclass.Main.1A.1B (mut (ref null $unreachableclass.Main.1A)))
 ))
+(type $unreachableclass.Main.1A.1B.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $unreachableclass.Main.1A.1B.vtable (mut (ref null $unreachableclass.Main.1A.1B.vtable)) (ref.null $unreachableclass.Main.1A.1B.vtable))
 
 ;;; B()
 (func $m_<init>__void_$pp_unreachableclass@unreachableclass.Main.1A.1B
@@ -61,6 +94,7 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_unreachableclass@unreachableclass.Main.1A.1B))
 
 ;;; void B.n()
 (func $m_n__void_$p_unreachableclass_Main_1A_1B@unreachableclass.Main.1A.1B
@@ -70,11 +104,21 @@
   )
  )
 )
+(global funcref (ref.func $m_n__void_$p_unreachableclass_Main_1A_1B@unreachableclass.Main.1A.1B))
 
 ;;; CLASS  <anonymous> extends Object
 (type $unreachableclass.Main.1 (struct
+ (field $vtable (ref null $unreachableclass.Main.1.vtable))
  (field $this@unreachableclass.Main.1 (mut (ref null $unreachableclass.Main)))
 ))
+(type $unreachableclass.Main.1.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $unreachableclass.Main.1.vtable (mut (ref null $unreachableclass.Main.1.vtable)) (ref.null $unreachableclass.Main.1.vtable))
 
 ;;; <anonymous> extends Object()
 (func $m_<init>__void_$pp_unreachableclass@unreachableclass.Main.1
@@ -88,4 +132,16 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_unreachableclass@unreachableclass.Main.1))
+
+;;; Code for unreachableclass.Main [vtable]
+ (global.set $unreachableclass.Main.vtable (struct.new_with_rtt $unreachableclass.Main.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $unreachableclass.Main.vtable)))
+;;; Code for unreachableclass.Main.1A [vtable]
+ (global.set $unreachableclass.Main.1A.vtable (struct.new_with_rtt $unreachableclass.Main.1A.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_m__void_$pp_unreachableclass@unreachableclass.Main.1A) (rtt.canon $unreachableclass.Main.1A.vtable)))
+;;; Code for unreachableclass.Main.1A.1B [vtable]
+ (global.set $unreachableclass.Main.1A.1B.vtable (struct.new_with_rtt $unreachableclass.Main.1A.1B.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $unreachableclass.Main.1A.1B.vtable)))
+;;; Code for unreachableclass.Main.1 [vtable]
+ (global.set $unreachableclass.Main.1.vtable (struct.new_with_rtt $unreachableclass.Main.1.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $unreachableclass.Main.1.vtable)))
+))
+(start $.runtime.init)
 

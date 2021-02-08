@@ -2,11 +2,25 @@
 
 ;;; CLASS  SomeJsType
 (type $jstype.SomeJsType (struct
+ (field $vtable (ref null $jstype.SomeJsType.vtable))
  (field $publicField@jstype.SomeJsType (mut i32))
  (field $privateField@jstype.SomeJsType (mut i32))
  (field $packageField@jstype.SomeJsType (mut i32))
  (field $protectedField@jstype.SomeJsType (mut i32))
 ))
+(type $jstype.SomeJsType.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_publicMethod__void (mut (ref $function.__$void)))
+ (field $m_packageMethod__void_$pp_jstype (mut (ref $function.__$void)))
+ (field $m_protectedMethod__void (mut (ref $function.__$void)))
+ (field $m_useFieldsAndMethods__void (mut (ref $function.__$void)))
+ (field $m_testStarAndWildCard__jstype_SomeJsType_Star__jstype_SomeJsType_Wildcard__jstype_SomeJsType_Wildcard (mut (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)))
+))
+(global $jstype.SomeJsType.vtable (mut (ref null $jstype.SomeJsType.vtable)) (ref.null $jstype.SomeJsType.vtable))
 
 ;;; SomeJsType()
 (func $m_<init>__void@jstype.SomeJsType
@@ -20,15 +34,19 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@jstype.SomeJsType))
 
 ;;; void SomeJsType.publicMethod()
 (func $m_publicMethod__void@jstype.SomeJsType
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
+ (local $this (ref null $jstype.SomeJsType))
+ (local.set $this (ref.cast $java.lang.Object $jstype.SomeJsType (local.get $this.untyped) (global.get $jstype.SomeJsType.rtt)))
  (block $return.label
   (block
   )
  )
 )
+(global funcref (ref.func $m_publicMethod__void@jstype.SomeJsType))
 
 ;;; void SomeJsType.privateMethod()
 (func $m_privateMethod__void_$p_jstype_SomeJsType@jstype.SomeJsType
@@ -38,60 +56,72 @@
   )
  )
 )
+(global funcref (ref.func $m_privateMethod__void_$p_jstype_SomeJsType@jstype.SomeJsType))
 
 ;;; void SomeJsType.packageMethod()
 (func $m_packageMethod__void_$pp_jstype@jstype.SomeJsType
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
+ (local $this (ref null $jstype.SomeJsType))
+ (local.set $this (ref.cast $java.lang.Object $jstype.SomeJsType (local.get $this.untyped) (global.get $jstype.SomeJsType.rtt)))
  (block $return.label
   (block
   )
  )
 )
+(global funcref (ref.func $m_packageMethod__void_$pp_jstype@jstype.SomeJsType))
 
 ;;; void SomeJsType.protectedMethod()
 (func $m_protectedMethod__void@jstype.SomeJsType
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
+ (local $this (ref null $jstype.SomeJsType))
+ (local.set $this (ref.cast $java.lang.Object $jstype.SomeJsType (local.get $this.untyped) (global.get $jstype.SomeJsType.rtt)))
  (block $return.label
   (block
   )
  )
 )
+(global funcref (ref.func $m_protectedMethod__void@jstype.SomeJsType))
 
 ;;; void SomeJsType.useFieldsAndMethods()
 (func $m_useFieldsAndMethods__void@jstype.SomeJsType
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (local $value i32)
+ (local $this (ref null $jstype.SomeJsType))
+ (local.set $this (ref.cast $java.lang.Object $jstype.SomeJsType (local.get $this.untyped) (global.get $jstype.SomeJsType.rtt)))
  (block $return.label
   (block
    ;; int value = (((SomeJsType.this.publicField + SomeJsType.this.privateField) + SomeJsType.this.packageField) + SomeJsType.this.protectedField);
    
-   (local.set $value (i32.add (i32.add (i32.add (struct.get $jstype.SomeJsType $publicField@jstype.SomeJsType  (ref.null $jstype.SomeJsType)) (struct.get $jstype.SomeJsType $privateField@jstype.SomeJsType  (ref.null $jstype.SomeJsType))) (struct.get $jstype.SomeJsType $packageField@jstype.SomeJsType  (ref.null $jstype.SomeJsType))) (struct.get $jstype.SomeJsType $protectedField@jstype.SomeJsType  (ref.null $jstype.SomeJsType))))
+   (local.set $value (i32.add (i32.add (i32.add (struct.get $jstype.SomeJsType $publicField@jstype.SomeJsType  (local.get $this)) (struct.get $jstype.SomeJsType $privateField@jstype.SomeJsType  (local.get $this))) (struct.get $jstype.SomeJsType $packageField@jstype.SomeJsType  (local.get $this))) (struct.get $jstype.SomeJsType $protectedField@jstype.SomeJsType  (local.get $this))))
    ;; SomeJsType.this.publicMethod();
-   
+   (call_ref (local.get $this)(struct.get $jstype.SomeJsType.vtable $m_publicMethod__void (struct.get $jstype.SomeJsType $vtable(local.get $this))))
    ;; SomeJsType.this.privateMethod();
    
    ;; SomeJsType.this.packageMethod();
-   
+   (call_ref (local.get $this)(struct.get $jstype.SomeJsType.vtable $m_packageMethod__void_$pp_jstype (struct.get $jstype.SomeJsType $vtable(local.get $this))))
    ;; SomeJsType.this.protectedMethod();
-   
+   (call_ref (local.get $this)(struct.get $jstype.SomeJsType.vtable $m_protectedMethod__void (struct.get $jstype.SomeJsType $vtable(local.get $this))))
   )
  )
 )
+(global funcref (ref.func $m_useFieldsAndMethods__void@jstype.SomeJsType))
 
 ;;; Wildcard SomeJsType.testStarAndWildCard(Star s, Wildcard w)
 (func $m_testStarAndWildCard__jstype_SomeJsType_Star__jstype_SomeJsType_Wildcard__jstype_SomeJsType_Wildcard@jstype.SomeJsType
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $s (ref null $java.lang.Object))
  (param $w (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (local $object (ref null $java.lang.Object))
  (local $star (ref null $java.lang.Object))
+ (local $this (ref null $jstype.SomeJsType))
+ (local.set $this (ref.cast $java.lang.Object $jstype.SomeJsType (local.get $this.untyped) (global.get $jstype.SomeJsType.rtt)))
  (block $return.label
   (block
    ;; Object object = new Object.<init>();
    
-   (local.set $object (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.rtt))))
+   (local.set $object (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (global.get $java.lang.Object.rtt))))
    ;; Star star = ((Star) ((Object) 3.0));
    
    (local.set $star (ref.null $java.lang.Object))
@@ -102,8 +132,14 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_testStarAndWildCard__jstype_SomeJsType_Star__jstype_SomeJsType_Wildcard__jstype_SomeJsType_Wildcard@jstype.SomeJsType))
 
 ;;; INTERFACE  Star
 
 ;;; INTERFACE  Wildcard
+
+;;; Code for jstype.SomeJsType [vtable]
+ (global.set $jstype.SomeJsType.vtable (struct.new_with_rtt $jstype.SomeJsType.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_publicMethod__void@jstype.SomeJsType) (ref.func $m_packageMethod__void_$pp_jstype@jstype.SomeJsType) (ref.func $m_protectedMethod__void@jstype.SomeJsType) (ref.func $m_useFieldsAndMethods__void@jstype.SomeJsType) (ref.func $m_testStarAndWildCard__jstype_SomeJsType_Star__jstype_SomeJsType_Wildcard__jstype_SomeJsType_Wildcard@jstype.SomeJsType) (rtt.canon $jstype.SomeJsType.vtable)))
+))
+(start $.runtime.init)
 

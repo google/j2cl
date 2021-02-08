@@ -2,7 +2,17 @@
 
 ;;; CLASS  ForEachStatement
 (type $foreachstatement.ForEachStatement (struct
+ (field $vtable (ref null $foreachstatement.ForEachStatement.vtable))
 ))
+(type $foreachstatement.ForEachStatement.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_test__java_lang_Iterable__void (mut (ref $function.$java.lang.Object__$void)))
+))
+(global $foreachstatement.ForEachStatement.vtable (mut (ref null $foreachstatement.ForEachStatement.vtable)) (ref.null $foreachstatement.ForEachStatement.vtable))
 
 ;;; ForEachStatement()
 (func $m_<init>__void@foreachstatement.ForEachStatement
@@ -16,16 +26,19 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@foreachstatement.ForEachStatement))
 
 ;;; void ForEachStatement.test(Iterable<Throwable> iterable)
 (func $m_test__java_lang_Iterable__void@foreachstatement.ForEachStatement
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $iterable (ref null $java.lang.Object))
  (local $$iterator (ref null $java.lang.Object))
  (local $t (ref null $java.lang.Throwable))
  (local $$array (ref null $java.lang.Object))
  (local $$index f64)
  (local $t_1 (ref null $java.lang.Throwable))
+ (local $this (ref null $foreachstatement.ForEachStatement))
+ (local.set $this (ref.cast $java.lang.Object $foreachstatement.ForEachStatement (local.get $this.untyped) (global.get $foreachstatement.ForEachStatement.rtt)))
  (block $return.label
   (block
    ;; LOOP: for (Iterator<Throwable> $iterator = iterable.iterator();$iterator.hasNext();) {
@@ -42,7 +55,7 @@
        (local.set $t (ref.cast $java.lang.Object $java.lang.Throwable (ref.null $java.lang.Throwable) (global.get $java.lang.Throwable.rtt)))
        (block
         ;; t.toString();
-        (drop (ref.null $java.lang.String))
+        (drop (call_ref (local.get $t)(struct.get $java.lang.Throwable.vtable $m_toString__java_lang_String (struct.get $java.lang.Throwable $vtable(local.get $t)))))
        )
       )
      )
@@ -65,7 +78,7 @@
        (local.set $t_1 (ref.null $java.lang.Throwable))
        (block
         ;; t.toString();
-        (drop (ref.null $java.lang.String))
+        (drop (call_ref (local.get $t_1)(struct.get $java.lang.Throwable.vtable $m_toString__java_lang_String (struct.get $java.lang.Throwable $vtable(local.get $t_1)))))
        )
       )
      )
@@ -77,4 +90,10 @@
   )
  )
 )
+(global funcref (ref.func $m_test__java_lang_Iterable__void@foreachstatement.ForEachStatement))
+
+;;; Code for foreachstatement.ForEachStatement [vtable]
+ (global.set $foreachstatement.ForEachStatement.vtable (struct.new_with_rtt $foreachstatement.ForEachStatement.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__java_lang_Iterable__void@foreachstatement.ForEachStatement) (rtt.canon $foreachstatement.ForEachStatement.vtable)))
+))
+(start $.runtime.init)
 

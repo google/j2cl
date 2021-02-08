@@ -2,7 +2,16 @@
 
 ;;; CLASS  InstanceQualifiers
 (type $instancequalifieronstaticfield.InstanceQualifiers (struct
+ (field $vtable (ref null $instancequalifieronstaticfield.InstanceQualifiers.vtable))
 ))
+(type $instancequalifieronstaticfield.InstanceQualifiers.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $instancequalifieronstaticfield.InstanceQualifiers.vtable (mut (ref null $instancequalifieronstaticfield.InstanceQualifiers.vtable)) (ref.null $instancequalifieronstaticfield.InstanceQualifiers.vtable))
 (global $staticField@instancequalifieronstaticfield.InstanceQualifiers (mut i32) (i32.const 0))
 (global $sideEffectCount@instancequalifieronstaticfield.InstanceQualifiers (mut i32) (i32.const 0))
 
@@ -18,6 +27,7 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@instancequalifieronstaticfield.InstanceQualifiers))
 
 ;;; int InstanceQualifiers.getStaticValue()
 (func $m_getStaticValue__int@instancequalifieronstaticfield.InstanceQualifiers
@@ -32,6 +42,7 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_getStaticValue__int@instancequalifieronstaticfield.InstanceQualifiers))
 
 ;;; InstanceQualifiers InstanceQualifiers.getStaticInstanceQualifiers()
 (func $m_getStaticInstanceQualifiers__instancequalifieronstaticfield_InstanceQualifiers@instancequalifieronstaticfield.InstanceQualifiers
@@ -46,6 +57,7 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_getStaticInstanceQualifiers__instancequalifieronstaticfield_InstanceQualifiers@instancequalifieronstaticfield.InstanceQualifiers))
 
 ;;; void InstanceQualifiers.main(String... args)
 (func $m_main__arrayOf_java_lang_String__void@instancequalifieronstaticfield.InstanceQualifiers
@@ -58,7 +70,7 @@
   (block
    ;; InstanceQualifiers main = new InstanceQualifiers.<init>();
    
-   (local.set $main (call $m_<init>__void@instancequalifieronstaticfield.InstanceQualifiers (struct.new_with_rtt $instancequalifieronstaticfield.InstanceQualifiers (global.get $instancequalifieronstaticfield.InstanceQualifiers.rtt))))
+   (local.set $main (call $m_<init>__void@instancequalifieronstaticfield.InstanceQualifiers (struct.new_with_rtt $instancequalifieronstaticfield.InstanceQualifiers (global.get $instancequalifieronstaticfield.InstanceQualifiers.vtable) (global.get $instancequalifieronstaticfield.InstanceQualifiers.rtt))))
    ;; int i = 0;
    
    (local.set $i (i32.const 0))
@@ -103,4 +115,10 @@
   )
  )
 )
+(global funcref (ref.func $m_main__arrayOf_java_lang_String__void@instancequalifieronstaticfield.InstanceQualifiers))
+
+;;; Code for instancequalifieronstaticfield.InstanceQualifiers [vtable]
+ (global.set $instancequalifieronstaticfield.InstanceQualifiers.vtable (struct.new_with_rtt $instancequalifieronstaticfield.InstanceQualifiers.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $instancequalifieronstaticfield.InstanceQualifiers.vtable)))
+))
+(start $.runtime.init)
 

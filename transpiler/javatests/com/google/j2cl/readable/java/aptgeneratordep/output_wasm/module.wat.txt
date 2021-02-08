@@ -2,7 +2,16 @@
 
 ;;; CLASS  Dummy
 (type $aptgeneratordep.Dummy (struct
+ (field $vtable (ref null $aptgeneratordep.Dummy.vtable))
 ))
+(type $aptgeneratordep.Dummy.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $aptgeneratordep.Dummy.vtable (mut (ref null $aptgeneratordep.Dummy.vtable)) (ref.null $aptgeneratordep.Dummy.vtable))
 
 ;;; Dummy()
 (func $m_<init>__void@aptgeneratordep.Dummy
@@ -16,11 +25,21 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@aptgeneratordep.Dummy))
 ;;; Code for aptgeneratordep.Foo
 
 ;;; CLASS  Foo
 (type $aptgeneratordep.Foo (struct
+ (field $vtable (ref null $aptgeneratordep.Foo.vtable))
 ))
+(type $aptgeneratordep.Foo.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $aptgeneratordep.Foo.vtable (mut (ref null $aptgeneratordep.Foo.vtable)) (ref.null $aptgeneratordep.Foo.vtable))
 
 ;;; Foo()
 (func $m_<init>__void@aptgeneratordep.Foo
@@ -34,19 +53,30 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@aptgeneratordep.Foo))
 
 ;;; String Foo.toString()
 (func $m_toString__java_lang_String@aptgeneratordep.Foo
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))
+ (local $this (ref null $aptgeneratordep.Foo))
+ (local.set $this (ref.cast $java.lang.Object $aptgeneratordep.Foo (local.get $this.untyped) (global.get $aptgeneratordep.Foo.rtt)))
  (block $return.label
   (block
    ;; return <expr>.getSimpleName();
-   (local.set $return.value (ref.null $java.lang.String))
+   (local.set $return.value (call_ref (ref.null $java.lang.Class)(struct.get $java.lang.Class.vtable $m_getSimpleName__java_lang_String (struct.get $java.lang.Class $vtable(ref.null $java.lang.Class)))))
    (br $return.label)
   )
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_toString__java_lang_String@aptgeneratordep.Foo))
+
+;;; Code for aptgeneratordep.Dummy [vtable]
+ (global.set $aptgeneratordep.Dummy.vtable (struct.new_with_rtt $aptgeneratordep.Dummy.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $aptgeneratordep.Dummy.vtable)))
+;;; Code for aptgeneratordep.Foo [vtable]
+ (global.set $aptgeneratordep.Foo.vtable (struct.new_with_rtt $aptgeneratordep.Foo.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@aptgeneratordep.Foo) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $aptgeneratordep.Foo.vtable)))
+))
+(start $.runtime.init)
 

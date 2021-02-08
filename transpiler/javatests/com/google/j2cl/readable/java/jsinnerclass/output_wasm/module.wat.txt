@@ -2,7 +2,16 @@
 
 ;;; CLASS  Main
 (type $jsinnerclass.Main (struct
+ (field $vtable (ref null $jsinnerclass.Main.vtable))
 ))
+(type $jsinnerclass.Main.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $jsinnerclass.Main.vtable (mut (ref null $jsinnerclass.Main.vtable)) (ref.null $jsinnerclass.Main.vtable))
 
 ;;; Main()
 (func $m_<init>__void@jsinnerclass.Main
@@ -16,22 +25,35 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@jsinnerclass.Main))
 
 ;;; void Main.main(String... args)
 (func $m_main__arrayOf_java_lang_String__void@jsinnerclass.Main
  (param $args (ref null $java.lang.Object))
+ (local $$qualifier (ref null $jsinnerclass.Main.Outer))
  (block $return.label
   (block
-   ;; assert (new Outer.<init>().method() == 5);
+   ;; assert ((Outer $qualifier = new Outer.<init>(),$qualifier.method()) == 5);
    ;; unimplemented statement AssertStatement
   )
  )
 )
+(global funcref (ref.func $m_main__arrayOf_java_lang_String__void@jsinnerclass.Main))
 
 ;;; CLASS  Outer
 (type $jsinnerclass.Main.Outer (struct
+ (field $vtable (ref null $jsinnerclass.Main.Outer.vtable))
  (field $a@jsinnerclass.Main.Outer (mut i32))
 ))
+(type $jsinnerclass.Main.Outer.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_method__int (mut (ref $function.__$int)))
+))
+(global $jsinnerclass.Main.Outer.vtable (mut (ref null $jsinnerclass.Main.Outer.vtable)) (ref.null $jsinnerclass.Main.Outer.vtable))
 
 ;;; Outer()
 (func $m_<init>__void_$pp_jsinnerclass@jsinnerclass.Main.Outer
@@ -45,27 +67,46 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_jsinnerclass@jsinnerclass.Main.Outer))
 
 ;;; int Outer.method()
 (func $m_method__int@jsinnerclass.Main.Outer
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (result i32)
  (local $return.value i32)
+ (local $$qualifier (ref null $jsinnerclass.Main.Outer.Inner))
+ (local $this (ref null $jsinnerclass.Main.Outer))
+ (local.set $this (ref.cast $java.lang.Object $jsinnerclass.Main.Outer (local.get $this.untyped) (global.get $jsinnerclass.Main.Outer.rtt)))
  (block $return.label
   (block
-   ;; return (Outer.this.new Inner.<init>().getB() + Outer.this.a);
-   (local.set $return.value (i32.add (i32.const 0) (struct.get $jsinnerclass.Main.Outer $a@jsinnerclass.Main.Outer  (ref.null $jsinnerclass.Main.Outer))))
+   ;; return ((Inner $qualifier = Outer.this.new Inner.<init>(),$qualifier.getB()) + Outer.this.a);
+   (local.set $return.value (i32.add (block (result i32)
+    
+    (local.set $$qualifier (call $m_<init>__void@jsinnerclass.Main.Outer.Inner (struct.new_with_rtt $jsinnerclass.Main.Outer.Inner (global.get $jsinnerclass.Main.Outer.Inner.vtable) (ref.null $jsinnerclass.Main.Outer) (i32.const 0) (global.get $jsinnerclass.Main.Outer.Inner.rtt))))
+    (call_ref (local.get $$qualifier)(struct.get $jsinnerclass.Main.Outer.Inner.vtable $m_getB__int (struct.get $jsinnerclass.Main.Outer.Inner $vtable(local.get $$qualifier))))
+   ) (struct.get $jsinnerclass.Main.Outer $a@jsinnerclass.Main.Outer  (local.get $this))))
    (br $return.label)
   )
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_method__int@jsinnerclass.Main.Outer))
 
 ;;; CLASS  Inner
 (type $jsinnerclass.Main.Outer.Inner (struct
+ (field $vtable (ref null $jsinnerclass.Main.Outer.Inner.vtable))
  (field $this@jsinnerclass.Main.Outer.Inner (mut (ref null $jsinnerclass.Main.Outer)))
  (field $b@jsinnerclass.Main.Outer.Inner (mut i32))
 ))
+(type $jsinnerclass.Main.Outer.Inner.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_getB__int (mut (ref $function.__$int)))
+))
+(global $jsinnerclass.Main.Outer.Inner.vtable (mut (ref null $jsinnerclass.Main.Outer.Inner.vtable)) (ref.null $jsinnerclass.Main.Outer.Inner.vtable))
 
 ;;; Inner()
 (func $m_<init>__void@jsinnerclass.Main.Outer.Inner
@@ -76,24 +117,37 @@
    ;; Object.this.Object.<init>();
    
    ;; (Inner.this.b = (Inner.this.this.a + 1));
-   (struct.set $jsinnerclass.Main.Outer.Inner $b@jsinnerclass.Main.Outer.Inner  (ref.null $jsinnerclass.Main.Outer.Inner) (i32.add (struct.get $jsinnerclass.Main.Outer $a@jsinnerclass.Main.Outer  (struct.get $jsinnerclass.Main.Outer.Inner $this@jsinnerclass.Main.Outer.Inner  (ref.null $jsinnerclass.Main.Outer.Inner))) (i32.const 1)))
+   (struct.set $jsinnerclass.Main.Outer.Inner $b@jsinnerclass.Main.Outer.Inner  (local.get $this) (i32.add (struct.get $jsinnerclass.Main.Outer $a@jsinnerclass.Main.Outer  (struct.get $jsinnerclass.Main.Outer.Inner $this@jsinnerclass.Main.Outer.Inner  (local.get $this))) (i32.const 1)))
   )
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@jsinnerclass.Main.Outer.Inner))
 
 ;;; int Inner.getB()
 (func $m_getB__int@jsinnerclass.Main.Outer.Inner
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (result i32)
  (local $return.value i32)
+ (local $this (ref null $jsinnerclass.Main.Outer.Inner))
+ (local.set $this (ref.cast $java.lang.Object $jsinnerclass.Main.Outer.Inner (local.get $this.untyped) (global.get $jsinnerclass.Main.Outer.Inner.rtt)))
  (block $return.label
   (block
    ;; return Inner.this.b;
-   (local.set $return.value (struct.get $jsinnerclass.Main.Outer.Inner $b@jsinnerclass.Main.Outer.Inner  (ref.null $jsinnerclass.Main.Outer.Inner)))
+   (local.set $return.value (struct.get $jsinnerclass.Main.Outer.Inner $b@jsinnerclass.Main.Outer.Inner  (local.get $this)))
    (br $return.label)
   )
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_getB__int@jsinnerclass.Main.Outer.Inner))
+
+;;; Code for jsinnerclass.Main [vtable]
+ (global.set $jsinnerclass.Main.vtable (struct.new_with_rtt $jsinnerclass.Main.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $jsinnerclass.Main.vtable)))
+;;; Code for jsinnerclass.Main.Outer [vtable]
+ (global.set $jsinnerclass.Main.Outer.vtable (struct.new_with_rtt $jsinnerclass.Main.Outer.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_method__int@jsinnerclass.Main.Outer) (rtt.canon $jsinnerclass.Main.Outer.vtable)))
+;;; Code for jsinnerclass.Main.Outer.Inner [vtable]
+ (global.set $jsinnerclass.Main.Outer.Inner.vtable (struct.new_with_rtt $jsinnerclass.Main.Outer.Inner.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_getB__int@jsinnerclass.Main.Outer.Inner) (rtt.canon $jsinnerclass.Main.Outer.Inner.vtable)))
+))
+(start $.runtime.init)
 

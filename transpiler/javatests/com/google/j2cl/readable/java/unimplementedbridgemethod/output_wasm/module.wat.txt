@@ -15,12 +15,22 @@
  )
  (local.get $return.value)
 )
+(global funcref (ref.func $m_staticFoo__int@unimplementedbridgemethod.I))
 
 ;;; INTERFACE  J
 
 ;;; CLASS  Bar
 (type $unimplementedbridgemethod.Bar (struct
+ (field $vtable (ref null $unimplementedbridgemethod.Bar.vtable))
 ))
+(type $unimplementedbridgemethod.Bar.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $unimplementedbridgemethod.Bar.vtable (mut (ref null $unimplementedbridgemethod.Bar.vtable)) (ref.null $unimplementedbridgemethod.Bar.vtable))
 
 ;;; Bar()
 (func $m_<init>__void_$pp_unimplementedbridgemethod@unimplementedbridgemethod.Bar
@@ -34,10 +44,20 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_unimplementedbridgemethod@unimplementedbridgemethod.Bar))
 
 ;;; CLASS  Foo
 (type $unimplementedbridgemethod.Foo (struct
+ (field $vtable (ref null $unimplementedbridgemethod.Foo.vtable))
 ))
+(type $unimplementedbridgemethod.Foo.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $unimplementedbridgemethod.Foo.vtable (mut (ref null $unimplementedbridgemethod.Foo.vtable)) (ref.null $unimplementedbridgemethod.Foo.vtable))
 
 ;;; Foo()
 (func $m_<init>__void@unimplementedbridgemethod.Foo
@@ -51,4 +71,5 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@unimplementedbridgemethod.Foo))
 

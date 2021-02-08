@@ -2,8 +2,17 @@
 
 ;;; CLASS  RawType
 (type $rawtype.RawType (struct
+ (field $vtable (ref null $rawtype.RawType.vtable))
  (field $c@rawtype.RawType (mut (ref null $java.lang.Object)))
 ))
+(type $rawtype.RawType.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $rawtype.RawType.vtable (mut (ref null $rawtype.RawType.vtable)) (ref.null $rawtype.RawType.vtable))
 
 ;;; RawType()
 (func $m_<init>__void_$pp_rawtype@rawtype.RawType
@@ -17,6 +26,7 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_rawtype@rawtype.RawType))
 
 ;;; INTERFACE  I
 
@@ -29,10 +39,21 @@
   )
  )
 )
+(global funcref (ref.func $m_f__rawtype_RawType__void@rawtype.RawType.I))
 
 ;;; CLASS  RawSubclass
 (type $rawtype.RawType.RawSubclass (struct
+ (field $vtable (ref null $rawtype.RawType.RawSubclass.vtable))
 ))
+(type $rawtype.RawType.RawSubclass.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_f__rawtype_RawType__void (mut (ref $function.$rawtype.RawType__$void)))
+))
+(global $rawtype.RawType.RawSubclass.vtable (mut (ref null $rawtype.RawType.RawSubclass.vtable)) (ref.null $rawtype.RawType.RawSubclass.vtable))
 
 ;;; RawSubclass()
 (func $m_<init>__void_$pp_rawtype@rawtype.RawType.RawSubclass
@@ -46,14 +67,25 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void_$pp_rawtype@rawtype.RawType.RawSubclass))
 
 ;;; void RawSubclass.f(RawType t)
 (func $m_f__rawtype_RawType__void@rawtype.RawType.RawSubclass
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
  (param $t (ref null $rawtype.RawType))
+ (local $this (ref null $rawtype.RawType.RawSubclass))
+ (local.set $this (ref.cast $java.lang.Object $rawtype.RawType.RawSubclass (local.get $this.untyped) (global.get $rawtype.RawType.RawSubclass.rtt)))
  (block $return.label
   (block
   )
  )
 )
+(global funcref (ref.func $m_f__rawtype_RawType__void@rawtype.RawType.RawSubclass))
+
+;;; Code for rawtype.RawType [vtable]
+ (global.set $rawtype.RawType.vtable (struct.new_with_rtt $rawtype.RawType.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $rawtype.RawType.vtable)))
+;;; Code for rawtype.RawType.RawSubclass [vtable]
+ (global.set $rawtype.RawType.RawSubclass.vtable (struct.new_with_rtt $rawtype.RawType.RawSubclass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_f__rawtype_RawType__void@rawtype.RawType.RawSubclass) (rtt.canon $rawtype.RawType.RawSubclass.vtable)))
+))
+(start $.runtime.init)
 

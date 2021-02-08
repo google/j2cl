@@ -2,7 +2,16 @@
 
 ;;; CLASS  ImportsFullyQualified
 (type $importsfullyqualified.ImportsFullyQualified (struct
+ (field $vtable (ref null $importsfullyqualified.ImportsFullyQualified.vtable))
 ))
+(type $importsfullyqualified.ImportsFullyQualified.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+(global $importsfullyqualified.ImportsFullyQualified.vtable (mut (ref null $importsfullyqualified.ImportsFullyQualified.vtable)) (ref.null $importsfullyqualified.ImportsFullyQualified.vtable))
 
 ;;; ImportsFullyQualified()
 (func $m_<init>__void@importsfullyqualified.ImportsFullyQualified
@@ -16,4 +25,10 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@importsfullyqualified.ImportsFullyQualified))
+
+;;; Code for importsfullyqualified.ImportsFullyQualified [vtable]
+ (global.set $importsfullyqualified.ImportsFullyQualified.vtable (struct.new_with_rtt $importsfullyqualified.ImportsFullyQualified.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $importsfullyqualified.ImportsFullyQualified.vtable)))
+))
+(start $.runtime.init)
 

@@ -2,7 +2,17 @@
 
 ;;; CLASS  LabeledStatement
 (type $labelstatement.LabeledStatement (struct
+ (field $vtable (ref null $labelstatement.LabeledStatement.vtable))
 ))
+(type $labelstatement.LabeledStatement.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_test__void (mut (ref $function.__$void)))
+))
+(global $labelstatement.LabeledStatement.vtable (mut (ref null $labelstatement.LabeledStatement.vtable)) (ref.null $labelstatement.LabeledStatement.vtable))
 
 ;;; LabeledStatement()
 (func $m_<init>__void@labelstatement.LabeledStatement
@@ -16,10 +26,13 @@
  )
  (local.get $this)
 )
+(global funcref (ref.func $m_<init>__void@labelstatement.LabeledStatement))
 
 ;;; void LabeledStatement.test()
 (func $m_test__void@labelstatement.LabeledStatement
- (param $this (ref null $java.lang.Object))
+ (param $this.untyped (ref null $java.lang.Object))
+ (local $this (ref null $labelstatement.LabeledStatement))
+ (local.set $this (ref.cast $java.lang.Object $labelstatement.LabeledStatement (local.get $this.untyped) (global.get $labelstatement.LabeledStatement.rtt)))
  (block $return.label
   (block
    ;; LABEL: for (;true;) {
@@ -55,4 +68,10 @@
   )
  )
 )
+(global funcref (ref.func $m_test__void@labelstatement.LabeledStatement))
+
+;;; Code for labelstatement.LabeledStatement [vtable]
+ (global.set $labelstatement.LabeledStatement.vtable (struct.new_with_rtt $labelstatement.LabeledStatement.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__void@labelstatement.LabeledStatement) (rtt.canon $labelstatement.LabeledStatement.vtable)))
+))
+(start $.runtime.init)
 
