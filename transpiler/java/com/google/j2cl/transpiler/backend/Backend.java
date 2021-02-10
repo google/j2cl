@@ -272,6 +272,8 @@ public enum Backend {
           new CreateImplicitConstructors(),
           new InsertExplicitSuperCalls(),
           new BridgeMethodsCreator(),
+          new NormalizeStaticMemberQualifiers(),
+          new NormalizeMultiExpressions(),
 
           // Rewrite operations that do not have direct support in wasm into ones that have.
           new ExpandCompoundAssignments(/* expandAll */ true),

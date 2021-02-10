@@ -15,8 +15,6 @@
  */
 package com.google.j2cl.transpiler.backend.wasm;
 
-import static com.google.j2cl.transpiler.backend.wasm.ExpressionTranspiler.returnsVoid;
-
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.Block;
@@ -35,29 +33,15 @@ import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.ThrowStatement;
 import com.google.j2cl.transpiler.ast.WhileStatement;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
-import java.util.Collection;
+import java.util.List;
 
 /** Transforms Statements into WASM code. */
 class StatementTranspiler {
-  SourceBuilder builder;
-  GenerationEnvironment environment;
 
-  public StatementTranspiler(SourceBuilder builder, GenerationEnvironment environment) {
-    this.builder = builder;
-    this.environment = environment;
-  }
+  public static void render(
+      Statement statement, final SourceBuilder builder, final GenerationEnvironment environment) {
 
-  public void renderStatements(Collection<Statement> statements) {
-    statements.forEach(
-        s -> {
-          builder.newLine();
-          renderStatement(s);
-        });
-  }
-
-  public void renderStatement(Statement statement) {
     class SourceTransformer extends AbstractVisitor {
-
       @Override
       public boolean enterStatement(Statement assertStatement) {
         builder.append(";; unimplemented statement " + assertStatement.getClass().getSimpleName());
@@ -70,6 +54,14 @@ class StatementTranspiler {
         renderStatements(block.getStatements());
         builder.closeParens();
         return false;
+      }
+
+      private void renderStatements(List<Statement> statements) {
+        statements.forEach(
+            s -> {
+              builder.newLine();
+              render(s);
+            });
       }
 
       @Override
@@ -91,19 +83,9 @@ class StatementTranspiler {
         Expression expression = expressionStatement.getExpression();
         builder.emitWithMapping(
             expressionStatement.getSourcePosition(),
-            () -> renderExpressionWithUnusedResult(expression));
+            () -> ExpressionTranspiler.renderWithUnusedResult(expression, builder, environment));
 
         return false;
-      }
-
-      private void renderExpressionWithUnusedResult(Expression expression) {
-        if (returnsVoid(expression)) {
-          renderExpression(expression);
-        } else {
-          builder.append("(drop ");
-          renderExpression(expression);
-          builder.append(")");
-        }
       }
 
       @Override
@@ -115,12 +97,12 @@ class StatementTranspiler {
         builder.newLine();
         builder.openParens("then");
         builder.newLine();
-        renderStatement(ifStatement.getThenStatement());
+        render(ifStatement.getThenStatement());
         builder.closeParens();
         if (ifStatement.getElseStatement() != null) {
           builder.openParens("else");
           builder.newLine();
-          renderStatement(ifStatement.getElseStatement());
+          render(ifStatement.getElseStatement());
           builder.closeParens();
         }
         builder.closeParens();
@@ -136,7 +118,7 @@ class StatementTranspiler {
         String label = getBreakLabelName(labeledStatement.getLabel());
         builder.openParens("block " + label);
         builder.newLine();
-        renderStatement(labeledStatement.getStatement());
+        render(labeledStatement.getStatement());
         builder.closeParens();
         return false;
       }
@@ -230,7 +212,7 @@ class StatementTranspiler {
             .forEach(
                 i -> {
                   builder.newLine();
-                  renderExpressionWithUnusedResult(i);
+                  ExpressionTranspiler.renderWithUnusedResult(i, builder, environment);
                 });
 
         renderLoop(
@@ -245,7 +227,7 @@ class StatementTranspiler {
                   .forEach(
                       u -> {
                         builder.newLine();
-                        renderExpressionWithUnusedResult(u);
+                        ExpressionTranspiler.renderWithUnusedResult(u, builder, environment);
                       });
               renderUnconditionalBranch(0);
             });
@@ -284,7 +266,7 @@ class StatementTranspiler {
         builder.newLine();
         builder.openParens("block " + label);
         builder.newLine();
-        renderStatement(statement);
+        render(statement);
         builder.closeParens();
       }
 
@@ -303,14 +285,18 @@ class StatementTranspiler {
       private void renderExpression(Expression expression) {
         ExpressionTranspiler.render(expression, builder, environment);
       }
+
+      void render(Statement stmt) {
+        StatementTranspiler.render(stmt, builder, environment);
+      }
     }
 
-    renderFirstLineAsComment(statement);
+    renderFirstLineAsComment(statement, builder);
     statement.accept(new SourceTransformer());
   }
 
   /** Render first line of the source code for {@code statement} as a WASM comment. * */
-  private void renderFirstLineAsComment(Statement s) {
+  private static void renderFirstLineAsComment(Statement s, SourceBuilder builder) {
     if (s instanceof Block) {
       return;
     }

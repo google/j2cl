@@ -284,7 +284,7 @@ public class WasmModuleGenerator {
     builder.indent();
     builder.newLine();
 
-    new StatementTranspiler(builder, environment).renderStatement(method.getBody());
+    StatementTranspiler.render(method.getBody(), builder, environment);
     builder.unindent();
     builder.newLine();
     builder.append(")");

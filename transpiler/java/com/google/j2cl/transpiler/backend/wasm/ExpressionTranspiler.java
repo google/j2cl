@@ -34,6 +34,7 @@ import com.google.j2cl.transpiler.ast.ExpressionWithComment;
 import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.InstanceOfExpression;
+import com.google.j2cl.transpiler.ast.JavaScriptConstructorReference;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MultiExpression;
@@ -60,6 +61,18 @@ import java.util.List;
  * <p>As is typical in stack based VMs, expressions evaluate leaving the result in the stack.
  */
 final class ExpressionTranspiler {
+
+  public static void renderWithUnusedResult(
+      Expression expression, SourceBuilder sourceBuilder, GenerationEnvironment environment) {
+    if (returnsVoid(expression)) {
+      render(expression, sourceBuilder, environment);
+    } else {
+      sourceBuilder.append("(drop ");
+      render(expression, sourceBuilder, environment);
+      sourceBuilder.append(")");
+    }
+  }
+
   public static void render(
       Expression expression,
       final SourceBuilder sourceBuilder,
@@ -116,7 +129,9 @@ final class ExpressionTranspiler {
         FieldDescriptor fieldDescriptor = fieldAccess.getTarget();
         String wasmOperation = assignment != null ? "set" : "get";
 
+        Expression qualifier = fieldAccess.getQualifier();
         if (fieldDescriptor.isStatic()) {
+          checkArgument(qualifier instanceof JavaScriptConstructorReference);
           sourceBuilder.append(
               format("(global.%s %s", wasmOperation, environment.getFieldName(fieldDescriptor)));
         } else {
@@ -126,7 +141,7 @@ final class ExpressionTranspiler {
                   wasmOperation,
                   environment.getWasmTypeName(fieldDescriptor.getEnclosingTypeDescriptor()),
                   environment.getFieldName(fieldDescriptor) + " "));
-          render(fieldAccess.getQualifier());
+          render(qualifier);
         }
 
         if (assignment != null) {
@@ -235,7 +250,9 @@ final class ExpressionTranspiler {
       @Override
       public boolean enterMethodCall(MethodCall methodCall) {
         MethodDescriptor target = methodCall.getTarget();
+        Expression qualifier = methodCall.getQualifier();
         if (target.isStatic()) {
+          checkState(qualifier instanceof JavaScriptConstructorReference);
           sourceBuilder.append("(call " + environment.getMethodImplementationName(target) + " ");
           renderTypedExpressions(target.getParameterTypeDescriptors(), methodCall.getArguments());
           sourceBuilder.append(")");
@@ -282,11 +299,11 @@ final class ExpressionTranspiler {
         expressions.forEach(
             expression -> {
               sourceBuilder.newLine();
-              render(expression);
-              checkState(
-                  expression == returnValue || returnsVoid(expression),
-                  "%s inside MultiExpression should return void.",
-                  expression.getClass());
+              if (expression == returnValue) {
+                render(expression);
+              } else {
+                renderWithUnusedResult(expression, sourceBuilder, environment);
+              }
             });
         sourceBuilder.closeParens();
         return false;

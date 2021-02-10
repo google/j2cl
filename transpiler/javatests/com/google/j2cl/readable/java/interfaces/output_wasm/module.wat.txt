@@ -45,9 +45,12 @@
    
    ;; interfaces.Main.Interface.staticInterfaceMethod();
    (call $m_staticInterfaceMethod__void@interfaces.Main.Interface )
-   ;; int x = (Main.this.new Implementor.<init>().a + interfaces.Main.Interface.b);
+   ;; int x = ((Main.this.new Implementor.<init>(),interfaces.Main.Interface.a) + interfaces.Main.Interface.b);
    
-   (local.set $x (i32.add (global.get $a@interfaces.Main.Interface) (global.get $b@interfaces.Main.Interface)))
+   (local.set $x (i32.add (block (result i32)
+    (drop (call $m_<init>__void_$pp_interfaces@interfaces.Main.Implementor (struct.new_with_rtt $interfaces.Main.Implementor (global.get $interfaces.Main.Implementor.vtable) (ref.null $interfaces.Main) (global.get $interfaces.Main.Implementor.rtt))))
+    (global.get $a@interfaces.Main.Interface)
+   ) (global.get $b@interfaces.Main.Interface)))
   )
  )
 )
