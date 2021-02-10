@@ -33,7 +33,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__java_lang_Object__void@genericequals.GenericEquals))
 
 ;;; Object GenericEquals.foo(GenericEquals<?> other)
 (func $m_foo__genericequals_GenericEquals__java_lang_Object@genericequals.GenericEquals
@@ -52,7 +51,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_foo__genericequals_GenericEquals__java_lang_Object@genericequals.GenericEquals))
+(elem declare func $m_foo__genericequals_GenericEquals__java_lang_Object@genericequals.GenericEquals)
 
 ;;; boolean GenericEquals.equals(Object obj)
 (func $m_equals__java_lang_Object__boolean@genericequals.GenericEquals
@@ -95,7 +94,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_equals__java_lang_Object__boolean@genericequals.GenericEquals))
+(elem declare func $m_equals__java_lang_Object__boolean@genericequals.GenericEquals)
 
 ;;; Code for genericequals.GenericEquals [vtable]
  (global.set $genericequals.GenericEquals.vtable (struct.new_with_rtt $genericequals.GenericEquals.vtable  (ref.func $m_equals__java_lang_Object__boolean@genericequals.GenericEquals) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__genericequals_GenericEquals__java_lang_Object@genericequals.GenericEquals) (rtt.canon $genericequals.GenericEquals.vtable)))

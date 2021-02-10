@@ -26,7 +26,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@blockscoping.BlockScoping))
 
 ;;; void BlockScoping.main()
 (func $m_main__void@blockscoping.BlockScoping
@@ -50,7 +49,7 @@
   )
  )
 )
-(global funcref (ref.func $m_main__void@blockscoping.BlockScoping))
+(elem declare func $m_main__void@blockscoping.BlockScoping)
 
 ;;; Code for blockscoping.BlockScoping [vtable]
  (global.set $blockscoping.BlockScoping.vtable (struct.new_with_rtt $blockscoping.BlockScoping.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_main__void@blockscoping.BlockScoping) (rtt.canon $blockscoping.BlockScoping.vtable)))

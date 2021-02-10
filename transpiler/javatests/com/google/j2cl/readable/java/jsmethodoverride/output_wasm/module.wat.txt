@@ -26,7 +26,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_jsmethodoverride@jsmethodoverride.Parent))
 
 ;;; void Parent.foo()
 (func $m_foo__void@jsmethodoverride.Parent
@@ -38,7 +37,7 @@
   )
  )
 )
-(global funcref (ref.func $m_foo__void@jsmethodoverride.Parent))
+(elem declare func $m_foo__void@jsmethodoverride.Parent)
 
 ;;; CLASS  Child
 (type $jsmethodoverride.Child (struct
@@ -66,7 +65,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@jsmethodoverride.Child))
 
 ;;; void Child.foo()
 (func $m_foo__void@jsmethodoverride.Child
@@ -78,7 +76,7 @@
   )
  )
 )
-(global funcref (ref.func $m_foo__void@jsmethodoverride.Child))
+(elem declare func $m_foo__void@jsmethodoverride.Child)
 
 ;;; Code for jsmethodoverride.Parent [vtable]
  (global.set $jsmethodoverride.Parent.vtable (struct.new_with_rtt $jsmethodoverride.Parent.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__void@jsmethodoverride.Parent) (rtt.canon $jsmethodoverride.Parent.vtable)))

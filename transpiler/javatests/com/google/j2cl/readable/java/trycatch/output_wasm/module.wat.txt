@@ -34,7 +34,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@trycatch.TryCatch))
 
 ;;; void TryCatch.testMultiCatch()
 (func $m_testMultiCatch__void@trycatch.TryCatch
@@ -50,7 +49,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testMultiCatch__void@trycatch.TryCatch))
+(elem declare func $m_testMultiCatch__void@trycatch.TryCatch)
 
 ;;; void TryCatch.testEmptyThrowableCatch()
 (func $m_testEmptyThrowableCatch__void@trycatch.TryCatch
@@ -69,7 +68,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testEmptyThrowableCatch__void@trycatch.TryCatch))
+(elem declare func $m_testEmptyThrowableCatch__void@trycatch.TryCatch)
 
 ;;; void TryCatch.testEmptyThrowableRethrow()
 (func $m_testEmptyThrowableRethrow__void@trycatch.TryCatch
@@ -84,7 +83,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testEmptyThrowableRethrow__void@trycatch.TryCatch))
+(elem declare func $m_testEmptyThrowableRethrow__void@trycatch.TryCatch)
 
 ;;; void TryCatch.testFinally()
 (func $m_testFinally__void@trycatch.TryCatch
@@ -98,7 +97,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testFinally__void@trycatch.TryCatch))
+(elem declare func $m_testFinally__void@trycatch.TryCatch)
 
 ;;; void TryCatch.testTryWithResource()
 (func $m_testTryWithResource__void@trycatch.TryCatch
@@ -115,7 +114,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testTryWithResource__void@trycatch.TryCatch))
+(elem declare func $m_testTryWithResource__void@trycatch.TryCatch)
 
 ;;; void TryCatch.testTryWithResourceJava9()
 (func $m_testTryWithResourceJava9__void@trycatch.TryCatch
@@ -140,7 +139,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testTryWithResourceJava9__void@trycatch.TryCatch))
+(elem declare func $m_testTryWithResourceJava9__void@trycatch.TryCatch)
 
 ;;; void TryCatch.testNestedTryCatch()
 (func $m_testNestedTryCatch__void@trycatch.TryCatch
@@ -156,7 +155,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testNestedTryCatch__void@trycatch.TryCatch))
+(elem declare func $m_testNestedTryCatch__void@trycatch.TryCatch)
 
 ;;; void TryCatch.testThrowGenerics()
 (func $m_testThrowGenerics__void@trycatch.TryCatch
@@ -170,7 +169,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testThrowGenerics__void@trycatch.TryCatch))
+(elem declare func $m_testThrowGenerics__void@trycatch.TryCatch)
 
 ;;; T TryCatch.getT(T t)
 (func $m_getT__java_lang_Object__java_lang_Object_$p_trycatch_TryCatch@trycatch.TryCatch
@@ -187,7 +186,6 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_getT__java_lang_Object__java_lang_Object_$p_trycatch_TryCatch@trycatch.TryCatch))
 
 ;;; void TryCatch.testThrowBoundGenerics()
 (func $m_testThrowBoundGenerics__void@trycatch.TryCatch
@@ -201,7 +199,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testThrowBoundGenerics__void@trycatch.TryCatch))
+(elem declare func $m_testThrowBoundGenerics__void@trycatch.TryCatch)
 
 ;;; T TryCatch.getThrowable()
 (func $m_getThrowable__java_lang_Throwable_$p_trycatch_TryCatch@trycatch.TryCatch
@@ -217,7 +215,6 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_getThrowable__java_lang_Throwable_$p_trycatch_TryCatch@trycatch.TryCatch))
 
 ;;; CLASS  ClosableThing
 (type $trycatch.TryCatch.ClosableThing (struct
@@ -245,7 +242,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_trycatch@trycatch.TryCatch.ClosableThing))
 
 ;;; void ClosableThing.close()
 (func $m_close__void@trycatch.TryCatch.ClosableThing
@@ -257,7 +253,7 @@
   )
  )
 )
-(global funcref (ref.func $m_close__void@trycatch.TryCatch.ClosableThing))
+(elem declare func $m_close__void@trycatch.TryCatch.ClosableThing)
 
 ;;; Code for trycatch.TryCatch [vtable]
  (global.set $trycatch.TryCatch.vtable (struct.new_with_rtt $trycatch.TryCatch.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_testMultiCatch__void@trycatch.TryCatch) (ref.func $m_testEmptyThrowableCatch__void@trycatch.TryCatch) (ref.func $m_testEmptyThrowableRethrow__void@trycatch.TryCatch) (ref.func $m_testFinally__void@trycatch.TryCatch) (ref.func $m_testTryWithResource__void@trycatch.TryCatch) (ref.func $m_testTryWithResourceJava9__void@trycatch.TryCatch) (ref.func $m_testNestedTryCatch__void@trycatch.TryCatch) (ref.func $m_testThrowGenerics__void@trycatch.TryCatch) (ref.func $m_testThrowBoundGenerics__void@trycatch.TryCatch) (rtt.canon $trycatch.TryCatch.vtable)))

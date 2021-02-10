@@ -29,7 +29,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@mixednestings.MixedNestings))
 
 ;;; void MixedNestings.mm()
 (func $m_mm__void@mixednestings.MixedNestings
@@ -41,7 +40,7 @@
   )
  )
 )
-(global funcref (ref.func $m_mm__void@mixednestings.MixedNestings))
+(elem declare func $m_mm__void@mixednestings.MixedNestings)
 
 ;;; void MixedNestings.test()
 (func $m_test__void@mixednestings.MixedNestings
@@ -61,7 +60,7 @@
   )
  )
 )
-(global funcref (ref.func $m_test__void@mixednestings.MixedNestings))
+(elem declare func $m_test__void@mixednestings.MixedNestings)
 
 ;;; CLASS  A
 (type $mixednestings.MixedNestings.A (struct
@@ -91,7 +90,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_mixednestings@mixednestings.MixedNestings.A))
 
 ;;; void A.aa()
 (func $m_aa__void@mixednestings.MixedNestings.A
@@ -103,7 +101,7 @@
   )
  )
 )
-(global funcref (ref.func $m_aa__void@mixednestings.MixedNestings.A))
+(elem declare func $m_aa__void@mixednestings.MixedNestings.A)
 
 ;;; void A.a()
 (func $m_a__void@mixednestings.MixedNestings.A
@@ -123,7 +121,7 @@
   )
  )
 )
-(global funcref (ref.func $m_a__void@mixednestings.MixedNestings.A))
+(elem declare func $m_a__void@mixednestings.MixedNestings.A)
 
 ;;; CLASS  B
 (type $mixednestings.MixedNestings.A.1B (struct
@@ -153,7 +151,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_mixednestings@mixednestings.MixedNestings.A.1B))
 
 ;;; void B.bb()
 (func $m_bb__void@mixednestings.MixedNestings.A.1B
@@ -165,7 +162,7 @@
   )
  )
 )
-(global funcref (ref.func $m_bb__void@mixednestings.MixedNestings.A.1B))
+(elem declare func $m_bb__void@mixednestings.MixedNestings.A.1B)
 
 ;;; int B.b()
 (func $m_b__int@mixednestings.MixedNestings.A.1B
@@ -187,7 +184,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_b__int@mixednestings.MixedNestings.A.1B))
+(elem declare func $m_b__int@mixednestings.MixedNestings.A.1B)
 
 ;;; CLASS  <anonymous> implements MyInterface
 (type $mixednestings.MixedNestings.A.1B.1 (struct
@@ -216,7 +213,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_mixednestings@mixednestings.MixedNestings.A.1B.1))
 
 ;;; int <anonymous> implements MyInterface.fun(int a)
 (func $m_fun__int__int@mixednestings.MixedNestings.A.1B.1
@@ -243,7 +239,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_fun__int__int@mixednestings.MixedNestings.A.1B.1))
+(elem declare func $m_fun__int__int@mixednestings.MixedNestings.A.1B.1)
 
 ;;; CLASS  <anonymous> implements MyInterface
 (type $mixednestings.MixedNestings.A.1B.1.1 (struct
@@ -272,7 +268,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_mixednestings@mixednestings.MixedNestings.A.1B.1.1))
 
 ;;; int <anonymous> implements MyInterface.fun(int b)
 (func $m_fun__int__int@mixednestings.MixedNestings.A.1B.1.1
@@ -291,7 +286,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_fun__int__int@mixednestings.MixedNestings.A.1B.1.1))
+(elem declare func $m_fun__int__int@mixednestings.MixedNestings.A.1B.1.1)
 
 ;;; Code for mixednestings.MixedNestings [vtable]
  (global.set $mixednestings.MixedNestings.vtable (struct.new_with_rtt $mixednestings.MixedNestings.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_mm__void@mixednestings.MixedNestings) (ref.func $m_test__void@mixednestings.MixedNestings) (rtt.canon $mixednestings.MixedNestings.vtable)))

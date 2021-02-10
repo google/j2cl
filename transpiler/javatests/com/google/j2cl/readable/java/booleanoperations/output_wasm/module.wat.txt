@@ -26,7 +26,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@booleanoperations.BooleanOperations))
 
 ;;; void BooleanOperations.acceptBoolean(boolean b)
 (func $m_acceptBoolean__boolean__void@booleanoperations.BooleanOperations
@@ -36,7 +35,6 @@
   )
  )
 )
-(global funcref (ref.func $m_acceptBoolean__boolean__void@booleanoperations.BooleanOperations))
 
 ;;; void BooleanOperations.test()
 (func $m_test__void@booleanoperations.BooleanOperations
@@ -201,7 +199,7 @@
   )
  )
 )
-(global funcref (ref.func $m_test__void@booleanoperations.BooleanOperations))
+(elem declare func $m_test__void@booleanoperations.BooleanOperations)
 
 ;;; CLASS  Outer
 (type $booleanoperations.BooleanOperations.1Outer (struct
@@ -230,7 +228,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_booleanoperations@booleanoperations.BooleanOperations.1Outer))
 
 ;;; CLASS  Inner
 (type $booleanoperations.BooleanOperations.1Outer.Inner (struct
@@ -258,7 +255,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_booleanoperations@booleanoperations.BooleanOperations.1Outer.Inner))
 
 ;;; Code for booleanoperations.BooleanOperations [vtable]
  (global.set $booleanoperations.BooleanOperations.vtable (struct.new_with_rtt $booleanoperations.BooleanOperations.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__void@booleanoperations.BooleanOperations) (rtt.canon $booleanoperations.BooleanOperations.vtable)))

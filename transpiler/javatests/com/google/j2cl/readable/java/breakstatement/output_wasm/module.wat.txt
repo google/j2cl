@@ -26,7 +26,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@breakstatement.BreakStatement))
 
 ;;; void BreakStatement.test()
 (func $m_test__void@breakstatement.BreakStatement
@@ -53,7 +52,7 @@
   )
  )
 )
-(global funcref (ref.func $m_test__void@breakstatement.BreakStatement))
+(elem declare func $m_test__void@breakstatement.BreakStatement)
 
 ;;; Code for breakstatement.BreakStatement [vtable]
  (global.set $breakstatement.BreakStatement.vtable (struct.new_with_rtt $breakstatement.BreakStatement.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__void@breakstatement.BreakStatement) (rtt.canon $breakstatement.BreakStatement.vtable)))

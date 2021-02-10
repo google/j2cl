@@ -31,7 +31,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@cast.CastGenerics))
 
 ;;; T CastGenerics.method()
 (func $m_method__java_lang_Object_$pp_cast@cast.CastGenerics
@@ -49,7 +48,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_method__java_lang_Object_$pp_cast@cast.CastGenerics))
+(elem declare func $m_method__java_lang_Object_$pp_cast@cast.CastGenerics)
 
 ;;; void CastGenerics.testErasureCast()
 (func $m_testErasureCast__void@cast.CastGenerics
@@ -197,7 +196,6 @@
   )
  )
 )
-(global funcref (ref.func $m_testErasureCast__void@cast.CastGenerics))
 
 ;;; void CastGenerics.testCastToParamterizedType()
 (func $m_testCastToParamterizedType__void@cast.CastGenerics
@@ -216,7 +214,6 @@
   )
  )
 )
-(global funcref (ref.func $m_testCastToParamterizedType__void@cast.CastGenerics))
 
 ;;; void CastGenerics.testCastToTypeVariable()
 (func $m_testCastToTypeVariable__void@cast.CastGenerics
@@ -248,7 +245,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testCastToTypeVariable__void@cast.CastGenerics))
+(elem declare func $m_testCastToTypeVariable__void@cast.CastGenerics)
 
 ;;; void CastGenerics.testCastToMethodTypeVariable()
 (func $m_testCastToMethodTypeVariable__void@cast.CastGenerics
@@ -276,7 +273,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testCastToMethodTypeVariable__void@cast.CastGenerics))
+(elem declare func $m_testCastToMethodTypeVariable__void@cast.CastGenerics)
 
 ;;; void CastGenerics.outerGenericMethod()
 (func $m_outerGenericMethod__void@cast.CastGenerics
@@ -288,7 +285,7 @@
   )
  )
 )
-(global funcref (ref.func $m_outerGenericMethod__void@cast.CastGenerics))
+(elem declare func $m_outerGenericMethod__void@cast.CastGenerics)
 
 ;;; EE CastGenerics.method(Object o)
 (func $m_method__java_lang_Object__cast_CastGenerics_Empty1@cast.CastGenerics
@@ -317,7 +314,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_method__java_lang_Object__cast_CastGenerics_Empty1@cast.CastGenerics))
+(elem declare func $m_method__java_lang_Object__cast_CastGenerics_Empty1@cast.CastGenerics)
 
 ;;; Foo<T> CastGenerics.doSomething()
 (func $m_doSomething__cast_CastGenerics_Foo@cast.CastGenerics
@@ -332,7 +329,6 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_doSomething__cast_CastGenerics_Foo@cast.CastGenerics))
 
 ;;; INTERFACE  A
 
@@ -363,7 +359,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$p_cast_CastGenerics_BaseImplementor@cast.CastGenerics.BaseImplementor))
 
 ;;; CLASS  Implementor
 (type $cast.CastGenerics.Implementor (struct
@@ -392,7 +387,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$p_cast_CastGenerics_Implementor@cast.CastGenerics.Implementor))
 
 ;;; void Implementor.mA()
 (func $m_mA__void@cast.CastGenerics.Implementor
@@ -404,7 +398,7 @@
   )
  )
 )
-(global funcref (ref.func $m_mA__void@cast.CastGenerics.Implementor))
+(elem declare func $m_mA__void@cast.CastGenerics.Implementor)
 
 ;;; void Implementor.mB()
 (func $m_mB__void@cast.CastGenerics.Implementor
@@ -416,7 +410,7 @@
   )
  )
 )
-(global funcref (ref.func $m_mB__void@cast.CastGenerics.Implementor))
+(elem declare func $m_mB__void@cast.CastGenerics.Implementor)
 
 ;;; CLASS  Container
 (type $cast.CastGenerics.Container (struct
@@ -444,7 +438,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$p_cast_CastGenerics_Container@cast.CastGenerics.Container))
 
 ;;; T Container.get()
 (func $m_get__java_lang_Object_$pp_cast@cast.CastGenerics.Container
@@ -462,7 +455,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_get__java_lang_Object_$pp_cast@cast.CastGenerics.Container))
+(elem declare func $m_get__java_lang_Object_$pp_cast@cast.CastGenerics.Container)
 
 ;;; CLASS  Nested
 (type $cast.CastGenerics.1Nested (struct
@@ -490,7 +483,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_cast@cast.CastGenerics.1Nested))
 
 ;;; void Nested.nestedGenericMethod(Object o)
 (func $m_nestedGenericMethod__java_lang_Object__void_$p_cast_CastGenerics_1Nested@cast.CastGenerics.1Nested
@@ -505,7 +497,6 @@
   )
  )
 )
-(global funcref (ref.func $m_nestedGenericMethod__java_lang_Object__void_$p_cast_CastGenerics_1Nested@cast.CastGenerics.1Nested))
 
 ;;; INTERFACE  Empty1
 
@@ -536,7 +527,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_cast@cast.CastGenerics.1))
 
 ;;; CLASS  Foo
 (type $cast.CastGenerics.Foo (struct
@@ -563,7 +553,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@cast.CastGenerics.Foo))
 ;;; Code for cast.CastPrimitives
 
 ;;; CLASS  CastPrimitives
@@ -596,7 +585,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@cast.CastPrimitives))
 
 ;;; void CastPrimitives.testPrimitiveCasts()
 (func $m_testPrimitiveCasts__void@cast.CastPrimitives
@@ -734,7 +722,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testPrimitiveCasts__void@cast.CastPrimitives))
+(elem declare func $m_testPrimitiveCasts__void@cast.CastPrimitives)
 
 ;;; void CastPrimitives.testReferenceToPrimitive()
 (func $m_testReferenceToPrimitive__void@cast.CastPrimitives
@@ -782,7 +770,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testReferenceToPrimitive__void@cast.CastPrimitives))
+(elem declare func $m_testReferenceToPrimitive__void@cast.CastPrimitives)
 
 ;;; void CastPrimitives.testUnboxAndWiden()
 (func $m_testUnboxAndWiden__void@cast.CastPrimitives
@@ -818,7 +806,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testUnboxAndWiden__void@cast.CastPrimitives))
+(elem declare func $m_testUnboxAndWiden__void@cast.CastPrimitives)
 
 ;;; void CastPrimitives.testImplicitArgumentCasts()
 (func $m_testImplicitArgumentCasts__void@cast.CastPrimitives
@@ -886,7 +874,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testImplicitArgumentCasts__void@cast.CastPrimitives))
+(elem declare func $m_testImplicitArgumentCasts__void@cast.CastPrimitives)
 
 ;;; short CastPrimitives.getShort(short value)
 (func $m_getShort__short__short@cast.CastPrimitives
@@ -902,7 +890,6 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_getShort__short__short@cast.CastPrimitives))
 
 ;;; int CastPrimitives.getInt(int value)
 (func $m_getInt__int__int@cast.CastPrimitives
@@ -918,7 +905,6 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_getInt__int__int@cast.CastPrimitives))
 
 ;;; long CastPrimitives.getLong(long value)
 (func $m_getLong__long__long@cast.CastPrimitives
@@ -934,7 +920,6 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_getLong__long__long@cast.CastPrimitives))
 
 ;;; float CastPrimitives.getFloat(float value)
 (func $m_getFloat__float__float@cast.CastPrimitives
@@ -950,7 +935,6 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_getFloat__float__float@cast.CastPrimitives))
 
 ;;; double CastPrimitives.getDouble(double value)
 (func $m_getDouble__double__double@cast.CastPrimitives
@@ -966,7 +950,6 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_getDouble__double__double@cast.CastPrimitives))
 
 ;;; void CastPrimitives.testImplicitLongAssignmentCasts()
 (func $m_testImplicitLongAssignmentCasts__void@cast.CastPrimitives
@@ -1054,7 +1037,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testImplicitLongAssignmentCasts__void@cast.CastPrimitives))
+(elem declare func $m_testImplicitLongAssignmentCasts__void@cast.CastPrimitives)
 
 ;;; CLASS  IntValueHolder
 (type $cast.CastPrimitives.IntValueHolder (struct
@@ -1082,7 +1065,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__int__void_$pp_cast@cast.CastPrimitives.IntValueHolder))
 
 ;;; CLASS  LongValueHolder
 (type $cast.CastPrimitives.LongValueHolder (struct
@@ -1110,7 +1092,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__long__void_$pp_cast@cast.CastPrimitives.LongValueHolder))
 ;;; Code for cast.Casts
 
 ;;; CLASS  Casts
@@ -1142,7 +1123,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@cast.Casts))
 
 ;;; void Casts.testCastToClass()
 (func $m_testCastToClass__void@cast.Casts
@@ -1162,7 +1142,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testCastToClass__void@cast.Casts))
+(elem declare func $m_testCastToClass__void@cast.Casts)
 
 ;;; void Casts.testCasToInterface()
 (func $m_testCasToInterface__void@cast.Casts
@@ -1182,7 +1162,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testCasToInterface__void@cast.Casts))
+(elem declare func $m_testCasToInterface__void@cast.Casts)
 
 ;;; void Casts.testCastToBoxedType()
 (func $m_testCastToBoxedType__void@cast.Casts
@@ -1234,7 +1214,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testCastToBoxedType__void@cast.Casts))
+(elem declare func $m_testCastToBoxedType__void@cast.Casts)
 
 ;;; void Casts.testCastToArray()
 (func $m_testCastToArray__void@cast.Casts
@@ -1254,7 +1234,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testCastToArray__void@cast.Casts))
+(elem declare func $m_testCastToArray__void@cast.Casts)
 
 ;;; Code for cast.CastGenerics [vtable]
  (global.set $cast.CastGenerics.vtable (struct.new_with_rtt $cast.CastGenerics.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_method__java_lang_Object_$pp_cast@cast.CastGenerics) (ref.func $m_testCastToTypeVariable__void@cast.CastGenerics) (ref.func $m_testCastToMethodTypeVariable__void@cast.CastGenerics) (ref.func $m_outerGenericMethod__void@cast.CastGenerics) (ref.func $m_method__java_lang_Object__cast_CastGenerics_Empty1@cast.CastGenerics) (rtt.canon $cast.CastGenerics.vtable)))

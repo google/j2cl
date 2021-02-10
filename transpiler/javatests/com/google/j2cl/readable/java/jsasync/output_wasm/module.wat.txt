@@ -30,7 +30,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@jsasync.Main))
 
 ;;; IThenable<Void> Main.emptyAsyncMethod()
 (func $m_emptyAsyncMethod__jsasync_Main_IThenable_$pp_jsasync@jsasync.Main
@@ -48,7 +47,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_emptyAsyncMethod__jsasync_Main_IThenable_$pp_jsasync@jsasync.Main))
+(elem declare func $m_emptyAsyncMethod__jsasync_Main_IThenable_$pp_jsasync@jsasync.Main)
 
 ;;; IThenable<Integer> Main.asyncMethod()
 (func $m_asyncMethod__jsasync_Main_IThenable_$pp_jsasync@jsasync.Main
@@ -70,7 +69,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_asyncMethod__jsasync_Main_IThenable_$pp_jsasync@jsasync.Main))
+(elem declare func $m_asyncMethod__jsasync_Main_IThenable_$pp_jsasync@jsasync.Main)
 
 ;;; IThenable<T> Main.parametricAsyncMethod(T value)
 (func $m_parametricAsyncMethod__java_lang_Object__jsasync_Main_IThenable_$pp_jsasync@jsasync.Main
@@ -89,7 +88,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_parametricAsyncMethod__java_lang_Object__jsasync_Main_IThenable_$pp_jsasync@jsasync.Main))
+(elem declare func $m_parametricAsyncMethod__java_lang_Object__jsasync_Main_IThenable_$pp_jsasync@jsasync.Main)
 
 ;;; IThenable<Void> Main.staticAsyncMethod()
 (func $m_staticAsyncMethod__jsasync_Main_IThenable@jsasync.Main
@@ -104,7 +103,6 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_staticAsyncMethod__jsasync_Main_IThenable@jsasync.Main))
 
 ;;; void Main.testAsyncLambdas()
 (func $m_testAsyncLambdas__void_$pp_jsasync@jsasync.Main
@@ -136,7 +134,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testAsyncLambdas__void_$pp_jsasync@jsasync.Main))
+(elem declare func $m_testAsyncLambdas__void_$pp_jsasync@jsasync.Main)
 
 ;;; T Main.await(IThenable<T> thenable)
 (func $m_await__jsasync_Main_IThenable__java_lang_Object@jsasync.Main
@@ -149,7 +147,6 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_await__jsasync_Main_IThenable__java_lang_Object@jsasync.Main))
 
 ;;; CLASS  <anonymous> implements BaseInterface
 (type $jsasync.Main.1 (struct
@@ -178,7 +175,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_jsasync@jsasync.Main.1))
 
 ;;; IThenable<Integer> <anonymous> implements BaseInterface.asyncCall()
 (func $m_asyncCall__jsasync_Main_IThenable@jsasync.Main.1
@@ -196,7 +192,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_asyncCall__jsasync_Main_IThenable@jsasync.Main.1))
+(elem declare func $m_asyncCall__jsasync_Main_IThenable@jsasync.Main.1)
 
 ;;; CLASS  <anonymous> implements JsFunctionInterface
 (type $jsasync.Main.2 (struct
@@ -225,7 +221,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_jsasync@jsasync.Main.2))
 
 ;;; IThenable<Integer> <anonymous> implements JsFunctionInterface.doSomething()
 (func $m_doSomething__jsasync_Main_IThenable@jsasync.Main.2
@@ -243,7 +238,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_doSomething__jsasync_Main_IThenable@jsasync.Main.2))
+(elem declare func $m_doSomething__jsasync_Main_IThenable@jsasync.Main.2)
 
 ;;; CLASS  <anonymous> implements JsFunctionInterface
 (type $jsasync.Main.3 (struct
@@ -272,7 +267,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_jsasync@jsasync.Main.3))
 
 ;;; IThenable<Integer> <anonymous> implements JsFunctionInterface.doSomething()
 (func $m_doSomething__jsasync_Main_IThenable@jsasync.Main.3
@@ -294,7 +288,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_doSomething__jsasync_Main_IThenable@jsasync.Main.3))
+(elem declare func $m_doSomething__jsasync_Main_IThenable@jsasync.Main.3)
 
 ;;; INTERFACE  BaseInterface
 
@@ -316,7 +310,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_asyncCall__jsasync_Main_IThenable@jsasync.Main.InterfaceWithAsyncDefaultMethod))
+(elem declare func $m_asyncCall__jsasync_Main_IThenable@jsasync.Main.InterfaceWithAsyncDefaultMethod)
 
 ;;; INTERFACE  JsFunctionInterface
 
@@ -349,7 +343,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$p_jsasync_Main_Promise@jsasync.Main.Promise))
 
 ;;; Promise<T> Promise.resolve(T value)
 (func $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise
@@ -362,7 +355,6 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise))
 
 ;;; Code for jsasync.Main [vtable]
  (global.set $jsasync.Main.vtable (struct.new_with_rtt $jsasync.Main.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_emptyAsyncMethod__jsasync_Main_IThenable_$pp_jsasync@jsasync.Main) (ref.func $m_asyncMethod__jsasync_Main_IThenable_$pp_jsasync@jsasync.Main) (ref.func $m_parametricAsyncMethod__java_lang_Object__jsasync_Main_IThenable_$pp_jsasync@jsasync.Main) (ref.func $m_testAsyncLambdas__void_$pp_jsasync@jsasync.Main) (rtt.canon $jsasync.Main.vtable)))

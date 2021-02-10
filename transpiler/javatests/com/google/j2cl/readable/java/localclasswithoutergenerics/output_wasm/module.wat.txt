@@ -25,7 +25,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@localclasswithoutergenerics.LocalClassWithOuterGenerics))
 
 ;;; void LocalClassWithOuterGenerics.foo()
 (func $m_foo__void@localclasswithoutergenerics.LocalClassWithOuterGenerics
@@ -42,7 +41,6 @@
   )
  )
 )
-(global funcref (ref.func $m_foo__void@localclasswithoutergenerics.LocalClassWithOuterGenerics))
 
 ;;; CLASS  Bar
 (type $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar (struct
@@ -70,7 +68,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_localclasswithoutergenerics@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar))
 
 ;;; void Bar.baz(Bar<T> other)
 (func $m_baz__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Bar__void_$pp_localclasswithoutergenerics@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar
@@ -83,7 +80,7 @@
   )
  )
 )
-(global funcref (ref.func $m_baz__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Bar__void_$pp_localclasswithoutergenerics@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar))
+(elem declare func $m_baz__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Bar__void_$pp_localclasswithoutergenerics@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar)
 
 ;;; CLASS  Baz
 (type $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz (struct
@@ -111,7 +108,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_localclasswithoutergenerics@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz))
 
 ;;; void Baz.qux(Baz<S, T> foo, Baz<T, T> bar, Baz<String, T> baz)
 (func $m_qux__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz__void_$pp_localclasswithoutergenerics@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz
@@ -126,7 +122,7 @@
   )
  )
 )
-(global funcref (ref.func $m_qux__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz__void_$pp_localclasswithoutergenerics@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz))
+(elem declare func $m_qux__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz__void_$pp_localclasswithoutergenerics@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz)
 
 ;;; Code for localclasswithoutergenerics.LocalClassWithOuterGenerics [vtable]
  (global.set $localclasswithoutergenerics.LocalClassWithOuterGenerics.vtable (struct.new_with_rtt $localclasswithoutergenerics.LocalClassWithOuterGenerics.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $localclasswithoutergenerics.LocalClassWithOuterGenerics.vtable)))

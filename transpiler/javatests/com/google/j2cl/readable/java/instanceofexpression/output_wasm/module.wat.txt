@@ -29,7 +29,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@instanceofexpression.InstanceofExpressions))
 
 ;;; void InstanceofExpressions.testInstanceofClass()
 (func $m_testInstanceofClass__void@instanceofexpression.InstanceofExpressions
@@ -54,7 +53,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testInstanceofClass__void@instanceofexpression.InstanceofExpressions))
+(elem declare func $m_testInstanceofClass__void@instanceofexpression.InstanceofExpressions)
 
 ;;; void InstanceofExpressions.testInstanceofInterface()
 (func $m_testInstanceofInterface__void@instanceofexpression.InstanceofExpressions
@@ -77,7 +76,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testInstanceofInterface__void@instanceofexpression.InstanceofExpressions))
+(elem declare func $m_testInstanceofInterface__void@instanceofexpression.InstanceofExpressions)
 
 ;;; void InstanceofExpressions.testInstanceofBoxedType()
 (func $m_testInstanceofBoxedType__void@instanceofexpression.InstanceofExpressions
@@ -123,7 +122,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testInstanceofBoxedType__void@instanceofexpression.InstanceofExpressions))
+(elem declare func $m_testInstanceofBoxedType__void@instanceofexpression.InstanceofExpressions)
 
 ;;; void InstanceofExpressions.testInstanceOfArray()
 (func $m_testInstanceOfArray__void@instanceofexpression.InstanceofExpressions
@@ -180,7 +179,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testInstanceOfArray__void@instanceofexpression.InstanceofExpressions))
+(elem declare func $m_testInstanceOfArray__void@instanceofexpression.InstanceofExpressions)
 
 ;;; CLASS  <anonymous> implements Serializable
 (type $instanceofexpression.InstanceofExpressions.1 (struct
@@ -208,7 +207,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_instanceofexpression@instanceofexpression.InstanceofExpressions.1))
 
 ;;; Code for instanceofexpression.InstanceofExpressions [vtable]
  (global.set $instanceofexpression.InstanceofExpressions.vtable (struct.new_with_rtt $instanceofexpression.InstanceofExpressions.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_testInstanceofClass__void@instanceofexpression.InstanceofExpressions) (ref.func $m_testInstanceofInterface__void@instanceofexpression.InstanceofExpressions) (ref.func $m_testInstanceofBoxedType__void@instanceofexpression.InstanceofExpressions) (ref.func $m_testInstanceOfArray__void@instanceofexpression.InstanceofExpressions) (rtt.canon $instanceofexpression.InstanceofExpressions.vtable)))

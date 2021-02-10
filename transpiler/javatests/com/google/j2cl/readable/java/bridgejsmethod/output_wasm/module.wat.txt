@@ -25,7 +25,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@bridgejsmethod.Main))
 
 ;;; void Main.test()
 (func $m_test__void@bridgejsmethod.Main
@@ -86,7 +85,6 @@
   )
  )
 )
-(global funcref (ref.func $m_test__void@bridgejsmethod.Main))
 
 ;;; CLASS  A
 (type $bridgejsmethod.Main.A (struct
@@ -115,7 +113,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@bridgejsmethod.Main.A))
 
 ;;; T A.fun(T t)
 (func $m_fun__java_lang_Object__java_lang_Object@bridgejsmethod.Main.A
@@ -134,7 +131,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_fun__java_lang_Object__java_lang_Object@bridgejsmethod.Main.A))
+(elem declare func $m_fun__java_lang_Object__java_lang_Object@bridgejsmethod.Main.A)
 
 ;;; void A.bar(T t)
 (func $m_bar__java_lang_Object__void@bridgejsmethod.Main.A
@@ -147,7 +144,7 @@
   )
  )
 )
-(global funcref (ref.func $m_bar__java_lang_Object__void@bridgejsmethod.Main.A))
+(elem declare func $m_bar__java_lang_Object__void@bridgejsmethod.Main.A)
 
 ;;; INTERFACE  I
 
@@ -182,7 +179,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@bridgejsmethod.Main.B))
 
 ;;; String B.fun(String s)
 (func $m_fun__java_lang_String__java_lang_String@bridgejsmethod.Main.B
@@ -201,7 +197,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_fun__java_lang_String__java_lang_String@bridgejsmethod.Main.B))
+(elem declare func $m_fun__java_lang_String__java_lang_String@bridgejsmethod.Main.B)
 
 ;;; void B.bar(String s)
 (func $m_bar__java_lang_String__void@bridgejsmethod.Main.B
@@ -214,7 +210,7 @@
   )
  )
 )
-(global funcref (ref.func $m_bar__java_lang_String__void@bridgejsmethod.Main.B))
+(elem declare func $m_bar__java_lang_String__void@bridgejsmethod.Main.B)
 
 ;;; void B.bar(Object arg0)
 (func $m_bar__java_lang_Object__void@bridgejsmethod.Main.B
@@ -229,7 +225,7 @@
   )
  )
 )
-(global funcref (ref.func $m_bar__java_lang_Object__void@bridgejsmethod.Main.B))
+(elem declare func $m_bar__java_lang_Object__void@bridgejsmethod.Main.B)
 
 ;;; String B.fun(Object arg0)
 (func $m_fun__java_lang_Object__java_lang_Object@bridgejsmethod.Main.B
@@ -248,7 +244,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_fun__java_lang_Object__java_lang_Object@bridgejsmethod.Main.B))
+(elem declare func $m_fun__java_lang_Object__java_lang_Object@bridgejsmethod.Main.B)
 
 ;;; CLASS  C
 (type $bridgejsmethod.Main.C (struct
@@ -278,7 +274,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@bridgejsmethod.Main.C))
 
 ;;; Integer C.fun(Integer i)
 (func $m_fun__java_lang_Integer__java_lang_Integer@bridgejsmethod.Main.C
@@ -297,7 +292,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_fun__java_lang_Integer__java_lang_Integer@bridgejsmethod.Main.C))
+(elem declare func $m_fun__java_lang_Integer__java_lang_Integer@bridgejsmethod.Main.C)
 
 ;;; Integer C.fun(Object arg0)
 (func $m_fun__java_lang_Object__java_lang_Object@bridgejsmethod.Main.C
@@ -316,7 +311,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_fun__java_lang_Object__java_lang_Object@bridgejsmethod.Main.C))
+(elem declare func $m_fun__java_lang_Object__java_lang_Object@bridgejsmethod.Main.C)
 
 ;;; CLASS  D
 (type $bridgejsmethod.Main.D (struct
@@ -347,7 +342,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@bridgejsmethod.Main.D))
 
 ;;; Integer D.fun(Integer i)
 (func $m_fun__java_lang_Integer__java_lang_Integer@bridgejsmethod.Main.D
@@ -366,7 +360,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_fun__java_lang_Integer__java_lang_Integer@bridgejsmethod.Main.D))
+(elem declare func $m_fun__java_lang_Integer__java_lang_Integer@bridgejsmethod.Main.D)
 
 ;;; Integer D.fun(Number arg0)
 (func $m_fun__java_lang_Number__java_lang_Number@bridgejsmethod.Main.D
@@ -385,7 +379,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_fun__java_lang_Number__java_lang_Number@bridgejsmethod.Main.D))
+(elem declare func $m_fun__java_lang_Number__java_lang_Number@bridgejsmethod.Main.D)
 
 ;;; Integer D.fun(Object arg0)
 (func $m_fun__java_lang_Object__java_lang_Object@bridgejsmethod.Main.D
@@ -404,7 +398,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_fun__java_lang_Object__java_lang_Object@bridgejsmethod.Main.D))
+(elem declare func $m_fun__java_lang_Object__java_lang_Object@bridgejsmethod.Main.D)
 
 ;;; CLASS  E
 (type $bridgejsmethod.Main.E (struct
@@ -435,7 +429,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@bridgejsmethod.Main.E))
 
 ;;; CLASS  F
 (type $bridgejsmethod.Main.F (struct
@@ -466,7 +459,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@bridgejsmethod.Main.F))
 
 ;;; Integer F.fun(Number arg0)
 (func $m_fun__java_lang_Number__java_lang_Number@bridgejsmethod.Main.F
@@ -485,7 +477,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_fun__java_lang_Number__java_lang_Number@bridgejsmethod.Main.F))
+(elem declare func $m_fun__java_lang_Number__java_lang_Number@bridgejsmethod.Main.F)
 
 ;;; Integer F.fun(Object arg0)
 (func $m_fun__java_lang_Object__java_lang_Object@bridgejsmethod.Main.F
@@ -504,7 +496,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_fun__java_lang_Object__java_lang_Object@bridgejsmethod.Main.F))
+(elem declare func $m_fun__java_lang_Object__java_lang_Object@bridgejsmethod.Main.F)
 
 ;;; Integer F.fun(Integer arg0)
 (func $m_fun__java_lang_Integer__java_lang_Integer@bridgejsmethod.Main.F
@@ -523,7 +515,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_fun__java_lang_Integer__java_lang_Integer@bridgejsmethod.Main.F))
+(elem declare func $m_fun__java_lang_Integer__java_lang_Integer@bridgejsmethod.Main.F)
 
 ;;; INTERFACE  G
 
@@ -553,7 +545,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@bridgejsmethod.Main.H))
 
 ;;; V H.enclose(V value)
 (func $m_enclose__java_lang_Object__java_lang_Object@bridgejsmethod.Main.H
@@ -572,7 +563,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_enclose__java_lang_Object__java_lang_Object@bridgejsmethod.Main.H))
+(elem declare func $m_enclose__java_lang_Object__java_lang_Object@bridgejsmethod.Main.H)
 
 ;;; CLASS  K
 (type $bridgejsmethod.Main.K (struct
@@ -600,7 +591,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@bridgejsmethod.Main.K))
 
 ;;; void K.fun(K1 k1, K2 k2)
 (func $m_fun__java_lang_Object__java_lang_Object__void_$pp_bridgejsmethod@bridgejsmethod.Main.K
@@ -614,7 +604,7 @@
   )
  )
 )
-(global funcref (ref.func $m_fun__java_lang_Object__java_lang_Object__void_$pp_bridgejsmethod@bridgejsmethod.Main.K))
+(elem declare func $m_fun__java_lang_Object__java_lang_Object__void_$pp_bridgejsmethod@bridgejsmethod.Main.K)
 
 ;;; CLASS  L
 (type $bridgejsmethod.Main.L (struct
@@ -643,7 +633,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@bridgejsmethod.Main.L))
 
 ;;; void L.fun(String string, L1 l1)
 (func $m_fun__java_lang_String__java_lang_Object__void_$pp_bridgejsmethod@bridgejsmethod.Main.L
@@ -657,7 +646,7 @@
   )
  )
 )
-(global funcref (ref.func $m_fun__java_lang_String__java_lang_Object__void_$pp_bridgejsmethod@bridgejsmethod.Main.L))
+(elem declare func $m_fun__java_lang_String__java_lang_Object__void_$pp_bridgejsmethod@bridgejsmethod.Main.L)
 
 ;;; void L.fun(Object arg0, Object arg1)
 (func $m_fun__java_lang_Object__java_lang_Object__void_$pp_bridgejsmethod@bridgejsmethod.Main.L
@@ -673,7 +662,7 @@
   )
  )
 )
-(global funcref (ref.func $m_fun__java_lang_Object__java_lang_Object__void_$pp_bridgejsmethod@bridgejsmethod.Main.L))
+(elem declare func $m_fun__java_lang_Object__java_lang_Object__void_$pp_bridgejsmethod@bridgejsmethod.Main.L)
 
 ;;; INTERFACE  M
 
@@ -704,7 +693,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_bridgejsmethod@bridgejsmethod.Main.N))
 
 ;;; CLASS  O
 (type $bridgejsmethod.Main.O (struct
@@ -735,7 +723,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_bridgejsmethod@bridgejsmethod.Main.O))
 
 ;;; B O.getB()
 (func $m_getB__bridgejsmethod_Main_B@bridgejsmethod.Main.O
@@ -753,7 +740,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_getB__bridgejsmethod_Main_B@bridgejsmethod.Main.O))
+(elem declare func $m_getB__bridgejsmethod_Main_B@bridgejsmethod.Main.O)
 
 ;;; INTERFACE  P
 
@@ -784,7 +771,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_bridgejsmethod@bridgejsmethod.Main.Q))
 
 ;;; CLASS  R
 (type $bridgejsmethod.Main.R (struct
@@ -814,7 +800,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_bridgejsmethod@bridgejsmethod.Main.R))
 
 ;;; String R.getKey()
 (func $m_getKey__java_lang_String@bridgejsmethod.Main.R
@@ -832,7 +817,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_getKey__java_lang_String@bridgejsmethod.Main.R))
+(elem declare func $m_getKey__java_lang_String@bridgejsmethod.Main.R)
 
 ;;; CLASS  S
 (type $bridgejsmethod.Main.S (struct
@@ -863,7 +848,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_bridgejsmethod@bridgejsmethod.Main.S))
 
 ;;; CLASS  GrandParent
 (type $bridgejsmethod.Main.GrandParent (struct
@@ -893,7 +877,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_bridgejsmethod@bridgejsmethod.Main.GrandParent))
 
 ;;; void GrandParent.jsMethod(T t)
 (func $m_jsMethod__java_lang_Object__void@bridgejsmethod.Main.GrandParent
@@ -906,7 +889,7 @@
   )
  )
 )
-(global funcref (ref.func $m_jsMethod__java_lang_Object__void@bridgejsmethod.Main.GrandParent))
+(elem declare func $m_jsMethod__java_lang_Object__void@bridgejsmethod.Main.GrandParent)
 
 ;;; void GrandParent.method(T t)
 (func $m_method__java_lang_Object__void@bridgejsmethod.Main.GrandParent
@@ -919,7 +902,7 @@
   )
  )
 )
-(global funcref (ref.func $m_method__java_lang_Object__void@bridgejsmethod.Main.GrandParent))
+(elem declare func $m_method__java_lang_Object__void@bridgejsmethod.Main.GrandParent)
 
 ;;; CLASS  Parent
 (type $bridgejsmethod.Main.Parent (struct
@@ -952,7 +935,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_bridgejsmethod@bridgejsmethod.Main.Parent))
 
 ;;; void Parent.jsMethod(T t)
 (func $m_jsMethod__bridgejsmethod_Main_Parent__void@bridgejsmethod.Main.Parent
@@ -965,7 +947,7 @@
   )
  )
 )
-(global funcref (ref.func $m_jsMethod__bridgejsmethod_Main_Parent__void@bridgejsmethod.Main.Parent))
+(elem declare func $m_jsMethod__bridgejsmethod_Main_Parent__void@bridgejsmethod.Main.Parent)
 
 ;;; void Parent.method(T t)
 (func $m_method__bridgejsmethod_Main_Parent__void@bridgejsmethod.Main.Parent
@@ -978,7 +960,7 @@
   )
  )
 )
-(global funcref (ref.func $m_method__bridgejsmethod_Main_Parent__void@bridgejsmethod.Main.Parent))
+(elem declare func $m_method__bridgejsmethod_Main_Parent__void@bridgejsmethod.Main.Parent)
 
 ;;; void Parent.jsMethod(Object arg0)
 (func $m_jsMethod__java_lang_Object__void@bridgejsmethod.Main.Parent
@@ -993,7 +975,7 @@
   )
  )
 )
-(global funcref (ref.func $m_jsMethod__java_lang_Object__void@bridgejsmethod.Main.Parent))
+(elem declare func $m_jsMethod__java_lang_Object__void@bridgejsmethod.Main.Parent)
 
 ;;; void Parent.method(Object arg0)
 (func $m_method__java_lang_Object__void@bridgejsmethod.Main.Parent
@@ -1008,7 +990,7 @@
   )
  )
 )
-(global funcref (ref.func $m_method__java_lang_Object__void@bridgejsmethod.Main.Parent))
+(elem declare func $m_method__java_lang_Object__void@bridgejsmethod.Main.Parent)
 
 ;;; CLASS  Child
 (type $bridgejsmethod.Main.Child (struct
@@ -1042,7 +1024,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_bridgejsmethod@bridgejsmethod.Main.Child))
 
 ;;; Code for bridgejsmethod.Main [vtable]
  (global.set $bridgejsmethod.Main.vtable (struct.new_with_rtt $bridgejsmethod.Main.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $bridgejsmethod.Main.vtable)))

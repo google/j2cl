@@ -26,7 +26,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@implicitparenthesis.ImplicitParenthesis))
 
 ;;; void ImplicitParenthesis.test()
 (func $m_test__void@implicitparenthesis.ImplicitParenthesis
@@ -42,7 +41,7 @@
   )
  )
 )
-(global funcref (ref.func $m_test__void@implicitparenthesis.ImplicitParenthesis))
+(elem declare func $m_test__void@implicitparenthesis.ImplicitParenthesis)
 
 ;;; void ImplicitParenthesis.examples()
 (func $m_examples__void@implicitparenthesis.ImplicitParenthesis
@@ -108,7 +107,6 @@
   )
  )
 )
-(global funcref (ref.func $m_examples__void@implicitparenthesis.ImplicitParenthesis))
 
 ;;; void ImplicitParenthesis.nonExamples()
 (func $m_nonExamples__void@implicitparenthesis.ImplicitParenthesis
@@ -148,7 +146,6 @@
   )
  )
 )
-(global funcref (ref.func $m_nonExamples__void@implicitparenthesis.ImplicitParenthesis))
 
 ;;; void ImplicitParenthesis.parenthesisRemoval()
 (func $m_parenthesisRemoval__void@implicitparenthesis.ImplicitParenthesis
@@ -159,7 +156,6 @@
   )
  )
 )
-(global funcref (ref.func $m_parenthesisRemoval__void@implicitparenthesis.ImplicitParenthesis))
 
 ;;; Code for implicitparenthesis.ImplicitParenthesis [vtable]
  (global.set $implicitparenthesis.ImplicitParenthesis.vtable (struct.new_with_rtt $implicitparenthesis.ImplicitParenthesis.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__void@implicitparenthesis.ImplicitParenthesis) (rtt.canon $implicitparenthesis.ImplicitParenthesis.vtable)))

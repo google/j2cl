@@ -26,7 +26,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@ternaryexpression.TernaryExpression))
 
 ;;; void TernaryExpression.test()
 (func $m_test__void@ternaryexpression.TernaryExpression
@@ -54,7 +53,7 @@
   )
  )
 )
-(global funcref (ref.func $m_test__void@ternaryexpression.TernaryExpression))
+(elem declare func $m_test__void@ternaryexpression.TernaryExpression)
 
 ;;; Code for ternaryexpression.TernaryExpression [vtable]
  (global.set $ternaryexpression.TernaryExpression.vtable (struct.new_with_rtt $ternaryexpression.TernaryExpression.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__void@ternaryexpression.TernaryExpression) (rtt.canon $ternaryexpression.TernaryExpression.vtable)))

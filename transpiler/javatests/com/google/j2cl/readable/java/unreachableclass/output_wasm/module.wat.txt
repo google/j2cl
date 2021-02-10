@@ -25,7 +25,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@unreachableclass.Main))
 
 ;;; CLASS  A
 (type $unreachableclass.Main.1A (struct
@@ -54,7 +53,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_unreachableclass@unreachableclass.Main.1A))
 
 ;;; void A.m()
 (func $m_m__void_$pp_unreachableclass@unreachableclass.Main.1A
@@ -66,7 +64,7 @@
   )
  )
 )
-(global funcref (ref.func $m_m__void_$pp_unreachableclass@unreachableclass.Main.1A))
+(elem declare func $m_m__void_$pp_unreachableclass@unreachableclass.Main.1A)
 
 ;;; CLASS  B
 (type $unreachableclass.Main.1A.1B (struct
@@ -94,7 +92,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_unreachableclass@unreachableclass.Main.1A.1B))
 
 ;;; void B.n()
 (func $m_n__void_$p_unreachableclass_Main_1A_1B@unreachableclass.Main.1A.1B
@@ -104,7 +101,6 @@
   )
  )
 )
-(global funcref (ref.func $m_n__void_$p_unreachableclass_Main_1A_1B@unreachableclass.Main.1A.1B))
 
 ;;; CLASS  <anonymous> extends Object
 (type $unreachableclass.Main.1 (struct
@@ -132,7 +128,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_unreachableclass@unreachableclass.Main.1))
 
 ;;; Code for unreachableclass.Main [vtable]
  (global.set $unreachableclass.Main.vtable (struct.new_with_rtt $unreachableclass.Main.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $unreachableclass.Main.vtable)))

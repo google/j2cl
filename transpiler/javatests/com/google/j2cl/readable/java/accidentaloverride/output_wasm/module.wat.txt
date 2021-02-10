@@ -26,7 +26,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_accidentaloverride@accidentaloverride.Parent))
 
 ;;; void Parent.foo(T e)
 (func $m_foo__java_lang_Error__void@accidentaloverride.Parent
@@ -39,7 +38,7 @@
   )
  )
 )
-(global funcref (ref.func $m_foo__java_lang_Error__void@accidentaloverride.Parent))
+(elem declare func $m_foo__java_lang_Error__void@accidentaloverride.Parent)
 
 ;;; INTERFACE  SuperInterface
 
@@ -71,7 +70,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_accidentaloverride@accidentaloverride.AnotherAccidentalOverride))
 
 ;;; void AnotherAccidentalOverride.foo(Object arg0)
 (func $m_foo__java_lang_Object__void@accidentaloverride.AnotherAccidentalOverride
@@ -86,7 +84,7 @@
   )
  )
 )
-(global funcref (ref.func $m_foo__java_lang_Object__void@accidentaloverride.AnotherAccidentalOverride))
+(elem declare func $m_foo__java_lang_Object__void@accidentaloverride.AnotherAccidentalOverride)
 
 ;;; void AnotherAccidentalOverride.foo(Error arg0)
 (func $m_foo__java_lang_Error__void@accidentaloverride.AnotherAccidentalOverride
@@ -101,7 +99,7 @@
   )
  )
 )
-(global funcref (ref.func $m_foo__java_lang_Error__void@accidentaloverride.AnotherAccidentalOverride))
+(elem declare func $m_foo__java_lang_Error__void@accidentaloverride.AnotherAccidentalOverride)
 
 ;;; void AnotherAccidentalOverride.foo(AssertionError arg0)
 (func $m_foo__java_lang_AssertionError__void@accidentaloverride.AnotherAccidentalOverride
@@ -116,7 +114,7 @@
   )
  )
 )
-(global funcref (ref.func $m_foo__java_lang_AssertionError__void@accidentaloverride.AnotherAccidentalOverride))
+(elem declare func $m_foo__java_lang_AssertionError__void@accidentaloverride.AnotherAccidentalOverride)
 
 ;;; CLASS  AccidentalOverride
 (type $accidentaloverride.AccidentalOverride (struct
@@ -145,7 +143,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@accidentaloverride.AccidentalOverride))
 
 ;;; void AccidentalOverride.foo(Object arg0)
 (func $m_foo__java_lang_Object__void@accidentaloverride.AccidentalOverride
@@ -160,7 +157,7 @@
   )
  )
 )
-(global funcref (ref.func $m_foo__java_lang_Object__void@accidentaloverride.AccidentalOverride))
+(elem declare func $m_foo__java_lang_Object__void@accidentaloverride.AccidentalOverride)
 
 ;;; Code for accidentaloverride.Parent [vtable]
  (global.set $accidentaloverride.Parent.vtable (struct.new_with_rtt $accidentaloverride.Parent.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__java_lang_Error__void@accidentaloverride.Parent) (rtt.canon $accidentaloverride.Parent.vtable)))

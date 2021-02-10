@@ -34,7 +34,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@jstype.SomeJsType))
 
 ;;; void SomeJsType.publicMethod()
 (func $m_publicMethod__void@jstype.SomeJsType
@@ -46,7 +45,7 @@
   )
  )
 )
-(global funcref (ref.func $m_publicMethod__void@jstype.SomeJsType))
+(elem declare func $m_publicMethod__void@jstype.SomeJsType)
 
 ;;; void SomeJsType.privateMethod()
 (func $m_privateMethod__void_$p_jstype_SomeJsType@jstype.SomeJsType
@@ -56,7 +55,6 @@
   )
  )
 )
-(global funcref (ref.func $m_privateMethod__void_$p_jstype_SomeJsType@jstype.SomeJsType))
 
 ;;; void SomeJsType.packageMethod()
 (func $m_packageMethod__void_$pp_jstype@jstype.SomeJsType
@@ -68,7 +66,7 @@
   )
  )
 )
-(global funcref (ref.func $m_packageMethod__void_$pp_jstype@jstype.SomeJsType))
+(elem declare func $m_packageMethod__void_$pp_jstype@jstype.SomeJsType)
 
 ;;; void SomeJsType.protectedMethod()
 (func $m_protectedMethod__void@jstype.SomeJsType
@@ -80,7 +78,7 @@
   )
  )
 )
-(global funcref (ref.func $m_protectedMethod__void@jstype.SomeJsType))
+(elem declare func $m_protectedMethod__void@jstype.SomeJsType)
 
 ;;; void SomeJsType.useFieldsAndMethods()
 (func $m_useFieldsAndMethods__void@jstype.SomeJsType
@@ -104,7 +102,7 @@
   )
  )
 )
-(global funcref (ref.func $m_useFieldsAndMethods__void@jstype.SomeJsType))
+(elem declare func $m_useFieldsAndMethods__void@jstype.SomeJsType)
 
 ;;; Wildcard SomeJsType.testStarAndWildCard(Star s, Wildcard w)
 (func $m_testStarAndWildCard__jstype_SomeJsType_Star__jstype_SomeJsType_Wildcard__jstype_SomeJsType_Wildcard@jstype.SomeJsType
@@ -132,7 +130,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_testStarAndWildCard__jstype_SomeJsType_Star__jstype_SomeJsType_Wildcard__jstype_SomeJsType_Wildcard@jstype.SomeJsType))
+(elem declare func $m_testStarAndWildCard__jstype_SomeJsType_Star__jstype_SomeJsType_Wildcard__jstype_SomeJsType_Wildcard@jstype.SomeJsType)
 
 ;;; INTERFACE  Star
 

@@ -26,7 +26,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@nestednativetype.NativeArray))
 
 ;;; Object NativeArray.a()
 (func $m_a__java_lang_Object@nestednativetype.NativeArray
@@ -44,7 +43,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_a__java_lang_Object@nestednativetype.NativeArray))
+(elem declare func $m_a__java_lang_Object@nestednativetype.NativeArray)
 
 ;;; CLASS  <anonymous> extends Object
 (type $nestednativetype.NativeArray.1 (struct
@@ -72,7 +71,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_nestednativetype@nestednativetype.NativeArray.1))
 
 ;;; Code for nestednativetype.NativeArray [vtable]
  (global.set $nestednativetype.NativeArray.vtable (struct.new_with_rtt $nestednativetype.NativeArray.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_a__java_lang_Object@nestednativetype.NativeArray) (rtt.canon $nestednativetype.NativeArray.vtable)))

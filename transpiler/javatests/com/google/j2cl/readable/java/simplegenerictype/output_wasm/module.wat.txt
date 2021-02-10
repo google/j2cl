@@ -34,7 +34,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__java_lang_Object__java_lang_Object__void@simplegenerictype.SimpleGenericType))
 
 ;;; void SimpleGenericType.test()
 (func $m_test__void@simplegenerictype.SimpleGenericType
@@ -50,7 +49,7 @@
   )
  )
 )
-(global funcref (ref.func $m_test__void@simplegenerictype.SimpleGenericType))
+(elem declare func $m_test__void@simplegenerictype.SimpleGenericType)
 
 ;;; Code for simplegenerictype.SimpleGenericType [vtable]
  (global.set $simplegenerictype.SimpleGenericType.vtable (struct.new_with_rtt $simplegenerictype.SimpleGenericType.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__void@simplegenerictype.SimpleGenericType) (rtt.canon $simplegenerictype.SimpleGenericType.vtable)))

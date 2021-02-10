@@ -34,7 +34,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@genericmethod.GenericMethod))
 
 ;;; void GenericMethod.foo(T f, S s)
 (func $m_foo__java_lang_Object__java_lang_Object__void@genericmethod.GenericMethod
@@ -48,7 +47,7 @@
   )
  )
 )
-(global funcref (ref.func $m_foo__java_lang_Object__java_lang_Object__void@genericmethod.GenericMethod))
+(elem declare func $m_foo__java_lang_Object__java_lang_Object__void@genericmethod.GenericMethod)
 
 ;;; void GenericMethod.fun(Object o)
 (func $m_fun__java_lang_Object__void@genericmethod.GenericMethod
@@ -61,7 +60,7 @@
   )
  )
 )
-(global funcref (ref.func $m_fun__java_lang_Object__void@genericmethod.GenericMethod))
+(elem declare func $m_fun__java_lang_Object__void@genericmethod.GenericMethod)
 
 ;;; void GenericMethod.fun(T t)
 (func $m_fun__java_lang_Exception__void@genericmethod.GenericMethod
@@ -74,7 +73,7 @@
   )
  )
 )
-(global funcref (ref.func $m_fun__java_lang_Exception__void@genericmethod.GenericMethod))
+(elem declare func $m_fun__java_lang_Exception__void@genericmethod.GenericMethod)
 
 ;;; void GenericMethod.fun(T t)
 (func $m_fun__java_lang_Error__void@genericmethod.GenericMethod
@@ -91,7 +90,7 @@
   )
  )
 )
-(global funcref (ref.func $m_fun__java_lang_Error__void@genericmethod.GenericMethod))
+(elem declare func $m_fun__java_lang_Error__void@genericmethod.GenericMethod)
 
 ;;; GenericMethod<T> GenericMethod.bar()
 (func $m_bar__genericmethod_GenericMethod@genericmethod.GenericMethod
@@ -109,7 +108,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_bar__genericmethod_GenericMethod@genericmethod.GenericMethod))
+(elem declare func $m_bar__genericmethod_GenericMethod@genericmethod.GenericMethod)
 
 ;;; T[] GenericMethod.fun(T[] array)
 (func $m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object@genericmethod.GenericMethod
@@ -128,7 +127,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object@genericmethod.GenericMethod))
+(elem declare func $m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object@genericmethod.GenericMethod)
 
 ;;; T GenericMethod.checked()
 (func $m_checked__java_lang_Object@genericmethod.GenericMethod
@@ -146,7 +145,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_checked__java_lang_Object@genericmethod.GenericMethod))
+(elem declare func $m_checked__java_lang_Object@genericmethod.GenericMethod)
 
 ;;; T GenericMethod.unchecked()
 (func $m_unchecked__java_lang_Object@genericmethod.GenericMethod
@@ -164,7 +163,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_unchecked__java_lang_Object@genericmethod.GenericMethod))
+(elem declare func $m_unchecked__java_lang_Object@genericmethod.GenericMethod)
 
 ;;; void GenericMethod.test()
 (func $m_test__void@genericmethod.GenericMethod
@@ -198,7 +197,7 @@
   )
  )
 )
-(global funcref (ref.func $m_test__void@genericmethod.GenericMethod))
+(elem declare func $m_test__void@genericmethod.GenericMethod)
 
 ;;; void GenericMethod.acceptsContent(Content content)
 (func $m_acceptsContent__genericmethod_GenericMethod_Content__void@genericmethod.GenericMethod
@@ -208,7 +207,6 @@
   )
  )
 )
-(global funcref (ref.func $m_acceptsContent__genericmethod_GenericMethod_Content__void@genericmethod.GenericMethod))
 
 ;;; void GenericMethod.acceptsString(String string)
 (func $m_acceptsString__java_lang_String__void@genericmethod.GenericMethod
@@ -218,7 +216,6 @@
   )
  )
 )
-(global funcref (ref.func $m_acceptsString__java_lang_String__void@genericmethod.GenericMethod))
 
 ;;; void GenericMethod.testErasureCast_wildcard()
 (func $m_testErasureCast_wildcard__void@genericmethod.GenericMethod
@@ -288,7 +285,6 @@
   )
  )
 )
-(global funcref (ref.func $m_testErasureCast_wildcard__void@genericmethod.GenericMethod))
 
 ;;; void GenericMethod.testErasureCast_typeVariable()
 (func $m_testErasureCast_typeVariable__void@genericmethod.GenericMethod
@@ -358,7 +354,6 @@
   )
  )
 )
-(global funcref (ref.func $m_testErasureCast_typeVariable__void@genericmethod.GenericMethod))
 
 ;;; CLASS  <anonymous> extends GenericMethod<T>
 (type $genericmethod.GenericMethod.1 (struct
@@ -397,7 +392,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_genericmethod@genericmethod.GenericMethod.1))
 
 ;;; void <anonymous> extends GenericMethod<T>.fun2(T t)
 (func $m_fun2__java_lang_Error__void@genericmethod.GenericMethod.1
@@ -410,7 +404,7 @@
   )
  )
 )
-(global funcref (ref.func $m_fun2__java_lang_Error__void@genericmethod.GenericMethod.1))
+(elem declare func $m_fun2__java_lang_Error__void@genericmethod.GenericMethod.1)
 
 ;;; void <anonymous> extends GenericMethod<T>.fun2(T t)
 (func $m_fun2__java_lang_Object__void@genericmethod.GenericMethod.1
@@ -423,7 +417,7 @@
   )
  )
 )
-(global funcref (ref.func $m_fun2__java_lang_Object__void@genericmethod.GenericMethod.1))
+(elem declare func $m_fun2__java_lang_Object__void@genericmethod.GenericMethod.1)
 
 ;;; CLASS  LocalClass
 (type $genericmethod.GenericMethod.1LocalClass (struct
@@ -462,7 +456,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_genericmethod@genericmethod.GenericMethod.1LocalClass))
 
 ;;; void LocalClass.fun2(T t)
 (func $m_fun2__java_lang_Object__void@genericmethod.GenericMethod.1LocalClass
@@ -475,7 +468,7 @@
   )
  )
 )
-(global funcref (ref.func $m_fun2__java_lang_Object__void@genericmethod.GenericMethod.1LocalClass))
+(elem declare func $m_fun2__java_lang_Object__void@genericmethod.GenericMethod.1LocalClass)
 
 ;;; void LocalClass.fun2(T t)
 (func $m_fun2__java_lang_Number__void@genericmethod.GenericMethod.1LocalClass
@@ -488,7 +481,7 @@
   )
  )
 )
-(global funcref (ref.func $m_fun2__java_lang_Number__void@genericmethod.GenericMethod.1LocalClass))
+(elem declare func $m_fun2__java_lang_Number__void@genericmethod.GenericMethod.1LocalClass)
 
 ;;; CLASS  SuperContainer
 (type $genericmethod.GenericMethod.SuperContainer (struct
@@ -516,7 +509,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_genericmethod@genericmethod.GenericMethod.SuperContainer))
 
 ;;; C SuperContainer.get()
 (func $m_get__genericmethod_GenericMethod_Container_$pp_genericmethod@genericmethod.GenericMethod.SuperContainer
@@ -534,7 +526,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_get__genericmethod_GenericMethod_Container_$pp_genericmethod@genericmethod.GenericMethod.SuperContainer))
+(elem declare func $m_get__genericmethod_GenericMethod_Container_$pp_genericmethod@genericmethod.GenericMethod.SuperContainer)
 
 ;;; CLASS  Container
 (type $genericmethod.GenericMethod.Container (struct
@@ -562,7 +554,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_genericmethod@genericmethod.GenericMethod.Container))
 
 ;;; CT Container.get()
 (func $m_get__genericmethod_GenericMethod_Content_$pp_genericmethod@genericmethod.GenericMethod.Container
@@ -580,7 +571,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_get__genericmethod_GenericMethod_Content_$pp_genericmethod@genericmethod.GenericMethod.Container))
+(elem declare func $m_get__genericmethod_GenericMethod_Content_$pp_genericmethod@genericmethod.GenericMethod.Container)
 
 ;;; CLASS  Content
 (type $genericmethod.GenericMethod.Content (struct
@@ -608,7 +599,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_genericmethod@genericmethod.GenericMethod.Content))
 
 ;;; String Content.getProp()
 (func $m_getProp__java_lang_String_$pp_genericmethod@genericmethod.GenericMethod.Content
@@ -626,7 +616,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_getProp__java_lang_String_$pp_genericmethod@genericmethod.GenericMethod.Content))
+(elem declare func $m_getProp__java_lang_String_$pp_genericmethod@genericmethod.GenericMethod.Content)
 
 ;;; Code for genericmethod.GenericMethod [vtable]
  (global.set $genericmethod.GenericMethod.vtable (struct.new_with_rtt $genericmethod.GenericMethod.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__java_lang_Object__java_lang_Object__void@genericmethod.GenericMethod) (ref.func $m_fun__java_lang_Object__void@genericmethod.GenericMethod) (ref.func $m_fun__java_lang_Exception__void@genericmethod.GenericMethod) (ref.func $m_fun__java_lang_Error__void@genericmethod.GenericMethod) (ref.func $m_bar__genericmethod_GenericMethod@genericmethod.GenericMethod) (ref.func $m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object@genericmethod.GenericMethod) (ref.func $m_checked__java_lang_Object@genericmethod.GenericMethod) (ref.func $m_unchecked__java_lang_Object@genericmethod.GenericMethod) (ref.func $m_test__void@genericmethod.GenericMethod) (rtt.canon $genericmethod.GenericMethod.vtable)))

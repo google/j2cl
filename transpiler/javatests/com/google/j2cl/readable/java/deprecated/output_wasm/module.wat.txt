@@ -24,7 +24,6 @@
   )
  )
 )
-(global funcref (ref.func $m_deprecatedStaticMethod__java_lang_Object__void@deprecated.DeprecatedExample))
 
 ;;; void DeprecatedExample.deprecatedInstanceMethod(String someArg)
 (func $m_deprecatedInstanceMethod__java_lang_String__void@deprecated.DeprecatedExample
@@ -37,7 +36,7 @@
   )
  )
 )
-(global funcref (ref.func $m_deprecatedInstanceMethod__java_lang_String__void@deprecated.DeprecatedExample))
+(elem declare func $m_deprecatedInstanceMethod__java_lang_String__void@deprecated.DeprecatedExample)
 
 ;;; DeprecatedExample()
 (func $m_<init>__void@deprecated.DeprecatedExample
@@ -51,7 +50,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@deprecated.DeprecatedExample))
 
 ;;; INTERFACE  DeprecatedInterface
 
@@ -90,7 +88,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$p_deprecated_DeprecatedExample_DeprecatedEnum@deprecated.DeprecatedExample.DeprecatedEnum))
 
 ;;; ENUM  DeprecatedJsEnum
 (type $deprecated.DeprecatedExample.DeprecatedJsEnum (struct
@@ -118,7 +115,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$p_deprecated_DeprecatedExample_DeprecatedJsEnum@deprecated.DeprecatedExample.DeprecatedJsEnum))
 
 ;;; Code for deprecated.DeprecatedExample [vtable]
  (global.set $deprecated.DeprecatedExample.vtable (struct.new_with_rtt $deprecated.DeprecatedExample.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_deprecatedInstanceMethod__java_lang_String__void@deprecated.DeprecatedExample) (rtt.canon $deprecated.DeprecatedExample.vtable)))

@@ -28,7 +28,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_supermethodcall@supermethodcall.GrandParent))
 
 ;;; void GrandParent.grandParentSimplest()
 (func $m_grandParentSimplest__void@supermethodcall.GrandParent
@@ -40,7 +39,7 @@
   )
  )
 )
-(global funcref (ref.func $m_grandParentSimplest__void@supermethodcall.GrandParent))
+(elem declare func $m_grandParentSimplest__void@supermethodcall.GrandParent)
 
 ;;; void GrandParent.grandParentWithParams(int foo)
 (func $m_grandParentWithParams__int__void@supermethodcall.GrandParent
@@ -53,7 +52,7 @@
   )
  )
 )
-(global funcref (ref.func $m_grandParentWithParams__int__void@supermethodcall.GrandParent))
+(elem declare func $m_grandParentWithParams__int__void@supermethodcall.GrandParent)
 
 ;;; Object GrandParent.grandParentWithChangingReturn()
 (func $m_grandParentWithChangingReturn__java_lang_Object@supermethodcall.GrandParent
@@ -71,7 +70,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_grandParentWithChangingReturn__java_lang_Object@supermethodcall.GrandParent))
+(elem declare func $m_grandParentWithChangingReturn__java_lang_Object@supermethodcall.GrandParent)
 
 ;;; CLASS  Parent
 (type $supermethodcall.Parent (struct
@@ -104,7 +103,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_supermethodcall@supermethodcall.Parent))
 
 ;;; void Parent.parentSimplest()
 (func $m_parentSimplest__void@supermethodcall.Parent
@@ -116,7 +114,7 @@
   )
  )
 )
-(global funcref (ref.func $m_parentSimplest__void@supermethodcall.Parent))
+(elem declare func $m_parentSimplest__void@supermethodcall.Parent)
 
 ;;; void Parent.parentWithParams(int foo)
 (func $m_parentWithParams__int__void@supermethodcall.Parent
@@ -129,7 +127,7 @@
   )
  )
 )
-(global funcref (ref.func $m_parentWithParams__int__void@supermethodcall.Parent))
+(elem declare func $m_parentWithParams__int__void@supermethodcall.Parent)
 
 ;;; Object Parent.parentWithChangingReturn()
 (func $m_parentWithChangingReturn__java_lang_Object@supermethodcall.Parent
@@ -147,7 +145,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_parentWithChangingReturn__java_lang_Object@supermethodcall.Parent))
+(elem declare func $m_parentWithChangingReturn__java_lang_Object@supermethodcall.Parent)
 
 ;;; CLASS  Child
 (type $supermethodcall.Child (struct
@@ -182,7 +180,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@supermethodcall.Child))
 
 ;;; void Child.parentSimplest()
 (func $m_parentSimplest__void@supermethodcall.Child
@@ -196,7 +193,7 @@
   )
  )
 )
-(global funcref (ref.func $m_parentSimplest__void@supermethodcall.Child))
+(elem declare func $m_parentSimplest__void@supermethodcall.Child)
 
 ;;; void Child.parentWithParams(int foo)
 (func $m_parentWithParams__int__void@supermethodcall.Child
@@ -211,7 +208,7 @@
   )
  )
 )
-(global funcref (ref.func $m_parentWithParams__int__void@supermethodcall.Child))
+(elem declare func $m_parentWithParams__int__void@supermethodcall.Child)
 
 ;;; Child Child.parentWithChangingReturn()
 (func $m_parentWithChangingReturn__supermethodcall_Child@supermethodcall.Child
@@ -231,7 +228,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_parentWithChangingReturn__supermethodcall_Child@supermethodcall.Child))
+(elem declare func $m_parentWithChangingReturn__supermethodcall_Child@supermethodcall.Child)
 
 ;;; void Child.grandParentSimplest()
 (func $m_grandParentSimplest__void@supermethodcall.Child
@@ -245,7 +242,7 @@
   )
  )
 )
-(global funcref (ref.func $m_grandParentSimplest__void@supermethodcall.Child))
+(elem declare func $m_grandParentSimplest__void@supermethodcall.Child)
 
 ;;; void Child.grandParentWithParams(int foo)
 (func $m_grandParentWithParams__int__void@supermethodcall.Child
@@ -260,7 +257,7 @@
   )
  )
 )
-(global funcref (ref.func $m_grandParentWithParams__int__void@supermethodcall.Child))
+(elem declare func $m_grandParentWithParams__int__void@supermethodcall.Child)
 
 ;;; Child Child.grandParentWithChangingReturn()
 (func $m_grandParentWithChangingReturn__supermethodcall_Child@supermethodcall.Child
@@ -280,7 +277,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_grandParentWithChangingReturn__supermethodcall_Child@supermethodcall.Child))
+(elem declare func $m_grandParentWithChangingReturn__supermethodcall_Child@supermethodcall.Child)
 
 ;;; Child Child.grandParentWithChangingReturn()
 (func $m_grandParentWithChangingReturn__java_lang_Object@supermethodcall.Child
@@ -298,7 +295,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_grandParentWithChangingReturn__java_lang_Object@supermethodcall.Child))
+(elem declare func $m_grandParentWithChangingReturn__java_lang_Object@supermethodcall.Child)
 
 ;;; Child Child.parentWithChangingReturn()
 (func $m_parentWithChangingReturn__java_lang_Object@supermethodcall.Child
@@ -316,7 +313,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_parentWithChangingReturn__java_lang_Object@supermethodcall.Child))
+(elem declare func $m_parentWithChangingReturn__java_lang_Object@supermethodcall.Child)
 
 ;;; Code for supermethodcall.GrandParent [vtable]
  (global.set $supermethodcall.GrandParent.vtable (struct.new_with_rtt $supermethodcall.GrandParent.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_grandParentSimplest__void@supermethodcall.GrandParent) (ref.func $m_grandParentWithParams__int__void@supermethodcall.GrandParent) (ref.func $m_grandParentWithChangingReturn__java_lang_Object@supermethodcall.GrandParent) (rtt.canon $supermethodcall.GrandParent.vtable)))

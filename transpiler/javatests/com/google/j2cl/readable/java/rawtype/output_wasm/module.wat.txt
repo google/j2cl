@@ -26,7 +26,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_rawtype@rawtype.RawType))
 
 ;;; INTERFACE  I
 
@@ -39,7 +38,7 @@
   )
  )
 )
-(global funcref (ref.func $m_f__rawtype_RawType__void@rawtype.RawType.I))
+(elem declare func $m_f__rawtype_RawType__void@rawtype.RawType.I)
 
 ;;; CLASS  RawSubclass
 (type $rawtype.RawType.RawSubclass (struct
@@ -67,7 +66,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_rawtype@rawtype.RawType.RawSubclass))
 
 ;;; void RawSubclass.f(RawType t)
 (func $m_f__rawtype_RawType__void@rawtype.RawType.RawSubclass
@@ -80,7 +78,7 @@
   )
  )
 )
-(global funcref (ref.func $m_f__rawtype_RawType__void@rawtype.RawType.RawSubclass))
+(elem declare func $m_f__rawtype_RawType__void@rawtype.RawType.RawSubclass)
 
 ;;; Code for rawtype.RawType [vtable]
  (global.set $rawtype.RawType.vtable (struct.new_with_rtt $rawtype.RawType.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $rawtype.RawType.vtable)))

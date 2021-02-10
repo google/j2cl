@@ -26,7 +26,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_jsproperties@jsproperties.Foo))
 
 ;;; int Foo.getA()
 (func $m_getA__int@jsproperties.Foo
@@ -41,7 +40,6 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_getA__int@jsproperties.Foo))
 
 ;;; void Foo.setA(int x)
 (func $m_setA__int__void@jsproperties.Foo
@@ -53,7 +51,6 @@
   )
  )
 )
-(global funcref (ref.func $m_setA__int__void@jsproperties.Foo))
 
 ;;; int Foo.getB()
 (func $m_getB__int@jsproperties.Foo
@@ -68,7 +65,6 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_getB__int@jsproperties.Foo))
 
 ;;; void Foo.setB(int x)
 (func $m_setB__int__void@jsproperties.Foo
@@ -80,7 +76,6 @@
   )
  )
 )
-(global funcref (ref.func $m_setB__int__void@jsproperties.Foo))
 
 ;;; CLASS  Bar
 (type $jsproperties.Bar (struct
@@ -112,7 +107,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_jsproperties@jsproperties.Bar))
 
 ;;; int Bar.getA()
 (func $m_getA__int@jsproperties.Bar
@@ -130,7 +124,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_getA__int@jsproperties.Bar))
+(elem declare func $m_getA__int@jsproperties.Bar)
 
 ;;; void Bar.setA(int x)
 (func $m_setA__int__void@jsproperties.Bar
@@ -145,7 +139,7 @@
   )
  )
 )
-(global funcref (ref.func $m_setA__int__void@jsproperties.Bar))
+(elem declare func $m_setA__int__void@jsproperties.Bar)
 
 ;;; int Bar.getB()
 (func $m_getB__int@jsproperties.Bar
@@ -163,7 +157,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_getB__int@jsproperties.Bar))
+(elem declare func $m_getB__int@jsproperties.Bar)
 
 ;;; void Bar.setB(int x)
 (func $m_setB__int__void@jsproperties.Bar
@@ -178,7 +172,7 @@
   )
  )
 )
-(global funcref (ref.func $m_setB__int__void@jsproperties.Bar))
+(elem declare func $m_setB__int__void@jsproperties.Bar)
 
 ;;; CLASS  NativeFoo
 (type $jsproperties.NativeFoo (struct
@@ -206,7 +200,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_jsproperties@jsproperties.NativeFoo))
 
 ;;; Object NativeFoo.getA()
 (func $m_getA__java_lang_Object@jsproperties.NativeFoo
@@ -221,7 +214,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_getA__java_lang_Object@jsproperties.NativeFoo))
+(elem declare func $m_getA__java_lang_Object@jsproperties.NativeFoo)
 
 ;;; double NativeFoo.getB()
 (func $m_getB__double@jsproperties.NativeFoo
@@ -233,7 +226,6 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_getB__double@jsproperties.NativeFoo))
 
 ;;; CLASS  Main
 (type $jsproperties.Main (struct
@@ -263,7 +255,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@jsproperties.Main))
 
 ;;; void Main.testNativeJsProperty()
 (func $m_testNativeJsProperty__void@jsproperties.Main
@@ -285,7 +276,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testNativeJsProperty__void@jsproperties.Main))
+(elem declare func $m_testNativeJsProperty__void@jsproperties.Main)
 
 ;;; void Main.testStaticJsProperty()
 (func $m_testStaticJsProperty__void@jsproperties.Main
@@ -305,7 +296,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testStaticJsProperty__void@jsproperties.Main))
+(elem declare func $m_testStaticJsProperty__void@jsproperties.Main)
 
 ;;; void Main.testInstanceJsProperty()
 (func $m_testInstanceJsProperty__void@jsproperties.Main
@@ -329,7 +320,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testInstanceJsProperty__void@jsproperties.Main))
+(elem declare func $m_testInstanceJsProperty__void@jsproperties.Main)
 
 ;;; Code for jsproperties.Foo [vtable]
  (global.set $jsproperties.Foo.vtable (struct.new_with_rtt $jsproperties.Foo.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $jsproperties.Foo.vtable)))

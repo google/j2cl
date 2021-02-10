@@ -29,7 +29,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_instancejsmethods@instancejsmethods.SuperParent))
 
 ;;; int SuperParent.fun(int a, int b)
 (func $m_fun__int__int__int@instancejsmethods.SuperParent
@@ -49,7 +48,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_fun__int__int__int@instancejsmethods.SuperParent))
+(elem declare func $m_fun__int__int__int@instancejsmethods.SuperParent)
 
 ;;; int SuperParent.bar(int a, int b)
 (func $m_bar__int__int__int@instancejsmethods.SuperParent
@@ -69,7 +68,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_bar__int__int__int@instancejsmethods.SuperParent))
+(elem declare func $m_bar__int__int__int@instancejsmethods.SuperParent)
 
 ;;; CLASS  Parent
 (type $instancejsmethods.Parent (struct
@@ -99,7 +98,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_instancejsmethods@instancejsmethods.Parent))
 
 ;;; int Parent.fun(int a, int b)
 (func $m_fun__int__int__int@instancejsmethods.Parent
@@ -119,7 +117,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_fun__int__int__int@instancejsmethods.Parent))
+(elem declare func $m_fun__int__int__int@instancejsmethods.Parent)
 
 ;;; int Parent.bar(int a, int b)
 (func $m_bar__int__int__int@instancejsmethods.Parent
@@ -139,7 +137,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_bar__int__int__int@instancejsmethods.Parent))
+(elem declare func $m_bar__int__int__int@instancejsmethods.Parent)
 
 ;;; int Parent.foo(int a)
 (func $m_foo__int__int@instancejsmethods.Parent
@@ -158,7 +156,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_foo__int__int@instancejsmethods.Parent))
+(elem declare func $m_foo__int__int@instancejsmethods.Parent)
 
 ;;; CLASS  Child
 (type $instancejsmethods.Child (struct
@@ -189,7 +187,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_instancejsmethods@instancejsmethods.Child))
 
 ;;; int Child.fun(int a, int b)
 (func $m_fun__int__int__int@instancejsmethods.Child
@@ -209,7 +206,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_fun__int__int__int@instancejsmethods.Child))
+(elem declare func $m_fun__int__int__int@instancejsmethods.Child)
 
 ;;; int Child.bar(int a, int b)
 (func $m_bar__int__int__int@instancejsmethods.Child
@@ -229,7 +226,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_bar__int__int__int@instancejsmethods.Child))
+(elem declare func $m_bar__int__int__int@instancejsmethods.Child)
 
 ;;; int Child.foo(int a)
 (func $m_foo__int__int@instancejsmethods.Child
@@ -248,7 +245,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_foo__int__int@instancejsmethods.Child))
+(elem declare func $m_foo__int__int@instancejsmethods.Child)
 
 ;;; int Child.intfFoo()
 (func $m_intfFoo__int@instancejsmethods.Child
@@ -266,7 +263,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_intfFoo__int@instancejsmethods.Child))
+(elem declare func $m_intfFoo__int@instancejsmethods.Child)
 
 ;;; CLASS  Main
 (type $instancejsmethods.Main (struct
@@ -294,7 +291,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@instancejsmethods.Main))
 
 ;;; void Main.testCallBySuperParent()
 (func $m_testCallBySuperParent__void@instancejsmethods.Main
@@ -348,7 +344,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testCallBySuperParent__void@instancejsmethods.Main))
+(elem declare func $m_testCallBySuperParent__void@instancejsmethods.Main)
 
 ;;; void Main.testCallByConcreteType()
 (func $m_testCallByConcreteType__void@instancejsmethods.Main
@@ -387,7 +383,6 @@
   )
  )
 )
-(global funcref (ref.func $m_testCallByConcreteType__void@instancejsmethods.Main))
 
 ;;; Code for instancejsmethods.SuperParent [vtable]
  (global.set $instancejsmethods.SuperParent.vtable (struct.new_with_rtt $instancejsmethods.SuperParent.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_fun__int__int__int@instancejsmethods.SuperParent) (ref.func $m_bar__int__int__int@instancejsmethods.SuperParent) (rtt.canon $instancejsmethods.SuperParent.vtable)))

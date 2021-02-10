@@ -39,7 +39,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__int__void@jsvarargs.Main))
 
 ;;; int Main.f1(int multiplier, int... numbers)
 (func $m_f1__int__arrayOf_int__int@jsvarargs.Main
@@ -56,7 +55,6 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_f1__int__arrayOf_int__int@jsvarargs.Main))
 
 ;;; int Main.f2(int... numbers)
 (func $m_f2__arrayOf_int__int@jsvarargs.Main
@@ -72,7 +70,6 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_f2__arrayOf_int__int@jsvarargs.Main))
 
 ;;; int Main.f3(int m, int... numbers)
 (func $m_f3__int__arrayOf_int__int@jsvarargs.Main
@@ -92,7 +89,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_f3__int__arrayOf_int__int@jsvarargs.Main))
+(elem declare func $m_f3__int__arrayOf_int__int@jsvarargs.Main)
 
 ;;; int Main.f4(int... numbers)
 (func $m_f4__arrayOf_int__int@jsvarargs.Main
@@ -111,7 +108,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_f4__arrayOf_int__int@jsvarargs.Main))
+(elem declare func $m_f4__arrayOf_int__int@jsvarargs.Main)
 
 ;;; T Main.generics(T... elements)
 (func $m_generics__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main
@@ -127,7 +124,6 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_generics__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main))
 
 ;;; Main Main.parameterizedType(List<Main>... elements)
 (func $m_parameterizedType__arrayOf_java_util_List__jsvarargs_Main@jsvarargs.Main
@@ -143,7 +139,6 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_parameterizedType__arrayOf_java_util_List__jsvarargs_Main@jsvarargs.Main))
 
 ;;; T Main.parameterizedByT(List<T>... elements)
 (func $m_parameterizedByT__arrayOf_java_util_List__java_lang_Object@jsvarargs.Main
@@ -159,7 +154,6 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_parameterizedByT__arrayOf_java_util_List__java_lang_Object@jsvarargs.Main))
 
 ;;; void Main.testStaticMethodNotFirst()
 (func $m_testStaticMethodNotFirst__void@jsvarargs.Main
@@ -197,7 +191,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testStaticMethodNotFirst__void@jsvarargs.Main))
+(elem declare func $m_testStaticMethodNotFirst__void@jsvarargs.Main)
 
 ;;; void Main.testStaticMethodFirst()
 (func $m_testStaticMethodFirst__void@jsvarargs.Main
@@ -255,7 +249,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testStaticMethodFirst__void@jsvarargs.Main))
+(elem declare func $m_testStaticMethodFirst__void@jsvarargs.Main)
 
 ;;; void Main.testInstanceMethodNotFirst()
 (func $m_testInstanceMethodNotFirst__void@jsvarargs.Main
@@ -285,7 +279,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testInstanceMethodNotFirst__void@jsvarargs.Main))
+(elem declare func $m_testInstanceMethodNotFirst__void@jsvarargs.Main)
 
 ;;; void Main.testInstanceMethodFirst()
 (func $m_testInstanceMethodFirst__void@jsvarargs.Main
@@ -315,7 +309,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testInstanceMethodFirst__void@jsvarargs.Main))
+(elem declare func $m_testInstanceMethodFirst__void@jsvarargs.Main)
 
 ;;; void Main.testJsFunction()
 (func $m_testJsFunction__void@jsvarargs.Main
@@ -353,7 +347,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testJsFunction__void@jsvarargs.Main))
+(elem declare func $m_testJsFunction__void@jsvarargs.Main)
 
 ;;; void Main.testSideEffect()
 (func $m_testSideEffect__void@jsvarargs.Main
@@ -377,7 +371,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testSideEffect__void@jsvarargs.Main))
+(elem declare func $m_testSideEffect__void@jsvarargs.Main)
 
 ;;; void Main.testNullJsVarargs()
 (func $m_testNullJsVarargs__void@jsvarargs.Main
@@ -395,7 +389,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testNullJsVarargs__void@jsvarargs.Main))
+(elem declare func $m_testNullJsVarargs__void@jsvarargs.Main)
 
 ;;; void Main.testGenericJsFunctionWithVarags()
 (func $m_testGenericJsFunctionWithVarags__void@jsvarargs.Main
@@ -413,7 +407,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testGenericJsFunctionWithVarags__void@jsvarargs.Main))
+(elem declare func $m_testGenericJsFunctionWithVarags__void@jsvarargs.Main)
 
 ;;; CLASS  NativeObject
 (type $jsvarargs.Main.NativeObject (struct
@@ -441,7 +435,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__arrayOf_java_lang_Object__void@jsvarargs.Main.NativeObject))
 
 ;;; CLASS  SubVarargsConstructorClass
 (type $jsvarargs.Main.SubVarargsConstructorClass (struct
@@ -470,7 +463,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__int__arrayOf_java_lang_Object__void@jsvarargs.Main.SubVarargsConstructorClass))
 
 ;;; INTERFACE  Function
 
@@ -500,7 +492,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@jsvarargs.Main.AbstractMethodWithVarargs))
 
 ;;; INTERFACE  StaticInterfaceMethodWithVarargs
 
@@ -512,7 +503,6 @@
   )
  )
 )
-(global funcref (ref.func $m_staticMethod__arrayOf_int__void@jsvarargs.Main.StaticInterfaceMethodWithVarargs))
 
 ;;; CLASS  AFunction
 (type $jsvarargs.Main.AFunction (struct
@@ -540,7 +530,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_jsvarargs@jsvarargs.Main.AFunction))
 
 ;;; Object AFunction.f1(int i, Object... args)
 (func $m_f1__int__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main.AFunction
@@ -560,7 +549,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_f1__int__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main.AFunction))
+(elem declare func $m_f1__int__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main.AFunction)
 
 ;;; CLASS  SubMain
 (type $jsvarargs.Main.SubMain (struct
@@ -598,7 +587,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@jsvarargs.Main.SubMain))
 
 ;;; int SubMain.f3(int m, int... numbers)
 (func $m_f3__int__arrayOf_int__int@jsvarargs.Main.SubMain
@@ -634,7 +622,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_f3__int__arrayOf_int__int@jsvarargs.Main.SubMain))
+(elem declare func $m_f3__int__arrayOf_int__int@jsvarargs.Main.SubMain)
 
 ;;; INTERFACE  GenericFunction
 ;;; Code for jsvarargs.QualifiedSuperMethodCall
@@ -675,7 +663,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@jsvarargs.QualifiedSuperMethodCall))
 
 ;;; CLASS  InnerClass
 (type $jsvarargs.QualifiedSuperMethodCall.InnerClass (struct
@@ -704,7 +691,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@jsvarargs.QualifiedSuperMethodCall.InnerClass))
 
 ;;; void InnerClass.test()
 (func $m_test__void@jsvarargs.QualifiedSuperMethodCall.InnerClass
@@ -730,7 +716,7 @@
   )
  )
 )
-(global funcref (ref.func $m_test__void@jsvarargs.QualifiedSuperMethodCall.InnerClass))
+(elem declare func $m_test__void@jsvarargs.QualifiedSuperMethodCall.InnerClass)
 
 ;;; Code for jsvarargs.Main [vtable]
  (global.set $jsvarargs.Main.vtable (struct.new_with_rtt $jsvarargs.Main.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_f3__int__arrayOf_int__int@jsvarargs.Main) (ref.func $m_f4__arrayOf_int__int@jsvarargs.Main) (ref.func $m_testStaticMethodNotFirst__void@jsvarargs.Main) (ref.func $m_testStaticMethodFirst__void@jsvarargs.Main) (ref.func $m_testInstanceMethodNotFirst__void@jsvarargs.Main) (ref.func $m_testInstanceMethodFirst__void@jsvarargs.Main) (ref.func $m_testJsFunction__void@jsvarargs.Main) (ref.func $m_testSideEffect__void@jsvarargs.Main) (ref.func $m_testNullJsVarargs__void@jsvarargs.Main) (ref.func $m_testGenericJsFunctionWithVarags__void@jsvarargs.Main) (rtt.canon $jsvarargs.Main.vtable)))

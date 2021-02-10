@@ -30,7 +30,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@staticfieldaccesslevels.StaticFieldAccessLevels))
 
 ;;; int StaticFieldAccessLevels.test()
 (func $m_test__int@staticfieldaccesslevels.StaticFieldAccessLevels
@@ -48,7 +47,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_test__int@staticfieldaccesslevels.StaticFieldAccessLevels))
+(elem declare func $m_test__int@staticfieldaccesslevels.StaticFieldAccessLevels)
 
 ;;; Code for staticfieldaccesslevels.StaticFieldAccessLevels [vtable]
  (global.set $staticfieldaccesslevels.StaticFieldAccessLevels.vtable (struct.new_with_rtt $staticfieldaccesslevels.StaticFieldAccessLevels.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__int@staticfieldaccesslevels.StaticFieldAccessLevels) (rtt.canon $staticfieldaccesslevels.StaticFieldAccessLevels.vtable)))

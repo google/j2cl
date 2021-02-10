@@ -28,7 +28,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__java_lang_Object__java_lang_Object__void@genericconstructor.GenericConstructor))
 
 ;;; GenericConstructor(T t)
 (func $m_<init>__java_lang_Object__void@genericconstructor.GenericConstructor
@@ -43,7 +42,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__java_lang_Object__void@genericconstructor.GenericConstructor))
 
 ;;; void GenericConstructor.test()
 (func $m_test__void@genericconstructor.GenericConstructor
@@ -59,7 +57,7 @@
   )
  )
 )
-(global funcref (ref.func $m_test__void@genericconstructor.GenericConstructor))
+(elem declare func $m_test__void@genericconstructor.GenericConstructor)
 
 ;;; Code for genericconstructor.GenericConstructor [vtable]
  (global.set $genericconstructor.GenericConstructor.vtable (struct.new_with_rtt $genericconstructor.GenericConstructor.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__void@genericconstructor.GenericConstructor) (rtt.canon $genericconstructor.GenericConstructor.vtable)))

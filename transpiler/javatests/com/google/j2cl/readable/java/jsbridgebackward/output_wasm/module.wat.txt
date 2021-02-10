@@ -28,7 +28,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_jsbridgebackward@jsbridgebackward.A))
 
 ;;; int A.foo(int a)
 (func $m_foo__int__int@jsbridgebackward.A
@@ -47,7 +46,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_foo__int__int@jsbridgebackward.A))
+(elem declare func $m_foo__int__int@jsbridgebackward.A)
 
 ;;; CLASS  InterfaceImpl
 (type $jsbridgebackward.InterfaceImpl (struct
@@ -75,7 +74,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@jsbridgebackward.InterfaceImpl))
 
 ;;; Code for jsbridgebackward.A [vtable]
  (global.set $jsbridgebackward.A.vtable (struct.new_with_rtt $jsbridgebackward.A.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__int__int@jsbridgebackward.A) (rtt.canon $jsbridgebackward.A.vtable)))

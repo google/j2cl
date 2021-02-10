@@ -31,7 +31,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@strings.Strings))
 
 ;;; void Strings.test()
 (func $m_test__void@strings.Strings
@@ -114,7 +113,7 @@
   )
  )
 )
-(global funcref (ref.func $m_test__void@strings.Strings))
+(elem declare func $m_test__void@strings.Strings)
 
 ;;; CLASS  StringHolder
 (type $strings.Strings.StringHolder (struct
@@ -142,7 +141,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$p_strings_Strings_StringHolder@strings.Strings.StringHolder))
 
 ;;; Code for strings.Strings [vtable]
  (global.set $strings.Strings.vtable (struct.new_with_rtt $strings.Strings.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__void@strings.Strings) (rtt.canon $strings.Strings.vtable)))

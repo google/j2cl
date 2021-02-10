@@ -43,7 +43,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@lambdas.Lambdas))
 
 ;;; int Lambdas.call(FunctionalInterface intf, int n)
 (func $m_call__lambdas_Lambdas_FunctionalInterface__int__int@lambdas.Lambdas
@@ -63,7 +62,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_call__lambdas_Lambdas_FunctionalInterface__int__int@lambdas.Lambdas))
+(elem declare func $m_call__lambdas_Lambdas_FunctionalInterface__int__int@lambdas.Lambdas)
 
 ;;; void Lambdas.testLambdaExpressionStyle()
 (func $m_testLambdaExpressionStyle__void@lambdas.Lambdas
@@ -78,7 +77,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testLambdaExpressionStyle__void@lambdas.Lambdas))
+(elem declare func $m_testLambdaExpressionStyle__void@lambdas.Lambdas)
 
 ;;; void Lambdas.testLambdaBlockStyle()
 (func $m_testLambdaBlockStyle__void@lambdas.Lambdas
@@ -93,7 +92,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testLambdaBlockStyle__void@lambdas.Lambdas))
+(elem declare func $m_testLambdaBlockStyle__void@lambdas.Lambdas)
 
 ;;; void Lambdas.testLambdaCaptureField()
 (func $m_testLambdaCaptureField__void@lambdas.Lambdas
@@ -108,7 +107,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testLambdaCaptureField__void@lambdas.Lambdas))
+(elem declare func $m_testLambdaCaptureField__void@lambdas.Lambdas)
 
 ;;; void Lambdas.testLambdaCaptureLocal()
 (func $m_testLambdaCaptureLocal__void@lambdas.Lambdas
@@ -127,7 +126,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testLambdaCaptureLocal__void@lambdas.Lambdas))
+(elem declare func $m_testLambdaCaptureLocal__void@lambdas.Lambdas)
 
 ;;; void Lambdas.testLambdaCaptureFieldAndLocal()
 (func $m_testLambdaCaptureFieldAndLocal__void@lambdas.Lambdas
@@ -147,7 +146,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testLambdaCaptureFieldAndLocal__void@lambdas.Lambdas))
+(elem declare func $m_testLambdaCaptureFieldAndLocal__void@lambdas.Lambdas)
 
 ;;; void Lambdas.funOuter()
 (func $m_funOuter__void@lambdas.Lambdas
@@ -159,7 +158,7 @@
   )
  )
 )
-(global funcref (ref.func $m_funOuter__void@lambdas.Lambdas))
+(elem declare func $m_funOuter__void@lambdas.Lambdas)
 
 ;;; void Lambdas.testLambdaCallOuterFunction()
 (func $m_testLambdaCallOuterFunction__void@lambdas.Lambdas
@@ -174,7 +173,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testLambdaCallOuterFunction__void@lambdas.Lambdas))
+(elem declare func $m_testLambdaCallOuterFunction__void@lambdas.Lambdas)
 
 ;;; void Lambdas.testLambdaInStaticContext()
 (func $m_testLambdaInStaticContext__void@lambdas.Lambdas
@@ -188,7 +187,6 @@
   )
  )
 )
-(global funcref (ref.func $m_testLambdaInStaticContext__void@lambdas.Lambdas))
 
 ;;; void Lambdas.testInstanceMethodTypeVariableThroughLambda()
 (func $m_testInstanceMethodTypeVariableThroughLambda__void@lambdas.Lambdas
@@ -205,7 +203,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testInstanceMethodTypeVariableThroughLambda__void@lambdas.Lambdas))
+(elem declare func $m_testInstanceMethodTypeVariableThroughLambda__void@lambdas.Lambdas)
 
 ;;; void Lambdas.testStaticMethodTypeVariableThroughLambda()
 (func $m_testStaticMethodTypeVariableThroughLambda__void@lambdas.Lambdas
@@ -219,7 +217,6 @@
   )
  )
 )
-(global funcref (ref.func $m_testStaticMethodTypeVariableThroughLambda__void@lambdas.Lambdas))
 
 ;;; T Lambdas.callWithTypeVariable(GenericFunctionalInterface<T> intf, T e)
 (func $m_callWithTypeVariable__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Object__java_lang_Object@lambdas.Lambdas
@@ -239,7 +236,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_callWithTypeVariable__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Object__java_lang_Object@lambdas.Lambdas))
+(elem declare func $m_callWithTypeVariable__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Object__java_lang_Object@lambdas.Lambdas)
 
 ;;; Error Lambdas.callParameterized(GenericFunctionalInterface<Error> intf, Error e)
 (func $m_callParameterized__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Error__java_lang_Error@lambdas.Lambdas
@@ -259,7 +256,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_callParameterized__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Error__java_lang_Error@lambdas.Lambdas))
+(elem declare func $m_callParameterized__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Error__java_lang_Error@lambdas.Lambdas)
 
 ;;; Enum<T> Lambdas.callTypeVariableWithBounds(GenericFunctionalInterface<Enum<T>> intf, Enum<T> e)
 (func $m_callTypeVariableWithBounds__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Enum__java_lang_Enum@lambdas.Lambdas
@@ -276,7 +273,6 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_callTypeVariableWithBounds__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Enum__java_lang_Enum@lambdas.Lambdas))
 
 ;;; GenericFunctionalInterface<T> Lambdas.callWithBiFunction(BiFunction<T, String, Double> fn)
 (func $m_callWithBiFunction__lambdas_Lambdas_BiFunction__lambdas_Lambdas_GenericFunctionalInterface_$pp_lambdas@lambdas.Lambdas
@@ -295,7 +291,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_callWithBiFunction__lambdas_Lambdas_BiFunction__lambdas_Lambdas_GenericFunctionalInterface_$pp_lambdas@lambdas.Lambdas))
+(elem declare func $m_callWithBiFunction__lambdas_Lambdas_BiFunction__lambdas_Lambdas_GenericFunctionalInterface_$pp_lambdas@lambdas.Lambdas)
 
 ;;; void Lambdas.testLambdaWithGenerics()
 (func $m_testLambdaWithGenerics__void@lambdas.Lambdas
@@ -325,7 +321,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testLambdaWithGenerics__void@lambdas.Lambdas))
+(elem declare func $m_testLambdaWithGenerics__void@lambdas.Lambdas)
 
 ;;; Object Lambdas.m()
 (func $m_m__java_lang_Object@lambdas.Lambdas
@@ -340,7 +336,6 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_m__java_lang_Object@lambdas.Lambdas))
 
 ;;; void Lambdas.testLambdaCallingStaticMethod()
 (func $m_testLambdaCallingStaticMethod__void@lambdas.Lambdas
@@ -354,7 +349,6 @@
   )
  )
 )
-(global funcref (ref.func $m_testLambdaCallingStaticMethod__void@lambdas.Lambdas))
 
 ;;; void Lambdas.testLambdaReturningVoidAsExpression()
 (func $m_testLambdaReturningVoidAsExpression__void@lambdas.Lambdas
@@ -370,7 +364,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testLambdaReturningVoidAsExpression__void@lambdas.Lambdas))
+(elem declare func $m_testLambdaReturningVoidAsExpression__void@lambdas.Lambdas)
 
 ;;; void Lambdas.testAnonymousInsideLambda()
 (func $m_testAnonymousInsideLambda__void@lambdas.Lambdas
@@ -386,7 +380,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testAnonymousInsideLambda__void@lambdas.Lambdas))
+(elem declare func $m_testAnonymousInsideLambda__void@lambdas.Lambdas)
 
 ;;; GenericJsFunction<E, E> Lambdas.identity()
 (func $m_identity__lambdas_Lambdas_GenericJsFunction@lambdas.Lambdas
@@ -410,7 +404,6 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_identity__lambdas_Lambdas_GenericJsFunction@lambdas.Lambdas))
 
 ;;; void Lambdas.testJsInteropLambdas()
 (func $m_testJsInteropLambdas__void@lambdas.Lambdas
@@ -445,7 +438,6 @@
   )
  )
 )
-(global funcref (ref.func $m_testJsInteropLambdas__void@lambdas.Lambdas))
 
 ;;; void Lambdas.testIntersectionTyping()
 (func $m_testIntersectionTyping__void@lambdas.Lambdas
@@ -465,7 +457,6 @@
   )
  )
 )
-(global funcref (ref.func $m_testIntersectionTyping__void@lambdas.Lambdas))
 
 ;;; void Lambdas.testDefaultMethodsInIntersectionAdaptor()
 (func $m_testDefaultMethodsInIntersectionAdaptor__void@lambdas.Lambdas
@@ -483,7 +474,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testDefaultMethodsInIntersectionAdaptor__void@lambdas.Lambdas))
+(elem declare func $m_testDefaultMethodsInIntersectionAdaptor__void@lambdas.Lambdas)
 
 ;;; INTERFACE  FunctionalInterface
 
@@ -516,7 +507,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_lambdas@lambdas.Lambdas.1))
 
 ;;; Functional<T> <anonymous> implements Functional<T>.wrap(Functional<T> f)
 (func $m_wrap__lambdas_Lambdas_Functional__lambdas_Lambdas_Functional@lambdas.Lambdas.1
@@ -535,7 +525,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_wrap__lambdas_Lambdas_Functional__lambdas_Lambdas_Functional@lambdas.Lambdas.1))
+(elem declare func $m_wrap__lambdas_Lambdas_Functional__lambdas_Lambdas_Functional@lambdas.Lambdas.1)
 
 ;;; CLASS  <anonymous> implements Functional<T>
 (type $lambdas.Lambdas.2 (struct
@@ -563,7 +553,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_lambdas@lambdas.Lambdas.2))
 
 ;;; Functional<T> <anonymous> implements Functional<T>.wrap(Functional<T> f)
 (func $m_wrap__lambdas_Lambdas_Functional__lambdas_Lambdas_Functional@lambdas.Lambdas.2
@@ -582,7 +571,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_wrap__lambdas_Lambdas_Functional__lambdas_Lambdas_Functional@lambdas.Lambdas.2))
+(elem declare func $m_wrap__lambdas_Lambdas_Functional__lambdas_Lambdas_Functional@lambdas.Lambdas.2)
 
 ;;; INTERFACE  GenericFunctionalInterface
 
@@ -605,7 +594,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_andThen__lambdas_Lambdas_Function__lambdas_Lambdas_BiFunction@lambdas.Lambdas.BiFunction))
+(elem declare func $m_andThen__lambdas_Lambdas_Function__lambdas_Lambdas_BiFunction@lambdas.Lambdas.BiFunction)
 
 ;;; INTERFACE  Function
 
@@ -623,7 +612,6 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_identity__lambdas_Lambdas_Function@lambdas.Lambdas.Function))
 
 ;;; INTERFACE  FunctionalInterfaceWithMethodReturningVoid
 
@@ -653,7 +641,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_lambdas@lambdas.Lambdas.3))
 
 ;;; CLASS  Parent
 (type $lambdas.Lambdas.Parent (struct
@@ -682,7 +669,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$p_lambdas_Lambdas_Parent@lambdas.Lambdas.Parent))
 
 ;;; void Parent.funInParent()
 (func $m_funInParent__void@lambdas.Lambdas.Parent
@@ -694,7 +680,7 @@
   )
  )
 )
-(global funcref (ref.func $m_funInParent__void@lambdas.Lambdas.Parent))
+(elem declare func $m_funInParent__void@lambdas.Lambdas.Parent)
 
 ;;; CLASS  LambdaInSubClass
 (type $lambdas.Lambdas.LambdaInSubClass (struct
@@ -724,7 +710,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$p_lambdas_Lambdas_LambdaInSubClass@lambdas.Lambdas.LambdaInSubClass))
 
 ;;; void LambdaInSubClass.testLambdaInSubclass()
 (func $m_testLambdaInSubclass__void@lambdas.Lambdas.LambdaInSubClass
@@ -742,7 +727,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testLambdaInSubclass__void@lambdas.Lambdas.LambdaInSubClass))
+(elem declare func $m_testLambdaInSubclass__void@lambdas.Lambdas.LambdaInSubClass)
 
 ;;; INTERFACE  GenericJsFunction
 
@@ -776,7 +761,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$p_lambdas_Lambdas_IdentityFunction@lambdas.Lambdas.IdentityFunction))
 
 ;;; Object IdentityFunction.apply(Object o)
 (func $m_apply__java_lang_Object__java_lang_Object@lambdas.Lambdas.IdentityFunction
@@ -795,7 +779,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_apply__java_lang_Object__java_lang_Object@lambdas.Lambdas.IdentityFunction))
+(elem declare func $m_apply__java_lang_Object__java_lang_Object@lambdas.Lambdas.IdentityFunction)
 
 ;;; INTERFACE  Equals
 
@@ -813,7 +797,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_get__java_lang_Object@lambdas.Lambdas.Equals))
+(elem declare func $m_get__java_lang_Object@lambdas.Lambdas.Equals)
 
 ;;; INTERFACE  JsSupplier
 
@@ -828,7 +812,7 @@
   )
  )
 )
-(global funcref (ref.func $m_method__java_lang_Object__void@lambdas.Lambdas.JustADefaultT))
+(elem declare func $m_method__java_lang_Object__void@lambdas.Lambdas.JustADefaultT)
 
 ;;; INTERFACE  JustADefaultS
 
@@ -841,7 +825,7 @@
   )
  )
 )
-(global funcref (ref.func $m_method__java_lang_Object__void@lambdas.Lambdas.JustADefaultS))
+(elem declare func $m_method__java_lang_Object__void@lambdas.Lambdas.JustADefaultS)
 
 ;;; INTERFACE  MarkerWithDefaultMethod
 
@@ -853,7 +837,7 @@
   )
  )
 )
-(global funcref (ref.func $m_defaultMethod__void@lambdas.Lambdas.MarkerWithDefaultMethod))
+(elem declare func $m_defaultMethod__void@lambdas.Lambdas.MarkerWithDefaultMethod)
 
 ;;; Code for lambdas.Lambdas [vtable]
  (global.set $lambdas.Lambdas.vtable (struct.new_with_rtt $lambdas.Lambdas.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_call__lambdas_Lambdas_FunctionalInterface__int__int@lambdas.Lambdas) (ref.func $m_testLambdaExpressionStyle__void@lambdas.Lambdas) (ref.func $m_testLambdaBlockStyle__void@lambdas.Lambdas) (ref.func $m_testLambdaCaptureField__void@lambdas.Lambdas) (ref.func $m_testLambdaCaptureLocal__void@lambdas.Lambdas) (ref.func $m_testLambdaCaptureFieldAndLocal__void@lambdas.Lambdas) (ref.func $m_funOuter__void@lambdas.Lambdas) (ref.func $m_testLambdaCallOuterFunction__void@lambdas.Lambdas) (ref.func $m_testInstanceMethodTypeVariableThroughLambda__void@lambdas.Lambdas) (ref.func $m_callWithTypeVariable__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Object__java_lang_Object@lambdas.Lambdas) (ref.func $m_callParameterized__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Error__java_lang_Error@lambdas.Lambdas) (ref.func $m_callWithBiFunction__lambdas_Lambdas_BiFunction__lambdas_Lambdas_GenericFunctionalInterface_$pp_lambdas@lambdas.Lambdas) (ref.func $m_testLambdaWithGenerics__void@lambdas.Lambdas) (ref.func $m_testLambdaReturningVoidAsExpression__void@lambdas.Lambdas) (ref.func $m_testAnonymousInsideLambda__void@lambdas.Lambdas) (ref.func $m_testDefaultMethodsInIntersectionAdaptor__void@lambdas.Lambdas) (rtt.canon $lambdas.Lambdas.vtable)))

@@ -37,7 +37,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@arithmeticexpressions.ArithmeticExpressions))
 
 ;;; void ArithmeticExpressions.testCoercions()
 (func $m_testCoercions__void@arithmeticexpressions.ArithmeticExpressions
@@ -85,7 +84,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testCoercions__void@arithmeticexpressions.ArithmeticExpressions))
+(elem declare func $m_testCoercions__void@arithmeticexpressions.ArithmeticExpressions)
 
 ;;; void ArithmeticExpressions.testPrimitives()
 (func $m_testPrimitives__void@arithmeticexpressions.ArithmeticExpressions
@@ -178,7 +177,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testPrimitives__void@arithmeticexpressions.ArithmeticExpressions))
+(elem declare func $m_testPrimitives__void@arithmeticexpressions.ArithmeticExpressions)
 
 ;;; void ArithmeticExpressions.testCompoundArray()
 (func $m_testCompoundArray__void@arithmeticexpressions.ArithmeticExpressions
@@ -319,7 +318,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testCompoundArray__void@arithmeticexpressions.ArithmeticExpressions))
+(elem declare func $m_testCompoundArray__void@arithmeticexpressions.ArithmeticExpressions)
 
 ;;; long[] ArithmeticExpressions.getLongArray()
 (func $m_getLongArray__arrayOf_long@arithmeticexpressions.ArithmeticExpressions
@@ -334,7 +333,6 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_getLongArray__arrayOf_long@arithmeticexpressions.ArithmeticExpressions))
 
 ;;; void ArithmeticExpressions.testCompoundBoxedTypes()
 (func $m_testCompoundBoxedTypes__void@arithmeticexpressions.ArithmeticExpressions
@@ -449,7 +447,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testCompoundBoxedTypes__void@arithmeticexpressions.ArithmeticExpressions))
+(elem declare func $m_testCompoundBoxedTypes__void@arithmeticexpressions.ArithmeticExpressions)
 
 ;;; Integer ArithmeticExpressions.getInteger()
 (func $m_getInteger__java_lang_Integer@arithmeticexpressions.ArithmeticExpressions
@@ -464,7 +462,6 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_getInteger__java_lang_Integer@arithmeticexpressions.ArithmeticExpressions))
 
 ;;; void ArithmeticExpressions.testSideEffect()
 (func $m_testSideEffect__void@arithmeticexpressions.ArithmeticExpressions
@@ -481,7 +478,6 @@
   )
  )
 )
-(global funcref (ref.func $m_testSideEffect__void@arithmeticexpressions.ArithmeticExpressions))
 
 ;;; ArithmeticExpressions ArithmeticExpressions.getWithSideEffect()
 (func $m_getWithSideEffect__arithmeticexpressions_ArithmeticExpressions@arithmeticexpressions.ArithmeticExpressions
@@ -496,7 +492,6 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_getWithSideEffect__arithmeticexpressions_ArithmeticExpressions@arithmeticexpressions.ArithmeticExpressions))
 
 ;;; void ArithmeticExpressions.testExtendedOperands()
 (func $m_testExtendedOperands__void@arithmeticexpressions.ArithmeticExpressions
@@ -537,7 +532,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testExtendedOperands__void@arithmeticexpressions.ArithmeticExpressions))
+(elem declare func $m_testExtendedOperands__void@arithmeticexpressions.ArithmeticExpressions)
 
 ;;; CLASS  Ref
 (type $arithmeticexpressions.ArithmeticExpressions.1Ref (struct
@@ -566,7 +561,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_arithmeticexpressions@arithmeticexpressions.ArithmeticExpressions.1Ref))
 
 ;;; Code for arithmeticexpressions.ArithmeticExpressions [vtable]
  (global.set $arithmeticexpressions.ArithmeticExpressions.vtable (struct.new_with_rtt $arithmeticexpressions.ArithmeticExpressions.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_testCoercions__void@arithmeticexpressions.ArithmeticExpressions) (ref.func $m_testPrimitives__void@arithmeticexpressions.ArithmeticExpressions) (ref.func $m_testCompoundArray__void@arithmeticexpressions.ArithmeticExpressions) (ref.func $m_testCompoundBoxedTypes__void@arithmeticexpressions.ArithmeticExpressions) (ref.func $m_testExtendedOperands__void@arithmeticexpressions.ArithmeticExpressions) (rtt.canon $arithmeticexpressions.ArithmeticExpressions.vtable)))

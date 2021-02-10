@@ -31,7 +31,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_devirtualizedsupermethodcall@devirtualizedsupermethodcall.SubNumber))
 
 ;;; int SubNumber.intValue()
 (func $m_intValue__int@devirtualizedsupermethodcall.SubNumber
@@ -49,7 +48,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_intValue__int@devirtualizedsupermethodcall.SubNumber))
+(elem declare func $m_intValue__int@devirtualizedsupermethodcall.SubNumber)
 
 ;;; long SubNumber.longValue()
 (func $m_longValue__long@devirtualizedsupermethodcall.SubNumber
@@ -67,7 +66,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_longValue__long@devirtualizedsupermethodcall.SubNumber))
+(elem declare func $m_longValue__long@devirtualizedsupermethodcall.SubNumber)
 
 ;;; float SubNumber.floatValue()
 (func $m_floatValue__float@devirtualizedsupermethodcall.SubNumber
@@ -85,7 +84,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_floatValue__float@devirtualizedsupermethodcall.SubNumber))
+(elem declare func $m_floatValue__float@devirtualizedsupermethodcall.SubNumber)
 
 ;;; double SubNumber.doubleValue()
 (func $m_doubleValue__double@devirtualizedsupermethodcall.SubNumber
@@ -103,7 +102,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_doubleValue__double@devirtualizedsupermethodcall.SubNumber))
+(elem declare func $m_doubleValue__double@devirtualizedsupermethodcall.SubNumber)
 
 ;;; CLASS  FooCallsSuperObjectMethod
 (type $devirtualizedsupermethodcall.FooCallsSuperObjectMethod (struct
@@ -130,7 +129,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_devirtualizedsupermethodcall@devirtualizedsupermethodcall.FooCallsSuperObjectMethod))
 
 ;;; int FooCallsSuperObjectMethod.hashCode()
 (func $m_hashCode__int@devirtualizedsupermethodcall.FooCallsSuperObjectMethod
@@ -148,7 +146,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_hashCode__int@devirtualizedsupermethodcall.FooCallsSuperObjectMethod))
+(elem declare func $m_hashCode__int@devirtualizedsupermethodcall.FooCallsSuperObjectMethod)
 
 ;;; CLASS  Main
 (type $devirtualizedsupermethodcall.Main (struct
@@ -176,7 +174,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@devirtualizedsupermethodcall.Main))
 
 ;;; void Main.main()
 (func $m_main__void@devirtualizedsupermethodcall.Main
@@ -208,7 +205,7 @@
   )
  )
 )
-(global funcref (ref.func $m_main__void@devirtualizedsupermethodcall.Main))
+(elem declare func $m_main__void@devirtualizedsupermethodcall.Main)
 
 ;;; Code for devirtualizedsupermethodcall.SubNumber [vtable]
  (global.set $devirtualizedsupermethodcall.SubNumber.vtable (struct.new_with_rtt $devirtualizedsupermethodcall.SubNumber.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_byteValue__byte@java.lang.Number) (ref.func $m_doubleValue__double@devirtualizedsupermethodcall.SubNumber) (ref.func $m_floatValue__float@devirtualizedsupermethodcall.SubNumber) (ref.func $m_intValue__int@devirtualizedsupermethodcall.SubNumber) (ref.func $m_longValue__long@devirtualizedsupermethodcall.SubNumber) (ref.func $m_shortValue__short@java.lang.Number) (rtt.canon $devirtualizedsupermethodcall.SubNumber.vtable)))

@@ -26,7 +26,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@importglobaljstypes.Date))
 
 ;;; double Date.now(double x)
 (func $m_now__double__double@importglobaljstypes.Date
@@ -42,7 +41,6 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_now__double__double@importglobaljstypes.Date))
 
 ;;; NativeDate Date.copy(NativeDate d)
 (func $m_copy__importglobaljstypes_Date_NativeDate__importglobaljstypes_Date_NativeDate@importglobaljstypes.Date
@@ -61,7 +59,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_copy__importglobaljstypes_Date_NativeDate__importglobaljstypes_Date_NativeDate@importglobaljstypes.Date))
+(elem declare func $m_copy__importglobaljstypes_Date_NativeDate__importglobaljstypes_Date_NativeDate@importglobaljstypes.Date)
 
 ;;; CLASS  NativeDate
 (type $importglobaljstypes.Date.NativeDate (struct
@@ -88,7 +86,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@importglobaljstypes.Date.NativeDate))
 
 ;;; double NativeDate.now()
 (func $m_now__double@importglobaljstypes.Date.NativeDate
@@ -100,7 +97,6 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_now__double@importglobaljstypes.Date.NativeDate))
 ;;; Code for importglobaljstypes.Number
 
 ;;; CLASS  Number
@@ -129,7 +125,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@importglobaljstypes.Number))
 
 ;;; boolean Number.fun(double x)
 (func $m_fun__double__boolean@importglobaljstypes.Number
@@ -142,7 +137,6 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_fun__double__boolean@importglobaljstypes.Number))
 
 ;;; boolean Number.test(double x)
 (func $m_test__double__boolean@importglobaljstypes.Number
@@ -158,7 +152,6 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_test__double__boolean@importglobaljstypes.Number))
 
 ;;; NativeFunction<String> Number.getFromCharCodeFunction()
 (func $m_getFromCharCodeFunction__importglobaljstypes_Number_NativeFunction@importglobaljstypes.Number
@@ -170,7 +163,6 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_getFromCharCodeFunction__importglobaljstypes_Number_NativeFunction@importglobaljstypes.Number))
 
 ;;; String Number.fromCharCode(int[] array)
 (func $m_fromCharCode__arrayOf_int__java_lang_String@importglobaljstypes.Number
@@ -191,7 +183,6 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_fromCharCode__arrayOf_int__java_lang_String@importglobaljstypes.Number))
 
 ;;; MyLiteralType Number.testJsDocForLiteralType(MyLiteralType a)
 (func $m_testJsDocForLiteralType__importglobaljstypes_Number_MyLiteralType__importglobaljstypes_Number_MyLiteralType@importglobaljstypes.Number
@@ -210,7 +201,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_testJsDocForLiteralType__importglobaljstypes_Number_MyLiteralType__importglobaljstypes_Number_MyLiteralType@importglobaljstypes.Number))
+(elem declare func $m_testJsDocForLiteralType__importglobaljstypes_Number_MyLiteralType__importglobaljstypes_Number_MyLiteralType@importglobaljstypes.Number)
 
 ;;; INTERFACE  NativeFunction
 

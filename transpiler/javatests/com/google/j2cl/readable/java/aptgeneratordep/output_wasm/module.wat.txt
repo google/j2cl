@@ -25,7 +25,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@aptgeneratordep.Dummy))
 ;;; Code for aptgeneratordep.Foo
 
 ;;; CLASS  Foo
@@ -53,7 +52,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@aptgeneratordep.Foo))
 
 ;;; String Foo.toString()
 (func $m_toString__java_lang_String@aptgeneratordep.Foo
@@ -71,7 +69,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_toString__java_lang_String@aptgeneratordep.Foo))
+(elem declare func $m_toString__java_lang_String@aptgeneratordep.Foo)
 
 ;;; Code for aptgeneratordep.Dummy [vtable]
  (global.set $aptgeneratordep.Dummy.vtable (struct.new_with_rtt $aptgeneratordep.Dummy.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $aptgeneratordep.Dummy.vtable)))

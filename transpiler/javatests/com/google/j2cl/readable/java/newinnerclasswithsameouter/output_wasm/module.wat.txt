@@ -25,7 +25,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@newinnerclasswithsameouter.NewInnerClassWithSameOuter))
 
 ;;; CLASS  A
 (type $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A (struct
@@ -54,7 +53,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A))
 
 ;;; void A.test()
 (func $m_test__void@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A
@@ -70,7 +68,7 @@
   )
  )
 )
-(global funcref (ref.func $m_test__void@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A))
+(elem declare func $m_test__void@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A)
 
 ;;; CLASS  B
 (type $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B (struct
@@ -98,7 +96,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B))
 
 ;;; CLASS  C
 (type $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C (struct
@@ -126,7 +123,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$p_newinnerclasswithsameouter_NewInnerClassWithSameOuter_C@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C))
 
 ;;; Code for newinnerclasswithsameouter.NewInnerClassWithSameOuter [vtable]
  (global.set $newinnerclasswithsameouter.NewInnerClassWithSameOuter.vtable (struct.new_with_rtt $newinnerclasswithsameouter.NewInnerClassWithSameOuter.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $newinnerclasswithsameouter.NewInnerClassWithSameOuter.vtable)))

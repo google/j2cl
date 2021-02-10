@@ -25,7 +25,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@jsinnerclass.Main))
 
 ;;; void Main.main(String... args)
 (func $m_main__arrayOf_java_lang_String__void@jsinnerclass.Main
@@ -38,7 +37,6 @@
   )
  )
 )
-(global funcref (ref.func $m_main__arrayOf_java_lang_String__void@jsinnerclass.Main))
 
 ;;; CLASS  Outer
 (type $jsinnerclass.Main.Outer (struct
@@ -67,7 +65,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_jsinnerclass@jsinnerclass.Main.Outer))
 
 ;;; int Outer.method()
 (func $m_method__int@jsinnerclass.Main.Outer
@@ -90,7 +87,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_method__int@jsinnerclass.Main.Outer))
+(elem declare func $m_method__int@jsinnerclass.Main.Outer)
 
 ;;; CLASS  Inner
 (type $jsinnerclass.Main.Outer.Inner (struct
@@ -122,7 +119,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@jsinnerclass.Main.Outer.Inner))
 
 ;;; int Inner.getB()
 (func $m_getB__int@jsinnerclass.Main.Outer.Inner
@@ -140,7 +136,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_getB__int@jsinnerclass.Main.Outer.Inner))
+(elem declare func $m_getB__int@jsinnerclass.Main.Outer.Inner)
 
 ;;; Code for jsinnerclass.Main [vtable]
  (global.set $jsinnerclass.Main.vtable (struct.new_with_rtt $jsinnerclass.Main.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $jsinnerclass.Main.vtable)))

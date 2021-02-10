@@ -27,7 +27,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_innerclassinheritance@innerclassinheritance.ParentOuter))
 
 ;;; void ParentOuter.funInParentOuter()
 (func $m_funInParentOuter__void@innerclassinheritance.ParentOuter
@@ -39,7 +38,7 @@
   )
  )
 )
-(global funcref (ref.func $m_funInParentOuter__void@innerclassinheritance.ParentOuter))
+(elem declare func $m_funInParentOuter__void@innerclassinheritance.ParentOuter)
 
 ;;; CLASS  ParentInner
 (type $innerclassinheritance.ParentInner (struct
@@ -68,7 +67,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_innerclassinheritance@innerclassinheritance.ParentInner))
 
 ;;; void ParentInner.funInParentInner()
 (func $m_funInParentInner__void@innerclassinheritance.ParentInner
@@ -80,7 +78,7 @@
   )
  )
 )
-(global funcref (ref.func $m_funInParentInner__void@innerclassinheritance.ParentInner))
+(elem declare func $m_funInParentInner__void@innerclassinheritance.ParentInner)
 
 ;;; CLASS  ChildClass
 (type $innerclassinheritance.ChildClass (struct
@@ -112,7 +110,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@innerclassinheritance.ChildClass))
 
 ;;; void ChildClass.funInOuter()
 (func $m_funInOuter__void@innerclassinheritance.ChildClass
@@ -124,7 +121,7 @@
   )
  )
 )
-(global funcref (ref.func $m_funInOuter__void@innerclassinheritance.ChildClass))
+(elem declare func $m_funInOuter__void@innerclassinheritance.ChildClass)
 
 ;;; void ChildClass.testLocalClass()
 (func $m_testLocalClass__void@innerclassinheritance.ChildClass
@@ -144,7 +141,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testLocalClass__void@innerclassinheritance.ChildClass))
+(elem declare func $m_testLocalClass__void@innerclassinheritance.ChildClass)
 
 ;;; CLASS  InnerClass
 (type $innerclassinheritance.ChildClass.InnerClass (struct
@@ -177,7 +174,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_innerclassinheritance@innerclassinheritance.ChildClass.InnerClass))
 
 ;;; void InnerClass.funInInner()
 (func $m_funInInner__void@innerclassinheritance.ChildClass.InnerClass
@@ -189,7 +185,7 @@
   )
  )
 )
-(global funcref (ref.func $m_funInInner__void@innerclassinheritance.ChildClass.InnerClass))
+(elem declare func $m_funInInner__void@innerclassinheritance.ChildClass.InnerClass)
 
 ;;; int InnerClass.testInnerClass()
 (func $m_testInnerClass__int@innerclassinheritance.ChildClass.InnerClass
@@ -241,7 +237,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_testInnerClass__int@innerclassinheritance.ChildClass.InnerClass))
+(elem declare func $m_testInnerClass__int@innerclassinheritance.ChildClass.InnerClass)
 
 ;;; CLASS  LocalClass
 (type $innerclassinheritance.ChildClass.1LocalClass (struct
@@ -276,7 +272,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_innerclassinheritance@innerclassinheritance.ChildClass.1LocalClass))
 
 ;;; void LocalClass.funInParentOuter()
 (func $m_funInParentOuter__void@innerclassinheritance.ChildClass.1LocalClass
@@ -288,7 +283,7 @@
   )
  )
 )
-(global funcref (ref.func $m_funInParentOuter__void@innerclassinheritance.ChildClass.1LocalClass))
+(elem declare func $m_funInParentOuter__void@innerclassinheritance.ChildClass.1LocalClass)
 
 ;;; void LocalClass.test()
 (func $m_test__void@innerclassinheritance.ChildClass.1LocalClass
@@ -310,7 +305,7 @@
   )
  )
 )
-(global funcref (ref.func $m_test__void@innerclassinheritance.ChildClass.1LocalClass))
+(elem declare func $m_test__void@innerclassinheritance.ChildClass.1LocalClass)
 ;;; Code for innerclassinheritance.MultipleNestings
 
 ;;; CLASS  MultipleNestings
@@ -339,7 +334,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@innerclassinheritance.MultipleNestings))
 
 ;;; void MultipleNestings.funInM()
 (func $m_funInM__void@innerclassinheritance.MultipleNestings
@@ -351,7 +345,7 @@
   )
  )
 )
-(global funcref (ref.func $m_funInM__void@innerclassinheritance.MultipleNestings))
+(elem declare func $m_funInM__void@innerclassinheritance.MultipleNestings)
 
 ;;; CLASS  Parent
 (type $innerclassinheritance.MultipleNestings.Parent (struct
@@ -380,7 +374,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@innerclassinheritance.MultipleNestings.Parent))
 
 ;;; void Parent.fun()
 (func $m_fun__void@innerclassinheritance.MultipleNestings.Parent
@@ -392,7 +385,7 @@
   )
  )
 )
-(global funcref (ref.func $m_fun__void@innerclassinheritance.MultipleNestings.Parent))
+(elem declare func $m_fun__void@innerclassinheritance.MultipleNestings.Parent)
 
 ;;; CLASS  InnerClass1
 (type $innerclassinheritance.MultipleNestings.InnerClass1 (struct
@@ -423,7 +416,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@innerclassinheritance.MultipleNestings.InnerClass1))
 
 ;;; void InnerClass1.funInI1()
 (func $m_funInI1__void@innerclassinheritance.MultipleNestings.InnerClass1
@@ -435,7 +427,7 @@
   )
  )
 )
-(global funcref (ref.func $m_funInI1__void@innerclassinheritance.MultipleNestings.InnerClass1))
+(elem declare func $m_funInI1__void@innerclassinheritance.MultipleNestings.InnerClass1)
 
 ;;; CLASS  InnerClass2
 (type $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 (struct
@@ -467,7 +459,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2))
 
 ;;; void InnerClass2.funInI2()
 (func $m_funInI2__void@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2
@@ -479,7 +470,7 @@
   )
  )
 )
-(global funcref (ref.func $m_funInI2__void@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2))
+(elem declare func $m_funInI2__void@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2)
 
 ;;; void InnerClass2.test()
 (func $m_test__void@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2
@@ -507,7 +498,7 @@
   )
  )
 )
-(global funcref (ref.func $m_test__void@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2))
+(elem declare func $m_test__void@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2)
 
 ;;; Code for innerclassinheritance.ParentOuter [vtable]
  (global.set $innerclassinheritance.ParentOuter.vtable (struct.new_with_rtt $innerclassinheritance.ParentOuter.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_funInParentOuter__void@innerclassinheritance.ParentOuter) (rtt.canon $innerclassinheritance.ParentOuter.vtable)))

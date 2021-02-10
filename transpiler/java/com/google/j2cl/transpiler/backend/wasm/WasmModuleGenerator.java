@@ -254,7 +254,6 @@ public class WasmModuleGenerator {
       builder.newLine();
       builder.append("(local $return.value " + environment.getWasmType(returnTypeDescriptor) + ")");
     }
-    
 
     // Emit locals.
     for (Variable variable : collectLocals(method)) {
@@ -301,13 +300,14 @@ public class WasmModuleGenerator {
     builder.newLine();
     builder.append(")");
 
-    // TODO(b/179171068): remove the following lines once the workaround is not needed.
-    // Declare a global for a reference to the function to work around the problem in wasp.
-    builder.newLine();
-    builder.append(
-        "(global funcref (ref.func "
-            + environment.getMethodImplementationName(method.getDescriptor())
-            + "))");
+    // Declare a function that will be target of dynamic dispatch.
+    if (methodDescriptor.isPolymorphic()) {
+      builder.newLine();
+      builder.append(
+          String.format(
+              "(elem declare func %s)",
+              environment.getMethodImplementationName(method.getDescriptor())));
+    }
   }
 
   private static List<Variable> collectLocals(Method method) {

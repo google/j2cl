@@ -26,7 +26,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_simplebridgemethods@simplebridgemethods.Superclass))
 
 ;;; void Superclass.m1(T t)
 (func $m_m1__java_lang_Error__void@simplebridgemethods.Superclass
@@ -39,7 +38,7 @@
   )
  )
 )
-(global funcref (ref.func $m_m1__java_lang_Error__void@simplebridgemethods.Superclass))
+(elem declare func $m_m1__java_lang_Error__void@simplebridgemethods.Superclass)
 
 ;;; CLASS  Subclass
 (type $simplebridgemethods.Subclass (struct
@@ -68,7 +67,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_simplebridgemethods@simplebridgemethods.Subclass))
 
 ;;; void Subclass.m1(AssertionError a)
 (func $m_m1__java_lang_AssertionError__void@simplebridgemethods.Subclass
@@ -81,7 +79,7 @@
   )
  )
 )
-(global funcref (ref.func $m_m1__java_lang_AssertionError__void@simplebridgemethods.Subclass))
+(elem declare func $m_m1__java_lang_AssertionError__void@simplebridgemethods.Subclass)
 
 ;;; void Subclass.m1(Error arg0)
 (func $m_m1__java_lang_Error__void@simplebridgemethods.Subclass
@@ -96,7 +94,7 @@
   )
  )
 )
-(global funcref (ref.func $m_m1__java_lang_Error__void@simplebridgemethods.Subclass))
+(elem declare func $m_m1__java_lang_Error__void@simplebridgemethods.Subclass)
 
 ;;; CLASS  AnotherSubclass
 (type $simplebridgemethods.AnotherSubclass (struct
@@ -124,7 +122,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_simplebridgemethods@simplebridgemethods.AnotherSubclass))
 
 ;;; INTERFACE  Callable
 
@@ -154,7 +151,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_simplebridgemethods@simplebridgemethods.Task))
 
 ;;; void Task.call(T t)
 (func $m_call__java_lang_Object__void@simplebridgemethods.Task
@@ -167,7 +163,7 @@
   )
  )
 )
-(global funcref (ref.func $m_call__java_lang_Object__void@simplebridgemethods.Task))
+(elem declare func $m_call__java_lang_Object__void@simplebridgemethods.Task)
 
 ;;; CLASS  AnotherTask
 (type $simplebridgemethods.AnotherTask (struct
@@ -196,7 +192,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_simplebridgemethods@simplebridgemethods.AnotherTask))
 
 ;;; void AnotherTask.call(Superclass<T> t)
 (func $m_call__simplebridgemethods_Superclass__void@simplebridgemethods.AnotherTask
@@ -209,7 +204,7 @@
   )
  )
 )
-(global funcref (ref.func $m_call__simplebridgemethods_Superclass__void@simplebridgemethods.AnotherTask))
+(elem declare func $m_call__simplebridgemethods_Superclass__void@simplebridgemethods.AnotherTask)
 
 ;;; void AnotherTask.call(Object arg0)
 (func $m_call__java_lang_Object__void@simplebridgemethods.AnotherTask
@@ -224,7 +219,7 @@
   )
  )
 )
-(global funcref (ref.func $m_call__java_lang_Object__void@simplebridgemethods.AnotherTask))
+(elem declare func $m_call__java_lang_Object__void@simplebridgemethods.AnotherTask)
 
 ;;; CLASS  SimpleBridgeMethods
 (type $simplebridgemethods.SimpleBridgeMethods (struct
@@ -251,7 +246,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@simplebridgemethods.SimpleBridgeMethods))
 
 ;;; Code for simplebridgemethods.Superclass [vtable]
  (global.set $simplebridgemethods.Superclass.vtable (struct.new_with_rtt $simplebridgemethods.Superclass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_m1__java_lang_Error__void@simplebridgemethods.Superclass) (rtt.canon $simplebridgemethods.Superclass.vtable)))

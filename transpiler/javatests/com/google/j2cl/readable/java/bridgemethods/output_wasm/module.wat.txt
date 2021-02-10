@@ -29,7 +29,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_bridgemethods@bridgemethods.A))
 
 ;;; T A.fun(S s)
 (func $m_fun__java_lang_Object__java_lang_Object@bridgemethods.A
@@ -48,7 +47,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_fun__java_lang_Object__java_lang_Object@bridgemethods.A))
+(elem declare func $m_fun__java_lang_Object__java_lang_Object@bridgemethods.A)
 
 ;;; T A.get()
 (func $m_get__java_lang_Object@bridgemethods.A
@@ -66,7 +65,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_get__java_lang_Object@bridgemethods.A))
+(elem declare func $m_get__java_lang_Object@bridgemethods.A)
 
 ;;; CLASS  B
 (type $bridgemethods.B (struct
@@ -96,7 +95,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_bridgemethods@bridgemethods.B))
 
 ;;; Integer B.fun(String s)
 (func $m_fun__java_lang_String__java_lang_Integer@bridgemethods.B
@@ -115,7 +113,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_fun__java_lang_String__java_lang_Integer@bridgemethods.B))
+(elem declare func $m_fun__java_lang_String__java_lang_Integer@bridgemethods.B)
 
 ;;; Integer B.fun(Object arg0)
 (func $m_fun__java_lang_Object__java_lang_Object@bridgemethods.B
@@ -134,7 +132,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_fun__java_lang_Object__java_lang_Object@bridgemethods.B))
+(elem declare func $m_fun__java_lang_Object__java_lang_Object@bridgemethods.B)
 
 ;;; INTERFACE  SpecializedInterface
 
@@ -167,7 +165,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_bridgemethods@bridgemethods.AccidentalOverride))
 
 ;;; String AccidentalOverride.fun(String arg0)
 (func $m_fun__java_lang_String__java_lang_String@bridgemethods.AccidentalOverride
@@ -186,7 +183,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_fun__java_lang_String__java_lang_String@bridgemethods.AccidentalOverride))
+(elem declare func $m_fun__java_lang_String__java_lang_String@bridgemethods.AccidentalOverride)
 
 ;;; String AccidentalOverride.get()
 (func $m_get__java_lang_String@bridgemethods.AccidentalOverride
@@ -204,7 +201,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_get__java_lang_String@bridgemethods.AccidentalOverride))
+(elem declare func $m_get__java_lang_String@bridgemethods.AccidentalOverride)
 
 ;;; String AccidentalOverride.fun(Object arg0)
 (func $m_fun__java_lang_Object__java_lang_Object@bridgemethods.AccidentalOverride
@@ -223,7 +220,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_fun__java_lang_Object__java_lang_Object@bridgemethods.AccidentalOverride))
+(elem declare func $m_fun__java_lang_Object__java_lang_Object@bridgemethods.AccidentalOverride)
 ;;; Code for bridgemethods.BridgeMethod
 
 ;;; INTERFACE  SomeInterface
@@ -254,7 +251,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_bridgemethods@bridgemethods.SuperParent))
 
 ;;; void SuperParent.foo(T t, S s)
 (func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.SuperParent
@@ -268,7 +264,7 @@
   )
  )
 )
-(global funcref (ref.func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.SuperParent))
+(elem declare func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.SuperParent)
 
 ;;; CLASS  Parent
 (type $bridgemethods.Parent (struct
@@ -299,7 +295,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_bridgemethods@bridgemethods.Parent))
 
 ;;; void Parent.foo(T t, Number s)
 (func $m_foo__java_lang_Error__java_lang_Number__void@bridgemethods.Parent
@@ -313,7 +308,7 @@
   )
  )
 )
-(global funcref (ref.func $m_foo__java_lang_Error__java_lang_Number__void@bridgemethods.Parent))
+(elem declare func $m_foo__java_lang_Error__java_lang_Number__void@bridgemethods.Parent)
 
 ;;; void Parent.bar(T t)
 (func $m_bar__java_lang_Number__void@bridgemethods.Parent
@@ -326,7 +321,7 @@
   )
  )
 )
-(global funcref (ref.func $m_bar__java_lang_Number__void@bridgemethods.Parent))
+(elem declare func $m_bar__java_lang_Number__void@bridgemethods.Parent)
 
 ;;; void Parent.fun(T t)
 (func $m_fun__java_lang_Object__void@bridgemethods.Parent
@@ -339,7 +334,7 @@
   )
  )
 )
-(global funcref (ref.func $m_fun__java_lang_Object__void@bridgemethods.Parent))
+(elem declare func $m_fun__java_lang_Object__void@bridgemethods.Parent)
 
 ;;; void Parent.foo(Object arg0, Object arg1)
 (func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.Parent
@@ -355,7 +350,7 @@
   )
  )
 )
-(global funcref (ref.func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.Parent))
+(elem declare func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.Parent)
 
 ;;; CLASS  BridgeMethod
 (type $bridgemethods.BridgeMethod (struct
@@ -389,7 +384,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@bridgemethods.BridgeMethod))
 
 ;;; void BridgeMethod.foo(AssertionError a, Number n)
 (func $m_foo__java_lang_AssertionError__java_lang_Number__void@bridgemethods.BridgeMethod
@@ -403,7 +397,7 @@
   )
  )
 )
-(global funcref (ref.func $m_foo__java_lang_AssertionError__java_lang_Number__void@bridgemethods.BridgeMethod))
+(elem declare func $m_foo__java_lang_AssertionError__java_lang_Number__void@bridgemethods.BridgeMethod)
 
 ;;; void BridgeMethod.bar(Number t)
 (func $m_bar__java_lang_Number__void@bridgemethods.BridgeMethod
@@ -416,7 +410,7 @@
   )
  )
 )
-(global funcref (ref.func $m_bar__java_lang_Number__void@bridgemethods.BridgeMethod))
+(elem declare func $m_bar__java_lang_Number__void@bridgemethods.BridgeMethod)
 
 ;;; void BridgeMethod.fun(Number t)
 (func $m_fun__java_lang_Number__void@bridgemethods.BridgeMethod
@@ -429,7 +423,7 @@
   )
  )
 )
-(global funcref (ref.func $m_fun__java_lang_Number__void@bridgemethods.BridgeMethod))
+(elem declare func $m_fun__java_lang_Number__void@bridgemethods.BridgeMethod)
 
 ;;; void BridgeMethod.foo(Object arg0, Number arg1)
 (func $m_foo__java_lang_Object__java_lang_Number__void@bridgemethods.BridgeMethod
@@ -445,7 +439,7 @@
   )
  )
 )
-(global funcref (ref.func $m_foo__java_lang_Object__java_lang_Number__void@bridgemethods.BridgeMethod))
+(elem declare func $m_foo__java_lang_Object__java_lang_Number__void@bridgemethods.BridgeMethod)
 
 ;;; void BridgeMethod.foo(Error arg0, Number arg1)
 (func $m_foo__java_lang_Error__java_lang_Number__void@bridgemethods.BridgeMethod
@@ -461,7 +455,7 @@
   )
  )
 )
-(global funcref (ref.func $m_foo__java_lang_Error__java_lang_Number__void@bridgemethods.BridgeMethod))
+(elem declare func $m_foo__java_lang_Error__java_lang_Number__void@bridgemethods.BridgeMethod)
 
 ;;; INTERFACE  SomeOtherFooInterface
 
@@ -495,7 +489,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_bridgemethods@bridgemethods.DualUnrelatedBridges))
 
 ;;; void DualUnrelatedBridges.foo(String s, Double n)
 (func $m_foo__java_lang_String__java_lang_Double__void@bridgemethods.DualUnrelatedBridges
@@ -509,7 +502,7 @@
   )
  )
 )
-(global funcref (ref.func $m_foo__java_lang_String__java_lang_Double__void@bridgemethods.DualUnrelatedBridges))
+(elem declare func $m_foo__java_lang_String__java_lang_Double__void@bridgemethods.DualUnrelatedBridges)
 
 ;;; void DualUnrelatedBridges.foo(String s, Number n)
 (func $m_foo__java_lang_String__java_lang_Number__void@bridgemethods.DualUnrelatedBridges
@@ -523,7 +516,7 @@
   )
  )
 )
-(global funcref (ref.func $m_foo__java_lang_String__java_lang_Number__void@bridgemethods.DualUnrelatedBridges))
+(elem declare func $m_foo__java_lang_String__java_lang_Number__void@bridgemethods.DualUnrelatedBridges)
 
 ;;; void DualUnrelatedBridges.foo(Object arg0, Object arg1)
 (func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.DualUnrelatedBridges
@@ -539,7 +532,7 @@
   )
  )
 )
-(global funcref (ref.func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.DualUnrelatedBridges))
+(elem declare func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.DualUnrelatedBridges)
 
 ;;; void DualUnrelatedBridges.foo(Object arg0, Number arg1)
 (func $m_foo__java_lang_Object__java_lang_Number__void@bridgemethods.DualUnrelatedBridges
@@ -555,7 +548,7 @@
   )
  )
 )
-(global funcref (ref.func $m_foo__java_lang_Object__java_lang_Number__void@bridgemethods.DualUnrelatedBridges))
+(elem declare func $m_foo__java_lang_Object__java_lang_Number__void@bridgemethods.DualUnrelatedBridges)
 
 ;;; void DualUnrelatedBridges.foo(Object arg0, Double arg1)
 (func $m_foo__java_lang_Object__java_lang_Double__void@bridgemethods.DualUnrelatedBridges
@@ -571,7 +564,7 @@
   )
  )
 )
-(global funcref (ref.func $m_foo__java_lang_Object__java_lang_Double__void@bridgemethods.DualUnrelatedBridges))
+(elem declare func $m_foo__java_lang_Object__java_lang_Double__void@bridgemethods.DualUnrelatedBridges)
 
 ;;; CLASS  SuperDualUnrelatedAccidentalBridges
 (type $bridgemethods.SuperDualUnrelatedAccidentalBridges (struct
@@ -600,7 +593,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_bridgemethods@bridgemethods.SuperDualUnrelatedAccidentalBridges))
 
 ;;; void SuperDualUnrelatedAccidentalBridges.foo(String s, Double n)
 (func $m_foo__java_lang_String__java_lang_Double__void@bridgemethods.SuperDualUnrelatedAccidentalBridges
@@ -614,7 +606,7 @@
   )
  )
 )
-(global funcref (ref.func $m_foo__java_lang_String__java_lang_Double__void@bridgemethods.SuperDualUnrelatedAccidentalBridges))
+(elem declare func $m_foo__java_lang_String__java_lang_Double__void@bridgemethods.SuperDualUnrelatedAccidentalBridges)
 
 ;;; void SuperDualUnrelatedAccidentalBridges.foo(String s, Number n)
 (func $m_foo__java_lang_String__java_lang_Number__void@bridgemethods.SuperDualUnrelatedAccidentalBridges
@@ -628,7 +620,7 @@
   )
  )
 )
-(global funcref (ref.func $m_foo__java_lang_String__java_lang_Number__void@bridgemethods.SuperDualUnrelatedAccidentalBridges))
+(elem declare func $m_foo__java_lang_String__java_lang_Number__void@bridgemethods.SuperDualUnrelatedAccidentalBridges)
 
 ;;; CLASS  DualUnrelatedAccidentalBridges
 (type $bridgemethods.DualUnrelatedAccidentalBridges (struct
@@ -660,7 +652,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_bridgemethods@bridgemethods.DualUnrelatedAccidentalBridges))
 
 ;;; void DualUnrelatedAccidentalBridges.foo(Object arg0, Object arg1)
 (func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.DualUnrelatedAccidentalBridges
@@ -676,7 +667,7 @@
   )
  )
 )
-(global funcref (ref.func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.DualUnrelatedAccidentalBridges))
+(elem declare func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.DualUnrelatedAccidentalBridges)
 
 ;;; void DualUnrelatedAccidentalBridges.foo(Object arg0, Number arg1)
 (func $m_foo__java_lang_Object__java_lang_Number__void@bridgemethods.DualUnrelatedAccidentalBridges
@@ -692,7 +683,7 @@
   )
  )
 )
-(global funcref (ref.func $m_foo__java_lang_Object__java_lang_Number__void@bridgemethods.DualUnrelatedAccidentalBridges))
+(elem declare func $m_foo__java_lang_Object__java_lang_Number__void@bridgemethods.DualUnrelatedAccidentalBridges)
 
 ;;; void DualUnrelatedAccidentalBridges.foo(Object arg0, Double arg1)
 (func $m_foo__java_lang_Object__java_lang_Double__void@bridgemethods.DualUnrelatedAccidentalBridges
@@ -708,7 +699,7 @@
   )
  )
 )
-(global funcref (ref.func $m_foo__java_lang_Object__java_lang_Double__void@bridgemethods.DualUnrelatedAccidentalBridges))
+(elem declare func $m_foo__java_lang_Object__java_lang_Double__void@bridgemethods.DualUnrelatedAccidentalBridges)
 
 ;;; INTERFACE  Getter
 
@@ -738,7 +729,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_bridgemethods@bridgemethods.ClassWithParameterizedGet))
 
 ;;; T ClassWithParameterizedGet.get(T t)
 (func $m_get__java_lang_Object__java_lang_Object@bridgemethods.ClassWithParameterizedGet
@@ -757,7 +747,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_get__java_lang_Object__java_lang_Object@bridgemethods.ClassWithParameterizedGet))
+(elem declare func $m_get__java_lang_Object__java_lang_Object@bridgemethods.ClassWithParameterizedGet)
 
 ;;; CLASS  AccidentalOverrideBridge
 (type $bridgemethods.AccidentalOverrideBridge (struct
@@ -787,7 +777,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_bridgemethods@bridgemethods.AccidentalOverrideBridge))
 
 ;;; void AccidentalOverrideBridge.test()
 (func $m_test__void@bridgemethods.AccidentalOverrideBridge
@@ -805,7 +794,7 @@
   )
  )
 )
-(global funcref (ref.func $m_test__void@bridgemethods.AccidentalOverrideBridge))
+(elem declare func $m_test__void@bridgemethods.AccidentalOverrideBridge)
 
 ;;; String AccidentalOverrideBridge.get(String arg0)
 (func $m_get__java_lang_String__java_lang_String@bridgemethods.AccidentalOverrideBridge
@@ -824,7 +813,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_get__java_lang_String__java_lang_String@bridgemethods.AccidentalOverrideBridge))
+(elem declare func $m_get__java_lang_String__java_lang_String@bridgemethods.AccidentalOverrideBridge)
 
 ;;; String AccidentalOverrideBridge.get(Object arg0)
 (func $m_get__java_lang_Object__java_lang_Object@bridgemethods.AccidentalOverrideBridge
@@ -843,7 +832,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_get__java_lang_Object__java_lang_Object@bridgemethods.AccidentalOverrideBridge))
+(elem declare func $m_get__java_lang_Object__java_lang_Object@bridgemethods.AccidentalOverrideBridge)
 
 ;;; CLASS  TestCase10036
 (type $bridgemethods.TestCase10036 (struct
@@ -870,7 +859,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_bridgemethods@bridgemethods.TestCase10036))
 
 ;;; INTERFACE  BI3
 
@@ -889,7 +877,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_get__java_lang_String__java_lang_String@bridgemethods.TestCase10036.BI3))
+(elem declare func $m_get__java_lang_String__java_lang_String@bridgemethods.TestCase10036.BI3)
 
 ;;; INTERFACE  BI2
 
@@ -921,7 +909,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_bridgemethods@bridgemethods.TestCase10036.B))
 
 ;;; CLASS  TestCase102
 (type $bridgemethods.TestCase102 (struct
@@ -948,7 +935,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_bridgemethods@bridgemethods.TestCase102))
 
 ;;; INTERFACE  BI2
 
@@ -980,7 +966,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_bridgemethods@bridgemethods.TestCase102.B))
 
 ;;; CLASS  C
 (type $bridgemethods.TestCase102.C (struct
@@ -1010,7 +995,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_bridgemethods@bridgemethods.TestCase102.C))
 
 ;;; void C.set(String value)
 (func $m_set__java_lang_String__void@bridgemethods.TestCase102.C
@@ -1023,7 +1007,7 @@
   )
  )
 )
-(global funcref (ref.func $m_set__java_lang_String__void@bridgemethods.TestCase102.C))
+(elem declare func $m_set__java_lang_String__void@bridgemethods.TestCase102.C)
 
 ;;; void C.set(B1 value)
 (func $m_set__java_lang_Object__void@bridgemethods.TestCase102.C
@@ -1036,7 +1020,7 @@
   )
  )
 )
-(global funcref (ref.func $m_set__java_lang_Object__void@bridgemethods.TestCase102.C))
+(elem declare func $m_set__java_lang_Object__void@bridgemethods.TestCase102.C)
 
 ;;; CLASS  ParameterizedParent
 (type $bridgemethods.ParameterizedParent (struct
@@ -1064,7 +1048,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_bridgemethods@bridgemethods.ParameterizedParent))
 
 ;;; Q ParameterizedParent.m(Q t)
 (func $m_m__bridgemethods_ParameterizedParent__bridgemethods_ParameterizedParent_$pp_bridgemethods@bridgemethods.ParameterizedParent
@@ -1083,7 +1066,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_m__bridgemethods_ParameterizedParent__bridgemethods_ParameterizedParent_$pp_bridgemethods@bridgemethods.ParameterizedParent))
+(elem declare func $m_m__bridgemethods_ParameterizedParent__bridgemethods_ParameterizedParent_$pp_bridgemethods@bridgemethods.ParameterizedParent)
 
 ;;; CLASS  ReparametrerizedChild
 (type $bridgemethods.ReparametrerizedChild (struct
@@ -1112,7 +1095,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_bridgemethods@bridgemethods.ReparametrerizedChild))
 
 ;;; S ReparametrerizedChild.m(S t)
 (func $m_m__bridgemethods_ReparametrerizedChild__bridgemethods_ReparametrerizedChild_$pp_bridgemethods@bridgemethods.ReparametrerizedChild
@@ -1131,7 +1113,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_m__bridgemethods_ReparametrerizedChild__bridgemethods_ReparametrerizedChild_$pp_bridgemethods@bridgemethods.ReparametrerizedChild))
+(elem declare func $m_m__bridgemethods_ReparametrerizedChild__bridgemethods_ReparametrerizedChild_$pp_bridgemethods@bridgemethods.ReparametrerizedChild)
 
 ;;; S ReparametrerizedChild.m(ParameterizedParent arg0)
 (func $m_m__bridgemethods_ParameterizedParent__bridgemethods_ParameterizedParent_$pp_bridgemethods@bridgemethods.ReparametrerizedChild
@@ -1150,7 +1132,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_m__bridgemethods_ParameterizedParent__bridgemethods_ParameterizedParent_$pp_bridgemethods@bridgemethods.ReparametrerizedChild))
+(elem declare func $m_m__bridgemethods_ParameterizedParent__bridgemethods_ParameterizedParent_$pp_bridgemethods@bridgemethods.ReparametrerizedChild)
 
 ;;; CLASS  LeafChild
 (type $bridgemethods.LeafChild (struct
@@ -1179,7 +1161,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_bridgemethods@bridgemethods.LeafChild))
 ;;; Code for bridgemethods.BridgeMethodDefault
 
 ;;; CLASS  BridgeMethodDefault
@@ -1207,7 +1188,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_bridgemethods@bridgemethods.BridgeMethodDefault))
 
 ;;; INTERFACE  I
 
@@ -1222,7 +1202,7 @@
   )
  )
 )
-(global funcref (ref.func $m_m__java_lang_String__void@bridgemethods.BridgeMethodDefault.II))
+(elem declare func $m_m__java_lang_String__void@bridgemethods.BridgeMethodDefault.II)
 
 ;;; CLASS  A
 (type $bridgemethods.BridgeMethodDefault.A (struct
@@ -1251,7 +1231,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_bridgemethods@bridgemethods.BridgeMethodDefault.A))
 
 ;;; void A.m(Object arg0)
 (func $m_m__java_lang_Object__void@bridgemethods.BridgeMethodDefault.A
@@ -1266,7 +1245,7 @@
   )
  )
 )
-(global funcref (ref.func $m_m__java_lang_Object__void@bridgemethods.BridgeMethodDefault.A))
+(elem declare func $m_m__java_lang_Object__void@bridgemethods.BridgeMethodDefault.A)
 
 ;;; void A.m(String arg0)
 (func $m_m__java_lang_String__void@bridgemethods.BridgeMethodDefault.A
@@ -1281,7 +1260,7 @@
   )
  )
 )
-(global funcref (ref.func $m_m__java_lang_String__void@bridgemethods.BridgeMethodDefault.A))
+(elem declare func $m_m__java_lang_String__void@bridgemethods.BridgeMethodDefault.A)
 
 ;;; INTERFACE  JJ
 
@@ -1294,7 +1273,7 @@
   )
  )
 )
-(global funcref (ref.func $m_m__java_lang_Object__void@bridgemethods.BridgeMethodDefault.JJ))
+(elem declare func $m_m__java_lang_Object__void@bridgemethods.BridgeMethodDefault.JJ)
 
 ;;; CLASS  B
 (type $bridgemethods.BridgeMethodDefault.B (struct
@@ -1322,7 +1301,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_bridgemethods@bridgemethods.BridgeMethodDefault.B))
 
 ;;; void B.m(Object arg0)
 (func $m_m__java_lang_Object__void@bridgemethods.BridgeMethodDefault.B
@@ -1337,7 +1315,7 @@
   )
  )
 )
-(global funcref (ref.func $m_m__java_lang_Object__void@bridgemethods.BridgeMethodDefault.B))
+(elem declare func $m_m__java_lang_Object__void@bridgemethods.BridgeMethodDefault.B)
 ;;; Code for bridgemethods.BridgeMethodShadowedSignature
 
 ;;; CLASS  BridgeMethodShadowedSignature
@@ -1365,7 +1343,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@bridgemethods.BridgeMethodShadowedSignature))
 
 ;;; INTERFACE  I
 
@@ -1395,7 +1372,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_bridgemethods@bridgemethods.BridgeMethodShadowedSignature.B))
 
 ;;; String B.get(B2 consumer)
 (func $m_get__java_lang_Object__java_lang_String@bridgemethods.BridgeMethodShadowedSignature.B
@@ -1414,7 +1390,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_get__java_lang_Object__java_lang_String@bridgemethods.BridgeMethodShadowedSignature.B))
+(elem declare func $m_get__java_lang_Object__java_lang_String@bridgemethods.BridgeMethodShadowedSignature.B)
 
 ;;; CLASS  C
 (type $bridgemethods.BridgeMethodShadowedSignature.C (struct
@@ -1443,7 +1419,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_bridgemethods@bridgemethods.BridgeMethodShadowedSignature.C))
 
 ;;; String C.get(Consumer<? super C1> arg0)
 (func $m_get__java_util_function_Consumer__java_lang_String@bridgemethods.BridgeMethodShadowedSignature.C
@@ -1462,7 +1437,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_get__java_util_function_Consumer__java_lang_String@bridgemethods.BridgeMethodShadowedSignature.C))
+(elem declare func $m_get__java_util_function_Consumer__java_lang_String@bridgemethods.BridgeMethodShadowedSignature.C)
 
 ;;; String C.get(Object arg0)
 (func $m_get__java_lang_Object__java_lang_String@bridgemethods.BridgeMethodShadowedSignature.C
@@ -1481,7 +1456,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_get__java_lang_Object__java_lang_String@bridgemethods.BridgeMethodShadowedSignature.C))
+(elem declare func $m_get__java_lang_Object__java_lang_String@bridgemethods.BridgeMethodShadowedSignature.C)
 ;;; Code for bridgemethods.EnumMap
 
 ;;; INTERFACE  Map
@@ -1512,7 +1487,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_bridgemethods@bridgemethods.AbstractMap))
 
 ;;; V AbstractMap.put(K key, V value)
 (func $m_put__java_lang_Object__java_lang_Object__java_lang_Object@bridgemethods.AbstractMap
@@ -1532,7 +1506,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_put__java_lang_Object__java_lang_Object__java_lang_Object@bridgemethods.AbstractMap))
+(elem declare func $m_put__java_lang_Object__java_lang_Object__java_lang_Object@bridgemethods.AbstractMap)
 
 ;;; CLASS  EnumMap
 (type $bridgemethods.EnumMap (struct
@@ -1561,7 +1535,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@bridgemethods.EnumMap))
 
 ;;; V EnumMap.put(K key, V value)
 (func $m_put__java_lang_Enum__java_lang_Object__java_lang_Object@bridgemethods.EnumMap
@@ -1581,7 +1554,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_put__java_lang_Enum__java_lang_Object__java_lang_Object@bridgemethods.EnumMap))
+(elem declare func $m_put__java_lang_Enum__java_lang_Object__java_lang_Object@bridgemethods.EnumMap)
 
 ;;; V EnumMap.put(Object arg0, Object arg1)
 (func $m_put__java_lang_Object__java_lang_Object__java_lang_Object@bridgemethods.EnumMap
@@ -1601,7 +1574,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_put__java_lang_Object__java_lang_Object__java_lang_Object@bridgemethods.EnumMap))
+(elem declare func $m_put__java_lang_Object__java_lang_Object__java_lang_Object@bridgemethods.EnumMap)
 
 ;;; Code for bridgemethods.A [vtable]
  (global.set $bridgemethods.A.vtable (struct.new_with_rtt $bridgemethods.A.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_fun__java_lang_Object__java_lang_Object@bridgemethods.A) (ref.func $m_get__java_lang_Object@bridgemethods.A) (rtt.canon $bridgemethods.A.vtable)))

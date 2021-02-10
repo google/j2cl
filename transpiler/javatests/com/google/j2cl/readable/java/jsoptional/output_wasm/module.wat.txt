@@ -31,7 +31,7 @@
   )
  )
 )
-(global funcref (ref.func $m_method1__int__java_lang_Double__java_lang_Integer__void@jsoptional.Main))
+(elem declare func $m_method1__int__java_lang_Double__java_lang_Integer__void@jsoptional.Main)
 
 ;;; void Main.method2(String s1, Double d, Boolean... i)
 (func $m_method2__java_lang_String__java_lang_Double__arrayOf_java_lang_Boolean__void@jsoptional.Main
@@ -46,7 +46,7 @@
   )
  )
 )
-(global funcref (ref.func $m_method2__java_lang_String__java_lang_Double__arrayOf_java_lang_Boolean__void@jsoptional.Main))
+(elem declare func $m_method2__java_lang_String__java_lang_Double__arrayOf_java_lang_Boolean__void@jsoptional.Main)
 
 ;;; Main(String a)
 (func $m_<init>__java_lang_String__void@jsoptional.Main
@@ -61,7 +61,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__java_lang_String__void@jsoptional.Main))
 
 ;;; void Main.testFunction(Function f)
 (func $m_testFunction__jsoptional_Main_Function__void@jsoptional.Main
@@ -74,7 +73,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testFunction__jsoptional_Main_Function__void@jsoptional.Main))
+(elem declare func $m_testFunction__jsoptional_Main_Function__void@jsoptional.Main)
 
 ;;; void Main.testOptionalFunction(Function f)
 (func $m_testOptionalFunction__jsoptional_Main_Function__void@jsoptional.Main
@@ -87,7 +86,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testOptionalFunction__jsoptional_Main_Function__void@jsoptional.Main))
+(elem declare func $m_testOptionalFunction__jsoptional_Main_Function__void@jsoptional.Main)
 
 ;;; INTERFACE  Function
 
@@ -117,7 +116,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_jsoptional@jsoptional.Main.AFunction))
 
 ;;; Object AFunction.f1(String i, Object... args)
 (func $m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object@jsoptional.Main.AFunction
@@ -137,7 +135,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object@jsoptional.Main.AFunction))
+(elem declare func $m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object@jsoptional.Main.AFunction)
 
 ;;; INTERFACE  I
 
@@ -168,7 +166,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_jsoptional@jsoptional.Main.TemplatedSubtype))
 
 ;;; void TemplatedSubtype.m(T t, Object o)
 (func $m_m__java_lang_String__java_lang_Object__void@jsoptional.Main.TemplatedSubtype
@@ -182,7 +179,7 @@
   )
  )
 )
-(global funcref (ref.func $m_m__java_lang_String__java_lang_Object__void@jsoptional.Main.TemplatedSubtype))
+(elem declare func $m_m__java_lang_String__java_lang_Object__void@jsoptional.Main.TemplatedSubtype)
 
 ;;; void TemplatedSubtype.m(Object arg0, Object arg1)
 (func $m_m__java_lang_Object__java_lang_Object__void@jsoptional.Main.TemplatedSubtype
@@ -198,7 +195,7 @@
   )
  )
 )
-(global funcref (ref.func $m_m__java_lang_Object__java_lang_Object__void@jsoptional.Main.TemplatedSubtype))
+(elem declare func $m_m__java_lang_Object__java_lang_Object__void@jsoptional.Main.TemplatedSubtype)
 
 ;;; CLASS  SpecializedSubtype
 (type $jsoptional.Main.SpecializedSubtype (struct
@@ -229,7 +226,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__java_lang_Object__void@jsoptional.Main.SpecializedSubtype))
 
 ;;; void SpecializedSubtype.m(String t, Object o)
 (func $m_m__java_lang_String__java_lang_Object__void@jsoptional.Main.SpecializedSubtype
@@ -243,7 +239,7 @@
   )
  )
 )
-(global funcref (ref.func $m_m__java_lang_String__java_lang_Object__void@jsoptional.Main.SpecializedSubtype))
+(elem declare func $m_m__java_lang_String__java_lang_Object__void@jsoptional.Main.SpecializedSubtype)
 
 ;;; void SpecializedSubtype.m(Object arg0, Object arg1)
 (func $m_m__java_lang_Object__java_lang_Object__void@jsoptional.Main.SpecializedSubtype
@@ -259,7 +255,7 @@
   )
  )
 )
-(global funcref (ref.func $m_m__java_lang_Object__java_lang_Object__void@jsoptional.Main.SpecializedSubtype))
+(elem declare func $m_m__java_lang_Object__java_lang_Object__void@jsoptional.Main.SpecializedSubtype)
 
 ;;; CLASS  NonJsTypeSubtype
 (type $jsoptional.Main.NonJsTypeSubtype (struct
@@ -288,7 +284,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_jsoptional@jsoptional.Main.NonJsTypeSubtype))
 
 ;;; void NonJsTypeSubtype.m(String t, Object o)
 (func $m_m__java_lang_String__java_lang_Object__void@jsoptional.Main.NonJsTypeSubtype
@@ -302,7 +297,7 @@
   )
  )
 )
-(global funcref (ref.func $m_m__java_lang_String__java_lang_Object__void@jsoptional.Main.NonJsTypeSubtype))
+(elem declare func $m_m__java_lang_String__java_lang_Object__void@jsoptional.Main.NonJsTypeSubtype)
 
 ;;; void NonJsTypeSubtype.m(Object arg0, Object arg1)
 (func $m_m__java_lang_Object__java_lang_Object__void@jsoptional.Main.NonJsTypeSubtype
@@ -318,7 +313,7 @@
   )
  )
 )
-(global funcref (ref.func $m_m__java_lang_Object__java_lang_Object__void@jsoptional.Main.NonJsTypeSubtype))
+(elem declare func $m_m__java_lang_Object__java_lang_Object__void@jsoptional.Main.NonJsTypeSubtype)
 
 ;;; Code for jsoptional.Main [vtable]
  (global.set $jsoptional.Main.vtable (struct.new_with_rtt $jsoptional.Main.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_method1__int__java_lang_Double__java_lang_Integer__void@jsoptional.Main) (ref.func $m_method2__java_lang_String__java_lang_Double__arrayOf_java_lang_Boolean__void@jsoptional.Main) (ref.func $m_testFunction__jsoptional_Main_Function__void@jsoptional.Main) (ref.func $m_testOptionalFunction__jsoptional_Main_Function__void@jsoptional.Main) (rtt.canon $jsoptional.Main.vtable)))

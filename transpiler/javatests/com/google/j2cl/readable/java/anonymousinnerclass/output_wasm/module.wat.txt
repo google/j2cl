@@ -25,7 +25,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_anonymousinnerclass@anonymousinnerclass.A))
 
 ;;; CLASS  B
 (type $anonymousinnerclass.A.B (struct
@@ -53,7 +52,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_anonymousinnerclass@anonymousinnerclass.A.B))
 
 ;;; CLASS  AnonymousInnerClass
 (type $anonymousinnerclass.AnonymousInnerClass (struct
@@ -81,7 +79,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@anonymousinnerclass.AnonymousInnerClass))
 
 ;;; void AnonymousInnerClass.test(int arg)
 (func $m_test__int__void@anonymousinnerclass.AnonymousInnerClass
@@ -110,7 +107,7 @@
   )
  )
 )
-(global funcref (ref.func $m_test__int__void@anonymousinnerclass.AnonymousInnerClass))
+(elem declare func $m_test__int__void@anonymousinnerclass.AnonymousInnerClass)
 
 ;;; CLASS  InnerClass
 (type $anonymousinnerclass.AnonymousInnerClass.InnerClass (struct
@@ -138,7 +135,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@anonymousinnerclass.AnonymousInnerClass.InnerClass))
 
 ;;; CLASS  <anonymous> extends InnerClass
 (type $anonymousinnerclass.AnonymousInnerClass.1 (struct
@@ -167,7 +163,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_anonymousinnerclass@anonymousinnerclass.AnonymousInnerClass.1))
 
 ;;; CLASS  <anonymous> extends B
 (type $anonymousinnerclass.AnonymousInnerClass.2 (struct
@@ -197,7 +192,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__anonymousinnerclass_A__void_$pp_anonymousinnerclass@anonymousinnerclass.AnonymousInnerClass.2))
 
 ;;; CLASS  C
 (type $anonymousinnerclass.AnonymousInnerClass.1C (struct
@@ -227,7 +221,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_anonymousinnerclass@anonymousinnerclass.AnonymousInnerClass.1C))
 
 ;;; CLASS  <anonymous> extends C
 (type $anonymousinnerclass.AnonymousInnerClass.3 (struct
@@ -259,7 +252,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_anonymousinnerclass@anonymousinnerclass.AnonymousInnerClass.3))
 
 ;;; Code for anonymousinnerclass.A [vtable]
  (global.set $anonymousinnerclass.A.vtable (struct.new_with_rtt $anonymousinnerclass.A.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $anonymousinnerclass.A.vtable)))

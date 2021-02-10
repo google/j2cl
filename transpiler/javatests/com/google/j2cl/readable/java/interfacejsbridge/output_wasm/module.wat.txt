@@ -32,7 +32,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@interfacejsbridge.InterfaceImpl))
 
 ;;; int InterfaceImpl.foo(int a)
 (func $m_foo__int__int@interfacejsbridge.InterfaceImpl
@@ -51,7 +50,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_foo__int__int@interfacejsbridge.InterfaceImpl))
+(elem declare func $m_foo__int__int@interfacejsbridge.InterfaceImpl)
 ;;; Code for interfacejsbridge.Main
 
 ;;; CLASS  Main
@@ -80,7 +79,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@interfacejsbridge.Main))
 
 ;;; void Main.test()
 (func $m_test__void@interfacejsbridge.Main
@@ -116,7 +114,7 @@
   )
  )
 )
-(global funcref (ref.func $m_test__void@interfacejsbridge.Main))
+(elem declare func $m_test__void@interfacejsbridge.Main)
 
 ;;; Code for interfacejsbridge.InterfaceImpl [vtable]
  (global.set $interfacejsbridge.InterfaceImpl.vtable (struct.new_with_rtt $interfacejsbridge.InterfaceImpl.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__int__int@interfacejsbridge.InterfaceImpl) (rtt.canon $interfacejsbridge.InterfaceImpl.vtable)))

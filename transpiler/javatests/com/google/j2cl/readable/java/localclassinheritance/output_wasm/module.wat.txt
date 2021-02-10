@@ -26,7 +26,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@localclassinheritance.LocalClassInheritance))
 
 ;;; void LocalClassInheritance.test()
 (func $m_test__void@localclassinheritance.LocalClassInheritance
@@ -42,7 +41,7 @@
   )
  )
 )
-(global funcref (ref.func $m_test__void@localclassinheritance.LocalClassInheritance))
+(elem declare func $m_test__void@localclassinheritance.LocalClassInheritance)
 
 ;;; CLASS  Parent
 (type $localclassinheritance.LocalClassInheritance.1Parent (struct
@@ -72,7 +71,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_localclassinheritance@localclassinheritance.LocalClassInheritance.1Parent))
 
 ;;; void Parent.n()
 (func $m_n__void@localclassinheritance.LocalClassInheritance.1Parent
@@ -88,7 +86,7 @@
   )
  )
 )
-(global funcref (ref.func $m_n__void@localclassinheritance.LocalClassInheritance.1Parent))
+(elem declare func $m_n__void@localclassinheritance.LocalClassInheritance.1Parent)
 
 ;;; CLASS  Child
 (type $localclassinheritance.LocalClassInheritance.1Child (struct
@@ -120,7 +118,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_localclassinheritance@localclassinheritance.LocalClassInheritance.1Child))
 
 ;;; void Child.n()
 (func $m_n__void@localclassinheritance.LocalClassInheritance.1Child
@@ -136,7 +133,7 @@
   )
  )
 )
-(global funcref (ref.func $m_n__void@localclassinheritance.LocalClassInheritance.1Child))
+(elem declare func $m_n__void@localclassinheritance.LocalClassInheritance.1Child)
 
 ;;; Code for localclassinheritance.LocalClassInheritance [vtable]
  (global.set $localclassinheritance.LocalClassInheritance.vtable (struct.new_with_rtt $localclassinheritance.LocalClassInheritance.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__void@localclassinheritance.LocalClassInheritance) (rtt.canon $localclassinheritance.LocalClassInheritance.vtable)))

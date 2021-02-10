@@ -28,7 +28,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@simplelocalclass.SimpleLocalClass))
 
 ;;; void SimpleLocalClass.test(int p)
 (func $m_test__int__void@simplelocalclass.SimpleLocalClass
@@ -55,7 +54,7 @@
   )
  )
 )
-(global funcref (ref.func $m_test__int__void@simplelocalclass.SimpleLocalClass))
+(elem declare func $m_test__int__void@simplelocalclass.SimpleLocalClass)
 
 ;;; void SimpleLocalClass.fun()
 (func $m_fun__void@simplelocalclass.SimpleLocalClass
@@ -71,7 +70,7 @@
   )
  )
 )
-(global funcref (ref.func $m_fun__void@simplelocalclass.SimpleLocalClass))
+(elem declare func $m_fun__void@simplelocalclass.SimpleLocalClass)
 
 ;;; void SimpleLocalClass.foo()
 (func $m_foo__void@simplelocalclass.SimpleLocalClass
@@ -83,7 +82,7 @@
   )
  )
 )
-(global funcref (ref.func $m_foo__void@simplelocalclass.SimpleLocalClass))
+(elem declare func $m_foo__void@simplelocalclass.SimpleLocalClass)
 
 ;;; CLASS  InnerClass
 (type $simplelocalclass.SimpleLocalClass.1InnerClass (struct
@@ -114,7 +113,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1InnerClass))
 
 ;;; int InnerClass.fun()
 (func $m_fun__int@simplelocalclass.SimpleLocalClass.1InnerClass
@@ -132,7 +130,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_fun__int@simplelocalclass.SimpleLocalClass.1InnerClass))
+(elem declare func $m_fun__int@simplelocalclass.SimpleLocalClass.1InnerClass)
 
 ;;; CLASS  InnerClassWithoutCaptures
 (type $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (struct
@@ -160,7 +158,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures))
 
 ;;; CLASS  InnerClass
 (type $simplelocalclass.SimpleLocalClass.2InnerClass (struct
@@ -190,7 +187,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.2InnerClass))
 
 ;;; CLASS  Abc$InnerClass
 (type $simplelocalclass.SimpleLocalClass.1Abc$InnerClass (struct
@@ -218,7 +214,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1Abc$InnerClass))
 
 ;;; CLASS  Klm$InnerClass
 (type $simplelocalclass.SimpleLocalClass.1Klm$InnerClass (struct
@@ -246,7 +241,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1Klm$InnerClass))
 
 ;;; Code for simplelocalclass.SimpleLocalClass [vtable]
  (global.set $simplelocalclass.SimpleLocalClass.vtable (struct.new_with_rtt $simplelocalclass.SimpleLocalClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__int__void@simplelocalclass.SimpleLocalClass) (ref.func $m_fun__void@simplelocalclass.SimpleLocalClass) (ref.func $m_foo__void@simplelocalclass.SimpleLocalClass) (rtt.canon $simplelocalclass.SimpleLocalClass.vtable)))

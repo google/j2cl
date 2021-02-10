@@ -26,7 +26,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@localnamecollision.Asserts))
 
 ;;; int Asserts.n()
 (func $m_n__int_$pp_localnamecollision@localnamecollision.Asserts
@@ -46,7 +45,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_n__int_$pp_localnamecollision@localnamecollision.Asserts))
+(elem declare func $m_n__int_$pp_localnamecollision@localnamecollision.Asserts)
 ;;; Code for localnamecollision.Class
 
 ;;; CLASS  Class
@@ -75,7 +74,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@localnamecollision.Class))
 
 ;;; void Class.main()
 (func $m_main__void@localnamecollision.Class
@@ -95,7 +93,7 @@
   )
  )
 )
-(global funcref (ref.func $m_main__void@localnamecollision.Class))
+(elem declare func $m_main__void@localnamecollision.Class)
 ;;; Code for localnamecollision.LocalNameCollision
 
 ;;; CLASS  LocalNameCollision
@@ -164,7 +162,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testClassLocalVarCollision__void@localnamecollision.LocalNameCollision))
+(elem declare func $m_testClassLocalVarCollision__void@localnamecollision.LocalNameCollision)
 
 ;;; boolean LocalNameCollision.testClassParameterCollision(boolean LocalNameCollision, Object Asserts, Object $Asserts, int l_Asserts, int A)
 (func $m_testClassParameterCollision__boolean__java_lang_Object__java_lang_Object__int__int__boolean@localnamecollision.LocalNameCollision
@@ -187,7 +185,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_testClassParameterCollision__boolean__java_lang_Object__java_lang_Object__int__int__boolean@localnamecollision.LocalNameCollision))
+(elem declare func $m_testClassParameterCollision__boolean__java_lang_Object__java_lang_Object__int__int__boolean@localnamecollision.LocalNameCollision)
 
 ;;; LocalNameCollision(boolean LocalNameCollision, Object Asserts, Object $Asserts, int l_Asserts, int A)
 (func $m_<init>__boolean__java_lang_Object__java_lang_Object__int__int__void@localnamecollision.LocalNameCollision
@@ -210,7 +208,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__boolean__java_lang_Object__java_lang_Object__int__int__void@localnamecollision.LocalNameCollision))
 ;;; Code for localnamecollision.package1.A
 
 ;;; CLASS  A
@@ -239,7 +236,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@localnamecollision.package1.A))
 
 ;;; int A.m()
 (func $m_m__int@localnamecollision.package1.A
@@ -257,7 +253,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_m__int@localnamecollision.package1.A))
+(elem declare func $m_m__int@localnamecollision.package1.A)
 ;;; Code for localnamecollision.package2.A
 
 ;;; CLASS  A
@@ -286,7 +282,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@localnamecollision.package2.A))
 
 ;;; int A.m()
 (func $m_m__int@localnamecollision.package2.A
@@ -304,7 +299,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_m__int@localnamecollision.package2.A))
+(elem declare func $m_m__int@localnamecollision.package2.A)
 
 ;;; Code for localnamecollision.Asserts [vtable]
  (global.set $localnamecollision.Asserts.vtable (struct.new_with_rtt $localnamecollision.Asserts.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_n__int_$pp_localnamecollision@localnamecollision.Asserts) (rtt.canon $localnamecollision.Asserts.vtable)))

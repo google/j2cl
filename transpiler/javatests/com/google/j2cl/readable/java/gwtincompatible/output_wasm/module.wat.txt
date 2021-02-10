@@ -29,7 +29,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@gwtincompatible.Implementor))
 
 ;;; void Implementor.compatibleMethod()
 (func $m_compatibleMethod__void@gwtincompatible.Implementor
@@ -45,7 +44,7 @@
   )
  )
 )
-(global funcref (ref.func $m_compatibleMethod__void@gwtincompatible.Implementor))
+(elem declare func $m_compatibleMethod__void@gwtincompatible.Implementor)
 
 ;;; ENUM  SomeEnum
 (type $gwtincompatible.Implementor.SomeEnum (struct
@@ -81,7 +80,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$p_gwtincompatible_Implementor_SomeEnum@gwtincompatible.Implementor.SomeEnum))
 
 ;;; CLASS  <anonymous> extends SomeEnum
 (type $gwtincompatible.Implementor.SomeEnum.1 (struct
@@ -116,7 +114,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_gwtincompatible@gwtincompatible.Implementor.SomeEnum.1))
 
 ;;; void <anonymous> extends SomeEnum.method()
 (func $m_method__void_$pp_gwtincompatible@gwtincompatible.Implementor.SomeEnum.1
@@ -128,7 +125,7 @@
   )
  )
 )
-(global funcref (ref.func $m_method__void_$pp_gwtincompatible@gwtincompatible.Implementor.SomeEnum.1))
+(elem declare func $m_method__void_$pp_gwtincompatible@gwtincompatible.Implementor.SomeEnum.1)
 ;;; Code for gwtincompatible.Interface
 
 ;;; INTERFACE  Interface
@@ -160,7 +157,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@gwtincompatible.Interface.ClassWithAbstractMethod))
 
 ;;; Code for gwtincompatible.Implementor [vtable]
  (global.set $gwtincompatible.Implementor.vtable (struct.new_with_rtt $gwtincompatible.Implementor.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_compatibleMethod__void@gwtincompatible.Implementor) (rtt.canon $gwtincompatible.Implementor.vtable)))

@@ -28,7 +28,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_overridingmethods@overridingmethods.Parent))
 
 ;;; void Parent.fun()
 (func $m_fun__void@overridingmethods.Parent
@@ -40,7 +39,7 @@
   )
  )
 )
-(global funcref (ref.func $m_fun__void@overridingmethods.Parent))
+(elem declare func $m_fun__void@overridingmethods.Parent)
 
 ;;; CLASS  Child
 (type $overridingmethods.Child (struct
@@ -69,7 +68,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@overridingmethods.Child))
 
 ;;; void Child.fun()
 (func $m_fun__void@overridingmethods.Child
@@ -81,7 +79,7 @@
   )
  )
 )
-(global funcref (ref.func $m_fun__void@overridingmethods.Child))
+(elem declare func $m_fun__void@overridingmethods.Child)
 
 ;;; void Child.bar()
 (func $m_bar__void@overridingmethods.Child
@@ -93,7 +91,7 @@
   )
  )
 )
-(global funcref (ref.func $m_bar__void@overridingmethods.Child))
+(elem declare func $m_bar__void@overridingmethods.Child)
 
 ;;; Code for overridingmethods.Parent [vtable]
  (global.set $overridingmethods.Parent.vtable (struct.new_with_rtt $overridingmethods.Parent.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_fun__void@overridingmethods.Parent) (rtt.canon $overridingmethods.Parent.vtable)))

@@ -25,7 +25,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@collisions.goog))
 
 ;;; CLASS  Blah
 (type $collisions.Blah (struct
@@ -52,7 +51,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_collisions@collisions.Blah))
 
 ;;; void Blah.m()
 (func $m_m__void@collisions.Blah
@@ -61,7 +59,6 @@
   )
  )
 )
-(global funcref (ref.func $m_m__void@collisions.Blah))
 
 ;;; double Blah.getN()
 (func $m_getN__double@collisions.Blah
@@ -73,7 +70,6 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_getN__double@collisions.Blah))
 
 ;;; CLASS  foo
 (type $collisions.foo (struct
@@ -100,7 +96,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_collisions@collisions.foo))
 
 ;;; CLASS  bar
 (type $collisions.bar (struct
@@ -127,7 +122,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_collisions@collisions.bar))
 
 ;;; CLASS  Other
 (type $collisions.Other (struct
@@ -155,7 +149,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_collisions@collisions.Other))
 
 ;;; T Other.m()
 (func $m_m__java_lang_Object_$pp_collisions@collisions.Other
@@ -181,7 +174,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_m__java_lang_Object_$pp_collisions@collisions.Other))
+(elem declare func $m_m__java_lang_Object_$pp_collisions@collisions.Other)
 
 ;;; CLASS  T
 (type $collisions.T (struct
@@ -210,7 +203,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_collisions@collisions.T))
 
 ;;; T T.m()
 (func $m_m__java_lang_Number_$pp_collisions@collisions.T
@@ -228,7 +220,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_m__java_lang_Number_$pp_collisions@collisions.T))
+(elem declare func $m_m__java_lang_Number_$pp_collisions@collisions.T)
 
 ;;; T T.n()
 (func $m_n__java_lang_Number_$pp_collisions@collisions.T
@@ -257,7 +249,7 @@
  )
  (local.get $return.value)
 )
-(global funcref (ref.func $m_n__java_lang_Number_$pp_collisions@collisions.T))
+(elem declare func $m_n__java_lang_Number_$pp_collisions@collisions.T)
 
 ;;; Code for collisions.goog [vtable]
  (global.set $collisions.goog.vtable (struct.new_with_rtt $collisions.goog.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $collisions.goog.vtable)))

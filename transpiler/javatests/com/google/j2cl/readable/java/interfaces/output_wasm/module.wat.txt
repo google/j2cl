@@ -26,7 +26,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void@interfaces.Main))
 
 ;;; void Main.testInterfaceMembers()
 (func $m_testInterfaceMembers__void_$pp_interfaces@interfaces.Main
@@ -52,7 +51,7 @@
   )
  )
 )
-(global funcref (ref.func $m_testInterfaceMembers__void_$pp_interfaces@interfaces.Main))
+(elem declare func $m_testInterfaceMembers__void_$pp_interfaces@interfaces.Main)
 
 ;;; INTERFACE  Interface
 (global $a@interfaces.Main.Interface (mut i32) (i32.const 0))
@@ -69,7 +68,7 @@
   )
  )
 )
-(global funcref (ref.func $m_defaultMethod__java_lang_Object__void@interfaces.Main.Interface))
+(elem declare func $m_defaultMethod__java_lang_Object__void@interfaces.Main.Interface)
 
 ;;; void Interface.privateMethod(T t)
 (func $m_privateMethod__java_lang_Object__void_$p_interfaces_Main_Interface@interfaces.Main.Interface
@@ -80,7 +79,6 @@
   )
  )
 )
-(global funcref (ref.func $m_privateMethod__java_lang_Object__void_$p_interfaces_Main_Interface@interfaces.Main.Interface))
 
 ;;; void Interface.staticInterfaceMethod()
 (func $m_staticInterfaceMethod__void@interfaces.Main.Interface
@@ -89,7 +87,6 @@
   )
  )
 )
-(global funcref (ref.func $m_staticInterfaceMethod__void@interfaces.Main.Interface))
 
 ;;; INTERFACE  SubInterface
 
@@ -104,7 +101,7 @@
   )
  )
 )
-(global funcref (ref.func $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface))
+(elem declare func $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface)
 
 ;;; CLASS  Implementor
 (type $interfaces.Main.Implementor (struct
@@ -135,7 +132,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_interfaces@interfaces.Main.Implementor))
 
 ;;; void Implementor.interfaceMethod()
 (func $m_interfaceMethod__void@interfaces.Main.Implementor
@@ -147,7 +143,7 @@
   )
  )
 )
-(global funcref (ref.func $m_interfaceMethod__void@interfaces.Main.Implementor))
+(elem declare func $m_interfaceMethod__void@interfaces.Main.Implementor)
 
 ;;; void Implementor.defaultMethod(Object arg0)
 (func $m_defaultMethod__java_lang_Object__void@interfaces.Main.Implementor
@@ -162,7 +158,7 @@
   )
  )
 )
-(global funcref (ref.func $m_defaultMethod__java_lang_Object__void@interfaces.Main.Implementor))
+(elem declare func $m_defaultMethod__java_lang_Object__void@interfaces.Main.Implementor)
 
 ;;; void Implementor.defaultMethod(String arg0)
 (func $m_defaultMethod__java_lang_String__void@interfaces.Main.Implementor
@@ -177,7 +173,7 @@
   )
  )
 )
-(global funcref (ref.func $m_defaultMethod__java_lang_String__void@interfaces.Main.Implementor))
+(elem declare func $m_defaultMethod__java_lang_String__void@interfaces.Main.Implementor)
 
 ;;; CLASS  AbstractImplementor
 (type $interfaces.Main.AbstractImplementor (struct
@@ -207,7 +203,6 @@
  )
  (local.get $this)
 )
-(global funcref (ref.func $m_<init>__void_$pp_interfaces@interfaces.Main.AbstractImplementor))
 
 ;;; void AbstractImplementor.defaultMethod(Object arg0)
 (func $m_defaultMethod__java_lang_Object__void@interfaces.Main.AbstractImplementor
@@ -222,7 +217,7 @@
   )
  )
 )
-(global funcref (ref.func $m_defaultMethod__java_lang_Object__void@interfaces.Main.AbstractImplementor))
+(elem declare func $m_defaultMethod__java_lang_Object__void@interfaces.Main.AbstractImplementor)
 
 ;;; void AbstractImplementor.defaultMethod(String arg0)
 (func $m_defaultMethod__java_lang_String__void@interfaces.Main.AbstractImplementor
@@ -237,7 +232,7 @@
   )
  )
 )
-(global funcref (ref.func $m_defaultMethod__java_lang_String__void@interfaces.Main.AbstractImplementor))
+(elem declare func $m_defaultMethod__java_lang_String__void@interfaces.Main.AbstractImplementor)
 
 ;;; Code for interfaces.Main [vtable]
  (global.set $interfaces.Main.vtable (struct.new_with_rtt $interfaces.Main.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_testInterfaceMembers__void_$pp_interfaces@interfaces.Main) (rtt.canon $interfaces.Main.vtable)))
