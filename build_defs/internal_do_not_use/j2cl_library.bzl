@@ -64,7 +64,7 @@ def j2cl_library(
 
         _to_j2wasm_targets("deps", j2wasm_args)
         _to_j2wasm_targets("exports", j2wasm_args)
-        j2wasm_args["tags"] = (j2wasm_args.get("tags") or []) + ["manual", "notap"]
+        j2wasm_args["tags"] = (j2wasm_args.get("tags") or []) + ["manual", "notap", "j2wasm"]
 
         j2wasm_library(
             name = j2wasm_library_name,
