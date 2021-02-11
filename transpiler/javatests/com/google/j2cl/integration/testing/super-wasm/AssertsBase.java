@@ -44,7 +44,8 @@ class AssertsBase {
     }
   }
 
-  static void assertThrowsClassCastException(JsRunnable runnable, String qualifiedBinaryName) {}
+  public static void assertThrowsClassCastException(
+      JsRunnable runnable, String qualifiedBinaryName) {}
 
-  static void assertThrows(Class<? extends Exception> exceptionClass, JsRunnable runnable) {}
+  public static void assertThrows(Class<? extends Exception> exceptionClass, JsRunnable runnable) {}
 }
