@@ -28,6 +28,8 @@ OPTIMIZED_JS_LIST = [
     "//transpiler/javatests/com/google/j2cl/integration/arrayobjectcalls:optimized_js.esnext",
     "//transpiler/javatests/com/google/j2cl/integration/arrayofboxedtype:optimized_js",
     "//transpiler/javatests/com/google/j2cl/integration/arrayofboxedtype:optimized_js.esnext",
+    "//transpiler/javatests/com/google/j2cl/integration/arrayoutofbounds:optimized_js",
+    "//transpiler/javatests/com/google/j2cl/integration/arrayoutofbounds:optimized_js.esnext",
     "//transpiler/javatests/com/google/j2cl/integration/arrayreadwrite:optimized_js",
     "//transpiler/javatests/com/google/j2cl/integration/arrayreadwrite:optimized_js.esnext",
     "//transpiler/javatests/com/google/j2cl/integration/assertsimple:optimized_js",

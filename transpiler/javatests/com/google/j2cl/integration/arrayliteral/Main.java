@@ -40,8 +40,6 @@ public class Main {
 
     Object[] values = new Object[] {"sam", "bob", "charlie"};
     values[0] = "jimmy";
-    // We don't throw exception on out of bounds index.
-    values[100] = "ted";
   }
 
   private static void testOneD() {
@@ -57,9 +55,6 @@ public class Main {
     oneD[0] = 5;
     oneD[1] = 5;
     oneD[2] = 5;
-
-    // We don't throw exception on out of bounds index.
-    oneD[3] = 5;
   }
 
   private static void testPartial2D() {
@@ -95,9 +90,6 @@ public class Main {
     twoD[0][1] = main;
     twoD[1][0] = main;
     twoD[1][1] = main;
-
-    // We don't throw exception on out of bounds index.
-    twoD[0][2] = main;
 
     // When inserting a leaf value the type must conform.
     assertThrows(ArrayStoreException.class, () -> twoD[0][0] = new Object());
