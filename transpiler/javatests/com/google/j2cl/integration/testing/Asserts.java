@@ -18,26 +18,7 @@ package com.google.j2cl.integration.testing;
 import javaemul.internal.annotations.DoNotAutobox;
 import jsinterop.annotations.JsFunction;
 
-public class Asserts {
-  public static void fail() {
-    throw new AssertionError();
-  }
-
-  public static void fail(String message) {
-    throw new AssertionError(message);
-  }
-
-  public static void assertTrue(boolean condition) {
-    if (!condition) {
-      fail();
-    }
-  }
-
-  public static void assertTrue(String message, boolean condition) {
-    if (!condition) {
-      fail(message);
-    }
-  }
+public class Asserts extends AssertsBase {
 
   public static void assertFalse(boolean condition) {
     assertTrue(!condition);
@@ -99,17 +80,6 @@ public class Asserts {
         getFailureMessage(expected, actual, "should not be the same as"), expected == actual);
   }
 
-  public static void assertThrows(Class<? extends Exception> exceptionClass, JsRunnable runnable) {
-    try {
-      runnable.run();
-    } catch (Throwable e) {
-      if (e.getClass() == exceptionClass) {
-        return;
-      }
-    }
-    fail("Should have thrown " + exceptionClass);
-  }
-
   @JsFunction
   public interface JsRunnable {
     void run();
@@ -124,20 +94,6 @@ public class Asserts {
 
   public static void assertThrowsClassCastException(JsRunnable runnable, Class<?> toClass) {
     assertThrowsClassCastException(runnable, toClass.getName());
-  }
-
-  public static void assertThrowsClassCastException(
-      JsRunnable runnable, String qualifiedBinaryName) {
-    try {
-      runnable.run();
-      fail("Should have thrown ClassCastException");
-    } catch (ClassCastException expected) {
-      if (qualifiedBinaryName != null) {
-        assertTrue(
-            "Got unexpected message " + expected.getMessage(),
-            expected.getMessage().endsWith("cannot be cast to " + qualifiedBinaryName));
-      }
-    }
   }
 
   public static void assertThrowsNullPointerException(JsRunnable runnable) {
