@@ -12,7 +12,7 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_method1__int__java_lang_Double__java_lang_Integer__void (mut (ref $function.$int__$java.lang.Double__$java.lang.Integer__$void)))
- (field $m_method2__java_lang_String__java_lang_Double__arrayOf_java_lang_Boolean__void (mut (ref $function.$java.lang.String__$java.lang.Double__$java.lang.Object__$void)))
+ (field $m_method2__java_lang_String__java_lang_Double__arrayOf_java_lang_Boolean__void (mut (ref $function.$java.lang.String__$java.lang.Double__$Object.array__$void)))
  (field $m_testFunction__jsoptional_Main_Function__void (mut (ref $function.$java.lang.Object__$void)))
  (field $m_testOptionalFunction__jsoptional_Main_Function__void (mut (ref $function.$java.lang.Object__$void)))
 ))
@@ -38,7 +38,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (param $s1 (ref null $java.lang.String))
  (param $d (ref null $java.lang.Double))
- (param $i (ref null $java.lang.Object))
+ (param $i (ref null $Object.array))
  (local $this (ref null $jsoptional.Main))
  (local.set $this (ref.cast $java.lang.Object $jsoptional.Main (local.get $this.untyped) (global.get $jsoptional.Main.rtt)))
  (block $return.label
@@ -100,7 +100,7 @@
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.String__$java.lang.Object__$java.lang.Object)))
+ (field $m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.String__$Object.array__$java.lang.Object)))
 ))
 (global $jsoptional.Main.AFunction.vtable (mut (ref null $jsoptional.Main.AFunction.vtable)) (ref.null $jsoptional.Main.AFunction.vtable))
 
@@ -121,15 +121,15 @@
 (func $m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object@jsoptional.Main.AFunction
  (param $this.untyped (ref null $java.lang.Object))
  (param $i (ref null $java.lang.String))
- (param $args (ref null $java.lang.Object))
+ (param $args (ref null $Object.array))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (local $this (ref null $jsoptional.Main.AFunction))
  (local.set $this (ref.cast $java.lang.Object $jsoptional.Main.AFunction (local.get $this.untyped) (global.get $jsoptional.Main.AFunction.rtt)))
  (block $return.label
   (block
-   ;; return args[0];
-   (local.set $return.value (ref.null $java.lang.Object))
+   ;; return ((Object) args[0]);
+   (local.set $return.value (ref.cast $java.lang.Object $java.lang.Object (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $args)) (i32.const 0)) (global.get $java.lang.Object.rtt)))
    (br $return.label)
   )
  )

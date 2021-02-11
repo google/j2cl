@@ -61,24 +61,26 @@
  (local $$qualifier_3 (ref null $java.lang.Object))
  (local $$qualifier_4 (ref null $java.lang.Object))
  (local $containerArrT (ref null $cast.CastGenerics.Container))
- (local $arrT (ref null $java.lang.Object))
+ (local $arrT (ref null $Object.array))
  (local $$qualifier_5 (ref null $java.lang.Object))
- (local $arrA (ref null $java.lang.Object))
- (local $arrB (ref null $java.lang.Object))
- (local $containerArrU (ref null $cast.CastGenerics.Container))
- (local $arrU (ref null $java.lang.Object))
  (local $$qualifier_6 (ref null $java.lang.Object))
+ (local $arrA (ref null $Object.array))
+ (local $arrB (ref null $Object.array))
+ (local $containerArrU (ref null $cast.CastGenerics.Container))
+ (local $arrU (ref null $Object.array))
+ (local $$qualifier_7 (ref null $java.lang.Object))
+ (local $$qualifier_8 (ref null $java.lang.Object))
  (local $containerBase (ref null $cast.CastGenerics.Container))
- (local $$qualifier_7 (ref null $cast.CastGenerics.BaseImplementor))
- (local $$qualifier_8 (ref null $cast.CastGenerics.BaseImplementor))
+ (local $$qualifier_9 (ref null $cast.CastGenerics.BaseImplementor))
+ (local $$qualifier_10 (ref null $cast.CastGenerics.BaseImplementor))
  (local $containerImplementor (ref null $cast.CastGenerics.Container))
- (local $$qualifier_9 (ref null $cast.CastGenerics.Implementor))
- (local $$qualifier_10 (ref null $cast.CastGenerics.Implementor))
+ (local $$qualifier_11 (ref null $cast.CastGenerics.Implementor))
+ (local $$qualifier_12 (ref null $cast.CastGenerics.Implementor))
  (block $return.label
   (block
    ;; String str = ((String) new CastGenerics.<init>().field);
    
-   (local.set $str (ref.cast $java.lang.Object $java.lang.String (struct.get $cast.CastGenerics $field@cast.CastGenerics  (call $m_<init>__void@cast.CastGenerics (struct.new_with_rtt $cast.CastGenerics (global.get $cast.CastGenerics.vtable) (ref.null $java.lang.Object) (global.get $cast.CastGenerics.rtt)))) (global.get $java.lang.String.rtt)))
+   (local.set $str (ref.cast $java.lang.Object $java.lang.String (struct.get $cast.CastGenerics $field@cast.CastGenerics(call $m_<init>__void@cast.CastGenerics (struct.new_with_rtt $cast.CastGenerics (global.get $cast.CastGenerics.vtable) (ref.null $java.lang.Object) (global.get $cast.CastGenerics.rtt)))) (global.get $java.lang.String.rtt)))
    ;; (str = ((String) (CastGenerics<String, Number> $qualifier = new CastGenerics.<init>(),$qualifier.method())));
    (local.set $str (ref.cast $java.lang.Object $java.lang.String (block (result (ref null $java.lang.String))
     
@@ -124,55 +126,65 @@
    (local.set $containerArrT (ref.null $cast.CastGenerics.Container))
    ;; T[] arrT = ((T[]) containerArrT.get());
    
-   (local.set $arrT (ref.null $java.lang.Object))
-   ;; arrT[0].mA();
-   
+   (local.set $arrT (ref.null $Object.array))
    (block
-    ;; B $qualifier = ((B) arrT[0]);
+    ;; T $qualifier = ((T) arrT[0]);
     
     (local.set $$qualifier_5 (ref.null $java.lang.Object))
-    ;; $qualifier.mB();
+    ;; $qualifier.mA();
     
    )
-   ;; A[] arrA = ((A[]) containerArrT.get());
-   
-   (local.set $arrA (ref.null $java.lang.Object))
-   ;; B[] arrB = ((B[]) containerArrT.get());
-   
-   (local.set $arrB (ref.null $java.lang.Object))
-   ;; Container<U[]> containerArrU = null;
-   
-   (local.set $containerArrU (ref.null $cast.CastGenerics.Container))
-   ;; U[] arrU = ((U[]) containerArrU.get());
-   
-   (local.set $arrU (ref.null $java.lang.Object))
-   ;; arrU[0].mA();
-   
    (block
-    ;; B $qualifier = ((B) arrU[0]);
+    ;; B $qualifier = ((B) ((T) arrT[0]));
     
     (local.set $$qualifier_6 (ref.null $java.lang.Object))
     ;; $qualifier.mB();
     
    )
+   ;; A[] arrA = ((A[]) containerArrT.get());
+   
+   (local.set $arrA (ref.null $Object.array))
+   ;; B[] arrB = ((B[]) containerArrT.get());
+   
+   (local.set $arrB (ref.null $Object.array))
+   ;; Container<U[]> containerArrU = null;
+   
+   (local.set $containerArrU (ref.null $cast.CastGenerics.Container))
+   ;; U[] arrU = ((U[]) containerArrU.get());
+   
+   (local.set $arrU (ref.null $Object.array))
+   (block
+    ;; U $qualifier = ((U) arrU[0]);
+    
+    (local.set $$qualifier_7 (ref.null $java.lang.Object))
+    ;; $qualifier.mA();
+    
+   )
+   (block
+    ;; B $qualifier = ((B) ((U) arrU[0]));
+    
+    (local.set $$qualifier_8 (ref.null $java.lang.Object))
+    ;; $qualifier.mB();
+    
+   )
    ;; (arrA = ((A[]) containerArrU.get()));
-   (local.set $arrA (ref.null $java.lang.Object))
+   (local.set $arrA (ref.null $Object.array))
    ;; (arrB = ((B[]) containerArrU.get()));
-   (local.set $arrB (ref.null $java.lang.Object))
+   (local.set $arrB (ref.null $Object.array))
    ;; Container<BaseImplementor> containerBase = null;
    
    (local.set $containerBase (ref.null $cast.CastGenerics.Container))
    (block
     ;; BaseImplementor $qualifier = ((BaseImplementor) containerBase.get());
     
-    (local.set $$qualifier_7 (ref.cast $java.lang.Object $cast.CastGenerics.BaseImplementor (call_ref (local.get $containerBase)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerBase)))) (global.get $cast.CastGenerics.BaseImplementor.rtt)))
+    (local.set $$qualifier_9 (ref.cast $java.lang.Object $cast.CastGenerics.BaseImplementor (call_ref (local.get $containerBase)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerBase)))) (global.get $cast.CastGenerics.BaseImplementor.rtt)))
     ;; $qualifier.mA();
     
    )
    (block
     ;; BaseImplementor $qualifier = ((BaseImplementor) containerBase.get());
     
-    (local.set $$qualifier_8 (ref.cast $java.lang.Object $cast.CastGenerics.BaseImplementor (call_ref (local.get $containerBase)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerBase)))) (global.get $cast.CastGenerics.BaseImplementor.rtt)))
+    (local.set $$qualifier_10 (ref.cast $java.lang.Object $cast.CastGenerics.BaseImplementor (call_ref (local.get $containerBase)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerBase)))) (global.get $cast.CastGenerics.BaseImplementor.rtt)))
     ;; $qualifier.mB();
     
    )
@@ -182,16 +194,16 @@
    (block
     ;; Implementor $qualifier = ((Implementor) containerImplementor.get());
     
-    (local.set $$qualifier_9 (ref.cast $java.lang.Object $cast.CastGenerics.Implementor (call_ref (local.get $containerImplementor)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerImplementor)))) (global.get $cast.CastGenerics.Implementor.rtt)))
+    (local.set $$qualifier_11 (ref.cast $java.lang.Object $cast.CastGenerics.Implementor (call_ref (local.get $containerImplementor)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerImplementor)))) (global.get $cast.CastGenerics.Implementor.rtt)))
     ;; $qualifier.mA();
-    (call_ref (local.get $$qualifier_9)(struct.get $cast.CastGenerics.Implementor.vtable $m_mA__void (struct.get $cast.CastGenerics.Implementor $vtable(local.get $$qualifier_9))))
+    (call_ref (local.get $$qualifier_11)(struct.get $cast.CastGenerics.Implementor.vtable $m_mA__void (struct.get $cast.CastGenerics.Implementor $vtable(local.get $$qualifier_11))))
    )
    (block
     ;; Implementor $qualifier = ((Implementor) containerImplementor.get());
     
-    (local.set $$qualifier_10 (ref.cast $java.lang.Object $cast.CastGenerics.Implementor (call_ref (local.get $containerImplementor)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerImplementor)))) (global.get $cast.CastGenerics.Implementor.rtt)))
+    (local.set $$qualifier_12 (ref.cast $java.lang.Object $cast.CastGenerics.Implementor (call_ref (local.get $containerImplementor)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerImplementor)))) (global.get $cast.CastGenerics.Implementor.rtt)))
     ;; $qualifier.mB();
-    (call_ref (local.get $$qualifier_10)(struct.get $cast.CastGenerics.Implementor.vtable $m_mB__void (struct.get $cast.CastGenerics.Implementor $vtable(local.get $$qualifier_10))))
+    (call_ref (local.get $$qualifier_12)(struct.get $cast.CastGenerics.Implementor.vtable $m_mB__void (struct.get $cast.CastGenerics.Implementor $vtable(local.get $$qualifier_12))))
    )
   )
  )
@@ -221,8 +233,8 @@
  (local $o (ref null $java.lang.Object))
  (local $e (ref null $java.lang.Number))
  (local $t (ref null $java.lang.Object))
- (local $es (ref null $java.lang.Object))
- (local $ts (ref null $java.lang.Object))
+ (local $es (ref null $Object.array))
+ (local $ts (ref null $Object.array))
  (local $this (ref null $cast.CastGenerics))
  (local.set $this (ref.cast $java.lang.Object $cast.CastGenerics (local.get $this.untyped) (global.get $cast.CastGenerics.rtt)))
  (block $return.label
@@ -238,10 +250,10 @@
    (local.set $t (ref.null $java.lang.Object))
    ;; E[] es = ((E[]) o);
    
-   (local.set $es (ref.null $java.lang.Object))
+   (local.set $es (ref.null $Object.array))
    ;; T[] ts = ((T[]) o);
    
-   (local.set $ts (ref.null $java.lang.Object))
+   (local.set $ts (ref.null $Object.array))
   )
  )
 )
@@ -267,7 +279,7 @@
    
    (local.set $c (ref.cast $java.lang.Object $cast.CastGenerics (local.get $o) (global.get $cast.CastGenerics.rtt)))
    ;; (c = ((S[]) o));
-   (local.set $c (ref.null $java.lang.Object))
+   (local.set $c (ref.null $Object.array))
    ;; (c = ((V) o));
    (local.set $c (ref.null $java.lang.Enum))
   )
@@ -1227,10 +1239,10 @@
   (block
    ;; Object foo = ((Object[]) null);
    
-   (local.set $foo (ref.null $java.lang.Object))
+   (local.set $foo (ref.null $Object.array))
    ;; Object bar = ((Object[][]) null);
    
-   (local.set $bar (ref.null $java.lang.Object))
+   (local.set $bar (ref.null $Object.array))
   )
  )
 )

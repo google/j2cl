@@ -26,9 +26,9 @@
    ;; Object.this.Object.<init>();
    
    ;; (GenericEquals.this.value = value);
-   (struct.set $genericequals.GenericEquals $value@genericequals.GenericEquals  (local.get $this) (local.get $value))
+   (struct.set $genericequals.GenericEquals $value@genericequals.GenericEquals(local.get $this) (local.get $value))
    ;; (GenericEquals.this.value2 = null);
-   (struct.set $genericequals.GenericEquals $value2@genericequals.GenericEquals  (local.get $this) (ref.null $genericequals.GenericEquals))
+   (struct.set $genericequals.GenericEquals $value2@genericequals.GenericEquals(local.get $this) (ref.null $genericequals.GenericEquals))
   )
  )
  (local.get $this)
@@ -45,7 +45,7 @@
  (block $return.label
   (block
    ;; return other.value2.value;
-   (local.set $return.value (struct.get $genericequals.GenericEquals $value@genericequals.GenericEquals  (struct.get $genericequals.GenericEquals $value2@genericequals.GenericEquals  (local.get $other))))
+   (local.set $return.value (struct.get $genericequals.GenericEquals $value@genericequals.GenericEquals(struct.get $genericequals.GenericEquals $value2@genericequals.GenericEquals(local.get $other))))
    (br $return.label)
   )
  )
@@ -88,7 +88,7 @@
    
    (local.set $other (ref.cast $java.lang.Object $genericequals.GenericEquals (local.get $obj) (global.get $genericequals.GenericEquals.rtt)))
    ;; return GenericEquals.this.value.equals(other.value);
-   (local.set $return.value (call_ref (struct.get $genericequals.GenericEquals $value@genericequals.GenericEquals  (local.get $this))(struct.get $genericequals.GenericEquals $value@genericequals.GenericEquals  (local.get $other))(struct.get $java.lang.Object.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.Object $vtable(struct.get $genericequals.GenericEquals $value@genericequals.GenericEquals  (local.get $this))))))
+   (local.set $return.value (call_ref (struct.get $genericequals.GenericEquals $value@genericequals.GenericEquals(local.get $this))(struct.get $genericequals.GenericEquals $value@genericequals.GenericEquals(local.get $other))(struct.get $java.lang.Object.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.Object $vtable(struct.get $genericequals.GenericEquals $value@genericequals.GenericEquals(local.get $this))))))
    (br $return.label)
   )
  )

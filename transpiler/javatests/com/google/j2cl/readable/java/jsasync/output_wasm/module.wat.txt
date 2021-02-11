@@ -186,7 +186,7 @@
  (block $return.label
   (block
    ;; return jsasync.Main.Promise.resolve(((Integer) jsasync.Main.await($1.this.this.x)));
-   (local.set $return.value (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (ref.cast $java.lang.Object $java.lang.Integer (call $m_await__jsasync_Main_IThenable__java_lang_Object@jsasync.Main (struct.get $jsasync.Main $x@jsasync.Main  (struct.get $jsasync.Main.1 $this@jsasync.Main.1  (local.get $this)))) (global.get $java.lang.Integer.rtt))))
+   (local.set $return.value (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (ref.cast $java.lang.Object $java.lang.Integer (call $m_await__jsasync_Main_IThenable__java_lang_Object@jsasync.Main (struct.get $jsasync.Main $x@jsasync.Main(struct.get $jsasync.Main.1 $this@jsasync.Main.1(local.get $this)))) (global.get $java.lang.Integer.rtt))))
    (br $return.label)
   )
  )
@@ -282,7 +282,7 @@
    
    (local.set $tmp (local.get $this))
    ;; return jsasync.Main.Promise.resolve(((Integer) jsasync.Main.await($3.this.this.x)));
-   (local.set $return.value (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (ref.cast $java.lang.Object $java.lang.Integer (call $m_await__jsasync_Main_IThenable__java_lang_Object@jsasync.Main (struct.get $jsasync.Main $x@jsasync.Main  (struct.get $jsasync.Main.3 $this@jsasync.Main.3  (local.get $this)))) (global.get $java.lang.Integer.rtt))))
+   (local.set $return.value (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (ref.cast $java.lang.Object $java.lang.Integer (call $m_await__jsasync_Main_IThenable__java_lang_Object@jsasync.Main (struct.get $jsasync.Main $x@jsasync.Main(struct.get $jsasync.Main.3 $this@jsasync.Main.3(local.get $this)))) (global.get $java.lang.Integer.rtt))))
    (br $return.label)
   )
  )

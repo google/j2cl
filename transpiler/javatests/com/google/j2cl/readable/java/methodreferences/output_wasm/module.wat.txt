@@ -253,7 +253,7 @@
  (block $return.label
   (block
    ;; return ObjectCapturingOuter.this.this;
-   (local.set $return.value (struct.get $methodreferences.MethodReferences.ObjectCapturingOuter $this@methodreferences.MethodReferences.ObjectCapturingOuter  (local.get $this)))
+   (local.set $return.value (struct.get $methodreferences.MethodReferences.ObjectCapturingOuter $this@methodreferences.MethodReferences.ObjectCapturingOuter(local.get $this)))
    (br $return.label)
   )
  )

@@ -71,7 +71,7 @@
    ;; Enum.this.Enum.<init>();
    
    ;; (Enum2.this.foo = foo);
-   (struct.set $enums.Enum2 $foo@enums.Enum2  (local.get $this) (local.get $foo))
+   (struct.set $enums.Enum2 $foo@enums.Enum2(local.get $this) (local.get $foo))
   )
  )
  (local.get $this)
@@ -94,7 +94,7 @@
 ;;; Enum2(Object... somePars)
 (func $m_<init>__arrayOf_java_lang_Object__void_$p_enums_Enum2@enums.Enum2
  (param $this (ref null $enums.Enum2))
- (param $somePars (ref null $java.lang.Object))
+ (param $somePars (ref null $Object.array))
  (result (ref null $enums.Enum2))
  (block $return.label
   (block

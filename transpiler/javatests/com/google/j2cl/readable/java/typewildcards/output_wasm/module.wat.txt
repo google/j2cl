@@ -123,7 +123,7 @@
   (block
    ;; int i = t.f;
    
-   (local.set $i (struct.get $typewildcards.TypeWildCards.A $f@typewildcards.TypeWildCards.A  (local.get $t)))
+   (local.set $i (struct.get $typewildcards.TypeWildCards.A $f@typewildcards.TypeWildCards.A(local.get $t)))
    ;; t.m();
    (call_ref (local.get $t)(struct.get $typewildcards.TypeWildCards.A.vtable $m_m__void (struct.get $typewildcards.TypeWildCards.A $vtable(local.get $t))))
   )
@@ -139,7 +139,7 @@
   (block
    ;; int i = t.f;
    
-   (local.set $i (struct.get $typewildcards.TypeWildCards.A $f@typewildcards.TypeWildCards.A  (local.get $t)))
+   (local.set $i (struct.get $typewildcards.TypeWildCards.A $f@typewildcards.TypeWildCards.A(local.get $t)))
    ;; t.m();
    (call_ref (local.get $t)(struct.get $typewildcards.TypeWildCards.A.vtable $m_m__void (struct.get $typewildcards.TypeWildCards.A $vtable(local.get $t))))
    (block

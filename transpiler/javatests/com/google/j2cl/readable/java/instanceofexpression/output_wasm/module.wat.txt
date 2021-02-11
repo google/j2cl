@@ -128,9 +128,9 @@
 (func $m_testInstanceOfArray__void@instanceofexpression.InstanceofExpressions
  (param $this.untyped (ref null $java.lang.Object))
  (local $object (ref null $java.lang.Object))
- (local $objectArray (ref null $java.lang.Object))
- (local $objectDoubleArray (ref null $java.lang.Object))
- (local $stringArray (ref null $java.lang.Object))
+ (local $objectArray (ref null $Object.array))
+ (local $objectDoubleArray (ref null $Object.array))
+ (local $stringArray (ref null $Object.array))
  (local $a i32)
  (local $this (ref null $instanceofexpression.InstanceofExpressions))
  (local.set $this (ref.cast $java.lang.Object $instanceofexpression.InstanceofExpressions (local.get $this.untyped) (global.get $instanceofexpression.InstanceofExpressions.rtt)))
@@ -141,13 +141,13 @@
    (local.set $object (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (global.get $java.lang.Object.rtt))))
    ;; Object[] objectArray = new Object[0];
    
-   (local.set $objectArray (ref.null $java.lang.Object))
+   (local.set $objectArray (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (array.new_default_with_rtt $Object.array.elements (i32.const 0) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
    ;; Object[][] objectDoubleArray = new Object[0][];
    
-   (local.set $objectDoubleArray (ref.null $java.lang.Object))
+   (local.set $objectDoubleArray (ref.null $Object.array))
    ;; String[] stringArray = new String[0];
    
-   (local.set $stringArray (ref.null $java.lang.Object))
+   (local.set $stringArray (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (array.new_default_with_rtt $Object.array.elements (i32.const 0) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
    ;; boolean a;
    
    ;; (a = object instanceof Object[]);

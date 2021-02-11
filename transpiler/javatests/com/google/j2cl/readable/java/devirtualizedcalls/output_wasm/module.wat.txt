@@ -30,7 +30,7 @@
 ;;; void ArrayCalls.main()
 (func $m_main__void@devirtualizedcalls.ArrayCalls
  (param $this.untyped (ref null $java.lang.Object))
- (local $array2d (ref null $java.lang.Object))
+ (local $array2d (ref null $Object.array))
  (local $length1 i32)
  (local $length2 i32)
  (local $this (ref null $devirtualizedcalls.ArrayCalls))
@@ -39,13 +39,13 @@
   (block
    ;; Object[][] array2d = new Object[1][1];
    
-   (local.set $array2d (ref.null $java.lang.Object))
+   (local.set $array2d (ref.null $Object.array))
    ;; int length1 = <expr>;
    
-   (local.set $length1 (i32.const 0))
+   (local.set $length1 (array.len $Object.array.elements (struct.get $Object.array $elements (ref.null $Object.array))))
    ;; int length2 = <expr>;
    
-   (local.set $length2 (i32.const 0))
+   (local.set $length2 (array.len $Object.array.elements (struct.get $Object.array $elements (local.get $array2d))))
   )
  )
 )
@@ -390,7 +390,7 @@
 (func $m_main__void@devirtualizedcalls.ObjectCalls
  (param $this.untyped (ref null $java.lang.Object))
  (local $object (ref null $java.lang.Object))
- (local $objectCalls (ref null $java.lang.Object))
+ (local $objectCalls (ref null $Object.array))
  (local $this (ref null $devirtualizedcalls.ObjectCalls))
  (local.set $this (ref.cast $java.lang.Object $devirtualizedcalls.ObjectCalls (local.get $this.untyped) (global.get $devirtualizedcalls.ObjectCalls.rtt)))
  (block $return.label
@@ -408,7 +408,7 @@
    (drop (call_ref (local.get $object)(struct.get $java.lang.Object.vtable $m_getClass__java_lang_Class (struct.get $java.lang.Object $vtable(local.get $object)))))
    ;; ObjectCalls[] objectCalls = new ObjectCalls[1];
    
-   (local.set $objectCalls (ref.null $java.lang.Object))
+   (local.set $objectCalls (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (array.new_default_with_rtt $Object.array.elements (i32.const 1) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
    ;; objectCalls.equals(objectCalls);
    (drop (call_ref (local.get $objectCalls)(local.get $objectCalls)(struct.get $java.lang.Object.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.Object $vtable(local.get $objectCalls)))))
    ;; objectCalls.hashCode();

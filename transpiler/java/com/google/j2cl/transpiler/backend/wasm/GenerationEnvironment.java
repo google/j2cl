@@ -19,6 +19,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static java.util.stream.Collectors.joining;
 
+import com.google.common.base.Preconditions;
 import com.google.common.base.Predicates;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
@@ -64,6 +65,17 @@ class GenerationEnvironment {
     return WASM_TYPES_BY_PRIMITIVE_TYPES.get(typeDescriptor);
   }
 
+  /**
+   * Returns the name for the element array type associated with typeDescriptor.
+   *
+   * <p>In WASM in order to use function references as structure fields (e.g. in the vtable), their
+   * types needs to be declared.
+   */
+  String getElementArrayTypeName(TypeDescriptor typeDescriptor) {
+    Preconditions.checkArgument(typeDescriptor.isArray());
+    return getWasmTypeName(typeDescriptor) + ".elements";
+  }
+
   /** Maps Java type declarations to the corresponding wasm type layout objects. */
   private final Map<TypeDeclaration, WasmTypeLayout> wasmTypeLayoutByTypeDeclaration;
 
@@ -86,8 +98,17 @@ class GenerationEnvironment {
   String getWasmTypeName(TypeDescriptor typeDescriptor) {
     typeDescriptor = typeDescriptor.toRawTypeDescriptor();
 
-    // TODO(rluble): remove j.l.O as a placeholder for arrays once arrays are implemented.
-    if (typeDescriptor.isInterface() || typeDescriptor.isArray()) {
+    if (typeDescriptor.isArray()) {
+      TypeDescriptor componentTypeDescriptor =
+          ((ArrayTypeDescriptor) typeDescriptor).getComponentTypeDescriptor();
+      String simpleName =
+          componentTypeDescriptor.isPrimitive()
+              ? ((PrimitiveTypeDescriptor) componentTypeDescriptor).getSimpleSourceName()
+              : "Object";
+      return String.format("$%s.array", simpleName);
+    }
+
+    if (typeDescriptor.isInterface()) {
       // Interfaces are modeled as java.lang.Object at runtime.
       return getWasmTypeName(TypeDescriptors.get().javaLangObject);
     }
@@ -114,15 +135,14 @@ class GenerationEnvironment {
 
   /** Returns the name of the global containing the rtt for {@code typeDeclaration}. */
   String getRttGlobalName(TypeDeclaration typeDeclaration) {
-    return getWasmTypeName(typeDeclaration.toUnparameterizedTypeDescriptor()) + ".rtt";
+    return getRttGlobalName(typeDeclaration.toUnparameterizedTypeDescriptor());
   }
 
   /** Returns the name of the global containing the rtt for {@code typeDescriptor}. */
   String getRttGlobalName(TypeDescriptor typeDescriptor) {
-    if (typeDescriptor.isClass() || typeDescriptor.isEnum()) {
-      return getRttGlobalName(((DeclaredTypeDescriptor) typeDescriptor).getTypeDeclaration());
-    }
-    throw new AssertionError("Unexpected type: " + typeDescriptor.getReadableDescription());
+    typeDescriptor = typeDescriptor.toUnparameterizedTypeDescriptor();
+    checkArgument(typeDescriptor.isClass() || typeDescriptor.isEnum() || typeDescriptor.isArray());
+    return getWasmTypeName(typeDescriptor) + ".rtt";
   }
 
   /** Returns the name of the wasm type of the vtable for a Java type. */

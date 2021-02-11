@@ -16,6 +16,8 @@
 package com.google.j2cl.transpiler.backend.wasm;
 
 import static com.google.common.base.Predicates.not;
+import static com.google.j2cl.transpiler.backend.wasm.GenerationEnvironment.getWasmTypeForPrimitive;
+import static java.lang.String.format;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableSet;
@@ -28,6 +30,7 @@ import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
@@ -43,6 +46,7 @@ import java.util.stream.Stream;
 
 /** Generates a WASM module containing all the code for the application. */
 public class WasmModuleGenerator {
+
   private final Problems problems;
   private final Path outputPath;
   private final Set<String> pendingEntryPoints;
@@ -106,7 +110,47 @@ public class WasmModuleGenerator {
             });
   }
 
+  private void emitArrayTypes() {
+    builder.newLine();
+    builder.append(";;; Code for Array types.");
+
+    emitArrayType("Object", environment.getWasmType(TypeDescriptors.get().javaLangObject));
+
+    // TODO(dramaix): consider using packed type i8 and i16 for some primitives
+    PrimitiveTypes.TYPES.stream()
+        .filter(p -> p != PrimitiveTypes.VOID)
+        .forEach(p -> emitArrayType(p.getSimpleSourceName(), getWasmTypeForPrimitive(p)));
+  }
+
+  private void emitArrayType(String javaType, String wasmType) {
+    builder.newLine();
+    builder.appendLines(
+        format(
+            "(global $%s.array.elements.rtt "
+                + "(rtt 1 $%s.array.elements) (rtt.canon $%s.array.elements))",
+            javaType, javaType, javaType),
+        // TODO(https://github.com/WebAssembly/wasp/issues/55): remove "field" when the issue is
+        //  fixed in wasp
+        format("(type $%s.array.elements (array (field (mut %s))))", javaType, wasmType),
+        format(
+            "(global $%s.array.rtt (rtt 2 $%s.array) (rtt.sub $%s.array  (global.get %s)))",
+            javaType,
+            javaType,
+            javaType,
+            environment.getRttGlobalName(TypeDescriptors.get().javaLangObject)),
+        format("(type $%s.array", javaType),
+        "  (struct",
+        format(
+            "    (field $vtable (ref null %s))",
+            environment.getWasmVtableTypeName(TypeDescriptors.get().javaLangObject)),
+        format("    (field $elements (ref null $%s.array.elements)))", javaType),
+        ")");
+    // TODO(b/179726089): implement array methods
+  }
+
   private void emitTypes(List<CompilationUnit> compilationUnits) {
+    emitArrayTypes();
+
     for (CompilationUnit j2clCompilationUnit : compilationUnits) {
       builder.newLine();
       builder.append(
@@ -146,13 +190,13 @@ public class WasmModuleGenerator {
     String superTypeRtt =
         superTypeDescriptor == null
             ? "(rtt.canon " + wasmTypeName + ")"
-            : String.format(
+            : format(
                 "(rtt.sub %s (global.get %s))",
                 wasmTypeName,
                 environment.getRttGlobalName(superTypeDescriptor.getTypeDeclaration()) + "");
     builder.newLine();
     builder.append(
-        String.format(
+        format(
             "(global %s (rtt %d %s) %s)",
             environment.getRttGlobalName(typeDeclaration) + "", depth, wasmTypeName, superTypeRtt));
   }

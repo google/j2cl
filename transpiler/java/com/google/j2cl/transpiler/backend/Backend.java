@@ -42,6 +42,7 @@ import com.google.j2cl.transpiler.passes.ImplementStaticInitialization;
 import com.google.j2cl.transpiler.passes.ImplementSynchronizedStatements;
 import com.google.j2cl.transpiler.passes.InsertBitwiseOperatorBooleanCoercions;
 import com.google.j2cl.transpiler.passes.InsertBoxingConversions;
+import com.google.j2cl.transpiler.passes.InsertCastOnArrayAccess;
 import com.google.j2cl.transpiler.passes.InsertCastOnNewInstances;
 import com.google.j2cl.transpiler.passes.InsertCastsToTypeBounds;
 import com.google.j2cl.transpiler.passes.InsertErasureTypeSafetyCasts;
@@ -284,6 +285,7 @@ public enum Backend {
           // Rewrite 'a || b' into 'a ? true : b' and 'a && b' into 'a ? b : false'
           new RewriteShortcutOperators(),
           new NormalizeLabels(),
+          new InsertCastOnArrayAccess(),
           new NormalizeDynamicDispatchQualifiers(),
 
           // Normalize multiexpressions before rewriting assignments so that whenever there is a
@@ -292,7 +294,6 @@ public enum Backend {
 
           // a = b => (a = b, a)
           new RewriteAssignmentExpressions(),
-
           // Post-verifications
           new VerifySingleAstReference(),
           new VerifyParamAndArgCounts(),

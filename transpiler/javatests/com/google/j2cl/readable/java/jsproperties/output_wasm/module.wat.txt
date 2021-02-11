@@ -118,7 +118,7 @@
  (block $return.label
   (block
    ;; return (Bar.this.f + 1);
-   (local.set $return.value (i32.add (struct.get $jsproperties.Bar $f@jsproperties.Bar  (local.get $this)) (i32.const 1)))
+   (local.set $return.value (i32.add (struct.get $jsproperties.Bar $f@jsproperties.Bar(local.get $this)) (i32.const 1)))
    (br $return.label)
   )
  )
@@ -135,7 +135,7 @@
  (block $return.label
   (block
    ;; (Bar.this.f = (x + 2));
-   (struct.set $jsproperties.Bar $f@jsproperties.Bar  (local.get $this) (i32.add (local.get $x) (i32.const 2)))
+   (struct.set $jsproperties.Bar $f@jsproperties.Bar(local.get $this) (i32.add (local.get $x) (i32.const 2)))
   )
  )
 )
@@ -151,7 +151,7 @@
  (block $return.label
   (block
    ;; return (Bar.this.f + 3);
-   (local.set $return.value (i32.add (struct.get $jsproperties.Bar $f@jsproperties.Bar  (local.get $this)) (i32.const 3)))
+   (local.set $return.value (i32.add (struct.get $jsproperties.Bar $f@jsproperties.Bar(local.get $this)) (i32.const 3)))
    (br $return.label)
   )
  )
@@ -168,7 +168,7 @@
  (block $return.label
   (block
    ;; (Bar.this.f = (x + 4));
-   (struct.set $jsproperties.Bar $f@jsproperties.Bar  (local.get $this) (i32.add (local.get $x) (i32.const 4)))
+   (struct.set $jsproperties.Bar $f@jsproperties.Bar(local.get $this) (i32.add (local.get $x) (i32.const 4)))
   )
  )
 )

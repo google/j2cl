@@ -15,7 +15,7 @@
  (field $m_fun__java_lang_Exception__void (mut (ref $function.$java.lang.Exception__$void)))
  (field $m_fun__java_lang_Error__void (mut (ref $function.$java.lang.Error__$void)))
  (field $m_bar__genericmethod_GenericMethod (mut (ref $function.__$genericmethod.GenericMethod)))
- (field $m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object)))
+ (field $m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object (mut (ref $function.$Object.array__$Object.array)))
  (field $m_checked__java_lang_Object (mut (ref $function.__$java.lang.Object)))
  (field $m_unchecked__java_lang_Object (mut (ref $function.__$java.lang.Object)))
  (field $m_test__void (mut (ref $function.__$void)))
@@ -113,9 +113,9 @@
 ;;; T[] GenericMethod.fun(T[] array)
 (func $m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object@genericmethod.GenericMethod
  (param $this.untyped (ref null $java.lang.Object))
- (param $array (ref null $java.lang.Object))
- (result (ref null $java.lang.Object))
- (local $return.value (ref null $java.lang.Object))
+ (param $array (ref null $Object.array))
+ (result (ref null $Object.array))
+ (local $return.value (ref null $Object.array))
  (local $this (ref null $genericmethod.GenericMethod))
  (local.set $this (ref.cast $java.lang.Object $genericmethod.GenericMethod (local.get $this.untyped) (global.get $genericmethod.GenericMethod.rtt)))
  (block $return.label
@@ -180,15 +180,15 @@
    ;; g.foo(g,g);
    (call_ref (local.get $g)(local.get $g)(local.get $g)(struct.get $genericmethod.GenericMethod.vtable $m_foo__java_lang_Object__java_lang_Object__void (struct.get $genericmethod.GenericMethod $vtable(local.get $g))))
    ;; g.foo(new Error.<init>(),new Exception.<init>());
-   (call_ref (local.get $g)(call $m_<init>__void@java.lang.Error (struct.new_with_rtt $java.lang.Error (global.get $java.lang.Error.vtable) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Error.rtt)))(call $m_<init>__void@java.lang.Exception (struct.new_with_rtt $java.lang.Exception (global.get $java.lang.Exception.vtable) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Exception.rtt)))(struct.get $genericmethod.GenericMethod.vtable $m_foo__java_lang_Object__java_lang_Object__void (struct.get $genericmethod.GenericMethod $vtable(local.get $g))))
+   (call_ref (local.get $g)(call $m_<init>__void@java.lang.Error (struct.new_with_rtt $java.lang.Error (global.get $java.lang.Error.vtable) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $Object.array) (ref.null $Object.array) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Error.rtt)))(call $m_<init>__void@java.lang.Exception (struct.new_with_rtt $java.lang.Exception (global.get $java.lang.Exception.vtable) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $Object.array) (ref.null $Object.array) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Exception.rtt)))(struct.get $genericmethod.GenericMethod.vtable $m_foo__java_lang_Object__java_lang_Object__void (struct.get $genericmethod.GenericMethod $vtable(local.get $g))))
    ;; g.fun(new Object.<init>());
    (call_ref (local.get $g)(call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (global.get $java.lang.Object.rtt)))(struct.get $genericmethod.GenericMethod.vtable $m_fun__java_lang_Object__void (struct.get $genericmethod.GenericMethod $vtable(local.get $g))))
    ;; g.fun(new Exception.<init>());
-   (call_ref (local.get $g)(call $m_<init>__void@java.lang.Exception (struct.new_with_rtt $java.lang.Exception (global.get $java.lang.Exception.vtable) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Exception.rtt)))(struct.get $genericmethod.GenericMethod.vtable $m_fun__java_lang_Exception__void (struct.get $genericmethod.GenericMethod $vtable(local.get $g))))
+   (call_ref (local.get $g)(call $m_<init>__void@java.lang.Exception (struct.new_with_rtt $java.lang.Exception (global.get $java.lang.Exception.vtable) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $Object.array) (ref.null $Object.array) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Exception.rtt)))(struct.get $genericmethod.GenericMethod.vtable $m_fun__java_lang_Exception__void (struct.get $genericmethod.GenericMethod $vtable(local.get $g))))
    ;; g.fun(new Error.<init>());
-   (call_ref (local.get $g)(call $m_<init>__void@java.lang.Error (struct.new_with_rtt $java.lang.Error (global.get $java.lang.Error.vtable) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Error.rtt)))(struct.get $genericmethod.GenericMethod.vtable $m_fun__java_lang_Error__void (struct.get $genericmethod.GenericMethod $vtable(local.get $g))))
+   (call_ref (local.get $g)(call $m_<init>__void@java.lang.Error (struct.new_with_rtt $java.lang.Error (global.get $java.lang.Error.vtable) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $Object.array) (ref.null $Object.array) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Error.rtt)))(struct.get $genericmethod.GenericMethod.vtable $m_fun__java_lang_Error__void (struct.get $genericmethod.GenericMethod $vtable(local.get $g))))
    ;; g.fun(new String[] {"asdf"});
-   (drop (call_ref (local.get $g)(ref.null $java.lang.Object)(struct.get $genericmethod.GenericMethod.vtable $m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object (struct.get $genericmethod.GenericMethod $vtable(local.get $g)))))
+   (drop (call_ref (local.get $g)(ref.null $Object.array)(struct.get $genericmethod.GenericMethod.vtable $m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object (struct.get $genericmethod.GenericMethod $vtable(local.get $g)))))
    ;; String s = ((String) GenericMethod.this.checked());
    
    (local.set $s (ref.cast $java.lang.Object $java.lang.String (call_ref (local.get $this)(struct.get $genericmethod.GenericMethod.vtable $m_checked__java_lang_Object (struct.get $genericmethod.GenericMethod $vtable(local.get $this)))) (global.get $java.lang.String.rtt)))
@@ -371,7 +371,7 @@
  (field $m_fun__java_lang_Exception__void (mut (ref $function.$java.lang.Exception__$void)))
  (field $m_fun__java_lang_Error__void (mut (ref $function.$java.lang.Error__$void)))
  (field $m_bar__genericmethod_GenericMethod (mut (ref $function.__$genericmethod.GenericMethod)))
- (field $m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object)))
+ (field $m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object (mut (ref $function.$Object.array__$Object.array)))
  (field $m_checked__java_lang_Object (mut (ref $function.__$java.lang.Object)))
  (field $m_unchecked__java_lang_Object (mut (ref $function.__$java.lang.Object)))
  (field $m_test__void (mut (ref $function.__$void)))
@@ -435,7 +435,7 @@
  (field $m_fun__java_lang_Exception__void (mut (ref $function.$java.lang.Exception__$void)))
  (field $m_fun__java_lang_Error__void (mut (ref $function.$java.lang.Error__$void)))
  (field $m_bar__genericmethod_GenericMethod (mut (ref $function.__$genericmethod.GenericMethod)))
- (field $m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object)))
+ (field $m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object (mut (ref $function.$Object.array__$Object.array)))
  (field $m_checked__java_lang_Object (mut (ref $function.__$java.lang.Object)))
  (field $m_unchecked__java_lang_Object (mut (ref $function.__$java.lang.Object)))
  (field $m_test__void (mut (ref $function.__$void)))

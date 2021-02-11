@@ -40,8 +40,8 @@
 ;;; void Arrays.testObjectArray()
 (func $m_testObjectArray__void@array.Arrays
  (param $this.untyped (ref null $java.lang.Object))
- (local $objects (ref null $java.lang.Object))
- (local $objects2d (ref null $java.lang.Object))
+ (local $objects (ref null $Object.array))
+ (local $objects2d (ref null $Object.array))
  (local $object (ref null $java.lang.Object))
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast $java.lang.Object $array.Arrays (local.get $this.untyped) (global.get $array.Arrays.rtt)))
@@ -49,27 +49,27 @@
   (block
    ;; Object[] objects = new Object[100];
    
-   (local.set $objects (ref.null $java.lang.Object))
+   (local.set $objects (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (array.new_default_with_rtt $Object.array.elements (i32.const 100) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
    ;; (objects = new Object[0]);
-   (local.set $objects (ref.null $java.lang.Object))
+   (local.set $objects (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (array.new_default_with_rtt $Object.array.elements (i32.const 0) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
    ;; (objects = new Object[] {null,null});
-   (local.set $objects (ref.null $java.lang.Object))
+   (local.set $objects (ref.null $Object.array))
    ;; Object[][] objects2d = new Object[5][10];
    
-   (local.set $objects2d (ref.null $java.lang.Object))
+   (local.set $objects2d (ref.null $Object.array))
    ;; (objects2d = new Object[][] {[null,null],null});
-   (local.set $objects2d (ref.null $java.lang.Object))
+   (local.set $objects2d (ref.null $Object.array))
    ;; (objects2d = new Object[20][]);
-   (local.set $objects2d (ref.null $java.lang.Object))
-   ;; Object object = objects[0];
+   (local.set $objects2d (ref.null $Object.array))
+   ;; Object object = ((Object) objects[0]);
    
-   (local.set $object (ref.null $java.lang.Object))
-   ;; (object = objects2d[0][1]);
-   (local.set $object (ref.null $java.lang.Object))
+   (local.set $object (ref.cast $java.lang.Object $java.lang.Object (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $objects)) (i32.const 0)) (global.get $java.lang.Object.rtt)))
+   ;; (object = ((Object) ((Object[]) objects2d[0])[1]));
+   (local.set $object (ref.cast $java.lang.Object $java.lang.Object (array.get $Object.array.elements (struct.get $Object.array $elements (ref.null $Object.array)) (i32.const 1)) (global.get $java.lang.Object.rtt)))
    ;; (objects[0] = null);
-   
-   ;; (objects2d[0][1] = null);
-   
+   (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $objects)) (i32.const 0) (ref.null $java.lang.Object))
+   ;; (((Object[]) objects2d[0])[1] = null);
+   (array.set $Object.array.elements (struct.get $Object.array $elements (ref.null $Object.array)) (i32.const 1) (ref.null $java.lang.Object))
   )
  )
 )
@@ -78,8 +78,8 @@
 ;;; void Arrays.testJavaTypeArray()
 (func $m_testJavaTypeArray__void@array.Arrays
  (param $this.untyped (ref null $java.lang.Object))
- (local $objects (ref null $java.lang.Object))
- (local $objects2d (ref null $java.lang.Object))
+ (local $objects (ref null $Object.array))
+ (local $objects2d (ref null $Object.array))
  (local $someObject (ref null $array.Arrays.SomeObject))
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast $java.lang.Object $array.Arrays (local.get $this.untyped) (global.get $array.Arrays.rtt)))
@@ -87,27 +87,27 @@
   (block
    ;; SomeObject[] objects = new SomeObject[100];
    
-   (local.set $objects (ref.null $java.lang.Object))
+   (local.set $objects (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (array.new_default_with_rtt $Object.array.elements (i32.const 100) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
    ;; (objects = new SomeObject[0]);
-   (local.set $objects (ref.null $java.lang.Object))
+   (local.set $objects (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (array.new_default_with_rtt $Object.array.elements (i32.const 0) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
    ;; (objects = new SomeObject[] {null,null});
-   (local.set $objects (ref.null $java.lang.Object))
+   (local.set $objects (ref.null $Object.array))
    ;; SomeObject[][] objects2d = new SomeObject[5][10];
    
-   (local.set $objects2d (ref.null $java.lang.Object))
+   (local.set $objects2d (ref.null $Object.array))
    ;; (objects2d = new SomeObject[][] {[null,null],null});
-   (local.set $objects2d (ref.null $java.lang.Object))
+   (local.set $objects2d (ref.null $Object.array))
    ;; (objects2d = new SomeObject[20][]);
-   (local.set $objects2d (ref.null $java.lang.Object))
-   ;; SomeObject someObject = objects[0];
+   (local.set $objects2d (ref.null $Object.array))
+   ;; SomeObject someObject = ((SomeObject) objects[0]);
    
-   (local.set $someObject (ref.null $array.Arrays.SomeObject))
-   ;; (someObject = objects2d[0][1]);
-   (local.set $someObject (ref.null $array.Arrays.SomeObject))
+   (local.set $someObject (ref.cast $java.lang.Object $array.Arrays.SomeObject (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $objects)) (i32.const 0)) (global.get $array.Arrays.SomeObject.rtt)))
+   ;; (someObject = ((SomeObject) ((SomeObject[]) objects2d[0])[1]));
+   (local.set $someObject (ref.cast $java.lang.Object $array.Arrays.SomeObject (array.get $Object.array.elements (struct.get $Object.array $elements (ref.null $Object.array)) (i32.const 1)) (global.get $array.Arrays.SomeObject.rtt)))
    ;; (objects[0] = null);
-   
-   ;; (objects2d[0][1] = null);
-   
+   (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $objects)) (i32.const 0) (ref.null $array.Arrays.SomeObject))
+   ;; (((SomeObject[]) objects2d[0])[1] = null);
+   (array.set $Object.array.elements (struct.get $Object.array $elements (ref.null $Object.array)) (i32.const 1) (ref.null $array.Arrays.SomeObject))
   )
  )
 )
@@ -116,8 +116,8 @@
 ;;; void Arrays.testIntArrays()
 (func $m_testIntArrays__void_$pp_array@array.Arrays
  (param $this.untyped (ref null $java.lang.Object))
- (local $ints (ref null $java.lang.Object))
- (local $ints2d (ref null $java.lang.Object))
+ (local $ints (ref null $int.array))
+ (local $ints2d (ref null $Object.array))
  (local $n i32)
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast $java.lang.Object $array.Arrays (local.get $this.untyped) (global.get $array.Arrays.rtt)))
@@ -125,27 +125,27 @@
   (block
    ;; int[] ints = new int[100];
    
-   (local.set $ints (ref.null $java.lang.Object))
+   (local.set $ints (struct.new_with_rtt $int.array (global.get $java.lang.Object.vtable) (array.new_default_with_rtt $int.array.elements (i32.const 100) (global.get $int.array.elements.rtt)) (global.get $int.array.rtt)))
    ;; (ints = new int[0]);
-   (local.set $ints (ref.null $java.lang.Object))
+   (local.set $ints (struct.new_with_rtt $int.array (global.get $java.lang.Object.vtable) (array.new_default_with_rtt $int.array.elements (i32.const 0) (global.get $int.array.elements.rtt)) (global.get $int.array.rtt)))
    ;; (ints = new int[] {0,1});
-   (local.set $ints (ref.null $java.lang.Object))
+   (local.set $ints (ref.null $int.array))
    ;; int[][] ints2d = new int[5][10];
    
-   (local.set $ints2d (ref.null $java.lang.Object))
+   (local.set $ints2d (ref.null $Object.array))
    ;; (ints2d = new int[][] {[1,2],null});
-   (local.set $ints2d (ref.null $java.lang.Object))
+   (local.set $ints2d (ref.null $Object.array))
    ;; (ints2d = new int[20][]);
-   (local.set $ints2d (ref.null $java.lang.Object))
+   (local.set $ints2d (ref.null $Object.array))
    ;; int n = ints[0];
    
-   (local.set $n (i32.const 0))
-   ;; (n = ints2d[0][1]);
-   (local.set $n (i32.const 0))
+   (local.set $n (array.get $int.array.elements (struct.get $int.array $elements (local.get $ints)) (i32.const 0)))
+   ;; (n = ((int[]) ints2d[0])[1]);
+   (local.set $n (array.get $int.array.elements (struct.get $int.array $elements (ref.null $int.array)) (i32.const 1)))
    ;; (ints[0] = 1);
-   
-   ;; (ints2d[0][1] = 1);
-   
+   (array.set $int.array.elements (struct.get $int.array $elements (local.get $ints)) (i32.const 0) (i32.const 1))
+   ;; (((int[]) ints2d[0])[1] = 1);
+   (array.set $int.array.elements (struct.get $int.array $elements (ref.null $int.array)) (i32.const 1) (i32.const 1))
   )
  )
 )
@@ -154,8 +154,8 @@
 ;;; void Arrays.testLongArrays()
 (func $m_testLongArrays__void_$pp_array@array.Arrays
  (param $this.untyped (ref null $java.lang.Object))
- (local $longs (ref null $java.lang.Object))
- (local $longs2d (ref null $java.lang.Object))
+ (local $longs (ref null $long.array))
+ (local $longs2d (ref null $Object.array))
  (local $n i64)
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast $java.lang.Object $array.Arrays (local.get $this.untyped) (global.get $array.Arrays.rtt)))
@@ -163,27 +163,27 @@
   (block
    ;; long[] longs = new long[100];
    
-   (local.set $longs (ref.null $java.lang.Object))
+   (local.set $longs (struct.new_with_rtt $long.array (global.get $java.lang.Object.vtable) (array.new_default_with_rtt $long.array.elements (i32.const 100) (global.get $long.array.elements.rtt)) (global.get $long.array.rtt)))
    ;; (longs = new long[0]);
-   (local.set $longs (ref.null $java.lang.Object))
+   (local.set $longs (struct.new_with_rtt $long.array (global.get $java.lang.Object.vtable) (array.new_default_with_rtt $long.array.elements (i32.const 0) (global.get $long.array.elements.rtt)) (global.get $long.array.rtt)))
    ;; (longs = new long[] {0,1});
-   (local.set $longs (ref.null $java.lang.Object))
+   (local.set $longs (ref.null $long.array))
    ;; long[][] longs2d = new long[5][10];
    
-   (local.set $longs2d (ref.null $java.lang.Object))
+   (local.set $longs2d (ref.null $Object.array))
    ;; (longs2d = new long[][] {[1,2],null});
-   (local.set $longs2d (ref.null $java.lang.Object))
+   (local.set $longs2d (ref.null $Object.array))
    ;; (longs2d = new long[20][]);
-   (local.set $longs2d (ref.null $java.lang.Object))
+   (local.set $longs2d (ref.null $Object.array))
    ;; long n = longs[0];
    
-   (local.set $n (i64.const 0))
-   ;; (n = longs2d[0][1]);
-   (local.set $n (i64.const 0))
+   (local.set $n (array.get $long.array.elements (struct.get $long.array $elements (local.get $longs)) (i32.const 0)))
+   ;; (n = ((long[]) longs2d[0])[1]);
+   (local.set $n (array.get $long.array.elements (struct.get $long.array $elements (ref.null $long.array)) (i32.const 1)))
    ;; (longs[0] = 1);
-   
-   ;; (longs2d[0][1] = 1);
-   
+   (array.set $long.array.elements (struct.get $long.array $elements (local.get $longs)) (i32.const 0) (i64.const 0))
+   ;; (((long[]) longs2d[0])[1] = 1);
+   (array.set $long.array.elements (struct.get $long.array $elements (ref.null $long.array)) (i32.const 1) (i64.const 0))
   )
  )
 )
@@ -192,8 +192,8 @@
 ;;; void Arrays.testDevirtualizedTypeArrays()
 (func $m_testDevirtualizedTypeArrays__void_$pp_array@array.Arrays
  (param $this.untyped (ref null $java.lang.Object))
- (local $booleans (ref null $java.lang.Object))
- (local $booleans2d (ref null $java.lang.Object))
+ (local $booleans (ref null $Object.array))
+ (local $booleans2d (ref null $Object.array))
  (local $b i32)
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast $java.lang.Object $array.Arrays (local.get $this.untyped) (global.get $array.Arrays.rtt)))
@@ -201,27 +201,27 @@
   (block
    ;; Boolean[] booleans = new Boolean[100];
    
-   (local.set $booleans (ref.null $java.lang.Object))
+   (local.set $booleans (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (array.new_default_with_rtt $Object.array.elements (i32.const 100) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
    ;; (booleans = new Boolean[0]);
-   (local.set $booleans (ref.null $java.lang.Object))
+   (local.set $booleans (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (array.new_default_with_rtt $Object.array.elements (i32.const 0) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
    ;; (booleans = new Boolean[] {true,false});
-   (local.set $booleans (ref.null $java.lang.Object))
+   (local.set $booleans (ref.null $Object.array))
    ;; Boolean[][] booleans2d = new Boolean[5][10];
    
-   (local.set $booleans2d (ref.null $java.lang.Object))
+   (local.set $booleans2d (ref.null $Object.array))
    ;; (booleans2d = new Boolean[][] {[true,false],null});
-   (local.set $booleans2d (ref.null $java.lang.Object))
+   (local.set $booleans2d (ref.null $Object.array))
    ;; (booleans2d = new Boolean[20][]);
-   (local.set $booleans2d (ref.null $java.lang.Object))
-   ;; boolean b = booleans[0];
+   (local.set $booleans2d (ref.null $Object.array))
+   ;; boolean b = ((Boolean) booleans[0]);
    
    (local.set $b (i32.const 0))
-   ;; (b = booleans2d[0][1]);
+   ;; (b = ((Boolean) ((Boolean[]) booleans2d[0])[1]));
    (local.set $b (i32.const 0))
    ;; (booleans[0] = true);
-   
-   ;; (booleans2d[0][1] = false);
-   
+   (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $booleans)) (i32.const 0) (ref.null $java.lang.Boolean))
+   ;; (((Boolean[]) booleans2d[0])[1] = false);
+   (array.set $Object.array.elements (struct.get $Object.array $elements (ref.null $Object.array)) (i32.const 1) (ref.null $java.lang.Boolean))
   )
  )
 )
@@ -230,8 +230,8 @@
 ;;; void Arrays.testStringArrays()
 (func $m_testStringArrays__void_$pp_array@array.Arrays
  (param $this.untyped (ref null $java.lang.Object))
- (local $strings (ref null $java.lang.Object))
- (local $strings2d (ref null $java.lang.Object))
+ (local $strings (ref null $Object.array))
+ (local $strings2d (ref null $Object.array))
  (local $b (ref null $java.lang.String))
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast $java.lang.Object $array.Arrays (local.get $this.untyped) (global.get $array.Arrays.rtt)))
@@ -239,27 +239,27 @@
   (block
    ;; String[] strings = new String[100];
    
-   (local.set $strings (ref.null $java.lang.Object))
+   (local.set $strings (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (array.new_default_with_rtt $Object.array.elements (i32.const 100) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
    ;; (strings = new String[0]);
-   (local.set $strings (ref.null $java.lang.Object))
+   (local.set $strings (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (array.new_default_with_rtt $Object.array.elements (i32.const 0) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
    ;; (strings = new String[] {null,null});
-   (local.set $strings (ref.null $java.lang.Object))
+   (local.set $strings (ref.null $Object.array))
    ;; String[][] strings2d = new String[5][10];
    
-   (local.set $strings2d (ref.null $java.lang.Object))
+   (local.set $strings2d (ref.null $Object.array))
    ;; (strings2d = new String[][] {[null,null],null});
-   (local.set $strings2d (ref.null $java.lang.Object))
+   (local.set $strings2d (ref.null $Object.array))
    ;; (strings2d = new String[20][]);
-   (local.set $strings2d (ref.null $java.lang.Object))
-   ;; String b = strings[0];
+   (local.set $strings2d (ref.null $Object.array))
+   ;; String b = ((String) strings[0]);
    
-   (local.set $b (ref.null $java.lang.String))
-   ;; (b = strings2d[0][1]);
-   (local.set $b (ref.null $java.lang.String))
+   (local.set $b (ref.cast $java.lang.Object $java.lang.String (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $strings)) (i32.const 0)) (global.get $java.lang.String.rtt)))
+   ;; (b = ((String) ((String[]) strings2d[0])[1]));
+   (local.set $b (ref.cast $java.lang.Object $java.lang.String (array.get $Object.array.elements (struct.get $Object.array $elements (ref.null $Object.array)) (i32.const 1)) (global.get $java.lang.String.rtt)))
    ;; (strings[0] = null);
-   
-   ;; (strings2d[0][1] = null);
-   
+   (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $strings)) (i32.const 0) (ref.null $java.lang.String))
+   ;; (((String[]) strings2d[0])[1] = null);
+   (array.set $Object.array.elements (struct.get $Object.array $elements (ref.null $Object.array)) (i32.const 1) (ref.null $java.lang.String))
   )
  )
 )
@@ -268,8 +268,8 @@
 ;;; void Arrays.testNativeArray()
 (func $m_testNativeArray__void@array.Arrays
  (param $this.untyped (ref null $java.lang.Object))
- (local $nativeObjects (ref null $java.lang.Object))
- (local $nativeObjects2d (ref null $java.lang.Object))
+ (local $nativeObjects (ref null $Object.array))
+ (local $nativeObjects2d (ref null $Object.array))
  (local $nativeObject (ref null $array.Arrays.NativeType))
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast $java.lang.Object $array.Arrays (local.get $this.untyped) (global.get $array.Arrays.rtt)))
@@ -277,27 +277,27 @@
   (block
    ;; NativeType[] nativeObjects = new NativeType[100];
    
-   (local.set $nativeObjects (ref.null $java.lang.Object))
+   (local.set $nativeObjects (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (array.new_default_with_rtt $Object.array.elements (i32.const 100) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
    ;; (nativeObjects = new NativeType[0]);
-   (local.set $nativeObjects (ref.null $java.lang.Object))
+   (local.set $nativeObjects (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (array.new_default_with_rtt $Object.array.elements (i32.const 0) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
    ;; (nativeObjects = new NativeType[] {null,null});
-   (local.set $nativeObjects (ref.null $java.lang.Object))
+   (local.set $nativeObjects (ref.null $Object.array))
    ;; NativeType[][] nativeObjects2d = new NativeType[5][10];
    
-   (local.set $nativeObjects2d (ref.null $java.lang.Object))
+   (local.set $nativeObjects2d (ref.null $Object.array))
    ;; (nativeObjects2d = new NativeType[][] {[null,null],null});
-   (local.set $nativeObjects2d (ref.null $java.lang.Object))
+   (local.set $nativeObjects2d (ref.null $Object.array))
    ;; (nativeObjects2d = new NativeType[20][]);
-   (local.set $nativeObjects2d (ref.null $java.lang.Object))
-   ;; NativeType nativeObject = nativeObjects[0];
+   (local.set $nativeObjects2d (ref.null $Object.array))
+   ;; NativeType nativeObject = ((NativeType) nativeObjects[0]);
    
-   (local.set $nativeObject (ref.null $array.Arrays.NativeType))
-   ;; (nativeObject = nativeObjects2d[0][1]);
-   (local.set $nativeObject (ref.null $array.Arrays.NativeType))
+   (local.set $nativeObject (ref.cast $java.lang.Object $array.Arrays.NativeType (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $nativeObjects)) (i32.const 0)) (global.get $array.Arrays.NativeType.rtt)))
+   ;; (nativeObject = ((NativeType) ((NativeType[]) nativeObjects2d[0])[1]));
+   (local.set $nativeObject (ref.cast $java.lang.Object $array.Arrays.NativeType (array.get $Object.array.elements (struct.get $Object.array $elements (ref.null $Object.array)) (i32.const 1)) (global.get $array.Arrays.NativeType.rtt)))
    ;; (nativeObjects[0] = null);
-   
-   ;; (nativeObjects2d[0][1] = null);
-   
+   (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $nativeObjects)) (i32.const 0) (ref.null $array.Arrays.NativeType))
+   ;; (((NativeType[]) nativeObjects2d[0])[1] = null);
+   (array.set $Object.array.elements (struct.get $Object.array $elements (ref.null $Object.array)) (i32.const 1) (ref.null $array.Arrays.NativeType))
   )
  )
 )
@@ -315,9 +315,9 @@
    ;; ArrayContainer<String> container = null;
    
    (local.set $container (ref.null $array.Arrays.ArrayContainer))
-   ;; String s = ((String[]) container.data)[0];
+   ;; String s = ((String) ((String[]) container.data)[0]);
    
-   (local.set $s (ref.null $java.lang.String))
+   (local.set $s (ref.cast $java.lang.Object $java.lang.String (array.get $Object.array.elements (struct.get $Object.array $elements (ref.null $Object.array)) (i32.const 0)) (global.get $java.lang.String.rtt)))
   )
  )
 )
@@ -331,9 +331,9 @@
  (block $return.label
   (block
    ;; Arrays.this.consumesCloneable(new Object[10]);
-   (call_ref (local.get $this)(ref.null $java.lang.Object)(struct.get $array.Arrays.vtable $m_consumesCloneable__java_lang_Cloneable__void (struct.get $array.Arrays $vtable(local.get $this))))
+   (call_ref (local.get $this)(struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (array.new_default_with_rtt $Object.array.elements (i32.const 10) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt))(struct.get $array.Arrays.vtable $m_consumesCloneable__java_lang_Cloneable__void (struct.get $array.Arrays $vtable(local.get $this))))
    ;; Arrays.this.consumesSerializable(new Object[10]);
-   (call_ref (local.get $this)(ref.null $java.lang.Object)(struct.get $array.Arrays.vtable $m_consumesSerializable__java_io_Serializable__void (struct.get $array.Arrays $vtable(local.get $this))))
+   (call_ref (local.get $this)(struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (array.new_default_with_rtt $Object.array.elements (i32.const 10) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt))(struct.get $array.Arrays.vtable $m_consumesSerializable__java_io_Serializable__void (struct.get $array.Arrays $vtable(local.get $this))))
   )
  )
 )
@@ -421,7 +421,7 @@
 ;;; CLASS  ArrayContainer
 (type $array.Arrays.ArrayContainer (struct
  (field $vtable (ref null $array.Arrays.ArrayContainer.vtable))
- (field $data@array.Arrays.ArrayContainer (mut (ref null $java.lang.Object)))
+ (field $data@array.Arrays.ArrayContainer (mut (ref null $Object.array)))
 ))
 (type $array.Arrays.ArrayContainer.vtable (struct
  

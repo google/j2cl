@@ -25,9 +25,9 @@
    ;; Object.this.Object.<init>();
    
    ;; (MultipleConstructors.this.id = id);
-   (struct.set $multipleconstructors.MultipleConstructors $id@multipleconstructors.MultipleConstructors  (local.get $this) (local.get $id))
+   (struct.set $multipleconstructors.MultipleConstructors $id@multipleconstructors.MultipleConstructors(local.get $this) (local.get $id))
    ;; (MultipleConstructors.this.flag = (id == 0));
-   (struct.set $multipleconstructors.MultipleConstructors $flag@multipleconstructors.MultipleConstructors  (local.get $this) (i32.eq (local.get $id) (i32.const 0)))
+   (struct.set $multipleconstructors.MultipleConstructors $flag@multipleconstructors.MultipleConstructors(local.get $this) (i32.eq (local.get $id) (i32.const 0)))
   )
  )
  (local.get $this)
@@ -43,9 +43,9 @@
    ;; Object.this.Object.<init>();
    
    ;; (MultipleConstructors.this.id = (0 - 1));
-   (struct.set $multipleconstructors.MultipleConstructors $id@multipleconstructors.MultipleConstructors  (local.get $this) (i32.sub (i32.const 0) (i32.const 1)))
+   (struct.set $multipleconstructors.MultipleConstructors $id@multipleconstructors.MultipleConstructors(local.get $this) (i32.sub (i32.const 0) (i32.const 1)))
    ;; (MultipleConstructors.this.flag = flag);
-   (struct.set $multipleconstructors.MultipleConstructors $flag@multipleconstructors.MultipleConstructors  (local.get $this) (local.get $flag))
+   (struct.set $multipleconstructors.MultipleConstructors $flag@multipleconstructors.MultipleConstructors(local.get $this) (local.get $flag))
   )
  )
  (local.get $this)
@@ -62,9 +62,9 @@
    ;; Object.this.Object.<init>();
    
    ;; (MultipleConstructors.this.id = id);
-   (struct.set $multipleconstructors.MultipleConstructors $id@multipleconstructors.MultipleConstructors  (local.get $this) (local.get $id))
+   (struct.set $multipleconstructors.MultipleConstructors $id@multipleconstructors.MultipleConstructors(local.get $this) (local.get $id))
    ;; (MultipleConstructors.this.flag = flag);
-   (struct.set $multipleconstructors.MultipleConstructors $flag@multipleconstructors.MultipleConstructors  (local.get $this) (local.get $flag))
+   (struct.set $multipleconstructors.MultipleConstructors $flag@multipleconstructors.MultipleConstructors(local.get $this) (local.get $flag))
   )
  )
  (local.get $this)

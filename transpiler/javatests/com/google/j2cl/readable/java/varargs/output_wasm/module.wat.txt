@@ -10,9 +10,9 @@
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_test__int__arrayOf_java_lang_Object__void (mut (ref $function.$int__$java.lang.Object__$void)))
- (field $m_testCloneable__arrayOf_java_lang_Cloneable__void (mut (ref $function.$java.lang.Object__$void)))
- (field $m_testSerializable__arrayOf_java_io_Serializable__void (mut (ref $function.$java.lang.Object__$void)))
+ (field $m_test__int__arrayOf_java_lang_Object__void (mut (ref $function.$int__$Object.array__$void)))
+ (field $m_testCloneable__arrayOf_java_lang_Cloneable__void (mut (ref $function.$Object.array__$void)))
+ (field $m_testSerializable__arrayOf_java_io_Serializable__void (mut (ref $function.$Object.array__$void)))
  (field $m_main__void (mut (ref $function.__$void)))
 ))
 (global $varargs.Varargs.vtable (mut (ref null $varargs.Varargs.vtable)) (ref.null $varargs.Varargs.vtable))
@@ -20,7 +20,7 @@
 ;;; Varargs(int... args)
 (func $m_<init>__arrayOf_int__void@varargs.Varargs
  (param $this (ref null $varargs.Varargs))
- (param $args (ref null $java.lang.Object))
+ (param $args (ref null $int.array))
  (result (ref null $varargs.Varargs))
  (block $return.label
   (block
@@ -48,7 +48,7 @@
 (func $m_test__int__arrayOf_java_lang_Object__void@varargs.Varargs
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
- (param $args (ref null $java.lang.Object))
+ (param $args (ref null $Object.array))
  (local $this (ref null $varargs.Varargs))
  (local.set $this (ref.cast $java.lang.Object $varargs.Varargs (local.get $this.untyped) (global.get $varargs.Varargs.rtt)))
  (block $return.label
@@ -61,7 +61,7 @@
 ;;; void Varargs.testCloneable(Cloneable... args)
 (func $m_testCloneable__arrayOf_java_lang_Cloneable__void@varargs.Varargs
  (param $this.untyped (ref null $java.lang.Object))
- (param $args (ref null $java.lang.Object))
+ (param $args (ref null $Object.array))
  (local $this (ref null $varargs.Varargs))
  (local.set $this (ref.cast $java.lang.Object $varargs.Varargs (local.get $this.untyped) (global.get $varargs.Varargs.rtt)))
  (block $return.label
@@ -74,7 +74,7 @@
 ;;; void Varargs.testSerializable(Serializable... args)
 (func $m_testSerializable__arrayOf_java_io_Serializable__void@varargs.Varargs
  (param $this.untyped (ref null $java.lang.Object))
- (param $args (ref null $java.lang.Object))
+ (param $args (ref null $Object.array))
  (local $this (ref null $varargs.Varargs))
  (local.set $this (ref.cast $java.lang.Object $varargs.Varargs (local.get $this.untyped) (global.get $varargs.Varargs.rtt)))
  (block $return.label
@@ -86,7 +86,7 @@
 
 ;;; void Varargs.fun(T... elements)
 (func $m_fun__arrayOf_java_lang_Object__void@varargs.Varargs
- (param $elements (ref null $java.lang.Object))
+ (param $elements (ref null $Object.array))
  (block $return.label
   (block
   )
@@ -100,7 +100,7 @@
  (block $return.label
   (block
    ;; varargs.Varargs.fun([a,b]);
-   (call $m_fun__arrayOf_java_lang_Object__void@varargs.Varargs (ref.null $java.lang.Object))
+   (call $m_fun__arrayOf_java_lang_Object__void@varargs.Varargs (ref.null $Object.array))
   )
  )
 )
@@ -117,19 +117,19 @@
    
    (local.set $v (call $m_<init>__void@varargs.Varargs (struct.new_with_rtt $varargs.Varargs (global.get $varargs.Varargs.vtable) (global.get $varargs.Varargs.rtt))))
    ;; v.test(1,[]);
-   (call_ref (local.get $v)(i32.const 1)(ref.null $java.lang.Object)(struct.get $varargs.Varargs.vtable $m_test__int__arrayOf_java_lang_Object__void (struct.get $varargs.Varargs $vtable(local.get $v))))
+   (call_ref (local.get $v)(i32.const 1)(ref.null $Object.array)(struct.get $varargs.Varargs.vtable $m_test__int__arrayOf_java_lang_Object__void (struct.get $varargs.Varargs $vtable(local.get $v))))
    ;; v.test(1,[new Object.<init>()]);
-   (call_ref (local.get $v)(i32.const 1)(ref.null $java.lang.Object)(struct.get $varargs.Varargs.vtable $m_test__int__arrayOf_java_lang_Object__void (struct.get $varargs.Varargs $vtable(local.get $v))))
+   (call_ref (local.get $v)(i32.const 1)(ref.null $Object.array)(struct.get $varargs.Varargs.vtable $m_test__int__arrayOf_java_lang_Object__void (struct.get $varargs.Varargs $vtable(local.get $v))))
    ;; v.test(1,new Object[] {new Object.<init>()});
-   (call_ref (local.get $v)(i32.const 1)(ref.null $java.lang.Object)(struct.get $varargs.Varargs.vtable $m_test__int__arrayOf_java_lang_Object__void (struct.get $varargs.Varargs $vtable(local.get $v))))
+   (call_ref (local.get $v)(i32.const 1)(ref.null $Object.array)(struct.get $varargs.Varargs.vtable $m_test__int__arrayOf_java_lang_Object__void (struct.get $varargs.Varargs $vtable(local.get $v))))
    ;; v.test(1,new Object[] {});
-   (call_ref (local.get $v)(i32.const 1)(ref.null $java.lang.Object)(struct.get $varargs.Varargs.vtable $m_test__int__arrayOf_java_lang_Object__void (struct.get $varargs.Varargs $vtable(local.get $v))))
+   (call_ref (local.get $v)(i32.const 1)(ref.null $Object.array)(struct.get $varargs.Varargs.vtable $m_test__int__arrayOf_java_lang_Object__void (struct.get $varargs.Varargs $vtable(local.get $v))))
    ;; v.test(1,new Object[][] {});
-   (call_ref (local.get $v)(i32.const 1)(ref.null $java.lang.Object)(struct.get $varargs.Varargs.vtable $m_test__int__arrayOf_java_lang_Object__void (struct.get $varargs.Varargs $vtable(local.get $v))))
+   (call_ref (local.get $v)(i32.const 1)(ref.null $Object.array)(struct.get $varargs.Varargs.vtable $m_test__int__arrayOf_java_lang_Object__void (struct.get $varargs.Varargs $vtable(local.get $v))))
    ;; v.testCloneable(new Object[][] {});
-   (call_ref (local.get $v)(ref.null $java.lang.Object)(struct.get $varargs.Varargs.vtable $m_testCloneable__arrayOf_java_lang_Cloneable__void (struct.get $varargs.Varargs $vtable(local.get $v))))
+   (call_ref (local.get $v)(ref.null $Object.array)(struct.get $varargs.Varargs.vtable $m_testCloneable__arrayOf_java_lang_Cloneable__void (struct.get $varargs.Varargs $vtable(local.get $v))))
    ;; v.testSerializable(new Object[][] {});
-   (call_ref (local.get $v)(ref.null $java.lang.Object)(struct.get $varargs.Varargs.vtable $m_testSerializable__arrayOf_java_io_Serializable__void (struct.get $varargs.Varargs $vtable(local.get $v))))
+   (call_ref (local.get $v)(ref.null $Object.array)(struct.get $varargs.Varargs.vtable $m_testSerializable__arrayOf_java_io_Serializable__void (struct.get $varargs.Varargs $vtable(local.get $v))))
   )
  )
 )
@@ -145,9 +145,9 @@
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_test__int__arrayOf_java_lang_Object__void (mut (ref $function.$int__$java.lang.Object__$void)))
- (field $m_testCloneable__arrayOf_java_lang_Cloneable__void (mut (ref $function.$java.lang.Object__$void)))
- (field $m_testSerializable__arrayOf_java_io_Serializable__void (mut (ref $function.$java.lang.Object__$void)))
+ (field $m_test__int__arrayOf_java_lang_Object__void (mut (ref $function.$int__$Object.array__$void)))
+ (field $m_testCloneable__arrayOf_java_lang_Cloneable__void (mut (ref $function.$Object.array__$void)))
+ (field $m_testSerializable__arrayOf_java_io_Serializable__void (mut (ref $function.$Object.array__$void)))
  (field $m_main__void (mut (ref $function.__$void)))
 ))
 (global $varargs.Child.vtable (mut (ref null $varargs.Child.vtable)) (ref.null $varargs.Child.vtable))

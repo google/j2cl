@@ -28,7 +28,7 @@
 
 ;;; void CastOnArrayInit.fun(Foo<E>... args)
 (func $m_fun__arrayOf_castonarrayinit_CastOnArrayInit_Foo__void@castonarrayinit.CastOnArrayInit
- (param $args (ref null $java.lang.Object))
+ (param $args (ref null $Object.array))
  (block $return.label
   (block
   )
@@ -48,7 +48,7 @@
    
    (local.set $f2 (call $m_<init>__void@castonarrayinit.CastOnArrayInit.Foo (struct.new_with_rtt $castonarrayinit.CastOnArrayInit.Foo (global.get $castonarrayinit.CastOnArrayInit.Foo.vtable) (global.get $castonarrayinit.CastOnArrayInit.Foo.rtt))))
    ;; castonarrayinit.CastOnArrayInit.fun([f1,f2]);
-   (call $m_fun__arrayOf_castonarrayinit_CastOnArrayInit_Foo__void@castonarrayinit.CastOnArrayInit (ref.null $java.lang.Object))
+   (call $m_fun__arrayOf_castonarrayinit_CastOnArrayInit_Foo__void@castonarrayinit.CastOnArrayInit (ref.null $Object.array))
   )
  )
 )

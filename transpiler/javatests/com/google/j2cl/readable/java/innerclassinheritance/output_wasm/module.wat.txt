@@ -198,13 +198,13 @@
  (block $return.label
   (block
    ;; InnerClass.this.this.funInParentOuter();
-   (call_ref (struct.get $innerclassinheritance.ChildClass.InnerClass $this@innerclassinheritance.ChildClass.InnerClass  (local.get $this))(struct.get $innerclassinheritance.ParentOuter.vtable $m_funInParentOuter__void (struct.get $innerclassinheritance.ParentOuter $vtable(struct.get $innerclassinheritance.ChildClass.InnerClass $this@innerclassinheritance.ChildClass.InnerClass  (local.get $this)))))
+   (call_ref (struct.get $innerclassinheritance.ChildClass.InnerClass $this@innerclassinheritance.ChildClass.InnerClass(local.get $this))(struct.get $innerclassinheritance.ParentOuter.vtable $m_funInParentOuter__void (struct.get $innerclassinheritance.ParentOuter $vtable(struct.get $innerclassinheritance.ChildClass.InnerClass $this@innerclassinheritance.ChildClass.InnerClass(local.get $this)))))
    ;; InnerClass.this.this.funInParentOuter();
-   (call_ref (struct.get $innerclassinheritance.ChildClass.InnerClass $this@innerclassinheritance.ChildClass.InnerClass  (local.get $this))(struct.get $innerclassinheritance.ParentOuter.vtable $m_funInParentOuter__void (struct.get $innerclassinheritance.ParentOuter $vtable(struct.get $innerclassinheritance.ChildClass.InnerClass $this@innerclassinheritance.ChildClass.InnerClass  (local.get $this)))))
+   (call_ref (struct.get $innerclassinheritance.ChildClass.InnerClass $this@innerclassinheritance.ChildClass.InnerClass(local.get $this))(struct.get $innerclassinheritance.ParentOuter.vtable $m_funInParentOuter__void (struct.get $innerclassinheritance.ParentOuter $vtable(struct.get $innerclassinheritance.ChildClass.InnerClass $this@innerclassinheritance.ChildClass.InnerClass(local.get $this)))))
    ;; InnerClass.this.this.funInOuter();
-   (call_ref (struct.get $innerclassinheritance.ChildClass.InnerClass $this@innerclassinheritance.ChildClass.InnerClass  (local.get $this))(struct.get $innerclassinheritance.ChildClass.vtable $m_funInOuter__void (struct.get $innerclassinheritance.ChildClass $vtable(struct.get $innerclassinheritance.ChildClass.InnerClass $this@innerclassinheritance.ChildClass.InnerClass  (local.get $this)))))
+   (call_ref (struct.get $innerclassinheritance.ChildClass.InnerClass $this@innerclassinheritance.ChildClass.InnerClass(local.get $this))(struct.get $innerclassinheritance.ChildClass.vtable $m_funInOuter__void (struct.get $innerclassinheritance.ChildClass $vtable(struct.get $innerclassinheritance.ChildClass.InnerClass $this@innerclassinheritance.ChildClass.InnerClass(local.get $this)))))
    ;; InnerClass.this.this.funInOuter();
-   (call_ref (struct.get $innerclassinheritance.ChildClass.InnerClass $this@innerclassinheritance.ChildClass.InnerClass  (local.get $this))(struct.get $innerclassinheritance.ChildClass.vtable $m_funInOuter__void (struct.get $innerclassinheritance.ChildClass $vtable(struct.get $innerclassinheritance.ChildClass.InnerClass $this@innerclassinheritance.ChildClass.InnerClass  (local.get $this)))))
+   (call_ref (struct.get $innerclassinheritance.ChildClass.InnerClass $this@innerclassinheritance.ChildClass.InnerClass(local.get $this))(struct.get $innerclassinheritance.ChildClass.vtable $m_funInOuter__void (struct.get $innerclassinheritance.ChildClass $vtable(struct.get $innerclassinheritance.ChildClass.InnerClass $this@innerclassinheritance.ChildClass.InnerClass(local.get $this)))))
    ;; InnerClass.this.funInParentInner();
    (call_ref (local.get $this)(struct.get $innerclassinheritance.ParentInner.vtable $m_funInParentInner__void (struct.get $innerclassinheritance.ParentInner $vtable(local.get $this))))
    ;; InnerClass.this.funInParentInner();
@@ -215,21 +215,21 @@
    (call_ref (local.get $this)(struct.get $innerclassinheritance.ChildClass.InnerClass.vtable $m_funInInner__void (struct.get $innerclassinheritance.ChildClass.InnerClass $vtable(local.get $this))))
    ;; int a = InnerClass.this.this.fieldInParentOuter;
    
-   (local.set $a (struct.get $innerclassinheritance.ParentOuter $fieldInParentOuter@innerclassinheritance.ParentOuter  (struct.get $innerclassinheritance.ChildClass.InnerClass $this@innerclassinheritance.ChildClass.InnerClass  (local.get $this))))
+   (local.set $a (struct.get $innerclassinheritance.ParentOuter $fieldInParentOuter@innerclassinheritance.ParentOuter(struct.get $innerclassinheritance.ChildClass.InnerClass $this@innerclassinheritance.ChildClass.InnerClass(local.get $this))))
    ;; (a = InnerClass.this.this.fieldInParentOuter);
-   (local.set $a (struct.get $innerclassinheritance.ParentOuter $fieldInParentOuter@innerclassinheritance.ParentOuter  (struct.get $innerclassinheritance.ChildClass.InnerClass $this@innerclassinheritance.ChildClass.InnerClass  (local.get $this))))
+   (local.set $a (struct.get $innerclassinheritance.ParentOuter $fieldInParentOuter@innerclassinheritance.ParentOuter(struct.get $innerclassinheritance.ChildClass.InnerClass $this@innerclassinheritance.ChildClass.InnerClass(local.get $this))))
    ;; (a = InnerClass.this.this.fieldInOuter);
-   (local.set $a (struct.get $innerclassinheritance.ChildClass $fieldInOuter@innerclassinheritance.ChildClass  (struct.get $innerclassinheritance.ChildClass.InnerClass $this@innerclassinheritance.ChildClass.InnerClass  (local.get $this))))
+   (local.set $a (struct.get $innerclassinheritance.ChildClass $fieldInOuter@innerclassinheritance.ChildClass(struct.get $innerclassinheritance.ChildClass.InnerClass $this@innerclassinheritance.ChildClass.InnerClass(local.get $this))))
    ;; (a = InnerClass.this.this.fieldInOuter);
-   (local.set $a (struct.get $innerclassinheritance.ChildClass $fieldInOuter@innerclassinheritance.ChildClass  (struct.get $innerclassinheritance.ChildClass.InnerClass $this@innerclassinheritance.ChildClass.InnerClass  (local.get $this))))
+   (local.set $a (struct.get $innerclassinheritance.ChildClass $fieldInOuter@innerclassinheritance.ChildClass(struct.get $innerclassinheritance.ChildClass.InnerClass $this@innerclassinheritance.ChildClass.InnerClass(local.get $this))))
    ;; (a = InnerClass.this.fieldInParentInner);
-   (local.set $a (struct.get $innerclassinheritance.ParentInner $fieldInParentInner@innerclassinheritance.ParentInner  (local.get $this)))
+   (local.set $a (struct.get $innerclassinheritance.ParentInner $fieldInParentInner@innerclassinheritance.ParentInner(local.get $this)))
    ;; (a = InnerClass.this.fieldInParentInner);
-   (local.set $a (struct.get $innerclassinheritance.ParentInner $fieldInParentInner@innerclassinheritance.ParentInner  (local.get $this)))
+   (local.set $a (struct.get $innerclassinheritance.ParentInner $fieldInParentInner@innerclassinheritance.ParentInner(local.get $this)))
    ;; (a = InnerClass.this.fieldInInner);
-   (local.set $a (struct.get $innerclassinheritance.ChildClass.InnerClass $fieldInInner@innerclassinheritance.ChildClass.InnerClass  (local.get $this)))
+   (local.set $a (struct.get $innerclassinheritance.ChildClass.InnerClass $fieldInInner@innerclassinheritance.ChildClass.InnerClass(local.get $this)))
    ;; (a = InnerClass.this.fieldInInner);
-   (local.set $a (struct.get $innerclassinheritance.ChildClass.InnerClass $fieldInInner@innerclassinheritance.ChildClass.InnerClass  (local.get $this)))
+   (local.set $a (struct.get $innerclassinheritance.ChildClass.InnerClass $fieldInInner@innerclassinheritance.ChildClass.InnerClass(local.get $this)))
    ;; return a;
    (local.set $return.value (local.get $a))
    (br $return.label)
@@ -295,13 +295,13 @@
    ;; $1LocalClass.this.funInOuter();
    (call_ref (local.get $this)(struct.get $innerclassinheritance.ChildClass.vtable $m_funInOuter__void (struct.get $innerclassinheritance.ChildClass $vtable(local.get $this))))
    ;; $1LocalClass.this.this.funInOuter();
-   (call_ref (struct.get $innerclassinheritance.ChildClass.1LocalClass $this@innerclassinheritance.ChildClass.1LocalClass  (local.get $this))(struct.get $innerclassinheritance.ChildClass.vtable $m_funInOuter__void (struct.get $innerclassinheritance.ChildClass $vtable(struct.get $innerclassinheritance.ChildClass.1LocalClass $this@innerclassinheritance.ChildClass.1LocalClass  (local.get $this)))))
+   (call_ref (struct.get $innerclassinheritance.ChildClass.1LocalClass $this@innerclassinheritance.ChildClass.1LocalClass(local.get $this))(struct.get $innerclassinheritance.ChildClass.vtable $m_funInOuter__void (struct.get $innerclassinheritance.ChildClass $vtable(struct.get $innerclassinheritance.ChildClass.1LocalClass $this@innerclassinheritance.ChildClass.1LocalClass(local.get $this)))))
    ;; $1LocalClass.this.funInParentOuter();
    (call_ref (local.get $this)(struct.get $innerclassinheritance.ChildClass.1LocalClass.vtable $m_funInParentOuter__void (struct.get $innerclassinheritance.ChildClass.1LocalClass $vtable(local.get $this))))
    ;; $1LocalClass.this.funInParentOuter();
    (call_ref (local.get $this)(struct.get $innerclassinheritance.ChildClass.1LocalClass.vtable $m_funInParentOuter__void (struct.get $innerclassinheritance.ChildClass.1LocalClass $vtable(local.get $this))))
    ;; $1LocalClass.this.this.funInParentOuter();
-   (call_ref (struct.get $innerclassinheritance.ChildClass.1LocalClass $this@innerclassinheritance.ChildClass.1LocalClass  (local.get $this))(struct.get $innerclassinheritance.ParentOuter.vtable $m_funInParentOuter__void (struct.get $innerclassinheritance.ParentOuter $vtable(struct.get $innerclassinheritance.ChildClass.1LocalClass $this@innerclassinheritance.ChildClass.1LocalClass  (local.get $this)))))
+   (call_ref (struct.get $innerclassinheritance.ChildClass.1LocalClass $this@innerclassinheritance.ChildClass.1LocalClass(local.get $this))(struct.get $innerclassinheritance.ParentOuter.vtable $m_funInParentOuter__void (struct.get $innerclassinheritance.ParentOuter $vtable(struct.get $innerclassinheritance.ChildClass.1LocalClass $this@innerclassinheritance.ChildClass.1LocalClass(local.get $this)))))
   )
  )
 )
@@ -484,15 +484,15 @@
    ;; InnerClass2.this.fun();
    (call_ref (local.get $this)(struct.get $innerclassinheritance.MultipleNestings.Parent.vtable $m_fun__void (struct.get $innerclassinheritance.MultipleNestings.Parent $vtable(local.get $this))))
    ;; InnerClass2.this.this.fun();
-   (call_ref (struct.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $this@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2  (local.get $this))(struct.get $innerclassinheritance.MultipleNestings.Parent.vtable $m_fun__void (struct.get $innerclassinheritance.MultipleNestings.Parent $vtable(struct.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $this@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2  (local.get $this)))))
+   (call_ref (struct.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $this@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2(local.get $this))(struct.get $innerclassinheritance.MultipleNestings.Parent.vtable $m_fun__void (struct.get $innerclassinheritance.MultipleNestings.Parent $vtable(struct.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $this@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2(local.get $this)))))
    ;; InnerClass2.this.this.this.funInM();
-   (call_ref (struct.get $innerclassinheritance.MultipleNestings.InnerClass1 $this@innerclassinheritance.MultipleNestings.InnerClass1  (struct.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $this@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2  (local.get $this)))(struct.get $innerclassinheritance.MultipleNestings.vtable $m_funInM__void (struct.get $innerclassinheritance.MultipleNestings $vtable(struct.get $innerclassinheritance.MultipleNestings.InnerClass1 $this@innerclassinheritance.MultipleNestings.InnerClass1  (struct.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $this@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2  (local.get $this))))))
+   (call_ref (struct.get $innerclassinheritance.MultipleNestings.InnerClass1 $this@innerclassinheritance.MultipleNestings.InnerClass1(struct.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $this@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2(local.get $this)))(struct.get $innerclassinheritance.MultipleNestings.vtable $m_funInM__void (struct.get $innerclassinheritance.MultipleNestings $vtable(struct.get $innerclassinheritance.MultipleNestings.InnerClass1 $this@innerclassinheritance.MultipleNestings.InnerClass1(struct.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $this@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2(local.get $this))))))
    ;; InnerClass2.this.this.this.funInM();
-   (call_ref (struct.get $innerclassinheritance.MultipleNestings.InnerClass1 $this@innerclassinheritance.MultipleNestings.InnerClass1  (struct.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $this@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2  (local.get $this)))(struct.get $innerclassinheritance.MultipleNestings.vtable $m_funInM__void (struct.get $innerclassinheritance.MultipleNestings $vtable(struct.get $innerclassinheritance.MultipleNestings.InnerClass1 $this@innerclassinheritance.MultipleNestings.InnerClass1  (struct.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $this@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2  (local.get $this))))))
+   (call_ref (struct.get $innerclassinheritance.MultipleNestings.InnerClass1 $this@innerclassinheritance.MultipleNestings.InnerClass1(struct.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $this@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2(local.get $this)))(struct.get $innerclassinheritance.MultipleNestings.vtable $m_funInM__void (struct.get $innerclassinheritance.MultipleNestings $vtable(struct.get $innerclassinheritance.MultipleNestings.InnerClass1 $this@innerclassinheritance.MultipleNestings.InnerClass1(struct.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $this@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2(local.get $this))))))
    ;; InnerClass2.this.this.funInI1();
-   (call_ref (struct.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $this@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2  (local.get $this))(struct.get $innerclassinheritance.MultipleNestings.InnerClass1.vtable $m_funInI1__void (struct.get $innerclassinheritance.MultipleNestings.InnerClass1 $vtable(struct.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $this@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2  (local.get $this)))))
+   (call_ref (struct.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $this@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2(local.get $this))(struct.get $innerclassinheritance.MultipleNestings.InnerClass1.vtable $m_funInI1__void (struct.get $innerclassinheritance.MultipleNestings.InnerClass1 $vtable(struct.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $this@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2(local.get $this)))))
    ;; InnerClass2.this.this.funInI1();
-   (call_ref (struct.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $this@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2  (local.get $this))(struct.get $innerclassinheritance.MultipleNestings.InnerClass1.vtable $m_funInI1__void (struct.get $innerclassinheritance.MultipleNestings.InnerClass1 $vtable(struct.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $this@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2  (local.get $this)))))
+   (call_ref (struct.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $this@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2(local.get $this))(struct.get $innerclassinheritance.MultipleNestings.InnerClass1.vtable $m_funInI1__void (struct.get $innerclassinheritance.MultipleNestings.InnerClass1 $vtable(struct.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $this@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2(local.get $this)))))
    ;; InnerClass2.this.funInI2();
    (call_ref (local.get $this)(struct.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.vtable $m_funInI2__void (struct.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $vtable(local.get $this))))
   )

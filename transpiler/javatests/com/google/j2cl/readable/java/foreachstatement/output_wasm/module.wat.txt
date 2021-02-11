@@ -33,7 +33,7 @@
  (param $iterable (ref null $java.lang.Object))
  (local $$iterator (ref null $java.lang.Object))
  (local $t (ref null $java.lang.Throwable))
- (local $$array (ref null $java.lang.Object))
+ (local $$array (ref null $Object.array))
  (local $$index f64)
  (local $t_1 (ref null $java.lang.Throwable))
  (local $this (ref null $foreachstatement.ForEachStatement))
@@ -65,16 +65,16 @@
    ;; LOOP: for (Throwable[] $array = new Throwable[10],double $index = 0;($index < <expr>);($index = ($index + 1.0))) {
    
    
-   (local.set $$array (ref.null $java.lang.Object))
+   (local.set $$array (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (array.new_default_with_rtt $Object.array.elements (i32.const 10) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
    (local.set $$index (f64.const 0.0))
    (block $LOOP_1.BREAK
     (loop
      (br_if 1 (i32.eqz (f64.lt (local.get $$index) (f64.const 0.0))))
      (block $LOOP_1.CONTINUE
       (block
-       ;; Throwable t = $array[$index];
+       ;; Throwable t = ((Throwable) $array[$index]);
        
-       (local.set $t_1 (ref.null $java.lang.Throwable))
+       (local.set $t_1 (ref.cast $java.lang.Object $java.lang.Throwable (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $$array)) (i32.const 0)) (global.get $java.lang.Throwable.rtt)))
        (block
         ;; t.toString();
         (drop (call_ref (local.get $t_1)(struct.get $java.lang.Throwable.vtable $m_toString__java_lang_String (struct.get $java.lang.Throwable $vtable(local.get $t_1)))))

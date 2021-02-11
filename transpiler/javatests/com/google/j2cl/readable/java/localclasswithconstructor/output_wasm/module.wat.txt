@@ -74,7 +74,7 @@
    ;; Object.this.Object.<init>();
    
    ;; ($1LocalClass.this.field = (($1LocalClass.this.localVar + a) + b));
-   (struct.set $localclasswithconstructor.LocalClassWithConstructor.1LocalClass $field@localclasswithconstructor.LocalClassWithConstructor.1LocalClass  (local.get $this) (i32.add (i32.add (struct.get $localclasswithconstructor.LocalClassWithConstructor.1LocalClass $localVar@localclasswithconstructor.LocalClassWithConstructor.1LocalClass  (local.get $this)) (local.get $a)) (local.get $b)))
+   (struct.set $localclasswithconstructor.LocalClassWithConstructor.1LocalClass $field@localclasswithconstructor.LocalClassWithConstructor.1LocalClass(local.get $this) (i32.add (i32.add (struct.get $localclasswithconstructor.LocalClassWithConstructor.1LocalClass $localVar@localclasswithconstructor.LocalClassWithConstructor.1LocalClass(local.get $this)) (local.get $a)) (local.get $b)))
   )
  )
  (local.get $this)
@@ -90,7 +90,7 @@
    ;; $1LocalClass.this.$1LocalClass.<init>(a,$1LocalClass.this.p);
    
    ;; ($1LocalClass.this.field = $1LocalClass.this.localVar);
-   (struct.set $localclasswithconstructor.LocalClassWithConstructor.1LocalClass $field@localclasswithconstructor.LocalClassWithConstructor.1LocalClass  (local.get $this) (struct.get $localclasswithconstructor.LocalClassWithConstructor.1LocalClass $localVar@localclasswithconstructor.LocalClassWithConstructor.1LocalClass  (local.get $this)))
+   (struct.set $localclasswithconstructor.LocalClassWithConstructor.1LocalClass $field@localclasswithconstructor.LocalClassWithConstructor.1LocalClass(local.get $this) (struct.get $localclasswithconstructor.LocalClassWithConstructor.1LocalClass $localVar@localclasswithconstructor.LocalClassWithConstructor.1LocalClass(local.get $this)))
   )
  )
  (local.get $this)

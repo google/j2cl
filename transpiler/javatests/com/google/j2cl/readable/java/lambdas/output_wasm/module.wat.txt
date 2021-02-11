@@ -56,7 +56,7 @@
  (block $return.label
   (block
    ;; return (Lambdas.this.field + intf.m(n));
-   (local.set $return.value (i32.add (struct.get $lambdas.Lambdas $field@lambdas.Lambdas  (local.get $this)) (i32.const 0)))
+   (local.set $return.value (i32.add (struct.get $lambdas.Lambdas $field@lambdas.Lambdas(local.get $this)) (i32.const 0)))
    (br $return.label)
   )
  )
@@ -308,9 +308,9 @@
  (block $return.label
   (block
    ;; Lambdas.this.callWithTypeVariable(function (Error i){
-   (drop (call_ref (local.get $this)(ref.null $java.lang.Object)(call $m_<init>__void@java.lang.Error (struct.new_with_rtt $java.lang.Error (global.get $java.lang.Error.vtable) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Error.rtt)))(struct.get $lambdas.Lambdas.vtable $m_callWithTypeVariable__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Object__java_lang_Object (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
+   (drop (call_ref (local.get $this)(ref.null $java.lang.Object)(call $m_<init>__void@java.lang.Error (struct.new_with_rtt $java.lang.Error (global.get $java.lang.Error.vtable) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $Object.array) (ref.null $Object.array) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Error.rtt)))(struct.get $lambdas.Lambdas.vtable $m_callWithTypeVariable__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Object__java_lang_Object (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
    ;; Lambdas.this.callParameterized(function (Error i){
-   (drop (call_ref (local.get $this)(ref.null $java.lang.Object)(call $m_<init>__void@java.lang.Error (struct.new_with_rtt $java.lang.Error (global.get $java.lang.Error.vtable) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Error.rtt)))(struct.get $lambdas.Lambdas.vtable $m_callParameterized__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Error__java_lang_Error (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
+   (drop (call_ref (local.get $this)(ref.null $java.lang.Object)(call $m_<init>__void@java.lang.Error (struct.new_with_rtt $java.lang.Error (global.get $java.lang.Error.vtable) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $Object.array) (ref.null $Object.array) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Error.rtt)))(struct.get $lambdas.Lambdas.vtable $m_callParameterized__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Error__java_lang_Error (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
    ;; lambdas.Lambdas.callTypeVariableWithBounds(function (Enum<T> i){
    (drop (call $m_callTypeVariableWithBounds__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Enum__java_lang_Enum@lambdas.Lambdas (ref.null $java.lang.Object)(ref.cast $java.lang.Object $java.lang.Enum (ref.null $java.lang.Object) (global.get $java.lang.Enum.rtt))))
    ;; Lambdas.this.callWithBiFunction(function (Object x,String y){

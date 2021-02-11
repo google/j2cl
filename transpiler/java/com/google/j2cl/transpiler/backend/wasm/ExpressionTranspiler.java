@@ -23,6 +23,8 @@ import static java.lang.String.format;
 
 import com.google.common.collect.Iterables;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
+import com.google.j2cl.transpiler.ast.ArrayAccess;
+import com.google.j2cl.transpiler.ast.ArrayLength;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.BinaryOperator;
 import com.google.j2cl.transpiler.ast.BooleanLiteral;
@@ -38,6 +40,7 @@ import com.google.j2cl.transpiler.ast.JavaScriptConstructorReference;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MultiExpression;
+import com.google.j2cl.transpiler.ast.NewArray;
 import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
@@ -48,7 +51,6 @@ import com.google.j2cl.transpiler.ast.ThisReference;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.UnaryExpression;
-import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
 import com.google.j2cl.transpiler.ast.VariableReference;
@@ -89,7 +91,7 @@ final class ExpressionTranspiler {
       public boolean enterBinaryExpression(BinaryExpression expression) {
         BinaryOperator operator = expression.getOperator();
         if (operator == BinaryOperator.ASSIGN) {
-          return renderAssignmentExpression(expression);
+          return renderAssignment(expression.getLeftOperand(), expression.getRightOperand());
         }
 
         renderBinaryOperation(expression);
@@ -113,42 +115,82 @@ final class ExpressionTranspiler {
         sourceBuilder.append(")");
       }
 
-      private boolean renderAssignmentExpression(BinaryExpression expression) {
-        Expression left = expression.getLeftOperand();
-        if (left instanceof VariableReference) {
-          renderVariableAssignment(
-              ((VariableReference) left).getTarget(), expression.getRightOperand());
-          return false;
-        } else if (left instanceof FieldAccess) {
-          renderFieldAccessOperation((FieldAccess) left, expression.getRightOperand());
-        }
-        return enterExpression(expression);
+      private boolean renderAssignment(Expression left, Expression right) {
+        sourceBuilder.append("(");
+        renderAccessExpression(left, "set");
+        sourceBuilder.append(" ");
+        renderTypedExpression(left.getTypeDescriptor(), right);
+        sourceBuilder.append(")");
+        return false;
       }
 
-      private void renderFieldAccessOperation(FieldAccess fieldAccess, Expression assignment) {
-        FieldDescriptor fieldDescriptor = fieldAccess.getTarget();
-        String wasmOperation = assignment != null ? "set" : "get";
-
-        Expression qualifier = fieldAccess.getQualifier();
-        if (fieldDescriptor.isStatic()) {
-          checkArgument(qualifier instanceof JavaScriptConstructorReference);
-          sourceBuilder.append(
-              format("(global.%s %s", wasmOperation, environment.getFieldName(fieldDescriptor)));
-        } else {
+      private void renderAccessExpression(Expression expression, String instruction) {
+        if (expression instanceof VariableReference) {
           sourceBuilder.append(
               format(
-                  "(struct.%s %s %s ",
-                  wasmOperation,
-                  environment.getWasmTypeName(fieldDescriptor.getEnclosingTypeDescriptor()),
-                  environment.getFieldName(fieldDescriptor) + " "));
-          render(qualifier);
-        }
+                  "local.%s %s",
+                  instruction,
+                  environment.getDeclarationName(((VariableReference) expression).getTarget())));
 
-        if (assignment != null) {
+        } else if (expression instanceof FieldAccess) {
+          FieldDescriptor fieldDescriptor = ((FieldAccess) expression).getTarget();
+          Expression qualifier = ((FieldAccess) expression).getQualifier();
+          if (fieldDescriptor.isStatic()) {
+            checkArgument(qualifier instanceof JavaScriptConstructorReference);
+            sourceBuilder.append(
+                format("global.%s %s", instruction, environment.getFieldName(fieldDescriptor)));
+          } else {
+            sourceBuilder.append(
+                format(
+                    "struct.%s %s %s",
+                    instruction,
+                    environment.getWasmTypeName(fieldDescriptor.getEnclosingTypeDescriptor()),
+                    environment.getFieldName(fieldDescriptor)));
+            render(qualifier);
+          }
+
+        } else if (expression instanceof ArrayAccess) {
+          ArrayAccess arrayAccess = (ArrayAccess) expression;
+          Expression arrayExpression = arrayAccess.getArrayExpression();
+
+          sourceBuilder.append(
+              format(
+                  "array.%s %s ",
+                  instruction,
+                  environment.getElementArrayTypeName(arrayExpression.getTypeDescriptor())));
+          renderArrayReference(arrayExpression);
           sourceBuilder.append(" ");
-          renderTypedExpression(fieldAccess.getTypeDescriptor(), assignment);
+          renderTypedExpression(PrimitiveTypes.INT, arrayAccess.getIndexExpression());
         }
+      }
+
+      private void renderArrayReference(Expression arrayExpression) {
+        sourceBuilder.append(
+            format(
+                "(struct.get %s $elements ",
+                environment.getWasmTypeName(arrayExpression.getTypeDescriptor())));
+        render(arrayExpression);
         sourceBuilder.append(")");
+      }
+
+      @Override
+      public boolean enterArrayAccess(ArrayAccess arrayAccess) {
+        sourceBuilder.append("(");
+        renderAccessExpression(arrayAccess, "get");
+        sourceBuilder.append(")");
+        return false;
+      }
+
+      @Override
+      public boolean enterArrayLength(ArrayLength arrayLength) {
+        sourceBuilder.append(
+            format(
+                "(array.len %s ",
+                environment.getElementArrayTypeName(
+                    arrayLength.getArrayExpression().getTypeDescriptor())));
+        renderArrayReference(arrayLength.getArrayExpression());
+        sourceBuilder.append(")");
+        return false;
       }
 
       @Override
@@ -209,7 +251,9 @@ final class ExpressionTranspiler {
 
       @Override
       public boolean enterFieldAccess(FieldAccess fieldAccess) {
-        renderFieldAccessOperation(fieldAccess, null);
+        sourceBuilder.append("(");
+        renderAccessExpression(fieldAccess, "get");
+        sourceBuilder.append(")");
         return false;
       }
 
@@ -230,14 +274,14 @@ final class ExpressionTranspiler {
 
         if (testTypeDescriptor.isClass() || testTypeDescriptor.isEnum()) {
           sourceBuilder.append(
-              String.format(
+              format(
                   "(ref.test %s %s ",
                   environment.getWasmTypeName(
                       instanceOfExpression.getExpression().getDeclaredTypeDescriptor()),
                   environment.getWasmTypeName(testTypeDescriptor)));
           render(instanceOfExpression.getExpression());
           sourceBuilder.append(
-              String.format(
+              format(
                   " (global.get %s))",
                   environment.getRttGlobalName(
                       ((DeclaredTypeDescriptor) testTypeDescriptor).getTypeDeclaration())));
@@ -269,7 +313,7 @@ final class ExpressionTranspiler {
 
           // Retrieve the method reference from the vtable to provide it to call_ref.
           sourceBuilder.append(
-              String.format(
+              format(
                   "(struct.get %s %s (struct.get %s $vtable",
                   environment.getWasmVtableTypeName(target.getEnclosingTypeDescriptor()),
                   environment.getVtableSlot(target),
@@ -306,6 +350,29 @@ final class ExpressionTranspiler {
               }
             });
         sourceBuilder.closeParens();
+        return false;
+      }
+
+      @Override
+      public boolean enterNewArray(NewArray newArray) {
+        // TODO(dramaix): remove this when full array support is implemented
+        if (newArray.getDimensionExpressions().size() > 1 || newArray.getArrayLiteral() != null) {
+          return enterExpression(newArray);
+        }
+
+        Expression dimensionExpression = newArray.getDimensionExpressions().get(0);
+        String arrayType = environment.getWasmTypeName(newArray.getTypeDescriptor());
+        String elementArrayType = environment.getElementArrayTypeName(newArray.getTypeDescriptor());
+
+        sourceBuilder.append(
+            format(
+                "(struct.new_with_rtt %s (global.get %s) (array.new_default_with_rtt %s ",
+                arrayType,
+                environment.getWasmVtableGlobalName(TypeDescriptors.get().javaLangObject),
+                elementArrayType));
+        renderTypedExpression(dimensionExpression.getTypeDescriptor(), dimensionExpression);
+        sourceBuilder.append(
+            format(" (global.get %s.rtt)) (global.get %s.rtt))", elementArrayType, arrayType));
         return false;
       }
 
@@ -396,14 +463,8 @@ final class ExpressionTranspiler {
       private void renderVariableDeclarationFragment(VariableDeclarationFragment fragment) {
         if (fragment.getInitializer() != null) {
           sourceBuilder.newLine();
-          renderVariableAssignment(fragment.getVariable(), fragment.getInitializer());
+          renderAssignment(fragment.getVariable().createReference(), fragment.getInitializer());
         }
-      }
-
-      private void renderVariableAssignment(Variable variable, Expression assignment) {
-        sourceBuilder.append("(local.set " + environment.getDeclarationName(variable) + " ");
-        renderTypedExpression(variable.getTypeDescriptor(), assignment);
-        sourceBuilder.append(")");
       }
 
       // TODO(dramaix): remove when coercions and casting are in place.
@@ -422,8 +483,9 @@ final class ExpressionTranspiler {
 
       @Override
       public boolean enterVariableReference(VariableReference variableReference) {
-        sourceBuilder.append(
-            "(local.get " + environment.getDeclarationName(variableReference.getTarget()) + ")");
+        sourceBuilder.append("(");
+        renderAccessExpression(variableReference, "get");
+        sourceBuilder.append(")");
         return false;
       }
 

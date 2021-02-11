@@ -124,7 +124,7 @@
  (block $return.label
   (block
    ;; return ($1InnerClass.this.localVar + $1InnerClass.this.p);
-   (local.set $return.value (i32.add (struct.get $simplelocalclass.SimpleLocalClass.1InnerClass $localVar@simplelocalclass.SimpleLocalClass.1InnerClass  (local.get $this)) (struct.get $simplelocalclass.SimpleLocalClass.1InnerClass $p@simplelocalclass.SimpleLocalClass.1InnerClass  (local.get $this))))
+   (local.set $return.value (i32.add (struct.get $simplelocalclass.SimpleLocalClass.1InnerClass $localVar@simplelocalclass.SimpleLocalClass.1InnerClass(local.get $this)) (struct.get $simplelocalclass.SimpleLocalClass.1InnerClass $p@simplelocalclass.SimpleLocalClass.1InnerClass(local.get $this))))
    (br $return.label)
   )
  )

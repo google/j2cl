@@ -28,7 +28,7 @@
 
 ;;; void Main.main(String... args)
 (func $m_main__arrayOf_java_lang_String__void@jsinnerclass.Main
- (param $args (ref null $java.lang.Object))
+ (param $args (ref null $Object.array))
  (local $$qualifier (ref null $jsinnerclass.Main.Outer))
  (block $return.label
   (block
@@ -81,7 +81,7 @@
     
     (local.set $$qualifier (call $m_<init>__void@jsinnerclass.Main.Outer.Inner (struct.new_with_rtt $jsinnerclass.Main.Outer.Inner (global.get $jsinnerclass.Main.Outer.Inner.vtable) (ref.null $jsinnerclass.Main.Outer) (i32.const 0) (global.get $jsinnerclass.Main.Outer.Inner.rtt))))
     (call_ref (local.get $$qualifier)(struct.get $jsinnerclass.Main.Outer.Inner.vtable $m_getB__int (struct.get $jsinnerclass.Main.Outer.Inner $vtable(local.get $$qualifier))))
-   ) (struct.get $jsinnerclass.Main.Outer $a@jsinnerclass.Main.Outer  (local.get $this))))
+   ) (struct.get $jsinnerclass.Main.Outer $a@jsinnerclass.Main.Outer(local.get $this))))
    (br $return.label)
   )
  )
@@ -114,7 +114,7 @@
    ;; Object.this.Object.<init>();
    
    ;; (Inner.this.b = (Inner.this.this.a + 1));
-   (struct.set $jsinnerclass.Main.Outer.Inner $b@jsinnerclass.Main.Outer.Inner  (local.get $this) (i32.add (struct.get $jsinnerclass.Main.Outer $a@jsinnerclass.Main.Outer  (struct.get $jsinnerclass.Main.Outer.Inner $this@jsinnerclass.Main.Outer.Inner  (local.get $this))) (i32.const 1)))
+   (struct.set $jsinnerclass.Main.Outer.Inner $b@jsinnerclass.Main.Outer.Inner(local.get $this) (i32.add (struct.get $jsinnerclass.Main.Outer $a@jsinnerclass.Main.Outer(struct.get $jsinnerclass.Main.Outer.Inner $this@jsinnerclass.Main.Outer.Inner(local.get $this))) (i32.const 1)))
   )
  )
  (local.get $this)
@@ -130,7 +130,7 @@
  (block $return.label
   (block
    ;; return Inner.this.b;
-   (local.set $return.value (struct.get $jsinnerclass.Main.Outer.Inner $b@jsinnerclass.Main.Outer.Inner  (local.get $this)))
+   (local.set $return.value (struct.get $jsinnerclass.Main.Outer.Inner $b@jsinnerclass.Main.Outer.Inner(local.get $this)))
    (br $return.label)
   )
  )
