@@ -183,9 +183,9 @@ def setup_j2cl_workspace(**kwargs):
 
     http_archive(
         name = "org_gwtproject_gwt",
-        strip_prefix = "gwt-ace78af575217192e7f444a1628844c8c30d5d6a",
-        url = "https://github.com/gwtproject/gwt/archive/ace78af575217192e7f444a1628844c8c30d5d6a.zip",
-        sha256 = "49c5521484a1284a6d3dc5561afb491ab1be59586cefc19d69f94d68a0e8d119",
+        strip_prefix = "gwt-6df48e8bd6872f96ec1b1baef72e4cbdae2226e7",
+        url = "https://github.com/gwtproject/gwt/archive/6df48e8bd6872f96ec1b1baef72e4cbdae2226e7.zip",
+        sha256 = "a422477b2a055b0fee6494c36ffc92a76ce6214924b679213d6fd3ff485ec1a9",
     )
 
     http_archive(

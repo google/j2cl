@@ -1,21 +1,25 @@
 Integration tests size report:
 **************************************
-There are 2 optimized size changes.
+There are 7 optimized size changes.
 Total optimized size (of already existing tests) changed from
-  2019233 to 2019199 bytes (100%->100.0%) and from
-  718626 to 718614 bytes (100%->100.0%) gzipped.
+  2020538 to 2020508 bytes (100%->100.0%) and from
+  719280 to 719272 bytes (100%->100.0%) gzipped.
 
 
 Shrinkage report highlights:
 **************************************
         old      new
-       1670     1664 arrayliteral.esnext (-0.4%)
-       1921     1915 arrayliteral (-0.3%)
+      30900    30891 box2d_default.esnext (-0.0%)
+      28818    28812 box2d_default (-0.0%)
+      27219    27214 box2d_noclassmetadata (-0.0%)
+      27047    27045 box2d_noclassmetadata_checksopt (-0.0%)
 
 
 Expansion report highlights:
 **************************************
-  none
+        old      new
+      27253    27263 box2d_noclassmetadata_checksmin.esnext (0.0%)
+      28531    28537 box2d_noclassmetadata_checksopt.esnext (0.0%)
 
 
 Incremental size reports (non-gzip):
@@ -28,12 +32,12 @@ Incremental size reports (non-gzip):
 Uncompiled bundle reports:
 **************************************
         old      new
-    4025151  4025151 box2d_default (unchanged)
-    2198457  2198457 box2d_default.minified (unchanged)
-    1168614  1168614 box2d_default.rta (unchanged)
-    2423091  2423091 emptyclass (unchanged)
-    1456814  1456814 emptyclass.minified (unchanged)
-     702005   702005 emptyclass.rta (unchanged)
+    4024796  4024510 box2d_default (-0.0%)
+    2198102  2197821 box2d_default.minified (-0.0%)
+    1168259  1167978 box2d_default.rta (-0.0%)
+    2422736  2422450 emptyclass (-0.0%)
+    1456459  1456178 emptyclass.minified (-0.0%)
+     701650   701369 emptyclass.rta (-0.0%)
 
 
 All reports:
@@ -59,14 +63,14 @@ All reports:
         733      733 arraycastsinglesideeffect.esnext (unchanged)
        1641     1641 arrayleafinsertion (unchanged)
        1417     1417 arrayleafinsertion.esnext (unchanged)
-       1921     1915 arrayliteral (-0.3%)
-       1670     1664 arrayliteral.esnext (-0.4%)
+       1915     1915 arrayliteral (unchanged)
+       1664     1664 arrayliteral.esnext (unchanged)
        1515     1515 arrayobjectcalls (unchanged)
        1268     1268 arrayobjectcalls.esnext (unchanged)
        3515     3515 arrayofboxedtype (unchanged)
        3220     3220 arrayofboxedtype.esnext (unchanged)
-         -1      332 arrayoutofbounds (new)
-         -1      334 arrayoutofbounds.esnext (new)
+        332      332 arrayoutofbounds (unchanged)
+        334      334 arrayoutofbounds.esnext (unchanged)
        3833     3833 arrayreadwrite (unchanged)
        3438     3438 arrayreadwrite.esnext (unchanged)
        2428     2428 assertsimple (unchanged)
@@ -85,14 +89,14 @@ All reports:
        2314     2314 binaryexpressions.esnext (unchanged)
         906      906 blockscoping (unchanged)
         621      621 blockscoping.esnext (unchanged)
-      28818    28818 box2d_default (unchanged)
-      30900    30900 box2d_default.esnext (unchanged)
-      27219    27219 box2d_noclassmetadata (unchanged)
-      28785    28785 box2d_noclassmetadata.esnext (unchanged)
+      28818    28812 box2d_default (-0.0%)
+      30900    30891 box2d_default.esnext (-0.0%)
+      27219    27214 box2d_noclassmetadata (-0.0%)
+      28785    28783 box2d_noclassmetadata.esnext (-0.0%)
       25871    25871 box2d_noclassmetadata_checksmin (unchanged)
-      27253    27253 box2d_noclassmetadata_checksmin.esnext (unchanged)
-      27047    27047 box2d_noclassmetadata_checksopt (unchanged)
-      28531    28531 box2d_noclassmetadata_checksopt.esnext (unchanged)
+      27253    27263 box2d_noclassmetadata_checksmin.esnext (0.0%)
+      27047    27045 box2d_noclassmetadata_checksopt (-0.0%)
+      28531    28537 box2d_noclassmetadata_checksopt.esnext (0.0%)
         959      959 breakstatement (unchanged)
         673      673 breakstatement.esnext (unchanged)
        2044     2044 bridgejsmethod (unchanged)
