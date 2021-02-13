@@ -79,6 +79,23 @@ public class OperationExpansionUtils {
   private static FieldAccess decomposeFieldAccess(
       FieldAccess lhs, List<VariableDeclarationFragment> temporaryVariableDeclarations) {
 
+    if (lhs.getTarget().isStatic()) {
+      // The qualifier here should not be extracted since it is a constructor reference.
+      //
+      // Note that checking idempotence of the qualifier is not correct since it might still be
+      // affected by the side effects in the rhs, e.g.
+      //
+      //      SomeClass a = foo;
+      //      a.result = (a = bar).toString()
+      //
+      // if this was not decomposed (because 'a' is idempotent), the above snippet would modify
+      // the instance 'foo' but return the value of 'bar.result' instead of 'foo.result' (see
+      // expandAssignmentExpression).
+      // What ensures correctness here without a rewrite is the qualifier being constant - not
+      // being idempotent.
+      return lhs;
+    }
+
     // The qualifier is not guaranteed to be free of side effects, so evaluate it first and assign
     // to a temporary variable.
     Expression qualifier = lhs.getQualifier();

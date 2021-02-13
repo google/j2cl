@@ -172,6 +172,8 @@
 [l = boxedInteger = i = 20;] => [l = $Primitives.$widenIntToLong((boxedInteger = Integer.m_valueOf__int(i = 20)).m_intValue__());] "arithmeticexpressions.ArithmeticExpressions.testExtendedOperands"
 [l = i + boxedInteger + l + 20;] => [l = $LongUtils.$plus($LongUtils.$plus($Primitives.$widenIntToLong(i + boxedInteger.m_intValue__() | 0), l), $Long.fromInt(20));] "arithmeticexpressions.ArithmeticExpressions.testExtendedOperands"
 [d = 20 + l + d;] => [d = $Primitives.$widenLongToDouble($LongUtils.$plus($Long.fromInt(20), l)) + d;] "arithmeticexpressions.ArithmeticExpressions.testExtendedOperands"
+[incrementCounter] => [m_incrementCounter__]
+[return ++counter;] => [return ArithmeticExpressions.f_counter__arithmeticexpressions_ArithmeticExpressions_ = $LongUtils.$plus(ArithmeticExpressions.f_counter__arithmeticexpressions_ArithmeticExpressions_, $Long.fromInt(1));] "arithmeticexpressions.ArithmeticExpressions.incrementCounter"
 [ArithmeticExpressions] => [$init___$p_arithmeticexpressions_ArithmeticExpressions]
 [ArithmeticExpressions] => [let /** !$Long */ $value;] "arithmeticexpressions.ArithmeticExpressions.<init>"
 [public long bar = foo++;] => [this.f_bar__arithmeticexpressions_ArithmeticExpressions = ($value = ArithmeticExpressions.$static_foo__arithmeticexpressions_ArithmeticExpressions, ArithmeticExpressions.$static_foo__arithmeticexpressions_ArithmeticExpressions = $LongUtils.$plus(ArithmeticExpressions.$static_foo__arithmeticexpressions_ArithmeticExpressions, $Long.fromInt(1)), $value);] "arithmeticexpressions.ArithmeticExpressions.<init>"
@@ -190,6 +192,7 @@
 [ArithmeticExpressions] => [j_l_Object.$clinit();] "arithmeticexpressions.ArithmeticExpressions.<clinit>"
 [public static long one = 1;] => [ArithmeticExpressions.$static_one__arithmeticexpressions_ArithmeticExpressions = $Long.fromInt(1);] "arithmeticexpressions.ArithmeticExpressions.<clinit>"
 [public static long foo = one++;] => [ArithmeticExpressions.$static_foo__arithmeticexpressions_ArithmeticExpressions = ($value = ArithmeticExpressions.$static_one__arithmeticexpressions_ArithmeticExpressions, ArithmeticExpressions.$static_one__arithmeticexpressions_ArithmeticExpressions = $LongUtils.$plus(ArithmeticExpressions.$static_one__arithmeticexpressions_ArithmeticExpressions, $Long.fromInt(1)), $value);] "arithmeticexpressions.ArithmeticExpressions.<clinit>"
+[private static long counter = 0;] => [ArithmeticExpressions.f_counter__arithmeticexpressions_ArithmeticExpressions_ = $Long.fromInt(0);] "arithmeticexpressions.ArithmeticExpressions.<clinit>"
 [private static final float FLOAT_CONSTANT = 1.1f;] => [/**@const {number}*/
 ArithmeticExpressions.f_FLOAT_CONSTANT__arithmeticexpressions_ArithmeticExpressions_ = 1.100000023841858;]
 [FLOAT_CONSTANT] => [f_FLOAT_CONSTANT__arithmeticexpressions_ArithmeticExpressions_]
@@ -203,4 +206,7 @@ ArithmeticExpressions.f_DOUBLE_CONSTANT_WITH_ARITHMETIC__arithmeticexpressions_A
 ArithmeticExpressions.$static_one__arithmeticexpressions_ArithmeticExpressions = $Long.fromInt(0);]
 [ArithmeticExpressions] => [/**@private {!$Long}*/
 ArithmeticExpressions.$static_foo__arithmeticexpressions_ArithmeticExpressions = $Long.fromInt(0);]
+[ArithmeticExpressions] => [/**@type {!$Long}*/
+ArithmeticExpressions.f_counter__arithmeticexpressions_ArithmeticExpressions_ = $Long.fromInt(0);]
+[counter] => [f_counter__arithmeticexpressions_ArithmeticExpressions_]
 

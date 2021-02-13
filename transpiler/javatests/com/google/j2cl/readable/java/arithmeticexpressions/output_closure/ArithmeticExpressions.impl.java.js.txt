@@ -239,6 +239,15 @@ class ArithmeticExpressions extends j_l_Object {
     d = $Primitives.$widenLongToDouble($LongUtils.$plus($Long.fromInt(20), l)) +
         d;
   }
+  /** @return {!$Long} */
+  static m_incrementCounter__() {
+    return ArithmeticExpressions
+               .f_counter__arithmeticexpressions_ArithmeticExpressions_ =
+               $LongUtils.$plus(
+                   ArithmeticExpressions
+                       .f_counter__arithmeticexpressions_ArithmeticExpressions_,
+                   $Long.fromInt(1));
+  }
   /** @private */
   $init___$p_arithmeticexpressions_ArithmeticExpressions() {
     let /** !$Long */ $value;
@@ -301,6 +310,9 @@ class ArithmeticExpressions extends j_l_Object {
                      .$static_one__arithmeticexpressions_ArithmeticExpressions,
                  $Long.fromInt(1)),
          $value);
+    ArithmeticExpressions
+        .f_counter__arithmeticexpressions_ArithmeticExpressions_ =
+        $Long.fromInt(0);
   }
   /** @return {boolean} */
   static $isInstance(/** ? */ instance) {
@@ -337,6 +349,9 @@ ArithmeticExpressions.$static_one__arithmeticexpressions_ArithmeticExpressions =
     $Long.fromInt(0);
 /**@private {!$Long}*/
 ArithmeticExpressions.$static_foo__arithmeticexpressions_ArithmeticExpressions =
+    $Long.fromInt(0);
+/**@type {!$Long}*/
+ArithmeticExpressions.f_counter__arithmeticexpressions_ArithmeticExpressions_ =
     $Long.fromInt(0);
 $Util.$setClassMetadata(
     ArithmeticExpressions, 'arithmeticexpressions.ArithmeticExpressions');

@@ -24,6 +24,7 @@
 (global $DOUBLE_CONSTANT_WITH_ARITHMETIC@arithmeticexpressions.ArithmeticExpressions (mut f64) (f64.const 0.0))
 (global $one@arithmeticexpressions.ArithmeticExpressions (mut i64) (i64.const 0))
 (global $foo@arithmeticexpressions.ArithmeticExpressions (mut i64) (i64.const 0))
+(global $counter@arithmeticexpressions.ArithmeticExpressions (mut i64) (i64.const 0))
 
 ;;; ArithmeticExpressions()
 (func $m_<init>__void@arithmeticexpressions.ArithmeticExpressions
@@ -533,6 +534,26 @@
  )
 )
 (elem declare func $m_testExtendedOperands__void@arithmeticexpressions.ArithmeticExpressions)
+
+;;; long ArithmeticExpressions.incrementCounter()
+(func $m_incrementCounter__long@arithmeticexpressions.ArithmeticExpressions
+ (result i64)
+ (local $return.value i64)
+ (local $$value i64)
+ (block $return.label
+  (block
+   ;; return (long $value = (arithmeticexpressions.ArithmeticExpressions.counter + 1),(arithmeticexpressions.ArithmeticExpressions.counter = $value),$value);
+   (local.set $return.value (block (result i64)
+    
+    (local.set $$value (i64.add (global.get $counter@arithmeticexpressions.ArithmeticExpressions) (i64.const 1)))
+    (global.set $counter@arithmeticexpressions.ArithmeticExpressions (local.get $$value))
+    (local.get $$value)
+   ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
 
 ;;; CLASS  Ref
 (type $arithmeticexpressions.ArithmeticExpressions.1Ref (struct

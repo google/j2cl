@@ -180,4 +180,10 @@ public class ArithmeticExpressions {
     l = i + boxedInteger + l + 20;
     d = 20 + l + d;
   }
+
+  private static long counter = 0;
+
+  private static long incrementCounter() {
+    return ++counter;
+  }
 }
