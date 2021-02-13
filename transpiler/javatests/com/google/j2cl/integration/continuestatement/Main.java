@@ -16,12 +16,21 @@
 package com.google.j2cl.integration.continuestatement;
 
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
+import static com.google.j2cl.integration.testing.Asserts.fail;
 
 /**
  * Test for continue statement.
  */
 public class Main {
+
   public static void main(String... args) {
+    testForLoop();
+    testWhileLoop();
+    testNestedForLoop();
+    testNestedSwitch();
+  }
+
+  private static void testForLoop() {
     int i = 0;
 
     for (; i < 100; i++) {
@@ -30,8 +39,11 @@ public class Main {
       }
       break;
     }
-
     assertTrue(i == 50);
+  }
+
+  private static void testWhileLoop() {
+    int i = 0;
 
     while (true) {
       i++;
@@ -43,7 +55,9 @@ public class Main {
     }
 
     assertTrue(i == 100);
+  }
 
+  private static void testNestedForLoop() {
     int count = 0;
 
     for (int j = 0; j < 100; j++) {
@@ -71,5 +85,22 @@ public class Main {
     }
 
     assertTrue(count == 101);
+  }
+
+  private static void testNestedSwitch() {
+    boolean loop = true;
+
+    while (loop) {
+      switch (1) {
+        case 1:
+          switch (2) {
+            case 2:
+              assertTrue(loop);
+              loop = false;
+              continue;
+          }
+      }
+      fail();
+    }
   }
 }

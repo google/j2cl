@@ -17,11 +17,14 @@ package com.google.j2cl.integration.breakstatement;
 
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
-/**
- * Test for for break statement.
- */
+/** Test for for break statement. */
 public class Main {
   public static void main(String... args) {
+    testUnlabeledBreaks();
+    testLabeledLoop();
+  }
+
+  private static void testUnlabeledBreaks() {
     int i = 0;
 
     for (; i < 100; i++) {
@@ -62,5 +65,15 @@ public class Main {
     }
 
     assertTrue(count == 101);
+  }
+
+  private static void testLabeledLoop() {
+    while (true) {
+      LABEL:
+      while (true) {
+        break;
+      }
+      break;
+    }
   }
 }

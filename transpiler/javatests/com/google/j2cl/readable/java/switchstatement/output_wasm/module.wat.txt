@@ -69,14 +69,98 @@
  (local.set $this (ref.cast $java.lang.Object $switchstatement.SwitchStatement (local.get $this.untyped) (global.get $switchstatement.SwitchStatement.rtt)))
  (block $return.label
   (block
-   ;; switch ("one") {
-   ;; unimplemented statement SwitchStatement
-   ;; switch (49) {
-   ;; unimplemented statement SwitchStatement
-   ;; switch (1) {
-   ;; unimplemented statement SwitchStatement
-   ;; switch (switchstatement.Numbers.ONE) {
-   ;; unimplemented statement SwitchStatement
+   ;; SWITCH: switch ("one") {
+   (block $SWITCH.BREAK
+    ;; switch ("one") {
+    
+    (block
+     (block
+      (block
+       (block ;; evaluate expression and jump
+        (br_if 0 (ref.eq (ref.null $java.lang.String) (ref.null $java.lang.String)))
+        (br_if 1 (ref.eq (ref.null $java.lang.String) (ref.null $java.lang.String)))
+        (br 2)
+       )
+       ;; case "one":
+      )
+      ;; case "two":
+      ;; break SWITCH;
+      (br $SWITCH.BREAK)
+     )
+     ;; default:
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; SWITCH: switch (49) {
+   (block $SWITCH_1.BREAK
+    ;; switch (49) {
+    
+    (block
+     (block
+      (block
+       (block ;; evaluate expression and jump
+        (br_if 0 (i32.eq (i32.const 49) (i32.const 49)))
+        (br_if 1 (i32.eq (i32.const 49) (i32.const 50)))
+        (br 2)
+       )
+       ;; case 49:
+      )
+      ;; case 50:
+      ;; break SWITCH;
+      (br $SWITCH_1.BREAK)
+     )
+     ;; default:
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; SWITCH: switch (1) {
+   (block $SWITCH_2.BREAK
+    ;; switch (1) {
+    
+    (block
+     (block
+      (block
+       (block ;; evaluate expression and jump
+        (br_if 0 (i32.eq (i32.const 1) (i32.const 1)))
+        (br_if 1 (i32.eq (i32.const 1) (i32.const 2)))
+        (br 2)
+       )
+       ;; case 1:
+      )
+      ;; case 2:
+      ;; break SWITCH;
+      (br $SWITCH_2.BREAK)
+     )
+     ;; default:
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; SWITCH: switch (switchstatement.Numbers.ONE) {
+   (block $SWITCH_3.BREAK
+    ;; switch (switchstatement.Numbers.ONE) {
+    
+    (block
+     (block
+      (block
+       (block ;; evaluate expression and jump
+        (br_if 0 (ref.eq (global.get $ONE@switchstatement.Numbers) (global.get $ONE@switchstatement.Numbers)))
+        (br_if 1 (ref.eq (global.get $ONE@switchstatement.Numbers) (global.get $TWO@switchstatement.Numbers)))
+        (br 2)
+       )
+       ;; case switchstatement.Numbers.ONE:
+      )
+      ;; case switchstatement.Numbers.TWO:
+      ;; break SWITCH;
+      (br $SWITCH_3.BREAK)
+     )
+     ;; default:
+     ;; return;
+     (br $return.label)
+    )
+   )
   )
  )
 )
@@ -92,10 +176,56 @@
  (local $i_1 i32)
  (block $return.label
   (block
-   ;; switch (3) {
-   ;; unimplemented statement SwitchStatement
-   ;; switch (5) {
-   ;; unimplemented statement SwitchStatement
+   ;; SWITCH: switch (3) {
+   (block $SWITCH.BREAK
+    ;; switch (3) {
+    
+    (block
+     (block
+      (block ;; evaluate expression and jump
+       (br_if 0 (i32.eq (i32.const 3) (i32.const 1)))
+       (br_if 1 (i32.eq (i32.const 3) (i32.const 3)))
+       (br 2)
+      )
+      ;; case 1:
+      ;; int unassigned,int unassigned2;
+      
+      ;; int i = 0;
+      
+      (local.set $i (i32.const 0))
+      ;; int j = 2,int b = (j + 1);
+      
+      (local.set $j (i32.const 2))
+      (local.set $b (i32.add (local.get $j) (i32.const 1)))
+      ;; break SWITCH;
+      (br $SWITCH.BREAK)
+     )
+     ;; case 3:
+     ;; (i = 3);
+     (local.set $i (i32.const 3))
+     ;; assert (i == 3);
+     ;; unimplemented statement AssertStatement
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; SWITCH: switch (5) {
+   (block $SWITCH_1.BREAK
+    ;; switch (5) {
+    
+    (block
+     (block ;; evaluate expression and jump
+      (br_if 0 (i32.eq (i32.const 5) (i32.const 5)))
+      (br 1)
+     )
+     ;; case 5:
+     ;; int i = 1;
+     
+     (local.set $i_1 (i32.const 1))
+     ;; break SWITCH;
+     (br $SWITCH_1.BREAK)
+    )
+   )
    ;; assert false;
    ;; unimplemented statement AssertStatement
   )

@@ -33,42 +33,56 @@ import java.util.Deque;
  * continues explicitly target a label. After this pass is ran all breaks and continues will have an
  * explicit target.
  *
- * <p>TODO(rluble): This pass does not handle switch statements yet.
  */
 public class NormalizeLabels extends NormalizationPass {
 
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
+    Deque<Label> enclosingContinueLabels = new ArrayDeque<>();
+    Deque<Label> enclosingBreakLabels = new ArrayDeque<>();
+
     compilationUnit.accept(
         new AbstractRewriter() {
-          Deque<Label> enclosingLoopLabels = new ArrayDeque<>();
-
           @Override
           public boolean shouldProcessLoopStatement(LoopStatement loopStatement) {
-            Label enclosingLabel =
-                getParent() instanceof LabeledStatement
-                    ? ((LabeledStatement) getParent()).getLabel()
-                    // Add a label for break and continues if the loop didn't have one.
-                    : Label.newBuilder().setName("LOOP").build();
-
-            enclosingLoopLabels.push(enclosingLabel);
+            Label enclosingLabel = getEnclosingLabel("LOOP");
+            enclosingBreakLabels.push(enclosingLabel);
+            enclosingContinueLabels.push(enclosingLabel);
             return true;
           }
 
           @Override
-          public Statement rewriteLoopStatement(LoopStatement loopStatement) {
-            Label loopLabel = enclosingLoopLabels.pop();
-            if (getParent() instanceof LabeledStatement) {
-              return loopStatement;
-            }
-            // Make sure loop is enclosed with the label if not already.
-            return loopStatement.encloseWithLabel(loopLabel);
+          public boolean shouldProcessSwitchStatement(SwitchStatement switchStatement) {
+            // Note that Switch statements are never targets of continue statements.
+            enclosingBreakLabels.push(getEnclosingLabel("SWITCH"));
+            return true;
+          }
+
+          private Label getEnclosingLabel(String labelName) {
+            return getParent() instanceof LabeledStatement
+                ? ((LabeledStatement) getParent()).getLabel()
+                : Label.newBuilder().setName(labelName).build();
           }
 
           @Override
-          public boolean shouldProcessSwitchStatement(SwitchStatement switchStatement) {
-            // TODO(dramaix): remove when SwitchStatement is implemented
-            return false;
+          public Statement rewriteLoopStatement(LoopStatement loopStatement) {
+            enclosingContinueLabels.pop();
+            return ensureLabeled(loopStatement);
+          }
+
+          @Override
+          public Statement rewriteSwitchStatement(SwitchStatement switchStatement) {
+            return ensureLabeled(switchStatement);
+          }
+
+          private Statement ensureLabeled(Statement statement) {
+            Label breakLabel = enclosingBreakLabels.pop();
+            if (getParent() instanceof LabeledStatement) {
+              return statement;
+            }
+
+            // Make sure statement is enclosed with the label (if not already).
+            return statement.encloseWithLabel(breakLabel);
           }
 
           @Override
@@ -78,7 +92,7 @@ public class NormalizeLabels extends NormalizationPass {
             }
 
             return ContinueStatement.newBuilder()
-                .setLabelReference(enclosingLoopLabels.peek().createReference())
+                .setLabelReference(enclosingContinueLabels.peek().createReference())
                 .setSourcePosition(continueStatement.getSourcePosition())
                 .build();
           }
@@ -89,7 +103,7 @@ public class NormalizeLabels extends NormalizationPass {
               return breakStatement;
             }
             return BreakStatement.Builder.from(breakStatement)
-                .setLabelReference(enclosingLoopLabels.peek().createReference())
+                .setLabelReference(enclosingBreakLabels.peek().createReference())
                 .build();
           }
         });

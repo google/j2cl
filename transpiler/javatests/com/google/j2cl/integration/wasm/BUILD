@@ -12,7 +12,7 @@ package(
 # blaze test :compiled_test
 # blaze test :uncompiled_test
 integration_test(
-    name = "dispatch",
+    name = "wasm",
     srcs = glob(["*.java"]),
     enable_wasm = True,
 )

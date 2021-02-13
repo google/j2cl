@@ -16,24 +16,23 @@
 package com.google.j2cl.transpiler.passes;
 
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
+import com.google.j2cl.transpiler.ast.Block;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MultiExpression;
+import com.google.j2cl.transpiler.ast.Statement;
+import com.google.j2cl.transpiler.ast.SwitchStatement;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 
 /**
- * Extracts non-idempotent dynamic dispatch qualifiers into local variables.
- *
- * <p>In WASM the qualifier of a dynamic method call needs to be passed twice, once to retrieve the
- * vtable and once as the implicit parameter. That implies that the result of qualifier will be
- * needed twice in a row.
+ * Extracts non-idempotent expressions into local variables to avoid double evaluation.
  *
  * <p>WASM does not provide a good alternative solution that could be used at generation time, e.g.
  * a 'dup' instruction which would allow duplicating a value in the stack.
  */
-public class NormalizeDynamicDispatchQualifiers extends NormalizationPass {
+public class ExtractNonIdempotentExpressions extends NormalizationPass {
 
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
@@ -50,7 +49,6 @@ public class NormalizeDynamicDispatchQualifiers extends NormalizationPass {
                       .setFinal(true)
                       .setTypeDescriptor(qualifier.getTypeDescriptor())
                       .build();
-
               return MultiExpression.newBuilder()
                   .setExpressions(
                       VariableDeclarationExpression.newBuilder()
@@ -62,6 +60,30 @@ public class NormalizeDynamicDispatchQualifiers extends NormalizationPass {
                   .build();
             }
             return methodCall;
+          }
+
+          @Override
+          public Statement rewriteSwitchStatement(SwitchStatement switchStatement) {
+            Expression switchExpression = switchStatement.getSwitchExpression();
+            if (!switchExpression.isIdempotent()) {
+              Variable switchVariable =
+                  Variable.newBuilder()
+                      .setName("$expression")
+                      .setFinal(true)
+                      .setTypeDescriptor(switchExpression.getTypeDescriptor())
+                      .build();
+              return Block.newBuilder()
+                  .setStatements(
+                      VariableDeclarationExpression.newBuilder()
+                          .addVariableDeclaration(switchVariable, switchExpression)
+                          .build()
+                          .makeStatement(switchStatement.getSourcePosition()),
+                      SwitchStatement.Builder.from(switchStatement)
+                          .setSwitchExpression(switchVariable.createReference())
+                          .build())
+                  .build();
+            }
+            return switchStatement;
           }
         });
   }

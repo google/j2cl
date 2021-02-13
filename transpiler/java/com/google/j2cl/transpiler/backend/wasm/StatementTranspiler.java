@@ -30,6 +30,8 @@ import com.google.j2cl.transpiler.ast.LabeledStatement;
 import com.google.j2cl.transpiler.ast.LoopStatement;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.Statement;
+import com.google.j2cl.transpiler.ast.SwitchCase;
+import com.google.j2cl.transpiler.ast.SwitchStatement;
 import com.google.j2cl.transpiler.ast.ThrowStatement;
 import com.google.j2cl.transpiler.ast.WhileStatement;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
@@ -112,7 +114,8 @@ class StatementTranspiler {
       @Override
       public boolean enterLabeledStatement(LabeledStatement labeledStatement) {
         if (labeledStatement.getStatement() instanceof LoopStatement) {
-          // Let the loops handle the labeling themselves.
+          // Let the loops handle the labeling themselves since the need to emit
+          // the target for the continue statement.
           return true;
         }
         String label = getBreakLabelName(labeledStatement.getLabel());
@@ -141,6 +144,89 @@ class StatementTranspiler {
               builder.append("(br $return.label)");
             });
         return false;
+      }
+
+      @Override
+      public boolean enterSwitchStatement(SwitchStatement switchStatement) {
+        // Switch statements are emitted as a series of nested blocks, with the innermost block
+        // corresponding to the first switch case, e.g. code like
+        //
+        //  switch (e) {
+        //    case A:
+        //    default:
+        //    case B:
+        //  }
+        //
+        // is emitted as:
+        //
+        // (block ;; case B:
+        //   (block ;; default
+        //     (block ;; case A:
+        //       (block  ;; determine case.
+        //         (br_if 0 e != A) ;; skip the rest of conditions and jump to the code for the
+        //                          ;; case.
+        //         (br_if 2 e != B)
+        //         (br 1) ;; jump to the code that handles the default case
+        //       )
+        //       ... code for case A:
+        //     )
+        //     ... code for default.
+        //   )
+        //   ... code for case B:
+        // )
+        //
+
+        // Open blocks for each case statement.
+        for (SwitchCase unused : switchStatement.getCases()) {
+          builder.newLine();
+          builder.openParens("block");
+        }
+
+        renderSwitchDispatchTable(switchStatement);
+
+        // Emit the code for each of the cases.
+        for (SwitchCase switchCase : switchStatement.getCases()) {
+          builder.newLine();
+          builder.append(
+              switchCase.isDefault()
+                  ? ";; default:"
+                  : ";; case " + switchCase.getCaseExpression() + ":");
+          renderStatements(switchCase.getStatements());
+          builder.closeParens();
+        }
+        return false;
+      }
+
+      private void renderSwitchDispatchTable(SwitchStatement switchStatement) {
+        // Evaluate the switch expression and jump to the right case.
+        builder.newLine();
+        builder.openParens("block ;; evaluate expression and jump");
+
+        // TODO(b/179956682): emit more efficient code for int enums using br_table
+        // or binary search.
+
+        int defaultCaseNumber = -1;
+        for (int caseNumber = 0; caseNumber < switchStatement.getCases().size(); caseNumber++) {
+          // Emit conditions for each case.
+          SwitchCase switchCase = switchStatement.getCases().get(caseNumber);
+          if (switchCase.isDefault()) {
+            // Skip the default case, since all the other conditions need to be evaluated before,
+            // but record where the default handling is done (which is not necessarily the last).
+            defaultCaseNumber = caseNumber;
+            continue;
+          }
+          // If the condition for this case is met, jump to the start of the case, i.e. jump out
+          // of all of the previous enclosing blocks.
+          renderConditionalBranch(
+              switchStatement.getSourcePosition(),
+              switchStatement.getSwitchExpression().infixEquals(switchCase.getCaseExpression()),
+              caseNumber);
+        }
+
+        // When no other condition was met, jump to the default case if exists.
+        renderUnconditionalBranch(
+            defaultCaseNumber != -1 ? defaultCaseNumber : switchStatement.getCases().size());
+        builder.closeParens();
       }
 
       @Override

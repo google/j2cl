@@ -30,6 +30,7 @@ import com.google.j2cl.transpiler.passes.DevirtualizeBoxedTypesAndJsFunctionImpl
 import com.google.j2cl.transpiler.passes.DevirtualizeMethodCalls;
 import com.google.j2cl.transpiler.passes.EnumMethodsCreator;
 import com.google.j2cl.transpiler.passes.ExpandCompoundAssignments;
+import com.google.j2cl.transpiler.passes.ExtractNonIdempotentExpressions;
 import com.google.j2cl.transpiler.passes.FilloutMissingSourceMapInformation;
 import com.google.j2cl.transpiler.passes.FixSuperCallQualifiers;
 import com.google.j2cl.transpiler.passes.ImplementAssertStatements;
@@ -63,7 +64,6 @@ import com.google.j2cl.transpiler.passes.NormalizeArrayLiterals;
 import com.google.j2cl.transpiler.passes.NormalizeCasts;
 import com.google.j2cl.transpiler.passes.NormalizeCatchClauses;
 import com.google.j2cl.transpiler.passes.NormalizeConstructors;
-import com.google.j2cl.transpiler.passes.NormalizeDynamicDispatchQualifiers;
 import com.google.j2cl.transpiler.passes.NormalizeEnumClasses;
 import com.google.j2cl.transpiler.passes.NormalizeEquality;
 import com.google.j2cl.transpiler.passes.NormalizeFieldInitialization;
@@ -286,7 +286,7 @@ public enum Backend {
           new RewriteShortcutOperators(),
           new NormalizeLabels(),
           new InsertCastOnArrayAccess(),
-          new NormalizeDynamicDispatchQualifiers(),
+          new ExtractNonIdempotentExpressions(),
 
           // Normalize multiexpressions before rewriting assignments so that whenever there is a
           // multiexpression, the result is used.

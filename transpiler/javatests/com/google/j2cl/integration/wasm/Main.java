@@ -13,12 +13,24 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.integration.dispatch;
+package com.google.j2cl.integration.wasm;
 
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
+import static com.google.j2cl.integration.testing.Asserts.fail;
 
-/** Tests method dispatch. */
+/**
+ * Incrementally tests wasm features as they are being added.
+ *
+ * <p>This test will be removed when all WASM features are implemented and all integration tests are
+ * enabled for WASM.
+ */
 public class Main {
+
+  public static void main(String... args) {
+    testDynamicClassMethodDispatch();
+    testSwitch();
+  }
+
   static class A {
     public int m() {
       return 1;
@@ -32,12 +44,40 @@ public class Main {
     }
   }
 
-  public static void main(String... args) {
+  private static void testDynamicClassMethodDispatch() {
     A a = new A();
     B b = new B();
     assertEquals(1, a.m());
     assertEquals(2, b.m());
     a = b;
     assertEquals(2, b.m());
+  }
+
+  private static int next = 0;
+
+  private static int returnsNext() {
+    return next++;
+  }
+
+  private static void testSwitch() {
+    // returnsNext = 0;
+    switch (returnsNext()) {
+      case 1:
+        fail();
+      case 0:
+        break;
+      default:
+        fail();
+    }
+
+    // returnsNext() = 1
+    switch (returnsNext()) {
+      case 2:
+        fail();
+      default:
+        break;
+      case 0:
+        fail();
+    }
   }
 }

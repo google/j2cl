@@ -19,7 +19,9 @@ import static com.google.common.base.Preconditions.checkState;
 
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
+import com.google.j2cl.transpiler.ast.BreakStatement;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.ContinueStatement;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.JavaScriptConstructorReference;
@@ -121,6 +123,20 @@ public class VerifyNormalizedUnits extends NormalizationPass {
           public void exitLoopStatement(LoopStatement loopStatement) {
             if (verifyForWasm) {
               checkState(getParent() instanceof LabeledStatement);
+            }
+          }
+
+          @Override
+          public void exitBreakStatement(BreakStatement breakStatement) {
+            if (verifyForWasm) {
+              checkState(breakStatement.getLabelReference() != null);
+            }
+          }
+
+          @Override
+          public void exitContinueStatement(ContinueStatement continueStatement) {
+            if (verifyForWasm) {
+              checkState(continueStatement.getLabelReference() != null);
             }
           }
         });
