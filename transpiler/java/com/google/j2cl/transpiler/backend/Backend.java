@@ -297,9 +297,8 @@ public enum Backend {
           // Post-verifications
           new VerifySingleAstReference(),
           new VerifyParamAndArgCounts(),
-          new VerifyReferenceScoping());
-      // TODO(b/173478946): enable it
-      // new VerifyNormalizedUnits());
+          new VerifyReferenceScoping(),
+          new VerifyNormalizedUnits(/* verifyForWasm **/ true));
     }
   };
 

@@ -17,7 +17,6 @@ package com.google.j2cl.transpiler.backend.wasm;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
-import static com.google.common.base.Preconditions.checkState;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveVoid;
 import static java.lang.String.format;
 
@@ -36,7 +35,6 @@ import com.google.j2cl.transpiler.ast.ExpressionWithComment;
 import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.InstanceOfExpression;
-import com.google.j2cl.transpiler.ast.JavaScriptConstructorReference;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MultiExpression;
@@ -136,7 +134,6 @@ final class ExpressionTranspiler {
           FieldDescriptor fieldDescriptor = ((FieldAccess) expression).getTarget();
           Expression qualifier = ((FieldAccess) expression).getQualifier();
           if (fieldDescriptor.isStatic()) {
-            checkArgument(qualifier instanceof JavaScriptConstructorReference);
             sourceBuilder.append(
                 format("global.%s %s", instruction, environment.getFieldName(fieldDescriptor)));
           } else {
@@ -294,9 +291,7 @@ final class ExpressionTranspiler {
       @Override
       public boolean enterMethodCall(MethodCall methodCall) {
         MethodDescriptor target = methodCall.getTarget();
-        Expression qualifier = methodCall.getQualifier();
         if (target.isStatic()) {
-          checkState(qualifier instanceof JavaScriptConstructorReference);
           sourceBuilder.append("(call " + environment.getMethodImplementationName(target) + " ");
           renderTypedExpressions(target.getParameterTypeDescriptors(), methodCall.getArguments());
           sourceBuilder.append(")");
@@ -305,7 +300,6 @@ final class ExpressionTranspiler {
 
           // Pass the implicit parameter.
           Expression implicitParameter = methodCall.getQualifier();
-          checkState(implicitParameter.isIdempotent());
           renderTypedExpression(target.getEnclosingTypeDescriptor(), implicitParameter);
 
           // Pass the rest of the parameters.
