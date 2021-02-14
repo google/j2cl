@@ -114,11 +114,11 @@
    
    (local.set $d (ref.null $java.lang.Double))
    ;; (a = d instanceof Object);
-   (local.set $a (ref.test $java.lang.Double $java.lang.Object (local.get $d) (global.get $java.lang.Object.rtt)))
+   (local.set $a (ref.test $java.lang.Object $java.lang.Object (local.get $d) (global.get $java.lang.Object.rtt)))
    ;; (a = d instanceof Number);
-   (local.set $a (ref.test $java.lang.Double $java.lang.Number (local.get $d) (global.get $java.lang.Number.rtt)))
+   (local.set $a (ref.test $java.lang.Object $java.lang.Number (local.get $d) (global.get $java.lang.Number.rtt)))
    ;; (a = d instanceof Double);
-   (local.set $a (ref.test $java.lang.Double $java.lang.Double (local.get $d) (global.get $java.lang.Double.rtt)))
+   (local.set $a (ref.test $java.lang.Object $java.lang.Double (local.get $d) (global.get $java.lang.Double.rtt)))
   )
  )
 )

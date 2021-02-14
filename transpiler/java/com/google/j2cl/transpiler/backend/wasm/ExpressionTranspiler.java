@@ -273,8 +273,7 @@ final class ExpressionTranspiler {
           sourceBuilder.append(
               format(
                   "(ref.test %s %s ",
-                  environment.getWasmTypeName(
-                      instanceOfExpression.getExpression().getDeclaredTypeDescriptor()),
+                  environment.getWasmTypeName(TypeDescriptors.get().javaLangObject),
                   environment.getWasmTypeName(testTypeDescriptor)));
           render(instanceOfExpression.getExpression());
           sourceBuilder.append(
