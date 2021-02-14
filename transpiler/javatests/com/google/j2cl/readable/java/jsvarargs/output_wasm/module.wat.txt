@@ -134,7 +134,7 @@
  (block $return.label
   (block
    ;; return ((Main) (List<Main> $qualifier = ((List<Main>) elements[0]),$qualifier.get(0)));
-   (local.set $return.value (ref.cast $java.lang.Object $jsvarargs.Main (block (result (ref null $jsvarargs.Main))
+   (local.set $return.value (ref.cast $java.lang.Object $jsvarargs.Main (block (result (ref null $java.lang.Object))
     
     (local.set $$qualifier (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $elements)) (i32.const 0)))
     (ref.null $jsvarargs.Main)

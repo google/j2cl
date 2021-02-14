@@ -332,7 +332,7 @@ final class ExpressionTranspiler {
         Expression returnValue = Iterables.getLast(expressions);
         sourceBuilder.openParens("block ");
         sourceBuilder.append(
-            "(result " + environment.getWasmType(returnValue.getTypeDescriptor()) + ")");
+            "(result " + environment.getWasmType(returnValue.getDeclaredTypeDescriptor()) + ")");
         expressions.forEach(
             expression -> {
               sourceBuilder.newLine();
