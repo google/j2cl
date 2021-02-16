@@ -86,7 +86,7 @@ public class OperationExpansionUtils {
       // affected by the side effects in the rhs, e.g.
       //
       //      SomeClass a = foo;
-      //      a.result = (a = bar).toString()
+      //      String rv = a.result = (a = bar).toString();
       //
       // if this was not decomposed (because 'a' is idempotent), the above snippet would modify
       // the instance 'foo' but return the value of 'bar.result' instead of 'foo.result' (see
