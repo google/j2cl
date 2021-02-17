@@ -129,9 +129,7 @@ public class WasmModuleGenerator {
             "(global $%s.array.elements.rtt "
                 + "(rtt 1 $%s.array.elements) (rtt.canon $%s.array.elements))",
             javaType, javaType, javaType),
-        // TODO(https://github.com/WebAssembly/wasp/issues/55): remove "field" when the issue is
-        //  fixed in wasp
-        format("(type $%s.array.elements (array (field (mut %s))))", javaType, wasmType),
+        format("(type $%s.array.elements (array (mut %s)))", javaType, wasmType),
         format(
             "(global $%s.array.rtt (rtt 2 $%s.array) (rtt.sub $%s.array  (global.get %s)))",
             javaType,
