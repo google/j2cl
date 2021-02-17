@@ -124,4 +124,8 @@ public final class Class<T> implements Type, Serializable {
     }
     return rv;
   }
+
+  public boolean isInstance(Object obj) {
+    return this == obj.getClass();
+  }
 }

@@ -20,6 +20,7 @@ import java.util.StringJoiner;
 import javaemul.internal.annotations.DoNotAutobox;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsType;
 
 /**
  * A base type that provides 'value' type semantics for equals/hashcode/toString via reflection.
@@ -32,6 +33,16 @@ import jsinterop.annotations.JsPackage;
  * properties are set to different values.
  */
 public abstract class ValueType {
+
+  @JsType(
+    isNative = true,
+    name = "Array",
+    namespace = JsPackage.GLOBAL
+  )
+  private static class NativeArray {
+    public static native boolean isArray(Object var0);
+  }
+
 
   @Override
   public boolean equals(Object o) {

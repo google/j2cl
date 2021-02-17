@@ -16,10 +16,9 @@
 
 package java.lang;
 
-import static javaemul.internal.InternalPreconditions.checkCriticalStringBounds;
-import static javaemul.internal.InternalPreconditions.checkNotNull;
-import static javaemul.internal.InternalPreconditions.checkStringBounds;
-import static javaemul.internal.InternalPreconditions.checkStringElementIndex;
+import javaemul.internal.*;
+import javaemul.internal.annotations.DoNotInline;
+import jsinterop.annotations.*;
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
@@ -28,17 +27,8 @@ import java.nio.charset.UnsupportedCharsetException;
 import java.util.Comparator;
 import java.util.Locale;
 import java.util.StringJoiner;
-import javaemul.internal.ArrayHelper;
-import javaemul.internal.Coercions;
-import javaemul.internal.EmulatedCharset;
-import javaemul.internal.JsUtils;
-import javaemul.internal.NativeRegExp;
-import javaemul.internal.annotations.DoNotInline;
-import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsNonNull;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+
+import static javaemul.internal.InternalPreconditions.*;
 
 /**
  * Intrinsic string class.
@@ -703,6 +693,28 @@ public final class String implements Comparable<String>, CharSequence,
       end--;
     }
     return start > 0 || end < length ? substring(start, end) : this;
+  }
+
+  public static String format(String format, Object... args) {
+    StringBuilder sb = new StringBuilder();
+
+    int lastIndex = 0;
+    int argIndex = 0;
+    int i = format.indexOf("%");
+    while (i > 0) {
+      sb.append(format.substring(lastIndex, i));
+      sb.append(args[argIndex++]);
+      lastIndex = i + 1;
+      if (lastIndex >= format.length()) {
+        return sb.toString();
+      }
+
+      i = format.indexOf("%", lastIndex);
+    }
+
+    sb.append(format.substring(lastIndex));
+
+    return sb.toString();
   }
 
   @JsType(isNative = true, name = "String", namespace = "<window>")

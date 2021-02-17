@@ -34,10 +34,8 @@ public interface ExecutorService extends Executor {
 
   boolean isTerminated();
 
-  // Blocking calls cannot be emulated on web. Subclasses of this class in shared code should mark
-  // their override with @GwtIncompatible.
-  // @GwtIncompatible("blocking")
-  // boolean awaitTermination(long timeout, TimeUnit unit) throws InterruptedException;
+  boolean awaitTermination(long timeout, TimeUnit unit)
+    throws InterruptedException;
 
   <T> Future<T> submit(Callable<T> task);
 
@@ -49,15 +47,20 @@ public interface ExecutorService extends Executor {
   // of the task that is provided hence could be emulated by directly executing them.
 
   <T> List<Future<T>> invokeAll(Collection<? extends Callable<T>> tasks)
-      throws InterruptedException;
+    throws InterruptedException;
 
   <T> List<Future<T>> invokeAll(
-      Collection<? extends Callable<T>> tasks, long timeout, TimeUnit unit)
-      throws InterruptedException;
+    Collection<? extends Callable<T>> tasks,
+    long timeout, TimeUnit unit
+  )
+    throws InterruptedException;
 
   <T> T invokeAny(Collection<? extends Callable<T>> tasks)
-      throws InterruptedException, ExecutionException;
+    throws InterruptedException, ExecutionException;
 
-  <T> T invokeAny(Collection<? extends Callable<T>> tasks, long timeout, TimeUnit unit)
-      throws InterruptedException, ExecutionException, TimeoutException;
+  <T> T invokeAny(
+    Collection<? extends Callable<T>> tasks,
+    long timeout, TimeUnit unit
+  )
+    throws InterruptedException, ExecutionException, TimeoutException;
 }
