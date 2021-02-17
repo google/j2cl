@@ -15,7 +15,7 @@
 /**
  * @fileoverview Header hand rolled.
  *
- * @suppress {extraRequire, lateProvide, unusedLocalVariables}
+ * @suppress {extraRequire, lateProvide, unusedLocalVariables, lintChecks}
  */
 goog.module('vmbootstrap.Objects');
 
@@ -25,14 +25,13 @@ goog.module('vmbootstrap.Objects');
 const _Boolean = goog.require('java.lang.Boolean');
 const _Class = goog.require('java.lang.Class');
 const _Double = goog.require('java.lang.Double');
-const _Object = goog.require('java.lang.Object');
-const _String = goog.require('java.lang.String');
-const _Arrays = goog.require('vmbootstrap.Arrays');
+const _HashCodes = goog.require('javaemul.internal.HashCodes$impl');
 const _JavaScriptFunction = goog.require('vmbootstrap.JavaScriptFunction');
 const _JavaScriptObject = goog.require('vmbootstrap.JavaScriptObject');
-const _$Hashing = goog.require('nativebootstrap.Hashing');
-
+const _Object = goog.require('java.lang.Object');
+const _String = goog.require('java.lang.String');
 
 // Re-exports the implementation.
 const Objects = goog.require('vmbootstrap.Objects$impl');
+
 exports = Objects;

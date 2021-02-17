@@ -17,11 +17,11 @@
  */
 goog.module('vmbootstrap.Objects$impl');
 
-let $Hashing = goog.forwardDeclare('nativebootstrap.Hashing$impl');
 let Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
 let Double = goog.forwardDeclare('java.lang.Double$impl');
+let HashCodes = goog.forwardDeclare('javaemul.internal.HashCodes$impl');
 let JavaLangObject = goog.forwardDeclare('java.lang.Object$impl');
 let JavaScriptFunction = goog.forwardDeclare('vmbootstrap.JavaScriptFunction$impl');
 let JavaScriptObject = goog.forwardDeclare('vmbootstrap.JavaScriptObject$impl');
@@ -68,21 +68,13 @@ class Objects {
       return obj.hashCode();
     }
 
-    // Boxed Types: overrides 'hashCode. Restore the behavior by the overrides
-    // in boxing classes.
-    let type = typeof obj;
-    if (type == 'number') {
-      return Double.m_hashCode__java_lang_Double(/**@type {number}*/ (obj));
-    } else if (type == 'boolean') {
-      return Boolean.m_hashCode__java_lang_Boolean(/**@type {boolean}*/ (obj));
-    } else if (type == 'string') {
-      return String.m_hashCode__java_lang_String(/**@type {string}*/ (obj));
-    }
+    // Boxed Types: overrides 'hashCode'  but doesn't need special casing as
+    // fallback covers them.
 
-    // Array Types: doesn't override 'hashCode'.
+    // Array Types: doesn't override 'hashCode' so fall back cover them.
 
-    // Fallback to default j.l.Object#hashCode behavior.
-    return $Hashing.$getHashCode(obj);
+    // The fallback to default j.l.Object#hashCode behavior.
+    return HashCodes.getIdentityHashCode(obj);
   }
 
   /**
@@ -134,15 +126,15 @@ class Objects {
    */
   static $clinit() {
     Objects.$clinit = function() {};
-    JavaLangObject = goog.module.get('java.lang.Object$impl');
+    Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     Boolean = goog.module.get('java.lang.Boolean$impl');
     Class = goog.module.get('java.lang.Class$impl');
     Double = goog.module.get('java.lang.Double$impl');
-    String = goog.module.get('java.lang.String$impl');
-    Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+    HashCodes = goog.module.get('javaemul.internal.HashCodes$impl');
+    JavaLangObject = goog.module.get('java.lang.Object$impl');
     JavaScriptFunction = goog.module.get('vmbootstrap.JavaScriptFunction$impl');
     JavaScriptObject = goog.module.get('vmbootstrap.JavaScriptObject$impl');
-    $Hashing = goog.module.get('nativebootstrap.Hashing$impl');
+    String = goog.module.get('java.lang.String$impl');
   }
 }
 
