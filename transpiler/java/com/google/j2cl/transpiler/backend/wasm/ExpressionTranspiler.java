@@ -416,8 +416,14 @@ final class ExpressionTranspiler {
       public boolean enterNumberLiteral(NumberLiteral numberLiteral) {
         PrimitiveTypeDescriptor typeDescriptor = numberLiteral.getTypeDescriptor();
         String wasmType = checkNotNull(environment.getWasmType(typeDescriptor));
-        sourceBuilder.append("(" + wasmType + ".const " + numberLiteral.getValue() + ")");
+        String value = convertToWasmLiteral(numberLiteral.getValue());
+        sourceBuilder.append("(" + wasmType + ".const " + value + ")");
         return false;
+      }
+
+      private String convertToWasmLiteral(Number value) {
+        // Handle NaN, Infinity, -Infinity as nan, inf and -inf.
+        return value.toString().replace("NaN", "nan").replace("Infinity", "inf");
       }
 
       @Override

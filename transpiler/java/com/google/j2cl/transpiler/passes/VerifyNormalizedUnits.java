@@ -64,7 +64,12 @@ public class VerifyNormalizedUnits extends NormalizationPass {
 
           @Override
           public void exitField(Field field) {
-            if (!verifyForWasm) {
+            if (verifyForWasm) {
+              // This is only running for WASM due to the transformations in Closure that result in
+              // primitive long initializers to be method calls to the runtime.
+              checkState(
+                  field.getInitializer() == null || field.getInitializer().isCompileTimeConstant());
+            } else {
               checkState(!field.isNative());
             }
           }

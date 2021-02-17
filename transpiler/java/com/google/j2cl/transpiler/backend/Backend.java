@@ -284,6 +284,7 @@ public enum Backend {
           new RewriteUnaryExpressions(),
           // Rewrite 'a || b' into 'a ? true : b' and 'a && b' into 'a ? b : false'
           new RewriteShortcutOperators(),
+          new NormalizeFieldInitialization(),
           new NormalizeLabels(),
           new InsertCastOnArrayAccess(),
           new ExtractNonIdempotentExpressions(),

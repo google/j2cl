@@ -218,14 +218,23 @@ public class WasmModuleGenerator {
   private void renderStaticFields(Type type) {
     for (Field field : type.getStaticFields()) {
       builder.newLine();
-      builder.append(
-          "(global "
-              + environment.getFieldName(field)
-              + " (mut "
-              + environment.getWasmType(field.getDescriptor().getTypeDescriptor())
-              + ") ");
-      ExpressionTranspiler.render(
-          field.getDescriptor().getTypeDescriptor().getDefaultValue(), builder, environment);
+      builder.append("(global " + environment.getFieldName(field));
+
+      if (field.isCompileTimeConstant()) {
+        // TODO(b/180439833): revisit compile time-constant initialization for String typed
+        // constants when String is implemented.
+        builder.append(
+            String.format(
+                " %s ", environment.getWasmType(field.getDescriptor().getTypeDescriptor())));
+        ExpressionTranspiler.render(field.getInitializer(), builder, environment);
+      } else {
+        builder.append(
+            String.format(
+                " (mut %s) ", environment.getWasmType(field.getDescriptor().getTypeDescriptor())));
+        ExpressionTranspiler.render(
+            field.getDescriptor().getTypeDescriptor().getDefaultValue(), builder, environment);
+      }
+
       builder.append(")");
     }
   }
