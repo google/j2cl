@@ -93,13 +93,13 @@ public class Main {
     assertTrue((l.getClass() instanceof Class));
     assertTrue((s.getClass() instanceof Class));
     assertTrue((b.getClass().getName().equals("java.lang.Byte")));
-    // assertTrue((d.getClass().getName().equals("java.lang.Double")));
+    assertTrue((d.getClass().getName().equals("java.lang.Double")));
     assertTrue((f.getClass().getName().equals("java.lang.Float")));
     assertTrue((i.getClass().getName().equals("java.lang.Integer")));
     assertTrue((l.getClass().getName().equals("java.lang.Long")));
     assertTrue((s.getClass().getName().equals("java.lang.Short")));
     assertTrue((c.getClass().getName().equals("java.lang.Character")));
-    // assertTrue((bool.getClass().getName().equals("java.lang.Boolean")));
+    assertTrue((bool.getClass().getName().equals("java.lang.Boolean")));
 
     new SubNumber().test();
   }
