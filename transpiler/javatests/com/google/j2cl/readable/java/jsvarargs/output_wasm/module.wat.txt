@@ -689,12 +689,15 @@
 ))
 (global $jsvarargs.QualifiedSuperMethodCall.InnerClass.vtable (mut (ref null $jsvarargs.QualifiedSuperMethodCall.InnerClass.vtable)) (ref.null $jsvarargs.QualifiedSuperMethodCall.InnerClass.vtable))
 
-;;; InnerClass()
-(func $m_<init>__void@jsvarargs.QualifiedSuperMethodCall.InnerClass
+;;; InnerClass(QualifiedSuperMethodCall $outer_this)
+(func $m_<init>__jsvarargs_QualifiedSuperMethodCall__void@jsvarargs.QualifiedSuperMethodCall.InnerClass
  (param $this (ref null $jsvarargs.QualifiedSuperMethodCall.InnerClass))
+ (param $$outer_this (ref null $jsvarargs.QualifiedSuperMethodCall))
  (result (ref null $jsvarargs.QualifiedSuperMethodCall.InnerClass))
  (block $return.label
   (block
+   ;; (InnerClass.this.this = $outer_this);
+   (struct.set $jsvarargs.QualifiedSuperMethodCall.InnerClass $this@jsvarargs.QualifiedSuperMethodCall.InnerClass(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

@@ -36,8 +36,8 @@
  (local.set $this (ref.cast $java.lang.Object $nestednativetype.NativeArray (local.get $this.untyped) (global.get $nestednativetype.NativeArray.rtt)))
  (block $return.label
   (block
-   ;; return NativeArray.this.new $1.<init>();
-   (local.set $return.value (call $m_<init>__void_$pp_nestednativetype@nestednativetype.NativeArray.1 (struct.new_with_rtt $nestednativetype.NativeArray.1 (global.get $nestednativetype.NativeArray.1.vtable) (ref.null $nestednativetype.NativeArray) (global.get $nestednativetype.NativeArray.1.rtt))))
+   ;; return new $1.<init>(NativeArray.this);
+   (local.set $return.value (call $m_<init>__nestednativetype_NativeArray__void_$pp_nestednativetype@nestednativetype.NativeArray.1 (struct.new_with_rtt $nestednativetype.NativeArray.1 (global.get $nestednativetype.NativeArray.1.vtable) (ref.null $nestednativetype.NativeArray) (global.get $nestednativetype.NativeArray.1.rtt))(local.get $this)))
    (br $return.label)
   )
  )
@@ -59,12 +59,15 @@
 ))
 (global $nestednativetype.NativeArray.1.vtable (mut (ref null $nestednativetype.NativeArray.1.vtable)) (ref.null $nestednativetype.NativeArray.1.vtable))
 
-;;; <anonymous> extends Object()
-(func $m_<init>__void_$pp_nestednativetype@nestednativetype.NativeArray.1
+;;; <anonymous> extends Object(NativeArray $outer_this)
+(func $m_<init>__nestednativetype_NativeArray__void_$pp_nestednativetype@nestednativetype.NativeArray.1
  (param $this (ref null $nestednativetype.NativeArray.1))
+ (param $$outer_this (ref null $nestednativetype.NativeArray))
  (result (ref null $nestednativetype.NativeArray.1))
  (block $return.label
   (block
+   ;; ($1.this.this = $outer_this);
+   (struct.set $nestednativetype.NativeArray.1 $this@nestednativetype.NativeArray.1(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

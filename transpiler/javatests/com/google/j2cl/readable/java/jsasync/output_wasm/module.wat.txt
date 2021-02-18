@@ -121,18 +121,18 @@
    ;; AsyncInterface i = function (){
    
    (local.set $i (ref.null $java.lang.Object))
-   ;; BaseInterface o = Main.this.new $1.<init>();
+   ;; BaseInterface o = new $1.<init>(Main.this);
    
-   (local.set $o (call $m_<init>__void_$pp_jsasync@jsasync.Main.1 (struct.new_with_rtt $jsasync.Main.1 (global.get $jsasync.Main.1.vtable) (ref.null $jsasync.Main) (global.get $jsasync.Main.1.rtt))))
+   (local.set $o (call $m_<init>__jsasync_Main__void_$pp_jsasync@jsasync.Main.1 (struct.new_with_rtt $jsasync.Main.1 (global.get $jsasync.Main.1.vtable) (ref.null $jsasync.Main) (global.get $jsasync.Main.1.rtt))(local.get $this)))
    ;; AsyncJsFunctionInterface j = function (){
    
    (local.set $j (ref.null $java.lang.Object))
-   ;; JsFunctionInterface optimizableJsFunction = Main.this.new $2.<init>();
+   ;; JsFunctionInterface optimizableJsFunction = new $2.<init>(Main.this);
    
-   (local.set $optimizableJsFunction (call $m_<init>__void_$pp_jsasync@jsasync.Main.2 (struct.new_with_rtt $jsasync.Main.2 (global.get $jsasync.Main.2.vtable) (ref.null $jsasync.Main) (global.get $jsasync.Main.2.rtt))))
-   ;; JsFunctionInterface unoptimizableJsFunction = Main.this.new $3.<init>();
+   (local.set $optimizableJsFunction (call $m_<init>__jsasync_Main__void_$pp_jsasync@jsasync.Main.2 (struct.new_with_rtt $jsasync.Main.2 (global.get $jsasync.Main.2.vtable) (ref.null $jsasync.Main) (global.get $jsasync.Main.2.rtt))(local.get $this)))
+   ;; JsFunctionInterface unoptimizableJsFunction = new $3.<init>(Main.this);
    
-   (local.set $unoptimizableJsFunction (call $m_<init>__void_$pp_jsasync@jsasync.Main.3 (struct.new_with_rtt $jsasync.Main.3 (global.get $jsasync.Main.3.vtable) (ref.null $jsasync.Main) (global.get $jsasync.Main.3.rtt))))
+   (local.set $unoptimizableJsFunction (call $m_<init>__jsasync_Main__void_$pp_jsasync@jsasync.Main.3 (struct.new_with_rtt $jsasync.Main.3 (global.get $jsasync.Main.3.vtable) (ref.null $jsasync.Main) (global.get $jsasync.Main.3.rtt))(local.get $this)))
   )
  )
 )
@@ -176,12 +176,15 @@
 ))
 (global $jsasync.Main.1.vtable (mut (ref null $jsasync.Main.1.vtable)) (ref.null $jsasync.Main.1.vtable))
 
-;;; <anonymous> implements BaseInterface()
-(func $m_<init>__void_$pp_jsasync@jsasync.Main.1
+;;; <anonymous> implements BaseInterface(Main $outer_this)
+(func $m_<init>__jsasync_Main__void_$pp_jsasync@jsasync.Main.1
  (param $this (ref null $jsasync.Main.1))
+ (param $$outer_this (ref null $jsasync.Main))
  (result (ref null $jsasync.Main.1))
  (block $return.label
   (block
+   ;; ($1.this.this = $outer_this);
+   (struct.set $jsasync.Main.1 $this@jsasync.Main.1(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -222,12 +225,15 @@
 ))
 (global $jsasync.Main.2.vtable (mut (ref null $jsasync.Main.2.vtable)) (ref.null $jsasync.Main.2.vtable))
 
-;;; <anonymous> implements JsFunctionInterface()
-(func $m_<init>__void_$pp_jsasync@jsasync.Main.2
+;;; <anonymous> implements JsFunctionInterface(Main $outer_this)
+(func $m_<init>__jsasync_Main__void_$pp_jsasync@jsasync.Main.2
  (param $this (ref null $jsasync.Main.2))
+ (param $$outer_this (ref null $jsasync.Main))
  (result (ref null $jsasync.Main.2))
  (block $return.label
   (block
+   ;; ($2.this.this = $outer_this);
+   (struct.set $jsasync.Main.2 $this@jsasync.Main.2(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -268,12 +274,15 @@
 ))
 (global $jsasync.Main.3.vtable (mut (ref null $jsasync.Main.3.vtable)) (ref.null $jsasync.Main.3.vtable))
 
-;;; <anonymous> implements JsFunctionInterface()
-(func $m_<init>__void_$pp_jsasync@jsasync.Main.3
+;;; <anonymous> implements JsFunctionInterface(Main $outer_this)
+(func $m_<init>__jsasync_Main__void_$pp_jsasync@jsasync.Main.3
  (param $this (ref null $jsasync.Main.3))
+ (param $$outer_this (ref null $jsasync.Main))
  (result (ref null $jsasync.Main.3))
  (block $return.label
   (block
+   ;; ($3.this.this = $outer_this);
+   (struct.set $jsasync.Main.3 $this@jsasync.Main.3(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

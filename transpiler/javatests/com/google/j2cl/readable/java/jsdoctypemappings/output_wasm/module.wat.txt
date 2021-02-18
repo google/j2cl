@@ -689,12 +689,15 @@
 ))
 (global $jsdoctypemappings.JsDocTypeMappings.ExportedType.vtable (mut (ref null $jsdoctypemappings.JsDocTypeMappings.ExportedType.vtable)) (ref.null $jsdoctypemappings.JsDocTypeMappings.ExportedType.vtable))
 
-;;; ExportedType()
-(func $m_<init>__void_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings.ExportedType
+;;; ExportedType(JsDocTypeMappings $outer_this)
+(func $m_<init>__jsdoctypemappings_JsDocTypeMappings__void_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings.ExportedType
  (param $this (ref null $jsdoctypemappings.JsDocTypeMappings.ExportedType))
+ (param $$outer_this (ref null $jsdoctypemappings.JsDocTypeMappings))
  (result (ref null $jsdoctypemappings.JsDocTypeMappings.ExportedType))
  (block $return.label
   (block
+   ;; (ExportedType.this.this = $outer_this);
+   (struct.set $jsdoctypemappings.JsDocTypeMappings.ExportedType $this@jsdoctypemappings.JsDocTypeMappings.ExportedType(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

@@ -291,11 +291,9 @@ final class ExpressionTranspiler {
       public boolean enterMethodCall(MethodCall methodCall) {
         MethodDescriptor target = methodCall.getTarget();
 
-        // TODO(b/170691045): remove once nested class constructors are normalized.
+        // TODO(b/170691046): remove once enum normalization is done.
         DeclaredTypeDescriptor enclosingTypeDescriptor = target.getEnclosingTypeDescriptor();
-        if (isNestedClassConstructor(target)
-            // TODO(b/170691046): remove once enum normalization is done.
-            || isEnumClassConstrcutor(target)) {
+        if (isEnumClassConstrcutor(target)) {
           render(enclosingTypeDescriptor.getDefaultValue());
           return false;
         }
@@ -342,15 +340,6 @@ final class ExpressionTranspiler {
         }
         // TODO(rluble): remove once all method call types are implemented.
         return super.enterMethodCall(methodCall);
-      }
-
-      // TODO(b/170691045): remove once nested class constructors are normalized.
-      private boolean isNestedClassConstructor(MethodDescriptor methodDescriptor) {
-        return methodDescriptor.isConstructor()
-            && methodDescriptor
-                .getEnclosingTypeDescriptor()
-                .getTypeDeclaration()
-                .isCapturingEnclosingInstance();
       }
 
       // TODO(b/170691046): remove once enum normalization is done.

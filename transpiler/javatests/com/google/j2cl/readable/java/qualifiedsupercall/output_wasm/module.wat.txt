@@ -81,12 +81,15 @@
 ))
 (global $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable (mut (ref null $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable)) (ref.null $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable))
 
-;;; InnerClass()
-(func $m_<init>__void@qualifiedsupercall.QualifiedSuperCall.InnerClass
+;;; InnerClass(QualifiedSuperCall $outer_this)
+(func $m_<init>__qualifiedsupercall_QualifiedSuperCall__void@qualifiedsupercall.QualifiedSuperCall.InnerClass
  (param $this (ref null $qualifiedsupercall.QualifiedSuperCall.InnerClass))
+ (param $$outer_this (ref null $qualifiedsupercall.QualifiedSuperCall))
  (result (ref null $qualifiedsupercall.QualifiedSuperCall.InnerClass))
  (block $return.label
   (block
+   ;; (InnerClass.this.this = $outer_this);
+   (struct.set $qualifiedsupercall.QualifiedSuperCall.InnerClass $this@qualifiedsupercall.QualifiedSuperCall.InnerClass(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

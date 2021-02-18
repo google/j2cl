@@ -36,19 +36,19 @@
  (local.set $this (ref.cast $java.lang.Object $interfaces.Main (local.get $this.untyped) (global.get $interfaces.Main.rtt)))
  (block $return.label
   (block
-   ;; Interface i = Main.this.new Implementor.<init>();
+   ;; Interface i = new Implementor.<init>(Main.this);
    
-   (local.set $i (call $m_<init>__void_$pp_interfaces@interfaces.Main.Implementor (struct.new_with_rtt $interfaces.Main.Implementor (global.get $interfaces.Main.Implementor.vtable) (ref.null $interfaces.Main) (global.get $interfaces.Main.Implementor.rtt))))
+   (local.set $i (call $m_<init>__interfaces_Main__void_$pp_interfaces@interfaces.Main.Implementor (struct.new_with_rtt $interfaces.Main.Implementor (global.get $interfaces.Main.Implementor.vtable) (ref.null $interfaces.Main) (global.get $interfaces.Main.Implementor.rtt))(local.get $this)))
    ;; i.interfaceMethod();
    
    ;; i.defaultMethod(null);
    
    ;; interfaces.Main.Interface.staticInterfaceMethod();
    (call $m_staticInterfaceMethod__void@interfaces.Main.Interface )
-   ;; int x = ((Main.this.new Implementor.<init>(),interfaces.Main.Interface.a) + interfaces.Main.Interface.b);
+   ;; int x = ((new Implementor.<init>(Main.this),interfaces.Main.Interface.a) + interfaces.Main.Interface.b);
    
    (local.set $x (i32.add (block (result i32)
-    (drop (call $m_<init>__void_$pp_interfaces@interfaces.Main.Implementor (struct.new_with_rtt $interfaces.Main.Implementor (global.get $interfaces.Main.Implementor.vtable) (ref.null $interfaces.Main) (global.get $interfaces.Main.Implementor.rtt))))
+    (drop (call $m_<init>__interfaces_Main__void_$pp_interfaces@interfaces.Main.Implementor (struct.new_with_rtt $interfaces.Main.Implementor (global.get $interfaces.Main.Implementor.vtable) (ref.null $interfaces.Main) (global.get $interfaces.Main.Implementor.rtt))(local.get $this)))
     (global.get $a@interfaces.Main.Interface)
    ) (global.get $b@interfaces.Main.Interface)))
   )
@@ -123,12 +123,15 @@
 ))
 (global $interfaces.Main.Implementor.vtable (mut (ref null $interfaces.Main.Implementor.vtable)) (ref.null $interfaces.Main.Implementor.vtable))
 
-;;; Implementor()
-(func $m_<init>__void_$pp_interfaces@interfaces.Main.Implementor
+;;; Implementor(Main $outer_this)
+(func $m_<init>__interfaces_Main__void_$pp_interfaces@interfaces.Main.Implementor
  (param $this (ref null $interfaces.Main.Implementor))
+ (param $$outer_this (ref null $interfaces.Main))
  (result (ref null $interfaces.Main.Implementor))
  (block $return.label
   (block
+   ;; (Implementor.this.this = $outer_this);
+   (struct.set $interfaces.Main.Implementor $this@interfaces.Main.Implementor(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -194,12 +197,15 @@
 ))
 (global $interfaces.Main.AbstractImplementor.vtable (mut (ref null $interfaces.Main.AbstractImplementor.vtable)) (ref.null $interfaces.Main.AbstractImplementor.vtable))
 
-;;; AbstractImplementor()
-(func $m_<init>__void_$pp_interfaces@interfaces.Main.AbstractImplementor
+;;; AbstractImplementor(Main $outer_this)
+(func $m_<init>__interfaces_Main__void_$pp_interfaces@interfaces.Main.AbstractImplementor
  (param $this (ref null $interfaces.Main.AbstractImplementor))
+ (param $$outer_this (ref null $interfaces.Main))
  (result (ref null $interfaces.Main.AbstractImplementor))
  (block $return.label
   (block
+   ;; (AbstractImplementor.this.this = $outer_this);
+   (struct.set $interfaces.Main.AbstractImplementor $this@interfaces.Main.AbstractImplementor(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

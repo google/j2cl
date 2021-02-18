@@ -83,10 +83,10 @@
  (local.set $this (ref.cast $java.lang.Object $genericmethod.GenericMethod (local.get $this.untyped) (global.get $genericmethod.GenericMethod.rtt)))
  (block $return.label
   (block
-   ;; GenericMethod.this.new $1.<init>();
-   (drop (call $m_<init>__void_$pp_genericmethod@genericmethod.GenericMethod.1 (struct.new_with_rtt $genericmethod.GenericMethod.1 (global.get $genericmethod.GenericMethod.1.vtable) (ref.null $genericmethod.GenericMethod) (global.get $genericmethod.GenericMethod.1.rtt))))
-   ;; GenericMethod.this.new $1LocalClass.<init>();
-   (drop (call $m_<init>__void_$pp_genericmethod@genericmethod.GenericMethod.1LocalClass (struct.new_with_rtt $genericmethod.GenericMethod.1LocalClass (global.get $genericmethod.GenericMethod.1LocalClass.vtable) (ref.null $genericmethod.GenericMethod) (global.get $genericmethod.GenericMethod.1LocalClass.rtt))))
+   ;; new $1.<init>(GenericMethod.this);
+   (drop (call $m_<init>__genericmethod_GenericMethod__void_$pp_genericmethod@genericmethod.GenericMethod.1 (struct.new_with_rtt $genericmethod.GenericMethod.1 (global.get $genericmethod.GenericMethod.1.vtable) (ref.null $genericmethod.GenericMethod) (global.get $genericmethod.GenericMethod.1.rtt))(local.get $this)))
+   ;; new $1LocalClass.<init>(GenericMethod.this);
+   (drop (call $m_<init>__genericmethod_GenericMethod__void_$pp_genericmethod@genericmethod.GenericMethod.1LocalClass (struct.new_with_rtt $genericmethod.GenericMethod.1LocalClass (global.get $genericmethod.GenericMethod.1LocalClass.vtable) (ref.null $genericmethod.GenericMethod) (global.get $genericmethod.GenericMethod.1LocalClass.rtt))(local.get $this)))
   )
  )
 )
@@ -380,12 +380,15 @@
 ))
 (global $genericmethod.GenericMethod.1.vtable (mut (ref null $genericmethod.GenericMethod.1.vtable)) (ref.null $genericmethod.GenericMethod.1.vtable))
 
-;;; <anonymous> extends GenericMethod<T>()
-(func $m_<init>__void_$pp_genericmethod@genericmethod.GenericMethod.1
+;;; <anonymous> extends GenericMethod<T>(GenericMethod<T> $outer_this)
+(func $m_<init>__genericmethod_GenericMethod__void_$pp_genericmethod@genericmethod.GenericMethod.1
  (param $this (ref null $genericmethod.GenericMethod.1))
+ (param $$outer_this (ref null $genericmethod.GenericMethod))
  (result (ref null $genericmethod.GenericMethod.1))
  (block $return.label
   (block
+   ;; ($1.this.this = $outer_this);
+   (struct.set $genericmethod.GenericMethod.1 $this@genericmethod.GenericMethod.1(local.get $this) (local.get $$outer_this))
    ;; GenericMethod.this.GenericMethod.<init>();
    (drop (call $m_<init>__void@genericmethod.GenericMethod (local.get $this)))
   )
@@ -444,12 +447,15 @@
 ))
 (global $genericmethod.GenericMethod.1LocalClass.vtable (mut (ref null $genericmethod.GenericMethod.1LocalClass.vtable)) (ref.null $genericmethod.GenericMethod.1LocalClass.vtable))
 
-;;; LocalClass()
-(func $m_<init>__void_$pp_genericmethod@genericmethod.GenericMethod.1LocalClass
+;;; LocalClass(GenericMethod<T> $outer_this)
+(func $m_<init>__genericmethod_GenericMethod__void_$pp_genericmethod@genericmethod.GenericMethod.1LocalClass
  (param $this (ref null $genericmethod.GenericMethod.1LocalClass))
+ (param $$outer_this (ref null $genericmethod.GenericMethod))
  (result (ref null $genericmethod.GenericMethod.1LocalClass))
  (block $return.label
   (block
+   ;; ($1LocalClass.this.this = $outer_this);
+   (struct.set $genericmethod.GenericMethod.1LocalClass $this@genericmethod.GenericMethod.1LocalClass(local.get $this) (local.get $$outer_this))
    ;; GenericMethod.this.GenericMethod.<init>();
    (drop (call $m_<init>__void@genericmethod.GenericMethod (local.get $this)))
   )

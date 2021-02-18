@@ -681,12 +681,15 @@
 ))
 (global $bridgejsmethod.Main.N.vtable (mut (ref null $bridgejsmethod.Main.N.vtable)) (ref.null $bridgejsmethod.Main.N.vtable))
 
-;;; N()
-(func $m_<init>__void_$pp_bridgejsmethod@bridgejsmethod.Main.N
+;;; N(Main $outer_this)
+(func $m_<init>__bridgejsmethod_Main__void_$pp_bridgejsmethod@bridgejsmethod.Main.N
  (param $this (ref null $bridgejsmethod.Main.N))
+ (param $$outer_this (ref null $bridgejsmethod.Main))
  (result (ref null $bridgejsmethod.Main.N))
  (block $return.label
   (block
+   ;; (N.this.this = $outer_this);
+   (struct.set $bridgejsmethod.Main.N $this@bridgejsmethod.Main.N(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -711,14 +714,17 @@
 ))
 (global $bridgejsmethod.Main.O.vtable (mut (ref null $bridgejsmethod.Main.O.vtable)) (ref.null $bridgejsmethod.Main.O.vtable))
 
-;;; O()
-(func $m_<init>__void_$pp_bridgejsmethod@bridgejsmethod.Main.O
+;;; O(Main $outer_this)
+(func $m_<init>__bridgejsmethod_Main__void_$pp_bridgejsmethod@bridgejsmethod.Main.O
  (param $this (ref null $bridgejsmethod.Main.O))
+ (param $$outer_this (ref null $bridgejsmethod.Main))
  (result (ref null $bridgejsmethod.Main.O))
  (block $return.label
   (block
-   ;; N.this.N.<init>();
-   (drop (ref.null $bridgejsmethod.Main.N))
+   ;; (O.this.this = $outer_this);
+   (struct.set $bridgejsmethod.Main.O $this@bridgejsmethod.Main.O(local.get $this) (local.get $$outer_this))
+   ;; N.this.N.<init>($outer_this);
+   (drop (call $m_<init>__bridgejsmethod_Main__void_$pp_bridgejsmethod@bridgejsmethod.Main.N (local.get $this)(local.get $$outer_this)))
   )
  )
  (local.get $this)
@@ -759,12 +765,15 @@
 ))
 (global $bridgejsmethod.Main.Q.vtable (mut (ref null $bridgejsmethod.Main.Q.vtable)) (ref.null $bridgejsmethod.Main.Q.vtable))
 
-;;; Q()
-(func $m_<init>__void_$pp_bridgejsmethod@bridgejsmethod.Main.Q
+;;; Q(Main $outer_this)
+(func $m_<init>__bridgejsmethod_Main__void_$pp_bridgejsmethod@bridgejsmethod.Main.Q
  (param $this (ref null $bridgejsmethod.Main.Q))
+ (param $$outer_this (ref null $bridgejsmethod.Main))
  (result (ref null $bridgejsmethod.Main.Q))
  (block $return.label
   (block
+   ;; (Q.this.this = $outer_this);
+   (struct.set $bridgejsmethod.Main.Q $this@bridgejsmethod.Main.Q(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -788,14 +797,17 @@
 ))
 (global $bridgejsmethod.Main.R.vtable (mut (ref null $bridgejsmethod.Main.R.vtable)) (ref.null $bridgejsmethod.Main.R.vtable))
 
-;;; R()
-(func $m_<init>__void_$pp_bridgejsmethod@bridgejsmethod.Main.R
+;;; R(Main $outer_this)
+(func $m_<init>__bridgejsmethod_Main__void_$pp_bridgejsmethod@bridgejsmethod.Main.R
  (param $this (ref null $bridgejsmethod.Main.R))
+ (param $$outer_this (ref null $bridgejsmethod.Main))
  (result (ref null $bridgejsmethod.Main.R))
  (block $return.label
   (block
-   ;; Q.this.Q.<init>();
-   (drop (ref.null $bridgejsmethod.Main.Q))
+   ;; (R.this.this = $outer_this);
+   (struct.set $bridgejsmethod.Main.R $this@bridgejsmethod.Main.R(local.get $this) (local.get $$outer_this))
+   ;; Q.this.Q.<init>($outer_this);
+   (drop (call $m_<init>__bridgejsmethod_Main__void_$pp_bridgejsmethod@bridgejsmethod.Main.Q (local.get $this)(local.get $$outer_this)))
   )
  )
  (local.get $this)
@@ -836,14 +848,17 @@
 ))
 (global $bridgejsmethod.Main.S.vtable (mut (ref null $bridgejsmethod.Main.S.vtable)) (ref.null $bridgejsmethod.Main.S.vtable))
 
-;;; S()
-(func $m_<init>__void_$pp_bridgejsmethod@bridgejsmethod.Main.S
+;;; S(Main $outer_this)
+(func $m_<init>__bridgejsmethod_Main__void_$pp_bridgejsmethod@bridgejsmethod.Main.S
  (param $this (ref null $bridgejsmethod.Main.S))
+ (param $$outer_this (ref null $bridgejsmethod.Main))
  (result (ref null $bridgejsmethod.Main.S))
  (block $return.label
   (block
-   ;; R.this.R.<init>();
-   (drop (ref.null $bridgejsmethod.Main.R))
+   ;; (S.this.this = $outer_this);
+   (struct.set $bridgejsmethod.Main.S $this@bridgejsmethod.Main.S(local.get $this) (local.get $$outer_this))
+   ;; R.this.R.<init>($outer_this);
+   (drop (call $m_<init>__bridgejsmethod_Main__void_$pp_bridgejsmethod@bridgejsmethod.Main.R (local.get $this)(local.get $$outer_this)))
   )
  )
  (local.get $this)
@@ -865,12 +880,15 @@
 ))
 (global $bridgejsmethod.Main.GrandParent.vtable (mut (ref null $bridgejsmethod.Main.GrandParent.vtable)) (ref.null $bridgejsmethod.Main.GrandParent.vtable))
 
-;;; GrandParent()
-(func $m_<init>__void_$pp_bridgejsmethod@bridgejsmethod.Main.GrandParent
+;;; GrandParent(Main $outer_this)
+(func $m_<init>__bridgejsmethod_Main__void_$pp_bridgejsmethod@bridgejsmethod.Main.GrandParent
  (param $this (ref null $bridgejsmethod.Main.GrandParent))
+ (param $$outer_this (ref null $bridgejsmethod.Main))
  (result (ref null $bridgejsmethod.Main.GrandParent))
  (block $return.label
   (block
+   ;; (GrandParent.this.this = $outer_this);
+   (struct.set $bridgejsmethod.Main.GrandParent $this@bridgejsmethod.Main.GrandParent(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -923,14 +941,17 @@
 ))
 (global $bridgejsmethod.Main.Parent.vtable (mut (ref null $bridgejsmethod.Main.Parent.vtable)) (ref.null $bridgejsmethod.Main.Parent.vtable))
 
-;;; Parent()
-(func $m_<init>__void_$pp_bridgejsmethod@bridgejsmethod.Main.Parent
+;;; Parent(Main $outer_this)
+(func $m_<init>__bridgejsmethod_Main__void_$pp_bridgejsmethod@bridgejsmethod.Main.Parent
  (param $this (ref null $bridgejsmethod.Main.Parent))
+ (param $$outer_this (ref null $bridgejsmethod.Main))
  (result (ref null $bridgejsmethod.Main.Parent))
  (block $return.label
   (block
-   ;; GrandParent.this.GrandParent.<init>();
-   (drop (ref.null $bridgejsmethod.Main.GrandParent))
+   ;; (Parent.this.this = $outer_this);
+   (struct.set $bridgejsmethod.Main.Parent $this@bridgejsmethod.Main.Parent(local.get $this) (local.get $$outer_this))
+   ;; GrandParent.this.GrandParent.<init>($outer_this);
+   (drop (call $m_<init>__bridgejsmethod_Main__void_$pp_bridgejsmethod@bridgejsmethod.Main.GrandParent (local.get $this)(local.get $$outer_this)))
   )
  )
  (local.get $this)
@@ -1012,14 +1033,17 @@
 ))
 (global $bridgejsmethod.Main.Child.vtable (mut (ref null $bridgejsmethod.Main.Child.vtable)) (ref.null $bridgejsmethod.Main.Child.vtable))
 
-;;; Child()
-(func $m_<init>__void_$pp_bridgejsmethod@bridgejsmethod.Main.Child
+;;; Child(Main $outer_this)
+(func $m_<init>__bridgejsmethod_Main__void_$pp_bridgejsmethod@bridgejsmethod.Main.Child
  (param $this (ref null $bridgejsmethod.Main.Child))
+ (param $$outer_this (ref null $bridgejsmethod.Main))
  (result (ref null $bridgejsmethod.Main.Child))
  (block $return.label
   (block
-   ;; Parent.this.Parent.<init>();
-   (drop (ref.null $bridgejsmethod.Main.Parent))
+   ;; (Child.this.this = $outer_this);
+   (struct.set $bridgejsmethod.Main.Child $this@bridgejsmethod.Main.Child(local.get $this) (local.get $$outer_this))
+   ;; Parent.this.Parent.<init>($outer_this);
+   (drop (call $m_<init>__bridgejsmethod_Main__void_$pp_bridgejsmethod@bridgejsmethod.Main.Parent (local.get $this)(local.get $$outer_this)))
   )
  )
  (local.get $this)

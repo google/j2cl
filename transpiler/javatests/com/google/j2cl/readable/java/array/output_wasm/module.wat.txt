@@ -379,12 +379,15 @@
 ))
 (global $array.Arrays.SomeObject.vtable (mut (ref null $array.Arrays.SomeObject.vtable)) (ref.null $array.Arrays.SomeObject.vtable))
 
-;;; SomeObject()
-(func $m_<init>__void_$p_array_Arrays_SomeObject@array.Arrays.SomeObject
+;;; SomeObject(Arrays $outer_this)
+(func $m_<init>__array_Arrays__void_$p_array_Arrays_SomeObject@array.Arrays.SomeObject
  (param $this (ref null $array.Arrays.SomeObject))
+ (param $$outer_this (ref null $array.Arrays))
  (result (ref null $array.Arrays.SomeObject))
  (block $return.label
   (block
+   ;; (SomeObject.this.this = $outer_this);
+   (struct.set $array.Arrays.SomeObject $this@array.Arrays.SomeObject(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

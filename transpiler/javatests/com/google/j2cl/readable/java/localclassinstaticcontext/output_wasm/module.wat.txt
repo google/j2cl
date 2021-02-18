@@ -225,9 +225,9 @@
  (block $return.label
   (block
    (block
-    ;; D $qualifier = C.this.new $1D.<init>();
+    ;; D $qualifier = new $1D.<init>(C.this);
     
-    (local.set $$qualifier (call $m_<init>__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.C.1D (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.C.1D (global.get $localclassinstaticcontext.LocalClassInStaticContext.C.1D.vtable) (ref.null $localclassinstaticcontext.LocalClassInStaticContext.C) (global.get $localclassinstaticcontext.LocalClassInStaticContext.C.1D.rtt))))
+    (local.set $$qualifier (call $m_<init>__localclassinstaticcontext_LocalClassInStaticContext_C__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.C.1D (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.C.1D (global.get $localclassinstaticcontext.LocalClassInStaticContext.C.1D.vtable) (ref.null $localclassinstaticcontext.LocalClassInStaticContext.C) (global.get $localclassinstaticcontext.LocalClassInStaticContext.C.1D.rtt))(local.get $this)))
     ;; $qualifier.fun();
     (drop (call_ref (local.get $$qualifier)(struct.get $localclassinstaticcontext.LocalClassInStaticContext.C.1D.vtable $m_fun__int (struct.get $localclassinstaticcontext.LocalClassInStaticContext.C.1D $vtable(local.get $$qualifier)))))
    )
@@ -262,12 +262,15 @@
 ))
 (global $localclassinstaticcontext.LocalClassInStaticContext.C.1D.vtable (mut (ref null $localclassinstaticcontext.LocalClassInStaticContext.C.1D.vtable)) (ref.null $localclassinstaticcontext.LocalClassInStaticContext.C.1D.vtable))
 
-;;; D()
-(func $m_<init>__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.C.1D
+;;; D(C $outer_this)
+(func $m_<init>__localclassinstaticcontext_LocalClassInStaticContext_C__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.C.1D
  (param $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.C.1D))
+ (param $$outer_this (ref null $localclassinstaticcontext.LocalClassInStaticContext.C))
  (result (ref null $localclassinstaticcontext.LocalClassInStaticContext.C.1D))
  (block $return.label
   (block
+   ;; ($1D.this.this = $outer_this);
+   (struct.set $localclassinstaticcontext.LocalClassInStaticContext.C.1D $this@localclassinstaticcontext.LocalClassInStaticContext.C.1D(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

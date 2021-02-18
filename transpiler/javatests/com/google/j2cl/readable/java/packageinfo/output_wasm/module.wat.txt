@@ -41,12 +41,15 @@
 ))
 (global $packageinfo.Outer.Inner.vtable (mut (ref null $packageinfo.Outer.Inner.vtable)) (ref.null $packageinfo.Outer.Inner.vtable))
 
-;;; Inner()
-(func $m_<init>__void@packageinfo.Outer.Inner
+;;; Inner(Outer $outer_this)
+(func $m_<init>__packageinfo_Outer__void@packageinfo.Outer.Inner
  (param $this (ref null $packageinfo.Outer.Inner))
+ (param $$outer_this (ref null $packageinfo.Outer))
  (result (ref null $packageinfo.Outer.Inner))
  (block $return.label
   (block
+   ;; (Inner.this.this = $outer_this);
+   (struct.set $packageinfo.Outer.Inner $this@packageinfo.Outer.Inner(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

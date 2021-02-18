@@ -230,12 +230,15 @@
 ))
 (global $methodreferences.MethodReferences.ObjectCapturingOuter.vtable (mut (ref null $methodreferences.MethodReferences.ObjectCapturingOuter.vtable)) (ref.null $methodreferences.MethodReferences.ObjectCapturingOuter.vtable))
 
-;;; ObjectCapturingOuter()
-(func $m_<init>__void_$pp_methodreferences@methodreferences.MethodReferences.ObjectCapturingOuter
+;;; ObjectCapturingOuter(MethodReferences<T> $outer_this)
+(func $m_<init>__methodreferences_MethodReferences__void_$pp_methodreferences@methodreferences.MethodReferences.ObjectCapturingOuter
  (param $this (ref null $methodreferences.MethodReferences.ObjectCapturingOuter))
+ (param $$outer_this (ref null $methodreferences.MethodReferences))
  (result (ref null $methodreferences.MethodReferences.ObjectCapturingOuter))
  (block $return.label
   (block
+   ;; (ObjectCapturingOuter.this.this = $outer_this);
+   (struct.set $methodreferences.MethodReferences.ObjectCapturingOuter $this@methodreferences.MethodReferences.ObjectCapturingOuter(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

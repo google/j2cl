@@ -228,13 +228,16 @@
 ))
 (global $jsoptional.Main.SpecializedSubtype.vtable (mut (ref null $jsoptional.Main.SpecializedSubtype.vtable)) (ref.null $jsoptional.Main.SpecializedSubtype.vtable))
 
-;;; SpecializedSubtype(Object a)
-(func $m_<init>__java_lang_Object__void@jsoptional.Main.SpecializedSubtype
+;;; SpecializedSubtype(Main $outer_this, Object a)
+(func $m_<init>__jsoptional_Main__java_lang_Object__void@jsoptional.Main.SpecializedSubtype
  (param $this (ref null $jsoptional.Main.SpecializedSubtype))
+ (param $$outer_this (ref null $jsoptional.Main))
  (param $a (ref null $java.lang.Object))
  (result (ref null $jsoptional.Main.SpecializedSubtype))
  (block $return.label
   (block
+   ;; (SpecializedSubtype.this.this = $outer_this);
+   (struct.set $jsoptional.Main.SpecializedSubtype $this@jsoptional.Main.SpecializedSubtype(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

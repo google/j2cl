@@ -508,12 +508,15 @@
 ))
 (global $lambdas.Lambdas.1.vtable (mut (ref null $lambdas.Lambdas.1.vtable)) (ref.null $lambdas.Lambdas.1.vtable))
 
-;;; <anonymous> implements Functional<T>()
-(func $m_<init>__void_$pp_lambdas@lambdas.Lambdas.1
+;;; <anonymous> implements Functional<T>(Lambdas $outer_this)
+(func $m_<init>__lambdas_Lambdas__void_$pp_lambdas@lambdas.Lambdas.1
  (param $this (ref null $lambdas.Lambdas.1))
+ (param $$outer_this (ref null $lambdas.Lambdas))
  (result (ref null $lambdas.Lambdas.1))
  (block $return.label
   (block
+   ;; ($1.this.this = $outer_this);
+   (struct.set $lambdas.Lambdas.1 $this@lambdas.Lambdas.1(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -642,12 +645,15 @@
 ))
 (global $lambdas.Lambdas.3.vtable (mut (ref null $lambdas.Lambdas.3.vtable)) (ref.null $lambdas.Lambdas.3.vtable))
 
-;;; <anonymous> extends Object()
-(func $m_<init>__void_$pp_lambdas@lambdas.Lambdas.3
+;;; <anonymous> extends Object(Lambdas $outer_this)
+(func $m_<init>__lambdas_Lambdas__void_$pp_lambdas@lambdas.Lambdas.3
  (param $this (ref null $lambdas.Lambdas.3))
+ (param $$outer_this (ref null $lambdas.Lambdas))
  (result (ref null $lambdas.Lambdas.3))
  (block $return.label
   (block
+   ;; ($3.this.this = $outer_this);
+   (struct.set $lambdas.Lambdas.3 $this@lambdas.Lambdas.3(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

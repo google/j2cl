@@ -266,12 +266,15 @@
 ))
 (global $libraryinfo.Main.Foo.vtable (mut (ref null $libraryinfo.Main.Foo.vtable)) (ref.null $libraryinfo.Main.Foo.vtable))
 
-;;; Foo()
-(func $m_<init>__void@libraryinfo.Main.Foo
+;;; Foo(Main $outer_this)
+(func $m_<init>__libraryinfo_Main__void@libraryinfo.Main.Foo
  (param $this (ref null $libraryinfo.Main.Foo))
+ (param $$outer_this (ref null $libraryinfo.Main))
  (result (ref null $libraryinfo.Main.Foo))
  (block $return.label
   (block
+   ;; (Foo.this.this = $outer_this);
+   (struct.set $libraryinfo.Main.Foo $this@libraryinfo.Main.Foo(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

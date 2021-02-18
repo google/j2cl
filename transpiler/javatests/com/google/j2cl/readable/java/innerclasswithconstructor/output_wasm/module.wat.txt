@@ -42,30 +42,34 @@
 ))
 (global $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.vtable (mut (ref null $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.vtable)) (ref.null $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.vtable))
 
-;;; InnerClass(int b)
-(func $m_<init>__int__void@innerclasswithconstructor.InnerClassWithConstructor.InnerClass
+;;; InnerClass(InnerClassWithConstructor $outer_this, int b)
+(func $m_<init>__innerclasswithconstructor_InnerClassWithConstructor__int__void@innerclasswithconstructor.InnerClassWithConstructor.InnerClass
  (param $this (ref null $innerclasswithconstructor.InnerClassWithConstructor.InnerClass))
+ (param $$outer_this (ref null $innerclasswithconstructor.InnerClassWithConstructor))
  (param $b i32)
  (result (ref null $innerclasswithconstructor.InnerClassWithConstructor.InnerClass))
  (block $return.label
   (block
+   ;; (InnerClass.this.this = $outer_this);
+   (struct.set $innerclasswithconstructor.InnerClassWithConstructor.InnerClass $this@innerclasswithconstructor.InnerClassWithConstructor.InnerClass(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
-   ;; (InnerClass.this.b = (InnerClass.this.this.a + b));
-   (struct.set $innerclasswithconstructor.InnerClassWithConstructor.InnerClass $b@innerclasswithconstructor.InnerClassWithConstructor.InnerClass(local.get $this) (i32.add (struct.get $innerclasswithconstructor.InnerClassWithConstructor $a@innerclasswithconstructor.InnerClassWithConstructor(struct.get $innerclasswithconstructor.InnerClassWithConstructor.InnerClass $this@innerclasswithconstructor.InnerClassWithConstructor.InnerClass(local.get $this))) (local.get $b)))
+   ;; (InnerClass.this.b = ($outer_this.a + b));
+   (struct.set $innerclasswithconstructor.InnerClassWithConstructor.InnerClass $b@innerclasswithconstructor.InnerClassWithConstructor.InnerClass(local.get $this) (i32.add (struct.get $innerclasswithconstructor.InnerClassWithConstructor $a@innerclasswithconstructor.InnerClassWithConstructor(local.get $$outer_this)) (local.get $b)))
   )
  )
  (local.get $this)
 )
 
-;;; InnerClass()
-(func $m_<init>__void@innerclasswithconstructor.InnerClassWithConstructor.InnerClass
+;;; InnerClass(InnerClassWithConstructor $outer_this)
+(func $m_<init>__innerclasswithconstructor_InnerClassWithConstructor__void@innerclasswithconstructor.InnerClassWithConstructor.InnerClass
  (param $this (ref null $innerclasswithconstructor.InnerClassWithConstructor.InnerClass))
+ (param $$outer_this (ref null $innerclasswithconstructor.InnerClassWithConstructor))
  (result (ref null $innerclasswithconstructor.InnerClassWithConstructor.InnerClass))
  (block $return.label
   (block
-   ;; InnerClass.this.InnerClass.<init>(InnerClass.this.this.a);
-   (drop (ref.null $innerclasswithconstructor.InnerClassWithConstructor.InnerClass))
+   ;; InnerClass.this.InnerClass.<init>($outer_this,$outer_this.a);
+   (drop (call $m_<init>__innerclasswithconstructor_InnerClassWithConstructor__int__void@innerclasswithconstructor.InnerClassWithConstructor.InnerClass (local.get $this)(local.get $$outer_this)(struct.get $innerclasswithconstructor.InnerClassWithConstructor $a@innerclasswithconstructor.InnerClassWithConstructor(local.get $$outer_this))))
   )
  )
  (local.get $this)

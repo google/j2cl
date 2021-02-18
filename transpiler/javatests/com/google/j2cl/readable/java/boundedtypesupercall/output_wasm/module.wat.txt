@@ -109,8 +109,8 @@
  (local.set $this (ref.cast $java.lang.Object $boundedtypesupercall.Main.Bar (local.get $this.untyped) (global.get $boundedtypesupercall.Main.Bar.rtt)))
  (block $return.label
   (block
-   ;; return Bar.this.new $1.<init>(Bar.this.getSomething());
-   (local.set $return.value (call $m_<init>__java_lang_Comparable__void_$pp_boundedtypesupercall@boundedtypesupercall.Main.Bar.1 (struct.new_with_rtt $boundedtypesupercall.Main.Bar.1 (global.get $boundedtypesupercall.Main.Bar.1.vtable) (ref.null $boundedtypesupercall.Main.Bar) (global.get $boundedtypesupercall.Main.Bar.1.rtt))(call_ref (local.get $this)(struct.get $boundedtypesupercall.Main.Bar.vtable $m_getSomething__java_lang_Comparable (struct.get $boundedtypesupercall.Main.Bar $vtable(local.get $this))))))
+   ;; return new $1.<init>(Bar.this,Bar.this.getSomething());
+   (local.set $return.value (call $m_<init>__boundedtypesupercall_Main_Bar__java_lang_Comparable__void_$pp_boundedtypesupercall@boundedtypesupercall.Main.Bar.1 (struct.new_with_rtt $boundedtypesupercall.Main.Bar.1 (global.get $boundedtypesupercall.Main.Bar.1.vtable) (ref.null $boundedtypesupercall.Main.Bar) (global.get $boundedtypesupercall.Main.Bar.1.rtt))(local.get $this)(call_ref (local.get $this)(struct.get $boundedtypesupercall.Main.Bar.vtable $m_getSomething__java_lang_Comparable (struct.get $boundedtypesupercall.Main.Bar $vtable(local.get $this))))))
    (br $return.label)
   )
  )
@@ -133,13 +133,16 @@
 ))
 (global $boundedtypesupercall.Main.Bar.1.vtable (mut (ref null $boundedtypesupercall.Main.Bar.1.vtable)) (ref.null $boundedtypesupercall.Main.Bar.1.vtable))
 
-;;; <anonymous> extends Foo<T>(T $_0)
-(func $m_<init>__java_lang_Comparable__void_$pp_boundedtypesupercall@boundedtypesupercall.Main.Bar.1
+;;; <anonymous> extends Foo<T>(Bar<T> $outer_this, T $_0)
+(func $m_<init>__boundedtypesupercall_Main_Bar__java_lang_Comparable__void_$pp_boundedtypesupercall@boundedtypesupercall.Main.Bar.1
  (param $this (ref null $boundedtypesupercall.Main.Bar.1))
+ (param $$outer_this (ref null $boundedtypesupercall.Main.Bar))
  (param $$_0 (ref null $java.lang.Object))
  (result (ref null $boundedtypesupercall.Main.Bar.1))
  (block $return.label
   (block
+   ;; ($1.this.this = $outer_this);
+   (struct.set $boundedtypesupercall.Main.Bar.1 $this@boundedtypesupercall.Main.Bar.1(local.get $this) (local.get $$outer_this))
    ;; Foo.this.Foo.<init>($_0);
    (drop (call $m_<init>__java_lang_Object__void@boundedtypesupercall.Main.Foo (local.get $this)(local.get $$_0)))
   )

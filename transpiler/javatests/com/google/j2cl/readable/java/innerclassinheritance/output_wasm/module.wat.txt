@@ -132,9 +132,9 @@
  (block $return.label
   (block
    (block
-    ;; LocalClass $qualifier = ChildClass.this.new $1LocalClass.<init>();
+    ;; LocalClass $qualifier = new $1LocalClass.<init>(ChildClass.this);
     
-    (local.set $$qualifier (call $m_<init>__void_$pp_innerclassinheritance@innerclassinheritance.ChildClass.1LocalClass (struct.new_with_rtt $innerclassinheritance.ChildClass.1LocalClass (global.get $innerclassinheritance.ChildClass.1LocalClass.vtable) (i32.const 0) (i32.const 0) (ref.null $innerclassinheritance.ChildClass) (ref.null $java.lang.Object) (global.get $innerclassinheritance.ChildClass.1LocalClass.rtt))))
+    (local.set $$qualifier (call $m_<init>__innerclassinheritance_ChildClass__void_$pp_innerclassinheritance@innerclassinheritance.ChildClass.1LocalClass (struct.new_with_rtt $innerclassinheritance.ChildClass.1LocalClass (global.get $innerclassinheritance.ChildClass.1LocalClass.vtable) (i32.const 0) (i32.const 0) (ref.null $innerclassinheritance.ChildClass) (ref.null $java.lang.Object) (global.get $innerclassinheritance.ChildClass.1LocalClass.rtt))(local.get $this)))
     ;; $qualifier.test();
     (call_ref (local.get $$qualifier)(struct.get $innerclassinheritance.ChildClass.1LocalClass.vtable $m_test__void (struct.get $innerclassinheritance.ChildClass.1LocalClass $vtable(local.get $$qualifier))))
    )
@@ -162,12 +162,15 @@
 ))
 (global $innerclassinheritance.ChildClass.InnerClass.vtable (mut (ref null $innerclassinheritance.ChildClass.InnerClass.vtable)) (ref.null $innerclassinheritance.ChildClass.InnerClass.vtable))
 
-;;; InnerClass()
-(func $m_<init>__void_$pp_innerclassinheritance@innerclassinheritance.ChildClass.InnerClass
+;;; InnerClass(ChildClass $outer_this)
+(func $m_<init>__innerclassinheritance_ChildClass__void_$pp_innerclassinheritance@innerclassinheritance.ChildClass.InnerClass
  (param $this (ref null $innerclassinheritance.ChildClass.InnerClass))
+ (param $$outer_this (ref null $innerclassinheritance.ChildClass))
  (result (ref null $innerclassinheritance.ChildClass.InnerClass))
  (block $return.label
   (block
+   ;; (InnerClass.this.this = $outer_this);
+   (struct.set $innerclassinheritance.ChildClass.InnerClass $this@innerclassinheritance.ChildClass.InnerClass(local.get $this) (local.get $$outer_this))
    ;; ParentInner.this.ParentInner.<init>();
    (drop (call $m_<init>__void_$pp_innerclassinheritance@innerclassinheritance.ParentInner (local.get $this)))
   )
@@ -260,12 +263,15 @@
 ))
 (global $innerclassinheritance.ChildClass.1LocalClass.vtable (mut (ref null $innerclassinheritance.ChildClass.1LocalClass.vtable)) (ref.null $innerclassinheritance.ChildClass.1LocalClass.vtable))
 
-;;; LocalClass()
-(func $m_<init>__void_$pp_innerclassinheritance@innerclassinheritance.ChildClass.1LocalClass
+;;; LocalClass(ChildClass $outer_this)
+(func $m_<init>__innerclassinheritance_ChildClass__void_$pp_innerclassinheritance@innerclassinheritance.ChildClass.1LocalClass
  (param $this (ref null $innerclassinheritance.ChildClass.1LocalClass))
+ (param $$outer_this (ref null $innerclassinheritance.ChildClass))
  (result (ref null $innerclassinheritance.ChildClass.1LocalClass))
  (block $return.label
   (block
+   ;; ($1LocalClass.this.this = $outer_this);
+   (struct.set $innerclassinheritance.ChildClass.1LocalClass $this@innerclassinheritance.ChildClass.1LocalClass(local.get $this) (local.get $$outer_this))
    ;; ChildClass.this.ChildClass.<init>();
    (drop (call $m_<init>__void@innerclassinheritance.ChildClass (local.get $this)))
    ;; $1LocalClass.this.$init();
@@ -375,12 +381,15 @@
 ))
 (global $innerclassinheritance.MultipleNestings.Parent.vtable (mut (ref null $innerclassinheritance.MultipleNestings.Parent.vtable)) (ref.null $innerclassinheritance.MultipleNestings.Parent.vtable))
 
-;;; Parent()
-(func $m_<init>__void@innerclassinheritance.MultipleNestings.Parent
+;;; Parent(MultipleNestings $outer_this)
+(func $m_<init>__innerclassinheritance_MultipleNestings__void@innerclassinheritance.MultipleNestings.Parent
  (param $this (ref null $innerclassinheritance.MultipleNestings.Parent))
+ (param $$outer_this (ref null $innerclassinheritance.MultipleNestings))
  (result (ref null $innerclassinheritance.MultipleNestings.Parent))
  (block $return.label
   (block
+   ;; (Parent.this.this = $outer_this);
+   (struct.set $innerclassinheritance.MultipleNestings.Parent $this@innerclassinheritance.MultipleNestings.Parent(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -417,14 +426,17 @@
 ))
 (global $innerclassinheritance.MultipleNestings.InnerClass1.vtable (mut (ref null $innerclassinheritance.MultipleNestings.InnerClass1.vtable)) (ref.null $innerclassinheritance.MultipleNestings.InnerClass1.vtable))
 
-;;; InnerClass1()
-(func $m_<init>__void@innerclassinheritance.MultipleNestings.InnerClass1
+;;; InnerClass1(MultipleNestings $outer_this)
+(func $m_<init>__innerclassinheritance_MultipleNestings__void@innerclassinheritance.MultipleNestings.InnerClass1
  (param $this (ref null $innerclassinheritance.MultipleNestings.InnerClass1))
+ (param $$outer_this (ref null $innerclassinheritance.MultipleNestings))
  (result (ref null $innerclassinheritance.MultipleNestings.InnerClass1))
  (block $return.label
   (block
-   ;; Parent.this.Parent.<init>();
-   (drop (ref.null $innerclassinheritance.MultipleNestings.Parent))
+   ;; (InnerClass1.this.this = $outer_this);
+   (struct.set $innerclassinheritance.MultipleNestings.InnerClass1 $this@innerclassinheritance.MultipleNestings.InnerClass1(local.get $this) (local.get $$outer_this))
+   ;; Parent.this.Parent.<init>($outer_this);
+   (drop (call $m_<init>__innerclassinheritance_MultipleNestings__void@innerclassinheritance.MultipleNestings.Parent (local.get $this)(local.get $$outer_this)))
   )
  )
  (local.get $this)
@@ -460,14 +472,17 @@
 ))
 (global $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.vtable (mut (ref null $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.vtable)) (ref.null $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.vtable))
 
-;;; InnerClass2()
-(func $m_<init>__void@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2
+;;; InnerClass2(InnerClass1 $outer_this)
+(func $m_<init>__innerclassinheritance_MultipleNestings_InnerClass1__void@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2
  (param $this (ref null $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2))
+ (param $$outer_this (ref null $innerclassinheritance.MultipleNestings.InnerClass1))
  (result (ref null $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2))
  (block $return.label
   (block
-   ;; Parent.this.Parent.<init>();
-   (drop (ref.null $innerclassinheritance.MultipleNestings.Parent))
+   ;; (InnerClass2.this.this = $outer_this);
+   (struct.set $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $this@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2(local.get $this) (local.get $$outer_this))
+   ;; Parent.this.Parent.<init>($outer_this.this);
+   (drop (call $m_<init>__innerclassinheritance_MultipleNestings__void@innerclassinheritance.MultipleNestings.Parent (local.get $this)(struct.get $innerclassinheritance.MultipleNestings.InnerClass1 $this@innerclassinheritance.MultipleNestings.InnerClass1(local.get $$outer_this))))
   )
  )
  (local.get $this)

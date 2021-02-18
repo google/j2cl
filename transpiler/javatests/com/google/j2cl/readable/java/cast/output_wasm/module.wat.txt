@@ -483,12 +483,15 @@
 ))
 (global $cast.CastGenerics.1Nested.vtable (mut (ref null $cast.CastGenerics.1Nested.vtable)) (ref.null $cast.CastGenerics.1Nested.vtable))
 
-;;; Nested()
-(func $m_<init>__void_$pp_cast@cast.CastGenerics.1Nested
+;;; Nested(CastGenerics<T, E> $outer_this)
+(func $m_<init>__cast_CastGenerics__void_$pp_cast@cast.CastGenerics.1Nested
  (param $this (ref null $cast.CastGenerics.1Nested))
+ (param $$outer_this (ref null $cast.CastGenerics))
  (result (ref null $cast.CastGenerics.1Nested))
  (block $return.label
   (block
+   ;; ($1Nested.this.this = $outer_this);
+   (struct.set $cast.CastGenerics.1Nested $this@cast.CastGenerics.1Nested(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

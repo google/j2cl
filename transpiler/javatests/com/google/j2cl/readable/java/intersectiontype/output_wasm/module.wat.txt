@@ -272,12 +272,15 @@
 ))
 (global $intersectiontype.IntersectionTypeTest.MapEntry.vtable (mut (ref null $intersectiontype.IntersectionTypeTest.MapEntry.vtable)) (ref.null $intersectiontype.IntersectionTypeTest.MapEntry.vtable))
 
-;;; MapEntry()
-(func $m_<init>__void_$pp_intersectiontype@intersectiontype.IntersectionTypeTest.MapEntry
+;;; MapEntry(IntersectionTypeTest<U> $outer_this)
+(func $m_<init>__intersectiontype_IntersectionTypeTest__void_$pp_intersectiontype@intersectiontype.IntersectionTypeTest.MapEntry
  (param $this (ref null $intersectiontype.IntersectionTypeTest.MapEntry))
+ (param $$outer_this (ref null $intersectiontype.IntersectionTypeTest))
  (result (ref null $intersectiontype.IntersectionTypeTest.MapEntry))
  (block $return.label
   (block
+   ;; (MapEntry.this.this = $outer_this);
+   (struct.set $intersectiontype.IntersectionTypeTest.MapEntry $this@intersectiontype.IntersectionTypeTest.MapEntry(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

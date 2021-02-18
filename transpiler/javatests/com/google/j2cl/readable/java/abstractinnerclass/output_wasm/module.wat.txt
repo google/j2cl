@@ -84,12 +84,15 @@
 ))
 (global $abstractinnerclass.InnerClasses.C.vtable (mut (ref null $abstractinnerclass.InnerClasses.C.vtable)) (ref.null $abstractinnerclass.InnerClasses.C.vtable))
 
-;;; C()
-(func $m_<init>__void_$pp_abstractinnerclass@abstractinnerclass.InnerClasses.C
+;;; C(InnerClasses $outer_this)
+(func $m_<init>__abstractinnerclass_InnerClasses__void_$pp_abstractinnerclass@abstractinnerclass.InnerClasses.C
  (param $this (ref null $abstractinnerclass.InnerClasses.C))
+ (param $$outer_this (ref null $abstractinnerclass.InnerClasses))
  (result (ref null $abstractinnerclass.InnerClasses.C))
  (block $return.label
   (block
+   ;; (C.this.this = $outer_this);
+   (struct.set $abstractinnerclass.InnerClasses.C $this@abstractinnerclass.InnerClasses.C(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

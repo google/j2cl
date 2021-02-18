@@ -56,12 +56,15 @@
 ))
 (global $unreachableclass.Main.1A.vtable (mut (ref null $unreachableclass.Main.1A.vtable)) (ref.null $unreachableclass.Main.1A.vtable))
 
-;;; A()
-(func $m_<init>__void_$pp_unreachableclass@unreachableclass.Main.1A
+;;; A(Main $outer_this)
+(func $m_<init>__unreachableclass_Main__void_$pp_unreachableclass@unreachableclass.Main.1A
  (param $this (ref null $unreachableclass.Main.1A))
+ (param $$outer_this (ref null $unreachableclass.Main))
  (result (ref null $unreachableclass.Main.1A))
  (block $return.label
   (block
+   ;; ($1A.this.this = $outer_this);
+   (struct.set $unreachableclass.Main.1A $this@unreachableclass.Main.1A(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -95,12 +98,15 @@
 ))
 (global $unreachableclass.Main.1A.1B.vtable (mut (ref null $unreachableclass.Main.1A.1B.vtable)) (ref.null $unreachableclass.Main.1A.1B.vtable))
 
-;;; B()
-(func $m_<init>__void_$pp_unreachableclass@unreachableclass.Main.1A.1B
+;;; B(A $outer_this)
+(func $m_<init>__unreachableclass_Main_1A__void_$pp_unreachableclass@unreachableclass.Main.1A.1B
  (param $this (ref null $unreachableclass.Main.1A.1B))
+ (param $$outer_this (ref null $unreachableclass.Main.1A))
  (result (ref null $unreachableclass.Main.1A.1B))
  (block $return.label
   (block
+   ;; ($1B.this.this = $outer_this);
+   (struct.set $unreachableclass.Main.1A.1B $this@unreachableclass.Main.1A.1B(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -131,12 +137,15 @@
 ))
 (global $unreachableclass.Main.1.vtable (mut (ref null $unreachableclass.Main.1.vtable)) (ref.null $unreachableclass.Main.1.vtable))
 
-;;; <anonymous> extends Object()
-(func $m_<init>__void_$pp_unreachableclass@unreachableclass.Main.1
+;;; <anonymous> extends Object(Main $outer_this)
+(func $m_<init>__unreachableclass_Main__void_$pp_unreachableclass@unreachableclass.Main.1
  (param $this (ref null $unreachableclass.Main.1))
+ (param $$outer_this (ref null $unreachableclass.Main))
  (result (ref null $unreachableclass.Main.1))
  (block $return.label
   (block
+   ;; ($1.this.this = $outer_this);
+   (struct.set $unreachableclass.Main.1 $this@unreachableclass.Main.1(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

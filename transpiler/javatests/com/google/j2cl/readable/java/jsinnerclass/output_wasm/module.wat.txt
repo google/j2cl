@@ -78,10 +78,10 @@
  (local.set $this (ref.cast $java.lang.Object $jsinnerclass.Main.Outer (local.get $this.untyped) (global.get $jsinnerclass.Main.Outer.rtt)))
  (block $return.label
   (block
-   ;; return ((Inner $qualifier = Outer.this.new Inner.<init>(),$qualifier.getB()) + Outer.this.a);
+   ;; return ((Inner $qualifier = new Inner.<init>(Outer.this),$qualifier.getB()) + Outer.this.a);
    (local.set $return.value (i32.add (block (result i32)
     
-    (local.set $$qualifier (call $m_<init>__void@jsinnerclass.Main.Outer.Inner (struct.new_with_rtt $jsinnerclass.Main.Outer.Inner (global.get $jsinnerclass.Main.Outer.Inner.vtable) (ref.null $jsinnerclass.Main.Outer) (i32.const 0) (global.get $jsinnerclass.Main.Outer.Inner.rtt))))
+    (local.set $$qualifier (call $m_<init>__jsinnerclass_Main_Outer__void@jsinnerclass.Main.Outer.Inner (struct.new_with_rtt $jsinnerclass.Main.Outer.Inner (global.get $jsinnerclass.Main.Outer.Inner.vtable) (ref.null $jsinnerclass.Main.Outer) (i32.const 0) (global.get $jsinnerclass.Main.Outer.Inner.rtt))(local.get $this)))
     (call_ref (local.get $$qualifier)(struct.get $jsinnerclass.Main.Outer.Inner.vtable $m_getB__int (struct.get $jsinnerclass.Main.Outer.Inner $vtable(local.get $$qualifier))))
    ) (struct.get $jsinnerclass.Main.Outer $a@jsinnerclass.Main.Outer(local.get $this))))
    (br $return.label)
@@ -118,16 +118,19 @@
 ))
 (global $jsinnerclass.Main.Outer.Inner.vtable (mut (ref null $jsinnerclass.Main.Outer.Inner.vtable)) (ref.null $jsinnerclass.Main.Outer.Inner.vtable))
 
-;;; Inner()
-(func $m_<init>__void@jsinnerclass.Main.Outer.Inner
+;;; Inner(Outer $outer_this)
+(func $m_<init>__jsinnerclass_Main_Outer__void@jsinnerclass.Main.Outer.Inner
  (param $this (ref null $jsinnerclass.Main.Outer.Inner))
+ (param $$outer_this (ref null $jsinnerclass.Main.Outer))
  (result (ref null $jsinnerclass.Main.Outer.Inner))
  (block $return.label
   (block
+   ;; (Inner.this.this = $outer_this);
+   (struct.set $jsinnerclass.Main.Outer.Inner $this@jsinnerclass.Main.Outer.Inner(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
-   ;; (Inner.this.b = (Inner.this.this.a + 1));
-   (struct.set $jsinnerclass.Main.Outer.Inner $b@jsinnerclass.Main.Outer.Inner(local.get $this) (i32.add (struct.get $jsinnerclass.Main.Outer $a@jsinnerclass.Main.Outer(struct.get $jsinnerclass.Main.Outer.Inner $this@jsinnerclass.Main.Outer.Inner(local.get $this))) (i32.const 1)))
+   ;; (Inner.this.b = ($outer_this.a + 1));
+   (struct.set $jsinnerclass.Main.Outer.Inner $b@jsinnerclass.Main.Outer.Inner(local.get $this) (i32.add (struct.get $jsinnerclass.Main.Outer $a@jsinnerclass.Main.Outer(local.get $$outer_this)) (i32.const 1)))
   )
  )
  (local.get $this)

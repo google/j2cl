@@ -983,12 +983,15 @@
 ))
 (global $bridgemethods.TestCase102.C.vtable (mut (ref null $bridgemethods.TestCase102.C.vtable)) (ref.null $bridgemethods.TestCase102.C.vtable))
 
-;;; C()
-(func $m_<init>__void_$pp_bridgemethods@bridgemethods.TestCase102.C
+;;; C(TestCase102 $outer_this)
+(func $m_<init>__bridgemethods_TestCase102__void_$pp_bridgemethods@bridgemethods.TestCase102.C
  (param $this (ref null $bridgemethods.TestCase102.C))
+ (param $$outer_this (ref null $bridgemethods.TestCase102))
  (result (ref null $bridgemethods.TestCase102.C))
  (block $return.label
   (block
+   ;; (C.this.this = $outer_this);
+   (struct.set $bridgemethods.TestCase102.C $this@bridgemethods.TestCase102.C(local.get $this) (local.get $$outer_this))
    ;; B.this.B.<init>();
    (drop (call $m_<init>__void_$pp_bridgemethods@bridgemethods.TestCase102.B (local.get $this)))
   )

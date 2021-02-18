@@ -43,14 +43,14 @@
    
    (local.set $localVar (i32.const 1))
    (block
-    ;; InnerClass $qualifier = SimpleLocalClass.this.new $1InnerClass.<init>();
+    ;; InnerClass $qualifier = new $1InnerClass.<init>(SimpleLocalClass.this,localVar,p);
     
-    (local.set $$qualifier (call $m_<init>__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1InnerClass (struct.new_with_rtt $simplelocalclass.SimpleLocalClass.1InnerClass (global.get $simplelocalclass.SimpleLocalClass.1InnerClass.vtable) (ref.null $simplelocalclass.SimpleLocalClass) (i32.const 0) (i32.const 0) (global.get $simplelocalclass.SimpleLocalClass.1InnerClass.rtt))))
+    (local.set $$qualifier (call $m_<init>__simplelocalclass_SimpleLocalClass__int__int__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1InnerClass (struct.new_with_rtt $simplelocalclass.SimpleLocalClass.1InnerClass (global.get $simplelocalclass.SimpleLocalClass.1InnerClass.vtable) (ref.null $simplelocalclass.SimpleLocalClass) (i32.const 0) (i32.const 0) (global.get $simplelocalclass.SimpleLocalClass.1InnerClass.rtt))(local.get $this)(local.get $localVar)(local.get $p)))
     ;; $qualifier.fun();
     (drop (call_ref (local.get $$qualifier)(struct.get $simplelocalclass.SimpleLocalClass.1InnerClass.vtable $m_fun__int (struct.get $simplelocalclass.SimpleLocalClass.1InnerClass $vtable(local.get $$qualifier)))))
    )
-   ;; SimpleLocalClass.this.new $1InnerClassWithoutCaptures.<init>();
-   (drop (call $m_<init>__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (struct.new_with_rtt $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (global.get $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.vtable) (ref.null $simplelocalclass.SimpleLocalClass) (global.get $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.rtt))))
+   ;; new $1InnerClassWithoutCaptures.<init>(SimpleLocalClass.this);
+   (drop (call $m_<init>__simplelocalclass_SimpleLocalClass__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (struct.new_with_rtt $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (global.get $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.vtable) (ref.null $simplelocalclass.SimpleLocalClass) (global.get $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.rtt))(local.get $this)))
   )
  )
 )
@@ -101,12 +101,21 @@
 ))
 (global $simplelocalclass.SimpleLocalClass.1InnerClass.vtable (mut (ref null $simplelocalclass.SimpleLocalClass.1InnerClass.vtable)) (ref.null $simplelocalclass.SimpleLocalClass.1InnerClass.vtable))
 
-;;; InnerClass()
-(func $m_<init>__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1InnerClass
+;;; InnerClass(SimpleLocalClass $outer_this, int $captured_localVar, int $captured_p)
+(func $m_<init>__simplelocalclass_SimpleLocalClass__int__int__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1InnerClass
  (param $this (ref null $simplelocalclass.SimpleLocalClass.1InnerClass))
+ (param $$outer_this (ref null $simplelocalclass.SimpleLocalClass))
+ (param $$captured_localVar i32)
+ (param $$captured_p i32)
  (result (ref null $simplelocalclass.SimpleLocalClass.1InnerClass))
  (block $return.label
   (block
+   ;; ($1InnerClass.this.this = $outer_this);
+   (struct.set $simplelocalclass.SimpleLocalClass.1InnerClass $this@simplelocalclass.SimpleLocalClass.1InnerClass(local.get $this) (local.get $$outer_this))
+   ;; ($1InnerClass.this.localVar = $captured_localVar);
+   (struct.set $simplelocalclass.SimpleLocalClass.1InnerClass $localVar@simplelocalclass.SimpleLocalClass.1InnerClass(local.get $this) (local.get $$captured_localVar))
+   ;; ($1InnerClass.this.p = $captured_p);
+   (struct.set $simplelocalclass.SimpleLocalClass.1InnerClass $p@simplelocalclass.SimpleLocalClass.1InnerClass(local.get $this) (local.get $$captured_p))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -146,12 +155,15 @@
 ))
 (global $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.vtable (mut (ref null $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.vtable)) (ref.null $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.vtable))
 
-;;; InnerClassWithoutCaptures()
-(func $m_<init>__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures
+;;; InnerClassWithoutCaptures(SimpleLocalClass $outer_this)
+(func $m_<init>__simplelocalclass_SimpleLocalClass__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures
  (param $this (ref null $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures))
+ (param $$outer_this (ref null $simplelocalclass.SimpleLocalClass))
  (result (ref null $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures))
  (block $return.label
   (block
+   ;; ($1InnerClassWithoutCaptures.this.this = $outer_this);
+   (struct.set $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures $this@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -175,12 +187,18 @@
 ))
 (global $simplelocalclass.SimpleLocalClass.2InnerClass.vtable (mut (ref null $simplelocalclass.SimpleLocalClass.2InnerClass.vtable)) (ref.null $simplelocalclass.SimpleLocalClass.2InnerClass.vtable))
 
-;;; InnerClass()
-(func $m_<init>__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.2InnerClass
+;;; InnerClass(SimpleLocalClass $outer_this, int $captured_localVar)
+(func $m_<init>__simplelocalclass_SimpleLocalClass__int__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.2InnerClass
  (param $this (ref null $simplelocalclass.SimpleLocalClass.2InnerClass))
+ (param $$outer_this (ref null $simplelocalclass.SimpleLocalClass))
+ (param $$captured_localVar i32)
  (result (ref null $simplelocalclass.SimpleLocalClass.2InnerClass))
  (block $return.label
   (block
+   ;; ($2InnerClass.this.this = $outer_this);
+   (struct.set $simplelocalclass.SimpleLocalClass.2InnerClass $this@simplelocalclass.SimpleLocalClass.2InnerClass(local.get $this) (local.get $$outer_this))
+   ;; ($2InnerClass.this.localVar = $captured_localVar);
+   (struct.set $simplelocalclass.SimpleLocalClass.2InnerClass $localVar@simplelocalclass.SimpleLocalClass.2InnerClass(local.get $this) (local.get $$captured_localVar))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; $2InnerClass.this.$init();
@@ -215,12 +233,15 @@
 ))
 (global $simplelocalclass.SimpleLocalClass.1Abc$InnerClass.vtable (mut (ref null $simplelocalclass.SimpleLocalClass.1Abc$InnerClass.vtable)) (ref.null $simplelocalclass.SimpleLocalClass.1Abc$InnerClass.vtable))
 
-;;; Abc$InnerClass()
-(func $m_<init>__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1Abc$InnerClass
+;;; Abc$InnerClass(SimpleLocalClass $outer_this)
+(func $m_<init>__simplelocalclass_SimpleLocalClass__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1Abc$InnerClass
  (param $this (ref null $simplelocalclass.SimpleLocalClass.1Abc$InnerClass))
+ (param $$outer_this (ref null $simplelocalclass.SimpleLocalClass))
  (result (ref null $simplelocalclass.SimpleLocalClass.1Abc$InnerClass))
  (block $return.label
   (block
+   ;; ($1Abc$InnerClass.this.this = $outer_this);
+   (struct.set $simplelocalclass.SimpleLocalClass.1Abc$InnerClass $this@simplelocalclass.SimpleLocalClass.1Abc$InnerClass(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -242,12 +263,15 @@
 ))
 (global $simplelocalclass.SimpleLocalClass.1Klm$InnerClass.vtable (mut (ref null $simplelocalclass.SimpleLocalClass.1Klm$InnerClass.vtable)) (ref.null $simplelocalclass.SimpleLocalClass.1Klm$InnerClass.vtable))
 
-;;; Klm$InnerClass()
-(func $m_<init>__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1Klm$InnerClass
+;;; Klm$InnerClass(SimpleLocalClass $outer_this)
+(func $m_<init>__simplelocalclass_SimpleLocalClass__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1Klm$InnerClass
  (param $this (ref null $simplelocalclass.SimpleLocalClass.1Klm$InnerClass))
+ (param $$outer_this (ref null $simplelocalclass.SimpleLocalClass))
  (result (ref null $simplelocalclass.SimpleLocalClass.1Klm$InnerClass))
  (block $return.label
   (block
+   ;; ($1Klm$InnerClass.this.this = $outer_this);
+   (struct.set $simplelocalclass.SimpleLocalClass.1Klm$InnerClass $this@simplelocalclass.SimpleLocalClass.1Klm$InnerClass(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

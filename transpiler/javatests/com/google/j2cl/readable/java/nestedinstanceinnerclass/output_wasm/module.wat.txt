@@ -34,8 +34,8 @@
  (local.set $this (ref.cast $java.lang.Object $nestedinstanceinnerclass.OuterClass (local.get $this.untyped) (global.get $nestedinstanceinnerclass.OuterClass.rtt)))
  (block $return.label
   (block
-   ;; new OuterClass.<init>().new InnerClass.<init>().new InnerInnerClass.<init>();
-   (drop (call $m_<init>__void@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (struct.new_with_rtt $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (global.get $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.vtable) (ref.null $nestedinstanceinnerclass.OuterClass.InnerClass) (ref.null $nestedinstanceinnerclass.OuterClass.InnerClass) (ref.null $nestedinstanceinnerclass.OuterClass) (global.get $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.rtt))))
+   ;; new InnerInnerClass.<init>(new InnerClass.<init>(new OuterClass.<init>()));
+   (drop (call $m_<init>__nestedinstanceinnerclass_OuterClass_InnerClass__void@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (struct.new_with_rtt $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (global.get $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.vtable) (ref.null $nestedinstanceinnerclass.OuterClass.InnerClass) (ref.null $nestedinstanceinnerclass.OuterClass.InnerClass) (ref.null $nestedinstanceinnerclass.OuterClass) (global.get $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.rtt))(call $m_<init>__nestedinstanceinnerclass_OuterClass__void@nestedinstanceinnerclass.OuterClass.InnerClass (struct.new_with_rtt $nestedinstanceinnerclass.OuterClass.InnerClass (global.get $nestedinstanceinnerclass.OuterClass.InnerClass.vtable) (ref.null $nestedinstanceinnerclass.OuterClass) (global.get $nestedinstanceinnerclass.OuterClass.InnerClass.rtt))(call $m_<init>__void@nestedinstanceinnerclass.OuterClass (struct.new_with_rtt $nestedinstanceinnerclass.OuterClass (global.get $nestedinstanceinnerclass.OuterClass.vtable) (global.get $nestedinstanceinnerclass.OuterClass.rtt))))))
   )
  )
 )
@@ -55,12 +55,15 @@
 ))
 (global $nestedinstanceinnerclass.OuterClass.InnerClass.vtable (mut (ref null $nestedinstanceinnerclass.OuterClass.InnerClass.vtable)) (ref.null $nestedinstanceinnerclass.OuterClass.InnerClass.vtable))
 
-;;; InnerClass()
-(func $m_<init>__void@nestedinstanceinnerclass.OuterClass.InnerClass
+;;; InnerClass(OuterClass $outer_this)
+(func $m_<init>__nestedinstanceinnerclass_OuterClass__void@nestedinstanceinnerclass.OuterClass.InnerClass
  (param $this (ref null $nestedinstanceinnerclass.OuterClass.InnerClass))
+ (param $$outer_this (ref null $nestedinstanceinnerclass.OuterClass))
  (result (ref null $nestedinstanceinnerclass.OuterClass.InnerClass))
  (block $return.label
   (block
+   ;; (InnerClass.this.this = $outer_this);
+   (struct.set $nestedinstanceinnerclass.OuterClass.InnerClass $this@nestedinstanceinnerclass.OuterClass.InnerClass(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -84,12 +87,15 @@
 ))
 (global $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.vtable (mut (ref null $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.vtable)) (ref.null $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.vtable))
 
-;;; InnerInnerClass()
-(func $m_<init>__void@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass
+;;; InnerInnerClass(InnerClass $outer_this)
+(func $m_<init>__nestedinstanceinnerclass_OuterClass_InnerClass__void@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass
  (param $this (ref null $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass))
+ (param $$outer_this (ref null $nestedinstanceinnerclass.OuterClass.InnerClass))
  (result (ref null $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass))
  (block $return.label
   (block
+   ;; (InnerInnerClass.this.this = $outer_this);
+   (struct.set $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass $this@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; InnerInnerClass.this.$init();

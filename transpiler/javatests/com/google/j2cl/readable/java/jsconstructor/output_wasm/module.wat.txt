@@ -527,13 +527,16 @@
 ))
 (global $jsconstructor.JsConstructorClass.InstanceVarargs.vtable (mut (ref null $jsconstructor.JsConstructorClass.InstanceVarargs.vtable)) (ref.null $jsconstructor.JsConstructorClass.InstanceVarargs.vtable))
 
-;;; InstanceVarargs(int... args)
-(func $m_<init>__arrayOf_int__void@jsconstructor.JsConstructorClass.InstanceVarargs
+;;; InstanceVarargs(JsConstructorClass $outer_this, int... args)
+(func $m_<init>__jsconstructor_JsConstructorClass__arrayOf_int__void@jsconstructor.JsConstructorClass.InstanceVarargs
  (param $this (ref null $jsconstructor.JsConstructorClass.InstanceVarargs))
+ (param $$outer_this (ref null $jsconstructor.JsConstructorClass))
  (param $args (ref null $int.array))
  (result (ref null $jsconstructor.JsConstructorClass.InstanceVarargs))
  (block $return.label
   (block
+   ;; (InstanceVarargs.this.this = $outer_this);
+   (struct.set $jsconstructor.JsConstructorClass.InstanceVarargs $this@jsconstructor.JsConstructorClass.InstanceVarargs(local.get $this) (local.get $$outer_this))
    ;; A.this.A.<init>(args[1]);
    (drop (call $m_<init>__int__void@jsconstructor.JsConstructorClass.A (local.get $this)(array.get $int.array.elements (struct.get $int.array $elements (local.get $args)) (i32.const 1))))
   )

@@ -273,6 +273,8 @@ public enum Backend {
           new CreateImplicitConstructors(),
           new InsertExplicitSuperCalls(),
           new BridgeMethodsCreator(),
+          // Must run before Enum normalization
+          new FixSuperCallQualifiers(),
           new NormalizeStaticMemberQualifiers(),
           new NormalizeMultiExpressions(),
 
@@ -286,6 +288,7 @@ public enum Backend {
           new RewriteShortcutOperators(),
           new NormalizeFieldInitialization(),
           new ImplementInstanceInitialization(),
+          new NormalizeNestedClassConstructors(),
           new NormalizeLabels(),
           new InsertCastOnArrayAccess(),
           new ExtractNonIdempotentExpressions(),
