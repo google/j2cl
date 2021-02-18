@@ -39,7 +39,7 @@ def _impl_j2wasm_application(ctx):
         outputs = [ctx.outputs.wat],
         command = (
             "tmp=$(mktemp -d);" +
-            "%s %s -d $tmp;" % (ctx.executable._zip.path, ctx.outputs.zip.path) +
+            "%s -q %s -d $tmp;" % (ctx.executable._zip.path, ctx.outputs.zip.path) +
             "cp $tmp/module.wat %s;" % ctx.outputs.wat.path +
             "rm -R $tmp;"
         ),
