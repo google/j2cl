@@ -22,7 +22,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; (Parent.this.field = f);
    (struct.set $supercallnondefault.Parent $field@supercallnondefault.Parent(local.get $this) (local.get $f))
   )
@@ -52,7 +52,7 @@
  (block $return.label
   (block
    ;; Parent.this.Parent.<init>(a);
-   
+   (drop (call $m_<init>__int__void@supercallnondefault.Parent (local.get $this)(local.get $a)))
   )
  )
  (local.get $this)

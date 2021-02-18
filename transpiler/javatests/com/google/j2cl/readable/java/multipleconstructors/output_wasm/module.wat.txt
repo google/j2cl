@@ -23,7 +23,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; (MultipleConstructors.this.id = id);
    (struct.set $multipleconstructors.MultipleConstructors $id@multipleconstructors.MultipleConstructors(local.get $this) (local.get $id))
    ;; (MultipleConstructors.this.flag = (id == 0));
@@ -41,7 +41,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; (MultipleConstructors.this.id = (0 - 1));
    (struct.set $multipleconstructors.MultipleConstructors $id@multipleconstructors.MultipleConstructors(local.get $this) (i32.sub (i32.const 0) (i32.const 1)))
    ;; (MultipleConstructors.this.flag = flag);
@@ -60,7 +60,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; (MultipleConstructors.this.id = id);
    (struct.set $multipleconstructors.MultipleConstructors $id@multipleconstructors.MultipleConstructors(local.get $this) (local.get $id))
    ;; (MultipleConstructors.this.flag = flag);

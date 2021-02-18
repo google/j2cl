@@ -24,7 +24,7 @@
  (block $return.label
   (block
    ;; ClassWithAbstractMethod.this.ClassWithAbstractMethod.<init>();
-   
+   (drop (call $m_<init>__void@gwtincompatible.Interface.ClassWithAbstractMethod (local.get $this)))
   )
  )
  (local.get $this)
@@ -75,7 +75,7 @@
  (block $return.label
   (block
    ;; Enum.this.Enum.<init>();
-   
+   (drop (ref.null $java.lang.Enum))
   )
  )
  (local.get $this)
@@ -109,7 +109,7 @@
  (block $return.label
   (block
    ;; SomeEnum.this.SomeEnum.<init>();
-   
+   (drop (call $m_<init>__void_$p_gwtincompatible_Implementor_SomeEnum@gwtincompatible.Implementor.SomeEnum (local.get $this)))
   )
  )
  (local.get $this)
@@ -152,7 +152,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)

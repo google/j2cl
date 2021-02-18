@@ -20,7 +20,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -46,7 +46,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -91,7 +91,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -117,10 +117,46 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   ;; bar.this.$init();
+   (call $$init__void_$p_collisions_bar@collisions.bar (local.get $this))
   )
  )
  (local.get $this)
+)
+
+;;; void bar.$init()
+(func $$init__void_$p_collisions_bar@collisions.bar
+ (param $this (ref null $collisions.bar))
+ (local $foo i32)
+ (local $bar i32)
+ (local $goog i32)
+ (local $flip i32)
+ (local $window i32)
+ (local $delete i32)
+ (local $undefined i32)
+ (block $return.label
+  (block
+   ;; int foo,int bar,int goog,int flip,int window;
+   
+   ;; collisions.Blah.m();
+   (call $m_m__void@collisions.Blah )
+   ;; collisions.Blah.getN();
+   (drop (call $m_getN__double@collisions.Blah ))
+   ;; new Blah.<init>();
+   (drop (call $m_<init>__void_$pp_collisions@collisions.Blah (struct.new_with_rtt $collisions.Blah (global.get $collisions.Blah.vtable) (global.get $collisions.Blah.rtt))))
+   ;; new goog.<init>();
+   (drop (call $m_<init>__void@collisions.goog (struct.new_with_rtt $collisions.goog (global.get $collisions.goog.vtable) (global.get $collisions.goog.rtt))))
+   ;; new foo.<init>();
+   (drop (call $m_<init>__void_$pp_collisions@collisions.foo (struct.new_with_rtt $collisions.foo (global.get $collisions.foo.vtable) (global.get $collisions.foo.rtt))))
+   ;; int delete = 1;
+   
+   (local.set $delete (i32.const 1))
+   ;; int undefined = 3;
+   
+   (local.set $undefined (i32.const 3))
+  )
+ )
 )
 
 ;;; CLASS  Other
@@ -144,7 +180,9 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   ;; Other.this.$init();
+   (call $$init__void_$p_collisions_Other@collisions.Other (local.get $this))
   )
  )
  (local.get $this)
@@ -176,6 +214,23 @@
 )
 (elem declare func $m_m__java_lang_Object_$pp_collisions@collisions.Other)
 
+;;; void Other.$init()
+(func $$init__void_$p_collisions_Other@collisions.Other
+ (param $this (ref null $collisions.Other))
+ (local $T_1 i32)
+ (local $o (ref null $collisions.Other))
+ (block $return.label
+  (block
+   ;; int T = 3;
+   
+   (local.set $T_1 (i32.const 3))
+   ;; Other<T> o = ((Other<T>) null);
+   
+   (local.set $o (ref.cast $java.lang.Object $collisions.Other (ref.null $java.lang.Object) (global.get $collisions.Other.rtt)))
+  )
+ )
+)
+
 ;;; CLASS  T
 (type $collisions.T (struct
  (field $vtable (ref null $collisions.T.vtable))
@@ -198,7 +253,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)

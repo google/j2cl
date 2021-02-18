@@ -20,7 +20,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -47,7 +47,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -74,7 +74,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -130,7 +130,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -158,7 +158,7 @@
  (block $return.label
   (block
    ;; InnerClass.this.InnerClass.<init>();
-   
+   (drop (ref.null $anonymousinnerclass.AnonymousInnerClass.InnerClass))
   )
  )
  (local.get $this)
@@ -187,7 +187,7 @@
  (block $return.label
   (block
    ;; $super_outer_this.B.<init>();
-   
+   (drop (ref.null $anonymousinnerclass.A.B))
   )
  )
  (local.get $this)
@@ -216,10 +216,23 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   ;; $1C.this.$init();
+   (call $$init__void_$p_anonymousinnerclass_AnonymousInnerClass_1C@anonymousinnerclass.AnonymousInnerClass.1C (local.get $this))
   )
  )
  (local.get $this)
+)
+
+;;; void C.$init()
+(func $$init__void_$p_anonymousinnerclass_AnonymousInnerClass_1C@anonymousinnerclass.AnonymousInnerClass.1C
+ (param $this (ref null $anonymousinnerclass.AnonymousInnerClass.1C))
+ (block $return.label
+  (block
+   ;; ($1C.this.fInC = $1C.this.arg);
+   (struct.set $anonymousinnerclass.AnonymousInnerClass.1C $fInC@anonymousinnerclass.AnonymousInnerClass.1C(local.get $this) (struct.get $anonymousinnerclass.AnonymousInnerClass.1C $arg@anonymousinnerclass.AnonymousInnerClass.1C(local.get $this)))
+  )
+ )
 )
 
 ;;; CLASS  <anonymous> extends C
@@ -247,7 +260,7 @@
  (block $return.label
   (block
    ;; $1C.this.$1C.<init>();
-   
+   (drop (ref.null $anonymousinnerclass.AnonymousInnerClass.1C))
   )
  )
  (local.get $this)

@@ -20,7 +20,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -60,7 +60,9 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   ;; Outer.this.$init();
+   (call $$init__void_$p_jsinnerclass_Main_Outer@jsinnerclass.Main.Outer (local.get $this))
   )
  )
  (local.get $this)
@@ -89,6 +91,17 @@
 )
 (elem declare func $m_method__int@jsinnerclass.Main.Outer)
 
+;;; void Outer.$init()
+(func $$init__void_$p_jsinnerclass_Main_Outer@jsinnerclass.Main.Outer
+ (param $this (ref null $jsinnerclass.Main.Outer))
+ (block $return.label
+  (block
+   ;; (Outer.this.a = 2);
+   (struct.set $jsinnerclass.Main.Outer $a@jsinnerclass.Main.Outer(local.get $this) (i32.const 2))
+  )
+ )
+)
+
 ;;; CLASS  Inner
 (type $jsinnerclass.Main.Outer.Inner (struct
  (field $vtable (ref null $jsinnerclass.Main.Outer.Inner.vtable))
@@ -112,7 +125,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; (Inner.this.b = (Inner.this.this.a + 1));
    (struct.set $jsinnerclass.Main.Outer.Inner $b@jsinnerclass.Main.Outer.Inner(local.get $this) (i32.add (struct.get $jsinnerclass.Main.Outer $a@jsinnerclass.Main.Outer(struct.get $jsinnerclass.Main.Outer.Inner $this@jsinnerclass.Main.Outer.Inner(local.get $this))) (i32.const 1)))
   )

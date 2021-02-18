@@ -24,7 +24,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -93,7 +93,7 @@
  (block $return.label
   (block
    ;; SuperParent.this.SuperParent.<init>();
-   
+   (drop (call $m_<init>__void_$pp_instancejsmethods@instancejsmethods.SuperParent (local.get $this)))
   )
  )
  (local.get $this)
@@ -182,7 +182,7 @@
  (block $return.label
   (block
    ;; Parent.this.Parent.<init>();
-   
+   (drop (call $m_<init>__void_$pp_instancejsmethods@instancejsmethods.Parent (local.get $this)))
   )
  )
  (local.get $this)
@@ -286,7 +286,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)

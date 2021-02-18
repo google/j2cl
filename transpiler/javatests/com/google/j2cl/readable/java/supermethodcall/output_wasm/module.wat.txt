@@ -23,7 +23,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -98,7 +98,7 @@
  (block $return.label
   (block
    ;; GrandParent.this.GrandParent.<init>();
-   
+   (drop (call $m_<init>__void_$pp_supermethodcall@supermethodcall.GrandParent (local.get $this)))
   )
  )
  (local.get $this)
@@ -175,7 +175,7 @@
  (block $return.label
   (block
    ;; Parent.this.Parent.<init>();
-   
+   (drop (call $m_<init>__void_$pp_supermethodcall@supermethodcall.Parent (local.get $this)))
   )
  )
  (local.get $this)

@@ -26,7 +26,9 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   ;; Strings.this.$init();
+   (call $$init__void_$p_strings_Strings@strings.Strings (local.get $this))
   )
  )
  (local.get $this)
@@ -115,6 +117,21 @@
 )
 (elem declare func $m_test__void@strings.Strings)
 
+;;; void Strings.$init()
+(func $$init__void_$p_strings_Strings@strings.Strings
+ (param $this (ref null $strings.Strings))
+ (block $return.label
+  (block
+   ;; (Strings.this.someString = "This is a string literal");
+   (struct.set $strings.Strings $someString@strings.Strings(local.get $this) (ref.null $java.lang.String))
+   ;; (Strings.this.nonBmpChar = "\uD800\uDF46");
+   (struct.set $strings.Strings $nonBmpChar@strings.Strings(local.get $this) (ref.null $java.lang.String))
+   ;; (Strings.this.wideColon = "\uFF1A");
+   (struct.set $strings.Strings $wideColon@strings.Strings(local.get $this) (ref.null $java.lang.String))
+  )
+ )
+)
+
 ;;; CLASS  StringHolder
 (type $strings.Strings.StringHolder (struct
  (field $vtable (ref null $strings.Strings.StringHolder.vtable))
@@ -136,10 +153,23 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   ;; StringHolder.this.$init();
+   (call $$init__void_$p_strings_Strings_StringHolder@strings.Strings.StringHolder (local.get $this))
   )
  )
  (local.get $this)
+)
+
+;;; void StringHolder.$init()
+(func $$init__void_$p_strings_Strings_StringHolder@strings.Strings.StringHolder
+ (param $this (ref null $strings.Strings.StringHolder))
+ (block $return.label
+  (block
+   ;; (StringHolder.this.s = "A");
+   (struct.set $strings.Strings.StringHolder $s@strings.Strings.StringHolder(local.get $this) (ref.null $java.lang.String))
+  )
+ )
 )
 
 ;;; Code for strings.Strings [vtable]

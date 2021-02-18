@@ -22,10 +22,23 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   ;; Foo.this.$init();
+   (call $$init__void_$p_packageinfosubpackage_Foo@packageinfosubpackage.Foo (local.get $this))
   )
  )
  (local.get $this)
+)
+
+;;; void Foo.$init()
+(func $$init__void_$p_packageinfosubpackage_Foo@packageinfosubpackage.Foo
+ (param $this (ref null $packageinfosubpackage.Foo))
+ (block $return.label
+  (block
+   ;; (Foo.this.nativeBar = new NativeBar.<init>());
+   (struct.set $packageinfosubpackage.Foo $nativeBar@packageinfosubpackage.Foo(local.get $this) (call $m_<init>__void_$p_packageinfosubpackage_Foo_NativeBar@packageinfosubpackage.Foo.NativeBar (struct.new_with_rtt $packageinfosubpackage.Foo.NativeBar (global.get $packageinfosubpackage.Foo.NativeBar.vtable) (global.get $packageinfosubpackage.Foo.NativeBar.rtt))))
+  )
+ )
 )
 
 ;;; CLASS  NativeBar
@@ -48,7 +61,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -76,7 +89,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)

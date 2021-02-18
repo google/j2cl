@@ -22,10 +22,25 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   ;; InstanceFieldInitializer.this.$init();
+   (call $$init__void_$p_instancefieldinitializer_InstanceFieldInitializer@instancefieldinitializer.InstanceFieldInitializer (local.get $this))
   )
  )
  (local.get $this)
+)
+
+;;; void InstanceFieldInitializer.$init()
+(func $$init__void_$p_instancefieldinitializer_InstanceFieldInitializer@instancefieldinitializer.InstanceFieldInitializer
+ (param $this (ref null $instancefieldinitializer.InstanceFieldInitializer))
+ (block $return.label
+  (block
+   ;; (InstanceFieldInitializer.this.a = 1);
+   (struct.set $instancefieldinitializer.InstanceFieldInitializer $a@instancefieldinitializer.InstanceFieldInitializer(local.get $this) (i32.const 1))
+   ;; (InstanceFieldInitializer.this.b = (InstanceFieldInitializer.this.a * 2));
+   (struct.set $instancefieldinitializer.InstanceFieldInitializer $b@instancefieldinitializer.InstanceFieldInitializer(local.get $this) (i32.mul (struct.get $instancefieldinitializer.InstanceFieldInitializer $a@instancefieldinitializer.InstanceFieldInitializer(local.get $this)) (i32.const 2)))
+  )
+ )
 )
 
 ;;; Code for instancefieldinitializer.InstanceFieldInitializer [vtable]

@@ -45,10 +45,23 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   ;; DeprecatedExample.this.$init();
+   (call $$init__void_$p_deprecated_DeprecatedExample@deprecated.DeprecatedExample (local.get $this))
   )
  )
  (local.get $this)
+)
+
+;;; void DeprecatedExample.$init()
+(func $$init__void_$p_deprecated_DeprecatedExample@deprecated.DeprecatedExample
+ (param $this (ref null $deprecated.DeprecatedExample))
+ (block $return.label
+  (block
+   ;; (DeprecatedExample.this.deprecatedInstanceField = "deprecated field");
+   (struct.set $deprecated.DeprecatedExample $deprecatedInstanceField@deprecated.DeprecatedExample(local.get $this) (ref.null $java.lang.String))
+  )
+ )
 )
 
 ;;; INTERFACE  DeprecatedInterface
@@ -83,7 +96,7 @@
  (block $return.label
   (block
    ;; Enum.this.Enum.<init>();
-   
+   (drop (ref.null $java.lang.Enum))
   )
  )
  (local.get $this)
@@ -110,7 +123,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)

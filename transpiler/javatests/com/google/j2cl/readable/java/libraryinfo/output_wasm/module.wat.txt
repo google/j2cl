@@ -21,7 +21,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -34,7 +34,7 @@
  (block $return.label
   (block
    ;; new Main.<init>().execute();
-   
+   (call $m_execute__void_$p_libraryinfo_Main@libraryinfo.Main (call $m_<init>__void@libraryinfo.Main (struct.new_with_rtt $libraryinfo.Main (global.get $libraryinfo.Main.vtable) (global.get $libraryinfo.Main.rtt))))
    ;; Function jsFunction = new FunctionImpl.<init>();
    
    (local.set $jsFunction (call $m_<init>__void_$p_libraryinfo_Main_FunctionImpl@libraryinfo.Main.FunctionImpl (struct.new_with_rtt $libraryinfo.Main.FunctionImpl (global.get $libraryinfo.Main.FunctionImpl.vtable) (global.get $libraryinfo.Main.FunctionImpl.rtt))))
@@ -135,7 +135,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -177,7 +177,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -204,7 +204,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; (MyJsType.this.someField = new Main.<init>());
    (struct.set $libraryinfo.Main.MyJsType $someField@libraryinfo.Main.MyJsType(local.get $this) (call $m_<init>__void@libraryinfo.Main (struct.new_with_rtt $libraryinfo.Main (global.get $libraryinfo.Main.vtable) (global.get $libraryinfo.Main.rtt))))
   )
@@ -233,7 +233,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -273,7 +273,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)

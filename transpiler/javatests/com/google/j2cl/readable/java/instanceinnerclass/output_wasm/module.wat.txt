@@ -23,7 +23,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -79,7 +79,9 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   ;; InnerClass.this.$init();
+   (call $$init__void_$p_instanceinnerclass_InstanceInnerClass_InnerClass@instanceinnerclass.InstanceInnerClass.InnerClass (local.get $this))
   )
  )
  (local.get $this)
@@ -100,6 +102,19 @@
  )
 )
 (elem declare func $m_funInner__void@instanceinnerclass.InstanceInnerClass.InnerClass)
+
+;;; void InnerClass.$init()
+(func $$init__void_$p_instanceinnerclass_InstanceInnerClass_InnerClass@instanceinnerclass.InstanceInnerClass.InnerClass
+ (param $this (ref null $instanceinnerclass.InstanceInnerClass.InnerClass))
+ (block $return.label
+  (block
+   ;; (InnerClass.this.field = (InnerClass.this.this.instanceField + InnerClass.this.this.instanceField));
+   (struct.set $instanceinnerclass.InstanceInnerClass.InnerClass $field@instanceinnerclass.InstanceInnerClass.InnerClass(local.get $this) (i32.add (struct.get $instanceinnerclass.InstanceInnerClass $instanceField@instanceinnerclass.InstanceInnerClass(struct.get $instanceinnerclass.InstanceInnerClass.InnerClass $this@instanceinnerclass.InstanceInnerClass.InnerClass(local.get $this))) (struct.get $instanceinnerclass.InstanceInnerClass $instanceField@instanceinnerclass.InstanceInnerClass(struct.get $instanceinnerclass.InstanceInnerClass.InnerClass $this@instanceinnerclass.InstanceInnerClass.InnerClass(local.get $this)))))
+   ;; (InnerClass.this.enclosingInstance = InnerClass.this.this);
+   (struct.set $instanceinnerclass.InstanceInnerClass.InnerClass $enclosingInstance@instanceinnerclass.InstanceInnerClass.InnerClass(local.get $this) (struct.get $instanceinnerclass.InstanceInnerClass.InnerClass $this@instanceinnerclass.InstanceInnerClass.InnerClass(local.get $this)))
+  )
+ )
+)
 
 ;;; Code for instanceinnerclass.InstanceInnerClass [vtable]
  (global.set $instanceinnerclass.InstanceInnerClass.vtable (struct.new_with_rtt $instanceinnerclass.InstanceInnerClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_funOuter__void@instanceinnerclass.InstanceInnerClass) (ref.func $m_test__void@instanceinnerclass.InstanceInnerClass) (rtt.canon $instanceinnerclass.InstanceInnerClass.vtable)))

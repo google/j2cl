@@ -21,7 +21,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -223,7 +223,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -250,10 +250,23 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   ;; Inner.this.$init();
+   (call $$init__void_$p_booleanoperations_BooleanOperations_1Outer_Inner@booleanoperations.BooleanOperations.1Outer.Inner (local.get $this))
   )
  )
  (local.get $this)
+)
+
+;;; void Inner.$init()
+(func $$init__void_$p_booleanoperations_BooleanOperations_1Outer_Inner@booleanoperations.BooleanOperations.1Outer.Inner
+ (param $this (ref null $booleanoperations.BooleanOperations.1Outer.Inner))
+ (block $return.label
+  (block
+   ;; (Inner.this.this.b = (Inner.this.this.b | true));
+   (struct.set $booleanoperations.BooleanOperations.1Outer $b@booleanoperations.BooleanOperations.1Outer(struct.get $booleanoperations.BooleanOperations.1Outer.Inner $this@booleanoperations.BooleanOperations.1Outer.Inner(local.get $this)) (i32.or (struct.get $booleanoperations.BooleanOperations.1Outer $b@booleanoperations.BooleanOperations.1Outer(struct.get $booleanoperations.BooleanOperations.1Outer.Inner $this@booleanoperations.BooleanOperations.1Outer.Inner(local.get $this))) (i32.const 1)))
+  )
+ )
 )
 
 ;;; Code for booleanoperations.BooleanOperations [vtable]

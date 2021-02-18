@@ -21,7 +21,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -66,7 +66,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -113,7 +113,7 @@
  (block $return.label
   (block
    ;; $1Parent.this.$1Parent.<init>();
-   
+   (drop (ref.null $localclassinheritance.LocalClassInheritance.1Parent))
   )
  )
  (local.get $this)

@@ -25,7 +25,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -38,7 +38,7 @@
  (block $return.label
   (block
    ;; Varargs.this.Varargs.<init>([1]);
-   
+   (drop (call $m_<init>__arrayOf_int__void@varargs.Varargs (local.get $this)(ref.null $int.array)))
   )
  )
  (local.get $this)
@@ -159,7 +159,7 @@
  (block $return.label
   (block
    ;; Varargs.this.Varargs.<init>([1]);
-   
+   (drop (call $m_<init>__arrayOf_int__void@varargs.Varargs (local.get $this)(ref.null $int.array)))
   )
  )
  (local.get $this)

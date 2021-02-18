@@ -21,7 +21,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -50,7 +50,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; (InnerClass.this.b = (InnerClass.this.this.a + b));
    (struct.set $innerclasswithconstructor.InnerClassWithConstructor.InnerClass $b@innerclasswithconstructor.InnerClassWithConstructor.InnerClass(local.get $this) (i32.add (struct.get $innerclasswithconstructor.InnerClassWithConstructor $a@innerclasswithconstructor.InnerClassWithConstructor(struct.get $innerclasswithconstructor.InnerClassWithConstructor.InnerClass $this@innerclasswithconstructor.InnerClassWithConstructor.InnerClass(local.get $this))) (local.get $b)))
   )
@@ -65,7 +65,7 @@
  (block $return.label
   (block
    ;; InnerClass.this.InnerClass.<init>(InnerClass.this.this.a);
-   
+   (drop (ref.null $innerclasswithconstructor.InnerClassWithConstructor.InnerClass))
   )
  )
  (local.get $this)

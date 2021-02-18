@@ -20,7 +20,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -72,7 +72,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -86,7 +86,7 @@
  (block $return.label
   (block
    ;; I.this.bar();
-   
+   (call $m_bar__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.I (ref.null $java.lang.Object))
   )
  )
 )
@@ -114,7 +114,7 @@
  (block $return.label
   (block
    ;; A.this.A.<init>();
-   
+   (drop (call $m_<init>__void_$pp_abstractmethodoverridedefault@abstractmethodoverridedefault.AbstractMethodOverrideDefault.A (local.get $this)))
   )
  )
  (local.get $this)
@@ -163,7 +163,7 @@
  (block $return.label
   (block
    ;; A.this.A.<init>();
-   
+   (drop (call $m_<init>__void_$pp_abstractmethodoverridedefault@abstractmethodoverridedefault.AbstractMethodOverrideDefault.A (local.get $this)))
   )
  )
  (local.get $this)
@@ -189,7 +189,7 @@
  (block $return.label
   (block
    ;; I.this.bar();
-   
+   (call $m_bar__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.I (ref.null $java.lang.Object))
   )
  )
 )

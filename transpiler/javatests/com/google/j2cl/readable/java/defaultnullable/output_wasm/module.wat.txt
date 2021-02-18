@@ -35,7 +35,9 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   ;; DefaultNullable.this.$init();
+   (call $$init__void_$p_defaultnullable_DefaultNullable@defaultnullable.DefaultNullable (local.get $this))
   )
  )
  (local.get $this)
@@ -93,6 +95,39 @@
  )
 )
 (elem declare func $m_m3__arrayOf_java_lang_String__void@defaultnullable.DefaultNullable)
+
+;;; void DefaultNullable.$init()
+(func $$init__void_$p_defaultnullable_DefaultNullable@defaultnullable.DefaultNullable
+ (param $this (ref null $defaultnullable.DefaultNullable))
+ (block $return.label
+  (block
+   ;; (DefaultNullable.this.f1 = "Hello");
+   (struct.set $defaultnullable.DefaultNullable $f1@defaultnullable.DefaultNullable(local.get $this) (ref.null $java.lang.String))
+   ;; (DefaultNullable.this.f2 = null);
+   (struct.set $defaultnullable.DefaultNullable $f2@defaultnullable.DefaultNullable(local.get $this) (ref.null $java.lang.String))
+   ;; (DefaultNullable.this.f3 = null);
+   (struct.set $defaultnullable.DefaultNullable $f3@defaultnullable.DefaultNullable(local.get $this) (ref.null $java.lang.String))
+   ;; (DefaultNullable.this.f4 = new ArrayList.<init>());
+   (struct.set $defaultnullable.DefaultNullable $f4@defaultnullable.DefaultNullable(local.get $this) (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.vtable) (i32.const 0) (ref.null $Object.array) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
+   ;; (DefaultNullable.this.f5 = new ArrayList.<init>());
+   (struct.set $defaultnullable.DefaultNullable $f5@defaultnullable.DefaultNullable(local.get $this) (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.vtable) (i32.const 0) (ref.null $Object.array) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
+   ;; (DefaultNullable.this.f6 = new ArrayList.<init>());
+   (struct.set $defaultnullable.DefaultNullable $f6@defaultnullable.DefaultNullable(local.get $this) (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.vtable) (i32.const 0) (ref.null $Object.array) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
+   ;; (DefaultNullable.this.f7 = null);
+   (struct.set $defaultnullable.DefaultNullable $f7@defaultnullable.DefaultNullable(local.get $this) (ref.null $java.lang.Object))
+   ;; (DefaultNullable.this.f8 = []);
+   (struct.set $defaultnullable.DefaultNullable $f8@defaultnullable.DefaultNullable(local.get $this) (ref.null $Object.array))
+   ;; (DefaultNullable.this.f9 = []);
+   (struct.set $defaultnullable.DefaultNullable $f9@defaultnullable.DefaultNullable(local.get $this) (ref.null $Object.array))
+   ;; (DefaultNullable.this.f10 = []);
+   (struct.set $defaultnullable.DefaultNullable $f10@defaultnullable.DefaultNullable(local.get $this) (ref.null $Object.array))
+   ;; (DefaultNullable.this.f11 = null);
+   (struct.set $defaultnullable.DefaultNullable $f11@defaultnullable.DefaultNullable(local.get $this) (ref.null $java.lang.Void))
+   ;; (DefaultNullable.this.f12 = new Object.<init>());
+   (struct.set $defaultnullable.DefaultNullable $f12@defaultnullable.DefaultNullable(local.get $this) (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (global.get $java.lang.Object.rtt))))
+  )
+ )
+)
 
 ;;; Code for defaultnullable.DefaultNullable [vtable]
  (global.set $defaultnullable.DefaultNullable.vtable (struct.new_with_rtt $defaultnullable.DefaultNullable.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_m1__java_lang_String__java_util_List__java_lang_String@defaultnullable.DefaultNullable) (ref.func $m_m2__java_lang_String__java_util_List__java_lang_String@defaultnullable.DefaultNullable) (ref.func $m_m3__arrayOf_java_lang_String__void@defaultnullable.DefaultNullable) (rtt.canon $defaultnullable.DefaultNullable.vtable)))

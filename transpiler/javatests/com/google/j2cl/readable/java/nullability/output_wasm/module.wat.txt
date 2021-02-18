@@ -36,7 +36,9 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   ;; Nullability.this.$init();
+   (call $$init__void_$p_nullability_Nullability@nullability.Nullability (local.get $this))
   )
  )
  (local.get $this)
@@ -116,6 +118,37 @@
 )
 (elem declare func $m_m4__nullability_Nullability_MyFunction__void@nullability.Nullability)
 
+;;; void Nullability.$init()
+(func $$init__void_$p_nullability_Nullability@nullability.Nullability
+ (param $this (ref null $nullability.Nullability))
+ (block $return.label
+  (block
+   ;; (Nullability.this.f1 = "Hello");
+   (struct.set $nullability.Nullability $f1@nullability.Nullability(local.get $this) (ref.null $java.lang.String))
+   ;; (Nullability.this.f2 = null);
+   (struct.set $nullability.Nullability $f2@nullability.Nullability(local.get $this) (ref.null $java.lang.String))
+   ;; (Nullability.this.f3 = null);
+   (struct.set $nullability.Nullability $f3@nullability.Nullability(local.get $this) (ref.null $java.lang.String))
+   ;; (Nullability.this.f4 = new ArrayList.<init>());
+   (struct.set $nullability.Nullability $f4@nullability.Nullability(local.get $this) (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.vtable) (i32.const 0) (ref.null $Object.array) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
+   ;; (Nullability.this.f5 = new ArrayList.<init>());
+   (struct.set $nullability.Nullability $f5@nullability.Nullability(local.get $this) (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.vtable) (i32.const 0) (ref.null $Object.array) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
+   ;; (Nullability.this.f6 = new ArrayList.<init>());
+   (struct.set $nullability.Nullability $f6@nullability.Nullability(local.get $this) (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.vtable) (i32.const 0) (ref.null $Object.array) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
+   ;; (Nullability.this.f7 = null);
+   (struct.set $nullability.Nullability $f7@nullability.Nullability(local.get $this) (ref.null $java.lang.Object))
+   ;; (Nullability.this.f8 = []);
+   (struct.set $nullability.Nullability $f8@nullability.Nullability(local.get $this) (ref.null $Object.array))
+   ;; (Nullability.this.f9 = []);
+   (struct.set $nullability.Nullability $f9@nullability.Nullability(local.get $this) (ref.null $Object.array))
+   ;; (Nullability.this.f10 = []);
+   (struct.set $nullability.Nullability $f10@nullability.Nullability(local.get $this) (ref.null $Object.array))
+   ;; (Nullability.this.f12 = new ArrayList.<init>());
+   (struct.set $nullability.Nullability $f12@nullability.Nullability(local.get $this) (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.vtable) (i32.const 0) (ref.null $Object.array) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
+  )
+ )
+)
+
 ;;; CLASS  Foo
 (type $nullability.Nullability.Foo (struct
  (field $vtable (ref null $nullability.Nullability.Foo.vtable))
@@ -138,7 +171,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -255,7 +288,7 @@
  (block $return.label
   (block
    ;; ArrayList.this.ArrayList.<init>();
-   
+   (drop (call $m_<init>__void@java.util.ArrayList (local.get $this)))
   )
  )
  (local.get $this)
@@ -290,7 +323,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -346,7 +379,7 @@
  (block $return.label
   (block
    ;; return Comparator.this.reversed();
-   (local.set $return.value (ref.null $java.lang.Object))
+   (local.set $return.value (call $m_reversed__java_util_Comparator@java.util.Comparator (ref.null $java.lang.Object)))
    (br $return.label)
   )
  )
@@ -365,7 +398,7 @@
  (block $return.label
   (block
    ;; return Comparator.this.thenComparing(arg0);
-   (local.set $return.value (ref.null $java.lang.Object))
+   (local.set $return.value (call $m_thenComparing__java_util_Comparator__java_util_Comparator@java.util.Comparator (ref.null $java.lang.Object)(local.get $arg0)))
    (br $return.label)
   )
  )
@@ -385,7 +418,7 @@
  (block $return.label
   (block
    ;; return Comparator.this.thenComparing(arg0,arg1);
-   (local.set $return.value (ref.null $java.lang.Object))
+   (local.set $return.value (call $m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator@java.util.Comparator (ref.null $java.lang.Object)(local.get $arg0)(local.get $arg1)))
    (br $return.label)
   )
  )
@@ -404,7 +437,7 @@
  (block $return.label
   (block
    ;; return Comparator.this.thenComparing(arg0);
-   (local.set $return.value (ref.null $java.lang.Object))
+   (local.set $return.value (call $m_thenComparing__java_util_function_Function__java_util_Comparator@java.util.Comparator (ref.null $java.lang.Object)(local.get $arg0)))
    (br $return.label)
   )
  )
@@ -423,7 +456,7 @@
  (block $return.label
   (block
    ;; return Comparator.this.thenComparingDouble(arg0);
-   (local.set $return.value (ref.null $java.lang.Object))
+   (local.set $return.value (call $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator@java.util.Comparator (ref.null $java.lang.Object)(local.get $arg0)))
    (br $return.label)
   )
  )
@@ -442,7 +475,7 @@
  (block $return.label
   (block
    ;; return Comparator.this.thenComparingInt(arg0);
-   (local.set $return.value (ref.null $java.lang.Object))
+   (local.set $return.value (call $m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator@java.util.Comparator (ref.null $java.lang.Object)(local.get $arg0)))
    (br $return.label)
   )
  )
@@ -461,7 +494,7 @@
  (block $return.label
   (block
    ;; return Comparator.this.thenComparingLong(arg0);
-   (local.set $return.value (ref.null $java.lang.Object))
+   (local.set $return.value (call $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator@java.util.Comparator (ref.null $java.lang.Object)(local.get $arg0)))
    (br $return.label)
   )
  )
@@ -498,7 +531,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -554,7 +587,7 @@
  (block $return.label
   (block
    ;; return Comparator.this.reversed();
-   (local.set $return.value (ref.null $java.lang.Object))
+   (local.set $return.value (call $m_reversed__java_util_Comparator@java.util.Comparator (ref.null $java.lang.Object)))
    (br $return.label)
   )
  )
@@ -573,7 +606,7 @@
  (block $return.label
   (block
    ;; return Comparator.this.thenComparing(arg0);
-   (local.set $return.value (ref.null $java.lang.Object))
+   (local.set $return.value (call $m_thenComparing__java_util_Comparator__java_util_Comparator@java.util.Comparator (ref.null $java.lang.Object)(local.get $arg0)))
    (br $return.label)
   )
  )
@@ -593,7 +626,7 @@
  (block $return.label
   (block
    ;; return Comparator.this.thenComparing(arg0,arg1);
-   (local.set $return.value (ref.null $java.lang.Object))
+   (local.set $return.value (call $m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator@java.util.Comparator (ref.null $java.lang.Object)(local.get $arg0)(local.get $arg1)))
    (br $return.label)
   )
  )
@@ -612,7 +645,7 @@
  (block $return.label
   (block
    ;; return Comparator.this.thenComparing(arg0);
-   (local.set $return.value (ref.null $java.lang.Object))
+   (local.set $return.value (call $m_thenComparing__java_util_function_Function__java_util_Comparator@java.util.Comparator (ref.null $java.lang.Object)(local.get $arg0)))
    (br $return.label)
   )
  )
@@ -631,7 +664,7 @@
  (block $return.label
   (block
    ;; return Comparator.this.thenComparingDouble(arg0);
-   (local.set $return.value (ref.null $java.lang.Object))
+   (local.set $return.value (call $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator@java.util.Comparator (ref.null $java.lang.Object)(local.get $arg0)))
    (br $return.label)
   )
  )
@@ -650,7 +683,7 @@
  (block $return.label
   (block
    ;; return Comparator.this.thenComparingInt(arg0);
-   (local.set $return.value (ref.null $java.lang.Object))
+   (local.set $return.value (call $m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator@java.util.Comparator (ref.null $java.lang.Object)(local.get $arg0)))
    (br $return.label)
   )
  )
@@ -669,7 +702,7 @@
  (block $return.label
   (block
    ;; return Comparator.this.thenComparingLong(arg0);
-   (local.set $return.value (ref.null $java.lang.Object))
+   (local.set $return.value (call $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator@java.util.Comparator (ref.null $java.lang.Object)(local.get $arg0)))
    (br $return.label)
   )
  )
@@ -701,7 +734,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -764,7 +797,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)

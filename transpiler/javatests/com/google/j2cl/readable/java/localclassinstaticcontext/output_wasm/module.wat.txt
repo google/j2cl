@@ -21,7 +21,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -61,7 +61,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -87,7 +87,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -114,7 +114,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -154,7 +154,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -180,7 +180,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -208,7 +208,9 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   ;; C.this.$init();
+   (call $$init__void_$p_localclassinstaticcontext_LocalClassInStaticContext_C@localclassinstaticcontext.LocalClassInStaticContext.C (local.get $this))
   )
  )
  (local.get $this)
@@ -234,6 +236,17 @@
 )
 (elem declare func $m_test__void@localclassinstaticcontext.LocalClassInStaticContext.C)
 
+;;; void C.$init()
+(func $$init__void_$p_localclassinstaticcontext_LocalClassInStaticContext_C@localclassinstaticcontext.LocalClassInStaticContext.C
+ (param $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.C))
+ (block $return.label
+  (block
+   ;; (C.this.f = 1);
+   (struct.set $localclassinstaticcontext.LocalClassInStaticContext.C $f@localclassinstaticcontext.LocalClassInStaticContext.C(local.get $this) (i32.const 1))
+  )
+ )
+)
+
 ;;; CLASS  D
 (type $localclassinstaticcontext.LocalClassInStaticContext.C.1D (struct
  (field $vtable (ref null $localclassinstaticcontext.LocalClassInStaticContext.C.1D.vtable))
@@ -256,7 +269,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)

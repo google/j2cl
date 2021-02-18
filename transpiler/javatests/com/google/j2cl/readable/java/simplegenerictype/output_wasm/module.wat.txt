@@ -25,7 +25,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; (SimpleGenericType.this.first = t);
    (struct.set $simplegenerictype.SimpleGenericType $first@simplegenerictype.SimpleGenericType(local.get $this) (local.get $t))
    ;; (SimpleGenericType.this.second = s);

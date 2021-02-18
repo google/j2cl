@@ -22,10 +22,23 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   ;; PublicInstanceFields.this.$init();
+   (call $$init__void_$p_publicinstancefields_PublicInstanceFields@publicinstancefields.PublicInstanceFields (local.get $this))
   )
  )
  (local.get $this)
+)
+
+;;; void PublicInstanceFields.$init()
+(func $$init__void_$p_publicinstancefields_PublicInstanceFields@publicinstancefields.PublicInstanceFields
+ (param $this (ref null $publicinstancefields.PublicInstanceFields))
+ (block $return.label
+  (block
+   ;; (PublicInstanceFields.this.a = 1);
+   (struct.set $publicinstancefields.PublicInstanceFields $a@publicinstancefields.PublicInstanceFields(local.get $this) (i32.const 1))
+  )
+ )
 )
 
 ;;; Code for publicinstancefields.PublicInstanceFields [vtable]

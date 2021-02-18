@@ -25,7 +25,9 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   ;; Main.this.$init();
+   (call $$init__void_$p_jsasync_Main@jsasync.Main (local.get $this))
   )
  )
  (local.get $this)
@@ -148,6 +150,17 @@
  (local.get $return.value)
 )
 
+;;; void Main.$init()
+(func $$init__void_$p_jsasync_Main@jsasync.Main
+ (param $this (ref null $jsasync.Main))
+ (block $return.label
+  (block
+   ;; (Main.this.x = jsasync.Main.Promise.resolve(10));
+   (struct.set $jsasync.Main $x@jsasync.Main(local.get $this) (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (ref.null $java.lang.Integer)))
+  )
+ )
+)
+
 ;;; CLASS  <anonymous> implements BaseInterface
 (type $jsasync.Main.1 (struct
  (field $vtable (ref null $jsasync.Main.1.vtable))
@@ -170,7 +183,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -216,7 +229,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -262,7 +275,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -338,7 +351,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)

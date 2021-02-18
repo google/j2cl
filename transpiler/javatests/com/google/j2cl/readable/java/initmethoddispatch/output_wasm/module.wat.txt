@@ -21,7 +21,7 @@
  (block $return.label
   (block
    ;; InitMethodDispatch.this.InitMethodDispatch.<init>(1);
-   
+   (drop (call $m_<init>__int__void_$pp_initmethoddispatch@initmethoddispatch.InitMethodDispatch (local.get $this)(i32.const 1)))
   )
  )
  (local.get $this)
@@ -35,7 +35,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; (InitMethodDispatch.this.value = i);
    (struct.set $initmethoddispatch.InitMethodDispatch $value@initmethoddispatch.InitMethodDispatch(local.get $this) (local.get $i))
   )

@@ -21,7 +21,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -62,7 +62,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -91,10 +91,25 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   ;; InnerInnerClass.this.$init();
+   (call $$init__void_$p_nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (local.get $this))
   )
  )
  (local.get $this)
+)
+
+;;; void InnerInnerClass.$init()
+(func $$init__void_$p_nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass
+ (param $this (ref null $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass))
+ (block $return.label
+  (block
+   ;; (InnerInnerClass.this.x = InnerInnerClass.this.this);
+   (struct.set $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass $x@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass(local.get $this) (struct.get $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass $this@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass(local.get $this)))
+   ;; (InnerInnerClass.this.y = InnerInnerClass.this.this.this);
+   (struct.set $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass $y@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass(local.get $this) (struct.get $nestedinstanceinnerclass.OuterClass.InnerClass $this@nestedinstanceinnerclass.OuterClass.InnerClass(struct.get $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass $this@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass(local.get $this))))
+  )
+ )
 )
 
 ;;; Code for nestedinstanceinnerclass.OuterClass [vtable]

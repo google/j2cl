@@ -40,7 +40,7 @@
  (block $return.label
   (block
    ;; Exception.this.Exception.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Exception (local.get $this)))
   )
  )
  (local.get $this)
@@ -54,7 +54,7 @@
  (block $return.label
   (block
    ;; Exception.this.Exception.<init>(cause);
-   
+   (drop (call $m_<init>__java_lang_Throwable__void@java.lang.Exception (local.get $this)(local.get $cause)))
   )
  )
  (local.get $this)
@@ -101,7 +101,7 @@
  (block $return.label
   (block
    ;; Exception.this.Exception.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Exception (local.get $this)))
   )
  )
  (local.get $this)
@@ -115,7 +115,7 @@
  (block $return.label
   (block
    ;; MyJsException.this.MyJsException.<init>();
-   
+   (drop (call $m_<init>__void@exception.MyJsException (local.get $this)))
   )
  )
  (local.get $this)

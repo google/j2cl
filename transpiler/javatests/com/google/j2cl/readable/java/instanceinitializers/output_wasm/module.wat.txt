@@ -21,10 +21,25 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   ;; InstanceInitializers.this.$init();
+   (call $$init__void_$p_instanceinitializers_InstanceInitializers@instanceinitializers.InstanceInitializers (local.get $this))
   )
  )
  (local.get $this)
+)
+
+;;; void InstanceInitializers.$init()
+(func $$init__void_$p_instanceinitializers_InstanceInitializers@instanceinitializers.InstanceInitializers
+ (param $this (ref null $instanceinitializers.InstanceInitializers))
+ (block $return.label
+  (block
+   ;; (InstanceInitializers.this.field = 1);
+   (struct.set $instanceinitializers.InstanceInitializers $field@instanceinitializers.InstanceInitializers(local.get $this) (i32.const 1))
+   ;; (InstanceInitializers.this.field = 2);
+   (struct.set $instanceinitializers.InstanceInitializers $field@instanceinitializers.InstanceInitializers(local.get $this) (i32.const 2))
+  )
+ )
 )
 
 ;;; Code for instanceinitializers.InstanceInitializers [vtable]

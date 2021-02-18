@@ -21,7 +21,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -35,7 +35,7 @@
  (block $return.label
   (block
    ;; Interface.this.defaultMethod();
-   
+   (call $m_defaultMethod__void@jstypewithdefault.Interface (ref.null $java.lang.Object))
   )
  )
 )

@@ -21,7 +21,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -67,7 +67,7 @@
  (block $return.label
   (block
    ;; Interface.this.privateMethod(t);
-   
+   (call $m_privateMethod__java_lang_Object__void_$p_interfaces_Main_Interface@interfaces.Main.Interface (ref.null $java.lang.Object)(local.get $t))
   )
  )
 )
@@ -100,7 +100,7 @@
  (block $return.label
   (block
    ;; Interface.this.defaultMethod(s);
-   
+   (call $m_defaultMethod__java_lang_Object__void@interfaces.Main.Interface (ref.null $java.lang.Object)(local.get $s))
   )
  )
 )
@@ -130,7 +130,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -172,7 +172,7 @@
  (block $return.label
   (block
    ;; SubInterface.this.defaultMethod(arg0);
-   
+   (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (ref.null $java.lang.Object)(local.get $arg0))
   )
  )
 )
@@ -201,7 +201,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -231,7 +231,7 @@
  (block $return.label
   (block
    ;; SubInterface.this.defaultMethod(arg0);
-   
+   (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (ref.null $java.lang.Object)(local.get $arg0))
   )
  )
 )

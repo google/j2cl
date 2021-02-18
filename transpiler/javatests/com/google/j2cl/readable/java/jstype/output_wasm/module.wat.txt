@@ -29,7 +29,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -94,7 +94,7 @@
    ;; SomeJsType.this.publicMethod();
    (call_ref (local.get $this)(struct.get $jstype.SomeJsType.vtable $m_publicMethod__void (struct.get $jstype.SomeJsType $vtable(local.get $this))))
    ;; SomeJsType.this.privateMethod();
-   
+   (call $m_privateMethod__void_$p_jstype_SomeJsType@jstype.SomeJsType (local.get $this))
    ;; SomeJsType.this.packageMethod();
    (call_ref (local.get $this)(struct.get $jstype.SomeJsType.vtable $m_packageMethod__void_$pp_jstype (struct.get $jstype.SomeJsType $vtable(local.get $this))))
    ;; SomeJsType.this.protectedMethod();

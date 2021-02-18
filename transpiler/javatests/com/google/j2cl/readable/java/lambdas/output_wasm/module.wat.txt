@@ -38,7 +38,9 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   ;; Lambdas.this.$init();
+   (call $$init__void_$p_lambdas_Lambdas@lambdas.Lambdas (local.get $this))
   )
  )
  (local.get $this)
@@ -476,6 +478,17 @@
 )
 (elem declare func $m_testDefaultMethodsInIntersectionAdaptor__void@lambdas.Lambdas)
 
+;;; void Lambdas.$init()
+(func $$init__void_$p_lambdas_Lambdas@lambdas.Lambdas
+ (param $this (ref null $lambdas.Lambdas))
+ (block $return.label
+  (block
+   ;; (Lambdas.this.field = 100);
+   (struct.set $lambdas.Lambdas $field@lambdas.Lambdas(local.get $this) (i32.const 100))
+  )
+ )
+)
+
 ;;; INTERFACE  FunctionalInterface
 
 ;;; INTERFACE  Functional
@@ -502,7 +515,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -548,7 +561,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -636,7 +649,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -664,7 +677,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -705,7 +718,7 @@
  (block $return.label
   (block
    ;; Parent.this.Parent.<init>();
-   
+   (drop (call $m_<init>__void_$p_lambdas_Lambdas_Parent@lambdas.Lambdas.Parent (local.get $this)))
   )
  )
  (local.get $this)
@@ -756,7 +769,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)

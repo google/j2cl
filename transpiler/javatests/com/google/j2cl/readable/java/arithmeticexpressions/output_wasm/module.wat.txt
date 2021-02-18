@@ -33,7 +33,9 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   ;; ArithmeticExpressions.this.$init();
+   (call $$init__void_$p_arithmeticexpressions_ArithmeticExpressions@arithmeticexpressions.ArithmeticExpressions (local.get $this))
   )
  )
  (local.get $this)
@@ -555,6 +557,23 @@
  (local.get $return.value)
 )
 
+;;; void ArithmeticExpressions.$init()
+(func $$init__void_$p_arithmeticexpressions_ArithmeticExpressions@arithmeticexpressions.ArithmeticExpressions
+ (param $this (ref null $arithmeticexpressions.ArithmeticExpressions))
+ (local $$value i64)
+ (block $return.label
+  (block
+   ;; (ArithmeticExpressions.this.bar = (long $value = arithmeticexpressions.ArithmeticExpressions.foo,(arithmeticexpressions.ArithmeticExpressions.foo = (arithmeticexpressions.ArithmeticExpressions.foo + 1)),$value));
+   (struct.set $arithmeticexpressions.ArithmeticExpressions $bar@arithmeticexpressions.ArithmeticExpressions(local.get $this) (block (result i64)
+    
+    (local.set $$value (global.get $foo@arithmeticexpressions.ArithmeticExpressions))
+    (global.set $foo@arithmeticexpressions.ArithmeticExpressions (i64.add (global.get $foo@arithmeticexpressions.ArithmeticExpressions) (i64.const 1)))
+    (local.get $$value)
+   ))
+  )
+ )
+)
+
 ;;; CLASS  Ref
 (type $arithmeticexpressions.ArithmeticExpressions.1Ref (struct
  (field $vtable (ref null $arithmeticexpressions.ArithmeticExpressions.1Ref.vtable))
@@ -577,7 +596,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)

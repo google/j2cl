@@ -21,7 +21,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -67,7 +67,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -115,10 +115,23 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   ;; $1InnerInnerClass.this.$init();
+   (call $$init__void_$p_nestedlocalclasses_NestedLocalClasses_1InnerClass_1InnerInnerClass@nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass (local.get $this))
   )
  )
  (local.get $this)
+)
+
+;;; void InnerInnerClass.$init()
+(func $$init__void_$p_nestedlocalclasses_NestedLocalClasses_1InnerClass_1InnerInnerClass@nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass
+ (param $this (ref null $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass))
+ (block $return.label
+  (block
+   ;; ($1InnerInnerClass.this.fieldInInnerInnerClass = ($1InnerInnerClass.this.localVar + $1InnerInnerClass.this.localVarInInnerClass));
+   (struct.set $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass $fieldInInnerInnerClass@nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass(local.get $this) (i32.add (struct.get $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass $localVar@nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass(local.get $this)) (struct.get $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass $localVarInInnerClass@nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass(local.get $this))))
+  )
+ )
 )
 
 ;;; CLASS  ClassIndirectlyCapturingLocal
@@ -144,10 +157,23 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   ;; $1ClassIndirectlyCapturingLocal.this.$init();
+   (call $$init__void_$p_nestedlocalclasses_NestedLocalClasses_1InnerClass_1ClassIndirectlyCapturingLocal@nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal (local.get $this))
   )
  )
  (local.get $this)
+)
+
+;;; void ClassIndirectlyCapturingLocal.$init()
+(func $$init__void_$p_nestedlocalclasses_NestedLocalClasses_1InnerClass_1ClassIndirectlyCapturingLocal@nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal
+ (param $this (ref null $nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal))
+ (block $return.label
+  (block
+   ;; $1ClassIndirectlyCapturingLocal.this.this.new $1InnerInnerClass.<init>();
+   (drop (call $m_<init>__void_$pp_nestedlocalclasses@nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass (struct.new_with_rtt $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass (global.get $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass.vtable) (ref.null $nestedlocalclasses.NestedLocalClasses.1InnerClass) (i32.const 0) (i32.const 0) (i32.const 0) (global.get $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass.rtt))))
+  )
+ )
 )
 
 ;;; INTERFACE  InterfaceWithThisReference
@@ -186,7 +212,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -200,7 +226,7 @@
  (block $return.label
   (block
    ;; InterfaceWithThisReference.this.foo();
-   
+   (call $m_foo__void@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference (ref.null $java.lang.Object))
   )
  )
 )
@@ -229,7 +255,7 @@
  (block $return.label
   (block
    ;; $1Super.this.$1Super.<init>();
-   
+   (drop (ref.null $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super))
   )
  )
  (local.get $this)

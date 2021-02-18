@@ -21,10 +21,11 @@ import static com.google.j2cl.integration.testing.Asserts.assertTrue;
  * Test instance initialization order.
  */
 public class Main {
-  public static int initStep = 1;
+  public static int initStep;
 
   public static void main(String... args) {
-    Main main = new Main();
+    initStep = 1;
+    new Main();
     assertTrue(Main.initStep == 6);
   }
 

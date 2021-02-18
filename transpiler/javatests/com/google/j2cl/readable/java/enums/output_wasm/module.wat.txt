@@ -29,7 +29,7 @@
  (block $return.label
   (block
    ;; Enum.this.Enum.<init>();
-   
+   (drop (ref.null $java.lang.Enum))
   )
  )
  (local.get $this)
@@ -69,7 +69,9 @@
  (block $return.label
   (block
    ;; Enum.this.Enum.<init>();
-   
+   (drop (ref.null $java.lang.Enum))
+   ;; Enum2.this.$init();
+   (call $$init__void_$p_enums_Enum2@enums.Enum2 (local.get $this))
    ;; (Enum2.this.foo = foo);
    (struct.set $enums.Enum2 $foo@enums.Enum2(local.get $this) (local.get $foo))
   )
@@ -85,7 +87,7 @@
  (block $return.label
   (block
    ;; Enum2.this.Enum2.<init>(foo.ordinal());
-   
+   (drop (call $m_<init>__int__void_$p_enums_Enum2@enums.Enum2 (local.get $this)(call_ref (local.get $foo)(struct.get $java.lang.Enum.vtable $m_ordinal__int (struct.get $java.lang.Enum $vtable(local.get $foo))))))
   )
  )
  (local.get $this)
@@ -99,7 +101,7 @@
  (block $return.label
   (block
    ;; Enum2.this.Enum2.<init>(<expr>);
-   
+   (drop (call $m_<init>__int__void_$p_enums_Enum2@enums.Enum2 (local.get $this)(array.len $Object.array.elements (struct.get $Object.array $elements (local.get $somePars)))))
   )
  )
  (local.get $this)
@@ -118,6 +120,17 @@
   )
  )
  (local.get $return.value)
+)
+
+;;; void Enum2.$init()
+(func $$init__void_$p_enums_Enum2@enums.Enum2
+ (param $this (ref null $enums.Enum2))
+ (block $return.label
+  (block
+   ;; (Enum2.this.foo = enums.Enum1.V1.ordinal());
+   (struct.set $enums.Enum2 $foo@enums.Enum2(local.get $this) (call_ref (global.get $V1@enums.Enum1)(struct.get $java.lang.Enum.vtable $m_ordinal__int (struct.get $java.lang.Enum $vtable(global.get $V1@enums.Enum1)))))
+  )
+ )
 )
 
 ;;; CLASS  <anonymous> extends Enum2
@@ -149,7 +162,7 @@
  (block $return.label
   (block
    ;; Enum2.this.Enum2.<init>($_0);
-   
+   (drop (call $m_<init>__int__void_$p_enums_Enum2@enums.Enum2 (local.get $this)(local.get $$_0)))
   )
  )
  (local.get $this)
@@ -184,7 +197,7 @@
  (block $return.label
   (block
    ;; Enum.this.Enum.<init>();
-   
+   (drop (ref.null $java.lang.Enum))
   )
  )
  (local.get $this)

@@ -290,40 +290,73 @@ final class ExpressionTranspiler {
       @Override
       public boolean enterMethodCall(MethodCall methodCall) {
         MethodDescriptor target = methodCall.getTarget();
-        if (target.isStatic()) {
-          sourceBuilder.append("(call " + environment.getMethodImplementationName(target) + " ");
-          renderTypedExpressions(target.getParameterTypeDescriptors(), methodCall.getArguments());
-          sourceBuilder.append(")");
-        } else if (isClassDynamicDispatch(methodCall)) {
-          sourceBuilder.append("(call_ref ");
 
-          // Pass the implicit parameter.
-          Expression implicitParameter = methodCall.getQualifier();
-          renderTypedExpression(target.getEnclosingTypeDescriptor(), implicitParameter);
-
-          // Pass the rest of the parameters.
-          renderTypedExpressions(target.getParameterTypeDescriptors(), methodCall.getArguments());
-
-          // Retrieve the method reference from the vtable to provide it to call_ref.
-          sourceBuilder.append(
-              format(
-                  "(struct.get %s %s (struct.get %s $vtable",
-                  environment.getWasmVtableTypeName(target.getEnclosingTypeDescriptor()),
-                  environment.getVtableSlot(target),
-                  environment.getWasmTypeName(target.getEnclosingTypeDescriptor())));
-          renderTypedExpression(target.getEnclosingTypeDescriptor(), methodCall.getQualifier());
-
-          sourceBuilder.append("))");
-          sourceBuilder.append(")");
-        } else {
-          // TODO(rluble): remove once all method call types are implemented.
-          return super.enterMethodCall(methodCall);
+        // TODO(b/170691045): remove once nested class constructors are normalized.
+        DeclaredTypeDescriptor enclosingTypeDescriptor = target.getEnclosingTypeDescriptor();
+        if (isNestedClassConstructor(target)
+            // TODO(b/170691046): remove once enum normalization is done.
+            || isEnumClassConstrcutor(target)) {
+          render(enclosingTypeDescriptor.getDefaultValue());
+          return false;
         }
-        return false;
+
+        if (methodCall.isPolymorphic()) {
+          if (target.isClassDynamicDispatch()) {
+            sourceBuilder.append("(call_ref ");
+
+            // Pass the implicit parameter.
+            Expression implicitParameter = methodCall.getQualifier();
+            renderTypedExpression(enclosingTypeDescriptor, implicitParameter);
+
+            // Pass the rest of the parameters.
+            renderTypedExpressions(target.getParameterTypeDescriptors(), methodCall.getArguments());
+
+            // Retrieve the method reference from the vtable to provide it to call_ref.
+            sourceBuilder.append(
+                format(
+                    "(struct.get %s %s (struct.get %s $vtable",
+                    environment.getWasmVtableTypeName(enclosingTypeDescriptor),
+                    environment.getVtableSlot(target),
+                    environment.getWasmTypeName(enclosingTypeDescriptor)));
+            renderTypedExpression(enclosingTypeDescriptor, methodCall.getQualifier());
+
+            sourceBuilder.append("))");
+            sourceBuilder.append(")");
+            return false;
+          }
+        } else {
+          // Non polymorphic methods are called directly, regardless of whether they are
+          // instance methods or not.
+          sourceBuilder.append("(call " + environment.getMethodImplementationName(target) + " ");
+          if (target.isStatic()) {
+            renderTypedExpressions(target.getParameterTypeDescriptors(), methodCall.getArguments());
+          } else {
+            // Constructors, non static private methods and super method calls receive the qualifier
+            // as the first parameter, then the corresponding arguments.
+            render(methodCall.getQualifier());
+            renderTypedExpressions(target.getParameterTypeDescriptors(), methodCall.getArguments());
+          }
+
+          sourceBuilder.append(")");
+          return false;
+        }
+        // TODO(rluble): remove once all method call types are implemented.
+        return super.enterMethodCall(methodCall);
       }
 
-      private boolean isClassDynamicDispatch(MethodCall methodCall) {
-        return methodCall.isPolymorphic() && methodCall.getTarget().isClassDynamicDispatch();
+      // TODO(b/170691045): remove once nested class constructors are normalized.
+      private boolean isNestedClassConstructor(MethodDescriptor methodDescriptor) {
+        return methodDescriptor.isConstructor()
+            && methodDescriptor
+                .getEnclosingTypeDescriptor()
+                .getTypeDeclaration()
+                .isCapturingEnclosingInstance();
+      }
+
+      // TODO(b/170691046): remove once enum normalization is done.
+      private boolean isEnumClassConstrcutor(MethodDescriptor methodDescriptor) {
+        return methodDescriptor.isConstructor()
+            && methodDescriptor.isMemberOf(TypeDescriptors.get().javaLangEnum);
       }
 
       @Override
@@ -495,6 +528,11 @@ final class ExpressionTranspiler {
   }
 
   public static boolean returnsVoid(Expression expression) {
+    if (expression instanceof MethodCall && ((MethodCall) expression).getTarget().isConstructor()) {
+      // This is a super() or this() call and the generated constructor for WASM is actually returns
+      // the instance (as opposed to how it is modeled in the AST where the return is void).
+      return false;
+    }
     // Even though per our Java based AST an assignment is an expression that returns the value of
     // its rhs, the AST is transformed so that the resulting value is never used and the assignment
     // can be safely considered not to produce a value.

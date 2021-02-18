@@ -20,10 +20,25 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   ;; Main.this.$init();
+   (call $$init__void_$p_unreachableclass_Main@unreachableclass.Main (local.get $this))
   )
  )
  (local.get $this)
+)
+
+;;; void Main.$init()
+(func $$init__void_$p_unreachableclass_Main@unreachableclass.Main
+ (param $this (ref null $unreachableclass.Main))
+ (local $e (ref null $java.lang.RuntimeException))
+ (local $$qualifier (ref null $unreachableclass.Main.1A))
+ (block $return.label
+  (block
+   ;; try {
+   ;; unimplemented statement TryStatement
+  )
+ )
 )
 
 ;;; CLASS  A
@@ -48,7 +63,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -87,7 +102,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -123,7 +138,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)

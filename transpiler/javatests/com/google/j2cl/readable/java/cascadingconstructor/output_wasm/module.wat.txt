@@ -24,7 +24,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; (CascadingConstructor.this.a = a);
    (struct.set $cascadingconstructor.CascadingConstructor $a@cascadingconstructor.CascadingConstructor(local.get $this) (local.get $a))
    ;; (CascadingConstructor.this.b = b);
@@ -42,7 +42,7 @@
  (block $return.label
   (block
    ;; CascadingConstructor.this.CascadingConstructor.<init>(a,(a * 2));
-   
+   (drop (call $m_<init>__int__int__void_$p_cascadingconstructor_CascadingConstructor@cascadingconstructor.CascadingConstructor (local.get $this)(local.get $a)(i32.mul (local.get $a) (i32.const 2))))
   )
  )
  (local.get $this)

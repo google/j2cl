@@ -23,10 +23,27 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   ;; ValueOfNullable.this.$init();
+   (call $$init__void_$p_valueofnullable_ValueOfNullable@valueofnullable.ValueOfNullable (local.get $this))
   )
  )
  (local.get $this)
+)
+
+;;; void ValueOfNullable.$init()
+(func $$init__void_$p_valueofnullable_ValueOfNullable@valueofnullable.ValueOfNullable
+ (param $this (ref null $valueofnullable.ValueOfNullable))
+ (block $return.label
+  (block
+   ;; (ValueOfNullable.this.nullableString = "b");
+   (struct.set $valueofnullable.ValueOfNullable $nullableString@valueofnullable.ValueOfNullable(local.get $this) (ref.null $java.lang.String))
+   ;; (ValueOfNullable.this.someChar = 97);
+   (struct.set $valueofnullable.ValueOfNullable $someChar@valueofnullable.ValueOfNullable(local.get $this) (i32.const 97))
+   ;; (ValueOfNullable.this.result = (ValueOfNullable.this.someChar + ValueOfNullable.this.nullableString));
+   (struct.set $valueofnullable.ValueOfNullable $result@valueofnullable.ValueOfNullable(local.get $this) (ref.null $java.lang.String))
+  )
+ )
 )
 
 ;;; Code for valueofnullable.ValueOfNullable [vtable]

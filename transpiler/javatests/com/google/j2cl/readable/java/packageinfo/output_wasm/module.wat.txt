@@ -21,7 +21,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -48,7 +48,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -76,10 +76,23 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   ;; Foo.this.$init();
+   (call $$init__void_$p_packageinfo_subpackage_Foo@packageinfo.subpackage.Foo (local.get $this))
   )
  )
  (local.get $this)
+)
+
+;;; void Foo.$init()
+(func $$init__void_$p_packageinfo_subpackage_Foo@packageinfo.subpackage.Foo
+ (param $this (ref null $packageinfo.subpackage.Foo))
+ (block $return.label
+  (block
+   ;; (Foo.this.outer = new Outer.<init>());
+   (struct.set $packageinfo.subpackage.Foo $outer@packageinfo.subpackage.Foo(local.get $this) (call $m_<init>__void@packageinfo.Outer (struct.new_with_rtt $packageinfo.Outer (global.get $packageinfo.Outer.vtable) (global.get $packageinfo.Outer.rtt))))
+  )
+ )
 )
 
 ;;; Code for packageinfo.Outer [vtable]

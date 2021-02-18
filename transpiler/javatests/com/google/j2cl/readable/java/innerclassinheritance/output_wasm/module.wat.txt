@@ -22,7 +22,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -62,7 +62,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -105,7 +105,7 @@
  (block $return.label
   (block
    ;; ParentOuter.this.ParentOuter.<init>();
-   
+   (drop (call $m_<init>__void_$pp_innerclassinheritance@innerclassinheritance.ParentOuter (local.get $this)))
   )
  )
  (local.get $this)
@@ -169,7 +169,7 @@
  (block $return.label
   (block
    ;; ParentInner.this.ParentInner.<init>();
-   
+   (drop (call $m_<init>__void_$pp_innerclassinheritance@innerclassinheritance.ParentInner (local.get $this)))
   )
  )
  (local.get $this)
@@ -267,7 +267,9 @@
  (block $return.label
   (block
    ;; ChildClass.this.ChildClass.<init>();
-   
+   (drop (call $m_<init>__void@innerclassinheritance.ChildClass (local.get $this)))
+   ;; $1LocalClass.this.$init();
+   (call $$init__void_$p_innerclassinheritance_ChildClass_1LocalClass@innerclassinheritance.ChildClass.1LocalClass (local.get $this))
   )
  )
  (local.get $this)
@@ -306,6 +308,17 @@
  )
 )
 (elem declare func $m_test__void@innerclassinheritance.ChildClass.1LocalClass)
+
+;;; void LocalClass.$init()
+(func $$init__void_$p_innerclassinheritance_ChildClass_1LocalClass@innerclassinheritance.ChildClass.1LocalClass
+ (param $this (ref null $innerclassinheritance.ChildClass.1LocalClass))
+ (block $return.label
+  (block
+   ;; ($1LocalClass.this.object = $1LocalClass.this);
+   (struct.set $innerclassinheritance.ChildClass.1LocalClass $object@innerclassinheritance.ChildClass.1LocalClass(local.get $this) (local.get $this))
+  )
+ )
+)
 ;;; Code for innerclassinheritance.MultipleNestings
 
 ;;; CLASS  MultipleNestings
@@ -329,7 +342,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -369,7 +382,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -411,7 +424,7 @@
  (block $return.label
   (block
    ;; Parent.this.Parent.<init>();
-   
+   (drop (ref.null $innerclassinheritance.MultipleNestings.Parent))
   )
  )
  (local.get $this)
@@ -454,7 +467,7 @@
  (block $return.label
   (block
    ;; Parent.this.Parent.<init>();
-   
+   (drop (ref.null $innerclassinheritance.MultipleNestings.Parent))
   )
  )
  (local.get $this)

@@ -32,7 +32,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; (Main.this.field = f);
    (struct.set $jsvarargs.Main $field@jsvarargs.Main(local.get $this) (local.get $f))
   )
@@ -440,7 +440,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -468,7 +468,7 @@
  (block $return.label
   (block
    ;; NativeObject.this.NativeObject.<init>(args);
-   
+   (drop (call $m_<init>__arrayOf_java_lang_Object__void@jsvarargs.Main.NativeObject (local.get $this)(local.get $args)))
   )
  )
  (local.get $this)
@@ -497,7 +497,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -535,7 +535,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -592,7 +592,7 @@
  (block $return.label
   (block
    ;; Main.this.Main.<init>(10);
-   
+   (drop (call $m_<init>__int__void@jsvarargs.Main (local.get $this)(i32.const 10)))
   )
  )
  (local.get $this)
@@ -668,7 +668,7 @@
  (block $return.label
   (block
    ;; Main.this.Main.<init>(0);
-   
+   (drop (call $m_<init>__int__void@jsvarargs.Main (local.get $this)(i32.const 0)))
   )
  )
  (local.get $this)
@@ -696,7 +696,7 @@
  (block $return.label
   (block
    ;; Object.this.Object.<init>();
-   
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -711,18 +711,18 @@
  (block $return.label
   (block
    ;; InnerClass.this.this.f3(1,[1,2]);
-   (drop (i32.const 0))
+   (drop (call $m_f3__int__arrayOf_int__int@jsvarargs.Main (struct.get $jsvarargs.QualifiedSuperMethodCall.InnerClass $this@jsvarargs.QualifiedSuperMethodCall.InnerClass(local.get $this))(i32.const 1)(ref.null $int.array)))
    ;; InnerClass.this.this.f3(1,[]);
-   (drop (i32.const 0))
+   (drop (call $m_f3__int__arrayOf_int__int@jsvarargs.Main (struct.get $jsvarargs.QualifiedSuperMethodCall.InnerClass $this@jsvarargs.QualifiedSuperMethodCall.InnerClass(local.get $this))(i32.const 1)(ref.null $int.array)))
    ;; InnerClass.this.this.f3(1,new int[] {1,2});
-   (drop (i32.const 0))
+   (drop (call $m_f3__int__arrayOf_int__int@jsvarargs.Main (struct.get $jsvarargs.QualifiedSuperMethodCall.InnerClass $this@jsvarargs.QualifiedSuperMethodCall.InnerClass(local.get $this))(i32.const 1)(ref.null $int.array)))
    ;; InnerClass.this.this.f3(1,new int[] {});
-   (drop (i32.const 0))
+   (drop (call $m_f3__int__arrayOf_int__int@jsvarargs.Main (struct.get $jsvarargs.QualifiedSuperMethodCall.InnerClass $this@jsvarargs.QualifiedSuperMethodCall.InnerClass(local.get $this))(i32.const 1)(ref.null $int.array)))
    ;; int[] ints = new int[] {1,2};
    
    (local.set $ints (ref.null $int.array))
    ;; InnerClass.this.this.f3(1,ints);
-   (drop (i32.const 0))
+   (drop (call $m_f3__int__arrayOf_int__int@jsvarargs.Main (struct.get $jsvarargs.QualifiedSuperMethodCall.InnerClass $this@jsvarargs.QualifiedSuperMethodCall.InnerClass(local.get $this))(i32.const 1)(local.get $ints)))
   )
  )
 )
