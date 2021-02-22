@@ -40,6 +40,7 @@ import com.google.j2cl.transpiler.passes.ImplementInstanceOfs;
 import com.google.j2cl.transpiler.passes.ImplementJsFunctionCopyMethod;
 import com.google.j2cl.transpiler.passes.ImplementLambdaExpressions;
 import com.google.j2cl.transpiler.passes.ImplementStaticInitialization;
+import com.google.j2cl.transpiler.passes.ImplementStringCompileTimeConstants;
 import com.google.j2cl.transpiler.passes.ImplementSynchronizedStatements;
 import com.google.j2cl.transpiler.passes.InsertBitwiseOperatorBooleanCoercions;
 import com.google.j2cl.transpiler.passes.InsertBoxingConversions;
@@ -286,6 +287,7 @@ public enum Backend {
           new RewriteUnaryExpressions(),
           // Rewrite 'a || b' into 'a ? true : b' and 'a && b' into 'a ? b : false'
           new RewriteShortcutOperators(),
+          new ImplementStringCompileTimeConstants(),
           new NormalizeFieldInitialization(),
           new ImplementInstanceInitialization(),
           new NormalizeNestedClassConstructors(),
