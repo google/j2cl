@@ -23,6 +23,7 @@
 ;;; CLASS  AbstractType
 (type $typeannotations.AbstractType (struct
  (field $vtable (ref null $typeannotations.AbstractType.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $typeannotations.AbstractType.vtable (struct
  
@@ -69,6 +70,7 @@
 ;;; CLASS  AbstractTypeNonNull
 (type $typeannotations.AbstractTypeNonNull (struct
  (field $vtable (ref null $typeannotations.AbstractTypeNonNull.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $typeannotations.AbstractTypeNonNull.vtable (struct
  
@@ -115,6 +117,7 @@
 ;;; CLASS  Parent
 (type $typeannotations.Parent (struct
  (field $vtable (ref null $typeannotations.Parent.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $typeannotations.Parent.vtable (struct
  
@@ -172,7 +175,7 @@
  (block $return.label
   (block
    ;; return new ArrayList.<init>();
-   (local.set $return.value (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.vtable) (i32.const 0) (ref.null $Object.array) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
+   (local.set $return.value (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.vtable) (i32.const 0) (i32.const 0) (ref.null $Object.array) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
    (br $return.label)
   )
  )
@@ -183,6 +186,7 @@
 ;;; CLASS  ChildWithNullableParent
 (type $typeannotations.ChildWithNullableParent (struct
  (field $vtable (ref null $typeannotations.ChildWithNullableParent.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $typeannotations.ChildWithNullableParent.vtable (struct
  
@@ -273,6 +277,7 @@
 ;;; CLASS  ChildWithNonNullableParent
 (type $typeannotations.ChildWithNonNullableParent (struct
  (field $vtable (ref null $typeannotations.ChildWithNonNullableParent.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $typeannotations.ChildWithNonNullableParent.vtable (struct
  
@@ -363,6 +368,7 @@
 ;;; CLASS  TypeAnnotations
 (type $typeannotations.TypeAnnotations (struct
  (field $vtable (ref null $typeannotations.TypeAnnotations.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $typeannotations.TypeAnnotations.vtable (struct
  
@@ -393,7 +399,7 @@
   (block
    ;; List<String> list = new ArrayList.<init>();
    
-   (local.set $list (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.vtable) (i32.const 0) (ref.null $Object.array) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
+   (local.set $list (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.vtable) (i32.const 0) (i32.const 0) (ref.null $Object.array) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
   )
  )
 )

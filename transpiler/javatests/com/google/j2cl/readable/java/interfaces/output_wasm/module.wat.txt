@@ -3,6 +3,7 @@
 ;;; CLASS  Main
 (type $interfaces.Main (struct
  (field $vtable (ref null $interfaces.Main.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $interfaces.Main.vtable (struct
  
@@ -38,7 +39,7 @@
   (block
    ;; Interface i = new Implementor.<init>(Main.this);
    
-   (local.set $i (call $m_<init>__interfaces_Main__void_$pp_interfaces@interfaces.Main.Implementor (struct.new_with_rtt $interfaces.Main.Implementor (global.get $interfaces.Main.Implementor.vtable) (ref.null $interfaces.Main) (global.get $interfaces.Main.Implementor.rtt))(local.get $this)))
+   (local.set $i (call $m_<init>__interfaces_Main__void_$pp_interfaces@interfaces.Main.Implementor (struct.new_with_rtt $interfaces.Main.Implementor (global.get $interfaces.Main.Implementor.vtable) (i32.const 0) (ref.null $interfaces.Main) (global.get $interfaces.Main.Implementor.rtt))(local.get $this)))
    ;; i.interfaceMethod();
    
    ;; i.defaultMethod(null);
@@ -48,7 +49,7 @@
    ;; int x = ((new Implementor.<init>(Main.this),interfaces.Main.Interface.a) + interfaces.Main.Interface.b);
    
    (local.set $x (i32.add (block (result i32)
-    (drop (call $m_<init>__interfaces_Main__void_$pp_interfaces@interfaces.Main.Implementor (struct.new_with_rtt $interfaces.Main.Implementor (global.get $interfaces.Main.Implementor.vtable) (ref.null $interfaces.Main) (global.get $interfaces.Main.Implementor.rtt))(local.get $this)))
+    (drop (call $m_<init>__interfaces_Main__void_$pp_interfaces@interfaces.Main.Implementor (struct.new_with_rtt $interfaces.Main.Implementor (global.get $interfaces.Main.Implementor.vtable) (i32.const 0) (ref.null $interfaces.Main) (global.get $interfaces.Main.Implementor.rtt))(local.get $this)))
     (global.get $a@interfaces.Main.Interface)
    ) (global.get $b@interfaces.Main.Interface)))
   )
@@ -109,6 +110,7 @@
 ;;; CLASS  Implementor
 (type $interfaces.Main.Implementor (struct
  (field $vtable (ref null $interfaces.Main.Implementor.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@interfaces.Main.Implementor (mut (ref null $interfaces.Main)))
 ))
 (type $interfaces.Main.Implementor.vtable (struct
@@ -184,6 +186,7 @@
 ;;; CLASS  AbstractImplementor
 (type $interfaces.Main.AbstractImplementor (struct
  (field $vtable (ref null $interfaces.Main.AbstractImplementor.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@interfaces.Main.AbstractImplementor (mut (ref null $interfaces.Main)))
 ))
 (type $interfaces.Main.AbstractImplementor.vtable (struct

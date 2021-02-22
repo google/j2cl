@@ -3,6 +3,7 @@
 ;;; CLASS  OuterClass
 (type $nestedinstanceinnerclass.OuterClass (struct
  (field $vtable (ref null $nestedinstanceinnerclass.OuterClass.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $nestedinstanceinnerclass.OuterClass.vtable (struct
  
@@ -35,7 +36,7 @@
  (block $return.label
   (block
    ;; new InnerInnerClass.<init>(new InnerClass.<init>(new OuterClass.<init>()));
-   (drop (call $m_<init>__nestedinstanceinnerclass_OuterClass_InnerClass__void@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (struct.new_with_rtt $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (global.get $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.vtable) (ref.null $nestedinstanceinnerclass.OuterClass.InnerClass) (ref.null $nestedinstanceinnerclass.OuterClass.InnerClass) (ref.null $nestedinstanceinnerclass.OuterClass) (global.get $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.rtt))(call $m_<init>__nestedinstanceinnerclass_OuterClass__void@nestedinstanceinnerclass.OuterClass.InnerClass (struct.new_with_rtt $nestedinstanceinnerclass.OuterClass.InnerClass (global.get $nestedinstanceinnerclass.OuterClass.InnerClass.vtable) (ref.null $nestedinstanceinnerclass.OuterClass) (global.get $nestedinstanceinnerclass.OuterClass.InnerClass.rtt))(call $m_<init>__void@nestedinstanceinnerclass.OuterClass (struct.new_with_rtt $nestedinstanceinnerclass.OuterClass (global.get $nestedinstanceinnerclass.OuterClass.vtable) (global.get $nestedinstanceinnerclass.OuterClass.rtt))))))
+   (drop (call $m_<init>__nestedinstanceinnerclass_OuterClass_InnerClass__void@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (struct.new_with_rtt $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (global.get $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.vtable) (i32.const 0) (ref.null $nestedinstanceinnerclass.OuterClass.InnerClass) (ref.null $nestedinstanceinnerclass.OuterClass.InnerClass) (ref.null $nestedinstanceinnerclass.OuterClass) (global.get $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.rtt))(call $m_<init>__nestedinstanceinnerclass_OuterClass__void@nestedinstanceinnerclass.OuterClass.InnerClass (struct.new_with_rtt $nestedinstanceinnerclass.OuterClass.InnerClass (global.get $nestedinstanceinnerclass.OuterClass.InnerClass.vtable) (i32.const 0) (ref.null $nestedinstanceinnerclass.OuterClass) (global.get $nestedinstanceinnerclass.OuterClass.InnerClass.rtt))(call $m_<init>__void@nestedinstanceinnerclass.OuterClass (struct.new_with_rtt $nestedinstanceinnerclass.OuterClass (global.get $nestedinstanceinnerclass.OuterClass.vtable) (i32.const 0) (global.get $nestedinstanceinnerclass.OuterClass.rtt))))))
   )
  )
 )
@@ -44,6 +45,7 @@
 ;;; CLASS  InnerClass
 (type $nestedinstanceinnerclass.OuterClass.InnerClass (struct
  (field $vtable (ref null $nestedinstanceinnerclass.OuterClass.InnerClass.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@nestedinstanceinnerclass.OuterClass.InnerClass (mut (ref null $nestedinstanceinnerclass.OuterClass)))
 ))
 (type $nestedinstanceinnerclass.OuterClass.InnerClass.vtable (struct
@@ -74,6 +76,7 @@
 ;;; CLASS  InnerInnerClass
 (type $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (struct
  (field $vtable (ref null $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (mut (ref null $nestedinstanceinnerclass.OuterClass.InnerClass)))
  (field $x@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (mut (ref null $nestedinstanceinnerclass.OuterClass.InnerClass)))
  (field $y@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (mut (ref null $nestedinstanceinnerclass.OuterClass)))

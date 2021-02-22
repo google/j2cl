@@ -3,6 +3,7 @@
 ;;; CLASS  TryCatch
 (type $trycatch.TryCatch (struct
  (field $vtable (ref null $trycatch.TryCatch.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $trycatch.TryCatch.vtable (struct
  
@@ -130,10 +131,10 @@
   (block
    ;; ClosableThing thing = new ClosableThing.<init>();
    
-   (local.set $thing (call $m_<init>__void_$pp_trycatch@trycatch.TryCatch.ClosableThing (struct.new_with_rtt $trycatch.TryCatch.ClosableThing (global.get $trycatch.TryCatch.ClosableThing.vtable) (global.get $trycatch.TryCatch.ClosableThing.rtt))))
+   (local.set $thing (call $m_<init>__void_$pp_trycatch@trycatch.TryCatch.ClosableThing (struct.new_with_rtt $trycatch.TryCatch.ClosableThing (global.get $trycatch.TryCatch.ClosableThing.vtable) (i32.const 0) (global.get $trycatch.TryCatch.ClosableThing.rtt))))
    ;; ClosableThing thing2 = new ClosableThing.<init>();
    
-   (local.set $thing2 (call $m_<init>__void_$pp_trycatch@trycatch.TryCatch.ClosableThing (struct.new_with_rtt $trycatch.TryCatch.ClosableThing (global.get $trycatch.TryCatch.ClosableThing.vtable) (global.get $trycatch.TryCatch.ClosableThing.rtt))))
+   (local.set $thing2 (call $m_<init>__void_$pp_trycatch@trycatch.TryCatch.ClosableThing (struct.new_with_rtt $trycatch.TryCatch.ClosableThing (global.get $trycatch.TryCatch.ClosableThing.vtable) (i32.const 0) (global.get $trycatch.TryCatch.ClosableThing.rtt))))
    ;; try (
    ;; unimplemented statement TryStatement
   )
@@ -165,7 +166,7 @@
  (block $return.label
   (block
    ;; throw TryCatch.this.getT(new Exception.<init>());
-   (call $m_getT__java_lang_Object__java_lang_Object_$p_trycatch_TryCatch@trycatch.TryCatch (local.get $this)(call $m_<init>__void@java.lang.Exception (struct.new_with_rtt $java.lang.Exception (global.get $java.lang.Exception.vtable) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $Object.array) (ref.null $Object.array) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Exception.rtt))))unreachable
+   (call $m_getT__java_lang_Object__java_lang_Object_$p_trycatch_TryCatch@trycatch.TryCatch (local.get $this)(call $m_<init>__void@java.lang.Exception (struct.new_with_rtt $java.lang.Exception (global.get $java.lang.Exception.vtable) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $Object.array) (ref.null $Object.array) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Exception.rtt))))unreachable
   )
  )
 )
@@ -219,6 +220,7 @@
 ;;; CLASS  ClosableThing
 (type $trycatch.TryCatch.ClosableThing (struct
  (field $vtable (ref null $trycatch.TryCatch.ClosableThing.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $trycatch.TryCatch.ClosableThing.vtable (struct
  

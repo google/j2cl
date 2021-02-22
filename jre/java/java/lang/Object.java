@@ -24,6 +24,8 @@ import jsinterop.annotations.JsMethod;
  */
 public class Object {
 
+  public int $systemIdentityHashCode; // only used in wasm to store identity hash code.
+
   @JsMethod
   public boolean equals(Object that) {
     return this == that;

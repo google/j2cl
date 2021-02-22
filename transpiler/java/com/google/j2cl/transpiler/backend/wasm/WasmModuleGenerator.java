@@ -139,7 +139,7 @@ public class WasmModuleGenerator {
         format("(type $%s.array", javaType),
         "  (struct",
         format(
-            "    (field $vtable (ref null %s))",
+            "    (field $vtable (ref null %s)) (field $$systemIdentityHashCode (mut i32))",
             environment.getWasmVtableTypeName(TypeDescriptors.get().javaLangObject)),
         format("    (field $elements (ref null $%s.array.elements)))", javaType),
         ")");

@@ -4,6 +4,7 @@
 ;;; CLASS  Foo
 (type $packageinfosubpackage.Foo (struct
  (field $vtable (ref null $packageinfosubpackage.Foo.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $nativeBar@packageinfosubpackage.Foo (mut (ref null $packageinfosubpackage.Foo.NativeBar)))
 ))
 (type $packageinfosubpackage.Foo.vtable (struct
@@ -36,7 +37,7 @@
  (block $return.label
   (block
    ;; (Foo.this.nativeBar = new NativeBar.<init>());
-   (struct.set $packageinfosubpackage.Foo $nativeBar@packageinfosubpackage.Foo(local.get $this) (call $m_<init>__void_$p_packageinfosubpackage_Foo_NativeBar@packageinfosubpackage.Foo.NativeBar (struct.new_with_rtt $packageinfosubpackage.Foo.NativeBar (global.get $packageinfosubpackage.Foo.NativeBar.vtable) (global.get $packageinfosubpackage.Foo.NativeBar.rtt))))
+   (struct.set $packageinfosubpackage.Foo $nativeBar@packageinfosubpackage.Foo(local.get $this) (call $m_<init>__void_$p_packageinfosubpackage_Foo_NativeBar@packageinfosubpackage.Foo.NativeBar (struct.new_with_rtt $packageinfosubpackage.Foo.NativeBar (global.get $packageinfosubpackage.Foo.NativeBar.vtable) (i32.const 0) (global.get $packageinfosubpackage.Foo.NativeBar.rtt))))
   )
  )
 )
@@ -44,6 +45,7 @@
 ;;; CLASS  NativeBar
 (type $packageinfosubpackage.Foo.NativeBar (struct
  (field $vtable (ref null $packageinfosubpackage.Foo.NativeBar.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $packageinfosubpackage.Foo.NativeBar.vtable (struct
  
@@ -71,6 +73,7 @@
 ;;; CLASS  Bar
 (type $packageinfosubpackage.subpackage.Bar (struct
  (field $vtable (ref null $packageinfosubpackage.subpackage.Bar.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $packageinfosubpackage.subpackage.Bar.vtable (struct
  

@@ -3,6 +3,7 @@
 ;;; CLASS  CastOnArrayInit
 (type $castonarrayinit.CastOnArrayInit (struct
  (field $vtable (ref null $castonarrayinit.CastOnArrayInit.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $castonarrayinit.CastOnArrayInit.vtable (struct
  
@@ -43,10 +44,10 @@
   (block
    ;; Foo<E> f1 = new Foo.<init>();
    
-   (local.set $f1 (call $m_<init>__void@castonarrayinit.CastOnArrayInit.Foo (struct.new_with_rtt $castonarrayinit.CastOnArrayInit.Foo (global.get $castonarrayinit.CastOnArrayInit.Foo.vtable) (global.get $castonarrayinit.CastOnArrayInit.Foo.rtt))))
+   (local.set $f1 (call $m_<init>__void@castonarrayinit.CastOnArrayInit.Foo (struct.new_with_rtt $castonarrayinit.CastOnArrayInit.Foo (global.get $castonarrayinit.CastOnArrayInit.Foo.vtable) (i32.const 0) (global.get $castonarrayinit.CastOnArrayInit.Foo.rtt))))
    ;; Foo<E> f2 = new Foo.<init>();
    
-   (local.set $f2 (call $m_<init>__void@castonarrayinit.CastOnArrayInit.Foo (struct.new_with_rtt $castonarrayinit.CastOnArrayInit.Foo (global.get $castonarrayinit.CastOnArrayInit.Foo.vtable) (global.get $castonarrayinit.CastOnArrayInit.Foo.rtt))))
+   (local.set $f2 (call $m_<init>__void@castonarrayinit.CastOnArrayInit.Foo (struct.new_with_rtt $castonarrayinit.CastOnArrayInit.Foo (global.get $castonarrayinit.CastOnArrayInit.Foo.vtable) (i32.const 0) (global.get $castonarrayinit.CastOnArrayInit.Foo.rtt))))
    ;; castonarrayinit.CastOnArrayInit.fun([f1,f2]);
    (call $m_fun__arrayOf_castonarrayinit_CastOnArrayInit_Foo__void@castonarrayinit.CastOnArrayInit (ref.null $Object.array))
   )
@@ -56,6 +57,7 @@
 ;;; CLASS  Foo
 (type $castonarrayinit.CastOnArrayInit.Foo (struct
  (field $vtable (ref null $castonarrayinit.CastOnArrayInit.Foo.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $castonarrayinit.CastOnArrayInit.Foo.vtable (struct
  

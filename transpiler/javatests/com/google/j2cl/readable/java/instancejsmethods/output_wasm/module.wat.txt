@@ -5,6 +5,7 @@
 ;;; CLASS  SuperParent
 (type $instancejsmethods.SuperParent (struct
  (field $vtable (ref null $instancejsmethods.SuperParent.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $instancejsmethods.SuperParent.vtable (struct
  
@@ -73,6 +74,7 @@
 ;;; CLASS  Parent
 (type $instancejsmethods.Parent (struct
  (field $vtable (ref null $instancejsmethods.Parent.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $instancejsmethods.Parent.vtable (struct
  
@@ -161,6 +163,7 @@
 ;;; CLASS  Child
 (type $instancejsmethods.Child (struct
  (field $vtable (ref null $instancejsmethods.Child.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $instancejsmethods.Child.vtable (struct
  
@@ -268,6 +271,7 @@
 ;;; CLASS  Main
 (type $instancejsmethods.Main (struct
  (field $vtable (ref null $instancejsmethods.Main.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $instancejsmethods.Main.vtable (struct
  
@@ -307,22 +311,22 @@
   (block
    ;; SuperParent sp = new SuperParent.<init>();
    
-   (local.set $sp (call $m_<init>__void_$pp_instancejsmethods@instancejsmethods.SuperParent (struct.new_with_rtt $instancejsmethods.SuperParent (global.get $instancejsmethods.SuperParent.vtable) (global.get $instancejsmethods.SuperParent.rtt))))
+   (local.set $sp (call $m_<init>__void_$pp_instancejsmethods@instancejsmethods.SuperParent (struct.new_with_rtt $instancejsmethods.SuperParent (global.get $instancejsmethods.SuperParent.vtable) (i32.const 0) (global.get $instancejsmethods.SuperParent.rtt))))
    ;; SuperParent p = new Parent.<init>();
    
-   (local.set $p (call $m_<init>__void_$pp_instancejsmethods@instancejsmethods.Parent (struct.new_with_rtt $instancejsmethods.Parent (global.get $instancejsmethods.Parent.vtable) (global.get $instancejsmethods.Parent.rtt))))
+   (local.set $p (call $m_<init>__void_$pp_instancejsmethods@instancejsmethods.Parent (struct.new_with_rtt $instancejsmethods.Parent (global.get $instancejsmethods.Parent.vtable) (i32.const 0) (global.get $instancejsmethods.Parent.rtt))))
    ;; SuperParent c = new Child.<init>();
    
-   (local.set $c (call $m_<init>__void_$pp_instancejsmethods@instancejsmethods.Child (struct.new_with_rtt $instancejsmethods.Child (global.get $instancejsmethods.Child.vtable) (global.get $instancejsmethods.Child.rtt))))
+   (local.set $c (call $m_<init>__void_$pp_instancejsmethods@instancejsmethods.Child (struct.new_with_rtt $instancejsmethods.Child (global.get $instancejsmethods.Child.vtable) (i32.const 0) (global.get $instancejsmethods.Child.rtt))))
    ;; Parent pp = new Parent.<init>();
    
-   (local.set $pp (call $m_<init>__void_$pp_instancejsmethods@instancejsmethods.Parent (struct.new_with_rtt $instancejsmethods.Parent (global.get $instancejsmethods.Parent.vtable) (global.get $instancejsmethods.Parent.rtt))))
+   (local.set $pp (call $m_<init>__void_$pp_instancejsmethods@instancejsmethods.Parent (struct.new_with_rtt $instancejsmethods.Parent (global.get $instancejsmethods.Parent.vtable) (i32.const 0) (global.get $instancejsmethods.Parent.rtt))))
    ;; Parent cc = new Child.<init>();
    
-   (local.set $cc (call $m_<init>__void_$pp_instancejsmethods@instancejsmethods.Child (struct.new_with_rtt $instancejsmethods.Child (global.get $instancejsmethods.Child.vtable) (global.get $instancejsmethods.Child.rtt))))
+   (local.set $cc (call $m_<init>__void_$pp_instancejsmethods@instancejsmethods.Child (struct.new_with_rtt $instancejsmethods.Child (global.get $instancejsmethods.Child.vtable) (i32.const 0) (global.get $instancejsmethods.Child.rtt))))
    ;; MyInterface intf = new Child.<init>();
    
-   (local.set $intf (call $m_<init>__void_$pp_instancejsmethods@instancejsmethods.Child (struct.new_with_rtt $instancejsmethods.Child (global.get $instancejsmethods.Child.vtable) (global.get $instancejsmethods.Child.rtt))))
+   (local.set $intf (call $m_<init>__void_$pp_instancejsmethods@instancejsmethods.Child (struct.new_with_rtt $instancejsmethods.Child (global.get $instancejsmethods.Child.vtable) (i32.const 0) (global.get $instancejsmethods.Child.rtt))))
    ;; sp.fun(12,35);
    (drop (call_ref (local.get $sp)(i32.const 12)(i32.const 35)(struct.get $instancejsmethods.SuperParent.vtable $m_fun__int__int__int (struct.get $instancejsmethods.SuperParent $vtable(local.get $sp)))))
    ;; sp.bar(6,7);
@@ -355,13 +359,13 @@
   (block
    ;; SuperParent sp = new SuperParent.<init>();
    
-   (local.set $sp (call $m_<init>__void_$pp_instancejsmethods@instancejsmethods.SuperParent (struct.new_with_rtt $instancejsmethods.SuperParent (global.get $instancejsmethods.SuperParent.vtable) (global.get $instancejsmethods.SuperParent.rtt))))
+   (local.set $sp (call $m_<init>__void_$pp_instancejsmethods@instancejsmethods.SuperParent (struct.new_with_rtt $instancejsmethods.SuperParent (global.get $instancejsmethods.SuperParent.vtable) (i32.const 0) (global.get $instancejsmethods.SuperParent.rtt))))
    ;; Parent p = new Parent.<init>();
    
-   (local.set $p (call $m_<init>__void_$pp_instancejsmethods@instancejsmethods.Parent (struct.new_with_rtt $instancejsmethods.Parent (global.get $instancejsmethods.Parent.vtable) (global.get $instancejsmethods.Parent.rtt))))
+   (local.set $p (call $m_<init>__void_$pp_instancejsmethods@instancejsmethods.Parent (struct.new_with_rtt $instancejsmethods.Parent (global.get $instancejsmethods.Parent.vtable) (i32.const 0) (global.get $instancejsmethods.Parent.rtt))))
    ;; Child c = new Child.<init>();
    
-   (local.set $c (call $m_<init>__void_$pp_instancejsmethods@instancejsmethods.Child (struct.new_with_rtt $instancejsmethods.Child (global.get $instancejsmethods.Child.vtable) (global.get $instancejsmethods.Child.rtt))))
+   (local.set $c (call $m_<init>__void_$pp_instancejsmethods@instancejsmethods.Child (struct.new_with_rtt $instancejsmethods.Child (global.get $instancejsmethods.Child.vtable) (i32.const 0) (global.get $instancejsmethods.Child.rtt))))
    ;; sp.fun(12,35);
    (drop (call_ref (local.get $sp)(i32.const 12)(i32.const 35)(struct.get $instancejsmethods.SuperParent.vtable $m_fun__int__int__int (struct.get $instancejsmethods.SuperParent $vtable(local.get $sp)))))
    ;; sp.bar(6,7);

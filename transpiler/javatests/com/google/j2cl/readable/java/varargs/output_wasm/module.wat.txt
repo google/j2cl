@@ -3,6 +3,7 @@
 ;;; CLASS  Varargs
 (type $varargs.Varargs (struct
  (field $vtable (ref null $varargs.Varargs.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $varargs.Varargs.vtable (struct
  
@@ -115,7 +116,7 @@
   (block
    ;; Varargs v = new Varargs.<init>();
    
-   (local.set $v (call $m_<init>__void@varargs.Varargs (struct.new_with_rtt $varargs.Varargs (global.get $varargs.Varargs.vtable) (global.get $varargs.Varargs.rtt))))
+   (local.set $v (call $m_<init>__void@varargs.Varargs (struct.new_with_rtt $varargs.Varargs (global.get $varargs.Varargs.vtable) (i32.const 0) (global.get $varargs.Varargs.rtt))))
    ;; v.test(1,[]);
    (call_ref (local.get $v)(i32.const 1)(ref.null $Object.array)(struct.get $varargs.Varargs.vtable $m_test__int__arrayOf_java_lang_Object__void (struct.get $varargs.Varargs $vtable(local.get $v))))
    ;; v.test(1,[new Object.<init>()]);
@@ -138,6 +139,7 @@
 ;;; CLASS  Child
 (type $varargs.Child (struct
  (field $vtable (ref null $varargs.Child.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $varargs.Child.vtable (struct
  

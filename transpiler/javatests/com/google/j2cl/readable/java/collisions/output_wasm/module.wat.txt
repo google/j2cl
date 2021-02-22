@@ -3,6 +3,7 @@
 ;;; CLASS  goog
 (type $collisions.goog (struct
  (field $vtable (ref null $collisions.goog.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $collisions.goog.vtable (struct
  
@@ -29,6 +30,7 @@
 ;;; CLASS  Blah
 (type $collisions.Blah (struct
  (field $vtable (ref null $collisions.Blah.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $collisions.Blah.vtable (struct
  
@@ -74,6 +76,7 @@
 ;;; CLASS  foo
 (type $collisions.foo (struct
  (field $vtable (ref null $collisions.foo.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $collisions.foo.vtable (struct
  
@@ -100,6 +103,7 @@
 ;;; CLASS  bar
 (type $collisions.bar (struct
  (field $vtable (ref null $collisions.bar.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $collisions.bar.vtable (struct
  
@@ -144,11 +148,11 @@
    ;; collisions.Blah.getN();
    (drop (call $m_getN__double@collisions.Blah ))
    ;; new Blah.<init>();
-   (drop (call $m_<init>__void_$pp_collisions@collisions.Blah (struct.new_with_rtt $collisions.Blah (global.get $collisions.Blah.vtable) (global.get $collisions.Blah.rtt))))
+   (drop (call $m_<init>__void_$pp_collisions@collisions.Blah (struct.new_with_rtt $collisions.Blah (global.get $collisions.Blah.vtable) (i32.const 0) (global.get $collisions.Blah.rtt))))
    ;; new goog.<init>();
-   (drop (call $m_<init>__void@collisions.goog (struct.new_with_rtt $collisions.goog (global.get $collisions.goog.vtable) (global.get $collisions.goog.rtt))))
+   (drop (call $m_<init>__void@collisions.goog (struct.new_with_rtt $collisions.goog (global.get $collisions.goog.vtable) (i32.const 0) (global.get $collisions.goog.rtt))))
    ;; new foo.<init>();
-   (drop (call $m_<init>__void_$pp_collisions@collisions.foo (struct.new_with_rtt $collisions.foo (global.get $collisions.foo.vtable) (global.get $collisions.foo.rtt))))
+   (drop (call $m_<init>__void_$pp_collisions@collisions.foo (struct.new_with_rtt $collisions.foo (global.get $collisions.foo.vtable) (i32.const 0) (global.get $collisions.foo.rtt))))
    ;; int delete = 1;
    
    (local.set $delete (i32.const 1))
@@ -162,6 +166,7 @@
 ;;; CLASS  Other
 (type $collisions.Other (struct
  (field $vtable (ref null $collisions.Other.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $collisions.Other.vtable (struct
  
@@ -234,6 +239,7 @@
 ;;; CLASS  T
 (type $collisions.T (struct
  (field $vtable (ref null $collisions.T.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $collisions.T.vtable (struct
  
@@ -292,7 +298,7 @@
    
    (local.set $t (block (result (ref null $java.lang.Number))
     
-    (local.set $$qualifier (call $m_<init>__void_$pp_collisions@collisions.T (struct.new_with_rtt $collisions.T (global.get $collisions.T.vtable) (global.get $collisions.T.rtt))))
+    (local.set $$qualifier (call $m_<init>__void_$pp_collisions@collisions.T (struct.new_with_rtt $collisions.T (global.get $collisions.T.vtable) (i32.const 0) (global.get $collisions.T.rtt))))
     (call_ref (local.get $$qualifier)(struct.get $collisions.T.vtable $m_m__java_lang_Number_$pp_collisions (struct.get $collisions.T $vtable(local.get $$qualifier))))
    ))
    ;; t.byteValue();

@@ -5,6 +5,7 @@
 ;;; CLASS  A
 (type $bridgemethods.A (struct
  (field $vtable (ref null $bridgemethods.A.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $bridgemethods.A.vtable (struct
  
@@ -70,6 +71,7 @@
 ;;; CLASS  B
 (type $bridgemethods.B (struct
  (field $vtable (ref null $bridgemethods.B.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $bridgemethods.B.vtable (struct
  
@@ -107,7 +109,7 @@
  (block $return.label
   (block
    ;; return new Integer.<init>(1);
-   (local.set $return.value (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
+   (local.set $return.value (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
    (br $return.label)
   )
  )
@@ -139,6 +141,7 @@
 ;;; CLASS  AccidentalOverride
 (type $bridgemethods.AccidentalOverride (struct
  (field $vtable (ref null $bridgemethods.AccidentalOverride.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $bridgemethods.AccidentalOverride.vtable (struct
  
@@ -228,6 +231,7 @@
 ;;; CLASS  SuperParent
 (type $bridgemethods.SuperParent (struct
  (field $vtable (ref null $bridgemethods.SuperParent.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $bridgemethods.SuperParent.vtable (struct
  
@@ -269,6 +273,7 @@
 ;;; CLASS  Parent
 (type $bridgemethods.Parent (struct
  (field $vtable (ref null $bridgemethods.Parent.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $bridgemethods.Parent.vtable (struct
  
@@ -355,6 +360,7 @@
 ;;; CLASS  BridgeMethod
 (type $bridgemethods.BridgeMethod (struct
  (field $vtable (ref null $bridgemethods.BridgeMethod.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $bridgemethods.BridgeMethod.vtable (struct
  
@@ -462,6 +468,7 @@
 ;;; CLASS  DualUnrelatedBridges
 (type $bridgemethods.DualUnrelatedBridges (struct
  (field $vtable (ref null $bridgemethods.DualUnrelatedBridges.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $bridgemethods.DualUnrelatedBridges.vtable (struct
  
@@ -569,6 +576,7 @@
 ;;; CLASS  SuperDualUnrelatedAccidentalBridges
 (type $bridgemethods.SuperDualUnrelatedAccidentalBridges (struct
  (field $vtable (ref null $bridgemethods.SuperDualUnrelatedAccidentalBridges.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $bridgemethods.SuperDualUnrelatedAccidentalBridges.vtable (struct
  
@@ -625,6 +633,7 @@
 ;;; CLASS  DualUnrelatedAccidentalBridges
 (type $bridgemethods.DualUnrelatedAccidentalBridges (struct
  (field $vtable (ref null $bridgemethods.DualUnrelatedAccidentalBridges.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $bridgemethods.DualUnrelatedAccidentalBridges.vtable (struct
  
@@ -706,6 +715,7 @@
 ;;; CLASS  ClassWithParameterizedGet
 (type $bridgemethods.ClassWithParameterizedGet (struct
  (field $vtable (ref null $bridgemethods.ClassWithParameterizedGet.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $bridgemethods.ClassWithParameterizedGet.vtable (struct
  
@@ -752,6 +762,7 @@
 ;;; CLASS  AccidentalOverrideBridge
 (type $bridgemethods.AccidentalOverrideBridge (struct
  (field $vtable (ref null $bridgemethods.AccidentalOverrideBridge.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $bridgemethods.AccidentalOverrideBridge.vtable (struct
  
@@ -788,7 +799,7 @@
   (block
    ;; Getter g = new AccidentalOverrideBridge.<init>();
    
-   (local.set $g (call $m_<init>__void_$pp_bridgemethods@bridgemethods.AccidentalOverrideBridge (struct.new_with_rtt $bridgemethods.AccidentalOverrideBridge (global.get $bridgemethods.AccidentalOverrideBridge.vtable) (global.get $bridgemethods.AccidentalOverrideBridge.rtt))))
+   (local.set $g (call $m_<init>__void_$pp_bridgemethods@bridgemethods.AccidentalOverrideBridge (struct.new_with_rtt $bridgemethods.AccidentalOverrideBridge (global.get $bridgemethods.AccidentalOverrideBridge.vtable) (i32.const 0) (global.get $bridgemethods.AccidentalOverrideBridge.rtt))))
    ;; g.get("");
    (drop (ref.null $java.lang.String))
   )
@@ -837,6 +848,7 @@
 ;;; CLASS  TestCase10036
 (type $bridgemethods.TestCase10036 (struct
  (field $vtable (ref null $bridgemethods.TestCase10036.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $bridgemethods.TestCase10036.vtable (struct
  
@@ -886,6 +898,7 @@
 ;;; CLASS  B
 (type $bridgemethods.TestCase10036.B (struct
  (field $vtable (ref null $bridgemethods.TestCase10036.B.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $bridgemethods.TestCase10036.B.vtable (struct
  
@@ -913,6 +926,7 @@
 ;;; CLASS  TestCase102
 (type $bridgemethods.TestCase102 (struct
  (field $vtable (ref null $bridgemethods.TestCase102.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $bridgemethods.TestCase102.vtable (struct
  
@@ -943,6 +957,7 @@
 ;;; CLASS  B
 (type $bridgemethods.TestCase102.B (struct
  (field $vtable (ref null $bridgemethods.TestCase102.B.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $bridgemethods.TestCase102.B.vtable (struct
  
@@ -970,6 +985,7 @@
 ;;; CLASS  C
 (type $bridgemethods.TestCase102.C (struct
  (field $vtable (ref null $bridgemethods.TestCase102.C.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@bridgemethods.TestCase102.C (mut (ref null $bridgemethods.TestCase102)))
 ))
 (type $bridgemethods.TestCase102.C.vtable (struct
@@ -1028,6 +1044,7 @@
 ;;; CLASS  ParameterizedParent
 (type $bridgemethods.ParameterizedParent (struct
  (field $vtable (ref null $bridgemethods.ParameterizedParent.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $bridgemethods.ParameterizedParent.vtable (struct
  
@@ -1074,6 +1091,7 @@
 ;;; CLASS  ReparametrerizedChild
 (type $bridgemethods.ReparametrerizedChild (struct
  (field $vtable (ref null $bridgemethods.ReparametrerizedChild.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $bridgemethods.ReparametrerizedChild.vtable (struct
  
@@ -1140,6 +1158,7 @@
 ;;; CLASS  LeafChild
 (type $bridgemethods.LeafChild (struct
  (field $vtable (ref null $bridgemethods.LeafChild.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $bridgemethods.LeafChild.vtable (struct
  
@@ -1169,6 +1188,7 @@
 ;;; CLASS  BridgeMethodDefault
 (type $bridgemethods.BridgeMethodDefault (struct
  (field $vtable (ref null $bridgemethods.BridgeMethodDefault.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $bridgemethods.BridgeMethodDefault.vtable (struct
  
@@ -1210,6 +1230,7 @@
 ;;; CLASS  A
 (type $bridgemethods.BridgeMethodDefault.A (struct
  (field $vtable (ref null $bridgemethods.BridgeMethodDefault.A.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $bridgemethods.BridgeMethodDefault.A.vtable (struct
  
@@ -1281,6 +1302,7 @@
 ;;; CLASS  B
 (type $bridgemethods.BridgeMethodDefault.B (struct
  (field $vtable (ref null $bridgemethods.BridgeMethodDefault.B.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $bridgemethods.BridgeMethodDefault.B.vtable (struct
  
@@ -1324,6 +1346,7 @@
 ;;; CLASS  BridgeMethodShadowedSignature
 (type $bridgemethods.BridgeMethodShadowedSignature (struct
  (field $vtable (ref null $bridgemethods.BridgeMethodShadowedSignature.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $bridgemethods.BridgeMethodShadowedSignature.vtable (struct
  
@@ -1352,6 +1375,7 @@
 ;;; CLASS  B
 (type $bridgemethods.BridgeMethodShadowedSignature.B (struct
  (field $vtable (ref null $bridgemethods.BridgeMethodShadowedSignature.B.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $bridgemethods.BridgeMethodShadowedSignature.B.vtable (struct
  
@@ -1398,6 +1422,7 @@
 ;;; CLASS  C
 (type $bridgemethods.BridgeMethodShadowedSignature.C (struct
  (field $vtable (ref null $bridgemethods.BridgeMethodShadowedSignature.C.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $bridgemethods.BridgeMethodShadowedSignature.C.vtable (struct
  
@@ -1467,6 +1492,7 @@
 ;;; CLASS  AbstractMap
 (type $bridgemethods.AbstractMap (struct
  (field $vtable (ref null $bridgemethods.AbstractMap.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $bridgemethods.AbstractMap.vtable (struct
  
@@ -1514,6 +1540,7 @@
 ;;; CLASS  EnumMap
 (type $bridgemethods.EnumMap (struct
  (field $vtable (ref null $bridgemethods.EnumMap.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $bridgemethods.EnumMap.vtable (struct
  

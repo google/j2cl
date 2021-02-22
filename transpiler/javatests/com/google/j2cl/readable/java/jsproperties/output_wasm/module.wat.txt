@@ -3,6 +3,7 @@
 ;;; CLASS  Foo
 (type $jsproperties.Foo (struct
  (field $vtable (ref null $jsproperties.Foo.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $jsproperties.Foo.vtable (struct
  
@@ -80,6 +81,7 @@
 ;;; CLASS  Bar
 (type $jsproperties.Bar (struct
  (field $vtable (ref null $jsproperties.Bar.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $f@jsproperties.Bar (mut i32))
 ))
 (type $jsproperties.Bar.vtable (struct
@@ -177,6 +179,7 @@
 ;;; CLASS  NativeFoo
 (type $jsproperties.NativeFoo (struct
  (field $vtable (ref null $jsproperties.NativeFoo.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $jsproperties.NativeFoo.vtable (struct
  
@@ -230,6 +233,7 @@
 ;;; CLASS  Main
 (type $jsproperties.Main (struct
  (field $vtable (ref null $jsproperties.Main.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $jsproperties.Main.vtable (struct
  
@@ -267,7 +271,7 @@
    (block
     ;; NativeFoo $qualifier = new NativeFoo.<init>();
     
-    (local.set $$qualifier (call $m_<init>__void_$pp_jsproperties@jsproperties.NativeFoo (struct.new_with_rtt $jsproperties.NativeFoo (global.get $jsproperties.NativeFoo.vtable) (global.get $jsproperties.NativeFoo.rtt))))
+    (local.set $$qualifier (call $m_<init>__void_$pp_jsproperties@jsproperties.NativeFoo (struct.new_with_rtt $jsproperties.NativeFoo (global.get $jsproperties.NativeFoo.vtable) (i32.const 0) (global.get $jsproperties.NativeFoo.rtt))))
     ;; $qualifier.getA();
     (drop (call_ref (local.get $$qualifier)(struct.get $jsproperties.NativeFoo.vtable $m_getA__java_lang_Object (struct.get $jsproperties.NativeFoo $vtable(local.get $$qualifier)))))
    )
@@ -308,7 +312,7 @@
   (block
    ;; Bar bar = new Bar.<init>();
    
-   (local.set $bar (call $m_<init>__void_$pp_jsproperties@jsproperties.Bar (struct.new_with_rtt $jsproperties.Bar (global.get $jsproperties.Bar.vtable) (i32.const 0) (global.get $jsproperties.Bar.rtt))))
+   (local.set $bar (call $m_<init>__void_$pp_jsproperties@jsproperties.Bar (struct.new_with_rtt $jsproperties.Bar (global.get $jsproperties.Bar.vtable) (i32.const 0) (i32.const 0) (global.get $jsproperties.Bar.rtt))))
    ;; bar.getA();
    (drop (call_ref (local.get $bar)(struct.get $jsproperties.Bar.vtable $m_getA__int (struct.get $jsproperties.Bar $vtable(local.get $bar)))))
    ;; bar.setA(10);

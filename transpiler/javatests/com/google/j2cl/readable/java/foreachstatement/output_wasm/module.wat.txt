@@ -3,6 +3,7 @@
 ;;; CLASS  ForEachStatement
 (type $foreachstatement.ForEachStatement (struct
  (field $vtable (ref null $foreachstatement.ForEachStatement.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $foreachstatement.ForEachStatement.vtable (struct
  
@@ -65,7 +66,7 @@
    ;; LOOP: for (Throwable[] $array = new Throwable[10],double $index = 0;($index < <expr>);($index = ($index + 1.0))) {
    
    
-   (local.set $$array (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (array.new_default_with_rtt $Object.array.elements (i32.const 10) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
+   (local.set $$array (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $Object.array.elements (i32.const 10) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
    (local.set $$index (f64.const 0.0))
    (block $LOOP_1.BREAK
     (loop

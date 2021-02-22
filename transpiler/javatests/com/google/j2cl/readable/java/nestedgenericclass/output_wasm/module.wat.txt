@@ -3,6 +3,7 @@
 ;;; CLASS  NestedGenericClass
 (type $nestedgenericclass.NestedGenericClass (struct
  (field $vtable (ref null $nestedgenericclass.NestedGenericClass.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $nestedgenericclass.NestedGenericClass.vtable (struct
  
@@ -38,9 +39,9 @@
  (block $return.label
   (block
    ;; new $1E.<init>(NestedGenericClass.this);
-   (drop (call $m_<init>__nestedgenericclass_NestedGenericClass__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.1E (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.1E (global.get $nestedgenericclass.NestedGenericClass.1E.vtable) (ref.null $nestedgenericclass.NestedGenericClass) (global.get $nestedgenericclass.NestedGenericClass.1E.rtt))(local.get $this)))
+   (drop (call $m_<init>__nestedgenericclass_NestedGenericClass__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.1E (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.1E (global.get $nestedgenericclass.NestedGenericClass.1E.vtable) (i32.const 0) (ref.null $nestedgenericclass.NestedGenericClass) (global.get $nestedgenericclass.NestedGenericClass.1E.rtt))(local.get $this)))
    ;; new $1F.<init>(NestedGenericClass.this);
-   (drop (call $m_<init>__nestedgenericclass_NestedGenericClass__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.1F (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.1F (global.get $nestedgenericclass.NestedGenericClass.1F.vtable) (ref.null $nestedgenericclass.NestedGenericClass) (ref.null $java.lang.Object) (global.get $nestedgenericclass.NestedGenericClass.1F.rtt))(local.get $this)))
+   (drop (call $m_<init>__nestedgenericclass_NestedGenericClass__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.1F (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.1F (global.get $nestedgenericclass.NestedGenericClass.1F.vtable) (i32.const 0) (ref.null $nestedgenericclass.NestedGenericClass) (ref.null $java.lang.Object) (global.get $nestedgenericclass.NestedGenericClass.1F.rtt))(local.get $this)))
   )
  )
 )
@@ -57,7 +58,7 @@
    (block
     ;; G<Error, T, T> $qualifier = new $1G.<init>(NestedGenericClass.this);
     
-    (local.set $$qualifier (call $m_<init>__nestedgenericclass_NestedGenericClass__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.1G (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.1G (global.get $nestedgenericclass.NestedGenericClass.1G.vtable) (ref.null $nestedgenericclass.NestedGenericClass) (global.get $nestedgenericclass.NestedGenericClass.1G.rtt))(local.get $this)))
+    (local.set $$qualifier (call $m_<init>__nestedgenericclass_NestedGenericClass__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.1G (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.1G (global.get $nestedgenericclass.NestedGenericClass.1G.vtable) (i32.const 0) (ref.null $nestedgenericclass.NestedGenericClass) (global.get $nestedgenericclass.NestedGenericClass.1G.rtt))(local.get $this)))
     ;; $qualifier.bar();
     (call_ref (local.get $$qualifier)(struct.get $nestedgenericclass.NestedGenericClass.1G.vtable $m_bar__void (struct.get $nestedgenericclass.NestedGenericClass.1G $vtable(local.get $$qualifier))))
    )
@@ -78,17 +79,17 @@
   (block
    ;; NestedGenericClass<Number> n = new NestedGenericClass.<init>();
    
-   (local.set $n (call $m_<init>__void@nestedgenericclass.NestedGenericClass (struct.new_with_rtt $nestedgenericclass.NestedGenericClass (global.get $nestedgenericclass.NestedGenericClass.vtable) (global.get $nestedgenericclass.NestedGenericClass.rtt))))
+   (local.set $n (call $m_<init>__void@nestedgenericclass.NestedGenericClass (struct.new_with_rtt $nestedgenericclass.NestedGenericClass (global.get $nestedgenericclass.NestedGenericClass.vtable) (i32.const 0) (global.get $nestedgenericclass.NestedGenericClass.rtt))))
    ;; A<Error, Number> a = new A.<init>(n);
    
-   (local.set $a (call $m_<init>__nestedgenericclass_NestedGenericClass__void@nestedgenericclass.NestedGenericClass.A (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.A (global.get $nestedgenericclass.NestedGenericClass.A.vtable) (ref.null $nestedgenericclass.NestedGenericClass) (global.get $nestedgenericclass.NestedGenericClass.A.rtt))(local.get $n)))
+   (local.set $a (call $m_<init>__nestedgenericclass_NestedGenericClass__void@nestedgenericclass.NestedGenericClass.A (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.A (global.get $nestedgenericclass.NestedGenericClass.A.vtable) (i32.const 0) (ref.null $nestedgenericclass.NestedGenericClass) (global.get $nestedgenericclass.NestedGenericClass.A.rtt))(local.get $n)))
    ;; B<Exception, Error, Number> b = new B.<init>(a);
    
-   (local.set $b (call $m_<init>__nestedgenericclass_NestedGenericClass_A__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.A.B (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.A.B (global.get $nestedgenericclass.NestedGenericClass.A.B.vtable) (ref.null $nestedgenericclass.NestedGenericClass.A) (global.get $nestedgenericclass.NestedGenericClass.A.B.rtt))(local.get $a)))
+   (local.set $b (call $m_<init>__nestedgenericclass_NestedGenericClass_A__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.A.B (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.A.B (global.get $nestedgenericclass.NestedGenericClass.A.B.vtable) (i32.const 0) (ref.null $nestedgenericclass.NestedGenericClass.A) (global.get $nestedgenericclass.NestedGenericClass.A.B.rtt))(local.get $a)))
    ;; new C.<init>(n);
-   (drop (call $m_<init>__nestedgenericclass_NestedGenericClass__void@nestedgenericclass.NestedGenericClass.C (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.C (global.get $nestedgenericclass.NestedGenericClass.C.vtable) (ref.null $nestedgenericclass.NestedGenericClass) (ref.null $java.lang.Object) (global.get $nestedgenericclass.NestedGenericClass.C.rtt))(local.get $n)))
+   (drop (call $m_<init>__nestedgenericclass_NestedGenericClass__void@nestedgenericclass.NestedGenericClass.C (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.C (global.get $nestedgenericclass.NestedGenericClass.C.vtable) (i32.const 0) (ref.null $nestedgenericclass.NestedGenericClass) (ref.null $java.lang.Object) (global.get $nestedgenericclass.NestedGenericClass.C.rtt))(local.get $n)))
    ;; new D.<init>(new C.<init>(n));
-   (drop (call $m_<init>__nestedgenericclass_NestedGenericClass_C__void@nestedgenericclass.NestedGenericClass.C.D (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.C.D (global.get $nestedgenericclass.NestedGenericClass.C.D.vtable) (ref.null $nestedgenericclass.NestedGenericClass.C) (ref.null $java.lang.Object) (global.get $nestedgenericclass.NestedGenericClass.C.D.rtt))(call $m_<init>__nestedgenericclass_NestedGenericClass__void@nestedgenericclass.NestedGenericClass.C (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.C (global.get $nestedgenericclass.NestedGenericClass.C.vtable) (ref.null $nestedgenericclass.NestedGenericClass) (ref.null $java.lang.Object) (global.get $nestedgenericclass.NestedGenericClass.C.rtt))(local.get $n))))
+   (drop (call $m_<init>__nestedgenericclass_NestedGenericClass_C__void@nestedgenericclass.NestedGenericClass.C.D (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.C.D (global.get $nestedgenericclass.NestedGenericClass.C.D.vtable) (i32.const 0) (ref.null $nestedgenericclass.NestedGenericClass.C) (ref.null $java.lang.Object) (global.get $nestedgenericclass.NestedGenericClass.C.D.rtt))(call $m_<init>__nestedgenericclass_NestedGenericClass__void@nestedgenericclass.NestedGenericClass.C (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.C (global.get $nestedgenericclass.NestedGenericClass.C.vtable) (i32.const 0) (ref.null $nestedgenericclass.NestedGenericClass) (ref.null $java.lang.Object) (global.get $nestedgenericclass.NestedGenericClass.C.rtt))(local.get $n))))
   )
  )
 )
@@ -97,6 +98,7 @@
 ;;; CLASS  A
 (type $nestedgenericclass.NestedGenericClass.A (struct
  (field $vtable (ref null $nestedgenericclass.NestedGenericClass.A.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@nestedgenericclass.NestedGenericClass.A (mut (ref null $nestedgenericclass.NestedGenericClass)))
 ))
 (type $nestedgenericclass.NestedGenericClass.A.vtable (struct
@@ -127,6 +129,7 @@
 ;;; CLASS  B
 (type $nestedgenericclass.NestedGenericClass.A.B (struct
  (field $vtable (ref null $nestedgenericclass.NestedGenericClass.A.B.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@nestedgenericclass.NestedGenericClass.A.B (mut (ref null $nestedgenericclass.NestedGenericClass.A)))
 ))
 (type $nestedgenericclass.NestedGenericClass.A.B.vtable (struct
@@ -174,6 +177,7 @@
 ;;; CLASS  C
 (type $nestedgenericclass.NestedGenericClass.C (struct
  (field $vtable (ref null $nestedgenericclass.NestedGenericClass.C.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@nestedgenericclass.NestedGenericClass.C (mut (ref null $nestedgenericclass.NestedGenericClass)))
  (field $c@nestedgenericclass.NestedGenericClass.C (mut (ref null $java.lang.Object)))
 ))
@@ -205,6 +209,7 @@
 ;;; CLASS  D
 (type $nestedgenericclass.NestedGenericClass.C.D (struct
  (field $vtable (ref null $nestedgenericclass.NestedGenericClass.C.D.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@nestedgenericclass.NestedGenericClass.C.D (mut (ref null $nestedgenericclass.NestedGenericClass.C)))
  (field $d@nestedgenericclass.NestedGenericClass.C.D (mut (ref null $java.lang.Object)))
 ))
@@ -236,6 +241,7 @@
 ;;; CLASS  E
 (type $nestedgenericclass.NestedGenericClass.1E (struct
  (field $vtable (ref null $nestedgenericclass.NestedGenericClass.1E.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@nestedgenericclass.NestedGenericClass.1E (mut (ref null $nestedgenericclass.NestedGenericClass)))
 ))
 (type $nestedgenericclass.NestedGenericClass.1E.vtable (struct
@@ -266,6 +272,7 @@
 ;;; CLASS  F
 (type $nestedgenericclass.NestedGenericClass.1F (struct
  (field $vtable (ref null $nestedgenericclass.NestedGenericClass.1F.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@nestedgenericclass.NestedGenericClass.1F (mut (ref null $nestedgenericclass.NestedGenericClass)))
  (field $f@nestedgenericclass.NestedGenericClass.1F (mut (ref null $java.lang.Object)))
 ))
@@ -297,6 +304,7 @@
 ;;; CLASS  G
 (type $nestedgenericclass.NestedGenericClass.1G (struct
  (field $vtable (ref null $nestedgenericclass.NestedGenericClass.1G.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@nestedgenericclass.NestedGenericClass.1G (mut (ref null $nestedgenericclass.NestedGenericClass)))
 ))
 (type $nestedgenericclass.NestedGenericClass.1G.vtable (struct
@@ -333,7 +341,7 @@
  (block $return.label
   (block
    ;; new $1H.<init>($1G.this);
-   (drop (call $m_<init>__nestedgenericclass_NestedGenericClass_1G__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.1G.1H (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.1G.1H (global.get $nestedgenericclass.NestedGenericClass.1G.1H.vtable) (ref.null $nestedgenericclass.NestedGenericClass.1G) (global.get $nestedgenericclass.NestedGenericClass.1G.1H.rtt))(local.get $this)))
+   (drop (call $m_<init>__nestedgenericclass_NestedGenericClass_1G__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.1G.1H (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.1G.1H (global.get $nestedgenericclass.NestedGenericClass.1G.1H.vtable) (i32.const 0) (ref.null $nestedgenericclass.NestedGenericClass.1G) (global.get $nestedgenericclass.NestedGenericClass.1G.1H.rtt))(local.get $this)))
   )
  )
 )
@@ -342,6 +350,7 @@
 ;;; CLASS  H
 (type $nestedgenericclass.NestedGenericClass.1G.1H (struct
  (field $vtable (ref null $nestedgenericclass.NestedGenericClass.1G.1H.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@nestedgenericclass.NestedGenericClass.1G.1H (mut (ref null $nestedgenericclass.NestedGenericClass.1G)))
 ))
 (type $nestedgenericclass.NestedGenericClass.1G.1H.vtable (struct

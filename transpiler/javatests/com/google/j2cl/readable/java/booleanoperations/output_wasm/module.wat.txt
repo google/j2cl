@@ -3,6 +3,7 @@
 ;;; CLASS  BooleanOperations
 (type $booleanoperations.BooleanOperations (struct
  (field $vtable (ref null $booleanoperations.BooleanOperations.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $booleanoperations.BooleanOperations.vtable (struct
  
@@ -185,12 +186,12 @@
    )
    ;; Outer finalOuter = new $1Outer.<init>(BooleanOperations.this);
    
-   (local.set $finalOuter (call $m_<init>__booleanoperations_BooleanOperations__void_$pp_booleanoperations@booleanoperations.BooleanOperations.1Outer (struct.new_with_rtt $booleanoperations.BooleanOperations.1Outer (global.get $booleanoperations.BooleanOperations.1Outer.vtable) (ref.null $booleanoperations.BooleanOperations) (i32.const 0) (global.get $booleanoperations.BooleanOperations.1Outer.rtt))(local.get $this)))
+   (local.set $finalOuter (call $m_<init>__booleanoperations_BooleanOperations__void_$pp_booleanoperations@booleanoperations.BooleanOperations.1Outer (struct.new_with_rtt $booleanoperations.BooleanOperations.1Outer (global.get $booleanoperations.BooleanOperations.1Outer.vtable) (i32.const 0) (ref.null $booleanoperations.BooleanOperations) (i32.const 0) (global.get $booleanoperations.BooleanOperations.1Outer.rtt))(local.get $this)))
    ;; (finalOuter.b = (finalOuter.b | true));
    (struct.set $booleanoperations.BooleanOperations.1Outer $b@booleanoperations.BooleanOperations.1Outer(local.get $finalOuter) (i32.or (struct.get $booleanoperations.BooleanOperations.1Outer $b@booleanoperations.BooleanOperations.1Outer(local.get $finalOuter)) (i32.const 1)))
    ;; Outer outer = new $1Outer.<init>(BooleanOperations.this);
    
-   (local.set $outer (call $m_<init>__booleanoperations_BooleanOperations__void_$pp_booleanoperations@booleanoperations.BooleanOperations.1Outer (struct.new_with_rtt $booleanoperations.BooleanOperations.1Outer (global.get $booleanoperations.BooleanOperations.1Outer.vtable) (ref.null $booleanoperations.BooleanOperations) (i32.const 0) (global.get $booleanoperations.BooleanOperations.1Outer.rtt))(local.get $this)))
+   (local.set $outer (call $m_<init>__booleanoperations_BooleanOperations__void_$pp_booleanoperations@booleanoperations.BooleanOperations.1Outer (struct.new_with_rtt $booleanoperations.BooleanOperations.1Outer (global.get $booleanoperations.BooleanOperations.1Outer.vtable) (i32.const 0) (ref.null $booleanoperations.BooleanOperations) (i32.const 0) (global.get $booleanoperations.BooleanOperations.1Outer.rtt))(local.get $this)))
    ;; (outer.b = (outer.b | (((outer = null),outer) == null)));
    (struct.set $booleanoperations.BooleanOperations.1Outer $b@booleanoperations.BooleanOperations.1Outer(local.get $outer) (i32.or (struct.get $booleanoperations.BooleanOperations.1Outer $b@booleanoperations.BooleanOperations.1Outer(local.get $outer)) (ref.eq (block (result (ref null $booleanoperations.BooleanOperations.1Outer))
     (local.set $outer (ref.null $booleanoperations.BooleanOperations.1Outer))
@@ -204,6 +205,7 @@
 ;;; CLASS  Outer
 (type $booleanoperations.BooleanOperations.1Outer (struct
  (field $vtable (ref null $booleanoperations.BooleanOperations.1Outer.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@booleanoperations.BooleanOperations.1Outer (mut (ref null $booleanoperations.BooleanOperations)))
  (field $b@booleanoperations.BooleanOperations.1Outer (mut i32))
 ))
@@ -235,6 +237,7 @@
 ;;; CLASS  Inner
 (type $booleanoperations.BooleanOperations.1Outer.Inner (struct
  (field $vtable (ref null $booleanoperations.BooleanOperations.1Outer.Inner.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@booleanoperations.BooleanOperations.1Outer.Inner (mut (ref null $booleanoperations.BooleanOperations.1Outer)))
 ))
 (type $booleanoperations.BooleanOperations.1Outer.Inner.vtable (struct

@@ -3,6 +3,7 @@
 ;;; CLASS  Lambdas
 (type $lambdas.Lambdas (struct
  (field $vtable (ref null $lambdas.Lambdas.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $field@lambdas.Lambdas (mut i32))
 ))
 (type $lambdas.Lambdas.vtable (struct
@@ -310,9 +311,9 @@
  (block $return.label
   (block
    ;; Lambdas.this.callWithTypeVariable(function (Error i){
-   (drop (call_ref (local.get $this)(ref.null $java.lang.Object)(call $m_<init>__void@java.lang.Error (struct.new_with_rtt $java.lang.Error (global.get $java.lang.Error.vtable) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $Object.array) (ref.null $Object.array) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Error.rtt)))(struct.get $lambdas.Lambdas.vtable $m_callWithTypeVariable__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Object__java_lang_Object (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
+   (drop (call_ref (local.get $this)(ref.null $java.lang.Object)(call $m_<init>__void@java.lang.Error (struct.new_with_rtt $java.lang.Error (global.get $java.lang.Error.vtable) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $Object.array) (ref.null $Object.array) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Error.rtt)))(struct.get $lambdas.Lambdas.vtable $m_callWithTypeVariable__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Object__java_lang_Object (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
    ;; Lambdas.this.callParameterized(function (Error i){
-   (drop (call_ref (local.get $this)(ref.null $java.lang.Object)(call $m_<init>__void@java.lang.Error (struct.new_with_rtt $java.lang.Error (global.get $java.lang.Error.vtable) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $Object.array) (ref.null $Object.array) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Error.rtt)))(struct.get $lambdas.Lambdas.vtable $m_callParameterized__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Error__java_lang_Error (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
+   (drop (call_ref (local.get $this)(ref.null $java.lang.Object)(call $m_<init>__void@java.lang.Error (struct.new_with_rtt $java.lang.Error (global.get $java.lang.Error.vtable) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $Object.array) (ref.null $Object.array) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Error.rtt)))(struct.get $lambdas.Lambdas.vtable $m_callParameterized__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Error__java_lang_Error (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
    ;; lambdas.Lambdas.callTypeVariableWithBounds(function (Enum<T> i){
    (drop (call $m_callTypeVariableWithBounds__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Enum__java_lang_Enum@lambdas.Lambdas (ref.null $java.lang.Object)(ref.cast $java.lang.Object $java.lang.Enum (ref.null $java.lang.Object) (global.get $java.lang.Enum.rtt))))
    ;; Lambdas.this.callWithBiFunction(function (Object x,String y){
@@ -395,7 +396,7 @@
     (then
      (block
       ;; (lambdas.Lambdas.identityFunction = new IdentityFunction.<init>());
-      (global.set $identityFunction@lambdas.Lambdas (call $m_<init>__void_$p_lambdas_Lambdas_IdentityFunction@lambdas.Lambdas.IdentityFunction (struct.new_with_rtt $lambdas.Lambdas.IdentityFunction (global.get $lambdas.Lambdas.IdentityFunction.vtable) (global.get $lambdas.Lambdas.IdentityFunction.rtt))))
+      (global.set $identityFunction@lambdas.Lambdas (call $m_<init>__void_$p_lambdas_Lambdas_IdentityFunction@lambdas.Lambdas.IdentityFunction (struct.new_with_rtt $lambdas.Lambdas.IdentityFunction (global.get $lambdas.Lambdas.IdentityFunction.vtable) (i32.const 0) (global.get $lambdas.Lambdas.IdentityFunction.rtt))))
      )
     )
    )
@@ -496,6 +497,7 @@
 ;;; CLASS  <anonymous> implements Functional<T>
 (type $lambdas.Lambdas.1 (struct
  (field $vtable (ref null $lambdas.Lambdas.1.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@lambdas.Lambdas.1 (mut (ref null $lambdas.Lambdas)))
 ))
 (type $lambdas.Lambdas.1.vtable (struct
@@ -546,6 +548,7 @@
 ;;; CLASS  <anonymous> implements Functional<T>
 (type $lambdas.Lambdas.2 (struct
  (field $vtable (ref null $lambdas.Lambdas.2.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $lambdas.Lambdas.2.vtable (struct
  
@@ -634,6 +637,7 @@
 ;;; CLASS  <anonymous> extends Object
 (type $lambdas.Lambdas.3 (struct
  (field $vtable (ref null $lambdas.Lambdas.3.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@lambdas.Lambdas.3 (mut (ref null $lambdas.Lambdas)))
 ))
 (type $lambdas.Lambdas.3.vtable (struct
@@ -664,6 +668,7 @@
 ;;; CLASS  Parent
 (type $lambdas.Lambdas.Parent (struct
  (field $vtable (ref null $lambdas.Lambdas.Parent.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $fieldInParent@lambdas.Lambdas.Parent (mut i32))
 ))
 (type $lambdas.Lambdas.Parent.vtable (struct
@@ -704,6 +709,7 @@
 ;;; CLASS  LambdaInSubClass
 (type $lambdas.Lambdas.LambdaInSubClass (struct
  (field $vtable (ref null $lambdas.Lambdas.LambdaInSubClass.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $fieldInParent@lambdas.Lambdas.Parent (mut i32))
 ))
 (type $lambdas.Lambdas.LambdaInSubClass.vtable (struct
@@ -757,6 +763,7 @@
 ;;; CLASS  IdentityFunction
 (type $lambdas.Lambdas.IdentityFunction (struct
  (field $vtable (ref null $lambdas.Lambdas.IdentityFunction.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $lambdas.Lambdas.IdentityFunction.vtable (struct
  

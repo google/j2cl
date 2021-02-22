@@ -3,6 +3,7 @@
 ;;; CLASS  LocalClassInStaticContext
 (type $localclassinstaticcontext.LocalClassInStaticContext (struct
  (field $vtable (ref null $localclassinstaticcontext.LocalClassInStaticContext.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $localclassinstaticcontext.LocalClassInStaticContext.vtable (struct
  
@@ -33,10 +34,10 @@
  (block $return.label
   (block
    ;; new $1A.<init>();
-   (drop (call $m_<init>__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.1A (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.1A (global.get $localclassinstaticcontext.LocalClassInStaticContext.1A.vtable) (global.get $localclassinstaticcontext.LocalClassInStaticContext.1A.rtt))))
+   (drop (call $m_<init>__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.1A (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.1A (global.get $localclassinstaticcontext.LocalClassInStaticContext.1A.vtable) (i32.const 0) (global.get $localclassinstaticcontext.LocalClassInStaticContext.1A.rtt))))
    ;; Object a = new $3.<init>();
    
-   (local.set $a (call $m_<init>__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.3 (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.3 (global.get $localclassinstaticcontext.LocalClassInStaticContext.3.vtable) (global.get $localclassinstaticcontext.LocalClassInStaticContext.3.rtt))))
+   (local.set $a (call $m_<init>__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.3 (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.3 (global.get $localclassinstaticcontext.LocalClassInStaticContext.3.vtable) (i32.const 0) (global.get $localclassinstaticcontext.LocalClassInStaticContext.3.rtt))))
   )
  )
 )
@@ -44,6 +45,7 @@
 ;;; CLASS  <anonymous> extends Object
 (type $localclassinstaticcontext.LocalClassInStaticContext.1 (struct
  (field $vtable (ref null $localclassinstaticcontext.LocalClassInStaticContext.1.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $localclassinstaticcontext.LocalClassInStaticContext.1.vtable (struct
  
@@ -70,6 +72,7 @@
 ;;; CLASS  A
 (type $localclassinstaticcontext.LocalClassInStaticContext.1A (struct
  (field $vtable (ref null $localclassinstaticcontext.LocalClassInStaticContext.1A.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $localclassinstaticcontext.LocalClassInStaticContext.1A.vtable (struct
  
@@ -96,6 +99,7 @@
 ;;; CLASS  <anonymous> extends Object
 (type $localclassinstaticcontext.LocalClassInStaticContext.3 (struct
  (field $vtable (ref null $localclassinstaticcontext.LocalClassInStaticContext.3.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $localclassinstaticcontext.LocalClassInStaticContext.3.vtable (struct
  
@@ -128,7 +132,7 @@
  (block $return.label
   (block
    ;; new $1A.<init>();
-   (drop (call $m_<init>__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.1A (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.1A (global.get $localclassinstaticcontext.LocalClassInStaticContext.1A.vtable) (global.get $localclassinstaticcontext.LocalClassInStaticContext.1A.rtt))))
+   (drop (call $m_<init>__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.1A (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.1A (global.get $localclassinstaticcontext.LocalClassInStaticContext.1A.vtable) (i32.const 0) (global.get $localclassinstaticcontext.LocalClassInStaticContext.1A.rtt))))
   )
  )
 )
@@ -137,6 +141,7 @@
 ;;; CLASS  B
 (type $localclassinstaticcontext.LocalClassInStaticContext.1B (struct
  (field $vtable (ref null $localclassinstaticcontext.LocalClassInStaticContext.1B.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $localclassinstaticcontext.LocalClassInStaticContext.1B.vtable (struct
  
@@ -163,6 +168,7 @@
 ;;; CLASS  <anonymous> extends Object
 (type $localclassinstaticcontext.LocalClassInStaticContext.2 (struct
  (field $vtable (ref null $localclassinstaticcontext.LocalClassInStaticContext.2.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $localclassinstaticcontext.LocalClassInStaticContext.2.vtable (struct
  
@@ -189,6 +195,7 @@
 ;;; CLASS  C
 (type $localclassinstaticcontext.LocalClassInStaticContext.C (struct
  (field $vtable (ref null $localclassinstaticcontext.LocalClassInStaticContext.C.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $f@localclassinstaticcontext.LocalClassInStaticContext.C (mut i32))
 ))
 (type $localclassinstaticcontext.LocalClassInStaticContext.C.vtable (struct
@@ -227,7 +234,7 @@
    (block
     ;; D $qualifier = new $1D.<init>(C.this);
     
-    (local.set $$qualifier (call $m_<init>__localclassinstaticcontext_LocalClassInStaticContext_C__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.C.1D (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.C.1D (global.get $localclassinstaticcontext.LocalClassInStaticContext.C.1D.vtable) (ref.null $localclassinstaticcontext.LocalClassInStaticContext.C) (global.get $localclassinstaticcontext.LocalClassInStaticContext.C.1D.rtt))(local.get $this)))
+    (local.set $$qualifier (call $m_<init>__localclassinstaticcontext_LocalClassInStaticContext_C__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.C.1D (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.C.1D (global.get $localclassinstaticcontext.LocalClassInStaticContext.C.1D.vtable) (i32.const 0) (ref.null $localclassinstaticcontext.LocalClassInStaticContext.C) (global.get $localclassinstaticcontext.LocalClassInStaticContext.C.1D.rtt))(local.get $this)))
     ;; $qualifier.fun();
     (drop (call_ref (local.get $$qualifier)(struct.get $localclassinstaticcontext.LocalClassInStaticContext.C.1D.vtable $m_fun__int (struct.get $localclassinstaticcontext.LocalClassInStaticContext.C.1D $vtable(local.get $$qualifier)))))
    )
@@ -250,6 +257,7 @@
 ;;; CLASS  D
 (type $localclassinstaticcontext.LocalClassInStaticContext.C.1D (struct
  (field $vtable (ref null $localclassinstaticcontext.LocalClassInStaticContext.C.1D.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@localclassinstaticcontext.LocalClassInStaticContext.C.1D (mut (ref null $localclassinstaticcontext.LocalClassInStaticContext.C)))
 ))
 (type $localclassinstaticcontext.LocalClassInStaticContext.C.1D.vtable (struct

@@ -3,6 +3,7 @@
 ;;; CLASS  BoundedJsArray
 (type $genericnativetype.BoundedJsArray (struct
  (field $vtable (ref null $genericnativetype.BoundedJsArray.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $genericnativetype.BoundedJsArray.vtable (struct
  
@@ -55,7 +56,7 @@
   (block
    ;; BoundedJsArray<V> array = new BoundedJsArray.<init>(size);
    
-   (local.set $array (call $m_<init>__int__void_$p_genericnativetype_BoundedJsArray@genericnativetype.BoundedJsArray (struct.new_with_rtt $genericnativetype.BoundedJsArray (global.get $genericnativetype.BoundedJsArray.vtable) (global.get $genericnativetype.BoundedJsArray.rtt))(local.get $size)))
+   (local.set $array (call $m_<init>__int__void_$p_genericnativetype_BoundedJsArray@genericnativetype.BoundedJsArray (struct.new_with_rtt $genericnativetype.BoundedJsArray (global.get $genericnativetype.BoundedJsArray.vtable) (i32.const 0) (global.get $genericnativetype.BoundedJsArray.rtt))(local.get $size)))
    ;; return array;
    (local.set $return.value (local.get $array))
    (br $return.label)
@@ -68,6 +69,7 @@
 ;;; CLASS  BoundedJsArrays
 (type $genericnativetype.BoundedJsArrays (struct
  (field $vtable (ref null $genericnativetype.BoundedJsArrays.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $genericnativetype.BoundedJsArrays.vtable (struct
  
