@@ -3,15 +3,6 @@
 ;;; CLASS  CompileTimeConstant
 (type $compiletimeconstant.CompileTimeConstant (struct
  (field $vtable (ref null $compiletimeconstant.CompileTimeConstant.vtable))
- (field $A2@compiletimeconstant.CompileTimeConstant (mut i32))
- (field $B2@compiletimeconstant.CompileTimeConstant (mut i32))
- (field $C2@compiletimeconstant.CompileTimeConstant (mut i32))
- (field $D2@compiletimeconstant.CompileTimeConstant (mut (ref null $java.lang.String)))
- (field $E2@compiletimeconstant.CompileTimeConstant (mut (ref null $java.lang.String)))
- (field $F2@compiletimeconstant.CompileTimeConstant (mut (ref null $java.lang.String)))
- (field $G2@compiletimeconstant.CompileTimeConstant (mut i64))
- (field $H2@compiletimeconstant.CompileTimeConstant (mut i32))
- (field $I2@compiletimeconstant.CompileTimeConstant (mut i32))
 ))
 (type $compiletimeconstant.CompileTimeConstant.vtable (struct
  
@@ -31,6 +22,15 @@
 (global $G@compiletimeconstant.CompileTimeConstant i64 (i64.const 10000))
 (global $H@compiletimeconstant.CompileTimeConstant i32 (i32.const 65))
 (global $I@compiletimeconstant.CompileTimeConstant i32 (i32.const 1))
+(global $A2@compiletimeconstant.CompileTimeConstant i32 (i32.const 10))
+(global $B2@compiletimeconstant.CompileTimeConstant i32 (i32.const 20))
+(global $C2@compiletimeconstant.CompileTimeConstant i32 (i32.const 200))
+(global $D2@compiletimeconstant.CompileTimeConstant (ref null $java.lang.String) (ref.null $java.lang.String))
+(global $E2@compiletimeconstant.CompileTimeConstant (ref null $java.lang.String) (ref.null $java.lang.String))
+(global $F2@compiletimeconstant.CompileTimeConstant (ref null $java.lang.String) (ref.null $java.lang.String))
+(global $G2@compiletimeconstant.CompileTimeConstant i64 (i64.const 10000))
+(global $H2@compiletimeconstant.CompileTimeConstant i32 (i32.const 65))
+(global $I2@compiletimeconstant.CompileTimeConstant i32 (i32.const 1))
 
 ;;; CompileTimeConstant()
 (func $m_<init>__void@compiletimeconstant.CompileTimeConstant
@@ -53,9 +53,12 @@
  (local $b i32)
  (block $return.label
   (block
-   ;; boolean b = CompileTimeConstant.this.I2;
+   ;; boolean b = (CompileTimeConstant.this,compiletimeconstant.CompileTimeConstant.I2);
    
-   (local.set $b (struct.get $compiletimeconstant.CompileTimeConstant $I2@compiletimeconstant.CompileTimeConstant(local.get $this)))
+   (local.set $b (block (result i32)
+    (drop (local.get $this))
+    (global.get $I2@compiletimeconstant.CompileTimeConstant)
+   ))
   )
  )
 )

@@ -69,6 +69,7 @@ import com.google.j2cl.transpiler.passes.NormalizeEnumClasses;
 import com.google.j2cl.transpiler.passes.NormalizeEquality;
 import com.google.j2cl.transpiler.passes.NormalizeFieldInitialization;
 import com.google.j2cl.transpiler.passes.NormalizeFunctionExpressions;
+import com.google.j2cl.transpiler.passes.NormalizeInstanceCompileTimeConstants;
 import com.google.j2cl.transpiler.passes.NormalizeInstanceOfs;
 import com.google.j2cl.transpiler.passes.NormalizeInterfaceMethods;
 import com.google.j2cl.transpiler.passes.NormalizeJsAwaitMethodInvocations;
@@ -276,6 +277,7 @@ public enum Backend {
           new BridgeMethodsCreator(),
           // Must run before Enum normalization
           new FixSuperCallQualifiers(),
+          new NormalizeInstanceCompileTimeConstants(),
           new NormalizeStaticMemberQualifiers(),
           new NormalizeMultiExpressions(),
 
