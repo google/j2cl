@@ -9,7 +9,6 @@
 ;;; CLASS  InterfaceImpl
 (type $interfacejsbridge.InterfaceImpl (struct
  (field $vtable (ref null $interfacejsbridge.InterfaceImpl.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $interfacejsbridge.InterfaceImpl.vtable (struct
  
@@ -57,7 +56,6 @@
 ;;; CLASS  Main
 (type $interfacejsbridge.Main (struct
  (field $vtable (ref null $interfacejsbridge.Main.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $interfacejsbridge.Main.vtable (struct
  
@@ -95,16 +93,16 @@
   (block
    ;; MyJsInterface a = new InterfaceImpl.<init>();
    
-   (local.set $a (call $m_<init>__void@interfacejsbridge.InterfaceImpl (struct.new_with_rtt $interfacejsbridge.InterfaceImpl (global.get $interfacejsbridge.InterfaceImpl.vtable) (i32.const 0) (global.get $interfacejsbridge.InterfaceImpl.rtt))))
+   (local.set $a (call $m_<init>__void@interfacejsbridge.InterfaceImpl (struct.new_with_rtt $interfacejsbridge.InterfaceImpl (global.get $interfacejsbridge.InterfaceImpl.vtable) (global.get $interfacejsbridge.InterfaceImpl.rtt))))
    ;; MyInterface b = new InterfaceImpl.<init>();
    
-   (local.set $b (call $m_<init>__void@interfacejsbridge.InterfaceImpl (struct.new_with_rtt $interfacejsbridge.InterfaceImpl (global.get $interfacejsbridge.InterfaceImpl.vtable) (i32.const 0) (global.get $interfacejsbridge.InterfaceImpl.rtt))))
+   (local.set $b (call $m_<init>__void@interfacejsbridge.InterfaceImpl (struct.new_with_rtt $interfacejsbridge.InterfaceImpl (global.get $interfacejsbridge.InterfaceImpl.vtable) (global.get $interfacejsbridge.InterfaceImpl.rtt))))
    ;; SubInterface c = new InterfaceImpl.<init>();
    
-   (local.set $c (call $m_<init>__void@interfacejsbridge.InterfaceImpl (struct.new_with_rtt $interfacejsbridge.InterfaceImpl (global.get $interfacejsbridge.InterfaceImpl.vtable) (i32.const 0) (global.get $interfacejsbridge.InterfaceImpl.rtt))))
+   (local.set $c (call $m_<init>__void@interfacejsbridge.InterfaceImpl (struct.new_with_rtt $interfacejsbridge.InterfaceImpl (global.get $interfacejsbridge.InterfaceImpl.vtable) (global.get $interfacejsbridge.InterfaceImpl.rtt))))
    ;; InterfaceImpl d = new InterfaceImpl.<init>();
    
-   (local.set $d (call $m_<init>__void@interfacejsbridge.InterfaceImpl (struct.new_with_rtt $interfacejsbridge.InterfaceImpl (global.get $interfacejsbridge.InterfaceImpl.vtable) (i32.const 0) (global.get $interfacejsbridge.InterfaceImpl.rtt))))
+   (local.set $d (call $m_<init>__void@interfacejsbridge.InterfaceImpl (struct.new_with_rtt $interfacejsbridge.InterfaceImpl (global.get $interfacejsbridge.InterfaceImpl.vtable) (global.get $interfacejsbridge.InterfaceImpl.rtt))))
    ;; a.foo(1);
    (drop (i32.const 0))
    ;; b.foo(1);

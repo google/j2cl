@@ -3,7 +3,6 @@
 ;;; CLASS  Main
 (type $libraryinfo.Main (struct
  (field $vtable (ref null $libraryinfo.Main.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $libraryinfo.Main.vtable (struct
  
@@ -35,18 +34,18 @@
  (block $return.label
   (block
    ;; new Main.<init>().execute();
-   (call $m_execute__void_$p_libraryinfo_Main@libraryinfo.Main (call $m_<init>__void@libraryinfo.Main (struct.new_with_rtt $libraryinfo.Main (global.get $libraryinfo.Main.vtable) (i32.const 0) (global.get $libraryinfo.Main.rtt))))
+   (call $m_execute__void_$p_libraryinfo_Main@libraryinfo.Main (call $m_<init>__void@libraryinfo.Main (struct.new_with_rtt $libraryinfo.Main (global.get $libraryinfo.Main.vtable) (global.get $libraryinfo.Main.rtt))))
    ;; Function jsFunction = new FunctionImpl.<init>();
    
-   (local.set $jsFunction (call $m_<init>__void_$p_libraryinfo_Main_FunctionImpl@libraryinfo.Main.FunctionImpl (struct.new_with_rtt $libraryinfo.Main.FunctionImpl (global.get $libraryinfo.Main.FunctionImpl.vtable) (i32.const 0) (global.get $libraryinfo.Main.FunctionImpl.rtt))))
+   (local.set $jsFunction (call $m_<init>__void_$p_libraryinfo_Main_FunctionImpl@libraryinfo.Main.FunctionImpl (struct.new_with_rtt $libraryinfo.Main.FunctionImpl (global.get $libraryinfo.Main.FunctionImpl.vtable) (global.get $libraryinfo.Main.FunctionImpl.rtt))))
    ;; (jsFunction = function (String s){
    (local.set $jsFunction (ref.null $java.lang.Object))
    ;; jsFunction.apply("foo");
    
    ;; new MyJsType.<init>();
-   (drop (call $m_<init>__void@libraryinfo.Main.MyJsType (struct.new_with_rtt $libraryinfo.Main.MyJsType (global.get $libraryinfo.Main.MyJsType.vtable) (i32.const 0) (ref.null $java.lang.Object) (global.get $libraryinfo.Main.MyJsType.rtt))))
+   (drop (call $m_<init>__void@libraryinfo.Main.MyJsType (struct.new_with_rtt $libraryinfo.Main.MyJsType (global.get $libraryinfo.Main.MyJsType.vtable) (ref.null $java.lang.Object) (global.get $libraryinfo.Main.MyJsType.rtt))))
    ;; new $1.<init>();
-   (drop (call $m_<init>__void_$pp_libraryinfo@libraryinfo.Main.1 (struct.new_with_rtt $libraryinfo.Main.1 (global.get $libraryinfo.Main.1.vtable) (i32.const 0) (global.get $libraryinfo.Main.1.rtt))))
+   (drop (call $m_<init>__void_$pp_libraryinfo@libraryinfo.Main.1 (struct.new_with_rtt $libraryinfo.Main.1 (global.get $libraryinfo.Main.1.vtable) (global.get $libraryinfo.Main.1.rtt))))
   )
  )
 )
@@ -118,7 +117,6 @@
 ;;; CLASS  FunctionImpl
 (type $libraryinfo.Main.FunctionImpl (struct
  (field $vtable (ref null $libraryinfo.Main.FunctionImpl.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $libraryinfo.Main.FunctionImpl.vtable (struct
  
@@ -159,7 +157,6 @@
 ;;; ENUM  MyEnum
 (type $libraryinfo.Main.MyEnum (struct
  (field $vtable (ref null $libraryinfo.Main.MyEnum.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $libraryinfo.Main.MyEnum.vtable (struct
  
@@ -189,7 +186,6 @@
 ;;; CLASS  MyJsType
 (type $libraryinfo.Main.MyJsType (struct
  (field $vtable (ref null $libraryinfo.Main.MyJsType.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $someField@libraryinfo.Main.MyJsType (mut (ref null $java.lang.Object)))
 ))
 (type $libraryinfo.Main.MyJsType.vtable (struct
@@ -210,7 +206,7 @@
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; (MyJsType.this.someField = new Main.<init>());
-   (struct.set $libraryinfo.Main.MyJsType $someField@libraryinfo.Main.MyJsType(local.get $this) (call $m_<init>__void@libraryinfo.Main (struct.new_with_rtt $libraryinfo.Main (global.get $libraryinfo.Main.vtable) (i32.const 0) (global.get $libraryinfo.Main.rtt))))
+   (struct.set $libraryinfo.Main.MyJsType $someField@libraryinfo.Main.MyJsType(local.get $this) (call $m_<init>__void@libraryinfo.Main (struct.new_with_rtt $libraryinfo.Main (global.get $libraryinfo.Main.vtable) (global.get $libraryinfo.Main.rtt))))
   )
  )
  (local.get $this)
@@ -219,7 +215,6 @@
 ;;; CLASS  <anonymous> extends Object
 (type $libraryinfo.Main.1 (struct
  (field $vtable (ref null $libraryinfo.Main.1.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $libraryinfo.Main.1.vtable (struct
  
@@ -259,7 +254,6 @@
 ;;; CLASS  Foo
 (type $libraryinfo.Main.Foo (struct
  (field $vtable (ref null $libraryinfo.Main.Foo.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@libraryinfo.Main.Foo (mut (ref null $libraryinfo.Main)))
 ))
 (type $libraryinfo.Main.Foo.vtable (struct

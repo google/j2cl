@@ -3,7 +3,6 @@
 ;;; CLASS  SimpleLocalClass
 (type $simplelocalclass.SimpleLocalClass (struct
  (field $vtable (ref null $simplelocalclass.SimpleLocalClass.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $simplelocalclass.SimpleLocalClass.vtable (struct
  
@@ -46,12 +45,12 @@
    (block
     ;; InnerClass $qualifier = new $1InnerClass.<init>(SimpleLocalClass.this,localVar,p);
     
-    (local.set $$qualifier (call $m_<init>__simplelocalclass_SimpleLocalClass__int__int__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1InnerClass (struct.new_with_rtt $simplelocalclass.SimpleLocalClass.1InnerClass (global.get $simplelocalclass.SimpleLocalClass.1InnerClass.vtable) (i32.const 0) (ref.null $simplelocalclass.SimpleLocalClass) (i32.const 0) (i32.const 0) (global.get $simplelocalclass.SimpleLocalClass.1InnerClass.rtt))(local.get $this)(local.get $localVar)(local.get $p)))
+    (local.set $$qualifier (call $m_<init>__simplelocalclass_SimpleLocalClass__int__int__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1InnerClass (struct.new_with_rtt $simplelocalclass.SimpleLocalClass.1InnerClass (global.get $simplelocalclass.SimpleLocalClass.1InnerClass.vtable) (ref.null $simplelocalclass.SimpleLocalClass) (i32.const 0) (i32.const 0) (global.get $simplelocalclass.SimpleLocalClass.1InnerClass.rtt))(local.get $this)(local.get $localVar)(local.get $p)))
     ;; $qualifier.fun();
     (drop (call_ref (local.get $$qualifier)(struct.get $simplelocalclass.SimpleLocalClass.1InnerClass.vtable $m_fun__int (struct.get $simplelocalclass.SimpleLocalClass.1InnerClass $vtable(local.get $$qualifier)))))
    )
    ;; new $1InnerClassWithoutCaptures.<init>(SimpleLocalClass.this);
-   (drop (call $m_<init>__simplelocalclass_SimpleLocalClass__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (struct.new_with_rtt $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (global.get $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.vtable) (i32.const 0) (ref.null $simplelocalclass.SimpleLocalClass) (global.get $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.rtt))(local.get $this)))
+   (drop (call $m_<init>__simplelocalclass_SimpleLocalClass__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (struct.new_with_rtt $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (global.get $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.vtable) (ref.null $simplelocalclass.SimpleLocalClass) (global.get $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.rtt))(local.get $this)))
   )
  )
 )
@@ -88,7 +87,6 @@
 ;;; CLASS  InnerClass
 (type $simplelocalclass.SimpleLocalClass.1InnerClass (struct
  (field $vtable (ref null $simplelocalclass.SimpleLocalClass.1InnerClass.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@simplelocalclass.SimpleLocalClass.1InnerClass (mut (ref null $simplelocalclass.SimpleLocalClass)))
  (field $localVar@simplelocalclass.SimpleLocalClass.1InnerClass (mut i32))
  (field $p@simplelocalclass.SimpleLocalClass.1InnerClass (mut i32))
@@ -146,7 +144,6 @@
 ;;; CLASS  InnerClassWithoutCaptures
 (type $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (struct
  (field $vtable (ref null $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (mut (ref null $simplelocalclass.SimpleLocalClass)))
 ))
 (type $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.vtable (struct
@@ -177,7 +174,6 @@
 ;;; CLASS  InnerClass
 (type $simplelocalclass.SimpleLocalClass.2InnerClass (struct
  (field $vtable (ref null $simplelocalclass.SimpleLocalClass.2InnerClass.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@simplelocalclass.SimpleLocalClass.2InnerClass (mut (ref null $simplelocalclass.SimpleLocalClass)))
  (field $field@simplelocalclass.SimpleLocalClass.2InnerClass (mut i32))
  (field $localVar@simplelocalclass.SimpleLocalClass.2InnerClass (mut i32))
@@ -226,7 +222,6 @@
 ;;; CLASS  Abc$InnerClass
 (type $simplelocalclass.SimpleLocalClass.1Abc$InnerClass (struct
  (field $vtable (ref null $simplelocalclass.SimpleLocalClass.1Abc$InnerClass.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@simplelocalclass.SimpleLocalClass.1Abc$InnerClass (mut (ref null $simplelocalclass.SimpleLocalClass)))
 ))
 (type $simplelocalclass.SimpleLocalClass.1Abc$InnerClass.vtable (struct
@@ -257,7 +252,6 @@
 ;;; CLASS  Klm$InnerClass
 (type $simplelocalclass.SimpleLocalClass.1Klm$InnerClass (struct
  (field $vtable (ref null $simplelocalclass.SimpleLocalClass.1Klm$InnerClass.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@simplelocalclass.SimpleLocalClass.1Klm$InnerClass (mut (ref null $simplelocalclass.SimpleLocalClass)))
 ))
 (type $simplelocalclass.SimpleLocalClass.1Klm$InnerClass.vtable (struct

@@ -3,7 +3,6 @@
 ;;; CLASS  ArrayCalls
 (type $devirtualizedcalls.ArrayCalls (struct
  (field $vtable (ref null $devirtualizedcalls.ArrayCalls.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $devirtualizedcalls.ArrayCalls.vtable (struct
  
@@ -56,7 +55,6 @@
 ;;; CLASS  CharSequenceCalls
 (type $devirtualizedcalls.CharSequenceCalls (struct
  (field $vtable (ref null $devirtualizedcalls.CharSequenceCalls.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $devirtualizedcalls.CharSequenceCalls.vtable (struct
  
@@ -119,7 +117,6 @@
 ;;; CLASS  NumberCalls
 (type $devirtualizedcalls.NumberCalls (struct
  (field $vtable (ref null $devirtualizedcalls.NumberCalls.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $devirtualizedcalls.NumberCalls.vtable (struct
  
@@ -167,7 +164,7 @@
   (block
    ;; Number i = new Integer.<init>(1);
    
-   (local.set $i (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
+   (local.set $i (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
    ;; i.byteValue();
    (drop (call_ref (local.get $i)(struct.get $java.lang.Number.vtable $m_byteValue__byte (struct.get $java.lang.Number $vtable(local.get $i)))))
    ;; i.doubleValue();
@@ -182,7 +179,7 @@
    (drop (call_ref (local.get $i)(struct.get $java.lang.Number.vtable $m_shortValue__short (struct.get $java.lang.Number $vtable(local.get $i)))))
    ;; Integer ii = new Integer.<init>(1);
    
-   (local.set $ii (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
+   (local.set $ii (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
    ;; ii.byteValue();
    (drop (call_ref (local.get $ii)(struct.get $java.lang.Integer.vtable $m_byteValue__byte (struct.get $java.lang.Integer $vtable(local.get $ii)))))
    ;; ii.doubleValue();
@@ -197,7 +194,7 @@
    (drop (call_ref (local.get $ii)(struct.get $java.lang.Integer.vtable $m_shortValue__short (struct.get $java.lang.Integer $vtable(local.get $ii)))))
    ;; Number d = new Double.<init>(1.1);
    
-   (local.set $d (call $m_<init>__double__void@java.lang.Double (struct.new_with_rtt $java.lang.Double (global.get $java.lang.Double.vtable) (i32.const 0) (f64.const 0.0) (global.get $java.lang.Double.rtt))(f64.const 1.1)))
+   (local.set $d (call $m_<init>__double__void@java.lang.Double (struct.new_with_rtt $java.lang.Double (global.get $java.lang.Double.vtable) (f64.const 0.0) (global.get $java.lang.Double.rtt))(f64.const 1.1)))
    ;; d.byteValue();
    (drop (call_ref (local.get $d)(struct.get $java.lang.Number.vtable $m_byteValue__byte (struct.get $java.lang.Number $vtable(local.get $d)))))
    ;; d.doubleValue();
@@ -212,7 +209,7 @@
    (drop (call_ref (local.get $d)(struct.get $java.lang.Number.vtable $m_shortValue__short (struct.get $java.lang.Number $vtable(local.get $d)))))
    ;; Double dd = new Double.<init>(1.1);
    
-   (local.set $dd (call $m_<init>__double__void@java.lang.Double (struct.new_with_rtt $java.lang.Double (global.get $java.lang.Double.vtable) (i32.const 0) (f64.const 0.0) (global.get $java.lang.Double.rtt))(f64.const 1.1)))
+   (local.set $dd (call $m_<init>__double__void@java.lang.Double (struct.new_with_rtt $java.lang.Double (global.get $java.lang.Double.vtable) (f64.const 0.0) (global.get $java.lang.Double.rtt))(f64.const 1.1)))
    ;; dd.byteValue();
    (drop (call_ref (local.get $dd)(struct.get $java.lang.Double.vtable $m_byteValue__byte (struct.get $java.lang.Double $vtable(local.get $dd)))))
    ;; dd.doubleValue();
@@ -227,7 +224,7 @@
    (drop (call_ref (local.get $dd)(struct.get $java.lang.Double.vtable $m_shortValue__short (struct.get $java.lang.Double $vtable(local.get $dd)))))
    ;; Number s = new Short.<init>(((short) 1));
    
-   (local.set $s (call $m_<init>__short__void@java.lang.Short (struct.new_with_rtt $java.lang.Short (global.get $java.lang.Short.vtable) (i32.const 0) (i32.const 0) (global.get $java.lang.Short.rtt))(i32.const 0)))
+   (local.set $s (call $m_<init>__short__void@java.lang.Short (struct.new_with_rtt $java.lang.Short (global.get $java.lang.Short.vtable) (i32.const 0) (global.get $java.lang.Short.rtt))(i32.const 0)))
    ;; s.byteValue();
    (drop (call_ref (local.get $s)(struct.get $java.lang.Number.vtable $m_byteValue__byte (struct.get $java.lang.Number $vtable(local.get $s)))))
    ;; s.doubleValue();
@@ -242,7 +239,7 @@
    (drop (call_ref (local.get $s)(struct.get $java.lang.Number.vtable $m_shortValue__short (struct.get $java.lang.Number $vtable(local.get $s)))))
    ;; Short ss = new Short.<init>(((short) 1));
    
-   (local.set $ss (call $m_<init>__short__void@java.lang.Short (struct.new_with_rtt $java.lang.Short (global.get $java.lang.Short.vtable) (i32.const 0) (i32.const 0) (global.get $java.lang.Short.rtt))(i32.const 0)))
+   (local.set $ss (call $m_<init>__short__void@java.lang.Short (struct.new_with_rtt $java.lang.Short (global.get $java.lang.Short.vtable) (i32.const 0) (global.get $java.lang.Short.rtt))(i32.const 0)))
    ;; ss.byteValue();
    (drop (call_ref (local.get $ss)(struct.get $java.lang.Short.vtable $m_byteValue__byte (struct.get $java.lang.Short $vtable(local.get $ss)))))
    ;; ss.doubleValue();
@@ -257,7 +254,7 @@
    (drop (call_ref (local.get $ss)(struct.get $java.lang.Short.vtable $m_shortValue__short (struct.get $java.lang.Short $vtable(local.get $ss)))))
    ;; Number b = new Byte.<init>(((byte) 1));
    
-   (local.set $b (call $m_<init>__byte__void@java.lang.Byte (struct.new_with_rtt $java.lang.Byte (global.get $java.lang.Byte.vtable) (i32.const 0) (i32.const 0) (global.get $java.lang.Byte.rtt))(i32.const 0)))
+   (local.set $b (call $m_<init>__byte__void@java.lang.Byte (struct.new_with_rtt $java.lang.Byte (global.get $java.lang.Byte.vtable) (i32.const 0) (global.get $java.lang.Byte.rtt))(i32.const 0)))
    ;; b.byteValue();
    (drop (call_ref (local.get $b)(struct.get $java.lang.Number.vtable $m_byteValue__byte (struct.get $java.lang.Number $vtable(local.get $b)))))
    ;; b.doubleValue();
@@ -272,7 +269,7 @@
    (drop (call_ref (local.get $b)(struct.get $java.lang.Number.vtable $m_shortValue__short (struct.get $java.lang.Number $vtable(local.get $b)))))
    ;; Byte bb = new Byte.<init>(((byte) 1));
    
-   (local.set $bb (call $m_<init>__byte__void@java.lang.Byte (struct.new_with_rtt $java.lang.Byte (global.get $java.lang.Byte.vtable) (i32.const 0) (i32.const 0) (global.get $java.lang.Byte.rtt))(i32.const 0)))
+   (local.set $bb (call $m_<init>__byte__void@java.lang.Byte (struct.new_with_rtt $java.lang.Byte (global.get $java.lang.Byte.vtable) (i32.const 0) (global.get $java.lang.Byte.rtt))(i32.const 0)))
    ;; bb.byteValue();
    (drop (call_ref (local.get $bb)(struct.get $java.lang.Byte.vtable $m_byteValue__byte (struct.get $java.lang.Byte $vtable(local.get $bb)))))
    ;; bb.doubleValue();
@@ -287,7 +284,7 @@
    (drop (call_ref (local.get $bb)(struct.get $java.lang.Byte.vtable $m_shortValue__short (struct.get $java.lang.Byte $vtable(local.get $bb)))))
    ;; Number f = new Float.<init>(1.100000023841858);
    
-   (local.set $f (call $m_<init>__float__void@java.lang.Float (struct.new_with_rtt $java.lang.Float (global.get $java.lang.Float.vtable) (i32.const 0) (f32.const 0.0) (global.get $java.lang.Float.rtt))(f32.const 1.100000023841858)))
+   (local.set $f (call $m_<init>__float__void@java.lang.Float (struct.new_with_rtt $java.lang.Float (global.get $java.lang.Float.vtable) (f32.const 0.0) (global.get $java.lang.Float.rtt))(f32.const 1.100000023841858)))
    ;; f.byteValue();
    (drop (call_ref (local.get $f)(struct.get $java.lang.Number.vtable $m_byteValue__byte (struct.get $java.lang.Number $vtable(local.get $f)))))
    ;; f.doubleValue();
@@ -302,7 +299,7 @@
    (drop (call_ref (local.get $f)(struct.get $java.lang.Number.vtable $m_shortValue__short (struct.get $java.lang.Number $vtable(local.get $f)))))
    ;; Float ff = new Float.<init>(1.100000023841858);
    
-   (local.set $ff (call $m_<init>__float__void@java.lang.Float (struct.new_with_rtt $java.lang.Float (global.get $java.lang.Float.vtable) (i32.const 0) (f32.const 0.0) (global.get $java.lang.Float.rtt))(f32.const 1.100000023841858)))
+   (local.set $ff (call $m_<init>__float__void@java.lang.Float (struct.new_with_rtt $java.lang.Float (global.get $java.lang.Float.vtable) (f32.const 0.0) (global.get $java.lang.Float.rtt))(f32.const 1.100000023841858)))
    ;; ff.byteValue();
    (drop (call_ref (local.get $ff)(struct.get $java.lang.Float.vtable $m_byteValue__byte (struct.get $java.lang.Float $vtable(local.get $ff)))))
    ;; ff.doubleValue();
@@ -317,7 +314,7 @@
    (drop (call_ref (local.get $ff)(struct.get $java.lang.Float.vtable $m_shortValue__short (struct.get $java.lang.Float $vtable(local.get $ff)))))
    ;; Number l = new Long.<init>(1);
    
-   (local.set $l (call $m_<init>__long__void@java.lang.Long (struct.new_with_rtt $java.lang.Long (global.get $java.lang.Long.vtable) (i32.const 0) (i64.const 0) (global.get $java.lang.Long.rtt))(i64.const 1)))
+   (local.set $l (call $m_<init>__long__void@java.lang.Long (struct.new_with_rtt $java.lang.Long (global.get $java.lang.Long.vtable) (i64.const 0) (global.get $java.lang.Long.rtt))(i64.const 1)))
    ;; l.byteValue();
    (drop (call_ref (local.get $l)(struct.get $java.lang.Number.vtable $m_byteValue__byte (struct.get $java.lang.Number $vtable(local.get $l)))))
    ;; l.doubleValue();
@@ -332,7 +329,7 @@
    (drop (call_ref (local.get $l)(struct.get $java.lang.Number.vtable $m_shortValue__short (struct.get $java.lang.Number $vtable(local.get $l)))))
    ;; Long ll = new Long.<init>(1);
    
-   (local.set $ll (call $m_<init>__long__void@java.lang.Long (struct.new_with_rtt $java.lang.Long (global.get $java.lang.Long.vtable) (i32.const 0) (i64.const 0) (global.get $java.lang.Long.rtt))(i64.const 1)))
+   (local.set $ll (call $m_<init>__long__void@java.lang.Long (struct.new_with_rtt $java.lang.Long (global.get $java.lang.Long.vtable) (i64.const 0) (global.get $java.lang.Long.rtt))(i64.const 1)))
    ;; ll.byteValue();
    (drop (call_ref (local.get $ll)(struct.get $java.lang.Long.vtable $m_byteValue__byte (struct.get $java.lang.Long $vtable(local.get $ll)))))
    ;; ll.doubleValue();
@@ -347,12 +344,12 @@
    (drop (call_ref (local.get $ll)(struct.get $java.lang.Long.vtable $m_shortValue__short (struct.get $java.lang.Long $vtable(local.get $ll)))))
    ;; Character c = new Character.<init>(97);
    
-   (local.set $c (call $m_<init>__char__void@java.lang.Character (struct.new_with_rtt $java.lang.Character (global.get $java.lang.Character.vtable) (i32.const 0) (i32.const 0) (global.get $java.lang.Character.rtt))(i32.const 97)))
+   (local.set $c (call $m_<init>__char__void@java.lang.Character (struct.new_with_rtt $java.lang.Character (global.get $java.lang.Character.vtable) (i32.const 0) (global.get $java.lang.Character.rtt))(i32.const 97)))
    ;; c.charValue();
    (drop (call_ref (local.get $c)(struct.get $java.lang.Character.vtable $m_charValue__char (struct.get $java.lang.Character $vtable(local.get $c)))))
    ;; Boolean bool = new Boolean.<init>(true);
    
-   (local.set $bool (call $m_<init>__boolean__void@java.lang.Boolean (struct.new_with_rtt $java.lang.Boolean (global.get $java.lang.Boolean.vtable) (i32.const 0) (i32.const 0) (global.get $java.lang.Boolean.rtt))(i32.const 1)))
+   (local.set $bool (call $m_<init>__boolean__void@java.lang.Boolean (struct.new_with_rtt $java.lang.Boolean (global.get $java.lang.Boolean.vtable) (i32.const 0) (global.get $java.lang.Boolean.rtt))(i32.const 1)))
    ;; bool.booleanValue();
    (drop (call_ref (local.get $bool)(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $bool)))))
   )
@@ -364,7 +361,6 @@
 ;;; CLASS  ObjectCalls
 (type $devirtualizedcalls.ObjectCalls (struct
  (field $vtable (ref null $devirtualizedcalls.ObjectCalls.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $devirtualizedcalls.ObjectCalls.vtable (struct
  
@@ -401,7 +397,7 @@
   (block
    ;; Object object = new Object.<init>();
    
-   (local.set $object (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (i32.const 0) (global.get $java.lang.Object.rtt))))
+   (local.set $object (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (global.get $java.lang.Object.rtt))))
    ;; object.equals(object);
    (drop (call_ref (local.get $object)(local.get $object)(struct.get $java.lang.Object.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.Object $vtable(local.get $object)))))
    ;; object.hashCode();
@@ -412,7 +408,7 @@
    (drop (call_ref (local.get $object)(struct.get $java.lang.Object.vtable $m_getClass__java_lang_Class (struct.get $java.lang.Object $vtable(local.get $object)))))
    ;; ObjectCalls[] objectCalls = new ObjectCalls[1];
    
-   (local.set $objectCalls (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $Object.array.elements (i32.const 1) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
+   (local.set $objectCalls (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (array.new_default_with_rtt $Object.array.elements (i32.const 1) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
    ;; objectCalls.equals(objectCalls);
    (drop (call_ref (local.get $objectCalls)(local.get $objectCalls)(struct.get $java.lang.Object.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.Object $vtable(local.get $objectCalls)))))
    ;; objectCalls.hashCode();
@@ -434,7 +430,7 @@
  (block $return.label
   (block
    ;; ObjectCalls.this.equals(new Object.<init>());
-   (drop (call_ref (local.get $this)(call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (i32.const 0) (global.get $java.lang.Object.rtt)))(struct.get $java.lang.Object.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.Object $vtable(local.get $this)))))
+   (drop (call_ref (local.get $this)(call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (global.get $java.lang.Object.rtt)))(struct.get $java.lang.Object.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.Object $vtable(local.get $this)))))
    ;; ObjectCalls.this.hashCode();
    (drop (call_ref (local.get $this)(struct.get $java.lang.Object.vtable $m_hashCode__int (struct.get $java.lang.Object $vtable(local.get $this)))))
    ;; ObjectCalls.this.toString();
@@ -442,7 +438,7 @@
    ;; ObjectCalls.this.getClass();
    (drop (call_ref (local.get $this)(struct.get $java.lang.Object.vtable $m_getClass__java_lang_Class (struct.get $java.lang.Object $vtable(local.get $this)))))
    ;; ObjectCalls.this.equals(new Object.<init>());
-   (drop (call_ref (local.get $this)(call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (i32.const 0) (global.get $java.lang.Object.rtt)))(struct.get $java.lang.Object.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.Object $vtable(local.get $this)))))
+   (drop (call_ref (local.get $this)(call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (global.get $java.lang.Object.rtt)))(struct.get $java.lang.Object.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.Object $vtable(local.get $this)))))
    ;; ObjectCalls.this.hashCode();
    (drop (call_ref (local.get $this)(struct.get $java.lang.Object.vtable $m_hashCode__int (struct.get $java.lang.Object $vtable(local.get $this)))))
    ;; ObjectCalls.this.toString();
@@ -458,7 +454,6 @@
 ;;; CLASS  StringCalls
 (type $devirtualizedcalls.StringCalls (struct
  (field $vtable (ref null $devirtualizedcalls.StringCalls.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $devirtualizedcalls.StringCalls.vtable (struct
  

@@ -3,7 +3,6 @@
 ;;; CLASS  LocalClassWithOuterGenerics
 (type $localclasswithoutergenerics.LocalClassWithOuterGenerics (struct
  (field $vtable (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $localclasswithoutergenerics.LocalClassWithOuterGenerics.vtable (struct
  
@@ -35,10 +34,10 @@
   (block
    ;; Bar<T> bar = new $1Bar.<init>();
    
-   (local.set $bar (call $m_<init>__void_$pp_localclasswithoutergenerics@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar (struct.new_with_rtt $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.vtable) (i32.const 0) (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.rtt))))
+   (local.set $bar (call $m_<init>__void_$pp_localclasswithoutergenerics@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar (struct.new_with_rtt $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.vtable) (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.rtt))))
    ;; Baz<Object, T> baz = new $1Baz.<init>();
    
-   (local.set $baz (call $m_<init>__void_$pp_localclasswithoutergenerics@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz (struct.new_with_rtt $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.vtable) (i32.const 0) (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.rtt))))
+   (local.set $baz (call $m_<init>__void_$pp_localclasswithoutergenerics@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz (struct.new_with_rtt $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.vtable) (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.rtt))))
   )
  )
 )
@@ -46,7 +45,6 @@
 ;;; CLASS  Bar
 (type $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar (struct
  (field $vtable (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.vtable (struct
  
@@ -87,7 +85,6 @@
 ;;; CLASS  Baz
 (type $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz (struct
  (field $vtable (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.vtable (struct
  

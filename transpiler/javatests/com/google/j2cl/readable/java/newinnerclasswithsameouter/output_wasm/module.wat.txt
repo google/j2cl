@@ -3,7 +3,6 @@
 ;;; CLASS  NewInnerClassWithSameOuter
 (type $newinnerclasswithsameouter.NewInnerClassWithSameOuter (struct
  (field $vtable (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $newinnerclasswithsameouter.NewInnerClassWithSameOuter.vtable (struct
  
@@ -30,7 +29,6 @@
 ;;; CLASS  A
 (type $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A (struct
  (field $vtable (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A (mut (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter)))
 ))
 (type $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A.vtable (struct
@@ -67,9 +65,9 @@
  (block $return.label
   (block
    ;; new B.<init>(A.this.this);
-   (drop (call $m_<init>__newinnerclasswithsameouter_NewInnerClassWithSameOuter__void@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B (struct.new_with_rtt $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B (global.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B.vtable) (i32.const 0) (ref.null $newinnerclasswithsameouter.NewInnerClassWithSameOuter) (global.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B.rtt))(struct.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A $this@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A(local.get $this))))
+   (drop (call $m_<init>__newinnerclasswithsameouter_NewInnerClassWithSameOuter__void@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B (struct.new_with_rtt $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B (global.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B.vtable) (ref.null $newinnerclasswithsameouter.NewInnerClassWithSameOuter) (global.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B.rtt))(struct.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A $this@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A(local.get $this))))
    ;; new C.<init>(A.this.this);
-   (drop (call $m_<init>__newinnerclasswithsameouter_NewInnerClassWithSameOuter__void_$p_newinnerclasswithsameouter_NewInnerClassWithSameOuter_C@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C (struct.new_with_rtt $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C (global.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C.vtable) (i32.const 0) (ref.null $newinnerclasswithsameouter.NewInnerClassWithSameOuter) (global.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C.rtt))(struct.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A $this@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A(local.get $this))))
+   (drop (call $m_<init>__newinnerclasswithsameouter_NewInnerClassWithSameOuter__void_$p_newinnerclasswithsameouter_NewInnerClassWithSameOuter_C@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C (struct.new_with_rtt $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C (global.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C.vtable) (ref.null $newinnerclasswithsameouter.NewInnerClassWithSameOuter) (global.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C.rtt))(struct.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A $this@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A(local.get $this))))
   )
  )
 )
@@ -78,7 +76,6 @@
 ;;; CLASS  B
 (type $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B (struct
  (field $vtable (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B (mut (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter)))
 ))
 (type $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B.vtable (struct
@@ -109,7 +106,6 @@
 ;;; CLASS  C
 (type $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C (struct
  (field $vtable (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C (mut (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter)))
 ))
 (type $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C.vtable (struct

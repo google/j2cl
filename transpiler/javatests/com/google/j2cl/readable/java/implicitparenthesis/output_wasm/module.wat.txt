@@ -3,7 +3,6 @@
 ;;; CLASS  ImplicitParenthesis
 (type $implicitparenthesis.ImplicitParenthesis (struct
  (field $vtable (ref null $implicitparenthesis.ImplicitParenthesis.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $implicitparenthesis.ImplicitParenthesis.vtable (struct
  
@@ -59,7 +58,7 @@
     ;; (primitiveInt = 5);
     (local.set $primitiveInt (i32.const 5))
     ;; (boxedInt = new Integer.<init>(10));
-    (local.set $boxedInt (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 10)))
+    (local.set $boxedInt (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 10)))
     ;; (primitiveInt = ((primitiveInt == 5)) ? (new Integer.<init>(15)) : (new Integer.<init>(30)));
     (local.set $primitiveInt (i32.const 0))
     ;; assert (primitiveInt == 15);
@@ -69,7 +68,7 @@
     ;; (primitiveInt = 5);
     (local.set $primitiveInt (i32.const 5))
     ;; (boxedInt = new Integer.<init>(10));
-    (local.set $boxedInt (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 10)))
+    (local.set $boxedInt (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 10)))
     ;; (primitiveInt = ((boxedInt = (boxedInt + primitiveInt)),boxedInt));
     (local.set $primitiveInt (i32.const 0))
     ;; assert (primitiveInt == 15);
@@ -79,7 +78,7 @@
     ;; (primitiveInt = 5);
     (local.set $primitiveInt (i32.const 5))
     ;; (boxedInt = new Integer.<init>(10));
-    (local.set $boxedInt (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 10)))
+    (local.set $boxedInt (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 10)))
     ;; (primitiveInt = ((boxedInt = primitiveInt),boxedInt));
     (local.set $primitiveInt (i32.const 0))
     ;; assert (primitiveInt == 5);
@@ -89,7 +88,7 @@
     ;; (primitiveInt = 5);
     (local.set $primitiveInt (i32.const 5))
     ;; (boxedInt = new Integer.<init>(10));
-    (local.set $boxedInt (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 10)))
+    (local.set $boxedInt (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 10)))
     ;; (primitiveInt = (Integer $value = boxedInt,(boxedInt = (boxedInt + 1)),$value));
     (local.set $primitiveInt (i32.const 0))
     ;; assert (primitiveInt == 10);
@@ -99,7 +98,7 @@
     ;; (primitiveInt = 5);
     (local.set $primitiveInt (i32.const 5))
     ;; (boxedInt = new Integer.<init>(10));
-    (local.set $boxedInt (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 10)))
+    (local.set $boxedInt (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 10)))
     ;; (primitiveInt = ((boxedInt = (boxedInt + 1)),boxedInt));
     (local.set $primitiveInt (i32.const 0))
     ;; assert (primitiveInt == 11);
@@ -126,7 +125,7 @@
     ;; (primitiveInt = 5);
     (local.set $primitiveInt (i32.const 5))
     ;; (boxedInt = new Integer.<init>(10));
-    (local.set $boxedInt (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 10)))
+    (local.set $boxedInt (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 10)))
     ;; (primitiveInt = (boxedInt - primitiveInt));
     (local.set $primitiveInt (i32.sub (i32.const 0) (local.get $primitiveInt)))
     ;; assert (primitiveInt == 5);
@@ -136,7 +135,7 @@
     ;; (primitiveInt = 5);
     (local.set $primitiveInt (i32.const 5))
     ;; (boxedInt = new Integer.<init>(10));
-    (local.set $boxedInt (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 10)))
+    (local.set $boxedInt (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 10)))
     ;; (boxedBoolean = true);
     (local.set $boxedBoolean (ref.null $java.lang.Boolean))
     ;; (boxedBoolean = (boxedInt == primitiveInt));
@@ -153,7 +152,7 @@
  (block $return.label
   (block
    ;; new Integer.<init>((1 + 2));
-   (drop (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.add (i32.const 1) (i32.const 2))))
+   (drop (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.add (i32.const 1) (i32.const 2))))
   )
  )
 )

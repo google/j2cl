@@ -3,7 +3,6 @@
 ;;; CLASS  GenericMethod
 (type $genericmethod.GenericMethod (struct
  (field $vtable (ref null $genericmethod.GenericMethod.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $genericmethod.GenericMethod.vtable (struct
  
@@ -85,9 +84,9 @@
  (block $return.label
   (block
    ;; new $1.<init>(GenericMethod.this);
-   (drop (call $m_<init>__genericmethod_GenericMethod__void_$pp_genericmethod@genericmethod.GenericMethod.1 (struct.new_with_rtt $genericmethod.GenericMethod.1 (global.get $genericmethod.GenericMethod.1.vtable) (i32.const 0) (ref.null $genericmethod.GenericMethod) (global.get $genericmethod.GenericMethod.1.rtt))(local.get $this)))
+   (drop (call $m_<init>__genericmethod_GenericMethod__void_$pp_genericmethod@genericmethod.GenericMethod.1 (struct.new_with_rtt $genericmethod.GenericMethod.1 (global.get $genericmethod.GenericMethod.1.vtable) (ref.null $genericmethod.GenericMethod) (global.get $genericmethod.GenericMethod.1.rtt))(local.get $this)))
    ;; new $1LocalClass.<init>(GenericMethod.this);
-   (drop (call $m_<init>__genericmethod_GenericMethod__void_$pp_genericmethod@genericmethod.GenericMethod.1LocalClass (struct.new_with_rtt $genericmethod.GenericMethod.1LocalClass (global.get $genericmethod.GenericMethod.1LocalClass.vtable) (i32.const 0) (ref.null $genericmethod.GenericMethod) (global.get $genericmethod.GenericMethod.1LocalClass.rtt))(local.get $this)))
+   (drop (call $m_<init>__genericmethod_GenericMethod__void_$pp_genericmethod@genericmethod.GenericMethod.1LocalClass (struct.new_with_rtt $genericmethod.GenericMethod.1LocalClass (global.get $genericmethod.GenericMethod.1LocalClass.vtable) (ref.null $genericmethod.GenericMethod) (global.get $genericmethod.GenericMethod.1LocalClass.rtt))(local.get $this)))
   )
  )
 )
@@ -177,17 +176,17 @@
   (block
    ;; GenericMethod<Number> g = new GenericMethod.<init>();
    
-   (local.set $g (call $m_<init>__void@genericmethod.GenericMethod (struct.new_with_rtt $genericmethod.GenericMethod (global.get $genericmethod.GenericMethod.vtable) (i32.const 0) (global.get $genericmethod.GenericMethod.rtt))))
+   (local.set $g (call $m_<init>__void@genericmethod.GenericMethod (struct.new_with_rtt $genericmethod.GenericMethod (global.get $genericmethod.GenericMethod.vtable) (global.get $genericmethod.GenericMethod.rtt))))
    ;; g.foo(g,g);
    (call_ref (local.get $g)(local.get $g)(local.get $g)(struct.get $genericmethod.GenericMethod.vtable $m_foo__java_lang_Object__java_lang_Object__void (struct.get $genericmethod.GenericMethod $vtable(local.get $g))))
    ;; g.foo(new Error.<init>(),new Exception.<init>());
-   (call_ref (local.get $g)(call $m_<init>__void@java.lang.Error (struct.new_with_rtt $java.lang.Error (global.get $java.lang.Error.vtable) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $Object.array) (ref.null $Object.array) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Error.rtt)))(call $m_<init>__void@java.lang.Exception (struct.new_with_rtt $java.lang.Exception (global.get $java.lang.Exception.vtable) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $Object.array) (ref.null $Object.array) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Exception.rtt)))(struct.get $genericmethod.GenericMethod.vtable $m_foo__java_lang_Object__java_lang_Object__void (struct.get $genericmethod.GenericMethod $vtable(local.get $g))))
+   (call_ref (local.get $g)(call $m_<init>__void@java.lang.Error (struct.new_with_rtt $java.lang.Error (global.get $java.lang.Error.vtable) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $Object.array) (ref.null $Object.array) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Error.rtt)))(call $m_<init>__void@java.lang.Exception (struct.new_with_rtt $java.lang.Exception (global.get $java.lang.Exception.vtable) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $Object.array) (ref.null $Object.array) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Exception.rtt)))(struct.get $genericmethod.GenericMethod.vtable $m_foo__java_lang_Object__java_lang_Object__void (struct.get $genericmethod.GenericMethod $vtable(local.get $g))))
    ;; g.fun(new Object.<init>());
-   (call_ref (local.get $g)(call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (i32.const 0) (global.get $java.lang.Object.rtt)))(struct.get $genericmethod.GenericMethod.vtable $m_fun__java_lang_Object__void (struct.get $genericmethod.GenericMethod $vtable(local.get $g))))
+   (call_ref (local.get $g)(call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (global.get $java.lang.Object.rtt)))(struct.get $genericmethod.GenericMethod.vtable $m_fun__java_lang_Object__void (struct.get $genericmethod.GenericMethod $vtable(local.get $g))))
    ;; g.fun(new Exception.<init>());
-   (call_ref (local.get $g)(call $m_<init>__void@java.lang.Exception (struct.new_with_rtt $java.lang.Exception (global.get $java.lang.Exception.vtable) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $Object.array) (ref.null $Object.array) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Exception.rtt)))(struct.get $genericmethod.GenericMethod.vtable $m_fun__java_lang_Exception__void (struct.get $genericmethod.GenericMethod $vtable(local.get $g))))
+   (call_ref (local.get $g)(call $m_<init>__void@java.lang.Exception (struct.new_with_rtt $java.lang.Exception (global.get $java.lang.Exception.vtable) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $Object.array) (ref.null $Object.array) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Exception.rtt)))(struct.get $genericmethod.GenericMethod.vtable $m_fun__java_lang_Exception__void (struct.get $genericmethod.GenericMethod $vtable(local.get $g))))
    ;; g.fun(new Error.<init>());
-   (call_ref (local.get $g)(call $m_<init>__void@java.lang.Error (struct.new_with_rtt $java.lang.Error (global.get $java.lang.Error.vtable) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $Object.array) (ref.null $Object.array) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Error.rtt)))(struct.get $genericmethod.GenericMethod.vtable $m_fun__java_lang_Error__void (struct.get $genericmethod.GenericMethod $vtable(local.get $g))))
+   (call_ref (local.get $g)(call $m_<init>__void@java.lang.Error (struct.new_with_rtt $java.lang.Error (global.get $java.lang.Error.vtable) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $Object.array) (ref.null $Object.array) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Error.rtt)))(struct.get $genericmethod.GenericMethod.vtable $m_fun__java_lang_Error__void (struct.get $genericmethod.GenericMethod $vtable(local.get $g))))
    ;; g.fun(new String[] {"asdf"});
    (drop (call_ref (local.get $g)(ref.null $Object.array)(struct.get $genericmethod.GenericMethod.vtable $m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object (struct.get $genericmethod.GenericMethod $vtable(local.get $g)))))
    ;; String s = ((String) GenericMethod.this.checked());
@@ -359,7 +358,6 @@
 ;;; CLASS  <anonymous> extends GenericMethod<T>
 (type $genericmethod.GenericMethod.1 (struct
  (field $vtable (ref null $genericmethod.GenericMethod.1.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@genericmethod.GenericMethod.1 (mut (ref null $genericmethod.GenericMethod)))
 ))
 (type $genericmethod.GenericMethod.1.vtable (struct
@@ -427,7 +425,6 @@
 ;;; CLASS  LocalClass
 (type $genericmethod.GenericMethod.1LocalClass (struct
  (field $vtable (ref null $genericmethod.GenericMethod.1LocalClass.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@genericmethod.GenericMethod.1LocalClass (mut (ref null $genericmethod.GenericMethod)))
 ))
 (type $genericmethod.GenericMethod.1LocalClass.vtable (struct
@@ -495,7 +492,6 @@
 ;;; CLASS  SuperContainer
 (type $genericmethod.GenericMethod.SuperContainer (struct
  (field $vtable (ref null $genericmethod.GenericMethod.SuperContainer.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $genericmethod.GenericMethod.SuperContainer.vtable (struct
  
@@ -541,7 +537,6 @@
 ;;; CLASS  Container
 (type $genericmethod.GenericMethod.Container (struct
  (field $vtable (ref null $genericmethod.GenericMethod.Container.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $genericmethod.GenericMethod.Container.vtable (struct
  
@@ -587,7 +582,6 @@
 ;;; CLASS  Content
 (type $genericmethod.GenericMethod.Content (struct
  (field $vtable (ref null $genericmethod.GenericMethod.Content.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $genericmethod.GenericMethod.Content.vtable (struct
  

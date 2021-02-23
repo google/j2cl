@@ -3,7 +3,6 @@
 ;;; CLASS  InstanceInnerClass
 (type $instanceinnerclass.InstanceInnerClass (struct
  (field $vtable (ref null $instanceinnerclass.InstanceInnerClass.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $instanceField@instanceinnerclass.InstanceInnerClass (mut i32))
 ))
 (type $instanceinnerclass.InstanceInnerClass.vtable (struct
@@ -50,7 +49,7 @@
  (block $return.label
   (block
    ;; new InnerClass.<init>(new InstanceInnerClass.<init>());
-   (drop (call $m_<init>__instanceinnerclass_InstanceInnerClass__void@instanceinnerclass.InstanceInnerClass.InnerClass (struct.new_with_rtt $instanceinnerclass.InstanceInnerClass.InnerClass (global.get $instanceinnerclass.InstanceInnerClass.InnerClass.vtable) (i32.const 0) (ref.null $instanceinnerclass.InstanceInnerClass) (i32.const 0) (ref.null $instanceinnerclass.InstanceInnerClass) (global.get $instanceinnerclass.InstanceInnerClass.InnerClass.rtt))(call $m_<init>__void@instanceinnerclass.InstanceInnerClass (struct.new_with_rtt $instanceinnerclass.InstanceInnerClass (global.get $instanceinnerclass.InstanceInnerClass.vtable) (i32.const 0) (i32.const 0) (global.get $instanceinnerclass.InstanceInnerClass.rtt)))))
+   (drop (call $m_<init>__instanceinnerclass_InstanceInnerClass__void@instanceinnerclass.InstanceInnerClass.InnerClass (struct.new_with_rtt $instanceinnerclass.InstanceInnerClass.InnerClass (global.get $instanceinnerclass.InstanceInnerClass.InnerClass.vtable) (ref.null $instanceinnerclass.InstanceInnerClass) (i32.const 0) (ref.null $instanceinnerclass.InstanceInnerClass) (global.get $instanceinnerclass.InstanceInnerClass.InnerClass.rtt))(call $m_<init>__void@instanceinnerclass.InstanceInnerClass (struct.new_with_rtt $instanceinnerclass.InstanceInnerClass (global.get $instanceinnerclass.InstanceInnerClass.vtable) (i32.const 0) (global.get $instanceinnerclass.InstanceInnerClass.rtt)))))
   )
  )
 )
@@ -59,7 +58,6 @@
 ;;; CLASS  InnerClass
 (type $instanceinnerclass.InstanceInnerClass.InnerClass (struct
  (field $vtable (ref null $instanceinnerclass.InstanceInnerClass.InnerClass.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@instanceinnerclass.InstanceInnerClass.InnerClass (mut (ref null $instanceinnerclass.InstanceInnerClass)))
  (field $field@instanceinnerclass.InstanceInnerClass.InnerClass (mut i32))
  (field $enclosingInstance@instanceinnerclass.InstanceInnerClass.InnerClass (mut (ref null $instanceinnerclass.InstanceInnerClass)))

@@ -3,7 +3,6 @@
 ;;; CLASS  GenericType
 (type $typewildcards.GenericType (struct
  (field $vtable (ref null $typewildcards.GenericType.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $typewildcards.GenericType.vtable (struct
  
@@ -30,7 +29,6 @@
 ;;; CLASS  TypeWildCards
 (type $typewildcards.TypeWildCards (struct
  (field $vtable (ref null $typewildcards.TypeWildCards.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $typewildcards.TypeWildCards.vtable (struct
  
@@ -107,11 +105,11 @@
  (block $return.label
   (block
    ;; TypeWildCards.this.unbounded(new GenericType.<init>());
-   (call_ref (local.get $this)(call $m_<init>__void_$pp_typewildcards@typewildcards.GenericType (struct.new_with_rtt $typewildcards.GenericType (global.get $typewildcards.GenericType.vtable) (i32.const 0) (global.get $typewildcards.GenericType.rtt)))(struct.get $typewildcards.TypeWildCards.vtable $m_unbounded__typewildcards_GenericType__void (struct.get $typewildcards.TypeWildCards $vtable(local.get $this))))
+   (call_ref (local.get $this)(call $m_<init>__void_$pp_typewildcards@typewildcards.GenericType (struct.new_with_rtt $typewildcards.GenericType (global.get $typewildcards.GenericType.vtable) (global.get $typewildcards.GenericType.rtt)))(struct.get $typewildcards.TypeWildCards.vtable $m_unbounded__typewildcards_GenericType__void (struct.get $typewildcards.TypeWildCards $vtable(local.get $this))))
    ;; TypeWildCards.this.upperBound(new GenericType.<init>());
-   (call_ref (local.get $this)(call $m_<init>__void_$pp_typewildcards@typewildcards.GenericType (struct.new_with_rtt $typewildcards.GenericType (global.get $typewildcards.GenericType.vtable) (i32.const 0) (global.get $typewildcards.GenericType.rtt)))(struct.get $typewildcards.TypeWildCards.vtable $m_upperBound__typewildcards_GenericType__void (struct.get $typewildcards.TypeWildCards $vtable(local.get $this))))
+   (call_ref (local.get $this)(call $m_<init>__void_$pp_typewildcards@typewildcards.GenericType (struct.new_with_rtt $typewildcards.GenericType (global.get $typewildcards.GenericType.vtable) (global.get $typewildcards.GenericType.rtt)))(struct.get $typewildcards.TypeWildCards.vtable $m_upperBound__typewildcards_GenericType__void (struct.get $typewildcards.TypeWildCards $vtable(local.get $this))))
    ;; TypeWildCards.this.lowerBound(new GenericType.<init>());
-   (call_ref (local.get $this)(call $m_<init>__void_$pp_typewildcards@typewildcards.GenericType (struct.new_with_rtt $typewildcards.GenericType (global.get $typewildcards.GenericType.vtable) (i32.const 0) (global.get $typewildcards.GenericType.rtt)))(struct.get $typewildcards.TypeWildCards.vtable $m_lowerBound__typewildcards_GenericType__void (struct.get $typewildcards.TypeWildCards $vtable(local.get $this))))
+   (call_ref (local.get $this)(call $m_<init>__void_$pp_typewildcards@typewildcards.GenericType (struct.new_with_rtt $typewildcards.GenericType (global.get $typewildcards.GenericType.vtable) (global.get $typewildcards.GenericType.rtt)))(struct.get $typewildcards.TypeWildCards.vtable $m_lowerBound__typewildcards_GenericType__void (struct.get $typewildcards.TypeWildCards $vtable(local.get $this))))
   )
  )
 )
@@ -231,7 +229,7 @@
  (block $return.label
   (block
    ;; typewildcards.TypeWildCards.takesRecursiveGeneric(new Foo.<init>(TypeWildCards.this));
-   (call $m_takesRecursiveGeneric__typewildcards_GenericType__void@typewildcards.TypeWildCards (call $m_<init>__typewildcards_TypeWildCards__void_$pp_typewildcards@typewildcards.TypeWildCards.Foo (struct.new_with_rtt $typewildcards.TypeWildCards.Foo (global.get $typewildcards.TypeWildCards.Foo.vtable) (i32.const 0) (ref.null $typewildcards.TypeWildCards) (global.get $typewildcards.TypeWildCards.Foo.rtt))(local.get $this)))
+   (call $m_takesRecursiveGeneric__typewildcards_GenericType__void@typewildcards.TypeWildCards (call $m_<init>__typewildcards_TypeWildCards__void_$pp_typewildcards@typewildcards.TypeWildCards.Foo (struct.new_with_rtt $typewildcards.TypeWildCards.Foo (global.get $typewildcards.TypeWildCards.Foo.vtable) (ref.null $typewildcards.TypeWildCards) (global.get $typewildcards.TypeWildCards.Foo.rtt))(local.get $this)))
   )
  )
 )
@@ -244,7 +242,6 @@
 ;;; CLASS  A
 (type $typewildcards.TypeWildCards.A (struct
  (field $vtable (ref null $typewildcards.TypeWildCards.A.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $f@typewildcards.TypeWildCards.A (mut i32))
 ))
 (type $typewildcards.TypeWildCards.A.vtable (struct
@@ -289,7 +286,6 @@
 ;;; CLASS  Element
 (type $typewildcards.TypeWildCards.Element (struct
  (field $vtable (ref null $typewildcards.TypeWildCards.Element.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@typewildcards.TypeWildCards.Element (mut (ref null $typewildcards.TypeWildCards)))
 ))
 (type $typewildcards.TypeWildCards.Element.vtable (struct
@@ -320,7 +316,6 @@
 ;;; CLASS  OtherElement
 (type $typewildcards.TypeWildCards.OtherElement (struct
  (field $vtable (ref null $typewildcards.TypeWildCards.OtherElement.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@typewildcards.TypeWildCards.OtherElement (mut (ref null $typewildcards.TypeWildCards)))
 ))
 (type $typewildcards.TypeWildCards.OtherElement.vtable (struct
@@ -351,7 +346,6 @@
 ;;; CLASS  SubOtherElement
 (type $typewildcards.TypeWildCards.SubOtherElement (struct
  (field $vtable (ref null $typewildcards.TypeWildCards.SubOtherElement.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@typewildcards.TypeWildCards.OtherElement (mut (ref null $typewildcards.TypeWildCards)))
  (field $this@typewildcards.TypeWildCards.SubOtherElement (mut (ref null $typewildcards.TypeWildCards)))
 ))
@@ -383,7 +377,6 @@
 ;;; CLASS  Foo
 (type $typewildcards.TypeWildCards.Foo (struct
  (field $vtable (ref null $typewildcards.TypeWildCards.Foo.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@typewildcards.TypeWildCards.Foo (mut (ref null $typewildcards.TypeWildCards)))
 ))
 (type $typewildcards.TypeWildCards.Foo.vtable (struct

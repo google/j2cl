@@ -3,7 +3,6 @@
 ;;; CLASS  LocalClassWithConstructor
 (type $localclasswithconstructor.LocalClassWithConstructor (struct
  (field $vtable (ref null $localclasswithconstructor.LocalClassWithConstructor.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $localclasswithconstructor.LocalClassWithConstructor.vtable (struct
  
@@ -41,7 +40,7 @@
    
    (local.set $localVar (i32.const 1))
    ;; new $1LocalClass.<init>(LocalClassWithConstructor.this,localVar,p,1);
-   (drop (call $m_<init>__localclasswithconstructor_LocalClassWithConstructor__int__int__int__void@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (struct.new_with_rtt $localclasswithconstructor.LocalClassWithConstructor.1LocalClass (global.get $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable) (i32.const 0) (ref.null $localclasswithconstructor.LocalClassWithConstructor) (i32.const 0) (i32.const 0) (i32.const 0) (global.get $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.rtt))(local.get $this)(local.get $localVar)(local.get $p)(i32.const 1)))
+   (drop (call $m_<init>__localclasswithconstructor_LocalClassWithConstructor__int__int__int__void@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (struct.new_with_rtt $localclasswithconstructor.LocalClassWithConstructor.1LocalClass (global.get $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable) (ref.null $localclasswithconstructor.LocalClassWithConstructor) (i32.const 0) (i32.const 0) (i32.const 0) (global.get $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.rtt))(local.get $this)(local.get $localVar)(local.get $p)(i32.const 1)))
   )
  )
 )
@@ -50,7 +49,6 @@
 ;;; CLASS  LocalClass
 (type $localclasswithconstructor.LocalClassWithConstructor.1LocalClass (struct
  (field $vtable (ref null $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (mut (ref null $localclasswithconstructor.LocalClassWithConstructor)))
  (field $field@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (mut i32))
  (field $localVar@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (mut i32))

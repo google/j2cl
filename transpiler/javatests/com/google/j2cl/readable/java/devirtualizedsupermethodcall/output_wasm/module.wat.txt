@@ -3,7 +3,6 @@
 ;;; CLASS  SubNumber
 (type $devirtualizedsupermethodcall.SubNumber (struct
  (field $vtable (ref null $devirtualizedsupermethodcall.SubNumber.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $devirtualizedsupermethodcall.SubNumber.vtable (struct
  
@@ -108,7 +107,6 @@
 ;;; CLASS  FooCallsSuperObjectMethod
 (type $devirtualizedsupermethodcall.FooCallsSuperObjectMethod (struct
  (field $vtable (ref null $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable (struct
  
@@ -153,7 +151,6 @@
 ;;; CLASS  Main
 (type $devirtualizedsupermethodcall.Main (struct
  (field $vtable (ref null $devirtualizedsupermethodcall.Main.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $devirtualizedsupermethodcall.Main.vtable (struct
  
@@ -189,12 +186,12 @@
   (block
    ;; FooCallsSuperObjectMethod fooCallsSuperObjectMethods = new FooCallsSuperObjectMethod.<init>();
    
-   (local.set $fooCallsSuperObjectMethods (call $m_<init>__void_$pp_devirtualizedsupermethodcall@devirtualizedsupermethodcall.FooCallsSuperObjectMethod (struct.new_with_rtt $devirtualizedsupermethodcall.FooCallsSuperObjectMethod (global.get $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable) (i32.const 0) (global.get $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.rtt))))
+   (local.set $fooCallsSuperObjectMethods (call $m_<init>__void_$pp_devirtualizedsupermethodcall@devirtualizedsupermethodcall.FooCallsSuperObjectMethod (struct.new_with_rtt $devirtualizedsupermethodcall.FooCallsSuperObjectMethod (global.get $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable) (global.get $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.rtt))))
    ;; fooCallsSuperObjectMethods.hashCode();
    (drop (call_ref (local.get $fooCallsSuperObjectMethods)(struct.get $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable $m_hashCode__int (struct.get $devirtualizedsupermethodcall.FooCallsSuperObjectMethod $vtable(local.get $fooCallsSuperObjectMethods)))))
    ;; SubNumber sn = new SubNumber.<init>();
    
-   (local.set $sn (call $m_<init>__void_$pp_devirtualizedsupermethodcall@devirtualizedsupermethodcall.SubNumber (struct.new_with_rtt $devirtualizedsupermethodcall.SubNumber (global.get $devirtualizedsupermethodcall.SubNumber.vtable) (i32.const 0) (global.get $devirtualizedsupermethodcall.SubNumber.rtt))))
+   (local.set $sn (call $m_<init>__void_$pp_devirtualizedsupermethodcall@devirtualizedsupermethodcall.SubNumber (struct.new_with_rtt $devirtualizedsupermethodcall.SubNumber (global.get $devirtualizedsupermethodcall.SubNumber.vtable) (global.get $devirtualizedsupermethodcall.SubNumber.rtt))))
    ;; sn.byteValue();
    (drop (call_ref (local.get $sn)(struct.get $java.lang.Number.vtable $m_byteValue__byte (struct.get $java.lang.Number $vtable(local.get $sn)))))
    ;; sn.doubleValue();

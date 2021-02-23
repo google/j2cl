@@ -3,7 +3,6 @@
 ;;; CLASS  Main
 (type $jsinnerclass.Main (struct
  (field $vtable (ref null $jsinnerclass.Main.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $jsinnerclass.Main.vtable (struct
  
@@ -42,7 +41,6 @@
 ;;; CLASS  Outer
 (type $jsinnerclass.Main.Outer (struct
  (field $vtable (ref null $jsinnerclass.Main.Outer.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $a@jsinnerclass.Main.Outer (mut i32))
 ))
 (type $jsinnerclass.Main.Outer.vtable (struct
@@ -83,7 +81,7 @@
    ;; return ((Inner $qualifier = new Inner.<init>(Outer.this),$qualifier.getB()) + Outer.this.a);
    (local.set $return.value (i32.add (block (result i32)
     
-    (local.set $$qualifier (call $m_<init>__jsinnerclass_Main_Outer__void@jsinnerclass.Main.Outer.Inner (struct.new_with_rtt $jsinnerclass.Main.Outer.Inner (global.get $jsinnerclass.Main.Outer.Inner.vtable) (i32.const 0) (ref.null $jsinnerclass.Main.Outer) (i32.const 0) (global.get $jsinnerclass.Main.Outer.Inner.rtt))(local.get $this)))
+    (local.set $$qualifier (call $m_<init>__jsinnerclass_Main_Outer__void@jsinnerclass.Main.Outer.Inner (struct.new_with_rtt $jsinnerclass.Main.Outer.Inner (global.get $jsinnerclass.Main.Outer.Inner.vtable) (ref.null $jsinnerclass.Main.Outer) (i32.const 0) (global.get $jsinnerclass.Main.Outer.Inner.rtt))(local.get $this)))
     (call_ref (local.get $$qualifier)(struct.get $jsinnerclass.Main.Outer.Inner.vtable $m_getB__int (struct.get $jsinnerclass.Main.Outer.Inner $vtable(local.get $$qualifier))))
    ) (struct.get $jsinnerclass.Main.Outer $a@jsinnerclass.Main.Outer(local.get $this))))
    (br $return.label)
@@ -107,7 +105,6 @@
 ;;; CLASS  Inner
 (type $jsinnerclass.Main.Outer.Inner (struct
  (field $vtable (ref null $jsinnerclass.Main.Outer.Inner.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@jsinnerclass.Main.Outer.Inner (mut (ref null $jsinnerclass.Main.Outer)))
  (field $b@jsinnerclass.Main.Outer.Inner (mut i32))
 ))

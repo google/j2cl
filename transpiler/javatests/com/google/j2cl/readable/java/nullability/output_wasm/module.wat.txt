@@ -3,7 +3,6 @@
 ;;; CLASS  Nullability
 (type $nullability.Nullability (struct
  (field $vtable (ref null $nullability.Nullability.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $f1@nullability.Nullability (mut (ref null $java.lang.String)))
  (field $f2@nullability.Nullability (mut (ref null $java.lang.String)))
  (field $f3@nullability.Nullability (mut (ref null $java.lang.String)))
@@ -131,11 +130,11 @@
    ;; (Nullability.this.f3 = null);
    (struct.set $nullability.Nullability $f3@nullability.Nullability(local.get $this) (ref.null $java.lang.String))
    ;; (Nullability.this.f4 = new ArrayList.<init>());
-   (struct.set $nullability.Nullability $f4@nullability.Nullability(local.get $this) (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.vtable) (i32.const 0) (i32.const 0) (ref.null $Object.array) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
+   (struct.set $nullability.Nullability $f4@nullability.Nullability(local.get $this) (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.vtable) (i32.const 0) (ref.null $Object.array) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
    ;; (Nullability.this.f5 = new ArrayList.<init>());
-   (struct.set $nullability.Nullability $f5@nullability.Nullability(local.get $this) (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.vtable) (i32.const 0) (i32.const 0) (ref.null $Object.array) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
+   (struct.set $nullability.Nullability $f5@nullability.Nullability(local.get $this) (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.vtable) (i32.const 0) (ref.null $Object.array) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
    ;; (Nullability.this.f6 = new ArrayList.<init>());
-   (struct.set $nullability.Nullability $f6@nullability.Nullability(local.get $this) (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.vtable) (i32.const 0) (i32.const 0) (ref.null $Object.array) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
+   (struct.set $nullability.Nullability $f6@nullability.Nullability(local.get $this) (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.vtable) (i32.const 0) (ref.null $Object.array) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
    ;; (Nullability.this.f7 = null);
    (struct.set $nullability.Nullability $f7@nullability.Nullability(local.get $this) (ref.null $java.lang.Object))
    ;; (Nullability.this.f8 = []);
@@ -145,7 +144,7 @@
    ;; (Nullability.this.f10 = []);
    (struct.set $nullability.Nullability $f10@nullability.Nullability(local.get $this) (ref.null $Object.array))
    ;; (Nullability.this.f12 = new ArrayList.<init>());
-   (struct.set $nullability.Nullability $f12@nullability.Nullability(local.get $this) (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.vtable) (i32.const 0) (i32.const 0) (ref.null $Object.array) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
+   (struct.set $nullability.Nullability $f12@nullability.Nullability(local.get $this) (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.vtable) (i32.const 0) (ref.null $Object.array) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
   )
  )
 )
@@ -153,7 +152,6 @@
 ;;; CLASS  Foo
 (type $nullability.Nullability.Foo (struct
  (field $vtable (ref null $nullability.Nullability.Foo.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $nullability.Nullability.Foo.vtable (struct
  
@@ -233,7 +231,6 @@
 ;;; CLASS  StringList
 (type $nullability.Nullability.StringList (struct
  (field $vtable (ref null $nullability.Nullability.StringList.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $modCount@java.util.AbstractList (mut i32))
  (field $array@java.util.ArrayList (mut (ref null $Object.array)))
  (field $exposeElement@java.util.ArrayList (mut (ref null $java.lang.Object)))
@@ -300,7 +297,6 @@
 ;;; CLASS  StringComparator
 (type $nullability.Nullability.StringComparator (struct
  (field $vtable (ref null $nullability.Nullability.StringComparator.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $nullability.Nullability.StringComparator.vtable (struct
  
@@ -509,7 +505,6 @@
 ;;; CLASS  NullableStringComparator
 (type $nullability.Nullability.NullableStringComparator (struct
  (field $vtable (ref null $nullability.Nullability.NullableStringComparator.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $nullability.Nullability.NullableStringComparator.vtable (struct
  
@@ -720,7 +715,6 @@
 ;;; CLASS  NullableTemplatedReturnOverride
 (type $nullability.Nullability.NullableTemplatedReturnOverride (struct
  (field $vtable (ref null $nullability.Nullability.NullableTemplatedReturnOverride.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $nullability.Nullability.NullableTemplatedReturnOverride.vtable (struct
  
@@ -786,7 +780,6 @@
 ;;; CLASS  ClassInSubpackage
 (type $nullability.subpackage.ClassInSubpackage (struct
  (field $vtable (ref null $nullability.subpackage.ClassInSubpackage.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $nullability.subpackage.ClassInSubpackage.vtable (struct
  

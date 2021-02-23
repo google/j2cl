@@ -3,7 +3,6 @@
 ;;; CLASS  Asserts
 (type $localnamecollision.Asserts (struct
  (field $vtable (ref null $localnamecollision.Asserts.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $localnamecollision.Asserts.vtable (struct
  
@@ -52,7 +51,6 @@
 ;;; CLASS  Class
 (type $localnamecollision.Class (struct
  (field $vtable (ref null $localnamecollision.Class.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $localnamecollision.Class.vtable (struct
  
@@ -88,7 +86,7 @@
    (block
     ;; Class $qualifier = new Class.<init>();
     
-    (local.set $$qualifier (call $m_<init>__void@localnamecollision.Class (struct.new_with_rtt $localnamecollision.Class (global.get $localnamecollision.Class.vtable) (i32.const 0) (global.get $localnamecollision.Class.rtt))))
+    (local.set $$qualifier (call $m_<init>__void@localnamecollision.Class (struct.new_with_rtt $localnamecollision.Class (global.get $localnamecollision.Class.vtable) (global.get $localnamecollision.Class.rtt))))
     ;; $qualifier.getClass();
     (drop (call_ref (local.get $$qualifier)(struct.get $java.lang.Object.vtable $m_getClass__java_lang_Class (struct.get $java.lang.Object $vtable(local.get $$qualifier)))))
    )
@@ -101,7 +99,6 @@
 ;;; CLASS  LocalNameCollision
 (type $localnamecollision.LocalNameCollision (struct
  (field $vtable (ref null $localnamecollision.LocalNameCollision.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $localnamecollision.LocalNameCollision.vtable (struct
  
@@ -216,7 +213,6 @@
 ;;; CLASS  A
 (type $localnamecollision.package1.A (struct
  (field $vtable (ref null $localnamecollision.package1.A.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $localnamecollision.package1.A.vtable (struct
  
@@ -263,7 +259,6 @@
 ;;; CLASS  A
 (type $localnamecollision.package2.A (struct
  (field $vtable (ref null $localnamecollision.package2.A.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $localnamecollision.package2.A.vtable (struct
  

@@ -3,7 +3,6 @@
 ;;; CLASS  Arrays
 (type $array.Arrays (struct
  (field $vtable (ref null $array.Arrays.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $array.Arrays.vtable (struct
  
@@ -50,9 +49,9 @@
   (block
    ;; Object[] objects = new Object[100];
    
-   (local.set $objects (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $Object.array.elements (i32.const 100) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
+   (local.set $objects (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (array.new_default_with_rtt $Object.array.elements (i32.const 100) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
    ;; (objects = new Object[0]);
-   (local.set $objects (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $Object.array.elements (i32.const 0) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
+   (local.set $objects (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (array.new_default_with_rtt $Object.array.elements (i32.const 0) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
    ;; (objects = new Object[] {null,null});
    (local.set $objects (ref.null $Object.array))
    ;; Object[][] objects2d = new Object[5][10];
@@ -88,9 +87,9 @@
   (block
    ;; SomeObject[] objects = new SomeObject[100];
    
-   (local.set $objects (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $Object.array.elements (i32.const 100) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
+   (local.set $objects (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (array.new_default_with_rtt $Object.array.elements (i32.const 100) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
    ;; (objects = new SomeObject[0]);
-   (local.set $objects (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $Object.array.elements (i32.const 0) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
+   (local.set $objects (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (array.new_default_with_rtt $Object.array.elements (i32.const 0) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
    ;; (objects = new SomeObject[] {null,null});
    (local.set $objects (ref.null $Object.array))
    ;; SomeObject[][] objects2d = new SomeObject[5][10];
@@ -126,9 +125,9 @@
   (block
    ;; int[] ints = new int[100];
    
-   (local.set $ints (struct.new_with_rtt $int.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $int.array.elements (i32.const 100) (global.get $int.array.elements.rtt)) (global.get $int.array.rtt)))
+   (local.set $ints (struct.new_with_rtt $int.array (global.get $java.lang.Object.vtable) (array.new_default_with_rtt $int.array.elements (i32.const 100) (global.get $int.array.elements.rtt)) (global.get $int.array.rtt)))
    ;; (ints = new int[0]);
-   (local.set $ints (struct.new_with_rtt $int.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $int.array.elements (i32.const 0) (global.get $int.array.elements.rtt)) (global.get $int.array.rtt)))
+   (local.set $ints (struct.new_with_rtt $int.array (global.get $java.lang.Object.vtable) (array.new_default_with_rtt $int.array.elements (i32.const 0) (global.get $int.array.elements.rtt)) (global.get $int.array.rtt)))
    ;; (ints = new int[] {0,1});
    (local.set $ints (ref.null $int.array))
    ;; int[][] ints2d = new int[5][10];
@@ -164,9 +163,9 @@
   (block
    ;; long[] longs = new long[100];
    
-   (local.set $longs (struct.new_with_rtt $long.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $long.array.elements (i32.const 100) (global.get $long.array.elements.rtt)) (global.get $long.array.rtt)))
+   (local.set $longs (struct.new_with_rtt $long.array (global.get $java.lang.Object.vtable) (array.new_default_with_rtt $long.array.elements (i32.const 100) (global.get $long.array.elements.rtt)) (global.get $long.array.rtt)))
    ;; (longs = new long[0]);
-   (local.set $longs (struct.new_with_rtt $long.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $long.array.elements (i32.const 0) (global.get $long.array.elements.rtt)) (global.get $long.array.rtt)))
+   (local.set $longs (struct.new_with_rtt $long.array (global.get $java.lang.Object.vtable) (array.new_default_with_rtt $long.array.elements (i32.const 0) (global.get $long.array.elements.rtt)) (global.get $long.array.rtt)))
    ;; (longs = new long[] {0,1});
    (local.set $longs (ref.null $long.array))
    ;; long[][] longs2d = new long[5][10];
@@ -202,9 +201,9 @@
   (block
    ;; Boolean[] booleans = new Boolean[100];
    
-   (local.set $booleans (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $Object.array.elements (i32.const 100) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
+   (local.set $booleans (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (array.new_default_with_rtt $Object.array.elements (i32.const 100) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
    ;; (booleans = new Boolean[0]);
-   (local.set $booleans (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $Object.array.elements (i32.const 0) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
+   (local.set $booleans (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (array.new_default_with_rtt $Object.array.elements (i32.const 0) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
    ;; (booleans = new Boolean[] {true,false});
    (local.set $booleans (ref.null $Object.array))
    ;; Boolean[][] booleans2d = new Boolean[5][10];
@@ -240,9 +239,9 @@
   (block
    ;; String[] strings = new String[100];
    
-   (local.set $strings (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $Object.array.elements (i32.const 100) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
+   (local.set $strings (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (array.new_default_with_rtt $Object.array.elements (i32.const 100) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
    ;; (strings = new String[0]);
-   (local.set $strings (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $Object.array.elements (i32.const 0) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
+   (local.set $strings (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (array.new_default_with_rtt $Object.array.elements (i32.const 0) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
    ;; (strings = new String[] {null,null});
    (local.set $strings (ref.null $Object.array))
    ;; String[][] strings2d = new String[5][10];
@@ -278,9 +277,9 @@
   (block
    ;; NativeType[] nativeObjects = new NativeType[100];
    
-   (local.set $nativeObjects (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $Object.array.elements (i32.const 100) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
+   (local.set $nativeObjects (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (array.new_default_with_rtt $Object.array.elements (i32.const 100) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
    ;; (nativeObjects = new NativeType[0]);
-   (local.set $nativeObjects (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $Object.array.elements (i32.const 0) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
+   (local.set $nativeObjects (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (array.new_default_with_rtt $Object.array.elements (i32.const 0) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
    ;; (nativeObjects = new NativeType[] {null,null});
    (local.set $nativeObjects (ref.null $Object.array))
    ;; NativeType[][] nativeObjects2d = new NativeType[5][10];
@@ -332,9 +331,9 @@
  (block $return.label
   (block
    ;; Arrays.this.consumesCloneable(new Object[10]);
-   (call_ref (local.get $this)(struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $Object.array.elements (i32.const 10) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt))(struct.get $array.Arrays.vtable $m_consumesCloneable__java_lang_Cloneable__void (struct.get $array.Arrays $vtable(local.get $this))))
+   (call_ref (local.get $this)(struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (array.new_default_with_rtt $Object.array.elements (i32.const 10) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt))(struct.get $array.Arrays.vtable $m_consumesCloneable__java_lang_Cloneable__void (struct.get $array.Arrays $vtable(local.get $this))))
    ;; Arrays.this.consumesSerializable(new Object[10]);
-   (call_ref (local.get $this)(struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $Object.array.elements (i32.const 10) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt))(struct.get $array.Arrays.vtable $m_consumesSerializable__java_io_Serializable__void (struct.get $array.Arrays $vtable(local.get $this))))
+   (call_ref (local.get $this)(struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (array.new_default_with_rtt $Object.array.elements (i32.const 10) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt))(struct.get $array.Arrays.vtable $m_consumesSerializable__java_io_Serializable__void (struct.get $array.Arrays $vtable(local.get $this))))
   )
  )
 )
@@ -369,7 +368,6 @@
 ;;; CLASS  SomeObject
 (type $array.Arrays.SomeObject (struct
  (field $vtable (ref null $array.Arrays.SomeObject.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@array.Arrays.SomeObject (mut (ref null $array.Arrays)))
 ))
 (type $array.Arrays.SomeObject.vtable (struct
@@ -400,7 +398,6 @@
 ;;; CLASS  NativeType
 (type $array.Arrays.NativeType (struct
  (field $vtable (ref null $array.Arrays.NativeType.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $array.Arrays.NativeType.vtable (struct
  
@@ -427,7 +424,6 @@
 ;;; CLASS  ArrayContainer
 (type $array.Arrays.ArrayContainer (struct
  (field $vtable (ref null $array.Arrays.ArrayContainer.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $data@array.Arrays.ArrayContainer (mut (ref null $Object.array)))
 ))
 (type $array.Arrays.ArrayContainer.vtable (struct

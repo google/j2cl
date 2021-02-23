@@ -3,7 +3,6 @@
 ;;; CLASS  Main
 (type $jsvarargs.Main (struct
  (field $vtable (ref null $jsvarargs.Main.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $field@jsvarargs.Main (mut i32))
 ))
 (type $jsvarargs.Main.vtable (struct
@@ -273,7 +272,7 @@
   (block
    ;; Main m = new Main.<init>(1);
    
-   (local.set $m (call $m_<init>__int__void@jsvarargs.Main (struct.new_with_rtt $jsvarargs.Main (global.get $jsvarargs.Main.vtable) (i32.const 0) (i32.const 0) (global.get $jsvarargs.Main.rtt))(i32.const 1)))
+   (local.set $m (call $m_<init>__int__void@jsvarargs.Main (struct.new_with_rtt $jsvarargs.Main (global.get $jsvarargs.Main.vtable) (i32.const 0) (global.get $jsvarargs.Main.rtt))(i32.const 1)))
    ;; m.f3(1,[1,2]);
    (drop (call_ref (local.get $m)(i32.const 1)(ref.null $int.array)(struct.get $jsvarargs.Main.vtable $m_f3__int__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $m)))))
    ;; m.f3(1,[]);
@@ -303,7 +302,7 @@
   (block
    ;; Main m = new Main.<init>(1);
    
-   (local.set $m (call $m_<init>__int__void@jsvarargs.Main (struct.new_with_rtt $jsvarargs.Main (global.get $jsvarargs.Main.vtable) (i32.const 0) (i32.const 0) (global.get $jsvarargs.Main.rtt))(i32.const 1)))
+   (local.set $m (call $m_<init>__int__void@jsvarargs.Main (struct.new_with_rtt $jsvarargs.Main (global.get $jsvarargs.Main.vtable) (i32.const 0) (global.get $jsvarargs.Main.rtt))(i32.const 1)))
    ;; m.f4([1,2]);
    (drop (call_ref (local.get $m)(ref.null $int.array)(struct.get $jsvarargs.Main.vtable $m_f4__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $m)))))
    ;; m.f4([]);
@@ -335,13 +334,13 @@
   (block
    ;; AFunction a = new AFunction.<init>();
    
-   (local.set $a (call $m_<init>__void_$pp_jsvarargs@jsvarargs.Main.AFunction (struct.new_with_rtt $jsvarargs.Main.AFunction (global.get $jsvarargs.Main.AFunction.vtable) (i32.const 0) (global.get $jsvarargs.Main.AFunction.rtt))))
+   (local.set $a (call $m_<init>__void_$pp_jsvarargs@jsvarargs.Main.AFunction (struct.new_with_rtt $jsvarargs.Main.AFunction (global.get $jsvarargs.Main.AFunction.vtable) (global.get $jsvarargs.Main.AFunction.rtt))))
    ;; Object o1 = new Object.<init>();
    
-   (local.set $o1 (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (i32.const 0) (global.get $java.lang.Object.rtt))))
+   (local.set $o1 (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (global.get $java.lang.Object.rtt))))
    ;; Object o2 = new Object.<init>();
    
-   (local.set $o2 (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (i32.const 0) (global.get $java.lang.Object.rtt))))
+   (local.set $o2 (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (global.get $java.lang.Object.rtt))))
    ;; a.f1(0,[o1,o2]);
    (drop (call_ref (local.get $a)(i32.const 0)(ref.null $Object.array)(struct.get $jsvarargs.Main.AFunction.vtable $m_f1__int__arrayOf_java_lang_Object__java_lang_Object (struct.get $jsvarargs.Main.AFunction $vtable(local.get $a)))))
    ;; a.f1(0,[]);
@@ -375,7 +374,7 @@
    (block
     ;; Main $qualifier = new Main.<init>(1);
     
-    (local.set $$qualifier (call $m_<init>__int__void@jsvarargs.Main (struct.new_with_rtt $jsvarargs.Main (global.get $jsvarargs.Main.vtable) (i32.const 0) (i32.const 0) (global.get $jsvarargs.Main.rtt))(i32.const 1)))
+    (local.set $$qualifier (call $m_<init>__int__void@jsvarargs.Main (struct.new_with_rtt $jsvarargs.Main (global.get $jsvarargs.Main.vtable) (i32.const 0) (global.get $jsvarargs.Main.rtt))(i32.const 1)))
     ;; $qualifier.f3(1,ints);
     (drop (call_ref (local.get $$qualifier)(i32.const 1)(local.get $ints)(struct.get $jsvarargs.Main.vtable $m_f3__int__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $$qualifier)))))
    )
@@ -423,7 +422,6 @@
 ;;; CLASS  NativeObject
 (type $jsvarargs.Main.NativeObject (struct
  (field $vtable (ref null $jsvarargs.Main.NativeObject.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $jsvarargs.Main.NativeObject.vtable (struct
  
@@ -451,7 +449,6 @@
 ;;; CLASS  SubVarargsConstructorClass
 (type $jsvarargs.Main.SubVarargsConstructorClass (struct
  (field $vtable (ref null $jsvarargs.Main.SubVarargsConstructorClass.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $jsvarargs.Main.SubVarargsConstructorClass.vtable (struct
  
@@ -482,7 +479,6 @@
 ;;; CLASS  AbstractMethodWithVarargs
 (type $jsvarargs.Main.AbstractMethodWithVarargs (struct
  (field $vtable (ref null $jsvarargs.Main.AbstractMethodWithVarargs.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $jsvarargs.Main.AbstractMethodWithVarargs.vtable (struct
  
@@ -521,7 +517,6 @@
 ;;; CLASS  AFunction
 (type $jsvarargs.Main.AFunction (struct
  (field $vtable (ref null $jsvarargs.Main.AFunction.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $jsvarargs.Main.AFunction.vtable (struct
  
@@ -569,7 +564,6 @@
 ;;; CLASS  SubMain
 (type $jsvarargs.Main.SubMain (struct
  (field $vtable (ref null $jsvarargs.Main.SubMain.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $field@jsvarargs.Main (mut i32))
 ))
 (type $jsvarargs.Main.SubMain.vtable (struct
@@ -646,7 +640,6 @@
 ;;; CLASS  QualifiedSuperMethodCall
 (type $jsvarargs.QualifiedSuperMethodCall (struct
  (field $vtable (ref null $jsvarargs.QualifiedSuperMethodCall.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $field@jsvarargs.Main (mut i32))
 ))
 (type $jsvarargs.QualifiedSuperMethodCall.vtable (struct
@@ -684,7 +677,6 @@
 ;;; CLASS  InnerClass
 (type $jsvarargs.QualifiedSuperMethodCall.InnerClass (struct
  (field $vtable (ref null $jsvarargs.QualifiedSuperMethodCall.InnerClass.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@jsvarargs.QualifiedSuperMethodCall.InnerClass (mut (ref null $jsvarargs.QualifiedSuperMethodCall)))
 ))
 (type $jsvarargs.QualifiedSuperMethodCall.InnerClass.vtable (struct

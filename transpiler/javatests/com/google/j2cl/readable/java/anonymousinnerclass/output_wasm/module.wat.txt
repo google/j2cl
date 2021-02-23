@@ -3,7 +3,6 @@
 ;;; CLASS  A
 (type $anonymousinnerclass.A (struct
  (field $vtable (ref null $anonymousinnerclass.A.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $anonymousinnerclass.A.vtable (struct
  
@@ -30,7 +29,6 @@
 ;;; CLASS  B
 (type $anonymousinnerclass.A.B (struct
  (field $vtable (ref null $anonymousinnerclass.A.B.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@anonymousinnerclass.A.B (mut (ref null $anonymousinnerclass.A)))
 ))
 (type $anonymousinnerclass.A.B.vtable (struct
@@ -61,7 +59,6 @@
 ;;; CLASS  AnonymousInnerClass
 (type $anonymousinnerclass.AnonymousInnerClass (struct
  (field $vtable (ref null $anonymousinnerclass.AnonymousInnerClass.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $anonymousinnerclass.AnonymousInnerClass.vtable (struct
  
@@ -100,16 +97,16 @@
   (block
    ;; InnerClass ic = new $1.<init>(AnonymousInnerClass.this);
    
-   (local.set $ic (call $m_<init>__anonymousinnerclass_AnonymousInnerClass__void_$pp_anonymousinnerclass@anonymousinnerclass.AnonymousInnerClass.1 (struct.new_with_rtt $anonymousinnerclass.AnonymousInnerClass.1 (global.get $anonymousinnerclass.AnonymousInnerClass.1.vtable) (i32.const 0) (ref.null $anonymousinnerclass.AnonymousInnerClass) (ref.null $anonymousinnerclass.AnonymousInnerClass) (global.get $anonymousinnerclass.AnonymousInnerClass.1.rtt))(local.get $this)))
+   (local.set $ic (call $m_<init>__anonymousinnerclass_AnonymousInnerClass__void_$pp_anonymousinnerclass@anonymousinnerclass.AnonymousInnerClass.1 (struct.new_with_rtt $anonymousinnerclass.AnonymousInnerClass.1 (global.get $anonymousinnerclass.AnonymousInnerClass.1.vtable) (ref.null $anonymousinnerclass.AnonymousInnerClass) (ref.null $anonymousinnerclass.AnonymousInnerClass) (global.get $anonymousinnerclass.AnonymousInnerClass.1.rtt))(local.get $this)))
    ;; A a = new A.<init>();
    
-   (local.set $a (call $m_<init>__void_$pp_anonymousinnerclass@anonymousinnerclass.A (struct.new_with_rtt $anonymousinnerclass.A (global.get $anonymousinnerclass.A.vtable) (i32.const 0) (global.get $anonymousinnerclass.A.rtt))))
+   (local.set $a (call $m_<init>__void_$pp_anonymousinnerclass@anonymousinnerclass.A (struct.new_with_rtt $anonymousinnerclass.A (global.get $anonymousinnerclass.A.vtable) (global.get $anonymousinnerclass.A.rtt))))
    ;; B b = new $2.<init>(AnonymousInnerClass.this,a);
    
-   (local.set $b (call $m_<init>__anonymousinnerclass_AnonymousInnerClass__anonymousinnerclass_A__void_$pp_anonymousinnerclass@anonymousinnerclass.AnonymousInnerClass.2 (struct.new_with_rtt $anonymousinnerclass.AnonymousInnerClass.2 (global.get $anonymousinnerclass.AnonymousInnerClass.2.vtable) (i32.const 0) (ref.null $anonymousinnerclass.A) (ref.null $anonymousinnerclass.AnonymousInnerClass) (global.get $anonymousinnerclass.AnonymousInnerClass.2.rtt))(local.get $this)(local.get $a)))
+   (local.set $b (call $m_<init>__anonymousinnerclass_AnonymousInnerClass__anonymousinnerclass_A__void_$pp_anonymousinnerclass@anonymousinnerclass.AnonymousInnerClass.2 (struct.new_with_rtt $anonymousinnerclass.AnonymousInnerClass.2 (global.get $anonymousinnerclass.AnonymousInnerClass.2.vtable) (ref.null $anonymousinnerclass.A) (ref.null $anonymousinnerclass.AnonymousInnerClass) (global.get $anonymousinnerclass.AnonymousInnerClass.2.rtt))(local.get $this)(local.get $a)))
    ;; C c = new $3.<init>(AnonymousInnerClass.this,arg);
    
-   (local.set $c (call $m_<init>__anonymousinnerclass_AnonymousInnerClass__int__void_$pp_anonymousinnerclass@anonymousinnerclass.AnonymousInnerClass.3 (struct.new_with_rtt $anonymousinnerclass.AnonymousInnerClass.3 (global.get $anonymousinnerclass.AnonymousInnerClass.3.vtable) (i32.const 0) (ref.null $anonymousinnerclass.AnonymousInnerClass) (i32.const 0) (i32.const 0) (ref.null $anonymousinnerclass.AnonymousInnerClass) (i32.const 0) (global.get $anonymousinnerclass.AnonymousInnerClass.3.rtt))(local.get $this)(local.get $arg)))
+   (local.set $c (call $m_<init>__anonymousinnerclass_AnonymousInnerClass__int__void_$pp_anonymousinnerclass@anonymousinnerclass.AnonymousInnerClass.3 (struct.new_with_rtt $anonymousinnerclass.AnonymousInnerClass.3 (global.get $anonymousinnerclass.AnonymousInnerClass.3.vtable) (ref.null $anonymousinnerclass.AnonymousInnerClass) (i32.const 0) (i32.const 0) (ref.null $anonymousinnerclass.AnonymousInnerClass) (i32.const 0) (global.get $anonymousinnerclass.AnonymousInnerClass.3.rtt))(local.get $this)(local.get $arg)))
   )
  )
 )
@@ -118,7 +115,6 @@
 ;;; CLASS  InnerClass
 (type $anonymousinnerclass.AnonymousInnerClass.InnerClass (struct
  (field $vtable (ref null $anonymousinnerclass.AnonymousInnerClass.InnerClass.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@anonymousinnerclass.AnonymousInnerClass.InnerClass (mut (ref null $anonymousinnerclass.AnonymousInnerClass)))
 ))
 (type $anonymousinnerclass.AnonymousInnerClass.InnerClass.vtable (struct
@@ -149,7 +145,6 @@
 ;;; CLASS  <anonymous> extends InnerClass
 (type $anonymousinnerclass.AnonymousInnerClass.1 (struct
  (field $vtable (ref null $anonymousinnerclass.AnonymousInnerClass.1.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@anonymousinnerclass.AnonymousInnerClass.InnerClass (mut (ref null $anonymousinnerclass.AnonymousInnerClass)))
  (field $this@anonymousinnerclass.AnonymousInnerClass.1 (mut (ref null $anonymousinnerclass.AnonymousInnerClass)))
 ))
@@ -181,7 +176,6 @@
 ;;; CLASS  <anonymous> extends B
 (type $anonymousinnerclass.AnonymousInnerClass.2 (struct
  (field $vtable (ref null $anonymousinnerclass.AnonymousInnerClass.2.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@anonymousinnerclass.A.B (mut (ref null $anonymousinnerclass.A)))
  (field $this@anonymousinnerclass.AnonymousInnerClass.2 (mut (ref null $anonymousinnerclass.AnonymousInnerClass)))
 ))
@@ -214,7 +208,6 @@
 ;;; CLASS  C
 (type $anonymousinnerclass.AnonymousInnerClass.1C (struct
  (field $vtable (ref null $anonymousinnerclass.AnonymousInnerClass.1C.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@anonymousinnerclass.AnonymousInnerClass.1C (mut (ref null $anonymousinnerclass.AnonymousInnerClass)))
  (field $fInC@anonymousinnerclass.AnonymousInnerClass.1C (mut i32))
  (field $arg@anonymousinnerclass.AnonymousInnerClass.1C (mut i32))
@@ -263,7 +256,6 @@
 ;;; CLASS  <anonymous> extends C
 (type $anonymousinnerclass.AnonymousInnerClass.3 (struct
  (field $vtable (ref null $anonymousinnerclass.AnonymousInnerClass.3.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@anonymousinnerclass.AnonymousInnerClass.1C (mut (ref null $anonymousinnerclass.AnonymousInnerClass)))
  (field $fInC@anonymousinnerclass.AnonymousInnerClass.1C (mut i32))
  (field $arg@anonymousinnerclass.AnonymousInnerClass.1C (mut i32))

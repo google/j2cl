@@ -3,7 +3,6 @@
 ;;; CLASS  InferReturn
 (type $inferreturn.InferReturn (struct
  (field $vtable (ref null $inferreturn.InferReturn.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $inferreturn.InferReturn.vtable (struct
  
@@ -35,7 +34,7 @@
  (block $return.label
   (block
    ;; return new InferReturn.<init>();
-   (local.set $return.value (call $m_<init>__void@inferreturn.InferReturn (struct.new_with_rtt $inferreturn.InferReturn (global.get $inferreturn.InferReturn.vtable) (i32.const 0) (global.get $inferreturn.InferReturn.rtt))))
+   (local.set $return.value (call $m_<init>__void@inferreturn.InferReturn (struct.new_with_rtt $inferreturn.InferReturn (global.get $inferreturn.InferReturn.vtable) (global.get $inferreturn.InferReturn.rtt))))
    (br $return.label)
   )
  )
@@ -95,7 +94,7 @@
  (block $return.label
   (block
    ;; return new ArrayList.<init>();
-   (local.set $return.value (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.vtable) (i32.const 0) (i32.const 0) (ref.null $Object.array) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
+   (local.set $return.value (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.vtable) (i32.const 0) (ref.null $Object.array) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
    (br $return.label)
   )
  )

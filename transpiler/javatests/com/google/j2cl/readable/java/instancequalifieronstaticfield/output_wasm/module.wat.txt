@@ -3,7 +3,6 @@
 ;;; CLASS  InstanceQualifiers
 (type $instancequalifieronstaticfield.InstanceQualifiers (struct
  (field $vtable (ref null $instancequalifieronstaticfield.InstanceQualifiers.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $instancequalifieronstaticfield.InstanceQualifiers.vtable (struct
  
@@ -66,7 +65,7 @@
   (block
    ;; InstanceQualifiers main = new InstanceQualifiers.<init>();
    
-   (local.set $main (call $m_<init>__void@instancequalifieronstaticfield.InstanceQualifiers (struct.new_with_rtt $instancequalifieronstaticfield.InstanceQualifiers (global.get $instancequalifieronstaticfield.InstanceQualifiers.vtable) (i32.const 0) (global.get $instancequalifieronstaticfield.InstanceQualifiers.rtt))))
+   (local.set $main (call $m_<init>__void@instancequalifieronstaticfield.InstanceQualifiers (struct.new_with_rtt $instancequalifieronstaticfield.InstanceQualifiers (global.get $instancequalifieronstaticfield.InstanceQualifiers.vtable) (global.get $instancequalifieronstaticfield.InstanceQualifiers.rtt))))
    ;; int i = 0;
    
    (local.set $i (i32.const 0))
