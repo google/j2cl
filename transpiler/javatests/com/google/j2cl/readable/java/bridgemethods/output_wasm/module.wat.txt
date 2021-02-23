@@ -177,7 +177,7 @@
  (block $return.label
   (block
    ;; return ((String) super.fun(arg0));
-   (local.set $return.value (ref.cast $java.lang.Object $java.lang.String (call_ref (local.get $this)(local.get $arg0)(struct.get $bridgemethods.A.vtable $m_fun__java_lang_Object__java_lang_Object (struct.get $bridgemethods.A $vtable(local.get $this)))) (global.get $java.lang.String.rtt)))
+   (local.set $return.value (ref.cast $java.lang.Object $java.lang.String (call $m_fun__java_lang_Object__java_lang_Object@bridgemethods.A (local.get $this)(local.get $arg0)) (global.get $java.lang.String.rtt)))
    (br $return.label)
   )
  )
@@ -807,7 +807,7 @@
  (block $return.label
   (block
    ;; return ((String) super.get(arg0));
-   (local.set $return.value (ref.cast $java.lang.Object $java.lang.String (call_ref (local.get $this)(local.get $arg0)(struct.get $bridgemethods.ClassWithParameterizedGet.vtable $m_get__java_lang_Object__java_lang_Object (struct.get $bridgemethods.ClassWithParameterizedGet $vtable(local.get $this)))) (global.get $java.lang.String.rtt)))
+   (local.set $return.value (ref.cast $java.lang.Object $java.lang.String (call $m_get__java_lang_Object__java_lang_Object@bridgemethods.ClassWithParameterizedGet (local.get $this)(local.get $arg0)) (global.get $java.lang.String.rtt)))
    (br $return.label)
   )
  )
@@ -1434,7 +1434,7 @@
  (block $return.label
   (block
    ;; return super.get(arg0);
-   (local.set $return.value (call_ref (local.get $this)(local.get $arg0)(struct.get $bridgemethods.BridgeMethodShadowedSignature.B.vtable $m_get__java_lang_Object__java_lang_String (struct.get $bridgemethods.BridgeMethodShadowedSignature.B $vtable(local.get $this)))))
+   (local.set $return.value (call $m_get__java_lang_Object__java_lang_String@bridgemethods.BridgeMethodShadowedSignature.B (local.get $this)(local.get $arg0)))
    (br $return.label)
   )
  )

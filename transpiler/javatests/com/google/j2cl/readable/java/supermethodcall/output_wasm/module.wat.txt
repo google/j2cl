@@ -189,7 +189,7 @@
  (block $return.label
   (block
    ;; super.parentSimplest();
-   (call_ref (local.get $this)(struct.get $supermethodcall.Parent.vtable $m_parentSimplest__void (struct.get $supermethodcall.Parent $vtable(local.get $this))))
+   (call $m_parentSimplest__void@supermethodcall.Parent (local.get $this))
   )
  )
 )
@@ -204,7 +204,7 @@
  (block $return.label
   (block
    ;; super.parentWithParams(foo);
-   (call_ref (local.get $this)(local.get $foo)(struct.get $supermethodcall.Parent.vtable $m_parentWithParams__int__void (struct.get $supermethodcall.Parent $vtable(local.get $this))))
+   (call $m_parentWithParams__int__void@supermethodcall.Parent (local.get $this)(local.get $foo))
   )
  )
 )
@@ -220,7 +220,7 @@
  (block $return.label
   (block
    ;; super.parentWithChangingReturn();
-   (drop (call_ref (local.get $this)(struct.get $supermethodcall.Parent.vtable $m_parentWithChangingReturn__java_lang_Object (struct.get $supermethodcall.Parent $vtable(local.get $this)))))
+   (drop (call $m_parentWithChangingReturn__java_lang_Object@supermethodcall.Parent (local.get $this)))
    ;; return Child.this;
    (local.set $return.value (local.get $this))
    (br $return.label)
@@ -238,7 +238,7 @@
  (block $return.label
   (block
    ;; super.grandParentSimplest();
-   (call_ref (local.get $this)(struct.get $supermethodcall.GrandParent.vtable $m_grandParentSimplest__void (struct.get $supermethodcall.GrandParent $vtable(local.get $this))))
+   (call $m_grandParentSimplest__void@supermethodcall.GrandParent (local.get $this))
   )
  )
 )
@@ -253,7 +253,7 @@
  (block $return.label
   (block
    ;; super.grandParentWithParams(foo);
-   (call_ref (local.get $this)(local.get $foo)(struct.get $supermethodcall.GrandParent.vtable $m_grandParentWithParams__int__void (struct.get $supermethodcall.GrandParent $vtable(local.get $this))))
+   (call $m_grandParentWithParams__int__void@supermethodcall.GrandParent (local.get $this)(local.get $foo))
   )
  )
 )
@@ -269,7 +269,7 @@
  (block $return.label
   (block
    ;; super.grandParentWithChangingReturn();
-   (drop (call_ref (local.get $this)(struct.get $supermethodcall.GrandParent.vtable $m_grandParentWithChangingReturn__java_lang_Object (struct.get $supermethodcall.GrandParent $vtable(local.get $this)))))
+   (drop (call $m_grandParentWithChangingReturn__java_lang_Object@supermethodcall.GrandParent (local.get $this)))
    ;; return Child.this;
    (local.set $return.value (local.get $this))
    (br $return.label)

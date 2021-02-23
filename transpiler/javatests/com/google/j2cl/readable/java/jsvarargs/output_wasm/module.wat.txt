@@ -613,18 +613,18 @@
   (block
    ;; int a = super.f3(1,[1,2]);
    
-   (local.set $a (call_ref (local.get $this)(i32.const 1)(ref.null $int.array)(struct.get $jsvarargs.Main.vtable $m_f3__int__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $this)))))
+   (local.set $a (call $m_f3__int__arrayOf_int__int@jsvarargs.Main (local.get $this)(i32.const 1)(ref.null $int.array)))
    ;; (a = (a + super.f3(1,[])));
-   (local.set $a (i32.add (local.get $a) (call_ref (local.get $this)(i32.const 1)(ref.null $int.array)(struct.get $jsvarargs.Main.vtable $m_f3__int__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $this))))))
+   (local.set $a (i32.add (local.get $a) (call $m_f3__int__arrayOf_int__int@jsvarargs.Main (local.get $this)(i32.const 1)(ref.null $int.array))))
    ;; (a = (a + super.f3(1,new int[] {1,2})));
-   (local.set $a (i32.add (local.get $a) (call_ref (local.get $this)(i32.const 1)(ref.null $int.array)(struct.get $jsvarargs.Main.vtable $m_f3__int__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $this))))))
+   (local.set $a (i32.add (local.get $a) (call $m_f3__int__arrayOf_int__int@jsvarargs.Main (local.get $this)(i32.const 1)(ref.null $int.array))))
    ;; (a = (a + super.f3(1,new int[] {})));
-   (local.set $a (i32.add (local.get $a) (call_ref (local.get $this)(i32.const 1)(ref.null $int.array)(struct.get $jsvarargs.Main.vtable $m_f3__int__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $this))))))
+   (local.set $a (i32.add (local.get $a) (call $m_f3__int__arrayOf_int__int@jsvarargs.Main (local.get $this)(i32.const 1)(ref.null $int.array))))
    ;; int[] ints = new int[] {1,2};
    
    (local.set $ints (ref.null $int.array))
    ;; (a = (a + super.f3(1,ints)));
-   (local.set $a (i32.add (local.get $a) (call_ref (local.get $this)(i32.const 1)(local.get $ints)(struct.get $jsvarargs.Main.vtable $m_f3__int__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $this))))))
+   (local.set $a (i32.add (local.get $a) (call $m_f3__int__arrayOf_int__int@jsvarargs.Main (local.get $this)(i32.const 1)(local.get $ints))))
    ;; return a;
    (local.set $return.value (local.get $a))
    (br $return.label)

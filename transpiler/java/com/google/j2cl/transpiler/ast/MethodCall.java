@@ -76,7 +76,9 @@ public class MethodCall extends Invocation {
 
   /** Returns true if the call needs dynamic dispatch. */
   public boolean isPolymorphic() {
-    return targetMethodDescriptor.isPolymorphic() && !isStaticDispatch;
+    return targetMethodDescriptor.isPolymorphic()
+        && !isStaticDispatch
+        && !(qualifier instanceof SuperReference);
   }
 
   @Override

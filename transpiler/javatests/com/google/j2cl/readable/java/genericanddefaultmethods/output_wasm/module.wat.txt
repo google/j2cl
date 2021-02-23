@@ -94,7 +94,7 @@
  (block $return.label
   (block
    ;; super.foo(arg0);
-   (call_ref (local.get $this)(local.get $arg0)(struct.get $genericanddefaultmethods.GenericClass.vtable $m_foo__java_lang_Object__void (struct.get $genericanddefaultmethods.GenericClass $vtable(local.get $this))))
+   (call $m_foo__java_lang_Object__void@genericanddefaultmethods.GenericClass (local.get $this)(local.get $arg0))
   )
  )
 )

@@ -263,7 +263,7 @@
  (block $return.label
   (block
    ;; return super.getFoo(arg0);
-   (local.set $return.value (call_ref (local.get $this)(local.get $arg0)(struct.get $multipleabstractparents.MultipleAbstractParents.AbstractCollection.vtable $m_getFoo__java_lang_Object__java_lang_String (struct.get $multipleabstractparents.MultipleAbstractParents.AbstractCollection $vtable(local.get $this)))))
+   (local.set $return.value (call $m_getFoo__java_lang_Object__java_lang_String@multipleabstractparents.MultipleAbstractParents.AbstractCollection (local.get $this)(local.get $arg0)))
    (br $return.label)
   )
  )

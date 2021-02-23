@@ -140,7 +140,7 @@
  (block $return.label
   (block
    ;; return super.hashCode();
-   (local.set $return.value (call_ref (local.get $this)(struct.get $java.lang.Object.vtable $m_hashCode__int (struct.get $java.lang.Object $vtable(local.get $this)))))
+   (local.set $return.value (call $m_hashCode__int@java.lang.Object (local.get $this)))
    (br $return.label)
   )
  )

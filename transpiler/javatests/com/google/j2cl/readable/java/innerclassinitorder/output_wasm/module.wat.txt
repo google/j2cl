@@ -1427,7 +1427,7 @@
  (block $return.label
   (block
    ;; return super.checkDispatch();
-   (local.set $return.value (call_ref (local.get $this)(struct.get $innerclassinitorder.InnerClassInitOrder.Outer.vtable $m_checkDispatch__int (struct.get $innerclassinitorder.InnerClassInitOrder.Outer $vtable(local.get $this)))))
+   (local.set $return.value (call $m_checkDispatch__int@innerclassinitorder.InnerClassInitOrder.Outer (local.get $this)))
    (br $return.label)
   )
  )
