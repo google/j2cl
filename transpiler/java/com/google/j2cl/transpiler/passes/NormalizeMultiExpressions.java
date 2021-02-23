@@ -39,8 +39,8 @@ import java.util.stream.Collectors;
 public class NormalizeMultiExpressions extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
-    // First remove multexpressions from lhs of assignments, compound agnments and operands of
-    // incements and decrements. Many passes and the final output pass expect those places to
+    // First remove multiexpressions from lhs of assignments, compound agnments and operands of
+    // increments and decrements. Many passes and the final output pass expect those places to
     // contain plain lvalues and not multiexpressions.
     // This needs to be done before flattening since it introduces a multiexpression that could be
     // flattened, e.g.  ( (a, b) = rhs) => (a , (b = rhs)) => (a, b = rhs).
