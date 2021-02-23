@@ -40,7 +40,7 @@
    (local.set $jsFunction (call $m_<init>__void_$p_libraryinfo_Main_FunctionImpl@libraryinfo.Main.FunctionImpl (struct.new_with_rtt $libraryinfo.Main.FunctionImpl (global.get $libraryinfo.Main.FunctionImpl.vtable) (global.get $libraryinfo.Main.FunctionImpl.rtt))))
    ;; (jsFunction = function (String s){
    (local.set $jsFunction (ref.null $java.lang.Object))
-   ;; jsFunction.apply("foo");
+   ;; jsFunction.apply(java.lang.String.fromInternalArray([102,111,111]));
    
    ;; new MyJsType.<init>();
    (drop (call $m_<init>__void@libraryinfo.Main.MyJsType (struct.new_with_rtt $libraryinfo.Main.MyJsType (global.get $libraryinfo.Main.MyJsType.vtable) (ref.null $java.lang.Object) (global.get $libraryinfo.Main.MyJsType.rtt))))
@@ -55,8 +55,8 @@
  (param $this (ref null $libraryinfo.Main))
  (block $return.label
   (block
-   ;; libraryinfo.Main.log("Foo");
-   (call $m_log__java_lang_Object__void@libraryinfo.Main (ref.null $java.lang.String))
+   ;; libraryinfo.Main.log(java.lang.String.fromInternalArray([70,111,111]));
+   (call $m_log__java_lang_Object__void@libraryinfo.Main (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array)))
   )
  )
 )

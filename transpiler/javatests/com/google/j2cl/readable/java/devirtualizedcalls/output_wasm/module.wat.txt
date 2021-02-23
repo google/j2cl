@@ -103,9 +103,9 @@
  (local.set $this (ref.cast $java.lang.Object $devirtualizedcalls.CharSequenceCalls (local.get $this.untyped) (global.get $devirtualizedcalls.CharSequenceCalls.rtt)))
  (block $return.label
   (block
-   ;; String s = "s";
+   ;; String s = java.lang.String.fromInternalArray([115]);
    
-   (local.set $s (ref.null $java.lang.String))
+   (local.set $s (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array)))
    ;; CharSequenceCalls.this.test(s);
    (call_ref (local.get $this)(local.get $s)(struct.get $devirtualizedcalls.CharSequenceCalls.vtable $m_test__java_lang_CharSequence__void (struct.get $devirtualizedcalls.CharSequenceCalls $vtable(local.get $this))))
   )
@@ -490,9 +490,9 @@
  (local.set $this (ref.cast $java.lang.Object $devirtualizedcalls.StringCalls (local.get $this.untyped) (global.get $devirtualizedcalls.StringCalls.rtt)))
  (block $return.label
   (block
-   ;; String literal = "String";
+   ;; String literal = java.lang.String.fromInternalArray([83,116,114,105,110,103]);
    
-   (local.set $literal (ref.null $java.lang.String))
+   (local.set $literal (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array)))
    ;; String sub = literal.substring(1);
    
    (local.set $sub (call_ref (local.get $literal)(i32.const 1)(struct.get $java.lang.String.vtable $m_substring__int__java_lang_String (struct.get $java.lang.String $vtable(local.get $literal)))))

@@ -61,11 +61,11 @@
    (local.set $s3 (ref.null $java.lang.String))
    ;; (s2 = (s2 + s2));
    (local.set $s2 (ref.null $java.lang.String))
-   ;; (s1 = (s1 + "a"));
+   ;; (s1 = (s1 + java.lang.String.fromInternalArray([97])));
    (local.set $s1 (ref.null $java.lang.String))
-   ;; (s3 = ((((s1 + s1) + s2) + null) + "a"));
+   ;; (s3 = ((((s1 + s1) + s2) + null) + java.lang.String.fromInternalArray([97])));
    (local.set $s3 (ref.null $java.lang.String))
-   ;; (s3 = (((("a" + s1) + s1) + s2) + null));
+   ;; (s3 = ((((java.lang.String.fromInternalArray([97]) + s1) + s1) + s2) + null));
    (local.set $s3 (ref.null $java.lang.String))
    ;; String s4;
    
@@ -75,9 +75,9 @@
    ;; char c2 = 111;
    
    (local.set $c2 (i32.const 111))
-   ;; (s4 = ((c1 + c2) + "o"));
+   ;; (s4 = ((c1 + c2) + java.lang.String.fromInternalArray([111])));
    (local.set $s4 (ref.null $java.lang.String))
-   ;; (s4 = (s4 + (1 + "")));
+   ;; (s4 = (s4 + (1 + java.lang.String.fromInternalArray([]))));
    (local.set $s4 (ref.null $java.lang.String))
    ;; (s4 = (s4 + 1));
    (local.set $s4 (ref.null $java.lang.String))
@@ -109,7 +109,7 @@
     ;; StringHolder $qualifier = new StringHolder.<init>();
     
     (local.set $$qualifier_2 (call $m_<init>__void_$p_strings_Strings_StringHolder@strings.Strings.StringHolder (struct.new_with_rtt $strings.Strings.StringHolder (global.get $strings.Strings.StringHolder.vtable) (ref.null $java.lang.String) (global.get $strings.Strings.StringHolder.rtt))))
-    ;; ($qualifier.s = ($qualifier.s + "o"));
+    ;; ($qualifier.s = ($qualifier.s + java.lang.String.fromInternalArray([111])));
     (struct.set $strings.Strings.StringHolder $s@strings.Strings.StringHolder(local.get $$qualifier_2) (ref.null $java.lang.String))
    )
   )
@@ -122,12 +122,12 @@
  (param $this (ref null $strings.Strings))
  (block $return.label
   (block
-   ;; (Strings.this.someString = "This is a string literal");
-   (struct.set $strings.Strings $someString@strings.Strings(local.get $this) (ref.null $java.lang.String))
-   ;; (Strings.this.nonBmpChar = "\uD800\uDF46");
-   (struct.set $strings.Strings $nonBmpChar@strings.Strings(local.get $this) (ref.null $java.lang.String))
-   ;; (Strings.this.wideColon = "\uFF1A");
-   (struct.set $strings.Strings $wideColon@strings.Strings(local.get $this) (ref.null $java.lang.String))
+   ;; (Strings.this.someString = java.lang.String.fromInternalArray([84,104,105,115,32,105,115,32,97,32,115,116,114,105,110,103,32,108,105,116,101,114,97,108]));
+   (struct.set $strings.Strings $someString@strings.Strings(local.get $this) (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array)))
+   ;; (Strings.this.nonBmpChar = java.lang.String.fromInternalArray([55296,57158]));
+   (struct.set $strings.Strings $nonBmpChar@strings.Strings(local.get $this) (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array)))
+   ;; (Strings.this.wideColon = java.lang.String.fromInternalArray([65306]));
+   (struct.set $strings.Strings $wideColon@strings.Strings(local.get $this) (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array)))
   )
  )
 )
@@ -166,8 +166,8 @@
  (param $this (ref null $strings.Strings.StringHolder))
  (block $return.label
   (block
-   ;; (StringHolder.this.s = "A");
-   (struct.set $strings.Strings.StringHolder $s@strings.Strings.StringHolder(local.get $this) (ref.null $java.lang.String))
+   ;; (StringHolder.this.s = java.lang.String.fromInternalArray([65]));
+   (struct.set $strings.Strings.StringHolder $s@strings.Strings.StringHolder(local.get $this) (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array)))
   )
  )
 )

@@ -55,8 +55,8 @@
  (local.set $this (ref.cast $java.lang.Object $jsnonnull.Main (local.get $this.untyped) (global.get $jsnonnull.Main.rtt)))
  (block $return.label
   (block
-   ;; return "";
-   (local.set $return.value (ref.null $java.lang.String))
+   ;; return java.lang.String.fromInternalArray([]);
+   (local.set $return.value (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array)))
    (br $return.label)
   )
  )
@@ -75,8 +75,8 @@
  (local.set $this (ref.cast $java.lang.Object $jsnonnull.Main (local.get $this.untyped) (global.get $jsnonnull.Main.rtt)))
  (block $return.label
   (block
-   ;; return "";
-   (local.set $return.value (ref.null $java.lang.String))
+   ;; return java.lang.String.fromInternalArray([]);
+   (local.set $return.value (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array)))
    (br $return.label)
   )
  )
@@ -122,8 +122,8 @@
  (param $this (ref null $jsnonnull.Main))
  (block $return.label
   (block
-   ;; (Main.this.f1 = "Hello");
-   (struct.set $jsnonnull.Main $f1@jsnonnull.Main(local.get $this) (ref.null $java.lang.String))
+   ;; (Main.this.f1 = java.lang.String.fromInternalArray([72,101,108,108,111]));
+   (struct.set $jsnonnull.Main $f1@jsnonnull.Main(local.get $this) (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array)))
    ;; (Main.this.f2 = null);
    (struct.set $jsnonnull.Main $f2@jsnonnull.Main(local.get $this) (ref.null $java.lang.String))
    ;; (Main.this.f4 = new ArrayList.<init>());

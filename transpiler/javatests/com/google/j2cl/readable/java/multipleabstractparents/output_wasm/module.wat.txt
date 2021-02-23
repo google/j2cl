@@ -37,11 +37,11 @@
  (local $$qualifier_5 (ref null $java.lang.Object))
  (block $return.label
   (block
-   ;; assert (String $qualifier = (ArrayList<String> $qualifier = new ArrayList.<init>(),$qualifier.getFoo(null)),$qualifier.equals("AbstractCollection"));
+   ;; assert (String $qualifier = (ArrayList<String> $qualifier = new ArrayList.<init>(),$qualifier.getFoo(null)),$qualifier.equals(java.lang.String.fromInternalArray([65,98,115,116,114,97,99,116,67,111,108,108,101,99,116,105,111,110])));
    ;; unimplemented statement AssertStatement
-   ;; assert (String $qualifier = (StringList $qualifier = new StringList.<init>(),$qualifier.getFoo(null)),$qualifier.equals("AbstractCollection"));
+   ;; assert (String $qualifier = (StringList $qualifier = new StringList.<init>(),$qualifier.getFoo(null)),$qualifier.equals(java.lang.String.fromInternalArray([65,98,115,116,114,97,99,116,67,111,108,108,101,99,116,105,111,110])));
    ;; unimplemented statement AssertStatement
-   ;; assert (String $qualifier = (IStringList $qualifier = ((IStringList) new StringList.<init>()),$qualifier.getFoo(null)),$qualifier.equals("AbstractCollection"));
+   ;; assert (String $qualifier = (IStringList $qualifier = ((IStringList) new StringList.<init>()),$qualifier.getFoo(null)),$qualifier.equals(java.lang.String.fromInternalArray([65,98,115,116,114,97,99,116,67,111,108,108,101,99,116,105,111,110])));
    ;; unimplemented statement AssertStatement
   )
  )
@@ -114,8 +114,8 @@
  (local.set $this (ref.cast $java.lang.Object $multipleabstractparents.MultipleAbstractParents.AbstractCollection (local.get $this.untyped) (global.get $multipleabstractparents.MultipleAbstractParents.AbstractCollection.rtt)))
  (block $return.label
   (block
-   ;; return "AbstractCollection";
-   (local.set $return.value (ref.null $java.lang.String))
+   ;; return java.lang.String.fromInternalArray([65,98,115,116,114,97,99,116,67,111,108,108,101,99,116,105,111,110]);
+   (local.set $return.value (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array)))
    (br $return.label)
   )
  )

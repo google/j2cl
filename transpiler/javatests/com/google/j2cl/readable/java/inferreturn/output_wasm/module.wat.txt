@@ -72,14 +72,14 @@
  (local $array (ref null $Object.array))
  (block $return.label
   (block
-   ;; ArrayList<Object> list = inferreturn.InferReturn.newArrayList("foo");
+   ;; ArrayList<Object> list = inferreturn.InferReturn.newArrayList(java.lang.String.fromInternalArray([102,111,111]));
    
-   (local.set $list (call $m_newArrayList__java_lang_Object__java_util_ArrayList@inferreturn.InferReturn (ref.null $java.lang.String)))
+   (local.set $list (call $m_newArrayList__java_lang_Object__java_util_ArrayList@inferreturn.InferReturn (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array))))
    ;; inferreturn.InferReturn.acceptsArrayListOfObject(list);
    (call $m_acceptsArrayListOfObject__java_util_ArrayList__void@inferreturn.InferReturn (local.get $list))
-   ;; Object[] array = inferreturn.InferReturn.newArray("foo");
+   ;; Object[] array = inferreturn.InferReturn.newArray(java.lang.String.fromInternalArray([102,111,111]));
    
-   (local.set $array (call $m_newArray__java_lang_Object__arrayOf_java_lang_Object@inferreturn.InferReturn (ref.null $java.lang.String)))
+   (local.set $array (call $m_newArray__java_lang_Object__arrayOf_java_lang_Object@inferreturn.InferReturn (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array))))
    ;; inferreturn.InferReturn.acceptsArrayOfObject(array);
    (call $m_acceptsArrayOfObject__arrayOf_java_lang_Object__void@inferreturn.InferReturn (local.get $array))
   )

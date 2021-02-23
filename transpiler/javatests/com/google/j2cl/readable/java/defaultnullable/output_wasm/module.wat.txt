@@ -54,8 +54,8 @@
  (local.set $this (ref.cast $java.lang.Object $defaultnullable.DefaultNullable (local.get $this.untyped) (global.get $defaultnullable.DefaultNullable.rtt)))
  (block $return.label
   (block
-   ;; return "";
-   (local.set $return.value (ref.null $java.lang.String))
+   ;; return java.lang.String.fromInternalArray([]);
+   (local.set $return.value (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array)))
    (br $return.label)
   )
  )
@@ -101,8 +101,8 @@
  (param $this (ref null $defaultnullable.DefaultNullable))
  (block $return.label
   (block
-   ;; (DefaultNullable.this.f1 = "Hello");
-   (struct.set $defaultnullable.DefaultNullable $f1@defaultnullable.DefaultNullable(local.get $this) (ref.null $java.lang.String))
+   ;; (DefaultNullable.this.f1 = java.lang.String.fromInternalArray([72,101,108,108,111]));
+   (struct.set $defaultnullable.DefaultNullable $f1@defaultnullable.DefaultNullable(local.get $this) (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array)))
    ;; (DefaultNullable.this.f2 = null);
    (struct.set $defaultnullable.DefaultNullable $f2@defaultnullable.DefaultNullable(local.get $this) (ref.null $java.lang.String))
    ;; (DefaultNullable.this.f3 = null);

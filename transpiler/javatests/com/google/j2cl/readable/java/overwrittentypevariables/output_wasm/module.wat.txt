@@ -96,8 +96,8 @@
  (local.set $this (ref.cast $java.lang.Object $overwrittentypevariables.HashFunctions.1 (local.get $this.untyped) (global.get $overwrittentypevariables.HashFunctions.1.rtt)))
  (block $return.label
   (block
-   ;; return "";
-   (local.set $return.value (ref.null $java.lang.String))
+   ;; return java.lang.String.fromInternalArray([]);
+   (local.set $return.value (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array)))
    (br $return.label)
   )
  )
@@ -162,7 +162,7 @@
  (local.set $this (ref.cast $java.lang.Object $overwrittentypevariables.HashFunctions.2 (local.get $this.untyped) (global.get $overwrittentypevariables.HashFunctions.2.rtt)))
  (block $return.label
   (block
-   ;; return ("" + input.ordinal());
+   ;; return (java.lang.String.fromInternalArray([]) + input.ordinal());
    (local.set $return.value (ref.null $java.lang.String))
    (br $return.label)
   )

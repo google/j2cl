@@ -126,6 +126,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     this.count = charCount;
     System.arraycopy(data, offset, value, 0, count);
   }
+
   /*
    * Internal version of the String(char[], int, int) constructor.
    * Does not range check, null check, or copy the character array.
@@ -144,7 +145,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     offset = 0;
     count = value.length;
   }
-  /** Creates a {@code String} from the contents of the specified {@code StringBuffer}. */
+
   public String(StringBuffer stringBuffer) {
     offset = 0;
     synchronized (stringBuffer) {
@@ -538,7 +539,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     }
     return -1;
   }
-  /** Returns the number of characters in this string. */
+
   public int length() {
     return count;
   }
@@ -704,7 +705,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
   public String toLowerCase(Locale locale) {
     return CaseMapper.toLowerCase(locale, this, value, offset, count);
   }
-  /** Returns this string. */
+
   @Override
   public String toString() {
     return this;
@@ -774,6 +775,11 @@ public final class String implements Serializable, Comparable<String>, CharSeque
 
   public static String valueOf(boolean value) {
     return value ? "true" : "false";
+  }
+
+  // Internal API to create String instance without an array copy.
+  static String fromInternalArray(char[] array) {
+    return new String(0, 0, array);
   }
 
   static String fromCodePoint(int codePoint) {

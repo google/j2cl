@@ -56,8 +56,8 @@
  (local.set $this (ref.cast $java.lang.Object $nullability.Nullability (local.get $this.untyped) (global.get $nullability.Nullability.rtt)))
  (block $return.label
   (block
-   ;; return "";
-   (local.set $return.value (ref.null $java.lang.String))
+   ;; return java.lang.String.fromInternalArray([]);
+   (local.set $return.value (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array)))
    (br $return.label)
   )
  )
@@ -76,8 +76,8 @@
  (local.set $this (ref.cast $java.lang.Object $nullability.Nullability (local.get $this.untyped) (global.get $nullability.Nullability.rtt)))
  (block $return.label
   (block
-   ;; return "";
-   (local.set $return.value (ref.null $java.lang.String))
+   ;; return java.lang.String.fromInternalArray([]);
+   (local.set $return.value (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array)))
    (br $return.label)
   )
  )
@@ -123,8 +123,8 @@
  (param $this (ref null $nullability.Nullability))
  (block $return.label
   (block
-   ;; (Nullability.this.f1 = "Hello");
-   (struct.set $nullability.Nullability $f1@nullability.Nullability(local.get $this) (ref.null $java.lang.String))
+   ;; (Nullability.this.f1 = java.lang.String.fromInternalArray([72,101,108,108,111]));
+   (struct.set $nullability.Nullability $f1@nullability.Nullability(local.get $this) (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array)))
    ;; (Nullability.this.f2 = null);
    (struct.set $nullability.Nullability $f2@nullability.Nullability(local.get $this) (ref.null $java.lang.String))
    ;; (Nullability.this.f3 = null);
@@ -217,8 +217,8 @@
  (local.set $this (ref.cast $java.lang.Object $nullability.Nullability.Foo (local.get $this.untyped) (global.get $nullability.Nullability.Foo.rtt)))
  (block $return.label
   (block
-   ;; return "Foo";
-   (local.set $return.value (ref.null $java.lang.String))
+   ;; return java.lang.String.fromInternalArray([70,111,111]);
+   (local.set $return.value (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array)))
    (br $return.label)
   )
  )
@@ -749,8 +749,8 @@
  (local.set $this (ref.cast $java.lang.Object $nullability.Nullability.NullableTemplatedReturnOverride (local.get $this.untyped) (global.get $nullability.Nullability.NullableTemplatedReturnOverride.rtt)))
  (block $return.label
   (block
-   ;; return "foo";
-   (local.set $return.value (ref.null $java.lang.String))
+   ;; return java.lang.String.fromInternalArray([102,111,111]);
+   (local.set $return.value (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array)))
    (br $return.label)
   )
  )
@@ -823,8 +823,8 @@
  (local $return.value (ref null $java.lang.String))
  (block $return.label
   (block
-   ;; return "Hello";
-   (local.set $return.value (ref.null $java.lang.String))
+   ;; return java.lang.String.fromInternalArray([72,101,108,108,111]);
+   (local.set $return.value (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array)))
    (br $return.label)
   )
  )

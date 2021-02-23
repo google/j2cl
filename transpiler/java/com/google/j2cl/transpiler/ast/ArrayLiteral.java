@@ -36,7 +36,8 @@ public class ArrayLiteral extends Expression {
     this(typeDescriptor, Arrays.asList(valueExpressions));
   }
 
-  public ArrayLiteral(ArrayTypeDescriptor typeDescriptor, List<Expression> valueExpressions) {
+  public ArrayLiteral(
+      ArrayTypeDescriptor typeDescriptor, List<? extends Expression> valueExpressions) {
     checkState(typeDescriptor.isArray());
 
     this.typeDescriptor = checkNotNull(typeDescriptor);

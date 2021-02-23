@@ -116,8 +116,8 @@
  (local.set $this (ref.cast $java.lang.Object $anonymousclass.AnonymousClass.1 (local.get $this.untyped) (global.get $anonymousclass.AnonymousClass.1.rtt)))
  (block $return.label
   (block
-   ;; return "a";
-   (local.set $return.value (ref.null $java.lang.String))
+   ;; return java.lang.String.fromInternalArray([97]);
+   (local.set $return.value (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array)))
    (br $return.label)
   )
  )
@@ -178,8 +178,8 @@
  (local.set $this (ref.cast $java.lang.Object $anonymousclass.SomeInterface.1 (local.get $this.untyped) (global.get $anonymousclass.SomeInterface.1.rtt)))
  (block $return.label
   (block
-   ;; return "a";
-   (local.set $return.value (ref.null $java.lang.String))
+   ;; return java.lang.String.fromInternalArray([97]);
+   (local.set $return.value (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array)))
    (br $return.label)
   )
  )

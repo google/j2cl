@@ -789,7 +789,7 @@
    ;; Getter g = new AccidentalOverrideBridge.<init>();
    
    (local.set $g (call $m_<init>__void_$pp_bridgemethods@bridgemethods.AccidentalOverrideBridge (struct.new_with_rtt $bridgemethods.AccidentalOverrideBridge (global.get $bridgemethods.AccidentalOverrideBridge.vtable) (global.get $bridgemethods.AccidentalOverrideBridge.rtt))))
-   ;; g.get("");
+   ;; g.get(java.lang.String.fromInternalArray([]));
    (drop (ref.null $java.lang.String))
   )
  )
@@ -870,8 +870,8 @@
  (local $return.value (ref null $java.lang.String))
  (block $return.label
   (block
-   ;; return "BI3 get String";
-   (local.set $return.value (ref.null $java.lang.String))
+   ;; return java.lang.String.fromInternalArray([66,73,51,32,103,101,116,32,83,116,114,105,110,103]);
+   (local.set $return.value (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array)))
    (br $return.label)
   )
  )
@@ -1386,8 +1386,8 @@
  (local.set $this (ref.cast $java.lang.Object $bridgemethods.BridgeMethodShadowedSignature.B (local.get $this.untyped) (global.get $bridgemethods.BridgeMethodShadowedSignature.B.rtt)))
  (block $return.label
   (block
-   ;; return "B get B2";
-   (local.set $return.value (ref.null $java.lang.String))
+   ;; return java.lang.String.fromInternalArray([66,32,103,101,116,32,66,50]);
+   (local.set $return.value (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array)))
    (br $return.label)
   )
  )

@@ -52,9 +52,9 @@
    ;; int d = 101;
    
    (local.set $d (i32.const 101))
-   ;; String e = "foo";
+   ;; String e = java.lang.String.fromInternalArray([102,111,111]);
    
-   (local.set $e (ref.null $java.lang.String))
+   (local.set $e (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array)))
    ;; Class<?> f = <expr>;
    
    (local.set $f (ref.null $java.lang.Class))

@@ -65,31 +65,37 @@
 ;;; void SwitchStatement.main()
 (func $m_main__void@switchstatement.SwitchStatement
  (param $this.untyped (ref null $java.lang.Object))
+ (local $$expression (ref null $java.lang.String))
  (local $this (ref null $switchstatement.SwitchStatement))
  (local.set $this (ref.cast $java.lang.Object $switchstatement.SwitchStatement (local.get $this.untyped) (global.get $switchstatement.SwitchStatement.rtt)))
  (block $return.label
   (block
-   ;; SWITCH: switch ("one") {
+   ;; SWITCH: {
    (block $SWITCH.BREAK
-    ;; switch ("one") {
-    
     (block
+     ;; String $expression = java.lang.String.fromInternalArray([111,110,101]);
+     
+     (local.set $$expression (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array)))
+     ;; switch ($expression) {
+     
      (block
       (block
-       (block ;; evaluate expression and jump
-        (br_if 0 (ref.eq (ref.null $java.lang.String) (ref.null $java.lang.String)))
-        (br_if 1 (ref.eq (ref.null $java.lang.String) (ref.null $java.lang.String)))
-        (br 2)
+       (block
+        (block ;; evaluate expression and jump
+         (br_if 0 (ref.eq (local.get $$expression) (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array))))
+         (br_if 1 (ref.eq (local.get $$expression) (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array))))
+         (br 2)
+        )
+        ;; case java.lang.String.fromInternalArray([111,110,101]):
        )
-       ;; case "one":
+       ;; case java.lang.String.fromInternalArray([116,119,111]):
+       ;; break SWITCH;
+       (br $SWITCH.BREAK)
       )
-      ;; case "two":
-      ;; break SWITCH;
-      (br $SWITCH.BREAK)
+      ;; default:
+      ;; return;
+      (br $return.label)
      )
-     ;; default:
-     ;; return;
-     (br $return.label)
     )
    )
    ;; SWITCH: switch (49) {

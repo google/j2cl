@@ -29,8 +29,8 @@ public class NumberLiteral extends Literal {
     return new NumberLiteral(PrimitiveTypes.INT, value);
   }
 
-  public static NumberLiteral fromChar(char value) {
-    return new NumberLiteral(PrimitiveTypes.CHAR, (int) value);
+  public static NumberLiteral fromChar(int value) {
+    return new NumberLiteral(PrimitiveTypes.CHAR, value);
   }
 
   public static NumberLiteral fromLong(long value) {

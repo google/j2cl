@@ -16,7 +16,9 @@
 package com.google.j2cl.transpiler.ast;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.collect.ImmutableList.toImmutableList;
 
+import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
 import org.apache.commons.text.StringEscapeUtils;
@@ -37,6 +39,10 @@ public class StringLiteral extends Literal {
   private static String escapeJavaString(String string) {
     // NOTE: StringEscapeUtils.escapeJava does not escape unprintable character 127 (delete).
     return StringEscapeUtils.escapeJava(string).replace("\u007f", "\\u007F");
+  }
+
+  public ImmutableList<NumberLiteral> toCharLiterals() {
+    return value.chars().mapToObj(NumberLiteral::fromChar).collect(toImmutableList());
   }
 
   @Override

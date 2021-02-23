@@ -8,8 +8,8 @@
  (param $value (ref null $java.lang.String))
  (block $return.label
   (block
-   ;; java.lang.System.out.println("in InterfaceWithDefault");
-   (call_ref (global.get $out@java.lang.System)(ref.null $java.lang.String)(struct.get $java.io.PrintStream.vtable $m_println__java_lang_String__void (struct.get $java.io.PrintStream $vtable(global.get $out@java.lang.System))))
+   ;; java.lang.System.out.println(java.lang.String.fromInternalArray([105,110,32,73,110,116,101,114,102,97,99,101,87,105,116,104,68,101,102,97,117,108,116]));
+   (call_ref (global.get $out@java.lang.System)(call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array))(struct.get $java.io.PrintStream.vtable $m_println__java_lang_String__void (struct.get $java.io.PrintStream $vtable(global.get $out@java.lang.System))))
   )
  )
 )
@@ -50,8 +50,8 @@
  (local.set $this (ref.cast $java.lang.Object $genericanddefaultmethods.GenericClass (local.get $this.untyped) (global.get $genericanddefaultmethods.GenericClass.rtt)))
  (block $return.label
   (block
-   ;; java.lang.System.out.println("in GenericClass");
-   (call_ref (global.get $out@java.lang.System)(ref.null $java.lang.String)(struct.get $java.io.PrintStream.vtable $m_println__java_lang_String__void (struct.get $java.io.PrintStream $vtable(global.get $out@java.lang.System))))
+   ;; java.lang.System.out.println(java.lang.String.fromInternalArray([105,110,32,71,101,110,101,114,105,99,67,108,97,115,115]));
+   (call_ref (global.get $out@java.lang.System)(call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array))(struct.get $java.io.PrintStream.vtable $m_println__java_lang_String__void (struct.get $java.io.PrintStream $vtable(global.get $out@java.lang.System))))
   )
  )
 )

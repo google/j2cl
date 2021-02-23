@@ -47,10 +47,10 @@
    ;; B b = new B.<init>();
    
    (local.set $b (call $m_<init>__void@bridgejsmethod.Main.B (struct.new_with_rtt $bridgejsmethod.Main.B (global.get $bridgejsmethod.Main.B.vtable) (global.get $bridgejsmethod.Main.B.rtt))))
-   ;; b.fun("abc");
-   (drop (call_ref (local.get $b)(ref.null $java.lang.String)(struct.get $bridgejsmethod.Main.B.vtable $m_fun__java_lang_String__java_lang_String (struct.get $bridgejsmethod.Main.B $vtable(local.get $b)))))
-   ;; b.bar("abc");
-   (call_ref (local.get $b)(ref.null $java.lang.String)(struct.get $bridgejsmethod.Main.B.vtable $m_bar__java_lang_String__void (struct.get $bridgejsmethod.Main.B $vtable(local.get $b))))
+   ;; b.fun(java.lang.String.fromInternalArray([97,98,99]));
+   (drop (call_ref (local.get $b)(call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array))(struct.get $bridgejsmethod.Main.B.vtable $m_fun__java_lang_String__java_lang_String (struct.get $bridgejsmethod.Main.B $vtable(local.get $b)))))
+   ;; b.bar(java.lang.String.fromInternalArray([97,98,99]));
+   (call_ref (local.get $b)(call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array))(struct.get $bridgejsmethod.Main.B.vtable $m_bar__java_lang_String__void (struct.get $bridgejsmethod.Main.B $vtable(local.get $b))))
    ;; C c = new C.<init>();
    
    (local.set $c (call $m_<init>__void@bridgejsmethod.Main.C (struct.new_with_rtt $bridgejsmethod.Main.C (global.get $bridgejsmethod.Main.C.vtable) (global.get $bridgejsmethod.Main.C.rtt))))
@@ -68,10 +68,10 @@
    ;; E e = new E.<init>();
    
    (local.set $e (call $m_<init>__void@bridgejsmethod.Main.E (struct.new_with_rtt $bridgejsmethod.Main.E (global.get $bridgejsmethod.Main.E.vtable) (global.get $bridgejsmethod.Main.E.rtt))))
-   ;; e.fun("abc");
-   (drop (call_ref (local.get $e)(ref.null $java.lang.String)(struct.get $bridgejsmethod.Main.B.vtable $m_fun__java_lang_String__java_lang_String (struct.get $bridgejsmethod.Main.B $vtable(local.get $e)))))
-   ;; e.bar("abc");
-   (call_ref (local.get $e)(ref.null $java.lang.String)(struct.get $bridgejsmethod.Main.B.vtable $m_bar__java_lang_String__void (struct.get $bridgejsmethod.Main.B $vtable(local.get $e))))
+   ;; e.fun(java.lang.String.fromInternalArray([97,98,99]));
+   (drop (call_ref (local.get $e)(call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array))(struct.get $bridgejsmethod.Main.B.vtable $m_fun__java_lang_String__java_lang_String (struct.get $bridgejsmethod.Main.B $vtable(local.get $e)))))
+   ;; e.bar(java.lang.String.fromInternalArray([97,98,99]));
+   (call_ref (local.get $e)(call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array))(struct.get $bridgejsmethod.Main.B.vtable $m_bar__java_lang_String__void (struct.get $bridgejsmethod.Main.B $vtable(local.get $e))))
    ;; H<Integer> h = new H.<init>();
    
    (local.set $h (call $m_<init>__void@bridgejsmethod.Main.H (struct.new_with_rtt $bridgejsmethod.Main.H (global.get $bridgejsmethod.Main.H.vtable) (global.get $bridgejsmethod.Main.H.rtt))))
@@ -80,8 +80,8 @@
    ;; L<Integer> l = new L.<init>();
    
    (local.set $l (call $m_<init>__void@bridgejsmethod.Main.L (struct.new_with_rtt $bridgejsmethod.Main.L (global.get $bridgejsmethod.Main.L.vtable) (global.get $bridgejsmethod.Main.L.rtt))))
-   ;; l.fun("foo",1);
-   (call_ref (local.get $l)(ref.null $java.lang.String)(ref.null $java.lang.Integer)(struct.get $bridgejsmethod.Main.L.vtable $m_fun__java_lang_String__java_lang_Object__void_$pp_bridgejsmethod (struct.get $bridgejsmethod.Main.L $vtable(local.get $l))))
+   ;; l.fun(java.lang.String.fromInternalArray([102,111,111]),1);
+   (call_ref (local.get $l)(call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array))(ref.null $java.lang.Integer)(struct.get $bridgejsmethod.Main.L.vtable $m_fun__java_lang_String__java_lang_Object__void_$pp_bridgejsmethod (struct.get $bridgejsmethod.Main.L $vtable(local.get $l))))
   )
  )
 )

@@ -36,8 +36,8 @@
  (param $this (ref null $valueofnullable.ValueOfNullable))
  (block $return.label
   (block
-   ;; (ValueOfNullable.this.nullableString = "b");
-   (struct.set $valueofnullable.ValueOfNullable $nullableString@valueofnullable.ValueOfNullable(local.get $this) (ref.null $java.lang.String))
+   ;; (ValueOfNullable.this.nullableString = java.lang.String.fromInternalArray([98]));
+   (struct.set $valueofnullable.ValueOfNullable $nullableString@valueofnullable.ValueOfNullable(local.get $this) (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array)))
    ;; (ValueOfNullable.this.someChar = 97);
    (struct.set $valueofnullable.ValueOfNullable $someChar@valueofnullable.ValueOfNullable(local.get $this) (i32.const 97))
    ;; (ValueOfNullable.this.result = (ValueOfNullable.this.someChar + ValueOfNullable.this.nullableString));

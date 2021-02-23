@@ -85,6 +85,7 @@ import com.google.j2cl.transpiler.passes.NormalizeNestedClassConstructors;
 import com.google.j2cl.transpiler.passes.NormalizeOverlayMembers;
 import com.google.j2cl.transpiler.passes.NormalizeStaticMemberQualifiers;
 import com.google.j2cl.transpiler.passes.NormalizeStaticNativeMemberReferences;
+import com.google.j2cl.transpiler.passes.NormalizeStringLiterals;
 import com.google.j2cl.transpiler.passes.NormalizeSwitchStatements;
 import com.google.j2cl.transpiler.passes.NormalizeTryWithResources;
 import com.google.j2cl.transpiler.passes.NormalizeTypeLiterals;
@@ -278,6 +279,7 @@ public enum Backend {
           // Must run before Enum normalization
           new FixSuperCallQualifiers(),
           new NormalizeInstanceCompileTimeConstants(),
+          new NormalizeStringLiterals(),
           new NormalizeStaticMemberQualifiers(),
           new NormalizeMultiExpressions(),
 

@@ -41,8 +41,8 @@
  (param $args (ref null $Object.array))
  (block $return.label
   (block
-   ;; jsmethod.JsMethodExample.log("test");
-   (call $m_log__java_lang_String__void@jsmethod.JsMethodExample (ref.null $java.lang.String))
+   ;; jsmethod.JsMethodExample.log(java.lang.String.fromInternalArray([116,101,115,116]));
+   (call $m_log__java_lang_String__void@jsmethod.JsMethodExample (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array)))
   )
  )
 )
