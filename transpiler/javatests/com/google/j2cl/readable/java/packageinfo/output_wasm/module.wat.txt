@@ -4,6 +4,7 @@
 ;;; CLASS  Outer
 (type $packageinfo.Outer (struct
  (field $vtable (ref null $packageinfo.Outer.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $packageinfo.Outer.vtable (struct
  
@@ -30,6 +31,7 @@
 ;;; CLASS  Inner
 (type $packageinfo.Outer.Inner (struct
  (field $vtable (ref null $packageinfo.Outer.Inner.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@packageinfo.Outer.Inner (mut (ref null $packageinfo.Outer)))
 ))
 (type $packageinfo.Outer.Inner.vtable (struct
@@ -61,6 +63,7 @@
 ;;; CLASS  Foo
 (type $packageinfo.subpackage.Foo (struct
  (field $vtable (ref null $packageinfo.subpackage.Foo.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $outer@packageinfo.subpackage.Foo (mut (ref null $packageinfo.Outer)))
 ))
 (type $packageinfo.subpackage.Foo.vtable (struct
@@ -93,7 +96,7 @@
  (block $return.label
   (block
    ;; (Foo.this.outer = new Outer.<init>());
-   (struct.set $packageinfo.subpackage.Foo $outer@packageinfo.subpackage.Foo(local.get $this) (call $m_<init>__void@packageinfo.Outer (struct.new_with_rtt $packageinfo.Outer (global.get $packageinfo.Outer.vtable) (global.get $packageinfo.Outer.rtt))))
+   (struct.set $packageinfo.subpackage.Foo $outer@packageinfo.subpackage.Foo(local.get $this) (call $m_<init>__void@packageinfo.Outer (struct.new_with_rtt $packageinfo.Outer (global.get $packageinfo.Outer.vtable) (i32.const 0) (global.get $packageinfo.Outer.rtt))))
   )
  )
 )

@@ -381,7 +381,8 @@ final class ExpressionTranspiler {
 
         sourceBuilder.append(
             format(
-                "(struct.new_with_rtt %s (global.get %s) (array.new_default_with_rtt %s ",
+                "(struct.new_with_rtt %s "
+                    + "(global.get %s) (i32.const 0) (array.new_default_with_rtt %s ",
                 arrayType,
                 environment.getWasmVtableGlobalName(TypeDescriptors.get().javaLangObject),
                 elementArrayType));

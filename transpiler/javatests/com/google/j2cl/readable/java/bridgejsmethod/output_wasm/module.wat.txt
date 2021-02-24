@@ -3,6 +3,7 @@
 ;;; CLASS  Main
 (type $bridgejsmethod.Main (struct
  (field $vtable (ref null $bridgejsmethod.Main.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $bridgejsmethod.Main.vtable (struct
  
@@ -39,47 +40,47 @@
   (block
    ;; A a = new A.<init>();
    
-   (local.set $a (call $m_<init>__void@bridgejsmethod.Main.A (struct.new_with_rtt $bridgejsmethod.Main.A (global.get $bridgejsmethod.Main.A.vtable) (global.get $bridgejsmethod.Main.A.rtt))))
+   (local.set $a (call $m_<init>__void@bridgejsmethod.Main.A (struct.new_with_rtt $bridgejsmethod.Main.A (global.get $bridgejsmethod.Main.A.vtable) (i32.const 0) (global.get $bridgejsmethod.Main.A.rtt))))
    ;; a.fun(1);
    (drop (call_ref (local.get $a)(ref.null $java.lang.Object)(struct.get $bridgejsmethod.Main.A.vtable $m_fun__java_lang_Object__java_lang_Object (struct.get $bridgejsmethod.Main.A $vtable(local.get $a)))))
    ;; a.bar(1);
    (call_ref (local.get $a)(ref.null $java.lang.Object)(struct.get $bridgejsmethod.Main.A.vtable $m_bar__java_lang_Object__void (struct.get $bridgejsmethod.Main.A $vtable(local.get $a))))
    ;; B b = new B.<init>();
    
-   (local.set $b (call $m_<init>__void@bridgejsmethod.Main.B (struct.new_with_rtt $bridgejsmethod.Main.B (global.get $bridgejsmethod.Main.B.vtable) (global.get $bridgejsmethod.Main.B.rtt))))
+   (local.set $b (call $m_<init>__void@bridgejsmethod.Main.B (struct.new_with_rtt $bridgejsmethod.Main.B (global.get $bridgejsmethod.Main.B.vtable) (i32.const 0) (global.get $bridgejsmethod.Main.B.rtt))))
    ;; b.fun(java.lang.String.fromInternalArray([97,98,99]));
    (drop (call_ref (local.get $b)(call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array))(struct.get $bridgejsmethod.Main.B.vtable $m_fun__java_lang_String__java_lang_String (struct.get $bridgejsmethod.Main.B $vtable(local.get $b)))))
    ;; b.bar(java.lang.String.fromInternalArray([97,98,99]));
    (call_ref (local.get $b)(call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array))(struct.get $bridgejsmethod.Main.B.vtable $m_bar__java_lang_String__void (struct.get $bridgejsmethod.Main.B $vtable(local.get $b))))
    ;; C c = new C.<init>();
    
-   (local.set $c (call $m_<init>__void@bridgejsmethod.Main.C (struct.new_with_rtt $bridgejsmethod.Main.C (global.get $bridgejsmethod.Main.C.vtable) (global.get $bridgejsmethod.Main.C.rtt))))
+   (local.set $c (call $m_<init>__void@bridgejsmethod.Main.C (struct.new_with_rtt $bridgejsmethod.Main.C (global.get $bridgejsmethod.Main.C.vtable) (i32.const 0) (global.get $bridgejsmethod.Main.C.rtt))))
    ;; c.fun(1);
    (drop (call_ref (local.get $c)(ref.null $java.lang.Integer)(struct.get $bridgejsmethod.Main.C.vtable $m_fun__java_lang_Integer__java_lang_Integer (struct.get $bridgejsmethod.Main.C $vtable(local.get $c)))))
    ;; c.bar(1);
    (call_ref (local.get $c)(ref.null $java.lang.Integer)(struct.get $bridgejsmethod.Main.A.vtable $m_bar__java_lang_Object__void (struct.get $bridgejsmethod.Main.A $vtable(local.get $c))))
    ;; D d = new D.<init>();
    
-   (local.set $d (call $m_<init>__void@bridgejsmethod.Main.D (struct.new_with_rtt $bridgejsmethod.Main.D (global.get $bridgejsmethod.Main.D.vtable) (global.get $bridgejsmethod.Main.D.rtt))))
+   (local.set $d (call $m_<init>__void@bridgejsmethod.Main.D (struct.new_with_rtt $bridgejsmethod.Main.D (global.get $bridgejsmethod.Main.D.vtable) (i32.const 0) (global.get $bridgejsmethod.Main.D.rtt))))
    ;; d.fun(1);
    (drop (call_ref (local.get $d)(ref.null $java.lang.Integer)(struct.get $bridgejsmethod.Main.D.vtable $m_fun__java_lang_Integer__java_lang_Integer (struct.get $bridgejsmethod.Main.D $vtable(local.get $d)))))
    ;; d.bar(1);
    (call_ref (local.get $d)(ref.null $java.lang.Integer)(struct.get $bridgejsmethod.Main.A.vtable $m_bar__java_lang_Object__void (struct.get $bridgejsmethod.Main.A $vtable(local.get $d))))
    ;; E e = new E.<init>();
    
-   (local.set $e (call $m_<init>__void@bridgejsmethod.Main.E (struct.new_with_rtt $bridgejsmethod.Main.E (global.get $bridgejsmethod.Main.E.vtable) (global.get $bridgejsmethod.Main.E.rtt))))
+   (local.set $e (call $m_<init>__void@bridgejsmethod.Main.E (struct.new_with_rtt $bridgejsmethod.Main.E (global.get $bridgejsmethod.Main.E.vtable) (i32.const 0) (global.get $bridgejsmethod.Main.E.rtt))))
    ;; e.fun(java.lang.String.fromInternalArray([97,98,99]));
    (drop (call_ref (local.get $e)(call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array))(struct.get $bridgejsmethod.Main.B.vtable $m_fun__java_lang_String__java_lang_String (struct.get $bridgejsmethod.Main.B $vtable(local.get $e)))))
    ;; e.bar(java.lang.String.fromInternalArray([97,98,99]));
    (call_ref (local.get $e)(call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array))(struct.get $bridgejsmethod.Main.B.vtable $m_bar__java_lang_String__void (struct.get $bridgejsmethod.Main.B $vtable(local.get $e))))
    ;; H<Integer> h = new H.<init>();
    
-   (local.set $h (call $m_<init>__void@bridgejsmethod.Main.H (struct.new_with_rtt $bridgejsmethod.Main.H (global.get $bridgejsmethod.Main.H.vtable) (global.get $bridgejsmethod.Main.H.rtt))))
+   (local.set $h (call $m_<init>__void@bridgejsmethod.Main.H (struct.new_with_rtt $bridgejsmethod.Main.H (global.get $bridgejsmethod.Main.H.vtable) (i32.const 0) (global.get $bridgejsmethod.Main.H.rtt))))
    ;; h.enclose(1);
    (drop (call_ref (local.get $h)(ref.null $java.lang.Integer)(struct.get $bridgejsmethod.Main.H.vtable $m_enclose__java_lang_Object__java_lang_Object (struct.get $bridgejsmethod.Main.H $vtable(local.get $h)))))
    ;; L<Integer> l = new L.<init>();
    
-   (local.set $l (call $m_<init>__void@bridgejsmethod.Main.L (struct.new_with_rtt $bridgejsmethod.Main.L (global.get $bridgejsmethod.Main.L.vtable) (global.get $bridgejsmethod.Main.L.rtt))))
+   (local.set $l (call $m_<init>__void@bridgejsmethod.Main.L (struct.new_with_rtt $bridgejsmethod.Main.L (global.get $bridgejsmethod.Main.L.vtable) (i32.const 0) (global.get $bridgejsmethod.Main.L.rtt))))
    ;; l.fun(java.lang.String.fromInternalArray([102,111,111]),1);
    (call_ref (local.get $l)(call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array))(ref.null $java.lang.Integer)(struct.get $bridgejsmethod.Main.L.vtable $m_fun__java_lang_String__java_lang_Object__void_$pp_bridgejsmethod (struct.get $bridgejsmethod.Main.L $vtable(local.get $l))))
   )
@@ -89,6 +90,7 @@
 ;;; CLASS  A
 (type $bridgejsmethod.Main.A (struct
  (field $vtable (ref null $bridgejsmethod.Main.A.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $bridgejsmethod.Main.A.vtable (struct
  
@@ -153,6 +155,7 @@
 ;;; CLASS  B
 (type $bridgejsmethod.Main.B (struct
  (field $vtable (ref null $bridgejsmethod.Main.B.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $bridgejsmethod.Main.B.vtable (struct
  
@@ -249,6 +252,7 @@
 ;;; CLASS  C
 (type $bridgejsmethod.Main.C (struct
  (field $vtable (ref null $bridgejsmethod.Main.C.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $bridgejsmethod.Main.C.vtable (struct
  
@@ -316,6 +320,7 @@
 ;;; CLASS  D
 (type $bridgejsmethod.Main.D (struct
  (field $vtable (ref null $bridgejsmethod.Main.D.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $bridgejsmethod.Main.D.vtable (struct
  
@@ -403,6 +408,7 @@
 ;;; CLASS  E
 (type $bridgejsmethod.Main.E (struct
  (field $vtable (ref null $bridgejsmethod.Main.E.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $bridgejsmethod.Main.E.vtable (struct
  
@@ -433,6 +439,7 @@
 ;;; CLASS  F
 (type $bridgejsmethod.Main.F (struct
  (field $vtable (ref null $bridgejsmethod.Main.F.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $bridgejsmethod.Main.F.vtable (struct
  
@@ -522,6 +529,7 @@
 ;;; CLASS  H
 (type $bridgejsmethod.Main.H (struct
  (field $vtable (ref null $bridgejsmethod.Main.H.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $bridgejsmethod.Main.H.vtable (struct
  
@@ -568,6 +576,7 @@
 ;;; CLASS  K
 (type $bridgejsmethod.Main.K (struct
  (field $vtable (ref null $bridgejsmethod.Main.K.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $bridgejsmethod.Main.K.vtable (struct
  
@@ -609,6 +618,7 @@
 ;;; CLASS  L
 (type $bridgejsmethod.Main.L (struct
  (field $vtable (ref null $bridgejsmethod.Main.L.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $bridgejsmethod.Main.L.vtable (struct
  
@@ -669,6 +679,7 @@
 ;;; CLASS  N
 (type $bridgejsmethod.Main.N (struct
  (field $vtable (ref null $bridgejsmethod.Main.N.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@bridgejsmethod.Main.N (mut (ref null $bridgejsmethod.Main)))
 ))
 (type $bridgejsmethod.Main.N.vtable (struct
@@ -700,6 +711,7 @@
 ;;; CLASS  O
 (type $bridgejsmethod.Main.O (struct
  (field $vtable (ref null $bridgejsmethod.Main.O.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@bridgejsmethod.Main.N (mut (ref null $bridgejsmethod.Main)))
  (field $this@bridgejsmethod.Main.O (mut (ref null $bridgejsmethod.Main)))
  (field $b@bridgejsmethod.Main.O (mut (ref null $bridgejsmethod.Main.B)))
@@ -753,6 +765,7 @@
 ;;; CLASS  Q
 (type $bridgejsmethod.Main.Q (struct
  (field $vtable (ref null $bridgejsmethod.Main.Q.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@bridgejsmethod.Main.Q (mut (ref null $bridgejsmethod.Main)))
 ))
 (type $bridgejsmethod.Main.Q.vtable (struct
@@ -784,6 +797,7 @@
 ;;; CLASS  R
 (type $bridgejsmethod.Main.R (struct
  (field $vtable (ref null $bridgejsmethod.Main.R.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@bridgejsmethod.Main.Q (mut (ref null $bridgejsmethod.Main)))
  (field $this@bridgejsmethod.Main.R (mut (ref null $bridgejsmethod.Main)))
 ))
@@ -834,6 +848,7 @@
 ;;; CLASS  S
 (type $bridgejsmethod.Main.S (struct
  (field $vtable (ref null $bridgejsmethod.Main.S.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@bridgejsmethod.Main.Q (mut (ref null $bridgejsmethod.Main)))
  (field $this@bridgejsmethod.Main.R (mut (ref null $bridgejsmethod.Main)))
  (field $this@bridgejsmethod.Main.S (mut (ref null $bridgejsmethod.Main)))
@@ -867,6 +882,7 @@
 ;;; CLASS  GrandParent
 (type $bridgejsmethod.Main.GrandParent (struct
  (field $vtable (ref null $bridgejsmethod.Main.GrandParent.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@bridgejsmethod.Main.GrandParent (mut (ref null $bridgejsmethod.Main)))
 ))
 (type $bridgejsmethod.Main.GrandParent.vtable (struct
@@ -925,6 +941,7 @@
 ;;; CLASS  Parent
 (type $bridgejsmethod.Main.Parent (struct
  (field $vtable (ref null $bridgejsmethod.Main.Parent.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@bridgejsmethod.Main.GrandParent (mut (ref null $bridgejsmethod.Main)))
  (field $this@bridgejsmethod.Main.Parent (mut (ref null $bridgejsmethod.Main)))
 ))
@@ -1016,6 +1033,7 @@
 ;;; CLASS  Child
 (type $bridgejsmethod.Main.Child (struct
  (field $vtable (ref null $bridgejsmethod.Main.Child.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@bridgejsmethod.Main.GrandParent (mut (ref null $bridgejsmethod.Main)))
  (field $this@bridgejsmethod.Main.Parent (mut (ref null $bridgejsmethod.Main)))
  (field $this@bridgejsmethod.Main.Child (mut (ref null $bridgejsmethod.Main)))

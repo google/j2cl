@@ -3,6 +3,7 @@
 ;;; CLASS  InstanceofExpressions
 (type $instanceofexpression.InstanceofExpressions (struct
  (field $vtable (ref null $instanceofexpression.InstanceofExpressions.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $instanceofexpression.InstanceofExpressions.vtable (struct
  
@@ -41,7 +42,7 @@
   (block
    ;; Object object = new InstanceofExpressions.<init>();
    
-   (local.set $object (call $m_<init>__void@instanceofexpression.InstanceofExpressions (struct.new_with_rtt $instanceofexpression.InstanceofExpressions (global.get $instanceofexpression.InstanceofExpressions.vtable) (global.get $instanceofexpression.InstanceofExpressions.rtt))))
+   (local.set $object (call $m_<init>__void@instanceofexpression.InstanceofExpressions (struct.new_with_rtt $instanceofexpression.InstanceofExpressions (global.get $instanceofexpression.InstanceofExpressions.vtable) (i32.const 0) (global.get $instanceofexpression.InstanceofExpressions.rtt))))
    ;; boolean b;
    
    ;; (b = object instanceof Object);
@@ -66,7 +67,7 @@
   (block
    ;; Object o = new Object.<init>();
    
-   (local.set $o (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (global.get $java.lang.Object.rtt))))
+   (local.set $o (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (i32.const 0) (global.get $java.lang.Object.rtt))))
    ;; boolean b;
    
    ;; (b = o instanceof Serializable);
@@ -90,7 +91,7 @@
   (block
    ;; Object b = new Integer.<init>(1);
    
-   (local.set $b (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
+   (local.set $b (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
    ;; boolean a = b instanceof Byte;
    
    (local.set $a (ref.test $java.lang.Object $java.lang.Byte (local.get $b) (global.get $java.lang.Byte.rtt)))
@@ -138,16 +139,16 @@
   (block
    ;; Object object = new Object.<init>();
    
-   (local.set $object (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (global.get $java.lang.Object.rtt))))
+   (local.set $object (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (i32.const 0) (global.get $java.lang.Object.rtt))))
    ;; Object[] objectArray = new Object[0];
    
-   (local.set $objectArray (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (array.new_default_with_rtt $Object.array.elements (i32.const 0) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
+   (local.set $objectArray (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $Object.array.elements (i32.const 0) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
    ;; Object[][] objectDoubleArray = new Object[0][];
    
    (local.set $objectDoubleArray (ref.null $Object.array))
    ;; String[] stringArray = new String[0];
    
-   (local.set $stringArray (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (array.new_default_with_rtt $Object.array.elements (i32.const 0) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
+   (local.set $stringArray (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $Object.array.elements (i32.const 0) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
    ;; boolean a;
    
    ;; (a = object instanceof Object[]);
@@ -184,6 +185,7 @@
 ;;; CLASS  <anonymous> implements Serializable
 (type $instanceofexpression.InstanceofExpressions.1 (struct
  (field $vtable (ref null $instanceofexpression.InstanceofExpressions.1.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@instanceofexpression.InstanceofExpressions.1 (mut (ref null $instanceofexpression.InstanceofExpressions)))
 ))
 (type $instanceofexpression.InstanceofExpressions.1.vtable (struct

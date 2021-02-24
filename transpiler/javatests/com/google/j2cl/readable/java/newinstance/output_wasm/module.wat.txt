@@ -3,6 +3,7 @@
 ;;; CLASS  NewInstanceExpr
 (type $newinstance.NewInstanceExpr (struct
  (field $vtable (ref null $newinstance.NewInstanceExpr.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $newinstance.NewInstanceExpr.vtable (struct
  
@@ -34,7 +35,7 @@
   (block
    ;; NewInstanceExpr a = new NewInstanceExpr.<init>();
    
-   (local.set $a (call $m_<init>__void@newinstance.NewInstanceExpr (struct.new_with_rtt $newinstance.NewInstanceExpr (global.get $newinstance.NewInstanceExpr.vtable) (global.get $newinstance.NewInstanceExpr.rtt))))
+   (local.set $a (call $m_<init>__void@newinstance.NewInstanceExpr (struct.new_with_rtt $newinstance.NewInstanceExpr (global.get $newinstance.NewInstanceExpr.vtable) (i32.const 0) (global.get $newinstance.NewInstanceExpr.rtt))))
   )
  )
 )

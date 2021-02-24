@@ -3,6 +3,7 @@
 ;;; CLASS  NativeArray
 (type $nestednativetype.NativeArray (struct
  (field $vtable (ref null $nestednativetype.NativeArray.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $nestednativetype.NativeArray.vtable (struct
  
@@ -37,7 +38,7 @@
  (block $return.label
   (block
    ;; return new $1.<init>(NativeArray.this);
-   (local.set $return.value (call $m_<init>__nestednativetype_NativeArray__void_$pp_nestednativetype@nestednativetype.NativeArray.1 (struct.new_with_rtt $nestednativetype.NativeArray.1 (global.get $nestednativetype.NativeArray.1.vtable) (ref.null $nestednativetype.NativeArray) (global.get $nestednativetype.NativeArray.1.rtt))(local.get $this)))
+   (local.set $return.value (call $m_<init>__nestednativetype_NativeArray__void_$pp_nestednativetype@nestednativetype.NativeArray.1 (struct.new_with_rtt $nestednativetype.NativeArray.1 (global.get $nestednativetype.NativeArray.1.vtable) (i32.const 0) (ref.null $nestednativetype.NativeArray) (global.get $nestednativetype.NativeArray.1.rtt))(local.get $this)))
    (br $return.label)
   )
  )
@@ -48,6 +49,7 @@
 ;;; CLASS  <anonymous> extends Object
 (type $nestednativetype.NativeArray.1 (struct
  (field $vtable (ref null $nestednativetype.NativeArray.1.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
  (field $this@nestednativetype.NativeArray.1 (mut (ref null $nestednativetype.NativeArray)))
 ))
 (type $nestednativetype.NativeArray.1.vtable (struct

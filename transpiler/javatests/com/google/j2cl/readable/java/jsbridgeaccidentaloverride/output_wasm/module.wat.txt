@@ -3,6 +3,7 @@
 ;;; CLASS  Main
 (type $jsbridgeaccidentaloverride.Main (struct
  (field $vtable (ref null $jsbridgeaccidentaloverride.Main.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $jsbridgeaccidentaloverride.Main.vtable (struct
  
@@ -40,16 +41,16 @@
   (block
    ;; MyJsType a = new MyJsType.<init>();
    
-   (local.set $a (call $m_<init>__void_$pp_jsbridgeaccidentaloverride@jsbridgeaccidentaloverride.MyJsType (struct.new_with_rtt $jsbridgeaccidentaloverride.MyJsType (global.get $jsbridgeaccidentaloverride.MyJsType.vtable) (global.get $jsbridgeaccidentaloverride.MyJsType.rtt))))
+   (local.set $a (call $m_<init>__void_$pp_jsbridgeaccidentaloverride@jsbridgeaccidentaloverride.MyJsType (struct.new_with_rtt $jsbridgeaccidentaloverride.MyJsType (global.get $jsbridgeaccidentaloverride.MyJsType.vtable) (i32.const 0) (global.get $jsbridgeaccidentaloverride.MyJsType.rtt))))
    ;; SubJsType b = new SubJsType.<init>();
    
-   (local.set $b (call $m_<init>__void_$pp_jsbridgeaccidentaloverride@jsbridgeaccidentaloverride.SubJsType (struct.new_with_rtt $jsbridgeaccidentaloverride.SubJsType (global.get $jsbridgeaccidentaloverride.SubJsType.vtable) (global.get $jsbridgeaccidentaloverride.SubJsType.rtt))))
+   (local.set $b (call $m_<init>__void_$pp_jsbridgeaccidentaloverride@jsbridgeaccidentaloverride.SubJsType (struct.new_with_rtt $jsbridgeaccidentaloverride.SubJsType (global.get $jsbridgeaccidentaloverride.SubJsType.vtable) (i32.const 0) (global.get $jsbridgeaccidentaloverride.SubJsType.rtt))))
    ;; MyInterface c = new SubJsType.<init>();
    
-   (local.set $c (call $m_<init>__void_$pp_jsbridgeaccidentaloverride@jsbridgeaccidentaloverride.SubJsType (struct.new_with_rtt $jsbridgeaccidentaloverride.SubJsType (global.get $jsbridgeaccidentaloverride.SubJsType.vtable) (global.get $jsbridgeaccidentaloverride.SubJsType.rtt))))
+   (local.set $c (call $m_<init>__void_$pp_jsbridgeaccidentaloverride@jsbridgeaccidentaloverride.SubJsType (struct.new_with_rtt $jsbridgeaccidentaloverride.SubJsType (global.get $jsbridgeaccidentaloverride.SubJsType.vtable) (i32.const 0) (global.get $jsbridgeaccidentaloverride.SubJsType.rtt))))
    ;; OtherInterface d = new SubJsType.<init>();
    
-   (local.set $d (call $m_<init>__void_$pp_jsbridgeaccidentaloverride@jsbridgeaccidentaloverride.SubJsType (struct.new_with_rtt $jsbridgeaccidentaloverride.SubJsType (global.get $jsbridgeaccidentaloverride.SubJsType.vtable) (global.get $jsbridgeaccidentaloverride.SubJsType.rtt))))
+   (local.set $d (call $m_<init>__void_$pp_jsbridgeaccidentaloverride@jsbridgeaccidentaloverride.SubJsType (struct.new_with_rtt $jsbridgeaccidentaloverride.SubJsType (global.get $jsbridgeaccidentaloverride.SubJsType.vtable) (i32.const 0) (global.get $jsbridgeaccidentaloverride.SubJsType.rtt))))
    ;; a.foo(1);
    (drop (call_ref (local.get $a)(i32.const 1)(struct.get $jsbridgeaccidentaloverride.MyJsType.vtable $m_foo__int__int (struct.get $jsbridgeaccidentaloverride.MyJsType $vtable(local.get $a)))))
    ;; b.foo(1);
@@ -79,6 +80,7 @@
 ;;; CLASS  MyJsType
 (type $jsbridgeaccidentaloverride.MyJsType (struct
  (field $vtable (ref null $jsbridgeaccidentaloverride.MyJsType.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $jsbridgeaccidentaloverride.MyJsType.vtable (struct
  
@@ -167,6 +169,7 @@
 ;;; CLASS  SubJsType
 (type $jsbridgeaccidentaloverride.SubJsType (struct
  (field $vtable (ref null $jsbridgeaccidentaloverride.SubJsType.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $jsbridgeaccidentaloverride.SubJsType.vtable (struct
  

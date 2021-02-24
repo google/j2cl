@@ -3,6 +3,7 @@
 ;;; CLASS  Foo
 (type $srcjar.Foo (struct
  (field $vtable (ref null $srcjar.Foo.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $srcjar.Foo.vtable (struct
  
@@ -30,6 +31,7 @@
 ;;; CLASS  Srcjar
 (type $srcjar.Srcjar (struct
  (field $vtable (ref null $srcjar.Srcjar.vtable))
+ (field $$systemIdentityHashCode@java.lang.Object (mut i32))
 ))
 (type $srcjar.Srcjar.vtable (struct
  
@@ -60,7 +62,7 @@
   (block
    ;; Foo foo = new Foo.<init>();
    
-   (local.set $foo (call $m_<init>__void@srcjar.Foo (struct.new_with_rtt $srcjar.Foo (global.get $srcjar.Foo.vtable) (global.get $srcjar.Foo.rtt))))
+   (local.set $foo (call $m_<init>__void@srcjar.Foo (struct.new_with_rtt $srcjar.Foo (global.get $srcjar.Foo.vtable) (i32.const 0) (global.get $srcjar.Foo.rtt))))
   )
  )
 )
