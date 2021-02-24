@@ -58,6 +58,7 @@ public class TypeDescriptors {
   public DeclaredTypeDescriptor javaIoSerializable;
 
   public DeclaredTypeDescriptor javaemulValueType;
+  public DeclaredTypeDescriptor javaemulInternalWasmArrayHelper;
   public DeclaredTypeDescriptor javaemulInternalPreconditions;
   public DeclaredTypeDescriptor javaemulInternalEnums;
   public DeclaredTypeDescriptor javaemulInternalConstructor;
@@ -511,6 +512,9 @@ public class TypeDescriptors {
           break;
         case "javaemul.internal.InternalPreconditions":
           typeDescriptors.javaemulInternalPreconditions = referenceType;
+          break;
+        case "javaemul.internal.WasmArrayHelper":
+          typeDescriptors.javaemulInternalWasmArrayHelper = referenceType;
           break;
         case "javaemul.internal.Enums":
           typeDescriptors.javaemulInternalEnums = referenceType;

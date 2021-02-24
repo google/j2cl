@@ -131,6 +131,7 @@
  (local $object (ref null $java.lang.Object))
  (local $objectArray (ref null $Object.array))
  (local $objectDoubleArray (ref null $Object.array))
+ (local $$array_literal (ref null $int.array))
  (local $stringArray (ref null $Object.array))
  (local $a i32)
  (local $this (ref null $instanceofexpression.InstanceofExpressions))
@@ -143,9 +144,15 @@
    ;; Object[] objectArray = new Object[0];
    
    (local.set $objectArray (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $Object.array.elements (i32.const 0) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
-   ;; Object[][] objectDoubleArray = new Object[0][];
+   ;; Object[][] objectDoubleArray = javaemul.internal.WasmArrayHelper.createArray((int[] $array_literal = new int[2],($array_literal[0] = 0),($array_literal[1] = -1),$array_literal),-1);
    
-   (local.set $objectDoubleArray (ref.null $Object.array))
+   (local.set $objectDoubleArray (call $m_createArray__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArrayHelper (block (result (ref null $int.array))
+    
+    (local.set $$array_literal (struct.new_with_rtt $int.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $int.array.elements (i32.const 2) (global.get $int.array.elements.rtt)) (global.get $int.array.rtt)))
+    (array.set $int.array.elements (struct.get $int.array $elements (local.get $$array_literal)) (i32.const 0) (i32.const 0))
+    (array.set $int.array.elements (struct.get $int.array $elements (local.get $$array_literal)) (i32.const 1) (i32.const -1))
+    (local.get $$array_literal)
+   )(i32.const -1)))
    ;; String[] stringArray = new String[0];
    
    (local.set $stringArray (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $Object.array.elements (i32.const 0) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))

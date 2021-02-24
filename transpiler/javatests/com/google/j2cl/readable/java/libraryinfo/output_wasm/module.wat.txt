@@ -32,6 +32,7 @@
 (func $m_entryPoint__void@libraryinfo.Main
  (local $jsFunction (ref null $java.lang.Object))
  (local $s (ref null $java.lang.String))
+ (local $$array_literal (ref null $char.array))
  (block $return.label
   (block
    ;; new Main.<init>().execute();
@@ -41,7 +42,7 @@
    (local.set $jsFunction (call $m_<init>__void_$p_libraryinfo_Main_FunctionImpl@libraryinfo.Main.FunctionImpl (struct.new_with_rtt $libraryinfo.Main.FunctionImpl (global.get $libraryinfo.Main.FunctionImpl.vtable) (i32.const 0) (global.get $libraryinfo.Main.FunctionImpl.rtt))))
    ;; (jsFunction = function (String s){
    (local.set $jsFunction (ref.null $java.lang.Object))
-   ;; jsFunction.apply(java.lang.String.fromInternalArray([102,111,111]));
+   ;; jsFunction.apply(java.lang.String.fromInternalArray((char[] $array_literal = new char[3],($array_literal[0] = 102),($array_literal[1] = 111),($array_literal[2] = 111),$array_literal)));
    
    ;; new MyJsType.<init>();
    (drop (call $m_<init>__void@libraryinfo.Main.MyJsType (struct.new_with_rtt $libraryinfo.Main.MyJsType (global.get $libraryinfo.Main.MyJsType.vtable) (i32.const 0) (ref.null $java.lang.Object) (global.get $libraryinfo.Main.MyJsType.rtt))))
@@ -54,10 +55,18 @@
 ;;; void Main.execute()
 (func $m_execute__void_$p_libraryinfo_Main@libraryinfo.Main
  (param $this (ref null $libraryinfo.Main))
+ (local $$array_literal (ref null $char.array))
  (block $return.label
   (block
-   ;; libraryinfo.Main.log(java.lang.String.fromInternalArray([70,111,111]));
-   (call $m_log__java_lang_Object__void@libraryinfo.Main (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array)))
+   ;; libraryinfo.Main.log(java.lang.String.fromInternalArray((char[] $array_literal = new char[3],($array_literal[0] = 70),($array_literal[1] = 111),($array_literal[2] = 111),$array_literal)));
+   (call $m_log__java_lang_Object__void@libraryinfo.Main (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (block (result (ref null $char.array))
+    
+    (local.set $$array_literal (struct.new_with_rtt $char.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $char.array.elements (i32.const 3) (global.get $char.array.elements.rtt)) (global.get $char.array.rtt)))
+    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 0) (i32.const 70))
+    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 1) (i32.const 111))
+    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 2) (i32.const 111))
+    (local.get $$array_literal)
+   )))
   )
  )
 )

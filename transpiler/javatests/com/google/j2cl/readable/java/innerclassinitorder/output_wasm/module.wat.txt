@@ -540,14 +540,19 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))
+ (local $$array_literal (ref null $char.array))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1))
  (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1 (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1.rtt)))
  (block $return.label
   (block
    ;; ($1.this.this.this.number = ($1.this.this.this.number + 100));
    (struct.set $innerclassinitorder.InnerClassInitOrder $number@innerclassinitorder.InnerClassInitOrder(struct.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall $this@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall(struct.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1 $this@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1(local.get $this))) (i32.add (struct.get $innerclassinitorder.InnerClassInitOrder $number@innerclassinitorder.InnerClassInitOrder(struct.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall $this@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall(struct.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1 $this@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1(local.get $this)))) (i32.const 100)))
-   ;; return java.lang.String.fromInternalArray([]);
-   (local.set $return.value (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array)))
+   ;; return java.lang.String.fromInternalArray((char[] $array_literal = new char[0],$array_literal));
+   (local.set $return.value (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (block (result (ref null $char.array))
+    
+    (local.set $$array_literal (struct.new_with_rtt $char.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $char.array.elements (i32.const 0) (global.get $char.array.elements.rtt)) (global.get $char.array.rtt)))
+    (local.get $$array_literal)
+   )))
    (br $return.label)
   )
  )
@@ -637,14 +642,19 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))
+ (local $$array_literal (ref null $char.array))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1))
  (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1 (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1.rtt)))
  (block $return.label
   (block
    ;; ($1.this.this.this.number = ($1.this.this.this.number + 1000));
    (struct.set $innerclassinitorder.InnerClassInitOrder $number@innerclassinitorder.InnerClassInitOrder(struct.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall $this@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall(struct.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1 $this@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1(local.get $this))) (i32.add (struct.get $innerclassinitorder.InnerClassInitOrder $number@innerclassinitorder.InnerClassInitOrder(struct.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall $this@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall(struct.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1 $this@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1(local.get $this)))) (i32.const 1000)))
-   ;; return java.lang.String.fromInternalArray([]);
-   (local.set $return.value (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array)))
+   ;; return java.lang.String.fromInternalArray((char[] $array_literal = new char[0],$array_literal));
+   (local.set $return.value (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (block (result (ref null $char.array))
+    
+    (local.set $$array_literal (struct.new_with_rtt $char.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $char.array.elements (i32.const 0) (global.get $char.array.elements.rtt)) (global.get $char.array.rtt)))
+    (local.get $$array_literal)
+   )))
    (br $return.label)
   )
  )

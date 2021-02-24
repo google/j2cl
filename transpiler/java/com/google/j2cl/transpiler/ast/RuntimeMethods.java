@@ -64,6 +64,22 @@ public class RuntimeMethods {
         .build();
   }
 
+  /** Create a call to javaemul.internal.WasmArrayHelper.createArray method. */
+  public static MethodCall createCreateMultiDimensionalArrayCall(
+      Expression dimensions, Expression leafType) {
+    return MethodCall.Builder.from(
+            TypeDescriptors.get()
+                .javaemulInternalWasmArrayHelper
+                .getMethodDescriptor(
+                    "createArray",
+                    ArrayTypeDescriptor.newBuilder()
+                        .setComponentTypeDescriptor(PrimitiveTypes.INT)
+                        .build(),
+                    PrimitiveTypes.INT))
+        .setArguments(dimensions, leafType)
+        .build();
+  }
+
   /** Create a call to an Asserts method. */
   public static MethodCall createAssertsMethodCall(String methodName, List<Expression> arguments) {
     return createRuntimeMethodCall(BootstrapType.ASSERTS.getDescriptor(), methodName, arguments);

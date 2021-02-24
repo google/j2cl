@@ -32,6 +32,7 @@ import com.google.j2cl.transpiler.ast.MemberReference;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MultiExpression;
+import com.google.j2cl.transpiler.ast.NewArray;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.UnaryExpression;
 
@@ -122,6 +123,15 @@ public class VerifyNormalizedUnits extends NormalizationPass {
           public void exitMultiExpression(MultiExpression multiExpression) {
             // No empty nor singleton multiexpressions should remain.
             checkState(multiExpression.getExpressions().size() > 1);
+          }
+
+          @Override
+          public void exitNewArray(NewArray newArray) {
+            if (verifyForWasm) {
+              checkState(
+                  newArray.getDimensionExpressions().size() == 1
+                      && newArray.getArrayLiteral() == null);
+            }
           }
 
           @Override

@@ -127,7 +127,7 @@
    (local.set $containerArrT (ref.null $cast.CastGenerics.Container))
    ;; T[] arrT = ((T[]) containerArrT.get());
    
-   (local.set $arrT (ref.null $Object.array))
+   (local.set $arrT (ref.cast $java.lang.Object $Object.array (call_ref (local.get $containerArrT)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerArrT)))) (global.get $Object.array.rtt)))
    (block
     ;; T $qualifier = ((T) arrT[0]);
     
@@ -144,16 +144,16 @@
    )
    ;; A[] arrA = ((A[]) containerArrT.get());
    
-   (local.set $arrA (ref.null $Object.array))
+   (local.set $arrA (ref.cast $java.lang.Object $Object.array (call_ref (local.get $containerArrT)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerArrT)))) (global.get $Object.array.rtt)))
    ;; B[] arrB = ((B[]) containerArrT.get());
    
-   (local.set $arrB (ref.null $Object.array))
+   (local.set $arrB (ref.cast $java.lang.Object $Object.array (call_ref (local.get $containerArrT)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerArrT)))) (global.get $Object.array.rtt)))
    ;; Container<U[]> containerArrU = null;
    
    (local.set $containerArrU (ref.null $cast.CastGenerics.Container))
    ;; U[] arrU = ((U[]) containerArrU.get());
    
-   (local.set $arrU (ref.null $Object.array))
+   (local.set $arrU (ref.cast $java.lang.Object $Object.array (call_ref (local.get $containerArrU)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerArrU)))) (global.get $Object.array.rtt)))
    (block
     ;; U $qualifier = ((U) arrU[0]);
     
@@ -169,9 +169,9 @@
     
    )
    ;; (arrA = ((A[]) containerArrU.get()));
-   (local.set $arrA (ref.null $Object.array))
+   (local.set $arrA (ref.cast $java.lang.Object $Object.array (call_ref (local.get $containerArrU)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerArrU)))) (global.get $Object.array.rtt)))
    ;; (arrB = ((B[]) containerArrU.get()));
-   (local.set $arrB (ref.null $Object.array))
+   (local.set $arrB (ref.cast $java.lang.Object $Object.array (call_ref (local.get $containerArrU)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerArrU)))) (global.get $Object.array.rtt)))
    ;; Container<BaseImplementor> containerBase = null;
    
    (local.set $containerBase (ref.null $cast.CastGenerics.Container))
@@ -251,10 +251,10 @@
    (local.set $t (ref.null $java.lang.Object))
    ;; E[] es = ((E[]) o);
    
-   (local.set $es (ref.null $Object.array))
+   (local.set $es (ref.cast $java.lang.Object $Object.array (local.get $o) (global.get $Object.array.rtt)))
    ;; T[] ts = ((T[]) o);
    
-   (local.set $ts (ref.null $Object.array))
+   (local.set $ts (ref.cast $java.lang.Object $Object.array (local.get $o) (global.get $Object.array.rtt)))
   )
  )
 )
@@ -280,7 +280,7 @@
    
    (local.set $c (ref.cast $java.lang.Object $cast.CastGenerics (local.get $o) (global.get $cast.CastGenerics.rtt)))
    ;; (c = ((S[]) o));
-   (local.set $c (ref.null $Object.array))
+   (local.set $c (ref.cast $java.lang.Object $Object.array (local.get $o) (global.get $Object.array.rtt)))
    ;; (c = ((V) o));
    (local.set $c (ref.null $java.lang.Enum))
   )
@@ -1253,10 +1253,10 @@
   (block
    ;; Object foo = ((Object[]) null);
    
-   (local.set $foo (ref.null $Object.array))
+   (local.set $foo (ref.cast $java.lang.Object $Object.array (ref.null $java.lang.Object) (global.get $Object.array.rtt)))
    ;; Object bar = ((Object[][]) null);
    
-   (local.set $bar (ref.null $Object.array))
+   (local.set $bar (ref.cast $java.lang.Object $Object.array (ref.null $java.lang.Object) (global.get $Object.array.rtt)))
   )
  )
 )

@@ -38,7 +38,7 @@ public class FrontendConstants {
   public static final String DO_NOT_AUTOBOX_ANNOTATION_NAME =
       "javaemul.internal.annotations.DoNotAutobox";
 
-  /** Classes that are assumed to be allways present. */
+  /** Classes that are assumed to be always present. */
   public static final ImmutableList<String> WELL_KNOWN_CLASS_NAMES =
       ImmutableList.of(
           "java.io.Serializable",
@@ -56,5 +56,6 @@ public class FrontendConstants {
           "javaemul.internal.ValueType",
           "javaemul.internal.InternalPreconditions",
           "javaemul.internal.Enums",
-          "javaemul.internal.Constructor");
+          "javaemul.internal.Constructor",
+          "javaemul.internal.WasmArrayHelper");
 }

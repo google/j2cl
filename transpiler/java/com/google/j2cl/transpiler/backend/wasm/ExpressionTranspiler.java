@@ -24,6 +24,7 @@ import com.google.common.collect.Iterables;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.ArrayAccess;
 import com.google.j2cl.transpiler.ast.ArrayLength;
+import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.BinaryOperator;
 import com.google.j2cl.transpiler.ast.BooleanLiteral;
@@ -201,7 +202,10 @@ final class ExpressionTranspiler {
           // TODO(rluble): implement interface casts.
           render(castExpression.getExpression());
           return false;
-        } else if (castTypeDescriptor.isClass() || castTypeDescriptor.isEnum()) {
+        } else if (castTypeDescriptor.isClass()
+            || castTypeDescriptor.isEnum()
+            || castTypeDescriptor.isArray()) {
+          // TODO(b/180967010): implement full support of array cast.
           sourceBuilder.append(
               format(
                   "(ref.cast %s %s ",
@@ -209,13 +213,10 @@ final class ExpressionTranspiler {
                   environment.getWasmTypeName(castTypeDescriptor)));
           render(castExpression.getExpression());
           sourceBuilder.append(
-              format(
-                  " (global.get %s))",
-                  environment.getRttGlobalName(
-                      ((DeclaredTypeDescriptor) castTypeDescriptor).getTypeDeclaration())));
+              format(" (global.get %s))", environment.getRttGlobalName(castTypeDescriptor)));
           return false;
         }
-        // TODO(rluble): handle primitive and array casts.
+        // TODO(b/170691713) : handle primitive conversions and coersions.
         return enterExpression(castExpression);
       }
 
@@ -370,11 +371,6 @@ final class ExpressionTranspiler {
 
       @Override
       public boolean enterNewArray(NewArray newArray) {
-        // TODO(dramaix): remove this when full array support is implemented
-        if (newArray.getDimensionExpressions().size() > 1 || newArray.getArrayLiteral() != null) {
-          return enterExpression(newArray);
-        }
-
         Expression dimensionExpression = newArray.getDimensionExpressions().get(0);
         String arrayType = environment.getWasmTypeName(newArray.getTypeDescriptor());
         String elementArrayType = environment.getElementArrayTypeName(newArray.getTypeDescriptor());
@@ -538,15 +534,26 @@ final class ExpressionTranspiler {
       Expression expression,
       SourceBuilder sourceBuilder,
       GenerationEnvironment environment) {
-    boolean isAssignable =
-        typeDescriptor.isPrimitive() || expression.getTypeDescriptor().isPrimitive()
-            ? typeDescriptor.equals(expression.getTypeDescriptor())
-            : expression.getTypeDescriptor().isAssignableTo(typeDescriptor);
-    if (isAssignable) {
+
+    if (isAssignable(typeDescriptor, expression.getTypeDescriptor())) {
       render(expression, sourceBuilder, environment);
     } else {
       render(typeDescriptor.getDefaultValue(), sourceBuilder, environment);
     }
+  }
+
+  private static boolean isAssignable(
+      TypeDescriptor typeDescriptor, TypeDescriptor expressionTypeDescriptor) {
+    if (typeDescriptor.isPrimitive() || expressionTypeDescriptor.isPrimitive()) {
+      return typeDescriptor.equals(expressionTypeDescriptor);
+    }
+    if (typeDescriptor.isArray()
+        && ((ArrayTypeDescriptor) typeDescriptor).getDimensions() > 1
+        && expressionTypeDescriptor.equals(TypeDescriptors.get().javaLangObjectArray)) {
+      // At runtime, multidimensionnal arrays are object arrays
+      return true;
+    }
+    return expressionTypeDescriptor.isAssignableTo(typeDescriptor);
   }
 
   private ExpressionTranspiler() {}

@@ -57,10 +57,31 @@
 ;;; void DeprecatedExample.$init()
 (func $$init__void_$p_deprecated_DeprecatedExample@deprecated.DeprecatedExample
  (param $this (ref null $deprecated.DeprecatedExample))
+ (local $$array_literal (ref null $char.array))
  (block $return.label
   (block
-   ;; (DeprecatedExample.this.deprecatedInstanceField = java.lang.String.fromInternalArray([100,101,112,114,101,99,97,116,101,100,32,102,105,101,108,100]));
-   (struct.set $deprecated.DeprecatedExample $deprecatedInstanceField@deprecated.DeprecatedExample(local.get $this) (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array)))
+   ;; (DeprecatedExample.this.deprecatedInstanceField = java.lang.String.fromInternalArray((char[] $array_literal = new char[16],($array_literal[0] = 100),($array_literal[1] = 101),($array_literal[2] = 112),($array_literal[3] = 114),($array_literal[4] = 101),($array_literal[5] = 99),($array_literal[6] = 97),($array_literal[7] = 116),($array_literal[8] = 101),($array_literal[9] = 100),($array_literal[10] = 32),($array_literal[11] = 102),($array_literal[12] = 105),($array_literal[13] = 101),($array_literal[14] = 108),($array_literal[15] = 100),$array_literal)));
+   (struct.set $deprecated.DeprecatedExample $deprecatedInstanceField@deprecated.DeprecatedExample(local.get $this) (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (block (result (ref null $char.array))
+    
+    (local.set $$array_literal (struct.new_with_rtt $char.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $char.array.elements (i32.const 16) (global.get $char.array.elements.rtt)) (global.get $char.array.rtt)))
+    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 0) (i32.const 100))
+    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 1) (i32.const 101))
+    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 2) (i32.const 112))
+    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 3) (i32.const 114))
+    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 4) (i32.const 101))
+    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 5) (i32.const 99))
+    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 6) (i32.const 97))
+    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 7) (i32.const 116))
+    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 8) (i32.const 101))
+    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 9) (i32.const 100))
+    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 10) (i32.const 32))
+    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 11) (i32.const 102))
+    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 12) (i32.const 105))
+    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 13) (i32.const 101))
+    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 14) (i32.const 108))
+    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 15) (i32.const 100))
+    (local.get $$array_literal)
+   )))
   )
  )
 )

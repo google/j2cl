@@ -217,17 +217,29 @@
 (func $m_main__arrayOf_java_lang_String__void@transitivejsoverlayimport.Main
  (param $args (ref null $Object.array))
  (local $transitive (ref null $transitivejsoverlayimport.Transitive))
+ (local $$array_literal (ref null $char.array))
  (local $immediate (ref null $transitivejsoverlayimport.Immediate))
+ (local $$array_literal_1 (ref null $char.array))
  (local $nonNativeUpper (ref null $transitivejsoverlayimport.NonNativeUpper))
+ (local $$array_literal_2 (ref null $char.array))
  (local $nonNativeLower (ref null $transitivejsoverlayimport.NonNativeLower))
+ (local $$array_literal_3 (ref null $char.array))
  (block $return.label
   (block
    (block
     ;; Transitive transitive = null;
     
     (local.set $transitive (ref.null $transitivejsoverlayimport.Transitive))
-    ;; transitive.doTransitiveInstanceMethod(java.lang.String.fromInternalArray([97,114,103,49]));
-    (call_ref (local.get $transitive)(call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array))(struct.get $transitivejsoverlayimport.Transitive.vtable $m_doTransitiveInstanceMethod__java_lang_String__void_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.Transitive $vtable(local.get $transitive))))
+    ;; transitive.doTransitiveInstanceMethod(java.lang.String.fromInternalArray((char[] $array_literal = new char[4],($array_literal[0] = 97),($array_literal[1] = 114),($array_literal[2] = 103),($array_literal[3] = 49),$array_literal)));
+    (call_ref (local.get $transitive)(call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (block (result (ref null $char.array))
+     
+     (local.set $$array_literal (struct.new_with_rtt $char.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $char.array.elements (i32.const 4) (global.get $char.array.elements.rtt)) (global.get $char.array.rtt)))
+     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 0) (i32.const 97))
+     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 1) (i32.const 114))
+     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 2) (i32.const 103))
+     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 3) (i32.const 49))
+     (local.get $$array_literal)
+    ))(struct.get $transitivejsoverlayimport.Transitive.vtable $m_doTransitiveInstanceMethod__java_lang_String__void_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.Transitive $vtable(local.get $transitive))))
     ;; transitive.getJsProperty();
     (drop (call_ref (local.get $transitive)(struct.get $transitivejsoverlayimport.Transitive.vtable $m_getJsProperty__int_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.Transitive $vtable(local.get $transitive)))))
    )
@@ -235,8 +247,16 @@
     ;; Immediate immediate = null;
     
     (local.set $immediate (ref.null $transitivejsoverlayimport.Immediate))
-    ;; immediate.doTransitiveInstanceMethod(java.lang.String.fromInternalArray([97,114,103,49]));
-    (call_ref (local.get $immediate)(call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array))(struct.get $transitivejsoverlayimport.Transitive.vtable $m_doTransitiveInstanceMethod__java_lang_String__void_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.Transitive $vtable(local.get $immediate))))
+    ;; immediate.doTransitiveInstanceMethod(java.lang.String.fromInternalArray((char[] $array_literal = new char[4],($array_literal[0] = 97),($array_literal[1] = 114),($array_literal[2] = 103),($array_literal[3] = 49),$array_literal)));
+    (call_ref (local.get $immediate)(call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (block (result (ref null $char.array))
+     
+     (local.set $$array_literal_1 (struct.new_with_rtt $char.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $char.array.elements (i32.const 4) (global.get $char.array.elements.rtt)) (global.get $char.array.rtt)))
+     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_1)) (i32.const 0) (i32.const 97))
+     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_1)) (i32.const 1) (i32.const 114))
+     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_1)) (i32.const 2) (i32.const 103))
+     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_1)) (i32.const 3) (i32.const 49))
+     (local.get $$array_literal_1)
+    ))(struct.get $transitivejsoverlayimport.Transitive.vtable $m_doTransitiveInstanceMethod__java_lang_String__void_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.Transitive $vtable(local.get $immediate))))
     ;; immediate.getJsProperty();
     (drop (call_ref (local.get $immediate)(struct.get $transitivejsoverlayimport.Transitive.vtable $m_getJsProperty__int_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.Transitive $vtable(local.get $immediate)))))
     ;; immediate.doImmediateInstanceMethod();
@@ -246,8 +266,16 @@
     ;; NonNativeUpper nonNativeUpper = null;
     
     (local.set $nonNativeUpper (ref.null $transitivejsoverlayimport.NonNativeUpper))
-    ;; nonNativeUpper.doTransitiveInstanceMethod(java.lang.String.fromInternalArray([97,114,103,49]));
-    (call_ref (local.get $nonNativeUpper)(call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array))(struct.get $transitivejsoverlayimport.Transitive.vtable $m_doTransitiveInstanceMethod__java_lang_String__void_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.Transitive $vtable(local.get $nonNativeUpper))))
+    ;; nonNativeUpper.doTransitiveInstanceMethod(java.lang.String.fromInternalArray((char[] $array_literal = new char[4],($array_literal[0] = 97),($array_literal[1] = 114),($array_literal[2] = 103),($array_literal[3] = 49),$array_literal)));
+    (call_ref (local.get $nonNativeUpper)(call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (block (result (ref null $char.array))
+     
+     (local.set $$array_literal_2 (struct.new_with_rtt $char.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $char.array.elements (i32.const 4) (global.get $char.array.elements.rtt)) (global.get $char.array.rtt)))
+     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_2)) (i32.const 0) (i32.const 97))
+     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_2)) (i32.const 1) (i32.const 114))
+     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_2)) (i32.const 2) (i32.const 103))
+     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_2)) (i32.const 3) (i32.const 49))
+     (local.get $$array_literal_2)
+    ))(struct.get $transitivejsoverlayimport.Transitive.vtable $m_doTransitiveInstanceMethod__java_lang_String__void_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.Transitive $vtable(local.get $nonNativeUpper))))
     ;; nonNativeUpper.getJsProperty();
     (drop (call_ref (local.get $nonNativeUpper)(struct.get $transitivejsoverlayimport.Transitive.vtable $m_getJsProperty__int_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.Transitive $vtable(local.get $nonNativeUpper)))))
     ;; nonNativeUpper.doImmediateInstanceMethod();
@@ -259,8 +287,16 @@
     ;; NonNativeLower nonNativeLower = null;
     
     (local.set $nonNativeLower (ref.null $transitivejsoverlayimport.NonNativeLower))
-    ;; nonNativeLower.doTransitiveInstanceMethod(java.lang.String.fromInternalArray([97,114,103,49]));
-    (call_ref (local.get $nonNativeLower)(call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array))(struct.get $transitivejsoverlayimport.Transitive.vtable $m_doTransitiveInstanceMethod__java_lang_String__void_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.Transitive $vtable(local.get $nonNativeLower))))
+    ;; nonNativeLower.doTransitiveInstanceMethod(java.lang.String.fromInternalArray((char[] $array_literal = new char[4],($array_literal[0] = 97),($array_literal[1] = 114),($array_literal[2] = 103),($array_literal[3] = 49),$array_literal)));
+    (call_ref (local.get $nonNativeLower)(call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (block (result (ref null $char.array))
+     
+     (local.set $$array_literal_3 (struct.new_with_rtt $char.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $char.array.elements (i32.const 4) (global.get $char.array.elements.rtt)) (global.get $char.array.rtt)))
+     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_3)) (i32.const 0) (i32.const 97))
+     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_3)) (i32.const 1) (i32.const 114))
+     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_3)) (i32.const 2) (i32.const 103))
+     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_3)) (i32.const 3) (i32.const 49))
+     (local.get $$array_literal_3)
+    ))(struct.get $transitivejsoverlayimport.Transitive.vtable $m_doTransitiveInstanceMethod__java_lang_String__void_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.Transitive $vtable(local.get $nonNativeLower))))
     ;; nonNativeLower.getJsProperty();
     (drop (call_ref (local.get $nonNativeLower)(struct.get $transitivejsoverlayimport.Transitive.vtable $m_getJsProperty__int_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.Transitive $vtable(local.get $nonNativeLower)))))
     ;; nonNativeLower.doImmediateInstanceMethod();

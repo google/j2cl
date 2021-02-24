@@ -793,6 +793,7 @@
 (func $m_test__void@bridgemethods.AccidentalOverrideBridge
  (param $this.untyped (ref null $java.lang.Object))
  (local $g (ref null $java.lang.Object))
+ (local $$array_literal (ref null $char.array))
  (local $this (ref null $bridgemethods.AccidentalOverrideBridge))
  (local.set $this (ref.cast $java.lang.Object $bridgemethods.AccidentalOverrideBridge (local.get $this.untyped) (global.get $bridgemethods.AccidentalOverrideBridge.rtt)))
  (block $return.label
@@ -800,7 +801,7 @@
    ;; Getter g = new AccidentalOverrideBridge.<init>();
    
    (local.set $g (call $m_<init>__void_$pp_bridgemethods@bridgemethods.AccidentalOverrideBridge (struct.new_with_rtt $bridgemethods.AccidentalOverrideBridge (global.get $bridgemethods.AccidentalOverrideBridge.vtable) (i32.const 0) (global.get $bridgemethods.AccidentalOverrideBridge.rtt))))
-   ;; g.get(java.lang.String.fromInternalArray([]));
+   ;; g.get(java.lang.String.fromInternalArray((char[] $array_literal = new char[0],$array_literal)));
    (drop (ref.null $java.lang.String))
   )
  )
@@ -880,10 +881,29 @@
  (param $value (ref null $java.lang.String))
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))
+ (local $$array_literal (ref null $char.array))
  (block $return.label
   (block
-   ;; return java.lang.String.fromInternalArray([66,73,51,32,103,101,116,32,83,116,114,105,110,103]);
-   (local.set $return.value (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array)))
+   ;; return java.lang.String.fromInternalArray((char[] $array_literal = new char[14],($array_literal[0] = 66),($array_literal[1] = 73),($array_literal[2] = 51),($array_literal[3] = 32),($array_literal[4] = 103),($array_literal[5] = 101),($array_literal[6] = 116),($array_literal[7] = 32),($array_literal[8] = 83),($array_literal[9] = 116),($array_literal[10] = 114),($array_literal[11] = 105),($array_literal[12] = 110),($array_literal[13] = 103),$array_literal));
+   (local.set $return.value (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (block (result (ref null $char.array))
+    
+    (local.set $$array_literal (struct.new_with_rtt $char.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $char.array.elements (i32.const 14) (global.get $char.array.elements.rtt)) (global.get $char.array.rtt)))
+    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 0) (i32.const 66))
+    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 1) (i32.const 73))
+    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 2) (i32.const 51))
+    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 3) (i32.const 32))
+    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 4) (i32.const 103))
+    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 5) (i32.const 101))
+    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 6) (i32.const 116))
+    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 7) (i32.const 32))
+    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 8) (i32.const 83))
+    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 9) (i32.const 116))
+    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 10) (i32.const 114))
+    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 11) (i32.const 105))
+    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 12) (i32.const 110))
+    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 13) (i32.const 103))
+    (local.get $$array_literal)
+   )))
    (br $return.label)
   )
  )
@@ -1406,12 +1426,25 @@
  (param $consumer (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))
+ (local $$array_literal (ref null $char.array))
  (local $this (ref null $bridgemethods.BridgeMethodShadowedSignature.B))
  (local.set $this (ref.cast $java.lang.Object $bridgemethods.BridgeMethodShadowedSignature.B (local.get $this.untyped) (global.get $bridgemethods.BridgeMethodShadowedSignature.B.rtt)))
  (block $return.label
   (block
-   ;; return java.lang.String.fromInternalArray([66,32,103,101,116,32,66,50]);
-   (local.set $return.value (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (ref.null $char.array)))
+   ;; return java.lang.String.fromInternalArray((char[] $array_literal = new char[8],($array_literal[0] = 66),($array_literal[1] = 32),($array_literal[2] = 103),($array_literal[3] = 101),($array_literal[4] = 116),($array_literal[5] = 32),($array_literal[6] = 66),($array_literal[7] = 50),$array_literal));
+   (local.set $return.value (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (block (result (ref null $char.array))
+    
+    (local.set $$array_literal (struct.new_with_rtt $char.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $char.array.elements (i32.const 8) (global.get $char.array.elements.rtt)) (global.get $char.array.rtt)))
+    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 0) (i32.const 66))
+    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 1) (i32.const 32))
+    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 2) (i32.const 103))
+    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 3) (i32.const 101))
+    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 4) (i32.const 116))
+    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 5) (i32.const 32))
+    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 6) (i32.const 66))
+    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 7) (i32.const 50))
+    (local.get $$array_literal)
+   )))
    (br $return.label)
   )
  )

@@ -170,6 +170,8 @@
 (func $m_test__void@genericmethod.GenericMethod
  (param $this.untyped (ref null $java.lang.Object))
  (local $g (ref null $genericmethod.GenericMethod))
+ (local $$array_literal (ref null $Object.array))
+ (local $$array_literal_1 (ref null $char.array))
  (local $s (ref null $java.lang.String))
  (local $this (ref null $genericmethod.GenericMethod))
  (local.set $this (ref.cast $java.lang.Object $genericmethod.GenericMethod (local.get $this.untyped) (global.get $genericmethod.GenericMethod.rtt)))
@@ -188,8 +190,21 @@
    (call_ref (local.get $g)(call $m_<init>__void@java.lang.Exception (struct.new_with_rtt $java.lang.Exception (global.get $java.lang.Exception.vtable) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $Object.array) (ref.null $Object.array) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Exception.rtt)))(struct.get $genericmethod.GenericMethod.vtable $m_fun__java_lang_Exception__void (struct.get $genericmethod.GenericMethod $vtable(local.get $g))))
    ;; g.fun(new Error.<init>());
    (call_ref (local.get $g)(call $m_<init>__void@java.lang.Error (struct.new_with_rtt $java.lang.Error (global.get $java.lang.Error.vtable) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $Object.array) (ref.null $Object.array) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Error.rtt)))(struct.get $genericmethod.GenericMethod.vtable $m_fun__java_lang_Error__void (struct.get $genericmethod.GenericMethod $vtable(local.get $g))))
-   ;; g.fun(new String[] {java.lang.String.fromInternalArray([97,115,100,102])});
-   (drop (call_ref (local.get $g)(ref.null $Object.array)(struct.get $genericmethod.GenericMethod.vtable $m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object (struct.get $genericmethod.GenericMethod $vtable(local.get $g)))))
+   ;; g.fun((String[] $array_literal = new String[1],($array_literal[0] = java.lang.String.fromInternalArray((char[] $array_literal = new char[4],($array_literal[0] = 97),($array_literal[1] = 115),($array_literal[2] = 100),($array_literal[3] = 102),$array_literal))),$array_literal));
+   (drop (call_ref (local.get $g)(block (result (ref null $Object.array))
+    
+    (local.set $$array_literal (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $Object.array.elements (i32.const 1) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
+    (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $$array_literal)) (i32.const 0) (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (block (result (ref null $char.array))
+     
+     (local.set $$array_literal_1 (struct.new_with_rtt $char.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $char.array.elements (i32.const 4) (global.get $char.array.elements.rtt)) (global.get $char.array.rtt)))
+     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_1)) (i32.const 0) (i32.const 97))
+     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_1)) (i32.const 1) (i32.const 115))
+     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_1)) (i32.const 2) (i32.const 100))
+     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_1)) (i32.const 3) (i32.const 102))
+     (local.get $$array_literal_1)
+    )))
+    (local.get $$array_literal)
+   )(struct.get $genericmethod.GenericMethod.vtable $m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object (struct.get $genericmethod.GenericMethod $vtable(local.get $g)))))
    ;; String s = ((String) GenericMethod.this.checked());
    
    (local.set $s (ref.cast $java.lang.Object $java.lang.String (call_ref (local.get $this)(struct.get $genericmethod.GenericMethod.vtable $m_checked__java_lang_Object (struct.get $genericmethod.GenericMethod $vtable(local.get $this)))) (global.get $java.lang.String.rtt)))

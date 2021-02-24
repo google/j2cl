@@ -40,6 +40,7 @@
 (func $m_test__void@castonarrayinit.CastOnArrayInit
  (local $f1 (ref null $castonarrayinit.CastOnArrayInit.Foo))
  (local $f2 (ref null $castonarrayinit.CastOnArrayInit.Foo))
+ (local $$array_literal (ref null $Object.array))
  (block $return.label
   (block
    ;; Foo<E> f1 = new Foo.<init>();
@@ -48,8 +49,14 @@
    ;; Foo<E> f2 = new Foo.<init>();
    
    (local.set $f2 (call $m_<init>__void@castonarrayinit.CastOnArrayInit.Foo (struct.new_with_rtt $castonarrayinit.CastOnArrayInit.Foo (global.get $castonarrayinit.CastOnArrayInit.Foo.vtable) (i32.const 0) (global.get $castonarrayinit.CastOnArrayInit.Foo.rtt))))
-   ;; castonarrayinit.CastOnArrayInit.fun([f1,f2]);
-   (call $m_fun__arrayOf_castonarrayinit_CastOnArrayInit_Foo__void@castonarrayinit.CastOnArrayInit (ref.null $Object.array))
+   ;; castonarrayinit.CastOnArrayInit.fun((Foo<E>[] $array_literal = new Foo<E>[2],($array_literal[0] = f1),($array_literal[1] = f2),$array_literal));
+   (call $m_fun__arrayOf_castonarrayinit_CastOnArrayInit_Foo__void@castonarrayinit.CastOnArrayInit (block (result (ref null $Object.array))
+    
+    (local.set $$array_literal (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $Object.array.elements (i32.const 2) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
+    (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $$array_literal)) (i32.const 0) (local.get $f1))
+    (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $$array_literal)) (i32.const 1) (local.get $f2))
+    (local.get $$array_literal)
+   ))
   )
  )
 )

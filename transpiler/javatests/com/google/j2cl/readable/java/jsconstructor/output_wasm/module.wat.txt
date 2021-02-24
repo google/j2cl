@@ -498,10 +498,16 @@
  (param $this (ref null $jsconstructor.JsConstructorClass.SubVarargs))
  (param $j i32)
  (result (ref null $jsconstructor.JsConstructorClass.SubVarargs))
+ (local $$array_literal (ref null $int.array))
  (block $return.label
   (block
-   ;; SubVarargs.this.SubVarargs.<init>(new Object.<init>(),[j]);
-   (drop (call $m_<init>__java_lang_Object__arrayOf_int__void@jsconstructor.JsConstructorClass.SubVarargs (local.get $this)(call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (i32.const 0) (global.get $java.lang.Object.rtt)))(ref.null $int.array)))
+   ;; SubVarargs.this.SubVarargs.<init>(new Object.<init>(),(int[] $array_literal = new int[1],($array_literal[0] = j),$array_literal));
+   (drop (call $m_<init>__java_lang_Object__arrayOf_int__void@jsconstructor.JsConstructorClass.SubVarargs (local.get $this)(call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (i32.const 0) (global.get $java.lang.Object.rtt)))(block (result (ref null $int.array))
+    
+    (local.set $$array_literal (struct.new_with_rtt $int.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $int.array.elements (i32.const 1) (global.get $int.array.elements.rtt)) (global.get $int.array.rtt)))
+    (array.set $int.array.elements (struct.get $int.array $elements (local.get $$array_literal)) (i32.const 0) (local.get $j))
+    (local.get $$array_literal)
+   )))
   )
  )
  (local.get $this)
@@ -511,14 +517,22 @@
 (func $m_subNativeInvocation__void@jsconstructor.JsConstructorClass.SubVarargs
  (local $unusedS1 (ref null $jsconstructor.JsConstructorClass.SubVarargs))
  (local $unusedS2 (ref null $jsconstructor.JsConstructorClass.SubVarargs))
+ (local $$array_literal (ref null $int.array))
  (block $return.label
   (block
    ;; SubVarargs unusedS1 = new SubVarargs.<init>(2);
    
    (local.set $unusedS1 (call $m_<init>__int__void@jsconstructor.JsConstructorClass.SubVarargs (struct.new_with_rtt $jsconstructor.JsConstructorClass.SubVarargs (global.get $jsconstructor.JsConstructorClass.SubVarargs.vtable) (i32.const 0) (i32.const 0) (global.get $jsconstructor.JsConstructorClass.SubVarargs.rtt))(i32.const 2)))
-   ;; SubVarargs unusedS2 = new SubVarargs.<init>(new Object.<init>(),[1,2,3]);
+   ;; SubVarargs unusedS2 = new SubVarargs.<init>(new Object.<init>(),(int[] $array_literal = new int[3],($array_literal[0] = 1),($array_literal[1] = 2),($array_literal[2] = 3),$array_literal));
    
-   (local.set $unusedS2 (call $m_<init>__java_lang_Object__arrayOf_int__void@jsconstructor.JsConstructorClass.SubVarargs (struct.new_with_rtt $jsconstructor.JsConstructorClass.SubVarargs (global.get $jsconstructor.JsConstructorClass.SubVarargs.vtable) (i32.const 0) (i32.const 0) (global.get $jsconstructor.JsConstructorClass.SubVarargs.rtt))(call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (i32.const 0) (global.get $java.lang.Object.rtt)))(ref.null $int.array)))
+   (local.set $unusedS2 (call $m_<init>__java_lang_Object__arrayOf_int__void@jsconstructor.JsConstructorClass.SubVarargs (struct.new_with_rtt $jsconstructor.JsConstructorClass.SubVarargs (global.get $jsconstructor.JsConstructorClass.SubVarargs.vtable) (i32.const 0) (i32.const 0) (global.get $jsconstructor.JsConstructorClass.SubVarargs.rtt))(call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (i32.const 0) (global.get $java.lang.Object.rtt)))(block (result (ref null $int.array))
+    
+    (local.set $$array_literal (struct.new_with_rtt $int.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $int.array.elements (i32.const 3) (global.get $int.array.elements.rtt)) (global.get $int.array.rtt)))
+    (array.set $int.array.elements (struct.get $int.array $elements (local.get $$array_literal)) (i32.const 0) (i32.const 1))
+    (array.set $int.array.elements (struct.get $int.array $elements (local.get $$array_literal)) (i32.const 1) (i32.const 2))
+    (array.set $int.array.elements (struct.get $int.array $elements (local.get $$array_literal)) (i32.const 2) (i32.const 3))
+    (local.get $$array_literal)
+   )))
   )
  )
 )

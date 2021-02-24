@@ -61,6 +61,7 @@ import com.google.j2cl.transpiler.passes.InsertWideningPrimitiveConversions;
 import com.google.j2cl.transpiler.passes.MoveVariableDeclarationsToEnclosingBlock;
 import com.google.j2cl.transpiler.passes.NormalizationPass;
 import com.google.j2cl.transpiler.passes.NormalizeArrayCreations;
+import com.google.j2cl.transpiler.passes.NormalizeArrayCreationsWasm;
 import com.google.j2cl.transpiler.passes.NormalizeArrayLiterals;
 import com.google.j2cl.transpiler.passes.NormalizeCasts;
 import com.google.j2cl.transpiler.passes.NormalizeCatchClauses;
@@ -296,6 +297,8 @@ public enum Backend {
           new ImplementInstanceInitialization(),
           new NormalizeNestedClassConstructors(),
           new NormalizeLabels(),
+          new NormalizeArrayLiterals(),
+          new NormalizeArrayCreationsWasm(),
           new InsertCastOnArrayAccess(),
           new ExtractNonIdempotentExpressions(),
 
