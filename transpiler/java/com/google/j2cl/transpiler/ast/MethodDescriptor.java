@@ -266,6 +266,9 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     return getOrigin() == MethodOrigin.DEFAULT_METHOD_BRIDGE;
   }
 
+  /** Returns {@code true} if the method is annotated with {@code UncheckedCast}. */
+  public abstract boolean isUncheckedCast();
+
   /** Returns true if the bridge was build with {@code candidateTarget} as its target. */
   boolean isBridgeTarget(MethodDescriptor candidateTarget) {
     MethodDescriptor method = getBridgeTarget();
@@ -664,6 +667,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         .setJsFunction(false)
         .setUnusableByJsSuppressed(false)
         .setDeprecated(false)
+        .setUncheckedCast(false)
         .setOrigin(MethodOrigin.SOURCE)
         .setParameterDescriptors(Collections.emptyList())
         .setTypeParameterTypeDescriptors(Collections.emptyList())
@@ -887,7 +891,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
           .setDeclarationDescriptor(null)
           .setDefaultMethod(false)
           .setAbstract(false)
-          .setNative(false);
+          .setNative(false)
+          .setUncheckedCast(false);
     }
 
     /** Internal use only. Use {@link #makeBridge}. */
@@ -903,6 +908,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     public abstract Builder setUnusableByJsSuppressed(boolean isUnusableByJsSuppressed);
 
     public abstract Builder setDeprecated(boolean isDeprecated);
+
+    public abstract Builder setUncheckedCast(boolean isUncheckedCast);
 
     public abstract Builder setEnclosingTypeDescriptor(
         DeclaredTypeDescriptor enclosingTypeDescriptor);

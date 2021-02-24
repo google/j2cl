@@ -57,7 +57,6 @@ import com.google.j2cl.transpiler.ast.ForStatement;
 import com.google.j2cl.transpiler.ast.FunctionExpression;
 import com.google.j2cl.transpiler.ast.IfStatement;
 import com.google.j2cl.transpiler.ast.InstanceOfExpression;
-import com.google.j2cl.transpiler.ast.JsDocCastExpression;
 import com.google.j2cl.transpiler.ast.Label;
 import com.google.j2cl.transpiler.ast.LabelReference;
 import com.google.j2cl.transpiler.ast.LabeledStatement;
@@ -1280,21 +1279,11 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       MethodDescriptor methodDescriptor = JdtUtils.createMethodDescriptor(methodBinding);
       List<Expression> arguments =
           convertArguments(methodBinding, JdtUtils.asTypedList(methodInvocation.arguments()));
-      MethodCall methodCall =
-          MethodCall.Builder.from(methodDescriptor)
-              .setQualifier(qualifier)
-              .setArguments(arguments)
-              .setSourcePosition(getSourcePosition(methodInvocation))
-              .build();
-      if (JdtUtils.hasUncheckedCastAnnotation(methodBinding)) {
-        // Annotate the invocation with the expected type. When InsertErasureSureTypeSafetyCasts
-        // runs, this invocation will be skipped as it will no longer be an assignment context.
-        return JsDocCastExpression.newBuilder()
-            .setExpression(methodCall)
-            .setCastType(methodDescriptor.getReturnTypeDescriptor())
-            .build();
-      }
-      return methodCall;
+      return MethodCall.Builder.from(methodDescriptor)
+          .setQualifier(qualifier)
+          .setArguments(arguments)
+          .setSourcePosition(getSourcePosition(methodInvocation))
+          .build();
     }
 
     private MethodCall convert(org.eclipse.jdt.core.dom.SuperMethodInvocation expression) {

@@ -21,6 +21,8 @@ import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
+import com.google.j2cl.transpiler.ast.JsDocCastExpression;
+import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
@@ -158,12 +160,22 @@ public class InsertErasureTypeSafetyCasts extends NormalizationPass {
       toTypeDescriptor = inferredTypeDescriptor;
     }
     if (!fromTypeDescriptor.toRawTypeDescriptor().isAssignableTo(toTypeDescriptor)) {
-      return CastExpression.newBuilder()
-          .setExpression(expression)
-          .setCastTypeDescriptor(toTypeDescriptor)
-          .build();
+      return isUncheckedCast(expression)
+          ? JsDocCastExpression.newBuilder()
+              .setExpression(expression)
+              .setCastType(toTypeDescriptor)
+              .build()
+          : CastExpression.newBuilder()
+              .setExpression(expression)
+              .setCastTypeDescriptor(toTypeDescriptor)
+              .build();
     }
 
     return expression;
+  }
+
+  private static boolean isUncheckedCast(Expression expression) {
+    return expression instanceof MethodCall
+        && ((MethodCall) expression).getTarget().isUncheckedCast();
   }
 }

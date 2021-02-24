@@ -51,7 +51,6 @@ import com.google.j2cl.transpiler.ast.FunctionExpression;
 import com.google.j2cl.transpiler.ast.IfStatement;
 import com.google.j2cl.transpiler.ast.InstanceOfExpression;
 import com.google.j2cl.transpiler.ast.JavaScriptConstructorReference;
-import com.google.j2cl.transpiler.ast.JsDocCastExpression;
 import com.google.j2cl.transpiler.ast.Label;
 import com.google.j2cl.transpiler.ast.LabelReference;
 import com.google.j2cl.transpiler.ast.LabeledStatement;
@@ -1283,27 +1282,12 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       qualifier = resolveOuterClassReference(enclosingTypeDescriptor, false);
     }
 
-    MethodCall methodCall =
-        MethodCall.Builder.from(methodDescriptor)
-            .setQualifier(qualifier)
-            .setArguments(arguments)
-            .setStaticDispatch(isStaticDispatch)
-            .setSourcePosition(getSourcePosition(methodInvocation))
-            .build();
-    if (hasUncheckedCastAnnotation(methodSymbol)) {
-      // Annotate the invocation with the expected type. When InsertErasureSureTypeSafetyCasts
-      // runs, this invocation will be skipped as it will no longer be an assignment context.
-      return JsDocCastExpression.newBuilder()
-          .setExpression(methodCall)
-          .setCastType(methodDescriptor.getReturnTypeDescriptor())
-          .build();
-    }
-    return methodCall;
-  }
-
-  /** Returns true if the symbol is annotated with @UncheckedCast. */
-  private static boolean hasUncheckedCastAnnotation(MethodSymbol symbol) {
-    return AnnotationUtils.hasAnnotation(symbol, "javaemul.internal.annotations.UncheckedCast");
+    return MethodCall.Builder.from(methodDescriptor)
+        .setQualifier(qualifier)
+        .setArguments(arguments)
+        .setStaticDispatch(isStaticDispatch)
+        .setSourcePosition(getSourcePosition(methodInvocation))
+        .build();
   }
 
   private List<Expression> convertArguments(

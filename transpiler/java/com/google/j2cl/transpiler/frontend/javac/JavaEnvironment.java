@@ -816,6 +816,8 @@ class JavaEnvironment {
         && enclosingTypeDescriptor.getSuperTypeDescriptor().hasJsConstructor()) {
       jsInfo = JsInfo.Builder.from(jsInfo).setJsMemberType(JsMemberType.CONSTRUCTOR).build();
     }
+
+    boolean hasUncheckedCast = hasUncheckedCastAnnotation((MethodSymbol) declarationMethodElement);
     return MethodDescriptor.newBuilder()
         .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
         .setName(isConstructor ? null : methodName)
@@ -837,7 +839,13 @@ class JavaEnvironment {
         .setUnusableByJsSuppressed(
             JsInteropAnnotationUtils.isUnusableByJsSuppressed(declarationMethodElement))
         .setDeprecated(isDeprecated(declarationMethodElement))
+        .setUncheckedCast(hasUncheckedCast)
         .build();
+  }
+
+  /** Returns true if the symbol is annotated with @UncheckedCast. */
+  private static boolean hasUncheckedCastAnnotation(MethodSymbol symbol) {
+    return AnnotationUtils.hasAnnotation(symbol, "javaemul.internal.annotations.UncheckedCast");
   }
 
   /** Checks overriding chain to compute JsInfo. */

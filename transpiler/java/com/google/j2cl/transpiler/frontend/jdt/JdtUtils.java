@@ -717,6 +717,8 @@ class JdtUtils {
         && enclosingTypeDescriptor.getSuperTypeDescriptor().hasJsConstructor()) {
       jsInfo = JsInfo.Builder.from(jsInfo).setJsMemberType(JsMemberType.CONSTRUCTOR).build();
     }
+
+    boolean hasUncheckedCast = hasUncheckedCastAnnotation(methodBinding);
     return MethodDescriptor.newBuilder()
         .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
         .setName(isConstructor ? null : methodName)
@@ -737,6 +739,7 @@ class JdtUtils {
         .setEnumSyntheticMethod(isEnumSyntheticMethod(methodBinding))
         .setUnusableByJsSuppressed(JsInteropAnnotationUtils.isUnusableByJsSuppressed(methodBinding))
         .setDeprecated(isDeprecated(methodBinding))
+        .setUncheckedCast(hasUncheckedCast)
         .build();
   }
 
