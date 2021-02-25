@@ -22,6 +22,7 @@
 (global $switchstatement.Numbers.vtable (mut (ref null $switchstatement.Numbers.vtable)) (ref.null $switchstatement.Numbers.vtable))
 (global $ONE@switchstatement.Numbers (mut (ref null $switchstatement.Numbers)) (ref.null $switchstatement.Numbers))
 (global $TWO@switchstatement.Numbers (mut (ref null $switchstatement.Numbers)) (ref.null $switchstatement.Numbers))
+(global $namesToValuesMap@switchstatement.Numbers (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
 (global $$initialized@switchstatement.Numbers (mut i32) (i32.const 0))
 
 ;;; Numbers()
@@ -35,6 +36,61 @@
   )
  )
  (local.get $this)
+)
+
+;;; Numbers Numbers.valueOf(String name)
+(func $m_valueOf__java_lang_String__switchstatement_Numbers@switchstatement.Numbers
+ (param $name (ref null $java.lang.String))
+ (result (ref null $switchstatement.Numbers))
+ (local $return.value (ref null $switchstatement.Numbers))
+ (block $return.label
+  (block
+   ;; switchstatement.Numbers.$clinit();
+   (call $$clinit__void@switchstatement.Numbers )
+   ;; if ((switchstatement.Numbers.namesToValuesMap == null)) {
+   (if (ref.eq (global.get $namesToValuesMap@switchstatement.Numbers) (ref.null $java.lang.Object))
+    (then
+     (block
+      ;; (switchstatement.Numbers.namesToValuesMap = javaemul.internal.Enums.createMapFromValues(switchstatement.Numbers.values()));
+      (global.set $namesToValuesMap@switchstatement.Numbers (ref.null $java.lang.Object))
+     )
+    )
+   )
+   ;; return ((Numbers) javaemul.internal.Enums.getValueFromNameAndMap(name,switchstatement.Numbers.namesToValuesMap));
+   (local.set $return.value (ref.cast $java.lang.Object $switchstatement.Numbers (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(ref.null $java.lang.Object)) (global.get $switchstatement.Numbers.rtt)))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; Numbers[] Numbers.values()
+(func $m_values__arrayOf_switchstatement_Numbers@switchstatement.Numbers
+ (result (ref null $Object.array))
+ (local $return.value (ref null $Object.array))
+ (local $$array_literal (ref null $Object.array))
+ (block $return.label
+  (block
+   ;; switchstatement.Numbers.$clinit();
+   (call $$clinit__void@switchstatement.Numbers )
+   ;; return (Numbers[] $array_literal = new Numbers[2],($array_literal[0] = (switchstatement.Numbers.$clinit(),switchstatement.Numbers.ONE)),($array_literal[1] = (switchstatement.Numbers.$clinit(),switchstatement.Numbers.TWO)),$array_literal);
+   (local.set $return.value (block (result (ref null $Object.array))
+    
+    (local.set $$array_literal (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $Object.array.elements (i32.const 2) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
+    (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $$array_literal)) (i32.const 0) (block (result (ref null $switchstatement.Numbers))
+     (call $$clinit__void@switchstatement.Numbers )
+     (global.get $ONE@switchstatement.Numbers)
+    ))
+    (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $$array_literal)) (i32.const 1) (block (result (ref null $switchstatement.Numbers))
+     (call $$clinit__void@switchstatement.Numbers )
+     (global.get $TWO@switchstatement.Numbers)
+    ))
+    (local.get $$array_literal)
+   ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
 )
 
 ;;; void Numbers.$clinit()
@@ -64,6 +120,8 @@
     ;; (switchstatement.Numbers.TWO = new Numbers.<init>());
     (global.set $TWO@switchstatement.Numbers (call $m_<init>__void_$p_switchstatement_Numbers@switchstatement.Numbers (struct.new_with_rtt $switchstatement.Numbers (global.get $switchstatement.Numbers.vtable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $switchstatement.Numbers.rtt))))
    )
+   ;; (switchstatement.Numbers.namesToValuesMap = null);
+   (global.set $namesToValuesMap@switchstatement.Numbers (ref.null $java.lang.Object))
   )
  )
 )

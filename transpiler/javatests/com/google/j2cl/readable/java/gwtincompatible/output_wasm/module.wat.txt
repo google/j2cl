@@ -107,6 +107,7 @@
 ))
 (global $gwtincompatible.Implementor.SomeEnum.vtable (mut (ref null $gwtincompatible.Implementor.SomeEnum.vtable)) (ref.null $gwtincompatible.Implementor.SomeEnum.vtable))
 (global $COMPATIBLE@gwtincompatible.Implementor.SomeEnum (mut (ref null $gwtincompatible.Implementor.SomeEnum)) (ref.null $gwtincompatible.Implementor.SomeEnum))
+(global $namesToValuesMap@gwtincompatible.Implementor.SomeEnum (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
 (global $$initialized@gwtincompatible.Implementor.SomeEnum (mut i32) (i32.const 0))
 
 ;;; SomeEnum()
@@ -120,6 +121,57 @@
   )
  )
  (local.get $this)
+)
+
+;;; SomeEnum SomeEnum.valueOf(String name)
+(func $m_valueOf__java_lang_String__gwtincompatible_Implementor_SomeEnum@gwtincompatible.Implementor.SomeEnum
+ (param $name (ref null $java.lang.String))
+ (result (ref null $gwtincompatible.Implementor.SomeEnum))
+ (local $return.value (ref null $gwtincompatible.Implementor.SomeEnum))
+ (block $return.label
+  (block
+   ;; gwtincompatible.Implementor.SomeEnum.$clinit();
+   (call $$clinit__void@gwtincompatible.Implementor.SomeEnum )
+   ;; if ((gwtincompatible.Implementor.SomeEnum.namesToValuesMap == null)) {
+   (if (ref.eq (global.get $namesToValuesMap@gwtincompatible.Implementor.SomeEnum) (ref.null $java.lang.Object))
+    (then
+     (block
+      ;; (gwtincompatible.Implementor.SomeEnum.namesToValuesMap = javaemul.internal.Enums.createMapFromValues(gwtincompatible.Implementor.SomeEnum.values()));
+      (global.set $namesToValuesMap@gwtincompatible.Implementor.SomeEnum (ref.null $java.lang.Object))
+     )
+    )
+   )
+   ;; return ((SomeEnum) javaemul.internal.Enums.getValueFromNameAndMap(name,gwtincompatible.Implementor.SomeEnum.namesToValuesMap));
+   (local.set $return.value (ref.cast $java.lang.Object $gwtincompatible.Implementor.SomeEnum (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(ref.null $java.lang.Object)) (global.get $gwtincompatible.Implementor.SomeEnum.rtt)))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; SomeEnum[] SomeEnum.values()
+(func $m_values__arrayOf_gwtincompatible_Implementor_SomeEnum@gwtincompatible.Implementor.SomeEnum
+ (result (ref null $Object.array))
+ (local $return.value (ref null $Object.array))
+ (local $$array_literal (ref null $Object.array))
+ (block $return.label
+  (block
+   ;; gwtincompatible.Implementor.SomeEnum.$clinit();
+   (call $$clinit__void@gwtincompatible.Implementor.SomeEnum )
+   ;; return (SomeEnum[] $array_literal = new SomeEnum[1],($array_literal[0] = (gwtincompatible.Implementor.SomeEnum.$clinit(),gwtincompatible.Implementor.SomeEnum.COMPATIBLE)),$array_literal);
+   (local.set $return.value (block (result (ref null $Object.array))
+    
+    (local.set $$array_literal (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $Object.array.elements (i32.const 1) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
+    (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $$array_literal)) (i32.const 0) (block (result (ref null $gwtincompatible.Implementor.SomeEnum))
+     (call $$clinit__void@gwtincompatible.Implementor.SomeEnum )
+     (global.get $COMPATIBLE@gwtincompatible.Implementor.SomeEnum)
+    ))
+    (local.get $$array_literal)
+   ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
 )
 
 ;;; void SomeEnum.$clinit()
@@ -143,6 +195,8 @@
     ;; (gwtincompatible.Implementor.SomeEnum.COMPATIBLE = new $1.<init>());
     (global.set $COMPATIBLE@gwtincompatible.Implementor.SomeEnum (call $m_<init>__void_$pp_gwtincompatible@gwtincompatible.Implementor.SomeEnum.1 (struct.new_with_rtt $gwtincompatible.Implementor.SomeEnum.1 (global.get $gwtincompatible.Implementor.SomeEnum.1.vtable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $gwtincompatible.Implementor.SomeEnum.1.rtt))))
    )
+   ;; (gwtincompatible.Implementor.SomeEnum.namesToValuesMap = null);
+   (global.set $namesToValuesMap@gwtincompatible.Implementor.SomeEnum (ref.null $java.lang.Object))
   )
  )
 )

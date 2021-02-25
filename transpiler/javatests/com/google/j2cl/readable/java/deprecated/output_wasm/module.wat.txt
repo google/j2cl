@@ -198,6 +198,7 @@
 ))
 (global $deprecated.DeprecatedExample.DeprecatedEnum.vtable (mut (ref null $deprecated.DeprecatedExample.DeprecatedEnum.vtable)) (ref.null $deprecated.DeprecatedExample.DeprecatedEnum.vtable))
 (global $A_VALUE@deprecated.DeprecatedExample.DeprecatedEnum (mut (ref null $deprecated.DeprecatedExample.DeprecatedEnum)) (ref.null $deprecated.DeprecatedExample.DeprecatedEnum))
+(global $namesToValuesMap@deprecated.DeprecatedExample.DeprecatedEnum (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
 (global $$initialized@deprecated.DeprecatedExample.DeprecatedEnum (mut i32) (i32.const 0))
 
 ;;; DeprecatedEnum()
@@ -211,6 +212,57 @@
   )
  )
  (local.get $this)
+)
+
+;;; DeprecatedEnum DeprecatedEnum.valueOf(String name)
+(func $m_valueOf__java_lang_String__deprecated_DeprecatedExample_DeprecatedEnum@deprecated.DeprecatedExample.DeprecatedEnum
+ (param $name (ref null $java.lang.String))
+ (result (ref null $deprecated.DeprecatedExample.DeprecatedEnum))
+ (local $return.value (ref null $deprecated.DeprecatedExample.DeprecatedEnum))
+ (block $return.label
+  (block
+   ;; deprecated.DeprecatedExample.DeprecatedEnum.$clinit();
+   (call $$clinit__void@deprecated.DeprecatedExample.DeprecatedEnum )
+   ;; if ((deprecated.DeprecatedExample.DeprecatedEnum.namesToValuesMap == null)) {
+   (if (ref.eq (global.get $namesToValuesMap@deprecated.DeprecatedExample.DeprecatedEnum) (ref.null $java.lang.Object))
+    (then
+     (block
+      ;; (deprecated.DeprecatedExample.DeprecatedEnum.namesToValuesMap = javaemul.internal.Enums.createMapFromValues(deprecated.DeprecatedExample.DeprecatedEnum.values()));
+      (global.set $namesToValuesMap@deprecated.DeprecatedExample.DeprecatedEnum (ref.null $java.lang.Object))
+     )
+    )
+   )
+   ;; return ((DeprecatedEnum) javaemul.internal.Enums.getValueFromNameAndMap(name,deprecated.DeprecatedExample.DeprecatedEnum.namesToValuesMap));
+   (local.set $return.value (ref.cast $java.lang.Object $deprecated.DeprecatedExample.DeprecatedEnum (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(ref.null $java.lang.Object)) (global.get $deprecated.DeprecatedExample.DeprecatedEnum.rtt)))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; DeprecatedEnum[] DeprecatedEnum.values()
+(func $m_values__arrayOf_deprecated_DeprecatedExample_DeprecatedEnum@deprecated.DeprecatedExample.DeprecatedEnum
+ (result (ref null $Object.array))
+ (local $return.value (ref null $Object.array))
+ (local $$array_literal (ref null $Object.array))
+ (block $return.label
+  (block
+   ;; deprecated.DeprecatedExample.DeprecatedEnum.$clinit();
+   (call $$clinit__void@deprecated.DeprecatedExample.DeprecatedEnum )
+   ;; return (DeprecatedEnum[] $array_literal = new DeprecatedEnum[1],($array_literal[0] = (deprecated.DeprecatedExample.DeprecatedEnum.$clinit(),deprecated.DeprecatedExample.DeprecatedEnum.A_VALUE)),$array_literal);
+   (local.set $return.value (block (result (ref null $Object.array))
+    
+    (local.set $$array_literal (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $Object.array.elements (i32.const 1) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
+    (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $$array_literal)) (i32.const 0) (block (result (ref null $deprecated.DeprecatedExample.DeprecatedEnum))
+     (call $$clinit__void@deprecated.DeprecatedExample.DeprecatedEnum )
+     (global.get $A_VALUE@deprecated.DeprecatedExample.DeprecatedEnum)
+    ))
+    (local.get $$array_literal)
+   ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
 )
 
 ;;; void DeprecatedEnum.$clinit()
@@ -234,6 +286,8 @@
     ;; (deprecated.DeprecatedExample.DeprecatedEnum.A_VALUE = new DeprecatedEnum.<init>());
     (global.set $A_VALUE@deprecated.DeprecatedExample.DeprecatedEnum (call $m_<init>__void_$p_deprecated_DeprecatedExample_DeprecatedEnum@deprecated.DeprecatedExample.DeprecatedEnum (struct.new_with_rtt $deprecated.DeprecatedExample.DeprecatedEnum (global.get $deprecated.DeprecatedExample.DeprecatedEnum.vtable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $deprecated.DeprecatedExample.DeprecatedEnum.rtt))))
    )
+   ;; (deprecated.DeprecatedExample.DeprecatedEnum.namesToValuesMap = null);
+   (global.set $namesToValuesMap@deprecated.DeprecatedExample.DeprecatedEnum (ref.null $java.lang.Object))
   )
  )
 )

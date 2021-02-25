@@ -278,6 +278,8 @@ public enum Backend {
           new CreateImplicitConstructors(),
           new InsertExplicitSuperCalls(),
           new BridgeMethodsCreator(),
+          new EnumMethodsCreator(),
+
           // Must run before Enum normalization
           new FixSuperCallQualifiers(),
           new NormalizeInstanceCompileTimeConstants(),

@@ -56,6 +56,11 @@ public class Main {
     assertEquals(2, b.m());
   }
 
+  enum MyEnum {
+    A,
+    B;
+  }
+
   private static int next = 0;
 
   private static int returnsNext() {
@@ -80,6 +85,16 @@ public class Main {
       default:
         break;
       case 0:
+        fail();
+    }
+
+    MyEnum a = MyEnum.A;
+    switch (a) {
+      case B:
+        fail();
+      case A:
+        break;
+      default:
         fail();
     }
   }

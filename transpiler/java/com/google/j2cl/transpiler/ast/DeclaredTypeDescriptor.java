@@ -19,6 +19,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
+import static com.google.common.collect.MoreCollectors.onlyElement;
 import static com.google.common.collect.MoreCollectors.toOptional;
 import static java.util.stream.Collectors.joining;
 
@@ -477,14 +478,24 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
    * there is a method with that signature.
    */
   public MethodDescriptor getMethodDescriptor(String methodName, TypeDescriptor... parameters) {
+    String targetSignature = MethodDescriptor.buildMethodSignature(methodName, parameters);
     return getMethodDescriptors().stream()
         .filter(Predicates.not(MethodDescriptor::isGeneralizingdBridge))
-        .filter(
-            m ->
-                m.getSignature()
-                    .equals(MethodDescriptor.buildMethodSignature(methodName, parameters)))
+        .filter(m -> m.getSignature().equals(targetSignature))
         .collect(toOptional())
         .orElse(null);
+  }
+
+  /**
+   * Returns a method descriptor for a method declered in this type named {@code name}.
+   *
+   * <p>Fails if not method with {@code name} is declared in the type or if there are multiple
+   * overloads declared in the type with the same {@code name}.
+   */
+  public MethodDescriptor getMethodDescriptorByName(String name) {
+    return getDeclaredMethodDescriptors().stream()
+        .filter(m -> m.getName().equals(name))
+        .collect(onlyElement());
   }
 
   /** The list of all methods available on a given type. */

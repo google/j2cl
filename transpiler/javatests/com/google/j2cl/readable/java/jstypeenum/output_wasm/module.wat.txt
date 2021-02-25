@@ -23,6 +23,7 @@
 (global $RED@jstypeenum.Color (mut (ref null $jstypeenum.Color)) (ref.null $jstypeenum.Color))
 (global $GREEN@jstypeenum.Color (mut (ref null $jstypeenum.Color)) (ref.null $jstypeenum.Color))
 (global $BLUE@jstypeenum.Color (mut (ref null $jstypeenum.Color)) (ref.null $jstypeenum.Color))
+(global $namesToValuesMap@jstypeenum.Color (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
 (global $$initialized@jstypeenum.Color (mut i32) (i32.const 0))
 
 ;;; Color()
@@ -36,6 +37,65 @@
   )
  )
  (local.get $this)
+)
+
+;;; Color Color.valueOf(String name)
+(func $m_valueOf__java_lang_String__jstypeenum_Color@jstypeenum.Color
+ (param $name (ref null $java.lang.String))
+ (result (ref null $jstypeenum.Color))
+ (local $return.value (ref null $jstypeenum.Color))
+ (block $return.label
+  (block
+   ;; jstypeenum.Color.$clinit();
+   (call $$clinit__void@jstypeenum.Color )
+   ;; if ((jstypeenum.Color.namesToValuesMap == null)) {
+   (if (ref.eq (global.get $namesToValuesMap@jstypeenum.Color) (ref.null $java.lang.Object))
+    (then
+     (block
+      ;; (jstypeenum.Color.namesToValuesMap = javaemul.internal.Enums.createMapFromValues(jstypeenum.Color.values()));
+      (global.set $namesToValuesMap@jstypeenum.Color (ref.null $java.lang.Object))
+     )
+    )
+   )
+   ;; return ((Color) javaemul.internal.Enums.getValueFromNameAndMap(name,jstypeenum.Color.namesToValuesMap));
+   (local.set $return.value (ref.cast $java.lang.Object $jstypeenum.Color (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(ref.null $java.lang.Object)) (global.get $jstypeenum.Color.rtt)))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; Color[] Color.values()
+(func $m_values__arrayOf_jstypeenum_Color@jstypeenum.Color
+ (result (ref null $Object.array))
+ (local $return.value (ref null $Object.array))
+ (local $$array_literal (ref null $Object.array))
+ (block $return.label
+  (block
+   ;; jstypeenum.Color.$clinit();
+   (call $$clinit__void@jstypeenum.Color )
+   ;; return (Color[] $array_literal = new Color[3],($array_literal[0] = (jstypeenum.Color.$clinit(),jstypeenum.Color.RED)),($array_literal[1] = (jstypeenum.Color.$clinit(),jstypeenum.Color.GREEN)),($array_literal[2] = (jstypeenum.Color.$clinit(),jstypeenum.Color.BLUE)),$array_literal);
+   (local.set $return.value (block (result (ref null $Object.array))
+    
+    (local.set $$array_literal (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $Object.array.elements (i32.const 3) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
+    (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $$array_literal)) (i32.const 0) (block (result (ref null $jstypeenum.Color))
+     (call $$clinit__void@jstypeenum.Color )
+     (global.get $RED@jstypeenum.Color)
+    ))
+    (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $$array_literal)) (i32.const 1) (block (result (ref null $jstypeenum.Color))
+     (call $$clinit__void@jstypeenum.Color )
+     (global.get $GREEN@jstypeenum.Color)
+    ))
+    (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $$array_literal)) (i32.const 2) (block (result (ref null $jstypeenum.Color))
+     (call $$clinit__void@jstypeenum.Color )
+     (global.get $BLUE@jstypeenum.Color)
+    ))
+    (local.get $$array_literal)
+   ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
 )
 
 ;;; void Color.$clinit()
@@ -71,6 +131,8 @@
     ;; (jstypeenum.Color.BLUE = new Color.<init>());
     (global.set $BLUE@jstypeenum.Color (call $m_<init>__void_$p_jstypeenum_Color@jstypeenum.Color (struct.new_with_rtt $jstypeenum.Color (global.get $jstypeenum.Color.vtable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $jstypeenum.Color.rtt))))
    )
+   ;; (jstypeenum.Color.namesToValuesMap = null);
+   (global.set $namesToValuesMap@jstypeenum.Color (ref.null $java.lang.Object))
   )
  )
 )

@@ -5,7 +5,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
+let Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
 
 /**
  * @extends {Enum<Color>}
@@ -33,10 +33,11 @@ class Color extends Enum {
     Color.$clinit();
     if ($Equality.$same(Color.f_namesToValuesMap__jstypeenum_Color_, null)) {
       Color.f_namesToValuesMap__jstypeenum_Color_ =
-          $Enums.createMapFromValues(Color.values());
+          /**@type {Map<?string, ?>}*/ (
+              Enums.createMapFromValues(Color.values()));
     }
-    return $Enums.getValueFromNameAndMap(
-        name, Color.f_namesToValuesMap__jstypeenum_Color_);
+    return /**@type {Color}*/ (Enums.getValueFromNameAndMap(
+        name, Color.f_namesToValuesMap__jstypeenum_Color_));
   }
   /** @return {!Array<!Color>} */
   static values() {
@@ -84,7 +85,7 @@ class Color extends Enum {
   static $loadModules() {
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-    $Enums = goog.module.get('vmbootstrap.Enums$impl');
+    Enums = goog.module.get('vmbootstrap.Enums$impl');
   }
 }
 /**@private {!Color}*/

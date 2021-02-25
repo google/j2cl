@@ -18,6 +18,7 @@ package javaemul.internal;
 import static javaemul.internal.InternalPreconditions.checkArgument;
 
 import java.io.Serializable;
+import javaemul.internal.annotations.UncheckedCast;
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
@@ -48,6 +49,7 @@ class Enums {
     return map;
   }
 
+  @UncheckedCast
   public static <V> V getValueFromNameAndMap(String name, NativeMap<String, V> map) {
     if (name == null) {
       throw new IllegalArgumentException();

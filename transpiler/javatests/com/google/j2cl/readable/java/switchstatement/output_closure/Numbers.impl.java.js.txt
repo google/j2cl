@@ -5,7 +5,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
+let Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
 
 /**
  * @extends {Enum<Numbers>}
@@ -35,10 +35,11 @@ class Numbers extends Enum {
     if ($Equality.$same(
             Numbers.f_namesToValuesMap__switchstatement_Numbers_, null)) {
       Numbers.f_namesToValuesMap__switchstatement_Numbers_ =
-          $Enums.createMapFromValues(Numbers.m_values__());
+          /**@type {Map<?string, ?>}*/ (
+              Enums.createMapFromValues(Numbers.m_values__()));
     }
-    return $Enums.getValueFromNameAndMap(
-        name, Numbers.f_namesToValuesMap__switchstatement_Numbers_);
+    return /**@type {Numbers}*/ (Enums.getValueFromNameAndMap(
+        name, Numbers.f_namesToValuesMap__switchstatement_Numbers_));
   }
   /** @return {!Array<!Numbers>} */
   static m_values__() {
@@ -81,7 +82,7 @@ class Numbers extends Enum {
   static $loadModules() {
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-    $Enums = goog.module.get('vmbootstrap.Enums$impl');
+    Enums = goog.module.get('vmbootstrap.Enums$impl');
   }
 }
 /**@private {!Numbers}*/

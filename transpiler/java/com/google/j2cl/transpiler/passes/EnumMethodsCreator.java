@@ -105,8 +105,7 @@ public class EnumMethodsCreator extends NormalizationPass {
                     .setStatements(
                         BinaryExpression.Builder.asAssignmentTo(namesToValuesMapFieldDescriptor)
                             .setRightOperand(
-                                RuntimeMethods.createEnumsCreateMapMethodCall(
-                                    namesToValuesMapFieldDescriptor.getTypeDescriptor(),
+                                RuntimeMethods.createEnumsCreateMapFromValuesMethodCall(
                                     MethodCall.Builder.from(
                                             getValuesMethodDescriptor(typeDescriptor))
                                         .build()))
@@ -119,7 +118,7 @@ public class EnumMethodsCreator extends NormalizationPass {
     Statement returnStatement =
         ReturnStatement.newBuilder()
             .setExpression(
-                RuntimeMethods.createEnumsGetValueMethodCall(
+                RuntimeMethods.createEnumsGetValueFromNameAndMapMethodCall(
                     typeDescriptor,
                     nameParameter.createReference(),
                     FieldAccess.Builder.from(namesToValuesMapFieldDescriptor).build()))

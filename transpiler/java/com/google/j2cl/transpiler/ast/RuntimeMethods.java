@@ -105,37 +105,39 @@ public class RuntimeMethods {
         .build();
   }
 
-  /** Create a call to Enums.createMap. */
-  public static Expression createEnumsCreateMapMethodCall(
-      TypeDescriptor returnTypeDescriptor, Expression values) {
+  /** Create a call to Enums.createMapFromValues. */
+  public static Expression createEnumsCreateMapFromValuesMethodCall(Expression values) {
 
     MethodDescriptor createMapMethodDescriptor =
-        MethodDescriptor.newBuilder()
-            .setJsInfo(JsInfo.RAW)
-            .setStatic(true)
-            .setEnclosingTypeDescriptor(BootstrapType.ENUMS.getDescriptor())
-            .setName("createMapFromValues")
-            .setReturnTypeDescriptor(returnTypeDescriptor)
-            .setParameterTypeDescriptors(values.getTypeDescriptor())
-            .build();
+        TypeDescriptors.get()
+            .javaemulInternalEnums
+            .getMethodDescriptorByName("createMapFromValues");
+
+    // createMapFromValues is parameterized by T extends Enum, so specialize the method to the
+    // right type.
+    TypeVariable enumType = createMapMethodDescriptor.getTypeParameterTypeDescriptors().get(0);
+    createMapMethodDescriptor.specializeTypeVariables(
+        ImmutableMap.of(
+            enumType,
+            ((ArrayTypeDescriptor) values.getTypeDescriptor()).getComponentTypeDescriptor()));
     return MethodCall.Builder.from(createMapMethodDescriptor).setArguments(values).build();
   }
 
   /** Create a call to Enums.getValueFromNameAndMap. */
-  public static Expression createEnumsGetValueMethodCall(
-      TypeDescriptor returnTypeDescriptor,
+  public static Expression createEnumsGetValueFromNameAndMapMethodCall(
+      TypeDescriptor enumTypeDescriptor,
       Expression nameParameter,
       Expression namesToValuesMapParameter) {
     MethodDescriptor getValueMethodDescriptor =
-        MethodDescriptor.newBuilder()
-            .setJsInfo(JsInfo.RAW)
-            .setStatic(true)
-            .setEnclosingTypeDescriptor(BootstrapType.ENUMS.getDescriptor())
-            .setName("getValueFromNameAndMap")
-            .setReturnTypeDescriptor(returnTypeDescriptor)
-            .setParameterTypeDescriptors(
-                nameParameter.getTypeDescriptor(), namesToValuesMapParameter.getTypeDescriptor())
-            .build();
+        TypeDescriptors.get()
+            .javaemulInternalEnums
+            .getMethodDescriptorByName("getValueFromNameAndMap");
+
+    // getValueFromNameAndMap is parameterized by T extends Enum, so specialize the method to the
+    // right enum type.
+    TypeVariable enumType = getValueMethodDescriptor.getTypeParameterTypeDescriptors().get(0);
+    getValueMethodDescriptor.specializeTypeVariables(ImmutableMap.of(enumType, enumType));
+
     return MethodCall.Builder.from(getValueMethodDescriptor)
         .setArguments(nameParameter, namesToValuesMapParameter)
         .build();
