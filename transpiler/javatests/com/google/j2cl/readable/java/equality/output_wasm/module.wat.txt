@@ -14,6 +14,7 @@
  (field $m_test__void (mut (ref $function.__$void)))
 ))
 (global $equality.Equality.vtable (mut (ref null $equality.Equality.vtable)) (ref.null $equality.Equality.vtable))
+(global $$initialized@equality.Equality (mut i32) (i32.const 0))
 
 ;;; Equality()
 (func $m_<init>__void@equality.Equality
@@ -63,6 +64,25 @@
  )
 )
 (elem declare func $m_test__void@equality.Equality)
+
+;;; void Equality.$clinit()
+(func $$clinit__void@equality.Equality
+ (block $return.label
+  (block
+   ;; if (equality.Equality.$initialized) return;
+   (if (global.get $$initialized@equality.Equality)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (equality.Equality.$initialized = true);
+   (global.set $$initialized@equality.Equality (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
 
 ;;; Code for equality.Equality [vtable]
  (global.set $equality.Equality.vtable (struct.new_with_rtt $equality.Equality.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__void@equality.Equality) (rtt.canon $equality.Equality.vtable)))

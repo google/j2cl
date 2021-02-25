@@ -23,6 +23,7 @@
 (global $RED@jstypeenum.Color (mut (ref null $jstypeenum.Color)) (ref.null $jstypeenum.Color))
 (global $GREEN@jstypeenum.Color (mut (ref null $jstypeenum.Color)) (ref.null $jstypeenum.Color))
 (global $BLUE@jstypeenum.Color (mut (ref null $jstypeenum.Color)) (ref.null $jstypeenum.Color))
+(global $$initialized@jstypeenum.Color (mut i32) (i32.const 0))
 
 ;;; Color()
 (func $m_<init>__void_$p_jstypeenum_Color@jstypeenum.Color
@@ -35,6 +36,43 @@
   )
  )
  (local.get $this)
+)
+
+;;; void Color.$clinit()
+(func $$clinit__void@jstypeenum.Color
+ (block $return.label
+  (block
+   ;; if (jstypeenum.Color.$initialized) return;
+   (if (global.get $$initialized@jstypeenum.Color)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (jstypeenum.Color.$initialized = true);
+   (global.set $$initialized@jstypeenum.Color (i32.const 1))
+   ;; java.lang.Enum.$clinit();
+   (call $$clinit__void@java.lang.Enum )
+   (block
+    ;; jstypeenum.Color.$clinit();
+    (call $$clinit__void@jstypeenum.Color )
+    ;; (jstypeenum.Color.RED = new Color.<init>());
+    (global.set $RED@jstypeenum.Color (call $m_<init>__void_$p_jstypeenum_Color@jstypeenum.Color (struct.new_with_rtt $jstypeenum.Color (global.get $jstypeenum.Color.vtable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $jstypeenum.Color.rtt))))
+   )
+   (block
+    ;; jstypeenum.Color.$clinit();
+    (call $$clinit__void@jstypeenum.Color )
+    ;; (jstypeenum.Color.GREEN = new Color.<init>());
+    (global.set $GREEN@jstypeenum.Color (call $m_<init>__void_$p_jstypeenum_Color@jstypeenum.Color (struct.new_with_rtt $jstypeenum.Color (global.get $jstypeenum.Color.vtable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $jstypeenum.Color.rtt))))
+   )
+   (block
+    ;; jstypeenum.Color.$clinit();
+    (call $$clinit__void@jstypeenum.Color )
+    ;; (jstypeenum.Color.BLUE = new Color.<init>());
+    (global.set $BLUE@jstypeenum.Color (call $m_<init>__void_$p_jstypeenum_Color@jstypeenum.Color (struct.new_with_rtt $jstypeenum.Color (global.get $jstypeenum.Color.vtable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $jstypeenum.Color.rtt))))
+   )
+  )
+ )
 )
 
 ;;; Code for jstypeenum.Color [vtable]

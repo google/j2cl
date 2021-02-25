@@ -13,6 +13,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $assertsimple.AssertSimple.vtable (mut (ref null $assertsimple.AssertSimple.vtable)) (ref.null $assertsimple.AssertSimple.vtable))
+(global $$initialized@assertsimple.AssertSimple (mut i32) (i32.const 0))
 
 ;;; AssertSimple()
 (func $m_<init>__void@assertsimple.AssertSimple
@@ -32,8 +33,29 @@
  (param $args (ref null $Object.array))
  (block $return.label
   (block
+   ;; assertsimple.AssertSimple.$clinit();
+   (call $$clinit__void@assertsimple.AssertSimple )
    ;; assert ((1 + 2) == 3);
    ;; unimplemented statement AssertStatement
+  )
+ )
+)
+
+;;; void AssertSimple.$clinit()
+(func $$clinit__void@assertsimple.AssertSimple
+ (block $return.label
+  (block
+   ;; if (assertsimple.AssertSimple.$initialized) return;
+   (if (global.get $$initialized@assertsimple.AssertSimple)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (assertsimple.AssertSimple.$initialized = true);
+   (global.set $$initialized@assertsimple.AssertSimple (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
   )
  )
 )

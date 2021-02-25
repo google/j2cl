@@ -17,6 +17,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $instancefieldaccesslevels.InstanceFieldAccessLevels.vtable (mut (ref null $instancefieldaccesslevels.InstanceFieldAccessLevels.vtable)) (ref.null $instancefieldaccesslevels.InstanceFieldAccessLevels.vtable))
+(global $$initialized@instancefieldaccesslevels.InstanceFieldAccessLevels (mut i32) (i32.const 0))
 
 ;;; InstanceFieldAccessLevels()
 (func $m_<init>__void@instancefieldaccesslevels.InstanceFieldAccessLevels
@@ -29,6 +30,25 @@
   )
  )
  (local.get $this)
+)
+
+;;; void InstanceFieldAccessLevels.$clinit()
+(func $$clinit__void@instancefieldaccesslevels.InstanceFieldAccessLevels
+ (block $return.label
+  (block
+   ;; if (instancefieldaccesslevels.InstanceFieldAccessLevels.$initialized) return;
+   (if (global.get $$initialized@instancefieldaccesslevels.InstanceFieldAccessLevels)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (instancefieldaccesslevels.InstanceFieldAccessLevels.$initialized = true);
+   (global.set $$initialized@instancefieldaccesslevels.InstanceFieldAccessLevels (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
 )
 
 ;;; Code for instancefieldaccesslevels.InstanceFieldAccessLevels [vtable]

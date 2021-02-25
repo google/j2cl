@@ -18,27 +18,20 @@ package com.google.j2cl.transpiler.passes;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 
-import com.google.common.base.Joiner;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
-import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
-import com.google.j2cl.transpiler.ast.Block;
-import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
-import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.FieldDescriptor.FieldOrigin;
 import com.google.j2cl.transpiler.ast.FunctionExpression;
-import com.google.j2cl.transpiler.ast.Invocation;
 import com.google.j2cl.transpiler.ast.JsInfo;
 import com.google.j2cl.transpiler.ast.JsMemberType;
 import com.google.j2cl.transpiler.ast.LambdaTypeDescriptors;
 import com.google.j2cl.transpiler.ast.Member;
-import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
@@ -47,35 +40,28 @@ import com.google.j2cl.transpiler.ast.MultiExpression;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.Type;
-import com.google.j2cl.transpiler.ast.TypeDeclaration;
-import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.Variable;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
-/** Implements static initialization to comply with Java semantics. */
-public class ImplementStaticInitialization extends NormalizationPass {
-
-  private final Set<String> privateStaticMembersCalledFromOtherClasses = new HashSet<>();
+/**
+ * Implements static initialization to comply with Java semantics by redirecting the clinit function
+ * that performs the initialization for the class to a function an empty function.
+ */
+public class ImplementStaticInitializationViaClinitFunctionRedirection
+    extends ImplementStaticInitializationBase {
 
   @Override
-  public void applyTo(CompilationUnit compilationUnit) {
-    collectPrivateMemberReferences(compilationUnit);
-    for (Type type : compilationUnit.getTypes()) {
+  public void applyTo(Type type) {
       checkState(!type.isNative());
       checkState(!type.isJsFunctionInterface());
       if (type.isJsEnum()) {
-        continue;
+      return;
       }
-      insertClinitCalls(type);
-      synthesizeSuperClinitCalls(type);
       synthesizeSettersAndGetters(type);
       synthesizeClinitMethod(type);
       synthesizeStaticFieldDeclaration(type);
-    }
   }
 
   private static void synthesizeStaticFieldDeclaration(Type type) {
@@ -96,75 +82,6 @@ public class ImplementStaticInitialization extends NormalizationPass {
           }
         });
   }
-
-  /** Collect all private static methods and fields that are accessed from outside its class. */
-  private void collectPrivateMemberReferences(CompilationUnit compilationUnit) {
-    compilationUnit.accept(
-        new AbstractVisitor() {
-          @Override
-          @SuppressWarnings("ReferenceEquality")
-          public void exitInvocation(Invocation invocation) {
-            recordMemberReference(getCurrentType().getDeclaration(), invocation.getTarget());
-          }
-
-          @Override
-          @SuppressWarnings("ReferenceEquality")
-          public void exitFieldAccess(FieldAccess fieldAccess) {
-            recordMemberReference(getCurrentType().getDeclaration(), fieldAccess.getTarget());
-          }
-        });
-  }
-
-  /** Records access to member {@code targetMember} from type {@code callerEnclosingType}. */
-  private void recordMemberReference(
-      TypeDeclaration callerEnclosingType, MemberDescriptor targetMember) {
-    if (targetMember.isInstanceMember() || !targetMember.getVisibility().isPrivate()) {
-      return;
-    }
-
-    if (!targetMember.isMemberOf(callerEnclosingType)) {
-      privateStaticMembersCalledFromOtherClasses.add(getUniqueIdentifier(targetMember));
-    }
-  }
-
-  /** Add clinit calls to static methods and (real js) constructors. */
-  private void insertClinitCalls(Type type) {
-    type.accept(
-        new AbstractRewriter() {
-          @Override
-          public Method rewriteMethod(Method method) {
-            if (triggersClinit(method.getDescriptor())) {
-              return Method.Builder.from(method)
-                  .addStatement(
-                      0,
-                      createClinitCallStatement(
-                          method.getBody().getSourcePosition(),
-                          method.getDescriptor().getEnclosingTypeDescriptor()))
-                  .build();
-            }
-            return method;
-          }
-        });
-  }
-
-  /** Synthesize a static initializer block that calls the necessary super type clinits. */
-  private static void synthesizeSuperClinitCalls(Type type) {
-    Block.Builder staticInitializerBuilder =
-        Block.newBuilder().setSourcePosition(type.getSourcePosition());
-
-    if (implementsClinitMethod(type.getSuperTypeDescriptor())) {
-      staticInitializerBuilder.addStatement(
-          createClinitCallStatement(type.getSourcePosition(), type.getSuperTypeDescriptor()));
-    }
-    addRequiredSuperInterfacesClinitCalls(
-        type.getSourcePosition(), type.getTypeDescriptor(), staticInitializerBuilder);
-
-    Block staticInitiliazerBlock = staticInitializerBuilder.build();
-    if (!staticInitiliazerBlock.isNoop()) {
-      type.addStaticInitializerBlock(0, staticInitiliazerBlock);
-    }
-  }
-
   /**
    * Synthesize static getters/setter to ensure class initialization is run on static field
    * accesses.
@@ -214,14 +131,6 @@ public class ImplementStaticInitialization extends NormalizationPass {
         });
   }
 
-  /** Returns a string that uniquely identifies a method. */
-  private static String getUniqueIdentifier(MemberDescriptor memberDescriptor) {
-    return Joiner.on("___")
-        .join(
-            memberDescriptor.getEnclosingTypeDescriptor().getQualifiedBinaryName(),
-            memberDescriptor.getMangledName());
-  }
-
   public void synthesizePropertyGetter(Type type, Field field) {
     FieldDescriptor fieldDescriptor = field.getDescriptor();
     type.addMethod(
@@ -264,79 +173,6 @@ public class ImplementStaticInitialization extends NormalizationPass {
                     .build()
                     .makeStatement(field.getSourcePosition()))
             .build());
-  }
-
-  private static Statement createClinitCallStatement(
-      SourcePosition sourcePosition, DeclaredTypeDescriptor typeDescriptor) {
-    return createClinitCallExpression(typeDescriptor).makeStatement(sourcePosition);
-  }
-
-  private static Expression createClinitCallExpression(DeclaredTypeDescriptor typeDescriptor) {
-    return MethodCall.Builder.from(typeDescriptor.getClinitMethodDescriptor()).build();
-  }
-
-  private static void addRequiredSuperInterfacesClinitCalls(
-      SourcePosition sourcePosition,
-      DeclaredTypeDescriptor typeDescriptor,
-      Block.Builder staticInitializerBuilder) {
-    for (DeclaredTypeDescriptor interfaceTypeDescriptor :
-        typeDescriptor.getInterfaceTypeDescriptors()) {
-      if (!implementsClinitMethod(interfaceTypeDescriptor)) {
-        continue;
-      }
-
-      if (interfaceTypeDescriptor.getTypeDeclaration().declaresDefaultMethods()) {
-        // The interface declares a default method; invoke its clinit which will initialize
-        // the interface and all it superinterfaces that declare default methods.
-        staticInitializerBuilder.addStatement(
-            createClinitCallStatement(sourcePosition, interfaceTypeDescriptor));
-        continue;
-      }
-
-      // The interface does not declare a default method so don't call its clinit; instead recurse
-      // into its super interface hierarchy to invoke clinits of super interfaces that declare
-      // default methods.
-      addRequiredSuperInterfacesClinitCalls(
-          sourcePosition, interfaceTypeDescriptor, staticInitializerBuilder);
-    }
-  }
-
-  /**
-   * Returns {@code true} if a class initialization (clinit) needs to be called when accessing this
-   * member (i.e. calling it if if a method, or referencing it if it is a field)
-   */
-  private boolean triggersClinit(MemberDescriptor memberDescriptor) {
-    if (memberDescriptor.isNative()) {
-      // Skip native members.
-      return false;
-    }
-
-    if (memberDescriptor.isCompileTimeConstant()) {
-      // Compile time constants do not trigger clinit.
-      return false;
-    }
-
-    if (memberDescriptor.getVisibility().isPrivate()
-        && !memberDescriptor.isJsMember()
-        && !isCalledFromOtherClasses(memberDescriptor)) {
-      // This is an effectively private member, which means that when this member is access clinit
-      // is already guaranteed to have been called.
-      return false;
-    }
-
-    return memberDescriptor.isStatic() || memberDescriptor.isJsConstructor();
-  }
-
-  private boolean isCalledFromOtherClasses(MemberDescriptor memberDescriptor) {
-    return privateStaticMembersCalledFromOtherClasses.contains(
-        getUniqueIdentifier(memberDescriptor));
-  }
-
-  /** Returns {@code true} if the type implements the class initialization method. */
-  private static boolean implementsClinitMethod(TypeDescriptor typeDescriptor) {
-    return typeDescriptor != null
-        && !typeDescriptor.isNative()
-        && !typeDescriptor.isJsFunctionInterface();
   }
 
   /** Returns the field descriptor for a the field backing the static setter/getters. */

@@ -1,4 +1,22 @@
 ;;; Code for emptyinterface.EmptyInterface
 
 ;;; INTERFACE  EmptyInterface
+(global $$initialized@emptyinterface.EmptyInterface (mut i32) (i32.const 0))
+
+;;; void EmptyInterface.$clinit()
+(func $$clinit__void@emptyinterface.EmptyInterface
+ (block $return.label
+  (block
+   ;; if (emptyinterface.EmptyInterface.$initialized) return;
+   (if (global.get $$initialized@emptyinterface.EmptyInterface)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (emptyinterface.EmptyInterface.$initialized = true);
+   (global.set $$initialized@emptyinterface.EmptyInterface (i32.const 1))
+  )
+ )
+)
 

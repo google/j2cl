@@ -1,6 +1,24 @@
 ;;; Code for mixednestings.MixedNestings
 
 ;;; INTERFACE  MyInterface
+(global $$initialized@mixednestings.MyInterface (mut i32) (i32.const 0))
+
+;;; void MyInterface.$clinit()
+(func $$clinit__void@mixednestings.MyInterface
+ (block $return.label
+  (block
+   ;; if (mixednestings.MyInterface.$initialized) return;
+   (if (global.get $$initialized@mixednestings.MyInterface)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (mixednestings.MyInterface.$initialized = true);
+   (global.set $$initialized@mixednestings.MyInterface (i32.const 1))
+  )
+ )
+)
 
 ;;; CLASS  MixedNestings
 (type $mixednestings.MixedNestings (struct
@@ -17,6 +35,7 @@
  (field $m_test__void (mut (ref $function.__$void)))
 ))
 (global $mixednestings.MixedNestings.vtable (mut (ref null $mixednestings.MixedNestings.vtable)) (ref.null $mixednestings.MixedNestings.vtable))
+(global $$initialized@mixednestings.MixedNestings (mut i32) (i32.const 0))
 
 ;;; MixedNestings()
 (func $m_<init>__void@mixednestings.MixedNestings
@@ -63,6 +82,25 @@
 )
 (elem declare func $m_test__void@mixednestings.MixedNestings)
 
+;;; void MixedNestings.$clinit()
+(func $$clinit__void@mixednestings.MixedNestings
+ (block $return.label
+  (block
+   ;; if (mixednestings.MixedNestings.$initialized) return;
+   (if (global.get $$initialized@mixednestings.MixedNestings)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (mixednestings.MixedNestings.$initialized = true);
+   (global.set $$initialized@mixednestings.MixedNestings (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; CLASS  A
 (type $mixednestings.MixedNestings.A (struct
  (field $vtable (ref null $mixednestings.MixedNestings.A.vtable))
@@ -79,6 +117,7 @@
  (field $m_a__void (mut (ref $function.__$void)))
 ))
 (global $mixednestings.MixedNestings.A.vtable (mut (ref null $mixednestings.MixedNestings.A.vtable)) (ref.null $mixednestings.MixedNestings.A.vtable))
+(global $$initialized@mixednestings.MixedNestings.A (mut i32) (i32.const 0))
 
 ;;; A(MixedNestings $outer_this)
 (func $m_<init>__mixednestings_MixedNestings__void_$pp_mixednestings@mixednestings.MixedNestings.A
@@ -128,6 +167,25 @@
 )
 (elem declare func $m_a__void@mixednestings.MixedNestings.A)
 
+;;; void A.$clinit()
+(func $$clinit__void@mixednestings.MixedNestings.A
+ (block $return.label
+  (block
+   ;; if (mixednestings.MixedNestings.A.$initialized) return;
+   (if (global.get $$initialized@mixednestings.MixedNestings.A)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (mixednestings.MixedNestings.A.$initialized = true);
+   (global.set $$initialized@mixednestings.MixedNestings.A (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; CLASS  B
 (type $mixednestings.MixedNestings.A.1B (struct
  (field $vtable (ref null $mixednestings.MixedNestings.A.1B.vtable))
@@ -144,6 +202,7 @@
  (field $m_b__int (mut (ref $function.__$int)))
 ))
 (global $mixednestings.MixedNestings.A.1B.vtable (mut (ref null $mixednestings.MixedNestings.A.1B.vtable)) (ref.null $mixednestings.MixedNestings.A.1B.vtable))
+(global $$initialized@mixednestings.MixedNestings.A.1B (mut i32) (i32.const 0))
 
 ;;; B(A $outer_this)
 (func $m_<init>__mixednestings_MixedNestings_A__void_$pp_mixednestings@mixednestings.MixedNestings.A.1B
@@ -195,6 +254,25 @@
 )
 (elem declare func $m_b__int@mixednestings.MixedNestings.A.1B)
 
+;;; void B.$clinit()
+(func $$clinit__void@mixednestings.MixedNestings.A.1B
+ (block $return.label
+  (block
+   ;; if (mixednestings.MixedNestings.A.1B.$initialized) return;
+   (if (global.get $$initialized@mixednestings.MixedNestings.A.1B)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (mixednestings.MixedNestings.A.1B.$initialized = true);
+   (global.set $$initialized@mixednestings.MixedNestings.A.1B (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; CLASS  <anonymous> implements MyInterface
 (type $mixednestings.MixedNestings.A.1B.1 (struct
  (field $vtable (ref null $mixednestings.MixedNestings.A.1B.1.vtable))
@@ -210,6 +288,7 @@
  (field $m_fun__int__int (mut (ref $function.$int__$int)))
 ))
 (global $mixednestings.MixedNestings.A.1B.1.vtable (mut (ref null $mixednestings.MixedNestings.A.1B.1.vtable)) (ref.null $mixednestings.MixedNestings.A.1B.1.vtable))
+(global $$initialized@mixednestings.MixedNestings.A.1B.1 (mut i32) (i32.const 0))
 
 ;;; <anonymous> implements MyInterface(B $outer_this)
 (func $m_<init>__mixednestings_MixedNestings_A_1B__void_$pp_mixednestings@mixednestings.MixedNestings.A.1B.1
@@ -254,6 +333,25 @@
 )
 (elem declare func $m_fun__int__int@mixednestings.MixedNestings.A.1B.1)
 
+;;; void <anonymous> implements MyInterface.$clinit()
+(func $$clinit__void@mixednestings.MixedNestings.A.1B.1
+ (block $return.label
+  (block
+   ;; if (mixednestings.MixedNestings.A.1B.1.$initialized) return;
+   (if (global.get $$initialized@mixednestings.MixedNestings.A.1B.1)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (mixednestings.MixedNestings.A.1B.1.$initialized = true);
+   (global.set $$initialized@mixednestings.MixedNestings.A.1B.1 (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; CLASS  <anonymous> implements MyInterface
 (type $mixednestings.MixedNestings.A.1B.1.1 (struct
  (field $vtable (ref null $mixednestings.MixedNestings.A.1B.1.1.vtable))
@@ -269,6 +367,7 @@
  (field $m_fun__int__int (mut (ref $function.$int__$int)))
 ))
 (global $mixednestings.MixedNestings.A.1B.1.1.vtable (mut (ref null $mixednestings.MixedNestings.A.1B.1.1.vtable)) (ref.null $mixednestings.MixedNestings.A.1B.1.1.vtable))
+(global $$initialized@mixednestings.MixedNestings.A.1B.1.1 (mut i32) (i32.const 0))
 
 ;;; <anonymous> implements MyInterface(<anonymous> implements MyInterface $outer_this)
 (func $m_<init>__mixednestings_MixedNestings_A_1B_1__void_$pp_mixednestings@mixednestings.MixedNestings.A.1B.1.1
@@ -304,6 +403,25 @@
  (local.get $return.value)
 )
 (elem declare func $m_fun__int__int@mixednestings.MixedNestings.A.1B.1.1)
+
+;;; void <anonymous> implements MyInterface.$clinit()
+(func $$clinit__void@mixednestings.MixedNestings.A.1B.1.1
+ (block $return.label
+  (block
+   ;; if (mixednestings.MixedNestings.A.1B.1.1.$initialized) return;
+   (if (global.get $$initialized@mixednestings.MixedNestings.A.1B.1.1)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (mixednestings.MixedNestings.A.1B.1.1.$initialized = true);
+   (global.set $$initialized@mixednestings.MixedNestings.A.1B.1.1 (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
 
 ;;; Code for mixednestings.MixedNestings [vtable]
  (global.set $mixednestings.MixedNestings.vtable (struct.new_with_rtt $mixednestings.MixedNestings.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_mm__void@mixednestings.MixedNestings) (ref.func $m_test__void@mixednestings.MixedNestings) (rtt.canon $mixednestings.MixedNestings.vtable)))

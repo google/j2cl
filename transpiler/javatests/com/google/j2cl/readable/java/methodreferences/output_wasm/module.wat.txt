@@ -18,6 +18,7 @@
 ))
 (global $methodreferences.MethodReferences.vtable (mut (ref null $methodreferences.MethodReferences.vtable)) (ref.null $methodreferences.MethodReferences.vtable))
 (global $staticStringProducer@methodreferences.MethodReferences (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
+(global $$initialized@methodreferences.MethodReferences (mut i32) (i32.const 0))
 
 ;;; MethodReferences()
 (func $m_<init>__void@methodreferences.MethodReferences
@@ -38,6 +39,8 @@
  (local $return.value (ref null $java.lang.Object))
  (block $return.label
   (block
+   ;; methodreferences.MethodReferences.$clinit();
+   (call $$clinit__void@methodreferences.MethodReferences )
    ;; return new Object.<init>();
    (local.set $return.value (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (i32.const 0) (global.get $java.lang.Object.rtt))))
    (br $return.label)
@@ -210,11 +213,95 @@
 )
 (elem declare func $m_main__void_$pp_methodreferences@methodreferences.MethodReferences)
 
+;;; void MethodReferences.$clinit()
+(func $$clinit__void@methodreferences.MethodReferences
+ (local $$$q (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; if (methodreferences.MethodReferences.$initialized) return;
+   (if (global.get $$initialized@methodreferences.MethodReferences)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (methodreferences.MethodReferences.$initialized = true);
+   (global.set $$initialized@methodreferences.MethodReferences (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+   (block
+    ;; methodreferences.MethodReferences.$clinit();
+    (call $$clinit__void@methodreferences.MethodReferences )
+    ;; (methodreferences.MethodReferences.staticStringProducer = (Object $$q = methodreferences.MethodReferences.m(),function (){
+    (global.set $staticStringProducer@methodreferences.MethodReferences (block (result (ref null $java.lang.Object))
+     
+     (local.set $$$q (call $m_m__java_lang_Object@methodreferences.MethodReferences ))
+     (ref.null $java.lang.Object)
+    ))
+   )
+  )
+ )
+)
+
 ;;; INTERFACE  Producer
+(global $$initialized@methodreferences.MethodReferences.Producer (mut i32) (i32.const 0))
+
+;;; void Producer.$clinit()
+(func $$clinit__void@methodreferences.MethodReferences.Producer
+ (block $return.label
+  (block
+   ;; if (methodreferences.MethodReferences.Producer.$initialized) return;
+   (if (global.get $$initialized@methodreferences.MethodReferences.Producer)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (methodreferences.MethodReferences.Producer.$initialized = true);
+   (global.set $$initialized@methodreferences.MethodReferences.Producer (i32.const 1))
+  )
+ )
+)
 
 ;;; INTERFACE  Predicate
+(global $$initialized@methodreferences.MethodReferences.Predicate (mut i32) (i32.const 0))
+
+;;; void Predicate.$clinit()
+(func $$clinit__void@methodreferences.MethodReferences.Predicate
+ (block $return.label
+  (block
+   ;; if (methodreferences.MethodReferences.Predicate.$initialized) return;
+   (if (global.get $$initialized@methodreferences.MethodReferences.Predicate)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (methodreferences.MethodReferences.Predicate.$initialized = true);
+   (global.set $$initialized@methodreferences.MethodReferences.Predicate (i32.const 1))
+  )
+ )
+)
 
 ;;; INTERFACE  ArrayProducer
+(global $$initialized@methodreferences.MethodReferences.ArrayProducer (mut i32) (i32.const 0))
+
+;;; void ArrayProducer.$clinit()
+(func $$clinit__void@methodreferences.MethodReferences.ArrayProducer
+ (block $return.label
+  (block
+   ;; if (methodreferences.MethodReferences.ArrayProducer.$initialized) return;
+   (if (global.get $$initialized@methodreferences.MethodReferences.ArrayProducer)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (methodreferences.MethodReferences.ArrayProducer.$initialized = true);
+   (global.set $$initialized@methodreferences.MethodReferences.ArrayProducer (i32.const 1))
+  )
+ )
+)
 
 ;;; CLASS  ObjectCapturingOuter
 (type $methodreferences.MethodReferences.ObjectCapturingOuter (struct
@@ -231,6 +318,7 @@
  (field $m_getMain__methodreferences_MethodReferences_$pp_methodreferences (mut (ref $function.__$methodreferences.MethodReferences)))
 ))
 (global $methodreferences.MethodReferences.ObjectCapturingOuter.vtable (mut (ref null $methodreferences.MethodReferences.ObjectCapturingOuter.vtable)) (ref.null $methodreferences.MethodReferences.ObjectCapturingOuter.vtable))
+(global $$initialized@methodreferences.MethodReferences.ObjectCapturingOuter (mut i32) (i32.const 0))
 
 ;;; ObjectCapturingOuter(MethodReferences<T> $outer_this)
 (func $m_<init>__methodreferences_MethodReferences__void_$pp_methodreferences@methodreferences.MethodReferences.ObjectCapturingOuter
@@ -266,15 +354,124 @@
 )
 (elem declare func $m_getMain__methodreferences_MethodReferences_$pp_methodreferences@methodreferences.MethodReferences.ObjectCapturingOuter)
 
+;;; void ObjectCapturingOuter.$clinit()
+(func $$clinit__void@methodreferences.MethodReferences.ObjectCapturingOuter
+ (block $return.label
+  (block
+   ;; if (methodreferences.MethodReferences.ObjectCapturingOuter.$initialized) return;
+   (if (global.get $$initialized@methodreferences.MethodReferences.ObjectCapturingOuter)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (methodreferences.MethodReferences.ObjectCapturingOuter.$initialized = true);
+   (global.set $$initialized@methodreferences.MethodReferences.ObjectCapturingOuter (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; INTERFACE  Function
+(global $$initialized@methodreferences.MethodReferences.Function (mut i32) (i32.const 0))
+
+;;; void Function.$clinit()
+(func $$clinit__void@methodreferences.MethodReferences.Function
+ (block $return.label
+  (block
+   ;; if (methodreferences.MethodReferences.Function.$initialized) return;
+   (if (global.get $$initialized@methodreferences.MethodReferences.Function)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (methodreferences.MethodReferences.Function.$initialized = true);
+   (global.set $$initialized@methodreferences.MethodReferences.Function (i32.const 1))
+  )
+ )
+)
 
 ;;; INTERFACE  BiFunction
+(global $$initialized@methodreferences.MethodReferences.BiFunction (mut i32) (i32.const 0))
+
+;;; void BiFunction.$clinit()
+(func $$clinit__void@methodreferences.MethodReferences.BiFunction
+ (block $return.label
+  (block
+   ;; if (methodreferences.MethodReferences.BiFunction.$initialized) return;
+   (if (global.get $$initialized@methodreferences.MethodReferences.BiFunction)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (methodreferences.MethodReferences.BiFunction.$initialized = true);
+   (global.set $$initialized@methodreferences.MethodReferences.BiFunction (i32.const 1))
+  )
+ )
+)
 
 ;;; INTERFACE  JsProducer
+(global $$initialized@methodreferences.MethodReferences.JsProducer (mut i32) (i32.const 0))
+
+;;; void JsProducer.$clinit()
+(func $$clinit__void@methodreferences.MethodReferences.JsProducer
+ (block $return.label
+  (block
+   ;; if (methodreferences.MethodReferences.JsProducer.$initialized) return;
+   (if (global.get $$initialized@methodreferences.MethodReferences.JsProducer)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (methodreferences.MethodReferences.JsProducer.$initialized = true);
+   (global.set $$initialized@methodreferences.MethodReferences.JsProducer (i32.const 1))
+  )
+ )
+)
 
 ;;; INTERFACE  JsFunctionInterface
+(global $$initialized@methodreferences.MethodReferences.JsFunctionInterface (mut i32) (i32.const 0))
+
+;;; void JsFunctionInterface.$clinit()
+(func $$clinit__void@methodreferences.MethodReferences.JsFunctionInterface
+ (block $return.label
+  (block
+   ;; if (methodreferences.MethodReferences.JsFunctionInterface.$initialized) return;
+   (if (global.get $$initialized@methodreferences.MethodReferences.JsFunctionInterface)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (methodreferences.MethodReferences.JsFunctionInterface.$initialized = true);
+   (global.set $$initialized@methodreferences.MethodReferences.JsFunctionInterface (i32.const 1))
+  )
+ )
+)
 
 ;;; INTERFACE  JsBiFunction
+(global $$initialized@methodreferences.MethodReferences.JsBiFunction (mut i32) (i32.const 0))
+
+;;; void JsBiFunction.$clinit()
+(func $$clinit__void@methodreferences.MethodReferences.JsBiFunction
+ (block $return.label
+  (block
+   ;; if (methodreferences.MethodReferences.JsBiFunction.$initialized) return;
+   (if (global.get $$initialized@methodreferences.MethodReferences.JsBiFunction)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (methodreferences.MethodReferences.JsBiFunction.$initialized = true);
+   (global.set $$initialized@methodreferences.MethodReferences.JsBiFunction (i32.const 1))
+  )
+ )
+)
 
 ;;; Code for methodreferences.MethodReferences [vtable]
  (global.set $methodreferences.MethodReferences.vtable (struct.new_with_rtt $methodreferences.MethodReferences.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_isA__java_lang_Boolean@methodreferences.MethodReferences) (ref.func $m_self__java_lang_Object_$pp_methodreferences@methodreferences.MethodReferences) (ref.func $m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences@methodreferences.MethodReferences) (ref.func $m_main__void_$pp_methodreferences@methodreferences.MethodReferences) (rtt.canon $methodreferences.MethodReferences.vtable)))

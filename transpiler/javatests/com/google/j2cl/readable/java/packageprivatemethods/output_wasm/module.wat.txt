@@ -19,6 +19,7 @@
  (field $m_fun__int__int__int (mut (ref $function.$int__$int__$int)))
 ))
 (global $packageprivatemethods.package1.Child.vtable (mut (ref null $packageprivatemethods.package1.Child.vtable)) (ref.null $packageprivatemethods.package1.Child.vtable))
+(global $$initialized@packageprivatemethods.package1.Child (mut i32) (i32.const 0))
 
 ;;; Child()
 (func $m_<init>__void@packageprivatemethods.package1.Child
@@ -131,6 +132,25 @@
  (local.get $return.value)
 )
 (elem declare func $m_fun__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child)
+
+;;; void Child.$clinit()
+(func $$clinit__void@packageprivatemethods.package1.Child
+ (block $return.label
+  (block
+   ;; if (packageprivatemethods.package1.Child.$initialized) return;
+   (if (global.get $$initialized@packageprivatemethods.package1.Child)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (packageprivatemethods.package1.Child.$initialized = true);
+   (global.set $$initialized@packageprivatemethods.package1.Child (i32.const 1))
+   ;; packageprivatemethods.package1.Parent.$clinit();
+   (call $$clinit__void@packageprivatemethods.package1.Parent )
+  )
+ )
+)
 ;;; Code for packageprivatemethods.package1.Parent
 
 ;;; CLASS  Parent
@@ -150,6 +170,7 @@
  (field $m_bar__int__int__int__int (mut (ref $function.$int__$int__$int__$int)))
 ))
 (global $packageprivatemethods.package1.Parent.vtable (mut (ref null $packageprivatemethods.package1.Parent.vtable)) (ref.null $packageprivatemethods.package1.Parent.vtable))
+(global $$initialized@packageprivatemethods.package1.Parent (mut i32) (i32.const 0))
 
 ;;; Parent()
 (func $m_<init>__void@packageprivatemethods.package1.Parent
@@ -203,6 +224,25 @@
  (local.get $return.value)
 )
 (elem declare func $m_bar__int__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Parent)
+
+;;; void Parent.$clinit()
+(func $$clinit__void@packageprivatemethods.package1.Parent
+ (block $return.label
+  (block
+   ;; if (packageprivatemethods.package1.Parent.$initialized) return;
+   (if (global.get $$initialized@packageprivatemethods.package1.Parent)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (packageprivatemethods.package1.Parent.$initialized = true);
+   (global.set $$initialized@packageprivatemethods.package1.Parent (i32.const 1))
+   ;; packageprivatemethods.package1.SuperParent.$clinit();
+   (call $$clinit__void@packageprivatemethods.package1.SuperParent )
+  )
+ )
+)
 ;;; Code for packageprivatemethods.package1.SuperParent
 
 ;;; CLASS  SuperParent
@@ -221,6 +261,7 @@
  (field $m_bar__int__int__int__int_$pp_packageprivatemethods_package1 (mut (ref $function.$int__$int__$int__$int)))
 ))
 (global $packageprivatemethods.package1.SuperParent.vtable (mut (ref null $packageprivatemethods.package1.SuperParent.vtable)) (ref.null $packageprivatemethods.package1.SuperParent.vtable))
+(global $$initialized@packageprivatemethods.package1.SuperParent (mut i32) (i32.const 0))
 
 ;;; SuperParent()
 (func $m_<init>__void@packageprivatemethods.package1.SuperParent
@@ -294,6 +335,25 @@
  (local.get $return.value)
 )
 (elem declare func $m_bar__int__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.SuperParent)
+
+;;; void SuperParent.$clinit()
+(func $$clinit__void@packageprivatemethods.package1.SuperParent
+ (block $return.label
+  (block
+   ;; if (packageprivatemethods.package1.SuperParent.$initialized) return;
+   (if (global.get $$initialized@packageprivatemethods.package1.SuperParent)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (packageprivatemethods.package1.SuperParent.$initialized = true);
+   (global.set $$initialized@packageprivatemethods.package1.SuperParent (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
 ;;; Code for packageprivatemethods.package2.SubChild
 
 ;;; CLASS  SubChild
@@ -315,6 +375,7 @@
  (field $m_fun__int__int__int (mut (ref $function.$int__$int__$int)))
 ))
 (global $packageprivatemethods.package2.SubChild.vtable (mut (ref null $packageprivatemethods.package2.SubChild.vtable)) (ref.null $packageprivatemethods.package2.SubChild.vtable))
+(global $$initialized@packageprivatemethods.package2.SubChild (mut i32) (i32.const 0))
 
 ;;; SubChild()
 (func $m_<init>__void@packageprivatemethods.package2.SubChild
@@ -347,6 +408,25 @@
  (local.get $return.value)
 )
 (elem declare func $m_foo__int__int@packageprivatemethods.package2.SubChild)
+
+;;; void SubChild.$clinit()
+(func $$clinit__void@packageprivatemethods.package2.SubChild
+ (block $return.label
+  (block
+   ;; if (packageprivatemethods.package2.SubChild.$initialized) return;
+   (if (global.get $$initialized@packageprivatemethods.package2.SubChild)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (packageprivatemethods.package2.SubChild.$initialized = true);
+   (global.set $$initialized@packageprivatemethods.package2.SubChild (i32.const 1))
+   ;; packageprivatemethods.package1.Child.$clinit();
+   (call $$clinit__void@packageprivatemethods.package1.Child )
+  )
+ )
+)
 ;;; Code for packageprivatemethods.package2.SubParent
 
 ;;; CLASS  SubParent
@@ -367,6 +447,7 @@
  (field $m_foo__int__int_$pp_packageprivatemethods_package2 (mut (ref $function.$int__$int)))
 ))
 (global $packageprivatemethods.package2.SubParent.vtable (mut (ref null $packageprivatemethods.package2.SubParent.vtable)) (ref.null $packageprivatemethods.package2.SubParent.vtable))
+(global $$initialized@packageprivatemethods.package2.SubParent (mut i32) (i32.const 0))
 
 ;;; SubParent()
 (func $m_<init>__void@packageprivatemethods.package2.SubParent
@@ -399,6 +480,25 @@
  (local.get $return.value)
 )
 (elem declare func $m_foo__int__int_$pp_packageprivatemethods_package2@packageprivatemethods.package2.SubParent)
+
+;;; void SubParent.$clinit()
+(func $$clinit__void@packageprivatemethods.package2.SubParent
+ (block $return.label
+  (block
+   ;; if (packageprivatemethods.package2.SubParent.$initialized) return;
+   (if (global.get $$initialized@packageprivatemethods.package2.SubParent)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (packageprivatemethods.package2.SubParent.$initialized = true);
+   (global.set $$initialized@packageprivatemethods.package2.SubParent (i32.const 1))
+   ;; packageprivatemethods.package1.Parent.$clinit();
+   (call $$clinit__void@packageprivatemethods.package1.Parent )
+  )
+ )
+)
 
 ;;; Code for packageprivatemethods.package1.Child [vtable]
  (global.set $packageprivatemethods.package1.Child.vtable (struct.new_with_rtt $packageprivatemethods.package1.Child.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child) (ref.func $m_fun__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child) (ref.func $m_bar__int__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Parent) (ref.func $m_bar__int__int__int__int@packageprivatemethods.package1.Child) (ref.func $m_foo__int__int@packageprivatemethods.package1.Child) (ref.func $m_fun__int__int__int@packageprivatemethods.package1.Child) (rtt.canon $packageprivatemethods.package1.Child.vtable)))

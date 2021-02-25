@@ -1,10 +1,64 @@
 ;;; Code for interfacejsbridge.InterfaceImpl
 
 ;;; INTERFACE  MyJsInterface
+(global $$initialized@interfacejsbridge.MyJsInterface (mut i32) (i32.const 0))
+
+;;; void MyJsInterface.$clinit()
+(func $$clinit__void@interfacejsbridge.MyJsInterface
+ (block $return.label
+  (block
+   ;; if (interfacejsbridge.MyJsInterface.$initialized) return;
+   (if (global.get $$initialized@interfacejsbridge.MyJsInterface)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (interfacejsbridge.MyJsInterface.$initialized = true);
+   (global.set $$initialized@interfacejsbridge.MyJsInterface (i32.const 1))
+  )
+ )
+)
 
 ;;; INTERFACE  MyInterface
+(global $$initialized@interfacejsbridge.MyInterface (mut i32) (i32.const 0))
+
+;;; void MyInterface.$clinit()
+(func $$clinit__void@interfacejsbridge.MyInterface
+ (block $return.label
+  (block
+   ;; if (interfacejsbridge.MyInterface.$initialized) return;
+   (if (global.get $$initialized@interfacejsbridge.MyInterface)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (interfacejsbridge.MyInterface.$initialized = true);
+   (global.set $$initialized@interfacejsbridge.MyInterface (i32.const 1))
+  )
+ )
+)
 
 ;;; INTERFACE  SubInterface
+(global $$initialized@interfacejsbridge.SubInterface (mut i32) (i32.const 0))
+
+;;; void SubInterface.$clinit()
+(func $$clinit__void@interfacejsbridge.SubInterface
+ (block $return.label
+  (block
+   ;; if (interfacejsbridge.SubInterface.$initialized) return;
+   (if (global.get $$initialized@interfacejsbridge.SubInterface)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (interfacejsbridge.SubInterface.$initialized = true);
+   (global.set $$initialized@interfacejsbridge.SubInterface (i32.const 1))
+  )
+ )
+)
 
 ;;; CLASS  InterfaceImpl
 (type $interfacejsbridge.InterfaceImpl (struct
@@ -20,6 +74,7 @@
  (field $m_foo__int__int (mut (ref $function.$int__$int)))
 ))
 (global $interfacejsbridge.InterfaceImpl.vtable (mut (ref null $interfacejsbridge.InterfaceImpl.vtable)) (ref.null $interfacejsbridge.InterfaceImpl.vtable))
+(global $$initialized@interfacejsbridge.InterfaceImpl (mut i32) (i32.const 0))
 
 ;;; InterfaceImpl()
 (func $m_<init>__void@interfacejsbridge.InterfaceImpl
@@ -52,6 +107,25 @@
  (local.get $return.value)
 )
 (elem declare func $m_foo__int__int@interfacejsbridge.InterfaceImpl)
+
+;;; void InterfaceImpl.$clinit()
+(func $$clinit__void@interfacejsbridge.InterfaceImpl
+ (block $return.label
+  (block
+   ;; if (interfacejsbridge.InterfaceImpl.$initialized) return;
+   (if (global.get $$initialized@interfacejsbridge.InterfaceImpl)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (interfacejsbridge.InterfaceImpl.$initialized = true);
+   (global.set $$initialized@interfacejsbridge.InterfaceImpl (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
 ;;; Code for interfacejsbridge.Main
 
 ;;; CLASS  Main
@@ -68,6 +142,7 @@
  (field $m_test__void (mut (ref $function.__$void)))
 ))
 (global $interfacejsbridge.Main.vtable (mut (ref null $interfacejsbridge.Main.vtable)) (ref.null $interfacejsbridge.Main.vtable))
+(global $$initialized@interfacejsbridge.Main (mut i32) (i32.const 0))
 
 ;;; Main()
 (func $m_<init>__void@interfacejsbridge.Main
@@ -117,6 +192,25 @@
  )
 )
 (elem declare func $m_test__void@interfacejsbridge.Main)
+
+;;; void Main.$clinit()
+(func $$clinit__void@interfacejsbridge.Main
+ (block $return.label
+  (block
+   ;; if (interfacejsbridge.Main.$initialized) return;
+   (if (global.get $$initialized@interfacejsbridge.Main)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (interfacejsbridge.Main.$initialized = true);
+   (global.set $$initialized@interfacejsbridge.Main (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
 
 ;;; Code for interfacejsbridge.InterfaceImpl [vtable]
  (global.set $interfacejsbridge.InterfaceImpl.vtable (struct.new_with_rtt $interfacejsbridge.InterfaceImpl.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__int__int@interfacejsbridge.InterfaceImpl) (rtt.canon $interfacejsbridge.InterfaceImpl.vtable)))

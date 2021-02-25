@@ -14,6 +14,7 @@
  (field $m_test__void (mut (ref $function.__$void)))
 ))
 (global $jsbridgeaccidentaloverride.Main.vtable (mut (ref null $jsbridgeaccidentaloverride.Main.vtable)) (ref.null $jsbridgeaccidentaloverride.Main.vtable))
+(global $$initialized@jsbridgeaccidentaloverride.Main (mut i32) (i32.const 0))
 
 ;;; Main()
 (func $m_<init>__void@jsbridgeaccidentaloverride.Main
@@ -73,9 +74,46 @@
  )
 )
 (elem declare func $m_test__void@jsbridgeaccidentaloverride.Main)
+
+;;; void Main.$clinit()
+(func $$clinit__void@jsbridgeaccidentaloverride.Main
+ (block $return.label
+  (block
+   ;; if (jsbridgeaccidentaloverride.Main.$initialized) return;
+   (if (global.get $$initialized@jsbridgeaccidentaloverride.Main)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (jsbridgeaccidentaloverride.Main.$initialized = true);
+   (global.set $$initialized@jsbridgeaccidentaloverride.Main (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
 ;;; Code for jsbridgeaccidentaloverride.MyJsType
 
 ;;; INTERFACE  OtherInterface
+(global $$initialized@jsbridgeaccidentaloverride.OtherInterface (mut i32) (i32.const 0))
+
+;;; void OtherInterface.$clinit()
+(func $$clinit__void@jsbridgeaccidentaloverride.OtherInterface
+ (block $return.label
+  (block
+   ;; if (jsbridgeaccidentaloverride.OtherInterface.$initialized) return;
+   (if (global.get $$initialized@jsbridgeaccidentaloverride.OtherInterface)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (jsbridgeaccidentaloverride.OtherInterface.$initialized = true);
+   (global.set $$initialized@jsbridgeaccidentaloverride.OtherInterface (i32.const 1))
+  )
+ )
+)
 
 ;;; CLASS  MyJsType
 (type $jsbridgeaccidentaloverride.MyJsType (struct
@@ -93,6 +131,7 @@
  (field $m_fun__int__int (mut (ref $function.$int__$int)))
 ))
 (global $jsbridgeaccidentaloverride.MyJsType.vtable (mut (ref null $jsbridgeaccidentaloverride.MyJsType.vtable)) (ref.null $jsbridgeaccidentaloverride.MyJsType.vtable))
+(global $$initialized@jsbridgeaccidentaloverride.MyJsType (mut i32) (i32.const 0))
 
 ;;; MyJsType()
 (func $m_<init>__void_$pp_jsbridgeaccidentaloverride@jsbridgeaccidentaloverride.MyJsType
@@ -164,7 +203,44 @@
 )
 (elem declare func $m_fun__int__int@jsbridgeaccidentaloverride.MyJsType)
 
+;;; void MyJsType.$clinit()
+(func $$clinit__void@jsbridgeaccidentaloverride.MyJsType
+ (block $return.label
+  (block
+   ;; if (jsbridgeaccidentaloverride.MyJsType.$initialized) return;
+   (if (global.get $$initialized@jsbridgeaccidentaloverride.MyJsType)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (jsbridgeaccidentaloverride.MyJsType.$initialized = true);
+   (global.set $$initialized@jsbridgeaccidentaloverride.MyJsType (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; INTERFACE  MyInterface
+(global $$initialized@jsbridgeaccidentaloverride.MyInterface (mut i32) (i32.const 0))
+
+;;; void MyInterface.$clinit()
+(func $$clinit__void@jsbridgeaccidentaloverride.MyInterface
+ (block $return.label
+  (block
+   ;; if (jsbridgeaccidentaloverride.MyInterface.$initialized) return;
+   (if (global.get $$initialized@jsbridgeaccidentaloverride.MyInterface)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (jsbridgeaccidentaloverride.MyInterface.$initialized = true);
+   (global.set $$initialized@jsbridgeaccidentaloverride.MyInterface (i32.const 1))
+  )
+ )
+)
 
 ;;; CLASS  SubJsType
 (type $jsbridgeaccidentaloverride.SubJsType (struct
@@ -182,6 +258,7 @@
  (field $m_fun__int__int (mut (ref $function.$int__$int)))
 ))
 (global $jsbridgeaccidentaloverride.SubJsType.vtable (mut (ref null $jsbridgeaccidentaloverride.SubJsType.vtable)) (ref.null $jsbridgeaccidentaloverride.SubJsType.vtable))
+(global $$initialized@jsbridgeaccidentaloverride.SubJsType (mut i32) (i32.const 0))
 
 ;;; SubJsType()
 (func $m_<init>__void_$pp_jsbridgeaccidentaloverride@jsbridgeaccidentaloverride.SubJsType
@@ -214,6 +291,25 @@
  (local.get $return.value)
 )
 (elem declare func $m_bar__int__int@jsbridgeaccidentaloverride.SubJsType)
+
+;;; void SubJsType.$clinit()
+(func $$clinit__void@jsbridgeaccidentaloverride.SubJsType
+ (block $return.label
+  (block
+   ;; if (jsbridgeaccidentaloverride.SubJsType.$initialized) return;
+   (if (global.get $$initialized@jsbridgeaccidentaloverride.SubJsType)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (jsbridgeaccidentaloverride.SubJsType.$initialized = true);
+   (global.set $$initialized@jsbridgeaccidentaloverride.SubJsType (i32.const 1))
+   ;; jsbridgeaccidentaloverride.MyJsType.$clinit();
+   (call $$clinit__void@jsbridgeaccidentaloverride.MyJsType )
+  )
+ )
+)
 
 ;;; Code for jsbridgeaccidentaloverride.Main [vtable]
  (global.set $jsbridgeaccidentaloverride.Main.vtable (struct.new_with_rtt $jsbridgeaccidentaloverride.Main.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__void@jsbridgeaccidentaloverride.Main) (rtt.canon $jsbridgeaccidentaloverride.Main.vtable)))

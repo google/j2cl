@@ -14,6 +14,7 @@
  (field $m_test__void (mut (ref $function.__$void)))
 ))
 (global $localclassinheritance.LocalClassInheritance.vtable (mut (ref null $localclassinheritance.LocalClassInheritance.vtable)) (ref.null $localclassinheritance.LocalClassInheritance.vtable))
+(global $$initialized@localclassinheritance.LocalClassInheritance (mut i32) (i32.const 0))
 
 ;;; LocalClassInheritance()
 (func $m_<init>__void@localclassinheritance.LocalClassInheritance
@@ -44,6 +45,25 @@
 )
 (elem declare func $m_test__void@localclassinheritance.LocalClassInheritance)
 
+;;; void LocalClassInheritance.$clinit()
+(func $$clinit__void@localclassinheritance.LocalClassInheritance
+ (block $return.label
+  (block
+   ;; if (localclassinheritance.LocalClassInheritance.$initialized) return;
+   (if (global.get $$initialized@localclassinheritance.LocalClassInheritance)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (localclassinheritance.LocalClassInheritance.$initialized = true);
+   (global.set $$initialized@localclassinheritance.LocalClassInheritance (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; CLASS  Parent
 (type $localclassinheritance.LocalClassInheritance.1Parent (struct
  (field $vtable (ref null $localclassinheritance.LocalClassInheritance.1Parent.vtable))
@@ -60,6 +80,7 @@
  (field $m_n__void (mut (ref $function.__$void)))
 ))
 (global $localclassinheritance.LocalClassInheritance.1Parent.vtable (mut (ref null $localclassinheritance.LocalClassInheritance.1Parent.vtable)) (ref.null $localclassinheritance.LocalClassInheritance.1Parent.vtable))
+(global $$initialized@localclassinheritance.LocalClassInheritance.1Parent (mut i32) (i32.const 0))
 
 ;;; Parent(LocalClassInheritance $outer_this, int $captured_f)
 (func $m_<init>__localclassinheritance_LocalClassInheritance__int__void_$pp_localclassinheritance@localclassinheritance.LocalClassInheritance.1Parent
@@ -96,6 +117,25 @@
 )
 (elem declare func $m_n__void@localclassinheritance.LocalClassInheritance.1Parent)
 
+;;; void Parent.$clinit()
+(func $$clinit__void@localclassinheritance.LocalClassInheritance.1Parent
+ (block $return.label
+  (block
+   ;; if (localclassinheritance.LocalClassInheritance.1Parent.$initialized) return;
+   (if (global.get $$initialized@localclassinheritance.LocalClassInheritance.1Parent)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (localclassinheritance.LocalClassInheritance.1Parent.$initialized = true);
+   (global.set $$initialized@localclassinheritance.LocalClassInheritance.1Parent (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; CLASS  Child
 (type $localclassinheritance.LocalClassInheritance.1Child (struct
  (field $vtable (ref null $localclassinheritance.LocalClassInheritance.1Child.vtable))
@@ -114,6 +154,7 @@
  (field $m_n__void (mut (ref $function.__$void)))
 ))
 (global $localclassinheritance.LocalClassInheritance.1Child.vtable (mut (ref null $localclassinheritance.LocalClassInheritance.1Child.vtable)) (ref.null $localclassinheritance.LocalClassInheritance.1Child.vtable))
+(global $$initialized@localclassinheritance.LocalClassInheritance.1Child (mut i32) (i32.const 0))
 
 ;;; Child(LocalClassInheritance $outer_this, int $captured_f)
 (func $m_<init>__localclassinheritance_LocalClassInheritance__int__void_$pp_localclassinheritance@localclassinheritance.LocalClassInheritance.1Child
@@ -149,6 +190,25 @@
  )
 )
 (elem declare func $m_n__void@localclassinheritance.LocalClassInheritance.1Child)
+
+;;; void Child.$clinit()
+(func $$clinit__void@localclassinheritance.LocalClassInheritance.1Child
+ (block $return.label
+  (block
+   ;; if (localclassinheritance.LocalClassInheritance.1Child.$initialized) return;
+   (if (global.get $$initialized@localclassinheritance.LocalClassInheritance.1Child)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (localclassinheritance.LocalClassInheritance.1Child.$initialized = true);
+   (global.set $$initialized@localclassinheritance.LocalClassInheritance.1Child (i32.const 1))
+   ;; localclassinheritance.LocalClassInheritance.1Parent.$clinit();
+   (call $$clinit__void@localclassinheritance.LocalClassInheritance.1Parent )
+  )
+ )
+)
 
 ;;; Code for localclassinheritance.LocalClassInheritance [vtable]
  (global.set $localclassinheritance.LocalClassInheritance.vtable (struct.new_with_rtt $localclassinheritance.LocalClassInheritance.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__void@localclassinheritance.LocalClassInheritance) (rtt.canon $localclassinheritance.LocalClassInheritance.vtable)))

@@ -13,6 +13,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $abstractmethodoverridedefault.AbstractMethodOverrideDefault.vtable (mut (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.vtable)) (ref.null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.vtable))
+(global $$initialized@abstractmethodoverridedefault.AbstractMethodOverrideDefault (mut i32) (i32.const 0))
 
 ;;; AbstractMethodOverrideDefault()
 (func $m_<init>__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault
@@ -27,7 +28,27 @@
  (local.get $this)
 )
 
+;;; void AbstractMethodOverrideDefault.$clinit()
+(func $$clinit__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault
+ (block $return.label
+  (block
+   ;; if (abstractmethodoverridedefault.AbstractMethodOverrideDefault.$initialized) return;
+   (if (global.get $$initialized@abstractmethodoverridedefault.AbstractMethodOverrideDefault)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (abstractmethodoverridedefault.AbstractMethodOverrideDefault.$initialized = true);
+   (global.set $$initialized@abstractmethodoverridedefault.AbstractMethodOverrideDefault (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; INTERFACE  I
+(global $$initialized@abstractmethodoverridedefault.AbstractMethodOverrideDefault.I (mut i32) (i32.const 0))
 
 ;;; void I.bar()
 (func $m_bar__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.I
@@ -39,7 +60,25 @@
 )
 (elem declare func $m_bar__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.I)
 
+;;; void I.$clinit()
+(func $$clinit__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.I
+ (block $return.label
+  (block
+   ;; if (abstractmethodoverridedefault.AbstractMethodOverrideDefault.I.$initialized) return;
+   (if (global.get $$initialized@abstractmethodoverridedefault.AbstractMethodOverrideDefault.I)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (abstractmethodoverridedefault.AbstractMethodOverrideDefault.I.$initialized = true);
+   (global.set $$initialized@abstractmethodoverridedefault.AbstractMethodOverrideDefault.I (i32.const 1))
+  )
+ )
+)
+
 ;;; INTERFACE  J
+(global $$initialized@abstractmethodoverridedefault.AbstractMethodOverrideDefault.J (mut i32) (i32.const 0))
 
 ;;; void J.foo()
 (func $m_foo__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.J
@@ -50,6 +89,23 @@
  )
 )
 (elem declare func $m_foo__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.J)
+
+;;; void J.$clinit()
+(func $$clinit__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.J
+ (block $return.label
+  (block
+   ;; if (abstractmethodoverridedefault.AbstractMethodOverrideDefault.J.$initialized) return;
+   (if (global.get $$initialized@abstractmethodoverridedefault.AbstractMethodOverrideDefault.J)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (abstractmethodoverridedefault.AbstractMethodOverrideDefault.J.$initialized = true);
+   (global.set $$initialized@abstractmethodoverridedefault.AbstractMethodOverrideDefault.J (i32.const 1))
+  )
+ )
+)
 
 ;;; CLASS  A
 (type $abstractmethodoverridedefault.AbstractMethodOverrideDefault.A (struct
@@ -66,6 +122,7 @@
  (field $m_bar__void (mut (ref $function.__$void)))
 ))
 (global $abstractmethodoverridedefault.AbstractMethodOverrideDefault.A.vtable (mut (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.A.vtable)) (ref.null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.A.vtable))
+(global $$initialized@abstractmethodoverridedefault.AbstractMethodOverrideDefault.A (mut i32) (i32.const 0))
 
 ;;; A()
 (func $m_<init>__void_$pp_abstractmethodoverridedefault@abstractmethodoverridedefault.AbstractMethodOverrideDefault.A
@@ -94,6 +151,27 @@
 )
 (elem declare func $m_bar__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.A)
 
+;;; void A.$clinit()
+(func $$clinit__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.A
+ (block $return.label
+  (block
+   ;; if (abstractmethodoverridedefault.AbstractMethodOverrideDefault.A.$initialized) return;
+   (if (global.get $$initialized@abstractmethodoverridedefault.AbstractMethodOverrideDefault.A)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (abstractmethodoverridedefault.AbstractMethodOverrideDefault.A.$initialized = true);
+   (global.set $$initialized@abstractmethodoverridedefault.AbstractMethodOverrideDefault.A (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+   ;; abstractmethodoverridedefault.AbstractMethodOverrideDefault.I.$clinit();
+   (call $$clinit__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.I )
+  )
+ )
+)
+
 ;;; CLASS  B
 (type $abstractmethodoverridedefault.AbstractMethodOverrideDefault.B (struct
  (field $vtable (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.B.vtable))
@@ -109,6 +187,7 @@
  (field $m_bar__void (mut (ref $function.__$void)))
 ))
 (global $abstractmethodoverridedefault.AbstractMethodOverrideDefault.B.vtable (mut (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.B.vtable)) (ref.null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.B.vtable))
+(global $$initialized@abstractmethodoverridedefault.AbstractMethodOverrideDefault.B (mut i32) (i32.const 0))
 
 ;;; B()
 (func $m_<init>__void_$pp_abstractmethodoverridedefault@abstractmethodoverridedefault.AbstractMethodOverrideDefault.B
@@ -144,6 +223,27 @@
 )
 (elem declare func $m_bar__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.B)
 
+;;; void B.$clinit()
+(func $$clinit__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.B
+ (block $return.label
+  (block
+   ;; if (abstractmethodoverridedefault.AbstractMethodOverrideDefault.B.$initialized) return;
+   (if (global.get $$initialized@abstractmethodoverridedefault.AbstractMethodOverrideDefault.B)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (abstractmethodoverridedefault.AbstractMethodOverrideDefault.B.$initialized = true);
+   (global.set $$initialized@abstractmethodoverridedefault.AbstractMethodOverrideDefault.B (i32.const 1))
+   ;; abstractmethodoverridedefault.AbstractMethodOverrideDefault.A.$clinit();
+   (call $$clinit__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.A )
+   ;; abstractmethodoverridedefault.AbstractMethodOverrideDefault.J.$clinit();
+   (call $$clinit__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.J )
+  )
+ )
+)
+
 ;;; CLASS  C
 (type $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C (struct
  (field $vtable (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.vtable))
@@ -159,6 +259,7 @@
  (field $m_bar__void (mut (ref $function.__$void)))
 ))
 (global $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.vtable (mut (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.vtable)) (ref.null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.vtable))
+(global $$initialized@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C (mut i32) (i32.const 0))
 
 ;;; C()
 (func $m_<init>__void_$pp_abstractmethodoverridedefault@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C
@@ -198,6 +299,25 @@
  )
 )
 (elem declare func $m_bar__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C)
+
+;;; void C.$clinit()
+(func $$clinit__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C
+ (block $return.label
+  (block
+   ;; if (abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.$initialized) return;
+   (if (global.get $$initialized@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.$initialized = true);
+   (global.set $$initialized@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C (i32.const 1))
+   ;; abstractmethodoverridedefault.AbstractMethodOverrideDefault.A.$clinit();
+   (call $$clinit__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.A )
+  )
+ )
+)
 
 ;;; Code for abstractmethodoverridedefault.AbstractMethodOverrideDefault [vtable]
  (global.set $abstractmethodoverridedefault.AbstractMethodOverrideDefault.vtable (struct.new_with_rtt $abstractmethodoverridedefault.AbstractMethodOverrideDefault.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $abstractmethodoverridedefault.AbstractMethodOverrideDefault.vtable)))

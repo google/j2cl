@@ -13,6 +13,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $newinnerclasswithsameouter.NewInnerClassWithSameOuter.vtable (mut (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter.vtable)) (ref.null $newinnerclasswithsameouter.NewInnerClassWithSameOuter.vtable))
+(global $$initialized@newinnerclasswithsameouter.NewInnerClassWithSameOuter (mut i32) (i32.const 0))
 
 ;;; NewInnerClassWithSameOuter()
 (func $m_<init>__void@newinnerclasswithsameouter.NewInnerClassWithSameOuter
@@ -25,6 +26,25 @@
   )
  )
  (local.get $this)
+)
+
+;;; void NewInnerClassWithSameOuter.$clinit()
+(func $$clinit__void@newinnerclasswithsameouter.NewInnerClassWithSameOuter
+ (block $return.label
+  (block
+   ;; if (newinnerclasswithsameouter.NewInnerClassWithSameOuter.$initialized) return;
+   (if (global.get $$initialized@newinnerclasswithsameouter.NewInnerClassWithSameOuter)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (newinnerclasswithsameouter.NewInnerClassWithSameOuter.$initialized = true);
+   (global.set $$initialized@newinnerclasswithsameouter.NewInnerClassWithSameOuter (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
 )
 
 ;;; CLASS  A
@@ -42,6 +62,7 @@
  (field $m_test__void (mut (ref $function.__$void)))
 ))
 (global $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A.vtable (mut (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A.vtable)) (ref.null $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A.vtable))
+(global $$initialized@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A (mut i32) (i32.const 0))
 
 ;;; A(NewInnerClassWithSameOuter $outer_this)
 (func $m_<init>__newinnerclasswithsameouter_NewInnerClassWithSameOuter__void@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A
@@ -75,6 +96,25 @@
 )
 (elem declare func $m_test__void@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A)
 
+;;; void A.$clinit()
+(func $$clinit__void@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A
+ (block $return.label
+  (block
+   ;; if (newinnerclasswithsameouter.NewInnerClassWithSameOuter.A.$initialized) return;
+   (if (global.get $$initialized@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (newinnerclasswithsameouter.NewInnerClassWithSameOuter.A.$initialized = true);
+   (global.set $$initialized@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; CLASS  B
 (type $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B (struct
  (field $vtable (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B.vtable))
@@ -89,6 +129,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B.vtable (mut (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B.vtable)) (ref.null $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B.vtable))
+(global $$initialized@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B (mut i32) (i32.const 0))
 
 ;;; B(NewInnerClassWithSameOuter $outer_this)
 (func $m_<init>__newinnerclasswithsameouter_NewInnerClassWithSameOuter__void@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B
@@ -106,6 +147,25 @@
  (local.get $this)
 )
 
+;;; void B.$clinit()
+(func $$clinit__void@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B
+ (block $return.label
+  (block
+   ;; if (newinnerclasswithsameouter.NewInnerClassWithSameOuter.B.$initialized) return;
+   (if (global.get $$initialized@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (newinnerclasswithsameouter.NewInnerClassWithSameOuter.B.$initialized = true);
+   (global.set $$initialized@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; CLASS  C
 (type $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C (struct
  (field $vtable (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C.vtable))
@@ -120,6 +180,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C.vtable (mut (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C.vtable)) (ref.null $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C.vtable))
+(global $$initialized@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C (mut i32) (i32.const 0))
 
 ;;; C(NewInnerClassWithSameOuter $outer_this)
 (func $m_<init>__newinnerclasswithsameouter_NewInnerClassWithSameOuter__void_$p_newinnerclasswithsameouter_NewInnerClassWithSameOuter_C@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C
@@ -135,6 +196,25 @@
   )
  )
  (local.get $this)
+)
+
+;;; void C.$clinit()
+(func $$clinit__void@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C
+ (block $return.label
+  (block
+   ;; if (newinnerclasswithsameouter.NewInnerClassWithSameOuter.C.$initialized) return;
+   (if (global.get $$initialized@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (newinnerclasswithsameouter.NewInnerClassWithSameOuter.C.$initialized = true);
+   (global.set $$initialized@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
 )
 
 ;;; Code for newinnerclasswithsameouter.NewInnerClassWithSameOuter [vtable]

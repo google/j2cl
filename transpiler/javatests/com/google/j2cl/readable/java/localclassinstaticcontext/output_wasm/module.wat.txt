@@ -14,6 +14,7 @@
 ))
 (global $localclassinstaticcontext.LocalClassInStaticContext.vtable (mut (ref null $localclassinstaticcontext.LocalClassInStaticContext.vtable)) (ref.null $localclassinstaticcontext.LocalClassInStaticContext.vtable))
 (global $f@localclassinstaticcontext.LocalClassInStaticContext (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
+(global $$initialized@localclassinstaticcontext.LocalClassInStaticContext (mut i32) (i32.const 0))
 
 ;;; LocalClassInStaticContext()
 (func $m_<init>__void@localclassinstaticcontext.LocalClassInStaticContext
@@ -33,11 +34,44 @@
  (local $a (ref null $java.lang.Object))
  (block $return.label
   (block
+   ;; localclassinstaticcontext.LocalClassInStaticContext.$clinit();
+   (call $$clinit__void@localclassinstaticcontext.LocalClassInStaticContext )
    ;; new $1A.<init>();
    (drop (call $m_<init>__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.1A (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.1A (global.get $localclassinstaticcontext.LocalClassInStaticContext.1A.vtable) (i32.const 0) (global.get $localclassinstaticcontext.LocalClassInStaticContext.1A.rtt))))
    ;; Object a = new $3.<init>();
    
    (local.set $a (call $m_<init>__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.3 (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.3 (global.get $localclassinstaticcontext.LocalClassInStaticContext.3.vtable) (i32.const 0) (global.get $localclassinstaticcontext.LocalClassInStaticContext.3.rtt))))
+  )
+ )
+)
+
+;;; void LocalClassInStaticContext.$clinit()
+(func $$clinit__void@localclassinstaticcontext.LocalClassInStaticContext
+ (local $b (ref null $java.lang.Object))
+ (block $return.label
+  (block
+   ;; if (localclassinstaticcontext.LocalClassInStaticContext.$initialized) return;
+   (if (global.get $$initialized@localclassinstaticcontext.LocalClassInStaticContext)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (localclassinstaticcontext.LocalClassInStaticContext.$initialized = true);
+   (global.set $$initialized@localclassinstaticcontext.LocalClassInStaticContext (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+   (block
+    ;; localclassinstaticcontext.LocalClassInStaticContext.$clinit();
+    (call $$clinit__void@localclassinstaticcontext.LocalClassInStaticContext )
+    ;; (localclassinstaticcontext.LocalClassInStaticContext.f = new $1.<init>());
+    (global.set $f@localclassinstaticcontext.LocalClassInStaticContext (call $m_<init>__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.1 (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.1 (global.get $localclassinstaticcontext.LocalClassInStaticContext.1.vtable) (i32.const 0) (global.get $localclassinstaticcontext.LocalClassInStaticContext.1.rtt))))
+   )
+   ;; new $1B.<init>();
+   (drop (call $m_<init>__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.1B (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.1B (global.get $localclassinstaticcontext.LocalClassInStaticContext.1B.vtable) (i32.const 0) (global.get $localclassinstaticcontext.LocalClassInStaticContext.1B.rtt))))
+   ;; Object b = new $2.<init>();
+   
+   (local.set $b (call $m_<init>__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.2 (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.2 (global.get $localclassinstaticcontext.LocalClassInStaticContext.2.vtable) (i32.const 0) (global.get $localclassinstaticcontext.LocalClassInStaticContext.2.rtt))))
   )
  )
 )
@@ -55,6 +89,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $localclassinstaticcontext.LocalClassInStaticContext.1.vtable (mut (ref null $localclassinstaticcontext.LocalClassInStaticContext.1.vtable)) (ref.null $localclassinstaticcontext.LocalClassInStaticContext.1.vtable))
+(global $$initialized@localclassinstaticcontext.LocalClassInStaticContext.1 (mut i32) (i32.const 0))
 
 ;;; <anonymous> extends Object()
 (func $m_<init>__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.1
@@ -67,6 +102,25 @@
   )
  )
  (local.get $this)
+)
+
+;;; void <anonymous> extends Object.$clinit()
+(func $$clinit__void@localclassinstaticcontext.LocalClassInStaticContext.1
+ (block $return.label
+  (block
+   ;; if (localclassinstaticcontext.LocalClassInStaticContext.1.$initialized) return;
+   (if (global.get $$initialized@localclassinstaticcontext.LocalClassInStaticContext.1)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (localclassinstaticcontext.LocalClassInStaticContext.1.$initialized = true);
+   (global.set $$initialized@localclassinstaticcontext.LocalClassInStaticContext.1 (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
 )
 
 ;;; CLASS  A
@@ -82,6 +136,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $localclassinstaticcontext.LocalClassInStaticContext.1A.vtable (mut (ref null $localclassinstaticcontext.LocalClassInStaticContext.1A.vtable)) (ref.null $localclassinstaticcontext.LocalClassInStaticContext.1A.vtable))
+(global $$initialized@localclassinstaticcontext.LocalClassInStaticContext.1A (mut i32) (i32.const 0))
 
 ;;; A()
 (func $m_<init>__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.1A
@@ -94,6 +149,25 @@
   )
  )
  (local.get $this)
+)
+
+;;; void A.$clinit()
+(func $$clinit__void@localclassinstaticcontext.LocalClassInStaticContext.1A
+ (block $return.label
+  (block
+   ;; if (localclassinstaticcontext.LocalClassInStaticContext.1A.$initialized) return;
+   (if (global.get $$initialized@localclassinstaticcontext.LocalClassInStaticContext.1A)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (localclassinstaticcontext.LocalClassInStaticContext.1A.$initialized = true);
+   (global.set $$initialized@localclassinstaticcontext.LocalClassInStaticContext.1A (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
 )
 
 ;;; CLASS  <anonymous> extends Object
@@ -110,6 +184,7 @@
  (field $m_m__void_$pp_localclassinstaticcontext (mut (ref $function.__$void)))
 ))
 (global $localclassinstaticcontext.LocalClassInStaticContext.3.vtable (mut (ref null $localclassinstaticcontext.LocalClassInStaticContext.3.vtable)) (ref.null $localclassinstaticcontext.LocalClassInStaticContext.3.vtable))
+(global $$initialized@localclassinstaticcontext.LocalClassInStaticContext.3 (mut i32) (i32.const 0))
 
 ;;; <anonymous> extends Object()
 (func $m_<init>__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.3
@@ -138,6 +213,25 @@
 )
 (elem declare func $m_m__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.3)
 
+;;; void <anonymous> extends Object.$clinit()
+(func $$clinit__void@localclassinstaticcontext.LocalClassInStaticContext.3
+ (block $return.label
+  (block
+   ;; if (localclassinstaticcontext.LocalClassInStaticContext.3.$initialized) return;
+   (if (global.get $$initialized@localclassinstaticcontext.LocalClassInStaticContext.3)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (localclassinstaticcontext.LocalClassInStaticContext.3.$initialized = true);
+   (global.set $$initialized@localclassinstaticcontext.LocalClassInStaticContext.3 (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; CLASS  B
 (type $localclassinstaticcontext.LocalClassInStaticContext.1B (struct
  (field $vtable (ref null $localclassinstaticcontext.LocalClassInStaticContext.1B.vtable))
@@ -151,6 +245,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $localclassinstaticcontext.LocalClassInStaticContext.1B.vtable (mut (ref null $localclassinstaticcontext.LocalClassInStaticContext.1B.vtable)) (ref.null $localclassinstaticcontext.LocalClassInStaticContext.1B.vtable))
+(global $$initialized@localclassinstaticcontext.LocalClassInStaticContext.1B (mut i32) (i32.const 0))
 
 ;;; B()
 (func $m_<init>__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.1B
@@ -163,6 +258,25 @@
   )
  )
  (local.get $this)
+)
+
+;;; void B.$clinit()
+(func $$clinit__void@localclassinstaticcontext.LocalClassInStaticContext.1B
+ (block $return.label
+  (block
+   ;; if (localclassinstaticcontext.LocalClassInStaticContext.1B.$initialized) return;
+   (if (global.get $$initialized@localclassinstaticcontext.LocalClassInStaticContext.1B)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (localclassinstaticcontext.LocalClassInStaticContext.1B.$initialized = true);
+   (global.set $$initialized@localclassinstaticcontext.LocalClassInStaticContext.1B (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
 )
 
 ;;; CLASS  <anonymous> extends Object
@@ -178,6 +292,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $localclassinstaticcontext.LocalClassInStaticContext.2.vtable (mut (ref null $localclassinstaticcontext.LocalClassInStaticContext.2.vtable)) (ref.null $localclassinstaticcontext.LocalClassInStaticContext.2.vtable))
+(global $$initialized@localclassinstaticcontext.LocalClassInStaticContext.2 (mut i32) (i32.const 0))
 
 ;;; <anonymous> extends Object()
 (func $m_<init>__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.2
@@ -190,6 +305,25 @@
   )
  )
  (local.get $this)
+)
+
+;;; void <anonymous> extends Object.$clinit()
+(func $$clinit__void@localclassinstaticcontext.LocalClassInStaticContext.2
+ (block $return.label
+  (block
+   ;; if (localclassinstaticcontext.LocalClassInStaticContext.2.$initialized) return;
+   (if (global.get $$initialized@localclassinstaticcontext.LocalClassInStaticContext.2)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (localclassinstaticcontext.LocalClassInStaticContext.2.$initialized = true);
+   (global.set $$initialized@localclassinstaticcontext.LocalClassInStaticContext.2 (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
 )
 
 ;;; CLASS  C
@@ -207,6 +341,7 @@
  (field $m_test__void (mut (ref $function.__$void)))
 ))
 (global $localclassinstaticcontext.LocalClassInStaticContext.C.vtable (mut (ref null $localclassinstaticcontext.LocalClassInStaticContext.C.vtable)) (ref.null $localclassinstaticcontext.LocalClassInStaticContext.C.vtable))
+(global $$initialized@localclassinstaticcontext.LocalClassInStaticContext.C (mut i32) (i32.const 0))
 
 ;;; C()
 (func $m_<init>__void@localclassinstaticcontext.LocalClassInStaticContext.C
@@ -254,6 +389,25 @@
  )
 )
 
+;;; void C.$clinit()
+(func $$clinit__void@localclassinstaticcontext.LocalClassInStaticContext.C
+ (block $return.label
+  (block
+   ;; if (localclassinstaticcontext.LocalClassInStaticContext.C.$initialized) return;
+   (if (global.get $$initialized@localclassinstaticcontext.LocalClassInStaticContext.C)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (localclassinstaticcontext.LocalClassInStaticContext.C.$initialized = true);
+   (global.set $$initialized@localclassinstaticcontext.LocalClassInStaticContext.C (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; CLASS  D
 (type $localclassinstaticcontext.LocalClassInStaticContext.C.1D (struct
  (field $vtable (ref null $localclassinstaticcontext.LocalClassInStaticContext.C.1D.vtable))
@@ -269,6 +423,7 @@
  (field $m_fun__int (mut (ref $function.__$int)))
 ))
 (global $localclassinstaticcontext.LocalClassInStaticContext.C.1D.vtable (mut (ref null $localclassinstaticcontext.LocalClassInStaticContext.C.1D.vtable)) (ref.null $localclassinstaticcontext.LocalClassInStaticContext.C.1D.vtable))
+(global $$initialized@localclassinstaticcontext.LocalClassInStaticContext.C.1D (mut i32) (i32.const 0))
 
 ;;; D(C $outer_this)
 (func $m_<init>__localclassinstaticcontext_LocalClassInStaticContext_C__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.C.1D
@@ -303,6 +458,25 @@
  (local.get $return.value)
 )
 (elem declare func $m_fun__int@localclassinstaticcontext.LocalClassInStaticContext.C.1D)
+
+;;; void D.$clinit()
+(func $$clinit__void@localclassinstaticcontext.LocalClassInStaticContext.C.1D
+ (block $return.label
+  (block
+   ;; if (localclassinstaticcontext.LocalClassInStaticContext.C.1D.$initialized) return;
+   (if (global.get $$initialized@localclassinstaticcontext.LocalClassInStaticContext.C.1D)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (localclassinstaticcontext.LocalClassInStaticContext.C.1D.$initialized = true);
+   (global.set $$initialized@localclassinstaticcontext.LocalClassInStaticContext.C.1D (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
 
 ;;; Code for localclassinstaticcontext.LocalClassInStaticContext [vtable]
  (global.set $localclassinstaticcontext.LocalClassInStaticContext.vtable (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $localclassinstaticcontext.LocalClassInStaticContext.vtable)))

@@ -18,6 +18,7 @@
  (field $m_main__void (mut (ref $function.__$void)))
 ))
 (global $simplelongs.SimpleLongs.vtable (mut (ref null $simplelongs.SimpleLongs.vtable)) (ref.null $simplelongs.SimpleLongs.vtable))
+(global $$initialized@simplelongs.SimpleLongs (mut i32) (i32.const 0))
 
 ;;; SimpleLongs()
 (func $m_<init>__void@simplelongs.SimpleLongs
@@ -181,6 +182,25 @@
   (block
    ;; (SimpleLongs.this.foo = 0);
    (struct.set $simplelongs.SimpleLongs $foo@simplelongs.SimpleLongs(local.get $this) (i64.const 0))
+  )
+ )
+)
+
+;;; void SimpleLongs.$clinit()
+(func $$clinit__void@simplelongs.SimpleLongs
+ (block $return.label
+  (block
+   ;; if (simplelongs.SimpleLongs.$initialized) return;
+   (if (global.get $$initialized@simplelongs.SimpleLongs)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (simplelongs.SimpleLongs.$initialized = true);
+   (global.set $$initialized@simplelongs.SimpleLongs (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
   )
  )
 )

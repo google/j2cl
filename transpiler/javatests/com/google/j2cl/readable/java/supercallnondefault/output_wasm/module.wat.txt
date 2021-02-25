@@ -14,6 +14,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $supercallnondefault.Parent.vtable (mut (ref null $supercallnondefault.Parent.vtable)) (ref.null $supercallnondefault.Parent.vtable))
+(global $$initialized@supercallnondefault.Parent (mut i32) (i32.const 0))
 
 ;;; Parent(int f)
 (func $m_<init>__int__void@supercallnondefault.Parent
@@ -31,6 +32,25 @@
  (local.get $this)
 )
 
+;;; void Parent.$clinit()
+(func $$clinit__void@supercallnondefault.Parent
+ (block $return.label
+  (block
+   ;; if (supercallnondefault.Parent.$initialized) return;
+   (if (global.get $$initialized@supercallnondefault.Parent)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (supercallnondefault.Parent.$initialized = true);
+   (global.set $$initialized@supercallnondefault.Parent (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; CLASS  Child
 (type $supercallnondefault.Child (struct
  (field $vtable (ref null $supercallnondefault.Child.vtable))
@@ -45,6 +65,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $supercallnondefault.Child.vtable (mut (ref null $supercallnondefault.Child.vtable)) (ref.null $supercallnondefault.Child.vtable))
+(global $$initialized@supercallnondefault.Child (mut i32) (i32.const 0))
 
 ;;; Child(int a)
 (func $m_<init>__int__void@supercallnondefault.Child
@@ -58,6 +79,25 @@
   )
  )
  (local.get $this)
+)
+
+;;; void Child.$clinit()
+(func $$clinit__void@supercallnondefault.Child
+ (block $return.label
+  (block
+   ;; if (supercallnondefault.Child.$initialized) return;
+   (if (global.get $$initialized@supercallnondefault.Child)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (supercallnondefault.Child.$initialized = true);
+   (global.set $$initialized@supercallnondefault.Child (i32.const 1))
+   ;; supercallnondefault.Parent.$clinit();
+   (call $$clinit__void@supercallnondefault.Parent )
+  )
+ )
 )
 
 ;;; Code for supercallnondefault.Parent [vtable]

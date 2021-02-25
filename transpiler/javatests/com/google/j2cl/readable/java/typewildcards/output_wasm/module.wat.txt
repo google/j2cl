@@ -13,6 +13,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $typewildcards.GenericType.vtable (mut (ref null $typewildcards.GenericType.vtable)) (ref.null $typewildcards.GenericType.vtable))
+(global $$initialized@typewildcards.GenericType (mut i32) (i32.const 0))
 
 ;;; GenericType()
 (func $m_<init>__void_$pp_typewildcards@typewildcards.GenericType
@@ -25,6 +26,25 @@
   )
  )
  (local.get $this)
+)
+
+;;; void GenericType.$clinit()
+(func $$clinit__void@typewildcards.GenericType
+ (block $return.label
+  (block
+   ;; if (typewildcards.GenericType.$initialized) return;
+   (if (global.get $$initialized@typewildcards.GenericType)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (typewildcards.GenericType.$initialized = true);
+   (global.set $$initialized@typewildcards.GenericType (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
 )
 
 ;;; CLASS  TypeWildCards
@@ -46,6 +66,7 @@
  (field $m_testRecursiveGeneric__void (mut (ref $function.__$void)))
 ))
 (global $typewildcards.TypeWildCards.vtable (mut (ref null $typewildcards.TypeWildCards.vtable)) (ref.null $typewildcards.TypeWildCards.vtable))
+(global $$initialized@typewildcards.TypeWildCards (mut i32) (i32.const 0))
 
 ;;; TypeWildCards()
 (func $m_<init>__void@typewildcards.TypeWildCards
@@ -123,6 +144,8 @@
  (local $i i32)
  (block $return.label
   (block
+   ;; typewildcards.TypeWildCards.$clinit();
+   (call $$clinit__void@typewildcards.TypeWildCards )
    ;; int i = t.f;
    
    (local.set $i (struct.get $typewildcards.TypeWildCards.A $f@typewildcards.TypeWildCards.A(local.get $t)))
@@ -139,6 +162,8 @@
  (local $$qualifier (ref null $java.lang.Object))
  (block $return.label
   (block
+   ;; typewildcards.TypeWildCards.$clinit();
+   (call $$clinit__void@typewildcards.TypeWildCards )
    ;; int i = t.f;
    
    (local.set $i (struct.get $typewildcards.TypeWildCards.A $f@typewildcards.TypeWildCards.A(local.get $t)))
@@ -237,9 +262,64 @@
 )
 (elem declare func $m_testRecursiveGeneric__void@typewildcards.TypeWildCards)
 
+;;; void TypeWildCards.$clinit()
+(func $$clinit__void@typewildcards.TypeWildCards
+ (block $return.label
+  (block
+   ;; if (typewildcards.TypeWildCards.$initialized) return;
+   (if (global.get $$initialized@typewildcards.TypeWildCards)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (typewildcards.TypeWildCards.$initialized = true);
+   (global.set $$initialized@typewildcards.TypeWildCards (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; INTERFACE  X
+(global $$initialized@typewildcards.TypeWildCards.X (mut i32) (i32.const 0))
+
+;;; void X.$clinit()
+(func $$clinit__void@typewildcards.TypeWildCards.X
+ (block $return.label
+  (block
+   ;; if (typewildcards.TypeWildCards.X.$initialized) return;
+   (if (global.get $$initialized@typewildcards.TypeWildCards.X)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (typewildcards.TypeWildCards.X.$initialized = true);
+   (global.set $$initialized@typewildcards.TypeWildCards.X (i32.const 1))
+  )
+ )
+)
 
 ;;; INTERFACE  Y
+(global $$initialized@typewildcards.TypeWildCards.Y (mut i32) (i32.const 0))
+
+;;; void Y.$clinit()
+(func $$clinit__void@typewildcards.TypeWildCards.Y
+ (block $return.label
+  (block
+   ;; if (typewildcards.TypeWildCards.Y.$initialized) return;
+   (if (global.get $$initialized@typewildcards.TypeWildCards.Y)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (typewildcards.TypeWildCards.Y.$initialized = true);
+   (global.set $$initialized@typewildcards.TypeWildCards.Y (i32.const 1))
+  )
+ )
+)
 
 ;;; CLASS  A
 (type $typewildcards.TypeWildCards.A (struct
@@ -256,6 +336,7 @@
  (field $m_m__void (mut (ref $function.__$void)))
 ))
 (global $typewildcards.TypeWildCards.A.vtable (mut (ref null $typewildcards.TypeWildCards.A.vtable)) (ref.null $typewildcards.TypeWildCards.A.vtable))
+(global $$initialized@typewildcards.TypeWildCards.A (mut i32) (i32.const 0))
 
 ;;; A()
 (func $m_<init>__void_$p_typewildcards_TypeWildCards_A@typewildcards.TypeWildCards.A
@@ -282,9 +363,64 @@
 )
 (elem declare func $m_m__void@typewildcards.TypeWildCards.A)
 
+;;; void A.$clinit()
+(func $$clinit__void@typewildcards.TypeWildCards.A
+ (block $return.label
+  (block
+   ;; if (typewildcards.TypeWildCards.A.$initialized) return;
+   (if (global.get $$initialized@typewildcards.TypeWildCards.A)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (typewildcards.TypeWildCards.A.$initialized = true);
+   (global.set $$initialized@typewildcards.TypeWildCards.A (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; INTERFACE  IntegerSupplier
+(global $$initialized@typewildcards.TypeWildCards.IntegerSupplier (mut i32) (i32.const 0))
+
+;;; void IntegerSupplier.$clinit()
+(func $$clinit__void@typewildcards.TypeWildCards.IntegerSupplier
+ (block $return.label
+  (block
+   ;; if (typewildcards.TypeWildCards.IntegerSupplier.$initialized) return;
+   (if (global.get $$initialized@typewildcards.TypeWildCards.IntegerSupplier)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (typewildcards.TypeWildCards.IntegerSupplier.$initialized = true);
+   (global.set $$initialized@typewildcards.TypeWildCards.IntegerSupplier (i32.const 1))
+  )
+ )
+)
 
 ;;; INTERFACE  HasKey
+(global $$initialized@typewildcards.TypeWildCards.HasKey (mut i32) (i32.const 0))
+
+;;; void HasKey.$clinit()
+(func $$clinit__void@typewildcards.TypeWildCards.HasKey
+ (block $return.label
+  (block
+   ;; if (typewildcards.TypeWildCards.HasKey.$initialized) return;
+   (if (global.get $$initialized@typewildcards.TypeWildCards.HasKey)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (typewildcards.TypeWildCards.HasKey.$initialized = true);
+   (global.set $$initialized@typewildcards.TypeWildCards.HasKey (i32.const 1))
+  )
+ )
+)
 
 ;;; CLASS  Element
 (type $typewildcards.TypeWildCards.Element (struct
@@ -300,6 +436,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $typewildcards.TypeWildCards.Element.vtable (mut (ref null $typewildcards.TypeWildCards.Element.vtable)) (ref.null $typewildcards.TypeWildCards.Element.vtable))
+(global $$initialized@typewildcards.TypeWildCards.Element (mut i32) (i32.const 0))
 
 ;;; Element(TypeWildCards $outer_this)
 (func $m_<init>__typewildcards_TypeWildCards__void@typewildcards.TypeWildCards.Element
@@ -317,6 +454,25 @@
  (local.get $this)
 )
 
+;;; void Element.$clinit()
+(func $$clinit__void@typewildcards.TypeWildCards.Element
+ (block $return.label
+  (block
+   ;; if (typewildcards.TypeWildCards.Element.$initialized) return;
+   (if (global.get $$initialized@typewildcards.TypeWildCards.Element)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (typewildcards.TypeWildCards.Element.$initialized = true);
+   (global.set $$initialized@typewildcards.TypeWildCards.Element (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; CLASS  OtherElement
 (type $typewildcards.TypeWildCards.OtherElement (struct
  (field $vtable (ref null $typewildcards.TypeWildCards.OtherElement.vtable))
@@ -331,6 +487,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $typewildcards.TypeWildCards.OtherElement.vtable (mut (ref null $typewildcards.TypeWildCards.OtherElement.vtable)) (ref.null $typewildcards.TypeWildCards.OtherElement.vtable))
+(global $$initialized@typewildcards.TypeWildCards.OtherElement (mut i32) (i32.const 0))
 
 ;;; OtherElement(TypeWildCards $outer_this)
 (func $m_<init>__typewildcards_TypeWildCards__void@typewildcards.TypeWildCards.OtherElement
@@ -348,6 +505,25 @@
  (local.get $this)
 )
 
+;;; void OtherElement.$clinit()
+(func $$clinit__void@typewildcards.TypeWildCards.OtherElement
+ (block $return.label
+  (block
+   ;; if (typewildcards.TypeWildCards.OtherElement.$initialized) return;
+   (if (global.get $$initialized@typewildcards.TypeWildCards.OtherElement)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (typewildcards.TypeWildCards.OtherElement.$initialized = true);
+   (global.set $$initialized@typewildcards.TypeWildCards.OtherElement (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; CLASS  SubOtherElement
 (type $typewildcards.TypeWildCards.SubOtherElement (struct
  (field $vtable (ref null $typewildcards.TypeWildCards.SubOtherElement.vtable))
@@ -363,6 +539,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $typewildcards.TypeWildCards.SubOtherElement.vtable (mut (ref null $typewildcards.TypeWildCards.SubOtherElement.vtable)) (ref.null $typewildcards.TypeWildCards.SubOtherElement.vtable))
+(global $$initialized@typewildcards.TypeWildCards.SubOtherElement (mut i32) (i32.const 0))
 
 ;;; SubOtherElement(TypeWildCards $outer_this)
 (func $m_<init>__typewildcards_TypeWildCards__void@typewildcards.TypeWildCards.SubOtherElement
@@ -380,6 +557,25 @@
  (local.get $this)
 )
 
+;;; void SubOtherElement.$clinit()
+(func $$clinit__void@typewildcards.TypeWildCards.SubOtherElement
+ (block $return.label
+  (block
+   ;; if (typewildcards.TypeWildCards.SubOtherElement.$initialized) return;
+   (if (global.get $$initialized@typewildcards.TypeWildCards.SubOtherElement)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (typewildcards.TypeWildCards.SubOtherElement.$initialized = true);
+   (global.set $$initialized@typewildcards.TypeWildCards.SubOtherElement (i32.const 1))
+   ;; typewildcards.TypeWildCards.OtherElement.$clinit();
+   (call $$clinit__void@typewildcards.TypeWildCards.OtherElement )
+  )
+ )
+)
+
 ;;; CLASS  Foo
 (type $typewildcards.TypeWildCards.Foo (struct
  (field $vtable (ref null $typewildcards.TypeWildCards.Foo.vtable))
@@ -394,6 +590,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $typewildcards.TypeWildCards.Foo.vtable (mut (ref null $typewildcards.TypeWildCards.Foo.vtable)) (ref.null $typewildcards.TypeWildCards.Foo.vtable))
+(global $$initialized@typewildcards.TypeWildCards.Foo (mut i32) (i32.const 0))
 
 ;;; Foo(TypeWildCards $outer_this)
 (func $m_<init>__typewildcards_TypeWildCards__void_$pp_typewildcards@typewildcards.TypeWildCards.Foo
@@ -409,6 +606,25 @@
   )
  )
  (local.get $this)
+)
+
+;;; void Foo.$clinit()
+(func $$clinit__void@typewildcards.TypeWildCards.Foo
+ (block $return.label
+  (block
+   ;; if (typewildcards.TypeWildCards.Foo.$initialized) return;
+   (if (global.get $$initialized@typewildcards.TypeWildCards.Foo)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (typewildcards.TypeWildCards.Foo.$initialized = true);
+   (global.set $$initialized@typewildcards.TypeWildCards.Foo (i32.const 1))
+   ;; typewildcards.GenericType.$clinit();
+   (call $$clinit__void@typewildcards.GenericType )
+  )
+ )
 )
 
 ;;; Code for typewildcards.GenericType [vtable]

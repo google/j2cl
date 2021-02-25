@@ -13,6 +13,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $genericnativetype.BoundedJsArray.vtable (mut (ref null $genericnativetype.BoundedJsArray.vtable)) (ref.null $genericnativetype.BoundedJsArray.vtable))
+(global $$initialized@genericnativetype.BoundedJsArray (mut i32) (i32.const 0))
 
 ;;; BoundedJsArray(int size)
 (func $m_<init>__int__void_$p_genericnativetype_BoundedJsArray@genericnativetype.BoundedJsArray
@@ -21,6 +22,8 @@
  (result (ref null $genericnativetype.BoundedJsArray))
  (block $return.label
   (block
+   ;; genericnativetype.BoundedJsArray.$clinit();
+   (call $$clinit__void@genericnativetype.BoundedJsArray )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -35,6 +38,8 @@
  (local $array (ref null $genericnativetype.BoundedJsArray))
  (block $return.label
   (block
+   ;; genericnativetype.BoundedJsArray.$clinit();
+   (call $$clinit__void@genericnativetype.BoundedJsArray )
    ;; BoundedJsArray<V> array = null;
    
    (local.set $array (ref.null $genericnativetype.BoundedJsArray))
@@ -54,6 +59,8 @@
  (local $array (ref null $genericnativetype.BoundedJsArray))
  (block $return.label
   (block
+   ;; genericnativetype.BoundedJsArray.$clinit();
+   (call $$clinit__void@genericnativetype.BoundedJsArray )
    ;; BoundedJsArray<V> array = new BoundedJsArray.<init>(size);
    
    (local.set $array (call $m_<init>__int__void_$p_genericnativetype_BoundedJsArray@genericnativetype.BoundedJsArray (struct.new_with_rtt $genericnativetype.BoundedJsArray (global.get $genericnativetype.BoundedJsArray.vtable) (i32.const 0) (global.get $genericnativetype.BoundedJsArray.rtt))(local.get $size)))
@@ -63,6 +70,25 @@
   )
  )
  (local.get $return.value)
+)
+
+;;; void BoundedJsArray.$clinit()
+(func $$clinit__void@genericnativetype.BoundedJsArray
+ (block $return.label
+  (block
+   ;; if (genericnativetype.BoundedJsArray.$initialized) return;
+   (if (global.get $$initialized@genericnativetype.BoundedJsArray)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (genericnativetype.BoundedJsArray.$initialized = true);
+   (global.set $$initialized@genericnativetype.BoundedJsArray (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
 )
 ;;; Code for genericnativetype.BoundedJsArrays
 
@@ -79,6 +105,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $genericnativetype.BoundedJsArrays.vtable (mut (ref null $genericnativetype.BoundedJsArrays.vtable)) (ref.null $genericnativetype.BoundedJsArrays.vtable))
+(global $$initialized@genericnativetype.BoundedJsArrays (mut i32) (i32.const 0))
 
 ;;; BoundedJsArrays()
 (func $m_<init>__void_$p_genericnativetype_BoundedJsArrays@genericnativetype.BoundedJsArrays
@@ -99,6 +126,8 @@
  (local $return.value (ref null $genericnativetype.BoundedJsArray))
  (block $return.label
   (block
+   ;; genericnativetype.BoundedJsArrays.$clinit();
+   (call $$clinit__void@genericnativetype.BoundedJsArrays )
    ;; return genericnativetype.BoundedJsArray.create();
    (local.set $return.value (call $m_create__genericnativetype_BoundedJsArray@genericnativetype.BoundedJsArray ))
    (br $return.label)
@@ -114,12 +143,33 @@
  (local $return.value (ref null $genericnativetype.BoundedJsArray))
  (block $return.label
   (block
+   ;; genericnativetype.BoundedJsArrays.$clinit();
+   (call $$clinit__void@genericnativetype.BoundedJsArrays )
    ;; return genericnativetype.BoundedJsArray.create(size);
    (local.set $return.value (call $m_create__int__genericnativetype_BoundedJsArray@genericnativetype.BoundedJsArray (local.get $size)))
    (br $return.label)
   )
  )
  (local.get $return.value)
+)
+
+;;; void BoundedJsArrays.$clinit()
+(func $$clinit__void@genericnativetype.BoundedJsArrays
+ (block $return.label
+  (block
+   ;; if (genericnativetype.BoundedJsArrays.$initialized) return;
+   (if (global.get $$initialized@genericnativetype.BoundedJsArrays)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (genericnativetype.BoundedJsArrays.$initialized = true);
+   (global.set $$initialized@genericnativetype.BoundedJsArrays (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
 )
 
 ;;; Code for genericnativetype.BoundedJsArray [vtable]

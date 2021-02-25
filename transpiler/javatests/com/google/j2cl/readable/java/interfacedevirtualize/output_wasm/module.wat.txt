@@ -21,6 +21,7 @@
  (field $m_compare3__java_lang_Integer__java_lang_Integer__int (mut (ref $function.$java.lang.Integer__$java.lang.Integer__$int)))
 ))
 (global $interfacedevirtualize.InterfaceDevirtualize.vtable (mut (ref null $interfacedevirtualize.InterfaceDevirtualize.vtable)) (ref.null $interfacedevirtualize.InterfaceDevirtualize.vtable))
+(global $$initialized@interfacedevirtualize.InterfaceDevirtualize (mut i32) (i32.const 0))
 
 ;;; InterfaceDevirtualize()
 (func $m_<init>__void@interfacedevirtualize.InterfaceDevirtualize
@@ -194,6 +195,25 @@
  (local.get $return.value)
 )
 (elem declare func $m_compare3__java_lang_Integer__java_lang_Integer__int@interfacedevirtualize.InterfaceDevirtualize)
+
+;;; void InterfaceDevirtualize.$clinit()
+(func $$clinit__void@interfacedevirtualize.InterfaceDevirtualize
+ (block $return.label
+  (block
+   ;; if (interfacedevirtualize.InterfaceDevirtualize.$initialized) return;
+   (if (global.get $$initialized@interfacedevirtualize.InterfaceDevirtualize)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (interfacedevirtualize.InterfaceDevirtualize.$initialized = true);
+   (global.set $$initialized@interfacedevirtualize.InterfaceDevirtualize (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
 
 ;;; Code for interfacedevirtualize.InterfaceDevirtualize [vtable]
  (global.set $interfacedevirtualize.InterfaceDevirtualize.vtable (struct.new_with_rtt $interfacedevirtualize.InterfaceDevirtualize.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_compare0__java_lang_Comparable__java_lang_Object__int@interfacedevirtualize.InterfaceDevirtualize) (ref.func $m_compare1__java_lang_Comparable__java_lang_Object__int@interfacedevirtualize.InterfaceDevirtualize) (ref.func $m_compare2__java_lang_Comparable__java_lang_Double__int@interfacedevirtualize.InterfaceDevirtualize) (ref.func $m_compare3__java_lang_Double__java_lang_Double__int@interfacedevirtualize.InterfaceDevirtualize) (ref.func $m_compare2__java_lang_Comparable__java_lang_Boolean__int@interfacedevirtualize.InterfaceDevirtualize) (ref.func $m_compare3__java_lang_Boolean__java_lang_Boolean__int@interfacedevirtualize.InterfaceDevirtualize) (ref.func $m_compare2__java_lang_Comparable__java_lang_Integer__int@interfacedevirtualize.InterfaceDevirtualize) (ref.func $m_compare3__java_lang_Integer__java_lang_Integer__int@interfacedevirtualize.InterfaceDevirtualize) (rtt.canon $interfacedevirtualize.InterfaceDevirtualize.vtable)))

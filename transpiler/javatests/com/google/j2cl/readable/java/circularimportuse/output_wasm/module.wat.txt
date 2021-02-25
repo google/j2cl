@@ -14,6 +14,7 @@
  (field $m_createRight__circularimportuse_Right_$pp_circularimportuse (mut (ref $function.__$circularimportuse.Right)))
 ))
 (global $circularimportuse.Left.vtable (mut (ref null $circularimportuse.Left.vtable)) (ref.null $circularimportuse.Left.vtable))
+(global $$initialized@circularimportuse.Left (mut i32) (i32.const 0))
 
 ;;; Left()
 (func $m_<init>__void@circularimportuse.Left
@@ -45,6 +46,25 @@
  (local.get $return.value)
 )
 (elem declare func $m_createRight__circularimportuse_Right_$pp_circularimportuse@circularimportuse.Left)
+
+;;; void Left.$clinit()
+(func $$clinit__void@circularimportuse.Left
+ (block $return.label
+  (block
+   ;; if (circularimportuse.Left.$initialized) return;
+   (if (global.get $$initialized@circularimportuse.Left)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (circularimportuse.Left.$initialized = true);
+   (global.set $$initialized@circularimportuse.Left (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
 ;;; Code for circularimportuse.Main
 
 ;;; CLASS  Main
@@ -60,6 +80,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $circularimportuse.Main.vtable (mut (ref null $circularimportuse.Main.vtable)) (ref.null $circularimportuse.Main.vtable))
+(global $$initialized@circularimportuse.Main (mut i32) (i32.const 0))
 
 ;;; Main()
 (func $m_<init>__void@circularimportuse.Main
@@ -81,12 +102,33 @@
  (local $right (ref null $circularimportuse.Right))
  (block $return.label
   (block
+   ;; circularimportuse.Main.$clinit();
+   (call $$clinit__void@circularimportuse.Main )
    ;; Left left = new Left.<init>();
    
    (local.set $left (call $m_<init>__void@circularimportuse.Left (struct.new_with_rtt $circularimportuse.Left (global.get $circularimportuse.Left.vtable) (i32.const 0) (global.get $circularimportuse.Left.rtt))))
    ;; Right right = new Right.<init>();
    
    (local.set $right (call $m_<init>__void@circularimportuse.Right (struct.new_with_rtt $circularimportuse.Right (global.get $circularimportuse.Right.vtable) (i32.const 0) (global.get $circularimportuse.Right.rtt))))
+  )
+ )
+)
+
+;;; void Main.$clinit()
+(func $$clinit__void@circularimportuse.Main
+ (block $return.label
+  (block
+   ;; if (circularimportuse.Main.$initialized) return;
+   (if (global.get $$initialized@circularimportuse.Main)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (circularimportuse.Main.$initialized = true);
+   (global.set $$initialized@circularimportuse.Main (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
   )
  )
 )
@@ -106,6 +148,7 @@
  (field $m_createLeft__circularimportuse_Left_$pp_circularimportuse (mut (ref $function.__$circularimportuse.Left)))
 ))
 (global $circularimportuse.Right.vtable (mut (ref null $circularimportuse.Right.vtable)) (ref.null $circularimportuse.Right.vtable))
+(global $$initialized@circularimportuse.Right (mut i32) (i32.const 0))
 
 ;;; Right()
 (func $m_<init>__void@circularimportuse.Right
@@ -137,6 +180,25 @@
  (local.get $return.value)
 )
 (elem declare func $m_createLeft__circularimportuse_Left_$pp_circularimportuse@circularimportuse.Right)
+
+;;; void Right.$clinit()
+(func $$clinit__void@circularimportuse.Right
+ (block $return.label
+  (block
+   ;; if (circularimportuse.Right.$initialized) return;
+   (if (global.get $$initialized@circularimportuse.Right)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (circularimportuse.Right.$initialized = true);
+   (global.set $$initialized@circularimportuse.Right (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
 
 ;;; Code for circularimportuse.Left [vtable]
  (global.set $circularimportuse.Left.vtable (struct.new_with_rtt $circularimportuse.Left.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_createRight__circularimportuse_Right_$pp_circularimportuse@circularimportuse.Left) (rtt.canon $circularimportuse.Left.vtable)))

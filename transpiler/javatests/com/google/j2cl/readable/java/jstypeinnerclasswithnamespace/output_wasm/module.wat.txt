@@ -13,6 +13,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.vtable (mut (ref null $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.vtable)) (ref.null $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.vtable))
+(global $$initialized@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace (mut i32) (i32.const 0))
 
 ;;; JsTypeInnerClassWithNamespace()
 (func $m_<init>__void@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace
@@ -25,6 +26,25 @@
   )
  )
  (local.get $this)
+)
+
+;;; void JsTypeInnerClassWithNamespace.$clinit()
+(func $$clinit__void@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace
+ (block $return.label
+  (block
+   ;; if (jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.$initialized) return;
+   (if (global.get $$initialized@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.$initialized = true);
+   (global.set $$initialized@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
 )
 
 ;;; CLASS  InnerClass
@@ -40,6 +60,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.vtable (mut (ref null $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.vtable)) (ref.null $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.vtable))
+(global $$initialized@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass (mut i32) (i32.const 0))
 
 ;;; InnerClass()
 (func $m_<init>__void_$pp_jstypeinnerclasswithnamespace@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass
@@ -52,6 +73,25 @@
   )
  )
  (local.get $this)
+)
+
+;;; void InnerClass.$clinit()
+(func $$clinit__void@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass
+ (block $return.label
+  (block
+   ;; if (jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.$initialized) return;
+   (if (global.get $$initialized@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.$initialized = true);
+   (global.set $$initialized@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
 )
 
 ;;; Code for jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace [vtable]

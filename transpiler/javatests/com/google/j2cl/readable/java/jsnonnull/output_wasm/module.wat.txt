@@ -27,6 +27,7 @@
  (field $m_m4__jsnonnull_Main_MyFunction__void (mut (ref $function.$java.lang.Object__$void)))
 ))
 (global $jsnonnull.Main.vtable (mut (ref null $jsnonnull.Main.vtable)) (ref.null $jsnonnull.Main.vtable))
+(global $$initialized@jsnonnull.Main (mut i32) (i32.const 0))
 
 ;;; Main(String a)
 (func $m_<init>__java_lang_String__void@jsnonnull.Main
@@ -35,6 +36,8 @@
  (result (ref null $jsnonnull.Main))
  (block $return.label
   (block
+   ;; jsnonnull.Main.$clinit();
+   (call $$clinit__void@jsnonnull.Main )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; Main.this.$init();
@@ -182,7 +185,44 @@
  )
 )
 
+;;; void Main.$clinit()
+(func $$clinit__void@jsnonnull.Main
+ (block $return.label
+  (block
+   ;; if (jsnonnull.Main.$initialized) return;
+   (if (global.get $$initialized@jsnonnull.Main)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (jsnonnull.Main.$initialized = true);
+   (global.set $$initialized@jsnonnull.Main (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; INTERFACE  MyFunction
+(global $$initialized@jsnonnull.Main.MyFunction (mut i32) (i32.const 0))
+
+;;; void MyFunction.$clinit()
+(func $$clinit__void@jsnonnull.Main.MyFunction
+ (block $return.label
+  (block
+   ;; if (jsnonnull.Main.MyFunction.$initialized) return;
+   (if (global.get $$initialized@jsnonnull.Main.MyFunction)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (jsnonnull.Main.MyFunction.$initialized = true);
+   (global.set $$initialized@jsnonnull.Main.MyFunction (i32.const 1))
+  )
+ )
+)
 
 ;;; CLASS  StringComparator
 (type $jsnonnull.Main.StringComparator (struct
@@ -206,6 +246,7 @@
  (field $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator (mut (ref $function.$java.lang.Object__$java.lang.Object)))
 ))
 (global $jsnonnull.Main.StringComparator.vtable (mut (ref null $jsnonnull.Main.StringComparator.vtable)) (ref.null $jsnonnull.Main.StringComparator.vtable))
+(global $$initialized@jsnonnull.Main.StringComparator (mut i32) (i32.const 0))
 
 ;;; StringComparator()
 (func $m_<init>__void@jsnonnull.Main.StringComparator
@@ -393,6 +434,27 @@
 )
 (elem declare func $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator@jsnonnull.Main.StringComparator)
 
+;;; void StringComparator.$clinit()
+(func $$clinit__void@jsnonnull.Main.StringComparator
+ (block $return.label
+  (block
+   ;; if (jsnonnull.Main.StringComparator.$initialized) return;
+   (if (global.get $$initialized@jsnonnull.Main.StringComparator)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (jsnonnull.Main.StringComparator.$initialized = true);
+   (global.set $$initialized@jsnonnull.Main.StringComparator (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+   ;; java.util.Comparator.$clinit();
+   (call $$clinit__void@java.util.Comparator )
+  )
+ )
+)
+
 ;;; CLASS  NullableStringComparator
 (type $jsnonnull.Main.NullableStringComparator (struct
  (field $vtable (ref null $jsnonnull.Main.NullableStringComparator.vtable))
@@ -415,6 +477,7 @@
  (field $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator (mut (ref $function.$java.lang.Object__$java.lang.Object)))
 ))
 (global $jsnonnull.Main.NullableStringComparator.vtable (mut (ref null $jsnonnull.Main.NullableStringComparator.vtable)) (ref.null $jsnonnull.Main.NullableStringComparator.vtable))
+(global $$initialized@jsnonnull.Main.NullableStringComparator (mut i32) (i32.const 0))
 
 ;;; NullableStringComparator()
 (func $m_<init>__void@jsnonnull.Main.NullableStringComparator
@@ -602,6 +665,27 @@
 )
 (elem declare func $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator@jsnonnull.Main.NullableStringComparator)
 
+;;; void NullableStringComparator.$clinit()
+(func $$clinit__void@jsnonnull.Main.NullableStringComparator
+ (block $return.label
+  (block
+   ;; if (jsnonnull.Main.NullableStringComparator.$initialized) return;
+   (if (global.get $$initialized@jsnonnull.Main.NullableStringComparator)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (jsnonnull.Main.NullableStringComparator.$initialized = true);
+   (global.set $$initialized@jsnonnull.Main.NullableStringComparator (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+   ;; java.util.Comparator.$clinit();
+   (call $$clinit__void@java.util.Comparator )
+  )
+ )
+)
+
 ;;; CLASS  NonNullableStringSubNullableComparator
 (type $jsnonnull.Main.NonNullableStringSubNullableComparator (struct
  (field $vtable (ref null $jsnonnull.Main.NonNullableStringSubNullableComparator.vtable))
@@ -624,6 +708,7 @@
  (field $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator (mut (ref $function.$java.lang.Object__$java.lang.Object)))
 ))
 (global $jsnonnull.Main.NonNullableStringSubNullableComparator.vtable (mut (ref null $jsnonnull.Main.NonNullableStringSubNullableComparator.vtable)) (ref.null $jsnonnull.Main.NonNullableStringSubNullableComparator.vtable))
+(global $$initialized@jsnonnull.Main.NonNullableStringSubNullableComparator (mut i32) (i32.const 0))
 
 ;;; NonNullableStringSubNullableComparator()
 (func $m_<init>__void@jsnonnull.Main.NonNullableStringSubNullableComparator
@@ -658,9 +743,64 @@
 )
 (elem declare func $m_compare__java_lang_String__java_lang_String__int@jsnonnull.Main.NonNullableStringSubNullableComparator)
 
+;;; void NonNullableStringSubNullableComparator.$clinit()
+(func $$clinit__void@jsnonnull.Main.NonNullableStringSubNullableComparator
+ (block $return.label
+  (block
+   ;; if (jsnonnull.Main.NonNullableStringSubNullableComparator.$initialized) return;
+   (if (global.get $$initialized@jsnonnull.Main.NonNullableStringSubNullableComparator)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (jsnonnull.Main.NonNullableStringSubNullableComparator.$initialized = true);
+   (global.set $$initialized@jsnonnull.Main.NonNullableStringSubNullableComparator (i32.const 1))
+   ;; jsnonnull.Main.NullableStringComparator.$clinit();
+   (call $$clinit__void@jsnonnull.Main.NullableStringComparator )
+  )
+ )
+)
+
 ;;; INTERFACE  NonNullableTemplatedReturn
+(global $$initialized@jsnonnull.Main.NonNullableTemplatedReturn (mut i32) (i32.const 0))
+
+;;; void NonNullableTemplatedReturn.$clinit()
+(func $$clinit__void@jsnonnull.Main.NonNullableTemplatedReturn
+ (block $return.label
+  (block
+   ;; if (jsnonnull.Main.NonNullableTemplatedReturn.$initialized) return;
+   (if (global.get $$initialized@jsnonnull.Main.NonNullableTemplatedReturn)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (jsnonnull.Main.NonNullableTemplatedReturn.$initialized = true);
+   (global.set $$initialized@jsnonnull.Main.NonNullableTemplatedReturn (i32.const 1))
+  )
+ )
+)
 
 ;;; INTERFACE  NonNullableTemplate
+(global $$initialized@jsnonnull.Main.NonNullableTemplate (mut i32) (i32.const 0))
+
+;;; void NonNullableTemplate.$clinit()
+(func $$clinit__void@jsnonnull.Main.NonNullableTemplate
+ (block $return.label
+  (block
+   ;; if (jsnonnull.Main.NonNullableTemplate.$initialized) return;
+   (if (global.get $$initialized@jsnonnull.Main.NonNullableTemplate)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (jsnonnull.Main.NonNullableTemplate.$initialized = true);
+   (global.set $$initialized@jsnonnull.Main.NonNullableTemplate (i32.const 1))
+  )
+ )
+)
 
 ;;; Code for jsnonnull.Main [vtable]
  (global.set $jsnonnull.Main.vtable (struct.new_with_rtt $jsnonnull.Main.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_m1__java_lang_String__java_util_List__java_lang_String__java_lang_String@jsnonnull.Main) (ref.func $m_m2__java_lang_String__java_util_List__java_lang_String@jsnonnull.Main) (ref.func $m_m3__java_lang_String__arrayOf_java_lang_String__java_lang_String@jsnonnull.Main) (ref.func $m_m4__jsnonnull_Main_MyFunction__void@jsnonnull.Main) (rtt.canon $jsnonnull.Main.vtable)))

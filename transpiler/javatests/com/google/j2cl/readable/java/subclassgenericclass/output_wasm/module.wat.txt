@@ -13,6 +13,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $subclassgenericclass.GenericClass.vtable (mut (ref null $subclassgenericclass.GenericClass.vtable)) (ref.null $subclassgenericclass.GenericClass.vtable))
+(global $$initialized@subclassgenericclass.GenericClass (mut i32) (i32.const 0))
 
 ;;; GenericClass()
 (func $m_<init>__void_$pp_subclassgenericclass@subclassgenericclass.GenericClass
@@ -25,6 +26,25 @@
   )
  )
  (local.get $this)
+)
+
+;;; void GenericClass.$clinit()
+(func $$clinit__void@subclassgenericclass.GenericClass
+ (block $return.label
+  (block
+   ;; if (subclassgenericclass.GenericClass.$initialized) return;
+   (if (global.get $$initialized@subclassgenericclass.GenericClass)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (subclassgenericclass.GenericClass.$initialized = true);
+   (global.set $$initialized@subclassgenericclass.GenericClass (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
 )
 
 ;;; CLASS  GenericSubclassGenericClass
@@ -40,6 +60,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $subclassgenericclass.GenericSubclassGenericClass.vtable (mut (ref null $subclassgenericclass.GenericSubclassGenericClass.vtable)) (ref.null $subclassgenericclass.GenericSubclassGenericClass.vtable))
+(global $$initialized@subclassgenericclass.GenericSubclassGenericClass (mut i32) (i32.const 0))
 
 ;;; GenericSubclassGenericClass()
 (func $m_<init>__void_$pp_subclassgenericclass@subclassgenericclass.GenericSubclassGenericClass
@@ -52,6 +73,25 @@
   )
  )
  (local.get $this)
+)
+
+;;; void GenericSubclassGenericClass.$clinit()
+(func $$clinit__void@subclassgenericclass.GenericSubclassGenericClass
+ (block $return.label
+  (block
+   ;; if (subclassgenericclass.GenericSubclassGenericClass.$initialized) return;
+   (if (global.get $$initialized@subclassgenericclass.GenericSubclassGenericClass)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (subclassgenericclass.GenericSubclassGenericClass.$initialized = true);
+   (global.set $$initialized@subclassgenericclass.GenericSubclassGenericClass (i32.const 1))
+   ;; subclassgenericclass.GenericClass.$clinit();
+   (call $$clinit__void@subclassgenericclass.GenericClass )
+  )
+ )
 )
 
 ;;; CLASS  SubclassGenericClass
@@ -67,6 +107,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $subclassgenericclass.SubclassGenericClass.vtable (mut (ref null $subclassgenericclass.SubclassGenericClass.vtable)) (ref.null $subclassgenericclass.SubclassGenericClass.vtable))
+(global $$initialized@subclassgenericclass.SubclassGenericClass (mut i32) (i32.const 0))
 
 ;;; SubclassGenericClass()
 (func $m_<init>__void@subclassgenericclass.SubclassGenericClass
@@ -79,6 +120,25 @@
   )
  )
  (local.get $this)
+)
+
+;;; void SubclassGenericClass.$clinit()
+(func $$clinit__void@subclassgenericclass.SubclassGenericClass
+ (block $return.label
+  (block
+   ;; if (subclassgenericclass.SubclassGenericClass.$initialized) return;
+   (if (global.get $$initialized@subclassgenericclass.SubclassGenericClass)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (subclassgenericclass.SubclassGenericClass.$initialized = true);
+   (global.set $$initialized@subclassgenericclass.SubclassGenericClass (i32.const 1))
+   ;; subclassgenericclass.GenericClass.$clinit();
+   (call $$clinit__void@subclassgenericclass.GenericClass )
+  )
+ )
 )
 
 ;;; Code for subclassgenericclass.GenericClass [vtable]

@@ -14,6 +14,7 @@
  (field $m_test__void (mut (ref $function.__$void)))
 ))
 (global $implicitparenthesis.ImplicitParenthesis.vtable (mut (ref null $implicitparenthesis.ImplicitParenthesis.vtable)) (ref.null $implicitparenthesis.ImplicitParenthesis.vtable))
+(global $$initialized@implicitparenthesis.ImplicitParenthesis (mut i32) (i32.const 0))
 
 ;;; ImplicitParenthesis()
 (func $m_<init>__void@implicitparenthesis.ImplicitParenthesis
@@ -154,6 +155,25 @@
   (block
    ;; new Integer.<init>((1 + 2));
    (drop (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.add (i32.const 1) (i32.const 2))))
+  )
+ )
+)
+
+;;; void ImplicitParenthesis.$clinit()
+(func $$clinit__void@implicitparenthesis.ImplicitParenthesis
+ (block $return.label
+  (block
+   ;; if (implicitparenthesis.ImplicitParenthesis.$initialized) return;
+   (if (global.get $$initialized@implicitparenthesis.ImplicitParenthesis)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (implicitparenthesis.ImplicitParenthesis.$initialized = true);
+   (global.set $$initialized@implicitparenthesis.ImplicitParenthesis (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
   )
  )
 )

@@ -14,6 +14,7 @@
  (field $m_test__void (mut (ref $function.__$void)))
 ))
 (global $whilestatement.WhileStatement.vtable (mut (ref null $whilestatement.WhileStatement.vtable)) (ref.null $whilestatement.WhileStatement.vtable))
+(global $$initialized@whilestatement.WhileStatement (mut i32) (i32.const 0))
 
 ;;; WhileStatement()
 (func $m_<init>__void@whilestatement.WhileStatement
@@ -58,6 +59,25 @@
  )
 )
 (elem declare func $m_test__void@whilestatement.WhileStatement)
+
+;;; void WhileStatement.$clinit()
+(func $$clinit__void@whilestatement.WhileStatement
+ (block $return.label
+  (block
+   ;; if (whilestatement.WhileStatement.$initialized) return;
+   (if (global.get $$initialized@whilestatement.WhileStatement)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (whilestatement.WhileStatement.$initialized = true);
+   (global.set $$initialized@whilestatement.WhileStatement (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
 
 ;;; Code for whilestatement.WhileStatement [vtable]
  (global.set $whilestatement.WhileStatement.vtable (struct.new_with_rtt $whilestatement.WhileStatement.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__void@whilestatement.WhileStatement) (rtt.canon $whilestatement.WhileStatement.vtable)))

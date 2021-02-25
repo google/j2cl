@@ -19,6 +19,7 @@
  (field $m_method__java_lang_Object__cast_CastGenerics_Empty1 (mut (ref $function.$java.lang.Object__$java.lang.Object)))
 ))
 (global $cast.CastGenerics.vtable (mut (ref null $cast.CastGenerics.vtable)) (ref.null $cast.CastGenerics.vtable))
+(global $$initialized@cast.CastGenerics (mut i32) (i32.const 0))
 
 ;;; CastGenerics()
 (func $m_<init>__void@cast.CastGenerics
@@ -79,6 +80,8 @@
  (local $$qualifier_12 (ref null $cast.CastGenerics.Implementor))
  (block $return.label
   (block
+   ;; cast.CastGenerics.$clinit();
+   (call $$clinit__void@cast.CastGenerics )
    ;; String str = ((String) new CastGenerics.<init>().field);
    
    (local.set $str (ref.cast $java.lang.Object $java.lang.String (struct.get $cast.CastGenerics $field@cast.CastGenerics(call $m_<init>__void@cast.CastGenerics (struct.new_with_rtt $cast.CastGenerics (global.get $cast.CastGenerics.vtable) (i32.const 0) (ref.null $java.lang.Object) (global.get $cast.CastGenerics.rtt)))) (global.get $java.lang.String.rtt)))
@@ -216,6 +219,8 @@
  (local $cc (ref null $cast.CastGenerics))
  (block $return.label
   (block
+   ;; cast.CastGenerics.$clinit();
+   (call $$clinit__void@cast.CastGenerics )
    ;; Object o = new Integer.<init>(1);
    
    (local.set $o (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
@@ -335,6 +340,8 @@
  (local $return.value (ref null $cast.CastGenerics.Foo))
  (block $return.label
   (block
+   ;; cast.CastGenerics.$clinit();
+   (call $$clinit__void@cast.CastGenerics )
    ;; return new $1.<init>();
    (local.set $return.value (call $m_<init>__void_$pp_cast@cast.CastGenerics.1 (struct.new_with_rtt $cast.CastGenerics.1 (global.get $cast.CastGenerics.1.vtable) (i32.const 0) (global.get $cast.CastGenerics.1.rtt))))
    (br $return.label)
@@ -343,9 +350,64 @@
  (local.get $return.value)
 )
 
+;;; void CastGenerics.$clinit()
+(func $$clinit__void@cast.CastGenerics
+ (block $return.label
+  (block
+   ;; if (cast.CastGenerics.$initialized) return;
+   (if (global.get $$initialized@cast.CastGenerics)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (cast.CastGenerics.$initialized = true);
+   (global.set $$initialized@cast.CastGenerics (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; INTERFACE  A
+(global $$initialized@cast.CastGenerics.A (mut i32) (i32.const 0))
+
+;;; void A.$clinit()
+(func $$clinit__void@cast.CastGenerics.A
+ (block $return.label
+  (block
+   ;; if (cast.CastGenerics.A.$initialized) return;
+   (if (global.get $$initialized@cast.CastGenerics.A)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (cast.CastGenerics.A.$initialized = true);
+   (global.set $$initialized@cast.CastGenerics.A (i32.const 1))
+  )
+ )
+)
 
 ;;; INTERFACE  B
+(global $$initialized@cast.CastGenerics.B (mut i32) (i32.const 0))
+
+;;; void B.$clinit()
+(func $$clinit__void@cast.CastGenerics.B
+ (block $return.label
+  (block
+   ;; if (cast.CastGenerics.B.$initialized) return;
+   (if (global.get $$initialized@cast.CastGenerics.B)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (cast.CastGenerics.B.$initialized = true);
+   (global.set $$initialized@cast.CastGenerics.B (i32.const 1))
+  )
+ )
+)
 
 ;;; CLASS  BaseImplementor
 (type $cast.CastGenerics.BaseImplementor (struct
@@ -360,6 +422,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $cast.CastGenerics.BaseImplementor.vtable (mut (ref null $cast.CastGenerics.BaseImplementor.vtable)) (ref.null $cast.CastGenerics.BaseImplementor.vtable))
+(global $$initialized@cast.CastGenerics.BaseImplementor (mut i32) (i32.const 0))
 
 ;;; BaseImplementor()
 (func $m_<init>__void_$p_cast_CastGenerics_BaseImplementor@cast.CastGenerics.BaseImplementor
@@ -372,6 +435,25 @@
   )
  )
  (local.get $this)
+)
+
+;;; void BaseImplementor.$clinit()
+(func $$clinit__void@cast.CastGenerics.BaseImplementor
+ (block $return.label
+  (block
+   ;; if (cast.CastGenerics.BaseImplementor.$initialized) return;
+   (if (global.get $$initialized@cast.CastGenerics.BaseImplementor)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (cast.CastGenerics.BaseImplementor.$initialized = true);
+   (global.set $$initialized@cast.CastGenerics.BaseImplementor (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
 )
 
 ;;; CLASS  Implementor
@@ -389,6 +471,7 @@
  (field $m_mB__void (mut (ref $function.__$void)))
 ))
 (global $cast.CastGenerics.Implementor.vtable (mut (ref null $cast.CastGenerics.Implementor.vtable)) (ref.null $cast.CastGenerics.Implementor.vtable))
+(global $$initialized@cast.CastGenerics.Implementor (mut i32) (i32.const 0))
 
 ;;; Implementor()
 (func $m_<init>__void_$p_cast_CastGenerics_Implementor@cast.CastGenerics.Implementor
@@ -427,6 +510,25 @@
 )
 (elem declare func $m_mB__void@cast.CastGenerics.Implementor)
 
+;;; void Implementor.$clinit()
+(func $$clinit__void@cast.CastGenerics.Implementor
+ (block $return.label
+  (block
+   ;; if (cast.CastGenerics.Implementor.$initialized) return;
+   (if (global.get $$initialized@cast.CastGenerics.Implementor)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (cast.CastGenerics.Implementor.$initialized = true);
+   (global.set $$initialized@cast.CastGenerics.Implementor (i32.const 1))
+   ;; cast.CastGenerics.BaseImplementor.$clinit();
+   (call $$clinit__void@cast.CastGenerics.BaseImplementor )
+  )
+ )
+)
+
 ;;; CLASS  Container
 (type $cast.CastGenerics.Container (struct
  (field $vtable (ref null $cast.CastGenerics.Container.vtable))
@@ -441,6 +543,7 @@
  (field $m_get__java_lang_Object_$pp_cast (mut (ref $function.__$java.lang.Object)))
 ))
 (global $cast.CastGenerics.Container.vtable (mut (ref null $cast.CastGenerics.Container.vtable)) (ref.null $cast.CastGenerics.Container.vtable))
+(global $$initialized@cast.CastGenerics.Container (mut i32) (i32.const 0))
 
 ;;; Container()
 (func $m_<init>__void_$p_cast_CastGenerics_Container@cast.CastGenerics.Container
@@ -473,6 +576,25 @@
 )
 (elem declare func $m_get__java_lang_Object_$pp_cast@cast.CastGenerics.Container)
 
+;;; void Container.$clinit()
+(func $$clinit__void@cast.CastGenerics.Container
+ (block $return.label
+  (block
+   ;; if (cast.CastGenerics.Container.$initialized) return;
+   (if (global.get $$initialized@cast.CastGenerics.Container)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (cast.CastGenerics.Container.$initialized = true);
+   (global.set $$initialized@cast.CastGenerics.Container (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; CLASS  Nested
 (type $cast.CastGenerics.1Nested (struct
  (field $vtable (ref null $cast.CastGenerics.1Nested.vtable))
@@ -487,6 +609,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $cast.CastGenerics.1Nested.vtable (mut (ref null $cast.CastGenerics.1Nested.vtable)) (ref.null $cast.CastGenerics.1Nested.vtable))
+(global $$initialized@cast.CastGenerics.1Nested (mut i32) (i32.const 0))
 
 ;;; Nested(CastGenerics<T, E> $outer_this)
 (func $m_<init>__cast_CastGenerics__void_$pp_cast@cast.CastGenerics.1Nested
@@ -518,9 +641,64 @@
  )
 )
 
+;;; void Nested.$clinit()
+(func $$clinit__void@cast.CastGenerics.1Nested
+ (block $return.label
+  (block
+   ;; if (cast.CastGenerics.1Nested.$initialized) return;
+   (if (global.get $$initialized@cast.CastGenerics.1Nested)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (cast.CastGenerics.1Nested.$initialized = true);
+   (global.set $$initialized@cast.CastGenerics.1Nested (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; INTERFACE  Empty1
+(global $$initialized@cast.CastGenerics.Empty1 (mut i32) (i32.const 0))
+
+;;; void Empty1.$clinit()
+(func $$clinit__void@cast.CastGenerics.Empty1
+ (block $return.label
+  (block
+   ;; if (cast.CastGenerics.Empty1.$initialized) return;
+   (if (global.get $$initialized@cast.CastGenerics.Empty1)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (cast.CastGenerics.Empty1.$initialized = true);
+   (global.set $$initialized@cast.CastGenerics.Empty1 (i32.const 1))
+  )
+ )
+)
 
 ;;; INTERFACE  Empty2
+(global $$initialized@cast.CastGenerics.Empty2 (mut i32) (i32.const 0))
+
+;;; void Empty2.$clinit()
+(func $$clinit__void@cast.CastGenerics.Empty2
+ (block $return.label
+  (block
+   ;; if (cast.CastGenerics.Empty2.$initialized) return;
+   (if (global.get $$initialized@cast.CastGenerics.Empty2)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (cast.CastGenerics.Empty2.$initialized = true);
+   (global.set $$initialized@cast.CastGenerics.Empty2 (i32.const 1))
+  )
+ )
+)
 
 ;;; CLASS  <anonymous> extends Foo<T>
 (type $cast.CastGenerics.1 (struct
@@ -535,6 +713,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $cast.CastGenerics.1.vtable (mut (ref null $cast.CastGenerics.1.vtable)) (ref.null $cast.CastGenerics.1.vtable))
+(global $$initialized@cast.CastGenerics.1 (mut i32) (i32.const 0))
 
 ;;; <anonymous> extends Foo<T>()
 (func $m_<init>__void_$pp_cast@cast.CastGenerics.1
@@ -547,6 +726,25 @@
   )
  )
  (local.get $this)
+)
+
+;;; void <anonymous> extends Foo<T>.$clinit()
+(func $$clinit__void@cast.CastGenerics.1
+ (block $return.label
+  (block
+   ;; if (cast.CastGenerics.1.$initialized) return;
+   (if (global.get $$initialized@cast.CastGenerics.1)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (cast.CastGenerics.1.$initialized = true);
+   (global.set $$initialized@cast.CastGenerics.1 (i32.const 1))
+   ;; cast.CastGenerics.Foo.$clinit();
+   (call $$clinit__void@cast.CastGenerics.Foo )
+  )
+ )
 )
 
 ;;; CLASS  Foo
@@ -562,6 +760,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $cast.CastGenerics.Foo.vtable (mut (ref null $cast.CastGenerics.Foo.vtable)) (ref.null $cast.CastGenerics.Foo.vtable))
+(global $$initialized@cast.CastGenerics.Foo (mut i32) (i32.const 0))
 
 ;;; Foo()
 (func $m_<init>__void@cast.CastGenerics.Foo
@@ -574,6 +773,25 @@
   )
  )
  (local.get $this)
+)
+
+;;; void Foo.$clinit()
+(func $$clinit__void@cast.CastGenerics.Foo
+ (block $return.label
+  (block
+   ;; if (cast.CastGenerics.Foo.$initialized) return;
+   (if (global.get $$initialized@cast.CastGenerics.Foo)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (cast.CastGenerics.Foo.$initialized = true);
+   (global.set $$initialized@cast.CastGenerics.Foo (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
 )
 ;;; Code for cast.CastPrimitives
 
@@ -595,6 +813,7 @@
  (field $m_testImplicitLongAssignmentCasts__void (mut (ref $function.__$void)))
 ))
 (global $cast.CastPrimitives.vtable (mut (ref null $cast.CastPrimitives.vtable)) (ref.null $cast.CastPrimitives.vtable))
+(global $$initialized@cast.CastPrimitives (mut i32) (i32.const 0))
 
 ;;; CastPrimitives()
 (func $m_<init>__void@cast.CastPrimitives
@@ -1062,6 +1281,25 @@
 )
 (elem declare func $m_testImplicitLongAssignmentCasts__void@cast.CastPrimitives)
 
+;;; void CastPrimitives.$clinit()
+(func $$clinit__void@cast.CastPrimitives
+ (block $return.label
+  (block
+   ;; if (cast.CastPrimitives.$initialized) return;
+   (if (global.get $$initialized@cast.CastPrimitives)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (cast.CastPrimitives.$initialized = true);
+   (global.set $$initialized@cast.CastPrimitives (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; CLASS  IntValueHolder
 (type $cast.CastPrimitives.IntValueHolder (struct
  (field $vtable (ref null $cast.CastPrimitives.IntValueHolder.vtable))
@@ -1075,6 +1313,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $cast.CastPrimitives.IntValueHolder.vtable (mut (ref null $cast.CastPrimitives.IntValueHolder.vtable)) (ref.null $cast.CastPrimitives.IntValueHolder.vtable))
+(global $$initialized@cast.CastPrimitives.IntValueHolder (mut i32) (i32.const 0))
 
 ;;; IntValueHolder(int value)
 (func $m_<init>__int__void_$pp_cast@cast.CastPrimitives.IntValueHolder
@@ -1090,6 +1329,25 @@
  (local.get $this)
 )
 
+;;; void IntValueHolder.$clinit()
+(func $$clinit__void@cast.CastPrimitives.IntValueHolder
+ (block $return.label
+  (block
+   ;; if (cast.CastPrimitives.IntValueHolder.$initialized) return;
+   (if (global.get $$initialized@cast.CastPrimitives.IntValueHolder)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (cast.CastPrimitives.IntValueHolder.$initialized = true);
+   (global.set $$initialized@cast.CastPrimitives.IntValueHolder (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; CLASS  LongValueHolder
 (type $cast.CastPrimitives.LongValueHolder (struct
  (field $vtable (ref null $cast.CastPrimitives.LongValueHolder.vtable))
@@ -1103,6 +1361,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $cast.CastPrimitives.LongValueHolder.vtable (mut (ref null $cast.CastPrimitives.LongValueHolder.vtable)) (ref.null $cast.CastPrimitives.LongValueHolder.vtable))
+(global $$initialized@cast.CastPrimitives.LongValueHolder (mut i32) (i32.const 0))
 
 ;;; LongValueHolder(long value)
 (func $m_<init>__long__void_$pp_cast@cast.CastPrimitives.LongValueHolder
@@ -1116,6 +1375,25 @@
   )
  )
  (local.get $this)
+)
+
+;;; void LongValueHolder.$clinit()
+(func $$clinit__void@cast.CastPrimitives.LongValueHolder
+ (block $return.label
+  (block
+   ;; if (cast.CastPrimitives.LongValueHolder.$initialized) return;
+   (if (global.get $$initialized@cast.CastPrimitives.LongValueHolder)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (cast.CastPrimitives.LongValueHolder.$initialized = true);
+   (global.set $$initialized@cast.CastPrimitives.LongValueHolder (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
 )
 ;;; Code for cast.Casts
 
@@ -1136,6 +1414,7 @@
  (field $m_testCastToArray__void (mut (ref $function.__$void)))
 ))
 (global $cast.Casts.vtable (mut (ref null $cast.Casts.vtable)) (ref.null $cast.Casts.vtable))
+(global $$initialized@cast.Casts (mut i32) (i32.const 0))
 
 ;;; Casts()
 (func $m_<init>__void@cast.Casts
@@ -1261,6 +1540,25 @@
  )
 )
 (elem declare func $m_testCastToArray__void@cast.Casts)
+
+;;; void Casts.$clinit()
+(func $$clinit__void@cast.Casts
+ (block $return.label
+  (block
+   ;; if (cast.Casts.$initialized) return;
+   (if (global.get $$initialized@cast.Casts)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (cast.Casts.$initialized = true);
+   (global.set $$initialized@cast.Casts (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
 
 ;;; Code for cast.CastGenerics [vtable]
  (global.set $cast.CastGenerics.vtable (struct.new_with_rtt $cast.CastGenerics.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_method__java_lang_Object_$pp_cast@cast.CastGenerics) (ref.func $m_testCastToTypeVariable__void@cast.CastGenerics) (ref.func $m_testCastToMethodTypeVariable__void@cast.CastGenerics) (ref.func $m_outerGenericMethod__void@cast.CastGenerics) (ref.func $m_method__java_lang_Object__cast_CastGenerics_Empty1@cast.CastGenerics) (rtt.canon $cast.CastGenerics.vtable)))

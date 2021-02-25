@@ -14,6 +14,7 @@
  (field $m_testMethod__java_util_ArrayList (mut (ref $function.__$java.util.ArrayList)))
 ))
 (global $jsmethod.JsMethodExample.vtable (mut (ref null $jsmethod.JsMethodExample.vtable)) (ref.null $jsmethod.JsMethodExample.vtable))
+(global $$initialized@jsmethod.JsMethodExample (mut i32) (i32.const 0))
 
 ;;; JsMethodExample()
 (func $m_<init>__void@jsmethod.JsMethodExample
@@ -21,6 +22,8 @@
  (result (ref null $jsmethod.JsMethodExample))
  (block $return.label
   (block
+   ;; jsmethod.JsMethodExample.$clinit();
+   (call $$clinit__void@jsmethod.JsMethodExample )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -43,6 +46,8 @@
  (local $$array_literal (ref null $char.array))
  (block $return.label
   (block
+   ;; jsmethod.JsMethodExample.$clinit();
+   (call $$clinit__void@jsmethod.JsMethodExample )
    ;; jsmethod.JsMethodExample.log(java.lang.String.fromInternalArray((char[] $array_literal = new char[4],($array_literal[0] = 116),($array_literal[1] = 101),($array_literal[2] = 115),($array_literal[3] = 116),$array_literal)));
    (call $m_log__java_lang_String__void@jsmethod.JsMethodExample (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (block (result (ref null $char.array))
     
@@ -72,6 +77,25 @@
 )
 (elem declare func $m_testMethod__java_util_ArrayList@jsmethod.JsMethodExample)
 
+;;; void JsMethodExample.$clinit()
+(func $$clinit__void@jsmethod.JsMethodExample
+ (block $return.label
+  (block
+   ;; if (jsmethod.JsMethodExample.$initialized) return;
+   (if (global.get $$initialized@jsmethod.JsMethodExample)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (jsmethod.JsMethodExample.$initialized = true);
+   (global.set $$initialized@jsmethod.JsMethodExample (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; CLASS  Base
 (type $jsmethod.JsMethodExample.Base (struct
  (field $vtable (ref null $jsmethod.JsMethodExample.Base.vtable))
@@ -86,6 +110,7 @@
  (field $m_m__java_lang_Object__void (mut (ref $function.$java.lang.Object__$void)))
 ))
 (global $jsmethod.JsMethodExample.Base.vtable (mut (ref null $jsmethod.JsMethodExample.Base.vtable)) (ref.null $jsmethod.JsMethodExample.Base.vtable))
+(global $$initialized@jsmethod.JsMethodExample.Base (mut i32) (i32.const 0))
 
 ;;; Base()
 (func $m_<init>__void_$pp_jsmethod@jsmethod.JsMethodExample.Base
@@ -113,7 +138,44 @@
 )
 (elem declare func $m_m__java_lang_Object__void@jsmethod.JsMethodExample.Base)
 
+;;; void Base.$clinit()
+(func $$clinit__void@jsmethod.JsMethodExample.Base
+ (block $return.label
+  (block
+   ;; if (jsmethod.JsMethodExample.Base.$initialized) return;
+   (if (global.get $$initialized@jsmethod.JsMethodExample.Base)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (jsmethod.JsMethodExample.Base.$initialized = true);
+   (global.set $$initialized@jsmethod.JsMethodExample.Base (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; INTERFACE  I
+(global $$initialized@jsmethod.JsMethodExample.I (mut i32) (i32.const 0))
+
+;;; void I.$clinit()
+(func $$clinit__void@jsmethod.JsMethodExample.I
+ (block $return.label
+  (block
+   ;; if (jsmethod.JsMethodExample.I.$initialized) return;
+   (if (global.get $$initialized@jsmethod.JsMethodExample.I)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (jsmethod.JsMethodExample.I.$initialized = true);
+   (global.set $$initialized@jsmethod.JsMethodExample.I (i32.const 1))
+  )
+ )
+)
 
 ;;; CLASS  Sub
 (type $jsmethod.JsMethodExample.Sub (struct
@@ -130,6 +192,7 @@
  (field $m_m__java_lang_String__void (mut (ref $function.$java.lang.String__$void)))
 ))
 (global $jsmethod.JsMethodExample.Sub.vtable (mut (ref null $jsmethod.JsMethodExample.Sub.vtable)) (ref.null $jsmethod.JsMethodExample.Sub.vtable))
+(global $$initialized@jsmethod.JsMethodExample.Sub (mut i32) (i32.const 0))
 
 ;;; Sub()
 (func $m_<init>__void_$pp_jsmethod@jsmethod.JsMethodExample.Sub
@@ -171,6 +234,25 @@
  )
 )
 (elem declare func $m_m__java_lang_Object__void@jsmethod.JsMethodExample.Sub)
+
+;;; void Sub.$clinit()
+(func $$clinit__void@jsmethod.JsMethodExample.Sub
+ (block $return.label
+  (block
+   ;; if (jsmethod.JsMethodExample.Sub.$initialized) return;
+   (if (global.get $$initialized@jsmethod.JsMethodExample.Sub)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (jsmethod.JsMethodExample.Sub.$initialized = true);
+   (global.set $$initialized@jsmethod.JsMethodExample.Sub (i32.const 1))
+   ;; jsmethod.JsMethodExample.Base.$clinit();
+   (call $$clinit__void@jsmethod.JsMethodExample.Base )
+  )
+ )
+)
 
 ;;; Code for jsmethod.JsMethodExample [vtable]
  (global.set $jsmethod.JsMethodExample.vtable (struct.new_with_rtt $jsmethod.JsMethodExample.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_testMethod__java_util_ArrayList@jsmethod.JsMethodExample) (rtt.canon $jsmethod.JsMethodExample.vtable)))

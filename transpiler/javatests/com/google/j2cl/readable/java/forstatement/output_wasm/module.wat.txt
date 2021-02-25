@@ -14,6 +14,7 @@
  (field $m_test__void (mut (ref $function.__$void)))
 ))
 (global $forstatement.ForStatement.vtable (mut (ref null $forstatement.ForStatement.vtable)) (ref.null $forstatement.ForStatement.vtable))
+(global $$initialized@forstatement.ForStatement (mut i32) (i32.const 0))
 
 ;;; ForStatement()
 (func $m_<init>__void@forstatement.ForStatement
@@ -150,6 +151,25 @@
   )
  )
  (local.get $return.value)
+)
+
+;;; void ForStatement.$clinit()
+(func $$clinit__void@forstatement.ForStatement
+ (block $return.label
+  (block
+   ;; if (forstatement.ForStatement.$initialized) return;
+   (if (global.get $$initialized@forstatement.ForStatement)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (forstatement.ForStatement.$initialized = true);
+   (global.set $$initialized@forstatement.ForStatement (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
 )
 
 ;;; Code for forstatement.ForStatement [vtable]

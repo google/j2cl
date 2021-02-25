@@ -14,6 +14,7 @@
  (field $m_foo__void (mut (ref $function.__$void)))
 ))
 (global $jsmethodoverride.Parent.vtable (mut (ref null $jsmethodoverride.Parent.vtable)) (ref.null $jsmethodoverride.Parent.vtable))
+(global $$initialized@jsmethodoverride.Parent (mut i32) (i32.const 0))
 
 ;;; Parent()
 (func $m_<init>__void_$pp_jsmethodoverride@jsmethodoverride.Parent
@@ -40,6 +41,25 @@
 )
 (elem declare func $m_foo__void@jsmethodoverride.Parent)
 
+;;; void Parent.$clinit()
+(func $$clinit__void@jsmethodoverride.Parent
+ (block $return.label
+  (block
+   ;; if (jsmethodoverride.Parent.$initialized) return;
+   (if (global.get $$initialized@jsmethodoverride.Parent)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (jsmethodoverride.Parent.$initialized = true);
+   (global.set $$initialized@jsmethodoverride.Parent (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; CLASS  Child
 (type $jsmethodoverride.Child (struct
  (field $vtable (ref null $jsmethodoverride.Child.vtable))
@@ -54,6 +74,7 @@
  (field $m_foo__void (mut (ref $function.__$void)))
 ))
 (global $jsmethodoverride.Child.vtable (mut (ref null $jsmethodoverride.Child.vtable)) (ref.null $jsmethodoverride.Child.vtable))
+(global $$initialized@jsmethodoverride.Child (mut i32) (i32.const 0))
 
 ;;; Child()
 (func $m_<init>__void@jsmethodoverride.Child
@@ -61,6 +82,8 @@
  (result (ref null $jsmethodoverride.Child))
  (block $return.label
   (block
+   ;; jsmethodoverride.Child.$clinit();
+   (call $$clinit__void@jsmethodoverride.Child )
    ;; Parent.this.Parent.<init>();
    (drop (call $m_<init>__void_$pp_jsmethodoverride@jsmethodoverride.Parent (local.get $this)))
   )
@@ -79,6 +102,25 @@
  )
 )
 (elem declare func $m_foo__void@jsmethodoverride.Child)
+
+;;; void Child.$clinit()
+(func $$clinit__void@jsmethodoverride.Child
+ (block $return.label
+  (block
+   ;; if (jsmethodoverride.Child.$initialized) return;
+   (if (global.get $$initialized@jsmethodoverride.Child)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (jsmethodoverride.Child.$initialized = true);
+   (global.set $$initialized@jsmethodoverride.Child (i32.const 1))
+   ;; jsmethodoverride.Parent.$clinit();
+   (call $$clinit__void@jsmethodoverride.Parent )
+  )
+ )
+)
 
 ;;; Code for jsmethodoverride.Parent [vtable]
  (global.set $jsmethodoverride.Parent.vtable (struct.new_with_rtt $jsmethodoverride.Parent.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__void@jsmethodoverride.Parent) (rtt.canon $jsmethodoverride.Parent.vtable)))

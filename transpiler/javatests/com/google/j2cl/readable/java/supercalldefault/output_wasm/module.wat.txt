@@ -13,6 +13,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $supercalldefault.SuperCallDefault.vtable (mut (ref null $supercalldefault.SuperCallDefault.vtable)) (ref.null $supercalldefault.SuperCallDefault.vtable))
+(global $$initialized@supercalldefault.SuperCallDefault (mut i32) (i32.const 0))
 
 ;;; SuperCallDefault()
 (func $m_<init>__void@supercalldefault.SuperCallDefault
@@ -25,6 +26,25 @@
   )
  )
  (local.get $this)
+)
+
+;;; void SuperCallDefault.$clinit()
+(func $$clinit__void@supercalldefault.SuperCallDefault
+ (block $return.label
+  (block
+   ;; if (supercalldefault.SuperCallDefault.$initialized) return;
+   (if (global.get $$initialized@supercalldefault.SuperCallDefault)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (supercalldefault.SuperCallDefault.$initialized = true);
+   (global.set $$initialized@supercalldefault.SuperCallDefault (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
 )
 
 ;;; Code for supercalldefault.SuperCallDefault [vtable]

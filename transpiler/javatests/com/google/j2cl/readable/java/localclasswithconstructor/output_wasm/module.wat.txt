@@ -14,6 +14,7 @@
  (field $m_test__int__void (mut (ref $function.$int__$void)))
 ))
 (global $localclasswithconstructor.LocalClassWithConstructor.vtable (mut (ref null $localclasswithconstructor.LocalClassWithConstructor.vtable)) (ref.null $localclasswithconstructor.LocalClassWithConstructor.vtable))
+(global $$initialized@localclasswithconstructor.LocalClassWithConstructor (mut i32) (i32.const 0))
 
 ;;; LocalClassWithConstructor()
 (func $m_<init>__void@localclasswithconstructor.LocalClassWithConstructor
@@ -47,6 +48,25 @@
 )
 (elem declare func $m_test__int__void@localclasswithconstructor.LocalClassWithConstructor)
 
+;;; void LocalClassWithConstructor.$clinit()
+(func $$clinit__void@localclasswithconstructor.LocalClassWithConstructor
+ (block $return.label
+  (block
+   ;; if (localclasswithconstructor.LocalClassWithConstructor.$initialized) return;
+   (if (global.get $$initialized@localclasswithconstructor.LocalClassWithConstructor)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (localclasswithconstructor.LocalClassWithConstructor.$initialized = true);
+   (global.set $$initialized@localclasswithconstructor.LocalClassWithConstructor (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; CLASS  LocalClass
 (type $localclasswithconstructor.LocalClassWithConstructor.1LocalClass (struct
  (field $vtable (ref null $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable))
@@ -64,6 +84,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable (mut (ref null $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable)) (ref.null $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable))
+(global $$initialized@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (mut i32) (i32.const 0))
 
 ;;; LocalClass(LocalClassWithConstructor $outer_this, int $captured_localVar, int $captured_p, int a, int b)
 (func $m_<init>__localclasswithconstructor_LocalClassWithConstructor__int__int__int__int__void@localclasswithconstructor.LocalClassWithConstructor.1LocalClass
@@ -108,6 +129,25 @@
   )
  )
  (local.get $this)
+)
+
+;;; void LocalClass.$clinit()
+(func $$clinit__void@localclasswithconstructor.LocalClassWithConstructor.1LocalClass
+ (block $return.label
+  (block
+   ;; if (localclasswithconstructor.LocalClassWithConstructor.1LocalClass.$initialized) return;
+   (if (global.get $$initialized@localclasswithconstructor.LocalClassWithConstructor.1LocalClass)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (localclasswithconstructor.LocalClassWithConstructor.1LocalClass.$initialized = true);
+   (global.set $$initialized@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
 )
 
 ;;; Code for localclasswithconstructor.LocalClassWithConstructor [vtable]

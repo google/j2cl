@@ -14,6 +14,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $instanceinitializers.InstanceInitializers.vtable (mut (ref null $instanceinitializers.InstanceInitializers.vtable)) (ref.null $instanceinitializers.InstanceInitializers.vtable))
+(global $$initialized@instanceinitializers.InstanceInitializers (mut i32) (i32.const 0))
 
 ;;; InstanceInitializers()
 (func $m_<init>__void@instanceinitializers.InstanceInitializers
@@ -39,6 +40,25 @@
    (struct.set $instanceinitializers.InstanceInitializers $field@instanceinitializers.InstanceInitializers(local.get $this) (i32.const 1))
    ;; (InstanceInitializers.this.field = 2);
    (struct.set $instanceinitializers.InstanceInitializers $field@instanceinitializers.InstanceInitializers(local.get $this) (i32.const 2))
+  )
+ )
+)
+
+;;; void InstanceInitializers.$clinit()
+(func $$clinit__void@instanceinitializers.InstanceInitializers
+ (block $return.label
+  (block
+   ;; if (instanceinitializers.InstanceInitializers.$initialized) return;
+   (if (global.get $$initialized@instanceinitializers.InstanceInitializers)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (instanceinitializers.InstanceInitializers.$initialized = true);
+   (global.set $$initialized@instanceinitializers.InstanceInitializers (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
   )
  )
 )

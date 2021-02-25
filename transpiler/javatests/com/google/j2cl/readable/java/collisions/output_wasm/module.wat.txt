@@ -13,6 +13,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $collisions.goog.vtable (mut (ref null $collisions.goog.vtable)) (ref.null $collisions.goog.vtable))
+(global $$initialized@collisions.goog (mut i32) (i32.const 0))
 
 ;;; goog()
 (func $m_<init>__void@collisions.goog
@@ -25,6 +26,25 @@
   )
  )
  (local.get $this)
+)
+
+;;; void goog.$clinit()
+(func $$clinit__void@collisions.goog
+ (block $return.label
+  (block
+   ;; if (collisions.goog.$initialized) return;
+   (if (global.get $$initialized@collisions.goog)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (collisions.goog.$initialized = true);
+   (global.set $$initialized@collisions.goog (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
 )
 
 ;;; CLASS  Blah
@@ -40,6 +60,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $collisions.Blah.vtable (mut (ref null $collisions.Blah.vtable)) (ref.null $collisions.Blah.vtable))
+(global $$initialized@collisions.Blah (mut i32) (i32.const 0))
 
 ;;; Blah()
 (func $m_<init>__void_$pp_collisions@collisions.Blah
@@ -47,6 +68,8 @@
  (result (ref null $collisions.Blah))
  (block $return.label
   (block
+   ;; collisions.Blah.$clinit();
+   (call $$clinit__void@collisions.Blah )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -73,6 +96,25 @@
  (local.get $return.value)
 )
 
+;;; void Blah.$clinit()
+(func $$clinit__void@collisions.Blah
+ (block $return.label
+  (block
+   ;; if (collisions.Blah.$initialized) return;
+   (if (global.get $$initialized@collisions.Blah)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (collisions.Blah.$initialized = true);
+   (global.set $$initialized@collisions.Blah (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; CLASS  foo
 (type $collisions.foo (struct
  (field $vtable (ref null $collisions.foo.vtable))
@@ -86,6 +128,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $collisions.foo.vtable (mut (ref null $collisions.foo.vtable)) (ref.null $collisions.foo.vtable))
+(global $$initialized@collisions.foo (mut i32) (i32.const 0))
 
 ;;; foo()
 (func $m_<init>__void_$pp_collisions@collisions.foo
@@ -98,6 +141,25 @@
   )
  )
  (local.get $this)
+)
+
+;;; void foo.$clinit()
+(func $$clinit__void@collisions.foo
+ (block $return.label
+  (block
+   ;; if (collisions.foo.$initialized) return;
+   (if (global.get $$initialized@collisions.foo)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (collisions.foo.$initialized = true);
+   (global.set $$initialized@collisions.foo (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
 )
 
 ;;; CLASS  bar
@@ -113,6 +175,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $collisions.bar.vtable (mut (ref null $collisions.bar.vtable)) (ref.null $collisions.bar.vtable))
+(global $$initialized@collisions.bar (mut i32) (i32.const 0))
 
 ;;; bar()
 (func $m_<init>__void_$pp_collisions@collisions.bar
@@ -163,6 +226,25 @@
  )
 )
 
+;;; void bar.$clinit()
+(func $$clinit__void@collisions.bar
+ (block $return.label
+  (block
+   ;; if (collisions.bar.$initialized) return;
+   (if (global.get $$initialized@collisions.bar)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (collisions.bar.$initialized = true);
+   (global.set $$initialized@collisions.bar (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; CLASS  Other
 (type $collisions.Other (struct
  (field $vtable (ref null $collisions.Other.vtable))
@@ -177,6 +259,7 @@
  (field $m_m__java_lang_Object_$pp_collisions (mut (ref $function.__$java.lang.Object)))
 ))
 (global $collisions.Other.vtable (mut (ref null $collisions.Other.vtable)) (ref.null $collisions.Other.vtable))
+(global $$initialized@collisions.Other (mut i32) (i32.const 0))
 
 ;;; Other()
 (func $m_<init>__void_$pp_collisions@collisions.Other
@@ -236,6 +319,25 @@
  )
 )
 
+;;; void Other.$clinit()
+(func $$clinit__void@collisions.Other
+ (block $return.label
+  (block
+   ;; if (collisions.Other.$initialized) return;
+   (if (global.get $$initialized@collisions.Other)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (collisions.Other.$initialized = true);
+   (global.set $$initialized@collisions.Other (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; CLASS  T
 (type $collisions.T (struct
  (field $vtable (ref null $collisions.T.vtable))
@@ -251,6 +353,7 @@
  (field $m_n__java_lang_Number_$pp_collisions (mut (ref $function.__$java.lang.Number)))
 ))
 (global $collisions.T.vtable (mut (ref null $collisions.T.vtable)) (ref.null $collisions.T.vtable))
+(global $$initialized@collisions.T (mut i32) (i32.const 0))
 
 ;;; T()
 (func $m_<init>__void_$pp_collisions@collisions.T
@@ -311,6 +414,25 @@
  (local.get $return.value)
 )
 (elem declare func $m_n__java_lang_Number_$pp_collisions@collisions.T)
+
+;;; void T.$clinit()
+(func $$clinit__void@collisions.T
+ (block $return.label
+  (block
+   ;; if (collisions.T.$initialized) return;
+   (if (global.get $$initialized@collisions.T)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (collisions.T.$initialized = true);
+   (global.set $$initialized@collisions.T (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
 
 ;;; Code for collisions.goog [vtable]
  (global.set $collisions.goog.vtable (struct.new_with_rtt $collisions.goog.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $collisions.goog.vtable)))

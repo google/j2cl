@@ -14,6 +14,7 @@
  (field $m_test__void (mut (ref $function.__$void)))
 ))
 (global $labelstatement.LabeledStatement.vtable (mut (ref null $labelstatement.LabeledStatement.vtable)) (ref.null $labelstatement.LabeledStatement.vtable))
+(global $$initialized@labelstatement.LabeledStatement (mut i32) (i32.const 0))
 
 ;;; LabeledStatement()
 (func $m_<init>__void@labelstatement.LabeledStatement
@@ -69,6 +70,25 @@
  )
 )
 (elem declare func $m_test__void@labelstatement.LabeledStatement)
+
+;;; void LabeledStatement.$clinit()
+(func $$clinit__void@labelstatement.LabeledStatement
+ (block $return.label
+  (block
+   ;; if (labelstatement.LabeledStatement.$initialized) return;
+   (if (global.get $$initialized@labelstatement.LabeledStatement)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (labelstatement.LabeledStatement.$initialized = true);
+   (global.set $$initialized@labelstatement.LabeledStatement (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
 
 ;;; Code for labelstatement.LabeledStatement [vtable]
  (global.set $labelstatement.LabeledStatement.vtable (struct.new_with_rtt $labelstatement.LabeledStatement.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__void@labelstatement.LabeledStatement) (rtt.canon $labelstatement.LabeledStatement.vtable)))

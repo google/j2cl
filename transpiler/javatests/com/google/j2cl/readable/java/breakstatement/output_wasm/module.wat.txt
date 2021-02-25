@@ -14,6 +14,7 @@
  (field $m_test__void (mut (ref $function.__$void)))
 ))
 (global $breakstatement.BreakStatement.vtable (mut (ref null $breakstatement.BreakStatement.vtable)) (ref.null $breakstatement.BreakStatement.vtable))
+(global $$initialized@breakstatement.BreakStatement (mut i32) (i32.const 0))
 
 ;;; BreakStatement()
 (func $m_<init>__void@breakstatement.BreakStatement
@@ -54,6 +55,25 @@
  )
 )
 (elem declare func $m_test__void@breakstatement.BreakStatement)
+
+;;; void BreakStatement.$clinit()
+(func $$clinit__void@breakstatement.BreakStatement
+ (block $return.label
+  (block
+   ;; if (breakstatement.BreakStatement.$initialized) return;
+   (if (global.get $$initialized@breakstatement.BreakStatement)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (breakstatement.BreakStatement.$initialized = true);
+   (global.set $$initialized@breakstatement.BreakStatement (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
 
 ;;; Code for breakstatement.BreakStatement [vtable]
  (global.set $breakstatement.BreakStatement.vtable (struct.new_with_rtt $breakstatement.BreakStatement.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__void@breakstatement.BreakStatement) (rtt.canon $breakstatement.BreakStatement.vtable)))

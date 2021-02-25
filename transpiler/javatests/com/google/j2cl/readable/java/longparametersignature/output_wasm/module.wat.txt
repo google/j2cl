@@ -14,6 +14,7 @@
  (field $m_main__long__void (mut (ref $function.$long__$void)))
 ))
 (global $longparametersignature.LongParameterSignature.vtable (mut (ref null $longparametersignature.LongParameterSignature.vtable)) (ref.null $longparametersignature.LongParameterSignature.vtable))
+(global $$initialized@longparametersignature.LongParameterSignature (mut i32) (i32.const 0))
 
 ;;; LongParameterSignature()
 (func $m_<init>__void@longparametersignature.LongParameterSignature
@@ -40,6 +41,25 @@
  )
 )
 (elem declare func $m_main__long__void@longparametersignature.LongParameterSignature)
+
+;;; void LongParameterSignature.$clinit()
+(func $$clinit__void@longparametersignature.LongParameterSignature
+ (block $return.label
+  (block
+   ;; if (longparametersignature.LongParameterSignature.$initialized) return;
+   (if (global.get $$initialized@longparametersignature.LongParameterSignature)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (longparametersignature.LongParameterSignature.$initialized = true);
+   (global.set $$initialized@longparametersignature.LongParameterSignature (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
 
 ;;; Code for longparametersignature.LongParameterSignature [vtable]
  (global.set $longparametersignature.LongParameterSignature.vtable (struct.new_with_rtt $longparametersignature.LongParameterSignature.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_main__long__void@longparametersignature.LongParameterSignature) (rtt.canon $longparametersignature.LongParameterSignature.vtable)))

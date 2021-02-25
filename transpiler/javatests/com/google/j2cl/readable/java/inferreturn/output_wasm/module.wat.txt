@@ -13,6 +13,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $inferreturn.InferReturn.vtable (mut (ref null $inferreturn.InferReturn.vtable)) (ref.null $inferreturn.InferReturn.vtable))
+(global $$initialized@inferreturn.InferReturn (mut i32) (i32.const 0))
 
 ;;; InferReturn()
 (func $m_<init>__void@inferreturn.InferReturn
@@ -34,6 +35,8 @@
  (local $return.value (ref null $inferreturn.InferReturn))
  (block $return.label
   (block
+   ;; inferreturn.InferReturn.$clinit();
+   (call $$clinit__void@inferreturn.InferReturn )
    ;; return new InferReturn.<init>();
    (local.set $return.value (call $m_<init>__void@inferreturn.InferReturn (struct.new_with_rtt $inferreturn.InferReturn (global.get $inferreturn.InferReturn.vtable) (i32.const 0) (global.get $inferreturn.InferReturn.rtt))))
    (br $return.label)
@@ -49,6 +52,8 @@
  (local $return.value (ref null $inferreturn.InferReturn))
  (block $return.label
   (block
+   ;; inferreturn.InferReturn.$clinit();
+   (call $$clinit__void@inferreturn.InferReturn )
    ;; if (!(foo == null)) {
    (if (i32.eqz (ref.eq (local.get $foo) (ref.null $java.lang.Object)))
     (then
@@ -75,6 +80,8 @@
  (local $$array_literal_1 (ref null $char.array))
  (block $return.label
   (block
+   ;; inferreturn.InferReturn.$clinit();
+   (call $$clinit__void@inferreturn.InferReturn )
    ;; ArrayList<Object> list = inferreturn.InferReturn.newArrayList(java.lang.String.fromInternalArray((char[] $array_literal = new char[3],($array_literal[0] = 102),($array_literal[1] = 111),($array_literal[2] = 111),$array_literal)));
    
    (local.set $list (call $m_newArrayList__java_lang_Object__java_util_ArrayList@inferreturn.InferReturn (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (block (result (ref null $char.array))
@@ -110,6 +117,8 @@
  (local $return.value (ref null $java.util.ArrayList))
  (block $return.label
   (block
+   ;; inferreturn.InferReturn.$clinit();
+   (call $$clinit__void@inferreturn.InferReturn )
    ;; return new ArrayList.<init>();
    (local.set $return.value (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.vtable) (i32.const 0) (i32.const 0) (ref.null $Object.array) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
    (br $return.label)
@@ -125,6 +134,8 @@
  (local $return.value (ref null $Object.array))
  (block $return.label
   (block
+   ;; inferreturn.InferReturn.$clinit();
+   (call $$clinit__void@inferreturn.InferReturn )
    ;; return ((V[]) new Object[0]);
    (local.set $return.value (ref.cast $java.lang.Object $Object.array (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $Object.array.elements (i32.const 0) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)) (global.get $Object.array.rtt)))
    (br $return.label)
@@ -138,6 +149,8 @@
  (param $foo (ref null $java.util.ArrayList))
  (block $return.label
   (block
+   ;; inferreturn.InferReturn.$clinit();
+   (call $$clinit__void@inferreturn.InferReturn )
   )
  )
 )
@@ -147,6 +160,27 @@
  (param $foo (ref null $Object.array))
  (block $return.label
   (block
+   ;; inferreturn.InferReturn.$clinit();
+   (call $$clinit__void@inferreturn.InferReturn )
+  )
+ )
+)
+
+;;; void InferReturn.$clinit()
+(func $$clinit__void@inferreturn.InferReturn
+ (block $return.label
+  (block
+   ;; if (inferreturn.InferReturn.$initialized) return;
+   (if (global.get $$initialized@inferreturn.InferReturn)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (inferreturn.InferReturn.$initialized = true);
+   (global.set $$initialized@inferreturn.InferReturn (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
   )
  )
 )

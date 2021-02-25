@@ -14,6 +14,7 @@
 ))
 (global $libraryinfo.Main.vtable (mut (ref null $libraryinfo.Main.vtable)) (ref.null $libraryinfo.Main.vtable))
 (global $STATIC_FIELD@libraryinfo.Main (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $$initialized@libraryinfo.Main (mut i32) (i32.const 0))
 
 ;;; Main()
 (func $m_<init>__void@libraryinfo.Main
@@ -35,6 +36,8 @@
  (local $$array_literal (ref null $char.array))
  (block $return.label
   (block
+   ;; libraryinfo.Main.$clinit();
+   (call $$clinit__void@libraryinfo.Main )
    ;; new Main.<init>().execute();
    (call $m_execute__void_$p_libraryinfo_Main@libraryinfo.Main (call $m_<init>__void@libraryinfo.Main (struct.new_with_rtt $libraryinfo.Main (global.get $libraryinfo.Main.vtable) (i32.const 0) (global.get $libraryinfo.Main.rtt))))
    ;; Function jsFunction = new FunctionImpl.<init>();
@@ -104,6 +107,8 @@
  (local $clazz (ref null $java.lang.Class))
  (block $return.label
   (block
+   ;; libraryinfo.Main.$clinit();
+   (call $$clinit__void@libraryinfo.Main )
    ;; Foo foo = null;
    
    (local.set $foo (ref.null $libraryinfo.Main.Foo))
@@ -116,13 +121,127 @@
  )
 )
 
+;;; void Main.$clinit()
+(func $$clinit__void@libraryinfo.Main
+ (local $$array_literal (ref null $char.array))
+ (block $return.label
+  (block
+   ;; if (libraryinfo.Main.$initialized) return;
+   (if (global.get $$initialized@libraryinfo.Main)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (libraryinfo.Main.$initialized = true);
+   (global.set $$initialized@libraryinfo.Main (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+   (block
+    ;; libraryinfo.Main.$clinit();
+    (call $$clinit__void@libraryinfo.Main )
+    ;; (libraryinfo.Main.STATIC_FIELD = java.lang.String.fromInternalArray((char[] $array_literal = new char[12],($array_literal[0] = 83),($array_literal[1] = 84),($array_literal[2] = 65),($array_literal[3] = 84),($array_literal[4] = 73),($array_literal[5] = 67),($array_literal[6] = 95),($array_literal[7] = 70),($array_literal[8] = 73),($array_literal[9] = 69),($array_literal[10] = 76),($array_literal[11] = 68),$array_literal)));
+    (global.set $STATIC_FIELD@libraryinfo.Main (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (block (result (ref null $char.array))
+     
+     (local.set $$array_literal (struct.new_with_rtt $char.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $char.array.elements (i32.const 12) (global.get $char.array.elements.rtt)) (global.get $char.array.rtt)))
+     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 0) (i32.const 83))
+     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 1) (i32.const 84))
+     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 2) (i32.const 65))
+     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 3) (i32.const 84))
+     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 4) (i32.const 73))
+     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 5) (i32.const 67))
+     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 6) (i32.const 95))
+     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 7) (i32.const 70))
+     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 8) (i32.const 73))
+     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 9) (i32.const 69))
+     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 10) (i32.const 76))
+     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 11) (i32.const 68))
+     (local.get $$array_literal)
+    )))
+   )
+  )
+ )
+)
+
 ;;; INTERFACE  JsTypeInterface
+(global $$initialized@libraryinfo.Main.JsTypeInterface (mut i32) (i32.const 0))
+
+;;; void JsTypeInterface.$clinit()
+(func $$clinit__void@libraryinfo.Main.JsTypeInterface
+ (block $return.label
+  (block
+   ;; if (libraryinfo.Main.JsTypeInterface.$initialized) return;
+   (if (global.get $$initialized@libraryinfo.Main.JsTypeInterface)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (libraryinfo.Main.JsTypeInterface.$initialized = true);
+   (global.set $$initialized@libraryinfo.Main.JsTypeInterface (i32.const 1))
+  )
+ )
+)
 
 ;;; INTERFACE  FunctionnalInterface
+(global $$initialized@libraryinfo.Main.FunctionnalInterface (mut i32) (i32.const 0))
+
+;;; void FunctionnalInterface.$clinit()
+(func $$clinit__void@libraryinfo.Main.FunctionnalInterface
+ (block $return.label
+  (block
+   ;; if (libraryinfo.Main.FunctionnalInterface.$initialized) return;
+   (if (global.get $$initialized@libraryinfo.Main.FunctionnalInterface)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (libraryinfo.Main.FunctionnalInterface.$initialized = true);
+   (global.set $$initialized@libraryinfo.Main.FunctionnalInterface (i32.const 1))
+  )
+ )
+)
 
 ;;; INTERFACE  JsAccessibleFunctionnalInterface
+(global $$initialized@libraryinfo.Main.JsAccessibleFunctionnalInterface (mut i32) (i32.const 0))
+
+;;; void JsAccessibleFunctionnalInterface.$clinit()
+(func $$clinit__void@libraryinfo.Main.JsAccessibleFunctionnalInterface
+ (block $return.label
+  (block
+   ;; if (libraryinfo.Main.JsAccessibleFunctionnalInterface.$initialized) return;
+   (if (global.get $$initialized@libraryinfo.Main.JsAccessibleFunctionnalInterface)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (libraryinfo.Main.JsAccessibleFunctionnalInterface.$initialized = true);
+   (global.set $$initialized@libraryinfo.Main.JsAccessibleFunctionnalInterface (i32.const 1))
+  )
+ )
+)
 
 ;;; INTERFACE  Function
+(global $$initialized@libraryinfo.Main.Function (mut i32) (i32.const 0))
+
+;;; void Function.$clinit()
+(func $$clinit__void@libraryinfo.Main.Function
+ (block $return.label
+  (block
+   ;; if (libraryinfo.Main.Function.$initialized) return;
+   (if (global.get $$initialized@libraryinfo.Main.Function)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (libraryinfo.Main.Function.$initialized = true);
+   (global.set $$initialized@libraryinfo.Main.Function (i32.const 1))
+  )
+ )
+)
 
 ;;; CLASS  FunctionImpl
 (type $libraryinfo.Main.FunctionImpl (struct
@@ -138,6 +257,7 @@
  (field $m_apply__java_lang_String__void (mut (ref $function.$java.lang.String__$void)))
 ))
 (global $libraryinfo.Main.FunctionImpl.vtable (mut (ref null $libraryinfo.Main.FunctionImpl.vtable)) (ref.null $libraryinfo.Main.FunctionImpl.vtable))
+(global $$initialized@libraryinfo.Main.FunctionImpl (mut i32) (i32.const 0))
 
 ;;; FunctionImpl()
 (func $m_<init>__void_$p_libraryinfo_Main_FunctionImpl@libraryinfo.Main.FunctionImpl
@@ -165,6 +285,25 @@
 )
 (elem declare func $m_apply__java_lang_String__void@libraryinfo.Main.FunctionImpl)
 
+;;; void FunctionImpl.$clinit()
+(func $$clinit__void@libraryinfo.Main.FunctionImpl
+ (block $return.label
+  (block
+   ;; if (libraryinfo.Main.FunctionImpl.$initialized) return;
+   (if (global.get $$initialized@libraryinfo.Main.FunctionImpl)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (libraryinfo.Main.FunctionImpl.$initialized = true);
+   (global.set $$initialized@libraryinfo.Main.FunctionImpl (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; ENUM  MyEnum
 (type $libraryinfo.Main.MyEnum (struct
  (field $vtable (ref null $libraryinfo.Main.MyEnum.vtable))
@@ -181,6 +320,7 @@
 (global $A@libraryinfo.Main.MyEnum (mut (ref null $libraryinfo.Main.MyEnum)) (ref.null $libraryinfo.Main.MyEnum))
 (global $B@libraryinfo.Main.MyEnum (mut (ref null $libraryinfo.Main.MyEnum)) (ref.null $libraryinfo.Main.MyEnum))
 (global $C@libraryinfo.Main.MyEnum (mut (ref null $libraryinfo.Main.MyEnum)) (ref.null $libraryinfo.Main.MyEnum))
+(global $$initialized@libraryinfo.Main.MyEnum (mut i32) (i32.const 0))
 
 ;;; MyEnum()
 (func $m_<init>__void_$p_libraryinfo_Main_MyEnum@libraryinfo.Main.MyEnum
@@ -193,6 +333,43 @@
   )
  )
  (local.get $this)
+)
+
+;;; void MyEnum.$clinit()
+(func $$clinit__void@libraryinfo.Main.MyEnum
+ (block $return.label
+  (block
+   ;; if (libraryinfo.Main.MyEnum.$initialized) return;
+   (if (global.get $$initialized@libraryinfo.Main.MyEnum)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (libraryinfo.Main.MyEnum.$initialized = true);
+   (global.set $$initialized@libraryinfo.Main.MyEnum (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+   (block
+    ;; libraryinfo.Main.MyEnum.$clinit();
+    (call $$clinit__void@libraryinfo.Main.MyEnum )
+    ;; (libraryinfo.Main.MyEnum.A = new MyEnum.<init>());
+    (global.set $A@libraryinfo.Main.MyEnum (call $m_<init>__void_$p_libraryinfo_Main_MyEnum@libraryinfo.Main.MyEnum (struct.new_with_rtt $libraryinfo.Main.MyEnum (global.get $libraryinfo.Main.MyEnum.vtable) (i32.const 0) (global.get $libraryinfo.Main.MyEnum.rtt))))
+   )
+   (block
+    ;; libraryinfo.Main.MyEnum.$clinit();
+    (call $$clinit__void@libraryinfo.Main.MyEnum )
+    ;; (libraryinfo.Main.MyEnum.B = new MyEnum.<init>());
+    (global.set $B@libraryinfo.Main.MyEnum (call $m_<init>__void_$p_libraryinfo_Main_MyEnum@libraryinfo.Main.MyEnum (struct.new_with_rtt $libraryinfo.Main.MyEnum (global.get $libraryinfo.Main.MyEnum.vtable) (i32.const 0) (global.get $libraryinfo.Main.MyEnum.rtt))))
+   )
+   (block
+    ;; libraryinfo.Main.MyEnum.$clinit();
+    (call $$clinit__void@libraryinfo.Main.MyEnum )
+    ;; (libraryinfo.Main.MyEnum.C = new MyEnum.<init>());
+    (global.set $C@libraryinfo.Main.MyEnum (call $m_<init>__void_$p_libraryinfo_Main_MyEnum@libraryinfo.Main.MyEnum (struct.new_with_rtt $libraryinfo.Main.MyEnum (global.get $libraryinfo.Main.MyEnum.vtable) (i32.const 0) (global.get $libraryinfo.Main.MyEnum.rtt))))
+   )
+  )
+ )
 )
 
 ;;; CLASS  MyJsType
@@ -209,6 +386,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $libraryinfo.Main.MyJsType.vtable (mut (ref null $libraryinfo.Main.MyJsType.vtable)) (ref.null $libraryinfo.Main.MyJsType.vtable))
+(global $$initialized@libraryinfo.Main.MyJsType (mut i32) (i32.const 0))
 
 ;;; MyJsType()
 (func $m_<init>__void@libraryinfo.Main.MyJsType
@@ -216,6 +394,8 @@
  (result (ref null $libraryinfo.Main.MyJsType))
  (block $return.label
   (block
+   ;; libraryinfo.Main.MyJsType.$clinit();
+   (call $$clinit__void@libraryinfo.Main.MyJsType )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; (MyJsType.this.someField = new Main.<init>());
@@ -223,6 +403,25 @@
   )
  )
  (local.get $this)
+)
+
+;;; void MyJsType.$clinit()
+(func $$clinit__void@libraryinfo.Main.MyJsType
+ (block $return.label
+  (block
+   ;; if (libraryinfo.Main.MyJsType.$initialized) return;
+   (if (global.get $$initialized@libraryinfo.Main.MyJsType)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (libraryinfo.Main.MyJsType.$initialized = true);
+   (global.set $$initialized@libraryinfo.Main.MyJsType (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
 )
 
 ;;; CLASS  <anonymous> extends Object
@@ -239,6 +438,7 @@
  (field $m_foo__void_$pp_libraryinfo (mut (ref $function.__$void)))
 ))
 (global $libraryinfo.Main.1.vtable (mut (ref null $libraryinfo.Main.1.vtable)) (ref.null $libraryinfo.Main.1.vtable))
+(global $$initialized@libraryinfo.Main.1 (mut i32) (i32.const 0))
 
 ;;; <anonymous> extends Object()
 (func $m_<init>__void_$pp_libraryinfo@libraryinfo.Main.1
@@ -265,6 +465,25 @@
 )
 (elem declare func $m_foo__void_$pp_libraryinfo@libraryinfo.Main.1)
 
+;;; void <anonymous> extends Object.$clinit()
+(func $$clinit__void@libraryinfo.Main.1
+ (block $return.label
+  (block
+   ;; if (libraryinfo.Main.1.$initialized) return;
+   (if (global.get $$initialized@libraryinfo.Main.1)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (libraryinfo.Main.1.$initialized = true);
+   (global.set $$initialized@libraryinfo.Main.1 (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; CLASS  Foo
 (type $libraryinfo.Main.Foo (struct
  (field $vtable (ref null $libraryinfo.Main.Foo.vtable))
@@ -280,6 +499,7 @@
  (field $m_instanceMethod__void_$pp_libraryinfo (mut (ref $function.__$void)))
 ))
 (global $libraryinfo.Main.Foo.vtable (mut (ref null $libraryinfo.Main.Foo.vtable)) (ref.null $libraryinfo.Main.Foo.vtable))
+(global $$initialized@libraryinfo.Main.Foo (mut i32) (i32.const 0))
 
 ;;; Foo(Main $outer_this)
 (func $m_<init>__libraryinfo_Main__void@libraryinfo.Main.Foo
@@ -308,6 +528,25 @@
  )
 )
 (elem declare func $m_instanceMethod__void_$pp_libraryinfo@libraryinfo.Main.Foo)
+
+;;; void Foo.$clinit()
+(func $$clinit__void@libraryinfo.Main.Foo
+ (block $return.label
+  (block
+   ;; if (libraryinfo.Main.Foo.$initialized) return;
+   (if (global.get $$initialized@libraryinfo.Main.Foo)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (libraryinfo.Main.Foo.$initialized = true);
+   (global.set $$initialized@libraryinfo.Main.Foo (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
 
 ;;; Code for libraryinfo.Main [vtable]
  (global.set $libraryinfo.Main.vtable (struct.new_with_rtt $libraryinfo.Main.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@libraryinfo.Main) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $libraryinfo.Main.vtable)))

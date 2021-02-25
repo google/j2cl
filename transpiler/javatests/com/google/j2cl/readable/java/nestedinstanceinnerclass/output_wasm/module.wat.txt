@@ -14,6 +14,7 @@
  (field $m_test__void (mut (ref $function.__$void)))
 ))
 (global $nestedinstanceinnerclass.OuterClass.vtable (mut (ref null $nestedinstanceinnerclass.OuterClass.vtable)) (ref.null $nestedinstanceinnerclass.OuterClass.vtable))
+(global $$initialized@nestedinstanceinnerclass.OuterClass (mut i32) (i32.const 0))
 
 ;;; OuterClass()
 (func $m_<init>__void@nestedinstanceinnerclass.OuterClass
@@ -42,6 +43,25 @@
 )
 (elem declare func $m_test__void@nestedinstanceinnerclass.OuterClass)
 
+;;; void OuterClass.$clinit()
+(func $$clinit__void@nestedinstanceinnerclass.OuterClass
+ (block $return.label
+  (block
+   ;; if (nestedinstanceinnerclass.OuterClass.$initialized) return;
+   (if (global.get $$initialized@nestedinstanceinnerclass.OuterClass)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (nestedinstanceinnerclass.OuterClass.$initialized = true);
+   (global.set $$initialized@nestedinstanceinnerclass.OuterClass (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; CLASS  InnerClass
 (type $nestedinstanceinnerclass.OuterClass.InnerClass (struct
  (field $vtable (ref null $nestedinstanceinnerclass.OuterClass.InnerClass.vtable))
@@ -56,6 +76,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $nestedinstanceinnerclass.OuterClass.InnerClass.vtable (mut (ref null $nestedinstanceinnerclass.OuterClass.InnerClass.vtable)) (ref.null $nestedinstanceinnerclass.OuterClass.InnerClass.vtable))
+(global $$initialized@nestedinstanceinnerclass.OuterClass.InnerClass (mut i32) (i32.const 0))
 
 ;;; InnerClass(OuterClass $outer_this)
 (func $m_<init>__nestedinstanceinnerclass_OuterClass__void@nestedinstanceinnerclass.OuterClass.InnerClass
@@ -71,6 +92,25 @@
   )
  )
  (local.get $this)
+)
+
+;;; void InnerClass.$clinit()
+(func $$clinit__void@nestedinstanceinnerclass.OuterClass.InnerClass
+ (block $return.label
+  (block
+   ;; if (nestedinstanceinnerclass.OuterClass.InnerClass.$initialized) return;
+   (if (global.get $$initialized@nestedinstanceinnerclass.OuterClass.InnerClass)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (nestedinstanceinnerclass.OuterClass.InnerClass.$initialized = true);
+   (global.set $$initialized@nestedinstanceinnerclass.OuterClass.InnerClass (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
 )
 
 ;;; CLASS  InnerInnerClass
@@ -89,6 +129,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.vtable (mut (ref null $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.vtable)) (ref.null $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.vtable))
+(global $$initialized@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (mut i32) (i32.const 0))
 
 ;;; InnerInnerClass(InnerClass $outer_this)
 (func $m_<init>__nestedinstanceinnerclass_OuterClass_InnerClass__void@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass
@@ -117,6 +158,25 @@
    (struct.set $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass $x@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass(local.get $this) (struct.get $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass $this@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass(local.get $this)))
    ;; (InnerInnerClass.this.y = InnerInnerClass.this.this.this);
    (struct.set $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass $y@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass(local.get $this) (struct.get $nestedinstanceinnerclass.OuterClass.InnerClass $this@nestedinstanceinnerclass.OuterClass.InnerClass(struct.get $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass $this@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass(local.get $this))))
+  )
+ )
+)
+
+;;; void InnerInnerClass.$clinit()
+(func $$clinit__void@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass
+ (block $return.label
+  (block
+   ;; if (nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.$initialized) return;
+   (if (global.get $$initialized@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.$initialized = true);
+   (global.set $$initialized@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
   )
  )
 )

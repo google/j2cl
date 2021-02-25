@@ -15,6 +15,7 @@
 (global $staticfieldinitializer.StaticFieldInitializer.vtable (mut (ref null $staticfieldinitializer.StaticFieldInitializer.vtable)) (ref.null $staticfieldinitializer.StaticFieldInitializer.vtable))
 (global $a@staticfieldinitializer.StaticFieldInitializer (mut i32) (i32.const 0))
 (global $b@staticfieldinitializer.StaticFieldInitializer (mut i32) (i32.const 0))
+(global $$initialized@staticfieldinitializer.StaticFieldInitializer (mut i32) (i32.const 0))
 
 ;;; StaticFieldInitializer()
 (func $m_<init>__void@staticfieldinitializer.StaticFieldInitializer
@@ -27,6 +28,40 @@
   )
  )
  (local.get $this)
+)
+
+;;; void StaticFieldInitializer.$clinit()
+(func $$clinit__void@staticfieldinitializer.StaticFieldInitializer
+ (block $return.label
+  (block
+   ;; if (staticfieldinitializer.StaticFieldInitializer.$initialized) return;
+   (if (global.get $$initialized@staticfieldinitializer.StaticFieldInitializer)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (staticfieldinitializer.StaticFieldInitializer.$initialized = true);
+   (global.set $$initialized@staticfieldinitializer.StaticFieldInitializer (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+   (block
+    ;; staticfieldinitializer.StaticFieldInitializer.$clinit();
+    (call $$clinit__void@staticfieldinitializer.StaticFieldInitializer )
+    ;; (staticfieldinitializer.StaticFieldInitializer.a = 2);
+    (global.set $a@staticfieldinitializer.StaticFieldInitializer (i32.const 2))
+   )
+   (block
+    ;; staticfieldinitializer.StaticFieldInitializer.$clinit();
+    (call $$clinit__void@staticfieldinitializer.StaticFieldInitializer )
+    ;; (staticfieldinitializer.StaticFieldInitializer.b = ((staticfieldinitializer.StaticFieldInitializer.$clinit(),staticfieldinitializer.StaticFieldInitializer.a) * 4));
+    (global.set $b@staticfieldinitializer.StaticFieldInitializer (i32.mul (block (result i32)
+     (call $$clinit__void@staticfieldinitializer.StaticFieldInitializer )
+     (global.get $a@staticfieldinitializer.StaticFieldInitializer)
+    ) (i32.const 4)))
+   )
+  )
+ )
 )
 
 ;;; Code for staticfieldinitializer.StaticFieldInitializer [vtable]

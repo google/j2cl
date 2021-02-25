@@ -1,6 +1,7 @@
 ;;; Code for typeannotations.ParametricType
 
 ;;; INTERFACE  ParametricType
+(global $$initialized@typeannotations.ParametricType (mut i32) (i32.const 0))
 
 ;;; List<T> ParametricType.m(List<Map<String[], Map<List<String>[], String[]>>> l)
 (func $m_m__java_util_List__java_util_List@typeannotations.ParametricType
@@ -18,6 +19,23 @@
  (local.get $return.value)
 )
 (elem declare func $m_m__java_util_List__java_util_List@typeannotations.ParametricType)
+
+;;; void ParametricType.$clinit()
+(func $$clinit__void@typeannotations.ParametricType
+ (block $return.label
+  (block
+   ;; if (typeannotations.ParametricType.$initialized) return;
+   (if (global.get $$initialized@typeannotations.ParametricType)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (typeannotations.ParametricType.$initialized = true);
+   (global.set $$initialized@typeannotations.ParametricType (i32.const 1))
+  )
+ )
+)
 ;;; Code for typeannotations.TypeAnnotations
 
 ;;; CLASS  AbstractType
@@ -34,6 +52,7 @@
  (field $m_m__java_util_List__java_util_List (mut (ref $function.$java.lang.Object__$java.lang.Object)))
 ))
 (global $typeannotations.AbstractType.vtable (mut (ref null $typeannotations.AbstractType.vtable)) (ref.null $typeannotations.AbstractType.vtable))
+(global $$initialized@typeannotations.AbstractType (mut i32) (i32.const 0))
 
 ;;; AbstractType()
 (func $m_<init>__void_$pp_typeannotations@typeannotations.AbstractType
@@ -67,6 +86,27 @@
 )
 (elem declare func $m_m__java_util_List__java_util_List@typeannotations.AbstractType)
 
+;;; void AbstractType.$clinit()
+(func $$clinit__void@typeannotations.AbstractType
+ (block $return.label
+  (block
+   ;; if (typeannotations.AbstractType.$initialized) return;
+   (if (global.get $$initialized@typeannotations.AbstractType)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (typeannotations.AbstractType.$initialized = true);
+   (global.set $$initialized@typeannotations.AbstractType (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+   ;; typeannotations.ParametricType.$clinit();
+   (call $$clinit__void@typeannotations.ParametricType )
+  )
+ )
+)
+
 ;;; CLASS  AbstractTypeNonNull
 (type $typeannotations.AbstractTypeNonNull (struct
  (field $vtable (ref null $typeannotations.AbstractTypeNonNull.vtable))
@@ -81,6 +121,7 @@
  (field $m_m__java_util_List__java_util_List (mut (ref $function.$java.lang.Object__$java.lang.Object)))
 ))
 (global $typeannotations.AbstractTypeNonNull.vtable (mut (ref null $typeannotations.AbstractTypeNonNull.vtable)) (ref.null $typeannotations.AbstractTypeNonNull.vtable))
+(global $$initialized@typeannotations.AbstractTypeNonNull (mut i32) (i32.const 0))
 
 ;;; AbstractTypeNonNull()
 (func $m_<init>__void_$pp_typeannotations@typeannotations.AbstractTypeNonNull
@@ -114,6 +155,27 @@
 )
 (elem declare func $m_m__java_util_List__java_util_List@typeannotations.AbstractTypeNonNull)
 
+;;; void AbstractTypeNonNull.$clinit()
+(func $$clinit__void@typeannotations.AbstractTypeNonNull
+ (block $return.label
+  (block
+   ;; if (typeannotations.AbstractTypeNonNull.$initialized) return;
+   (if (global.get $$initialized@typeannotations.AbstractTypeNonNull)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (typeannotations.AbstractTypeNonNull.$initialized = true);
+   (global.set $$initialized@typeannotations.AbstractTypeNonNull (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+   ;; typeannotations.ParametricType.$clinit();
+   (call $$clinit__void@typeannotations.ParametricType )
+  )
+ )
+)
+
 ;;; CLASS  Parent
 (type $typeannotations.Parent (struct
  (field $vtable (ref null $typeannotations.Parent.vtable))
@@ -129,6 +191,7 @@
  (field $m_m__java_util_List__typeannotations_Parent__java_util_List (mut (ref $function.$java.lang.Object__$typeannotations.Parent__$java.lang.Object)))
 ))
 (global $typeannotations.Parent.vtable (mut (ref null $typeannotations.Parent.vtable)) (ref.null $typeannotations.Parent.vtable))
+(global $$initialized@typeannotations.Parent (mut i32) (i32.const 0))
 
 ;;; Parent()
 (func $m_<init>__void_$pp_typeannotations@typeannotations.Parent
@@ -183,6 +246,25 @@
 )
 (elem declare func $m_m__java_util_List__typeannotations_Parent__java_util_List@typeannotations.Parent)
 
+;;; void Parent.$clinit()
+(func $$clinit__void@typeannotations.Parent
+ (block $return.label
+  (block
+   ;; if (typeannotations.Parent.$initialized) return;
+   (if (global.get $$initialized@typeannotations.Parent)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (typeannotations.Parent.$initialized = true);
+   (global.set $$initialized@typeannotations.Parent (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; CLASS  ChildWithNullableParent
 (type $typeannotations.ChildWithNullableParent (struct
  (field $vtable (ref null $typeannotations.ChildWithNullableParent.vtable))
@@ -201,6 +283,7 @@
  (field $m_m__java_util_List__java_util_List (mut (ref $function.$java.lang.Object__$java.lang.Object)))
 ))
 (global $typeannotations.ChildWithNullableParent.vtable (mut (ref null $typeannotations.ChildWithNullableParent.vtable)) (ref.null $typeannotations.ChildWithNullableParent.vtable))
+(global $$initialized@typeannotations.ChildWithNullableParent (mut i32) (i32.const 0))
 
 ;;; ChildWithNullableParent()
 (func $m_<init>__void_$pp_typeannotations@typeannotations.ChildWithNullableParent
@@ -274,6 +357,27 @@
 )
 (elem declare func $m_m__java_util_List__java_util_List@typeannotations.ChildWithNullableParent)
 
+;;; void ChildWithNullableParent.$clinit()
+(func $$clinit__void@typeannotations.ChildWithNullableParent
+ (block $return.label
+  (block
+   ;; if (typeannotations.ChildWithNullableParent.$initialized) return;
+   (if (global.get $$initialized@typeannotations.ChildWithNullableParent)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (typeannotations.ChildWithNullableParent.$initialized = true);
+   (global.set $$initialized@typeannotations.ChildWithNullableParent (i32.const 1))
+   ;; typeannotations.Parent.$clinit();
+   (call $$clinit__void@typeannotations.Parent )
+   ;; typeannotations.ParametricType.$clinit();
+   (call $$clinit__void@typeannotations.ParametricType )
+  )
+ )
+)
+
 ;;; CLASS  ChildWithNonNullableParent
 (type $typeannotations.ChildWithNonNullableParent (struct
  (field $vtable (ref null $typeannotations.ChildWithNonNullableParent.vtable))
@@ -292,6 +396,7 @@
  (field $m_m__java_util_List__java_util_List (mut (ref $function.$java.lang.Object__$java.lang.Object)))
 ))
 (global $typeannotations.ChildWithNonNullableParent.vtable (mut (ref null $typeannotations.ChildWithNonNullableParent.vtable)) (ref.null $typeannotations.ChildWithNonNullableParent.vtable))
+(global $$initialized@typeannotations.ChildWithNonNullableParent (mut i32) (i32.const 0))
 
 ;;; ChildWithNonNullableParent()
 (func $m_<init>__void_$pp_typeannotations@typeannotations.ChildWithNonNullableParent
@@ -365,6 +470,27 @@
 )
 (elem declare func $m_m__java_util_List__java_util_List@typeannotations.ChildWithNonNullableParent)
 
+;;; void ChildWithNonNullableParent.$clinit()
+(func $$clinit__void@typeannotations.ChildWithNonNullableParent
+ (block $return.label
+  (block
+   ;; if (typeannotations.ChildWithNonNullableParent.$initialized) return;
+   (if (global.get $$initialized@typeannotations.ChildWithNonNullableParent)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (typeannotations.ChildWithNonNullableParent.$initialized = true);
+   (global.set $$initialized@typeannotations.ChildWithNonNullableParent (i32.const 1))
+   ;; typeannotations.Parent.$clinit();
+   (call $$clinit__void@typeannotations.Parent )
+   ;; typeannotations.ParametricType.$clinit();
+   (call $$clinit__void@typeannotations.ParametricType )
+  )
+ )
+)
+
 ;;; CLASS  TypeAnnotations
 (type $typeannotations.TypeAnnotations (struct
  (field $vtable (ref null $typeannotations.TypeAnnotations.vtable))
@@ -378,6 +504,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $typeannotations.TypeAnnotations.vtable (mut (ref null $typeannotations.TypeAnnotations.vtable)) (ref.null $typeannotations.TypeAnnotations.vtable))
+(global $$initialized@typeannotations.TypeAnnotations (mut i32) (i32.const 0))
 
 ;;; TypeAnnotations()
 (func $m_<init>__void@typeannotations.TypeAnnotations
@@ -397,9 +524,30 @@
  (local $list (ref null $java.lang.Object))
  (block $return.label
   (block
+   ;; typeannotations.TypeAnnotations.$clinit();
+   (call $$clinit__void@typeannotations.TypeAnnotations )
    ;; List<String> list = new ArrayList.<init>();
    
    (local.set $list (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.vtable) (i32.const 0) (i32.const 0) (ref.null $Object.array) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
+  )
+ )
+)
+
+;;; void TypeAnnotations.$clinit()
+(func $$clinit__void@typeannotations.TypeAnnotations
+ (block $return.label
+  (block
+   ;; if (typeannotations.TypeAnnotations.$initialized) return;
+   (if (global.get $$initialized@typeannotations.TypeAnnotations)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (typeannotations.TypeAnnotations.$initialized = true);
+   (global.set $$initialized@typeannotations.TypeAnnotations (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
   )
  )
 )

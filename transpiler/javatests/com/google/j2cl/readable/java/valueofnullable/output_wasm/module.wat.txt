@@ -16,6 +16,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $valueofnullable.ValueOfNullable.vtable (mut (ref null $valueofnullable.ValueOfNullable.vtable)) (ref.null $valueofnullable.ValueOfNullable.vtable))
+(global $$initialized@valueofnullable.ValueOfNullable (mut i32) (i32.const 0))
 
 ;;; ValueOfNullable()
 (func $m_<init>__void@valueofnullable.ValueOfNullable
@@ -49,6 +50,25 @@
    (struct.set $valueofnullable.ValueOfNullable $someChar@valueofnullable.ValueOfNullable(local.get $this) (i32.const 97))
    ;; (ValueOfNullable.this.result = (ValueOfNullable.this.someChar + ValueOfNullable.this.nullableString));
    (struct.set $valueofnullable.ValueOfNullable $result@valueofnullable.ValueOfNullable(local.get $this) (ref.null $java.lang.String))
+  )
+ )
+)
+
+;;; void ValueOfNullable.$clinit()
+(func $$clinit__void@valueofnullable.ValueOfNullable
+ (block $return.label
+  (block
+   ;; if (valueofnullable.ValueOfNullable.$initialized) return;
+   (if (global.get $$initialized@valueofnullable.ValueOfNullable)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (valueofnullable.ValueOfNullable.$initialized = true);
+   (global.set $$initialized@valueofnullable.ValueOfNullable (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
   )
  )
 )

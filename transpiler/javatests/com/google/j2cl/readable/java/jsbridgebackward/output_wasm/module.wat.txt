@@ -1,6 +1,24 @@
 ;;; Code for jsbridgebackward.InterfaceImpl
 
 ;;; INTERFACE  MyJsInterface
+(global $$initialized@jsbridgebackward.MyJsInterface (mut i32) (i32.const 0))
+
+;;; void MyJsInterface.$clinit()
+(func $$clinit__void@jsbridgebackward.MyJsInterface
+ (block $return.label
+  (block
+   ;; if (jsbridgebackward.MyJsInterface.$initialized) return;
+   (if (global.get $$initialized@jsbridgebackward.MyJsInterface)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (jsbridgebackward.MyJsInterface.$initialized = true);
+   (global.set $$initialized@jsbridgebackward.MyJsInterface (i32.const 1))
+  )
+ )
+)
 
 ;;; CLASS  A
 (type $jsbridgebackward.A (struct
@@ -16,6 +34,7 @@
  (field $m_foo__int__int (mut (ref $function.$int__$int)))
 ))
 (global $jsbridgebackward.A.vtable (mut (ref null $jsbridgebackward.A.vtable)) (ref.null $jsbridgebackward.A.vtable))
+(global $$initialized@jsbridgebackward.A (mut i32) (i32.const 0))
 
 ;;; A()
 (func $m_<init>__void_$pp_jsbridgebackward@jsbridgebackward.A
@@ -49,6 +68,25 @@
 )
 (elem declare func $m_foo__int__int@jsbridgebackward.A)
 
+;;; void A.$clinit()
+(func $$clinit__void@jsbridgebackward.A
+ (block $return.label
+  (block
+   ;; if (jsbridgebackward.A.$initialized) return;
+   (if (global.get $$initialized@jsbridgebackward.A)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (jsbridgebackward.A.$initialized = true);
+   (global.set $$initialized@jsbridgebackward.A (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; CLASS  InterfaceImpl
 (type $jsbridgebackward.InterfaceImpl (struct
  (field $vtable (ref null $jsbridgebackward.InterfaceImpl.vtable))
@@ -63,6 +101,7 @@
  (field $m_foo__int__int (mut (ref $function.$int__$int)))
 ))
 (global $jsbridgebackward.InterfaceImpl.vtable (mut (ref null $jsbridgebackward.InterfaceImpl.vtable)) (ref.null $jsbridgebackward.InterfaceImpl.vtable))
+(global $$initialized@jsbridgebackward.InterfaceImpl (mut i32) (i32.const 0))
 
 ;;; InterfaceImpl()
 (func $m_<init>__void@jsbridgebackward.InterfaceImpl
@@ -75,6 +114,25 @@
   )
  )
  (local.get $this)
+)
+
+;;; void InterfaceImpl.$clinit()
+(func $$clinit__void@jsbridgebackward.InterfaceImpl
+ (block $return.label
+  (block
+   ;; if (jsbridgebackward.InterfaceImpl.$initialized) return;
+   (if (global.get $$initialized@jsbridgebackward.InterfaceImpl)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (jsbridgebackward.InterfaceImpl.$initialized = true);
+   (global.set $$initialized@jsbridgebackward.InterfaceImpl (i32.const 1))
+   ;; jsbridgebackward.A.$clinit();
+   (call $$clinit__void@jsbridgebackward.A )
+  )
+ )
 )
 
 ;;; Code for jsbridgebackward.A [vtable]

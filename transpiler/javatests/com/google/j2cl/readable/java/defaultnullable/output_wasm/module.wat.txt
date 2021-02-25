@@ -28,6 +28,7 @@
  (field $m_m3__arrayOf_java_lang_String__void (mut (ref $function.$Object.array__$void)))
 ))
 (global $defaultnullable.DefaultNullable.vtable (mut (ref null $defaultnullable.DefaultNullable.vtable)) (ref.null $defaultnullable.DefaultNullable.vtable))
+(global $$initialized@defaultnullable.DefaultNullable (mut i32) (i32.const 0))
 
 ;;; DefaultNullable()
 (func $m_<init>__void@defaultnullable.DefaultNullable
@@ -156,6 +157,25 @@
    (struct.set $defaultnullable.DefaultNullable $f11@defaultnullable.DefaultNullable(local.get $this) (ref.null $java.lang.Void))
    ;; (DefaultNullable.this.f12 = new Object.<init>());
    (struct.set $defaultnullable.DefaultNullable $f12@defaultnullable.DefaultNullable(local.get $this) (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (i32.const 0) (global.get $java.lang.Object.rtt))))
+  )
+ )
+)
+
+;;; void DefaultNullable.$clinit()
+(func $$clinit__void@defaultnullable.DefaultNullable
+ (block $return.label
+  (block
+   ;; if (defaultnullable.DefaultNullable.$initialized) return;
+   (if (global.get $$initialized@defaultnullable.DefaultNullable)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (defaultnullable.DefaultNullable.$initialized = true);
+   (global.set $$initialized@defaultnullable.DefaultNullable (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
   )
  )
 )

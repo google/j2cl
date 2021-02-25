@@ -26,6 +26,6 @@ public class Main {
     // assertion would fail.
     bar++;
 
-    assertTrue(bar == 1);
+    assertTrue(bar == 1L);
   }
 }

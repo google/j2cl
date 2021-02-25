@@ -13,6 +13,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $abstractinnerclass.InnerClasses.vtable (mut (ref null $abstractinnerclass.InnerClasses.vtable)) (ref.null $abstractinnerclass.InnerClasses.vtable))
+(global $$initialized@abstractinnerclass.InnerClasses (mut i32) (i32.const 0))
 
 ;;; InnerClasses()
 (func $m_<init>__void@abstractinnerclass.InnerClasses
@@ -27,7 +28,44 @@
  (local.get $this)
 )
 
+;;; void InnerClasses.$clinit()
+(func $$clinit__void@abstractinnerclass.InnerClasses
+ (block $return.label
+  (block
+   ;; if (abstractinnerclass.InnerClasses.$initialized) return;
+   (if (global.get $$initialized@abstractinnerclass.InnerClasses)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (abstractinnerclass.InnerClasses.$initialized = true);
+   (global.set $$initialized@abstractinnerclass.InnerClasses (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; INTERFACE  A
+(global $$initialized@abstractinnerclass.InnerClasses.A (mut i32) (i32.const 0))
+
+;;; void A.$clinit()
+(func $$clinit__void@abstractinnerclass.InnerClasses.A
+ (block $return.label
+  (block
+   ;; if (abstractinnerclass.InnerClasses.A.$initialized) return;
+   (if (global.get $$initialized@abstractinnerclass.InnerClasses.A)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (abstractinnerclass.InnerClasses.A.$initialized = true);
+   (global.set $$initialized@abstractinnerclass.InnerClasses.A (i32.const 1))
+  )
+ )
+)
 
 ;;; CLASS  B
 (type $abstractinnerclass.InnerClasses.B (struct
@@ -43,6 +81,7 @@
  (field $m_bar__void_$pp_abstractinnerclass (mut (ref $function.__$void)))
 ))
 (global $abstractinnerclass.InnerClasses.B.vtable (mut (ref null $abstractinnerclass.InnerClasses.B.vtable)) (ref.null $abstractinnerclass.InnerClasses.B.vtable))
+(global $$initialized@abstractinnerclass.InnerClasses.B (mut i32) (i32.const 0))
 
 ;;; B()
 (func $m_<init>__void_$pp_abstractinnerclass@abstractinnerclass.InnerClasses.B
@@ -71,6 +110,25 @@
 )
 (elem declare func $m_bar__void_$pp_abstractinnerclass@abstractinnerclass.InnerClasses.B)
 
+;;; void B.$clinit()
+(func $$clinit__void@abstractinnerclass.InnerClasses.B
+ (block $return.label
+  (block
+   ;; if (abstractinnerclass.InnerClasses.B.$initialized) return;
+   (if (global.get $$initialized@abstractinnerclass.InnerClasses.B)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (abstractinnerclass.InnerClasses.B.$initialized = true);
+   (global.set $$initialized@abstractinnerclass.InnerClasses.B (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; CLASS  C
 (type $abstractinnerclass.InnerClasses.C (struct
  (field $vtable (ref null $abstractinnerclass.InnerClasses.C.vtable))
@@ -86,6 +144,7 @@
  (field $m_bar__void_$pp_abstractinnerclass (mut (ref $function.__$void)))
 ))
 (global $abstractinnerclass.InnerClasses.C.vtable (mut (ref null $abstractinnerclass.InnerClasses.C.vtable)) (ref.null $abstractinnerclass.InnerClasses.C.vtable))
+(global $$initialized@abstractinnerclass.InnerClasses.C (mut i32) (i32.const 0))
 
 ;;; C(InnerClasses $outer_this)
 (func $m_<init>__abstractinnerclass_InnerClasses__void_$pp_abstractinnerclass@abstractinnerclass.InnerClasses.C
@@ -116,6 +175,25 @@
  )
 )
 (elem declare func $m_bar__void_$pp_abstractinnerclass@abstractinnerclass.InnerClasses.C)
+
+;;; void C.$clinit()
+(func $$clinit__void@abstractinnerclass.InnerClasses.C
+ (block $return.label
+  (block
+   ;; if (abstractinnerclass.InnerClasses.C.$initialized) return;
+   (if (global.get $$initialized@abstractinnerclass.InnerClasses.C)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (abstractinnerclass.InnerClasses.C.$initialized = true);
+   (global.set $$initialized@abstractinnerclass.InnerClasses.C (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
 
 ;;; Code for abstractinnerclass.InnerClasses [vtable]
  (global.set $abstractinnerclass.InnerClasses.vtable (struct.new_with_rtt $abstractinnerclass.InnerClasses.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $abstractinnerclass.InnerClasses.vtable)))

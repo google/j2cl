@@ -17,6 +17,7 @@
  (field $m_testInstanceOfArray__void (mut (ref $function.__$void)))
 ))
 (global $instanceofexpression.InstanceofExpressions.vtable (mut (ref null $instanceofexpression.InstanceofExpressions.vtable)) (ref.null $instanceofexpression.InstanceofExpressions.vtable))
+(global $$initialized@instanceofexpression.InstanceofExpressions (mut i32) (i32.const 0))
 
 ;;; InstanceofExpressions()
 (func $m_<init>__void@instanceofexpression.InstanceofExpressions
@@ -189,6 +190,25 @@
 )
 (elem declare func $m_testInstanceOfArray__void@instanceofexpression.InstanceofExpressions)
 
+;;; void InstanceofExpressions.$clinit()
+(func $$clinit__void@instanceofexpression.InstanceofExpressions
+ (block $return.label
+  (block
+   ;; if (instanceofexpression.InstanceofExpressions.$initialized) return;
+   (if (global.get $$initialized@instanceofexpression.InstanceofExpressions)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (instanceofexpression.InstanceofExpressions.$initialized = true);
+   (global.set $$initialized@instanceofexpression.InstanceofExpressions (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; CLASS  <anonymous> implements Serializable
 (type $instanceofexpression.InstanceofExpressions.1 (struct
  (field $vtable (ref null $instanceofexpression.InstanceofExpressions.1.vtable))
@@ -203,6 +223,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $instanceofexpression.InstanceofExpressions.1.vtable (mut (ref null $instanceofexpression.InstanceofExpressions.1.vtable)) (ref.null $instanceofexpression.InstanceofExpressions.1.vtable))
+(global $$initialized@instanceofexpression.InstanceofExpressions.1 (mut i32) (i32.const 0))
 
 ;;; <anonymous> implements Serializable(InstanceofExpressions $outer_this)
 (func $m_<init>__instanceofexpression_InstanceofExpressions__void_$pp_instanceofexpression@instanceofexpression.InstanceofExpressions.1
@@ -218,6 +239,25 @@
   )
  )
  (local.get $this)
+)
+
+;;; void <anonymous> implements Serializable.$clinit()
+(func $$clinit__void@instanceofexpression.InstanceofExpressions.1
+ (block $return.label
+  (block
+   ;; if (instanceofexpression.InstanceofExpressions.1.$initialized) return;
+   (if (global.get $$initialized@instanceofexpression.InstanceofExpressions.1)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (instanceofexpression.InstanceofExpressions.1.$initialized = true);
+   (global.set $$initialized@instanceofexpression.InstanceofExpressions.1 (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
 )
 
 ;;; Code for instanceofexpression.InstanceofExpressions [vtable]

@@ -14,6 +14,7 @@
  (field $m_defaultMethod__void (mut (ref $function.__$void)))
 ))
 (global $jstypewithdefault.SomeJsType.vtable (mut (ref null $jstypewithdefault.SomeJsType.vtable)) (ref.null $jstypewithdefault.SomeJsType.vtable))
+(global $$initialized@jstypewithdefault.SomeJsType (mut i32) (i32.const 0))
 
 ;;; SomeJsType()
 (func $m_<init>__void@jstypewithdefault.SomeJsType
@@ -42,7 +43,29 @@
 )
 (elem declare func $m_defaultMethod__void@jstypewithdefault.SomeJsType)
 
+;;; void SomeJsType.$clinit()
+(func $$clinit__void@jstypewithdefault.SomeJsType
+ (block $return.label
+  (block
+   ;; if (jstypewithdefault.SomeJsType.$initialized) return;
+   (if (global.get $$initialized@jstypewithdefault.SomeJsType)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (jstypewithdefault.SomeJsType.$initialized = true);
+   (global.set $$initialized@jstypewithdefault.SomeJsType (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+   ;; jstypewithdefault.Interface.$clinit();
+   (call $$clinit__void@jstypewithdefault.Interface )
+  )
+ )
+)
+
 ;;; INTERFACE  Interface
+(global $$initialized@jstypewithdefault.Interface (mut i32) (i32.const 0))
 
 ;;; void Interface.defaultMethod()
 (func $m_defaultMethod__void@jstypewithdefault.Interface
@@ -53,6 +76,23 @@
  )
 )
 (elem declare func $m_defaultMethod__void@jstypewithdefault.Interface)
+
+;;; void Interface.$clinit()
+(func $$clinit__void@jstypewithdefault.Interface
+ (block $return.label
+  (block
+   ;; if (jstypewithdefault.Interface.$initialized) return;
+   (if (global.get $$initialized@jstypewithdefault.Interface)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (jstypewithdefault.Interface.$initialized = true);
+   (global.set $$initialized@jstypewithdefault.Interface (i32.const 1))
+  )
+ )
+)
 
 ;;; Code for jstypewithdefault.SomeJsType [vtable]
  (global.set $jstypewithdefault.SomeJsType.vtable (struct.new_with_rtt $jstypewithdefault.SomeJsType.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_defaultMethod__void@jstypewithdefault.SomeJsType) (rtt.canon $jstypewithdefault.SomeJsType.vtable)))

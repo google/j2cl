@@ -13,6 +13,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $newinstance.NewInstanceExpr.vtable (mut (ref null $newinstance.NewInstanceExpr.vtable)) (ref.null $newinstance.NewInstanceExpr.vtable))
+(global $$initialized@newinstance.NewInstanceExpr (mut i32) (i32.const 0))
 
 ;;; NewInstanceExpr()
 (func $m_<init>__void@newinstance.NewInstanceExpr
@@ -33,9 +34,30 @@
  (local $a (ref null $newinstance.NewInstanceExpr))
  (block $return.label
   (block
+   ;; newinstance.NewInstanceExpr.$clinit();
+   (call $$clinit__void@newinstance.NewInstanceExpr )
    ;; NewInstanceExpr a = new NewInstanceExpr.<init>();
    
    (local.set $a (call $m_<init>__void@newinstance.NewInstanceExpr (struct.new_with_rtt $newinstance.NewInstanceExpr (global.get $newinstance.NewInstanceExpr.vtable) (i32.const 0) (global.get $newinstance.NewInstanceExpr.rtt))))
+  )
+ )
+)
+
+;;; void NewInstanceExpr.$clinit()
+(func $$clinit__void@newinstance.NewInstanceExpr
+ (block $return.label
+  (block
+   ;; if (newinstance.NewInstanceExpr.$initialized) return;
+   (if (global.get $$initialized@newinstance.NewInstanceExpr)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (newinstance.NewInstanceExpr.$initialized = true);
+   (global.set $$initialized@newinstance.NewInstanceExpr (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
   )
  )
 )

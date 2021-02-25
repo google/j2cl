@@ -16,6 +16,7 @@
  (field $m_foo__genericequals_GenericEquals__java_lang_Object (mut (ref $function.$genericequals.GenericEquals__$java.lang.Object)))
 ))
 (global $genericequals.GenericEquals.vtable (mut (ref null $genericequals.GenericEquals.vtable)) (ref.null $genericequals.GenericEquals.vtable))
+(global $$initialized@genericequals.GenericEquals (mut i32) (i32.const 0))
 
 ;;; GenericEquals(T value)
 (func $m_<init>__java_lang_Object__void@genericequals.GenericEquals
@@ -96,6 +97,25 @@
  (local.get $return.value)
 )
 (elem declare func $m_equals__java_lang_Object__boolean@genericequals.GenericEquals)
+
+;;; void GenericEquals.$clinit()
+(func $$clinit__void@genericequals.GenericEquals
+ (block $return.label
+  (block
+   ;; if (genericequals.GenericEquals.$initialized) return;
+   (if (global.get $$initialized@genericequals.GenericEquals)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (genericequals.GenericEquals.$initialized = true);
+   (global.set $$initialized@genericequals.GenericEquals (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
 
 ;;; Code for genericequals.GenericEquals [vtable]
  (global.set $genericequals.GenericEquals.vtable (struct.new_with_rtt $genericequals.GenericEquals.vtable  (ref.func $m_equals__java_lang_Object__boolean@genericequals.GenericEquals) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__genericequals_GenericEquals__java_lang_Object@genericequals.GenericEquals) (rtt.canon $genericequals.GenericEquals.vtable)))

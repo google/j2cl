@@ -13,6 +13,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $privateconstructor.PrivateConstructor.vtable (mut (ref null $privateconstructor.PrivateConstructor.vtable)) (ref.null $privateconstructor.PrivateConstructor.vtable))
+(global $$initialized@privateconstructor.PrivateConstructor (mut i32) (i32.const 0))
 
 ;;; PrivateConstructor()
 (func $m_<init>__void_$p_privateconstructor_PrivateConstructor@privateconstructor.PrivateConstructor
@@ -25,6 +26,25 @@
   )
  )
  (local.get $this)
+)
+
+;;; void PrivateConstructor.$clinit()
+(func $$clinit__void@privateconstructor.PrivateConstructor
+ (block $return.label
+  (block
+   ;; if (privateconstructor.PrivateConstructor.$initialized) return;
+   (if (global.get $$initialized@privateconstructor.PrivateConstructor)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (privateconstructor.PrivateConstructor.$initialized = true);
+   (global.set $$initialized@privateconstructor.PrivateConstructor (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
 )
 
 ;;; Code for privateconstructor.PrivateConstructor [vtable]

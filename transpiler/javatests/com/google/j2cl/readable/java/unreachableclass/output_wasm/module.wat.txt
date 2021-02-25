@@ -13,6 +13,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $unreachableclass.Main.vtable (mut (ref null $unreachableclass.Main.vtable)) (ref.null $unreachableclass.Main.vtable))
+(global $$initialized@unreachableclass.Main (mut i32) (i32.const 0))
 
 ;;; Main()
 (func $m_<init>__void@unreachableclass.Main
@@ -42,6 +43,25 @@
  )
 )
 
+;;; void Main.$clinit()
+(func $$clinit__void@unreachableclass.Main
+ (block $return.label
+  (block
+   ;; if (unreachableclass.Main.$initialized) return;
+   (if (global.get $$initialized@unreachableclass.Main)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (unreachableclass.Main.$initialized = true);
+   (global.set $$initialized@unreachableclass.Main (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; CLASS  A
 (type $unreachableclass.Main.1A (struct
  (field $vtable (ref null $unreachableclass.Main.1A.vtable))
@@ -57,6 +77,7 @@
  (field $m_m__void_$pp_unreachableclass (mut (ref $function.__$void)))
 ))
 (global $unreachableclass.Main.1A.vtable (mut (ref null $unreachableclass.Main.1A.vtable)) (ref.null $unreachableclass.Main.1A.vtable))
+(global $$initialized@unreachableclass.Main.1A (mut i32) (i32.const 0))
 
 ;;; A(Main $outer_this)
 (func $m_<init>__unreachableclass_Main__void_$pp_unreachableclass@unreachableclass.Main.1A
@@ -86,6 +107,25 @@
 )
 (elem declare func $m_m__void_$pp_unreachableclass@unreachableclass.Main.1A)
 
+;;; void A.$clinit()
+(func $$clinit__void@unreachableclass.Main.1A
+ (block $return.label
+  (block
+   ;; if (unreachableclass.Main.1A.$initialized) return;
+   (if (global.get $$initialized@unreachableclass.Main.1A)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (unreachableclass.Main.1A.$initialized = true);
+   (global.set $$initialized@unreachableclass.Main.1A (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; CLASS  B
 (type $unreachableclass.Main.1A.1B (struct
  (field $vtable (ref null $unreachableclass.Main.1A.1B.vtable))
@@ -100,6 +140,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $unreachableclass.Main.1A.1B.vtable (mut (ref null $unreachableclass.Main.1A.1B.vtable)) (ref.null $unreachableclass.Main.1A.1B.vtable))
+(global $$initialized@unreachableclass.Main.1A.1B (mut i32) (i32.const 0))
 
 ;;; B(A $outer_this)
 (func $m_<init>__unreachableclass_Main_1A__void_$pp_unreachableclass@unreachableclass.Main.1A.1B
@@ -126,6 +167,25 @@
  )
 )
 
+;;; void B.$clinit()
+(func $$clinit__void@unreachableclass.Main.1A.1B
+ (block $return.label
+  (block
+   ;; if (unreachableclass.Main.1A.1B.$initialized) return;
+   (if (global.get $$initialized@unreachableclass.Main.1A.1B)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (unreachableclass.Main.1A.1B.$initialized = true);
+   (global.set $$initialized@unreachableclass.Main.1A.1B (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; CLASS  <anonymous> extends Object
 (type $unreachableclass.Main.1 (struct
  (field $vtable (ref null $unreachableclass.Main.1.vtable))
@@ -140,6 +200,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $unreachableclass.Main.1.vtable (mut (ref null $unreachableclass.Main.1.vtable)) (ref.null $unreachableclass.Main.1.vtable))
+(global $$initialized@unreachableclass.Main.1 (mut i32) (i32.const 0))
 
 ;;; <anonymous> extends Object(Main $outer_this)
 (func $m_<init>__unreachableclass_Main__void_$pp_unreachableclass@unreachableclass.Main.1
@@ -155,6 +216,25 @@
   )
  )
  (local.get $this)
+)
+
+;;; void <anonymous> extends Object.$clinit()
+(func $$clinit__void@unreachableclass.Main.1
+ (block $return.label
+  (block
+   ;; if (unreachableclass.Main.1.$initialized) return;
+   (if (global.get $$initialized@unreachableclass.Main.1)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (unreachableclass.Main.1.$initialized = true);
+   (global.set $$initialized@unreachableclass.Main.1 (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
 )
 
 ;;; Code for unreachableclass.Main [vtable]

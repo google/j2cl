@@ -14,6 +14,7 @@
  (field $m_test__void (mut (ref $function.__$void)))
 ))
 (global $ifstatement.IfStatement.vtable (mut (ref null $ifstatement.IfStatement.vtable)) (ref.null $ifstatement.IfStatement.vtable))
+(global $$initialized@ifstatement.IfStatement (mut i32) (i32.const 0))
 
 ;;; IfStatement()
 (func $m_<init>__void@ifstatement.IfStatement
@@ -83,6 +84,25 @@
  )
 )
 (elem declare func $m_test__void@ifstatement.IfStatement)
+
+;;; void IfStatement.$clinit()
+(func $$clinit__void@ifstatement.IfStatement
+ (block $return.label
+  (block
+   ;; if (ifstatement.IfStatement.$initialized) return;
+   (if (global.get $$initialized@ifstatement.IfStatement)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (ifstatement.IfStatement.$initialized = true);
+   (global.set $$initialized@ifstatement.IfStatement (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
 
 ;;; Code for ifstatement.IfStatement [vtable]
  (global.set $ifstatement.IfStatement.vtable (struct.new_with_rtt $ifstatement.IfStatement.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__void@ifstatement.IfStatement) (rtt.canon $ifstatement.IfStatement.vtable)))

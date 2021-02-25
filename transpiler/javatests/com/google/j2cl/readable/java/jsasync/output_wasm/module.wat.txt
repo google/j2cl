@@ -18,6 +18,7 @@
  (field $m_testAsyncLambdas__void_$pp_jsasync (mut (ref $function.__$void)))
 ))
 (global $jsasync.Main.vtable (mut (ref null $jsasync.Main.vtable)) (ref.null $jsasync.Main.vtable))
+(global $$initialized@jsasync.Main (mut i32) (i32.const 0))
 
 ;;; Main()
 (func $m_<init>__void@jsasync.Main
@@ -99,6 +100,8 @@
  (local $return.value (ref null $java.lang.Object))
  (block $return.label
   (block
+   ;; jsasync.Main.$clinit();
+   (call $$clinit__void@jsasync.Main )
    ;; return jsasync.Main.Promise.resolve(((Void) jsasync.Main.await(jsasync.Main.Promise.resolve(((Void) null)))));
    (local.set $return.value (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (ref.cast $java.lang.Object $java.lang.Void (call $m_await__jsasync_Main_IThenable__java_lang_Object@jsasync.Main (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (ref.cast $java.lang.Object $java.lang.Void (ref.null $java.lang.Object) (global.get $java.lang.Void.rtt)))) (global.get $java.lang.Void.rtt))))
    (br $return.label)
@@ -162,6 +165,25 @@
  )
 )
 
+;;; void Main.$clinit()
+(func $$clinit__void@jsasync.Main
+ (block $return.label
+  (block
+   ;; if (jsasync.Main.$initialized) return;
+   (if (global.get $$initialized@jsasync.Main)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (jsasync.Main.$initialized = true);
+   (global.set $$initialized@jsasync.Main (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; CLASS  <anonymous> implements BaseInterface
 (type $jsasync.Main.1 (struct
  (field $vtable (ref null $jsasync.Main.1.vtable))
@@ -177,6 +199,7 @@
  (field $m_asyncCall__jsasync_Main_IThenable (mut (ref $function.__$java.lang.Object)))
 ))
 (global $jsasync.Main.1.vtable (mut (ref null $jsasync.Main.1.vtable)) (ref.null $jsasync.Main.1.vtable))
+(global $$initialized@jsasync.Main.1 (mut i32) (i32.const 0))
 
 ;;; <anonymous> implements BaseInterface(Main $outer_this)
 (func $m_<init>__jsasync_Main__void_$pp_jsasync@jsasync.Main.1
@@ -212,6 +235,25 @@
 )
 (elem declare func $m_asyncCall__jsasync_Main_IThenable@jsasync.Main.1)
 
+;;; void <anonymous> implements BaseInterface.$clinit()
+(func $$clinit__void@jsasync.Main.1
+ (block $return.label
+  (block
+   ;; if (jsasync.Main.1.$initialized) return;
+   (if (global.get $$initialized@jsasync.Main.1)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (jsasync.Main.1.$initialized = true);
+   (global.set $$initialized@jsasync.Main.1 (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; CLASS  <anonymous> implements JsFunctionInterface
 (type $jsasync.Main.2 (struct
  (field $vtable (ref null $jsasync.Main.2.vtable))
@@ -227,6 +269,7 @@
  (field $m_doSomething__jsasync_Main_IThenable (mut (ref $function.__$java.lang.Object)))
 ))
 (global $jsasync.Main.2.vtable (mut (ref null $jsasync.Main.2.vtable)) (ref.null $jsasync.Main.2.vtable))
+(global $$initialized@jsasync.Main.2 (mut i32) (i32.const 0))
 
 ;;; <anonymous> implements JsFunctionInterface(Main $outer_this)
 (func $m_<init>__jsasync_Main__void_$pp_jsasync@jsasync.Main.2
@@ -262,6 +305,25 @@
 )
 (elem declare func $m_doSomething__jsasync_Main_IThenable@jsasync.Main.2)
 
+;;; void <anonymous> implements JsFunctionInterface.$clinit()
+(func $$clinit__void@jsasync.Main.2
+ (block $return.label
+  (block
+   ;; if (jsasync.Main.2.$initialized) return;
+   (if (global.get $$initialized@jsasync.Main.2)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (jsasync.Main.2.$initialized = true);
+   (global.set $$initialized@jsasync.Main.2 (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; CLASS  <anonymous> implements JsFunctionInterface
 (type $jsasync.Main.3 (struct
  (field $vtable (ref null $jsasync.Main.3.vtable))
@@ -277,6 +339,7 @@
  (field $m_doSomething__jsasync_Main_IThenable (mut (ref $function.__$java.lang.Object)))
 ))
 (global $jsasync.Main.3.vtable (mut (ref null $jsasync.Main.3.vtable)) (ref.null $jsasync.Main.3.vtable))
+(global $$initialized@jsasync.Main.3 (mut i32) (i32.const 0))
 
 ;;; <anonymous> implements JsFunctionInterface(Main $outer_this)
 (func $m_<init>__jsasync_Main__void_$pp_jsasync@jsasync.Main.3
@@ -316,11 +379,67 @@
 )
 (elem declare func $m_doSomething__jsasync_Main_IThenable@jsasync.Main.3)
 
+;;; void <anonymous> implements JsFunctionInterface.$clinit()
+(func $$clinit__void@jsasync.Main.3
+ (block $return.label
+  (block
+   ;; if (jsasync.Main.3.$initialized) return;
+   (if (global.get $$initialized@jsasync.Main.3)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (jsasync.Main.3.$initialized = true);
+   (global.set $$initialized@jsasync.Main.3 (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; INTERFACE  BaseInterface
+(global $$initialized@jsasync.Main.BaseInterface (mut i32) (i32.const 0))
+
+;;; void BaseInterface.$clinit()
+(func $$clinit__void@jsasync.Main.BaseInterface
+ (block $return.label
+  (block
+   ;; if (jsasync.Main.BaseInterface.$initialized) return;
+   (if (global.get $$initialized@jsasync.Main.BaseInterface)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (jsasync.Main.BaseInterface.$initialized = true);
+   (global.set $$initialized@jsasync.Main.BaseInterface (i32.const 1))
+  )
+ )
+)
 
 ;;; INTERFACE  AsyncInterface
+(global $$initialized@jsasync.Main.AsyncInterface (mut i32) (i32.const 0))
+
+;;; void AsyncInterface.$clinit()
+(func $$clinit__void@jsasync.Main.AsyncInterface
+ (block $return.label
+  (block
+   ;; if (jsasync.Main.AsyncInterface.$initialized) return;
+   (if (global.get $$initialized@jsasync.Main.AsyncInterface)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (jsasync.Main.AsyncInterface.$initialized = true);
+   (global.set $$initialized@jsasync.Main.AsyncInterface (i32.const 1))
+  )
+ )
+)
 
 ;;; INTERFACE  InterfaceWithAsyncDefaultMethod
+(global $$initialized@jsasync.Main.InterfaceWithAsyncDefaultMethod (mut i32) (i32.const 0))
 
 ;;; IThenable<Integer> InterfaceWithAsyncDefaultMethod.asyncCall()
 (func $m_asyncCall__jsasync_Main_IThenable@jsasync.Main.InterfaceWithAsyncDefaultMethod
@@ -338,11 +457,82 @@
 )
 (elem declare func $m_asyncCall__jsasync_Main_IThenable@jsasync.Main.InterfaceWithAsyncDefaultMethod)
 
+;;; void InterfaceWithAsyncDefaultMethod.$clinit()
+(func $$clinit__void@jsasync.Main.InterfaceWithAsyncDefaultMethod
+ (block $return.label
+  (block
+   ;; if (jsasync.Main.InterfaceWithAsyncDefaultMethod.$initialized) return;
+   (if (global.get $$initialized@jsasync.Main.InterfaceWithAsyncDefaultMethod)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (jsasync.Main.InterfaceWithAsyncDefaultMethod.$initialized = true);
+   (global.set $$initialized@jsasync.Main.InterfaceWithAsyncDefaultMethod (i32.const 1))
+  )
+ )
+)
+
 ;;; INTERFACE  JsFunctionInterface
+(global $$initialized@jsasync.Main.JsFunctionInterface (mut i32) (i32.const 0))
+
+;;; void JsFunctionInterface.$clinit()
+(func $$clinit__void@jsasync.Main.JsFunctionInterface
+ (block $return.label
+  (block
+   ;; if (jsasync.Main.JsFunctionInterface.$initialized) return;
+   (if (global.get $$initialized@jsasync.Main.JsFunctionInterface)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (jsasync.Main.JsFunctionInterface.$initialized = true);
+   (global.set $$initialized@jsasync.Main.JsFunctionInterface (i32.const 1))
+  )
+ )
+)
 
 ;;; INTERFACE  AsyncJsFunctionInterface
+(global $$initialized@jsasync.Main.AsyncJsFunctionInterface (mut i32) (i32.const 0))
+
+;;; void AsyncJsFunctionInterface.$clinit()
+(func $$clinit__void@jsasync.Main.AsyncJsFunctionInterface
+ (block $return.label
+  (block
+   ;; if (jsasync.Main.AsyncJsFunctionInterface.$initialized) return;
+   (if (global.get $$initialized@jsasync.Main.AsyncJsFunctionInterface)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (jsasync.Main.AsyncJsFunctionInterface.$initialized = true);
+   (global.set $$initialized@jsasync.Main.AsyncJsFunctionInterface (i32.const 1))
+  )
+ )
+)
 
 ;;; INTERFACE  IThenable
+(global $$initialized@jsasync.Main.IThenable (mut i32) (i32.const 0))
+
+;;; void IThenable.$clinit()
+(func $$clinit__void@jsasync.Main.IThenable
+ (block $return.label
+  (block
+   ;; if (jsasync.Main.IThenable.$initialized) return;
+   (if (global.get $$initialized@jsasync.Main.IThenable)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (jsasync.Main.IThenable.$initialized = true);
+   (global.set $$initialized@jsasync.Main.IThenable (i32.const 1))
+  )
+ )
+)
 
 ;;; CLASS  Promise
 (type $jsasync.Main.Promise (struct
@@ -357,6 +547,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $jsasync.Main.Promise.vtable (mut (ref null $jsasync.Main.Promise.vtable)) (ref.null $jsasync.Main.Promise.vtable))
+(global $$initialized@jsasync.Main.Promise (mut i32) (i32.const 0))
 
 ;;; Promise()
 (func $m_<init>__void_$p_jsasync_Main_Promise@jsasync.Main.Promise
@@ -364,6 +555,8 @@
  (result (ref null $jsasync.Main.Promise))
  (block $return.label
   (block
+   ;; jsasync.Main.Promise.$clinit();
+   (call $$clinit__void@jsasync.Main.Promise )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -381,6 +574,25 @@
   )
  )
  (local.get $return.value)
+)
+
+;;; void Promise.$clinit()
+(func $$clinit__void@jsasync.Main.Promise
+ (block $return.label
+  (block
+   ;; if (jsasync.Main.Promise.$initialized) return;
+   (if (global.get $$initialized@jsasync.Main.Promise)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (jsasync.Main.Promise.$initialized = true);
+   (global.set $$initialized@jsasync.Main.Promise (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
 )
 
 ;;; Code for jsasync.Main [vtable]

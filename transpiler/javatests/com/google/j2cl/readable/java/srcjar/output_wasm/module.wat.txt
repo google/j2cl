@@ -13,6 +13,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $srcjar.Foo.vtable (mut (ref null $srcjar.Foo.vtable)) (ref.null $srcjar.Foo.vtable))
+(global $$initialized@srcjar.Foo (mut i32) (i32.const 0))
 
 ;;; Foo()
 (func $m_<init>__void@srcjar.Foo
@@ -25,6 +26,25 @@
   )
  )
  (local.get $this)
+)
+
+;;; void Foo.$clinit()
+(func $$clinit__void@srcjar.Foo
+ (block $return.label
+  (block
+   ;; if (srcjar.Foo.$initialized) return;
+   (if (global.get $$initialized@srcjar.Foo)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (srcjar.Foo.$initialized = true);
+   (global.set $$initialized@srcjar.Foo (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
 )
 ;;; Code for srcjar.Srcjar
 
@@ -41,6 +61,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $srcjar.Srcjar.vtable (mut (ref null $srcjar.Srcjar.vtable)) (ref.null $srcjar.Srcjar.vtable))
+(global $$initialized@srcjar.Srcjar (mut i32) (i32.const 0))
 
 ;;; Srcjar()
 (func $m_<init>__void@srcjar.Srcjar
@@ -60,9 +81,30 @@
  (local $foo (ref null $srcjar.Foo))
  (block $return.label
   (block
+   ;; srcjar.Srcjar.$clinit();
+   (call $$clinit__void@srcjar.Srcjar )
    ;; Foo foo = new Foo.<init>();
    
    (local.set $foo (call $m_<init>__void@srcjar.Foo (struct.new_with_rtt $srcjar.Foo (global.get $srcjar.Foo.vtable) (i32.const 0) (global.get $srcjar.Foo.rtt))))
+  )
+ )
+)
+
+;;; void Srcjar.$clinit()
+(func $$clinit__void@srcjar.Srcjar
+ (block $return.label
+  (block
+   ;; if (srcjar.Srcjar.$initialized) return;
+   (if (global.get $$initialized@srcjar.Srcjar)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (srcjar.Srcjar.$initialized = true);
+   (global.set $$initialized@srcjar.Srcjar (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
   )
  )
 )

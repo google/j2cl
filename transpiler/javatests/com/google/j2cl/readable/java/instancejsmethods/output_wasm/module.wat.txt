@@ -1,6 +1,24 @@
 ;;; Code for instancejsmethods.Main
 
 ;;; INTERFACE  MyInterface
+(global $$initialized@instancejsmethods.MyInterface (mut i32) (i32.const 0))
+
+;;; void MyInterface.$clinit()
+(func $$clinit__void@instancejsmethods.MyInterface
+ (block $return.label
+  (block
+   ;; if (instancejsmethods.MyInterface.$initialized) return;
+   (if (global.get $$initialized@instancejsmethods.MyInterface)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (instancejsmethods.MyInterface.$initialized = true);
+   (global.set $$initialized@instancejsmethods.MyInterface (i32.const 1))
+  )
+ )
+)
 
 ;;; CLASS  SuperParent
 (type $instancejsmethods.SuperParent (struct
@@ -17,6 +35,7 @@
  (field $m_bar__int__int__int (mut (ref $function.$int__$int__$int)))
 ))
 (global $instancejsmethods.SuperParent.vtable (mut (ref null $instancejsmethods.SuperParent.vtable)) (ref.null $instancejsmethods.SuperParent.vtable))
+(global $$initialized@instancejsmethods.SuperParent (mut i32) (i32.const 0))
 
 ;;; SuperParent()
 (func $m_<init>__void_$pp_instancejsmethods@instancejsmethods.SuperParent
@@ -71,6 +90,25 @@
 )
 (elem declare func $m_bar__int__int__int@instancejsmethods.SuperParent)
 
+;;; void SuperParent.$clinit()
+(func $$clinit__void@instancejsmethods.SuperParent
+ (block $return.label
+  (block
+   ;; if (instancejsmethods.SuperParent.$initialized) return;
+   (if (global.get $$initialized@instancejsmethods.SuperParent)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (instancejsmethods.SuperParent.$initialized = true);
+   (global.set $$initialized@instancejsmethods.SuperParent (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; CLASS  Parent
 (type $instancejsmethods.Parent (struct
  (field $vtable (ref null $instancejsmethods.Parent.vtable))
@@ -87,6 +125,7 @@
  (field $m_foo__int__int (mut (ref $function.$int__$int)))
 ))
 (global $instancejsmethods.Parent.vtable (mut (ref null $instancejsmethods.Parent.vtable)) (ref.null $instancejsmethods.Parent.vtable))
+(global $$initialized@instancejsmethods.Parent (mut i32) (i32.const 0))
 
 ;;; Parent()
 (func $m_<init>__void_$pp_instancejsmethods@instancejsmethods.Parent
@@ -160,6 +199,25 @@
 )
 (elem declare func $m_foo__int__int@instancejsmethods.Parent)
 
+;;; void Parent.$clinit()
+(func $$clinit__void@instancejsmethods.Parent
+ (block $return.label
+  (block
+   ;; if (instancejsmethods.Parent.$initialized) return;
+   (if (global.get $$initialized@instancejsmethods.Parent)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (instancejsmethods.Parent.$initialized = true);
+   (global.set $$initialized@instancejsmethods.Parent (i32.const 1))
+   ;; instancejsmethods.SuperParent.$clinit();
+   (call $$clinit__void@instancejsmethods.SuperParent )
+  )
+ )
+)
+
 ;;; CLASS  Child
 (type $instancejsmethods.Child (struct
  (field $vtable (ref null $instancejsmethods.Child.vtable))
@@ -177,6 +235,7 @@
  (field $m_intfFoo__int (mut (ref $function.__$int)))
 ))
 (global $instancejsmethods.Child.vtable (mut (ref null $instancejsmethods.Child.vtable)) (ref.null $instancejsmethods.Child.vtable))
+(global $$initialized@instancejsmethods.Child (mut i32) (i32.const 0))
 
 ;;; Child()
 (func $m_<init>__void_$pp_instancejsmethods@instancejsmethods.Child
@@ -268,6 +327,25 @@
 )
 (elem declare func $m_intfFoo__int@instancejsmethods.Child)
 
+;;; void Child.$clinit()
+(func $$clinit__void@instancejsmethods.Child
+ (block $return.label
+  (block
+   ;; if (instancejsmethods.Child.$initialized) return;
+   (if (global.get $$initialized@instancejsmethods.Child)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (instancejsmethods.Child.$initialized = true);
+   (global.set $$initialized@instancejsmethods.Child (i32.const 1))
+   ;; instancejsmethods.Parent.$clinit();
+   (call $$clinit__void@instancejsmethods.Parent )
+  )
+ )
+)
+
 ;;; CLASS  Main
 (type $instancejsmethods.Main (struct
  (field $vtable (ref null $instancejsmethods.Main.vtable))
@@ -282,6 +360,7 @@
  (field $m_testCallBySuperParent__void (mut (ref $function.__$void)))
 ))
 (global $instancejsmethods.Main.vtable (mut (ref null $instancejsmethods.Main.vtable)) (ref.null $instancejsmethods.Main.vtable))
+(global $$initialized@instancejsmethods.Main (mut i32) (i32.const 0))
 
 ;;; Main()
 (func $m_<init>__void@instancejsmethods.Main
@@ -357,6 +436,8 @@
  (local $c (ref null $instancejsmethods.Child))
  (block $return.label
   (block
+   ;; instancejsmethods.Main.$clinit();
+   (call $$clinit__void@instancejsmethods.Main )
    ;; SuperParent sp = new SuperParent.<init>();
    
    (local.set $sp (call $m_<init>__void_$pp_instancejsmethods@instancejsmethods.SuperParent (struct.new_with_rtt $instancejsmethods.SuperParent (global.get $instancejsmethods.SuperParent.vtable) (i32.const 0) (global.get $instancejsmethods.SuperParent.rtt))))
@@ -384,6 +465,25 @@
    (drop (call_ref (local.get $c)(i32.const 1)(struct.get $instancejsmethods.Child.vtable $m_foo__int__int (struct.get $instancejsmethods.Child $vtable(local.get $c)))))
    ;; c.intfFoo();
    (drop (call_ref (local.get $c)(struct.get $instancejsmethods.Child.vtable $m_intfFoo__int (struct.get $instancejsmethods.Child $vtable(local.get $c)))))
+  )
+ )
+)
+
+;;; void Main.$clinit()
+(func $$clinit__void@instancejsmethods.Main
+ (block $return.label
+  (block
+   ;; if (instancejsmethods.Main.$initialized) return;
+   (if (global.get $$initialized@instancejsmethods.Main)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (instancejsmethods.Main.$initialized = true);
+   (global.set $$initialized@instancejsmethods.Main (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
   )
  )
 )

@@ -1,6 +1,24 @@
 ;;; Code for gwtincompatible.GwtIncompatible
 
 ;;; INTERFACE  GwtIncompatible
+(global $$initialized@gwtincompatible.GwtIncompatible (mut i32) (i32.const 0))
+
+;;; void GwtIncompatible.$clinit()
+(func $$clinit__void@gwtincompatible.GwtIncompatible
+ (block $return.label
+  (block
+   ;; if (gwtincompatible.GwtIncompatible.$initialized) return;
+   (if (global.get $$initialized@gwtincompatible.GwtIncompatible)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (gwtincompatible.GwtIncompatible.$initialized = true);
+   (global.set $$initialized@gwtincompatible.GwtIncompatible (i32.const 1))
+  )
+ )
+)
 ;;; Code for gwtincompatible.Implementor
 
 ;;; CLASS  Implementor
@@ -17,6 +35,7 @@
  (field $m_compatibleMethod__void (mut (ref $function.__$void)))
 ))
 (global $gwtincompatible.Implementor.vtable (mut (ref null $gwtincompatible.Implementor.vtable)) (ref.null $gwtincompatible.Implementor.vtable))
+(global $$initialized@gwtincompatible.Implementor (mut i32) (i32.const 0))
 
 ;;; Implementor()
 (func $m_<init>__void@gwtincompatible.Implementor
@@ -47,6 +66,25 @@
 )
 (elem declare func $m_compatibleMethod__void@gwtincompatible.Implementor)
 
+;;; void Implementor.$clinit()
+(func $$clinit__void@gwtincompatible.Implementor
+ (block $return.label
+  (block
+   ;; if (gwtincompatible.Implementor.$initialized) return;
+   (if (global.get $$initialized@gwtincompatible.Implementor)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (gwtincompatible.Implementor.$initialized = true);
+   (global.set $$initialized@gwtincompatible.Implementor (i32.const 1))
+   ;; gwtincompatible.Interface.ClassWithAbstractMethod.$clinit();
+   (call $$clinit__void@gwtincompatible.Interface.ClassWithAbstractMethod )
+  )
+ )
+)
+
 ;;; ENUM  SomeEnum
 (type $gwtincompatible.Implementor.SomeEnum (struct
  (field $vtable (ref null $gwtincompatible.Implementor.SomeEnum.vtable))
@@ -69,6 +107,7 @@
 ))
 (global $gwtincompatible.Implementor.SomeEnum.vtable (mut (ref null $gwtincompatible.Implementor.SomeEnum.vtable)) (ref.null $gwtincompatible.Implementor.SomeEnum.vtable))
 (global $COMPATIBLE@gwtincompatible.Implementor.SomeEnum (mut (ref null $gwtincompatible.Implementor.SomeEnum)) (ref.null $gwtincompatible.Implementor.SomeEnum))
+(global $$initialized@gwtincompatible.Implementor.SomeEnum (mut i32) (i32.const 0))
 
 ;;; SomeEnum()
 (func $m_<init>__void_$p_gwtincompatible_Implementor_SomeEnum@gwtincompatible.Implementor.SomeEnum
@@ -81,6 +120,31 @@
   )
  )
  (local.get $this)
+)
+
+;;; void SomeEnum.$clinit()
+(func $$clinit__void@gwtincompatible.Implementor.SomeEnum
+ (block $return.label
+  (block
+   ;; if (gwtincompatible.Implementor.SomeEnum.$initialized) return;
+   (if (global.get $$initialized@gwtincompatible.Implementor.SomeEnum)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (gwtincompatible.Implementor.SomeEnum.$initialized = true);
+   (global.set $$initialized@gwtincompatible.Implementor.SomeEnum (i32.const 1))
+   ;; java.lang.Enum.$clinit();
+   (call $$clinit__void@java.lang.Enum )
+   (block
+    ;; gwtincompatible.Implementor.SomeEnum.$clinit();
+    (call $$clinit__void@gwtincompatible.Implementor.SomeEnum )
+    ;; (gwtincompatible.Implementor.SomeEnum.COMPATIBLE = new $1.<init>());
+    (global.set $COMPATIBLE@gwtincompatible.Implementor.SomeEnum (call $m_<init>__void_$pp_gwtincompatible@gwtincompatible.Implementor.SomeEnum.1 (struct.new_with_rtt $gwtincompatible.Implementor.SomeEnum.1 (global.get $gwtincompatible.Implementor.SomeEnum.1.vtable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $gwtincompatible.Implementor.SomeEnum.1.rtt))))
+   )
+  )
+ )
 )
 
 ;;; CLASS  <anonymous> extends SomeEnum
@@ -104,6 +168,7 @@
  (field $m_method__void_$pp_gwtincompatible (mut (ref $function.__$void)))
 ))
 (global $gwtincompatible.Implementor.SomeEnum.1.vtable (mut (ref null $gwtincompatible.Implementor.SomeEnum.1.vtable)) (ref.null $gwtincompatible.Implementor.SomeEnum.1.vtable))
+(global $$initialized@gwtincompatible.Implementor.SomeEnum.1 (mut i32) (i32.const 0))
 
 ;;; <anonymous> extends SomeEnum()
 (func $m_<init>__void_$pp_gwtincompatible@gwtincompatible.Implementor.SomeEnum.1
@@ -129,11 +194,66 @@
  )
 )
 (elem declare func $m_method__void_$pp_gwtincompatible@gwtincompatible.Implementor.SomeEnum.1)
+
+;;; void <anonymous> extends SomeEnum.$clinit()
+(func $$clinit__void@gwtincompatible.Implementor.SomeEnum.1
+ (block $return.label
+  (block
+   ;; if (gwtincompatible.Implementor.SomeEnum.1.$initialized) return;
+   (if (global.get $$initialized@gwtincompatible.Implementor.SomeEnum.1)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (gwtincompatible.Implementor.SomeEnum.1.$initialized = true);
+   (global.set $$initialized@gwtincompatible.Implementor.SomeEnum.1 (i32.const 1))
+   ;; gwtincompatible.Implementor.SomeEnum.$clinit();
+   (call $$clinit__void@gwtincompatible.Implementor.SomeEnum )
+  )
+ )
+)
 ;;; Code for gwtincompatible.Interface
 
 ;;; INTERFACE  Interface
+(global $$initialized@gwtincompatible.Interface (mut i32) (i32.const 0))
+
+;;; void Interface.$clinit()
+(func $$clinit__void@gwtincompatible.Interface
+ (block $return.label
+  (block
+   ;; if (gwtincompatible.Interface.$initialized) return;
+   (if (global.get $$initialized@gwtincompatible.Interface)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (gwtincompatible.Interface.$initialized = true);
+   (global.set $$initialized@gwtincompatible.Interface (i32.const 1))
+  )
+ )
+)
 
 ;;; INTERFACE  NestedInterface
+(global $$initialized@gwtincompatible.Interface.NestedInterface (mut i32) (i32.const 0))
+
+;;; void NestedInterface.$clinit()
+(func $$clinit__void@gwtincompatible.Interface.NestedInterface
+ (block $return.label
+  (block
+   ;; if (gwtincompatible.Interface.NestedInterface.$initialized) return;
+   (if (global.get $$initialized@gwtincompatible.Interface.NestedInterface)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (gwtincompatible.Interface.NestedInterface.$initialized = true);
+   (global.set $$initialized@gwtincompatible.Interface.NestedInterface (i32.const 1))
+  )
+ )
+)
 
 ;;; CLASS  ClassWithAbstractMethod
 (type $gwtincompatible.Interface.ClassWithAbstractMethod (struct
@@ -148,6 +268,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $gwtincompatible.Interface.ClassWithAbstractMethod.vtable (mut (ref null $gwtincompatible.Interface.ClassWithAbstractMethod.vtable)) (ref.null $gwtincompatible.Interface.ClassWithAbstractMethod.vtable))
+(global $$initialized@gwtincompatible.Interface.ClassWithAbstractMethod (mut i32) (i32.const 0))
 
 ;;; ClassWithAbstractMethod()
 (func $m_<init>__void@gwtincompatible.Interface.ClassWithAbstractMethod
@@ -160,6 +281,25 @@
   )
  )
  (local.get $this)
+)
+
+;;; void ClassWithAbstractMethod.$clinit()
+(func $$clinit__void@gwtincompatible.Interface.ClassWithAbstractMethod
+ (block $return.label
+  (block
+   ;; if (gwtincompatible.Interface.ClassWithAbstractMethod.$initialized) return;
+   (if (global.get $$initialized@gwtincompatible.Interface.ClassWithAbstractMethod)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (gwtincompatible.Interface.ClassWithAbstractMethod.$initialized = true);
+   (global.set $$initialized@gwtincompatible.Interface.ClassWithAbstractMethod (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
 )
 
 ;;; Code for gwtincompatible.Implementor [vtable]

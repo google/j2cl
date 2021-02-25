@@ -15,6 +15,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $cascadingconstructor.CascadingConstructor.vtable (mut (ref null $cascadingconstructor.CascadingConstructor.vtable)) (ref.null $cascadingconstructor.CascadingConstructor.vtable))
+(global $$initialized@cascadingconstructor.CascadingConstructor (mut i32) (i32.const 0))
 
 ;;; CascadingConstructor(int a, int b)
 (func $m_<init>__int__int__void_$p_cascadingconstructor_CascadingConstructor@cascadingconstructor.CascadingConstructor
@@ -47,6 +48,25 @@
   )
  )
  (local.get $this)
+)
+
+;;; void CascadingConstructor.$clinit()
+(func $$clinit__void@cascadingconstructor.CascadingConstructor
+ (block $return.label
+  (block
+   ;; if (cascadingconstructor.CascadingConstructor.$initialized) return;
+   (if (global.get $$initialized@cascadingconstructor.CascadingConstructor)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (cascadingconstructor.CascadingConstructor.$initialized = true);
+   (global.set $$initialized@cascadingconstructor.CascadingConstructor (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
 )
 
 ;;; Code for cascadingconstructor.CascadingConstructor [vtable]

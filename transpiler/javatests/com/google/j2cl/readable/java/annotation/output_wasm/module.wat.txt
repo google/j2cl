@@ -13,6 +13,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $annotation.Main.vtable (mut (ref null $annotation.Main.vtable)) (ref.null $annotation.Main.vtable))
+(global $$initialized@annotation.Main (mut i32) (i32.const 0))
 
 ;;; Main()
 (func $m_<init>__void@annotation.Main
@@ -27,8 +28,45 @@
  (local.get $this)
 )
 
+;;; void Main.$clinit()
+(func $$clinit__void@annotation.Main
+ (block $return.label
+  (block
+   ;; if (annotation.Main.$initialized) return;
+   (if (global.get $$initialized@annotation.Main)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (annotation.Main.$initialized = true);
+   (global.set $$initialized@annotation.Main (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; INTERFACE  Foo
 (global $CONSTANT@annotation.Main.Foo i32 (i32.const 123))
+(global $$initialized@annotation.Main.Foo (mut i32) (i32.const 0))
+
+;;; void Foo.$clinit()
+(func $$clinit__void@annotation.Main.Foo
+ (block $return.label
+  (block
+   ;; if (annotation.Main.Foo.$initialized) return;
+   (if (global.get $$initialized@annotation.Main.Foo)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (annotation.Main.Foo.$initialized = true);
+   (global.set $$initialized@annotation.Main.Foo (i32.const 1))
+  )
+ )
+)
 
 ;;; CLASS  Bar
 (type $annotation.Main.Bar (struct
@@ -45,6 +83,7 @@
  (field $m_baz__int_$pp_annotation (mut (ref $function.__$int)))
 ))
 (global $annotation.Main.Bar.vtable (mut (ref null $annotation.Main.Bar.vtable)) (ref.null $annotation.Main.Bar.vtable))
+(global $$initialized@annotation.Main.Bar (mut i32) (i32.const 0))
 
 ;;; Bar(Main $outer_this)
 (func $m_<init>__annotation_Main__void_$pp_annotation@annotation.Main.Bar
@@ -85,6 +124,25 @@
  (local.get $return.value)
 )
 (elem declare func $m_baz__int_$pp_annotation@annotation.Main.Bar)
+
+;;; void Bar.$clinit()
+(func $$clinit__void@annotation.Main.Bar
+ (block $return.label
+  (block
+   ;; if (annotation.Main.Bar.$initialized) return;
+   (if (global.get $$initialized@annotation.Main.Bar)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (annotation.Main.Bar.$initialized = true);
+   (global.set $$initialized@annotation.Main.Bar (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
 
 ;;; Code for annotation.Main [vtable]
  (global.set $annotation.Main.vtable (struct.new_with_rtt $annotation.Main.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $annotation.Main.vtable)))

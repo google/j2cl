@@ -14,4 +14,5 @@ package(
 integration_test(
     name = "staticnestedclass",
     srcs = glob(["*.java"]),
+    enable_wasm = True,
 )

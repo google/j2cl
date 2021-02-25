@@ -13,6 +13,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $boundedtypevariable.BoundedTypeVariable.vtable (mut (ref null $boundedtypevariable.BoundedTypeVariable.vtable)) (ref.null $boundedtypevariable.BoundedTypeVariable.vtable))
+(global $$initialized@boundedtypevariable.BoundedTypeVariable (mut i32) (i32.const 0))
 
 ;;; BoundedTypeVariable()
 (func $m_<init>__void@boundedtypevariable.BoundedTypeVariable
@@ -25,6 +26,25 @@
   )
  )
  (local.get $this)
+)
+
+;;; void BoundedTypeVariable.$clinit()
+(func $$clinit__void@boundedtypevariable.BoundedTypeVariable
+ (block $return.label
+  (block
+   ;; if (boundedtypevariable.BoundedTypeVariable.$initialized) return;
+   (if (global.get $$initialized@boundedtypevariable.BoundedTypeVariable)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (boundedtypevariable.BoundedTypeVariable.$initialized = true);
+   (global.set $$initialized@boundedtypevariable.BoundedTypeVariable (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
 )
 
 ;;; Code for boundedtypevariable.BoundedTypeVariable [vtable]

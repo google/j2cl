@@ -17,6 +17,7 @@
  (field $m_main__void (mut (ref $function.__$void)))
 ))
 (global $varargs.Varargs.vtable (mut (ref null $varargs.Varargs.vtable)) (ref.null $varargs.Varargs.vtable))
+(global $$initialized@varargs.Varargs (mut i32) (i32.const 0))
 
 ;;; Varargs(int... args)
 (func $m_<init>__arrayOf_int__void@varargs.Varargs
@@ -96,6 +97,8 @@
  (param $elements (ref null $Object.array))
  (block $return.label
   (block
+   ;; varargs.Varargs.$clinit();
+   (call $$clinit__void@varargs.Varargs )
   )
  )
 )
@@ -107,6 +110,8 @@
  (local $$array_literal (ref null $Object.array))
  (block $return.label
   (block
+   ;; varargs.Varargs.$clinit();
+   (call $$clinit__void@varargs.Varargs )
    ;; varargs.Varargs.fun((E[] $array_literal = new E[2],($array_literal[0] = a),($array_literal[1] = b),$array_literal));
    (call $m_fun__arrayOf_java_lang_Object__void@varargs.Varargs (block (result (ref null $Object.array))
     
@@ -207,6 +212,25 @@
 )
 (elem declare func $m_main__void@varargs.Varargs)
 
+;;; void Varargs.$clinit()
+(func $$clinit__void@varargs.Varargs
+ (block $return.label
+  (block
+   ;; if (varargs.Varargs.$initialized) return;
+   (if (global.get $$initialized@varargs.Varargs)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (varargs.Varargs.$initialized = true);
+   (global.set $$initialized@varargs.Varargs (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; CLASS  Child
 (type $varargs.Child (struct
  (field $vtable (ref null $varargs.Child.vtable))
@@ -224,6 +248,7 @@
  (field $m_main__void (mut (ref $function.__$void)))
 ))
 (global $varargs.Child.vtable (mut (ref null $varargs.Child.vtable)) (ref.null $varargs.Child.vtable))
+(global $$initialized@varargs.Child (mut i32) (i32.const 0))
 
 ;;; Child()
 (func $m_<init>__void@varargs.Child
@@ -242,6 +267,25 @@
   )
  )
  (local.get $this)
+)
+
+;;; void Child.$clinit()
+(func $$clinit__void@varargs.Child
+ (block $return.label
+  (block
+   ;; if (varargs.Child.$initialized) return;
+   (if (global.get $$initialized@varargs.Child)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (varargs.Child.$initialized = true);
+   (global.set $$initialized@varargs.Child (i32.const 1))
+   ;; varargs.Varargs.$clinit();
+   (call $$clinit__void@varargs.Varargs )
+  )
+ )
 )
 
 ;;; Code for varargs.Varargs [vtable]

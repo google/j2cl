@@ -22,6 +22,7 @@
  (field $m_testThrowBoundGenerics__void (mut (ref $function.__$void)))
 ))
 (global $trycatch.TryCatch.vtable (mut (ref null $trycatch.TryCatch.vtable)) (ref.null $trycatch.TryCatch.vtable))
+(global $$initialized@trycatch.TryCatch (mut i32) (i32.const 0))
 
 ;;; TryCatch()
 (func $m_<init>__void@trycatch.TryCatch
@@ -217,6 +218,25 @@
  (local.get $return.value)
 )
 
+;;; void TryCatch.$clinit()
+(func $$clinit__void@trycatch.TryCatch
+ (block $return.label
+  (block
+   ;; if (trycatch.TryCatch.$initialized) return;
+   (if (global.get $$initialized@trycatch.TryCatch)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (trycatch.TryCatch.$initialized = true);
+   (global.set $$initialized@trycatch.TryCatch (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; CLASS  ClosableThing
 (type $trycatch.TryCatch.ClosableThing (struct
  (field $vtable (ref null $trycatch.TryCatch.ClosableThing.vtable))
@@ -231,6 +251,7 @@
  (field $m_close__void (mut (ref $function.__$void)))
 ))
 (global $trycatch.TryCatch.ClosableThing.vtable (mut (ref null $trycatch.TryCatch.ClosableThing.vtable)) (ref.null $trycatch.TryCatch.ClosableThing.vtable))
+(global $$initialized@trycatch.TryCatch.ClosableThing (mut i32) (i32.const 0))
 
 ;;; ClosableThing()
 (func $m_<init>__void_$pp_trycatch@trycatch.TryCatch.ClosableThing
@@ -256,6 +277,25 @@
  )
 )
 (elem declare func $m_close__void@trycatch.TryCatch.ClosableThing)
+
+;;; void ClosableThing.$clinit()
+(func $$clinit__void@trycatch.TryCatch.ClosableThing
+ (block $return.label
+  (block
+   ;; if (trycatch.TryCatch.ClosableThing.$initialized) return;
+   (if (global.get $$initialized@trycatch.TryCatch.ClosableThing)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (trycatch.TryCatch.ClosableThing.$initialized = true);
+   (global.set $$initialized@trycatch.TryCatch.ClosableThing (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
 
 ;;; Code for trycatch.TryCatch [vtable]
  (global.set $trycatch.TryCatch.vtable (struct.new_with_rtt $trycatch.TryCatch.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_testMultiCatch__void@trycatch.TryCatch) (ref.func $m_testEmptyThrowableCatch__void@trycatch.TryCatch) (ref.func $m_testEmptyThrowableRethrow__void@trycatch.TryCatch) (ref.func $m_testFinally__void@trycatch.TryCatch) (ref.func $m_testTryWithResource__void@trycatch.TryCatch) (ref.func $m_testTryWithResourceJava9__void@trycatch.TryCatch) (ref.func $m_testNestedTryCatch__void@trycatch.TryCatch) (ref.func $m_testThrowGenerics__void@trycatch.TryCatch) (ref.func $m_testThrowBoundGenerics__void@trycatch.TryCatch) (rtt.canon $trycatch.TryCatch.vtable)))

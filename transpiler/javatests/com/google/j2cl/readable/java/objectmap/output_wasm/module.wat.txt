@@ -13,6 +13,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $objectmap.ObjectMap.vtable (mut (ref null $objectmap.ObjectMap.vtable)) (ref.null $objectmap.ObjectMap.vtable))
+(global $$initialized@objectmap.ObjectMap (mut i32) (i32.const 0))
 
 ;;; ObjectMap()
 (func $m_<init>__void@objectmap.ObjectMap
@@ -20,6 +21,8 @@
  (result (ref null $objectmap.ObjectMap))
  (block $return.label
   (block
+   ;; objectmap.ObjectMap.$clinit();
+   (call $$clinit__void@objectmap.ObjectMap )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -33,6 +36,8 @@
  (local $return.value (ref null $objectmap.ObjectMap))
  (block $return.label
   (block
+   ;; objectmap.ObjectMap.$clinit();
+   (call $$clinit__void@objectmap.ObjectMap )
    ;; return null;
    (local.set $return.value (ref.null $objectmap.ObjectMap))
    (br $return.label)
@@ -47,12 +52,33 @@
  (local $return.value (ref null $objectmap.ObjectMap))
  (block $return.label
   (block
+   ;; objectmap.ObjectMap.$clinit();
+   (call $$clinit__void@objectmap.ObjectMap )
    ;; return null;
    (local.set $return.value (ref.null $objectmap.ObjectMap))
    (br $return.label)
   )
  )
  (local.get $return.value)
+)
+
+;;; void ObjectMap.$clinit()
+(func $$clinit__void@objectmap.ObjectMap
+ (block $return.label
+  (block
+   ;; if (objectmap.ObjectMap.$initialized) return;
+   (if (global.get $$initialized@objectmap.ObjectMap)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (objectmap.ObjectMap.$initialized = true);
+   (global.set $$initialized@objectmap.ObjectMap (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
 )
 
 ;;; Code for objectmap.ObjectMap [vtable]

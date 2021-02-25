@@ -33,6 +33,7 @@
  (field $m_setStackTrace__arrayOf_java_lang_StackTraceElement__void (mut (ref $function.$Object.array__$void)))
 ))
 (global $exception.MyException.vtable (mut (ref null $exception.MyException.vtable)) (ref.null $exception.MyException.vtable))
+(global $$initialized@exception.MyException (mut i32) (i32.const 0))
 
 ;;; MyException()
 (func $m_<init>__void_$pp_exception@exception.MyException
@@ -59,6 +60,25 @@
   )
  )
  (local.get $this)
+)
+
+;;; void MyException.$clinit()
+(func $$clinit__void@exception.MyException
+ (block $return.label
+  (block
+   ;; if (exception.MyException.$initialized) return;
+   (if (global.get $$initialized@exception.MyException)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (exception.MyException.$initialized = true);
+   (global.set $$initialized@exception.MyException (i32.const 1))
+   ;; java.lang.Exception.$clinit();
+   (call $$clinit__void@java.lang.Exception )
+  )
+ )
 )
 ;;; Code for exception.MyJsException
 
@@ -95,6 +115,7 @@
  (field $m_setStackTrace__arrayOf_java_lang_StackTraceElement__void (mut (ref $function.$Object.array__$void)))
 ))
 (global $exception.MyJsException.vtable (mut (ref null $exception.MyJsException.vtable)) (ref.null $exception.MyJsException.vtable))
+(global $$initialized@exception.MyJsException (mut i32) (i32.const 0))
 
 ;;; MyJsException()
 (func $m_<init>__void@exception.MyJsException
@@ -102,6 +123,8 @@
  (result (ref null $exception.MyJsException))
  (block $return.label
   (block
+   ;; exception.MyJsException.$clinit();
+   (call $$clinit__void@exception.MyJsException )
    ;; Exception.this.Exception.<init>();
    (drop (call $m_<init>__void@java.lang.Exception (local.get $this)))
   )
@@ -121,6 +144,25 @@
   )
  )
  (local.get $this)
+)
+
+;;; void MyJsException.$clinit()
+(func $$clinit__void@exception.MyJsException
+ (block $return.label
+  (block
+   ;; if (exception.MyJsException.$initialized) return;
+   (if (global.get $$initialized@exception.MyJsException)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (exception.MyJsException.$initialized = true);
+   (global.set $$initialized@exception.MyJsException (i32.const 1))
+   ;; java.lang.Exception.$clinit();
+   (call $$clinit__void@java.lang.Exception )
+  )
+ )
 )
 
 ;;; Code for exception.MyException [vtable]

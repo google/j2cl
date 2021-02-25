@@ -1,6 +1,7 @@
 ;;; Code for unimplementedbridgemethod.Foo
 
 ;;; INTERFACE  I
+(global $$initialized@unimplementedbridgemethod.I (mut i32) (i32.const 0))
 
 ;;; int I.staticFoo()
 (func $m_staticFoo__int@unimplementedbridgemethod.I
@@ -8,6 +9,8 @@
  (local $return.value i32)
  (block $return.label
   (block
+   ;; unimplementedbridgemethod.I.$clinit();
+   (call $$clinit__void@unimplementedbridgemethod.I )
    ;; return 0;
    (local.set $return.value (i32.const 0))
    (br $return.label)
@@ -16,7 +19,42 @@
  (local.get $return.value)
 )
 
+;;; void I.$clinit()
+(func $$clinit__void@unimplementedbridgemethod.I
+ (block $return.label
+  (block
+   ;; if (unimplementedbridgemethod.I.$initialized) return;
+   (if (global.get $$initialized@unimplementedbridgemethod.I)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (unimplementedbridgemethod.I.$initialized = true);
+   (global.set $$initialized@unimplementedbridgemethod.I (i32.const 1))
+  )
+ )
+)
+
 ;;; INTERFACE  J
+(global $$initialized@unimplementedbridgemethod.J (mut i32) (i32.const 0))
+
+;;; void J.$clinit()
+(func $$clinit__void@unimplementedbridgemethod.J
+ (block $return.label
+  (block
+   ;; if (unimplementedbridgemethod.J.$initialized) return;
+   (if (global.get $$initialized@unimplementedbridgemethod.J)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (unimplementedbridgemethod.J.$initialized = true);
+   (global.set $$initialized@unimplementedbridgemethod.J (i32.const 1))
+  )
+ )
+)
 
 ;;; CLASS  Bar
 (type $unimplementedbridgemethod.Bar (struct
@@ -31,6 +69,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $unimplementedbridgemethod.Bar.vtable (mut (ref null $unimplementedbridgemethod.Bar.vtable)) (ref.null $unimplementedbridgemethod.Bar.vtable))
+(global $$initialized@unimplementedbridgemethod.Bar (mut i32) (i32.const 0))
 
 ;;; Bar()
 (func $m_<init>__void_$pp_unimplementedbridgemethod@unimplementedbridgemethod.Bar
@@ -43,6 +82,25 @@
   )
  )
  (local.get $this)
+)
+
+;;; void Bar.$clinit()
+(func $$clinit__void@unimplementedbridgemethod.Bar
+ (block $return.label
+  (block
+   ;; if (unimplementedbridgemethod.Bar.$initialized) return;
+   (if (global.get $$initialized@unimplementedbridgemethod.Bar)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (unimplementedbridgemethod.Bar.$initialized = true);
+   (global.set $$initialized@unimplementedbridgemethod.Bar (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
 )
 
 ;;; CLASS  Foo
@@ -58,6 +116,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $unimplementedbridgemethod.Foo.vtable (mut (ref null $unimplementedbridgemethod.Foo.vtable)) (ref.null $unimplementedbridgemethod.Foo.vtable))
+(global $$initialized@unimplementedbridgemethod.Foo (mut i32) (i32.const 0))
 
 ;;; Foo()
 (func $m_<init>__void@unimplementedbridgemethod.Foo
@@ -70,5 +129,24 @@
   )
  )
  (local.get $this)
+)
+
+;;; void Foo.$clinit()
+(func $$clinit__void@unimplementedbridgemethod.Foo
+ (block $return.label
+  (block
+   ;; if (unimplementedbridgemethod.Foo.$initialized) return;
+   (if (global.get $$initialized@unimplementedbridgemethod.Foo)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (unimplementedbridgemethod.Foo.$initialized = true);
+   (global.set $$initialized@unimplementedbridgemethod.Foo (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
 )
 

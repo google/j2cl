@@ -13,6 +13,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $emptymethod.EmptyMethod.vtable (mut (ref null $emptymethod.EmptyMethod.vtable)) (ref.null $emptymethod.EmptyMethod.vtable))
+(global $$initialized@emptymethod.EmptyMethod (mut i32) (i32.const 0))
 
 ;;; EmptyMethod()
 (func $m_<init>__void@emptymethod.EmptyMethod
@@ -32,6 +33,27 @@
  (param $args (ref null $Object.array))
  (block $return.label
   (block
+   ;; emptymethod.EmptyMethod.$clinit();
+   (call $$clinit__void@emptymethod.EmptyMethod )
+  )
+ )
+)
+
+;;; void EmptyMethod.$clinit()
+(func $$clinit__void@emptymethod.EmptyMethod
+ (block $return.label
+  (block
+   ;; if (emptymethod.EmptyMethod.$initialized) return;
+   (if (global.get $$initialized@emptymethod.EmptyMethod)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (emptymethod.EmptyMethod.$initialized = true);
+   (global.set $$initialized@emptymethod.EmptyMethod (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
   )
  )
 )

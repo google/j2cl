@@ -15,6 +15,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $publicinstancefields.PublicInstanceFields.vtable (mut (ref null $publicinstancefields.PublicInstanceFields.vtable)) (ref.null $publicinstancefields.PublicInstanceFields.vtable))
+(global $$initialized@publicinstancefields.PublicInstanceFields (mut i32) (i32.const 0))
 
 ;;; PublicInstanceFields()
 (func $m_<init>__void@publicinstancefields.PublicInstanceFields
@@ -38,6 +39,25 @@
   (block
    ;; (PublicInstanceFields.this.a = 1);
    (struct.set $publicinstancefields.PublicInstanceFields $a@publicinstancefields.PublicInstanceFields(local.get $this) (i32.const 1))
+  )
+ )
+)
+
+;;; void PublicInstanceFields.$clinit()
+(func $$clinit__void@publicinstancefields.PublicInstanceFields
+ (block $return.label
+  (block
+   ;; if (publicinstancefields.PublicInstanceFields.$initialized) return;
+   (if (global.get $$initialized@publicinstancefields.PublicInstanceFields)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (publicinstancefields.PublicInstanceFields.$initialized = true);
+   (global.set $$initialized@publicinstancefields.PublicInstanceFields (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
   )
  )
 )

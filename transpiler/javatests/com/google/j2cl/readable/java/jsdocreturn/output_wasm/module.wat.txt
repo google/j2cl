@@ -15,6 +15,7 @@
  (field $m_test2__int (mut (ref $function.__$int)))
 ))
 (global $jsdocreturn.JsDocReturn.vtable (mut (ref null $jsdocreturn.JsDocReturn.vtable)) (ref.null $jsdocreturn.JsDocReturn.vtable))
+(global $$initialized@jsdocreturn.JsDocReturn (mut i32) (i32.const 0))
 
 ;;; JsDocReturn()
 (func $m_<init>__void@jsdocreturn.JsDocReturn
@@ -58,6 +59,25 @@
  (local.get $return.value)
 )
 (elem declare func $m_test2__int@jsdocreturn.JsDocReturn)
+
+;;; void JsDocReturn.$clinit()
+(func $$clinit__void@jsdocreturn.JsDocReturn
+ (block $return.label
+  (block
+   ;; if (jsdocreturn.JsDocReturn.$initialized) return;
+   (if (global.get $$initialized@jsdocreturn.JsDocReturn)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (jsdocreturn.JsDocReturn.$initialized = true);
+   (global.set $$initialized@jsdocreturn.JsDocReturn (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
 
 ;;; Code for jsdocreturn.JsDocReturn [vtable]
  (global.set $jsdocreturn.JsDocReturn.vtable (struct.new_with_rtt $jsdocreturn.JsDocReturn.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test1__void@jsdocreturn.JsDocReturn) (ref.func $m_test2__int@jsdocreturn.JsDocReturn) (rtt.canon $jsdocreturn.JsDocReturn.vtable)))

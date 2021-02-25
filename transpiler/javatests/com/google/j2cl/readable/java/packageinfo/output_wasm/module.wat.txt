@@ -14,6 +14,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $packageinfo.Outer.vtable (mut (ref null $packageinfo.Outer.vtable)) (ref.null $packageinfo.Outer.vtable))
+(global $$initialized@packageinfo.Outer (mut i32) (i32.const 0))
 
 ;;; Outer()
 (func $m_<init>__void@packageinfo.Outer
@@ -21,11 +22,32 @@
  (result (ref null $packageinfo.Outer))
  (block $return.label
   (block
+   ;; packageinfo.Outer.$clinit();
+   (call $$clinit__void@packageinfo.Outer )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
+)
+
+;;; void Outer.$clinit()
+(func $$clinit__void@packageinfo.Outer
+ (block $return.label
+  (block
+   ;; if (packageinfo.Outer.$initialized) return;
+   (if (global.get $$initialized@packageinfo.Outer)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (packageinfo.Outer.$initialized = true);
+   (global.set $$initialized@packageinfo.Outer (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
 )
 
 ;;; CLASS  Inner
@@ -42,6 +64,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $packageinfo.Outer.Inner.vtable (mut (ref null $packageinfo.Outer.Inner.vtable)) (ref.null $packageinfo.Outer.Inner.vtable))
+(global $$initialized@packageinfo.Outer.Inner (mut i32) (i32.const 0))
 
 ;;; Inner(Outer $outer_this)
 (func $m_<init>__packageinfo_Outer__void@packageinfo.Outer.Inner
@@ -50,6 +73,8 @@
  (result (ref null $packageinfo.Outer.Inner))
  (block $return.label
   (block
+   ;; packageinfo.Outer.Inner.$clinit();
+   (call $$clinit__void@packageinfo.Outer.Inner )
    ;; (Inner.this.this = $outer_this);
    (struct.set $packageinfo.Outer.Inner $this@packageinfo.Outer.Inner(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
@@ -57,6 +82,25 @@
   )
  )
  (local.get $this)
+)
+
+;;; void Inner.$clinit()
+(func $$clinit__void@packageinfo.Outer.Inner
+ (block $return.label
+  (block
+   ;; if (packageinfo.Outer.Inner.$initialized) return;
+   (if (global.get $$initialized@packageinfo.Outer.Inner)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (packageinfo.Outer.Inner.$initialized = true);
+   (global.set $$initialized@packageinfo.Outer.Inner (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
 )
 ;;; Code for packageinfo.subpackage.Foo
 
@@ -74,6 +118,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $packageinfo.subpackage.Foo.vtable (mut (ref null $packageinfo.subpackage.Foo.vtable)) (ref.null $packageinfo.subpackage.Foo.vtable))
+(global $$initialized@packageinfo.subpackage.Foo (mut i32) (i32.const 0))
 
 ;;; Foo()
 (func $m_<init>__void@packageinfo.subpackage.Foo
@@ -97,6 +142,25 @@
   (block
    ;; (Foo.this.outer = new Outer.<init>());
    (struct.set $packageinfo.subpackage.Foo $outer@packageinfo.subpackage.Foo(local.get $this) (call $m_<init>__void@packageinfo.Outer (struct.new_with_rtt $packageinfo.Outer (global.get $packageinfo.Outer.vtable) (i32.const 0) (global.get $packageinfo.Outer.rtt))))
+  )
+ )
+)
+
+;;; void Foo.$clinit()
+(func $$clinit__void@packageinfo.subpackage.Foo
+ (block $return.label
+  (block
+   ;; if (packageinfo.subpackage.Foo.$initialized) return;
+   (if (global.get $$initialized@packageinfo.subpackage.Foo)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (packageinfo.subpackage.Foo.$initialized = true);
+   (global.set $$initialized@packageinfo.subpackage.Foo (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
   )
  )
 )

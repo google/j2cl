@@ -13,5 +13,6 @@ package(
 integration_test(
     name = "staticfieldcollision",
     srcs = glob(["*.java"]),
+    enable_wasm = True,
     deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )

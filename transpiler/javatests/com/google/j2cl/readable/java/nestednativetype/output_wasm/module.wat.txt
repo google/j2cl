@@ -14,6 +14,7 @@
  (field $m_a__java_lang_Object (mut (ref $function.__$java.lang.Object)))
 ))
 (global $nestednativetype.NativeArray.vtable (mut (ref null $nestednativetype.NativeArray.vtable)) (ref.null $nestednativetype.NativeArray.vtable))
+(global $$initialized@nestednativetype.NativeArray (mut i32) (i32.const 0))
 
 ;;; NativeArray()
 (func $m_<init>__void@nestednativetype.NativeArray
@@ -21,6 +22,8 @@
  (result (ref null $nestednativetype.NativeArray))
  (block $return.label
   (block
+   ;; nestednativetype.NativeArray.$clinit();
+   (call $$clinit__void@nestednativetype.NativeArray )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -46,6 +49,25 @@
 )
 (elem declare func $m_a__java_lang_Object@nestednativetype.NativeArray)
 
+;;; void NativeArray.$clinit()
+(func $$clinit__void@nestednativetype.NativeArray
+ (block $return.label
+  (block
+   ;; if (nestednativetype.NativeArray.$initialized) return;
+   (if (global.get $$initialized@nestednativetype.NativeArray)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (nestednativetype.NativeArray.$initialized = true);
+   (global.set $$initialized@nestednativetype.NativeArray (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; CLASS  <anonymous> extends Object
 (type $nestednativetype.NativeArray.1 (struct
  (field $vtable (ref null $nestednativetype.NativeArray.1.vtable))
@@ -60,6 +82,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $nestednativetype.NativeArray.1.vtable (mut (ref null $nestednativetype.NativeArray.1.vtable)) (ref.null $nestednativetype.NativeArray.1.vtable))
+(global $$initialized@nestednativetype.NativeArray.1 (mut i32) (i32.const 0))
 
 ;;; <anonymous> extends Object(NativeArray $outer_this)
 (func $m_<init>__nestednativetype_NativeArray__void_$pp_nestednativetype@nestednativetype.NativeArray.1
@@ -75,6 +98,25 @@
   )
  )
  (local.get $this)
+)
+
+;;; void <anonymous> extends Object.$clinit()
+(func $$clinit__void@nestednativetype.NativeArray.1
+ (block $return.label
+  (block
+   ;; if (nestednativetype.NativeArray.1.$initialized) return;
+   (if (global.get $$initialized@nestednativetype.NativeArray.1)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (nestednativetype.NativeArray.1.$initialized = true);
+   (global.set $$initialized@nestednativetype.NativeArray.1 (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
 )
 
 ;;; Code for nestednativetype.NativeArray [vtable]

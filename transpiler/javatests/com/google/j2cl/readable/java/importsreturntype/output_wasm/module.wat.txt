@@ -14,6 +14,7 @@
  (field $m_get__importsreturntype_ImportsReturnType_Set (mut (ref $function.__$importsreturntype.ImportsReturnType.Set)))
 ))
 (global $importsreturntype.ImportsReturnType.vtable (mut (ref null $importsreturntype.ImportsReturnType.vtable)) (ref.null $importsreturntype.ImportsReturnType.vtable))
+(global $$initialized@importsreturntype.ImportsReturnType (mut i32) (i32.const 0))
 
 ;;; ImportsReturnType()
 (func $m_<init>__void@importsreturntype.ImportsReturnType
@@ -46,6 +47,25 @@
 )
 (elem declare func $m_get__importsreturntype_ImportsReturnType_Set@importsreturntype.ImportsReturnType)
 
+;;; void ImportsReturnType.$clinit()
+(func $$clinit__void@importsreturntype.ImportsReturnType
+ (block $return.label
+  (block
+   ;; if (importsreturntype.ImportsReturnType.$initialized) return;
+   (if (global.get $$initialized@importsreturntype.ImportsReturnType)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (importsreturntype.ImportsReturnType.$initialized = true);
+   (global.set $$initialized@importsreturntype.ImportsReturnType (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; CLASS  Entry
 (type $importsreturntype.ImportsReturnType.Entry (struct
  (field $vtable (ref null $importsreturntype.ImportsReturnType.Entry.vtable))
@@ -59,6 +79,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $importsreturntype.ImportsReturnType.Entry.vtable (mut (ref null $importsreturntype.ImportsReturnType.Entry.vtable)) (ref.null $importsreturntype.ImportsReturnType.Entry.vtable))
+(global $$initialized@importsreturntype.ImportsReturnType.Entry (mut i32) (i32.const 0))
 
 ;;; Entry()
 (func $m_<init>__void@importsreturntype.ImportsReturnType.Entry
@@ -71,6 +92,25 @@
   )
  )
  (local.get $this)
+)
+
+;;; void Entry.$clinit()
+(func $$clinit__void@importsreturntype.ImportsReturnType.Entry
+ (block $return.label
+  (block
+   ;; if (importsreturntype.ImportsReturnType.Entry.$initialized) return;
+   (if (global.get $$initialized@importsreturntype.ImportsReturnType.Entry)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (importsreturntype.ImportsReturnType.Entry.$initialized = true);
+   (global.set $$initialized@importsreturntype.ImportsReturnType.Entry (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
 )
 
 ;;; CLASS  Set
@@ -86,6 +126,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $importsreturntype.ImportsReturnType.Set.vtable (mut (ref null $importsreturntype.ImportsReturnType.Set.vtable)) (ref.null $importsreturntype.ImportsReturnType.Set.vtable))
+(global $$initialized@importsreturntype.ImportsReturnType.Set (mut i32) (i32.const 0))
 
 ;;; Set()
 (func $m_<init>__void@importsreturntype.ImportsReturnType.Set
@@ -98,6 +139,25 @@
   )
  )
  (local.get $this)
+)
+
+;;; void Set.$clinit()
+(func $$clinit__void@importsreturntype.ImportsReturnType.Set
+ (block $return.label
+  (block
+   ;; if (importsreturntype.ImportsReturnType.Set.$initialized) return;
+   (if (global.get $$initialized@importsreturntype.ImportsReturnType.Set)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (importsreturntype.ImportsReturnType.Set.$initialized = true);
+   (global.set $$initialized@importsreturntype.ImportsReturnType.Set (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
 )
 
 ;;; Code for importsreturntype.ImportsReturnType [vtable]

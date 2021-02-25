@@ -39,7 +39,8 @@ import com.google.j2cl.transpiler.passes.ImplementInstanceInitialization;
 import com.google.j2cl.transpiler.passes.ImplementInstanceOfs;
 import com.google.j2cl.transpiler.passes.ImplementJsFunctionCopyMethod;
 import com.google.j2cl.transpiler.passes.ImplementLambdaExpressions;
-import com.google.j2cl.transpiler.passes.ImplementStaticInitialization;
+import com.google.j2cl.transpiler.passes.ImplementStaticInitializationViaClinitFunctionRedirection;
+import com.google.j2cl.transpiler.passes.ImplementStaticInitializationViaConditionChecks;
 import com.google.j2cl.transpiler.passes.ImplementStringCompileTimeConstants;
 import com.google.j2cl.transpiler.passes.ImplementSynchronizedStatements;
 import com.google.j2cl.transpiler.passes.InsertBitwiseOperatorBooleanCoercions;
@@ -222,7 +223,7 @@ public enum Backend {
           new InsertTypeAnnotationOnGenericReturnTypes(),
 
           // Perform post cleanups.
-          new ImplementStaticInitialization(),
+          new ImplementStaticInitializationViaClinitFunctionRedirection(),
           // Needs to run after ImplementStaticInitialization since ImplementIsInstanceMethods
           // creates static methods which should not call $clinit.
           new ImplementInstanceOfs(),
@@ -300,6 +301,7 @@ public enum Backend {
           new NormalizeArrayLiterals(),
           new NormalizeArrayCreationsWasm(),
           new InsertCastOnArrayAccess(),
+          new ImplementStaticInitializationViaConditionChecks(),
           new ExtractNonIdempotentExpressions(),
 
           // Normalize multiexpressions before rewriting assignments so that whenever there is a

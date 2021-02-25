@@ -14,6 +14,7 @@
  (field $m_foo__java_lang_Error__void (mut (ref $function.$java.lang.Error__$void)))
 ))
 (global $accidentaloverride.Parent.vtable (mut (ref null $accidentaloverride.Parent.vtable)) (ref.null $accidentaloverride.Parent.vtable))
+(global $$initialized@accidentaloverride.Parent (mut i32) (i32.const 0))
 
 ;;; Parent()
 (func $m_<init>__void_$pp_accidentaloverride@accidentaloverride.Parent
@@ -41,7 +42,44 @@
 )
 (elem declare func $m_foo__java_lang_Error__void@accidentaloverride.Parent)
 
+;;; void Parent.$clinit()
+(func $$clinit__void@accidentaloverride.Parent
+ (block $return.label
+  (block
+   ;; if (accidentaloverride.Parent.$initialized) return;
+   (if (global.get $$initialized@accidentaloverride.Parent)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (accidentaloverride.Parent.$initialized = true);
+   (global.set $$initialized@accidentaloverride.Parent (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; INTERFACE  SuperInterface
+(global $$initialized@accidentaloverride.SuperInterface (mut i32) (i32.const 0))
+
+;;; void SuperInterface.$clinit()
+(func $$clinit__void@accidentaloverride.SuperInterface
+ (block $return.label
+  (block
+   ;; if (accidentaloverride.SuperInterface.$initialized) return;
+   (if (global.get $$initialized@accidentaloverride.SuperInterface)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (accidentaloverride.SuperInterface.$initialized = true);
+   (global.set $$initialized@accidentaloverride.SuperInterface (i32.const 1))
+  )
+ )
+)
 
 ;;; CLASS  AnotherAccidentalOverride
 (type $accidentaloverride.AnotherAccidentalOverride (struct
@@ -59,6 +97,7 @@
  (field $m_foo__java_lang_AssertionError__void (mut (ref $function.$java.lang.AssertionError__$void)))
 ))
 (global $accidentaloverride.AnotherAccidentalOverride.vtable (mut (ref null $accidentaloverride.AnotherAccidentalOverride.vtable)) (ref.null $accidentaloverride.AnotherAccidentalOverride.vtable))
+(global $$initialized@accidentaloverride.AnotherAccidentalOverride (mut i32) (i32.const 0))
 
 ;;; AnotherAccidentalOverride()
 (func $m_<init>__void_$pp_accidentaloverride@accidentaloverride.AnotherAccidentalOverride
@@ -118,6 +157,25 @@
 )
 (elem declare func $m_foo__java_lang_AssertionError__void@accidentaloverride.AnotherAccidentalOverride)
 
+;;; void AnotherAccidentalOverride.$clinit()
+(func $$clinit__void@accidentaloverride.AnotherAccidentalOverride
+ (block $return.label
+  (block
+   ;; if (accidentaloverride.AnotherAccidentalOverride.$initialized) return;
+   (if (global.get $$initialized@accidentaloverride.AnotherAccidentalOverride)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (accidentaloverride.AnotherAccidentalOverride.$initialized = true);
+   (global.set $$initialized@accidentaloverride.AnotherAccidentalOverride (i32.const 1))
+   ;; accidentaloverride.Parent.$clinit();
+   (call $$clinit__void@accidentaloverride.Parent )
+  )
+ )
+)
+
 ;;; CLASS  AccidentalOverride
 (type $accidentaloverride.AccidentalOverride (struct
  (field $vtable (ref null $accidentaloverride.AccidentalOverride.vtable))
@@ -133,6 +191,7 @@
  (field $m_foo__java_lang_Object__void (mut (ref $function.$java.lang.Object__$void)))
 ))
 (global $accidentaloverride.AccidentalOverride.vtable (mut (ref null $accidentaloverride.AccidentalOverride.vtable)) (ref.null $accidentaloverride.AccidentalOverride.vtable))
+(global $$initialized@accidentaloverride.AccidentalOverride (mut i32) (i32.const 0))
 
 ;;; AccidentalOverride()
 (func $m_<init>__void@accidentaloverride.AccidentalOverride
@@ -161,6 +220,25 @@
  )
 )
 (elem declare func $m_foo__java_lang_Object__void@accidentaloverride.AccidentalOverride)
+
+;;; void AccidentalOverride.$clinit()
+(func $$clinit__void@accidentaloverride.AccidentalOverride
+ (block $return.label
+  (block
+   ;; if (accidentaloverride.AccidentalOverride.$initialized) return;
+   (if (global.get $$initialized@accidentaloverride.AccidentalOverride)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (accidentaloverride.AccidentalOverride.$initialized = true);
+   (global.set $$initialized@accidentaloverride.AccidentalOverride (i32.const 1))
+   ;; accidentaloverride.Parent.$clinit();
+   (call $$clinit__void@accidentaloverride.Parent )
+  )
+ )
+)
 
 ;;; Code for accidentaloverride.Parent [vtable]
  (global.set $accidentaloverride.Parent.vtable (struct.new_with_rtt $accidentaloverride.Parent.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__java_lang_Error__void@accidentaloverride.Parent) (rtt.canon $accidentaloverride.Parent.vtable)))

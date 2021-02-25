@@ -16,6 +16,7 @@
  (field $m_grandParentWithChangingReturn__java_lang_Object (mut (ref $function.__$java.lang.Object)))
 ))
 (global $supermethodcall.GrandParent.vtable (mut (ref null $supermethodcall.GrandParent.vtable)) (ref.null $supermethodcall.GrandParent.vtable))
+(global $$initialized@supermethodcall.GrandParent (mut i32) (i32.const 0))
 
 ;;; GrandParent()
 (func $m_<init>__void_$pp_supermethodcall@supermethodcall.GrandParent
@@ -73,6 +74,25 @@
 )
 (elem declare func $m_grandParentWithChangingReturn__java_lang_Object@supermethodcall.GrandParent)
 
+;;; void GrandParent.$clinit()
+(func $$clinit__void@supermethodcall.GrandParent
+ (block $return.label
+  (block
+   ;; if (supermethodcall.GrandParent.$initialized) return;
+   (if (global.get $$initialized@supermethodcall.GrandParent)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (supermethodcall.GrandParent.$initialized = true);
+   (global.set $$initialized@supermethodcall.GrandParent (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; CLASS  Parent
 (type $supermethodcall.Parent (struct
  (field $vtable (ref null $supermethodcall.Parent.vtable))
@@ -92,6 +112,7 @@
  (field $m_parentWithChangingReturn__java_lang_Object (mut (ref $function.__$java.lang.Object)))
 ))
 (global $supermethodcall.Parent.vtable (mut (ref null $supermethodcall.Parent.vtable)) (ref.null $supermethodcall.Parent.vtable))
+(global $$initialized@supermethodcall.Parent (mut i32) (i32.const 0))
 
 ;;; Parent()
 (func $m_<init>__void_$pp_supermethodcall@supermethodcall.Parent
@@ -149,6 +170,25 @@
 )
 (elem declare func $m_parentWithChangingReturn__java_lang_Object@supermethodcall.Parent)
 
+;;; void Parent.$clinit()
+(func $$clinit__void@supermethodcall.Parent
+ (block $return.label
+  (block
+   ;; if (supermethodcall.Parent.$initialized) return;
+   (if (global.get $$initialized@supermethodcall.Parent)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (supermethodcall.Parent.$initialized = true);
+   (global.set $$initialized@supermethodcall.Parent (i32.const 1))
+   ;; supermethodcall.GrandParent.$clinit();
+   (call $$clinit__void@supermethodcall.GrandParent )
+  )
+ )
+)
+
 ;;; CLASS  Child
 (type $supermethodcall.Child (struct
  (field $vtable (ref null $supermethodcall.Child.vtable))
@@ -170,6 +210,7 @@
  (field $m_grandParentWithChangingReturn__supermethodcall_Child (mut (ref $function.__$supermethodcall.Child)))
 ))
 (global $supermethodcall.Child.vtable (mut (ref null $supermethodcall.Child.vtable)) (ref.null $supermethodcall.Child.vtable))
+(global $$initialized@supermethodcall.Child (mut i32) (i32.const 0))
 
 ;;; Child()
 (func $m_<init>__void@supermethodcall.Child
@@ -317,6 +358,25 @@
  (local.get $return.value)
 )
 (elem declare func $m_parentWithChangingReturn__java_lang_Object@supermethodcall.Child)
+
+;;; void Child.$clinit()
+(func $$clinit__void@supermethodcall.Child
+ (block $return.label
+  (block
+   ;; if (supermethodcall.Child.$initialized) return;
+   (if (global.get $$initialized@supermethodcall.Child)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (supermethodcall.Child.$initialized = true);
+   (global.set $$initialized@supermethodcall.Child (i32.const 1))
+   ;; supermethodcall.Parent.$clinit();
+   (call $$clinit__void@supermethodcall.Parent )
+  )
+ )
+)
 
 ;;; Code for supermethodcall.GrandParent [vtable]
  (global.set $supermethodcall.GrandParent.vtable (struct.new_with_rtt $supermethodcall.GrandParent.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_grandParentSimplest__void@supermethodcall.GrandParent) (ref.func $m_grandParentWithParams__int__void@supermethodcall.GrandParent) (ref.func $m_grandParentWithChangingReturn__java_lang_Object@supermethodcall.GrandParent) (rtt.canon $supermethodcall.GrandParent.vtable)))

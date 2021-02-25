@@ -14,6 +14,7 @@
 ))
 (global $longinitialvalue.LongInitialValue.vtable (mut (ref null $longinitialvalue.LongInitialValue.vtable)) (ref.null $longinitialvalue.LongInitialValue.vtable))
 (global $LONG_VALUE@longinitialvalue.LongInitialValue (mut i64) (i64.const 0))
+(global $$initialized@longinitialvalue.LongInitialValue (mut i32) (i32.const 0))
 
 ;;; LongInitialValue()
 (func $m_<init>__void@longinitialvalue.LongInitialValue
@@ -26,5 +27,24 @@
   )
  )
  (local.get $this)
+)
+
+;;; void LongInitialValue.$clinit()
+(func $$clinit__void@longinitialvalue.LongInitialValue
+ (block $return.label
+  (block
+   ;; if (longinitialvalue.LongInitialValue.$initialized) return;
+   (if (global.get $$initialized@longinitialvalue.LongInitialValue)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (longinitialvalue.LongInitialValue.$initialized = true);
+   (global.set $$initialized@longinitialvalue.LongInitialValue (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
 )
 

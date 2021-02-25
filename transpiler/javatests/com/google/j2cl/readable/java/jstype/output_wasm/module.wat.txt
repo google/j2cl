@@ -22,6 +22,7 @@
  (field $m_testStarAndWildCard__jstype_SomeJsType_Star__jstype_SomeJsType_Wildcard__jstype_SomeJsType_Wildcard (mut (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)))
 ))
 (global $jstype.SomeJsType.vtable (mut (ref null $jstype.SomeJsType.vtable)) (ref.null $jstype.SomeJsType.vtable))
+(global $$initialized@jstype.SomeJsType (mut i32) (i32.const 0))
 
 ;;; SomeJsType()
 (func $m_<init>__void@jstype.SomeJsType
@@ -29,6 +30,8 @@
  (result (ref null $jstype.SomeJsType))
  (block $return.label
   (block
+   ;; jstype.SomeJsType.$clinit();
+   (call $$clinit__void@jstype.SomeJsType )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -133,9 +136,64 @@
 )
 (elem declare func $m_testStarAndWildCard__jstype_SomeJsType_Star__jstype_SomeJsType_Wildcard__jstype_SomeJsType_Wildcard@jstype.SomeJsType)
 
+;;; void SomeJsType.$clinit()
+(func $$clinit__void@jstype.SomeJsType
+ (block $return.label
+  (block
+   ;; if (jstype.SomeJsType.$initialized) return;
+   (if (global.get $$initialized@jstype.SomeJsType)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (jstype.SomeJsType.$initialized = true);
+   (global.set $$initialized@jstype.SomeJsType (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; INTERFACE  Star
+(global $$initialized@jstype.SomeJsType.Star (mut i32) (i32.const 0))
+
+;;; void Star.$clinit()
+(func $$clinit__void@jstype.SomeJsType.Star
+ (block $return.label
+  (block
+   ;; if (jstype.SomeJsType.Star.$initialized) return;
+   (if (global.get $$initialized@jstype.SomeJsType.Star)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (jstype.SomeJsType.Star.$initialized = true);
+   (global.set $$initialized@jstype.SomeJsType.Star (i32.const 1))
+  )
+ )
+)
 
 ;;; INTERFACE  Wildcard
+(global $$initialized@jstype.SomeJsType.Wildcard (mut i32) (i32.const 0))
+
+;;; void Wildcard.$clinit()
+(func $$clinit__void@jstype.SomeJsType.Wildcard
+ (block $return.label
+  (block
+   ;; if (jstype.SomeJsType.Wildcard.$initialized) return;
+   (if (global.get $$initialized@jstype.SomeJsType.Wildcard)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (jstype.SomeJsType.Wildcard.$initialized = true);
+   (global.set $$initialized@jstype.SomeJsType.Wildcard (i32.const 1))
+  )
+ )
+)
 
 ;;; Code for jstype.SomeJsType [vtable]
  (global.set $jstype.SomeJsType.vtable (struct.new_with_rtt $jstype.SomeJsType.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_publicMethod__void@jstype.SomeJsType) (ref.func $m_packageMethod__void_$pp_jstype@jstype.SomeJsType) (ref.func $m_protectedMethod__void@jstype.SomeJsType) (ref.func $m_useFieldsAndMethods__void@jstype.SomeJsType) (ref.func $m_testStarAndWildCard__jstype_SomeJsType_Star__jstype_SomeJsType_Wildcard__jstype_SomeJsType_Wildcard@jstype.SomeJsType) (rtt.canon $jstype.SomeJsType.vtable)))

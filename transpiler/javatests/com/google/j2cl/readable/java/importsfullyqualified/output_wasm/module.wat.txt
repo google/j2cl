@@ -13,6 +13,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $importsfullyqualified.ImportsFullyQualified.vtable (mut (ref null $importsfullyqualified.ImportsFullyQualified.vtable)) (ref.null $importsfullyqualified.ImportsFullyQualified.vtable))
+(global $$initialized@importsfullyqualified.ImportsFullyQualified (mut i32) (i32.const 0))
 
 ;;; ImportsFullyQualified()
 (func $m_<init>__void@importsfullyqualified.ImportsFullyQualified
@@ -25,6 +26,25 @@
   )
  )
  (local.get $this)
+)
+
+;;; void ImportsFullyQualified.$clinit()
+(func $$clinit__void@importsfullyqualified.ImportsFullyQualified
+ (block $return.label
+  (block
+   ;; if (importsfullyqualified.ImportsFullyQualified.$initialized) return;
+   (if (global.get $$initialized@importsfullyqualified.ImportsFullyQualified)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (importsfullyqualified.ImportsFullyQualified.$initialized = true);
+   (global.set $$initialized@importsfullyqualified.ImportsFullyQualified (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
 )
 
 ;;; Code for importsfullyqualified.ImportsFullyQualified [vtable]

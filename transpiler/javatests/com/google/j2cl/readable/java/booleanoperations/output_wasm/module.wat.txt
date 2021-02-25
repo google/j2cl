@@ -14,6 +14,7 @@
  (field $m_test__void (mut (ref $function.__$void)))
 ))
 (global $booleanoperations.BooleanOperations.vtable (mut (ref null $booleanoperations.BooleanOperations.vtable)) (ref.null $booleanoperations.BooleanOperations.vtable))
+(global $$initialized@booleanoperations.BooleanOperations (mut i32) (i32.const 0))
 
 ;;; BooleanOperations()
 (func $m_<init>__void@booleanoperations.BooleanOperations
@@ -202,6 +203,25 @@
 )
 (elem declare func $m_test__void@booleanoperations.BooleanOperations)
 
+;;; void BooleanOperations.$clinit()
+(func $$clinit__void@booleanoperations.BooleanOperations
+ (block $return.label
+  (block
+   ;; if (booleanoperations.BooleanOperations.$initialized) return;
+   (if (global.get $$initialized@booleanoperations.BooleanOperations)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (booleanoperations.BooleanOperations.$initialized = true);
+   (global.set $$initialized@booleanoperations.BooleanOperations (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; CLASS  Outer
 (type $booleanoperations.BooleanOperations.1Outer (struct
  (field $vtable (ref null $booleanoperations.BooleanOperations.1Outer.vtable))
@@ -217,6 +237,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $booleanoperations.BooleanOperations.1Outer.vtable (mut (ref null $booleanoperations.BooleanOperations.1Outer.vtable)) (ref.null $booleanoperations.BooleanOperations.1Outer.vtable))
+(global $$initialized@booleanoperations.BooleanOperations.1Outer (mut i32) (i32.const 0))
 
 ;;; Outer(BooleanOperations $outer_this)
 (func $m_<init>__booleanoperations_BooleanOperations__void_$pp_booleanoperations@booleanoperations.BooleanOperations.1Outer
@@ -234,6 +255,25 @@
  (local.get $this)
 )
 
+;;; void Outer.$clinit()
+(func $$clinit__void@booleanoperations.BooleanOperations.1Outer
+ (block $return.label
+  (block
+   ;; if (booleanoperations.BooleanOperations.1Outer.$initialized) return;
+   (if (global.get $$initialized@booleanoperations.BooleanOperations.1Outer)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (booleanoperations.BooleanOperations.1Outer.$initialized = true);
+   (global.set $$initialized@booleanoperations.BooleanOperations.1Outer (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; CLASS  Inner
 (type $booleanoperations.BooleanOperations.1Outer.Inner (struct
  (field $vtable (ref null $booleanoperations.BooleanOperations.1Outer.Inner.vtable))
@@ -248,6 +288,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $booleanoperations.BooleanOperations.1Outer.Inner.vtable (mut (ref null $booleanoperations.BooleanOperations.1Outer.Inner.vtable)) (ref.null $booleanoperations.BooleanOperations.1Outer.Inner.vtable))
+(global $$initialized@booleanoperations.BooleanOperations.1Outer.Inner (mut i32) (i32.const 0))
 
 ;;; Inner(Outer $outer_this)
 (func $m_<init>__booleanoperations_BooleanOperations_1Outer__void_$pp_booleanoperations@booleanoperations.BooleanOperations.1Outer.Inner
@@ -274,6 +315,25 @@
   (block
    ;; (Inner.this.this.b = (Inner.this.this.b | true));
    (struct.set $booleanoperations.BooleanOperations.1Outer $b@booleanoperations.BooleanOperations.1Outer(struct.get $booleanoperations.BooleanOperations.1Outer.Inner $this@booleanoperations.BooleanOperations.1Outer.Inner(local.get $this)) (i32.or (struct.get $booleanoperations.BooleanOperations.1Outer $b@booleanoperations.BooleanOperations.1Outer(struct.get $booleanoperations.BooleanOperations.1Outer.Inner $this@booleanoperations.BooleanOperations.1Outer.Inner(local.get $this))) (i32.const 1)))
+  )
+ )
+)
+
+;;; void Inner.$clinit()
+(func $$clinit__void@booleanoperations.BooleanOperations.1Outer.Inner
+ (block $return.label
+  (block
+   ;; if (booleanoperations.BooleanOperations.1Outer.Inner.$initialized) return;
+   (if (global.get $$initialized@booleanoperations.BooleanOperations.1Outer.Inner)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (booleanoperations.BooleanOperations.1Outer.Inner.$initialized = true);
+   (global.set $$initialized@booleanoperations.BooleanOperations.1Outer.Inner (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
   )
  )
 )

@@ -16,6 +16,7 @@
  (field $m_doImmediateInstanceMethod__void_$pp_transitivejsoverlayimport (mut (ref $function.__$void)))
 ))
 (global $transitivejsoverlayimport.Immediate.vtable (mut (ref null $transitivejsoverlayimport.Immediate.vtable)) (ref.null $transitivejsoverlayimport.Immediate.vtable))
+(global $$initialized@transitivejsoverlayimport.Immediate (mut i32) (i32.const 0))
 
 ;;; Immediate()
 (func $m_<init>__void_$pp_transitivejsoverlayimport@transitivejsoverlayimport.Immediate
@@ -23,6 +24,8 @@
  (result (ref null $transitivejsoverlayimport.Immediate))
  (block $return.label
   (block
+   ;; transitivejsoverlayimport.Immediate.$clinit();
+   (call $$clinit__void@transitivejsoverlayimport.Immediate )
    ;; Transitive.this.Transitive.<init>();
    (drop (call $m_<init>__void_$pp_transitivejsoverlayimport@transitivejsoverlayimport.Transitive (local.get $this)))
   )
@@ -42,6 +45,23 @@
 )
 (elem declare func $m_doImmediateInstanceMethod__void_$pp_transitivejsoverlayimport@transitivejsoverlayimport.Immediate)
 
+;;; void Immediate.$clinit()
+(func $$clinit__void@transitivejsoverlayimport.Immediate
+ (block $return.label
+  (block
+   ;; if (transitivejsoverlayimport.Immediate.$initialized) return;
+   (if (global.get $$initialized@transitivejsoverlayimport.Immediate)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (transitivejsoverlayimport.Immediate.$initialized = true);
+   (global.set $$initialized@transitivejsoverlayimport.Immediate (i32.const 1))
+  )
+ )
+)
+
 ;;; CLASS  NonNativeUpper
 (type $transitivejsoverlayimport.NonNativeUpper (struct
  (field $vtable (ref null $transitivejsoverlayimport.NonNativeUpper.vtable))
@@ -59,6 +79,7 @@
  (field $m_doNonNativeUpperInstanceMethod__void_$pp_transitivejsoverlayimport (mut (ref $function.__$void)))
 ))
 (global $transitivejsoverlayimport.NonNativeUpper.vtable (mut (ref null $transitivejsoverlayimport.NonNativeUpper.vtable)) (ref.null $transitivejsoverlayimport.NonNativeUpper.vtable))
+(global $$initialized@transitivejsoverlayimport.NonNativeUpper (mut i32) (i32.const 0))
 
 ;;; NonNativeUpper()
 (func $m_<init>__void@transitivejsoverlayimport.NonNativeUpper
@@ -66,6 +87,8 @@
  (result (ref null $transitivejsoverlayimport.NonNativeUpper))
  (block $return.label
   (block
+   ;; transitivejsoverlayimport.NonNativeUpper.$clinit();
+   (call $$clinit__void@transitivejsoverlayimport.NonNativeUpper )
    ;; Immediate.this.Immediate.<init>();
    (drop (call $m_<init>__void_$pp_transitivejsoverlayimport@transitivejsoverlayimport.Immediate (local.get $this)))
   )
@@ -85,6 +108,23 @@
 )
 (elem declare func $m_doNonNativeUpperInstanceMethod__void_$pp_transitivejsoverlayimport@transitivejsoverlayimport.NonNativeUpper)
 
+;;; void NonNativeUpper.$clinit()
+(func $$clinit__void@transitivejsoverlayimport.NonNativeUpper
+ (block $return.label
+  (block
+   ;; if (transitivejsoverlayimport.NonNativeUpper.$initialized) return;
+   (if (global.get $$initialized@transitivejsoverlayimport.NonNativeUpper)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (transitivejsoverlayimport.NonNativeUpper.$initialized = true);
+   (global.set $$initialized@transitivejsoverlayimport.NonNativeUpper (i32.const 1))
+  )
+ )
+)
+
 ;;; CLASS  NonNativeLower
 (type $transitivejsoverlayimport.NonNativeLower (struct
  (field $vtable (ref null $transitivejsoverlayimport.NonNativeLower.vtable))
@@ -103,6 +143,7 @@
  (field $m_doNonNativeLowerInstanceMethod__void_$pp_transitivejsoverlayimport (mut (ref $function.__$void)))
 ))
 (global $transitivejsoverlayimport.NonNativeLower.vtable (mut (ref null $transitivejsoverlayimport.NonNativeLower.vtable)) (ref.null $transitivejsoverlayimport.NonNativeLower.vtable))
+(global $$initialized@transitivejsoverlayimport.NonNativeLower (mut i32) (i32.const 0))
 
 ;;; NonNativeLower()
 (func $m_<init>__void@transitivejsoverlayimport.NonNativeLower
@@ -110,6 +151,8 @@
  (result (ref null $transitivejsoverlayimport.NonNativeLower))
  (block $return.label
   (block
+   ;; transitivejsoverlayimport.NonNativeLower.$clinit();
+   (call $$clinit__void@transitivejsoverlayimport.NonNativeLower )
    ;; NonNativeUpper.this.NonNativeUpper.<init>();
    (drop (call $m_<init>__void@transitivejsoverlayimport.NonNativeUpper (local.get $this)))
   )
@@ -129,6 +172,25 @@
 )
 (elem declare func $m_doNonNativeLowerInstanceMethod__void_$pp_transitivejsoverlayimport@transitivejsoverlayimport.NonNativeLower)
 
+;;; void NonNativeLower.$clinit()
+(func $$clinit__void@transitivejsoverlayimport.NonNativeLower
+ (block $return.label
+  (block
+   ;; if (transitivejsoverlayimport.NonNativeLower.$initialized) return;
+   (if (global.get $$initialized@transitivejsoverlayimport.NonNativeLower)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (transitivejsoverlayimport.NonNativeLower.$initialized = true);
+   (global.set $$initialized@transitivejsoverlayimport.NonNativeLower (i32.const 1))
+   ;; transitivejsoverlayimport.NonNativeUpper.$clinit();
+   (call $$clinit__void@transitivejsoverlayimport.NonNativeUpper )
+  )
+ )
+)
+
 ;;; CLASS  Transitive
 (type $transitivejsoverlayimport.Transitive (struct
  (field $vtable (ref null $transitivejsoverlayimport.Transitive.vtable))
@@ -144,6 +206,7 @@
  (field $m_doTransitiveInstanceMethod__java_lang_String__void_$pp_transitivejsoverlayimport (mut (ref $function.$java.lang.String__$void)))
 ))
 (global $transitivejsoverlayimport.Transitive.vtable (mut (ref null $transitivejsoverlayimport.Transitive.vtable)) (ref.null $transitivejsoverlayimport.Transitive.vtable))
+(global $$initialized@transitivejsoverlayimport.Transitive (mut i32) (i32.const 0))
 
 ;;; Transitive()
 (func $m_<init>__void_$pp_transitivejsoverlayimport@transitivejsoverlayimport.Transitive
@@ -151,6 +214,8 @@
  (result (ref null $transitivejsoverlayimport.Transitive))
  (block $return.label
   (block
+   ;; transitivejsoverlayimport.Transitive.$clinit();
+   (call $$clinit__void@transitivejsoverlayimport.Transitive )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -186,6 +251,25 @@
 )
 (elem declare func $m_doTransitiveInstanceMethod__java_lang_String__void_$pp_transitivejsoverlayimport@transitivejsoverlayimport.Transitive)
 
+;;; void Transitive.$clinit()
+(func $$clinit__void@transitivejsoverlayimport.Transitive
+ (block $return.label
+  (block
+   ;; if (transitivejsoverlayimport.Transitive.$initialized) return;
+   (if (global.get $$initialized@transitivejsoverlayimport.Transitive)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (transitivejsoverlayimport.Transitive.$initialized = true);
+   (global.set $$initialized@transitivejsoverlayimport.Transitive (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
 ;;; CLASS  Main
 (type $transitivejsoverlayimport.Main (struct
  (field $vtable (ref null $transitivejsoverlayimport.Main.vtable))
@@ -199,6 +283,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $transitivejsoverlayimport.Main.vtable (mut (ref null $transitivejsoverlayimport.Main.vtable)) (ref.null $transitivejsoverlayimport.Main.vtable))
+(global $$initialized@transitivejsoverlayimport.Main (mut i32) (i32.const 0))
 
 ;;; Main()
 (func $m_<init>__void@transitivejsoverlayimport.Main
@@ -226,6 +311,8 @@
  (local $$array_literal_3 (ref null $char.array))
  (block $return.label
   (block
+   ;; transitivejsoverlayimport.Main.$clinit();
+   (call $$clinit__void@transitivejsoverlayimport.Main )
    (block
     ;; Transitive transitive = null;
     
@@ -306,6 +393,25 @@
     ;; nonNativeLower.doNonNativeLowerInstanceMethod();
     (call_ref (local.get $nonNativeLower)(struct.get $transitivejsoverlayimport.NonNativeLower.vtable $m_doNonNativeLowerInstanceMethod__void_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.NonNativeLower $vtable(local.get $nonNativeLower))))
    )
+  )
+ )
+)
+
+;;; void Main.$clinit()
+(func $$clinit__void@transitivejsoverlayimport.Main
+ (block $return.label
+  (block
+   ;; if (transitivejsoverlayimport.Main.$initialized) return;
+   (if (global.get $$initialized@transitivejsoverlayimport.Main)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (transitivejsoverlayimport.Main.$initialized = true);
+   (global.set $$initialized@transitivejsoverlayimport.Main (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
   )
  )
 )
