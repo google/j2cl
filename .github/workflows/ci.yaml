@@ -14,7 +14,7 @@
 
 # Format reference: https://docs.github.com/en/actions/reference
 
-name: J2CL CI
+name: CI
 
 # https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#on
 on:
@@ -32,9 +32,7 @@ env:
 
 # https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobs
 jobs:
-  build-and-test:
-    name: Build and Test
-
+  build:
     runs-on: ${{ matrix.os }}
 
     strategy:
