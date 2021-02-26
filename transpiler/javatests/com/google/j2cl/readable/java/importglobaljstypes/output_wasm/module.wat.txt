@@ -3,7 +3,7 @@
 ;;; CLASS  Date
 (type $importglobaljstypes.Date (struct
  (field $vtable (ref null $importglobaljstypes.Date.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $importglobaljstypes.Date.vtable (struct
  
@@ -14,7 +14,7 @@
  (field $m_copy__importglobaljstypes_Date_NativeDate__importglobaljstypes_Date_NativeDate (mut (ref $function.$importglobaljstypes.Date.NativeDate__$importglobaljstypes.Date.NativeDate)))
 ))
 (global $importglobaljstypes.Date.vtable (mut (ref null $importglobaljstypes.Date.vtable)) (ref.null $importglobaljstypes.Date.vtable))
-(global $$initialized@importglobaljstypes.Date (mut i32) (i32.const 0))
+(global $f_$initialized__importglobaljstypes_Date (mut i32) (i32.const 0))
 
 ;;; Date()
 (func $m_<init>__void@importglobaljstypes.Date
@@ -70,14 +70,14 @@
  (block $return.label
   (block
    ;; if (importglobaljstypes.Date.$initialized) return;
-   (if (global.get $$initialized@importglobaljstypes.Date)
+   (if (global.get $f_$initialized__importglobaljstypes_Date)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (importglobaljstypes.Date.$initialized = true);
-   (global.set $$initialized@importglobaljstypes.Date (i32.const 1))
+   (global.set $f_$initialized__importglobaljstypes_Date (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -87,7 +87,7 @@
 ;;; CLASS  NativeDate
 (type $importglobaljstypes.Date.NativeDate (struct
  (field $vtable (ref null $importglobaljstypes.Date.NativeDate.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $importglobaljstypes.Date.NativeDate.vtable (struct
  
@@ -97,7 +97,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $importglobaljstypes.Date.NativeDate.vtable (mut (ref null $importglobaljstypes.Date.NativeDate.vtable)) (ref.null $importglobaljstypes.Date.NativeDate.vtable))
-(global $$initialized@importglobaljstypes.Date.NativeDate (mut i32) (i32.const 0))
+(global $f_$initialized__importglobaljstypes_Date_NativeDate (mut i32) (i32.const 0))
 
 ;;; NativeDate()
 (func $m_<init>__void@importglobaljstypes.Date.NativeDate
@@ -130,14 +130,14 @@
  (block $return.label
   (block
    ;; if (importglobaljstypes.Date.NativeDate.$initialized) return;
-   (if (global.get $$initialized@importglobaljstypes.Date.NativeDate)
+   (if (global.get $f_$initialized__importglobaljstypes_Date_NativeDate)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (importglobaljstypes.Date.NativeDate.$initialized = true);
-   (global.set $$initialized@importglobaljstypes.Date.NativeDate (i32.const 1))
+   (global.set $f_$initialized__importglobaljstypes_Date_NativeDate (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -148,7 +148,7 @@
 ;;; CLASS  Number
 (type $importglobaljstypes.Number (struct
  (field $vtable (ref null $importglobaljstypes.Number.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $importglobaljstypes.Number.vtable (struct
  
@@ -159,7 +159,7 @@
  (field $m_testJsDocForLiteralType__importglobaljstypes_Number_MyLiteralType__importglobaljstypes_Number_MyLiteralType (mut (ref $function.$java.lang.Object__$java.lang.Object)))
 ))
 (global $importglobaljstypes.Number.vtable (mut (ref null $importglobaljstypes.Number.vtable)) (ref.null $importglobaljstypes.Number.vtable))
-(global $$initialized@importglobaljstypes.Number (mut i32) (i32.const 0))
+(global $f_$initialized__importglobaljstypes_Number (mut i32) (i32.const 0))
 
 ;;; Number()
 (func $m_<init>__void@importglobaljstypes.Number
@@ -260,14 +260,14 @@
  (block $return.label
   (block
    ;; if (importglobaljstypes.Number.$initialized) return;
-   (if (global.get $$initialized@importglobaljstypes.Number)
+   (if (global.get $f_$initialized__importglobaljstypes_Number)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (importglobaljstypes.Number.$initialized = true);
-   (global.set $$initialized@importglobaljstypes.Number (i32.const 1))
+   (global.set $f_$initialized__importglobaljstypes_Number (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -275,41 +275,41 @@
 )
 
 ;;; INTERFACE  NativeFunction
-(global $$initialized@importglobaljstypes.Number.NativeFunction (mut i32) (i32.const 0))
+(global $f_$initialized__importglobaljstypes_Number_NativeFunction (mut i32) (i32.const 0))
 
 ;;; void NativeFunction.$clinit()
 (func $$clinit__void@importglobaljstypes.Number.NativeFunction
  (block $return.label
   (block
    ;; if (importglobaljstypes.Number.NativeFunction.$initialized) return;
-   (if (global.get $$initialized@importglobaljstypes.Number.NativeFunction)
+   (if (global.get $f_$initialized__importglobaljstypes_Number_NativeFunction)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (importglobaljstypes.Number.NativeFunction.$initialized = true);
-   (global.set $$initialized@importglobaljstypes.Number.NativeFunction (i32.const 1))
+   (global.set $f_$initialized__importglobaljstypes_Number_NativeFunction (i32.const 1))
   )
  )
 )
 
 ;;; INTERFACE  MyLiteralType
-(global $$initialized@importglobaljstypes.Number.MyLiteralType (mut i32) (i32.const 0))
+(global $f_$initialized__importglobaljstypes_Number_MyLiteralType (mut i32) (i32.const 0))
 
 ;;; void MyLiteralType.$clinit()
 (func $$clinit__void@importglobaljstypes.Number.MyLiteralType
  (block $return.label
   (block
    ;; if (importglobaljstypes.Number.MyLiteralType.$initialized) return;
-   (if (global.get $$initialized@importglobaljstypes.Number.MyLiteralType)
+   (if (global.get $f_$initialized__importglobaljstypes_Number_MyLiteralType)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (importglobaljstypes.Number.MyLiteralType.$initialized = true);
-   (global.set $$initialized@importglobaljstypes.Number.MyLiteralType (i32.const 1))
+   (global.set $f_$initialized__importglobaljstypes_Number_MyLiteralType (i32.const 1))
   )
  )
 )

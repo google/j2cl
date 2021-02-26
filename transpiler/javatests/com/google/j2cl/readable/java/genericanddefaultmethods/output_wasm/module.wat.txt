@@ -1,7 +1,7 @@
 ;;; Code for genericanddefaultmethods.ConcreteClass
 
 ;;; INTERFACE  InterfaceWithDefault
-(global $$initialized@genericanddefaultmethods.InterfaceWithDefault (mut i32) (i32.const 0))
+(global $f_$initialized__genericanddefaultmethods_InterfaceWithDefault (mut i32) (i32.const 0))
 
 ;;; void InterfaceWithDefault.foo(String value)
 (func $m_foo__java_lang_String__void@genericanddefaultmethods.InterfaceWithDefault
@@ -16,7 +16,7 @@
     
     (local.set $$qualifier (block (result (ref null $java.io.PrintStream))
      (call $$clinit__void@java.lang.System )
-     (global.get $out@java.lang.System)
+     (global.get $f_out__java_lang_System)
     ))
     ;; $qualifier.println(java.lang.String.fromInternalArray((char[] $array_literal = new char[23],($array_literal[0] = 105),($array_literal[1] = 110),($array_literal[2] = 32),($array_literal[3] = 73),($array_literal[4] = 110),($array_literal[5] = 116),($array_literal[6] = 101),($array_literal[7] = 114),($array_literal[8] = 102),($array_literal[9] = 97),($array_literal[10] = 99),($array_literal[11] = 101),($array_literal[12] = 87),($array_literal[13] = 105),($array_literal[14] = 116),($array_literal[15] = 104),($array_literal[16] = 68),($array_literal[17] = 101),($array_literal[18] = 102),($array_literal[19] = 97),($array_literal[20] = 117),($array_literal[21] = 108),($array_literal[22] = 116),$array_literal)));
     (call_ref (local.get $$qualifier)(call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (block (result (ref null $char.array))
@@ -58,14 +58,14 @@
  (block $return.label
   (block
    ;; if (genericanddefaultmethods.InterfaceWithDefault.$initialized) return;
-   (if (global.get $$initialized@genericanddefaultmethods.InterfaceWithDefault)
+   (if (global.get $f_$initialized__genericanddefaultmethods_InterfaceWithDefault)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (genericanddefaultmethods.InterfaceWithDefault.$initialized = true);
-   (global.set $$initialized@genericanddefaultmethods.InterfaceWithDefault (i32.const 1))
+   (global.set $f_$initialized__genericanddefaultmethods_InterfaceWithDefault (i32.const 1))
   )
  )
 )
@@ -73,7 +73,7 @@
 ;;; CLASS  GenericClass
 (type $genericanddefaultmethods.GenericClass (struct
  (field $vtable (ref null $genericanddefaultmethods.GenericClass.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $genericanddefaultmethods.GenericClass.vtable (struct
  
@@ -84,7 +84,7 @@
  (field $m_foo__java_lang_Object__void (mut (ref $function.$java.lang.Object__$void)))
 ))
 (global $genericanddefaultmethods.GenericClass.vtable (mut (ref null $genericanddefaultmethods.GenericClass.vtable)) (ref.null $genericanddefaultmethods.GenericClass.vtable))
-(global $$initialized@genericanddefaultmethods.GenericClass (mut i32) (i32.const 0))
+(global $f_$initialized__genericanddefaultmethods_GenericClass (mut i32) (i32.const 0))
 
 ;;; GenericClass()
 (func $m_<init>__void_$pp_genericanddefaultmethods@genericanddefaultmethods.GenericClass
@@ -114,7 +114,7 @@
     
     (local.set $$qualifier (block (result (ref null $java.io.PrintStream))
      (call $$clinit__void@java.lang.System )
-     (global.get $out@java.lang.System)
+     (global.get $f_out__java_lang_System)
     ))
     ;; $qualifier.println(java.lang.String.fromInternalArray((char[] $array_literal = new char[15],($array_literal[0] = 105),($array_literal[1] = 110),($array_literal[2] = 32),($array_literal[3] = 71),($array_literal[4] = 101),($array_literal[5] = 110),($array_literal[6] = 101),($array_literal[7] = 114),($array_literal[8] = 105),($array_literal[9] = 99),($array_literal[10] = 67),($array_literal[11] = 108),($array_literal[12] = 97),($array_literal[13] = 115),($array_literal[14] = 115),$array_literal)));
     (call_ref (local.get $$qualifier)(call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (block (result (ref null $char.array))
@@ -148,14 +148,14 @@
  (block $return.label
   (block
    ;; if (genericanddefaultmethods.GenericClass.$initialized) return;
-   (if (global.get $$initialized@genericanddefaultmethods.GenericClass)
+   (if (global.get $f_$initialized__genericanddefaultmethods_GenericClass)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (genericanddefaultmethods.GenericClass.$initialized = true);
-   (global.set $$initialized@genericanddefaultmethods.GenericClass (i32.const 1))
+   (global.set $f_$initialized__genericanddefaultmethods_GenericClass (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -165,7 +165,7 @@
 ;;; CLASS  ConcreteClass
 (type $genericanddefaultmethods.ConcreteClass (struct
  (field $vtable (ref null $genericanddefaultmethods.ConcreteClass.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $genericanddefaultmethods.ConcreteClass.vtable (struct
  
@@ -177,7 +177,7 @@
  (field $m_foo__java_lang_String__void (mut (ref $function.$java.lang.String__$void)))
 ))
 (global $genericanddefaultmethods.ConcreteClass.vtable (mut (ref null $genericanddefaultmethods.ConcreteClass.vtable)) (ref.null $genericanddefaultmethods.ConcreteClass.vtable))
-(global $$initialized@genericanddefaultmethods.ConcreteClass (mut i32) (i32.const 0))
+(global $f_$initialized__genericanddefaultmethods_ConcreteClass (mut i32) (i32.const 0))
 
 ;;; ConcreteClass()
 (func $m_<init>__void@genericanddefaultmethods.ConcreteClass
@@ -227,14 +227,14 @@
  (block $return.label
   (block
    ;; if (genericanddefaultmethods.ConcreteClass.$initialized) return;
-   (if (global.get $$initialized@genericanddefaultmethods.ConcreteClass)
+   (if (global.get $f_$initialized__genericanddefaultmethods_ConcreteClass)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (genericanddefaultmethods.ConcreteClass.$initialized = true);
-   (global.set $$initialized@genericanddefaultmethods.ConcreteClass (i32.const 1))
+   (global.set $f_$initialized__genericanddefaultmethods_ConcreteClass (i32.const 1))
    ;; genericanddefaultmethods.GenericClass.$clinit();
    (call $$clinit__void@genericanddefaultmethods.GenericClass )
    ;; genericanddefaultmethods.InterfaceWithDefault.$clinit();

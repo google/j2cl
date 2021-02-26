@@ -3,11 +3,11 @@
 ;;; CLASS  SomeJsType
 (type $jstype.SomeJsType (struct
  (field $vtable (ref null $jstype.SomeJsType.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $publicField@jstype.SomeJsType (mut i32))
- (field $privateField@jstype.SomeJsType (mut i32))
- (field $packageField@jstype.SomeJsType (mut i32))
- (field $protectedField@jstype.SomeJsType (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $f_publicField__jstype_SomeJsType (mut i32))
+ (field $f_privateField__jstype_SomeJsType_ (mut i32))
+ (field $f_packageField__jstype_SomeJsType (mut i32))
+ (field $f_protectedField__jstype_SomeJsType (mut i32))
 ))
 (type $jstype.SomeJsType.vtable (struct
  
@@ -22,7 +22,7 @@
  (field $m_testStarAndWildCard__jstype_SomeJsType_Star__jstype_SomeJsType_Wildcard__jstype_SomeJsType_Wildcard (mut (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)))
 ))
 (global $jstype.SomeJsType.vtable (mut (ref null $jstype.SomeJsType.vtable)) (ref.null $jstype.SomeJsType.vtable))
-(global $$initialized@jstype.SomeJsType (mut i32) (i32.const 0))
+(global $f_$initialized__jstype_SomeJsType (mut i32) (i32.const 0))
 
 ;;; SomeJsType()
 (func $m_<init>__void@jstype.SomeJsType
@@ -94,7 +94,7 @@
   (block
    ;; int value = (((SomeJsType.this.publicField + SomeJsType.this.privateField) + SomeJsType.this.packageField) + SomeJsType.this.protectedField);
    
-   (local.set $value (i32.add (i32.add (i32.add (struct.get $jstype.SomeJsType $publicField@jstype.SomeJsType(local.get $this)) (struct.get $jstype.SomeJsType $privateField@jstype.SomeJsType(local.get $this))) (struct.get $jstype.SomeJsType $packageField@jstype.SomeJsType(local.get $this))) (struct.get $jstype.SomeJsType $protectedField@jstype.SomeJsType(local.get $this))))
+   (local.set $value (i32.add (i32.add (i32.add (struct.get $jstype.SomeJsType $f_publicField__jstype_SomeJsType(local.get $this)) (struct.get $jstype.SomeJsType $f_privateField__jstype_SomeJsType_(local.get $this))) (struct.get $jstype.SomeJsType $f_packageField__jstype_SomeJsType(local.get $this))) (struct.get $jstype.SomeJsType $f_protectedField__jstype_SomeJsType(local.get $this))))
    ;; SomeJsType.this.publicMethod();
    (call_ref (local.get $this)(struct.get $jstype.SomeJsType.vtable $m_publicMethod__void (struct.get $jstype.SomeJsType $vtable(local.get $this))))
    ;; SomeJsType.this.privateMethod();
@@ -141,14 +141,14 @@
  (block $return.label
   (block
    ;; if (jstype.SomeJsType.$initialized) return;
-   (if (global.get $$initialized@jstype.SomeJsType)
+   (if (global.get $f_$initialized__jstype_SomeJsType)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jstype.SomeJsType.$initialized = true);
-   (global.set $$initialized@jstype.SomeJsType (i32.const 1))
+   (global.set $f_$initialized__jstype_SomeJsType (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -156,41 +156,41 @@
 )
 
 ;;; INTERFACE  Star
-(global $$initialized@jstype.SomeJsType.Star (mut i32) (i32.const 0))
+(global $f_$initialized__jstype_SomeJsType_Star (mut i32) (i32.const 0))
 
 ;;; void Star.$clinit()
 (func $$clinit__void@jstype.SomeJsType.Star
  (block $return.label
   (block
    ;; if (jstype.SomeJsType.Star.$initialized) return;
-   (if (global.get $$initialized@jstype.SomeJsType.Star)
+   (if (global.get $f_$initialized__jstype_SomeJsType_Star)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jstype.SomeJsType.Star.$initialized = true);
-   (global.set $$initialized@jstype.SomeJsType.Star (i32.const 1))
+   (global.set $f_$initialized__jstype_SomeJsType_Star (i32.const 1))
   )
  )
 )
 
 ;;; INTERFACE  Wildcard
-(global $$initialized@jstype.SomeJsType.Wildcard (mut i32) (i32.const 0))
+(global $f_$initialized__jstype_SomeJsType_Wildcard (mut i32) (i32.const 0))
 
 ;;; void Wildcard.$clinit()
 (func $$clinit__void@jstype.SomeJsType.Wildcard
  (block $return.label
   (block
    ;; if (jstype.SomeJsType.Wildcard.$initialized) return;
-   (if (global.get $$initialized@jstype.SomeJsType.Wildcard)
+   (if (global.get $f_$initialized__jstype_SomeJsType_Wildcard)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jstype.SomeJsType.Wildcard.$initialized = true);
-   (global.set $$initialized@jstype.SomeJsType.Wildcard (i32.const 1))
+   (global.set $f_$initialized__jstype_SomeJsType_Wildcard (i32.const 1))
   )
  )
 )

@@ -3,7 +3,7 @@
 ;;; CLASS  GenericClass
 (type $subclassgenericclass.GenericClass (struct
  (field $vtable (ref null $subclassgenericclass.GenericClass.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $subclassgenericclass.GenericClass.vtable (struct
  
@@ -13,7 +13,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $subclassgenericclass.GenericClass.vtable (mut (ref null $subclassgenericclass.GenericClass.vtable)) (ref.null $subclassgenericclass.GenericClass.vtable))
-(global $$initialized@subclassgenericclass.GenericClass (mut i32) (i32.const 0))
+(global $f_$initialized__subclassgenericclass_GenericClass (mut i32) (i32.const 0))
 
 ;;; GenericClass()
 (func $m_<init>__void_$pp_subclassgenericclass@subclassgenericclass.GenericClass
@@ -33,14 +33,14 @@
  (block $return.label
   (block
    ;; if (subclassgenericclass.GenericClass.$initialized) return;
-   (if (global.get $$initialized@subclassgenericclass.GenericClass)
+   (if (global.get $f_$initialized__subclassgenericclass_GenericClass)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (subclassgenericclass.GenericClass.$initialized = true);
-   (global.set $$initialized@subclassgenericclass.GenericClass (i32.const 1))
+   (global.set $f_$initialized__subclassgenericclass_GenericClass (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -50,7 +50,7 @@
 ;;; CLASS  GenericSubclassGenericClass
 (type $subclassgenericclass.GenericSubclassGenericClass (struct
  (field $vtable (ref null $subclassgenericclass.GenericSubclassGenericClass.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $subclassgenericclass.GenericSubclassGenericClass.vtable (struct
  
@@ -60,7 +60,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $subclassgenericclass.GenericSubclassGenericClass.vtable (mut (ref null $subclassgenericclass.GenericSubclassGenericClass.vtable)) (ref.null $subclassgenericclass.GenericSubclassGenericClass.vtable))
-(global $$initialized@subclassgenericclass.GenericSubclassGenericClass (mut i32) (i32.const 0))
+(global $f_$initialized__subclassgenericclass_GenericSubclassGenericClass (mut i32) (i32.const 0))
 
 ;;; GenericSubclassGenericClass()
 (func $m_<init>__void_$pp_subclassgenericclass@subclassgenericclass.GenericSubclassGenericClass
@@ -80,14 +80,14 @@
  (block $return.label
   (block
    ;; if (subclassgenericclass.GenericSubclassGenericClass.$initialized) return;
-   (if (global.get $$initialized@subclassgenericclass.GenericSubclassGenericClass)
+   (if (global.get $f_$initialized__subclassgenericclass_GenericSubclassGenericClass)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (subclassgenericclass.GenericSubclassGenericClass.$initialized = true);
-   (global.set $$initialized@subclassgenericclass.GenericSubclassGenericClass (i32.const 1))
+   (global.set $f_$initialized__subclassgenericclass_GenericSubclassGenericClass (i32.const 1))
    ;; subclassgenericclass.GenericClass.$clinit();
    (call $$clinit__void@subclassgenericclass.GenericClass )
   )
@@ -97,7 +97,7 @@
 ;;; CLASS  SubclassGenericClass
 (type $subclassgenericclass.SubclassGenericClass (struct
  (field $vtable (ref null $subclassgenericclass.SubclassGenericClass.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $subclassgenericclass.SubclassGenericClass.vtable (struct
  
@@ -107,7 +107,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $subclassgenericclass.SubclassGenericClass.vtable (mut (ref null $subclassgenericclass.SubclassGenericClass.vtable)) (ref.null $subclassgenericclass.SubclassGenericClass.vtable))
-(global $$initialized@subclassgenericclass.SubclassGenericClass (mut i32) (i32.const 0))
+(global $f_$initialized__subclassgenericclass_SubclassGenericClass (mut i32) (i32.const 0))
 
 ;;; SubclassGenericClass()
 (func $m_<init>__void@subclassgenericclass.SubclassGenericClass
@@ -127,14 +127,14 @@
  (block $return.label
   (block
    ;; if (subclassgenericclass.SubclassGenericClass.$initialized) return;
-   (if (global.get $$initialized@subclassgenericclass.SubclassGenericClass)
+   (if (global.get $f_$initialized__subclassgenericclass_SubclassGenericClass)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (subclassgenericclass.SubclassGenericClass.$initialized = true);
-   (global.set $$initialized@subclassgenericclass.SubclassGenericClass (i32.const 1))
+   (global.set $f_$initialized__subclassgenericclass_SubclassGenericClass (i32.const 1))
    ;; subclassgenericclass.GenericClass.$clinit();
    (call $$clinit__void@subclassgenericclass.GenericClass )
   )

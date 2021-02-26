@@ -3,7 +3,7 @@
 ;;; CLASS  Superclass
 (type $simplebridgemethods.Superclass (struct
  (field $vtable (ref null $simplebridgemethods.Superclass.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $simplebridgemethods.Superclass.vtable (struct
  
@@ -14,7 +14,7 @@
  (field $m_m1__java_lang_Error__void (mut (ref $function.$java.lang.Error__$void)))
 ))
 (global $simplebridgemethods.Superclass.vtable (mut (ref null $simplebridgemethods.Superclass.vtable)) (ref.null $simplebridgemethods.Superclass.vtable))
-(global $$initialized@simplebridgemethods.Superclass (mut i32) (i32.const 0))
+(global $f_$initialized__simplebridgemethods_Superclass (mut i32) (i32.const 0))
 
 ;;; Superclass()
 (func $m_<init>__void_$pp_simplebridgemethods@simplebridgemethods.Superclass
@@ -47,14 +47,14 @@
  (block $return.label
   (block
    ;; if (simplebridgemethods.Superclass.$initialized) return;
-   (if (global.get $$initialized@simplebridgemethods.Superclass)
+   (if (global.get $f_$initialized__simplebridgemethods_Superclass)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (simplebridgemethods.Superclass.$initialized = true);
-   (global.set $$initialized@simplebridgemethods.Superclass (i32.const 1))
+   (global.set $f_$initialized__simplebridgemethods_Superclass (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -64,7 +64,7 @@
 ;;; CLASS  Subclass
 (type $simplebridgemethods.Subclass (struct
  (field $vtable (ref null $simplebridgemethods.Subclass.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $simplebridgemethods.Subclass.vtable (struct
  
@@ -76,7 +76,7 @@
  (field $m_m1__java_lang_AssertionError__void (mut (ref $function.$java.lang.AssertionError__$void)))
 ))
 (global $simplebridgemethods.Subclass.vtable (mut (ref null $simplebridgemethods.Subclass.vtable)) (ref.null $simplebridgemethods.Subclass.vtable))
-(global $$initialized@simplebridgemethods.Subclass (mut i32) (i32.const 0))
+(global $f_$initialized__simplebridgemethods_Subclass (mut i32) (i32.const 0))
 
 ;;; Subclass()
 (func $m_<init>__void_$pp_simplebridgemethods@simplebridgemethods.Subclass
@@ -124,14 +124,14 @@
  (block $return.label
   (block
    ;; if (simplebridgemethods.Subclass.$initialized) return;
-   (if (global.get $$initialized@simplebridgemethods.Subclass)
+   (if (global.get $f_$initialized__simplebridgemethods_Subclass)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (simplebridgemethods.Subclass.$initialized = true);
-   (global.set $$initialized@simplebridgemethods.Subclass (i32.const 1))
+   (global.set $f_$initialized__simplebridgemethods_Subclass (i32.const 1))
    ;; simplebridgemethods.Superclass.$clinit();
    (call $$clinit__void@simplebridgemethods.Superclass )
   )
@@ -141,7 +141,7 @@
 ;;; CLASS  AnotherSubclass
 (type $simplebridgemethods.AnotherSubclass (struct
  (field $vtable (ref null $simplebridgemethods.AnotherSubclass.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $simplebridgemethods.AnotherSubclass.vtable (struct
  
@@ -152,7 +152,7 @@
  (field $m_m1__java_lang_Error__void (mut (ref $function.$java.lang.Error__$void)))
 ))
 (global $simplebridgemethods.AnotherSubclass.vtable (mut (ref null $simplebridgemethods.AnotherSubclass.vtable)) (ref.null $simplebridgemethods.AnotherSubclass.vtable))
-(global $$initialized@simplebridgemethods.AnotherSubclass (mut i32) (i32.const 0))
+(global $f_$initialized__simplebridgemethods_AnotherSubclass (mut i32) (i32.const 0))
 
 ;;; AnotherSubclass()
 (func $m_<init>__void_$pp_simplebridgemethods@simplebridgemethods.AnotherSubclass
@@ -172,14 +172,14 @@
  (block $return.label
   (block
    ;; if (simplebridgemethods.AnotherSubclass.$initialized) return;
-   (if (global.get $$initialized@simplebridgemethods.AnotherSubclass)
+   (if (global.get $f_$initialized__simplebridgemethods_AnotherSubclass)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (simplebridgemethods.AnotherSubclass.$initialized = true);
-   (global.set $$initialized@simplebridgemethods.AnotherSubclass (i32.const 1))
+   (global.set $f_$initialized__simplebridgemethods_AnotherSubclass (i32.const 1))
    ;; simplebridgemethods.Superclass.$clinit();
    (call $$clinit__void@simplebridgemethods.Superclass )
   )
@@ -187,21 +187,21 @@
 )
 
 ;;; INTERFACE  Callable
-(global $$initialized@simplebridgemethods.Callable (mut i32) (i32.const 0))
+(global $f_$initialized__simplebridgemethods_Callable (mut i32) (i32.const 0))
 
 ;;; void Callable.$clinit()
 (func $$clinit__void@simplebridgemethods.Callable
  (block $return.label
   (block
    ;; if (simplebridgemethods.Callable.$initialized) return;
-   (if (global.get $$initialized@simplebridgemethods.Callable)
+   (if (global.get $f_$initialized__simplebridgemethods_Callable)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (simplebridgemethods.Callable.$initialized = true);
-   (global.set $$initialized@simplebridgemethods.Callable (i32.const 1))
+   (global.set $f_$initialized__simplebridgemethods_Callable (i32.const 1))
   )
  )
 )
@@ -209,7 +209,7 @@
 ;;; CLASS  Task
 (type $simplebridgemethods.Task (struct
  (field $vtable (ref null $simplebridgemethods.Task.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $simplebridgemethods.Task.vtable (struct
  
@@ -220,7 +220,7 @@
  (field $m_call__java_lang_Object__void (mut (ref $function.$java.lang.Object__$void)))
 ))
 (global $simplebridgemethods.Task.vtable (mut (ref null $simplebridgemethods.Task.vtable)) (ref.null $simplebridgemethods.Task.vtable))
-(global $$initialized@simplebridgemethods.Task (mut i32) (i32.const 0))
+(global $f_$initialized__simplebridgemethods_Task (mut i32) (i32.const 0))
 
 ;;; Task()
 (func $m_<init>__void_$pp_simplebridgemethods@simplebridgemethods.Task
@@ -253,14 +253,14 @@
  (block $return.label
   (block
    ;; if (simplebridgemethods.Task.$initialized) return;
-   (if (global.get $$initialized@simplebridgemethods.Task)
+   (if (global.get $f_$initialized__simplebridgemethods_Task)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (simplebridgemethods.Task.$initialized = true);
-   (global.set $$initialized@simplebridgemethods.Task (i32.const 1))
+   (global.set $f_$initialized__simplebridgemethods_Task (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -270,7 +270,7 @@
 ;;; CLASS  AnotherTask
 (type $simplebridgemethods.AnotherTask (struct
  (field $vtable (ref null $simplebridgemethods.AnotherTask.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $simplebridgemethods.AnotherTask.vtable (struct
  
@@ -282,7 +282,7 @@
  (field $m_call__java_lang_Object__void (mut (ref $function.$java.lang.Object__$void)))
 ))
 (global $simplebridgemethods.AnotherTask.vtable (mut (ref null $simplebridgemethods.AnotherTask.vtable)) (ref.null $simplebridgemethods.AnotherTask.vtable))
-(global $$initialized@simplebridgemethods.AnotherTask (mut i32) (i32.const 0))
+(global $f_$initialized__simplebridgemethods_AnotherTask (mut i32) (i32.const 0))
 
 ;;; AnotherTask()
 (func $m_<init>__void_$pp_simplebridgemethods@simplebridgemethods.AnotherTask
@@ -330,14 +330,14 @@
  (block $return.label
   (block
    ;; if (simplebridgemethods.AnotherTask.$initialized) return;
-   (if (global.get $$initialized@simplebridgemethods.AnotherTask)
+   (if (global.get $f_$initialized__simplebridgemethods_AnotherTask)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (simplebridgemethods.AnotherTask.$initialized = true);
-   (global.set $$initialized@simplebridgemethods.AnotherTask (i32.const 1))
+   (global.set $f_$initialized__simplebridgemethods_AnotherTask (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -347,7 +347,7 @@
 ;;; CLASS  SimpleBridgeMethods
 (type $simplebridgemethods.SimpleBridgeMethods (struct
  (field $vtable (ref null $simplebridgemethods.SimpleBridgeMethods.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $simplebridgemethods.SimpleBridgeMethods.vtable (struct
  
@@ -357,7 +357,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $simplebridgemethods.SimpleBridgeMethods.vtable (mut (ref null $simplebridgemethods.SimpleBridgeMethods.vtable)) (ref.null $simplebridgemethods.SimpleBridgeMethods.vtable))
-(global $$initialized@simplebridgemethods.SimpleBridgeMethods (mut i32) (i32.const 0))
+(global $f_$initialized__simplebridgemethods_SimpleBridgeMethods (mut i32) (i32.const 0))
 
 ;;; SimpleBridgeMethods()
 (func $m_<init>__void@simplebridgemethods.SimpleBridgeMethods
@@ -377,14 +377,14 @@
  (block $return.label
   (block
    ;; if (simplebridgemethods.SimpleBridgeMethods.$initialized) return;
-   (if (global.get $$initialized@simplebridgemethods.SimpleBridgeMethods)
+   (if (global.get $f_$initialized__simplebridgemethods_SimpleBridgeMethods)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (simplebridgemethods.SimpleBridgeMethods.$initialized = true);
-   (global.set $$initialized@simplebridgemethods.SimpleBridgeMethods (i32.const 1))
+   (global.set $f_$initialized__simplebridgemethods_SimpleBridgeMethods (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

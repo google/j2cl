@@ -3,7 +3,7 @@
 ;;; CLASS  StaticConstant
 (type $staticconstant.StaticConstant (struct
  (field $vtable (ref null $staticconstant.StaticConstant.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $staticconstant.StaticConstant.vtable (struct
  
@@ -13,8 +13,8 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $staticconstant.StaticConstant.vtable (mut (ref null $staticconstant.StaticConstant.vtable)) (ref.null $staticconstant.StaticConstant.vtable))
-(global $FOO@staticconstant.StaticConstant i32 (i32.const 1))
-(global $$initialized@staticconstant.StaticConstant (mut i32) (i32.const 0))
+(global $f_FOO__staticconstant_StaticConstant i32 (i32.const 1))
+(global $f_$initialized__staticconstant_StaticConstant (mut i32) (i32.const 0))
 
 ;;; StaticConstant()
 (func $m_<init>__void@staticconstant.StaticConstant
@@ -34,14 +34,14 @@
  (block $return.label
   (block
    ;; if (staticconstant.StaticConstant.$initialized) return;
-   (if (global.get $$initialized@staticconstant.StaticConstant)
+   (if (global.get $f_$initialized__staticconstant_StaticConstant)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (staticconstant.StaticConstant.$initialized = true);
-   (global.set $$initialized@staticconstant.StaticConstant (i32.const 1))
+   (global.set $f_$initialized__staticconstant_StaticConstant (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

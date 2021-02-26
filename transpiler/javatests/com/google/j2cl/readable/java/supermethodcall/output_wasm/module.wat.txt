@@ -3,7 +3,7 @@
 ;;; CLASS  GrandParent
 (type $supermethodcall.GrandParent (struct
  (field $vtable (ref null $supermethodcall.GrandParent.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $supermethodcall.GrandParent.vtable (struct
  
@@ -16,7 +16,7 @@
  (field $m_grandParentWithChangingReturn__java_lang_Object (mut (ref $function.__$java.lang.Object)))
 ))
 (global $supermethodcall.GrandParent.vtable (mut (ref null $supermethodcall.GrandParent.vtable)) (ref.null $supermethodcall.GrandParent.vtable))
-(global $$initialized@supermethodcall.GrandParent (mut i32) (i32.const 0))
+(global $f_$initialized__supermethodcall_GrandParent (mut i32) (i32.const 0))
 
 ;;; GrandParent()
 (func $m_<init>__void_$pp_supermethodcall@supermethodcall.GrandParent
@@ -79,14 +79,14 @@
  (block $return.label
   (block
    ;; if (supermethodcall.GrandParent.$initialized) return;
-   (if (global.get $$initialized@supermethodcall.GrandParent)
+   (if (global.get $f_$initialized__supermethodcall_GrandParent)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (supermethodcall.GrandParent.$initialized = true);
-   (global.set $$initialized@supermethodcall.GrandParent (i32.const 1))
+   (global.set $f_$initialized__supermethodcall_GrandParent (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -96,7 +96,7 @@
 ;;; CLASS  Parent
 (type $supermethodcall.Parent (struct
  (field $vtable (ref null $supermethodcall.Parent.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $supermethodcall.Parent.vtable (struct
  
@@ -112,7 +112,7 @@
  (field $m_parentWithChangingReturn__java_lang_Object (mut (ref $function.__$java.lang.Object)))
 ))
 (global $supermethodcall.Parent.vtable (mut (ref null $supermethodcall.Parent.vtable)) (ref.null $supermethodcall.Parent.vtable))
-(global $$initialized@supermethodcall.Parent (mut i32) (i32.const 0))
+(global $f_$initialized__supermethodcall_Parent (mut i32) (i32.const 0))
 
 ;;; Parent()
 (func $m_<init>__void_$pp_supermethodcall@supermethodcall.Parent
@@ -175,14 +175,14 @@
  (block $return.label
   (block
    ;; if (supermethodcall.Parent.$initialized) return;
-   (if (global.get $$initialized@supermethodcall.Parent)
+   (if (global.get $f_$initialized__supermethodcall_Parent)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (supermethodcall.Parent.$initialized = true);
-   (global.set $$initialized@supermethodcall.Parent (i32.const 1))
+   (global.set $f_$initialized__supermethodcall_Parent (i32.const 1))
    ;; supermethodcall.GrandParent.$clinit();
    (call $$clinit__void@supermethodcall.GrandParent )
   )
@@ -192,7 +192,7 @@
 ;;; CLASS  Child
 (type $supermethodcall.Child (struct
  (field $vtable (ref null $supermethodcall.Child.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $supermethodcall.Child.vtable (struct
  
@@ -210,7 +210,7 @@
  (field $m_grandParentWithChangingReturn__supermethodcall_Child (mut (ref $function.__$supermethodcall.Child)))
 ))
 (global $supermethodcall.Child.vtable (mut (ref null $supermethodcall.Child.vtable)) (ref.null $supermethodcall.Child.vtable))
-(global $$initialized@supermethodcall.Child (mut i32) (i32.const 0))
+(global $f_$initialized__supermethodcall_Child (mut i32) (i32.const 0))
 
 ;;; Child()
 (func $m_<init>__void@supermethodcall.Child
@@ -364,14 +364,14 @@
  (block $return.label
   (block
    ;; if (supermethodcall.Child.$initialized) return;
-   (if (global.get $$initialized@supermethodcall.Child)
+   (if (global.get $f_$initialized__supermethodcall_Child)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (supermethodcall.Child.$initialized = true);
-   (global.set $$initialized@supermethodcall.Child (i32.const 1))
+   (global.set $f_$initialized__supermethodcall_Child (i32.const 1))
    ;; supermethodcall.Parent.$clinit();
    (call $$clinit__void@supermethodcall.Parent )
   )

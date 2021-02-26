@@ -3,7 +3,7 @@
 ;;; CLASS  StaticNestedClassParent
 (type $staticnestedclass.StaticNestedClassParent (struct
  (field $vtable (ref null $staticnestedclass.StaticNestedClassParent.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $staticnestedclass.StaticNestedClassParent.vtable (struct
  
@@ -13,7 +13,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $staticnestedclass.StaticNestedClassParent.vtable (mut (ref null $staticnestedclass.StaticNestedClassParent.vtable)) (ref.null $staticnestedclass.StaticNestedClassParent.vtable))
-(global $$initialized@staticnestedclass.StaticNestedClassParent (mut i32) (i32.const 0))
+(global $f_$initialized__staticnestedclass_StaticNestedClassParent (mut i32) (i32.const 0))
 
 ;;; StaticNestedClassParent()
 (func $m_<init>__void@staticnestedclass.StaticNestedClassParent
@@ -33,14 +33,14 @@
  (block $return.label
   (block
    ;; if (staticnestedclass.StaticNestedClassParent.$initialized) return;
-   (if (global.get $$initialized@staticnestedclass.StaticNestedClassParent)
+   (if (global.get $f_$initialized__staticnestedclass_StaticNestedClassParent)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (staticnestedclass.StaticNestedClassParent.$initialized = true);
-   (global.set $$initialized@staticnestedclass.StaticNestedClassParent (i32.const 1))
+   (global.set $f_$initialized__staticnestedclass_StaticNestedClassParent (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -50,7 +50,7 @@
 ;;; CLASS  StaticNestedClass
 (type $staticnestedclass.StaticNestedClassParent.StaticNestedClass (struct
  (field $vtable (ref null $staticnestedclass.StaticNestedClassParent.StaticNestedClass.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $staticnestedclass.StaticNestedClassParent.StaticNestedClass.vtable (struct
  
@@ -60,7 +60,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $staticnestedclass.StaticNestedClassParent.StaticNestedClass.vtable (mut (ref null $staticnestedclass.StaticNestedClassParent.StaticNestedClass.vtable)) (ref.null $staticnestedclass.StaticNestedClassParent.StaticNestedClass.vtable))
-(global $$initialized@staticnestedclass.StaticNestedClassParent.StaticNestedClass (mut i32) (i32.const 0))
+(global $f_$initialized__staticnestedclass_StaticNestedClassParent_StaticNestedClass (mut i32) (i32.const 0))
 
 ;;; StaticNestedClass()
 (func $m_<init>__void@staticnestedclass.StaticNestedClassParent.StaticNestedClass
@@ -80,14 +80,14 @@
  (block $return.label
   (block
    ;; if (staticnestedclass.StaticNestedClassParent.StaticNestedClass.$initialized) return;
-   (if (global.get $$initialized@staticnestedclass.StaticNestedClassParent.StaticNestedClass)
+   (if (global.get $f_$initialized__staticnestedclass_StaticNestedClassParent_StaticNestedClass)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (staticnestedclass.StaticNestedClassParent.StaticNestedClass.$initialized = true);
-   (global.set $$initialized@staticnestedclass.StaticNestedClassParent.StaticNestedClass (i32.const 1))
+   (global.set $f_$initialized__staticnestedclass_StaticNestedClassParent_StaticNestedClass (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

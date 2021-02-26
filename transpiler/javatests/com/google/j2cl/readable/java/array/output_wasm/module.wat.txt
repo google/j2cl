@@ -3,7 +3,7 @@
 ;;; CLASS  Arrays
 (type $array.Arrays (struct
  (field $vtable (ref null $array.Arrays.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $array.Arrays.vtable (struct
  
@@ -24,7 +24,7 @@
  (field $m_consumesSerializable__java_io_Serializable__void (mut (ref $function.$java.lang.Object__$void)))
 ))
 (global $array.Arrays.vtable (mut (ref null $array.Arrays.vtable)) (ref.null $array.Arrays.vtable))
-(global $$initialized@array.Arrays (mut i32) (i32.const 0))
+(global $f_$initialized__array_Arrays (mut i32) (i32.const 0))
 
 ;;; Arrays()
 (func $m_<init>__void@array.Arrays
@@ -613,7 +613,7 @@
    (local.set $container (ref.null $array.Arrays.ArrayContainer))
    ;; String s = ((String) ((String[]) container.data)[0]);
    
-   (local.set $s (ref.cast $java.lang.Object $java.lang.String (array.get $Object.array.elements (struct.get $Object.array $elements (ref.cast $java.lang.Object $Object.array (struct.get $array.Arrays.ArrayContainer $data@array.Arrays.ArrayContainer(local.get $container)) (global.get $Object.array.rtt))) (i32.const 0)) (global.get $java.lang.String.rtt)))
+   (local.set $s (ref.cast $java.lang.Object $java.lang.String (array.get $Object.array.elements (struct.get $Object.array $elements (ref.cast $java.lang.Object $Object.array (struct.get $array.Arrays.ArrayContainer $f_data__array_Arrays_ArrayContainer(local.get $container)) (global.get $Object.array.rtt))) (i32.const 0)) (global.get $java.lang.String.rtt)))
   )
  )
 )
@@ -666,14 +666,14 @@
  (block $return.label
   (block
    ;; if (array.Arrays.$initialized) return;
-   (if (global.get $$initialized@array.Arrays)
+   (if (global.get $f_$initialized__array_Arrays)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (array.Arrays.$initialized = true);
-   (global.set $$initialized@array.Arrays (i32.const 1))
+   (global.set $f_$initialized__array_Arrays (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -683,8 +683,8 @@
 ;;; CLASS  SomeObject
 (type $array.Arrays.SomeObject (struct
  (field $vtable (ref null $array.Arrays.SomeObject.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $this@array.Arrays.SomeObject (mut (ref null $array.Arrays)))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $$outer_this__array_Arrays_SomeObject (mut (ref null $array.Arrays)))
 ))
 (type $array.Arrays.SomeObject.vtable (struct
  
@@ -694,7 +694,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $array.Arrays.SomeObject.vtable (mut (ref null $array.Arrays.SomeObject.vtable)) (ref.null $array.Arrays.SomeObject.vtable))
-(global $$initialized@array.Arrays.SomeObject (mut i32) (i32.const 0))
+(global $f_$initialized__array_Arrays_SomeObject (mut i32) (i32.const 0))
 
 ;;; SomeObject(Arrays $outer_this)
 (func $m_<init>__array_Arrays__void_$p_array_Arrays_SomeObject@array.Arrays.SomeObject
@@ -704,7 +704,7 @@
  (block $return.label
   (block
    ;; (SomeObject.this.this = $outer_this);
-   (struct.set $array.Arrays.SomeObject $this@array.Arrays.SomeObject(local.get $this) (local.get $$outer_this))
+   (struct.set $array.Arrays.SomeObject $$outer_this__array_Arrays_SomeObject(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -717,14 +717,14 @@
  (block $return.label
   (block
    ;; if (array.Arrays.SomeObject.$initialized) return;
-   (if (global.get $$initialized@array.Arrays.SomeObject)
+   (if (global.get $f_$initialized__array_Arrays_SomeObject)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (array.Arrays.SomeObject.$initialized = true);
-   (global.set $$initialized@array.Arrays.SomeObject (i32.const 1))
+   (global.set $f_$initialized__array_Arrays_SomeObject (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -734,7 +734,7 @@
 ;;; CLASS  NativeType
 (type $array.Arrays.NativeType (struct
  (field $vtable (ref null $array.Arrays.NativeType.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $array.Arrays.NativeType.vtable (struct
  
@@ -744,7 +744,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $array.Arrays.NativeType.vtable (mut (ref null $array.Arrays.NativeType.vtable)) (ref.null $array.Arrays.NativeType.vtable))
-(global $$initialized@array.Arrays.NativeType (mut i32) (i32.const 0))
+(global $f_$initialized__array_Arrays_NativeType (mut i32) (i32.const 0))
 
 ;;; NativeType()
 (func $m_<init>__void_$p_array_Arrays_NativeType@array.Arrays.NativeType
@@ -766,14 +766,14 @@
  (block $return.label
   (block
    ;; if (array.Arrays.NativeType.$initialized) return;
-   (if (global.get $$initialized@array.Arrays.NativeType)
+   (if (global.get $f_$initialized__array_Arrays_NativeType)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (array.Arrays.NativeType.$initialized = true);
-   (global.set $$initialized@array.Arrays.NativeType (i32.const 1))
+   (global.set $f_$initialized__array_Arrays_NativeType (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -783,8 +783,8 @@
 ;;; CLASS  ArrayContainer
 (type $array.Arrays.ArrayContainer (struct
  (field $vtable (ref null $array.Arrays.ArrayContainer.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $data@array.Arrays.ArrayContainer (mut (ref null $Object.array)))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $f_data__array_Arrays_ArrayContainer (mut (ref null $Object.array)))
 ))
 (type $array.Arrays.ArrayContainer.vtable (struct
  
@@ -794,7 +794,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $array.Arrays.ArrayContainer.vtable (mut (ref null $array.Arrays.ArrayContainer.vtable)) (ref.null $array.Arrays.ArrayContainer.vtable))
-(global $$initialized@array.Arrays.ArrayContainer (mut i32) (i32.const 0))
+(global $f_$initialized__array_Arrays_ArrayContainer (mut i32) (i32.const 0))
 
 ;;; ArrayContainer()
 (func $m_<init>__void_$p_array_Arrays_ArrayContainer@array.Arrays.ArrayContainer
@@ -814,14 +814,14 @@
  (block $return.label
   (block
    ;; if (array.Arrays.ArrayContainer.$initialized) return;
-   (if (global.get $$initialized@array.Arrays.ArrayContainer)
+   (if (global.get $f_$initialized__array_Arrays_ArrayContainer)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (array.Arrays.ArrayContainer.$initialized = true);
-   (global.set $$initialized@array.Arrays.ArrayContainer (i32.const 1))
+   (global.set $f_$initialized__array_Arrays_ArrayContainer (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

@@ -3,7 +3,7 @@
 ;;; CLASS  JsIgnoreExample
 (type $jsignore.JsIgnoreExample (struct
  (field $vtable (ref null $jsignore.JsIgnoreExample.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $jsignore.JsIgnoreExample.vtable (struct
  
@@ -13,10 +13,10 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $jsignore.JsIgnoreExample.vtable (mut (ref null $jsignore.JsIgnoreExample.vtable)) (ref.null $jsignore.JsIgnoreExample.vtable))
-(global $exportedField@jsignore.JsIgnoreExample (mut i32) (i32.const 0))
-(global $notExportedField@jsignore.JsIgnoreExample (mut i32) (i32.const 0))
-(global $CONSTNAME@jsignore.JsIgnoreExample (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
-(global $$initialized@jsignore.JsIgnoreExample (mut i32) (i32.const 0))
+(global $f_exportedField__jsignore_JsIgnoreExample (mut i32) (i32.const 0))
+(global $f_notExportedField__jsignore_JsIgnoreExample (mut i32) (i32.const 0))
+(global $f_CONSTNAME__jsignore_JsIgnoreExample (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
+(global $f_$initialized__jsignore_JsIgnoreExample (mut i32) (i32.const 0))
 
 ;;; JsIgnoreExample()
 (func $m_<init>__void@jsignore.JsIgnoreExample
@@ -58,33 +58,33 @@
  (block $return.label
   (block
    ;; if (jsignore.JsIgnoreExample.$initialized) return;
-   (if (global.get $$initialized@jsignore.JsIgnoreExample)
+   (if (global.get $f_$initialized__jsignore_JsIgnoreExample)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsignore.JsIgnoreExample.$initialized = true);
-   (global.set $$initialized@jsignore.JsIgnoreExample (i32.const 1))
+   (global.set $f_$initialized__jsignore_JsIgnoreExample (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
    (block
     ;; jsignore.JsIgnoreExample.$clinit();
     (call $$clinit__void@jsignore.JsIgnoreExample )
     ;; (jsignore.JsIgnoreExample.exportedField = 10);
-    (global.set $exportedField@jsignore.JsIgnoreExample (i32.const 10))
+    (global.set $f_exportedField__jsignore_JsIgnoreExample (i32.const 10))
    )
    (block
     ;; jsignore.JsIgnoreExample.$clinit();
     (call $$clinit__void@jsignore.JsIgnoreExample )
     ;; (jsignore.JsIgnoreExample.notExportedField = 20);
-    (global.set $notExportedField@jsignore.JsIgnoreExample (i32.const 20))
+    (global.set $f_notExportedField__jsignore_JsIgnoreExample (i32.const 20))
    )
    (block
     ;; jsignore.JsIgnoreExample.$clinit();
     (call $$clinit__void@jsignore.JsIgnoreExample )
     ;; (jsignore.JsIgnoreExample.CONSTNAME = new Object.<init>());
-    (global.set $CONSTNAME@jsignore.JsIgnoreExample (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (i32.const 0) (global.get $java.lang.Object.rtt))))
+    (global.set $f_CONSTNAME__jsignore_JsIgnoreExample (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (i32.const 0) (global.get $java.lang.Object.rtt))))
    )
   )
  )

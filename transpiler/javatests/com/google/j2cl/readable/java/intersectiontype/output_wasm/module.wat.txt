@@ -1,101 +1,101 @@
 ;;; Code for intersectiontype.IntersectionTypeTest
 
 ;;; INTERFACE  Getable
-(global $$initialized@intersectiontype.Getable (mut i32) (i32.const 0))
+(global $f_$initialized__intersectiontype_Getable (mut i32) (i32.const 0))
 
 ;;; void Getable.$clinit()
 (func $$clinit__void@intersectiontype.Getable
  (block $return.label
   (block
    ;; if (intersectiontype.Getable.$initialized) return;
-   (if (global.get $$initialized@intersectiontype.Getable)
+   (if (global.get $f_$initialized__intersectiontype_Getable)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (intersectiontype.Getable.$initialized = true);
-   (global.set $$initialized@intersectiontype.Getable (i32.const 1))
+   (global.set $f_$initialized__intersectiontype_Getable (i32.const 1))
   )
  )
 )
 
 ;;; INTERFACE  Setable
-(global $$initialized@intersectiontype.Setable (mut i32) (i32.const 0))
+(global $f_$initialized__intersectiontype_Setable (mut i32) (i32.const 0))
 
 ;;; void Setable.$clinit()
 (func $$clinit__void@intersectiontype.Setable
  (block $return.label
   (block
    ;; if (intersectiontype.Setable.$initialized) return;
-   (if (global.get $$initialized@intersectiontype.Setable)
+   (if (global.get $f_$initialized__intersectiontype_Setable)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (intersectiontype.Setable.$initialized = true);
-   (global.set $$initialized@intersectiontype.Setable (i32.const 1))
+   (global.set $f_$initialized__intersectiontype_Setable (i32.const 1))
   )
  )
 )
 
 ;;; INTERFACE  Serial
-(global $$initialized@intersectiontype.Serial (mut i32) (i32.const 0))
+(global $f_$initialized__intersectiontype_Serial (mut i32) (i32.const 0))
 
 ;;; void Serial.$clinit()
 (func $$clinit__void@intersectiontype.Serial
  (block $return.label
   (block
    ;; if (intersectiontype.Serial.$initialized) return;
-   (if (global.get $$initialized@intersectiontype.Serial)
+   (if (global.get $f_$initialized__intersectiontype_Serial)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (intersectiontype.Serial.$initialized = true);
-   (global.set $$initialized@intersectiontype.Serial (i32.const 1))
+   (global.set $f_$initialized__intersectiontype_Serial (i32.const 1))
   )
  )
 )
 
 ;;; INTERFACE  Cmp
-(global $$initialized@intersectiontype.Cmp (mut i32) (i32.const 0))
+(global $f_$initialized__intersectiontype_Cmp (mut i32) (i32.const 0))
 
 ;;; void Cmp.$clinit()
 (func $$clinit__void@intersectiontype.Cmp
  (block $return.label
   (block
    ;; if (intersectiontype.Cmp.$initialized) return;
-   (if (global.get $$initialized@intersectiontype.Cmp)
+   (if (global.get $f_$initialized__intersectiontype_Cmp)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (intersectiontype.Cmp.$initialized = true);
-   (global.set $$initialized@intersectiontype.Cmp (i32.const 1))
+   (global.set $f_$initialized__intersectiontype_Cmp (i32.const 1))
   )
  )
 )
 
 ;;; INTERFACE  Cmp2
-(global $$initialized@intersectiontype.Cmp2 (mut i32) (i32.const 0))
+(global $f_$initialized__intersectiontype_Cmp2 (mut i32) (i32.const 0))
 
 ;;; void Cmp2.$clinit()
 (func $$clinit__void@intersectiontype.Cmp2
  (block $return.label
   (block
    ;; if (intersectiontype.Cmp2.$initialized) return;
-   (if (global.get $$initialized@intersectiontype.Cmp2)
+   (if (global.get $f_$initialized__intersectiontype_Cmp2)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (intersectiontype.Cmp2.$initialized = true);
-   (global.set $$initialized@intersectiontype.Cmp2 (i32.const 1))
+   (global.set $f_$initialized__intersectiontype_Cmp2 (i32.const 1))
   )
  )
 )
@@ -103,7 +103,7 @@
 ;;; CLASS  IntersectionTypeTest
 (type $intersectiontype.IntersectionTypeTest (struct
  (field $vtable (ref null $intersectiontype.IntersectionTypeTest.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $intersectiontype.IntersectionTypeTest.vtable (struct
  
@@ -115,7 +115,7 @@
  (field $m_testMethodCall__void (mut (ref $function.__$void)))
 ))
 (global $intersectiontype.IntersectionTypeTest.vtable (mut (ref null $intersectiontype.IntersectionTypeTest.vtable)) (ref.null $intersectiontype.IntersectionTypeTest.vtable))
-(global $$initialized@intersectiontype.IntersectionTypeTest (mut i32) (i32.const 0))
+(global $f_$initialized__intersectiontype_IntersectionTypeTest (mut i32) (i32.const 0))
 
 ;;; IntersectionTypeTest()
 (func $m_<init>__void@intersectiontype.IntersectionTypeTest
@@ -368,14 +368,14 @@
  (block $return.label
   (block
    ;; if (intersectiontype.IntersectionTypeTest.$initialized) return;
-   (if (global.get $$initialized@intersectiontype.IntersectionTypeTest)
+   (if (global.get $f_$initialized__intersectiontype_IntersectionTypeTest)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (intersectiontype.IntersectionTypeTest.$initialized = true);
-   (global.set $$initialized@intersectiontype.IntersectionTypeTest (i32.const 1))
+   (global.set $f_$initialized__intersectiontype_IntersectionTypeTest (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -385,8 +385,8 @@
 ;;; CLASS  MapEntry
 (type $intersectiontype.IntersectionTypeTest.MapEntry (struct
  (field $vtable (ref null $intersectiontype.IntersectionTypeTest.MapEntry.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $this@intersectiontype.IntersectionTypeTest.MapEntry (mut (ref null $intersectiontype.IntersectionTypeTest)))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $$outer_this__intersectiontype_IntersectionTypeTest_MapEntry (mut (ref null $intersectiontype.IntersectionTypeTest)))
 ))
 (type $intersectiontype.IntersectionTypeTest.MapEntry.vtable (struct
  
@@ -397,7 +397,7 @@
  (field $m_method__java_lang_Object__intersectiontype_Getable (mut (ref $function.$java.lang.Object__$java.lang.Object)))
 ))
 (global $intersectiontype.IntersectionTypeTest.MapEntry.vtable (mut (ref null $intersectiontype.IntersectionTypeTest.MapEntry.vtable)) (ref.null $intersectiontype.IntersectionTypeTest.MapEntry.vtable))
-(global $$initialized@intersectiontype.IntersectionTypeTest.MapEntry (mut i32) (i32.const 0))
+(global $f_$initialized__intersectiontype_IntersectionTypeTest_MapEntry (mut i32) (i32.const 0))
 
 ;;; MapEntry(IntersectionTypeTest<U> $outer_this)
 (func $m_<init>__intersectiontype_IntersectionTypeTest__void_$pp_intersectiontype@intersectiontype.IntersectionTypeTest.MapEntry
@@ -407,7 +407,7 @@
  (block $return.label
   (block
    ;; (MapEntry.this.this = $outer_this);
-   (struct.set $intersectiontype.IntersectionTypeTest.MapEntry $this@intersectiontype.IntersectionTypeTest.MapEntry(local.get $this) (local.get $$outer_this))
+   (struct.set $intersectiontype.IntersectionTypeTest.MapEntry $$outer_this__intersectiontype_IntersectionTypeTest_MapEntry(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -439,14 +439,14 @@
  (block $return.label
   (block
    ;; if (intersectiontype.IntersectionTypeTest.MapEntry.$initialized) return;
-   (if (global.get $$initialized@intersectiontype.IntersectionTypeTest.MapEntry)
+   (if (global.get $f_$initialized__intersectiontype_IntersectionTypeTest_MapEntry)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (intersectiontype.IntersectionTypeTest.MapEntry.$initialized = true);
-   (global.set $$initialized@intersectiontype.IntersectionTypeTest.MapEntry (i32.const 1))
+   (global.set $f_$initialized__intersectiontype_IntersectionTypeTest_MapEntry (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -456,7 +456,7 @@
 ;;; CLASS  A
 (type $intersectiontype.IntersectionTypeTest.A (struct
  (field $vtable (ref null $intersectiontype.IntersectionTypeTest.A.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $intersectiontype.IntersectionTypeTest.A.vtable (struct
  
@@ -466,7 +466,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $intersectiontype.IntersectionTypeTest.A.vtable (mut (ref null $intersectiontype.IntersectionTypeTest.A.vtable)) (ref.null $intersectiontype.IntersectionTypeTest.A.vtable))
-(global $$initialized@intersectiontype.IntersectionTypeTest.A (mut i32) (i32.const 0))
+(global $f_$initialized__intersectiontype_IntersectionTypeTest_A (mut i32) (i32.const 0))
 
 ;;; A()
 (func $m_<init>__void_$p_intersectiontype_IntersectionTypeTest_A@intersectiontype.IntersectionTypeTest.A
@@ -486,14 +486,14 @@
  (block $return.label
   (block
    ;; if (intersectiontype.IntersectionTypeTest.A.$initialized) return;
-   (if (global.get $$initialized@intersectiontype.IntersectionTypeTest.A)
+   (if (global.get $f_$initialized__intersectiontype_IntersectionTypeTest_A)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (intersectiontype.IntersectionTypeTest.A.$initialized = true);
-   (global.set $$initialized@intersectiontype.IntersectionTypeTest.A (i32.const 1))
+   (global.set $f_$initialized__intersectiontype_IntersectionTypeTest_A (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -501,41 +501,41 @@
 )
 
 ;;; INTERFACE  EmptyA
-(global $$initialized@intersectiontype.IntersectionTypeTest.EmptyA (mut i32) (i32.const 0))
+(global $f_$initialized__intersectiontype_IntersectionTypeTest_EmptyA (mut i32) (i32.const 0))
 
 ;;; void EmptyA.$clinit()
 (func $$clinit__void@intersectiontype.IntersectionTypeTest.EmptyA
  (block $return.label
   (block
    ;; if (intersectiontype.IntersectionTypeTest.EmptyA.$initialized) return;
-   (if (global.get $$initialized@intersectiontype.IntersectionTypeTest.EmptyA)
+   (if (global.get $f_$initialized__intersectiontype_IntersectionTypeTest_EmptyA)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (intersectiontype.IntersectionTypeTest.EmptyA.$initialized = true);
-   (global.set $$initialized@intersectiontype.IntersectionTypeTest.EmptyA (i32.const 1))
+   (global.set $f_$initialized__intersectiontype_IntersectionTypeTest_EmptyA (i32.const 1))
   )
  )
 )
 
 ;;; INTERFACE  EmptyB
-(global $$initialized@intersectiontype.IntersectionTypeTest.EmptyB (mut i32) (i32.const 0))
+(global $f_$initialized__intersectiontype_IntersectionTypeTest_EmptyB (mut i32) (i32.const 0))
 
 ;;; void EmptyB.$clinit()
 (func $$clinit__void@intersectiontype.IntersectionTypeTest.EmptyB
  (block $return.label
   (block
    ;; if (intersectiontype.IntersectionTypeTest.EmptyB.$initialized) return;
-   (if (global.get $$initialized@intersectiontype.IntersectionTypeTest.EmptyB)
+   (if (global.get $f_$initialized__intersectiontype_IntersectionTypeTest_EmptyB)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (intersectiontype.IntersectionTypeTest.EmptyB.$initialized = true);
-   (global.set $$initialized@intersectiontype.IntersectionTypeTest.EmptyB (i32.const 1))
+   (global.set $f_$initialized__intersectiontype_IntersectionTypeTest_EmptyB (i32.const 1))
   )
  )
 )

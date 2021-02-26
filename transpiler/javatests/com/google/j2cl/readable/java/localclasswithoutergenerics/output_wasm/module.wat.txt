@@ -3,7 +3,7 @@
 ;;; CLASS  LocalClassWithOuterGenerics
 (type $localclasswithoutergenerics.LocalClassWithOuterGenerics (struct
  (field $vtable (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $localclasswithoutergenerics.LocalClassWithOuterGenerics.vtable (struct
  
@@ -13,7 +13,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $localclasswithoutergenerics.LocalClassWithOuterGenerics.vtable (mut (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.vtable)) (ref.null $localclasswithoutergenerics.LocalClassWithOuterGenerics.vtable))
-(global $$initialized@localclasswithoutergenerics.LocalClassWithOuterGenerics (mut i32) (i32.const 0))
+(global $f_$initialized__localclasswithoutergenerics_LocalClassWithOuterGenerics (mut i32) (i32.const 0))
 
 ;;; LocalClassWithOuterGenerics()
 (func $m_<init>__void@localclasswithoutergenerics.LocalClassWithOuterGenerics
@@ -51,14 +51,14 @@
  (block $return.label
   (block
    ;; if (localclasswithoutergenerics.LocalClassWithOuterGenerics.$initialized) return;
-   (if (global.get $$initialized@localclasswithoutergenerics.LocalClassWithOuterGenerics)
+   (if (global.get $f_$initialized__localclasswithoutergenerics_LocalClassWithOuterGenerics)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (localclasswithoutergenerics.LocalClassWithOuterGenerics.$initialized = true);
-   (global.set $$initialized@localclasswithoutergenerics.LocalClassWithOuterGenerics (i32.const 1))
+   (global.set $f_$initialized__localclasswithoutergenerics_LocalClassWithOuterGenerics (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -68,7 +68,7 @@
 ;;; CLASS  Bar
 (type $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar (struct
  (field $vtable (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.vtable (struct
  
@@ -79,7 +79,7 @@
  (field $m_baz__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Bar__void_$pp_localclasswithoutergenerics (mut (ref $function.$localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar__$void)))
 ))
 (global $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.vtable (mut (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.vtable)) (ref.null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.vtable))
-(global $$initialized@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar (mut i32) (i32.const 0))
+(global $f_$initialized__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Bar (mut i32) (i32.const 0))
 
 ;;; Bar()
 (func $m_<init>__void_$pp_localclasswithoutergenerics@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar
@@ -112,14 +112,14 @@
  (block $return.label
   (block
    ;; if (localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.$initialized) return;
-   (if (global.get $$initialized@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar)
+   (if (global.get $f_$initialized__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Bar)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.$initialized = true);
-   (global.set $$initialized@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar (i32.const 1))
+   (global.set $f_$initialized__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Bar (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -129,7 +129,7 @@
 ;;; CLASS  Baz
 (type $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz (struct
  (field $vtable (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.vtable (struct
  
@@ -140,7 +140,7 @@
  (field $m_qux__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz__void_$pp_localclasswithoutergenerics (mut (ref $function.$localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz__$localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz__$localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz__$void)))
 ))
 (global $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.vtable (mut (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.vtable)) (ref.null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.vtable))
-(global $$initialized@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz (mut i32) (i32.const 0))
+(global $f_$initialized__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz (mut i32) (i32.const 0))
 
 ;;; Baz()
 (func $m_<init>__void_$pp_localclasswithoutergenerics@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz
@@ -175,14 +175,14 @@
  (block $return.label
   (block
    ;; if (localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.$initialized) return;
-   (if (global.get $$initialized@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz)
+   (if (global.get $f_$initialized__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.$initialized = true);
-   (global.set $$initialized@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz (i32.const 1))
+   (global.set $f_$initialized__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

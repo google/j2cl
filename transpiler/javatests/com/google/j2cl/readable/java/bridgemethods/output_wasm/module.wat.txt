@@ -1,21 +1,21 @@
 ;;; Code for bridgemethods.AccidentalOverride
 
 ;;; INTERFACE  I
-(global $$initialized@bridgemethods.I (mut i32) (i32.const 0))
+(global $f_$initialized__bridgemethods_I (mut i32) (i32.const 0))
 
 ;;; void I.$clinit()
 (func $$clinit__void@bridgemethods.I
  (block $return.label
   (block
    ;; if (bridgemethods.I.$initialized) return;
-   (if (global.get $$initialized@bridgemethods.I)
+   (if (global.get $f_$initialized__bridgemethods_I)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (bridgemethods.I.$initialized = true);
-   (global.set $$initialized@bridgemethods.I (i32.const 1))
+   (global.set $f_$initialized__bridgemethods_I (i32.const 1))
   )
  )
 )
@@ -23,7 +23,7 @@
 ;;; CLASS  A
 (type $bridgemethods.A (struct
  (field $vtable (ref null $bridgemethods.A.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $bridgemethods.A.vtable (struct
  
@@ -35,7 +35,7 @@
  (field $m_get__java_lang_Object (mut (ref $function.__$java.lang.Object)))
 ))
 (global $bridgemethods.A.vtable (mut (ref null $bridgemethods.A.vtable)) (ref.null $bridgemethods.A.vtable))
-(global $$initialized@bridgemethods.A (mut i32) (i32.const 0))
+(global $f_$initialized__bridgemethods_A (mut i32) (i32.const 0))
 
 ;;; A()
 (func $m_<init>__void_$pp_bridgemethods@bridgemethods.A
@@ -92,14 +92,14 @@
  (block $return.label
   (block
    ;; if (bridgemethods.A.$initialized) return;
-   (if (global.get $$initialized@bridgemethods.A)
+   (if (global.get $f_$initialized__bridgemethods_A)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (bridgemethods.A.$initialized = true);
-   (global.set $$initialized@bridgemethods.A (i32.const 1))
+   (global.set $f_$initialized__bridgemethods_A (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -109,7 +109,7 @@
 ;;; CLASS  B
 (type $bridgemethods.B (struct
  (field $vtable (ref null $bridgemethods.B.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $bridgemethods.B.vtable (struct
  
@@ -122,7 +122,7 @@
  (field $m_fun__java_lang_String__java_lang_Integer (mut (ref $function.$java.lang.String__$java.lang.Integer)))
 ))
 (global $bridgemethods.B.vtable (mut (ref null $bridgemethods.B.vtable)) (ref.null $bridgemethods.B.vtable))
-(global $$initialized@bridgemethods.B (mut i32) (i32.const 0))
+(global $f_$initialized__bridgemethods_B (mut i32) (i32.const 0))
 
 ;;; B()
 (func $m_<init>__void_$pp_bridgemethods@bridgemethods.B
@@ -180,14 +180,14 @@
  (block $return.label
   (block
    ;; if (bridgemethods.B.$initialized) return;
-   (if (global.get $$initialized@bridgemethods.B)
+   (if (global.get $f_$initialized__bridgemethods_B)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (bridgemethods.B.$initialized = true);
-   (global.set $$initialized@bridgemethods.B (i32.const 1))
+   (global.set $f_$initialized__bridgemethods_B (i32.const 1))
    ;; bridgemethods.A.$clinit();
    (call $$clinit__void@bridgemethods.A )
   )
@@ -195,21 +195,21 @@
 )
 
 ;;; INTERFACE  SpecializedInterface
-(global $$initialized@bridgemethods.SpecializedInterface (mut i32) (i32.const 0))
+(global $f_$initialized__bridgemethods_SpecializedInterface (mut i32) (i32.const 0))
 
 ;;; void SpecializedInterface.$clinit()
 (func $$clinit__void@bridgemethods.SpecializedInterface
  (block $return.label
   (block
    ;; if (bridgemethods.SpecializedInterface.$initialized) return;
-   (if (global.get $$initialized@bridgemethods.SpecializedInterface)
+   (if (global.get $f_$initialized__bridgemethods_SpecializedInterface)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (bridgemethods.SpecializedInterface.$initialized = true);
-   (global.set $$initialized@bridgemethods.SpecializedInterface (i32.const 1))
+   (global.set $f_$initialized__bridgemethods_SpecializedInterface (i32.const 1))
   )
  )
 )
@@ -217,7 +217,7 @@
 ;;; CLASS  AccidentalOverride
 (type $bridgemethods.AccidentalOverride (struct
  (field $vtable (ref null $bridgemethods.AccidentalOverride.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $bridgemethods.AccidentalOverride.vtable (struct
  
@@ -231,7 +231,7 @@
  (field $m_get__java_lang_String (mut (ref $function.__$java.lang.String)))
 ))
 (global $bridgemethods.AccidentalOverride.vtable (mut (ref null $bridgemethods.AccidentalOverride.vtable)) (ref.null $bridgemethods.AccidentalOverride.vtable))
-(global $$initialized@bridgemethods.AccidentalOverride (mut i32) (i32.const 0))
+(global $f_$initialized__bridgemethods_AccidentalOverride (mut i32) (i32.const 0))
 
 ;;; AccidentalOverride()
 (func $m_<init>__void_$pp_bridgemethods@bridgemethods.AccidentalOverride
@@ -307,14 +307,14 @@
  (block $return.label
   (block
    ;; if (bridgemethods.AccidentalOverride.$initialized) return;
-   (if (global.get $$initialized@bridgemethods.AccidentalOverride)
+   (if (global.get $f_$initialized__bridgemethods_AccidentalOverride)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (bridgemethods.AccidentalOverride.$initialized = true);
-   (global.set $$initialized@bridgemethods.AccidentalOverride (i32.const 1))
+   (global.set $f_$initialized__bridgemethods_AccidentalOverride (i32.const 1))
    ;; bridgemethods.A.$clinit();
    (call $$clinit__void@bridgemethods.A )
   )
@@ -323,21 +323,21 @@
 ;;; Code for bridgemethods.BridgeMethod
 
 ;;; INTERFACE  SomeInterface
-(global $$initialized@bridgemethods.SomeInterface (mut i32) (i32.const 0))
+(global $f_$initialized__bridgemethods_SomeInterface (mut i32) (i32.const 0))
 
 ;;; void SomeInterface.$clinit()
 (func $$clinit__void@bridgemethods.SomeInterface
  (block $return.label
   (block
    ;; if (bridgemethods.SomeInterface.$initialized) return;
-   (if (global.get $$initialized@bridgemethods.SomeInterface)
+   (if (global.get $f_$initialized__bridgemethods_SomeInterface)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (bridgemethods.SomeInterface.$initialized = true);
-   (global.set $$initialized@bridgemethods.SomeInterface (i32.const 1))
+   (global.set $f_$initialized__bridgemethods_SomeInterface (i32.const 1))
   )
  )
 )
@@ -345,7 +345,7 @@
 ;;; CLASS  SuperParent
 (type $bridgemethods.SuperParent (struct
  (field $vtable (ref null $bridgemethods.SuperParent.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $bridgemethods.SuperParent.vtable (struct
  
@@ -356,7 +356,7 @@
  (field $m_foo__java_lang_Object__java_lang_Object__void (mut (ref $function.$java.lang.Object__$java.lang.Object__$void)))
 ))
 (global $bridgemethods.SuperParent.vtable (mut (ref null $bridgemethods.SuperParent.vtable)) (ref.null $bridgemethods.SuperParent.vtable))
-(global $$initialized@bridgemethods.SuperParent (mut i32) (i32.const 0))
+(global $f_$initialized__bridgemethods_SuperParent (mut i32) (i32.const 0))
 
 ;;; SuperParent()
 (func $m_<init>__void_$pp_bridgemethods@bridgemethods.SuperParent
@@ -390,14 +390,14 @@
  (block $return.label
   (block
    ;; if (bridgemethods.SuperParent.$initialized) return;
-   (if (global.get $$initialized@bridgemethods.SuperParent)
+   (if (global.get $f_$initialized__bridgemethods_SuperParent)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (bridgemethods.SuperParent.$initialized = true);
-   (global.set $$initialized@bridgemethods.SuperParent (i32.const 1))
+   (global.set $f_$initialized__bridgemethods_SuperParent (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -407,7 +407,7 @@
 ;;; CLASS  Parent
 (type $bridgemethods.Parent (struct
  (field $vtable (ref null $bridgemethods.Parent.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $bridgemethods.Parent.vtable (struct
  
@@ -421,7 +421,7 @@
  (field $m_fun__java_lang_Object__void (mut (ref $function.$java.lang.Object__$void)))
 ))
 (global $bridgemethods.Parent.vtable (mut (ref null $bridgemethods.Parent.vtable)) (ref.null $bridgemethods.Parent.vtable))
-(global $$initialized@bridgemethods.Parent (mut i32) (i32.const 0))
+(global $f_$initialized__bridgemethods_Parent (mut i32) (i32.const 0))
 
 ;;; Parent()
 (func $m_<init>__void_$pp_bridgemethods@bridgemethods.Parent
@@ -497,14 +497,14 @@
  (block $return.label
   (block
    ;; if (bridgemethods.Parent.$initialized) return;
-   (if (global.get $$initialized@bridgemethods.Parent)
+   (if (global.get $f_$initialized__bridgemethods_Parent)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (bridgemethods.Parent.$initialized = true);
-   (global.set $$initialized@bridgemethods.Parent (i32.const 1))
+   (global.set $f_$initialized__bridgemethods_Parent (i32.const 1))
    ;; bridgemethods.SuperParent.$clinit();
    (call $$clinit__void@bridgemethods.SuperParent )
   )
@@ -514,7 +514,7 @@
 ;;; CLASS  BridgeMethod
 (type $bridgemethods.BridgeMethod (struct
  (field $vtable (ref null $bridgemethods.BridgeMethod.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $bridgemethods.BridgeMethod.vtable (struct
  
@@ -531,7 +531,7 @@
  (field $m_foo__java_lang_Object__java_lang_Number__void (mut (ref $function.$java.lang.Object__$java.lang.Number__$void)))
 ))
 (global $bridgemethods.BridgeMethod.vtable (mut (ref null $bridgemethods.BridgeMethod.vtable)) (ref.null $bridgemethods.BridgeMethod.vtable))
-(global $$initialized@bridgemethods.BridgeMethod (mut i32) (i32.const 0))
+(global $f_$initialized__bridgemethods_BridgeMethod (mut i32) (i32.const 0))
 
 ;;; BridgeMethod()
 (func $m_<init>__void@bridgemethods.BridgeMethod
@@ -623,14 +623,14 @@
  (block $return.label
   (block
    ;; if (bridgemethods.BridgeMethod.$initialized) return;
-   (if (global.get $$initialized@bridgemethods.BridgeMethod)
+   (if (global.get $f_$initialized__bridgemethods_BridgeMethod)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (bridgemethods.BridgeMethod.$initialized = true);
-   (global.set $$initialized@bridgemethods.BridgeMethod (i32.const 1))
+   (global.set $f_$initialized__bridgemethods_BridgeMethod (i32.const 1))
    ;; bridgemethods.Parent.$clinit();
    (call $$clinit__void@bridgemethods.Parent )
   )
@@ -638,21 +638,21 @@
 )
 
 ;;; INTERFACE  SomeOtherFooInterface
-(global $$initialized@bridgemethods.SomeOtherFooInterface (mut i32) (i32.const 0))
+(global $f_$initialized__bridgemethods_SomeOtherFooInterface (mut i32) (i32.const 0))
 
 ;;; void SomeOtherFooInterface.$clinit()
 (func $$clinit__void@bridgemethods.SomeOtherFooInterface
  (block $return.label
   (block
    ;; if (bridgemethods.SomeOtherFooInterface.$initialized) return;
-   (if (global.get $$initialized@bridgemethods.SomeOtherFooInterface)
+   (if (global.get $f_$initialized__bridgemethods_SomeOtherFooInterface)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (bridgemethods.SomeOtherFooInterface.$initialized = true);
-   (global.set $$initialized@bridgemethods.SomeOtherFooInterface (i32.const 1))
+   (global.set $f_$initialized__bridgemethods_SomeOtherFooInterface (i32.const 1))
   )
  )
 )
@@ -660,7 +660,7 @@
 ;;; CLASS  DualUnrelatedBridges
 (type $bridgemethods.DualUnrelatedBridges (struct
  (field $vtable (ref null $bridgemethods.DualUnrelatedBridges.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $bridgemethods.DualUnrelatedBridges.vtable (struct
  
@@ -675,7 +675,7 @@
  (field $m_foo__java_lang_Object__java_lang_Double__void (mut (ref $function.$java.lang.Object__$java.lang.Double__$void)))
 ))
 (global $bridgemethods.DualUnrelatedBridges.vtable (mut (ref null $bridgemethods.DualUnrelatedBridges.vtable)) (ref.null $bridgemethods.DualUnrelatedBridges.vtable))
-(global $$initialized@bridgemethods.DualUnrelatedBridges (mut i32) (i32.const 0))
+(global $f_$initialized__bridgemethods_DualUnrelatedBridges (mut i32) (i32.const 0))
 
 ;;; DualUnrelatedBridges()
 (func $m_<init>__void_$pp_bridgemethods@bridgemethods.DualUnrelatedBridges
@@ -771,14 +771,14 @@
  (block $return.label
   (block
    ;; if (bridgemethods.DualUnrelatedBridges.$initialized) return;
-   (if (global.get $$initialized@bridgemethods.DualUnrelatedBridges)
+   (if (global.get $f_$initialized__bridgemethods_DualUnrelatedBridges)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (bridgemethods.DualUnrelatedBridges.$initialized = true);
-   (global.set $$initialized@bridgemethods.DualUnrelatedBridges (i32.const 1))
+   (global.set $f_$initialized__bridgemethods_DualUnrelatedBridges (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -788,7 +788,7 @@
 ;;; CLASS  SuperDualUnrelatedAccidentalBridges
 (type $bridgemethods.SuperDualUnrelatedAccidentalBridges (struct
  (field $vtable (ref null $bridgemethods.SuperDualUnrelatedAccidentalBridges.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $bridgemethods.SuperDualUnrelatedAccidentalBridges.vtable (struct
  
@@ -800,7 +800,7 @@
  (field $m_foo__java_lang_String__java_lang_Number__void (mut (ref $function.$java.lang.String__$java.lang.Number__$void)))
 ))
 (global $bridgemethods.SuperDualUnrelatedAccidentalBridges.vtable (mut (ref null $bridgemethods.SuperDualUnrelatedAccidentalBridges.vtable)) (ref.null $bridgemethods.SuperDualUnrelatedAccidentalBridges.vtable))
-(global $$initialized@bridgemethods.SuperDualUnrelatedAccidentalBridges (mut i32) (i32.const 0))
+(global $f_$initialized__bridgemethods_SuperDualUnrelatedAccidentalBridges (mut i32) (i32.const 0))
 
 ;;; SuperDualUnrelatedAccidentalBridges()
 (func $m_<init>__void_$pp_bridgemethods@bridgemethods.SuperDualUnrelatedAccidentalBridges
@@ -848,14 +848,14 @@
  (block $return.label
   (block
    ;; if (bridgemethods.SuperDualUnrelatedAccidentalBridges.$initialized) return;
-   (if (global.get $$initialized@bridgemethods.SuperDualUnrelatedAccidentalBridges)
+   (if (global.get $f_$initialized__bridgemethods_SuperDualUnrelatedAccidentalBridges)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (bridgemethods.SuperDualUnrelatedAccidentalBridges.$initialized = true);
-   (global.set $$initialized@bridgemethods.SuperDualUnrelatedAccidentalBridges (i32.const 1))
+   (global.set $f_$initialized__bridgemethods_SuperDualUnrelatedAccidentalBridges (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -865,7 +865,7 @@
 ;;; CLASS  DualUnrelatedAccidentalBridges
 (type $bridgemethods.DualUnrelatedAccidentalBridges (struct
  (field $vtable (ref null $bridgemethods.DualUnrelatedAccidentalBridges.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $bridgemethods.DualUnrelatedAccidentalBridges.vtable (struct
  
@@ -880,7 +880,7 @@
  (field $m_foo__java_lang_Object__java_lang_Double__void (mut (ref $function.$java.lang.Object__$java.lang.Double__$void)))
 ))
 (global $bridgemethods.DualUnrelatedAccidentalBridges.vtable (mut (ref null $bridgemethods.DualUnrelatedAccidentalBridges.vtable)) (ref.null $bridgemethods.DualUnrelatedAccidentalBridges.vtable))
-(global $$initialized@bridgemethods.DualUnrelatedAccidentalBridges (mut i32) (i32.const 0))
+(global $f_$initialized__bridgemethods_DualUnrelatedAccidentalBridges (mut i32) (i32.const 0))
 
 ;;; DualUnrelatedAccidentalBridges()
 (func $m_<init>__void_$pp_bridgemethods@bridgemethods.DualUnrelatedAccidentalBridges
@@ -948,14 +948,14 @@
  (block $return.label
   (block
    ;; if (bridgemethods.DualUnrelatedAccidentalBridges.$initialized) return;
-   (if (global.get $$initialized@bridgemethods.DualUnrelatedAccidentalBridges)
+   (if (global.get $f_$initialized__bridgemethods_DualUnrelatedAccidentalBridges)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (bridgemethods.DualUnrelatedAccidentalBridges.$initialized = true);
-   (global.set $$initialized@bridgemethods.DualUnrelatedAccidentalBridges (i32.const 1))
+   (global.set $f_$initialized__bridgemethods_DualUnrelatedAccidentalBridges (i32.const 1))
    ;; bridgemethods.SuperDualUnrelatedAccidentalBridges.$clinit();
    (call $$clinit__void@bridgemethods.SuperDualUnrelatedAccidentalBridges )
   )
@@ -963,21 +963,21 @@
 )
 
 ;;; INTERFACE  Getter
-(global $$initialized@bridgemethods.Getter (mut i32) (i32.const 0))
+(global $f_$initialized__bridgemethods_Getter (mut i32) (i32.const 0))
 
 ;;; void Getter.$clinit()
 (func $$clinit__void@bridgemethods.Getter
  (block $return.label
   (block
    ;; if (bridgemethods.Getter.$initialized) return;
-   (if (global.get $$initialized@bridgemethods.Getter)
+   (if (global.get $f_$initialized__bridgemethods_Getter)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (bridgemethods.Getter.$initialized = true);
-   (global.set $$initialized@bridgemethods.Getter (i32.const 1))
+   (global.set $f_$initialized__bridgemethods_Getter (i32.const 1))
   )
  )
 )
@@ -985,7 +985,7 @@
 ;;; CLASS  ClassWithParameterizedGet
 (type $bridgemethods.ClassWithParameterizedGet (struct
  (field $vtable (ref null $bridgemethods.ClassWithParameterizedGet.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $bridgemethods.ClassWithParameterizedGet.vtable (struct
  
@@ -996,7 +996,7 @@
  (field $m_get__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object)))
 ))
 (global $bridgemethods.ClassWithParameterizedGet.vtable (mut (ref null $bridgemethods.ClassWithParameterizedGet.vtable)) (ref.null $bridgemethods.ClassWithParameterizedGet.vtable))
-(global $$initialized@bridgemethods.ClassWithParameterizedGet (mut i32) (i32.const 0))
+(global $f_$initialized__bridgemethods_ClassWithParameterizedGet (mut i32) (i32.const 0))
 
 ;;; ClassWithParameterizedGet()
 (func $m_<init>__void_$pp_bridgemethods@bridgemethods.ClassWithParameterizedGet
@@ -1035,14 +1035,14 @@
  (block $return.label
   (block
    ;; if (bridgemethods.ClassWithParameterizedGet.$initialized) return;
-   (if (global.get $$initialized@bridgemethods.ClassWithParameterizedGet)
+   (if (global.get $f_$initialized__bridgemethods_ClassWithParameterizedGet)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (bridgemethods.ClassWithParameterizedGet.$initialized = true);
-   (global.set $$initialized@bridgemethods.ClassWithParameterizedGet (i32.const 1))
+   (global.set $f_$initialized__bridgemethods_ClassWithParameterizedGet (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -1052,7 +1052,7 @@
 ;;; CLASS  AccidentalOverrideBridge
 (type $bridgemethods.AccidentalOverrideBridge (struct
  (field $vtable (ref null $bridgemethods.AccidentalOverrideBridge.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $bridgemethods.AccidentalOverrideBridge.vtable (struct
  
@@ -1065,7 +1065,7 @@
  (field $m_get__java_lang_String__java_lang_String (mut (ref $function.$java.lang.String__$java.lang.String)))
 ))
 (global $bridgemethods.AccidentalOverrideBridge.vtable (mut (ref null $bridgemethods.AccidentalOverrideBridge.vtable)) (ref.null $bridgemethods.AccidentalOverrideBridge.vtable))
-(global $$initialized@bridgemethods.AccidentalOverrideBridge (mut i32) (i32.const 0))
+(global $f_$initialized__bridgemethods_AccidentalOverrideBridge (mut i32) (i32.const 0))
 
 ;;; AccidentalOverrideBridge()
 (func $m_<init>__void_$pp_bridgemethods@bridgemethods.AccidentalOverrideBridge
@@ -1142,14 +1142,14 @@
  (block $return.label
   (block
    ;; if (bridgemethods.AccidentalOverrideBridge.$initialized) return;
-   (if (global.get $$initialized@bridgemethods.AccidentalOverrideBridge)
+   (if (global.get $f_$initialized__bridgemethods_AccidentalOverrideBridge)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (bridgemethods.AccidentalOverrideBridge.$initialized = true);
-   (global.set $$initialized@bridgemethods.AccidentalOverrideBridge (i32.const 1))
+   (global.set $f_$initialized__bridgemethods_AccidentalOverrideBridge (i32.const 1))
    ;; bridgemethods.ClassWithParameterizedGet.$clinit();
    (call $$clinit__void@bridgemethods.ClassWithParameterizedGet )
   )
@@ -1159,7 +1159,7 @@
 ;;; CLASS  TestCase10036
 (type $bridgemethods.TestCase10036 (struct
  (field $vtable (ref null $bridgemethods.TestCase10036.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $bridgemethods.TestCase10036.vtable (struct
  
@@ -1169,7 +1169,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $bridgemethods.TestCase10036.vtable (mut (ref null $bridgemethods.TestCase10036.vtable)) (ref.null $bridgemethods.TestCase10036.vtable))
-(global $$initialized@bridgemethods.TestCase10036 (mut i32) (i32.const 0))
+(global $f_$initialized__bridgemethods_TestCase10036 (mut i32) (i32.const 0))
 
 ;;; TestCase10036()
 (func $m_<init>__void_$pp_bridgemethods@bridgemethods.TestCase10036
@@ -1189,14 +1189,14 @@
  (block $return.label
   (block
    ;; if (bridgemethods.TestCase10036.$initialized) return;
-   (if (global.get $$initialized@bridgemethods.TestCase10036)
+   (if (global.get $f_$initialized__bridgemethods_TestCase10036)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (bridgemethods.TestCase10036.$initialized = true);
-   (global.set $$initialized@bridgemethods.TestCase10036 (i32.const 1))
+   (global.set $f_$initialized__bridgemethods_TestCase10036 (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -1204,7 +1204,7 @@
 )
 
 ;;; INTERFACE  BI3
-(global $$initialized@bridgemethods.TestCase10036.BI3 (mut i32) (i32.const 0))
+(global $f_$initialized__bridgemethods_TestCase10036_BI3 (mut i32) (i32.const 0))
 
 ;;; String BI3.get(String value)
 (func $m_get__java_lang_String__java_lang_String@bridgemethods.TestCase10036.BI3
@@ -1247,54 +1247,54 @@
  (block $return.label
   (block
    ;; if (bridgemethods.TestCase10036.BI3.$initialized) return;
-   (if (global.get $$initialized@bridgemethods.TestCase10036.BI3)
+   (if (global.get $f_$initialized__bridgemethods_TestCase10036_BI3)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (bridgemethods.TestCase10036.BI3.$initialized = true);
-   (global.set $$initialized@bridgemethods.TestCase10036.BI3 (i32.const 1))
+   (global.set $f_$initialized__bridgemethods_TestCase10036_BI3 (i32.const 1))
   )
  )
 )
 
 ;;; INTERFACE  BI2
-(global $$initialized@bridgemethods.TestCase10036.BI2 (mut i32) (i32.const 0))
+(global $f_$initialized__bridgemethods_TestCase10036_BI2 (mut i32) (i32.const 0))
 
 ;;; void BI2.$clinit()
 (func $$clinit__void@bridgemethods.TestCase10036.BI2
  (block $return.label
   (block
    ;; if (bridgemethods.TestCase10036.BI2.$initialized) return;
-   (if (global.get $$initialized@bridgemethods.TestCase10036.BI2)
+   (if (global.get $f_$initialized__bridgemethods_TestCase10036_BI2)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (bridgemethods.TestCase10036.BI2.$initialized = true);
-   (global.set $$initialized@bridgemethods.TestCase10036.BI2 (i32.const 1))
+   (global.set $f_$initialized__bridgemethods_TestCase10036_BI2 (i32.const 1))
   )
  )
 )
 
 ;;; INTERFACE  BI1
-(global $$initialized@bridgemethods.TestCase10036.BI1 (mut i32) (i32.const 0))
+(global $f_$initialized__bridgemethods_TestCase10036_BI1 (mut i32) (i32.const 0))
 
 ;;; void BI1.$clinit()
 (func $$clinit__void@bridgemethods.TestCase10036.BI1
  (block $return.label
   (block
    ;; if (bridgemethods.TestCase10036.BI1.$initialized) return;
-   (if (global.get $$initialized@bridgemethods.TestCase10036.BI1)
+   (if (global.get $f_$initialized__bridgemethods_TestCase10036_BI1)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (bridgemethods.TestCase10036.BI1.$initialized = true);
-   (global.set $$initialized@bridgemethods.TestCase10036.BI1 (i32.const 1))
+   (global.set $f_$initialized__bridgemethods_TestCase10036_BI1 (i32.const 1))
    ;; bridgemethods.TestCase10036.BI3.$clinit();
    (call $$clinit__void@bridgemethods.TestCase10036.BI3 )
   )
@@ -1304,7 +1304,7 @@
 ;;; CLASS  B
 (type $bridgemethods.TestCase10036.B (struct
  (field $vtable (ref null $bridgemethods.TestCase10036.B.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $bridgemethods.TestCase10036.B.vtable (struct
  
@@ -1315,7 +1315,7 @@
  (field $m_get__java_lang_Comparable__java_lang_String (mut (ref $function.$java.lang.Object__$java.lang.String)))
 ))
 (global $bridgemethods.TestCase10036.B.vtable (mut (ref null $bridgemethods.TestCase10036.B.vtable)) (ref.null $bridgemethods.TestCase10036.B.vtable))
-(global $$initialized@bridgemethods.TestCase10036.B (mut i32) (i32.const 0))
+(global $f_$initialized__bridgemethods_TestCase10036_B (mut i32) (i32.const 0))
 
 ;;; B()
 (func $m_<init>__void_$pp_bridgemethods@bridgemethods.TestCase10036.B
@@ -1335,14 +1335,14 @@
  (block $return.label
   (block
    ;; if (bridgemethods.TestCase10036.B.$initialized) return;
-   (if (global.get $$initialized@bridgemethods.TestCase10036.B)
+   (if (global.get $f_$initialized__bridgemethods_TestCase10036_B)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (bridgemethods.TestCase10036.B.$initialized = true);
-   (global.set $$initialized@bridgemethods.TestCase10036.B (i32.const 1))
+   (global.set $f_$initialized__bridgemethods_TestCase10036_B (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
    ;; bridgemethods.TestCase10036.BI3.$clinit();
@@ -1354,7 +1354,7 @@
 ;;; CLASS  TestCase102
 (type $bridgemethods.TestCase102 (struct
  (field $vtable (ref null $bridgemethods.TestCase102.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $bridgemethods.TestCase102.vtable (struct
  
@@ -1364,7 +1364,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $bridgemethods.TestCase102.vtable (mut (ref null $bridgemethods.TestCase102.vtable)) (ref.null $bridgemethods.TestCase102.vtable))
-(global $$initialized@bridgemethods.TestCase102 (mut i32) (i32.const 0))
+(global $f_$initialized__bridgemethods_TestCase102 (mut i32) (i32.const 0))
 
 ;;; TestCase102()
 (func $m_<init>__void_$pp_bridgemethods@bridgemethods.TestCase102
@@ -1384,14 +1384,14 @@
  (block $return.label
   (block
    ;; if (bridgemethods.TestCase102.$initialized) return;
-   (if (global.get $$initialized@bridgemethods.TestCase102)
+   (if (global.get $f_$initialized__bridgemethods_TestCase102)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (bridgemethods.TestCase102.$initialized = true);
-   (global.set $$initialized@bridgemethods.TestCase102 (i32.const 1))
+   (global.set $f_$initialized__bridgemethods_TestCase102 (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -1399,41 +1399,41 @@
 )
 
 ;;; INTERFACE  BI2
-(global $$initialized@bridgemethods.TestCase102.BI2 (mut i32) (i32.const 0))
+(global $f_$initialized__bridgemethods_TestCase102_BI2 (mut i32) (i32.const 0))
 
 ;;; void BI2.$clinit()
 (func $$clinit__void@bridgemethods.TestCase102.BI2
  (block $return.label
   (block
    ;; if (bridgemethods.TestCase102.BI2.$initialized) return;
-   (if (global.get $$initialized@bridgemethods.TestCase102.BI2)
+   (if (global.get $f_$initialized__bridgemethods_TestCase102_BI2)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (bridgemethods.TestCase102.BI2.$initialized = true);
-   (global.set $$initialized@bridgemethods.TestCase102.BI2 (i32.const 1))
+   (global.set $f_$initialized__bridgemethods_TestCase102_BI2 (i32.const 1))
   )
  )
 )
 
 ;;; INTERFACE  BI1
-(global $$initialized@bridgemethods.TestCase102.BI1 (mut i32) (i32.const 0))
+(global $f_$initialized__bridgemethods_TestCase102_BI1 (mut i32) (i32.const 0))
 
 ;;; void BI1.$clinit()
 (func $$clinit__void@bridgemethods.TestCase102.BI1
  (block $return.label
   (block
    ;; if (bridgemethods.TestCase102.BI1.$initialized) return;
-   (if (global.get $$initialized@bridgemethods.TestCase102.BI1)
+   (if (global.get $f_$initialized__bridgemethods_TestCase102_BI1)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (bridgemethods.TestCase102.BI1.$initialized = true);
-   (global.set $$initialized@bridgemethods.TestCase102.BI1 (i32.const 1))
+   (global.set $f_$initialized__bridgemethods_TestCase102_BI1 (i32.const 1))
   )
  )
 )
@@ -1441,7 +1441,7 @@
 ;;; CLASS  B
 (type $bridgemethods.TestCase102.B (struct
  (field $vtable (ref null $bridgemethods.TestCase102.B.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $bridgemethods.TestCase102.B.vtable (struct
  
@@ -1452,7 +1452,7 @@
  (field $m_set__java_lang_Object__void (mut (ref $function.$java.lang.Object__$void)))
 ))
 (global $bridgemethods.TestCase102.B.vtable (mut (ref null $bridgemethods.TestCase102.B.vtable)) (ref.null $bridgemethods.TestCase102.B.vtable))
-(global $$initialized@bridgemethods.TestCase102.B (mut i32) (i32.const 0))
+(global $f_$initialized__bridgemethods_TestCase102_B (mut i32) (i32.const 0))
 
 ;;; B()
 (func $m_<init>__void_$pp_bridgemethods@bridgemethods.TestCase102.B
@@ -1472,14 +1472,14 @@
  (block $return.label
   (block
    ;; if (bridgemethods.TestCase102.B.$initialized) return;
-   (if (global.get $$initialized@bridgemethods.TestCase102.B)
+   (if (global.get $f_$initialized__bridgemethods_TestCase102_B)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (bridgemethods.TestCase102.B.$initialized = true);
-   (global.set $$initialized@bridgemethods.TestCase102.B (i32.const 1))
+   (global.set $f_$initialized__bridgemethods_TestCase102_B (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -1489,8 +1489,8 @@
 ;;; CLASS  C
 (type $bridgemethods.TestCase102.C (struct
  (field $vtable (ref null $bridgemethods.TestCase102.C.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $this@bridgemethods.TestCase102.C (mut (ref null $bridgemethods.TestCase102)))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $$outer_this__bridgemethods_TestCase102_C (mut (ref null $bridgemethods.TestCase102)))
 ))
 (type $bridgemethods.TestCase102.C.vtable (struct
  
@@ -1502,7 +1502,7 @@
  (field $m_set__java_lang_String__void (mut (ref $function.$java.lang.String__$void)))
 ))
 (global $bridgemethods.TestCase102.C.vtable (mut (ref null $bridgemethods.TestCase102.C.vtable)) (ref.null $bridgemethods.TestCase102.C.vtable))
-(global $$initialized@bridgemethods.TestCase102.C (mut i32) (i32.const 0))
+(global $f_$initialized__bridgemethods_TestCase102_C (mut i32) (i32.const 0))
 
 ;;; C(TestCase102 $outer_this)
 (func $m_<init>__bridgemethods_TestCase102__void_$pp_bridgemethods@bridgemethods.TestCase102.C
@@ -1512,7 +1512,7 @@
  (block $return.label
   (block
    ;; (C.this.this = $outer_this);
-   (struct.set $bridgemethods.TestCase102.C $this@bridgemethods.TestCase102.C(local.get $this) (local.get $$outer_this))
+   (struct.set $bridgemethods.TestCase102.C $$outer_this__bridgemethods_TestCase102_C(local.get $this) (local.get $$outer_this))
    ;; B.this.B.<init>();
    (drop (call $m_<init>__void_$pp_bridgemethods@bridgemethods.TestCase102.B (local.get $this)))
   )
@@ -1551,14 +1551,14 @@
  (block $return.label
   (block
    ;; if (bridgemethods.TestCase102.C.$initialized) return;
-   (if (global.get $$initialized@bridgemethods.TestCase102.C)
+   (if (global.get $f_$initialized__bridgemethods_TestCase102_C)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (bridgemethods.TestCase102.C.$initialized = true);
-   (global.set $$initialized@bridgemethods.TestCase102.C (i32.const 1))
+   (global.set $f_$initialized__bridgemethods_TestCase102_C (i32.const 1))
    ;; bridgemethods.TestCase102.B.$clinit();
    (call $$clinit__void@bridgemethods.TestCase102.B )
   )
@@ -1568,7 +1568,7 @@
 ;;; CLASS  ParameterizedParent
 (type $bridgemethods.ParameterizedParent (struct
  (field $vtable (ref null $bridgemethods.ParameterizedParent.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $bridgemethods.ParameterizedParent.vtable (struct
  
@@ -1579,7 +1579,7 @@
  (field $m_m__bridgemethods_ParameterizedParent__bridgemethods_ParameterizedParent_$pp_bridgemethods (mut (ref $function.$bridgemethods.ParameterizedParent__$bridgemethods.ParameterizedParent)))
 ))
 (global $bridgemethods.ParameterizedParent.vtable (mut (ref null $bridgemethods.ParameterizedParent.vtable)) (ref.null $bridgemethods.ParameterizedParent.vtable))
-(global $$initialized@bridgemethods.ParameterizedParent (mut i32) (i32.const 0))
+(global $f_$initialized__bridgemethods_ParameterizedParent (mut i32) (i32.const 0))
 
 ;;; ParameterizedParent()
 (func $m_<init>__void_$pp_bridgemethods@bridgemethods.ParameterizedParent
@@ -1618,14 +1618,14 @@
  (block $return.label
   (block
    ;; if (bridgemethods.ParameterizedParent.$initialized) return;
-   (if (global.get $$initialized@bridgemethods.ParameterizedParent)
+   (if (global.get $f_$initialized__bridgemethods_ParameterizedParent)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (bridgemethods.ParameterizedParent.$initialized = true);
-   (global.set $$initialized@bridgemethods.ParameterizedParent (i32.const 1))
+   (global.set $f_$initialized__bridgemethods_ParameterizedParent (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -1635,7 +1635,7 @@
 ;;; CLASS  ReparametrerizedChild
 (type $bridgemethods.ReparametrerizedChild (struct
  (field $vtable (ref null $bridgemethods.ReparametrerizedChild.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $bridgemethods.ReparametrerizedChild.vtable (struct
  
@@ -1647,7 +1647,7 @@
  (field $m_m__bridgemethods_ReparametrerizedChild__bridgemethods_ReparametrerizedChild_$pp_bridgemethods (mut (ref $function.$bridgemethods.ReparametrerizedChild__$bridgemethods.ReparametrerizedChild)))
 ))
 (global $bridgemethods.ReparametrerizedChild.vtable (mut (ref null $bridgemethods.ReparametrerizedChild.vtable)) (ref.null $bridgemethods.ReparametrerizedChild.vtable))
-(global $$initialized@bridgemethods.ReparametrerizedChild (mut i32) (i32.const 0))
+(global $f_$initialized__bridgemethods_ReparametrerizedChild (mut i32) (i32.const 0))
 
 ;;; ReparametrerizedChild()
 (func $m_<init>__void_$pp_bridgemethods@bridgemethods.ReparametrerizedChild
@@ -1705,14 +1705,14 @@
  (block $return.label
   (block
    ;; if (bridgemethods.ReparametrerizedChild.$initialized) return;
-   (if (global.get $$initialized@bridgemethods.ReparametrerizedChild)
+   (if (global.get $f_$initialized__bridgemethods_ReparametrerizedChild)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (bridgemethods.ReparametrerizedChild.$initialized = true);
-   (global.set $$initialized@bridgemethods.ReparametrerizedChild (i32.const 1))
+   (global.set $f_$initialized__bridgemethods_ReparametrerizedChild (i32.const 1))
    ;; bridgemethods.ParameterizedParent.$clinit();
    (call $$clinit__void@bridgemethods.ParameterizedParent )
   )
@@ -1722,7 +1722,7 @@
 ;;; CLASS  LeafChild
 (type $bridgemethods.LeafChild (struct
  (field $vtable (ref null $bridgemethods.LeafChild.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $bridgemethods.LeafChild.vtable (struct
  
@@ -1734,7 +1734,7 @@
  (field $m_m__bridgemethods_ReparametrerizedChild__bridgemethods_ReparametrerizedChild_$pp_bridgemethods (mut (ref $function.$bridgemethods.ReparametrerizedChild__$bridgemethods.ReparametrerizedChild)))
 ))
 (global $bridgemethods.LeafChild.vtable (mut (ref null $bridgemethods.LeafChild.vtable)) (ref.null $bridgemethods.LeafChild.vtable))
-(global $$initialized@bridgemethods.LeafChild (mut i32) (i32.const 0))
+(global $f_$initialized__bridgemethods_LeafChild (mut i32) (i32.const 0))
 
 ;;; LeafChild()
 (func $m_<init>__void_$pp_bridgemethods@bridgemethods.LeafChild
@@ -1754,14 +1754,14 @@
  (block $return.label
   (block
    ;; if (bridgemethods.LeafChild.$initialized) return;
-   (if (global.get $$initialized@bridgemethods.LeafChild)
+   (if (global.get $f_$initialized__bridgemethods_LeafChild)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (bridgemethods.LeafChild.$initialized = true);
-   (global.set $$initialized@bridgemethods.LeafChild (i32.const 1))
+   (global.set $f_$initialized__bridgemethods_LeafChild (i32.const 1))
    ;; bridgemethods.ReparametrerizedChild.$clinit();
    (call $$clinit__void@bridgemethods.ReparametrerizedChild )
   )
@@ -1772,7 +1772,7 @@
 ;;; CLASS  BridgeMethodDefault
 (type $bridgemethods.BridgeMethodDefault (struct
  (field $vtable (ref null $bridgemethods.BridgeMethodDefault.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $bridgemethods.BridgeMethodDefault.vtable (struct
  
@@ -1782,7 +1782,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $bridgemethods.BridgeMethodDefault.vtable (mut (ref null $bridgemethods.BridgeMethodDefault.vtable)) (ref.null $bridgemethods.BridgeMethodDefault.vtable))
-(global $$initialized@bridgemethods.BridgeMethodDefault (mut i32) (i32.const 0))
+(global $f_$initialized__bridgemethods_BridgeMethodDefault (mut i32) (i32.const 0))
 
 ;;; BridgeMethodDefault()
 (func $m_<init>__void_$pp_bridgemethods@bridgemethods.BridgeMethodDefault
@@ -1802,14 +1802,14 @@
  (block $return.label
   (block
    ;; if (bridgemethods.BridgeMethodDefault.$initialized) return;
-   (if (global.get $$initialized@bridgemethods.BridgeMethodDefault)
+   (if (global.get $f_$initialized__bridgemethods_BridgeMethodDefault)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (bridgemethods.BridgeMethodDefault.$initialized = true);
-   (global.set $$initialized@bridgemethods.BridgeMethodDefault (i32.const 1))
+   (global.set $f_$initialized__bridgemethods_BridgeMethodDefault (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -1817,27 +1817,27 @@
 )
 
 ;;; INTERFACE  I
-(global $$initialized@bridgemethods.BridgeMethodDefault.I (mut i32) (i32.const 0))
+(global $f_$initialized__bridgemethods_BridgeMethodDefault_I (mut i32) (i32.const 0))
 
 ;;; void I.$clinit()
 (func $$clinit__void@bridgemethods.BridgeMethodDefault.I
  (block $return.label
   (block
    ;; if (bridgemethods.BridgeMethodDefault.I.$initialized) return;
-   (if (global.get $$initialized@bridgemethods.BridgeMethodDefault.I)
+   (if (global.get $f_$initialized__bridgemethods_BridgeMethodDefault_I)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (bridgemethods.BridgeMethodDefault.I.$initialized = true);
-   (global.set $$initialized@bridgemethods.BridgeMethodDefault.I (i32.const 1))
+   (global.set $f_$initialized__bridgemethods_BridgeMethodDefault_I (i32.const 1))
   )
  )
 )
 
 ;;; INTERFACE  II
-(global $$initialized@bridgemethods.BridgeMethodDefault.II (mut i32) (i32.const 0))
+(global $f_$initialized__bridgemethods_BridgeMethodDefault_II (mut i32) (i32.const 0))
 
 ;;; void II.m(String s)
 (func $m_m__java_lang_String__void@bridgemethods.BridgeMethodDefault.II
@@ -1855,14 +1855,14 @@
  (block $return.label
   (block
    ;; if (bridgemethods.BridgeMethodDefault.II.$initialized) return;
-   (if (global.get $$initialized@bridgemethods.BridgeMethodDefault.II)
+   (if (global.get $f_$initialized__bridgemethods_BridgeMethodDefault_II)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (bridgemethods.BridgeMethodDefault.II.$initialized = true);
-   (global.set $$initialized@bridgemethods.BridgeMethodDefault.II (i32.const 1))
+   (global.set $f_$initialized__bridgemethods_BridgeMethodDefault_II (i32.const 1))
   )
  )
 )
@@ -1870,7 +1870,7 @@
 ;;; CLASS  A
 (type $bridgemethods.BridgeMethodDefault.A (struct
  (field $vtable (ref null $bridgemethods.BridgeMethodDefault.A.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $bridgemethods.BridgeMethodDefault.A.vtable (struct
  
@@ -1882,7 +1882,7 @@
  (field $m_m__java_lang_String__void (mut (ref $function.$java.lang.String__$void)))
 ))
 (global $bridgemethods.BridgeMethodDefault.A.vtable (mut (ref null $bridgemethods.BridgeMethodDefault.A.vtable)) (ref.null $bridgemethods.BridgeMethodDefault.A.vtable))
-(global $$initialized@bridgemethods.BridgeMethodDefault.A (mut i32) (i32.const 0))
+(global $f_$initialized__bridgemethods_BridgeMethodDefault_A (mut i32) (i32.const 0))
 
 ;;; A()
 (func $m_<init>__void_$pp_bridgemethods@bridgemethods.BridgeMethodDefault.A
@@ -1932,14 +1932,14 @@
  (block $return.label
   (block
    ;; if (bridgemethods.BridgeMethodDefault.A.$initialized) return;
-   (if (global.get $$initialized@bridgemethods.BridgeMethodDefault.A)
+   (if (global.get $f_$initialized__bridgemethods_BridgeMethodDefault_A)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (bridgemethods.BridgeMethodDefault.A.$initialized = true);
-   (global.set $$initialized@bridgemethods.BridgeMethodDefault.A (i32.const 1))
+   (global.set $f_$initialized__bridgemethods_BridgeMethodDefault_A (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
    ;; bridgemethods.BridgeMethodDefault.II.$clinit();
@@ -1949,7 +1949,7 @@
 )
 
 ;;; INTERFACE  JJ
-(global $$initialized@bridgemethods.BridgeMethodDefault.JJ (mut i32) (i32.const 0))
+(global $f_$initialized__bridgemethods_BridgeMethodDefault_JJ (mut i32) (i32.const 0))
 
 ;;; void JJ.m(Object o)
 (func $m_m__java_lang_Object__void@bridgemethods.BridgeMethodDefault.JJ
@@ -1967,14 +1967,14 @@
  (block $return.label
   (block
    ;; if (bridgemethods.BridgeMethodDefault.JJ.$initialized) return;
-   (if (global.get $$initialized@bridgemethods.BridgeMethodDefault.JJ)
+   (if (global.get $f_$initialized__bridgemethods_BridgeMethodDefault_JJ)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (bridgemethods.BridgeMethodDefault.JJ.$initialized = true);
-   (global.set $$initialized@bridgemethods.BridgeMethodDefault.JJ (i32.const 1))
+   (global.set $f_$initialized__bridgemethods_BridgeMethodDefault_JJ (i32.const 1))
   )
  )
 )
@@ -1982,7 +1982,7 @@
 ;;; CLASS  B
 (type $bridgemethods.BridgeMethodDefault.B (struct
  (field $vtable (ref null $bridgemethods.BridgeMethodDefault.B.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $bridgemethods.BridgeMethodDefault.B.vtable (struct
  
@@ -1993,7 +1993,7 @@
  (field $m_m__java_lang_Object__void (mut (ref $function.$java.lang.Object__$void)))
 ))
 (global $bridgemethods.BridgeMethodDefault.B.vtable (mut (ref null $bridgemethods.BridgeMethodDefault.B.vtable)) (ref.null $bridgemethods.BridgeMethodDefault.B.vtable))
-(global $$initialized@bridgemethods.BridgeMethodDefault.B (mut i32) (i32.const 0))
+(global $f_$initialized__bridgemethods_BridgeMethodDefault_B (mut i32) (i32.const 0))
 
 ;;; B()
 (func $m_<init>__void_$pp_bridgemethods@bridgemethods.BridgeMethodDefault.B
@@ -2028,14 +2028,14 @@
  (block $return.label
   (block
    ;; if (bridgemethods.BridgeMethodDefault.B.$initialized) return;
-   (if (global.get $$initialized@bridgemethods.BridgeMethodDefault.B)
+   (if (global.get $f_$initialized__bridgemethods_BridgeMethodDefault_B)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (bridgemethods.BridgeMethodDefault.B.$initialized = true);
-   (global.set $$initialized@bridgemethods.BridgeMethodDefault.B (i32.const 1))
+   (global.set $f_$initialized__bridgemethods_BridgeMethodDefault_B (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
    ;; bridgemethods.BridgeMethodDefault.JJ.$clinit();
@@ -2048,7 +2048,7 @@
 ;;; CLASS  BridgeMethodShadowedSignature
 (type $bridgemethods.BridgeMethodShadowedSignature (struct
  (field $vtable (ref null $bridgemethods.BridgeMethodShadowedSignature.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $bridgemethods.BridgeMethodShadowedSignature.vtable (struct
  
@@ -2058,7 +2058,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $bridgemethods.BridgeMethodShadowedSignature.vtable (mut (ref null $bridgemethods.BridgeMethodShadowedSignature.vtable)) (ref.null $bridgemethods.BridgeMethodShadowedSignature.vtable))
-(global $$initialized@bridgemethods.BridgeMethodShadowedSignature (mut i32) (i32.const 0))
+(global $f_$initialized__bridgemethods_BridgeMethodShadowedSignature (mut i32) (i32.const 0))
 
 ;;; BridgeMethodShadowedSignature()
 (func $m_<init>__void@bridgemethods.BridgeMethodShadowedSignature
@@ -2078,14 +2078,14 @@
  (block $return.label
   (block
    ;; if (bridgemethods.BridgeMethodShadowedSignature.$initialized) return;
-   (if (global.get $$initialized@bridgemethods.BridgeMethodShadowedSignature)
+   (if (global.get $f_$initialized__bridgemethods_BridgeMethodShadowedSignature)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (bridgemethods.BridgeMethodShadowedSignature.$initialized = true);
-   (global.set $$initialized@bridgemethods.BridgeMethodShadowedSignature (i32.const 1))
+   (global.set $f_$initialized__bridgemethods_BridgeMethodShadowedSignature (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -2093,21 +2093,21 @@
 )
 
 ;;; INTERFACE  I
-(global $$initialized@bridgemethods.BridgeMethodShadowedSignature.I (mut i32) (i32.const 0))
+(global $f_$initialized__bridgemethods_BridgeMethodShadowedSignature_I (mut i32) (i32.const 0))
 
 ;;; void I.$clinit()
 (func $$clinit__void@bridgemethods.BridgeMethodShadowedSignature.I
  (block $return.label
   (block
    ;; if (bridgemethods.BridgeMethodShadowedSignature.I.$initialized) return;
-   (if (global.get $$initialized@bridgemethods.BridgeMethodShadowedSignature.I)
+   (if (global.get $f_$initialized__bridgemethods_BridgeMethodShadowedSignature_I)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (bridgemethods.BridgeMethodShadowedSignature.I.$initialized = true);
-   (global.set $$initialized@bridgemethods.BridgeMethodShadowedSignature.I (i32.const 1))
+   (global.set $f_$initialized__bridgemethods_BridgeMethodShadowedSignature_I (i32.const 1))
   )
  )
 )
@@ -2115,7 +2115,7 @@
 ;;; CLASS  B
 (type $bridgemethods.BridgeMethodShadowedSignature.B (struct
  (field $vtable (ref null $bridgemethods.BridgeMethodShadowedSignature.B.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $bridgemethods.BridgeMethodShadowedSignature.B.vtable (struct
  
@@ -2126,7 +2126,7 @@
  (field $m_get__java_lang_Object__java_lang_String (mut (ref $function.$java.lang.Object__$java.lang.String)))
 ))
 (global $bridgemethods.BridgeMethodShadowedSignature.B.vtable (mut (ref null $bridgemethods.BridgeMethodShadowedSignature.B.vtable)) (ref.null $bridgemethods.BridgeMethodShadowedSignature.B.vtable))
-(global $$initialized@bridgemethods.BridgeMethodShadowedSignature.B (mut i32) (i32.const 0))
+(global $f_$initialized__bridgemethods_BridgeMethodShadowedSignature_B (mut i32) (i32.const 0))
 
 ;;; B()
 (func $m_<init>__void_$pp_bridgemethods@bridgemethods.BridgeMethodShadowedSignature.B
@@ -2178,14 +2178,14 @@
  (block $return.label
   (block
    ;; if (bridgemethods.BridgeMethodShadowedSignature.B.$initialized) return;
-   (if (global.get $$initialized@bridgemethods.BridgeMethodShadowedSignature.B)
+   (if (global.get $f_$initialized__bridgemethods_BridgeMethodShadowedSignature_B)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (bridgemethods.BridgeMethodShadowedSignature.B.$initialized = true);
-   (global.set $$initialized@bridgemethods.BridgeMethodShadowedSignature.B (i32.const 1))
+   (global.set $f_$initialized__bridgemethods_BridgeMethodShadowedSignature_B (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -2195,7 +2195,7 @@
 ;;; CLASS  C
 (type $bridgemethods.BridgeMethodShadowedSignature.C (struct
  (field $vtable (ref null $bridgemethods.BridgeMethodShadowedSignature.C.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $bridgemethods.BridgeMethodShadowedSignature.C.vtable (struct
  
@@ -2207,7 +2207,7 @@
  (field $m_get__java_util_function_Consumer__java_lang_String (mut (ref $function.$java.lang.Object__$java.lang.String)))
 ))
 (global $bridgemethods.BridgeMethodShadowedSignature.C.vtable (mut (ref null $bridgemethods.BridgeMethodShadowedSignature.C.vtable)) (ref.null $bridgemethods.BridgeMethodShadowedSignature.C.vtable))
-(global $$initialized@bridgemethods.BridgeMethodShadowedSignature.C (mut i32) (i32.const 0))
+(global $f_$initialized__bridgemethods_BridgeMethodShadowedSignature_C (mut i32) (i32.const 0))
 
 ;;; C()
 (func $m_<init>__void_$pp_bridgemethods@bridgemethods.BridgeMethodShadowedSignature.C
@@ -2265,14 +2265,14 @@
  (block $return.label
   (block
    ;; if (bridgemethods.BridgeMethodShadowedSignature.C.$initialized) return;
-   (if (global.get $$initialized@bridgemethods.BridgeMethodShadowedSignature.C)
+   (if (global.get $f_$initialized__bridgemethods_BridgeMethodShadowedSignature_C)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (bridgemethods.BridgeMethodShadowedSignature.C.$initialized = true);
-   (global.set $$initialized@bridgemethods.BridgeMethodShadowedSignature.C (i32.const 1))
+   (global.set $f_$initialized__bridgemethods_BridgeMethodShadowedSignature_C (i32.const 1))
    ;; bridgemethods.BridgeMethodShadowedSignature.B.$clinit();
    (call $$clinit__void@bridgemethods.BridgeMethodShadowedSignature.B )
   )
@@ -2281,21 +2281,21 @@
 ;;; Code for bridgemethods.EnumMap
 
 ;;; INTERFACE  Map
-(global $$initialized@bridgemethods.Map (mut i32) (i32.const 0))
+(global $f_$initialized__bridgemethods_Map (mut i32) (i32.const 0))
 
 ;;; void Map.$clinit()
 (func $$clinit__void@bridgemethods.Map
  (block $return.label
   (block
    ;; if (bridgemethods.Map.$initialized) return;
-   (if (global.get $$initialized@bridgemethods.Map)
+   (if (global.get $f_$initialized__bridgemethods_Map)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (bridgemethods.Map.$initialized = true);
-   (global.set $$initialized@bridgemethods.Map (i32.const 1))
+   (global.set $f_$initialized__bridgemethods_Map (i32.const 1))
   )
  )
 )
@@ -2303,7 +2303,7 @@
 ;;; CLASS  AbstractMap
 (type $bridgemethods.AbstractMap (struct
  (field $vtable (ref null $bridgemethods.AbstractMap.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $bridgemethods.AbstractMap.vtable (struct
  
@@ -2314,7 +2314,7 @@
  (field $m_put__java_lang_Object__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)))
 ))
 (global $bridgemethods.AbstractMap.vtable (mut (ref null $bridgemethods.AbstractMap.vtable)) (ref.null $bridgemethods.AbstractMap.vtable))
-(global $$initialized@bridgemethods.AbstractMap (mut i32) (i32.const 0))
+(global $f_$initialized__bridgemethods_AbstractMap (mut i32) (i32.const 0))
 
 ;;; AbstractMap()
 (func $m_<init>__void_$pp_bridgemethods@bridgemethods.AbstractMap
@@ -2354,14 +2354,14 @@
  (block $return.label
   (block
    ;; if (bridgemethods.AbstractMap.$initialized) return;
-   (if (global.get $$initialized@bridgemethods.AbstractMap)
+   (if (global.get $f_$initialized__bridgemethods_AbstractMap)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (bridgemethods.AbstractMap.$initialized = true);
-   (global.set $$initialized@bridgemethods.AbstractMap (i32.const 1))
+   (global.set $f_$initialized__bridgemethods_AbstractMap (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -2371,7 +2371,7 @@
 ;;; CLASS  EnumMap
 (type $bridgemethods.EnumMap (struct
  (field $vtable (ref null $bridgemethods.EnumMap.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $bridgemethods.EnumMap.vtable (struct
  
@@ -2383,7 +2383,7 @@
  (field $m_put__java_lang_Enum__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Enum__$java.lang.Object__$java.lang.Object)))
 ))
 (global $bridgemethods.EnumMap.vtable (mut (ref null $bridgemethods.EnumMap.vtable)) (ref.null $bridgemethods.EnumMap.vtable))
-(global $$initialized@bridgemethods.EnumMap (mut i32) (i32.const 0))
+(global $f_$initialized__bridgemethods_EnumMap (mut i32) (i32.const 0))
 
 ;;; EnumMap()
 (func $m_<init>__void@bridgemethods.EnumMap
@@ -2443,14 +2443,14 @@
  (block $return.label
   (block
    ;; if (bridgemethods.EnumMap.$initialized) return;
-   (if (global.get $$initialized@bridgemethods.EnumMap)
+   (if (global.get $f_$initialized__bridgemethods_EnumMap)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (bridgemethods.EnumMap.$initialized = true);
-   (global.set $$initialized@bridgemethods.EnumMap (i32.const 1))
+   (global.set $f_$initialized__bridgemethods_EnumMap (i32.const 1))
    ;; bridgemethods.AbstractMap.$clinit();
    (call $$clinit__void@bridgemethods.AbstractMap )
   )

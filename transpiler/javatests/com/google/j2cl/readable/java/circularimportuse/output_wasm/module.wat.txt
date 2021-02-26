@@ -3,7 +3,7 @@
 ;;; CLASS  Left
 (type $circularimportuse.Left (struct
  (field $vtable (ref null $circularimportuse.Left.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $circularimportuse.Left.vtable (struct
  
@@ -14,7 +14,7 @@
  (field $m_createRight__circularimportuse_Right_$pp_circularimportuse (mut (ref $function.__$circularimportuse.Right)))
 ))
 (global $circularimportuse.Left.vtable (mut (ref null $circularimportuse.Left.vtable)) (ref.null $circularimportuse.Left.vtable))
-(global $$initialized@circularimportuse.Left (mut i32) (i32.const 0))
+(global $f_$initialized__circularimportuse_Left (mut i32) (i32.const 0))
 
 ;;; Left()
 (func $m_<init>__void@circularimportuse.Left
@@ -52,14 +52,14 @@
  (block $return.label
   (block
    ;; if (circularimportuse.Left.$initialized) return;
-   (if (global.get $$initialized@circularimportuse.Left)
+   (if (global.get $f_$initialized__circularimportuse_Left)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (circularimportuse.Left.$initialized = true);
-   (global.set $$initialized@circularimportuse.Left (i32.const 1))
+   (global.set $f_$initialized__circularimportuse_Left (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -70,7 +70,7 @@
 ;;; CLASS  Main
 (type $circularimportuse.Main (struct
  (field $vtable (ref null $circularimportuse.Main.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $circularimportuse.Main.vtable (struct
  
@@ -80,7 +80,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $circularimportuse.Main.vtable (mut (ref null $circularimportuse.Main.vtable)) (ref.null $circularimportuse.Main.vtable))
-(global $$initialized@circularimportuse.Main (mut i32) (i32.const 0))
+(global $f_$initialized__circularimportuse_Main (mut i32) (i32.const 0))
 
 ;;; Main()
 (func $m_<init>__void@circularimportuse.Main
@@ -119,14 +119,14 @@
  (block $return.label
   (block
    ;; if (circularimportuse.Main.$initialized) return;
-   (if (global.get $$initialized@circularimportuse.Main)
+   (if (global.get $f_$initialized__circularimportuse_Main)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (circularimportuse.Main.$initialized = true);
-   (global.set $$initialized@circularimportuse.Main (i32.const 1))
+   (global.set $f_$initialized__circularimportuse_Main (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -137,7 +137,7 @@
 ;;; CLASS  Right
 (type $circularimportuse.Right (struct
  (field $vtable (ref null $circularimportuse.Right.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $circularimportuse.Right.vtable (struct
  
@@ -148,7 +148,7 @@
  (field $m_createLeft__circularimportuse_Left_$pp_circularimportuse (mut (ref $function.__$circularimportuse.Left)))
 ))
 (global $circularimportuse.Right.vtable (mut (ref null $circularimportuse.Right.vtable)) (ref.null $circularimportuse.Right.vtable))
-(global $$initialized@circularimportuse.Right (mut i32) (i32.const 0))
+(global $f_$initialized__circularimportuse_Right (mut i32) (i32.const 0))
 
 ;;; Right()
 (func $m_<init>__void@circularimportuse.Right
@@ -186,14 +186,14 @@
  (block $return.label
   (block
    ;; if (circularimportuse.Right.$initialized) return;
-   (if (global.get $$initialized@circularimportuse.Right)
+   (if (global.get $f_$initialized__circularimportuse_Right)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (circularimportuse.Right.$initialized = true);
-   (global.set $$initialized@circularimportuse.Right (i32.const 1))
+   (global.set $f_$initialized__circularimportuse_Right (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

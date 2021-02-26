@@ -1,41 +1,41 @@
 ;;; Code for overwrittentypevariables.HashFunctions
 
 ;;; INTERFACE  MyFunction
-(global $$initialized@overwrittentypevariables.MyFunction (mut i32) (i32.const 0))
+(global $f_$initialized__overwrittentypevariables_MyFunction (mut i32) (i32.const 0))
 
 ;;; void MyFunction.$clinit()
 (func $$clinit__void@overwrittentypevariables.MyFunction
  (block $return.label
   (block
    ;; if (overwrittentypevariables.MyFunction.$initialized) return;
-   (if (global.get $$initialized@overwrittentypevariables.MyFunction)
+   (if (global.get $f_$initialized__overwrittentypevariables_MyFunction)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (overwrittentypevariables.MyFunction.$initialized = true);
-   (global.set $$initialized@overwrittentypevariables.MyFunction (i32.const 1))
+   (global.set $f_$initialized__overwrittentypevariables_MyFunction (i32.const 1))
   )
  )
 )
 
 ;;; INTERFACE  HashFunction
-(global $$initialized@overwrittentypevariables.HashFunction (mut i32) (i32.const 0))
+(global $f_$initialized__overwrittentypevariables_HashFunction (mut i32) (i32.const 0))
 
 ;;; void HashFunction.$clinit()
 (func $$clinit__void@overwrittentypevariables.HashFunction
  (block $return.label
   (block
    ;; if (overwrittentypevariables.HashFunction.$initialized) return;
-   (if (global.get $$initialized@overwrittentypevariables.HashFunction)
+   (if (global.get $f_$initialized__overwrittentypevariables_HashFunction)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (overwrittentypevariables.HashFunction.$initialized = true);
-   (global.set $$initialized@overwrittentypevariables.HashFunction (i32.const 1))
+   (global.set $f_$initialized__overwrittentypevariables_HashFunction (i32.const 1))
   )
  )
 )
@@ -43,7 +43,7 @@
 ;;; CLASS  HashFunctions
 (type $overwrittentypevariables.HashFunctions (struct
  (field $vtable (ref null $overwrittentypevariables.HashFunctions.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $overwrittentypevariables.HashFunctions.vtable (struct
  
@@ -53,7 +53,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $overwrittentypevariables.HashFunctions.vtable (mut (ref null $overwrittentypevariables.HashFunctions.vtable)) (ref.null $overwrittentypevariables.HashFunctions.vtable))
-(global $$initialized@overwrittentypevariables.HashFunctions (mut i32) (i32.const 0))
+(global $f_$initialized__overwrittentypevariables_HashFunctions (mut i32) (i32.const 0))
 
 ;;; HashFunctions()
 (func $m_<init>__void@overwrittentypevariables.HashFunctions
@@ -105,14 +105,14 @@
  (block $return.label
   (block
    ;; if (overwrittentypevariables.HashFunctions.$initialized) return;
-   (if (global.get $$initialized@overwrittentypevariables.HashFunctions)
+   (if (global.get $f_$initialized__overwrittentypevariables_HashFunctions)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (overwrittentypevariables.HashFunctions.$initialized = true);
-   (global.set $$initialized@overwrittentypevariables.HashFunctions (i32.const 1))
+   (global.set $f_$initialized__overwrittentypevariables_HashFunctions (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -122,7 +122,7 @@
 ;;; CLASS  <anonymous> implements HashFunction<T>
 (type $overwrittentypevariables.HashFunctions.1 (struct
  (field $vtable (ref null $overwrittentypevariables.HashFunctions.1.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $overwrittentypevariables.HashFunctions.1.vtable (struct
  
@@ -134,7 +134,7 @@
  (field $m_apply__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object)))
 ))
 (global $overwrittentypevariables.HashFunctions.1.vtable (mut (ref null $overwrittentypevariables.HashFunctions.1.vtable)) (ref.null $overwrittentypevariables.HashFunctions.1.vtable))
-(global $$initialized@overwrittentypevariables.HashFunctions.1 (mut i32) (i32.const 0))
+(global $f_$initialized__overwrittentypevariables_HashFunctions_1 (mut i32) (i32.const 0))
 
 ;;; <anonymous> implements HashFunction<T>()
 (func $m_<init>__void_$pp_overwrittentypevariables@overwrittentypevariables.HashFunctions.1
@@ -197,14 +197,14 @@
  (block $return.label
   (block
    ;; if (overwrittentypevariables.HashFunctions.1.$initialized) return;
-   (if (global.get $$initialized@overwrittentypevariables.HashFunctions.1)
+   (if (global.get $f_$initialized__overwrittentypevariables_HashFunctions_1)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (overwrittentypevariables.HashFunctions.1.$initialized = true);
-   (global.set $$initialized@overwrittentypevariables.HashFunctions.1 (i32.const 1))
+   (global.set $f_$initialized__overwrittentypevariables_HashFunctions_1 (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -214,7 +214,7 @@
 ;;; CLASS  <anonymous> implements HashFunction<T>
 (type $overwrittentypevariables.HashFunctions.2 (struct
  (field $vtable (ref null $overwrittentypevariables.HashFunctions.2.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $overwrittentypevariables.HashFunctions.2.vtable (struct
  
@@ -226,7 +226,7 @@
  (field $m_apply__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object)))
 ))
 (global $overwrittentypevariables.HashFunctions.2.vtable (mut (ref null $overwrittentypevariables.HashFunctions.2.vtable)) (ref.null $overwrittentypevariables.HashFunctions.2.vtable))
-(global $$initialized@overwrittentypevariables.HashFunctions.2 (mut i32) (i32.const 0))
+(global $f_$initialized__overwrittentypevariables_HashFunctions_2 (mut i32) (i32.const 0))
 
 ;;; <anonymous> implements HashFunction<T>()
 (func $m_<init>__void_$pp_overwrittentypevariables@overwrittentypevariables.HashFunctions.2
@@ -285,14 +285,14 @@
  (block $return.label
   (block
    ;; if (overwrittentypevariables.HashFunctions.2.$initialized) return;
-   (if (global.get $$initialized@overwrittentypevariables.HashFunctions.2)
+   (if (global.get $f_$initialized__overwrittentypevariables_HashFunctions_2)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (overwrittentypevariables.HashFunctions.2.$initialized = true);
-   (global.set $$initialized@overwrittentypevariables.HashFunctions.2 (i32.const 1))
+   (global.set $f_$initialized__overwrittentypevariables_HashFunctions_2 (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

@@ -3,7 +3,7 @@
 ;;; CLASS  DoWhileStatement
 (type $dowhilestatement.DoWhileStatement (struct
  (field $vtable (ref null $dowhilestatement.DoWhileStatement.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $dowhilestatement.DoWhileStatement.vtable (struct
  
@@ -14,7 +14,7 @@
  (field $m_test__void (mut (ref $function.__$void)))
 ))
 (global $dowhilestatement.DoWhileStatement.vtable (mut (ref null $dowhilestatement.DoWhileStatement.vtable)) (ref.null $dowhilestatement.DoWhileStatement.vtable))
-(global $$initialized@dowhilestatement.DoWhileStatement (mut i32) (i32.const 0))
+(global $f_$initialized__dowhilestatement_DoWhileStatement (mut i32) (i32.const 0))
 
 ;;; DoWhileStatement()
 (func $m_<init>__void@dowhilestatement.DoWhileStatement
@@ -64,14 +64,14 @@
  (block $return.label
   (block
    ;; if (dowhilestatement.DoWhileStatement.$initialized) return;
-   (if (global.get $$initialized@dowhilestatement.DoWhileStatement)
+   (if (global.get $f_$initialized__dowhilestatement_DoWhileStatement)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (dowhilestatement.DoWhileStatement.$initialized = true);
-   (global.set $$initialized@dowhilestatement.DoWhileStatement (i32.const 1))
+   (global.set $f_$initialized__dowhilestatement_DoWhileStatement (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

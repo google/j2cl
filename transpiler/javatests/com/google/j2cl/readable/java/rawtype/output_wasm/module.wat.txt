@@ -3,8 +3,8 @@
 ;;; CLASS  RawType
 (type $rawtype.RawType (struct
  (field $vtable (ref null $rawtype.RawType.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $c@rawtype.RawType (mut (ref null $java.lang.Object)))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $f_c__rawtype_RawType (mut (ref null $java.lang.Object)))
 ))
 (type $rawtype.RawType.vtable (struct
  
@@ -14,7 +14,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $rawtype.RawType.vtable (mut (ref null $rawtype.RawType.vtable)) (ref.null $rawtype.RawType.vtable))
-(global $$initialized@rawtype.RawType (mut i32) (i32.const 0))
+(global $f_$initialized__rawtype_RawType (mut i32) (i32.const 0))
 
 ;;; RawType()
 (func $m_<init>__void_$pp_rawtype@rawtype.RawType
@@ -34,14 +34,14 @@
  (block $return.label
   (block
    ;; if (rawtype.RawType.$initialized) return;
-   (if (global.get $$initialized@rawtype.RawType)
+   (if (global.get $f_$initialized__rawtype_RawType)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (rawtype.RawType.$initialized = true);
-   (global.set $$initialized@rawtype.RawType (i32.const 1))
+   (global.set $f_$initialized__rawtype_RawType (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -49,7 +49,7 @@
 )
 
 ;;; INTERFACE  I
-(global $$initialized@rawtype.RawType.I (mut i32) (i32.const 0))
+(global $f_$initialized__rawtype_RawType_I (mut i32) (i32.const 0))
 
 ;;; void I.f(T t)
 (func $m_f__rawtype_RawType__void@rawtype.RawType.I
@@ -67,14 +67,14 @@
  (block $return.label
   (block
    ;; if (rawtype.RawType.I.$initialized) return;
-   (if (global.get $$initialized@rawtype.RawType.I)
+   (if (global.get $f_$initialized__rawtype_RawType_I)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (rawtype.RawType.I.$initialized = true);
-   (global.set $$initialized@rawtype.RawType.I (i32.const 1))
+   (global.set $f_$initialized__rawtype_RawType_I (i32.const 1))
   )
  )
 )
@@ -82,7 +82,7 @@
 ;;; CLASS  RawSubclass
 (type $rawtype.RawType.RawSubclass (struct
  (field $vtable (ref null $rawtype.RawType.RawSubclass.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $rawtype.RawType.RawSubclass.vtable (struct
  
@@ -93,7 +93,7 @@
  (field $m_f__rawtype_RawType__void (mut (ref $function.$rawtype.RawType__$void)))
 ))
 (global $rawtype.RawType.RawSubclass.vtable (mut (ref null $rawtype.RawType.RawSubclass.vtable)) (ref.null $rawtype.RawType.RawSubclass.vtable))
-(global $$initialized@rawtype.RawType.RawSubclass (mut i32) (i32.const 0))
+(global $f_$initialized__rawtype_RawType_RawSubclass (mut i32) (i32.const 0))
 
 ;;; RawSubclass()
 (func $m_<init>__void_$pp_rawtype@rawtype.RawType.RawSubclass
@@ -126,14 +126,14 @@
  (block $return.label
   (block
    ;; if (rawtype.RawType.RawSubclass.$initialized) return;
-   (if (global.get $$initialized@rawtype.RawType.RawSubclass)
+   (if (global.get $f_$initialized__rawtype_RawType_RawSubclass)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (rawtype.RawType.RawSubclass.$initialized = true);
-   (global.set $$initialized@rawtype.RawType.RawSubclass (i32.const 1))
+   (global.set $f_$initialized__rawtype_RawType_RawSubclass (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
    ;; rawtype.RawType.I.$clinit();

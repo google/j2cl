@@ -3,7 +3,7 @@
 ;;; CLASS  MultipleAbstractParents
 (type $multipleabstractparents.MultipleAbstractParents (struct
  (field $vtable (ref null $multipleabstractparents.MultipleAbstractParents.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $multipleabstractparents.MultipleAbstractParents.vtable (struct
  
@@ -13,7 +13,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $multipleabstractparents.MultipleAbstractParents.vtable (mut (ref null $multipleabstractparents.MultipleAbstractParents.vtable)) (ref.null $multipleabstractparents.MultipleAbstractParents.vtable))
-(global $$initialized@multipleabstractparents.MultipleAbstractParents (mut i32) (i32.const 0))
+(global $f_$initialized__multipleabstractparents_MultipleAbstractParents (mut i32) (i32.const 0))
 
 ;;; MultipleAbstractParents()
 (func $m_<init>__void@multipleabstractparents.MultipleAbstractParents
@@ -59,14 +59,14 @@
  (block $return.label
   (block
    ;; if (multipleabstractparents.MultipleAbstractParents.$initialized) return;
-   (if (global.get $$initialized@multipleabstractparents.MultipleAbstractParents)
+   (if (global.get $f_$initialized__multipleabstractparents_MultipleAbstractParents)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (multipleabstractparents.MultipleAbstractParents.$initialized = true);
-   (global.set $$initialized@multipleabstractparents.MultipleAbstractParents (i32.const 1))
+   (global.set $f_$initialized__multipleabstractparents_MultipleAbstractParents (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -74,41 +74,41 @@
 )
 
 ;;; INTERFACE  List
-(global $$initialized@multipleabstractparents.MultipleAbstractParents.List (mut i32) (i32.const 0))
+(global $f_$initialized__multipleabstractparents_MultipleAbstractParents_List (mut i32) (i32.const 0))
 
 ;;; void List.$clinit()
 (func $$clinit__void@multipleabstractparents.MultipleAbstractParents.List
  (block $return.label
   (block
    ;; if (multipleabstractparents.MultipleAbstractParents.List.$initialized) return;
-   (if (global.get $$initialized@multipleabstractparents.MultipleAbstractParents.List)
+   (if (global.get $f_$initialized__multipleabstractparents_MultipleAbstractParents_List)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (multipleabstractparents.MultipleAbstractParents.List.$initialized = true);
-   (global.set $$initialized@multipleabstractparents.MultipleAbstractParents.List (i32.const 1))
+   (global.set $f_$initialized__multipleabstractparents_MultipleAbstractParents_List (i32.const 1))
   )
  )
 )
 
 ;;; INTERFACE  Collection
-(global $$initialized@multipleabstractparents.MultipleAbstractParents.Collection (mut i32) (i32.const 0))
+(global $f_$initialized__multipleabstractparents_MultipleAbstractParents_Collection (mut i32) (i32.const 0))
 
 ;;; void Collection.$clinit()
 (func $$clinit__void@multipleabstractparents.MultipleAbstractParents.Collection
  (block $return.label
   (block
    ;; if (multipleabstractparents.MultipleAbstractParents.Collection.$initialized) return;
-   (if (global.get $$initialized@multipleabstractparents.MultipleAbstractParents.Collection)
+   (if (global.get $f_$initialized__multipleabstractparents_MultipleAbstractParents_Collection)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (multipleabstractparents.MultipleAbstractParents.Collection.$initialized = true);
-   (global.set $$initialized@multipleabstractparents.MultipleAbstractParents.Collection (i32.const 1))
+   (global.set $f_$initialized__multipleabstractparents_MultipleAbstractParents_Collection (i32.const 1))
   )
  )
 )
@@ -116,7 +116,7 @@
 ;;; CLASS  AbstractListCollection
 (type $multipleabstractparents.MultipleAbstractParents.AbstractListCollection (struct
  (field $vtable (ref null $multipleabstractparents.MultipleAbstractParents.AbstractListCollection.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $multipleabstractparents.MultipleAbstractParents.AbstractListCollection.vtable (struct
  
@@ -126,7 +126,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $multipleabstractparents.MultipleAbstractParents.AbstractListCollection.vtable (mut (ref null $multipleabstractparents.MultipleAbstractParents.AbstractListCollection.vtable)) (ref.null $multipleabstractparents.MultipleAbstractParents.AbstractListCollection.vtable))
-(global $$initialized@multipleabstractparents.MultipleAbstractParents.AbstractListCollection (mut i32) (i32.const 0))
+(global $f_$initialized__multipleabstractparents_MultipleAbstractParents_AbstractListCollection (mut i32) (i32.const 0))
 
 ;;; AbstractListCollection()
 (func $m_<init>__void@multipleabstractparents.MultipleAbstractParents.AbstractListCollection
@@ -146,14 +146,14 @@
  (block $return.label
   (block
    ;; if (multipleabstractparents.MultipleAbstractParents.AbstractListCollection.$initialized) return;
-   (if (global.get $$initialized@multipleabstractparents.MultipleAbstractParents.AbstractListCollection)
+   (if (global.get $f_$initialized__multipleabstractparents_MultipleAbstractParents_AbstractListCollection)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (multipleabstractparents.MultipleAbstractParents.AbstractListCollection.$initialized = true);
-   (global.set $$initialized@multipleabstractparents.MultipleAbstractParents.AbstractListCollection (i32.const 1))
+   (global.set $f_$initialized__multipleabstractparents_MultipleAbstractParents_AbstractListCollection (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -163,7 +163,7 @@
 ;;; CLASS  AbstractCollection
 (type $multipleabstractparents.MultipleAbstractParents.AbstractCollection (struct
  (field $vtable (ref null $multipleabstractparents.MultipleAbstractParents.AbstractCollection.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $multipleabstractparents.MultipleAbstractParents.AbstractCollection.vtable (struct
  
@@ -174,7 +174,7 @@
  (field $m_getFoo__java_lang_Object__java_lang_String (mut (ref $function.$java.lang.Object__$java.lang.String)))
 ))
 (global $multipleabstractparents.MultipleAbstractParents.AbstractCollection.vtable (mut (ref null $multipleabstractparents.MultipleAbstractParents.AbstractCollection.vtable)) (ref.null $multipleabstractparents.MultipleAbstractParents.AbstractCollection.vtable))
-(global $$initialized@multipleabstractparents.MultipleAbstractParents.AbstractCollection (mut i32) (i32.const 0))
+(global $f_$initialized__multipleabstractparents_MultipleAbstractParents_AbstractCollection (mut i32) (i32.const 0))
 
 ;;; AbstractCollection()
 (func $m_<init>__void@multipleabstractparents.MultipleAbstractParents.AbstractCollection
@@ -236,14 +236,14 @@
  (block $return.label
   (block
    ;; if (multipleabstractparents.MultipleAbstractParents.AbstractCollection.$initialized) return;
-   (if (global.get $$initialized@multipleabstractparents.MultipleAbstractParents.AbstractCollection)
+   (if (global.get $f_$initialized__multipleabstractparents_MultipleAbstractParents_AbstractCollection)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (multipleabstractparents.MultipleAbstractParents.AbstractCollection.$initialized = true);
-   (global.set $$initialized@multipleabstractparents.MultipleAbstractParents.AbstractCollection (i32.const 1))
+   (global.set $f_$initialized__multipleabstractparents_MultipleAbstractParents_AbstractCollection (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -253,7 +253,7 @@
 ;;; CLASS  AbstractList
 (type $multipleabstractparents.MultipleAbstractParents.AbstractList (struct
  (field $vtable (ref null $multipleabstractparents.MultipleAbstractParents.AbstractList.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $multipleabstractparents.MultipleAbstractParents.AbstractList.vtable (struct
  
@@ -264,7 +264,7 @@
  (field $m_getFoo__java_lang_Object__java_lang_String (mut (ref $function.$java.lang.Object__$java.lang.String)))
 ))
 (global $multipleabstractparents.MultipleAbstractParents.AbstractList.vtable (mut (ref null $multipleabstractparents.MultipleAbstractParents.AbstractList.vtable)) (ref.null $multipleabstractparents.MultipleAbstractParents.AbstractList.vtable))
-(global $$initialized@multipleabstractparents.MultipleAbstractParents.AbstractList (mut i32) (i32.const 0))
+(global $f_$initialized__multipleabstractparents_MultipleAbstractParents_AbstractList (mut i32) (i32.const 0))
 
 ;;; AbstractList()
 (func $m_<init>__void@multipleabstractparents.MultipleAbstractParents.AbstractList
@@ -284,14 +284,14 @@
  (block $return.label
   (block
    ;; if (multipleabstractparents.MultipleAbstractParents.AbstractList.$initialized) return;
-   (if (global.get $$initialized@multipleabstractparents.MultipleAbstractParents.AbstractList)
+   (if (global.get $f_$initialized__multipleabstractparents_MultipleAbstractParents_AbstractList)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (multipleabstractparents.MultipleAbstractParents.AbstractList.$initialized = true);
-   (global.set $$initialized@multipleabstractparents.MultipleAbstractParents.AbstractList (i32.const 1))
+   (global.set $f_$initialized__multipleabstractparents_MultipleAbstractParents_AbstractList (i32.const 1))
    ;; multipleabstractparents.MultipleAbstractParents.AbstractCollection.$clinit();
    (call $$clinit__void@multipleabstractparents.MultipleAbstractParents.AbstractCollection )
   )
@@ -301,7 +301,7 @@
 ;;; CLASS  AbstractList2
 (type $multipleabstractparents.MultipleAbstractParents.AbstractList2 (struct
  (field $vtable (ref null $multipleabstractparents.MultipleAbstractParents.AbstractList2.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $multipleabstractparents.MultipleAbstractParents.AbstractList2.vtable (struct
  
@@ -311,7 +311,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $multipleabstractparents.MultipleAbstractParents.AbstractList2.vtable (mut (ref null $multipleabstractparents.MultipleAbstractParents.AbstractList2.vtable)) (ref.null $multipleabstractparents.MultipleAbstractParents.AbstractList2.vtable))
-(global $$initialized@multipleabstractparents.MultipleAbstractParents.AbstractList2 (mut i32) (i32.const 0))
+(global $f_$initialized__multipleabstractparents_MultipleAbstractParents_AbstractList2 (mut i32) (i32.const 0))
 
 ;;; AbstractList2()
 (func $m_<init>__void@multipleabstractparents.MultipleAbstractParents.AbstractList2
@@ -331,14 +331,14 @@
  (block $return.label
   (block
    ;; if (multipleabstractparents.MultipleAbstractParents.AbstractList2.$initialized) return;
-   (if (global.get $$initialized@multipleabstractparents.MultipleAbstractParents.AbstractList2)
+   (if (global.get $f_$initialized__multipleabstractparents_MultipleAbstractParents_AbstractList2)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (multipleabstractparents.MultipleAbstractParents.AbstractList2.$initialized = true);
-   (global.set $$initialized@multipleabstractparents.MultipleAbstractParents.AbstractList2 (i32.const 1))
+   (global.set $f_$initialized__multipleabstractparents_MultipleAbstractParents_AbstractList2 (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -348,7 +348,7 @@
 ;;; CLASS  ArrayList
 (type $multipleabstractparents.MultipleAbstractParents.ArrayList (struct
  (field $vtable (ref null $multipleabstractparents.MultipleAbstractParents.ArrayList.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $multipleabstractparents.MultipleAbstractParents.ArrayList.vtable (struct
  
@@ -359,7 +359,7 @@
  (field $m_getFoo__java_lang_Object__java_lang_String (mut (ref $function.$java.lang.Object__$java.lang.String)))
 ))
 (global $multipleabstractparents.MultipleAbstractParents.ArrayList.vtable (mut (ref null $multipleabstractparents.MultipleAbstractParents.ArrayList.vtable)) (ref.null $multipleabstractparents.MultipleAbstractParents.ArrayList.vtable))
-(global $$initialized@multipleabstractparents.MultipleAbstractParents.ArrayList (mut i32) (i32.const 0))
+(global $f_$initialized__multipleabstractparents_MultipleAbstractParents_ArrayList (mut i32) (i32.const 0))
 
 ;;; ArrayList()
 (func $m_<init>__void@multipleabstractparents.MultipleAbstractParents.ArrayList
@@ -379,14 +379,14 @@
  (block $return.label
   (block
    ;; if (multipleabstractparents.MultipleAbstractParents.ArrayList.$initialized) return;
-   (if (global.get $$initialized@multipleabstractparents.MultipleAbstractParents.ArrayList)
+   (if (global.get $f_$initialized__multipleabstractparents_MultipleAbstractParents_ArrayList)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (multipleabstractparents.MultipleAbstractParents.ArrayList.$initialized = true);
-   (global.set $$initialized@multipleabstractparents.MultipleAbstractParents.ArrayList (i32.const 1))
+   (global.set $f_$initialized__multipleabstractparents_MultipleAbstractParents_ArrayList (i32.const 1))
    ;; multipleabstractparents.MultipleAbstractParents.AbstractList.$clinit();
    (call $$clinit__void@multipleabstractparents.MultipleAbstractParents.AbstractList )
   )
@@ -394,21 +394,21 @@
 )
 
 ;;; INTERFACE  IStringList
-(global $$initialized@multipleabstractparents.MultipleAbstractParents.IStringList (mut i32) (i32.const 0))
+(global $f_$initialized__multipleabstractparents_MultipleAbstractParents_IStringList (mut i32) (i32.const 0))
 
 ;;; void IStringList.$clinit()
 (func $$clinit__void@multipleabstractparents.MultipleAbstractParents.IStringList
  (block $return.label
   (block
    ;; if (multipleabstractparents.MultipleAbstractParents.IStringList.$initialized) return;
-   (if (global.get $$initialized@multipleabstractparents.MultipleAbstractParents.IStringList)
+   (if (global.get $f_$initialized__multipleabstractparents_MultipleAbstractParents_IStringList)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (multipleabstractparents.MultipleAbstractParents.IStringList.$initialized = true);
-   (global.set $$initialized@multipleabstractparents.MultipleAbstractParents.IStringList (i32.const 1))
+   (global.set $f_$initialized__multipleabstractparents_MultipleAbstractParents_IStringList (i32.const 1))
   )
  )
 )
@@ -416,7 +416,7 @@
 ;;; CLASS  AbstractStringList
 (type $multipleabstractparents.MultipleAbstractParents.AbstractStringList (struct
  (field $vtable (ref null $multipleabstractparents.MultipleAbstractParents.AbstractStringList.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $multipleabstractparents.MultipleAbstractParents.AbstractStringList.vtable (struct
  
@@ -428,7 +428,7 @@
  (field $m_getFoo__java_lang_String__java_lang_String (mut (ref $function.$java.lang.String__$java.lang.String)))
 ))
 (global $multipleabstractparents.MultipleAbstractParents.AbstractStringList.vtable (mut (ref null $multipleabstractparents.MultipleAbstractParents.AbstractStringList.vtable)) (ref.null $multipleabstractparents.MultipleAbstractParents.AbstractStringList.vtable))
-(global $$initialized@multipleabstractparents.MultipleAbstractParents.AbstractStringList (mut i32) (i32.const 0))
+(global $f_$initialized__multipleabstractparents_MultipleAbstractParents_AbstractStringList (mut i32) (i32.const 0))
 
 ;;; AbstractStringList()
 (func $m_<init>__void@multipleabstractparents.MultipleAbstractParents.AbstractStringList
@@ -486,14 +486,14 @@
  (block $return.label
   (block
    ;; if (multipleabstractparents.MultipleAbstractParents.AbstractStringList.$initialized) return;
-   (if (global.get $$initialized@multipleabstractparents.MultipleAbstractParents.AbstractStringList)
+   (if (global.get $f_$initialized__multipleabstractparents_MultipleAbstractParents_AbstractStringList)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (multipleabstractparents.MultipleAbstractParents.AbstractStringList.$initialized = true);
-   (global.set $$initialized@multipleabstractparents.MultipleAbstractParents.AbstractStringList (i32.const 1))
+   (global.set $f_$initialized__multipleabstractparents_MultipleAbstractParents_AbstractStringList (i32.const 1))
    ;; multipleabstractparents.MultipleAbstractParents.AbstractList.$clinit();
    (call $$clinit__void@multipleabstractparents.MultipleAbstractParents.AbstractList )
   )
@@ -503,7 +503,7 @@
 ;;; CLASS  AbstractStringList2
 (type $multipleabstractparents.MultipleAbstractParents.AbstractStringList2 (struct
  (field $vtable (ref null $multipleabstractparents.MultipleAbstractParents.AbstractStringList2.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $multipleabstractparents.MultipleAbstractParents.AbstractStringList2.vtable (struct
  
@@ -514,7 +514,7 @@
  (field $m_getFoo__java_lang_String__java_lang_String (mut (ref $function.$java.lang.String__$java.lang.String)))
 ))
 (global $multipleabstractparents.MultipleAbstractParents.AbstractStringList2.vtable (mut (ref null $multipleabstractparents.MultipleAbstractParents.AbstractStringList2.vtable)) (ref.null $multipleabstractparents.MultipleAbstractParents.AbstractStringList2.vtable))
-(global $$initialized@multipleabstractparents.MultipleAbstractParents.AbstractStringList2 (mut i32) (i32.const 0))
+(global $f_$initialized__multipleabstractparents_MultipleAbstractParents_AbstractStringList2 (mut i32) (i32.const 0))
 
 ;;; AbstractStringList2()
 (func $m_<init>__void@multipleabstractparents.MultipleAbstractParents.AbstractStringList2
@@ -553,14 +553,14 @@
  (block $return.label
   (block
    ;; if (multipleabstractparents.MultipleAbstractParents.AbstractStringList2.$initialized) return;
-   (if (global.get $$initialized@multipleabstractparents.MultipleAbstractParents.AbstractStringList2)
+   (if (global.get $f_$initialized__multipleabstractparents_MultipleAbstractParents_AbstractStringList2)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (multipleabstractparents.MultipleAbstractParents.AbstractStringList2.$initialized = true);
-   (global.set $$initialized@multipleabstractparents.MultipleAbstractParents.AbstractStringList2 (i32.const 1))
+   (global.set $f_$initialized__multipleabstractparents_MultipleAbstractParents_AbstractStringList2 (i32.const 1))
    ;; multipleabstractparents.MultipleAbstractParents.AbstractList2.$clinit();
    (call $$clinit__void@multipleabstractparents.MultipleAbstractParents.AbstractList2 )
   )
@@ -570,7 +570,7 @@
 ;;; CLASS  AbstractStringList3
 (type $multipleabstractparents.MultipleAbstractParents.AbstractStringList3 (struct
  (field $vtable (ref null $multipleabstractparents.MultipleAbstractParents.AbstractStringList3.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $multipleabstractparents.MultipleAbstractParents.AbstractStringList3.vtable (struct
  
@@ -580,7 +580,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $multipleabstractparents.MultipleAbstractParents.AbstractStringList3.vtable (mut (ref null $multipleabstractparents.MultipleAbstractParents.AbstractStringList3.vtable)) (ref.null $multipleabstractparents.MultipleAbstractParents.AbstractStringList3.vtable))
-(global $$initialized@multipleabstractparents.MultipleAbstractParents.AbstractStringList3 (mut i32) (i32.const 0))
+(global $f_$initialized__multipleabstractparents_MultipleAbstractParents_AbstractStringList3 (mut i32) (i32.const 0))
 
 ;;; AbstractStringList3()
 (func $m_<init>__void@multipleabstractparents.MultipleAbstractParents.AbstractStringList3
@@ -600,14 +600,14 @@
  (block $return.label
   (block
    ;; if (multipleabstractparents.MultipleAbstractParents.AbstractStringList3.$initialized) return;
-   (if (global.get $$initialized@multipleabstractparents.MultipleAbstractParents.AbstractStringList3)
+   (if (global.get $f_$initialized__multipleabstractparents_MultipleAbstractParents_AbstractStringList3)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (multipleabstractparents.MultipleAbstractParents.AbstractStringList3.$initialized = true);
-   (global.set $$initialized@multipleabstractparents.MultipleAbstractParents.AbstractStringList3 (i32.const 1))
+   (global.set $f_$initialized__multipleabstractparents_MultipleAbstractParents_AbstractStringList3 (i32.const 1))
    ;; multipleabstractparents.MultipleAbstractParents.AbstractList2.$clinit();
    (call $$clinit__void@multipleabstractparents.MultipleAbstractParents.AbstractList2 )
   )
@@ -617,7 +617,7 @@
 ;;; CLASS  StringList
 (type $multipleabstractparents.MultipleAbstractParents.StringList (struct
  (field $vtable (ref null $multipleabstractparents.MultipleAbstractParents.StringList.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $multipleabstractparents.MultipleAbstractParents.StringList.vtable (struct
  
@@ -629,7 +629,7 @@
  (field $m_getFoo__java_lang_String__java_lang_String (mut (ref $function.$java.lang.String__$java.lang.String)))
 ))
 (global $multipleabstractparents.MultipleAbstractParents.StringList.vtable (mut (ref null $multipleabstractparents.MultipleAbstractParents.StringList.vtable)) (ref.null $multipleabstractparents.MultipleAbstractParents.StringList.vtable))
-(global $$initialized@multipleabstractparents.MultipleAbstractParents.StringList (mut i32) (i32.const 0))
+(global $f_$initialized__multipleabstractparents_MultipleAbstractParents_StringList (mut i32) (i32.const 0))
 
 ;;; StringList()
 (func $m_<init>__void@multipleabstractparents.MultipleAbstractParents.StringList
@@ -649,14 +649,14 @@
  (block $return.label
   (block
    ;; if (multipleabstractparents.MultipleAbstractParents.StringList.$initialized) return;
-   (if (global.get $$initialized@multipleabstractparents.MultipleAbstractParents.StringList)
+   (if (global.get $f_$initialized__multipleabstractparents_MultipleAbstractParents_StringList)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (multipleabstractparents.MultipleAbstractParents.StringList.$initialized = true);
-   (global.set $$initialized@multipleabstractparents.MultipleAbstractParents.StringList (i32.const 1))
+   (global.set $f_$initialized__multipleabstractparents_MultipleAbstractParents_StringList (i32.const 1))
    ;; multipleabstractparents.MultipleAbstractParents.AbstractStringList.$clinit();
    (call $$clinit__void@multipleabstractparents.MultipleAbstractParents.AbstractStringList )
   )
@@ -666,7 +666,7 @@
 ;;; CLASS  StringListChild
 (type $multipleabstractparents.MultipleAbstractParents.StringListChild (struct
  (field $vtable (ref null $multipleabstractparents.MultipleAbstractParents.StringListChild.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $multipleabstractparents.MultipleAbstractParents.StringListChild.vtable (struct
  
@@ -678,7 +678,7 @@
  (field $m_getFoo__java_lang_String__java_lang_String (mut (ref $function.$java.lang.String__$java.lang.String)))
 ))
 (global $multipleabstractparents.MultipleAbstractParents.StringListChild.vtable (mut (ref null $multipleabstractparents.MultipleAbstractParents.StringListChild.vtable)) (ref.null $multipleabstractparents.MultipleAbstractParents.StringListChild.vtable))
-(global $$initialized@multipleabstractparents.MultipleAbstractParents.StringListChild (mut i32) (i32.const 0))
+(global $f_$initialized__multipleabstractparents_MultipleAbstractParents_StringListChild (mut i32) (i32.const 0))
 
 ;;; StringListChild()
 (func $m_<init>__void@multipleabstractparents.MultipleAbstractParents.StringListChild
@@ -698,14 +698,14 @@
  (block $return.label
   (block
    ;; if (multipleabstractparents.MultipleAbstractParents.StringListChild.$initialized) return;
-   (if (global.get $$initialized@multipleabstractparents.MultipleAbstractParents.StringListChild)
+   (if (global.get $f_$initialized__multipleabstractparents_MultipleAbstractParents_StringListChild)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (multipleabstractparents.MultipleAbstractParents.StringListChild.$initialized = true);
-   (global.set $$initialized@multipleabstractparents.MultipleAbstractParents.StringListChild (i32.const 1))
+   (global.set $f_$initialized__multipleabstractparents_MultipleAbstractParents_StringListChild (i32.const 1))
    ;; multipleabstractparents.MultipleAbstractParents.StringList.$clinit();
    (call $$clinit__void@multipleabstractparents.MultipleAbstractParents.StringList )
   )

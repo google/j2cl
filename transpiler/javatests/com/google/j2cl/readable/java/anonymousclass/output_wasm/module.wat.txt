@@ -3,7 +3,7 @@
 ;;; CLASS  SomeClass
 (type $anonymousclass.SomeClass (struct
  (field $vtable (ref null $anonymousclass.SomeClass.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $anonymousclass.SomeClass.vtable (struct
  
@@ -14,7 +14,7 @@
  (field $m_foo__java_lang_String (mut (ref $function.__$java.lang.String)))
 ))
 (global $anonymousclass.SomeClass.vtable (mut (ref null $anonymousclass.SomeClass.vtable)) (ref.null $anonymousclass.SomeClass.vtable))
-(global $$initialized@anonymousclass.SomeClass (mut i32) (i32.const 0))
+(global $f_$initialized__anonymousclass_SomeClass (mut i32) (i32.const 0))
 
 ;;; SomeClass(int i)
 (func $m_<init>__int__void_$pp_anonymousclass@anonymousclass.SomeClass
@@ -35,14 +35,14 @@
  (block $return.label
   (block
    ;; if (anonymousclass.SomeClass.$initialized) return;
-   (if (global.get $$initialized@anonymousclass.SomeClass)
+   (if (global.get $f_$initialized__anonymousclass_SomeClass)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (anonymousclass.SomeClass.$initialized = true);
-   (global.set $$initialized@anonymousclass.SomeClass (i32.const 1))
+   (global.set $f_$initialized__anonymousclass_SomeClass (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -52,7 +52,7 @@
 ;;; CLASS  AnonymousClass
 (type $anonymousclass.AnonymousClass (struct
  (field $vtable (ref null $anonymousclass.AnonymousClass.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $anonymousclass.AnonymousClass.vtable (struct
  
@@ -63,7 +63,7 @@
  (field $m_main__void (mut (ref $function.__$void)))
 ))
 (global $anonymousclass.AnonymousClass.vtable (mut (ref null $anonymousclass.AnonymousClass.vtable)) (ref.null $anonymousclass.AnonymousClass.vtable))
-(global $$initialized@anonymousclass.AnonymousClass (mut i32) (i32.const 0))
+(global $f_$initialized__anonymousclass_AnonymousClass (mut i32) (i32.const 0))
 
 ;;; AnonymousClass()
 (func $m_<init>__void@anonymousclass.AnonymousClass
@@ -99,14 +99,14 @@
  (block $return.label
   (block
    ;; if (anonymousclass.AnonymousClass.$initialized) return;
-   (if (global.get $$initialized@anonymousclass.AnonymousClass)
+   (if (global.get $f_$initialized__anonymousclass_AnonymousClass)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (anonymousclass.AnonymousClass.$initialized = true);
-   (global.set $$initialized@anonymousclass.AnonymousClass (i32.const 1))
+   (global.set $f_$initialized__anonymousclass_AnonymousClass (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -116,10 +116,10 @@
 ;;; CLASS  <anonymous> extends SomeClass
 (type $anonymousclass.AnonymousClass.1 (struct
  (field $vtable (ref null $anonymousclass.AnonymousClass.1.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $this@anonymousclass.AnonymousClass.1 (mut (ref null $anonymousclass.AnonymousClass)))
- (field $object@anonymousclass.AnonymousClass.1 (mut (ref null $java.lang.Object)))
- (field $outer@anonymousclass.AnonymousClass.1 (mut (ref null $java.lang.Object)))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $$outer_this__anonymousclass_AnonymousClass_1 (mut (ref null $anonymousclass.AnonymousClass)))
+ (field $f_object__anonymousclass_AnonymousClass_1 (mut (ref null $java.lang.Object)))
+ (field $f_outer__anonymousclass_AnonymousClass_1 (mut (ref null $java.lang.Object)))
 ))
 (type $anonymousclass.AnonymousClass.1.vtable (struct
  
@@ -130,7 +130,7 @@
  (field $m_foo__java_lang_String (mut (ref $function.__$java.lang.String)))
 ))
 (global $anonymousclass.AnonymousClass.1.vtable (mut (ref null $anonymousclass.AnonymousClass.1.vtable)) (ref.null $anonymousclass.AnonymousClass.1.vtable))
-(global $$initialized@anonymousclass.AnonymousClass.1 (mut i32) (i32.const 0))
+(global $f_$initialized__anonymousclass_AnonymousClass_1 (mut i32) (i32.const 0))
 
 ;;; <anonymous> extends SomeClass(AnonymousClass $outer_this, int $_0)
 (func $m_<init>__anonymousclass_AnonymousClass__int__void_$pp_anonymousclass@anonymousclass.AnonymousClass.1
@@ -141,7 +141,7 @@
  (block $return.label
   (block
    ;; ($1.this.this = $outer_this);
-   (struct.set $anonymousclass.AnonymousClass.1 $this@anonymousclass.AnonymousClass.1(local.get $this) (local.get $$outer_this))
+   (struct.set $anonymousclass.AnonymousClass.1 $$outer_this__anonymousclass_AnonymousClass_1(local.get $this) (local.get $$outer_this))
    ;; SomeClass.this.SomeClass.<init>($_0);
    (drop (call $m_<init>__int__void_$pp_anonymousclass@anonymousclass.SomeClass (local.get $this)(local.get $$_0)))
    ;; $1.this.$init();
@@ -181,9 +181,9 @@
  (block $return.label
   (block
    ;; ($1.this.object = $1.this);
-   (struct.set $anonymousclass.AnonymousClass.1 $object@anonymousclass.AnonymousClass.1(local.get $this) (local.get $this))
+   (struct.set $anonymousclass.AnonymousClass.1 $f_object__anonymousclass_AnonymousClass_1(local.get $this) (local.get $this))
    ;; ($1.this.outer = $1.this.this);
-   (struct.set $anonymousclass.AnonymousClass.1 $outer@anonymousclass.AnonymousClass.1(local.get $this) (struct.get $anonymousclass.AnonymousClass.1 $this@anonymousclass.AnonymousClass.1(local.get $this)))
+   (struct.set $anonymousclass.AnonymousClass.1 $f_outer__anonymousclass_AnonymousClass_1(local.get $this) (struct.get $anonymousclass.AnonymousClass.1 $$outer_this__anonymousclass_AnonymousClass_1(local.get $this)))
   )
  )
 )
@@ -193,14 +193,14 @@
  (block $return.label
   (block
    ;; if (anonymousclass.AnonymousClass.1.$initialized) return;
-   (if (global.get $$initialized@anonymousclass.AnonymousClass.1)
+   (if (global.get $f_$initialized__anonymousclass_AnonymousClass_1)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (anonymousclass.AnonymousClass.1.$initialized = true);
-   (global.set $$initialized@anonymousclass.AnonymousClass.1 (i32.const 1))
+   (global.set $f_$initialized__anonymousclass_AnonymousClass_1 (i32.const 1))
    ;; anonymousclass.SomeClass.$clinit();
    (call $$clinit__void@anonymousclass.SomeClass )
   )
@@ -208,27 +208,27 @@
 )
 
 ;;; INTERFACE  SomeInterface
-(global $implicitlyStatic@anonymousclass.SomeInterface (mut (ref null $anonymousclass.SomeClass)) (ref.null $anonymousclass.SomeClass))
-(global $$initialized@anonymousclass.SomeInterface (mut i32) (i32.const 0))
+(global $f_implicitlyStatic__anonymousclass_SomeInterface (mut (ref null $anonymousclass.SomeClass)) (ref.null $anonymousclass.SomeClass))
+(global $f_$initialized__anonymousclass_SomeInterface (mut i32) (i32.const 0))
 
 ;;; void SomeInterface.$clinit()
 (func $$clinit__void@anonymousclass.SomeInterface
  (block $return.label
   (block
    ;; if (anonymousclass.SomeInterface.$initialized) return;
-   (if (global.get $$initialized@anonymousclass.SomeInterface)
+   (if (global.get $f_$initialized__anonymousclass_SomeInterface)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (anonymousclass.SomeInterface.$initialized = true);
-   (global.set $$initialized@anonymousclass.SomeInterface (i32.const 1))
+   (global.set $f_$initialized__anonymousclass_SomeInterface (i32.const 1))
    (block
     ;; anonymousclass.SomeInterface.$clinit();
     (call $$clinit__void@anonymousclass.SomeInterface )
     ;; (anonymousclass.SomeInterface.implicitlyStatic = new $1.<init>(1));
-    (global.set $implicitlyStatic@anonymousclass.SomeInterface (call $m_<init>__int__void_$pp_anonymousclass@anonymousclass.SomeInterface.1 (struct.new_with_rtt $anonymousclass.SomeInterface.1 (global.get $anonymousclass.SomeInterface.1.vtable) (i32.const 0) (global.get $anonymousclass.SomeInterface.1.rtt))(i32.const 1)))
+    (global.set $f_implicitlyStatic__anonymousclass_SomeInterface (call $m_<init>__int__void_$pp_anonymousclass@anonymousclass.SomeInterface.1 (struct.new_with_rtt $anonymousclass.SomeInterface.1 (global.get $anonymousclass.SomeInterface.1.vtable) (i32.const 0) (global.get $anonymousclass.SomeInterface.1.rtt))(i32.const 1)))
    )
   )
  )
@@ -237,7 +237,7 @@
 ;;; CLASS  <anonymous> extends SomeClass
 (type $anonymousclass.SomeInterface.1 (struct
  (field $vtable (ref null $anonymousclass.SomeInterface.1.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $anonymousclass.SomeInterface.1.vtable (struct
  
@@ -248,7 +248,7 @@
  (field $m_foo__java_lang_String (mut (ref $function.__$java.lang.String)))
 ))
 (global $anonymousclass.SomeInterface.1.vtable (mut (ref null $anonymousclass.SomeInterface.1.vtable)) (ref.null $anonymousclass.SomeInterface.1.vtable))
-(global $$initialized@anonymousclass.SomeInterface.1 (mut i32) (i32.const 0))
+(global $f_$initialized__anonymousclass_SomeInterface_1 (mut i32) (i32.const 0))
 
 ;;; <anonymous> extends SomeClass(int $_0)
 (func $m_<init>__int__void_$pp_anonymousclass@anonymousclass.SomeInterface.1
@@ -293,14 +293,14 @@
  (block $return.label
   (block
    ;; if (anonymousclass.SomeInterface.1.$initialized) return;
-   (if (global.get $$initialized@anonymousclass.SomeInterface.1)
+   (if (global.get $f_$initialized__anonymousclass_SomeInterface_1)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (anonymousclass.SomeInterface.1.$initialized = true);
-   (global.set $$initialized@anonymousclass.SomeInterface.1 (i32.const 1))
+   (global.set $f_$initialized__anonymousclass_SomeInterface_1 (i32.const 1))
    ;; anonymousclass.SomeClass.$clinit();
    (call $$clinit__void@anonymousclass.SomeClass )
   )

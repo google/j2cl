@@ -3,11 +3,11 @@
 ;;; CLASS  InstanceFieldAccessLevels
 (type $instancefieldaccesslevels.InstanceFieldAccessLevels (struct
  (field $vtable (ref null $instancefieldaccesslevels.InstanceFieldAccessLevels.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $a@instancefieldaccesslevels.InstanceFieldAccessLevels (mut i32))
- (field $b@instancefieldaccesslevels.InstanceFieldAccessLevels (mut i32))
- (field $c@instancefieldaccesslevels.InstanceFieldAccessLevels (mut (ref null $java.lang.Object)))
- (field $d@instancefieldaccesslevels.InstanceFieldAccessLevels (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $f_a__instancefieldaccesslevels_InstanceFieldAccessLevels (mut i32))
+ (field $f_b__instancefieldaccesslevels_InstanceFieldAccessLevels_ (mut i32))
+ (field $f_c__instancefieldaccesslevels_InstanceFieldAccessLevels (mut (ref null $java.lang.Object)))
+ (field $f_d__instancefieldaccesslevels_InstanceFieldAccessLevels (mut i32))
 ))
 (type $instancefieldaccesslevels.InstanceFieldAccessLevels.vtable (struct
  
@@ -17,7 +17,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $instancefieldaccesslevels.InstanceFieldAccessLevels.vtable (mut (ref null $instancefieldaccesslevels.InstanceFieldAccessLevels.vtable)) (ref.null $instancefieldaccesslevels.InstanceFieldAccessLevels.vtable))
-(global $$initialized@instancefieldaccesslevels.InstanceFieldAccessLevels (mut i32) (i32.const 0))
+(global $f_$initialized__instancefieldaccesslevels_InstanceFieldAccessLevels (mut i32) (i32.const 0))
 
 ;;; InstanceFieldAccessLevels()
 (func $m_<init>__void@instancefieldaccesslevels.InstanceFieldAccessLevels
@@ -37,14 +37,14 @@
  (block $return.label
   (block
    ;; if (instancefieldaccesslevels.InstanceFieldAccessLevels.$initialized) return;
-   (if (global.get $$initialized@instancefieldaccesslevels.InstanceFieldAccessLevels)
+   (if (global.get $f_$initialized__instancefieldaccesslevels_InstanceFieldAccessLevels)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (instancefieldaccesslevels.InstanceFieldAccessLevels.$initialized = true);
-   (global.set $$initialized@instancefieldaccesslevels.InstanceFieldAccessLevels (i32.const 1))
+   (global.set $f_$initialized__instancefieldaccesslevels_InstanceFieldAccessLevels (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

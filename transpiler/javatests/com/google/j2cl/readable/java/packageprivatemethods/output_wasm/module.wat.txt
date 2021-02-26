@@ -3,7 +3,7 @@
 ;;; CLASS  Child
 (type $packageprivatemethods.package1.Child (struct
  (field $vtable (ref null $packageprivatemethods.package1.Child.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $packageprivatemethods.package1.Child.vtable (struct
  
@@ -19,7 +19,7 @@
  (field $m_fun__int__int__int (mut (ref $function.$int__$int__$int)))
 ))
 (global $packageprivatemethods.package1.Child.vtable (mut (ref null $packageprivatemethods.package1.Child.vtable)) (ref.null $packageprivatemethods.package1.Child.vtable))
-(global $$initialized@packageprivatemethods.package1.Child (mut i32) (i32.const 0))
+(global $f_$initialized__packageprivatemethods_package1_Child (mut i32) (i32.const 0))
 
 ;;; Child()
 (func $m_<init>__void@packageprivatemethods.package1.Child
@@ -138,14 +138,14 @@
  (block $return.label
   (block
    ;; if (packageprivatemethods.package1.Child.$initialized) return;
-   (if (global.get $$initialized@packageprivatemethods.package1.Child)
+   (if (global.get $f_$initialized__packageprivatemethods_package1_Child)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (packageprivatemethods.package1.Child.$initialized = true);
-   (global.set $$initialized@packageprivatemethods.package1.Child (i32.const 1))
+   (global.set $f_$initialized__packageprivatemethods_package1_Child (i32.const 1))
    ;; packageprivatemethods.package1.Parent.$clinit();
    (call $$clinit__void@packageprivatemethods.package1.Parent )
   )
@@ -156,7 +156,7 @@
 ;;; CLASS  Parent
 (type $packageprivatemethods.package1.Parent (struct
  (field $vtable (ref null $packageprivatemethods.package1.Parent.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $packageprivatemethods.package1.Parent.vtable (struct
  
@@ -170,7 +170,7 @@
  (field $m_bar__int__int__int__int (mut (ref $function.$int__$int__$int__$int)))
 ))
 (global $packageprivatemethods.package1.Parent.vtable (mut (ref null $packageprivatemethods.package1.Parent.vtable)) (ref.null $packageprivatemethods.package1.Parent.vtable))
-(global $$initialized@packageprivatemethods.package1.Parent (mut i32) (i32.const 0))
+(global $f_$initialized__packageprivatemethods_package1_Parent (mut i32) (i32.const 0))
 
 ;;; Parent()
 (func $m_<init>__void@packageprivatemethods.package1.Parent
@@ -230,14 +230,14 @@
  (block $return.label
   (block
    ;; if (packageprivatemethods.package1.Parent.$initialized) return;
-   (if (global.get $$initialized@packageprivatemethods.package1.Parent)
+   (if (global.get $f_$initialized__packageprivatemethods_package1_Parent)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (packageprivatemethods.package1.Parent.$initialized = true);
-   (global.set $$initialized@packageprivatemethods.package1.Parent (i32.const 1))
+   (global.set $f_$initialized__packageprivatemethods_package1_Parent (i32.const 1))
    ;; packageprivatemethods.package1.SuperParent.$clinit();
    (call $$clinit__void@packageprivatemethods.package1.SuperParent )
   )
@@ -248,7 +248,7 @@
 ;;; CLASS  SuperParent
 (type $packageprivatemethods.package1.SuperParent (struct
  (field $vtable (ref null $packageprivatemethods.package1.SuperParent.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $packageprivatemethods.package1.SuperParent.vtable (struct
  
@@ -261,7 +261,7 @@
  (field $m_bar__int__int__int__int_$pp_packageprivatemethods_package1 (mut (ref $function.$int__$int__$int__$int)))
 ))
 (global $packageprivatemethods.package1.SuperParent.vtable (mut (ref null $packageprivatemethods.package1.SuperParent.vtable)) (ref.null $packageprivatemethods.package1.SuperParent.vtable))
-(global $$initialized@packageprivatemethods.package1.SuperParent (mut i32) (i32.const 0))
+(global $f_$initialized__packageprivatemethods_package1_SuperParent (mut i32) (i32.const 0))
 
 ;;; SuperParent()
 (func $m_<init>__void@packageprivatemethods.package1.SuperParent
@@ -341,14 +341,14 @@
  (block $return.label
   (block
    ;; if (packageprivatemethods.package1.SuperParent.$initialized) return;
-   (if (global.get $$initialized@packageprivatemethods.package1.SuperParent)
+   (if (global.get $f_$initialized__packageprivatemethods_package1_SuperParent)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (packageprivatemethods.package1.SuperParent.$initialized = true);
-   (global.set $$initialized@packageprivatemethods.package1.SuperParent (i32.const 1))
+   (global.set $f_$initialized__packageprivatemethods_package1_SuperParent (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -359,7 +359,7 @@
 ;;; CLASS  SubChild
 (type $packageprivatemethods.package2.SubChild (struct
  (field $vtable (ref null $packageprivatemethods.package2.SubChild.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $packageprivatemethods.package2.SubChild.vtable (struct
  
@@ -375,7 +375,7 @@
  (field $m_fun__int__int__int (mut (ref $function.$int__$int__$int)))
 ))
 (global $packageprivatemethods.package2.SubChild.vtable (mut (ref null $packageprivatemethods.package2.SubChild.vtable)) (ref.null $packageprivatemethods.package2.SubChild.vtable))
-(global $$initialized@packageprivatemethods.package2.SubChild (mut i32) (i32.const 0))
+(global $f_$initialized__packageprivatemethods_package2_SubChild (mut i32) (i32.const 0))
 
 ;;; SubChild()
 (func $m_<init>__void@packageprivatemethods.package2.SubChild
@@ -414,14 +414,14 @@
  (block $return.label
   (block
    ;; if (packageprivatemethods.package2.SubChild.$initialized) return;
-   (if (global.get $$initialized@packageprivatemethods.package2.SubChild)
+   (if (global.get $f_$initialized__packageprivatemethods_package2_SubChild)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (packageprivatemethods.package2.SubChild.$initialized = true);
-   (global.set $$initialized@packageprivatemethods.package2.SubChild (i32.const 1))
+   (global.set $f_$initialized__packageprivatemethods_package2_SubChild (i32.const 1))
    ;; packageprivatemethods.package1.Child.$clinit();
    (call $$clinit__void@packageprivatemethods.package1.Child )
   )
@@ -432,7 +432,7 @@
 ;;; CLASS  SubParent
 (type $packageprivatemethods.package2.SubParent (struct
  (field $vtable (ref null $packageprivatemethods.package2.SubParent.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $packageprivatemethods.package2.SubParent.vtable (struct
  
@@ -447,7 +447,7 @@
  (field $m_foo__int__int_$pp_packageprivatemethods_package2 (mut (ref $function.$int__$int)))
 ))
 (global $packageprivatemethods.package2.SubParent.vtable (mut (ref null $packageprivatemethods.package2.SubParent.vtable)) (ref.null $packageprivatemethods.package2.SubParent.vtable))
-(global $$initialized@packageprivatemethods.package2.SubParent (mut i32) (i32.const 0))
+(global $f_$initialized__packageprivatemethods_package2_SubParent (mut i32) (i32.const 0))
 
 ;;; SubParent()
 (func $m_<init>__void@packageprivatemethods.package2.SubParent
@@ -486,14 +486,14 @@
  (block $return.label
   (block
    ;; if (packageprivatemethods.package2.SubParent.$initialized) return;
-   (if (global.get $$initialized@packageprivatemethods.package2.SubParent)
+   (if (global.get $f_$initialized__packageprivatemethods_package2_SubParent)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (packageprivatemethods.package2.SubParent.$initialized = true);
-   (global.set $$initialized@packageprivatemethods.package2.SubParent (i32.const 1))
+   (global.set $f_$initialized__packageprivatemethods_package2_SubParent (i32.const 1))
    ;; packageprivatemethods.package1.Parent.$clinit();
    (call $$clinit__void@packageprivatemethods.package1.Parent )
   )

@@ -3,7 +3,7 @@
 ;;; CLASS  Main
 (type $jsinnerclass.Main (struct
  (field $vtable (ref null $jsinnerclass.Main.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $jsinnerclass.Main.vtable (struct
  
@@ -13,7 +13,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $jsinnerclass.Main.vtable (mut (ref null $jsinnerclass.Main.vtable)) (ref.null $jsinnerclass.Main.vtable))
-(global $$initialized@jsinnerclass.Main (mut i32) (i32.const 0))
+(global $f_$initialized__jsinnerclass_Main (mut i32) (i32.const 0))
 
 ;;; Main()
 (func $m_<init>__void@jsinnerclass.Main
@@ -47,14 +47,14 @@
  (block $return.label
   (block
    ;; if (jsinnerclass.Main.$initialized) return;
-   (if (global.get $$initialized@jsinnerclass.Main)
+   (if (global.get $f_$initialized__jsinnerclass_Main)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsinnerclass.Main.$initialized = true);
-   (global.set $$initialized@jsinnerclass.Main (i32.const 1))
+   (global.set $f_$initialized__jsinnerclass_Main (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -64,8 +64,8 @@
 ;;; CLASS  Outer
 (type $jsinnerclass.Main.Outer (struct
  (field $vtable (ref null $jsinnerclass.Main.Outer.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $a@jsinnerclass.Main.Outer (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $f_a__jsinnerclass_Main_Outer (mut i32))
 ))
 (type $jsinnerclass.Main.Outer.vtable (struct
  
@@ -76,7 +76,7 @@
  (field $m_method__int (mut (ref $function.__$int)))
 ))
 (global $jsinnerclass.Main.Outer.vtable (mut (ref null $jsinnerclass.Main.Outer.vtable)) (ref.null $jsinnerclass.Main.Outer.vtable))
-(global $$initialized@jsinnerclass.Main.Outer (mut i32) (i32.const 0))
+(global $f_$initialized__jsinnerclass_Main_Outer (mut i32) (i32.const 0))
 
 ;;; Outer()
 (func $m_<init>__void_$pp_jsinnerclass@jsinnerclass.Main.Outer
@@ -108,7 +108,7 @@
     
     (local.set $$qualifier (call $m_<init>__jsinnerclass_Main_Outer__void@jsinnerclass.Main.Outer.Inner (struct.new_with_rtt $jsinnerclass.Main.Outer.Inner (global.get $jsinnerclass.Main.Outer.Inner.vtable) (i32.const 0) (ref.null $jsinnerclass.Main.Outer) (i32.const 0) (global.get $jsinnerclass.Main.Outer.Inner.rtt))(local.get $this)))
     (call_ref (local.get $$qualifier)(struct.get $jsinnerclass.Main.Outer.Inner.vtable $m_getB__int (struct.get $jsinnerclass.Main.Outer.Inner $vtable(local.get $$qualifier))))
-   ) (struct.get $jsinnerclass.Main.Outer $a@jsinnerclass.Main.Outer(local.get $this))))
+   ) (struct.get $jsinnerclass.Main.Outer $f_a__jsinnerclass_Main_Outer(local.get $this))))
    (br $return.label)
   )
  )
@@ -122,7 +122,7 @@
  (block $return.label
   (block
    ;; (Outer.this.a = 2);
-   (struct.set $jsinnerclass.Main.Outer $a@jsinnerclass.Main.Outer(local.get $this) (i32.const 2))
+   (struct.set $jsinnerclass.Main.Outer $f_a__jsinnerclass_Main_Outer(local.get $this) (i32.const 2))
   )
  )
 )
@@ -132,14 +132,14 @@
  (block $return.label
   (block
    ;; if (jsinnerclass.Main.Outer.$initialized) return;
-   (if (global.get $$initialized@jsinnerclass.Main.Outer)
+   (if (global.get $f_$initialized__jsinnerclass_Main_Outer)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsinnerclass.Main.Outer.$initialized = true);
-   (global.set $$initialized@jsinnerclass.Main.Outer (i32.const 1))
+   (global.set $f_$initialized__jsinnerclass_Main_Outer (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -149,9 +149,9 @@
 ;;; CLASS  Inner
 (type $jsinnerclass.Main.Outer.Inner (struct
  (field $vtable (ref null $jsinnerclass.Main.Outer.Inner.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $this@jsinnerclass.Main.Outer.Inner (mut (ref null $jsinnerclass.Main.Outer)))
- (field $b@jsinnerclass.Main.Outer.Inner (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $$outer_this__jsinnerclass_Main_Outer_Inner (mut (ref null $jsinnerclass.Main.Outer)))
+ (field $f_b__jsinnerclass_Main_Outer_Inner_ (mut i32))
 ))
 (type $jsinnerclass.Main.Outer.Inner.vtable (struct
  
@@ -162,7 +162,7 @@
  (field $m_getB__int (mut (ref $function.__$int)))
 ))
 (global $jsinnerclass.Main.Outer.Inner.vtable (mut (ref null $jsinnerclass.Main.Outer.Inner.vtable)) (ref.null $jsinnerclass.Main.Outer.Inner.vtable))
-(global $$initialized@jsinnerclass.Main.Outer.Inner (mut i32) (i32.const 0))
+(global $f_$initialized__jsinnerclass_Main_Outer_Inner (mut i32) (i32.const 0))
 
 ;;; Inner(Outer $outer_this)
 (func $m_<init>__jsinnerclass_Main_Outer__void@jsinnerclass.Main.Outer.Inner
@@ -174,11 +174,11 @@
    ;; jsinnerclass.Main.Outer.Inner.$clinit();
    (call $$clinit__void@jsinnerclass.Main.Outer.Inner )
    ;; (Inner.this.this = $outer_this);
-   (struct.set $jsinnerclass.Main.Outer.Inner $this@jsinnerclass.Main.Outer.Inner(local.get $this) (local.get $$outer_this))
+   (struct.set $jsinnerclass.Main.Outer.Inner $$outer_this__jsinnerclass_Main_Outer_Inner(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; (Inner.this.b = ($outer_this.a + 1));
-   (struct.set $jsinnerclass.Main.Outer.Inner $b@jsinnerclass.Main.Outer.Inner(local.get $this) (i32.add (struct.get $jsinnerclass.Main.Outer $a@jsinnerclass.Main.Outer(local.get $$outer_this)) (i32.const 1)))
+   (struct.set $jsinnerclass.Main.Outer.Inner $f_b__jsinnerclass_Main_Outer_Inner_(local.get $this) (i32.add (struct.get $jsinnerclass.Main.Outer $f_a__jsinnerclass_Main_Outer(local.get $$outer_this)) (i32.const 1)))
   )
  )
  (local.get $this)
@@ -194,7 +194,7 @@
  (block $return.label
   (block
    ;; return Inner.this.b;
-   (local.set $return.value (struct.get $jsinnerclass.Main.Outer.Inner $b@jsinnerclass.Main.Outer.Inner(local.get $this)))
+   (local.set $return.value (struct.get $jsinnerclass.Main.Outer.Inner $f_b__jsinnerclass_Main_Outer_Inner_(local.get $this)))
    (br $return.label)
   )
  )
@@ -207,14 +207,14 @@
  (block $return.label
   (block
    ;; if (jsinnerclass.Main.Outer.Inner.$initialized) return;
-   (if (global.get $$initialized@jsinnerclass.Main.Outer.Inner)
+   (if (global.get $f_$initialized__jsinnerclass_Main_Outer_Inner)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsinnerclass.Main.Outer.Inner.$initialized = true);
-   (global.set $$initialized@jsinnerclass.Main.Outer.Inner (i32.const 1))
+   (global.set $f_$initialized__jsinnerclass_Main_Outer_Inner (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

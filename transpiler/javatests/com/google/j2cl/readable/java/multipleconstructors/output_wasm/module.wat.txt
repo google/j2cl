@@ -3,9 +3,9 @@
 ;;; CLASS  MultipleConstructors
 (type $multipleconstructors.MultipleConstructors (struct
  (field $vtable (ref null $multipleconstructors.MultipleConstructors.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $id@multipleconstructors.MultipleConstructors (mut i32))
- (field $flag@multipleconstructors.MultipleConstructors (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $f_id__multipleconstructors_MultipleConstructors_ (mut i32))
+ (field $f_flag__multipleconstructors_MultipleConstructors_ (mut i32))
 ))
 (type $multipleconstructors.MultipleConstructors.vtable (struct
  
@@ -15,7 +15,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $multipleconstructors.MultipleConstructors.vtable (mut (ref null $multipleconstructors.MultipleConstructors.vtable)) (ref.null $multipleconstructors.MultipleConstructors.vtable))
-(global $$initialized@multipleconstructors.MultipleConstructors (mut i32) (i32.const 0))
+(global $f_$initialized__multipleconstructors_MultipleConstructors (mut i32) (i32.const 0))
 
 ;;; MultipleConstructors(int id)
 (func $m_<init>__int__void@multipleconstructors.MultipleConstructors
@@ -27,9 +27,9 @@
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; (MultipleConstructors.this.id = id);
-   (struct.set $multipleconstructors.MultipleConstructors $id@multipleconstructors.MultipleConstructors(local.get $this) (local.get $id))
+   (struct.set $multipleconstructors.MultipleConstructors $f_id__multipleconstructors_MultipleConstructors_(local.get $this) (local.get $id))
    ;; (MultipleConstructors.this.flag = (id == 0));
-   (struct.set $multipleconstructors.MultipleConstructors $flag@multipleconstructors.MultipleConstructors(local.get $this) (i32.eq (local.get $id) (i32.const 0)))
+   (struct.set $multipleconstructors.MultipleConstructors $f_flag__multipleconstructors_MultipleConstructors_(local.get $this) (i32.eq (local.get $id) (i32.const 0)))
   )
  )
  (local.get $this)
@@ -45,9 +45,9 @@
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; (MultipleConstructors.this.id = (0 - 1));
-   (struct.set $multipleconstructors.MultipleConstructors $id@multipleconstructors.MultipleConstructors(local.get $this) (i32.sub (i32.const 0) (i32.const 1)))
+   (struct.set $multipleconstructors.MultipleConstructors $f_id__multipleconstructors_MultipleConstructors_(local.get $this) (i32.sub (i32.const 0) (i32.const 1)))
    ;; (MultipleConstructors.this.flag = flag);
-   (struct.set $multipleconstructors.MultipleConstructors $flag@multipleconstructors.MultipleConstructors(local.get $this) (local.get $flag))
+   (struct.set $multipleconstructors.MultipleConstructors $f_flag__multipleconstructors_MultipleConstructors_(local.get $this) (local.get $flag))
   )
  )
  (local.get $this)
@@ -64,9 +64,9 @@
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; (MultipleConstructors.this.id = id);
-   (struct.set $multipleconstructors.MultipleConstructors $id@multipleconstructors.MultipleConstructors(local.get $this) (local.get $id))
+   (struct.set $multipleconstructors.MultipleConstructors $f_id__multipleconstructors_MultipleConstructors_(local.get $this) (local.get $id))
    ;; (MultipleConstructors.this.flag = flag);
-   (struct.set $multipleconstructors.MultipleConstructors $flag@multipleconstructors.MultipleConstructors(local.get $this) (local.get $flag))
+   (struct.set $multipleconstructors.MultipleConstructors $f_flag__multipleconstructors_MultipleConstructors_(local.get $this) (local.get $flag))
   )
  )
  (local.get $this)
@@ -77,14 +77,14 @@
  (block $return.label
   (block
    ;; if (multipleconstructors.MultipleConstructors.$initialized) return;
-   (if (global.get $$initialized@multipleconstructors.MultipleConstructors)
+   (if (global.get $f_$initialized__multipleconstructors_MultipleConstructors)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (multipleconstructors.MultipleConstructors.$initialized = true);
-   (global.set $$initialized@multipleconstructors.MultipleConstructors (i32.const 1))
+   (global.set $f_$initialized__multipleconstructors_MultipleConstructors (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

@@ -3,7 +3,7 @@
 ;;; CLASS  JsDocReturn
 (type $jsdocreturn.JsDocReturn (struct
  (field $vtable (ref null $jsdocreturn.JsDocReturn.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $jsdocreturn.JsDocReturn.vtable (struct
  
@@ -15,7 +15,7 @@
  (field $m_test2__int (mut (ref $function.__$int)))
 ))
 (global $jsdocreturn.JsDocReturn.vtable (mut (ref null $jsdocreturn.JsDocReturn.vtable)) (ref.null $jsdocreturn.JsDocReturn.vtable))
-(global $$initialized@jsdocreturn.JsDocReturn (mut i32) (i32.const 0))
+(global $f_$initialized__jsdocreturn_JsDocReturn (mut i32) (i32.const 0))
 
 ;;; JsDocReturn()
 (func $m_<init>__void@jsdocreturn.JsDocReturn
@@ -65,14 +65,14 @@
  (block $return.label
   (block
    ;; if (jsdocreturn.JsDocReturn.$initialized) return;
-   (if (global.get $$initialized@jsdocreturn.JsDocReturn)
+   (if (global.get $f_$initialized__jsdocreturn_JsDocReturn)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsdocreturn.JsDocReturn.$initialized = true);
-   (global.set $$initialized@jsdocreturn.JsDocReturn (i32.const 1))
+   (global.set $f_$initialized__jsdocreturn_JsDocReturn (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

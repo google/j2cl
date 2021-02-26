@@ -3,19 +3,19 @@
 ;;; CLASS  DefaultNullable
 (type $defaultnullable.DefaultNullable (struct
  (field $vtable (ref null $defaultnullable.DefaultNullable.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $f1@defaultnullable.DefaultNullable (mut (ref null $java.lang.String)))
- (field $f2@defaultnullable.DefaultNullable (mut (ref null $java.lang.String)))
- (field $f3@defaultnullable.DefaultNullable (mut (ref null $java.lang.String)))
- (field $f4@defaultnullable.DefaultNullable (mut (ref null $java.lang.Object)))
- (field $f5@defaultnullable.DefaultNullable (mut (ref null $java.lang.Object)))
- (field $f6@defaultnullable.DefaultNullable (mut (ref null $java.lang.Object)))
- (field $f7@defaultnullable.DefaultNullable (mut (ref null $java.lang.Object)))
- (field $f8@defaultnullable.DefaultNullable (mut (ref null $Object.array)))
- (field $f9@defaultnullable.DefaultNullable (mut (ref null $Object.array)))
- (field $f10@defaultnullable.DefaultNullable (mut (ref null $Object.array)))
- (field $f11@defaultnullable.DefaultNullable (mut (ref null $java.lang.Void)))
- (field $f12@defaultnullable.DefaultNullable (mut (ref null $java.lang.Object)))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $f_f1__defaultnullable_DefaultNullable_ (mut (ref null $java.lang.String)))
+ (field $f_f2__defaultnullable_DefaultNullable_ (mut (ref null $java.lang.String)))
+ (field $f_f3__defaultnullable_DefaultNullable_ (mut (ref null $java.lang.String)))
+ (field $f_f4__defaultnullable_DefaultNullable_ (mut (ref null $java.lang.Object)))
+ (field $f_f5__defaultnullable_DefaultNullable_ (mut (ref null $java.lang.Object)))
+ (field $f_f6__defaultnullable_DefaultNullable_ (mut (ref null $java.lang.Object)))
+ (field $f_f7__defaultnullable_DefaultNullable_ (mut (ref null $java.lang.Object)))
+ (field $f_f8__defaultnullable_DefaultNullable_ (mut (ref null $Object.array)))
+ (field $f_f9__defaultnullable_DefaultNullable_ (mut (ref null $Object.array)))
+ (field $f_f10__defaultnullable_DefaultNullable_ (mut (ref null $Object.array)))
+ (field $f_f11__defaultnullable_DefaultNullable_ (mut (ref null $java.lang.Void)))
+ (field $f_f12__defaultnullable_DefaultNullable_ (mut (ref null $java.lang.Object)))
 ))
 (type $defaultnullable.DefaultNullable.vtable (struct
  
@@ -28,7 +28,7 @@
  (field $m_m3__arrayOf_java_lang_String__void (mut (ref $function.$Object.array__$void)))
 ))
 (global $defaultnullable.DefaultNullable.vtable (mut (ref null $defaultnullable.DefaultNullable.vtable)) (ref.null $defaultnullable.DefaultNullable.vtable))
-(global $$initialized@defaultnullable.DefaultNullable (mut i32) (i32.const 0))
+(global $f_$initialized__defaultnullable_DefaultNullable (mut i32) (i32.const 0))
 
 ;;; DefaultNullable()
 (func $m_<init>__void@defaultnullable.DefaultNullable
@@ -113,7 +113,7 @@
  (block $return.label
   (block
    ;; (DefaultNullable.this.f1 = java.lang.String.fromInternalArray((char[] $array_literal = new char[5],($array_literal[0] = 72),($array_literal[1] = 101),($array_literal[2] = 108),($array_literal[3] = 108),($array_literal[4] = 111),$array_literal)));
-   (struct.set $defaultnullable.DefaultNullable $f1@defaultnullable.DefaultNullable(local.get $this) (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (block (result (ref null $char.array))
+   (struct.set $defaultnullable.DefaultNullable $f_f1__defaultnullable_DefaultNullable_(local.get $this) (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (block (result (ref null $char.array))
     
     (local.set $$array_literal (struct.new_with_rtt $char.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $char.array.elements (i32.const 5) (global.get $char.array.elements.rtt)) (global.get $char.array.rtt)))
     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 0) (i32.const 72))
@@ -124,39 +124,39 @@
     (local.get $$array_literal)
    )))
    ;; (DefaultNullable.this.f2 = null);
-   (struct.set $defaultnullable.DefaultNullable $f2@defaultnullable.DefaultNullable(local.get $this) (ref.null $java.lang.String))
+   (struct.set $defaultnullable.DefaultNullable $f_f2__defaultnullable_DefaultNullable_(local.get $this) (ref.null $java.lang.String))
    ;; (DefaultNullable.this.f3 = null);
-   (struct.set $defaultnullable.DefaultNullable $f3@defaultnullable.DefaultNullable(local.get $this) (ref.null $java.lang.String))
+   (struct.set $defaultnullable.DefaultNullable $f_f3__defaultnullable_DefaultNullable_(local.get $this) (ref.null $java.lang.String))
    ;; (DefaultNullable.this.f4 = new ArrayList.<init>());
-   (struct.set $defaultnullable.DefaultNullable $f4@defaultnullable.DefaultNullable(local.get $this) (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.vtable) (i32.const 0) (i32.const 0) (ref.null $Object.array) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
+   (struct.set $defaultnullable.DefaultNullable $f_f4__defaultnullable_DefaultNullable_(local.get $this) (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.vtable) (i32.const 0) (i32.const 0) (ref.null $Object.array) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
    ;; (DefaultNullable.this.f5 = new ArrayList.<init>());
-   (struct.set $defaultnullable.DefaultNullable $f5@defaultnullable.DefaultNullable(local.get $this) (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.vtable) (i32.const 0) (i32.const 0) (ref.null $Object.array) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
+   (struct.set $defaultnullable.DefaultNullable $f_f5__defaultnullable_DefaultNullable_(local.get $this) (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.vtable) (i32.const 0) (i32.const 0) (ref.null $Object.array) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
    ;; (DefaultNullable.this.f6 = new ArrayList.<init>());
-   (struct.set $defaultnullable.DefaultNullable $f6@defaultnullable.DefaultNullable(local.get $this) (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.vtable) (i32.const 0) (i32.const 0) (ref.null $Object.array) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
+   (struct.set $defaultnullable.DefaultNullable $f_f6__defaultnullable_DefaultNullable_(local.get $this) (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.vtable) (i32.const 0) (i32.const 0) (ref.null $Object.array) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
    ;; (DefaultNullable.this.f7 = null);
-   (struct.set $defaultnullable.DefaultNullable $f7@defaultnullable.DefaultNullable(local.get $this) (ref.null $java.lang.Object))
+   (struct.set $defaultnullable.DefaultNullable $f_f7__defaultnullable_DefaultNullable_(local.get $this) (ref.null $java.lang.Object))
    ;; (DefaultNullable.this.f8 = (String[] $array_literal = new String[0],$array_literal));
-   (struct.set $defaultnullable.DefaultNullable $f8@defaultnullable.DefaultNullable(local.get $this) (block (result (ref null $Object.array))
+   (struct.set $defaultnullable.DefaultNullable $f_f8__defaultnullable_DefaultNullable_(local.get $this) (block (result (ref null $Object.array))
     
     (local.set $$array_literal_1 (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $Object.array.elements (i32.const 0) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
     (local.get $$array_literal_1)
    ))
    ;; (DefaultNullable.this.f9 = (String[] $array_literal = new String[0],$array_literal));
-   (struct.set $defaultnullable.DefaultNullable $f9@defaultnullable.DefaultNullable(local.get $this) (block (result (ref null $Object.array))
+   (struct.set $defaultnullable.DefaultNullable $f_f9__defaultnullable_DefaultNullable_(local.get $this) (block (result (ref null $Object.array))
     
     (local.set $$array_literal_2 (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $Object.array.elements (i32.const 0) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
     (local.get $$array_literal_2)
    ))
    ;; (DefaultNullable.this.f10 = (String[] $array_literal = new String[0],$array_literal));
-   (struct.set $defaultnullable.DefaultNullable $f10@defaultnullable.DefaultNullable(local.get $this) (block (result (ref null $Object.array))
+   (struct.set $defaultnullable.DefaultNullable $f_f10__defaultnullable_DefaultNullable_(local.get $this) (block (result (ref null $Object.array))
     
     (local.set $$array_literal_3 (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $Object.array.elements (i32.const 0) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
     (local.get $$array_literal_3)
    ))
    ;; (DefaultNullable.this.f11 = null);
-   (struct.set $defaultnullable.DefaultNullable $f11@defaultnullable.DefaultNullable(local.get $this) (ref.null $java.lang.Void))
+   (struct.set $defaultnullable.DefaultNullable $f_f11__defaultnullable_DefaultNullable_(local.get $this) (ref.null $java.lang.Void))
    ;; (DefaultNullable.this.f12 = new Object.<init>());
-   (struct.set $defaultnullable.DefaultNullable $f12@defaultnullable.DefaultNullable(local.get $this) (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (i32.const 0) (global.get $java.lang.Object.rtt))))
+   (struct.set $defaultnullable.DefaultNullable $f_f12__defaultnullable_DefaultNullable_(local.get $this) (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (i32.const 0) (global.get $java.lang.Object.rtt))))
   )
  )
 )
@@ -166,14 +166,14 @@
  (block $return.label
   (block
    ;; if (defaultnullable.DefaultNullable.$initialized) return;
-   (if (global.get $$initialized@defaultnullable.DefaultNullable)
+   (if (global.get $f_$initialized__defaultnullable_DefaultNullable)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (defaultnullable.DefaultNullable.$initialized = true);
-   (global.set $$initialized@defaultnullable.DefaultNullable (i32.const 1))
+   (global.set $f_$initialized__defaultnullable_DefaultNullable (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

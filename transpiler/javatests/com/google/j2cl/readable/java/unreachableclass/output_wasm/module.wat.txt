@@ -3,7 +3,7 @@
 ;;; CLASS  Main
 (type $unreachableclass.Main (struct
  (field $vtable (ref null $unreachableclass.Main.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $unreachableclass.Main.vtable (struct
  
@@ -13,7 +13,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $unreachableclass.Main.vtable (mut (ref null $unreachableclass.Main.vtable)) (ref.null $unreachableclass.Main.vtable))
-(global $$initialized@unreachableclass.Main (mut i32) (i32.const 0))
+(global $f_$initialized__unreachableclass_Main (mut i32) (i32.const 0))
 
 ;;; Main()
 (func $m_<init>__void@unreachableclass.Main
@@ -48,14 +48,14 @@
  (block $return.label
   (block
    ;; if (unreachableclass.Main.$initialized) return;
-   (if (global.get $$initialized@unreachableclass.Main)
+   (if (global.get $f_$initialized__unreachableclass_Main)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (unreachableclass.Main.$initialized = true);
-   (global.set $$initialized@unreachableclass.Main (i32.const 1))
+   (global.set $f_$initialized__unreachableclass_Main (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -65,8 +65,8 @@
 ;;; CLASS  A
 (type $unreachableclass.Main.1A (struct
  (field $vtable (ref null $unreachableclass.Main.1A.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $this@unreachableclass.Main.1A (mut (ref null $unreachableclass.Main)))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $$outer_this__unreachableclass_Main_1A (mut (ref null $unreachableclass.Main)))
 ))
 (type $unreachableclass.Main.1A.vtable (struct
  
@@ -77,7 +77,7 @@
  (field $m_m__void_$pp_unreachableclass (mut (ref $function.__$void)))
 ))
 (global $unreachableclass.Main.1A.vtable (mut (ref null $unreachableclass.Main.1A.vtable)) (ref.null $unreachableclass.Main.1A.vtable))
-(global $$initialized@unreachableclass.Main.1A (mut i32) (i32.const 0))
+(global $f_$initialized__unreachableclass_Main_1A (mut i32) (i32.const 0))
 
 ;;; A(Main $outer_this)
 (func $m_<init>__unreachableclass_Main__void_$pp_unreachableclass@unreachableclass.Main.1A
@@ -87,7 +87,7 @@
  (block $return.label
   (block
    ;; ($1A.this.this = $outer_this);
-   (struct.set $unreachableclass.Main.1A $this@unreachableclass.Main.1A(local.get $this) (local.get $$outer_this))
+   (struct.set $unreachableclass.Main.1A $$outer_this__unreachableclass_Main_1A(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -112,14 +112,14 @@
  (block $return.label
   (block
    ;; if (unreachableclass.Main.1A.$initialized) return;
-   (if (global.get $$initialized@unreachableclass.Main.1A)
+   (if (global.get $f_$initialized__unreachableclass_Main_1A)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (unreachableclass.Main.1A.$initialized = true);
-   (global.set $$initialized@unreachableclass.Main.1A (i32.const 1))
+   (global.set $f_$initialized__unreachableclass_Main_1A (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -129,8 +129,8 @@
 ;;; CLASS  B
 (type $unreachableclass.Main.1A.1B (struct
  (field $vtable (ref null $unreachableclass.Main.1A.1B.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $this@unreachableclass.Main.1A.1B (mut (ref null $unreachableclass.Main.1A)))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $$outer_this__unreachableclass_Main_1A_1B (mut (ref null $unreachableclass.Main.1A)))
 ))
 (type $unreachableclass.Main.1A.1B.vtable (struct
  
@@ -140,7 +140,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $unreachableclass.Main.1A.1B.vtable (mut (ref null $unreachableclass.Main.1A.1B.vtable)) (ref.null $unreachableclass.Main.1A.1B.vtable))
-(global $$initialized@unreachableclass.Main.1A.1B (mut i32) (i32.const 0))
+(global $f_$initialized__unreachableclass_Main_1A_1B (mut i32) (i32.const 0))
 
 ;;; B(A $outer_this)
 (func $m_<init>__unreachableclass_Main_1A__void_$pp_unreachableclass@unreachableclass.Main.1A.1B
@@ -150,7 +150,7 @@
  (block $return.label
   (block
    ;; ($1B.this.this = $outer_this);
-   (struct.set $unreachableclass.Main.1A.1B $this@unreachableclass.Main.1A.1B(local.get $this) (local.get $$outer_this))
+   (struct.set $unreachableclass.Main.1A.1B $$outer_this__unreachableclass_Main_1A_1B(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -172,14 +172,14 @@
  (block $return.label
   (block
    ;; if (unreachableclass.Main.1A.1B.$initialized) return;
-   (if (global.get $$initialized@unreachableclass.Main.1A.1B)
+   (if (global.get $f_$initialized__unreachableclass_Main_1A_1B)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (unreachableclass.Main.1A.1B.$initialized = true);
-   (global.set $$initialized@unreachableclass.Main.1A.1B (i32.const 1))
+   (global.set $f_$initialized__unreachableclass_Main_1A_1B (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -189,8 +189,8 @@
 ;;; CLASS  <anonymous> extends Object
 (type $unreachableclass.Main.1 (struct
  (field $vtable (ref null $unreachableclass.Main.1.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $this@unreachableclass.Main.1 (mut (ref null $unreachableclass.Main)))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $$outer_this__unreachableclass_Main_1 (mut (ref null $unreachableclass.Main)))
 ))
 (type $unreachableclass.Main.1.vtable (struct
  
@@ -200,7 +200,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $unreachableclass.Main.1.vtable (mut (ref null $unreachableclass.Main.1.vtable)) (ref.null $unreachableclass.Main.1.vtable))
-(global $$initialized@unreachableclass.Main.1 (mut i32) (i32.const 0))
+(global $f_$initialized__unreachableclass_Main_1 (mut i32) (i32.const 0))
 
 ;;; <anonymous> extends Object(Main $outer_this)
 (func $m_<init>__unreachableclass_Main__void_$pp_unreachableclass@unreachableclass.Main.1
@@ -210,7 +210,7 @@
  (block $return.label
   (block
    ;; ($1.this.this = $outer_this);
-   (struct.set $unreachableclass.Main.1 $this@unreachableclass.Main.1(local.get $this) (local.get $$outer_this))
+   (struct.set $unreachableclass.Main.1 $$outer_this__unreachableclass_Main_1(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -223,14 +223,14 @@
  (block $return.label
   (block
    ;; if (unreachableclass.Main.1.$initialized) return;
-   (if (global.get $$initialized@unreachableclass.Main.1)
+   (if (global.get $f_$initialized__unreachableclass_Main_1)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (unreachableclass.Main.1.$initialized = true);
-   (global.set $$initialized@unreachableclass.Main.1 (i32.const 1))
+   (global.set $f_$initialized__unreachableclass_Main_1 (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

@@ -1,61 +1,61 @@
 ;;; Code for interfacejsbridge.InterfaceImpl
 
 ;;; INTERFACE  MyJsInterface
-(global $$initialized@interfacejsbridge.MyJsInterface (mut i32) (i32.const 0))
+(global $f_$initialized__interfacejsbridge_MyJsInterface (mut i32) (i32.const 0))
 
 ;;; void MyJsInterface.$clinit()
 (func $$clinit__void@interfacejsbridge.MyJsInterface
  (block $return.label
   (block
    ;; if (interfacejsbridge.MyJsInterface.$initialized) return;
-   (if (global.get $$initialized@interfacejsbridge.MyJsInterface)
+   (if (global.get $f_$initialized__interfacejsbridge_MyJsInterface)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (interfacejsbridge.MyJsInterface.$initialized = true);
-   (global.set $$initialized@interfacejsbridge.MyJsInterface (i32.const 1))
+   (global.set $f_$initialized__interfacejsbridge_MyJsInterface (i32.const 1))
   )
  )
 )
 
 ;;; INTERFACE  MyInterface
-(global $$initialized@interfacejsbridge.MyInterface (mut i32) (i32.const 0))
+(global $f_$initialized__interfacejsbridge_MyInterface (mut i32) (i32.const 0))
 
 ;;; void MyInterface.$clinit()
 (func $$clinit__void@interfacejsbridge.MyInterface
  (block $return.label
   (block
    ;; if (interfacejsbridge.MyInterface.$initialized) return;
-   (if (global.get $$initialized@interfacejsbridge.MyInterface)
+   (if (global.get $f_$initialized__interfacejsbridge_MyInterface)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (interfacejsbridge.MyInterface.$initialized = true);
-   (global.set $$initialized@interfacejsbridge.MyInterface (i32.const 1))
+   (global.set $f_$initialized__interfacejsbridge_MyInterface (i32.const 1))
   )
  )
 )
 
 ;;; INTERFACE  SubInterface
-(global $$initialized@interfacejsbridge.SubInterface (mut i32) (i32.const 0))
+(global $f_$initialized__interfacejsbridge_SubInterface (mut i32) (i32.const 0))
 
 ;;; void SubInterface.$clinit()
 (func $$clinit__void@interfacejsbridge.SubInterface
  (block $return.label
   (block
    ;; if (interfacejsbridge.SubInterface.$initialized) return;
-   (if (global.get $$initialized@interfacejsbridge.SubInterface)
+   (if (global.get $f_$initialized__interfacejsbridge_SubInterface)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (interfacejsbridge.SubInterface.$initialized = true);
-   (global.set $$initialized@interfacejsbridge.SubInterface (i32.const 1))
+   (global.set $f_$initialized__interfacejsbridge_SubInterface (i32.const 1))
   )
  )
 )
@@ -63,7 +63,7 @@
 ;;; CLASS  InterfaceImpl
 (type $interfacejsbridge.InterfaceImpl (struct
  (field $vtable (ref null $interfacejsbridge.InterfaceImpl.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $interfacejsbridge.InterfaceImpl.vtable (struct
  
@@ -74,7 +74,7 @@
  (field $m_foo__int__int (mut (ref $function.$int__$int)))
 ))
 (global $interfacejsbridge.InterfaceImpl.vtable (mut (ref null $interfacejsbridge.InterfaceImpl.vtable)) (ref.null $interfacejsbridge.InterfaceImpl.vtable))
-(global $$initialized@interfacejsbridge.InterfaceImpl (mut i32) (i32.const 0))
+(global $f_$initialized__interfacejsbridge_InterfaceImpl (mut i32) (i32.const 0))
 
 ;;; InterfaceImpl()
 (func $m_<init>__void@interfacejsbridge.InterfaceImpl
@@ -113,14 +113,14 @@
  (block $return.label
   (block
    ;; if (interfacejsbridge.InterfaceImpl.$initialized) return;
-   (if (global.get $$initialized@interfacejsbridge.InterfaceImpl)
+   (if (global.get $f_$initialized__interfacejsbridge_InterfaceImpl)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (interfacejsbridge.InterfaceImpl.$initialized = true);
-   (global.set $$initialized@interfacejsbridge.InterfaceImpl (i32.const 1))
+   (global.set $f_$initialized__interfacejsbridge_InterfaceImpl (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -131,7 +131,7 @@
 ;;; CLASS  Main
 (type $interfacejsbridge.Main (struct
  (field $vtable (ref null $interfacejsbridge.Main.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $interfacejsbridge.Main.vtable (struct
  
@@ -142,7 +142,7 @@
  (field $m_test__void (mut (ref $function.__$void)))
 ))
 (global $interfacejsbridge.Main.vtable (mut (ref null $interfacejsbridge.Main.vtable)) (ref.null $interfacejsbridge.Main.vtable))
-(global $$initialized@interfacejsbridge.Main (mut i32) (i32.const 0))
+(global $f_$initialized__interfacejsbridge_Main (mut i32) (i32.const 0))
 
 ;;; Main()
 (func $m_<init>__void@interfacejsbridge.Main
@@ -198,14 +198,14 @@
  (block $return.label
   (block
    ;; if (interfacejsbridge.Main.$initialized) return;
-   (if (global.get $$initialized@interfacejsbridge.Main)
+   (if (global.get $f_$initialized__interfacejsbridge_Main)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (interfacejsbridge.Main.$initialized = true);
-   (global.set $$initialized@interfacejsbridge.Main (i32.const 1))
+   (global.set $f_$initialized__interfacejsbridge_Main (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

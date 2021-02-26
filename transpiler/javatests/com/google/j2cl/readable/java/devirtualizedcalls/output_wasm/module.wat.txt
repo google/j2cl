@@ -3,7 +3,7 @@
 ;;; CLASS  ArrayCalls
 (type $devirtualizedcalls.ArrayCalls (struct
  (field $vtable (ref null $devirtualizedcalls.ArrayCalls.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $devirtualizedcalls.ArrayCalls.vtable (struct
  
@@ -14,7 +14,7 @@
  (field $m_main__void (mut (ref $function.__$void)))
 ))
 (global $devirtualizedcalls.ArrayCalls.vtable (mut (ref null $devirtualizedcalls.ArrayCalls.vtable)) (ref.null $devirtualizedcalls.ArrayCalls.vtable))
-(global $$initialized@devirtualizedcalls.ArrayCalls (mut i32) (i32.const 0))
+(global $f_$initialized__devirtualizedcalls_ArrayCalls (mut i32) (i32.const 0))
 
 ;;; ArrayCalls()
 (func $m_<init>__void@devirtualizedcalls.ArrayCalls
@@ -65,14 +65,14 @@
  (block $return.label
   (block
    ;; if (devirtualizedcalls.ArrayCalls.$initialized) return;
-   (if (global.get $$initialized@devirtualizedcalls.ArrayCalls)
+   (if (global.get $f_$initialized__devirtualizedcalls_ArrayCalls)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (devirtualizedcalls.ArrayCalls.$initialized = true);
-   (global.set $$initialized@devirtualizedcalls.ArrayCalls (i32.const 1))
+   (global.set $f_$initialized__devirtualizedcalls_ArrayCalls (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -83,7 +83,7 @@
 ;;; CLASS  CharSequenceCalls
 (type $devirtualizedcalls.CharSequenceCalls (struct
  (field $vtable (ref null $devirtualizedcalls.CharSequenceCalls.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $devirtualizedcalls.CharSequenceCalls.vtable (struct
  
@@ -95,7 +95,7 @@
  (field $m_main__void (mut (ref $function.__$void)))
 ))
 (global $devirtualizedcalls.CharSequenceCalls.vtable (mut (ref null $devirtualizedcalls.CharSequenceCalls.vtable)) (ref.null $devirtualizedcalls.CharSequenceCalls.vtable))
-(global $$initialized@devirtualizedcalls.CharSequenceCalls (mut i32) (i32.const 0))
+(global $f_$initialized__devirtualizedcalls_CharSequenceCalls (mut i32) (i32.const 0))
 
 ;;; CharSequenceCalls()
 (func $m_<init>__void@devirtualizedcalls.CharSequenceCalls
@@ -154,14 +154,14 @@
  (block $return.label
   (block
    ;; if (devirtualizedcalls.CharSequenceCalls.$initialized) return;
-   (if (global.get $$initialized@devirtualizedcalls.CharSequenceCalls)
+   (if (global.get $f_$initialized__devirtualizedcalls_CharSequenceCalls)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (devirtualizedcalls.CharSequenceCalls.$initialized = true);
-   (global.set $$initialized@devirtualizedcalls.CharSequenceCalls (i32.const 1))
+   (global.set $f_$initialized__devirtualizedcalls_CharSequenceCalls (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -172,7 +172,7 @@
 ;;; CLASS  NumberCalls
 (type $devirtualizedcalls.NumberCalls (struct
  (field $vtable (ref null $devirtualizedcalls.NumberCalls.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $devirtualizedcalls.NumberCalls.vtable (struct
  
@@ -183,7 +183,7 @@
  (field $m_main__void (mut (ref $function.__$void)))
 ))
 (global $devirtualizedcalls.NumberCalls.vtable (mut (ref null $devirtualizedcalls.NumberCalls.vtable)) (ref.null $devirtualizedcalls.NumberCalls.vtable))
-(global $$initialized@devirtualizedcalls.NumberCalls (mut i32) (i32.const 0))
+(global $f_$initialized__devirtualizedcalls_NumberCalls (mut i32) (i32.const 0))
 
 ;;; NumberCalls()
 (func $m_<init>__void@devirtualizedcalls.NumberCalls
@@ -419,14 +419,14 @@
  (block $return.label
   (block
    ;; if (devirtualizedcalls.NumberCalls.$initialized) return;
-   (if (global.get $$initialized@devirtualizedcalls.NumberCalls)
+   (if (global.get $f_$initialized__devirtualizedcalls_NumberCalls)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (devirtualizedcalls.NumberCalls.$initialized = true);
-   (global.set $$initialized@devirtualizedcalls.NumberCalls (i32.const 1))
+   (global.set $f_$initialized__devirtualizedcalls_NumberCalls (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -437,7 +437,7 @@
 ;;; CLASS  ObjectCalls
 (type $devirtualizedcalls.ObjectCalls (struct
  (field $vtable (ref null $devirtualizedcalls.ObjectCalls.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $devirtualizedcalls.ObjectCalls.vtable (struct
  
@@ -449,7 +449,7 @@
  (field $m_test__void (mut (ref $function.__$void)))
 ))
 (global $devirtualizedcalls.ObjectCalls.vtable (mut (ref null $devirtualizedcalls.ObjectCalls.vtable)) (ref.null $devirtualizedcalls.ObjectCalls.vtable))
-(global $$initialized@devirtualizedcalls.ObjectCalls (mut i32) (i32.const 0))
+(global $f_$initialized__devirtualizedcalls_ObjectCalls (mut i32) (i32.const 0))
 
 ;;; ObjectCalls()
 (func $m_<init>__void@devirtualizedcalls.ObjectCalls
@@ -533,14 +533,14 @@
  (block $return.label
   (block
    ;; if (devirtualizedcalls.ObjectCalls.$initialized) return;
-   (if (global.get $$initialized@devirtualizedcalls.ObjectCalls)
+   (if (global.get $f_$initialized__devirtualizedcalls_ObjectCalls)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (devirtualizedcalls.ObjectCalls.$initialized = true);
-   (global.set $$initialized@devirtualizedcalls.ObjectCalls (i32.const 1))
+   (global.set $f_$initialized__devirtualizedcalls_ObjectCalls (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -551,7 +551,7 @@
 ;;; CLASS  StringCalls
 (type $devirtualizedcalls.StringCalls (struct
  (field $vtable (ref null $devirtualizedcalls.StringCalls.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $devirtualizedcalls.StringCalls.vtable (struct
  
@@ -562,7 +562,7 @@
  (field $m_main__void (mut (ref $function.__$void)))
 ))
 (global $devirtualizedcalls.StringCalls.vtable (mut (ref null $devirtualizedcalls.StringCalls.vtable)) (ref.null $devirtualizedcalls.StringCalls.vtable))
-(global $$initialized@devirtualizedcalls.StringCalls (mut i32) (i32.const 0))
+(global $f_$initialized__devirtualizedcalls_StringCalls (mut i32) (i32.const 0))
 
 ;;; StringCalls()
 (func $m_<init>__void@devirtualizedcalls.StringCalls
@@ -625,14 +625,14 @@
  (block $return.label
   (block
    ;; if (devirtualizedcalls.StringCalls.$initialized) return;
-   (if (global.get $$initialized@devirtualizedcalls.StringCalls)
+   (if (global.get $f_$initialized__devirtualizedcalls_StringCalls)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (devirtualizedcalls.StringCalls.$initialized = true);
-   (global.set $$initialized@devirtualizedcalls.StringCalls (i32.const 1))
+   (global.set $f_$initialized__devirtualizedcalls_StringCalls (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

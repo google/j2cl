@@ -3,9 +3,9 @@
 ;;; CLASS  CascadingConstructor
 (type $cascadingconstructor.CascadingConstructor (struct
  (field $vtable (ref null $cascadingconstructor.CascadingConstructor.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $a@cascadingconstructor.CascadingConstructor (mut i32))
- (field $b@cascadingconstructor.CascadingConstructor (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $f_a__cascadingconstructor_CascadingConstructor_ (mut i32))
+ (field $f_b__cascadingconstructor_CascadingConstructor_ (mut i32))
 ))
 (type $cascadingconstructor.CascadingConstructor.vtable (struct
  
@@ -15,7 +15,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $cascadingconstructor.CascadingConstructor.vtable (mut (ref null $cascadingconstructor.CascadingConstructor.vtable)) (ref.null $cascadingconstructor.CascadingConstructor.vtable))
-(global $$initialized@cascadingconstructor.CascadingConstructor (mut i32) (i32.const 0))
+(global $f_$initialized__cascadingconstructor_CascadingConstructor (mut i32) (i32.const 0))
 
 ;;; CascadingConstructor(int a, int b)
 (func $m_<init>__int__int__void_$p_cascadingconstructor_CascadingConstructor@cascadingconstructor.CascadingConstructor
@@ -28,9 +28,9 @@
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; (CascadingConstructor.this.a = a);
-   (struct.set $cascadingconstructor.CascadingConstructor $a@cascadingconstructor.CascadingConstructor(local.get $this) (local.get $a))
+   (struct.set $cascadingconstructor.CascadingConstructor $f_a__cascadingconstructor_CascadingConstructor_(local.get $this) (local.get $a))
    ;; (CascadingConstructor.this.b = b);
-   (struct.set $cascadingconstructor.CascadingConstructor $b@cascadingconstructor.CascadingConstructor(local.get $this) (local.get $b))
+   (struct.set $cascadingconstructor.CascadingConstructor $f_b__cascadingconstructor_CascadingConstructor_(local.get $this) (local.get $b))
   )
  )
  (local.get $this)
@@ -55,14 +55,14 @@
  (block $return.label
   (block
    ;; if (cascadingconstructor.CascadingConstructor.$initialized) return;
-   (if (global.get $$initialized@cascadingconstructor.CascadingConstructor)
+   (if (global.get $f_$initialized__cascadingconstructor_CascadingConstructor)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (cascadingconstructor.CascadingConstructor.$initialized = true);
-   (global.set $$initialized@cascadingconstructor.CascadingConstructor (i32.const 1))
+   (global.set $f_$initialized__cascadingconstructor_CascadingConstructor (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

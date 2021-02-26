@@ -3,7 +3,7 @@
 ;;; CLASS  SubNumber
 (type $devirtualizedsupermethodcall.SubNumber (struct
  (field $vtable (ref null $devirtualizedsupermethodcall.SubNumber.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $devirtualizedsupermethodcall.SubNumber.vtable (struct
  
@@ -19,7 +19,7 @@
  (field $m_shortValue__short (mut (ref $function.__$short)))
 ))
 (global $devirtualizedsupermethodcall.SubNumber.vtable (mut (ref null $devirtualizedsupermethodcall.SubNumber.vtable)) (ref.null $devirtualizedsupermethodcall.SubNumber.vtable))
-(global $$initialized@devirtualizedsupermethodcall.SubNumber (mut i32) (i32.const 0))
+(global $f_$initialized__devirtualizedsupermethodcall_SubNumber (mut i32) (i32.const 0))
 
 ;;; SubNumber()
 (func $m_<init>__void_$pp_devirtualizedsupermethodcall@devirtualizedsupermethodcall.SubNumber
@@ -111,14 +111,14 @@
  (block $return.label
   (block
    ;; if (devirtualizedsupermethodcall.SubNumber.$initialized) return;
-   (if (global.get $$initialized@devirtualizedsupermethodcall.SubNumber)
+   (if (global.get $f_$initialized__devirtualizedsupermethodcall_SubNumber)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (devirtualizedsupermethodcall.SubNumber.$initialized = true);
-   (global.set $$initialized@devirtualizedsupermethodcall.SubNumber (i32.const 1))
+   (global.set $f_$initialized__devirtualizedsupermethodcall_SubNumber (i32.const 1))
    ;; java.lang.Number.$clinit();
    (call $$clinit__void@java.lang.Number )
   )
@@ -128,7 +128,7 @@
 ;;; CLASS  FooCallsSuperObjectMethod
 (type $devirtualizedsupermethodcall.FooCallsSuperObjectMethod (struct
  (field $vtable (ref null $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable (struct
  
@@ -138,7 +138,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable (mut (ref null $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable)) (ref.null $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable))
-(global $$initialized@devirtualizedsupermethodcall.FooCallsSuperObjectMethod (mut i32) (i32.const 0))
+(global $f_$initialized__devirtualizedsupermethodcall_FooCallsSuperObjectMethod (mut i32) (i32.const 0))
 
 ;;; FooCallsSuperObjectMethod()
 (func $m_<init>__void_$pp_devirtualizedsupermethodcall@devirtualizedsupermethodcall.FooCallsSuperObjectMethod
@@ -176,14 +176,14 @@
  (block $return.label
   (block
    ;; if (devirtualizedsupermethodcall.FooCallsSuperObjectMethod.$initialized) return;
-   (if (global.get $$initialized@devirtualizedsupermethodcall.FooCallsSuperObjectMethod)
+   (if (global.get $f_$initialized__devirtualizedsupermethodcall_FooCallsSuperObjectMethod)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (devirtualizedsupermethodcall.FooCallsSuperObjectMethod.$initialized = true);
-   (global.set $$initialized@devirtualizedsupermethodcall.FooCallsSuperObjectMethod (i32.const 1))
+   (global.set $f_$initialized__devirtualizedsupermethodcall_FooCallsSuperObjectMethod (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -193,7 +193,7 @@
 ;;; CLASS  Main
 (type $devirtualizedsupermethodcall.Main (struct
  (field $vtable (ref null $devirtualizedsupermethodcall.Main.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $devirtualizedsupermethodcall.Main.vtable (struct
  
@@ -204,7 +204,7 @@
  (field $m_main__void (mut (ref $function.__$void)))
 ))
 (global $devirtualizedsupermethodcall.Main.vtable (mut (ref null $devirtualizedsupermethodcall.Main.vtable)) (ref.null $devirtualizedsupermethodcall.Main.vtable))
-(global $$initialized@devirtualizedsupermethodcall.Main (mut i32) (i32.const 0))
+(global $f_$initialized__devirtualizedsupermethodcall_Main (mut i32) (i32.const 0))
 
 ;;; Main()
 (func $m_<init>__void@devirtualizedsupermethodcall.Main
@@ -256,14 +256,14 @@
  (block $return.label
   (block
    ;; if (devirtualizedsupermethodcall.Main.$initialized) return;
-   (if (global.get $$initialized@devirtualizedsupermethodcall.Main)
+   (if (global.get $f_$initialized__devirtualizedsupermethodcall_Main)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (devirtualizedsupermethodcall.Main.$initialized = true);
-   (global.set $$initialized@devirtualizedsupermethodcall.Main (i32.const 1))
+   (global.set $f_$initialized__devirtualizedsupermethodcall_Main (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

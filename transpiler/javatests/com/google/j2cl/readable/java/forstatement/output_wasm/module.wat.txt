@@ -3,7 +3,7 @@
 ;;; CLASS  ForStatement
 (type $forstatement.ForStatement (struct
  (field $vtable (ref null $forstatement.ForStatement.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $forstatement.ForStatement.vtable (struct
  
@@ -14,7 +14,7 @@
  (field $m_test__void (mut (ref $function.__$void)))
 ))
 (global $forstatement.ForStatement.vtable (mut (ref null $forstatement.ForStatement.vtable)) (ref.null $forstatement.ForStatement.vtable))
-(global $$initialized@forstatement.ForStatement (mut i32) (i32.const 0))
+(global $f_$initialized__forstatement_ForStatement (mut i32) (i32.const 0))
 
 ;;; ForStatement()
 (func $m_<init>__void@forstatement.ForStatement
@@ -158,14 +158,14 @@
  (block $return.label
   (block
    ;; if (forstatement.ForStatement.$initialized) return;
-   (if (global.get $$initialized@forstatement.ForStatement)
+   (if (global.get $f_$initialized__forstatement_ForStatement)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (forstatement.ForStatement.$initialized = true);
-   (global.set $$initialized@forstatement.ForStatement (i32.const 1))
+   (global.set $f_$initialized__forstatement_ForStatement (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

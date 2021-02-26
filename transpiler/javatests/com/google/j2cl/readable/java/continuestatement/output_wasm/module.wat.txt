@@ -3,7 +3,7 @@
 ;;; CLASS  ContinueStatement
 (type $continuestatement.ContinueStatement (struct
  (field $vtable (ref null $continuestatement.ContinueStatement.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $continuestatement.ContinueStatement.vtable (struct
  
@@ -14,7 +14,7 @@
  (field $m_test__void (mut (ref $function.__$void)))
 ))
 (global $continuestatement.ContinueStatement.vtable (mut (ref null $continuestatement.ContinueStatement.vtable)) (ref.null $continuestatement.ContinueStatement.vtable))
-(global $$initialized@continuestatement.ContinueStatement (mut i32) (i32.const 0))
+(global $f_$initialized__continuestatement_ContinueStatement (mut i32) (i32.const 0))
 
 ;;; ContinueStatement()
 (func $m_<init>__void@continuestatement.ContinueStatement
@@ -61,14 +61,14 @@
  (block $return.label
   (block
    ;; if (continuestatement.ContinueStatement.$initialized) return;
-   (if (global.get $$initialized@continuestatement.ContinueStatement)
+   (if (global.get $f_$initialized__continuestatement_ContinueStatement)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (continuestatement.ContinueStatement.$initialized = true);
-   (global.set $$initialized@continuestatement.ContinueStatement (i32.const 1))
+   (global.set $f_$initialized__continuestatement_ContinueStatement (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

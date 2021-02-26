@@ -1,21 +1,21 @@
 ;;; Code for mixednestings.MixedNestings
 
 ;;; INTERFACE  MyInterface
-(global $$initialized@mixednestings.MyInterface (mut i32) (i32.const 0))
+(global $f_$initialized__mixednestings_MyInterface (mut i32) (i32.const 0))
 
 ;;; void MyInterface.$clinit()
 (func $$clinit__void@mixednestings.MyInterface
  (block $return.label
   (block
    ;; if (mixednestings.MyInterface.$initialized) return;
-   (if (global.get $$initialized@mixednestings.MyInterface)
+   (if (global.get $f_$initialized__mixednestings_MyInterface)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (mixednestings.MyInterface.$initialized = true);
-   (global.set $$initialized@mixednestings.MyInterface (i32.const 1))
+   (global.set $f_$initialized__mixednestings_MyInterface (i32.const 1))
   )
  )
 )
@@ -23,7 +23,7 @@
 ;;; CLASS  MixedNestings
 (type $mixednestings.MixedNestings (struct
  (field $vtable (ref null $mixednestings.MixedNestings.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $mixednestings.MixedNestings.vtable (struct
  
@@ -35,7 +35,7 @@
  (field $m_test__void (mut (ref $function.__$void)))
 ))
 (global $mixednestings.MixedNestings.vtable (mut (ref null $mixednestings.MixedNestings.vtable)) (ref.null $mixednestings.MixedNestings.vtable))
-(global $$initialized@mixednestings.MixedNestings (mut i32) (i32.const 0))
+(global $f_$initialized__mixednestings_MixedNestings (mut i32) (i32.const 0))
 
 ;;; MixedNestings()
 (func $m_<init>__void@mixednestings.MixedNestings
@@ -87,14 +87,14 @@
  (block $return.label
   (block
    ;; if (mixednestings.MixedNestings.$initialized) return;
-   (if (global.get $$initialized@mixednestings.MixedNestings)
+   (if (global.get $f_$initialized__mixednestings_MixedNestings)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (mixednestings.MixedNestings.$initialized = true);
-   (global.set $$initialized@mixednestings.MixedNestings (i32.const 1))
+   (global.set $f_$initialized__mixednestings_MixedNestings (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -104,8 +104,8 @@
 ;;; CLASS  A
 (type $mixednestings.MixedNestings.A (struct
  (field $vtable (ref null $mixednestings.MixedNestings.A.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $this@mixednestings.MixedNestings.A (mut (ref null $mixednestings.MixedNestings)))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $$outer_this__mixednestings_MixedNestings_A (mut (ref null $mixednestings.MixedNestings)))
 ))
 (type $mixednestings.MixedNestings.A.vtable (struct
  
@@ -117,7 +117,7 @@
  (field $m_a__void (mut (ref $function.__$void)))
 ))
 (global $mixednestings.MixedNestings.A.vtable (mut (ref null $mixednestings.MixedNestings.A.vtable)) (ref.null $mixednestings.MixedNestings.A.vtable))
-(global $$initialized@mixednestings.MixedNestings.A (mut i32) (i32.const 0))
+(global $f_$initialized__mixednestings_MixedNestings_A (mut i32) (i32.const 0))
 
 ;;; A(MixedNestings $outer_this)
 (func $m_<init>__mixednestings_MixedNestings__void_$pp_mixednestings@mixednestings.MixedNestings.A
@@ -127,7 +127,7 @@
  (block $return.label
   (block
    ;; (A.this.this = $outer_this);
-   (struct.set $mixednestings.MixedNestings.A $this@mixednestings.MixedNestings.A(local.get $this) (local.get $$outer_this))
+   (struct.set $mixednestings.MixedNestings.A $$outer_this__mixednestings_MixedNestings_A(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -172,14 +172,14 @@
  (block $return.label
   (block
    ;; if (mixednestings.MixedNestings.A.$initialized) return;
-   (if (global.get $$initialized@mixednestings.MixedNestings.A)
+   (if (global.get $f_$initialized__mixednestings_MixedNestings_A)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (mixednestings.MixedNestings.A.$initialized = true);
-   (global.set $$initialized@mixednestings.MixedNestings.A (i32.const 1))
+   (global.set $f_$initialized__mixednestings_MixedNestings_A (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -189,8 +189,8 @@
 ;;; CLASS  B
 (type $mixednestings.MixedNestings.A.1B (struct
  (field $vtable (ref null $mixednestings.MixedNestings.A.1B.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $this@mixednestings.MixedNestings.A.1B (mut (ref null $mixednestings.MixedNestings.A)))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $$outer_this__mixednestings_MixedNestings_A_1B (mut (ref null $mixednestings.MixedNestings.A)))
 ))
 (type $mixednestings.MixedNestings.A.1B.vtable (struct
  
@@ -202,7 +202,7 @@
  (field $m_b__int (mut (ref $function.__$int)))
 ))
 (global $mixednestings.MixedNestings.A.1B.vtable (mut (ref null $mixednestings.MixedNestings.A.1B.vtable)) (ref.null $mixednestings.MixedNestings.A.1B.vtable))
-(global $$initialized@mixednestings.MixedNestings.A.1B (mut i32) (i32.const 0))
+(global $f_$initialized__mixednestings_MixedNestings_A_1B (mut i32) (i32.const 0))
 
 ;;; B(A $outer_this)
 (func $m_<init>__mixednestings_MixedNestings_A__void_$pp_mixednestings@mixednestings.MixedNestings.A.1B
@@ -212,7 +212,7 @@
  (block $return.label
   (block
    ;; ($1B.this.this = $outer_this);
-   (struct.set $mixednestings.MixedNestings.A.1B $this@mixednestings.MixedNestings.A.1B(local.get $this) (local.get $$outer_this))
+   (struct.set $mixednestings.MixedNestings.A.1B $$outer_this__mixednestings_MixedNestings_A_1B(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -259,14 +259,14 @@
  (block $return.label
   (block
    ;; if (mixednestings.MixedNestings.A.1B.$initialized) return;
-   (if (global.get $$initialized@mixednestings.MixedNestings.A.1B)
+   (if (global.get $f_$initialized__mixednestings_MixedNestings_A_1B)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (mixednestings.MixedNestings.A.1B.$initialized = true);
-   (global.set $$initialized@mixednestings.MixedNestings.A.1B (i32.const 1))
+   (global.set $f_$initialized__mixednestings_MixedNestings_A_1B (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -276,8 +276,8 @@
 ;;; CLASS  <anonymous> implements MyInterface
 (type $mixednestings.MixedNestings.A.1B.1 (struct
  (field $vtable (ref null $mixednestings.MixedNestings.A.1B.1.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $this@mixednestings.MixedNestings.A.1B.1 (mut (ref null $mixednestings.MixedNestings.A.1B)))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $$outer_this__mixednestings_MixedNestings_A_1B_1 (mut (ref null $mixednestings.MixedNestings.A.1B)))
 ))
 (type $mixednestings.MixedNestings.A.1B.1.vtable (struct
  
@@ -288,7 +288,7 @@
  (field $m_fun__int__int (mut (ref $function.$int__$int)))
 ))
 (global $mixednestings.MixedNestings.A.1B.1.vtable (mut (ref null $mixednestings.MixedNestings.A.1B.1.vtable)) (ref.null $mixednestings.MixedNestings.A.1B.1.vtable))
-(global $$initialized@mixednestings.MixedNestings.A.1B.1 (mut i32) (i32.const 0))
+(global $f_$initialized__mixednestings_MixedNestings_A_1B_1 (mut i32) (i32.const 0))
 
 ;;; <anonymous> implements MyInterface(B $outer_this)
 (func $m_<init>__mixednestings_MixedNestings_A_1B__void_$pp_mixednestings@mixednestings.MixedNestings.A.1B.1
@@ -298,7 +298,7 @@
  (block $return.label
   (block
    ;; ($1.this.this = $outer_this);
-   (struct.set $mixednestings.MixedNestings.A.1B.1 $this@mixednestings.MixedNestings.A.1B.1(local.get $this) (local.get $$outer_this))
+   (struct.set $mixednestings.MixedNestings.A.1B.1 $$outer_this__mixednestings_MixedNestings_A_1B_1(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -338,14 +338,14 @@
  (block $return.label
   (block
    ;; if (mixednestings.MixedNestings.A.1B.1.$initialized) return;
-   (if (global.get $$initialized@mixednestings.MixedNestings.A.1B.1)
+   (if (global.get $f_$initialized__mixednestings_MixedNestings_A_1B_1)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (mixednestings.MixedNestings.A.1B.1.$initialized = true);
-   (global.set $$initialized@mixednestings.MixedNestings.A.1B.1 (i32.const 1))
+   (global.set $f_$initialized__mixednestings_MixedNestings_A_1B_1 (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -355,8 +355,8 @@
 ;;; CLASS  <anonymous> implements MyInterface
 (type $mixednestings.MixedNestings.A.1B.1.1 (struct
  (field $vtable (ref null $mixednestings.MixedNestings.A.1B.1.1.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $this@mixednestings.MixedNestings.A.1B.1.1 (mut (ref null $mixednestings.MixedNestings.A.1B.1)))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $$outer_this__mixednestings_MixedNestings_A_1B_1_1 (mut (ref null $mixednestings.MixedNestings.A.1B.1)))
 ))
 (type $mixednestings.MixedNestings.A.1B.1.1.vtable (struct
  
@@ -367,7 +367,7 @@
  (field $m_fun__int__int (mut (ref $function.$int__$int)))
 ))
 (global $mixednestings.MixedNestings.A.1B.1.1.vtable (mut (ref null $mixednestings.MixedNestings.A.1B.1.1.vtable)) (ref.null $mixednestings.MixedNestings.A.1B.1.1.vtable))
-(global $$initialized@mixednestings.MixedNestings.A.1B.1.1 (mut i32) (i32.const 0))
+(global $f_$initialized__mixednestings_MixedNestings_A_1B_1_1 (mut i32) (i32.const 0))
 
 ;;; <anonymous> implements MyInterface(<anonymous> implements MyInterface $outer_this)
 (func $m_<init>__mixednestings_MixedNestings_A_1B_1__void_$pp_mixednestings@mixednestings.MixedNestings.A.1B.1.1
@@ -377,7 +377,7 @@
  (block $return.label
   (block
    ;; ($1.this.this = $outer_this);
-   (struct.set $mixednestings.MixedNestings.A.1B.1.1 $this@mixednestings.MixedNestings.A.1B.1.1(local.get $this) (local.get $$outer_this))
+   (struct.set $mixednestings.MixedNestings.A.1B.1.1 $$outer_this__mixednestings_MixedNestings_A_1B_1_1(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -409,14 +409,14 @@
  (block $return.label
   (block
    ;; if (mixednestings.MixedNestings.A.1B.1.1.$initialized) return;
-   (if (global.get $$initialized@mixednestings.MixedNestings.A.1B.1.1)
+   (if (global.get $f_$initialized__mixednestings_MixedNestings_A_1B_1_1)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (mixednestings.MixedNestings.A.1B.1.1.$initialized = true);
-   (global.set $$initialized@mixednestings.MixedNestings.A.1B.1.1 (i32.const 1))
+   (global.set $f_$initialized__mixednestings_MixedNestings_A_1B_1_1 (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

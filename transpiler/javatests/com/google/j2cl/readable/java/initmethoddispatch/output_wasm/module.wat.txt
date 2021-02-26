@@ -3,8 +3,8 @@
 ;;; CLASS  InitMethodDispatch
 (type $initmethoddispatch.InitMethodDispatch (struct
  (field $vtable (ref null $initmethoddispatch.InitMethodDispatch.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $value@initmethoddispatch.InitMethodDispatch (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $f_value__initmethoddispatch_InitMethodDispatch (mut i32))
 ))
 (type $initmethoddispatch.InitMethodDispatch.vtable (struct
  
@@ -14,7 +14,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $initmethoddispatch.InitMethodDispatch.vtable (mut (ref null $initmethoddispatch.InitMethodDispatch.vtable)) (ref.null $initmethoddispatch.InitMethodDispatch.vtable))
-(global $$initialized@initmethoddispatch.InitMethodDispatch (mut i32) (i32.const 0))
+(global $f_$initialized__initmethoddispatch_InitMethodDispatch (mut i32) (i32.const 0))
 
 ;;; InitMethodDispatch()
 (func $m_<init>__void_$pp_initmethoddispatch@initmethoddispatch.InitMethodDispatch
@@ -39,7 +39,7 @@
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; (InitMethodDispatch.this.value = i);
-   (struct.set $initmethoddispatch.InitMethodDispatch $value@initmethoddispatch.InitMethodDispatch(local.get $this) (local.get $i))
+   (struct.set $initmethoddispatch.InitMethodDispatch $f_value__initmethoddispatch_InitMethodDispatch(local.get $this) (local.get $i))
   )
  )
  (local.get $this)
@@ -50,14 +50,14 @@
  (block $return.label
   (block
    ;; if (initmethoddispatch.InitMethodDispatch.$initialized) return;
-   (if (global.get $$initialized@initmethoddispatch.InitMethodDispatch)
+   (if (global.get $f_$initialized__initmethoddispatch_InitMethodDispatch)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (initmethoddispatch.InitMethodDispatch.$initialized = true);
-   (global.set $$initialized@initmethoddispatch.InitMethodDispatch (i32.const 1))
+   (global.set $f_$initialized__initmethoddispatch_InitMethodDispatch (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

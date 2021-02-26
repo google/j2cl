@@ -1,41 +1,41 @@
 ;;; Code for implementsgenericinterface.GenericInterfaceImpl
 
 ;;; INTERFACE  GenericInterface
-(global $$initialized@implementsgenericinterface.GenericInterface (mut i32) (i32.const 0))
+(global $f_$initialized__implementsgenericinterface_GenericInterface (mut i32) (i32.const 0))
 
 ;;; void GenericInterface.$clinit()
 (func $$clinit__void@implementsgenericinterface.GenericInterface
  (block $return.label
   (block
    ;; if (implementsgenericinterface.GenericInterface.$initialized) return;
-   (if (global.get $$initialized@implementsgenericinterface.GenericInterface)
+   (if (global.get $f_$initialized__implementsgenericinterface_GenericInterface)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (implementsgenericinterface.GenericInterface.$initialized = true);
-   (global.set $$initialized@implementsgenericinterface.GenericInterface (i32.const 1))
+   (global.set $f_$initialized__implementsgenericinterface_GenericInterface (i32.const 1))
   )
  )
 )
 
 ;;; INTERFACE  GenericSubInterface
-(global $$initialized@implementsgenericinterface.GenericSubInterface (mut i32) (i32.const 0))
+(global $f_$initialized__implementsgenericinterface_GenericSubInterface (mut i32) (i32.const 0))
 
 ;;; void GenericSubInterface.$clinit()
 (func $$clinit__void@implementsgenericinterface.GenericSubInterface
  (block $return.label
   (block
    ;; if (implementsgenericinterface.GenericSubInterface.$initialized) return;
-   (if (global.get $$initialized@implementsgenericinterface.GenericSubInterface)
+   (if (global.get $f_$initialized__implementsgenericinterface_GenericSubInterface)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (implementsgenericinterface.GenericSubInterface.$initialized = true);
-   (global.set $$initialized@implementsgenericinterface.GenericSubInterface (i32.const 1))
+   (global.set $f_$initialized__implementsgenericinterface_GenericSubInterface (i32.const 1))
   )
  )
 )
@@ -43,7 +43,7 @@
 ;;; CLASS  GenericInterfaceGenericImpl
 (type $implementsgenericinterface.GenericInterfaceGenericImpl (struct
  (field $vtable (ref null $implementsgenericinterface.GenericInterfaceGenericImpl.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $implementsgenericinterface.GenericInterfaceGenericImpl.vtable (struct
  
@@ -53,7 +53,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $implementsgenericinterface.GenericInterfaceGenericImpl.vtable (mut (ref null $implementsgenericinterface.GenericInterfaceGenericImpl.vtable)) (ref.null $implementsgenericinterface.GenericInterfaceGenericImpl.vtable))
-(global $$initialized@implementsgenericinterface.GenericInterfaceGenericImpl (mut i32) (i32.const 0))
+(global $f_$initialized__implementsgenericinterface_GenericInterfaceGenericImpl (mut i32) (i32.const 0))
 
 ;;; GenericInterfaceGenericImpl()
 (func $m_<init>__void_$pp_implementsgenericinterface@implementsgenericinterface.GenericInterfaceGenericImpl
@@ -73,14 +73,14 @@
  (block $return.label
   (block
    ;; if (implementsgenericinterface.GenericInterfaceGenericImpl.$initialized) return;
-   (if (global.get $$initialized@implementsgenericinterface.GenericInterfaceGenericImpl)
+   (if (global.get $f_$initialized__implementsgenericinterface_GenericInterfaceGenericImpl)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (implementsgenericinterface.GenericInterfaceGenericImpl.$initialized = true);
-   (global.set $$initialized@implementsgenericinterface.GenericInterfaceGenericImpl (i32.const 1))
+   (global.set $f_$initialized__implementsgenericinterface_GenericInterfaceGenericImpl (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -90,7 +90,7 @@
 ;;; CLASS  GenericInterfaceImpl
 (type $implementsgenericinterface.GenericInterfaceImpl (struct
  (field $vtable (ref null $implementsgenericinterface.GenericInterfaceImpl.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $implementsgenericinterface.GenericInterfaceImpl.vtable (struct
  
@@ -100,7 +100,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $implementsgenericinterface.GenericInterfaceImpl.vtable (mut (ref null $implementsgenericinterface.GenericInterfaceImpl.vtable)) (ref.null $implementsgenericinterface.GenericInterfaceImpl.vtable))
-(global $$initialized@implementsgenericinterface.GenericInterfaceImpl (mut i32) (i32.const 0))
+(global $f_$initialized__implementsgenericinterface_GenericInterfaceImpl (mut i32) (i32.const 0))
 
 ;;; GenericInterfaceImpl()
 (func $m_<init>__void@implementsgenericinterface.GenericInterfaceImpl
@@ -120,14 +120,14 @@
  (block $return.label
   (block
    ;; if (implementsgenericinterface.GenericInterfaceImpl.$initialized) return;
-   (if (global.get $$initialized@implementsgenericinterface.GenericInterfaceImpl)
+   (if (global.get $f_$initialized__implementsgenericinterface_GenericInterfaceImpl)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (implementsgenericinterface.GenericInterfaceImpl.$initialized = true);
-   (global.set $$initialized@implementsgenericinterface.GenericInterfaceImpl (i32.const 1))
+   (global.set $f_$initialized__implementsgenericinterface_GenericInterfaceImpl (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

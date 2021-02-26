@@ -3,7 +3,7 @@
 ;;; CLASS  Parent
 (type $qualifiedsupercall.Parent (struct
  (field $vtable (ref null $qualifiedsupercall.Parent.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $qualifiedsupercall.Parent.vtable (struct
  
@@ -14,7 +14,7 @@
  (field $m_fun__void (mut (ref $function.__$void)))
 ))
 (global $qualifiedsupercall.Parent.vtable (mut (ref null $qualifiedsupercall.Parent.vtable)) (ref.null $qualifiedsupercall.Parent.vtable))
-(global $$initialized@qualifiedsupercall.Parent (mut i32) (i32.const 0))
+(global $f_$initialized__qualifiedsupercall_Parent (mut i32) (i32.const 0))
 
 ;;; Parent()
 (func $m_<init>__void_$pp_qualifiedsupercall@qualifiedsupercall.Parent
@@ -46,14 +46,14 @@
  (block $return.label
   (block
    ;; if (qualifiedsupercall.Parent.$initialized) return;
-   (if (global.get $$initialized@qualifiedsupercall.Parent)
+   (if (global.get $f_$initialized__qualifiedsupercall_Parent)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (qualifiedsupercall.Parent.$initialized = true);
-   (global.set $$initialized@qualifiedsupercall.Parent (i32.const 1))
+   (global.set $f_$initialized__qualifiedsupercall_Parent (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -63,7 +63,7 @@
 ;;; CLASS  QualifiedSuperCall
 (type $qualifiedsupercall.QualifiedSuperCall (struct
  (field $vtable (ref null $qualifiedsupercall.QualifiedSuperCall.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $qualifiedsupercall.QualifiedSuperCall.vtable (struct
  
@@ -74,7 +74,7 @@
  (field $m_fun__void (mut (ref $function.__$void)))
 ))
 (global $qualifiedsupercall.QualifiedSuperCall.vtable (mut (ref null $qualifiedsupercall.QualifiedSuperCall.vtable)) (ref.null $qualifiedsupercall.QualifiedSuperCall.vtable))
-(global $$initialized@qualifiedsupercall.QualifiedSuperCall (mut i32) (i32.const 0))
+(global $f_$initialized__qualifiedsupercall_QualifiedSuperCall (mut i32) (i32.const 0))
 
 ;;; QualifiedSuperCall()
 (func $m_<init>__void@qualifiedsupercall.QualifiedSuperCall
@@ -94,14 +94,14 @@
  (block $return.label
   (block
    ;; if (qualifiedsupercall.QualifiedSuperCall.$initialized) return;
-   (if (global.get $$initialized@qualifiedsupercall.QualifiedSuperCall)
+   (if (global.get $f_$initialized__qualifiedsupercall_QualifiedSuperCall)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (qualifiedsupercall.QualifiedSuperCall.$initialized = true);
-   (global.set $$initialized@qualifiedsupercall.QualifiedSuperCall (i32.const 1))
+   (global.set $f_$initialized__qualifiedsupercall_QualifiedSuperCall (i32.const 1))
    ;; qualifiedsupercall.Parent.$clinit();
    (call $$clinit__void@qualifiedsupercall.Parent )
   )
@@ -111,8 +111,8 @@
 ;;; CLASS  InnerClass
 (type $qualifiedsupercall.QualifiedSuperCall.InnerClass (struct
  (field $vtable (ref null $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $this@qualifiedsupercall.QualifiedSuperCall.InnerClass (mut (ref null $qualifiedsupercall.QualifiedSuperCall)))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $$outer_this__qualifiedsupercall_QualifiedSuperCall_InnerClass (mut (ref null $qualifiedsupercall.QualifiedSuperCall)))
 ))
 (type $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable (struct
  
@@ -123,7 +123,7 @@
  (field $m_test__void (mut (ref $function.__$void)))
 ))
 (global $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable (mut (ref null $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable)) (ref.null $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable))
-(global $$initialized@qualifiedsupercall.QualifiedSuperCall.InnerClass (mut i32) (i32.const 0))
+(global $f_$initialized__qualifiedsupercall_QualifiedSuperCall_InnerClass (mut i32) (i32.const 0))
 
 ;;; InnerClass(QualifiedSuperCall $outer_this)
 (func $m_<init>__qualifiedsupercall_QualifiedSuperCall__void@qualifiedsupercall.QualifiedSuperCall.InnerClass
@@ -133,7 +133,7 @@
  (block $return.label
   (block
    ;; (InnerClass.this.this = $outer_this);
-   (struct.set $qualifiedsupercall.QualifiedSuperCall.InnerClass $this@qualifiedsupercall.QualifiedSuperCall.InnerClass(local.get $this) (local.get $$outer_this))
+   (struct.set $qualifiedsupercall.QualifiedSuperCall.InnerClass $$outer_this__qualifiedsupercall_QualifiedSuperCall_InnerClass(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -149,7 +149,7 @@
  (block $return.label
   (block
    ;; InnerClass.this.this.fun();
-   (call $m_fun__void@qualifiedsupercall.Parent (struct.get $qualifiedsupercall.QualifiedSuperCall.InnerClass $this@qualifiedsupercall.QualifiedSuperCall.InnerClass(local.get $this)))
+   (call $m_fun__void@qualifiedsupercall.Parent (struct.get $qualifiedsupercall.QualifiedSuperCall.InnerClass $$outer_this__qualifiedsupercall_QualifiedSuperCall_InnerClass(local.get $this)))
   )
  )
 )
@@ -160,14 +160,14 @@
  (block $return.label
   (block
    ;; if (qualifiedsupercall.QualifiedSuperCall.InnerClass.$initialized) return;
-   (if (global.get $$initialized@qualifiedsupercall.QualifiedSuperCall.InnerClass)
+   (if (global.get $f_$initialized__qualifiedsupercall_QualifiedSuperCall_InnerClass)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (qualifiedsupercall.QualifiedSuperCall.InnerClass.$initialized = true);
-   (global.set $$initialized@qualifiedsupercall.QualifiedSuperCall.InnerClass (i32.const 1))
+   (global.set $f_$initialized__qualifiedsupercall_QualifiedSuperCall_InnerClass (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

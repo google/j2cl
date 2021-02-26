@@ -3,7 +3,7 @@
 ;;; CLASS  TryCatch
 (type $trycatch.TryCatch (struct
  (field $vtable (ref null $trycatch.TryCatch.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $trycatch.TryCatch.vtable (struct
  
@@ -22,7 +22,7 @@
  (field $m_testThrowBoundGenerics__void (mut (ref $function.__$void)))
 ))
 (global $trycatch.TryCatch.vtable (mut (ref null $trycatch.TryCatch.vtable)) (ref.null $trycatch.TryCatch.vtable))
-(global $$initialized@trycatch.TryCatch (mut i32) (i32.const 0))
+(global $f_$initialized__trycatch_TryCatch (mut i32) (i32.const 0))
 
 ;;; TryCatch()
 (func $m_<init>__void@trycatch.TryCatch
@@ -223,14 +223,14 @@
  (block $return.label
   (block
    ;; if (trycatch.TryCatch.$initialized) return;
-   (if (global.get $$initialized@trycatch.TryCatch)
+   (if (global.get $f_$initialized__trycatch_TryCatch)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (trycatch.TryCatch.$initialized = true);
-   (global.set $$initialized@trycatch.TryCatch (i32.const 1))
+   (global.set $f_$initialized__trycatch_TryCatch (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -240,7 +240,7 @@
 ;;; CLASS  ClosableThing
 (type $trycatch.TryCatch.ClosableThing (struct
  (field $vtable (ref null $trycatch.TryCatch.ClosableThing.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $trycatch.TryCatch.ClosableThing.vtable (struct
  
@@ -251,7 +251,7 @@
  (field $m_close__void (mut (ref $function.__$void)))
 ))
 (global $trycatch.TryCatch.ClosableThing.vtable (mut (ref null $trycatch.TryCatch.ClosableThing.vtable)) (ref.null $trycatch.TryCatch.ClosableThing.vtable))
-(global $$initialized@trycatch.TryCatch.ClosableThing (mut i32) (i32.const 0))
+(global $f_$initialized__trycatch_TryCatch_ClosableThing (mut i32) (i32.const 0))
 
 ;;; ClosableThing()
 (func $m_<init>__void_$pp_trycatch@trycatch.TryCatch.ClosableThing
@@ -283,14 +283,14 @@
  (block $return.label
   (block
    ;; if (trycatch.TryCatch.ClosableThing.$initialized) return;
-   (if (global.get $$initialized@trycatch.TryCatch.ClosableThing)
+   (if (global.get $f_$initialized__trycatch_TryCatch_ClosableThing)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (trycatch.TryCatch.ClosableThing.$initialized = true);
-   (global.set $$initialized@trycatch.TryCatch.ClosableThing (i32.const 1))
+   (global.set $f_$initialized__trycatch_TryCatch_ClosableThing (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

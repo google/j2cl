@@ -3,7 +3,7 @@
 ;;; CLASS  CastOnArrayInit
 (type $castonarrayinit.CastOnArrayInit (struct
  (field $vtable (ref null $castonarrayinit.CastOnArrayInit.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $castonarrayinit.CastOnArrayInit.vtable (struct
  
@@ -13,7 +13,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $castonarrayinit.CastOnArrayInit.vtable (mut (ref null $castonarrayinit.CastOnArrayInit.vtable)) (ref.null $castonarrayinit.CastOnArrayInit.vtable))
-(global $$initialized@castonarrayinit.CastOnArrayInit (mut i32) (i32.const 0))
+(global $f_$initialized__castonarrayinit_CastOnArrayInit (mut i32) (i32.const 0))
 
 ;;; CastOnArrayInit()
 (func $m_<init>__void@castonarrayinit.CastOnArrayInit
@@ -71,14 +71,14 @@
  (block $return.label
   (block
    ;; if (castonarrayinit.CastOnArrayInit.$initialized) return;
-   (if (global.get $$initialized@castonarrayinit.CastOnArrayInit)
+   (if (global.get $f_$initialized__castonarrayinit_CastOnArrayInit)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (castonarrayinit.CastOnArrayInit.$initialized = true);
-   (global.set $$initialized@castonarrayinit.CastOnArrayInit (i32.const 1))
+   (global.set $f_$initialized__castonarrayinit_CastOnArrayInit (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -88,7 +88,7 @@
 ;;; CLASS  Foo
 (type $castonarrayinit.CastOnArrayInit.Foo (struct
  (field $vtable (ref null $castonarrayinit.CastOnArrayInit.Foo.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $castonarrayinit.CastOnArrayInit.Foo.vtable (struct
  
@@ -98,7 +98,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $castonarrayinit.CastOnArrayInit.Foo.vtable (mut (ref null $castonarrayinit.CastOnArrayInit.Foo.vtable)) (ref.null $castonarrayinit.CastOnArrayInit.Foo.vtable))
-(global $$initialized@castonarrayinit.CastOnArrayInit.Foo (mut i32) (i32.const 0))
+(global $f_$initialized__castonarrayinit_CastOnArrayInit_Foo (mut i32) (i32.const 0))
 
 ;;; Foo()
 (func $m_<init>__void@castonarrayinit.CastOnArrayInit.Foo
@@ -118,14 +118,14 @@
  (block $return.label
   (block
    ;; if (castonarrayinit.CastOnArrayInit.Foo.$initialized) return;
-   (if (global.get $$initialized@castonarrayinit.CastOnArrayInit.Foo)
+   (if (global.get $f_$initialized__castonarrayinit_CastOnArrayInit_Foo)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (castonarrayinit.CastOnArrayInit.Foo.$initialized = true);
-   (global.set $$initialized@castonarrayinit.CastOnArrayInit.Foo (i32.const 1))
+   (global.set $f_$initialized__castonarrayinit_CastOnArrayInit_Foo (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

@@ -3,7 +3,7 @@
 ;;; CLASS  Dummy
 (type $aptgeneratordep.Dummy (struct
  (field $vtable (ref null $aptgeneratordep.Dummy.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $aptgeneratordep.Dummy.vtable (struct
  
@@ -13,7 +13,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $aptgeneratordep.Dummy.vtable (mut (ref null $aptgeneratordep.Dummy.vtable)) (ref.null $aptgeneratordep.Dummy.vtable))
-(global $$initialized@aptgeneratordep.Dummy (mut i32) (i32.const 0))
+(global $f_$initialized__aptgeneratordep_Dummy (mut i32) (i32.const 0))
 
 ;;; Dummy()
 (func $m_<init>__void@aptgeneratordep.Dummy
@@ -33,14 +33,14 @@
  (block $return.label
   (block
    ;; if (aptgeneratordep.Dummy.$initialized) return;
-   (if (global.get $$initialized@aptgeneratordep.Dummy)
+   (if (global.get $f_$initialized__aptgeneratordep_Dummy)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (aptgeneratordep.Dummy.$initialized = true);
-   (global.set $$initialized@aptgeneratordep.Dummy (i32.const 1))
+   (global.set $f_$initialized__aptgeneratordep_Dummy (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -51,7 +51,7 @@
 ;;; CLASS  Foo
 (type $aptgeneratordep.Foo (struct
  (field $vtable (ref null $aptgeneratordep.Foo.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $aptgeneratordep.Foo.vtable (struct
  
@@ -61,7 +61,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $aptgeneratordep.Foo.vtable (mut (ref null $aptgeneratordep.Foo.vtable)) (ref.null $aptgeneratordep.Foo.vtable))
-(global $$initialized@aptgeneratordep.Foo (mut i32) (i32.const 0))
+(global $f_$initialized__aptgeneratordep_Foo (mut i32) (i32.const 0))
 
 ;;; Foo()
 (func $m_<init>__void@aptgeneratordep.Foo
@@ -99,14 +99,14 @@
  (block $return.label
   (block
    ;; if (aptgeneratordep.Foo.$initialized) return;
-   (if (global.get $$initialized@aptgeneratordep.Foo)
+   (if (global.get $f_$initialized__aptgeneratordep_Foo)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (aptgeneratordep.Foo.$initialized = true);
-   (global.set $$initialized@aptgeneratordep.Foo (i32.const 1))
+   (global.set $f_$initialized__aptgeneratordep_Foo (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

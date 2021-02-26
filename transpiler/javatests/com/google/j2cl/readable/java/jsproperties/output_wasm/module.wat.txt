@@ -3,7 +3,7 @@
 ;;; CLASS  Foo
 (type $jsproperties.Foo (struct
  (field $vtable (ref null $jsproperties.Foo.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $jsproperties.Foo.vtable (struct
  
@@ -13,8 +13,8 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $jsproperties.Foo.vtable (mut (ref null $jsproperties.Foo.vtable)) (ref.null $jsproperties.Foo.vtable))
-(global $f@jsproperties.Foo (mut i32) (i32.const 0))
-(global $$initialized@jsproperties.Foo (mut i32) (i32.const 0))
+(global $f_f__jsproperties_Foo_ (mut i32) (i32.const 0))
+(global $f_$initialized__jsproperties_Foo (mut i32) (i32.const 0))
 
 ;;; Foo()
 (func $m_<init>__void_$pp_jsproperties@jsproperties.Foo
@@ -38,7 +38,7 @@
    ;; jsproperties.Foo.$clinit();
    (call $$clinit__void@jsproperties.Foo )
    ;; return (jsproperties.Foo.f + 1);
-   (local.set $return.value (i32.add (global.get $f@jsproperties.Foo) (i32.const 1)))
+   (local.set $return.value (i32.add (global.get $f_f__jsproperties_Foo_) (i32.const 1)))
    (br $return.label)
   )
  )
@@ -53,7 +53,7 @@
    ;; jsproperties.Foo.$clinit();
    (call $$clinit__void@jsproperties.Foo )
    ;; (jsproperties.Foo.f = (x + 2));
-   (global.set $f@jsproperties.Foo (i32.add (local.get $x) (i32.const 2)))
+   (global.set $f_f__jsproperties_Foo_ (i32.add (local.get $x) (i32.const 2)))
   )
  )
 )
@@ -67,7 +67,7 @@
    ;; jsproperties.Foo.$clinit();
    (call $$clinit__void@jsproperties.Foo )
    ;; return (jsproperties.Foo.f + 3);
-   (local.set $return.value (i32.add (global.get $f@jsproperties.Foo) (i32.const 3)))
+   (local.set $return.value (i32.add (global.get $f_f__jsproperties_Foo_) (i32.const 3)))
    (br $return.label)
   )
  )
@@ -82,7 +82,7 @@
    ;; jsproperties.Foo.$clinit();
    (call $$clinit__void@jsproperties.Foo )
    ;; (jsproperties.Foo.f = (x + 4));
-   (global.set $f@jsproperties.Foo (i32.add (local.get $x) (i32.const 4)))
+   (global.set $f_f__jsproperties_Foo_ (i32.add (local.get $x) (i32.const 4)))
   )
  )
 )
@@ -92,14 +92,14 @@
  (block $return.label
   (block
    ;; if (jsproperties.Foo.$initialized) return;
-   (if (global.get $$initialized@jsproperties.Foo)
+   (if (global.get $f_$initialized__jsproperties_Foo)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsproperties.Foo.$initialized = true);
-   (global.set $$initialized@jsproperties.Foo (i32.const 1))
+   (global.set $f_$initialized__jsproperties_Foo (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -109,8 +109,8 @@
 ;;; CLASS  Bar
 (type $jsproperties.Bar (struct
  (field $vtable (ref null $jsproperties.Bar.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $f@jsproperties.Bar (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $f_f__jsproperties_Bar_ (mut i32))
 ))
 (type $jsproperties.Bar.vtable (struct
  
@@ -124,7 +124,7 @@
  (field $m_setB__int__void (mut (ref $function.$int__$void)))
 ))
 (global $jsproperties.Bar.vtable (mut (ref null $jsproperties.Bar.vtable)) (ref.null $jsproperties.Bar.vtable))
-(global $$initialized@jsproperties.Bar (mut i32) (i32.const 0))
+(global $f_$initialized__jsproperties_Bar (mut i32) (i32.const 0))
 
 ;;; Bar()
 (func $m_<init>__void_$pp_jsproperties@jsproperties.Bar
@@ -149,7 +149,7 @@
  (block $return.label
   (block
    ;; return (Bar.this.f + 1);
-   (local.set $return.value (i32.add (struct.get $jsproperties.Bar $f@jsproperties.Bar(local.get $this)) (i32.const 1)))
+   (local.set $return.value (i32.add (struct.get $jsproperties.Bar $f_f__jsproperties_Bar_(local.get $this)) (i32.const 1)))
    (br $return.label)
   )
  )
@@ -166,7 +166,7 @@
  (block $return.label
   (block
    ;; (Bar.this.f = (x + 2));
-   (struct.set $jsproperties.Bar $f@jsproperties.Bar(local.get $this) (i32.add (local.get $x) (i32.const 2)))
+   (struct.set $jsproperties.Bar $f_f__jsproperties_Bar_(local.get $this) (i32.add (local.get $x) (i32.const 2)))
   )
  )
 )
@@ -182,7 +182,7 @@
  (block $return.label
   (block
    ;; return (Bar.this.f + 3);
-   (local.set $return.value (i32.add (struct.get $jsproperties.Bar $f@jsproperties.Bar(local.get $this)) (i32.const 3)))
+   (local.set $return.value (i32.add (struct.get $jsproperties.Bar $f_f__jsproperties_Bar_(local.get $this)) (i32.const 3)))
    (br $return.label)
   )
  )
@@ -199,7 +199,7 @@
  (block $return.label
   (block
    ;; (Bar.this.f = (x + 4));
-   (struct.set $jsproperties.Bar $f@jsproperties.Bar(local.get $this) (i32.add (local.get $x) (i32.const 4)))
+   (struct.set $jsproperties.Bar $f_f__jsproperties_Bar_(local.get $this) (i32.add (local.get $x) (i32.const 4)))
   )
  )
 )
@@ -210,14 +210,14 @@
  (block $return.label
   (block
    ;; if (jsproperties.Bar.$initialized) return;
-   (if (global.get $$initialized@jsproperties.Bar)
+   (if (global.get $f_$initialized__jsproperties_Bar)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsproperties.Bar.$initialized = true);
-   (global.set $$initialized@jsproperties.Bar (i32.const 1))
+   (global.set $f_$initialized__jsproperties_Bar (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -227,7 +227,7 @@
 ;;; CLASS  NativeFoo
 (type $jsproperties.NativeFoo (struct
  (field $vtable (ref null $jsproperties.NativeFoo.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $jsproperties.NativeFoo.vtable (struct
  
@@ -238,7 +238,7 @@
  (field $m_getA__java_lang_Object (mut (ref $function.__$java.lang.Object)))
 ))
 (global $jsproperties.NativeFoo.vtable (mut (ref null $jsproperties.NativeFoo.vtable)) (ref.null $jsproperties.NativeFoo.vtable))
-(global $$initialized@jsproperties.NativeFoo (mut i32) (i32.const 0))
+(global $f_$initialized__jsproperties_NativeFoo (mut i32) (i32.const 0))
 
 ;;; NativeFoo()
 (func $m_<init>__void_$pp_jsproperties@jsproperties.NativeFoo
@@ -284,14 +284,14 @@
  (block $return.label
   (block
    ;; if (jsproperties.NativeFoo.$initialized) return;
-   (if (global.get $$initialized@jsproperties.NativeFoo)
+   (if (global.get $f_$initialized__jsproperties_NativeFoo)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsproperties.NativeFoo.$initialized = true);
-   (global.set $$initialized@jsproperties.NativeFoo (i32.const 1))
+   (global.set $f_$initialized__jsproperties_NativeFoo (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -301,7 +301,7 @@
 ;;; CLASS  Main
 (type $jsproperties.Main (struct
  (field $vtable (ref null $jsproperties.Main.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $jsproperties.Main.vtable (struct
  
@@ -314,7 +314,7 @@
  (field $m_testInstanceJsProperty__void (mut (ref $function.__$void)))
 ))
 (global $jsproperties.Main.vtable (mut (ref null $jsproperties.Main.vtable)) (ref.null $jsproperties.Main.vtable))
-(global $$initialized@jsproperties.Main (mut i32) (i32.const 0))
+(global $f_$initialized__jsproperties_Main (mut i32) (i32.const 0))
 
 ;;; Main()
 (func $m_<init>__void@jsproperties.Main
@@ -400,14 +400,14 @@
  (block $return.label
   (block
    ;; if (jsproperties.Main.$initialized) return;
-   (if (global.get $$initialized@jsproperties.Main)
+   (if (global.get $f_$initialized__jsproperties_Main)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsproperties.Main.$initialized = true);
-   (global.set $$initialized@jsproperties.Main (i32.const 1))
+   (global.set $f_$initialized__jsproperties_Main (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

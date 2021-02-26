@@ -3,7 +3,7 @@
 ;;; CLASS  SimpleLocalClass
 (type $simplelocalclass.SimpleLocalClass (struct
  (field $vtable (ref null $simplelocalclass.SimpleLocalClass.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $simplelocalclass.SimpleLocalClass.vtable (struct
  
@@ -16,7 +16,7 @@
  (field $m_foo__void (mut (ref $function.__$void)))
 ))
 (global $simplelocalclass.SimpleLocalClass.vtable (mut (ref null $simplelocalclass.SimpleLocalClass.vtable)) (ref.null $simplelocalclass.SimpleLocalClass.vtable))
-(global $$initialized@simplelocalclass.SimpleLocalClass (mut i32) (i32.const 0))
+(global $f_$initialized__simplelocalclass_SimpleLocalClass (mut i32) (i32.const 0))
 
 ;;; SimpleLocalClass()
 (func $m_<init>__void@simplelocalclass.SimpleLocalClass
@@ -91,14 +91,14 @@
  (block $return.label
   (block
    ;; if (simplelocalclass.SimpleLocalClass.$initialized) return;
-   (if (global.get $$initialized@simplelocalclass.SimpleLocalClass)
+   (if (global.get $f_$initialized__simplelocalclass_SimpleLocalClass)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (simplelocalclass.SimpleLocalClass.$initialized = true);
-   (global.set $$initialized@simplelocalclass.SimpleLocalClass (i32.const 1))
+   (global.set $f_$initialized__simplelocalclass_SimpleLocalClass (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -108,10 +108,10 @@
 ;;; CLASS  InnerClass
 (type $simplelocalclass.SimpleLocalClass.1InnerClass (struct
  (field $vtable (ref null $simplelocalclass.SimpleLocalClass.1InnerClass.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $this@simplelocalclass.SimpleLocalClass.1InnerClass (mut (ref null $simplelocalclass.SimpleLocalClass)))
- (field $localVar@simplelocalclass.SimpleLocalClass.1InnerClass (mut i32))
- (field $p@simplelocalclass.SimpleLocalClass.1InnerClass (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $$outer_this__simplelocalclass_SimpleLocalClass_1InnerClass (mut (ref null $simplelocalclass.SimpleLocalClass)))
+ (field $$captured_localVar__simplelocalclass_SimpleLocalClass_1InnerClass (mut i32))
+ (field $$captured_p__simplelocalclass_SimpleLocalClass_1InnerClass (mut i32))
 ))
 (type $simplelocalclass.SimpleLocalClass.1InnerClass.vtable (struct
  
@@ -122,7 +122,7 @@
  (field $m_fun__int (mut (ref $function.__$int)))
 ))
 (global $simplelocalclass.SimpleLocalClass.1InnerClass.vtable (mut (ref null $simplelocalclass.SimpleLocalClass.1InnerClass.vtable)) (ref.null $simplelocalclass.SimpleLocalClass.1InnerClass.vtable))
-(global $$initialized@simplelocalclass.SimpleLocalClass.1InnerClass (mut i32) (i32.const 0))
+(global $f_$initialized__simplelocalclass_SimpleLocalClass_1InnerClass (mut i32) (i32.const 0))
 
 ;;; InnerClass(SimpleLocalClass $outer_this, int $captured_localVar, int $captured_p)
 (func $m_<init>__simplelocalclass_SimpleLocalClass__int__int__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1InnerClass
@@ -134,11 +134,11 @@
  (block $return.label
   (block
    ;; ($1InnerClass.this.this = $outer_this);
-   (struct.set $simplelocalclass.SimpleLocalClass.1InnerClass $this@simplelocalclass.SimpleLocalClass.1InnerClass(local.get $this) (local.get $$outer_this))
+   (struct.set $simplelocalclass.SimpleLocalClass.1InnerClass $$outer_this__simplelocalclass_SimpleLocalClass_1InnerClass(local.get $this) (local.get $$outer_this))
    ;; ($1InnerClass.this.localVar = $captured_localVar);
-   (struct.set $simplelocalclass.SimpleLocalClass.1InnerClass $localVar@simplelocalclass.SimpleLocalClass.1InnerClass(local.get $this) (local.get $$captured_localVar))
+   (struct.set $simplelocalclass.SimpleLocalClass.1InnerClass $$captured_localVar__simplelocalclass_SimpleLocalClass_1InnerClass(local.get $this) (local.get $$captured_localVar))
    ;; ($1InnerClass.this.p = $captured_p);
-   (struct.set $simplelocalclass.SimpleLocalClass.1InnerClass $p@simplelocalclass.SimpleLocalClass.1InnerClass(local.get $this) (local.get $$captured_p))
+   (struct.set $simplelocalclass.SimpleLocalClass.1InnerClass $$captured_p__simplelocalclass_SimpleLocalClass_1InnerClass(local.get $this) (local.get $$captured_p))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -156,7 +156,7 @@
  (block $return.label
   (block
    ;; return ($1InnerClass.this.localVar + $1InnerClass.this.p);
-   (local.set $return.value (i32.add (struct.get $simplelocalclass.SimpleLocalClass.1InnerClass $localVar@simplelocalclass.SimpleLocalClass.1InnerClass(local.get $this)) (struct.get $simplelocalclass.SimpleLocalClass.1InnerClass $p@simplelocalclass.SimpleLocalClass.1InnerClass(local.get $this))))
+   (local.set $return.value (i32.add (struct.get $simplelocalclass.SimpleLocalClass.1InnerClass $$captured_localVar__simplelocalclass_SimpleLocalClass_1InnerClass(local.get $this)) (struct.get $simplelocalclass.SimpleLocalClass.1InnerClass $$captured_p__simplelocalclass_SimpleLocalClass_1InnerClass(local.get $this))))
    (br $return.label)
   )
  )
@@ -169,14 +169,14 @@
  (block $return.label
   (block
    ;; if (simplelocalclass.SimpleLocalClass.1InnerClass.$initialized) return;
-   (if (global.get $$initialized@simplelocalclass.SimpleLocalClass.1InnerClass)
+   (if (global.get $f_$initialized__simplelocalclass_SimpleLocalClass_1InnerClass)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (simplelocalclass.SimpleLocalClass.1InnerClass.$initialized = true);
-   (global.set $$initialized@simplelocalclass.SimpleLocalClass.1InnerClass (i32.const 1))
+   (global.set $f_$initialized__simplelocalclass_SimpleLocalClass_1InnerClass (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -186,8 +186,8 @@
 ;;; CLASS  InnerClassWithoutCaptures
 (type $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (struct
  (field $vtable (ref null $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $this@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (mut (ref null $simplelocalclass.SimpleLocalClass)))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $$outer_this__simplelocalclass_SimpleLocalClass_1InnerClassWithoutCaptures (mut (ref null $simplelocalclass.SimpleLocalClass)))
 ))
 (type $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.vtable (struct
  
@@ -197,7 +197,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.vtable (mut (ref null $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.vtable)) (ref.null $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.vtable))
-(global $$initialized@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (mut i32) (i32.const 0))
+(global $f_$initialized__simplelocalclass_SimpleLocalClass_1InnerClassWithoutCaptures (mut i32) (i32.const 0))
 
 ;;; InnerClassWithoutCaptures(SimpleLocalClass $outer_this)
 (func $m_<init>__simplelocalclass_SimpleLocalClass__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures
@@ -207,7 +207,7 @@
  (block $return.label
   (block
    ;; ($1InnerClassWithoutCaptures.this.this = $outer_this);
-   (struct.set $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures $this@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures(local.get $this) (local.get $$outer_this))
+   (struct.set $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures $$outer_this__simplelocalclass_SimpleLocalClass_1InnerClassWithoutCaptures(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -220,14 +220,14 @@
  (block $return.label
   (block
    ;; if (simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.$initialized) return;
-   (if (global.get $$initialized@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures)
+   (if (global.get $f_$initialized__simplelocalclass_SimpleLocalClass_1InnerClassWithoutCaptures)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.$initialized = true);
-   (global.set $$initialized@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (i32.const 1))
+   (global.set $f_$initialized__simplelocalclass_SimpleLocalClass_1InnerClassWithoutCaptures (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -237,10 +237,10 @@
 ;;; CLASS  InnerClass
 (type $simplelocalclass.SimpleLocalClass.2InnerClass (struct
  (field $vtable (ref null $simplelocalclass.SimpleLocalClass.2InnerClass.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $this@simplelocalclass.SimpleLocalClass.2InnerClass (mut (ref null $simplelocalclass.SimpleLocalClass)))
- (field $field@simplelocalclass.SimpleLocalClass.2InnerClass (mut i32))
- (field $localVar@simplelocalclass.SimpleLocalClass.2InnerClass (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $$outer_this__simplelocalclass_SimpleLocalClass_2InnerClass (mut (ref null $simplelocalclass.SimpleLocalClass)))
+ (field $f_field__simplelocalclass_SimpleLocalClass_2InnerClass (mut i32))
+ (field $$captured_localVar__simplelocalclass_SimpleLocalClass_2InnerClass (mut i32))
 ))
 (type $simplelocalclass.SimpleLocalClass.2InnerClass.vtable (struct
  
@@ -250,7 +250,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $simplelocalclass.SimpleLocalClass.2InnerClass.vtable (mut (ref null $simplelocalclass.SimpleLocalClass.2InnerClass.vtable)) (ref.null $simplelocalclass.SimpleLocalClass.2InnerClass.vtable))
-(global $$initialized@simplelocalclass.SimpleLocalClass.2InnerClass (mut i32) (i32.const 0))
+(global $f_$initialized__simplelocalclass_SimpleLocalClass_2InnerClass (mut i32) (i32.const 0))
 
 ;;; InnerClass(SimpleLocalClass $outer_this, int $captured_localVar)
 (func $m_<init>__simplelocalclass_SimpleLocalClass__int__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.2InnerClass
@@ -261,9 +261,9 @@
  (block $return.label
   (block
    ;; ($2InnerClass.this.this = $outer_this);
-   (struct.set $simplelocalclass.SimpleLocalClass.2InnerClass $this@simplelocalclass.SimpleLocalClass.2InnerClass(local.get $this) (local.get $$outer_this))
+   (struct.set $simplelocalclass.SimpleLocalClass.2InnerClass $$outer_this__simplelocalclass_SimpleLocalClass_2InnerClass(local.get $this) (local.get $$outer_this))
    ;; ($2InnerClass.this.localVar = $captured_localVar);
-   (struct.set $simplelocalclass.SimpleLocalClass.2InnerClass $localVar@simplelocalclass.SimpleLocalClass.2InnerClass(local.get $this) (local.get $$captured_localVar))
+   (struct.set $simplelocalclass.SimpleLocalClass.2InnerClass $$captured_localVar__simplelocalclass_SimpleLocalClass_2InnerClass(local.get $this) (local.get $$captured_localVar))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; $2InnerClass.this.$init();
@@ -279,7 +279,7 @@
  (block $return.label
   (block
    ;; ($2InnerClass.this.field = $2InnerClass.this.localVar);
-   (struct.set $simplelocalclass.SimpleLocalClass.2InnerClass $field@simplelocalclass.SimpleLocalClass.2InnerClass(local.get $this) (struct.get $simplelocalclass.SimpleLocalClass.2InnerClass $localVar@simplelocalclass.SimpleLocalClass.2InnerClass(local.get $this)))
+   (struct.set $simplelocalclass.SimpleLocalClass.2InnerClass $f_field__simplelocalclass_SimpleLocalClass_2InnerClass(local.get $this) (struct.get $simplelocalclass.SimpleLocalClass.2InnerClass $$captured_localVar__simplelocalclass_SimpleLocalClass_2InnerClass(local.get $this)))
   )
  )
 )
@@ -289,14 +289,14 @@
  (block $return.label
   (block
    ;; if (simplelocalclass.SimpleLocalClass.2InnerClass.$initialized) return;
-   (if (global.get $$initialized@simplelocalclass.SimpleLocalClass.2InnerClass)
+   (if (global.get $f_$initialized__simplelocalclass_SimpleLocalClass_2InnerClass)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (simplelocalclass.SimpleLocalClass.2InnerClass.$initialized = true);
-   (global.set $$initialized@simplelocalclass.SimpleLocalClass.2InnerClass (i32.const 1))
+   (global.set $f_$initialized__simplelocalclass_SimpleLocalClass_2InnerClass (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -306,8 +306,8 @@
 ;;; CLASS  Abc$InnerClass
 (type $simplelocalclass.SimpleLocalClass.1Abc$InnerClass (struct
  (field $vtable (ref null $simplelocalclass.SimpleLocalClass.1Abc$InnerClass.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $this@simplelocalclass.SimpleLocalClass.1Abc$InnerClass (mut (ref null $simplelocalclass.SimpleLocalClass)))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $$outer_this__simplelocalclass_SimpleLocalClass_1Abc$InnerClass (mut (ref null $simplelocalclass.SimpleLocalClass)))
 ))
 (type $simplelocalclass.SimpleLocalClass.1Abc$InnerClass.vtable (struct
  
@@ -317,7 +317,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $simplelocalclass.SimpleLocalClass.1Abc$InnerClass.vtable (mut (ref null $simplelocalclass.SimpleLocalClass.1Abc$InnerClass.vtable)) (ref.null $simplelocalclass.SimpleLocalClass.1Abc$InnerClass.vtable))
-(global $$initialized@simplelocalclass.SimpleLocalClass.1Abc$InnerClass (mut i32) (i32.const 0))
+(global $f_$initialized__simplelocalclass_SimpleLocalClass_1Abc$InnerClass (mut i32) (i32.const 0))
 
 ;;; Abc$InnerClass(SimpleLocalClass $outer_this)
 (func $m_<init>__simplelocalclass_SimpleLocalClass__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1Abc$InnerClass
@@ -327,7 +327,7 @@
  (block $return.label
   (block
    ;; ($1Abc$InnerClass.this.this = $outer_this);
-   (struct.set $simplelocalclass.SimpleLocalClass.1Abc$InnerClass $this@simplelocalclass.SimpleLocalClass.1Abc$InnerClass(local.get $this) (local.get $$outer_this))
+   (struct.set $simplelocalclass.SimpleLocalClass.1Abc$InnerClass $$outer_this__simplelocalclass_SimpleLocalClass_1Abc$InnerClass(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -340,14 +340,14 @@
  (block $return.label
   (block
    ;; if (simplelocalclass.SimpleLocalClass.1Abc$InnerClass.$initialized) return;
-   (if (global.get $$initialized@simplelocalclass.SimpleLocalClass.1Abc$InnerClass)
+   (if (global.get $f_$initialized__simplelocalclass_SimpleLocalClass_1Abc$InnerClass)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (simplelocalclass.SimpleLocalClass.1Abc$InnerClass.$initialized = true);
-   (global.set $$initialized@simplelocalclass.SimpleLocalClass.1Abc$InnerClass (i32.const 1))
+   (global.set $f_$initialized__simplelocalclass_SimpleLocalClass_1Abc$InnerClass (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -357,8 +357,8 @@
 ;;; CLASS  Klm$InnerClass
 (type $simplelocalclass.SimpleLocalClass.1Klm$InnerClass (struct
  (field $vtable (ref null $simplelocalclass.SimpleLocalClass.1Klm$InnerClass.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $this@simplelocalclass.SimpleLocalClass.1Klm$InnerClass (mut (ref null $simplelocalclass.SimpleLocalClass)))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $$outer_this__simplelocalclass_SimpleLocalClass_1Klm$InnerClass (mut (ref null $simplelocalclass.SimpleLocalClass)))
 ))
 (type $simplelocalclass.SimpleLocalClass.1Klm$InnerClass.vtable (struct
  
@@ -368,7 +368,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $simplelocalclass.SimpleLocalClass.1Klm$InnerClass.vtable (mut (ref null $simplelocalclass.SimpleLocalClass.1Klm$InnerClass.vtable)) (ref.null $simplelocalclass.SimpleLocalClass.1Klm$InnerClass.vtable))
-(global $$initialized@simplelocalclass.SimpleLocalClass.1Klm$InnerClass (mut i32) (i32.const 0))
+(global $f_$initialized__simplelocalclass_SimpleLocalClass_1Klm$InnerClass (mut i32) (i32.const 0))
 
 ;;; Klm$InnerClass(SimpleLocalClass $outer_this)
 (func $m_<init>__simplelocalclass_SimpleLocalClass__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1Klm$InnerClass
@@ -378,7 +378,7 @@
  (block $return.label
   (block
    ;; ($1Klm$InnerClass.this.this = $outer_this);
-   (struct.set $simplelocalclass.SimpleLocalClass.1Klm$InnerClass $this@simplelocalclass.SimpleLocalClass.1Klm$InnerClass(local.get $this) (local.get $$outer_this))
+   (struct.set $simplelocalclass.SimpleLocalClass.1Klm$InnerClass $$outer_this__simplelocalclass_SimpleLocalClass_1Klm$InnerClass(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -391,14 +391,14 @@
  (block $return.label
   (block
    ;; if (simplelocalclass.SimpleLocalClass.1Klm$InnerClass.$initialized) return;
-   (if (global.get $$initialized@simplelocalclass.SimpleLocalClass.1Klm$InnerClass)
+   (if (global.get $f_$initialized__simplelocalclass_SimpleLocalClass_1Klm$InnerClass)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (simplelocalclass.SimpleLocalClass.1Klm$InnerClass.$initialized = true);
-   (global.set $$initialized@simplelocalclass.SimpleLocalClass.1Klm$InnerClass (i32.const 1))
+   (global.set $f_$initialized__simplelocalclass_SimpleLocalClass_1Klm$InnerClass (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

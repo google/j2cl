@@ -3,7 +3,7 @@
 ;;; CLASS  GenericConstructor
 (type $genericconstructor.GenericConstructor (struct
  (field $vtable (ref null $genericconstructor.GenericConstructor.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $genericconstructor.GenericConstructor.vtable (struct
  
@@ -14,7 +14,7 @@
  (field $m_test__void (mut (ref $function.__$void)))
 ))
 (global $genericconstructor.GenericConstructor.vtable (mut (ref null $genericconstructor.GenericConstructor.vtable)) (ref.null $genericconstructor.GenericConstructor.vtable))
-(global $$initialized@genericconstructor.GenericConstructor (mut i32) (i32.const 0))
+(global $f_$initialized__genericconstructor_GenericConstructor (mut i32) (i32.const 0))
 
 ;;; GenericConstructor(S s, T t)
 (func $m_<init>__java_lang_Object__java_lang_Object__void@genericconstructor.GenericConstructor
@@ -66,14 +66,14 @@
  (block $return.label
   (block
    ;; if (genericconstructor.GenericConstructor.$initialized) return;
-   (if (global.get $$initialized@genericconstructor.GenericConstructor)
+   (if (global.get $f_$initialized__genericconstructor_GenericConstructor)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (genericconstructor.GenericConstructor.$initialized = true);
-   (global.set $$initialized@genericconstructor.GenericConstructor (i32.const 1))
+   (global.set $f_$initialized__genericconstructor_GenericConstructor (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

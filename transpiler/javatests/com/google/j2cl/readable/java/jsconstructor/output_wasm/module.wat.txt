@@ -3,7 +3,7 @@
 ;;; CLASS  JsConstructorClass
 (type $jsconstructor.JsConstructorClass (struct
  (field $vtable (ref null $jsconstructor.JsConstructorClass.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $jsconstructor.JsConstructorClass.vtable (struct
  
@@ -13,7 +13,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $jsconstructor.JsConstructorClass.vtable (mut (ref null $jsconstructor.JsConstructorClass.vtable)) (ref.null $jsconstructor.JsConstructorClass.vtable))
-(global $$initialized@jsconstructor.JsConstructorClass (mut i32) (i32.const 0))
+(global $f_$initialized__jsconstructor_JsConstructorClass (mut i32) (i32.const 0))
 
 ;;; JsConstructorClass()
 (func $m_<init>__void@jsconstructor.JsConstructorClass
@@ -33,14 +33,14 @@
  (block $return.label
   (block
    ;; if (jsconstructor.JsConstructorClass.$initialized) return;
-   (if (global.get $$initialized@jsconstructor.JsConstructorClass)
+   (if (global.get $f_$initialized__jsconstructor_JsConstructorClass)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsconstructor.JsConstructorClass.$initialized = true);
-   (global.set $$initialized@jsconstructor.JsConstructorClass (i32.const 1))
+   (global.set $f_$initialized__jsconstructor_JsConstructorClass (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -50,8 +50,8 @@
 ;;; CLASS  A
 (type $jsconstructor.JsConstructorClass.A (struct
  (field $vtable (ref null $jsconstructor.JsConstructorClass.A.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $fA@jsconstructor.JsConstructorClass.A (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $f_fA__jsconstructor_JsConstructorClass_A (mut i32))
 ))
 (type $jsconstructor.JsConstructorClass.A.vtable (struct
  
@@ -61,7 +61,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $jsconstructor.JsConstructorClass.A.vtable (mut (ref null $jsconstructor.JsConstructorClass.A.vtable)) (ref.null $jsconstructor.JsConstructorClass.A.vtable))
-(global $$initialized@jsconstructor.JsConstructorClass.A (mut i32) (i32.const 0))
+(global $f_$initialized__jsconstructor_JsConstructorClass_A (mut i32) (i32.const 0))
 
 ;;; A(int x)
 (func $m_<init>__int__void@jsconstructor.JsConstructorClass.A
@@ -75,7 +75,7 @@
    ;; A.this.$init();
    (call $$init__void_$p_jsconstructor_JsConstructorClass_A@jsconstructor.JsConstructorClass.A (local.get $this))
    ;; (A.this.fA = x);
-   (struct.set $jsconstructor.JsConstructorClass.A $fA@jsconstructor.JsConstructorClass.A(local.get $this) (local.get $x))
+   (struct.set $jsconstructor.JsConstructorClass.A $f_fA__jsconstructor_JsConstructorClass_A(local.get $this) (local.get $x))
   )
  )
  (local.get $this)
@@ -102,7 +102,7 @@
  (block $return.label
   (block
    ;; (A.this.fA = 1);
-   (struct.set $jsconstructor.JsConstructorClass.A $fA@jsconstructor.JsConstructorClass.A(local.get $this) (i32.const 1))
+   (struct.set $jsconstructor.JsConstructorClass.A $f_fA__jsconstructor_JsConstructorClass_A(local.get $this) (i32.const 1))
   )
  )
 )
@@ -112,14 +112,14 @@
  (block $return.label
   (block
    ;; if (jsconstructor.JsConstructorClass.A.$initialized) return;
-   (if (global.get $$initialized@jsconstructor.JsConstructorClass.A)
+   (if (global.get $f_$initialized__jsconstructor_JsConstructorClass_A)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsconstructor.JsConstructorClass.A.$initialized = true);
-   (global.set $$initialized@jsconstructor.JsConstructorClass.A (i32.const 1))
+   (global.set $f_$initialized__jsconstructor_JsConstructorClass_A (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -129,9 +129,9 @@
 ;;; CLASS  B
 (type $jsconstructor.JsConstructorClass.B (struct
  (field $vtable (ref null $jsconstructor.JsConstructorClass.B.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $fA@jsconstructor.JsConstructorClass.A (mut i32))
- (field $fB@jsconstructor.JsConstructorClass.B (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $f_fA__jsconstructor_JsConstructorClass_A (mut i32))
+ (field $f_fB__jsconstructor_JsConstructorClass_B (mut i32))
 ))
 (type $jsconstructor.JsConstructorClass.B.vtable (struct
  
@@ -141,7 +141,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $jsconstructor.JsConstructorClass.B.vtable (mut (ref null $jsconstructor.JsConstructorClass.B.vtable)) (ref.null $jsconstructor.JsConstructorClass.B.vtable))
-(global $$initialized@jsconstructor.JsConstructorClass.B (mut i32) (i32.const 0))
+(global $f_$initialized__jsconstructor_JsConstructorClass_B (mut i32) (i32.const 0))
 
 ;;; B(int x)
 (func $m_<init>__int__void@jsconstructor.JsConstructorClass.B
@@ -157,7 +157,7 @@
    ;; B.this.$init();
    (call $$init__void_$p_jsconstructor_JsConstructorClass_B@jsconstructor.JsConstructorClass.B (local.get $this))
    ;; (B.this.fB = 3);
-   (struct.set $jsconstructor.JsConstructorClass.B $fB@jsconstructor.JsConstructorClass.B(local.get $this) (i32.const 3))
+   (struct.set $jsconstructor.JsConstructorClass.B $f_fB__jsconstructor_JsConstructorClass_B(local.get $this) (i32.const 3))
   )
  )
  (local.get $this)
@@ -172,7 +172,7 @@
    ;; B.this.B.<init>(10);
    (drop (call $m_<init>__int__void@jsconstructor.JsConstructorClass.B (local.get $this)(i32.const 10)))
    ;; (B.this.fB = 4);
-   (struct.set $jsconstructor.JsConstructorClass.B $fB@jsconstructor.JsConstructorClass.B(local.get $this) (i32.const 4))
+   (struct.set $jsconstructor.JsConstructorClass.B $f_fB__jsconstructor_JsConstructorClass_B(local.get $this) (i32.const 4))
   )
  )
  (local.get $this)
@@ -189,7 +189,7 @@
    ;; B.this.B.<init>((x + y));
    (drop (call $m_<init>__int__void@jsconstructor.JsConstructorClass.B (local.get $this)(i32.add (local.get $x) (local.get $y))))
    ;; (B.this.fB = (x * y));
-   (struct.set $jsconstructor.JsConstructorClass.B $fB@jsconstructor.JsConstructorClass.B(local.get $this) (i32.mul (local.get $x) (local.get $y)))
+   (struct.set $jsconstructor.JsConstructorClass.B $f_fB__jsconstructor_JsConstructorClass_B(local.get $this) (i32.mul (local.get $x) (local.get $y)))
   )
  )
  (local.get $this)
@@ -201,7 +201,7 @@
  (block $return.label
   (block
    ;; (B.this.fB = 2);
-   (struct.set $jsconstructor.JsConstructorClass.B $fB@jsconstructor.JsConstructorClass.B(local.get $this) (i32.const 2))
+   (struct.set $jsconstructor.JsConstructorClass.B $f_fB__jsconstructor_JsConstructorClass_B(local.get $this) (i32.const 2))
   )
  )
 )
@@ -211,14 +211,14 @@
  (block $return.label
   (block
    ;; if (jsconstructor.JsConstructorClass.B.$initialized) return;
-   (if (global.get $$initialized@jsconstructor.JsConstructorClass.B)
+   (if (global.get $f_$initialized__jsconstructor_JsConstructorClass_B)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsconstructor.JsConstructorClass.B.$initialized = true);
-   (global.set $$initialized@jsconstructor.JsConstructorClass.B (i32.const 1))
+   (global.set $f_$initialized__jsconstructor_JsConstructorClass_B (i32.const 1))
    ;; jsconstructor.JsConstructorClass.A.$clinit();
    (call $$clinit__void@jsconstructor.JsConstructorClass.A )
   )
@@ -228,10 +228,10 @@
 ;;; CLASS  C
 (type $jsconstructor.JsConstructorClass.C (struct
  (field $vtable (ref null $jsconstructor.JsConstructorClass.C.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $fA@jsconstructor.JsConstructorClass.A (mut i32))
- (field $fB@jsconstructor.JsConstructorClass.B (mut i32))
- (field $fC@jsconstructor.JsConstructorClass.C (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $f_fA__jsconstructor_JsConstructorClass_A (mut i32))
+ (field $f_fB__jsconstructor_JsConstructorClass_B (mut i32))
+ (field $f_fC__jsconstructor_JsConstructorClass_C (mut i32))
 ))
 (type $jsconstructor.JsConstructorClass.C.vtable (struct
  
@@ -241,7 +241,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $jsconstructor.JsConstructorClass.C.vtable (mut (ref null $jsconstructor.JsConstructorClass.C.vtable)) (ref.null $jsconstructor.JsConstructorClass.C.vtable))
-(global $$initialized@jsconstructor.JsConstructorClass.C (mut i32) (i32.const 0))
+(global $f_$initialized__jsconstructor_JsConstructorClass_C (mut i32) (i32.const 0))
 
 ;;; C(int x)
 (func $m_<init>__int__void@jsconstructor.JsConstructorClass.C
@@ -257,7 +257,7 @@
    ;; C.this.$init();
    (call $$init__void_$p_jsconstructor_JsConstructorClass_C@jsconstructor.JsConstructorClass.C (local.get $this))
    ;; (C.this.fC = 6);
-   (struct.set $jsconstructor.JsConstructorClass.C $fC@jsconstructor.JsConstructorClass.C(local.get $this) (i32.const 6))
+   (struct.set $jsconstructor.JsConstructorClass.C $f_fC__jsconstructor_JsConstructorClass_C(local.get $this) (i32.const 6))
   )
  )
  (local.get $this)
@@ -274,7 +274,7 @@
    ;; C.this.C.<init>((x + y));
    (drop (call $m_<init>__int__void@jsconstructor.JsConstructorClass.C (local.get $this)(i32.add (local.get $x) (local.get $y))))
    ;; (C.this.fC = 7);
-   (struct.set $jsconstructor.JsConstructorClass.C $fC@jsconstructor.JsConstructorClass.C(local.get $this) (i32.const 7))
+   (struct.set $jsconstructor.JsConstructorClass.C $f_fC__jsconstructor_JsConstructorClass_C(local.get $this) (i32.const 7))
   )
  )
  (local.get $this)
@@ -286,7 +286,7 @@
  (block $return.label
   (block
    ;; (C.this.fC = 1);
-   (struct.set $jsconstructor.JsConstructorClass.C $fC@jsconstructor.JsConstructorClass.C(local.get $this) (i32.const 1))
+   (struct.set $jsconstructor.JsConstructorClass.C $f_fC__jsconstructor_JsConstructorClass_C(local.get $this) (i32.const 1))
   )
  )
 )
@@ -296,14 +296,14 @@
  (block $return.label
   (block
    ;; if (jsconstructor.JsConstructorClass.C.$initialized) return;
-   (if (global.get $$initialized@jsconstructor.JsConstructorClass.C)
+   (if (global.get $f_$initialized__jsconstructor_JsConstructorClass_C)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsconstructor.JsConstructorClass.C.$initialized = true);
-   (global.set $$initialized@jsconstructor.JsConstructorClass.C (i32.const 1))
+   (global.set $f_$initialized__jsconstructor_JsConstructorClass_C (i32.const 1))
    ;; jsconstructor.JsConstructorClass.B.$clinit();
    (call $$clinit__void@jsconstructor.JsConstructorClass.B )
   )
@@ -313,10 +313,10 @@
 ;;; CLASS  D
 (type $jsconstructor.JsConstructorClass.D (struct
  (field $vtable (ref null $jsconstructor.JsConstructorClass.D.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $fA@jsconstructor.JsConstructorClass.A (mut i32))
- (field $fB@jsconstructor.JsConstructorClass.B (mut i32))
- (field $fD@jsconstructor.JsConstructorClass.D (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $f_fA__jsconstructor_JsConstructorClass_A (mut i32))
+ (field $f_fB__jsconstructor_JsConstructorClass_B (mut i32))
+ (field $f_fD__jsconstructor_JsConstructorClass_D (mut i32))
 ))
 (type $jsconstructor.JsConstructorClass.D.vtable (struct
  
@@ -326,7 +326,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $jsconstructor.JsConstructorClass.D.vtable (mut (ref null $jsconstructor.JsConstructorClass.D.vtable)) (ref.null $jsconstructor.JsConstructorClass.D.vtable))
-(global $$initialized@jsconstructor.JsConstructorClass.D (mut i32) (i32.const 0))
+(global $f_$initialized__jsconstructor_JsConstructorClass_D (mut i32) (i32.const 0))
 
 ;;; D()
 (func $m_<init>__void@jsconstructor.JsConstructorClass.D
@@ -341,7 +341,7 @@
    ;; D.this.$init();
    (call $$init__void_$p_jsconstructor_JsConstructorClass_D@jsconstructor.JsConstructorClass.D (local.get $this))
    ;; (D.this.fD = 10);
-   (struct.set $jsconstructor.JsConstructorClass.D $fD@jsconstructor.JsConstructorClass.D(local.get $this) (i32.const 10))
+   (struct.set $jsconstructor.JsConstructorClass.D $f_fD__jsconstructor_JsConstructorClass_D(local.get $this) (i32.const 10))
   )
  )
  (local.get $this)
@@ -357,7 +357,7 @@
    ;; D.this.D.<init>();
    (drop (call $m_<init>__void@jsconstructor.JsConstructorClass.D (local.get $this)))
    ;; (D.this.fD = x);
-   (struct.set $jsconstructor.JsConstructorClass.D $fD@jsconstructor.JsConstructorClass.D(local.get $this) (local.get $x))
+   (struct.set $jsconstructor.JsConstructorClass.D $f_fD__jsconstructor_JsConstructorClass_D(local.get $this) (local.get $x))
   )
  )
  (local.get $this)
@@ -369,7 +369,7 @@
  (block $return.label
   (block
    ;; (D.this.fD = 8);
-   (struct.set $jsconstructor.JsConstructorClass.D $fD@jsconstructor.JsConstructorClass.D(local.get $this) (i32.const 8))
+   (struct.set $jsconstructor.JsConstructorClass.D $f_fD__jsconstructor_JsConstructorClass_D(local.get $this) (i32.const 8))
   )
  )
 )
@@ -379,14 +379,14 @@
  (block $return.label
   (block
    ;; if (jsconstructor.JsConstructorClass.D.$initialized) return;
-   (if (global.get $$initialized@jsconstructor.JsConstructorClass.D)
+   (if (global.get $f_$initialized__jsconstructor_JsConstructorClass_D)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsconstructor.JsConstructorClass.D.$initialized = true);
-   (global.set $$initialized@jsconstructor.JsConstructorClass.D (i32.const 1))
+   (global.set $f_$initialized__jsconstructor_JsConstructorClass_D (i32.const 1))
    ;; jsconstructor.JsConstructorClass.B.$clinit();
    (call $$clinit__void@jsconstructor.JsConstructorClass.B )
   )
@@ -396,11 +396,11 @@
 ;;; CLASS  E
 (type $jsconstructor.JsConstructorClass.E (struct
  (field $vtable (ref null $jsconstructor.JsConstructorClass.E.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $fA@jsconstructor.JsConstructorClass.A (mut i32))
- (field $fB@jsconstructor.JsConstructorClass.B (mut i32))
- (field $fC@jsconstructor.JsConstructorClass.C (mut i32))
- (field $fE@jsconstructor.JsConstructorClass.E (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $f_fA__jsconstructor_JsConstructorClass_A (mut i32))
+ (field $f_fB__jsconstructor_JsConstructorClass_B (mut i32))
+ (field $f_fC__jsconstructor_JsConstructorClass_C (mut i32))
+ (field $f_fE__jsconstructor_JsConstructorClass_E (mut i32))
 ))
 (type $jsconstructor.JsConstructorClass.E.vtable (struct
  
@@ -410,7 +410,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $jsconstructor.JsConstructorClass.E.vtable (mut (ref null $jsconstructor.JsConstructorClass.E.vtable)) (ref.null $jsconstructor.JsConstructorClass.E.vtable))
-(global $$initialized@jsconstructor.JsConstructorClass.E (mut i32) (i32.const 0))
+(global $f_$initialized__jsconstructor_JsConstructorClass_E (mut i32) (i32.const 0))
 
 ;;; E()
 (func $m_<init>__void@jsconstructor.JsConstructorClass.E
@@ -425,7 +425,7 @@
    ;; E.this.$init();
    (call $$init__void_$p_jsconstructor_JsConstructorClass_E@jsconstructor.JsConstructorClass.E (local.get $this))
    ;; (E.this.fE = 12);
-   (struct.set $jsconstructor.JsConstructorClass.E $fE@jsconstructor.JsConstructorClass.E(local.get $this) (i32.const 12))
+   (struct.set $jsconstructor.JsConstructorClass.E $f_fE__jsconstructor_JsConstructorClass_E(local.get $this) (i32.const 12))
   )
  )
  (local.get $this)
@@ -437,7 +437,7 @@
  (block $return.label
   (block
    ;; (E.this.fE = 11);
-   (struct.set $jsconstructor.JsConstructorClass.E $fE@jsconstructor.JsConstructorClass.E(local.get $this) (i32.const 11))
+   (struct.set $jsconstructor.JsConstructorClass.E $f_fE__jsconstructor_JsConstructorClass_E(local.get $this) (i32.const 11))
   )
  )
 )
@@ -447,14 +447,14 @@
  (block $return.label
   (block
    ;; if (jsconstructor.JsConstructorClass.E.$initialized) return;
-   (if (global.get $$initialized@jsconstructor.JsConstructorClass.E)
+   (if (global.get $f_$initialized__jsconstructor_JsConstructorClass_E)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsconstructor.JsConstructorClass.E.$initialized = true);
-   (global.set $$initialized@jsconstructor.JsConstructorClass.E (i32.const 1))
+   (global.set $f_$initialized__jsconstructor_JsConstructorClass_E (i32.const 1))
    ;; jsconstructor.JsConstructorClass.C.$clinit();
    (call $$clinit__void@jsconstructor.JsConstructorClass.C )
   )
@@ -464,11 +464,11 @@
 ;;; CLASS  F
 (type $jsconstructor.JsConstructorClass.F (struct
  (field $vtable (ref null $jsconstructor.JsConstructorClass.F.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $fA@jsconstructor.JsConstructorClass.A (mut i32))
- (field $fB@jsconstructor.JsConstructorClass.B (mut i32))
- (field $fC@jsconstructor.JsConstructorClass.C (mut i32))
- (field $fF@jsconstructor.JsConstructorClass.F (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $f_fA__jsconstructor_JsConstructorClass_A (mut i32))
+ (field $f_fB__jsconstructor_JsConstructorClass_B (mut i32))
+ (field $f_fC__jsconstructor_JsConstructorClass_C (mut i32))
+ (field $f_fF__jsconstructor_JsConstructorClass_F (mut i32))
 ))
 (type $jsconstructor.JsConstructorClass.F.vtable (struct
  
@@ -478,7 +478,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $jsconstructor.JsConstructorClass.F.vtable (mut (ref null $jsconstructor.JsConstructorClass.F.vtable)) (ref.null $jsconstructor.JsConstructorClass.F.vtable))
-(global $$initialized@jsconstructor.JsConstructorClass.F (mut i32) (i32.const 0))
+(global $f_$initialized__jsconstructor_JsConstructorClass_F (mut i32) (i32.const 0))
 
 ;;; F(int x)
 (func $m_<init>__int__void@jsconstructor.JsConstructorClass.F
@@ -494,7 +494,7 @@
    ;; F.this.$init();
    (call $$init__void_$p_jsconstructor_JsConstructorClass_F@jsconstructor.JsConstructorClass.F (local.get $this))
    ;; (F.this.fF = (x + 3));
-   (struct.set $jsconstructor.JsConstructorClass.F $fF@jsconstructor.JsConstructorClass.F(local.get $this) (i32.add (local.get $x) (i32.const 3)))
+   (struct.set $jsconstructor.JsConstructorClass.F $f_fF__jsconstructor_JsConstructorClass_F(local.get $this) (i32.add (local.get $x) (i32.const 3)))
   )
  )
  (local.get $this)
@@ -506,7 +506,7 @@
  (block $return.label
   (block
    ;; (F.this.fF = 13);
-   (struct.set $jsconstructor.JsConstructorClass.F $fF@jsconstructor.JsConstructorClass.F(local.get $this) (i32.const 13))
+   (struct.set $jsconstructor.JsConstructorClass.F $f_fF__jsconstructor_JsConstructorClass_F(local.get $this) (i32.const 13))
   )
  )
 )
@@ -516,14 +516,14 @@
  (block $return.label
   (block
    ;; if (jsconstructor.JsConstructorClass.F.$initialized) return;
-   (if (global.get $$initialized@jsconstructor.JsConstructorClass.F)
+   (if (global.get $f_$initialized__jsconstructor_JsConstructorClass_F)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsconstructor.JsConstructorClass.F.$initialized = true);
-   (global.set $$initialized@jsconstructor.JsConstructorClass.F (i32.const 1))
+   (global.set $f_$initialized__jsconstructor_JsConstructorClass_F (i32.const 1))
    ;; jsconstructor.JsConstructorClass.C.$clinit();
    (call $$clinit__void@jsconstructor.JsConstructorClass.C )
   )
@@ -533,7 +533,7 @@
 ;;; CLASS  G
 (type $jsconstructor.JsConstructorClass.G (struct
  (field $vtable (ref null $jsconstructor.JsConstructorClass.G.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $jsconstructor.JsConstructorClass.G.vtable (struct
  
@@ -543,7 +543,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $jsconstructor.JsConstructorClass.G.vtable (mut (ref null $jsconstructor.JsConstructorClass.G.vtable)) (ref.null $jsconstructor.JsConstructorClass.G.vtable))
-(global $$initialized@jsconstructor.JsConstructorClass.G (mut i32) (i32.const 0))
+(global $f_$initialized__jsconstructor_JsConstructorClass_G (mut i32) (i32.const 0))
 
 ;;; G()
 (func $m_<init>__void@jsconstructor.JsConstructorClass.G
@@ -565,14 +565,14 @@
  (block $return.label
   (block
    ;; if (jsconstructor.JsConstructorClass.G.$initialized) return;
-   (if (global.get $$initialized@jsconstructor.JsConstructorClass.G)
+   (if (global.get $f_$initialized__jsconstructor_JsConstructorClass_G)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsconstructor.JsConstructorClass.G.$initialized = true);
-   (global.set $$initialized@jsconstructor.JsConstructorClass.G (i32.const 1))
+   (global.set $f_$initialized__jsconstructor_JsConstructorClass_G (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -582,7 +582,7 @@
 ;;; CLASS  H
 (type $jsconstructor.JsConstructorClass.H (struct
  (field $vtable (ref null $jsconstructor.JsConstructorClass.H.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $jsconstructor.JsConstructorClass.H.vtable (struct
  
@@ -592,7 +592,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $jsconstructor.JsConstructorClass.H.vtable (mut (ref null $jsconstructor.JsConstructorClass.H.vtable)) (ref.null $jsconstructor.JsConstructorClass.H.vtable))
-(global $$initialized@jsconstructor.JsConstructorClass.H (mut i32) (i32.const 0))
+(global $f_$initialized__jsconstructor_JsConstructorClass_H (mut i32) (i32.const 0))
 
 ;;; H()
 (func $m_<init>__void@jsconstructor.JsConstructorClass.H
@@ -614,14 +614,14 @@
  (block $return.label
   (block
    ;; if (jsconstructor.JsConstructorClass.H.$initialized) return;
-   (if (global.get $$initialized@jsconstructor.JsConstructorClass.H)
+   (if (global.get $f_$initialized__jsconstructor_JsConstructorClass_H)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsconstructor.JsConstructorClass.H.$initialized = true);
-   (global.set $$initialized@jsconstructor.JsConstructorClass.H (i32.const 1))
+   (global.set $f_$initialized__jsconstructor_JsConstructorClass_H (i32.const 1))
    ;; jsconstructor.JsConstructorClass.G.$clinit();
    (call $$clinit__void@jsconstructor.JsConstructorClass.G )
   )
@@ -631,8 +631,8 @@
 ;;; CLASS  Varargs
 (type $jsconstructor.JsConstructorClass.Varargs (struct
  (field $vtable (ref null $jsconstructor.JsConstructorClass.Varargs.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $fA@jsconstructor.JsConstructorClass.A (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $f_fA__jsconstructor_JsConstructorClass_A (mut i32))
 ))
 (type $jsconstructor.JsConstructorClass.Varargs.vtable (struct
  
@@ -642,7 +642,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $jsconstructor.JsConstructorClass.Varargs.vtable (mut (ref null $jsconstructor.JsConstructorClass.Varargs.vtable)) (ref.null $jsconstructor.JsConstructorClass.Varargs.vtable))
-(global $$initialized@jsconstructor.JsConstructorClass.Varargs (mut i32) (i32.const 0))
+(global $f_$initialized__jsconstructor_JsConstructorClass_Varargs (mut i32) (i32.const 0))
 
 ;;; Varargs(int... args)
 (func $m_<init>__arrayOf_int__void@jsconstructor.JsConstructorClass.Varargs
@@ -665,14 +665,14 @@
  (block $return.label
   (block
    ;; if (jsconstructor.JsConstructorClass.Varargs.$initialized) return;
-   (if (global.get $$initialized@jsconstructor.JsConstructorClass.Varargs)
+   (if (global.get $f_$initialized__jsconstructor_JsConstructorClass_Varargs)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsconstructor.JsConstructorClass.Varargs.$initialized = true);
-   (global.set $$initialized@jsconstructor.JsConstructorClass.Varargs (i32.const 1))
+   (global.set $f_$initialized__jsconstructor_JsConstructorClass_Varargs (i32.const 1))
    ;; jsconstructor.JsConstructorClass.A.$clinit();
    (call $$clinit__void@jsconstructor.JsConstructorClass.A )
   )
@@ -682,8 +682,8 @@
 ;;; CLASS  SubVarargs
 (type $jsconstructor.JsConstructorClass.SubVarargs (struct
  (field $vtable (ref null $jsconstructor.JsConstructorClass.SubVarargs.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $fA@jsconstructor.JsConstructorClass.A (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $f_fA__jsconstructor_JsConstructorClass_A (mut i32))
 ))
 (type $jsconstructor.JsConstructorClass.SubVarargs.vtable (struct
  
@@ -693,7 +693,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $jsconstructor.JsConstructorClass.SubVarargs.vtable (mut (ref null $jsconstructor.JsConstructorClass.SubVarargs.vtable)) (ref.null $jsconstructor.JsConstructorClass.SubVarargs.vtable))
-(global $$initialized@jsconstructor.JsConstructorClass.SubVarargs (mut i32) (i32.const 0))
+(global $f_$initialized__jsconstructor_JsConstructorClass_SubVarargs (mut i32) (i32.const 0))
 
 ;;; SubVarargs(Object i, int... args)
 (func $m_<init>__java_lang_Object__arrayOf_int__void@jsconstructor.JsConstructorClass.SubVarargs
@@ -763,14 +763,14 @@
  (block $return.label
   (block
    ;; if (jsconstructor.JsConstructorClass.SubVarargs.$initialized) return;
-   (if (global.get $$initialized@jsconstructor.JsConstructorClass.SubVarargs)
+   (if (global.get $f_$initialized__jsconstructor_JsConstructorClass_SubVarargs)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsconstructor.JsConstructorClass.SubVarargs.$initialized = true);
-   (global.set $$initialized@jsconstructor.JsConstructorClass.SubVarargs (i32.const 1))
+   (global.set $f_$initialized__jsconstructor_JsConstructorClass_SubVarargs (i32.const 1))
    ;; jsconstructor.JsConstructorClass.Varargs.$clinit();
    (call $$clinit__void@jsconstructor.JsConstructorClass.Varargs )
   )
@@ -780,9 +780,9 @@
 ;;; CLASS  InstanceVarargs
 (type $jsconstructor.JsConstructorClass.InstanceVarargs (struct
  (field $vtable (ref null $jsconstructor.JsConstructorClass.InstanceVarargs.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $fA@jsconstructor.JsConstructorClass.A (mut i32))
- (field $this@jsconstructor.JsConstructorClass.InstanceVarargs (mut (ref null $jsconstructor.JsConstructorClass)))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $f_fA__jsconstructor_JsConstructorClass_A (mut i32))
+ (field $$outer_this__jsconstructor_JsConstructorClass_InstanceVarargs (mut (ref null $jsconstructor.JsConstructorClass)))
 ))
 (type $jsconstructor.JsConstructorClass.InstanceVarargs.vtable (struct
  
@@ -792,7 +792,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $jsconstructor.JsConstructorClass.InstanceVarargs.vtable (mut (ref null $jsconstructor.JsConstructorClass.InstanceVarargs.vtable)) (ref.null $jsconstructor.JsConstructorClass.InstanceVarargs.vtable))
-(global $$initialized@jsconstructor.JsConstructorClass.InstanceVarargs (mut i32) (i32.const 0))
+(global $f_$initialized__jsconstructor_JsConstructorClass_InstanceVarargs (mut i32) (i32.const 0))
 
 ;;; InstanceVarargs(JsConstructorClass $outer_this, int... args)
 (func $m_<init>__jsconstructor_JsConstructorClass__arrayOf_int__void@jsconstructor.JsConstructorClass.InstanceVarargs
@@ -805,7 +805,7 @@
    ;; jsconstructor.JsConstructorClass.InstanceVarargs.$clinit();
    (call $$clinit__void@jsconstructor.JsConstructorClass.InstanceVarargs )
    ;; (InstanceVarargs.this.this = $outer_this);
-   (struct.set $jsconstructor.JsConstructorClass.InstanceVarargs $this@jsconstructor.JsConstructorClass.InstanceVarargs(local.get $this) (local.get $$outer_this))
+   (struct.set $jsconstructor.JsConstructorClass.InstanceVarargs $$outer_this__jsconstructor_JsConstructorClass_InstanceVarargs(local.get $this) (local.get $$outer_this))
    ;; A.this.A.<init>(args[1]);
    (drop (call $m_<init>__int__void@jsconstructor.JsConstructorClass.A (local.get $this)(array.get $int.array.elements (struct.get $int.array $elements (local.get $args)) (i32.const 1))))
   )
@@ -818,14 +818,14 @@
  (block $return.label
   (block
    ;; if (jsconstructor.JsConstructorClass.InstanceVarargs.$initialized) return;
-   (if (global.get $$initialized@jsconstructor.JsConstructorClass.InstanceVarargs)
+   (if (global.get $f_$initialized__jsconstructor_JsConstructorClass_InstanceVarargs)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsconstructor.JsConstructorClass.InstanceVarargs.$initialized = true);
-   (global.set $$initialized@jsconstructor.JsConstructorClass.InstanceVarargs (i32.const 1))
+   (global.set $f_$initialized__jsconstructor_JsConstructorClass_InstanceVarargs (i32.const 1))
    ;; jsconstructor.JsConstructorClass.A.$clinit();
    (call $$clinit__void@jsconstructor.JsConstructorClass.A )
   )
@@ -835,7 +835,7 @@
 ;;; CLASS  RegularType
 (type $jsconstructor.JsConstructorClass.RegularType (struct
  (field $vtable (ref null $jsconstructor.JsConstructorClass.RegularType.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $jsconstructor.JsConstructorClass.RegularType.vtable (struct
  
@@ -845,7 +845,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $jsconstructor.JsConstructorClass.RegularType.vtable (mut (ref null $jsconstructor.JsConstructorClass.RegularType.vtable)) (ref.null $jsconstructor.JsConstructorClass.RegularType.vtable))
-(global $$initialized@jsconstructor.JsConstructorClass.RegularType (mut i32) (i32.const 0))
+(global $f_$initialized__jsconstructor_JsConstructorClass_RegularType (mut i32) (i32.const 0))
 
 ;;; RegularType(Object b)
 (func $m_<init>__java_lang_Object__void@jsconstructor.JsConstructorClass.RegularType
@@ -866,14 +866,14 @@
  (block $return.label
   (block
    ;; if (jsconstructor.JsConstructorClass.RegularType.$initialized) return;
-   (if (global.get $$initialized@jsconstructor.JsConstructorClass.RegularType)
+   (if (global.get $f_$initialized__jsconstructor_JsConstructorClass_RegularType)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsconstructor.JsConstructorClass.RegularType.$initialized = true);
-   (global.set $$initialized@jsconstructor.JsConstructorClass.RegularType (i32.const 1))
+   (global.set $f_$initialized__jsconstructor_JsConstructorClass_RegularType (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -883,7 +883,7 @@
 ;;; CLASS  JsConstructorSubtypeOfRegularType
 (type $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType (struct
  (field $vtable (ref null $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.vtable (struct
  
@@ -893,7 +893,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.vtable (mut (ref null $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.vtable)) (ref.null $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.vtable))
-(global $$initialized@jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType (mut i32) (i32.const 0))
+(global $f_$initialized__jsconstructor_JsConstructorClass_JsConstructorSubtypeOfRegularType (mut i32) (i32.const 0))
 
 ;;; JsConstructorSubtypeOfRegularType(Object object)
 (func $m_<init>__java_lang_Object__void@jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType
@@ -929,14 +929,14 @@
  (block $return.label
   (block
    ;; if (jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.$initialized) return;
-   (if (global.get $$initialized@jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType)
+   (if (global.get $f_$initialized__jsconstructor_JsConstructorClass_JsConstructorSubtypeOfRegularType)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.$initialized = true);
-   (global.set $$initialized@jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType (i32.const 1))
+   (global.set $f_$initialized__jsconstructor_JsConstructorClass_JsConstructorSubtypeOfRegularType (i32.const 1))
    ;; jsconstructor.JsConstructorClass.RegularType.$clinit();
    (call $$clinit__void@jsconstructor.JsConstructorClass.RegularType )
   )

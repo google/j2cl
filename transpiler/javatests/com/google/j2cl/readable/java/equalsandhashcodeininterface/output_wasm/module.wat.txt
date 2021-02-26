@@ -1,63 +1,63 @@
 ;;; Code for equalsandhashcodeininterface.BothInInterface
 
 ;;; INTERFACE  BothInInterface
-(global $$initialized@equalsandhashcodeininterface.BothInInterface (mut i32) (i32.const 0))
+(global $f_$initialized__equalsandhashcodeininterface_BothInInterface (mut i32) (i32.const 0))
 
 ;;; void BothInInterface.$clinit()
 (func $$clinit__void@equalsandhashcodeininterface.BothInInterface
  (block $return.label
   (block
    ;; if (equalsandhashcodeininterface.BothInInterface.$initialized) return;
-   (if (global.get $$initialized@equalsandhashcodeininterface.BothInInterface)
+   (if (global.get $f_$initialized__equalsandhashcodeininterface_BothInInterface)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (equalsandhashcodeininterface.BothInInterface.$initialized = true);
-   (global.set $$initialized@equalsandhashcodeininterface.BothInInterface (i32.const 1))
+   (global.set $f_$initialized__equalsandhashcodeininterface_BothInInterface (i32.const 1))
   )
  )
 )
 ;;; Code for equalsandhashcodeininterface.NeitherInInterface
 
 ;;; INTERFACE  NeitherInInterface
-(global $$initialized@equalsandhashcodeininterface.NeitherInInterface (mut i32) (i32.const 0))
+(global $f_$initialized__equalsandhashcodeininterface_NeitherInInterface (mut i32) (i32.const 0))
 
 ;;; void NeitherInInterface.$clinit()
 (func $$clinit__void@equalsandhashcodeininterface.NeitherInInterface
  (block $return.label
   (block
    ;; if (equalsandhashcodeininterface.NeitherInInterface.$initialized) return;
-   (if (global.get $$initialized@equalsandhashcodeininterface.NeitherInInterface)
+   (if (global.get $f_$initialized__equalsandhashcodeininterface_NeitherInInterface)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (equalsandhashcodeininterface.NeitherInInterface.$initialized = true);
-   (global.set $$initialized@equalsandhashcodeininterface.NeitherInInterface (i32.const 1))
+   (global.set $f_$initialized__equalsandhashcodeininterface_NeitherInInterface (i32.const 1))
   )
  )
 )
 ;;; Code for equalsandhashcodeininterface.ViaJsMethodInInterface
 
 ;;; INTERFACE  ViaJsMethodInInterface
-(global $$initialized@equalsandhashcodeininterface.ViaJsMethodInInterface (mut i32) (i32.const 0))
+(global $f_$initialized__equalsandhashcodeininterface_ViaJsMethodInInterface (mut i32) (i32.const 0))
 
 ;;; void ViaJsMethodInInterface.$clinit()
 (func $$clinit__void@equalsandhashcodeininterface.ViaJsMethodInInterface
  (block $return.label
   (block
    ;; if (equalsandhashcodeininterface.ViaJsMethodInInterface.$initialized) return;
-   (if (global.get $$initialized@equalsandhashcodeininterface.ViaJsMethodInInterface)
+   (if (global.get $f_$initialized__equalsandhashcodeininterface_ViaJsMethodInInterface)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (equalsandhashcodeininterface.ViaJsMethodInInterface.$initialized = true);
-   (global.set $$initialized@equalsandhashcodeininterface.ViaJsMethodInInterface (i32.const 1))
+   (global.set $f_$initialized__equalsandhashcodeininterface_ViaJsMethodInInterface (i32.const 1))
   )
  )
 )

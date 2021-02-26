@@ -3,10 +3,10 @@
 ;;; CLASS  Strings
 (type $strings.Strings (struct
  (field $vtable (ref null $strings.Strings.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $someString@strings.Strings (mut (ref null $java.lang.String)))
- (field $nonBmpChar@strings.Strings (mut (ref null $java.lang.String)))
- (field $wideColon@strings.Strings (mut (ref null $java.lang.String)))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $f_someString__strings_Strings_ (mut (ref null $java.lang.String)))
+ (field $f_nonBmpChar__strings_Strings_ (mut (ref null $java.lang.String)))
+ (field $f_wideColon__strings_Strings_ (mut (ref null $java.lang.String)))
 ))
 (type $strings.Strings.vtable (struct
  
@@ -17,9 +17,9 @@
  (field $m_test__void (mut (ref $function.__$void)))
 ))
 (global $strings.Strings.vtable (mut (ref null $strings.Strings.vtable)) (ref.null $strings.Strings.vtable))
-(global $ESCAPE_CODES@strings.Strings (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
-(global $ESCAPE_CODES_COPY@strings.Strings (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
-(global $$initialized@strings.Strings (mut i32) (i32.const 0))
+(global $f_ESCAPE_CODES__strings_Strings_ (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_ESCAPE_CODES_COPY__strings_Strings_ (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__strings_Strings (mut i32) (i32.const 0))
 
 ;;; Strings()
 (func $m_<init>__void@strings.Strings
@@ -104,21 +104,21 @@
     
     (local.set $$qualifier (call $m_<init>__void_$p_strings_Strings_StringHolder@strings.Strings.StringHolder (struct.new_with_rtt $strings.Strings.StringHolder (global.get $strings.Strings.StringHolder.vtable) (i32.const 0) (ref.null $java.lang.String) (global.get $strings.Strings.StringHolder.rtt))))
     ;; ($qualifier.s = ($qualifier.s + s4));
-    (struct.set $strings.Strings.StringHolder $s@strings.Strings.StringHolder(local.get $$qualifier) (ref.null $java.lang.String))
+    (struct.set $strings.Strings.StringHolder $f_s__strings_Strings_StringHolder(local.get $$qualifier) (ref.null $java.lang.String))
    )
    (block
     ;; StringHolder $qualifier = new StringHolder.<init>();
     
     (local.set $$qualifier_1 (call $m_<init>__void_$p_strings_Strings_StringHolder@strings.Strings.StringHolder (struct.new_with_rtt $strings.Strings.StringHolder (global.get $strings.Strings.StringHolder.vtable) (i32.const 0) (ref.null $java.lang.String) (global.get $strings.Strings.StringHolder.rtt))))
     ;; ($qualifier.s = ($qualifier.s + c1));
-    (struct.set $strings.Strings.StringHolder $s@strings.Strings.StringHolder(local.get $$qualifier_1) (ref.null $java.lang.String))
+    (struct.set $strings.Strings.StringHolder $f_s__strings_Strings_StringHolder(local.get $$qualifier_1) (ref.null $java.lang.String))
    )
    (block
     ;; StringHolder $qualifier = new StringHolder.<init>();
     
     (local.set $$qualifier_2 (call $m_<init>__void_$p_strings_Strings_StringHolder@strings.Strings.StringHolder (struct.new_with_rtt $strings.Strings.StringHolder (global.get $strings.Strings.StringHolder.vtable) (i32.const 0) (ref.null $java.lang.String) (global.get $strings.Strings.StringHolder.rtt))))
     ;; ($qualifier.s = ($qualifier.s + java.lang.String.fromInternalArray((char[] $array_literal = new char[1],($array_literal[0] = 111),$array_literal))));
-    (struct.set $strings.Strings.StringHolder $s@strings.Strings.StringHolder(local.get $$qualifier_2) (ref.null $java.lang.String))
+    (struct.set $strings.Strings.StringHolder $f_s__strings_Strings_StringHolder(local.get $$qualifier_2) (ref.null $java.lang.String))
    )
   )
  )
@@ -134,7 +134,7 @@
  (block $return.label
   (block
    ;; (Strings.this.someString = java.lang.String.fromInternalArray((char[] $array_literal = new char[24],($array_literal[0] = 84),($array_literal[1] = 104),($array_literal[2] = 105),($array_literal[3] = 115),($array_literal[4] = 32),($array_literal[5] = 105),($array_literal[6] = 115),($array_literal[7] = 32),($array_literal[8] = 97),($array_literal[9] = 32),($array_literal[10] = 115),($array_literal[11] = 116),($array_literal[12] = 114),($array_literal[13] = 105),($array_literal[14] = 110),($array_literal[15] = 103),($array_literal[16] = 32),($array_literal[17] = 108),($array_literal[18] = 105),($array_literal[19] = 116),($array_literal[20] = 101),($array_literal[21] = 114),($array_literal[22] = 97),($array_literal[23] = 108),$array_literal)));
-   (struct.set $strings.Strings $someString@strings.Strings(local.get $this) (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (block (result (ref null $char.array))
+   (struct.set $strings.Strings $f_someString__strings_Strings_(local.get $this) (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (block (result (ref null $char.array))
     
     (local.set $$array_literal (struct.new_with_rtt $char.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $char.array.elements (i32.const 24) (global.get $char.array.elements.rtt)) (global.get $char.array.rtt)))
     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 0) (i32.const 84))
@@ -164,7 +164,7 @@
     (local.get $$array_literal)
    )))
    ;; (Strings.this.nonBmpChar = java.lang.String.fromInternalArray((char[] $array_literal = new char[2],($array_literal[0] = 55296),($array_literal[1] = 57158),$array_literal)));
-   (struct.set $strings.Strings $nonBmpChar@strings.Strings(local.get $this) (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (block (result (ref null $char.array))
+   (struct.set $strings.Strings $f_nonBmpChar__strings_Strings_(local.get $this) (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (block (result (ref null $char.array))
     
     (local.set $$array_literal_1 (struct.new_with_rtt $char.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $char.array.elements (i32.const 2) (global.get $char.array.elements.rtt)) (global.get $char.array.rtt)))
     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_1)) (i32.const 0) (i32.const 55296))
@@ -172,7 +172,7 @@
     (local.get $$array_literal_1)
    )))
    ;; (Strings.this.wideColon = java.lang.String.fromInternalArray((char[] $array_literal = new char[1],($array_literal[0] = 65306),$array_literal)));
-   (struct.set $strings.Strings $wideColon@strings.Strings(local.get $this) (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (block (result (ref null $char.array))
+   (struct.set $strings.Strings $f_wideColon__strings_Strings_(local.get $this) (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (block (result (ref null $char.array))
     
     (local.set $$array_literal_2 (struct.new_with_rtt $char.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $char.array.elements (i32.const 1) (global.get $char.array.elements.rtt)) (global.get $char.array.rtt)))
     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_2)) (i32.const 0) (i32.const 65306))
@@ -189,18 +189,18 @@
  (block $return.label
   (block
    ;; if (strings.Strings.$initialized) return;
-   (if (global.get $$initialized@strings.Strings)
+   (if (global.get $f_$initialized__strings_Strings)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (strings.Strings.$initialized = true);
-   (global.set $$initialized@strings.Strings (i32.const 1))
+   (global.set $f_$initialized__strings_Strings (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
    ;; (strings.Strings.ESCAPE_CODES = java.lang.String.fromInternalArray((char[] $array_literal = new char[13],($array_literal[0] = 8),($array_literal[1] = 12),($array_literal[2] = 10),($array_literal[3] = 13),($array_literal[4] = 9),($array_literal[5] = 34),($array_literal[6] = 39),($array_literal[7] = 92),($array_literal[8] = 0),($array_literal[9] = 127),($array_literal[10] = 55296),($array_literal[11] = 57158),($array_literal[12] = 65306),$array_literal)));
-   (global.set $ESCAPE_CODES@strings.Strings (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (block (result (ref null $char.array))
+   (global.set $f_ESCAPE_CODES__strings_Strings_ (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (block (result (ref null $char.array))
     
     (local.set $$array_literal (struct.new_with_rtt $char.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $char.array.elements (i32.const 13) (global.get $char.array.elements.rtt)) (global.get $char.array.rtt)))
     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 0) (i32.const 8))
@@ -219,7 +219,7 @@
     (local.get $$array_literal)
    )))
    ;; (strings.Strings.ESCAPE_CODES_COPY = java.lang.String.fromInternalArray((char[] $array_literal = new char[13],($array_literal[0] = 8),($array_literal[1] = 12),($array_literal[2] = 10),($array_literal[3] = 13),($array_literal[4] = 9),($array_literal[5] = 34),($array_literal[6] = 39),($array_literal[7] = 92),($array_literal[8] = 0),($array_literal[9] = 127),($array_literal[10] = 55296),($array_literal[11] = 57158),($array_literal[12] = 65306),$array_literal)));
-   (global.set $ESCAPE_CODES_COPY@strings.Strings (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (block (result (ref null $char.array))
+   (global.set $f_ESCAPE_CODES_COPY__strings_Strings_ (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (block (result (ref null $char.array))
     
     (local.set $$array_literal_1 (struct.new_with_rtt $char.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $char.array.elements (i32.const 13) (global.get $char.array.elements.rtt)) (global.get $char.array.rtt)))
     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_1)) (i32.const 0) (i32.const 8))
@@ -244,8 +244,8 @@
 ;;; CLASS  StringHolder
 (type $strings.Strings.StringHolder (struct
  (field $vtable (ref null $strings.Strings.StringHolder.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $s@strings.Strings.StringHolder (mut (ref null $java.lang.String)))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $f_s__strings_Strings_StringHolder (mut (ref null $java.lang.String)))
 ))
 (type $strings.Strings.StringHolder.vtable (struct
  
@@ -255,7 +255,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $strings.Strings.StringHolder.vtable (mut (ref null $strings.Strings.StringHolder.vtable)) (ref.null $strings.Strings.StringHolder.vtable))
-(global $$initialized@strings.Strings.StringHolder (mut i32) (i32.const 0))
+(global $f_$initialized__strings_Strings_StringHolder (mut i32) (i32.const 0))
 
 ;;; StringHolder()
 (func $m_<init>__void_$p_strings_Strings_StringHolder@strings.Strings.StringHolder
@@ -279,7 +279,7 @@
  (block $return.label
   (block
    ;; (StringHolder.this.s = java.lang.String.fromInternalArray((char[] $array_literal = new char[1],($array_literal[0] = 65),$array_literal)));
-   (struct.set $strings.Strings.StringHolder $s@strings.Strings.StringHolder(local.get $this) (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (block (result (ref null $char.array))
+   (struct.set $strings.Strings.StringHolder $f_s__strings_Strings_StringHolder(local.get $this) (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (block (result (ref null $char.array))
     
     (local.set $$array_literal (struct.new_with_rtt $char.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $char.array.elements (i32.const 1) (global.get $char.array.elements.rtt)) (global.get $char.array.rtt)))
     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 0) (i32.const 65))
@@ -294,14 +294,14 @@
  (block $return.label
   (block
    ;; if (strings.Strings.StringHolder.$initialized) return;
-   (if (global.get $$initialized@strings.Strings.StringHolder)
+   (if (global.get $f_$initialized__strings_Strings_StringHolder)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (strings.Strings.StringHolder.$initialized = true);
-   (global.set $$initialized@strings.Strings.StringHolder (i32.const 1))
+   (global.set $f_$initialized__strings_Strings_StringHolder (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

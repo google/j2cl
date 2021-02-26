@@ -3,7 +3,7 @@
 ;;; CLASS  AnotherClass
 (type $multipletopclasses.AnotherClass (struct
  (field $vtable (ref null $multipletopclasses.AnotherClass.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $multipletopclasses.AnotherClass.vtable (struct
  
@@ -13,7 +13,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $multipletopclasses.AnotherClass.vtable (mut (ref null $multipletopclasses.AnotherClass.vtable)) (ref.null $multipletopclasses.AnotherClass.vtable))
-(global $$initialized@multipletopclasses.AnotherClass (mut i32) (i32.const 0))
+(global $f_$initialized__multipletopclasses_AnotherClass (mut i32) (i32.const 0))
 
 ;;; AnotherClass()
 (func $m_<init>__void_$pp_multipletopclasses@multipletopclasses.AnotherClass
@@ -33,14 +33,14 @@
  (block $return.label
   (block
    ;; if (multipletopclasses.AnotherClass.$initialized) return;
-   (if (global.get $$initialized@multipletopclasses.AnotherClass)
+   (if (global.get $f_$initialized__multipletopclasses_AnotherClass)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (multipletopclasses.AnotherClass.$initialized = true);
-   (global.set $$initialized@multipletopclasses.AnotherClass (i32.const 1))
+   (global.set $f_$initialized__multipletopclasses_AnotherClass (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -50,7 +50,7 @@
 ;;; CLASS  MultipleTopClasses
 (type $multipletopclasses.MultipleTopClasses (struct
  (field $vtable (ref null $multipletopclasses.MultipleTopClasses.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $multipletopclasses.MultipleTopClasses.vtable (struct
  
@@ -60,7 +60,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $multipletopclasses.MultipleTopClasses.vtable (mut (ref null $multipletopclasses.MultipleTopClasses.vtable)) (ref.null $multipletopclasses.MultipleTopClasses.vtable))
-(global $$initialized@multipletopclasses.MultipleTopClasses (mut i32) (i32.const 0))
+(global $f_$initialized__multipletopclasses_MultipleTopClasses (mut i32) (i32.const 0))
 
 ;;; MultipleTopClasses()
 (func $m_<init>__void@multipletopclasses.MultipleTopClasses
@@ -80,14 +80,14 @@
  (block $return.label
   (block
    ;; if (multipletopclasses.MultipleTopClasses.$initialized) return;
-   (if (global.get $$initialized@multipletopclasses.MultipleTopClasses)
+   (if (global.get $f_$initialized__multipletopclasses_MultipleTopClasses)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (multipletopclasses.MultipleTopClasses.$initialized = true);
-   (global.set $$initialized@multipletopclasses.MultipleTopClasses (i32.const 1))
+   (global.set $f_$initialized__multipletopclasses_MultipleTopClasses (i32.const 1))
    ;; multipletopclasses.AnotherClass.$clinit();
    (call $$clinit__void@multipletopclasses.AnotherClass )
   )

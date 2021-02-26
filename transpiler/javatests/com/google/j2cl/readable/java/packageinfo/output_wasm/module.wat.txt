@@ -4,7 +4,7 @@
 ;;; CLASS  Outer
 (type $packageinfo.Outer (struct
  (field $vtable (ref null $packageinfo.Outer.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $packageinfo.Outer.vtable (struct
  
@@ -14,7 +14,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $packageinfo.Outer.vtable (mut (ref null $packageinfo.Outer.vtable)) (ref.null $packageinfo.Outer.vtable))
-(global $$initialized@packageinfo.Outer (mut i32) (i32.const 0))
+(global $f_$initialized__packageinfo_Outer (mut i32) (i32.const 0))
 
 ;;; Outer()
 (func $m_<init>__void@packageinfo.Outer
@@ -36,14 +36,14 @@
  (block $return.label
   (block
    ;; if (packageinfo.Outer.$initialized) return;
-   (if (global.get $$initialized@packageinfo.Outer)
+   (if (global.get $f_$initialized__packageinfo_Outer)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (packageinfo.Outer.$initialized = true);
-   (global.set $$initialized@packageinfo.Outer (i32.const 1))
+   (global.set $f_$initialized__packageinfo_Outer (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -53,8 +53,8 @@
 ;;; CLASS  Inner
 (type $packageinfo.Outer.Inner (struct
  (field $vtable (ref null $packageinfo.Outer.Inner.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $this@packageinfo.Outer.Inner (mut (ref null $packageinfo.Outer)))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $$outer_this__packageinfo_Outer_Inner (mut (ref null $packageinfo.Outer)))
 ))
 (type $packageinfo.Outer.Inner.vtable (struct
  
@@ -64,7 +64,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $packageinfo.Outer.Inner.vtable (mut (ref null $packageinfo.Outer.Inner.vtable)) (ref.null $packageinfo.Outer.Inner.vtable))
-(global $$initialized@packageinfo.Outer.Inner (mut i32) (i32.const 0))
+(global $f_$initialized__packageinfo_Outer_Inner (mut i32) (i32.const 0))
 
 ;;; Inner(Outer $outer_this)
 (func $m_<init>__packageinfo_Outer__void@packageinfo.Outer.Inner
@@ -76,7 +76,7 @@
    ;; packageinfo.Outer.Inner.$clinit();
    (call $$clinit__void@packageinfo.Outer.Inner )
    ;; (Inner.this.this = $outer_this);
-   (struct.set $packageinfo.Outer.Inner $this@packageinfo.Outer.Inner(local.get $this) (local.get $$outer_this))
+   (struct.set $packageinfo.Outer.Inner $$outer_this__packageinfo_Outer_Inner(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -89,14 +89,14 @@
  (block $return.label
   (block
    ;; if (packageinfo.Outer.Inner.$initialized) return;
-   (if (global.get $$initialized@packageinfo.Outer.Inner)
+   (if (global.get $f_$initialized__packageinfo_Outer_Inner)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (packageinfo.Outer.Inner.$initialized = true);
-   (global.set $$initialized@packageinfo.Outer.Inner (i32.const 1))
+   (global.set $f_$initialized__packageinfo_Outer_Inner (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -107,8 +107,8 @@
 ;;; CLASS  Foo
 (type $packageinfo.subpackage.Foo (struct
  (field $vtable (ref null $packageinfo.subpackage.Foo.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $outer@packageinfo.subpackage.Foo (mut (ref null $packageinfo.Outer)))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $f_outer__packageinfo_subpackage_Foo (mut (ref null $packageinfo.Outer)))
 ))
 (type $packageinfo.subpackage.Foo.vtable (struct
  
@@ -118,7 +118,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $packageinfo.subpackage.Foo.vtable (mut (ref null $packageinfo.subpackage.Foo.vtable)) (ref.null $packageinfo.subpackage.Foo.vtable))
-(global $$initialized@packageinfo.subpackage.Foo (mut i32) (i32.const 0))
+(global $f_$initialized__packageinfo_subpackage_Foo (mut i32) (i32.const 0))
 
 ;;; Foo()
 (func $m_<init>__void@packageinfo.subpackage.Foo
@@ -141,7 +141,7 @@
  (block $return.label
   (block
    ;; (Foo.this.outer = new Outer.<init>());
-   (struct.set $packageinfo.subpackage.Foo $outer@packageinfo.subpackage.Foo(local.get $this) (call $m_<init>__void@packageinfo.Outer (struct.new_with_rtt $packageinfo.Outer (global.get $packageinfo.Outer.vtable) (i32.const 0) (global.get $packageinfo.Outer.rtt))))
+   (struct.set $packageinfo.subpackage.Foo $f_outer__packageinfo_subpackage_Foo(local.get $this) (call $m_<init>__void@packageinfo.Outer (struct.new_with_rtt $packageinfo.Outer (global.get $packageinfo.Outer.vtable) (i32.const 0) (global.get $packageinfo.Outer.rtt))))
   )
  )
 )
@@ -151,14 +151,14 @@
  (block $return.label
   (block
    ;; if (packageinfo.subpackage.Foo.$initialized) return;
-   (if (global.get $$initialized@packageinfo.subpackage.Foo)
+   (if (global.get $f_$initialized__packageinfo_subpackage_Foo)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (packageinfo.subpackage.Foo.$initialized = true);
-   (global.set $$initialized@packageinfo.subpackage.Foo (i32.const 1))
+   (global.set $f_$initialized__packageinfo_subpackage_Foo (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

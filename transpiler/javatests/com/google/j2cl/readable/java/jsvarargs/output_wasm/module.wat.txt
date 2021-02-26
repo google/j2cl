@@ -3,8 +3,8 @@
 ;;; CLASS  Main
 (type $jsvarargs.Main (struct
  (field $vtable (ref null $jsvarargs.Main.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $field@jsvarargs.Main (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $f_field__jsvarargs_Main (mut i32))
 ))
 (type $jsvarargs.Main.vtable (struct
  
@@ -24,7 +24,7 @@
  (field $m_testGenericJsFunctionWithVarags__void (mut (ref $function.__$void)))
 ))
 (global $jsvarargs.Main.vtable (mut (ref null $jsvarargs.Main.vtable)) (ref.null $jsvarargs.Main.vtable))
-(global $$initialized@jsvarargs.Main (mut i32) (i32.const 0))
+(global $f_$initialized__jsvarargs_Main (mut i32) (i32.const 0))
 
 ;;; Main(int f)
 (func $m_<init>__int__void@jsvarargs.Main
@@ -36,7 +36,7 @@
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; (Main.this.field = f);
-   (struct.set $jsvarargs.Main $field@jsvarargs.Main(local.get $this) (local.get $f))
+   (struct.set $jsvarargs.Main $f_field__jsvarargs_Main(local.get $this) (local.get $f))
   )
  )
  (local.get $this)
@@ -89,7 +89,7 @@
  (block $return.label
   (block
    ;; return ((Main.this.field + m) + numbers[1]);
-   (local.set $return.value (i32.add (i32.add (struct.get $jsvarargs.Main $field@jsvarargs.Main(local.get $this)) (local.get $m)) (array.get $int.array.elements (struct.get $int.array $elements (local.get $numbers)) (i32.const 1))))
+   (local.set $return.value (i32.add (i32.add (struct.get $jsvarargs.Main $f_field__jsvarargs_Main(local.get $this)) (local.get $m)) (array.get $int.array.elements (struct.get $int.array $elements (local.get $numbers)) (i32.const 1))))
    (br $return.label)
   )
  )
@@ -108,7 +108,7 @@
  (block $return.label
   (block
    ;; return (Main.this.field + numbers[1]);
-   (local.set $return.value (i32.add (struct.get $jsvarargs.Main $field@jsvarargs.Main(local.get $this)) (array.get $int.array.elements (struct.get $int.array $elements (local.get $numbers)) (i32.const 1))))
+   (local.set $return.value (i32.add (struct.get $jsvarargs.Main $f_field__jsvarargs_Main(local.get $this)) (array.get $int.array.elements (struct.get $int.array $elements (local.get $numbers)) (i32.const 1))))
    (br $return.label)
   )
  )
@@ -727,14 +727,14 @@
  (block $return.label
   (block
    ;; if (jsvarargs.Main.$initialized) return;
-   (if (global.get $$initialized@jsvarargs.Main)
+   (if (global.get $f_$initialized__jsvarargs_Main)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsvarargs.Main.$initialized = true);
-   (global.set $$initialized@jsvarargs.Main (i32.const 1))
+   (global.set $f_$initialized__jsvarargs_Main (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -744,7 +744,7 @@
 ;;; CLASS  NativeObject
 (type $jsvarargs.Main.NativeObject (struct
  (field $vtable (ref null $jsvarargs.Main.NativeObject.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $jsvarargs.Main.NativeObject.vtable (struct
  
@@ -754,7 +754,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $jsvarargs.Main.NativeObject.vtable (mut (ref null $jsvarargs.Main.NativeObject.vtable)) (ref.null $jsvarargs.Main.NativeObject.vtable))
-(global $$initialized@jsvarargs.Main.NativeObject (mut i32) (i32.const 0))
+(global $f_$initialized__jsvarargs_Main_NativeObject (mut i32) (i32.const 0))
 
 ;;; NativeObject(Object... pars)
 (func $m_<init>__arrayOf_java_lang_Object__void@jsvarargs.Main.NativeObject
@@ -777,14 +777,14 @@
  (block $return.label
   (block
    ;; if (jsvarargs.Main.NativeObject.$initialized) return;
-   (if (global.get $$initialized@jsvarargs.Main.NativeObject)
+   (if (global.get $f_$initialized__jsvarargs_Main_NativeObject)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsvarargs.Main.NativeObject.$initialized = true);
-   (global.set $$initialized@jsvarargs.Main.NativeObject (i32.const 1))
+   (global.set $f_$initialized__jsvarargs_Main_NativeObject (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -794,7 +794,7 @@
 ;;; CLASS  SubVarargsConstructorClass
 (type $jsvarargs.Main.SubVarargsConstructorClass (struct
  (field $vtable (ref null $jsvarargs.Main.SubVarargsConstructorClass.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $jsvarargs.Main.SubVarargsConstructorClass.vtable (struct
  
@@ -804,7 +804,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $jsvarargs.Main.SubVarargsConstructorClass.vtable (mut (ref null $jsvarargs.Main.SubVarargsConstructorClass.vtable)) (ref.null $jsvarargs.Main.SubVarargsConstructorClass.vtable))
-(global $$initialized@jsvarargs.Main.SubVarargsConstructorClass (mut i32) (i32.const 0))
+(global $f_$initialized__jsvarargs_Main_SubVarargsConstructorClass (mut i32) (i32.const 0))
 
 ;;; SubVarargsConstructorClass(int i, Object... args)
 (func $m_<init>__int__arrayOf_java_lang_Object__void@jsvarargs.Main.SubVarargsConstructorClass
@@ -828,34 +828,34 @@
  (block $return.label
   (block
    ;; if (jsvarargs.Main.SubVarargsConstructorClass.$initialized) return;
-   (if (global.get $$initialized@jsvarargs.Main.SubVarargsConstructorClass)
+   (if (global.get $f_$initialized__jsvarargs_Main_SubVarargsConstructorClass)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsvarargs.Main.SubVarargsConstructorClass.$initialized = true);
-   (global.set $$initialized@jsvarargs.Main.SubVarargsConstructorClass (i32.const 1))
+   (global.set $f_$initialized__jsvarargs_Main_SubVarargsConstructorClass (i32.const 1))
   )
  )
 )
 
 ;;; INTERFACE  Function
-(global $$initialized@jsvarargs.Main.Function (mut i32) (i32.const 0))
+(global $f_$initialized__jsvarargs_Main_Function (mut i32) (i32.const 0))
 
 ;;; void Function.$clinit()
 (func $$clinit__void@jsvarargs.Main.Function
  (block $return.label
   (block
    ;; if (jsvarargs.Main.Function.$initialized) return;
-   (if (global.get $$initialized@jsvarargs.Main.Function)
+   (if (global.get $f_$initialized__jsvarargs_Main_Function)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsvarargs.Main.Function.$initialized = true);
-   (global.set $$initialized@jsvarargs.Main.Function (i32.const 1))
+   (global.set $f_$initialized__jsvarargs_Main_Function (i32.const 1))
   )
  )
 )
@@ -863,7 +863,7 @@
 ;;; CLASS  AbstractMethodWithVarargs
 (type $jsvarargs.Main.AbstractMethodWithVarargs (struct
  (field $vtable (ref null $jsvarargs.Main.AbstractMethodWithVarargs.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $jsvarargs.Main.AbstractMethodWithVarargs.vtable (struct
  
@@ -874,7 +874,7 @@
  (field $m_abstractMethod__arrayOf_int__void (mut (ref $function.$int.array__$void)))
 ))
 (global $jsvarargs.Main.AbstractMethodWithVarargs.vtable (mut (ref null $jsvarargs.Main.AbstractMethodWithVarargs.vtable)) (ref.null $jsvarargs.Main.AbstractMethodWithVarargs.vtable))
-(global $$initialized@jsvarargs.Main.AbstractMethodWithVarargs (mut i32) (i32.const 0))
+(global $f_$initialized__jsvarargs_Main_AbstractMethodWithVarargs (mut i32) (i32.const 0))
 
 ;;; AbstractMethodWithVarargs()
 (func $m_<init>__void@jsvarargs.Main.AbstractMethodWithVarargs
@@ -896,14 +896,14 @@
  (block $return.label
   (block
    ;; if (jsvarargs.Main.AbstractMethodWithVarargs.$initialized) return;
-   (if (global.get $$initialized@jsvarargs.Main.AbstractMethodWithVarargs)
+   (if (global.get $f_$initialized__jsvarargs_Main_AbstractMethodWithVarargs)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsvarargs.Main.AbstractMethodWithVarargs.$initialized = true);
-   (global.set $$initialized@jsvarargs.Main.AbstractMethodWithVarargs (i32.const 1))
+   (global.set $f_$initialized__jsvarargs_Main_AbstractMethodWithVarargs (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -911,7 +911,7 @@
 )
 
 ;;; INTERFACE  StaticInterfaceMethodWithVarargs
-(global $$initialized@jsvarargs.Main.StaticInterfaceMethodWithVarargs (mut i32) (i32.const 0))
+(global $f_$initialized__jsvarargs_Main_StaticInterfaceMethodWithVarargs (mut i32) (i32.const 0))
 
 ;;; void StaticInterfaceMethodWithVarargs.staticMethod(int... args)
 (func $m_staticMethod__arrayOf_int__void@jsvarargs.Main.StaticInterfaceMethodWithVarargs
@@ -929,14 +929,14 @@
  (block $return.label
   (block
    ;; if (jsvarargs.Main.StaticInterfaceMethodWithVarargs.$initialized) return;
-   (if (global.get $$initialized@jsvarargs.Main.StaticInterfaceMethodWithVarargs)
+   (if (global.get $f_$initialized__jsvarargs_Main_StaticInterfaceMethodWithVarargs)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsvarargs.Main.StaticInterfaceMethodWithVarargs.$initialized = true);
-   (global.set $$initialized@jsvarargs.Main.StaticInterfaceMethodWithVarargs (i32.const 1))
+   (global.set $f_$initialized__jsvarargs_Main_StaticInterfaceMethodWithVarargs (i32.const 1))
   )
  )
 )
@@ -944,7 +944,7 @@
 ;;; CLASS  AFunction
 (type $jsvarargs.Main.AFunction (struct
  (field $vtable (ref null $jsvarargs.Main.AFunction.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $jsvarargs.Main.AFunction.vtable (struct
  
@@ -955,7 +955,7 @@
  (field $m_f1__int__arrayOf_java_lang_Object__java_lang_Object (mut (ref $function.$int__$Object.array__$java.lang.Object)))
 ))
 (global $jsvarargs.Main.AFunction.vtable (mut (ref null $jsvarargs.Main.AFunction.vtable)) (ref.null $jsvarargs.Main.AFunction.vtable))
-(global $$initialized@jsvarargs.Main.AFunction (mut i32) (i32.const 0))
+(global $f_$initialized__jsvarargs_Main_AFunction (mut i32) (i32.const 0))
 
 ;;; AFunction()
 (func $m_<init>__void_$pp_jsvarargs@jsvarargs.Main.AFunction
@@ -995,14 +995,14 @@
  (block $return.label
   (block
    ;; if (jsvarargs.Main.AFunction.$initialized) return;
-   (if (global.get $$initialized@jsvarargs.Main.AFunction)
+   (if (global.get $f_$initialized__jsvarargs_Main_AFunction)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsvarargs.Main.AFunction.$initialized = true);
-   (global.set $$initialized@jsvarargs.Main.AFunction (i32.const 1))
+   (global.set $f_$initialized__jsvarargs_Main_AFunction (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -1012,8 +1012,8 @@
 ;;; CLASS  SubMain
 (type $jsvarargs.Main.SubMain (struct
  (field $vtable (ref null $jsvarargs.Main.SubMain.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $field@jsvarargs.Main (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $f_field__jsvarargs_Main (mut i32))
 ))
 (type $jsvarargs.Main.SubMain.vtable (struct
  
@@ -1033,7 +1033,7 @@
  (field $m_testGenericJsFunctionWithVarags__void (mut (ref $function.__$void)))
 ))
 (global $jsvarargs.Main.SubMain.vtable (mut (ref null $jsvarargs.Main.SubMain.vtable)) (ref.null $jsvarargs.Main.SubMain.vtable))
-(global $$initialized@jsvarargs.Main.SubMain (mut i32) (i32.const 0))
+(global $f_$initialized__jsvarargs_Main_SubMain (mut i32) (i32.const 0))
 
 ;;; SubMain()
 (func $m_<init>__void@jsvarargs.Main.SubMain
@@ -1120,14 +1120,14 @@
  (block $return.label
   (block
    ;; if (jsvarargs.Main.SubMain.$initialized) return;
-   (if (global.get $$initialized@jsvarargs.Main.SubMain)
+   (if (global.get $f_$initialized__jsvarargs_Main_SubMain)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsvarargs.Main.SubMain.$initialized = true);
-   (global.set $$initialized@jsvarargs.Main.SubMain (i32.const 1))
+   (global.set $f_$initialized__jsvarargs_Main_SubMain (i32.const 1))
    ;; jsvarargs.Main.$clinit();
    (call $$clinit__void@jsvarargs.Main )
   )
@@ -1135,21 +1135,21 @@
 )
 
 ;;; INTERFACE  GenericFunction
-(global $$initialized@jsvarargs.Main.GenericFunction (mut i32) (i32.const 0))
+(global $f_$initialized__jsvarargs_Main_GenericFunction (mut i32) (i32.const 0))
 
 ;;; void GenericFunction.$clinit()
 (func $$clinit__void@jsvarargs.Main.GenericFunction
  (block $return.label
   (block
    ;; if (jsvarargs.Main.GenericFunction.$initialized) return;
-   (if (global.get $$initialized@jsvarargs.Main.GenericFunction)
+   (if (global.get $f_$initialized__jsvarargs_Main_GenericFunction)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsvarargs.Main.GenericFunction.$initialized = true);
-   (global.set $$initialized@jsvarargs.Main.GenericFunction (i32.const 1))
+   (global.set $f_$initialized__jsvarargs_Main_GenericFunction (i32.const 1))
   )
  )
 )
@@ -1158,8 +1158,8 @@
 ;;; CLASS  QualifiedSuperMethodCall
 (type $jsvarargs.QualifiedSuperMethodCall (struct
  (field $vtable (ref null $jsvarargs.QualifiedSuperMethodCall.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $field@jsvarargs.Main (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $f_field__jsvarargs_Main (mut i32))
 ))
 (type $jsvarargs.QualifiedSuperMethodCall.vtable (struct
  
@@ -1179,7 +1179,7 @@
  (field $m_testGenericJsFunctionWithVarags__void (mut (ref $function.__$void)))
 ))
 (global $jsvarargs.QualifiedSuperMethodCall.vtable (mut (ref null $jsvarargs.QualifiedSuperMethodCall.vtable)) (ref.null $jsvarargs.QualifiedSuperMethodCall.vtable))
-(global $$initialized@jsvarargs.QualifiedSuperMethodCall (mut i32) (i32.const 0))
+(global $f_$initialized__jsvarargs_QualifiedSuperMethodCall (mut i32) (i32.const 0))
 
 ;;; QualifiedSuperMethodCall()
 (func $m_<init>__void@jsvarargs.QualifiedSuperMethodCall
@@ -1199,14 +1199,14 @@
  (block $return.label
   (block
    ;; if (jsvarargs.QualifiedSuperMethodCall.$initialized) return;
-   (if (global.get $$initialized@jsvarargs.QualifiedSuperMethodCall)
+   (if (global.get $f_$initialized__jsvarargs_QualifiedSuperMethodCall)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsvarargs.QualifiedSuperMethodCall.$initialized = true);
-   (global.set $$initialized@jsvarargs.QualifiedSuperMethodCall (i32.const 1))
+   (global.set $f_$initialized__jsvarargs_QualifiedSuperMethodCall (i32.const 1))
    ;; jsvarargs.Main.$clinit();
    (call $$clinit__void@jsvarargs.Main )
   )
@@ -1216,8 +1216,8 @@
 ;;; CLASS  InnerClass
 (type $jsvarargs.QualifiedSuperMethodCall.InnerClass (struct
  (field $vtable (ref null $jsvarargs.QualifiedSuperMethodCall.InnerClass.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $this@jsvarargs.QualifiedSuperMethodCall.InnerClass (mut (ref null $jsvarargs.QualifiedSuperMethodCall)))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $$outer_this__jsvarargs_QualifiedSuperMethodCall_InnerClass (mut (ref null $jsvarargs.QualifiedSuperMethodCall)))
 ))
 (type $jsvarargs.QualifiedSuperMethodCall.InnerClass.vtable (struct
  
@@ -1228,7 +1228,7 @@
  (field $m_test__void (mut (ref $function.__$void)))
 ))
 (global $jsvarargs.QualifiedSuperMethodCall.InnerClass.vtable (mut (ref null $jsvarargs.QualifiedSuperMethodCall.InnerClass.vtable)) (ref.null $jsvarargs.QualifiedSuperMethodCall.InnerClass.vtable))
-(global $$initialized@jsvarargs.QualifiedSuperMethodCall.InnerClass (mut i32) (i32.const 0))
+(global $f_$initialized__jsvarargs_QualifiedSuperMethodCall_InnerClass (mut i32) (i32.const 0))
 
 ;;; InnerClass(QualifiedSuperMethodCall $outer_this)
 (func $m_<init>__jsvarargs_QualifiedSuperMethodCall__void@jsvarargs.QualifiedSuperMethodCall.InnerClass
@@ -1238,7 +1238,7 @@
  (block $return.label
   (block
    ;; (InnerClass.this.this = $outer_this);
-   (struct.set $jsvarargs.QualifiedSuperMethodCall.InnerClass $this@jsvarargs.QualifiedSuperMethodCall.InnerClass(local.get $this) (local.get $$outer_this))
+   (struct.set $jsvarargs.QualifiedSuperMethodCall.InnerClass $$outer_this__jsvarargs_QualifiedSuperMethodCall_InnerClass(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -1260,7 +1260,7 @@
  (block $return.label
   (block
    ;; InnerClass.this.this.f3(1,(int[] $array_literal = new int[2],($array_literal[0] = 1),($array_literal[1] = 2),$array_literal));
-   (drop (call $m_f3__int__arrayOf_int__int@jsvarargs.Main (struct.get $jsvarargs.QualifiedSuperMethodCall.InnerClass $this@jsvarargs.QualifiedSuperMethodCall.InnerClass(local.get $this))(i32.const 1)(block (result (ref null $int.array))
+   (drop (call $m_f3__int__arrayOf_int__int@jsvarargs.Main (struct.get $jsvarargs.QualifiedSuperMethodCall.InnerClass $$outer_this__jsvarargs_QualifiedSuperMethodCall_InnerClass(local.get $this))(i32.const 1)(block (result (ref null $int.array))
     
     (local.set $$array_literal (struct.new_with_rtt $int.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $int.array.elements (i32.const 2) (global.get $int.array.elements.rtt)) (global.get $int.array.rtt)))
     (array.set $int.array.elements (struct.get $int.array $elements (local.get $$array_literal)) (i32.const 0) (i32.const 1))
@@ -1268,13 +1268,13 @@
     (local.get $$array_literal)
    )))
    ;; InnerClass.this.this.f3(1,(int[] $array_literal = new int[0],$array_literal));
-   (drop (call $m_f3__int__arrayOf_int__int@jsvarargs.Main (struct.get $jsvarargs.QualifiedSuperMethodCall.InnerClass $this@jsvarargs.QualifiedSuperMethodCall.InnerClass(local.get $this))(i32.const 1)(block (result (ref null $int.array))
+   (drop (call $m_f3__int__arrayOf_int__int@jsvarargs.Main (struct.get $jsvarargs.QualifiedSuperMethodCall.InnerClass $$outer_this__jsvarargs_QualifiedSuperMethodCall_InnerClass(local.get $this))(i32.const 1)(block (result (ref null $int.array))
     
     (local.set $$array_literal_1 (struct.new_with_rtt $int.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $int.array.elements (i32.const 0) (global.get $int.array.elements.rtt)) (global.get $int.array.rtt)))
     (local.get $$array_literal_1)
    )))
    ;; InnerClass.this.this.f3(1,(int[] $array_literal = new int[2],($array_literal[0] = 1),($array_literal[1] = 2),$array_literal));
-   (drop (call $m_f3__int__arrayOf_int__int@jsvarargs.Main (struct.get $jsvarargs.QualifiedSuperMethodCall.InnerClass $this@jsvarargs.QualifiedSuperMethodCall.InnerClass(local.get $this))(i32.const 1)(block (result (ref null $int.array))
+   (drop (call $m_f3__int__arrayOf_int__int@jsvarargs.Main (struct.get $jsvarargs.QualifiedSuperMethodCall.InnerClass $$outer_this__jsvarargs_QualifiedSuperMethodCall_InnerClass(local.get $this))(i32.const 1)(block (result (ref null $int.array))
     
     (local.set $$array_literal_2 (struct.new_with_rtt $int.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $int.array.elements (i32.const 2) (global.get $int.array.elements.rtt)) (global.get $int.array.rtt)))
     (array.set $int.array.elements (struct.get $int.array $elements (local.get $$array_literal_2)) (i32.const 0) (i32.const 1))
@@ -1282,7 +1282,7 @@
     (local.get $$array_literal_2)
    )))
    ;; InnerClass.this.this.f3(1,(int[] $array_literal = new int[0],$array_literal));
-   (drop (call $m_f3__int__arrayOf_int__int@jsvarargs.Main (struct.get $jsvarargs.QualifiedSuperMethodCall.InnerClass $this@jsvarargs.QualifiedSuperMethodCall.InnerClass(local.get $this))(i32.const 1)(block (result (ref null $int.array))
+   (drop (call $m_f3__int__arrayOf_int__int@jsvarargs.Main (struct.get $jsvarargs.QualifiedSuperMethodCall.InnerClass $$outer_this__jsvarargs_QualifiedSuperMethodCall_InnerClass(local.get $this))(i32.const 1)(block (result (ref null $int.array))
     
     (local.set $$array_literal_3 (struct.new_with_rtt $int.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $int.array.elements (i32.const 0) (global.get $int.array.elements.rtt)) (global.get $int.array.rtt)))
     (local.get $$array_literal_3)
@@ -1297,7 +1297,7 @@
     (local.get $$array_literal_4)
    ))
    ;; InnerClass.this.this.f3(1,ints);
-   (drop (call $m_f3__int__arrayOf_int__int@jsvarargs.Main (struct.get $jsvarargs.QualifiedSuperMethodCall.InnerClass $this@jsvarargs.QualifiedSuperMethodCall.InnerClass(local.get $this))(i32.const 1)(local.get $ints)))
+   (drop (call $m_f3__int__arrayOf_int__int@jsvarargs.Main (struct.get $jsvarargs.QualifiedSuperMethodCall.InnerClass $$outer_this__jsvarargs_QualifiedSuperMethodCall_InnerClass(local.get $this))(i32.const 1)(local.get $ints)))
   )
  )
 )
@@ -1308,14 +1308,14 @@
  (block $return.label
   (block
    ;; if (jsvarargs.QualifiedSuperMethodCall.InnerClass.$initialized) return;
-   (if (global.get $$initialized@jsvarargs.QualifiedSuperMethodCall.InnerClass)
+   (if (global.get $f_$initialized__jsvarargs_QualifiedSuperMethodCall_InnerClass)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsvarargs.QualifiedSuperMethodCall.InnerClass.$initialized = true);
-   (global.set $$initialized@jsvarargs.QualifiedSuperMethodCall.InnerClass (i32.const 1))
+   (global.set $f_$initialized__jsvarargs_QualifiedSuperMethodCall_InnerClass (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

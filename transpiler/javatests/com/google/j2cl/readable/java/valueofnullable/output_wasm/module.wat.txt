@@ -3,10 +3,10 @@
 ;;; CLASS  ValueOfNullable
 (type $valueofnullable.ValueOfNullable (struct
  (field $vtable (ref null $valueofnullable.ValueOfNullable.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $nullableString@valueofnullable.ValueOfNullable (mut (ref null $java.lang.String)))
- (field $someChar@valueofnullable.ValueOfNullable (mut i32))
- (field $result@valueofnullable.ValueOfNullable (mut (ref null $java.lang.String)))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $f_nullableString__valueofnullable_ValueOfNullable (mut (ref null $java.lang.String)))
+ (field $f_someChar__valueofnullable_ValueOfNullable (mut i32))
+ (field $f_result__valueofnullable_ValueOfNullable (mut (ref null $java.lang.String)))
 ))
 (type $valueofnullable.ValueOfNullable.vtable (struct
  
@@ -16,7 +16,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $valueofnullable.ValueOfNullable.vtable (mut (ref null $valueofnullable.ValueOfNullable.vtable)) (ref.null $valueofnullable.ValueOfNullable.vtable))
-(global $$initialized@valueofnullable.ValueOfNullable (mut i32) (i32.const 0))
+(global $f_$initialized__valueofnullable_ValueOfNullable (mut i32) (i32.const 0))
 
 ;;; ValueOfNullable()
 (func $m_<init>__void@valueofnullable.ValueOfNullable
@@ -40,16 +40,16 @@
  (block $return.label
   (block
    ;; (ValueOfNullable.this.nullableString = java.lang.String.fromInternalArray((char[] $array_literal = new char[1],($array_literal[0] = 98),$array_literal)));
-   (struct.set $valueofnullable.ValueOfNullable $nullableString@valueofnullable.ValueOfNullable(local.get $this) (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (block (result (ref null $char.array))
+   (struct.set $valueofnullable.ValueOfNullable $f_nullableString__valueofnullable_ValueOfNullable(local.get $this) (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (block (result (ref null $char.array))
     
     (local.set $$array_literal (struct.new_with_rtt $char.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $char.array.elements (i32.const 1) (global.get $char.array.elements.rtt)) (global.get $char.array.rtt)))
     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 0) (i32.const 98))
     (local.get $$array_literal)
    )))
    ;; (ValueOfNullable.this.someChar = 97);
-   (struct.set $valueofnullable.ValueOfNullable $someChar@valueofnullable.ValueOfNullable(local.get $this) (i32.const 97))
+   (struct.set $valueofnullable.ValueOfNullable $f_someChar__valueofnullable_ValueOfNullable(local.get $this) (i32.const 97))
    ;; (ValueOfNullable.this.result = (ValueOfNullable.this.someChar + ValueOfNullable.this.nullableString));
-   (struct.set $valueofnullable.ValueOfNullable $result@valueofnullable.ValueOfNullable(local.get $this) (ref.null $java.lang.String))
+   (struct.set $valueofnullable.ValueOfNullable $f_result__valueofnullable_ValueOfNullable(local.get $this) (ref.null $java.lang.String))
   )
  )
 )
@@ -59,14 +59,14 @@
  (block $return.label
   (block
    ;; if (valueofnullable.ValueOfNullable.$initialized) return;
-   (if (global.get $$initialized@valueofnullable.ValueOfNullable)
+   (if (global.get $f_$initialized__valueofnullable_ValueOfNullable)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (valueofnullable.ValueOfNullable.$initialized = true);
-   (global.set $$initialized@valueofnullable.ValueOfNullable (i32.const 1))
+   (global.set $f_$initialized__valueofnullable_ValueOfNullable (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

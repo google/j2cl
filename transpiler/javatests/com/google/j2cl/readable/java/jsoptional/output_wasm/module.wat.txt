@@ -3,8 +3,8 @@
 ;;; CLASS  Main
 (type $jsoptional.Main (struct
  (field $vtable (ref null $jsoptional.Main.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $f@jsoptional.Main (mut (ref null $java.lang.Object)))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $f_f__jsoptional_Main (mut (ref null $java.lang.Object)))
 ))
 (type $jsoptional.Main.vtable (struct
  
@@ -18,7 +18,7 @@
  (field $m_testOptionalFunction__jsoptional_Main_Function__void (mut (ref $function.$java.lang.Object__$void)))
 ))
 (global $jsoptional.Main.vtable (mut (ref null $jsoptional.Main.vtable)) (ref.null $jsoptional.Main.vtable))
-(global $$initialized@jsoptional.Main (mut i32) (i32.const 0))
+(global $f_$initialized__jsoptional_Main (mut i32) (i32.const 0))
 
 ;;; void Main.method1(int i1, Double d, Integer i)
 (func $m_method1__int__java_lang_Double__java_lang_Integer__void@jsoptional.Main
@@ -102,7 +102,7 @@
  (block $return.label
   (block
    ;; (Main.this.f = function (String s,Object[] varargs){
-   (struct.set $jsoptional.Main $f@jsoptional.Main(local.get $this) (ref.null $java.lang.Object))
+   (struct.set $jsoptional.Main $f_f__jsoptional_Main(local.get $this) (ref.null $java.lang.Object))
   )
  )
 )
@@ -112,14 +112,14 @@
  (block $return.label
   (block
    ;; if (jsoptional.Main.$initialized) return;
-   (if (global.get $$initialized@jsoptional.Main)
+   (if (global.get $f_$initialized__jsoptional_Main)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsoptional.Main.$initialized = true);
-   (global.set $$initialized@jsoptional.Main (i32.const 1))
+   (global.set $f_$initialized__jsoptional_Main (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -127,21 +127,21 @@
 )
 
 ;;; INTERFACE  Function
-(global $$initialized@jsoptional.Main.Function (mut i32) (i32.const 0))
+(global $f_$initialized__jsoptional_Main_Function (mut i32) (i32.const 0))
 
 ;;; void Function.$clinit()
 (func $$clinit__void@jsoptional.Main.Function
  (block $return.label
   (block
    ;; if (jsoptional.Main.Function.$initialized) return;
-   (if (global.get $$initialized@jsoptional.Main.Function)
+   (if (global.get $f_$initialized__jsoptional_Main_Function)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsoptional.Main.Function.$initialized = true);
-   (global.set $$initialized@jsoptional.Main.Function (i32.const 1))
+   (global.set $f_$initialized__jsoptional_Main_Function (i32.const 1))
   )
  )
 )
@@ -149,7 +149,7 @@
 ;;; CLASS  AFunction
 (type $jsoptional.Main.AFunction (struct
  (field $vtable (ref null $jsoptional.Main.AFunction.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $jsoptional.Main.AFunction.vtable (struct
  
@@ -160,7 +160,7 @@
  (field $m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.String__$Object.array__$java.lang.Object)))
 ))
 (global $jsoptional.Main.AFunction.vtable (mut (ref null $jsoptional.Main.AFunction.vtable)) (ref.null $jsoptional.Main.AFunction.vtable))
-(global $$initialized@jsoptional.Main.AFunction (mut i32) (i32.const 0))
+(global $f_$initialized__jsoptional_Main_AFunction (mut i32) (i32.const 0))
 
 ;;; AFunction()
 (func $m_<init>__void_$pp_jsoptional@jsoptional.Main.AFunction
@@ -200,14 +200,14 @@
  (block $return.label
   (block
    ;; if (jsoptional.Main.AFunction.$initialized) return;
-   (if (global.get $$initialized@jsoptional.Main.AFunction)
+   (if (global.get $f_$initialized__jsoptional_Main_AFunction)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsoptional.Main.AFunction.$initialized = true);
-   (global.set $$initialized@jsoptional.Main.AFunction (i32.const 1))
+   (global.set $f_$initialized__jsoptional_Main_AFunction (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -215,21 +215,21 @@
 )
 
 ;;; INTERFACE  I
-(global $$initialized@jsoptional.Main.I (mut i32) (i32.const 0))
+(global $f_$initialized__jsoptional_Main_I (mut i32) (i32.const 0))
 
 ;;; void I.$clinit()
 (func $$clinit__void@jsoptional.Main.I
  (block $return.label
   (block
    ;; if (jsoptional.Main.I.$initialized) return;
-   (if (global.get $$initialized@jsoptional.Main.I)
+   (if (global.get $f_$initialized__jsoptional_Main_I)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsoptional.Main.I.$initialized = true);
-   (global.set $$initialized@jsoptional.Main.I (i32.const 1))
+   (global.set $f_$initialized__jsoptional_Main_I (i32.const 1))
   )
  )
 )
@@ -237,7 +237,7 @@
 ;;; CLASS  TemplatedSubtype
 (type $jsoptional.Main.TemplatedSubtype (struct
  (field $vtable (ref null $jsoptional.Main.TemplatedSubtype.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $jsoptional.Main.TemplatedSubtype.vtable (struct
  
@@ -249,7 +249,7 @@
  (field $m_m__java_lang_Object__java_lang_Object__void (mut (ref $function.$java.lang.Object__$java.lang.Object__$void)))
 ))
 (global $jsoptional.Main.TemplatedSubtype.vtable (mut (ref null $jsoptional.Main.TemplatedSubtype.vtable)) (ref.null $jsoptional.Main.TemplatedSubtype.vtable))
-(global $$initialized@jsoptional.Main.TemplatedSubtype (mut i32) (i32.const 0))
+(global $f_$initialized__jsoptional_Main_TemplatedSubtype (mut i32) (i32.const 0))
 
 ;;; TemplatedSubtype()
 (func $m_<init>__void_$pp_jsoptional@jsoptional.Main.TemplatedSubtype
@@ -299,14 +299,14 @@
  (block $return.label
   (block
    ;; if (jsoptional.Main.TemplatedSubtype.$initialized) return;
-   (if (global.get $$initialized@jsoptional.Main.TemplatedSubtype)
+   (if (global.get $f_$initialized__jsoptional_Main_TemplatedSubtype)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsoptional.Main.TemplatedSubtype.$initialized = true);
-   (global.set $$initialized@jsoptional.Main.TemplatedSubtype (i32.const 1))
+   (global.set $f_$initialized__jsoptional_Main_TemplatedSubtype (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -316,8 +316,8 @@
 ;;; CLASS  SpecializedSubtype
 (type $jsoptional.Main.SpecializedSubtype (struct
  (field $vtable (ref null $jsoptional.Main.SpecializedSubtype.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $this@jsoptional.Main.SpecializedSubtype (mut (ref null $jsoptional.Main)))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $$outer_this__jsoptional_Main_SpecializedSubtype (mut (ref null $jsoptional.Main)))
 ))
 (type $jsoptional.Main.SpecializedSubtype.vtable (struct
  
@@ -329,7 +329,7 @@
  (field $m_m__java_lang_Object__java_lang_Object__void (mut (ref $function.$java.lang.Object__$java.lang.Object__$void)))
 ))
 (global $jsoptional.Main.SpecializedSubtype.vtable (mut (ref null $jsoptional.Main.SpecializedSubtype.vtable)) (ref.null $jsoptional.Main.SpecializedSubtype.vtable))
-(global $$initialized@jsoptional.Main.SpecializedSubtype (mut i32) (i32.const 0))
+(global $f_$initialized__jsoptional_Main_SpecializedSubtype (mut i32) (i32.const 0))
 
 ;;; SpecializedSubtype(Main $outer_this, Object a)
 (func $m_<init>__jsoptional_Main__java_lang_Object__void@jsoptional.Main.SpecializedSubtype
@@ -342,7 +342,7 @@
    ;; jsoptional.Main.SpecializedSubtype.$clinit();
    (call $$clinit__void@jsoptional.Main.SpecializedSubtype )
    ;; (SpecializedSubtype.this.this = $outer_this);
-   (struct.set $jsoptional.Main.SpecializedSubtype $this@jsoptional.Main.SpecializedSubtype(local.get $this) (local.get $$outer_this))
+   (struct.set $jsoptional.Main.SpecializedSubtype $$outer_this__jsoptional_Main_SpecializedSubtype(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -385,14 +385,14 @@
  (block $return.label
   (block
    ;; if (jsoptional.Main.SpecializedSubtype.$initialized) return;
-   (if (global.get $$initialized@jsoptional.Main.SpecializedSubtype)
+   (if (global.get $f_$initialized__jsoptional_Main_SpecializedSubtype)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsoptional.Main.SpecializedSubtype.$initialized = true);
-   (global.set $$initialized@jsoptional.Main.SpecializedSubtype (i32.const 1))
+   (global.set $f_$initialized__jsoptional_Main_SpecializedSubtype (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -402,7 +402,7 @@
 ;;; CLASS  NonJsTypeSubtype
 (type $jsoptional.Main.NonJsTypeSubtype (struct
  (field $vtable (ref null $jsoptional.Main.NonJsTypeSubtype.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $jsoptional.Main.NonJsTypeSubtype.vtable (struct
  
@@ -414,7 +414,7 @@
  (field $m_m__java_lang_Object__java_lang_Object__void (mut (ref $function.$java.lang.Object__$java.lang.Object__$void)))
 ))
 (global $jsoptional.Main.NonJsTypeSubtype.vtable (mut (ref null $jsoptional.Main.NonJsTypeSubtype.vtable)) (ref.null $jsoptional.Main.NonJsTypeSubtype.vtable))
-(global $$initialized@jsoptional.Main.NonJsTypeSubtype (mut i32) (i32.const 0))
+(global $f_$initialized__jsoptional_Main_NonJsTypeSubtype (mut i32) (i32.const 0))
 
 ;;; NonJsTypeSubtype()
 (func $m_<init>__void_$pp_jsoptional@jsoptional.Main.NonJsTypeSubtype
@@ -464,14 +464,14 @@
  (block $return.label
   (block
    ;; if (jsoptional.Main.NonJsTypeSubtype.$initialized) return;
-   (if (global.get $$initialized@jsoptional.Main.NonJsTypeSubtype)
+   (if (global.get $f_$initialized__jsoptional_Main_NonJsTypeSubtype)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsoptional.Main.NonJsTypeSubtype.$initialized = true);
-   (global.set $$initialized@jsoptional.Main.NonJsTypeSubtype (i32.const 1))
+   (global.set $f_$initialized__jsoptional_Main_NonJsTypeSubtype (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

@@ -3,7 +3,7 @@
 ;;; CLASS  Parent
 (type $jsmethodoverride.Parent (struct
  (field $vtable (ref null $jsmethodoverride.Parent.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $jsmethodoverride.Parent.vtable (struct
  
@@ -14,7 +14,7 @@
  (field $m_foo__void (mut (ref $function.__$void)))
 ))
 (global $jsmethodoverride.Parent.vtable (mut (ref null $jsmethodoverride.Parent.vtable)) (ref.null $jsmethodoverride.Parent.vtable))
-(global $$initialized@jsmethodoverride.Parent (mut i32) (i32.const 0))
+(global $f_$initialized__jsmethodoverride_Parent (mut i32) (i32.const 0))
 
 ;;; Parent()
 (func $m_<init>__void_$pp_jsmethodoverride@jsmethodoverride.Parent
@@ -46,14 +46,14 @@
  (block $return.label
   (block
    ;; if (jsmethodoverride.Parent.$initialized) return;
-   (if (global.get $$initialized@jsmethodoverride.Parent)
+   (if (global.get $f_$initialized__jsmethodoverride_Parent)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsmethodoverride.Parent.$initialized = true);
-   (global.set $$initialized@jsmethodoverride.Parent (i32.const 1))
+   (global.set $f_$initialized__jsmethodoverride_Parent (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -63,7 +63,7 @@
 ;;; CLASS  Child
 (type $jsmethodoverride.Child (struct
  (field $vtable (ref null $jsmethodoverride.Child.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $jsmethodoverride.Child.vtable (struct
  
@@ -74,7 +74,7 @@
  (field $m_foo__void (mut (ref $function.__$void)))
 ))
 (global $jsmethodoverride.Child.vtable (mut (ref null $jsmethodoverride.Child.vtable)) (ref.null $jsmethodoverride.Child.vtable))
-(global $$initialized@jsmethodoverride.Child (mut i32) (i32.const 0))
+(global $f_$initialized__jsmethodoverride_Child (mut i32) (i32.const 0))
 
 ;;; Child()
 (func $m_<init>__void@jsmethodoverride.Child
@@ -108,14 +108,14 @@
  (block $return.label
   (block
    ;; if (jsmethodoverride.Child.$initialized) return;
-   (if (global.get $$initialized@jsmethodoverride.Child)
+   (if (global.get $f_$initialized__jsmethodoverride_Child)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsmethodoverride.Child.$initialized = true);
-   (global.set $$initialized@jsmethodoverride.Child (i32.const 1))
+   (global.set $f_$initialized__jsmethodoverride_Child (i32.const 1))
    ;; jsmethodoverride.Parent.$clinit();
    (call $$clinit__void@jsmethodoverride.Parent )
   )

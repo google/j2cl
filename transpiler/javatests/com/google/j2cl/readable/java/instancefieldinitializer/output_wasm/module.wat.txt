@@ -3,9 +3,9 @@
 ;;; CLASS  InstanceFieldInitializer
 (type $instancefieldinitializer.InstanceFieldInitializer (struct
  (field $vtable (ref null $instancefieldinitializer.InstanceFieldInitializer.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $a@instancefieldinitializer.InstanceFieldInitializer (mut i32))
- (field $b@instancefieldinitializer.InstanceFieldInitializer (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $f_a__instancefieldinitializer_InstanceFieldInitializer (mut i32))
+ (field $f_b__instancefieldinitializer_InstanceFieldInitializer (mut i32))
 ))
 (type $instancefieldinitializer.InstanceFieldInitializer.vtable (struct
  
@@ -15,7 +15,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $instancefieldinitializer.InstanceFieldInitializer.vtable (mut (ref null $instancefieldinitializer.InstanceFieldInitializer.vtable)) (ref.null $instancefieldinitializer.InstanceFieldInitializer.vtable))
-(global $$initialized@instancefieldinitializer.InstanceFieldInitializer (mut i32) (i32.const 0))
+(global $f_$initialized__instancefieldinitializer_InstanceFieldInitializer (mut i32) (i32.const 0))
 
 ;;; InstanceFieldInitializer()
 (func $m_<init>__void@instancefieldinitializer.InstanceFieldInitializer
@@ -38,9 +38,9 @@
  (block $return.label
   (block
    ;; (InstanceFieldInitializer.this.a = 1);
-   (struct.set $instancefieldinitializer.InstanceFieldInitializer $a@instancefieldinitializer.InstanceFieldInitializer(local.get $this) (i32.const 1))
+   (struct.set $instancefieldinitializer.InstanceFieldInitializer $f_a__instancefieldinitializer_InstanceFieldInitializer(local.get $this) (i32.const 1))
    ;; (InstanceFieldInitializer.this.b = (InstanceFieldInitializer.this.a * 2));
-   (struct.set $instancefieldinitializer.InstanceFieldInitializer $b@instancefieldinitializer.InstanceFieldInitializer(local.get $this) (i32.mul (struct.get $instancefieldinitializer.InstanceFieldInitializer $a@instancefieldinitializer.InstanceFieldInitializer(local.get $this)) (i32.const 2)))
+   (struct.set $instancefieldinitializer.InstanceFieldInitializer $f_b__instancefieldinitializer_InstanceFieldInitializer(local.get $this) (i32.mul (struct.get $instancefieldinitializer.InstanceFieldInitializer $f_a__instancefieldinitializer_InstanceFieldInitializer(local.get $this)) (i32.const 2)))
   )
  )
 )
@@ -50,14 +50,14 @@
  (block $return.label
   (block
    ;; if (instancefieldinitializer.InstanceFieldInitializer.$initialized) return;
-   (if (global.get $$initialized@instancefieldinitializer.InstanceFieldInitializer)
+   (if (global.get $f_$initialized__instancefieldinitializer_InstanceFieldInitializer)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (instancefieldinitializer.InstanceFieldInitializer.$initialized = true);
-   (global.set $$initialized@instancefieldinitializer.InstanceFieldInitializer (i32.const 1))
+   (global.set $f_$initialized__instancefieldinitializer_InstanceFieldInitializer (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

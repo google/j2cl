@@ -3,7 +3,7 @@
 ;;; CLASS  Main
 (type $interfaces.Main (struct
  (field $vtable (ref null $interfaces.Main.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $interfaces.Main.vtable (struct
  
@@ -14,7 +14,7 @@
  (field $m_testInterfaceMembers__void_$pp_interfaces (mut (ref $function.__$void)))
 ))
 (global $interfaces.Main.vtable (mut (ref null $interfaces.Main.vtable)) (ref.null $interfaces.Main.vtable))
-(global $$initialized@interfaces.Main (mut i32) (i32.const 0))
+(global $f_$initialized__interfaces_Main (mut i32) (i32.const 0))
 
 ;;; Main()
 (func $m_<init>__void@interfaces.Main
@@ -51,8 +51,8 @@
    
    (local.set $x (i32.add (block (result i32)
     (drop (call $m_<init>__interfaces_Main__void_$pp_interfaces@interfaces.Main.Implementor (struct.new_with_rtt $interfaces.Main.Implementor (global.get $interfaces.Main.Implementor.vtable) (i32.const 0) (ref.null $interfaces.Main) (global.get $interfaces.Main.Implementor.rtt))(local.get $this)))
-    (global.get $a@interfaces.Main.Interface)
-   ) (global.get $b@interfaces.Main.Interface)))
+    (global.get $f_a__interfaces_Main_Interface)
+   ) (global.get $f_b__interfaces_Main_Interface)))
   )
  )
 )
@@ -63,14 +63,14 @@
  (block $return.label
   (block
    ;; if (interfaces.Main.$initialized) return;
-   (if (global.get $$initialized@interfaces.Main)
+   (if (global.get $f_$initialized__interfaces_Main)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (interfaces.Main.$initialized = true);
-   (global.set $$initialized@interfaces.Main (i32.const 1))
+   (global.set $f_$initialized__interfaces_Main (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -78,9 +78,9 @@
 )
 
 ;;; INTERFACE  Interface
-(global $a@interfaces.Main.Interface i32 (i32.const 1))
-(global $b@interfaces.Main.Interface i32 (i32.const 2))
-(global $$initialized@interfaces.Main.Interface (mut i32) (i32.const 0))
+(global $f_a__interfaces_Main_Interface i32 (i32.const 1))
+(global $f_b__interfaces_Main_Interface i32 (i32.const 2))
+(global $f_$initialized__interfaces_Main_Interface (mut i32) (i32.const 0))
 
 ;;; void Interface.defaultMethod(T t)
 (func $m_defaultMethod__java_lang_Object__void@interfaces.Main.Interface
@@ -120,20 +120,20 @@
  (block $return.label
   (block
    ;; if (interfaces.Main.Interface.$initialized) return;
-   (if (global.get $$initialized@interfaces.Main.Interface)
+   (if (global.get $f_$initialized__interfaces_Main_Interface)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (interfaces.Main.Interface.$initialized = true);
-   (global.set $$initialized@interfaces.Main.Interface (i32.const 1))
+   (global.set $f_$initialized__interfaces_Main_Interface (i32.const 1))
   )
  )
 )
 
 ;;; INTERFACE  SubInterface
-(global $$initialized@interfaces.Main.SubInterface (mut i32) (i32.const 0))
+(global $f_$initialized__interfaces_Main_SubInterface (mut i32) (i32.const 0))
 
 ;;; void SubInterface.defaultMethod(String s)
 (func $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface
@@ -153,14 +153,14 @@
  (block $return.label
   (block
    ;; if (interfaces.Main.SubInterface.$initialized) return;
-   (if (global.get $$initialized@interfaces.Main.SubInterface)
+   (if (global.get $f_$initialized__interfaces_Main_SubInterface)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (interfaces.Main.SubInterface.$initialized = true);
-   (global.set $$initialized@interfaces.Main.SubInterface (i32.const 1))
+   (global.set $f_$initialized__interfaces_Main_SubInterface (i32.const 1))
    ;; interfaces.Main.Interface.$clinit();
    (call $$clinit__void@interfaces.Main.Interface )
   )
@@ -170,8 +170,8 @@
 ;;; CLASS  Implementor
 (type $interfaces.Main.Implementor (struct
  (field $vtable (ref null $interfaces.Main.Implementor.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $this@interfaces.Main.Implementor (mut (ref null $interfaces.Main)))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $$outer_this__interfaces_Main_Implementor (mut (ref null $interfaces.Main)))
 ))
 (type $interfaces.Main.Implementor.vtable (struct
  
@@ -184,7 +184,7 @@
  (field $m_defaultMethod__java_lang_String__void (mut (ref $function.$java.lang.String__$void)))
 ))
 (global $interfaces.Main.Implementor.vtable (mut (ref null $interfaces.Main.Implementor.vtable)) (ref.null $interfaces.Main.Implementor.vtable))
-(global $$initialized@interfaces.Main.Implementor (mut i32) (i32.const 0))
+(global $f_$initialized__interfaces_Main_Implementor (mut i32) (i32.const 0))
 
 ;;; Implementor(Main $outer_this)
 (func $m_<init>__interfaces_Main__void_$pp_interfaces@interfaces.Main.Implementor
@@ -194,7 +194,7 @@
  (block $return.label
   (block
    ;; (Implementor.this.this = $outer_this);
-   (struct.set $interfaces.Main.Implementor $this@interfaces.Main.Implementor(local.get $this) (local.get $$outer_this))
+   (struct.set $interfaces.Main.Implementor $$outer_this__interfaces_Main_Implementor(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -249,14 +249,14 @@
  (block $return.label
   (block
    ;; if (interfaces.Main.Implementor.$initialized) return;
-   (if (global.get $$initialized@interfaces.Main.Implementor)
+   (if (global.get $f_$initialized__interfaces_Main_Implementor)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (interfaces.Main.Implementor.$initialized = true);
-   (global.set $$initialized@interfaces.Main.Implementor (i32.const 1))
+   (global.set $f_$initialized__interfaces_Main_Implementor (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
    ;; interfaces.Main.SubInterface.$clinit();
@@ -270,8 +270,8 @@
 ;;; CLASS  AbstractImplementor
 (type $interfaces.Main.AbstractImplementor (struct
  (field $vtable (ref null $interfaces.Main.AbstractImplementor.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $this@interfaces.Main.AbstractImplementor (mut (ref null $interfaces.Main)))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $$outer_this__interfaces_Main_AbstractImplementor (mut (ref null $interfaces.Main)))
 ))
 (type $interfaces.Main.AbstractImplementor.vtable (struct
  
@@ -283,7 +283,7 @@
  (field $m_defaultMethod__java_lang_String__void (mut (ref $function.$java.lang.String__$void)))
 ))
 (global $interfaces.Main.AbstractImplementor.vtable (mut (ref null $interfaces.Main.AbstractImplementor.vtable)) (ref.null $interfaces.Main.AbstractImplementor.vtable))
-(global $$initialized@interfaces.Main.AbstractImplementor (mut i32) (i32.const 0))
+(global $f_$initialized__interfaces_Main_AbstractImplementor (mut i32) (i32.const 0))
 
 ;;; AbstractImplementor(Main $outer_this)
 (func $m_<init>__interfaces_Main__void_$pp_interfaces@interfaces.Main.AbstractImplementor
@@ -293,7 +293,7 @@
  (block $return.label
   (block
    ;; (AbstractImplementor.this.this = $outer_this);
-   (struct.set $interfaces.Main.AbstractImplementor $this@interfaces.Main.AbstractImplementor(local.get $this) (local.get $$outer_this))
+   (struct.set $interfaces.Main.AbstractImplementor $$outer_this__interfaces_Main_AbstractImplementor(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -336,14 +336,14 @@
  (block $return.label
   (block
    ;; if (interfaces.Main.AbstractImplementor.$initialized) return;
-   (if (global.get $$initialized@interfaces.Main.AbstractImplementor)
+   (if (global.get $f_$initialized__interfaces_Main_AbstractImplementor)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (interfaces.Main.AbstractImplementor.$initialized = true);
-   (global.set $$initialized@interfaces.Main.AbstractImplementor (i32.const 1))
+   (global.set $f_$initialized__interfaces_Main_AbstractImplementor (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
    ;; interfaces.Main.SubInterface.$clinit();

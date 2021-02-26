@@ -3,7 +3,7 @@
 ;;; CLASS  LongParameterSignature
 (type $longparametersignature.LongParameterSignature (struct
  (field $vtable (ref null $longparametersignature.LongParameterSignature.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $longparametersignature.LongParameterSignature.vtable (struct
  
@@ -14,7 +14,7 @@
  (field $m_main__long__void (mut (ref $function.$long__$void)))
 ))
 (global $longparametersignature.LongParameterSignature.vtable (mut (ref null $longparametersignature.LongParameterSignature.vtable)) (ref.null $longparametersignature.LongParameterSignature.vtable))
-(global $$initialized@longparametersignature.LongParameterSignature (mut i32) (i32.const 0))
+(global $f_$initialized__longparametersignature_LongParameterSignature (mut i32) (i32.const 0))
 
 ;;; LongParameterSignature()
 (func $m_<init>__void@longparametersignature.LongParameterSignature
@@ -47,14 +47,14 @@
  (block $return.label
   (block
    ;; if (longparametersignature.LongParameterSignature.$initialized) return;
-   (if (global.get $$initialized@longparametersignature.LongParameterSignature)
+   (if (global.get $f_$initialized__longparametersignature_LongParameterSignature)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (longparametersignature.LongParameterSignature.$initialized = true);
-   (global.set $$initialized@longparametersignature.LongParameterSignature (i32.const 1))
+   (global.set $f_$initialized__longparametersignature_LongParameterSignature (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

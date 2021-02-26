@@ -252,10 +252,23 @@ public abstract class MemberDescriptor
    */
   public abstract String getMangledName();
 
+  // TODO(b/178738483): This is a temporary hack to be able to reuse bridging logic in Closure
+  // and WASM.
+  private static ThreadLocal<Boolean> useWasmManglingPatterns =
+      ThreadLocal.withInitial(() -> false);
+
+  public static void setWasmManglingPatterns() {
+    useWasmManglingPatterns.set(true);
+  }
+
+  static boolean useWasmManglingPatterns() {
+    return useWasmManglingPatterns.get();
+  }
+
   /** Utility to compute the mangled name of a member as if it were a property. */
   // TODO(b/158014657): make this method package protected once the bug is fixed.
   public String computePropertyMangledName() {
-    if (isJsMember()) {
+    if (isJsMember() && !useWasmManglingPatterns()) {
       return getSimpleJsName();
     }
 

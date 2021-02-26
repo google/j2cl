@@ -1,21 +1,21 @@
 ;;; Code for functiontype.FunctionImpl
 
 ;;; INTERFACE  Function
-(global $$initialized@functiontype.Function (mut i32) (i32.const 0))
+(global $f_$initialized__functiontype_Function (mut i32) (i32.const 0))
 
 ;;; void Function.$clinit()
 (func $$clinit__void@functiontype.Function
  (block $return.label
   (block
    ;; if (functiontype.Function.$initialized) return;
-   (if (global.get $$initialized@functiontype.Function)
+   (if (global.get $f_$initialized__functiontype_Function)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (functiontype.Function.$initialized = true);
-   (global.set $$initialized@functiontype.Function (i32.const 1))
+   (global.set $f_$initialized__functiontype_Function (i32.const 1))
   )
  )
 )
@@ -23,7 +23,7 @@
 ;;; CLASS  FunctionImpl
 (type $functiontype.FunctionImpl (struct
  (field $vtable (ref null $functiontype.FunctionImpl.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $functiontype.FunctionImpl.vtable (struct
  
@@ -34,7 +34,7 @@
  (field $m_test__functiontype_Function__void (mut (ref $function.$java.lang.Object__$void)))
 ))
 (global $functiontype.FunctionImpl.vtable (mut (ref null $functiontype.FunctionImpl.vtable)) (ref.null $functiontype.FunctionImpl.vtable))
-(global $$initialized@functiontype.FunctionImpl (mut i32) (i32.const 0))
+(global $f_$initialized__functiontype_FunctionImpl (mut i32) (i32.const 0))
 
 ;;; FunctionImpl()
 (func $m_<init>__void@functiontype.FunctionImpl
@@ -67,14 +67,14 @@
  (block $return.label
   (block
    ;; if (functiontype.FunctionImpl.$initialized) return;
-   (if (global.get $$initialized@functiontype.FunctionImpl)
+   (if (global.get $f_$initialized__functiontype_FunctionImpl)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (functiontype.FunctionImpl.$initialized = true);
-   (global.set $$initialized@functiontype.FunctionImpl (i32.const 1))
+   (global.set $f_$initialized__functiontype_FunctionImpl (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

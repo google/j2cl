@@ -3,7 +3,7 @@
 ;;; CLASS  JsTypeWithNamespace
 (type $jstypewithnamespace.JsTypeWithNamespace (struct
  (field $vtable (ref null $jstypewithnamespace.JsTypeWithNamespace.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $jstypewithnamespace.JsTypeWithNamespace.vtable (struct
  
@@ -13,7 +13,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $jstypewithnamespace.JsTypeWithNamespace.vtable (mut (ref null $jstypewithnamespace.JsTypeWithNamespace.vtable)) (ref.null $jstypewithnamespace.JsTypeWithNamespace.vtable))
-(global $$initialized@jstypewithnamespace.JsTypeWithNamespace (mut i32) (i32.const 0))
+(global $f_$initialized__jstypewithnamespace_JsTypeWithNamespace (mut i32) (i32.const 0))
 
 ;;; JsTypeWithNamespace()
 (func $m_<init>__void@jstypewithnamespace.JsTypeWithNamespace
@@ -35,14 +35,14 @@
  (block $return.label
   (block
    ;; if (jstypewithnamespace.JsTypeWithNamespace.$initialized) return;
-   (if (global.get $$initialized@jstypewithnamespace.JsTypeWithNamespace)
+   (if (global.get $f_$initialized__jstypewithnamespace_JsTypeWithNamespace)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jstypewithnamespace.JsTypeWithNamespace.$initialized = true);
-   (global.set $$initialized@jstypewithnamespace.JsTypeWithNamespace (i32.const 1))
+   (global.set $f_$initialized__jstypewithnamespace_JsTypeWithNamespace (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

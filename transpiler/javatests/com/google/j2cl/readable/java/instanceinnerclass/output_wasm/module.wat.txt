@@ -3,8 +3,8 @@
 ;;; CLASS  InstanceInnerClass
 (type $instanceinnerclass.InstanceInnerClass (struct
  (field $vtable (ref null $instanceinnerclass.InstanceInnerClass.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $instanceField@instanceinnerclass.InstanceInnerClass (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $f_instanceField__instanceinnerclass_InstanceInnerClass (mut i32))
 ))
 (type $instanceinnerclass.InstanceInnerClass.vtable (struct
  
@@ -16,7 +16,7 @@
  (field $m_test__void (mut (ref $function.__$void)))
 ))
 (global $instanceinnerclass.InstanceInnerClass.vtable (mut (ref null $instanceinnerclass.InstanceInnerClass.vtable)) (ref.null $instanceinnerclass.InstanceInnerClass.vtable))
-(global $$initialized@instanceinnerclass.InstanceInnerClass (mut i32) (i32.const 0))
+(global $f_$initialized__instanceinnerclass_InstanceInnerClass (mut i32) (i32.const 0))
 
 ;;; InstanceInnerClass()
 (func $m_<init>__void@instanceinnerclass.InstanceInnerClass
@@ -62,14 +62,14 @@
  (block $return.label
   (block
    ;; if (instanceinnerclass.InstanceInnerClass.$initialized) return;
-   (if (global.get $$initialized@instanceinnerclass.InstanceInnerClass)
+   (if (global.get $f_$initialized__instanceinnerclass_InstanceInnerClass)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (instanceinnerclass.InstanceInnerClass.$initialized = true);
-   (global.set $$initialized@instanceinnerclass.InstanceInnerClass (i32.const 1))
+   (global.set $f_$initialized__instanceinnerclass_InstanceInnerClass (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -79,10 +79,10 @@
 ;;; CLASS  InnerClass
 (type $instanceinnerclass.InstanceInnerClass.InnerClass (struct
  (field $vtable (ref null $instanceinnerclass.InstanceInnerClass.InnerClass.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $this@instanceinnerclass.InstanceInnerClass.InnerClass (mut (ref null $instanceinnerclass.InstanceInnerClass)))
- (field $field@instanceinnerclass.InstanceInnerClass.InnerClass (mut i32))
- (field $enclosingInstance@instanceinnerclass.InstanceInnerClass.InnerClass (mut (ref null $instanceinnerclass.InstanceInnerClass)))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $$outer_this__instanceinnerclass_InstanceInnerClass_InnerClass (mut (ref null $instanceinnerclass.InstanceInnerClass)))
+ (field $f_field__instanceinnerclass_InstanceInnerClass_InnerClass (mut i32))
+ (field $f_enclosingInstance__instanceinnerclass_InstanceInnerClass_InnerClass (mut (ref null $instanceinnerclass.InstanceInnerClass)))
 ))
 (type $instanceinnerclass.InstanceInnerClass.InnerClass.vtable (struct
  
@@ -93,7 +93,7 @@
  (field $m_funInner__void (mut (ref $function.__$void)))
 ))
 (global $instanceinnerclass.InstanceInnerClass.InnerClass.vtable (mut (ref null $instanceinnerclass.InstanceInnerClass.InnerClass.vtable)) (ref.null $instanceinnerclass.InstanceInnerClass.InnerClass.vtable))
-(global $$initialized@instanceinnerclass.InstanceInnerClass.InnerClass (mut i32) (i32.const 0))
+(global $f_$initialized__instanceinnerclass_InstanceInnerClass_InnerClass (mut i32) (i32.const 0))
 
 ;;; InnerClass(InstanceInnerClass $outer_this)
 (func $m_<init>__instanceinnerclass_InstanceInnerClass__void@instanceinnerclass.InstanceInnerClass.InnerClass
@@ -103,7 +103,7 @@
  (block $return.label
   (block
    ;; (InnerClass.this.this = $outer_this);
-   (struct.set $instanceinnerclass.InstanceInnerClass.InnerClass $this@instanceinnerclass.InstanceInnerClass.InnerClass(local.get $this) (local.get $$outer_this))
+   (struct.set $instanceinnerclass.InstanceInnerClass.InnerClass $$outer_this__instanceinnerclass_InstanceInnerClass_InnerClass(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; InnerClass.this.$init();
@@ -121,9 +121,9 @@
  (block $return.label
   (block
    ;; InnerClass.this.this.funOuter();
-   (call_ref (struct.get $instanceinnerclass.InstanceInnerClass.InnerClass $this@instanceinnerclass.InstanceInnerClass.InnerClass(local.get $this))(struct.get $instanceinnerclass.InstanceInnerClass.vtable $m_funOuter__void (struct.get $instanceinnerclass.InstanceInnerClass $vtable(struct.get $instanceinnerclass.InstanceInnerClass.InnerClass $this@instanceinnerclass.InstanceInnerClass.InnerClass(local.get $this)))))
+   (call_ref (struct.get $instanceinnerclass.InstanceInnerClass.InnerClass $$outer_this__instanceinnerclass_InstanceInnerClass_InnerClass(local.get $this))(struct.get $instanceinnerclass.InstanceInnerClass.vtable $m_funOuter__void (struct.get $instanceinnerclass.InstanceInnerClass $vtable(struct.get $instanceinnerclass.InstanceInnerClass.InnerClass $$outer_this__instanceinnerclass_InstanceInnerClass_InnerClass(local.get $this)))))
    ;; InnerClass.this.this.funOuter();
-   (call_ref (struct.get $instanceinnerclass.InstanceInnerClass.InnerClass $this@instanceinnerclass.InstanceInnerClass.InnerClass(local.get $this))(struct.get $instanceinnerclass.InstanceInnerClass.vtable $m_funOuter__void (struct.get $instanceinnerclass.InstanceInnerClass $vtable(struct.get $instanceinnerclass.InstanceInnerClass.InnerClass $this@instanceinnerclass.InstanceInnerClass.InnerClass(local.get $this)))))
+   (call_ref (struct.get $instanceinnerclass.InstanceInnerClass.InnerClass $$outer_this__instanceinnerclass_InstanceInnerClass_InnerClass(local.get $this))(struct.get $instanceinnerclass.InstanceInnerClass.vtable $m_funOuter__void (struct.get $instanceinnerclass.InstanceInnerClass $vtable(struct.get $instanceinnerclass.InstanceInnerClass.InnerClass $$outer_this__instanceinnerclass_InstanceInnerClass_InnerClass(local.get $this)))))
   )
  )
 )
@@ -135,9 +135,9 @@
  (block $return.label
   (block
    ;; (InnerClass.this.field = (InnerClass.this.this.instanceField + InnerClass.this.this.instanceField));
-   (struct.set $instanceinnerclass.InstanceInnerClass.InnerClass $field@instanceinnerclass.InstanceInnerClass.InnerClass(local.get $this) (i32.add (struct.get $instanceinnerclass.InstanceInnerClass $instanceField@instanceinnerclass.InstanceInnerClass(struct.get $instanceinnerclass.InstanceInnerClass.InnerClass $this@instanceinnerclass.InstanceInnerClass.InnerClass(local.get $this))) (struct.get $instanceinnerclass.InstanceInnerClass $instanceField@instanceinnerclass.InstanceInnerClass(struct.get $instanceinnerclass.InstanceInnerClass.InnerClass $this@instanceinnerclass.InstanceInnerClass.InnerClass(local.get $this)))))
+   (struct.set $instanceinnerclass.InstanceInnerClass.InnerClass $f_field__instanceinnerclass_InstanceInnerClass_InnerClass(local.get $this) (i32.add (struct.get $instanceinnerclass.InstanceInnerClass $f_instanceField__instanceinnerclass_InstanceInnerClass(struct.get $instanceinnerclass.InstanceInnerClass.InnerClass $$outer_this__instanceinnerclass_InstanceInnerClass_InnerClass(local.get $this))) (struct.get $instanceinnerclass.InstanceInnerClass $f_instanceField__instanceinnerclass_InstanceInnerClass(struct.get $instanceinnerclass.InstanceInnerClass.InnerClass $$outer_this__instanceinnerclass_InstanceInnerClass_InnerClass(local.get $this)))))
    ;; (InnerClass.this.enclosingInstance = InnerClass.this.this);
-   (struct.set $instanceinnerclass.InstanceInnerClass.InnerClass $enclosingInstance@instanceinnerclass.InstanceInnerClass.InnerClass(local.get $this) (struct.get $instanceinnerclass.InstanceInnerClass.InnerClass $this@instanceinnerclass.InstanceInnerClass.InnerClass(local.get $this)))
+   (struct.set $instanceinnerclass.InstanceInnerClass.InnerClass $f_enclosingInstance__instanceinnerclass_InstanceInnerClass_InnerClass(local.get $this) (struct.get $instanceinnerclass.InstanceInnerClass.InnerClass $$outer_this__instanceinnerclass_InstanceInnerClass_InnerClass(local.get $this)))
   )
  )
 )
@@ -147,14 +147,14 @@
  (block $return.label
   (block
    ;; if (instanceinnerclass.InstanceInnerClass.InnerClass.$initialized) return;
-   (if (global.get $$initialized@instanceinnerclass.InstanceInnerClass.InnerClass)
+   (if (global.get $f_$initialized__instanceinnerclass_InstanceInnerClass_InnerClass)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (instanceinnerclass.InstanceInnerClass.InnerClass.$initialized = true);
-   (global.set $$initialized@instanceinnerclass.InstanceInnerClass.InnerClass (i32.const 1))
+   (global.set $f_$initialized__instanceinnerclass_InstanceInnerClass_InnerClass (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

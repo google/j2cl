@@ -3,7 +3,7 @@
 ;;; CLASS  BreakStatement
 (type $breakstatement.BreakStatement (struct
  (field $vtable (ref null $breakstatement.BreakStatement.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $breakstatement.BreakStatement.vtable (struct
  
@@ -14,7 +14,7 @@
  (field $m_test__void (mut (ref $function.__$void)))
 ))
 (global $breakstatement.BreakStatement.vtable (mut (ref null $breakstatement.BreakStatement.vtable)) (ref.null $breakstatement.BreakStatement.vtable))
-(global $$initialized@breakstatement.BreakStatement (mut i32) (i32.const 0))
+(global $f_$initialized__breakstatement_BreakStatement (mut i32) (i32.const 0))
 
 ;;; BreakStatement()
 (func $m_<init>__void@breakstatement.BreakStatement
@@ -61,14 +61,14 @@
  (block $return.label
   (block
    ;; if (breakstatement.BreakStatement.$initialized) return;
-   (if (global.get $$initialized@breakstatement.BreakStatement)
+   (if (global.get $f_$initialized__breakstatement_BreakStatement)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (breakstatement.BreakStatement.$initialized = true);
-   (global.set $$initialized@breakstatement.BreakStatement (i32.const 1))
+   (global.set $f_$initialized__breakstatement_BreakStatement (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

@@ -3,7 +3,7 @@
 ;;; CLASS  JsMethodExample
 (type $jsmethod.JsMethodExample (struct
  (field $vtable (ref null $jsmethod.JsMethodExample.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $jsmethod.JsMethodExample.vtable (struct
  
@@ -14,7 +14,7 @@
  (field $m_testMethod__java_util_ArrayList (mut (ref $function.__$java.util.ArrayList)))
 ))
 (global $jsmethod.JsMethodExample.vtable (mut (ref null $jsmethod.JsMethodExample.vtable)) (ref.null $jsmethod.JsMethodExample.vtable))
-(global $$initialized@jsmethod.JsMethodExample (mut i32) (i32.const 0))
+(global $f_$initialized__jsmethod_JsMethodExample (mut i32) (i32.const 0))
 
 ;;; JsMethodExample()
 (func $m_<init>__void@jsmethod.JsMethodExample
@@ -82,14 +82,14 @@
  (block $return.label
   (block
    ;; if (jsmethod.JsMethodExample.$initialized) return;
-   (if (global.get $$initialized@jsmethod.JsMethodExample)
+   (if (global.get $f_$initialized__jsmethod_JsMethodExample)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsmethod.JsMethodExample.$initialized = true);
-   (global.set $$initialized@jsmethod.JsMethodExample (i32.const 1))
+   (global.set $f_$initialized__jsmethod_JsMethodExample (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -99,7 +99,7 @@
 ;;; CLASS  Base
 (type $jsmethod.JsMethodExample.Base (struct
  (field $vtable (ref null $jsmethod.JsMethodExample.Base.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $jsmethod.JsMethodExample.Base.vtable (struct
  
@@ -110,7 +110,7 @@
  (field $m_m__java_lang_Object__void (mut (ref $function.$java.lang.Object__$void)))
 ))
 (global $jsmethod.JsMethodExample.Base.vtable (mut (ref null $jsmethod.JsMethodExample.Base.vtable)) (ref.null $jsmethod.JsMethodExample.Base.vtable))
-(global $$initialized@jsmethod.JsMethodExample.Base (mut i32) (i32.const 0))
+(global $f_$initialized__jsmethod_JsMethodExample_Base (mut i32) (i32.const 0))
 
 ;;; Base()
 (func $m_<init>__void_$pp_jsmethod@jsmethod.JsMethodExample.Base
@@ -143,14 +143,14 @@
  (block $return.label
   (block
    ;; if (jsmethod.JsMethodExample.Base.$initialized) return;
-   (if (global.get $$initialized@jsmethod.JsMethodExample.Base)
+   (if (global.get $f_$initialized__jsmethod_JsMethodExample_Base)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsmethod.JsMethodExample.Base.$initialized = true);
-   (global.set $$initialized@jsmethod.JsMethodExample.Base (i32.const 1))
+   (global.set $f_$initialized__jsmethod_JsMethodExample_Base (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -158,21 +158,21 @@
 )
 
 ;;; INTERFACE  I
-(global $$initialized@jsmethod.JsMethodExample.I (mut i32) (i32.const 0))
+(global $f_$initialized__jsmethod_JsMethodExample_I (mut i32) (i32.const 0))
 
 ;;; void I.$clinit()
 (func $$clinit__void@jsmethod.JsMethodExample.I
  (block $return.label
   (block
    ;; if (jsmethod.JsMethodExample.I.$initialized) return;
-   (if (global.get $$initialized@jsmethod.JsMethodExample.I)
+   (if (global.get $f_$initialized__jsmethod_JsMethodExample_I)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsmethod.JsMethodExample.I.$initialized = true);
-   (global.set $$initialized@jsmethod.JsMethodExample.I (i32.const 1))
+   (global.set $f_$initialized__jsmethod_JsMethodExample_I (i32.const 1))
   )
  )
 )
@@ -180,7 +180,7 @@
 ;;; CLASS  Sub
 (type $jsmethod.JsMethodExample.Sub (struct
  (field $vtable (ref null $jsmethod.JsMethodExample.Sub.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $jsmethod.JsMethodExample.Sub.vtable (struct
  
@@ -192,7 +192,7 @@
  (field $m_m__java_lang_String__void (mut (ref $function.$java.lang.String__$void)))
 ))
 (global $jsmethod.JsMethodExample.Sub.vtable (mut (ref null $jsmethod.JsMethodExample.Sub.vtable)) (ref.null $jsmethod.JsMethodExample.Sub.vtable))
-(global $$initialized@jsmethod.JsMethodExample.Sub (mut i32) (i32.const 0))
+(global $f_$initialized__jsmethod_JsMethodExample_Sub (mut i32) (i32.const 0))
 
 ;;; Sub()
 (func $m_<init>__void_$pp_jsmethod@jsmethod.JsMethodExample.Sub
@@ -240,14 +240,14 @@
  (block $return.label
   (block
    ;; if (jsmethod.JsMethodExample.Sub.$initialized) return;
-   (if (global.get $$initialized@jsmethod.JsMethodExample.Sub)
+   (if (global.get $f_$initialized__jsmethod_JsMethodExample_Sub)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsmethod.JsMethodExample.Sub.$initialized = true);
-   (global.set $$initialized@jsmethod.JsMethodExample.Sub (i32.const 1))
+   (global.set $f_$initialized__jsmethod_JsMethodExample_Sub (i32.const 1))
    ;; jsmethod.JsMethodExample.Base.$clinit();
    (call $$clinit__void@jsmethod.JsMethodExample.Base )
   )

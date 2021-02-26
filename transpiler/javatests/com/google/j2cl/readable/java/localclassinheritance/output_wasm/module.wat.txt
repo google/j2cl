@@ -3,7 +3,7 @@
 ;;; CLASS  LocalClassInheritance
 (type $localclassinheritance.LocalClassInheritance (struct
  (field $vtable (ref null $localclassinheritance.LocalClassInheritance.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $localclassinheritance.LocalClassInheritance.vtable (struct
  
@@ -14,7 +14,7 @@
  (field $m_test__void (mut (ref $function.__$void)))
 ))
 (global $localclassinheritance.LocalClassInheritance.vtable (mut (ref null $localclassinheritance.LocalClassInheritance.vtable)) (ref.null $localclassinheritance.LocalClassInheritance.vtable))
-(global $$initialized@localclassinheritance.LocalClassInheritance (mut i32) (i32.const 0))
+(global $f_$initialized__localclassinheritance_LocalClassInheritance (mut i32) (i32.const 0))
 
 ;;; LocalClassInheritance()
 (func $m_<init>__void@localclassinheritance.LocalClassInheritance
@@ -50,14 +50,14 @@
  (block $return.label
   (block
    ;; if (localclassinheritance.LocalClassInheritance.$initialized) return;
-   (if (global.get $$initialized@localclassinheritance.LocalClassInheritance)
+   (if (global.get $f_$initialized__localclassinheritance_LocalClassInheritance)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (localclassinheritance.LocalClassInheritance.$initialized = true);
-   (global.set $$initialized@localclassinheritance.LocalClassInheritance (i32.const 1))
+   (global.set $f_$initialized__localclassinheritance_LocalClassInheritance (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -67,9 +67,9 @@
 ;;; CLASS  Parent
 (type $localclassinheritance.LocalClassInheritance.1Parent (struct
  (field $vtable (ref null $localclassinheritance.LocalClassInheritance.1Parent.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $this@localclassinheritance.LocalClassInheritance.1Parent (mut (ref null $localclassinheritance.LocalClassInheritance)))
- (field $f@localclassinheritance.LocalClassInheritance.1Parent (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $$outer_this__localclassinheritance_LocalClassInheritance_1Parent (mut (ref null $localclassinheritance.LocalClassInheritance)))
+ (field $$captured_f__localclassinheritance_LocalClassInheritance_1Parent (mut i32))
 ))
 (type $localclassinheritance.LocalClassInheritance.1Parent.vtable (struct
  
@@ -80,7 +80,7 @@
  (field $m_n__void (mut (ref $function.__$void)))
 ))
 (global $localclassinheritance.LocalClassInheritance.1Parent.vtable (mut (ref null $localclassinheritance.LocalClassInheritance.1Parent.vtable)) (ref.null $localclassinheritance.LocalClassInheritance.1Parent.vtable))
-(global $$initialized@localclassinheritance.LocalClassInheritance.1Parent (mut i32) (i32.const 0))
+(global $f_$initialized__localclassinheritance_LocalClassInheritance_1Parent (mut i32) (i32.const 0))
 
 ;;; Parent(LocalClassInheritance $outer_this, int $captured_f)
 (func $m_<init>__localclassinheritance_LocalClassInheritance__int__void_$pp_localclassinheritance@localclassinheritance.LocalClassInheritance.1Parent
@@ -91,9 +91,9 @@
  (block $return.label
   (block
    ;; ($1Parent.this.this = $outer_this);
-   (struct.set $localclassinheritance.LocalClassInheritance.1Parent $this@localclassinheritance.LocalClassInheritance.1Parent(local.get $this) (local.get $$outer_this))
+   (struct.set $localclassinheritance.LocalClassInheritance.1Parent $$outer_this__localclassinheritance_LocalClassInheritance_1Parent(local.get $this) (local.get $$outer_this))
    ;; ($1Parent.this.f = $captured_f);
-   (struct.set $localclassinheritance.LocalClassInheritance.1Parent $f@localclassinheritance.LocalClassInheritance.1Parent(local.get $this) (local.get $$captured_f))
+   (struct.set $localclassinheritance.LocalClassInheritance.1Parent $$captured_f__localclassinheritance_LocalClassInheritance_1Parent(local.get $this) (local.get $$captured_f))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -111,7 +111,7 @@
   (block
    ;; int i = $1Parent.this.f;
    
-   (local.set $i (struct.get $localclassinheritance.LocalClassInheritance.1Parent $f@localclassinheritance.LocalClassInheritance.1Parent(local.get $this)))
+   (local.set $i (struct.get $localclassinheritance.LocalClassInheritance.1Parent $$captured_f__localclassinheritance_LocalClassInheritance_1Parent(local.get $this)))
   )
  )
 )
@@ -122,14 +122,14 @@
  (block $return.label
   (block
    ;; if (localclassinheritance.LocalClassInheritance.1Parent.$initialized) return;
-   (if (global.get $$initialized@localclassinheritance.LocalClassInheritance.1Parent)
+   (if (global.get $f_$initialized__localclassinheritance_LocalClassInheritance_1Parent)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (localclassinheritance.LocalClassInheritance.1Parent.$initialized = true);
-   (global.set $$initialized@localclassinheritance.LocalClassInheritance.1Parent (i32.const 1))
+   (global.set $f_$initialized__localclassinheritance_LocalClassInheritance_1Parent (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -139,11 +139,11 @@
 ;;; CLASS  Child
 (type $localclassinheritance.LocalClassInheritance.1Child (struct
  (field $vtable (ref null $localclassinheritance.LocalClassInheritance.1Child.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $this@localclassinheritance.LocalClassInheritance.1Parent (mut (ref null $localclassinheritance.LocalClassInheritance)))
- (field $f@localclassinheritance.LocalClassInheritance.1Parent (mut i32))
- (field $this@localclassinheritance.LocalClassInheritance.1Child (mut (ref null $localclassinheritance.LocalClassInheritance)))
- (field $f@localclassinheritance.LocalClassInheritance.1Child (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $$outer_this__localclassinheritance_LocalClassInheritance_1Parent (mut (ref null $localclassinheritance.LocalClassInheritance)))
+ (field $$captured_f__localclassinheritance_LocalClassInheritance_1Parent (mut i32))
+ (field $$outer_this__localclassinheritance_LocalClassInheritance_1Child (mut (ref null $localclassinheritance.LocalClassInheritance)))
+ (field $$captured_f__localclassinheritance_LocalClassInheritance_1Child (mut i32))
 ))
 (type $localclassinheritance.LocalClassInheritance.1Child.vtable (struct
  
@@ -154,7 +154,7 @@
  (field $m_n__void (mut (ref $function.__$void)))
 ))
 (global $localclassinheritance.LocalClassInheritance.1Child.vtable (mut (ref null $localclassinheritance.LocalClassInheritance.1Child.vtable)) (ref.null $localclassinheritance.LocalClassInheritance.1Child.vtable))
-(global $$initialized@localclassinheritance.LocalClassInheritance.1Child (mut i32) (i32.const 0))
+(global $f_$initialized__localclassinheritance_LocalClassInheritance_1Child (mut i32) (i32.const 0))
 
 ;;; Child(LocalClassInheritance $outer_this, int $captured_f)
 (func $m_<init>__localclassinheritance_LocalClassInheritance__int__void_$pp_localclassinheritance@localclassinheritance.LocalClassInheritance.1Child
@@ -165,9 +165,9 @@
  (block $return.label
   (block
    ;; ($1Child.this.this = $outer_this);
-   (struct.set $localclassinheritance.LocalClassInheritance.1Child $this@localclassinheritance.LocalClassInheritance.1Child(local.get $this) (local.get $$outer_this))
+   (struct.set $localclassinheritance.LocalClassInheritance.1Child $$outer_this__localclassinheritance_LocalClassInheritance_1Child(local.get $this) (local.get $$outer_this))
    ;; ($1Child.this.f = $captured_f);
-   (struct.set $localclassinheritance.LocalClassInheritance.1Child $f@localclassinheritance.LocalClassInheritance.1Child(local.get $this) (local.get $$captured_f))
+   (struct.set $localclassinheritance.LocalClassInheritance.1Child $$captured_f__localclassinheritance_LocalClassInheritance_1Child(local.get $this) (local.get $$captured_f))
    ;; $1Parent.this.$1Parent.<init>($outer_this,$captured_f);
    (drop (call $m_<init>__localclassinheritance_LocalClassInheritance__int__void_$pp_localclassinheritance@localclassinheritance.LocalClassInheritance.1Parent (local.get $this)(local.get $$outer_this)(local.get $$captured_f)))
   )
@@ -185,7 +185,7 @@
   (block
    ;; int i = $1Child.this.f;
    
-   (local.set $i (struct.get $localclassinheritance.LocalClassInheritance.1Child $f@localclassinheritance.LocalClassInheritance.1Child(local.get $this)))
+   (local.set $i (struct.get $localclassinheritance.LocalClassInheritance.1Child $$captured_f__localclassinheritance_LocalClassInheritance_1Child(local.get $this)))
   )
  )
 )
@@ -196,14 +196,14 @@
  (block $return.label
   (block
    ;; if (localclassinheritance.LocalClassInheritance.1Child.$initialized) return;
-   (if (global.get $$initialized@localclassinheritance.LocalClassInheritance.1Child)
+   (if (global.get $f_$initialized__localclassinheritance_LocalClassInheritance_1Child)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (localclassinheritance.LocalClassInheritance.1Child.$initialized = true);
-   (global.set $$initialized@localclassinheritance.LocalClassInheritance.1Child (i32.const 1))
+   (global.set $f_$initialized__localclassinheritance_LocalClassInheritance_1Child (i32.const 1))
    ;; localclassinheritance.LocalClassInheritance.1Parent.$clinit();
    (call $$clinit__void@localclassinheritance.LocalClassInheritance.1Parent )
   )

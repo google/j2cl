@@ -3,7 +3,7 @@
 ;;; CLASS  ImportsFullyQualified
 (type $importsfullyqualified.ImportsFullyQualified (struct
  (field $vtable (ref null $importsfullyqualified.ImportsFullyQualified.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $importsfullyqualified.ImportsFullyQualified.vtable (struct
  
@@ -13,7 +13,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $importsfullyqualified.ImportsFullyQualified.vtable (mut (ref null $importsfullyqualified.ImportsFullyQualified.vtable)) (ref.null $importsfullyqualified.ImportsFullyQualified.vtable))
-(global $$initialized@importsfullyqualified.ImportsFullyQualified (mut i32) (i32.const 0))
+(global $f_$initialized__importsfullyqualified_ImportsFullyQualified (mut i32) (i32.const 0))
 
 ;;; ImportsFullyQualified()
 (func $m_<init>__void@importsfullyqualified.ImportsFullyQualified
@@ -33,14 +33,14 @@
  (block $return.label
   (block
    ;; if (importsfullyqualified.ImportsFullyQualified.$initialized) return;
-   (if (global.get $$initialized@importsfullyqualified.ImportsFullyQualified)
+   (if (global.get $f_$initialized__importsfullyqualified_ImportsFullyQualified)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (importsfullyqualified.ImportsFullyQualified.$initialized = true);
-   (global.set $$initialized@importsfullyqualified.ImportsFullyQualified (i32.const 1))
+   (global.set $f_$initialized__importsfullyqualified_ImportsFullyQualified (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

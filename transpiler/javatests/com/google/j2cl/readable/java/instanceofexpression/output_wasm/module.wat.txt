@@ -3,7 +3,7 @@
 ;;; CLASS  InstanceofExpressions
 (type $instanceofexpression.InstanceofExpressions (struct
  (field $vtable (ref null $instanceofexpression.InstanceofExpressions.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $instanceofexpression.InstanceofExpressions.vtable (struct
  
@@ -17,7 +17,7 @@
  (field $m_testInstanceOfArray__void (mut (ref $function.__$void)))
 ))
 (global $instanceofexpression.InstanceofExpressions.vtable (mut (ref null $instanceofexpression.InstanceofExpressions.vtable)) (ref.null $instanceofexpression.InstanceofExpressions.vtable))
-(global $$initialized@instanceofexpression.InstanceofExpressions (mut i32) (i32.const 0))
+(global $f_$initialized__instanceofexpression_InstanceofExpressions (mut i32) (i32.const 0))
 
 ;;; InstanceofExpressions()
 (func $m_<init>__void@instanceofexpression.InstanceofExpressions
@@ -195,14 +195,14 @@
  (block $return.label
   (block
    ;; if (instanceofexpression.InstanceofExpressions.$initialized) return;
-   (if (global.get $$initialized@instanceofexpression.InstanceofExpressions)
+   (if (global.get $f_$initialized__instanceofexpression_InstanceofExpressions)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (instanceofexpression.InstanceofExpressions.$initialized = true);
-   (global.set $$initialized@instanceofexpression.InstanceofExpressions (i32.const 1))
+   (global.set $f_$initialized__instanceofexpression_InstanceofExpressions (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -212,8 +212,8 @@
 ;;; CLASS  <anonymous> implements Serializable
 (type $instanceofexpression.InstanceofExpressions.1 (struct
  (field $vtable (ref null $instanceofexpression.InstanceofExpressions.1.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $this@instanceofexpression.InstanceofExpressions.1 (mut (ref null $instanceofexpression.InstanceofExpressions)))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $$outer_this__instanceofexpression_InstanceofExpressions_1 (mut (ref null $instanceofexpression.InstanceofExpressions)))
 ))
 (type $instanceofexpression.InstanceofExpressions.1.vtable (struct
  
@@ -223,7 +223,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $instanceofexpression.InstanceofExpressions.1.vtable (mut (ref null $instanceofexpression.InstanceofExpressions.1.vtable)) (ref.null $instanceofexpression.InstanceofExpressions.1.vtable))
-(global $$initialized@instanceofexpression.InstanceofExpressions.1 (mut i32) (i32.const 0))
+(global $f_$initialized__instanceofexpression_InstanceofExpressions_1 (mut i32) (i32.const 0))
 
 ;;; <anonymous> implements Serializable(InstanceofExpressions $outer_this)
 (func $m_<init>__instanceofexpression_InstanceofExpressions__void_$pp_instanceofexpression@instanceofexpression.InstanceofExpressions.1
@@ -233,7 +233,7 @@
  (block $return.label
   (block
    ;; ($1.this.this = $outer_this);
-   (struct.set $instanceofexpression.InstanceofExpressions.1 $this@instanceofexpression.InstanceofExpressions.1(local.get $this) (local.get $$outer_this))
+   (struct.set $instanceofexpression.InstanceofExpressions.1 $$outer_this__instanceofexpression_InstanceofExpressions_1(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -246,14 +246,14 @@
  (block $return.label
   (block
    ;; if (instanceofexpression.InstanceofExpressions.1.$initialized) return;
-   (if (global.get $$initialized@instanceofexpression.InstanceofExpressions.1)
+   (if (global.get $f_$initialized__instanceofexpression_InstanceofExpressions_1)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (instanceofexpression.InstanceofExpressions.1.$initialized = true);
-   (global.set $$initialized@instanceofexpression.InstanceofExpressions.1 (i32.const 1))
+   (global.set $f_$initialized__instanceofexpression_InstanceofExpressions_1 (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

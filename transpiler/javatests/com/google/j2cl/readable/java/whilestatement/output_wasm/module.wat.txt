@@ -3,7 +3,7 @@
 ;;; CLASS  WhileStatement
 (type $whilestatement.WhileStatement (struct
  (field $vtable (ref null $whilestatement.WhileStatement.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $whilestatement.WhileStatement.vtable (struct
  
@@ -14,7 +14,7 @@
  (field $m_test__void (mut (ref $function.__$void)))
 ))
 (global $whilestatement.WhileStatement.vtable (mut (ref null $whilestatement.WhileStatement.vtable)) (ref.null $whilestatement.WhileStatement.vtable))
-(global $$initialized@whilestatement.WhileStatement (mut i32) (i32.const 0))
+(global $f_$initialized__whilestatement_WhileStatement (mut i32) (i32.const 0))
 
 ;;; WhileStatement()
 (func $m_<init>__void@whilestatement.WhileStatement
@@ -65,14 +65,14 @@
  (block $return.label
   (block
    ;; if (whilestatement.WhileStatement.$initialized) return;
-   (if (global.get $$initialized@whilestatement.WhileStatement)
+   (if (global.get $f_$initialized__whilestatement_WhileStatement)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (whilestatement.WhileStatement.$initialized = true);
-   (global.set $$initialized@whilestatement.WhileStatement (i32.const 1))
+   (global.set $f_$initialized__whilestatement_WhileStatement (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

@@ -1,21 +1,21 @@
 ;;; Code for genericinterfaceabstractimpl.AbstractImpl
 
 ;;; INTERFACE  MyInterface
-(global $$initialized@genericinterfaceabstractimpl.MyInterface (mut i32) (i32.const 0))
+(global $f_$initialized__genericinterfaceabstractimpl_MyInterface (mut i32) (i32.const 0))
 
 ;;; void MyInterface.$clinit()
 (func $$clinit__void@genericinterfaceabstractimpl.MyInterface
  (block $return.label
   (block
    ;; if (genericinterfaceabstractimpl.MyInterface.$initialized) return;
-   (if (global.get $$initialized@genericinterfaceabstractimpl.MyInterface)
+   (if (global.get $f_$initialized__genericinterfaceabstractimpl_MyInterface)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (genericinterfaceabstractimpl.MyInterface.$initialized = true);
-   (global.set $$initialized@genericinterfaceabstractimpl.MyInterface (i32.const 1))
+   (global.set $f_$initialized__genericinterfaceabstractimpl_MyInterface (i32.const 1))
   )
  )
 )
@@ -23,7 +23,7 @@
 ;;; CLASS  AbstractImpl
 (type $genericinterfaceabstractimpl.AbstractImpl (struct
  (field $vtable (ref null $genericinterfaceabstractimpl.AbstractImpl.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $genericinterfaceabstractimpl.AbstractImpl.vtable (struct
  
@@ -33,7 +33,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $genericinterfaceabstractimpl.AbstractImpl.vtable (mut (ref null $genericinterfaceabstractimpl.AbstractImpl.vtable)) (ref.null $genericinterfaceabstractimpl.AbstractImpl.vtable))
-(global $$initialized@genericinterfaceabstractimpl.AbstractImpl (mut i32) (i32.const 0))
+(global $f_$initialized__genericinterfaceabstractimpl_AbstractImpl (mut i32) (i32.const 0))
 
 ;;; AbstractImpl()
 (func $m_<init>__void@genericinterfaceabstractimpl.AbstractImpl
@@ -53,14 +53,14 @@
  (block $return.label
   (block
    ;; if (genericinterfaceabstractimpl.AbstractImpl.$initialized) return;
-   (if (global.get $$initialized@genericinterfaceabstractimpl.AbstractImpl)
+   (if (global.get $f_$initialized__genericinterfaceabstractimpl_AbstractImpl)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (genericinterfaceabstractimpl.AbstractImpl.$initialized = true);
-   (global.set $$initialized@genericinterfaceabstractimpl.AbstractImpl (i32.const 1))
+   (global.set $f_$initialized__genericinterfaceabstractimpl_AbstractImpl (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

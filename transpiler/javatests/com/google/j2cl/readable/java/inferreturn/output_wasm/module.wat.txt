@@ -3,7 +3,7 @@
 ;;; CLASS  InferReturn
 (type $inferreturn.InferReturn (struct
  (field $vtable (ref null $inferreturn.InferReturn.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $inferreturn.InferReturn.vtable (struct
  
@@ -13,7 +13,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $inferreturn.InferReturn.vtable (mut (ref null $inferreturn.InferReturn.vtable)) (ref.null $inferreturn.InferReturn.vtable))
-(global $$initialized@inferreturn.InferReturn (mut i32) (i32.const 0))
+(global $f_$initialized__inferreturn_InferReturn (mut i32) (i32.const 0))
 
 ;;; InferReturn()
 (func $m_<init>__void@inferreturn.InferReturn
@@ -171,14 +171,14 @@
  (block $return.label
   (block
    ;; if (inferreturn.InferReturn.$initialized) return;
-   (if (global.get $$initialized@inferreturn.InferReturn)
+   (if (global.get $f_$initialized__inferreturn_InferReturn)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (inferreturn.InferReturn.$initialized = true);
-   (global.set $$initialized@inferreturn.InferReturn (i32.const 1))
+   (global.set $f_$initialized__inferreturn_InferReturn (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

@@ -181,10 +181,7 @@ class GenerationEnvironment {
   }
 
   String getFieldName(FieldDescriptor fieldDescriptor) {
-    return "$"
-        + fieldDescriptor.getName()
-        + "@"
-        + fieldDescriptor.getEnclosingTypeDescriptor().getQualifiedSourceName();
+    return "$" + fieldDescriptor.getMangledName();
   }
 
   private final Map<HasName, String> nameByDeclaration = new HashMap<>();

@@ -3,7 +3,7 @@
 ;;; CLASS  ObjectMap
 (type $objectmap.ObjectMap (struct
  (field $vtable (ref null $objectmap.ObjectMap.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $objectmap.ObjectMap.vtable (struct
  
@@ -13,7 +13,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $objectmap.ObjectMap.vtable (mut (ref null $objectmap.ObjectMap.vtable)) (ref.null $objectmap.ObjectMap.vtable))
-(global $$initialized@objectmap.ObjectMap (mut i32) (i32.const 0))
+(global $f_$initialized__objectmap_ObjectMap (mut i32) (i32.const 0))
 
 ;;; ObjectMap()
 (func $m_<init>__void@objectmap.ObjectMap
@@ -67,14 +67,14 @@
  (block $return.label
   (block
    ;; if (objectmap.ObjectMap.$initialized) return;
-   (if (global.get $$initialized@objectmap.ObjectMap)
+   (if (global.get $f_$initialized__objectmap_ObjectMap)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (objectmap.ObjectMap.$initialized = true);
-   (global.set $$initialized@objectmap.ObjectMap (i32.const 1))
+   (global.set $f_$initialized__objectmap_ObjectMap (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

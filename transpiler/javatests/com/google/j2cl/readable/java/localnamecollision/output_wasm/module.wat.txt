@@ -3,7 +3,7 @@
 ;;; CLASS  Asserts
 (type $localnamecollision.Asserts (struct
  (field $vtable (ref null $localnamecollision.Asserts.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $localnamecollision.Asserts.vtable (struct
  
@@ -14,7 +14,7 @@
  (field $m_n__int_$pp_localnamecollision (mut (ref $function.__$int)))
 ))
 (global $localnamecollision.Asserts.vtable (mut (ref null $localnamecollision.Asserts.vtable)) (ref.null $localnamecollision.Asserts.vtable))
-(global $$initialized@localnamecollision.Asserts (mut i32) (i32.const 0))
+(global $f_$initialized__localnamecollision_Asserts (mut i32) (i32.const 0))
 
 ;;; Asserts()
 (func $m_<init>__void@localnamecollision.Asserts
@@ -54,14 +54,14 @@
  (block $return.label
   (block
    ;; if (localnamecollision.Asserts.$initialized) return;
-   (if (global.get $$initialized@localnamecollision.Asserts)
+   (if (global.get $f_$initialized__localnamecollision_Asserts)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (localnamecollision.Asserts.$initialized = true);
-   (global.set $$initialized@localnamecollision.Asserts (i32.const 1))
+   (global.set $f_$initialized__localnamecollision_Asserts (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -72,7 +72,7 @@
 ;;; CLASS  Class
 (type $localnamecollision.Class (struct
  (field $vtable (ref null $localnamecollision.Class.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $localnamecollision.Class.vtable (struct
  
@@ -83,7 +83,7 @@
  (field $m_main__void (mut (ref $function.__$void)))
 ))
 (global $localnamecollision.Class.vtable (mut (ref null $localnamecollision.Class.vtable)) (ref.null $localnamecollision.Class.vtable))
-(global $$initialized@localnamecollision.Class (mut i32) (i32.const 0))
+(global $f_$initialized__localnamecollision_Class (mut i32) (i32.const 0))
 
 ;;; Class()
 (func $m_<init>__void@localnamecollision.Class
@@ -123,14 +123,14 @@
  (block $return.label
   (block
    ;; if (localnamecollision.Class.$initialized) return;
-   (if (global.get $$initialized@localnamecollision.Class)
+   (if (global.get $f_$initialized__localnamecollision_Class)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (localnamecollision.Class.$initialized = true);
-   (global.set $$initialized@localnamecollision.Class (i32.const 1))
+   (global.set $f_$initialized__localnamecollision_Class (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -141,7 +141,7 @@
 ;;; CLASS  LocalNameCollision
 (type $localnamecollision.LocalNameCollision (struct
  (field $vtable (ref null $localnamecollision.LocalNameCollision.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $localnamecollision.LocalNameCollision.vtable (struct
  
@@ -153,7 +153,7 @@
  (field $m_testClassParameterCollision__boolean__java_lang_Object__java_lang_Object__int__int__boolean (mut (ref $function.$boolean__$java.lang.Object__$java.lang.Object__$int__$int__$boolean)))
 ))
 (global $localnamecollision.LocalNameCollision.vtable (mut (ref null $localnamecollision.LocalNameCollision.vtable)) (ref.null $localnamecollision.LocalNameCollision.vtable))
-(global $$initialized@localnamecollision.LocalNameCollision (mut i32) (i32.const 0))
+(global $f_$initialized__localnamecollision_LocalNameCollision (mut i32) (i32.const 0))
 
 ;;; void LocalNameCollision.testClassLocalVarCollision()
 (func $m_testClassLocalVarCollision__void@localnamecollision.LocalNameCollision
@@ -258,14 +258,14 @@
  (block $return.label
   (block
    ;; if (localnamecollision.LocalNameCollision.$initialized) return;
-   (if (global.get $$initialized@localnamecollision.LocalNameCollision)
+   (if (global.get $f_$initialized__localnamecollision_LocalNameCollision)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (localnamecollision.LocalNameCollision.$initialized = true);
-   (global.set $$initialized@localnamecollision.LocalNameCollision (i32.const 1))
+   (global.set $f_$initialized__localnamecollision_LocalNameCollision (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -276,7 +276,7 @@
 ;;; CLASS  A
 (type $localnamecollision.package1.A (struct
  (field $vtable (ref null $localnamecollision.package1.A.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $localnamecollision.package1.A.vtable (struct
  
@@ -287,7 +287,7 @@
  (field $m_m__int (mut (ref $function.__$int)))
 ))
 (global $localnamecollision.package1.A.vtable (mut (ref null $localnamecollision.package1.A.vtable)) (ref.null $localnamecollision.package1.A.vtable))
-(global $$initialized@localnamecollision.package1.A (mut i32) (i32.const 0))
+(global $f_$initialized__localnamecollision_package1_A (mut i32) (i32.const 0))
 
 ;;; A()
 (func $m_<init>__void@localnamecollision.package1.A
@@ -325,14 +325,14 @@
  (block $return.label
   (block
    ;; if (localnamecollision.package1.A.$initialized) return;
-   (if (global.get $$initialized@localnamecollision.package1.A)
+   (if (global.get $f_$initialized__localnamecollision_package1_A)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (localnamecollision.package1.A.$initialized = true);
-   (global.set $$initialized@localnamecollision.package1.A (i32.const 1))
+   (global.set $f_$initialized__localnamecollision_package1_A (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -343,7 +343,7 @@
 ;;; CLASS  A
 (type $localnamecollision.package2.A (struct
  (field $vtable (ref null $localnamecollision.package2.A.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $localnamecollision.package2.A.vtable (struct
  
@@ -354,7 +354,7 @@
  (field $m_m__int (mut (ref $function.__$int)))
 ))
 (global $localnamecollision.package2.A.vtable (mut (ref null $localnamecollision.package2.A.vtable)) (ref.null $localnamecollision.package2.A.vtable))
-(global $$initialized@localnamecollision.package2.A (mut i32) (i32.const 0))
+(global $f_$initialized__localnamecollision_package2_A (mut i32) (i32.const 0))
 
 ;;; A()
 (func $m_<init>__void@localnamecollision.package2.A
@@ -392,14 +392,14 @@
  (block $return.label
   (block
    ;; if (localnamecollision.package2.A.$initialized) return;
-   (if (global.get $$initialized@localnamecollision.package2.A)
+   (if (global.get $f_$initialized__localnamecollision_package2_A)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (localnamecollision.package2.A.$initialized = true);
-   (global.set $$initialized@localnamecollision.package2.A (i32.const 1))
+   (global.set $f_$initialized__localnamecollision_package2_A (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

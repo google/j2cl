@@ -3,9 +3,9 @@
 ;;; ENUM  Numbers
 (type $switchstatement.Numbers (struct
  (field $vtable (ref null $switchstatement.Numbers.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $name@java.lang.Enum (mut (ref null $java.lang.String)))
- (field $ordinal@java.lang.Enum (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $f_name__java_lang_Enum_ (mut (ref null $java.lang.String)))
+ (field $f_ordinal__java_lang_Enum_ (mut i32))
 ))
 (type $switchstatement.Numbers.vtable (struct
  
@@ -20,10 +20,10 @@
  (field $m_compareTo__java_lang_Object__int (mut (ref $function.$java.lang.Object__$int)))
 ))
 (global $switchstatement.Numbers.vtable (mut (ref null $switchstatement.Numbers.vtable)) (ref.null $switchstatement.Numbers.vtable))
-(global $ONE@switchstatement.Numbers (mut (ref null $switchstatement.Numbers)) (ref.null $switchstatement.Numbers))
-(global $TWO@switchstatement.Numbers (mut (ref null $switchstatement.Numbers)) (ref.null $switchstatement.Numbers))
-(global $namesToValuesMap@switchstatement.Numbers (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
-(global $$initialized@switchstatement.Numbers (mut i32) (i32.const 0))
+(global $f_ONE__switchstatement_Numbers (mut (ref null $switchstatement.Numbers)) (ref.null $switchstatement.Numbers))
+(global $f_TWO__switchstatement_Numbers (mut (ref null $switchstatement.Numbers)) (ref.null $switchstatement.Numbers))
+(global $f_namesToValuesMap__switchstatement_Numbers_ (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
+(global $f_$initialized__switchstatement_Numbers (mut i32) (i32.const 0))
 
 ;;; Numbers()
 (func $m_<init>__void_$p_switchstatement_Numbers@switchstatement.Numbers
@@ -48,11 +48,11 @@
    ;; switchstatement.Numbers.$clinit();
    (call $$clinit__void@switchstatement.Numbers )
    ;; if ((switchstatement.Numbers.namesToValuesMap == null)) {
-   (if (ref.eq (global.get $namesToValuesMap@switchstatement.Numbers) (ref.null $java.lang.Object))
+   (if (ref.eq (global.get $f_namesToValuesMap__switchstatement_Numbers_) (ref.null $java.lang.Object))
     (then
      (block
       ;; (switchstatement.Numbers.namesToValuesMap = javaemul.internal.Enums.createMapFromValues(switchstatement.Numbers.values()));
-      (global.set $namesToValuesMap@switchstatement.Numbers (ref.null $java.lang.Object))
+      (global.set $f_namesToValuesMap__switchstatement_Numbers_ (ref.null $java.lang.Object))
      )
     )
    )
@@ -79,11 +79,11 @@
     (local.set $$array_literal (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $Object.array.elements (i32.const 2) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
     (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $$array_literal)) (i32.const 0) (block (result (ref null $switchstatement.Numbers))
      (call $$clinit__void@switchstatement.Numbers )
-     (global.get $ONE@switchstatement.Numbers)
+     (global.get $f_ONE__switchstatement_Numbers)
     ))
     (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $$array_literal)) (i32.const 1) (block (result (ref null $switchstatement.Numbers))
      (call $$clinit__void@switchstatement.Numbers )
-     (global.get $TWO@switchstatement.Numbers)
+     (global.get $f_TWO__switchstatement_Numbers)
     ))
     (local.get $$array_literal)
    ))
@@ -98,30 +98,30 @@
  (block $return.label
   (block
    ;; if (switchstatement.Numbers.$initialized) return;
-   (if (global.get $$initialized@switchstatement.Numbers)
+   (if (global.get $f_$initialized__switchstatement_Numbers)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (switchstatement.Numbers.$initialized = true);
-   (global.set $$initialized@switchstatement.Numbers (i32.const 1))
+   (global.set $f_$initialized__switchstatement_Numbers (i32.const 1))
    ;; java.lang.Enum.$clinit();
    (call $$clinit__void@java.lang.Enum )
    (block
     ;; switchstatement.Numbers.$clinit();
     (call $$clinit__void@switchstatement.Numbers )
     ;; (switchstatement.Numbers.ONE = new Numbers.<init>());
-    (global.set $ONE@switchstatement.Numbers (call $m_<init>__void_$p_switchstatement_Numbers@switchstatement.Numbers (struct.new_with_rtt $switchstatement.Numbers (global.get $switchstatement.Numbers.vtable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $switchstatement.Numbers.rtt))))
+    (global.set $f_ONE__switchstatement_Numbers (call $m_<init>__void_$p_switchstatement_Numbers@switchstatement.Numbers (struct.new_with_rtt $switchstatement.Numbers (global.get $switchstatement.Numbers.vtable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $switchstatement.Numbers.rtt))))
    )
    (block
     ;; switchstatement.Numbers.$clinit();
     (call $$clinit__void@switchstatement.Numbers )
     ;; (switchstatement.Numbers.TWO = new Numbers.<init>());
-    (global.set $TWO@switchstatement.Numbers (call $m_<init>__void_$p_switchstatement_Numbers@switchstatement.Numbers (struct.new_with_rtt $switchstatement.Numbers (global.get $switchstatement.Numbers.vtable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $switchstatement.Numbers.rtt))))
+    (global.set $f_TWO__switchstatement_Numbers (call $m_<init>__void_$p_switchstatement_Numbers@switchstatement.Numbers (struct.new_with_rtt $switchstatement.Numbers (global.get $switchstatement.Numbers.vtable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $switchstatement.Numbers.rtt))))
    )
    ;; (switchstatement.Numbers.namesToValuesMap = null);
-   (global.set $namesToValuesMap@switchstatement.Numbers (ref.null $java.lang.Object))
+   (global.set $f_namesToValuesMap__switchstatement_Numbers_ (ref.null $java.lang.Object))
   )
  )
 )
@@ -129,7 +129,7 @@
 ;;; CLASS  SwitchStatement
 (type $switchstatement.SwitchStatement (struct
  (field $vtable (ref null $switchstatement.SwitchStatement.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $switchstatement.SwitchStatement.vtable (struct
  
@@ -140,7 +140,7 @@
  (field $m_main__void (mut (ref $function.__$void)))
 ))
 (global $switchstatement.SwitchStatement.vtable (mut (ref null $switchstatement.SwitchStatement.vtable)) (ref.null $switchstatement.SwitchStatement.vtable))
-(global $$initialized@switchstatement.SwitchStatement (mut i32) (i32.const 0))
+(global $f_$initialized__switchstatement_SwitchStatement (mut i32) (i32.const 0))
 
 ;;; SwitchStatement()
 (func $m_<init>__void@switchstatement.SwitchStatement
@@ -269,7 +269,7 @@
      
      (local.set $$expression_1 (block (result (ref null $switchstatement.Numbers))
       (call $$clinit__void@switchstatement.Numbers )
-      (global.get $ONE@switchstatement.Numbers)
+      (global.get $f_ONE__switchstatement_Numbers)
      ))
      ;; switch ($expression) {
      
@@ -279,11 +279,11 @@
         (block ;; evaluate expression and jump
          (br_if 0 (ref.eq (local.get $$expression_1) (block (result (ref null $switchstatement.Numbers))
           (call $$clinit__void@switchstatement.Numbers )
-          (global.get $ONE@switchstatement.Numbers)
+          (global.get $f_ONE__switchstatement_Numbers)
          )))
          (br_if 1 (ref.eq (local.get $$expression_1) (block (result (ref null $switchstatement.Numbers))
           (call $$clinit__void@switchstatement.Numbers )
-          (global.get $TWO@switchstatement.Numbers)
+          (global.get $f_TWO__switchstatement_Numbers)
          )))
          (br 2)
         )
@@ -375,14 +375,14 @@
  (block $return.label
   (block
    ;; if (switchstatement.SwitchStatement.$initialized) return;
-   (if (global.get $$initialized@switchstatement.SwitchStatement)
+   (if (global.get $f_$initialized__switchstatement_SwitchStatement)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (switchstatement.SwitchStatement.$initialized = true);
-   (global.set $$initialized@switchstatement.SwitchStatement (i32.const 1))
+   (global.set $f_$initialized__switchstatement_SwitchStatement (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

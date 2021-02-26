@@ -450,15 +450,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     return getOrigin().getName() == null ? getName() : getOrigin().getName();
   }
 
-  // TODO(b/178738483): This is a temporary hack to be able to reuse bridging logic in Closure
-  // and WASM.
-  private static ThreadLocal<Boolean> useWasmManglingPatterns =
-      ThreadLocal.withInitial(() -> false);
-
-  public static void setWasmManglingPatterns() {
-    useWasmManglingPatterns.set(true);
-  }
-
   @Memoized
   @Override
   public String getMangledName() {
@@ -466,7 +457,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       return getManglingDescriptor().getMangledName();
     }
 
-    if (!useWasmManglingPatterns.get()) {
+    if (!useWasmManglingPatterns()) {
       // Do not use JsInfo when producing mangled names for wasm.
       if (isConstructor()) {
         return "constructor";
@@ -517,7 +508,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     }
 
     Iterable<String> manglingDescriptors =
-        useWasmManglingPatterns.get()
+        useWasmManglingPatterns()
             ? Iterables.concat(
                 getMangledParameterTypes(),
                 ImmutableList.of(getReturnTypeDescriptor().toRawTypeDescriptor().getMangledName()))

@@ -3,7 +3,7 @@
 ;;; CLASS  LabeledStatement
 (type $labelstatement.LabeledStatement (struct
  (field $vtable (ref null $labelstatement.LabeledStatement.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $labelstatement.LabeledStatement.vtable (struct
  
@@ -14,7 +14,7 @@
  (field $m_test__void (mut (ref $function.__$void)))
 ))
 (global $labelstatement.LabeledStatement.vtable (mut (ref null $labelstatement.LabeledStatement.vtable)) (ref.null $labelstatement.LabeledStatement.vtable))
-(global $$initialized@labelstatement.LabeledStatement (mut i32) (i32.const 0))
+(global $f_$initialized__labelstatement_LabeledStatement (mut i32) (i32.const 0))
 
 ;;; LabeledStatement()
 (func $m_<init>__void@labelstatement.LabeledStatement
@@ -76,14 +76,14 @@
  (block $return.label
   (block
    ;; if (labelstatement.LabeledStatement.$initialized) return;
-   (if (global.get $$initialized@labelstatement.LabeledStatement)
+   (if (global.get $f_$initialized__labelstatement_LabeledStatement)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (labelstatement.LabeledStatement.$initialized = true);
-   (global.set $$initialized@labelstatement.LabeledStatement (i32.const 1))
+   (global.set $f_$initialized__labelstatement_LabeledStatement (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

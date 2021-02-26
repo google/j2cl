@@ -3,7 +3,7 @@
 ;;; CLASS  SomeJsType
 (type $jstypewithdefault.SomeJsType (struct
  (field $vtable (ref null $jstypewithdefault.SomeJsType.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $jstypewithdefault.SomeJsType.vtable (struct
  
@@ -14,7 +14,7 @@
  (field $m_defaultMethod__void (mut (ref $function.__$void)))
 ))
 (global $jstypewithdefault.SomeJsType.vtable (mut (ref null $jstypewithdefault.SomeJsType.vtable)) (ref.null $jstypewithdefault.SomeJsType.vtable))
-(global $$initialized@jstypewithdefault.SomeJsType (mut i32) (i32.const 0))
+(global $f_$initialized__jstypewithdefault_SomeJsType (mut i32) (i32.const 0))
 
 ;;; SomeJsType()
 (func $m_<init>__void@jstypewithdefault.SomeJsType
@@ -48,14 +48,14 @@
  (block $return.label
   (block
    ;; if (jstypewithdefault.SomeJsType.$initialized) return;
-   (if (global.get $$initialized@jstypewithdefault.SomeJsType)
+   (if (global.get $f_$initialized__jstypewithdefault_SomeJsType)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jstypewithdefault.SomeJsType.$initialized = true);
-   (global.set $$initialized@jstypewithdefault.SomeJsType (i32.const 1))
+   (global.set $f_$initialized__jstypewithdefault_SomeJsType (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
    ;; jstypewithdefault.Interface.$clinit();
@@ -65,7 +65,7 @@
 )
 
 ;;; INTERFACE  Interface
-(global $$initialized@jstypewithdefault.Interface (mut i32) (i32.const 0))
+(global $f_$initialized__jstypewithdefault_Interface (mut i32) (i32.const 0))
 
 ;;; void Interface.defaultMethod()
 (func $m_defaultMethod__void@jstypewithdefault.Interface
@@ -82,14 +82,14 @@
  (block $return.label
   (block
    ;; if (jstypewithdefault.Interface.$initialized) return;
-   (if (global.get $$initialized@jstypewithdefault.Interface)
+   (if (global.get $f_$initialized__jstypewithdefault_Interface)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jstypewithdefault.Interface.$initialized = true);
-   (global.set $$initialized@jstypewithdefault.Interface (i32.const 1))
+   (global.set $f_$initialized__jstypewithdefault_Interface (i32.const 1))
   )
  )
 )

@@ -3,7 +3,7 @@
 ;;; CLASS  ImportsReturnType
 (type $importsreturntype.ImportsReturnType (struct
  (field $vtable (ref null $importsreturntype.ImportsReturnType.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $importsreturntype.ImportsReturnType.vtable (struct
  
@@ -14,7 +14,7 @@
  (field $m_get__importsreturntype_ImportsReturnType_Set (mut (ref $function.__$importsreturntype.ImportsReturnType.Set)))
 ))
 (global $importsreturntype.ImportsReturnType.vtable (mut (ref null $importsreturntype.ImportsReturnType.vtable)) (ref.null $importsreturntype.ImportsReturnType.vtable))
-(global $$initialized@importsreturntype.ImportsReturnType (mut i32) (i32.const 0))
+(global $f_$initialized__importsreturntype_ImportsReturnType (mut i32) (i32.const 0))
 
 ;;; ImportsReturnType()
 (func $m_<init>__void@importsreturntype.ImportsReturnType
@@ -52,14 +52,14 @@
  (block $return.label
   (block
    ;; if (importsreturntype.ImportsReturnType.$initialized) return;
-   (if (global.get $$initialized@importsreturntype.ImportsReturnType)
+   (if (global.get $f_$initialized__importsreturntype_ImportsReturnType)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (importsreturntype.ImportsReturnType.$initialized = true);
-   (global.set $$initialized@importsreturntype.ImportsReturnType (i32.const 1))
+   (global.set $f_$initialized__importsreturntype_ImportsReturnType (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -69,7 +69,7 @@
 ;;; CLASS  Entry
 (type $importsreturntype.ImportsReturnType.Entry (struct
  (field $vtable (ref null $importsreturntype.ImportsReturnType.Entry.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $importsreturntype.ImportsReturnType.Entry.vtable (struct
  
@@ -79,7 +79,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $importsreturntype.ImportsReturnType.Entry.vtable (mut (ref null $importsreturntype.ImportsReturnType.Entry.vtable)) (ref.null $importsreturntype.ImportsReturnType.Entry.vtable))
-(global $$initialized@importsreturntype.ImportsReturnType.Entry (mut i32) (i32.const 0))
+(global $f_$initialized__importsreturntype_ImportsReturnType_Entry (mut i32) (i32.const 0))
 
 ;;; Entry()
 (func $m_<init>__void@importsreturntype.ImportsReturnType.Entry
@@ -99,14 +99,14 @@
  (block $return.label
   (block
    ;; if (importsreturntype.ImportsReturnType.Entry.$initialized) return;
-   (if (global.get $$initialized@importsreturntype.ImportsReturnType.Entry)
+   (if (global.get $f_$initialized__importsreturntype_ImportsReturnType_Entry)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (importsreturntype.ImportsReturnType.Entry.$initialized = true);
-   (global.set $$initialized@importsreturntype.ImportsReturnType.Entry (i32.const 1))
+   (global.set $f_$initialized__importsreturntype_ImportsReturnType_Entry (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -116,7 +116,7 @@
 ;;; CLASS  Set
 (type $importsreturntype.ImportsReturnType.Set (struct
  (field $vtable (ref null $importsreturntype.ImportsReturnType.Set.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $importsreturntype.ImportsReturnType.Set.vtable (struct
  
@@ -126,7 +126,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $importsreturntype.ImportsReturnType.Set.vtable (mut (ref null $importsreturntype.ImportsReturnType.Set.vtable)) (ref.null $importsreturntype.ImportsReturnType.Set.vtable))
-(global $$initialized@importsreturntype.ImportsReturnType.Set (mut i32) (i32.const 0))
+(global $f_$initialized__importsreturntype_ImportsReturnType_Set (mut i32) (i32.const 0))
 
 ;;; Set()
 (func $m_<init>__void@importsreturntype.ImportsReturnType.Set
@@ -146,14 +146,14 @@
  (block $return.label
   (block
    ;; if (importsreturntype.ImportsReturnType.Set.$initialized) return;
-   (if (global.get $$initialized@importsreturntype.ImportsReturnType.Set)
+   (if (global.get $f_$initialized__importsreturntype_ImportsReturnType_Set)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (importsreturntype.ImportsReturnType.Set.$initialized = true);
-   (global.set $$initialized@importsreturntype.ImportsReturnType.Set (i32.const 1))
+   (global.set $f_$initialized__importsreturntype_ImportsReturnType_Set (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

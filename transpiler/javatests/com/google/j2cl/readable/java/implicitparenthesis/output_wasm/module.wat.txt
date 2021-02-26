@@ -3,7 +3,7 @@
 ;;; CLASS  ImplicitParenthesis
 (type $implicitparenthesis.ImplicitParenthesis (struct
  (field $vtable (ref null $implicitparenthesis.ImplicitParenthesis.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $implicitparenthesis.ImplicitParenthesis.vtable (struct
  
@@ -14,7 +14,7 @@
  (field $m_test__void (mut (ref $function.__$void)))
 ))
 (global $implicitparenthesis.ImplicitParenthesis.vtable (mut (ref null $implicitparenthesis.ImplicitParenthesis.vtable)) (ref.null $implicitparenthesis.ImplicitParenthesis.vtable))
-(global $$initialized@implicitparenthesis.ImplicitParenthesis (mut i32) (i32.const 0))
+(global $f_$initialized__implicitparenthesis_ImplicitParenthesis (mut i32) (i32.const 0))
 
 ;;; ImplicitParenthesis()
 (func $m_<init>__void@implicitparenthesis.ImplicitParenthesis
@@ -164,14 +164,14 @@
  (block $return.label
   (block
    ;; if (implicitparenthesis.ImplicitParenthesis.$initialized) return;
-   (if (global.get $$initialized@implicitparenthesis.ImplicitParenthesis)
+   (if (global.get $f_$initialized__implicitparenthesis_ImplicitParenthesis)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (implicitparenthesis.ImplicitParenthesis.$initialized = true);
-   (global.set $$initialized@implicitparenthesis.ImplicitParenthesis (i32.const 1))
+   (global.set $f_$initialized__implicitparenthesis_ImplicitParenthesis (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

@@ -3,7 +3,7 @@
 ;;; CLASS  StaticBlockLocalVar
 (type $staticblocklocalvar.StaticBlockLocalVar (struct
  (field $vtable (ref null $staticblocklocalvar.StaticBlockLocalVar.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $staticblocklocalvar.StaticBlockLocalVar.vtable (struct
  
@@ -13,7 +13,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $staticblocklocalvar.StaticBlockLocalVar.vtable (mut (ref null $staticblocklocalvar.StaticBlockLocalVar.vtable)) (ref.null $staticblocklocalvar.StaticBlockLocalVar.vtable))
-(global $$initialized@staticblocklocalvar.StaticBlockLocalVar (mut i32) (i32.const 0))
+(global $f_$initialized__staticblocklocalvar_StaticBlockLocalVar (mut i32) (i32.const 0))
 
 ;;; StaticBlockLocalVar()
 (func $m_<init>__void@staticblocklocalvar.StaticBlockLocalVar
@@ -34,14 +34,14 @@
  (block $return.label
   (block
    ;; if (staticblocklocalvar.StaticBlockLocalVar.$initialized) return;
-   (if (global.get $$initialized@staticblocklocalvar.StaticBlockLocalVar)
+   (if (global.get $f_$initialized__staticblocklocalvar_StaticBlockLocalVar)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (staticblocklocalvar.StaticBlockLocalVar.$initialized = true);
-   (global.set $$initialized@staticblocklocalvar.StaticBlockLocalVar (i32.const 1))
+   (global.set $f_$initialized__staticblocklocalvar_StaticBlockLocalVar (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
    ;; int i = 10;

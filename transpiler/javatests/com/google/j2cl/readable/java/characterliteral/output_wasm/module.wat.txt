@@ -3,7 +3,7 @@
 ;;; CLASS  CharacterLiteral
 (type $characterliteral.CharacterLiteral (struct
  (field $vtable (ref null $characterliteral.CharacterLiteral.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $characterliteral.CharacterLiteral.vtable (struct
  
@@ -14,7 +14,7 @@
  (field $m_main__void (mut (ref $function.__$void)))
 ))
 (global $characterliteral.CharacterLiteral.vtable (mut (ref null $characterliteral.CharacterLiteral.vtable)) (ref.null $characterliteral.CharacterLiteral.vtable))
-(global $$initialized@characterliteral.CharacterLiteral (mut i32) (i32.const 0))
+(global $f_$initialized__characterliteral_CharacterLiteral (mut i32) (i32.const 0))
 
 ;;; CharacterLiteral()
 (func $m_<init>__void@characterliteral.CharacterLiteral
@@ -288,14 +288,14 @@
  (block $return.label
   (block
    ;; if (characterliteral.CharacterLiteral.$initialized) return;
-   (if (global.get $$initialized@characterliteral.CharacterLiteral)
+   (if (global.get $f_$initialized__characterliteral_CharacterLiteral)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (characterliteral.CharacterLiteral.$initialized = true);
-   (global.set $$initialized@characterliteral.CharacterLiteral (i32.const 1))
+   (global.set $f_$initialized__characterliteral_CharacterLiteral (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

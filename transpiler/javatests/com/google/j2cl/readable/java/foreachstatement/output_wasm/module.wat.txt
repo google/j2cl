@@ -3,7 +3,7 @@
 ;;; CLASS  ForEachStatement
 (type $foreachstatement.ForEachStatement (struct
  (field $vtable (ref null $foreachstatement.ForEachStatement.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $foreachstatement.ForEachStatement.vtable (struct
  
@@ -14,7 +14,7 @@
  (field $m_test__java_lang_Iterable__void (mut (ref $function.$java.lang.Object__$void)))
 ))
 (global $foreachstatement.ForEachStatement.vtable (mut (ref null $foreachstatement.ForEachStatement.vtable)) (ref.null $foreachstatement.ForEachStatement.vtable))
-(global $$initialized@foreachstatement.ForEachStatement (mut i32) (i32.const 0))
+(global $f_$initialized__foreachstatement_ForEachStatement (mut i32) (i32.const 0))
 
 ;;; ForEachStatement()
 (func $m_<init>__void@foreachstatement.ForEachStatement
@@ -98,14 +98,14 @@
  (block $return.label
   (block
    ;; if (foreachstatement.ForEachStatement.$initialized) return;
-   (if (global.get $$initialized@foreachstatement.ForEachStatement)
+   (if (global.get $f_$initialized__foreachstatement_ForEachStatement)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (foreachstatement.ForEachStatement.$initialized = true);
-   (global.set $$initialized@foreachstatement.ForEachStatement (i32.const 1))
+   (global.set $f_$initialized__foreachstatement_ForEachStatement (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

@@ -3,7 +3,7 @@
 ;;; CLASS  LongInitialValue
 (type $longinitialvalue.LongInitialValue (struct
  (field $vtable (ref null $longinitialvalue.LongInitialValue.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $longinitialvalue.LongInitialValue.vtable (struct
  
@@ -13,8 +13,8 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $longinitialvalue.LongInitialValue.vtable (mut (ref null $longinitialvalue.LongInitialValue.vtable)) (ref.null $longinitialvalue.LongInitialValue.vtable))
-(global $LONG_VALUE@longinitialvalue.LongInitialValue (mut i64) (i64.const 0))
-(global $$initialized@longinitialvalue.LongInitialValue (mut i32) (i32.const 0))
+(global $f_LONG_VALUE__longinitialvalue_LongInitialValue (mut i64) (i64.const 0))
+(global $f_$initialized__longinitialvalue_LongInitialValue (mut i32) (i32.const 0))
 
 ;;; LongInitialValue()
 (func $m_<init>__void@longinitialvalue.LongInitialValue
@@ -34,14 +34,14 @@
  (block $return.label
   (block
    ;; if (longinitialvalue.LongInitialValue.$initialized) return;
-   (if (global.get $$initialized@longinitialvalue.LongInitialValue)
+   (if (global.get $f_$initialized__longinitialvalue_LongInitialValue)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (longinitialvalue.LongInitialValue.$initialized = true);
-   (global.set $$initialized@longinitialvalue.LongInitialValue (i32.const 1))
+   (global.set $f_$initialized__longinitialvalue_LongInitialValue (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

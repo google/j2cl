@@ -3,7 +3,7 @@
 ;;; CLASS  StaticJsMethodsWithClassNamespace
 (type $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace (struct
  (field $vtable (ref null $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.vtable (struct
  
@@ -14,7 +14,7 @@
  (field $m_test__void (mut (ref $function.__$void)))
 ))
 (global $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.vtable (mut (ref null $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.vtable)) (ref.null $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.vtable))
-(global $$initialized@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace (mut i32) (i32.const 0))
+(global $f_$initialized__staticjsmethodswithclassnamespace_StaticJsMethodsWithClassNamespace (mut i32) (i32.const 0))
 
 ;;; StaticJsMethodsWithClassNamespace()
 (func $m_<init>__void@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace
@@ -62,14 +62,14 @@
  (block $return.label
   (block
    ;; if (staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.$initialized) return;
-   (if (global.get $$initialized@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace)
+   (if (global.get $f_$initialized__staticjsmethodswithclassnamespace_StaticJsMethodsWithClassNamespace)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.$initialized = true);
-   (global.set $$initialized@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace (i32.const 1))
+   (global.set $f_$initialized__staticjsmethodswithclassnamespace_StaticJsMethodsWithClassNamespace (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -79,7 +79,7 @@
 ;;; CLASS  ExternalCaller
 (type $staticjsmethodswithclassnamespace.ExternalCaller (struct
  (field $vtable (ref null $staticjsmethodswithclassnamespace.ExternalCaller.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $staticjsmethodswithclassnamespace.ExternalCaller.vtable (struct
  
@@ -90,7 +90,7 @@
  (field $m_test__void (mut (ref $function.__$void)))
 ))
 (global $staticjsmethodswithclassnamespace.ExternalCaller.vtable (mut (ref null $staticjsmethodswithclassnamespace.ExternalCaller.vtable)) (ref.null $staticjsmethodswithclassnamespace.ExternalCaller.vtable))
-(global $$initialized@staticjsmethodswithclassnamespace.ExternalCaller (mut i32) (i32.const 0))
+(global $f_$initialized__staticjsmethodswithclassnamespace_ExternalCaller (mut i32) (i32.const 0))
 
 ;;; ExternalCaller()
 (func $m_<init>__void_$pp_staticjsmethodswithclassnamespace@staticjsmethodswithclassnamespace.ExternalCaller
@@ -124,14 +124,14 @@
  (block $return.label
   (block
    ;; if (staticjsmethodswithclassnamespace.ExternalCaller.$initialized) return;
-   (if (global.get $$initialized@staticjsmethodswithclassnamespace.ExternalCaller)
+   (if (global.get $f_$initialized__staticjsmethodswithclassnamespace_ExternalCaller)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (staticjsmethodswithclassnamespace.ExternalCaller.$initialized = true);
-   (global.set $$initialized@staticjsmethodswithclassnamespace.ExternalCaller (i32.const 1))
+   (global.set $f_$initialized__staticjsmethodswithclassnamespace_ExternalCaller (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

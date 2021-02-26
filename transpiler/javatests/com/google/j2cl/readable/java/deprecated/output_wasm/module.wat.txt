@@ -3,8 +3,8 @@
 ;;; CLASS  DeprecatedExample
 (type $deprecated.DeprecatedExample (struct
  (field $vtable (ref null $deprecated.DeprecatedExample.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $deprecatedInstanceField@deprecated.DeprecatedExample (mut (ref null $java.lang.String)))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $f_deprecatedInstanceField__deprecated_DeprecatedExample (mut (ref null $java.lang.String)))
 ))
 (type $deprecated.DeprecatedExample.vtable (struct
  
@@ -15,8 +15,8 @@
  (field $m_deprecatedInstanceMethod__java_lang_String__void (mut (ref $function.$java.lang.String__$void)))
 ))
 (global $deprecated.DeprecatedExample.vtable (mut (ref null $deprecated.DeprecatedExample.vtable)) (ref.null $deprecated.DeprecatedExample.vtable))
-(global $DEPRECATED_STATIC_FIELD@deprecated.DeprecatedExample (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
-(global $$initialized@deprecated.DeprecatedExample (mut i32) (i32.const 0))
+(global $f_DEPRECATED_STATIC_FIELD__deprecated_DeprecatedExample (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__deprecated_DeprecatedExample (mut i32) (i32.const 0))
 
 ;;; void DeprecatedExample.deprecatedStaticMethod(Object someObject)
 (func $m_deprecatedStaticMethod__java_lang_Object__void@deprecated.DeprecatedExample
@@ -66,7 +66,7 @@
  (block $return.label
   (block
    ;; (DeprecatedExample.this.deprecatedInstanceField = java.lang.String.fromInternalArray((char[] $array_literal = new char[16],($array_literal[0] = 100),($array_literal[1] = 101),($array_literal[2] = 112),($array_literal[3] = 114),($array_literal[4] = 101),($array_literal[5] = 99),($array_literal[6] = 97),($array_literal[7] = 116),($array_literal[8] = 101),($array_literal[9] = 100),($array_literal[10] = 32),($array_literal[11] = 102),($array_literal[12] = 105),($array_literal[13] = 101),($array_literal[14] = 108),($array_literal[15] = 100),$array_literal)));
-   (struct.set $deprecated.DeprecatedExample $deprecatedInstanceField@deprecated.DeprecatedExample(local.get $this) (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (block (result (ref null $char.array))
+   (struct.set $deprecated.DeprecatedExample $f_deprecatedInstanceField__deprecated_DeprecatedExample(local.get $this) (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (block (result (ref null $char.array))
     
     (local.set $$array_literal (struct.new_with_rtt $char.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $char.array.elements (i32.const 16) (global.get $char.array.elements.rtt)) (global.get $char.array.rtt)))
     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 0) (i32.const 100))
@@ -97,21 +97,21 @@
  (block $return.label
   (block
    ;; if (deprecated.DeprecatedExample.$initialized) return;
-   (if (global.get $$initialized@deprecated.DeprecatedExample)
+   (if (global.get $f_$initialized__deprecated_DeprecatedExample)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (deprecated.DeprecatedExample.$initialized = true);
-   (global.set $$initialized@deprecated.DeprecatedExample (i32.const 1))
+   (global.set $f_$initialized__deprecated_DeprecatedExample (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
    (block
     ;; deprecated.DeprecatedExample.$clinit();
     (call $$clinit__void@deprecated.DeprecatedExample )
     ;; (deprecated.DeprecatedExample.DEPRECATED_STATIC_FIELD = java.lang.String.fromInternalArray((char[] $array_literal = new char[16],($array_literal[0] = 100),($array_literal[1] = 101),($array_literal[2] = 112),($array_literal[3] = 114),($array_literal[4] = 101),($array_literal[5] = 99),($array_literal[6] = 97),($array_literal[7] = 116),($array_literal[8] = 101),($array_literal[9] = 100),($array_literal[10] = 32),($array_literal[11] = 102),($array_literal[12] = 105),($array_literal[13] = 101),($array_literal[14] = 108),($array_literal[15] = 100),$array_literal)));
-    (global.set $DEPRECATED_STATIC_FIELD@deprecated.DeprecatedExample (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (block (result (ref null $char.array))
+    (global.set $f_DEPRECATED_STATIC_FIELD__deprecated_DeprecatedExample (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (block (result (ref null $char.array))
      
      (local.set $$array_literal (struct.new_with_rtt $char.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $char.array.elements (i32.const 16) (global.get $char.array.elements.rtt)) (global.get $char.array.rtt)))
      (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 0) (i32.const 100))
@@ -138,41 +138,41 @@
 )
 
 ;;; INTERFACE  DeprecatedInterface
-(global $$initialized@deprecated.DeprecatedExample.DeprecatedInterface (mut i32) (i32.const 0))
+(global $f_$initialized__deprecated_DeprecatedExample_DeprecatedInterface (mut i32) (i32.const 0))
 
 ;;; void DeprecatedInterface.$clinit()
 (func $$clinit__void@deprecated.DeprecatedExample.DeprecatedInterface
  (block $return.label
   (block
    ;; if (deprecated.DeprecatedExample.DeprecatedInterface.$initialized) return;
-   (if (global.get $$initialized@deprecated.DeprecatedExample.DeprecatedInterface)
+   (if (global.get $f_$initialized__deprecated_DeprecatedExample_DeprecatedInterface)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (deprecated.DeprecatedExample.DeprecatedInterface.$initialized = true);
-   (global.set $$initialized@deprecated.DeprecatedExample.DeprecatedInterface (i32.const 1))
+   (global.set $f_$initialized__deprecated_DeprecatedExample_DeprecatedInterface (i32.const 1))
   )
  )
 )
 
 ;;; INTERFACE  DeprecatedJsFunction
-(global $$initialized@deprecated.DeprecatedExample.DeprecatedJsFunction (mut i32) (i32.const 0))
+(global $f_$initialized__deprecated_DeprecatedExample_DeprecatedJsFunction (mut i32) (i32.const 0))
 
 ;;; void DeprecatedJsFunction.$clinit()
 (func $$clinit__void@deprecated.DeprecatedExample.DeprecatedJsFunction
  (block $return.label
   (block
    ;; if (deprecated.DeprecatedExample.DeprecatedJsFunction.$initialized) return;
-   (if (global.get $$initialized@deprecated.DeprecatedExample.DeprecatedJsFunction)
+   (if (global.get $f_$initialized__deprecated_DeprecatedExample_DeprecatedJsFunction)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (deprecated.DeprecatedExample.DeprecatedJsFunction.$initialized = true);
-   (global.set $$initialized@deprecated.DeprecatedExample.DeprecatedJsFunction (i32.const 1))
+   (global.set $f_$initialized__deprecated_DeprecatedExample_DeprecatedJsFunction (i32.const 1))
   )
  )
 )
@@ -180,9 +180,9 @@
 ;;; ENUM  DeprecatedEnum
 (type $deprecated.DeprecatedExample.DeprecatedEnum (struct
  (field $vtable (ref null $deprecated.DeprecatedExample.DeprecatedEnum.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $name@java.lang.Enum (mut (ref null $java.lang.String)))
- (field $ordinal@java.lang.Enum (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $f_name__java_lang_Enum_ (mut (ref null $java.lang.String)))
+ (field $f_ordinal__java_lang_Enum_ (mut i32))
 ))
 (type $deprecated.DeprecatedExample.DeprecatedEnum.vtable (struct
  
@@ -197,9 +197,9 @@
  (field $m_compareTo__java_lang_Object__int (mut (ref $function.$java.lang.Object__$int)))
 ))
 (global $deprecated.DeprecatedExample.DeprecatedEnum.vtable (mut (ref null $deprecated.DeprecatedExample.DeprecatedEnum.vtable)) (ref.null $deprecated.DeprecatedExample.DeprecatedEnum.vtable))
-(global $A_VALUE@deprecated.DeprecatedExample.DeprecatedEnum (mut (ref null $deprecated.DeprecatedExample.DeprecatedEnum)) (ref.null $deprecated.DeprecatedExample.DeprecatedEnum))
-(global $namesToValuesMap@deprecated.DeprecatedExample.DeprecatedEnum (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
-(global $$initialized@deprecated.DeprecatedExample.DeprecatedEnum (mut i32) (i32.const 0))
+(global $f_A_VALUE__deprecated_DeprecatedExample_DeprecatedEnum (mut (ref null $deprecated.DeprecatedExample.DeprecatedEnum)) (ref.null $deprecated.DeprecatedExample.DeprecatedEnum))
+(global $f_namesToValuesMap__deprecated_DeprecatedExample_DeprecatedEnum_ (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
+(global $f_$initialized__deprecated_DeprecatedExample_DeprecatedEnum (mut i32) (i32.const 0))
 
 ;;; DeprecatedEnum()
 (func $m_<init>__void_$p_deprecated_DeprecatedExample_DeprecatedEnum@deprecated.DeprecatedExample.DeprecatedEnum
@@ -224,11 +224,11 @@
    ;; deprecated.DeprecatedExample.DeprecatedEnum.$clinit();
    (call $$clinit__void@deprecated.DeprecatedExample.DeprecatedEnum )
    ;; if ((deprecated.DeprecatedExample.DeprecatedEnum.namesToValuesMap == null)) {
-   (if (ref.eq (global.get $namesToValuesMap@deprecated.DeprecatedExample.DeprecatedEnum) (ref.null $java.lang.Object))
+   (if (ref.eq (global.get $f_namesToValuesMap__deprecated_DeprecatedExample_DeprecatedEnum_) (ref.null $java.lang.Object))
     (then
      (block
       ;; (deprecated.DeprecatedExample.DeprecatedEnum.namesToValuesMap = javaemul.internal.Enums.createMapFromValues(deprecated.DeprecatedExample.DeprecatedEnum.values()));
-      (global.set $namesToValuesMap@deprecated.DeprecatedExample.DeprecatedEnum (ref.null $java.lang.Object))
+      (global.set $f_namesToValuesMap__deprecated_DeprecatedExample_DeprecatedEnum_ (ref.null $java.lang.Object))
      )
     )
    )
@@ -255,7 +255,7 @@
     (local.set $$array_literal (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $Object.array.elements (i32.const 1) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
     (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $$array_literal)) (i32.const 0) (block (result (ref null $deprecated.DeprecatedExample.DeprecatedEnum))
      (call $$clinit__void@deprecated.DeprecatedExample.DeprecatedEnum )
-     (global.get $A_VALUE@deprecated.DeprecatedExample.DeprecatedEnum)
+     (global.get $f_A_VALUE__deprecated_DeprecatedExample_DeprecatedEnum)
     ))
     (local.get $$array_literal)
    ))
@@ -270,24 +270,24 @@
  (block $return.label
   (block
    ;; if (deprecated.DeprecatedExample.DeprecatedEnum.$initialized) return;
-   (if (global.get $$initialized@deprecated.DeprecatedExample.DeprecatedEnum)
+   (if (global.get $f_$initialized__deprecated_DeprecatedExample_DeprecatedEnum)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (deprecated.DeprecatedExample.DeprecatedEnum.$initialized = true);
-   (global.set $$initialized@deprecated.DeprecatedExample.DeprecatedEnum (i32.const 1))
+   (global.set $f_$initialized__deprecated_DeprecatedExample_DeprecatedEnum (i32.const 1))
    ;; java.lang.Enum.$clinit();
    (call $$clinit__void@java.lang.Enum )
    (block
     ;; deprecated.DeprecatedExample.DeprecatedEnum.$clinit();
     (call $$clinit__void@deprecated.DeprecatedExample.DeprecatedEnum )
     ;; (deprecated.DeprecatedExample.DeprecatedEnum.A_VALUE = new DeprecatedEnum.<init>());
-    (global.set $A_VALUE@deprecated.DeprecatedExample.DeprecatedEnum (call $m_<init>__void_$p_deprecated_DeprecatedExample_DeprecatedEnum@deprecated.DeprecatedExample.DeprecatedEnum (struct.new_with_rtt $deprecated.DeprecatedExample.DeprecatedEnum (global.get $deprecated.DeprecatedExample.DeprecatedEnum.vtable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $deprecated.DeprecatedExample.DeprecatedEnum.rtt))))
+    (global.set $f_A_VALUE__deprecated_DeprecatedExample_DeprecatedEnum (call $m_<init>__void_$p_deprecated_DeprecatedExample_DeprecatedEnum@deprecated.DeprecatedExample.DeprecatedEnum (struct.new_with_rtt $deprecated.DeprecatedExample.DeprecatedEnum (global.get $deprecated.DeprecatedExample.DeprecatedEnum.vtable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $deprecated.DeprecatedExample.DeprecatedEnum.rtt))))
    )
    ;; (deprecated.DeprecatedExample.DeprecatedEnum.namesToValuesMap = null);
-   (global.set $namesToValuesMap@deprecated.DeprecatedExample.DeprecatedEnum (ref.null $java.lang.Object))
+   (global.set $f_namesToValuesMap__deprecated_DeprecatedExample_DeprecatedEnum_ (ref.null $java.lang.Object))
   )
  )
 )
@@ -295,7 +295,7 @@
 ;;; ENUM  DeprecatedJsEnum
 (type $deprecated.DeprecatedExample.DeprecatedJsEnum (struct
  (field $vtable (ref null $deprecated.DeprecatedExample.DeprecatedJsEnum.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $deprecated.DeprecatedExample.DeprecatedJsEnum.vtable (struct
  
@@ -305,8 +305,8 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $deprecated.DeprecatedExample.DeprecatedJsEnum.vtable (mut (ref null $deprecated.DeprecatedExample.DeprecatedJsEnum.vtable)) (ref.null $deprecated.DeprecatedExample.DeprecatedJsEnum.vtable))
-(global $A_VALUE@deprecated.DeprecatedExample.DeprecatedJsEnum (mut (ref null $deprecated.DeprecatedExample.DeprecatedJsEnum)) (ref.null $deprecated.DeprecatedExample.DeprecatedJsEnum))
-(global $$initialized@deprecated.DeprecatedExample.DeprecatedJsEnum (mut i32) (i32.const 0))
+(global $f_A_VALUE__deprecated_DeprecatedExample_DeprecatedJsEnum (mut (ref null $deprecated.DeprecatedExample.DeprecatedJsEnum)) (ref.null $deprecated.DeprecatedExample.DeprecatedJsEnum))
+(global $f_$initialized__deprecated_DeprecatedExample_DeprecatedJsEnum (mut i32) (i32.const 0))
 
 ;;; DeprecatedJsEnum()
 (func $m_<init>__void_$p_deprecated_DeprecatedExample_DeprecatedJsEnum@deprecated.DeprecatedExample.DeprecatedJsEnum
@@ -326,21 +326,21 @@
  (block $return.label
   (block
    ;; if (deprecated.DeprecatedExample.DeprecatedJsEnum.$initialized) return;
-   (if (global.get $$initialized@deprecated.DeprecatedExample.DeprecatedJsEnum)
+   (if (global.get $f_$initialized__deprecated_DeprecatedExample_DeprecatedJsEnum)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (deprecated.DeprecatedExample.DeprecatedJsEnum.$initialized = true);
-   (global.set $$initialized@deprecated.DeprecatedExample.DeprecatedJsEnum (i32.const 1))
+   (global.set $f_$initialized__deprecated_DeprecatedExample_DeprecatedJsEnum (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
    (block
     ;; deprecated.DeprecatedExample.DeprecatedJsEnum.$clinit();
     (call $$clinit__void@deprecated.DeprecatedExample.DeprecatedJsEnum )
     ;; (deprecated.DeprecatedExample.DeprecatedJsEnum.A_VALUE = new DeprecatedJsEnum.<init>());
-    (global.set $A_VALUE@deprecated.DeprecatedExample.DeprecatedJsEnum (call $m_<init>__void_$p_deprecated_DeprecatedExample_DeprecatedJsEnum@deprecated.DeprecatedExample.DeprecatedJsEnum (struct.new_with_rtt $deprecated.DeprecatedExample.DeprecatedJsEnum (global.get $deprecated.DeprecatedExample.DeprecatedJsEnum.vtable) (i32.const 0) (global.get $deprecated.DeprecatedExample.DeprecatedJsEnum.rtt))))
+    (global.set $f_A_VALUE__deprecated_DeprecatedExample_DeprecatedJsEnum (call $m_<init>__void_$p_deprecated_DeprecatedExample_DeprecatedJsEnum@deprecated.DeprecatedExample.DeprecatedJsEnum (struct.new_with_rtt $deprecated.DeprecatedExample.DeprecatedJsEnum (global.get $deprecated.DeprecatedExample.DeprecatedJsEnum.vtable) (i32.const 0) (global.get $deprecated.DeprecatedExample.DeprecatedJsEnum.rtt))))
    )
   )
  )

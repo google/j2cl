@@ -3,7 +3,7 @@
 ;;; CLASS  JsDocTypeMappings
 (type $jsdoctypemappings.JsDocTypeMappings (struct
  (field $vtable (ref null $jsdoctypemappings.JsDocTypeMappings.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $jsdoctypemappings.JsDocTypeMappings.vtable (struct
  
@@ -46,7 +46,7 @@
  (field $m_returnNativeWildcard__jsdoctypemappings_JsDocTypeMappings_NativeWildcard_$pp_jsdoctypemappings (mut (ref $function.__$java.lang.Object)))
 ))
 (global $jsdoctypemappings.JsDocTypeMappings.vtable (mut (ref null $jsdoctypemappings.JsDocTypeMappings.vtable)) (ref.null $jsdoctypemappings.JsDocTypeMappings.vtable))
-(global $$initialized@jsdoctypemappings.JsDocTypeMappings (mut i32) (i32.const 0))
+(global $f_$initialized__jsdoctypemappings_JsDocTypeMappings (mut i32) (i32.const 0))
 
 ;;; JsDocTypeMappings()
 (func $m_<init>__void@jsdoctypemappings.JsDocTypeMappings
@@ -654,14 +654,14 @@
  (block $return.label
   (block
    ;; if (jsdoctypemappings.JsDocTypeMappings.$initialized) return;
-   (if (global.get $$initialized@jsdoctypemappings.JsDocTypeMappings)
+   (if (global.get $f_$initialized__jsdoctypemappings_JsDocTypeMappings)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsdoctypemappings.JsDocTypeMappings.$initialized = true);
-   (global.set $$initialized@jsdoctypemappings.JsDocTypeMappings (i32.const 1))
+   (global.set $f_$initialized__jsdoctypemappings_JsDocTypeMappings (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -669,21 +669,21 @@
 )
 
 ;;; INTERFACE  NativeFunction
-(global $$initialized@jsdoctypemappings.JsDocTypeMappings.NativeFunction (mut i32) (i32.const 0))
+(global $f_$initialized__jsdoctypemappings_JsDocTypeMappings_NativeFunction (mut i32) (i32.const 0))
 
 ;;; void NativeFunction.$clinit()
 (func $$clinit__void@jsdoctypemappings.JsDocTypeMappings.NativeFunction
  (block $return.label
   (block
    ;; if (jsdoctypemappings.JsDocTypeMappings.NativeFunction.$initialized) return;
-   (if (global.get $$initialized@jsdoctypemappings.JsDocTypeMappings.NativeFunction)
+   (if (global.get $f_$initialized__jsdoctypemappings_JsDocTypeMappings_NativeFunction)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsdoctypemappings.JsDocTypeMappings.NativeFunction.$initialized = true);
-   (global.set $$initialized@jsdoctypemappings.JsDocTypeMappings.NativeFunction (i32.const 1))
+   (global.set $f_$initialized__jsdoctypemappings_JsDocTypeMappings_NativeFunction (i32.const 1))
   )
  )
 )
@@ -691,7 +691,7 @@
 ;;; CLASS  NativeType
 (type $jsdoctypemappings.JsDocTypeMappings.NativeType (struct
  (field $vtable (ref null $jsdoctypemappings.JsDocTypeMappings.NativeType.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $jsdoctypemappings.JsDocTypeMappings.NativeType.vtable (struct
  
@@ -701,7 +701,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $jsdoctypemappings.JsDocTypeMappings.NativeType.vtable (mut (ref null $jsdoctypemappings.JsDocTypeMappings.NativeType.vtable)) (ref.null $jsdoctypemappings.JsDocTypeMappings.NativeType.vtable))
-(global $$initialized@jsdoctypemappings.JsDocTypeMappings.NativeType (mut i32) (i32.const 0))
+(global $f_$initialized__jsdoctypemappings_JsDocTypeMappings_NativeType (mut i32) (i32.const 0))
 
 ;;; NativeType()
 (func $m_<init>__void_$p_jsdoctypemappings_JsDocTypeMappings_NativeType@jsdoctypemappings.JsDocTypeMappings.NativeType
@@ -723,14 +723,14 @@
  (block $return.label
   (block
    ;; if (jsdoctypemappings.JsDocTypeMappings.NativeType.$initialized) return;
-   (if (global.get $$initialized@jsdoctypemappings.JsDocTypeMappings.NativeType)
+   (if (global.get $f_$initialized__jsdoctypemappings_JsDocTypeMappings_NativeType)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsdoctypemappings.JsDocTypeMappings.NativeType.$initialized = true);
-   (global.set $$initialized@jsdoctypemappings.JsDocTypeMappings.NativeType (i32.const 1))
+   (global.set $f_$initialized__jsdoctypemappings_JsDocTypeMappings_NativeType (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -740,8 +740,8 @@
 ;;; CLASS  ExportedType
 (type $jsdoctypemappings.JsDocTypeMappings.ExportedType (struct
  (field $vtable (ref null $jsdoctypemappings.JsDocTypeMappings.ExportedType.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $this@jsdoctypemappings.JsDocTypeMappings.ExportedType (mut (ref null $jsdoctypemappings.JsDocTypeMappings)))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $$outer_this__jsdoctypemappings_JsDocTypeMappings_ExportedType (mut (ref null $jsdoctypemappings.JsDocTypeMappings)))
 ))
 (type $jsdoctypemappings.JsDocTypeMappings.ExportedType.vtable (struct
  
@@ -751,7 +751,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $jsdoctypemappings.JsDocTypeMappings.ExportedType.vtable (mut (ref null $jsdoctypemappings.JsDocTypeMappings.ExportedType.vtable)) (ref.null $jsdoctypemappings.JsDocTypeMappings.ExportedType.vtable))
-(global $$initialized@jsdoctypemappings.JsDocTypeMappings.ExportedType (mut i32) (i32.const 0))
+(global $f_$initialized__jsdoctypemappings_JsDocTypeMappings_ExportedType (mut i32) (i32.const 0))
 
 ;;; ExportedType(JsDocTypeMappings $outer_this)
 (func $m_<init>__jsdoctypemappings_JsDocTypeMappings__void_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings.ExportedType
@@ -761,7 +761,7 @@
  (block $return.label
   (block
    ;; (ExportedType.this.this = $outer_this);
-   (struct.set $jsdoctypemappings.JsDocTypeMappings.ExportedType $this@jsdoctypemappings.JsDocTypeMappings.ExportedType(local.get $this) (local.get $$outer_this))
+   (struct.set $jsdoctypemappings.JsDocTypeMappings.ExportedType $$outer_this__jsdoctypemappings_JsDocTypeMappings_ExportedType(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -774,14 +774,14 @@
  (block $return.label
   (block
    ;; if (jsdoctypemappings.JsDocTypeMappings.ExportedType.$initialized) return;
-   (if (global.get $$initialized@jsdoctypemappings.JsDocTypeMappings.ExportedType)
+   (if (global.get $f_$initialized__jsdoctypemappings_JsDocTypeMappings_ExportedType)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsdoctypemappings.JsDocTypeMappings.ExportedType.$initialized = true);
-   (global.set $$initialized@jsdoctypemappings.JsDocTypeMappings.ExportedType (i32.const 1))
+   (global.set $f_$initialized__jsdoctypemappings_JsDocTypeMappings_ExportedType (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -789,161 +789,161 @@
 )
 
 ;;; INTERFACE  NativeNumber
-(global $$initialized@jsdoctypemappings.JsDocTypeMappings.NativeNumber (mut i32) (i32.const 0))
+(global $f_$initialized__jsdoctypemappings_JsDocTypeMappings_NativeNumber (mut i32) (i32.const 0))
 
 ;;; void NativeNumber.$clinit()
 (func $$clinit__void@jsdoctypemappings.JsDocTypeMappings.NativeNumber
  (block $return.label
   (block
    ;; if (jsdoctypemappings.JsDocTypeMappings.NativeNumber.$initialized) return;
-   (if (global.get $$initialized@jsdoctypemappings.JsDocTypeMappings.NativeNumber)
+   (if (global.get $f_$initialized__jsdoctypemappings_JsDocTypeMappings_NativeNumber)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsdoctypemappings.JsDocTypeMappings.NativeNumber.$initialized = true);
-   (global.set $$initialized@jsdoctypemappings.JsDocTypeMappings.NativeNumber (i32.const 1))
+   (global.set $f_$initialized__jsdoctypemappings_JsDocTypeMappings_NativeNumber (i32.const 1))
   )
  )
 )
 
 ;;; INTERFACE  NativeBoolean
-(global $$initialized@jsdoctypemappings.JsDocTypeMappings.NativeBoolean (mut i32) (i32.const 0))
+(global $f_$initialized__jsdoctypemappings_JsDocTypeMappings_NativeBoolean (mut i32) (i32.const 0))
 
 ;;; void NativeBoolean.$clinit()
 (func $$clinit__void@jsdoctypemappings.JsDocTypeMappings.NativeBoolean
  (block $return.label
   (block
    ;; if (jsdoctypemappings.JsDocTypeMappings.NativeBoolean.$initialized) return;
-   (if (global.get $$initialized@jsdoctypemappings.JsDocTypeMappings.NativeBoolean)
+   (if (global.get $f_$initialized__jsdoctypemappings_JsDocTypeMappings_NativeBoolean)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsdoctypemappings.JsDocTypeMappings.NativeBoolean.$initialized = true);
-   (global.set $$initialized@jsdoctypemappings.JsDocTypeMappings.NativeBoolean (i32.const 1))
+   (global.set $f_$initialized__jsdoctypemappings_JsDocTypeMappings_NativeBoolean (i32.const 1))
   )
  )
 )
 
 ;;; INTERFACE  NativeString
-(global $$initialized@jsdoctypemappings.JsDocTypeMappings.NativeString (mut i32) (i32.const 0))
+(global $f_$initialized__jsdoctypemappings_JsDocTypeMappings_NativeString (mut i32) (i32.const 0))
 
 ;;; void NativeString.$clinit()
 (func $$clinit__void@jsdoctypemappings.JsDocTypeMappings.NativeString
  (block $return.label
   (block
    ;; if (jsdoctypemappings.JsDocTypeMappings.NativeString.$initialized) return;
-   (if (global.get $$initialized@jsdoctypemappings.JsDocTypeMappings.NativeString)
+   (if (global.get $f_$initialized__jsdoctypemappings_JsDocTypeMappings_NativeString)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsdoctypemappings.JsDocTypeMappings.NativeString.$initialized = true);
-   (global.set $$initialized@jsdoctypemappings.JsDocTypeMappings.NativeString (i32.const 1))
+   (global.set $f_$initialized__jsdoctypemappings_JsDocTypeMappings_NativeString (i32.const 1))
   )
  )
 )
 
 ;;; INTERFACE  NativeNull
-(global $$initialized@jsdoctypemappings.JsDocTypeMappings.NativeNull (mut i32) (i32.const 0))
+(global $f_$initialized__jsdoctypemappings_JsDocTypeMappings_NativeNull (mut i32) (i32.const 0))
 
 ;;; void NativeNull.$clinit()
 (func $$clinit__void@jsdoctypemappings.JsDocTypeMappings.NativeNull
  (block $return.label
   (block
    ;; if (jsdoctypemappings.JsDocTypeMappings.NativeNull.$initialized) return;
-   (if (global.get $$initialized@jsdoctypemappings.JsDocTypeMappings.NativeNull)
+   (if (global.get $f_$initialized__jsdoctypemappings_JsDocTypeMappings_NativeNull)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsdoctypemappings.JsDocTypeMappings.NativeNull.$initialized = true);
-   (global.set $$initialized@jsdoctypemappings.JsDocTypeMappings.NativeNull (i32.const 1))
+   (global.set $f_$initialized__jsdoctypemappings_JsDocTypeMappings_NativeNull (i32.const 1))
   )
  )
 )
 
 ;;; INTERFACE  NativeUndefined
-(global $$initialized@jsdoctypemappings.JsDocTypeMappings.NativeUndefined (mut i32) (i32.const 0))
+(global $f_$initialized__jsdoctypemappings_JsDocTypeMappings_NativeUndefined (mut i32) (i32.const 0))
 
 ;;; void NativeUndefined.$clinit()
 (func $$clinit__void@jsdoctypemappings.JsDocTypeMappings.NativeUndefined
  (block $return.label
   (block
    ;; if (jsdoctypemappings.JsDocTypeMappings.NativeUndefined.$initialized) return;
-   (if (global.get $$initialized@jsdoctypemappings.JsDocTypeMappings.NativeUndefined)
+   (if (global.get $f_$initialized__jsdoctypemappings_JsDocTypeMappings_NativeUndefined)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsdoctypemappings.JsDocTypeMappings.NativeUndefined.$initialized = true);
-   (global.set $$initialized@jsdoctypemappings.JsDocTypeMappings.NativeUndefined (i32.const 1))
+   (global.set $f_$initialized__jsdoctypemappings_JsDocTypeMappings_NativeUndefined (i32.const 1))
   )
  )
 )
 
 ;;; INTERFACE  NativeVoid
-(global $$initialized@jsdoctypemappings.JsDocTypeMappings.NativeVoid (mut i32) (i32.const 0))
+(global $f_$initialized__jsdoctypemappings_JsDocTypeMappings_NativeVoid (mut i32) (i32.const 0))
 
 ;;; void NativeVoid.$clinit()
 (func $$clinit__void@jsdoctypemappings.JsDocTypeMappings.NativeVoid
  (block $return.label
   (block
    ;; if (jsdoctypemappings.JsDocTypeMappings.NativeVoid.$initialized) return;
-   (if (global.get $$initialized@jsdoctypemappings.JsDocTypeMappings.NativeVoid)
+   (if (global.get $f_$initialized__jsdoctypemappings_JsDocTypeMappings_NativeVoid)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsdoctypemappings.JsDocTypeMappings.NativeVoid.$initialized = true);
-   (global.set $$initialized@jsdoctypemappings.JsDocTypeMappings.NativeVoid (i32.const 1))
+   (global.set $f_$initialized__jsdoctypemappings_JsDocTypeMappings_NativeVoid (i32.const 1))
   )
  )
 )
 
 ;;; INTERFACE  NativeStar
-(global $$initialized@jsdoctypemappings.JsDocTypeMappings.NativeStar (mut i32) (i32.const 0))
+(global $f_$initialized__jsdoctypemappings_JsDocTypeMappings_NativeStar (mut i32) (i32.const 0))
 
 ;;; void NativeStar.$clinit()
 (func $$clinit__void@jsdoctypemappings.JsDocTypeMappings.NativeStar
  (block $return.label
   (block
    ;; if (jsdoctypemappings.JsDocTypeMappings.NativeStar.$initialized) return;
-   (if (global.get $$initialized@jsdoctypemappings.JsDocTypeMappings.NativeStar)
+   (if (global.get $f_$initialized__jsdoctypemappings_JsDocTypeMappings_NativeStar)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsdoctypemappings.JsDocTypeMappings.NativeStar.$initialized = true);
-   (global.set $$initialized@jsdoctypemappings.JsDocTypeMappings.NativeStar (i32.const 1))
+   (global.set $f_$initialized__jsdoctypemappings_JsDocTypeMappings_NativeStar (i32.const 1))
   )
  )
 )
 
 ;;; INTERFACE  NativeWildcard
-(global $$initialized@jsdoctypemappings.JsDocTypeMappings.NativeWildcard (mut i32) (i32.const 0))
+(global $f_$initialized__jsdoctypemappings_JsDocTypeMappings_NativeWildcard (mut i32) (i32.const 0))
 
 ;;; void NativeWildcard.$clinit()
 (func $$clinit__void@jsdoctypemappings.JsDocTypeMappings.NativeWildcard
  (block $return.label
   (block
    ;; if (jsdoctypemappings.JsDocTypeMappings.NativeWildcard.$initialized) return;
-   (if (global.get $$initialized@jsdoctypemappings.JsDocTypeMappings.NativeWildcard)
+   (if (global.get $f_$initialized__jsdoctypemappings_JsDocTypeMappings_NativeWildcard)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (jsdoctypemappings.JsDocTypeMappings.NativeWildcard.$initialized = true);
-   (global.set $$initialized@jsdoctypemappings.JsDocTypeMappings.NativeWildcard (i32.const 1))
+   (global.set $f_$initialized__jsdoctypemappings_JsDocTypeMappings_NativeWildcard (i32.const 1))
   )
  )
 )

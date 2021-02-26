@@ -3,7 +3,7 @@
 ;;; CLASS  ClassLiteral
 (type $classliteral.ClassLiteral (struct
  (field $vtable (ref null $classliteral.ClassLiteral.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $classliteral.ClassLiteral.vtable (struct
  
@@ -14,7 +14,7 @@
  (field $m_main__void (mut (ref $function.__$void)))
 ))
 (global $classliteral.ClassLiteral.vtable (mut (ref null $classliteral.ClassLiteral.vtable)) (ref.null $classliteral.ClassLiteral.vtable))
-(global $$initialized@classliteral.ClassLiteral (mut i32) (i32.const 0))
+(global $f_$initialized__classliteral_ClassLiteral (mut i32) (i32.const 0))
 
 ;;; ClassLiteral()
 (func $m_<init>__void@classliteral.ClassLiteral
@@ -52,14 +52,14 @@
  (block $return.label
   (block
    ;; if (classliteral.ClassLiteral.$initialized) return;
-   (if (global.get $$initialized@classliteral.ClassLiteral)
+   (if (global.get $f_$initialized__classliteral_ClassLiteral)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (classliteral.ClassLiteral.$initialized = true);
-   (global.set $$initialized@classliteral.ClassLiteral (i32.const 1))
+   (global.set $f_$initialized__classliteral_ClassLiteral (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

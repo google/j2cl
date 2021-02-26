@@ -3,7 +3,7 @@
 ;;; CLASS  BoundedJsArray
 (type $genericnativetype.BoundedJsArray (struct
  (field $vtable (ref null $genericnativetype.BoundedJsArray.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $genericnativetype.BoundedJsArray.vtable (struct
  
@@ -13,7 +13,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $genericnativetype.BoundedJsArray.vtable (mut (ref null $genericnativetype.BoundedJsArray.vtable)) (ref.null $genericnativetype.BoundedJsArray.vtable))
-(global $$initialized@genericnativetype.BoundedJsArray (mut i32) (i32.const 0))
+(global $f_$initialized__genericnativetype_BoundedJsArray (mut i32) (i32.const 0))
 
 ;;; BoundedJsArray(int size)
 (func $m_<init>__int__void_$p_genericnativetype_BoundedJsArray@genericnativetype.BoundedJsArray
@@ -77,14 +77,14 @@
  (block $return.label
   (block
    ;; if (genericnativetype.BoundedJsArray.$initialized) return;
-   (if (global.get $$initialized@genericnativetype.BoundedJsArray)
+   (if (global.get $f_$initialized__genericnativetype_BoundedJsArray)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (genericnativetype.BoundedJsArray.$initialized = true);
-   (global.set $$initialized@genericnativetype.BoundedJsArray (i32.const 1))
+   (global.set $f_$initialized__genericnativetype_BoundedJsArray (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -95,7 +95,7 @@
 ;;; CLASS  BoundedJsArrays
 (type $genericnativetype.BoundedJsArrays (struct
  (field $vtable (ref null $genericnativetype.BoundedJsArrays.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $genericnativetype.BoundedJsArrays.vtable (struct
  
@@ -105,7 +105,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $genericnativetype.BoundedJsArrays.vtable (mut (ref null $genericnativetype.BoundedJsArrays.vtable)) (ref.null $genericnativetype.BoundedJsArrays.vtable))
-(global $$initialized@genericnativetype.BoundedJsArrays (mut i32) (i32.const 0))
+(global $f_$initialized__genericnativetype_BoundedJsArrays (mut i32) (i32.const 0))
 
 ;;; BoundedJsArrays()
 (func $m_<init>__void_$p_genericnativetype_BoundedJsArrays@genericnativetype.BoundedJsArrays
@@ -158,14 +158,14 @@
  (block $return.label
   (block
    ;; if (genericnativetype.BoundedJsArrays.$initialized) return;
-   (if (global.get $$initialized@genericnativetype.BoundedJsArrays)
+   (if (global.get $f_$initialized__genericnativetype_BoundedJsArrays)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (genericnativetype.BoundedJsArrays.$initialized = true);
-   (global.set $$initialized@genericnativetype.BoundedJsArrays (i32.const 1))
+   (global.set $f_$initialized__genericnativetype_BoundedJsArrays (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )

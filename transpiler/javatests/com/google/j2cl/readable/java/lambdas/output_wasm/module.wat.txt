@@ -3,8 +3,8 @@
 ;;; CLASS  Lambdas
 (type $lambdas.Lambdas (struct
  (field $vtable (ref null $lambdas.Lambdas.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $field@lambdas.Lambdas (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $f_field__lambdas_Lambdas (mut i32))
 ))
 (type $lambdas.Lambdas.vtable (struct
  
@@ -30,8 +30,8 @@
  (field $m_testDefaultMethodsInIntersectionAdaptor__void (mut (ref $function.__$void)))
 ))
 (global $lambdas.Lambdas.vtable (mut (ref null $lambdas.Lambdas.vtable)) (ref.null $lambdas.Lambdas.vtable))
-(global $identityFunction@lambdas.Lambdas (mut (ref null $lambdas.Lambdas.IdentityFunction)) (ref.null $lambdas.Lambdas.IdentityFunction))
-(global $$initialized@lambdas.Lambdas (mut i32) (i32.const 0))
+(global $f_identityFunction__lambdas_Lambdas_ (mut (ref null $lambdas.Lambdas.IdentityFunction)) (ref.null $lambdas.Lambdas.IdentityFunction))
+(global $f_$initialized__lambdas_Lambdas (mut i32) (i32.const 0))
 
 ;;; Lambdas()
 (func $m_<init>__void@lambdas.Lambdas
@@ -60,7 +60,7 @@
  (block $return.label
   (block
    ;; return (Lambdas.this.field + intf.m(n));
-   (local.set $return.value (i32.add (struct.get $lambdas.Lambdas $field@lambdas.Lambdas(local.get $this)) (i32.const 0)))
+   (local.set $return.value (i32.add (struct.get $lambdas.Lambdas $f_field__lambdas_Lambdas(local.get $this)) (i32.const 0)))
    (br $return.label)
   )
  )
@@ -405,16 +405,16 @@
    ;; lambdas.Lambdas.$clinit();
    (call $$clinit__void@lambdas.Lambdas )
    ;; if ((lambdas.Lambdas.identityFunction == null)) {
-   (if (ref.eq (global.get $identityFunction@lambdas.Lambdas) (ref.null $java.lang.Object))
+   (if (ref.eq (global.get $f_identityFunction__lambdas_Lambdas_) (ref.null $java.lang.Object))
     (then
      (block
       ;; (lambdas.Lambdas.identityFunction = new IdentityFunction.<init>());
-      (global.set $identityFunction@lambdas.Lambdas (call $m_<init>__void_$p_lambdas_Lambdas_IdentityFunction@lambdas.Lambdas.IdentityFunction (struct.new_with_rtt $lambdas.Lambdas.IdentityFunction (global.get $lambdas.Lambdas.IdentityFunction.vtable) (i32.const 0) (global.get $lambdas.Lambdas.IdentityFunction.rtt))))
+      (global.set $f_identityFunction__lambdas_Lambdas_ (call $m_<init>__void_$p_lambdas_Lambdas_IdentityFunction@lambdas.Lambdas.IdentityFunction (struct.new_with_rtt $lambdas.Lambdas.IdentityFunction (global.get $lambdas.Lambdas.IdentityFunction.vtable) (i32.const 0) (global.get $lambdas.Lambdas.IdentityFunction.rtt))))
      )
     )
    )
    ;; return ((GenericJsFunction<E, E>) lambdas.Lambdas.identityFunction);
-   (local.set $return.value (global.get $identityFunction@lambdas.Lambdas))
+   (local.set $return.value (global.get $f_identityFunction__lambdas_Lambdas_))
    (br $return.label)
   )
  )
@@ -502,7 +502,7 @@
  (block $return.label
   (block
    ;; (Lambdas.this.field = 100);
-   (struct.set $lambdas.Lambdas $field@lambdas.Lambdas(local.get $this) (i32.const 100))
+   (struct.set $lambdas.Lambdas $f_field__lambdas_Lambdas(local.get $this) (i32.const 100))
   )
  )
 )
@@ -512,58 +512,58 @@
  (block $return.label
   (block
    ;; if (lambdas.Lambdas.$initialized) return;
-   (if (global.get $$initialized@lambdas.Lambdas)
+   (if (global.get $f_$initialized__lambdas_Lambdas)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (lambdas.Lambdas.$initialized = true);
-   (global.set $$initialized@lambdas.Lambdas (i32.const 1))
+   (global.set $f_$initialized__lambdas_Lambdas (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
    ;; (lambdas.Lambdas.identityFunction = null);
-   (global.set $identityFunction@lambdas.Lambdas (ref.null $lambdas.Lambdas.IdentityFunction))
+   (global.set $f_identityFunction__lambdas_Lambdas_ (ref.null $lambdas.Lambdas.IdentityFunction))
   )
  )
 )
 
 ;;; INTERFACE  FunctionalInterface
-(global $$initialized@lambdas.Lambdas.FunctionalInterface (mut i32) (i32.const 0))
+(global $f_$initialized__lambdas_Lambdas_FunctionalInterface (mut i32) (i32.const 0))
 
 ;;; void FunctionalInterface.$clinit()
 (func $$clinit__void@lambdas.Lambdas.FunctionalInterface
  (block $return.label
   (block
    ;; if (lambdas.Lambdas.FunctionalInterface.$initialized) return;
-   (if (global.get $$initialized@lambdas.Lambdas.FunctionalInterface)
+   (if (global.get $f_$initialized__lambdas_Lambdas_FunctionalInterface)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (lambdas.Lambdas.FunctionalInterface.$initialized = true);
-   (global.set $$initialized@lambdas.Lambdas.FunctionalInterface (i32.const 1))
+   (global.set $f_$initialized__lambdas_Lambdas_FunctionalInterface (i32.const 1))
   )
  )
 )
 
 ;;; INTERFACE  Functional
-(global $$initialized@lambdas.Lambdas.Functional (mut i32) (i32.const 0))
+(global $f_$initialized__lambdas_Lambdas_Functional (mut i32) (i32.const 0))
 
 ;;; void Functional.$clinit()
 (func $$clinit__void@lambdas.Lambdas.Functional
  (block $return.label
   (block
    ;; if (lambdas.Lambdas.Functional.$initialized) return;
-   (if (global.get $$initialized@lambdas.Lambdas.Functional)
+   (if (global.get $f_$initialized__lambdas_Lambdas_Functional)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (lambdas.Lambdas.Functional.$initialized = true);
-   (global.set $$initialized@lambdas.Lambdas.Functional (i32.const 1))
+   (global.set $f_$initialized__lambdas_Lambdas_Functional (i32.const 1))
   )
  )
 )
@@ -571,8 +571,8 @@
 ;;; CLASS  <anonymous> implements Functional<T>
 (type $lambdas.Lambdas.1 (struct
  (field $vtable (ref null $lambdas.Lambdas.1.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $this@lambdas.Lambdas.1 (mut (ref null $lambdas.Lambdas)))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $$outer_this__lambdas_Lambdas_1 (mut (ref null $lambdas.Lambdas)))
 ))
 (type $lambdas.Lambdas.1.vtable (struct
  
@@ -583,7 +583,7 @@
  (field $m_wrap__lambdas_Lambdas_Functional__lambdas_Lambdas_Functional (mut (ref $function.$java.lang.Object__$java.lang.Object)))
 ))
 (global $lambdas.Lambdas.1.vtable (mut (ref null $lambdas.Lambdas.1.vtable)) (ref.null $lambdas.Lambdas.1.vtable))
-(global $$initialized@lambdas.Lambdas.1 (mut i32) (i32.const 0))
+(global $f_$initialized__lambdas_Lambdas_1 (mut i32) (i32.const 0))
 
 ;;; <anonymous> implements Functional<T>(Lambdas $outer_this)
 (func $m_<init>__lambdas_Lambdas__void_$pp_lambdas@lambdas.Lambdas.1
@@ -593,7 +593,7 @@
  (block $return.label
   (block
    ;; ($1.this.this = $outer_this);
-   (struct.set $lambdas.Lambdas.1 $this@lambdas.Lambdas.1(local.get $this) (local.get $$outer_this))
+   (struct.set $lambdas.Lambdas.1 $$outer_this__lambdas_Lambdas_1(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -625,14 +625,14 @@
  (block $return.label
   (block
    ;; if (lambdas.Lambdas.1.$initialized) return;
-   (if (global.get $$initialized@lambdas.Lambdas.1)
+   (if (global.get $f_$initialized__lambdas_Lambdas_1)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (lambdas.Lambdas.1.$initialized = true);
-   (global.set $$initialized@lambdas.Lambdas.1 (i32.const 1))
+   (global.set $f_$initialized__lambdas_Lambdas_1 (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -642,7 +642,7 @@
 ;;; CLASS  <anonymous> implements Functional<T>
 (type $lambdas.Lambdas.2 (struct
  (field $vtable (ref null $lambdas.Lambdas.2.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $lambdas.Lambdas.2.vtable (struct
  
@@ -653,7 +653,7 @@
  (field $m_wrap__lambdas_Lambdas_Functional__lambdas_Lambdas_Functional (mut (ref $function.$java.lang.Object__$java.lang.Object)))
 ))
 (global $lambdas.Lambdas.2.vtable (mut (ref null $lambdas.Lambdas.2.vtable)) (ref.null $lambdas.Lambdas.2.vtable))
-(global $$initialized@lambdas.Lambdas.2 (mut i32) (i32.const 0))
+(global $f_$initialized__lambdas_Lambdas_2 (mut i32) (i32.const 0))
 
 ;;; <anonymous> implements Functional<T>()
 (func $m_<init>__void_$pp_lambdas@lambdas.Lambdas.2
@@ -692,14 +692,14 @@
  (block $return.label
   (block
    ;; if (lambdas.Lambdas.2.$initialized) return;
-   (if (global.get $$initialized@lambdas.Lambdas.2)
+   (if (global.get $f_$initialized__lambdas_Lambdas_2)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (lambdas.Lambdas.2.$initialized = true);
-   (global.set $$initialized@lambdas.Lambdas.2 (i32.const 1))
+   (global.set $f_$initialized__lambdas_Lambdas_2 (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -707,27 +707,27 @@
 )
 
 ;;; INTERFACE  GenericFunctionalInterface
-(global $$initialized@lambdas.Lambdas.GenericFunctionalInterface (mut i32) (i32.const 0))
+(global $f_$initialized__lambdas_Lambdas_GenericFunctionalInterface (mut i32) (i32.const 0))
 
 ;;; void GenericFunctionalInterface.$clinit()
 (func $$clinit__void@lambdas.Lambdas.GenericFunctionalInterface
  (block $return.label
   (block
    ;; if (lambdas.Lambdas.GenericFunctionalInterface.$initialized) return;
-   (if (global.get $$initialized@lambdas.Lambdas.GenericFunctionalInterface)
+   (if (global.get $f_$initialized__lambdas_Lambdas_GenericFunctionalInterface)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (lambdas.Lambdas.GenericFunctionalInterface.$initialized = true);
-   (global.set $$initialized@lambdas.Lambdas.GenericFunctionalInterface (i32.const 1))
+   (global.set $f_$initialized__lambdas_Lambdas_GenericFunctionalInterface (i32.const 1))
   )
  )
 )
 
 ;;; INTERFACE  BiFunction
-(global $$initialized@lambdas.Lambdas.BiFunction (mut i32) (i32.const 0))
+(global $f_$initialized__lambdas_Lambdas_BiFunction (mut i32) (i32.const 0))
 
 ;;; BiFunction<T, U, V> BiFunction.andThen(Function<? super R, ? extends V> after)
 (func $m_andThen__lambdas_Lambdas_Function__lambdas_Lambdas_BiFunction@lambdas.Lambdas.BiFunction
@@ -753,20 +753,20 @@
  (block $return.label
   (block
    ;; if (lambdas.Lambdas.BiFunction.$initialized) return;
-   (if (global.get $$initialized@lambdas.Lambdas.BiFunction)
+   (if (global.get $f_$initialized__lambdas_Lambdas_BiFunction)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (lambdas.Lambdas.BiFunction.$initialized = true);
-   (global.set $$initialized@lambdas.Lambdas.BiFunction (i32.const 1))
+   (global.set $f_$initialized__lambdas_Lambdas_BiFunction (i32.const 1))
   )
  )
 )
 
 ;;; INTERFACE  Function
-(global $$initialized@lambdas.Lambdas.Function (mut i32) (i32.const 0))
+(global $f_$initialized__lambdas_Lambdas_Function (mut i32) (i32.const 0))
 
 ;;; Function<T, T> Function.identity()
 (func $m_identity__lambdas_Lambdas_Function@lambdas.Lambdas.Function
@@ -790,34 +790,34 @@
  (block $return.label
   (block
    ;; if (lambdas.Lambdas.Function.$initialized) return;
-   (if (global.get $$initialized@lambdas.Lambdas.Function)
+   (if (global.get $f_$initialized__lambdas_Lambdas_Function)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (lambdas.Lambdas.Function.$initialized = true);
-   (global.set $$initialized@lambdas.Lambdas.Function (i32.const 1))
+   (global.set $f_$initialized__lambdas_Lambdas_Function (i32.const 1))
   )
  )
 )
 
 ;;; INTERFACE  FunctionalInterfaceWithMethodReturningVoid
-(global $$initialized@lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid (mut i32) (i32.const 0))
+(global $f_$initialized__lambdas_Lambdas_FunctionalInterfaceWithMethodReturningVoid (mut i32) (i32.const 0))
 
 ;;; void FunctionalInterfaceWithMethodReturningVoid.$clinit()
 (func $$clinit__void@lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid
  (block $return.label
   (block
    ;; if (lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid.$initialized) return;
-   (if (global.get $$initialized@lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid)
+   (if (global.get $f_$initialized__lambdas_Lambdas_FunctionalInterfaceWithMethodReturningVoid)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid.$initialized = true);
-   (global.set $$initialized@lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid (i32.const 1))
+   (global.set $f_$initialized__lambdas_Lambdas_FunctionalInterfaceWithMethodReturningVoid (i32.const 1))
   )
  )
 )
@@ -825,8 +825,8 @@
 ;;; CLASS  <anonymous> extends Object
 (type $lambdas.Lambdas.3 (struct
  (field $vtable (ref null $lambdas.Lambdas.3.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $this@lambdas.Lambdas.3 (mut (ref null $lambdas.Lambdas)))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $$outer_this__lambdas_Lambdas_3 (mut (ref null $lambdas.Lambdas)))
 ))
 (type $lambdas.Lambdas.3.vtable (struct
  
@@ -836,7 +836,7 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
 (global $lambdas.Lambdas.3.vtable (mut (ref null $lambdas.Lambdas.3.vtable)) (ref.null $lambdas.Lambdas.3.vtable))
-(global $$initialized@lambdas.Lambdas.3 (mut i32) (i32.const 0))
+(global $f_$initialized__lambdas_Lambdas_3 (mut i32) (i32.const 0))
 
 ;;; <anonymous> extends Object(Lambdas $outer_this)
 (func $m_<init>__lambdas_Lambdas__void_$pp_lambdas@lambdas.Lambdas.3
@@ -846,7 +846,7 @@
  (block $return.label
   (block
    ;; ($3.this.this = $outer_this);
-   (struct.set $lambdas.Lambdas.3 $this@lambdas.Lambdas.3(local.get $this) (local.get $$outer_this))
+   (struct.set $lambdas.Lambdas.3 $$outer_this__lambdas_Lambdas_3(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -859,14 +859,14 @@
  (block $return.label
   (block
    ;; if (lambdas.Lambdas.3.$initialized) return;
-   (if (global.get $$initialized@lambdas.Lambdas.3)
+   (if (global.get $f_$initialized__lambdas_Lambdas_3)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (lambdas.Lambdas.3.$initialized = true);
-   (global.set $$initialized@lambdas.Lambdas.3 (i32.const 1))
+   (global.set $f_$initialized__lambdas_Lambdas_3 (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -876,8 +876,8 @@
 ;;; CLASS  Parent
 (type $lambdas.Lambdas.Parent (struct
  (field $vtable (ref null $lambdas.Lambdas.Parent.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $fieldInParent@lambdas.Lambdas.Parent (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $f_fieldInParent__lambdas_Lambdas_Parent (mut i32))
 ))
 (type $lambdas.Lambdas.Parent.vtable (struct
  
@@ -888,7 +888,7 @@
  (field $m_funInParent__void (mut (ref $function.__$void)))
 ))
 (global $lambdas.Lambdas.Parent.vtable (mut (ref null $lambdas.Lambdas.Parent.vtable)) (ref.null $lambdas.Lambdas.Parent.vtable))
-(global $$initialized@lambdas.Lambdas.Parent (mut i32) (i32.const 0))
+(global $f_$initialized__lambdas_Lambdas_Parent (mut i32) (i32.const 0))
 
 ;;; Parent()
 (func $m_<init>__void_$p_lambdas_Lambdas_Parent@lambdas.Lambdas.Parent
@@ -920,14 +920,14 @@
  (block $return.label
   (block
    ;; if (lambdas.Lambdas.Parent.$initialized) return;
-   (if (global.get $$initialized@lambdas.Lambdas.Parent)
+   (if (global.get $f_$initialized__lambdas_Lambdas_Parent)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (lambdas.Lambdas.Parent.$initialized = true);
-   (global.set $$initialized@lambdas.Lambdas.Parent (i32.const 1))
+   (global.set $f_$initialized__lambdas_Lambdas_Parent (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -937,8 +937,8 @@
 ;;; CLASS  LambdaInSubClass
 (type $lambdas.Lambdas.LambdaInSubClass (struct
  (field $vtable (ref null $lambdas.Lambdas.LambdaInSubClass.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $fieldInParent@lambdas.Lambdas.Parent (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $f_fieldInParent__lambdas_Lambdas_Parent (mut i32))
 ))
 (type $lambdas.Lambdas.LambdaInSubClass.vtable (struct
  
@@ -950,7 +950,7 @@
  (field $m_testLambdaInSubclass__void (mut (ref $function.__$void)))
 ))
 (global $lambdas.Lambdas.LambdaInSubClass.vtable (mut (ref null $lambdas.Lambdas.LambdaInSubClass.vtable)) (ref.null $lambdas.Lambdas.LambdaInSubClass.vtable))
-(global $$initialized@lambdas.Lambdas.LambdaInSubClass (mut i32) (i32.const 0))
+(global $f_$initialized__lambdas_Lambdas_LambdaInSubClass (mut i32) (i32.const 0))
 
 ;;; LambdaInSubClass()
 (func $m_<init>__void_$p_lambdas_Lambdas_LambdaInSubClass@lambdas.Lambdas.LambdaInSubClass
@@ -988,14 +988,14 @@
  (block $return.label
   (block
    ;; if (lambdas.Lambdas.LambdaInSubClass.$initialized) return;
-   (if (global.get $$initialized@lambdas.Lambdas.LambdaInSubClass)
+   (if (global.get $f_$initialized__lambdas_Lambdas_LambdaInSubClass)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (lambdas.Lambdas.LambdaInSubClass.$initialized = true);
-   (global.set $$initialized@lambdas.Lambdas.LambdaInSubClass (i32.const 1))
+   (global.set $f_$initialized__lambdas_Lambdas_LambdaInSubClass (i32.const 1))
    ;; lambdas.Lambdas.Parent.$clinit();
    (call $$clinit__void@lambdas.Lambdas.Parent )
   )
@@ -1003,61 +1003,61 @@
 )
 
 ;;; INTERFACE  GenericJsFunction
-(global $$initialized@lambdas.Lambdas.GenericJsFunction (mut i32) (i32.const 0))
+(global $f_$initialized__lambdas_Lambdas_GenericJsFunction (mut i32) (i32.const 0))
 
 ;;; void GenericJsFunction.$clinit()
 (func $$clinit__void@lambdas.Lambdas.GenericJsFunction
  (block $return.label
   (block
    ;; if (lambdas.Lambdas.GenericJsFunction.$initialized) return;
-   (if (global.get $$initialized@lambdas.Lambdas.GenericJsFunction)
+   (if (global.get $f_$initialized__lambdas_Lambdas_GenericJsFunction)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (lambdas.Lambdas.GenericJsFunction.$initialized = true);
-   (global.set $$initialized@lambdas.Lambdas.GenericJsFunction (i32.const 1))
+   (global.set $f_$initialized__lambdas_Lambdas_GenericJsFunction (i32.const 1))
   )
  )
 )
 
 ;;; INTERFACE  Thenable
-(global $$initialized@lambdas.Lambdas.Thenable (mut i32) (i32.const 0))
+(global $f_$initialized__lambdas_Lambdas_Thenable (mut i32) (i32.const 0))
 
 ;;; void Thenable.$clinit()
 (func $$clinit__void@lambdas.Lambdas.Thenable
  (block $return.label
   (block
    ;; if (lambdas.Lambdas.Thenable.$initialized) return;
-   (if (global.get $$initialized@lambdas.Lambdas.Thenable)
+   (if (global.get $f_$initialized__lambdas_Lambdas_Thenable)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (lambdas.Lambdas.Thenable.$initialized = true);
-   (global.set $$initialized@lambdas.Lambdas.Thenable (i32.const 1))
+   (global.set $f_$initialized__lambdas_Lambdas_Thenable (i32.const 1))
   )
  )
 )
 
 ;;; INTERFACE  AnotherThenable
-(global $$initialized@lambdas.Lambdas.AnotherThenable (mut i32) (i32.const 0))
+(global $f_$initialized__lambdas_Lambdas_AnotherThenable (mut i32) (i32.const 0))
 
 ;;; void AnotherThenable.$clinit()
 (func $$clinit__void@lambdas.Lambdas.AnotherThenable
  (block $return.label
   (block
    ;; if (lambdas.Lambdas.AnotherThenable.$initialized) return;
-   (if (global.get $$initialized@lambdas.Lambdas.AnotherThenable)
+   (if (global.get $f_$initialized__lambdas_Lambdas_AnotherThenable)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (lambdas.Lambdas.AnotherThenable.$initialized = true);
-   (global.set $$initialized@lambdas.Lambdas.AnotherThenable (i32.const 1))
+   (global.set $f_$initialized__lambdas_Lambdas_AnotherThenable (i32.const 1))
   )
  )
 )
@@ -1065,7 +1065,7 @@
 ;;; CLASS  IdentityFunction
 (type $lambdas.Lambdas.IdentityFunction (struct
  (field $vtable (ref null $lambdas.Lambdas.IdentityFunction.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $lambdas.Lambdas.IdentityFunction.vtable (struct
  
@@ -1076,7 +1076,7 @@
  (field $m_apply__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object)))
 ))
 (global $lambdas.Lambdas.IdentityFunction.vtable (mut (ref null $lambdas.Lambdas.IdentityFunction.vtable)) (ref.null $lambdas.Lambdas.IdentityFunction.vtable))
-(global $$initialized@lambdas.Lambdas.IdentityFunction (mut i32) (i32.const 0))
+(global $f_$initialized__lambdas_Lambdas_IdentityFunction (mut i32) (i32.const 0))
 
 ;;; IdentityFunction()
 (func $m_<init>__void_$p_lambdas_Lambdas_IdentityFunction@lambdas.Lambdas.IdentityFunction
@@ -1115,14 +1115,14 @@
  (block $return.label
   (block
    ;; if (lambdas.Lambdas.IdentityFunction.$initialized) return;
-   (if (global.get $$initialized@lambdas.Lambdas.IdentityFunction)
+   (if (global.get $f_$initialized__lambdas_Lambdas_IdentityFunction)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (lambdas.Lambdas.IdentityFunction.$initialized = true);
-   (global.set $$initialized@lambdas.Lambdas.IdentityFunction (i32.const 1))
+   (global.set $f_$initialized__lambdas_Lambdas_IdentityFunction (i32.const 1))
    ;; java.lang.Object.$clinit();
    (call $$clinit__void@java.lang.Object )
   )
@@ -1130,7 +1130,7 @@
 )
 
 ;;; INTERFACE  Equals
-(global $$initialized@lambdas.Lambdas.Equals (mut i32) (i32.const 0))
+(global $f_$initialized__lambdas_Lambdas_Equals (mut i32) (i32.const 0))
 
 ;;; T Equals.get()
 (func $m_get__java_lang_Object@lambdas.Lambdas.Equals
@@ -1153,34 +1153,34 @@
  (block $return.label
   (block
    ;; if (lambdas.Lambdas.Equals.$initialized) return;
-   (if (global.get $$initialized@lambdas.Lambdas.Equals)
+   (if (global.get $f_$initialized__lambdas_Lambdas_Equals)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (lambdas.Lambdas.Equals.$initialized = true);
-   (global.set $$initialized@lambdas.Lambdas.Equals (i32.const 1))
+   (global.set $f_$initialized__lambdas_Lambdas_Equals (i32.const 1))
   )
  )
 )
 
 ;;; INTERFACE  JsSupplier
-(global $$initialized@lambdas.Lambdas.JsSupplier (mut i32) (i32.const 0))
+(global $f_$initialized__lambdas_Lambdas_JsSupplier (mut i32) (i32.const 0))
 
 ;;; void JsSupplier.$clinit()
 (func $$clinit__void@lambdas.Lambdas.JsSupplier
  (block $return.label
   (block
    ;; if (lambdas.Lambdas.JsSupplier.$initialized) return;
-   (if (global.get $$initialized@lambdas.Lambdas.JsSupplier)
+   (if (global.get $f_$initialized__lambdas_Lambdas_JsSupplier)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (lambdas.Lambdas.JsSupplier.$initialized = true);
-   (global.set $$initialized@lambdas.Lambdas.JsSupplier (i32.const 1))
+   (global.set $f_$initialized__lambdas_Lambdas_JsSupplier (i32.const 1))
    ;; lambdas.Lambdas.Equals.$clinit();
    (call $$clinit__void@lambdas.Lambdas.Equals )
   )
@@ -1188,7 +1188,7 @@
 )
 
 ;;; INTERFACE  JustADefaultT
-(global $$initialized@lambdas.Lambdas.JustADefaultT (mut i32) (i32.const 0))
+(global $f_$initialized__lambdas_Lambdas_JustADefaultT (mut i32) (i32.const 0))
 
 ;;; void JustADefaultT.method(T t)
 (func $m_method__java_lang_Object__void@lambdas.Lambdas.JustADefaultT
@@ -1206,20 +1206,20 @@
  (block $return.label
   (block
    ;; if (lambdas.Lambdas.JustADefaultT.$initialized) return;
-   (if (global.get $$initialized@lambdas.Lambdas.JustADefaultT)
+   (if (global.get $f_$initialized__lambdas_Lambdas_JustADefaultT)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (lambdas.Lambdas.JustADefaultT.$initialized = true);
-   (global.set $$initialized@lambdas.Lambdas.JustADefaultT (i32.const 1))
+   (global.set $f_$initialized__lambdas_Lambdas_JustADefaultT (i32.const 1))
   )
  )
 )
 
 ;;; INTERFACE  JustADefaultS
-(global $$initialized@lambdas.Lambdas.JustADefaultS (mut i32) (i32.const 0))
+(global $f_$initialized__lambdas_Lambdas_JustADefaultS (mut i32) (i32.const 0))
 
 ;;; void JustADefaultS.method(S t)
 (func $m_method__java_lang_Object__void@lambdas.Lambdas.JustADefaultS
@@ -1237,20 +1237,20 @@
  (block $return.label
   (block
    ;; if (lambdas.Lambdas.JustADefaultS.$initialized) return;
-   (if (global.get $$initialized@lambdas.Lambdas.JustADefaultS)
+   (if (global.get $f_$initialized__lambdas_Lambdas_JustADefaultS)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (lambdas.Lambdas.JustADefaultS.$initialized = true);
-   (global.set $$initialized@lambdas.Lambdas.JustADefaultS (i32.const 1))
+   (global.set $f_$initialized__lambdas_Lambdas_JustADefaultS (i32.const 1))
   )
  )
 )
 
 ;;; INTERFACE  MarkerWithDefaultMethod
-(global $$initialized@lambdas.Lambdas.MarkerWithDefaultMethod (mut i32) (i32.const 0))
+(global $f_$initialized__lambdas_Lambdas_MarkerWithDefaultMethod (mut i32) (i32.const 0))
 
 ;;; void MarkerWithDefaultMethod.defaultMethod()
 (func $m_defaultMethod__void@lambdas.Lambdas.MarkerWithDefaultMethod
@@ -1267,14 +1267,14 @@
  (block $return.label
   (block
    ;; if (lambdas.Lambdas.MarkerWithDefaultMethod.$initialized) return;
-   (if (global.get $$initialized@lambdas.Lambdas.MarkerWithDefaultMethod)
+   (if (global.get $f_$initialized__lambdas_Lambdas_MarkerWithDefaultMethod)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (lambdas.Lambdas.MarkerWithDefaultMethod.$initialized = true);
-   (global.set $$initialized@lambdas.Lambdas.MarkerWithDefaultMethod (i32.const 1))
+   (global.set $f_$initialized__lambdas_Lambdas_MarkerWithDefaultMethod (i32.const 1))
   )
  )
 )

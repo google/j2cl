@@ -1,21 +1,21 @@
 ;;; Code for simplegenericinterface.SimpleGenericInterface
 
 ;;; INTERFACE  SimpleGenericInterface
-(global $$initialized@simplegenericinterface.SimpleGenericInterface (mut i32) (i32.const 0))
+(global $f_$initialized__simplegenericinterface_SimpleGenericInterface (mut i32) (i32.const 0))
 
 ;;; void SimpleGenericInterface.$clinit()
 (func $$clinit__void@simplegenericinterface.SimpleGenericInterface
  (block $return.label
   (block
    ;; if (simplegenericinterface.SimpleGenericInterface.$initialized) return;
-   (if (global.get $$initialized@simplegenericinterface.SimpleGenericInterface)
+   (if (global.get $f_$initialized__simplegenericinterface_SimpleGenericInterface)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (simplegenericinterface.SimpleGenericInterface.$initialized = true);
-   (global.set $$initialized@simplegenericinterface.SimpleGenericInterface (i32.const 1))
+   (global.set $f_$initialized__simplegenericinterface_SimpleGenericInterface (i32.const 1))
   )
  )
 )

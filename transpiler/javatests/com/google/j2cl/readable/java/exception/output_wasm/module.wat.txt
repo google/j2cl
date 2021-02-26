@@ -3,14 +3,14 @@
 ;;; CLASS  MyException
 (type $exception.MyException (struct
  (field $vtable (ref null $exception.MyException.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $detailMessage@java.lang.Throwable (mut (ref null $java.lang.String)))
- (field $cause@java.lang.Throwable (mut (ref null $java.lang.Throwable)))
- (field $suppressedExceptions@java.lang.Throwable (mut (ref null $Object.array)))
- (field $stackTrace@java.lang.Throwable (mut (ref null $Object.array)))
- (field $disableSuppression@java.lang.Throwable (mut i32))
- (field $disableStackTrace@java.lang.Throwable (mut i32))
- (field $backingJsObject@java.lang.Throwable (mut (ref null $java.lang.Object)))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $f_detailMessage__java_lang_Throwable_ (mut (ref null $java.lang.String)))
+ (field $f_cause__java_lang_Throwable_ (mut (ref null $java.lang.Throwable)))
+ (field $f_suppressedExceptions__java_lang_Throwable_ (mut (ref null $Object.array)))
+ (field $f_stackTrace__java_lang_Throwable_ (mut (ref null $Object.array)))
+ (field $f_disableSuppression__java_lang_Throwable_ (mut i32))
+ (field $f_disableStackTrace__java_lang_Throwable_ (mut i32))
+ (field $f_backingJsObject__java_lang_Throwable_ (mut (ref null $java.lang.Object)))
 ))
 (type $exception.MyException.vtable (struct
  
@@ -33,7 +33,7 @@
  (field $m_setStackTrace__arrayOf_java_lang_StackTraceElement__void (mut (ref $function.$Object.array__$void)))
 ))
 (global $exception.MyException.vtable (mut (ref null $exception.MyException.vtable)) (ref.null $exception.MyException.vtable))
-(global $$initialized@exception.MyException (mut i32) (i32.const 0))
+(global $f_$initialized__exception_MyException (mut i32) (i32.const 0))
 
 ;;; MyException()
 (func $m_<init>__void_$pp_exception@exception.MyException
@@ -67,14 +67,14 @@
  (block $return.label
   (block
    ;; if (exception.MyException.$initialized) return;
-   (if (global.get $$initialized@exception.MyException)
+   (if (global.get $f_$initialized__exception_MyException)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (exception.MyException.$initialized = true);
-   (global.set $$initialized@exception.MyException (i32.const 1))
+   (global.set $f_$initialized__exception_MyException (i32.const 1))
    ;; java.lang.Exception.$clinit();
    (call $$clinit__void@java.lang.Exception )
   )
@@ -85,14 +85,14 @@
 ;;; CLASS  MyJsException
 (type $exception.MyJsException (struct
  (field $vtable (ref null $exception.MyJsException.vtable))
- (field $$systemIdentityHashCode@java.lang.Object (mut i32))
- (field $detailMessage@java.lang.Throwable (mut (ref null $java.lang.String)))
- (field $cause@java.lang.Throwable (mut (ref null $java.lang.Throwable)))
- (field $suppressedExceptions@java.lang.Throwable (mut (ref null $Object.array)))
- (field $stackTrace@java.lang.Throwable (mut (ref null $Object.array)))
- (field $disableSuppression@java.lang.Throwable (mut i32))
- (field $disableStackTrace@java.lang.Throwable (mut i32))
- (field $backingJsObject@java.lang.Throwable (mut (ref null $java.lang.Object)))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $f_detailMessage__java_lang_Throwable_ (mut (ref null $java.lang.String)))
+ (field $f_cause__java_lang_Throwable_ (mut (ref null $java.lang.Throwable)))
+ (field $f_suppressedExceptions__java_lang_Throwable_ (mut (ref null $Object.array)))
+ (field $f_stackTrace__java_lang_Throwable_ (mut (ref null $Object.array)))
+ (field $f_disableSuppression__java_lang_Throwable_ (mut i32))
+ (field $f_disableStackTrace__java_lang_Throwable_ (mut i32))
+ (field $f_backingJsObject__java_lang_Throwable_ (mut (ref null $java.lang.Object)))
 ))
 (type $exception.MyJsException.vtable (struct
  
@@ -115,7 +115,7 @@
  (field $m_setStackTrace__arrayOf_java_lang_StackTraceElement__void (mut (ref $function.$Object.array__$void)))
 ))
 (global $exception.MyJsException.vtable (mut (ref null $exception.MyJsException.vtable)) (ref.null $exception.MyJsException.vtable))
-(global $$initialized@exception.MyJsException (mut i32) (i32.const 0))
+(global $f_$initialized__exception_MyJsException (mut i32) (i32.const 0))
 
 ;;; MyJsException()
 (func $m_<init>__void@exception.MyJsException
@@ -151,14 +151,14 @@
  (block $return.label
   (block
    ;; if (exception.MyJsException.$initialized) return;
-   (if (global.get $$initialized@exception.MyJsException)
+   (if (global.get $f_$initialized__exception_MyJsException)
     (then
      ;; return;
      (br $return.label)
     )
    )
    ;; (exception.MyJsException.$initialized = true);
-   (global.set $$initialized@exception.MyJsException (i32.const 1))
+   (global.set $f_$initialized__exception_MyJsException (i32.const 1))
    ;; java.lang.Exception.$clinit();
    (call $$clinit__void@java.lang.Exception )
   )
