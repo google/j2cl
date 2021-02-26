@@ -1,6 +1,4 @@
-;;; Code for publicconstructor.PublicConstructor
-
-;;; CLASS  PublicConstructor
+;;; Code for publicconstructor.PublicConstructor [CLASS]
 (type $publicconstructor.PublicConstructor (struct
  (field $vtable (ref null $publicconstructor.PublicConstructor.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -47,8 +45,5 @@
  )
 )
 
-;;; Code for publicconstructor.PublicConstructor [vtable]
+ ;;; Code for publicconstructor.PublicConstructor [vtable]
  (global.set $publicconstructor.PublicConstructor.vtable (struct.new_with_rtt $publicconstructor.PublicConstructor.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $publicconstructor.PublicConstructor.vtable)))
-))
-(start $.runtime.init)
-

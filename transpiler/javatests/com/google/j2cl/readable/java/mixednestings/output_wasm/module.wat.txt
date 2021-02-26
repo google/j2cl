@@ -1,6 +1,4 @@
-;;; Code for mixednestings.MixedNestings
-
-;;; INTERFACE  MyInterface
+;;; Code for mixednestings.MyInterface [INTERFACE]
 (global $f_$initialized__mixednestings_MyInterface (mut i32) (i32.const 0))
 
 ;;; void MyInterface.$clinit()
@@ -20,7 +18,7 @@
  )
 )
 
-;;; CLASS  MixedNestings
+;;; Code for mixednestings.MixedNestings [CLASS]
 (type $mixednestings.MixedNestings (struct
  (field $vtable (ref null $mixednestings.MixedNestings.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -101,7 +99,7 @@
  )
 )
 
-;;; CLASS  A
+;;; Code for mixednestings.MixedNestings.A [CLASS]
 (type $mixednestings.MixedNestings.A (struct
  (field $vtable (ref null $mixednestings.MixedNestings.A.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -186,7 +184,7 @@
  )
 )
 
-;;; CLASS  B
+;;; Code for mixednestings.MixedNestings.A.1B [CLASS]
 (type $mixednestings.MixedNestings.A.1B (struct
  (field $vtable (ref null $mixednestings.MixedNestings.A.1B.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -273,7 +271,7 @@
  )
 )
 
-;;; CLASS  <anonymous> implements MyInterface
+;;; Code for mixednestings.MixedNestings.A.1B.1 [CLASS]
 (type $mixednestings.MixedNestings.A.1B.1 (struct
  (field $vtable (ref null $mixednestings.MixedNestings.A.1B.1.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -352,7 +350,7 @@
  )
 )
 
-;;; CLASS  <anonymous> implements MyInterface
+;;; Code for mixednestings.MixedNestings.A.1B.1.1 [CLASS]
 (type $mixednestings.MixedNestings.A.1B.1.1 (struct
  (field $vtable (ref null $mixednestings.MixedNestings.A.1B.1.1.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -423,16 +421,17 @@
  )
 )
 
-;;; Code for mixednestings.MixedNestings [vtable]
+ ;;; Code for mixednestings.MixedNestings [vtable]
  (global.set $mixednestings.MixedNestings.vtable (struct.new_with_rtt $mixednestings.MixedNestings.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_mm__void@mixednestings.MixedNestings) (ref.func $m_test__void@mixednestings.MixedNestings) (rtt.canon $mixednestings.MixedNestings.vtable)))
-;;; Code for mixednestings.MixedNestings.A [vtable]
- (global.set $mixednestings.MixedNestings.A.vtable (struct.new_with_rtt $mixednestings.MixedNestings.A.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_aa__void@mixednestings.MixedNestings.A) (ref.func $m_a__void@mixednestings.MixedNestings.A) (rtt.canon $mixednestings.MixedNestings.A.vtable)))
-;;; Code for mixednestings.MixedNestings.A.1B [vtable]
- (global.set $mixednestings.MixedNestings.A.1B.vtable (struct.new_with_rtt $mixednestings.MixedNestings.A.1B.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_bb__void@mixednestings.MixedNestings.A.1B) (ref.func $m_b__int@mixednestings.MixedNestings.A.1B) (rtt.canon $mixednestings.MixedNestings.A.1B.vtable)))
-;;; Code for mixednestings.MixedNestings.A.1B.1 [vtable]
- (global.set $mixednestings.MixedNestings.A.1B.1.vtable (struct.new_with_rtt $mixednestings.MixedNestings.A.1B.1.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_fun__int__int@mixednestings.MixedNestings.A.1B.1) (rtt.canon $mixednestings.MixedNestings.A.1B.1.vtable)))
-;;; Code for mixednestings.MixedNestings.A.1B.1.1 [vtable]
- (global.set $mixednestings.MixedNestings.A.1B.1.1.vtable (struct.new_with_rtt $mixednestings.MixedNestings.A.1B.1.1.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_fun__int__int@mixednestings.MixedNestings.A.1B.1.1) (rtt.canon $mixednestings.MixedNestings.A.1B.1.1.vtable)))
-))
-(start $.runtime.init)
 
+ ;;; Code for mixednestings.MixedNestings.A [vtable]
+ (global.set $mixednestings.MixedNestings.A.vtable (struct.new_with_rtt $mixednestings.MixedNestings.A.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_aa__void@mixednestings.MixedNestings.A) (ref.func $m_a__void@mixednestings.MixedNestings.A) (rtt.canon $mixednestings.MixedNestings.A.vtable)))
+
+ ;;; Code for mixednestings.MixedNestings.A.1B [vtable]
+ (global.set $mixednestings.MixedNestings.A.1B.vtable (struct.new_with_rtt $mixednestings.MixedNestings.A.1B.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_bb__void@mixednestings.MixedNestings.A.1B) (ref.func $m_b__int@mixednestings.MixedNestings.A.1B) (rtt.canon $mixednestings.MixedNestings.A.1B.vtable)))
+
+ ;;; Code for mixednestings.MixedNestings.A.1B.1 [vtable]
+ (global.set $mixednestings.MixedNestings.A.1B.1.vtable (struct.new_with_rtt $mixednestings.MixedNestings.A.1B.1.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_fun__int__int@mixednestings.MixedNestings.A.1B.1) (rtt.canon $mixednestings.MixedNestings.A.1B.1.vtable)))
+
+ ;;; Code for mixednestings.MixedNestings.A.1B.1.1 [vtable]
+ (global.set $mixednestings.MixedNestings.A.1B.1.1.vtable (struct.new_with_rtt $mixednestings.MixedNestings.A.1B.1.1.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_fun__int__int@mixednestings.MixedNestings.A.1B.1.1) (rtt.canon $mixednestings.MixedNestings.A.1B.1.1.vtable)))

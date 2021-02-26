@@ -111,8 +111,7 @@ public class WasmModuleGenerator {
   }
 
   private void emitArrayTypes() {
-    builder.newLine();
-    builder.append(";;; Code for Array types.");
+    emitBeginCodeComment("Array types");
 
     emitArrayType("Object", environment.getWasmType(TypeDescriptors.get().javaLangObject));
 
@@ -120,6 +119,7 @@ public class WasmModuleGenerator {
     PrimitiveTypes.TYPES.stream()
         .filter(p -> p != PrimitiveTypes.VOID)
         .forEach(p -> emitArrayType(p.getSimpleSourceName(), getWasmTypeForPrimitive(p)));
+    emitEndCodeComment("Array types");
   }
 
   private void emitArrayType(String javaType, String wasmType) {
@@ -150,14 +150,10 @@ public class WasmModuleGenerator {
     emitArrayTypes();
 
     for (CompilationUnit j2clCompilationUnit : compilationUnits) {
-      builder.newLine();
-      builder.append(
-          ";;; Code for "
-              + j2clCompilationUnit.getPackageName()
-              + "."
-              + j2clCompilationUnit.getName());
       for (Type type : j2clCompilationUnit.getTypes()) {
+        emitBeginCodeComment(type, type.getKind().name());
         renderType(type);
+        emitEndCodeComment(type, type.getKind().name());
       }
     }
   }
@@ -200,9 +196,6 @@ public class WasmModuleGenerator {
   }
 
   private void renderType(Type type) {
-    builder.newLine();
-    builder.newLine();
-    builder.append(";;; " + type.getKind() + "  " + type.getReadableDescription());
     if (!type.isInterface()) {
       // Interfaces at runtime are treated as java.lang.Object; they don't have an empty structure
       // nor rtts.
@@ -440,9 +433,7 @@ public class WasmModuleGenerator {
 
   /** Emit a function that will be used to initialize the runtime at module instantiation time. */
   private void emitRuntimeInitialization(List<CompilationUnit> compilationUnits) {
-    builder.newLine();
-    builder.newLine();
-    builder.append(";;; Code for runtime initialization.");
+    emitBeginCodeComment("runtime initialization");
     builder.newLine();
     builder.append("(func $.runtime.init (block ");
     builder.indent();
@@ -460,15 +451,12 @@ public class WasmModuleGenerator {
     builder.append("))");
     builder.newLine();
     builder.append("(start $.runtime.init)");
+    emitEndCodeComment("runtime initialization");
   }
 
   /** Emits the code to initialize the vtable structure for {@code typeDeclaration}. */
   private void emitVtableInitialization(TypeDeclaration typeDeclaration) {
-    builder.unindent();
-    builder.newLine();
-    builder.append(
-        String.format(";;; Code for %s [vtable]", typeDeclaration.getQualifiedSourceName()));
-    builder.indent();
+    emitBeginCodeComment(typeDeclaration, "vtable");
     builder.newLine();
     DeclaredTypeDescriptor td = typeDeclaration.toUnparameterizedTypeDescriptor();
     builder.append(
@@ -485,5 +473,33 @@ public class WasmModuleGenerator {
                         " (ref.func %s)",
                         environment.getMethodImplementationName(m.getDescriptor()))));
     builder.append(String.format(" (rtt.canon %s)))", environment.getWasmVtableTypeName(td)));
+    emitEndCodeComment(typeDeclaration, "vtable");
+  }
+
+  private void emitBeginCodeComment(Type type, String section) {
+    emitBeginCodeComment(type.getDeclaration(), section);
+  }
+
+  private void emitBeginCodeComment(TypeDeclaration typeDeclaration, String section) {
+    emitBeginCodeComment(
+        String.format("%s [%s]", typeDeclaration.getQualifiedSourceName(), section));
+  }
+
+  private void emitBeginCodeComment(String commentId) {
+    builder.newLine();
+    builder.append(";;; Code for " + commentId);
+  }
+
+  private void emitEndCodeComment(Type type, String section) {
+    emitEndCodeComment(type.getDeclaration(), section);
+  }
+
+  private void emitEndCodeComment(TypeDeclaration typeDeclaration, String section) {
+    emitEndCodeComment(String.format("%s [%s]", typeDeclaration.getQualifiedSourceName(), section));
+  }
+
+  private void emitEndCodeComment(String commentId) {
+    builder.newLine();
+    builder.append(";;; End of code for " + commentId);
   }
 }

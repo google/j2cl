@@ -1,6 +1,4 @@
-;;; Code for jsbridgebackward.InterfaceImpl
-
-;;; INTERFACE  MyJsInterface
+;;; Code for jsbridgebackward.MyJsInterface [INTERFACE]
 (global $f_$initialized__jsbridgebackward_MyJsInterface (mut i32) (i32.const 0))
 
 ;;; void MyJsInterface.$clinit()
@@ -20,7 +18,7 @@
  )
 )
 
-;;; CLASS  A
+;;; Code for jsbridgebackward.A [CLASS]
 (type $jsbridgebackward.A (struct
  (field $vtable (ref null $jsbridgebackward.A.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -87,7 +85,7 @@
  )
 )
 
-;;; CLASS  InterfaceImpl
+;;; Code for jsbridgebackward.InterfaceImpl [CLASS]
 (type $jsbridgebackward.InterfaceImpl (struct
  (field $vtable (ref null $jsbridgebackward.InterfaceImpl.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -135,10 +133,8 @@
  )
 )
 
-;;; Code for jsbridgebackward.A [vtable]
+ ;;; Code for jsbridgebackward.A [vtable]
  (global.set $jsbridgebackward.A.vtable (struct.new_with_rtt $jsbridgebackward.A.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__int__int@jsbridgebackward.A) (rtt.canon $jsbridgebackward.A.vtable)))
-;;; Code for jsbridgebackward.InterfaceImpl [vtable]
- (global.set $jsbridgebackward.InterfaceImpl.vtable (struct.new_with_rtt $jsbridgebackward.InterfaceImpl.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__int__int@jsbridgebackward.A) (rtt.canon $jsbridgebackward.InterfaceImpl.vtable)))
-))
-(start $.runtime.init)
 
+ ;;; Code for jsbridgebackward.InterfaceImpl [vtable]
+ (global.set $jsbridgebackward.InterfaceImpl.vtable (struct.new_with_rtt $jsbridgebackward.InterfaceImpl.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__int__int@jsbridgebackward.A) (rtt.canon $jsbridgebackward.InterfaceImpl.vtable)))

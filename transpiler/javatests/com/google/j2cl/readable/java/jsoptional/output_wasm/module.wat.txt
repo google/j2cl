@@ -1,6 +1,4 @@
-;;; Code for jsoptional.Main
-
-;;; CLASS  Main
+;;; Code for jsoptional.Main [CLASS]
 (type $jsoptional.Main (struct
  (field $vtable (ref null $jsoptional.Main.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -126,7 +124,7 @@
  )
 )
 
-;;; INTERFACE  Function
+;;; Code for jsoptional.Main.Function [INTERFACE]
 (global $f_$initialized__jsoptional_Main_Function (mut i32) (i32.const 0))
 
 ;;; void Function.$clinit()
@@ -146,7 +144,7 @@
  )
 )
 
-;;; CLASS  AFunction
+;;; Code for jsoptional.Main.AFunction [CLASS]
 (type $jsoptional.Main.AFunction (struct
  (field $vtable (ref null $jsoptional.Main.AFunction.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -214,7 +212,7 @@
  )
 )
 
-;;; INTERFACE  I
+;;; Code for jsoptional.Main.I [INTERFACE]
 (global $f_$initialized__jsoptional_Main_I (mut i32) (i32.const 0))
 
 ;;; void I.$clinit()
@@ -234,7 +232,7 @@
  )
 )
 
-;;; CLASS  TemplatedSubtype
+;;; Code for jsoptional.Main.TemplatedSubtype [CLASS]
 (type $jsoptional.Main.TemplatedSubtype (struct
  (field $vtable (ref null $jsoptional.Main.TemplatedSubtype.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -313,7 +311,7 @@
  )
 )
 
-;;; CLASS  SpecializedSubtype
+;;; Code for jsoptional.Main.SpecializedSubtype [CLASS]
 (type $jsoptional.Main.SpecializedSubtype (struct
  (field $vtable (ref null $jsoptional.Main.SpecializedSubtype.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -399,7 +397,7 @@
  )
 )
 
-;;; CLASS  NonJsTypeSubtype
+;;; Code for jsoptional.Main.NonJsTypeSubtype [CLASS]
 (type $jsoptional.Main.NonJsTypeSubtype (struct
  (field $vtable (ref null $jsoptional.Main.NonJsTypeSubtype.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -478,16 +476,17 @@
  )
 )
 
-;;; Code for jsoptional.Main [vtable]
+ ;;; Code for jsoptional.Main [vtable]
  (global.set $jsoptional.Main.vtable (struct.new_with_rtt $jsoptional.Main.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_method1__int__java_lang_Double__java_lang_Integer__void@jsoptional.Main) (ref.func $m_method2__java_lang_String__java_lang_Double__arrayOf_java_lang_Boolean__void@jsoptional.Main) (ref.func $m_testFunction__jsoptional_Main_Function__void@jsoptional.Main) (ref.func $m_testOptionalFunction__jsoptional_Main_Function__void@jsoptional.Main) (rtt.canon $jsoptional.Main.vtable)))
-;;; Code for jsoptional.Main.AFunction [vtable]
- (global.set $jsoptional.Main.AFunction.vtable (struct.new_with_rtt $jsoptional.Main.AFunction.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object@jsoptional.Main.AFunction) (rtt.canon $jsoptional.Main.AFunction.vtable)))
-;;; Code for jsoptional.Main.TemplatedSubtype [vtable]
- (global.set $jsoptional.Main.TemplatedSubtype.vtable (struct.new_with_rtt $jsoptional.Main.TemplatedSubtype.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_m__java_lang_String__java_lang_Object__void@jsoptional.Main.TemplatedSubtype) (ref.func $m_m__java_lang_Object__java_lang_Object__void@jsoptional.Main.TemplatedSubtype) (rtt.canon $jsoptional.Main.TemplatedSubtype.vtable)))
-;;; Code for jsoptional.Main.SpecializedSubtype [vtable]
- (global.set $jsoptional.Main.SpecializedSubtype.vtable (struct.new_with_rtt $jsoptional.Main.SpecializedSubtype.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_m__java_lang_String__java_lang_Object__void@jsoptional.Main.SpecializedSubtype) (ref.func $m_m__java_lang_Object__java_lang_Object__void@jsoptional.Main.SpecializedSubtype) (rtt.canon $jsoptional.Main.SpecializedSubtype.vtable)))
-;;; Code for jsoptional.Main.NonJsTypeSubtype [vtable]
- (global.set $jsoptional.Main.NonJsTypeSubtype.vtable (struct.new_with_rtt $jsoptional.Main.NonJsTypeSubtype.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_m__java_lang_String__java_lang_Object__void@jsoptional.Main.NonJsTypeSubtype) (ref.func $m_m__java_lang_Object__java_lang_Object__void@jsoptional.Main.NonJsTypeSubtype) (rtt.canon $jsoptional.Main.NonJsTypeSubtype.vtable)))
-))
-(start $.runtime.init)
 
+ ;;; Code for jsoptional.Main.AFunction [vtable]
+ (global.set $jsoptional.Main.AFunction.vtable (struct.new_with_rtt $jsoptional.Main.AFunction.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object@jsoptional.Main.AFunction) (rtt.canon $jsoptional.Main.AFunction.vtable)))
+
+ ;;; Code for jsoptional.Main.TemplatedSubtype [vtable]
+ (global.set $jsoptional.Main.TemplatedSubtype.vtable (struct.new_with_rtt $jsoptional.Main.TemplatedSubtype.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_m__java_lang_String__java_lang_Object__void@jsoptional.Main.TemplatedSubtype) (ref.func $m_m__java_lang_Object__java_lang_Object__void@jsoptional.Main.TemplatedSubtype) (rtt.canon $jsoptional.Main.TemplatedSubtype.vtable)))
+
+ ;;; Code for jsoptional.Main.SpecializedSubtype [vtable]
+ (global.set $jsoptional.Main.SpecializedSubtype.vtable (struct.new_with_rtt $jsoptional.Main.SpecializedSubtype.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_m__java_lang_String__java_lang_Object__void@jsoptional.Main.SpecializedSubtype) (ref.func $m_m__java_lang_Object__java_lang_Object__void@jsoptional.Main.SpecializedSubtype) (rtt.canon $jsoptional.Main.SpecializedSubtype.vtable)))
+
+ ;;; Code for jsoptional.Main.NonJsTypeSubtype [vtable]
+ (global.set $jsoptional.Main.NonJsTypeSubtype.vtable (struct.new_with_rtt $jsoptional.Main.NonJsTypeSubtype.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_m__java_lang_String__java_lang_Object__void@jsoptional.Main.NonJsTypeSubtype) (ref.func $m_m__java_lang_Object__java_lang_Object__void@jsoptional.Main.NonJsTypeSubtype) (rtt.canon $jsoptional.Main.NonJsTypeSubtype.vtable)))

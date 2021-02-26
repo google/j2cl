@@ -1,6 +1,4 @@
-;;; Code for nestedlocalclasses.NestedLocalClasses
-
-;;; CLASS  NestedLocalClasses
+;;; Code for nestedlocalclasses.NestedLocalClasses [CLASS]
 (type $nestedlocalclasses.NestedLocalClasses (struct
  (field $vtable (ref null $nestedlocalclasses.NestedLocalClasses.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -65,7 +63,7 @@
  )
 )
 
-;;; CLASS  InnerClass
+;;; Code for nestedlocalclasses.NestedLocalClasses.1InnerClass [CLASS]
 (type $nestedlocalclasses.NestedLocalClasses.1InnerClass (struct
  (field $vtable (ref null $nestedlocalclasses.NestedLocalClasses.1InnerClass.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -139,7 +137,7 @@
  )
 )
 
-;;; CLASS  InnerInnerClass
+;;; Code for nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass [CLASS]
 (type $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass (struct
  (field $vtable (ref null $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -212,7 +210,7 @@
  )
 )
 
-;;; CLASS  ClassIndirectlyCapturingLocal
+;;; Code for nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal [CLASS]
 (type $nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal (struct
  (field $vtable (ref null $nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -284,7 +282,7 @@
  )
 )
 
-;;; INTERFACE  InterfaceWithThisReference
+;;; Code for nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference [INTERFACE]
 (global $f_$initialized__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference (mut i32) (i32.const 0))
 
 ;;; void InterfaceWithThisReference.foo()
@@ -316,7 +314,7 @@
  )
 )
 
-;;; CLASS  Super
+;;; Code for nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super [CLASS]
 (type $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super (struct
  (field $vtable (ref null $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -384,7 +382,7 @@
  )
 )
 
-;;; CLASS  <anonymous> extends Super
+;;; Code for nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1 [CLASS]
 (type $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1 (struct
  (field $vtable (ref null $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -437,18 +435,20 @@
  )
 )
 
-;;; Code for nestedlocalclasses.NestedLocalClasses [vtable]
+ ;;; Code for nestedlocalclasses.NestedLocalClasses [vtable]
  (global.set $nestedlocalclasses.NestedLocalClasses.vtable (struct.new_with_rtt $nestedlocalclasses.NestedLocalClasses.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__int__void@nestedlocalclasses.NestedLocalClasses) (rtt.canon $nestedlocalclasses.NestedLocalClasses.vtable)))
-;;; Code for nestedlocalclasses.NestedLocalClasses.1InnerClass [vtable]
- (global.set $nestedlocalclasses.NestedLocalClasses.1InnerClass.vtable (struct.new_with_rtt $nestedlocalclasses.NestedLocalClasses.1InnerClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_fun__void@nestedlocalclasses.NestedLocalClasses.1InnerClass) (rtt.canon $nestedlocalclasses.NestedLocalClasses.1InnerClass.vtable)))
-;;; Code for nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass [vtable]
- (global.set $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass.vtable (struct.new_with_rtt $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass.vtable)))
-;;; Code for nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal [vtable]
- (global.set $nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal.vtable (struct.new_with_rtt $nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal.vtable)))
-;;; Code for nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super [vtable]
- (global.set $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super.vtable (struct.new_with_rtt $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__void@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super) (rtt.canon $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super.vtable)))
-;;; Code for nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1 [vtable]
- (global.set $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1.vtable (struct.new_with_rtt $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__void@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super) (rtt.canon $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1.vtable)))
-))
-(start $.runtime.init)
 
+ ;;; Code for nestedlocalclasses.NestedLocalClasses.1InnerClass [vtable]
+ (global.set $nestedlocalclasses.NestedLocalClasses.1InnerClass.vtable (struct.new_with_rtt $nestedlocalclasses.NestedLocalClasses.1InnerClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_fun__void@nestedlocalclasses.NestedLocalClasses.1InnerClass) (rtt.canon $nestedlocalclasses.NestedLocalClasses.1InnerClass.vtable)))
+
+ ;;; Code for nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass [vtable]
+ (global.set $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass.vtable (struct.new_with_rtt $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass.vtable)))
+
+ ;;; Code for nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal [vtable]
+ (global.set $nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal.vtable (struct.new_with_rtt $nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal.vtable)))
+
+ ;;; Code for nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super [vtable]
+ (global.set $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super.vtable (struct.new_with_rtt $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__void@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super) (rtt.canon $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super.vtable)))
+
+ ;;; Code for nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1 [vtable]
+ (global.set $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1.vtable (struct.new_with_rtt $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__void@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super) (rtt.canon $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1.vtable)))

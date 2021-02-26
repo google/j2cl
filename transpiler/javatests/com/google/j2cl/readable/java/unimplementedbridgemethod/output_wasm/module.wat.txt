@@ -1,6 +1,4 @@
-;;; Code for unimplementedbridgemethod.Foo
-
-;;; INTERFACE  I
+;;; Code for unimplementedbridgemethod.I [INTERFACE]
 (global $f_$initialized__unimplementedbridgemethod_I (mut i32) (i32.const 0))
 
 ;;; int I.staticFoo()
@@ -36,7 +34,7 @@
  )
 )
 
-;;; INTERFACE  J
+;;; Code for unimplementedbridgemethod.J [INTERFACE]
 (global $f_$initialized__unimplementedbridgemethod_J (mut i32) (i32.const 0))
 
 ;;; void J.$clinit()
@@ -56,7 +54,7 @@
  )
 )
 
-;;; CLASS  Bar
+;;; Code for unimplementedbridgemethod.Bar [CLASS]
 (type $unimplementedbridgemethod.Bar (struct
  (field $vtable (ref null $unimplementedbridgemethod.Bar.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -103,7 +101,7 @@
  )
 )
 
-;;; CLASS  Foo
+;;; Code for unimplementedbridgemethod.Foo [CLASS]
 (type $unimplementedbridgemethod.Foo (struct
  (field $vtable (ref null $unimplementedbridgemethod.Foo.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -149,4 +147,3 @@
   )
  )
 )
-

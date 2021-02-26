@@ -1,6 +1,4 @@
-;;; Code for annotation.Main
-
-;;; CLASS  Main
+;;; Code for annotation.Main [CLASS]
 (type $annotation.Main (struct
  (field $vtable (ref null $annotation.Main.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -47,7 +45,7 @@
  )
 )
 
-;;; INTERFACE  Foo
+;;; Code for annotation.Main.Foo [INTERFACE]
 (global $f_CONSTANT__annotation_Main_Foo i32 (i32.const 123))
 (global $f_$initialized__annotation_Main_Foo (mut i32) (i32.const 0))
 
@@ -68,7 +66,7 @@
  )
 )
 
-;;; CLASS  Bar
+;;; Code for annotation.Main.Bar [CLASS]
 (type $annotation.Main.Bar (struct
  (field $vtable (ref null $annotation.Main.Bar.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -144,10 +142,8 @@
  )
 )
 
-;;; Code for annotation.Main [vtable]
+ ;;; Code for annotation.Main [vtable]
  (global.set $annotation.Main.vtable (struct.new_with_rtt $annotation.Main.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $annotation.Main.vtable)))
-;;; Code for annotation.Main.Bar [vtable]
- (global.set $annotation.Main.Bar.vtable (struct.new_with_rtt $annotation.Main.Bar.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_baz__int_$pp_annotation@annotation.Main.Bar) (rtt.canon $annotation.Main.Bar.vtable)))
-))
-(start $.runtime.init)
 
+ ;;; Code for annotation.Main.Bar [vtable]
+ (global.set $annotation.Main.Bar.vtable (struct.new_with_rtt $annotation.Main.Bar.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_baz__int_$pp_annotation@annotation.Main.Bar) (rtt.canon $annotation.Main.Bar.vtable)))

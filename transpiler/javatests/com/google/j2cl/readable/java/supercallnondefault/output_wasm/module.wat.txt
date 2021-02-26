@@ -1,6 +1,4 @@
-;;; Code for supercallnondefault.Child
-
-;;; CLASS  Parent
+;;; Code for supercallnondefault.Parent [CLASS]
 (type $supercallnondefault.Parent (struct
  (field $vtable (ref null $supercallnondefault.Parent.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -51,7 +49,7 @@
  )
 )
 
-;;; CLASS  Child
+;;; Code for supercallnondefault.Child [CLASS]
 (type $supercallnondefault.Child (struct
  (field $vtable (ref null $supercallnondefault.Child.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -100,10 +98,8 @@
  )
 )
 
-;;; Code for supercallnondefault.Parent [vtable]
+ ;;; Code for supercallnondefault.Parent [vtable]
  (global.set $supercallnondefault.Parent.vtable (struct.new_with_rtt $supercallnondefault.Parent.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $supercallnondefault.Parent.vtable)))
-;;; Code for supercallnondefault.Child [vtable]
- (global.set $supercallnondefault.Child.vtable (struct.new_with_rtt $supercallnondefault.Child.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $supercallnondefault.Child.vtable)))
-))
-(start $.runtime.init)
 
+ ;;; Code for supercallnondefault.Child [vtable]
+ (global.set $supercallnondefault.Child.vtable (struct.new_with_rtt $supercallnondefault.Child.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $supercallnondefault.Child.vtable)))

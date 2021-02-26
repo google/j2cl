@@ -1,6 +1,4 @@
-;;; Code for devirtualizedsupermethodcall.Main
-
-;;; CLASS  SubNumber
+;;; Code for devirtualizedsupermethodcall.SubNumber [CLASS]
 (type $devirtualizedsupermethodcall.SubNumber (struct
  (field $vtable (ref null $devirtualizedsupermethodcall.SubNumber.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -125,7 +123,7 @@
  )
 )
 
-;;; CLASS  FooCallsSuperObjectMethod
+;;; Code for devirtualizedsupermethodcall.FooCallsSuperObjectMethod [CLASS]
 (type $devirtualizedsupermethodcall.FooCallsSuperObjectMethod (struct
  (field $vtable (ref null $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -190,7 +188,7 @@
  )
 )
 
-;;; CLASS  Main
+;;; Code for devirtualizedsupermethodcall.Main [CLASS]
 (type $devirtualizedsupermethodcall.Main (struct
  (field $vtable (ref null $devirtualizedsupermethodcall.Main.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -270,12 +268,11 @@
  )
 )
 
-;;; Code for devirtualizedsupermethodcall.SubNumber [vtable]
+ ;;; Code for devirtualizedsupermethodcall.SubNumber [vtable]
  (global.set $devirtualizedsupermethodcall.SubNumber.vtable (struct.new_with_rtt $devirtualizedsupermethodcall.SubNumber.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_byteValue__byte@java.lang.Number) (ref.func $m_doubleValue__double@devirtualizedsupermethodcall.SubNumber) (ref.func $m_floatValue__float@devirtualizedsupermethodcall.SubNumber) (ref.func $m_intValue__int@devirtualizedsupermethodcall.SubNumber) (ref.func $m_longValue__long@devirtualizedsupermethodcall.SubNumber) (ref.func $m_shortValue__short@java.lang.Number) (rtt.canon $devirtualizedsupermethodcall.SubNumber.vtable)))
-;;; Code for devirtualizedsupermethodcall.FooCallsSuperObjectMethod [vtable]
- (global.set $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable (struct.new_with_rtt $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@devirtualizedsupermethodcall.FooCallsSuperObjectMethod) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable)))
-;;; Code for devirtualizedsupermethodcall.Main [vtable]
- (global.set $devirtualizedsupermethodcall.Main.vtable (struct.new_with_rtt $devirtualizedsupermethodcall.Main.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_main__void@devirtualizedsupermethodcall.Main) (rtt.canon $devirtualizedsupermethodcall.Main.vtable)))
-))
-(start $.runtime.init)
 
+ ;;; Code for devirtualizedsupermethodcall.FooCallsSuperObjectMethod [vtable]
+ (global.set $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable (struct.new_with_rtt $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@devirtualizedsupermethodcall.FooCallsSuperObjectMethod) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable)))
+
+ ;;; Code for devirtualizedsupermethodcall.Main [vtable]
+ (global.set $devirtualizedsupermethodcall.Main.vtable (struct.new_with_rtt $devirtualizedsupermethodcall.Main.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_main__void@devirtualizedsupermethodcall.Main) (rtt.canon $devirtualizedsupermethodcall.Main.vtable)))

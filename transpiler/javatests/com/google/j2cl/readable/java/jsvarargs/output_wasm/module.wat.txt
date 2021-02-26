@@ -1,6 +1,4 @@
-;;; Code for jsvarargs.Main
-
-;;; CLASS  Main
+;;; Code for jsvarargs.Main [CLASS]
 (type $jsvarargs.Main (struct
  (field $vtable (ref null $jsvarargs.Main.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -741,7 +739,7 @@
  )
 )
 
-;;; CLASS  NativeObject
+;;; Code for jsvarargs.Main.NativeObject [CLASS]
 (type $jsvarargs.Main.NativeObject (struct
  (field $vtable (ref null $jsvarargs.Main.NativeObject.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -791,7 +789,7 @@
  )
 )
 
-;;; CLASS  SubVarargsConstructorClass
+;;; Code for jsvarargs.Main.SubVarargsConstructorClass [CLASS]
 (type $jsvarargs.Main.SubVarargsConstructorClass (struct
  (field $vtable (ref null $jsvarargs.Main.SubVarargsConstructorClass.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -840,7 +838,7 @@
  )
 )
 
-;;; INTERFACE  Function
+;;; Code for jsvarargs.Main.Function [INTERFACE]
 (global $f_$initialized__jsvarargs_Main_Function (mut i32) (i32.const 0))
 
 ;;; void Function.$clinit()
@@ -860,7 +858,7 @@
  )
 )
 
-;;; CLASS  AbstractMethodWithVarargs
+;;; Code for jsvarargs.Main.AbstractMethodWithVarargs [CLASS]
 (type $jsvarargs.Main.AbstractMethodWithVarargs (struct
  (field $vtable (ref null $jsvarargs.Main.AbstractMethodWithVarargs.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -910,7 +908,7 @@
  )
 )
 
-;;; INTERFACE  StaticInterfaceMethodWithVarargs
+;;; Code for jsvarargs.Main.StaticInterfaceMethodWithVarargs [INTERFACE]
 (global $f_$initialized__jsvarargs_Main_StaticInterfaceMethodWithVarargs (mut i32) (i32.const 0))
 
 ;;; void StaticInterfaceMethodWithVarargs.staticMethod(int... args)
@@ -941,7 +939,7 @@
  )
 )
 
-;;; CLASS  AFunction
+;;; Code for jsvarargs.Main.AFunction [CLASS]
 (type $jsvarargs.Main.AFunction (struct
  (field $vtable (ref null $jsvarargs.Main.AFunction.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -1009,7 +1007,7 @@
  )
 )
 
-;;; CLASS  SubMain
+;;; Code for jsvarargs.Main.SubMain [CLASS]
 (type $jsvarargs.Main.SubMain (struct
  (field $vtable (ref null $jsvarargs.Main.SubMain.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -1134,7 +1132,7 @@
  )
 )
 
-;;; INTERFACE  GenericFunction
+;;; Code for jsvarargs.Main.GenericFunction [INTERFACE]
 (global $f_$initialized__jsvarargs_Main_GenericFunction (mut i32) (i32.const 0))
 
 ;;; void GenericFunction.$clinit()
@@ -1153,9 +1151,8 @@
   )
  )
 )
-;;; Code for jsvarargs.QualifiedSuperMethodCall
 
-;;; CLASS  QualifiedSuperMethodCall
+;;; Code for jsvarargs.QualifiedSuperMethodCall [CLASS]
 (type $jsvarargs.QualifiedSuperMethodCall (struct
  (field $vtable (ref null $jsvarargs.QualifiedSuperMethodCall.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -1213,7 +1210,7 @@
  )
 )
 
-;;; CLASS  InnerClass
+;;; Code for jsvarargs.QualifiedSuperMethodCall.InnerClass [CLASS]
 (type $jsvarargs.QualifiedSuperMethodCall.InnerClass (struct
  (field $vtable (ref null $jsvarargs.QualifiedSuperMethodCall.InnerClass.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -1322,20 +1319,23 @@
  )
 )
 
-;;; Code for jsvarargs.Main [vtable]
+ ;;; Code for jsvarargs.Main [vtable]
  (global.set $jsvarargs.Main.vtable (struct.new_with_rtt $jsvarargs.Main.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_f3__int__arrayOf_int__int@jsvarargs.Main) (ref.func $m_f4__arrayOf_int__int@jsvarargs.Main) (ref.func $m_testStaticMethodNotFirst__void@jsvarargs.Main) (ref.func $m_testStaticMethodFirst__void@jsvarargs.Main) (ref.func $m_testInstanceMethodNotFirst__void@jsvarargs.Main) (ref.func $m_testInstanceMethodFirst__void@jsvarargs.Main) (ref.func $m_testJsFunction__void@jsvarargs.Main) (ref.func $m_testSideEffect__void@jsvarargs.Main) (ref.func $m_testNullJsVarargs__void@jsvarargs.Main) (ref.func $m_testGenericJsFunctionWithVarags__void@jsvarargs.Main) (rtt.canon $jsvarargs.Main.vtable)))
-;;; Code for jsvarargs.Main.NativeObject [vtable]
- (global.set $jsvarargs.Main.NativeObject.vtable (struct.new_with_rtt $jsvarargs.Main.NativeObject.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $jsvarargs.Main.NativeObject.vtable)))
-;;; Code for jsvarargs.Main.SubVarargsConstructorClass [vtable]
- (global.set $jsvarargs.Main.SubVarargsConstructorClass.vtable (struct.new_with_rtt $jsvarargs.Main.SubVarargsConstructorClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $jsvarargs.Main.SubVarargsConstructorClass.vtable)))
-;;; Code for jsvarargs.Main.AFunction [vtable]
- (global.set $jsvarargs.Main.AFunction.vtable (struct.new_with_rtt $jsvarargs.Main.AFunction.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_f1__int__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main.AFunction) (rtt.canon $jsvarargs.Main.AFunction.vtable)))
-;;; Code for jsvarargs.Main.SubMain [vtable]
- (global.set $jsvarargs.Main.SubMain.vtable (struct.new_with_rtt $jsvarargs.Main.SubMain.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_f3__int__arrayOf_int__int@jsvarargs.Main.SubMain) (ref.func $m_f4__arrayOf_int__int@jsvarargs.Main) (ref.func $m_testStaticMethodNotFirst__void@jsvarargs.Main) (ref.func $m_testStaticMethodFirst__void@jsvarargs.Main) (ref.func $m_testInstanceMethodNotFirst__void@jsvarargs.Main) (ref.func $m_testInstanceMethodFirst__void@jsvarargs.Main) (ref.func $m_testJsFunction__void@jsvarargs.Main) (ref.func $m_testSideEffect__void@jsvarargs.Main) (ref.func $m_testNullJsVarargs__void@jsvarargs.Main) (ref.func $m_testGenericJsFunctionWithVarags__void@jsvarargs.Main) (rtt.canon $jsvarargs.Main.SubMain.vtable)))
-;;; Code for jsvarargs.QualifiedSuperMethodCall [vtable]
- (global.set $jsvarargs.QualifiedSuperMethodCall.vtable (struct.new_with_rtt $jsvarargs.QualifiedSuperMethodCall.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_f3__int__arrayOf_int__int@jsvarargs.Main) (ref.func $m_f4__arrayOf_int__int@jsvarargs.Main) (ref.func $m_testStaticMethodNotFirst__void@jsvarargs.Main) (ref.func $m_testStaticMethodFirst__void@jsvarargs.Main) (ref.func $m_testInstanceMethodNotFirst__void@jsvarargs.Main) (ref.func $m_testInstanceMethodFirst__void@jsvarargs.Main) (ref.func $m_testJsFunction__void@jsvarargs.Main) (ref.func $m_testSideEffect__void@jsvarargs.Main) (ref.func $m_testNullJsVarargs__void@jsvarargs.Main) (ref.func $m_testGenericJsFunctionWithVarags__void@jsvarargs.Main) (rtt.canon $jsvarargs.QualifiedSuperMethodCall.vtable)))
-;;; Code for jsvarargs.QualifiedSuperMethodCall.InnerClass [vtable]
- (global.set $jsvarargs.QualifiedSuperMethodCall.InnerClass.vtable (struct.new_with_rtt $jsvarargs.QualifiedSuperMethodCall.InnerClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__void@jsvarargs.QualifiedSuperMethodCall.InnerClass) (rtt.canon $jsvarargs.QualifiedSuperMethodCall.InnerClass.vtable)))
-))
-(start $.runtime.init)
 
+ ;;; Code for jsvarargs.Main.NativeObject [vtable]
+ (global.set $jsvarargs.Main.NativeObject.vtable (struct.new_with_rtt $jsvarargs.Main.NativeObject.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $jsvarargs.Main.NativeObject.vtable)))
+
+ ;;; Code for jsvarargs.Main.SubVarargsConstructorClass [vtable]
+ (global.set $jsvarargs.Main.SubVarargsConstructorClass.vtable (struct.new_with_rtt $jsvarargs.Main.SubVarargsConstructorClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $jsvarargs.Main.SubVarargsConstructorClass.vtable)))
+
+ ;;; Code for jsvarargs.Main.AFunction [vtable]
+ (global.set $jsvarargs.Main.AFunction.vtable (struct.new_with_rtt $jsvarargs.Main.AFunction.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_f1__int__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main.AFunction) (rtt.canon $jsvarargs.Main.AFunction.vtable)))
+
+ ;;; Code for jsvarargs.Main.SubMain [vtable]
+ (global.set $jsvarargs.Main.SubMain.vtable (struct.new_with_rtt $jsvarargs.Main.SubMain.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_f3__int__arrayOf_int__int@jsvarargs.Main.SubMain) (ref.func $m_f4__arrayOf_int__int@jsvarargs.Main) (ref.func $m_testStaticMethodNotFirst__void@jsvarargs.Main) (ref.func $m_testStaticMethodFirst__void@jsvarargs.Main) (ref.func $m_testInstanceMethodNotFirst__void@jsvarargs.Main) (ref.func $m_testInstanceMethodFirst__void@jsvarargs.Main) (ref.func $m_testJsFunction__void@jsvarargs.Main) (ref.func $m_testSideEffect__void@jsvarargs.Main) (ref.func $m_testNullJsVarargs__void@jsvarargs.Main) (ref.func $m_testGenericJsFunctionWithVarags__void@jsvarargs.Main) (rtt.canon $jsvarargs.Main.SubMain.vtable)))
+
+ ;;; Code for jsvarargs.QualifiedSuperMethodCall [vtable]
+ (global.set $jsvarargs.QualifiedSuperMethodCall.vtable (struct.new_with_rtt $jsvarargs.QualifiedSuperMethodCall.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_f3__int__arrayOf_int__int@jsvarargs.Main) (ref.func $m_f4__arrayOf_int__int@jsvarargs.Main) (ref.func $m_testStaticMethodNotFirst__void@jsvarargs.Main) (ref.func $m_testStaticMethodFirst__void@jsvarargs.Main) (ref.func $m_testInstanceMethodNotFirst__void@jsvarargs.Main) (ref.func $m_testInstanceMethodFirst__void@jsvarargs.Main) (ref.func $m_testJsFunction__void@jsvarargs.Main) (ref.func $m_testSideEffect__void@jsvarargs.Main) (ref.func $m_testNullJsVarargs__void@jsvarargs.Main) (ref.func $m_testGenericJsFunctionWithVarags__void@jsvarargs.Main) (rtt.canon $jsvarargs.QualifiedSuperMethodCall.vtable)))
+
+ ;;; Code for jsvarargs.QualifiedSuperMethodCall.InnerClass [vtable]
+ (global.set $jsvarargs.QualifiedSuperMethodCall.InnerClass.vtable (struct.new_with_rtt $jsvarargs.QualifiedSuperMethodCall.InnerClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__void@jsvarargs.QualifiedSuperMethodCall.InnerClass) (rtt.canon $jsvarargs.QualifiedSuperMethodCall.InnerClass.vtable)))

@@ -1,6 +1,4 @@
-;;; Code for srcjar.Foo
-
-;;; CLASS  Foo
+;;; Code for srcjar.Foo [CLASS]
 (type $srcjar.Foo (struct
  (field $vtable (ref null $srcjar.Foo.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -46,9 +44,8 @@
   )
  )
 )
-;;; Code for srcjar.Srcjar
 
-;;; CLASS  Srcjar
+;;; Code for srcjar.Srcjar [CLASS]
 (type $srcjar.Srcjar (struct
  (field $vtable (ref null $srcjar.Srcjar.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -109,10 +106,8 @@
  )
 )
 
-;;; Code for srcjar.Foo [vtable]
+ ;;; Code for srcjar.Foo [vtable]
  (global.set $srcjar.Foo.vtable (struct.new_with_rtt $srcjar.Foo.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $srcjar.Foo.vtable)))
-;;; Code for srcjar.Srcjar [vtable]
- (global.set $srcjar.Srcjar.vtable (struct.new_with_rtt $srcjar.Srcjar.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $srcjar.Srcjar.vtable)))
-))
-(start $.runtime.init)
 
+ ;;; Code for srcjar.Srcjar [vtable]
+ (global.set $srcjar.Srcjar.vtable (struct.new_with_rtt $srcjar.Srcjar.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $srcjar.Srcjar.vtable)))

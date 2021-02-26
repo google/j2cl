@@ -1,6 +1,4 @@
-;;; Code for innerclassinheritance.ChildClass
-
-;;; CLASS  ParentOuter
+;;; Code for innerclassinheritance.ParentOuter [CLASS]
 (type $innerclassinheritance.ParentOuter (struct
  (field $vtable (ref null $innerclassinheritance.ParentOuter.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -61,7 +59,7 @@
  )
 )
 
-;;; CLASS  ParentInner
+;;; Code for innerclassinheritance.ParentInner [CLASS]
 (type $innerclassinheritance.ParentInner (struct
  (field $vtable (ref null $innerclassinheritance.ParentInner.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -122,7 +120,7 @@
  )
 )
 
-;;; CLASS  ChildClass
+;;; Code for innerclassinheritance.ChildClass [CLASS]
 (type $innerclassinheritance.ChildClass (struct
  (field $vtable (ref null $innerclassinheritance.ChildClass.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -206,7 +204,7 @@
  )
 )
 
-;;; CLASS  InnerClass
+;;; Code for innerclassinheritance.ChildClass.InnerClass [CLASS]
 (type $innerclassinheritance.ChildClass.InnerClass (struct
  (field $vtable (ref null $innerclassinheritance.ChildClass.InnerClass.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -326,7 +324,7 @@
  )
 )
 
-;;; CLASS  LocalClass
+;;; Code for innerclassinheritance.ChildClass.1LocalClass [CLASS]
 (type $innerclassinheritance.ChildClass.1LocalClass (struct
  (field $vtable (ref null $innerclassinheritance.ChildClass.1LocalClass.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -430,9 +428,8 @@
   )
  )
 )
-;;; Code for innerclassinheritance.MultipleNestings
 
-;;; CLASS  MultipleNestings
+;;; Code for innerclassinheritance.MultipleNestings [CLASS]
 (type $innerclassinheritance.MultipleNestings (struct
  (field $vtable (ref null $innerclassinheritance.MultipleNestings.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -492,7 +489,7 @@
  )
 )
 
-;;; CLASS  Parent
+;;; Code for innerclassinheritance.MultipleNestings.Parent [CLASS]
 (type $innerclassinheritance.MultipleNestings.Parent (struct
  (field $vtable (ref null $innerclassinheritance.MultipleNestings.Parent.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -556,7 +553,7 @@
  )
 )
 
-;;; CLASS  InnerClass1
+;;; Code for innerclassinheritance.MultipleNestings.InnerClass1 [CLASS]
 (type $innerclassinheritance.MultipleNestings.InnerClass1 (struct
  (field $vtable (ref null $innerclassinheritance.MultipleNestings.InnerClass1.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -622,7 +619,7 @@
  )
 )
 
-;;; CLASS  InnerClass2
+;;; Code for innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 [CLASS]
 (type $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 (struct
  (field $vtable (ref null $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -717,24 +714,29 @@
  )
 )
 
-;;; Code for innerclassinheritance.ParentOuter [vtable]
+ ;;; Code for innerclassinheritance.ParentOuter [vtable]
  (global.set $innerclassinheritance.ParentOuter.vtable (struct.new_with_rtt $innerclassinheritance.ParentOuter.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_funInParentOuter__void@innerclassinheritance.ParentOuter) (rtt.canon $innerclassinheritance.ParentOuter.vtable)))
-;;; Code for innerclassinheritance.ParentInner [vtable]
- (global.set $innerclassinheritance.ParentInner.vtable (struct.new_with_rtt $innerclassinheritance.ParentInner.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_funInParentInner__void@innerclassinheritance.ParentInner) (rtt.canon $innerclassinheritance.ParentInner.vtable)))
-;;; Code for innerclassinheritance.ChildClass [vtable]
- (global.set $innerclassinheritance.ChildClass.vtable (struct.new_with_rtt $innerclassinheritance.ChildClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_funInParentOuter__void@innerclassinheritance.ParentOuter) (ref.func $m_funInOuter__void@innerclassinheritance.ChildClass) (ref.func $m_testLocalClass__void@innerclassinheritance.ChildClass) (rtt.canon $innerclassinheritance.ChildClass.vtable)))
-;;; Code for innerclassinheritance.ChildClass.InnerClass [vtable]
- (global.set $innerclassinheritance.ChildClass.InnerClass.vtable (struct.new_with_rtt $innerclassinheritance.ChildClass.InnerClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_funInParentInner__void@innerclassinheritance.ParentInner) (ref.func $m_funInInner__void@innerclassinheritance.ChildClass.InnerClass) (ref.func $m_testInnerClass__int@innerclassinheritance.ChildClass.InnerClass) (rtt.canon $innerclassinheritance.ChildClass.InnerClass.vtable)))
-;;; Code for innerclassinheritance.ChildClass.1LocalClass [vtable]
- (global.set $innerclassinheritance.ChildClass.1LocalClass.vtable (struct.new_with_rtt $innerclassinheritance.ChildClass.1LocalClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_funInParentOuter__void@innerclassinheritance.ChildClass.1LocalClass) (ref.func $m_funInOuter__void@innerclassinheritance.ChildClass) (ref.func $m_testLocalClass__void@innerclassinheritance.ChildClass) (ref.func $m_test__void@innerclassinheritance.ChildClass.1LocalClass) (rtt.canon $innerclassinheritance.ChildClass.1LocalClass.vtable)))
-;;; Code for innerclassinheritance.MultipleNestings [vtable]
- (global.set $innerclassinheritance.MultipleNestings.vtable (struct.new_with_rtt $innerclassinheritance.MultipleNestings.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_funInM__void@innerclassinheritance.MultipleNestings) (rtt.canon $innerclassinheritance.MultipleNestings.vtable)))
-;;; Code for innerclassinheritance.MultipleNestings.Parent [vtable]
- (global.set $innerclassinheritance.MultipleNestings.Parent.vtable (struct.new_with_rtt $innerclassinheritance.MultipleNestings.Parent.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_fun__void@innerclassinheritance.MultipleNestings.Parent) (rtt.canon $innerclassinheritance.MultipleNestings.Parent.vtable)))
-;;; Code for innerclassinheritance.MultipleNestings.InnerClass1 [vtable]
- (global.set $innerclassinheritance.MultipleNestings.InnerClass1.vtable (struct.new_with_rtt $innerclassinheritance.MultipleNestings.InnerClass1.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_fun__void@innerclassinheritance.MultipleNestings.Parent) (ref.func $m_funInI1__void@innerclassinheritance.MultipleNestings.InnerClass1) (rtt.canon $innerclassinheritance.MultipleNestings.InnerClass1.vtable)))
-;;; Code for innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 [vtable]
- (global.set $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.vtable (struct.new_with_rtt $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_fun__void@innerclassinheritance.MultipleNestings.Parent) (ref.func $m_funInI2__void@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2) (ref.func $m_test__void@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2) (rtt.canon $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.vtable)))
-))
-(start $.runtime.init)
 
+ ;;; Code for innerclassinheritance.ParentInner [vtable]
+ (global.set $innerclassinheritance.ParentInner.vtable (struct.new_with_rtt $innerclassinheritance.ParentInner.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_funInParentInner__void@innerclassinheritance.ParentInner) (rtt.canon $innerclassinheritance.ParentInner.vtable)))
+
+ ;;; Code for innerclassinheritance.ChildClass [vtable]
+ (global.set $innerclassinheritance.ChildClass.vtable (struct.new_with_rtt $innerclassinheritance.ChildClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_funInParentOuter__void@innerclassinheritance.ParentOuter) (ref.func $m_funInOuter__void@innerclassinheritance.ChildClass) (ref.func $m_testLocalClass__void@innerclassinheritance.ChildClass) (rtt.canon $innerclassinheritance.ChildClass.vtable)))
+
+ ;;; Code for innerclassinheritance.ChildClass.InnerClass [vtable]
+ (global.set $innerclassinheritance.ChildClass.InnerClass.vtable (struct.new_with_rtt $innerclassinheritance.ChildClass.InnerClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_funInParentInner__void@innerclassinheritance.ParentInner) (ref.func $m_funInInner__void@innerclassinheritance.ChildClass.InnerClass) (ref.func $m_testInnerClass__int@innerclassinheritance.ChildClass.InnerClass) (rtt.canon $innerclassinheritance.ChildClass.InnerClass.vtable)))
+
+ ;;; Code for innerclassinheritance.ChildClass.1LocalClass [vtable]
+ (global.set $innerclassinheritance.ChildClass.1LocalClass.vtable (struct.new_with_rtt $innerclassinheritance.ChildClass.1LocalClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_funInParentOuter__void@innerclassinheritance.ChildClass.1LocalClass) (ref.func $m_funInOuter__void@innerclassinheritance.ChildClass) (ref.func $m_testLocalClass__void@innerclassinheritance.ChildClass) (ref.func $m_test__void@innerclassinheritance.ChildClass.1LocalClass) (rtt.canon $innerclassinheritance.ChildClass.1LocalClass.vtable)))
+
+ ;;; Code for innerclassinheritance.MultipleNestings [vtable]
+ (global.set $innerclassinheritance.MultipleNestings.vtable (struct.new_with_rtt $innerclassinheritance.MultipleNestings.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_funInM__void@innerclassinheritance.MultipleNestings) (rtt.canon $innerclassinheritance.MultipleNestings.vtable)))
+
+ ;;; Code for innerclassinheritance.MultipleNestings.Parent [vtable]
+ (global.set $innerclassinheritance.MultipleNestings.Parent.vtable (struct.new_with_rtt $innerclassinheritance.MultipleNestings.Parent.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_fun__void@innerclassinheritance.MultipleNestings.Parent) (rtt.canon $innerclassinheritance.MultipleNestings.Parent.vtable)))
+
+ ;;; Code for innerclassinheritance.MultipleNestings.InnerClass1 [vtable]
+ (global.set $innerclassinheritance.MultipleNestings.InnerClass1.vtable (struct.new_with_rtt $innerclassinheritance.MultipleNestings.InnerClass1.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_fun__void@innerclassinheritance.MultipleNestings.Parent) (ref.func $m_funInI1__void@innerclassinheritance.MultipleNestings.InnerClass1) (rtt.canon $innerclassinheritance.MultipleNestings.InnerClass1.vtable)))
+
+ ;;; Code for innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 [vtable]
+ (global.set $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.vtable (struct.new_with_rtt $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_fun__void@innerclassinheritance.MultipleNestings.Parent) (ref.func $m_funInI2__void@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2) (ref.func $m_test__void@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2) (rtt.canon $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.vtable)))

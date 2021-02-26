@@ -1,6 +1,4 @@
-;;; Code for staticconstant.StaticConstant
-
-;;; CLASS  StaticConstant
+;;; Code for staticconstant.StaticConstant [CLASS]
 (type $staticconstant.StaticConstant (struct
  (field $vtable (ref null $staticconstant.StaticConstant.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -48,8 +46,5 @@
  )
 )
 
-;;; Code for staticconstant.StaticConstant [vtable]
+ ;;; Code for staticconstant.StaticConstant [vtable]
  (global.set $staticconstant.StaticConstant.vtable (struct.new_with_rtt $staticconstant.StaticConstant.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $staticconstant.StaticConstant.vtable)))
-))
-(start $.runtime.init)
-

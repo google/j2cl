@@ -1,6 +1,4 @@
-;;; Code for aptgeneratordep.Dummy
-
-;;; CLASS  Dummy
+;;; Code for aptgeneratordep.Dummy [CLASS]
 (type $aptgeneratordep.Dummy (struct
  (field $vtable (ref null $aptgeneratordep.Dummy.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -46,9 +44,8 @@
   )
  )
 )
-;;; Code for aptgeneratordep.Foo
 
-;;; CLASS  Foo
+;;; Code for aptgeneratordep.Foo [CLASS]
 (type $aptgeneratordep.Foo (struct
  (field $vtable (ref null $aptgeneratordep.Foo.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -113,10 +110,8 @@
  )
 )
 
-;;; Code for aptgeneratordep.Dummy [vtable]
+ ;;; Code for aptgeneratordep.Dummy [vtable]
  (global.set $aptgeneratordep.Dummy.vtable (struct.new_with_rtt $aptgeneratordep.Dummy.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $aptgeneratordep.Dummy.vtable)))
-;;; Code for aptgeneratordep.Foo [vtable]
- (global.set $aptgeneratordep.Foo.vtable (struct.new_with_rtt $aptgeneratordep.Foo.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@aptgeneratordep.Foo) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $aptgeneratordep.Foo.vtable)))
-))
-(start $.runtime.init)
 
+ ;;; Code for aptgeneratordep.Foo [vtable]
+ (global.set $aptgeneratordep.Foo.vtable (struct.new_with_rtt $aptgeneratordep.Foo.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@aptgeneratordep.Foo) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $aptgeneratordep.Foo.vtable)))

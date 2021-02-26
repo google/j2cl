@@ -1,6 +1,4 @@
-;;; Code for importglobaljstypes.Date
-
-;;; CLASS  Date
+;;; Code for importglobaljstypes.Date [CLASS]
 (type $importglobaljstypes.Date (struct
  (field $vtable (ref null $importglobaljstypes.Date.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -84,7 +82,7 @@
  )
 )
 
-;;; CLASS  NativeDate
+;;; Code for importglobaljstypes.Date.NativeDate [CLASS]
 (type $importglobaljstypes.Date.NativeDate (struct
  (field $vtable (ref null $importglobaljstypes.Date.NativeDate.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -143,9 +141,8 @@
   )
  )
 )
-;;; Code for importglobaljstypes.Number
 
-;;; CLASS  Number
+;;; Code for importglobaljstypes.Number [CLASS]
 (type $importglobaljstypes.Number (struct
  (field $vtable (ref null $importglobaljstypes.Number.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -274,7 +271,7 @@
  )
 )
 
-;;; INTERFACE  NativeFunction
+;;; Code for importglobaljstypes.Number.NativeFunction [INTERFACE]
 (global $f_$initialized__importglobaljstypes_Number_NativeFunction (mut i32) (i32.const 0))
 
 ;;; void NativeFunction.$clinit()
@@ -294,7 +291,7 @@
  )
 )
 
-;;; INTERFACE  MyLiteralType
+;;; Code for importglobaljstypes.Number.MyLiteralType [INTERFACE]
 (global $f_$initialized__importglobaljstypes_Number_MyLiteralType (mut i32) (i32.const 0))
 
 ;;; void MyLiteralType.$clinit()
@@ -314,12 +311,11 @@
  )
 )
 
-;;; Code for importglobaljstypes.Date [vtable]
+ ;;; Code for importglobaljstypes.Date [vtable]
  (global.set $importglobaljstypes.Date.vtable (struct.new_with_rtt $importglobaljstypes.Date.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_copy__importglobaljstypes_Date_NativeDate__importglobaljstypes_Date_NativeDate@importglobaljstypes.Date) (rtt.canon $importglobaljstypes.Date.vtable)))
-;;; Code for importglobaljstypes.Date.NativeDate [vtable]
- (global.set $importglobaljstypes.Date.NativeDate.vtable (struct.new_with_rtt $importglobaljstypes.Date.NativeDate.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $importglobaljstypes.Date.NativeDate.vtable)))
-;;; Code for importglobaljstypes.Number [vtable]
- (global.set $importglobaljstypes.Number.vtable (struct.new_with_rtt $importglobaljstypes.Number.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_testJsDocForLiteralType__importglobaljstypes_Number_MyLiteralType__importglobaljstypes_Number_MyLiteralType@importglobaljstypes.Number) (rtt.canon $importglobaljstypes.Number.vtable)))
-))
-(start $.runtime.init)
 
+ ;;; Code for importglobaljstypes.Date.NativeDate [vtable]
+ (global.set $importglobaljstypes.Date.NativeDate.vtable (struct.new_with_rtt $importglobaljstypes.Date.NativeDate.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $importglobaljstypes.Date.NativeDate.vtable)))
+
+ ;;; Code for importglobaljstypes.Number [vtable]
+ (global.set $importglobaljstypes.Number.vtable (struct.new_with_rtt $importglobaljstypes.Number.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_testJsDocForLiteralType__importglobaljstypes_Number_MyLiteralType__importglobaljstypes_Number_MyLiteralType@importglobaljstypes.Number) (rtt.canon $importglobaljstypes.Number.vtable)))

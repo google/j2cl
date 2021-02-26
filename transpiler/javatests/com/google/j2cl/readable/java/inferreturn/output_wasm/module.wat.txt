@@ -1,6 +1,4 @@
-;;; Code for inferreturn.InferReturn
-
-;;; CLASS  InferReturn
+;;; Code for inferreturn.InferReturn [CLASS]
 (type $inferreturn.InferReturn (struct
  (field $vtable (ref null $inferreturn.InferReturn.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -185,8 +183,5 @@
  )
 )
 
-;;; Code for inferreturn.InferReturn [vtable]
+ ;;; Code for inferreturn.InferReturn [vtable]
  (global.set $inferreturn.InferReturn.vtable (struct.new_with_rtt $inferreturn.InferReturn.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $inferreturn.InferReturn.vtable)))
-))
-(start $.runtime.init)
-

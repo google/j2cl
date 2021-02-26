@@ -1,6 +1,4 @@
-;;; Code for simplegenerictype.SimpleGenericType
-
-;;; CLASS  SimpleGenericType
+;;; Code for simplegenerictype.SimpleGenericType [CLASS]
 (type $simplegenerictype.SimpleGenericType (struct
  (field $vtable (ref null $simplegenerictype.SimpleGenericType.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -72,8 +70,5 @@
  )
 )
 
-;;; Code for simplegenerictype.SimpleGenericType [vtable]
+ ;;; Code for simplegenerictype.SimpleGenericType [vtable]
  (global.set $simplegenerictype.SimpleGenericType.vtable (struct.new_with_rtt $simplegenerictype.SimpleGenericType.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__void@simplegenerictype.SimpleGenericType) (rtt.canon $simplegenerictype.SimpleGenericType.vtable)))
-))
-(start $.runtime.init)
-

@@ -1,7 +1,4 @@
-;;; Code for packageinfo.package-info
-;;; Code for packageinfo.Outer
-
-;;; CLASS  Outer
+;;; Code for packageinfo.Outer [CLASS]
 (type $packageinfo.Outer (struct
  (field $vtable (ref null $packageinfo.Outer.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -50,7 +47,7 @@
  )
 )
 
-;;; CLASS  Inner
+;;; Code for packageinfo.Outer.Inner [CLASS]
 (type $packageinfo.Outer.Inner (struct
  (field $vtable (ref null $packageinfo.Outer.Inner.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -102,9 +99,8 @@
   )
  )
 )
-;;; Code for packageinfo.subpackage.Foo
 
-;;; CLASS  Foo
+;;; Code for packageinfo.subpackage.Foo [CLASS]
 (type $packageinfo.subpackage.Foo (struct
  (field $vtable (ref null $packageinfo.subpackage.Foo.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -165,12 +161,11 @@
  )
 )
 
-;;; Code for packageinfo.Outer [vtable]
+ ;;; Code for packageinfo.Outer [vtable]
  (global.set $packageinfo.Outer.vtable (struct.new_with_rtt $packageinfo.Outer.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $packageinfo.Outer.vtable)))
-;;; Code for packageinfo.Outer.Inner [vtable]
- (global.set $packageinfo.Outer.Inner.vtable (struct.new_with_rtt $packageinfo.Outer.Inner.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $packageinfo.Outer.Inner.vtable)))
-;;; Code for packageinfo.subpackage.Foo [vtable]
- (global.set $packageinfo.subpackage.Foo.vtable (struct.new_with_rtt $packageinfo.subpackage.Foo.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $packageinfo.subpackage.Foo.vtable)))
-))
-(start $.runtime.init)
 
+ ;;; Code for packageinfo.Outer.Inner [vtable]
+ (global.set $packageinfo.Outer.Inner.vtable (struct.new_with_rtt $packageinfo.Outer.Inner.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $packageinfo.Outer.Inner.vtable)))
+
+ ;;; Code for packageinfo.subpackage.Foo [vtable]
+ (global.set $packageinfo.subpackage.Foo.vtable (struct.new_with_rtt $packageinfo.subpackage.Foo.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $packageinfo.subpackage.Foo.vtable)))

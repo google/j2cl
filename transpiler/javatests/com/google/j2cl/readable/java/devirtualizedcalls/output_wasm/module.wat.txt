@@ -1,6 +1,4 @@
-;;; Code for devirtualizedcalls.ArrayCalls
-
-;;; CLASS  ArrayCalls
+;;; Code for devirtualizedcalls.ArrayCalls [CLASS]
 (type $devirtualizedcalls.ArrayCalls (struct
  (field $vtable (ref null $devirtualizedcalls.ArrayCalls.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -78,9 +76,8 @@
   )
  )
 )
-;;; Code for devirtualizedcalls.CharSequenceCalls
 
-;;; CLASS  CharSequenceCalls
+;;; Code for devirtualizedcalls.CharSequenceCalls [CLASS]
 (type $devirtualizedcalls.CharSequenceCalls (struct
  (field $vtable (ref null $devirtualizedcalls.CharSequenceCalls.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -167,9 +164,8 @@
   )
  )
 )
-;;; Code for devirtualizedcalls.NumberCalls
 
-;;; CLASS  NumberCalls
+;;; Code for devirtualizedcalls.NumberCalls [CLASS]
 (type $devirtualizedcalls.NumberCalls (struct
  (field $vtable (ref null $devirtualizedcalls.NumberCalls.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -432,9 +428,8 @@
   )
  )
 )
-;;; Code for devirtualizedcalls.ObjectCalls
 
-;;; CLASS  ObjectCalls
+;;; Code for devirtualizedcalls.ObjectCalls [CLASS]
 (type $devirtualizedcalls.ObjectCalls (struct
  (field $vtable (ref null $devirtualizedcalls.ObjectCalls.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -546,9 +541,8 @@
   )
  )
 )
-;;; Code for devirtualizedcalls.StringCalls
 
-;;; CLASS  StringCalls
+;;; Code for devirtualizedcalls.StringCalls [CLASS]
 (type $devirtualizedcalls.StringCalls (struct
  (field $vtable (ref null $devirtualizedcalls.StringCalls.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -639,16 +633,17 @@
  )
 )
 
-;;; Code for devirtualizedcalls.ArrayCalls [vtable]
+ ;;; Code for devirtualizedcalls.ArrayCalls [vtable]
  (global.set $devirtualizedcalls.ArrayCalls.vtable (struct.new_with_rtt $devirtualizedcalls.ArrayCalls.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_main__void@devirtualizedcalls.ArrayCalls) (rtt.canon $devirtualizedcalls.ArrayCalls.vtable)))
-;;; Code for devirtualizedcalls.CharSequenceCalls [vtable]
- (global.set $devirtualizedcalls.CharSequenceCalls.vtable (struct.new_with_rtt $devirtualizedcalls.CharSequenceCalls.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__java_lang_CharSequence__void@devirtualizedcalls.CharSequenceCalls) (ref.func $m_main__void@devirtualizedcalls.CharSequenceCalls) (rtt.canon $devirtualizedcalls.CharSequenceCalls.vtable)))
-;;; Code for devirtualizedcalls.NumberCalls [vtable]
- (global.set $devirtualizedcalls.NumberCalls.vtable (struct.new_with_rtt $devirtualizedcalls.NumberCalls.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_main__void@devirtualizedcalls.NumberCalls) (rtt.canon $devirtualizedcalls.NumberCalls.vtable)))
-;;; Code for devirtualizedcalls.ObjectCalls [vtable]
- (global.set $devirtualizedcalls.ObjectCalls.vtable (struct.new_with_rtt $devirtualizedcalls.ObjectCalls.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_main__void@devirtualizedcalls.ObjectCalls) (ref.func $m_test__void@devirtualizedcalls.ObjectCalls) (rtt.canon $devirtualizedcalls.ObjectCalls.vtable)))
-;;; Code for devirtualizedcalls.StringCalls [vtable]
- (global.set $devirtualizedcalls.StringCalls.vtable (struct.new_with_rtt $devirtualizedcalls.StringCalls.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_main__void@devirtualizedcalls.StringCalls) (rtt.canon $devirtualizedcalls.StringCalls.vtable)))
-))
-(start $.runtime.init)
 
+ ;;; Code for devirtualizedcalls.CharSequenceCalls [vtable]
+ (global.set $devirtualizedcalls.CharSequenceCalls.vtable (struct.new_with_rtt $devirtualizedcalls.CharSequenceCalls.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__java_lang_CharSequence__void@devirtualizedcalls.CharSequenceCalls) (ref.func $m_main__void@devirtualizedcalls.CharSequenceCalls) (rtt.canon $devirtualizedcalls.CharSequenceCalls.vtable)))
+
+ ;;; Code for devirtualizedcalls.NumberCalls [vtable]
+ (global.set $devirtualizedcalls.NumberCalls.vtable (struct.new_with_rtt $devirtualizedcalls.NumberCalls.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_main__void@devirtualizedcalls.NumberCalls) (rtt.canon $devirtualizedcalls.NumberCalls.vtable)))
+
+ ;;; Code for devirtualizedcalls.ObjectCalls [vtable]
+ (global.set $devirtualizedcalls.ObjectCalls.vtable (struct.new_with_rtt $devirtualizedcalls.ObjectCalls.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_main__void@devirtualizedcalls.ObjectCalls) (ref.func $m_test__void@devirtualizedcalls.ObjectCalls) (rtt.canon $devirtualizedcalls.ObjectCalls.vtable)))
+
+ ;;; Code for devirtualizedcalls.StringCalls [vtable]
+ (global.set $devirtualizedcalls.StringCalls.vtable (struct.new_with_rtt $devirtualizedcalls.StringCalls.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_main__void@devirtualizedcalls.StringCalls) (rtt.canon $devirtualizedcalls.StringCalls.vtable)))

@@ -1,6 +1,4 @@
-;;; Code for abstractinnerclass.InnerClasses
-
-;;; CLASS  InnerClasses
+;;; Code for abstractinnerclass.InnerClasses [CLASS]
 (type $abstractinnerclass.InnerClasses (struct
  (field $vtable (ref null $abstractinnerclass.InnerClasses.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -47,7 +45,7 @@
  )
 )
 
-;;; INTERFACE  A
+;;; Code for abstractinnerclass.InnerClasses.A [INTERFACE]
 (global $f_$initialized__abstractinnerclass_InnerClasses_A (mut i32) (i32.const 0))
 
 ;;; void A.$clinit()
@@ -67,7 +65,7 @@
  )
 )
 
-;;; CLASS  B
+;;; Code for abstractinnerclass.InnerClasses.B [CLASS]
 (type $abstractinnerclass.InnerClasses.B (struct
  (field $vtable (ref null $abstractinnerclass.InnerClasses.B.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -129,7 +127,7 @@
  )
 )
 
-;;; CLASS  C
+;;; Code for abstractinnerclass.InnerClasses.C [CLASS]
 (type $abstractinnerclass.InnerClasses.C (struct
  (field $vtable (ref null $abstractinnerclass.InnerClasses.C.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -195,8 +193,5 @@
  )
 )
 
-;;; Code for abstractinnerclass.InnerClasses [vtable]
+ ;;; Code for abstractinnerclass.InnerClasses [vtable]
  (global.set $abstractinnerclass.InnerClasses.vtable (struct.new_with_rtt $abstractinnerclass.InnerClasses.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $abstractinnerclass.InnerClasses.vtable)))
-))
-(start $.runtime.init)
-

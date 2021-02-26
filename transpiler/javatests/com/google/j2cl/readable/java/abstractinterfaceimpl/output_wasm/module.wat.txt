@@ -1,6 +1,4 @@
-;;; Code for abstractinterfaceimpl.AbstractInterfaceImpl
-
-;;; INTERFACE  MyInterface
+;;; Code for abstractinterfaceimpl.MyInterface [INTERFACE]
 (global $f_$initialized__abstractinterfaceimpl_MyInterface (mut i32) (i32.const 0))
 
 ;;; void MyInterface.$clinit()
@@ -20,7 +18,7 @@
  )
 )
 
-;;; CLASS  AbstractInterfaceImpl
+;;; Code for abstractinterfaceimpl.AbstractInterfaceImpl [CLASS]
 (type $abstractinterfaceimpl.AbstractInterfaceImpl (struct
  (field $vtable (ref null $abstractinterfaceimpl.AbstractInterfaceImpl.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -66,4 +64,3 @@
   )
  )
 )
-

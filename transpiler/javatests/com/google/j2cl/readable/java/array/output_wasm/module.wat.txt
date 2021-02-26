@@ -1,6 +1,4 @@
-;;; Code for array.Arrays
-
-;;; CLASS  Arrays
+;;; Code for array.Arrays [CLASS]
 (type $array.Arrays (struct
  (field $vtable (ref null $array.Arrays.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -680,7 +678,7 @@
  )
 )
 
-;;; CLASS  SomeObject
+;;; Code for array.Arrays.SomeObject [CLASS]
 (type $array.Arrays.SomeObject (struct
  (field $vtable (ref null $array.Arrays.SomeObject.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -731,7 +729,7 @@
  )
 )
 
-;;; CLASS  NativeType
+;;; Code for array.Arrays.NativeType [CLASS]
 (type $array.Arrays.NativeType (struct
  (field $vtable (ref null $array.Arrays.NativeType.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -780,7 +778,7 @@
  )
 )
 
-;;; CLASS  ArrayContainer
+;;; Code for array.Arrays.ArrayContainer [CLASS]
 (type $array.Arrays.ArrayContainer (struct
  (field $vtable (ref null $array.Arrays.ArrayContainer.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -828,14 +826,14 @@
  )
 )
 
-;;; Code for array.Arrays [vtable]
+ ;;; Code for array.Arrays [vtable]
  (global.set $array.Arrays.vtable (struct.new_with_rtt $array.Arrays.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_testObjectArray__void@array.Arrays) (ref.func $m_testJavaTypeArray__void@array.Arrays) (ref.func $m_testIntArrays__void_$pp_array@array.Arrays) (ref.func $m_testLongArrays__void_$pp_array@array.Arrays) (ref.func $m_testDevirtualizedTypeArrays__void_$pp_array@array.Arrays) (ref.func $m_testStringArrays__void_$pp_array@array.Arrays) (ref.func $m_testNativeArray__void@array.Arrays) (ref.func $m_testErasureCastsOnArrayAccess__void@array.Arrays) (ref.func $m_testArraysSupertypeClosureTypes__void@array.Arrays) (ref.func $m_consumesCloneable__java_lang_Cloneable__void@array.Arrays) (ref.func $m_consumesSerializable__java_io_Serializable__void@array.Arrays) (rtt.canon $array.Arrays.vtable)))
-;;; Code for array.Arrays.SomeObject [vtable]
- (global.set $array.Arrays.SomeObject.vtable (struct.new_with_rtt $array.Arrays.SomeObject.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $array.Arrays.SomeObject.vtable)))
-;;; Code for array.Arrays.NativeType [vtable]
- (global.set $array.Arrays.NativeType.vtable (struct.new_with_rtt $array.Arrays.NativeType.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $array.Arrays.NativeType.vtable)))
-;;; Code for array.Arrays.ArrayContainer [vtable]
- (global.set $array.Arrays.ArrayContainer.vtable (struct.new_with_rtt $array.Arrays.ArrayContainer.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $array.Arrays.ArrayContainer.vtable)))
-))
-(start $.runtime.init)
 
+ ;;; Code for array.Arrays.SomeObject [vtable]
+ (global.set $array.Arrays.SomeObject.vtable (struct.new_with_rtt $array.Arrays.SomeObject.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $array.Arrays.SomeObject.vtable)))
+
+ ;;; Code for array.Arrays.NativeType [vtable]
+ (global.set $array.Arrays.NativeType.vtable (struct.new_with_rtt $array.Arrays.NativeType.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $array.Arrays.NativeType.vtable)))
+
+ ;;; Code for array.Arrays.ArrayContainer [vtable]
+ (global.set $array.Arrays.ArrayContainer.vtable (struct.new_with_rtt $array.Arrays.ArrayContainer.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $array.Arrays.ArrayContainer.vtable)))

@@ -1,6 +1,4 @@
-;;; Code for functiontype.FunctionImpl
-
-;;; INTERFACE  Function
+;;; Code for functiontype.Function [INTERFACE]
 (global $f_$initialized__functiontype_Function (mut i32) (i32.const 0))
 
 ;;; void Function.$clinit()
@@ -20,7 +18,7 @@
  )
 )
 
-;;; CLASS  FunctionImpl
+;;; Code for functiontype.FunctionImpl [CLASS]
 (type $functiontype.FunctionImpl (struct
  (field $vtable (ref null $functiontype.FunctionImpl.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -81,8 +79,5 @@
  )
 )
 
-;;; Code for functiontype.FunctionImpl [vtable]
+ ;;; Code for functiontype.FunctionImpl [vtable]
  (global.set $functiontype.FunctionImpl.vtable (struct.new_with_rtt $functiontype.FunctionImpl.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__functiontype_Function__void@functiontype.FunctionImpl) (rtt.canon $functiontype.FunctionImpl.vtable)))
-))
-(start $.runtime.init)
-

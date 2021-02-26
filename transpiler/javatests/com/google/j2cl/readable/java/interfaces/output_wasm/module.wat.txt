@@ -1,6 +1,4 @@
-;;; Code for interfaces.Main
-
-;;; CLASS  Main
+;;; Code for interfaces.Main [CLASS]
 (type $interfaces.Main (struct
  (field $vtable (ref null $interfaces.Main.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -77,7 +75,7 @@
  )
 )
 
-;;; INTERFACE  Interface
+;;; Code for interfaces.Main.Interface [INTERFACE]
 (global $f_a__interfaces_Main_Interface i32 (i32.const 1))
 (global $f_b__interfaces_Main_Interface i32 (i32.const 2))
 (global $f_$initialized__interfaces_Main_Interface (mut i32) (i32.const 0))
@@ -132,7 +130,7 @@
  )
 )
 
-;;; INTERFACE  SubInterface
+;;; Code for interfaces.Main.SubInterface [INTERFACE]
 (global $f_$initialized__interfaces_Main_SubInterface (mut i32) (i32.const 0))
 
 ;;; void SubInterface.defaultMethod(String s)
@@ -167,7 +165,7 @@
  )
 )
 
-;;; CLASS  Implementor
+;;; Code for interfaces.Main.Implementor [CLASS]
 (type $interfaces.Main.Implementor (struct
  (field $vtable (ref null $interfaces.Main.Implementor.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -267,7 +265,7 @@
  )
 )
 
-;;; CLASS  AbstractImplementor
+;;; Code for interfaces.Main.AbstractImplementor [CLASS]
 (type $interfaces.Main.AbstractImplementor (struct
  (field $vtable (ref null $interfaces.Main.AbstractImplementor.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -352,10 +350,8 @@
  )
 )
 
-;;; Code for interfaces.Main [vtable]
+ ;;; Code for interfaces.Main [vtable]
  (global.set $interfaces.Main.vtable (struct.new_with_rtt $interfaces.Main.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_testInterfaceMembers__void_$pp_interfaces@interfaces.Main) (rtt.canon $interfaces.Main.vtable)))
-;;; Code for interfaces.Main.Implementor [vtable]
- (global.set $interfaces.Main.Implementor.vtable (struct.new_with_rtt $interfaces.Main.Implementor.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_interfaceMethod__void@interfaces.Main.Implementor) (ref.func $m_defaultMethod__java_lang_Object__void@interfaces.Main.Implementor) (ref.func $m_defaultMethod__java_lang_String__void@interfaces.Main.Implementor) (rtt.canon $interfaces.Main.Implementor.vtable)))
-))
-(start $.runtime.init)
 
+ ;;; Code for interfaces.Main.Implementor [vtable]
+ (global.set $interfaces.Main.Implementor.vtable (struct.new_with_rtt $interfaces.Main.Implementor.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_interfaceMethod__void@interfaces.Main.Implementor) (ref.func $m_defaultMethod__java_lang_Object__void@interfaces.Main.Implementor) (ref.func $m_defaultMethod__java_lang_String__void@interfaces.Main.Implementor) (rtt.canon $interfaces.Main.Implementor.vtable)))

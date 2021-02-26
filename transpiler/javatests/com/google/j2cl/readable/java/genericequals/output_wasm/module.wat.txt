@@ -1,6 +1,4 @@
-;;; Code for genericequals.GenericEquals
-
-;;; CLASS  GenericEquals
+;;; Code for genericequals.GenericEquals [CLASS]
 (type $genericequals.GenericEquals (struct
  (field $vtable (ref null $genericequals.GenericEquals.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
@@ -117,8 +115,5 @@
  )
 )
 
-;;; Code for genericequals.GenericEquals [vtable]
+ ;;; Code for genericequals.GenericEquals [vtable]
  (global.set $genericequals.GenericEquals.vtable (struct.new_with_rtt $genericequals.GenericEquals.vtable  (ref.func $m_equals__java_lang_Object__boolean@genericequals.GenericEquals) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__genericequals_GenericEquals__java_lang_Object@genericequals.GenericEquals) (rtt.canon $genericequals.GenericEquals.vtable)))
-))
-(start $.runtime.init)
-
