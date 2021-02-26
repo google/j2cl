@@ -952,6 +952,13 @@ public class JsInteropRestrictionsChecker {
       checkIllegalOverrides(method);
       checkMethodParameters(method);
 
+      if (method.getWasmInfo() != null && !(method.isNative() && method.isStatic())) {
+        problems.warning(
+            member.getSourcePosition(),
+            "Wasm method '%s' needs to be static native",
+            memberDescriptor.getReadableDescription());
+      }
+
       if (memberDescriptor.isNative()) {
         checkNativeMethod(method);
       }

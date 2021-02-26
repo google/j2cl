@@ -20,6 +20,9 @@ import static com.google.j2cl.integration.testing.Asserts.assertFalse;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static com.google.j2cl.integration.testing.Asserts.fail;
 
+import javaemul.internal.annotations.Wasm;
+import jsinterop.annotations.JsMethod;
+
 /**
  * Incrementally tests wasm features as they are being added.
  *
@@ -32,6 +35,7 @@ public class Main {
     testDynamicClassMethodDispatch();
     testSwitch();
     testArrays();
+    testWasmAnnotation();
   }
 
   static class A {
@@ -239,4 +243,12 @@ public class Main {
     assertTrue(partial3D[0][0][1] == 1);
     assertTrue(partial3D[0][0][2] == 2);
   }
+
+  private static void testWasmAnnotation() {
+    assertTrue(42 == multiply(6, 7));
+  }
+
+  @JsMethod // Exist to keep to test running under closure output
+  @Wasm("i32.mul")
+  private static native int multiply(int x, int y);
 }

@@ -415,6 +415,9 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     return true;
   }
 
+  @Nullable
+  public abstract String getWasmInfo();
+
   public boolean isPropertyGetter() {
     return isJsPropertyGetter() || getOrigin() == MethodOrigin.SYNTHETIC_PROPERTY_GETTER;
   }
@@ -900,6 +903,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     /** Internal use only. Use {@link #makeBridge}. */
     abstract Builder setBridgeTarget(MethodDescriptor bridgeOrigin);
+
+    public abstract Builder setWasmInfo(String value);
 
     public abstract Builder setEnumSyntheticMethod(boolean isEnumSyntheticMethod);
 

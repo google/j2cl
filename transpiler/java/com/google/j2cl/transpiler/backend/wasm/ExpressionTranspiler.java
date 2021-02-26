@@ -326,7 +326,14 @@ final class ExpressionTranspiler {
         } else {
           // Non polymorphic methods are called directly, regardless of whether they are
           // instance methods or not.
-          sourceBuilder.append("(call " + environment.getMethodImplementationName(target) + " ");
+
+          String wasmInfo = methodCall.getTarget().getWasmInfo();
+          if (wasmInfo == null) {
+            sourceBuilder.append("(call " + environment.getMethodImplementationName(target) + " ");
+          } else {
+            sourceBuilder.append("(" + wasmInfo);
+          }
+
           if (target.isStatic()) {
             renderTypedExpressions(target.getParameterTypeDescriptors(), methodCall.getArguments());
           } else {

@@ -727,6 +727,7 @@ class JdtUtils {
         .setReturnTypeDescriptor(returnTypeDescriptor)
         .setTypeParameterTypeDescriptors(typeParameterTypeDescriptors)
         .setJsInfo(jsInfo)
+        .setWasmInfo(getWasmInfo(methodBinding))
         .setJsFunction(isOrOverridesJsFunctionMethod(methodBinding))
         .setVisibility(visibility)
         .setStatic(isStatic)
@@ -741,6 +742,13 @@ class JdtUtils {
         .setDeprecated(isDeprecated(methodBinding))
         .setUncheckedCast(hasUncheckedCast)
         .build();
+  }
+
+  private static String getWasmInfo(IMethodBinding binding) {
+    return JdtAnnotationUtils.getStringAttribute(
+        JdtAnnotationUtils.findAnnotationBindingByName(
+            binding.getAnnotations(), "javaemul.internal.annotations.Wasm"),
+        "value");
   }
 
   private static boolean isOrOverridesJsFunctionMethod(IMethodBinding methodBinding) {
