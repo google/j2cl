@@ -1,4 +1,4 @@
-# [J2CL](http://j2cl.io)  &middot; ![Build Status](https://github.com/google/j2cl/workflows/build%20and%20tests/badge.svg)
+# [J2CL](http://j2cl.io)  &middot; [![Build Status](https://github.com/google/j2cl/actions/workflows/ci.yaml/badge.svg)](https://github.com/google/j2cl/actions/workflows/ci.yaml)
 
 Seamless Java in JavaScript applications that tightly optimizes with
 [Closure Compiler](https://github.com/google/closure-compiler)
