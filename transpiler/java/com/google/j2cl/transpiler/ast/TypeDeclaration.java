@@ -814,7 +814,7 @@ public abstract class TypeDeclaration
 
     abstract Optional<TypeDeclaration> getEnclosingTypeDeclaration();
 
-    abstract boolean isNative();
+    abstract Optional<JsEnumInfo> getJsEnumInfo();
 
     private static final ThreadLocalInterner<TypeDeclaration> interner =
         new ThreadLocalInterner<>();
@@ -822,6 +822,13 @@ public abstract class TypeDeclaration
     abstract TypeDeclaration autoBuild();
 
     public TypeDeclaration build() {
+      if (getJsEnumInfo().isPresent()) {
+        // The actual supertype for JsEnums is Object. JsEnum don't really extend Enum
+        // and modeling that fact in the type model allows passes that query assignability (e.g.
+        // to implement casts, instance ofs and JsEnum boxing etc.) to get the right answer.
+        setSuperTypeDescriptorFactory(() -> TypeDescriptors.get().javaLangObject);
+      }
+
       if (!getPackageName().isPresent() && getEnclosingTypeDeclaration().isPresent()) {
         setPackageName(getEnclosingTypeDeclaration().get().getPackageName());
       }

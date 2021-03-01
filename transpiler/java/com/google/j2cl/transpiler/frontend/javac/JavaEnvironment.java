@@ -1043,13 +1043,11 @@ class JavaEnvironment {
             .setEnclosingTypeDescriptor(createDeclaredTypeDescriptor(classType.getEnclosingType()))
             .setSuperTypeDescriptorFactory(
                 () ->
-                    (typeDeclaration.isJsEnum()
-                        ? TypeDescriptors.get().javaLangObject
-                        : createDeclaredTypeDescriptor(
-                            javacTypes.directSupertypes(classType).stream()
-                                .filter(Predicates.not(Type::isInterface))
-                                .findFirst()
-                                .orElse(null))))
+                    createDeclaredTypeDescriptor(
+                        javacTypes.directSupertypes(classType).stream()
+                            .filter(Predicates.not(Type::isInterface))
+                            .findFirst()
+                            .orElse(null)))
             .setInterfaceTypeDescriptorsFactory(
                 td ->
                     createTypeDescriptors(
@@ -1254,15 +1252,12 @@ class JavaEnvironment {
         .setPackageName(packageName)
         .setSuperTypeDescriptorFactory(
             () ->
-                (jsEnumInfo != null
-                    ? TypeDescriptors.get().javaLangObject
-                    : (DeclaredTypeDescriptor)
-                        applyNullabilityAnnotations(
-                            createDeclaredTypeDescriptor(typeElement.getSuperclass()),
-                            typeElement,
-                            position ->
-                                position.type == TargetType.CLASS_EXTENDS
-                                    && position.type_index == -1)))
+                (DeclaredTypeDescriptor)
+                    applyNullabilityAnnotations(
+                        createDeclaredTypeDescriptor(typeElement.getSuperclass()),
+                        typeElement,
+                        position ->
+                            position.type == TargetType.CLASS_EXTENDS && position.type_index == -1))
         .setTypeParameterDescriptors(
             typeParameterElements.stream()
                 .map(TypeParameterElement::asType)

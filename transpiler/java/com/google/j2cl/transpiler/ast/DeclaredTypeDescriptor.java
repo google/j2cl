@@ -1092,10 +1092,17 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
     private static final ThreadLocalInterner<DeclaredTypeDescriptor> interner =
         new ThreadLocalInterner<>();
 
+    abstract TypeDeclaration getTypeDeclaration();
+
     abstract DeclaredTypeDescriptor autoBuild();
 
     @SuppressWarnings("ReferenceEquality")
     public DeclaredTypeDescriptor build() {
+      if (getTypeDeclaration().isJsEnum()) {
+        // JsEnums don't extend Enum but Object. Fix it up on construction.
+        setSuperTypeDescriptorFactory(() -> TypeDescriptors.get().javaLangObject);
+      }
+
       DeclaredTypeDescriptor typeDescriptor = autoBuild();
 
       checkState(

@@ -1005,7 +1005,7 @@ class JdtUtils {
                 () -> createMethodDescriptor(typeBinding.getFunctionalInterfaceMethod()))
             .setJsFunctionMethodDescriptorFactory(() -> getJsFunctionMethodDescriptor(typeBinding))
             .setSuperTypeDescriptorFactory(
-                getSuperTypeFactory(typeDeclaration.isJsEnum(), typeBinding))
+                () -> createDeclaredTypeDescriptor(typeBinding.getSuperclass()))
             .setTypeArgumentDescriptors(getTypeArgumentTypeDescriptors(typeBinding))
             .setDeclaredFieldDescriptorsFactory(declaredFields)
             .setDeclaredMethodDescriptorsFactory(declaredMethods)
@@ -1115,7 +1115,8 @@ class JdtUtils {
         .setSimpleJsName(getJsName(typeBinding))
         .setCustomizedJsNamespace(getJsNamespace(typeBinding, packageInfoCache))
         .setPackageName(packageName)
-        .setSuperTypeDescriptorFactory(getSuperTypeFactory(jsEnumInfo != null, typeBinding))
+        .setSuperTypeDescriptorFactory(
+            () -> createDeclaredTypeDescriptor(typeBinding.getSuperclass()))
         .setTypeParameterDescriptors(
             getTypeArgumentTypeDescriptors(typeBinding, TypeVariable.class))
         .setVisibility(getVisibility(typeBinding))
@@ -1124,14 +1125,6 @@ class JdtUtils {
         .setUnusableByJsSuppressed(JsInteropAnnotationUtils.isUnusableByJsSuppressed(typeBinding))
         .setDeprecated(isDeprecated(typeBinding))
         .build();
-  }
-
-  private static Supplier<DeclaredTypeDescriptor> getSuperTypeFactory(
-      boolean isJsEnum, ITypeBinding typeBinding) {
-    return () ->
-        isJsEnum
-            ? TypeDescriptors.get().javaLangObject
-            : createDeclaredTypeDescriptor(typeBinding.getSuperclass());
   }
 
   private static boolean isAnnotatedWithFunctionalInterface(ITypeBinding typeBinding) {
