@@ -13,4 +13,5 @@ package(
 integration_test(
     name = "unusedmultiexpressionreturn",
     srcs = glob(["*.java"]),
+    enable_wasm = True,
 )

@@ -13,6 +13,7 @@ package(
 integration_test(
     name = "variables",
     srcs = glob(["*.java"]),
+    enable_wasm = True,
     # TODO(b/118184493): remove when Java 10 language support is enabled.
     j2cl_library_tags = ["manual"],
 )

@@ -14,4 +14,5 @@ package(
 integration_test(
     name = "srcjar",
     srcs = ["Main.srcjar"],
+    enable_wasm = True,
 )

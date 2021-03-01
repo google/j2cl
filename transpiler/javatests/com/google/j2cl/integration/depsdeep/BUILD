@@ -14,6 +14,7 @@ package(
 integration_test(
     name = "depsdeep",
     srcs = ["Main.java"],
+    enable_wasm = True,
     deps = [
         "//transpiler/javatests/com/google/j2cl/integration/depsdeep/bar",
         "//transpiler/javatests/com/google/j2cl/integration/depsdeep/foo",
