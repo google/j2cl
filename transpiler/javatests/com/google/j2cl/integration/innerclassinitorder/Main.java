@@ -235,8 +235,8 @@ public class Main {
       };
       results[i] = ap;
     }
-    for (AddNumber theAp : results) {
-      theAp.act();
+    for (int i = 0; i < results.length; i++) {
+      results[i].act();
     }
     assertTrue((number == 1156));
   }
