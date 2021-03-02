@@ -202,9 +202,9 @@ class AutoBoxing extends j_l_Object {
     boxD = Double.m_doubleValue__java_lang_Double(boxD) +
         Double.m_doubleValue__java_lang_Double(boxD);
     boxI = Integer.m_valueOf__int(
-        $Primitives.$coerceDivision(boxI.m_intValue__() / boxI.m_intValue__()));
+        $Primitives.coerceDivision(boxI.m_intValue__() / boxI.m_intValue__()));
     boxL = Long.m_valueOf__long(
-        $LongUtils.$divide(boxL.m_longValue__(), boxL.m_longValue__()));
+        $LongUtils.divide(boxL.m_longValue__(), boxL.m_longValue__()));
     boxBool = !Boolean.m_booleanValue__java_lang_Boolean(boxBool);
     boxI = Integer.m_valueOf__int(+boxI.m_intValue__());
     boxI = Integer.m_valueOf__int(-boxI.m_intValue__() | 0);
@@ -240,14 +240,14 @@ class AutoBoxing extends j_l_Object {
     d = boxB.m_byteValue__();
     d = boxF.m_floatValue__();
     d = boxI.m_intValue__();
-    d = $Primitives.$widenLongToDouble(boxL.m_longValue__());
+    d = $Primitives.widenLongToDouble(boxL.m_longValue__());
     d = boxS.m_shortValue__();
     d = boxC.m_charValue__();
     this.m_takesAndReturnsPrimitiveDouble__double(boxB.m_byteValue__());
     this.m_takesAndReturnsPrimitiveDouble__double(boxF.m_floatValue__());
     this.m_takesAndReturnsPrimitiveDouble__double(boxI.m_intValue__());
     this.m_takesAndReturnsPrimitiveDouble__double(
-        $Primitives.$widenLongToDouble(boxL.m_longValue__()));
+        $Primitives.widenLongToDouble(boxL.m_longValue__()));
     this.m_takesAndReturnsPrimitiveDouble__double(boxS.m_shortValue__());
     this.m_takesAndReturnsPrimitiveDouble__double(boxC.m_charValue__());
     let v = this.m_takesAndReturnsVoid__java_lang_Void(
@@ -258,7 +258,7 @@ class AutoBoxing extends j_l_Object {
         Double.m_doubleValue__java_lang_Double(boxD);
     f = boxF.m_floatValue__() - boxF.m_floatValue__();
     i = Math.imul(boxI.m_intValue__(), boxI.m_intValue__());
-    l = $LongUtils.$divide(boxL.m_longValue__(), boxL.m_longValue__());
+    l = $LongUtils.divide(boxL.m_longValue__(), boxL.m_longValue__());
     bool = !Boolean.m_booleanValue__java_lang_Boolean(boxBool);
     i = +boxI.m_intValue__();
     i = -boxI.m_intValue__() | 0;
@@ -271,8 +271,8 @@ class AutoBoxing extends j_l_Object {
                  boxI.m_intValue__() + (i = i + boxI.m_intValue__() | 0) | 0))
                 .m_intValue__() |
         0;
-    l = $LongUtils.$leftShift(
-        l, $Primitives.$narrowLongToInt(boxL.m_longValue__()));
+    l = $LongUtils.leftShift(
+        l, $Primitives.narrowLongToInt(boxL.m_longValue__()));
   }
 
   m_testUnboxingBoolean__() {
@@ -402,26 +402,26 @@ class AutoBoxing extends j_l_Object {
     AutoBoxing.$clinit();
     let n = /**@type {T}*/ (Long.m_valueOf__long($Long.fromInt(10)));
     let l = /**@type {Long}*/ (n).m_longValue__();
-    $Asserts.$assert($LongUtils.$equals(l, $Long.fromInt(10)));
-    n = Long.m_valueOf__long($LongUtils.$plus(
+    $Asserts.$assert($LongUtils.equals(l, $Long.fromInt(10)));
+    n = Long.m_valueOf__long($LongUtils.plus(
         /**@type {Long}*/ (n).m_longValue__(), $Long.fromInt(1)));
     l = /**@type {!$1Local<Long, T>}*/ ($1Local.$create__())
             .m_toLong__java_lang_Long_$pp_autoboxing(
                 Long.m_valueOf__long($Long.fromInt(11)));
-    $Asserts.$assert($LongUtils.$equals(l, $Long.fromInt(11)));
+    $Asserts.$assert($LongUtils.equals(l, $Long.fromInt(11)));
   }
   /** @template T */
   static m_testUnboxingFromIntersectionType__() {
     AutoBoxing.$clinit();
     let n = /**@type {T}*/ (Long.m_valueOf__long($Long.fromInt(10)));
     let l = /**@type {Long}*/ (n).m_longValue__();
-    $Asserts.$assert($LongUtils.$equals(l, $Long.fromInt(10)));
-    n = Long.m_valueOf__long($LongUtils.$plus(
+    $Asserts.$assert($LongUtils.equals(l, $Long.fromInt(10)));
+    n = Long.m_valueOf__long($LongUtils.plus(
         /**@type {Long}*/ (n).m_longValue__(), $Long.fromInt(1)));
     l = /**@type {!$2Local<Long, T>}*/ ($2Local.$create__())
             .m_toLong__java_lang_Long_$pp_autoboxing(
                 Long.m_valueOf__long($Long.fromInt(11)));
-    $Asserts.$assert($LongUtils.$equals(l, $Long.fromInt(11)));
+    $Asserts.$assert($LongUtils.equals(l, $Long.fromInt(11)));
     let i = Integer.m_valueOf__int(10).m_intValue__();
   }
 

@@ -24,114 +24,114 @@ import jsinterop.annotations.JsType;
 @JsType(namespace = "vmbootstrap")
 class LongUtils {
 
-  public static int $compare(NativeLong a, NativeLong b) {
+  public static int compare(NativeLong a, NativeLong b) {
     return a.compare(b);
   }
 
-  public static NativeLong $fromInt(int value) {
+  public static NativeLong fromInt(int value) {
     // Ensure int is coerced to 32 bits.
     return NativeLong.fromInt(value | 0);
   }
 
-  public static NativeLong $fromNumber(double value) {
+  public static NativeLong fromNumber(double value) {
     return NativeLong.fromNumber(value);
   }
 
-  public static int $toInt(NativeLong value) {
+  public static int toInt(NativeLong value) {
     return value.toInt();
   }
 
-  public static double $toNumber(NativeLong value) {
+  public static double toNumber(NativeLong value) {
     return value.toNumber();
   }
 
-  public static NativeLong $and(NativeLong leftLong, NativeLong rightLong) {
+  public static NativeLong bitAnd(NativeLong leftLong, NativeLong rightLong) {
     return leftLong.and(rightLong);
   }
 
-  public static NativeLong $not(NativeLong valueLong) {
+  public static NativeLong not(NativeLong valueLong) {
     return valueLong.not();
   }
 
-  public static NativeLong $divide(NativeLong leftLong, NativeLong rightLong) {
+  public static NativeLong divide(NativeLong leftLong, NativeLong rightLong) {
     LongUtils.checkDivisorZero(rightLong);
     return leftLong.div(rightLong);
   }
 
-  public static boolean $equals(NativeLong leftLong, NativeLong rightLong) {
+  public static boolean equals(NativeLong leftLong, NativeLong rightLong) {
     return leftLong.equals(rightLong);
   }
 
-  public static boolean $greater(NativeLong leftLong, NativeLong rightLong) {
+  public static boolean greater(NativeLong leftLong, NativeLong rightLong) {
     return leftLong.greaterThan(rightLong);
   }
 
-  public static boolean $greaterEquals(NativeLong leftLong, NativeLong rightLong) {
+  public static boolean greaterEquals(NativeLong leftLong, NativeLong rightLong) {
     return leftLong.greaterThanOrEqual(rightLong);
   }
 
-  public static NativeLong $leftShift(NativeLong valueLong, int numBits) {
+  public static NativeLong leftShift(NativeLong valueLong, int numBits) {
     return valueLong.shiftLeft(numBits);
   }
 
-  public static boolean $less(NativeLong leftLong, NativeLong rightLong) {
+  public static boolean less(NativeLong leftLong, NativeLong rightLong) {
     return leftLong.lessThan(rightLong);
   }
 
-  public static boolean $lessEquals(NativeLong leftLong, NativeLong rightLong) {
+  public static boolean lessEquals(NativeLong leftLong, NativeLong rightLong) {
     return leftLong.lessThanOrEqual(rightLong);
   }
 
-  public static NativeLong $minus(NativeLong leftLong, NativeLong rightLong) {
+  public static NativeLong minus(NativeLong leftLong, NativeLong rightLong) {
     return leftLong.subtract(rightLong);
   }
 
-  public static NativeLong $negate(NativeLong valueLong) {
+  public static NativeLong negate(NativeLong valueLong) {
     return valueLong.negate();
   }
 
-  public static boolean $notEquals(NativeLong leftLong, NativeLong rightLong) {
+  public static boolean notEquals(NativeLong leftLong, NativeLong rightLong) {
     return leftLong.notEquals(rightLong);
   }
 
-  public static NativeLong $or(NativeLong leftLong, NativeLong rightLong) {
+  public static NativeLong bitOr(NativeLong leftLong, NativeLong rightLong) {
     return leftLong.or(rightLong);
   }
 
-  public static NativeLong $plus(NativeLong leftLong, NativeLong rightLong) {
+  public static NativeLong plus(NativeLong leftLong, NativeLong rightLong) {
     return leftLong.add(rightLong);
   }
 
-  public static NativeLong $remainder(NativeLong leftLong, NativeLong rightLong) {
+  public static NativeLong remainder(NativeLong leftLong, NativeLong rightLong) {
     LongUtils.checkDivisorZero(rightLong);
     return leftLong.modulo(rightLong);
   }
 
-  public static NativeLong $rightShiftSigned(NativeLong valueLong, int numBits) {
+  public static NativeLong rightShiftSigned(NativeLong valueLong, int numBits) {
     return valueLong.shiftRight(numBits);
   }
 
-  public static NativeLong $rightShiftUnsigned(NativeLong valueLong, int numBits) {
+  public static NativeLong rightShiftUnsigned(NativeLong valueLong, int numBits) {
     return valueLong.shiftRightUnsigned(numBits);
   }
 
-  public static NativeLong $times(NativeLong leftLong, NativeLong rightLong) {
+  public static NativeLong times(NativeLong leftLong, NativeLong rightLong) {
     return leftLong.multiply(rightLong);
   }
 
-  public static NativeLong $xor(NativeLong leftLong, NativeLong rightLong) {
+  public static NativeLong bitXor(NativeLong leftLong, NativeLong rightLong) {
     return leftLong.xor(rightLong);
   }
 
-  public static int $getHighBits(NativeLong valueLong) {
+  public static int getHighBits(NativeLong valueLong) {
     return valueLong.getHighBits();
   }
 
-  public static int $getLowBits(NativeLong valueLong) {
+  public static int getLowBits(NativeLong valueLong) {
     return valueLong.getLowBits();
   }
 
-  public static String $toString(NativeLong valueLong) {
+  public static String toString(NativeLong valueLong) {
     return valueLong.toString();
   }
 

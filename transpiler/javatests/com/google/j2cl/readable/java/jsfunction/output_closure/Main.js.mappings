@@ -159,12 +159,12 @@
 [o = SimpleJsFunction[].class;] => [o = Class.$get($JavaScriptFunction, 1);] "jsfunction.Main.testJsFunctionClassLiterals"
 [testJsFunctionOptional] => [m_testJsFunctionOptional___$pp_jsfunction]
 [JsFunctionOptional f = (i, n) -> (int) (i + n);] => [let f = (/** number */ i, /** ?number= */ n) =>{
-   return $Primitives.$narrowDoubleToInt(i + Double.m_doubleValue__java_lang_Double(n));
+   return $Primitives.narrowDoubleToInt(i + Double.m_doubleValue__java_lang_Double(n));
   };] "jsfunction.Main.testJsFunctionOptional"
 [f] => [f] "f"
 [i] => [i] "i"
 [n] => [n] "n"
-[(int) (i + n)] => [return $Primitives.$narrowDoubleToInt(i + Double.m_doubleValue__java_lang_Double(n));] "jsfunction.Main.<lambda in testJsFunctionOptional>"
+[(int) (i + n)] => [return $Primitives.narrowDoubleToInt(i + Double.m_doubleValue__java_lang_Double(n));] "jsfunction.Main.<lambda in testJsFunctionOptional>"
 [setParametricJsFunction] => [set parametricJsFunction]
 [fn] => [fn] "fn"
 [setParametricJsFunction] => [Main.$clinit();] "jsfunction.Main.setParametricJsFunction"

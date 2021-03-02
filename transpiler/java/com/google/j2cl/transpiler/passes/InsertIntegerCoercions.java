@@ -52,9 +52,9 @@ public class InsertIntegerCoercions extends NormalizationPass {
               case REMAINDER:
                 // Division and remainder in addition to coercion to int they also need to
                 // throw ArithmeticException if the divisor is 0, and both things are handled by
-                // {@link Primitives.$coerceDivision}.
+                // {@link Primitives.coerceDivision}.
                 return RuntimeMethods.createPrimitivesMethodCall(
-                    "$coerceDivision", binaryExpression);
+                    "coerceDivision", binaryExpression);
               case TIMES:
                 // Multiplication is implemented using Math.imul which will coerce its operands,
                 // hence the coercion that might have been inserted by this pass can be removed

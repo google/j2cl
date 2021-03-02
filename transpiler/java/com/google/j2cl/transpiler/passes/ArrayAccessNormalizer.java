@@ -23,9 +23,7 @@ import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
 
-/**
- * Rewrites array set operations to use Arrays.$set or LongUtils.$set operations.
- */
+/** Rewrites array set operations to use the runtime method Arrays.$set. */
 public class ArrayAccessNormalizer extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {

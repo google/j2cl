@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.ast;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableList;
@@ -226,7 +227,7 @@ public class RuntimeMethods {
             .setParameterTypeDescriptors(PrimitiveTypes.LONG, PrimitiveTypes.LONG)
             .setReturnTypeDescriptor(returnTypeDescriptor)
             .build();
-    // LongUtils.$someOperation(leftOperand, rightOperand);
+    // LongUtils.someOperation(leftOperand, rightOperand);
     return MethodCall.Builder.from(longUtilsMethodDescriptor)
         .setArguments(leftOperand, rightOperand)
         .build();
@@ -283,7 +284,7 @@ public class RuntimeMethods {
         (PrimitiveTypeDescriptor) expression.getTypeDescriptor();
     String methodName =
         String.format(
-            "$narrow%sTo%s",
+            "narrow%sTo%s",
             toProperCase(fromTypeDescriptor.getSimpleSourceName()),
             toProperCase(toTypeDescriptor.getSimpleSourceName()));
     MethodDescriptor narrowMethodDescriptor =
@@ -295,7 +296,7 @@ public class RuntimeMethods {
             .setParameterTypeDescriptors(fromTypeDescriptor)
             .setReturnTypeDescriptor(toTypeDescriptor)
             .build();
-    // Primitives.$narrowAToB(expr);
+    // Primitives.narrowAToB(expr);
     return MethodCall.Builder.from(narrowMethodDescriptor).setArguments(expression).build();
   }
 
@@ -306,7 +307,7 @@ public class RuntimeMethods {
         (PrimitiveTypeDescriptor) expression.getTypeDescriptor();
     String widenMethodName =
         String.format(
-            "$widen%sTo%s",
+            "widen%sTo%s",
             toProperCase(fromTypeDescriptor.getSimpleSourceName()),
             toProperCase(toTypeDescriptor.getSimpleSourceName()));
     MethodDescriptor widenMethodDescriptor =
@@ -318,7 +319,7 @@ public class RuntimeMethods {
             .setParameterTypeDescriptors(fromTypeDescriptor)
             .setReturnTypeDescriptor(toTypeDescriptor)
             .build();
-    // Primitives.$widenAToB(expr);
+    // Primitives.widenAToB(expr);
     return MethodCall.Builder.from(widenMethodDescriptor).setArguments(expression).build();
   }
 
@@ -513,7 +514,7 @@ public class RuntimeMethods {
                           // Primitives methods
                           ImmutableMap.<String, MethodInfo>builder()
                               .put(
-                                  "$coerceDivision",
+                                  "coerceDivision",
                                   MethodInfo.newBuilder()
                                       .setReturnType(PrimitiveTypes.INT)
                                       .setParameters(PrimitiveTypes.INT)
@@ -524,13 +525,13 @@ public class RuntimeMethods {
                           // LongUtils methods
                           ImmutableMap.<String, MethodInfo>builder()
                               .put(
-                                  "$negate",
+                                  "negate",
                                   MethodInfo.newBuilder()
                                       .setReturnType(PrimitiveTypes.LONG)
                                       .setParameters(PrimitiveTypes.LONG)
                                       .build())
                               .put(
-                                  "$not",
+                                  "not",
                                   MethodInfo.newBuilder()
                                       .setReturnType(PrimitiveTypes.LONG)
                                       .setParameters(PrimitiveTypes.LONG)
@@ -614,6 +615,7 @@ public class RuntimeMethods {
       DeclaredTypeDescriptor vmTypeDescriptor, String methodName, List<Expression> arguments) {
     MethodInfo methodInfo =
         runtimeMethodInfoByMethodNameByType.get().get(vmTypeDescriptor).get(methodName);
+    checkNotNull(methodInfo, "%s#%s(%s)", vmTypeDescriptor, methodName, arguments);
     List<TypeDescriptor> parameterTypeDescriptors = methodInfo.getParameters();
     int requiredParameters = methodInfo.getRequiredParameters();
     TypeDescriptor returnTypeDescriptor = methodInfo.getReturnType();

@@ -59,23 +59,22 @@ class ArithmeticExpressions extends j_l_Object {
         c = ($value_1 = a, a = a - 1 | 0, $value_1), d = a = a + 1 | 0,
         e = a = a - 1 | 0, f = -a | 0, g = +a, h = ~a, i = 1 + 1 + 2 - 5 | 0,
         j = Math.imul(1 + 2, 3 + 4),
-        p = $Primitives.$coerceDivision(
-            Math.imul($Primitives.$coerceDivision(1 / 2), 3) % 4);
+        p = $Primitives.coerceDivision(
+            Math.imul($Primitives.coerceDivision(1 / 2), 3) % 4);
     let k = !((1 + 2 + 3 | 0) == 4), l = (1 + 2 | 0) != 4,
-        m = $Primitives.$widenLongToDouble(Long.f_MAX_VALUE__java_lang_Long) !=
+        m = $Primitives.widenLongToDouble(Long.f_MAX_VALUE__java_lang_Long) !=
         9.223372036854778E18;
-    let o = $Primitives.$coerceDivision((5 + 1 | 0) / 2) - 0;
+    let o = $Primitives.coerceDivision((5 + 1 | 0) / 2) - 0;
     a = a << 31;
     a = a << 1;
-    a = $Primitives.$narrowLongToInt(
-        $LongUtils.$plus($Primitives.$widenIntToLong(a), $Long.fromInt(1)));
-    a = $Primitives.$narrowLongToInt(
-        $LongUtils.$divide($Primitives.$widenIntToLong(a), $Long.fromInt(1)));
-    a = $Primitives.$narrowDoubleToInt(
-        a + Double.f_MAX_VALUE__java_lang_Double);
+    a = $Primitives.narrowLongToInt(
+        $LongUtils.plus($Primitives.widenIntToLong(a), $Long.fromInt(1)));
+    a = $Primitives.narrowLongToInt(
+        $LongUtils.divide($Primitives.widenIntToLong(a), $Long.fromInt(1)));
+    a = $Primitives.narrowDoubleToInt(a + Double.f_MAX_VALUE__java_lang_Double);
     k = !!(+k | +true);
     let s = 10;
-    k = (s = $Primitives.$narrowIntToShort(s + 1 | 0)) == 10;
+    k = (s = $Primitives.narrowIntToShort(s + 1 | 0)) == 10;
     let q = 3 >> 2;
     q = 3 >>> 2 | 0;
   }
@@ -85,11 +84,11 @@ class ArithmeticExpressions extends j_l_Object {
     $Arrays.$set(ints, 0, ints[0] + 1 | 0);
     $Arrays.$set(ints, 0, ints[0] - 1 | 0);
     $Arrays.$set(ints, 0, Math.imul(ints[0], 1));
-    $Arrays.$set(ints, 0, $Primitives.$coerceDivision(ints[0] / 1));
+    $Arrays.$set(ints, 0, $Primitives.coerceDivision(ints[0] / 1));
     ints[0] &= 1;
     ints[0] ^= 1;
     ints[0] |= 1;
-    $Arrays.$set(ints, 0, $Primitives.$coerceDivision(ints[0] % 1));
+    $Arrays.$set(ints, 0, $Primitives.coerceDivision(ints[0] % 1));
     ints[0] <<= 1;
     ints[0] >>= 1;
     $Arrays.$set(ints, 0, ints[0] >>> 1 | 0);
@@ -110,17 +109,17 @@ class ArithmeticExpressions extends j_l_Object {
       let $array_2 = ints, $index_2 = ($value_1 = i, i = i + 1 | 0, $value_1);
       $Arrays.$set(
           $array_2, $index_2,
-          $Primitives.$coerceDivision($array_2[$index_2] / 1));
+          $Primitives.coerceDivision($array_2[$index_2] / 1));
     }
     let longs = null;
-    $Arrays.$set(longs, 0, $LongUtils.$plus(longs[0], $Long.fromInt(1)));
-    $Arrays.$set(longs, 0, $LongUtils.$minus(longs[0], $Long.fromInt(1)));
-    $Arrays.$set(longs, 0, $LongUtils.$minus(longs[0], $Long.fromInt(1)));
+    $Arrays.$set(longs, 0, $LongUtils.plus(longs[0], $Long.fromInt(1)));
+    $Arrays.$set(longs, 0, $LongUtils.minus(longs[0], $Long.fromInt(1)));
+    $Arrays.$set(longs, 0, $LongUtils.minus(longs[0], $Long.fromInt(1)));
     {
       let $array_3 = ArithmeticExpressions.m_getLongArray__(), $index_3 = 0;
       $Arrays.$set(
           $array_3, $index_3,
-          $LongUtils.$plus($array_3[$index_3], $Long.fromInt(1)));
+          $LongUtils.plus($array_3[$index_3], $Long.fromInt(1)));
     }
     let booleans = null;
     $Arrays.$set(booleans, 0, !!(+booleans[0] | +true));
@@ -132,7 +131,7 @@ class ArithmeticExpressions extends j_l_Object {
     let shorts = null;
     let b =
         $Arrays.$set(
-            shorts, 0, $Primitives.$narrowIntToShort(shorts[0] + 1 | 0)) == 10;
+            shorts, 0, $Primitives.narrowIntToShort(shorts[0] + 1 | 0)) == 10;
   }
   /** @return {Array<!$Long>} */
   static m_getLongArray__() {
@@ -160,10 +159,10 @@ class ArithmeticExpressions extends j_l_Object {
          $value_1);
     let b = Byte.m_valueOf__byte(0);
     b = Byte.m_valueOf__byte(
-        $Primitives.$narrowIntToByte(b.m_byteValue__() + 1 | 0));
+        $Primitives.narrowIntToByte(b.m_byteValue__() + 1 | 0));
     let ch = Character.m_valueOf__char(99 /* "c" */);
-    ch = Character.m_valueOf__char($Primitives.$narrowIntToChar(
-        ch.m_charValue__() + 1 /* "\u0001" */ | 0));
+    ch = Character.m_valueOf__char(
+        $Primitives.narrowIntToChar(ch.m_charValue__() + 1 /* "\u0001" */ | 0));
     (f = Integer.m_valueOf__int(f.m_intValue__() + 1 | 0)).m_intValue__();
     ($value_2 = f, f = Integer.m_valueOf__int(f.m_intValue__() - 1 | 0),
      $value_2)
@@ -195,7 +194,7 @@ class ArithmeticExpressions extends j_l_Object {
     {
       let $qualifier = ArithmeticExpressions.m_getWithSideEffect__();
       $qualifier.f_intField__arithmeticexpressions_ArithmeticExpressions =
-          $LongUtils.$plus(
+          $LongUtils.plus(
               $qualifier
                   .f_intField__arithmeticexpressions_ArithmeticExpressions,
               $Long.fromInt(5));
@@ -211,39 +210,37 @@ class ArithmeticExpressions extends j_l_Object {
     let /** number */ i;
     let /** !$Long */ l;
     let /** number */ d;
-    l = $LongUtils.$minus(
-        $Primitives.$widenIntToLong(2 - boxedInteger.m_intValue__() | 0),
+    l = $LongUtils.minus(
+        $Primitives.widenIntToLong(2 - boxedInteger.m_intValue__() | 0),
         $Long.fromInt(2));
-    l = $LongUtils.$or(
-        $Primitives.$widenIntToLong(2 | boxedInteger.m_intValue__()),
+    l = $LongUtils.bitOr(
+        $Primitives.widenIntToLong(2 | boxedInteger.m_intValue__()),
         $Long.fromInt(2));
-    l = $LongUtils.$times(
-        $LongUtils.$times(
-            $LongUtils.$times(
-                $LongUtils.$times($Long.fromInt(1000000), l),
-                $Long.fromInt(60)),
+    l = $LongUtils.times(
+        $LongUtils.times(
+            $LongUtils.times(
+                $LongUtils.times($Long.fromInt(1000000), l), $Long.fromInt(60)),
             $Long.fromInt(60)),
         $Long.fromInt(24));
-    l = $LongUtils.$times(
-        $LongUtils.$times(
-            $Primitives.$widenIntToLong(Math.imul(Math.imul(24, 60), 60)), l),
+    l = $LongUtils.times(
+        $LongUtils.times(
+            $Primitives.widenIntToLong(Math.imul(Math.imul(24, 60), 60)), l),
         $Long.fromInt(1000000));
-    d = $Primitives.$widenLongToDouble(l = $Primitives.$widenIntToLong(i = 20));
-    l = $Primitives.$widenIntToLong(
+    d = $Primitives.widenLongToDouble(l = $Primitives.widenIntToLong(i = 20));
+    l = $Primitives.widenIntToLong(
         (boxedInteger = Integer.m_valueOf__int(i = 20)).m_intValue__());
-    l = $LongUtils.$plus(
-        $LongUtils.$plus(
-            $Primitives.$widenIntToLong(i + boxedInteger.m_intValue__() | 0),
-            l),
+    l = $LongUtils.plus(
+        $LongUtils.plus(
+            $Primitives.widenIntToLong(i + boxedInteger.m_intValue__() | 0), l),
         $Long.fromInt(20));
-    d = $Primitives.$widenLongToDouble($LongUtils.$plus($Long.fromInt(20), l)) +
+    d = $Primitives.widenLongToDouble($LongUtils.plus($Long.fromInt(20), l)) +
         d;
   }
   /** @return {!$Long} */
   static m_incrementCounter__() {
     return ArithmeticExpressions
                .f_counter__arithmeticexpressions_ArithmeticExpressions_ =
-               $LongUtils.$plus(
+               $LongUtils.plus(
                    ArithmeticExpressions
                        .f_counter__arithmeticexpressions_ArithmeticExpressions_,
                    $Long.fromInt(1));
@@ -256,7 +253,7 @@ class ArithmeticExpressions extends j_l_Object {
                       .$static_foo__arithmeticexpressions_ArithmeticExpressions,
          ArithmeticExpressions
              .$static_foo__arithmeticexpressions_ArithmeticExpressions =
-             $LongUtils.$plus(
+             $LongUtils.plus(
                  ArithmeticExpressions
                      .$static_foo__arithmeticexpressions_ArithmeticExpressions,
                  $Long.fromInt(1)),
@@ -305,7 +302,7 @@ class ArithmeticExpressions extends j_l_Object {
                       .$static_one__arithmeticexpressions_ArithmeticExpressions,
          ArithmeticExpressions
              .$static_one__arithmeticexpressions_ArithmeticExpressions =
-             $LongUtils.$plus(
+             $LongUtils.plus(
                  ArithmeticExpressions
                      .$static_one__arithmeticexpressions_ArithmeticExpressions,
                  $Long.fromInt(1)),

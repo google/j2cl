@@ -19,12 +19,12 @@
 [count++;] => [count = count + 1 | 0;] "forstatement.ForStatement.test"
 [for (long l = 0, count = 0; l < 100; l++, l++) {
       count++;
-    }] => [for (let l = $Long.fromInt(0), count_1 = $Long.fromInt(0); $LongUtils.$less(l, $Long.fromInt(100)); l = $LongUtils.$plus(l, $Long.fromInt(1)), l = $LongUtils.$plus(l, $Long.fromInt(1))) {
-   count_1 = $LongUtils.$plus(count_1, $Long.fromInt(1));
+    }] => [for (let l = $Long.fromInt(0), count_1 = $Long.fromInt(0); $LongUtils.less(l, $Long.fromInt(100)); l = $LongUtils.plus(l, $Long.fromInt(1)), l = $LongUtils.plus(l, $Long.fromInt(1))) {
+   count_1 = $LongUtils.plus(count_1, $Long.fromInt(1));
   }] "forstatement.ForStatement.test"
 [l] => [l] "l"
 [count] => [count_1] "count"
-[count++;] => [count_1 = $LongUtils.$plus(count_1, $Long.fromInt(1));] "forstatement.ForStatement.test"
+[count++;] => [count_1 = $LongUtils.plus(count_1, $Long.fromInt(1));] "forstatement.ForStatement.test"
 [boolean a = false;] => [let a = false;] "forstatement.ForStatement.test"
 [a] => [a] "a"
 [for (; a |= true; ) {}] => [for (; a = !!(+a | +true); ) {}] "forstatement.ForStatement.test"

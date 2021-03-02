@@ -24,147 +24,131 @@ import jsinterop.annotations.JsType;
 @JsType(namespace = "vmbootstrap")
 public class Primitives {
 
-  /**
-   * Narrows a number to a 8-bit signed number.
-   */
-  public static int $toByte(int instance) {
+  /** Narrows a number to a 8-bit signed number. */
+  public static int toByte(int instance) {
     return instance << 24 >> 24;
   }
 
-  /**
-   * Narrows a number to a 16-bit number.
-   */
-  public static int $toChar(int instance) {
+  /** Narrows a number to a 16-bit number. */
+  public static int toChar(int instance) {
     return instance & 0xFFFF;
   }
 
-  /**
-   * Narrows a number to a 16-bit signed number.
-   */
-  public static int $toShort(int instance) {
+  /** Narrows a number to a 16-bit signed number. */
+  public static int toShort(int instance) {
     return instance << 16 >> 16;
   }
 
-  /**
-   * Narrows a number to a 32-bit signed number.
-   */
-  public static int $toInt(int instance) {
+  /** Narrows a number to a 32-bit signed number. */
+  public static int toInt(int instance) {
     return instance | 0;
   }
 
-  public static int $widenByteToChar(int instance) {
-    return $toChar(instance);
+  public static int widenByteToChar(int instance) {
+    return toChar(instance);
   }
 
-  public static int $narrowCharToByte(int instance) {
-    return $toByte(instance);
+  public static int narrowCharToByte(int instance) {
+    return toByte(instance);
   }
 
-  public static int $narrowCharToShort(int instance) {
-    return $toShort(instance);
+  public static int narrowCharToShort(int instance) {
+    return toShort(instance);
   }
 
-  public static int $narrowShortToByte(int instance) {
-    return $toByte(instance);
+  public static int narrowShortToByte(int instance) {
+    return toByte(instance);
   }
 
-  public static int $narrowShortToChar(int instance) {
-    return $toChar(instance);
+  public static int narrowShortToChar(int instance) {
+    return toChar(instance);
   }
 
-  public static int $narrowIntToByte(int instance) {
-    return $toByte(instance);
+  public static int narrowIntToByte(int instance) {
+    return toByte(instance);
   }
 
-  public static int $narrowIntToChar(int instance) {
-    return $toChar(instance);
+  public static int narrowIntToChar(int instance) {
+    return toChar(instance);
   }
 
-  public static int $narrowIntToShort(int instance) {
-    return $toShort(instance);
+  public static int narrowIntToShort(int instance) {
+    return toShort(instance);
   }
 
-  public static NativeLong $widenByteToLong(int instance) {
-    return LongUtils.$fromInt(instance);
+  public static NativeLong widenByteToLong(int instance) {
+    return LongUtils.fromInt(instance);
   }
 
-  public static NativeLong $widenCharToLong(int instance) {
-    return LongUtils.$fromInt(instance);
+  public static NativeLong widenCharToLong(int instance) {
+    return LongUtils.fromInt(instance);
   }
 
-  public static NativeLong $widenShortToLong(int instance) {
-    return LongUtils.$fromInt(instance);
+  public static NativeLong widenShortToLong(int instance) {
+    return LongUtils.fromInt(instance);
   }
 
-  public static NativeLong $widenIntToLong(int instance) {
-    return LongUtils.$fromInt(instance);
+  public static NativeLong widenIntToLong(int instance) {
+    return LongUtils.fromInt(instance);
   }
 
-  public static NativeLong $narrowFloatToLong(int instance) {
-    return LongUtils.$fromNumber(instance);
+  public static NativeLong narrowFloatToLong(int instance) {
+    return LongUtils.fromNumber(instance);
   }
 
-  public static NativeLong $narrowDoubleToLong(int instance) {
-    return LongUtils.$fromNumber(instance);
+  public static NativeLong narrowDoubleToLong(int instance) {
+    return LongUtils.fromNumber(instance);
   }
 
-  /**
-   * Narrows a Long to a 8-bit signed number.
-   */
-  public static int $narrowLongToByte(NativeLong instance) {
-    int intValue = LongUtils.$toInt(instance);
-    return $toByte(intValue);
+  /** Narrows a Long to a 8-bit signed number. */
+  public static int narrowLongToByte(NativeLong instance) {
+    int intValue = LongUtils.toInt(instance);
+    return toByte(intValue);
   }
 
-  /**
-   * Narrows a Long to a 16-bit number.
-   */
-  public static int $narrowLongToChar(NativeLong instance) {
-    int intValue = LongUtils.$toInt(instance);
-    return $toChar(intValue);
+  /** Narrows a Long to a 16-bit number. */
+  public static int narrowLongToChar(NativeLong instance) {
+    int intValue = LongUtils.toInt(instance);
+    return toChar(intValue);
   }
 
-  /**
-   * Narrows a Long to a 16-bit signed number.
-   */
-  public static int $narrowLongToShort(NativeLong instance) {
-    int intValue = LongUtils.$toInt(instance);
-    return $toShort(intValue);
+  /** Narrows a Long to a 16-bit signed number. */
+  public static int narrowLongToShort(NativeLong instance) {
+    int intValue = LongUtils.toInt(instance);
+    return toShort(intValue);
   }
 
-  /**
-   * Narrows a Long to a 32-bit signed number.
-   */
-  public static int $narrowLongToInt(NativeLong instance) {
-    return LongUtils.$toInt(instance);
+  /** Narrows a Long to a 32-bit signed number. */
+  public static int narrowLongToInt(NativeLong instance) {
+    return LongUtils.toInt(instance);
   }
 
-  public static double $widenLongToFloat(NativeLong instance) {
-    return LongUtils.$toNumber(instance);
+  public static double widenLongToFloat(NativeLong instance) {
+    return LongUtils.toNumber(instance);
   }
 
-  public static double $widenLongToDouble(NativeLong instance) {
-    return LongUtils.$toNumber(instance);
+  public static double widenLongToDouble(NativeLong instance) {
+    return LongUtils.toNumber(instance);
   }
 
-  public static int $narrowFloatToByte(int instance) {
+  public static int narrowFloatToByte(int instance) {
     int roundInt = roundToInt(instance);
-    return $toByte(roundInt);
+    return toByte(roundInt);
   }
 
-  public static int $narrowDoubleToByte(int instance) {
+  public static int narrowDoubleToByte(int instance) {
     int roundInt = roundToInt(instance);
-    return $toByte(roundInt);
+    return toByte(roundInt);
   }
 
-  public static int $narrowFloatToChar(int instance) {
+  public static int narrowFloatToChar(int instance) {
     int roundInt = roundToInt(instance);
-    return $toChar(roundInt);
+    return toChar(roundInt);
   }
 
-  public static int $narrowDoubleToChar(int instance) {
+  public static int narrowDoubleToChar(int instance) {
     int roundInt = roundToInt(instance);
-    return $toChar(roundInt);
+    return toChar(roundInt);
   }
 
   /**
@@ -174,9 +158,9 @@ public class Primitives {
    * @return {number}
    * @public
    */
-  public static int $narrowFloatToShort(int instance) {
+  public static int narrowFloatToShort(int instance) {
     int roundInt = roundToInt(instance);
-    return $toShort(roundInt);
+    return toShort(roundInt);
   }
 
   /**
@@ -186,9 +170,9 @@ public class Primitives {
    * @return {number}
    * @public
    */
-  public static int $narrowDoubleToShort(int instance) {
+  public static int narrowDoubleToShort(int instance) {
     int roundInt = roundToInt(instance);
-    return $toShort(roundInt);
+    return toShort(roundInt);
   }
 
   /**
@@ -198,7 +182,7 @@ public class Primitives {
    * @return {number}
    * @public
    */
-  public static int $narrowFloatToInt(int instance) {
+  public static int narrowFloatToInt(int instance) {
     return roundToInt(instance);
   }
 
@@ -209,23 +193,20 @@ public class Primitives {
    * @return {number}
    * @public
    */
-  public static int $narrowDoubleToInt(int instance) {
+  public static int narrowDoubleToInt(int instance) {
     return roundToInt(instance);
   }
 
-  /**
-   * Checks if result is Infinity or Nan to catch division by zero and
-   * coerces it to integer
-   */
-  public static int $coerceDivision(int value) {
+  /** Checks if result is Infinity or Nan to catch division by zero and coerces it to integer */
+  public static int coerceDivision(int value) {
     InternalPreconditions.checkArithmetic(Double.isFinite(value));
-    return $toInt(value);
+    return toInt(value);
   }
 
   /**
    * Rounds to an integral value.
    */
   private static int roundToInt(int value) {
-    return $toInt(Math.max(Math.min(value, Integer.MAX_VALUE), Integer.MIN_VALUE));
+    return toInt(Math.max(Math.min(value, Integer.MAX_VALUE), Integer.MIN_VALUE));
   }
 }

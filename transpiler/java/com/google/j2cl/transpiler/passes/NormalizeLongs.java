@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
+import com.google.common.base.CaseFormat;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.BinaryOperator;
@@ -73,19 +74,20 @@ public class NormalizeLongs extends NormalizationPass {
               return prefixExpression.getOperand();
             }
 
-            // LongUtils.$someOperation(operand);
+            // LongUtils.someOperation(operand);
             return RuntimeMethods.createLongUtilsMethodCall(
                 getLongOperationFunctionName(operator), operand);
           }
         });
   }
 
+  // TODO(goktug): Remove this method after RewriteUnaryExpressions start running for all backends.
   private static String getLongOperationFunctionName(PrefixOperator prefixOperator) {
     switch (prefixOperator) {
       case MINUS:
-        return "$negate"; // Multiply by -1;
+        return "negate"; // Multiply by -1;
       case COMPLEMENT:
-        return "$not"; // Bitwise not
+        return "not"; // Bitwise not
       default:
         checkArgument(
             false, "The requested binary operator is invalid on Longs " + prefixOperator + ".");
@@ -93,49 +95,7 @@ public class NormalizeLongs extends NormalizationPass {
     }
   }
 
-  private static String getLongOperationFunctionName(BinaryOperator binaryOperator) {
-    switch (binaryOperator) {
-      case TIMES:
-        return "$times";
-      case DIVIDE:
-        return "$divide";
-      case REMAINDER:
-        return "$remainder";
-      case PLUS:
-        return "$plus";
-      case MINUS:
-        return "$minus";
-      case LEFT_SHIFT:
-        return "$leftShift";
-      case RIGHT_SHIFT_SIGNED:
-        return "$rightShiftSigned";
-      case RIGHT_SHIFT_UNSIGNED:
-        return "$rightShiftUnsigned";
-      case LESS:
-        return "$less";
-      case GREATER:
-        return "$greater";
-      case LESS_EQUALS:
-        return "$lessEquals";
-      case GREATER_EQUALS:
-        return "$greaterEquals";
-      case EQUALS:
-        return "$equals";
-      case NOT_EQUALS:
-        return "$notEquals";
-      case BIT_XOR:
-        return "$xor";
-      case BIT_AND:
-        return "$and";
-      case BIT_OR:
-        return "$or";
-      default:
-        checkArgument(
-            false,
-            "The requested binary operator doesn't translate to a LongUtils call: "
-                + binaryOperator
-                + ".");
-        return null;
-    }
+  private static String getLongOperationFunctionName(BinaryOperator operator) {
+    return CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, operator.name());
   }
 }

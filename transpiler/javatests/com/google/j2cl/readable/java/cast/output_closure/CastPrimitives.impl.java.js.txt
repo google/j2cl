@@ -44,52 +44,52 @@ class CastPrimitives extends j_l_Object {
     let f = 1.100000023841858;
     let d = 1.1;
     b = b;
-    c = $Primitives.$widenByteToChar(b);
+    c = $Primitives.widenByteToChar(b);
     s = b;
     i = b;
-    l = $Primitives.$widenByteToLong(b);
+    l = $Primitives.widenByteToLong(b);
     f = b;
     d = b;
-    b = $Primitives.$narrowCharToByte(c);
+    b = $Primitives.narrowCharToByte(c);
     c = c;
-    s = $Primitives.$narrowCharToShort(c);
+    s = $Primitives.narrowCharToShort(c);
     i = c;
-    l = $Primitives.$widenCharToLong(c);
+    l = $Primitives.widenCharToLong(c);
     f = c;
     d = c;
-    b = $Primitives.$narrowShortToByte(s);
-    c = $Primitives.$narrowShortToChar(s);
+    b = $Primitives.narrowShortToByte(s);
+    c = $Primitives.narrowShortToChar(s);
     s = s;
     i = s;
-    l = $Primitives.$widenShortToLong(s);
+    l = $Primitives.widenShortToLong(s);
     f = s;
     d = s;
-    b = $Primitives.$narrowIntToByte(i);
-    c = $Primitives.$narrowIntToChar(i);
-    s = $Primitives.$narrowIntToShort(i);
+    b = $Primitives.narrowIntToByte(i);
+    c = $Primitives.narrowIntToChar(i);
+    s = $Primitives.narrowIntToShort(i);
     i = i;
-    l = $Primitives.$widenIntToLong(i);
+    l = $Primitives.widenIntToLong(i);
     f = i;
     d = i;
-    b = $Primitives.$narrowLongToByte(l);
-    c = $Primitives.$narrowLongToChar(l);
-    s = $Primitives.$narrowLongToShort(l);
-    i = $Primitives.$narrowLongToInt(l);
+    b = $Primitives.narrowLongToByte(l);
+    c = $Primitives.narrowLongToChar(l);
+    s = $Primitives.narrowLongToShort(l);
+    i = $Primitives.narrowLongToInt(l);
     l = l;
-    f = $Primitives.$widenLongToFloat(l);
-    d = $Primitives.$widenLongToDouble(l);
-    b = $Primitives.$narrowFloatToByte(f);
-    c = $Primitives.$narrowFloatToChar(f);
-    s = $Primitives.$narrowFloatToShort(f);
-    i = $Primitives.$narrowFloatToInt(f);
-    l = $Primitives.$narrowFloatToLong(f);
+    f = $Primitives.widenLongToFloat(l);
+    d = $Primitives.widenLongToDouble(l);
+    b = $Primitives.narrowFloatToByte(f);
+    c = $Primitives.narrowFloatToChar(f);
+    s = $Primitives.narrowFloatToShort(f);
+    i = $Primitives.narrowFloatToInt(f);
+    l = $Primitives.narrowFloatToLong(f);
     f = f;
     d = f;
-    b = $Primitives.$narrowDoubleToByte(d);
-    c = $Primitives.$narrowDoubleToChar(d);
-    s = $Primitives.$narrowDoubleToShort(d);
-    i = $Primitives.$narrowDoubleToInt(d);
-    l = $Primitives.$narrowDoubleToLong(d);
+    b = $Primitives.narrowDoubleToByte(d);
+    c = $Primitives.narrowDoubleToChar(d);
+    s = $Primitives.narrowDoubleToShort(d);
+    i = $Primitives.narrowDoubleToInt(d);
+    l = $Primitives.narrowDoubleToLong(d);
     f = d;
     d = d;
   }
@@ -112,7 +112,7 @@ class CastPrimitives extends j_l_Object {
     let boxedByte = Byte.m_valueOf__byte(0);
     let s = boxedByte.m_byteValue__();
     let i = boxedByte.m_byteValue__();
-    let l = $Primitives.$widenByteToLong(boxedByte.m_byteValue__());
+    let l = $Primitives.widenByteToLong(boxedByte.m_byteValue__());
     let f = boxedByte.m_byteValue__();
     let d = boxedByte.m_byteValue__();
   }
@@ -127,18 +127,18 @@ class CastPrimitives extends j_l_Object {
     let d = 1.7976931348623157E308;
     CastPrimitives.m_getShort__short(b);
     CastPrimitives.m_getInt__int(b);
-    CastPrimitives.m_getLong__long($Primitives.$widenByteToLong(b));
+    CastPrimitives.m_getLong__long($Primitives.widenByteToLong(b));
     CastPrimitives.m_getFloat__float(b);
     CastPrimitives.m_getDouble__double(b);
-    CastPrimitives.m_getFloat__float($Primitives.$widenLongToFloat(l));
-    CastPrimitives.m_getDouble__double($Primitives.$widenLongToDouble(l));
+    CastPrimitives.m_getFloat__float($Primitives.widenLongToFloat(l));
+    CastPrimitives.m_getDouble__double($Primitives.widenLongToDouble(l));
     CastPrimitives.m_getDouble__double(f);
     IntValueHolder.$create__int(b);
     IntValueHolder.$create__int(c);
     IntValueHolder.$create__int(s);
-    LongValueHolder.$create__long($Primitives.$widenByteToLong(b));
-    LongValueHolder.$create__long($Primitives.$widenCharToLong(c));
-    LongValueHolder.$create__long($Primitives.$widenIntToLong(i));
+    LongValueHolder.$create__long($Primitives.widenByteToLong(b));
+    LongValueHolder.$create__long($Primitives.widenCharToLong(c));
+    LongValueHolder.$create__long($Primitives.widenIntToLong(i));
   }
   /** @return {number} */
   static m_getShort__short(/** number */ value) {
@@ -171,35 +171,35 @@ class CastPrimitives extends j_l_Object {
     let fdouble = 17;
     let tlong = $Long.fromInt(0);
     {
-      tlong = $Primitives.$widenByteToLong(fbyte);
+      tlong = $Primitives.widenByteToLong(fbyte);
       tlong = flong;
     }
     {
-      tlong = $Primitives.$widenIntToLong(fint);
-      tlong = $LongUtils.$plus(tlong, $Primitives.$widenIntToLong(fint));
-      tlong = $LongUtils.$leftShift(tlong, fint);
+      tlong = $Primitives.widenIntToLong(fint);
+      tlong = $LongUtils.plus(tlong, $Primitives.widenIntToLong(fint));
+      tlong = $LongUtils.leftShift(tlong, fint);
     }
     {
-      tlong = $LongUtils.$plus(tlong, $Primitives.$widenCharToLong(fchar));
-      tlong = $LongUtils.$plus(tlong, flong);
-      tlong = $Primitives.$narrowFloatToLong(
-          $Primitives.$widenLongToFloat(tlong) + ffloat);
+      tlong = $LongUtils.plus(tlong, $Primitives.widenCharToLong(fchar));
+      tlong = $LongUtils.plus(tlong, flong);
+      tlong = $Primitives.narrowFloatToLong(
+          $Primitives.widenLongToFloat(tlong) + ffloat);
     }
     {
-      tlong = $LongUtils.$times(flong, $Primitives.$widenIntToLong(fint));
-      tlong = $LongUtils.$rightShiftSigned(flong, fint);
+      tlong = $LongUtils.times(flong, $Primitives.widenIntToLong(fint));
+      tlong = $LongUtils.rightShiftSigned(flong, fint);
     }
     {
-      tlong = $LongUtils.$plus(flong, $Primitives.$widenShortToLong(fshort));
-      tlong = $LongUtils.$plus(flong, flong);
+      tlong = $LongUtils.plus(flong, $Primitives.widenShortToLong(fshort));
+      tlong = $LongUtils.plus(flong, flong);
     }
     {
-      tlong = $LongUtils.$leftShift(flong, $Primitives.$narrowLongToInt(tlong));
-      tlong = $LongUtils.$leftShift(tlong, $Primitives.$narrowLongToInt(flong));
+      tlong = $LongUtils.leftShift(flong, $Primitives.narrowLongToInt(tlong));
+      tlong = $LongUtils.leftShift(tlong, $Primitives.narrowLongToInt(flong));
     }
     {
-      tlong = $LongUtils.$plus(
-          $Primitives.$widenIntToLong(0 + 1 | 0), $Long.fromInt(2));
+      tlong = $LongUtils.plus(
+          $Primitives.widenIntToLong(0 + 1 | 0), $Long.fromInt(2));
     }
   }
 
