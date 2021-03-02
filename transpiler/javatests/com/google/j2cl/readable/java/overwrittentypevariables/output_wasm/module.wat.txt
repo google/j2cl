@@ -286,7 +286,7 @@
  (block $return.label
   (block
    ;; return $2.this.apply(((T) arg0));
-   (local.set $return.value (call_ref (local.get $this)(ref.null $java.lang.Enum)(struct.get $overwrittentypevariables.HashFunctions.2.vtable $m_apply__java_lang_Enum__java_lang_String (struct.get $overwrittentypevariables.HashFunctions.2 $vtable(local.get $this)))))
+   (local.set $return.value (call_ref (local.get $this)(ref.cast $java.lang.Object $java.lang.Enum (local.get $arg0) (global.get $java.lang.Enum.rtt))(struct.get $overwrittentypevariables.HashFunctions.2.vtable $m_apply__java_lang_Enum__java_lang_String (struct.get $overwrittentypevariables.HashFunctions.2 $vtable(local.get $this)))))
    (br $return.label)
   )
  )

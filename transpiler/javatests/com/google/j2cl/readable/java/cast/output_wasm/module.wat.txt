@@ -208,14 +208,14 @@
    (block
     ;; T $qualifier = ((T) arrT[0]);
     
-    (local.set $$qualifier_5 (ref.null $java.lang.Object))
+    (local.set $$qualifier_5 (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $arrT)) (i32.const 0)))
     ;; $qualifier.mA();
     
    )
    (block
     ;; B $qualifier = ((B) ((T) arrT[0]));
     
-    (local.set $$qualifier_6 (ref.null $java.lang.Object))
+    (local.set $$qualifier_6 (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $arrT)) (i32.const 0)))
     ;; $qualifier.mB();
     
    )
@@ -234,14 +234,14 @@
    (block
     ;; U $qualifier = ((U) arrU[0]);
     
-    (local.set $$qualifier_7 (ref.null $java.lang.Object))
+    (local.set $$qualifier_7 (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $arrU)) (i32.const 0)))
     ;; $qualifier.mA();
     
    )
    (block
     ;; B $qualifier = ((B) ((U) arrU[0]));
     
-    (local.set $$qualifier_8 (ref.null $java.lang.Object))
+    (local.set $$qualifier_8 (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $arrU)) (i32.const 0)))
     ;; $qualifier.mB();
     
    )
@@ -324,10 +324,10 @@
    (local.set $o (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
    ;; E e = ((E) o);
    
-   (local.set $e (ref.null $java.lang.Number))
+   (local.set $e (ref.cast $java.lang.Object $java.lang.Number (local.get $o) (global.get $java.lang.Number.rtt)))
    ;; T t = ((T) o);
    
-   (local.set $t (ref.null $java.lang.Object))
+   (local.set $t (ref.cast $java.lang.Object $java.lang.Object (local.get $o) (global.get $java.lang.Object.rtt)))
    ;; E[] es = ((E[]) o);
    
    (local.set $es (ref.cast $java.lang.Object $Object.array (local.get $o) (global.get $Object.array.rtt)))
@@ -354,14 +354,14 @@
    (local.set $o (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
    ;; S s = ((S) o);
    
-   (local.set $s (ref.null $java.lang.Object))
+   (local.set $s (ref.cast $java.lang.Object $java.lang.Object (local.get $o) (global.get $java.lang.Object.rtt)))
    ;; Object c = ((CastGenerics<S, Number>) o);
    
    (local.set $c (ref.cast $java.lang.Object $cast.CastGenerics (local.get $o) (global.get $cast.CastGenerics.rtt)))
    ;; (c = ((S[]) o));
    (local.set $c (ref.cast $java.lang.Object $Object.array (local.get $o) (global.get $Object.array.rtt)))
    ;; (c = ((V) o));
-   (local.set $c (ref.null $java.lang.Enum))
+   (local.set $c (ref.cast $java.lang.Object $java.lang.Enum (local.get $o) (global.get $java.lang.Enum.rtt)))
   )
  )
 )
@@ -394,7 +394,7 @@
     (then
      (block
       ;; return ((EE) o);
-      (local.set $return.value (ref.null $java.lang.Object))
+      (local.set $return.value (local.get $o))
       (br $return.label)
      )
     )
@@ -700,7 +700,7 @@
   (block
    ;; TT t = ((TT) o);
    
-   (local.set $t (ref.null $java.lang.Enum))
+   (local.set $t (ref.cast $java.lang.Object $java.lang.Enum (local.get $o) (global.get $java.lang.Enum.rtt)))
   )
  )
 )

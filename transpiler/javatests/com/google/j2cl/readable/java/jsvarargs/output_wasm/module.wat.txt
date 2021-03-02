@@ -179,7 +179,7 @@
    ;; jsvarargs.Main.$clinit();
    (call $$clinit__void@jsvarargs.Main )
    ;; return ((T) elements[0]);
-   (local.set $return.value (ref.null $java.lang.Object))
+   (local.set $return.value (ref.cast $java.lang.Object $java.lang.Object (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $elements)) (i32.const 0)) (global.get $java.lang.Object.rtt)))
    (br $return.label)
   )
  )

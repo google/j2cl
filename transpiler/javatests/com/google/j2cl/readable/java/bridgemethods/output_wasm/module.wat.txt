@@ -677,7 +677,7 @@
  (block $return.label
   (block
    ;; Parent.this.foo(((T) arg0),((Number) arg1));
-   (call_ref (local.get $this)(ref.null $java.lang.Error)(ref.cast $java.lang.Object $java.lang.Number (local.get $arg1) (global.get $java.lang.Number.rtt))(struct.get $bridgemethods.Parent.vtable $m_foo__java_lang_Error__java_lang_Number__void (struct.get $bridgemethods.Parent $vtable(local.get $this))))
+   (call_ref (local.get $this)(ref.cast $java.lang.Object $java.lang.Error (local.get $arg0) (global.get $java.lang.Error.rtt))(ref.cast $java.lang.Object $java.lang.Number (local.get $arg1) (global.get $java.lang.Number.rtt))(struct.get $bridgemethods.Parent.vtable $m_foo__java_lang_Error__java_lang_Number__void (struct.get $bridgemethods.Parent $vtable(local.get $this))))
   )
  )
 )
@@ -1850,7 +1850,7 @@
  (block $return.label
   (block
    ;; return ReparametrerizedChild.this.m(((S) arg0));
-   (local.set $return.value (call_ref (local.get $this)(ref.null $bridgemethods.ReparametrerizedChild)(struct.get $bridgemethods.ReparametrerizedChild.vtable $m_m__bridgemethods_ReparametrerizedChild__bridgemethods_ReparametrerizedChild_$pp_bridgemethods (struct.get $bridgemethods.ReparametrerizedChild $vtable(local.get $this)))))
+   (local.set $return.value (call_ref (local.get $this)(ref.cast $java.lang.Object $bridgemethods.ReparametrerizedChild (local.get $arg0) (global.get $bridgemethods.ReparametrerizedChild.rtt))(struct.get $bridgemethods.ReparametrerizedChild.vtable $m_m__bridgemethods_ReparametrerizedChild__bridgemethods_ReparametrerizedChild_$pp_bridgemethods (struct.get $bridgemethods.ReparametrerizedChild $vtable(local.get $this)))))
    (br $return.label)
   )
  )
@@ -2562,7 +2562,7 @@
  (block $return.label
   (block
    ;; return EnumMap.this.put(((K) arg0),arg1);
-   (local.set $return.value (call_ref (local.get $this)(ref.null $java.lang.Enum)(local.get $arg1)(struct.get $bridgemethods.EnumMap.vtable $m_put__java_lang_Enum__java_lang_Object__java_lang_Object (struct.get $bridgemethods.EnumMap $vtable(local.get $this)))))
+   (local.set $return.value (call_ref (local.get $this)(ref.cast $java.lang.Object $java.lang.Enum (local.get $arg0) (global.get $java.lang.Enum.rtt))(local.get $arg1)(struct.get $bridgemethods.EnumMap.vtable $m_put__java_lang_Enum__java_lang_Object__java_lang_Object (struct.get $bridgemethods.EnumMap $vtable(local.get $this)))))
    (br $return.label)
   )
  )

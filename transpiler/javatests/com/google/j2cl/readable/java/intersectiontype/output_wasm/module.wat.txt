@@ -195,13 +195,13 @@
     (then
      (block
       ;; return (((Getable<T>&Setable)) o);
-      (local.set $return.value (ref.null $java.lang.Object))
+      (local.set $return.value (local.get $o))
       (br $return.label)
      )
     )
    )
    ;; return (((Getable<T>&Setable)) o);
-   (local.set $return.value (ref.null $java.lang.Object))
+   (local.set $return.value (local.get $o))
    (br $return.label)
   )
  )
@@ -218,7 +218,7 @@
    ;; intersectiontype.IntersectionTypeTest.$clinit();
    (call $$clinit__void@intersectiontype.IntersectionTypeTest )
    ;; return (((Getable<Comparable<String>>&Setable)) s);
-   (local.set $return.value (ref.null $java.lang.Object))
+   (local.set $return.value (local.get $s))
    (br $return.label)
   )
  )
@@ -235,7 +235,7 @@
    ;; intersectiontype.IntersectionTypeTest.$clinit();
    (call $$clinit__void@intersectiontype.IntersectionTypeTest )
    ;; return (((Getable<Comparable<T>>&Setable)) s);
-   (local.set $return.value (ref.null $java.lang.Object))
+   (local.set $return.value (local.get $s))
    (br $return.label)
   )
  )
@@ -306,13 +306,13 @@
    (call $$clinit__void@intersectiontype.IntersectionTypeTest )
    ;; A e = (((A&EmptyA&EmptyB)) o);
    
-   (local.set $e (ref.null $intersectiontype.IntersectionTypeTest.A))
+   (local.set $e (ref.cast $java.lang.Object $intersectiontype.IntersectionTypeTest.A (local.get $o) (global.get $intersectiontype.IntersectionTypeTest.A.rtt)))
    ;; EmptyA g = ((EmptyA) (((A&EmptyA&EmptyB)) o));
    
-   (local.set $g (ref.null $intersectiontype.IntersectionTypeTest.A))
+   (local.set $g (ref.cast $java.lang.Object $intersectiontype.IntersectionTypeTest.A (local.get $o) (global.get $intersectiontype.IntersectionTypeTest.A.rtt)))
    ;; EmptyB s = ((EmptyB) (((A&EmptyA&EmptyB)) o));
    
-   (local.set $s (ref.null $intersectiontype.IntersectionTypeTest.A))
+   (local.set $s (ref.cast $java.lang.Object $intersectiontype.IntersectionTypeTest.A (local.get $o) (global.get $intersectiontype.IntersectionTypeTest.A.rtt)))
   )
  )
 )
@@ -339,7 +339,7 @@
  (block $return.label
   (block
    ;; return ((T) intersectiontype.IntersectionTypeTest.get(new Object.<init>()));
-   (local.set $return.value (ref.null $intersectiontype.IntersectionTypeTest.A))
+   (local.set $return.value (ref.cast $java.lang.Object $intersectiontype.IntersectionTypeTest.A (call $m_get__java_lang_Object__java_lang_Object@intersectiontype.IntersectionTypeTest (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (i32.const 0) (global.get $java.lang.Object.rtt)))) (global.get $intersectiontype.IntersectionTypeTest.A.rtt)))
    (br $return.label)
   )
  )
@@ -382,7 +382,7 @@
    
    (local.set $o (call $m_m__intersectiontype_IntersectionTypeTest_A@intersectiontype.IntersectionTypeTest ))
    ;; intersectiontype.IntersectionTypeTest.set((((A&EmptyA)) o));
-   (call $m_set__intersectiontype_IntersectionTypeTest_A__void@intersectiontype.IntersectionTypeTest (ref.null $intersectiontype.IntersectionTypeTest.A))
+   (call $m_set__intersectiontype_IntersectionTypeTest_A__void@intersectiontype.IntersectionTypeTest (ref.cast $java.lang.Object $intersectiontype.IntersectionTypeTest.A (local.get $o) (global.get $intersectiontype.IntersectionTypeTest.A.rtt)))
    ;; intersectiontype.IntersectionTypeTest.set(intersectiontype.IntersectionTypeTest.m());
    (call $m_set__intersectiontype_IntersectionTypeTest_A__void@intersectiontype.IntersectionTypeTest (call $m_m__intersectiontype_IntersectionTypeTest_A@intersectiontype.IntersectionTypeTest ))
    ;; Getable<?> g = intersectiontype.IntersectionTypeTest.n();
@@ -454,7 +454,7 @@
  (block $return.label
   (block
    ;; return (((Getable<T>&Setable)) o);
-   (local.set $return.value (ref.null $java.lang.Object))
+   (local.set $return.value (local.get $o))
    (br $return.label)
   )
  )

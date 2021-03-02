@@ -1544,7 +1544,7 @@
  (block $return.label
   (block
    ;; Parent.this.jsMethod(((T) arg0));
-   (call_ref (local.get $this)(ref.null $bridgejsmethod.Main.Parent)(struct.get $bridgejsmethod.Main.Parent.vtable $m_jsMethod__bridgejsmethod_Main_Parent__void (struct.get $bridgejsmethod.Main.Parent $vtable(local.get $this))))
+   (call_ref (local.get $this)(ref.cast $java.lang.Object $bridgejsmethod.Main.Parent (local.get $arg0) (global.get $bridgejsmethod.Main.Parent.rtt))(struct.get $bridgejsmethod.Main.Parent.vtable $m_jsMethod__bridgejsmethod_Main_Parent__void (struct.get $bridgejsmethod.Main.Parent $vtable(local.get $this))))
   )
  )
 )
@@ -1559,7 +1559,7 @@
  (block $return.label
   (block
    ;; Parent.this.method(((T) arg0));
-   (call_ref (local.get $this)(ref.null $bridgejsmethod.Main.Parent)(struct.get $bridgejsmethod.Main.Parent.vtable $m_method__bridgejsmethod_Main_Parent__void (struct.get $bridgejsmethod.Main.Parent $vtable(local.get $this))))
+   (call_ref (local.get $this)(ref.cast $java.lang.Object $bridgejsmethod.Main.Parent (local.get $arg0) (global.get $bridgejsmethod.Main.Parent.rtt))(struct.get $bridgejsmethod.Main.Parent.vtable $m_method__bridgejsmethod_Main_Parent__void (struct.get $bridgejsmethod.Main.Parent $vtable(local.get $this))))
   )
  )
 )
