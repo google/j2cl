@@ -15,6 +15,7 @@
  */
 package javaemul.internal;
 
+import javaemul.internal.annotations.DoNotAutobox;
 import jsinterop.annotations.JsType;
 
 /**
@@ -23,177 +24,180 @@ import jsinterop.annotations.JsType;
  */
 @JsType(namespace = "vmbootstrap")
 class LongUtils {
-
-  public static int compare(NativeLong a, NativeLong b) {
-    return a.compare(b);
+  public static int compare(long a, long b) {
+    return toNativeLong(a).compare(b);
   }
 
-  public static NativeLong fromInt(int value) {
+  public static long fromInt(int value) {
     // Ensure int is coerced to 32 bits.
     return NativeLong.fromInt(value | 0);
   }
 
-  public static NativeLong fromNumber(double value) {
+  public static long fromNumber(double value) {
     return NativeLong.fromNumber(value);
   }
 
-  public static int toInt(NativeLong value) {
-    return value.toInt();
+  public static int toInt(long value) {
+    return toNativeLong(value).toInt();
   }
 
-  public static double toNumber(NativeLong value) {
-    return value.toNumber();
+  public static double toNumber(long value) {
+    return toNativeLong(value).toNumber();
   }
 
-  public static NativeLong bitAnd(NativeLong leftLong, NativeLong rightLong) {
-    return leftLong.and(rightLong);
+  public static long bitAnd(long leftLong, long rightLong) {
+    return toNativeLong(leftLong).and(rightLong);
   }
 
-  public static NativeLong not(NativeLong valueLong) {
-    return valueLong.not();
+  public static long not(long valueLong) {
+    return toNativeLong(valueLong).not();
   }
 
-  public static NativeLong divide(NativeLong leftLong, NativeLong rightLong) {
+  public static long divide(long leftLong, long rightLong) {
     LongUtils.checkDivisorZero(rightLong);
-    return leftLong.div(rightLong);
+    return toNativeLong(leftLong).div(rightLong);
   }
 
-  public static boolean equals(NativeLong leftLong, NativeLong rightLong) {
-    return leftLong.equals(rightLong);
+  public static boolean equals(long leftLong, long rightLong) {
+    return toNativeLong(leftLong).equals(toNativeLong(rightLong));
   }
 
-  public static boolean greater(NativeLong leftLong, NativeLong rightLong) {
-    return leftLong.greaterThan(rightLong);
+  public static boolean greater(long leftLong, long rightLong) {
+    return toNativeLong(leftLong).greaterThan(rightLong);
   }
 
-  public static boolean greaterEquals(NativeLong leftLong, NativeLong rightLong) {
-    return leftLong.greaterThanOrEqual(rightLong);
+  public static boolean greaterEquals(long leftLong, long rightLong) {
+    return toNativeLong(leftLong).greaterThanOrEqual(rightLong);
   }
 
-  public static NativeLong leftShift(NativeLong valueLong, int numBits) {
-    return valueLong.shiftLeft(numBits);
+  public static long leftShift(long valueLong, int numBits) {
+    return toNativeLong(valueLong).shiftLeft(numBits);
   }
 
-  public static boolean less(NativeLong leftLong, NativeLong rightLong) {
-    return leftLong.lessThan(rightLong);
+  public static boolean less(long leftLong, long rightLong) {
+    return toNativeLong(leftLong).lessThan(rightLong);
   }
 
-  public static boolean lessEquals(NativeLong leftLong, NativeLong rightLong) {
-    return leftLong.lessThanOrEqual(rightLong);
+  public static boolean lessEquals(long leftLong, long rightLong) {
+    return toNativeLong(leftLong).lessThanOrEqual(rightLong);
   }
 
-  public static NativeLong minus(NativeLong leftLong, NativeLong rightLong) {
-    return leftLong.subtract(rightLong);
+  public static long minus(long leftLong, long rightLong) {
+    return toNativeLong(leftLong).subtract(rightLong);
   }
 
-  public static NativeLong negate(NativeLong valueLong) {
-    return valueLong.negate();
+  public static long negate(long valueLong) {
+    return toNativeLong(valueLong).negate();
   }
 
-  public static boolean notEquals(NativeLong leftLong, NativeLong rightLong) {
-    return leftLong.notEquals(rightLong);
+  public static boolean notEquals(long leftLong, long rightLong) {
+    return toNativeLong(leftLong).notEquals(rightLong);
   }
 
-  public static NativeLong bitOr(NativeLong leftLong, NativeLong rightLong) {
-    return leftLong.or(rightLong);
+  public static long bitOr(long leftLong, long rightLong) {
+    return toNativeLong(leftLong).or(rightLong);
   }
 
-  public static NativeLong plus(NativeLong leftLong, NativeLong rightLong) {
-    return leftLong.add(rightLong);
+  public static long plus(long leftLong, long rightLong) {
+    return toNativeLong(leftLong).add(rightLong);
   }
 
-  public static NativeLong remainder(NativeLong leftLong, NativeLong rightLong) {
+  public static long remainder(long leftLong, long rightLong) {
     LongUtils.checkDivisorZero(rightLong);
-    return leftLong.modulo(rightLong);
+    return toNativeLong(leftLong).modulo(rightLong);
   }
 
-  public static NativeLong rightShiftSigned(NativeLong valueLong, int numBits) {
-    return valueLong.shiftRight(numBits);
+  public static long rightShiftSigned(long valueLong, int numBits) {
+    return toNativeLong(valueLong).shiftRight(numBits);
   }
 
-  public static NativeLong rightShiftUnsigned(NativeLong valueLong, int numBits) {
-    return valueLong.shiftRightUnsigned(numBits);
+  public static long rightShiftUnsigned(long valueLong, int numBits) {
+    return toNativeLong(valueLong).shiftRightUnsigned(numBits);
   }
 
-  public static NativeLong times(NativeLong leftLong, NativeLong rightLong) {
-    return leftLong.multiply(rightLong);
+  public static long times(long leftLong, long rightLong) {
+    return toNativeLong(leftLong).multiply(rightLong);
   }
 
-  public static NativeLong bitXor(NativeLong leftLong, NativeLong rightLong) {
-    return leftLong.xor(rightLong);
+  public static long bitXor(long leftLong, long rightLong) {
+    return toNativeLong(leftLong).xor(rightLong);
   }
 
-  public static int getHighBits(NativeLong valueLong) {
-    return valueLong.getHighBits();
+  public static int getHighBits(long valueLong) {
+    return toNativeLong(valueLong).getHighBits();
   }
 
-  public static int getLowBits(NativeLong valueLong) {
-    return valueLong.getLowBits();
+  public static int getLowBits(long valueLong) {
+    return toNativeLong(valueLong).getLowBits();
   }
 
-  public static String toString(NativeLong valueLong) {
-    return valueLong.toString();
+  public static String toString(long valueLong) {
+    return toNativeLong(valueLong).toString();
   }
 
-  public static void checkDivisorZero(NativeLong divisor) {
-    InternalPreconditions.checkArithmetic(!divisor.isZero());
+  public static void checkDivisorZero(long divisor) {
+    InternalPreconditions.checkArithmetic(!toNativeLong(divisor).isZero());
+  }
+
+  private static NativeLong toNativeLong(@DoNotAutobox Object l) {
+    return JsUtils.uncheckedCast(l);
   }
 
   @JsType(isNative = true, name = "Long", namespace = "nativebootstrap")
   static class NativeLong {
-    public static native NativeLong fromBits(int lowBits, int highBits);
+    public static native long fromBits(int lowBits, int highBits);
 
-    public static native NativeLong fromInt(int value);
+    public static native long fromInt(int value);
 
-    public static native NativeLong fromNumber(double value);
+    public static native long fromNumber(double value);
 
-    public native NativeLong add(NativeLong rightLong);
+    public native long add(long rightLong);
 
-    public native NativeLong and(NativeLong rightLong);
+    public native long and(long rightLong);
 
-    public native int compare(NativeLong b);
+    public native int compare(long b);
 
-    public native NativeLong div(NativeLong rightLong);
+    public native long div(long rightLong);
 
     public native int getHighBits();
 
     public native int getLowBits();
 
-    public native boolean greaterThan(NativeLong rightLong);
+    public native boolean greaterThan(long rightLong);
 
-    public native boolean greaterThanOrEqual(NativeLong rightLong);
+    public native boolean greaterThanOrEqual(long rightLong);
 
     public native boolean isZero();
 
-    public native boolean lessThan(NativeLong rightLong);
+    public native boolean lessThan(long rightLong);
 
-    public native boolean lessThanOrEqual(NativeLong rightLong);
+    public native boolean lessThanOrEqual(long rightLong);
 
-    public native NativeLong modulo(NativeLong rightLong);
+    public native long modulo(long rightLong);
 
-    public native NativeLong multiply(NativeLong rightLong);
+    public native long multiply(long rightLong);
 
-    public native NativeLong negate();
+    public native long negate();
 
-    public native NativeLong not();
+    public native long not();
 
-    public native boolean notEquals(NativeLong rightLong);
+    public native boolean notEquals(long rightLong);
 
-    public native NativeLong or(NativeLong rightLong);
+    public native long or(long rightLong);
 
-    public native NativeLong shiftLeft(int int1);
+    public native long shiftLeft(int int1);
 
-    public native NativeLong shiftRight(int int1);
+    public native long shiftRight(int int1);
 
-    public native NativeLong shiftRightUnsigned(int int1);
+    public native long shiftRightUnsigned(int int1);
 
-    public native NativeLong subtract(NativeLong rightLong);
+    public native long subtract(long rightLong);
 
     public native int toInt();
 
     public native double toNumber();
 
-    public native NativeLong xor(NativeLong rightLong);
+    public native long xor(long rightLong);
 
     // This is a native object whose hashCode method should never be called.
     @SuppressWarnings("EqualsHashCode")

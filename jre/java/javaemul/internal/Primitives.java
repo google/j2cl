@@ -15,11 +15,11 @@
  */
 package javaemul.internal;
 
-import javaemul.internal.LongUtils.NativeLong;
 import jsinterop.annotations.JsType;
 
 /**
- * Static Primitive helper. This class should only use int & NativeLong and avoid casts.
+ * Static Primitive helper. This class should only use int, long and double and avoid casts and
+ * coercions.
  */
 @JsType(namespace = "vmbootstrap")
 public class Primitives {
@@ -76,58 +76,58 @@ public class Primitives {
     return toShort(instance);
   }
 
-  public static NativeLong widenByteToLong(int instance) {
+  public static long widenByteToLong(int instance) {
     return LongUtils.fromInt(instance);
   }
 
-  public static NativeLong widenCharToLong(int instance) {
+  public static long widenCharToLong(int instance) {
     return LongUtils.fromInt(instance);
   }
 
-  public static NativeLong widenShortToLong(int instance) {
+  public static long widenShortToLong(int instance) {
     return LongUtils.fromInt(instance);
   }
 
-  public static NativeLong widenIntToLong(int instance) {
+  public static long widenIntToLong(int instance) {
     return LongUtils.fromInt(instance);
   }
 
-  public static NativeLong narrowFloatToLong(int instance) {
+  public static long narrowFloatToLong(int instance) {
     return LongUtils.fromNumber(instance);
   }
 
-  public static NativeLong narrowDoubleToLong(int instance) {
+  public static long narrowDoubleToLong(int instance) {
     return LongUtils.fromNumber(instance);
   }
 
   /** Narrows a Long to a 8-bit signed number. */
-  public static int narrowLongToByte(NativeLong instance) {
+  public static int narrowLongToByte(long instance) {
     int intValue = LongUtils.toInt(instance);
     return toByte(intValue);
   }
 
   /** Narrows a Long to a 16-bit number. */
-  public static int narrowLongToChar(NativeLong instance) {
+  public static int narrowLongToChar(long instance) {
     int intValue = LongUtils.toInt(instance);
     return toChar(intValue);
   }
 
   /** Narrows a Long to a 16-bit signed number. */
-  public static int narrowLongToShort(NativeLong instance) {
+  public static int narrowLongToShort(long instance) {
     int intValue = LongUtils.toInt(instance);
     return toShort(intValue);
   }
 
   /** Narrows a Long to a 32-bit signed number. */
-  public static int narrowLongToInt(NativeLong instance) {
+  public static int narrowLongToInt(long instance) {
     return LongUtils.toInt(instance);
   }
 
-  public static double widenLongToFloat(NativeLong instance) {
+  public static double widenLongToFloat(long instance) {
     return LongUtils.toNumber(instance);
   }
 
-  public static double widenLongToDouble(NativeLong instance) {
+  public static double widenLongToDouble(long instance) {
     return LongUtils.toNumber(instance);
   }
 

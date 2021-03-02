@@ -1,20 +1,23 @@
 Integration tests size report:
 **************************************
-There are 1 optimized size changes.
+There are 4 optimized size changes.
 Total optimized size (of already existing tests) changed from
-  2035003 to 2035007 bytes (100%->100.0%) and from
-  725095 to 725089 bytes (100%->100.0%) gzipped.
+  2035007 to 2034950 bytes (100%->100.0%) and from
+  725089 to 725036 bytes (100%->100.0%) gzipped.
 
 
 Shrinkage report highlights:
 **************************************
         old      new
-       1788     1782 innerclassinitorder.esnext (-0.3%)
+       2305     2274 alllongoperations.esnext (-1.3%)
+       2617     2590 alllongoperations (-1.0%)
 
 
 Expansion report highlights:
 **************************************
-  none
+        old      new
+       3484     3488 underflowoverflowconversion (0.1%)
+       3191     3192 underflowoverflowconversion.esnext (0.0%)
 
 
 Incremental size reports (non-gzip):
@@ -27,12 +30,12 @@ Incremental size reports (non-gzip):
 Uncompiled bundle reports:
 **************************************
         old      new
-    4023278  4023278 box2d_default (unchanged)
-    2196770  2196770 box2d_default.minified (unchanged)
-    1166851  1166851 box2d_default.rta (unchanged)
-    2419991  2419991 emptyclass (unchanged)
-    1455074  1455074 emptyclass.minified (unchanged)
-     700249   700249 emptyclass.rta (unchanged)
+    4022927  4024246 box2d_default (0.0%)
+    2196399  2197297 box2d_default.minified (0.0%)
+    1166682  1167580 box2d_default.rta (0.1%)
+    2419674  2420993 emptyclass (0.1%)
+    1454737  1455635 emptyclass.minified (0.1%)
+     700113   701011 emptyclass.rta (0.1%)
 
 
 All reports:
@@ -40,8 +43,8 @@ All reports:
         old      new
         998      998 abstractinnerclass (unchanged)
         684      684 abstractinnerclass.esnext (unchanged)
-       2617     2617 alllongoperations (unchanged)
-       2305     2305 alllongoperations.esnext (unchanged)
+       2617     2590 alllongoperations (-1.0%)
+       2305     2274 alllongoperations.esnext (-1.3%)
        4797     4797 allsimplebridges (unchanged)
        3037     3037 allsimplebridges.esnext (unchanged)
        2287     2287 argumentimplicitcasts (unchanged)
@@ -187,7 +190,7 @@ All reports:
          22       22 innerclassinheritance (unchanged)
          22       22 innerclassinheritance.esnext (unchanged)
        2063     2063 innerclassinitorder (unchanged)
-       1788     1782 innerclassinitorder.esnext (-0.3%)
+       1782     1782 innerclassinitorder.esnext (unchanged)
        2176     2176 instancecompiletimeconstant (unchanged)
        1868     1868 instancecompiletimeconstant.esnext (unchanged)
         945      945 instanceinitorder (unchanged)
@@ -400,8 +403,8 @@ All reports:
         747      747 typewildcards.esnext (unchanged)
        1146     1146 unaryexpressions (unchanged)
         862      862 unaryexpressions.esnext (unchanged)
-       3484     3484 underflowoverflowconversion (unchanged)
-       3191     3191 underflowoverflowconversion.esnext (unchanged)
+       3484     3488 underflowoverflowconversion (0.1%)
+       3191     3192 underflowoverflowconversion.esnext (0.0%)
         179      179 unusedmultiexpressionreturn (unchanged)
         184      184 unusedmultiexpressionreturn.esnext (unchanged)
        3735     3735 varargs (unchanged)
