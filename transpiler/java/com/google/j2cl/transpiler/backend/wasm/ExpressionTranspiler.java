@@ -193,7 +193,8 @@ final class ExpressionTranspiler {
 
       @Override
       public boolean enterCastExpression(CastExpression castExpression) {
-        TypeDescriptor castTypeDescriptor = castExpression.getCastTypeDescriptor();
+        TypeDescriptor castTypeDescriptor =
+            castExpression.getCastTypeDescriptor().toRawTypeDescriptor();
         if (castExpression.getExpression().getTypeDescriptor().isPrimitive()) {
           // TODO(b/170691747): Remove when boxing is done.
           return enterExpression(castExpression);
