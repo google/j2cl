@@ -1,3 +1,39 @@
+;;; Code for simplelocalclass.SimpleLocalClass [vtable]
+(global $simplelocalclass.SimpleLocalClass.vtable (mut (ref null $simplelocalclass.SimpleLocalClass.vtable)) (ref.null $simplelocalclass.SimpleLocalClass.vtable))
+
+;;; Code for simplelocalclass.SimpleLocalClass.1InnerClass [vtable]
+(global $simplelocalclass.SimpleLocalClass.1InnerClass.vtable (mut (ref null $simplelocalclass.SimpleLocalClass.1InnerClass.vtable)) (ref.null $simplelocalclass.SimpleLocalClass.1InnerClass.vtable))
+
+;;; Code for simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures [vtable]
+(global $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.vtable (mut (ref null $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.vtable)) (ref.null $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.vtable))
+
+;;; Code for simplelocalclass.SimpleLocalClass.2InnerClass [vtable]
+(global $simplelocalclass.SimpleLocalClass.2InnerClass.vtable (mut (ref null $simplelocalclass.SimpleLocalClass.2InnerClass.vtable)) (ref.null $simplelocalclass.SimpleLocalClass.2InnerClass.vtable))
+
+;;; Code for simplelocalclass.SimpleLocalClass.1Abc$InnerClass [vtable]
+(global $simplelocalclass.SimpleLocalClass.1Abc$InnerClass.vtable (mut (ref null $simplelocalclass.SimpleLocalClass.1Abc$InnerClass.vtable)) (ref.null $simplelocalclass.SimpleLocalClass.1Abc$InnerClass.vtable))
+
+;;; Code for simplelocalclass.SimpleLocalClass.1Klm$InnerClass [vtable]
+(global $simplelocalclass.SimpleLocalClass.1Klm$InnerClass.vtable (mut (ref null $simplelocalclass.SimpleLocalClass.1Klm$InnerClass.vtable)) (ref.null $simplelocalclass.SimpleLocalClass.1Klm$InnerClass.vtable))
+
+;;; Code for simplelocalclass.SimpleLocalClass [static fields]
+(global $f_$initialized__simplelocalclass_SimpleLocalClass (mut i32) (i32.const 0))
+
+;;; Code for simplelocalclass.SimpleLocalClass.1InnerClass [static fields]
+(global $f_$initialized__simplelocalclass_SimpleLocalClass_1InnerClass (mut i32) (i32.const 0))
+
+;;; Code for simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures [static fields]
+(global $f_$initialized__simplelocalclass_SimpleLocalClass_1InnerClassWithoutCaptures (mut i32) (i32.const 0))
+
+;;; Code for simplelocalclass.SimpleLocalClass.2InnerClass [static fields]
+(global $f_$initialized__simplelocalclass_SimpleLocalClass_2InnerClass (mut i32) (i32.const 0))
+
+;;; Code for simplelocalclass.SimpleLocalClass.1Abc$InnerClass [static fields]
+(global $f_$initialized__simplelocalclass_SimpleLocalClass_1Abc$InnerClass (mut i32) (i32.const 0))
+
+;;; Code for simplelocalclass.SimpleLocalClass.1Klm$InnerClass [static fields]
+(global $f_$initialized__simplelocalclass_SimpleLocalClass_1Klm$InnerClass (mut i32) (i32.const 0))
+
 ;;; Code for simplelocalclass.SimpleLocalClass [CLASS]
 (type $simplelocalclass.SimpleLocalClass (struct
  (field $vtable (ref null $simplelocalclass.SimpleLocalClass.vtable))
@@ -13,8 +49,6 @@
  (field $m_fun__void (mut (ref $function.__$void)))
  (field $m_foo__void (mut (ref $function.__$void)))
 ))
-(global $simplelocalclass.SimpleLocalClass.vtable (mut (ref null $simplelocalclass.SimpleLocalClass.vtable)) (ref.null $simplelocalclass.SimpleLocalClass.vtable))
-(global $f_$initialized__simplelocalclass_SimpleLocalClass (mut i32) (i32.const 0))
 
 ;;; SimpleLocalClass()
 (func $m_<init>__void@simplelocalclass.SimpleLocalClass
@@ -119,8 +153,6 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_fun__int (mut (ref $function.__$int)))
 ))
-(global $simplelocalclass.SimpleLocalClass.1InnerClass.vtable (mut (ref null $simplelocalclass.SimpleLocalClass.1InnerClass.vtable)) (ref.null $simplelocalclass.SimpleLocalClass.1InnerClass.vtable))
-(global $f_$initialized__simplelocalclass_SimpleLocalClass_1InnerClass (mut i32) (i32.const 0))
 
 ;;; InnerClass(SimpleLocalClass $outer_this, int $captured_localVar, int $captured_p)
 (func $m_<init>__simplelocalclass_SimpleLocalClass__int__int__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1InnerClass
@@ -194,8 +226,6 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
-(global $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.vtable (mut (ref null $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.vtable)) (ref.null $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.vtable))
-(global $f_$initialized__simplelocalclass_SimpleLocalClass_1InnerClassWithoutCaptures (mut i32) (i32.const 0))
 
 ;;; InnerClassWithoutCaptures(SimpleLocalClass $outer_this)
 (func $m_<init>__simplelocalclass_SimpleLocalClass__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures
@@ -247,8 +277,6 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
-(global $simplelocalclass.SimpleLocalClass.2InnerClass.vtable (mut (ref null $simplelocalclass.SimpleLocalClass.2InnerClass.vtable)) (ref.null $simplelocalclass.SimpleLocalClass.2InnerClass.vtable))
-(global $f_$initialized__simplelocalclass_SimpleLocalClass_2InnerClass (mut i32) (i32.const 0))
 
 ;;; InnerClass(SimpleLocalClass $outer_this, int $captured_localVar)
 (func $m_<init>__simplelocalclass_SimpleLocalClass__int__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.2InnerClass
@@ -314,8 +342,6 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
-(global $simplelocalclass.SimpleLocalClass.1Abc$InnerClass.vtable (mut (ref null $simplelocalclass.SimpleLocalClass.1Abc$InnerClass.vtable)) (ref.null $simplelocalclass.SimpleLocalClass.1Abc$InnerClass.vtable))
-(global $f_$initialized__simplelocalclass_SimpleLocalClass_1Abc$InnerClass (mut i32) (i32.const 0))
 
 ;;; Abc$InnerClass(SimpleLocalClass $outer_this)
 (func $m_<init>__simplelocalclass_SimpleLocalClass__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1Abc$InnerClass
@@ -365,8 +391,6 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
-(global $simplelocalclass.SimpleLocalClass.1Klm$InnerClass.vtable (mut (ref null $simplelocalclass.SimpleLocalClass.1Klm$InnerClass.vtable)) (ref.null $simplelocalclass.SimpleLocalClass.1Klm$InnerClass.vtable))
-(global $f_$initialized__simplelocalclass_SimpleLocalClass_1Klm$InnerClass (mut i32) (i32.const 0))
 
 ;;; Klm$InnerClass(SimpleLocalClass $outer_this)
 (func $m_<init>__simplelocalclass_SimpleLocalClass__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1Klm$InnerClass
@@ -403,20 +427,20 @@
  )
 )
 
- ;;; Code for simplelocalclass.SimpleLocalClass [vtable]
+ ;;; Code for simplelocalclass.SimpleLocalClass [vtable.init]
  (global.set $simplelocalclass.SimpleLocalClass.vtable (struct.new_with_rtt $simplelocalclass.SimpleLocalClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__int__void@simplelocalclass.SimpleLocalClass) (ref.func $m_fun__void@simplelocalclass.SimpleLocalClass) (ref.func $m_foo__void@simplelocalclass.SimpleLocalClass) (rtt.canon $simplelocalclass.SimpleLocalClass.vtable)))
 
- ;;; Code for simplelocalclass.SimpleLocalClass.1InnerClass [vtable]
+ ;;; Code for simplelocalclass.SimpleLocalClass.1InnerClass [vtable.init]
  (global.set $simplelocalclass.SimpleLocalClass.1InnerClass.vtable (struct.new_with_rtt $simplelocalclass.SimpleLocalClass.1InnerClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_fun__int@simplelocalclass.SimpleLocalClass.1InnerClass) (rtt.canon $simplelocalclass.SimpleLocalClass.1InnerClass.vtable)))
 
- ;;; Code for simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures [vtable]
+ ;;; Code for simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures [vtable.init]
  (global.set $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.vtable (struct.new_with_rtt $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.vtable)))
 
- ;;; Code for simplelocalclass.SimpleLocalClass.2InnerClass [vtable]
+ ;;; Code for simplelocalclass.SimpleLocalClass.2InnerClass [vtable.init]
  (global.set $simplelocalclass.SimpleLocalClass.2InnerClass.vtable (struct.new_with_rtt $simplelocalclass.SimpleLocalClass.2InnerClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $simplelocalclass.SimpleLocalClass.2InnerClass.vtable)))
 
- ;;; Code for simplelocalclass.SimpleLocalClass.1Abc$InnerClass [vtable]
+ ;;; Code for simplelocalclass.SimpleLocalClass.1Abc$InnerClass [vtable.init]
  (global.set $simplelocalclass.SimpleLocalClass.1Abc$InnerClass.vtable (struct.new_with_rtt $simplelocalclass.SimpleLocalClass.1Abc$InnerClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $simplelocalclass.SimpleLocalClass.1Abc$InnerClass.vtable)))
 
- ;;; Code for simplelocalclass.SimpleLocalClass.1Klm$InnerClass [vtable]
+ ;;; Code for simplelocalclass.SimpleLocalClass.1Klm$InnerClass [vtable.init]
  (global.set $simplelocalclass.SimpleLocalClass.1Klm$InnerClass.vtable (struct.new_with_rtt $simplelocalclass.SimpleLocalClass.1Klm$InnerClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $simplelocalclass.SimpleLocalClass.1Klm$InnerClass.vtable)))

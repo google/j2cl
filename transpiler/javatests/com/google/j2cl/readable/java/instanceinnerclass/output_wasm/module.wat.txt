@@ -1,3 +1,15 @@
+;;; Code for instanceinnerclass.InstanceInnerClass [vtable]
+(global $instanceinnerclass.InstanceInnerClass.vtable (mut (ref null $instanceinnerclass.InstanceInnerClass.vtable)) (ref.null $instanceinnerclass.InstanceInnerClass.vtable))
+
+;;; Code for instanceinnerclass.InstanceInnerClass.InnerClass [vtable]
+(global $instanceinnerclass.InstanceInnerClass.InnerClass.vtable (mut (ref null $instanceinnerclass.InstanceInnerClass.InnerClass.vtable)) (ref.null $instanceinnerclass.InstanceInnerClass.InnerClass.vtable))
+
+;;; Code for instanceinnerclass.InstanceInnerClass [static fields]
+(global $f_$initialized__instanceinnerclass_InstanceInnerClass (mut i32) (i32.const 0))
+
+;;; Code for instanceinnerclass.InstanceInnerClass.InnerClass [static fields]
+(global $f_$initialized__instanceinnerclass_InstanceInnerClass_InnerClass (mut i32) (i32.const 0))
+
 ;;; Code for instanceinnerclass.InstanceInnerClass [CLASS]
 (type $instanceinnerclass.InstanceInnerClass (struct
  (field $vtable (ref null $instanceinnerclass.InstanceInnerClass.vtable))
@@ -13,8 +25,6 @@
  (field $m_funOuter__void (mut (ref $function.__$void)))
  (field $m_test__void (mut (ref $function.__$void)))
 ))
-(global $instanceinnerclass.InstanceInnerClass.vtable (mut (ref null $instanceinnerclass.InstanceInnerClass.vtable)) (ref.null $instanceinnerclass.InstanceInnerClass.vtable))
-(global $f_$initialized__instanceinnerclass_InstanceInnerClass (mut i32) (i32.const 0))
 
 ;;; InstanceInnerClass()
 (func $m_<init>__void@instanceinnerclass.InstanceInnerClass
@@ -90,8 +100,6 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_funInner__void (mut (ref $function.__$void)))
 ))
-(global $instanceinnerclass.InstanceInnerClass.InnerClass.vtable (mut (ref null $instanceinnerclass.InstanceInnerClass.InnerClass.vtable)) (ref.null $instanceinnerclass.InstanceInnerClass.InnerClass.vtable))
-(global $f_$initialized__instanceinnerclass_InstanceInnerClass_InnerClass (mut i32) (i32.const 0))
 
 ;;; InnerClass(InstanceInnerClass $outer_this)
 (func $m_<init>__instanceinnerclass_InstanceInnerClass__void@instanceinnerclass.InstanceInnerClass.InnerClass
@@ -159,8 +167,8 @@
  )
 )
 
- ;;; Code for instanceinnerclass.InstanceInnerClass [vtable]
+ ;;; Code for instanceinnerclass.InstanceInnerClass [vtable.init]
  (global.set $instanceinnerclass.InstanceInnerClass.vtable (struct.new_with_rtt $instanceinnerclass.InstanceInnerClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_funOuter__void@instanceinnerclass.InstanceInnerClass) (ref.func $m_test__void@instanceinnerclass.InstanceInnerClass) (rtt.canon $instanceinnerclass.InstanceInnerClass.vtable)))
 
- ;;; Code for instanceinnerclass.InstanceInnerClass.InnerClass [vtable]
+ ;;; Code for instanceinnerclass.InstanceInnerClass.InnerClass [vtable.init]
  (global.set $instanceinnerclass.InstanceInnerClass.InnerClass.vtable (struct.new_with_rtt $instanceinnerclass.InstanceInnerClass.InnerClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_funInner__void@instanceinnerclass.InstanceInnerClass.InnerClass) (rtt.canon $instanceinnerclass.InstanceInnerClass.InnerClass.vtable)))

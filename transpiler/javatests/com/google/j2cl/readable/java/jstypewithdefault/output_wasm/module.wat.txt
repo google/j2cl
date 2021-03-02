@@ -1,3 +1,12 @@
+;;; Code for jstypewithdefault.SomeJsType [vtable]
+(global $jstypewithdefault.SomeJsType.vtable (mut (ref null $jstypewithdefault.SomeJsType.vtable)) (ref.null $jstypewithdefault.SomeJsType.vtable))
+
+;;; Code for jstypewithdefault.SomeJsType [static fields]
+(global $f_$initialized__jstypewithdefault_SomeJsType (mut i32) (i32.const 0))
+
+;;; Code for jstypewithdefault.Interface [static fields]
+(global $f_$initialized__jstypewithdefault_Interface (mut i32) (i32.const 0))
+
 ;;; Code for jstypewithdefault.SomeJsType [CLASS]
 (type $jstypewithdefault.SomeJsType (struct
  (field $vtable (ref null $jstypewithdefault.SomeJsType.vtable))
@@ -11,8 +20,6 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_defaultMethod__void (mut (ref $function.__$void)))
 ))
-(global $jstypewithdefault.SomeJsType.vtable (mut (ref null $jstypewithdefault.SomeJsType.vtable)) (ref.null $jstypewithdefault.SomeJsType.vtable))
-(global $f_$initialized__jstypewithdefault_SomeJsType (mut i32) (i32.const 0))
 
 ;;; SomeJsType()
 (func $m_<init>__void@jstypewithdefault.SomeJsType
@@ -63,7 +70,6 @@
 )
 
 ;;; Code for jstypewithdefault.Interface [INTERFACE]
-(global $f_$initialized__jstypewithdefault_Interface (mut i32) (i32.const 0))
 
 ;;; void Interface.defaultMethod()
 (func $m_defaultMethod__void@jstypewithdefault.Interface
@@ -92,5 +98,5 @@
  )
 )
 
- ;;; Code for jstypewithdefault.SomeJsType [vtable]
+ ;;; Code for jstypewithdefault.SomeJsType [vtable.init]
  (global.set $jstypewithdefault.SomeJsType.vtable (struct.new_with_rtt $jstypewithdefault.SomeJsType.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_defaultMethod__void@jstypewithdefault.SomeJsType) (rtt.canon $jstypewithdefault.SomeJsType.vtable)))

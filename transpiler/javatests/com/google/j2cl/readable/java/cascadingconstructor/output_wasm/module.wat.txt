@@ -1,3 +1,9 @@
+;;; Code for cascadingconstructor.CascadingConstructor [vtable]
+(global $cascadingconstructor.CascadingConstructor.vtable (mut (ref null $cascadingconstructor.CascadingConstructor.vtable)) (ref.null $cascadingconstructor.CascadingConstructor.vtable))
+
+;;; Code for cascadingconstructor.CascadingConstructor [static fields]
+(global $f_$initialized__cascadingconstructor_CascadingConstructor (mut i32) (i32.const 0))
+
 ;;; Code for cascadingconstructor.CascadingConstructor [CLASS]
 (type $cascadingconstructor.CascadingConstructor (struct
  (field $vtable (ref null $cascadingconstructor.CascadingConstructor.vtable))
@@ -12,8 +18,6 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
-(global $cascadingconstructor.CascadingConstructor.vtable (mut (ref null $cascadingconstructor.CascadingConstructor.vtable)) (ref.null $cascadingconstructor.CascadingConstructor.vtable))
-(global $f_$initialized__cascadingconstructor_CascadingConstructor (mut i32) (i32.const 0))
 
 ;;; CascadingConstructor(int a, int b)
 (func $m_<init>__int__int__void_$p_cascadingconstructor_CascadingConstructor@cascadingconstructor.CascadingConstructor
@@ -67,5 +71,5 @@
  )
 )
 
- ;;; Code for cascadingconstructor.CascadingConstructor [vtable]
+ ;;; Code for cascadingconstructor.CascadingConstructor [vtable.init]
  (global.set $cascadingconstructor.CascadingConstructor.vtable (struct.new_with_rtt $cascadingconstructor.CascadingConstructor.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $cascadingconstructor.CascadingConstructor.vtable)))

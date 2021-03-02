@@ -1,3 +1,18 @@
+;;; Code for switchstatement.Numbers [vtable]
+(global $switchstatement.Numbers.vtable (mut (ref null $switchstatement.Numbers.vtable)) (ref.null $switchstatement.Numbers.vtable))
+
+;;; Code for switchstatement.SwitchStatement [vtable]
+(global $switchstatement.SwitchStatement.vtable (mut (ref null $switchstatement.SwitchStatement.vtable)) (ref.null $switchstatement.SwitchStatement.vtable))
+
+;;; Code for switchstatement.Numbers [static fields]
+(global $f_ONE__switchstatement_Numbers (mut (ref null $switchstatement.Numbers)) (ref.null $switchstatement.Numbers))
+(global $f_TWO__switchstatement_Numbers (mut (ref null $switchstatement.Numbers)) (ref.null $switchstatement.Numbers))
+(global $f_namesToValuesMap__switchstatement_Numbers_ (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
+(global $f_$initialized__switchstatement_Numbers (mut i32) (i32.const 0))
+
+;;; Code for switchstatement.SwitchStatement [static fields]
+(global $f_$initialized__switchstatement_SwitchStatement (mut i32) (i32.const 0))
+
 ;;; Code for switchstatement.Numbers [ENUM]
 (type $switchstatement.Numbers (struct
  (field $vtable (ref null $switchstatement.Numbers.vtable))
@@ -17,11 +32,6 @@
  (field $m_compareTo__java_lang_Enum__int (mut (ref $function.$java.lang.Enum__$int)))
  (field $m_compareTo__java_lang_Object__int (mut (ref $function.$java.lang.Object__$int)))
 ))
-(global $switchstatement.Numbers.vtable (mut (ref null $switchstatement.Numbers.vtable)) (ref.null $switchstatement.Numbers.vtable))
-(global $f_ONE__switchstatement_Numbers (mut (ref null $switchstatement.Numbers)) (ref.null $switchstatement.Numbers))
-(global $f_TWO__switchstatement_Numbers (mut (ref null $switchstatement.Numbers)) (ref.null $switchstatement.Numbers))
-(global $f_namesToValuesMap__switchstatement_Numbers_ (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
-(global $f_$initialized__switchstatement_Numbers (mut i32) (i32.const 0))
 
 ;;; Numbers()
 (func $m_<init>__void_$p_switchstatement_Numbers@switchstatement.Numbers
@@ -137,8 +147,6 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_main__void (mut (ref $function.__$void)))
 ))
-(global $switchstatement.SwitchStatement.vtable (mut (ref null $switchstatement.SwitchStatement.vtable)) (ref.null $switchstatement.SwitchStatement.vtable))
-(global $f_$initialized__switchstatement_SwitchStatement (mut i32) (i32.const 0))
 
 ;;; SwitchStatement()
 (func $m_<init>__void@switchstatement.SwitchStatement
@@ -387,8 +395,8 @@
  )
 )
 
- ;;; Code for switchstatement.Numbers [vtable]
+ ;;; Code for switchstatement.Numbers [vtable.init]
  (global.set $switchstatement.Numbers.vtable (struct.new_with_rtt $switchstatement.Numbers.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Enum) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_getDeclaringClass__java_lang_Class@java.lang.Enum) (ref.func $m_name__java_lang_String@java.lang.Enum) (ref.func $m_ordinal__int@java.lang.Enum) (ref.func $m_compareTo__java_lang_Enum__int@java.lang.Enum) (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum) (rtt.canon $switchstatement.Numbers.vtable)))
 
- ;;; Code for switchstatement.SwitchStatement [vtable]
+ ;;; Code for switchstatement.SwitchStatement [vtable.init]
  (global.set $switchstatement.SwitchStatement.vtable (struct.new_with_rtt $switchstatement.SwitchStatement.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_main__void@switchstatement.SwitchStatement) (rtt.canon $switchstatement.SwitchStatement.vtable)))

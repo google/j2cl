@@ -1,3 +1,9 @@
+;;; Code for characterliteral.CharacterLiteral [vtable]
+(global $characterliteral.CharacterLiteral.vtable (mut (ref null $characterliteral.CharacterLiteral.vtable)) (ref.null $characterliteral.CharacterLiteral.vtable))
+
+;;; Code for characterliteral.CharacterLiteral [static fields]
+(global $f_$initialized__characterliteral_CharacterLiteral (mut i32) (i32.const 0))
+
 ;;; Code for characterliteral.CharacterLiteral [CLASS]
 (type $characterliteral.CharacterLiteral (struct
  (field $vtable (ref null $characterliteral.CharacterLiteral.vtable))
@@ -11,8 +17,6 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_main__void (mut (ref $function.__$void)))
 ))
-(global $characterliteral.CharacterLiteral.vtable (mut (ref null $characterliteral.CharacterLiteral.vtable)) (ref.null $characterliteral.CharacterLiteral.vtable))
-(global $f_$initialized__characterliteral_CharacterLiteral (mut i32) (i32.const 0))
 
 ;;; CharacterLiteral()
 (func $m_<init>__void@characterliteral.CharacterLiteral
@@ -300,5 +304,5 @@
  )
 )
 
- ;;; Code for characterliteral.CharacterLiteral [vtable]
+ ;;; Code for characterliteral.CharacterLiteral [vtable.init]
  (global.set $characterliteral.CharacterLiteral.vtable (struct.new_with_rtt $characterliteral.CharacterLiteral.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_main__void@characterliteral.CharacterLiteral) (rtt.canon $characterliteral.CharacterLiteral.vtable)))

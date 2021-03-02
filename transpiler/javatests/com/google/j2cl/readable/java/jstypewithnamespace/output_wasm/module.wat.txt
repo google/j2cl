@@ -1,3 +1,9 @@
+;;; Code for jstypewithnamespace.JsTypeWithNamespace [vtable]
+(global $jstypewithnamespace.JsTypeWithNamespace.vtable (mut (ref null $jstypewithnamespace.JsTypeWithNamespace.vtable)) (ref.null $jstypewithnamespace.JsTypeWithNamespace.vtable))
+
+;;; Code for jstypewithnamespace.JsTypeWithNamespace [static fields]
+(global $f_$initialized__jstypewithnamespace_JsTypeWithNamespace (mut i32) (i32.const 0))
+
 ;;; Code for jstypewithnamespace.JsTypeWithNamespace [CLASS]
 (type $jstypewithnamespace.JsTypeWithNamespace (struct
  (field $vtable (ref null $jstypewithnamespace.JsTypeWithNamespace.vtable))
@@ -10,8 +16,6 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
-(global $jstypewithnamespace.JsTypeWithNamespace.vtable (mut (ref null $jstypewithnamespace.JsTypeWithNamespace.vtable)) (ref.null $jstypewithnamespace.JsTypeWithNamespace.vtable))
-(global $f_$initialized__jstypewithnamespace_JsTypeWithNamespace (mut i32) (i32.const 0))
 
 ;;; JsTypeWithNamespace()
 (func $m_<init>__void@jstypewithnamespace.JsTypeWithNamespace
@@ -47,5 +51,5 @@
  )
 )
 
- ;;; Code for jstypewithnamespace.JsTypeWithNamespace [vtable]
+ ;;; Code for jstypewithnamespace.JsTypeWithNamespace [vtable.init]
  (global.set $jstypewithnamespace.JsTypeWithNamespace.vtable (struct.new_with_rtt $jstypewithnamespace.JsTypeWithNamespace.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $jstypewithnamespace.JsTypeWithNamespace.vtable)))

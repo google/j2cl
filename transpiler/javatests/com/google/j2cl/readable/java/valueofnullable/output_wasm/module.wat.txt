@@ -1,3 +1,9 @@
+;;; Code for valueofnullable.ValueOfNullable [vtable]
+(global $valueofnullable.ValueOfNullable.vtable (mut (ref null $valueofnullable.ValueOfNullable.vtable)) (ref.null $valueofnullable.ValueOfNullable.vtable))
+
+;;; Code for valueofnullable.ValueOfNullable [static fields]
+(global $f_$initialized__valueofnullable_ValueOfNullable (mut i32) (i32.const 0))
+
 ;;; Code for valueofnullable.ValueOfNullable [CLASS]
 (type $valueofnullable.ValueOfNullable (struct
  (field $vtable (ref null $valueofnullable.ValueOfNullable.vtable))
@@ -13,8 +19,6 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
-(global $valueofnullable.ValueOfNullable.vtable (mut (ref null $valueofnullable.ValueOfNullable.vtable)) (ref.null $valueofnullable.ValueOfNullable.vtable))
-(global $f_$initialized__valueofnullable_ValueOfNullable (mut i32) (i32.const 0))
 
 ;;; ValueOfNullable()
 (func $m_<init>__void@valueofnullable.ValueOfNullable
@@ -71,5 +75,5 @@
  )
 )
 
- ;;; Code for valueofnullable.ValueOfNullable [vtable]
+ ;;; Code for valueofnullable.ValueOfNullable [vtable.init]
  (global.set $valueofnullable.ValueOfNullable.vtable (struct.new_with_rtt $valueofnullable.ValueOfNullable.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $valueofnullable.ValueOfNullable.vtable)))

@@ -1,3 +1,9 @@
+;;; Code for jstypeswithconstructor.JsTypesWithConstructor [vtable]
+(global $jstypeswithconstructor.JsTypesWithConstructor.vtable (mut (ref null $jstypeswithconstructor.JsTypesWithConstructor.vtable)) (ref.null $jstypeswithconstructor.JsTypesWithConstructor.vtable))
+
+;;; Code for jstypeswithconstructor.JsTypesWithConstructor [static fields]
+(global $f_$initialized__jstypeswithconstructor_JsTypesWithConstructor (mut i32) (i32.const 0))
+
 ;;; Code for jstypeswithconstructor.JsTypesWithConstructor [CLASS]
 (type $jstypeswithconstructor.JsTypesWithConstructor (struct
  (field $vtable (ref null $jstypeswithconstructor.JsTypesWithConstructor.vtable))
@@ -10,8 +16,6 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
-(global $jstypeswithconstructor.JsTypesWithConstructor.vtable (mut (ref null $jstypeswithconstructor.JsTypesWithConstructor.vtable)) (ref.null $jstypeswithconstructor.JsTypesWithConstructor.vtable))
-(global $f_$initialized__jstypeswithconstructor_JsTypesWithConstructor (mut i32) (i32.const 0))
 
 ;;; JsTypesWithConstructor()
 (func $m_<init>__void@jstypeswithconstructor.JsTypesWithConstructor
@@ -47,5 +51,5 @@
  )
 )
 
- ;;; Code for jstypeswithconstructor.JsTypesWithConstructor [vtable]
+ ;;; Code for jstypeswithconstructor.JsTypesWithConstructor [vtable.init]
  (global.set $jstypeswithconstructor.JsTypesWithConstructor.vtable (struct.new_with_rtt $jstypeswithconstructor.JsTypesWithConstructor.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $jstypeswithconstructor.JsTypesWithConstructor.vtable)))

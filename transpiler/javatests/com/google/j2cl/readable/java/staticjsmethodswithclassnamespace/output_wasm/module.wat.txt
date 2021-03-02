@@ -1,3 +1,15 @@
+;;; Code for staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace [vtable]
+(global $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.vtable (mut (ref null $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.vtable)) (ref.null $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.vtable))
+
+;;; Code for staticjsmethodswithclassnamespace.ExternalCaller [vtable]
+(global $staticjsmethodswithclassnamespace.ExternalCaller.vtable (mut (ref null $staticjsmethodswithclassnamespace.ExternalCaller.vtable)) (ref.null $staticjsmethodswithclassnamespace.ExternalCaller.vtable))
+
+;;; Code for staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace [static fields]
+(global $f_$initialized__staticjsmethodswithclassnamespace_StaticJsMethodsWithClassNamespace (mut i32) (i32.const 0))
+
+;;; Code for staticjsmethodswithclassnamespace.ExternalCaller [static fields]
+(global $f_$initialized__staticjsmethodswithclassnamespace_ExternalCaller (mut i32) (i32.const 0))
+
 ;;; Code for staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace [CLASS]
 (type $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace (struct
  (field $vtable (ref null $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.vtable))
@@ -11,8 +23,6 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_test__void (mut (ref $function.__$void)))
 ))
-(global $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.vtable (mut (ref null $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.vtable)) (ref.null $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.vtable))
-(global $f_$initialized__staticjsmethodswithclassnamespace_StaticJsMethodsWithClassNamespace (mut i32) (i32.const 0))
 
 ;;; StaticJsMethodsWithClassNamespace()
 (func $m_<init>__void@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace
@@ -87,8 +97,6 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_test__void (mut (ref $function.__$void)))
 ))
-(global $staticjsmethodswithclassnamespace.ExternalCaller.vtable (mut (ref null $staticjsmethodswithclassnamespace.ExternalCaller.vtable)) (ref.null $staticjsmethodswithclassnamespace.ExternalCaller.vtable))
-(global $f_$initialized__staticjsmethodswithclassnamespace_ExternalCaller (mut i32) (i32.const 0))
 
 ;;; ExternalCaller()
 (func $m_<init>__void_$pp_staticjsmethodswithclassnamespace@staticjsmethodswithclassnamespace.ExternalCaller
@@ -136,8 +144,8 @@
  )
 )
 
- ;;; Code for staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace [vtable]
+ ;;; Code for staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace [vtable.init]
  (global.set $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.vtable (struct.new_with_rtt $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__void@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace) (rtt.canon $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.vtable)))
 
- ;;; Code for staticjsmethodswithclassnamespace.ExternalCaller [vtable]
+ ;;; Code for staticjsmethodswithclassnamespace.ExternalCaller [vtable.init]
  (global.set $staticjsmethodswithclassnamespace.ExternalCaller.vtable (struct.new_with_rtt $staticjsmethodswithclassnamespace.ExternalCaller.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__void@staticjsmethodswithclassnamespace.ExternalCaller) (rtt.canon $staticjsmethodswithclassnamespace.ExternalCaller.vtable)))

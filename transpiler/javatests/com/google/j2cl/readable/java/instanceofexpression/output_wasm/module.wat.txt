@@ -1,3 +1,15 @@
+;;; Code for instanceofexpression.InstanceofExpressions [vtable]
+(global $instanceofexpression.InstanceofExpressions.vtable (mut (ref null $instanceofexpression.InstanceofExpressions.vtable)) (ref.null $instanceofexpression.InstanceofExpressions.vtable))
+
+;;; Code for instanceofexpression.InstanceofExpressions.1 [vtable]
+(global $instanceofexpression.InstanceofExpressions.1.vtable (mut (ref null $instanceofexpression.InstanceofExpressions.1.vtable)) (ref.null $instanceofexpression.InstanceofExpressions.1.vtable))
+
+;;; Code for instanceofexpression.InstanceofExpressions [static fields]
+(global $f_$initialized__instanceofexpression_InstanceofExpressions (mut i32) (i32.const 0))
+
+;;; Code for instanceofexpression.InstanceofExpressions.1 [static fields]
+(global $f_$initialized__instanceofexpression_InstanceofExpressions_1 (mut i32) (i32.const 0))
+
 ;;; Code for instanceofexpression.InstanceofExpressions [CLASS]
 (type $instanceofexpression.InstanceofExpressions (struct
  (field $vtable (ref null $instanceofexpression.InstanceofExpressions.vtable))
@@ -14,8 +26,6 @@
  (field $m_testInstanceofBoxedType__void (mut (ref $function.__$void)))
  (field $m_testInstanceOfArray__void (mut (ref $function.__$void)))
 ))
-(global $instanceofexpression.InstanceofExpressions.vtable (mut (ref null $instanceofexpression.InstanceofExpressions.vtable)) (ref.null $instanceofexpression.InstanceofExpressions.vtable))
-(global $f_$initialized__instanceofexpression_InstanceofExpressions (mut i32) (i32.const 0))
 
 ;;; InstanceofExpressions()
 (func $m_<init>__void@instanceofexpression.InstanceofExpressions
@@ -220,8 +230,6 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
-(global $instanceofexpression.InstanceofExpressions.1.vtable (mut (ref null $instanceofexpression.InstanceofExpressions.1.vtable)) (ref.null $instanceofexpression.InstanceofExpressions.1.vtable))
-(global $f_$initialized__instanceofexpression_InstanceofExpressions_1 (mut i32) (i32.const 0))
 
 ;;; <anonymous> implements Serializable(InstanceofExpressions $outer_this)
 (func $m_<init>__instanceofexpression_InstanceofExpressions__void_$pp_instanceofexpression@instanceofexpression.InstanceofExpressions.1
@@ -258,8 +266,8 @@
  )
 )
 
- ;;; Code for instanceofexpression.InstanceofExpressions [vtable]
+ ;;; Code for instanceofexpression.InstanceofExpressions [vtable.init]
  (global.set $instanceofexpression.InstanceofExpressions.vtable (struct.new_with_rtt $instanceofexpression.InstanceofExpressions.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_testInstanceofClass__void@instanceofexpression.InstanceofExpressions) (ref.func $m_testInstanceofInterface__void@instanceofexpression.InstanceofExpressions) (ref.func $m_testInstanceofBoxedType__void@instanceofexpression.InstanceofExpressions) (ref.func $m_testInstanceOfArray__void@instanceofexpression.InstanceofExpressions) (rtt.canon $instanceofexpression.InstanceofExpressions.vtable)))
 
- ;;; Code for instanceofexpression.InstanceofExpressions.1 [vtable]
+ ;;; Code for instanceofexpression.InstanceofExpressions.1 [vtable.init]
  (global.set $instanceofexpression.InstanceofExpressions.1.vtable (struct.new_with_rtt $instanceofexpression.InstanceofExpressions.1.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $instanceofexpression.InstanceofExpressions.1.vtable)))

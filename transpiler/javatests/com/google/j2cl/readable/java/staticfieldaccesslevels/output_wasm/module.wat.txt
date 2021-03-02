@@ -1,3 +1,13 @@
+;;; Code for staticfieldaccesslevels.StaticFieldAccessLevels [vtable]
+(global $staticfieldaccesslevels.StaticFieldAccessLevels.vtable (mut (ref null $staticfieldaccesslevels.StaticFieldAccessLevels.vtable)) (ref.null $staticfieldaccesslevels.StaticFieldAccessLevels.vtable))
+
+;;; Code for staticfieldaccesslevels.StaticFieldAccessLevels [static fields]
+(global $f_a__staticfieldaccesslevels_StaticFieldAccessLevels (mut i32) (i32.const 0))
+(global $f_b__staticfieldaccesslevels_StaticFieldAccessLevels_ (mut i32) (i32.const 0))
+(global $f_c__staticfieldaccesslevels_StaticFieldAccessLevels (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
+(global $f_d__staticfieldaccesslevels_StaticFieldAccessLevels (mut i32) (i32.const 0))
+(global $f_$initialized__staticfieldaccesslevels_StaticFieldAccessLevels (mut i32) (i32.const 0))
+
 ;;; Code for staticfieldaccesslevels.StaticFieldAccessLevels [CLASS]
 (type $staticfieldaccesslevels.StaticFieldAccessLevels (struct
  (field $vtable (ref null $staticfieldaccesslevels.StaticFieldAccessLevels.vtable))
@@ -11,12 +21,6 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_test__int (mut (ref $function.__$int)))
 ))
-(global $staticfieldaccesslevels.StaticFieldAccessLevels.vtable (mut (ref null $staticfieldaccesslevels.StaticFieldAccessLevels.vtable)) (ref.null $staticfieldaccesslevels.StaticFieldAccessLevels.vtable))
-(global $f_a__staticfieldaccesslevels_StaticFieldAccessLevels (mut i32) (i32.const 0))
-(global $f_b__staticfieldaccesslevels_StaticFieldAccessLevels_ (mut i32) (i32.const 0))
-(global $f_c__staticfieldaccesslevels_StaticFieldAccessLevels (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
-(global $f_d__staticfieldaccesslevels_StaticFieldAccessLevels (mut i32) (i32.const 0))
-(global $f_$initialized__staticfieldaccesslevels_StaticFieldAccessLevels (mut i32) (i32.const 0))
 
 ;;; StaticFieldAccessLevels()
 (func $m_<init>__void@staticfieldaccesslevels.StaticFieldAccessLevels
@@ -74,5 +78,5 @@
  )
 )
 
- ;;; Code for staticfieldaccesslevels.StaticFieldAccessLevels [vtable]
+ ;;; Code for staticfieldaccesslevels.StaticFieldAccessLevels [vtable.init]
  (global.set $staticfieldaccesslevels.StaticFieldAccessLevels.vtable (struct.new_with_rtt $staticfieldaccesslevels.StaticFieldAccessLevels.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__int@staticfieldaccesslevels.StaticFieldAccessLevels) (rtt.canon $staticfieldaccesslevels.StaticFieldAccessLevels.vtable)))

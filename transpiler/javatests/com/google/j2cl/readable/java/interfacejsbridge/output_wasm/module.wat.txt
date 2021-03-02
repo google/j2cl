@@ -1,5 +1,25 @@
-;;; Code for interfacejsbridge.MyJsInterface [INTERFACE]
+;;; Code for interfacejsbridge.InterfaceImpl [vtable]
+(global $interfacejsbridge.InterfaceImpl.vtable (mut (ref null $interfacejsbridge.InterfaceImpl.vtable)) (ref.null $interfacejsbridge.InterfaceImpl.vtable))
+
+;;; Code for interfacejsbridge.Main [vtable]
+(global $interfacejsbridge.Main.vtable (mut (ref null $interfacejsbridge.Main.vtable)) (ref.null $interfacejsbridge.Main.vtable))
+
+;;; Code for interfacejsbridge.MyJsInterface [static fields]
 (global $f_$initialized__interfacejsbridge_MyJsInterface (mut i32) (i32.const 0))
+
+;;; Code for interfacejsbridge.MyInterface [static fields]
+(global $f_$initialized__interfacejsbridge_MyInterface (mut i32) (i32.const 0))
+
+;;; Code for interfacejsbridge.SubInterface [static fields]
+(global $f_$initialized__interfacejsbridge_SubInterface (mut i32) (i32.const 0))
+
+;;; Code for interfacejsbridge.InterfaceImpl [static fields]
+(global $f_$initialized__interfacejsbridge_InterfaceImpl (mut i32) (i32.const 0))
+
+;;; Code for interfacejsbridge.Main [static fields]
+(global $f_$initialized__interfacejsbridge_Main (mut i32) (i32.const 0))
+
+;;; Code for interfacejsbridge.MyJsInterface [INTERFACE]
 
 ;;; void MyJsInterface.$clinit()
 (func $$clinit__void@interfacejsbridge.MyJsInterface
@@ -19,7 +39,6 @@
 )
 
 ;;; Code for interfacejsbridge.MyInterface [INTERFACE]
-(global $f_$initialized__interfacejsbridge_MyInterface (mut i32) (i32.const 0))
 
 ;;; void MyInterface.$clinit()
 (func $$clinit__void@interfacejsbridge.MyInterface
@@ -39,7 +58,6 @@
 )
 
 ;;; Code for interfacejsbridge.SubInterface [INTERFACE]
-(global $f_$initialized__interfacejsbridge_SubInterface (mut i32) (i32.const 0))
 
 ;;; void SubInterface.$clinit()
 (func $$clinit__void@interfacejsbridge.SubInterface
@@ -71,8 +89,6 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_foo__int__int (mut (ref $function.$int__$int)))
 ))
-(global $interfacejsbridge.InterfaceImpl.vtable (mut (ref null $interfacejsbridge.InterfaceImpl.vtable)) (ref.null $interfacejsbridge.InterfaceImpl.vtable))
-(global $f_$initialized__interfacejsbridge_InterfaceImpl (mut i32) (i32.const 0))
 
 ;;; InterfaceImpl()
 (func $m_<init>__void@interfacejsbridge.InterfaceImpl
@@ -138,8 +154,6 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_test__void (mut (ref $function.__$void)))
 ))
-(global $interfacejsbridge.Main.vtable (mut (ref null $interfacejsbridge.Main.vtable)) (ref.null $interfacejsbridge.Main.vtable))
-(global $f_$initialized__interfacejsbridge_Main (mut i32) (i32.const 0))
 
 ;;; Main()
 (func $m_<init>__void@interfacejsbridge.Main
@@ -209,8 +223,8 @@
  )
 )
 
- ;;; Code for interfacejsbridge.InterfaceImpl [vtable]
+ ;;; Code for interfacejsbridge.InterfaceImpl [vtable.init]
  (global.set $interfacejsbridge.InterfaceImpl.vtable (struct.new_with_rtt $interfacejsbridge.InterfaceImpl.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__int__int@interfacejsbridge.InterfaceImpl) (rtt.canon $interfacejsbridge.InterfaceImpl.vtable)))
 
- ;;; Code for interfacejsbridge.Main [vtable]
+ ;;; Code for interfacejsbridge.Main [vtable.init]
  (global.set $interfacejsbridge.Main.vtable (struct.new_with_rtt $interfacejsbridge.Main.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__void@interfacejsbridge.Main) (rtt.canon $interfacejsbridge.Main.vtable)))

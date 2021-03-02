@@ -1,5 +1,43 @@
-;;; Code for typeannotations.ParametricType [INTERFACE]
+;;; Code for typeannotations.AbstractType [vtable]
+(global $typeannotations.AbstractType.vtable (mut (ref null $typeannotations.AbstractType.vtable)) (ref.null $typeannotations.AbstractType.vtable))
+
+;;; Code for typeannotations.AbstractTypeNonNull [vtable]
+(global $typeannotations.AbstractTypeNonNull.vtable (mut (ref null $typeannotations.AbstractTypeNonNull.vtable)) (ref.null $typeannotations.AbstractTypeNonNull.vtable))
+
+;;; Code for typeannotations.Parent [vtable]
+(global $typeannotations.Parent.vtable (mut (ref null $typeannotations.Parent.vtable)) (ref.null $typeannotations.Parent.vtable))
+
+;;; Code for typeannotations.ChildWithNullableParent [vtable]
+(global $typeannotations.ChildWithNullableParent.vtable (mut (ref null $typeannotations.ChildWithNullableParent.vtable)) (ref.null $typeannotations.ChildWithNullableParent.vtable))
+
+;;; Code for typeannotations.ChildWithNonNullableParent [vtable]
+(global $typeannotations.ChildWithNonNullableParent.vtable (mut (ref null $typeannotations.ChildWithNonNullableParent.vtable)) (ref.null $typeannotations.ChildWithNonNullableParent.vtable))
+
+;;; Code for typeannotations.TypeAnnotations [vtable]
+(global $typeannotations.TypeAnnotations.vtable (mut (ref null $typeannotations.TypeAnnotations.vtable)) (ref.null $typeannotations.TypeAnnotations.vtable))
+
+;;; Code for typeannotations.ParametricType [static fields]
 (global $f_$initialized__typeannotations_ParametricType (mut i32) (i32.const 0))
+
+;;; Code for typeannotations.AbstractType [static fields]
+(global $f_$initialized__typeannotations_AbstractType (mut i32) (i32.const 0))
+
+;;; Code for typeannotations.AbstractTypeNonNull [static fields]
+(global $f_$initialized__typeannotations_AbstractTypeNonNull (mut i32) (i32.const 0))
+
+;;; Code for typeannotations.Parent [static fields]
+(global $f_$initialized__typeannotations_Parent (mut i32) (i32.const 0))
+
+;;; Code for typeannotations.ChildWithNullableParent [static fields]
+(global $f_$initialized__typeannotations_ChildWithNullableParent (mut i32) (i32.const 0))
+
+;;; Code for typeannotations.ChildWithNonNullableParent [static fields]
+(global $f_$initialized__typeannotations_ChildWithNonNullableParent (mut i32) (i32.const 0))
+
+;;; Code for typeannotations.TypeAnnotations [static fields]
+(global $f_$initialized__typeannotations_TypeAnnotations (mut i32) (i32.const 0))
+
+;;; Code for typeannotations.ParametricType [INTERFACE]
 
 ;;; List<T> ParametricType.m(List<Map<String[], Map<List<String>[], String[]>>> l)
 (func $m_m__java_util_List__java_util_List@typeannotations.ParametricType
@@ -48,8 +86,6 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_m__java_util_List__java_util_List (mut (ref $function.$java.lang.Object__$java.lang.Object)))
 ))
-(global $typeannotations.AbstractType.vtable (mut (ref null $typeannotations.AbstractType.vtable)) (ref.null $typeannotations.AbstractType.vtable))
-(global $f_$initialized__typeannotations_AbstractType (mut i32) (i32.const 0))
 
 ;;; AbstractType()
 (func $m_<init>__void_$pp_typeannotations@typeannotations.AbstractType
@@ -117,8 +153,6 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_m__java_util_List__java_util_List (mut (ref $function.$java.lang.Object__$java.lang.Object)))
 ))
-(global $typeannotations.AbstractTypeNonNull.vtable (mut (ref null $typeannotations.AbstractTypeNonNull.vtable)) (ref.null $typeannotations.AbstractTypeNonNull.vtable))
-(global $f_$initialized__typeannotations_AbstractTypeNonNull (mut i32) (i32.const 0))
 
 ;;; AbstractTypeNonNull()
 (func $m_<init>__void_$pp_typeannotations@typeannotations.AbstractTypeNonNull
@@ -187,8 +221,6 @@
  (field $m_m__java_lang_String__typeannotations_Parent__typeannotations_Parent (mut (ref $function.$java.lang.String__$typeannotations.Parent__$typeannotations.Parent)))
  (field $m_m__java_util_List__typeannotations_Parent__java_util_List (mut (ref $function.$java.lang.Object__$typeannotations.Parent__$java.lang.Object)))
 ))
-(global $typeannotations.Parent.vtable (mut (ref null $typeannotations.Parent.vtable)) (ref.null $typeannotations.Parent.vtable))
-(global $f_$initialized__typeannotations_Parent (mut i32) (i32.const 0))
 
 ;;; Parent()
 (func $m_<init>__void_$pp_typeannotations@typeannotations.Parent
@@ -279,8 +311,6 @@
  (field $m_m__java_util_List__java_lang_Object__java_util_List (mut (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)))
  (field $m_m__java_util_List__java_util_List (mut (ref $function.$java.lang.Object__$java.lang.Object)))
 ))
-(global $typeannotations.ChildWithNullableParent.vtable (mut (ref null $typeannotations.ChildWithNullableParent.vtable)) (ref.null $typeannotations.ChildWithNullableParent.vtable))
-(global $f_$initialized__typeannotations_ChildWithNullableParent (mut i32) (i32.const 0))
 
 ;;; ChildWithNullableParent()
 (func $m_<init>__void_$pp_typeannotations@typeannotations.ChildWithNullableParent
@@ -392,8 +422,6 @@
  (field $m_m__java_util_List__java_lang_Object__java_util_List (mut (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)))
  (field $m_m__java_util_List__java_util_List (mut (ref $function.$java.lang.Object__$java.lang.Object)))
 ))
-(global $typeannotations.ChildWithNonNullableParent.vtable (mut (ref null $typeannotations.ChildWithNonNullableParent.vtable)) (ref.null $typeannotations.ChildWithNonNullableParent.vtable))
-(global $f_$initialized__typeannotations_ChildWithNonNullableParent (mut i32) (i32.const 0))
 
 ;;; ChildWithNonNullableParent()
 (func $m_<init>__void_$pp_typeannotations@typeannotations.ChildWithNonNullableParent
@@ -500,8 +528,6 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
-(global $typeannotations.TypeAnnotations.vtable (mut (ref null $typeannotations.TypeAnnotations.vtable)) (ref.null $typeannotations.TypeAnnotations.vtable))
-(global $f_$initialized__typeannotations_TypeAnnotations (mut i32) (i32.const 0))
 
 ;;; TypeAnnotations()
 (func $m_<init>__void@typeannotations.TypeAnnotations
@@ -549,14 +575,14 @@
  )
 )
 
- ;;; Code for typeannotations.Parent [vtable]
+ ;;; Code for typeannotations.Parent [vtable.init]
  (global.set $typeannotations.Parent.vtable (struct.new_with_rtt $typeannotations.Parent.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_m__java_lang_String__typeannotations_Parent__typeannotations_Parent@typeannotations.Parent) (ref.func $m_m__java_util_List__typeannotations_Parent__java_util_List@typeannotations.Parent) (rtt.canon $typeannotations.Parent.vtable)))
 
- ;;; Code for typeannotations.ChildWithNullableParent [vtable]
+ ;;; Code for typeannotations.ChildWithNullableParent [vtable.init]
  (global.set $typeannotations.ChildWithNullableParent.vtable (struct.new_with_rtt $typeannotations.ChildWithNullableParent.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_m__java_lang_String__typeannotations_Parent__typeannotations_Parent@typeannotations.Parent) (ref.func $m_m__java_util_List__typeannotations_Parent__java_util_List@typeannotations.Parent) (ref.func $m_m__java_lang_String__java_lang_Object__java_lang_Object@typeannotations.ChildWithNullableParent) (ref.func $m_m__java_util_List__java_lang_Object__java_util_List@typeannotations.ChildWithNullableParent) (ref.func $m_m__java_util_List__java_util_List@typeannotations.ChildWithNullableParent) (rtt.canon $typeannotations.ChildWithNullableParent.vtable)))
 
- ;;; Code for typeannotations.ChildWithNonNullableParent [vtable]
+ ;;; Code for typeannotations.ChildWithNonNullableParent [vtable.init]
  (global.set $typeannotations.ChildWithNonNullableParent.vtable (struct.new_with_rtt $typeannotations.ChildWithNonNullableParent.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_m__java_lang_String__typeannotations_Parent__typeannotations_Parent@typeannotations.Parent) (ref.func $m_m__java_util_List__typeannotations_Parent__java_util_List@typeannotations.Parent) (ref.func $m_m__java_lang_String__java_lang_Object__java_lang_Object@typeannotations.ChildWithNonNullableParent) (ref.func $m_m__java_util_List__java_lang_Object__java_util_List@typeannotations.ChildWithNonNullableParent) (ref.func $m_m__java_util_List__java_util_List@typeannotations.ChildWithNonNullableParent) (rtt.canon $typeannotations.ChildWithNonNullableParent.vtable)))
 
- ;;; Code for typeannotations.TypeAnnotations [vtable]
+ ;;; Code for typeannotations.TypeAnnotations [vtable.init]
  (global.set $typeannotations.TypeAnnotations.vtable (struct.new_with_rtt $typeannotations.TypeAnnotations.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $typeannotations.TypeAnnotations.vtable)))

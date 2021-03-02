@@ -1,3 +1,15 @@
+;;; Code for aptgeneratordep.Dummy [vtable]
+(global $aptgeneratordep.Dummy.vtable (mut (ref null $aptgeneratordep.Dummy.vtable)) (ref.null $aptgeneratordep.Dummy.vtable))
+
+;;; Code for aptgeneratordep.Foo [vtable]
+(global $aptgeneratordep.Foo.vtable (mut (ref null $aptgeneratordep.Foo.vtable)) (ref.null $aptgeneratordep.Foo.vtable))
+
+;;; Code for aptgeneratordep.Dummy [static fields]
+(global $f_$initialized__aptgeneratordep_Dummy (mut i32) (i32.const 0))
+
+;;; Code for aptgeneratordep.Foo [static fields]
+(global $f_$initialized__aptgeneratordep_Foo (mut i32) (i32.const 0))
+
 ;;; Code for aptgeneratordep.Dummy [CLASS]
 (type $aptgeneratordep.Dummy (struct
  (field $vtable (ref null $aptgeneratordep.Dummy.vtable))
@@ -10,8 +22,6 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
-(global $aptgeneratordep.Dummy.vtable (mut (ref null $aptgeneratordep.Dummy.vtable)) (ref.null $aptgeneratordep.Dummy.vtable))
-(global $f_$initialized__aptgeneratordep_Dummy (mut i32) (i32.const 0))
 
 ;;; Dummy()
 (func $m_<init>__void@aptgeneratordep.Dummy
@@ -57,8 +67,6 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
-(global $aptgeneratordep.Foo.vtable (mut (ref null $aptgeneratordep.Foo.vtable)) (ref.null $aptgeneratordep.Foo.vtable))
-(global $f_$initialized__aptgeneratordep_Foo (mut i32) (i32.const 0))
 
 ;;; Foo()
 (func $m_<init>__void@aptgeneratordep.Foo
@@ -110,8 +118,8 @@
  )
 )
 
- ;;; Code for aptgeneratordep.Dummy [vtable]
+ ;;; Code for aptgeneratordep.Dummy [vtable.init]
  (global.set $aptgeneratordep.Dummy.vtable (struct.new_with_rtt $aptgeneratordep.Dummy.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $aptgeneratordep.Dummy.vtable)))
 
- ;;; Code for aptgeneratordep.Foo [vtable]
+ ;;; Code for aptgeneratordep.Foo [vtable.init]
  (global.set $aptgeneratordep.Foo.vtable (struct.new_with_rtt $aptgeneratordep.Foo.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@aptgeneratordep.Foo) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $aptgeneratordep.Foo.vtable)))

@@ -1,3 +1,9 @@
+;;; Code for newinstance.NewInstanceExpr [vtable]
+(global $newinstance.NewInstanceExpr.vtable (mut (ref null $newinstance.NewInstanceExpr.vtable)) (ref.null $newinstance.NewInstanceExpr.vtable))
+
+;;; Code for newinstance.NewInstanceExpr [static fields]
+(global $f_$initialized__newinstance_NewInstanceExpr (mut i32) (i32.const 0))
+
 ;;; Code for newinstance.NewInstanceExpr [CLASS]
 (type $newinstance.NewInstanceExpr (struct
  (field $vtable (ref null $newinstance.NewInstanceExpr.vtable))
@@ -10,8 +16,6 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
-(global $newinstance.NewInstanceExpr.vtable (mut (ref null $newinstance.NewInstanceExpr.vtable)) (ref.null $newinstance.NewInstanceExpr.vtable))
-(global $f_$initialized__newinstance_NewInstanceExpr (mut i32) (i32.const 0))
 
 ;;; NewInstanceExpr()
 (func $m_<init>__void@newinstance.NewInstanceExpr
@@ -60,5 +64,5 @@
  )
 )
 
- ;;; Code for newinstance.NewInstanceExpr [vtable]
+ ;;; Code for newinstance.NewInstanceExpr [vtable.init]
  (global.set $newinstance.NewInstanceExpr.vtable (struct.new_with_rtt $newinstance.NewInstanceExpr.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $newinstance.NewInstanceExpr.vtable)))

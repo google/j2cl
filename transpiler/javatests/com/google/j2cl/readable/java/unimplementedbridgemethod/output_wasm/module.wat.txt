@@ -1,5 +1,22 @@
-;;; Code for unimplementedbridgemethod.I [INTERFACE]
+;;; Code for unimplementedbridgemethod.Bar [vtable]
+(global $unimplementedbridgemethod.Bar.vtable (mut (ref null $unimplementedbridgemethod.Bar.vtable)) (ref.null $unimplementedbridgemethod.Bar.vtable))
+
+;;; Code for unimplementedbridgemethod.Foo [vtable]
+(global $unimplementedbridgemethod.Foo.vtable (mut (ref null $unimplementedbridgemethod.Foo.vtable)) (ref.null $unimplementedbridgemethod.Foo.vtable))
+
+;;; Code for unimplementedbridgemethod.I [static fields]
 (global $f_$initialized__unimplementedbridgemethod_I (mut i32) (i32.const 0))
+
+;;; Code for unimplementedbridgemethod.J [static fields]
+(global $f_$initialized__unimplementedbridgemethod_J (mut i32) (i32.const 0))
+
+;;; Code for unimplementedbridgemethod.Bar [static fields]
+(global $f_$initialized__unimplementedbridgemethod_Bar (mut i32) (i32.const 0))
+
+;;; Code for unimplementedbridgemethod.Foo [static fields]
+(global $f_$initialized__unimplementedbridgemethod_Foo (mut i32) (i32.const 0))
+
+;;; Code for unimplementedbridgemethod.I [INTERFACE]
 
 ;;; int I.staticFoo()
 (func $m_staticFoo__int@unimplementedbridgemethod.I
@@ -35,7 +52,6 @@
 )
 
 ;;; Code for unimplementedbridgemethod.J [INTERFACE]
-(global $f_$initialized__unimplementedbridgemethod_J (mut i32) (i32.const 0))
 
 ;;; void J.$clinit()
 (func $$clinit__void@unimplementedbridgemethod.J
@@ -66,8 +82,6 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
-(global $unimplementedbridgemethod.Bar.vtable (mut (ref null $unimplementedbridgemethod.Bar.vtable)) (ref.null $unimplementedbridgemethod.Bar.vtable))
-(global $f_$initialized__unimplementedbridgemethod_Bar (mut i32) (i32.const 0))
 
 ;;; Bar()
 (func $m_<init>__void_$pp_unimplementedbridgemethod@unimplementedbridgemethod.Bar
@@ -113,8 +127,6 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
-(global $unimplementedbridgemethod.Foo.vtable (mut (ref null $unimplementedbridgemethod.Foo.vtable)) (ref.null $unimplementedbridgemethod.Foo.vtable))
-(global $f_$initialized__unimplementedbridgemethod_Foo (mut i32) (i32.const 0))
 
 ;;; Foo()
 (func $m_<init>__void@unimplementedbridgemethod.Foo

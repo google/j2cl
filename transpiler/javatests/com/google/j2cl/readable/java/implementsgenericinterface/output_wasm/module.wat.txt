@@ -1,5 +1,22 @@
-;;; Code for implementsgenericinterface.GenericInterface [INTERFACE]
+;;; Code for implementsgenericinterface.GenericInterfaceGenericImpl [vtable]
+(global $implementsgenericinterface.GenericInterfaceGenericImpl.vtable (mut (ref null $implementsgenericinterface.GenericInterfaceGenericImpl.vtable)) (ref.null $implementsgenericinterface.GenericInterfaceGenericImpl.vtable))
+
+;;; Code for implementsgenericinterface.GenericInterfaceImpl [vtable]
+(global $implementsgenericinterface.GenericInterfaceImpl.vtable (mut (ref null $implementsgenericinterface.GenericInterfaceImpl.vtable)) (ref.null $implementsgenericinterface.GenericInterfaceImpl.vtable))
+
+;;; Code for implementsgenericinterface.GenericInterface [static fields]
 (global $f_$initialized__implementsgenericinterface_GenericInterface (mut i32) (i32.const 0))
+
+;;; Code for implementsgenericinterface.GenericSubInterface [static fields]
+(global $f_$initialized__implementsgenericinterface_GenericSubInterface (mut i32) (i32.const 0))
+
+;;; Code for implementsgenericinterface.GenericInterfaceGenericImpl [static fields]
+(global $f_$initialized__implementsgenericinterface_GenericInterfaceGenericImpl (mut i32) (i32.const 0))
+
+;;; Code for implementsgenericinterface.GenericInterfaceImpl [static fields]
+(global $f_$initialized__implementsgenericinterface_GenericInterfaceImpl (mut i32) (i32.const 0))
+
+;;; Code for implementsgenericinterface.GenericInterface [INTERFACE]
 
 ;;; void GenericInterface.$clinit()
 (func $$clinit__void@implementsgenericinterface.GenericInterface
@@ -19,7 +36,6 @@
 )
 
 ;;; Code for implementsgenericinterface.GenericSubInterface [INTERFACE]
-(global $f_$initialized__implementsgenericinterface_GenericSubInterface (mut i32) (i32.const 0))
 
 ;;; void GenericSubInterface.$clinit()
 (func $$clinit__void@implementsgenericinterface.GenericSubInterface
@@ -50,8 +66,6 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
-(global $implementsgenericinterface.GenericInterfaceGenericImpl.vtable (mut (ref null $implementsgenericinterface.GenericInterfaceGenericImpl.vtable)) (ref.null $implementsgenericinterface.GenericInterfaceGenericImpl.vtable))
-(global $f_$initialized__implementsgenericinterface_GenericInterfaceGenericImpl (mut i32) (i32.const 0))
 
 ;;; GenericInterfaceGenericImpl()
 (func $m_<init>__void_$pp_implementsgenericinterface@implementsgenericinterface.GenericInterfaceGenericImpl
@@ -97,8 +111,6 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
-(global $implementsgenericinterface.GenericInterfaceImpl.vtable (mut (ref null $implementsgenericinterface.GenericInterfaceImpl.vtable)) (ref.null $implementsgenericinterface.GenericInterfaceImpl.vtable))
-(global $f_$initialized__implementsgenericinterface_GenericInterfaceImpl (mut i32) (i32.const 0))
 
 ;;; GenericInterfaceImpl()
 (func $m_<init>__void@implementsgenericinterface.GenericInterfaceImpl
@@ -132,8 +144,8 @@
  )
 )
 
- ;;; Code for implementsgenericinterface.GenericInterfaceGenericImpl [vtable]
+ ;;; Code for implementsgenericinterface.GenericInterfaceGenericImpl [vtable.init]
  (global.set $implementsgenericinterface.GenericInterfaceGenericImpl.vtable (struct.new_with_rtt $implementsgenericinterface.GenericInterfaceGenericImpl.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $implementsgenericinterface.GenericInterfaceGenericImpl.vtable)))
 
- ;;; Code for implementsgenericinterface.GenericInterfaceImpl [vtable]
+ ;;; Code for implementsgenericinterface.GenericInterfaceImpl [vtable.init]
  (global.set $implementsgenericinterface.GenericInterfaceImpl.vtable (struct.new_with_rtt $implementsgenericinterface.GenericInterfaceImpl.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $implementsgenericinterface.GenericInterfaceImpl.vtable)))

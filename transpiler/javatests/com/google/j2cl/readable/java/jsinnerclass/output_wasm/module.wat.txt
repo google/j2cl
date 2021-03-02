@@ -1,3 +1,21 @@
+;;; Code for jsinnerclass.Main [vtable]
+(global $jsinnerclass.Main.vtable (mut (ref null $jsinnerclass.Main.vtable)) (ref.null $jsinnerclass.Main.vtable))
+
+;;; Code for jsinnerclass.Main.Outer [vtable]
+(global $jsinnerclass.Main.Outer.vtable (mut (ref null $jsinnerclass.Main.Outer.vtable)) (ref.null $jsinnerclass.Main.Outer.vtable))
+
+;;; Code for jsinnerclass.Main.Outer.Inner [vtable]
+(global $jsinnerclass.Main.Outer.Inner.vtable (mut (ref null $jsinnerclass.Main.Outer.Inner.vtable)) (ref.null $jsinnerclass.Main.Outer.Inner.vtable))
+
+;;; Code for jsinnerclass.Main [static fields]
+(global $f_$initialized__jsinnerclass_Main (mut i32) (i32.const 0))
+
+;;; Code for jsinnerclass.Main.Outer [static fields]
+(global $f_$initialized__jsinnerclass_Main_Outer (mut i32) (i32.const 0))
+
+;;; Code for jsinnerclass.Main.Outer.Inner [static fields]
+(global $f_$initialized__jsinnerclass_Main_Outer_Inner (mut i32) (i32.const 0))
+
 ;;; Code for jsinnerclass.Main [CLASS]
 (type $jsinnerclass.Main (struct
  (field $vtable (ref null $jsinnerclass.Main.vtable))
@@ -10,8 +28,6 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
-(global $jsinnerclass.Main.vtable (mut (ref null $jsinnerclass.Main.vtable)) (ref.null $jsinnerclass.Main.vtable))
-(global $f_$initialized__jsinnerclass_Main (mut i32) (i32.const 0))
 
 ;;; Main()
 (func $m_<init>__void@jsinnerclass.Main
@@ -73,8 +89,6 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_method__int (mut (ref $function.__$int)))
 ))
-(global $jsinnerclass.Main.Outer.vtable (mut (ref null $jsinnerclass.Main.Outer.vtable)) (ref.null $jsinnerclass.Main.Outer.vtable))
-(global $f_$initialized__jsinnerclass_Main_Outer (mut i32) (i32.const 0))
 
 ;;; Outer()
 (func $m_<init>__void_$pp_jsinnerclass@jsinnerclass.Main.Outer
@@ -159,8 +173,6 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_getB__int (mut (ref $function.__$int)))
 ))
-(global $jsinnerclass.Main.Outer.Inner.vtable (mut (ref null $jsinnerclass.Main.Outer.Inner.vtable)) (ref.null $jsinnerclass.Main.Outer.Inner.vtable))
-(global $f_$initialized__jsinnerclass_Main_Outer_Inner (mut i32) (i32.const 0))
 
 ;;; Inner(Outer $outer_this)
 (func $m_<init>__jsinnerclass_Main_Outer__void@jsinnerclass.Main.Outer.Inner
@@ -219,11 +231,11 @@
  )
 )
 
- ;;; Code for jsinnerclass.Main [vtable]
+ ;;; Code for jsinnerclass.Main [vtable.init]
  (global.set $jsinnerclass.Main.vtable (struct.new_with_rtt $jsinnerclass.Main.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $jsinnerclass.Main.vtable)))
 
- ;;; Code for jsinnerclass.Main.Outer [vtable]
+ ;;; Code for jsinnerclass.Main.Outer [vtable.init]
  (global.set $jsinnerclass.Main.Outer.vtable (struct.new_with_rtt $jsinnerclass.Main.Outer.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_method__int@jsinnerclass.Main.Outer) (rtt.canon $jsinnerclass.Main.Outer.vtable)))
 
- ;;; Code for jsinnerclass.Main.Outer.Inner [vtable]
+ ;;; Code for jsinnerclass.Main.Outer.Inner [vtable.init]
  (global.set $jsinnerclass.Main.Outer.Inner.vtable (struct.new_with_rtt $jsinnerclass.Main.Outer.Inner.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_getB__int@jsinnerclass.Main.Outer.Inner) (rtt.canon $jsinnerclass.Main.Outer.Inner.vtable)))

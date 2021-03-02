@@ -1,3 +1,15 @@
+;;; Code for srcjar.Foo [vtable]
+(global $srcjar.Foo.vtable (mut (ref null $srcjar.Foo.vtable)) (ref.null $srcjar.Foo.vtable))
+
+;;; Code for srcjar.Srcjar [vtable]
+(global $srcjar.Srcjar.vtable (mut (ref null $srcjar.Srcjar.vtable)) (ref.null $srcjar.Srcjar.vtable))
+
+;;; Code for srcjar.Foo [static fields]
+(global $f_$initialized__srcjar_Foo (mut i32) (i32.const 0))
+
+;;; Code for srcjar.Srcjar [static fields]
+(global $f_$initialized__srcjar_Srcjar (mut i32) (i32.const 0))
+
 ;;; Code for srcjar.Foo [CLASS]
 (type $srcjar.Foo (struct
  (field $vtable (ref null $srcjar.Foo.vtable))
@@ -10,8 +22,6 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
-(global $srcjar.Foo.vtable (mut (ref null $srcjar.Foo.vtable)) (ref.null $srcjar.Foo.vtable))
-(global $f_$initialized__srcjar_Foo (mut i32) (i32.const 0))
 
 ;;; Foo()
 (func $m_<init>__void@srcjar.Foo
@@ -57,8 +67,6 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
-(global $srcjar.Srcjar.vtable (mut (ref null $srcjar.Srcjar.vtable)) (ref.null $srcjar.Srcjar.vtable))
-(global $f_$initialized__srcjar_Srcjar (mut i32) (i32.const 0))
 
 ;;; Srcjar()
 (func $m_<init>__void@srcjar.Srcjar
@@ -106,8 +114,8 @@
  )
 )
 
- ;;; Code for srcjar.Foo [vtable]
+ ;;; Code for srcjar.Foo [vtable.init]
  (global.set $srcjar.Foo.vtable (struct.new_with_rtt $srcjar.Foo.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $srcjar.Foo.vtable)))
 
- ;;; Code for srcjar.Srcjar [vtable]
+ ;;; Code for srcjar.Srcjar [vtable.init]
  (global.set $srcjar.Srcjar.vtable (struct.new_with_rtt $srcjar.Srcjar.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $srcjar.Srcjar.vtable)))

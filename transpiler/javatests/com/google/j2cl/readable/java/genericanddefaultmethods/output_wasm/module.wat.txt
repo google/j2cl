@@ -1,5 +1,19 @@
-;;; Code for genericanddefaultmethods.InterfaceWithDefault [INTERFACE]
+;;; Code for genericanddefaultmethods.GenericClass [vtable]
+(global $genericanddefaultmethods.GenericClass.vtable (mut (ref null $genericanddefaultmethods.GenericClass.vtable)) (ref.null $genericanddefaultmethods.GenericClass.vtable))
+
+;;; Code for genericanddefaultmethods.ConcreteClass [vtable]
+(global $genericanddefaultmethods.ConcreteClass.vtable (mut (ref null $genericanddefaultmethods.ConcreteClass.vtable)) (ref.null $genericanddefaultmethods.ConcreteClass.vtable))
+
+;;; Code for genericanddefaultmethods.InterfaceWithDefault [static fields]
 (global $f_$initialized__genericanddefaultmethods_InterfaceWithDefault (mut i32) (i32.const 0))
+
+;;; Code for genericanddefaultmethods.GenericClass [static fields]
+(global $f_$initialized__genericanddefaultmethods_GenericClass (mut i32) (i32.const 0))
+
+;;; Code for genericanddefaultmethods.ConcreteClass [static fields]
+(global $f_$initialized__genericanddefaultmethods_ConcreteClass (mut i32) (i32.const 0))
+
+;;; Code for genericanddefaultmethods.InterfaceWithDefault [INTERFACE]
 
 ;;; void InterfaceWithDefault.foo(String value)
 (func $m_foo__java_lang_String__void@genericanddefaultmethods.InterfaceWithDefault
@@ -81,8 +95,6 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_foo__java_lang_Object__void (mut (ref $function.$java.lang.Object__$void)))
 ))
-(global $genericanddefaultmethods.GenericClass.vtable (mut (ref null $genericanddefaultmethods.GenericClass.vtable)) (ref.null $genericanddefaultmethods.GenericClass.vtable))
-(global $f_$initialized__genericanddefaultmethods_GenericClass (mut i32) (i32.const 0))
 
 ;;; GenericClass()
 (func $m_<init>__void_$pp_genericanddefaultmethods@genericanddefaultmethods.GenericClass
@@ -174,8 +186,6 @@
  (field $m_foo__java_lang_Object__void (mut (ref $function.$java.lang.Object__$void)))
  (field $m_foo__java_lang_String__void (mut (ref $function.$java.lang.String__$void)))
 ))
-(global $genericanddefaultmethods.ConcreteClass.vtable (mut (ref null $genericanddefaultmethods.ConcreteClass.vtable)) (ref.null $genericanddefaultmethods.ConcreteClass.vtable))
-(global $f_$initialized__genericanddefaultmethods_ConcreteClass (mut i32) (i32.const 0))
 
 ;;; ConcreteClass()
 (func $m_<init>__void@genericanddefaultmethods.ConcreteClass
@@ -241,8 +251,8 @@
  )
 )
 
- ;;; Code for genericanddefaultmethods.GenericClass [vtable]
+ ;;; Code for genericanddefaultmethods.GenericClass [vtable.init]
  (global.set $genericanddefaultmethods.GenericClass.vtable (struct.new_with_rtt $genericanddefaultmethods.GenericClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__java_lang_Object__void@genericanddefaultmethods.GenericClass) (rtt.canon $genericanddefaultmethods.GenericClass.vtable)))
 
- ;;; Code for genericanddefaultmethods.ConcreteClass [vtable]
+ ;;; Code for genericanddefaultmethods.ConcreteClass [vtable.init]
  (global.set $genericanddefaultmethods.ConcreteClass.vtable (struct.new_with_rtt $genericanddefaultmethods.ConcreteClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__java_lang_Object__void@genericanddefaultmethods.ConcreteClass) (ref.func $m_foo__java_lang_String__void@genericanddefaultmethods.ConcreteClass) (rtt.canon $genericanddefaultmethods.ConcreteClass.vtable)))

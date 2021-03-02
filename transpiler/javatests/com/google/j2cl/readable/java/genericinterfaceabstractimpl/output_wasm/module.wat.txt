@@ -1,5 +1,13 @@
-;;; Code for genericinterfaceabstractimpl.MyInterface [INTERFACE]
+;;; Code for genericinterfaceabstractimpl.AbstractImpl [vtable]
+(global $genericinterfaceabstractimpl.AbstractImpl.vtable (mut (ref null $genericinterfaceabstractimpl.AbstractImpl.vtable)) (ref.null $genericinterfaceabstractimpl.AbstractImpl.vtable))
+
+;;; Code for genericinterfaceabstractimpl.MyInterface [static fields]
 (global $f_$initialized__genericinterfaceabstractimpl_MyInterface (mut i32) (i32.const 0))
+
+;;; Code for genericinterfaceabstractimpl.AbstractImpl [static fields]
+(global $f_$initialized__genericinterfaceabstractimpl_AbstractImpl (mut i32) (i32.const 0))
+
+;;; Code for genericinterfaceabstractimpl.MyInterface [INTERFACE]
 
 ;;; void MyInterface.$clinit()
 (func $$clinit__void@genericinterfaceabstractimpl.MyInterface
@@ -30,8 +38,6 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
-(global $genericinterfaceabstractimpl.AbstractImpl.vtable (mut (ref null $genericinterfaceabstractimpl.AbstractImpl.vtable)) (ref.null $genericinterfaceabstractimpl.AbstractImpl.vtable))
-(global $f_$initialized__genericinterfaceabstractimpl_AbstractImpl (mut i32) (i32.const 0))
 
 ;;; AbstractImpl()
 (func $m_<init>__void@genericinterfaceabstractimpl.AbstractImpl

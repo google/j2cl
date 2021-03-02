@@ -1,3 +1,9 @@
+;;; Code for ternaryexpression.TernaryExpression [vtable]
+(global $ternaryexpression.TernaryExpression.vtable (mut (ref null $ternaryexpression.TernaryExpression.vtable)) (ref.null $ternaryexpression.TernaryExpression.vtable))
+
+;;; Code for ternaryexpression.TernaryExpression [static fields]
+(global $f_$initialized__ternaryexpression_TernaryExpression (mut i32) (i32.const 0))
+
 ;;; Code for ternaryexpression.TernaryExpression [CLASS]
 (type $ternaryexpression.TernaryExpression (struct
  (field $vtable (ref null $ternaryexpression.TernaryExpression.vtable))
@@ -11,8 +17,6 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_test__void (mut (ref $function.__$void)))
 ))
-(global $ternaryexpression.TernaryExpression.vtable (mut (ref null $ternaryexpression.TernaryExpression.vtable)) (ref.null $ternaryexpression.TernaryExpression.vtable))
-(global $f_$initialized__ternaryexpression_TernaryExpression (mut i32) (i32.const 0))
 
 ;;; TernaryExpression()
 (func $m_<init>__void@ternaryexpression.TernaryExpression
@@ -74,5 +78,5 @@
  )
 )
 
- ;;; Code for ternaryexpression.TernaryExpression [vtable]
+ ;;; Code for ternaryexpression.TernaryExpression [vtable.init]
  (global.set $ternaryexpression.TernaryExpression.vtable (struct.new_with_rtt $ternaryexpression.TernaryExpression.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__void@ternaryexpression.TernaryExpression) (rtt.canon $ternaryexpression.TernaryExpression.vtable)))

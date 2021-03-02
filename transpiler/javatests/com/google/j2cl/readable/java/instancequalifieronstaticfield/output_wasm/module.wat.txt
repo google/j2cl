@@ -1,3 +1,11 @@
+;;; Code for instancequalifieronstaticfield.InstanceQualifiers [vtable]
+(global $instancequalifieronstaticfield.InstanceQualifiers.vtable (mut (ref null $instancequalifieronstaticfield.InstanceQualifiers.vtable)) (ref.null $instancequalifieronstaticfield.InstanceQualifiers.vtable))
+
+;;; Code for instancequalifieronstaticfield.InstanceQualifiers [static fields]
+(global $f_staticField__instancequalifieronstaticfield_InstanceQualifiers (mut i32) (i32.const 0))
+(global $f_sideEffectCount__instancequalifieronstaticfield_InstanceQualifiers (mut i32) (i32.const 0))
+(global $f_$initialized__instancequalifieronstaticfield_InstanceQualifiers (mut i32) (i32.const 0))
+
 ;;; Code for instancequalifieronstaticfield.InstanceQualifiers [CLASS]
 (type $instancequalifieronstaticfield.InstanceQualifiers (struct
  (field $vtable (ref null $instancequalifieronstaticfield.InstanceQualifiers.vtable))
@@ -10,10 +18,6 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
-(global $instancequalifieronstaticfield.InstanceQualifiers.vtable (mut (ref null $instancequalifieronstaticfield.InstanceQualifiers.vtable)) (ref.null $instancequalifieronstaticfield.InstanceQualifiers.vtable))
-(global $f_staticField__instancequalifieronstaticfield_InstanceQualifiers (mut i32) (i32.const 0))
-(global $f_sideEffectCount__instancequalifieronstaticfield_InstanceQualifiers (mut i32) (i32.const 0))
-(global $f_$initialized__instancequalifieronstaticfield_InstanceQualifiers (mut i32) (i32.const 0))
 
 ;;; InstanceQualifiers()
 (func $m_<init>__void@instancequalifieronstaticfield.InstanceQualifiers
@@ -205,5 +209,5 @@
  )
 )
 
- ;;; Code for instancequalifieronstaticfield.InstanceQualifiers [vtable]
+ ;;; Code for instancequalifieronstaticfield.InstanceQualifiers [vtable.init]
  (global.set $instancequalifieronstaticfield.InstanceQualifiers.vtable (struct.new_with_rtt $instancequalifieronstaticfield.InstanceQualifiers.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $instancequalifieronstaticfield.InstanceQualifiers.vtable)))

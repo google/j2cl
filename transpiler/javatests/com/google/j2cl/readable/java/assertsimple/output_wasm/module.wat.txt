@@ -1,3 +1,9 @@
+;;; Code for assertsimple.AssertSimple [vtable]
+(global $assertsimple.AssertSimple.vtable (mut (ref null $assertsimple.AssertSimple.vtable)) (ref.null $assertsimple.AssertSimple.vtable))
+
+;;; Code for assertsimple.AssertSimple [static fields]
+(global $f_$initialized__assertsimple_AssertSimple (mut i32) (i32.const 0))
+
 ;;; Code for assertsimple.AssertSimple [CLASS]
 (type $assertsimple.AssertSimple (struct
  (field $vtable (ref null $assertsimple.AssertSimple.vtable))
@@ -10,8 +16,6 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
-(global $assertsimple.AssertSimple.vtable (mut (ref null $assertsimple.AssertSimple.vtable)) (ref.null $assertsimple.AssertSimple.vtable))
-(global $f_$initialized__assertsimple_AssertSimple (mut i32) (i32.const 0))
 
 ;;; AssertSimple()
 (func $m_<init>__void@assertsimple.AssertSimple
@@ -58,5 +62,5 @@
  )
 )
 
- ;;; Code for assertsimple.AssertSimple [vtable]
+ ;;; Code for assertsimple.AssertSimple [vtable.init]
  (global.set $assertsimple.AssertSimple.vtable (struct.new_with_rtt $assertsimple.AssertSimple.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $assertsimple.AssertSimple.vtable)))

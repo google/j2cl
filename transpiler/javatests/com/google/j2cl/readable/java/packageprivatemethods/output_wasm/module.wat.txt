@@ -1,3 +1,33 @@
+;;; Code for packageprivatemethods.package1.Child [vtable]
+(global $packageprivatemethods.package1.Child.vtable (mut (ref null $packageprivatemethods.package1.Child.vtable)) (ref.null $packageprivatemethods.package1.Child.vtable))
+
+;;; Code for packageprivatemethods.package1.Parent [vtable]
+(global $packageprivatemethods.package1.Parent.vtable (mut (ref null $packageprivatemethods.package1.Parent.vtable)) (ref.null $packageprivatemethods.package1.Parent.vtable))
+
+;;; Code for packageprivatemethods.package1.SuperParent [vtable]
+(global $packageprivatemethods.package1.SuperParent.vtable (mut (ref null $packageprivatemethods.package1.SuperParent.vtable)) (ref.null $packageprivatemethods.package1.SuperParent.vtable))
+
+;;; Code for packageprivatemethods.package2.SubChild [vtable]
+(global $packageprivatemethods.package2.SubChild.vtable (mut (ref null $packageprivatemethods.package2.SubChild.vtable)) (ref.null $packageprivatemethods.package2.SubChild.vtable))
+
+;;; Code for packageprivatemethods.package2.SubParent [vtable]
+(global $packageprivatemethods.package2.SubParent.vtable (mut (ref null $packageprivatemethods.package2.SubParent.vtable)) (ref.null $packageprivatemethods.package2.SubParent.vtable))
+
+;;; Code for packageprivatemethods.package1.Child [static fields]
+(global $f_$initialized__packageprivatemethods_package1_Child (mut i32) (i32.const 0))
+
+;;; Code for packageprivatemethods.package1.Parent [static fields]
+(global $f_$initialized__packageprivatemethods_package1_Parent (mut i32) (i32.const 0))
+
+;;; Code for packageprivatemethods.package1.SuperParent [static fields]
+(global $f_$initialized__packageprivatemethods_package1_SuperParent (mut i32) (i32.const 0))
+
+;;; Code for packageprivatemethods.package2.SubChild [static fields]
+(global $f_$initialized__packageprivatemethods_package2_SubChild (mut i32) (i32.const 0))
+
+;;; Code for packageprivatemethods.package2.SubParent [static fields]
+(global $f_$initialized__packageprivatemethods_package2_SubParent (mut i32) (i32.const 0))
+
 ;;; Code for packageprivatemethods.package1.Child [CLASS]
 (type $packageprivatemethods.package1.Child (struct
  (field $vtable (ref null $packageprivatemethods.package1.Child.vtable))
@@ -16,8 +46,6 @@
  (field $m_foo__int__int (mut (ref $function.$int__$int)))
  (field $m_fun__int__int__int (mut (ref $function.$int__$int__$int)))
 ))
-(global $packageprivatemethods.package1.Child.vtable (mut (ref null $packageprivatemethods.package1.Child.vtable)) (ref.null $packageprivatemethods.package1.Child.vtable))
-(global $f_$initialized__packageprivatemethods_package1_Child (mut i32) (i32.const 0))
 
 ;;; Child()
 (func $m_<init>__void@packageprivatemethods.package1.Child
@@ -166,8 +194,6 @@
  (field $m_bar__int__int__int__int_$pp_packageprivatemethods_package1 (mut (ref $function.$int__$int__$int__$int)))
  (field $m_bar__int__int__int__int (mut (ref $function.$int__$int__$int__$int)))
 ))
-(global $packageprivatemethods.package1.Parent.vtable (mut (ref null $packageprivatemethods.package1.Parent.vtable)) (ref.null $packageprivatemethods.package1.Parent.vtable))
-(global $f_$initialized__packageprivatemethods_package1_Parent (mut i32) (i32.const 0))
 
 ;;; Parent()
 (func $m_<init>__void@packageprivatemethods.package1.Parent
@@ -256,8 +282,6 @@
  (field $m_fun__int__int__int_$pp_packageprivatemethods_package1 (mut (ref $function.$int__$int__$int)))
  (field $m_bar__int__int__int__int_$pp_packageprivatemethods_package1 (mut (ref $function.$int__$int__$int__$int)))
 ))
-(global $packageprivatemethods.package1.SuperParent.vtable (mut (ref null $packageprivatemethods.package1.SuperParent.vtable)) (ref.null $packageprivatemethods.package1.SuperParent.vtable))
-(global $f_$initialized__packageprivatemethods_package1_SuperParent (mut i32) (i32.const 0))
 
 ;;; SuperParent()
 (func $m_<init>__void@packageprivatemethods.package1.SuperParent
@@ -369,8 +393,6 @@
  (field $m_foo__int__int (mut (ref $function.$int__$int)))
  (field $m_fun__int__int__int (mut (ref $function.$int__$int__$int)))
 ))
-(global $packageprivatemethods.package2.SubChild.vtable (mut (ref null $packageprivatemethods.package2.SubChild.vtable)) (ref.null $packageprivatemethods.package2.SubChild.vtable))
-(global $f_$initialized__packageprivatemethods_package2_SubChild (mut i32) (i32.const 0))
 
 ;;; SubChild()
 (func $m_<init>__void@packageprivatemethods.package2.SubChild
@@ -440,8 +462,6 @@
  (field $m_bar__int__int__int__int (mut (ref $function.$int__$int__$int__$int)))
  (field $m_foo__int__int_$pp_packageprivatemethods_package2 (mut (ref $function.$int__$int)))
 ))
-(global $packageprivatemethods.package2.SubParent.vtable (mut (ref null $packageprivatemethods.package2.SubParent.vtable)) (ref.null $packageprivatemethods.package2.SubParent.vtable))
-(global $f_$initialized__packageprivatemethods_package2_SubParent (mut i32) (i32.const 0))
 
 ;;; SubParent()
 (func $m_<init>__void@packageprivatemethods.package2.SubParent
@@ -494,11 +514,11 @@
  )
 )
 
- ;;; Code for packageprivatemethods.package1.Child [vtable]
+ ;;; Code for packageprivatemethods.package1.Child [vtable.init]
  (global.set $packageprivatemethods.package1.Child.vtable (struct.new_with_rtt $packageprivatemethods.package1.Child.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child) (ref.func $m_fun__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child) (ref.func $m_bar__int__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Parent) (ref.func $m_bar__int__int__int__int@packageprivatemethods.package1.Child) (ref.func $m_foo__int__int@packageprivatemethods.package1.Child) (ref.func $m_fun__int__int__int@packageprivatemethods.package1.Child) (rtt.canon $packageprivatemethods.package1.Child.vtable)))
 
- ;;; Code for packageprivatemethods.package1.SuperParent [vtable]
+ ;;; Code for packageprivatemethods.package1.SuperParent [vtable.init]
  (global.set $packageprivatemethods.package1.SuperParent.vtable (struct.new_with_rtt $packageprivatemethods.package1.SuperParent.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.SuperParent) (ref.func $m_fun__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.SuperParent) (ref.func $m_bar__int__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.SuperParent) (rtt.canon $packageprivatemethods.package1.SuperParent.vtable)))
 
- ;;; Code for packageprivatemethods.package2.SubChild [vtable]
+ ;;; Code for packageprivatemethods.package2.SubChild [vtable.init]
  (global.set $packageprivatemethods.package2.SubChild.vtable (struct.new_with_rtt $packageprivatemethods.package2.SubChild.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child) (ref.func $m_fun__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child) (ref.func $m_bar__int__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Parent) (ref.func $m_bar__int__int__int__int@packageprivatemethods.package1.Child) (ref.func $m_foo__int__int@packageprivatemethods.package2.SubChild) (ref.func $m_fun__int__int__int@packageprivatemethods.package1.Child) (rtt.canon $packageprivatemethods.package2.SubChild.vtable)))

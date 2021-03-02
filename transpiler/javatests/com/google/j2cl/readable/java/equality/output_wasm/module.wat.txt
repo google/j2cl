@@ -1,3 +1,9 @@
+;;; Code for equality.Equality [vtable]
+(global $equality.Equality.vtable (mut (ref null $equality.Equality.vtable)) (ref.null $equality.Equality.vtable))
+
+;;; Code for equality.Equality [static fields]
+(global $f_$initialized__equality_Equality (mut i32) (i32.const 0))
+
 ;;; Code for equality.Equality [CLASS]
 (type $equality.Equality (struct
  (field $vtable (ref null $equality.Equality.vtable))
@@ -11,8 +17,6 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_test__void (mut (ref $function.__$void)))
 ))
-(global $equality.Equality.vtable (mut (ref null $equality.Equality.vtable)) (ref.null $equality.Equality.vtable))
-(global $f_$initialized__equality_Equality (mut i32) (i32.const 0))
 
 ;;; Equality()
 (func $m_<init>__void@equality.Equality
@@ -82,5 +86,5 @@
  )
 )
 
- ;;; Code for equality.Equality [vtable]
+ ;;; Code for equality.Equality [vtable.init]
  (global.set $equality.Equality.vtable (struct.new_with_rtt $equality.Equality.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__void@equality.Equality) (rtt.canon $equality.Equality.vtable)))

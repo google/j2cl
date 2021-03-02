@@ -1,16 +1,7 @@
-;;; Code for compiletimeconstant.CompileTimeConstant [CLASS]
-(type $compiletimeconstant.CompileTimeConstant (struct
- (field $vtable (ref null $compiletimeconstant.CompileTimeConstant.vtable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
-(type $compiletimeconstant.CompileTimeConstant.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+;;; Code for compiletimeconstant.CompileTimeConstant [vtable]
 (global $compiletimeconstant.CompileTimeConstant.vtable (mut (ref null $compiletimeconstant.CompileTimeConstant.vtable)) (ref.null $compiletimeconstant.CompileTimeConstant.vtable))
+
+;;; Code for compiletimeconstant.CompileTimeConstant [static fields]
 (global $f_OBJ__compiletimeconstant_CompileTimeConstant (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
 (global $f_A__compiletimeconstant_CompileTimeConstant i32 (i32.const 10))
 (global $f_B__compiletimeconstant_CompileTimeConstant i32 (i32.const 20))
@@ -31,6 +22,19 @@
 (global $f_H2__compiletimeconstant_CompileTimeConstant i32 (i32.const 65))
 (global $f_I2__compiletimeconstant_CompileTimeConstant i32 (i32.const 1))
 (global $f_$initialized__compiletimeconstant_CompileTimeConstant (mut i32) (i32.const 0))
+
+;;; Code for compiletimeconstant.CompileTimeConstant [CLASS]
+(type $compiletimeconstant.CompileTimeConstant (struct
+ (field $vtable (ref null $compiletimeconstant.CompileTimeConstant.vtable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+))
+(type $compiletimeconstant.CompileTimeConstant.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
 
 ;;; CompileTimeConstant()
 (func $m_<init>__void@compiletimeconstant.CompileTimeConstant
@@ -202,5 +206,5 @@
  )
 )
 
- ;;; Code for compiletimeconstant.CompileTimeConstant [vtable]
+ ;;; Code for compiletimeconstant.CompileTimeConstant [vtable.init]
  (global.set $compiletimeconstant.CompileTimeConstant.vtable (struct.new_with_rtt $compiletimeconstant.CompileTimeConstant.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $compiletimeconstant.CompileTimeConstant.vtable)))

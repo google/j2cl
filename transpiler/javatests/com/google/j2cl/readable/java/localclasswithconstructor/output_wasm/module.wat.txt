@@ -1,3 +1,15 @@
+;;; Code for localclasswithconstructor.LocalClassWithConstructor [vtable]
+(global $localclasswithconstructor.LocalClassWithConstructor.vtable (mut (ref null $localclasswithconstructor.LocalClassWithConstructor.vtable)) (ref.null $localclasswithconstructor.LocalClassWithConstructor.vtable))
+
+;;; Code for localclasswithconstructor.LocalClassWithConstructor.1LocalClass [vtable]
+(global $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable (mut (ref null $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable)) (ref.null $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable))
+
+;;; Code for localclasswithconstructor.LocalClassWithConstructor [static fields]
+(global $f_$initialized__localclasswithconstructor_LocalClassWithConstructor (mut i32) (i32.const 0))
+
+;;; Code for localclasswithconstructor.LocalClassWithConstructor.1LocalClass [static fields]
+(global $f_$initialized__localclasswithconstructor_LocalClassWithConstructor_1LocalClass (mut i32) (i32.const 0))
+
 ;;; Code for localclasswithconstructor.LocalClassWithConstructor [CLASS]
 (type $localclasswithconstructor.LocalClassWithConstructor (struct
  (field $vtable (ref null $localclasswithconstructor.LocalClassWithConstructor.vtable))
@@ -11,8 +23,6 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_test__int__void (mut (ref $function.$int__$void)))
 ))
-(global $localclasswithconstructor.LocalClassWithConstructor.vtable (mut (ref null $localclasswithconstructor.LocalClassWithConstructor.vtable)) (ref.null $localclasswithconstructor.LocalClassWithConstructor.vtable))
-(global $f_$initialized__localclasswithconstructor_LocalClassWithConstructor (mut i32) (i32.const 0))
 
 ;;; LocalClassWithConstructor()
 (func $m_<init>__void@localclasswithconstructor.LocalClassWithConstructor
@@ -81,8 +91,6 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
-(global $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable (mut (ref null $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable)) (ref.null $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable))
-(global $f_$initialized__localclasswithconstructor_LocalClassWithConstructor_1LocalClass (mut i32) (i32.const 0))
 
 ;;; LocalClass(LocalClassWithConstructor $outer_this, int $captured_localVar, int $captured_p, int a, int b)
 (func $m_<init>__localclasswithconstructor_LocalClassWithConstructor__int__int__int__int__void@localclasswithconstructor.LocalClassWithConstructor.1LocalClass
@@ -148,8 +156,8 @@
  )
 )
 
- ;;; Code for localclasswithconstructor.LocalClassWithConstructor [vtable]
+ ;;; Code for localclasswithconstructor.LocalClassWithConstructor [vtable.init]
  (global.set $localclasswithconstructor.LocalClassWithConstructor.vtable (struct.new_with_rtt $localclasswithconstructor.LocalClassWithConstructor.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__int__void@localclasswithconstructor.LocalClassWithConstructor) (rtt.canon $localclasswithconstructor.LocalClassWithConstructor.vtable)))
 
- ;;; Code for localclasswithconstructor.LocalClassWithConstructor.1LocalClass [vtable]
+ ;;; Code for localclasswithconstructor.LocalClassWithConstructor.1LocalClass [vtable.init]
  (global.set $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable (struct.new_with_rtt $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable)))

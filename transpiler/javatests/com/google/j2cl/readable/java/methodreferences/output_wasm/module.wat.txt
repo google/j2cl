@@ -1,3 +1,40 @@
+;;; Code for methodreferences.MethodReferences [vtable]
+(global $methodreferences.MethodReferences.vtable (mut (ref null $methodreferences.MethodReferences.vtable)) (ref.null $methodreferences.MethodReferences.vtable))
+
+;;; Code for methodreferences.MethodReferences.ObjectCapturingOuter [vtable]
+(global $methodreferences.MethodReferences.ObjectCapturingOuter.vtable (mut (ref null $methodreferences.MethodReferences.ObjectCapturingOuter.vtable)) (ref.null $methodreferences.MethodReferences.ObjectCapturingOuter.vtable))
+
+;;; Code for methodreferences.MethodReferences [static fields]
+(global $f_staticStringProducer__methodreferences_MethodReferences (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
+(global $f_$initialized__methodreferences_MethodReferences (mut i32) (i32.const 0))
+
+;;; Code for methodreferences.MethodReferences.Producer [static fields]
+(global $f_$initialized__methodreferences_MethodReferences_Producer (mut i32) (i32.const 0))
+
+;;; Code for methodreferences.MethodReferences.Predicate [static fields]
+(global $f_$initialized__methodreferences_MethodReferences_Predicate (mut i32) (i32.const 0))
+
+;;; Code for methodreferences.MethodReferences.ArrayProducer [static fields]
+(global $f_$initialized__methodreferences_MethodReferences_ArrayProducer (mut i32) (i32.const 0))
+
+;;; Code for methodreferences.MethodReferences.ObjectCapturingOuter [static fields]
+(global $f_$initialized__methodreferences_MethodReferences_ObjectCapturingOuter (mut i32) (i32.const 0))
+
+;;; Code for methodreferences.MethodReferences.Function [static fields]
+(global $f_$initialized__methodreferences_MethodReferences_Function (mut i32) (i32.const 0))
+
+;;; Code for methodreferences.MethodReferences.BiFunction [static fields]
+(global $f_$initialized__methodreferences_MethodReferences_BiFunction (mut i32) (i32.const 0))
+
+;;; Code for methodreferences.MethodReferences.JsProducer [static fields]
+(global $f_$initialized__methodreferences_MethodReferences_JsProducer (mut i32) (i32.const 0))
+
+;;; Code for methodreferences.MethodReferences.JsFunctionInterface [static fields]
+(global $f_$initialized__methodreferences_MethodReferences_JsFunctionInterface (mut i32) (i32.const 0))
+
+;;; Code for methodreferences.MethodReferences.JsBiFunction [static fields]
+(global $f_$initialized__methodreferences_MethodReferences_JsBiFunction (mut i32) (i32.const 0))
+
 ;;; Code for methodreferences.MethodReferences [CLASS]
 (type $methodreferences.MethodReferences (struct
  (field $vtable (ref null $methodreferences.MethodReferences.vtable))
@@ -14,9 +51,6 @@
  (field $m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences (mut (ref $function.$java.lang.Number__$java.lang.Boolean)))
  (field $m_main__void_$pp_methodreferences (mut (ref $function.__$void)))
 ))
-(global $methodreferences.MethodReferences.vtable (mut (ref null $methodreferences.MethodReferences.vtable)) (ref.null $methodreferences.MethodReferences.vtable))
-(global $f_staticStringProducer__methodreferences_MethodReferences (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
-(global $f_$initialized__methodreferences_MethodReferences (mut i32) (i32.const 0))
 
 ;;; MethodReferences()
 (func $m_<init>__void@methodreferences.MethodReferences
@@ -242,7 +276,6 @@
 )
 
 ;;; Code for methodreferences.MethodReferences.Producer [INTERFACE]
-(global $f_$initialized__methodreferences_MethodReferences_Producer (mut i32) (i32.const 0))
 
 ;;; void Producer.$clinit()
 (func $$clinit__void@methodreferences.MethodReferences.Producer
@@ -262,7 +295,6 @@
 )
 
 ;;; Code for methodreferences.MethodReferences.Predicate [INTERFACE]
-(global $f_$initialized__methodreferences_MethodReferences_Predicate (mut i32) (i32.const 0))
 
 ;;; void Predicate.$clinit()
 (func $$clinit__void@methodreferences.MethodReferences.Predicate
@@ -282,7 +314,6 @@
 )
 
 ;;; Code for methodreferences.MethodReferences.ArrayProducer [INTERFACE]
-(global $f_$initialized__methodreferences_MethodReferences_ArrayProducer (mut i32) (i32.const 0))
 
 ;;; void ArrayProducer.$clinit()
 (func $$clinit__void@methodreferences.MethodReferences.ArrayProducer
@@ -315,8 +346,6 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_getMain__methodreferences_MethodReferences_$pp_methodreferences (mut (ref $function.__$methodreferences.MethodReferences)))
 ))
-(global $methodreferences.MethodReferences.ObjectCapturingOuter.vtable (mut (ref null $methodreferences.MethodReferences.ObjectCapturingOuter.vtable)) (ref.null $methodreferences.MethodReferences.ObjectCapturingOuter.vtable))
-(global $f_$initialized__methodreferences_MethodReferences_ObjectCapturingOuter (mut i32) (i32.const 0))
 
 ;;; ObjectCapturingOuter(MethodReferences<T> $outer_this)
 (func $m_<init>__methodreferences_MethodReferences__void_$pp_methodreferences@methodreferences.MethodReferences.ObjectCapturingOuter
@@ -372,7 +401,6 @@
 )
 
 ;;; Code for methodreferences.MethodReferences.Function [INTERFACE]
-(global $f_$initialized__methodreferences_MethodReferences_Function (mut i32) (i32.const 0))
 
 ;;; void Function.$clinit()
 (func $$clinit__void@methodreferences.MethodReferences.Function
@@ -392,7 +420,6 @@
 )
 
 ;;; Code for methodreferences.MethodReferences.BiFunction [INTERFACE]
-(global $f_$initialized__methodreferences_MethodReferences_BiFunction (mut i32) (i32.const 0))
 
 ;;; void BiFunction.$clinit()
 (func $$clinit__void@methodreferences.MethodReferences.BiFunction
@@ -412,7 +439,6 @@
 )
 
 ;;; Code for methodreferences.MethodReferences.JsProducer [INTERFACE]
-(global $f_$initialized__methodreferences_MethodReferences_JsProducer (mut i32) (i32.const 0))
 
 ;;; void JsProducer.$clinit()
 (func $$clinit__void@methodreferences.MethodReferences.JsProducer
@@ -432,7 +458,6 @@
 )
 
 ;;; Code for methodreferences.MethodReferences.JsFunctionInterface [INTERFACE]
-(global $f_$initialized__methodreferences_MethodReferences_JsFunctionInterface (mut i32) (i32.const 0))
 
 ;;; void JsFunctionInterface.$clinit()
 (func $$clinit__void@methodreferences.MethodReferences.JsFunctionInterface
@@ -452,7 +477,6 @@
 )
 
 ;;; Code for methodreferences.MethodReferences.JsBiFunction [INTERFACE]
-(global $f_$initialized__methodreferences_MethodReferences_JsBiFunction (mut i32) (i32.const 0))
 
 ;;; void JsBiFunction.$clinit()
 (func $$clinit__void@methodreferences.MethodReferences.JsBiFunction
@@ -471,8 +495,8 @@
  )
 )
 
- ;;; Code for methodreferences.MethodReferences [vtable]
+ ;;; Code for methodreferences.MethodReferences [vtable.init]
  (global.set $methodreferences.MethodReferences.vtable (struct.new_with_rtt $methodreferences.MethodReferences.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_isA__java_lang_Boolean@methodreferences.MethodReferences) (ref.func $m_self__java_lang_Object_$pp_methodreferences@methodreferences.MethodReferences) (ref.func $m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences@methodreferences.MethodReferences) (ref.func $m_main__void_$pp_methodreferences@methodreferences.MethodReferences) (rtt.canon $methodreferences.MethodReferences.vtable)))
 
- ;;; Code for methodreferences.MethodReferences.ObjectCapturingOuter [vtable]
+ ;;; Code for methodreferences.MethodReferences.ObjectCapturingOuter [vtable.init]
  (global.set $methodreferences.MethodReferences.ObjectCapturingOuter.vtable (struct.new_with_rtt $methodreferences.MethodReferences.ObjectCapturingOuter.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_getMain__methodreferences_MethodReferences_$pp_methodreferences@methodreferences.MethodReferences.ObjectCapturingOuter) (rtt.canon $methodreferences.MethodReferences.ObjectCapturingOuter.vtable)))

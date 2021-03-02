@@ -1,3 +1,11 @@
+;;; Code for staticfieldinitializer.StaticFieldInitializer [vtable]
+(global $staticfieldinitializer.StaticFieldInitializer.vtable (mut (ref null $staticfieldinitializer.StaticFieldInitializer.vtable)) (ref.null $staticfieldinitializer.StaticFieldInitializer.vtable))
+
+;;; Code for staticfieldinitializer.StaticFieldInitializer [static fields]
+(global $f_a__staticfieldinitializer_StaticFieldInitializer (mut i32) (i32.const 0))
+(global $f_b__staticfieldinitializer_StaticFieldInitializer (mut i32) (i32.const 0))
+(global $f_$initialized__staticfieldinitializer_StaticFieldInitializer (mut i32) (i32.const 0))
+
 ;;; Code for staticfieldinitializer.StaticFieldInitializer [CLASS]
 (type $staticfieldinitializer.StaticFieldInitializer (struct
  (field $vtable (ref null $staticfieldinitializer.StaticFieldInitializer.vtable))
@@ -10,10 +18,6 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
-(global $staticfieldinitializer.StaticFieldInitializer.vtable (mut (ref null $staticfieldinitializer.StaticFieldInitializer.vtable)) (ref.null $staticfieldinitializer.StaticFieldInitializer.vtable))
-(global $f_a__staticfieldinitializer_StaticFieldInitializer (mut i32) (i32.const 0))
-(global $f_b__staticfieldinitializer_StaticFieldInitializer (mut i32) (i32.const 0))
-(global $f_$initialized__staticfieldinitializer_StaticFieldInitializer (mut i32) (i32.const 0))
 
 ;;; StaticFieldInitializer()
 (func $m_<init>__void@staticfieldinitializer.StaticFieldInitializer
@@ -62,5 +66,5 @@
  )
 )
 
- ;;; Code for staticfieldinitializer.StaticFieldInitializer [vtable]
+ ;;; Code for staticfieldinitializer.StaticFieldInitializer [vtable.init]
  (global.set $staticfieldinitializer.StaticFieldInitializer.vtable (struct.new_with_rtt $staticfieldinitializer.StaticFieldInitializer.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $staticfieldinitializer.StaticFieldInitializer.vtable)))

@@ -1,3 +1,13 @@
+;;; Code for jstypeenum.Color [vtable]
+(global $jstypeenum.Color.vtable (mut (ref null $jstypeenum.Color.vtable)) (ref.null $jstypeenum.Color.vtable))
+
+;;; Code for jstypeenum.Color [static fields]
+(global $f_RED__jstypeenum_Color (mut (ref null $jstypeenum.Color)) (ref.null $jstypeenum.Color))
+(global $f_GREEN__jstypeenum_Color (mut (ref null $jstypeenum.Color)) (ref.null $jstypeenum.Color))
+(global $f_BLUE__jstypeenum_Color (mut (ref null $jstypeenum.Color)) (ref.null $jstypeenum.Color))
+(global $f_namesToValuesMap__jstypeenum_Color_ (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
+(global $f_$initialized__jstypeenum_Color (mut i32) (i32.const 0))
+
 ;;; Code for jstypeenum.Color [ENUM]
 (type $jstypeenum.Color (struct
  (field $vtable (ref null $jstypeenum.Color.vtable))
@@ -17,12 +27,6 @@
  (field $m_compareTo__java_lang_Enum__int (mut (ref $function.$java.lang.Enum__$int)))
  (field $m_compareTo__java_lang_Object__int (mut (ref $function.$java.lang.Object__$int)))
 ))
-(global $jstypeenum.Color.vtable (mut (ref null $jstypeenum.Color.vtable)) (ref.null $jstypeenum.Color.vtable))
-(global $f_RED__jstypeenum_Color (mut (ref null $jstypeenum.Color)) (ref.null $jstypeenum.Color))
-(global $f_GREEN__jstypeenum_Color (mut (ref null $jstypeenum.Color)) (ref.null $jstypeenum.Color))
-(global $f_BLUE__jstypeenum_Color (mut (ref null $jstypeenum.Color)) (ref.null $jstypeenum.Color))
-(global $f_namesToValuesMap__jstypeenum_Color_ (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
-(global $f_$initialized__jstypeenum_Color (mut i32) (i32.const 0))
 
 ;;; Color()
 (func $m_<init>__void_$p_jstypeenum_Color@jstypeenum.Color
@@ -135,5 +139,5 @@
  )
 )
 
- ;;; Code for jstypeenum.Color [vtable]
+ ;;; Code for jstypeenum.Color [vtable.init]
  (global.set $jstypeenum.Color.vtable (struct.new_with_rtt $jstypeenum.Color.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Enum) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_getDeclaringClass__java_lang_Class@java.lang.Enum) (ref.func $m_name__java_lang_String@java.lang.Enum) (ref.func $m_ordinal__int@java.lang.Enum) (ref.func $m_compareTo__java_lang_Enum__int@java.lang.Enum) (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum) (rtt.canon $jstypeenum.Color.vtable)))

@@ -1,3 +1,9 @@
+;;; Code for genericconstructor.GenericConstructor [vtable]
+(global $genericconstructor.GenericConstructor.vtable (mut (ref null $genericconstructor.GenericConstructor.vtable)) (ref.null $genericconstructor.GenericConstructor.vtable))
+
+;;; Code for genericconstructor.GenericConstructor [static fields]
+(global $f_$initialized__genericconstructor_GenericConstructor (mut i32) (i32.const 0))
+
 ;;; Code for genericconstructor.GenericConstructor [CLASS]
 (type $genericconstructor.GenericConstructor (struct
  (field $vtable (ref null $genericconstructor.GenericConstructor.vtable))
@@ -11,8 +17,6 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_test__void (mut (ref $function.__$void)))
 ))
-(global $genericconstructor.GenericConstructor.vtable (mut (ref null $genericconstructor.GenericConstructor.vtable)) (ref.null $genericconstructor.GenericConstructor.vtable))
-(global $f_$initialized__genericconstructor_GenericConstructor (mut i32) (i32.const 0))
 
 ;;; GenericConstructor(S s, T t)
 (func $m_<init>__java_lang_Object__java_lang_Object__void@genericconstructor.GenericConstructor
@@ -78,5 +82,5 @@
  )
 )
 
- ;;; Code for genericconstructor.GenericConstructor [vtable]
+ ;;; Code for genericconstructor.GenericConstructor [vtable.init]
  (global.set $genericconstructor.GenericConstructor.vtable (struct.new_with_rtt $genericconstructor.GenericConstructor.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__void@genericconstructor.GenericConstructor) (rtt.canon $genericconstructor.GenericConstructor.vtable)))

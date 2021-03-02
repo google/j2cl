@@ -1,3 +1,27 @@
+;;; Code for unreachableclass.Main [vtable]
+(global $unreachableclass.Main.vtable (mut (ref null $unreachableclass.Main.vtable)) (ref.null $unreachableclass.Main.vtable))
+
+;;; Code for unreachableclass.Main.1A [vtable]
+(global $unreachableclass.Main.1A.vtable (mut (ref null $unreachableclass.Main.1A.vtable)) (ref.null $unreachableclass.Main.1A.vtable))
+
+;;; Code for unreachableclass.Main.1A.1B [vtable]
+(global $unreachableclass.Main.1A.1B.vtable (mut (ref null $unreachableclass.Main.1A.1B.vtable)) (ref.null $unreachableclass.Main.1A.1B.vtable))
+
+;;; Code for unreachableclass.Main.1 [vtable]
+(global $unreachableclass.Main.1.vtable (mut (ref null $unreachableclass.Main.1.vtable)) (ref.null $unreachableclass.Main.1.vtable))
+
+;;; Code for unreachableclass.Main [static fields]
+(global $f_$initialized__unreachableclass_Main (mut i32) (i32.const 0))
+
+;;; Code for unreachableclass.Main.1A [static fields]
+(global $f_$initialized__unreachableclass_Main_1A (mut i32) (i32.const 0))
+
+;;; Code for unreachableclass.Main.1A.1B [static fields]
+(global $f_$initialized__unreachableclass_Main_1A_1B (mut i32) (i32.const 0))
+
+;;; Code for unreachableclass.Main.1 [static fields]
+(global $f_$initialized__unreachableclass_Main_1 (mut i32) (i32.const 0))
+
 ;;; Code for unreachableclass.Main [CLASS]
 (type $unreachableclass.Main (struct
  (field $vtable (ref null $unreachableclass.Main.vtable))
@@ -10,8 +34,6 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
-(global $unreachableclass.Main.vtable (mut (ref null $unreachableclass.Main.vtable)) (ref.null $unreachableclass.Main.vtable))
-(global $f_$initialized__unreachableclass_Main (mut i32) (i32.const 0))
 
 ;;; Main()
 (func $m_<init>__void@unreachableclass.Main
@@ -74,8 +96,6 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_m__void_$pp_unreachableclass (mut (ref $function.__$void)))
 ))
-(global $unreachableclass.Main.1A.vtable (mut (ref null $unreachableclass.Main.1A.vtable)) (ref.null $unreachableclass.Main.1A.vtable))
-(global $f_$initialized__unreachableclass_Main_1A (mut i32) (i32.const 0))
 
 ;;; A(Main $outer_this)
 (func $m_<init>__unreachableclass_Main__void_$pp_unreachableclass@unreachableclass.Main.1A
@@ -137,8 +157,6 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
-(global $unreachableclass.Main.1A.1B.vtable (mut (ref null $unreachableclass.Main.1A.1B.vtable)) (ref.null $unreachableclass.Main.1A.1B.vtable))
-(global $f_$initialized__unreachableclass_Main_1A_1B (mut i32) (i32.const 0))
 
 ;;; B(A $outer_this)
 (func $m_<init>__unreachableclass_Main_1A__void_$pp_unreachableclass@unreachableclass.Main.1A.1B
@@ -197,8 +215,6 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
-(global $unreachableclass.Main.1.vtable (mut (ref null $unreachableclass.Main.1.vtable)) (ref.null $unreachableclass.Main.1.vtable))
-(global $f_$initialized__unreachableclass_Main_1 (mut i32) (i32.const 0))
 
 ;;; <anonymous> extends Object(Main $outer_this)
 (func $m_<init>__unreachableclass_Main__void_$pp_unreachableclass@unreachableclass.Main.1
@@ -235,14 +251,14 @@
  )
 )
 
- ;;; Code for unreachableclass.Main [vtable]
+ ;;; Code for unreachableclass.Main [vtable.init]
  (global.set $unreachableclass.Main.vtable (struct.new_with_rtt $unreachableclass.Main.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $unreachableclass.Main.vtable)))
 
- ;;; Code for unreachableclass.Main.1A [vtable]
+ ;;; Code for unreachableclass.Main.1A [vtable.init]
  (global.set $unreachableclass.Main.1A.vtable (struct.new_with_rtt $unreachableclass.Main.1A.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_m__void_$pp_unreachableclass@unreachableclass.Main.1A) (rtt.canon $unreachableclass.Main.1A.vtable)))
 
- ;;; Code for unreachableclass.Main.1A.1B [vtable]
+ ;;; Code for unreachableclass.Main.1A.1B [vtable.init]
  (global.set $unreachableclass.Main.1A.1B.vtable (struct.new_with_rtt $unreachableclass.Main.1A.1B.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $unreachableclass.Main.1A.1B.vtable)))
 
- ;;; Code for unreachableclass.Main.1 [vtable]
+ ;;; Code for unreachableclass.Main.1 [vtable.init]
  (global.set $unreachableclass.Main.1.vtable (struct.new_with_rtt $unreachableclass.Main.1.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $unreachableclass.Main.1.vtable)))

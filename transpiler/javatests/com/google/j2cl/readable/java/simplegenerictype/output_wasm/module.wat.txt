@@ -1,3 +1,9 @@
+;;; Code for simplegenerictype.SimpleGenericType [vtable]
+(global $simplegenerictype.SimpleGenericType.vtable (mut (ref null $simplegenerictype.SimpleGenericType.vtable)) (ref.null $simplegenerictype.SimpleGenericType.vtable))
+
+;;; Code for simplegenerictype.SimpleGenericType [static fields]
+(global $f_$initialized__simplegenerictype_SimpleGenericType (mut i32) (i32.const 0))
+
 ;;; Code for simplegenerictype.SimpleGenericType [CLASS]
 (type $simplegenerictype.SimpleGenericType (struct
  (field $vtable (ref null $simplegenerictype.SimpleGenericType.vtable))
@@ -13,8 +19,6 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_test__void (mut (ref $function.__$void)))
 ))
-(global $simplegenerictype.SimpleGenericType.vtable (mut (ref null $simplegenerictype.SimpleGenericType.vtable)) (ref.null $simplegenerictype.SimpleGenericType.vtable))
-(global $f_$initialized__simplegenerictype_SimpleGenericType (mut i32) (i32.const 0))
 
 ;;; SimpleGenericType(T t, S s)
 (func $m_<init>__java_lang_Object__java_lang_Object__void@simplegenerictype.SimpleGenericType
@@ -70,5 +74,5 @@
  )
 )
 
- ;;; Code for simplegenerictype.SimpleGenericType [vtable]
+ ;;; Code for simplegenerictype.SimpleGenericType [vtable.init]
  (global.set $simplegenerictype.SimpleGenericType.vtable (struct.new_with_rtt $simplegenerictype.SimpleGenericType.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__void@simplegenerictype.SimpleGenericType) (rtt.canon $simplegenerictype.SimpleGenericType.vtable)))

@@ -1,3 +1,9 @@
+;;; Code for boundedtypevariable.BoundedTypeVariable [vtable]
+(global $boundedtypevariable.BoundedTypeVariable.vtable (mut (ref null $boundedtypevariable.BoundedTypeVariable.vtable)) (ref.null $boundedtypevariable.BoundedTypeVariable.vtable))
+
+;;; Code for boundedtypevariable.BoundedTypeVariable [static fields]
+(global $f_$initialized__boundedtypevariable_BoundedTypeVariable (mut i32) (i32.const 0))
+
 ;;; Code for boundedtypevariable.BoundedTypeVariable [CLASS]
 (type $boundedtypevariable.BoundedTypeVariable (struct
  (field $vtable (ref null $boundedtypevariable.BoundedTypeVariable.vtable))
@@ -10,8 +16,6 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
-(global $boundedtypevariable.BoundedTypeVariable.vtable (mut (ref null $boundedtypevariable.BoundedTypeVariable.vtable)) (ref.null $boundedtypevariable.BoundedTypeVariable.vtable))
-(global $f_$initialized__boundedtypevariable_BoundedTypeVariable (mut i32) (i32.const 0))
 
 ;;; BoundedTypeVariable()
 (func $m_<init>__void@boundedtypevariable.BoundedTypeVariable
@@ -45,5 +49,5 @@
  )
 )
 
- ;;; Code for boundedtypevariable.BoundedTypeVariable [vtable]
+ ;;; Code for boundedtypevariable.BoundedTypeVariable [vtable.init]
  (global.set $boundedtypevariable.BoundedTypeVariable.vtable (struct.new_with_rtt $boundedtypevariable.BoundedTypeVariable.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $boundedtypevariable.BoundedTypeVariable.vtable)))

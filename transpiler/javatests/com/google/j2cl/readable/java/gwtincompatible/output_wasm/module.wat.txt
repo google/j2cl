@@ -1,5 +1,39 @@
-;;; Code for gwtincompatible.GwtIncompatible [INTERFACE]
+;;; Code for gwtincompatible.Implementor [vtable]
+(global $gwtincompatible.Implementor.vtable (mut (ref null $gwtincompatible.Implementor.vtable)) (ref.null $gwtincompatible.Implementor.vtable))
+
+;;; Code for gwtincompatible.Implementor.SomeEnum [vtable]
+(global $gwtincompatible.Implementor.SomeEnum.vtable (mut (ref null $gwtincompatible.Implementor.SomeEnum.vtable)) (ref.null $gwtincompatible.Implementor.SomeEnum.vtable))
+
+;;; Code for gwtincompatible.Implementor.SomeEnum.1 [vtable]
+(global $gwtincompatible.Implementor.SomeEnum.1.vtable (mut (ref null $gwtincompatible.Implementor.SomeEnum.1.vtable)) (ref.null $gwtincompatible.Implementor.SomeEnum.1.vtable))
+
+;;; Code for gwtincompatible.Interface.ClassWithAbstractMethod [vtable]
+(global $gwtincompatible.Interface.ClassWithAbstractMethod.vtable (mut (ref null $gwtincompatible.Interface.ClassWithAbstractMethod.vtable)) (ref.null $gwtincompatible.Interface.ClassWithAbstractMethod.vtable))
+
+;;; Code for gwtincompatible.GwtIncompatible [static fields]
 (global $f_$initialized__gwtincompatible_GwtIncompatible (mut i32) (i32.const 0))
+
+;;; Code for gwtincompatible.Implementor [static fields]
+(global $f_$initialized__gwtincompatible_Implementor (mut i32) (i32.const 0))
+
+;;; Code for gwtincompatible.Implementor.SomeEnum [static fields]
+(global $f_COMPATIBLE__gwtincompatible_Implementor_SomeEnum (mut (ref null $gwtincompatible.Implementor.SomeEnum)) (ref.null $gwtincompatible.Implementor.SomeEnum))
+(global $f_namesToValuesMap__gwtincompatible_Implementor_SomeEnum_ (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
+(global $f_$initialized__gwtincompatible_Implementor_SomeEnum (mut i32) (i32.const 0))
+
+;;; Code for gwtincompatible.Implementor.SomeEnum.1 [static fields]
+(global $f_$initialized__gwtincompatible_Implementor_SomeEnum_1 (mut i32) (i32.const 0))
+
+;;; Code for gwtincompatible.Interface [static fields]
+(global $f_$initialized__gwtincompatible_Interface (mut i32) (i32.const 0))
+
+;;; Code for gwtincompatible.Interface.NestedInterface [static fields]
+(global $f_$initialized__gwtincompatible_Interface_NestedInterface (mut i32) (i32.const 0))
+
+;;; Code for gwtincompatible.Interface.ClassWithAbstractMethod [static fields]
+(global $f_$initialized__gwtincompatible_Interface_ClassWithAbstractMethod (mut i32) (i32.const 0))
+
+;;; Code for gwtincompatible.GwtIncompatible [INTERFACE]
 
 ;;; void GwtIncompatible.$clinit()
 (func $$clinit__void@gwtincompatible.GwtIncompatible
@@ -31,8 +65,6 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_compatibleMethod__void (mut (ref $function.__$void)))
 ))
-(global $gwtincompatible.Implementor.vtable (mut (ref null $gwtincompatible.Implementor.vtable)) (ref.null $gwtincompatible.Implementor.vtable))
-(global $f_$initialized__gwtincompatible_Implementor (mut i32) (i32.const 0))
 
 ;;; Implementor()
 (func $m_<init>__void@gwtincompatible.Implementor
@@ -102,10 +134,6 @@
  (field $m_compareTo__java_lang_Object__int (mut (ref $function.$java.lang.Object__$int)))
  (field $m_method__void_$pp_gwtincompatible (mut (ref $function.__$void)))
 ))
-(global $gwtincompatible.Implementor.SomeEnum.vtable (mut (ref null $gwtincompatible.Implementor.SomeEnum.vtable)) (ref.null $gwtincompatible.Implementor.SomeEnum.vtable))
-(global $f_COMPATIBLE__gwtincompatible_Implementor_SomeEnum (mut (ref null $gwtincompatible.Implementor.SomeEnum)) (ref.null $gwtincompatible.Implementor.SomeEnum))
-(global $f_namesToValuesMap__gwtincompatible_Implementor_SomeEnum_ (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
-(global $f_$initialized__gwtincompatible_Implementor_SomeEnum (mut i32) (i32.const 0))
 
 ;;; SomeEnum()
 (func $m_<init>__void_$p_gwtincompatible_Implementor_SomeEnum@gwtincompatible.Implementor.SomeEnum
@@ -218,8 +246,6 @@
  (field $m_compareTo__java_lang_Object__int (mut (ref $function.$java.lang.Object__$int)))
  (field $m_method__void_$pp_gwtincompatible (mut (ref $function.__$void)))
 ))
-(global $gwtincompatible.Implementor.SomeEnum.1.vtable (mut (ref null $gwtincompatible.Implementor.SomeEnum.1.vtable)) (ref.null $gwtincompatible.Implementor.SomeEnum.1.vtable))
-(global $f_$initialized__gwtincompatible_Implementor_SomeEnum_1 (mut i32) (i32.const 0))
 
 ;;; <anonymous> extends SomeEnum()
 (func $m_<init>__void_$pp_gwtincompatible@gwtincompatible.Implementor.SomeEnum.1
@@ -266,7 +292,6 @@
 )
 
 ;;; Code for gwtincompatible.Interface [INTERFACE]
-(global $f_$initialized__gwtincompatible_Interface (mut i32) (i32.const 0))
 
 ;;; void Interface.$clinit()
 (func $$clinit__void@gwtincompatible.Interface
@@ -286,7 +311,6 @@
 )
 
 ;;; Code for gwtincompatible.Interface.NestedInterface [INTERFACE]
-(global $f_$initialized__gwtincompatible_Interface_NestedInterface (mut i32) (i32.const 0))
 
 ;;; void NestedInterface.$clinit()
 (func $$clinit__void@gwtincompatible.Interface.NestedInterface
@@ -317,8 +341,6 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
-(global $gwtincompatible.Interface.ClassWithAbstractMethod.vtable (mut (ref null $gwtincompatible.Interface.ClassWithAbstractMethod.vtable)) (ref.null $gwtincompatible.Interface.ClassWithAbstractMethod.vtable))
-(global $f_$initialized__gwtincompatible_Interface_ClassWithAbstractMethod (mut i32) (i32.const 0))
 
 ;;; ClassWithAbstractMethod()
 (func $m_<init>__void@gwtincompatible.Interface.ClassWithAbstractMethod
@@ -352,8 +374,8 @@
  )
 )
 
- ;;; Code for gwtincompatible.Implementor [vtable]
+ ;;; Code for gwtincompatible.Implementor [vtable.init]
  (global.set $gwtincompatible.Implementor.vtable (struct.new_with_rtt $gwtincompatible.Implementor.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_compatibleMethod__void@gwtincompatible.Implementor) (rtt.canon $gwtincompatible.Implementor.vtable)))
 
- ;;; Code for gwtincompatible.Implementor.SomeEnum.1 [vtable]
+ ;;; Code for gwtincompatible.Implementor.SomeEnum.1 [vtable.init]
  (global.set $gwtincompatible.Implementor.SomeEnum.1.vtable (struct.new_with_rtt $gwtincompatible.Implementor.SomeEnum.1.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Enum) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_getDeclaringClass__java_lang_Class@java.lang.Enum) (ref.func $m_name__java_lang_String@java.lang.Enum) (ref.func $m_ordinal__int@java.lang.Enum) (ref.func $m_compareTo__java_lang_Enum__int@java.lang.Enum) (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum) (ref.func $m_method__void_$pp_gwtincompatible@gwtincompatible.Implementor.SomeEnum.1) (rtt.canon $gwtincompatible.Implementor.SomeEnum.1.vtable)))

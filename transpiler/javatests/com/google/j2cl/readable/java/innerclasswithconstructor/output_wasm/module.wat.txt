@@ -1,3 +1,15 @@
+;;; Code for innerclasswithconstructor.InnerClassWithConstructor [vtable]
+(global $innerclasswithconstructor.InnerClassWithConstructor.vtable (mut (ref null $innerclasswithconstructor.InnerClassWithConstructor.vtable)) (ref.null $innerclasswithconstructor.InnerClassWithConstructor.vtable))
+
+;;; Code for innerclasswithconstructor.InnerClassWithConstructor.InnerClass [vtable]
+(global $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.vtable (mut (ref null $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.vtable)) (ref.null $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.vtable))
+
+;;; Code for innerclasswithconstructor.InnerClassWithConstructor [static fields]
+(global $f_$initialized__innerclasswithconstructor_InnerClassWithConstructor (mut i32) (i32.const 0))
+
+;;; Code for innerclasswithconstructor.InnerClassWithConstructor.InnerClass [static fields]
+(global $f_$initialized__innerclasswithconstructor_InnerClassWithConstructor_InnerClass (mut i32) (i32.const 0))
+
 ;;; Code for innerclasswithconstructor.InnerClassWithConstructor [CLASS]
 (type $innerclasswithconstructor.InnerClassWithConstructor (struct
  (field $vtable (ref null $innerclasswithconstructor.InnerClassWithConstructor.vtable))
@@ -11,8 +23,6 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
-(global $innerclasswithconstructor.InnerClassWithConstructor.vtable (mut (ref null $innerclasswithconstructor.InnerClassWithConstructor.vtable)) (ref.null $innerclasswithconstructor.InnerClassWithConstructor.vtable))
-(global $f_$initialized__innerclasswithconstructor_InnerClassWithConstructor (mut i32) (i32.const 0))
 
 ;;; InnerClassWithConstructor()
 (func $m_<init>__void@innerclasswithconstructor.InnerClassWithConstructor
@@ -60,8 +70,6 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
-(global $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.vtable (mut (ref null $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.vtable)) (ref.null $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.vtable))
-(global $f_$initialized__innerclasswithconstructor_InnerClassWithConstructor_InnerClass (mut i32) (i32.const 0))
 
 ;;; InnerClass(InnerClassWithConstructor $outer_this, int b)
 (func $m_<init>__innerclasswithconstructor_InnerClassWithConstructor__int__void@innerclasswithconstructor.InnerClassWithConstructor.InnerClass
@@ -115,8 +123,8 @@
  )
 )
 
- ;;; Code for innerclasswithconstructor.InnerClassWithConstructor [vtable]
+ ;;; Code for innerclasswithconstructor.InnerClassWithConstructor [vtable.init]
  (global.set $innerclasswithconstructor.InnerClassWithConstructor.vtable (struct.new_with_rtt $innerclasswithconstructor.InnerClassWithConstructor.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $innerclasswithconstructor.InnerClassWithConstructor.vtable)))
 
- ;;; Code for innerclasswithconstructor.InnerClassWithConstructor.InnerClass [vtable]
+ ;;; Code for innerclasswithconstructor.InnerClassWithConstructor.InnerClass [vtable.init]
  (global.set $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.vtable (struct.new_with_rtt $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.vtable)))

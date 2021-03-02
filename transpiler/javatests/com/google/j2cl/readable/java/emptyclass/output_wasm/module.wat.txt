@@ -1,3 +1,9 @@
+;;; Code for emptyclass.EmptyClass [vtable]
+(global $emptyclass.EmptyClass.vtable (mut (ref null $emptyclass.EmptyClass.vtable)) (ref.null $emptyclass.EmptyClass.vtable))
+
+;;; Code for emptyclass.EmptyClass [static fields]
+(global $f_$initialized__emptyclass_EmptyClass (mut i32) (i32.const 0))
+
 ;;; Code for emptyclass.EmptyClass [CLASS]
 (type $emptyclass.EmptyClass (struct
  (field $vtable (ref null $emptyclass.EmptyClass.vtable))
@@ -10,8 +16,6 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
-(global $emptyclass.EmptyClass.vtable (mut (ref null $emptyclass.EmptyClass.vtable)) (ref.null $emptyclass.EmptyClass.vtable))
-(global $f_$initialized__emptyclass_EmptyClass (mut i32) (i32.const 0))
 
 ;;; EmptyClass()
 (func $m_<init>__void@emptyclass.EmptyClass
@@ -45,5 +49,5 @@
  )
 )
 
- ;;; Code for emptyclass.EmptyClass [vtable]
+ ;;; Code for emptyclass.EmptyClass [vtable.init]
  (global.set $emptyclass.EmptyClass.vtable (struct.new_with_rtt $emptyclass.EmptyClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $emptyclass.EmptyClass.vtable)))

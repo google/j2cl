@@ -1,3 +1,9 @@
+;;; Code for forstatement.ForStatement [vtable]
+(global $forstatement.ForStatement.vtable (mut (ref null $forstatement.ForStatement.vtable)) (ref.null $forstatement.ForStatement.vtable))
+
+;;; Code for forstatement.ForStatement [static fields]
+(global $f_$initialized__forstatement_ForStatement (mut i32) (i32.const 0))
+
 ;;; Code for forstatement.ForStatement [CLASS]
 (type $forstatement.ForStatement (struct
  (field $vtable (ref null $forstatement.ForStatement.vtable))
@@ -11,8 +17,6 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_test__void (mut (ref $function.__$void)))
 ))
-(global $forstatement.ForStatement.vtable (mut (ref null $forstatement.ForStatement.vtable)) (ref.null $forstatement.ForStatement.vtable))
-(global $f_$initialized__forstatement_ForStatement (mut i32) (i32.const 0))
 
 ;;; ForStatement()
 (func $m_<init>__void@forstatement.ForStatement
@@ -170,5 +174,5 @@
  )
 )
 
- ;;; Code for forstatement.ForStatement [vtable]
+ ;;; Code for forstatement.ForStatement [vtable.init]
  (global.set $forstatement.ForStatement.vtable (struct.new_with_rtt $forstatement.ForStatement.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__void@forstatement.ForStatement) (rtt.canon $forstatement.ForStatement.vtable)))

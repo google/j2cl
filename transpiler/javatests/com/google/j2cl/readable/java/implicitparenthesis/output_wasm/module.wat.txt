@@ -1,3 +1,9 @@
+;;; Code for implicitparenthesis.ImplicitParenthesis [vtable]
+(global $implicitparenthesis.ImplicitParenthesis.vtable (mut (ref null $implicitparenthesis.ImplicitParenthesis.vtable)) (ref.null $implicitparenthesis.ImplicitParenthesis.vtable))
+
+;;; Code for implicitparenthesis.ImplicitParenthesis [static fields]
+(global $f_$initialized__implicitparenthesis_ImplicitParenthesis (mut i32) (i32.const 0))
+
 ;;; Code for implicitparenthesis.ImplicitParenthesis [CLASS]
 (type $implicitparenthesis.ImplicitParenthesis (struct
  (field $vtable (ref null $implicitparenthesis.ImplicitParenthesis.vtable))
@@ -11,8 +17,6 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_test__void (mut (ref $function.__$void)))
 ))
-(global $implicitparenthesis.ImplicitParenthesis.vtable (mut (ref null $implicitparenthesis.ImplicitParenthesis.vtable)) (ref.null $implicitparenthesis.ImplicitParenthesis.vtable))
-(global $f_$initialized__implicitparenthesis_ImplicitParenthesis (mut i32) (i32.const 0))
 
 ;;; ImplicitParenthesis()
 (func $m_<init>__void@implicitparenthesis.ImplicitParenthesis
@@ -176,5 +180,5 @@
  )
 )
 
- ;;; Code for implicitparenthesis.ImplicitParenthesis [vtable]
+ ;;; Code for implicitparenthesis.ImplicitParenthesis [vtable.init]
  (global.set $implicitparenthesis.ImplicitParenthesis.vtable (struct.new_with_rtt $implicitparenthesis.ImplicitParenthesis.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__void@implicitparenthesis.ImplicitParenthesis) (rtt.canon $implicitparenthesis.ImplicitParenthesis.vtable)))

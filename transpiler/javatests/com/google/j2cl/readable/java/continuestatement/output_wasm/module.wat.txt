@@ -1,3 +1,9 @@
+;;; Code for continuestatement.ContinueStatement [vtable]
+(global $continuestatement.ContinueStatement.vtable (mut (ref null $continuestatement.ContinueStatement.vtable)) (ref.null $continuestatement.ContinueStatement.vtable))
+
+;;; Code for continuestatement.ContinueStatement [static fields]
+(global $f_$initialized__continuestatement_ContinueStatement (mut i32) (i32.const 0))
+
 ;;; Code for continuestatement.ContinueStatement [CLASS]
 (type $continuestatement.ContinueStatement (struct
  (field $vtable (ref null $continuestatement.ContinueStatement.vtable))
@@ -11,8 +17,6 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_test__void (mut (ref $function.__$void)))
 ))
-(global $continuestatement.ContinueStatement.vtable (mut (ref null $continuestatement.ContinueStatement.vtable)) (ref.null $continuestatement.ContinueStatement.vtable))
-(global $f_$initialized__continuestatement_ContinueStatement (mut i32) (i32.const 0))
 
 ;;; ContinueStatement()
 (func $m_<init>__void@continuestatement.ContinueStatement
@@ -73,5 +77,5 @@
  )
 )
 
- ;;; Code for continuestatement.ContinueStatement [vtable]
+ ;;; Code for continuestatement.ContinueStatement [vtable.init]
  (global.set $continuestatement.ContinueStatement.vtable (struct.new_with_rtt $continuestatement.ContinueStatement.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__void@continuestatement.ContinueStatement) (rtt.canon $continuestatement.ContinueStatement.vtable)))

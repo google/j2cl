@@ -1,3 +1,60 @@
+;;; Code for jsvarargs.Main [vtable]
+(global $jsvarargs.Main.vtable (mut (ref null $jsvarargs.Main.vtable)) (ref.null $jsvarargs.Main.vtable))
+
+;;; Code for jsvarargs.Main.NativeObject [vtable]
+(global $jsvarargs.Main.NativeObject.vtable (mut (ref null $jsvarargs.Main.NativeObject.vtable)) (ref.null $jsvarargs.Main.NativeObject.vtable))
+
+;;; Code for jsvarargs.Main.SubVarargsConstructorClass [vtable]
+(global $jsvarargs.Main.SubVarargsConstructorClass.vtable (mut (ref null $jsvarargs.Main.SubVarargsConstructorClass.vtable)) (ref.null $jsvarargs.Main.SubVarargsConstructorClass.vtable))
+
+;;; Code for jsvarargs.Main.AbstractMethodWithVarargs [vtable]
+(global $jsvarargs.Main.AbstractMethodWithVarargs.vtable (mut (ref null $jsvarargs.Main.AbstractMethodWithVarargs.vtable)) (ref.null $jsvarargs.Main.AbstractMethodWithVarargs.vtable))
+
+;;; Code for jsvarargs.Main.AFunction [vtable]
+(global $jsvarargs.Main.AFunction.vtable (mut (ref null $jsvarargs.Main.AFunction.vtable)) (ref.null $jsvarargs.Main.AFunction.vtable))
+
+;;; Code for jsvarargs.Main.SubMain [vtable]
+(global $jsvarargs.Main.SubMain.vtable (mut (ref null $jsvarargs.Main.SubMain.vtable)) (ref.null $jsvarargs.Main.SubMain.vtable))
+
+;;; Code for jsvarargs.QualifiedSuperMethodCall [vtable]
+(global $jsvarargs.QualifiedSuperMethodCall.vtable (mut (ref null $jsvarargs.QualifiedSuperMethodCall.vtable)) (ref.null $jsvarargs.QualifiedSuperMethodCall.vtable))
+
+;;; Code for jsvarargs.QualifiedSuperMethodCall.InnerClass [vtable]
+(global $jsvarargs.QualifiedSuperMethodCall.InnerClass.vtable (mut (ref null $jsvarargs.QualifiedSuperMethodCall.InnerClass.vtable)) (ref.null $jsvarargs.QualifiedSuperMethodCall.InnerClass.vtable))
+
+;;; Code for jsvarargs.Main [static fields]
+(global $f_$initialized__jsvarargs_Main (mut i32) (i32.const 0))
+
+;;; Code for jsvarargs.Main.NativeObject [static fields]
+(global $f_$initialized__jsvarargs_Main_NativeObject (mut i32) (i32.const 0))
+
+;;; Code for jsvarargs.Main.SubVarargsConstructorClass [static fields]
+(global $f_$initialized__jsvarargs_Main_SubVarargsConstructorClass (mut i32) (i32.const 0))
+
+;;; Code for jsvarargs.Main.Function [static fields]
+(global $f_$initialized__jsvarargs_Main_Function (mut i32) (i32.const 0))
+
+;;; Code for jsvarargs.Main.AbstractMethodWithVarargs [static fields]
+(global $f_$initialized__jsvarargs_Main_AbstractMethodWithVarargs (mut i32) (i32.const 0))
+
+;;; Code for jsvarargs.Main.StaticInterfaceMethodWithVarargs [static fields]
+(global $f_$initialized__jsvarargs_Main_StaticInterfaceMethodWithVarargs (mut i32) (i32.const 0))
+
+;;; Code for jsvarargs.Main.AFunction [static fields]
+(global $f_$initialized__jsvarargs_Main_AFunction (mut i32) (i32.const 0))
+
+;;; Code for jsvarargs.Main.SubMain [static fields]
+(global $f_$initialized__jsvarargs_Main_SubMain (mut i32) (i32.const 0))
+
+;;; Code for jsvarargs.Main.GenericFunction [static fields]
+(global $f_$initialized__jsvarargs_Main_GenericFunction (mut i32) (i32.const 0))
+
+;;; Code for jsvarargs.QualifiedSuperMethodCall [static fields]
+(global $f_$initialized__jsvarargs_QualifiedSuperMethodCall (mut i32) (i32.const 0))
+
+;;; Code for jsvarargs.QualifiedSuperMethodCall.InnerClass [static fields]
+(global $f_$initialized__jsvarargs_QualifiedSuperMethodCall_InnerClass (mut i32) (i32.const 0))
+
 ;;; Code for jsvarargs.Main [CLASS]
 (type $jsvarargs.Main (struct
  (field $vtable (ref null $jsvarargs.Main.vtable))
@@ -21,8 +78,6 @@
  (field $m_testNullJsVarargs__void (mut (ref $function.__$void)))
  (field $m_testGenericJsFunctionWithVarags__void (mut (ref $function.__$void)))
 ))
-(global $jsvarargs.Main.vtable (mut (ref null $jsvarargs.Main.vtable)) (ref.null $jsvarargs.Main.vtable))
-(global $f_$initialized__jsvarargs_Main (mut i32) (i32.const 0))
 
 ;;; Main(int f)
 (func $m_<init>__int__void@jsvarargs.Main
@@ -751,8 +806,6 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
-(global $jsvarargs.Main.NativeObject.vtable (mut (ref null $jsvarargs.Main.NativeObject.vtable)) (ref.null $jsvarargs.Main.NativeObject.vtable))
-(global $f_$initialized__jsvarargs_Main_NativeObject (mut i32) (i32.const 0))
 
 ;;; NativeObject(Object... pars)
 (func $m_<init>__arrayOf_java_lang_Object__void@jsvarargs.Main.NativeObject
@@ -801,8 +854,6 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
-(global $jsvarargs.Main.SubVarargsConstructorClass.vtable (mut (ref null $jsvarargs.Main.SubVarargsConstructorClass.vtable)) (ref.null $jsvarargs.Main.SubVarargsConstructorClass.vtable))
-(global $f_$initialized__jsvarargs_Main_SubVarargsConstructorClass (mut i32) (i32.const 0))
 
 ;;; SubVarargsConstructorClass(int i, Object... args)
 (func $m_<init>__int__arrayOf_java_lang_Object__void@jsvarargs.Main.SubVarargsConstructorClass
@@ -839,7 +890,6 @@
 )
 
 ;;; Code for jsvarargs.Main.Function [INTERFACE]
-(global $f_$initialized__jsvarargs_Main_Function (mut i32) (i32.const 0))
 
 ;;; void Function.$clinit()
 (func $$clinit__void@jsvarargs.Main.Function
@@ -871,8 +921,6 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_abstractMethod__arrayOf_int__void (mut (ref $function.$int.array__$void)))
 ))
-(global $jsvarargs.Main.AbstractMethodWithVarargs.vtable (mut (ref null $jsvarargs.Main.AbstractMethodWithVarargs.vtable)) (ref.null $jsvarargs.Main.AbstractMethodWithVarargs.vtable))
-(global $f_$initialized__jsvarargs_Main_AbstractMethodWithVarargs (mut i32) (i32.const 0))
 
 ;;; AbstractMethodWithVarargs()
 (func $m_<init>__void@jsvarargs.Main.AbstractMethodWithVarargs
@@ -909,7 +957,6 @@
 )
 
 ;;; Code for jsvarargs.Main.StaticInterfaceMethodWithVarargs [INTERFACE]
-(global $f_$initialized__jsvarargs_Main_StaticInterfaceMethodWithVarargs (mut i32) (i32.const 0))
 
 ;;; void StaticInterfaceMethodWithVarargs.staticMethod(int... args)
 (func $m_staticMethod__arrayOf_int__void@jsvarargs.Main.StaticInterfaceMethodWithVarargs
@@ -952,8 +999,6 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_f1__int__arrayOf_java_lang_Object__java_lang_Object (mut (ref $function.$int__$Object.array__$java.lang.Object)))
 ))
-(global $jsvarargs.Main.AFunction.vtable (mut (ref null $jsvarargs.Main.AFunction.vtable)) (ref.null $jsvarargs.Main.AFunction.vtable))
-(global $f_$initialized__jsvarargs_Main_AFunction (mut i32) (i32.const 0))
 
 ;;; AFunction()
 (func $m_<init>__void_$pp_jsvarargs@jsvarargs.Main.AFunction
@@ -1030,8 +1075,6 @@
  (field $m_testNullJsVarargs__void (mut (ref $function.__$void)))
  (field $m_testGenericJsFunctionWithVarags__void (mut (ref $function.__$void)))
 ))
-(global $jsvarargs.Main.SubMain.vtable (mut (ref null $jsvarargs.Main.SubMain.vtable)) (ref.null $jsvarargs.Main.SubMain.vtable))
-(global $f_$initialized__jsvarargs_Main_SubMain (mut i32) (i32.const 0))
 
 ;;; SubMain()
 (func $m_<init>__void@jsvarargs.Main.SubMain
@@ -1133,7 +1176,6 @@
 )
 
 ;;; Code for jsvarargs.Main.GenericFunction [INTERFACE]
-(global $f_$initialized__jsvarargs_Main_GenericFunction (mut i32) (i32.const 0))
 
 ;;; void GenericFunction.$clinit()
 (func $$clinit__void@jsvarargs.Main.GenericFunction
@@ -1175,8 +1217,6 @@
  (field $m_testNullJsVarargs__void (mut (ref $function.__$void)))
  (field $m_testGenericJsFunctionWithVarags__void (mut (ref $function.__$void)))
 ))
-(global $jsvarargs.QualifiedSuperMethodCall.vtable (mut (ref null $jsvarargs.QualifiedSuperMethodCall.vtable)) (ref.null $jsvarargs.QualifiedSuperMethodCall.vtable))
-(global $f_$initialized__jsvarargs_QualifiedSuperMethodCall (mut i32) (i32.const 0))
 
 ;;; QualifiedSuperMethodCall()
 (func $m_<init>__void@jsvarargs.QualifiedSuperMethodCall
@@ -1224,8 +1264,6 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_test__void (mut (ref $function.__$void)))
 ))
-(global $jsvarargs.QualifiedSuperMethodCall.InnerClass.vtable (mut (ref null $jsvarargs.QualifiedSuperMethodCall.InnerClass.vtable)) (ref.null $jsvarargs.QualifiedSuperMethodCall.InnerClass.vtable))
-(global $f_$initialized__jsvarargs_QualifiedSuperMethodCall_InnerClass (mut i32) (i32.const 0))
 
 ;;; InnerClass(QualifiedSuperMethodCall $outer_this)
 (func $m_<init>__jsvarargs_QualifiedSuperMethodCall__void@jsvarargs.QualifiedSuperMethodCall.InnerClass
@@ -1319,23 +1357,23 @@
  )
 )
 
- ;;; Code for jsvarargs.Main [vtable]
+ ;;; Code for jsvarargs.Main [vtable.init]
  (global.set $jsvarargs.Main.vtable (struct.new_with_rtt $jsvarargs.Main.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_f3__int__arrayOf_int__int@jsvarargs.Main) (ref.func $m_f4__arrayOf_int__int@jsvarargs.Main) (ref.func $m_testStaticMethodNotFirst__void@jsvarargs.Main) (ref.func $m_testStaticMethodFirst__void@jsvarargs.Main) (ref.func $m_testInstanceMethodNotFirst__void@jsvarargs.Main) (ref.func $m_testInstanceMethodFirst__void@jsvarargs.Main) (ref.func $m_testJsFunction__void@jsvarargs.Main) (ref.func $m_testSideEffect__void@jsvarargs.Main) (ref.func $m_testNullJsVarargs__void@jsvarargs.Main) (ref.func $m_testGenericJsFunctionWithVarags__void@jsvarargs.Main) (rtt.canon $jsvarargs.Main.vtable)))
 
- ;;; Code for jsvarargs.Main.NativeObject [vtable]
+ ;;; Code for jsvarargs.Main.NativeObject [vtable.init]
  (global.set $jsvarargs.Main.NativeObject.vtable (struct.new_with_rtt $jsvarargs.Main.NativeObject.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $jsvarargs.Main.NativeObject.vtable)))
 
- ;;; Code for jsvarargs.Main.SubVarargsConstructorClass [vtable]
+ ;;; Code for jsvarargs.Main.SubVarargsConstructorClass [vtable.init]
  (global.set $jsvarargs.Main.SubVarargsConstructorClass.vtable (struct.new_with_rtt $jsvarargs.Main.SubVarargsConstructorClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $jsvarargs.Main.SubVarargsConstructorClass.vtable)))
 
- ;;; Code for jsvarargs.Main.AFunction [vtable]
+ ;;; Code for jsvarargs.Main.AFunction [vtable.init]
  (global.set $jsvarargs.Main.AFunction.vtable (struct.new_with_rtt $jsvarargs.Main.AFunction.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_f1__int__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main.AFunction) (rtt.canon $jsvarargs.Main.AFunction.vtable)))
 
- ;;; Code for jsvarargs.Main.SubMain [vtable]
+ ;;; Code for jsvarargs.Main.SubMain [vtable.init]
  (global.set $jsvarargs.Main.SubMain.vtable (struct.new_with_rtt $jsvarargs.Main.SubMain.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_f3__int__arrayOf_int__int@jsvarargs.Main.SubMain) (ref.func $m_f4__arrayOf_int__int@jsvarargs.Main) (ref.func $m_testStaticMethodNotFirst__void@jsvarargs.Main) (ref.func $m_testStaticMethodFirst__void@jsvarargs.Main) (ref.func $m_testInstanceMethodNotFirst__void@jsvarargs.Main) (ref.func $m_testInstanceMethodFirst__void@jsvarargs.Main) (ref.func $m_testJsFunction__void@jsvarargs.Main) (ref.func $m_testSideEffect__void@jsvarargs.Main) (ref.func $m_testNullJsVarargs__void@jsvarargs.Main) (ref.func $m_testGenericJsFunctionWithVarags__void@jsvarargs.Main) (rtt.canon $jsvarargs.Main.SubMain.vtable)))
 
- ;;; Code for jsvarargs.QualifiedSuperMethodCall [vtable]
+ ;;; Code for jsvarargs.QualifiedSuperMethodCall [vtable.init]
  (global.set $jsvarargs.QualifiedSuperMethodCall.vtable (struct.new_with_rtt $jsvarargs.QualifiedSuperMethodCall.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_f3__int__arrayOf_int__int@jsvarargs.Main) (ref.func $m_f4__arrayOf_int__int@jsvarargs.Main) (ref.func $m_testStaticMethodNotFirst__void@jsvarargs.Main) (ref.func $m_testStaticMethodFirst__void@jsvarargs.Main) (ref.func $m_testInstanceMethodNotFirst__void@jsvarargs.Main) (ref.func $m_testInstanceMethodFirst__void@jsvarargs.Main) (ref.func $m_testJsFunction__void@jsvarargs.Main) (ref.func $m_testSideEffect__void@jsvarargs.Main) (ref.func $m_testNullJsVarargs__void@jsvarargs.Main) (ref.func $m_testGenericJsFunctionWithVarags__void@jsvarargs.Main) (rtt.canon $jsvarargs.QualifiedSuperMethodCall.vtable)))
 
- ;;; Code for jsvarargs.QualifiedSuperMethodCall.InnerClass [vtable]
+ ;;; Code for jsvarargs.QualifiedSuperMethodCall.InnerClass [vtable.init]
  (global.set $jsvarargs.QualifiedSuperMethodCall.InnerClass.vtable (struct.new_with_rtt $jsvarargs.QualifiedSuperMethodCall.InnerClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__void@jsvarargs.QualifiedSuperMethodCall.InnerClass) (rtt.canon $jsvarargs.QualifiedSuperMethodCall.InnerClass.vtable)))

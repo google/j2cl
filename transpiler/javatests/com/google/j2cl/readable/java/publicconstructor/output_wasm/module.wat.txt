@@ -1,3 +1,9 @@
+;;; Code for publicconstructor.PublicConstructor [vtable]
+(global $publicconstructor.PublicConstructor.vtable (mut (ref null $publicconstructor.PublicConstructor.vtable)) (ref.null $publicconstructor.PublicConstructor.vtable))
+
+;;; Code for publicconstructor.PublicConstructor [static fields]
+(global $f_$initialized__publicconstructor_PublicConstructor (mut i32) (i32.const 0))
+
 ;;; Code for publicconstructor.PublicConstructor [CLASS]
 (type $publicconstructor.PublicConstructor (struct
  (field $vtable (ref null $publicconstructor.PublicConstructor.vtable))
@@ -10,8 +16,6 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
-(global $publicconstructor.PublicConstructor.vtable (mut (ref null $publicconstructor.PublicConstructor.vtable)) (ref.null $publicconstructor.PublicConstructor.vtable))
-(global $f_$initialized__publicconstructor_PublicConstructor (mut i32) (i32.const 0))
 
 ;;; PublicConstructor()
 (func $m_<init>__void@publicconstructor.PublicConstructor
@@ -45,5 +49,5 @@
  )
 )
 
- ;;; Code for publicconstructor.PublicConstructor [vtable]
+ ;;; Code for publicconstructor.PublicConstructor [vtable.init]
  (global.set $publicconstructor.PublicConstructor.vtable (struct.new_with_rtt $publicconstructor.PublicConstructor.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $publicconstructor.PublicConstructor.vtable)))

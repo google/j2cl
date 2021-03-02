@@ -1,3 +1,17 @@
+;;; Code for strings.Strings [vtable]
+(global $strings.Strings.vtable (mut (ref null $strings.Strings.vtable)) (ref.null $strings.Strings.vtable))
+
+;;; Code for strings.Strings.StringHolder [vtable]
+(global $strings.Strings.StringHolder.vtable (mut (ref null $strings.Strings.StringHolder.vtable)) (ref.null $strings.Strings.StringHolder.vtable))
+
+;;; Code for strings.Strings [static fields]
+(global $f_ESCAPE_CODES__strings_Strings_ (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_ESCAPE_CODES_COPY__strings_Strings_ (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_$initialized__strings_Strings (mut i32) (i32.const 0))
+
+;;; Code for strings.Strings.StringHolder [static fields]
+(global $f_$initialized__strings_Strings_StringHolder (mut i32) (i32.const 0))
+
 ;;; Code for strings.Strings [CLASS]
 (type $strings.Strings (struct
  (field $vtable (ref null $strings.Strings.vtable))
@@ -14,10 +28,6 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_test__void (mut (ref $function.__$void)))
 ))
-(global $strings.Strings.vtable (mut (ref null $strings.Strings.vtable)) (ref.null $strings.Strings.vtable))
-(global $f_ESCAPE_CODES__strings_Strings_ (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
-(global $f_ESCAPE_CODES_COPY__strings_Strings_ (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
-(global $f_$initialized__strings_Strings (mut i32) (i32.const 0))
 
 ;;; Strings()
 (func $m_<init>__void@strings.Strings
@@ -252,8 +262,6 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
-(global $strings.Strings.StringHolder.vtable (mut (ref null $strings.Strings.StringHolder.vtable)) (ref.null $strings.Strings.StringHolder.vtable))
-(global $f_$initialized__strings_Strings_StringHolder (mut i32) (i32.const 0))
 
 ;;; StringHolder()
 (func $m_<init>__void_$p_strings_Strings_StringHolder@strings.Strings.StringHolder
@@ -306,8 +314,8 @@
  )
 )
 
- ;;; Code for strings.Strings [vtable]
+ ;;; Code for strings.Strings [vtable.init]
  (global.set $strings.Strings.vtable (struct.new_with_rtt $strings.Strings.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__void@strings.Strings) (rtt.canon $strings.Strings.vtable)))
 
- ;;; Code for strings.Strings.StringHolder [vtable]
+ ;;; Code for strings.Strings.StringHolder [vtable.init]
  (global.set $strings.Strings.StringHolder.vtable (struct.new_with_rtt $strings.Strings.StringHolder.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $strings.Strings.StringHolder.vtable)))

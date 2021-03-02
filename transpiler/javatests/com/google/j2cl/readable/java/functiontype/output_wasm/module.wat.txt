@@ -1,5 +1,13 @@
-;;; Code for functiontype.Function [INTERFACE]
+;;; Code for functiontype.FunctionImpl [vtable]
+(global $functiontype.FunctionImpl.vtable (mut (ref null $functiontype.FunctionImpl.vtable)) (ref.null $functiontype.FunctionImpl.vtable))
+
+;;; Code for functiontype.Function [static fields]
 (global $f_$initialized__functiontype_Function (mut i32) (i32.const 0))
+
+;;; Code for functiontype.FunctionImpl [static fields]
+(global $f_$initialized__functiontype_FunctionImpl (mut i32) (i32.const 0))
+
+;;; Code for functiontype.Function [INTERFACE]
 
 ;;; void Function.$clinit()
 (func $$clinit__void@functiontype.Function
@@ -31,8 +39,6 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_test__functiontype_Function__void (mut (ref $function.$java.lang.Object__$void)))
 ))
-(global $functiontype.FunctionImpl.vtable (mut (ref null $functiontype.FunctionImpl.vtable)) (ref.null $functiontype.FunctionImpl.vtable))
-(global $f_$initialized__functiontype_FunctionImpl (mut i32) (i32.const 0))
 
 ;;; FunctionImpl()
 (func $m_<init>__void@functiontype.FunctionImpl
@@ -79,5 +85,5 @@
  )
 )
 
- ;;; Code for functiontype.FunctionImpl [vtable]
+ ;;; Code for functiontype.FunctionImpl [vtable.init]
  (global.set $functiontype.FunctionImpl.vtable (struct.new_with_rtt $functiontype.FunctionImpl.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__functiontype_Function__void@functiontype.FunctionImpl) (rtt.canon $functiontype.FunctionImpl.vtable)))

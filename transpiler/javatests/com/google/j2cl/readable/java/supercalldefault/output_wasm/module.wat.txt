@@ -1,3 +1,9 @@
+;;; Code for supercalldefault.SuperCallDefault [vtable]
+(global $supercalldefault.SuperCallDefault.vtable (mut (ref null $supercalldefault.SuperCallDefault.vtable)) (ref.null $supercalldefault.SuperCallDefault.vtable))
+
+;;; Code for supercalldefault.SuperCallDefault [static fields]
+(global $f_$initialized__supercalldefault_SuperCallDefault (mut i32) (i32.const 0))
+
 ;;; Code for supercalldefault.SuperCallDefault [CLASS]
 (type $supercalldefault.SuperCallDefault (struct
  (field $vtable (ref null $supercalldefault.SuperCallDefault.vtable))
@@ -10,8 +16,6 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
 ))
-(global $supercalldefault.SuperCallDefault.vtable (mut (ref null $supercalldefault.SuperCallDefault.vtable)) (ref.null $supercalldefault.SuperCallDefault.vtable))
-(global $f_$initialized__supercalldefault_SuperCallDefault (mut i32) (i32.const 0))
 
 ;;; SuperCallDefault()
 (func $m_<init>__void@supercalldefault.SuperCallDefault
@@ -45,5 +49,5 @@
  )
 )
 
- ;;; Code for supercalldefault.SuperCallDefault [vtable]
+ ;;; Code for supercalldefault.SuperCallDefault [vtable.init]
  (global.set $supercalldefault.SuperCallDefault.vtable (struct.new_with_rtt $supercalldefault.SuperCallDefault.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $supercalldefault.SuperCallDefault.vtable)))

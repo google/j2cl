@@ -1,3 +1,9 @@
+;;; Code for defaultnullable.DefaultNullable [vtable]
+(global $defaultnullable.DefaultNullable.vtable (mut (ref null $defaultnullable.DefaultNullable.vtable)) (ref.null $defaultnullable.DefaultNullable.vtable))
+
+;;; Code for defaultnullable.DefaultNullable [static fields]
+(global $f_$initialized__defaultnullable_DefaultNullable (mut i32) (i32.const 0))
+
 ;;; Code for defaultnullable.DefaultNullable [CLASS]
 (type $defaultnullable.DefaultNullable (struct
  (field $vtable (ref null $defaultnullable.DefaultNullable.vtable))
@@ -25,8 +31,6 @@
  (field $m_m2__java_lang_String__java_util_List__java_lang_String (mut (ref $function.$java.lang.String__$java.lang.Object__$java.lang.String)))
  (field $m_m3__arrayOf_java_lang_String__void (mut (ref $function.$Object.array__$void)))
 ))
-(global $defaultnullable.DefaultNullable.vtable (mut (ref null $defaultnullable.DefaultNullable.vtable)) (ref.null $defaultnullable.DefaultNullable.vtable))
-(global $f_$initialized__defaultnullable_DefaultNullable (mut i32) (i32.const 0))
 
 ;;; DefaultNullable()
 (func $m_<init>__void@defaultnullable.DefaultNullable
@@ -178,5 +182,5 @@
  )
 )
 
- ;;; Code for defaultnullable.DefaultNullable [vtable]
+ ;;; Code for defaultnullable.DefaultNullable [vtable.init]
  (global.set $defaultnullable.DefaultNullable.vtable (struct.new_with_rtt $defaultnullable.DefaultNullable.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_m1__java_lang_String__java_util_List__java_lang_String@defaultnullable.DefaultNullable) (ref.func $m_m2__java_lang_String__java_util_List__java_lang_String@defaultnullable.DefaultNullable) (ref.func $m_m3__arrayOf_java_lang_String__void@defaultnullable.DefaultNullable) (rtt.canon $defaultnullable.DefaultNullable.vtable)))
