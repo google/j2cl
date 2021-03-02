@@ -82,9 +82,9 @@ public class Main {
     assertTrue(4L == (b % a));
     assertTrue(11110L == (a + b));
     assertTrue(-8642L == (a - b));
-    assertTrue(9872L == (a << 3)); // right operand is not a long
-    assertTrue(-7L == (c >> 3)); // right operand is not a long
-    assertTrue(2305843009213693945L == (c >>> 3)); // right operand is not a long
+    assertTrue(9872L == (a << 3L));
+    assertTrue(-7L == (c >> 3L));
+    assertTrue(2305843009213693945L == (c >>> 3L));
     assertTrue(a < b);
     assertTrue(b > a);
     assertTrue(b <= b);
