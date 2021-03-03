@@ -22,6 +22,7 @@ def setup_j2cl_workspace(**kwargs):
         artifact = "com.google.auto:auto-common:0.9",
         server_urls = _MAVEN_CENTRAL_URLS,
         licenses = ["notice"],
+        artifact_sha256 = "d65d7e7b45ac92317eae8a55481ca25e5fba908a2fd24b66684854d9dec2fcfd",
     )
 
     jvm_maven_import_external(
@@ -29,6 +30,7 @@ def setup_j2cl_workspace(**kwargs):
         artifact = "com.google.auto.service:auto-service-annotations:1.0-rc7",
         server_urls = _MAVEN_CENTRAL_URLS,
         licenses = ["notice"],
+        artifact_sha256 = "986dc826fa0a43bf9f04194c1a8667774f4f44190ec816b08554b47891ba5459",
     )
 
     jvm_maven_import_external(
@@ -36,6 +38,7 @@ def setup_j2cl_workspace(**kwargs):
         artifact = "com.google.auto.service:auto-service:1.0-rc7",
         server_urls = _MAVEN_CENTRAL_URLS,
         licenses = ["notice"],
+        artifact_sha256 = "24f13c98baf5fb87e7502fd87130457941cda405ec6ff28d8ff964a8f58a82ed",
     )
 
     # We cannot replace com_google_jsinterop_annotations so choose a different name
@@ -51,6 +54,7 @@ def setup_j2cl_workspace(**kwargs):
         artifact = "commons-collections:commons-collections:3.2.2",
         server_urls = _MAVEN_CENTRAL_URLS,
         licenses = ["notice"],
+        artifact_sha256 = "eeeae917917144a68a741d4c0dff66aa5c5c5fd85593ff217bced3fc8ca783b8",
     )
 
     jvm_maven_import_external(
@@ -58,6 +62,7 @@ def setup_j2cl_workspace(**kwargs):
         artifact = "commons-lang:commons-lang:2.6",
         server_urls = _MAVEN_CENTRAL_URLS,
         licenses = ["notice"],
+        artifact_sha256 = "50f11b09f877c294d56f24463f47d28f929cf5044f648661c0f0cfbae9a2f49c",
     )
 
     jvm_maven_import_external(
@@ -65,6 +70,7 @@ def setup_j2cl_workspace(**kwargs):
         artifact = "org.apache.commons:commons-lang3:3.6",
         server_urls = _MAVEN_CENTRAL_URLS,
         licenses = ["notice"],
+        artifact_sha256 = "89c27f03fff18d0b06e7afd7ef25e209766df95b6c1269d6c3ebbdea48d5f284",
     )
 
     jvm_maven_import_external(
@@ -72,6 +78,7 @@ def setup_j2cl_workspace(**kwargs):
         artifact = "org.apache.commons:commons-text:1.2",
         server_urls = _MAVEN_CENTRAL_URLS,
         licenses = ["notice"],
+        artifact_sha256 = "d4a57bbc1627da7c391308fd0fe910b83170fb66afd117236a5b111d2db1590b",
     )
 
     jvm_maven_import_external(
@@ -79,6 +86,7 @@ def setup_j2cl_workspace(**kwargs):
         artifact = "org.apache.velocity:velocity:1.7",
         server_urls = _MAVEN_CENTRAL_URLS,
         licenses = ["notice"],
+        artifact_sha256 = "ec92dae810034f4b46dbb16ef4364a4013b0efb24a8c5dd67435cae46a290d8e",
     )
 
     jvm_maven_import_external(
@@ -116,6 +124,7 @@ def setup_j2cl_workspace(**kwargs):
         artifact = "com.google.errorprone:javac:9+181-r4173-1",
         server_urls = _MAVEN_CENTRAL_URLS,
         licenses = ["notice"],
+        artifact_sha256 = "1d8d347a0e1579f3fc86ac04d1974e489afc66357f0009ac9804a7ac30912ed6",
     )
 
     # Eclipse JARs listed at
