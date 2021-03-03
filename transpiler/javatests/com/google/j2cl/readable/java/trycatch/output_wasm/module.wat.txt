@@ -175,7 +175,8 @@
  (block $return.label
   (block
    ;; throw TryCatch.this.getT(new Exception.<init>());
-   (call $m_getT__java_lang_Object__java_lang_Object_$p_trycatch_TryCatch@trycatch.TryCatch (local.get $this)(call $m_<init>__void@java.lang.Exception (struct.new_with_rtt $java.lang.Exception (global.get $java.lang.Exception.vtable) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $Object.array) (ref.null $Object.array) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Exception.rtt))))unreachable
+   
+   (unreachable)
   )
  )
 )
@@ -205,7 +206,8 @@
  (block $return.label
   (block
    ;; throw TryCatch.this.getThrowable();
-   (call $m_getThrowable__java_lang_Throwable_$p_trycatch_TryCatch@trycatch.TryCatch (local.get $this))unreachable
+   
+   (unreachable)
   )
  )
 )
