@@ -267,14 +267,11 @@ public class RuntimeMethods {
   }
 
   /** Create a call to a Primitives method. */
-  public static MethodCall createPrimitivesMethodCall(String methodName, Expression... arguments) {
-    return createPrimitivesMethodCall(methodName, Arrays.asList(arguments));
-  }
+  public static MethodCall createPrimitivesMethodCall(String methodName, Expression argument) {
+    MethodDescriptor narrowMethodDescriptor =
+        TypeDescriptors.get().javaemulInternalPrimitives.getMethodDescriptorByName(methodName);
 
-  /** Create a call to an Primitives method. */
-  public static MethodCall createPrimitivesMethodCall(
-      String methodName, List<Expression> arguments) {
-    return createRuntimeMethodCall(BootstrapType.PRIMITIVES.getDescriptor(), methodName, arguments);
+    return MethodCall.Builder.from(narrowMethodDescriptor).setArguments(argument).build();
   }
 
   /** Create a call to the corresponding narrowing Primitives method. */
@@ -287,17 +284,8 @@ public class RuntimeMethods {
             "narrow%sTo%s",
             toProperCase(fromTypeDescriptor.getSimpleSourceName()),
             toProperCase(toTypeDescriptor.getSimpleSourceName()));
-    MethodDescriptor narrowMethodDescriptor =
-        MethodDescriptor.newBuilder()
-            .setJsInfo(JsInfo.RAW)
-            .setStatic(true)
-            .setEnclosingTypeDescriptor(BootstrapType.PRIMITIVES.getDescriptor())
-            .setName(methodName)
-            .setParameterTypeDescriptors(fromTypeDescriptor)
-            .setReturnTypeDescriptor(toTypeDescriptor)
-            .build();
-    // Primitives.narrowAToB(expr);
-    return MethodCall.Builder.from(narrowMethodDescriptor).setArguments(expression).build();
+
+    return createPrimitivesMethodCall(methodName, expression);
   }
 
   /** Create a call to the corresponding widening Primitives method. */
@@ -305,22 +293,13 @@ public class RuntimeMethods {
       Expression expression, PrimitiveTypeDescriptor toTypeDescriptor) {
     PrimitiveTypeDescriptor fromTypeDescriptor =
         (PrimitiveTypeDescriptor) expression.getTypeDescriptor();
-    String widenMethodName =
+    String methodName =
         String.format(
             "widen%sTo%s",
             toProperCase(fromTypeDescriptor.getSimpleSourceName()),
             toProperCase(toTypeDescriptor.getSimpleSourceName()));
-    MethodDescriptor widenMethodDescriptor =
-        MethodDescriptor.newBuilder()
-            .setJsInfo(JsInfo.RAW)
-            .setStatic(true)
-            .setEnclosingTypeDescriptor(BootstrapType.PRIMITIVES.getDescriptor())
-            .setName(widenMethodName)
-            .setParameterTypeDescriptors(fromTypeDescriptor)
-            .setReturnTypeDescriptor(toTypeDescriptor)
-            .build();
-    // Primitives.widenAToB(expr);
-    return MethodCall.Builder.from(widenMethodDescriptor).setArguments(expression).build();
+
+    return createPrimitivesMethodCall(methodName, expression);
   }
 
   /** Return the String with first letter capitalized. */

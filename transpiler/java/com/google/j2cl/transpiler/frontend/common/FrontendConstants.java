@@ -55,6 +55,7 @@ public class FrontendConstants {
           "java.lang.Throwable",
           "javaemul.internal.ValueType",
           "javaemul.internal.InternalPreconditions",
+          "javaemul.internal.Primitives",
           "javaemul.internal.Enums",
           "javaemul.internal.Constructor",
           "javaemul.internal.WasmArrayHelper");
