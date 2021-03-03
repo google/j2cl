@@ -244,6 +244,8 @@ OPTIMIZED_JS_LIST = [
     "//transpiler/javatests/com/google/j2cl/integration/multipleconstructors:optimized_js.esnext",
     "//transpiler/javatests/com/google/j2cl/integration/multipleroottypes:optimized_js",
     "//transpiler/javatests/com/google/j2cl/integration/multipleroottypes:optimized_js.esnext",
+    "//transpiler/javatests/com/google/j2cl/integration/narrowingdoubletofloat:optimized_js",
+    "//transpiler/javatests/com/google/j2cl/integration/narrowingdoubletofloat:optimized_js.esnext",
     "//transpiler/javatests/com/google/j2cl/integration/narrowingprimitiveconversion:optimized_js",
     "//transpiler/javatests/com/google/j2cl/integration/narrowingprimitiveconversion:optimized_js.esnext",
     "//transpiler/javatests/com/google/j2cl/integration/nativeinjection:optimized_js",

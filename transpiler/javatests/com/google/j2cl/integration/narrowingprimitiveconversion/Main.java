@@ -97,21 +97,18 @@ public class Main {
     assertTrue(((short) d == 2));
     assertTrue(((int) d == 2));
     assertTrue(((long) d == 2L));
-    assertTrue(((float) d == d)); // we don't honor float-double precision differences
 
     assertTrue(((byte) dd == -1));
     assertTrue(((char) dd == 65535));
     assertTrue(((short) dd == -1));
     assertTrue(((int) dd == 2147483647));
     assertTrue(((long) dd == 2415919103L));
-    assertTrue(((float) dd == dd)); // we don't honor float-double precision differences
 
     assertTrue(((byte) md == -1));
     assertTrue(((char) md == 65535));
     assertTrue(((short) md == -1));
     assertTrue(((int) md == 2147483647));
     assertTrue(((long) md == 9223372036854775807L));
-    assertTrue(((float) md == md)); // we don't honor float-double precision differences
 
     int n = 5;
     assertTrue(2 * (n / 2) == 4);
