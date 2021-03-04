@@ -293,7 +293,6 @@ public class TypeDescriptors {
     ASSERTS("vmbootstrap", "Asserts"),
     ARRAYS("vmbootstrap", "Arrays"),
     CASTS("vmbootstrap", "Casts"),
-    PRIMITIVES("vmbootstrap", "Primitives"),
     ENUMS("vmbootstrap", "Enums"),
     EXCEPTIONS("vmbootstrap", "Exceptions"),
     LONG_UTILS("vmbootstrap", "LongUtils"),

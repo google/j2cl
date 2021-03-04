@@ -489,17 +489,6 @@ public class RuntimeMethods {
                                       .build())
                               .build())
                       .put(
-                          BootstrapType.PRIMITIVES.getDescriptor(),
-                          // Primitives methods
-                          ImmutableMap.<String, MethodInfo>builder()
-                              .put(
-                                  "coerceDivision",
-                                  MethodInfo.newBuilder()
-                                      .setReturnType(PrimitiveTypes.INT)
-                                      .setParameters(PrimitiveTypes.INT)
-                                      .build())
-                              .build())
-                      .put(
                           BootstrapType.LONG_UTILS.getDescriptor(),
                           // LongUtils methods
                           ImmutableMap.<String, MethodInfo>builder()
