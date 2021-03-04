@@ -15,6 +15,8 @@
  */
 package foreachstatement;
 
+import java.util.Iterator;
+
 public class ForEachStatement {
   public void test(Iterable<Throwable> iterable) {
     for (Throwable t : iterable) {
@@ -24,5 +26,30 @@ public class ForEachStatement {
     for (Throwable t : new Throwable[10]) {
       t.toString();
     }
+  }
+
+  static class Exception1 extends Exception implements Iterable<String> {
+    public Iterator<String> iterator() {
+      return null;
+    }
+  }
+
+  static class Exception2 extends Exception implements Iterable<Object> {
+    public Iterator<Object> iterator() {
+      return null;
+    }
+  }
+
+  private void testMulticatch() throws Exception {
+    try {
+      throw new Exception();
+    } catch (Exception1 | Exception2 e) {
+      for (Object o : e) {}
+    }
+  }
+
+  private <T extends Object & Iterable<String>, U extends T> void testTypeVariable() {
+    U iterable = null;
+    for (String s : iterable) {}
   }
 }

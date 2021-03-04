@@ -17,6 +17,7 @@ package com.google.j2cl.integration.foreachstatement;
 
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
+import java.io.Serializable;
 import java.util.Iterator;
 
 /**
@@ -24,27 +25,28 @@ import java.util.Iterator;
  */
 public class Main {
 
-  static class MyIterable implements Iterable<String> {
-    public Iterator<String> iterator() {
-      return new Iterator<String>() {
-        private int i = 5;
+  static class MyIterable implements Iterable<Integer>, Serializable {
+    class MyIterator implements Iterator<Integer> {
+      private int i = 5;
 
-        public boolean hasNext() {
-          return i >= 0;
-        }
+      public boolean hasNext() {
+        return i >= 1;
+      }
 
-        public String next() {
-          return "" + i--;
-        }
+      public Integer next() {
+        return new Integer(i--);
+      }
 
-        public void remove() {}
-      };
+      public void remove() {}
+    }
+
+    public MyIterator iterator() {
+      return new MyIterator();
     }
   }
 
-  public static void main(String... args) {
-
-    int[] array = new int[] {5, 4, 3, 2, 1, 0};
+  private static void testForEachArray() {
+    int[] array = new int[] {5, 4, 3, 2, 1};
     int j = 5;
     int lastSeenInt = -1;
     for (int i : array) {
@@ -53,18 +55,10 @@ public class Main {
       lastSeenInt = i;
     }
 
-    assertTrue("LastSeen:<" + lastSeenInt + "> should be zero", lastSeenInt == 0);
+    assertTrue("LastSeen:<" + lastSeenInt + "> should be zero", lastSeenInt == 1);
+  }
 
-    String lastSeenString = "";
-    j = 5;
-    for (String s : new MyIterable()) {
-
-      assertTrue("Seen:<" + s + "> Expected:<" + j + ">", s == "" + j);
-      j--;
-      lastSeenString = s;
-    }
-    assertTrue("LastSeen:<" + lastSeenString + "> should be zero", lastSeenString == "0");
-
+  private static void testForEachArray_nested() {
     int[][] matrix = new int[5][5];
     // load the matrix
     for (int i = 0; i < 5; i++) {
@@ -86,5 +80,38 @@ public class Main {
 
   private static int value(int i, int j) {
     return i * 10 + j;
+  }
+
+  private static void testForEachIterable() {
+    Integer lastSeenInteger = new Integer(-1);
+    int j = 5;
+    for (Integer s : new MyIterable()) {
+      assertTrue("Seen:<" + s + "> Expected:<" + j + ">", s.intValue() == j);
+      j--;
+      lastSeenInteger = s;
+    }
+    assertTrue(
+        "LastSeen:<" + lastSeenInteger + "> should be zero", lastSeenInteger.intValue() == 1);
+  }
+
+  private static <T extends MyIterable & Serializable, S extends T>
+      void testForEachIterable_typeVariablesAndIntersectionTypes() {
+    S iterable = (S) new MyIterable();
+    Integer lastSeenInteger = new Integer(-1);
+    int j = 5;
+    for (Integer s : iterable) {
+      assertTrue("Seen:<" + s + "> Expected:<" + j + ">", s.intValue() == j);
+      j--;
+      lastSeenInteger = s;
+    }
+    assertTrue(
+        "LastSeen:<" + lastSeenInteger + "> should be zero", lastSeenInteger.intValue() == 1);
+  }
+
+  public static void main(String... args) {
+    testForEachArray();
+    testForEachArray_nested();
+    testForEachIterable();
+    testForEachIterable_typeVariablesAndIntersectionTypes();
   }
 }

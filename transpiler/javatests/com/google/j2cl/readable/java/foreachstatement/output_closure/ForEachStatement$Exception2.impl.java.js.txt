@@ -1,0 +1,69 @@
+goog.module('foreachstatement.ForEachStatement.Exception2$impl');
+
+const Exception = goog.require('java.lang.Exception$impl');
+const Iterable = goog.require('java.lang.Iterable$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
+let Spliterator = goog.forwardDeclare('java.util.Spliterator$impl');
+let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
+
+/**
+ * @implements {Iterable<*>}
+ */
+class Exception2 extends Exception {
+  /** @protected */
+  constructor() {
+    super();
+  }
+  /** @return {!Exception2} */
+  static $create__() {
+    Exception2.$clinit();
+    let $instance = new Exception2();
+    $instance.$ctor__foreachstatement_ForEachStatement_Exception2__();
+    $instance.m_privateInitError__java_lang_Object_$pp_java_lang(
+        new Error($instance));
+    return $instance;
+  }
+
+  $ctor__foreachstatement_ForEachStatement_Exception2__() {
+    this.$ctor__java_lang_Exception__();
+  }
+  /** @override @return {Iterator<*>} */
+  m_iterator__() {
+    return null;
+  }
+  // Default method forwarding stub.
+  /** @override */
+  m_forEach__java_util_function_Consumer(/** Consumer<?> */ arg0) {
+    Iterable
+        .m_forEach__$default__java_lang_Iterable__java_util_function_Consumer(
+            this, arg0);
+  }
+  // Default method forwarding stub.
+  /** @override @return {Spliterator<*>} */
+  m_spliterator__() {
+    return /**@type {Spliterator<*>}*/ (
+        Iterable.m_spliterator__$default__java_lang_Iterable(this));
+  }
+
+  static $clinit() {
+    Exception2.$clinit = () => {};
+    Exception2.$loadModules();
+    Exception.$clinit();
+    Iterable.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof Exception2;
+  }
+
+  static $loadModules() {}
+}
+Iterable.$markImplementor(Exception2);
+$Util.$setClassMetadata(
+    Exception2, 'foreachstatement.ForEachStatement$Exception2');
+
+exports = Exception2;
+
+//# sourceMappingURL=ForEachStatement$Exception2.js.map
