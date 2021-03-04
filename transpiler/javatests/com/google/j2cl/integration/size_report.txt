@@ -1,21 +1,25 @@
 Integration tests size report:
 **************************************
-There are 2 optimized size changes.
+There are 9 optimized size changes.
 Total optimized size (of already existing tests) changed from
-  2036380 to 2037338 bytes (100%->100.0%) and from
-  725125 to 725341 bytes (100%->100.0%) gzipped.
+  2037338 to 2039064 bytes (100%->100.1%) and from
+  725341 to 726073 bytes (100%->100.1%) gzipped.
 
 
 Shrinkage report highlights:
 **************************************
-  none
+        old      new
+       2767     2763 longimplicitcasts (-0.1%)
+       2503     2500 longimplicitcasts.esnext (-0.1%)
 
 
 Expansion report highlights:
 **************************************
         old      new
-       1486     1626 foreachstatement (9.4%)
-       1182     1258 foreachstatement.esnext (6.4%)
+         22      695 arithmeticexceptiondisabled (3059.1%)
+      12223    12232 jsinteroptests.esnext (0.1%)
+      28829    28850 box2d_noclassmetadata.esnext (0.1%)
+      28568    28587 box2d_noclassmetadata_checksopt.esnext (0.1%)
 
 
 Incremental size reports (non-gzip):
@@ -28,12 +32,12 @@ Incremental size reports (non-gzip):
 Uncompiled bundle reports:
 **************************************
         old      new
-    4026219  4026219 box2d_default (unchanged)
-    2199132  2199132 box2d_default.minified (unchanged)
-    1169843  1169843 box2d_default.rta (unchanged)
-    2422252  2422252 emptyclass (unchanged)
-    1456774  1456774 emptyclass.minified (unchanged)
-     702569   702569 emptyclass.rta (unchanged)
+    4026219  4026960 box2d_default (0.0%)
+    2199132  2199532 box2d_default.minified (0.0%)
+    1169843  1170203 box2d_default.rta (0.0%)
+    2422252  2422993 emptyclass (0.0%)
+    1456774  1457174 emptyclass.minified (0.0%)
+     702569   702919 emptyclass.rta (0.0%)
 
 
 All reports:
@@ -49,7 +53,7 @@ All reports:
        1998     1998 argumentimplicitcasts.esnext (unchanged)
        2595     2595 arithmeticexception (unchanged)
        2359     2359 arithmeticexception.esnext (unchanged)
-         22       22 arithmeticexceptiondisabled (unchanged)
+         22      695 arithmeticexceptiondisabled (3059.1%)
          22       22 arithmeticexceptiondisabled.esnext (unchanged)
         898      898 arithmeticexceptiondisabledresultused (unchanged)
         607      607 arithmeticexceptiondisabledresultused.esnext (unchanged)
@@ -86,13 +90,13 @@ All reports:
         908      908 blockscoping (unchanged)
         623      623 blockscoping.esnext (unchanged)
       28817    28817 box2d_default (unchanged)
-      30934    30934 box2d_default.esnext (unchanged)
+      30934    30938 box2d_default.esnext (0.0%)
       27225    27225 box2d_noclassmetadata (unchanged)
-      28829    28829 box2d_noclassmetadata.esnext (unchanged)
+      28829    28850 box2d_noclassmetadata.esnext (0.1%)
       25892    25892 box2d_noclassmetadata_checksmin (unchanged)
-      27297    27297 box2d_noclassmetadata_checksmin.esnext (unchanged)
+      27297    27304 box2d_noclassmetadata_checksmin.esnext (0.0%)
       27051    27051 box2d_noclassmetadata_checksopt (unchanged)
-      28568    28568 box2d_noclassmetadata_checksopt.esnext (unchanged)
+      28568    28587 box2d_noclassmetadata_checksopt.esnext (0.1%)
         961      961 breakstatement (unchanged)
         675      675 breakstatement.esnext (unchanged)
        2042     2042 bridgejsmethod (unchanged)
@@ -163,8 +167,8 @@ All reports:
         827      827 fieldshadowing.esnext (unchanged)
         923      923 finallyblock (unchanged)
         645      645 finallyblock.esnext (unchanged)
-       1486     1626 foreachstatement (9.4%)
-       1182     1258 foreachstatement.esnext (6.4%)
+       1626     1626 foreachstatement (unchanged)
+       1258     1258 foreachstatement.esnext (unchanged)
        1006     1006 forstatement (unchanged)
         700      700 forstatement.esnext (unchanged)
          22       22 gwtincompatible (unchanged)
@@ -239,8 +243,8 @@ All reports:
        1465     1465 jsfunctiontypeannotation.esnext (unchanged)
         971      971 jsinnerclass (unchanged)
         669      669 jsinnerclass.esnext (unchanged)
-      13995    13995 jsinteroptests (unchanged)
-      12223    12223 jsinteroptests.esnext (unchanged)
+      13995    14001 jsinteroptests (0.0%)
+      12223    12232 jsinteroptests.esnext (0.1%)
         975      975 jsmethodoverride (unchanged)
         669      669 jsmethodoverride.esnext (unchanged)
        1182     1182 jsoverlay (unchanged)
@@ -263,8 +267,8 @@ All reports:
        4194     4194 logging.esnext (unchanged)
        3877     3877 loggingstripped (unchanged)
        3477     3477 loggingstripped.esnext (unchanged)
-       2767     2767 longimplicitcasts (unchanged)
-       2503     2503 longimplicitcasts.esnext (unchanged)
+       2767     2763 longimplicitcasts (-0.1%)
+       2503     2500 longimplicitcasts.esnext (-0.1%)
        2542     2542 longoperationsinglesideeffect (unchanged)
        2225     2225 longoperationsinglesideeffect.esnext (unchanged)
        3064     3064 methodreferences (unchanged)

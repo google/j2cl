@@ -18,6 +18,7 @@ package java.lang;
 import static javaemul.internal.InternalPreconditions.checkNotNull;
 
 import javaemul.internal.JsUtils;
+import javaemul.internal.Platform;
 import jsinterop.annotations.JsMethod;
 
 /**
@@ -200,15 +201,17 @@ public final class Double extends Number implements Comparable<Double> {
     return (int) d;
   }
 
-  @JsMethod(namespace = "<window>")
-  public static native boolean isFinite(double x);
+  public static boolean isFinite(double x) {
+    return Platform.isFinite(x);
+  }
 
   public static boolean isInfinite(double x) {
     return !isNaN(x) && !isFinite(x);
   }
 
-  @JsMethod(namespace = "<window>")
-  public static native boolean isNaN(double x);
+  public static boolean isNaN(double x) {
+    return Platform.isNaN(x);
+  }
 
   public static double longBitsToDouble(long bits) {
     long ihi = (long) (bits >> 32);
