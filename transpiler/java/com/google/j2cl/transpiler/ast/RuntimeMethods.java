@@ -117,11 +117,14 @@ public class RuntimeMethods {
     // createMapFromValues is parameterized by T extends Enum, so specialize the method to the
     // right type.
     TypeVariable enumType = createMapMethodDescriptor.getTypeParameterTypeDescriptors().get(0);
-    createMapMethodDescriptor.specializeTypeVariables(
-        ImmutableMap.of(
-            enumType,
-            ((ArrayTypeDescriptor) values.getTypeDescriptor()).getComponentTypeDescriptor()));
-    return MethodCall.Builder.from(createMapMethodDescriptor).setArguments(values).build();
+    return MethodCall.Builder.from(
+            createMapMethodDescriptor.specializeTypeVariables(
+                ImmutableMap.of(
+                    enumType,
+                    ((ArrayTypeDescriptor) values.getTypeDescriptor())
+                        .getComponentTypeDescriptor())))
+        .setArguments(values)
+        .build();
   }
 
   /** Create a call to Enums.getValueFromNameAndMap. */
@@ -137,9 +140,9 @@ public class RuntimeMethods {
     // getValueFromNameAndMap is parameterized by T extends Enum, so specialize the method to the
     // right enum type.
     TypeVariable enumType = getValueMethodDescriptor.getTypeParameterTypeDescriptors().get(0);
-    getValueMethodDescriptor.specializeTypeVariables(ImmutableMap.of(enumType, enumType));
-
-    return MethodCall.Builder.from(getValueMethodDescriptor)
+    return MethodCall.Builder.from(
+            getValueMethodDescriptor.specializeTypeVariables(
+                ImmutableMap.of(enumType, enumTypeDescriptor)))
         .setArguments(nameParameter, namesToValuesMapParameter)
         .build();
   }
@@ -147,11 +150,19 @@ public class RuntimeMethods {
   /** Create a call to Enums.[boxingMethod] */
   public static Expression createEnumsBoxMethodCall(Expression value) {
     TypeDescriptor valueTypeDescriptor = value.getTypeDescriptor();
-
     String boxingMethodName =
         valueTypeDescriptor.getJsEnumInfo().supportsComparable() ? "boxComparable" : "box";
-    return createEnumsMethodCall(
-        boxingMethodName, value, valueTypeDescriptor.getMetadataConstructorReference());
+
+    MethodDescriptor boxingMethod =
+        TypeDescriptors.get().javaemulInternalEnums.getMethodDescriptorByName(boxingMethodName);
+
+    // boxing operations are parameterized by the JsEnum type, so specialize the method to the
+    // right type.
+    TypeVariable type = boxingMethod.getTypeParameterTypeDescriptors().get(0);
+    return MethodCall.Builder.from(
+            boxingMethod.specializeTypeVariables(ImmutableMap.of(type, valueTypeDescriptor)))
+        .setArguments(value, valueTypeDescriptor.getMetadataConstructorReference())
+        .build();
   }
 
   /** Create a call to Enums.unbox. */
@@ -159,14 +170,11 @@ public class RuntimeMethods {
     return createEnumsMethodCall("unbox", expression);
   }
 
-  /** Create a call to an Enums method. */
-  public static MethodCall createEnumsMethodCall(String methodName, Expression... arguments) {
-    return createEnumsMethodCall(methodName, Arrays.asList(arguments));
-  }
+  public static Expression createEnumsMethodCall(String unbox, Expression... arguments) {
+    MethodDescriptor methodDescriptor =
+        TypeDescriptors.get().javaemulInternalEnums.getMethodDescriptorByName(unbox);
 
-  /** Create a call to an Enums method. */
-  private static MethodCall createEnumsMethodCall(String methodName, List<Expression> arguments) {
-    return createRuntimeMethodCall(BootstrapType.ENUMS.getDescriptor(), methodName, arguments);
+    return MethodCall.Builder.from(methodDescriptor).setArguments(arguments).build();
   }
 
   /** Create a call to an Equality method. */
@@ -539,41 +547,6 @@ public class RuntimeMethods {
                                   MethodInfo.newBuilder()
                                       .setReturnType(PrimitiveTypes.LONG)
                                       .setParameters(PrimitiveTypes.INT, PrimitiveTypes.INT)
-                                      .build())
-                              .build())
-                      .put(
-                          BootstrapType.ENUMS.getDescriptor(),
-                          // Enums methods
-                          ImmutableMap.<String, MethodInfo>builder()
-                              .put(
-                                  "isInstanceOf",
-                                  MethodInfo.newBuilder()
-                                      .setReturnType(PrimitiveTypes.BOOLEAN)
-                                      .setParameters(
-                                          TypeDescriptors.get().javaLangObject,
-                                          TypeDescriptors.get().javaLangObject)
-                                      .build())
-                              .put(
-                                  "box",
-                                  MethodInfo.newBuilder()
-                                      .setReturnType(TypeDescriptors.get().javaLangObject)
-                                      .setParameters(
-                                          TypeDescriptors.get().javaLangObject,
-                                          TypeDescriptors.get().javaLangObject)
-                                      .build())
-                              .put(
-                                  "boxComparable",
-                                  MethodInfo.newBuilder()
-                                      .setReturnType(TypeDescriptors.get().javaLangObject)
-                                      .setParameters(
-                                          TypeDescriptors.get().javaLangObject,
-                                          TypeDescriptors.get().javaLangObject)
-                                      .build())
-                              .put(
-                                  "unbox",
-                                  MethodInfo.newBuilder()
-                                      .setReturnType(TypeDescriptors.get().javaLangObject)
-                                      .setParameters(TypeDescriptors.get().javaLangObject)
                                       .build())
                               .build())
                       .build());

@@ -39,8 +39,9 @@ class Enum3 extends Enum {
   static m_valueOf__java_lang_String(/** string */ name) {
     Enum3.$clinit();
     if ($Equality.$same(Enum3.f_namesToValuesMap__enums_Enum3_, null)) {
-      Enum3.f_namesToValuesMap__enums_Enum3_ = /**@type {Map<?string, ?>}*/ (
-          $Enums.createMapFromValues(Enum3.m_values__()));
+      Enum3.f_namesToValuesMap__enums_Enum3_ =
+          /**@type {Map<?string, !Enum3>}*/ (
+              $Enums.createMapFromValues(Enum3.m_values__()));
     }
     return /**@type {Enum3}*/ ($Enums.getValueFromNameAndMap(
         name, Enum3.f_namesToValuesMap__enums_Enum3_));

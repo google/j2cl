@@ -293,7 +293,6 @@ public class TypeDescriptors {
     ASSERTS("vmbootstrap", "Asserts"),
     ARRAYS("vmbootstrap", "Arrays"),
     CASTS("vmbootstrap", "Casts"),
-    ENUMS("vmbootstrap", "Enums"),
     EXCEPTIONS("vmbootstrap", "Exceptions"),
     LONG_UTILS("vmbootstrap", "LongUtils"),
     JAVA_SCRIPT_OBJECT("vmbootstrap", "JavaScriptObject"),
