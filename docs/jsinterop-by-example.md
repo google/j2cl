@@ -377,3 +377,43 @@ const ExposedEnum = {
   VALUE2 : 'Value2'
 }
 ```
+
+### Calling legacy Closure functions that are themselves a namespace
+
+```js
+// Some old existing bar.js
+goog.provide('foo.bar');
+
+/** @return {string} */
+foo.bar = function(value) {
+  return 'bar';
+};
+```
+
+```java
+// Handwritten Java code to expose foo.bar to Java code.
+public class Main {
+  // Note that the method sets the namespace and leaves the name empty.
+  @JsMethod(namespace = "foo.bar", name = "")
+  public static native String bar();
+}
+```
+
+### Accessing legacy Closure properties that are themselves a namespace
+
+```js
+// Some old existing bar.js
+goog.provide('foo.bar');
+
+/** @return {string} */
+foo.bar = 'bar';
+```
+
+```java
+// Handwritten Java code to expose foo.bar to Java code.
+public class Main {
+  // Note that the method sets the namespace and leaves the name empty.
+  @JsProperty(namespace = "foo.bar", name = "")
+  public static native String bar();
+}
+```

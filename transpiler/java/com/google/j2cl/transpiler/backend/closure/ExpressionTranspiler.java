@@ -284,6 +284,14 @@ public class ExpressionTranspiler {
         Expression qualifier = ((MemberReference) enclosingExpression).getQualifier();
         if (shouldRenderQualifier(qualifier)) {
           processLeftSubExpression(enclosingExpression, qualifier);
+
+          // If there's no property name then we want to reference the namespace itself. This would
+          // be the case if there's a @JsMethod lacking a name. In those cases the intent is to
+          // reference a function that is itself a namespace. Therefore we shouldn't render anything
+          // beyond the qualifier.
+          if (jsPropertyName.isEmpty()) {
+            return;
+          }
           sourceBuilder.append(".");
         }
         sourceBuilder.emitWithMapping(sourcePosition, () -> sourceBuilder.append(jsPropertyName));

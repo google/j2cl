@@ -46,6 +46,8 @@ public class NativeJsTypeTest {
     testVariableExternCollision();
     testAliasExternCollision();
     testBridgesNativeSubclass();
+    testCallNamespaceAsFunction();
+    testAccessNamespaceAsProperty();
   }
 
   @JsType(isNative = true)
@@ -524,4 +526,18 @@ public class NativeJsTypeTest {
 
   @JsMethod(namespace = "woo.NativeJsTypeTest.NativeBridgesSubclass", name = "create")
   private static native AbstractSuperClassForJs createBridgesNativeSubclass();
+
+  @JsMethod(namespace = "woo.NativeJsTypeTest.FunctionNamespace", name = "")
+  private static native String callFunctionNamespace(String input);
+
+  private static void testCallNamespaceAsFunction() {
+    assertEquals("foobar", callFunctionNamespace("foo"));
+  }
+
+  @JsProperty(namespace = "woo.NativeJsTypeTest.PropertyNamespace", name = "")
+  private static native String getPropertyNamespace();
+
+  private static void testAccessNamespaceAsProperty() {
+    assertEquals("foo", getPropertyNamespace());
+  }
 }

@@ -1271,7 +1271,14 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "   @JsProperty(name = \"s^\") public int  m;",
             "   @JsProperty(name = \"\") public int n;",
             "   @JsMethod(name = \"a.b\") static void o() {}",
-            "   @JsProperty(name = \"a.c\") static int q;",
+            "   @JsMethod(name = \"\") static void p() {}",
+            "   @JsMethod(name = \"\") void q() {}",
+            "   @JsMethod(name = \"\") static native void r();",
+            "   @JsMethod(namespace = \"34s\", name = \"\") static native void s();",
+            "   @JsProperty(name = \"a.c\") static int t;",
+            "   @JsProperty(name = \"\") int u;",
+            "   @JsProperty(namespace =\"a.b.c\", name = \"\") int v;",
+            "   @JsProperty(namespace = \"34s\", name = \"\") static native int w();",
             "}",
             "@JsType(namespace = JsPackage.GLOBAL, name = \"a.b.d\")",
             "class OtherBuggy { }",
@@ -1287,13 +1294,31 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "'Buggy.m' has invalid name 's^'.",
             "'Buggy.n' cannot have an empty name.",
             "'void Buggy.o()' has invalid name 'a.b'.",
-            "'Buggy.q' has invalid name 'a.c'.",
+            "'void Buggy.p()' cannot have an empty name.",
+            "'void Buggy.q()' cannot have an empty name.",
+            "'void Buggy.r()' cannot have an empty name.",
+            "'void Buggy.s()' has invalid namespace '34s'.",
+            "'Buggy.t' has invalid name 'a.c'.",
+            "'Buggy.u' cannot have an empty name.",
+            "'Buggy.v' cannot have an empty name.",
+            "'int Buggy.w()' has invalid namespace '34s'.",
             "'OtherBuggy' has invalid name 'a.b.d'.",
             "'NativeEnum' has invalid name '='.",
             "'MyJsEnum' has invalid name 'c.d'.",
             "Only native interfaces in the global namespace can be named '*'.",
             "Only native interfaces in the global namespace can be named '?'.",
             "Only native interfaces in the global namespace can be named '*'.");
+  }
+
+  public void testJsNameEmptyNamesSucceeds() {
+    assertTranspileSucceeds(
+            "test.Buggy",
+            "import jsinterop.annotations.*;",
+            "public class Buggy {",
+            "   @JsMethod(namespace = \"foo.buzz\", name = \"\") static native void buzz();",
+            "   @JsProperty(namespace = \"foo.bar\", name = \"\") static native String bar();",
+            "}")
+        .assertNoWarnings();
   }
 
   public void testJsNameInvalidNamespacesFails() {

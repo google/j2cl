@@ -1103,7 +1103,7 @@ public class JsInteropRestrictionsChecker {
       return true;
     }
 
-    if (!checkJsName(member)) {
+    if (!isValidUnnamedJsMember(member) && !checkJsName(member)) {
       return false;
     }
 
@@ -1135,6 +1135,24 @@ public class JsInteropRestrictionsChecker {
     }
 
     return checkJsNamespace(member);
+  }
+
+  /**
+   * Checks if the given member is properly using an empty JS name.
+   *
+   * <p>A valid use-case for this is for when you need to refer to a JS property/function that is
+   * itself a namespace.
+   */
+  private static boolean isValidUnnamedJsMember(Member member) {
+    String jsName = member.getSimpleJsName();
+    if (jsName == null || !jsName.isEmpty() || !member.isStatic()) {
+      return false;
+    }
+    // If you're unnammed then you must have an explicit namespace.
+    if (member.getDescriptor().getJsInfo().getJsNamespace() == null) {
+      return false;
+    }
+    return member.isMethod() && member.isNative();
   }
 
   private void checkJsOverlay(Member member) {
