@@ -3,7 +3,7 @@ goog.module('jsvarargs.Main.StaticInterfaceMethodWithVarargs$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 /**
  * @interface
@@ -11,7 +11,7 @@ let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 class StaticInterfaceMethodWithVarargs {
   static staticMethod(.../** ...number */ args) {
     StaticInterfaceMethodWithVarargs.$clinit();
-    $Arrays.$stampType(args, $int, 1);
+    $Arrays.$stampType(args, $$int, 1);
   }
 
   static $clinit() {
@@ -31,7 +31,7 @@ class StaticInterfaceMethodWithVarargs {
 
   static $loadModules() {
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
   }
 }
 StaticInterfaceMethodWithVarargs.$markImplementor(

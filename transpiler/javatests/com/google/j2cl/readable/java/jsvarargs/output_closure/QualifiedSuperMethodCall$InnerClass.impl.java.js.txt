@@ -7,7 +7,7 @@ let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreco
 let Main = goog.forwardDeclare('jsvarargs.Main$impl');
 let QualifiedSuperMethodCall = goog.forwardDeclare('jsvarargs.QualifiedSuperMethodCall$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 class InnerClass extends j_l_Object {
   /** @protected */
@@ -45,7 +45,7 @@ class InnerClass extends j_l_Object {
         2);
     Main.prototype.f3.call(
         this.$outer_this__jsvarargs_QualifiedSuperMethodCall_InnerClass, 1);
-    let ints = /**@type {!Array<number>}*/ ($Arrays.$init([1, 2], $int));
+    let ints = /**@type {!Array<number>}*/ ($Arrays.$init([1, 2], $$int));
     Main.prototype.f3.call(
         this.$outer_this__jsvarargs_QualifiedSuperMethodCall_InnerClass, 1,
         ...InternalPreconditions.m_checkNotNull__java_lang_Object(ints));
@@ -66,7 +66,7 @@ class InnerClass extends j_l_Object {
         goog.module.get('javaemul.internal.InternalPreconditions$impl');
     Main = goog.module.get('jsvarargs.Main$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
   }
 }
 $Util.$setClassMetadata(

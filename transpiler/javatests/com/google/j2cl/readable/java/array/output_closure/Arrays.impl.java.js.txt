@@ -10,8 +10,8 @@ let Cloneable = goog.forwardDeclare('java.lang.Cloneable$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
-let $long = goog.forwardDeclare('vmbootstrap.primitives.$long$impl');
+let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+let $$long = goog.forwardDeclare('vmbootstrap.primitives.$long$impl');
 
 class Arrays extends j_l_Object {
   /** @protected */
@@ -71,16 +71,16 @@ class Arrays extends j_l_Object {
   }
 
   m_testIntArrays___$pp_array() {
-    let ints = /**@type {!Array<number>}*/ ($Arrays.$create([100], $int));
-    ints = /**@type {!Array<number>}*/ ($Arrays.$create([0], $int));
-    ints = /**@type {!Array<number>}*/ ($Arrays.$init([0, 1], $int));
+    let ints = /**@type {!Array<number>}*/ ($Arrays.$create([100], $$int));
+    ints = /**@type {!Array<number>}*/ ($Arrays.$create([0], $$int));
+    ints = /**@type {!Array<number>}*/ ($Arrays.$init([0, 1], $$int));
     let ints2d =
-        /**@type {!Array<Array<number>>}*/ ($Arrays.$create([5, 10], $int));
+        /**@type {!Array<Array<number>>}*/ ($Arrays.$create([5, 10], $$int));
     ints2d = /**@type {!Array<Array<number>>}*/ ($Arrays.$init(
-        [/**@type {!Array<number>}*/ ($Arrays.$init([1, 2], $int)), null], $int,
-        2));
+        [/**@type {!Array<number>}*/ ($Arrays.$init([1, 2], $$int)), null],
+        $$int, 2));
     ints2d =
-        /**@type {!Array<Array<number>>}*/ ($Arrays.$create([20, null], $int));
+        /**@type {!Array<Array<number>>}*/ ($Arrays.$create([20, null], $$int));
     let n = ints[0];
     n = ints2d[0][1];
     $Arrays.$set(ints, 0, 1);
@@ -88,21 +88,21 @@ class Arrays extends j_l_Object {
   }
 
   m_testLongArrays___$pp_array() {
-    let longs = /**@type {!Array<!$Long>}*/ ($Arrays.$create([100], $long));
-    longs = /**@type {!Array<!$Long>}*/ ($Arrays.$create([0], $long));
+    let longs = /**@type {!Array<!$Long>}*/ ($Arrays.$create([100], $$long));
+    longs = /**@type {!Array<!$Long>}*/ ($Arrays.$create([0], $$long));
     longs = /**@type {!Array<!$Long>}*/ (
-        $Arrays.$init([$Long.fromInt(0), $Long.fromInt(1)], $long));
+        $Arrays.$init([$Long.fromInt(0), $Long.fromInt(1)], $$long));
     let longs2d =
-        /**@type {!Array<Array<!$Long>>}*/ ($Arrays.$create([5, 10], $long));
+        /**@type {!Array<Array<!$Long>>}*/ ($Arrays.$create([5, 10], $$long));
     longs2d = /**@type {!Array<Array<!$Long>>}*/ ($Arrays.$init(
         [
           /**@type {!Array<!$Long>}*/ (
-              $Arrays.$init([$Long.fromInt(1), $Long.fromInt(2)], $long)),
+              $Arrays.$init([$Long.fromInt(1), $Long.fromInt(2)], $$long)),
           null
         ],
-        $long, 2));
-    longs2d =
-        /**@type {!Array<Array<!$Long>>}*/ ($Arrays.$create([20, null], $long));
+        $$long, 2));
+    longs2d = /**@type {!Array<Array<!$Long>>}*/ (
+        $Arrays.$create([20, null], $$long));
     let n = longs[0];
     n = longs2d[0][1];
     $Arrays.$set(longs, 0, $Long.fromInt(1));
@@ -202,8 +202,8 @@ class Arrays extends j_l_Object {
     j_l_String = goog.module.get('java.lang.String$impl');
     $Long = goog.module.get('nativebootstrap.Long$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
-    $long = goog.module.get('vmbootstrap.primitives.$long$impl');
+    $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    $$long = goog.module.get('vmbootstrap.primitives.$long$impl');
   }
 }
 $Util.$setClassMetadata(Arrays, 'array.Arrays');

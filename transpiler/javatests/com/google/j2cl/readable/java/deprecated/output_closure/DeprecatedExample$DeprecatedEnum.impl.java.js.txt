@@ -5,7 +5,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-let Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
+let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
 
 /**
  * @extends {Enum<DeprecatedEnum>}
@@ -41,9 +41,9 @@ class DeprecatedEnum extends Enum {
       DeprecatedEnum
           .f_namesToValuesMap__deprecated_DeprecatedExample_DeprecatedEnum_ =
           /**@type {Map<?string, ?>}*/ (
-              Enums.createMapFromValues(DeprecatedEnum.values()));
+              $Enums.createMapFromValues(DeprecatedEnum.values()));
     }
-    return /**@type {DeprecatedEnum}*/ (Enums.getValueFromNameAndMap(
+    return /**@type {DeprecatedEnum}*/ ($Enums.getValueFromNameAndMap(
         name,
         DeprecatedEnum
             .f_namesToValuesMap__deprecated_DeprecatedExample_DeprecatedEnum_));
@@ -86,7 +86,7 @@ class DeprecatedEnum extends Enum {
   static $loadModules() {
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-    Enums = goog.module.get('vmbootstrap.Enums$impl');
+    $Enums = goog.module.get('vmbootstrap.Enums$impl');
   }
 }
 /**@private {!DeprecatedEnum} @deprecated*/

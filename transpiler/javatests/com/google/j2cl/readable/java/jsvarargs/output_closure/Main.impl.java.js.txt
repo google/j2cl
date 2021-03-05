@@ -9,7 +9,7 @@ let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreco
 let AFunction = goog.forwardDeclare('jsvarargs.Main.AFunction$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 class Main extends j_l_Object {
   /** @protected */
@@ -33,23 +33,23 @@ class Main extends j_l_Object {
   /** @return {number} */
   static f1(/** number */ multiplier, .../** ...number */ numbers) {
     Main.$clinit();
-    $Arrays.$stampType(numbers, $int, 1);
+    $Arrays.$stampType(numbers, $$int, 1);
     return numbers.length + numbers[0] + multiplier | 0;
   }
   /** @return {number} */
   static f2(.../** ...number */ numbers) {
     Main.$clinit();
-    $Arrays.$stampType(numbers, $int, 1);
+    $Arrays.$stampType(numbers, $$int, 1);
     return numbers.length + numbers[0] | 0;
   }
   /** @return {number} */
   f3(/** number */ m, .../** ...number */ numbers) {
-    $Arrays.$stampType(numbers, $int, 1);
+    $Arrays.$stampType(numbers, $$int, 1);
     return this.f_field__jsvarargs_Main + m + numbers[1] | 0;
   }
   /** @return {number} */
   f4(.../** ...number */ numbers) {
-    $Arrays.$stampType(numbers, $int, 1);
+    $Arrays.$stampType(numbers, $$int, 1);
     return this.f_field__jsvarargs_Main + numbers[1] | 0;
   }
   /** @template T @return {T} */
@@ -79,7 +79,7 @@ class Main extends j_l_Object {
     Main.f1(1, 1, 2);
     Main.f1(1);
     Main.f1(1);
-    let ints = /**@type {!Array<number>}*/ ($Arrays.$init([1, 2], $int));
+    let ints = /**@type {!Array<number>}*/ ($Arrays.$init([1, 2], $$int));
     Main.f1(1, ...InternalPreconditions.m_checkNotNull__java_lang_Object(ints));
     Main.f1(1, ...InternalPreconditions.m_checkNotNull__java_lang_Object(ints));
     Main.f1(1, ...InternalPreconditions.m_checkNotNull__java_lang_Object(null));
@@ -97,12 +97,12 @@ class Main extends j_l_Object {
     Main.generics();
     Main.f2(1, 2);
     Main.f2(1, 2);
-    Main.generics(/**@type {!Array<number>}*/ ($Arrays.$init([1, 2], $int)));
+    Main.generics(/**@type {!Array<number>}*/ ($Arrays.$init([1, 2], $$int)));
     Main.generics(Integer.m_valueOf__int(1), Integer.m_valueOf__int(2));
     Main.f2();
     Main.f2();
-    Main.generics(/**@type {!Array<number>}*/ ($Arrays.$init([], $int)));
-    let ints = /**@type {!Array<number>}*/ ($Arrays.$init([1, 2], $int));
+    Main.generics(/**@type {!Array<number>}*/ ($Arrays.$init([], $$int)));
+    let ints = /**@type {!Array<number>}*/ ($Arrays.$init([1, 2], $$int));
     let integers = /**@type {!Array<Integer>}*/ ($Arrays.$init(
         [Integer.m_valueOf__int(1), Integer.m_valueOf__int(2)], Integer));
     Main.f2(...InternalPreconditions.m_checkNotNull__java_lang_Object(ints));
@@ -117,7 +117,7 @@ class Main extends j_l_Object {
     m.f3(1);
     m.f3(1, 1, 2);
     m.f3(1);
-    let ints = /**@type {!Array<number>}*/ ($Arrays.$init([1, 2], $int));
+    let ints = /**@type {!Array<number>}*/ ($Arrays.$init([1, 2], $$int));
     m.f3(1, ...InternalPreconditions.m_checkNotNull__java_lang_Object(ints));
   }
 
@@ -127,7 +127,7 @@ class Main extends j_l_Object {
     m.f4();
     m.f4(1, 2);
     m.f4();
-    let ints = /**@type {!Array<number>}*/ ($Arrays.$init([1, 2], $int));
+    let ints = /**@type {!Array<number>}*/ ($Arrays.$init([1, 2], $$int));
     m.f4(...InternalPreconditions.m_checkNotNull__java_lang_Object(ints));
   }
 
@@ -144,7 +144,7 @@ class Main extends j_l_Object {
   }
 
   m_testSideEffect__() {
-    let ints = /**@type {!Array<number>}*/ ($Arrays.$init([1, 2], $int));
+    let ints = /**@type {!Array<number>}*/ ($Arrays.$init([1, 2], $$int));
     Main.$create__int(1).f3(
         1, ...InternalPreconditions.m_checkNotNull__java_lang_Object(ints));
   }
@@ -178,7 +178,7 @@ class Main extends j_l_Object {
     AFunction = goog.module.get('jsvarargs.Main.AFunction$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
   }
 }
 $Util.$setClassMetadata(Main, 'jsvarargs.Main');

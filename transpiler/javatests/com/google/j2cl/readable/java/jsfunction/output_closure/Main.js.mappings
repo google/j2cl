@@ -79,7 +79,7 @@
         (int i, int... numbers) -> {
 ...          return sum;
         };] => [let f = (/** number */ i, .../** ...number */ numbers) =>{
-   $Arrays.$stampType(numbers, $int, 1);
+   $Arrays.$stampType(numbers, $$int, 1);
 ...   return sum;
   };] "jsfunction.Main.testJsFunctionVarargs"
 [f] => [f] "f"
@@ -88,7 +88,7 @@
 [(int i, int... numbers) -> {
           int sum = i;
 ...          return sum;
-        }] => [$Arrays.$stampType(numbers, $int, 1);] "jsfunction.Main.<lambda in testJsFunctionVarargs>"
+        }] => [$Arrays.$stampType(numbers, $$int, 1);] "jsfunction.Main.<lambda in testJsFunctionVarargs>"
 [int sum = i;] => [let sum = i;] "jsfunction.Main.<lambda in testJsFunctionVarargs>"
 [sum] => [sum] "sum"
 [for (int number : numbers) {
@@ -109,12 +109,12 @@
       @Override
 ...      }
     };] => [return (/** number */ i, .../** ...number */ numbers) =>{
-   $Arrays.$stampType(numbers, $int, 1);
+   $Arrays.$stampType(numbers, $$int, 1);
 ...   return sum;
   };] "jsfunction.Main.testJsFunctionVarargsInnerClass"
 [i] => [i] "i"
 [numbers] => [numbers] "numbers"
-[m] => [$Arrays.$stampType(numbers, $int, 1);] "jsfunction.Main$4.m"
+[m] => [$Arrays.$stampType(numbers, $$int, 1);] "jsfunction.Main$4.m"
 [int sum = i;] => [let sum = i;] "jsfunction.Main$4.m"
 [sum] => [sum] "sum"
 [for (int number : numbers) {
@@ -159,12 +159,12 @@
 [o = SimpleJsFunction[].class;] => [o = Class.$get($JavaScriptFunction, 1);] "jsfunction.Main.testJsFunctionClassLiterals"
 [testJsFunctionOptional] => [m_testJsFunctionOptional___$pp_jsfunction]
 [JsFunctionOptional f = (i, n) -> (int) (i + n);] => [let f = (/** number */ i, /** ?number= */ n) =>{
-   return Primitives.narrowDoubleToInt(i + Double.m_doubleValue__java_lang_Double(n));
+   return $Primitives.narrowDoubleToInt(i + Double.m_doubleValue__java_lang_Double(n));
   };] "jsfunction.Main.testJsFunctionOptional"
 [f] => [f] "f"
 [i] => [i] "i"
 [n] => [n] "n"
-[(int) (i + n)] => [return Primitives.narrowDoubleToInt(i + Double.m_doubleValue__java_lang_Double(n));] "jsfunction.Main.<lambda in testJsFunctionOptional>"
+[(int) (i + n)] => [return $Primitives.narrowDoubleToInt(i + Double.m_doubleValue__java_lang_Double(n));] "jsfunction.Main.<lambda in testJsFunctionOptional>"
 [setParametricJsFunction] => [set parametricJsFunction]
 [fn] => [fn] "fn"
 [setParametricJsFunction] => [Main.$clinit();] "jsfunction.Main.setParametricJsFunction"

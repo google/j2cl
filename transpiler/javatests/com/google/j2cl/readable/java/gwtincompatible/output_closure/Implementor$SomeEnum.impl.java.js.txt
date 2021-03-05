@@ -6,7 +6,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let $1 = goog.forwardDeclare('gwtincompatible.Implementor.SomeEnum.$1$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-let Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
+let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
 
 /**
  * @abstract
@@ -33,9 +33,9 @@ class SomeEnum extends Enum {
             null)) {
       SomeEnum.f_namesToValuesMap__gwtincompatible_Implementor_SomeEnum_ =
           /**@type {Map<?string, ?>}*/ (
-              Enums.createMapFromValues(SomeEnum.m_values__()));
+              $Enums.createMapFromValues(SomeEnum.m_values__()));
     }
-    return /**@type {SomeEnum}*/ (Enums.getValueFromNameAndMap(
+    return /**@type {SomeEnum}*/ ($Enums.getValueFromNameAndMap(
         name,
         SomeEnum.f_namesToValuesMap__gwtincompatible_Implementor_SomeEnum_));
   }
@@ -72,7 +72,7 @@ class SomeEnum extends Enum {
     $1 = goog.module.get('gwtincompatible.Implementor.SomeEnum.$1$impl');
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-    Enums = goog.module.get('vmbootstrap.Enums$impl');
+    $Enums = goog.module.get('vmbootstrap.Enums$impl');
   }
 }
 /**@private {!SomeEnum}*/

@@ -5,7 +5,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-let Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
+let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
 
 /**
  * @extends {Enum<Enum1>}
@@ -33,9 +33,9 @@ class Enum1 extends Enum {
     Enum1.$clinit();
     if ($Equality.$same(Enum1.f_namesToValuesMap__enums_Enum1_, null)) {
       Enum1.f_namesToValuesMap__enums_Enum1_ = /**@type {Map<?string, ?>}*/ (
-          Enums.createMapFromValues(Enum1.m_values__()));
+          $Enums.createMapFromValues(Enum1.m_values__()));
     }
-    return /**@type {Enum1}*/ (Enums.getValueFromNameAndMap(
+    return /**@type {Enum1}*/ ($Enums.getValueFromNameAndMap(
         name, Enum1.f_namesToValuesMap__enums_Enum1_));
   }
   /** @return {!Array<!Enum1>} */
@@ -71,7 +71,7 @@ class Enum1 extends Enum {
   static $loadModules() {
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-    Enums = goog.module.get('vmbootstrap.Enums$impl');
+    $Enums = goog.module.get('vmbootstrap.Enums$impl');
   }
 }
 /**@private {!Enum1}*/

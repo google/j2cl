@@ -8,7 +8,7 @@ let $1 = goog.forwardDeclare('enums.Enum2.$1$impl');
 let j_l_Object = goog.forwardDeclare('java.lang.Object$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-let Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
+let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
 
 /**
  * @extends {Enum<Enum2>}
@@ -86,9 +86,9 @@ class Enum2 extends Enum {
     Enum2.$clinit();
     if ($Equality.$same(Enum2.f_namesToValuesMap__enums_Enum2_, null)) {
       Enum2.f_namesToValuesMap__enums_Enum2_ = /**@type {Map<?string, ?>}*/ (
-          Enums.createMapFromValues(Enum2.m_values__()));
+          $Enums.createMapFromValues(Enum2.m_values__()));
     }
-    return /**@type {Enum2}*/ (Enums.getValueFromNameAndMap(
+    return /**@type {Enum2}*/ ($Enums.getValueFromNameAndMap(
         name, Enum2.f_namesToValuesMap__enums_Enum2_));
   }
   /** @return {!Array<!Enum2>} */
@@ -163,7 +163,7 @@ class Enum2 extends Enum {
     j_l_Object = goog.module.get('java.lang.Object$impl');
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-    Enums = goog.module.get('vmbootstrap.Enums$impl');
+    $Enums = goog.module.get('vmbootstrap.Enums$impl');
   }
 }
 /**@private {!Enum2}*/

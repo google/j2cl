@@ -453,10 +453,11 @@ class ImportGatherer extends AbstractVisitor {
 
   /** Returns the class components normalizing the names of the internal runtime classes */
   private ImmutableList<String> getClassComponents(TypeDeclaration typeDeclaration) {
-    if (BootstrapType.typeDescriptors.contains(typeDeclaration.toUnparameterizedTypeDescriptor())) {
+    if (typeDeclaration.getQualifiedJsName().startsWith("vmbootstrap.")
+        || typeDeclaration.getQualifiedJsName().startsWith("nativebootstrap.")) {
       // Aliases for internal runtime classes are prepended '$' to their name to make them more
       // recognizable in the JavaScript source.
-      return ImmutableList.of("$" + Iterables.getOnlyElement(typeDeclaration.getClassComponents()));
+      return ImmutableList.of("$" + String.join("_", typeDeclaration.getClassComponents()));
     }
 
     return typeDeclaration

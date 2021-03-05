@@ -6,7 +6,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Serializable = goog.forwardDeclare('java.io.Serializable$impl');
 let Cloneable = goog.forwardDeclare('java.lang.Cloneable$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 class Varargs extends j_l_Object {
   /** @protected */
@@ -38,7 +38,7 @@ class Varargs extends j_l_Object {
 
   $ctor__varargs_Varargs__() {
     this.$ctor__varargs_Varargs__arrayOf_int(
-        /**@type {!Array<number>}*/ ($Arrays.$init([1], $int)));
+        /**@type {!Array<number>}*/ ($Arrays.$init([1], $$int)));
   }
 
   m_test__int__arrayOf_java_lang_Object(/** number */ a, /** Array<*> */ args) {
@@ -85,7 +85,7 @@ class Varargs extends j_l_Object {
 
   static $loadModules() {
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
   }
 }
 $Util.$setClassMetadata(Varargs, 'varargs.Varargs');

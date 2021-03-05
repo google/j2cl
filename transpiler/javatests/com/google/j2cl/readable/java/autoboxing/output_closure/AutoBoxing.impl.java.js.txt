@@ -20,7 +20,7 @@ let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $LongUtils = goog.forwardDeclare('vmbootstrap.LongUtils$impl');
-let Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
+let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
 
 class AutoBoxing extends j_l_Object {
   /** @protected */
@@ -202,7 +202,7 @@ class AutoBoxing extends j_l_Object {
     boxD = Double.m_doubleValue__java_lang_Double(boxD) +
         Double.m_doubleValue__java_lang_Double(boxD);
     boxI = Integer.m_valueOf__int(
-        Primitives.coerceDivision(boxI.m_intValue__() / boxI.m_intValue__()));
+        $Primitives.coerceDivision(boxI.m_intValue__() / boxI.m_intValue__()));
     boxL = Long.m_valueOf__long(
         $LongUtils.divide(boxL.m_longValue__(), boxL.m_longValue__()));
     boxBool = !Boolean.m_booleanValue__java_lang_Boolean(boxBool);
@@ -240,14 +240,14 @@ class AutoBoxing extends j_l_Object {
     d = boxB.m_byteValue__();
     d = boxF.m_floatValue__();
     d = boxI.m_intValue__();
-    d = Primitives.widenLongToDouble(boxL.m_longValue__());
+    d = $Primitives.widenLongToDouble(boxL.m_longValue__());
     d = boxS.m_shortValue__();
     d = boxC.m_charValue__();
     this.m_takesAndReturnsPrimitiveDouble__double(boxB.m_byteValue__());
     this.m_takesAndReturnsPrimitiveDouble__double(boxF.m_floatValue__());
     this.m_takesAndReturnsPrimitiveDouble__double(boxI.m_intValue__());
     this.m_takesAndReturnsPrimitiveDouble__double(
-        Primitives.widenLongToDouble(boxL.m_longValue__()));
+        $Primitives.widenLongToDouble(boxL.m_longValue__()));
     this.m_takesAndReturnsPrimitiveDouble__double(boxS.m_shortValue__());
     this.m_takesAndReturnsPrimitiveDouble__double(boxC.m_charValue__());
     let v = this.m_takesAndReturnsVoid__java_lang_Void(
@@ -272,7 +272,7 @@ class AutoBoxing extends j_l_Object {
                 .m_intValue__() |
         0;
     l = $LongUtils.leftShift(
-        l, Primitives.narrowLongToInt(boxL.m_longValue__()));
+        l, $Primitives.narrowLongToInt(boxL.m_longValue__()));
   }
 
   m_testUnboxingBoolean__() {
@@ -452,7 +452,7 @@ class AutoBoxing extends j_l_Object {
     $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');
-    Primitives = goog.module.get('vmbootstrap.Primitives$impl');
+    $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
   }
 }
 /**@const {number}*/

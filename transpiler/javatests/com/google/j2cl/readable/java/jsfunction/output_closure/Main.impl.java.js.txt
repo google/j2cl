@@ -18,8 +18,8 @@ let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $JavaScriptFunction = goog.forwardDeclare('vmbootstrap.JavaScriptFunction$impl');
-let Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
-let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
+let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 class Main extends j_l_Object {
   /** @protected */
@@ -103,7 +103,7 @@ class Main extends j_l_Object {
   /** @return {?function(number, ...number):number} */
   m_testJsFunctionVarargs___$pp_jsfunction() {
     let f = (/** number */ i, .../** ...number */ numbers) => {
-      $Arrays.$stampType(numbers, $int, 1);
+      $Arrays.$stampType(numbers, $$int, 1);
       let sum = i;
       for (let $array = numbers, $index = 0; $index < $array.length; $index++) {
         let number_1 = $array[$index];
@@ -116,7 +116,7 @@ class Main extends j_l_Object {
   /** @return {?function(number, ...number):number} */
   m_testJsFunctionVarargsInnerClass___$pp_jsfunction() {
     return (/** number */ i, .../** ...number */ numbers) => {
-      $Arrays.$stampType(numbers, $int, 1);
+      $Arrays.$stampType(numbers, $$int, 1);
       let sum = i;
       for (let $array = numbers, $index = 0; $index < $array.length; $index++) {
         let number_1 = $array[$index];
@@ -165,7 +165,7 @@ class Main extends j_l_Object {
 
   m_testJsFunctionOptional___$pp_jsfunction() {
     let f = (/** number */ i, /** ?number= */ n) => {
-      return Primitives.narrowDoubleToInt(
+      return $Primitives.narrowDoubleToInt(
           i + Double.m_doubleValue__java_lang_Double(n));
     };
   }
@@ -340,8 +340,8 @@ class Main extends j_l_Object {
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     $JavaScriptFunction =
         goog.module.get('vmbootstrap.JavaScriptFunction$impl');
-    Primitives = goog.module.get('vmbootstrap.Primitives$impl');
-    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
+    $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
   }
 }
 $Util.$setClassMetadata(Main, 'jsfunction.Main');

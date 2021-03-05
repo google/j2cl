@@ -5,7 +5,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 const $JavaScriptFunction = goog.require('vmbootstrap.JavaScriptFunction$impl');
 
 let Double = goog.forwardDeclare('java.lang.Double$impl');
-let Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
+let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
 
 class JsFunctionOptionalImpl extends j_l_Object {
   /** @protected */
@@ -27,7 +27,7 @@ class JsFunctionOptionalImpl extends j_l_Object {
   }
   /** @this {?function(number, ?number=):number} @return {number} */
   m_m__int__java_lang_Double(/** number */ i, /** ?number= */ number_1) {
-    return Primitives.narrowDoubleToInt(
+    return $Primitives.narrowDoubleToInt(
         i + Double.m_doubleValue__java_lang_Double(number_1));
   }
 
@@ -48,7 +48,7 @@ class JsFunctionOptionalImpl extends j_l_Object {
 
   static $loadModules() {
     Double = goog.module.get('java.lang.Double$impl');
-    Primitives = goog.module.get('vmbootstrap.Primitives$impl');
+    $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
   }
 }
 $JavaScriptFunction.$markImplementor(JsFunctionOptionalImpl);

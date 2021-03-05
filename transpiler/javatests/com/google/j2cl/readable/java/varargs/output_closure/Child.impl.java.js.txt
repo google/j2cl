@@ -4,7 +4,7 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 const Varargs = goog.require('varargs.Varargs$impl');
 
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 class Child extends Varargs {
   /** @protected */
@@ -21,7 +21,7 @@ class Child extends Varargs {
 
   $ctor__varargs_Child__() {
     this.$ctor__varargs_Varargs__arrayOf_int(
-        /**@type {!Array<number>}*/ ($Arrays.$init([1], $int)));
+        /**@type {!Array<number>}*/ ($Arrays.$init([1], $$int)));
   }
 
   static $clinit() {
@@ -36,7 +36,7 @@ class Child extends Varargs {
 
   static $loadModules() {
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
   }
 }
 $Util.$setClassMetadata(Child, 'varargs.Child');
