@@ -711,6 +711,15 @@ public abstract class TypeDeclaration
     return descriptor == null ? null : function.apply(descriptor);
   }
 
+  // TODO(b/181615162): This is a temporary hack to be able to reuse bridging logic in Closure
+  // and WASM.
+  private static final ThreadLocal<Boolean> ignoreJsEnumAnnotations =
+      ThreadLocal.withInitial(() -> false);
+
+  public static void setIgnoreJsEnumAnnotations() {
+    ignoreJsEnumAnnotations.set(true);
+  }
+
   /** Builder for a TypeDeclaration. */
   @AutoValue.Builder
   public abstract static class Builder {
@@ -823,10 +832,14 @@ public abstract class TypeDeclaration
 
     public TypeDeclaration build() {
       if (getJsEnumInfo().isPresent()) {
-        // The actual supertype for JsEnums is Object. JsEnum don't really extend Enum
-        // and modeling that fact in the type model allows passes that query assignability (e.g.
-        // to implement casts, instance ofs and JsEnum boxing etc.) to get the right answer.
-        setSuperTypeDescriptorFactory(() -> TypeDescriptors.get().javaLangObject);
+        if (ignoreJsEnumAnnotations.get()) {
+          setJsEnumInfo(null);
+        } else {
+          // The actual supertype for JsEnums is Object. JsEnum don't really extend Enum
+          // and modeling that fact in the type model allows passes that query assignability (e.g.
+          // to implement casts, instance ofs and JsEnum boxing etc.) to get the right answer.
+          setSuperTypeDescriptorFactory(() -> TypeDescriptors.get().javaLangObject);
+        }
       }
 
       if (!getPackageName().isPresent() && getEnclosingTypeDeclaration().isPresent()) {

@@ -19,6 +19,7 @@
 ;;; Code for gwtincompatible.Implementor.SomeEnum [static fields]
 (global $f_COMPATIBLE__gwtincompatible_Implementor_SomeEnum (mut (ref null $gwtincompatible.Implementor.SomeEnum)) (ref.null $gwtincompatible.Implementor.SomeEnum))
 (global $f_namesToValuesMap__gwtincompatible_Implementor_SomeEnum_ (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
+(global $$ordinal_COMPATIBLE__gwtincompatible_Implementor_SomeEnum i32 (i32.const 0))
 (global $f_$initialized__gwtincompatible_Implementor_SomeEnum (mut i32) (i32.const 0))
 
 ;;; Code for gwtincompatible.Implementor.SomeEnum.1 [static fields]
@@ -135,14 +136,20 @@
  (field $m_method__void_$pp_gwtincompatible (mut (ref $function.__$void)))
 ))
 
-;;; SomeEnum()
-(func $m_<init>__void_$p_gwtincompatible_Implementor_SomeEnum@gwtincompatible.Implementor.SomeEnum
+;;; SomeEnum(String $name, int $ordinal)
+(func $m_<init>__java_lang_String__int__void_$p_gwtincompatible_Implementor_SomeEnum@gwtincompatible.Implementor.SomeEnum
  (param $this (ref null $gwtincompatible.Implementor.SomeEnum))
+ (param $$name (ref null $java.lang.String))
+ (param $$ordinal i32)
  (result (ref null $gwtincompatible.Implementor.SomeEnum))
  (block $return.label
   (block
-   ;; Enum.this.Enum.<init>();
-   (drop (ref.null $java.lang.Enum))
+   ;; (Enum.this.name = $name);
+   (struct.set $java.lang.Enum $f_name__java_lang_Enum_(local.get $this) (local.get $$name))
+   ;; (Enum.this.ordinal = $ordinal);
+   (struct.set $java.lang.Enum $f_ordinal__java_lang_Enum_(local.get $this) (local.get $$ordinal))
+   ;; Enum.this.Enum.<init>($name,$ordinal);
+   (drop (call $m_<init>__java_lang_String__int__void@java.lang.Enum (local.get $this)(local.get $$name)(local.get $$ordinal)))
   )
  )
  (local.get $this)
@@ -217,8 +224,8 @@
    (block
     ;; gwtincompatible.Implementor.SomeEnum.$clinit();
     (call $$clinit__void@gwtincompatible.Implementor.SomeEnum )
-    ;; (gwtincompatible.Implementor.SomeEnum.COMPATIBLE = new $1.<init>());
-    (global.set $f_COMPATIBLE__gwtincompatible_Implementor_SomeEnum (call $m_<init>__void_$pp_gwtincompatible@gwtincompatible.Implementor.SomeEnum.1 (struct.new_with_rtt $gwtincompatible.Implementor.SomeEnum.1 (global.get $gwtincompatible.Implementor.SomeEnum.1.vtable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $gwtincompatible.Implementor.SomeEnum.1.rtt))))
+    ;; (gwtincompatible.Implementor.SomeEnum.COMPATIBLE = new $1.<init>("COMPATIBLE",gwtincompatible.Implementor.SomeEnum.COMPATIBLE));
+    (global.set $f_COMPATIBLE__gwtincompatible_Implementor_SomeEnum (call $m_<init>__java_lang_String__int__void_$pp_gwtincompatible@gwtincompatible.Implementor.SomeEnum.1 (struct.new_with_rtt $gwtincompatible.Implementor.SomeEnum.1 (global.get $gwtincompatible.Implementor.SomeEnum.1.vtable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $gwtincompatible.Implementor.SomeEnum.1.rtt))(ref.null $java.lang.String)(global.get $$ordinal_COMPATIBLE__gwtincompatible_Implementor_SomeEnum)))
    )
    ;; (gwtincompatible.Implementor.SomeEnum.namesToValuesMap = null);
    (global.set $f_namesToValuesMap__gwtincompatible_Implementor_SomeEnum_ (ref.null $java.lang.Object))
@@ -247,14 +254,16 @@
  (field $m_method__void_$pp_gwtincompatible (mut (ref $function.__$void)))
 ))
 
-;;; <anonymous> extends SomeEnum()
-(func $m_<init>__void_$pp_gwtincompatible@gwtincompatible.Implementor.SomeEnum.1
+;;; <anonymous> extends SomeEnum(String $name, int $ordinal)
+(func $m_<init>__java_lang_String__int__void_$pp_gwtincompatible@gwtincompatible.Implementor.SomeEnum.1
  (param $this (ref null $gwtincompatible.Implementor.SomeEnum.1))
+ (param $$name (ref null $java.lang.String))
+ (param $$ordinal i32)
  (result (ref null $gwtincompatible.Implementor.SomeEnum.1))
  (block $return.label
   (block
-   ;; SomeEnum.this.SomeEnum.<init>();
-   (drop (call $m_<init>__void_$p_gwtincompatible_Implementor_SomeEnum@gwtincompatible.Implementor.SomeEnum (local.get $this)))
+   ;; SomeEnum.this.SomeEnum.<init>($name,$ordinal);
+   (drop (call $m_<init>__java_lang_String__int__void_$p_gwtincompatible_Implementor_SomeEnum@gwtincompatible.Implementor.SomeEnum (local.get $this)(local.get $$name)(local.get $$ordinal)))
   )
  )
  (local.get $this)

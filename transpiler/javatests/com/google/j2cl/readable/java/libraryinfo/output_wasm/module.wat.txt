@@ -39,6 +39,10 @@
 (global $f_A__libraryinfo_Main_MyEnum (mut (ref null $libraryinfo.Main.MyEnum)) (ref.null $libraryinfo.Main.MyEnum))
 (global $f_B__libraryinfo_Main_MyEnum (mut (ref null $libraryinfo.Main.MyEnum)) (ref.null $libraryinfo.Main.MyEnum))
 (global $f_C__libraryinfo_Main_MyEnum (mut (ref null $libraryinfo.Main.MyEnum)) (ref.null $libraryinfo.Main.MyEnum))
+(global $f_namesToValuesMap__libraryinfo_Main_MyEnum_ (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
+(global $$ordinal_A__libraryinfo_Main_MyEnum i32 (i32.const 0))
+(global $$ordinal_B__libraryinfo_Main_MyEnum i32 (i32.const 1))
+(global $$ordinal_C__libraryinfo_Main_MyEnum i32 (i32.const 2))
 (global $f_$initialized__libraryinfo_Main_MyEnum (mut i32) (i32.const 0))
 
 ;;; Code for libraryinfo.Main.MyJsType [static fields]
@@ -349,6 +353,8 @@
 (type $libraryinfo.Main.MyEnum (struct
  (field $vtable (ref null $libraryinfo.Main.MyEnum.vtable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $f_name__java_lang_Enum_ (mut (ref null $java.lang.String)))
+ (field $f_ordinal__java_lang_Enum_ (mut i32))
 ))
 (type $libraryinfo.Main.MyEnum.vtable (struct
  
@@ -356,19 +362,89 @@
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_getDeclaringClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_name__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_ordinal__int (mut (ref $function.__$int)))
+ (field $m_compareTo__java_lang_Enum__int (mut (ref $function.$java.lang.Enum__$int)))
+ (field $m_compareTo__java_lang_Object__int (mut (ref $function.$java.lang.Object__$int)))
 ))
 
-;;; MyEnum()
-(func $m_<init>__void_$p_libraryinfo_Main_MyEnum@libraryinfo.Main.MyEnum
+;;; MyEnum(String $name, int $ordinal)
+(func $m_<init>__java_lang_String__int__void_$p_libraryinfo_Main_MyEnum@libraryinfo.Main.MyEnum
  (param $this (ref null $libraryinfo.Main.MyEnum))
+ (param $$name (ref null $java.lang.String))
+ (param $$ordinal i32)
  (result (ref null $libraryinfo.Main.MyEnum))
  (block $return.label
   (block
-   ;; Object.this.Object.<init>();
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   ;; (Enum.this.name = $name);
+   (struct.set $java.lang.Enum $f_name__java_lang_Enum_(local.get $this) (local.get $$name))
+   ;; (Enum.this.ordinal = $ordinal);
+   (struct.set $java.lang.Enum $f_ordinal__java_lang_Enum_(local.get $this) (local.get $$ordinal))
+   ;; Enum.this.Enum.<init>($name,$ordinal);
+   (drop (call $m_<init>__java_lang_String__int__void@java.lang.Enum (local.get $this)(local.get $$name)(local.get $$ordinal)))
   )
  )
  (local.get $this)
+)
+
+;;; MyEnum MyEnum.valueOf(String name)
+(func $m_valueOf__java_lang_String__libraryinfo_Main_MyEnum@libraryinfo.Main.MyEnum
+ (param $name (ref null $java.lang.String))
+ (result (ref null $libraryinfo.Main.MyEnum))
+ (local $return.value (ref null $libraryinfo.Main.MyEnum))
+ (block $return.label
+  (block
+   ;; libraryinfo.Main.MyEnum.$clinit();
+   (call $$clinit__void@libraryinfo.Main.MyEnum )
+   ;; if ((libraryinfo.Main.MyEnum.namesToValuesMap == null)) {
+   (if (ref.eq (global.get $f_namesToValuesMap__libraryinfo_Main_MyEnum_) (ref.null $java.lang.Object))
+    (then
+     (block
+      ;; (libraryinfo.Main.MyEnum.namesToValuesMap = javaemul.internal.Enums.createMapFromValues(libraryinfo.Main.MyEnum.values()));
+      (global.set $f_namesToValuesMap__libraryinfo_Main_MyEnum_ (ref.null $java.lang.Object))
+     )
+    )
+   )
+   ;; return ((MyEnum) javaemul.internal.Enums.getValueFromNameAndMap(name,libraryinfo.Main.MyEnum.namesToValuesMap));
+   (local.set $return.value (ref.cast $java.lang.Object $libraryinfo.Main.MyEnum (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(ref.null $java.lang.Object)) (global.get $libraryinfo.Main.MyEnum.rtt)))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+
+;;; MyEnum[] MyEnum.values()
+(func $m_values__arrayOf_libraryinfo_Main_MyEnum@libraryinfo.Main.MyEnum
+ (result (ref null $Object.array))
+ (local $return.value (ref null $Object.array))
+ (local $$array_literal (ref null $Object.array))
+ (block $return.label
+  (block
+   ;; libraryinfo.Main.MyEnum.$clinit();
+   (call $$clinit__void@libraryinfo.Main.MyEnum )
+   ;; return (MyEnum[] $array_literal = new MyEnum[3],($array_literal[0] = (libraryinfo.Main.MyEnum.$clinit(),libraryinfo.Main.MyEnum.A)),($array_literal[1] = (libraryinfo.Main.MyEnum.$clinit(),libraryinfo.Main.MyEnum.B)),($array_literal[2] = (libraryinfo.Main.MyEnum.$clinit(),libraryinfo.Main.MyEnum.C)),$array_literal);
+   (local.set $return.value (block (result (ref null $Object.array))
+    
+    (local.set $$array_literal (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $Object.array.elements (i32.const 3) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
+    (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $$array_literal)) (i32.const 0) (block (result (ref null $libraryinfo.Main.MyEnum))
+     (call $$clinit__void@libraryinfo.Main.MyEnum )
+     (global.get $f_A__libraryinfo_Main_MyEnum)
+    ))
+    (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $$array_literal)) (i32.const 1) (block (result (ref null $libraryinfo.Main.MyEnum))
+     (call $$clinit__void@libraryinfo.Main.MyEnum )
+     (global.get $f_B__libraryinfo_Main_MyEnum)
+    ))
+    (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $$array_literal)) (i32.const 2) (block (result (ref null $libraryinfo.Main.MyEnum))
+     (call $$clinit__void@libraryinfo.Main.MyEnum )
+     (global.get $f_C__libraryinfo_Main_MyEnum)
+    ))
+    (local.get $$array_literal)
+   ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
 )
 
 ;;; void MyEnum.$clinit()
@@ -384,26 +460,28 @@
    )
    ;; (libraryinfo.Main.MyEnum.$initialized = true);
    (global.set $f_$initialized__libraryinfo_Main_MyEnum (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   (call $$clinit__void@java.lang.Object )
+   ;; java.lang.Enum.$clinit();
+   (call $$clinit__void@java.lang.Enum )
    (block
     ;; libraryinfo.Main.MyEnum.$clinit();
     (call $$clinit__void@libraryinfo.Main.MyEnum )
-    ;; (libraryinfo.Main.MyEnum.A = new MyEnum.<init>());
-    (global.set $f_A__libraryinfo_Main_MyEnum (call $m_<init>__void_$p_libraryinfo_Main_MyEnum@libraryinfo.Main.MyEnum (struct.new_with_rtt $libraryinfo.Main.MyEnum (global.get $libraryinfo.Main.MyEnum.vtable) (i32.const 0) (global.get $libraryinfo.Main.MyEnum.rtt))))
+    ;; (libraryinfo.Main.MyEnum.A = new MyEnum.<init>("A",libraryinfo.Main.MyEnum.A));
+    (global.set $f_A__libraryinfo_Main_MyEnum (call $m_<init>__java_lang_String__int__void_$p_libraryinfo_Main_MyEnum@libraryinfo.Main.MyEnum (struct.new_with_rtt $libraryinfo.Main.MyEnum (global.get $libraryinfo.Main.MyEnum.vtable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $libraryinfo.Main.MyEnum.rtt))(ref.null $java.lang.String)(global.get $$ordinal_A__libraryinfo_Main_MyEnum)))
    )
    (block
     ;; libraryinfo.Main.MyEnum.$clinit();
     (call $$clinit__void@libraryinfo.Main.MyEnum )
-    ;; (libraryinfo.Main.MyEnum.B = new MyEnum.<init>());
-    (global.set $f_B__libraryinfo_Main_MyEnum (call $m_<init>__void_$p_libraryinfo_Main_MyEnum@libraryinfo.Main.MyEnum (struct.new_with_rtt $libraryinfo.Main.MyEnum (global.get $libraryinfo.Main.MyEnum.vtable) (i32.const 0) (global.get $libraryinfo.Main.MyEnum.rtt))))
+    ;; (libraryinfo.Main.MyEnum.B = new MyEnum.<init>("B",libraryinfo.Main.MyEnum.B));
+    (global.set $f_B__libraryinfo_Main_MyEnum (call $m_<init>__java_lang_String__int__void_$p_libraryinfo_Main_MyEnum@libraryinfo.Main.MyEnum (struct.new_with_rtt $libraryinfo.Main.MyEnum (global.get $libraryinfo.Main.MyEnum.vtable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $libraryinfo.Main.MyEnum.rtt))(ref.null $java.lang.String)(global.get $$ordinal_B__libraryinfo_Main_MyEnum)))
    )
    (block
     ;; libraryinfo.Main.MyEnum.$clinit();
     (call $$clinit__void@libraryinfo.Main.MyEnum )
-    ;; (libraryinfo.Main.MyEnum.C = new MyEnum.<init>());
-    (global.set $f_C__libraryinfo_Main_MyEnum (call $m_<init>__void_$p_libraryinfo_Main_MyEnum@libraryinfo.Main.MyEnum (struct.new_with_rtt $libraryinfo.Main.MyEnum (global.get $libraryinfo.Main.MyEnum.vtable) (i32.const 0) (global.get $libraryinfo.Main.MyEnum.rtt))))
+    ;; (libraryinfo.Main.MyEnum.C = new MyEnum.<init>("C",libraryinfo.Main.MyEnum.C));
+    (global.set $f_C__libraryinfo_Main_MyEnum (call $m_<init>__java_lang_String__int__void_$p_libraryinfo_Main_MyEnum@libraryinfo.Main.MyEnum (struct.new_with_rtt $libraryinfo.Main.MyEnum (global.get $libraryinfo.Main.MyEnum.vtable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $libraryinfo.Main.MyEnum.rtt))(ref.null $java.lang.String)(global.get $$ordinal_C__libraryinfo_Main_MyEnum)))
    )
+   ;; (libraryinfo.Main.MyEnum.namesToValuesMap = null);
+   (global.set $f_namesToValuesMap__libraryinfo_Main_MyEnum_ (ref.null $java.lang.Object))
   )
  )
 )
@@ -585,7 +663,7 @@
  (global.set $libraryinfo.Main.FunctionImpl.vtable (struct.new_with_rtt $libraryinfo.Main.FunctionImpl.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_apply__java_lang_String__void@libraryinfo.Main.FunctionImpl) (rtt.canon $libraryinfo.Main.FunctionImpl.vtable)))
 
  ;;; Code for libraryinfo.Main.MyEnum [vtable.init]
- (global.set $libraryinfo.Main.MyEnum.vtable (struct.new_with_rtt $libraryinfo.Main.MyEnum.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $libraryinfo.Main.MyEnum.vtable)))
+ (global.set $libraryinfo.Main.MyEnum.vtable (struct.new_with_rtt $libraryinfo.Main.MyEnum.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Enum) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_getDeclaringClass__java_lang_Class@java.lang.Enum) (ref.func $m_name__java_lang_String@java.lang.Enum) (ref.func $m_ordinal__int@java.lang.Enum) (ref.func $m_compareTo__java_lang_Enum__int@java.lang.Enum) (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum) (rtt.canon $libraryinfo.Main.MyEnum.vtable)))
 
  ;;; Code for libraryinfo.Main.MyJsType [vtable.init]
  (global.set $libraryinfo.Main.MyJsType.vtable (struct.new_with_rtt $libraryinfo.Main.MyJsType.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $libraryinfo.Main.MyJsType.vtable)))

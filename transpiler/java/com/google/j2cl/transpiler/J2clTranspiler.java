@@ -18,6 +18,7 @@ import com.google.common.util.concurrent.Uninterruptibles;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.MemberDescriptor;
+import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.backend.Backend;
 import com.google.j2cl.transpiler.passes.JsInteropRestrictionsChecker;
 import com.google.j2cl.transpiler.passes.NormalizationPass;
@@ -65,6 +66,7 @@ class J2clTranspiler {
     if (options.getBackend() == Backend.WASM) {
       // TODO(rluble): cleanup the static state.
       MemberDescriptor.setWasmManglingPatterns();
+      TypeDeclaration.setIgnoreJsEnumAnnotations();
     }
     List<CompilationUnit> j2clUnits =
         options

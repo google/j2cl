@@ -14,6 +14,8 @@
 (global $f_V1__enums_Enum1 (mut (ref null $enums.Enum1)) (ref.null $enums.Enum1))
 (global $f_V2__enums_Enum1 (mut (ref null $enums.Enum1)) (ref.null $enums.Enum1))
 (global $f_namesToValuesMap__enums_Enum1_ (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
+(global $$ordinal_V1__enums_Enum1 i32 (i32.const 0))
+(global $$ordinal_V2__enums_Enum1 i32 (i32.const 1))
 (global $f_$initialized__enums_Enum1 (mut i32) (i32.const 0))
 
 ;;; Code for enums.Enum2 [static fields]
@@ -23,6 +25,10 @@
 (global $f_VALUE4__enums_Enum2 (mut (ref null $enums.Enum2)) (ref.null $enums.Enum2))
 (global $f_C__enums_Enum2 (mut (ref null $enums.Enum2)) (ref.null $enums.Enum2))
 (global $f_namesToValuesMap__enums_Enum2_ (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
+(global $$ordinal_VALUE1__enums_Enum2 i32 (i32.const 0))
+(global $$ordinal_VALUE2__enums_Enum2 i32 (i32.const 1))
+(global $$ordinal_VALUE3__enums_Enum2 i32 (i32.const 2))
+(global $$ordinal_VALUE4__enums_Enum2 i32 (i32.const 3))
 (global $f_$initialized__enums_Enum2 (mut i32) (i32.const 0))
 
 ;;; Code for enums.Enum2.1 [static fields]
@@ -31,6 +37,7 @@
 ;;; Code for enums.Enum3 [static fields]
 (global $f_VALUE1__enums_Enum3 (mut (ref null $enums.Enum3)) (ref.null $enums.Enum3))
 (global $f_namesToValuesMap__enums_Enum3_ (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
+(global $$ordinal_VALUE1__enums_Enum3 i32 (i32.const 0))
 (global $f_$initialized__enums_Enum3 (mut i32) (i32.const 0))
 
 ;;; Code for enums.Enum1 [ENUM]
@@ -53,14 +60,20 @@
  (field $m_compareTo__java_lang_Object__int (mut (ref $function.$java.lang.Object__$int)))
 ))
 
-;;; Enum1()
-(func $m_<init>__void_$p_enums_Enum1@enums.Enum1
+;;; Enum1(String $name, int $ordinal)
+(func $m_<init>__java_lang_String__int__void_$p_enums_Enum1@enums.Enum1
  (param $this (ref null $enums.Enum1))
+ (param $$name (ref null $java.lang.String))
+ (param $$ordinal i32)
  (result (ref null $enums.Enum1))
  (block $return.label
   (block
-   ;; Enum.this.Enum.<init>();
-   (drop (ref.null $java.lang.Enum))
+   ;; (Enum.this.name = $name);
+   (struct.set $java.lang.Enum $f_name__java_lang_Enum_(local.get $this) (local.get $$name))
+   ;; (Enum.this.ordinal = $ordinal);
+   (struct.set $java.lang.Enum $f_ordinal__java_lang_Enum_(local.get $this) (local.get $$ordinal))
+   ;; Enum.this.Enum.<init>($name,$ordinal);
+   (drop (call $m_<init>__java_lang_String__int__void@java.lang.Enum (local.get $this)(local.get $$name)(local.get $$ordinal)))
   )
  )
  (local.get $this)
@@ -139,14 +152,14 @@
    (block
     ;; enums.Enum1.$clinit();
     (call $$clinit__void@enums.Enum1 )
-    ;; (enums.Enum1.V1 = new Enum1.<init>());
-    (global.set $f_V1__enums_Enum1 (call $m_<init>__void_$p_enums_Enum1@enums.Enum1 (struct.new_with_rtt $enums.Enum1 (global.get $enums.Enum1.vtable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $enums.Enum1.rtt))))
+    ;; (enums.Enum1.V1 = new Enum1.<init>("V1",enums.Enum1.V1));
+    (global.set $f_V1__enums_Enum1 (call $m_<init>__java_lang_String__int__void_$p_enums_Enum1@enums.Enum1 (struct.new_with_rtt $enums.Enum1 (global.get $enums.Enum1.vtable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $enums.Enum1.rtt))(ref.null $java.lang.String)(global.get $$ordinal_V1__enums_Enum1)))
    )
    (block
     ;; enums.Enum1.$clinit();
     (call $$clinit__void@enums.Enum1 )
-    ;; (enums.Enum1.V2 = new Enum1.<init>());
-    (global.set $f_V2__enums_Enum1 (call $m_<init>__void_$p_enums_Enum1@enums.Enum1 (struct.new_with_rtt $enums.Enum1 (global.get $enums.Enum1.vtable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $enums.Enum1.rtt))))
+    ;; (enums.Enum1.V2 = new Enum1.<init>("V2",enums.Enum1.V2));
+    (global.set $f_V2__enums_Enum1 (call $m_<init>__java_lang_String__int__void_$p_enums_Enum1@enums.Enum1 (struct.new_with_rtt $enums.Enum1 (global.get $enums.Enum1.vtable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $enums.Enum1.rtt))(ref.null $java.lang.String)(global.get $$ordinal_V2__enums_Enum1)))
    )
    ;; (enums.Enum1.namesToValuesMap = null);
    (global.set $f_namesToValuesMap__enums_Enum1_ (ref.null $java.lang.Object))
@@ -175,15 +188,21 @@
  (field $m_compareTo__java_lang_Object__int (mut (ref $function.$java.lang.Object__$int)))
 ))
 
-;;; Enum2(int foo)
-(func $m_<init>__int__void_$p_enums_Enum2@enums.Enum2
+;;; Enum2(String $name, int $ordinal, int foo)
+(func $m_<init>__java_lang_String__int__int__void_$p_enums_Enum2@enums.Enum2
  (param $this (ref null $enums.Enum2))
+ (param $$name (ref null $java.lang.String))
+ (param $$ordinal i32)
  (param $foo i32)
  (result (ref null $enums.Enum2))
  (block $return.label
   (block
-   ;; Enum.this.Enum.<init>();
-   (drop (ref.null $java.lang.Enum))
+   ;; (Enum.this.name = $name);
+   (struct.set $java.lang.Enum $f_name__java_lang_Enum_(local.get $this) (local.get $$name))
+   ;; (Enum.this.ordinal = $ordinal);
+   (struct.set $java.lang.Enum $f_ordinal__java_lang_Enum_(local.get $this) (local.get $$ordinal))
+   ;; Enum.this.Enum.<init>($name,$ordinal);
+   (drop (call $m_<init>__java_lang_String__int__void@java.lang.Enum (local.get $this)(local.get $$name)(local.get $$ordinal)))
    ;; Enum2.this.$init();
    (call $$init__void_$p_enums_Enum2@enums.Enum2 (local.get $this))
    ;; (Enum2.this.foo = foo);
@@ -193,29 +212,41 @@
  (local.get $this)
 )
 
-;;; Enum2(Enum foo)
-(func $m_<init>__java_lang_Enum__void_$p_enums_Enum2@enums.Enum2
+;;; Enum2(String $name, int $ordinal, Enum foo)
+(func $m_<init>__java_lang_String__int__java_lang_Enum__void_$p_enums_Enum2@enums.Enum2
  (param $this (ref null $enums.Enum2))
+ (param $$name (ref null $java.lang.String))
+ (param $$ordinal i32)
  (param $foo (ref null $java.lang.Enum))
  (result (ref null $enums.Enum2))
  (block $return.label
   (block
-   ;; Enum2.this.Enum2.<init>(foo.ordinal());
-   (drop (call $m_<init>__int__void_$p_enums_Enum2@enums.Enum2 (local.get $this)(call_ref (local.get $foo)(struct.get $java.lang.Enum.vtable $m_ordinal__int (struct.get $java.lang.Enum $vtable(local.get $foo))))))
+   ;; (Enum.this.name = $name);
+   (struct.set $java.lang.Enum $f_name__java_lang_Enum_(local.get $this) (local.get $$name))
+   ;; (Enum.this.ordinal = $ordinal);
+   (struct.set $java.lang.Enum $f_ordinal__java_lang_Enum_(local.get $this) (local.get $$ordinal))
+   ;; Enum2.this.Enum2.<init>($name,$ordinal,foo.ordinal());
+   (drop (call $m_<init>__java_lang_String__int__int__void_$p_enums_Enum2@enums.Enum2 (local.get $this)(local.get $$name)(local.get $$ordinal)(call_ref (local.get $foo)(struct.get $java.lang.Enum.vtable $m_ordinal__int (struct.get $java.lang.Enum $vtable(local.get $foo))))))
   )
  )
  (local.get $this)
 )
 
-;;; Enum2(Object... somePars)
-(func $m_<init>__arrayOf_java_lang_Object__void_$p_enums_Enum2@enums.Enum2
+;;; Enum2(String $name, int $ordinal, Object... somePars)
+(func $m_<init>__java_lang_String__int__arrayOf_java_lang_Object__void_$p_enums_Enum2@enums.Enum2
  (param $this (ref null $enums.Enum2))
+ (param $$name (ref null $java.lang.String))
+ (param $$ordinal i32)
  (param $somePars (ref null $Object.array))
  (result (ref null $enums.Enum2))
  (block $return.label
   (block
-   ;; Enum2.this.Enum2.<init>(<expr>);
-   (drop (call $m_<init>__int__void_$p_enums_Enum2@enums.Enum2 (local.get $this)(array.len $Object.array.elements (struct.get $Object.array $elements (local.get $somePars)))))
+   ;; (Enum.this.name = $name);
+   (struct.set $java.lang.Enum $f_name__java_lang_Enum_(local.get $this) (local.get $$name))
+   ;; (Enum.this.ordinal = $ordinal);
+   (struct.set $java.lang.Enum $f_ordinal__java_lang_Enum_(local.get $this) (local.get $$ordinal))
+   ;; Enum2.this.Enum2.<init>($name,$ordinal,<expr>);
+   (drop (call $m_<init>__java_lang_String__int__int__void_$p_enums_Enum2@enums.Enum2 (local.get $this)(local.get $$name)(local.get $$ordinal)(array.len $Object.array.elements (struct.get $Object.array $elements (local.get $somePars)))))
   )
  )
  (local.get $this)
@@ -339,14 +370,14 @@
    (block
     ;; enums.Enum2.$clinit();
     (call $$clinit__void@enums.Enum2 )
-    ;; (enums.Enum2.VALUE1 = new Enum2.<init>(2));
-    (global.set $f_VALUE1__enums_Enum2 (call $m_<init>__int__void_$p_enums_Enum2@enums.Enum2 (struct.new_with_rtt $enums.Enum2 (global.get $enums.Enum2.vtable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (i32.const 0) (global.get $enums.Enum2.rtt))(i32.const 2)))
+    ;; (enums.Enum2.VALUE1 = new Enum2.<init>("VALUE1",enums.Enum2.VALUE1,2));
+    (global.set $f_VALUE1__enums_Enum2 (call $m_<init>__java_lang_String__int__int__void_$p_enums_Enum2@enums.Enum2 (struct.new_with_rtt $enums.Enum2 (global.get $enums.Enum2.vtable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (i32.const 0) (global.get $enums.Enum2.rtt))(ref.null $java.lang.String)(global.get $$ordinal_VALUE1__enums_Enum2)(i32.const 2)))
    )
    (block
     ;; enums.Enum2.$clinit();
     (call $$clinit__void@enums.Enum2 )
-    ;; (enums.Enum2.VALUE2 = new Enum2.<init>((enums.Enum1.$clinit(),enums.Enum1.V1)));
-    (global.set $f_VALUE2__enums_Enum2 (call $m_<init>__java_lang_Enum__void_$p_enums_Enum2@enums.Enum2 (struct.new_with_rtt $enums.Enum2 (global.get $enums.Enum2.vtable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (i32.const 0) (global.get $enums.Enum2.rtt))(block (result (ref null $enums.Enum1))
+    ;; (enums.Enum2.VALUE2 = new Enum2.<init>("VALUE2",enums.Enum2.VALUE2,(enums.Enum1.$clinit(),enums.Enum1.V1)));
+    (global.set $f_VALUE2__enums_Enum2 (call $m_<init>__java_lang_String__int__java_lang_Enum__void_$p_enums_Enum2@enums.Enum2 (struct.new_with_rtt $enums.Enum2 (global.get $enums.Enum2.vtable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (i32.const 0) (global.get $enums.Enum2.rtt))(ref.null $java.lang.String)(global.get $$ordinal_VALUE2__enums_Enum2)(block (result (ref null $enums.Enum1))
      (call $$clinit__void@enums.Enum1 )
      (global.get $f_V1__enums_Enum1)
     )))
@@ -354,8 +385,8 @@
    (block
     ;; enums.Enum2.$clinit();
     (call $$clinit__void@enums.Enum2 )
-    ;; (enums.Enum2.VALUE3 = new Enum2.<init>((Object[] $array_literal = new Object[0],$array_literal)));
-    (global.set $f_VALUE3__enums_Enum2 (call $m_<init>__arrayOf_java_lang_Object__void_$p_enums_Enum2@enums.Enum2 (struct.new_with_rtt $enums.Enum2 (global.get $enums.Enum2.vtable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (i32.const 0) (global.get $enums.Enum2.rtt))(block (result (ref null $Object.array))
+    ;; (enums.Enum2.VALUE3 = new Enum2.<init>("VALUE3",enums.Enum2.VALUE3,(Object[] $array_literal = new Object[0],$array_literal)));
+    (global.set $f_VALUE3__enums_Enum2 (call $m_<init>__java_lang_String__int__arrayOf_java_lang_Object__void_$p_enums_Enum2@enums.Enum2 (struct.new_with_rtt $enums.Enum2 (global.get $enums.Enum2.vtable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (i32.const 0) (global.get $enums.Enum2.rtt))(ref.null $java.lang.String)(global.get $$ordinal_VALUE3__enums_Enum2)(block (result (ref null $Object.array))
      
      (local.set $$array_literal (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $Object.array.elements (i32.const 0) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
      (local.get $$array_literal)
@@ -364,8 +395,8 @@
    (block
     ;; enums.Enum2.$clinit();
     (call $$clinit__void@enums.Enum2 )
-    ;; (enums.Enum2.VALUE4 = new $1.<init>(5));
-    (global.set $f_VALUE4__enums_Enum2 (call $m_<init>__int__void_$pp_enums@enums.Enum2.1 (struct.new_with_rtt $enums.Enum2.1 (global.get $enums.Enum2.1.vtable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (i32.const 0) (global.get $enums.Enum2.1.rtt))(i32.const 5)))
+    ;; (enums.Enum2.VALUE4 = new $1.<init>("VALUE4",enums.Enum2.VALUE4,5));
+    (global.set $f_VALUE4__enums_Enum2 (call $m_<init>__java_lang_String__int__int__void_$pp_enums@enums.Enum2.1 (struct.new_with_rtt $enums.Enum2.1 (global.get $enums.Enum2.1.vtable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (i32.const 0) (global.get $enums.Enum2.1.rtt))(ref.null $java.lang.String)(global.get $$ordinal_VALUE4__enums_Enum2)(i32.const 5)))
    )
    (block
     ;; enums.Enum2.$clinit();
@@ -400,15 +431,17 @@
  (field $m_compareTo__java_lang_Object__int (mut (ref $function.$java.lang.Object__$int)))
 ))
 
-;;; <anonymous> extends Enum2(int $_0)
-(func $m_<init>__int__void_$pp_enums@enums.Enum2.1
+;;; <anonymous> extends Enum2(String $name, int $ordinal, int $_0)
+(func $m_<init>__java_lang_String__int__int__void_$pp_enums@enums.Enum2.1
  (param $this (ref null $enums.Enum2.1))
+ (param $$name (ref null $java.lang.String))
+ (param $$ordinal i32)
  (param $$_0 i32)
  (result (ref null $enums.Enum2.1))
  (block $return.label
   (block
-   ;; Enum2.this.Enum2.<init>($_0);
-   (drop (call $m_<init>__int__void_$p_enums_Enum2@enums.Enum2 (local.get $this)(local.get $$_0)))
+   ;; Enum2.this.Enum2.<init>($name,$ordinal,$_0);
+   (drop (call $m_<init>__java_lang_String__int__int__void_$p_enums_Enum2@enums.Enum2 (local.get $this)(local.get $$name)(local.get $$ordinal)(local.get $$_0)))
   )
  )
  (local.get $this)
@@ -453,15 +486,21 @@
  (field $m_compareTo__java_lang_Object__int (mut (ref $function.$java.lang.Object__$int)))
 ))
 
-;;; Enum3(Function<Integer, Integer> function)
-(func $m_<init>__java_util_function_Function__void_$p_enums_Enum3@enums.Enum3
+;;; Enum3(String $name, int $ordinal, Function<Integer, Integer> function)
+(func $m_<init>__java_lang_String__int__java_util_function_Function__void_$p_enums_Enum3@enums.Enum3
  (param $this (ref null $enums.Enum3))
+ (param $$name (ref null $java.lang.String))
+ (param $$ordinal i32)
  (param $function (ref null $java.lang.Object))
  (result (ref null $enums.Enum3))
  (block $return.label
   (block
-   ;; Enum.this.Enum.<init>();
-   (drop (ref.null $java.lang.Enum))
+   ;; (Enum.this.name = $name);
+   (struct.set $java.lang.Enum $f_name__java_lang_Enum_(local.get $this) (local.get $$name))
+   ;; (Enum.this.ordinal = $ordinal);
+   (struct.set $java.lang.Enum $f_ordinal__java_lang_Enum_(local.get $this) (local.get $$ordinal))
+   ;; Enum.this.Enum.<init>($name,$ordinal);
+   (drop (call $m_<init>__java_lang_String__int__void@java.lang.Enum (local.get $this)(local.get $$name)(local.get $$ordinal)))
   )
  )
  (local.get $this)
@@ -537,8 +576,8 @@
    (block
     ;; enums.Enum3.$clinit();
     (call $$clinit__void@enums.Enum3 )
-    ;; (enums.Enum3.VALUE1 = new Enum3.<init>(function (Integer v){
-    (global.set $f_VALUE1__enums_Enum3 (call $m_<init>__java_util_function_Function__void_$p_enums_Enum3@enums.Enum3 (struct.new_with_rtt $enums.Enum3 (global.get $enums.Enum3.vtable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $enums.Enum3.rtt))(ref.null $java.lang.Object)))
+    ;; (enums.Enum3.VALUE1 = new Enum3.<init>("VALUE1",enums.Enum3.VALUE1,function (Integer v){
+    (global.set $f_VALUE1__enums_Enum3 (call $m_<init>__java_lang_String__int__java_util_function_Function__void_$p_enums_Enum3@enums.Enum3 (struct.new_with_rtt $enums.Enum3 (global.get $enums.Enum3.vtable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $enums.Enum3.rtt))(ref.null $java.lang.String)(global.get $$ordinal_VALUE1__enums_Enum3)(ref.null $java.lang.Object)))
    )
    ;; (enums.Enum3.namesToValuesMap = null);
    (global.set $f_namesToValuesMap__enums_Enum3_ (ref.null $java.lang.Object))

@@ -43,6 +43,16 @@ public class NormalizeEnumClasses extends NormalizationPass {
   private static final String ORDINAL_PARAMETER_NAME = "$ordinal";
   private static final String VALUE_NAME_PARAMETER_NAME = "$name";
 
+  private final boolean useMakeEnumNameIndirection;
+
+  public NormalizeEnumClasses() {
+    this(true);
+  }
+
+  public NormalizeEnumClasses(boolean useMakeEnumNameIndirection) {
+    this.useMakeEnumNameIndirection = useMakeEnumNameIndirection;
+  }
+
   @Override
   public void applyTo(Type type) {
     if (!type.isEnumOrSubclass() || type.isNative()) {
@@ -156,11 +166,11 @@ public class NormalizeEnumClasses extends NormalizationPass {
   }
 
   /** Rewrites the initialization of the enum value fields with the right ordinal and name. */
-  public static void rewriteEnumValueFieldsInitialization(Type type) {
-    type.getEnumFields().forEach(NormalizeEnumClasses::rewriteEnumValueFieldInitialization);
+  public void rewriteEnumValueFieldsInitialization(Type type) {
+    type.getEnumFields().forEach(this::rewriteEnumValueFieldInitialization);
   }
 
-  private static void rewriteEnumValueFieldInitialization(Field enumField) {
+  private void rewriteEnumValueFieldInitialization(Field enumField) {
     enumField.accept(
         new AbstractRewriter() {
           @Override
@@ -190,7 +200,9 @@ public class NormalizeEnumClasses extends NormalizationPass {
         });
   }
 
-  private static MethodCall enumReplaceStringMethodCall(Expression nameVariable) {
-    return RuntimeMethods.createUtilMethodCall("$makeEnumName", nameVariable);
+  private Expression enumReplaceStringMethodCall(Expression nameVariable) {
+    return useMakeEnumNameIndirection
+        ? RuntimeMethods.createUtilMethodCall("$makeEnumName", nameVariable)
+        : nameVariable;
   }
 }

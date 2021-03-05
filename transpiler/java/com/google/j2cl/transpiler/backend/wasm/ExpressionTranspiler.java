@@ -293,13 +293,7 @@ final class ExpressionTranspiler {
       public boolean enterMethodCall(MethodCall methodCall) {
         MethodDescriptor target = methodCall.getTarget();
 
-        // TODO(b/170691046): remove once enum normalization is done.
         DeclaredTypeDescriptor enclosingTypeDescriptor = target.getEnclosingTypeDescriptor();
-        if (isEnumClassConstrcutor(target)) {
-          render(enclosingTypeDescriptor.getDefaultValue());
-          return false;
-        }
-
         if (methodCall.isPolymorphic()) {
           if (target.isClassDynamicDispatch()) {
             sourceBuilder.append("(call_ref ");
@@ -349,12 +343,6 @@ final class ExpressionTranspiler {
         }
         // TODO(rluble): remove once all method call types are implemented.
         return super.enterMethodCall(methodCall);
-      }
-
-      // TODO(b/170691046): remove once enum normalization is done.
-      private boolean isEnumClassConstrcutor(MethodDescriptor methodDescriptor) {
-        return methodDescriptor.isConstructor()
-            && methodDescriptor.isMemberOf(TypeDescriptors.get().javaLangEnum);
       }
 
       @Override

@@ -284,11 +284,13 @@ public enum Backend {
           new FixSuperCallQualifiers(),
           new NormalizeInstanceCompileTimeConstants(),
           new NormalizeStringLiterals(),
+          new NormalizeEnumClasses(/* useMakeEnumNameIndirection= */ false),
           new NormalizeStaticMemberQualifiers(),
           new NormalizeMultiExpressions(),
+          new NormalizeSwitchStatements(),
 
           // Rewrite operations that do not have direct support in wasm into ones that have.
-          new ExpandCompoundAssignments(/* expandAll */ true),
+          new ExpandCompoundAssignments(/* expandAll= */ true),
           new InsertErasureTypeSafetyCasts(),
           // Rewrite 'a != b' to '!(a == b)'
           new RewriteReferenceNotEquals(),
@@ -316,7 +318,7 @@ public enum Backend {
           new VerifySingleAstReference(),
           new VerifyParamAndArgCounts(),
           new VerifyReferenceScoping(),
-          new VerifyNormalizedUnits(/* verifyForWasm **/ true));
+          new VerifyNormalizedUnits(/* verifyForWasm= **/ true));
     }
   };
 
