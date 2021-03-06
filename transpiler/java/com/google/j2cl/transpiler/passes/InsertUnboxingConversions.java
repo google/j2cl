@@ -15,12 +15,17 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
+import com.google.j2cl.transpiler.ast.MethodCall;
+import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import java.util.Optional;
@@ -76,7 +81,7 @@ public class InsertUnboxingConversions extends NormalizationPass {
 
   private static Expression maybeUnbox(Expression expression) {
     if (TypeDescriptors.isBoxedType(expression.getTypeDescriptor())) {
-      return AstUtils.unbox(expression);
+      return unbox(expression);
     }
     return expression;
   }
@@ -88,7 +93,7 @@ public class InsertUnboxingConversions extends NormalizationPass {
     if (TypeDescriptors.isNonVoidPrimitiveType(toTypeDescriptor)
         && TypeDescriptors.isBoxedType(fromTypeDescriptor)) {
       // An unboxing conversion....
-      Expression resultExpression = AstUtils.unbox(expression);
+      Expression resultExpression = unbox(expression);
 
       fromTypeDescriptor = resultExpression.getTypeDescriptor();
       checkState(fromTypeDescriptor.isPrimitive() && toTypeDescriptor.isPrimitive());
@@ -105,5 +110,27 @@ public class InsertUnboxingConversions extends NormalizationPass {
       return Optional.of(resultExpression);
     }
     return Optional.empty();
+  }
+
+  /**
+   * Unboxes {expression} using the ***Value() method of the corresponding boxed type. e.g
+   * expression => expression.intValue().
+   */
+  private static Expression unbox(Expression expression) {
+    DeclaredTypeDescriptor boxType =
+        (DeclaredTypeDescriptor) expression.getTypeDescriptor().toRawTypeDescriptor();
+    checkArgument(TypeDescriptors.isBoxedType(boxType));
+    PrimitiveTypeDescriptor primitiveType = boxType.toUnboxedType();
+
+    MethodDescriptor valueMethodDescriptor =
+        boxType.getMethodDescriptor(primitiveType.getSimpleSourceName() + "Value");
+
+    MethodCall methodCall =
+        MethodCall.Builder.from(valueMethodDescriptor).setQualifier(expression).build();
+
+    if (TypeDescriptors.isBoxedBooleanOrDouble(boxType)) {
+      methodCall = AstUtils.devirtualizeMethodCall(methodCall, boxType);
+    }
+    return methodCall;
   }
 }

@@ -15,12 +15,17 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import com.google.j2cl.transpiler.ast.AstUtils;
+import static com.google.common.base.Preconditions.checkArgument;
+
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
+import com.google.j2cl.transpiler.ast.MethodCall;
+import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
+import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 
@@ -61,7 +66,7 @@ public class InsertBoxingConversions extends NormalizationPass {
             && TypeDescriptors.isNonVoidPrimitiveType(fromTypeDescriptor)
             && !TypeDescriptors.isPrimitiveBooleanOrDouble(fromTypeDescriptor)) {
           // Actually remove the cast and replace it with the boxing.
-          Expression boxedExpression = AstUtils.box(castExpression.getExpression());
+          Expression boxedExpression = box(castExpression.getExpression());
           // It's possible that casting a primitive type to a non-boxed reference type.
           // e.g. (Object) i; in this case, just keep the NOOP casting after boxing.
           if (!boxedExpression.getTypeDescriptor().isAssignableTo(toTypeDescriptor)) {
@@ -92,7 +97,7 @@ public class InsertBoxingConversions extends NormalizationPass {
     if (!TypeDescriptors.isNonVoidPrimitiveType(toTypeDescriptor)
         && TypeDescriptors.isNonVoidPrimitiveType(expression.getTypeDescriptor())
         && !TypeDescriptors.isPrimitiveBooleanOrDouble(expression.getTypeDescriptor())) {
-      return AstUtils.box(expression);
+      return box(expression);
     }
     return expression;
   }
@@ -104,5 +109,21 @@ public class InsertBoxingConversions extends NormalizationPass {
       return numberLiteral;
     }
     return new NumberLiteral(toTypeDescriptor.toUnboxedType(), numberLiteral.getValue());
+  }
+
+  /**
+   * Boxes {@code expression} using the valueOf() method of the corresponding boxed type. e.g.
+   * expression => Integer.valueOf(expression).
+   */
+  private static Expression box(Expression expression) {
+    PrimitiveTypeDescriptor primitiveType =
+        (PrimitiveTypeDescriptor) expression.getTypeDescriptor();
+    checkArgument(!TypeDescriptors.isPrimitiveVoid(primitiveType));
+    checkArgument(!TypeDescriptors.isPrimitiveBooleanOrDouble(primitiveType));
+    DeclaredTypeDescriptor boxType = primitiveType.toBoxedType();
+
+    MethodDescriptor valueOfMethodDescriptor =
+        boxType.getMethodDescriptor(MethodDescriptor.VALUE_OF_METHOD_NAME, primitiveType);
+    return MethodCall.Builder.from(valueOfMethodDescriptor).setArguments(expression).build();
   }
 }

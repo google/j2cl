@@ -267,45 +267,6 @@ public class AstUtils {
         sourcePosition, forwardingMethodCall, returnTypeDescriptor);
   }
 
-  /**
-   * Boxes {@code expression} using the valueOf() method of the corresponding boxed type. e.g.
-   * expression => Integer.valueOf(expression).
-   */
-  public static Expression box(Expression expression) {
-    PrimitiveTypeDescriptor primitiveType =
-        (PrimitiveTypeDescriptor) expression.getTypeDescriptor();
-    checkArgument(!TypeDescriptors.isPrimitiveVoid(primitiveType));
-    checkArgument(!TypeDescriptors.isPrimitiveBooleanOrDouble(primitiveType));
-    DeclaredTypeDescriptor boxType = primitiveType.toBoxedType();
-
-    MethodDescriptor valueOfMethodDescriptor =
-        boxType.getMethodDescriptor(MethodDescriptor.VALUE_OF_METHOD_NAME, primitiveType);
-    return MethodCall.Builder.from(valueOfMethodDescriptor).setArguments(expression).build();
-  }
-
-  /**
-   * Unboxes {expression} using the ***Value() method of the corresponding boxed type. e.g
-   * expression => expression.intValue().
-   */
-  public static Expression unbox(Expression expression) {
-    DeclaredTypeDescriptor boxType =
-        (DeclaredTypeDescriptor) expression.getTypeDescriptor().toRawTypeDescriptor();
-    checkArgument(TypeDescriptors.isBoxedType(boxType));
-    PrimitiveTypeDescriptor primitiveType = boxType.toUnboxedType();
-
-    MethodDescriptor valueMethodDescriptor =
-        boxType.getMethodDescriptor(
-            primitiveType.getSimpleSourceName() + MethodDescriptor.VALUE_METHOD_SUFFIX);
-
-    MethodCall methodCall =
-        MethodCall.Builder.from(valueMethodDescriptor).setQualifier(expression).build();
-
-    if (TypeDescriptors.isBoxedBooleanOrDouble(boxType)) {
-      methodCall = devirtualizeMethodCall(methodCall, boxType);
-    }
-    return methodCall;
-  }
-
   public static boolean isDelegatedConstructorCall(
       MethodCall methodCall, DeclaredTypeDescriptor targetTypeDescriptor) {
     if (methodCall == null || !methodCall.getTarget().isConstructor()) {
