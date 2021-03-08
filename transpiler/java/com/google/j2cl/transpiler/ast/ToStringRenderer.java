@@ -237,6 +237,17 @@ class ToStringRenderer {
       }
 
       @Override
+      public boolean enterForEachStatement(ForEachStatement forEachStatement) {
+        print("for (");
+        accept(forEachStatement.getLoopVariable());
+        print(" : ");
+        accept(forEachStatement.getIterableExpression());
+        print(") ");
+        accept(forEachStatement.getBody());
+        return false;
+      }
+
+      @Override
       public boolean enterForStatement(ForStatement forStatement) {
         print("for (");
         printSeparated(",", forStatement.getInitializers());

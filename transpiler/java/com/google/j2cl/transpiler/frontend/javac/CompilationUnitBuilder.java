@@ -42,10 +42,10 @@ import com.google.j2cl.transpiler.ast.ContinueStatement;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.DoWhileStatement;
 import com.google.j2cl.transpiler.ast.Expression;
-import com.google.j2cl.transpiler.ast.ExpressionStatement;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
+import com.google.j2cl.transpiler.ast.ForEachStatement;
 import com.google.j2cl.transpiler.ast.ForStatement;
 import com.google.j2cl.transpiler.ast.FunctionExpression;
 import com.google.j2cl.transpiler.ast.IfStatement;
@@ -61,10 +61,8 @@ import com.google.j2cl.transpiler.ast.NewArray;
 import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PostfixExpression;
-import com.google.j2cl.transpiler.ast.PostfixOperator;
 import com.google.j2cl.transpiler.ast.PrefixExpression;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
-import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.Statement;
@@ -153,7 +151,6 @@ import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Name;
 import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.ExecutableType;
-import javax.lang.model.type.TypeKind;
 import javax.lang.model.type.TypeMirror;
 
 /** Creates a J2CL Java AST from the AST provided by JavaC. */
@@ -479,143 +476,11 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     }
   }
 
-  private ForStatement convertEnhancedForLoop(JCEnhancedForLoop statement) {
-    if (statement.getExpression().type.getKind() == TypeKind.ARRAY) {
-      return convertForEachArray(statement);
-    }
-
-    return convertForEachInstance(statement);
-  }
-
-  private ForStatement convertForEachArray(JCEnhancedForLoop statement) {
-    // Converts
-    //
-    //   for(T v : exp) S
-    //
-    // into
-    //
-    //   for(T[] $array = (exp), int $index = 0; $index < $array.length; $index++ ) {
-    //        T v = (T) $array[$index];
-    //        S;
-    //   }
-
-    TypeMirror expressionTypeBinding = statement.getExpression().type;
-
-    // T[] array = exp.
-    Variable arrayVariable =
-        Variable.newBuilder()
-            .setName("$array")
-            .setTypeDescriptor(environment.createTypeDescriptor(expressionTypeBinding))
-            .setFinal(true)
-            .build();
-
-    // Declare the indexing variable double instead of int to avoid integer coercions. Since Java
-    // arrays can only be up to Integer.MAX_VALUE size, this change would not have any observable
-    // effect.
-    // double $index = 0;
-    Variable indexVariable =
-        Variable.newBuilder().setName("$index").setTypeDescriptor(PrimitiveTypes.DOUBLE).build();
-
-    // $index < $array.length
-    Expression condition =
-        indexVariable
-            .createReference()
-            .infixLessThan(
-                ArrayLength.newBuilder()
-                    .setArrayExpression(arrayVariable.createReference())
-                    .build());
-
-    ExpressionStatement forVariableDeclarationStatement =
-        VariableDeclarationExpression.newBuilder()
-            .addVariableDeclaration(
-                createVariable(statement.getVariable(), false),
-                ArrayAccess.newBuilder()
-                    .setArrayExpression(arrayVariable.createReference())
-                    .setIndexExpression(indexVariable.createReference())
-                    .build())
-            .build()
-            .makeStatement(getSourcePosition(statement));
-
-    return ForStatement.newBuilder()
-        .setConditionExpression(condition)
-        //  {   T t = $array[$index]; S; }
-        .setBodyStatements(
-            forVariableDeclarationStatement, convertStatement(statement.getStatement()))
-        .setInitializers(
-            VariableDeclarationExpression.newBuilder()
-                .addVariableDeclaration(arrayVariable, convertExpression(statement.getExpression()))
-                .addVariableDeclaration(indexVariable, NumberLiteral.fromInt(0))
-                .build())
-        .setUpdates(
-            PostfixExpression.newBuilder()
-                .setOperand(indexVariable.createReference())
-                .setOperator(PostfixOperator.INCREMENT)
-                .build())
-        .setSourcePosition(getSourcePosition(statement))
-        .build();
-  }
-
-  private ForStatement convertForEachInstance(JCEnhancedForLoop statement) {
-    // Converts
-    //
-    //   for(T v : exp) S
-    //
-    // into
-    //
-    //   for(Iterator<T> $iterator = (exp).iterator(); $iterator.hasNext(); ) {
-    //        T v = (T) $iterator.next();
-    //        S;
-    //   }
-
-    TypeMirror expressionTypeBinding = statement.getExpression().type;
-
-    MethodDescriptor iteratorMethodDescriptor =
-        environment
-            .createDeclaredTypeDescriptor(expressionTypeBinding)
-            .getMethodDescriptor("iterator");
-    DeclaredTypeDescriptor iteratorTypeDescriptor =
-        (DeclaredTypeDescriptor) iteratorMethodDescriptor.getReturnTypeDescriptor();
-    Variable iteratorVariable =
-        Variable.newBuilder()
-            .setName("$iterator")
-            .setTypeDescriptor(iteratorTypeDescriptor)
-            .setFinal(true)
-            .build();
-
-    VariableDeclarationExpression iteratorDeclaration =
-        VariableDeclarationExpression.newBuilder()
-            .addVariableDeclaration(
-                iteratorVariable,
-                MethodCall.Builder.from(iteratorMethodDescriptor)
-                    .setQualifier(convertExpression(statement.getExpression()))
-                    .build())
-            .build();
-
-    // $iterator.hasNext();
-    MethodDescriptor hasNextMethodDescriptor =
-        iteratorTypeDescriptor.getMethodDescriptor("hasNext");
-    Expression condition =
-        MethodCall.Builder.from(hasNextMethodDescriptor)
-            .setQualifier(iteratorVariable.createReference())
-            .build();
-
-    // T v = $iterator.next();
-    MethodDescriptor nextMethodDescriptor = iteratorTypeDescriptor.getMethodDescriptor("next");
-    ExpressionStatement forVariableDeclarationStatement =
-        VariableDeclarationExpression.newBuilder()
-            .addVariableDeclaration(
-                createVariable(statement.getVariable(), false),
-                MethodCall.Builder.from(nextMethodDescriptor)
-                    .setQualifier(iteratorVariable.createReference())
-                    .build())
-            .build()
-            .makeStatement(getSourcePosition(statement));
-
-    return ForStatement.newBuilder()
-        .setConditionExpression(condition)
-        .setBodyStatements(
-            forVariableDeclarationStatement, convertStatement(statement.getStatement()))
-        .setInitializers(iteratorDeclaration)
+  private ForEachStatement convertEnhancedForLoop(JCEnhancedForLoop statement) {
+    return ForEachStatement.newBuilder()
+        .setLoopVariable(createVariable(statement.getVariable(), false))
+        .setIterableExpression(convertExpression(statement.getExpression()))
+        .setBody(convertStatement(statement.getStatement()))
         .setSourcePosition(getSourcePosition(statement))
         .build();
   }

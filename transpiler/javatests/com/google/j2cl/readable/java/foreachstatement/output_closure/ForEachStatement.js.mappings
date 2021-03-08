@@ -54,7 +54,7 @@
       for (Object o : e) {}
     }] => [let e = /**@type {(Exception1|Exception2)}*/ (__$exc);] "foreachstatement.ForEachStatement.testMulticatch"
 [e] => [e] "e"
-[for (Object o : e) {}] => [for (let $iterator = e.m_iterator__(); $iterator.m_hasNext__(); ) {
+[for (Object o : e) {}] => [for (let $iterator = /**@type {Iterable<*>}*/ ($Casts.$to(e, Iterable)).m_iterator__(); $iterator.m_hasNext__(); ) {
      let o = $iterator.m_next__();
     }] "foreachstatement.ForEachStatement.testMulticatch"
 [for (Object o : e) {}] => [let o = $iterator.m_next__();] "foreachstatement.ForEachStatement.testMulticatch"
@@ -70,6 +70,13 @@
   }] "foreachstatement.ForEachStatement.testTypeVariable"
 [for (String s : iterable) {}] => [let s = /**@type {?string}*/ ($Casts.$to($iterator.m_next__(), j_l_String));] "foreachstatement.ForEachStatement.testTypeVariable"
 [s] => [s] "s"
+[IterableReturningTypeVariable<?> anotherIterable = null;] => [let anotherIterable = null;] "foreachstatement.ForEachStatement.testTypeVariable"
+[anotherIterable] => [anotherIterable] "anotherIterable"
+[for (int s : anotherIterable) {}] => [for (let $iterator_1 = /**@type {Iterator<Integer>}*/ (anotherIterable.m_iterator__()); /**@type {Iterator}*/ ($iterator_1).m_hasNext__(); ) {
+   let s_1 = /**@type {Integer}*/ ($Casts.$to(/**@type {Iterator}*/ ($iterator_1).m_next__(), Integer)).m_intValue__();
+  }] "foreachstatement.ForEachStatement.testTypeVariable"
+[for (int s : anotherIterable) {}] => [let s_1 = /**@type {Integer}*/ ($Casts.$to(/**@type {Iterator}*/ ($iterator_1).m_next__(), Integer)).m_intValue__();] "foreachstatement.ForEachStatement.testTypeVariable"
+[s] => [s_1] "s"
 [ForEachStatement] => [$clinit]
 [ForEachStatement] => [ForEachStatement.$clinit = () =>{};] "foreachstatement.ForEachStatement.<clinit>"
 [ForEachStatement] => [ForEachStatement.$loadModules();] "foreachstatement.ForEachStatement.<clinit>"

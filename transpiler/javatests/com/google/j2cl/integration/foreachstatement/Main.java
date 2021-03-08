@@ -17,8 +17,10 @@ package com.google.j2cl.integration.foreachstatement;
 
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
+import com.google.j2cl.integration.foreachstatement.Main.MyIterable.MyIterator;
 import java.io.Serializable;
 import java.util.Iterator;
+import javaemul.internal.annotations.Wasm;
 
 /**
  * Test for for loops.
@@ -94,6 +96,7 @@ public class Main {
         "LastSeen:<" + lastSeenInteger + "> should be zero", lastSeenInteger.intValue() == 1);
   }
 
+  @Wasm("nop") // TODO(b/170691044): Remove once interface dispatch in WASM is implemented.
   private static <T extends MyIterable & Serializable, S extends T>
       void testForEachIterable_typeVariablesAndIntersectionTypes() {
     S iterable = (S) new MyIterable();

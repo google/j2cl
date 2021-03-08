@@ -14,6 +14,7 @@
 package com.google.j2cl.transpiler;
 
 import com.google.common.base.Throwables;
+import com.google.common.collect.ImmutableList;
 import com.google.common.util.concurrent.Uninterruptibles;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
@@ -77,6 +78,7 @@ class J2clTranspiler {
                 options.getGenerateKytheIndexingMetadata(),
                 problems);
     if (!j2clUnits.isEmpty()) {
+      desugarUnits(j2clUnits);
       checkUnits(j2clUnits);
       normalizeUnits(j2clUnits);
     }
@@ -94,15 +96,24 @@ class J2clTranspiler {
             problems);
   }
 
+  private void desugarUnits(List<CompilationUnit> j2clUnits) {
+    runPasses(j2clUnits, options.getBackend().getDesugaringPasses());
+  }
+
   private void checkUnits(List<CompilationUnit> j2clUnits) {
     JsInteropRestrictionsChecker.check(j2clUnits, problems);
     problems.abortIfHasErrors();
   }
 
   private void normalizeUnits(List<CompilationUnit> j2clUnits) {
+    runPasses(
+        j2clUnits, options.getBackend().getPasses(options.getExperimentalOptimizeAutovalue()));
+  }
+
+  private static void runPasses(
+      List<CompilationUnit> j2clUnits, ImmutableList<NormalizationPass> passes) {
     for (CompilationUnit j2clUnit : j2clUnits) {
-      for (NormalizationPass pass :
-          options.getBackend().getPasses(options.getExperimentalOptimizeAutovalue())) {
+      for (NormalizationPass pass : passes) {
         pass.execute(j2clUnit);
       }
     }

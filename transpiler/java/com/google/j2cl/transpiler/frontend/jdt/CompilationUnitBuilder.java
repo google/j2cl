@@ -30,7 +30,6 @@ import com.google.common.collect.MoreCollectors;
 import com.google.j2cl.common.FilePosition;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.ArrayAccess;
-import com.google.j2cl.transpiler.ast.ArrayLength;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.AssertStatement;
@@ -53,6 +52,7 @@ import com.google.j2cl.transpiler.ast.ExpressionStatement;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
+import com.google.j2cl.transpiler.ast.ForEachStatement;
 import com.google.j2cl.transpiler.ast.ForStatement;
 import com.google.j2cl.transpiler.ast.FunctionExpression;
 import com.google.j2cl.transpiler.ast.IfStatement;
@@ -67,10 +67,8 @@ import com.google.j2cl.transpiler.ast.NewArray;
 import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PostfixExpression;
-import com.google.j2cl.transpiler.ast.PostfixOperator;
 import com.google.j2cl.transpiler.ast.PrefixExpression;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
-import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.StringLiteral;
@@ -110,6 +108,7 @@ import org.eclipse.jdt.core.dom.AnonymousClassDeclaration;
 import org.eclipse.jdt.core.dom.ArrayType;
 import org.eclipse.jdt.core.dom.BodyDeclaration;
 import org.eclipse.jdt.core.dom.CreationReference;
+import org.eclipse.jdt.core.dom.EnhancedForStatement;
 import org.eclipse.jdt.core.dom.EnumConstantDeclaration;
 import org.eclipse.jdt.core.dom.EnumDeclaration;
 import org.eclipse.jdt.core.dom.ExpressionMethodReference;
@@ -681,7 +680,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         case ASTNode.FOR_STATEMENT:
           return convert((org.eclipse.jdt.core.dom.ForStatement) statement);
         case ASTNode.ENHANCED_FOR_STATEMENT:
-          return convert((org.eclipse.jdt.core.dom.EnhancedForStatement) statement);
+          return convert((EnhancedForStatement) statement);
         case ASTNode.IF_STATEMENT:
           return convert((org.eclipse.jdt.core.dom.IfStatement) statement);
         case ASTNode.LABELED_STATEMENT:
@@ -796,146 +795,15 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           .build();
     }
 
-    private ForStatement convert(org.eclipse.jdt.core.dom.EnhancedForStatement statement) {
-      if (statement.getExpression().resolveTypeBinding().isArray()) {
-        return convertForEachArray(statement);
-      }
-
-      return convertForEachInstance(statement);
-    }
-
-    private ForStatement convertForEachArray(
-        org.eclipse.jdt.core.dom.EnhancedForStatement statement) {
-      // Converts
-      //
-      //   for(T v : exp) S
-      //
-      // into
-      //
-      //   for(T[] $array = (exp), int $index = 0; $index < $array.length; $index++ ) {
-      //        T v = (T) $array[$index];
-      //        S;
-      //   }
-
-      ITypeBinding expressionTypeBinding = statement.getExpression().resolveTypeBinding();
-
-      // T[] array = exp.
-      Variable arrayVariable =
-          Variable.newBuilder()
-              .setName("$array")
-              .setTypeDescriptor(JdtUtils.createTypeDescriptor(expressionTypeBinding))
-              .setFinal(true)
-              .build();
-
-      // Declare the indexing variable double instead of int to avoid integer coercions. Since Java
-      // arrays can only be up to Integer.MAX_VALUE size, this change would not have any observable
-      // effect.
-      // double $index = 0;
-      Variable indexVariable =
-          Variable.newBuilder().setName("$index").setTypeDescriptor(PrimitiveTypes.DOUBLE).build();
-
-      // $index < $array.length
-      Expression condition =
-          indexVariable
-              .createReference()
-              .infixLessThan(
-                  ArrayLength.newBuilder()
-                      .setArrayExpression(arrayVariable.createReference())
-                      .build());
-
-      ExpressionStatement forVariableDeclarationStatement =
-          VariableDeclarationExpression.newBuilder()
-              .addVariableDeclaration(
-                  convert(statement.getParameter()),
-                  ArrayAccess.newBuilder()
-                      .setArrayExpression(arrayVariable.createReference())
-                      .setIndexExpression(indexVariable.createReference())
-                      .build())
-              .build()
-              .makeStatement(getSourcePosition(statement));
-
-      return ForStatement.newBuilder()
-          .setConditionExpression(condition)
-          //  {   T t = $array[$index]; S; }
-          .setBodyStatements(forVariableDeclarationStatement, convert(statement.getBody()))
-          .setInitializers(
-              VariableDeclarationExpression.newBuilder()
-                  .addVariableDeclaration(arrayVariable, convert(statement.getExpression()))
-                  .addVariableDeclaration(indexVariable, NumberLiteral.fromInt(0))
-                  .build())
-          .setUpdates(
-              PostfixExpression.newBuilder()
-                  .setOperand(indexVariable.createReference())
-                  .setOperator(PostfixOperator.INCREMENT)
-                  .build())
+    private Statement convert(EnhancedForStatement statement) {
+      return ForEachStatement.newBuilder()
+          .setLoopVariable(convert(statement.getParameter()))
+          .setIterableExpression(convert(statement.getExpression()))
+          .setBody(convert(statement.getBody()))
           .setSourcePosition(getSourcePosition(statement))
           .build();
     }
 
-    private ForStatement convertForEachInstance(
-        org.eclipse.jdt.core.dom.EnhancedForStatement statement) {
-      // Converts
-      //
-      //   for(T v : exp) S
-      //
-      // into
-      //
-      //   for(Iterator<T> $iterator = (exp).iterator(); $iterator.hasNext(); ) {
-      //        T v = (T) $iterator.next();
-      //        S;
-      //   }
-
-      ITypeBinding expressionTypeBinding = statement.getExpression().resolveTypeBinding();
-
-      IMethodBinding iteratorMethodBinding =
-          JdtUtils.getMethodBinding(expressionTypeBinding, "iterator");
-
-      // Iterator<T> $iterator = (exp).iterator();
-      Variable iteratorVariable =
-          Variable.newBuilder()
-              .setName("$iterator")
-              .setTypeDescriptor(
-                  JdtUtils.createTypeDescriptor(iteratorMethodBinding.getReturnType()))
-              .setFinal(true)
-              .build();
-
-      VariableDeclarationExpression iteratorDeclaration =
-          VariableDeclarationExpression.newBuilder()
-              .addVariableDeclaration(
-                  iteratorVariable,
-                  MethodCall.Builder.from(JdtUtils.createMethodDescriptor(iteratorMethodBinding))
-                      .setQualifier(convert(statement.getExpression()))
-                      .build())
-              .build();
-
-      // $iterator.hasNext();
-      IMethodBinding hasNextMethodBinding =
-          JdtUtils.getMethodBinding(iteratorMethodBinding.getReturnType(), "hasNext");
-      Expression condition =
-          MethodCall.Builder.from(JdtUtils.createMethodDescriptor(hasNextMethodBinding))
-              .setQualifier(iteratorVariable.createReference())
-              .build();
-
-      // T v = $iterator.next();
-      IMethodBinding nextMethodBinding =
-          JdtUtils.getMethodBinding(iteratorMethodBinding.getReturnType(), "next");
-      ExpressionStatement forVariableDeclarationStatement =
-          VariableDeclarationExpression.newBuilder()
-              .addVariableDeclaration(
-                  convert(statement.getParameter()),
-                  MethodCall.Builder.from(JdtUtils.createMethodDescriptor(nextMethodBinding))
-                      .setQualifier(iteratorVariable.createReference())
-                      .build())
-              .build()
-              .makeStatement(getSourcePosition(statement));
-
-      return ForStatement.newBuilder()
-          .setConditionExpression(condition)
-          .setBodyStatements(forVariableDeclarationStatement, convert(statement.getBody()))
-          .setInitializers(iteratorDeclaration)
-          .setSourcePosition(getSourcePosition(statement))
-          .build();
-    }
 
     private DoWhileStatement convert(org.eclipse.jdt.core.dom.DoStatement statement) {
       return DoWhileStatement.newBuilder()

@@ -347,7 +347,7 @@
  (local $i i32)
  (local $ap (ref null $innerclassinitorder.InnerClassInitOrder.1AddNumber))
  (local $$array (ref null $Object.array))
- (local $$index f64)
+ (local $$index i32)
  (local $theAp (ref null $innerclassinitorder.InnerClassInitOrder.1AddNumber))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
  (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
@@ -377,26 +377,26 @@
      
     )
    )
-   ;; LOOP: for (AddNumber[] $array = results,double $index = 0;($index < <expr>);($index = ($index + 1.0))) {
+   ;; LOOP: for (AddNumber[] $array = results,int $index = 0;($index < <expr>);($index = ($index + 1))) {
    
    
    (local.set $$array (local.get $results))
-   (local.set $$index (f64.const 0.0))
+   (local.set $$index (i32.const 0))
    (block $LOOP_1.BREAK
     (loop
-     (br_if 1 (i32.eqz (f64.lt (local.get $$index) (f64.const 0.0))))
+     (br_if 1 (i32.eqz (i32.lt_s (local.get $$index) (array.len $Object.array.elements (struct.get $Object.array $elements (local.get $$array))))))
      (block $LOOP_1.CONTINUE
       (block
        ;; AddNumber theAp = ((AddNumber) $array[$index]);
        
-       (local.set $theAp (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder.1AddNumber (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $$array)) (i32.const 0)) (global.get $innerclassinitorder.InnerClassInitOrder.1AddNumber.rtt)))
+       (local.set $theAp (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder.1AddNumber (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $$array)) (local.get $$index)) (global.get $innerclassinitorder.InnerClassInitOrder.1AddNumber.rtt)))
        (block
         ;; theAp.act();
         (call_ref (local.get $theAp)(struct.get $innerclassinitorder.InnerClassInitOrder.1AddNumber.vtable $m_act__void (struct.get $innerclassinitorder.InnerClassInitOrder.1AddNumber $vtable(local.get $theAp))))
        )
       )
      )
-     (local.set $$index (f64.add (local.get $$index) (f64.const 1.0)))
+     (local.set $$index (i32.add (local.get $$index) (i32.const 1)))
      (br 0)
      
     )

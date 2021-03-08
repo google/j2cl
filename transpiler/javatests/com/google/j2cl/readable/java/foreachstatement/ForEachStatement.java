@@ -48,8 +48,18 @@ public class ForEachStatement {
     }
   }
 
+  static class IterableReturningTypeVariable<T extends Iterator<Integer>>
+      implements Iterable<Integer> {
+    public T iterator() {
+      return null;
+    }
+  }
+
   private <T extends Object & Iterable<String>, U extends T> void testTypeVariable() {
     U iterable = null;
     for (String s : iterable) {}
+
+    IterableReturningTypeVariable<?> anotherIterable = null;
+    for (int s : anotherIterable) {}
   }
 }

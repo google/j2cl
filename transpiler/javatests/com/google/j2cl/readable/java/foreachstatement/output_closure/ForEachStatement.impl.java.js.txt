@@ -6,9 +6,11 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Exception1 = goog.forwardDeclare('foreachstatement.ForEachStatement.Exception1$impl');
 let Exception2 = goog.forwardDeclare('foreachstatement.ForEachStatement.Exception2$impl');
 let Exception = goog.forwardDeclare('java.lang.Exception$impl');
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Iterable = goog.forwardDeclare('java.lang.Iterable$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
+let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
@@ -52,7 +54,9 @@ class ForEachStatement extends j_l_Object {
       __$exc = $Exceptions.toJava(__$exc);
       if (Exception1.$isInstance(__$exc) || Exception2.$isInstance(__$exc)) {
         let e = /**@type {(Exception1|Exception2)}*/ (__$exc);
-        for (let $iterator = e.m_iterator__(); $iterator.m_hasNext__();) {
+        for (let $iterator = /**@type {Iterable<*>}*/ ($Casts.$to(e, Iterable))
+                                 .m_iterator__();
+             $iterator.m_hasNext__();) {
           let o = $iterator.m_next__();
         }
       } else {
@@ -69,6 +73,16 @@ class ForEachStatement extends j_l_Object {
          $iterator.m_hasNext__();) {
       let s =
           /**@type {?string}*/ ($Casts.$to($iterator.m_next__(), j_l_String));
+    }
+    let anotherIterable = null;
+    for (let $iterator_1 =
+             /**@type {Iterator<Integer>}*/ (anotherIterable.m_iterator__());
+         /**@type {Iterator}*/ ($iterator_1).m_hasNext__();) {
+      let s_1 =
+          /**@type {Integer}*/ (
+              $Casts.$to(
+                  /**@type {Iterator}*/ ($iterator_1).m_next__(), Integer))
+              .m_intValue__();
     }
   }
 
@@ -88,6 +102,7 @@ class ForEachStatement extends j_l_Object {
     Exception2 =
         goog.module.get('foreachstatement.ForEachStatement.Exception2$impl');
     Exception = goog.module.get('java.lang.Exception$impl');
+    Integer = goog.module.get('java.lang.Integer$impl');
     Iterable = goog.module.get('java.lang.Iterable$impl');
     j_l_String = goog.module.get('java.lang.String$impl');
     Throwable = goog.module.get('java.lang.Throwable$impl');

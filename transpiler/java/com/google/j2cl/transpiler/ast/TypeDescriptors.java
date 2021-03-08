@@ -50,6 +50,8 @@ public class TypeDescriptors {
   public DeclaredTypeDescriptor javaLangNulPointerException;
   public DeclaredTypeDescriptor javaLangEnum;
   public DeclaredTypeDescriptor javaLangRunnable;
+  public DeclaredTypeDescriptor javaLangIterable;
+  public DeclaredTypeDescriptor javaUtilIterator;
 
   public DeclaredTypeDescriptor javaLangNumber;
   public DeclaredTypeDescriptor javaLangComparable;
@@ -505,6 +507,12 @@ public class TypeDescriptors {
           break;
         case "java.lang.Runnable":
           typeDescriptors.javaLangRunnable = referenceType;
+          break;
+        case "java.lang.Iterable":
+          typeDescriptors.javaLangIterable = referenceType;
+          break;
+        case "java.util.Iterator":
+          typeDescriptors.javaUtilIterator = referenceType;
           break;
         case "javaemul.internal.ValueType":
           typeDescriptors.javaemulValueType = referenceType;

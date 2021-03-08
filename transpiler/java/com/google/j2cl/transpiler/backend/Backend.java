@@ -70,6 +70,7 @@ import com.google.j2cl.transpiler.passes.NormalizeConstructors;
 import com.google.j2cl.transpiler.passes.NormalizeEnumClasses;
 import com.google.j2cl.transpiler.passes.NormalizeEquality;
 import com.google.j2cl.transpiler.passes.NormalizeFieldInitialization;
+import com.google.j2cl.transpiler.passes.NormalizeForEachStatement;
 import com.google.j2cl.transpiler.passes.NormalizeFunctionExpressions;
 import com.google.j2cl.transpiler.passes.NormalizeInstanceCompileTimeConstants;
 import com.google.j2cl.transpiler.passes.NormalizeInstanceOfs;
@@ -131,6 +132,11 @@ public enum Backend {
               generateKytheIndexingMetadata,
               problems)
           .generateOutputs(j2clCompilationUnits);
+    }
+
+    @Override
+    public ImmutableList<NormalizationPass> getDesugaringPasses() {
+      return ImmutableList.of(new NormalizeForEachStatement(/* useDoubleForIndexVariable= */ true));
     }
 
     @Override
@@ -267,6 +273,12 @@ public enum Backend {
     }
 
     @Override
+    public ImmutableList<NormalizationPass> getDesugaringPasses() {
+      return ImmutableList.of(
+          new NormalizeForEachStatement(/* useDoubleForIndexVariable= */ false));
+    }
+
+    @Override
     public ImmutableList<NormalizationPass> getPasses(boolean experimentalOptimizeAutovalue) {
       return ImmutableList.of(
           // Pre-verifications
@@ -321,6 +333,8 @@ public enum Backend {
           new VerifyNormalizedUnits(/* verifyForWasm= **/ true));
     }
   };
+
+  public abstract ImmutableList<NormalizationPass> getDesugaringPasses();
 
   public abstract ImmutableList<NormalizationPass> getPasses(boolean experimentalOptimizeAutovalue);
 

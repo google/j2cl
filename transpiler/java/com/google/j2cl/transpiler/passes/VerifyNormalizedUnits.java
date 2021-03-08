@@ -24,6 +24,7 @@ import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.ContinueStatement;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldAccess;
+import com.google.j2cl.transpiler.ast.ForEachStatement;
 import com.google.j2cl.transpiler.ast.JavaScriptConstructorReference;
 import com.google.j2cl.transpiler.ast.LabeledStatement;
 import com.google.j2cl.transpiler.ast.LoopStatement;
@@ -153,6 +154,11 @@ public class VerifyNormalizedUnits extends NormalizationPass {
             if (verifyForWasm) {
               checkState(continueStatement.getLabelReference() != null);
             }
+          }
+
+          @Override
+          public void exitForEachStatement(ForEachStatement continueStatement) {
+            checkState(false);
           }
         });
   }
