@@ -219,7 +219,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     for (JCTree bodyDeclaration : bodyDeclarations) {
       if (bodyDeclaration instanceof JCVariableDecl) {
         JCVariableDecl fieldDeclaration = (JCVariableDecl) bodyDeclaration;
-        type.addField(convertFieldDeclaration(fieldDeclaration));
+        type.addMember(convertFieldDeclaration(fieldDeclaration));
       } else if (bodyDeclaration instanceof JCMethodDecl) {
         JCMethodDecl methodDeclaration = (JCMethodDecl) bodyDeclaration;
         if ((methodDeclaration.mods.flags & Flags.GENERATEDCONSTR) != 0
@@ -231,7 +231,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           // constructors can be removed by adding isGenerated or isSynthetic to Method.
           continue;
         }
-        type.addMethod(convertMethodDeclaration(methodDeclaration));
+        type.addMember(convertMethodDeclaration(methodDeclaration));
         // } else if (bodyDeclaration instanceof AnnotationTypeMemberDeclaration) {
         //   AnnotationTypeMemberDeclaration memberDeclaration =
         //       (AnnotationTypeMemberDeclaration) bodyDeclaration;
@@ -258,7 +258,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     for (Variable capturedVariable : getCapturedVariables(currentTypeDeclaration)) {
       FieldDescriptor fieldDescriptor =
           AstUtils.getFieldDescriptorForCapture(type.getTypeDescriptor(), capturedVariable);
-      type.addField(
+      type.addMember(
           Field.Builder.from(fieldDescriptor)
               .setCapturedVariable(capturedVariable)
               .setSourcePosition(type.getSourcePosition())
@@ -267,7 +267,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     }
     if (JavaEnvironment.capturesEnclosingInstance(classSymbol)) {
       // add field for enclosing instance.
-      type.addField(
+      type.addMember(
           0,
           Field.Builder.from(
                   AstUtils.getFieldDescriptorForEnclosingInstance(

@@ -143,7 +143,7 @@ public class NormalizeConstructors extends NormalizationPass {
     removeUnneededCtorCalls(type);
     rewriteConstructorsAsCtorMethods(type);
 
-    type.addMethod(0, es6Constructor);
+    type.addMember(0, es6Constructor);
   }
 
   private static void removeUnneededCtorCalls(Type type) {

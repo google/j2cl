@@ -79,7 +79,7 @@ public class EnumMethodsCreator extends NormalizationPass {
     // Create a field to hold the names to values map.
     FieldDescriptor namesToValuesMapFieldDescriptor =
         getNamesToValuesMapFieldDescriptor(typeDescriptor);
-    enumType.addField(
+    enumType.addMember(
         Field.Builder.from(namesToValuesMapFieldDescriptor)
             .setInitializer(namesToValuesMapFieldDescriptor.getTypeDescriptor().getNullValue())
             .setSourcePosition(enumType.getSourcePosition())
@@ -126,7 +126,7 @@ public class EnumMethodsCreator extends NormalizationPass {
             .setSourcePosition(sourcePosition)
             .build();
 
-    enumType.addMethod(
+    enumType.addMember(
         Method.newBuilder()
             .setMethodDescriptor(getValueOfMethodDescriptor(typeDescriptor))
             .setParameters(nameParameter)
@@ -200,7 +200,7 @@ public class EnumMethodsCreator extends NormalizationPass {
             .setComponentTypeDescriptor(enumType.getTypeDescriptor())
             .build();
 
-    enumType.addMethod(
+    enumType.addMember(
         Method.newBuilder()
             .setMethodDescriptor(getValuesMethodDescriptor(enumType.getTypeDescriptor()))
             .addStatements(

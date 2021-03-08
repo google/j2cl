@@ -52,11 +52,11 @@ public class NormalizeInterfaceMethods extends NormalizationPass {
             checkState(!methodDescriptor.isJsOverlay());
 
             if (methodDescriptor.isDefaultMethod()) {
-              type.addMethod(AstUtils.devirtualizeMethod(method, DEFAULT_POSTFIX));
+              type.addMember(AstUtils.devirtualizeMethod(method, DEFAULT_POSTFIX));
               // Retain the interface method declaration.
               return createInterfaceMethodDeclaration(method);
             } else if (isInterfacePrivateInstanceMethod(methodDescriptor)) {
-              type.addMethod(AstUtils.devirtualizeMethod(method, PRIVATE_POSTFIX));
+              type.addMember(AstUtils.devirtualizeMethod(method, PRIVATE_POSTFIX));
               return null;
             } else {
               return method;

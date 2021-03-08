@@ -180,11 +180,11 @@ public class ImplementLambdaExpressions extends NormalizationPass {
             .setFinal(true)
             .build();
     MethodDescriptor adaptorConstructor = adaptorTypeDescriptor.getSingleConstructor();
-    functionalInterfaceType.addMethod(
-        // FunctionalInterface$$LambdaAdaptor $adapt(
-        //     FunctionalInterface$$LambdaAdaptor$$JsFunctionInterface fn) {
-        //   return new FunctionalInterface$$LambdaAadaptor(fn);
-        // }
+    // FunctionalInterface$$LambdaAdaptor $adapt(
+    //     FunctionalInterface$$LambdaAdaptor$$JsFunctionInterface fn) {
+    //   return new FunctionalInterface$$LambdaAadaptor(fn);
+    // }
+    functionalInterfaceType.addMember(
         Method.newBuilder()
             .setMethodDescriptor(adaptMethodDescriptor)
             .setParameters(jsFunctionParameter)
@@ -283,7 +283,7 @@ public class ImplementLambdaExpressions extends NormalizationPass {
             .setName("fn")
             .setTypeDescriptor(jsFunctionTypeDescriptor)
             .build();
-    adaptorType.addField(
+    adaptorType.addMember(
         Field.Builder.from(jsFunctionFieldDescriptor).setSourcePosition(sourcePosition).build());
 
     // Create the forwarding method that forwards calls to the functional interface method to
@@ -296,20 +296,20 @@ public class ImplementLambdaExpressions extends NormalizationPass {
             .setEnclosingTypeDescriptor(jsFunctionTypeDescriptor)
             .build();
 
-    adaptorType.addMethod(
-        //  @JsConstructor
-        //  FunctionalInterface$$LambdaAdaptor(FunctionalInterface$$JsFunction fn) {
-        //    this.fn = fn;
-        //  }
+    //  @JsConstructor
+    //  FunctionalInterface$$LambdaAdaptor(FunctionalInterface$$JsFunction fn) {
+    //    this.fn = fn;
+    //  }
+    adaptorType.addMember(
         createLambdaAdaptorConstructor(
             sourcePosition,
             adaptorTypeDescriptor,
             jsFunctionTypeDescriptor,
             jsFunctionFieldDescriptor));
-    adaptorType.addMethod(
-        // public t method(t1 p1, t2 p2, .....) {
-        //   return this.fn.method(p1, p2, ....);
-        // }
+    // public t method(t1 p1, t2 p2, .....) {
+    //   return this.fn.method(p1, p2, ....);
+    // }
+    adaptorType.addMember(
         AstUtils.createForwardingMethod(
             sourcePosition,
             FieldAccess.Builder.from(jsFunctionFieldDescriptor).build(),

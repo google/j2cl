@@ -199,7 +199,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
             int ordinal = 0;
             for (EnumConstantDeclaration enumConstantDeclaration :
                 JdtUtils.<EnumConstantDeclaration>asTypedList(enumDeclaration.enumConstants())) {
-              enumType.addField(ordinal, convert(enumConstantDeclaration));
+              enumType.addMember(ordinal, convert(enumConstantDeclaration));
               ordinal++;
             }
             return null;
@@ -246,14 +246,14 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       for (BodyDeclaration bodyDeclaration : bodyDeclarations) {
         if (bodyDeclaration instanceof FieldDeclaration) {
           FieldDeclaration fieldDeclaration = (FieldDeclaration) bodyDeclaration;
-          type.addFields(convert(fieldDeclaration));
+          type.addMembers(convert(fieldDeclaration));
         } else if (bodyDeclaration instanceof MethodDeclaration) {
           MethodDeclaration methodDeclaration = (MethodDeclaration) bodyDeclaration;
-          type.addMethod(convert(methodDeclaration));
+          type.addMember(convert(methodDeclaration));
         } else if (bodyDeclaration instanceof AnnotationTypeMemberDeclaration) {
           AnnotationTypeMemberDeclaration memberDeclaration =
               (AnnotationTypeMemberDeclaration) bodyDeclaration;
-          type.addMethod(convert(memberDeclaration));
+          type.addMember(convert(memberDeclaration));
         } else if (bodyDeclaration instanceof Initializer) {
           Initializer initializer = (Initializer) bodyDeclaration;
           Block block = convert(initializer.getBody());
@@ -276,7 +276,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       for (Variable capturedVariable : getCapturedVariables(currentTypeDeclaration)) {
         FieldDescriptor fieldDescriptor =
             AstUtils.getFieldDescriptorForCapture(type.getTypeDescriptor(), capturedVariable);
-        type.addField(
+        type.addMember(
             Field.Builder.from(fieldDescriptor)
                 .setCapturedVariable(capturedVariable)
                 .setSourcePosition(type.getSourcePosition())
@@ -285,7 +285,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       }
       if (type.getDeclaration().isCapturingEnclosingInstance()) {
         // add field for enclosing instance.
-        type.addField(
+        type.addMember(
             0,
             Field.Builder.from(
                     AstUtils.getFieldDescriptorForEnclosingInstance(
@@ -488,7 +488,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
                       .build();
             }
 
-            type.addMethod(
+            type.addMember(
                 0,
                 AstUtils.createImplicitAnonymousClassConstructor(
                     type.getSourcePosition(), constructorDescriptor, superConstructorDescriptor));

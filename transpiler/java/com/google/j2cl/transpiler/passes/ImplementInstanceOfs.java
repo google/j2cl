@@ -128,7 +128,7 @@ public class ImplementInstanceOfs extends NormalizationPass {
     // $isInstance(instance) {
     //    return <expression for instanceOf>.
     // }
-    type.addMethod(
+    type.addMember(
         Method.newBuilder()
             .setMethodDescriptor(type.getTypeDescriptor().getIsInstanceMethodDescriptor())
             .setParameters(instanceParameter)
@@ -249,6 +249,6 @@ public class ImplementInstanceOfs extends NormalizationPass {
             .build()
             .makeStatement(SourcePosition.NONE));
 
-    type.addMethod(methodBuilder.build());
+    type.addMember(methodBuilder.build());
   }
 }

@@ -162,7 +162,7 @@ public class NormalizeEnumClasses extends NormalizationPass {
               .setInitializer(NumberLiteral.fromInt(enumField.getEnumOrdinal()))
               .build());
     }
-    type.addFields(ordinalConstantFields);
+    type.addMembers(ordinalConstantFields);
   }
 
   /** Rewrites the initialization of the enum value fields with the right ordinal and name. */

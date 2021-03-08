@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.ast;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
@@ -138,23 +139,23 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
     this.members = members;
   }
 
+  public void addMember(Member member) {
+    members.add(checkNotNull(member));
+  }
+
+  public void addMember(int position, Member member) {
+    members.add(position, checkNotNull(member));
+  }
+
+  public void addMembers(Collection<? extends Member> newMembers) {
+    members.addAll(newMembers);
+  }
+
   public ImmutableList<Field> getFields() {
     return members.stream()
         .filter(Member::isField)
         .map(Field.class::cast)
-        .collect(ImmutableList.toImmutableList());
-  }
-
-  public void addField(Field field) {
-    members.add(field);
-  }
-
-  public void addField(int position, Field field) {
-    members.add(position, checkNotNull(field));
-  }
-
-  public void addFields(Collection<Field> fields) {
-    members.addAll(checkNotNull(fields));
+        .collect(toImmutableList());
   }
 
   /**
@@ -162,28 +163,14 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
    * distinguish enum fields from static fields created in the enum body.
    */
   public ImmutableList<Field> getEnumFields() {
-    return getFields().stream().filter(Field::isEnumField).collect(ImmutableList.toImmutableList());
+    return getFields().stream().filter(Field::isEnumField).collect(toImmutableList());
   }
 
   public ImmutableList<Method> getMethods() {
     return members.stream()
         .filter(Member::isMethod)
         .map(Method.class::cast)
-        .collect(ImmutableList.toImmutableList());
-  }
-
-  public void addMethod(Method method) {
-    checkArgument(!method.isConstructor() || (!isInterface() && !isOverlayImplementation()));
-    members.add(method);
-  }
-
-  public void addMethod(int index, Method method) {
-    checkArgument(index >= 0 && index <= members.size());
-    members.add(index, method);
-  }
-
-  public void addMethods(Collection<Method> methods) {
-    members.addAll(methods);
+        .collect(toImmutableList());
   }
 
   public Visibility getVisibility() {
@@ -260,13 +247,11 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
         .filter(Member::isField)
         .filter(Predicates.not(Member::isStatic))
         .map(Field.class::cast)
-        .collect(ImmutableList.toImmutableList());
+        .collect(toImmutableList());
   }
 
   public ImmutableList<Member> getInstanceMembers() {
-    return members.stream()
-        .filter(Predicates.not(Member::isStatic))
-        .collect(ImmutableList.toImmutableList());
+    return members.stream().filter(Predicates.not(Member::isStatic)).collect(toImmutableList());
   }
 
   public ImmutableList<Field> getStaticFields() {
@@ -274,7 +259,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
         .filter(Member::isField)
         .filter(Member::isStatic)
         .map(Field.class::cast)
-        .collect(ImmutableList.toImmutableList());
+        .collect(toImmutableList());
   }
 
   public ImmutableList<InitializerBlock> getStaticInitializerBlocks() {
@@ -282,7 +267,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
         .filter(Member::isStatic)
         .filter(Member::isInitializerBlock)
         .map(InitializerBlock.class::cast)
-        .collect(ImmutableList.toImmutableList());
+        .collect(toImmutableList());
   }
 
   public ImmutableList<InitializerBlock> getInstanceInitializerBlocks() {
@@ -290,13 +275,11 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
         .filter(Predicates.not(Member::isStatic))
         .filter(Member::isInitializerBlock)
         .map(InitializerBlock.class::cast)
-        .collect(ImmutableList.toImmutableList());
+        .collect(toImmutableList());
   }
 
   public ImmutableList<Method> getConstructors() {
-    return getMethods().stream()
-        .filter(Member::isConstructor)
-        .collect(ImmutableList.toImmutableList());
+    return getMethods().stream().filter(Member::isConstructor).collect(toImmutableList());
   }
 
   @Override

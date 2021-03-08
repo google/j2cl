@@ -46,7 +46,7 @@ public class ImplementInstanceInitialization extends NormalizationPass {
             .flatMap(initializerBlock -> initializerBlock.getBlock().getStatements().stream())
             .collect(Collectors.toList());
 
-    type.addMethod(
+    type.addMember(
         Method.newBuilder()
             .setMethodDescriptor(type.getTypeDescriptor().getInitMethodDescriptor())
             .addStatements(statements)

@@ -47,7 +47,7 @@ public class BridgeMethodsCreator extends NormalizationPass {
     type.getTypeDescriptor().getPolymorphicMethods().stream()
         .filter(MethodDescriptor::isBridge)
         .filter(m -> m.isMemberOf(type.getDeclaration()))
-        .forEach(m -> type.addMethod(createBridgeMethod(type, m)));
+        .forEach(m -> type.addMember(createBridgeMethod(type, m)));
   }
 
   /** Returns bridge method that calls the targeted method in its body. */

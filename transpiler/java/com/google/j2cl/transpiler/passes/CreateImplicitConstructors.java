@@ -35,7 +35,7 @@ public class CreateImplicitConstructors extends NormalizationPass {
 
     MethodDescriptor methodDescriptor =
         AstUtils.createImplicitConstructorDescriptor(type.getTypeDescriptor());
-    type.addMethod(
+    type.addMember(
         0,
         Method.newBuilder()
             .setMethodDescriptor(methodDescriptor)

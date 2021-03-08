@@ -72,11 +72,11 @@ public class NormalizeOverlayMembers extends NormalizationPass {
       }
       if (member.isMethod()) {
         Method method = (Method) member;
-        overlayClass.addMethod(createOverlayMethod(method, overlayImplDescriptor));
+        overlayClass.addMember(createOverlayMethod(method, overlayImplDescriptor));
       } else if (member.isField()) {
         Field field = (Field) member;
         checkState(field.getDescriptor().isStatic());
-        overlayClass.addField(
+        overlayClass.addMember(
             Field.Builder.from(field)
                 .setInitializer(AstUtils.clone(field.getInitializer()))
                 .setEnclosingClass(overlayImplDescriptor)

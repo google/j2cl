@@ -69,7 +69,7 @@ public class NormalizeFieldInitialization extends NormalizationPass {
           }
         });
     // Keep the fields for declaration purpose.
-    type.addFields(fieldDeclarations);
+    type.addMembers(fieldDeclarations);
   }
 
   private static Expression getDeclarationValue(Field field) {

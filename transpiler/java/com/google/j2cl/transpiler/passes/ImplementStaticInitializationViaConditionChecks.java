@@ -77,7 +77,7 @@ public class ImplementStaticInitializationViaConditionChecks
     FieldDescriptor isInitializedFieldDescriptor = getInitializedField(type.getTypeDescriptor());
 
     // Add the $isInitialized static field to the type.
-    type.addField(
+    type.addMember(
         Field.Builder.from(isInitializedFieldDescriptor).setSourcePosition(sourcePosition).build());
 
     // if ($isInitialized) { return; }
@@ -106,7 +106,7 @@ public class ImplementStaticInitializationViaConditionChecks
             .flatMap(initializerBlock -> initializerBlock.getBlock().getStatements().stream())
             .collect(Collectors.toList());
 
-    type.addMethod(
+    type.addMember(
         Method.newBuilder()
             .setMethodDescriptor(type.getTypeDescriptor().getClinitMethodDescriptor())
             .addStatements(checkInitialized, setInitialized)

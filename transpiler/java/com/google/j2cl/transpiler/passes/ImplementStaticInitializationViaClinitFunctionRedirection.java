@@ -133,7 +133,7 @@ public class ImplementStaticInitializationViaClinitFunctionRedirection
 
   public void synthesizePropertyGetter(Type type, Field field) {
     FieldDescriptor fieldDescriptor = field.getDescriptor();
-    type.addMethod(
+    type.addMember(
         Method.newBuilder()
             .setSourcePosition(field.getSourcePosition())
             .setMethodDescriptor(getGetterMethodDescriptor(fieldDescriptor))
@@ -158,7 +158,7 @@ public class ImplementStaticInitializationViaClinitFunctionRedirection
             .setTypeDescriptor(fieldDescriptor.getTypeDescriptor())
             .setParameter(true)
             .build();
-    type.addMethod(
+    type.addMember(
         Method.newBuilder()
             .setSourcePosition(field.getSourcePosition())
             .setMethodDescriptor(getSetterMethodDescriptor(fieldDescriptor))
@@ -263,7 +263,7 @@ public class ImplementStaticInitializationViaClinitFunctionRedirection
             .flatMap(initializerBlock -> initializerBlock.getBlock().getStatements().stream())
             .collect(Collectors.toList());
 
-    type.addMethod(
+    type.addMember(
         Method.newBuilder()
             .setMethodDescriptor(type.getTypeDescriptor().getClinitMethodDescriptor())
             .addStatements(noopClinitFunction, callLoadModules)

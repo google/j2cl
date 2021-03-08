@@ -98,6 +98,6 @@ public class ImplementJsFunctionCopyMethod extends NormalizationPass {
             .build()
             .makeStatement(SourcePosition.NONE));
 
-    type.addMethod(methodBuilder.build());
+    type.addMember(methodBuilder.build());
   }
 }
