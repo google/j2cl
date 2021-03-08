@@ -80,15 +80,23 @@ import java.util.Set;
 /** Checks and throws errors for invalid JsInterop constructs. */
 public class JsInteropRestrictionsChecker {
 
-  public static void check(List<CompilationUnit> compilationUnits, Problems problems) {
-    new JsInteropRestrictionsChecker(problems).checkCompilationUnits(compilationUnits);
+  public static void check(
+      List<CompilationUnit> compilationUnits, Problems problems, boolean enableWasmChecks) {
+    new JsInteropRestrictionsChecker(problems, enableWasmChecks)
+        .checkCompilationUnits(compilationUnits);
   }
 
   private final Problems problems;
+  private final boolean enableWasmChecks;
   private boolean wasUnusableByJsWarningReported = false;
 
-  private JsInteropRestrictionsChecker(Problems problems) {
+  private JsInteropRestrictionsChecker(Problems problems, boolean enableWasmChecks) {
     this.problems = problems;
+    this.enableWasmChecks = enableWasmChecks && Boolean.getBoolean("j2cl.enable_wasm_checks");
+  }
+
+  private static boolean isWasmNativeAllowed(String qualifiedName) {
+    return qualifiedName.startsWith("java.") || qualifiedName.startsWith("javaemul.");
   }
 
   private void checkCompilationUnits(List<CompilationUnit> compilationUnits) {
@@ -960,6 +968,16 @@ public class JsInteropRestrictionsChecker {
       }
 
       if (memberDescriptor.isNative()) {
+        if (enableWasmChecks) {
+          if (method.getWasmInfo() != null
+              || isWasmNativeAllowed(method.getQualifiedBinaryName())) {
+            return;
+          }
+          problems.error(
+              member.getSourcePosition(),
+              "Native method '%s' is not supported in WASM backend",
+              memberDescriptor.getReadableDescription());
+        }
         checkNativeMethod(method);
       }
       if (memberDescriptor.isJsAsync()) {
@@ -1204,6 +1222,16 @@ public class JsInteropRestrictionsChecker {
   private boolean checkNativeJsType(Type type) {
     TypeDeclaration typeDeclaration = type.getDeclaration();
     String readableDescription = typeDeclaration.getReadableDescription();
+
+    if (enableWasmChecks) {
+      if (!type.isInterface() && !isWasmNativeAllowed(typeDeclaration.getQualifiedBinaryName())) {
+        problems.error(
+            type.getSourcePosition(),
+            "Native type '%s' is not supported in WASM backend",
+            readableDescription);
+      }
+      return false;
+    }
 
     if (type.isEnumOrSubclass()) {
       problems.error(

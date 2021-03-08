@@ -21,12 +21,14 @@ def _impl_j2wasm_application(ctx):
 
     args.add_all(srcs)
 
+    enable_wasm_checks = ctx.var.get("j2cl_wasm_checks", None) == "1"
+
     ctx.actions.run(
         progress_message = "Transpiling to WASM %s" % ctx.label,
         inputs = depset(transitive = [srcs, classpath]),
         outputs = [ctx.outputs.zip],
         executable = ctx.executable._j2cl_transpiler,
-        arguments = [args],
+        arguments = ["--jvm_flag=-Dj2cl.enable_wasm_checks=" + str(enable_wasm_checks), args],
         env = dict(LANG = "en_US.UTF-8"),
         execution_requirements = {"supports-workers": "1"},
         mnemonic = "J2wasm",

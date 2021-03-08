@@ -101,7 +101,8 @@ class J2clTranspiler {
   }
 
   private void checkUnits(List<CompilationUnit> j2clUnits) {
-    JsInteropRestrictionsChecker.check(j2clUnits, problems);
+    JsInteropRestrictionsChecker.check(
+        j2clUnits, problems, /* enableWasmChecks= */ options.getBackend() == Backend.WASM);
     problems.abortIfHasErrors();
   }
 
